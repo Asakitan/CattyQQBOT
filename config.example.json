@@ -93,9 +93,10 @@
     "reply_human_split_min_chars": 48,
     "reply_human_split_delay_seconds": 0.8,
     "expression_repeat_enabled": true,
-    "expression_repeat_threshold": 3,
+    "expression_repeat_threshold": 2,
     "expression_repeat_window_seconds": 20,
-    "expression_repeat_include_images": true
+    "expression_repeat_include_images": true,
+    "expression_repeat_include_text": true
   },
   "emoji": {
     "enabled": true,
@@ -104,7 +105,9 @@
     "manifest_path": "emojis/manifest.json",
     "interest_threshold": 60,
     "save_interest_threshold": 85,
-    "max_candidates": 8
+    "max_candidates": 8,
+    "reply_enabled": true,
+    "reply_probability": 0.85
   },
   "access": {
     "allowed_user_ids": [],

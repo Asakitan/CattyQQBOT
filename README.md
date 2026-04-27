@@ -126,7 +126,7 @@ ai 帮我总结这段话
 
 艾特、回复机器人消息、触发前缀或命中 `directed_keywords` 时会直接回复；普通群聊会按群攒到 `filter.group_batch_messages` 条，或距离本群上一批普通群消息达到 `filter.group_batch_seconds` 秒后，把这段最近未 filter 的普通消息作为压缩窗口交给 AI，从中查找疑似指向 BOT/AI/猫猫的话题再决定是否自然回复；如果不该回复，AI 会输出内部不回复标记且不会发到群里。
 
-如果群友在短时间内连续发送同一个 QQ 表情，默认第 3 次时机器人会直接复读这条表情消息，不调用 AI 接口。AI 的普通文本回复会由 `filter` 小模型判断是否追加本轮专用的轻量分段提示，再由主模型按语义决定是否拆成两条消息发送；原始 `system_prompt` 不会被改写。
+如果群友在短时间内连续发送同一个 QQ 表情、普通图片、图片类表情或文字消息，默认第 2 次时机器人会直接复读这条消息，不调用 AI 接口；机器人自己的消息不会计入连发判断。AI 的普通文本回复会由 `filter` 小模型判断是否追加本轮专用的轻量分段提示，再由主模型按语义决定是否拆成两条消息发送；原始 `system_prompt` 不会被改写。
 
 清空当前会话上下文：
 
@@ -193,7 +193,7 @@ ai 清空记忆缓存
 
 `proactive` 会让机器人每天在加入的群里主动冒泡：每个群每天最多 5 次，实际次数会根据该群互动分和当天群友发言量浮动。主动冒泡会参考群摘要、群友画像、近期聊天和上次有没有人接话，内容会从卡拉彼丘、自己的现实世界生活感、或适合当前群的话题里挑一个方向。如果冒泡后没人回应，机器人会记录一点失落感并降低该群互动分。
 
-当前默认 prompt 已经严格清理 emoji 使用：AI 默认不输出 emoji、颜文字或 `:heart:` 这类表情代码，除非用户明确要求。
+默认会把本地表情库候选交给主 AI；普通轻松聊天会优先让 AI 自己挑一张表情包，若 AI 没输出表情标记，程序也会按 `emoji.reply_probability` 自动补一张。默认表情不需要 `interest` 字段，`interest` 只用于下载表情；但 `emojis/manifest.json` 只是索引，实际图片文件也必须放在 `emoji.dir` 下，例如 `emojis/事后喵.jpg`。
 
 图片消息：私聊发图会触发回复；群里如果带艾特、前缀或指向词，也会先把图片下载地址交给 `vision` 图片识别模型，识别成文字、兴趣程度、表情含义和情绪标签后再交给主聊天模型。主 AI 可以决定是否追加本地表情包；默认表情放在 `emojis/`，高兴趣图片会按配置保存到 `emojis/downloaded/` 并记录到 `emojis/manifest.json`。若 `vision` 不单独配置，会复用 `ai` 主模型配置；若遇到 GIF 或动态 WebP，程序会自动截取第一帧转成 PNG 再识别。若图片识别失败，会退回为文字方式把图片地址交给主模型。
 
@@ -263,10 +263,11 @@ dist/CattyQQAI.exe
 | `chat.directed_keywords` | `["你","猫猫","猫娘","看看"]` | 群聊指向词，命中后可触发回复 |
 | `chat.image_response_enabled` | `true` | 是否响应图片消息 |
 | `chat.image_vision_enabled` | `true` | 是否启用图片识别；启用后先走 `vision`，再把识别结果交给主模型 |
-| `chat.expression_repeat_enabled` | `true` | 是否启用群聊表情连发复读 |
-| `chat.expression_repeat_threshold` | `3` | 连续多少条相同表情后直接复读 |
+| `chat.expression_repeat_enabled` | `true` | 是否启用群聊表情/文字连发复读 |
+| `chat.expression_repeat_threshold` | `2` | 连续多少条相同消息后直接复读 |
 | `chat.expression_repeat_window_seconds` | `20` | 连发计数允许的最大间隔秒数 |
 | `chat.expression_repeat_include_images` | `true` | 是否把图片类表情也纳入复读检测 |
+| `chat.expression_repeat_include_text` | `true` | 是否把文字消息也纳入复读检测 |
 | `emoji.enabled` | `true` | 是否启用本地表情库和高兴趣图片入库 |
 | `emoji.dir` | `emojis` | 默认表情库目录，直接放在该目录下的图片优先级高于下载表情 |
 | `emoji.download_dir` | `emojis/downloaded` | 高兴趣图片自动保存目录 |
@@ -274,6 +275,8 @@ dist/CattyQQAI.exe
 | `emoji.interest_threshold` | `60` | 识图兴趣达到该值后才把表情候选交给主 AI |
 | `emoji.save_interest_threshold` | `85` | 识图兴趣达到该值且 vision 标记可复用时保存到下载表情库 |
 | `emoji.max_candidates` | `8` | 每次提供给主 AI 选择的表情候选数量 |
+| `emoji.reply_enabled` | `true` | 是否允许 AI 回复后额外发送一张本地表情包 |
+| `emoji.reply_probability` | `0.85` | AI 没主动选择表情时，程序自动补发本地表情包的概率 |
 | `memory.enabled` | `true` | 是否启用群友记忆 |
 | `memory.path` | `memory.json` | 记忆索引文件路径 |
 | `memory.group_storage_dir` | `memory_groups` | 按群号拆分保存群记忆 JSON 的目录 |

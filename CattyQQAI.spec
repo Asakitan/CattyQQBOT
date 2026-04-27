@@ -1,5 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+import os
+
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 
@@ -19,6 +21,8 @@ hiddenimports = sorted(set(hiddenimports))
 datas = [
     ('src/catty_qq_ai', 'catty_qq_ai'),
 ]
+if os.path.isdir('emojis'):
+    datas.append(('emojis', 'emojis'))
 datas += collect_data_files('nonebot')
 datas += collect_data_files('nonebot.adapters.onebot')
 datas += collect_data_files('PIL')

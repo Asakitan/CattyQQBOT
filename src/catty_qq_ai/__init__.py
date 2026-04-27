@@ -124,10 +124,10 @@ def _emoji_reply_context(image_analysis: dict[str, object], candidates: str) -> 
     tags = image_analysis.get("emotion_tags")
     tag_text = ", ".join(str(tag) for tag in tags) if isinstance(tags, list) else ""
     return (
-        "你可以决定本轮回复是否额外发送一个表情包。"
+        "本轮可以额外发送一个本地表情包，普通轻松聊天默认建议发送。"
         "如果需要表情包，在回复正文末尾单独追加一行 "
         f"{EMOJI_QUERY_PREFIX}你的表情意图{EMOJI_QUERY_SUFFIX}；"
-        "不要解释这个标记，不需要表情就不要输出标记。"
+        "不要解释这个标记；只有严肃排错、道歉、风险提醒或确实不适合时才不输出标记。"
         "优先选择能自然贴合情绪的默认表情；没有合适默认表情时才用下载表情。\n"
         f"图片兴趣度：{image_analysis.get('interest', 0)}/100\n"
         f"图片/表情含义：{image_analysis.get('expression') or image_analysis.get('summary') or ''}\n"
@@ -151,6 +151,43 @@ def _extract_emoji_query(reply: str) -> tuple[str, str]:
 
 def _emoji_segment(entry: EmojiEntry) -> MessageSegment:
     return MessageSegment.image(file=entry.path.resolve().as_uri())
+
+
+def _generic_emoji_context(incoming: ExtractedMessage) -> str:
+    if not config.catty_emoji_enabled:
+        return ""
+    candidates = emoji_store.candidates_text(incoming.text)
+    if not candidates:
+        return ""
+    return _emoji_reply_context(
+        {
+            "interest": 100,
+            "expression": incoming.text,
+            "summary": incoming.text,
+            "emotion_tags": [],
+        },
+        candidates,
+    )
+
+
+def _should_auto_emoji_reply(incoming: ExtractedMessage, reply: str) -> bool:
+    if not config.catty_emoji_enabled or not config.catty_emoji_reply_enabled:
+        return False
+    if not reply.strip() or _is_no_reply(reply):
+        return False
+    probability = max(min(float(config.catty_emoji_reply_probability), 1.0), 0.0)
+    if probability <= 0:
+        return False
+    if incoming.opportunistic and probability < 1.0:
+        probability *= 0.5
+    return random.random() < probability
+
+
+def _choose_auto_emoji(reply: str, incoming: ExtractedMessage) -> EmojiEntry | None:
+    entry = emoji_store.choose(reply or incoming.text)
+    if entry is not None:
+        return entry
+    return emoji_store.choose("")
 
 
 def _build_messages(
@@ -249,7 +286,11 @@ def _expression_repeat_message(bot: Bot, event: MessageEvent) -> Message | None:
     if not config.catty_expression_repeat_enabled:
         return None
 
-    signature = expression_message_signature(event, include_images=config.catty_expression_repeat_include_images)
+    signature = expression_message_signature(
+        event,
+        include_images=config.catty_expression_repeat_include_images,
+        include_text=config.catty_expression_repeat_include_text,
+    )
     key = f"group:{event.group_id}"
     state = _expression_repeats[key]
     now = time.monotonic()
@@ -724,6 +765,8 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 if interest >= config.catty_emoji_interest_threshold:
                     candidates = emoji_store.candidates_text(query, tags=tags)
                     emoji_context = _emoji_reply_context(image_analysis, candidates)
+        if not emoji_context:
+            emoji_context = _generic_emoji_context(incoming)
         semantic_reply_split = await _should_request_semantic_reply_split(incoming)
         messages = _build_messages(
             event,
@@ -752,6 +795,8 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
 
         reply, emoji_query = _extract_emoji_query(reply)
         emoji_entry = emoji_store.choose(emoji_query) if emoji_query and config.catty_emoji_enabled else None
+        if emoji_entry is None and _should_auto_emoji_reply(incoming, reply):
+            emoji_entry = _choose_auto_emoji(reply, incoming)
         chunks = _reply_chunks(reply)
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)

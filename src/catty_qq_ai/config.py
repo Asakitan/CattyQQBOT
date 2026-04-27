@@ -72,6 +72,8 @@ class Config(BaseModel):
     catty_emoji_interest_threshold: int = 60
     catty_emoji_save_interest_threshold: int = 85
     catty_emoji_max_candidates: int = 8
+    catty_emoji_reply_enabled: bool = True
+    catty_emoji_reply_probability: float = 0.85
     catty_memory_enabled: bool = True
     catty_memory_path: str = "memory.json"
     catty_memory_group_storage_dir: str = ""
@@ -104,9 +106,10 @@ class Config(BaseModel):
     catty_reply_human_split_min_chars: int = 48
     catty_reply_human_split_delay_seconds: float = 0.8
     catty_expression_repeat_enabled: bool = True
-    catty_expression_repeat_threshold: int = 3
+    catty_expression_repeat_threshold: int = 2
     catty_expression_repeat_window_seconds: float = 20.0
     catty_expression_repeat_include_images: bool = True
+    catty_expression_repeat_include_text: bool = True
 
     catty_allowed_user_ids: set[int] = Field(default_factory=set)
     catty_allowed_group_ids: set[int] = Field(default_factory=set)
@@ -218,6 +221,7 @@ class Config(BaseModel):
         "catty_emoji_interest_threshold",
         "catty_emoji_save_interest_threshold",
         "catty_emoji_max_candidates",
+        "catty_emoji_reply_probability",
         "catty_proactive_max_daily_per_group",
         "catty_proactive_check_interval_seconds",
         "catty_proactive_min_interval_minutes",

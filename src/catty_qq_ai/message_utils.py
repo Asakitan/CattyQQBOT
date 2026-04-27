@@ -117,10 +117,25 @@ def extract_images(event: MessageEvent) -> list[tuple[str, str]]:
     return images
 
 
-def expression_message_signature(event: MessageEvent, *, include_images: bool = True) -> tuple[str, ...] | None:
+def _normalize_repeat_text(text: str) -> str:
+    return re.sub(r"\s+", " ", text.strip())
+
+
+def expression_message_signature(
+    event: MessageEvent,
+    *,
+    include_images: bool = True,
+    include_text: bool = True,
+) -> tuple[str, ...] | None:
     signature: list[str] = []
     for segment in event.message:
-        if segment.type == "text" and not str(segment.data.get("text", "")).strip():
+        if segment.type == "text":
+            text = _normalize_repeat_text(str(segment.data.get("text", "")))
+            if not text:
+                continue
+            if not include_text:
+                return None
+            signature.append(f"text:{text}")
             continue
         if segment.type == "image" and not include_images:
             return None
@@ -142,12 +157,19 @@ def expression_message_signature(event: MessageEvent, *, include_images: bool = 
                 data.get("emoji_id"),
                 data.get("key"),
                 data.get("summary"),
-                data.get("url"),
                 data.get("file"),
             ]
-            value = "|".join(part for part in parts if part)
+            value = "|".join(part for part in parts if part) or data.get("url")
         else:
-            value = data.get("file") or data.get("summary") or data.get("url")
+            parts = [
+                data.get("file_id"),
+                data.get("file"),
+                data.get("md5"),
+                data.get("sha1"),
+                data.get("id"),
+                data.get("summary"),
+            ]
+            value = "|".join(part for part in parts if part) or data.get("url")
 
         if not value:
             return None

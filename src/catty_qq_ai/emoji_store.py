@@ -3,8 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 import hashlib
 import json
+import logging
 from pathlib import Path
 import re
+import sys
 from typing import Any
 from urllib.parse import urlparse
 
@@ -12,6 +14,7 @@ from .config import Config
 
 
 EMOJI_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp"}
+logger = logging.getLogger(__name__)
 
 
 @dataclass(slots=True)
@@ -58,12 +61,36 @@ class EmojiStore:
         if self.enabled:
             self.refresh()
 
+    def _has_emoji_files(self, path: Path) -> bool:
+        return path.is_dir() and any(item.is_file() and item.suffix.lower() in EMOJI_EXTENSIONS for item in path.rglob("*"))
+
+    def _use_bundled_root_if_needed(self) -> None:
+        if self._has_emoji_files(self.root):
+            return
+        bundle_root_value = getattr(sys, "_MEIPASS", "")
+        if not bundle_root_value:
+            return
+        bundled_root = Path(str(bundle_root_value)) / "emojis"
+        if self._has_emoji_files(bundled_root):
+            logger.info("Using bundled emoji directory: %s", bundled_root)
+            self.root = bundled_root
+
     def refresh(self) -> None:
-        self.root.mkdir(parents=True, exist_ok=True)
+        self._use_bundled_root_if_needed()
+        if not self.root.exists():
+            self.root.mkdir(parents=True, exist_ok=True)
         self.download_dir.mkdir(parents=True, exist_ok=True)
         self.manifest_path.parent.mkdir(parents=True, exist_ok=True)
         self._manifest = self._load_manifest()
         self._scan_files()
+        manifest_count = len(self._manifest.get("emojis", {})) if isinstance(self._manifest.get("emojis"), dict) else 0
+        if manifest_count and not self._entries:
+            logger.warning(
+                "Emoji manifest has %s entries but no image files were found under %s. "
+                "Put the referenced jpg/png/gif/webp files in emoji.dir or update config.json.",
+                manifest_count,
+                self.root,
+            )
         self._save_manifest()
 
     def _load_manifest(self) -> dict[str, Any]:
@@ -167,11 +194,20 @@ class EmojiStore:
         for entry in self._entries:
             haystack = set(entry.tags)
             haystack.update(_safe_tokens(entry.meaning))
+            haystack_text = {text.lower() for text in entry.tags}
+            haystack_text.add(entry.meaning.lower())
             score = entry.priority
-            score += 40 * len(wanted & haystack)
+            token_hits = len(wanted & haystack)
+            fuzzy_hits = sum(
+                1
+                for token in wanted
+                if token not in haystack and any(token in text or text in token for text in haystack_text)
+            )
+            score += 40 * token_hits
+            score += 25 * fuzzy_hits
             if entry.source == "default":
                 score += 30
-            if wanted and len(wanted & haystack) == 0:
+            if wanted and token_hits == 0 and fuzzy_hits == 0:
                 score -= 120
             if score > 0:
                 scored.append((score, entry))

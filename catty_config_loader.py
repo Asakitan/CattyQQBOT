@@ -97,9 +97,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "reply_human_split_min_chars": 48,
         "reply_human_split_delay_seconds": 0.8,
         "expression_repeat_enabled": True,
-        "expression_repeat_threshold": 3,
+        "expression_repeat_threshold": 2,
         "expression_repeat_window_seconds": 20,
         "expression_repeat_include_images": True,
+        "expression_repeat_include_text": True,
     },
     "emoji": {
         "enabled": True,
@@ -109,6 +110,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "interest_threshold": 60,
         "save_interest_threshold": 85,
         "max_candidates": 8,
+        "reply_enabled": True,
+        "reply_probability": 0.85,
     },
     "memory": {
         "enabled": True,
@@ -303,6 +306,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_EXPRESSION_REPEAT_THRESHOLD", chat.get("expression_repeat_threshold"))
     _set_env("CATTY_EXPRESSION_REPEAT_WINDOW_SECONDS", chat.get("expression_repeat_window_seconds"))
     _set_env("CATTY_EXPRESSION_REPEAT_INCLUDE_IMAGES", chat.get("expression_repeat_include_images"))
+    _set_env("CATTY_EXPRESSION_REPEAT_INCLUDE_TEXT", chat.get("expression_repeat_include_text"))
 
     emoji = _section(data, "emoji")
     _set_env("CATTY_EMOJI_ENABLED", emoji.get("enabled"))
@@ -327,6 +331,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_EMOJI_INTEREST_THRESHOLD", emoji.get("interest_threshold"))
     _set_env("CATTY_EMOJI_SAVE_INTEREST_THRESHOLD", emoji.get("save_interest_threshold"))
     _set_env("CATTY_EMOJI_MAX_CANDIDATES", emoji.get("max_candidates"))
+    _set_env("CATTY_EMOJI_REPLY_ENABLED", emoji.get("reply_enabled"))
+    _set_env("CATTY_EMOJI_REPLY_PROBABILITY", emoji.get("reply_probability"))
 
     memory = _section(data, "memory")
     memory_path = memory.get("path")
