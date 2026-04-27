@@ -1,11 +1,11 @@
 import asyncio
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import time
 from typing import DefaultDict
 
 import httpx
-from nonebot import get_driver, get_plugin_config, logger, on_message
+from nonebot import get_bots, get_driver, get_plugin_config, logger, on_message
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, PrivateMessageEvent
 from nonebot.adapters.onebot.v11 import Bot, Message, MessageEvent
 from nonebot.matcher import Matcher
@@ -24,7 +24,7 @@ from .message_utils import (
     split_reply,
 )
 from .memory import MemoryStore
-from .openai_client import OpenAICompatibleError, assess_user_anger, chat_completion, describe_images, should_reply_to_group_message, should_request_reply_split
+from .openai_client import OpenAICompatibleError, assess_user_anger, chat_completion, describe_images, should_request_reply_split
 
 
 __plugin_meta__ = PluginMetadata(
@@ -52,7 +52,21 @@ class ExpressionRepeatState:
     responded: bool = False
 
 
+@dataclass(slots=True)
+class GroupFilterBatchMessage:
+    history_content: str
+    has_image: bool = False
+
+
+@dataclass(slots=True)
+class GroupFilterBatchState:
+    messages: list[GroupFilterBatchMessage] = field(default_factory=list)
+    first_seen: float = 0.0
+
+
 _expression_repeats: DefaultDict[str, ExpressionRepeatState] = defaultdict(ExpressionRepeatState)
+_group_filter_batches: DefaultDict[str, GroupFilterBatchState] = defaultdict(GroupFilterBatchState)
+_group_filter_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 REPLY_SPLIT_MARKER = "<<<CATTY_REPLY_SPLIT>>>"
 NO_REPLY_MARKER = "<<<CATTY_NO_REPLY>>>"
 TRAILING_CHAT_PUNCTUATION = " \t\r\n。！？!?；;，,、：:…."
@@ -94,14 +108,17 @@ def _build_messages(
     image_description: str | None = None,
     anger_context: str | None = None,
     semantic_reply_split: bool = False,
+    group_filter_context: str | None = None,
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
     if config.catty_system_prompt.strip():
         messages.append({"role": "system", "content": config.catty_system_prompt.strip()})
     if semantic_reply_split:
         messages.append({"role": "system", "content": _semantic_reply_split_prompt()})
-    if incoming.opportunistic:
+    if incoming.opportunistic or group_filter_context:
         messages.append({"role": "system", "content": _opportunistic_reply_prompt()})
+    if group_filter_context:
+        messages.append({"role": "system", "content": group_filter_context})
     if anger_context:
         messages.append({"role": "system", "content": anger_context})
     memory_context = memory_store.build_context(event)
@@ -217,7 +234,7 @@ def _semantic_reply_split_prompt() -> str:
 
 def _opportunistic_reply_prompt() -> str:
     return (
-        "这是特别关注群活跃窗口内捕获的一条普通群聊消息，不是明确 @ 你、前缀命令或强指向请求。"
+        "这是长期群聊观察窗口内捕获的普通群聊消息，不是明确 @ 你、前缀命令或强指向请求。"
         "你需要先判断是否值得自然插话：只有能提供帮助、接住话题、纠正明显误解、或用户明显希望有人回应时才回复；"
         f"如果不该回复，只输出 {NO_REPLY_MARKER}，不要输出其他内容。"
     )
@@ -225,6 +242,58 @@ def _opportunistic_reply_prompt() -> str:
 
 def _is_no_reply(reply: str) -> bool:
     return reply.strip().strip(TRAILING_CHAT_PUNCTUATION) == NO_REPLY_MARKER
+
+
+def _group_filter_reply_context(batch: list[GroupFilterBatchMessage]) -> str:
+    lines = [
+        f"{index}. {message.history_content}{' [含图片]' if message.has_image else ''}"
+        for index, message in enumerate(batch, 1)
+    ]
+    return (
+        "下面是本群这轮按 filter 批量窗口攒到的普通群聊消息。"
+        "它们不是明确 @ 你、回复你或前缀命令；请把它们当作主动插话判断的上下文。\n"
+        "本批普通群消息：\n" + "\n".join(lines)
+    )
+
+
+def _coerce_group_id(group_id: str) -> int | str:
+    stripped = group_id.strip()
+    if stripped.isdigit():
+        return int(stripped)
+    return stripped
+
+
+async def _take_due_group_filter_batch(
+    event: GroupMessageEvent,
+    incoming: ExtractedMessage,
+) -> list[GroupFilterBatchMessage] | None:
+    key = f"group:{event.group_id}"
+    now = time.monotonic()
+    batch_messages = max(int(config.catty_filter_group_batch_messages), 1)
+    batch_seconds = max(float(config.catty_filter_group_batch_seconds), 0.0)
+
+    async with _group_filter_locks[key]:
+        state = _group_filter_batches[key]
+        if not state.messages:
+            state.first_seen = now
+        state.messages.append(
+            GroupFilterBatchMessage(
+                history_content=incoming.history_content,
+                has_image=incoming.has_image,
+            )
+        )
+        if len(state.messages) > batch_messages:
+            del state.messages[:-batch_messages]
+
+        due_by_count = len(state.messages) >= batch_messages
+        due_by_time = batch_seconds <= 0 or now - state.first_seen >= batch_seconds
+        if not due_by_count and not due_by_time:
+            return None
+
+        batch = list(state.messages)
+        state.messages.clear()
+        state.first_seen = 0.0
+        return batch
 
 
 async def _should_request_semantic_reply_split(incoming: ExtractedMessage) -> bool:
@@ -240,6 +309,86 @@ async def _should_request_semantic_reply_split(incoming: ExtractedMessage) -> bo
     except httpx.HTTPError as exc:
         logger.warning(f"Reply split filter transport error: {exc}")
     return False
+
+
+def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
+    max_daily = max(config.catty_proactive_max_daily_per_group, 0)
+    daily_target = memory_store.proactive_daily_target(group_id, max_daily=max_daily)
+    context = memory_store.build_proactive_context(
+        group_id,
+        recent_limit=max(config.catty_proactive_recent_messages, 1),
+    )
+    system_prompt = config.catty_system_prompt.strip()
+    messages: list[ChatMessage] = []
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    messages.append(
+        {
+            "role": "system",
+            "content": (
+                "你正在以群友身份进行每天主动冒泡，不是回应某个明确提问。"
+                "你可以从三类方向选一个：1) 结合自己的背景聊一点卡拉彼丘相关体验、角色、地图、配队或小吐槽；"
+                "2) 分享一点你作为接入现实世界的猫系AI的日常观察和生活感；"
+                "3) 根据群摘要、群友画像和近期聊天挑一个容易让群友接话的话题。"
+                "必须考虑当前群背景和群友背景，像普通群友自然开口，不要像公告、任务报告或营销话术。"
+                "如果这个群此刻不适合冒泡，只输出 "
+                f"{NO_REPLY_MARKER}。如果上次主动冒泡没人理，可以轻微失落，但不要抱怨或道德绑架。"
+                "只输出要发送到群里的正文，1到2句，尽量短。"
+            ),
+        }
+    )
+    messages.append(
+        {
+            "role": "user",
+            "content": (
+                f"今天本群目标主动冒泡次数：{daily_target}/{max_daily}。\n"
+                f"{context}\n\n"
+                "请生成这次主动冒泡消息。"
+            ),
+        }
+    )
+    return messages
+
+
+async def _candidate_group_ids(bot: Bot) -> list[str]:
+    if config.catty_allowed_group_ids:
+        return sorted(str(group_id) for group_id in config.catty_allowed_group_ids)
+
+    group_ids = set(memory_store.group_ids())
+    try:
+        group_list = await bot.get_group_list()
+    except Exception as exc:
+        logger.warning(f"Failed to fetch group list for proactive bubbles: {exc}")
+    else:
+        if isinstance(group_list, list):
+            for group in group_list:
+                if isinstance(group, dict):
+                    group_id = group.get("group_id")
+                else:
+                    group_id = getattr(group, "group_id", None)
+                if group_id is not None:
+                    group_ids.add(str(group_id))
+    return sorted(group_ids)
+
+
+async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
+    messages = _build_proactive_messages(group_id)
+    reply = await chat_completion(config, messages)
+    if _is_no_reply(reply):
+        return False
+    chunks = _reply_chunks(reply)
+    if not chunks:
+        return False
+
+    sent_text = "\n".join(chunks)
+    delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
+    for chunk in chunks:
+        await bot.send_group_msg(group_id=_coerce_group_id(group_id), message=Message(chunk))
+        if delay_seconds:
+            await asyncio.sleep(delay_seconds)
+    memory_store.record_proactive_bubble_sent(group_id, sent_text)
+    logger.info(f"Sent proactive bubble to group {group_id}")
+    return True
 
 
 def _reply_chunks(reply: str) -> list[str]:
@@ -293,17 +442,13 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     if incoming is None:
         return False
     if incoming.needs_filter:
-        try:
-            should_reply = await should_reply_to_group_message(config, incoming.text, has_image=incoming.has_image)
-        except OpenAICompatibleError as exc:
-            logger.warning(f"Group message filter API error: {exc}")
+        if not isinstance(event, GroupMessageEvent):
             return False
-        except httpx.HTTPError as exc:
-            logger.warning(f"Group message filter transport error: {exc}")
+        batch = await _take_due_group_filter_batch(event, incoming)
+        if batch is None:
             return False
-        if not should_reply:
-            return False
-    if isinstance(event, GroupMessageEvent) and config.catty_filter_anger_enabled:
+        state["catty_group_filter_context"] = _group_filter_reply_context(batch)
+    if isinstance(event, GroupMessageEvent) and config.catty_filter_anger_enabled and not state.get("catty_group_filter_context"):
         if memory_store.is_user_in_anger_cooldown(event):
             return False
         try:
@@ -355,7 +500,9 @@ async def handle_expression_repeat(matcher: Matcher, state: T_State) -> None:
 
 
 @observe_matcher.handle()
-async def observe_memory(event: MessageEvent) -> None:
+async def observe_memory(bot: Bot, event: MessageEvent) -> None:
+    if str(event.user_id) == str(bot.self_id):
+        return
     if isinstance(event, GroupMessageEvent):
         memory_store.remember_corpus_event(
             event,
@@ -401,15 +548,44 @@ async def _summary_loop() -> None:
                 logger.warning(f"Failed to summarize mentioned member profile for {user_id} in group {group_id}: {exc}")
 
 
+async def _proactive_bubble_loop() -> None:
+    if not config.catty_proactive_enabled or not _has_api_key():
+        return
+    while True:
+        await asyncio.sleep(max(config.catty_proactive_check_interval_seconds, 60.0))
+        bots = list(get_bots().values())
+        if not bots:
+            continue
+        for bot in bots:
+            group_ids = await _candidate_group_ids(bot)
+            due_group_ids = memory_store.due_proactive_group_ids(
+                group_ids,
+                max_daily=max(config.catty_proactive_max_daily_per_group, 0),
+                min_interval_minutes=max(config.catty_proactive_min_interval_minutes, 1.0),
+            )
+            for group_id in due_group_ids:
+                try:
+                    await _send_proactive_bubble(bot, group_id)
+                except OpenAICompatibleError as exc:
+                    logger.warning(f"Proactive bubble API error for group {group_id}: {exc}")
+                except httpx.HTTPError as exc:
+                    logger.warning(f"Proactive bubble transport error for group {group_id}: {exc}")
+                except Exception as exc:
+                    logger.warning(f"Failed to send proactive bubble to group {group_id}: {exc}")
+                await asyncio.sleep(2)
+
+
 @get_driver().on_startup
 async def start_memory_summary_loop() -> None:
     asyncio.create_task(_summary_loop())
+    asyncio.create_task(_proactive_bubble_loop())
 
 
 @chat_matcher.handle()
 async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     incoming: ExtractedMessage = state["catty_incoming"]
     anger_context = str(state.get("catty_anger_context") or "")
+    group_filter_context = str(state.get("catty_group_filter_context") or "")
     history_key = build_history_key(event, config)
     memory_store.remember_event(event)
 
@@ -451,6 +627,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             image_description=image_description,
             anger_context=anger_context,
             semantic_reply_split=semantic_reply_split,
+            group_filter_context=group_filter_context,
         )
         try:
             reply = await chat_completion(config, messages)
@@ -464,7 +641,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             logger.warning(f"OpenAI-compatible API transport error: {exc}")
             await matcher.finish(Message("AI 接口连接失败了，检查一下 BASE_URL、网络或代理配置。"))
 
-        if incoming.opportunistic and _is_no_reply(reply):
+        if (incoming.opportunistic or group_filter_context) and _is_no_reply(reply):
             await matcher.finish()
 
         chunks = _reply_chunks(reply)

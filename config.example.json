@@ -52,6 +52,8 @@
     "temperature": 0,
     "max_tokens": 64,
     "request_timeout": 10,
+    "group_batch_messages": 50,
+    "group_batch_seconds": 120,
     "anger_enabled": true,
     "anger_warn_threshold": 60,
     "anger_mute_threshold": 100,
@@ -115,5 +117,13 @@
     "special_group_active_minutes_per_hour": 10,
     "member_mention_threshold": 20,
     "private_summary_messages": 500
+  },
+  "proactive": {
+    "enabled": true,
+    "max_daily_per_group": 5,
+    "check_interval_seconds": 300,
+    "min_interval_minutes": 120,
+    "response_window_minutes": 30,
+    "recent_messages": 40
   }
 }

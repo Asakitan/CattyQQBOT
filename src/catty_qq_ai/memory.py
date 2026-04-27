@@ -19,6 +19,10 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
+def _today() -> str:
+    return datetime.now().date().isoformat()
+
+
 def _parse_time(value: Any) -> datetime | None:
     if not value:
         return None
@@ -113,6 +117,8 @@ class MemoryStore:
         self.max_corpus_messages = max(config.catty_memory_max_corpus_messages, 20)
         self.private_summary_messages = max(config.catty_memory_private_summary_messages, 1)
         self.member_mention_threshold = max(config.catty_memory_member_mention_threshold, 1)
+        self.proactive_response_window_minutes = max(config.catty_proactive_response_window_minutes, 1.0)
+        self.proactive_recent_messages = max(config.catty_proactive_recent_messages, 1)
         self.group_titles = dict(config.catty_group_titles)
         self.user_titles = dict(config.catty_user_titles)
         self.group_user_titles = dict(config.catty_group_user_titles)
@@ -191,6 +197,12 @@ class MemoryStore:
         for group_id, group in self._data.get("groups", {}).items():
             if isinstance(group, dict):
                 self._write_entity_file(self._group_file(str(group_id)), "group_id", str(group_id), group)
+
+    def group_ids(self) -> list[str]:
+        groups = self._data.get("groups", {})
+        if not isinstance(groups, dict):
+            return []
+        return sorted(str(group_id) for group_id in groups)
 
     def _write_entity_file(self, path: Path, id_key: str, entity_id: str, data: dict[str, Any]) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -405,6 +417,7 @@ class MemoryStore:
             target["count"] = int(target.get("count") or 0) + 1
             target_corpus.append(entry)
             del target_corpus[:-self.member_mention_threshold]
+        self._record_proactive_human_message(group)
         self._save()
 
     def remember_private_corpus_event(self, event: MessageEvent, text: str, *, has_image: bool = False) -> None:
@@ -520,6 +533,131 @@ class MemoryStore:
                     due.append((group_id, str(user_id)))
         return due
 
+    def _proactive_state(self, group: dict[str, Any]) -> dict[str, Any]:
+        state = group.setdefault("proactive", {})
+        if not isinstance(state, dict):
+            state = {}
+            group["proactive"] = state
+        today = _today()
+        if state.get("date") != today:
+            state["date"] = today
+            state["daily_sent"] = 0
+            state["daily_human_messages"] = 0
+        return state
+
+    def _interaction_score(self, state: dict[str, Any]) -> int:
+        try:
+            score = int(state.get("interaction_score") or 0)
+        except (TypeError, ValueError):
+            score = 0
+        return max(min(score, 100), 0)
+
+    def _set_interaction_score(self, state: dict[str, Any], score: int) -> None:
+        state["interaction_score"] = max(min(int(score), 100), 0)
+
+    def _expire_proactive_pending(self, state: dict[str, Any]) -> bool:
+        pending = state.get("pending")
+        if not isinstance(pending, dict):
+            return False
+        if pending.get("responded_at") or pending.get("missed_at"):
+            return False
+        sent_at = _parse_time(pending.get("sent_at"))
+        if sent_at is None:
+            pending["missed_at"] = _now()
+            return True
+        now = datetime.now(timezone.utc)
+        if (now - sent_at).total_seconds() < self.proactive_response_window_minutes * 60:
+            return False
+        pending["missed_at"] = _now()
+        state["last_unanswered_at"] = pending["missed_at"]
+        state["unanswered_count"] = int(state.get("unanswered_count") or 0) + 1
+        self._set_interaction_score(state, self._interaction_score(state) - 8)
+        return True
+
+    def _record_proactive_human_message(self, group: dict[str, Any]) -> None:
+        state = self._proactive_state(group)
+        state["daily_human_messages"] = int(state.get("daily_human_messages") or 0) + 1
+        self._set_interaction_score(state, self._interaction_score(state) + 1)
+
+        pending = state.get("pending")
+        if not isinstance(pending, dict) or pending.get("responded_at") or pending.get("missed_at"):
+            return
+        sent_at = _parse_time(pending.get("sent_at"))
+        if sent_at is None:
+            return
+        now = datetime.now(timezone.utc)
+        if (now - sent_at).total_seconds() > self.proactive_response_window_minutes * 60:
+            self._expire_proactive_pending(state)
+            return
+        pending["responded_at"] = _now()
+        state["last_response_at"] = pending["responded_at"]
+        state["last_unanswered_at"] = ""
+        state["response_count"] = int(state.get("response_count") or 0) + 1
+        self._set_interaction_score(state, self._interaction_score(state) + 8)
+
+    def proactive_daily_target(self, group_id: str, *, max_daily: int) -> int:
+        group = self._data.setdefault("groups", {}).setdefault(str(group_id), {})
+        state = self._proactive_state(group)
+        score = self._interaction_score(state)
+        daily_human_messages = int(state.get("daily_human_messages") or 0)
+        signal = score + daily_human_messages // 10
+        if signal >= 60:
+            target = 5
+        elif signal >= 40:
+            target = 4
+        elif signal >= 24:
+            target = 3
+        elif signal >= 10:
+            target = 2
+        else:
+            target = 1
+        return max(min(target, max(max_daily, 0)), 0)
+
+    def due_proactive_group_ids(
+        self,
+        group_ids: list[str],
+        *,
+        max_daily: int,
+        min_interval_minutes: float,
+    ) -> list[str]:
+        if not self.enabled:
+            return []
+        due: list[str] = []
+        now = datetime.now(timezone.utc)
+        changed = False
+        for raw_group_id in group_ids:
+            group_id = str(raw_group_id)
+            group = self._data.setdefault("groups", {}).setdefault(group_id, {})
+            if not isinstance(group, dict):
+                continue
+            state = self._proactive_state(group)
+            changed = self._expire_proactive_pending(state) or changed
+            target = self.proactive_daily_target(group_id, max_daily=max_daily)
+            if target <= 0 or int(state.get("daily_sent") or 0) >= target:
+                continue
+            pending = state.get("pending")
+            if isinstance(pending, dict) and not pending.get("responded_at") and not pending.get("missed_at"):
+                continue
+            last_sent = _parse_time(state.get("last_sent_at"))
+            if last_sent is not None and (now - last_sent).total_seconds() < max(min_interval_minutes, 1.0) * 60:
+                continue
+            due.append(group_id)
+        if changed:
+            self._save()
+        return due
+
+    def record_proactive_bubble_sent(self, group_id: str, text: str) -> None:
+        if not self.enabled:
+            return
+        group = self._data.setdefault("groups", {}).setdefault(str(group_id), {})
+        state = self._proactive_state(group)
+        now = _now()
+        state["daily_sent"] = int(state.get("daily_sent") or 0) + 1
+        state["last_sent_at"] = now
+        state["last_sent_text"] = text.strip()[:500]
+        state["pending"] = {"sent_at": now, "text": text.strip()[:500]}
+        self._save()
+
     def _corpus_lines(self, corpus: list[Any], limit: int) -> list[str]:
         lines: list[str] = []
         for item in corpus[-limit:]:
@@ -540,7 +678,7 @@ class MemoryStore:
         lines = self._corpus_lines(corpus, min(self.max_corpus_messages, 300))
         prompt = (
             '压缩QQ群长期记忆，省token。只输出JSON：'
-            '{"summary":"<=300字","members":[{"user_id":"QQ","display_name":"名","gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}]}。'
+            '{"summary":"<=2500字","members":[{"user_id":"QQ","display_name":"名","gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}]}。'
             "只写有证据的信息；性别不确定写未知；不要Markdown/emoji。"
         )
         user_content = (
@@ -548,6 +686,44 @@ class MemoryStore:
             + "\n".join(lines)
         )
         return [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]
+
+    def build_proactive_context(self, group_id: str, *, recent_limit: int | None = None) -> str:
+        group = self._data.get("groups", {}).get(str(group_id), {})
+        if not isinstance(group, dict):
+            return f"当前群：{group_id}；暂无长期记忆。"
+        state = self._proactive_state(group)
+        self._expire_proactive_pending(state)
+        summary = str(group.get("summary") or "").strip() or "暂无"
+        corpus = group.get("corpus", [])
+        recent_lines = self._corpus_lines(corpus if isinstance(corpus, list) else [], recent_limit or self.proactive_recent_messages)
+        members = group.get("members", {})
+        member_profiles = group.get("member_profiles", {})
+        known: list[str] = []
+        if isinstance(members, dict):
+            for member_id, member in list(members.items())[-self.max_known_members :]:
+                if not isinstance(member, dict):
+                    continue
+                display_name = str(member.get("display_name") or member_id)
+                profile = member_profiles.get(member_id, {}) if isinstance(member_profiles, dict) else {}
+                impression = ""
+                if isinstance(profile, dict):
+                    impression = str(profile.get("impression") or "").strip()
+                if not impression:
+                    impression = str(member.get("impression") or "").strip()
+                title = self._title_for(str(member_id), str(group_id))
+                known.append(f"{display_name}({member_id})=>{title}/{impression[:40] or '暂无印象'}")
+        sadness = "是" if state.get("last_unanswered_at") else "否"
+        return "\n".join(
+            [
+                f"当前群：{group_id}",
+                f"群摘要：{summary}",
+                f"互动分：{self._interaction_score(state)}/100；今日群友消息：{int(state.get('daily_human_messages') or 0)}；今日已主动冒泡：{int(state.get('daily_sent') or 0)}。",
+                f"上次主动冒泡无人回应：{sadness}",
+                "已知群友：" + ("；".join(known) if known else "暂无"),
+                "近期群聊：",
+                "\n".join(recent_lines[-(recent_limit or self.proactive_recent_messages) :]) if recent_lines else "暂无",
+            ]
+        )
 
     def build_private_summary_messages(self, user_id: str) -> list[dict[str, object]]:
         user = self._data.get("users", {}).get(user_id, {})
@@ -558,7 +734,7 @@ class MemoryStore:
         lines = self._corpus_lines(corpus, self.private_summary_messages)
         prompt = (
             '压缩QQ私聊记忆，省token。只输出JSON：'
-            '{"summary":"<=300字","profile":{"gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}}。'
+            '{"summary":"<=2500字","profile":{"gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}}。'
             "只写偏好、事实、称呼、边界；不要Markdown/emoji。"
         )
         user_content = (
@@ -577,7 +753,7 @@ class MemoryStore:
         lines = self._corpus_lines(corpus, self.member_mention_threshold)
         prompt = (
             '根据群里50次提到某人的上下文做短画像。只输出JSON：'
-            '{"user_id":"QQ","gender":"男/女/未知","title":"称呼","impression":"<=40字","evidence":"<=60字","confidence":"低/中/高"}。'
+            '{"user_id":"QQ","gender":"男/女/未知","title":"称呼","impression":"<=140字","evidence":"<=60字","confidence":"低/中/高"}。'
             "只根据上下文证据；不要Markdown/emoji。"
         )
         user_content = (

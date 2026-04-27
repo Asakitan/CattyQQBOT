@@ -45,6 +45,8 @@ class Config(BaseModel):
     catty_filter_temperature: float | None = 0.0
     catty_filter_max_tokens: int | None = 64
     catty_filter_request_timeout: float | None = 10.0
+    catty_filter_group_batch_messages: int = 50
+    catty_filter_group_batch_seconds: float = 120.0
     catty_filter_anger_enabled: bool = True
     catty_filter_anger_warn_threshold: int = 60
     catty_filter_anger_mute_threshold: int = 100
@@ -78,6 +80,13 @@ class Config(BaseModel):
     catty_group_titles: dict[str, str] = Field(default_factory=dict)
     catty_user_titles: dict[str, str] = Field(default_factory=dict)
     catty_group_user_titles: dict[str, dict[str, str]] = Field(default_factory=dict)
+
+    catty_proactive_enabled: bool = True
+    catty_proactive_max_daily_per_group: int = 5
+    catty_proactive_check_interval_seconds: float = 300.0
+    catty_proactive_min_interval_minutes: float = 120.0
+    catty_proactive_response_window_minutes: float = 30.0
+    catty_proactive_recent_messages: int = 40
 
     catty_temperature: float | None = 0.7
     catty_max_tokens: int | None = 1000
@@ -194,9 +203,16 @@ class Config(BaseModel):
         "catty_filter_temperature",
         "catty_filter_max_tokens",
         "catty_filter_request_timeout",
+        "catty_filter_group_batch_messages",
+        "catty_filter_group_batch_seconds",
         "catty_filter_anger_warn_threshold",
         "catty_filter_anger_mute_threshold",
         "catty_filter_anger_cooldown_seconds",
+        "catty_proactive_max_daily_per_group",
+        "catty_proactive_check_interval_seconds",
+        "catty_proactive_min_interval_minutes",
+        "catty_proactive_response_window_minutes",
+        "catty_proactive_recent_messages",
         mode="before",
     )
     @classmethod

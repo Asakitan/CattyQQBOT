@@ -124,7 +124,7 @@ ai 帮我总结这段话
 你看看这张图
 ```
 
-艾特、回复机器人消息、触发前缀或命中 `directed_keywords` 时会直接回复；普通群聊会先交给 `filter` 小模型判断，明显没有指向 AI 的消息不会回复。
+艾特、回复机器人消息、触发前缀或命中 `directed_keywords` 时会直接回复；普通群聊会按群攒到 `filter.group_batch_messages` 条，或距离本群上一批普通群消息达到 `filter.group_batch_seconds` 秒后，带主动插话提示交给 AI 判断是否自然回复；如果不该回复，AI 会输出内部不回复标记且不会发到群里。
 
 如果群友在短时间内连续发送同一个 QQ 表情，默认第 3 次时机器人会直接复读这条表情消息，不调用 AI 接口。AI 的普通文本回复会由 `filter` 小模型判断是否追加本轮专用的轻量分段提示，再由主模型按语义决定是否拆成两条消息发送；原始 `system_prompt` 不会被改写。
 
@@ -189,7 +189,9 @@ ai 清空记忆缓存
 
 所有允许的群都会记录待压缩语料，并按 `summary_interval_minutes` 定时压缩成长期摘要；摘要会在后续对话里提供给模型，用来形成群印象和群友画像。生成长期摘要后，当前待压缩语料会自动清空。私聊也会按人物单独记录语料并定时压缩，用来记住用户偏好、称呼和重要事实。
 
-`special_group_ids` 是特别关心群：它只影响主动活跃窗口，不再限制总结范围。特别关心群默认每小时随机分布 10 个活跃分钟；活跃期内机器人会把更多普通群聊交给 AI 判断是否值得插话，AI 可以选择不回复。非活跃期仍然只在艾特、前缀或指向词触发时回复。
+`special_group_ids` 是旧特别关心群配置：当前不再用它限制总结范围，也不再用短活跃窗口控制普通群插话。普通群聊的长期主动观察由 `filter.group_batch_messages` 和 `filter.group_batch_seconds` 控制；到达批次后 AI 会自行判断是否值得插话，也可以选择不回复。
+
+`proactive` 会让机器人每天在加入的群里主动冒泡：每个群每天最多 5 次，实际次数会根据该群互动分和当天群友发言量浮动。主动冒泡会参考群摘要、群友画像、近期聊天和上次有没有人接话，内容会从卡拉彼丘、自己的现实世界生活感、或适合当前群的话题里挑一个方向。如果冒泡后没人回应，机器人会记录一点失落感并降低该群互动分。
 
 当前默认 prompt 已经严格清理 emoji 使用：AI 默认不输出 emoji、颜文字或 `:heart:` 这类表情代码，除非用户明确要求。
 
@@ -238,11 +240,13 @@ dist/CattyQQAI.exe
 | `vision.api_key` | 空 | 图片识别模型 API Key；空则复用 `ai.api_key` |
 | `vision.model` | 空 | 图片识别模型名；空则复用 `ai.model` |
 | `vision.max_tokens` | `800` | 图片识别结果最大 token |
-| `filter.enabled` | `true` | 是否启用群消息快速过滤和语义分段判断 |
+| `filter.enabled` | `true` | 是否启用普通群消息批量主动判断、语义分段判断和怒气判断 |
 | `filter.base_url` | 空 | 过滤模型 OpenAI-compatible 地址；空则复用 `ai.base_url` |
 | `filter.api_key` | 空 | 过滤模型 API Key；空则复用 `ai.api_key` |
 | `filter.model` | 空 | 过滤模型名；空则复用 `ai.model` |
 | `filter.max_tokens` | `64` | 过滤判断最大 token，建议使用便宜快速模型 |
+| `filter.group_batch_messages` | `50` | 每个群累计多少条普通群消息后触发一次主动回复判断 |
+| `filter.group_batch_seconds` | `120` | 每个群普通群消息最多等待多少秒触发一次主动回复判断；在下一条群消息到达时检查 |
 | `filter.anger_enabled` | `true` | 是否启用用户无用复读怒气值判断 |
 | `filter.anger_warn_threshold` | `60` | 怒气达到该值后把不耐烦状态反馈给主 AI |
 | `filter.anger_mute_threshold` | `100` | 怒气达到该值后暂时不回复该用户 |
@@ -272,10 +276,16 @@ dist/CattyQQAI.exe
 | `memory.max_corpus_messages` | `800` | 每个群最多保留的待总结语料条数 |
 | `memory.private_summary_messages` | `500` | 私聊累计多少条后做一次长期总结 |
 | `memory.member_mention_threshold` | `20` | 群友被 @ 提到多少次后做画像总结 |
-| `memory.special_group_active_minutes_per_hour` | `10` | 旧热点窗口配置；当前普通群消息统一走 `filter` 判断 |
+| `memory.special_group_active_minutes_per_hour` | `10` | 旧热点窗口配置；当前普通群消息按 `filter.group_batch_messages` / `filter.group_batch_seconds` 批量判断 |
 | `memory.user_titles` | `{}` | 按 QQ 号配置全局称呼 |
 | `memory.group_titles` | `{}` | 按群号配置群默认称呼 |
 | `memory.group_user_titles` | `{}` | 按群号和 QQ 号配置专属称呼 |
+| `proactive.enabled` | `true` | 是否启用每天按群主动冒泡 |
+| `proactive.max_daily_per_group` | `5` | 每个群每天最多主动冒泡次数 |
+| `proactive.check_interval_seconds` | `300` | 主动冒泡调度器检查间隔 |
+| `proactive.min_interval_minutes` | `120` | 同一群两次主动冒泡的最小间隔 |
+| `proactive.response_window_minutes` | `30` | 主动冒泡后等待群友回应的窗口；超时无人回复会降低互动分 |
+| `proactive.recent_messages` | `40` | 主动冒泡时参考的近期群聊条数 |
 | `access.allowed_user_ids` | `[]` | 只允许这些 QQ 用户 |
 | `access.allowed_group_ids` | `[]` | 只允许这些 QQ 群 |
 

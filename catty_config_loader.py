@@ -72,6 +72,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "temperature": 0,
         "max_tokens": 64,
         "request_timeout": 10,
+        "group_batch_messages": 50,
+        "group_batch_seconds": 120,
         "anger_enabled": True,
         "anger_warn_threshold": 60,
         "anger_mute_threshold": 100,
@@ -115,6 +117,14 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "group_titles": {},
         "user_titles": {},
         "group_user_titles": {},
+    },
+    "proactive": {
+        "enabled": True,
+        "max_daily_per_group": 5,
+        "check_interval_seconds": 300,
+        "min_interval_minutes": 120,
+        "response_window_minutes": 30,
+        "recent_messages": 40,
     },
     "access": {
         "allowed_user_ids": [],
@@ -256,6 +266,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FILTER_TEMPERATURE", filter_config.get("temperature"))
     _set_env("CATTY_FILTER_MAX_TOKENS", filter_config.get("max_tokens"))
     _set_env("CATTY_FILTER_REQUEST_TIMEOUT", filter_config.get("request_timeout"))
+    _set_env("CATTY_FILTER_GROUP_BATCH_MESSAGES", filter_config.get("group_batch_messages"))
+    _set_env("CATTY_FILTER_GROUP_BATCH_SECONDS", filter_config.get("group_batch_seconds"))
     _set_env("CATTY_FILTER_ANGER_ENABLED", filter_config.get("anger_enabled"))
     _set_env("CATTY_FILTER_ANGER_WARN_THRESHOLD", filter_config.get("anger_warn_threshold"))
     _set_env("CATTY_FILTER_ANGER_MUTE_THRESHOLD", filter_config.get("anger_mute_threshold"))
@@ -314,6 +326,14 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_GROUP_TITLES", memory.get("group_titles"), json_value=True)
     _set_env("CATTY_USER_TITLES", memory.get("user_titles"), json_value=True)
     _set_env("CATTY_GROUP_USER_TITLES", memory.get("group_user_titles"), json_value=True)
+
+    proactive = _section(data, "proactive")
+    _set_env("CATTY_PROACTIVE_ENABLED", proactive.get("enabled"))
+    _set_env("CATTY_PROACTIVE_MAX_DAILY_PER_GROUP", proactive.get("max_daily_per_group"))
+    _set_env("CATTY_PROACTIVE_CHECK_INTERVAL_SECONDS", proactive.get("check_interval_seconds"))
+    _set_env("CATTY_PROACTIVE_MIN_INTERVAL_MINUTES", proactive.get("min_interval_minutes"))
+    _set_env("CATTY_PROACTIVE_RESPONSE_WINDOW_MINUTES", proactive.get("response_window_minutes"))
+    _set_env("CATTY_PROACTIVE_RECENT_MESSAGES", proactive.get("recent_messages"))
 
     access = _section(data, "access")
     _set_env("CATTY_ALLOWED_USER_IDS", access.get("allowed_user_ids"), json_value=True)
