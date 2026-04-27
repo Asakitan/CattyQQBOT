@@ -62,6 +62,17 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "max_tokens": 800,
         "request_timeout": 60,
     },
+    "filter": {
+        "enabled": True,
+        "base_url": "",
+        "api_key": "",
+        "model": "",
+        "extra_headers": {},
+        "extra_body": {},
+        "temperature": 0,
+        "max_tokens": 64,
+        "request_timeout": 10,
+    },
     "chat": {
         "system_prompt": "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。",
         "trigger_prefixes": ["ai", "AI", "猫猫"],
@@ -95,7 +106,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "max_corpus_messages": 800,
         "private_summary_messages": 500,
         "member_mention_threshold": 20,
-        "special_group_active_window_enabled": True,
+        "special_group_active_window_enabled": False,
         "special_group_active_minutes_per_hour": 10,
         "group_titles": {},
         "user_titles": {},
@@ -230,6 +241,17 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_VISION_TEMPERATURE", vision.get("temperature"))
     _set_env("CATTY_VISION_MAX_TOKENS", vision.get("max_tokens"))
     _set_env("CATTY_VISION_REQUEST_TIMEOUT", vision.get("request_timeout"))
+
+    filter_config = _section(data, "filter")
+    _set_env("CATTY_FILTER_ENABLED", filter_config.get("enabled"))
+    _set_env("CATTY_FILTER_BASE_URL", filter_config.get("base_url"))
+    _set_env("CATTY_FILTER_API_KEY", filter_config.get("api_key"))
+    _set_env("CATTY_FILTER_MODEL", filter_config.get("model"))
+    _set_env("CATTY_FILTER_EXTRA_HEADERS", filter_config.get("extra_headers"), json_value=True)
+    _set_env("CATTY_FILTER_EXTRA_BODY", filter_config.get("extra_body"), json_value=True)
+    _set_env("CATTY_FILTER_TEMPERATURE", filter_config.get("temperature"))
+    _set_env("CATTY_FILTER_MAX_TOKENS", filter_config.get("max_tokens"))
+    _set_env("CATTY_FILTER_REQUEST_TIMEOUT", filter_config.get("request_timeout"))
 
     chat = _section(data, "chat")
     _set_env("CATTY_SYSTEM_PROMPT", chat.get("system_prompt"))

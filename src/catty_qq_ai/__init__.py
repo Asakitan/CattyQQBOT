@@ -1,7 +1,6 @@
 import asyncio
 from collections import defaultdict
 from dataclasses import dataclass
-import random
 import time
 from typing import DefaultDict
 
@@ -25,7 +24,7 @@ from .message_utils import (
     split_reply,
 )
 from .memory import MemoryStore
-from .openai_client import OpenAICompatibleError, chat_completion, describe_images
+from .openai_client import OpenAICompatibleError, chat_completion, describe_images, should_reply_to_group_message, should_request_reply_split
 
 
 __plugin_meta__ = PluginMetadata(
@@ -225,11 +224,19 @@ def _is_no_reply(reply: str) -> bool:
     return reply.strip().strip(TRAILING_CHAT_PUNCTUATION) == NO_REPLY_MARKER
 
 
-def _should_request_semantic_reply_split() -> bool:
+async def _should_request_semantic_reply_split(incoming: ExtractedMessage) -> bool:
     if not config.catty_reply_human_split_enabled:
         return False
-    probability = min(max(config.catty_reply_human_split_probability, 0.0), 1.0)
-    return probability > 0 and random.random() < probability
+    if config.catty_reply_human_split_probability <= 0:
+        return False
+    min_chars = max(config.catty_reply_human_split_min_chars, 1)
+    try:
+        return await should_request_reply_split(config, incoming.history_content, min_chars=min_chars)
+    except OpenAICompatibleError as exc:
+        logger.warning(f"Reply split filter API error: {exc}")
+    except httpx.HTTPError as exc:
+        logger.warning(f"Reply split filter transport error: {exc}")
+    return False
 
 
 def _reply_chunks(reply: str) -> list[str]:
@@ -282,6 +289,17 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     incoming = extract_incoming_message(str(bot.self_id), event, config, replied_to_self=replied_to_self)
     if incoming is None:
         return False
+    if incoming.needs_filter:
+        try:
+            should_reply = await should_reply_to_group_message(config, incoming.text, has_image=incoming.has_image)
+        except OpenAICompatibleError as exc:
+            logger.warning(f"Group message filter API error: {exc}")
+            return False
+        except httpx.HTTPError as exc:
+            logger.warning(f"Group message filter transport error: {exc}")
+            return False
+        if not should_reply:
+            return False
     state["catty_incoming"] = incoming
     return True
 
@@ -379,14 +397,20 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
 
     async with _locks[history_key]:
         image_description: str | None = None
+        image_description_cached = False
         if incoming.has_image and config.catty_image_vision_enabled:
-            try:
-                image_description = await describe_images(config, incoming.image_urls, incoming.history_content)
-            except OpenAICompatibleError as exc:
-                logger.warning(f"Image recognition failed, falling back to image URLs: {exc}")
-            except httpx.HTTPError as exc:
-                logger.warning(f"Image recognition transport error, falling back to image URLs: {exc}")
-        semantic_reply_split = _should_request_semantic_reply_split()
+            image_description = memory_store.get_image_summary(incoming.image_keys)
+            image_description_cached = bool(image_description)
+            if not image_description:
+                try:
+                    image_description = await describe_images(config, incoming.image_urls, incoming.history_content)
+                    if image_description:
+                        memory_store.remember_image_record(incoming.image_keys, image_description)
+                except OpenAICompatibleError as exc:
+                    logger.warning(f"Image recognition failed, falling back to image URLs: {exc}")
+                except httpx.HTTPError as exc:
+                    logger.warning(f"Image recognition transport error, falling back to image URLs: {exc}")
+        semantic_reply_split = await _should_request_semantic_reply_split(incoming)
         messages = _build_messages(
             event,
             history_key,
@@ -410,7 +434,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish()
 
         chunks = _reply_chunks(reply)
-        if image_description:
+        if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
         _append_history(history_key, incoming.history_content, "\n".join(chunks) if chunks else reply)
 

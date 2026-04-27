@@ -42,6 +42,17 @@
     "max_tokens": 800,
     "request_timeout": 60
   },
+  "filter": {
+    "enabled": true,
+    "base_url": "",
+    "api_key": "",
+    "model": "",
+    "extra_headers": {},
+    "extra_body": {},
+    "temperature": 0,
+    "max_tokens": 64,
+    "request_timeout": 10
+  },
   "chat": {
     "system_prompt": "你是一个接入 QQ 群和私聊的中文 AI 助手。回答要简洁、自然、可靠，适合 QQ 聊天。默认不使用 emoji、颜文字或表情代码，除非用户明确要求。",
     "trigger_prefixes": [
@@ -96,7 +107,7 @@
     "special_group_ids": [],
     "summary_interval_minutes": 30,
     "max_corpus_messages": 800,
-    "special_group_active_window_enabled": true,
+    "special_group_active_window_enabled": false,
     "special_group_active_minutes_per_hour": 10,
     "member_mention_threshold": 20,
     "private_summary_messages": 500

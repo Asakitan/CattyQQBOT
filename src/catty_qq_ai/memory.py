@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from datetime import datetime, timezone
@@ -85,6 +86,15 @@ def _safe_storage_id(value: str) -> str:
     return safe or "unknown"
 
 
+def _image_record_id(image_keys: list[str]) -> str:
+    keys = [key.strip() for key in image_keys if key.strip()]
+    if not keys:
+        return ""
+    payload = json.dumps(keys, ensure_ascii=False, separators=(",", ":"))
+    digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+    return f"image_set:{digest}"
+
+
 class MemoryStore:
     def __init__(self, config: Config) -> None:
         self.enabled = config.catty_memory_enabled
@@ -106,7 +116,7 @@ class MemoryStore:
         self.group_titles = dict(config.catty_group_titles)
         self.user_titles = dict(config.catty_user_titles)
         self.group_user_titles = dict(config.catty_group_user_titles)
-        self._data: dict[str, Any] = {"users": {}, "groups": {}}
+        self._data: dict[str, Any] = {"users": {}, "groups": {}, "images": {}}
         if self.enabled:
             self._load()
 
@@ -132,6 +142,7 @@ class MemoryStore:
             if isinstance(loaded, dict):
                 self._data["users"] = loaded.get("users", {}) if isinstance(loaded.get("users", {}), dict) else {}
                 self._data["groups"] = loaded.get("groups", {}) if isinstance(loaded.get("groups", {}), dict) else {}
+                self._data["images"] = loaded.get("images", {}) if isinstance(loaded.get("images", {}), dict) else {}
         self._load_entity_files(self.user_storage_dir, "user_id", "user_", self._data.setdefault("users", {}))
         self._load_entity_files(self.group_storage_dir, "group_id", "group_", self._data.setdefault("groups", {}))
 
@@ -165,6 +176,7 @@ class MemoryStore:
             "version": 2,
             "users": {},
             "groups": {},
+            "images": self._data.get("images", {}) if isinstance(self._data.get("images"), dict) else {},
             "user_ids": sorted(str(user_id) for user_id in self._data.get("users", {})),
             "group_ids": sorted(str(group_id) for group_id in self._data.get("groups", {})),
             "user_storage_dir": str(self.user_storage_dir),
@@ -186,6 +198,45 @@ class MemoryStore:
             "data": data,
         }
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    def get_image_summary(self, image_keys: list[str]) -> str:
+        if not self.enabled:
+            return ""
+        record_id = _image_record_id(image_keys)
+        if not record_id:
+            return ""
+        images = self._data.setdefault("images", {})
+        record = images.get(record_id) if isinstance(images, dict) else None
+        if not isinstance(record, dict):
+            return ""
+        summary = str(record.get("summary") or "").strip()
+        if summary:
+            record["last_seen"] = _now()
+            record["seen_count"] = int(record.get("seen_count") or 0) + 1
+            self._save()
+        return summary
+
+    def remember_image_record(self, image_keys: list[str], image_summary: str) -> None:
+        summary = image_summary.strip()
+        if not self.enabled or not summary:
+            return
+        record_id = _image_record_id(image_keys)
+        if not record_id:
+            return
+        images = self._data.setdefault("images", {})
+        if not isinstance(images, dict):
+            images = {}
+            self._data["images"] = images
+        existing = images.get(record_id)
+        seen_count = int(existing.get("seen_count") or 0) if isinstance(existing, dict) else 0
+        images[record_id] = {
+            "keys": [key.strip() for key in image_keys if key.strip()],
+            "summary": summary,
+            "updated_at": _now(),
+            "last_seen": _now(),
+            "seen_count": seen_count + 1,
+        }
+        self._save()
 
     def remember_event(self, event: MessageEvent) -> None:
         if not self.enabled:

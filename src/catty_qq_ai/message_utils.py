@@ -20,8 +20,11 @@ class ExtractedMessage:
     replied_to_self: bool
     used_prefix: bool
     image_urls: list[str]
+    image_keys: list[str]
     has_image: bool
     directed: bool
+    directly_requested: bool
+    needs_filter: bool
     opportunistic: bool = False
 
 
@@ -60,14 +63,43 @@ def event_plain_text(event: MessageEvent) -> str:
 
 
 def extract_image_urls(event: MessageEvent) -> list[str]:
-    urls: list[str] = []
+    return [url for url, _key in extract_images(event)]
+
+
+def _image_cache_key(segment_type: str, data: dict[str, Any], url: str) -> str:
+    if segment_type == "mface":
+        parts = [
+            data.get("package_id"),
+            data.get("emoji_id"),
+            data.get("key"),
+            data.get("summary"),
+            data.get("file"),
+        ]
+    else:
+        parts = [
+            data.get("file_id"),
+            data.get("file"),
+            data.get("md5"),
+            data.get("sha1"),
+            data.get("id"),
+            data.get("summary"),
+        ]
+    values = [str(part).strip() for part in parts if str(part or "").strip()]
+    if values:
+        return f"{segment_type}:" + "|".join(values)
+    return f"{segment_type}:url:{url}"
+
+
+def extract_images(event: MessageEvent) -> list[tuple[str, str]]:
+    images: list[tuple[str, str]] = []
     for segment in event.message:
-        if segment.type != "image":
+        if segment.type not in {"image", "mface"}:
             continue
         url = str(segment.data.get("url") or "").strip()
-        if url:
-            urls.append(url)
-    return urls
+        if not url:
+            continue
+        images.append((url, _image_cache_key(segment.type, segment.data, url)))
+    return images
 
 
 def expression_message_signature(event: MessageEvent, *, include_images: bool = True) -> tuple[str, ...] | None:
@@ -236,7 +268,9 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, 
         return None
 
     text = _plain_text(event)
-    image_urls = extract_image_urls(event)
+    images = extract_images(event)
+    image_urls = [url for url, _key in images]
+    image_keys = [key for _url, key in images]
     has_image = bool(image_urls)
     text_without_mention, textual_mention = _strip_textual_mention(text, config.catty_trigger_prefixes)
     mentioned = _mentioned_self(self_id, event) or textual_mention
@@ -246,12 +280,18 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, 
     text_without_prefix, used_prefix = _strip_prefix(text_without_mention, config.catty_trigger_prefixes)
     directed = _has_directed_keyword(text_without_prefix or text, config)
 
-    if isinstance(event, GroupMessageEvent) and config.catty_group_require_mention_or_prefix:
-        special_active = _special_group_in_active_window(event, config)
+    directly_requested = True
+    needs_filter = False
+    if isinstance(event, GroupMessageEvent):
+        special_active = False
         image_directed = config.catty_image_response_enabled and has_image and directed
         directly_requested = mentioned or replied_to_self or used_prefix or directed or image_directed
         if not directly_requested and not special_active:
-            return None
+            if not config.catty_filter_enabled:
+                if config.catty_group_require_mention_or_prefix:
+                    return None
+            else:
+                needs_filter = True
         opportunistic = special_active and not directly_requested
     else:
         opportunistic = False
@@ -283,8 +323,11 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, 
         replied_to_self=replied_to_self,
         used_prefix=used_prefix,
         image_urls=image_urls,
+        image_keys=image_keys,
         has_image=has_image,
         directed=directed,
+        directly_requested=directly_requested,
+        needs_filter=needs_filter,
         opportunistic=opportunistic,
     )
 

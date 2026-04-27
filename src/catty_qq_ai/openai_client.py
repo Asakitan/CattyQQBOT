@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 from io import BytesIO
+import json
 from typing import Any
 from urllib.parse import urlparse
 
@@ -158,6 +159,97 @@ async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
         extra_headers=config.catty_openai_extra_headers,
         extra_body=config.catty_openai_extra_body,
     )
+
+
+def _json_decision(text: str, key: str) -> bool:
+    raw = text.strip()
+    if not raw:
+        return False
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError:
+        start = raw.find("{")
+        end = raw.rfind("}")
+        if start >= 0 and end > start:
+            try:
+                parsed = json.loads(raw[start : end + 1])
+            except json.JSONDecodeError:
+                parsed = None
+        else:
+            parsed = None
+    if isinstance(parsed, dict):
+        value = parsed.get(key)
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            return value.strip().lower() in {"true", "yes", "y", "1", "reply", "split"}
+
+    normalized = raw.strip().lower()
+    if key == "reply":
+        return normalized in {"reply", "yes", "true", "1", "回复"}
+    if key == "split":
+        return normalized in {"split", "yes", "true", "1", "拆分"}
+    return False
+
+
+async def _filter_completion(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 64) -> str:
+    base_url = config.catty_filter_base_url or config.catty_openai_base_url
+    api_key = config.catty_filter_api_key or config.catty_openai_api_key
+    model = config.catty_filter_model or config.catty_openai_model
+    return await _post_chat_completion(
+        base_url=base_url,
+        api_key=api_key,
+        model=model,
+        messages=messages,
+        timeout=config.catty_filter_request_timeout or config.catty_request_timeout,
+        proxy=config.catty_http_proxy,
+        temperature=config.catty_filter_temperature,
+        max_tokens=config.catty_filter_max_tokens or fallback_max_tokens,
+        extra_headers=config.catty_filter_extra_headers or config.catty_openai_extra_headers,
+        extra_body=config.catty_filter_extra_body,
+    )
+
+
+async def should_reply_to_group_message(config: Config, message_text: str, *, has_image: bool = False) -> bool:
+    if not config.catty_filter_enabled:
+        return False
+    if not (config.catty_filter_api_key or config.catty_openai_api_key):
+        return False
+
+    content = message_text.strip() or ("[图片]" if has_image else "")
+    if not content:
+        return False
+    prompt = (
+        "你是QQ群AI回复过滤器，只判断普通群消息是否明显指向机器人/AI并需要机器人回复。"
+        "规则：明确在问机器人、AI、猫猫、助手，或明显要求机器人帮忙/回答/看图，才回复；"
+        "普通闲聊、群友互相对话、吐槽、表情包、没有指向对象的问题，一律不回复。"
+        "只输出JSON：{\"reply\":true|false}，不要解释。"
+    )
+    user_content = f"消息：{content}\n是否有图片：{'是' if has_image else '否'}"
+    reply = await _filter_completion(
+        config,
+        [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}],
+    )
+    return _json_decision(reply, "reply")
+
+
+async def should_request_reply_split(config: Config, user_content: str, *, min_chars: int) -> bool:
+    if not config.catty_filter_enabled:
+        return False
+    if not (config.catty_filter_api_key or config.catty_openai_api_key):
+        return False
+
+    prompt = (
+        "你是QQ回复分段判断器，只判断本轮回复是否值得允许主AI按语义拆成两条消息。"
+        f"只有当用户问题大概率需要不少于约{min_chars}个中文字符、且拆成两条会更像自然聊天时，返回true；"
+        "短答、斗嘴、普通闲聊、简单问候、只需一句话回答时返回false。"
+        "只输出JSON：{\"split\":true|false}，不要解释。"
+    )
+    reply = await _filter_completion(
+        config,
+        [{"role": "system", "content": prompt}, {"role": "user", "content": user_content.strip()}],
+    )
+    return _json_decision(reply, "split")
 
 
 async def describe_images(config: Config, image_urls: list[str], context: str) -> str:

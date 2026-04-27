@@ -124,7 +124,9 @@ ai 帮我总结这段话
 你看看这张图
 ```
 
-如果群友在短时间内连续发送同一个 QQ 表情，默认第 3 次时机器人会直接复读这条表情消息，不调用 AI 接口。AI 的普通文本回复会按概率收到一条本轮专用的轻量分段提示，由 AI 自己按语义决定是否拆成两条消息发送；原始 `system_prompt` 不会被改写。
+艾特、回复机器人消息、触发前缀或命中 `directed_keywords` 时会直接回复；普通群聊会先交给 `filter` 小模型判断，明显没有指向 AI 的消息不会回复。
+
+如果群友在短时间内连续发送同一个 QQ 表情，默认第 3 次时机器人会直接复读这条表情消息，不调用 AI 接口。AI 的普通文本回复会由 `filter` 小模型判断是否追加本轮专用的轻量分段提示，再由主模型按语义决定是否拆成两条消息发送；原始 `system_prompt` 不会被改写。
 
 清空当前会话上下文：
 
@@ -166,7 +168,7 @@ ai 清空记忆缓存
     "max_corpus_messages": 800,
     "private_summary_messages": 500,
     "member_mention_threshold": 20,
-    "special_group_active_window_enabled": true,
+    "special_group_active_window_enabled": false,
     "special_group_active_minutes_per_hour": 10,
     "user_titles": {
       "993255714": "主任"
@@ -236,13 +238,18 @@ dist/CattyQQAI.exe
 | `vision.api_key` | 空 | 图片识别模型 API Key；空则复用 `ai.api_key` |
 | `vision.model` | 空 | 图片识别模型名；空则复用 `ai.model` |
 | `vision.max_tokens` | `800` | 图片识别结果最大 token |
+| `filter.enabled` | `true` | 是否启用群消息快速过滤和语义分段判断 |
+| `filter.base_url` | 空 | 过滤模型 OpenAI-compatible 地址；空则复用 `ai.base_url` |
+| `filter.api_key` | 空 | 过滤模型 API Key；空则复用 `ai.api_key` |
+| `filter.model` | 空 | 过滤模型名；空则复用 `ai.model` |
+| `filter.max_tokens` | `64` | 过滤判断最大 token，建议使用便宜快速模型 |
 | `chat.trigger_prefixes` | `["ai","AI","猫猫"]` | 群聊文字触发前缀 |
 | `chat.group_require_mention_or_prefix` | `true` | 群聊是否必须艾特或前缀 |
 | `chat.private_require_prefix` | `false` | 私聊是否必须前缀 |
 | `chat.history_turns` | `16` | 每个会话保留的上下文轮数 |
 | `chat.reply_max_chars` | `1800` | 单条回复超过该长度时强制切分 |
-| `chat.reply_human_split_enabled` | `true` | 是否按概率给本轮 AI 回复追加语义分段提示 |
-| `chat.reply_human_split_probability` | `0.35` | 本轮追加语义分段提示的概率 |
+| `chat.reply_human_split_enabled` | `true` | 是否允许 filter API 判断本轮是否追加语义分段提示 |
+| `chat.reply_human_split_probability` | `0.35` | 兼容旧配置；大于 0 时启用 filter API 语义分段判断 |
 | `chat.reply_human_split_min_chars` | `48` | 提示 AI 至少达到该字符数才考虑语义分段 |
 | `chat.reply_human_split_delay_seconds` | `0.8` | 分段发送之间的等待秒数 |
 | `chat.directed_keywords` | `["你","猫猫","猫娘","看看"]` | 群聊指向词，命中后可触发回复 |
@@ -261,7 +268,7 @@ dist/CattyQQAI.exe
 | `memory.max_corpus_messages` | `800` | 每个群最多保留的待总结语料条数 |
 | `memory.private_summary_messages` | `500` | 私聊累计多少条后做一次长期总结 |
 | `memory.member_mention_threshold` | `20` | 群友被 @ 提到多少次后做画像总结 |
-| `memory.special_group_active_minutes_per_hour` | `10` | 特别关心群每小时随机活跃分钟数 |
+| `memory.special_group_active_minutes_per_hour` | `10` | 旧热点窗口配置；当前普通群消息统一走 `filter` 判断 |
 | `memory.user_titles` | `{}` | 按 QQ 号配置全局称呼 |
 | `memory.group_titles` | `{}` | 按群号配置群默认称呼 |
 | `memory.group_user_titles` | `{}` | 按群号和 QQ 号配置专属称呼 |

@@ -36,6 +36,16 @@ class Config(BaseModel):
     catty_vision_max_tokens: int | None = 800
     catty_vision_request_timeout: float | None = None
 
+    catty_filter_enabled: bool = True
+    catty_filter_base_url: str = ""
+    catty_filter_api_key: str = ""
+    catty_filter_model: str = ""
+    catty_filter_extra_headers: dict[str, str] = Field(default_factory=dict)
+    catty_filter_extra_body: dict[str, Any] = Field(default_factory=dict)
+    catty_filter_temperature: float | None = 0.0
+    catty_filter_max_tokens: int | None = 64
+    catty_filter_request_timeout: float | None = 10.0
+
     catty_system_prompt: str = "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。"
     catty_trigger_prefixes: list[str] = Field(default_factory=lambda: ["ai", "AI", "猫猫"])
     catty_enable_private: bool = True
@@ -59,7 +69,7 @@ class Config(BaseModel):
     catty_memory_max_corpus_messages: int = 800
     catty_memory_private_summary_messages: int = 500
     catty_memory_member_mention_threshold: int = 20
-    catty_special_group_active_window_enabled: bool = True
+    catty_special_group_active_window_enabled: bool = False
     catty_special_group_active_minutes_per_hour: int = 10
     catty_group_titles: dict[str, str] = Field(default_factory=dict)
     catty_user_titles: dict[str, str] = Field(default_factory=dict)
@@ -82,7 +92,7 @@ class Config(BaseModel):
     catty_allowed_group_ids: set[int] = Field(default_factory=set)
     catty_http_proxy: str = ""
 
-    @field_validator("catty_openai_base_url", "catty_vision_base_url")
+    @field_validator("catty_openai_base_url", "catty_vision_base_url", "catty_filter_base_url")
     @classmethod
     def normalize_base_url(cls, value: str) -> str:
         return value.strip().rstrip("/")
@@ -131,7 +141,7 @@ class Config(BaseModel):
             return {int(item) for item in value}
         return value
 
-    @field_validator("catty_openai_extra_headers", "catty_vision_extra_headers", mode="before")
+    @field_validator("catty_openai_extra_headers", "catty_vision_extra_headers", "catty_filter_extra_headers", mode="before")
     @classmethod
     def parse_extra_headers(cls, value: Any) -> Any:
         if value is None or value == "":
@@ -142,7 +152,7 @@ class Config(BaseModel):
             data = value
         return {str(key): str(val) for key, val in dict(data).items()}
 
-    @field_validator("catty_openai_extra_body", "catty_vision_extra_body", mode="before")
+    @field_validator("catty_openai_extra_body", "catty_vision_extra_body", "catty_filter_extra_body", mode="before")
     @classmethod
     def parse_extra_body(cls, value: Any) -> Any:
         if value is None or value == "":
@@ -171,7 +181,17 @@ class Config(BaseModel):
             parsed[str(group_id)] = {str(user_id): str(title) for user_id, title in dict(members).items()}
         return parsed
 
-    @field_validator("catty_temperature", "catty_max_tokens", "catty_vision_temperature", "catty_vision_max_tokens", "catty_vision_request_timeout", mode="before")
+    @field_validator(
+        "catty_temperature",
+        "catty_max_tokens",
+        "catty_vision_temperature",
+        "catty_vision_max_tokens",
+        "catty_vision_request_timeout",
+        "catty_filter_temperature",
+        "catty_filter_max_tokens",
+        "catty_filter_request_timeout",
+        mode="before",
+    )
     @classmethod
     def parse_optional_numbers(cls, value: Any) -> Any:
         if value == "":
