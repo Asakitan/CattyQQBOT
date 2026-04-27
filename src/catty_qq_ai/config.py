@@ -26,6 +26,15 @@ class Config(BaseModel):
     catty_openai_extra_headers: dict[str, str] = Field(default_factory=dict)
     catty_openai_extra_body: dict[str, Any] = Field(default_factory=dict)
 
+    catty_audit_ai_base_url: str = ""
+    catty_audit_ai_api_key: str = ""
+    catty_audit_ai_model: str = ""
+    catty_audit_ai_extra_headers: dict[str, str] = Field(default_factory=dict)
+    catty_audit_ai_extra_body: dict[str, Any] = Field(default_factory=dict)
+    catty_audit_ai_temperature: float | None = 0.1
+    catty_audit_ai_max_tokens: int | None = 320
+    catty_audit_ai_request_timeout: float | None = 60.0
+
     catty_vision_base_url: str = ""
     catty_vision_api_key: str = ""
     catty_vision_model: str = ""
@@ -51,6 +60,24 @@ class Config(BaseModel):
     catty_filter_anger_warn_threshold: int = 60
     catty_filter_anger_mute_threshold: int = 100
     catty_filter_anger_cooldown_seconds: int = 3600
+    catty_local_critic_enabled: bool = False
+    catty_local_critic_base_url: str = "http://127.0.0.1:11434/v1"
+    catty_local_critic_api_key: str = "ollama"
+    catty_local_critic_model: str = "qwen2.5:1.5b"
+    catty_local_critic_extra_headers: dict[str, str] = Field(default_factory=dict)
+    catty_local_critic_extra_body: dict[str, Any] = Field(default_factory=dict)
+    catty_local_critic_temperature: float | None = 0.1
+    catty_local_critic_max_tokens: int | None = 160
+    catty_local_critic_request_timeout: float | None = 30.0
+    catty_local_critic_rewrite_when_score_below: int = 75
+    catty_local_critic_reply_gate_enabled: bool = True
+    catty_local_critic_reply_gate_min_confidence: int = 55
+    catty_local_critic_reply_gate_examples: int = 12
+    catty_local_critic_force_direct_reply: bool = True
+    catty_local_critic_collect_training_samples: bool = True
+    catty_local_critic_training_samples_path: str = "local_critic_samples.jsonl"
+    catty_local_training_collect_assistant_samples: bool = True
+    catty_local_training_assistant_samples_path: str = "training/assistant_reply_samples.jsonl"
     catty_web_search_enabled: bool = True
     catty_web_search_cooldown_seconds: int = 600
     catty_web_search_max_results: int = 5
@@ -132,7 +159,13 @@ class Config(BaseModel):
     catty_allowed_group_ids: set[int] = Field(default_factory=set)
     catty_http_proxy: str = ""
 
-    @field_validator("catty_openai_base_url", "catty_vision_base_url", "catty_filter_base_url")
+    @field_validator(
+        "catty_openai_base_url",
+        "catty_audit_ai_base_url",
+        "catty_vision_base_url",
+        "catty_filter_base_url",
+        "catty_local_critic_base_url",
+    )
     @classmethod
     def normalize_base_url(cls, value: str) -> str:
         return value.strip().rstrip("/")
@@ -187,7 +220,14 @@ class Config(BaseModel):
             return {int(item) for item in value}
         return value
 
-    @field_validator("catty_openai_extra_headers", "catty_vision_extra_headers", "catty_filter_extra_headers", mode="before")
+    @field_validator(
+        "catty_openai_extra_headers",
+        "catty_audit_ai_extra_headers",
+        "catty_vision_extra_headers",
+        "catty_filter_extra_headers",
+        "catty_local_critic_extra_headers",
+        mode="before",
+    )
     @classmethod
     def parse_extra_headers(cls, value: Any) -> Any:
         if value is None or value == "":
@@ -198,7 +238,14 @@ class Config(BaseModel):
             data = value
         return {str(key): str(val) for key, val in dict(data).items()}
 
-    @field_validator("catty_openai_extra_body", "catty_vision_extra_body", "catty_filter_extra_body", mode="before")
+    @field_validator(
+        "catty_openai_extra_body",
+        "catty_audit_ai_extra_body",
+        "catty_vision_extra_body",
+        "catty_filter_extra_body",
+        "catty_local_critic_extra_body",
+        mode="before",
+    )
     @classmethod
     def parse_extra_body(cls, value: Any) -> Any:
         if value is None or value == "":
@@ -248,6 +295,9 @@ class Config(BaseModel):
     @field_validator(
         "catty_temperature",
         "catty_max_tokens",
+        "catty_audit_ai_temperature",
+        "catty_audit_ai_max_tokens",
+        "catty_audit_ai_request_timeout",
         "catty_vision_temperature",
         "catty_vision_max_tokens",
         "catty_vision_request_timeout",
@@ -259,6 +309,12 @@ class Config(BaseModel):
         "catty_filter_anger_warn_threshold",
         "catty_filter_anger_mute_threshold",
         "catty_filter_anger_cooldown_seconds",
+        "catty_local_critic_temperature",
+        "catty_local_critic_max_tokens",
+        "catty_local_critic_request_timeout",
+        "catty_local_critic_rewrite_when_score_below",
+        "catty_local_critic_reply_gate_min_confidence",
+        "catty_local_critic_reply_gate_examples",
         "catty_web_search_cooldown_seconds",
         "catty_web_search_max_results",
         "catty_web_search_request_timeout",

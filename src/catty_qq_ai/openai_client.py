@@ -169,6 +169,21 @@ async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
     )
 
 
+async def local_critic_completion(config: Config, messages: list[ChatMessage]) -> str:
+    return await _post_chat_completion(
+        base_url=config.catty_local_critic_base_url,
+        api_key=config.catty_local_critic_api_key,
+        model=config.catty_local_critic_model,
+        messages=messages,
+        timeout=config.catty_local_critic_request_timeout or config.catty_request_timeout,
+        proxy=config.catty_http_proxy,
+        temperature=config.catty_local_critic_temperature,
+        max_tokens=config.catty_local_critic_max_tokens,
+        extra_headers=config.catty_local_critic_extra_headers,
+        extra_body=config.catty_local_critic_extra_body,
+    )
+
+
 def _json_decision(text: str, key: str) -> bool:
     raw = text.strip()
     if not raw:
@@ -207,27 +222,50 @@ def _json_object(text: str) -> dict[str, Any] | None:
 
 
 async def _filter_completion(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 64) -> str:
-    base_url = config.catty_filter_base_url or config.catty_openai_base_url
-    api_key = config.catty_filter_api_key or config.catty_openai_api_key
-    model = config.catty_filter_model or config.catty_openai_model
+    use_filter_route = bool(config.catty_filter_model.strip())
+    base_url = (
+        (config.catty_filter_base_url if use_filter_route else "")
+        or config.catty_audit_ai_base_url
+        or config.catty_openai_base_url
+    )
+    api_key = (
+        (config.catty_filter_api_key if use_filter_route else "")
+        or config.catty_audit_ai_api_key
+        or config.catty_openai_api_key
+    )
+    model = config.catty_filter_model if use_filter_route else (config.catty_audit_ai_model or config.catty_openai_model)
+    temperature = config.catty_filter_temperature if use_filter_route else config.catty_audit_ai_temperature
+    max_tokens = config.catty_filter_max_tokens if use_filter_route else config.catty_audit_ai_max_tokens
     return await _post_chat_completion(
         base_url=base_url,
         api_key=api_key,
         model=model,
         messages=messages,
-        timeout=config.catty_filter_request_timeout or config.catty_request_timeout,
+        timeout=(
+            (config.catty_filter_request_timeout if use_filter_route else None)
+            or config.catty_audit_ai_request_timeout
+            or config.catty_request_timeout
+        ),
         proxy=config.catty_http_proxy,
-        temperature=config.catty_filter_temperature,
-        max_tokens=config.catty_filter_max_tokens or fallback_max_tokens,
-        extra_headers=config.catty_filter_extra_headers or config.catty_openai_extra_headers,
-        extra_body=config.catty_filter_extra_body,
+        temperature=temperature,
+        max_tokens=max_tokens or fallback_max_tokens,
+        extra_headers=(
+            (config.catty_filter_extra_headers if use_filter_route else {})
+            or config.catty_audit_ai_extra_headers
+            or config.catty_openai_extra_headers
+        ),
+        extra_body=(
+            (config.catty_filter_extra_body if use_filter_route else {})
+            or config.catty_audit_ai_extra_body
+            or config.catty_openai_extra_body
+        ),
     )
 
 
 async def should_reply_to_group_message(config: Config, message_text: str, *, has_image: bool = False) -> bool:
     if not config.catty_filter_enabled:
         return False
-    if not (config.catty_filter_api_key or config.catty_openai_api_key):
+    if not (config.catty_filter_api_key or config.catty_audit_ai_api_key or config.catty_openai_api_key):
         return False
 
     content = message_text.strip() or ("[图片]" if has_image else "")
@@ -250,7 +288,7 @@ async def should_reply_to_group_message(config: Config, message_text: str, *, ha
 async def should_request_reply_split(config: Config, user_content: str, *, min_chars: int) -> bool:
     if not config.catty_filter_enabled:
         return False
-    if not (config.catty_filter_api_key or config.catty_openai_api_key):
+    if not (config.catty_filter_api_key or config.catty_audit_ai_api_key or config.catty_openai_api_key):
         return False
 
     prompt = (
@@ -269,7 +307,7 @@ async def should_request_reply_split(config: Config, user_content: str, *, min_c
 async def assess_user_anger(config: Config, message_text: str, *, current_anger: int, has_image: bool = False) -> dict[str, Any]:
     if not config.catty_filter_enabled or not config.catty_filter_anger_enabled:
         return {"useless": False, "anger_delta": -5, "reason": ""}
-    if not (config.catty_filter_api_key or config.catty_openai_api_key):
+    if not (config.catty_filter_api_key or config.catty_audit_ai_api_key or config.catty_openai_api_key):
         return {"useless": False, "anger_delta": 0, "reason": ""}
 
     content = message_text.strip() or ("[图片]" if has_image else "")

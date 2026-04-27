@@ -4,6 +4,11 @@ config.local.json
 memory.json
 memory_groups/
 memory_users/
+local_critic_samples.jsonl
+models/
+tools/ollama/
+training/
+start_catty.bat
 .venv/
 __pycache__/
 *.py[cod]
@@ -14,3 +19,6 @@ dist/
 build/
 *.egg-info/
 logs/
+file_sync.exe
+file_sync_config.json
+tools/

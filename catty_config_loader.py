@@ -9,6 +9,22 @@ from typing import Any
 
 
 CONFIG_FILENAME = "config.json"
+REPLY_GATE_TRAIN_COMMAND = (
+    '"{python}" "{scripts_dir}/local_lora_train.py" --dataset "{dataset}" '
+    '--output-dir "{output_dir}" --config "{config}" --task reply_gate --mode idle'
+)
+REPLY_GATE_BUSY_TRAIN_COMMAND = (
+    '"{python}" "{scripts_dir}/local_lora_train.py" --dataset "{dataset}" '
+    '--output-dir "{output_dir}" --config "{config}" --task reply_gate --mode busy'
+)
+ASSISTANT_TRAIN_COMMAND = (
+    '"{python}" "{scripts_dir}/local_lora_train.py" --dataset "{dataset}" '
+    '--output-dir "{output_dir}" --config "{config}" --task assistant_reply --mode idle'
+)
+ASSISTANT_BUSY_TRAIN_COMMAND = (
+    '"{python}" "{scripts_dir}/local_lora_train.py" --dataset "{dataset}" '
+    '--output-dir "{output_dir}" --config "{config}" --task assistant_reply --mode busy'
+)
 
 
 @dataclass(frozen=True)
@@ -51,6 +67,16 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "request_timeout": 60,
         "http_proxy": "",
     },
+    "audit_ai": {
+        "base_url": "",
+        "api_key": "",
+        "model": "",
+        "extra_headers": {},
+        "extra_body": {},
+        "temperature": 0.1,
+        "max_tokens": 320,
+        "request_timeout": 60,
+    },
     "vision": {
         "base_url": "",
         "api_key": "",
@@ -78,6 +104,98 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "anger_warn_threshold": 60,
         "anger_mute_threshold": 100,
         "anger_cooldown_seconds": 3600,
+    },
+    "ollama": {
+        "enabled": False,
+        "auto_install": True,
+        "auto_start": True,
+        "auto_pull_model": True,
+        "model": "qwen2.5:1.5b",
+        "install_dir": "tools/ollama",
+        "models_dir": "models/ollama",
+        "executable": "",
+        "download_url": "",
+        "api_url": "http://127.0.0.1:11434",
+        "startup_timeout_seconds": 60,
+        "pull_timeout_seconds": 1800,
+        "stop_existing": True,
+        "new_console": False,
+    },
+    "local_critic": {
+        "enabled": False,
+        "base_url": "http://127.0.0.1:11434/v1",
+        "api_key": "ollama",
+        "model": "qwen2.5:1.5b",
+        "extra_headers": {},
+        "extra_body": {},
+        "temperature": 0.1,
+        "max_tokens": 160,
+        "request_timeout": 30,
+        "rewrite_when_score_below": 75,
+        "reply_gate_enabled": True,
+        "reply_gate_min_confidence": 55,
+        "reply_gate_examples": 12,
+        "force_direct_reply": True,
+        "collect_training_samples": True,
+        "training_samples_path": "local_critic_samples.jsonl",
+    },
+    "local_training": {
+        "enabled": False,
+        "auto_train_on_startup": False,
+        "source_samples_path": "local_critic_samples.jsonl",
+        "dataset_path": "training/reply_gate_dataset.jsonl",
+        "output_dir": "training/reply_gate_lora",
+        "state_path": "training/reply_gate_train_state.json",
+        "min_samples": 200,
+        "min_new_samples": 50,
+        "train_command": REPLY_GATE_TRAIN_COMMAND,
+        "collect_assistant_samples": True,
+        "assistant_samples_path": "training/assistant_reply_samples.jsonl",
+        "assistant_dataset_path": "training/assistant_reply_dataset.jsonl",
+        "assistant_output_dir": "training/assistant_reply_lora",
+        "assistant_train_command": ASSISTANT_TRAIN_COMMAND,
+        "auto_fill_training_commands": True,
+        "backend_command": "",
+        "assistant_backend_command": "",
+        "busy_backend_command": "",
+        "assistant_busy_backend_command": "",
+        "artifact_audit_enabled": True,
+        "artifact_audit_route": "audit_ai",
+        "artifact_audit_base_url": "",
+        "artifact_audit_api_key": "",
+        "artifact_audit_model": "",
+        "artifact_audit_temperature": 0.1,
+        "artifact_audit_max_tokens": 320,
+        "artifact_audit_timeout_seconds": 60,
+        "artifact_audit_can_approve_apply": True,
+        "artifact_audit_can_approve_merge": True,
+        "apply_trained_adapter_enabled": True,
+        "apply_trained_adapter_command": "",
+        "assistant_apply_trained_adapter_command": "",
+        "merge_trained_model_enabled": True,
+        "merge_trained_model_command": "",
+        "assistant_merge_trained_model_command": "",
+        "merge_min_samples": 1000,
+        "assistant_merge_min_samples": 1000,
+        "busy_training_max_steps": 20,
+        "idle_training_max_steps": 200,
+        "busy_training_enabled": True,
+        "busy_train_command": REPLY_GATE_BUSY_TRAIN_COMMAND,
+        "assistant_busy_train_command": ASSISTANT_BUSY_TRAIN_COMMAND,
+        "busy_training_max_seconds": 600,
+        "idle_training_max_seconds": 0,
+        "idle_training_enabled": True,
+        "idle_start_hour": 2,
+        "idle_end_hour": 6,
+        "idle_min_quiet_minutes": 45,
+        "allow_quiet_idle": True,
+        "active_check_interval_seconds": 900,
+        "idle_check_interval_seconds": 3600,
+        "mcp_server_enabled": True,
+        "mcp_server_script": "scripts/catty_training_mcp_server.py",
+        "assistant_min_samples": 200,
+        "assistant_min_new_samples": 50,
+        "watch_interval_seconds": 0,
     },
     "web_search": {
         "enabled": True,
@@ -278,6 +396,16 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_REQUEST_TIMEOUT", ai.get("request_timeout"))
     _set_env("CATTY_HTTP_PROXY", ai.get("http_proxy"))
 
+    audit_ai = _section(data, "audit_ai")
+    _set_env("CATTY_AUDIT_AI_BASE_URL", audit_ai.get("base_url"))
+    _set_env("CATTY_AUDIT_AI_API_KEY", audit_ai.get("api_key"))
+    _set_env("CATTY_AUDIT_AI_MODEL", audit_ai.get("model"))
+    _set_env("CATTY_AUDIT_AI_EXTRA_HEADERS", audit_ai.get("extra_headers"), json_value=True)
+    _set_env("CATTY_AUDIT_AI_EXTRA_BODY", audit_ai.get("extra_body"), json_value=True)
+    _set_env("CATTY_AUDIT_AI_TEMPERATURE", audit_ai.get("temperature"))
+    _set_env("CATTY_AUDIT_AI_MAX_TOKENS", audit_ai.get("max_tokens"))
+    _set_env("CATTY_AUDIT_AI_REQUEST_TIMEOUT", audit_ai.get("request_timeout"))
+
     vision = _section(data, "vision")
     _set_env("CATTY_VISION_BASE_URL", vision.get("base_url"))
     _set_env("CATTY_VISION_API_KEY", vision.get("api_key"))
@@ -305,6 +433,38 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FILTER_ANGER_WARN_THRESHOLD", filter_config.get("anger_warn_threshold"))
     _set_env("CATTY_FILTER_ANGER_MUTE_THRESHOLD", filter_config.get("anger_mute_threshold"))
     _set_env("CATTY_FILTER_ANGER_COOLDOWN_SECONDS", filter_config.get("anger_cooldown_seconds"))
+
+    local_critic = _section(data, "local_critic")
+    _set_env("CATTY_LOCAL_CRITIC_ENABLED", local_critic.get("enabled"))
+    _set_env("CATTY_LOCAL_CRITIC_BASE_URL", local_critic.get("base_url"))
+    _set_env("CATTY_LOCAL_CRITIC_API_KEY", local_critic.get("api_key"))
+    _set_env("CATTY_LOCAL_CRITIC_MODEL", local_critic.get("model"))
+    _set_env("CATTY_LOCAL_CRITIC_EXTRA_HEADERS", local_critic.get("extra_headers"), json_value=True)
+    _set_env("CATTY_LOCAL_CRITIC_EXTRA_BODY", local_critic.get("extra_body"), json_value=True)
+    _set_env("CATTY_LOCAL_CRITIC_TEMPERATURE", local_critic.get("temperature"))
+    _set_env("CATTY_LOCAL_CRITIC_MAX_TOKENS", local_critic.get("max_tokens"))
+    _set_env("CATTY_LOCAL_CRITIC_REQUEST_TIMEOUT", local_critic.get("request_timeout"))
+    _set_env("CATTY_LOCAL_CRITIC_REWRITE_WHEN_SCORE_BELOW", local_critic.get("rewrite_when_score_below"))
+    _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_ENABLED", local_critic.get("reply_gate_enabled"))
+    _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_MIN_CONFIDENCE", local_critic.get("reply_gate_min_confidence"))
+    _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_EXAMPLES", local_critic.get("reply_gate_examples"))
+    _set_env("CATTY_LOCAL_CRITIC_FORCE_DIRECT_REPLY", local_critic.get("force_direct_reply"))
+    _set_env("CATTY_LOCAL_CRITIC_COLLECT_TRAINING_SAMPLES", local_critic.get("collect_training_samples"))
+    training_samples_path = local_critic.get("training_samples_path")
+    if training_samples_path:
+        resolved_training_samples_path = Path(str(training_samples_path)).expanduser()
+        if not resolved_training_samples_path.is_absolute():
+            resolved_training_samples_path = base_dir / resolved_training_samples_path
+        _set_env("CATTY_LOCAL_CRITIC_TRAINING_SAMPLES_PATH", resolved_training_samples_path)
+
+    local_training = _section(data, "local_training")
+    _set_env("CATTY_LOCAL_TRAINING_COLLECT_ASSISTANT_SAMPLES", local_training.get("collect_assistant_samples"))
+    assistant_samples_path = local_training.get("assistant_samples_path")
+    if assistant_samples_path:
+        resolved_assistant_samples_path = Path(str(assistant_samples_path)).expanduser()
+        if not resolved_assistant_samples_path.is_absolute():
+            resolved_assistant_samples_path = base_dir / resolved_assistant_samples_path
+        _set_env("CATTY_LOCAL_TRAINING_ASSISTANT_SAMPLES_PATH", resolved_assistant_samples_path)
 
     web_search = _section(data, "web_search")
     _set_env("CATTY_WEB_SEARCH_ENABLED", web_search.get("enabled"))

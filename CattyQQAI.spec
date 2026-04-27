@@ -16,6 +16,7 @@ hiddenimports += collect_submodules('nonebot.adapters.onebot')
 hiddenimports += collect_submodules('fastapi')
 hiddenimports += collect_submodules('uvicorn')
 hiddenimports += collect_submodules('PIL')
+hiddenimports += collect_submodules('mcp')
 hiddenimports = sorted(set(hiddenimports))
 
 datas = [
@@ -23,9 +24,12 @@ datas = [
 ]
 if os.path.isdir('emojis'):
     datas.append(('emojis', 'emojis'))
+if os.path.isdir('scripts'):
+    datas.append(('scripts', 'scripts'))
 datas += collect_data_files('nonebot')
 datas += collect_data_files('nonebot.adapters.onebot')
 datas += collect_data_files('PIL')
+datas += collect_data_files('mcp')
 
 
 a = Analysis(

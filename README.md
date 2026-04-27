@@ -211,6 +211,24 @@ ai 清空记忆缓存
 
 图片消息：私聊发图会触发回复；群里如果带艾特、前缀或指向词，也会先把图片下载地址交给 `vision` 图片识别模型，识别成文字、兴趣程度、表情含义和情绪标签后再交给主聊天模型。主 AI 可以决定是否追加本地表情包；默认表情放在 `emojis/`，高兴趣图片会按配置保存到 `emojis/downloaded/` 并记录到 `emojis/manifest.json`。若 `vision` 不单独配置，会复用 `ai` 主模型配置；若遇到 GIF 或动态 WebP，程序会自动截取第一帧转成 PNG 再识别。若图片识别失败，会退回为文字方式把图片地址交给主模型。
 
+本地 reply gate：`local_critic` 可以接入一个 OpenAI-compatible 的本地小模型，例如 Ollama 的 `qwen2.5:1.5b`。本地模型先判断本轮是否应该回复；只有放行后才交给主 AI 写正文。主 AI 不再负责“要不要 reply”的判断，如果它仍输出不回复标记，程序会强制重写并兜底短回复。reply gate 会读取最近的 `local_critic_samples.jsonl` 样本作为判定参考，并继续把放行/拒绝样本写回这个 JSONL，方便后续训练。
+
+本地训练：`local_training` 会把 reply gate 样本导出成 `training/reply_gate_dataset.jsonl`，也会把主模型真实收到的上下文和最终回复收集到 `training/assistant_reply_samples.jsonl`，再导出成 `training/assistant_reply_dataset.jsonl`。聊天正文走 `ai`，普通审核/判断和训练成果审批走 `audit_ai`；`filter.model` 留空时会继承 `audit_ai`。Ollama 本体不能边运行边在线增参；样本达到对应 `min_samples` 且新增样本达到对应 `min_new_samples` 后，启动时会自动判断是否适合训练。`auto_fill_training_commands` 打开时，空的 `train_command` / `busy_train_command` / `assistant_train_command` / `assistant_busy_train_command` 会自动落到项目内安全 wrapper：`scripts/local_lora_train.py`。wrapper 只会执行你配置的 `backend_command` / `assistant_backend_command` / `busy_backend_command` / `assistant_busy_backend_command`，后端为空时只写状态并跳过，不会让主 AI 生成或执行任意 shell 命令。训练后如果输出目录出现 LoRA adapter、`Modelfile` 或 `.gguf`，wrapper 会记录成果并调用 `audit_ai` 做成果审核；审核模型只输出 `allow_apply/allow_merge` JSON，不直接执行命令。配置了 `apply_trained_adapter_command` 且审核同意时会把小成果接入微调，样本达到 `merge_min_samples`、处于闲时且审核同意时才会执行 `merge_trained_model_command` 合并大成果。默认这些应用/合并命令为空，所以不会热替换正在工作的审核模型。`watch_interval_seconds` 大于 0 时会在后台循环检查。默认会根据服务器本地系统时间、凌晨闲时窗口和样本文件最近更新时间判断闲时；忙时训练会用低优先级并受 `busy_training_max_seconds` 和 `busy_training_max_steps` 限制，避免影响 reply 审核和主程序运行。
+
+训练 MCP server：项目内包含 `scripts/catty_training_mcp_server.py`，可作为 MCP stdio server 暴露 `training_status` 和 `training_config_summary` 两个工具，方便外部 MCP 客户端查看训练样本、最新成果状态和 hook 配置。它不会返回 API key。
+
+项目内 Ollama：`ollama.enabled` 打开后，服务器启动 Catty 时会自动把 Ollama 便携包部署到 `tools/ollama`，把模型放到 `models/ollama`，并用当前配置文件所在文件夹作为工作目录启动。`install_dir` 和 `models_dir` 必须留在项目文件夹内，避免把程序或模型装到项目外。
+
+也可以手动执行同样的项目内部署：
+
+```powershell
+.\scripts\start_ollama_local.ps1
+```
+
+脚本会下载项目内便携 Ollama 并拉取 `qwen2.5:1.5b`；临时不想拉模型时加 `-SkipPull`。
+
+服务器 Python 环境：运行 `install_python_env.bat` 会自动寻找或安装 Python 3.11、创建 `.venv`、安装依赖，然后生成只用于启动的 `start_catty.bat`。安装脚本成功后会自动删除自己；以后服务器直接运行 `start_catty.bat`。
+
 ## 打包 exe
 
 安装打包依赖：
@@ -250,6 +268,10 @@ dist/CattyQQAI.exe
 | `ai.model` | `gpt-4o-mini` | 模型名 |
 | `ai.extra_headers` | `{}` | 额外 HTTP Header |
 | `ai.extra_body` | `{}` | 额外请求体字段 |
+| `audit_ai.base_url` | 空 | 审核/判断/训练成果审批模型地址；空则最终兜底 `ai.base_url` |
+| `audit_ai.api_key` | 空 | 审核模型 API Key；空则最终兜底 `ai.api_key` |
+| `audit_ai.model` | 空 | 审核模型名；空则最终兜底 `ai.model` |
+| `audit_ai.max_tokens` | `320` | 审核 JSON 输出最大 token |
 | `vision.base_url` | 空 | 图片识别模型 OpenAI-compatible 地址；空则复用 `ai.base_url` |
 | `vision.api_key` | 空 | 图片识别模型 API Key；空则复用 `ai.api_key` |
 | `vision.model` | 空 | 图片识别模型名；空则复用 `ai.model` |
@@ -265,6 +287,77 @@ dist/CattyQQAI.exe
 | `filter.anger_warn_threshold` | `60` | 怒气达到该值后把不耐烦状态反馈给主 AI |
 | `filter.anger_mute_threshold` | `100` | 怒气达到该值后进入少搭理冷却；filter 只提供状态，是否回复和怎么表达交给主 AI |
 | `filter.anger_cooldown_seconds` | `3600` | 怒气爆表后的冷却秒数 |
+| `ollama.enabled` | `false` | 是否在 Catty 启动时自动部署并启动项目内 Ollama |
+| `ollama.auto_install` | `true` | `tools/ollama` 缺少 Ollama 时是否自动下载便携包 |
+| `ollama.auto_pull_model` | `true` | 模型不存在时是否自动拉取到 `models/ollama` |
+| `ollama.model` | `qwen2.5:1.5b` | 自动拉取和校正默认使用的本地模型 |
+| `ollama.install_dir` | `tools/ollama` | Ollama 程序安装目录；必须在项目文件夹内 |
+| `ollama.models_dir` | `models/ollama` | Ollama 模型目录；必须在项目文件夹内 |
+| `ollama.download_url` | 空 | 自定义 Ollama 便携包下载地址；空则按系统使用默认下载地址 |
+| `ollama.stop_existing` | `true` | 启动项目内 Ollama 前是否先停止已有 Ollama 进程 |
+| `local_critic.enabled` | `false` | 是否启用本地模型 reply gate 和回复校正 |
+| `local_critic.base_url` | `http://127.0.0.1:11434/v1` | 本地校正模型 OpenAI-compatible 地址 |
+| `local_critic.api_key` | `ollama` | 本地校正模型 API Key；Ollama 兼容端点可用任意非空值 |
+| `local_critic.model` | `qwen2.5:1.5b` | 本地校正模型名 |
+| `local_critic.max_tokens` | `160` | 校正 JSON 输出最大 token |
+| `local_critic.rewrite_when_score_below` | `75` | 评分低于该值时请求主模型重写 |
+| `local_critic.reply_gate_enabled` | `true` | 是否由本地模型决定本轮是否交给主 AI 回复 |
+| `local_critic.reply_gate_min_confidence` | `55` | 本地 reply gate 放行所需最低置信度 |
+| `local_critic.reply_gate_examples` | `12` | 每次判定时读取最近多少条 reply gate 样本作为参考 |
+| `local_critic.force_direct_reply` | `true` | @、回复、前缀、私聊、明显喊名时即使 gate 异常也强制放行 |
+| `local_critic.collect_training_samples` | `true` | 是否保存草稿、评分和最终回复样本 |
+| `local_critic.training_samples_path` | `local_critic_samples.jsonl` | 校正样本 JSONL 文件路径 |
+| `local_training.enabled` | `false` | 是否启用本地训练数据导出/训练钩子 |
+| `local_training.auto_train_on_startup` | `false` | 启动时是否自动检查样本并运行训练命令 |
+| `local_training.dataset_path` | `training/reply_gate_dataset.jsonl` | 导出的 reply gate 训练集路径 |
+| `local_training.output_dir` | `training/reply_gate_lora` | 训练输出目录 |
+| `local_training.min_samples` | `200` | 至少累计多少样本才允许训练 |
+| `local_training.min_new_samples` | `50` | 距离上次训练至少新增多少样本才再次训练 |
+| `local_training.train_command` | 安全 wrapper | reply gate 闲时训练命令；支持 `{dataset}`、`{output_dir}`、`{config}`、`{python}`、`{scripts_dir}` 占位符 |
+| `local_training.collect_assistant_samples` | `true` | 是否收集主模型上下文和最终回复，供本地模型模仿学习 |
+| `local_training.assistant_samples_path` | `training/assistant_reply_samples.jsonl` | 主模型影子语料原始 JSONL |
+| `local_training.assistant_dataset_path` | `training/assistant_reply_dataset.jsonl` | 导出的主模型回复训练集 |
+| `local_training.assistant_output_dir` | `training/assistant_reply_lora` | 主模型回复 LoRA 输出目录 |
+| `local_training.assistant_train_command` | 安全 wrapper | 主模型回复闲时训练命令；支持 `{dataset}`、`{output_dir}`、`{config}`、`{python}`、`{scripts_dir}` 占位符 |
+| `local_training.auto_fill_training_commands` | `true` | 训练命令为空时是否自动使用项目内安全 wrapper |
+| `local_training.backend_command` | 空 | wrapper 执行的 reply gate 闲时后端命令；支持 `{dataset}`、`{output_dir}`、`{config}`、`{task}`、`{mode}`、`{max_steps}` |
+| `local_training.assistant_backend_command` | 空 | wrapper 执行的主模型回复闲时后端命令 |
+| `local_training.busy_backend_command` | 空 | wrapper 执行的 reply gate 忙时小训练后端命令 |
+| `local_training.assistant_busy_backend_command` | 空 | wrapper 执行的主模型回复忙时小训练后端命令 |
+| `local_training.artifact_audit_enabled` | `true` | 是否用 `audit_ai` 审核训练成果 |
+| `local_training.artifact_audit_route` | `audit_ai` | 成果审核路由；默认走 `audit_ai`，最终兜底 `ai` |
+| `local_training.artifact_audit_base_url` | 空 | 成果审核模型地址；空则复用 `audit_ai.base_url` |
+| `local_training.artifact_audit_api_key` | 空 | 成果审核 API Key；空则复用 `audit_ai.api_key` |
+| `local_training.artifact_audit_model` | 空 | 成果审核模型；空则复用 `audit_ai.model` |
+| `local_training.artifact_audit_can_approve_apply` | `true` | 审核模型是否有权批准小成果接入 |
+| `local_training.artifact_audit_can_approve_merge` | `true` | 审核模型是否有权批准大成果合并 |
+| `local_training.apply_trained_adapter_enabled` | `true` | 训练产出 adapter 后是否允许执行接入微调 hook |
+| `local_training.apply_trained_adapter_command` | 空 | reply gate 小成果接入命令；支持 `{artifact}` 等 wrapper 占位符 |
+| `local_training.assistant_apply_trained_adapter_command` | 空 | 主模型回复小成果接入命令 |
+| `local_training.merge_trained_model_enabled` | `true` | 大成果达到阈值后是否允许执行模型合并 hook |
+| `local_training.merge_trained_model_command` | 空 | reply gate 大成果合并命令；建议只在闲时创建新模型标签 |
+| `local_training.assistant_merge_trained_model_command` | 空 | 主模型回复大成果合并命令 |
+| `local_training.merge_min_samples` | `1000` | reply gate 至少多少训练样本才允许大成果合并 |
+| `local_training.assistant_merge_min_samples` | `1000` | 主模型回复至少多少训练样本才允许大成果合并 |
+| `local_training.busy_training_max_steps` | `20` | wrapper 传给忙时后端的建议最大步数 |
+| `local_training.idle_training_max_steps` | `200` | wrapper 传给闲时后端的建议最大步数 |
+| `local_training.busy_training_enabled` | `true` | 忙时是否允许小幅度训练；需要单独配置 busy 命令 |
+| `local_training.busy_train_command` | 安全 wrapper | 忙时 reply gate 小训练命令；默认走受控 wrapper |
+| `local_training.assistant_busy_train_command` | 安全 wrapper | 忙时主模型回复小训练命令；默认走受控 wrapper |
+| `local_training.busy_training_max_seconds` | `600` | 忙时单次训练最大秒数；超时会放弃本轮 |
+| `local_training.idle_training_max_seconds` | `0` | 闲时单次训练最大秒数；0 表示不限制 |
+| `local_training.idle_training_enabled` | `true` | 是否启用自动闲时判断；关闭后只按样本条件运行训练命令 |
+| `local_training.idle_start_hour` | `2` | 本地系统时间闲时开始小时 |
+| `local_training.idle_end_hour` | `6` | 本地系统时间闲时结束小时 |
+| `local_training.idle_min_quiet_minutes` | `45` | 样本文件多久没更新才认为聊天足够安静 |
+| `local_training.allow_quiet_idle` | `true` | 非凌晨窗口但长时间安静时是否也允许完整训练 |
+| `local_training.active_check_interval_seconds` | `900` | 判断为忙时的下次检查间隔 |
+| `local_training.idle_check_interval_seconds` | `3600` | 判断为闲时的下次检查间隔 |
+| `local_training.mcp_server_enabled` | `true` | 是否随配置提供训练 MCP server 脚本 |
+| `local_training.mcp_server_script` | `scripts/catty_training_mcp_server.py` | 训练 MCP server 脚本路径 |
+| `local_training.assistant_min_samples` | `200` | 主模型回复样本至少累计多少条才允许训练 |
+| `local_training.assistant_min_new_samples` | `50` | 主模型回复距离上次训练至少新增多少条才再次训练 |
+| `local_training.watch_interval_seconds` | `0` | 大于 0 时后台循环检查训练条件；0 表示启动时只检查一次 |
 | `web_search.enabled` | `true` | 是否允许显式联网搜索 |
 | `web_search.cooldown_seconds` | `600` | 普通用户联网搜索冷却；有 `user_titles`/`group_user_titles` 的用户不受限制 |
 | `web_search.max_results` | `5` | 每次搜索交给 AI 的结果数量上限 |

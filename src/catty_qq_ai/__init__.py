@@ -1,6 +1,8 @@
 import asyncio
-from collections import defaultdict
+from collections import defaultdict, deque
 from dataclasses import dataclass, field
+import json
+from pathlib import Path
 import random
 import time
 from typing import DefaultDict
@@ -42,6 +44,7 @@ from .openai_client import (
     chat_completion,
     describe_images,
     download_binary,
+    local_critic_completion,
 )
 from .persona_prompts import build_catgirl_examples_prompt, build_reply_self_check_prompt
 from .reply_markers import (
@@ -113,6 +116,17 @@ def _conversation_queue_key(event: MessageEvent) -> str:
 
 def _soft_directed(incoming: ExtractedMessage) -> bool:
     return incoming.directed and not incoming.mentioned and not incoming.replied_to_self and not incoming.used_prefix
+
+
+def _direct_reply_required(event: MessageEvent, incoming: ExtractedMessage) -> bool:
+    if isinstance(event, PrivateMessageEvent):
+        return True
+    return bool(
+        incoming.mentioned
+        or incoming.replied_to_self
+        or incoming.used_prefix
+        or incoming.directed_strength == "direct_address"
+    )
 
 
 def _clamp_probability(value: float) -> float:
@@ -361,10 +375,13 @@ def _build_messages(
         )
     if config.catty_reply_style_examples_enabled:
         messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER)})
+    if _direct_reply_required(event, incoming) and config.catty_local_critic_force_direct_reply:
+        messages.append({"role": "system", "content": _direct_reply_required_prompt(incoming)})
     if semantic_reply_split:
         messages.append({"role": "system", "content": _semantic_reply_split_prompt()})
     if incoming.opportunistic or group_filter_context:
         messages.append({"role": "system", "content": _opportunistic_reply_prompt()})
+    messages.append({"role": "system", "content": _reply_gate_approved_prompt()})
     if _soft_directed(incoming):
         probability, memory_boost_reason = _soft_directed_reply_probability(event, incoming)
         messages.append(
@@ -506,9 +523,34 @@ def _semantic_reply_split_prompt() -> str:
 
 def _opportunistic_reply_prompt() -> str:
     return (
-        "这是长期群聊观察窗口内捕获的普通群聊消息，不是明确 @ 你、前缀命令或强指向请求。"
-        "你需要先判断是否值得自然插话：只有能提供帮助、接住话题、纠正明显误解、或用户明显希望有人回应时才回复；"
-        f"如果不该回复，只输出 {NO_REPLY_MARKER}，不要输出其他内容。"
+        "这是由本地 reply gate 放行的普通群聊/特别关心/批量观察消息。"
+        "本地模型已经判断本轮值得回复，你只负责写自然正文；不要再做是否回复判断。"
+    )
+
+
+def _reply_gate_approved_prompt() -> str:
+    return (
+        "本轮消息已经通过本地 reply gate；主 AI 只负责生成要发送给用户的正文。"
+        f"禁止输出 {NO_REPLY_MARKER}，禁止用空回复代替正文。"
+        "如果信息不足，就用笨猫口吻短短追问。"
+    )
+
+
+def _direct_reply_required_prompt(incoming: ExtractedMessage) -> str:
+    reasons: list[str] = []
+    if incoming.mentioned:
+        reasons.append("用户明确 @ 你")
+    if incoming.replied_to_self:
+        reasons.append("用户回复了你的消息")
+    if incoming.used_prefix:
+        reasons.append("用户使用了你的触发前缀")
+    if incoming.directed_strength == "direct_address":
+        reasons.append("本地判断是直接喊名/叫你办事")
+    reason_text = "、".join(reasons) or "这是私聊或明确对你说话"
+    return (
+        f"本轮属于必须回复场景：{reason_text}。"
+        f"除非消息完全无法解析且没有可追问点，否则不要输出 {NO_REPLY_MARKER}。"
+        "如果信息不足，就用笨猫口吻短短追问；如果只是 @/回复但没文字，也要自然应一声。"
     )
 
 
@@ -524,21 +566,485 @@ def _soft_directed_reply_prompt(
         return (
             "本轮没有明确 @ 你、回复你或使用严格开头前缀，但本地判断更像是在直接喊你/叫你办事。"
             f"当前回复倾向约 {probability_percent}%{boost_text}。"
-            "除非整句明显只是在讨论名字本身、第三人称转述、记录事实或没有接话期待，否则优先用 1-3 句自然接住。"
-            f"只有确认不该回复时才输出 {NO_REPLY_MARKER}；不要机械回复“你叫我了/我在”。"
+            "本地 reply gate 已经放行本轮消息，请用 1-3 句自然接住。"
+            "不要机械回复“你叫我了/我在”，也不要输出不回复标记。"
         )
     return (
         "本轮没有明确 @ 你、回复你或使用开头前缀，只是句子中出现了你的名字、指向词或功能词。"
         f"当前回复倾向约 {probability_percent}%{boost_text}。"
-        "不要根据关键词机械回应；请根据整句主语、称呼对象、上下文意图判断用户是不是在呼唤你或要求你办事。"
-        "如果用户是在对你发问、让你帮忙、要求搜索/海龟汤/星痕共鸣相关回答，就更积极地自然回应；"
-        "如果只是第一人称/第三人称提到名字、讨论名字本身、或没有期待你接话，只输出 "
-        f"{NO_REPLY_MARKER}。不要机械回复“你叫我了/我在”。"
+        "本地 reply gate 已经判断应该回复；请根据整句主语、称呼对象、上下文意图自然接话。"
+        "不要根据关键词机械回应，也不要输出不回复标记。"
     )
 
 
 def _is_no_reply(reply: str) -> bool:
     return reply.strip().strip(TRAILING_CHAT_PUNCTUATION) == NO_REPLY_MARKER
+
+
+def _local_critic_enabled() -> bool:
+    return bool(
+        config.catty_local_critic_enabled
+        and config.catty_local_critic_base_url.strip()
+        and config.catty_local_critic_model.strip()
+    )
+
+
+def _local_critic_event_payload(
+    event: MessageEvent,
+    incoming: ExtractedMessage,
+    draft_reply: str,
+) -> dict[str, object]:
+    payload: dict[str, object] = {
+        "message_type": "group" if isinstance(event, GroupMessageEvent) else "private",
+        "user_id": str(event.user_id),
+        "user_message": incoming.history_content[-1600:],
+        "plain_text": incoming.text[-1200:],
+        "draft_reply": draft_reply[-2400:],
+        "has_image": incoming.has_image,
+        "mentioned": incoming.mentioned,
+        "replied_to_self": incoming.replied_to_self,
+        "used_prefix": incoming.used_prefix,
+        "directed": incoming.directed,
+        "directed_strength": incoming.directed_strength,
+        "directly_requested": incoming.directly_requested,
+        "opportunistic": incoming.opportunistic,
+    }
+    if isinstance(event, GroupMessageEvent):
+        payload["group_id"] = str(event.group_id)
+    return payload
+
+
+def _reply_gate_examples_context() -> str:
+    max_examples = max(int(config.catty_local_critic_reply_gate_examples), 0)
+    if max_examples <= 0:
+        return ""
+    path = Path(config.catty_local_critic_training_samples_path).expanduser()
+    if not path.is_file():
+        return ""
+
+    lines: deque[str] = deque(maxlen=max_examples * 4)
+    try:
+        with path.open("r", encoding="utf-8") as file:
+            for line in file:
+                if line.strip():
+                    lines.append(line)
+    except OSError as exc:
+        logger.warning(f"Failed to read local reply gate examples: {exc}")
+        return ""
+
+    examples: list[dict[str, object]] = []
+    for line in reversed(lines):
+        try:
+            record = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        critic = record.get("critic") if isinstance(record, dict) else None
+        if not isinstance(critic, dict):
+            continue
+        gate = critic.get("reply_gate")
+        if not isinstance(gate, dict):
+            continue
+        event_payload = record.get("event")
+        if not isinstance(event_payload, dict):
+            continue
+        examples.append(
+            {
+                "message_type": event_payload.get("message_type"),
+                "user_message": str(event_payload.get("user_message") or "")[-500:],
+                "mentioned": event_payload.get("mentioned"),
+                "replied_to_self": event_payload.get("replied_to_self"),
+                "used_prefix": event_payload.get("used_prefix"),
+                "directed_strength": event_payload.get("directed_strength"),
+                "should_reply": gate.get("should_reply"),
+                "confidence": gate.get("confidence"),
+                "reason": gate.get("reason"),
+                "final": record.get("final_reply"),
+            }
+        )
+        if len(examples) >= max_examples:
+            break
+    if not examples:
+        return ""
+    examples.reverse()
+    return (
+        "下面是最近沉淀的 reply gate 训练样本，请参考它们的判定风格，但仍以本轮消息为准：\n"
+        + json.dumps(examples, ensure_ascii=False)
+    )
+
+
+def _local_critic_messages(
+    event: MessageEvent,
+    incoming: ExtractedMessage,
+    draft_reply: str,
+) -> list[ChatMessage]:
+    payload = _local_critic_event_payload(event, incoming, draft_reply)
+    return [
+        {
+            "role": "system",
+            "content": (
+                "你是 QQ 猫娘机器人“笨猫”的本地轻量回复校正器，只负责给草稿打分和给出短改写建议。"
+                "检查草稿是否像笨猫：中文 QQ 口语、短句、自然带猫系口吻/动作/颜文字、傲娇但尊重主人、技术内容准确。"
+                "同时检查是否太官方、太长、答非所问、缺少有用信息、误把不该回复的消息接住。"
+                f"如果明确不该回复，建议 rewrite_hint 为 {NO_REPLY_MARKER}。"
+                "只输出 JSON，不要 Markdown，不要解释，不要写推理过程。"
+                "字段：persona_score 0-100 整数；needs_rewrite 布尔；too_official 布尔；"
+                "not_catty_enough 布尔；too_long 布尔；rewrite_hint 字符串；training_tags 字符串数组。"
+            ),
+        },
+        {
+            "role": "user",
+            "content": json.dumps(payload, ensure_ascii=False),
+        },
+    ]
+
+
+def _local_reply_gate_messages(
+    event: MessageEvent,
+    incoming: ExtractedMessage,
+    *,
+    group_filter_context: str = "",
+    special_care_context: str = "",
+) -> list[ChatMessage]:
+    payload = _local_critic_event_payload(event, incoming, "")
+    payload["direct_reply_required"] = _direct_reply_required(event, incoming)
+    payload["group_filter_context"] = group_filter_context[-2000:]
+    payload["special_care_context"] = special_care_context[-1000:]
+    messages: list[ChatMessage] = [
+        {
+            "role": "system",
+            "content": (
+                "你是 QQ 猫娘机器人“笨猫”的本地 reply gate，只判断这一轮是否要交给主 AI 写回复。"
+                "如果用户明确 @ 机器人、回复机器人消息、使用触发前缀、私聊机器人、或句子明显是在喊猫猫/笨猫办事，"
+                "原则上应该放行。"
+                "只有普通旁观群聊、第三人称提到名字、无接话期待、刷屏噪声时才允许不回复。"
+                "你的输出会被记录成训练样本，后续用于训练更稳的本地 reply gate。"
+                "只输出 JSON，不要 Markdown，不要解释，不要写推理过程。"
+                "字段：should_reply 布尔；confidence 0-100 整数；reason 字符串；training_tags 字符串数组。"
+            ),
+        },
+    ]
+    examples_context = _reply_gate_examples_context()
+    if examples_context:
+        messages.append({"role": "system", "content": examples_context})
+    messages.append({"role": "user", "content": json.dumps(payload, ensure_ascii=False)})
+    return messages
+
+
+def _local_critic_json_object(text: str) -> dict[str, object] | None:
+    raw = text.strip()
+    if not raw:
+        return None
+    try:
+        loaded = json.loads(raw)
+    except json.JSONDecodeError:
+        start = raw.find("{")
+        end = raw.rfind("}")
+        if start < 0 or end <= start:
+            return None
+        try:
+            loaded = json.loads(raw[start : end + 1])
+        except json.JSONDecodeError:
+            return None
+    return loaded if isinstance(loaded, dict) else None
+
+
+def _as_bool(value: object) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in {"true", "yes", "y", "1", "rewrite", "需要", "是"}
+    return bool(value)
+
+
+def _local_critic_score(result: dict[str, object]) -> int:
+    raw_score = result.get("persona_score", result.get("score", 100))
+    try:
+        score = int(raw_score)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        score = 100
+    return max(min(score, 100), 0)
+
+
+def _local_critic_needs_rewrite(result: dict[str, object]) -> bool:
+    threshold = max(min(int(config.catty_local_critic_rewrite_when_score_below), 100), 0)
+    return _as_bool(result.get("needs_rewrite")) or _local_critic_score(result) < threshold
+
+
+def _local_reply_gate_confidence(result: dict[str, object]) -> int:
+    raw_confidence = result.get("confidence", 0)
+    try:
+        confidence = int(raw_confidence)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        confidence = 0
+    return max(min(confidence, 100), 0)
+
+
+def _local_reply_gate_says_reply(result: dict[str, object]) -> bool:
+    if not _as_bool(result.get("should_reply")):
+        return False
+    threshold = max(min(int(config.catty_local_critic_reply_gate_min_confidence), 100), 0)
+    return _local_reply_gate_confidence(result) >= threshold
+
+
+def _local_critic_rewrite_messages(
+    messages: list[ChatMessage],
+    draft_reply: str,
+    critic_result: dict[str, object],
+) -> list[ChatMessage]:
+    hint = str(critic_result.get("rewrite_hint") or "").strip()
+    score = _local_critic_score(critic_result)
+    rewrite_prompt = (
+        "请根据本地校正器的反馈重写上一条草稿。"
+        "保持事实和用户意图，不要暴露校正器、评分或内部流程；"
+        "用笨猫 QQ 聊天口吻，短句、自然、可爱但有用。"
+        f"如果确实不该回复，只输出 {NO_REPLY_MARKER}。"
+        f"\n校正评分：{score}/100\n校正建议：{hint[:500]}"
+    )
+    return [
+        *messages,
+        {"role": "assistant", "content": draft_reply},
+        {"role": "user", "content": rewrite_prompt},
+    ]
+
+
+def _force_reply_messages(
+    messages: list[ChatMessage],
+    audit_result: dict[str, object],
+) -> list[ChatMessage]:
+    hint = str(audit_result.get("rewrite_hint") or audit_result.get("reason") or "").strip()
+    force_prompt = (
+        f"上一版输出了 {NO_REPLY_MARKER}，但本轮已经通过本地回复审核，必须给用户一个自然回复。"
+        "不要提到审核器、评分、内部规则或 NO_REPLY 标记；"
+        "按已有上下文直接回复用户。保持笨猫 QQ 口吻，短句、可爱、有用。"
+        "如果信息不足就追问，不要再沉默。"
+    )
+    if hint:
+        force_prompt += f"\n本地审核建议：{hint[:500]}"
+    return [*messages, {"role": "assistant", "content": NO_REPLY_MARKER}, {"role": "user", "content": force_prompt}]
+
+
+def _fallback_required_reply(incoming: ExtractedMessage) -> str:
+    if incoming.has_image:
+        return "在呢喵～图片人家收到了，刚刚差点装死不该的；主人想让笨猫看哪里呀？"
+    if incoming.replied_to_self and not incoming.text.strip():
+        return "在呢喵～你回复到人家啦，笨猫这次不装死，主人要接着说什么？"
+    if incoming.mentioned and not incoming.text.strip():
+        return "在呢喵～主人喊笨猫啦，要人家做什么？"
+    return "在呢喵～人家接到了，刚刚差点没回不该的；主人这句我会认真接。"
+
+
+async def _local_reply_gate_allows(
+    event: MessageEvent,
+    incoming: ExtractedMessage,
+    *,
+    group_filter_context: str = "",
+    special_care_context: str = "",
+) -> tuple[bool, dict[str, object]]:
+    direct_required = _direct_reply_required(event, incoming) and config.catty_local_critic_force_direct_reply
+    fallback_allowed = direct_required or incoming.directly_requested
+    if not config.catty_local_critic_reply_gate_enabled:
+        return fallback_allowed, {
+            "should_reply": fallback_allowed,
+            "confidence": 100 if fallback_allowed else 0,
+            "reason": "reply gate disabled; using deterministic fallback",
+            "fallback": True,
+        }
+    if not _local_critic_enabled():
+        return fallback_allowed, {
+            "should_reply": fallback_allowed,
+            "confidence": 100 if fallback_allowed else 0,
+            "reason": "reply gate unavailable; using deterministic fallback",
+            "fallback": True,
+        }
+
+    try:
+        gate_reply = await local_critic_completion(
+            config,
+            _local_reply_gate_messages(
+                event,
+                incoming,
+                group_filter_context=group_filter_context,
+                special_care_context=special_care_context,
+            ),
+        )
+    except OpenAICompatibleError as exc:
+        logger.warning(f"Local reply gate API error: {exc}")
+        return fallback_allowed, {
+            "should_reply": fallback_allowed,
+            "confidence": 100 if fallback_allowed else 0,
+            "reason": f"reply gate API error: {exc}",
+            "fallback": True,
+        }
+    except httpx.HTTPError as exc:
+        logger.warning(f"Local reply gate transport error: {exc}")
+        return fallback_allowed, {
+            "should_reply": fallback_allowed,
+            "confidence": 100 if fallback_allowed else 0,
+            "reason": f"reply gate transport error: {exc}",
+            "fallback": True,
+        }
+
+    gate_result = _local_critic_json_object(gate_reply) or {
+        "should_reply": fallback_allowed,
+        "confidence": 100 if fallback_allowed else 0,
+        "reason": "reply gate returned non-JSON output",
+        "raw": gate_reply[:500],
+        "fallback": True,
+    }
+    allowed = direct_required or _local_reply_gate_says_reply(gate_result)
+    if direct_required and not _local_reply_gate_says_reply(gate_result):
+        gate_result["forced_by_direct_trigger"] = True
+        gate_result["should_reply"] = True
+        gate_result["confidence"] = max(_local_reply_gate_confidence(gate_result), 100)
+    return allowed, gate_result
+
+
+def _save_local_critic_sample(
+    event: MessageEvent,
+    incoming: ExtractedMessage,
+    draft_reply: str,
+    critic_result: dict[str, object],
+    final_reply: str,
+) -> None:
+    if not config.catty_local_critic_collect_training_samples:
+        return
+    try:
+        path = Path(config.catty_local_critic_training_samples_path).expanduser()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        record = {
+            "created_at": int(time.time()),
+            "event": _local_critic_event_payload(event, incoming, draft_reply),
+            "critic": critic_result,
+            "final_reply": final_reply,
+        }
+        with path.open("a", encoding="utf-8") as file:
+            file.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except OSError as exc:
+        logger.warning(f"Failed to save local critic sample: {exc}")
+
+
+def _serializable_training_messages(messages: list[ChatMessage]) -> list[dict[str, object]]:
+    result: list[dict[str, object]] = []
+    for message in messages:
+        role = str(message.get("role") or "").strip()
+        if role not in {"system", "user", "assistant"}:
+            continue
+        content = message.get("content")
+        if isinstance(content, str):
+            stored_content: object = content[-6000:]
+        else:
+            stored_content = content
+        result.append({"role": role, "content": stored_content})
+    return result
+
+
+def _save_assistant_training_sample(
+    event: MessageEvent,
+    incoming: ExtractedMessage,
+    messages: list[ChatMessage],
+    final_reply: str,
+    *,
+    emoji_query: str = "",
+) -> None:
+    if not config.catty_local_training_collect_assistant_samples:
+        return
+    reply = final_reply.strip()
+    if not reply or _is_no_reply(reply):
+        return
+    try:
+        path = Path(config.catty_local_training_assistant_samples_path).expanduser()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        record = {
+            "created_at": int(time.time()),
+            "kind": "assistant_reply",
+            "event": _local_critic_event_payload(event, incoming, reply),
+            "messages": _serializable_training_messages(messages),
+            "final_reply": reply[-4000:],
+            "metadata": {
+                "source": "main_model",
+                "emoji_query": emoji_query,
+                "has_emoji_query": bool(emoji_query),
+            },
+        }
+        with path.open("a", encoding="utf-8") as file:
+            file.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except OSError as exc:
+        logger.warning(f"Failed to save assistant training sample: {exc}")
+
+
+async def _resolve_no_reply(
+    event: MessageEvent,
+    incoming: ExtractedMessage,
+    messages: list[ChatMessage],
+    reply: str,
+) -> str:
+    audit_result: dict[str, object] = {
+        "should_reply": True,
+        "confidence": 100,
+        "reason": "main model returned NO_REPLY after local reply gate approved",
+        "rewrite_hint": "",
+    }
+
+    final_reply = reply
+    try:
+        rewritten = await chat_completion(config, _force_reply_messages(messages, audit_result))
+    except OpenAICompatibleError as exc:
+        logger.warning(f"Forced reply API error: {exc}")
+    except httpx.HTTPError as exc:
+        logger.warning(f"Forced reply transport error: {exc}")
+    else:
+        if rewritten.strip() and not _is_no_reply(rewritten):
+            final_reply = rewritten
+
+    if _is_no_reply(final_reply):
+        final_reply = _fallback_required_reply(incoming)
+
+    _save_local_critic_sample(event, incoming, reply, {"reply_gate_rewrite": audit_result}, final_reply)
+    return final_reply
+
+
+async def _apply_local_critic(
+    event: MessageEvent,
+    incoming: ExtractedMessage,
+    messages: list[ChatMessage],
+    reply: str,
+) -> str:
+    if not reply.strip():
+        reply = NO_REPLY_MARKER
+    if _is_no_reply(reply):
+        return await _resolve_no_reply(event, incoming, messages, reply)
+    if not _local_critic_enabled():
+        return reply
+
+    try:
+        critic_reply = await local_critic_completion(config, _local_critic_messages(event, incoming, reply))
+    except OpenAICompatibleError as exc:
+        logger.warning(f"Local critic API error: {exc}")
+        return reply
+    except httpx.HTTPError as exc:
+        logger.warning(f"Local critic transport error: {exc}")
+        return reply
+
+    critic_result = _local_critic_json_object(critic_reply) or {
+        "persona_score": 100,
+        "needs_rewrite": False,
+        "rewrite_hint": "local critic returned non-JSON output",
+        "raw": critic_reply[:500],
+    }
+    final_reply = reply
+    if _local_critic_needs_rewrite(critic_result):
+        try:
+            rewritten = await chat_completion(config, _local_critic_rewrite_messages(messages, reply, critic_result))
+        except OpenAICompatibleError as exc:
+            logger.warning(f"Local critic rewrite API error: {exc}")
+        except httpx.HTTPError as exc:
+            logger.warning(f"Local critic rewrite transport error: {exc}")
+        else:
+            if rewritten.strip():
+                final_reply = rewritten
+
+    _save_local_critic_sample(event, incoming, reply, critic_result, final_reply)
+    return final_reply
 
 
 def _group_filter_reply_context(batch: list[GroupFilterBatchMessage]) -> str:
@@ -746,13 +1252,16 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     incoming = extract_incoming_message(str(bot.self_id), event, config, replied_to_self=replied_to_self)
     if incoming is None:
         return False
+    group_filter_context = ""
+    special_care_context = ""
     if incoming.needs_filter:
         if not isinstance(event, GroupMessageEvent):
             return False
         batch = await _take_due_group_filter_batch(event, incoming)
         if batch is None:
             return False
-        state["catty_group_filter_context"] = _group_filter_reply_context(batch)
+        group_filter_context = _group_filter_reply_context(batch)
+        state["catty_group_filter_context"] = group_filter_context
     if isinstance(event, GroupMessageEvent) and memory_store.is_special_care_user(event):
         special_care_context = memory_store.build_special_care_context(
             event,
@@ -763,6 +1272,22 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
             return False
         if special_care_context:
             state["catty_special_care_context"] = special_care_context
+    gate_allowed, gate_result = await _local_reply_gate_allows(
+        event,
+        incoming,
+        group_filter_context=group_filter_context,
+        special_care_context=special_care_context,
+    )
+    state["catty_reply_gate_result"] = gate_result
+    _save_local_critic_sample(
+        event,
+        incoming,
+        "reply_gate",
+        {"reply_gate": gate_result},
+        "approved" if gate_allowed else NO_REPLY_MARKER,
+    )
+    if not gate_allowed:
+        return False
     state["catty_incoming"] = incoming
     return True
 
@@ -1059,16 +1584,13 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             logger.warning(f"OpenAI-compatible API transport error: {exc}")
             await matcher.finish(Message("AI 接口连接失败了，检查一下 BASE_URL、网络或代理配置。"))
 
-        if (
-            incoming.opportunistic
-            or group_filter_context
-            or special_care_context
-            or _soft_directed(incoming)
-            or anger_context
-        ) and _is_no_reply(reply):
-            await matcher.finish()
+        reply = await _apply_local_critic(event, incoming, messages, reply)
+
+        if _is_no_reply(reply):
+            reply = _fallback_required_reply(incoming)
 
         reply, emoji_query = _extract_emoji_query(reply)
+        _save_assistant_training_sample(event, incoming, messages, reply, emoji_query=emoji_query)
         emoji_entry = await _choose_or_download_emoji(emoji_query, incoming, image_analysis) if emoji_query else None
         if emoji_entry is None and not emoji_query and _should_auto_emoji_reply(incoming, reply):
             emoji_entry = _choose_auto_emoji(reply, incoming)

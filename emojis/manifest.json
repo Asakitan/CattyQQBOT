@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "emojis": {
+    "事后喵.jpg": {
+      "meaning": "事后喵",
+      "tags": [
+        "事后喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "何意味？.jpg": {
+      "meaning": "何意味？",
+      "tags": [
+        "何意味？"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "敢惹我.jpg": {
+      "meaning": "敢惹我",
+      "tags": [
+        "敢惹我"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "出击喵.jpg": {
+      "meaning": "出击喵",
+      "tags": [
+        "出击喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "哭哭喵.jpg": {
+      "meaning": "哭哭喵",
+      "tags": [
+        "哭哭喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "唐猫不屑.jpg": {
+      "meaning": "唐猫不屑",
+      "tags": [
+        "唐猫不屑"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "唐猫高兴.jpg": {
+      "meaning": "唐猫高兴",
+      "tags": [
+        "唐猫高兴"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "喵喵喵.jpg": {
+      "meaning": "喵喵喵",
+      "tags": [
+        "喵喵喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "喵喵看着你.jpg": {
+      "meaning": "喵喵看着你",
+      "tags": [
+        "喵喵看着你"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "我喜欢你喵.jpg": {
+      "meaning": "我喜欢你喵",
+      "tags": [
+        "我喜欢你喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "抱枕防御喵.jpg": {
+      "meaning": "抱枕防御喵",
+      "tags": [
+        "抱枕防御喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "挨打喵.jpg": {
+      "meaning": "挨打喵",
+      "tags": [
+        "挨打喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "无语喵.jpg": {
+      "meaning": "无语喵",
+      "tags": [
+        "无语喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "欸嘿.jpg": {
+      "meaning": "欸嘿",
+      "tags": [
+        "欸嘿"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "火力大喵！.jpg": {
+      "meaning": "火力大喵！",
+      "tags": [
+        "火力大喵！"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "炸毛喵.jpg": {
+      "meaning": "炸毛喵",
+      "tags": [
+        "炸毛喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "燃尽了喵.jpg": {
+      "meaning": "燃尽了喵",
+      "tags": [
+        "燃尽了喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "睡觉了喵.jpg": {
+      "meaning": "睡觉了喵",
+      "tags": [
+        "睡觉了喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "睡觉喵.jpg": {
+      "meaning": "睡觉喵",
+      "tags": [
+        "睡觉喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "笨蛋！.jpg": {
+      "meaning": "笨蛋！",
+      "tags": [
+        "笨蛋！"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "糖丸喵.jpg": {
+      "meaning": "糖丸喵",
+      "tags": [
+        "糖丸喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "给你一拳喵.jpg": {
+      "meaning": "给你一拳喵",
+      "tags": [
+        "给你一拳喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "自豪喵.jpg": {
+      "meaning": "自豪喵",
+      "tags": [
+        "自豪喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "色诱喵.jpg": {
+      "meaning": "色诱喵",
+      "tags": [
+        "色诱喵"
+      ],
+      "source": "default",
+      "priority": 100
+    },
+    "起飞喵.jpg": {
+      "meaning": "起飞喵",
+      "tags": [
+        "起飞喵"
+      ],
+      "source": "default",
+      "priority": 100
+    }
+  }
+}
