@@ -110,6 +110,10 @@ def _conversation_queue_key(event: MessageEvent) -> str:
     return f"private:{event.user_id}"
 
 
+def _soft_directed(incoming: ExtractedMessage) -> bool:
+    return incoming.directed and not incoming.mentioned and not incoming.replied_to_self and not incoming.used_prefix
+
+
 def _display_name(event: MessageEvent) -> str:
     sender = getattr(event, "sender", None)
     for attr in ("card", "nickname"):
@@ -299,6 +303,8 @@ def _build_messages(
         messages.append({"role": "system", "content": _semantic_reply_split_prompt()})
     if incoming.opportunistic or group_filter_context:
         messages.append({"role": "system", "content": _opportunistic_reply_prompt()})
+    if _soft_directed(incoming):
+        messages.append({"role": "system", "content": _soft_directed_reply_prompt()})
     if group_filter_context:
         messages.append({"role": "system", "content": group_filter_context})
     if anger_context:
@@ -429,6 +435,15 @@ def _opportunistic_reply_prompt() -> str:
         "这是长期群聊观察窗口内捕获的普通群聊消息，不是明确 @ 你、前缀命令或强指向请求。"
         "你需要先判断是否值得自然插话：只有能提供帮助、接住话题、纠正明显误解、或用户明显希望有人回应时才回复；"
         f"如果不该回复，只输出 {NO_REPLY_MARKER}，不要输出其他内容。"
+    )
+
+
+def _soft_directed_reply_prompt() -> str:
+    return (
+        "本轮没有明确 @ 你、回复你或使用开头前缀，只是句子中出现了你的名字、指向词或功能词。"
+        "请先认真判断语义：如果用户是在对你发问、让你帮忙、要求搜索/海龟汤/星痕共鸣相关回答，就自然回应；"
+        "如果只是第三人称提到你的名字、讨论名字本身、或没有期待你接话，只输出 "
+        f"{NO_REPLY_MARKER}。不要机械回复“你叫我了/我在”。"
     )
 
 
@@ -926,7 +941,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             logger.warning(f"OpenAI-compatible API transport error: {exc}")
             await matcher.finish(Message("AI 接口连接失败了，检查一下 BASE_URL、网络或代理配置。"))
 
-        if (incoming.opportunistic or group_filter_context) and _is_no_reply(reply):
+        if (incoming.opportunistic or group_filter_context or _soft_directed(incoming)) and _is_no_reply(reply):
             await matcher.finish()
 
         reply, emoji_query = _extract_emoji_query(reply)
