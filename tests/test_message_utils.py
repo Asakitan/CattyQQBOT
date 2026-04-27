@@ -33,11 +33,11 @@ class DirectedKeywordTests(unittest.TestCase):
             catty_directed_keywords=["你", "猫猫", "猫娘", "看看", "图片"],
         )
 
-    def test_inline_name_mentions_are_not_always_directed(self) -> None:
-        self.assertFalse(_message_utils._has_directed_keyword("这个猫猫表情好好笑", self.config))
-        self.assertFalse(_message_utils._has_directed_keyword("我叫猫猫也可以吗", self.config))
+    def test_inline_name_mentions_are_sent_to_ai_for_judgment(self) -> None:
+        self.assertTrue(_message_utils._has_directed_keyword("这个猫猫表情好好笑", self.config))
+        self.assertTrue(_message_utils._has_directed_keyword("我叫猫猫也可以吗", self.config))
 
-    def test_inline_name_address_is_directed(self) -> None:
+    def test_inline_name_address_is_also_sent_to_ai(self) -> None:
         self.assertTrue(_message_utils._has_directed_keyword("猫猫你看看这个", self.config))
         self.assertTrue(_message_utils._has_directed_keyword("猫猫，帮我想一下", self.config))
         self.assertTrue(_message_utils._has_directed_keyword("问猫猫这个怎么弄", self.config))
@@ -46,9 +46,12 @@ class DirectedKeywordTests(unittest.TestCase):
         self.assertTrue(_message_utils._has_directed_keyword("联网搜索 星痕共鸣职业", self.config))
         self.assertTrue(_message_utils._has_directed_keyword("来个海龟汤", self.config))
 
-    def test_generic_second_person_is_only_direct_at_start(self) -> None:
+    def test_second_person_mentions_are_sent_to_ai_for_subject_judgment(self) -> None:
         self.assertTrue(_message_utils._has_directed_keyword("你觉得呢", self.config))
-        self.assertFalse(_message_utils._has_directed_keyword("他说你昨天很忙", self.config))
+        self.assertTrue(_message_utils._has_directed_keyword("他说你昨天很忙", self.config))
+
+    def test_plain_messages_without_markers_stay_unhandled(self) -> None:
+        self.assertFalse(_message_utils._has_directed_keyword("今天午饭吃什么", self.config))
 
 
 if __name__ == "__main__":

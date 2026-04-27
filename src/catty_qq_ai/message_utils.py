@@ -11,19 +11,6 @@ from .features import FEATURE_DIRECT_KEYWORDS
 
 
 EXPRESSION_SEGMENT_TYPES = {"face", "mface", "image"}
-GENERIC_DIRECT_KEYWORDS = {
-    "你",
-    "看看",
-    "帮我看看",
-    "这张图",
-    "这个图",
-    "图片",
-    "图里",
-    "评价一下",
-    "怎么回事",
-}
-DIRECT_ALIAS_FOLLOWERS = set(" 　\t\r\n,，.。!！?？:：;；~～你帮看来在给要能会可说讲搜查")
-DIRECT_ALIAS_PREFIXES = ("喊", "问", "找", "让", "请")
 
 
 @dataclass(slots=True)
@@ -260,54 +247,23 @@ def _strip_textual_mention(text: str, aliases: list[str]) -> tuple[str, bool]:
     return stripped, False
 
 
-def _configured_bot_aliases(config: Config) -> list[str]:
-    aliases: list[str] = []
-    for raw_alias in [*config.catty_trigger_prefixes, *config.catty_directed_keywords]:
-        alias = raw_alias.strip().lower().lstrip("@")
-        if len(alias) < 2 or alias in GENERIC_DIRECT_KEYWORDS:
-            continue
-        if alias not in aliases:
-            aliases.append(alias)
-    return sorted(aliases, key=len, reverse=True)
-
-
-def _has_inline_alias_address(normalized: str, aliases: list[str]) -> bool:
-    for alias in aliases:
-        start = 0
-        while True:
-            index = normalized.find(alias, start)
-            if index < 0:
-                break
-            before = normalized[index - 1] if index > 0 else ""
-            after_index = index + len(alias)
-            after = normalized[after_index] if after_index < len(normalized) else ""
-            at_sentence_start = index == 0 or before in " 　\t\r\n,，.。!！?？:：;；~～"
-            after_looks_addressed = not after or after in DIRECT_ALIAS_FOLLOWERS
-            before_looks_addressed = bool(before) and before in DIRECT_ALIAS_PREFIXES
-            if (at_sentence_start and after_looks_addressed) or before_looks_addressed:
-                return True
-            start = index + len(alias)
-    return False
-
-
-def _has_generic_direct_keyword(normalized: str, config: Config) -> bool:
-    configured = {keyword.strip().lower() for keyword in config.catty_directed_keywords if keyword.strip()}
-    if "你" in configured and normalized.startswith(("你", "妳")):
-        return True
-    return any(keyword in normalized for keyword in configured & (GENERIC_DIRECT_KEYWORDS - {"你"}))
+def _configured_direct_markers(config: Config) -> list[str]:
+    markers: list[str] = []
+    for raw_marker in [*config.catty_trigger_prefixes, *config.catty_directed_keywords, *FEATURE_DIRECT_KEYWORDS]:
+        marker = raw_marker.strip().lower().lstrip("@")
+        if marker and marker not in markers:
+            markers.append(marker)
+    return sorted(markers, key=len, reverse=True)
 
 
 def _has_directed_keyword(text: str, config: Config) -> bool:
     normalized = text.strip().lower()
     if not normalized:
         return False
-    for keyword in FEATURE_DIRECT_KEYWORDS:
-        keyword = keyword.strip().lower()
-        if keyword and keyword in normalized:
+    for keyword in _configured_direct_markers(config):
+        if keyword in normalized:
             return True
-    if _has_generic_direct_keyword(normalized, config):
-        return True
-    return _has_inline_alias_address(normalized, _configured_bot_aliases(config))
+    return False
 
 
 def _is_special_group(event: MessageEvent, config: Config) -> bool:

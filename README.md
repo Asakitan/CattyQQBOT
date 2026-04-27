@@ -124,7 +124,7 @@ ai 帮我总结这段话
 你看看这张图
 ```
 
-艾特、回复机器人消息、触发开头前缀或明确命中 `directed_keywords` 时会直接回复；如果只是句子中间出现“猫猫/笨猫”等名字，程序会先判断是不是在对机器人说话，避免只因为提到名字就机械回复“我在/你叫我了”。普通群聊会按群攒到 `filter.group_batch_messages` 条，或距离本群上一批普通群消息达到 `filter.group_batch_seconds` 秒后，把这段最近未 filter 的普通消息作为压缩窗口交给 AI，从中查找疑似指向 BOT/AI/猫猫的话题再决定是否自然回复；如果不该回复，AI 会输出内部不回复标记且不会发到群里。
+艾特、回复机器人消息或触发开头前缀时会直接回复；如果句子中出现“猫猫/笨猫/你”等配置里的名字或指向词，程序只负责把这类软触发消息交给 AI，由 AI 根据整句主语、称呼对象和上下文判断是不是在呼唤机器人，避免只因为提到名字就机械回复“我在/你叫我了”。普通群聊会按群攒到 `filter.group_batch_messages` 条，或距离本群上一批普通群消息达到 `filter.group_batch_seconds` 秒后，把这段最近未 filter 的普通消息作为压缩窗口交给 AI，从中查找疑似指向 BOT/AI/猫猫的话题再决定是否自然回复；如果不该回复，AI 会输出内部不回复标记且不会发到群里。
 
 如果群友在短时间内连续发送同一个 QQ 表情、普通图片、图片类表情或文字消息，默认第 2 次时机器人会直接复读这条消息，不调用 AI 接口；机器人自己的消息不会计入连发判断。AI 的普通文本回复会由 `filter` 小模型判断是否追加本轮专用的轻量分段提示，再由主模型按语义决定是否拆成两条消息发送；原始 `system_prompt` 不会被改写。
 
@@ -271,7 +271,7 @@ dist/CattyQQAI.exe
 | `chat.reply_human_split_probability` | `0.35` | 分段提示的本地触发概率，不再额外调用 filter API |
 | `chat.reply_human_split_min_chars` | `48` | 提示 AI 至少达到该字符数才考虑语义分段 |
 | `chat.reply_human_split_delay_seconds` | `0.8` | 分段发送之间的等待秒数 |
-| `chat.directed_keywords` | `["你","猫猫","猫娘","看看"]` | 群聊指向词；名字类词会区分直接喊机器人和句中普通提及 |
+| `chat.directed_keywords` | `["你","猫猫","猫娘","看看"]` | 群聊软触发词；命中后交给 AI 判断主语、呼唤对象和是否需要回应 |
 | `chat.image_response_enabled` | `true` | 是否响应图片消息 |
 | `chat.image_vision_enabled` | `true` | 是否启用图片识别；启用后先走 `vision`，再把识别结果交给主模型 |
 | `chat.expression_repeat_enabled` | `true` | 是否启用群聊表情/文字连发复读 |
