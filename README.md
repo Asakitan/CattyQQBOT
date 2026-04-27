@@ -213,7 +213,9 @@ ai 清空记忆缓存
 
 本地 reply gate：`local_critic` 可以接入一个 OpenAI-compatible 的本地小模型，例如 Ollama 的 `qwen2.5:1.5b`。本地模型先判断本轮是否应该回复；只有放行后才交给主 AI 写正文。主 AI 不再负责“要不要 reply”的判断，如果它仍输出不回复标记，程序会强制重写并兜底短回复。reply gate 会读取最近的 `local_critic_samples.jsonl` 样本作为判定参考，并继续把放行/拒绝样本写回这个 JSONL，方便后续训练。
 
-本地训练：`local_training` 会把 reply gate 样本导出成 `training/reply_gate_dataset.jsonl`，也会把主模型真实收到的上下文和最终回复收集到 `training/assistant_reply_samples.jsonl`，再导出成 `training/assistant_reply_dataset.jsonl`。聊天正文走 `ai`，普通审核/判断和训练成果审批走 `audit_ai`；`filter.model` 留空时会继承 `audit_ai`。Ollama 本体不能边运行边在线增参；样本达到对应 `min_samples` 且新增样本达到对应 `min_new_samples` 后，启动时会自动判断是否适合训练。`auto_fill_training_commands` 打开时，空的 `train_command` / `busy_train_command` / `assistant_train_command` / `assistant_busy_train_command` 会自动落到项目内安全 wrapper：`scripts/local_lora_train.py`。wrapper 只会执行你配置的 `backend_command` / `assistant_backend_command` / `busy_backend_command` / `assistant_busy_backend_command`，后端为空时只写状态并跳过，不会让主 AI 生成或执行任意 shell 命令。训练后如果输出目录出现 LoRA adapter、`Modelfile` 或 `.gguf`，wrapper 会记录成果并调用 `audit_ai` 做成果审核；审核模型只输出 `allow_apply/allow_merge` JSON，不直接执行命令。配置了 `apply_trained_adapter_command` 且审核同意时会把小成果接入微调，样本达到 `merge_min_samples`、处于闲时且审核同意时才会执行 `merge_trained_model_command` 合并大成果。默认这些应用/合并命令为空，所以不会热替换正在工作的审核模型。`watch_interval_seconds` 大于 0 时会在后台循环检查。默认会根据服务器本地系统时间、凌晨闲时窗口和样本文件最近更新时间判断闲时；忙时训练会用低优先级并受 `busy_training_max_seconds` 和 `busy_training_max_steps` 限制，避免影响 reply 审核和主程序运行。
+本地训练：`local_training` 会把 reply gate 样本导出成 `training/reply_gate_dataset.jsonl`，也会把主模型真实收到的上下文和最终回复收集到 `training/assistant_reply_samples.jsonl`，再导出成 `training/assistant_reply_dataset.jsonl`。聊天正文走 `ai`，普通审核/判断和训练成果审批走 `audit_ai`；`filter.model` 留空时会继承 `audit_ai`。Ollama 本体不能边运行边在线增参；样本达到对应 `min_samples` 且新增样本达到对应 `min_new_samples` 后，启动时会自动判断是否适合训练。`auto_fill_training_commands` 打开时，空的 `train_command` / `busy_train_command` / `assistant_train_command` / `assistant_busy_train_command` 会自动落到项目内安全 wrapper：`scripts/local_lora_train.py`。wrapper 只会执行你配置的 `backend_command` / `assistant_backend_command` / `busy_backend_command` / `assistant_busy_backend_command`，后端为空时只写状态并跳过，不会让主 AI 生成或执行任意 shell 命令。训练后如果输出目录出现 LoRA adapter、`Modelfile` 或 `.gguf`，wrapper 会记录成果并调用 `audit_ai` 做成果审核；审核模型只输出 `allow_apply/allow_merge` 和 `next_suggestions` JSON，不直接执行命令。配置了 `apply_trained_adapter_command` 且审核同意时会把小成果接入微调，样本达到 `merge_min_samples`、处于闲时且审核同意时才会执行 `merge_trained_model_command` 合并大成果。默认这些应用/合并命令为空，所以不会热替换正在工作的审核模型。`watch_interval_seconds` 大于 0 时会在后台循环检查。默认会根据服务器本地系统时间、凌晨闲时窗口和样本文件最近更新时间判断闲时；忙时训练会用低优先级并受 `busy_training_max_seconds` 和 `busy_training_max_steps` 限制，避免影响 reply 审核和主程序运行。
+
+训练进度窗口：打开 `local_training.progress_window_enabled` 后，启动时会额外弹出 `scripts/catty_training_dashboard.py` 的 Tk 小窗，轮询数据集样本数、最近训练状态、GLM-5.1 成果审批、`next_suggestions` 和 `training/local_training.log`。窗口只读状态文件，不会执行训练命令，也不会展示 API key。
 
 训练 MCP server：项目内包含 `scripts/catty_training_mcp_server.py`，可作为 MCP stdio server 暴露 `training_status` 和 `training_config_summary` 两个工具，方便外部 MCP 客户端查看训练样本、最新成果状态和 hook 配置。它不会返回 API key。
 
@@ -329,8 +331,12 @@ dist/CattyQQAI.exe
 | `local_training.artifact_audit_base_url` | 空 | 成果审核模型地址；空则复用 `audit_ai.base_url` |
 | `local_training.artifact_audit_api_key` | 空 | 成果审核 API Key；空则复用 `audit_ai.api_key` |
 | `local_training.artifact_audit_model` | 空 | 成果审核模型；空则复用 `audit_ai.model` |
+| `local_training.artifact_audit_temperature` | `0.5` | 训练成果审批温度；给 GLM-5.1 留一点建议弹性 |
+| `local_training.artifact_audit_max_tokens` | `640` | 成果审批 JSON 最大 token，包含下一步建议 |
 | `local_training.artifact_audit_can_approve_apply` | `true` | 审核模型是否有权批准小成果接入 |
 | `local_training.artifact_audit_can_approve_merge` | `true` | 审核模型是否有权批准大成果合并 |
+| `local_training.artifact_audit_next_suggestions_enabled` | `true` | 是否要求并记录 GLM-5.1 审批时给出的下一步建议 |
+| `local_training.artifact_audit_suggestions_path` | `training/glm_audit_suggestions.jsonl` | 审批建议 JSONL 记录路径 |
 | `local_training.apply_trained_adapter_enabled` | `true` | 训练产出 adapter 后是否允许执行接入微调 hook |
 | `local_training.apply_trained_adapter_command` | 空 | reply gate 小成果接入命令；支持 `{artifact}` 等 wrapper 占位符 |
 | `local_training.assistant_apply_trained_adapter_command` | 空 | 主模型回复小成果接入命令 |
@@ -355,6 +361,10 @@ dist/CattyQQAI.exe
 | `local_training.idle_check_interval_seconds` | `3600` | 判断为闲时的下次检查间隔 |
 | `local_training.mcp_server_enabled` | `true` | 是否随配置提供训练 MCP server 脚本 |
 | `local_training.mcp_server_script` | `scripts/catty_training_mcp_server.py` | 训练 MCP server 脚本路径 |
+| `local_training.progress_window_enabled` | `false` | 是否启动训练进度/GLM 审批小窗 |
+| `local_training.progress_window_script` | `scripts/catty_training_dashboard.py` | 训练进度窗口脚本 |
+| `local_training.progress_window_poll_seconds` | `5` | 训练进度窗口刷新间隔 |
+| `local_training.progress_log_path` | `training/local_training.log` | 自动训练 watcher 的日志路径 |
 | `local_training.assistant_min_samples` | `200` | 主模型回复样本至少累计多少条才允许训练 |
 | `local_training.assistant_min_new_samples` | `50` | 主模型回复距离上次训练至少新增多少条才再次训练 |
 | `local_training.watch_interval_seconds` | `0` | 大于 0 时后台循环检查训练条件；0 表示启动时只检查一次 |

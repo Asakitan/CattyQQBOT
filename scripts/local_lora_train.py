@@ -184,13 +184,60 @@ def _audit_model_config(config: dict[str, Any], training: dict[str, Any]) -> dic
         "base_url": _route_text(config, training, "base_url", *sections),
         "api_key": _route_text(config, training, "api_key", *sections),
         "model": _route_text(config, training, "model", *sections),
-        "temperature": _route_number(config, training, "temperature", 0.1, *sections),
-        "max_tokens": int(_route_number(config, training, "max_tokens", 320, *sections)),
+        "temperature": _route_number(config, training, "temperature", 0.5, *sections),
+        "max_tokens": int(_route_number(config, training, "max_tokens", 640, *sections)),
         "timeout": _route_number(config, training, "timeout_seconds", 0, *sections)
         or _route_number(config, training, "request_timeout", 60, *sections),
         "extra_headers": _route_dict(config, "extra_headers", *sections),
         "extra_body": _route_dict(config, "extra_body", *sections),
     }
+
+
+def _suggestions_from(value: object) -> list[str]:
+    if isinstance(value, list):
+        return [str(item).strip() for item in value if str(item).strip()]
+    text = str(value or "").strip()
+    return [text] if text else []
+
+
+def _append_audit_suggestions(
+    config_path: Path,
+    training: dict[str, Any],
+    *,
+    audit: dict[str, Any],
+    task: str,
+    mode: str,
+    output_dir: Path,
+    sample_count: int,
+    artifact: dict[str, Any],
+) -> None:
+    if not _as_bool(training.get("artifact_audit_next_suggestions_enabled"), default=True):
+        return
+    suggestions = _suggestions_from(audit.get("next_suggestions"))
+    if not suggestions:
+        return
+    path = Path(str(training.get("artifact_audit_suggestions_path") or "training/glm_audit_suggestions.jsonl"))
+    if not path.is_absolute():
+        path = config_path.parent / path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    record = {
+        "created_at": int(time.time()),
+        "task": task,
+        "mode": mode,
+        "output_dir": str(output_dir),
+        "sample_count": sample_count,
+        "artifact_primary": str(artifact.get("primary") or ""),
+        "audit_status": audit.get("status"),
+        "risk_level": audit.get("risk_level"),
+        "allow_apply": audit.get("allow_apply"),
+        "allow_merge": audit.get("allow_merge"),
+        "reason": audit.get("reason"),
+        "next_suggestions": suggestions,
+        "model": audit.get("model"),
+        "route": audit.get("route"),
+    }
+    with path.open("a", encoding="utf-8") as file:
+        file.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
 def _audit_training_artifact(
@@ -243,7 +290,8 @@ def _audit_training_artifact(
                 "你是 Catty 本地训练成果审核官。只审核训练产物是否适合进入下一步，"
                 "不要生成 shell 命令，不要要求删除文件，只输出 JSON。"
                 "JSON 字段：allow_apply(bool), allow_merge(bool), risk_level(low|medium|high), "
-                "reason(str), checks(list)。"
+                "reason(str), checks(list), next_suggestions(list[str])。"
+                "next_suggestions 用来给维护者参考下一步方向，只能是自然语言建议，不能包含可直接执行的命令。"
             ),
         },
         {"role": "user", "content": json.dumps(payload, ensure_ascii=False)},
@@ -295,6 +343,7 @@ def _audit_training_artifact(
         "risk_level": str(parsed.get("risk_level") or "medium"),
         "reason": str(parsed.get("reason") or ""),
         "checks": parsed.get("checks") if isinstance(parsed.get("checks"), list) else [],
+        "next_suggestions": _suggestions_from(parsed.get("next_suggestions")),
         "model": model_config["model"],
         "route": model_config["route"],
     }
@@ -423,6 +472,16 @@ def run(args: argparse.Namespace) -> int:
             artifact=artifact,
         )
         status["artifact_audit"] = audit
+        _append_audit_suggestions(
+            config_path,
+            training,
+            audit=audit,
+            task=args.task,
+            mode=args.mode,
+            output_dir=output_dir,
+            sample_count=sample_count,
+            artifact=artifact,
+        )
         status["apply_adapter"] = _run_optional_hook(
             training,
             hook_key="apply_trained_adapter_command",

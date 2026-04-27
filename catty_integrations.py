@@ -281,24 +281,80 @@ def _start_ollama(ollama: dict[str, Any], config: dict[str, Any], config_dir: Pa
 
 def _start_local_training(local_training: dict[str, Any], config_dir: Path) -> None:
     if not _as_bool(local_training.get("auto_train_on_startup"), default=False):
+        _start_training_dashboard(local_training, config_dir)
         return
     script_path = config_dir / "scripts" / "auto_train_reply_gate.py"
     config_path = config_dir / "config.json"
     if not script_path.exists():
         print(f"Local training script not found: {script_path}")
+        _start_training_dashboard(local_training, config_dir)
         return
     args = [sys.executable, str(script_path), "--config", str(config_path)]
     if int(float(local_training.get("watch_interval_seconds") or 0)) > 0:
         args.append("--watch")
     else:
         args.append("--once")
+
+    log_path = _resolve_path(local_training.get("progress_log_path", "training/local_training.log"), config_dir)
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    log_file = log_path.open("ab")
+    subprocess.Popen(
+        args,
+        cwd=str(config_dir),
+        stdout=log_file,
+        stderr=subprocess.STDOUT,
+    )
+    try:
+        display_log_path = log_path.relative_to(config_dir)
+    except ValueError:
+        display_log_path = log_path
+    print(f"Started local training exporter/watcher; log: {display_log_path}")
+    _start_training_dashboard(local_training, config_dir)
+
+
+def _gui_python_executable() -> str:
+    if os.name != "nt":
+        return sys.executable
+    executable = Path(sys.executable)
+    if executable.name.lower() == "python.exe":
+        pythonw = executable.with_name("pythonw.exe")
+        if pythonw.exists():
+            return str(pythonw)
+    return str(executable)
+
+
+def _start_training_dashboard(local_training: dict[str, Any], config_dir: Path) -> None:
+    if not _as_bool(local_training.get("progress_window_enabled"), default=False):
+        return
+    script_path = _resolve_path(
+        local_training.get("progress_window_script", "scripts/catty_training_dashboard.py"),
+        config_dir,
+    )
+    config_path = config_dir / "config.json"
+    if not script_path.exists():
+        print(f"Local training progress window script not found: {script_path}")
+        return
+
+    poll_seconds = max(float(local_training.get("progress_window_poll_seconds") or 5), 1.0)
+    args = [
+        _gui_python_executable(),
+        str(script_path),
+        "--config",
+        str(config_path),
+        "--poll-seconds",
+        str(poll_seconds),
+    ]
+    creationflags = 0
+    if os.name == "nt":
+        creationflags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
     subprocess.Popen(
         args,
         cwd=str(config_dir),
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
+        creationflags=creationflags,
     )
-    print("Started local training exporter/watcher")
+    print("Started local training progress window")
 
 
 def _start_napcat(qq: dict[str, Any], config_dir: Path) -> None:
