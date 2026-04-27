@@ -146,6 +146,14 @@ async def _vision_image_url(config: Config, url: str) -> str:
     return _first_frame_data_url(response.content) or url
 
 
+async def download_binary(config: Config, url: str, *, timeout: float | None = None) -> tuple[bytes, str]:
+    request_timeout = timeout or config.catty_vision_request_timeout or config.catty_request_timeout
+    async with httpx.AsyncClient(**_client_kwargs(request_timeout, config.catty_http_proxy)) as client:
+        response = await client.get(url)
+    response.raise_for_status()
+    return response.content, response.headers.get("content-type", "")
+
+
 async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
     return await _post_chat_completion(
         base_url=config.catty_openai_base_url,
@@ -322,3 +330,58 @@ async def describe_images(config: Config, image_urls: list[str], context: str) -
         extra_headers=config.catty_vision_extra_headers or config.catty_openai_extra_headers,
         extra_body=config.catty_vision_extra_body,
     )
+
+
+async def analyze_images_for_reply(config: Config, image_urls: list[str], context: str) -> dict[str, Any]:
+    if not image_urls:
+        return {}
+
+    prompt = (
+        "请识别图片内容并只输出 JSON。字段："
+        "summary 字符串，描述图片/表情内容；"
+        "interest 0-100 整数，表示这张图作为聊天表情或回复素材的有趣程度；"
+        "emotion_tags 字符串数组，提取情绪/语气标签，如 开心、震惊、无语、害羞、嘲笑、疑惑；"
+        "expression 字符串，说明它适合表达什么；"
+        "emoji_query 字符串，给主 AI 匹配本地表情库用；"
+        "save_as_emoji 布尔值，只有非常适合作为表情复用时为 true。"
+        "不要输出 Markdown，不要解释。"
+    )
+    text = f"{prompt}\n\n聊天上下文：\n{context}".strip()
+    content: list[dict[str, Any]] = [{"type": "text", "text": text}]
+    for url in image_urls:
+        prepared_url = await _vision_image_url(config, url)
+        content.append({"type": "image_url", "image_url": {"url": prepared_url}})
+
+    reply = await _post_chat_completion(
+        base_url=config.catty_vision_base_url or config.catty_openai_base_url,
+        api_key=config.catty_vision_api_key or config.catty_openai_api_key,
+        model=config.catty_vision_model or config.catty_openai_model,
+        messages=[{"role": "user", "content": content}],
+        timeout=config.catty_vision_request_timeout or config.catty_request_timeout,
+        proxy=config.catty_http_proxy,
+        temperature=config.catty_vision_temperature,
+        max_tokens=config.catty_vision_max_tokens,
+        extra_headers=config.catty_vision_extra_headers or config.catty_openai_extra_headers,
+        extra_body=config.catty_vision_extra_body,
+    )
+    parsed = _json_object(reply) or {}
+    try:
+        interest = int(parsed.get("interest", 0))
+    except (TypeError, ValueError):
+        interest = 0
+    emotion_tags = parsed.get("emotion_tags")
+    if isinstance(emotion_tags, str):
+        tags = [item.strip() for item in emotion_tags.replace("，", ",").split(",") if item.strip()]
+    elif isinstance(emotion_tags, list):
+        tags = [str(item).strip() for item in emotion_tags if str(item).strip()]
+    else:
+        tags = []
+    return {
+        "summary": str(parsed.get("summary") or "").strip() or reply.strip(),
+        "interest": max(min(interest, 100), 0),
+        "emotion_tags": tags,
+        "expression": str(parsed.get("expression") or "").strip(),
+        "emoji_query": str(parsed.get("emoji_query") or "").strip(),
+        "save_as_emoji": bool(parsed.get("save_as_emoji")),
+        "raw": reply,
+    }

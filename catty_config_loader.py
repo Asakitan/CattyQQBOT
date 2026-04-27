@@ -72,8 +72,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "temperature": 0,
         "max_tokens": 64,
         "request_timeout": 10,
-        "group_batch_messages": 50,
-        "group_batch_seconds": 120,
+        "group_batch_messages": 200,
+        "group_batch_seconds": 1200,
         "anger_enabled": True,
         "anger_warn_threshold": 60,
         "anger_mute_threshold": 100,
@@ -100,6 +100,15 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "expression_repeat_threshold": 3,
         "expression_repeat_window_seconds": 20,
         "expression_repeat_include_images": True,
+    },
+    "emoji": {
+        "enabled": True,
+        "dir": "emojis",
+        "download_dir": "emojis/downloaded",
+        "manifest_path": "emojis/manifest.json",
+        "interest_threshold": 60,
+        "save_interest_threshold": 85,
+        "max_candidates": 8,
     },
     "memory": {
         "enabled": True,
@@ -294,6 +303,30 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_EXPRESSION_REPEAT_THRESHOLD", chat.get("expression_repeat_threshold"))
     _set_env("CATTY_EXPRESSION_REPEAT_WINDOW_SECONDS", chat.get("expression_repeat_window_seconds"))
     _set_env("CATTY_EXPRESSION_REPEAT_INCLUDE_IMAGES", chat.get("expression_repeat_include_images"))
+
+    emoji = _section(data, "emoji")
+    _set_env("CATTY_EMOJI_ENABLED", emoji.get("enabled"))
+    emoji_dir = emoji.get("dir")
+    if emoji_dir:
+        resolved_emoji_dir = Path(str(emoji_dir)).expanduser()
+        if not resolved_emoji_dir.is_absolute():
+            resolved_emoji_dir = base_dir / resolved_emoji_dir
+        _set_env("CATTY_EMOJI_DIR", resolved_emoji_dir)
+    emoji_download_dir = emoji.get("download_dir")
+    if emoji_download_dir:
+        resolved_emoji_download_dir = Path(str(emoji_download_dir)).expanduser()
+        if not resolved_emoji_download_dir.is_absolute():
+            resolved_emoji_download_dir = base_dir / resolved_emoji_download_dir
+        _set_env("CATTY_EMOJI_DOWNLOAD_DIR", resolved_emoji_download_dir)
+    emoji_manifest_path = emoji.get("manifest_path")
+    if emoji_manifest_path:
+        resolved_emoji_manifest_path = Path(str(emoji_manifest_path)).expanduser()
+        if not resolved_emoji_manifest_path.is_absolute():
+            resolved_emoji_manifest_path = base_dir / resolved_emoji_manifest_path
+        _set_env("CATTY_EMOJI_MANIFEST_PATH", resolved_emoji_manifest_path)
+    _set_env("CATTY_EMOJI_INTEREST_THRESHOLD", emoji.get("interest_threshold"))
+    _set_env("CATTY_EMOJI_SAVE_INTEREST_THRESHOLD", emoji.get("save_interest_threshold"))
+    _set_env("CATTY_EMOJI_MAX_CANDIDATES", emoji.get("max_candidates"))
 
     memory = _section(data, "memory")
     memory_path = memory.get("path")

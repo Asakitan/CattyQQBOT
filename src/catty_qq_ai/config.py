@@ -45,8 +45,8 @@ class Config(BaseModel):
     catty_filter_temperature: float | None = 0.0
     catty_filter_max_tokens: int | None = 64
     catty_filter_request_timeout: float | None = 10.0
-    catty_filter_group_batch_messages: int = 50
-    catty_filter_group_batch_seconds: float = 120.0
+    catty_filter_group_batch_messages: int = 200
+    catty_filter_group_batch_seconds: float = 1200.0
     catty_filter_anger_enabled: bool = True
     catty_filter_anger_warn_threshold: int = 60
     catty_filter_anger_mute_threshold: int = 100
@@ -65,6 +65,13 @@ class Config(BaseModel):
     )
     catty_image_response_enabled: bool = True
     catty_image_vision_enabled: bool = True
+    catty_emoji_enabled: bool = True
+    catty_emoji_dir: str = "emojis"
+    catty_emoji_download_dir: str = "emojis/downloaded"
+    catty_emoji_manifest_path: str = "emojis/manifest.json"
+    catty_emoji_interest_threshold: int = 60
+    catty_emoji_save_interest_threshold: int = 85
+    catty_emoji_max_candidates: int = 8
     catty_memory_enabled: bool = True
     catty_memory_path: str = "memory.json"
     catty_memory_group_storage_dir: str = ""
@@ -208,6 +215,9 @@ class Config(BaseModel):
         "catty_filter_anger_warn_threshold",
         "catty_filter_anger_mute_threshold",
         "catty_filter_anger_cooldown_seconds",
+        "catty_emoji_interest_threshold",
+        "catty_emoji_save_interest_threshold",
+        "catty_emoji_max_candidates",
         "catty_proactive_max_daily_per_group",
         "catty_proactive_check_interval_seconds",
         "catty_proactive_min_interval_minutes",

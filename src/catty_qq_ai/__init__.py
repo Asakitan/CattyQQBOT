@@ -1,13 +1,14 @@
 import asyncio
 from collections import defaultdict
 from dataclasses import dataclass, field
+import random
 import time
 from typing import DefaultDict
 
 import httpx
 from nonebot import get_bots, get_driver, get_plugin_config, logger, on_message
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, PrivateMessageEvent
-from nonebot.adapters.onebot.v11 import Bot, Message, MessageEvent
+from nonebot.adapters.onebot.v11 import Bot, Message, MessageEvent, MessageSegment
 from nonebot.matcher import Matcher
 from nonebot.plugin import PluginMetadata
 from nonebot.typing import T_State
@@ -23,8 +24,16 @@ from .message_utils import (
     reply_message_ids,
     split_reply,
 )
+from .emoji_store import EmojiEntry, EmojiStore
 from .memory import MemoryStore
-from .openai_client import OpenAICompatibleError, assess_user_anger, chat_completion, describe_images, should_request_reply_split
+from .openai_client import (
+    OpenAICompatibleError,
+    analyze_images_for_reply,
+    assess_user_anger,
+    chat_completion,
+    describe_images,
+    download_binary,
+)
 
 
 __plugin_meta__ = PluginMetadata(
@@ -38,6 +47,7 @@ __plugin_meta__ = PluginMetadata(
 
 config = get_plugin_config(Config)
 memory_store = MemoryStore(config)
+emoji_store = EmojiStore(config)
 
 ChatMessage = dict[str, object]
 _histories: DefaultDict[str, list[ChatMessage]] = defaultdict(list)
@@ -69,11 +79,19 @@ _group_filter_batches: DefaultDict[str, GroupFilterBatchState] = defaultdict(Gro
 _group_filter_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 REPLY_SPLIT_MARKER = "<<<CATTY_REPLY_SPLIT>>>"
 NO_REPLY_MARKER = "<<<CATTY_NO_REPLY>>>"
+EMOJI_QUERY_PREFIX = "<<<CATTY_EMOJI_QUERY:"
+EMOJI_QUERY_SUFFIX = ">>>"
 TRAILING_CHAT_PUNCTUATION = " \t\r\n。！？!?；;，,、：:…."
 
 
 def _has_api_key() -> bool:
     return bool(config.catty_openai_api_key.strip())
+
+
+def _conversation_queue_key(event: MessageEvent) -> str:
+    if isinstance(event, GroupMessageEvent):
+        return f"group:{event.group_id}"
+    return f"private:{event.user_id}"
 
 
 def _reset_history(key: str) -> None:
@@ -100,6 +118,41 @@ def _build_user_content(incoming: ExtractedMessage, *, image_description: str | 
     return f"{incoming.history_content}\n图片下载地址：\n{urls}\n请基于这些图片地址和上下文自然回应。"
 
 
+def _emoji_reply_context(image_analysis: dict[str, object], candidates: str) -> str:
+    if not candidates:
+        return ""
+    tags = image_analysis.get("emotion_tags")
+    tag_text = ", ".join(str(tag) for tag in tags) if isinstance(tags, list) else ""
+    return (
+        "你可以决定本轮回复是否额外发送一个表情包。"
+        "如果需要表情包，在回复正文末尾单独追加一行 "
+        f"{EMOJI_QUERY_PREFIX}你的表情意图{EMOJI_QUERY_SUFFIX}；"
+        "不要解释这个标记，不需要表情就不要输出标记。"
+        "优先选择能自然贴合情绪的默认表情；没有合适默认表情时才用下载表情。\n"
+        f"图片兴趣度：{image_analysis.get('interest', 0)}/100\n"
+        f"图片/表情含义：{image_analysis.get('expression') or image_analysis.get('summary') or ''}\n"
+        f"情绪标签：{tag_text}\n"
+        f"可用表情候选：\n{candidates}"
+    )
+
+
+def _extract_emoji_query(reply: str) -> tuple[str, str]:
+    start = reply.find(EMOJI_QUERY_PREFIX)
+    if start < 0:
+        return reply, ""
+    end = reply.find(EMOJI_QUERY_SUFFIX, start)
+    if end < 0:
+        return reply, ""
+    query_start = start + len(EMOJI_QUERY_PREFIX)
+    query = reply[query_start:end].strip()
+    clean = (reply[:start] + reply[end + len(EMOJI_QUERY_SUFFIX) :]).strip()
+    return clean, query
+
+
+def _emoji_segment(entry: EmojiEntry) -> MessageSegment:
+    return MessageSegment.image(file=entry.path.resolve().as_uri())
+
+
 def _build_messages(
     event: MessageEvent,
     key: str,
@@ -109,6 +162,7 @@ def _build_messages(
     anger_context: str | None = None,
     semantic_reply_split: bool = False,
     group_filter_context: str | None = None,
+    emoji_context: str | None = None,
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
     if config.catty_system_prompt.strip():
@@ -121,6 +175,8 @@ def _build_messages(
         messages.append({"role": "system", "content": group_filter_context})
     if anger_context:
         messages.append({"role": "system", "content": anger_context})
+    if emoji_context:
+        messages.append({"role": "system", "content": emoji_context})
     memory_context = memory_store.build_context(event)
     if memory_context:
         messages.append({"role": "system", "content": memory_context})
@@ -251,7 +307,8 @@ def _group_filter_reply_context(batch: list[GroupFilterBatchMessage]) -> str:
     ]
     return (
         "下面是本群这轮按 filter 批量窗口攒到的普通群聊消息。"
-        "它们不是明确 @ 你、回复你或前缀命令；请把它们当作主动插话判断的上下文。\n"
+        "它们不是明确 @ 你、回复你或前缀命令；请先压缩理解最近没 filter 的疑似话题，"
+        "只在发现明显指向 BOT/AI/猫猫、需要你补充、或群友期待机器人回应的话题时回复。\n"
         "本批普通群消息：\n" + "\n".join(lines)
     )
 
@@ -299,16 +356,13 @@ async def _take_due_group_filter_batch(
 async def _should_request_semantic_reply_split(incoming: ExtractedMessage) -> bool:
     if not config.catty_reply_human_split_enabled:
         return False
-    if config.catty_reply_human_split_probability <= 0:
+    probability = max(min(float(config.catty_reply_human_split_probability), 1.0), 0.0)
+    if probability <= 0:
         return False
     min_chars = max(config.catty_reply_human_split_min_chars, 1)
-    try:
-        return await should_request_reply_split(config, incoming.history_content, min_chars=min_chars)
-    except OpenAICompatibleError as exc:
-        logger.warning(f"Reply split filter API error: {exc}")
-    except httpx.HTTPError as exc:
-        logger.warning(f"Reply split filter transport error: {exc}")
-    return False
+    if len(incoming.history_content.strip()) < min_chars:
+        return False
+    return random.random() < probability
 
 
 def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
@@ -372,23 +426,24 @@ async def _candidate_group_ids(bot: Bot) -> list[str]:
 
 
 async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
-    messages = _build_proactive_messages(group_id)
-    reply = await chat_completion(config, messages)
-    if _is_no_reply(reply):
-        return False
-    chunks = _reply_chunks(reply)
-    if not chunks:
-        return False
+    async with _locks[f"group:{group_id}"]:
+        messages = _build_proactive_messages(group_id)
+        reply = await chat_completion(config, messages)
+        if _is_no_reply(reply):
+            return False
+        chunks = _reply_chunks(reply)
+        if not chunks:
+            return False
 
-    sent_text = "\n".join(chunks)
-    delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
-    for chunk in chunks:
-        await bot.send_group_msg(group_id=_coerce_group_id(group_id), message=Message(chunk))
-        if delay_seconds:
-            await asyncio.sleep(delay_seconds)
-    memory_store.record_proactive_bubble_sent(group_id, sent_text)
-    logger.info(f"Sent proactive bubble to group {group_id}")
-    return True
+        sent_text = "\n".join(chunks)
+        delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
+        for chunk in chunks:
+            await bot.send_group_msg(group_id=_coerce_group_id(group_id), message=Message(chunk))
+            if delay_seconds:
+                await asyncio.sleep(delay_seconds)
+        memory_store.record_proactive_bubble_sent(group_id, sent_text)
+        logger.info(f"Sent proactive bubble to group {group_id}")
+        return True
 
 
 def _reply_chunks(reply: str) -> list[str]:
@@ -448,35 +503,6 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
         if batch is None:
             return False
         state["catty_group_filter_context"] = _group_filter_reply_context(batch)
-    if isinstance(event, GroupMessageEvent) and config.catty_filter_anger_enabled and not state.get("catty_group_filter_context"):
-        if memory_store.is_user_in_anger_cooldown(event):
-            return False
-        try:
-            anger_result = await assess_user_anger(
-                config,
-                incoming.text,
-                current_anger=memory_store.user_anger_score(event),
-                has_image=incoming.has_image,
-            )
-        except OpenAICompatibleError as exc:
-            logger.warning(f"User anger filter API error: {exc}")
-        except httpx.HTTPError as exc:
-            logger.warning(f"User anger filter transport error: {exc}")
-        else:
-            anger_state = memory_store.update_user_anger(
-                event,
-                delta=int(anger_result.get("anger_delta") or 0),
-                reason=str(anger_result.get("reason") or ""),
-                useless=bool(anger_result.get("useless")),
-                mute_threshold=config.catty_filter_anger_mute_threshold,
-                cooldown_seconds=config.catty_filter_anger_cooldown_seconds,
-            )
-            if anger_state.get("muted"):
-                return False
-            state["catty_anger_context"] = memory_store.build_anger_context(
-                event,
-                warn_threshold=config.catty_filter_anger_warn_threshold,
-            )
     state["catty_incoming"] = incoming
     return True
 
@@ -495,8 +521,9 @@ observe_matcher = on_message(priority=5, block=False)
 
 
 @expression_repeat_matcher.handle()
-async def handle_expression_repeat(matcher: Matcher, state: T_State) -> None:
-    await matcher.finish(state["catty_repeat_message"])
+async def handle_expression_repeat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    async with _locks[_conversation_queue_key(event)]:
+        await matcher.finish(state["catty_repeat_message"])
 
 
 @observe_matcher.handle()
@@ -584,33 +611,84 @@ async def start_memory_summary_loop() -> None:
 @chat_matcher.handle()
 async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     incoming: ExtractedMessage = state["catty_incoming"]
-    anger_context = str(state.get("catty_anger_context") or "")
     group_filter_context = str(state.get("catty_group_filter_context") or "")
     history_key = build_history_key(event, config)
-    memory_store.remember_event(event)
+    queue_key = _conversation_queue_key(event)
 
-    if _is_memory_cache_clear_request(incoming.text):
-        _reset_history(history_key)
-        result = memory_store.clear_cache(event)
-        await matcher.finish(Message(f"{result}\n会话上下文也清掉啦。"))
+    async with _locks[queue_key]:
+        anger_context = ""
+        if isinstance(event, GroupMessageEvent) and config.catty_filter_anger_enabled and not group_filter_context:
+            if memory_store.is_user_in_anger_cooldown(event):
+                await matcher.finish()
+            try:
+                anger_result = await assess_user_anger(
+                    config,
+                    incoming.text,
+                    current_anger=memory_store.user_anger_score(event),
+                    has_image=incoming.has_image,
+                )
+            except OpenAICompatibleError as exc:
+                logger.warning(f"User anger filter API error: {exc}")
+            except httpx.HTTPError as exc:
+                logger.warning(f"User anger filter transport error: {exc}")
+            else:
+                anger_state = memory_store.update_user_anger(
+                    event,
+                    delta=int(anger_result.get("anger_delta") or 0),
+                    reason=str(anger_result.get("reason") or ""),
+                    useless=bool(anger_result.get("useless")),
+                    mute_threshold=config.catty_filter_anger_mute_threshold,
+                    cooldown_seconds=config.catty_filter_anger_cooldown_seconds,
+                )
+                if anger_state.get("muted"):
+                    await matcher.finish()
+                anger_context = memory_store.build_anger_context(
+                    event,
+                    warn_threshold=config.catty_filter_anger_warn_threshold,
+                )
 
-    if _is_memory_view_request(incoming.text):
-        await matcher.finish(Message(memory_store.build_memory_view(event)))
+        memory_store.remember_event(event)
 
-    if _is_reset_request(incoming.text):
-        _reset_history(history_key)
-        await matcher.finish(Message("上下文清掉啦。"))
+        if _is_memory_cache_clear_request(incoming.text):
+            _reset_history(history_key)
+            result = memory_store.clear_cache(event)
+            await matcher.finish(Message(f"{result}\n会话上下文也清掉啦。"))
 
-    if not _has_api_key():
-        await matcher.finish(Message("还没有配置 API Key，先在 config.json 里填好 ai.api_key 再来找我。"))
+        if _is_memory_view_request(incoming.text):
+            await matcher.finish(Message(memory_store.build_memory_view(event)))
 
-    async with _locks[history_key]:
+        if _is_reset_request(incoming.text):
+            _reset_history(history_key)
+            await matcher.finish(Message("上下文清掉啦。"))
+
+        if not _has_api_key():
+            await matcher.finish(Message("还没有配置 API Key，先在 config.json 里填好 ai.api_key 再来找我。"))
+
         image_description: str | None = None
         image_description_cached = False
+        image_analysis: dict[str, object] = {}
+        emoji_context = ""
         if incoming.has_image and config.catty_image_vision_enabled:
             image_description = memory_store.get_image_summary(incoming.image_keys)
             image_description_cached = bool(image_description)
             if not image_description:
+                try:
+                    image_analysis = await analyze_images_for_reply(config, incoming.image_urls, incoming.history_content)
+                    tags = image_analysis.get("emotion_tags")
+                    tag_text = ", ".join(str(tag) for tag in tags) if isinstance(tags, list) else ""
+                    image_description = (
+                        f"{image_analysis.get('summary') or ''}\n"
+                        f"兴趣程度：{image_analysis.get('interest', 0)}/100\n"
+                        f"表情含义：{image_analysis.get('expression') or ''}\n"
+                        f"情绪标签：{tag_text}"
+                    ).strip()
+                    if image_description:
+                        memory_store.remember_image_record(incoming.image_keys, image_description)
+                except OpenAICompatibleError as exc:
+                    logger.warning(f"Image recognition failed, falling back to image URLs: {exc}")
+                except httpx.HTTPError as exc:
+                    logger.warning(f"Image recognition transport error, falling back to image URLs: {exc}")
+            if not image_description and not image_description_cached:
                 try:
                     image_description = await describe_images(config, incoming.image_urls, incoming.history_content)
                     if image_description:
@@ -619,6 +697,33 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                     logger.warning(f"Image recognition failed, falling back to image URLs: {exc}")
                 except httpx.HTTPError as exc:
                     logger.warning(f"Image recognition transport error, falling back to image URLs: {exc}")
+            if image_analysis and config.catty_emoji_enabled:
+                tags_value = image_analysis.get("emotion_tags")
+                tags = [str(tag) for tag in tags_value] if isinstance(tags_value, list) else []
+                interest = int(image_analysis.get("interest") or 0)
+                query = str(image_analysis.get("emoji_query") or image_analysis.get("expression") or "")
+                if (
+                    incoming.image_urls
+                    and interest >= config.catty_emoji_save_interest_threshold
+                    and bool(image_analysis.get("save_as_emoji"))
+                ):
+                    try:
+                        image_data, content_type = await download_binary(config, incoming.image_urls[0])
+                        emoji_store.save_downloaded(
+                            image_data=image_data,
+                            content_type=content_type,
+                            source_url=incoming.image_urls[0],
+                            meaning=str(image_analysis.get("expression") or image_analysis.get("summary") or ""),
+                            tags=tags,
+                            interest=interest,
+                        )
+                    except httpx.HTTPError as exc:
+                        logger.warning(f"Failed to download high-interest emoji image: {exc}")
+                    except OSError as exc:
+                        logger.warning(f"Failed to save high-interest emoji image: {exc}")
+                if interest >= config.catty_emoji_interest_threshold:
+                    candidates = emoji_store.candidates_text(query, tags=tags)
+                    emoji_context = _emoji_reply_context(image_analysis, candidates)
         semantic_reply_split = await _should_request_semantic_reply_split(incoming)
         messages = _build_messages(
             event,
@@ -628,6 +733,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             anger_context=anger_context,
             semantic_reply_split=semantic_reply_split,
             group_filter_context=group_filter_context,
+            emoji_context=emoji_context,
         )
         try:
             reply = await chat_completion(config, messages)
@@ -644,14 +750,22 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         if (incoming.opportunistic or group_filter_context) and _is_no_reply(reply):
             await matcher.finish()
 
+        reply, emoji_query = _extract_emoji_query(reply)
+        emoji_entry = emoji_store.choose(emoji_query) if emoji_query and config.catty_emoji_enabled else None
         chunks = _reply_chunks(reply)
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
         _append_history(history_key, incoming.history_content, "\n".join(chunks) if chunks else reply)
 
-    delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
-    for chunk in chunks[:-1]:
-        await matcher.send(Message(chunk))
-        if delay_seconds:
-            await asyncio.sleep(delay_seconds)
-    await matcher.finish(Message(chunks[-1] if chunks else "AI 没有返回内容。"))
+        delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
+        for chunk in chunks[:-1]:
+            await matcher.send(Message(chunk))
+            if delay_seconds:
+                await asyncio.sleep(delay_seconds)
+        if emoji_entry:
+            if chunks:
+                await matcher.send(Message(chunks[-1]))
+                if delay_seconds:
+                    await asyncio.sleep(delay_seconds)
+            await matcher.finish(Message(_emoji_segment(emoji_entry)))
+        await matcher.finish(Message(chunks[-1] if chunks else "AI 没有返回内容。"))
