@@ -43,6 +43,7 @@ from .openai_client import (
     describe_images,
     download_binary,
 )
+from .persona_prompts import build_catgirl_examples_prompt, build_reply_self_check_prompt
 from .reply_markers import (
     EMOJI_QUERY_PREFIX,
     EMOJI_QUERY_SUFFIX,
@@ -310,6 +311,15 @@ def _build_messages(
     messages: list[ChatMessage] = []
     if config.catty_system_prompt.strip():
         messages.append({"role": "system", "content": config.catty_system_prompt.strip()})
+    if config.catty_reply_self_check_enabled:
+        messages.append(
+            {
+                "role": "system",
+                "content": build_reply_self_check_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER),
+            }
+        )
+    if config.catty_reply_style_examples_enabled:
+        messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER)})
     if semantic_reply_split:
         messages.append({"role": "system", "content": _semantic_reply_split_prompt()})
     if incoming.opportunistic or group_filter_context:
@@ -539,6 +549,15 @@ def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
+    if config.catty_reply_self_check_enabled:
+        messages.append(
+            {
+                "role": "system",
+                "content": build_reply_self_check_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER),
+            }
+        )
+    if config.catty_reply_style_examples_enabled:
+        messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER)})
     messages.append(
         {
             "role": "system",

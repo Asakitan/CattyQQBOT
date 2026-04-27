@@ -110,6 +110,8 @@ class Config(BaseModel):
     catty_reply_human_split_probability: float = 0.35
     catty_reply_human_split_min_chars: int = 48
     catty_reply_human_split_delay_seconds: float = 0.8
+    catty_reply_self_check_enabled: bool = True
+    catty_reply_style_examples_enabled: bool = True
     catty_expression_repeat_enabled: bool = True
     catty_expression_repeat_threshold: int = 2
     catty_expression_repeat_window_seconds: float = 20.0

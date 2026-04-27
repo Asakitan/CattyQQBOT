@@ -105,6 +105,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "reply_human_split_probability": 0.35,
         "reply_human_split_min_chars": 48,
         "reply_human_split_delay_seconds": 0.8,
+        "reply_self_check_enabled": True,
+        "reply_style_examples_enabled": True,
         "expression_repeat_enabled": True,
         "expression_repeat_threshold": 2,
         "expression_repeat_window_seconds": 20,
@@ -320,6 +322,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_REPLY_HUMAN_SPLIT_PROBABILITY", chat.get("reply_human_split_probability"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_MIN_CHARS", chat.get("reply_human_split_min_chars"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_DELAY_SECONDS", chat.get("reply_human_split_delay_seconds"))
+    _set_env("CATTY_REPLY_SELF_CHECK_ENABLED", chat.get("reply_self_check_enabled"))
+    _set_env("CATTY_REPLY_STYLE_EXAMPLES_ENABLED", chat.get("reply_style_examples_enabled"))
     _set_env("CATTY_EXPRESSION_REPEAT_ENABLED", chat.get("expression_repeat_enabled"))
     _set_env("CATTY_EXPRESSION_REPEAT_THRESHOLD", chat.get("expression_repeat_threshold"))
     _set_env("CATTY_EXPRESSION_REPEAT_WINDOW_SECONDS", chat.get("expression_repeat_window_seconds"))

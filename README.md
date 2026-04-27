@@ -271,6 +271,8 @@ dist/CattyQQAI.exe
 | `chat.reply_human_split_probability` | `0.35` | 分段提示的本地触发概率，不再额外调用 filter API |
 | `chat.reply_human_split_min_chars` | `48` | 提示 AI 至少达到该字符数才考虑语义分段 |
 | `chat.reply_human_split_delay_seconds` | `0.8` | 分段发送之间的等待秒数 |
+| `chat.reply_self_check_enabled` | `true` | 回复前追加隐藏自检提示，让主 AI 先理解意图、再用猫娘语气短句回应 |
+| `chat.reply_style_examples_enabled` | `true` | 回复前追加猫娘风格例句提示，让主 AI 学习可爱但有用的 QQ 口语节奏 |
 | `chat.directed_keywords` | `["你","猫猫","猫娘","看看"]` | 群聊软触发词；命中后交给 AI 判断主语、呼唤对象和是否需要回应 |
 | `chat.image_response_enabled` | `true` | 是否响应图片消息 |
 | `chat.image_vision_enabled` | `true` | 是否启用图片识别；启用后先走 `vision`，再把识别结果交给主模型 |
