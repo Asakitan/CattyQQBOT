@@ -98,6 +98,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "group_history_scope": "group",
         "history_turns": 16,
         "directed_keywords": ["你", "猫猫", "猫娘", "看看", "帮我看看", "这张图", "这个图", "图片", "图里", "评价一下", "怎么回事"],
+        "soft_directed_reply_probability": 0.65,
+        "direct_address_reply_probability": 0.9,
         "image_response_enabled": True,
         "image_vision_enabled": True,
         "reply_max_chars": 1800,
@@ -139,6 +141,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "max_corpus_messages": 800,
         "private_summary_messages": 500,
         "member_mention_threshold": 20,
+        "reply_boost_enabled": True,
+        "reply_boost_min_corpus_messages": 80,
+        "reply_boost_probability_bonus": 0.15,
+        "reply_boost_max_probability": 0.95,
         "special_group_active_window_enabled": False,
         "special_group_active_minutes_per_hour": 10,
         "group_titles": {},
@@ -319,6 +325,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_GROUP_HISTORY_SCOPE", chat.get("group_history_scope"))
     _set_env("CATTY_HISTORY_TURNS", chat.get("history_turns"))
     _set_env("CATTY_DIRECTED_KEYWORDS", chat.get("directed_keywords"), json_value=True)
+    _set_env("CATTY_SOFT_DIRECTED_REPLY_PROBABILITY", chat.get("soft_directed_reply_probability"))
+    _set_env("CATTY_DIRECT_ADDRESS_REPLY_PROBABILITY", chat.get("direct_address_reply_probability"))
     _set_env("CATTY_IMAGE_RESPONSE_ENABLED", chat.get("image_response_enabled"))
     _set_env("CATTY_IMAGE_VISION_ENABLED", chat.get("image_vision_enabled"))
     _set_env("CATTY_REPLY_MAX_CHARS", chat.get("reply_max_chars"))
@@ -390,6 +398,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_MEMORY_MAX_CORPUS_MESSAGES", memory.get("max_corpus_messages"))
     _set_env("CATTY_MEMORY_PRIVATE_SUMMARY_MESSAGES", memory.get("private_summary_messages"))
     _set_env("CATTY_MEMORY_MEMBER_MENTION_THRESHOLD", memory.get("member_mention_threshold"))
+    _set_env("CATTY_MEMORY_REPLY_BOOST_ENABLED", memory.get("reply_boost_enabled"))
+    _set_env("CATTY_MEMORY_REPLY_BOOST_MIN_CORPUS_MESSAGES", memory.get("reply_boost_min_corpus_messages"))
+    _set_env("CATTY_MEMORY_REPLY_BOOST_PROBABILITY_BONUS", memory.get("reply_boost_probability_bonus"))
+    _set_env("CATTY_MEMORY_REPLY_BOOST_MAX_PROBABILITY", memory.get("reply_boost_max_probability"))
     _set_env("CATTY_SPECIAL_GROUP_ACTIVE_WINDOW_ENABLED", memory.get("special_group_active_window_enabled"))
     _set_env("CATTY_SPECIAL_GROUP_ACTIVE_MINUTES_PER_HOUR", memory.get("special_group_active_minutes_per_hour"))
     _set_env("CATTY_GROUP_TITLES", memory.get("group_titles"), json_value=True)

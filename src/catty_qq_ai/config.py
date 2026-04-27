@@ -68,6 +68,8 @@ class Config(BaseModel):
     catty_directed_keywords: list[str] = Field(
         default_factory=lambda: ["你", "猫猫", "猫娘", "看看", "帮我看看", "这张图", "这个图", "图片", "图里", "评价一下", "怎么回事"]
     )
+    catty_soft_directed_reply_probability: float = 0.65
+    catty_direct_address_reply_probability: float = 0.9
     catty_image_response_enabled: bool = True
     catty_image_vision_enabled: bool = True
     catty_emoji_enabled: bool = True
@@ -93,6 +95,10 @@ class Config(BaseModel):
     catty_memory_max_corpus_messages: int = 800
     catty_memory_private_summary_messages: int = 500
     catty_memory_member_mention_threshold: int = 20
+    catty_memory_reply_boost_enabled: bool = True
+    catty_memory_reply_boost_min_corpus_messages: int = 80
+    catty_memory_reply_boost_probability_bonus: float = 0.15
+    catty_memory_reply_boost_max_probability: float = 0.95
     catty_special_group_active_window_enabled: bool = False
     catty_special_group_active_minutes_per_hour: int = 10
     catty_group_titles: dict[str, str] = Field(default_factory=dict)
@@ -259,6 +265,11 @@ class Config(BaseModel):
         "catty_turtle_soup_cooldown_seconds",
         "catty_special_care_cooldown_seconds",
         "catty_special_care_response_window_minutes",
+        "catty_soft_directed_reply_probability",
+        "catty_direct_address_reply_probability",
+        "catty_memory_reply_boost_min_corpus_messages",
+        "catty_memory_reply_boost_probability_bonus",
+        "catty_memory_reply_boost_max_probability",
         "catty_emoji_interest_threshold",
         "catty_emoji_save_interest_threshold",
         "catty_emoji_max_candidates",

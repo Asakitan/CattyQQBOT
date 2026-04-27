@@ -1137,6 +1137,35 @@ class MemoryStore:
             lines.append("人物画像：暂无")
         return "\n".join(lines)
 
+    def reply_boost_signal(self, event: MessageEvent) -> dict[str, Any]:
+        if not self.enabled:
+            return {}
+        if isinstance(event, GroupMessageEvent):
+            group = self._data.get("groups", {}).get(str(event.group_id), {})
+            if not isinstance(group, dict):
+                return {"scope": "group", "corpus_count": 0, "has_summary": False, "profile_count": 0}
+            corpus = group.get("corpus", [])
+            profiles = group.get("member_profiles", {})
+            return {
+                "scope": "group",
+                "corpus_count": len(corpus) if isinstance(corpus, list) else 0,
+                "has_summary": bool(str(group.get("summary") or "").strip()),
+                "profile_count": len(profiles) if isinstance(profiles, dict) else 0,
+            }
+        if isinstance(event, PrivateMessageEvent):
+            user = self._data.get("users", {}).get(str(event.user_id), {})
+            if not isinstance(user, dict):
+                return {"scope": "private", "corpus_count": 0, "has_summary": False, "profile_count": 0}
+            corpus = user.get("private_corpus", [])
+            profile = user.get("private_profile", {})
+            return {
+                "scope": "private",
+                "corpus_count": len(corpus) if isinstance(corpus, list) else 0,
+                "has_summary": bool(str(user.get("private_summary") or "").strip()),
+                "profile_count": 1 if isinstance(profile, dict) and profile else 0,
+            }
+        return {}
+
     def build_context(self, event: MessageEvent) -> str:
         if not self.enabled:
             return ""
@@ -1197,5 +1226,5 @@ class MemoryStore:
 
         lines.append("- 自然使用称呼，不要每句话都堆称呼。性别未知或低置信度时用中性称呼。")
         lines.append("- 如果用户明确要求查看已存储记忆、群友画像或人物信息，可以依据本段记忆回答；没有记录时直说没有。")
-        lines.append("- 默认不用 emoji/颜文字，除非用户明确要求。")
+        lines.append("- 可以自然少量使用猫系颜文字或动作，如 (ฅ>ω<*ฅ)、(๑•̀ㅂ•́)و✧、ฅฅ；不要刷屏。")
         return "\n".join(lines)

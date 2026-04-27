@@ -42,6 +42,15 @@ class DirectedKeywordTests(unittest.TestCase):
         self.assertTrue(_message_utils._has_directed_keyword("猫猫，帮我想一下", self.config))
         self.assertTrue(_message_utils._has_directed_keyword("问猫猫这个怎么弄", self.config))
 
+    def test_direct_address_strength_is_higher_for_obvious_calls(self) -> None:
+        self.assertEqual(_message_utils._directed_keyword_strength("猫猫你看看这个", self.config), "direct_address")
+        self.assertEqual(_message_utils._directed_keyword_strength("猫猫，帮我想一下", self.config), "direct_address")
+        self.assertEqual(_message_utils._directed_keyword_strength("问猫猫这个怎么弄", self.config), "direct_address")
+
+    def test_inline_name_mentions_remain_keyword_strength(self) -> None:
+        self.assertEqual(_message_utils._directed_keyword_strength("这个猫猫表情好好笑", self.config), "keyword")
+        self.assertEqual(_message_utils._directed_keyword_strength("我叫猫猫也可以吗", self.config), "keyword")
+
     def test_feature_keywords_still_wake_bot(self) -> None:
         self.assertTrue(_message_utils._has_directed_keyword("联网搜索 星痕共鸣职业", self.config))
         self.assertTrue(_message_utils._has_directed_keyword("来个海龟汤", self.config))

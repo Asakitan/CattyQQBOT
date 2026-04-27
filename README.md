@@ -124,7 +124,7 @@ ai 帮我总结这段话
 你看看这张图
 ```
 
-艾特、回复机器人消息或触发开头前缀时会直接回复；如果句子中出现“猫猫/笨猫/你”等配置里的名字或指向词，程序只负责把这类软触发消息交给 AI，由 AI 根据整句主语、称呼对象和上下文判断是不是在呼唤机器人，避免只因为提到名字就机械回复“我在/你叫我了”。普通群聊会按群攒到 `filter.group_batch_messages` 条，或距离本群上一批普通群消息达到 `filter.group_batch_seconds` 秒后，把这段最近未 filter 的普通消息作为压缩窗口交给 AI，从中查找疑似指向 BOT/AI/猫猫的话题再决定是否自然回复；如果不该回复，AI 会输出内部不回复标记且不会发到群里。
+艾特、回复机器人消息或触发开头前缀时会直接回复；如果句子中出现“猫猫/笨猫/你”等配置里的名字或指向词，程序会把这类软触发消息交给 AI，由 AI 根据整句主语、称呼对象和上下文判断是不是在呼唤机器人。明显像“猫猫你看看”“问猫猫这个怎么弄”的直接喊名会使用更高的 `chat.direct_address_reply_probability`，普通软触发使用 `chat.soft_directed_reply_probability`；当群聊/私聊已经积累足够语料、摘要或画像时，还会按 `memory.reply_boost_*` 给回复倾向加一点权重。普通群聊会按群攒到 `filter.group_batch_messages` 条，或距离本群上一批普通群消息达到 `filter.group_batch_seconds` 秒后，把这段最近未 filter 的普通消息作为压缩窗口交给 AI，从中查找疑似指向 BOT/AI/猫猫的话题再决定是否自然回复；如果不该回复，AI 会输出内部不回复标记且不会发到群里。
 
 如果群友在短时间内连续发送同一个 QQ 表情、普通图片、图片类表情或文字消息，默认第 2 次时机器人会直接复读这条消息，不调用 AI 接口；机器人自己的消息不会计入连发判断。AI 的普通文本回复会由 `filter` 小模型判断是否追加本轮专用的轻量分段提示，再由主模型按语义决定是否拆成两条消息发送；原始 `system_prompt` 不会被改写。
 
@@ -282,6 +282,8 @@ dist/CattyQQAI.exe
 | `chat.reply_self_check_enabled` | `true` | 回复前追加隐藏自检提示，让主 AI 先理解意图、再用猫娘语气短句回应 |
 | `chat.reply_style_examples_enabled` | `true` | 回复前追加猫娘风格例句提示，让主 AI 学习可爱但有用的 QQ 口语节奏 |
 | `chat.directed_keywords` | `["你","猫猫","猫娘","看看"]` | 群聊软触发词；命中后交给 AI 判断主语、呼唤对象和是否需要回应 |
+| `chat.soft_directed_reply_probability` | `0.65` | 普通软触发交给 AI 后的回复倾向提示；数值越高越容易接话 |
+| `chat.direct_address_reply_probability` | `0.9` | 像“猫猫你看看/问猫猫”这类明显喊名时的回复倾向提示 |
 | `chat.image_response_enabled` | `true` | 是否响应图片消息 |
 | `chat.image_vision_enabled` | `true` | 是否启用图片识别；启用后先走 `vision`，再把识别结果交给主模型 |
 | `chat.expression_repeat_enabled` | `true` | 是否启用群聊表情/文字连发复读 |
@@ -309,6 +311,10 @@ dist/CattyQQAI.exe
 | `memory.special_care_response_window_minutes` | `30` | 笨猫跟特别关心回复后等待对方接话的窗口；超时会记录一点没被理状态 |
 | `memory.summary_interval_minutes` | `30` | 群聊语料压缩间隔 |
 | `memory.max_corpus_messages` | `800` | 每个群最多保留的待总结语料条数 |
+| `memory.reply_boost_enabled` | `true` | 语料、摘要或画像足够时是否提高软触发回复倾向 |
+| `memory.reply_boost_min_corpus_messages` | `80` | 待压缩语料达到多少条后启用回复倾向加成 |
+| `memory.reply_boost_probability_bonus` | `0.15` | 记忆加成给软触发回复倾向增加的数值 |
+| `memory.reply_boost_max_probability` | `0.95` | 记忆加成后的回复倾向上限 |
 | `memory.private_summary_messages` | `500` | 私聊累计多少条后做一次长期总结 |
 | `memory.member_mention_threshold` | `20` | 群友被 @ 提到多少次后做画像总结 |
 | `memory.special_group_active_minutes_per_hour` | `10` | 旧热点窗口配置；当前普通群消息按 `filter.group_batch_messages` / `filter.group_batch_seconds` 批量判断 |

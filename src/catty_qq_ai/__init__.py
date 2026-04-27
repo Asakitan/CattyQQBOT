@@ -115,6 +115,46 @@ def _soft_directed(incoming: ExtractedMessage) -> bool:
     return incoming.directed and not incoming.mentioned and not incoming.replied_to_self and not incoming.used_prefix
 
 
+def _clamp_probability(value: float) -> float:
+    return max(min(float(value), 1.0), 0.0)
+
+
+def _memory_reply_probability_boost(event: MessageEvent) -> tuple[float, str]:
+    if not config.catty_memory_reply_boost_enabled:
+        return 0.0, ""
+    signal = memory_store.reply_boost_signal(event)
+    if not signal:
+        return 0.0, ""
+    corpus_count = int(signal.get("corpus_count") or 0)
+    profile_count = int(signal.get("profile_count") or 0)
+    has_summary = bool(signal.get("has_summary"))
+    min_corpus = max(int(config.catty_memory_reply_boost_min_corpus_messages), 1)
+    if corpus_count < min_corpus and not has_summary and profile_count <= 0:
+        return 0.0, ""
+
+    reasons: list[str] = []
+    if corpus_count >= min_corpus:
+        reasons.append(f"已积累 {corpus_count} 条待压缩语料")
+    if has_summary:
+        reasons.append("已有长期摘要")
+    if profile_count > 0:
+        reasons.append(f"已有 {profile_count} 个画像")
+    bonus = _clamp_probability(config.catty_memory_reply_boost_probability_bonus)
+    return bonus, "；".join(reasons)
+
+
+def _soft_directed_reply_probability(event: MessageEvent, incoming: ExtractedMessage) -> tuple[float, str]:
+    if incoming.directed_strength == "direct_address":
+        base = _clamp_probability(config.catty_direct_address_reply_probability)
+    else:
+        base = _clamp_probability(config.catty_soft_directed_reply_probability)
+    boost, reason = _memory_reply_probability_boost(event)
+    if boost <= 0:
+        return base, ""
+    cap = max(base, _clamp_probability(config.catty_memory_reply_boost_max_probability))
+    return min(base + boost, cap), reason
+
+
 def _display_name(event: MessageEvent) -> str:
     sender = getattr(event, "sender", None)
     for attr in ("card", "nickname"):
@@ -326,7 +366,17 @@ def _build_messages(
     if incoming.opportunistic or group_filter_context:
         messages.append({"role": "system", "content": _opportunistic_reply_prompt()})
     if _soft_directed(incoming):
-        messages.append({"role": "system", "content": _soft_directed_reply_prompt()})
+        probability, memory_boost_reason = _soft_directed_reply_probability(event, incoming)
+        messages.append(
+            {
+                "role": "system",
+                "content": _soft_directed_reply_prompt(
+                    incoming,
+                    reply_probability=probability,
+                    memory_boost_reason=memory_boost_reason,
+                ),
+            }
+        )
     if group_filter_context:
         messages.append({"role": "system", "content": group_filter_context})
     if special_care_context:
@@ -462,11 +512,26 @@ def _opportunistic_reply_prompt() -> str:
     )
 
 
-def _soft_directed_reply_prompt() -> str:
+def _soft_directed_reply_prompt(
+    incoming: ExtractedMessage,
+    *,
+    reply_probability: float,
+    memory_boost_reason: str = "",
+) -> str:
+    probability_percent = round(_clamp_probability(reply_probability) * 100)
+    boost_text = f"；记忆加成原因：{memory_boost_reason}" if memory_boost_reason else ""
+    if incoming.directed_strength == "direct_address":
+        return (
+            "本轮没有明确 @ 你、回复你或使用严格开头前缀，但本地判断更像是在直接喊你/叫你办事。"
+            f"当前回复倾向约 {probability_percent}%{boost_text}。"
+            "除非整句明显只是在讨论名字本身、第三人称转述、记录事实或没有接话期待，否则优先用 1-3 句自然接住。"
+            f"只有确认不该回复时才输出 {NO_REPLY_MARKER}；不要机械回复“你叫我了/我在”。"
+        )
     return (
         "本轮没有明确 @ 你、回复你或使用开头前缀，只是句子中出现了你的名字、指向词或功能词。"
+        f"当前回复倾向约 {probability_percent}%{boost_text}。"
         "不要根据关键词机械回应；请根据整句主语、称呼对象、上下文意图判断用户是不是在呼唤你或要求你办事。"
-        "如果用户是在对你发问、让你帮忙、要求搜索/海龟汤/星痕共鸣相关回答，就自然回应；"
+        "如果用户是在对你发问、让你帮忙、要求搜索/海龟汤/星痕共鸣相关回答，就更积极地自然回应；"
         "如果只是第一人称/第三人称提到名字、讨论名字本身、或没有期待你接话，只输出 "
         f"{NO_REPLY_MARKER}。不要机械回复“你叫我了/我在”。"
     )

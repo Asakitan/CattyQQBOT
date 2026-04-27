@@ -28,6 +28,8 @@ class PersonaPromptsTests(unittest.TestCase):
         self.assertIn("怎么还没好", prompt)
         self.assertIn("这个能不能别硬编码", prompt)
         self.assertIn("一点都不可爱", prompt)
+        self.assertIn("(ฅ>ω<*ฅ)", prompt)
+        self.assertIn("ヾ(≧▽≦*)o", prompt)
         self.assertIn("好回复：NOPE", prompt)
         self.assertNotIn("<<<CATTY_NO_REPLY>>>", prompt)
 

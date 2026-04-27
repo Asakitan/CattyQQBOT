@@ -11,6 +11,49 @@ from .features import FEATURE_DIRECT_KEYWORDS
 
 
 EXPRESSION_SEGMENT_TYPES = {"face", "mface", "image"}
+GENERIC_DIRECTED_MARKERS = {
+    "你",
+    "妳",
+    "您",
+    "看看",
+    "帮我看看",
+    "这张图",
+    "这个图",
+    "图片",
+    "图里",
+    "评价一下",
+    "怎么回事",
+}
+DIRECT_ADDRESS_LEADS = ("问", "找", "喊", "求", "请", "麻烦", "艾特", "@")
+DIRECT_ADDRESS_TRAILS = (
+    "你",
+    "妳",
+    "您",
+    "帮",
+    "看",
+    "瞅",
+    "查",
+    "搜",
+    "来",
+    "给",
+    "说",
+    "讲",
+    "想",
+    "评",
+    "能",
+    "可以",
+    "要",
+    "在",
+    "出来",
+    "救",
+    "教",
+    "今天",
+    "这个",
+    "这张",
+    "怎么",
+    "为啥",
+    "为什么",
+)
 
 
 @dataclass(slots=True)
@@ -24,6 +67,7 @@ class ExtractedMessage:
     image_keys: list[str]
     has_image: bool
     directed: bool
+    directed_strength: str
     directly_requested: bool
     needs_filter: bool
     opportunistic: bool = False
@@ -256,6 +300,56 @@ def _configured_direct_markers(config: Config) -> list[str]:
     return sorted(markers, key=len, reverse=True)
 
 
+def _configured_direct_address_markers(config: Config) -> list[str]:
+    trigger_markers = {
+        raw_marker.strip().lower().lstrip("@")
+        for raw_marker in config.catty_trigger_prefixes
+        if raw_marker.strip().lstrip("@")
+    }
+    markers: list[str] = []
+    for raw_marker in [*config.catty_trigger_prefixes, *config.catty_directed_keywords]:
+        marker = raw_marker.strip().lower().lstrip("@")
+        if not marker:
+            continue
+        if marker not in trigger_markers and marker in GENERIC_DIRECTED_MARKERS:
+            continue
+        if marker not in trigger_markers and len(marker) < 2:
+            continue
+        if marker not in markers:
+            markers.append(marker)
+    return sorted(markers, key=len, reverse=True)
+
+
+def _looks_like_direct_address(text: str, config: Config) -> bool:
+    normalized = text.strip().lower()
+    if not normalized:
+        return False
+    compact = re.sub(r"[\s:：,，!！?？~～。、“”\"'‘’、]+", "", normalized)
+    for marker in _configured_direct_address_markers(config):
+        if normalized.startswith(marker):
+            after_marker = normalized[len(marker) :]
+            if not after_marker:
+                return True
+            if re.match(r"^[\s:：,，!！?？~～。、“”\"'‘’、]+", after_marker):
+                return True
+            compact_after = re.sub(r"\s+", "", after_marker)
+            if compact_after.startswith(DIRECT_ADDRESS_TRAILS):
+                return True
+        if compact == marker:
+            return True
+        if any(f"{lead}{marker}" in compact for lead in DIRECT_ADDRESS_LEADS):
+            return True
+    return False
+
+
+def _directed_keyword_strength(text: str, config: Config) -> str:
+    if not _has_directed_keyword(text, config):
+        return "none"
+    if _looks_like_direct_address(text, config):
+        return "direct_address"
+    return "keyword"
+
+
 def _has_directed_keyword(text: str, config: Config) -> bool:
     normalized = text.strip().lower()
     if not normalized:
@@ -334,7 +428,9 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, 
         return None
 
     text_without_prefix, used_prefix = _strip_prefix(text_without_mention, config.catty_trigger_prefixes)
-    directed = _has_directed_keyword(text_without_prefix or text, config)
+    directed_text = text_without_prefix or text
+    directed_strength = _directed_keyword_strength(directed_text, config)
+    directed = directed_strength != "none"
 
     directly_requested = True
     needs_filter = False
@@ -382,6 +478,7 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, 
         image_keys=image_keys,
         has_image=has_image,
         directed=directed,
+        directed_strength=directed_strength,
         directly_requested=directly_requested,
         needs_filter=needs_filter,
         opportunistic=opportunistic,
