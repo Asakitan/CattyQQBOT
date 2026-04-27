@@ -202,13 +202,13 @@ ai 清空记忆缓存
 安装打包依赖：
 
 ```powershell
-pip install -e ".[build]"
+.\.venv\Scripts\python.exe -m pip install -e ".[build]"
 ```
 
 打包：
 
 ```powershell
-pyinstaller --noconfirm --clean --onefile --name CattyQQAI --paths src --add-data "src/catty_qq_ai;catty_qq_ai" --hidden-import catty_qq_ai --hidden-import catty_integrations --hidden-import nonebot.drivers.fastapi --hidden-import nonebot.adapters.onebot.v11 bot.py
+.\.venv\Scripts\pyinstaller.exe --noconfirm --clean CattyQQAI.spec
 ```
 
 产物在：
