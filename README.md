@@ -255,7 +255,7 @@ dist/CattyQQAI.exe
 | `filter.group_batch_seconds` | `1200` | 每个群普通群消息最多等待多少秒触发一次主动回复判断；在下一条群消息到达时检查 |
 | `filter.anger_enabled` | `true` | 是否启用用户无用复读怒气值判断 |
 | `filter.anger_warn_threshold` | `60` | 怒气达到该值后把不耐烦状态反馈给主 AI |
-| `filter.anger_mute_threshold` | `100` | 怒气达到该值后暂时不回复该用户，并输出猫系心理活动 |
+| `filter.anger_mute_threshold` | `100` | 怒气达到该值后进入少搭理冷却；filter 只提供状态，是否回复和怎么表达交给主 AI |
 | `filter.anger_cooldown_seconds` | `3600` | 怒气爆表后的冷却秒数 |
 | `web_search.enabled` | `true` | 是否允许显式联网搜索 |
 | `web_search.cooldown_seconds` | `600` | 普通用户联网搜索冷却；有 `user_titles`/`group_user_titles` 的用户不受限制 |

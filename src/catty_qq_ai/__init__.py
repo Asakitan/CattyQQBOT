@@ -145,11 +145,22 @@ def _persona_search_cooldown_message(event: MessageEvent, remaining: float) -> s
     )
 
 
-def _ignore_thought(event: MessageEvent, remaining: float) -> str:
+def _anger_reply_decision_context(
+    event: MessageEvent,
+    *,
+    remaining: float,
+    newly_muted: bool = False,
+    reason: str = "",
+) -> str:
     name = _display_name(event)
+    state = "刚被 filter 粗筛判定进入少搭理冷却" if newly_muted else "仍处于少搭理冷却"
+    reason_part = f"；粗筛原因：{reason.strip()[:120]}" if reason.strip() else ""
     return (
-        f"（心理活动：哼，笨猫决定不理 {name} {format_duration_cn(remaining)} 了，"
-        "先把尾巴收起来冷静一下喵。）"
+        "用户耐心条/少搭理状态（来自 filter 分类和本地记忆，不是最终回复）："
+        f"对象是 {name}（QQ {event.user_id}），{state}，剩余约 {format_duration_cn(remaining)}{reason_part}。"
+        f"filter 只负责分类和粗筛；请主 AI 根据整句主语、上下文和人格自行判断是否理会 {name}。"
+        f"如果决定不理或冷处理，可以自然写自己的内心反应、短句敷衍或直接输出 {NO_REPLY_MARKER}；"
+        "不要套用固定模板，也不要机械说“我不理你多久了”。"
     )
 
 
@@ -772,33 +783,40 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         if isinstance(event, GroupMessageEvent) and config.catty_filter_anger_enabled and not group_filter_context:
             cooldown_remaining = memory_store.user_anger_cooldown_remaining_seconds(event)
             if cooldown_remaining > 0:
-                await matcher.finish(Message(_ignore_thought(event, cooldown_remaining)))
-            try:
-                anger_result = await assess_user_anger(
-                    config,
-                    incoming.text,
-                    current_anger=memory_store.user_anger_score(event),
-                    has_image=incoming.has_image,
-                )
-            except OpenAICompatibleError as exc:
-                logger.warning(f"User anger filter API error: {exc}")
-            except httpx.HTTPError as exc:
-                logger.warning(f"User anger filter transport error: {exc}")
+                anger_context = _anger_reply_decision_context(event, remaining=cooldown_remaining)
             else:
-                anger_state = memory_store.update_user_anger(
-                    event,
-                    delta=int(anger_result.get("anger_delta") or 0),
-                    reason=str(anger_result.get("reason") or ""),
-                    useless=bool(anger_result.get("useless")),
-                    mute_threshold=config.catty_filter_anger_mute_threshold,
-                    cooldown_seconds=config.catty_filter_anger_cooldown_seconds,
-                )
-                if anger_state.get("muted"):
-                    await matcher.finish(Message(_ignore_thought(event, config.catty_filter_anger_cooldown_seconds)))
-                anger_context = memory_store.build_anger_context(
-                    event,
-                    warn_threshold=config.catty_filter_anger_warn_threshold,
-                )
+                try:
+                    anger_result = await assess_user_anger(
+                        config,
+                        incoming.text,
+                        current_anger=memory_store.user_anger_score(event),
+                        has_image=incoming.has_image,
+                    )
+                except OpenAICompatibleError as exc:
+                    logger.warning(f"User anger filter API error: {exc}")
+                except httpx.HTTPError as exc:
+                    logger.warning(f"User anger filter transport error: {exc}")
+                else:
+                    anger_state = memory_store.update_user_anger(
+                        event,
+                        delta=int(anger_result.get("anger_delta") or 0),
+                        reason=str(anger_result.get("reason") or ""),
+                        useless=bool(anger_result.get("useless")),
+                        mute_threshold=config.catty_filter_anger_mute_threshold,
+                        cooldown_seconds=config.catty_filter_anger_cooldown_seconds,
+                    )
+                    if anger_state.get("muted"):
+                        anger_context = _anger_reply_decision_context(
+                            event,
+                            remaining=config.catty_filter_anger_cooldown_seconds,
+                            newly_muted=True,
+                            reason=str(anger_state.get("reason") or ""),
+                        )
+                    else:
+                        anger_context = memory_store.build_anger_context(
+                            event,
+                            warn_threshold=config.catty_filter_anger_warn_threshold,
+                        )
 
         memory_store.remember_event(event)
 
@@ -942,7 +960,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             logger.warning(f"OpenAI-compatible API transport error: {exc}")
             await matcher.finish(Message("AI 接口连接失败了，检查一下 BASE_URL、网络或代理配置。"))
 
-        if (incoming.opportunistic or group_filter_context or _soft_directed(incoming)) and _is_no_reply(reply):
+        if (incoming.opportunistic or group_filter_context or _soft_directed(incoming) or anger_context) and _is_no_reply(reply):
             await matcher.finish()
 
         reply, emoji_query = _extract_emoji_query(reply)
