@@ -410,6 +410,8 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish()
 
         chunks = _reply_chunks(reply)
+        if image_description:
+            memory_store.remember_image_summary(event, image_description)
         _append_history(history_key, incoming.history_content, "\n".join(chunks) if chunks else reply)
 
     delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)

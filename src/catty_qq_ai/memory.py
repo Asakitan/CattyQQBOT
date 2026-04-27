@@ -274,6 +274,56 @@ class MemoryStore:
         del corpus[:-self.private_summary_messages]
         self._save()
 
+    def remember_image_summary(self, event: MessageEvent, image_summary: str) -> None:
+        summary = image_summary.strip()
+        if not self.enabled or not summary:
+            return
+        content = f"图片内容：{summary}"
+
+        if isinstance(event, GroupMessageEvent):
+            group_id = str(event.group_id)
+            self.remember_event(event)
+            group = self._data.setdefault("groups", {}).setdefault(group_id, {})
+            corpus = group.setdefault("corpus", [])
+            if not isinstance(corpus, list):
+                corpus = []
+                group["corpus"] = corpus
+            entry = {
+                "time": _now(),
+                "user_id": str(event.user_id),
+                "display_name": _sender_name(event),
+                "text": content,
+                "has_image": True,
+            }
+            corpus.append(entry)
+            del corpus[:-self.max_corpus_messages]
+
+            mention_profiles = group.setdefault("mention_profiles", {})
+            for target_id in _message_mentions(event):
+                target = mention_profiles.setdefault(target_id, {"corpus": [], "count": 0})
+                target_corpus = target.setdefault("corpus", [])
+                if not isinstance(target_corpus, list):
+                    target_corpus = []
+                    target["corpus"] = target_corpus
+                target_corpus.append(entry)
+                del target_corpus[:-self.member_mention_threshold]
+            self._save()
+            return
+
+        if isinstance(event, PrivateMessageEvent):
+            self.remember_event(event)
+            user_id = str(event.user_id)
+            user = self._data.setdefault("users", {}).setdefault(user_id, {})
+            user.setdefault("private_summary", "")
+            user.setdefault("private_profile", {})
+            corpus = user.setdefault("private_corpus", [])
+            if not isinstance(corpus, list):
+                corpus = []
+                user["private_corpus"] = corpus
+            corpus.append({"time": _now(), "display_name": _sender_name(event), "text": content, "has_image": True})
+            del corpus[:-self.private_summary_messages]
+            self._save()
+
     def due_group_ids(self) -> list[str]:
         if not self.enabled:
             return []
