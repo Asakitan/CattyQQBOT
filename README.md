@@ -170,6 +170,12 @@ ai 清空记忆缓存
     "user_storage_dir": "memory_users",
     "max_known_members": 20,
     "special_group_ids": [168538447],
+    "special_care_user_ids": [993255714],
+    "group_special_care_user_ids": {
+      "168538447": [993255714]
+    },
+    "special_care_cooldown_seconds": 90,
+    "special_care_response_window_minutes": 30,
     "summary_interval_minutes": 30,
     "max_corpus_messages": 800,
     "private_summary_messages": 500,
@@ -196,6 +202,8 @@ ai 清空记忆缓存
 所有允许的群都会记录待压缩语料，并按 `summary_interval_minutes` 定时压缩成长期摘要；摘要会在后续对话里提供给模型，用来形成群印象和群友画像。生成长期摘要后，当前待压缩语料会自动清空。私聊也会按人物单独记录语料并定时压缩，用来记住用户偏好、称呼和重要事实。
 
 `special_group_ids` 是旧特别关心群配置：当前不再用它限制总结范围，也不再用短活跃窗口控制普通群插话。普通群聊的长期主动观察由 `filter.group_batch_messages` 和 `filter.group_batch_seconds` 控制；到达批次后 AI 会自行判断是否值得插话，也可以选择不回复。
+
+`special_care_user_ids` 和 `group_special_care_user_ids` 是特别关心用户配置：命中用户在群里发言时，不等普通批量 filter，直接把本轮消息交给主 AI 判断是否自然跟上去回复；若 AI 判断不适合，可以只输出不回复标记。机器人会记录上次跟特别关心贴上去后有没有被接话，没被理时会把一点“败犬感/酸酸失落”的状态交给主 AI 表现，但不会硬编码固定句子。
 
 `proactive` 会让机器人每天在加入的群里主动冒泡：每个群每天最多 5 次，实际次数会根据该群互动分和当天群友发言量浮动。主动冒泡会参考群摘要、群友画像、近期聊天和上次有没有人接话，内容会从卡拉彼丘、自己的现实世界生活感、或适合当前群的话题里挑一个方向。如果冒泡后没人回应，机器人会记录一点失落感并降低该群互动分。
 
@@ -295,6 +303,10 @@ dist/CattyQQAI.exe
 | `memory.group_storage_dir` | `memory_groups` | 按群号拆分保存群记忆 JSON 的目录 |
 | `memory.user_storage_dir` | `memory_users` | 按 QQ 号拆分保存私聊人物 JSON 的目录 |
 | `memory.special_group_ids` | `[]` | 特别关心群号列表 |
+| `memory.special_care_user_ids` | `[]` | 全局特别关心 QQ 用户；这些用户群聊发言会立即交给主 AI 判断是否跟上 |
+| `memory.group_special_care_user_ids` | `{}` | 按群号配置特别关心 QQ 用户列表 |
+| `memory.special_care_cooldown_seconds` | `90` | 同一特别关心用户普通发言触发主 AI 判断的最小间隔；明确 @/前缀不受影响 |
+| `memory.special_care_response_window_minutes` | `30` | 笨猫跟特别关心回复后等待对方接话的窗口；超时会记录一点没被理状态 |
 | `memory.summary_interval_minutes` | `30` | 群聊语料压缩间隔 |
 | `memory.max_corpus_messages` | `800` | 每个群最多保留的待总结语料条数 |
 | `memory.private_summary_messages` | `500` | 私聊累计多少条后做一次长期总结 |

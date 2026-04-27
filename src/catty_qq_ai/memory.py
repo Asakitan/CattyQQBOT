@@ -10,6 +10,7 @@ from typing import Any
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, PrivateMessageEvent
 
 from .config import Config
+from .reply_markers import NO_REPLY_MARKER
 
 
 OWNER_TITLE = "主人"
@@ -119,6 +120,12 @@ class MemoryStore:
         self.member_mention_threshold = max(config.catty_memory_member_mention_threshold, 1)
         self.proactive_response_window_minutes = max(config.catty_proactive_response_window_minutes, 1.0)
         self.proactive_recent_messages = max(config.catty_proactive_recent_messages, 1)
+        self.special_care_user_ids = {str(user_id) for user_id in config.catty_special_care_user_ids}
+        self.group_special_care_user_ids = {
+            str(group_id): {str(user_id) for user_id in user_ids}
+            for group_id, user_ids in config.catty_group_special_care_user_ids.items()
+        }
+        self.special_care_response_window_minutes = max(config.catty_special_care_response_window_minutes, 1.0)
         self.group_titles = dict(config.catty_group_titles)
         self.user_titles = dict(config.catty_user_titles)
         self.group_user_titles = dict(config.catty_group_user_titles)
@@ -421,6 +428,8 @@ class MemoryStore:
             target_corpus.append(entry)
             del target_corpus[:-self.member_mention_threshold]
         self._record_proactive_human_message(group)
+        if self.is_special_care_user(event):
+            self._record_special_care_human_message(group, str(event.user_id))
         self._save()
 
     def remember_private_corpus_event(self, event: MessageEvent, text: str, *, has_image: bool = False) -> None:
@@ -597,6 +606,119 @@ class MemoryStore:
         state["last_unanswered_at"] = ""
         state["response_count"] = int(state.get("response_count") or 0) + 1
         self._set_interaction_score(state, self._interaction_score(state) + 8)
+
+    def is_special_care_user(self, event: MessageEvent) -> bool:
+        user_id = str(event.user_id)
+        if user_id in self.special_care_user_ids:
+            return True
+        if isinstance(event, GroupMessageEvent):
+            return user_id in self.group_special_care_user_ids.get(str(event.group_id), set())
+        return False
+
+    def _special_care_state(self, group: dict[str, Any], user_id: str) -> dict[str, Any]:
+        special = group.setdefault("special_care", {})
+        if not isinstance(special, dict):
+            special = {}
+            group["special_care"] = special
+        state = special.setdefault(user_id, {})
+        if not isinstance(state, dict):
+            state = {}
+            special[user_id] = state
+        return state
+
+    def _expire_special_care_pending(self, state: dict[str, Any]) -> bool:
+        pending = state.get("pending")
+        if not isinstance(pending, dict):
+            return False
+        if pending.get("responded_at") or pending.get("missed_at"):
+            return False
+        sent_at = _parse_time(pending.get("sent_at"))
+        if sent_at is None:
+            pending["missed_at"] = _now()
+            return True
+        now = datetime.now(timezone.utc)
+        if (now - sent_at).total_seconds() < self.special_care_response_window_minutes * 60:
+            return False
+        pending["missed_at"] = _now()
+        state["last_ignored_at"] = pending["missed_at"]
+        state["ignored_count"] = int(state.get("ignored_count") or 0) + 1
+        return True
+
+    def _record_special_care_human_message(self, group: dict[str, Any], user_id: str) -> bool:
+        state = self._special_care_state(group, user_id)
+        state["last_seen_at"] = _now()
+        pending = state.get("pending")
+        if not isinstance(pending, dict) or pending.get("responded_at") or pending.get("missed_at"):
+            return False
+        sent_at = _parse_time(pending.get("sent_at"))
+        if sent_at is None:
+            return False
+        now = datetime.now(timezone.utc)
+        if (now - sent_at).total_seconds() > self.special_care_response_window_minutes * 60:
+            self._expire_special_care_pending(state)
+            return True
+        pending["responded_at"] = _now()
+        state["last_response_at"] = pending["responded_at"]
+        state["last_ignored_at"] = ""
+        state["response_count"] = int(state.get("response_count") or 0) + 1
+        return True
+
+    def build_special_care_context(
+        self,
+        event: MessageEvent,
+        *,
+        cooldown_seconds: int,
+        enforce_cooldown: bool,
+    ) -> str:
+        if not self.enabled or not isinstance(event, GroupMessageEvent) or not self.is_special_care_user(event):
+            return ""
+        group_id = str(event.group_id)
+        user_id = str(event.user_id)
+        group = self._data.setdefault("groups", {}).setdefault(group_id, {})
+        if not isinstance(group, dict):
+            return ""
+        state = self._special_care_state(group, user_id)
+        changed = self._expire_special_care_pending(state)
+        now = datetime.now(timezone.utc)
+        last_considered = _parse_time(state.get("last_considered_at"))
+        if enforce_cooldown and last_considered is not None:
+            elapsed = (now - last_considered).total_seconds()
+            if elapsed < max(cooldown_seconds, 0):
+                if changed:
+                    self._save()
+                return ""
+        state["last_considered_at"] = _now()
+        state["last_seen_at"] = state["last_considered_at"]
+        self._save()
+
+        title = self._title_for(user_id, group_id)
+        ignored_count = int(state.get("ignored_count") or 0)
+        last_ignored = "是" if state.get("last_ignored_at") else "否"
+        last_text = ""
+        pending = state.get("pending")
+        if isinstance(pending, dict):
+            last_text = str(pending.get("text") or "").strip()[:120]
+        return (
+            "特别关心触发："
+            f"{_sender_name(event)}({user_id}) 是你特别关心的人，称呼可用「{title}」。"
+            "这不是强制回复，请根据 ta 的发言内容、群聊上下文和自然程度判断要不要跟上去。"
+            f"如果不适合回复，只输出 {NO_REPLY_MARKER}。上次贴上去无人接住：{last_ignored}；累计没被理 {ignored_count} 次。"
+            "如果最近没被理，可以表现一点败犬感、酸酸失落或嘴硬贴贴，但不要抱怨、道德绑架或刷存在感。"
+            + (f"上次你贴过去的内容：{last_text}" if last_text else "")
+        )
+
+    def record_special_care_reply_sent(self, event: MessageEvent, text: str) -> None:
+        if not self.enabled or not isinstance(event, GroupMessageEvent) or not self.is_special_care_user(event):
+            return
+        group = self._data.setdefault("groups", {}).setdefault(str(event.group_id), {})
+        if not isinstance(group, dict):
+            return
+        state = self._special_care_state(group, str(event.user_id))
+        now = _now()
+        state["last_reply_at"] = now
+        state["last_reply_text"] = text.strip()[:500]
+        state["pending"] = {"sent_at": now, "text": text.strip()[:500]}
+        self._save()
 
     def proactive_daily_target(self, group_id: str, *, max_daily: int) -> int:
         group = self._data.setdefault("groups", {}).setdefault(str(group_id), {})

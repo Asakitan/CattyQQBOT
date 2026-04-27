@@ -304,6 +304,7 @@ def _build_messages(
     anger_context: str | None = None,
     semantic_reply_split: bool = False,
     group_filter_context: str | None = None,
+    special_care_context: str | None = None,
     emoji_context: str | None = None,
     web_search_context: str | None = None,
     star_resonance_context: str | None = None,
@@ -328,6 +329,8 @@ def _build_messages(
         messages.append({"role": "system", "content": _soft_directed_reply_prompt()})
     if group_filter_context:
         messages.append({"role": "system", "content": group_filter_context})
+    if special_care_context:
+        messages.append({"role": "system", "content": special_care_context})
     if anger_context:
         messages.append({"role": "system", "content": anger_context})
     if web_search_context:
@@ -685,6 +688,16 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
         if batch is None:
             return False
         state["catty_group_filter_context"] = _group_filter_reply_context(batch)
+    if isinstance(event, GroupMessageEvent) and memory_store.is_special_care_user(event):
+        special_care_context = memory_store.build_special_care_context(
+            event,
+            cooldown_seconds=config.catty_special_care_cooldown_seconds,
+            enforce_cooldown=incoming.opportunistic,
+        )
+        if incoming.opportunistic and not special_care_context:
+            return False
+        if special_care_context:
+            state["catty_special_care_context"] = special_care_context
     state["catty_incoming"] = incoming
     return True
 
@@ -794,6 +807,7 @@ async def start_memory_summary_loop() -> None:
 async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     incoming: ExtractedMessage = state["catty_incoming"]
     group_filter_context = str(state.get("catty_group_filter_context") or "")
+    special_care_context = str(state.get("catty_special_care_context") or "")
     history_key = build_history_key(event, config)
     queue_key = _conversation_queue_key(event)
 
@@ -963,6 +977,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             anger_context=anger_context,
             semantic_reply_split=semantic_reply_split,
             group_filter_context=group_filter_context,
+            special_care_context=special_care_context,
             emoji_context=emoji_context,
             web_search_context=web_search_context,
             star_resonance_context=star_resonance_context,
@@ -979,7 +994,13 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             logger.warning(f"OpenAI-compatible API transport error: {exc}")
             await matcher.finish(Message("AI 接口连接失败了，检查一下 BASE_URL、网络或代理配置。"))
 
-        if (incoming.opportunistic or group_filter_context or _soft_directed(incoming) or anger_context) and _is_no_reply(reply):
+        if (
+            incoming.opportunistic
+            or group_filter_context
+            or special_care_context
+            or _soft_directed(incoming)
+            or anger_context
+        ) and _is_no_reply(reply):
             await matcher.finish()
 
         reply, emoji_query = _extract_emoji_query(reply)
@@ -990,6 +1011,8 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
         _append_history(history_key, incoming.history_content, "\n".join(chunks) if chunks else reply)
+        if special_care_context and chunks:
+            memory_store.record_special_care_reply_sent(event, "\n".join(chunks))
 
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
         for chunk in chunks[:-1]:

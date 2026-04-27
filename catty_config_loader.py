@@ -131,6 +131,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "user_storage_dir": "memory_users",
         "max_known_members": 20,
         "special_group_ids": [],
+        "special_care_user_ids": [],
+        "group_special_care_user_ids": {},
+        "special_care_cooldown_seconds": 90,
+        "special_care_response_window_minutes": 30,
         "summary_interval_minutes": 30,
         "max_corpus_messages": 800,
         "private_summary_messages": 500,
@@ -378,6 +382,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_MEMORY_ENABLED", memory.get("enabled"))
     _set_env("CATTY_MEMORY_MAX_KNOWN_MEMBERS", memory.get("max_known_members"))
     _set_env("CATTY_MEMORY_SPECIAL_GROUP_IDS", memory.get("special_group_ids"), json_value=True)
+    _set_env("CATTY_SPECIAL_CARE_USER_IDS", memory.get("special_care_user_ids"), json_value=True)
+    _set_env("CATTY_GROUP_SPECIAL_CARE_USER_IDS", memory.get("group_special_care_user_ids"), json_value=True)
+    _set_env("CATTY_SPECIAL_CARE_COOLDOWN_SECONDS", memory.get("special_care_cooldown_seconds"))
+    _set_env("CATTY_SPECIAL_CARE_RESPONSE_WINDOW_MINUTES", memory.get("special_care_response_window_minutes"))
     _set_env("CATTY_MEMORY_SUMMARY_INTERVAL_MINUTES", memory.get("summary_interval_minutes"))
     _set_env("CATTY_MEMORY_MAX_CORPUS_MESSAGES", memory.get("max_corpus_messages"))
     _set_env("CATTY_MEMORY_PRIVATE_SUMMARY_MESSAGES", memory.get("private_summary_messages"))

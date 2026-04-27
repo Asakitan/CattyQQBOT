@@ -85,6 +85,10 @@ class Config(BaseModel):
     catty_memory_user_storage_dir: str = ""
     catty_memory_max_known_members: int = 20
     catty_memory_special_group_ids: set[int] = Field(default_factory=set)
+    catty_special_care_user_ids: set[int] = Field(default_factory=set)
+    catty_group_special_care_user_ids: dict[str, set[int]] = Field(default_factory=dict)
+    catty_special_care_cooldown_seconds: int = 90
+    catty_special_care_response_window_minutes: float = 30.0
     catty_memory_summary_interval_minutes: int = 30
     catty_memory_max_corpus_messages: int = 800
     catty_memory_private_summary_messages: int = 500
@@ -152,7 +156,13 @@ class Config(BaseModel):
             return _split_text(raw)
         return value
 
-    @field_validator("catty_allowed_user_ids", "catty_allowed_group_ids", "catty_memory_special_group_ids", mode="before")
+    @field_validator(
+        "catty_allowed_user_ids",
+        "catty_allowed_group_ids",
+        "catty_memory_special_group_ids",
+        "catty_special_care_user_ids",
+        mode="before",
+    )
     @classmethod
     def parse_int_set(cls, value: Any) -> Any:
         if value is None or value == "":
@@ -211,6 +221,24 @@ class Config(BaseModel):
             parsed[str(group_id)] = {str(user_id): str(title) for user_id, title in dict(members).items()}
         return parsed
 
+    @field_validator("catty_group_special_care_user_ids", mode="before")
+    @classmethod
+    def parse_group_special_care_user_ids(cls, value: Any) -> Any:
+        if value is None or value == "":
+            return {}
+        data = _parse_json_object(value) if isinstance(value, str) else dict(value)
+        parsed: dict[str, set[int]] = {}
+        for group_id, members in data.items():
+            if members is None or members == "":
+                parsed[str(group_id)] = set()
+            elif isinstance(members, str):
+                parsed[str(group_id)] = {int(item) for item in _split_text(members)}
+            elif isinstance(members, (list, tuple, set)):
+                parsed[str(group_id)] = {int(item) for item in members}
+            else:
+                raise ValueError("catty_group_special_care_user_ids values must be lists or comma-separated strings")
+        return parsed
+
     @field_validator(
         "catty_temperature",
         "catty_max_tokens",
@@ -229,6 +257,8 @@ class Config(BaseModel):
         "catty_web_search_max_results",
         "catty_web_search_request_timeout",
         "catty_turtle_soup_cooldown_seconds",
+        "catty_special_care_cooldown_seconds",
+        "catty_special_care_response_window_minutes",
         "catty_emoji_interest_threshold",
         "catty_emoji_save_interest_threshold",
         "catty_emoji_max_candidates",

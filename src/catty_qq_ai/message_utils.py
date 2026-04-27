@@ -284,6 +284,16 @@ def _special_group_in_active_window(event: MessageEvent, config: Config) -> bool
     return now.minute in active_slots
 
 
+def _is_special_care_user(event: MessageEvent, config: Config) -> bool:
+    user_id = int(event.user_id)
+    if user_id in getattr(config, "catty_special_care_user_ids", set()):
+        return True
+    if isinstance(event, GroupMessageEvent):
+        group_map = getattr(config, "catty_group_special_care_user_ids", {})
+        return user_id in group_map.get(str(event.group_id), set())
+    return False
+
+
 def _allowed_by_config(event: MessageEvent, config: Config) -> bool:
     if config.catty_allowed_user_ids and int(event.user_id) not in config.catty_allowed_user_ids:
         return False
@@ -329,7 +339,7 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, 
     directly_requested = True
     needs_filter = False
     if isinstance(event, GroupMessageEvent):
-        special_active = False
+        special_active = _is_special_care_user(event, config)
         image_directed = config.catty_image_response_enabled and has_image and directed
         directly_requested = mentioned or replied_to_self or used_prefix or directed or image_directed
         if not directly_requested and not special_active:
