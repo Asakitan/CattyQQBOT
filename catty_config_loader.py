@@ -79,6 +79,15 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "anger_mute_threshold": 100,
         "anger_cooldown_seconds": 3600,
     },
+    "web_search": {
+        "enabled": True,
+        "cooldown_seconds": 600,
+        "max_results": 5,
+        "request_timeout": 10,
+    },
+    "turtle_soup": {
+        "cooldown_seconds": 300,
+    },
     "chat": {
         "system_prompt": "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。",
         "trigger_prefixes": ["ai", "AI", "猫猫"],
@@ -284,6 +293,15 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FILTER_ANGER_WARN_THRESHOLD", filter_config.get("anger_warn_threshold"))
     _set_env("CATTY_FILTER_ANGER_MUTE_THRESHOLD", filter_config.get("anger_mute_threshold"))
     _set_env("CATTY_FILTER_ANGER_COOLDOWN_SECONDS", filter_config.get("anger_cooldown_seconds"))
+
+    web_search = _section(data, "web_search")
+    _set_env("CATTY_WEB_SEARCH_ENABLED", web_search.get("enabled"))
+    _set_env("CATTY_WEB_SEARCH_COOLDOWN_SECONDS", web_search.get("cooldown_seconds"))
+    _set_env("CATTY_WEB_SEARCH_MAX_RESULTS", web_search.get("max_results"))
+    _set_env("CATTY_WEB_SEARCH_REQUEST_TIMEOUT", web_search.get("request_timeout"))
+
+    turtle_soup = _section(data, "turtle_soup")
+    _set_env("CATTY_TURTLE_SOUP_COOLDOWN_SECONDS", turtle_soup.get("cooldown_seconds"))
 
     chat = _section(data, "chat")
     _set_env("CATTY_SYSTEM_PROMPT", chat.get("system_prompt"))

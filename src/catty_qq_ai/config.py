@@ -51,6 +51,11 @@ class Config(BaseModel):
     catty_filter_anger_warn_threshold: int = 60
     catty_filter_anger_mute_threshold: int = 100
     catty_filter_anger_cooldown_seconds: int = 3600
+    catty_web_search_enabled: bool = True
+    catty_web_search_cooldown_seconds: int = 600
+    catty_web_search_max_results: int = 5
+    catty_web_search_request_timeout: float | None = 10.0
+    catty_turtle_soup_cooldown_seconds: int = 300
 
     catty_system_prompt: str = "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。"
     catty_trigger_prefixes: list[str] = Field(default_factory=lambda: ["ai", "AI", "猫猫"])
@@ -218,6 +223,10 @@ class Config(BaseModel):
         "catty_filter_anger_warn_threshold",
         "catty_filter_anger_mute_threshold",
         "catty_filter_anger_cooldown_seconds",
+        "catty_web_search_cooldown_seconds",
+        "catty_web_search_max_results",
+        "catty_web_search_request_timeout",
+        "catty_turtle_soup_cooldown_seconds",
         "catty_emoji_interest_threshold",
         "catty_emoji_save_interest_threshold",
         "catty_emoji_max_candidates",

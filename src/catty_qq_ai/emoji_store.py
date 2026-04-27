@@ -14,6 +14,7 @@ from .config import Config
 
 
 EMOJI_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp"}
+QUERY_EDGE_PUNCTUATION = " \t\r\n。！？!?；;，,、：:….'\"`“”‘’（）()[]【】<>《》"
 logger = logging.getLogger(__name__)
 
 
@@ -27,8 +28,42 @@ class EmojiEntry:
 
 
 def _safe_tokens(text: str) -> list[str]:
+    text = text.strip(QUERY_EDGE_PUNCTUATION)
     tokens = re.split(r"[\s,，、;；|_\\/\-.]+", text.lower())
     return [token for token in tokens if token]
+
+
+def _clean_query(text: str) -> str:
+    return text.strip(QUERY_EDGE_PUNCTUATION)
+
+
+def _match_score(
+    query: str,
+    *,
+    wanted_tags: list[str] | None = None,
+    haystack_tags: list[str] | None = None,
+    meaning: str,
+    base_score: int = 0,
+) -> int:
+    wanted = set(_safe_tokens(query))
+    for tag in wanted_tags or []:
+        wanted.update(_safe_tokens(tag))
+    if not wanted:
+        return 0
+
+    haystack = set(_safe_tokens(meaning))
+    for tag in haystack_tags or []:
+        haystack.update(_safe_tokens(tag))
+    haystack_text = {meaning.lower(), *[tag.lower() for tag in haystack_tags or []]}
+    token_hits = len(wanted & haystack)
+    fuzzy_hits = sum(
+        1
+        for token in wanted
+        if token not in haystack and any(token in text or text in token for text in haystack_text)
+    )
+    if token_hits == 0 and fuzzy_hits == 0:
+        return 0
+    return base_score + 40 * token_hits + 25 * fuzzy_hits
 
 
 def _extension_from(content_type: str, source_url: str) -> str:
@@ -86,7 +121,7 @@ class EmojiStore:
         manifest_count = len(self._manifest.get("emojis", {})) if isinstance(self._manifest.get("emojis"), dict) else 0
         if manifest_count and not self._entries:
             logger.warning(
-                "Emoji manifest has %s entries but no image files were found under %s. "
+                "Emoji manifest has %s entries but no listed image files were found under %s. "
                 "Put the referenced jpg/png/gif/webp files in emoji.dir or update config.json.",
                 manifest_count,
                 self.root,
@@ -138,6 +173,7 @@ class EmojiStore:
             self._manifest["emojis"] = emojis
         entries: list[EmojiEntry] = []
         download_root = self.download_dir.resolve()
+        skipped_unindexed = 0
         for path in sorted(self.root.rglob("*")):
             if not path.is_file() or path.suffix.lower() not in EMOJI_EXTENSIONS:
                 continue
@@ -149,8 +185,8 @@ class EmojiStore:
                 source = "default"
             meta = emojis.get(key)
             if not isinstance(meta, dict):
-                meta = self._default_meta(path, source)
-                emojis[key] = meta
+                skipped_unindexed += 1
+                continue
             meta.setdefault("source", source)
             meta.setdefault("priority", 100 if meta.get("source") == "default" else 50)
             raw_tags = meta.get("tags")
@@ -170,6 +206,12 @@ class EmojiStore:
                 )
             )
         self._entries = entries
+        if skipped_unindexed:
+            logger.info(
+                "Skipped %s emoji image files that are not listed in manifest %s.",
+                skipped_unindexed,
+                self.manifest_path,
+            )
 
     def candidates_text(self, query: str, tags: list[str] | None = None) -> str:
         entries = self.select(query, tags=tags, limit=self.max_candidates)
@@ -184,6 +226,7 @@ class EmojiStore:
     def select(self, query: str, *, tags: list[str] | None = None, limit: int | None = None) -> list[EmojiEntry]:
         if not self.enabled:
             return []
+        query = _clean_query(query)
         wanted = set(_safe_tokens(query))
         for tag in tags or []:
             wanted.update(_safe_tokens(tag))
@@ -192,31 +235,74 @@ class EmojiStore:
 
         scored: list[tuple[int, EmojiEntry]] = []
         for entry in self._entries:
-            haystack = set(entry.tags)
-            haystack.update(_safe_tokens(entry.meaning))
-            haystack_text = {text.lower() for text in entry.tags}
-            haystack_text.add(entry.meaning.lower())
-            score = entry.priority
-            token_hits = len(wanted & haystack)
-            fuzzy_hits = sum(
-                1
-                for token in wanted
-                if token not in haystack and any(token in text or text in token for text in haystack_text)
+            score = _match_score(
+                query,
+                wanted_tags=tags,
+                haystack_tags=entry.tags,
+                meaning=entry.meaning,
+                base_score=entry.priority,
             )
-            score += 40 * token_hits
-            score += 25 * fuzzy_hits
+            if score <= 0:
+                continue
             if entry.source == "default":
                 score += 30
-            if wanted and token_hits == 0 and fuzzy_hits == 0:
-                score -= 120
-            if score > 0:
-                scored.append((score, entry))
+            scored.append((score, entry))
         scored.sort(key=lambda item: item[0], reverse=True)
         return [entry for _score, entry in scored[: limit or 1]]
 
-    def choose(self, query: str, *, tags: list[str] | None = None) -> EmojiEntry | None:
+    def choose(self, query: str, *, tags: list[str] | None = None, refresh_on_miss: bool = False) -> EmojiEntry | None:
         entries = self.select(query, tags=tags, limit=1)
+        if entries:
+            return entries[0]
+        if refresh_on_miss and self.enabled:
+            self.refresh()
+            entries = self.select(query, tags=tags, limit=1)
         return entries[0] if entries else None
+
+    def adopt_downloaded(self, query: str, *, tags: list[str] | None = None) -> EmojiEntry | None:
+        query = _clean_query(query)
+        if not self.enabled or not query or not self.download_dir.is_dir():
+            return None
+        emojis = self._manifest.setdefault("emojis", {})
+        if not isinstance(emojis, dict):
+            emojis = {}
+            self._manifest["emojis"] = emojis
+
+        scored: list[tuple[int, Path]] = []
+        for path in sorted(self.download_dir.rglob("*")):
+            if not path.is_file() or path.suffix.lower() not in EMOJI_EXTENSIONS:
+                continue
+            key = self._relative_key(path)
+            if isinstance(emojis.get(key), dict):
+                continue
+            path_tags = _safe_tokens(path.stem)
+            score = _match_score(
+                query,
+                wanted_tags=tags,
+                haystack_tags=path_tags,
+                meaning=path.stem,
+                base_score=50,
+            )
+            if score > 0:
+                scored.append((score, path))
+        if not scored:
+            return None
+
+        scored.sort(key=lambda item: item[0], reverse=True)
+        path = scored[0][1]
+        key = self._relative_key(path)
+        clean_tags = [tag.strip().lower() for tag in (tags or []) if tag.strip()]
+        clean_tags.extend(token for token in _safe_tokens(query) if token not in clean_tags)
+        clean_tags.extend(token for token in _safe_tokens(path.stem) if token not in clean_tags)
+        emojis[key] = {
+            "meaning": query.strip() or path.stem,
+            "tags": clean_tags,
+            "source": "downloaded",
+            "priority": 50,
+        }
+        self._scan_files()
+        self._save_manifest()
+        return self.choose(query, tags=clean_tags)
 
     def save_downloaded(
         self,

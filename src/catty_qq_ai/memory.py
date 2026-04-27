@@ -226,24 +226,27 @@ class MemoryStore:
         return max(min(int(record.get("score") or 0), 100), 0)
 
     def is_user_in_anger_cooldown(self, event: MessageEvent) -> bool:
+        return self.user_anger_cooldown_remaining_seconds(event) > 0
+
+    def user_anger_cooldown_remaining_seconds(self, event: MessageEvent) -> float:
         if not self.enabled:
-            return False
+            return 0.0
         anger = self._data.setdefault("anger", {})
         record = anger.get(self._anger_key(event)) if isinstance(anger, dict) else None
         if not isinstance(record, dict):
-            return False
+            return 0.0
         muted_until = _parse_time(record.get("muted_until"))
         if muted_until is None:
-            return False
+            return 0.0
         now = datetime.now(timezone.utc)
         if muted_until > now:
-            return True
+            return (muted_until - now).total_seconds()
         record["muted_until"] = ""
         record["score"] = 0
         record["last_reason"] = "冷却结束"
         record["updated_at"] = _now()
         self._save()
-        return False
+        return 0.0
 
     def update_user_anger(
         self,

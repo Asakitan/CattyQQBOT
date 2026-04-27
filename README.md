@@ -149,6 +149,12 @@ ai 清空缓存
 ai 清空记忆缓存
 ```
 
+联网搜索：群友明确要求“联网搜索/上网查/搜一下/查一下”等时，机器人会抓取一轮网页搜索结果再交给主 AI 回答。普通用户每 10 分钟 1 次；在 `memory.user_titles` 或 `memory.group_user_titles` 里配置了称呼的用户不受冷却限制。冷却未结束时，机器人会用猫系人格拒绝，不会消耗 AI 回复。
+
+海龟汤：群里有人要求“海龟汤”时，机器人会直接开一题；每个群 5 分钟 1 次，冷却未结束时会用猫系人格提醒。私聊不按群冷却。
+
+星痕共鸣：程序内置了《星痕共鸣》/Blue Protocol: Star Resonance 的轻量本地语料记忆；本轮输入包含星痕共鸣相关词时，会把这份本地记忆提供给主 AI。若用户要最新赛季、强度榜或活动，仍建议触发联网搜索。
+
 ## 群友记忆和称呼
 
 程序会自动把见过的 QQ 用户、群成员昵称和最后出现时间记录下来。`memory.json` 会放在 `config.json` 同目录作为索引壳子；每个群会单独写到 `memory_groups/group_<群号>.json`，每个私聊人物会单独写到 `memory_users/user_<QQ>.json`，重启后仍然能记住群友和私聊人物。
@@ -193,7 +199,7 @@ ai 清空记忆缓存
 
 `proactive` 会让机器人每天在加入的群里主动冒泡：每个群每天最多 5 次，实际次数会根据该群互动分和当天群友发言量浮动。主动冒泡会参考群摘要、群友画像、近期聊天和上次有没有人接话，内容会从卡拉彼丘、自己的现实世界生活感、或适合当前群的话题里挑一个方向。如果冒泡后没人回应，机器人会记录一点失落感并降低该群互动分。
 
-默认会把本地表情库候选交给主 AI；普通轻松聊天会优先让 AI 自己挑一张表情包，若 AI 没输出表情标记，程序也会按 `emoji.reply_probability` 自动补一张。默认表情不需要 `interest` 字段，`interest` 只用于下载表情；但 `emojis/manifest.json` 只是索引，实际图片文件也必须放在 `emoji.dir` 下，例如 `emojis/事后喵.jpg`。
+默认会把本地表情库候选交给主 AI；普通轻松聊天会优先让 AI 自己挑一张表情包，若 AI 没输出表情标记，程序也会按 `emoji.reply_probability` 尝试自动补一张命中的本地表情。`emojis/manifest.json` 是可发送表情白名单，只有 manifest 里登记且实际图片文件也存在于 `emoji.dir` 下的图片才会参与匹配，例如 `emojis/事后喵.jpg`；如果 AI 明确点名了一个本地没有的表情，程序会先尝试收养 `emoji.download_dir` 里文件名匹配的已下载图片，本轮消息带图片时也会尝试下载当前图片并登记为下载表情，仍然没有可用图片就跳过。默认表情不需要 `interest` 字段，`interest` 只用于下载表情。
 
 图片消息：私聊发图会触发回复；群里如果带艾特、前缀或指向词，也会先把图片下载地址交给 `vision` 图片识别模型，识别成文字、兴趣程度、表情含义和情绪标签后再交给主聊天模型。主 AI 可以决定是否追加本地表情包；默认表情放在 `emojis/`，高兴趣图片会按配置保存到 `emojis/downloaded/` 并记录到 `emojis/manifest.json`。若 `vision` 不单独配置，会复用 `ai` 主模型配置；若遇到 GIF 或动态 WebP，程序会自动截取第一帧转成 PNG 再识别。若图片识别失败，会退回为文字方式把图片地址交给主模型。
 
@@ -249,8 +255,13 @@ dist/CattyQQAI.exe
 | `filter.group_batch_seconds` | `1200` | 每个群普通群消息最多等待多少秒触发一次主动回复判断；在下一条群消息到达时检查 |
 | `filter.anger_enabled` | `true` | 是否启用用户无用复读怒气值判断 |
 | `filter.anger_warn_threshold` | `60` | 怒气达到该值后把不耐烦状态反馈给主 AI |
-| `filter.anger_mute_threshold` | `100` | 怒气达到该值后暂时不回复该用户 |
+| `filter.anger_mute_threshold` | `100` | 怒气达到该值后暂时不回复该用户，并输出猫系心理活动 |
 | `filter.anger_cooldown_seconds` | `3600` | 怒气爆表后的冷却秒数 |
+| `web_search.enabled` | `true` | 是否允许显式联网搜索 |
+| `web_search.cooldown_seconds` | `600` | 普通用户联网搜索冷却；有 `user_titles`/`group_user_titles` 的用户不受限制 |
+| `web_search.max_results` | `5` | 每次搜索交给 AI 的结果数量上限 |
+| `web_search.request_timeout` | `10` | 联网搜索请求超时秒数 |
+| `turtle_soup.cooldown_seconds` | `300` | 每个群触发海龟汤的冷却秒数 |
 | `chat.trigger_prefixes` | `["ai","AI","猫猫"]` | 群聊文字触发前缀 |
 | `chat.group_require_mention_or_prefix` | `true` | 群聊是否必须艾特或前缀 |
 | `chat.private_require_prefix` | `false` | 私聊是否必须前缀 |

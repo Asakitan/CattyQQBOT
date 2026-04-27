@@ -14,6 +14,15 @@ from nonebot.plugin import PluginMetadata
 from nonebot.typing import T_State
 
 from .config import Config
+from .features import (
+    choose_turtle_soup,
+    extract_web_search_query,
+    format_duration_cn,
+    is_turtle_soup_request,
+    search_cooldown_key,
+    turtle_soup_cooldown_key,
+    turtle_soup_remaining,
+)
 from .message_utils import (
     ExtractedMessage,
     build_history_key,
@@ -34,6 +43,16 @@ from .openai_client import (
     describe_images,
     download_binary,
 )
+from .reply_markers import (
+    EMOJI_QUERY_PREFIX,
+    EMOJI_QUERY_SUFFIX,
+    NO_REPLY_MARKER,
+    REPLY_SPLIT_MARKER,
+    TRAILING_CHAT_PUNCTUATION,
+    extract_emoji_query as _extract_emoji_query,
+)
+from .star_resonance_memory import build_star_resonance_context
+from .web_search import format_search_context, search_web
 
 
 __plugin_meta__ = PluginMetadata(
@@ -77,11 +96,8 @@ class GroupFilterBatchState:
 _expression_repeats: DefaultDict[str, ExpressionRepeatState] = defaultdict(ExpressionRepeatState)
 _group_filter_batches: DefaultDict[str, GroupFilterBatchState] = defaultdict(GroupFilterBatchState)
 _group_filter_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
-REPLY_SPLIT_MARKER = "<<<CATTY_REPLY_SPLIT>>>"
-NO_REPLY_MARKER = "<<<CATTY_NO_REPLY>>>"
-EMOJI_QUERY_PREFIX = "<<<CATTY_EMOJI_QUERY:"
-EMOJI_QUERY_SUFFIX = ">>>"
-TRAILING_CHAT_PUNCTUATION = " \t\r\n。！？!?；;，,、：:…."
+_web_search_cooldowns: dict[str, float] = {}
+_turtle_soup_cooldowns: dict[str, float] = {}
 
 
 def _has_api_key() -> bool:
@@ -92,6 +108,54 @@ def _conversation_queue_key(event: MessageEvent) -> str:
     if isinstance(event, GroupMessageEvent):
         return f"group:{event.group_id}"
     return f"private:{event.user_id}"
+
+
+def _display_name(event: MessageEvent) -> str:
+    sender = getattr(event, "sender", None)
+    for attr in ("card", "nickname"):
+        value = getattr(sender, attr, "") if sender is not None else ""
+        if value:
+            return str(value)
+    return str(event.user_id)
+
+
+def _configured_title(event: MessageEvent) -> str:
+    user_id = str(event.user_id)
+    if isinstance(event, GroupMessageEvent):
+        group_title = config.catty_group_user_titles.get(str(event.group_id), {}).get(user_id)
+        if group_title:
+            return str(group_title)
+    return str(config.catty_user_titles.get(user_id) or "")
+
+
+def _web_search_exempt(event: MessageEvent) -> bool:
+    return bool(_configured_title(event).strip())
+
+
+def _persona_search_cooldown_message(event: MessageEvent, remaining: float) -> str:
+    title = _configured_title(event).strip() or _display_name(event)
+    return (
+        f"哼，{title}刚刚已经用过联网搜索啦喵～"
+        f"每个人 10 分钟只有一次机会，还剩 {format_duration_cn(remaining)}，"
+        "先让猫猫的搜索爪爪冷却一下。"
+    )
+
+
+def _ignore_thought(event: MessageEvent, remaining: float) -> str:
+    name = _display_name(event)
+    return (
+        f"（心理活动：哼，笨猫决定不理 {name} {format_duration_cn(remaining)} 了，"
+        "先把尾巴收起来冷静一下喵。）"
+    )
+
+
+async def _build_web_search_context(query: str) -> str:
+    try:
+        results = await search_web(config, query)
+    except httpx.HTTPError as exc:
+        logger.warning(f"Web search failed for {query}: {exc}")
+        return f"本轮用户要求联网搜索「{query}」，但搜索请求失败：{exc}。请如实说明搜索失败，不要编造。"
+    return format_search_context(query, results)
 
 
 def _reset_history(key: str) -> None:
@@ -136,19 +200,6 @@ def _emoji_reply_context(image_analysis: dict[str, object], candidates: str) -> 
     )
 
 
-def _extract_emoji_query(reply: str) -> tuple[str, str]:
-    start = reply.find(EMOJI_QUERY_PREFIX)
-    if start < 0:
-        return reply, ""
-    end = reply.find(EMOJI_QUERY_SUFFIX, start)
-    if end < 0:
-        return reply, ""
-    query_start = start + len(EMOJI_QUERY_PREFIX)
-    query = reply[query_start:end].strip()
-    clean = (reply[:start] + reply[end + len(EMOJI_QUERY_SUFFIX) :]).strip()
-    return clean, query
-
-
 def _emoji_segment(entry: EmojiEntry) -> MessageSegment:
     return MessageSegment.image(file=entry.path.resolve().as_uri())
 
@@ -184,10 +235,48 @@ def _should_auto_emoji_reply(incoming: ExtractedMessage, reply: str) -> bool:
 
 
 def _choose_auto_emoji(reply: str, incoming: ExtractedMessage) -> EmojiEntry | None:
-    entry = emoji_store.choose(reply or incoming.text)
+    return emoji_store.choose(reply or incoming.text)
+
+
+async def _choose_or_download_emoji(
+    query: str,
+    incoming: ExtractedMessage,
+    image_analysis: dict[str, object],
+) -> EmojiEntry | None:
+    if not query.strip() or not config.catty_emoji_enabled:
+        return None
+
+    entry = emoji_store.choose(query, refresh_on_miss=True)
     if entry is not None:
         return entry
-    return emoji_store.choose("")
+
+    tags_value = image_analysis.get("emotion_tags")
+    tags = [str(tag) for tag in tags_value] if isinstance(tags_value, list) else []
+    entry = emoji_store.adopt_downloaded(query, tags=tags)
+    if entry is not None:
+        logger.info("Adopted downloaded emoji for query %s: %s", query, entry.path)
+        return entry
+
+    if not incoming.image_urls:
+        return None
+
+    try:
+        image_data, content_type = await download_binary(config, incoming.image_urls[0])
+        entry = emoji_store.save_downloaded(
+            image_data=image_data,
+            content_type=content_type,
+            source_url=incoming.image_urls[0],
+            meaning=query,
+            tags=[*tags, query],
+            interest=max(config.catty_emoji_save_interest_threshold, 50),
+        )
+    except httpx.HTTPError as exc:
+        logger.warning(f"Failed to download missing emoji candidate for {query}: {exc}")
+        return None
+    except OSError as exc:
+        logger.warning(f"Failed to save missing emoji candidate for {query}: {exc}")
+        return None
+    return entry
 
 
 def _build_messages(
@@ -200,6 +289,8 @@ def _build_messages(
     semantic_reply_split: bool = False,
     group_filter_context: str | None = None,
     emoji_context: str | None = None,
+    web_search_context: str | None = None,
+    star_resonance_context: str | None = None,
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
     if config.catty_system_prompt.strip():
@@ -212,6 +303,10 @@ def _build_messages(
         messages.append({"role": "system", "content": group_filter_context})
     if anger_context:
         messages.append({"role": "system", "content": anger_context})
+    if web_search_context:
+        messages.append({"role": "system", "content": web_search_context})
+    if star_resonance_context:
+        messages.append({"role": "system", "content": star_resonance_context})
     if emoji_context:
         messages.append({"role": "system", "content": emoji_context})
     memory_context = memory_store.build_context(event)
@@ -659,8 +754,9 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
     async with _locks[queue_key]:
         anger_context = ""
         if isinstance(event, GroupMessageEvent) and config.catty_filter_anger_enabled and not group_filter_context:
-            if memory_store.is_user_in_anger_cooldown(event):
-                await matcher.finish()
+            cooldown_remaining = memory_store.user_anger_cooldown_remaining_seconds(event)
+            if cooldown_remaining > 0:
+                await matcher.finish(Message(_ignore_thought(event, cooldown_remaining)))
             try:
                 anger_result = await assess_user_anger(
                     config,
@@ -682,7 +778,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                     cooldown_seconds=config.catty_filter_anger_cooldown_seconds,
                 )
                 if anger_state.get("muted"):
-                    await matcher.finish()
+                    await matcher.finish(Message(_ignore_thought(event, config.catty_filter_anger_cooldown_seconds)))
                 anger_context = memory_store.build_anger_context(
                     event,
                     warn_threshold=config.catty_filter_anger_warn_threshold,
@@ -702,8 +798,46 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             _reset_history(history_key)
             await matcher.finish(Message("上下文清掉啦。"))
 
+        if is_turtle_soup_request(incoming.text):
+            if isinstance(event, GroupMessageEvent):
+                soup_key = turtle_soup_cooldown_key(event.group_id)
+                remaining = turtle_soup_remaining(
+                    _turtle_soup_cooldowns,
+                    soup_key,
+                    cooldown_seconds=config.catty_turtle_soup_cooldown_seconds,
+                )
+                if remaining > 0:
+                    await matcher.finish(
+                        Message(
+                            "哼，这个群刚端过一碗海龟汤啦喵～"
+                            f"还剩 {format_duration_cn(remaining)} 才能开下一锅，先问问上一题也不是不行。"
+                        )
+                    )
+                _turtle_soup_cooldowns[soup_key] = time.monotonic()
+            else:
+                soup_key = turtle_soup_cooldown_key(None)
+            await matcher.finish(Message(choose_turtle_soup(soup_key)))
+
         if not _has_api_key():
             await matcher.finish(Message("还没有配置 API Key，先在 config.json 里填好 ai.api_key 再来找我。"))
+
+        web_search_context = ""
+        web_search_query = extract_web_search_query(incoming.text)
+        if web_search_query and config.catty_web_search_enabled:
+            search_key = search_cooldown_key(event.user_id)
+            if not _web_search_exempt(event):
+                now = time.monotonic()
+                search_cooldown = max(config.catty_web_search_cooldown_seconds, 0)
+                last_search = _web_search_cooldowns.get(search_key, 0.0)
+                remaining = max(last_search + search_cooldown - now, 0.0)
+                if remaining > 0:
+                    await matcher.finish(Message(_persona_search_cooldown_message(event, remaining)))
+                _web_search_cooldowns[search_key] = now
+            web_search_context = await _build_web_search_context(web_search_query)
+        elif web_search_query:
+            web_search_context = "本轮用户要求联网搜索，但当前配置关闭了 web_search.enabled。请用猫系人格说明联网搜索暂时不可用。"
+
+        star_resonance_context = build_star_resonance_context(incoming.text)
 
         image_description: str | None = None
         image_description_cached = False
@@ -777,6 +911,8 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             semantic_reply_split=semantic_reply_split,
             group_filter_context=group_filter_context,
             emoji_context=emoji_context,
+            web_search_context=web_search_context,
+            star_resonance_context=star_resonance_context,
         )
         try:
             reply = await chat_completion(config, messages)
@@ -794,8 +930,8 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish()
 
         reply, emoji_query = _extract_emoji_query(reply)
-        emoji_entry = emoji_store.choose(emoji_query) if emoji_query and config.catty_emoji_enabled else None
-        if emoji_entry is None and _should_auto_emoji_reply(incoming, reply):
+        emoji_entry = await _choose_or_download_emoji(emoji_query, incoming, image_analysis) if emoji_query else None
+        if emoji_entry is None and not emoji_query and _should_auto_emoji_reply(incoming, reply):
             emoji_entry = _choose_auto_emoji(reply, incoming)
         chunks = _reply_chunks(reply)
         if image_description and not image_description_cached:

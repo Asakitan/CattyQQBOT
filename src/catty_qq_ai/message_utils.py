@@ -7,6 +7,7 @@ from typing import Any
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, PrivateMessageEvent
 
 from .config import Config
+from .features import FEATURE_DIRECT_KEYWORDS
 
 
 EXPRESSION_SEGMENT_TYPES = {"face", "mface", "image"}
@@ -250,7 +251,7 @@ def _has_directed_keyword(text: str, config: Config) -> bool:
     normalized = text.strip().lower()
     if not normalized:
         return False
-    for keyword in config.catty_directed_keywords:
+    for keyword in [*config.catty_directed_keywords, *FEATURE_DIRECT_KEYWORDS]:
         keyword = keyword.strip().lower()
         if keyword and keyword in normalized:
             return True
