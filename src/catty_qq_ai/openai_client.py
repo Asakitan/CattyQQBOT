@@ -1,0 +1,189 @@
+from __future__ import annotations
+
+import base64
+from io import BytesIO
+from typing import Any
+from urllib.parse import urlparse
+
+import httpx
+from PIL import Image, ImageSequence
+
+from .config import Config
+
+
+ChatMessage = dict[str, Any]
+
+
+class OpenAICompatibleError(Exception):
+    def __init__(self, public_message: str, detail: str | None = None) -> None:
+        super().__init__(detail or public_message)
+        self.public_message = public_message
+
+
+def _chat_completions_url(base_url: str) -> str:
+    if base_url.endswith("/chat/completions"):
+        return base_url
+    return f"{base_url}/chat/completions"
+
+
+def _extract_content(data: dict[str, Any]) -> str:
+    try:
+        choice = data["choices"][0]
+    except (KeyError, IndexError, TypeError) as exc:
+        raise OpenAICompatibleError("AI 返回格式不符合 Chat Completions。", repr(data)[:500]) from exc
+
+    message = choice.get("message") or {}
+    content = message.get("content")
+    if isinstance(content, str):
+        return content.strip()
+    if isinstance(content, list):
+        parts: list[str] = []
+        for item in content:
+            if isinstance(item, str):
+                parts.append(item)
+            elif isinstance(item, dict):
+                text = item.get("text") or item.get("content")
+                if isinstance(text, str):
+                    parts.append(text)
+        return "\n".join(part for part in parts if part).strip()
+
+    text = choice.get("text")
+    if isinstance(text, str):
+        return text.strip()
+
+    raise OpenAICompatibleError("AI 没有返回可读文本。", repr(data)[:500])
+
+
+def _client_kwargs(timeout: float, proxy: str) -> dict[str, Any]:
+    kwargs: dict[str, Any] = {
+        "timeout": timeout,
+        "follow_redirects": True,
+    }
+    if proxy.strip():
+        kwargs["proxy"] = proxy.strip()
+    return kwargs
+
+
+async def _post_chat_completion(
+    *,
+    base_url: str,
+    api_key: str,
+    model: str,
+    messages: list[ChatMessage],
+    timeout: float,
+    proxy: str,
+    temperature: float | None,
+    max_tokens: int | None,
+    extra_headers: dict[str, str],
+    extra_body: dict[str, Any],
+) -> str:
+    if not base_url.strip():
+        raise OpenAICompatibleError("AI 接口地址为空。")
+    if not model.strip():
+        raise OpenAICompatibleError("AI 模型名为空。")
+
+    headers = {
+        "Authorization": f"Bearer {api_key.strip()}",
+        "Content-Type": "application/json",
+        **extra_headers,
+    }
+    payload: dict[str, Any] = {
+        "model": model,
+        "messages": messages,
+    }
+    if temperature is not None:
+        payload["temperature"] = temperature
+    if max_tokens is not None:
+        payload["max_tokens"] = max_tokens
+    payload.update(extra_body)
+
+    async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
+        response = await client.post(_chat_completions_url(base_url), headers=headers, json=payload)
+
+    if response.status_code >= 400:
+        detail = response.text[:500]
+        raise OpenAICompatibleError(f"AI 接口 HTTP {response.status_code}。", detail)
+
+    try:
+        data = response.json()
+    except ValueError as exc:
+        raise OpenAICompatibleError("AI 返回的不是 JSON。", response.text[:500]) from exc
+
+    return _extract_content(data)
+
+
+def _needs_first_frame(url: str, content_type: str) -> bool:
+    path = urlparse(url).path.lower()
+    return path.endswith((".gif", ".webp")) or "gif" in content_type or "webp" in content_type
+
+
+def _first_frame_data_url(data: bytes) -> str | None:
+    try:
+        with Image.open(BytesIO(data)) as image:
+            frame_count = getattr(image, "n_frames", 1)
+            image_format = (image.format or "").upper()
+            if image_format not in {"GIF", "WEBP"} and frame_count <= 1:
+                return None
+            frame = next(ImageSequence.Iterator(image)).convert("RGBA")
+            output = BytesIO()
+            frame.save(output, format="PNG")
+    except Exception:
+        return None
+    encoded = base64.b64encode(output.getvalue()).decode("ascii")
+    return f"data:image/png;base64,{encoded}"
+
+
+async def _vision_image_url(config: Config, url: str) -> str:
+    timeout = config.catty_vision_request_timeout or config.catty_request_timeout
+    async with httpx.AsyncClient(**_client_kwargs(timeout, config.catty_http_proxy)) as client:
+        response = await client.get(url)
+    response.raise_for_status()
+    content_type = response.headers.get("content-type", "").lower()
+    if not _needs_first_frame(url, content_type):
+        data_url = _first_frame_data_url(response.content)
+        return data_url or url
+    return _first_frame_data_url(response.content) or url
+
+
+async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
+    return await _post_chat_completion(
+        base_url=config.catty_openai_base_url,
+        api_key=config.catty_openai_api_key,
+        model=config.catty_openai_model,
+        messages=messages,
+        timeout=config.catty_request_timeout,
+        proxy=config.catty_http_proxy,
+        temperature=config.catty_temperature,
+        max_tokens=config.catty_max_tokens,
+        extra_headers=config.catty_openai_extra_headers,
+        extra_body=config.catty_openai_extra_body,
+    )
+
+
+async def describe_images(config: Config, image_urls: list[str], context: str) -> str:
+    if not image_urls:
+        return ""
+
+    base_url = config.catty_vision_base_url or config.catty_openai_base_url
+    api_key = config.catty_vision_api_key or config.catty_openai_api_key
+    model = config.catty_vision_model or config.catty_openai_model
+    prompt = config.catty_vision_prompt.strip() or "请识别图片内容，提取和聊天回复相关的信息。"
+    text = f"{prompt}\n\n聊天上下文：\n{context}".strip()
+    content: list[dict[str, Any]] = [{"type": "text", "text": text}]
+
+    for url in image_urls:
+        prepared_url = await _vision_image_url(config, url)
+        content.append({"type": "image_url", "image_url": {"url": prepared_url}})
+
+    return await _post_chat_completion(
+        base_url=base_url,
+        api_key=api_key,
+        model=model,
+        messages=[{"role": "user", "content": content}],
+        timeout=config.catty_vision_request_timeout or config.catty_request_timeout,
+        proxy=config.catty_http_proxy,
+        temperature=config.catty_vision_temperature,
+        max_tokens=config.catty_vision_max_tokens,
+        extra_headers=config.catty_vision_extra_headers or config.catty_openai_extra_headers,
+        extra_body=config.catty_vision_extra_body,
+    )
