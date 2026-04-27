@@ -51,7 +51,11 @@
     "extra_body": {},
     "temperature": 0,
     "max_tokens": 64,
-    "request_timeout": 10
+    "request_timeout": 10,
+    "anger_enabled": true,
+    "anger_warn_threshold": 60,
+    "anger_mute_threshold": 100,
+    "anger_cooldown_seconds": 3600
   },
   "chat": {
     "system_prompt": "你是一个接入 QQ 群和私聊的中文 AI 助手。回答要简洁、自然、可靠，适合 QQ 聊天。默认不使用 emoji、颜文字或表情代码，除非用户明确要求。",

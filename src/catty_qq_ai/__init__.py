@@ -24,7 +24,7 @@ from .message_utils import (
     split_reply,
 )
 from .memory import MemoryStore
-from .openai_client import OpenAICompatibleError, chat_completion, describe_images, should_reply_to_group_message, should_request_reply_split
+from .openai_client import OpenAICompatibleError, assess_user_anger, chat_completion, describe_images, should_reply_to_group_message, should_request_reply_split
 
 
 __plugin_meta__ = PluginMetadata(
@@ -92,6 +92,7 @@ def _build_messages(
     incoming: ExtractedMessage,
     *,
     image_description: str | None = None,
+    anger_context: str | None = None,
     semantic_reply_split: bool = False,
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
@@ -101,6 +102,8 @@ def _build_messages(
         messages.append({"role": "system", "content": _semantic_reply_split_prompt()})
     if incoming.opportunistic:
         messages.append({"role": "system", "content": _opportunistic_reply_prompt()})
+    if anger_context:
+        messages.append({"role": "system", "content": anger_context})
     memory_context = memory_store.build_context(event)
     if memory_context:
         messages.append({"role": "system", "content": memory_context})
@@ -300,6 +303,35 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
             return False
         if not should_reply:
             return False
+    if isinstance(event, GroupMessageEvent) and config.catty_filter_anger_enabled:
+        if memory_store.is_user_in_anger_cooldown(event):
+            return False
+        try:
+            anger_result = await assess_user_anger(
+                config,
+                incoming.text,
+                current_anger=memory_store.user_anger_score(event),
+                has_image=incoming.has_image,
+            )
+        except OpenAICompatibleError as exc:
+            logger.warning(f"User anger filter API error: {exc}")
+        except httpx.HTTPError as exc:
+            logger.warning(f"User anger filter transport error: {exc}")
+        else:
+            anger_state = memory_store.update_user_anger(
+                event,
+                delta=int(anger_result.get("anger_delta") or 0),
+                reason=str(anger_result.get("reason") or ""),
+                useless=bool(anger_result.get("useless")),
+                mute_threshold=config.catty_filter_anger_mute_threshold,
+                cooldown_seconds=config.catty_filter_anger_cooldown_seconds,
+            )
+            if anger_state.get("muted"):
+                return False
+            state["catty_anger_context"] = memory_store.build_anger_context(
+                event,
+                warn_threshold=config.catty_filter_anger_warn_threshold,
+            )
     state["catty_incoming"] = incoming
     return True
 
@@ -377,6 +409,7 @@ async def start_memory_summary_loop() -> None:
 @chat_matcher.handle()
 async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     incoming: ExtractedMessage = state["catty_incoming"]
+    anger_context = str(state.get("catty_anger_context") or "")
     history_key = build_history_key(event, config)
     memory_store.remember_event(event)
 
@@ -416,6 +449,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             history_key,
             incoming,
             image_description=image_description,
+            anger_context=anger_context,
             semantic_reply_split=semantic_reply_split,
         )
         try:

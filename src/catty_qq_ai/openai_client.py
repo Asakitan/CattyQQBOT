@@ -165,18 +165,7 @@ def _json_decision(text: str, key: str) -> bool:
     raw = text.strip()
     if not raw:
         return False
-    try:
-        parsed = json.loads(raw)
-    except json.JSONDecodeError:
-        start = raw.find("{")
-        end = raw.rfind("}")
-        if start >= 0 and end > start:
-            try:
-                parsed = json.loads(raw[start : end + 1])
-            except json.JSONDecodeError:
-                parsed = None
-        else:
-            parsed = None
+    parsed = _json_object(raw)
     if isinstance(parsed, dict):
         value = parsed.get(key)
         if isinstance(value, bool):
@@ -190,6 +179,23 @@ def _json_decision(text: str, key: str) -> bool:
     if key == "split":
         return normalized in {"split", "yes", "true", "1", "拆分"}
     return False
+
+
+def _json_object(text: str) -> dict[str, Any] | None:
+    raw = text.strip()
+    try:
+        loaded = json.loads(raw)
+    except json.JSONDecodeError:
+        start = raw.find("{")
+        end = raw.rfind("}")
+        if start >= 0 and end > start:
+            try:
+                loaded = json.loads(raw[start : end + 1])
+            except json.JSONDecodeError:
+                return None
+        else:
+            return None
+    return loaded if isinstance(loaded, dict) else None
 
 
 async def _filter_completion(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 64) -> str:
@@ -250,6 +256,43 @@ async def should_request_reply_split(config: Config, user_content: str, *, min_c
         [{"role": "system", "content": prompt}, {"role": "user", "content": user_content.strip()}],
     )
     return _json_decision(reply, "split")
+
+
+async def assess_user_anger(config: Config, message_text: str, *, current_anger: int, has_image: bool = False) -> dict[str, Any]:
+    if not config.catty_filter_enabled or not config.catty_filter_anger_enabled:
+        return {"useless": False, "anger_delta": -5, "reason": ""}
+    if not (config.catty_filter_api_key or config.catty_openai_api_key):
+        return {"useless": False, "anger_delta": 0, "reason": ""}
+
+    content = message_text.strip() or ("[图片]" if has_image else "")
+    prompt = (
+        "你是QQ群机器人耐心条评估器，判断用户这条发给机器人的消息是否无用、复读、刷屏、纠缠或故意消耗机器人。"
+        "结合当前怒气值给出本条对怒气的增减：有实质问题/正常交流应降低怒气；复读、无意义短句、反复挑衅、只发无关表情应增加怒气。"
+        "anger_delta 范围 -20 到 40；useless 为 true 表示这条确实无用或复读。"
+        "只输出JSON：{\"useless\":true|false,\"anger_delta\":整数,\"reason\":\"<=30字\"}，不要解释。"
+    )
+    user_content = f"当前怒气值：{max(min(current_anger, 100), 0)}/100\n消息：{content}\n是否有图片：{'是' if has_image else '否'}"
+    reply = await _filter_completion(
+        config,
+        [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}],
+        fallback_max_tokens=96,
+    )
+    parsed = _json_object(reply) or {}
+    useless = parsed.get("useless")
+    if isinstance(useless, str):
+        useless_value = useless.strip().lower() in {"true", "yes", "1", "无用", "复读"}
+    else:
+        useless_value = bool(useless)
+    try:
+        anger_delta = int(parsed.get("anger_delta", 0))
+    except (TypeError, ValueError):
+        anger_delta = 0
+    reason = str(parsed.get("reason") or "").strip()
+    return {
+        "useless": useless_value,
+        "anger_delta": max(min(anger_delta, 40), -20),
+        "reason": reason,
+    }
 
 
 async def describe_images(config: Config, image_urls: list[str], context: str) -> str:

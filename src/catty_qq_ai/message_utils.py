@@ -36,6 +36,18 @@ def _message_text_segments(event: MessageEvent) -> list[str]:
     return [str(segment.data.get("text", "")) for segment in event.message if segment.type == "text"]
 
 
+def _raw_message_text(event: MessageEvent) -> str:
+    return str(getattr(event, "raw_message", "") or "")
+
+
+def _control_text_sources(event: MessageEvent) -> list[str]:
+    sources = _message_text_segments(event)
+    raw_message = _raw_message_text(event)
+    if raw_message:
+        sources.append(raw_message)
+    return sources
+
+
 def _control_code_values(text: str, code_type: str, key: str) -> list[str]:
     values: list[str] = []
     for match in _CONTROL_TAG_PATTERN.finditer(text):
@@ -55,7 +67,10 @@ def _strip_control_codes(text: str) -> str:
 
 
 def _plain_text(event: MessageEvent) -> str:
-    return _strip_control_codes("".join(_message_text_segments(event)))
+    text = "".join(_message_text_segments(event))
+    if not text.strip():
+        text = _raw_message_text(event)
+    return _strip_control_codes(text)
 
 
 def event_plain_text(event: MessageEvent) -> str:
@@ -149,7 +164,7 @@ def _mentioned_self(self_id: str, event: MessageEvent) -> bool:
         target = str(segment.data.get("qq", "")).strip()
         if target in target_ids:
             return True
-    for text in _message_text_segments(event):
+    for text in _control_text_sources(event):
         for target in _control_code_values(text, "at", "qq"):
             if target in target_ids:
                 return True
@@ -169,7 +184,7 @@ def reply_message_ids(event: MessageEvent) -> list[str]:
     for segment in event.message:
         if segment.type == "reply":
             add(segment.data.get("id") or segment.data.get("message_id"))
-    for text in _message_text_segments(event):
+    for text in _control_text_sources(event):
         for message_id in _control_code_values(text, "reply", "id"):
             add(message_id)
     return ids

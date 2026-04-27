@@ -72,6 +72,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "temperature": 0,
         "max_tokens": 64,
         "request_timeout": 10,
+        "anger_enabled": True,
+        "anger_warn_threshold": 60,
+        "anger_mute_threshold": 100,
+        "anger_cooldown_seconds": 3600,
     },
     "chat": {
         "system_prompt": "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。",
@@ -252,6 +256,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FILTER_TEMPERATURE", filter_config.get("temperature"))
     _set_env("CATTY_FILTER_MAX_TOKENS", filter_config.get("max_tokens"))
     _set_env("CATTY_FILTER_REQUEST_TIMEOUT", filter_config.get("request_timeout"))
+    _set_env("CATTY_FILTER_ANGER_ENABLED", filter_config.get("anger_enabled"))
+    _set_env("CATTY_FILTER_ANGER_WARN_THRESHOLD", filter_config.get("anger_warn_threshold"))
+    _set_env("CATTY_FILTER_ANGER_MUTE_THRESHOLD", filter_config.get("anger_mute_threshold"))
+    _set_env("CATTY_FILTER_ANGER_COOLDOWN_SECONDS", filter_config.get("anger_cooldown_seconds"))
 
     chat = _section(data, "chat")
     _set_env("CATTY_SYSTEM_PROMPT", chat.get("system_prompt"))

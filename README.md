@@ -243,6 +243,10 @@ dist/CattyQQAI.exe
 | `filter.api_key` | 空 | 过滤模型 API Key；空则复用 `ai.api_key` |
 | `filter.model` | 空 | 过滤模型名；空则复用 `ai.model` |
 | `filter.max_tokens` | `64` | 过滤判断最大 token，建议使用便宜快速模型 |
+| `filter.anger_enabled` | `true` | 是否启用用户无用复读怒气值判断 |
+| `filter.anger_warn_threshold` | `60` | 怒气达到该值后把不耐烦状态反馈给主 AI |
+| `filter.anger_mute_threshold` | `100` | 怒气达到该值后暂时不回复该用户 |
+| `filter.anger_cooldown_seconds` | `3600` | 怒气爆表后的冷却秒数 |
 | `chat.trigger_prefixes` | `["ai","AI","猫猫"]` | 群聊文字触发前缀 |
 | `chat.group_require_mention_or_prefix` | `true` | 群聊是否必须艾特或前缀 |
 | `chat.private_require_prefix` | `false` | 私聊是否必须前缀 |

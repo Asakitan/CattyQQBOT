@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -116,7 +116,7 @@ class MemoryStore:
         self.group_titles = dict(config.catty_group_titles)
         self.user_titles = dict(config.catty_user_titles)
         self.group_user_titles = dict(config.catty_group_user_titles)
-        self._data: dict[str, Any] = {"users": {}, "groups": {}, "images": {}}
+        self._data: dict[str, Any] = {"users": {}, "groups": {}, "images": {}, "anger": {}}
         if self.enabled:
             self._load()
 
@@ -143,6 +143,7 @@ class MemoryStore:
                 self._data["users"] = loaded.get("users", {}) if isinstance(loaded.get("users", {}), dict) else {}
                 self._data["groups"] = loaded.get("groups", {}) if isinstance(loaded.get("groups", {}), dict) else {}
                 self._data["images"] = loaded.get("images", {}) if isinstance(loaded.get("images", {}), dict) else {}
+                self._data["anger"] = loaded.get("anger", {}) if isinstance(loaded.get("anger", {}), dict) else {}
         self._load_entity_files(self.user_storage_dir, "user_id", "user_", self._data.setdefault("users", {}))
         self._load_entity_files(self.group_storage_dir, "group_id", "group_", self._data.setdefault("groups", {}))
 
@@ -177,6 +178,7 @@ class MemoryStore:
             "users": {},
             "groups": {},
             "images": self._data.get("images", {}) if isinstance(self._data.get("images"), dict) else {},
+            "anger": self._data.get("anger", {}) if isinstance(self._data.get("anger"), dict) else {},
             "user_ids": sorted(str(user_id) for user_id in self._data.get("users", {})),
             "group_ids": sorted(str(group_id) for group_id in self._data.get("groups", {})),
             "user_storage_dir": str(self.user_storage_dir),
@@ -198,6 +200,105 @@ class MemoryStore:
             "data": data,
         }
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    def _anger_key(self, event: MessageEvent) -> str:
+        if isinstance(event, GroupMessageEvent):
+            return f"group:{event.group_id}:user:{event.user_id}"
+        return f"private:{event.user_id}"
+
+    def user_anger_score(self, event: MessageEvent) -> int:
+        anger = self._data.setdefault("anger", {})
+        record = anger.get(self._anger_key(event)) if isinstance(anger, dict) else None
+        if not isinstance(record, dict):
+            return 0
+        return max(min(int(record.get("score") or 0), 100), 0)
+
+    def is_user_in_anger_cooldown(self, event: MessageEvent) -> bool:
+        if not self.enabled:
+            return False
+        anger = self._data.setdefault("anger", {})
+        record = anger.get(self._anger_key(event)) if isinstance(anger, dict) else None
+        if not isinstance(record, dict):
+            return False
+        muted_until = _parse_time(record.get("muted_until"))
+        if muted_until is None:
+            return False
+        now = datetime.now(timezone.utc)
+        if muted_until > now:
+            return True
+        record["muted_until"] = ""
+        record["score"] = 0
+        record["last_reason"] = "冷却结束"
+        record["updated_at"] = _now()
+        self._save()
+        return False
+
+    def update_user_anger(
+        self,
+        event: MessageEvent,
+        *,
+        delta: int,
+        reason: str,
+        useless: bool,
+        mute_threshold: int,
+        cooldown_seconds: int,
+    ) -> dict[str, Any]:
+        if not self.enabled:
+            return {"score": 0, "muted": False, "reason": ""}
+        anger = self._data.setdefault("anger", {})
+        if not isinstance(anger, dict):
+            anger = {}
+            self._data["anger"] = anger
+        key = self._anger_key(event)
+        record = anger.setdefault(key, {})
+        if not isinstance(record, dict):
+            record = {}
+            anger[key] = record
+
+        old_score = max(min(int(record.get("score") or 0), 100), 0)
+        cleaned_delta = max(min(int(delta), 40), -20)
+        if useless:
+            new_score = min(old_score + max(cleaned_delta, 0), 100)
+        else:
+            new_score = max(old_score + min(cleaned_delta, -5), 0)
+
+        muted = new_score >= mute_threshold
+        record.update(
+            {
+                "scope": "group" if isinstance(event, GroupMessageEvent) else "private",
+                "group_id": str(getattr(event, "group_id", "")),
+                "user_id": str(event.user_id),
+                "score": new_score,
+                "last_delta": cleaned_delta,
+                "last_useless": bool(useless),
+                "last_reason": reason.strip()[:120],
+                "updated_at": _now(),
+            }
+        )
+        if muted:
+            muted_until = datetime.now(timezone.utc) + timedelta(seconds=max(cooldown_seconds, 60))
+            record["muted_until"] = muted_until.isoformat(timespec="seconds")
+        else:
+            record["muted_until"] = ""
+        self._save()
+        return {"score": new_score, "muted": muted, "reason": str(record.get("last_reason") or "")}
+
+    def build_anger_context(self, event: MessageEvent, *, warn_threshold: int) -> str:
+        if not self.enabled:
+            return ""
+        anger = self._data.setdefault("anger", {})
+        record = anger.get(self._anger_key(event)) if isinstance(anger, dict) else None
+        if not isinstance(record, dict):
+            return ""
+        score = max(min(int(record.get("score") or 0), 100), 0)
+        if score < warn_threshold:
+            return ""
+        reason = str(record.get("last_reason") or "连续发送无用/复读内容").strip()
+        return (
+            "用户耐心条状态："
+            f"当前怒气值 {score}/100，原因：{reason}。"
+            "回复时可以表现出明显不耐烦、少搭理复读和无意义纠缠；但不要攻击现实身份。"
+        )
 
     def get_image_summary(self, image_keys: list[str]) -> str:
         if not self.enabled:
