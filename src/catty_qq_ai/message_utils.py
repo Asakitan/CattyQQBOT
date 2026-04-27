@@ -17,6 +17,7 @@ class ExtractedMessage:
     text: str
     history_content: str
     mentioned: bool
+    replied_to_self: bool
     used_prefix: bool
     image_urls: list[str]
     has_image: bool
@@ -24,12 +25,34 @@ class ExtractedMessage:
     opportunistic: bool = False
 
 
+_CONTROL_CODE_PATTERN = re.compile(r"\[(?:CQ:)?(?:at|reply)[:,][^\]]*\]", re.IGNORECASE)
+_CONTROL_TAG_PATTERN = re.compile(r"\[(?:CQ:)?(?P<type>at|reply)[:,](?P<data>[^\]]*)\]", re.IGNORECASE)
+
+
+def _message_text_segments(event: MessageEvent) -> list[str]:
+    return [str(segment.data.get("text", "")) for segment in event.message if segment.type == "text"]
+
+
+def _control_code_values(text: str, code_type: str, key: str) -> list[str]:
+    values: list[str] = []
+    for match in _CONTROL_TAG_PATTERN.finditer(text):
+        if match.group("type").lower() != code_type:
+            continue
+        for part in match.group("data").split(","):
+            name, sep, value = part.partition("=")
+            if sep and name.strip().lower() == key:
+                value = value.strip()
+                if value:
+                    values.append(value)
+    return values
+
+
+def _strip_control_codes(text: str) -> str:
+    return _CONTROL_CODE_PATTERN.sub("", text).strip()
+
+
 def _plain_text(event: MessageEvent) -> str:
-    parts: list[str] = []
-    for segment in event.message:
-        if segment.type == "text":
-            parts.append(str(segment.data.get("text", "")))
-    return "".join(parts).strip()
+    return _strip_control_codes("".join(_message_text_segments(event)))
 
 
 def event_plain_text(event: MessageEvent) -> str:
@@ -87,13 +110,37 @@ def expression_message_signature(event: MessageEvent, *, include_images: bool = 
 
 
 def _mentioned_self(self_id: str, event: MessageEvent) -> bool:
+    target_ids = {str(self_id), "all"}
     for segment in event.message:
         if segment.type != "at":
             continue
-        target = str(segment.data.get("qq", ""))
-        if target in {self_id, "all"}:
+        target = str(segment.data.get("qq", "")).strip()
+        if target in target_ids:
             return True
+    for text in _message_text_segments(event):
+        for target in _control_code_values(text, "at", "qq"):
+            if target in target_ids:
+                return True
     return False
+
+
+def reply_message_ids(event: MessageEvent) -> list[str]:
+    ids: list[str] = []
+    seen: set[str] = set()
+
+    def add(value: object) -> None:
+        message_id = str(value or "").strip()
+        if message_id and message_id not in seen:
+            seen.add(message_id)
+            ids.append(message_id)
+
+    for segment in event.message:
+        if segment.type == "reply":
+            add(segment.data.get("id") or segment.data.get("message_id"))
+    for text in _message_text_segments(event):
+        for message_id in _control_code_values(text, "reply", "id"):
+            add(message_id)
+    return ids
 
 
 def _strip_prefix(text: str, prefixes: list[str]) -> tuple[str, bool]:
@@ -108,6 +155,25 @@ def _strip_prefix(text: str, prefixes: list[str]) -> tuple[str, bool]:
             rest = stripped[len(prefix) :]
             if not rest or re.match(r"^[\s:：,，;；-]+", rest):
                 return rest.strip(" \t\r\n:：,，;；-"), True
+    return stripped, False
+
+
+def _strip_textual_mention(text: str, aliases: list[str]) -> tuple[str, bool]:
+    stripped = text.strip()
+    if not stripped.startswith("@"):
+        return stripped, False
+
+    rest = stripped[1:].lstrip()
+    for alias in sorted(aliases, key=len, reverse=True):
+        alias = alias.strip().lstrip("@")
+        if not alias:
+            continue
+        if rest == alias:
+            return "", True
+        if rest.startswith(alias):
+            after_alias = rest[len(alias) :]
+            if not after_alias or re.match(r"^[\s:：,，;；-]+", after_alias):
+                return after_alias.strip(" \t\r\n:：,，;；-"), True
     return stripped, False
 
 
@@ -165,24 +231,25 @@ def _sender_name(event: MessageEvent) -> str:
     return str(event.user_id)
 
 
-def extract_incoming_message(self_id: str, event: MessageEvent, config: Config) -> ExtractedMessage | None:
+def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, *, replied_to_self: bool = False) -> ExtractedMessage | None:
     if not _allowed_by_config(event, config):
         return None
 
     text = _plain_text(event)
     image_urls = extract_image_urls(event)
     has_image = bool(image_urls)
-    mentioned = _mentioned_self(self_id, event)
-    if not text and not has_image and not mentioned:
+    text_without_mention, textual_mention = _strip_textual_mention(text, config.catty_trigger_prefixes)
+    mentioned = _mentioned_self(self_id, event) or textual_mention
+    if not text and not has_image and not mentioned and not replied_to_self:
         return None
 
-    text_without_prefix, used_prefix = _strip_prefix(text, config.catty_trigger_prefixes)
+    text_without_prefix, used_prefix = _strip_prefix(text_without_mention, config.catty_trigger_prefixes)
     directed = _has_directed_keyword(text_without_prefix or text, config)
 
     if isinstance(event, GroupMessageEvent) and config.catty_group_require_mention_or_prefix:
         special_active = _special_group_in_active_window(event, config)
         image_directed = config.catty_image_response_enabled and has_image and directed
-        directly_requested = mentioned or used_prefix or directed or image_directed
+        directly_requested = mentioned or replied_to_self or used_prefix or directed or image_directed
         if not directly_requested and not special_active:
             return None
         opportunistic = special_active and not directly_requested
@@ -194,6 +261,8 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config) 
     final_text = text_without_prefix.strip()
     if not final_text and has_image:
         final_text = "请看这张图片并自然回应。"
+    if not final_text and replied_to_self:
+        final_text = "群友回复了你的消息但没有附加文字，请自然开口回应。"
     if not final_text and mentioned:
         final_text = "群友 @ 了你但没有附加文字，请自然开口回应。"
     if not final_text:
@@ -211,6 +280,7 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config) 
         text=final_text,
         history_content=history_content,
         mentioned=mentioned,
+        replied_to_self=replied_to_self,
         used_prefix=used_prefix,
         image_urls=image_urls,
         has_image=has_image,

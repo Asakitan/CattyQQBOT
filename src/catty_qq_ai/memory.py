@@ -11,6 +11,9 @@ from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, Private
 from .config import Config
 
 
+OWNER_TITLE = "主人"
+
+
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
@@ -393,7 +396,7 @@ class MemoryStore:
             raw_members = parsed.get("members", [])
             if isinstance(raw_members, list):
                 for raw_member in raw_members:
-                    self._save_member_profile(profiles, members, raw_member)
+                    self._save_member_profile(group_id, profiles, members, raw_member)
         group["last_summary_at"] = _now()
         group["corpus"] = []
         self._save()
@@ -409,7 +412,7 @@ class MemoryStore:
             if isinstance(raw_profile, dict):
                 profile = {
                     "gender": _clean_gender(raw_profile.get("gender")),
-                    "inferred_title": str(raw_profile.get("title") or "").strip() or "群友",
+                    "inferred_title": self._safe_title(user_id, None, raw_profile.get("title")),
                     "impression": str(raw_profile.get("impression") or "").strip(),
                     "confidence": _clean_confidence(raw_profile.get("confidence")),
                     "updated_at": _now(),
@@ -431,14 +434,14 @@ class MemoryStore:
         parsed["user_id"] = user_id
         profiles = group.setdefault("member_profiles", {})
         members = group.setdefault("members", {})
-        self._save_member_profile(profiles, members, parsed)
+        self._save_member_profile(group_id, profiles, members, parsed)
         mention_data = group.setdefault("mention_profiles", {}).setdefault(user_id, {})
         mention_data["last_summary_at"] = _now()
         mention_data["corpus"] = []
         mention_data["count"] = 0
         self._save()
 
-    def _save_member_profile(self, profiles: dict[str, Any], members: dict[str, Any], raw_member: Any) -> None:
+    def _save_member_profile(self, group_id: str, profiles: dict[str, Any], members: dict[str, Any], raw_member: Any) -> None:
         if not isinstance(raw_member, dict):
             return
         user_id = str(raw_member.get("user_id") or "").strip()
@@ -447,7 +450,7 @@ class MemoryStore:
         profile = {
             "display_name": str(raw_member.get("display_name") or "").strip(),
             "gender": _clean_gender(raw_member.get("gender")),
-            "inferred_title": str(raw_member.get("title") or "").strip() or "群友",
+            "inferred_title": self._safe_title(user_id, group_id, raw_member.get("title")),
             "impression": str(raw_member.get("impression") or "").strip(),
             "evidence": str(raw_member.get("evidence") or "").strip(),
             "confidence": _clean_confidence(raw_member.get("confidence")),
@@ -462,32 +465,47 @@ class MemoryStore:
         member["impression"] = profile["impression"]
         member["profile_confidence"] = profile["confidence"]
 
-    def _title_for(self, user_id: str, group_id: str | None = None) -> str:
+    def _configured_title_for(self, user_id: str, group_id: str | None = None) -> str:
         if group_id and self.group_user_titles.get(group_id, {}).get(user_id):
-            return self.group_user_titles[group_id][user_id]
+            return str(self.group_user_titles[group_id][user_id]).strip()
         if user_id in self.user_titles:
-            return self.user_titles[user_id]
+            return str(self.user_titles[user_id]).strip()
+        return ""
+
+    def _is_configured_owner(self, user_id: str, group_id: str | None = None) -> bool:
+        return self._configured_title_for(user_id, group_id) == OWNER_TITLE
+
+    def _safe_title(self, user_id: str, group_id: str | None, title: Any) -> str:
+        cleaned = str(title or "").strip() or "群友"
+        if OWNER_TITLE in cleaned and not self._is_configured_owner(user_id, group_id):
+            return "群友"
+        return cleaned
+
+    def _title_for(self, user_id: str, group_id: str | None = None) -> str:
+        configured_title = self._configured_title_for(user_id, group_id)
+        if configured_title:
+            return configured_title
         if group_id:
             group = self._data.get("groups", {}).get(group_id, {})
             member = group.get("members", {}).get(user_id, {}) if isinstance(group, dict) else {}
             for key in ("title", "inferred_title"):
                 title = member.get(key) if isinstance(member, dict) else None
                 if title:
-                    return str(title)
+                    return self._safe_title(user_id, group_id, title)
             profile = group.get("member_profiles", {}).get(user_id, {}) if isinstance(group, dict) else {}
             profile_title = profile.get("inferred_title") if isinstance(profile, dict) else None
             if profile_title:
-                return str(profile_title)
+                return self._safe_title(user_id, group_id, profile_title)
             group_title = self.group_titles.get(group_id) or group.get("title") if isinstance(group, dict) else None
             if group_title:
-                return str(group_title)
+                return self._safe_title(user_id, group_id, group_title)
         user = self._data.get("users", {}).get(user_id, {})
         if isinstance(user, dict):
             for source in (user, user.get("private_profile", {})):
                 if isinstance(source, dict):
                     title = source.get("title") or source.get("inferred_title")
                     if title:
-                        return str(title)
+                        return self._safe_title(user_id, group_id, title)
         return "群友"
 
     def _profile_for(self, user_id: str, group_id: str) -> dict[str, Any]:
@@ -627,6 +645,10 @@ class MemoryStore:
             group_id = str(event.group_id)
             title = self._title_for(user_id, group_id)
             lines.append(f"- 当前群：{group_id}；优先称呼当前用户为「{title}」。")
+            if self._is_configured_owner(user_id, group_id):
+                lines.append("- 当前用户在配置里被定义为「主人」，可以这样称呼。")
+            else:
+                lines.append("- 只有配置称呼明确为「主人」的 QQ 才能被叫主人；当前用户不能叫主人。")
             group = self._data.get("groups", {}).get(group_id, {})
             if isinstance(group, dict):
                 summary = str(group.get("summary") or "").strip()
@@ -654,6 +676,10 @@ class MemoryStore:
         elif isinstance(event, PrivateMessageEvent):
             title = self._title_for(user_id)
             lines.append(f"- 当前是私聊；优先称呼当前用户为「{title}」。")
+            if self._is_configured_owner(user_id):
+                lines.append("- 当前用户在配置里被定义为「主人」，可以这样称呼。")
+            else:
+                lines.append("- 只有配置称呼明确为「主人」的 QQ 才能被叫主人；当前用户不能叫主人。")
             user = self._data.get("users", {}).get(user_id, {})
             if isinstance(user, dict):
                 summary = str(user.get("private_summary") or "").strip()

@@ -21,6 +21,7 @@ from .message_utils import (
     expression_message_signature,
     extract_incoming_message,
     extract_image_urls,
+    reply_message_ids,
     split_reply,
 )
 from .memory import MemoryStore
@@ -244,8 +245,41 @@ def _reply_chunks(reply: str) -> list[str]:
     return chunks
 
 
+def _coerce_message_id(message_id: str) -> int | str:
+    stripped = message_id.strip()
+    if stripped.lstrip("-").isdigit():
+        return int(stripped)
+    return stripped
+
+
+def _sender_id_from_message(message: object) -> str:
+    if isinstance(message, dict):
+        sender = message.get("sender")
+        if isinstance(sender, dict):
+            sender_id = sender.get("user_id")
+        else:
+            sender_id = getattr(sender, "user_id", None)
+        return str(sender_id or message.get("user_id") or "")
+
+    sender = getattr(message, "sender", None)
+    return str(getattr(sender, "user_id", None) or getattr(message, "user_id", "") or "")
+
+
+async def _reply_targets_self(bot: Bot, event: MessageEvent) -> bool:
+    for message_id in reply_message_ids(event):
+        try:
+            message = await bot.get_msg(message_id=_coerce_message_id(message_id))
+        except Exception as exc:
+            logger.debug(f"Failed to inspect replied message {message_id}: {exc}")
+            continue
+        if _sender_id_from_message(message) == str(bot.self_id):
+            return True
+    return False
+
+
 async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
-    incoming = extract_incoming_message(bot.self_id, event, config)
+    replied_to_self = await _reply_targets_self(bot, event)
+    incoming = extract_incoming_message(str(bot.self_id), event, config, replied_to_self=replied_to_self)
     if incoming is None:
         return False
     state["catty_incoming"] = incoming
