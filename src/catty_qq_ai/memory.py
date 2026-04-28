@@ -366,6 +366,7 @@ class MemoryStore:
             return
         user_id = str(event.user_id)
         name = _sender_name(event)
+
         users = self._data.setdefault("users", {})
         user = users.setdefault(user_id, {})
         user["display_name"] = name
@@ -663,6 +664,20 @@ class MemoryStore:
         state["response_count"] = int(state.get("response_count") or 0) + 1
         return True
 
+    def _has_group_proactive_memory(self, group: dict[str, Any]) -> bool:
+        summary = str(group.get("summary") or "").strip()
+        if summary:
+            return True
+        for key in ("corpus",):
+            value = group.get(key)
+            if isinstance(value, list) and value:
+                return True
+        for key in ("members", "member_profiles", "mention_profiles"):
+            value = group.get(key)
+            if isinstance(value, dict) and value:
+                return True
+        return False
+
     def build_special_care_context(
         self,
         event: MessageEvent,
@@ -750,10 +765,11 @@ class MemoryStore:
         due: list[str] = []
         now = datetime.now(timezone.utc)
         changed = False
+        groups = self._data.setdefault("groups", {})
         for raw_group_id in group_ids:
             group_id = str(raw_group_id)
-            group = self._data.setdefault("groups", {}).setdefault(group_id, {})
-            if not isinstance(group, dict):
+            group = groups.get(group_id) if isinstance(groups, dict) else None
+            if not isinstance(group, dict) or not self._has_group_proactive_memory(group):
                 continue
             state = self._proactive_state(group)
             changed = self._expire_proactive_pending(state) or changed
@@ -835,7 +851,7 @@ class MemoryStore:
                     impression = str(profile.get("impression") or "").strip()
                 if not impression:
                     impression = str(member.get("impression") or "").strip()
-                title = self._title_for(str(member_id), str(group_id))
+                title = self._title_for(str(member_id), str(group_id), include_user_memory=False)
                 known.append(f"{display_name}({member_id})=>{title}/{impression[:40] or '暂无印象'}")
         sadness = "是" if state.get("last_unanswered_at") else "否"
         return "\n".join(
@@ -984,7 +1000,7 @@ class MemoryStore:
             return "群友"
         return cleaned
 
-    def _title_for(self, user_id: str, group_id: str | None = None) -> str:
+    def _title_for(self, user_id: str, group_id: str | None = None, *, include_user_memory: bool = True) -> str:
         configured_title = self._configured_title_for(user_id, group_id)
         if configured_title:
             return configured_title
@@ -1002,6 +1018,8 @@ class MemoryStore:
             group_title = self.group_titles.get(group_id) or group.get("title") if isinstance(group, dict) else None
             if group_title:
                 return self._safe_title(user_id, group_id, group_title)
+            if not include_user_memory:
+                return "群友"
         user = self._data.get("users", {}).get(user_id, {})
         if isinstance(user, dict):
             for source in (user, user.get("private_profile", {})):
@@ -1010,6 +1028,22 @@ class MemoryStore:
                     if title:
                         return self._safe_title(user_id, group_id, title)
         return "群友"
+
+    def _same_user_memory_lines(self, user_id: str) -> list[str]:
+        user = self._data.get("users", {}).get(user_id, {})
+        if not isinstance(user, dict):
+            return []
+        lines: list[str] = []
+        summary = str(user.get("private_summary") or "").strip()
+        if summary:
+            lines.append("- 同一 QQ 用户私聊摘要：" + summary)
+        profile = user.get("private_profile", {})
+        if isinstance(profile, dict) and profile:
+            lines.append(
+                f"- 同一 QQ 用户画像：性别={_clean_gender(profile.get('gender'))}，"
+                f"印象={str(profile.get('impression') or '暂无')[:80]}。"
+            )
+        return lines
 
     def _profile_for(self, user_id: str, group_id: str) -> dict[str, Any]:
         group = self._data.get("groups", {}).get(group_id, {})
@@ -1104,7 +1138,10 @@ class MemoryStore:
                 display_name = str(member.get("display_name") or member_id)
                 profile = self._profile_for(str(member_id), group_id)
                 impression = str(profile.get("impression") or "").strip()[:40] or "暂无印象"
-                known.append(f"- {display_name}({member_id})：{self._title_for(str(member_id), group_id)}；{impression}")
+                known.append(
+                    f"- {display_name}({member_id})："
+                    f"{self._title_for(str(member_id), group_id, include_user_memory=False)}；{impression}"
+                )
             remaining = max(len(members) - len(known), 0)
             if remaining:
                 known.append(f"- 还有 {remaining} 个群友没有展开。")
@@ -1192,6 +1229,7 @@ class MemoryStore:
                         f"- 当前用户画像：性别={_clean_gender(profile.get('gender'))}，"
                         f"印象={str(profile.get('impression') or '暂无')[:80]}。"
                     )
+                lines.extend(self._same_user_memory_lines(user_id))
                 members = group.get("members", {})
                 known: list[str] = []
                 if isinstance(members, dict) and self.max_known_members:
@@ -1199,7 +1237,7 @@ class MemoryStore:
                         if not isinstance(member, dict):
                             continue
                         display_name = str(member.get("display_name") or member_id)
-                        member_title = self._title_for(str(member_id), group_id)
+                        member_title = self._title_for(str(member_id), group_id, include_user_memory=False)
                         profile = self._profile_for(str(member_id), group_id)
                         impression = str(profile.get("impression") or "").strip()
                         known.append(f"{display_name}({member_id})=>{member_title}/{impression[:30]}")

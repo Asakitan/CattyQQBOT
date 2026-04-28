@@ -227,8 +227,27 @@ def _first_frame_data_url(data: bytes) -> str | None:
     return f"data:image/png;base64,{encoded}"
 
 
+def _data_url_content_type_and_bytes(url: str) -> tuple[str, bytes] | None:
+    if not url.startswith("data:"):
+        return None
+    header, separator, encoded = url.partition(",")
+    if not separator or ";base64" not in header.lower():
+        return None
+    content_type = header[5:].split(";", 1)[0].lower()
+    try:
+        data = base64.b64decode(encoded, validate=False)
+    except Exception:
+        return None
+    return content_type, data
+
+
 async def _vision_image_url(config: Config, url: str) -> str:
     if url.startswith("data:"):
+        parsed = _data_url_content_type_and_bytes(url)
+        if parsed is not None:
+            content_type, data = parsed
+            if _needs_first_frame(url, content_type):
+                return _first_frame_data_url(data) or url
         return url
     timeout = config.catty_vision_request_timeout or config.catty_request_timeout
     async with httpx.AsyncClient(**_client_kwargs(timeout, config.catty_http_proxy)) as client:
@@ -239,6 +258,32 @@ async def _vision_image_url(config: Config, url: str) -> str:
         data_url = _first_frame_data_url(response.content)
         return data_url or url
     return _first_frame_data_url(response.content) or url
+
+
+def _image_analysis_from_reply(reply: str) -> dict[str, Any]:
+    if not reply.strip():
+        return {}
+    parsed = _json_object(reply) or {}
+    try:
+        interest = int(parsed.get("interest", 0))
+    except (TypeError, ValueError):
+        interest = 0
+    emotion_tags = parsed.get("emotion_tags")
+    if isinstance(emotion_tags, str):
+        tags = [item.strip() for item in emotion_tags.replace("，", ",").split(",") if item.strip()]
+    elif isinstance(emotion_tags, list):
+        tags = [str(item).strip() for item in emotion_tags if str(item).strip()]
+    else:
+        tags = []
+    return {
+        "summary": str(parsed.get("summary") or "").strip() or reply.strip(),
+        "interest": max(min(interest, 100), 0),
+        "emotion_tags": tags,
+        "expression": str(parsed.get("expression") or "").strip(),
+        "emoji_query": str(parsed.get("emoji_query") or "").strip(),
+        "save_as_emoji": bool(parsed.get("save_as_emoji")),
+        "raw": reply,
+    }
 
 
 async def download_binary(config: Config, url: str, *, timeout: float | None = None) -> tuple[bytes, str]:
@@ -520,24 +565,4 @@ async def analyze_images_for_reply(config: Config, image_urls: list[str], contex
         extra_headers=config.catty_vision_extra_headers or config.catty_openai_extra_headers,
         extra_body=config.catty_vision_extra_body,
     )
-    parsed = _json_object(reply) or {}
-    try:
-        interest = int(parsed.get("interest", 0))
-    except (TypeError, ValueError):
-        interest = 0
-    emotion_tags = parsed.get("emotion_tags")
-    if isinstance(emotion_tags, str):
-        tags = [item.strip() for item in emotion_tags.replace("，", ",").split(",") if item.strip()]
-    elif isinstance(emotion_tags, list):
-        tags = [str(item).strip() for item in emotion_tags if str(item).strip()]
-    else:
-        tags = []
-    return {
-        "summary": str(parsed.get("summary") or "").strip() or reply.strip(),
-        "interest": max(min(interest, 100), 0),
-        "emotion_tags": tags,
-        "expression": str(parsed.get("expression") or "").strip(),
-        "emoji_query": str(parsed.get("emoji_query") or "").strip(),
-        "save_as_emoji": bool(parsed.get("save_as_emoji")),
-        "raw": reply,
-    }
+    return _image_analysis_from_reply(reply)

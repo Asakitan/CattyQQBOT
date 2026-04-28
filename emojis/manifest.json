@@ -200,6 +200,14 @@
       ],
       "source": "default",
       "priority": 100
+    },
+    "拍桌跳.gif": {
+      "meaning": "拍桌跳",
+      "tags": [
+        "拍桌跳"
+      ],
+      "source": "default",
+      "priority": 100
     }
   }
 }

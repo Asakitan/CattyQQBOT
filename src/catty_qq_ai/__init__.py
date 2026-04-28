@@ -370,6 +370,14 @@ def _remember_bot_reply_for_event(event: MessageEvent, text: str) -> None:
     )
 
 
+def _remember_bot_repeat_for_event(event: MessageEvent, text: str) -> None:
+    _remember_bot_conversation_message(
+        _conversation_queue_key(event),
+        bot_id=str(getattr(event, "self_id", "") or ""),
+        text=text,
+    )
+
+
 def _wake_context_prompt(event: MessageEvent) -> str:
     key = _conversation_queue_key(event)
     recent = list(_recent_conversation_messages.get(key, ()))
@@ -514,6 +522,24 @@ def _emoji_reply_context(image_analysis: dict[str, object], candidates: str) -> 
         f"情绪标签：{tag_text}\n"
         f"可用表情候选：\n{candidate_text}"
     )
+
+
+def _image_analysis_description(image_analysis: dict[str, object]) -> str:
+    summary = str(image_analysis.get("summary") or "").strip()
+    expression = str(image_analysis.get("expression") or "").strip()
+    tags_value = image_analysis.get("emotion_tags")
+    tags = [str(tag).strip() for tag in tags_value if str(tag).strip()] if isinstance(tags_value, list) else []
+    if not summary and not expression and not tags:
+        return ""
+    lines = []
+    if summary:
+        lines.append(summary)
+    lines.append(f"兴趣程度：{int(image_analysis.get('interest') or 0)}/100")
+    if expression:
+        lines.append(f"表情含义：{expression}")
+    if tags:
+        lines.append("情绪标签：" + ", ".join(tags))
+    return "\n".join(lines).strip()
 
 
 def _emoji_segment(entry: EmojiEntry) -> MessageSegment:
@@ -1907,7 +1933,7 @@ poke_matcher = on_notice(rule=_poke_rule, priority=55, block=True)
 async def handle_expression_repeat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     async with _locks[_conversation_queue_key(event)]:
         repeat_message = str(state["catty_repeat_message"])
-        _remember_bot_reply_for_event(event, repeat_message)
+        _remember_bot_repeat_for_event(event, repeat_message)
         await matcher.finish(state["catty_repeat_message"])
 
 
@@ -2143,14 +2169,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             if not image_description:
                 try:
                     image_analysis = await analyze_images_for_reply(config, incoming.image_urls, incoming.history_content)
-                    tags = image_analysis.get("emotion_tags")
-                    tag_text = ", ".join(str(tag) for tag in tags) if isinstance(tags, list) else ""
-                    image_description = (
-                        f"{image_analysis.get('summary') or ''}\n"
-                        f"兴趣程度：{image_analysis.get('interest', 0)}/100\n"
-                        f"表情含义：{image_analysis.get('expression') or ''}\n"
-                        f"情绪标签：{tag_text}"
-                    ).strip()
+                    image_description = _image_analysis_description(image_analysis)
                     if image_description:
                         memory_store.remember_image_record(incoming.image_keys, image_description)
                 except OpenAICompatibleError as exc:
