@@ -11,6 +11,21 @@ _SPEC.loader.exec_module(_config)
 
 
 class ConfigTests(unittest.TestCase):
+    def test_reply_delivery_defaults_enable_group_quotes_and_mixed_emoji(self) -> None:
+        config = _config.Config()
+
+        self.assertTrue(config.catty_reply_mix_emoji_with_text)
+        self.assertTrue(config.catty_reply_quote_enabled)
+        self.assertFalse(config.catty_reply_quote_private_enabled)
+
+    def test_emoji_diversity_defaults_are_enabled(self) -> None:
+        config = _config.Config()
+
+        self.assertFalse(config.catty_emoji_auto_fallback_enabled)
+        self.assertTrue(config.catty_emoji_diversity_enabled)
+        self.assertEqual(config.catty_emoji_diversity_recent_window, 8)
+        self.assertEqual(config.catty_emoji_diversity_candidate_pool, 6)
+
     def test_special_care_user_ids_parse_from_json_strings(self) -> None:
         config = _config.Config(
             catty_special_care_user_ids="[1001, 1002]",

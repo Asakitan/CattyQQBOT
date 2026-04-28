@@ -246,6 +246,9 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "reply_human_split_probability": 0.35,
         "reply_human_split_min_chars": 48,
         "reply_human_split_delay_seconds": 0.8,
+        "reply_mix_emoji_with_text": True,
+        "reply_quote_enabled": True,
+        "reply_quote_private_enabled": False,
         "reply_self_check_enabled": True,
         "reply_style_examples_enabled": True,
         "expression_repeat_enabled": True,
@@ -264,6 +267,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "max_candidates": 8,
         "reply_enabled": True,
         "reply_probability": 0.85,
+        "auto_fallback_enabled": False,
+        "diversity_enabled": True,
+        "diversity_recent_window": 8,
+        "diversity_candidate_pool": 6,
     },
     "memory": {
         "enabled": True,
@@ -532,6 +539,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_REPLY_HUMAN_SPLIT_PROBABILITY", chat.get("reply_human_split_probability"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_MIN_CHARS", chat.get("reply_human_split_min_chars"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_DELAY_SECONDS", chat.get("reply_human_split_delay_seconds"))
+    _set_env("CATTY_REPLY_MIX_EMOJI_WITH_TEXT", chat.get("reply_mix_emoji_with_text"))
+    _set_env("CATTY_REPLY_QUOTE_ENABLED", chat.get("reply_quote_enabled"))
+    _set_env("CATTY_REPLY_QUOTE_PRIVATE_ENABLED", chat.get("reply_quote_private_enabled"))
     _set_env("CATTY_REPLY_SELF_CHECK_ENABLED", chat.get("reply_self_check_enabled"))
     _set_env("CATTY_REPLY_STYLE_EXAMPLES_ENABLED", chat.get("reply_style_examples_enabled"))
     _set_env("CATTY_EXPRESSION_REPEAT_ENABLED", chat.get("expression_repeat_enabled"))
@@ -565,6 +575,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_EMOJI_MAX_CANDIDATES", emoji.get("max_candidates"))
     _set_env("CATTY_EMOJI_REPLY_ENABLED", emoji.get("reply_enabled"))
     _set_env("CATTY_EMOJI_REPLY_PROBABILITY", emoji.get("reply_probability"))
+    _set_env("CATTY_EMOJI_AUTO_FALLBACK_ENABLED", emoji.get("auto_fallback_enabled"))
+    _set_env("CATTY_EMOJI_DIVERSITY_ENABLED", emoji.get("diversity_enabled"))
+    _set_env("CATTY_EMOJI_DIVERSITY_RECENT_WINDOW", emoji.get("diversity_recent_window"))
+    _set_env("CATTY_EMOJI_DIVERSITY_CANDIDATE_POOL", emoji.get("diversity_candidate_pool"))
 
     memory = _section(data, "memory")
     memory_path = memory.get("path")

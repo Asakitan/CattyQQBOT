@@ -50,6 +50,7 @@ from .openai_client import (
 )
 from .persona_prompts import (
     build_catgirl_examples_prompt,
+    build_group_meme_literacy_prompt,
     build_persona_memory_prompt,
     build_reply_intelligence_prompt,
     build_reply_self_check_prompt,
@@ -131,6 +132,7 @@ _web_search_cooldowns: dict[str, float] = {}
 _turtle_soup_cooldowns: dict[str, float] = {}
 _local_critic_warmup_success_logged = False
 _consumed_reply_source_ids: dict[str, float] = {}
+_recent_emoji_paths: DefaultDict[str, deque[str]] = defaultdict(lambda: deque(maxlen=50))
 
 
 def _has_api_key() -> bool:
@@ -512,11 +514,13 @@ def _emoji_reply_context(image_analysis: dict[str, object], candidates: str) -> 
     tag_text = ", ".join(str(tag) for tag in tags) if isinstance(tags, list) else ""
     candidate_text = candidates or "当前本地表情库没有直接命中的候选；如果很适合发图，可以输出表情意图，程序会尝试联网搜索并下载到表情库。"
     return (
-        "本轮可以额外发送一个本地表情包，普通轻松聊天默认建议发送。"
-        "如果需要表情包，在回复正文末尾单独追加一行 "
+        "本轮是否额外发送本地表情包由主 AI 根据语境决定，不要默认每次都发。"
+        "请结合用户消息、图片/表情含义、群聊氛围、双方关系、你将要输出的正文语气来判断表情是否合适。"
+        "只有当某个表情能自然补充情绪、接梗、撒娇、吐槽或强化回复时，才在回复正文末尾单独追加一行 "
         f"{EMOJI_QUERY_PREFIX}你的表情意图{EMOJI_QUERY_SUFFIX}；"
-        "不要解释这个标记；只有严肃排错、道歉、风险提醒或确实不适合时才不输出标记。"
-        "优先选择能自然贴合情绪的默认表情；没有合适默认表情时可以写更具体的表情意图让程序下载。\n"
+        "不要解释这个标记。"
+        "表情意图可以写候选表情的含义，也可以写更贴近语境的情绪/动作/梗图意图；程序会按语境匹配并尽量避开最近重复。"
+        "严肃排错、道歉、风险提醒、信息密集解释、或表情会打断语气时不要输出标记。\n"
         f"图片兴趣度：{image_analysis.get('interest', 0)}/100\n"
         f"图片/表情含义：{image_analysis.get('expression') or image_analysis.get('summary') or ''}\n"
         f"情绪标签：{tag_text}\n"
@@ -546,6 +550,78 @@ def _emoji_segment(entry: EmojiEntry) -> MessageSegment:
     return MessageSegment.image(file=entry.path.resolve().as_uri())
 
 
+def _emoji_entry_key(entry: EmojiEntry) -> str:
+    return str(entry.path.resolve())
+
+
+def _emoji_candidate_pool_limit() -> int:
+    return max(int(config.catty_emoji_max_candidates), int(config.catty_emoji_diversity_candidate_pool), 1)
+
+
+def _recent_emoji_keys(event: MessageEvent) -> set[str]:
+    if not config.catty_emoji_diversity_enabled:
+        return set()
+    window = max(int(config.catty_emoji_diversity_recent_window), 0)
+    if window <= 0:
+        return set()
+    recent = _recent_emoji_paths[_conversation_queue_key(event)]
+    return set(list(recent)[-window:])
+
+
+def _remember_emoji_choice(event: MessageEvent, entry: EmojiEntry) -> None:
+    if not config.catty_emoji_diversity_enabled:
+        return
+    if max(int(config.catty_emoji_diversity_recent_window), 0) <= 0:
+        return
+    _recent_emoji_paths[_conversation_queue_key(event)].append(_emoji_entry_key(entry))
+
+
+def _unique_emoji_entries(entries: list[EmojiEntry]) -> list[EmojiEntry]:
+    unique: list[EmojiEntry] = []
+    seen: set[str] = set()
+    for entry in entries:
+        key = _emoji_entry_key(entry)
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(entry)
+    return unique
+
+
+def _select_diverse_emoji(event: MessageEvent, entries: list[EmojiEntry]) -> EmojiEntry | None:
+    unique = _unique_emoji_entries(entries)
+    if not unique:
+        return None
+    if not config.catty_emoji_diversity_enabled or len(unique) == 1:
+        return unique[0]
+
+    pool_limit = min(max(int(config.catty_emoji_diversity_candidate_pool), 1), len(unique))
+    pool = unique[:pool_limit]
+    recent_keys = _recent_emoji_keys(event)
+    fresh_pool = [entry for entry in pool if _emoji_entry_key(entry) not in recent_keys]
+    choices = fresh_pool or pool
+    weights = [1.0 / ((pool.index(entry) + 1) ** 0.85) for entry in choices]
+    return random.choices(choices, weights=weights, k=1)[0]
+
+
+def _choose_matching_emoji(
+    event: MessageEvent,
+    query: str,
+    *,
+    tags: list[str] | None = None,
+    refresh_on_miss: bool = False,
+) -> EmojiEntry | None:
+    entries = emoji_store.select(query, tags=tags, limit=_emoji_candidate_pool_limit())
+    if entries:
+        return _select_diverse_emoji(event, entries)
+    if refresh_on_miss and config.catty_emoji_enabled:
+        emoji_store.refresh()
+        entries = emoji_store.select(query, tags=tags, limit=_emoji_candidate_pool_limit())
+        if entries:
+            return _select_diverse_emoji(event, entries)
+    return None
+
+
 def _generic_emoji_context(incoming: ExtractedMessage) -> str:
     if not config.catty_emoji_enabled:
         return ""
@@ -562,6 +638,8 @@ def _generic_emoji_context(incoming: ExtractedMessage) -> str:
 
 
 def _should_auto_emoji_reply(incoming: ExtractedMessage, reply: str) -> bool:
+    if not config.catty_emoji_auto_fallback_enabled:
+        return False
     if not config.catty_emoji_enabled or not config.catty_emoji_reply_enabled:
         return False
     if not reply.strip() or _is_no_reply(reply):
@@ -574,12 +652,18 @@ def _should_auto_emoji_reply(incoming: ExtractedMessage, reply: str) -> bool:
     return random.random() < probability
 
 
-def _choose_auto_emoji(reply: str, incoming: ExtractedMessage) -> EmojiEntry | None:
-    entry = emoji_store.choose(reply) or emoji_store.choose(incoming.text)
+def _choose_auto_emoji(event: MessageEvent, reply: str, incoming: ExtractedMessage) -> EmojiEntry | None:
+    candidates = _unique_emoji_entries(
+        [
+            *emoji_store.select(reply, limit=_emoji_candidate_pool_limit()),
+            *emoji_store.select(incoming.text, limit=_emoji_candidate_pool_limit()),
+        ]
+    )
+    entry = _select_diverse_emoji(event, candidates)
     if entry is not None:
         return entry
-    candidates = emoji_store.select("", limit=max(int(config.catty_emoji_max_candidates), 1))
-    return random.choice(candidates) if candidates else None
+    candidates = emoji_store.select("", limit=_emoji_candidate_pool_limit())
+    return _select_diverse_emoji(event, candidates)
 
 
 def _emoji_entry_data_url(entry: EmojiEntry) -> str:
@@ -629,6 +713,7 @@ async def _enrich_emoji_metadata_with_vision_ai(
 
 
 async def _choose_or_download_emoji(
+    event: MessageEvent,
     query: str,
     incoming: ExtractedMessage,
     image_analysis: dict[str, object],
@@ -636,12 +721,12 @@ async def _choose_or_download_emoji(
     if not query.strip() or not config.catty_emoji_enabled:
         return None
 
-    entry = emoji_store.choose(query, refresh_on_miss=True)
+    tags_value = image_analysis.get("emotion_tags")
+    tags = [str(tag) for tag in tags_value] if isinstance(tags_value, list) else []
+    entry = _choose_matching_emoji(event, query, tags=tags, refresh_on_miss=True)
     if entry is not None:
         return entry
 
-    tags_value = image_analysis.get("emotion_tags")
-    tags = [str(tag) for tag in tags_value] if isinstance(tags_value, list) else []
     entry = emoji_store.adopt_downloaded(query, tags=tags)
     if entry is not None:
         logger.info("Adopted downloaded emoji for query %s: %s", query, entry.path)
@@ -706,6 +791,7 @@ def _build_messages(
     if persona_memory:
         messages.append({"role": "system", "content": persona_memory})
     messages.append({"role": "system", "content": build_reply_intelligence_prompt(NO_REPLY_MARKER)})
+    messages.append({"role": "system", "content": build_group_meme_literacy_prompt()})
     if config.catty_reply_self_check_enabled:
         messages.append(
             {
@@ -1673,6 +1759,7 @@ def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
                 "content": build_reply_self_check_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER),
             }
         )
+    messages.append({"role": "system", "content": build_group_meme_literacy_prompt()})
     if config.catty_reply_style_examples_enabled:
         messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER)})
     messages.append(
@@ -1773,6 +1860,42 @@ def _coerce_message_id(message_id: str) -> int | str:
     if stripped.lstrip("-").isdigit():
         return int(stripped)
     return stripped
+
+
+def _reply_quote_segment(event: MessageEvent) -> MessageSegment | None:
+    if not config.catty_reply_quote_enabled:
+        return None
+    if isinstance(event, PrivateMessageEvent) and not config.catty_reply_quote_private_enabled:
+        return None
+    message_id = _event_message_id(event).strip()
+    if not message_id or not message_id.lstrip("-").isdigit():
+        return None
+    return MessageSegment.reply(int(message_id))
+
+
+def _compose_reply_message(
+    event: MessageEvent,
+    *,
+    text: str = "",
+    emoji_entry: EmojiEntry | None = None,
+    quote: bool = False,
+) -> Message:
+    message = Message()
+    if quote:
+        quote_segment = _reply_quote_segment(event)
+        if quote_segment is not None:
+            message += quote_segment
+    if text.strip():
+        message += Message(text)
+    if emoji_entry is not None:
+        message += _emoji_segment(emoji_entry)
+    return message if message else Message(text)
+
+
+def _should_quote_chat_reply(event: MessageEvent) -> bool:
+    if isinstance(event, PrivateMessageEvent) and not config.catty_reply_quote_private_enabled:
+        return False
+    return _reply_quote_segment(event) is not None
 
 
 def _sender_id_from_message(message: object) -> str:
@@ -2260,14 +2383,15 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
 
         reply, emoji_query = _extract_emoji_query(reply)
         _save_assistant_training_sample(event, incoming, messages, reply, emoji_query=emoji_query)
-        emoji_entry = await _choose_or_download_emoji(emoji_query, incoming, image_analysis) if emoji_query else None
+        emoji_entry = await _choose_or_download_emoji(event, emoji_query, incoming, image_analysis) if emoji_query else None
         if emoji_query and emoji_entry is None:
             logger.info("Emoji query did not resolve to an image: %s", emoji_query)
         if emoji_entry is None and not emoji_query and _should_auto_emoji_reply(incoming, reply):
-            emoji_entry = _choose_auto_emoji(reply, incoming)
+            emoji_entry = _choose_auto_emoji(event, reply, incoming)
             if emoji_entry is None:
                 logger.info("Auto emoji skipped because no local emoji entry is available")
         if emoji_entry is not None:
+            _remember_emoji_choice(event, emoji_entry)
             logger.info("Selected emoji for reply: %s", emoji_entry.path)
         chunks = _reply_chunks(reply)
         if image_description and not image_description_cached:
@@ -2277,23 +2401,36 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             memory_store.record_special_care_reply_sent(event, "\n".join(chunks))
 
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
+        quote_pending = _should_quote_chat_reply(event)
         for chunk in chunks[:-1]:
             _remember_bot_reply_for_event(event, chunk)
-            await matcher.send(Message(chunk))
+            await matcher.send(_compose_reply_message(event, text=chunk, quote=quote_pending))
+            quote_pending = False
             _mark_consumed_reply_source_if_sent(event, state)
             if delay_seconds:
                 await asyncio.sleep(delay_seconds)
         if emoji_entry:
             if chunks:
                 _remember_bot_reply_for_event(event, chunks[-1])
-                await matcher.send(Message(chunks[-1]))
+                if config.catty_reply_mix_emoji_with_text:
+                    _mark_consumed_reply_source_if_sent(event, state)
+                    await matcher.finish(
+                        _compose_reply_message(
+                            event,
+                            text=chunks[-1],
+                            emoji_entry=emoji_entry,
+                            quote=quote_pending,
+                        )
+                    )
+                await matcher.send(_compose_reply_message(event, text=chunks[-1], quote=quote_pending))
+                quote_pending = False
                 _mark_consumed_reply_source_if_sent(event, state)
                 if delay_seconds:
                     await asyncio.sleep(delay_seconds)
             else:
                 _mark_consumed_reply_source_if_sent(event, state)
-            await matcher.finish(Message(_emoji_segment(emoji_entry)))
+            await matcher.finish(_compose_reply_message(event, emoji_entry=emoji_entry, quote=quote_pending))
         _mark_consumed_reply_source_if_sent(event, state)
         final_message = chunks[-1] if chunks else "喵喵！猫猫现在很忙哦，等一下再来找人家～"
         _remember_bot_reply_for_event(event, final_message)
-        await matcher.finish(Message(final_message))
+        await matcher.finish(_compose_reply_message(event, text=final_message, quote=quote_pending))

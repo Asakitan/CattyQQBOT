@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "catty-qq-ai"
-version = "0.2.11"
+version = "0.2.12"
 description = "NoneBot2 QQ chat plugin backed by an OpenAI-compatible API."
 readme = "README.md"
 requires-python = ">=3.10"

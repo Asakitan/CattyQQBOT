@@ -57,6 +57,14 @@ class PersonaPromptsTests(unittest.TestCase):
         self.assertIn("不要把记忆整段背出来", prompt)
         self.assertIn("NOPE", prompt)
 
+    def test_group_meme_literacy_prompt_guides_abstract_group_chat(self) -> None:
+        prompt = _persona_prompts.build_group_meme_literacy_prompt()
+
+        self.assertIn("群友抽象语境理解", prompt)
+        self.assertIn("玩梗", prompt)
+        self.assertIn("难绷", prompt)
+        self.assertIn("不要长篇科普", prompt)
+
 
 if __name__ == "__main__":
     unittest.main()

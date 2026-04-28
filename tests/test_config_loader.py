@@ -47,6 +47,79 @@ class ConfigLoaderTests(unittest.TestCase):
         self.assertEqual(extra_body, {"think": False})
         self.assertEqual(mode, "reply_gate_only")
 
+    def test_reply_delivery_flags_are_exported_from_chat_config(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            base_dir = Path(directory)
+            data = {
+                "server": {},
+                "qq": {},
+                "ai": {},
+                "audit_ai": {},
+                "vision": {},
+                "filter": {},
+                "local_critic": {},
+                "local_training": {},
+                "web_search": {},
+                "turtle_soup": {},
+                "chat": {
+                    "reply_mix_emoji_with_text": False,
+                    "reply_quote_enabled": True,
+                    "reply_quote_private_enabled": True,
+                },
+                "emoji": {},
+                "memory": {},
+                "proactive": {},
+                "access": {},
+            }
+
+            with patch.dict(os.environ, {}, clear=True):
+                _loader._apply_config(data, base_dir)
+                mixed = os.environ["CATTY_REPLY_MIX_EMOJI_WITH_TEXT"]
+                quote = os.environ["CATTY_REPLY_QUOTE_ENABLED"]
+                private_quote = os.environ["CATTY_REPLY_QUOTE_PRIVATE_ENABLED"]
+
+        self.assertEqual(mixed, "false")
+        self.assertEqual(quote, "true")
+        self.assertEqual(private_quote, "true")
+
+    def test_emoji_diversity_flags_are_exported(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            base_dir = Path(directory)
+            data = {
+                "server": {},
+                "qq": {},
+                "ai": {},
+                "audit_ai": {},
+                "vision": {},
+                "filter": {},
+                "local_critic": {},
+                "local_training": {},
+                "web_search": {},
+                "turtle_soup": {},
+                "chat": {},
+                "emoji": {
+                    "auto_fallback_enabled": False,
+                    "diversity_enabled": True,
+                    "diversity_recent_window": 10,
+                    "diversity_candidate_pool": 8,
+                },
+                "memory": {},
+                "proactive": {},
+                "access": {},
+            }
+
+            with patch.dict(os.environ, {}, clear=True):
+                _loader._apply_config(data, base_dir)
+                enabled = os.environ["CATTY_EMOJI_DIVERSITY_ENABLED"]
+                fallback = os.environ["CATTY_EMOJI_AUTO_FALLBACK_ENABLED"]
+                window = os.environ["CATTY_EMOJI_DIVERSITY_RECENT_WINDOW"]
+                pool = os.environ["CATTY_EMOJI_DIVERSITY_CANDIDATE_POOL"]
+
+        self.assertEqual(enabled, "true")
+        self.assertEqual(fallback, "false")
+        self.assertEqual(window, "10")
+        self.assertEqual(pool, "8")
+
 
 if __name__ == "__main__":
     unittest.main()

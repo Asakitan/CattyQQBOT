@@ -118,6 +118,10 @@ class Config(BaseModel):
     catty_emoji_max_candidates: int = 8
     catty_emoji_reply_enabled: bool = True
     catty_emoji_reply_probability: float = 0.85
+    catty_emoji_auto_fallback_enabled: bool = False
+    catty_emoji_diversity_enabled: bool = True
+    catty_emoji_diversity_recent_window: int = 8
+    catty_emoji_diversity_candidate_pool: int = 6
     catty_memory_enabled: bool = True
     catty_memory_path: str = "memory.json"
     catty_memory_group_storage_dir: str = ""
@@ -157,6 +161,9 @@ class Config(BaseModel):
     catty_reply_human_split_probability: float = 0.35
     catty_reply_human_split_min_chars: int = 48
     catty_reply_human_split_delay_seconds: float = 0.8
+    catty_reply_mix_emoji_with_text: bool = True
+    catty_reply_quote_enabled: bool = True
+    catty_reply_quote_private_enabled: bool = False
     catty_reply_self_check_enabled: bool = True
     catty_reply_style_examples_enabled: bool = True
     catty_expression_repeat_enabled: bool = True
@@ -364,6 +371,8 @@ class Config(BaseModel):
         "catty_emoji_save_interest_threshold",
         "catty_emoji_max_candidates",
         "catty_emoji_reply_probability",
+        "catty_emoji_diversity_recent_window",
+        "catty_emoji_diversity_candidate_pool",
         "catty_proactive_max_daily_per_group",
         "catty_proactive_check_interval_seconds",
         "catty_proactive_min_interval_minutes",

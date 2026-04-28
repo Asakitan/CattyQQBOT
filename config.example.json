@@ -226,6 +226,9 @@
     "reply_human_split_probability": 0.35,
     "reply_human_split_min_chars": 48,
     "reply_human_split_delay_seconds": 0.8,
+    "reply_mix_emoji_with_text": true,
+    "reply_quote_enabled": true,
+    "reply_quote_private_enabled": false,
     "reply_self_check_enabled": true,
     "reply_style_examples_enabled": true,
     "expression_repeat_enabled": true,
@@ -243,7 +246,11 @@
     "save_interest_threshold": 85,
     "max_candidates": 8,
     "reply_enabled": true,
-    "reply_probability": 0.85
+    "reply_probability": 0.85,
+    "auto_fallback_enabled": false,
+    "diversity_enabled": true,
+    "diversity_recent_window": 8,
+    "diversity_candidate_pool": 6
   },
   "access": {
     "allowed_user_ids": [],
