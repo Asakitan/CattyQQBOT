@@ -413,6 +413,18 @@ def _wake_context_prompt(event: MessageEvent) -> str:
     )
 
 
+def _bot_continuation_judgement_prompt(event: MessageEvent) -> str:
+    remaining = _bot_reply_continuation_remaining(event)
+    return (
+        "本轮消息是因为笨猫刚刚回复过当前用户，所以被续聊窗口直接递送给主 AI 判断；"
+        "这只是递送资格，不代表一定要回复。"
+        "请先判断当前消息是否仍在和笨猫对话："
+        "如果是在回答笨猫刚才的问题、继续同一话题、用第二人称/命令/调戏/追问指向笨猫，才自然回复；"
+        f"如果明显是在跟其他群友说话、第三人称闲聊、自言自语、转入新话题但没有指向笨猫，只输出 {NO_REPLY_MARKER}。"
+        f"当前续聊窗口剩余额度约 {remaining}；输出 {NO_REPLY_MARKER} 会消耗 1 次，真正回复会继续续上。"
+    )
+
+
 def _configured_title(event: MessageEvent) -> str:
     user_id = str(event.user_id)
     if isinstance(event, GroupMessageEvent):
@@ -658,6 +670,7 @@ def _build_messages(
     web_search_context: str | None = None,
     star_resonance_context: str | None = None,
     wake_context: str | None = None,
+    bot_continuation_context: str | None = None,
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
     system_prompt = config.catty_system_prompt.strip()
@@ -707,6 +720,8 @@ def _build_messages(
         messages.append({"role": "system", "content": star_resonance_context})
     if wake_context:
         messages.append({"role": "system", "content": wake_context})
+    if bot_continuation_context:
+        messages.append({"role": "system", "content": bot_continuation_context})
     if emoji_context:
         messages.append({"role": "system", "content": emoji_context})
     memory_context = memory_store.build_context(event)
@@ -2112,6 +2127,11 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
 
         star_resonance_context = build_star_resonance_context(incoming.text)
         wake_context = _wake_context_prompt(event)
+        bot_continuation_context = (
+            _bot_continuation_judgement_prompt(event)
+            if state.get("catty_recent_bot_continuation")
+            else ""
+        )
 
         image_description: str | None = None
         image_description_cached = False
@@ -2191,6 +2211,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             ),
             star_resonance_context=star_resonance_context,
             wake_context=wake_context,
+            bot_continuation_context=bot_continuation_context,
         )
         try:
             reply = await chat_completion(config, messages)
