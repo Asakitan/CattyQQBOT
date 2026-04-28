@@ -65,6 +65,43 @@ class TrainingDashboardTests(unittest.TestCase):
             self.assertEqual(snapshot["suggestions"]["reply_gate"], ["collect more directed messages"])
             self.assertIn("line2", snapshot["log_tail"])
 
+    def test_model_test_prompt_and_score_file(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            config_path = root / "config.json"
+            config_path.write_text(
+                json.dumps(
+                    {
+                        "chat": {"system_prompt": "你是主 AI 笨猫。"},
+                        "local_critic": {"base_url": "http://127.0.0.1:11434/v1", "model": "qwen2.5:1.5b"},
+                        "local_training": {"model_test_scores_path": "training/scores.jsonl"},
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            messages = _dashboard.build_model_test_messages(config_path, "测试一下")
+            self.assertEqual(messages[0]["content"], "你是主 AI 笨猫。")
+            self.assertEqual(messages[-1]["content"], "测试一下")
+
+            saved = _dashboard.save_model_eval(
+                config_path,
+                {
+                    "model": "qwen2.5:1.5b",
+                    "elapsed_seconds": 1.23,
+                    "prompt": "测试一下",
+                    "response": "喵～",
+                },
+                score=4,
+                note="good",
+            )
+
+            self.assertEqual(saved, root / "training" / "scores.jsonl")
+            records = _dashboard.latest_model_evals(config_path)
+            self.assertEqual(records[0]["score"], 4)
+            self.assertEqual(records[0]["note"], "good")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -215,7 +215,7 @@ ai 清空记忆缓存
 
 本地训练：`local_training` 会把 reply gate 样本导出成 `training/reply_gate_dataset.jsonl`，也会把主模型真实收到的上下文和最终回复收集到 `training/assistant_reply_samples.jsonl`，再导出成 `training/assistant_reply_dataset.jsonl`。聊天正文走 `ai`，普通审核/判断和训练成果审批走 `audit_ai`；`filter.model` 留空时会继承 `audit_ai`。Ollama 本体不能边运行边在线增参；样本达到对应 `min_samples` 且新增样本达到对应 `min_new_samples` 后，启动时会自动判断是否适合训练。`auto_fill_training_commands` 打开时，空的 `train_command` / `busy_train_command` / `assistant_train_command` / `assistant_busy_train_command` 会自动落到项目内安全 wrapper：`scripts/local_lora_train.py`。wrapper 只会执行你配置的 `backend_command` / `assistant_backend_command` / `busy_backend_command` / `assistant_busy_backend_command`，后端为空时只写状态并跳过，不会让主 AI 生成或执行任意 shell 命令。训练后如果输出目录出现 LoRA adapter、`Modelfile` 或 `.gguf`，wrapper 会记录成果并调用 `audit_ai` 做成果审核；审核模型只输出 `allow_apply/allow_merge` 和 `next_suggestions` JSON，不直接执行命令。配置了 `apply_trained_adapter_command` 且审核同意时会把小成果接入微调，样本达到 `merge_min_samples`、处于闲时且审核同意时才会执行 `merge_trained_model_command` 合并大成果。默认这些应用/合并命令为空，所以不会热替换正在工作的审核模型。`watch_interval_seconds` 大于 0 时会在后台循环检查。默认会根据服务器本地系统时间、凌晨闲时窗口和样本文件最近更新时间判断闲时；忙时训练会用低优先级并受 `busy_training_max_seconds` 和 `busy_training_max_steps` 限制，避免影响 reply 审核和主程序运行。
 
-训练进度窗口：打开 `local_training.progress_window_enabled` 后，启动时会额外弹出 `scripts/catty_training_dashboard.py` 的 Tk 小窗，轮询数据集样本数、最近训练状态、GLM-5.1 成果审批、`next_suggestions` 和 `training/local_training.log`。窗口只读状态文件，不会执行训练命令，也不会展示 API key。
+训练进度窗口：打开 `local_training.progress_window_enabled` 后，启动时会额外弹出 `scripts/catty_training_dashboard.py` 的 Tk 小窗，轮询数据集样本数、最近训练状态、GLM-5.1 成果审批、`next_suggestions` 和 `training/local_training.log`。窗口里还有 `Ollama test` 页，可以用主 AI 的 `chat.system_prompt` 向本地 `local_critic.model` 提问，查看输出耗时和内容，再把 1-5 分评分、备注写入 `model_test_scores_path`。窗口不会执行训练命令，也不会展示 API key。
 
 训练 MCP server：项目内包含 `scripts/catty_training_mcp_server.py`，可作为 MCP stdio server 暴露 `training_status` 和 `training_config_summary` 两个工具，方便外部 MCP 客户端查看训练样本、最新成果状态和 hook 配置。它不会返回 API key。
 
@@ -375,6 +375,9 @@ dist/CattyQQAI.exe
 | `local_training.progress_window_script` | `scripts/catty_training_dashboard.py` | 训练进度窗口脚本 |
 | `local_training.progress_window_poll_seconds` | `5` | 训练进度窗口刷新间隔 |
 | `local_training.progress_log_path` | `training/local_training.log` | 自动训练 watcher 的日志路径 |
+| `local_training.model_test_max_tokens` | `480` | 训练窗口里手动询问本地模型时的最大输出 token |
+| `local_training.model_test_request_timeout` | `60` | 训练窗口里手动询问本地模型时的请求超时 |
+| `local_training.model_test_scores_path` | `training/model_eval_scores.jsonl` | 训练窗口保存人工评分和输出耗时的 JSONL 路径 |
 | `local_training.assistant_min_samples` | `200` | 主模型回复样本至少累计多少条才允许训练 |
 | `local_training.assistant_min_new_samples` | `50` | 主模型回复距离上次训练至少新增多少条才再次训练 |
 | `local_training.watch_interval_seconds` | `0` | 大于 0 时后台循环检查训练条件；0 表示启动时只检查一次 |
