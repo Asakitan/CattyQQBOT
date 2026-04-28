@@ -76,7 +76,11 @@ set "START_BAT=start_catty.bat"
   echo   pause
   echo   exit /b 1
   echo ^)
-  echo ".venv\Scripts\python.exe" bot.py
+  echo if "%%CATTY_NO_HOT_RELOAD%%"=="1" ^(
+  echo   ".venv\Scripts\python.exe" bot.py
+  echo ^) else ^(
+  echo   ".venv\Scripts\python.exe" scripts\catty_hot_reload.py
+  echo ^)
   echo pause
 )
 

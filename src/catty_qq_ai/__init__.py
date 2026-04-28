@@ -4,6 +4,7 @@ from collections import defaultdict, deque
 from dataclasses import dataclass, field
 import json
 import mimetypes
+import os
 from pathlib import Path
 import random
 import time
@@ -66,6 +67,13 @@ from .reply_markers import (
 from .star_resonance_memory import build_star_resonance_context
 from .web_search import search_image_urls
 
+try:
+    from catty_config_loader import _apply_config as _apply_json_config
+    from catty_config_loader import _find_config_path as _find_json_config_path
+except Exception:
+    _apply_json_config = None
+    _find_json_config_path = None
+
 
 __plugin_meta__ = PluginMetadata(
     name="Catty QQ AI",
@@ -83,6 +91,10 @@ emoji_store = EmojiStore(config)
 ChatMessage = dict[str, object]
 _histories: DefaultDict[str, list[ChatMessage]] = defaultdict(list)
 _locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
+_hot_reload_config_path: Path | None = None
+_hot_reload_config_signature: tuple[int, int] | None = None
+_hot_reload_emoji_signature: tuple[tuple[str, int, int], ...] = ()
+_hot_reload_memory_signature: tuple[tuple[str, int, int], ...] = ()
 
 
 @dataclass(slots=True)
@@ -133,6 +145,12 @@ _turtle_soup_cooldowns: dict[str, float] = {}
 _local_critic_warmup_success_logged = False
 _consumed_reply_source_ids: dict[str, float] = {}
 _recent_emoji_paths: DefaultDict[str, deque[str]] = defaultdict(lambda: deque(maxlen=50))
+
+_WAKE_CONTEXT_MIN_MESSAGES = 16
+_WAKE_CONTEXT_MAX_MESSAGES = 50
+_WAKE_CONTEXT_SOFT_DIRECTED_MESSAGES = 32
+_WAKE_CONTEXT_CONTINUATION_MESSAGES = 44
+_WAKE_CONTEXT_AFTER_MESSAGES = 6
 
 
 def _has_api_key() -> bool:
@@ -384,28 +402,120 @@ def _remember_bot_repeat_for_event(event: MessageEvent, text: str) -> None:
     )
 
 
-def _wake_context_prompt(event: MessageEvent) -> str:
-    key = _conversation_queue_key(event)
-    recent = list(_recent_conversation_messages.get(key, ()))
-    if not recent:
-        return ""
+def _ordered_unique_recent_messages(recent: list[RecentConversationMessage]) -> list[RecentConversationMessage]:
+    ordered = sorted(recent, key=lambda item: item.created_at)
+    seen_ids: set[str] = set()
+    fallback_seen_at: dict[tuple[str, str, bool, str, bool], float] = {}
+    unique: list[RecentConversationMessage] = []
+    for item in ordered:
+        message_id = item.message_id.strip()
+        if message_id:
+            if message_id in seen_ids:
+                continue
+            seen_ids.add(message_id)
+            unique.append(item)
+            continue
+
+        fallback_key = (
+            item.user_id,
+            item.text,
+            item.is_bot,
+            item.target_user_id,
+            item.has_image,
+        )
+        last_seen_at = fallback_seen_at.get(fallback_key)
+        if last_seen_at is not None and item.created_at - last_seen_at < 2.0:
+            continue
+        fallback_seen_at[fallback_key] = item.created_at
+        unique.append(item)
+    return unique
+
+
+def _wake_context_message_limit(
+    event: MessageEvent,
+    incoming: ExtractedMessage | None,
+    *,
+    group_filter_context: bool = False,
+    bot_continuation: bool = False,
+    recent: list[RecentConversationMessage] | None = None,
+    current_index: int = -1,
+) -> int:
+    limit = _WAKE_CONTEXT_MIN_MESSAGES
+    if isinstance(event, PrivateMessageEvent):
+        limit = _WAKE_CONTEXT_SOFT_DIRECTED_MESSAGES
+    if group_filter_context:
+        limit = max(limit, _WAKE_CONTEXT_MIN_MESSAGES)
+    if bot_continuation:
+        limit = max(limit, _WAKE_CONTEXT_CONTINUATION_MESSAGES)
+    if incoming is not None:
+        if incoming.mentioned or incoming.replied_to_self or incoming.used_prefix:
+            limit = _WAKE_CONTEXT_MAX_MESSAGES
+        elif incoming.directed_strength == "direct_address":
+            limit = max(limit, _WAKE_CONTEXT_CONTINUATION_MESSAGES)
+        elif incoming.directed:
+            limit = max(limit, _WAKE_CONTEXT_SOFT_DIRECTED_MESSAGES)
+        if incoming.opportunistic or incoming.has_image:
+            limit = max(limit, _WAKE_CONTEXT_SOFT_DIRECTED_MESSAGES)
+    if recent is not None and current_index >= 0:
+        nearby_start = max(0, current_index - 10)
+        nearby_end = min(len(recent), current_index + 1)
+        if any(item.is_bot for item in recent[nearby_start:nearby_end]):
+            limit = max(limit, _WAKE_CONTEXT_CONTINUATION_MESSAGES)
+    return max(_WAKE_CONTEXT_MIN_MESSAGES, min(limit, _WAKE_CONTEXT_MAX_MESSAGES))
+
+
+def _find_current_recent_index(recent: list[RecentConversationMessage], event: MessageEvent) -> int:
     current_message_id = _event_message_id(event)
-    current_index = -1
     if current_message_id:
         for index, item in enumerate(recent):
             if item.message_id == current_message_id:
-                current_index = index
-                break
-    if current_index < 0:
-        for index in range(len(recent) - 1, -1, -1):
-            if recent[index].user_id == str(event.user_id):
-                current_index = index
-                break
-    if current_index < 0:
-        current_index = len(recent) - 1
+                return index
+    for index in range(len(recent) - 1, -1, -1):
+        if recent[index].user_id == str(event.user_id):
+            return index
+    return len(recent) - 1
 
-    start = max(0, current_index - 3)
-    end = min(len(recent), current_index + 4)
+
+def _recent_context_window(
+    recent: list[RecentConversationMessage],
+    current_index: int,
+    limit: int,
+) -> tuple[int, int]:
+    if not recent:
+        return 0, 0
+    limit = max(1, min(limit, len(recent)))
+    after_count = min(len(recent) - current_index - 1, min(_WAKE_CONTEXT_AFTER_MESSAGES, limit // 4))
+    before_count = limit - 1 - after_count
+    start = max(0, current_index - before_count)
+    end = min(len(recent), current_index + after_count + 1)
+    if end - start < limit:
+        start = max(0, end - limit)
+    if end - start < limit:
+        end = min(len(recent), start + limit)
+    return start, end
+
+
+def _wake_context_prompt(
+    event: MessageEvent,
+    incoming: ExtractedMessage | None = None,
+    *,
+    group_filter_context: bool = False,
+    bot_continuation: bool = False,
+) -> str:
+    key = _conversation_queue_key(event)
+    recent = _ordered_unique_recent_messages(list(_recent_conversation_messages.get(key, ())))
+    if not recent:
+        return ""
+    current_index = _find_current_recent_index(recent, event)
+    limit = _wake_context_message_limit(
+        event,
+        incoming,
+        group_filter_context=group_filter_context,
+        bot_continuation=bot_continuation,
+        recent=recent,
+        current_index=current_index,
+    )
+    start, end = _recent_context_window(recent, current_index, limit)
     lines: list[str] = []
     for index, item in enumerate(recent[start:end], start=start):
         marker = " <- 当前唤起消息" if index == current_index else ""
@@ -419,8 +529,14 @@ def _wake_context_prompt(event: MessageEvent) -> str:
     if not lines:
         return ""
     return (
-        "当前是由一条消息唤起的回复。下面给出当前唤起消息附近最多上 3 条和下 3 条的聊天上下文；"
+        "当前是由一条消息唤起的回复。下面给出本会话独立实时上下文，已按时间顺序整理并去重；"
+        f"群聊按群号隔离，最多 {limit} 条，本轮实际 {len(lines)} 条。"
+        f"如果少于 {_WAKE_CONTEXT_MIN_MESSAGES} 条，说明当前会话暂时没有更多可用缓存。"
         "实时场景通常只有上文和当前消息，若没有下文不要臆造。"
+        "请先定位带“<- 当前唤起消息”的发言者、它 @/回复/指向的对象，以及最近笨猫自己的发言；"
+        "不要把别的群友发言误认成当前用户原文，也不要因为更早消息更热闹就偏离当前唤起消息。"
+        "如果当前消息是在接前文、点名某个群友、要求评价某句称呼或梗，请结合上文选准回复目标；"
+        "如果上下文显示是在让你攻击他人，保持轻度玩笑边界，不要升级辱骂。"
         "如果上一条或近几条是笨猫自己刚刚向当前用户追问/邀请继续说话，而当前消息像回答或续聊，通常应该接住。"
         f"请主 AI 自己判断是否真的需要回复；如果只是误触发、重复回复同一条消息、或上下文显示不该接话，只输出 {NO_REPLY_MARKER}。\n"
         + "\n".join(lines)
@@ -468,6 +584,181 @@ def _persona_search_cooldown_message(event: MessageEvent, remaining: float) -> s
         f"每个人 10 分钟只有一次机会，还剩 {format_duration_cn(remaining)}，"
         "先让猫猫的搜索爪爪冷却一下。"
     )
+
+
+def _runtime_config_path() -> Path | None:
+    if _find_json_config_path is not None:
+        return _find_json_config_path()
+    path = Path.cwd() / "config.json"
+    return path if path.is_file() else None
+
+
+def _file_signature(path: Path | None) -> tuple[int, int] | None:
+    if path is None:
+        return None
+    try:
+        stat = path.stat()
+    except OSError:
+        return None
+    return (stat.st_mtime_ns, stat.st_size)
+
+
+def _tree_signature(paths: list[Path], *, suffixes: set[str] | None = None) -> tuple[tuple[str, int, int], ...]:
+    entries: list[tuple[str, int, int]] = []
+    seen: set[Path] = set()
+    for root in paths:
+        try:
+            resolved_root = root.resolve()
+        except OSError:
+            continue
+        if resolved_root in seen:
+            continue
+        seen.add(resolved_root)
+        if root.is_file():
+            candidates = [root]
+        elif root.is_dir():
+            candidates = [path for path in root.rglob("*") if path.is_file()]
+        else:
+            continue
+        for path in candidates:
+            if suffixes is not None and path.suffix.lower() not in suffixes:
+                continue
+            try:
+                stat = path.stat()
+                key = str(path.resolve())
+            except OSError:
+                continue
+            entries.append((key, stat.st_mtime_ns, stat.st_size))
+    return tuple(sorted(entries))
+
+
+def _config_from_environment() -> Config:
+    values = {
+        field_name: os.environ[env_name]
+        for field_name in Config.model_fields
+        if (env_name := field_name.upper()) in os.environ
+    }
+    return Config.model_validate(values)
+
+
+def _load_runtime_config_from_path(path: Path) -> Config | None:
+    if _apply_json_config is None:
+        logger.warning("Hot reload skipped config reload because catty_config_loader is unavailable")
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+    except json.JSONDecodeError as exc:
+        logger.warning(
+            f"Hot reload skipped invalid config.json at {path}:{exc.lineno}:{exc.colno}: {exc.msg}"
+        )
+        return None
+    except OSError as exc:
+        logger.warning(f"Hot reload failed to read config.json at {path}: {exc}")
+        return None
+    if not isinstance(data, dict):
+        logger.warning(f"Hot reload skipped config.json because root is not an object: {path}")
+        return None
+    managed_env_names = {field_name.upper() for field_name in Config.model_fields}
+    previous_env = {name: os.environ.get(name) for name in managed_env_names}
+    try:
+        for name in managed_env_names:
+            os.environ.pop(name, None)
+        _apply_json_config(data, path.parent)
+        return _config_from_environment()
+    except Exception as exc:
+        for name, value in previous_env.items():
+            if value is None:
+                os.environ.pop(name, None)
+            else:
+                os.environ[name] = value
+        logger.warning(f"Hot reload skipped invalid config values from {path}: {exc}")
+        return None
+
+
+def _emoji_paths_for_config(current_config: Config) -> list[Path]:
+    return [
+        Path(current_config.catty_emoji_dir).expanduser(),
+        Path(current_config.catty_emoji_download_dir).expanduser(),
+        Path(current_config.catty_emoji_manifest_path).expanduser(),
+    ]
+
+
+def _memory_paths_for_store(store: MemoryStore) -> list[Path]:
+    return [store.path, store.group_storage_dir, store.user_storage_dir]
+
+
+def _emoji_signature_for_config(current_config: Config) -> tuple[tuple[str, int, int], ...]:
+    return _tree_signature(_emoji_paths_for_config(current_config))
+
+
+def _memory_signature_for_store(store: MemoryStore) -> tuple[tuple[str, int, int], ...]:
+    return _tree_signature(_memory_paths_for_store(store), suffixes={".json"})
+
+
+def _sync_hot_reload_signatures() -> None:
+    global _hot_reload_config_path, _hot_reload_config_signature
+    global _hot_reload_emoji_signature, _hot_reload_memory_signature
+    _hot_reload_config_path = _runtime_config_path()
+    _hot_reload_config_signature = _file_signature(_hot_reload_config_path)
+    _hot_reload_emoji_signature = _emoji_signature_for_config(config)
+    _hot_reload_memory_signature = _memory_signature_for_store(memory_store)
+
+
+def _remember_hot_reload_config_signature(path: Path | None, signature: tuple[int, int] | None) -> None:
+    global _hot_reload_config_path, _hot_reload_config_signature
+    _hot_reload_config_path = path
+    _hot_reload_config_signature = signature
+
+
+def _apply_runtime_config(new_config: Config) -> None:
+    global config, memory_store, emoji_store
+    config = new_config
+    memory_store = MemoryStore(config)
+    emoji_store = EmojiStore(config)
+    _sync_hot_reload_signatures()
+
+
+def _reload_runtime_config_from_path(path: Path) -> bool:
+    new_config = _load_runtime_config_from_path(path)
+    if new_config is None:
+        return False
+    _apply_runtime_config(new_config)
+    logger.info(f"Hot reloaded config.json: {path}")
+    return True
+
+
+async def _hot_reload_loop() -> None:
+    _sync_hot_reload_signatures()
+    while True:
+        poll_seconds = max(float(config.catty_hot_reload_poll_seconds or 1.5), 0.2)
+        await asyncio.sleep(poll_seconds)
+        config_path = _runtime_config_path()
+        config_signature = _file_signature(config_path)
+        if config_path is not None and config_signature != _hot_reload_config_signature:
+            if _reload_runtime_config_from_path(config_path):
+                continue
+            _remember_hot_reload_config_signature(config_path, config_signature)
+        if not config.catty_hot_reload_enabled:
+            continue
+        emoji_signature = _emoji_signature_for_config(config)
+        if emoji_signature != _hot_reload_emoji_signature:
+            try:
+                emoji_store.refresh()
+                logger.info("Hot reloaded emoji files and manifest")
+            except Exception as exc:
+                logger.warning(f"Hot reload failed to refresh emoji store: {exc}")
+            finally:
+                _sync_hot_reload_signatures()
+            continue
+        memory_signature = _memory_signature_for_store(memory_store)
+        if memory_signature != _hot_reload_memory_signature:
+            try:
+                memory_store.refresh()
+                logger.info("Hot reloaded memory files")
+            except Exception as exc:
+                logger.warning(f"Hot reload failed to refresh memory store: {exc}")
+            finally:
+                _sync_hot_reload_signatures()
 
 
 def _anger_reply_decision_context(
@@ -1170,16 +1461,15 @@ async def _warm_local_critic_model() -> None:
 
 
 async def _local_critic_warmup_loop() -> None:
-    if not config.catty_local_critic_warmup_enabled or not _local_critic_enabled():
-        return
-    interval = max(float(config.catty_local_critic_warmup_interval_seconds or 300.0), 60.0)
     while True:
-        try:
-            await _warm_local_critic_model()
-        except httpx.HTTPError as exc:
-            logger.warning(f"Local critic Ollama warmup failed: {_http_error_detail(exc)}")
-        except Exception as exc:
-            logger.warning(f"Local critic Ollama warmup failed: {exc}")
+        if config.catty_local_critic_warmup_enabled and _local_critic_enabled():
+            try:
+                await _warm_local_critic_model()
+            except httpx.HTTPError as exc:
+                logger.warning(f"Local critic Ollama warmup failed: {_http_error_detail(exc)}")
+            except Exception as exc:
+                logger.warning(f"Local critic Ollama warmup failed: {exc}")
+        interval = max(float(config.catty_local_critic_warmup_interval_seconds or 300.0), 60.0)
         await asyncio.sleep(interval)
 
 
@@ -1808,24 +2098,59 @@ def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
 
 
 async def _candidate_group_ids(bot: Bot) -> list[str]:
-    if config.catty_allowed_group_ids:
-        return sorted(str(group_id) for group_id in config.catty_allowed_group_ids)
-
-    group_ids = set(memory_store.group_ids())
+    allowed_group_ids = {str(group_id) for group_id in config.catty_allowed_group_ids}
+    stored_group_ids = set(memory_store.group_ids())
     try:
         group_list = await bot.get_group_list()
     except Exception as exc:
         logger.warning(f"Failed to fetch group list for proactive bubbles: {exc}")
-    else:
-        if isinstance(group_list, list):
-            for group in group_list:
-                if isinstance(group, dict):
-                    group_id = group.get("group_id")
-                else:
-                    group_id = getattr(group, "group_id", None)
-                if group_id is not None:
-                    group_ids.add(str(group_id))
-    return sorted(group_ids)
+        return sorted(allowed_group_ids or stored_group_ids)
+
+    live_group_ids: set[str] = set()
+    if isinstance(group_list, list):
+        for group in group_list:
+            if isinstance(group, dict):
+                group_id = group.get("group_id")
+            else:
+                group_id = getattr(group, "group_id", None)
+            if group_id is not None:
+                live_group_ids.add(str(group_id))
+    removed_group_ids = sorted(stored_group_ids - live_group_ids)
+    for group_id in removed_group_ids:
+        _forget_removed_group(group_id, reason="not present in bot group list")
+    if allowed_group_ids:
+        missing_allowed = sorted(allowed_group_ids - live_group_ids)
+        if missing_allowed:
+            logger.warning(f"Configured proactive groups are not in current group list and will be skipped: {missing_allowed}")
+        return sorted(allowed_group_ids & live_group_ids)
+    return sorted(live_group_ids)
+
+
+def _is_removed_from_group_error(exc: Exception) -> bool:
+    parts = [
+        str(exc),
+        str(getattr(exc, "message", "") or ""),
+        str(getattr(exc, "wording", "") or ""),
+        str(getattr(exc, "retcode", "") or ""),
+    ]
+    text = "\n".join(parts)
+    return "已被移出该群" in text or "重新加群" in text
+
+
+def _forget_removed_group(group_id: str, *, reason: str) -> None:
+    scope = f"group:{group_id}"
+    removed = memory_store.remove_group_memory(group_id)
+    _histories.pop(scope, None)
+    _expression_repeats.pop(scope, None)
+    _group_filter_batches.pop(scope, None)
+    _recent_conversation_messages.pop(scope, None)
+    _recent_emoji_paths.pop(scope, None)
+    for key in [key for key in _bot_reply_continuations if key.startswith(f"{scope}:")]:
+        _bot_reply_continuations.pop(key, None)
+    for key in [key for key in _consumed_reply_source_ids if key.startswith(f"{scope}:")]:
+        _consumed_reply_source_ids.pop(key, None)
+    if removed:
+        logger.info(f"Removed stale group memory and disabled proactive bubbles for group {group_id}: {reason}")
 
 
 async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
@@ -1909,10 +2234,24 @@ def _compose_reply_message(
     return message if message else Message(text)
 
 
-def _should_quote_chat_reply(event: MessageEvent) -> bool:
+def _should_quote_chat_reply(
+    event: MessageEvent,
+    incoming: ExtractedMessage | None = None,
+    *,
+    group_filter_context: str = "",
+    bot_continuation: bool = False,
+) -> bool:
     if isinstance(event, PrivateMessageEvent) and not config.catty_reply_quote_private_enabled:
         return False
-    return _reply_quote_segment(event) is not None
+    if _reply_quote_segment(event) is None:
+        return False
+    if incoming is None or bot_continuation:
+        return True
+    if _direct_reply_required(event, incoming):
+        return True
+    if group_filter_context or incoming.opportunistic or incoming.needs_filter:
+        return False
+    return True
 
 
 def _sender_id_from_message(message: object) -> str:
@@ -2120,10 +2459,10 @@ async def observe_memory(bot: Bot, event: MessageEvent) -> None:
 
 
 async def _summary_loop() -> None:
-    if not _has_api_key():
-        return
     while True:
         await asyncio.sleep(60)
+        if not _has_api_key():
+            continue
         for group_id in memory_store.due_group_ids():
             try:
                 messages = memory_store.build_summary_messages(group_id)
@@ -2151,10 +2490,10 @@ async def _summary_loop() -> None:
 
 
 async def _proactive_bubble_loop() -> None:
-    if not config.catty_proactive_enabled or not _has_api_key():
-        return
     while True:
         await asyncio.sleep(max(config.catty_proactive_check_interval_seconds, 60.0))
+        if not config.catty_proactive_enabled or not _has_api_key():
+            continue
         bots = list(get_bots().values())
         if not bots:
             continue
@@ -2173,12 +2512,16 @@ async def _proactive_bubble_loop() -> None:
                 except httpx.HTTPError as exc:
                     logger.warning(f"Proactive bubble transport error for group {group_id}: {exc}")
                 except Exception as exc:
-                    logger.warning(f"Failed to send proactive bubble to group {group_id}: {exc}")
+                    if _is_removed_from_group_error(exc):
+                        _forget_removed_group(group_id, reason="send failed because bot was removed from group")
+                    else:
+                        logger.warning(f"Failed to send proactive bubble to group {group_id}: {exc}")
                 await asyncio.sleep(2)
 
 
 @get_driver().on_startup
 async def start_memory_summary_loop() -> None:
+    asyncio.create_task(_hot_reload_loop())
     asyncio.create_task(_summary_loop())
     asyncio.create_task(_proactive_bubble_loop())
     asyncio.create_task(_local_critic_warmup_loop())
@@ -2292,7 +2635,12 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             web_search_context = "本轮用户要求联网搜索，但当前配置关闭了 web_search.enabled。请用猫系人格说明联网搜索暂时不可用。"
 
         star_resonance_context = build_star_resonance_context(incoming.text)
-        wake_context = _wake_context_prompt(event)
+        wake_context = _wake_context_prompt(
+            event,
+            incoming,
+            group_filter_context=bool(group_filter_context),
+            bot_continuation=bool(state.get("catty_recent_bot_continuation")),
+        )
         bot_continuation_context = (
             _bot_continuation_judgement_prompt(event)
             if state.get("catty_recent_bot_continuation")
@@ -2418,7 +2766,12 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             memory_store.record_special_care_reply_sent(event, "\n".join(chunks))
 
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
-        quote_pending = _should_quote_chat_reply(event)
+        quote_pending = _should_quote_chat_reply(
+            event,
+            incoming,
+            group_filter_context=group_filter_context,
+            bot_continuation=bool(state.get("catty_recent_bot_continuation")),
+        )
         for chunk in chunks[:-1]:
             _remember_bot_reply_for_event(event, chunk)
             await matcher.send(_compose_reply_message(event, text=chunk, quote=quote_pending))

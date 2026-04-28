@@ -288,5 +288,11 @@
     "min_interval_minutes": 120,
     "response_window_minutes": 30,
     "recent_messages": 40
+  },
+  "hot_reload": {
+    "enabled": true,
+    "poll_seconds": 1.5,
+    "debounce_seconds": 1,
+    "restart_on_code_change": true
   }
 }

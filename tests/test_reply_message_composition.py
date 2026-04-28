@@ -1,13 +1,14 @@
 from pathlib import Path
 import asyncio
 import importlib.util
+import re
 import sys
 import tempfile
 import types
 import unittest
 
 import nonebot
-from nonebot.adapters.onebot.v11 import GroupMessageEvent, Message
+from nonebot.adapters.onebot.v11 import GroupMessageEvent, Message, MessageSegment
 from nonebot.adapters.onebot.v11.event import Sender
 
 
@@ -35,8 +36,13 @@ def _load_plugin_module():
 _plugin = _load_plugin_module()
 
 
-def _group_event(message_id: int = 123) -> GroupMessageEvent:
-    message = Message("猫猫看这个")
+def _group_event(message_id: int = 123, text: str = "猫猫看这个", *, mention_self: bool = False) -> GroupMessageEvent:
+    if mention_self:
+        message = Message([MessageSegment.at(999), MessageSegment.text(f" {text}")])
+        raw_message = f"[CQ:at,qq=999] {text}"
+    else:
+        message = Message(text)
+        raw_message = text
     return GroupMessageEvent(
         time=0,
         self_id=999,
@@ -47,11 +53,15 @@ def _group_event(message_id: int = 123) -> GroupMessageEvent:
         message_id=message_id,
         message=message,
         original_message=message,
-        raw_message="猫猫看这个",
+        raw_message=raw_message,
         font=0,
         sender=Sender(user_id=20002, nickname="群友", card="群友"),
         group_id=10001,
     )
+
+
+def _wake_context_rows(prompt: str) -> list[str]:
+    return [line for line in prompt.splitlines() if re.match(r"^[+-]\d+\. ", line)]
 
 
 class ReplyMessageCompositionTests(unittest.TestCase):
@@ -70,6 +80,7 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         _plugin.config.catty_reply_quote_enabled = True
         _plugin.config.catty_reply_quote_private_enabled = False
         _plugin.config.catty_reply_mix_emoji_with_text = True
+        _plugin._recent_conversation_messages.clear()
 
     def tearDown(self) -> None:
         _plugin.config.catty_reply_quote_enabled = self._old_quote_enabled
@@ -84,6 +95,7 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         _plugin.config.catty_local_critic_enabled = self._old_local_critic_enabled
         _plugin.config.catty_local_critic_force_direct_reply = self._old_force_direct_reply
         _plugin._recent_emoji_paths.clear()
+        _plugin._recent_conversation_messages.clear()
 
     def test_reply_message_can_quote_text_and_image_together(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -118,6 +130,55 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         self.assertIn("图片、壁纸、表情包或图包", context)
         self.assertIn("不要编造搜索结果", context)
         self.assertNotIn("DuckDuckGo", context)
+
+    def test_invalid_hot_reload_config_does_not_replace_current_config(self) -> None:
+        old_model = _plugin.config.catty_openai_model
+        with tempfile.TemporaryDirectory() as directory:
+            config_path = Path(directory) / "config.json"
+            config_path.write_text('{"ai": ', encoding="utf-8")
+
+            loaded = _plugin._load_runtime_config_from_path(config_path)
+
+        self.assertIsNone(loaded)
+        self.assertEqual(_plugin.config.catty_openai_model, old_model)
+
+    def test_candidate_group_ids_prunes_removed_memory_groups(self) -> None:
+        class FakeBot:
+            async def get_group_list(self):
+                return [{"group_id": 10001}]
+
+        old_memory_store = _plugin.memory_store
+        old_allowed_group_ids = _plugin.config.catty_allowed_group_ids
+        try:
+            with tempfile.TemporaryDirectory() as directory:
+                store = _plugin.MemoryStore(
+                    _plugin.Config(
+                        catty_memory_enabled=True,
+                        catty_memory_path=str(Path(directory) / "memory.json"),
+                        catty_memory_group_storage_dir=str(Path(directory) / "groups"),
+                        catty_memory_user_storage_dir=str(Path(directory) / "users"),
+                    )
+                )
+                store._data["groups"] = {
+                    "10001": {"summary": "live group"},
+                    "20002": {"summary": "stale group"},
+                }
+                store._save()
+                _plugin.memory_store = store
+                _plugin.config.catty_allowed_group_ids = set()
+
+                group_ids = asyncio.run(_plugin._candidate_group_ids(FakeBot()))
+
+                self.assertEqual(group_ids, ["10001"])
+                self.assertEqual(store.group_ids(), ["10001"])
+        finally:
+            _plugin.memory_store = old_memory_store
+            _plugin.config.catty_allowed_group_ids = old_allowed_group_ids
+
+    def test_removed_group_send_error_is_detected(self) -> None:
+        exc = RuntimeError("发送失败，你已被移出该群，请重新加群。")
+
+        self.assertTrue(_plugin._is_removed_from_group_error(exc))
 
     def test_quote_can_be_disabled(self) -> None:
         _plugin.config.catty_reply_quote_enabled = False
@@ -174,6 +235,112 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         self.assertIn("先回答 B", prompt)
         self.assertIn("冒号后就是用户完整原文", prompt)
         self.assertIn("不要只吐槽、玩梗或空泛追问", prompt)
+
+    def test_wake_context_uses_hard_trigger_window_up_to_fifty_messages(self) -> None:
+        key = "group:10001"
+        for index in range(1, 61):
+            _plugin._recent_conversation_messages[key].append(
+                _plugin.RecentConversationMessage(
+                    message_id=str(index),
+                    user_id="20002",
+                    display_name="群友",
+                    text="猫猫看这个" if index == 60 else f"第{index}条",
+                    has_image=False,
+                    created_at=float(index),
+                )
+            )
+        event = _group_event(60, mention_self=True)
+        incoming = _plugin.extract_incoming_message(str(event.self_id), event, _plugin.config)
+        assert incoming is not None
+
+        prompt = _plugin._wake_context_prompt(event, incoming)
+        rows = _wake_context_rows(prompt)
+
+        self.assertEqual(len(rows), 50)
+        self.assertIn("最多 50 条", prompt)
+        self.assertIn("按时间顺序整理并去重", prompt)
+        self.assertIn("群聊按群号隔离", prompt)
+        self.assertIn("第11条", rows[0])
+        self.assertNotIn("第10条", prompt)
+        self.assertIn("猫猫看这个", rows[-1])
+        self.assertIn("<- 当前唤起消息", rows[-1])
+
+    def test_wake_context_uses_min_window_for_loose_group_filter_messages(self) -> None:
+        key = "group:10001"
+        for index in range(1, 31):
+            _plugin._recent_conversation_messages[key].append(
+                _plugin.RecentConversationMessage(
+                    message_id=str(index),
+                    user_id="20002",
+                    display_name="群友",
+                    text=f"第{index}条",
+                    has_image=False,
+                    created_at=float(index),
+                )
+            )
+        event = _group_event(30, text="第30条")
+        loose_incoming = types.SimpleNamespace(
+            mentioned=False,
+            replied_to_self=False,
+            used_prefix=False,
+            directed=False,
+            directed_strength="none",
+            opportunistic=False,
+            has_image=False,
+        )
+
+        prompt = _plugin._wake_context_prompt(event, loose_incoming, group_filter_context=True)
+        rows = _wake_context_rows(prompt)
+
+        self.assertEqual(len(rows), 16)
+        self.assertIn("最多 16 条", prompt)
+        self.assertIn("第15条", rows[0])
+        self.assertIn("第30条", rows[-1])
+        self.assertIn("<- 当前唤起消息", rows[-1])
+
+    def test_wake_context_sorts_by_time_and_deduplicates_message_ids(self) -> None:
+        key = "group:10001"
+        for message_id, text, created_at in [
+            ("3", "当前", 3.0),
+            ("2", "重复", 2.0),
+            ("1", "早", 1.0),
+            ("2", "重复", 2.1),
+        ]:
+            _plugin._recent_conversation_messages[key].append(
+                _plugin.RecentConversationMessage(
+                    message_id=message_id,
+                    user_id="20002",
+                    display_name="群友",
+                    text=text,
+                    has_image=False,
+                    created_at=created_at,
+                )
+            )
+        event = _group_event(3, text="当前")
+
+        prompt = _plugin._wake_context_prompt(event)
+        rows = _wake_context_rows(prompt)
+
+        row_texts = [row.split(": ", 1)[1].split(" <-", 1)[0] for row in rows]
+        self.assertEqual(row_texts, ["早", "重复", "当前"])
+        self.assertEqual(row_texts.count("重复"), 1)
+
+    def test_group_filter_reply_does_not_quote_unselected_current_message(self) -> None:
+        event = _group_event(456, text="普通群聊")
+        loose_incoming = types.SimpleNamespace(
+            mentioned=False,
+            replied_to_self=False,
+            used_prefix=False,
+            directed=False,
+            directed_strength="none",
+            needs_filter=True,
+            opportunistic=False,
+            has_image=False,
+        )
+
+        self.assertFalse(
+            _plugin._should_quote_chat_reply(event, loose_incoming, group_filter_context="批量窗口")
+        )
 
     def test_direct_trigger_no_reply_is_forced_without_local_critic(self) -> None:
         event = _group_event(456)

@@ -309,6 +309,12 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "allowed_user_ids": [],
         "allowed_group_ids": [],
     },
+    "hot_reload": {
+        "enabled": True,
+        "poll_seconds": 1.5,
+        "debounce_seconds": 1.0,
+        "restart_on_code_change": True,
+    },
 }
 
 
@@ -631,6 +637,12 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     access = _section(data, "access")
     _set_env("CATTY_ALLOWED_USER_IDS", access.get("allowed_user_ids"), json_value=True)
     _set_env("CATTY_ALLOWED_GROUP_IDS", access.get("allowed_group_ids"), json_value=True)
+
+    hot_reload = _section(data, "hot_reload")
+    _set_env("CATTY_HOT_RELOAD_ENABLED", hot_reload.get("enabled"))
+    _set_env("CATTY_HOT_RELOAD_POLL_SECONDS", hot_reload.get("poll_seconds"))
+    _set_env("CATTY_HOT_RELOAD_DEBOUNCE_SECONDS", hot_reload.get("debounce_seconds"))
+    _set_env("CATTY_HOT_RELOAD_RESTART_ON_CODE_CHANGE", hot_reload.get("restart_on_code_change"))
 
 
 def load_config_to_env() -> LoadedConfig | None:

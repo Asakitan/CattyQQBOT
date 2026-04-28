@@ -1,5 +1,7 @@
 from pathlib import Path
+from datetime import datetime, timedelta, timezone
 import importlib.util
+import json
 import sys
 import tempfile
 import types
@@ -100,6 +102,34 @@ class MemoryIsolationTests(unittest.TestCase):
             self.assertNotIn("private_profile", store._data["users"]["20002"])
             self.assertEqual(store._data["groups"]["10001"]["members"]["20002"]["display_name"], "群名片")
 
+    def test_refresh_reloads_modified_entity_files(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            store = _store(directory)
+            store.remember_event(_group_event(10001, 20002, "旧名片"))
+            group_file = Path(directory) / "groups" / "group_10001.json"
+            payload = json.loads(group_file.read_text(encoding="utf-8"))
+            payload["data"]["members"]["20002"]["display_name"] = "新名片"
+            group_file.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+
+            store.refresh()
+
+            self.assertEqual(store._data["groups"]["10001"]["members"]["20002"]["display_name"], "新名片")
+
+    def test_remove_group_memory_deletes_group_file_and_anger_state(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            store = _store(directory)
+            event = _group_event(10001, 20002, "群名片")
+            store.remember_event(event)
+            store.update_user_anger(event, delta=10, reason="测试", useless=True, mute_threshold=100, cooldown_seconds=60)
+            group_file = Path(directory) / "groups" / "group_10001.json"
+
+            removed = store.remove_group_memory("10001")
+
+            self.assertTrue(removed)
+            self.assertNotIn("10001", store._data["groups"])
+            self.assertFalse(group_file.exists())
+            self.assertFalse(any(str(key).startswith("group:10001:") for key in store._data["anger"]))
+
     def test_group_reply_context_can_use_same_user_memory_but_not_other_group_profile(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             store = _store(directory)
@@ -166,6 +196,78 @@ class MemoryIsolationTests(unittest.TestCase):
                 store.due_proactive_group_ids(["10001"], max_daily=5, min_interval_minutes=1),
                 ["10001"],
             )
+
+    def test_corpus_entries_store_content_temperature(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            store = _store(directory)
+
+            store.remember_corpus_event(_group_event(10001, 20002, "群名片"), "猴屁股旧梗")
+
+            corpus = store._data["groups"]["10001"]["corpus"]
+            self.assertEqual(corpus[-1]["content_temperature"], 1.0)
+            self.assertIn("content_touched_at", corpus[-1])
+            self.assertEqual(corpus[-1]["text"], "猴屁股旧梗")
+
+    def test_corpus_temperature_cools_old_unmentioned_content(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            store = _store(directory)
+            old_time = (datetime.now(timezone.utc) - timedelta(hours=3)).isoformat(timespec="seconds")
+            now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            corpus = [
+                {
+                    "time": old_time,
+                    "user_id": "20002",
+                    "display_name": "群友",
+                    "text": "猴屁股旧梗",
+                    "has_image": False,
+                    "content_temperature": 1.0,
+                    "content_touched_at": old_time,
+                },
+                {
+                    "time": now,
+                    "user_id": "20003",
+                    "display_name": "群友B",
+                    "text": "现在聊排位",
+                    "has_image": False,
+                    "content_temperature": 1.0,
+                    "content_touched_at": now,
+                },
+            ]
+            store._data["groups"]["10001"] = {
+                "summary": "",
+                "corpus": corpus,
+                "members": {},
+                "member_profiles": {},
+                "mention_profiles": {},
+            }
+
+            all_lines = store._corpus_lines(corpus, 10)
+            hot_lines = store._corpus_lines(
+                corpus,
+                10,
+                min_temperature=_memory.CONTENT_TEMPERATURE_COLD_THRESHOLD,
+            )
+            proactive = store.build_proactive_context("10001", recent_limit=10)
+
+            self.assertIn("[温度", all_lines[0])
+            self.assertIn("猴屁股旧梗", all_lines[0])
+            self.assertFalse(any("猴屁股旧梗" in line for line in hot_lines))
+            self.assertIn("现在聊排位", "\n".join(hot_lines))
+            self.assertNotIn("猴屁股旧梗", proactive)
+            self.assertIn("低温内容不要主动续", proactive)
+
+    def test_summary_prompt_treats_low_temperature_as_background(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            store = _store(directory)
+            store.remember_corpus_event(_group_event(10001, 20002, "群名片"), "一次性玩笑")
+
+            messages = store.build_summary_messages("10001")
+            prompt = str(messages[0]["content"])
+            user_content = str(messages[1]["content"])
+
+            self.assertIn("温度0-1", prompt)
+            self.assertIn("不要写进摘要", prompt)
+            self.assertIn("[温度", user_content)
 
     def test_private_context_does_not_use_group_profile(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

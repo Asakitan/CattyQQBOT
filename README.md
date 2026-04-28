@@ -199,7 +199,7 @@ ai 清空记忆缓存
 
 优先级是：`group_user_titles` 指定群内专属称呼 > `user_titles` 全局称呼 > `group_titles` 群默认称呼 > `群友`。
 
-所有允许的群都会记录待压缩语料，并按 `summary_interval_minutes` 定时压缩成长期摘要；摘要会在后续对话里提供给模型，用来形成群印象和群友画像。生成长期摘要后，当前待压缩语料会自动清空。私聊也会按人物单独记录语料并定时压缩，用来记住用户偏好、称呼和重要事实。主回复线程还会额外加入一条很短的“笨猫人格记忆”，把“笨猫/猫猫/米雪儿/你都是当前助手本人”、回复节奏和称呼规则固定住；如果模型有客服腔、报告腔、第三人称说笨猫等脱离人格倾向，会被要求先在心里重读主 prompt 和笨猫人格记忆，再重新组织回复。主线程还会追加“主回复智能策略”，要求模型先判断任务类型、主语指代、上下文、记忆和是否需要澄清，再给最终正文，减少关键词式傻回复。
+所有允许的群都会记录待压缩语料，并按 `summary_interval_minutes` 定时压缩成长期摘要；摘要会在后续对话里提供给模型，用来形成群印象和群友画像。生成长期摘要后，当前待压缩语料会自动清空。私聊也会按人物单独记录语料并定时压缩，用来记住用户偏好、称呼和重要事实。每条待压缩语料会带 `content_temperature`，新内容温度高，随着时间和后续消息自然降温；低温旧梗、脏话、露骨玩笑或攻击性称呼只作背景，摘要和主动冒泡都会被提醒不要在没人重新提起时主动续聊。主回复线程还会额外加入一条很短的“笨猫人格记忆”，把“笨猫/猫猫/米雪儿/你都是当前助手本人”、回复节奏和称呼规则固定住；如果模型有客服腔、报告腔、第三人称说笨猫等脱离人格倾向，会被要求先在心里重读主 prompt 和笨猫人格记忆，再重新组织回复。主线程还会追加“主回复智能策略”，要求模型先判断任务类型、主语指代、上下文、记忆和是否需要澄清，再给最终正文，减少关键词式傻回复。
 
 `special_group_ids` 是旧特别关心群配置：当前不再用它限制总结范围，也不再用短活跃窗口控制普通群插话。普通群聊的长期主动观察由 `filter.group_batch_messages` 和 `filter.group_batch_seconds` 控制；到达批次后 AI 会自行判断是否值得插话，也可以选择不回复。
 
@@ -230,6 +230,8 @@ ai 清空记忆缓存
 脚本会下载项目内便携 Ollama 并拉取 `qwen2.5:1.5b`；临时不想拉模型时加 `-SkipPull`。
 
 服务器 Python 环境：运行 `install_python_env.bat` 会自动寻找或安装 Python 3.11、创建 `.venv`、安装依赖，然后生成只用于启动的 `start_catty.bat`。安装脚本成功后会自动删除自己；以后服务器直接运行 `start_catty.bat`。
+
+热更新：`start_catty.bat` 默认会先启动 `scripts/catty_hot_reload.py` 守护进程，再由守护进程拉起 `bot.py`。`config.json`、`emojis/manifest.json`、`emojis/`、`memory.json`、`memory_groups/`、`memory_users/` 会在运行中自动重读；`src/`、`scripts/`、`bot.py`、`catty_config_loader.py`、`catty_integrations.py`、`pyproject.toml`、`CattyQQAI.spec`、`README.md` 等项目文件变化会触发子进程自动重启，让替换后的代码完整生效。临时调试不想用守护时，先设置 `CATTY_NO_HOT_RELOAD=1` 再运行 `start_catty.bat`。
 
 ## 打包 exe
 
@@ -394,7 +396,7 @@ dist/CattyQQAI.exe
 | `chat.group_require_mention_or_prefix` | `true` | 群聊是否必须艾特或前缀 |
 | `chat.private_require_prefix` | `false` | 私聊是否必须前缀 |
 | `chat.history_turns` | `16` | 每个会话保留的上下文轮数 |
-| `chat` 唤起上下文 | 自动 | 入口被唤起后，会把当前唤起消息附近最多上 3 条/下 3 条近期聊天交给主 AI 判断；主 AI 可输出 `NO_REPLY` 安静不回 |
+| `chat` 唤起上下文 | 自动 | 入口被唤起后，会按群/私聊隔离、按时间去重整理近期聊天给主 AI 判断；普通群批量至少保留可用的 16 条，越明确指向猫猫窗口越大，最多 50 条；主 AI 可输出 `NO_REPLY` 安静不回 |
 | `chat.reply_max_chars` | `1800` | 单条回复超过该长度时最多切成两条发送 |
 | `chat.reply_human_split_enabled` | `true` | 是否允许本地概率判断本轮是否追加语义分段提示 |
 | `chat.reply_human_split_probability` | `0.35` | 分段提示的本地触发概率，不再额外调用 filter API |
@@ -450,6 +452,10 @@ dist/CattyQQAI.exe
 | `proactive.recent_messages` | `40` | 主动冒泡时参考的近期群聊条数 |
 | `access.allowed_user_ids` | `[]` | 只允许这些 QQ 用户 |
 | `access.allowed_group_ids` | `[]` | 只允许这些 QQ 群 |
+| `hot_reload.enabled` | `true` | 是否启用运行时配置/记忆/表情自动重读；代码文件热替换由启动守护处理 |
+| `hot_reload.poll_seconds` | `1.5` | 热更新轮询间隔秒数 |
+| `hot_reload.debounce_seconds` | `1` | 守护进程检测到代码文件变化后的合并等待秒数 |
+| `hot_reload.restart_on_code_change` | `true` | 守护进程检测到项目代码/脚本/文档白名单变化时是否自动重启子进程 |
 
 `ai.extra_headers` 示例：
 

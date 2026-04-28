@@ -26,6 +26,14 @@ class ConfigTests(unittest.TestCase):
         self.assertEqual(config.catty_emoji_diversity_recent_window, 8)
         self.assertEqual(config.catty_emoji_diversity_candidate_pool, 6)
 
+    def test_hot_reload_defaults_are_enabled(self) -> None:
+        config = _config.Config()
+
+        self.assertTrue(config.catty_hot_reload_enabled)
+        self.assertEqual(config.catty_hot_reload_poll_seconds, 1.5)
+        self.assertEqual(config.catty_hot_reload_debounce_seconds, 1.0)
+        self.assertTrue(config.catty_hot_reload_restart_on_code_change)
+
     def test_special_care_user_ids_parse_from_json_strings(self) -> None:
         config = _config.Config(
             catty_special_care_user_ids="[1001, 1002]",

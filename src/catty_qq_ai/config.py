@@ -175,6 +175,10 @@ class Config(BaseModel):
     catty_allowed_user_ids: set[int] = Field(default_factory=set)
     catty_allowed_group_ids: set[int] = Field(default_factory=set)
     catty_http_proxy: str = ""
+    catty_hot_reload_enabled: bool = True
+    catty_hot_reload_poll_seconds: float = 1.5
+    catty_hot_reload_debounce_seconds: float = 1.0
+    catty_hot_reload_restart_on_code_change: bool = True
 
     @field_validator(
         "catty_openai_base_url",
@@ -378,6 +382,8 @@ class Config(BaseModel):
         "catty_proactive_min_interval_minutes",
         "catty_proactive_response_window_minutes",
         "catty_proactive_recent_messages",
+        "catty_hot_reload_poll_seconds",
+        "catty_hot_reload_debounce_seconds",
         mode="before",
     )
     @classmethod

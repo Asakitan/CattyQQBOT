@@ -120,6 +120,45 @@ class ConfigLoaderTests(unittest.TestCase):
         self.assertEqual(window, "10")
         self.assertEqual(pool, "8")
 
+    def test_hot_reload_flags_are_exported(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            base_dir = Path(directory)
+            data = {
+                "server": {},
+                "qq": {},
+                "ai": {},
+                "audit_ai": {},
+                "vision": {},
+                "filter": {},
+                "local_critic": {},
+                "local_training": {},
+                "web_search": {},
+                "turtle_soup": {},
+                "chat": {},
+                "emoji": {},
+                "memory": {},
+                "proactive": {},
+                "access": {},
+                "hot_reload": {
+                    "enabled": True,
+                    "poll_seconds": 2,
+                    "debounce_seconds": 0.5,
+                    "restart_on_code_change": False,
+                },
+            }
+
+            with patch.dict(os.environ, {}, clear=True):
+                _loader._apply_config(data, base_dir)
+                enabled = os.environ["CATTY_HOT_RELOAD_ENABLED"]
+                poll = os.environ["CATTY_HOT_RELOAD_POLL_SECONDS"]
+                debounce = os.environ["CATTY_HOT_RELOAD_DEBOUNCE_SECONDS"]
+                restart = os.environ["CATTY_HOT_RELOAD_RESTART_ON_CODE_CHANGE"]
+
+        self.assertEqual(enabled, "true")
+        self.assertEqual(poll, "2")
+        self.assertEqual(debounce, "0.5")
+        self.assertEqual(restart, "false")
+
 
 if __name__ == "__main__":
     unittest.main()

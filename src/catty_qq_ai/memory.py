@@ -14,6 +14,11 @@ from .reply_markers import NO_REPLY_MARKER
 
 
 OWNER_TITLE = "主人"
+CONTENT_TEMPERATURE_INITIAL = 1.0
+CONTENT_TEMPERATURE_HALF_LIFE_MINUTES = 30.0
+CONTENT_TEMPERATURE_TURN_DECAY = 0.92
+CONTENT_TEMPERATURE_COLD_THRESHOLD = 0.25
+CONTENT_TEMPERATURE_SUMMARY_COLD_THRESHOLD = 0.30
 
 
 def _now() -> str:
@@ -31,6 +36,66 @@ def _parse_time(value: Any) -> datetime | None:
         return datetime.fromisoformat(str(value))
     except ValueError:
         return None
+
+
+def _utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def _as_aware_utc(value: datetime) -> datetime:
+    if value.tzinfo is None:
+        return value.replace(tzinfo=timezone.utc)
+    return value.astimezone(timezone.utc)
+
+
+def _clamp_temperature(value: Any) -> float:
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        numeric = CONTENT_TEMPERATURE_INITIAL
+    return max(0.0, min(numeric, 1.0))
+
+
+def _content_temperature(item: dict[str, Any], *, newer_messages: int = 0, now: datetime | None = None) -> float:
+    base = _clamp_temperature(
+        item.get("content_temperature", item.get("temperature", CONTENT_TEMPERATURE_INITIAL))
+    )
+    seen_at = _parse_time(item.get("content_touched_at") or item.get("last_seen_at") or item.get("time"))
+    if seen_at is None:
+        age_factor = 1.0
+    else:
+        current = now or _utc_now()
+        age_minutes = max((_as_aware_utc(current) - _as_aware_utc(seen_at)).total_seconds() / 60.0, 0.0)
+        age_factor = 0.5 ** (age_minutes / CONTENT_TEMPERATURE_HALF_LIFE_MINUTES)
+    turn_factor = CONTENT_TEMPERATURE_TURN_DECAY ** max(int(newer_messages), 0)
+    return max(0.01, min(base * age_factor * turn_factor, 1.0))
+
+
+def _temperature_label(value: float) -> str:
+    if value >= 0.65:
+        return "热"
+    if value >= CONTENT_TEMPERATURE_COLD_THRESHOLD:
+        return "降温"
+    return "冷"
+
+
+def _new_corpus_entry(
+    *,
+    user_id: str,
+    display_name: str,
+    text: str,
+    has_image: bool,
+) -> dict[str, Any]:
+    now = _now()
+    return {
+        "time": now,
+        "user_id": user_id,
+        "display_name": display_name,
+        "text": text,
+        "has_image": has_image,
+        "content_temperature": CONTENT_TEMPERATURE_INITIAL,
+        "content_touched_at": now,
+    }
 
 
 def _sender_name(event: MessageEvent) -> str:
@@ -133,6 +198,11 @@ class MemoryStore:
         if self.enabled:
             self._load()
 
+    def refresh(self) -> None:
+        self._data = {"users": {}, "groups": {}, "images": {}, "anger": {}}
+        if self.enabled:
+            self._load()
+
     def _resolve_storage_dir(self, configured: str, fallback_name: str) -> Path:
         raw = configured.strip()
         directory = Path(raw).expanduser() if raw else self.path.with_name(fallback_name)
@@ -210,6 +280,26 @@ class MemoryStore:
         if not isinstance(groups, dict):
             return []
         return sorted(str(group_id) for group_id in groups)
+
+    def remove_group_memory(self, group_id: object) -> bool:
+        group_id_text = str(group_id)
+        groups = self._data.setdefault("groups", {})
+        existed = isinstance(groups, dict) and group_id_text in groups
+        if isinstance(groups, dict):
+            groups.pop(group_id_text, None)
+        anger = self._data.get("anger")
+        if isinstance(anger, dict):
+            prefix = f"group:{group_id_text}:"
+            for key in [key for key in anger if str(key).startswith(prefix)]:
+                anger.pop(key, None)
+        group_file = self._group_file(group_id_text)
+        file_existed = group_file.exists()
+        try:
+            group_file.unlink(missing_ok=True)
+        except OSError:
+            pass
+        self._save()
+        return existed or file_existed
 
     def _write_entity_file(self, path: Path, id_key: str, entity_id: str, data: dict[str, Any]) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -408,13 +498,12 @@ class MemoryStore:
         if not isinstance(corpus, list):
             corpus = []
             group["corpus"] = corpus
-        entry = {
-            "time": _now(),
-            "user_id": str(event.user_id),
-            "display_name": _sender_name(event),
-            "text": content,
-            "has_image": has_image,
-        }
+        entry = _new_corpus_entry(
+            user_id=str(event.user_id),
+            display_name=_sender_name(event),
+            text=content,
+            has_image=has_image,
+        )
         corpus.append(entry)
         del corpus[:-self.max_corpus_messages]
 
@@ -448,7 +537,14 @@ class MemoryStore:
         content = text.strip() if text.strip() else ("[图片]" if has_image else "")
         if not content:
             return
-        corpus.append({"time": _now(), "display_name": _sender_name(event), "text": content, "has_image": has_image})
+        corpus.append(
+            _new_corpus_entry(
+                user_id=str(event.user_id),
+                display_name=_sender_name(event),
+                text=content,
+                has_image=has_image,
+            )
+        )
         del corpus[:-self.private_summary_messages]
         self._save()
 
@@ -466,13 +562,12 @@ class MemoryStore:
             if not isinstance(corpus, list):
                 corpus = []
                 group["corpus"] = corpus
-            entry = {
-                "time": _now(),
-                "user_id": str(event.user_id),
-                "display_name": _sender_name(event),
-                "text": content,
-                "has_image": True,
-            }
+            entry = _new_corpus_entry(
+                user_id=str(event.user_id),
+                display_name=_sender_name(event),
+                text=content,
+                has_image=True,
+            )
             corpus.append(entry)
             del corpus[:-self.max_corpus_messages]
 
@@ -498,7 +593,14 @@ class MemoryStore:
             if not isinstance(corpus, list):
                 corpus = []
                 user["private_corpus"] = corpus
-            corpus.append({"time": _now(), "display_name": _sender_name(event), "text": content, "has_image": True})
+            corpus.append(
+                _new_corpus_entry(
+                    user_id=str(event.user_id),
+                    display_name=_sender_name(event),
+                    text=content,
+                    has_image=True,
+                )
+            )
             del corpus[:-self.private_summary_messages]
             self._save()
 
@@ -799,16 +901,33 @@ class MemoryStore:
         state["pending"] = {"sent_at": now, "text": text.strip()[:500]}
         self._save()
 
-    def _corpus_lines(self, corpus: list[Any], limit: int) -> list[str]:
+    def _corpus_lines(
+        self,
+        corpus: list[Any],
+        limit: int,
+        *,
+        min_temperature: float = 0.0,
+        include_temperature: bool = True,
+    ) -> list[str]:
         lines: list[str] = []
-        for item in corpus[-limit:]:
+        selected = corpus[-limit:] if limit > 0 else []
+        start_index = max(len(corpus) - len(selected), 0)
+        now = _utc_now()
+        for offset, item in enumerate(selected):
             if not isinstance(item, dict):
+                continue
+            newer_messages = max(len(corpus) - (start_index + offset) - 1, 0)
+            temperature = _content_temperature(item, newer_messages=newer_messages, now=now)
+            if temperature < min_temperature:
                 continue
             name = str(item.get("display_name") or item.get("user_id") or "群友")
             user_id = str(item.get("user_id") or "")
             text = str(item.get("text") or "")
             image = "+图" if item.get("has_image") else ""
-            lines.append(f"{name}({user_id}{image}): {text}")
+            temperature_prefix = ""
+            if include_temperature:
+                temperature_prefix = f"[温度{temperature:.2f}/{_temperature_label(temperature)}] "
+            lines.append(f"{temperature_prefix}{name}({user_id}{image}): {text}")
         return lines
 
     def build_summary_messages(self, group_id: str) -> list[dict[str, object]]:
@@ -820,6 +939,8 @@ class MemoryStore:
         prompt = (
             '压缩QQ群长期记忆，省token。只输出JSON：'
             '{"summary":"<=2500字","members":[{"user_id":"QQ","display_name":"名","gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}]}。'
+            f"语料行前的温度0-1表示当前话题热度；低于{CONTENT_TEMPERATURE_SUMMARY_COLD_THRESHOLD:.2f}的旧梗、脏话、攻击性/露骨玩笑只作背景，"
+            "除非多次重复或明确是稳定偏好/事实，否则不要写进摘要或人物画像，避免以后主动复读。"
             "只写有证据的信息；性别不确定写未知；不要Markdown/emoji。"
         )
         user_content = (
@@ -836,7 +957,11 @@ class MemoryStore:
         self._expire_proactive_pending(state)
         summary = str(group.get("summary") or "").strip() or "暂无"
         corpus = group.get("corpus", [])
-        recent_lines = self._corpus_lines(corpus if isinstance(corpus, list) else [], recent_limit or self.proactive_recent_messages)
+        recent_lines = self._corpus_lines(
+            corpus if isinstance(corpus, list) else [],
+            recent_limit or self.proactive_recent_messages,
+            min_temperature=CONTENT_TEMPERATURE_COLD_THRESHOLD,
+        )
         members = group.get("members", {})
         member_profiles = group.get("member_profiles", {})
         known: list[str] = []
@@ -860,9 +985,10 @@ class MemoryStore:
                 f"群摘要：{summary}",
                 f"互动分：{self._interaction_score(state)}/100；今日群友消息：{int(state.get('daily_human_messages') or 0)}；今日已主动冒泡：{int(state.get('daily_sent') or 0)}。",
                 f"上次主动冒泡无人回应：{sadness}",
+                "记忆温度规则：近期群聊里的温度越低，说明越像旧梗/冷掉的话题；低温内容不要主动续，除非群友重新提起。",
                 "已知群友：" + ("；".join(known) if known else "暂无"),
                 "近期群聊：",
-                "\n".join(recent_lines[-(recent_limit or self.proactive_recent_messages) :]) if recent_lines else "暂无",
+                "\n".join(recent_lines[-(recent_limit or self.proactive_recent_messages) :]) if recent_lines else "暂无热话题",
             ]
         )
 
@@ -876,6 +1002,8 @@ class MemoryStore:
         prompt = (
             '压缩QQ私聊记忆，省token。只输出JSON：'
             '{"summary":"<=2500字","profile":{"gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}}。'
+            "语料行前的温度0-1表示当前话题热度；低温旧梗、一次性玩笑或情绪化片段只作背景，"
+            "除非反复出现或是稳定偏好/边界，否则不要写进长期摘要。"
             "只写偏好、事实、称呼、边界；不要Markdown/emoji。"
         )
         user_content = (
@@ -895,6 +1023,7 @@ class MemoryStore:
         prompt = (
             '根据群里50次提到某人的上下文做短画像。只输出JSON：'
             '{"user_id":"QQ","gender":"男/女/未知","title":"称呼","impression":"<=140字","evidence":"<=60字","confidence":"低/中/高"}。'
+            "语料行前的温度0-1表示当前话题热度；低温单次调侃、脏梗或攻击性称呼不要当成人物稳定特征。"
             "只根据上下文证据；不要Markdown/emoji。"
         )
         user_content = (
@@ -1263,6 +1392,7 @@ class MemoryStore:
                     )
 
         lines.append("- 自然使用称呼，不要每句话都堆称呼。性别未知或低置信度时用中性称呼。")
+        lines.append("- 记忆只是背景，不是当前话题；如果当前唤起上下文没有提到某个旧梗、露骨玩笑或攻击性形容，不要主动翻出来续聊。")
         lines.append("- 如果用户明确要求查看已存储记忆、群友画像或人物信息，可以依据本段记忆回答；没有记录时直说没有。")
         lines.append("- 可以自然少量使用猫系颜文字或动作，如 (ฅ>ω<*ฅ)、(๑•̀ㅂ•́)و✧、ฅฅ；不要刷屏。")
         return "\n".join(lines)
