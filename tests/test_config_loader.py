@@ -31,7 +31,7 @@ class ConfigLoaderTests(unittest.TestCase):
                 "local_training": {},
                 "web_search": {},
                 "turtle_soup": {},
-                "chat": {"followup_reply_window_seconds": 180},
+                "chat": {},
                 "emoji": {},
                 "memory": {},
                 "proactive": {},
@@ -42,12 +42,10 @@ class ConfigLoaderTests(unittest.TestCase):
                 _loader._apply_config(data, base_dir)
                 extra_body = json.loads(os.environ["CATTY_LOCAL_CRITIC_EXTRA_BODY"])
                 mode = os.environ["CATTY_LOCAL_CRITIC_MODE"]
-                followup_window = os.environ.get("CATTY_FOLLOWUP_REPLY_WINDOW_SECONDS")
 
         self.assertFalse(extra_body["think"])
         self.assertEqual(extra_body, {"think": False})
         self.assertEqual(mode, "reply_gate_only")
-        self.assertEqual(followup_window, "180")
 
 
 if __name__ == "__main__":

@@ -204,7 +204,6 @@
     "group_require_mention_or_prefix": true,
     "group_history_scope": "group",
     "history_turns": 16,
-    "followup_reply_window_seconds": 180,
     "reply_max_chars": 1800,
     "directed_keywords": [
       "你",

@@ -102,14 +102,24 @@ class GroupFilterBatchState:
     first_seen: float = 0.0
 
 
+@dataclass(slots=True)
+class RecentConversationMessage:
+    message_id: str
+    user_id: str
+    display_name: str
+    text: str
+    has_image: bool
+    created_at: float
+
+
 _expression_repeats: DefaultDict[str, ExpressionRepeatState] = defaultdict(ExpressionRepeatState)
 _group_filter_batches: DefaultDict[str, GroupFilterBatchState] = defaultdict(GroupFilterBatchState)
 _group_filter_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
+_recent_conversation_messages: DefaultDict[str, deque[RecentConversationMessage]] = defaultdict(lambda: deque(maxlen=80))
 _web_search_cooldowns: dict[str, float] = {}
 _turtle_soup_cooldowns: dict[str, float] = {}
 _local_critic_warmup_success_logged = False
 _consumed_reply_source_ids: dict[str, float] = {}
-_recent_bot_reply_threads: dict[str, float] = {}
 
 
 def _has_api_key() -> bool:
@@ -125,57 +135,6 @@ def _conversation_queue_key(event: MessageEvent) -> str:
 def _reply_source_key(event: MessageEvent, message_id: str) -> str:
     scope = _conversation_queue_key(event)
     return f"{scope}:reply-source:{message_id}"
-
-
-def _followup_thread_key(event: MessageEvent) -> str | None:
-    if isinstance(event, GroupMessageEvent):
-        return f"group:{event.group_id}:user:{event.user_id}"
-    if isinstance(event, PrivateMessageEvent):
-        return f"private:{event.user_id}"
-    return None
-
-
-def _prune_recent_bot_reply_threads(now: float) -> None:
-    max_age = max(float(config.catty_followup_reply_window_seconds or 0.0), 0.0)
-    if max_age <= 0:
-        _recent_bot_reply_threads.clear()
-        return
-    stale = [key for key, timestamp in _recent_bot_reply_threads.items() if now - timestamp > max_age]
-    for key in stale:
-        _recent_bot_reply_threads.pop(key, None)
-
-
-def _recent_bot_reply_context(event: MessageEvent) -> dict[str, object]:
-    window_seconds = max(float(config.catty_followup_reply_window_seconds or 0.0), 0.0)
-    if window_seconds <= 0:
-        return {"recent_bot_reply": False}
-    key = _followup_thread_key(event)
-    if key is None:
-        return {"recent_bot_reply": False}
-    now = time.monotonic()
-    _prune_recent_bot_reply_threads(now)
-    last_reply_at = _recent_bot_reply_threads.get(key)
-    if last_reply_at is None:
-        return {"recent_bot_reply": False}
-    elapsed = now - last_reply_at
-    return {
-        "recent_bot_reply": elapsed <= window_seconds,
-        "seconds_since_bot_reply": round(elapsed, 1),
-        "followup_window_seconds": window_seconds,
-    }
-
-
-def _has_recent_bot_reply(event: MessageEvent) -> bool:
-    return bool(_recent_bot_reply_context(event).get("recent_bot_reply"))
-
-
-def _mark_recent_bot_reply_thread(event: MessageEvent) -> None:
-    key = _followup_thread_key(event)
-    if key is None:
-        return
-    now = time.monotonic()
-    _prune_recent_bot_reply_threads(now)
-    _recent_bot_reply_threads[key] = now
 
 
 def _reply_source_keys(event: MessageEvent) -> list[str]:
@@ -269,6 +228,74 @@ def _display_name(event: MessageEvent) -> str:
         if value:
             return str(value)
     return str(event.user_id)
+
+
+def _event_message_id(event: MessageEvent) -> str:
+    return str(getattr(event, "message_id", "") or getattr(event, "id", "") or "")
+
+
+def _remember_recent_conversation_event(event: MessageEvent, incoming: ExtractedMessage | None = None) -> None:
+    text = (incoming.text if incoming is not None else event_plain_text(event)).strip()
+    has_image = incoming.has_image if incoming is not None else bool(extract_image_urls(event))
+    if not text and not has_image:
+        return
+    key = _conversation_queue_key(event)
+    message_id = _event_message_id(event)
+    recent = _recent_conversation_messages[key]
+    if message_id and any(item.message_id == message_id for item in recent):
+        return
+    now = time.monotonic()
+    if not message_id and recent:
+        last = recent[-1]
+        if last.user_id == str(event.user_id) and last.text == (text or "[图片]") and now - last.created_at < 2.0:
+            return
+    recent.append(
+        RecentConversationMessage(
+            message_id=message_id,
+            user_id=str(event.user_id),
+            display_name=_display_name(event),
+            text=text or "[图片]",
+            has_image=has_image,
+            created_at=now,
+        )
+    )
+
+
+def _wake_context_prompt(event: MessageEvent) -> str:
+    key = _conversation_queue_key(event)
+    recent = list(_recent_conversation_messages.get(key, ()))
+    if not recent:
+        return ""
+    current_message_id = _event_message_id(event)
+    current_index = -1
+    if current_message_id:
+        for index, item in enumerate(recent):
+            if item.message_id == current_message_id:
+                current_index = index
+                break
+    if current_index < 0:
+        for index in range(len(recent) - 1, -1, -1):
+            if recent[index].user_id == str(event.user_id):
+                current_index = index
+                break
+    if current_index < 0:
+        current_index = len(recent) - 1
+
+    start = max(0, current_index - 3)
+    end = min(len(recent), current_index + 4)
+    lines: list[str] = []
+    for index, item in enumerate(recent[start:end], start=start):
+        marker = " <- 当前唤起消息" if index == current_index else ""
+        image_marker = " [含图片]" if item.has_image else ""
+        lines.append(f"{index - current_index:+d}. {item.display_name}({item.user_id}): {item.text}{image_marker}{marker}")
+    if not lines:
+        return ""
+    return (
+        "当前是由一条消息唤起的回复。下面给出当前唤起消息附近最多上 3 条和下 3 条的聊天上下文；"
+        "实时场景通常只有上文和当前消息，若没有下文不要臆造。"
+        f"请主 AI 自己判断是否真的需要回复；如果只是误触发、重复回复同一条消息、或上下文显示不该接话，只输出 {NO_REPLY_MARKER}。\n"
+        + "\n".join(lines)
+    )
 
 
 def _configured_title(event: MessageEvent) -> str:
@@ -455,6 +482,7 @@ def _build_messages(
     emoji_context: str | None = None,
     web_search_context: str | None = None,
     star_resonance_context: str | None = None,
+    wake_context: str | None = None,
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
     system_prompt = config.catty_system_prompt.strip()
@@ -502,6 +530,8 @@ def _build_messages(
         messages.append({"role": "system", "content": web_search_context})
     if star_resonance_context:
         messages.append({"role": "system", "content": star_resonance_context})
+    if wake_context:
+        messages.append({"role": "system", "content": wake_context})
     if emoji_context:
         messages.append({"role": "system", "content": emoji_context})
     memory_context = memory_store.build_context(event)
@@ -621,16 +651,16 @@ def _semantic_reply_split_prompt() -> str:
 
 def _opportunistic_reply_prompt() -> str:
     return (
-        "这是由本地 reply gate 放行的普通群聊/特别关心/批量观察消息。"
-        "本地模型已经判断本轮值得回复，你只负责写自然正文；不要再做是否回复判断。"
+        "这是由普通群聊、特别关心或批量观察进入主 AI 判断的消息。"
+        f"请结合上下文判断是否真的值得接话；如果不该回复，只输出 {NO_REPLY_MARKER}。"
     )
 
 
 def _reply_gate_approved_prompt() -> str:
     return (
-        "本轮消息已经通过本地 reply gate；主 AI 只负责生成要发送给用户的正文。"
-        f"禁止输出 {NO_REPLY_MARKER}，禁止用空回复代替正文。"
-        "如果信息不足，就用笨猫口吻短短追问。"
+        "本轮消息已经通过入口唤起，最终是否回复交给主 AI 结合上下文判断。"
+        f"如果上下文显示只是误触发、重复回复同一条消息、第三人称闲聊或不该接话，只输出 {NO_REPLY_MARKER}。"
+        "如果要回复，就直接生成要发送给用户的正文；信息不足时用笨猫口吻短短追问。"
     )
 
 
@@ -647,8 +677,8 @@ def _direct_reply_required_prompt(incoming: ExtractedMessage) -> str:
     reason_text = "、".join(reasons) or "这是私聊或明确对你说话"
     return (
         f"本轮属于必须回复场景：{reason_text}。"
-        f"除非消息完全无法解析且没有可追问点，否则不要输出 {NO_REPLY_MARKER}。"
-        "如果信息不足，就用笨猫口吻短短追问；如果只是 @/回复但没文字，也要自然应一声。"
+        f"通常应该接话；但如果上下文显示是在重复回复同一条消息、误触发或明显不该接话，可以输出 {NO_REPLY_MARKER}。"
+        "如果信息不足，就用笨猫口吻短短追问；如果只是 @/回复但没文字，也可以自然应一声。"
     )
 
 
@@ -664,14 +694,14 @@ def _soft_directed_reply_prompt(
         return (
             "本轮没有明确 @ 你、回复你或使用严格开头前缀，但本地判断更像是在直接喊你/叫你办事。"
             f"当前回复倾向约 {probability_percent}%{boost_text}。"
-            "本地 reply gate 已经放行本轮消息，请用 1-3 句自然接住。"
-            "不要机械回复“你叫我了/我在”，也不要输出不回复标记。"
+            "请结合上下文自己判断是否真的要接话；如果该接，就用 1-3 句自然接住。"
+            f"不要机械回复“你叫我了/我在”；如果只是误触发或第三人称闲聊，只输出 {NO_REPLY_MARKER}。"
         )
     return (
         "本轮没有明确 @ 你、回复你或使用开头前缀，只是句子中出现了你的名字、指向词或功能词。"
         f"当前回复倾向约 {probability_percent}%{boost_text}。"
-        "本地 reply gate 已经判断应该回复；请根据整句主语、称呼对象、上下文意图自然接话。"
-        "不要根据关键词机械回应，也不要输出不回复标记。"
+        "请根据整句主语、称呼对象和上下文意图判断是否自然接话。"
+        f"不要根据关键词机械回应；如果不该回复，只输出 {NO_REPLY_MARKER}。"
     )
 
 
@@ -841,7 +871,6 @@ def _local_critic_event_payload(
     incoming: ExtractedMessage,
     draft_reply: str,
 ) -> dict[str, object]:
-    followup_context = _recent_bot_reply_context(event)
     payload: dict[str, object] = {
         "message_type": "group" if isinstance(event, GroupMessageEvent) else "private",
         "user_id": str(event.user_id),
@@ -856,7 +885,6 @@ def _local_critic_event_payload(
         "directed_strength": incoming.directed_strength,
         "directly_requested": incoming.directly_requested,
         "opportunistic": incoming.opportunistic,
-        **followup_context,
     }
     if isinstance(event, GroupMessageEvent):
         payload["group_id"] = str(event.group_id)
@@ -958,7 +986,6 @@ def _local_reply_gate_messages(
     user_message_chars = _positive_int(config.catty_local_critic_reply_gate_user_message_chars, 240, minimum=80)
     plain_text_chars = _positive_int(config.catty_local_critic_reply_gate_plain_text_chars, 120, minimum=40)
     context_chars = _positive_int(config.catty_local_critic_reply_gate_context_chars, 160, minimum=0)
-    followup_context = _recent_bot_reply_context(event)
     payload: dict[str, object] = {
         "message_type": "group" if isinstance(event, GroupMessageEvent) else "private",
         "message": incoming.history_content[-user_message_chars:],
@@ -972,7 +999,6 @@ def _local_reply_gate_messages(
         "directly_requested": incoming.directly_requested,
         "opportunistic": incoming.opportunistic,
         "direct_reply_required": _direct_reply_required(event, incoming),
-        **followup_context,
     }
     if context_chars and group_filter_context:
         payload["group_context"] = group_filter_context[-context_chars:]
@@ -985,9 +1011,6 @@ def _local_reply_gate_messages(
                 "/no_think\n"
                 "Fast QQ reply gate. JSON only. "
                 "true=direct bot ask/image help/special-care/batched context expects bot. "
-                "recent_bot_reply=true means the bot just replied to this same user in this chat; "
-                "then short follow-ups, teasing, questions, or second-person commands are usually active conversation, "
-                "but still output false for clear third-person chatter/spam/no expectation. "
                 "false=idle chatter/third-person/no expectation/spam. "
                 "Schema:{\"should_reply\":true|false,\"confidence\":0-100,\"reason\":\"<=8 chars\"}."
             ),
@@ -1066,12 +1089,12 @@ def _fallback_reply_decision_context(gate_result: dict[str, object]) -> str:
             "reason": str(gate_result.get("reason") or "")[-240:],
         },
         "instruction": (
-            "本地 reply gate 本轮不可用或返回异常，才由主 AI 接管是否回复。"
-            "请沿用旧硬判断：如果 @、回复机器人、前缀、私聊、明显喊猫猫办事，就回复；"
-            f"如果只是普通旁观群聊、第三人称闲聊、无接话期待，请只输出 {NO_REPLY_MARKER}。"
+            "本轮没有使用本地小模型 reply gate，是否回复交给主 AI 结合上下文判断。"
+            "如果 @、回复机器人、前缀、私聊、明显喊猫猫办事，通常可以回复；"
+            f"如果只是普通旁观群聊、第三人称闲聊、误触发或无接话期待，请只输出 {NO_REPLY_MARKER}。"
         ),
     }
-    return "本地 reply gate fallback，本轮是否回复临时交给主 AI 判断：\n" + json.dumps(payload, ensure_ascii=False)
+    return "本轮回复入口信息，是否回复交给主 AI 判断：\n" + json.dumps(payload, ensure_ascii=False)
 
 
 def _local_critic_rewrite_messages(
@@ -1311,6 +1334,8 @@ async def _apply_local_critic(
     if not reply.strip():
         reply = NO_REPLY_MARKER
     if _is_no_reply(reply):
+        if not _local_critic_enabled():
+            return reply
         return await _resolve_no_reply(event, incoming, messages, reply)
     if not _local_critic_post_check_enabled():
         return reply
@@ -1566,6 +1591,7 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     incoming = extract_incoming_message(str(bot.self_id), event, config, replied_to_self=replied_to_self)
     if incoming is None:
         return False
+    _remember_recent_conversation_event(event, incoming)
     if replied_to_self and _has_consumed_reply_source(event):
         duplicate_result = {
             "should_reply": False,
@@ -1576,8 +1602,6 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
         state["catty_reply_gate_result"] = duplicate_result
         _save_local_critic_sample(event, incoming, "reply_gate", {"reply_gate": duplicate_result}, NO_REPLY_MARKER)
         return False
-    if incoming.needs_filter and _has_recent_bot_reply(event):
-        incoming.needs_filter = False
     group_filter_context = ""
     special_care_context = ""
     if incoming.needs_filter:
@@ -1667,7 +1691,6 @@ poke_matcher = on_notice(rule=_poke_rule, priority=55, block=True)
 @expression_repeat_matcher.handle()
 async def handle_expression_repeat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     async with _locks[_conversation_queue_key(event)]:
-        _mark_recent_bot_reply_thread(event)
         await matcher.finish(state["catty_repeat_message"])
 
 
@@ -1676,11 +1699,9 @@ async def handle_poke(bot: Bot, event: PokeNotifyEvent, state: T_State) -> None:
     message = Message(str(state["catty_poke_reply"]))
     if event.group_id is not None:
         async with _locks[f"group:{event.group_id}"]:
-            _mark_recent_bot_reply_thread(event)
             await bot.send_group_msg(group_id=_coerce_group_id(str(event.group_id)), message=message)
     else:
         async with _locks[f"private:{event.user_id}"]:
-            _mark_recent_bot_reply_thread(event)
             await bot.send_private_msg(user_id=int(event.user_id), message=message)
 
 
@@ -1688,6 +1709,7 @@ async def handle_poke(bot: Bot, event: PokeNotifyEvent, state: T_State) -> None:
 async def observe_memory(bot: Bot, event: MessageEvent) -> None:
     if str(event.user_id) == str(bot.self_id):
         return
+    _remember_recent_conversation_event(event)
     if isinstance(event, GroupMessageEvent):
         memory_store.remember_corpus_event(
             event,
@@ -1875,6 +1897,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             web_search_context = "本轮用户要求联网搜索，但当前配置关闭了 web_search.enabled。请用猫系人格说明联网搜索暂时不可用。"
 
         star_resonance_context = build_star_resonance_context(incoming.text)
+        wake_context = _wake_context_prompt(event)
 
         image_description: str | None = None
         image_description_cached = False
@@ -1953,6 +1976,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 part for part in [web_search_context, fallback_decision_context] if part
             ),
             star_resonance_context=star_resonance_context,
+            wake_context=wake_context,
         )
         try:
             reply = await chat_completion(config, messages)
@@ -1969,7 +1993,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         reply = await _apply_local_critic(event, incoming, messages, reply)
 
         if _is_no_reply(reply):
-            reply = _fallback_required_reply(incoming)
+            await matcher.finish()
 
         reply, emoji_query = _extract_emoji_query(reply)
         _save_assistant_training_sample(event, incoming, messages, reply, emoji_query=emoji_query)
@@ -1980,7 +2004,6 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
         _append_history(history_key, incoming.history_content, "\n".join(chunks) if chunks else reply)
-        _mark_recent_bot_reply_thread(event)
         if special_care_context and chunks:
             memory_store.record_special_care_reply_sent(event, "\n".join(chunks))
 

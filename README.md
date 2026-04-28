@@ -394,7 +394,7 @@ dist/CattyQQAI.exe
 | `chat.group_require_mention_or_prefix` | `true` | 群聊是否必须艾特或前缀 |
 | `chat.private_require_prefix` | `false` | 私聊是否必须前缀 |
 | `chat.history_turns` | `16` | 每个会话保留的上下文轮数 |
-| `chat.followup_reply_window_seconds` | `180` | 猫猫回复某个群友后，该群友在窗口期内继续发言会携带 `recent_bot_reply` 信号交给 reply gate 判断是否接话；不是直接绕过小模型 |
+| `chat` 唤起上下文 | 自动 | 入口被唤起后，会把当前唤起消息附近最多上 3 条/下 3 条近期聊天交给主 AI 判断；主 AI 可输出 `NO_REPLY` 安静不回 |
 | `chat.reply_max_chars` | `1800` | 单条回复超过该长度时最多切成两条发送 |
 | `chat.reply_human_split_enabled` | `true` | 是否允许本地概率判断本轮是否追加语义分段提示 |
 | `chat.reply_human_split_probability` | `0.35` | 分段提示的本地触发概率，不再额外调用 filter API |

@@ -102,7 +102,6 @@ class Config(BaseModel):
     catty_group_require_mention_or_prefix: bool = True
     catty_group_history_scope: str = "group"
     catty_history_turns: int = 16
-    catty_followup_reply_window_seconds: float = 180.0
     catty_directed_keywords: list[str] = Field(
         default_factory=lambda: ["你", "猫猫", "猫娘", "看看", "帮我看看", "这张图", "这个图", "图片", "图里", "评价一下", "怎么回事"]
     )
@@ -337,7 +336,6 @@ class Config(BaseModel):
         "catty_filter_anger_warn_threshold",
         "catty_filter_anger_mute_threshold",
         "catty_filter_anger_cooldown_seconds",
-        "catty_followup_reply_window_seconds",
         "catty_local_critic_temperature",
         "catty_local_critic_max_tokens",
         "catty_local_critic_request_timeout",
