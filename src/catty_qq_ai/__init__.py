@@ -8,8 +8,8 @@ import time
 from typing import DefaultDict
 
 import httpx
-from nonebot import get_bots, get_driver, get_plugin_config, logger, on_message
-from nonebot.adapters.onebot.v11 import GroupMessageEvent, PrivateMessageEvent
+from nonebot import get_bots, get_driver, get_plugin_config, logger, on_message, on_notice
+from nonebot.adapters.onebot.v11 import GroupMessageEvent, PokeNotifyEvent, PrivateMessageEvent
 from nonebot.adapters.onebot.v11 import Bot, Message, MessageEvent, MessageSegment
 from nonebot.matcher import Matcher
 from nonebot.plugin import PluginMetadata
@@ -46,7 +46,12 @@ from .openai_client import (
     download_binary,
     local_critic_completion,
 )
-from .persona_prompts import build_catgirl_examples_prompt, build_persona_memory_prompt, build_reply_self_check_prompt
+from .persona_prompts import (
+    build_catgirl_examples_prompt,
+    build_persona_memory_prompt,
+    build_reply_intelligence_prompt,
+    build_reply_self_check_prompt,
+)
 from .reply_markers import (
     EMOJI_QUERY_PREFIX,
     EMOJI_QUERY_SUFFIX,
@@ -143,6 +148,11 @@ def _mark_consumed_reply_source(event: MessageEvent) -> None:
     _prune_consumed_reply_sources(now)
     for key in _reply_source_keys(event):
         _consumed_reply_source_ids[key] = now
+
+
+def _mark_consumed_reply_source_if_sent(event: MessageEvent, state: T_State) -> None:
+    if state.get("catty_replied_to_self"):
+        _mark_consumed_reply_source(event)
 
 
 def _soft_directed(incoming: ExtractedMessage) -> bool:
@@ -401,6 +411,7 @@ def _build_messages(
     persona_memory = build_persona_memory_prompt(system_prompt)
     if persona_memory:
         messages.append({"role": "system", "content": persona_memory})
+    messages.append({"role": "system", "content": build_reply_intelligence_prompt(NO_REPLY_MARKER)})
     if config.catty_reply_self_check_enabled:
         messages.append(
             {
@@ -1469,6 +1480,9 @@ def _sender_id_from_message(message: object) -> str:
 
 
 async def _reply_targets_self(bot: Bot, event: MessageEvent) -> bool:
+    reply = getattr(event, "reply", None)
+    if reply is not None and _sender_id_from_message(reply) == str(bot.self_id):
+        return True
     for message_id in reply_message_ids(event):
         try:
             message = await bot.get_msg(message_id=_coerce_message_id(message_id))
@@ -1531,8 +1545,7 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     )
     if not gate_allowed:
         return False
-    if replied_to_self:
-        _mark_consumed_reply_source(event)
+    state["catty_replied_to_self"] = replied_to_self
     state["catty_incoming"] = incoming
     return True
 
@@ -1550,10 +1563,53 @@ expression_repeat_matcher = on_message(rule=_expression_repeat_rule, priority=50
 observe_matcher = on_message(priority=5, block=False)
 
 
+def _poke_allowed(bot: Bot, event: PokeNotifyEvent) -> bool:
+    if str(event.target_id) != str(bot.self_id) or str(event.user_id) == str(bot.self_id):
+        return False
+    if event.group_id is not None:
+        if not config.catty_enable_group:
+            return False
+        if config.catty_allowed_group_ids and int(event.group_id) not in config.catty_allowed_group_ids:
+            return False
+    else:
+        if not config.catty_enable_private:
+            return False
+    if config.catty_allowed_user_ids and int(event.user_id) not in config.catty_allowed_user_ids:
+        return False
+    return True
+
+
+async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
+    if not _poke_allowed(bot, event):
+        return False
+    state["catty_poke_reply"] = random.choice(
+        [
+            "喵呜？！谁拍人家尾巴啦～笨猫在这呢，主人要叫猫猫嘛 ฅฅ",
+            "哼，被拍到啦～人家才没有偷偷发呆呢，主人说话喵。",
+            "喵？猫猫被戳醒了～要人家陪你还是帮你看东西呀 (ฅ>ω<*ฅ)",
+        ]
+    )
+    return True
+
+
+poke_matcher = on_notice(rule=_poke_rule, priority=55, block=True)
+
+
 @expression_repeat_matcher.handle()
 async def handle_expression_repeat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     async with _locks[_conversation_queue_key(event)]:
         await matcher.finish(state["catty_repeat_message"])
+
+
+@poke_matcher.handle()
+async def handle_poke(bot: Bot, event: PokeNotifyEvent, state: T_State) -> None:
+    message = Message(str(state["catty_poke_reply"]))
+    if event.group_id is not None:
+        async with _locks[f"group:{event.group_id}"]:
+            await bot.send_group_msg(group_id=_coerce_group_id(str(event.group_id)), message=message)
+    else:
+        async with _locks[f"private:{event.user_id}"]:
+            await bot.send_private_msg(user_id=int(event.user_id), message=message)
 
 
 @observe_matcher.handle()
@@ -1858,12 +1914,17 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
         for chunk in chunks[:-1]:
             await matcher.send(Message(chunk))
+            _mark_consumed_reply_source_if_sent(event, state)
             if delay_seconds:
                 await asyncio.sleep(delay_seconds)
         if emoji_entry:
             if chunks:
                 await matcher.send(Message(chunks[-1]))
+                _mark_consumed_reply_source_if_sent(event, state)
                 if delay_seconds:
                     await asyncio.sleep(delay_seconds)
+            else:
+                _mark_consumed_reply_source_if_sent(event, state)
             await matcher.finish(Message(_emoji_segment(emoji_entry)))
-        await matcher.finish(Message(chunks[-1] if chunks else "AI 没有返回内容。"))
+        _mark_consumed_reply_source_if_sent(event, state)
+        await matcher.finish(Message(chunks[-1] if chunks else "喵喵！猫猫现在很忙哦，等一下再来找人家～"))

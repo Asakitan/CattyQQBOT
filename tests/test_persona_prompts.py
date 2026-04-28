@@ -16,9 +16,8 @@ class PersonaPromptsTests(unittest.TestCase):
 
         self.assertIn("禁止把笨猫当成第三个人", prompt)
         self.assertIn("脱离人格倾向", prompt)
-        self.assertIn("敏感/超限边界", prompt)
-        self.assertIn("未成年性化", prompt)
-        self.assertIn("安全替代", prompt)
+        self.assertIn("主回复智能策略", prompt)
+        self.assertIn("NSFW处理", prompt)
         self.assertIn("重读主 prompt", prompt)
         self.assertIn("用户真实意图", prompt)
         self.assertIn("猫系动作", prompt)
@@ -46,7 +45,17 @@ class PersonaPromptsTests(unittest.TestCase):
         self.assertIn("米雪儿、笨猫、猫猫都指你本人", prompt)
         self.assertIn("不要把笨猫当第三个人", prompt)
         self.assertIn("重新阅读主 prompt", prompt)
-        self.assertIn("未成年或年龄不明", prompt)
+        self.assertIn("角色同步确认", prompt)
+
+    def test_reply_intelligence_prompt_guides_context_use(self) -> None:
+        prompt = _persona_prompts.build_reply_intelligence_prompt("NOPE")
+
+        self.assertIn("主回复智能策略", prompt)
+        self.assertIn("任务类型", prompt)
+        self.assertIn("主语和指代", prompt)
+        self.assertIn("不要只因为出现关键词", prompt)
+        self.assertIn("不要把记忆整段背出来", prompt)
+        self.assertIn("NOPE", prompt)
 
 
 if __name__ == "__main__":

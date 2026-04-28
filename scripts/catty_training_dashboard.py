@@ -134,6 +134,7 @@ def build_model_test_messages(config_path: Path, user_text: str, *, thinking: bo
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
     messages.append({"role": "system", "content": _PROMPTS.build_persona_memory_prompt(system_prompt)})
+    messages.append({"role": "system", "content": _PROMPTS.build_reply_intelligence_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": _PROMPTS.build_reply_self_check_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER)})
     messages.append({"role": "system", "content": _PROMPTS.build_catgirl_examples_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": _thread_test_prompt()})
