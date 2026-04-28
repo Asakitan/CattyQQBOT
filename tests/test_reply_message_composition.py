@@ -147,6 +147,19 @@ class ReplyMessageCompositionTests(unittest.TestCase):
 
         self.assertTrue(_plugin._should_auto_emoji_reply(incoming, "普通回复喵"))
 
+    def test_bot_continuation_prompt_keeps_technical_followups_actionable(self) -> None:
+        event = _group_event(456)
+
+        prompt = _plugin._bot_continuation_judgement_prompt(event)
+
+        self.assertIn("你看看", prompt)
+        self.assertIn("技术求助", prompt)
+        self.assertIn("可执行技术结论", prompt)
+        self.assertIn("句尾的请求目标", prompt)
+        self.assertIn("先回答 B", prompt)
+        self.assertIn("冒号后就是用户完整原文", prompt)
+        self.assertIn("不要只吐槽、玩梗或空泛追问", prompt)
+
 
 if __name__ == "__main__":
     unittest.main()

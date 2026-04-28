@@ -55,6 +55,10 @@ class PersonaPromptsTests(unittest.TestCase):
         self.assertIn("主语和指代", prompt)
         self.assertIn("不要只因为出现关键词", prompt)
         self.assertIn("不要把记忆整段背出来", prompt)
+        self.assertIn("必须覆盖用户提出的具体目标", prompt)
+        self.assertIn("方式/方案/怎么做", prompt)
+        self.assertIn("先回答 B", prompt)
+        self.assertIn("不要说只看到几个词", prompt)
         self.assertIn("NOPE", prompt)
 
     def test_group_meme_literacy_prompt_guides_abstract_group_chat(self) -> None:
