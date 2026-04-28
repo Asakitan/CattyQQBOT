@@ -61,15 +61,16 @@ class Config(BaseModel):
     catty_filter_anger_mute_threshold: int = 100
     catty_filter_anger_cooldown_seconds: int = 3600
     catty_local_critic_enabled: bool = False
+    catty_local_critic_mode: str = "reply_gate_only"
     catty_local_critic_base_url: str = "http://127.0.0.1:11434/v1"
     catty_local_critic_api_key: str = "ollama"
     catty_local_critic_model: str = "qwen2.5:1.5b"
     catty_local_critic_extra_headers: dict[str, str] = Field(default_factory=dict)
-    catty_local_critic_extra_body: dict[str, Any] = Field(default_factory=lambda: {"think": False, "keep_alive": "30m"})
-    catty_local_critic_temperature: float | None = 0.1
-    catty_local_critic_max_tokens: int | None = 96
-    catty_local_critic_request_timeout: float | None = 30.0
-    catty_local_critic_rewrite_when_score_below: int = 75
+    catty_local_critic_extra_body: dict[str, Any] = Field(default_factory=lambda: {"think": False})
+    catty_local_critic_temperature: float | None = None
+    catty_local_critic_max_tokens: int | None = 16
+    catty_local_critic_request_timeout: float | None = 4.0
+    catty_local_critic_rewrite_when_score_below: int = 0
     catty_local_critic_reply_gate_enabled: bool = True
     catty_local_critic_reply_gate_min_confidence: int = 55
     catty_local_critic_reply_gate_examples: int = 0
@@ -186,6 +187,23 @@ class Config(BaseModel):
         if normalized not in {"group", "user"}:
             raise ValueError("catty_group_history_scope must be group or user")
         return normalized
+
+    @field_validator("catty_local_critic_mode")
+    @classmethod
+    def validate_local_critic_mode(cls, value: str) -> str:
+        normalized = value.strip().lower()
+        aliases = {
+            "gate": "reply_gate_only",
+            "gate_only": "reply_gate_only",
+            "reply_gate": "reply_gate_only",
+            "reply_gate_only": "reply_gate_only",
+            "critic": "reply_gate_and_critic",
+            "full": "reply_gate_and_critic",
+            "reply_gate_and_critic": "reply_gate_and_critic",
+        }
+        if normalized not in aliases:
+            raise ValueError("catty_local_critic_mode must be reply_gate_only or reply_gate_and_critic")
+        return aliases[normalized]
 
     @field_validator("catty_trigger_prefixes", "catty_directed_keywords", mode="before")
     @classmethod

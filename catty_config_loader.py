@@ -123,15 +123,16 @@ DEFAULT_CONFIG: dict[str, Any] = {
     },
     "local_critic": {
         "enabled": False,
+        "mode": "reply_gate_only",
         "base_url": "http://127.0.0.1:11434/v1",
         "api_key": "ollama",
         "model": "qwen2.5:1.5b",
         "extra_headers": {},
-        "extra_body": {"think": False, "keep_alive": "30m"},
-        "temperature": 0.1,
-        "max_tokens": 96,
-        "request_timeout": 30,
-        "rewrite_when_score_below": 75,
+        "extra_body": {"think": False},
+        "temperature": None,
+        "max_tokens": 16,
+        "request_timeout": 4,
+        "rewrite_when_score_below": 0,
         "reply_gate_enabled": True,
         "reply_gate_min_confidence": 55,
         "reply_gate_examples": 0,
@@ -210,6 +211,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "progress_log_path": "training/local_training.log",
         "model_test_max_tokens": 480,
         "model_test_request_timeout": 60,
+        "model_test_thinking_max_tokens": 96,
         "model_test_thinking_timeout": 20,
         "model_test_scores_path": "training/model_eval_scores.jsonl",
         "assistant_min_samples": 200,
@@ -459,10 +461,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
         local_critic_extra_body = {}
     merged_local_critic_extra_body = {
         "think": False,
-        "keep_alive": local_critic.get("warmup_keep_alive") or "30m",
         **local_critic_extra_body,
     }
     _set_env("CATTY_LOCAL_CRITIC_ENABLED", local_critic.get("enabled"))
+    _set_env("CATTY_LOCAL_CRITIC_MODE", local_critic.get("mode") or "reply_gate_only")
     _set_env("CATTY_LOCAL_CRITIC_BASE_URL", local_critic.get("base_url"))
     _set_env("CATTY_LOCAL_CRITIC_API_KEY", local_critic.get("api_key"))
     _set_env("CATTY_LOCAL_CRITIC_MODEL", local_critic.get("model"))

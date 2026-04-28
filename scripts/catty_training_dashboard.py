@@ -9,6 +9,7 @@ import time
 from pathlib import Path
 from typing import Any
 from urllib import error, request
+from urllib.parse import urlparse
 
 _ROOT = Path(__file__).resolve().parents[1]
 _PROMPTS_PATH = _ROOT / "src" / "catty_qq_ai" / "persona_prompts.py"
@@ -70,8 +71,35 @@ def _chat_completions_url(base_url: str) -> str:
     return f"{base}/chat/completions"
 
 
+def _ollama_chat_url(base_url: str) -> str:
+    base = base_url.strip().rstrip("/")
+    for suffix in ("/v1/chat/completions", "/chat/completions", "/v1", "/api/chat", "/api"):
+        if base.endswith(suffix):
+            base = base[: -len(suffix)]
+            break
+    return f"{base}/api/chat"
+
+
+def _looks_like_ollama_route(base_url: str, api_key: str, extra_body: dict[str, Any]) -> bool:
+    native_flag = extra_body.get("native_ollama")
+    if isinstance(native_flag, bool):
+        return native_flag
+    parsed = urlparse(base_url)
+    return parsed.port == 11434 or api_key.strip().lower() == "ollama"
+
+
 def _json_object(value: object) -> dict[str, Any]:
     return value if isinstance(value, dict) else {}
+
+
+def _ollama_options(*, temperature: object, max_tokens: int, extra_body: dict[str, Any]) -> dict[str, Any]:
+    raw_options = extra_body.get("options")
+    options = dict(raw_options) if isinstance(raw_options, dict) else {}
+    if temperature is not None and "temperature" not in options:
+        options["temperature"] = temperature
+    if "num_predict" not in options:
+        options["num_predict"] = max_tokens
+    return options
 
 
 def _route_config(config: dict[str, Any]) -> dict[str, Any]:
@@ -79,17 +107,19 @@ def _route_config(config: dict[str, Any]) -> dict[str, Any]:
     local_critic = _json_object(config.get("local_critic"))
     training = _json_object(config.get("local_training"))
     timeout = float(training.get("model_test_request_timeout") or local_critic.get("request_timeout") or 60)
+    local_critic_extra_body = _json_object(local_critic.get("extra_body"))
     extra_body = {
         "think": False,
-        "keep_alive": local_critic.get("warmup_keep_alive") or "30m",
-        **_json_object(local_critic.get("extra_body")),
+        **local_critic_extra_body,
     }
+    max_tokens = int(training.get("model_test_max_tokens") or ai.get("max_tokens") or 480)
     return {
         "base_url": str(local_critic.get("base_url") or "http://127.0.0.1:11434/v1"),
         "api_key": str(local_critic.get("api_key") or "ollama"),
         "model": str(local_critic.get("model") or ""),
         "temperature": local_critic.get("temperature", ai.get("temperature", 0.7)),
-        "max_tokens": int(training.get("model_test_max_tokens") or ai.get("max_tokens") or 480),
+        "max_tokens": max_tokens,
+        "thinking_max_tokens": int(training.get("model_test_thinking_max_tokens") or min(max_tokens, 96)),
         "timeout": timeout,
         "thinking_timeout": float(training.get("model_test_thinking_timeout") or min(timeout, 20.0)),
         "extra_headers": _json_object(local_critic.get("extra_headers")),
@@ -163,21 +193,43 @@ def run_model_test(config_path: Path, user_text: str, *, thinking: bool = False)
     request_timeout = float(route["thinking_timeout"] if thinking else route["timeout"])
     extra_body = dict(route["extra_body"])
     extra_body["think"] = bool(thinking)
-    payload: dict[str, Any] = {
-        "model": route["model"],
-        "messages": messages,
-        "stream": False,
-        "temperature": route["temperature"],
-        "max_tokens": route["max_tokens"],
-    }
-    payload.update(extra_body)
+    request_max_tokens = int(route["thinking_max_tokens"] if thinking else route["max_tokens"])
+    use_native_ollama = _looks_like_ollama_route(route["base_url"], route["api_key"], extra_body)
+    if use_native_ollama:
+        payload = {
+            "model": route["model"],
+            "messages": messages,
+            "stream": False,
+            "options": _ollama_options(
+                temperature=route["temperature"],
+                max_tokens=request_max_tokens,
+                extra_body=extra_body,
+            ),
+        }
+        if "keep_alive" in extra_body:
+            payload["keep_alive"] = extra_body["keep_alive"]
+        if "think" in extra_body:
+            payload["think"] = extra_body["think"]
+        url = _ollama_chat_url(route["base_url"])
+        transport = "ollama_api_chat"
+    else:
+        payload = {
+            "model": route["model"],
+            "messages": messages,
+            "stream": False,
+            "temperature": route["temperature"],
+            "max_tokens": request_max_tokens,
+        }
+        payload.update(extra_body)
+        url = _chat_completions_url(route["base_url"])
+        transport = "openai_chat_completions"
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     headers = {
         "Authorization": f"Bearer {route['api_key']}",
         "Content-Type": "application/json",
         **route["extra_headers"],
     }
-    req = request.Request(_chat_completions_url(route["base_url"]), data=body, headers=headers, method="POST")
+    req = request.Request(url, data=body, headers=headers, method="POST")
     started = time.perf_counter()
     try:
         with request.urlopen(req, timeout=request_timeout) as response:
@@ -196,12 +248,19 @@ def run_model_test(config_path: Path, user_text: str, *, thinking: bool = False)
         raise
     elapsed = time.perf_counter() - started
     data = json.loads(raw)
-    choice = data["choices"][0]
-    message = choice.get("message") or {}
-    content = message.get("content")
-    if isinstance(content, list):
-        content = "\n".join(str(item.get("text") or item.get("content") or "") for item in content if isinstance(item, dict))
-    text = str(content or choice.get("text") or "").strip()
+    if use_native_ollama:
+        message = data.get("message") if isinstance(data, dict) else {}
+        content = message.get("content") if isinstance(message, dict) else ""
+        text = str(content or data.get("response") or "").strip()
+    else:
+        choice = data["choices"][0]
+        message = choice.get("message") or {}
+        content = message.get("content")
+        if isinstance(content, list):
+            content = "\n".join(
+                str(item.get("text") or item.get("content") or "") for item in content if isinstance(item, dict)
+            )
+        text = str(content or choice.get("text") or "").strip()
     return {
         "created_at": int(time.time()),
         "model": route["model"],
@@ -211,7 +270,9 @@ def run_model_test(config_path: Path, user_text: str, *, thinking: bool = False)
         "messages": messages,
         "response": text,
         "thinking_enabled": bool(thinking),
+        "transport": transport,
         "request_timeout_seconds": request_timeout,
+        "request_max_tokens": request_max_tokens,
         "request_extra_body": extra_body,
         "usage": data.get("usage") if isinstance(data, dict) else None,
     }
@@ -438,6 +499,7 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
     eval_text.configure(state="disabled", font=("Consolas", 9))
     eval_text.grid(row=8, column=0, sticky="nsew", padx=8, pady=(0, 8))
     latest_result: dict[str, Any] = {}
+    active_request = {"id": 0, "done": True}
 
     def replace_text(widget: ScrolledText, text: str) -> None:
         widget.configure(state="normal")
@@ -475,6 +537,7 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
         ask_button.configure(state="disabled")
         save_button.configure(state="disabled")
         mode = "thinking" if thinking_var.get() else "no_think"
+        timeout = 60.0
         try:
             route = _route_config(_load_json(config_path))
             timeout = float(route["thinking_timeout"] if thinking_var.get() else route["timeout"])
@@ -482,18 +545,41 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
         except Exception:
             test_status_var.set(f"Asking model ({mode})...")
         set_output("")
+        active_request["id"] = int(active_request["id"]) + 1
+        active_request["done"] = False
+        request_id = int(active_request["id"])
+        thinking_enabled = bool(thinking_var.get())
+
+        def still_waiting() -> bool:
+            return int(active_request["id"]) == request_id and not bool(active_request["done"])
+
+        def wall_clock_timeout() -> None:
+            if not still_waiting():
+                return
+            finish_error(
+                RuntimeError(
+                    f"{mode} wall-clock timeout after {timeout:g}s; "
+                    "Ollama may still be generating in the background. "
+                    "For qwen2.5 on Xeon v4, uncheck Thinking first."
+                ),
+                request_id=request_id,
+            )
 
         def worker() -> None:
             try:
-                result = run_model_test(config_path, prompt, thinking=thinking_var.get())
+                result = run_model_test(config_path, prompt, thinking=thinking_enabled)
             except Exception as exc:
-                root.after(0, lambda: finish_error(exc))
+                root.after(0, lambda: finish_error(exc, request_id=request_id))
             else:
-                root.after(0, lambda: finish_success(result))
+                root.after(0, lambda: finish_success(result, request_id=request_id))
 
+        root.after(int(max(timeout, 1.0) * 1000), wall_clock_timeout)
         threading.Thread(target=worker, daemon=True).start()
 
-    def finish_success(result: dict[str, Any]) -> None:
+    def finish_success(result: dict[str, Any], *, request_id: int | None = None) -> None:
+        if request_id is not None and (int(active_request["id"]) != request_id or bool(active_request["done"])):
+            return
+        active_request["done"] = True
         latest_result.clear()
         latest_result.update(result)
         elapsed = result.get("elapsed_seconds", "-")
@@ -501,7 +587,9 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
         mode = "thinking" if result.get("thinking_enabled") else "no_think"
         usage = result.get("usage")
         request_meta = {
+            "transport": result.get("transport"),
             "timeout_seconds": result.get("request_timeout_seconds"),
+            "max_tokens": result.get("request_max_tokens"),
             "extra_body": result.get("request_extra_body"),
         }
         meta_text = "\n\nrequest=" + json.dumps(request_meta, ensure_ascii=False)
@@ -511,7 +599,10 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
         ask_button.configure(state="normal")
         save_button.configure(state="normal")
 
-    def finish_error(exc: Exception) -> None:
+    def finish_error(exc: Exception, *, request_id: int | None = None) -> None:
+        if request_id is not None and (int(active_request["id"]) != request_id or bool(active_request["done"])):
+            return
+        active_request["done"] = True
         latest_result.clear()
         set_output(f"{exc.__class__.__name__}: {exc}")
         test_status_var.set("Request failed")

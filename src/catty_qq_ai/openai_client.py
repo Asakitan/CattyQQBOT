@@ -27,6 +27,23 @@ def _chat_completions_url(base_url: str) -> str:
     return f"{base_url}/chat/completions"
 
 
+def _ollama_chat_url(base_url: str) -> str:
+    base = base_url.strip().rstrip("/")
+    for suffix in ("/v1/chat/completions", "/chat/completions", "/v1", "/api/chat", "/api"):
+        if base.endswith(suffix):
+            base = base[: -len(suffix)]
+            break
+    return f"{base}/api/chat"
+
+
+def _looks_like_ollama_route(base_url: str, api_key: str, extra_body: dict[str, Any]) -> bool:
+    native_flag = extra_body.get("native_ollama")
+    if isinstance(native_flag, bool):
+        return native_flag
+    parsed = urlparse(base_url)
+    return parsed.port == 11434 or api_key.strip().lower() == "ollama"
+
+
 def _extract_content(data: dict[str, Any]) -> str:
     try:
         choice = data["choices"][0]
@@ -55,6 +72,18 @@ def _extract_content(data: dict[str, Any]) -> str:
     raise OpenAICompatibleError("AI 没有返回可读文本。", repr(data)[:500])
 
 
+def _extract_ollama_chat_content(data: dict[str, Any]) -> str:
+    message = data.get("message")
+    if isinstance(message, dict):
+        content = message.get("content")
+        if isinstance(content, str):
+            return content.strip()
+    response = data.get("response")
+    if isinstance(response, str):
+        return response.strip()
+    raise OpenAICompatibleError("Ollama 没有返回可读文本。", repr(data)[:500])
+
+
 def _client_kwargs(timeout: float, proxy: str) -> dict[str, Any]:
     kwargs: dict[str, Any] = {
         "timeout": timeout,
@@ -63,6 +92,21 @@ def _client_kwargs(timeout: float, proxy: str) -> dict[str, Any]:
     if proxy.strip():
         kwargs["proxy"] = proxy.strip()
     return kwargs
+
+
+def _ollama_options(
+    *,
+    temperature: float | None,
+    max_tokens: int | None,
+    extra_body: dict[str, Any],
+) -> dict[str, Any]:
+    raw_options = extra_body.get("options")
+    options = dict(raw_options) if isinstance(raw_options, dict) else {}
+    if temperature is not None and "temperature" not in options:
+        options["temperature"] = temperature
+    if max_tokens is not None and "num_predict" not in options:
+        options["num_predict"] = max_tokens
+    return options
 
 
 async def _post_chat_completion(
@@ -111,6 +155,55 @@ async def _post_chat_completion(
         raise OpenAICompatibleError("AI 返回的不是 JSON。", response.text[:500]) from exc
 
     return _extract_content(data)
+
+
+async def _post_ollama_chat(
+    *,
+    base_url: str,
+    model: str,
+    messages: list[ChatMessage],
+    timeout: float,
+    proxy: str,
+    temperature: float | None,
+    max_tokens: int | None,
+    extra_headers: dict[str, str],
+    extra_body: dict[str, Any],
+) -> str:
+    if not base_url.strip():
+        raise OpenAICompatibleError("Ollama 接口地址为空。")
+    if not model.strip():
+        raise OpenAICompatibleError("Ollama 模型名为空。")
+
+    options = _ollama_options(temperature=temperature, max_tokens=max_tokens, extra_body=extra_body)
+    payload: dict[str, Any] = {
+        "model": model,
+        "messages": messages,
+        "stream": False,
+    }
+    if options:
+        payload["options"] = options
+    if "keep_alive" in extra_body:
+        payload["keep_alive"] = extra_body["keep_alive"]
+    if "think" in extra_body:
+        payload["think"] = extra_body["think"]
+
+    headers = {
+        "Content-Type": "application/json",
+        **extra_headers,
+    }
+    async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
+        response = await client.post(_ollama_chat_url(base_url), headers=headers, json=payload)
+
+    if response.status_code >= 400:
+        detail = response.text[:500]
+        raise OpenAICompatibleError(f"Ollama 接口 HTTP {response.status_code}。", detail)
+
+    try:
+        data = response.json()
+    except ValueError as exc:
+        raise OpenAICompatibleError("Ollama 返回的不是 JSON。", response.text[:500]) from exc
+
+    return _extract_ollama_chat_content(data)
 
 
 def _needs_first_frame(url: str, content_type: str) -> bool:
@@ -177,17 +270,33 @@ async def local_critic_completion(
     max_tokens: int | None = None,
     extra_body: dict[str, Any] | None = None,
 ) -> str:
+    body = extra_body if extra_body is not None else config.catty_local_critic_extra_body
+    request_timeout = timeout or config.catty_local_critic_request_timeout or config.catty_request_timeout
+    request_max_tokens = max_tokens if max_tokens is not None else config.catty_local_critic_max_tokens
+    if _looks_like_ollama_route(config.catty_local_critic_base_url, config.catty_local_critic_api_key, body):
+        return await _post_ollama_chat(
+            base_url=config.catty_local_critic_base_url,
+            model=config.catty_local_critic_model,
+            messages=messages,
+            timeout=request_timeout,
+            proxy=config.catty_http_proxy,
+            temperature=config.catty_local_critic_temperature,
+            max_tokens=request_max_tokens,
+            extra_headers=config.catty_local_critic_extra_headers,
+            extra_body=body,
+        )
+
     return await _post_chat_completion(
         base_url=config.catty_local_critic_base_url,
         api_key=config.catty_local_critic_api_key,
         model=config.catty_local_critic_model,
         messages=messages,
-        timeout=timeout or config.catty_local_critic_request_timeout or config.catty_request_timeout,
+        timeout=request_timeout,
         proxy=config.catty_http_proxy,
         temperature=config.catty_local_critic_temperature,
-        max_tokens=max_tokens if max_tokens is not None else config.catty_local_critic_max_tokens,
+        max_tokens=request_max_tokens,
         extra_headers=config.catty_local_critic_extra_headers,
-        extra_body=extra_body if extra_body is not None else config.catty_local_critic_extra_body,
+        extra_body=body,
     )
 
 

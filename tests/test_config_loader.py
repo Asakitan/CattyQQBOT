@@ -17,7 +17,7 @@ _SPEC.loader.exec_module(_loader)
 
 
 class ConfigLoaderTests(unittest.TestCase):
-    def test_local_critic_extra_body_gets_keep_alive_default(self) -> None:
+    def test_local_critic_extra_body_stays_gate_only(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             base_dir = Path(directory)
             data = {
@@ -41,9 +41,11 @@ class ConfigLoaderTests(unittest.TestCase):
             with patch.dict(os.environ, {}, clear=True):
                 _loader._apply_config(data, base_dir)
                 extra_body = json.loads(os.environ["CATTY_LOCAL_CRITIC_EXTRA_BODY"])
+                mode = os.environ["CATTY_LOCAL_CRITIC_MODE"]
 
         self.assertFalse(extra_body["think"])
-        self.assertEqual(extra_body["keep_alive"], "30m")
+        self.assertEqual(extra_body, {"think": False})
+        self.assertEqual(mode, "reply_gate_only")
 
 
 if __name__ == "__main__":

@@ -24,6 +24,7 @@ class ConfigTests(unittest.TestCase):
     def test_local_critic_config_parses_json_fields(self) -> None:
         config = _config.Config(
             catty_local_critic_base_url="http://127.0.0.1:11434/v1/",
+            catty_local_critic_mode="gate",
             catty_local_critic_extra_headers='{"X-Test":"ok"}',
             catty_local_critic_extra_body='{"num_ctx":2048,"keep_alive":"45m"}',
             catty_local_critic_rewrite_when_score_below="70",
@@ -43,6 +44,7 @@ class ConfigTests(unittest.TestCase):
         )
 
         self.assertEqual(config.catty_local_critic_base_url, "http://127.0.0.1:11434/v1")
+        self.assertEqual(config.catty_local_critic_mode, "reply_gate_only")
         self.assertEqual(config.catty_local_critic_extra_headers, {"X-Test": "ok"})
         self.assertEqual(config.catty_local_critic_extra_body, {"num_ctx": 2048, "keep_alive": "45m"})
         self.assertEqual(config.catty_local_critic_rewrite_when_score_below, 70)

@@ -635,6 +635,14 @@ def _local_critic_enabled() -> bool:
     )
 
 
+def _local_critic_reply_gate_only() -> bool:
+    return config.catty_local_critic_mode == "reply_gate_only"
+
+
+def _local_critic_post_check_enabled() -> bool:
+    return _local_critic_enabled() and not _local_critic_reply_gate_only()
+
+
 def _http_error_detail(exc: httpx.HTTPError) -> str:
     parts = [exc.__class__.__name__]
     message = str(exc).strip()
@@ -1245,7 +1253,7 @@ async def _apply_local_critic(
         reply = NO_REPLY_MARKER
     if _is_no_reply(reply):
         return await _resolve_no_reply(event, incoming, messages, reply)
-    if not _local_critic_enabled():
+    if not _local_critic_post_check_enabled():
         return reply
 
     try:

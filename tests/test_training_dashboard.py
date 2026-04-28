@@ -95,8 +95,15 @@ class TrainingDashboardTests(unittest.TestCase):
             self.assertTrue(any("Thinking 测试模式" in str(message.get("content")) for message in thinking_messages))
             self.assertNotIn("/no_think", [message["content"] for message in thinking_messages])
             route = _dashboard._route_config(_dashboard._load_json(config_path))
-            self.assertEqual(route["extra_body"]["keep_alive"], "30m")
+            self.assertEqual(route["extra_body"], {"think": False})
+            self.assertEqual(route["thinking_max_tokens"], 96)
             self.assertEqual(route["thinking_timeout"], 20.0)
+            self.assertEqual(_dashboard._ollama_chat_url(route["base_url"]), "http://127.0.0.1:11434/api/chat")
+            self.assertTrue(_dashboard._looks_like_ollama_route(route["base_url"], route["api_key"], route["extra_body"]))
+            self.assertEqual(
+                _dashboard._ollama_options(temperature=0.1, max_tokens=96, extra_body=route["extra_body"])["num_predict"],
+                96,
+            )
 
             saved = _dashboard.save_model_eval(
                 config_path,
