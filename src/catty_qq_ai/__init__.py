@@ -1,7 +1,9 @@
 import asyncio
+import base64
 from collections import defaultdict, deque
 from dataclasses import dataclass, field
 import json
+import mimetypes
 from pathlib import Path
 import random
 import time
@@ -61,7 +63,7 @@ from .reply_markers import (
     extract_emoji_query as _extract_emoji_query,
 )
 from .star_resonance_memory import build_star_resonance_context
-from .web_search import format_search_context, search_web
+from .web_search import format_search_context, search_image_urls, search_web
 
 
 __plugin_meta__ = PluginMetadata(
@@ -110,12 +112,21 @@ class RecentConversationMessage:
     text: str
     has_image: bool
     created_at: float
+    is_bot: bool = False
+    target_user_id: str = ""
+
+
+@dataclass(slots=True)
+class BotReplyContinuationState:
+    expires_at: float
+    remaining_messages: int
 
 
 _expression_repeats: DefaultDict[str, ExpressionRepeatState] = defaultdict(ExpressionRepeatState)
 _group_filter_batches: DefaultDict[str, GroupFilterBatchState] = defaultdict(GroupFilterBatchState)
 _group_filter_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 _recent_conversation_messages: DefaultDict[str, deque[RecentConversationMessage]] = defaultdict(lambda: deque(maxlen=80))
+_bot_reply_continuations: dict[str, BotReplyContinuationState] = {}
 _web_search_cooldowns: dict[str, float] = {}
 _turtle_soup_cooldowns: dict[str, float] = {}
 _local_critic_warmup_success_logged = False
@@ -135,6 +146,59 @@ def _conversation_queue_key(event: MessageEvent) -> str:
 def _reply_source_key(event: MessageEvent, message_id: str) -> str:
     scope = _conversation_queue_key(event)
     return f"{scope}:reply-source:{message_id}"
+
+
+def _bot_reply_continuation_key(scope: str, user_id: str) -> str:
+    return f"{scope}:user:{user_id}"
+
+
+def _prune_bot_reply_continuations(now: float) -> None:
+    stale = [key for key, state in _bot_reply_continuations.items() if state.expires_at <= now or state.remaining_messages <= 0]
+    for key in stale:
+        _bot_reply_continuations.pop(key, None)
+
+
+def _mark_bot_reply_continuation(scope: str, target_user_id: str, *, window_seconds: float = 180.0, messages: int = 3) -> None:
+    if not target_user_id:
+        return
+    now = time.monotonic()
+    _prune_bot_reply_continuations(now)
+    _bot_reply_continuations[_bot_reply_continuation_key(scope, str(target_user_id))] = BotReplyContinuationState(
+        expires_at=now + max(window_seconds, 1.0),
+        remaining_messages=max(messages, 1),
+    )
+
+
+def _has_bot_reply_continuation(event: MessageEvent) -> bool:
+    now = time.monotonic()
+    _prune_bot_reply_continuations(now)
+    key = _bot_reply_continuation_key(_conversation_queue_key(event), str(event.user_id))
+    return key in _bot_reply_continuations
+
+
+def _decrement_bot_reply_continuation(event: MessageEvent) -> None:
+    now = time.monotonic()
+    _prune_bot_reply_continuations(now)
+    key = _bot_reply_continuation_key(_conversation_queue_key(event), str(event.user_id))
+    state = _bot_reply_continuations.get(key)
+    if state is None:
+        return
+    state.remaining_messages -= 1
+    if state.remaining_messages <= 0:
+        _bot_reply_continuations.pop(key, None)
+
+
+def _bot_reply_continuation_remaining(event: MessageEvent) -> int:
+    now = time.monotonic()
+    _prune_bot_reply_continuations(now)
+    key = _bot_reply_continuation_key(_conversation_queue_key(event), str(event.user_id))
+    state = _bot_reply_continuations.get(key)
+    return max(state.remaining_messages, 0) if state is not None else 0
+
+
+def _recent_bot_prompted_user(event: MessageEvent, *, window_seconds: float = 180.0) -> bool:
+    del window_seconds
+    return _has_bot_reply_continuation(event)
 
 
 def _reply_source_keys(event: MessageEvent) -> list[str]:
@@ -257,7 +321,52 @@ def _remember_recent_conversation_event(event: MessageEvent, incoming: Extracted
             text=text or "[图片]",
             has_image=has_image,
             created_at=now,
+            is_bot=False,
         )
+    )
+
+
+def _remember_bot_conversation_message(
+    key: str,
+    *,
+    bot_id: str,
+    text: str,
+    message_id: str = "",
+    target_user_id: str = "",
+) -> None:
+    clean_text = text.strip()
+    if not clean_text:
+        return
+    recent = _recent_conversation_messages[key]
+    if message_id and any(item.message_id == message_id for item in recent):
+        return
+    now = time.monotonic()
+    if not message_id and recent:
+        last = recent[-1]
+        if last.is_bot and last.text == clean_text and now - last.created_at < 2.0:
+            return
+    if target_user_id:
+        _mark_bot_reply_continuation(key, str(target_user_id))
+    recent.append(
+        RecentConversationMessage(
+            message_id=message_id,
+            user_id=str(bot_id),
+            display_name="笨猫",
+            text=clean_text,
+            has_image=False,
+            created_at=now,
+            is_bot=True,
+            target_user_id=str(target_user_id or ""),
+        )
+    )
+
+
+def _remember_bot_reply_for_event(event: MessageEvent, text: str) -> None:
+    _remember_bot_conversation_message(
+        _conversation_queue_key(event),
+        bot_id=str(getattr(event, "self_id", "") or ""),
+        text=text,
+        target_user_id=str(event.user_id),
     )
 
 
@@ -287,12 +396,18 @@ def _wake_context_prompt(event: MessageEvent) -> str:
     for index, item in enumerate(recent[start:end], start=start):
         marker = " <- 当前唤起消息" if index == current_index else ""
         image_marker = " [含图片]" if item.has_image else ""
-        lines.append(f"{index - current_index:+d}. {item.display_name}({item.user_id}): {item.text}{image_marker}{marker}")
+        speaker = f"{item.display_name}({item.user_id})"
+        if item.is_bot:
+            speaker = f"笨猫自己({item.user_id})"
+            if item.target_user_id:
+                speaker += f" -> {item.target_user_id}"
+        lines.append(f"{index - current_index:+d}. {speaker}: {item.text}{image_marker}{marker}")
     if not lines:
         return ""
     return (
         "当前是由一条消息唤起的回复。下面给出当前唤起消息附近最多上 3 条和下 3 条的聊天上下文；"
         "实时场景通常只有上文和当前消息，若没有下文不要臆造。"
+        "如果上一条或近几条是笨猫自己刚刚向当前用户追问/邀请继续说话，而当前消息像回答或续聊，通常应该接住。"
         f"请主 AI 自己判断是否真的需要回复；如果只是误触发、重复回复同一条消息、或上下文显示不该接话，只输出 {NO_REPLY_MARKER}。\n"
         + "\n".join(lines)
     )
@@ -373,20 +488,19 @@ def _build_user_content(incoming: ExtractedMessage, *, image_description: str | 
 
 
 def _emoji_reply_context(image_analysis: dict[str, object], candidates: str) -> str:
-    if not candidates:
-        return ""
     tags = image_analysis.get("emotion_tags")
     tag_text = ", ".join(str(tag) for tag in tags) if isinstance(tags, list) else ""
+    candidate_text = candidates or "当前本地表情库没有直接命中的候选；如果很适合发图，可以输出表情意图，程序会尝试联网搜索并下载到表情库。"
     return (
         "本轮可以额外发送一个本地表情包，普通轻松聊天默认建议发送。"
         "如果需要表情包，在回复正文末尾单独追加一行 "
         f"{EMOJI_QUERY_PREFIX}你的表情意图{EMOJI_QUERY_SUFFIX}；"
         "不要解释这个标记；只有严肃排错、道歉、风险提醒或确实不适合时才不输出标记。"
-        "优先选择能自然贴合情绪的默认表情；没有合适默认表情时才用下载表情。\n"
+        "优先选择能自然贴合情绪的默认表情；没有合适默认表情时可以写更具体的表情意图让程序下载。\n"
         f"图片兴趣度：{image_analysis.get('interest', 0)}/100\n"
         f"图片/表情含义：{image_analysis.get('expression') or image_analysis.get('summary') or ''}\n"
         f"情绪标签：{tag_text}\n"
-        f"可用表情候选：\n{candidates}"
+        f"可用表情候选：\n{candidate_text}"
     )
 
 
@@ -398,8 +512,6 @@ def _generic_emoji_context(incoming: ExtractedMessage) -> str:
     if not config.catty_emoji_enabled:
         return ""
     candidates = emoji_store.candidates_text(incoming.text)
-    if not candidates:
-        return ""
     return _emoji_reply_context(
         {
             "interest": 100,
@@ -425,7 +537,57 @@ def _should_auto_emoji_reply(incoming: ExtractedMessage, reply: str) -> bool:
 
 
 def _choose_auto_emoji(reply: str, incoming: ExtractedMessage) -> EmojiEntry | None:
-    return emoji_store.choose(reply or incoming.text)
+    entry = emoji_store.choose(reply) or emoji_store.choose(incoming.text)
+    if entry is not None:
+        return entry
+    candidates = emoji_store.select("", limit=max(int(config.catty_emoji_max_candidates), 1))
+    return random.choice(candidates) if candidates else None
+
+
+def _emoji_entry_data_url(entry: EmojiEntry) -> str:
+    content_type = mimetypes.guess_type(entry.path.name)[0] or "image/jpeg"
+    data = entry.path.read_bytes()
+    return f"data:{content_type};base64,{base64.b64encode(data).decode('ascii')}"
+
+
+async def _enrich_emoji_metadata_with_vision_ai(
+    entry: EmojiEntry,
+    *,
+    query: str,
+    context_text: str,
+) -> EmojiEntry:
+    if not (config.catty_vision_api_key.strip() or _has_api_key()):
+        return entry
+    try:
+        analysis = await analyze_images_for_reply(
+            config,
+            [_emoji_entry_data_url(entry)],
+            (
+                "请给这个 QQ 猫娘聊天表情包写入库标签。"
+                f"用户想要的表情意图：{query[:120]}；"
+                f"当前聊天上下文：{context_text[:240]}；"
+                f"文件名：{entry.path.name}。"
+                "请重点判断它适合表达的情绪、动作、猫系/梗图用途。"
+            ),
+        )
+    except (OpenAICompatibleError, httpx.HTTPError, OSError) as exc:
+        logger.warning(f"Failed to enrich emoji metadata with vision AI for {entry.path.name}: {exc}")
+        return entry
+    if not analysis:
+        return entry
+    meaning = str(analysis.get("expression") or analysis.get("emoji_query") or analysis.get("summary") or entry.meaning).strip()
+    raw_tags = analysis.get("emotion_tags")
+    tags = [str(tag).strip() for tag in raw_tags if str(tag).strip()] if isinstance(raw_tags, list) else []
+    emoji_query = str(analysis.get("emoji_query") or "").strip()
+    if emoji_query:
+        tags.append(emoji_query)
+    if query:
+        tags.append(query)
+    updated = emoji_store.update_metadata(entry, meaning=meaning, tags=tags, source=entry.source, priority=entry.priority)
+    if updated is not None:
+        logger.info("Updated emoji metadata with vision AI: %s -> %s [%s]", entry.path.name, meaning, ", ".join(tags[:8]))
+        return updated
+    return entry
 
 
 async def _choose_or_download_emoji(
@@ -445,28 +607,41 @@ async def _choose_or_download_emoji(
     entry = emoji_store.adopt_downloaded(query, tags=tags)
     if entry is not None:
         logger.info("Adopted downloaded emoji for query %s: %s", query, entry.path)
-        return entry
+        return await _enrich_emoji_metadata_with_vision_ai(entry, query=query, context_text=incoming.text)
 
-    if not incoming.image_urls:
-        return None
+    image_urls = list(incoming.image_urls)
+    if not image_urls:
+        try:
+            image_urls = await search_image_urls(config, f"{query} 猫猫 表情包", max_results=6)
+        except (httpx.HTTPError, ValueError) as exc:
+            logger.warning(f"Failed to search emoji image for {query}: {exc}")
+        if not image_urls:
+            logger.info("No downloadable emoji image found for query %s", query)
+            return None
 
-    try:
-        image_data, content_type = await download_binary(config, incoming.image_urls[0])
-        entry = emoji_store.save_downloaded(
-            image_data=image_data,
-            content_type=content_type,
-            source_url=incoming.image_urls[0],
-            meaning=query,
-            tags=[*tags, query],
-            interest=max(config.catty_emoji_save_interest_threshold, 50),
-        )
-    except httpx.HTTPError as exc:
-        logger.warning(f"Failed to download missing emoji candidate for {query}: {exc}")
-        return None
-    except OSError as exc:
-        logger.warning(f"Failed to save missing emoji candidate for {query}: {exc}")
-        return None
-    return entry
+    for image_url in image_urls[:6]:
+        try:
+            image_data, content_type = await download_binary(config, image_url)
+            if content_type and not content_type.lower().startswith("image/"):
+                continue
+            entry = emoji_store.save_downloaded(
+                image_data=image_data,
+                content_type=content_type,
+                source_url=image_url,
+                meaning=query,
+                tags=[*tags, query],
+                interest=max(config.catty_emoji_save_interest_threshold, 50),
+            )
+        except httpx.HTTPError as exc:
+            logger.warning(f"Failed to download missing emoji candidate for {query}: {exc}")
+            continue
+        except OSError as exc:
+            logger.warning(f"Failed to save missing emoji candidate for {query}: {exc}")
+            continue
+        if entry is not None:
+            logger.info("Downloaded emoji image for query %s: %s", query, entry.path)
+            return await _enrich_emoji_metadata_with_vision_ai(entry, query=query, context_text=incoming.text)
+    return None
 
 
 def _build_messages(
@@ -1522,6 +1697,7 @@ async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
         for chunk in chunks:
             await bot.send_group_msg(group_id=_coerce_group_id(group_id), message=Message(chunk))
+            _remember_bot_conversation_message(f"group:{group_id}", bot_id=str(bot.self_id), text=chunk)
             if delay_seconds:
                 await asyncio.sleep(delay_seconds)
         memory_store.record_proactive_bubble_sent(group_id, sent_text)
@@ -1591,7 +1767,19 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     incoming = extract_incoming_message(str(bot.self_id), event, config, replied_to_self=replied_to_self)
     if incoming is None:
         return False
+    recent_bot_continuation = _recent_bot_prompted_user(event)
     _remember_recent_conversation_event(event, incoming)
+    if recent_bot_continuation:
+        incoming.needs_filter = False
+        incoming.directly_requested = True
+        incoming.opportunistic = False
+        state["catty_recent_bot_continuation"] = True
+        logger.info(
+            "Promoted recent bot continuation to main AI: user=%s group=%s remaining=%s",
+            event.user_id,
+            getattr(event, "group_id", ""),
+            _bot_reply_continuation_remaining(event),
+        )
     if replied_to_self and _has_consumed_reply_source(event):
         duplicate_result = {
             "should_reply": False,
@@ -1609,6 +1797,12 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
             return False
         batch = await _take_due_group_filter_batch(event, incoming)
         if batch is None:
+            logger.debug(
+                "Deferred ordinary group message to filter batch: user=%s group=%s text=%s",
+                event.user_id,
+                getattr(event, "group_id", ""),
+                incoming.text[:80],
+            )
             return False
         group_filter_context = _group_filter_reply_context(batch)
         state["catty_group_filter_context"] = group_filter_context
@@ -1637,6 +1831,12 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
         "approved" if gate_allowed else NO_REPLY_MARKER,
     )
     if not gate_allowed:
+        logger.debug(
+            "Reply gate/fallback rejected message before main AI: user=%s group=%s reason=%s",
+            event.user_id,
+            getattr(event, "group_id", ""),
+            gate_result.get("reason") if isinstance(gate_result, dict) else "",
+        )
         return False
     state["catty_replied_to_self"] = replied_to_self
     state["catty_incoming"] = incoming
@@ -1691,6 +1891,8 @@ poke_matcher = on_notice(rule=_poke_rule, priority=55, block=True)
 @expression_repeat_matcher.handle()
 async def handle_expression_repeat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     async with _locks[_conversation_queue_key(event)]:
+        repeat_message = str(state["catty_repeat_message"])
+        _remember_bot_reply_for_event(event, repeat_message)
         await matcher.finish(state["catty_repeat_message"])
 
 
@@ -1699,9 +1901,21 @@ async def handle_poke(bot: Bot, event: PokeNotifyEvent, state: T_State) -> None:
     message = Message(str(state["catty_poke_reply"]))
     if event.group_id is not None:
         async with _locks[f"group:{event.group_id}"]:
+            _remember_bot_conversation_message(
+                f"group:{event.group_id}",
+                bot_id=str(bot.self_id),
+                text=str(state["catty_poke_reply"]),
+                target_user_id=str(event.user_id),
+            )
             await bot.send_group_msg(group_id=_coerce_group_id(str(event.group_id)), message=message)
     else:
         async with _locks[f"private:{event.user_id}"]:
+            _remember_bot_conversation_message(
+                f"private:{event.user_id}",
+                bot_id=str(bot.self_id),
+                text=str(state["catty_poke_reply"]),
+                target_user_id=str(event.user_id),
+            )
             await bot.send_private_msg(user_id=int(event.user_id), message=message)
 
 
@@ -1993,13 +2207,28 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         reply = await _apply_local_critic(event, incoming, messages, reply)
 
         if _is_no_reply(reply):
+            if state.get("catty_recent_bot_continuation"):
+                _decrement_bot_reply_continuation(event)
+            logger.info(
+                "Main AI chose NO_REPLY after wake context: user=%s group=%s continuation_remaining=%s text=%s",
+                event.user_id,
+                getattr(event, "group_id", ""),
+                _bot_reply_continuation_remaining(event),
+                incoming.text[:80],
+            )
             await matcher.finish()
 
         reply, emoji_query = _extract_emoji_query(reply)
         _save_assistant_training_sample(event, incoming, messages, reply, emoji_query=emoji_query)
         emoji_entry = await _choose_or_download_emoji(emoji_query, incoming, image_analysis) if emoji_query else None
+        if emoji_query and emoji_entry is None:
+            logger.info("Emoji query did not resolve to an image: %s", emoji_query)
         if emoji_entry is None and not emoji_query and _should_auto_emoji_reply(incoming, reply):
             emoji_entry = _choose_auto_emoji(reply, incoming)
+            if emoji_entry is None:
+                logger.info("Auto emoji skipped because no local emoji entry is available")
+        if emoji_entry is not None:
+            logger.info("Selected emoji for reply: %s", emoji_entry.path)
         chunks = _reply_chunks(reply)
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
@@ -2009,12 +2238,14 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
 
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
         for chunk in chunks[:-1]:
+            _remember_bot_reply_for_event(event, chunk)
             await matcher.send(Message(chunk))
             _mark_consumed_reply_source_if_sent(event, state)
             if delay_seconds:
                 await asyncio.sleep(delay_seconds)
         if emoji_entry:
             if chunks:
+                _remember_bot_reply_for_event(event, chunks[-1])
                 await matcher.send(Message(chunks[-1]))
                 _mark_consumed_reply_source_if_sent(event, state)
                 if delay_seconds:
@@ -2023,4 +2254,6 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 _mark_consumed_reply_source_if_sent(event, state)
             await matcher.finish(Message(_emoji_segment(emoji_entry)))
         _mark_consumed_reply_source_if_sent(event, state)
-        await matcher.finish(Message(chunks[-1] if chunks else "喵喵！猫猫现在很忙哦，等一下再来找人家～"))
+        final_message = chunks[-1] if chunks else "喵喵！猫猫现在很忙哦，等一下再来找人家～"
+        _remember_bot_reply_for_event(event, final_message)
+        await matcher.finish(Message(final_message))

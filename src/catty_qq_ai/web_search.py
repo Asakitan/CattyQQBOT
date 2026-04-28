@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from html import unescape
 from html.parser import HTMLParser
+import re
 from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
 
@@ -88,6 +89,58 @@ async def search_web(config: Config, query: str) -> list[WebSearchResult]:
     parser.feed(response.text)
     max_results = max(int(config.catty_web_search_max_results), 1)
     return parser.results[:max_results]
+
+
+def _extract_duckduckgo_vqd(html: str) -> str:
+    for pattern in (
+        r"vqd=['\"]([^'\"]+)['\"]",
+        r"vqd=([^&\"']+)&",
+        r'"vqd"\s*:\s*"([^"]+)"',
+    ):
+        match = re.search(pattern, html)
+        if match:
+            return unescape(match.group(1))
+    return ""
+
+
+async def search_image_urls(config: Config, query: str, *, max_results: int = 6) -> list[str]:
+    if not query.strip() or not config.catty_web_search_enabled:
+        return []
+    timeout = config.catty_web_search_request_timeout or config.catty_request_timeout
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+        ),
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.6",
+        "Referer": "https://duckduckgo.com/",
+    }
+    async with httpx.AsyncClient(timeout=timeout, follow_redirects=True, proxy=config.catty_http_proxy or None) as client:
+        page = await client.get("https://duckduckgo.com/", params={"q": query, "iax": "images", "ia": "images"}, headers=headers)
+        page.raise_for_status()
+        vqd = _extract_duckduckgo_vqd(page.text)
+        if not vqd:
+            return []
+        response = await client.get(
+            "https://duckduckgo.com/i.js",
+            params={"l": "zh-cn", "o": "json", "q": query, "vqd": vqd, "f": ",,,", "p": "1"},
+            headers=headers,
+        )
+        response.raise_for_status()
+    data = response.json()
+    results = data.get("results") if isinstance(data, dict) else None
+    urls: list[str] = []
+    if not isinstance(results, list):
+        return urls
+    for item in results:
+        if not isinstance(item, dict):
+            continue
+        image_url = str(item.get("image") or item.get("thumbnail") or "").strip()
+        if image_url.startswith("http") and image_url not in urls:
+            urls.append(image_url)
+        if len(urls) >= max_results:
+            break
+    return urls
 
 
 def format_search_context(query: str, results: list[WebSearchResult]) -> str:

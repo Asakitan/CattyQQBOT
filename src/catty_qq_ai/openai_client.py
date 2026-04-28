@@ -228,6 +228,8 @@ def _first_frame_data_url(data: bytes) -> str | None:
 
 
 async def _vision_image_url(config: Config, url: str) -> str:
+    if url.startswith("data:"):
+        return url
     timeout = config.catty_vision_request_timeout or config.catty_request_timeout
     async with httpx.AsyncClient(**_client_kwargs(timeout, config.catty_http_proxy)) as client:
         response = await client.get(url)

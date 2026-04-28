@@ -27,7 +27,7 @@ EmojiStore = _emoji_store.EmojiStore
 
 
 class EmojiStoreTests(unittest.TestCase):
-    def test_manifest_is_allowlist_and_unknown_query_does_not_fallback(self) -> None:
+    def test_default_emoji_files_are_auto_registered_and_unknown_query_does_not_fallback(self) -> None:
         with TemporaryDirectory() as tmp:
             root = Path(tmp) / "emojis"
             root.mkdir()
@@ -61,10 +61,10 @@ class EmojiStoreTests(unittest.TestCase):
 
             store = EmojiStore(config)
 
-            self.assertEqual([entry.path.name for entry in store._entries], ["唐猫不屑.jpg"])
+            self.assertEqual([entry.path.name for entry in store._entries], ["唐猫不屑.jpg", "未登记.jpg"])
             self.assertEqual(store.choose("不屑").path.name, "唐猫不屑.jpg")
             self.assertIsNone(store.choose("给爷喵一个"))
-            self.assertIsNone(store.choose("未登记"))
+            self.assertEqual(store.choose("未登记").path.name, "未登记.jpg")
             self.assertEqual(store.choose("事后喵。", refresh_on_miss=True), None)
             self.assertEqual(store.choose("").path.name, "唐猫不屑.jpg")
 
@@ -95,7 +95,7 @@ class EmojiStoreTests(unittest.TestCase):
             adopted = store.adopt_downloaded("傻猫")
             self.assertIsNotNone(adopted)
             self.assertEqual(adopted.path.name, "傻猫.jpg")
-            self.assertIsNone(store.choose("未登记"))
+            self.assertEqual(store.choose("未登记").path.name, "未登记.jpg")
 
     def test_choose_can_refresh_after_manifest_or_files_change(self) -> None:
         with TemporaryDirectory() as tmp:

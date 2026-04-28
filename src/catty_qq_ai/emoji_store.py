@@ -17,6 +17,32 @@ EMOJI_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp"}
 QUERY_EDGE_PUNCTUATION = " \t\r\n。！？!?；;，,、：:….'\"`“”‘’（）()[]【】<>《》"
 logger = logging.getLogger(__name__)
 
+EMOJI_QUERY_ALIASES = {
+    "开心": ["高兴", "唐猫高兴", "喵喵喵", "欸嘿", "起飞喵"],
+    "高兴": ["开心", "唐猫高兴", "喵喵喵", "欸嘿", "起飞喵"],
+    "喜欢": ["我喜欢你喵", "贴贴", "喵喵看着你"],
+    "贴贴": ["我喜欢你喵", "喜欢", "喵喵看着你"],
+    "撒娇": ["我喜欢你喵", "喵喵喵", "喵喵看着你"],
+    "害羞": ["事后喵", "我喜欢你喵", "色诱喵"],
+    "涩": ["事后喵", "色诱喵"],
+    "色": ["事后喵", "色诱喵"],
+    "疑惑": ["何意味", "何意味？", "喵喵看着你"],
+    "问号": ["何意味", "何意味？"],
+    "震惊": ["何意味", "拍桌跳", "喵喵喵"],
+    "无语": ["无语喵", "唐猫不屑"],
+    "嫌弃": ["唐猫不屑", "无语喵"],
+    "不屑": ["唐猫不屑", "敢惹我"],
+    "生气": ["炸毛喵", "敢惹我", "给你一拳喵"],
+    "炸毛": ["炸毛喵", "敢惹我", "给你一拳喵"],
+    "打": ["给你一拳喵", "挨打喵", "拍桌跳"],
+    "哭": ["哭哭喵", "燃尽了喵"],
+    "难过": ["哭哭喵", "燃尽了喵"],
+    "累": ["燃尽了喵", "睡觉喵", "睡觉了喵"],
+    "睡": ["睡觉喵", "睡觉了喵"],
+    "出击": ["出击喵", "火力大喵", "起飞喵"],
+    "自豪": ["自豪喵", "唐猫高兴"],
+}
+
 
 @dataclass(slots=True)
 class EmojiEntry:
@@ -30,7 +56,20 @@ class EmojiEntry:
 def _safe_tokens(text: str) -> list[str]:
     text = text.strip(QUERY_EDGE_PUNCTUATION)
     tokens = re.split(r"[\s,，、;；|_\\/\-.]+", text.lower())
-    return [token for token in tokens if token]
+    result = [token for token in tokens if token]
+    compact = "".join(result)
+    expanded: list[str] = []
+    for token in [*result, compact]:
+        if not token:
+            continue
+        for keyword, aliases in EMOJI_QUERY_ALIASES.items():
+            keyword_lower = keyword.lower()
+            if keyword_lower in token or token in keyword_lower:
+                expanded.extend(alias.lower() for alias in aliases)
+    for token in expanded:
+        if token and token not in result:
+            result.append(token)
+    return result
 
 
 def _clean_query(text: str) -> str:
@@ -174,6 +213,7 @@ class EmojiStore:
         entries: list[EmojiEntry] = []
         download_root = self.download_dir.resolve()
         skipped_unindexed = 0
+        auto_registered = 0
         for path in sorted(self.root.rglob("*")):
             if not path.is_file() or path.suffix.lower() not in EMOJI_EXTENSIONS:
                 continue
@@ -185,8 +225,13 @@ class EmojiStore:
                 source = "default"
             meta = emojis.get(key)
             if not isinstance(meta, dict):
-                skipped_unindexed += 1
-                continue
+                if source == "default":
+                    meta = self._default_meta(path, source)
+                    emojis[key] = meta
+                    auto_registered += 1
+                else:
+                    skipped_unindexed += 1
+                    continue
             meta.setdefault("source", source)
             meta.setdefault("priority", 100 if meta.get("source") == "default" else 50)
             raw_tags = meta.get("tags")
@@ -210,6 +255,12 @@ class EmojiStore:
             logger.info(
                 "Skipped %s emoji image files that are not listed in manifest %s.",
                 skipped_unindexed,
+                self.manifest_path,
+            )
+        if auto_registered:
+            logger.info(
+                "Auto-registered %s default emoji image files in manifest %s.",
+                auto_registered,
                 self.manifest_path,
             )
 
@@ -337,3 +388,42 @@ class EmojiStore:
         self._scan_files()
         self._save_manifest()
         return self.choose(" ".join(clean_tags) or meaning, tags=clean_tags)
+
+    def update_metadata(
+        self,
+        entry: EmojiEntry,
+        *,
+        meaning: str,
+        tags: list[str],
+        source: str | None = None,
+        priority: int | None = None,
+    ) -> EmojiEntry | None:
+        if not self.enabled:
+            return None
+        key = self._relative_key(entry.path)
+        emojis = self._manifest.setdefault("emojis", {})
+        if not isinstance(emojis, dict):
+            emojis = {}
+            self._manifest["emojis"] = emojis
+        meta = emojis.get(key)
+        if not isinstance(meta, dict):
+            meta = self._default_meta(entry.path, source or entry.source)
+        clean_tags: list[str] = []
+        for tag in tags:
+            tag = str(tag).strip().lower()
+            if tag and tag not in clean_tags:
+                clean_tags.append(tag)
+        for token in _safe_tokens(meaning):
+            if token not in clean_tags:
+                clean_tags.append(token)
+        meta["meaning"] = meaning.strip() or entry.meaning or entry.path.stem
+        meta["tags"] = clean_tags or entry.tags
+        meta["source"] = source or str(meta.get("source") or entry.source)
+        if priority is not None:
+            meta["priority"] = max(min(int(priority), 100), 0)
+        else:
+            meta.setdefault("priority", entry.priority)
+        emojis[key] = meta
+        self._scan_files()
+        self._save_manifest()
+        return self.choose(meta["meaning"], tags=clean_tags) or entry
