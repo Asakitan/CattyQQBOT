@@ -303,6 +303,7 @@ dist/CattyQQAI.exe
 | `local_critic.model` | `qwen2.5:1.5b` | 本地校正模型名 |
 | `local_critic.max_tokens` | `96` | 回复校正 JSON 输出最大 token |
 | `local_critic.request_timeout` | `30` | 本地校正模型请求超时；超时后保留原回复 |
+| `local_critic.extra_body` | `{"think": false, "keep_alive": "30m"}` | 传给 Ollama/OpenAI-compatible 端点的额外请求体；远端内存偏高时可手动加入 `{"options":{"num_ctx":1024}}` 限制上下文缓存 |
 | `local_critic.rewrite_when_score_below` | `75` | 评分低于该值时请求主模型重写 |
 | `local_critic.reply_gate_enabled` | `true` | 是否由本地模型决定本轮是否交给主 AI 回复 |
 | `local_critic.reply_gate_min_confidence` | `55` | 本地 reply gate 放行所需最低置信度 |
@@ -377,6 +378,7 @@ dist/CattyQQAI.exe
 | `local_training.progress_log_path` | `training/local_training.log` | 自动训练 watcher 的日志路径 |
 | `local_training.model_test_max_tokens` | `480` | 训练窗口里手动询问本地模型时的最大输出 token |
 | `local_training.model_test_request_timeout` | `60` | 训练窗口里手动询问本地模型时的请求超时 |
+| `local_training.model_test_thinking_timeout` | `20` | 训练窗口勾选 `Thinking` 时的单独超时；避免远端思维链卡住导致小窗长时间等待 |
 | `local_training.model_test_scores_path` | `training/model_eval_scores.jsonl` | 训练窗口保存人工评分和输出耗时的 JSONL 路径 |
 | `local_training.assistant_min_samples` | `200` | 主模型回复样本至少累计多少条才允许训练 |
 | `local_training.assistant_min_new_samples` | `50` | 主模型回复距离上次训练至少新增多少条才再次训练 |

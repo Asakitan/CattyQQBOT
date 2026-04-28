@@ -92,9 +92,11 @@ class TrainingDashboardTests(unittest.TestCase):
             self.assertEqual(messages[7]["content"], "/no_think")
             thinking_messages = _dashboard.build_model_test_messages(config_path, "测试一下", thinking=True)
             self.assertTrue(any("禁止把笨猫当成第三个人" in str(message.get("content")) for message in thinking_messages))
+            self.assertTrue(any("Thinking 测试模式" in str(message.get("content")) for message in thinking_messages))
             self.assertNotIn("/no_think", [message["content"] for message in thinking_messages])
             route = _dashboard._route_config(_dashboard._load_json(config_path))
             self.assertEqual(route["extra_body"]["keep_alive"], "30m")
+            self.assertEqual(route["thinking_timeout"], 20.0)
 
             saved = _dashboard.save_model_eval(
                 config_path,

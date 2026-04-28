@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import socket
 import threading
 import time
 from pathlib import Path
@@ -18,6 +19,10 @@ _PROMPTS_SPEC.loader.exec_module(_PROMPTS)
 
 NO_REPLY_MARKER = "<<<CATTY_NO_REPLY>>>"
 REPLY_SPLIT_MARKER = "<<<CATTY_REPLY_SPLIT>>>"
+THINKING_TEST_PROMPT = (
+    "Thinking 测试模式：允许短暂思考来对比质量，但必须尽快给最终正文；"
+    "不要卡在思维链，不要只输出思考过程，最终回复仍按主 AI 人格和 QQ 口吻输出。"
+)
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -73,6 +78,7 @@ def _route_config(config: dict[str, Any]) -> dict[str, Any]:
     ai = _json_object(config.get("ai"))
     local_critic = _json_object(config.get("local_critic"))
     training = _json_object(config.get("local_training"))
+    timeout = float(training.get("model_test_request_timeout") or local_critic.get("request_timeout") or 60)
     extra_body = {
         "think": False,
         "keep_alive": local_critic.get("warmup_keep_alive") or "30m",
@@ -84,7 +90,8 @@ def _route_config(config: dict[str, Any]) -> dict[str, Any]:
         "model": str(local_critic.get("model") or ""),
         "temperature": local_critic.get("temperature", ai.get("temperature", 0.7)),
         "max_tokens": int(training.get("model_test_max_tokens") or ai.get("max_tokens") or 480),
-        "timeout": float(training.get("model_test_request_timeout") or local_critic.get("request_timeout") or 60),
+        "timeout": timeout,
+        "thinking_timeout": float(training.get("model_test_thinking_timeout") or min(timeout, 20.0)),
         "extra_headers": _json_object(local_critic.get("extra_headers")),
         "extra_body": extra_body,
     }
@@ -139,7 +146,9 @@ def build_model_test_messages(config_path: Path, user_text: str, *, thinking: bo
     messages.append({"role": "system", "content": _PROMPTS.build_catgirl_examples_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": _thread_test_prompt()})
     messages.append({"role": "system", "content": _test_memory_context(config_path, config)})
-    if not thinking:
+    if thinking:
+        messages.append({"role": "system", "content": THINKING_TEST_PROMPT})
+    else:
         messages.append({"role": "system", "content": "/no_think"})
     messages.append({"role": "user", "content": user_text.strip()})
     return messages
@@ -151,6 +160,7 @@ def run_model_test(config_path: Path, user_text: str, *, thinking: bool = False)
     if not route["model"]:
         raise ValueError("local_critic.model is empty")
     messages = build_model_test_messages(config_path, user_text, thinking=thinking)
+    request_timeout = float(route["thinking_timeout"] if thinking else route["timeout"])
     extra_body = dict(route["extra_body"])
     extra_body["think"] = bool(thinking)
     payload: dict[str, Any] = {
@@ -170,11 +180,20 @@ def run_model_test(config_path: Path, user_text: str, *, thinking: bool = False)
     req = request.Request(_chat_completions_url(route["base_url"]), data=body, headers=headers, method="POST")
     started = time.perf_counter()
     try:
-        with request.urlopen(req, timeout=route["timeout"]) as response:
+        with request.urlopen(req, timeout=request_timeout) as response:
             raw = response.read().decode("utf-8", errors="replace")
     except error.HTTPError as exc:
         detail = exc.read().decode("utf-8", errors="replace")[:500]
         raise RuntimeError(f"HTTP {exc.code}: {detail}") from exc
+    except (TimeoutError, socket.timeout) as exc:
+        mode = "thinking" if thinking else "no_think"
+        raise RuntimeError(f"{mode} request timed out after {request_timeout:g}s") from exc
+    except error.URLError as exc:
+        reason = getattr(exc, "reason", exc)
+        if isinstance(reason, (TimeoutError, socket.timeout)) or "timed out" in str(reason).lower():
+            mode = "thinking" if thinking else "no_think"
+            raise RuntimeError(f"{mode} request timed out after {request_timeout:g}s") from exc
+        raise
     elapsed = time.perf_counter() - started
     data = json.loads(raw)
     choice = data["choices"][0]
@@ -192,6 +211,8 @@ def run_model_test(config_path: Path, user_text: str, *, thinking: bool = False)
         "messages": messages,
         "response": text,
         "thinking_enabled": bool(thinking),
+        "request_timeout_seconds": request_timeout,
+        "request_extra_body": extra_body,
         "usage": data.get("usage") if isinstance(data, dict) else None,
     }
 
@@ -453,7 +474,13 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
             return
         ask_button.configure(state="disabled")
         save_button.configure(state="disabled")
-        test_status_var.set("Asking model...")
+        mode = "thinking" if thinking_var.get() else "no_think"
+        try:
+            route = _route_config(_load_json(config_path))
+            timeout = float(route["thinking_timeout"] if thinking_var.get() else route["timeout"])
+            test_status_var.set(f"Asking model ({mode}, timeout {timeout:g}s)...")
+        except Exception:
+            test_status_var.set(f"Asking model ({mode})...")
         set_output("")
 
         def worker() -> None:
@@ -473,8 +500,13 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
         model = result.get("model", "-")
         mode = "thinking" if result.get("thinking_enabled") else "no_think"
         usage = result.get("usage")
-        usage_text = f"\n\nusage={json.dumps(usage, ensure_ascii=False)}" if usage else ""
-        set_output(str(result.get("response") or "") + usage_text)
+        request_meta = {
+            "timeout_seconds": result.get("request_timeout_seconds"),
+            "extra_body": result.get("request_extra_body"),
+        }
+        meta_text = "\n\nrequest=" + json.dumps(request_meta, ensure_ascii=False)
+        usage_text = f"\nusage={json.dumps(usage, ensure_ascii=False)}" if usage else ""
+        set_output(str(result.get("response") or "") + meta_text + usage_text)
         test_status_var.set(f"{model} {mode} replied in {elapsed}s")
         ask_button.configure(state="normal")
         save_button.configure(state="normal")
