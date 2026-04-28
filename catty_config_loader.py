@@ -127,22 +127,22 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "api_key": "ollama",
         "model": "qwen2.5:1.5b",
         "extra_headers": {},
-        "extra_body": {"think": False},
+        "extra_body": {"think": False, "keep_alive": "30m"},
         "temperature": 0.1,
         "max_tokens": 96,
-        "request_timeout": 5,
+        "request_timeout": 30,
         "rewrite_when_score_below": 75,
         "reply_gate_enabled": True,
         "reply_gate_min_confidence": 55,
         "reply_gate_examples": 0,
-        "reply_gate_max_tokens": 32,
+        "reply_gate_max_tokens": 16,
         "reply_gate_request_timeout": 4,
-        "reply_gate_user_message_chars": 240,
-        "reply_gate_plain_text_chars": 120,
-        "reply_gate_context_chars": 160,
+        "reply_gate_user_message_chars": 120,
+        "reply_gate_plain_text_chars": 60,
+        "reply_gate_context_chars": 80,
         "warmup_enabled": True,
         "warmup_keep_alive": "30m",
-        "warmup_interval_seconds": 1200,
+        "warmup_interval_seconds": 300,
         "warmup_request_timeout": 60,
         "force_direct_reply": True,
         "collect_training_samples": True,
@@ -453,12 +453,20 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FILTER_ANGER_COOLDOWN_SECONDS", filter_config.get("anger_cooldown_seconds"))
 
     local_critic = _section(data, "local_critic")
+    local_critic_extra_body = local_critic.get("extra_body")
+    if not isinstance(local_critic_extra_body, dict):
+        local_critic_extra_body = {}
+    merged_local_critic_extra_body = {
+        "think": False,
+        "keep_alive": local_critic.get("warmup_keep_alive") or "30m",
+        **local_critic_extra_body,
+    }
     _set_env("CATTY_LOCAL_CRITIC_ENABLED", local_critic.get("enabled"))
     _set_env("CATTY_LOCAL_CRITIC_BASE_URL", local_critic.get("base_url"))
     _set_env("CATTY_LOCAL_CRITIC_API_KEY", local_critic.get("api_key"))
     _set_env("CATTY_LOCAL_CRITIC_MODEL", local_critic.get("model"))
     _set_env("CATTY_LOCAL_CRITIC_EXTRA_HEADERS", local_critic.get("extra_headers"), json_value=True)
-    _set_env("CATTY_LOCAL_CRITIC_EXTRA_BODY", local_critic.get("extra_body"), json_value=True)
+    _set_env("CATTY_LOCAL_CRITIC_EXTRA_BODY", merged_local_critic_extra_body, json_value=True)
     _set_env("CATTY_LOCAL_CRITIC_TEMPERATURE", local_critic.get("temperature"))
     _set_env("CATTY_LOCAL_CRITIC_MAX_TOKENS", local_critic.get("max_tokens"))
     _set_env("CATTY_LOCAL_CRITIC_REQUEST_TIMEOUT", local_critic.get("request_timeout"))

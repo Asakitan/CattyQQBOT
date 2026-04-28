@@ -14,6 +14,12 @@ class PersonaPromptsTests(unittest.TestCase):
     def test_self_check_mentions_intent_and_markers(self) -> None:
         prompt = _persona_prompts.build_reply_self_check_prompt("NOPE", "SPLIT")
 
+        self.assertIn("禁止把笨猫当成第三个人", prompt)
+        self.assertIn("脱离人格倾向", prompt)
+        self.assertIn("敏感/超限边界", prompt)
+        self.assertIn("未成年性化", prompt)
+        self.assertIn("安全替代", prompt)
+        self.assertIn("重读主 prompt", prompt)
         self.assertIn("用户真实意图", prompt)
         self.assertIn("猫系动作", prompt)
         self.assertIn("现场感", prompt)
@@ -32,6 +38,15 @@ class PersonaPromptsTests(unittest.TestCase):
         self.assertIn("ヾ(≧▽≦*)o", prompt)
         self.assertIn("好回复：NOPE", prompt)
         self.assertNotIn("<<<CATTY_NO_REPLY>>>", prompt)
+
+    def test_persona_memory_anchors_identity_without_copying_full_prompt(self) -> None:
+        prompt = _persona_prompts.build_persona_memory_prompt("你现在是米雪儿，长设定。")
+
+        self.assertIn("笨猫人格记忆", prompt)
+        self.assertIn("米雪儿、笨猫、猫猫都指你本人", prompt)
+        self.assertIn("不要把笨猫当第三个人", prompt)
+        self.assertIn("重新阅读主 prompt", prompt)
+        self.assertIn("未成年或年龄不明", prompt)
 
 
 if __name__ == "__main__":

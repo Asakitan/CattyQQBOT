@@ -46,7 +46,7 @@ from .openai_client import (
     download_binary,
     local_critic_completion,
 )
-from .persona_prompts import build_catgirl_examples_prompt, build_reply_self_check_prompt
+from .persona_prompts import build_catgirl_examples_prompt, build_persona_memory_prompt, build_reply_self_check_prompt
 from .reply_markers import (
     EMOJI_QUERY_PREFIX,
     EMOJI_QUERY_SUFFIX,
@@ -103,6 +103,7 @@ _group_filter_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 _web_search_cooldowns: dict[str, float] = {}
 _turtle_soup_cooldowns: dict[str, float] = {}
 _local_critic_warmup_success_logged = False
+_consumed_reply_source_ids: dict[str, float] = {}
 
 
 def _has_api_key() -> bool:
@@ -113,6 +114,35 @@ def _conversation_queue_key(event: MessageEvent) -> str:
     if isinstance(event, GroupMessageEvent):
         return f"group:{event.group_id}"
     return f"private:{event.user_id}"
+
+
+def _reply_source_key(event: MessageEvent, message_id: str) -> str:
+    scope = _conversation_queue_key(event)
+    return f"{scope}:reply-source:{message_id}"
+
+
+def _reply_source_keys(event: MessageEvent) -> list[str]:
+    return [_reply_source_key(event, message_id) for message_id in reply_message_ids(event)]
+
+
+def _prune_consumed_reply_sources(now: float) -> None:
+    max_age = 3600.0
+    stale = [key for key, timestamp in _consumed_reply_source_ids.items() if now - timestamp > max_age]
+    for key in stale:
+        _consumed_reply_source_ids.pop(key, None)
+
+
+def _has_consumed_reply_source(event: MessageEvent) -> bool:
+    now = time.monotonic()
+    _prune_consumed_reply_sources(now)
+    return any(key in _consumed_reply_source_ids for key in _reply_source_keys(event))
+
+
+def _mark_consumed_reply_source(event: MessageEvent) -> None:
+    now = time.monotonic()
+    _prune_consumed_reply_sources(now)
+    for key in _reply_source_keys(event):
+        _consumed_reply_source_ids[key] = now
 
 
 def _soft_directed(incoming: ExtractedMessage) -> bool:
@@ -365,8 +395,12 @@ def _build_messages(
     star_resonance_context: str | None = None,
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
-    if config.catty_system_prompt.strip():
-        messages.append({"role": "system", "content": config.catty_system_prompt.strip()})
+    system_prompt = config.catty_system_prompt.strip()
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    persona_memory = build_persona_memory_prompt(system_prompt)
+    if persona_memory:
+        messages.append({"role": "system", "content": persona_memory})
     if config.catty_reply_self_check_enabled:
         messages.append(
             {
@@ -720,7 +754,7 @@ async def _warm_local_critic_model() -> None:
 async def _local_critic_warmup_loop() -> None:
     if not config.catty_local_critic_warmup_enabled or not _local_critic_enabled():
         return
-    interval = max(float(config.catty_local_critic_warmup_interval_seconds or 1200.0), 60.0)
+    interval = max(float(config.catty_local_critic_warmup_interval_seconds or 300.0), 60.0)
     while True:
         try:
             await _warm_local_critic_model()
@@ -874,11 +908,10 @@ def _local_reply_gate_messages(
             "role": "system",
             "content": (
                 "/no_think\n"
-                "Fast QQ reply gate. Decide only whether the main AI should answer this event. "
-                "Return compact JSON only, no Markdown, no chain-of-thought, no user-facing reply. "
-                "Reply true for a direct ask to the bot, image/help request, special-care opening, or batched group context that expects the bot. "
-                "Reply false for idle group chatter, third-person mention, no response expectation, spam, or noise. "
-                "Schema: {\"should_reply\":true|false,\"confidence\":0-100,\"reason\":\"<=12 chars\",\"training_tags\":[]}."
+                "Fast QQ reply gate. JSON only. "
+                "true=direct bot ask/image help/special-care/batched context expects bot. "
+                "false=idle chatter/third-person/no expectation/spam. "
+                "Schema:{\"should_reply\":true|false,\"confidence\":0-100,\"reason\":\"<=8 chars\"}."
             ),
         },
     ]
@@ -1403,7 +1436,16 @@ def _reply_chunks(reply: str) -> list[str]:
     for index in range(len(chunks) - 1):
         chunks[index] = chunks[index].rstrip(TRAILING_CHAT_PUNCTUATION)
     chunks = [chunk for chunk in chunks if chunk]
-    return chunks
+    return _cap_reply_chunks(chunks, max_chunks=2)
+
+
+def _cap_reply_chunks(chunks: list[str], *, max_chunks: int) -> list[str]:
+    if len(chunks) <= max_chunks:
+        return chunks
+    if max_chunks <= 1:
+        joined = "\n".join(chunks).strip()
+        return [joined] if joined else []
+    return chunks[: max_chunks - 1] + ["\n".join(chunks[max_chunks - 1 :]).strip()]
 
 
 def _coerce_message_id(message_id: str) -> int | str:
@@ -1443,6 +1485,16 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     incoming = extract_incoming_message(str(bot.self_id), event, config, replied_to_self=replied_to_self)
     if incoming is None:
         return False
+    if replied_to_self and _has_consumed_reply_source(event):
+        duplicate_result = {
+            "should_reply": False,
+            "confidence": 100,
+            "reason": "duplicate reply source already handled",
+            "deduplicated_reply_source": True,
+        }
+        state["catty_reply_gate_result"] = duplicate_result
+        _save_local_critic_sample(event, incoming, "reply_gate", {"reply_gate": duplicate_result}, NO_REPLY_MARKER)
+        return False
     group_filter_context = ""
     special_care_context = ""
     if incoming.needs_filter:
@@ -1479,6 +1531,8 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     )
     if not gate_allowed:
         return False
+    if replied_to_self:
+        _mark_consumed_reply_source(event)
     state["catty_incoming"] = incoming
     return True
 

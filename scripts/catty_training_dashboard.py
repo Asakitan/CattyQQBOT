@@ -1,12 +1,23 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import threading
 import time
 from pathlib import Path
 from typing import Any
 from urllib import error, request
+
+_ROOT = Path(__file__).resolve().parents[1]
+_PROMPTS_PATH = _ROOT / "src" / "catty_qq_ai" / "persona_prompts.py"
+_PROMPTS_SPEC = importlib.util.spec_from_file_location("catty_dashboard_persona_prompts", _PROMPTS_PATH)
+assert _PROMPTS_SPEC is not None and _PROMPTS_SPEC.loader is not None
+_PROMPTS = importlib.util.module_from_spec(_PROMPTS_SPEC)
+_PROMPTS_SPEC.loader.exec_module(_PROMPTS)
+
+NO_REPLY_MARKER = "<<<CATTY_NO_REPLY>>>"
+REPLY_SPLIT_MARKER = "<<<CATTY_REPLY_SPLIT>>>"
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -62,6 +73,11 @@ def _route_config(config: dict[str, Any]) -> dict[str, Any]:
     ai = _json_object(config.get("ai"))
     local_critic = _json_object(config.get("local_critic"))
     training = _json_object(config.get("local_training"))
+    extra_body = {
+        "think": False,
+        "keep_alive": local_critic.get("warmup_keep_alive") or "30m",
+        **_json_object(local_critic.get("extra_body")),
+    }
     return {
         "base_url": str(local_critic.get("base_url") or "http://127.0.0.1:11434/v1"),
         "api_key": str(local_critic.get("api_key") or "ollama"),
@@ -70,36 +86,72 @@ def _route_config(config: dict[str, Any]) -> dict[str, Any]:
         "max_tokens": int(training.get("model_test_max_tokens") or ai.get("max_tokens") or 480),
         "timeout": float(training.get("model_test_request_timeout") or local_critic.get("request_timeout") or 60),
         "extra_headers": _json_object(local_critic.get("extra_headers")),
-        "extra_body": _json_object(local_critic.get("extra_body")),
+        "extra_body": extra_body,
     }
 
 
-def build_model_test_messages(config_path: Path, user_text: str) -> list[dict[str, object]]:
+def _thread_test_prompt() -> str:
+    return (
+        "这是训练测试窗口的主线程模拟请求。请像真实 QQ 回复主线程一样回答："
+        "已经通过本地 reply gate，不要再做是否回复判断，不要解释测试环境，不要输出 "
+        f"{NO_REPLY_MARKER}；信息不足时用笨猫口吻短问一句。"
+    )
+
+
+def _test_memory_context(config_path: Path, config: dict[str, Any]) -> str:
+    memory = _json_object(config.get("memory"))
+    if memory.get("enabled") is False:
+        return "测试窗口模拟记忆：当前关闭 memory.enabled。"
+    lines = ["测试窗口模拟记忆：", "- 当前输入按私聊/主线程验收处理，目标是观察模型真实回复质量。"]
+    user_titles = _json_object(memory.get("user_titles"))
+    owner_ids = [str(user_id) for user_id, title in user_titles.items() if str(title).strip() == "主人"]
+    if owner_ids:
+        owner_id = owner_ids[0]
+        lines.append(f"- 配置里 QQ {owner_id} 的称呼是「主人」；测试里可以按主人语气回应。")
+        storage_dir = str(memory.get("user_storage_dir") or "memory_users")
+        user_dir = _resolve(config_path.resolve().parent, storage_dir, "memory_users")
+        user_file = user_dir / f"user_{owner_id}.json"
+        user_data = _load_json(user_file)
+        data = _json_object(user_data.get("data"))
+        summary = str(data.get("private_summary") or "").strip()
+        if summary:
+            lines.append("- 私聊摘要：" + summary[:500])
+        profile = _json_object(data.get("private_profile"))
+        impression = str(profile.get("impression") or "").strip()
+        if impression:
+            lines.append("- 私聊画像：" + impression[:160])
+    else:
+        lines.append("- 未配置主人称呼；测试里不要强行叫主人。")
+    lines.append("- 这是记忆上下文，不要原样背诵，只在回答相关时自然使用。")
+    return "\n".join(lines)
+
+
+def build_model_test_messages(config_path: Path, user_text: str, *, thinking: bool = False) -> list[dict[str, object]]:
     config = _load_json(config_path)
     chat = _json_object(config.get("chat"))
     system_prompt = str(chat.get("system_prompt") or "").strip()
     messages: list[dict[str, object]] = []
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
-    messages.append(
-        {
-            "role": "system",
-            "content": (
-                "这是训练测试窗口的人工验收请求。请按主 AI 的人格、语气和回复规则正常回答用户，"
-                "不要解释测试环境，不要输出 NO_REPLY；信息不足时用角色口吻短问一句。"
-            ),
-        }
-    )
+    messages.append({"role": "system", "content": _PROMPTS.build_persona_memory_prompt(system_prompt)})
+    messages.append({"role": "system", "content": _PROMPTS.build_reply_self_check_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER)})
+    messages.append({"role": "system", "content": _PROMPTS.build_catgirl_examples_prompt(NO_REPLY_MARKER)})
+    messages.append({"role": "system", "content": _thread_test_prompt()})
+    messages.append({"role": "system", "content": _test_memory_context(config_path, config)})
+    if not thinking:
+        messages.append({"role": "system", "content": "/no_think"})
     messages.append({"role": "user", "content": user_text.strip()})
     return messages
 
 
-def run_model_test(config_path: Path, user_text: str) -> dict[str, Any]:
+def run_model_test(config_path: Path, user_text: str, *, thinking: bool = False) -> dict[str, Any]:
     config = _load_json(config_path)
     route = _route_config(config)
     if not route["model"]:
         raise ValueError("local_critic.model is empty")
-    messages = build_model_test_messages(config_path, user_text)
+    messages = build_model_test_messages(config_path, user_text, thinking=thinking)
+    extra_body = dict(route["extra_body"])
+    extra_body["think"] = bool(thinking)
     payload: dict[str, Any] = {
         "model": route["model"],
         "messages": messages,
@@ -107,7 +159,7 @@ def run_model_test(config_path: Path, user_text: str) -> dict[str, Any]:
         "temperature": route["temperature"],
         "max_tokens": route["max_tokens"],
     }
-    payload.update(route["extra_body"])
+    payload.update(extra_body)
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
     headers = {
         "Authorization": f"Bearer {route['api_key']}",
@@ -138,6 +190,7 @@ def run_model_test(config_path: Path, user_text: str) -> dict[str, Any]:
         "prompt": user_text,
         "messages": messages,
         "response": text,
+        "thinking_enabled": bool(thinking),
         "usage": data.get("usage") if isinstance(data, dict) else None,
     }
 
@@ -335,12 +388,15 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
     controls.columnconfigure(5, weight=1)
     ask_button = ttk.Button(controls, text="Ask model")
     ask_button.grid(row=0, column=0, sticky="w")
-    ttk.Label(controls, text="Score").grid(row=0, column=1, padx=(12, 4))
+    thinking_var = tk.BooleanVar(value=False)
+    thinking_check = ttk.Checkbutton(controls, text="Thinking", variable=thinking_var)
+    thinking_check.grid(row=0, column=1, padx=(12, 0), sticky="w")
+    ttk.Label(controls, text="Score").grid(row=0, column=2, padx=(12, 4))
     score_var = tk.IntVar(value=5)
     score_box = ttk.Combobox(controls, textvariable=score_var, values=[1, 2, 3, 4, 5], width=4, state="readonly")
-    score_box.grid(row=0, column=2, sticky="w")
+    score_box.grid(row=0, column=3, sticky="w")
     save_button = ttk.Button(controls, text="Save score")
-    save_button.grid(row=0, column=3, padx=(8, 0), sticky="w")
+    save_button.grid(row=0, column=4, padx=(8, 0), sticky="w")
     test_status_var = tk.StringVar(value="Ready")
     ttk.Label(controls, textvariable=test_status_var).grid(row=0, column=5, sticky="e")
 
@@ -401,7 +457,7 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
 
         def worker() -> None:
             try:
-                result = run_model_test(config_path, prompt)
+                result = run_model_test(config_path, prompt, thinking=thinking_var.get())
             except Exception as exc:
                 root.after(0, lambda: finish_error(exc))
             else:
@@ -414,10 +470,11 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
         latest_result.update(result)
         elapsed = result.get("elapsed_seconds", "-")
         model = result.get("model", "-")
+        mode = "thinking" if result.get("thinking_enabled") else "no_think"
         usage = result.get("usage")
         usage_text = f"\n\nusage={json.dumps(usage, ensure_ascii=False)}" if usage else ""
         set_output(str(result.get("response") or "") + usage_text)
-        test_status_var.set(f"{model} replied in {elapsed}s")
+        test_status_var.set(f"{model} {mode} replied in {elapsed}s")
         ask_button.configure(state="normal")
         save_button.configure(state="normal")
 

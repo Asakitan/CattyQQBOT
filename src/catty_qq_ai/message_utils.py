@@ -493,16 +493,18 @@ def build_history_key(event: MessageEvent, config: Config) -> str:
     return f"private:{event.user_id}"
 
 
-def split_reply(text: str, max_chars: int) -> list[str]:
+def split_reply(text: str, max_chars: int, *, max_chunks: int = 2) -> list[str]:
     clean = text.strip()
     if not clean:
         return []
     if max_chars <= 0 or len(clean) <= max_chars:
         return [clean]
+    if max_chunks <= 1:
+        return [clean]
 
     chunks: list[str] = []
     remaining = clean
-    while len(remaining) > max_chars:
+    while len(remaining) > max_chars and len(chunks) < max_chunks - 1:
         split_at = remaining.rfind("\n", 0, max_chars)
         if split_at < max_chars // 2:
             split_at = remaining.rfind("。", 0, max_chars)

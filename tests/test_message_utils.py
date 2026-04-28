@@ -63,5 +63,20 @@ class DirectedKeywordTests(unittest.TestCase):
         self.assertFalse(_message_utils._has_directed_keyword("今天午饭吃什么", self.config))
 
 
+class ReplySplitTests(unittest.TestCase):
+    def test_long_reply_is_split_into_two_chunks(self) -> None:
+        reply = "第一句很长很长。" * 20
+
+        chunks = _message_utils.split_reply(reply, 30)
+
+        self.assertEqual(len(chunks), 2)
+        self.assertEqual("".join(chunks), reply)
+
+    def test_split_can_be_disabled_by_max_chunks(self) -> None:
+        reply = "猫猫要说很多很多话" * 10
+
+        self.assertEqual(_message_utils.split_reply(reply, 20, max_chunks=1), [reply])
+
+
 if __name__ == "__main__":
     unittest.main()

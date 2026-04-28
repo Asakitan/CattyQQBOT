@@ -199,7 +199,7 @@ ai 清空记忆缓存
 
 优先级是：`group_user_titles` 指定群内专属称呼 > `user_titles` 全局称呼 > `group_titles` 群默认称呼 > `群友`。
 
-所有允许的群都会记录待压缩语料，并按 `summary_interval_minutes` 定时压缩成长期摘要；摘要会在后续对话里提供给模型，用来形成群印象和群友画像。生成长期摘要后，当前待压缩语料会自动清空。私聊也会按人物单独记录语料并定时压缩，用来记住用户偏好、称呼和重要事实。
+所有允许的群都会记录待压缩语料，并按 `summary_interval_minutes` 定时压缩成长期摘要；摘要会在后续对话里提供给模型，用来形成群印象和群友画像。生成长期摘要后，当前待压缩语料会自动清空。私聊也会按人物单独记录语料并定时压缩，用来记住用户偏好、称呼和重要事实。主回复线程还会额外加入一条很短的“笨猫人格记忆”，把“笨猫/猫猫/米雪儿/你都是当前助手本人”、回复节奏和称呼规则固定住；如果模型有客服腔、报告腔、第三人称说笨猫等脱离人格倾向，会被要求先在心里重读主 prompt 和笨猫人格记忆，再重新组织回复。人格记忆也包含敏感/超限边界：露骨性内容、强迫/非自愿性内容、未成年性化、现实违法伤害、自残自杀指导、武器/黑客/诈骗等可操作危险做法不能照做，会保持笨猫口吻短拒绝或转成安全替代。
 
 `special_group_ids` 是旧特别关心群配置：当前不再用它限制总结范围，也不再用短活跃窗口控制普通群插话。普通群聊的长期主动观察由 `filter.group_batch_messages` 和 `filter.group_batch_seconds` 控制；到达批次后 AI 会自行判断是否值得插话，也可以选择不回复。
 
@@ -215,7 +215,7 @@ ai 清空记忆缓存
 
 本地训练：`local_training` 会把 reply gate 样本导出成 `training/reply_gate_dataset.jsonl`，也会把主模型真实收到的上下文和最终回复收集到 `training/assistant_reply_samples.jsonl`，再导出成 `training/assistant_reply_dataset.jsonl`。聊天正文走 `ai`，普通审核/判断和训练成果审批走 `audit_ai`；`filter.model` 留空时会继承 `audit_ai`。Ollama 本体不能边运行边在线增参；样本达到对应 `min_samples` 且新增样本达到对应 `min_new_samples` 后，启动时会自动判断是否适合训练。`auto_fill_training_commands` 打开时，空的 `train_command` / `busy_train_command` / `assistant_train_command` / `assistant_busy_train_command` 会自动落到项目内安全 wrapper：`scripts/local_lora_train.py`。wrapper 只会执行你配置的 `backend_command` / `assistant_backend_command` / `busy_backend_command` / `assistant_busy_backend_command`，后端为空时只写状态并跳过，不会让主 AI 生成或执行任意 shell 命令。训练后如果输出目录出现 LoRA adapter、`Modelfile` 或 `.gguf`，wrapper 会记录成果并调用 `audit_ai` 做成果审核；审核模型只输出 `allow_apply/allow_merge` 和 `next_suggestions` JSON，不直接执行命令。配置了 `apply_trained_adapter_command` 且审核同意时会把小成果接入微调，样本达到 `merge_min_samples`、处于闲时且审核同意时才会执行 `merge_trained_model_command` 合并大成果。默认这些应用/合并命令为空，所以不会热替换正在工作的审核模型。`watch_interval_seconds` 大于 0 时会在后台循环检查。默认会根据服务器本地系统时间、凌晨闲时窗口和样本文件最近更新时间判断闲时；忙时训练会用低优先级并受 `busy_training_max_seconds` 和 `busy_training_max_steps` 限制，避免影响 reply 审核和主程序运行。
 
-训练进度窗口：打开 `local_training.progress_window_enabled` 后，启动时会额外弹出 `scripts/catty_training_dashboard.py` 的 Tk 小窗，轮询数据集样本数、最近训练状态、GLM-5.1 成果审批、`next_suggestions` 和 `training/local_training.log`。窗口里还有 `Ollama test` 页，可以用主 AI 的 `chat.system_prompt` 向本地 `local_critic.model` 提问，查看输出耗时和内容，再把 1-5 分评分、备注写入 `model_test_scores_path`。窗口不会执行训练命令，也不会展示 API key。
+训练进度窗口：打开 `local_training.progress_window_enabled` 后，启动时会额外弹出 `scripts/catty_training_dashboard.py` 的 Tk 小窗，轮询数据集样本数、最近训练状态、GLM-5.1 成果审批、`next_suggestions` 和 `training/local_training.log`。窗口里还有 `Ollama test` 页，可以用主 AI 的 `chat.system_prompt` 向本地 `local_critic.model` 提问，查看输出耗时和内容，再把 1-5 分评分、备注写入 `model_test_scores_path`。测试请求会模拟主回复线程，带上笨猫人格记忆、自检提示、风格例句、reply gate 已放行提示和简化记忆上下文，避免小模型把笨猫当第三个人，也方便观察它在接近真实主线程时的表现。默认以 `/no_think` 测试；勾选 `Thinking` 会发送 `think=true`，方便对比思考模式耗时和质量。窗口不会执行训练命令，也不会展示 API key。
 
 训练 MCP server：项目内包含 `scripts/catty_training_mcp_server.py`，可作为 MCP stdio server 暴露 `training_status` 和 `training_config_summary` 两个工具，方便外部 MCP 客户端查看训练样本、最新成果状态和 hook 配置。它不会返回 API key。
 
@@ -302,19 +302,19 @@ dist/CattyQQAI.exe
 | `local_critic.api_key` | `ollama` | 本地校正模型 API Key；Ollama 兼容端点可用任意非空值 |
 | `local_critic.model` | `qwen2.5:1.5b` | 本地校正模型名 |
 | `local_critic.max_tokens` | `96` | 回复校正 JSON 输出最大 token |
-| `local_critic.request_timeout` | `5` | 本地校正模型请求超时；超时后保留原回复 |
+| `local_critic.request_timeout` | `30` | 本地校正模型请求超时；超时后保留原回复 |
 | `local_critic.rewrite_when_score_below` | `75` | 评分低于该值时请求主模型重写 |
 | `local_critic.reply_gate_enabled` | `true` | 是否由本地模型决定本轮是否交给主 AI 回复 |
 | `local_critic.reply_gate_min_confidence` | `55` | 本地 reply gate 放行所需最低置信度 |
 | `local_critic.reply_gate_examples` | `0` | 每次判定时读取最近多少条 reply gate 样本作为参考；实时低延迟建议保持 0 |
-| `local_critic.reply_gate_max_tokens` | `32` | reply gate JSON 输出最大 token |
+| `local_critic.reply_gate_max_tokens` | `16` | reply gate JSON 输出最大 token |
 | `local_critic.reply_gate_request_timeout` | `4` | reply gate 单次请求超时，超时后走硬判断 fallback |
-| `local_critic.reply_gate_user_message_chars` | `240` | reply gate 最多读取多少字符的群聊展示消息 |
-| `local_critic.reply_gate_plain_text_chars` | `120` | reply gate 最多读取多少字符的纯文本 |
-| `local_critic.reply_gate_context_chars` | `160` | reply gate 最多读取多少字符的批量/特别关心上下文 |
+| `local_critic.reply_gate_user_message_chars` | `120` | reply gate 最多读取多少字符的群聊展示消息 |
+| `local_critic.reply_gate_plain_text_chars` | `60` | reply gate 最多读取多少字符的纯文本 |
+| `local_critic.reply_gate_context_chars` | `80` | reply gate 最多读取多少字符的批量/特别关心上下文 |
 | `local_critic.warmup_enabled` | `true` | 是否用 Ollama 原生空 prompt 后台预加载/保温本地校正模型；仅在 `local_critic.enabled` 打开时运行 |
 | `local_critic.warmup_keep_alive` | `30m` | 预热请求要求 Ollama 将模型保留在内存中的时长 |
-| `local_critic.warmup_interval_seconds` | `1200` | 后台保温间隔；应短于 `warmup_keep_alive` |
+| `local_critic.warmup_interval_seconds` | `300` | 后台保温间隔；应短于 `warmup_keep_alive` |
 | `local_critic.warmup_request_timeout` | `60` | 单次预热/保温请求超时 |
 | `local_critic.force_direct_reply` | `true` | @、回复、前缀、私聊、明显喊名时即使 gate 异常也强制放行 |
 | `local_critic.collect_training_samples` | `true` | 是否保存草稿、评分和最终回复样本 |
@@ -390,12 +390,12 @@ dist/CattyQQAI.exe
 | `chat.group_require_mention_or_prefix` | `true` | 群聊是否必须艾特或前缀 |
 | `chat.private_require_prefix` | `false` | 私聊是否必须前缀 |
 | `chat.history_turns` | `16` | 每个会话保留的上下文轮数 |
-| `chat.reply_max_chars` | `1800` | 单条回复超过该长度时强制切分 |
+| `chat.reply_max_chars` | `1800` | 单条回复超过该长度时最多切成两条发送 |
 | `chat.reply_human_split_enabled` | `true` | 是否允许本地概率判断本轮是否追加语义分段提示 |
 | `chat.reply_human_split_probability` | `0.35` | 分段提示的本地触发概率，不再额外调用 filter API |
 | `chat.reply_human_split_min_chars` | `48` | 提示 AI 至少达到该字符数才考虑语义分段 |
 | `chat.reply_human_split_delay_seconds` | `0.8` | 分段发送之间的等待秒数 |
-| `chat.reply_self_check_enabled` | `true` | 回复前追加隐藏自检提示，让主 AI 先理解意图、再用猫娘语气短句回应 |
+| `chat.reply_self_check_enabled` | `true` | 回复前追加隐藏自检提示，让主 AI 先理解意图；若有脱离人格倾向则先重读主 prompt 和笨猫人格记忆；遇到敏感/超限请求时用猫娘语气短拒绝或转安全替代 |
 | `chat.reply_style_examples_enabled` | `true` | 回复前追加猫娘风格例句提示，让主 AI 学习可爱但有用的 QQ 口语节奏 |
 | `chat.directed_keywords` | `["你","猫猫","猫娘","看看"]` | 群聊软触发词；命中后交给 AI 判断主语、呼唤对象和是否需要回应 |
 | `chat.soft_directed_reply_probability` | `0.65` | 普通软触发交给 AI 后的回复倾向提示；数值越高越容易接话 |
