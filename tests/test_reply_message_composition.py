@@ -1,4 +1,5 @@
 from pathlib import Path
+import asyncio
 import importlib.util
 import sys
 import tempfile
@@ -64,6 +65,8 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         self._old_auto_fallback_enabled = _plugin.config.catty_emoji_auto_fallback_enabled
         self._old_emoji_reply_enabled = _plugin.config.catty_emoji_reply_enabled
         self._old_emoji_reply_probability = _plugin.config.catty_emoji_reply_probability
+        self._old_local_critic_enabled = _plugin.config.catty_local_critic_enabled
+        self._old_force_direct_reply = _plugin.config.catty_local_critic_force_direct_reply
         _plugin.config.catty_reply_quote_enabled = True
         _plugin.config.catty_reply_quote_private_enabled = False
         _plugin.config.catty_reply_mix_emoji_with_text = True
@@ -78,6 +81,8 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         _plugin.config.catty_emoji_auto_fallback_enabled = self._old_auto_fallback_enabled
         _plugin.config.catty_emoji_reply_enabled = self._old_emoji_reply_enabled
         _plugin.config.catty_emoji_reply_probability = self._old_emoji_reply_probability
+        _plugin.config.catty_local_critic_enabled = self._old_local_critic_enabled
+        _plugin.config.catty_local_critic_force_direct_reply = self._old_force_direct_reply
         _plugin._recent_emoji_paths.clear()
 
     def test_reply_message_can_quote_text_and_image_together(self) -> None:
@@ -159,6 +164,32 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         self.assertIn("先回答 B", prompt)
         self.assertIn("冒号后就是用户完整原文", prompt)
         self.assertIn("不要只吐槽、玩梗或空泛追问", prompt)
+
+    def test_direct_trigger_no_reply_is_forced_without_local_critic(self) -> None:
+        event = _group_event(456)
+        incoming = _plugin.extract_incoming_message(str(event.self_id), event, _plugin.config)
+        assert incoming is not None
+        original_chat_completion = _plugin.chat_completion
+
+        async def fake_chat_completion(config, messages):
+            return "来啦主人～这个人家接住了喵"
+
+        _plugin.config.catty_local_critic_enabled = False
+        _plugin.config.catty_local_critic_force_direct_reply = True
+        _plugin.chat_completion = fake_chat_completion
+        try:
+            reply = asyncio.run(
+                _plugin._apply_local_critic(
+                    event,
+                    incoming,
+                    [],
+                    _plugin.NO_REPLY_MARKER,
+                )
+            )
+        finally:
+            _plugin.chat_completion = original_chat_completion
+
+        self.assertEqual(reply, "来啦主人～这个人家接住了喵")
 
 
 if __name__ == "__main__":

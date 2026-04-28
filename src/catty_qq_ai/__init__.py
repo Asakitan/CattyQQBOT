@@ -247,6 +247,10 @@ def _direct_reply_required(event: MessageEvent, incoming: ExtractedMessage) -> b
     )
 
 
+def _force_direct_reply_enabled(event: MessageEvent, incoming: ExtractedMessage) -> bool:
+    return _direct_reply_required(event, incoming) and config.catty_local_critic_force_direct_reply
+
+
 def _clamp_probability(value: float) -> float:
     return max(min(float(value), 1.0), 0.0)
 
@@ -810,7 +814,7 @@ def _build_messages(
         )
     if config.catty_reply_style_examples_enabled:
         messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER)})
-    if _direct_reply_required(event, incoming) and config.catty_local_critic_force_direct_reply:
+    if _force_direct_reply_enabled(event, incoming):
         messages.append({"role": "system", "content": _direct_reply_required_prompt(incoming)})
     if semantic_reply_split:
         messages.append({"role": "system", "content": _semantic_reply_split_prompt()})
@@ -1462,7 +1466,7 @@ async def _local_reply_gate_allows(
     group_filter_context: str = "",
     special_care_context: str = "",
 ) -> tuple[bool, dict[str, object]]:
-    direct_required = _direct_reply_required(event, incoming) and config.catty_local_critic_force_direct_reply
+    direct_required = _force_direct_reply_enabled(event, incoming)
     fallback_allowed = direct_required or incoming.directly_requested
     if direct_required:
         return True, {
@@ -1645,6 +1649,8 @@ async def _apply_local_critic(
     if not reply.strip():
         reply = NO_REPLY_MARKER
     if _is_no_reply(reply):
+        if _force_direct_reply_enabled(event, incoming):
+            return await _resolve_no_reply(event, incoming, messages, reply)
         if not _local_critic_enabled():
             return reply
         return await _resolve_no_reply(event, incoming, messages, reply)
