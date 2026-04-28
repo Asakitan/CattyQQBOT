@@ -109,6 +109,7 @@ _web_search_cooldowns: dict[str, float] = {}
 _turtle_soup_cooldowns: dict[str, float] = {}
 _local_critic_warmup_success_logged = False
 _consumed_reply_source_ids: dict[str, float] = {}
+_recent_bot_reply_threads: dict[str, float] = {}
 
 
 def _has_api_key() -> bool:
@@ -124,6 +125,57 @@ def _conversation_queue_key(event: MessageEvent) -> str:
 def _reply_source_key(event: MessageEvent, message_id: str) -> str:
     scope = _conversation_queue_key(event)
     return f"{scope}:reply-source:{message_id}"
+
+
+def _followup_thread_key(event: MessageEvent) -> str | None:
+    if isinstance(event, GroupMessageEvent):
+        return f"group:{event.group_id}:user:{event.user_id}"
+    if isinstance(event, PrivateMessageEvent):
+        return f"private:{event.user_id}"
+    return None
+
+
+def _prune_recent_bot_reply_threads(now: float) -> None:
+    max_age = max(float(config.catty_followup_reply_window_seconds or 0.0), 0.0)
+    if max_age <= 0:
+        _recent_bot_reply_threads.clear()
+        return
+    stale = [key for key, timestamp in _recent_bot_reply_threads.items() if now - timestamp > max_age]
+    for key in stale:
+        _recent_bot_reply_threads.pop(key, None)
+
+
+def _recent_bot_reply_context(event: MessageEvent) -> dict[str, object]:
+    window_seconds = max(float(config.catty_followup_reply_window_seconds or 0.0), 0.0)
+    if window_seconds <= 0:
+        return {"recent_bot_reply": False}
+    key = _followup_thread_key(event)
+    if key is None:
+        return {"recent_bot_reply": False}
+    now = time.monotonic()
+    _prune_recent_bot_reply_threads(now)
+    last_reply_at = _recent_bot_reply_threads.get(key)
+    if last_reply_at is None:
+        return {"recent_bot_reply": False}
+    elapsed = now - last_reply_at
+    return {
+        "recent_bot_reply": elapsed <= window_seconds,
+        "seconds_since_bot_reply": round(elapsed, 1),
+        "followup_window_seconds": window_seconds,
+    }
+
+
+def _has_recent_bot_reply(event: MessageEvent) -> bool:
+    return bool(_recent_bot_reply_context(event).get("recent_bot_reply"))
+
+
+def _mark_recent_bot_reply_thread(event: MessageEvent) -> None:
+    key = _followup_thread_key(event)
+    if key is None:
+        return
+    now = time.monotonic()
+    _prune_recent_bot_reply_threads(now)
+    _recent_bot_reply_threads[key] = now
 
 
 def _reply_source_keys(event: MessageEvent) -> list[str]:
@@ -789,6 +841,7 @@ def _local_critic_event_payload(
     incoming: ExtractedMessage,
     draft_reply: str,
 ) -> dict[str, object]:
+    followup_context = _recent_bot_reply_context(event)
     payload: dict[str, object] = {
         "message_type": "group" if isinstance(event, GroupMessageEvent) else "private",
         "user_id": str(event.user_id),
@@ -803,6 +856,7 @@ def _local_critic_event_payload(
         "directed_strength": incoming.directed_strength,
         "directly_requested": incoming.directly_requested,
         "opportunistic": incoming.opportunistic,
+        **followup_context,
     }
     if isinstance(event, GroupMessageEvent):
         payload["group_id"] = str(event.group_id)
@@ -904,6 +958,7 @@ def _local_reply_gate_messages(
     user_message_chars = _positive_int(config.catty_local_critic_reply_gate_user_message_chars, 240, minimum=80)
     plain_text_chars = _positive_int(config.catty_local_critic_reply_gate_plain_text_chars, 120, minimum=40)
     context_chars = _positive_int(config.catty_local_critic_reply_gate_context_chars, 160, minimum=0)
+    followup_context = _recent_bot_reply_context(event)
     payload: dict[str, object] = {
         "message_type": "group" if isinstance(event, GroupMessageEvent) else "private",
         "message": incoming.history_content[-user_message_chars:],
@@ -917,6 +972,7 @@ def _local_reply_gate_messages(
         "directly_requested": incoming.directly_requested,
         "opportunistic": incoming.opportunistic,
         "direct_reply_required": _direct_reply_required(event, incoming),
+        **followup_context,
     }
     if context_chars and group_filter_context:
         payload["group_context"] = group_filter_context[-context_chars:]
@@ -929,6 +985,9 @@ def _local_reply_gate_messages(
                 "/no_think\n"
                 "Fast QQ reply gate. JSON only. "
                 "true=direct bot ask/image help/special-care/batched context expects bot. "
+                "recent_bot_reply=true means the bot just replied to this same user in this chat; "
+                "then short follow-ups, teasing, questions, or second-person commands are usually active conversation, "
+                "but still output false for clear third-person chatter/spam/no expectation. "
                 "false=idle chatter/third-person/no expectation/spam. "
                 "Schema:{\"should_reply\":true|false,\"confidence\":0-100,\"reason\":\"<=8 chars\"}."
             ),
@@ -1517,6 +1576,8 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
         state["catty_reply_gate_result"] = duplicate_result
         _save_local_critic_sample(event, incoming, "reply_gate", {"reply_gate": duplicate_result}, NO_REPLY_MARKER)
         return False
+    if incoming.needs_filter and _has_recent_bot_reply(event):
+        incoming.needs_filter = False
     group_filter_context = ""
     special_care_context = ""
     if incoming.needs_filter:
@@ -1606,6 +1667,7 @@ poke_matcher = on_notice(rule=_poke_rule, priority=55, block=True)
 @expression_repeat_matcher.handle()
 async def handle_expression_repeat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     async with _locks[_conversation_queue_key(event)]:
+        _mark_recent_bot_reply_thread(event)
         await matcher.finish(state["catty_repeat_message"])
 
 
@@ -1614,9 +1676,11 @@ async def handle_poke(bot: Bot, event: PokeNotifyEvent, state: T_State) -> None:
     message = Message(str(state["catty_poke_reply"]))
     if event.group_id is not None:
         async with _locks[f"group:{event.group_id}"]:
+            _mark_recent_bot_reply_thread(event)
             await bot.send_group_msg(group_id=_coerce_group_id(str(event.group_id)), message=message)
     else:
         async with _locks[f"private:{event.user_id}"]:
+            _mark_recent_bot_reply_thread(event)
             await bot.send_private_msg(user_id=int(event.user_id), message=message)
 
 
@@ -1916,6 +1980,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
         _append_history(history_key, incoming.history_content, "\n".join(chunks) if chunks else reply)
+        _mark_recent_bot_reply_thread(event)
         if special_care_context and chunks:
             memory_store.record_special_care_reply_sent(event, "\n".join(chunks))
 
