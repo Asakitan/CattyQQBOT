@@ -64,7 +64,7 @@ from .reply_markers import (
     extract_emoji_query as _extract_emoji_query,
 )
 from .star_resonance_memory import build_star_resonance_context
-from .web_search import format_search_context, search_image_urls, search_web
+from .web_search import search_image_urls
 
 
 __plugin_meta__ = PluginMetadata(
@@ -490,12 +490,14 @@ def _anger_reply_decision_context(
 
 
 async def _build_web_search_context(query: str) -> str:
-    try:
-        results = await search_web(config, query)
-    except httpx.HTTPError as exc:
-        logger.warning(f"Web search failed for {query}: {exc}")
-        return f"本轮用户要求联网搜索「{query}」，但搜索请求失败：{exc}。请如实说明搜索失败，不要编造。"
-    return format_search_context(query, results)
+    return (
+        f"本轮用户明确要求联网搜索「{query}」。"
+        "这不是普通闲聊，也不是只需要表态的命令；请先理解用户要搜的对象和意图，然后在同一条最终回复里直接给出搜索后的答案。"
+        "请由主 AI 自己使用运行环境/模型提供的原生联网搜索能力完成查询，不要使用本地预置资料冒充最新搜索结果。"
+        "如果用户要图片、壁纸、表情包或图包，请在同一条回复里给出可执行的搜索结论、关键词、来源建议或合规替代方案，不要只说“我去搜/我不会搜”。"
+        "如果当前主 AI 实际没有可用的联网搜索能力，请用猫系人格如实说明限制，并在同一条回复里给出替代建议；"
+        "不要编造搜索结果、链接、日期或来源。"
+    )
 
 
 def _reset_history(key: str) -> None:

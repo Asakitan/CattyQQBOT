@@ -36,6 +36,14 @@ class OpenAIClientTests(unittest.TestCase):
     def test_empty_image_analysis_reply_is_not_treated_as_valid_analysis(self) -> None:
         self.assertEqual(_client._image_analysis_from_reply(""), {})
 
+    def test_http_503_public_message_is_catty(self) -> None:
+        message = _client._catty_http_status_message("AI 接口", 503)
+
+        self.assertIn("喵呜", message)
+        self.assertIn("忙到炸毛", message)
+        self.assertIn("503", message)
+        self.assertNotIn("HTTP 503", message)
+
     def test_data_gif_is_converted_to_first_frame_png_for_vision(self) -> None:
         image = Image.new("RGBA", (2, 2), (255, 0, 0, 255))
         output = BytesIO()

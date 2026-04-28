@@ -21,6 +21,18 @@ class OpenAICompatibleError(Exception):
         self.public_message = public_message
 
 
+def _catty_http_status_message(service_name: str, status_code: int) -> str:
+    if status_code == 503:
+        return f"喵呜，{service_name}那边暂时忙到炸毛了（503），主人稍后再戳一下猫猫吧。"
+    if status_code == 429:
+        return f"喵呜，{service_name}被戳太快啦（429），主人让猫猫缓一小会儿再试。"
+    if status_code in {401, 403}:
+        return f"喵呜，{service_name}不让猫猫进去（{status_code}），主人检查一下 API Key 或权限。"
+    if 500 <= status_code < 600:
+        return f"喵呜，{service_name}那边临时炸毛了（{status_code}），主人稍后再试一下。"
+    return f"喵呜，{service_name}请求没过（{status_code}），主人检查一下配置或稍后再试。"
+
+
 def _chat_completions_url(base_url: str) -> str:
     if base_url.endswith("/chat/completions"):
         return base_url
@@ -147,7 +159,7 @@ async def _post_chat_completion(
 
     if response.status_code >= 400:
         detail = response.text[:500]
-        raise OpenAICompatibleError(f"AI 接口 HTTP {response.status_code}。", detail)
+        raise OpenAICompatibleError(_catty_http_status_message("AI 接口", response.status_code), detail)
 
     try:
         data = response.json()
@@ -196,7 +208,7 @@ async def _post_ollama_chat(
 
     if response.status_code >= 400:
         detail = response.text[:500]
-        raise OpenAICompatibleError(f"Ollama 接口 HTTP {response.status_code}。", detail)
+        raise OpenAICompatibleError(_catty_http_status_message("Ollama 接口", response.status_code), detail)
 
     try:
         data = response.json()

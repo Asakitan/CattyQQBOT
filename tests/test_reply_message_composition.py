@@ -109,6 +109,16 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         self.assertEqual(message[1].type, "text")
         self.assertEqual(message[2].type, "image")
 
+    def test_web_search_context_delegates_to_main_ai(self) -> None:
+        context = asyncio.run(_plugin._build_web_search_context("星痕共鸣"))
+
+        self.assertIn("由主 AI 自己", context)
+        self.assertIn("原生联网搜索能力", context)
+        self.assertIn("同一条最终回复", context)
+        self.assertIn("图片、壁纸、表情包或图包", context)
+        self.assertIn("不要编造搜索结果", context)
+        self.assertNotIn("DuckDuckGo", context)
+
     def test_quote_can_be_disabled(self) -> None:
         _plugin.config.catty_reply_quote_enabled = False
 

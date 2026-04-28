@@ -28,6 +28,8 @@ class FeatureTests(unittest.TestCase):
     def test_extract_web_search_query(self) -> None:
         self.assertEqual(extract_web_search_query("联网搜索 星痕共鸣 职业"), "星痕共鸣 职业")
         self.assertEqual(extract_web_search_query("帮我查一下蓝色协议"), "蓝色协议")
+        self.assertEqual(extract_web_search_query("猫猫帮我搜一点色图"), "色图")
+        self.assertEqual(extract_web_search_query("帮我搜点猫图"), "猫图")
         self.assertEqual(extract_web_search_query("普通聊天"), "")
 
     def test_turtle_soup_request_and_cooldown(self) -> None:

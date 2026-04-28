@@ -149,7 +149,7 @@ ai 清空缓存
 ai 清空记忆缓存
 ```
 
-联网搜索：群友明确要求“联网搜索/上网查/搜一下/查一下”等时，机器人会抓取一轮网页搜索结果再交给主 AI 回答。普通用户每 10 分钟 1 次；在 `memory.user_titles` 或 `memory.group_user_titles` 里配置了称呼的用户不受冷却限制。冷却未结束时，机器人会用猫系人格拒绝，不会消耗 AI 回复。
+联网搜索：群友明确要求“联网搜索/上网查/搜一下/查一下”等时，机器人会把这轮搜索需求交给主 AI 的原生联网搜索能力处理；如果当前主 AI/服务商不支持实际联网，机器人会让主 AI 如实说明不能联网，不会编造搜索结果。普通用户每 10 分钟 1 次；在 `config.json` 里配置了专属称呼的用户不受冷却限制。冷却未结束时，机器人会用猫系人格拒绝，不会消耗 AI 回复。
 
 海龟汤：群里有人要求“海龟汤”时，机器人会直接开一题；每个群 5 分钟 1 次，冷却未结束时会用猫系人格提醒。私聊不按群冷却。
 
@@ -386,9 +386,9 @@ dist/CattyQQAI.exe
 | `local_training.assistant_min_new_samples` | `50` | 主模型回复距离上次训练至少新增多少条才再次训练 |
 | `local_training.watch_interval_seconds` | `0` | 大于 0 时后台循环检查训练条件；0 表示启动时只检查一次 |
 | `web_search.enabled` | `true` | 是否允许显式联网搜索 |
-| `web_search.cooldown_seconds` | `600` | 普通用户联网搜索冷却；有 `user_titles`/`group_user_titles` 的用户不受限制 |
-| `web_search.max_results` | `5` | 每次搜索交给 AI 的结果数量上限 |
-| `web_search.request_timeout` | `10` | 联网搜索请求超时秒数 |
+| `web_search.cooldown_seconds` | `600` | 普通用户联网搜索冷却；在 `config.json` 里配置了专属称呼的用户不受限制 |
+| `web_search.max_results` | `5` | 兼容旧本地文本搜索配置；当前文本搜索交给主 AI 原生联网能力，内部表情找图仍可单独传入数量上限 |
+| `web_search.request_timeout` | `10` | 兼容旧本地文本搜索配置；当前文本搜索不再发起本地网页请求，表情找图仍会使用该超时 |
 | `turtle_soup.cooldown_seconds` | `300` | 每个群触发海龟汤的冷却秒数 |
 | `chat.trigger_prefixes` | `["ai","AI","猫猫"]` | 群聊文字触发前缀 |
 | `chat.group_require_mention_or_prefix` | `true` | 群聊是否必须艾特或前缀 |

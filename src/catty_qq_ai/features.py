@@ -13,6 +13,10 @@ FEATURE_DIRECT_KEYWORDS = (
     "搜一下",
     "搜索一下",
     "帮我搜",
+    "搜点",
+    "搜",
+    "搜一点",
+    "搜些",
     "帮我查",
     "查一下",
     "查找一下",
@@ -25,7 +29,7 @@ FEATURE_DIRECT_KEYWORDS = (
 )
 
 _SEARCH_PATTERNS = (
-    r"^(?:帮我|给我|猫猫|笨猫|喵)?(?:联网|上网|网上)?(?:搜索|搜一下|搜搜|查一下|查下|查查|查找一下|百度一下|谷歌一下)\s*",
+    r"^(?:(?:猫猫|笨猫|喵)[，,、\s]*)?(?:(?:帮|替|给)我)?(?:联网|上网|网上)?(?:搜索一下|搜索|搜一下|搜一搜|搜搜|搜点|搜一点|搜些|搜|查一下|查下|查查|查找一下|查找|百度一下|谷歌一下)\s*",
     r"(?:联网|上网|网上)(?:搜索|搜|查)\s*",
 )
 
@@ -63,11 +67,12 @@ def extract_web_search_query(text: str) -> str:
     if not clean:
         return ""
     lowered = clean.lower()
-    if not any(keyword in lowered for keyword in ("联网", "上网", "网上", "搜索", "搜一下", "查一下", "查下", "查找", "百度", "谷歌")):
+    if not any(keyword in lowered for keyword in ("联网", "上网", "网上", "搜索", "搜", "查一下", "查下", "查找", "百度", "谷歌")):
         return ""
     query = clean
     for pattern in _SEARCH_PATTERNS:
         query = re.sub(pattern, "", query, count=1, flags=re.IGNORECASE).strip()
+    query = re.sub(r"^(?:一点|一些|点|些)\s*", "", query, count=1, flags=re.IGNORECASE).strip()
     query = query.strip(" ：:，,。！？!?；;\"'“”‘’")
     return query or clean
 
