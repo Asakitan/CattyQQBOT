@@ -140,7 +140,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "reply_gate_user_message_chars": 240,
         "reply_gate_plain_text_chars": 120,
         "reply_gate_context_chars": 160,
-        "warmup_enabled": False,
+        "warmup_enabled": True,
         "warmup_keep_alive": "30m",
         "warmup_interval_seconds": 1200,
         "warmup_request_timeout": 60,

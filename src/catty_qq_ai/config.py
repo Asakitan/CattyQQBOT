@@ -78,7 +78,7 @@ class Config(BaseModel):
     catty_local_critic_reply_gate_user_message_chars: int = 240
     catty_local_critic_reply_gate_plain_text_chars: int = 120
     catty_local_critic_reply_gate_context_chars: int = 160
-    catty_local_critic_warmup_enabled: bool = False
+    catty_local_critic_warmup_enabled: bool = True
     catty_local_critic_warmup_keep_alive: str = "30m"
     catty_local_critic_warmup_interval_seconds: float = 1200.0
     catty_local_critic_warmup_request_timeout: float = 60.0

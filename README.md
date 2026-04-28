@@ -312,7 +312,7 @@ dist/CattyQQAI.exe
 | `local_critic.reply_gate_user_message_chars` | `240` | reply gate 最多读取多少字符的群聊展示消息 |
 | `local_critic.reply_gate_plain_text_chars` | `120` | reply gate 最多读取多少字符的纯文本 |
 | `local_critic.reply_gate_context_chars` | `160` | reply gate 最多读取多少字符的批量/特别关心上下文 |
-| `local_critic.warmup_enabled` | `false` | 是否用 Ollama 原生空 prompt 后台预加载/保温本地校正模型 |
+| `local_critic.warmup_enabled` | `true` | 是否用 Ollama 原生空 prompt 后台预加载/保温本地校正模型；仅在 `local_critic.enabled` 打开时运行 |
 | `local_critic.warmup_keep_alive` | `30m` | 预热请求要求 Ollama 将模型保留在内存中的时长 |
 | `local_critic.warmup_interval_seconds` | `1200` | 后台保温间隔；应短于 `warmup_keep_alive` |
 | `local_critic.warmup_request_timeout` | `60` | 单次预热/保温请求超时 |
