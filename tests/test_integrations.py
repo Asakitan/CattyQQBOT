@@ -34,11 +34,11 @@ class IntegrationPathTests(unittest.TestCase):
 
     def test_ollama_models_to_check_includes_local_critic_model(self) -> None:
         models = _integrations._ollama_models_to_check(
-            {"local_critic": {"model": "qwen3:4b"}},
+            {"local_critic": {"model": "qwen2.5:1.5b"}},
             {"model": "qwen3:0.6b"},
         )
 
-        self.assertEqual(models, ["qwen3:0.6b", "qwen3:4b"])
+        self.assertEqual(models, ["qwen3:0.6b", "qwen2.5:1.5b"])
 
 
 if __name__ == "__main__":

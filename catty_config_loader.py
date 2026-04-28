@@ -127,14 +127,23 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "api_key": "ollama",
         "model": "qwen2.5:1.5b",
         "extra_headers": {},
-        "extra_body": {},
+        "extra_body": {"think": False},
         "temperature": 0.1,
-        "max_tokens": 160,
-        "request_timeout": 30,
+        "max_tokens": 96,
+        "request_timeout": 5,
         "rewrite_when_score_below": 75,
         "reply_gate_enabled": True,
         "reply_gate_min_confidence": 55,
-        "reply_gate_examples": 12,
+        "reply_gate_examples": 0,
+        "reply_gate_max_tokens": 32,
+        "reply_gate_request_timeout": 4,
+        "reply_gate_user_message_chars": 240,
+        "reply_gate_plain_text_chars": 120,
+        "reply_gate_context_chars": 160,
+        "warmup_enabled": False,
+        "warmup_keep_alive": "30m",
+        "warmup_interval_seconds": 1200,
+        "warmup_request_timeout": 60,
         "force_direct_reply": True,
         "collect_training_samples": True,
         "training_samples_path": "local_critic_samples.jsonl",
@@ -454,6 +463,15 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_ENABLED", local_critic.get("reply_gate_enabled"))
     _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_MIN_CONFIDENCE", local_critic.get("reply_gate_min_confidence"))
     _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_EXAMPLES", local_critic.get("reply_gate_examples"))
+    _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_MAX_TOKENS", local_critic.get("reply_gate_max_tokens"))
+    _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_REQUEST_TIMEOUT", local_critic.get("reply_gate_request_timeout"))
+    _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_USER_MESSAGE_CHARS", local_critic.get("reply_gate_user_message_chars"))
+    _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_PLAIN_TEXT_CHARS", local_critic.get("reply_gate_plain_text_chars"))
+    _set_env("CATTY_LOCAL_CRITIC_REPLY_GATE_CONTEXT_CHARS", local_critic.get("reply_gate_context_chars"))
+    _set_env("CATTY_LOCAL_CRITIC_WARMUP_ENABLED", local_critic.get("warmup_enabled"))
+    _set_env("CATTY_LOCAL_CRITIC_WARMUP_KEEP_ALIVE", local_critic.get("warmup_keep_alive"))
+    _set_env("CATTY_LOCAL_CRITIC_WARMUP_INTERVAL_SECONDS", local_critic.get("warmup_interval_seconds"))
+    _set_env("CATTY_LOCAL_CRITIC_WARMUP_REQUEST_TIMEOUT", local_critic.get("warmup_request_timeout"))
     _set_env("CATTY_LOCAL_CRITIC_FORCE_DIRECT_REPLY", local_critic.get("force_direct_reply"))
     _set_env("CATTY_LOCAL_CRITIC_COLLECT_TRAINING_SAMPLES", local_critic.get("collect_training_samples"))
     training_samples_path = local_critic.get("training_samples_path")

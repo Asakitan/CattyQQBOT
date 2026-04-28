@@ -211,7 +211,7 @@ ai 清空记忆缓存
 
 图片消息：私聊发图会触发回复；群里如果带艾特、前缀或指向词，也会先把图片下载地址交给 `vision` 图片识别模型，识别成文字、兴趣程度、表情含义和情绪标签后再交给主聊天模型。主 AI 可以决定是否追加本地表情包；默认表情放在 `emojis/`，高兴趣图片会按配置保存到 `emojis/downloaded/` 并记录到 `emojis/manifest.json`。若 `vision` 不单独配置，会复用 `ai` 主模型配置；若遇到 GIF 或动态 WebP，程序会自动截取第一帧转成 PNG 再识别。若图片识别失败，会退回为文字方式把图片地址交给主模型。
 
-本地 reply gate：`local_critic` 可以接入一个 OpenAI-compatible 的本地小模型，例如 Ollama 的 `qwen2.5:1.5b`。本地模型先判断本轮是否应该回复；只有放行后才交给主 AI 写正文。主 AI 不再负责“要不要 reply”的判断，如果它仍输出不回复标记，程序会强制重写并兜底短回复。reply gate 会读取最近的 `local_critic_samples.jsonl` 样本作为判定参考，并继续把放行/拒绝样本写回这个 JSONL，方便后续训练。
+本地 reply gate：`local_critic` 可以接入一个 OpenAI-compatible 的本地小模型，例如 Ollama 的 `qwen2.5:1.5b`。正常情况下由本地模型决定本轮是否交给主 AI；gate 拒绝时不会再请求主 AI。@、回复、前缀、私聊、明显喊猫猫这些硬触发会直接放行，不再等待本地模型。非训练实时 gate 会通过 `think=false`、`/no_think`、独立 `reply_gate_max_tokens`、独立 `reply_gate_request_timeout` 和短 payload 控制在 1-5 秒内；超时或返回坏 JSON 时只走旧硬判断 fallback。默认不再把历史训练样本塞进实时 gate prompt，但仍会继续把放行/拒绝样本写回 `local_critic_samples.jsonl`，方便后续训练。若 `warmup_enabled` 打开，启动后会用 Ollama 原生 `/api/generate` 空 prompt 预加载模型，并按 `warmup_interval_seconds` 刷新 `warmup_keep_alive`，减少长时间无人说话后的冷启动。
 
 本地训练：`local_training` 会把 reply gate 样本导出成 `training/reply_gate_dataset.jsonl`，也会把主模型真实收到的上下文和最终回复收集到 `training/assistant_reply_samples.jsonl`，再导出成 `training/assistant_reply_dataset.jsonl`。聊天正文走 `ai`，普通审核/判断和训练成果审批走 `audit_ai`；`filter.model` 留空时会继承 `audit_ai`。Ollama 本体不能边运行边在线增参；样本达到对应 `min_samples` 且新增样本达到对应 `min_new_samples` 后，启动时会自动判断是否适合训练。`auto_fill_training_commands` 打开时，空的 `train_command` / `busy_train_command` / `assistant_train_command` / `assistant_busy_train_command` 会自动落到项目内安全 wrapper：`scripts/local_lora_train.py`。wrapper 只会执行你配置的 `backend_command` / `assistant_backend_command` / `busy_backend_command` / `assistant_busy_backend_command`，后端为空时只写状态并跳过，不会让主 AI 生成或执行任意 shell 命令。训练后如果输出目录出现 LoRA adapter、`Modelfile` 或 `.gguf`，wrapper 会记录成果并调用 `audit_ai` 做成果审核；审核模型只输出 `allow_apply/allow_merge` 和 `next_suggestions` JSON，不直接执行命令。配置了 `apply_trained_adapter_command` 且审核同意时会把小成果接入微调，样本达到 `merge_min_samples`、处于闲时且审核同意时才会执行 `merge_trained_model_command` 合并大成果。默认这些应用/合并命令为空，所以不会热替换正在工作的审核模型。`watch_interval_seconds` 大于 0 时会在后台循环检查。默认会根据服务器本地系统时间、凌晨闲时窗口和样本文件最近更新时间判断闲时；忙时训练会用低优先级并受 `busy_training_max_seconds` 和 `busy_training_max_steps` 限制，避免影响 reply 审核和主程序运行。
 
@@ -301,11 +301,21 @@ dist/CattyQQAI.exe
 | `local_critic.base_url` | `http://127.0.0.1:11434/v1` | 本地校正模型 OpenAI-compatible 地址 |
 | `local_critic.api_key` | `ollama` | 本地校正模型 API Key；Ollama 兼容端点可用任意非空值 |
 | `local_critic.model` | `qwen2.5:1.5b` | 本地校正模型名 |
-| `local_critic.max_tokens` | `160` | 校正 JSON 输出最大 token |
+| `local_critic.max_tokens` | `96` | 回复校正 JSON 输出最大 token |
+| `local_critic.request_timeout` | `5` | 本地校正模型请求超时；超时后保留原回复 |
 | `local_critic.rewrite_when_score_below` | `75` | 评分低于该值时请求主模型重写 |
 | `local_critic.reply_gate_enabled` | `true` | 是否由本地模型决定本轮是否交给主 AI 回复 |
 | `local_critic.reply_gate_min_confidence` | `55` | 本地 reply gate 放行所需最低置信度 |
-| `local_critic.reply_gate_examples` | `12` | 每次判定时读取最近多少条 reply gate 样本作为参考 |
+| `local_critic.reply_gate_examples` | `0` | 每次判定时读取最近多少条 reply gate 样本作为参考；实时低延迟建议保持 0 |
+| `local_critic.reply_gate_max_tokens` | `32` | reply gate JSON 输出最大 token |
+| `local_critic.reply_gate_request_timeout` | `4` | reply gate 单次请求超时，超时后走硬判断 fallback |
+| `local_critic.reply_gate_user_message_chars` | `240` | reply gate 最多读取多少字符的群聊展示消息 |
+| `local_critic.reply_gate_plain_text_chars` | `120` | reply gate 最多读取多少字符的纯文本 |
+| `local_critic.reply_gate_context_chars` | `160` | reply gate 最多读取多少字符的批量/特别关心上下文 |
+| `local_critic.warmup_enabled` | `false` | 是否用 Ollama 原生空 prompt 后台预加载/保温本地校正模型 |
+| `local_critic.warmup_keep_alive` | `30m` | 预热请求要求 Ollama 将模型保留在内存中的时长 |
+| `local_critic.warmup_interval_seconds` | `1200` | 后台保温间隔；应短于 `warmup_keep_alive` |
+| `local_critic.warmup_request_timeout` | `60` | 单次预热/保温请求超时 |
 | `local_critic.force_direct_reply` | `true` | @、回复、前缀、私聊、明显喊名时即使 gate 异常也强制放行 |
 | `local_critic.collect_training_samples` | `true` | 是否保存草稿、评分和最终回复样本 |
 | `local_critic.training_samples_path` | `local_critic_samples.jsonl` | 校正样本 JSONL 文件路径 |

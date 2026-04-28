@@ -102,6 +102,7 @@ _group_filter_batches: DefaultDict[str, GroupFilterBatchState] = defaultdict(Gro
 _group_filter_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 _web_search_cooldowns: dict[str, float] = {}
 _turtle_soup_cooldowns: dict[str, float] = {}
+_local_critic_warmup_success_logged = False
 
 
 def _has_api_key() -> bool:
@@ -589,6 +590,147 @@ def _local_critic_enabled() -> bool:
     )
 
 
+def _http_error_detail(exc: httpx.HTTPError) -> str:
+    parts = [exc.__class__.__name__]
+    message = str(exc).strip()
+    if message:
+        parts.append(message)
+    request = getattr(exc, "request", None)
+    if request is not None:
+        parts.append(f"{request.method} {request.url}")
+    response = getattr(exc, "response", None)
+    if response is not None:
+        parts.append(f"HTTP {response.status_code}")
+        text = response.text.strip()
+        if text:
+            parts.append(text[:300])
+    cause = getattr(exc, "__cause__", None)
+    if cause is not None:
+        cause_message = str(cause).strip()
+        if cause_message:
+            parts.append(f"cause={cause.__class__.__name__}: {cause_message}")
+        else:
+            parts.append(f"cause={cause.__class__.__name__}")
+    return " | ".join(parts)
+
+
+def _is_retryable_local_transport_error(exc: httpx.HTTPError) -> bool:
+    return isinstance(
+        exc,
+        (
+            httpx.ConnectError,
+            httpx.ConnectTimeout,
+            httpx.ReadError,
+            httpx.RemoteProtocolError,
+            httpx.WriteError,
+        ),
+    )
+
+
+async def _local_critic_completion_with_retry(
+    messages: list[ChatMessage],
+    *,
+    label: str,
+    timeout: float | None = None,
+    max_tokens: int | None = None,
+    extra_body: dict[str, object] | None = None,
+) -> str:
+    last_error: httpx.HTTPError | None = None
+    for attempt in range(2):
+        try:
+            return await local_critic_completion(
+                config,
+                messages,
+                timeout=timeout,
+                max_tokens=max_tokens,
+                extra_body=extra_body,
+            )
+        except httpx.HTTPError as exc:
+            last_error = exc
+            detail = _http_error_detail(exc)
+            if attempt == 0 and not isinstance(exc, httpx.TimeoutException) and _is_retryable_local_transport_error(exc):
+                logger.warning(f"{label} transport error on attempt 1/2: {detail}; retrying once")
+                await asyncio.sleep(1.0)
+                continue
+            raise
+    assert last_error is not None
+    raise last_error
+
+
+def _positive_int(value: int | None, default: int, *, minimum: int = 0) -> int:
+    try:
+        parsed = int(value if value is not None else default)
+    except (TypeError, ValueError):
+        parsed = default
+    return max(parsed, minimum)
+
+
+def _local_reply_gate_timeout() -> float:
+    timeout = config.catty_local_critic_reply_gate_request_timeout
+    return float(timeout or config.catty_local_critic_request_timeout or config.catty_request_timeout)
+
+
+def _local_reply_gate_max_tokens() -> int | None:
+    return config.catty_local_critic_reply_gate_max_tokens
+
+
+def _local_reply_gate_extra_body() -> dict[str, object]:
+    return {**config.catty_local_critic_extra_body, "stream": False}
+
+
+def _ollama_native_base_url() -> str:
+    base_url = config.catty_local_critic_base_url.strip().rstrip("/")
+    for suffix in ("/v1/chat/completions", "/chat/completions", "/v1"):
+        if base_url.endswith(suffix):
+            return base_url[: -len(suffix)].rstrip("/")
+    return base_url
+
+
+def _ollama_native_generate_url() -> str:
+    return _ollama_native_base_url() + "/api/generate"
+
+
+async def _warm_local_critic_model() -> None:
+    global _local_critic_warmup_success_logged
+    keep_alive = config.catty_local_critic_warmup_keep_alive.strip()
+    payload: dict[str, object] = {
+        "model": config.catty_local_critic_model,
+        "stream": False,
+    }
+    if keep_alive:
+        payload["keep_alive"] = keep_alive
+    timeout = max(float(config.catty_local_critic_warmup_request_timeout or 60.0), 1.0)
+    client_kwargs: dict[str, object] = {"timeout": timeout, "follow_redirects": True}
+    if config.catty_http_proxy.strip():
+        client_kwargs["proxy"] = config.catty_http_proxy.strip()
+    async with httpx.AsyncClient(**client_kwargs) as client:
+        response = await client.post(_ollama_native_generate_url(), json=payload)
+    response.raise_for_status()
+    if not _local_critic_warmup_success_logged:
+        logger.info(
+            "Local critic Ollama warmup loaded model %s with keep_alive=%s",
+            config.catty_local_critic_model,
+            keep_alive or "default",
+        )
+        _local_critic_warmup_success_logged = True
+    else:
+        logger.debug("Local critic Ollama warmup refreshed model %s", config.catty_local_critic_model)
+
+
+async def _local_critic_warmup_loop() -> None:
+    if not config.catty_local_critic_warmup_enabled or not _local_critic_enabled():
+        return
+    interval = max(float(config.catty_local_critic_warmup_interval_seconds or 1200.0), 60.0)
+    while True:
+        try:
+            await _warm_local_critic_model()
+        except httpx.HTTPError as exc:
+            logger.warning(f"Local critic Ollama warmup failed: {_http_error_detail(exc)}")
+        except Exception as exc:
+            logger.warning(f"Local critic Ollama warmup failed: {exc}")
+        await asyncio.sleep(interval)
+
+
 def _local_critic_event_payload(
     event: MessageEvent,
     incoming: ExtractedMessage,
@@ -650,15 +792,14 @@ def _reply_gate_examples_context() -> str:
         examples.append(
             {
                 "message_type": event_payload.get("message_type"),
-                "user_message": str(event_payload.get("user_message") or "")[-500:],
+                "user_message": str(event_payload.get("user_message") or "")[-220:],
                 "mentioned": event_payload.get("mentioned"),
                 "replied_to_self": event_payload.get("replied_to_self"),
                 "used_prefix": event_payload.get("used_prefix"),
                 "directed_strength": event_payload.get("directed_strength"),
                 "should_reply": gate.get("should_reply"),
                 "confidence": gate.get("confidence"),
-                "reason": gate.get("reason"),
-                "final": record.get("final_reply"),
+                "reason": str(gate.get("reason") or "")[-120:],
             }
         )
         if len(examples) >= max_examples:
@@ -682,6 +823,8 @@ def _local_critic_messages(
         {
             "role": "system",
             "content": (
+                "/no_think\n"
+                "当前是实时回复校正，不是训练；禁止进入思考模式，禁止输出 <think> 或思考链。"
                 "你是 QQ 猫娘机器人“笨猫”的本地轻量回复校正器，只负责给草稿打分和给出短改写建议。"
                 "检查草稿是否像笨猫：中文 QQ 口语、短句、自然带猫系口吻/动作/颜文字、傲娇但尊重主人、技术内容准确。"
                 "同时检查是否太官方、太长、答非所问、缺少有用信息、误把不该回复的消息接住。"
@@ -705,21 +848,37 @@ def _local_reply_gate_messages(
     group_filter_context: str = "",
     special_care_context: str = "",
 ) -> list[ChatMessage]:
-    payload = _local_critic_event_payload(event, incoming, "")
-    payload["direct_reply_required"] = _direct_reply_required(event, incoming)
-    payload["group_filter_context"] = group_filter_context[-2000:]
-    payload["special_care_context"] = special_care_context[-1000:]
+    user_message_chars = _positive_int(config.catty_local_critic_reply_gate_user_message_chars, 240, minimum=80)
+    plain_text_chars = _positive_int(config.catty_local_critic_reply_gate_plain_text_chars, 120, minimum=40)
+    context_chars = _positive_int(config.catty_local_critic_reply_gate_context_chars, 160, minimum=0)
+    payload: dict[str, object] = {
+        "message_type": "group" if isinstance(event, GroupMessageEvent) else "private",
+        "message": incoming.history_content[-user_message_chars:],
+        "text": incoming.text[-plain_text_chars:],
+        "has_image": incoming.has_image,
+        "mentioned": incoming.mentioned,
+        "replied_to_self": incoming.replied_to_self,
+        "used_prefix": incoming.used_prefix,
+        "directed": incoming.directed,
+        "directed_strength": incoming.directed_strength,
+        "directly_requested": incoming.directly_requested,
+        "opportunistic": incoming.opportunistic,
+        "direct_reply_required": _direct_reply_required(event, incoming),
+    }
+    if context_chars and group_filter_context:
+        payload["group_context"] = group_filter_context[-context_chars:]
+    if context_chars and special_care_context:
+        payload["special_care"] = special_care_context[-context_chars:]
     messages: list[ChatMessage] = [
         {
             "role": "system",
             "content": (
-                "你是 QQ 猫娘机器人“笨猫”的本地 reply gate，只判断这一轮是否要交给主 AI 写回复。"
-                "如果用户明确 @ 机器人、回复机器人消息、使用触发前缀、私聊机器人、或句子明显是在喊猫猫/笨猫办事，"
-                "原则上应该放行。"
-                "只有普通旁观群聊、第三人称提到名字、无接话期待、刷屏噪声时才允许不回复。"
-                "你的输出会被记录成训练样本，后续用于训练更稳的本地 reply gate。"
-                "只输出 JSON，不要 Markdown，不要解释，不要写推理过程。"
-                "字段：should_reply 布尔；confidence 0-100 整数；reason 字符串；training_tags 字符串数组。"
+                "/no_think\n"
+                "Fast QQ reply gate. Decide only whether the main AI should answer this event. "
+                "Return compact JSON only, no Markdown, no chain-of-thought, no user-facing reply. "
+                "Reply true for a direct ask to the bot, image/help request, special-care opening, or batched group context that expects the bot. "
+                "Reply false for idle group chatter, third-person mention, no response expectation, spam, or noise. "
+                "Schema: {\"should_reply\":true|false,\"confidence\":0-100,\"reason\":\"<=12 chars\",\"training_tags\":[]}."
             ),
         },
     ]
@@ -786,6 +945,24 @@ def _local_reply_gate_says_reply(result: dict[str, object]) -> bool:
     return _local_reply_gate_confidence(result) >= threshold
 
 
+def _fallback_reply_decision_context(gate_result: dict[str, object]) -> str:
+    if not gate_result.get("fallback"):
+        return ""
+    payload = {
+        "fallback_gate": {
+            "should_reply": bool(gate_result.get("should_reply")),
+            "confidence": _local_reply_gate_confidence(gate_result),
+            "reason": str(gate_result.get("reason") or "")[-240:],
+        },
+        "instruction": (
+            "本地 reply gate 本轮不可用或返回异常，才由主 AI 接管是否回复。"
+            "请沿用旧硬判断：如果 @、回复机器人、前缀、私聊、明显喊猫猫办事，就回复；"
+            f"如果只是普通旁观群聊、第三人称闲聊、无接话期待，请只输出 {NO_REPLY_MARKER}。"
+        ),
+    }
+    return "本地 reply gate fallback，本轮是否回复临时交给主 AI 判断：\n" + json.dumps(payload, ensure_ascii=False)
+
+
 def _local_critic_rewrite_messages(
     messages: list[ChatMessage],
     draft_reply: str,
@@ -842,6 +1019,13 @@ async def _local_reply_gate_allows(
 ) -> tuple[bool, dict[str, object]]:
     direct_required = _direct_reply_required(event, incoming) and config.catty_local_critic_force_direct_reply
     fallback_allowed = direct_required or incoming.directly_requested
+    if direct_required:
+        return True, {
+            "should_reply": True,
+            "confidence": 100,
+            "reason": "direct trigger; skipped local reply gate",
+            "skipped_model": True,
+        }
     if not config.catty_local_critic_reply_gate_enabled:
         return fallback_allowed, {
             "should_reply": fallback_allowed,
@@ -858,14 +1042,17 @@ async def _local_reply_gate_allows(
         }
 
     try:
-        gate_reply = await local_critic_completion(
-            config,
+        gate_reply = await _local_critic_completion_with_retry(
             _local_reply_gate_messages(
                 event,
                 incoming,
                 group_filter_context=group_filter_context,
                 special_care_context=special_care_context,
             ),
+            label="Local reply gate",
+            timeout=_local_reply_gate_timeout(),
+            max_tokens=_local_reply_gate_max_tokens(),
+            extra_body=_local_reply_gate_extra_body(),
         )
     except OpenAICompatibleError as exc:
         logger.warning(f"Local reply gate API error: {exc}")
@@ -876,11 +1063,12 @@ async def _local_reply_gate_allows(
             "fallback": True,
         }
     except httpx.HTTPError as exc:
-        logger.warning(f"Local reply gate transport error: {exc}")
+        detail = _http_error_detail(exc)
+        logger.warning(f"Local reply gate transport error: {detail}")
         return fallback_allowed, {
             "should_reply": fallback_allowed,
             "confidence": 100 if fallback_allowed else 0,
-            "reason": f"reply gate transport error: {exc}",
+            "reason": f"reply gate transport error: {detail}",
             "fallback": True,
         }
 
@@ -1017,12 +1205,15 @@ async def _apply_local_critic(
         return reply
 
     try:
-        critic_reply = await local_critic_completion(config, _local_critic_messages(event, incoming, reply))
+        critic_reply = await _local_critic_completion_with_retry(
+            _local_critic_messages(event, incoming, reply),
+            label="Local critic",
+        )
     except OpenAICompatibleError as exc:
         logger.warning(f"Local critic API error: {exc}")
         return reply
     except httpx.HTTPError as exc:
-        logger.warning(f"Local critic transport error: {exc}")
+        logger.warning(f"Local critic transport error: {_http_error_detail(exc)}")
         return reply
 
     critic_result = _local_critic_json_object(critic_reply) or {
@@ -1391,6 +1582,7 @@ async def _proactive_bubble_loop() -> None:
 async def start_memory_summary_loop() -> None:
     asyncio.create_task(_summary_loop())
     asyncio.create_task(_proactive_bubble_loop())
+    asyncio.create_task(_local_critic_warmup_loop())
 
 
 @chat_matcher.handle()
@@ -1398,6 +1590,12 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
     incoming: ExtractedMessage = state["catty_incoming"]
     group_filter_context = str(state.get("catty_group_filter_context") or "")
     special_care_context = str(state.get("catty_special_care_context") or "")
+    gate_result = state.get("catty_reply_gate_result")
+    fallback_decision_context = (
+        _fallback_reply_decision_context(gate_result)
+        if isinstance(gate_result, dict)
+        else ""
+    )
     history_key = build_history_key(event, config)
     queue_key = _conversation_queue_key(event)
 
@@ -1569,7 +1767,9 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             group_filter_context=group_filter_context,
             special_care_context=special_care_context,
             emoji_context=emoji_context,
-            web_search_context=web_search_context,
+            web_search_context="\n\n".join(
+                part for part in [web_search_context, fallback_decision_context] if part
+            ),
             star_resonance_context=star_resonance_context,
         )
         try:

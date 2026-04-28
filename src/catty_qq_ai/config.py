@@ -65,14 +65,23 @@ class Config(BaseModel):
     catty_local_critic_api_key: str = "ollama"
     catty_local_critic_model: str = "qwen2.5:1.5b"
     catty_local_critic_extra_headers: dict[str, str] = Field(default_factory=dict)
-    catty_local_critic_extra_body: dict[str, Any] = Field(default_factory=dict)
+    catty_local_critic_extra_body: dict[str, Any] = Field(default_factory=lambda: {"think": False})
     catty_local_critic_temperature: float | None = 0.1
-    catty_local_critic_max_tokens: int | None = 160
-    catty_local_critic_request_timeout: float | None = 30.0
+    catty_local_critic_max_tokens: int | None = 96
+    catty_local_critic_request_timeout: float | None = 5.0
     catty_local_critic_rewrite_when_score_below: int = 75
     catty_local_critic_reply_gate_enabled: bool = True
     catty_local_critic_reply_gate_min_confidence: int = 55
-    catty_local_critic_reply_gate_examples: int = 12
+    catty_local_critic_reply_gate_examples: int = 0
+    catty_local_critic_reply_gate_max_tokens: int | None = 32
+    catty_local_critic_reply_gate_request_timeout: float | None = 4.0
+    catty_local_critic_reply_gate_user_message_chars: int = 240
+    catty_local_critic_reply_gate_plain_text_chars: int = 120
+    catty_local_critic_reply_gate_context_chars: int = 160
+    catty_local_critic_warmup_enabled: bool = False
+    catty_local_critic_warmup_keep_alive: str = "30m"
+    catty_local_critic_warmup_interval_seconds: float = 1200.0
+    catty_local_critic_warmup_request_timeout: float = 60.0
     catty_local_critic_force_direct_reply: bool = True
     catty_local_critic_collect_training_samples: bool = True
     catty_local_critic_training_samples_path: str = "local_critic_samples.jsonl"
@@ -315,6 +324,13 @@ class Config(BaseModel):
         "catty_local_critic_rewrite_when_score_below",
         "catty_local_critic_reply_gate_min_confidence",
         "catty_local_critic_reply_gate_examples",
+        "catty_local_critic_reply_gate_max_tokens",
+        "catty_local_critic_reply_gate_request_timeout",
+        "catty_local_critic_reply_gate_user_message_chars",
+        "catty_local_critic_reply_gate_plain_text_chars",
+        "catty_local_critic_reply_gate_context_chars",
+        "catty_local_critic_warmup_interval_seconds",
+        "catty_local_critic_warmup_request_timeout",
         "catty_web_search_cooldown_seconds",
         "catty_web_search_max_results",
         "catty_web_search_request_timeout",

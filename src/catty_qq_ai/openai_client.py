@@ -169,18 +169,25 @@ async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
     )
 
 
-async def local_critic_completion(config: Config, messages: list[ChatMessage]) -> str:
+async def local_critic_completion(
+    config: Config,
+    messages: list[ChatMessage],
+    *,
+    timeout: float | None = None,
+    max_tokens: int | None = None,
+    extra_body: dict[str, Any] | None = None,
+) -> str:
     return await _post_chat_completion(
         base_url=config.catty_local_critic_base_url,
         api_key=config.catty_local_critic_api_key,
         model=config.catty_local_critic_model,
         messages=messages,
-        timeout=config.catty_local_critic_request_timeout or config.catty_request_timeout,
+        timeout=timeout or config.catty_local_critic_request_timeout or config.catty_request_timeout,
         proxy=config.catty_http_proxy,
         temperature=config.catty_local_critic_temperature,
-        max_tokens=config.catty_local_critic_max_tokens,
+        max_tokens=max_tokens if max_tokens is not None else config.catty_local_critic_max_tokens,
         extra_headers=config.catty_local_critic_extra_headers,
-        extra_body=config.catty_local_critic_extra_body,
+        extra_body=extra_body if extra_body is not None else config.catty_local_critic_extra_body,
     )
 
 
