@@ -878,6 +878,12 @@ class MemoryStore:
             target = self.proactive_daily_target(group_id, max_daily=max_daily)
             if target <= 0 or int(state.get("daily_sent") or 0) >= target:
                 continue
+            send_blocked_until = _parse_time(state.get("send_blocked_until"))
+            if send_blocked_until is not None:
+                if now < _as_aware_utc(send_blocked_until):
+                    continue
+                state["send_blocked_until"] = ""
+                changed = True
             pending = state.get("pending")
             if isinstance(pending, dict) and not pending.get("responded_at") and not pending.get("missed_at"):
                 continue
@@ -899,6 +905,22 @@ class MemoryStore:
         state["last_sent_at"] = now
         state["last_sent_text"] = text.strip()[:500]
         state["pending"] = {"sent_at": now, "text": text.strip()[:500]}
+        state["send_blocked_until"] = ""
+        state["send_failure_count"] = 0
+        state["last_send_failure_reason"] = ""
+        self._save()
+
+    def record_proactive_bubble_failed(self, group_id: str, reason: str, *, retry_after_minutes: float) -> None:
+        if not self.enabled:
+            return
+        group = self._data.setdefault("groups", {}).setdefault(str(group_id), {})
+        state = self._proactive_state(group)
+        now = datetime.now(timezone.utc)
+        retry_after = now + timedelta(minutes=max(float(retry_after_minutes), 1.0))
+        state["last_send_failed_at"] = now.isoformat(timespec="seconds")
+        state["send_blocked_until"] = retry_after.isoformat(timespec="seconds")
+        state["last_send_failure_reason"] = reason.strip()[:500]
+        state["send_failure_count"] = int(state.get("send_failure_count") or 0) + 1
         self._save()
 
     def _corpus_lines(

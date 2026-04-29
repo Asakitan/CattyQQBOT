@@ -19,6 +19,29 @@ def _parse_json_object(value: str) -> dict[str, Any]:
     return loaded
 
 
+class KeywordReplyRule(BaseModel):
+    keywords: list[str] = Field(default_factory=list)
+    reply: str = ""
+    enabled: bool = True
+
+    @field_validator("keywords", mode="before")
+    @classmethod
+    def parse_keywords(cls, value: Any) -> Any:
+        if value is None:
+            return []
+        if isinstance(value, str):
+            raw = value.strip()
+            if not raw:
+                return []
+            if raw.startswith("["):
+                loaded = json.loads(raw)
+                if not isinstance(loaded, list):
+                    raise ValueError("keyword reply keywords JSON value must be a list")
+                return [str(item).strip() for item in loaded if str(item).strip()]
+            return _split_text(raw)
+        return value
+
+
 class Config(BaseModel):
     catty_openai_base_url: str = "https://api.openai.com/v1"
     catty_openai_api_key: str = ""
@@ -105,6 +128,7 @@ class Config(BaseModel):
     catty_directed_keywords: list[str] = Field(
         default_factory=lambda: ["你", "猫猫", "猫娘", "看看", "帮我看看", "这张图", "这个图", "图片", "图里", "评价一下", "怎么回事"]
     )
+    catty_keyword_replies: list[KeywordReplyRule] = Field(default_factory=list)
     catty_soft_directed_reply_probability: float = 0.65
     catty_direct_address_reply_probability: float = 0.9
     catty_image_response_enabled: bool = True
@@ -231,6 +255,20 @@ class Config(BaseModel):
                     raise ValueError("catty_trigger_prefixes JSON value must be a list")
                 return [str(item).strip() for item in loaded if str(item).strip()]
             return _split_text(raw)
+        return value
+
+    @field_validator("catty_keyword_replies", mode="before")
+    @classmethod
+    def parse_keyword_replies(cls, value: Any) -> Any:
+        if value is None or value == "":
+            return []
+        if isinstance(value, str):
+            raw = value.strip()
+            if not raw:
+                return []
+            return json.loads(raw)
+        if isinstance(value, dict):
+            return [{"keywords": [key], "reply": reply} for key, reply in value.items()]
         return value
 
     @field_validator(

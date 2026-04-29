@@ -197,6 +197,31 @@ class MemoryIsolationTests(unittest.TestCase):
                 ["10001"],
             )
 
+    def test_proactive_due_skips_group_during_send_failure_cooldown(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            store = _store(directory)
+            store.remember_event(_group_event(10001, 20002, "一群名片"))
+
+            store.record_proactive_bubble_failed("10001", "send failed: muted", retry_after_minutes=30)
+
+            self.assertEqual(
+                store.due_proactive_group_ids(["10001"], max_daily=5, min_interval_minutes=1),
+                [],
+            )
+            state = store._data["groups"]["10001"]["proactive"]
+            self.assertIn("send failed: muted", state["last_send_failure_reason"])
+            self.assertEqual(state["send_failure_count"], 1)
+
+            state["send_blocked_until"] = (datetime.now(timezone.utc) - timedelta(minutes=1)).isoformat(
+                timespec="seconds"
+            )
+
+            self.assertEqual(
+                store.due_proactive_group_ids(["10001"], max_daily=5, min_interval_minutes=1),
+                ["10001"],
+            )
+            self.assertEqual(state["send_blocked_until"], "")
+
     def test_corpus_entries_store_content_temperature(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             store = _store(directory)

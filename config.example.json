@@ -218,6 +218,7 @@
       "评价一下",
       "怎么回事"
     ],
+    "keyword_replies": [],
     "soft_directed_reply_probability": 0.65,
     "direct_address_reply_probability": 0.9,
     "image_response_enabled": true,

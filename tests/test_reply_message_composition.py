@@ -77,6 +77,7 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         self._old_emoji_reply_probability = _plugin.config.catty_emoji_reply_probability
         self._old_local_critic_enabled = _plugin.config.catty_local_critic_enabled
         self._old_force_direct_reply = _plugin.config.catty_local_critic_force_direct_reply
+        self._old_keyword_replies = list(_plugin.config.catty_keyword_replies)
         _plugin.config.catty_reply_quote_enabled = True
         _plugin.config.catty_reply_quote_private_enabled = False
         _plugin.config.catty_reply_mix_emoji_with_text = True
@@ -94,6 +95,7 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         _plugin.config.catty_emoji_reply_probability = self._old_emoji_reply_probability
         _plugin.config.catty_local_critic_enabled = self._old_local_critic_enabled
         _plugin.config.catty_local_critic_force_direct_reply = self._old_force_direct_reply
+        _plugin.config.catty_keyword_replies = self._old_keyword_replies
         _plugin._recent_emoji_paths.clear()
         _plugin._recent_conversation_messages.clear()
 
@@ -222,6 +224,19 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         _plugin.config.catty_emoji_reply_probability = 1.0
 
         self.assertTrue(_plugin._should_auto_emoji_reply(incoming, "普通回复喵"))
+
+    def test_keyword_reply_matches_mc_terms_without_mcp_false_positive(self) -> None:
+        _plugin.config.catty_keyword_replies = [
+            _plugin.KeywordReplyRule(
+                keywords=["MC", "我的世界", "Minecraft"],
+                reply="莎国方可梦2.0开服啦喵",
+            )
+        ]
+
+        self.assertEqual(_plugin._keyword_reply_for_text("有人玩 MC 吗"), "莎国方可梦2.0开服啦喵")
+        self.assertEqual(_plugin._keyword_reply_for_text("我的世界开不开心"), "莎国方可梦2.0开服啦喵")
+        self.assertEqual(_plugin._keyword_reply_for_text("minecraft 服务器"), "莎国方可梦2.0开服啦喵")
+        self.assertEqual(_plugin._keyword_reply_for_text("MCP 工具怎么配"), "")
 
     def test_bot_continuation_prompt_keeps_technical_followups_actionable(self) -> None:
         event = _group_event(456)

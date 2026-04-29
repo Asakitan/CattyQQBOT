@@ -237,6 +237,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "group_history_scope": "group",
         "history_turns": 16,
         "directed_keywords": ["你", "猫猫", "猫娘", "看看", "帮我看看", "这张图", "这个图", "图片", "图里", "评价一下", "怎么回事"],
+        "keyword_replies": [],
         "soft_directed_reply_probability": 0.65,
         "direct_address_reply_probability": 0.9,
         "image_response_enabled": True,
@@ -536,6 +537,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_GROUP_HISTORY_SCOPE", chat.get("group_history_scope"))
     _set_env("CATTY_HISTORY_TURNS", chat.get("history_turns"))
     _set_env("CATTY_DIRECTED_KEYWORDS", chat.get("directed_keywords"), json_value=True)
+    _set_env("CATTY_KEYWORD_REPLIES", chat.get("keyword_replies"), json_value=True)
     _set_env("CATTY_SOFT_DIRECTED_REPLY_PROBABILITY", chat.get("soft_directed_reply_probability"))
     _set_env("CATTY_DIRECT_ADDRESS_REPLY_PROBABILITY", chat.get("direct_address_reply_probability"))
     _set_env("CATTY_IMAGE_RESPONSE_ENABLED", chat.get("image_response_enabled"))

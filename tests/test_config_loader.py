@@ -82,6 +82,41 @@ class ConfigLoaderTests(unittest.TestCase):
         self.assertEqual(quote, "true")
         self.assertEqual(private_quote, "true")
 
+    def test_keyword_replies_are_exported_from_chat_config(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            base_dir = Path(directory)
+            data = {
+                "server": {},
+                "qq": {},
+                "ai": {},
+                "audit_ai": {},
+                "vision": {},
+                "filter": {},
+                "local_critic": {},
+                "local_training": {},
+                "web_search": {},
+                "turtle_soup": {},
+                "chat": {
+                    "keyword_replies": [
+                        {
+                            "keywords": ["MC", "我的世界"],
+                            "reply": "开服啦喵",
+                        }
+                    ],
+                },
+                "emoji": {},
+                "memory": {},
+                "proactive": {},
+                "access": {},
+            }
+
+            with patch.dict(os.environ, {}, clear=True):
+                _loader._apply_config(data, base_dir)
+                keyword_replies = json.loads(os.environ["CATTY_KEYWORD_REPLIES"])
+
+        self.assertEqual(keyword_replies[0]["keywords"], ["MC", "我的世界"])
+        self.assertEqual(keyword_replies[0]["reply"], "开服啦喵")
+
     def test_emoji_diversity_flags_are_exported(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             base_dir = Path(directory)

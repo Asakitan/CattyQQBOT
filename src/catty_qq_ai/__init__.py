@@ -7,6 +7,7 @@ import mimetypes
 import os
 from pathlib import Path
 import random
+import re
 import time
 from typing import DefaultDict
 
@@ -18,7 +19,7 @@ from nonebot.matcher import Matcher
 from nonebot.plugin import PluginMetadata
 from nonebot.typing import T_State
 
-from .config import Config
+from .config import Config, KeywordReplyRule
 from .features import (
     choose_turtle_soup,
     extract_web_search_query,
@@ -155,6 +156,42 @@ _WAKE_CONTEXT_AFTER_MESSAGES = 6
 
 def _has_api_key() -> bool:
     return bool(config.catty_openai_api_key.strip())
+
+
+def _keyword_reply_event_allowed(event: MessageEvent) -> bool:
+    if config.catty_allowed_user_ids and int(event.user_id) not in config.catty_allowed_user_ids:
+        return False
+    if isinstance(event, GroupMessageEvent):
+        if not config.catty_enable_group:
+            return False
+        if config.catty_allowed_group_ids and int(event.group_id) not in config.catty_allowed_group_ids:
+            return False
+        return True
+    if isinstance(event, PrivateMessageEvent):
+        return config.catty_enable_private
+    return False
+
+
+def _keyword_reply_rule_enabled(rule: KeywordReplyRule) -> bool:
+    return bool(getattr(rule, "enabled", True) and str(getattr(rule, "reply", "")).strip())
+
+
+def _keyword_matches_text(text: str, keyword: str) -> bool:
+    keyword = keyword.strip()
+    if not text.strip() or not keyword:
+        return False
+    if re.fullmatch(r"[A-Za-z0-9_]+", keyword):
+        return re.search(rf"(?<![A-Za-z0-9_]){re.escape(keyword)}(?![A-Za-z0-9_])", text, re.IGNORECASE) is not None
+    return keyword.casefold() in text.casefold()
+
+
+def _keyword_reply_for_text(text: str) -> str:
+    for rule in config.catty_keyword_replies:
+        if not _keyword_reply_rule_enabled(rule):
+            continue
+        if any(_keyword_matches_text(text, str(keyword)) for keyword in rule.keywords):
+            return rule.reply.strip()
+    return ""
 
 
 def _conversation_queue_key(event: MessageEvent) -> str:
@@ -2153,6 +2190,24 @@ def _forget_removed_group(group_id: str, *, reason: str) -> None:
         logger.info(f"Removed stale group memory and disabled proactive bubbles for group {group_id}: {reason}")
 
 
+def _record_proactive_send_failure(group_id: str, exc: Exception) -> None:
+    retry_after_minutes = max(
+        config.catty_proactive_min_interval_minutes,
+        config.catty_proactive_response_window_minutes,
+        30.0,
+    )
+    memory_store.record_proactive_bubble_failed(
+        group_id,
+        str(exc),
+        retry_after_minutes=retry_after_minutes,
+    )
+    logger.info(
+        "Paused proactive bubbles for group %s for %.1f minutes after send failure",
+        group_id,
+        retry_after_minutes,
+    )
+
+
 async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
     async with _locks[f"group:{group_id}"]:
         messages = _build_proactive_messages(group_id)
@@ -2166,7 +2221,11 @@ async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
         sent_text = "\n".join(chunks)
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
         for chunk in chunks:
-            await bot.send_group_msg(group_id=_coerce_group_id(group_id), message=Message(chunk))
+            try:
+                await bot.send_group_msg(group_id=_coerce_group_id(group_id), message=Message(chunk))
+            except Exception as exc:
+                _record_proactive_send_failure(group_id, exc)
+                raise
             _remember_bot_conversation_message(f"group:{group_id}", bot_id=str(bot.self_id), text=chunk)
             if delay_seconds:
                 await asyncio.sleep(delay_seconds)
@@ -2371,6 +2430,17 @@ async def _expression_repeat_rule(bot: Bot, event: MessageEvent, state: T_State)
     return True
 
 
+async def _keyword_reply_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    reply = _keyword_reply_for_text(event_plain_text(event))
+    if not reply:
+        return False
+    state["catty_keyword_reply"] = reply
+    return True
+
+
+keyword_reply_matcher = on_message(rule=_keyword_reply_rule, priority=40, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
 expression_repeat_matcher = on_message(rule=_expression_repeat_rule, priority=50, block=True)
 observe_matcher = on_message(priority=5, block=False)
@@ -2406,6 +2476,20 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
 
 
 poke_matcher = on_notice(rule=_poke_rule, priority=55, block=True)
+
+
+@keyword_reply_matcher.handle()
+async def handle_keyword_reply(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    async with _locks[_conversation_queue_key(event)]:
+        reply = str(state["catty_keyword_reply"])
+        _remember_bot_reply_for_event(event, reply)
+        await matcher.finish(
+            _compose_reply_message(
+                event,
+                text=reply,
+                quote=isinstance(event, GroupMessageEvent),
+            )
+        )
 
 
 @expression_repeat_matcher.handle()
