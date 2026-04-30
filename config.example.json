@@ -226,6 +226,7 @@
     "reply_human_split_enabled": true,
     "reply_human_split_probability": 0.35,
     "reply_human_split_min_chars": 48,
+    "reply_human_split_max_chunks": 4,
     "reply_human_split_delay_seconds": 0.8,
     "reply_mix_emoji_with_text": true,
     "reply_quote_enabled": true,

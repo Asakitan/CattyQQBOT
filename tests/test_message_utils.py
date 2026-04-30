@@ -77,6 +77,15 @@ class ReplySplitTests(unittest.TestCase):
 
         self.assertEqual(_message_utils.split_reply(reply, 20, max_chunks=1), [reply])
 
+    def test_long_reply_can_use_more_than_two_chunks(self) -> None:
+        reply = "第一句很长很长。" * 30
+
+        chunks = _message_utils.split_reply(reply, 30, max_chunks=4)
+
+        self.assertGreater(len(chunks), 2)
+        self.assertLessEqual(len(chunks), 4)
+        self.assertEqual("".join(chunks), reply)
+
 
 if __name__ == "__main__":
     unittest.main()

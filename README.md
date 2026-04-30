@@ -126,7 +126,7 @@ ai 帮我总结这段话
 
 艾特、回复机器人消息、拍了拍机器人或触发开头前缀时会直接回复；如果句子中出现“猫猫/笨猫/你”等配置里的名字或指向词，程序会把这类软触发消息交给 AI，由 AI 根据整句主语、称呼对象和上下文判断是不是在呼唤机器人。明显像“猫猫你看看”“问猫猫这个怎么弄”的直接喊名会使用更高的 `chat.direct_address_reply_probability`，普通软触发使用 `chat.soft_directed_reply_probability`；当群聊/私聊已经积累足够语料、摘要或画像时，还会按 `memory.reply_boost_*` 给回复倾向加一点权重。普通群聊会按群攒到 `filter.group_batch_messages` 条，或距离本群上一批普通群消息达到 `filter.group_batch_seconds` 秒后，把这段最近未 filter 的普通消息作为压缩窗口交给 AI，从中查找疑似指向 BOT/AI/猫猫的话题再决定是否自然回复；如果不该回复，AI 会输出内部不回复标记且不会发到群里。
 
-如果群友在短时间内连续发送同一个 QQ 表情、普通图片、图片类表情或文字消息，默认第 2 次时机器人会直接复读这条消息，不调用 AI 接口；机器人自己的消息不会计入连发判断。AI 的普通文本回复会由 `filter` 小模型判断是否追加本轮专用的轻量分段提示，再由主模型按语义决定是否拆成两条消息发送；原始 `system_prompt` 不会被改写。
+如果群友在短时间内连续发送同一个 QQ 表情、普通图片、图片类表情或文字消息，默认第 2 次时机器人会直接复读这条消息，不调用 AI 接口；机器人自己的消息不会计入连发判断。AI 的普通文本回复会按本地概率追加本轮专用的轻量分段提示，再由主模型按语义自己决定说几段、拆几条消息发送；原始 `system_prompt` 不会被改写。
 
 清空当前会话上下文：
 
@@ -397,10 +397,11 @@ dist/CattyQQAI.exe
 | `chat.private_require_prefix` | `false` | 私聊是否必须前缀 |
 | `chat.history_turns` | `16` | 每个会话保留的上下文轮数 |
 | `chat` 唤起上下文 | 自动 | 入口被唤起后，会按群/私聊隔离、按时间去重整理近期聊天给主 AI 判断；普通群批量至少保留可用的 16 条，越明确指向猫猫窗口越大，最多 50 条；主 AI 可输出 `NO_REPLY` 安静不回 |
-| `chat.reply_max_chars` | `1800` | 单条回复超过该长度时最多切成两条发送 |
+| `chat.reply_max_chars` | `1800` | 单条消息超过该长度时按上限继续切分发送 |
 | `chat.reply_human_split_enabled` | `true` | 是否允许本地概率判断本轮是否追加语义分段提示 |
 | `chat.reply_human_split_probability` | `0.35` | 分段提示的本地触发概率，不再额外调用 filter API |
 | `chat.reply_human_split_min_chars` | `48` | 提示 AI 至少达到该字符数才考虑语义分段 |
+| `chat.reply_human_split_max_chunks` | `4` | AI 自主分段和超长回复切分时最多发送的消息条数，防止刷屏 |
 | `chat.reply_human_split_delay_seconds` | `0.8` | 分段发送之间的等待秒数 |
 | `chat.reply_self_check_enabled` | `true` | 回复前追加隐藏自检提示，让主 AI 先理解意图；若有脱离人格倾向则先重读主 prompt 和笨猫人格记忆；遇到敏感/超限请求时用猫娘语气短拒绝或转安全替代 |
 | `chat.reply_style_examples_enabled` | `true` | 回复前追加猫娘风格例句提示，让主 AI 学习可爱但有用的 QQ 口语节奏 |

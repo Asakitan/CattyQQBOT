@@ -467,8 +467,8 @@ async def should_request_reply_split(config: Config, user_content: str, *, min_c
         return False
 
     prompt = (
-        "你是QQ回复分段判断器，只判断本轮回复是否值得允许主AI按语义拆成两条消息。"
-        f"只有当用户问题大概率需要不少于约{min_chars}个中文字符、且拆成两条会更像自然聊天时，返回true；"
+        "你是QQ回复分段判断器，只判断本轮回复是否值得允许主AI按语义拆成多条消息。"
+        f"只有当用户问题大概率需要不少于约{min_chars}个中文字符、且拆分会更像自然聊天时，返回true；"
         "短答、斗嘴、普通闲聊、简单问候、只需一句话回答时返回false。"
         "只输出JSON：{\"split\":true|false}，不要解释。"
     )

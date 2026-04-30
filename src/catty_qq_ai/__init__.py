@@ -1285,11 +1285,13 @@ def _expression_repeat_message(bot: Bot, event: MessageEvent) -> Message | None:
 
 def _semantic_reply_split_prompt() -> str:
     min_chars = max(config.catty_reply_human_split_min_chars, 1)
+    max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
     return (
-        "本轮允许你在语义自然时把回复拆成两条 QQ 消息。"
-        f"只有当回复预计不少于约 {min_chars} 个中文字符、且拆分后两条都完整自然时才拆；"
-        "如果拆成两条，第一条结尾不能带标点，整体尽量像群友聊天一样少用收尾标点；"
-        f"如果决定拆分，只在两条消息之间单独输出一行 {REPLY_SPLIT_MARKER}。"
+        "本轮允许你按语义自然度自己决定回复成一条还是多条 QQ 消息。"
+        f"只有当回复预计不少于约 {min_chars} 个中文字符、且拆分后每条都完整自然时才拆；"
+        f"最多拆成 {max_chunks} 条，普通闲聊不需要硬拆，复杂说明可以按步骤多拆几条；"
+        "被拆分消息的前几条结尾尽量少用收尾标点，整体像群友聊天一样自然；"
+        f"如果决定拆分，只在消息之间单独输出一行 {REPLY_SPLIT_MARKER}。"
         "不要解释这个标记，不要为了拆分牺牲原本回答质量；不适合拆分就正常单条回复。"
     )
 
@@ -1339,7 +1341,7 @@ def _soft_directed_reply_prompt(
         return (
             "本轮没有明确 @ 你、回复你或使用严格开头前缀，但本地判断更像是在直接喊你/叫你办事。"
             f"当前回复倾向约 {probability_percent}%{boost_text}。"
-            "请结合上下文自己判断是否真的要接话；如果该接，就用 1-3 句自然接住。"
+            "请结合上下文自己判断是否真的要接话；如果该接，按场景自己决定回复长短，自然接住重点。"
             f"不要机械回复“你叫我了/我在”；如果只是误触发或第三人称闲聊，只输出 {NO_REPLY_MARKER}。"
         )
     return (
@@ -2235,16 +2237,17 @@ async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
 
 
 def _reply_chunks(reply: str) -> list[str]:
+    max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
     if REPLY_SPLIT_MARKER not in reply:
-        return split_reply(reply, config.catty_reply_max_chars)
+        return split_reply(reply, config.catty_reply_max_chars, max_chunks=max_chunks)
 
     chunks: list[str] = []
     for part in reply.split(REPLY_SPLIT_MARKER):
-        chunks.extend(split_reply(part, config.catty_reply_max_chars))
+        chunks.extend(split_reply(part, config.catty_reply_max_chars, max_chunks=max_chunks))
     for index in range(len(chunks) - 1):
         chunks[index] = chunks[index].rstrip(TRAILING_CHAT_PUNCTUATION)
     chunks = [chunk for chunk in chunks if chunk]
-    return _cap_reply_chunks(chunks, max_chunks=2)
+    return _cap_reply_chunks(chunks, max_chunks=max_chunks)
 
 
 def _cap_reply_chunks(chunks: list[str], *, max_chunks: int) -> list[str]:

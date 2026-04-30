@@ -184,6 +184,7 @@ class Config(BaseModel):
     catty_reply_human_split_enabled: bool = True
     catty_reply_human_split_probability: float = 0.35
     catty_reply_human_split_min_chars: int = 48
+    catty_reply_human_split_max_chunks: int = 4
     catty_reply_human_split_delay_seconds: float = 0.8
     catty_reply_mix_emoji_with_text: bool = True
     catty_reply_quote_enabled: bool = True
@@ -420,6 +421,7 @@ class Config(BaseModel):
         "catty_proactive_min_interval_minutes",
         "catty_proactive_response_window_minutes",
         "catty_proactive_recent_messages",
+        "catty_reply_human_split_max_chunks",
         "catty_hot_reload_poll_seconds",
         "catty_hot_reload_debounce_seconds",
         mode="before",

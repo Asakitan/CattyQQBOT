@@ -246,6 +246,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "reply_human_split_enabled": True,
         "reply_human_split_probability": 0.35,
         "reply_human_split_min_chars": 48,
+        "reply_human_split_max_chunks": 4,
         "reply_human_split_delay_seconds": 0.8,
         "reply_mix_emoji_with_text": True,
         "reply_quote_enabled": True,
@@ -546,6 +547,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_REPLY_HUMAN_SPLIT_ENABLED", chat.get("reply_human_split_enabled"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_PROBABILITY", chat.get("reply_human_split_probability"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_MIN_CHARS", chat.get("reply_human_split_min_chars"))
+    _set_env("CATTY_REPLY_HUMAN_SPLIT_MAX_CHUNKS", chat.get("reply_human_split_max_chunks"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_DELAY_SECONDS", chat.get("reply_human_split_delay_seconds"))
     _set_env("CATTY_REPLY_MIX_EMOJI_WITH_TEXT", chat.get("reply_mix_emoji_with_text"))
     _set_env("CATTY_REPLY_QUOTE_ENABLED", chat.get("reply_quote_enabled"))

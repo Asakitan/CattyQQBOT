@@ -22,6 +22,8 @@ class PersonaPromptsTests(unittest.TestCase):
         self.assertIn("用户真实意图", prompt)
         self.assertIn("猫系动作", prompt)
         self.assertIn("现场感", prompt)
+        self.assertIn("自己判断本轮适合回复几段", prompt)
+        self.assertIn("自己决定需要恢复几次", prompt)
         self.assertIn("删掉一句最像客服", prompt)
         self.assertIn("NOPE", prompt)
         self.assertIn("SPLIT", prompt)
