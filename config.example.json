@@ -186,7 +186,11 @@
     "enabled": true,
     "cooldown_seconds": 600,
     "max_results": 5,
-    "request_timeout": 10
+    "request_timeout": 10,
+    "engines": [
+      "google",
+      "bing"
+    ]
   },
   "turtle_soup": {
     "cooldown_seconds": 300

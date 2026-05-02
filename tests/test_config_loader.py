@@ -194,6 +194,33 @@ class ConfigLoaderTests(unittest.TestCase):
         self.assertEqual(debounce, "0.5")
         self.assertEqual(restart, "false")
 
+    def test_web_search_engines_are_exported(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            base_dir = Path(directory)
+            data = {
+                "server": {},
+                "qq": {},
+                "ai": {},
+                "audit_ai": {},
+                "vision": {},
+                "filter": {},
+                "local_critic": {},
+                "local_training": {},
+                "web_search": {"engines": ["google", "bing"]},
+                "turtle_soup": {},
+                "chat": {},
+                "emoji": {},
+                "memory": {},
+                "proactive": {},
+                "access": {},
+            }
+
+            with patch.dict(os.environ, {}, clear=True):
+                _loader._apply_config(data, base_dir)
+                engines = json.loads(os.environ["CATTY_WEB_SEARCH_ENGINES"])
+
+        self.assertEqual(engines, ["google", "bing"])
+
 
 if __name__ == "__main__":
     unittest.main()

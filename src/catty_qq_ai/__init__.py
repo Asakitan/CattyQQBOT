@@ -66,7 +66,7 @@ from .reply_markers import (
     extract_emoji_query as _extract_emoji_query,
 )
 from .star_resonance_memory import build_star_resonance_context
-from .web_search import search_image_urls
+from .web_search import format_search_context, search_image_urls, search_web
 
 try:
     from catty_config_loader import _apply_config as _apply_json_config
@@ -142,6 +142,9 @@ _group_filter_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 _recent_conversation_messages: DefaultDict[str, deque[RecentConversationMessage]] = defaultdict(lambda: deque(maxlen=80))
 _bot_reply_continuations: dict[str, BotReplyContinuationState] = {}
 _web_search_cooldowns: dict[str, float] = {}
+WEB_SEARCH_REQUEST_PREFIX = "[[CATTY_WEB_SEARCH:"
+WEB_SEARCH_REQUEST_SUFFIX = "]]"
+_WEB_SEARCH_REQUEST_RE = re.compile(r"\[\[CATTY_WEB_SEARCH:\s*(.*?)\]\]", re.DOTALL)
 _turtle_soup_cooldowns: dict[str, float] = {}
 _local_critic_warmup_success_logged = False
 _consumed_reply_source_ids: dict[str, float] = {}
@@ -818,14 +821,64 @@ def _anger_reply_decision_context(
 
 
 async def _build_web_search_context(query: str) -> str:
+    try:
+        results = await search_web(config, query)
+    except (httpx.HTTPError, ValueError) as exc:
+        logger.warning(f"Web search failed for {query}: {exc}")
+        return (
+            f"本轮用户明确要求联网搜索「{query}」，但本地 Google/Bing 搜索插件调用失败。"
+            "请用猫系人格如实说明这次联网查询失败，不要编造搜索结果、链接、日期或来源；"
+            "可以基于已有知识给出有限建议，并提醒用户稍后重试。"
+        )
+    return format_search_context(query, results)
+
+
+def _web_search_plugin_prompt() -> str:
+    engines = ", ".join(config.catty_web_search_engines or ["google", "bing"])
     return (
-        f"本轮用户明确要求联网搜索「{query}」。"
-        "这不是普通闲聊，也不是只需要表态的命令；请先理解用户要搜的对象和意图，然后在同一条最终回复里直接给出搜索后的答案。"
-        "请由主 AI 自己使用运行环境/模型提供的原生联网搜索能力完成查询，不要使用本地预置资料冒充最新搜索结果。"
-        "如果用户要图片、壁纸、表情包或图包，请在同一条回复里给出可执行的搜索结论、关键词、来源建议或合规替代方案，不要只说“我去搜/我不会搜”。"
-        "如果当前主 AI 实际没有可用的联网搜索能力，请用猫系人格如实说明限制，并在同一条回复里给出替代建议；"
-        "不要编造搜索结果、链接、日期或来源。"
+        "你可以请求本地联网搜索插件。"
+        f"当问题需要最新信息、具体来源、新闻、价格、版本、时效性事实，或用户让你联网/搜索/查资料时，"
+        f"请只输出 {WEB_SEARCH_REQUEST_PREFIX} 你的搜索关键词 {WEB_SEARCH_REQUEST_SUFFIX}，不要同时给最终答案。"
+        f"程序会使用 {engines} 搜索，并把结果回填给你再生成最终回复。"
+        "不需要联网时正常回答；拿到搜索结果后必须基于结果回答，来源不足就说明限制，禁止编造链接。"
     )
+
+
+def _extract_model_web_search_query(reply: str) -> str:
+    match = _WEB_SEARCH_REQUEST_RE.search(reply or "")
+    if not match:
+        return ""
+    query = match.group(1).strip(" ：:，,。！？!?；;\"'“”‘’\n\t")
+    return query[:160]
+
+
+async def _resolve_model_requested_web_search(
+    messages: list[ChatMessage],
+    reply: str,
+) -> tuple[str, list[ChatMessage]]:
+    query = _extract_model_web_search_query(reply)
+    if not query:
+        return reply, messages
+    if not config.catty_web_search_enabled:
+        return (
+            "喵呜，猫猫想联网搜一下再回答，但当前 web_search.enabled 关着，不能硬编结果。主人把联网搜索打开后人家再查。",
+            messages,
+        )
+    web_search_context = await _build_web_search_context(query)
+    followup_messages = [
+        *messages,
+        {"role": "assistant", "content": reply},
+        {
+            "role": "system",
+            "content": (
+                f"本地联网搜索插件已按主 AI 请求查询「{query}」。"
+                "请现在给用户最终答案，不要再输出搜索标记；如果结果不足，请明确说明。"
+            ),
+        },
+        {"role": "system", "content": web_search_context},
+    ]
+    resolved_reply = await chat_completion(config, followup_messages)
+    return resolved_reply, followup_messages
 
 
 def _reset_history(key: str) -> None:
@@ -1135,6 +1188,8 @@ def _build_messages(
         messages.append({"role": "system", "content": persona_memory})
     messages.append({"role": "system", "content": build_reply_intelligence_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": build_group_meme_literacy_prompt()})
+    if config.catty_web_search_enabled:
+        messages.append({"role": "system", "content": _web_search_plugin_prompt()})
     if config.catty_reply_self_check_enabled:
         messages.append(
             {
@@ -2809,6 +2864,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         )
         try:
             reply = await chat_completion(config, messages)
+            reply, messages = await _resolve_model_requested_web_search(messages, reply)
         except OpenAICompatibleError as exc:
             logger.warning(f"OpenAI-compatible API error: {exc}")
             await matcher.finish(Message(f"AI 接口出错：{exc.public_message}"))

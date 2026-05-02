@@ -123,15 +123,19 @@ class ReplyMessageCompositionTests(unittest.TestCase):
         self.assertEqual(message[1].type, "text")
         self.assertEqual(message[2].type, "image")
 
-    def test_web_search_context_delegates_to_main_ai(self) -> None:
-        context = asyncio.run(_plugin._build_web_search_context("星痕共鸣"))
+    def test_web_search_prompt_lets_main_ai_request_plugin_search(self) -> None:
+        prompt = _plugin._web_search_plugin_prompt()
 
-        self.assertIn("由主 AI 自己", context)
-        self.assertIn("原生联网搜索能力", context)
-        self.assertIn("同一条最终回复", context)
-        self.assertIn("图片、壁纸、表情包或图包", context)
-        self.assertIn("不要编造搜索结果", context)
-        self.assertNotIn("DuckDuckGo", context)
+        self.assertIn("[[CATTY_WEB_SEARCH:", prompt)
+        self.assertIn("google", prompt)
+        self.assertIn("bing", prompt)
+        self.assertIn("程序会使用", prompt)
+        self.assertIn("禁止编造链接", prompt)
+
+    def test_extract_model_web_search_query(self) -> None:
+        query = _plugin._extract_model_web_search_query("[[CATTY_WEB_SEARCH: 星痕共鸣 最新职业 ]]")
+
+        self.assertEqual(query, "星痕共鸣 最新职业")
 
     def test_invalid_hot_reload_config_does_not_replace_current_config(self) -> None:
         old_model = _plugin.config.catty_openai_model

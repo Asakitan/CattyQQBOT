@@ -115,6 +115,7 @@ class Config(BaseModel):
     catty_web_search_cooldown_seconds: int = 600
     catty_web_search_max_results: int = 5
     catty_web_search_request_timeout: float | None = 10.0
+    catty_web_search_engines: list[str] = Field(default_factory=lambda: ["google", "bing"])
     catty_turtle_soup_cooldown_seconds: int = 300
 
     catty_system_prompt: str = "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。"
@@ -241,7 +242,7 @@ class Config(BaseModel):
             raise ValueError("catty_local_critic_mode must be reply_gate_only or reply_gate_and_critic")
         return aliases[normalized]
 
-    @field_validator("catty_trigger_prefixes", "catty_directed_keywords", mode="before")
+    @field_validator("catty_trigger_prefixes", "catty_directed_keywords", "catty_web_search_engines", mode="before")
     @classmethod
     def parse_prefixes(cls, value: Any) -> Any:
         if value is None:

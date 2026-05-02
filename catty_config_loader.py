@@ -223,6 +223,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "cooldown_seconds": 600,
         "max_results": 5,
         "request_timeout": 10,
+        "engines": ["google", "bing"],
     },
     "turtle_soup": {
         "cooldown_seconds": 300,
@@ -524,6 +525,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_WEB_SEARCH_COOLDOWN_SECONDS", web_search.get("cooldown_seconds"))
     _set_env("CATTY_WEB_SEARCH_MAX_RESULTS", web_search.get("max_results"))
     _set_env("CATTY_WEB_SEARCH_REQUEST_TIMEOUT", web_search.get("request_timeout"))
+    _set_env("CATTY_WEB_SEARCH_ENGINES", web_search.get("engines"), json_value=True)
 
     turtle_soup = _section(data, "turtle_soup")
     _set_env("CATTY_TURTLE_SOUP_COOLDOWN_SECONDS", turtle_soup.get("cooldown_seconds"))

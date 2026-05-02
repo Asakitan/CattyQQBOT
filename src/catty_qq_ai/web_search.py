@@ -6,6 +6,7 @@ from html.parser import HTMLParser
 import re
 from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
+from xml.etree import ElementTree
 
 import httpx
 
@@ -17,6 +18,7 @@ class WebSearchResult:
     title: str
     url: str
     snippet: str = ""
+    source: str = ""
 
 
 def _clean_duckduckgo_url(url: str) -> str:
@@ -28,6 +30,137 @@ def _clean_duckduckgo_url(url: str) -> str:
     if url.startswith("//"):
         return "https:" + url
     return url
+
+
+def _clean_google_url(url: str) -> str:
+    parsed = urlparse(url)
+    if parsed.netloc.endswith("google.com") and parsed.path == "/url":
+        target = parse_qs(parsed.query).get("q", [""])[0]
+        if target:
+            return unquote(target)
+    if url.startswith("/url?"):
+        target = parse_qs(urlparse(url).query).get("q", [""])[0]
+        if target:
+            return unquote(target)
+    if url.startswith("//"):
+        return "https:" + url
+    return url
+
+
+def _is_search_result_url(url: str) -> bool:
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"}:
+        return False
+    blocked_hosts = (
+        "bing.com",
+        "google.com",
+        "gstatic.com",
+        "googleusercontent.com",
+        "microsoft.com",
+        "msn.com",
+    )
+    return not any(parsed.netloc.endswith(host) for host in blocked_hosts)
+
+
+class _GoogleParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.results: list[WebSearchResult] = []
+        self._pending_href = ""
+        self._capture_title = False
+        self._text_parts: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attrs_map = {name: value or "" for name, value in attrs}
+        if tag == "a":
+            href = _clean_google_url(unescape(attrs_map.get("href", "")).strip())
+            if _is_search_result_url(href):
+                self._pending_href = href
+        elif tag == "h3" and self._pending_href:
+            self._capture_title = True
+            self._text_parts = []
+
+    def handle_data(self, data: str) -> None:
+        if self._capture_title:
+            self._text_parts.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "h3" and self._capture_title:
+            title = unescape("".join(self._text_parts)).strip()
+            if title and self._pending_href:
+                self.results.append(WebSearchResult(title=title, url=self._pending_href, source="Google"))
+            self._capture_title = False
+            self._pending_href = ""
+            self._text_parts = []
+
+
+class _BingParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.results: list[WebSearchResult] = []
+        self._in_result = False
+        self._in_title = False
+        self._capture_title = False
+        self._capture_snippet = False
+        self._href = ""
+        self._text_parts: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attrs_map = {name: value or "" for name, value in attrs}
+        classes = set(attrs_map.get("class", "").split())
+        if tag == "li" and "b_algo" in classes:
+            self._in_result = True
+        elif self._in_result and tag == "h2":
+            self._in_title = True
+        elif self._in_title and tag == "a":
+            href = unescape(attrs_map.get("href", "")).strip()
+            if _is_search_result_url(href):
+                self._capture_title = True
+                self._href = href
+                self._text_parts = []
+        elif self._in_result and tag == "p":
+            self._capture_snippet = True
+            self._text_parts = []
+
+    def handle_data(self, data: str) -> None:
+        if self._capture_title or self._capture_snippet:
+            self._text_parts.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "a" and self._capture_title:
+            title = unescape("".join(self._text_parts)).strip()
+            if title and self._href:
+                self.results.append(WebSearchResult(title=title, url=self._href, source="Bing"))
+            self._capture_title = False
+            self._href = ""
+            self._text_parts = []
+        elif tag == "h2" and self._in_title:
+            self._in_title = False
+        elif tag == "p" and self._capture_snippet:
+            snippet = unescape("".join(self._text_parts)).strip()
+            if snippet and self.results and not self.results[-1].snippet:
+                self.results[-1].snippet = " ".join(snippet.split())
+            self._capture_snippet = False
+            self._text_parts = []
+        elif tag == "li" and self._in_result:
+            self._in_result = False
+
+
+def _parse_rss_results(xml_text: str, source: str) -> list[WebSearchResult]:
+    try:
+        root = ElementTree.fromstring(xml_text)
+    except ElementTree.ParseError:
+        return []
+    results: list[WebSearchResult] = []
+    for item in root.findall(".//item"):
+        title = "".join(item.findtext("title") or "").strip()
+        url = "".join(item.findtext("link") or "").strip()
+        snippet = "".join(item.findtext("description") or "").strip()
+        snippet = re.sub(r"<[^>]+>", " ", snippet)
+        snippet = " ".join(unescape(snippet).split())
+        if title and url:
+            results.append(WebSearchResult(title=unescape(title), url=url, snippet=snippet, source=source))
+    return results
 
 
 class _DuckDuckGoParser(HTMLParser):
@@ -82,13 +215,62 @@ async def search_web(config: Config, query: str) -> list[WebSearchResult]:
         ),
         "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.6",
     }
-    async with httpx.AsyncClient(timeout=timeout, follow_redirects=True, proxy=config.catty_http_proxy or None) as client:
-        response = await client.get("https://duckduckgo.com/html/", params={"q": query}, headers=headers)
-    response.raise_for_status()
-    parser = _DuckDuckGoParser()
-    parser.feed(response.text)
     max_results = max(int(config.catty_web_search_max_results), 1)
-    return parser.results[:max_results]
+    engines = [engine.lower() for engine in config.catty_web_search_engines if engine.strip()]
+    if not engines:
+        engines = ["google", "bing"]
+
+    seen_urls: set[str] = set()
+    results_by_engine: list[list[WebSearchResult]] = []
+    async with httpx.AsyncClient(timeout=timeout, follow_redirects=True, proxy=config.catty_http_proxy or None) as client:
+        for engine in engines:
+            parser: HTMLParser
+            try:
+                if engine == "google":
+                    response = await client.get(
+                        "https://news.google.com/rss/search",
+                        params={"q": query, "hl": "zh-CN", "gl": "CN", "ceid": "CN:zh-Hans"},
+                        headers=headers,
+                    )
+                    parser = _GoogleParser()
+                elif engine == "bing":
+                    response = await client.get(
+                        "https://www.bing.com/search",
+                        params={"q": query, "format": "rss", "setlang": "zh-CN"},
+                        headers=headers,
+                    )
+                    parser = _BingParser()
+                elif engine == "duckduckgo":
+                    response = await client.get("https://duckduckgo.com/html/", params={"q": query}, headers=headers)
+                    parser = _DuckDuckGoParser()
+                else:
+                    continue
+                response.raise_for_status()
+            except httpx.HTTPError:
+                continue
+            if engine in {"google", "bing"} and "xml" in response.headers.get("content-type", "").lower():
+                parsed_results = _parse_rss_results(response.text, "Google" if engine == "google" else "Bing")
+            else:
+                parser.feed(response.text)
+                parsed_results = getattr(parser, "results", [])
+            engine_results: list[WebSearchResult] = []
+            for result in parsed_results:
+                if result.url in seen_urls:
+                    continue
+                seen_urls.add(result.url)
+                engine_results.append(result)
+                if len(engine_results) >= max_results:
+                    break
+            if engine_results:
+                results_by_engine.append(engine_results)
+    results: list[WebSearchResult] = []
+    for offset in range(max_results):
+        for engine_results in results_by_engine:
+            if offset < len(engine_results):
+                results.append(engine_results[offset])
+                if len(results) >= max_results:
+                    return results
+    return results
 
 
 def _extract_duckduckgo_vqd(html: str) -> str:
@@ -151,5 +333,6 @@ def format_search_context(query: str, results: list[WebSearchResult]) -> str:
     ]
     for index, result in enumerate(results, 1):
         snippet = f"\n摘要：{result.snippet}" if result.snippet else ""
-        lines.append(f"{index}. {result.title}\n链接：{result.url}{snippet}")
+        source = f"来源：{result.source}\n" if result.source else ""
+        lines.append(f"{index}. {result.title}\n{source}链接：{result.url}{snippet}")
     return "\n".join(lines)

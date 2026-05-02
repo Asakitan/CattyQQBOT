@@ -389,8 +389,9 @@ dist/CattyQQAI.exe
 | `local_training.watch_interval_seconds` | `0` | 大于 0 时后台循环检查训练条件；0 表示启动时只检查一次 |
 | `web_search.enabled` | `true` | 是否允许显式联网搜索 |
 | `web_search.cooldown_seconds` | `600` | 普通用户联网搜索冷却；在 `config.json` 里配置了专属称呼的用户不受限制 |
-| `web_search.max_results` | `5` | 兼容旧本地文本搜索配置；当前文本搜索交给主 AI 原生联网能力，内部表情找图仍可单独传入数量上限 |
-| `web_search.request_timeout` | `10` | 兼容旧本地文本搜索配置；当前文本搜索不再发起本地网页请求，表情找图仍会使用该超时 |
+| `web_search.max_results` | `5` | 本地联网搜索插件最多回填多少条结果 |
+| `web_search.request_timeout` | `10` | Google/Bing 搜索和内部表情找图的请求超时 |
+| `web_search.engines` | `["google","bing"]` | 主 AI 请求或用户显式要求联网时使用的搜索源；也可加入 `duckduckgo` 作为备用 |
 | `turtle_soup.cooldown_seconds` | `300` | 每个群触发海龟汤的冷却秒数 |
 | `chat.trigger_prefixes` | `["ai","AI","猫猫"]` | 群聊文字触发前缀 |
 | `chat.group_require_mention_or_prefix` | `true` | 群聊是否必须艾特或前缀 |
