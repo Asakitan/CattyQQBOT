@@ -192,6 +192,21 @@
       "bing"
     ]
   },
+  "nsfw_search": {
+    "enabled": true,
+    "max_results": 4,
+    "request_timeout": 15,
+    "cooldown_seconds": 30,
+    "image_send_count": 2,
+    "pixiv_cookie": "",
+    "pixiv_image_size": "regular"
+  },
+  "owner_forward": {
+    "enabled": false,
+    "owner_qq": 0,
+    "forward_private_messages": true,
+    "block_ai_reply": true
+  },
   "turtle_soup": {
     "cooldown_seconds": 300
   },
@@ -286,6 +301,10 @@
     "special_group_active_minutes_per_hour": 10,
     "member_mention_threshold": 20,
     "private_summary_messages": 500
+  },
+  "game_context": {
+    "star_resonance_group_ids": [],
+    "strinova_group_ids": []
   },
   "proactive": {
     "enabled": true,

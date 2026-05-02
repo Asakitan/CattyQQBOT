@@ -44,6 +44,15 @@ class ConfigTests(unittest.TestCase):
         self.assertEqual(config.catty_group_special_care_user_ids["12345"], {1003, 1004})
         self.assertEqual(config.catty_group_special_care_user_ids["67890"], {1005, 1006})
 
+    def test_game_context_group_ids_parse_from_strings(self) -> None:
+        config = _config.Config(
+            catty_game_context_star_resonance_group_ids="[477970838, 578305908]",
+            catty_game_context_strinova_group_ids="1001,1002",
+        )
+
+        self.assertEqual(config.catty_game_context_star_resonance_group_ids, {477970838, 578305908})
+        self.assertEqual(config.catty_game_context_strinova_group_ids, {1001, 1002})
+
     def test_local_critic_config_parses_json_fields(self) -> None:
         config = _config.Config(
             catty_local_critic_base_url="http://127.0.0.1:11434/v1/",

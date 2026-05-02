@@ -53,6 +53,7 @@ class DirectedKeywordTests(unittest.TestCase):
 
     def test_feature_keywords_still_wake_bot(self) -> None:
         self.assertTrue(_message_utils._has_directed_keyword("联网搜索 星痕共鸣职业", self.config))
+        self.assertTrue(_message_utils._has_directed_keyword("卡拉彼丘弦化怎么练", self.config))
         self.assertTrue(_message_utils._has_directed_keyword("来个海龟汤", self.config))
 
     def test_second_person_mentions_are_sent_to_ai_for_subject_judgment(self) -> None:

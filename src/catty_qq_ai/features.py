@@ -26,6 +26,9 @@ FEATURE_DIRECT_KEYWORDS = (
     "星痕共鸣",
     "blue protocol",
     "star resonance",
+    "卡拉彼丘",
+    "strinova",
+    "弦化",
 )
 
 _SEARCH_PATTERNS = (

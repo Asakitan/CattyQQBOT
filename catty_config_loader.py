@@ -225,6 +225,21 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "request_timeout": 10,
         "engines": ["google", "bing"],
     },
+    "nsfw_search": {
+        "enabled": True,
+        "max_results": 4,
+        "request_timeout": 15,
+        "cooldown_seconds": 30,
+        "image_send_count": 2,
+        "pixiv_cookie": "",
+        "pixiv_image_size": "regular",
+    },
+    "owner_forward": {
+        "enabled": False,
+        "owner_qq": 0,
+        "forward_private_messages": True,
+        "block_ai_reply": True,
+    },
     "turtle_soup": {
         "cooldown_seconds": 300,
     },
@@ -299,6 +314,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "group_titles": {},
         "user_titles": {},
         "group_user_titles": {},
+    },
+    "game_context": {
+        "star_resonance_group_ids": [],
+        "strinova_group_ids": [],
     },
     "proactive": {
         "enabled": True,
@@ -527,6 +546,21 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_WEB_SEARCH_REQUEST_TIMEOUT", web_search.get("request_timeout"))
     _set_env("CATTY_WEB_SEARCH_ENGINES", web_search.get("engines"), json_value=True)
 
+    nsfw_search = _section(data, "nsfw_search")
+    _set_env("CATTY_NSFW_SEARCH_ENABLED", nsfw_search.get("enabled"))
+    _set_env("CATTY_NSFW_SEARCH_MAX_RESULTS", nsfw_search.get("max_results"))
+    _set_env("CATTY_NSFW_SEARCH_REQUEST_TIMEOUT", nsfw_search.get("request_timeout"))
+    _set_env("CATTY_NSFW_SEARCH_COOLDOWN_SECONDS", nsfw_search.get("cooldown_seconds"))
+    _set_env("CATTY_NSFW_IMAGE_SEND_COUNT", nsfw_search.get("image_send_count"))
+    _set_env("CATTY_NSFW_PIXIV_COOKIE", nsfw_search.get("pixiv_cookie"))
+    _set_env("CATTY_NSFW_PIXIV_IMAGE_SIZE", nsfw_search.get("pixiv_image_size"))
+
+    owner_forward = _section(data, "owner_forward")
+    _set_env("CATTY_OWNER_FORWARD_ENABLED", owner_forward.get("enabled"))
+    _set_env("CATTY_OWNER_QQ", owner_forward.get("owner_qq"))
+    _set_env("CATTY_OWNER_FORWARD_PRIVATE_MESSAGES", owner_forward.get("forward_private_messages"))
+    _set_env("CATTY_OWNER_FORWARD_BLOCK_AI_REPLY", owner_forward.get("block_ai_reply"))
+
     turtle_soup = _section(data, "turtle_soup")
     _set_env("CATTY_TURTLE_SOUP_COOLDOWN_SECONDS", turtle_soup.get("cooldown_seconds"))
 
@@ -631,6 +665,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_GROUP_TITLES", memory.get("group_titles"), json_value=True)
     _set_env("CATTY_USER_TITLES", memory.get("user_titles"), json_value=True)
     _set_env("CATTY_GROUP_USER_TITLES", memory.get("group_user_titles"), json_value=True)
+
+    game_context = _section(data, "game_context")
+    _set_env("CATTY_GAME_CONTEXT_STAR_RESONANCE_GROUP_IDS", game_context.get("star_resonance_group_ids"), json_value=True)
+    _set_env("CATTY_GAME_CONTEXT_STRINOVA_GROUP_IDS", game_context.get("strinova_group_ids"), json_value=True)
 
     proactive = _section(data, "proactive")
     _set_env("CATTY_PROACTIVE_ENABLED", proactive.get("enabled"))

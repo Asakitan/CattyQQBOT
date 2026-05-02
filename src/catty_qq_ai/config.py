@@ -116,6 +116,18 @@ class Config(BaseModel):
     catty_web_search_max_results: int = 5
     catty_web_search_request_timeout: float | None = 10.0
     catty_web_search_engines: list[str] = Field(default_factory=lambda: ["google", "bing"])
+    catty_nsfw_search_enabled: bool = True
+    catty_nsfw_search_max_results: int = 4
+    catty_nsfw_search_request_timeout: float | None = 15.0
+    catty_nsfw_search_cooldown_seconds: int = 30
+    catty_nsfw_image_send_count: int = 2
+    catty_nsfw_pixiv_cookie: str = ""
+    catty_nsfw_pixiv_image_size: str = "regular"
+
+    catty_owner_qq: int = 0
+    catty_owner_forward_enabled: bool = False
+    catty_owner_forward_private_messages: bool = True
+    catty_owner_forward_block_ai_reply: bool = True
     catty_turtle_soup_cooldown_seconds: int = 300
 
     catty_system_prompt: str = "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。"
@@ -170,6 +182,9 @@ class Config(BaseModel):
     catty_group_titles: dict[str, str] = Field(default_factory=dict)
     catty_user_titles: dict[str, str] = Field(default_factory=dict)
     catty_group_user_titles: dict[str, dict[str, str]] = Field(default_factory=dict)
+
+    catty_game_context_star_resonance_group_ids: set[int] = Field(default_factory=set)
+    catty_game_context_strinova_group_ids: set[int] = Field(default_factory=set)
 
     catty_proactive_enabled: bool = True
     catty_proactive_max_daily_per_group: int = 5
@@ -278,6 +293,8 @@ class Config(BaseModel):
         "catty_allowed_group_ids",
         "catty_memory_special_group_ids",
         "catty_special_care_user_ids",
+        "catty_game_context_star_resonance_group_ids",
+        "catty_game_context_strinova_group_ids",
         mode="before",
     )
     @classmethod
@@ -403,6 +420,10 @@ class Config(BaseModel):
         "catty_web_search_cooldown_seconds",
         "catty_web_search_max_results",
         "catty_web_search_request_timeout",
+        "catty_nsfw_search_max_results",
+        "catty_nsfw_search_request_timeout",
+        "catty_nsfw_search_cooldown_seconds",
+        "catty_nsfw_image_send_count",
         "catty_turtle_soup_cooldown_seconds",
         "catty_special_care_cooldown_seconds",
         "catty_special_care_response_window_minutes",

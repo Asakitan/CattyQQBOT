@@ -221,6 +221,39 @@ class ConfigLoaderTests(unittest.TestCase):
 
         self.assertEqual(engines, ["google", "bing"])
 
+    def test_game_context_group_ids_are_exported(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            base_dir = Path(directory)
+            data = {
+                "server": {},
+                "qq": {},
+                "ai": {},
+                "audit_ai": {},
+                "vision": {},
+                "filter": {},
+                "local_critic": {},
+                "local_training": {},
+                "web_search": {},
+                "turtle_soup": {},
+                "chat": {},
+                "emoji": {},
+                "memory": {},
+                "game_context": {
+                    "star_resonance_group_ids": [477970838, 578305908],
+                    "strinova_group_ids": [1001],
+                },
+                "proactive": {},
+                "access": {},
+            }
+
+            with patch.dict(os.environ, {}, clear=True):
+                _loader._apply_config(data, base_dir)
+                star_group_ids = json.loads(os.environ["CATTY_GAME_CONTEXT_STAR_RESONANCE_GROUP_IDS"])
+                strinova_group_ids = json.loads(os.environ["CATTY_GAME_CONTEXT_STRINOVA_GROUP_IDS"])
+
+        self.assertEqual(star_group_ids, [477970838, 578305908])
+        self.assertEqual(strinova_group_ids, [1001])
+
 
 if __name__ == "__main__":
     unittest.main()
