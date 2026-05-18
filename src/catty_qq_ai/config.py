@@ -49,6 +49,24 @@ class Config(BaseModel):
     catty_openai_extra_headers: dict[str, str] = Field(default_factory=dict)
     catty_openai_extra_body: dict[str, Any] = Field(default_factory=dict)
 
+    # 主 AI 不可用时的本地 fallback（默认指向项目内 Ollama qwen2.5:7b）
+    catty_ai_fallback_enabled: bool = False
+    catty_ai_fallback_base_url: str = ""
+    catty_ai_fallback_api_key: str = ""
+    catty_ai_fallback_model: str = ""
+    catty_ai_fallback_extra_headers: dict[str, str] = Field(default_factory=dict)
+    catty_ai_fallback_extra_body: dict[str, Any] = Field(default_factory=dict)
+    catty_ai_fallback_temperature: float | None = None
+    catty_ai_fallback_max_tokens: int | None = 4096
+    catty_ai_fallback_request_timeout: float | None = 180.0
+    # 触发 fallback 后，主 AI 在该秒数内直接走本地不再重试云
+    catty_ai_fallback_cooldown_seconds: float = 300.0
+    # MC 有玩家在线时禁止本地 fallback 推理（保护游戏流畅度）
+    catty_ai_fallback_mc_gate_enabled: bool = True
+    catty_ai_fallback_mc_server_host: str = "localhost"
+    catty_ai_fallback_mc_server_port: int = 26843
+    catty_ai_fallback_mc_ping_timeout_seconds: float = 3.0
+
     catty_audit_ai_base_url: str = ""
     catty_audit_ai_api_key: str = ""
     catty_audit_ai_model: str = ""
@@ -138,6 +156,10 @@ class Config(BaseModel):
     catty_group_require_mention_or_prefix: bool = True
     catty_group_history_scope: str = "group"
     catty_history_turns: int = 16
+    catty_session_cache_persistence_enabled: bool = True
+    catty_session_cache_dir: str = "sessions"
+    catty_session_cache_max_sessions: int = 200
+    catty_session_cache_save_debounce_seconds: float = 2.0
     catty_directed_keywords: list[str] = Field(
         default_factory=lambda: ["你", "猫猫", "猫娘", "看看", "帮我看看", "这张图", "这个图", "图片", "图里", "评价一下", "怎么回事"]
     )
@@ -159,6 +181,12 @@ class Config(BaseModel):
     catty_emoji_diversity_enabled: bool = True
     catty_emoji_diversity_recent_window: int = 8
     catty_emoji_diversity_candidate_pool: int = 6
+    catty_legs_enabled: bool = True
+    catty_legs_pictures_dir: str = "pictures"
+    catty_legs_cooldown_seconds: float = 3.0
+    # 戳一戳：避免被刷屏。同一用户在同一会话内的最小回复间隔与回应概率
+    catty_poke_cooldown_seconds: float = 45.0
+    catty_poke_reply_probability: float = 0.85
     catty_memory_enabled: bool = True
     catty_memory_path: str = "memory.json"
     catty_memory_group_storage_dir: str = ""
@@ -215,6 +243,13 @@ class Config(BaseModel):
 
     catty_allowed_user_ids: set[int] = Field(default_factory=set)
     catty_allowed_group_ids: set[int] = Field(default_factory=set)
+    # bot-loop 防护三层：
+    # 1) 硬黑名单 QQ 号（如 Q 群管家明确加进来）
+    # 2) QQ 协议层机器人标记（NapCat / OneBot sender 字段中的 is_bot/role=bot/category 等）
+    # 3) 启发式自介模板兜底（"我是 X 助手"、"暂时还不能和你对话" 等）
+    catty_ignored_user_ids: set[int] = Field(default_factory=set)
+    catty_ignore_marked_bots: bool = True
+    catty_ignore_bot_self_intro_enabled: bool = True
     catty_http_proxy: str = ""
     catty_hot_reload_enabled: bool = True
     catty_hot_reload_poll_seconds: float = 1.5
@@ -291,6 +326,7 @@ class Config(BaseModel):
     @field_validator(
         "catty_allowed_user_ids",
         "catty_allowed_group_ids",
+        "catty_ignored_user_ids",
         "catty_memory_special_group_ids",
         "catty_special_care_user_ids",
         "catty_game_context_star_resonance_group_ids",
@@ -317,6 +353,7 @@ class Config(BaseModel):
 
     @field_validator(
         "catty_openai_extra_headers",
+        "catty_ai_fallback_extra_headers",
         "catty_audit_ai_extra_headers",
         "catty_vision_extra_headers",
         "catty_filter_extra_headers",
@@ -335,6 +372,7 @@ class Config(BaseModel):
 
     @field_validator(
         "catty_openai_extra_body",
+        "catty_ai_fallback_extra_body",
         "catty_audit_ai_extra_body",
         "catty_vision_extra_body",
         "catty_filter_extra_body",

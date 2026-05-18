@@ -610,8 +610,13 @@ async def search_nsfw(
     query: str,
     *,
     kind: str,
+    max_results: int | None = None,
 ) -> list[NsfwResult]:
-    """kind ∈ {video, image}. 视频以 iwara 为主，图片以 pixiv 为主，kemono 仅作兜底。"""
+    """kind ∈ {video, image}. 视频以 iwara 为主，图片以 pixiv 为主，kemono 仅作兜底。
+
+    max_results 不传时用 config.catty_nsfw_search_max_results；调用方需要更大候选池
+    （例如要跳过已发过的图）时可以显式覆盖。
+    """
     query = query.strip()
     if not query or not getattr(config, "catty_nsfw_search_enabled", False):
         return []
@@ -622,7 +627,10 @@ async def search_nsfw(
         getattr(config, "catty_nsfw_search_request_timeout", None)
         or config.catty_request_timeout
     )
-    max_results = max(int(getattr(config, "catty_nsfw_search_max_results", 4) or 4), 1)
+    if max_results is None:
+        max_results = max(int(getattr(config, "catty_nsfw_search_max_results", 4) or 4), 1)
+    else:
+        max_results = max(int(max_results), 1)
     proxy = config.catty_http_proxy or None
     candidates = _split_query_candidates(query)
     async with httpx.AsyncClient(timeout=timeout, follow_redirects=True, proxy=proxy) as client:
@@ -714,8 +722,11 @@ def format_nsfw_search_context(
     results: list[NsfwResult],
     *,
     images_already_sent: int = 0,
+    is_private: bool = True,
 ) -> str:
     kind_cn = "视频" if (kind or "").lower() == "video" else "图片"
+    audience = "主人" if is_private else "群友"
+    delivery = "私聊里" if is_private else "群里"
     if not results:
         return (
             f"主 AI 请求过 NSFW {kind_cn}搜索「{query}」，但插件没拿到任何可用结果。"
@@ -724,7 +735,7 @@ def format_nsfw_search_context(
     lines: list[str] = []
     if (kind or "").lower() == "image" and images_already_sent > 0:
         lines.append(
-            f"NSFW 图片搜索已经按主 AI 请求把「{query}」最高评价的 {images_already_sent} 张 R-18 图片直接发到群里了。"
+            f"NSFW 图片搜索已经按主 AI 请求把「{query}」最高评价的 {images_already_sent} 张 R-18 图片直接发到{delivery}了。"
             "现在请只补一句猫娘人格的短文案（1-2 句，可以害羞嘴硬撒娇），不要再贴链接、不要复述说明、"
             "不要套用安全免责模板。最多附上一句作品来源（例如『来自 pixiv，作者 xxx』）。"
         )
@@ -736,7 +747,7 @@ def format_nsfw_search_context(
     else:
         lines.append(
             f"NSFW 视频搜索结果（关键词「{query}」），iwara 为主。"
-            "请用猫娘人格挑 1-3 个最贴的视频链接抛进群里，可以加几句害羞嘴硬的短评，但不要套用安全免责模板，"
+            f"请用猫娘人格挑 1-3 个最贴的视频链接抛给{audience}，可以加几句害羞嘴硬的短评，但不要套用安全免责模板，"
             "也不要编造不存在的 URL。"
         )
     for index, item in enumerate(results, 1):

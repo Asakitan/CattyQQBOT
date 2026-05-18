@@ -94,12 +94,36 @@ def _default_ollama_executable() -> str:
     return "ollama.exe" if os.name == "nt" else "ollama"
 
 
+def _ssl_context_with_certifi():
+    """Build an SSL context that uses certifi's CA bundle when available.
+
+    Python 3.14 on freshly provisioned Windows often lacks the system CA chain
+    GitHub uses, causing `CERTIFICATE_VERIFY_FAILED` during the Ollama download.
+    certifi ships an up-to-date Mozilla bundle that resolves it; we fall back
+    to the platform default when certifi isn't installed.
+    """
+    import ssl
+    try:
+        import certifi  # type: ignore
+        return ssl.create_default_context(cafile=certifi.where())
+    except ImportError:
+        return ssl.create_default_context()
+
+
 def _download_file(url: str, target_dir: Path) -> Path:
     target_dir.mkdir(parents=True, exist_ok=True)
     filename = Path(urlparse(url).path).name or "ollama-download"
     archive_path = target_dir / filename
     print(f"Downloading Ollama package: {url}")
-    urlretrieve(url, archive_path)
+    import urllib.request
+    ctx = _ssl_context_with_certifi()
+    with urllib.request.urlopen(url, context=ctx, timeout=600) as response:
+        with open(archive_path, "wb") as fh:
+            while True:
+                chunk = response.read(65536)
+                if not chunk:
+                    break
+                fh.write(chunk)
     return archive_path
 
 
@@ -149,10 +173,19 @@ def _stop_existing_ollama() -> None:
     subprocess.run(["pkill", "-f", "ollama serve"], capture_output=True, check=False)
 
 
-def _ollama_env(base_dir: Path, models_relative: str) -> dict[str, str]:
+def _ollama_env(
+    base_dir: Path,
+    models_relative: str,
+    *,
+    num_thread: int | None = None,
+) -> dict[str, str]:
     env = os.environ.copy()
     env["OLLAMA_MODELS"] = models_relative
     env["PATH"] = str(base_dir / "tools" / "ollama") + os.pathsep + env.get("PATH", "")
+    # 限制 Ollama 推理线程数,给系统和 MC 留余量(不锁 affinity,只控总线程)
+    if num_thread is not None and num_thread > 0:
+        env["OLLAMA_NUM_THREAD"] = str(num_thread)
+        env["OLLAMA_NUM_THREADS"] = str(num_thread)  # 老版别名兼容
     return env
 
 
@@ -199,6 +232,14 @@ def _ollama_models_to_check(config: dict[str, Any], ollama: dict[str, Any]) -> l
         text = str(value or "").strip()
         if text and text not in models:
             models.append(text)
+    extra = ollama.get("extra_models") or []
+    if isinstance(extra, str):
+        extra = [extra]
+    if isinstance(extra, list):
+        for item in extra:
+            text = str(item or "").strip()
+            if text and text not in models:
+                models.append(text)
     local_critic = config.get("local_critic", {})
     if isinstance(local_critic, dict):
         text = str(local_critic.get("model") or "").strip()
@@ -245,14 +286,23 @@ def _start_ollama(ollama: dict[str, Any], config: dict[str, Any], config_dir: Pa
     else:
         executable = _deploy_ollama(ollama, install_dir)
 
-    env = _ollama_env(config_dir, models_relative)
+    num_thread_raw = ollama.get("num_thread")
+    try:
+        num_thread = int(num_thread_raw) if num_thread_raw not in (None, "", 0) else None
+    except (TypeError, ValueError):
+        num_thread = None
+    env = _ollama_env(config_dir, models_relative, num_thread=num_thread)
     if _as_bool(ollama.get("stop_existing"), default=True):
         _stop_existing_ollama()
         time.sleep(1)
 
     creationflags = 0
-    if os.name == "nt" and _as_bool(ollama.get("new_console"), default=False):
-        creationflags = getattr(subprocess, "CREATE_NEW_CONSOLE", 0)
+    if os.name == "nt":
+        if _as_bool(ollama.get("new_console"), default=False):
+            creationflags |= getattr(subprocess, "CREATE_NEW_CONSOLE", 0)
+        # 默认让 ollama 走 BelowNormal,Windows 调度器自动让位给前台 MC/系统
+        if _as_bool(ollama.get("below_normal_priority"), default=True):
+            creationflags |= getattr(subprocess, "BELOW_NORMAL_PRIORITY_CLASS", 0)
 
     subprocess.Popen(
         [str(executable), "serve"],
@@ -262,6 +312,10 @@ def _start_ollama(ollama: dict[str, Any], config: dict[str, Any], config_dir: Pa
         stderr=subprocess.DEVNULL,
         creationflags=creationflags,
     )
+    if num_thread:
+        print(f"Ollama OLLAMA_NUM_THREAD={num_thread}, BelowNormal priority")
+    else:
+        print("Ollama starting with default thread count, BelowNormal priority")
     api_url = str(ollama.get("api_url") or "http://127.0.0.1:11434").strip()
     _wait_ollama_ready(api_url, float(ollama.get("startup_timeout_seconds") or 60))
 

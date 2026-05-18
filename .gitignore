@@ -22,3 +22,6 @@ logs/
 file_sync.exe
 file_sync_config.json
 tools/
+tests/
+backup/
+.sync_tmp/

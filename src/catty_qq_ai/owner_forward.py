@@ -1,7 +1,8 @@
 """主人通知 / 转发模块。
 
-不走 AI——好友申请、陌生人/非主人私聊消息都直接转发到 owner_qq，
+不走 AI——好友申请、陌生人/临时会话私聊消息都直接转发到 owner_qq，
 主人在私聊里回 `/同意 <QQ号>` 或 `/拒绝 <QQ号>` 来处理待办申请。
+好友私聊放行给主聊天链路直接回复。
 """
 from __future__ import annotations
 
@@ -64,6 +65,16 @@ def _should_block_ai_reply() -> bool:
     if config is None:
         return False
     return bool(getattr(config, "catty_owner_forward_block_ai_reply", True))
+
+
+def _private_message_sub_type(event: PrivateMessageEvent) -> str:
+    return str(getattr(event, "sub_type", "") or "").strip().lower()
+
+
+def _should_forward_private_message(event: PrivateMessageEvent) -> bool:
+    if not _is_private_forwarding_enabled():
+        return False
+    return _private_message_sub_type(event) != "friend"
 
 
 def _clean_pending() -> None:
@@ -185,8 +196,12 @@ async def _handle_private(
             await matcher.finish()
         return
 
-    # 2) 非主人私聊 → 转发给主人
-    if not _is_private_forwarding_enabled():
+    # 2) 非主人好友私聊 → 放行给主聊天链路直接回复；陌生人/临时会话才转发给主人
+    sub_type = _private_message_sub_type(event)
+    if not _should_forward_private_message(event):
+        logger.debug(
+            f"owner_forward: private message from {sender_qq} sub_type={sub_type or 'unknown'} allowed to AI"
+        )
         return
     sender_nickname = ""
     sender_obj = getattr(event, "sender", None)
@@ -195,8 +210,9 @@ async def _handle_private(
             getattr(sender_obj, "nickname", "") or getattr(sender_obj, "card", "") or ""
         )
     lines = [
-        "[陌生人/好友私聊] 有人在私聊猫猫喵～",
+        "[陌生人私聊] 有人在私聊猫猫喵～",
         f"对方：{sender_nickname or '（无昵称）'} (QQ {sender_qq})",
+        f"私聊类型：{sub_type or 'unknown'}",
     ]
     if raw_text:
         snippet = raw_text if len(raw_text) <= 500 else raw_text[:500] + "…(已截断)"
@@ -204,9 +220,9 @@ async def _handle_private(
     raw_message = str(getattr(event, "message", "") or "")
     if raw_message and raw_message.strip() != raw_text:
         lines.append(f"原始 message：{raw_message[:300]}")
-    lines.append("（猫猫只转发不回复；要不要理由主人决定。）")
+    lines.append("（非好友/临时会话只转发不回复；好友私聊会让猫猫直接回。）")
     await _send_to_owner(bot, "\n".join(lines))
-    logger.info(f"owner_forward: relayed private message from {sender_qq} to owner")
+    logger.info(f"owner_forward: relayed private message from {sender_qq} sub_type={sub_type or 'unknown'} to owner")
     if _should_block_ai_reply():
         matcher.stop_propagation()
         await matcher.finish()

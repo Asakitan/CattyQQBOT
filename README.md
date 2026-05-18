@@ -135,6 +135,25 @@ ai reset
 ai 清空上下文
 ```
 
+会话缓存：每个群/私聊都有独立的会话上下文窗口，按 `build_history_key` 的 key 隔离（`group:<群号>`、`group:<群号>:user:<QQ>` 或 `private:<QQ>`）。默认开启**持久化 + LRU**：
+
+- 上下文写入会异步落盘到 `sessions/` 目录（每个会话一份 JSON），bot 重启后会自动恢复，不会丢上一轮对话。
+- 内存里维持 LRU 顺序，超过 `session_cache.max_sessions` 时把最久未访问的会话连同盘上文件一起淘汰，避免长期运行后内存膨胀。
+- 写盘走 dirty 标记 + 后台节流（`session_cache.save_debounce_seconds`），不会每条消息都同步写。
+- 关停时会 flush 一次最后未落盘的 dirty 会话。
+
+只有主人（`owner_qq` 配置）在**私聊里**可以查看会话列表，群里发同样的指令不会响应：
+
+```text
+ai 会话列表
+ai 列会话
+/sessions
+```
+
+返回当前所有会话窗口的 key、消息条数、最近访问时间，以及缓存目录和上限。
+
+Prompt 优化：system prompt 按**稳定性**重排——人格锚定、情景流水线、自检兜底等完全不变的内容放最前面，按事件变化的（图片识别、强制回复、软触发、消息上下文）放后面。OpenAI/兼容服务的 **prompt cache** 按前缀命中，前缀稳定时输入 token 自动按 0.1x 价计费。会话历史攒到 12 条（约 6 轮）后会**自动跳过教学型例句**（`catgirl_examples` + `disambiguation_examples`）——模型已经能从历史里看到自身口吻，省下约 30-40% 的 system token。冷会话依旧挂全套例句保证起手风格稳。
+
 查看当前群/私聊已存储的记忆和人物信息：
 
 ```text
@@ -221,6 +240,8 @@ ai 清空记忆缓存
 
 本地训练：`local_training` 会把 reply gate 样本导出成 `training/reply_gate_dataset.jsonl`，也会把主模型真实收到的上下文和最终回复收集到 `training/assistant_reply_samples.jsonl`，再导出成 `training/assistant_reply_dataset.jsonl`。聊天正文走 `ai`，普通审核/判断和训练成果审批走 `audit_ai`；`filter.model` 留空时会继承 `audit_ai`。Ollama 本体不能边运行边在线增参；样本达到对应 `min_samples` 且新增样本达到对应 `min_new_samples` 后，启动时会自动判断是否适合训练。`auto_fill_training_commands` 打开时，空的 `train_command` / `busy_train_command` / `assistant_train_command` / `assistant_busy_train_command` 会自动落到项目内安全 wrapper：`scripts/local_lora_train.py`。wrapper 只会执行你配置的 `backend_command` / `assistant_backend_command` / `busy_backend_command` / `assistant_busy_backend_command`，后端为空时只写状态并跳过，不会让主 AI 生成或执行任意 shell 命令。训练后如果输出目录出现 LoRA adapter、`Modelfile` 或 `.gguf`，wrapper 会记录成果并调用 `audit_ai` 做成果审核；审核模型只输出 `allow_apply/allow_merge` 和 `next_suggestions` JSON，不直接执行命令。配置了 `apply_trained_adapter_command` 且审核同意时会把小成果接入微调，样本达到 `merge_min_samples`、处于闲时且审核同意时才会执行 `merge_trained_model_command` 合并大成果。默认这些应用/合并命令为空，所以不会热替换正在工作的审核模型。`watch_interval_seconds` 大于 0 时会在后台循环检查。默认会根据服务器本地系统时间、凌晨闲时窗口和样本文件最近更新时间判断闲时；忙时训练会用低优先级并受 `busy_training_max_seconds` 和 `busy_training_max_steps` 限制，避免影响 reply 审核和主程序运行。
 
+MC 在线玩家闲时判定：`local_training.mc_idle_check_enabled=true` 打开后，会通过 **Server List Ping** 协议（`scripts/mc_idle_ping.py` 纯标准库手撸，0 第三方依赖）连接 `mc_server_host:mc_server_port` 拿在线玩家数。**MC 有人在线绝不训**，无人持续 `mc_idle_min_minutes` 分钟后才允许启训。`mc_last_player_seen` 写在 `state_path` 里跨重启保留。MC 不可达（端口拒绝/超时/解析失败）按"不训"处理，保护游戏不被误抢资源。开启 MC 判定后会**覆盖时间窗口逻辑**——`idle_start_hour`/`idle_end_hour`/`idle_min_quiet_minutes`/`allow_quiet_idle` 只在 MC 检查未启用时生效。训练子进程一旦启动会跑完它的 `idle_training_max_steps` / `idle_training_max_seconds` 才退出；玩家在训练中途上线时，下一轮 watcher 检查会发现 MC 有人不再启动新训练（推荐把 `idle_training_max_seconds` 设个上限如 1800，避免训练任务长时间占 CPU 影响玩家体验）。
+
 训练进度窗口：打开 `local_training.progress_window_enabled` 后，启动时会额外弹出 `scripts/catty_training_dashboard.py` 的 Tk 小窗，轮询数据集样本数、最近训练状态、GLM-5.1 成果审批、`next_suggestions` 和 `training/local_training.log`。窗口里还有 `Ollama test` 页，可以用主 AI 的 `chat.system_prompt` 向本地 `local_critic.model` 提问，查看输出耗时和内容，再把 1-5 分评分、备注写入 `model_test_scores_path`。测试请求会模拟主回复线程，带上笨猫人格记忆、自检提示、风格例句、入口唤起提示和简化记忆上下文，避免小模型把笨猫当第三个人，也方便观察它在接近真实主线程时的表现。默认以 `/no_think` 测试；勾选 `Thinking` 会发送 `think=true`，方便对比思考模式耗时和质量。窗口不会执行训练命令，也不会展示 API key。
 
 训练 MCP server：项目内包含 `scripts/catty_training_mcp_server.py`，可作为 MCP stdio server 暴露 `training_status` 和 `training_config_summary` 两个工具，方便外部 MCP 客户端查看训练样本、最新成果状态和 hook 配置。它不会返回 API key。
@@ -301,6 +322,7 @@ dist/CattyQQAI.exe
 | `ollama.auto_install` | `true` | `tools/ollama` 缺少 Ollama 时是否自动下载便携包 |
 | `ollama.auto_pull_model` | `true` | 模型不存在时是否自动拉取到 `models/ollama` |
 | `ollama.model` | `qwen2.5:1.5b` | 自动拉取和校正默认使用的本地模型 |
+| `ollama.extra_models` | `[]` | 启动时**额外**自动拉取的本地模型列表，例如 `["qwen2.5:7b"]` 用来预置主模型 backup 或更大的 audit 模型 |
 | `ollama.install_dir` | `tools/ollama` | Ollama 程序安装目录；必须在项目文件夹内 |
 | `ollama.models_dir` | `models/ollama` | Ollama 模型目录；必须在项目文件夹内 |
 | `ollama.download_url` | 空 | 自定义 Ollama 便携包下载地址；空则按系统使用默认下载地址 |
@@ -377,6 +399,11 @@ dist/CattyQQAI.exe
 | `local_training.idle_end_hour` | `6` | 本地系统时间闲时结束小时 |
 | `local_training.idle_min_quiet_minutes` | `45` | 样本文件多久没更新才认为聊天足够安静 |
 | `local_training.allow_quiet_idle` | `true` | 非凌晨窗口但长时间安静时是否也允许完整训练 |
+| `local_training.mc_idle_check_enabled` | `false` | 是否启用 MC SLP 在线玩家探测；开启后**主导闲时判定**：MC 有人在线绝不训，无人持续 `mc_idle_min_minutes` 后才训，ping 失败按"不训"处理保护游戏 |
+| `local_training.mc_server_host` | `localhost` | MC 服务器 host，SLP ping 用 |
+| `local_training.mc_server_port` | `26843` | MC 服务器端口 |
+| `local_training.mc_idle_min_minutes` | `30` | MC 无玩家持续多少分钟后才算"真闲"可启训练 |
+| `local_training.mc_ping_timeout_seconds` | `5.0` | 单次 SLP ping 的 socket 超时秒数 |
 | `local_training.active_check_interval_seconds` | `900` | 判断为忙时的下次检查间隔 |
 | `local_training.idle_check_interval_seconds` | `3600` | 判断为闲时的下次检查间隔 |
 | `local_training.mcp_server_enabled` | `true` | 是否随配置提供训练 MCP server 脚本 |
@@ -398,11 +425,17 @@ dist/CattyQQAI.exe
 | `web_search.max_results` | `5` | 本地联网搜索插件最多回填多少条结果 |
 | `web_search.request_timeout` | `10` | Google/Bing 搜索和内部表情找图的请求超时 |
 | `web_search.engines` | `["google","bing"]` | 主 AI 请求或用户显式要求联网时使用的搜索源；也可加入 `duckduckgo` 作为备用 |
+| `owner_forward.forward_private_messages` | `true` | 是否把非好友/临时会话私聊转发给主人审核；好友私聊不会被拦截，会继续交给猫猫直接回复 |
+| `owner_forward.block_ai_reply` | `true` | 转发非好友/临时会话私聊后是否阻止主 AI 再回复该消息 |
 | `turtle_soup.cooldown_seconds` | `300` | 每个群触发海龟汤的冷却秒数 |
 | `chat.trigger_prefixes` | `["ai","AI","猫猫"]` | 群聊文字触发前缀 |
 | `chat.group_require_mention_or_prefix` | `true` | 群聊是否必须艾特或前缀 |
 | `chat.private_require_prefix` | `false` | 私聊是否必须前缀 |
 | `chat.history_turns` | `16` | 每个会话保留的上下文轮数 |
+| `session_cache.persistence_enabled` | `true` | 是否把每个群/私聊的上下文写到 `sessions/` 目录，重启后自动恢复 |
+| `session_cache.dir` | `sessions` | 会话上下文持久化目录，每个会话一份 JSON |
+| `session_cache.max_sessions` | `200` | 内存里最多保留多少个会话窗口；超过后按 LRU 淘汰最久未访问的（盘上文件同步删除） |
+| `session_cache.save_debounce_seconds` | `2.0` | 后台 flush 的节流间隔，dirty 会话会按这个间隔落盘 |
 | `chat` 唤起上下文 | 自动 | 入口被唤起后，会按群/私聊隔离、按时间去重整理近期聊天给主 AI 判断；普通群批量至少保留可用的 16 条，越明确指向猫猫窗口越大，最多 50 条；主 AI 可输出 `NO_REPLY` 安静不回 |
 | `chat.reply_max_chars` | `1800` | 单条消息超过该长度时按上限继续切分发送 |
 | `chat.reply_human_split_enabled` | `true` | 是否允许本地概率判断本轮是否追加语义分段提示 |
@@ -488,6 +521,21 @@ dist/CattyQQAI.exe
     "extra_body": {
       "top_p": 0.9
     }
+  }
+}
+```
+
+主模型 backup（本地 Qwen2.5-7B fallback）：`config.json` 顶层可以保留一个 `ai_local_backup` 节点存档本地 Ollama 配置，loader 会忽略它，纯人工备忘。云挂了/想试本地时，把 `ai_local_backup` 整段复制覆盖 `ai` 节点即可一秒切换；切回云就反向操作。配合 `ollama.extra_models: ["qwen2.5:7b"]` 启动时自动预拉取，切换时不用等下载。注意 6 核 CPU 上 Qwen2.5-7B Q4 单轮约 18-30 秒，仅适合云宕机兜底、私聊或冒泡，不建议作群聊主回复。
+
+```json
+{
+  "ai_local_backup": {
+    "_note": "复制覆盖到 ai 节点即可切到本地 Qwen2.5-7B",
+    "base_url": "http://127.0.0.1:11434/v1",
+    "api_key": "ollama",
+    "model": "qwen2.5:7b",
+    "max_tokens": 4096,
+    "extra_body": {"think": false}
   }
 }
 ```

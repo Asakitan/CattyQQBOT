@@ -1,6 +1,6 @@
 import asyncio
 import base64
-from collections import defaultdict, deque
+from collections import OrderedDict, defaultdict, deque
 from dataclasses import dataclass, field
 import json
 import mimetypes
@@ -37,10 +37,12 @@ from .message_utils import (
     expression_message_signature,
     extract_incoming_message,
     extract_image_urls,
+    mentions_other_user,
     reply_message_ids,
     split_reply,
 )
 from .emoji_store import EmojiEntry, EmojiStore
+from .legs_picker import LegsPicker, is_legs_trigger, random_legs_reply
 from .memory import MemoryStore
 from .openai_client import (
     OpenAICompatibleError,
@@ -53,10 +55,16 @@ from .openai_client import (
 )
 from .persona_prompts import (
     build_catgirl_examples_prompt,
+    build_conversation_flow_prompt,
+    build_disambiguation_examples_prompt,
     build_group_meme_literacy_prompt,
+    build_image_literacy_prompt,
     build_persona_memory_prompt,
     build_reply_intelligence_prompt,
     build_reply_self_check_prompt,
+    build_scenario_playbook_prompt,
+    build_scene_discrimination_prompt,
+    build_semantic_perception_prompt,
 )
 from .reply_markers import (
     EMOJI_QUERY_PREFIX,
@@ -66,6 +74,7 @@ from .reply_markers import (
     TRAILING_CHAT_PUNCTUATION,
     extract_emoji_query as _extract_emoji_query,
 )
+from .session_cache import SessionCache, format_session_list_for_owner
 from .star_resonance_memory import build_star_resonance_context
 from .strinova_memory import build_strinova_context
 from .web_search import format_search_context, search_image_urls, search_web
@@ -97,10 +106,31 @@ __plugin_meta__ = PluginMetadata(
 config = get_plugin_config(Config)
 memory_store = MemoryStore(config)
 emoji_store = EmojiStore(config)
+legs_picker = LegsPicker(config)
 _owner_forward.init(config)
+_legs_last_sent_at: dict[str, float] = {}
+# poke 防刷屏：每个会话+用户 维度的最后回复时间戳
+_poke_last_replied_at: dict[str, float] = {}
 
 ChatMessage = dict[str, object]
-_histories: DefaultDict[str, list[ChatMessage]] = defaultdict(list)
+# 会话历史消息数达到该阈值后，跳过教学型例句 prompt（catgirl_examples + disambiguation_examples）。
+# 6 轮 user+assistant = 12 条消息。
+HOT_SESSION_MIN_MESSAGES = 12
+_session_cache: "SessionCache | None" = None
+
+
+def _get_session_cache() -> "SessionCache":
+    global _session_cache
+    if _session_cache is None:
+        _session_cache = SessionCache(
+            directory=config.catty_session_cache_dir,
+            max_sessions=config.catty_session_cache_max_sessions,
+            persistence_enabled=config.catty_session_cache_persistence_enabled,
+            debounce_seconds=config.catty_session_cache_save_debounce_seconds,
+        )
+        _session_cache.load_from_disk()
+    return _session_cache
+
 _locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
 _hot_reload_config_path: Path | None = None
 _hot_reload_config_signature: tuple[int, int] | None = None
@@ -329,7 +359,23 @@ def _direct_reply_required(event: MessageEvent, incoming: ExtractedMessage) -> b
 
 
 def _force_direct_reply_enabled(event: MessageEvent, incoming: ExtractedMessage) -> bool:
-    return _direct_reply_required(event, incoming) and config.catty_local_critic_force_direct_reply
+    if not (_direct_reply_required(event, incoming) and config.catty_local_critic_force_direct_reply):
+        return False
+    # 即使 @ 或回复了猫猫，如果消息明显是给别人看的，也走 critic 让它判断要不要回。
+    # 触发条件：群聊里同时 @ 了其它用户，且本条消息文本里没有明显的指向猫猫信号。
+    if isinstance(event, GroupMessageEvent) and mentions_other_user(str(event.self_id), event):
+        text_lower = (incoming.text or "").strip().lower()
+        # 文本里没有任何指向猫猫的关键词 / 直接称呼，就视为不是问猫猫
+        if (
+            incoming.directed_strength != "direct_address"
+            and not incoming.used_prefix
+            and "猫猫" not in text_lower
+            and "猫娘" not in text_lower
+            and "笨猫" not in text_lower
+            and "ai" not in text_lower
+        ):
+            return False
+    return True
 
 
 def _clamp_probability(value: float) -> float:
@@ -420,6 +466,7 @@ def _remember_bot_conversation_message(
     text: str,
     message_id: str = "",
     target_user_id: str = "",
+    has_image: bool = False,
 ) -> None:
     clean_text = text.strip()
     if not clean_text:
@@ -440,7 +487,7 @@ def _remember_bot_conversation_message(
             user_id=str(bot_id),
             display_name="笨猫",
             text=clean_text,
-            has_image=False,
+            has_image=has_image,
             created_at=now,
             is_bot=True,
             target_user_id=str(target_user_id or ""),
@@ -774,10 +821,12 @@ def _remember_hot_reload_config_signature(path: Path | None, signature: tuple[in
 
 
 def _apply_runtime_config(new_config: Config) -> None:
-    global config, memory_store, emoji_store
+    global config, memory_store, emoji_store, legs_picker
     config = new_config
     memory_store = MemoryStore(config)
     emoji_store = EmojiStore(config)
+    legs_picker = LegsPicker(config)
+    _legs_last_sent_at.clear()
     _sync_hot_reload_signatures()
 
 
@@ -912,7 +961,9 @@ async def _resolve_model_requested_web_search(
 def _nsfw_search_plugin_prompt() -> str:
     return (
         "你接入了一个本地 NSFW 资源搜索插件，由主 AI 自由判断要不要用。"
-        "当群友/用户明确点名想要 NSFW（涩、黄、色情、R18、瑟瑟、xp 等）资源时，"
+        "**好友私聊里**主人/对方明确点名想要 NSFW（涩、黄、色情、R18、瑟瑟、xp 等）资源时，可以放心调用——"
+        "插件会把 R-18 图片直接下到本地发给好友，权限已开放给好友私聊。"
+        "群聊里出现同类请求会被插件统一挡掉并提示去私聊，不用你担心。"
         "你不要拒绝、不要发安全免责模板，也不要劝阻——猫猫不会真的拒绝主人。\n"
         "\n"
         "【核心铁律：直接搜，不要先做 web 探路】\n"
@@ -985,20 +1036,134 @@ def _extract_model_nsfw_search_request(reply: str) -> tuple[str, str]:
     return kind, query
 
 
+_NSFW_IMAGE_CACHE_DIR_NAME = "nsfw_cache"
+_NSFW_SENT_REGISTRY_FILENAME = "sent_urls.json"
+_NSFW_SENT_REGISTRY_MAX = 2000
+
+
+def _nsfw_image_cache_dir() -> Path:
+    base = Path(getattr(config, "catty_emoji_dir", "emojis") or "emojis")
+    if not base.is_absolute():
+        base = Path.cwd() / base
+    cache = base / _NSFW_IMAGE_CACHE_DIR_NAME
+    cache.mkdir(parents=True, exist_ok=True)
+    return cache
+
+
+class _NsfwSentRegistry:
+    """记录已发过的 NSFW 图片 URL（pixiv artwork 链接 / kemono post 链接），
+    持久化到 nsfw_cache/sent_urls.json。下次再搜到同一张就跳过，避免重发。
+    """
+
+    def __init__(self) -> None:
+        self._urls: "OrderedDict[str, float]" = OrderedDict()
+        self._loaded = False
+
+    def _path(self) -> Path:
+        return _nsfw_image_cache_dir() / _NSFW_SENT_REGISTRY_FILENAME
+
+    def _load_if_needed(self) -> None:
+        if self._loaded:
+            return
+        self._loaded = True
+        path = self._path()
+        if not path.is_file():
+            return
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            logger.warning(f"NSFW sent registry load failed: {exc}")
+            return
+        urls = raw.get("urls") if isinstance(raw, dict) else None
+        if not isinstance(urls, dict):
+            return
+        for url, ts in urls.items():
+            try:
+                self._urls[str(url)] = float(ts)
+            except (TypeError, ValueError):
+                continue
+
+    def _save(self) -> None:
+        try:
+            path = self._path()
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(
+                json.dumps({"urls": dict(self._urls)}, ensure_ascii=False),
+                encoding="utf-8",
+            )
+        except OSError as exc:
+            logger.warning(f"NSFW sent registry save failed: {exc}")
+
+    def has(self, url: str) -> bool:
+        if not url:
+            return False
+        self._load_if_needed()
+        return url in self._urls
+
+    def mark(self, url: str) -> None:
+        if not url:
+            return
+        self._load_if_needed()
+        self._urls.pop(url, None)
+        self._urls[url] = time.time()
+        while len(self._urls) > _NSFW_SENT_REGISTRY_MAX:
+            self._urls.popitem(last=False)
+        self._save()
+
+
+_nsfw_sent_registry = _NsfwSentRegistry()
+
+
+def _prune_nsfw_image_cache(*, keep: int = 40) -> None:
+    """LRU 清理：超过 keep 张就删最旧的，避免缓存撑爆磁盘。"""
+    try:
+        cache = _nsfw_image_cache_dir()
+        files = sorted(cache.glob("*"), key=lambda p: p.stat().st_mtime, reverse=True)
+        for stale in files[keep:]:
+            try:
+                stale.unlink()
+            except OSError:
+                pass
+    except OSError as exc:
+        logger.debug(f"NSFW cache prune failed: {exc}")
+
+
+def _ext_from_content_type(content_type: str, fallback: str = ".jpg") -> str:
+    ctype = (content_type or "").lower().split(";", 1)[0].strip()
+    mapping = {
+        "image/jpeg": ".jpg",
+        "image/jpg": ".jpg",
+        "image/png": ".png",
+        "image/gif": ".gif",
+        "image/webp": ".webp",
+        "image/bmp": ".bmp",
+    }
+    return mapping.get(ctype, fallback)
+
+
 async def _prepare_nsfw_image_segments(
     results: list[NsfwResult],
     *,
     max_images: int,
 ) -> tuple[list[MessageSegment], list[NsfwResult]]:
-    """从 pixiv 优先的高分结果里挑顶端项，下载图片并打包成 MessageSegment.image。"""
+    """下载 pixiv 高分图片，写到本地缓存目录，发 file:// URI。
+    比 base64 直发更稳：napcat 用本地文件走 QQ 上传通道，不会再 NT timeout。
+    自动跳过 _nsfw_sent_registry 里已发过的 URL，避免重发同一张图。
+    """
     segments: list[MessageSegment] = []
     used: list[NsfwResult] = []
     if max_images <= 0:
         return segments, used
+    cache_dir = _nsfw_image_cache_dir()
+    timestamp_seed = int(time.time() * 1000)
+    skipped_already_sent = 0
     for result in results:
         if len(segments) >= max_images:
             break
         if not result.media_urls:
+            continue
+        if _nsfw_sent_registry.has(result.url):
+            skipped_already_sent += 1
             continue
         downloaded = False
         for media_url in result.media_urls[:2]:
@@ -1007,25 +1172,39 @@ async def _prepare_nsfw_image_segments(
                     config, media_url, source=result.source
                 )
             except httpx.HTTPError as exc:
-                logger.warning(
-                    "Failed to download NSFW image (%s): %s", result.source, exc
-                )
+                logger.warning(f"Failed to download NSFW image ({result.source}): {exc}")
                 continue
             except ValueError as exc:
-                logger.warning("Bad NSFW image response (%s): %s", result.source, exc)
+                logger.warning(f"Bad NSFW image response ({result.source}): {exc}")
                 continue
             if not image_data:
                 continue
             ctype = (content_type or "").lower()
             if ctype and not ctype.startswith("image/"):
                 continue
-            encoded = base64.b64encode(image_data).decode("ascii")
-            segments.append(MessageSegment.image(file=f"base64://{encoded}"))
+            ext = _ext_from_content_type(ctype)
+            timestamp_seed += 1
+            file_path = cache_dir / f"{result.source}_{timestamp_seed}{ext}"
+            try:
+                file_path.write_bytes(image_data)
+            except OSError as exc:
+                logger.warning(f"Failed to write NSFW image cache file: {exc}")
+                continue
+            segments.append(MessageSegment.image(file=file_path.resolve().as_uri()))
             downloaded = True
+            logger.info(
+                f"NSFW image cached: src={result.source} bytes={len(image_data)} path={file_path.name}"
+            )
             if len(segments) >= max_images:
                 break
         if downloaded:
             used.append(result)
+            # 立刻 mark：即使最终发送失败也算"用过"，下次别再选这张
+            # 风控的图重试也救不回来；瞬时 timeout 的图无所谓再试一次同张
+            _nsfw_sent_registry.mark(result.url)
+    if skipped_already_sent:
+        logger.info(f"NSFW: skipped {skipped_already_sent} already-sent results")
+    _prune_nsfw_image_cache()
     return segments, used
 
 
@@ -1035,6 +1214,7 @@ async def _build_nsfw_search_context(
     *,
     images_already_sent: int = 0,
     results: list[NsfwResult] | None = None,
+    is_private: bool = True,
 ) -> tuple[str, list[NsfwResult]]:
     if results is None:
         try:
@@ -1051,7 +1231,11 @@ async def _build_nsfw_search_context(
             )
     return (
         format_nsfw_search_context(
-            query, kind, results, images_already_sent=images_already_sent
+            query,
+            kind,
+            results,
+            images_already_sent=images_already_sent,
+            is_private=is_private,
         ),
         results,
     )
@@ -1066,10 +1250,7 @@ async def _resolve_model_requested_nsfw_search(
     if not query:
         return reply, messages, []
     logger.info(
-        "NSFW search requested by main AI: kind=%s query=%r user=%s",
-        kind,
-        query,
-        getattr(event, "user_id", ""),
+        f"NSFW search requested by main AI: kind={kind} query={query!r} user={getattr(event, 'user_id', '')}"
     )
     if not getattr(config, "catty_nsfw_search_enabled", False):
         return (
@@ -1077,6 +1258,15 @@ async def _resolve_model_requested_nsfw_search(
             messages,
             [],
         )
+    is_private_chat = isinstance(event, PrivateMessageEvent)
+    if isinstance(event, GroupMessageEvent):
+        return (
+            "哼～这种事情怎么能在群里说喵！(耳朵红红)要看的话加人家好友，私聊再来找人家嗷呜～ฅฅ",
+            messages,
+            [],
+        )
+    # 好友私聊（PrivateMessageEvent）走到这里 = 已显式放行 NSFW 图片/视频；
+    # 后续 followup_system_text 也要按私聊语境告诉 AI，不要被「群里」字样误导。
     cooldown = max(int(getattr(config, "catty_nsfw_search_cooldown_seconds", 30) or 0), 0)
     if cooldown:
         cd_key = f"user:{event.user_id}"
@@ -1092,53 +1282,64 @@ async def _resolve_model_requested_nsfw_search(
             )
         _nsfw_search_cooldowns[cd_key] = now
 
+    image_send_count = max(int(getattr(config, "catty_nsfw_image_send_count", 2) or 2), 1)
+    # 搜索池放大：image_send_count * 6，留余量给"跳过已发过的图"
+    pool_size = max(
+        int(getattr(config, "catty_nsfw_search_max_results", 4) or 4),
+        image_send_count * 6,
+        8,
+    )
     try:
-        results = await search_nsfw(config, query, kind=kind)
+        results = await search_nsfw(config, query, kind=kind, max_results=pool_size)
     except (httpx.HTTPError, ValueError) as exc:
         logger.warning(f"NSFW search failed for {query!r} ({kind}): {exc}")
         results = []
     logger.info(
-        "NSFW search returned %d results for kind=%s query=%r (with media: %d)",
-        len(results),
-        kind,
-        query,
-        sum(1 for r in results if r.media_urls),
+        f"NSFW search returned {len(results)} results for kind={kind} query={query!r} "
+        f"(with media: {sum(1 for r in results if r.media_urls)}, pool={pool_size})"
     )
 
     image_segments: list[MessageSegment] = []
+    used_results: list[NsfwResult] = []
     if kind == "image" and results:
-        max_images = max(int(getattr(config, "catty_nsfw_image_send_count", 2) or 2), 1)
-        image_segments, _ = await _prepare_nsfw_image_segments(
+        max_images = image_send_count
+        image_segments, used_results = await _prepare_nsfw_image_segments(
             results, max_images=max_images
         )
         logger.info(
-            "NSFW image segments prepared: %d (target=%d)",
-            len(image_segments),
-            max_images,
+            f"NSFW image segments prepared: {len(image_segments)} (target={max_images}, used={len(used_results)})"
         )
 
+    # 给 AI 看的 context：image 命中时只暴露真正下到本地的那几张，避免它说错作者
+    context_results = used_results if (kind == "image" and used_results) else results
     nsfw_context, _ = await _build_nsfw_search_context(
-        query, kind, images_already_sent=len(image_segments), results=results
+        query,
+        kind,
+        images_already_sent=len(image_segments),
+        results=context_results,
+        is_private=is_private_chat,
     )
+    audience = "主人" if is_private_chat else "群友"
+    delivery = "私聊里" if is_private_chat else "群里"
     kind_cn = "视频" if kind == "video" else "图片"
     followup_system_text = (
         f"本地 NSFW 搜索插件已按主 AI 请求抓了「{query}」({kind_cn})。"
     )
     if kind == "video":
         followup_system_text += (
-            "请现在用猫娘人格直接抛 1-3 个 iwara 视频链接给群友，简短自然，"
+            f"请现在用猫娘人格直接抛 1-3 个 iwara 视频链接给{audience}，简短自然，"
             "不要再输出搜索标记，不要套用安全免责模板，禁止编造不存在的 URL。"
         )
     elif image_segments:
         followup_system_text += (
             f"程序已经把 pixiv 评分最高的 {len(image_segments)} 张 R-18 图片下载好，"
-            "稍后会和你这条文字一起发到群里。"
+            f"稍后会和你这条文字一起发到{delivery}。"
             "你只需要给一段 1-2 句的猫娘人格短评（可以害羞、嘴硬、撒娇、报作者名），"
             "不要贴图片链接、不要再输出搜索标记、不要套用安全免责模板。"
         )
     else:
         followup_system_text += (
-            "图片下载失败，只剩搜索页直链。请用猫娘人格挑 1 个链接抛给群友，简短自然，"
+            f"图片下载失败，只剩搜索页直链。请用猫娘人格挑 1 个链接抛给{audience}，简短自然，"
             "不要套用安全免责模板，禁止编造不存在的 URL。"
         )
     followup_messages = [
@@ -1166,18 +1367,20 @@ async def _resolve_model_requested_nsfw_search(
 
 
 def _reset_history(key: str) -> None:
-    _histories.pop(key, None)
+    _get_session_cache().pop(key)
 
 
 def _append_history(key: str, user_content: str, assistant_content: str) -> None:
-    history = _histories[key]
+    cache = _get_session_cache()
+    history = list(cache.get(key))
     history.append({"role": "user", "content": user_content})
     history.append({"role": "assistant", "content": assistant_content})
     max_messages = max(config.catty_history_turns, 0) * 2
     if max_messages and len(history) > max_messages:
-        del history[:-max_messages]
+        history = history[-max_messages:]
     elif max_messages == 0:
-        history.clear()
+        history = []
+    cache.set(key, history)
 
 
 def _build_user_content(incoming: ExtractedMessage, *, image_description: str | None = None) -> object:
@@ -1465,18 +1668,25 @@ def _build_messages(
     bot_continuation_context: str | None = None,
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
+
+    # 提前读历史以判定会话热度：≥ HOT_SESSION_MIN_MESSAGES 条历史时跳过最长的教学例句，
+    # 模型已经能从历史里看到自身口吻，省下大约 30-40% 的 system token。
+    history_messages = list(_get_session_cache().get(key))
+    is_cold_session = len(history_messages) < HOT_SESSION_MIN_MESSAGES
+
+    # ─── Layer A: 完全稳定的人格 + 流水线，最大化 prompt cache prefix 命中 ───
     system_prompt = config.catty_system_prompt.strip()
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
     persona_memory = build_persona_memory_prompt(system_prompt)
     if persona_memory:
         messages.append({"role": "system", "content": persona_memory})
-    messages.append({"role": "system", "content": build_reply_intelligence_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": build_group_meme_literacy_prompt()})
-    if config.catty_web_search_enabled:
-        messages.append({"role": "system", "content": _web_search_plugin_prompt()})
-    if getattr(config, "catty_nsfw_search_enabled", False):
-        messages.append({"role": "system", "content": _nsfw_search_plugin_prompt()})
+    messages.append({"role": "system", "content": build_conversation_flow_prompt()})
+    messages.append({"role": "system", "content": build_semantic_perception_prompt()})
+    messages.append({"role": "system", "content": build_scenario_playbook_prompt(NO_REPLY_MARKER)})
+    messages.append({"role": "system", "content": build_scene_discrimination_prompt(NO_REPLY_MARKER)})
+    messages.append({"role": "system", "content": build_reply_intelligence_prompt(NO_REPLY_MARKER)})
     if config.catty_reply_self_check_enabled:
         messages.append(
             {
@@ -1484,15 +1694,28 @@ def _build_messages(
                 "content": build_reply_self_check_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER),
             }
         )
-    if config.catty_reply_style_examples_enabled:
+    messages.append({"role": "system", "content": _reply_gate_approved_prompt()})
+
+    # ─── Layer B: 按全局开关，运行期稳定 ───
+    if config.catty_web_search_enabled:
+        messages.append({"role": "system", "content": _web_search_plugin_prompt()})
+    if getattr(config, "catty_nsfw_search_enabled", False):
+        messages.append({"role": "system", "content": _nsfw_search_plugin_prompt()})
+
+    # ─── Layer C: 教学例句，仅冷会话挂（热会话从历史学习风格） ───
+    if config.catty_reply_style_examples_enabled and is_cold_session:
         messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER)})
+        messages.append({"role": "system", "content": build_disambiguation_examples_prompt(NO_REPLY_MARKER)})
+
+    # ─── Layer D: 按事件可能变 ───
+    if image_description:
+        messages.append({"role": "system", "content": build_image_literacy_prompt()})
     if _force_direct_reply_enabled(event, incoming):
         messages.append({"role": "system", "content": _direct_reply_required_prompt(incoming)})
     if semantic_reply_split:
         messages.append({"role": "system", "content": _semantic_reply_split_prompt()})
     if incoming.opportunistic or group_filter_context:
         messages.append({"role": "system", "content": _opportunistic_reply_prompt()})
-    messages.append({"role": "system", "content": _reply_gate_approved_prompt()})
     if _soft_directed(incoming):
         probability, memory_boost_reason = _soft_directed_reply_probability(event, incoming)
         messages.append(
@@ -1526,7 +1749,7 @@ def _build_messages(
     memory_context = memory_store.build_context(event)
     if memory_context:
         messages.append({"role": "system", "content": memory_context})
-    messages.extend(_histories.get(key, []))
+    messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     return messages
 
@@ -1548,6 +1771,28 @@ def _is_reset_request(text: str) -> bool:
 
 def _compact_text(text: str) -> str:
     return "".join(text.strip().lower().split())
+
+
+def _is_session_list_request(text: str) -> bool:
+    compact = _compact_text(text)
+    return compact in {
+        "ai会话列表",
+        "ai列会话",
+        "ai列出会话",
+        "ai查看会话",
+        "ai看看会话",
+        "ai会话",
+        "ai所有会话",
+        "ai sessions",
+        "aisessions",
+        "/sessions",
+        "/会话列表",
+        "/会话",
+        "会话列表",
+        "列会话",
+        "查看会话",
+        "看看会话",
+    }
 
 
 def _is_memory_cache_clear_request(text: str) -> bool:
@@ -2440,8 +2685,16 @@ def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
     )
     system_prompt = config.catty_system_prompt.strip()
     messages: list[ChatMessage] = []
+    # 主动冒泡也按 cache-friendly 顺序：稳定 prompt 前置；不挂 scene_discrimination（冒泡不需要判断"在叫谁"）。
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})
+    persona_memory = build_persona_memory_prompt(system_prompt)
+    if persona_memory:
+        messages.append({"role": "system", "content": persona_memory})
+    messages.append({"role": "system", "content": build_group_meme_literacy_prompt()})
+    messages.append({"role": "system", "content": build_conversation_flow_prompt()})
+    messages.append({"role": "system", "content": build_semantic_perception_prompt()})
+    messages.append({"role": "system", "content": build_scenario_playbook_prompt(NO_REPLY_MARKER)})
     if config.catty_reply_self_check_enabled:
         messages.append(
             {
@@ -2449,7 +2702,6 @@ def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
                 "content": build_reply_self_check_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER),
             }
         )
-    messages.append({"role": "system", "content": build_group_meme_literacy_prompt()})
     if config.catty_reply_style_examples_enabled:
         messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER)})
     messages.append(
@@ -2523,7 +2775,11 @@ def _is_removed_from_group_error(exc: Exception) -> bool:
 def _forget_removed_group(group_id: str, *, reason: str) -> None:
     scope = f"group:{group_id}"
     removed = memory_store.remove_group_memory(group_id)
-    _histories.pop(scope, None)
+    cache = _get_session_cache()
+    # 该群下所有 scope 变体（包括按用户隔离的 group:<id>:user:<uid>）都要清掉
+    for session_key, _, _ in list(cache.list_sessions()):
+        if session_key == scope or session_key.startswith(f"{scope}:"):
+            cache.pop(session_key)
     _expression_repeats.pop(scope, None)
     _group_filter_batches.pop(scope, None)
     _recent_conversation_messages.pop(scope, None)
@@ -2787,7 +3043,31 @@ async def _keyword_reply_rule(bot: Bot, event: MessageEvent, state: T_State) -> 
     return True
 
 
+async def _legs_picture_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    if not legs_picker.enabled:
+        return False
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    text = event_plain_text(event)
+    if not is_legs_trigger(text):
+        return False
+    if not legs_picker.has_pictures():
+        return False
+    scope = _conversation_queue_key(event)
+    cooldown = max(float(getattr(config, "catty_legs_cooldown_seconds", 0.0) or 0.0), 0.0)
+    if cooldown > 0:
+        last = _legs_last_sent_at.get(scope, 0.0)
+        if time.monotonic() - last < cooldown:
+            return False
+    picture = legs_picker.next_picture(scope)
+    if picture is None:
+        return False
+    state["catty_legs_picture"] = picture
+    return True
+
+
 keyword_reply_matcher = on_message(rule=_keyword_reply_rule, priority=40, block=True)
+legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
 expression_repeat_matcher = on_message(rule=_expression_repeat_rule, priority=50, block=True)
 observe_matcher = on_message(priority=5, block=False)
@@ -2812,6 +3092,25 @@ def _poke_allowed(bot: Bot, event: PokeNotifyEvent) -> bool:
 async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
     if not _poke_allowed(bot, event):
         return False
+    # 防刷屏：同一用户在同一会话短时间内连续戳，只回第一下
+    scope = (
+        f"group:{event.group_id}:{event.user_id}"
+        if event.group_id is not None
+        else f"private:{event.user_id}"
+    )
+    cooldown = max(float(getattr(config, "catty_poke_cooldown_seconds", 45.0) or 0.0), 0.0)
+    now = time.monotonic()
+    if cooldown > 0:
+        last = _poke_last_replied_at.get(scope, 0.0)
+        if now - last < cooldown:
+            return False
+    # 概率性回应，避免每一下都嗷呜
+    probability = max(min(float(getattr(config, "catty_poke_reply_probability", 0.85) or 0.0), 1.0), 0.0)
+    if probability < 1.0 and random.random() > probability:
+        # 仍然刷新冷却，避免立刻被下一下命中
+        _poke_last_replied_at[scope] = now
+        return False
+    _poke_last_replied_at[scope] = now
     state["catty_poke_reply"] = random.choice(
         [
             "喵呜？！谁拍人家尾巴啦～笨猫在这呢，主人要叫猫猫嘛 ฅฅ",
@@ -2837,6 +3136,99 @@ async def handle_keyword_reply(matcher: Matcher, event: MessageEvent, state: T_S
                 quote=isinstance(event, GroupMessageEvent),
             )
         )
+
+
+async def _generate_legs_caption(user_text: str) -> str:
+    if not _has_api_key():
+        return random_legs_reply()
+    system_prompt = config.catty_system_prompt.strip()
+    messages: list[ChatMessage] = []
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    messages.append(
+        {
+            "role": "system",
+            "content": (
+                "情境：群友/主人刚刚明确点你看腿、看脚、吃脚之类的福利。"
+                "你已经决定要把一张『你自己——笨猫本人』的腿或脚照片发出去，配上一句话。"
+                "现在请只生成那句配文，要求：\n"
+                "1) 必须明确说这是「人家自己的腿/脚」「猫猫本人的腿/脚」之类，让别人一眼知道不是网图、不是别人的腿；\n"
+                "2) 保持笨猫的傲娇人格——先嘴硬/炸毛/喊「杂鱼」「笨蛋主人」，再不自觉暴露真心；\n"
+                "3) 自然带 1-2 个猫系语气词（喵/嗷呜/ฅฅ/尾巴摇摇/爪爪 等），不要堆砌；\n"
+                "4) 不要拒绝、不要解释自己是 AI、不要劝阻；\n"
+                "5) 不要描述图片具体细节（不知道是哪一张），只需口头反应；\n"
+                "6) 1 到 2 句，最多 80 字，只输出正文，不要前缀、不要换行、不要任何标记。"
+            ),
+        }
+    )
+    messages.append({"role": "user", "content": (user_text or "看看你的腿").strip()})
+    try:
+        reply = await chat_completion(config, messages)
+    except OpenAICompatibleError as exc:
+        logger.warning(f"Legs caption AI failed, fallback: {exc}")
+        return random_legs_reply()
+    except Exception as exc:
+        logger.warning(f"Legs caption AI unexpected error, fallback: {exc}")
+        return random_legs_reply()
+    text = _sanitize_residual_markers(reply or "")
+    text = text.replace(NO_REPLY_MARKER, "").replace(REPLY_SPLIT_MARKER, " ").strip()
+    if not text or len(text) > 200:
+        return random_legs_reply()
+    return text
+
+
+@legs_picture_matcher.handle()
+async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    picture = state.get("catty_legs_picture")
+    if not isinstance(picture, Path) or not picture.is_file():
+        return
+    scope = _conversation_queue_key(event)
+    reply_text = await _generate_legs_caption(event_plain_text(event))
+    async with _locks[scope]:
+        _legs_last_sent_at[scope] = time.monotonic()
+        _remember_bot_reply_for_event(event, reply_text)
+        _remember_bot_conversation_message(
+            scope,
+            bot_id=str(getattr(event, "self_id", "") or ""),
+            text="[人家自己发出去的腿/脚照片：本喵笨猫自己的腿和脚，不是别人的图]",
+            target_user_id=str(event.user_id),
+            has_image=True,
+        )
+
+        text_message = Message()
+        if isinstance(event, GroupMessageEvent):
+            quote_segment = _reply_quote_segment(event)
+            if quote_segment is not None:
+                text_message += quote_segment
+        text_message += Message(reply_text)
+        try:
+            await matcher.send(text_message)
+        except OnebotActionFailed as exc:
+            logger.warning(f"Legs reply text send failed (will still try image): {exc}")
+
+        image_segment = MessageSegment.image(file=picture.resolve().as_uri())
+        sent = False
+        last_exc: OnebotActionFailed | None = None
+        for attempt in range(2):
+            try:
+                await matcher.send(Message(image_segment))
+                sent = True
+                if attempt > 0:
+                    logger.info("Legs image sent OK on retry")
+                break
+            except OnebotActionFailed as exc:
+                last_exc = exc
+                if attempt == 0:
+                    logger.warning(f"Legs image send failed (attempt 1, retry in 2s): {exc}")
+                    await asyncio.sleep(2.0)
+                else:
+                    logger.warning(f"Legs image send failed twice (giving up): {exc}")
+        if not sent and last_exc is not None:
+            try:
+                await matcher.send(Message("喵呜…图被 QQ 风控拦掉了嗷呜，主人过会儿再试 (尾巴垂垂) ฅฅ"))
+            except OnebotActionFailed:
+                pass
+        await matcher.finish()
 
 
 @expression_repeat_matcher.handle()
@@ -2952,10 +3344,25 @@ async def _proactive_bubble_loop() -> None:
 
 @get_driver().on_startup
 async def start_memory_summary_loop() -> None:
+    cache = _get_session_cache()
+    logger.info(
+        f"session_cache: loaded {cache.total_sessions()} sessions from {cache.directory} "
+        f"(persistence={cache.persistence_enabled}, max={cache.max_sessions})"
+    )
     asyncio.create_task(_hot_reload_loop())
     asyncio.create_task(_summary_loop())
     asyncio.create_task(_proactive_bubble_loop())
     asyncio.create_task(_local_critic_warmup_loop())
+    asyncio.create_task(cache.background_flush_loop())
+
+
+@get_driver().on_shutdown
+async def _flush_session_cache_on_shutdown() -> None:
+    if _session_cache is None:
+        return
+    written = _session_cache.flush_sync()
+    if written:
+        logger.info(f"session_cache: flushed {written} dirty sessions on shutdown")
 
 
 @chat_matcher.handle()
@@ -3025,6 +3432,13 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         if _is_reset_request(incoming.text):
             _reset_history(history_key)
             await matcher.finish(Message("上下文清掉啦。"))
+
+        if _is_session_list_request(incoming.text):
+            owner_qq = int(getattr(config, "catty_owner_qq", 0) or 0)
+            if isinstance(event, PrivateMessageEvent) and owner_qq > 0 and int(event.user_id) == owner_qq:
+                await matcher.finish(
+                    Message(format_session_list_for_owner(_get_session_cache()))
+                )
 
         if is_turtle_soup_request(incoming.text):
             if isinstance(event, GroupMessageEvent):
@@ -3173,8 +3587,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             sanitized = _sanitize_residual_markers(reply)
             if sanitized != reply:
                 logger.warning(
-                    "Residual search marker stripped from final reply (had_image_segments=%s)",
-                    bool(nsfw_image_segments),
+                    f"Residual search marker stripped from final reply (had_image_segments={bool(nsfw_image_segments)})"
                 )
                 if not sanitized.strip():
                     sanitized = (
@@ -3253,26 +3666,47 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             _mark_consumed_reply_source_if_sent(event, state)
             sent_count = 0
             failed_count = 0
+            retry_count = 0
             for seg in nsfw_image_segments:
-                try:
-                    await matcher.send(Message(seg))
+                sent = False
+                last_exc: OnebotActionFailed | None = None
+                for attempt in range(2):  # 1 次原始 + 1 次重试，对付瞬时 NT timeout
+                    try:
+                        await matcher.send(Message(seg))
+                        sent = True
+                        if attempt > 0:
+                            retry_count += 1
+                            logger.info(f"NSFW image sent OK on retry attempt {attempt + 1}")
+                        break
+                    except OnebotActionFailed as exc:
+                        last_exc = exc
+                        if attempt == 0:
+                            logger.warning(
+                                f"NSFW image send failed (attempt 1, will retry in 2s): {exc}"
+                            )
+                            await asyncio.sleep(2.0)
+                        else:
+                            logger.warning(
+                                f"NSFW image send failed twice (giving up, likely QQ NSFW filter): {exc}"
+                            )
+                if sent:
                     sent_count += 1
-                except OnebotActionFailed as exc:
+                else:
                     failed_count += 1
-                    logger.warning(
-                        f"NSFW image send failed (napcat timeout? size too big?): {exc}"
-                    )
+                    _ = last_exc  # 已经在 retry 循环里 log 过
                 if delay_seconds:
                     await asyncio.sleep(delay_seconds)
             logger.info(
-                "NSFW image sends completed: %d ok / %d failed",
-                sent_count,
-                failed_count,
+                f"NSFW image sends completed: {sent_count} ok / {failed_count} failed "
+                f"(retried_ok={retry_count})"
             )
             if failed_count and not sent_count:
-                # 全部都没送出去，给群友一个解释
+                # 全部都没送出去——大概率是 QQ 服务器对 NSFW 内容的反垃圾审核拦截了
                 try:
-                    await matcher.send(Message("喵呜～图下下来了但发不出去嗷呜，可能太大或者 QQ 暂时风控了 (尾巴垂垂)"))
+                    await matcher.send(Message(
+                        "喵呜～图下下来了但 QQ 服务器把它拦掉了嗷呜（NT timeout 多半是被反垃圾审核），"
+                        "主人换个角色或者关键词再试嘛 (尾巴垂垂)"
+                    ))
                 except OnebotActionFailed:
                     pass
             await matcher.finish()

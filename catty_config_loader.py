@@ -67,6 +67,22 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "request_timeout": 60,
         "http_proxy": "",
     },
+    "ai_fallback": {
+        "enabled": False,
+        "base_url": "",
+        "api_key": "",
+        "model": "",
+        "extra_headers": {},
+        "extra_body": {},
+        "temperature": None,
+        "max_tokens": 4096,
+        "request_timeout": 180,
+        "cooldown_seconds": 300,
+        "mc_gate_enabled": True,
+        "mc_server_host": "localhost",
+        "mc_server_port": 26843,
+        "mc_ping_timeout_seconds": 3.0,
+    },
     "audit_ai": {
         "base_url": "",
         "api_key": "",
@@ -111,6 +127,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "auto_start": True,
         "auto_pull_model": True,
         "model": "qwen2.5:1.5b",
+        "num_thread": None,
+        "below_normal_priority": True,
         "install_dir": "tools/ollama",
         "models_dir": "models/ollama",
         "executable": "",
@@ -452,6 +470,22 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_REQUEST_TIMEOUT", ai.get("request_timeout"))
     _set_env("CATTY_HTTP_PROXY", ai.get("http_proxy"))
 
+    ai_fallback = _section(data, "ai_fallback")
+    _set_env("CATTY_AI_FALLBACK_ENABLED", ai_fallback.get("enabled"))
+    _set_env("CATTY_AI_FALLBACK_BASE_URL", ai_fallback.get("base_url"))
+    _set_env("CATTY_AI_FALLBACK_API_KEY", ai_fallback.get("api_key"))
+    _set_env("CATTY_AI_FALLBACK_MODEL", ai_fallback.get("model"))
+    _set_env("CATTY_AI_FALLBACK_EXTRA_HEADERS", ai_fallback.get("extra_headers"), json_value=True)
+    _set_env("CATTY_AI_FALLBACK_EXTRA_BODY", ai_fallback.get("extra_body"), json_value=True)
+    _set_env("CATTY_AI_FALLBACK_TEMPERATURE", ai_fallback.get("temperature"))
+    _set_env("CATTY_AI_FALLBACK_MAX_TOKENS", ai_fallback.get("max_tokens"))
+    _set_env("CATTY_AI_FALLBACK_REQUEST_TIMEOUT", ai_fallback.get("request_timeout"))
+    _set_env("CATTY_AI_FALLBACK_COOLDOWN_SECONDS", ai_fallback.get("cooldown_seconds"))
+    _set_env("CATTY_AI_FALLBACK_MC_GATE_ENABLED", ai_fallback.get("mc_gate_enabled"))
+    _set_env("CATTY_AI_FALLBACK_MC_SERVER_HOST", ai_fallback.get("mc_server_host"))
+    _set_env("CATTY_AI_FALLBACK_MC_SERVER_PORT", ai_fallback.get("mc_server_port"))
+    _set_env("CATTY_AI_FALLBACK_MC_PING_TIMEOUT_SECONDS", ai_fallback.get("mc_ping_timeout_seconds"))
+
     audit_ai = _section(data, "audit_ai")
     _set_env("CATTY_AUDIT_AI_BASE_URL", audit_ai.get("base_url"))
     _set_env("CATTY_AUDIT_AI_API_KEY", audit_ai.get("api_key"))
@@ -574,6 +608,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_GROUP_HISTORY_SCOPE", chat.get("group_history_scope"))
     _set_env("CATTY_HISTORY_TURNS", chat.get("history_turns"))
     _set_env("CATTY_DIRECTED_KEYWORDS", chat.get("directed_keywords"), json_value=True)
+    _set_env("CATTY_IGNORED_USER_IDS", chat.get("ignored_user_ids"), json_value=True)
+    _set_env("CATTY_IGNORE_MARKED_BOTS", chat.get("ignore_marked_bots"))
+    _set_env("CATTY_IGNORE_BOT_SELF_INTRO_ENABLED", chat.get("ignore_bot_self_intro_enabled"))
     _set_env("CATTY_KEYWORD_REPLIES", chat.get("keyword_replies"), json_value=True)
     _set_env("CATTY_SOFT_DIRECTED_REPLY_PROBABILITY", chat.get("soft_directed_reply_probability"))
     _set_env("CATTY_DIRECT_ADDRESS_REPLY_PROBABILITY", chat.get("direct_address_reply_probability"))

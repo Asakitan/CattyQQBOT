@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import asyncio
 import base64
 from io import BytesIO
 import json
+import logging
+import time
 from typing import Any
 from urllib.parse import urlparse
 
@@ -10,6 +13,36 @@ import httpx
 from PIL import Image, ImageSequence
 
 from .config import Config
+from .mc_status import mc_has_players
+
+
+_logger = logging.getLogger("catty_qq_ai")
+
+# 全局云端健康状态：> time.monotonic() 时主回复直接走 fallback 不再尝试云。
+_cloud_fail_until: float = 0.0
+
+
+def _cloud_is_unhealthy() -> bool:
+    return time.monotonic() < _cloud_fail_until
+
+
+def _cloud_health_remaining_seconds() -> float:
+    return max(_cloud_fail_until - time.monotonic(), 0.0)
+
+
+def _mark_cloud_unhealthy(cooldown_seconds: float) -> None:
+    global _cloud_fail_until
+    _cloud_fail_until = time.monotonic() + max(cooldown_seconds, 0.0)
+
+
+def _mark_cloud_healthy() -> None:
+    global _cloud_fail_until
+    _cloud_fail_until = 0.0
+
+
+def _reset_cloud_health_for_tests() -> None:
+    """Test-only helper: reset the global health timer."""
+    _mark_cloud_healthy()
 
 
 ChatMessage = dict[str, Any]
@@ -19,6 +52,10 @@ class OpenAICompatibleError(Exception):
     def __init__(self, public_message: str, detail: str | None = None) -> None:
         super().__init__(detail or public_message)
         self.public_message = public_message
+
+
+class MCBusyError(OpenAICompatibleError):
+    """MC server has players online and local fallback is gated off."""
 
 
 def _catty_http_status_message(service_name: str, status_code: int) -> str:
@@ -306,19 +343,129 @@ async def download_binary(config: Config, url: str, *, timeout: float | None = N
     return response.content, response.headers.get("content-type", "")
 
 
-async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
+def _fallback_is_configured(config: Config) -> bool:
+    if not bool(getattr(config, "catty_ai_fallback_enabled", False)):
+        return False
+    base = str(getattr(config, "catty_ai_fallback_base_url", "") or "").strip()
+    model = str(getattr(config, "catty_ai_fallback_model", "") or "").strip()
+    return bool(base) and bool(model)
+
+
+async def _check_mc_gate_or_raise(config: Config) -> None:
+    """If MC has players online, refuse to run the local fallback model."""
+    if not bool(getattr(config, "catty_ai_fallback_mc_gate_enabled", False)):
+        return
+    host = str(getattr(config, "catty_ai_fallback_mc_server_host", "") or "").strip()
+    if not host:
+        return
+    port = int(getattr(config, "catty_ai_fallback_mc_server_port", 0) or 0)
+    if port <= 0:
+        return
+    timeout = float(getattr(config, "catty_ai_fallback_mc_ping_timeout_seconds", 3.0) or 3.0)
+    try:
+        has_players = await mc_has_players(host, port, timeout=timeout)
+    except Exception as exc:  # noqa: BLE001
+        _logger.warning("MC gate ping failed (%s); allowing fallback to proceed", exc)
+        return
+    if has_players:
+        _logger.info("MC gate: players online at %s:%d, refusing local fallback", host, port)
+        raise MCBusyError(
+            "喵呜，MC 群友正在玩游戏中，猫猫这会儿不能用本地脑子顶上来——主人稍等一下再戳。",
+            "MC has players online; local 7B fallback is gated off to protect game performance.",
+        )
+
+
+async def _post_fallback_chat(config: Config, messages: list[ChatMessage]) -> str:
+    await _check_mc_gate_or_raise(config)
+
+    base_url = config.catty_ai_fallback_base_url
+    api_key = config.catty_ai_fallback_api_key
+    model = config.catty_ai_fallback_model
+    extra_body = dict(config.catty_ai_fallback_extra_body or {})
+    extra_headers = config.catty_ai_fallback_extra_headers or {}
+    timeout = config.catty_ai_fallback_request_timeout or config.catty_request_timeout
+    temperature = config.catty_ai_fallback_temperature
+    max_tokens = config.catty_ai_fallback_max_tokens
+
+    # 内存预算够时让 7B 留在内存复用更快。想要立刻卸载,在 config 的
+    # ai_fallback.extra_body 里加 "keep_alive": 0 即可。
+    if _looks_like_ollama_route(base_url, api_key, extra_body):
+        return await _post_ollama_chat(
+            base_url=base_url,
+            model=model,
+            messages=messages,
+            timeout=timeout,
+            proxy=config.catty_http_proxy,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            extra_headers=extra_headers,
+            extra_body=extra_body,
+        )
     return await _post_chat_completion(
-        base_url=config.catty_openai_base_url,
-        api_key=config.catty_openai_api_key,
-        model=config.catty_openai_model,
+        base_url=base_url,
+        api_key=api_key,
+        model=model,
         messages=messages,
-        timeout=config.catty_request_timeout,
+        timeout=timeout,
         proxy=config.catty_http_proxy,
-        temperature=config.catty_temperature,
-        max_tokens=config.catty_max_tokens,
-        extra_headers=config.catty_openai_extra_headers,
-        extra_body=config.catty_openai_extra_body,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        extra_headers=extra_headers,
+        extra_body=extra_body,
     )
+
+
+async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
+    fallback_ready = _fallback_is_configured(config)
+    cooldown = float(getattr(config, "catty_ai_fallback_cooldown_seconds", 300.0))
+
+    # 云端在冷却期：直接走 fallback，不再戳云白白等超时。
+    # MCBusyError（MC 有玩家）会自然向上传播给用户看到。
+    if fallback_ready and _cloud_is_unhealthy():
+        _logger.info(
+            "chat_completion: cloud in cooldown (%.0fs remaining), routing to local fallback %s",
+            _cloud_health_remaining_seconds(),
+            config.catty_ai_fallback_model,
+        )
+        return await _post_fallback_chat(config, messages)
+
+    # 正常走云。
+    try:
+        result = await _post_chat_completion(
+            base_url=config.catty_openai_base_url,
+            api_key=config.catty_openai_api_key,
+            model=config.catty_openai_model,
+            messages=messages,
+            timeout=config.catty_request_timeout,
+            proxy=config.catty_http_proxy,
+            temperature=config.catty_temperature,
+            max_tokens=config.catty_max_tokens,
+            extra_headers=config.catty_openai_extra_headers,
+            extra_body=config.catty_openai_extra_body,
+        )
+        # 云端成功:清除任何残留 unhealthy 标记
+        if _cloud_is_unhealthy():
+            _logger.info("chat_completion: cloud recovered, clearing cooldown")
+            _mark_cloud_healthy()
+        return result
+    except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as cloud_exc:
+        if not fallback_ready:
+            raise
+        _mark_cloud_unhealthy(cooldown)
+        _logger.warning(
+            "chat_completion: cloud call failed (%s), routing to local fallback %s for next %.0fs",
+            cloud_exc.__class__.__name__,
+            config.catty_ai_fallback_model,
+            cooldown,
+        )
+        try:
+            return await _post_fallback_chat(config, messages)
+        except MCBusyError:
+            # MC 有人 → 直接抛"游戏中不可用"给用户，不被云错误覆盖
+            raise
+        except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as fb_exc:
+            # 云端和 fallback 都挂了:抛云的原始错误,把 fallback 异常作为 __cause__
+            raise cloud_exc from fb_exc
 
 
 async def local_critic_completion(

@@ -1,3 +1,4 @@
+import logging
 import random
 import re
 from dataclasses import dataclass
@@ -8,6 +9,95 @@ from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, Private
 
 from .config import Config
 from .features import FEATURE_DIRECT_KEYWORDS
+
+
+_logger = logging.getLogger("catty_qq_ai")
+
+# 第一次命中机器人标记字段时 dump sender 一次方便主人调整精确化规则
+_marked_bot_dump_done = False
+
+# QQ 协议/NapCat sender 字段里常见的机器人标记。多字段试探,覆盖不同实现。
+_BOT_FLAG_BOOL_ATTRS = ("is_bot", "is_robot", "robot", "official")
+_BOT_FLAG_STRING_ATTRS = ("role", "category", "sub_type", "type", "user_type", "account_type")
+_BOT_FLAG_STRING_VALUES = {"bot", "robot", "official_bot", "qqbot", "officialrobot", "official_robot"}
+
+# 启发式机器人自介模板:大概率是另一个机器人在自介,普通用户不会这么说
+_BOT_INTRO_PATTERNS = (
+    re.compile(r"暂时还?不能(?:和|跟|与)你?(?:对话|交流|聊天|回复)"),
+    re.compile(r"我是.{0,12}(?:机器人|小助手|助手|管家|bot|BOT|AI|ai)(?:[，,。！!？?～~\s]|$)"),
+    re.compile(r"群管家|签到小助手|签到助手|Q群管家|qq群管家", re.IGNORECASE),
+)
+
+
+def _looks_like_marked_bot(event: MessageEvent) -> bool:
+    """QQ 协议层标记的机器人:检查 sender 上多种可能的字段。
+
+    优先 OneBot/NapCat 暴露的字段(is_bot/role/category/user_type 等)。
+    第一次命中时 log 一行 dump sender,方便主人确认是哪个字段触发的。
+    """
+    sender = getattr(event, "sender", None)
+    if sender is None:
+        return False
+
+    candidates: list[Any] = [sender]
+    raw_sender = None
+    raw_event = getattr(event, "raw_event", None) or getattr(event, "__raw_event__", None)
+    if isinstance(raw_event, dict):
+        rs = raw_event.get("sender")
+        if isinstance(rs, dict):
+            raw_sender = rs
+            candidates.append(rs)
+
+    for source in candidates:
+        if source is None:
+            continue
+        getter = source.get if isinstance(source, dict) else lambda name, default=None, _s=source: getattr(_s, name, default)
+        for attr in _BOT_FLAG_BOOL_ATTRS:
+            try:
+                if bool(getter(attr, False)):
+                    _maybe_dump_marked_bot(event, sender, raw_sender, hit=f"{attr}=truthy")
+                    return True
+            except Exception:  # noqa: BLE001
+                continue
+        for attr in _BOT_FLAG_STRING_ATTRS:
+            try:
+                value = str(getter(attr, "") or "").strip().lower()
+            except Exception:  # noqa: BLE001
+                continue
+            if value and value in _BOT_FLAG_STRING_VALUES:
+                _maybe_dump_marked_bot(event, sender, raw_sender, hit=f"{attr}={value}")
+                return True
+    return False
+
+
+def _maybe_dump_marked_bot(event: MessageEvent, sender: Any, raw_sender: Any, *, hit: str) -> None:
+    global _marked_bot_dump_done
+    if _marked_bot_dump_done:
+        return
+    _marked_bot_dump_done = True
+    try:
+        sender_dump = sender.dict() if hasattr(sender, "dict") else dict(getattr(sender, "__dict__", {}))
+    except Exception:  # noqa: BLE001
+        sender_dump = str(sender)
+    _logger.info(
+        "marked-bot filter fired: hit=%s user_id=%s sender_dump=%s raw_sender=%s",
+        hit,
+        getattr(event, "user_id", "?"),
+        sender_dump,
+        raw_sender,
+    )
+
+
+def _looks_like_bot_self_intro(text: str) -> bool:
+    if not text:
+        return False
+    body = text.strip()
+    if not body:
+        return False
+    for pattern in _BOT_INTRO_PATTERNS:
+        if pattern.search(body):
+            return True
+    return False
 
 
 EXPRESSION_SEGMENT_TYPES = {"face", "mface", "image"}
@@ -238,6 +328,25 @@ def _mentioned_self(self_id: str, event: MessageEvent) -> bool:
     return False
 
 
+def mentions_other_user(self_id: str, event: MessageEvent) -> bool:
+    """是否在同一条消息里 @ 了猫猫之外的其他用户（用于判断这条消息其实是给别人看的）。"""
+    self_str = str(self_id)
+    for segment in event.message:
+        if segment.type != "at":
+            continue
+        target = str(segment.data.get("qq", "")).strip()
+        if not target or target == "all":
+            continue
+        if target != self_str:
+            return True
+    for text in _control_text_sources(event):
+        for target in _control_code_values(text, "at", "qq"):
+            target = str(target or "").strip()
+            if target and target != "all" and target != self_str:
+                return True
+    return False
+
+
 def reply_message_ids(event: MessageEvent) -> list[str]:
     ids: list[str] = []
     seen: set[str] = set()
@@ -350,13 +459,91 @@ def _directed_keyword_strength(text: str, config: Config) -> str:
     return "keyword"
 
 
+# 这些关键词太泛，单独子串命中很容易误判（"我跟他说你坏话"、"搜集邮票"、"看看那个"…）。
+# 命中后必须再额外满足"看起来是在喊人/请猫猫做事"的语境才算 directed。
+# 分两组：
+#   动词类（看看/搜/查 等动作请求）—— 出现在句首/紧跟请求引导词等位置算指向
+#   名词类（图片/图里/你 等称呼或对象词）—— 还需要配合请求引导词或问句尾，单独句首不算
+_WEAK_GENERIC_VERB_MARKERS = {
+    "搜", "查", "看看", "看一下", "看一眼",
+}
+_WEAK_GENERIC_NOUN_MARKERS = {
+    "你", "妳", "您",
+    "图片", "图里", "这张图", "这个图", "评价一下", "怎么回事",
+}
+_WEAK_GENERIC_MARKERS = _WEAK_GENERIC_VERB_MARKERS | _WEAK_GENERIC_NOUN_MARKERS
+
+# 在这些位置出现弱关键词，才视为真的在指向猫猫：
+# - 句首/独立短句开头（仅动词类）
+# - 明显的请求/称呼前导词后面（请/帮/麻烦/喊/找/问/求/给…）
+# - 紧跟问号/语气助词形成"对你说话"的句尾（你呢/你吧/你呀/你嘛）
+_ADDRESSING_LEAD_CHARS = "请帮麻烦喊找问求给替让叫艾"
+_ADDRESSING_TRAIL_CHARS = "呢吧呀嘛啊么吗"
+_ADDRESSING_BOUNDARY_CHARS = " \t\r\n,，。.;；!！?？:：、~～\"'“”‘’()（）[]【】「」"
+
+
+def _weak_marker_in_addressing_context(normalized: str, marker: str, *, allow_sentence_start: bool) -> bool:
+    # 在原文里逐个出现位置判断，命中一次就行
+    start = 0
+    while True:
+        idx = normalized.find(marker, start)
+        if idx < 0:
+            return False
+        end = idx + len(marker)
+        prev_char = normalized[idx - 1] if idx > 0 else ""
+        next_char = normalized[end] if end < len(normalized) else ""
+        is_at_sentence_start = (not prev_char) or (prev_char in _ADDRESSING_BOUNDARY_CHARS)
+
+        # 0) 单字称呼词出现在消息最最开头，几乎必然是在喊人（"你好啊"/"您慢走"）
+        if idx == 0 and len(marker) <= 1 and marker in {"你", "妳", "您"}:
+            return True
+        # 1) 句首/紧跟标点（仅动词类弱标记可凭此触发，名词类不行——"图片素材网站"不该算）
+        if allow_sentence_start and is_at_sentence_start:
+            return True
+        # 2) 前面是明显的请求/称呼引导字
+        if prev_char and prev_char in _ADDRESSING_LEAD_CHARS:
+            return True
+        # 3) 后面紧跟问号/语气助词，像在喊人
+        if next_char and (next_char in _ADDRESSING_TRAIL_CHARS or next_char in "?？!！"):
+            return True
+        # 4) 整段就是这一个词
+        if normalized.strip() == marker:
+            return True
+
+        start = end
+        if start >= len(normalized):
+            return False
+
+
+_ASCII_WORD_RE = re.compile(r"[A-Za-z0-9_]")
+
+
+def _ascii_marker_matches(normalized: str, marker: str) -> bool:
+    """对 ASCII 关键词使用单词边界匹配，避免 ai 命中 'wait'/'aigc'。"""
+    pattern = re.compile(rf"(?<![A-Za-z0-9_]){re.escape(marker)}(?![A-Za-z0-9_])", re.IGNORECASE)
+    return pattern.search(normalized) is not None
+
+
 def _has_directed_keyword(text: str, config: Config) -> bool:
     normalized = text.strip().lower()
     if not normalized:
         return False
     for keyword in _configured_direct_markers(config):
-        if keyword in normalized:
-            return True
+        # ASCII 关键词需要单词边界，避免在 "wait"/"aigc"/"saint" 里误命中
+        if keyword.isascii() and _ASCII_WORD_RE.search(keyword):
+            if not _ascii_marker_matches(normalized, keyword):
+                continue
+        elif keyword not in normalized:
+            continue
+        # 单字 / 弱泛化关键词需要更强的指向上下文，避免在"他对你说"、"搜集"、"看看那个"中误判
+        if len(keyword) <= 1 or keyword in _WEAK_GENERIC_MARKERS:
+            allow_start = keyword in _WEAK_GENERIC_VERB_MARKERS or (
+                len(keyword) <= 1 and keyword not in _WEAK_GENERIC_NOUN_MARKERS
+            )
+            if _weak_marker_in_addressing_context(normalized, keyword, allow_sentence_start=allow_start):
+                return True
+            continue
+        return True
     return False
 
 
@@ -389,7 +576,14 @@ def _is_special_care_user(event: MessageEvent, config: Config) -> bool:
 
 
 def _allowed_by_config(event: MessageEvent, config: Config) -> bool:
-    if config.catty_allowed_user_ids and int(event.user_id) not in config.catty_allowed_user_ids:
+    user_id = int(event.user_id)
+    # 硬黑名单(主人手动把已知机器人 QQ 写进来)
+    if getattr(config, "catty_ignored_user_ids", set()) and user_id in config.catty_ignored_user_ids:
+        return False
+    # QQ 协议层标记的机器人(NapCat/OneBot sender 字段)
+    if bool(getattr(config, "catty_ignore_marked_bots", True)) and _looks_like_marked_bot(event):
+        return False
+    if config.catty_allowed_user_ids and user_id not in config.catty_allowed_user_ids:
         return False
     if isinstance(event, GroupMessageEvent):
         if not config.catty_enable_group:
@@ -418,6 +612,15 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, 
         return None
 
     text = _plain_text(event)
+    # 启发式 bot-self-intro 拦截:即使 QQ 协议没标记,文本明显是机器人自介模板就静默忽略
+    if bool(getattr(config, "catty_ignore_bot_self_intro_enabled", True)) and _looks_like_bot_self_intro(text):
+        _logger.info(
+            "bot-loop guard: dropped self-intro message from user=%s text=%r",
+            getattr(event, "user_id", "?"),
+            (text or "")[:120],
+        )
+        return None
+
     images = extract_images(event)
     image_urls = [url for url, _key in images]
     image_keys = [key for _url, key in images]

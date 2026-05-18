@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from export_reply_gate_dataset import export_all_datasets
+from mc_idle_ping import ping_mc_server
 
 
 def _load_config(path: Path) -> dict[str, Any]:
@@ -137,7 +138,64 @@ def _latest_sample_mtime(paths: list[Path]) -> float | None:
     return latest
 
 
-def _idle_decision(config: dict[str, Any], config_path: Path) -> tuple[bool, str, int]:
+def _mc_idle_decision(
+    training: dict[str, Any],
+    state: dict[str, Any],
+    now: float,
+    *,
+    idle_interval: int,
+    active_interval: int,
+) -> tuple[bool, str, int] | None:
+    """如果开启 MC idle 检查，返回最终决定；否则返回 None 让外层走时间窗口逻辑。
+
+    决策：
+    - ping 失败 → 谨慎不训（保护游戏运行）
+    - 有玩家 → 不训，刷新 mc_last_player_seen
+    - 无玩家但持续时间不够 → 不训
+    - 无玩家且持续 ≥ mc_idle_min_minutes → 可训
+    """
+    if not _as_bool(training.get("mc_idle_check_enabled"), default=False):
+        return None
+    host = str(training.get("mc_server_host") or "localhost").strip() or "localhost"
+    port = int(training.get("mc_server_port") or 26843)
+    idle_minutes = max(float(training.get("mc_idle_min_minutes") or 30.0), 0.0)
+    timeout = max(float(training.get("mc_ping_timeout_seconds") or 5.0), 0.5)
+
+    online, players = ping_mc_server(host, port, timeout=timeout)
+    if not online:
+        return False, f"MC server unreachable at {host}:{port}, skip training to be safe", active_interval
+
+    if players > 0:
+        state["mc_last_player_seen"] = now
+        return False, f"MC has {players} players online", active_interval
+
+    last_seen = float(state.get("mc_last_player_seen") or 0.0)
+    if last_seen <= 0.0:
+        # 第一次看到 0 玩家，从这一刻起算
+        state["mc_last_player_seen"] = now
+        return False, f"MC empty starting now, need {int(idle_minutes)}m streak", active_interval
+
+    empty_for_seconds = max(now - last_seen, 0.0)
+    needed_seconds = idle_minutes * 60
+    if empty_for_seconds < needed_seconds:
+        remaining_min = max(int((needed_seconds - empty_for_seconds) / 60), 1)
+        return (
+            False,
+            f"MC empty for {int(empty_for_seconds / 60)}m, need {int(idle_minutes)}m (~{remaining_min}m to go)",
+            active_interval,
+        )
+    return (
+        True,
+        f"MC empty for {int(empty_for_seconds / 60)}m (>= {int(idle_minutes)}m), safe to train",
+        idle_interval,
+    )
+
+
+def _idle_decision(
+    config: dict[str, Any],
+    config_path: Path,
+    state: dict[str, Any] | None = None,
+) -> tuple[bool, str, int]:
     training = config.get("local_training", {})
     if not isinstance(training, dict):
         training = {}
@@ -147,6 +205,18 @@ def _idle_decision(config: dict[str, Any], config_path: Path) -> tuple[bool, str
         return True, "idle gate disabled", idle_interval
 
     now = time.time()
+    # MC idle gating 是主导条件——开启后无视时间窗口，按"MC 真的没人"判断
+    if state is not None:
+        mc_decision = _mc_idle_decision(
+            training,
+            state,
+            now,
+            idle_interval=idle_interval,
+            active_interval=active_interval,
+        )
+        if mc_decision is not None:
+            return mc_decision
+
     local_time = time.localtime(now)
     start_hour = int(training.get("idle_start_hour") or 2)
     end_hour = int(training.get("idle_end_hour") or 6)
@@ -261,7 +331,7 @@ def run_once(config_path: Path) -> int:
     datasets = export_all_datasets(config_path)
     state_path = _resolve(base_dir, str(training.get("state_path") or "training/reply_gate_train_state.json"))
     state = _load_state(state_path)
-    can_train, idle_reason, _ = _idle_decision(config, config_path)
+    can_train, idle_reason, _ = _idle_decision(config, config_path, state)
     busy_training_enabled = _as_bool(training.get("busy_training_enabled"), default=True)
     idle_timeout_seconds = int(training.get("idle_training_max_seconds") or 0)
     busy_timeout_seconds = int(training.get("busy_training_max_seconds") or 600)
@@ -336,7 +406,12 @@ def run_once(config_path: Path) -> int:
 def run_watch(config_path: Path) -> int:
     while True:
         config = _load_config(config_path)
-        _, _, interval = _idle_decision(config, config_path)
+        base_dir = config_path.parent
+        training = config.get("local_training", {}) or {}
+        state_path = _resolve(base_dir, str(training.get("state_path") or "training/reply_gate_train_state.json"))
+        state = _load_state(state_path)
+        _, _, interval = _idle_decision(config, config_path, state)
+        _save_state(state_path, state)
         run_once(config_path)
         time.sleep(max(interval, 60))
 
