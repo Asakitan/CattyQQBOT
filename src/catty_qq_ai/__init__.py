@@ -1960,20 +1960,21 @@ def _expression_repeat_message(bot: Bot, event: MessageEvent) -> Message | None:
 def _semantic_reply_split_prompt() -> str:
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
     return (
-        "QQ 回复分段硬规则（整套 prompt 里最容易被你忽略的硬要求，请认真执行）："
-        f"按真实 QQ 群友连发短消息的节奏分段——人类发 QQ 时一个意思也常常拆成 2~{max_chunks} 条短消息，"
-        "比如『哈？？』『主人这题太缺德了喵』分两条发，而不是『哈？？主人这题太缺德了喵』堆一句。"
-        "所以你写完后，只要回复**不止一个超短句**（>15 字、或有明显语气转折/动作描写/主语切换），"
-        f"就**必须**拆成 2~{max_chunks} 条 QQ 消息，不许全挤成一整段。"
-        "拆分方法两种**都行**（系统都能接住，你挑顺手的）："
-        f"(A) 在两条之间单独占一行输出 {REPLY_SPLIT_MARKER}；"
-        "(B) 直接用换行符 \\n 分隔（每条短消息占一行，自然换行就行，不用 marker）。"
-        "示例（请按这个粒度拆）："
-        "整段 『哈？？主人你这题也太缺德了！猫猫平时是优雅蹲坑型，尾巴盘好、耳朵警戒，结束还要疯狂埋埋，绝不承认会炸毛喵！』 "
-        "应拆为 3 条（像群友真实连发的节奏）："
-        "『哈？？』 / 『主人你这题也太缺德了喵』 / 『猫猫平时是优雅蹲坑型，尾巴盘好、结束还要疯狂埋埋，绝不承认会炸毛喵！』。"
-        "被拆的前几条结尾少用句号/感叹号，像群友连发短消息那样自然。"
-        "确实只是一个超短句（<10 字、单一情绪反应）才单条；不要把一整段挤成一条，也不要为了凑数硬灌长。"
+        "QQ 回复分段规则——按真实人类节奏拆，不要过度拆碎也不要全挤一团："
+        "判断标准：把回复念出来，听起来像『一气呵成』还是『有几个独立轮次』？"
+        "【一气呵成 → 单条】几个短句串成一个完整想法（看到图+评论这张+说没识别+让重发，全是同一个意思的展开），"
+        "用逗号/句号连成一条 QQ 消息发，不要每短句单切。"
+        "【真有几个轮次 → 拆 2~3 条】对前文的强反应 + 接下来要说的新事情；技术结论 + 后续追问；强情绪 + 话题展开。"
+        "**反例**（过度拆，禁止这样）：『这个表情猫猫看到了』『呆呆小仓鼠那张嘛』『但题目那张没识别出』『主人重发』"
+        "——一个完整想法被切碎，应合成一条：『这个表情看到啦～呆呆小仓鼠那张挺无辜，但题目那张没识别出，主人重发一次猫猫马上做』。"
+        "**正例**（自然拆 3 条）：『哈？？』『主人你这题也太缺德了喵』『猫猫平时是优雅蹲坑型，尾巴盘好、结束还要疯狂埋埋，绝不承认会炸毛喵！』"
+        "——『反应』『吐槽』『话题展开』三个真实轮次。"
+        f"拆分方法两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
+        "被拆的前几条结尾少用句号/感叹号，自然些。"
+        f"上限 {max_chunks} 条；超短回复（<15 字）单条。"
+        "**重要：QQ 群是纯文本环境，完全不渲染 LaTeX/Markdown**——不要输出 `\\[`、`\\frac`、`\\sqrt`、`\\int`、`**加粗**`、` ```代码块``` ` 这类标记，群友看到就是一堆反斜杠。"
+        "技术回答（数学/代码/公式）用 Unicode 符号和纯文本表达：x² x³ ⁻¹ ½ × ÷ ∫ √ π ∞ → ≤ ≥ ≠ Δ Σ；或者用 x^2、sqrt(x)、int_0^1 这种 plain text；"
+        "代码就直接写代码内容，不要 ``` 包；分点用换行+「1)」「2)」即可（系统会按段落保持完整，不会按行拆消息）。"
     )
 
 
@@ -2949,6 +2950,38 @@ async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
         return True
 
 
+_TECHNICAL_FORMATTING_PATTERNS = (
+    r"\[",
+    r"\]",
+    r"\(",
+    r"\)",
+    r"\frac",
+    r"\sqrt",
+    r"\int",
+    r"\sum",
+    r"\lim",
+    r"\boxed",
+    r"\ln",
+    r"\sin",
+    r"\cos",
+    r"\to",
+    "$$",
+    "```",
+)
+
+
+def _looks_like_qq_short_chat(reply: str) -> bool:
+    """判断回复是不是 QQ 短聊节奏(可以按换行拆),而不是长技术答(分点/公式/代码块)。"""
+    if len(reply) > 240:
+        return False  # 长回复多半是技术答,整段保持
+    if any(m in reply for m in _TECHNICAL_FORMATTING_PATTERNS):
+        return False  # 有 LaTeX/代码块标记 = 技术格式化,不要拆
+    # 分点列表(出现 2 个及以上 "1. " / "- " / "* " 行首)= 技术列表,不拆
+    if len(re.findall(r"(?:^|\n)\s*(?:[-*]|\d+\.)\s", reply)) >= 2:
+        return False
+    return True
+
+
 def _reply_chunks(reply: str) -> list[str]:
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
 
@@ -2962,16 +2995,17 @@ def _reply_chunks(reply: str) -> list[str]:
         chunks = [chunk for chunk in chunks if chunk]
         return _cap_reply_chunks(chunks, max_chunks=max_chunks)
 
-    # 路径 2:AI 没用 marker,但用换行/空行表达"想拆"
-    # —— 人类发 QQ 时一个意思也常常拆 2-3 条短消息,AI 用 \n / \n\n 表达自然分段
-    # 触发条件:回复里有换行,且换行分出来的每段都不过长(不是分点列表/代码块那种)
-    segments = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
-    if len(segments) >= 2 and all(len(seg) <= 200 for seg in segments):
-        for index in range(len(segments) - 1):
-            segments[index] = segments[index].rstrip(TRAILING_CHAT_PUNCTUATION)
-        return _cap_reply_chunks(segments, max_chunks=max_chunks)
+    # 路径 2:AI 用换行表达"QQ 节奏拆分"(短回复且无技术格式标记)
+    # —— 严格限定为短聊场景,避免长技术答里的 \n 被错拆
+    if _looks_like_qq_short_chat(reply):
+        segments = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
+        # 每段也要短(≤80 字符),才像 QQ 连发节奏;否则更可能是段落不是消息
+        if 2 <= len(segments) <= max_chunks and all(len(seg) <= 80 for seg in segments):
+            for index in range(len(segments) - 1):
+                segments[index] = segments[index].rstrip(TRAILING_CHAT_PUNCTUATION)
+            return _cap_reply_chunks(segments, max_chunks=max_chunks)
 
-    # 路径 3:既无 marker 也无意义换行 —— 走字符长度兜底
+    # 路径 3:走 split_reply 字符长度兜底(长技术答走这里,在合理换行处切大段)
     return split_reply(reply, config.catty_reply_max_chars, max_chunks=max_chunks)
 
 
