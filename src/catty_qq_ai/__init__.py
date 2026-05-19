@@ -2771,12 +2771,16 @@ async def _take_due_group_filter_batch(
 
 
 async def _should_request_semantic_reply_split(incoming: ExtractedMessage) -> bool:
-    if not config.catty_reply_human_split_enabled:
-        return False
-    min_chars = max(config.catty_reply_human_split_min_chars, 1)
-    if len(incoming.history_content.strip()) < min_chars:
-        return False
-    return True
+    """决定是否给主 AI 挂"允许按语义拆成多条消息"的 prompt。
+
+    回复长度在调 AI 前没法知道,过去用 incoming 用户输入长度做硬阈值是错对象——
+    短问题("评价一下我"才十几字)常引出 60+ 字的长回复,但被这里直接挡掉,
+    导致整段不拆,看着不像 QQ 聊天。
+    现在统一只看 enabled,让 prompt 始终挂上;prompt 里已写明
+    "只有回复预计不少于约 {min_chars} 个中文字符才拆",AI 自己看着办。
+    """
+    del incoming
+    return bool(config.catty_reply_human_split_enabled)
 
 
 def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
