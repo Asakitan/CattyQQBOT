@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
 import re
@@ -7,10 +8,26 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+from nonebot import logger
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, PrivateMessageEvent
 
 from .config import Config
 from .reply_markers import NO_REPLY_MARKER
+
+
+def _atomic_write_text(path: Path, content: str) -> None:
+    """写到 .tmp 再 os.replace 替换目标，防止写一半被中断留下半截 JSON。"""
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    try:
+        tmp.write_text(content, encoding="utf-8")
+        tmp.replace(path)
+    except Exception:
+        try:
+            if tmp.exists():
+                tmp.unlink()
+        except OSError:
+            pass
+        raise
 
 
 OWNER_TITLE = "主人"
@@ -194,11 +211,23 @@ class MemoryStore:
         self.group_titles = dict(config.catty_group_titles)
         self.user_titles = dict(config.catty_user_titles)
         self.group_user_titles = dict(config.catty_group_user_titles)
+        self.save_debounce_seconds = max(
+            float(getattr(config, "catty_memory_save_debounce_seconds", 2.0) or 2.0),
+            0.1,
+        )
         self._data: dict[str, Any] = {"users": {}, "groups": {}, "images": {}, "anger": {}}
+        self._dirty: bool = False
         if self.enabled:
             self._load()
 
     def refresh(self) -> None:
+        # 热重载前先把内存里待落盘的脏数据写下去，避免被 _load 直接覆盖。
+        if self._dirty:
+            try:
+                self._persist_now()
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"memory_store: refresh pre-flush failed: {exc}")
+            self._dirty = False
         self._data = {"users": {}, "groups": {}, "images": {}, "anger": {}}
         if self.enabled:
             self._load()
@@ -253,6 +282,20 @@ class MemoryStore:
                 target[entity_id] = data
 
     def _save(self) -> None:
+        """标记内存有变更，等 background_flush_loop 或 flush_sync 真正落盘。
+
+        语义保持和旧版兼容：调用方只管"我改完了"，不必关心 I/O。
+        debounce 把高频小改动合并成每 save_debounce_seconds 一次写盘。
+        """
+        if not self.enabled:
+            return
+        self._dirty = True
+
+    def _persist_now(self) -> None:
+        """全量同步把 self._data 落盘（index + 每个 user/group 一个文件）。
+
+        所有文件都走 atomic write，防止写到一半被中断后留下损坏 JSON。
+        """
         if not self.enabled:
             return
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -267,13 +310,41 @@ class MemoryStore:
             "user_storage_dir": str(self.user_storage_dir),
             "group_storage_dir": str(self.group_storage_dir),
         }
-        self.path.write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        _atomic_write_text(self.path, json.dumps(index, ensure_ascii=False, indent=2) + "\n")
         for user_id, user in self._data.get("users", {}).items():
             if isinstance(user, dict):
                 self._write_entity_file(self._user_file(str(user_id)), "user_id", str(user_id), user)
         for group_id, group in self._data.get("groups", {}).items():
             if isinstance(group, dict):
                 self._write_entity_file(self._group_file(str(group_id)), "group_id", str(group_id), group)
+
+    def flush_sync(self) -> bool:
+        """如果有脏数据则真正落盘。返回是否实际写了。供 shutdown / hot-reload 钩子调用。"""
+        if not self.enabled:
+            self._dirty = False
+            return False
+        if not self._dirty:
+            return False
+        try:
+            self._persist_now()
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"memory_store: flush_sync failed: {exc}")
+            return False
+        finally:
+            self._dirty = False
+        return True
+
+    async def background_flush_loop(self) -> None:
+        """后台 debounce flush。在 on_startup 里 create_task 起来即可。"""
+        while True:
+            try:
+                await asyncio.sleep(self.save_debounce_seconds)
+                if self._dirty:
+                    self.flush_sync()
+            except asyncio.CancelledError:
+                break
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"memory_store: background flush failed: {exc}")
 
     def group_ids(self) -> list[str]:
         groups = self._data.get("groups", {})
@@ -308,7 +379,7 @@ class MemoryStore:
             "updated_at": _now(),
             "data": data,
         }
-        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        _atomic_write_text(path, json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
 
     def _anger_key(self, event: MessageEvent) -> str:
         if isinstance(event, GroupMessageEvent):

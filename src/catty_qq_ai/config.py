@@ -211,6 +211,8 @@ class Config(BaseModel):
     catty_memory_reply_boost_min_corpus_messages: int = 80
     catty_memory_reply_boost_probability_bonus: float = 0.15
     catty_memory_reply_boost_max_probability: float = 0.95
+    # 记忆落盘 debounce：把高频群消息触发的 _save() 合并成最多每 N 秒一次实际写盘。
+    catty_memory_save_debounce_seconds: float = 2.0
     catty_special_group_active_window_enabled: bool = False
     catty_special_group_active_minutes_per_hour: int = 10
     catty_group_titles: dict[str, str] = Field(default_factory=dict)

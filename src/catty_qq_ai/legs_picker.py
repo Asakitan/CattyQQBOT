@@ -60,6 +60,8 @@ _LEG_TOUCH_VERBS = r"(?:吃|啃|舔|嗦|嚼|含|吸|咬|亲|闻|嗅|摸|捏|揉)
 _LEG_PARTS_SAFE = r"(?:大腿|小腿|玉腿|玉足|腿腿|脚丫|脚丫子|脚趾|脚脚|jio|jiojio)"
 # 单字脚/腿要求紧贴代词使用
 _LEG_PARTS_BARE = r"(?:腿|脚)"
+# 明确“要福利”的说法可以走腿图福利；单字“福/看福”不放这里，交给主 AI 语义判断。
+_LEG_WELFARE_PARTS = r"(?:福利(?!院)|福力|福图)"
 
 LEG_TRIGGER_PATTERNS: tuple[re.Pattern[str], ...] = (
     # 1) （可选代词）+ 看类动词 +（可选代词）+ 单字腿/脚
@@ -88,6 +90,12 @@ LEG_TRIGGER_PATTERNS: tuple[re.Pattern[str], ...] = (
     ),
     # 5) 极明确的萌叠词，单独出现也算
     re.compile(r"腿腿|脚脚|jiojio", re.IGNORECASE),
+    # 6) 明确索要福利：来点福利 / 发点福利 / 整点福图 / 看看福利
+    re.compile(
+        rf"(?:来点|整点|发点|上点|给点|求|要|看看|看一眼|看一下)\s*"
+        rf"(?:{_LEG_PRONOUN}\s*)?{_LEG_WELFARE_PARTS}",
+        re.IGNORECASE,
+    ),
 )
 
 

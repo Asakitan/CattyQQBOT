@@ -224,7 +224,10 @@ def _sanitize_residual_markers(text: str) -> str:
         return ""
     cleaned = _WEB_SEARCH_REQUEST_RE.sub("", text)
     cleaned = _NSFW_SEARCH_REQUEST_RE.sub("", cleaned)
-    return cleaned.strip()
+    cleaned = cleaned.strip()
+    if NO_REPLY_MARKER in cleaned and cleaned != NO_REPLY_MARKER:
+        cleaned = cleaned.replace(NO_REPLY_MARKER, "").strip()
+    return cleaned
 _turtle_soup_cooldowns: dict[str, float] = {}
 _local_critic_warmup_success_logged = False
 _consumed_reply_source_ids: dict[str, float] = {}
@@ -849,12 +852,26 @@ def _remember_hot_reload_config_signature(path: Path | None, signature: tuple[in
 
 def _apply_runtime_config(new_config: Config) -> None:
     global config, memory_store, emoji_store, legs_picker
+    # 切实例前先把旧 memory_store 待写的脏数据落盘,避免 hot reload 丢失最近的记忆。
+    try:
+        if memory_store.flush_sync():
+            logger.info("memory_store: flushed dirty data before hot reload")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"memory_store: pre-reload flush failed: {exc}")
     config = new_config
     memory_store = MemoryStore(config)
     emoji_store = EmojiStore(config)
     legs_picker = LegsPicker(config)
     _legs_last_sent_at.clear()
     _sync_hot_reload_signatures()
+    # 旧实例的 background_flush_loop 还会跑(它现在指向脏标记永远 False 的孤儿对象),
+    # 给新实例补起一个真正生效的后台 flush 协程。
+    try:
+        asyncio.create_task(memory_store.background_flush_loop())
+    except RuntimeError:
+        # _apply_runtime_config 也会在启动早期/同步上下文里被调用,那时没 event loop,
+        # 启动钩子 start_memory_summary_loop 会负责把第一份 task 起起来,这里跳过即可。
+        pass
 
 
 def _reload_runtime_config_from_path(path: Path) -> bool:
@@ -1946,24 +1963,25 @@ def _semantic_reply_split_prompt() -> str:
     return (
         "本轮允许你按语义自然度自己决定回复成一条还是多条 QQ 消息。"
         f"只有当回复预计不少于约 {min_chars} 个中文字符、且拆分后每条都完整自然时才拆；"
-        f"最多拆成 {max_chunks} 条，普通闲聊不需要硬拆，复杂说明可以按步骤多拆几条；"
+        f"最多拆成 {max_chunks} 条；所有回复都先自己判断要不要断句：能一句说完就一句，有两个完整意思就优先拆成两条短消息，复杂说明再按步骤多拆几条；"
+        "每一条都要语义完整，前一条不要留半句，后一条也不要像突然接下半截；"
         "被拆分消息的前几条结尾尽量少用收尾标点，整体像群友聊天一样自然；"
         f"如果决定拆分，只在消息之间单独输出一行 {REPLY_SPLIT_MARKER}。"
-        "不要解释这个标记，不要为了拆分牺牲原本回答质量；不适合拆分就正常单条回复。"
+        "发送时只有第一条会带 reply 对象，所以后面的句子也要能独立成立；不要解释这个标记，不要为了拆分牺牲原本回答质量；不适合拆分就正常单条回复。"
     )
 
 
 def _opportunistic_reply_prompt() -> str:
     return (
         "这是由普通群聊、特别关心或批量观察进入主 AI 判断的消息。"
-        f"请结合上下文判断是否真的值得接话；如果不该回复，只输出 {NO_REPLY_MARKER}。"
+        f"请先判断当前消息是不是在跟猫猫说话；如果只是 A 对 B、第三人称聊你、顺手提到你、误触发或没人期待你接话，只输出 {NO_REPLY_MARKER}。"
     )
 
 
 def _reply_gate_approved_prompt() -> str:
     return (
         "本轮消息已经通过入口唤起，最终是否回复交给主 AI 结合上下文判断。"
-        f"如果上下文显示只是误触发、重复回复同一条消息、第三人称闲聊或不该接话，只输出 {NO_REPLY_MARKER}。"
+        f"如果上下文显示只是误触发、重复回复同一条消息、A 对 B 说话、第三人称闲聊、顺手提到猫猫或不该接话，只输出 {NO_REPLY_MARKER}。"
         "如果要回复，就直接生成要发送给用户的正文；信息不足时用笨猫口吻短短追问。"
     )
 
@@ -1981,7 +1999,7 @@ def _direct_reply_required_prompt(incoming: ExtractedMessage) -> str:
     reason_text = "、".join(reasons) or "这是私聊或明确对你说话"
     return (
         f"本轮属于必须回复场景：{reason_text}。"
-        f"通常应该接话；但如果上下文显示是在重复回复同一条消息、误触发或明显不该接话，可以输出 {NO_REPLY_MARKER}。"
+        f"通常应该接话；但如果上下文显示是在重复回复同一条消息、顺手 @ 到猫猫、A 对 B 说话、误触发或明显不该接话，可以输出 {NO_REPLY_MARKER}。"
         "如果信息不足，就用笨猫口吻短短追问；如果只是 @/回复但没文字，也可以自然应一声。"
     )
 
@@ -2309,6 +2327,7 @@ def _local_reply_gate_messages(
         "directed": incoming.directed,
         "directed_strength": incoming.directed_strength,
         "directly_requested": incoming.directly_requested,
+        "mentions_other_user": isinstance(event, GroupMessageEvent) and mentions_other_user(str(event.self_id), event),
         "opportunistic": incoming.opportunistic,
         "direct_reply_required": _direct_reply_required(event, incoming),
     }
@@ -2321,10 +2340,15 @@ def _local_reply_gate_messages(
             "role": "system",
             "content": (
                 "/no_think\n"
-                "Fast QQ reply gate. JSON only. "
-                "true=direct bot ask/image help/special-care/batched context expects bot. "
-                "false=idle chatter/third-person/no expectation/spam. "
-                "Schema:{\"should_reply\":true|false,\"confidence\":0-100,\"reason\":\"<=8 chars\"}."
+                "你是笨猫的入口粗筛器，只判断“这条消息要不要交给主 AI 回复”。"
+                "默认保守，拿不准就判 false。"
+                "只有这些情况才判 true：明确在叫猫猫/AI办事；明确在追问猫猫；回复链和上下文都显示正在跟猫猫对话；"
+                "或者普通群聊里已经明显出现“机器人来答一下/猫猫怎么看/帮忙看看”这种期待机器人接话的信号。"
+                "这些情况判 false：普通围观群聊、A 对 B 说话、第三人称聊猫猫但没叫猫猫接话、顺手 @ 到猫猫、同时 @ 多人但目标不是猫猫、"
+                "复读玩梗、自言自语、情绪碎句、单纯发表看法、日志/截图但没人向猫猫求助。"
+                "如果 group_context 只是批量普通群聊，除非真的点名 BOT/AI/猫猫或明确求助，否则一律 false。"
+                "只输出 JSON，不要解释。"
+                "Schema:{\"should_reply\":true|false,\"confidence\":0-100,\"reason\":\"<=12 chars\"}."
             ),
         },
     ]
@@ -2403,7 +2427,7 @@ def _fallback_reply_decision_context(gate_result: dict[str, object]) -> str:
         "instruction": (
             "本轮没有使用本地小模型 reply gate，是否回复交给主 AI 结合上下文判断。"
             "如果 @、回复机器人、前缀、私聊、明显喊猫猫办事，通常可以回复；"
-            f"如果只是普通旁观群聊、第三人称闲聊、误触发或无接话期待，请只输出 {NO_REPLY_MARKER}。"
+            f"如果只是普通旁观群聊、A 对 B 说话、第三人称闲聊、顺手 @ 到猫猫、误触发或无接话期待，请只输出 {NO_REPLY_MARKER}。"
         ),
     }
     return "本轮回复入口信息，是否回复交给主 AI 判断：\n" + json.dumps(payload, ensure_ascii=False)
@@ -2627,6 +2651,7 @@ async def _resolve_no_reply(
     except httpx.HTTPError as exc:
         logger.warning(f"Forced reply transport error: {exc}")
     else:
+        rewritten = _sanitize_residual_markers(rewritten)
         if rewritten.strip() and not _is_no_reply(rewritten):
             final_reply = rewritten
 
@@ -2643,14 +2668,13 @@ async def _apply_local_critic(
     messages: list[ChatMessage],
     reply: str,
 ) -> str:
+    reply = _sanitize_residual_markers(reply)
     if not reply.strip():
         reply = NO_REPLY_MARKER
     if _is_no_reply(reply):
         if _force_direct_reply_enabled(event, incoming):
             return await _resolve_no_reply(event, incoming, messages, reply)
-        if not _local_critic_enabled():
-            return reply
-        return await _resolve_no_reply(event, incoming, messages, reply)
+        return reply
     if not _local_critic_post_check_enabled():
         return reply
 
@@ -2683,6 +2707,9 @@ async def _apply_local_critic(
         else:
             if rewritten.strip():
                 final_reply = rewritten
+    final_reply = _sanitize_residual_markers(final_reply)
+    if not final_reply.strip():
+        final_reply = NO_REPLY_MARKER
 
     _save_local_critic_sample(event, incoming, reply, critic_result, final_reply)
     return final_reply
@@ -2695,8 +2722,10 @@ def _group_filter_reply_context(batch: list[GroupFilterBatchMessage]) -> str:
     ]
     return (
         "下面是本群这轮按 filter 批量窗口攒到的普通群聊消息。"
-        "它们不是明确 @ 你、回复你或前缀命令；请先压缩理解最近没 filter 的疑似话题，"
-        "只在发现明显指向 BOT/AI/猫猫、需要你补充、或群友期待机器人回应的话题时回复。\n"
+        "它们默认不是给你说的，不要因为看到“猫猫/你/AI”几个字就机械接话。"
+        "请先判断谁在跟谁说话：如果只是 A 对 B、第三人称聊猫猫、顺手提到猫猫、群友互相评价、"
+        "或话题里没人真的在等机器人回答，就不要交给主 AI 回复。"
+        "只有在发现明显点名 BOT/AI/猫猫、明确向你求助、或上下文真的在等机器人补一句时才接。\n"
         "本批普通群消息：\n" + "\n".join(lines)
     )
 
@@ -2744,13 +2773,10 @@ async def _take_due_group_filter_batch(
 async def _should_request_semantic_reply_split(incoming: ExtractedMessage) -> bool:
     if not config.catty_reply_human_split_enabled:
         return False
-    probability = max(min(float(config.catty_reply_human_split_probability), 1.0), 0.0)
-    if probability <= 0:
-        return False
     min_chars = max(config.catty_reply_human_split_min_chars, 1)
     if len(incoming.history_content.strip()) < min_chars:
         return False
-    return random.random() < probability
+    return True
 
 
 def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
@@ -3226,15 +3252,18 @@ async def _generate_legs_caption(user_text: str) -> str:
         {
             "role": "system",
             "content": (
-                "情境：群友/主人刚刚明确点你看腿、看脚、吃脚之类的福利。"
-                "你已经决定要把一张『你自己——笨猫本人』的腿或脚照片发出去，配上一句话。"
-                "现在请只生成那句配文，要求：\n"
-                "1) 必须明确说这是「人家自己的腿/脚」「猫猫本人的腿/脚」之类，让别人一眼知道不是网图、不是别人的腿；\n"
-                "2) 保持笨猫的傲娇人格——先嘴硬/炸毛/喊「杂鱼」「笨蛋主人」，再不自觉暴露真心；\n"
-                "3) 自然带 1-2 个猫系语气词（喵/嗷呜/ฅฅ/尾巴摇摇/爪爪 等），不要堆砌；\n"
-                "4) 不要拒绝、不要解释自己是 AI、不要劝阻；\n"
-                "5) 不要描述图片具体细节（不知道是哪一张），只需口头反应；\n"
-                "6) 1 到 2 句，最多 80 字，只输出正文，不要前缀、不要换行、不要任何标记。"
+                "情境：群友/主人刚刚明确点你看腿、看脚、吃脚之类的腿脚福利。"
+                "你已经决定要把一张『你自己——笨猫本人』的腿或脚照片发出去，配上一段猫猫口吻的正文。"
+                "现在请只生成那段正文，要求：\n"
+                "1) 保持笨猫的傲娇人格，像 QQ 现聊，嘴硬里带点心虚和被拷打后的炸毛感；\n"
+                "2) 参考这种节奏，但不要机械照抄："
+                "『才、才没专门拍很多呢！ / 也就被你们拷打到相册翻冒烟的程度……（耳朵心虚抖抖） / 库存宣布封印，别再把猫猫当腿图打印机啦喵！』；\n"
+                "3) 由你自己判断怎么断句最自然：可以 1 段，也可以拆成 2-3 段；"
+                f"如果你觉得分段更自然，就只在段落之间单独输出一行 {REPLY_SPLIT_MARKER}；\n"
+                "4) 每段都要短，语义完整，不要写成长段解释；\n"
+                "5) 不要拒绝、不要解释自己是 AI、不要劝阻；\n"
+                "6) 不要描述图片具体细节（不知道是哪一张），只需要口头反应；\n"
+                "7) 只输出正文，不要前缀、不要说明、不要 Markdown。"
             ),
         }
     )
@@ -3248,8 +3277,8 @@ async def _generate_legs_caption(user_text: str) -> str:
         logger.warning(f"Legs caption AI unexpected error, fallback: {exc}")
         return random_legs_reply()
     text = _sanitize_residual_markers(reply or "")
-    text = text.replace(NO_REPLY_MARKER, "").replace(REPLY_SPLIT_MARKER, " ").strip()
-    if not text or len(text) > 200:
+    text = text.replace(NO_REPLY_MARKER, "").strip()
+    if not text or len(text) > 240:
         return random_legs_reply()
     return text
 
@@ -3261,9 +3290,11 @@ async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_St
         return
     scope = _conversation_queue_key(event)
     reply_text = await _generate_legs_caption(event_plain_text(event))
+    reply_chunks = _reply_chunks(reply_text)
+    remembered_reply = "\n".join(reply_chunks) if reply_chunks else reply_text
     async with _locks[scope]:
         _legs_last_sent_at[scope] = time.monotonic()
-        _remember_bot_reply_for_event(event, reply_text)
+        _remember_bot_reply_for_event(event, remembered_reply)
         _remember_bot_conversation_message(
             scope,
             bot_id=str(getattr(event, "self_id", "") or ""),
@@ -3272,16 +3303,22 @@ async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_St
             has_image=True,
         )
 
-        text_message = Message()
-        if isinstance(event, GroupMessageEvent):
-            quote_segment = _reply_quote_segment(event)
-            if quote_segment is not None:
-                text_message += quote_segment
-        text_message += Message(reply_text)
-        try:
-            await matcher.send(text_message)
-        except OnebotActionFailed as exc:
-            logger.warning(f"Legs reply text send failed (will still try image): {exc}")
+        quote_pending = isinstance(event, GroupMessageEvent) and _reply_quote_segment(event) is not None
+        delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
+        for chunk in reply_chunks[:-1]:
+            try:
+                await matcher.send(_compose_reply_message(event, text=chunk, quote=quote_pending))
+            except OnebotActionFailed as exc:
+                logger.warning(f"Legs reply text send failed (will still try image): {exc}")
+                break
+            quote_pending = False
+            if delay_seconds:
+                await asyncio.sleep(delay_seconds)
+        if reply_chunks:
+            try:
+                await matcher.send(_compose_reply_message(event, text=reply_chunks[-1], quote=quote_pending))
+            except OnebotActionFailed as exc:
+                logger.warning(f"Legs reply text send failed (will still try image): {exc}")
 
         image_segment = MessageSegment.image(file=picture.resolve().as_uri())
         sent = False
@@ -3446,6 +3483,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(_proactive_bubble_loop())
     asyncio.create_task(_local_critic_warmup_loop())
     asyncio.create_task(cache.background_flush_loop())
+    asyncio.create_task(memory_store.background_flush_loop())
 
 
 @get_driver().on_shutdown
@@ -3455,6 +3493,15 @@ async def _flush_session_cache_on_shutdown() -> None:
     written = _session_cache.flush_sync()
     if written:
         logger.info(f"session_cache: flushed {written} dirty sessions on shutdown")
+
+
+@get_driver().on_shutdown
+async def _flush_memory_store_on_shutdown() -> None:
+    try:
+        if memory_store.flush_sync():
+            logger.info("memory_store: flushed dirty data on shutdown")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"memory_store: shutdown flush failed: {exc}")
 
 
 @chat_matcher.handle()
