@@ -1958,22 +1958,22 @@ def _expression_repeat_message(bot: Bot, event: MessageEvent) -> Message | None:
 
 
 def _semantic_reply_split_prompt() -> str:
-    min_chars = max(config.catty_reply_human_split_min_chars, 1)
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
     return (
         "QQ 回复分段硬规则（整套 prompt 里最容易被你忽略的硬要求，请认真执行）："
-        f"先按猫猫人格短回复，不为拆而拆；但写完后只要回复整体 ≥ {min_chars} 个中文字符、"
-        "且里面有 2 个独立完整的意思（典型信号：感叹号/问号/句号后又起了新视角、新主语，"
-        "或从『即时反应』切到『具体描述』、从『结论』切到『感想』），"
-        f"就**必须**拆成 2~{max_chunks} 条 QQ 消息发，不许全挤成一整段。"
-        f"拆分方法：在两条之间单独占一行输出 {REPLY_SPLIT_MARKER}；每条都要语义独立、单独看也成立。"
+        f"按真实 QQ 群友连发短消息的节奏分段——人类发 QQ 时一个意思也常常拆成 2~{max_chunks} 条短消息，"
+        "比如『哈？？』『主人这题太缺德了喵』分两条发，而不是『哈？？主人这题太缺德了喵』堆一句。"
+        "所以你写完后，只要回复**不止一个超短句**（>15 字、或有明显语气转折/动作描写/主语切换），"
+        f"就**必须**拆成 2~{max_chunks} 条 QQ 消息，不许全挤成一整段。"
+        "拆分方法两种**都行**（系统都能接住，你挑顺手的）："
+        f"(A) 在两条之间单独占一行输出 {REPLY_SPLIT_MARKER}；"
+        "(B) 直接用换行符 \\n 分隔（每条短消息占一行，自然换行就行，不用 marker）。"
         "示例（请按这个粒度拆）："
         "整段 『哈？？主人你这题也太缺德了！猫猫平时是优雅蹲坑型，尾巴盘好、耳朵警戒，结束还要疯狂埋埋，绝不承认会炸毛喵！』 "
-        "明显是『对问题的即时反应』+『对自己的具体描述』两个意思，应拆为："
-        f"第一条 『哈？？主人你这题也太缺德了』，{REPLY_SPLIT_MARKER}，"
-        "第二条 『猫猫平时是优雅蹲坑型，尾巴盘好、耳朵警戒，结束还要疯狂埋埋，绝不承认会炸毛喵！』。"
+        "应拆为 3 条（像群友真实连发的节奏）："
+        "『哈？？』 / 『主人你这题也太缺德了喵』 / 『猫猫平时是优雅蹲坑型，尾巴盘好、结束还要疯狂埋埋，绝不承认会炸毛喵！』。"
         "被拆的前几条结尾少用句号/感叹号，像群友连发短消息那样自然。"
-        "确实只有一个意思，或回复短于阈值，才单条；不要为了凑长把一句话灌成两条；不要解释这个 marker。"
+        "确实只是一个超短句（<10 字、单一情绪反应）才单条；不要把一整段挤成一条，也不要为了凑数硬灌长。"
     )
 
 
@@ -2951,16 +2951,28 @@ async def _send_proactive_bubble(bot: Bot, group_id: str) -> bool:
 
 def _reply_chunks(reply: str) -> list[str]:
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
-    if REPLY_SPLIT_MARKER not in reply:
-        return split_reply(reply, config.catty_reply_max_chars, max_chunks=max_chunks)
 
-    chunks: list[str] = []
-    for part in reply.split(REPLY_SPLIT_MARKER):
-        chunks.extend(split_reply(part, config.catty_reply_max_chars, max_chunks=max_chunks))
-    for index in range(len(chunks) - 1):
-        chunks[index] = chunks[index].rstrip(TRAILING_CHAT_PUNCTUATION)
-    chunks = [chunk for chunk in chunks if chunk]
-    return _cap_reply_chunks(chunks, max_chunks=max_chunks)
+    # 路径 1:AI 字面输出了 REPLY_SPLIT_MARKER
+    if REPLY_SPLIT_MARKER in reply:
+        chunks: list[str] = []
+        for part in reply.split(REPLY_SPLIT_MARKER):
+            chunks.extend(split_reply(part, config.catty_reply_max_chars, max_chunks=max_chunks))
+        for index in range(len(chunks) - 1):
+            chunks[index] = chunks[index].rstrip(TRAILING_CHAT_PUNCTUATION)
+        chunks = [chunk for chunk in chunks if chunk]
+        return _cap_reply_chunks(chunks, max_chunks=max_chunks)
+
+    # 路径 2:AI 没用 marker,但用换行/空行表达"想拆"
+    # —— 人类发 QQ 时一个意思也常常拆 2-3 条短消息,AI 用 \n / \n\n 表达自然分段
+    # 触发条件:回复里有换行,且换行分出来的每段都不过长(不是分点列表/代码块那种)
+    segments = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
+    if len(segments) >= 2 and all(len(seg) <= 200 for seg in segments):
+        for index in range(len(segments) - 1):
+            segments[index] = segments[index].rstrip(TRAILING_CHAT_PUNCTUATION)
+        return _cap_reply_chunks(segments, max_chunks=max_chunks)
+
+    # 路径 3:既无 marker 也无意义换行 —— 走字符长度兜底
+    return split_reply(reply, config.catty_reply_max_chars, max_chunks=max_chunks)
 
 
 def _cap_reply_chunks(chunks: list[str], *, max_chunks: int) -> list[str]:
