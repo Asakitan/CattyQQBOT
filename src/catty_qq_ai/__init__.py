@@ -45,6 +45,7 @@ from .emoji_store import EmojiEntry, EmojiStore
 from .legs_picker import LegsPicker, is_legs_trigger, random_legs_reply
 from .memory import MemoryStore
 from .openai_client import (
+    MCBusyError,
     OpenAICompatibleError,
     analyze_images_for_reply,
     assess_user_anger,
@@ -74,6 +75,7 @@ from .reply_markers import (
     TRAILING_CHAT_PUNCTUATION,
     extract_emoji_query as _extract_emoji_query,
 )
+from . import activity_feed
 from .session_cache import SessionCache, format_session_list_for_owner
 from .star_resonance_memory import build_star_resonance_context
 from .strinova_memory import build_strinova_context
@@ -104,6 +106,31 @@ __plugin_meta__ = PluginMetadata(
 
 
 config = get_plugin_config(Config)
+
+
+def _apply_bot_cpu_affinity(cfg: Config) -> None:
+    """把 bot 主进程绑到指定核心，让 Ollama 用其他核。Windows 专用，失败静默。"""
+    raw = getattr(cfg, "catty_cpu_affinity_mask", 0)
+    if not raw or os.name != "nt":
+        return
+    try:
+        mask = int(raw, 0) if isinstance(raw, str) else int(raw)
+    except (TypeError, ValueError):
+        return
+    if mask <= 0:
+        return
+    try:
+        import ctypes
+        hproc = ctypes.windll.kernel32.GetCurrentProcess()
+        ok = ctypes.windll.kernel32.SetProcessAffinityMask(hproc, mask)
+        if ok:
+            logger.info(f"catty bot process affinity set to {hex(mask)}")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"failed to set catty bot affinity: {exc}")
+
+
+_apply_bot_cpu_affinity(config)
+
 memory_store = MemoryStore(config)
 emoji_store = EmojiStore(config)
 legs_picker = LegsPicker(config)
@@ -949,7 +976,17 @@ async def _resolve_model_requested_web_search(
         },
         {"role": "system", "content": web_search_context},
     ]
-    resolved_reply = await chat_completion(config, followup_messages)
+    try:
+        resolved_reply = await chat_completion(config, followup_messages)
+    except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
+        logger.warning(
+            f"Web search followup AI failed ({exc.__class__.__name__}: {exc}); using stripped main reply"
+        )
+        stripped = _sanitize_residual_markers(reply).strip()
+        fallback_text = stripped or (
+            f"喵呜～人家想去搜「{query}」但二次问 AI 时超时了嗷呜～主人过会儿再试 (尾巴垂垂)"
+        )
+        return fallback_text, followup_messages
     resolved_reply = _sanitize_residual_markers(resolved_reply)
     if not resolved_reply.strip():
         resolved_reply = (
@@ -1348,7 +1385,29 @@ async def _resolve_model_requested_nsfw_search(
         {"role": "system", "content": followup_system_text},
         {"role": "system", "content": nsfw_context},
     ]
-    resolved_reply = await chat_completion(config, followup_messages)
+    try:
+        resolved_reply = await chat_completion(config, followup_messages)
+    except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
+        logger.warning(
+            f"NSFW search followup AI failed ({exc.__class__.__name__}: {exc}); using soft fallback so image segments still ship"
+        )
+        if image_segments:
+            return (
+                "哼～主人这种东西也想看喵！(脸红甩尾巴)给主人挑了几张评价高的嗷呜～ฅฅ",
+                followup_messages,
+                image_segments,
+            )
+        if kind == "video":
+            return (
+                "喵～二次问 AI 时超时了，主人自己点搜索页看看嘛 (尾巴垂垂)",
+                followup_messages,
+                [],
+            )
+        return (
+            "喵呜～想给主人搜但二次 AI 调用超时了嗷呜～换个名字再戳人家嘛 (尾巴垂垂)",
+            followup_messages,
+            [],
+        )
     resolved_reply = _sanitize_residual_markers(resolved_reply)
     if not resolved_reply.strip():
         if image_segments:
@@ -1381,6 +1440,15 @@ def _append_history(key: str, user_content: str, assistant_content: str) -> None
     elif max_messages == 0:
         history = []
     cache.set(key, history)
+    # 给训练 idle gate + dashboard conversation feed 用
+    try:
+        activity_feed.record_assistant_reply(
+            scope=key,
+            text=str(assistant_content or ""),
+            triggered_by="chat_completion",
+        )
+    except Exception:  # noqa: BLE001
+        pass
 
 
 def _build_user_content(incoming: ExtractedMessage, *, image_description: str | None = None) -> object:
@@ -2061,15 +2129,28 @@ def _ollama_native_generate_url() -> str:
     return _ollama_native_base_url() + "/api/generate"
 
 
+def _warmup_target_model() -> str:
+    """Pick the model to keep hot. Only local_critic is eligible.
+
+    ai_fallback 已在代码层面硬关闭（见 openai_client._fallback_is_configured），
+    所以即便配置里写了 fallback 模型也不再把它驻留显存。
+    """
+    if _local_critic_enabled():
+        return config.catty_local_critic_model.strip()
+    return ""
+
+
 async def _warm_local_critic_model() -> None:
     global _local_critic_warmup_success_logged
-    keep_alive = config.catty_local_critic_warmup_keep_alive.strip()
+    model = _warmup_target_model()
+    if not model:
+        return
+    keep_alive = config.catty_local_critic_warmup_keep_alive.strip() or "-1"
     payload: dict[str, object] = {
-        "model": config.catty_local_critic_model,
+        "model": model,
         "stream": False,
+        "keep_alive": keep_alive,
     }
-    if keep_alive:
-        payload["keep_alive"] = keep_alive
     timeout = max(float(config.catty_local_critic_warmup_request_timeout or 60.0), 1.0)
     client_kwargs: dict[str, object] = {"timeout": timeout, "follow_redirects": True}
     if config.catty_http_proxy.strip():
@@ -2078,25 +2159,21 @@ async def _warm_local_critic_model() -> None:
         response = await client.post(_ollama_native_generate_url(), json=payload)
     response.raise_for_status()
     if not _local_critic_warmup_success_logged:
-        logger.info(
-            "Local critic Ollama warmup loaded model %s with keep_alive=%s",
-            config.catty_local_critic_model,
-            keep_alive or "default",
-        )
+        logger.info("Ollama warmup loaded model %s with keep_alive=%s", model, keep_alive)
         _local_critic_warmup_success_logged = True
     else:
-        logger.debug("Local critic Ollama warmup refreshed model %s", config.catty_local_critic_model)
+        logger.debug("Ollama warmup refreshed model %s", model)
 
 
 async def _local_critic_warmup_loop() -> None:
     while True:
-        if config.catty_local_critic_warmup_enabled and _local_critic_enabled():
+        if config.catty_local_critic_warmup_enabled and _warmup_target_model():
             try:
                 await _warm_local_critic_model()
             except httpx.HTTPError as exc:
-                logger.warning(f"Local critic Ollama warmup failed: {_http_error_detail(exc)}")
+                logger.warning(f"Ollama warmup failed: {_http_error_detail(exc)}")
             except Exception as exc:
-                logger.warning(f"Local critic Ollama warmup failed: {exc}")
+                logger.warning(f"Ollama warmup failed: {exc}")
         interval = max(float(config.catty_local_critic_warmup_interval_seconds or 300.0), 60.0)
         await asyncio.sleep(interval)
 
@@ -3267,6 +3344,21 @@ async def observe_memory(bot: Bot, event: MessageEvent) -> None:
     if str(event.user_id) == str(bot.self_id):
         return
     _remember_recent_conversation_event(event)
+    # activity feed: 训练 idle gate + dashboard conversation feed 都用这个
+    try:
+        scope = _conversation_queue_key(event)
+        sender_name = _sender_name(event)
+        text = event_plain_text(event)
+        image_urls = extract_image_urls(event)
+        activity_feed.record_user_message(
+            scope=scope,
+            sender_name=sender_name,
+            sender_id=str(event.user_id),
+            text=text,
+            image_count=len(image_urls),
+        )
+    except Exception:  # noqa: BLE001
+        pass
     if isinstance(event, GroupMessageEvent):
         memory_store.remember_corpus_event(
             event,
@@ -3596,15 +3688,22 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                         else "喵呜～猫猫这次没搜到合适的嗷呜，主人换个名字再戳人家嘛 (尾巴垂垂)"
                     )
                 reply = sanitized
+        except MCBusyError as exc:
+            logger.info(f"MC busy gate refused local fallback: {exc}")
+            await matcher.finish(Message(exc.public_message))
         except OpenAICompatibleError as exc:
             logger.warning(f"OpenAI-compatible API error: {exc}")
             await matcher.finish(Message(f"AI 接口出错：{exc.public_message}"))
         except httpx.TimeoutException:
             logger.warning("OpenAI-compatible API request timed out")
-            await matcher.finish(Message("AI 接口超时了，稍后再试一下。"))
+            await matcher.finish(Message(
+                "AI 接口超时了喵呜～(尾巴垂垂)云端可能在喘气，过 30 秒再戳人家叭。"
+            ))
         except httpx.HTTPError as exc:
             logger.warning(f"OpenAI-compatible API transport error: {exc}")
-            await matcher.finish(Message("AI 接口连接失败了，检查一下 BASE_URL、网络或代理配置。"))
+            await matcher.finish(Message(
+                "AI 接口连不上喵～(爪爪挠头)云端和本地兜底都没响应，主人查下网络再试。"
+            ))
 
         reply = await _apply_local_critic(event, incoming, messages, reply)
 

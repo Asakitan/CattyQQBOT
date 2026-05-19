@@ -187,7 +187,12 @@ def main() -> int:
                 except ValueError:
                     self_key = ""
                 if self_key in changes:
-                    os.execv(sys.executable, [sys.executable, *sys.argv])
+                    # Windows: os.execv is implemented as spawn-and-wait (NOT a true
+                    # replace), so the parent process keeps living and we get a
+                    # fork-tree of stacked hot_reload + bot.py processes. Spawn the
+                    # new watcher explicitly, then exit *this* process cleanly.
+                    subprocess.Popen([sys.executable, *sys.argv], cwd=str(root))
+                    sys.exit(0)
                 restarting = True
                 break
         except KeyboardInterrupt:

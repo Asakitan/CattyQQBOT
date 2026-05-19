@@ -45,6 +45,23 @@ def _reset_cloud_health_for_tests() -> None:
     _mark_cloud_healthy()
 
 
+# Fallback warmup: 第一次 fallback 调用走冷启动会同时付出"模型 load 到显存"+"大 prompt 处理"
+# 两份成本(~60-120s)。先发一个 1-token "hi" 把模型 load 上来,再发真正的请求,
+# 让真正回复只付"prompt 处理"那一份(KV cache 已经热了)。
+_fallback_warmed_at: float = 0.0
+_FALLBACK_WARMUP_WINDOW_SECONDS = 120.0
+_FALLBACK_WARMUP_TIMEOUT_SECONDS = 180.0
+
+
+def _mark_fallback_warmed() -> None:
+    global _fallback_warmed_at
+    _fallback_warmed_at = time.monotonic()
+
+
+def _fallback_is_warm() -> bool:
+    return time.monotonic() - _fallback_warmed_at < _FALLBACK_WARMUP_WINDOW_SECONDS
+
+
 ChatMessage = dict[str, Any]
 
 
@@ -134,8 +151,13 @@ def _extract_ollama_chat_content(data: dict[str, Any]) -> str:
 
 
 def _client_kwargs(timeout: float, proxy: str) -> dict[str, Any]:
+    # 分开 connect / read：网络不通 10s 内快速判死,但慢慢吐 token 的云端要给完整 read 窗口。
+    # 整个 timeout 当成 read timeout(LLM 慢回复的瓶颈)。pool/write 一并用同样的 read 时长,
+    # connect 固定 10s 避开"网络挂了还要等 read 超时"的等待。
+    connect_timeout = min(float(timeout), 10.0) if timeout and timeout > 0 else 10.0
+    read_timeout = float(timeout) if timeout and timeout > 0 else None
     kwargs: dict[str, Any] = {
-        "timeout": timeout,
+        "timeout": httpx.Timeout(read_timeout, connect=connect_timeout),
         "follow_redirects": True,
     }
     if proxy.strip():
@@ -344,11 +366,22 @@ async def download_binary(config: Config, url: str, *, timeout: float | None = N
 
 
 def _fallback_is_configured(config: Config) -> bool:
-    if not bool(getattr(config, "catty_ai_fallback_enabled", False)):
-        return False
-    base = str(getattr(config, "catty_ai_fallback_base_url", "") or "").strip()
-    model = str(getattr(config, "catty_ai_fallback_model", "") or "").strip()
-    return bool(base) and bool(model)
+    # 代码层面硬关闭本地 AI fallback：忽略 ai_fallback.* 配置，永远不路由到本地模型。
+    # 云端调用失败时直接把云端的异常抛给上层，不再尝试本地兜底。
+    del config
+    return False
+
+
+def _fallback_should_strip_system(config: Config) -> bool:
+    """catty-* 派生模型把人格烧进了 SYSTEM 层,再发 system role 会破坏 KV cache。"""
+    if bool(getattr(config, "catty_ai_fallback_strip_system_messages", False)):
+        return True
+    model = str(getattr(config, "catty_ai_fallback_model", "") or "").strip().lower()
+    return model.startswith("catty-")
+
+
+def _strip_system_messages(messages: list[ChatMessage]) -> list[ChatMessage]:
+    return [m for m in messages if m.get("role") != "system"]
 
 
 async def _check_mc_gate_or_raise(config: Config) -> None:
@@ -375,8 +408,57 @@ async def _check_mc_gate_or_raise(config: Config) -> None:
         )
 
 
+async def _warmup_fallback_if_cold(config: Config) -> bool:
+    """如果本地 fallback 模型最近没有被打到,先发一个 1-token "hi" 把它 load 上来。
+
+    Ollama 第一次推理同时付"GGUF 从磁盘 load 到显存"+"prompt 处理"两份成本——
+    在 5070Ti Laptop 上对 7B Q4_K_M 大概 60-120s。先用最小 prompt(1 token)单独
+    付掉 load 那一份,然后真正用户请求只付 prompt 处理那一份(模型已经在显存里,
+    KV cache 在 OLLAMA_KEEP_ALIVE=-1 下持久)。
+
+    返回 True 代表本次确实做了 warmup;False 代表跳过(已经 warm 或者不支持)。
+    失败不抛异常——真正的 fallback 调用会自己再试一次,该报错就让它报。
+    """
+    if _fallback_is_warm():
+        return False
+    base_url = config.catty_ai_fallback_base_url
+    api_key = config.catty_ai_fallback_api_key
+    model = config.catty_ai_fallback_model
+    if not str(base_url or "").strip() or not str(model or "").strip():
+        return False
+    # 只对 Ollama 后端做 warmup;OpenAI-compatible HTTP 后端用法不一样,跳过。
+    if not _looks_like_ollama_route(base_url, api_key, {}):
+        return False
+    _logger.info("Fallback cold-start: warming %s with 1-token hi", model)
+    try:
+        await _post_ollama_chat(
+            base_url=base_url,
+            model=model,
+            messages=[{"role": "user", "content": "hi"}],
+            timeout=_FALLBACK_WARMUP_TIMEOUT_SECONDS,
+            proxy=config.catty_http_proxy,
+            temperature=None,
+            max_tokens=1,
+            extra_headers={},
+            extra_body={"keep_alive": -1},
+        )
+    except Exception as exc:  # noqa: BLE001
+        _logger.warning(
+            "Fallback warmup failed (%s: %s); real call will retry directly",
+            exc.__class__.__name__,
+            exc,
+        )
+        return False
+    _mark_fallback_warmed()
+    _logger.info("Fallback %s warmed up; real request can stream immediately", model)
+    return True
+
+
 async def _post_fallback_chat(config: Config, messages: list[ChatMessage]) -> str:
     await _check_mc_gate_or_raise(config)
+
+    # 冷启动时先单独 warmup,避免真正请求同时承担 load + 大 prompt 处理被卡 60s+。
+    await _warmup_fallback_if_cold(config)
 
     base_url = config.catty_ai_fallback_base_url
     api_key = config.catty_ai_fallback_api_key
@@ -387,10 +469,17 @@ async def _post_fallback_chat(config: Config, messages: list[ChatMessage]) -> st
     temperature = config.catty_ai_fallback_temperature
     max_tokens = config.catty_ai_fallback_max_tokens
 
+    if _fallback_should_strip_system(config):
+        stripped = _strip_system_messages(messages)
+        dropped = len(messages) - len(stripped)
+        if dropped > 0:
+            _logger.info("fallback: dropped %d system message(s) for %s (persona baked in)", dropped, model)
+        messages = stripped
+
     # 内存预算够时让 7B 留在内存复用更快。想要立刻卸载,在 config 的
     # ai_fallback.extra_body 里加 "keep_alive": 0 即可。
     if _looks_like_ollama_route(base_url, api_key, extra_body):
-        return await _post_ollama_chat(
+        result = await _post_ollama_chat(
             base_url=base_url,
             model=model,
             messages=messages,
@@ -401,7 +490,9 @@ async def _post_fallback_chat(config: Config, messages: list[ChatMessage]) -> st
             extra_headers=extra_headers,
             extra_body=extra_body,
         )
-    return await _post_chat_completion(
+        _mark_fallback_warmed()
+        return result
+    result = await _post_chat_completion(
         base_url=base_url,
         api_key=api_key,
         model=model,
@@ -413,6 +504,8 @@ async def _post_fallback_chat(config: Config, messages: list[ChatMessage]) -> st
         extra_headers=extra_headers,
         extra_body=extra_body,
     )
+    _mark_fallback_warmed()
+    return result
 
 
 async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:

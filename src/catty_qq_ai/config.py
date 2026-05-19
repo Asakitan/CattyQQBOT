@@ -66,6 +66,9 @@ class Config(BaseModel):
     catty_ai_fallback_mc_server_host: str = "localhost"
     catty_ai_fallback_mc_server_port: int = 26843
     catty_ai_fallback_mc_ping_timeout_seconds: float = 3.0
+    # 兜底模型已经把人格烧进 Modelfile SYSTEM 时,剥离 system role 消息避免 KV cache 失效
+    # 留空(默认)时:若 model 以 "catty-" 开头自动启用,否则不剥离
+    catty_ai_fallback_strip_system_messages: bool = False
 
     catty_audit_ai_base_url: str = ""
     catty_audit_ai_api_key: str = ""
@@ -160,6 +163,9 @@ class Config(BaseModel):
     catty_session_cache_dir: str = "sessions"
     catty_session_cache_max_sessions: int = 200
     catty_session_cache_save_debounce_seconds: float = 2.0
+    # bot 主进程 CPU affinity (Windows). 0 = 不绑核 (默认 OS 自由调度)
+    # 6 核机器:1 = 核0 only,把 Ollama 留给核1-5
+    catty_cpu_affinity_mask: int = 0
     catty_directed_keywords: list[str] = Field(
         default_factory=lambda: ["你", "猫猫", "猫娘", "看看", "帮我看看", "这张图", "这个图", "图片", "图里", "评价一下", "怎么回事"]
     )

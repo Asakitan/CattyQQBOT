@@ -182,6 +182,8 @@ def _ollama_env(
     env = os.environ.copy()
     env["OLLAMA_MODELS"] = models_relative
     env["PATH"] = str(base_dir / "tools" / "ollama") + os.pathsep + env.get("PATH", "")
+    # 任何 model 一旦 load 就永驻内存,避免反复 cold start(35s)。warmup loop 会定期 ping。
+    env["OLLAMA_KEEP_ALIVE"] = "-1"
     # 限制 Ollama 推理线程数,给系统和 MC 留余量(不锁 affinity,只控总线程)
     if num_thread is not None and num_thread > 0:
         env["OLLAMA_NUM_THREAD"] = str(num_thread)
@@ -219,9 +221,14 @@ def _model_available(executable: Path, model: str, *, cwd: Path, env: dict[str, 
         check=False,
     )
     wanted = model.strip()
+    # ollama list 列出的是 "name:tag" 形式(e.g. "catty-7b:latest"),用户配置里可能不带 tag。
+    # 当查询的名字本身没带 ":" 时,把 "wanted" 和 "wanted:latest" 都当成命中。
+    candidates = {wanted}
+    if ":" not in wanted:
+        candidates.add(f"{wanted}:latest")
     for line in result.stdout.splitlines()[1:]:
         columns = line.split()
-        if columns and columns[0] == wanted:
+        if columns and columns[0] in candidates:
             return True
     return False
 
@@ -243,6 +250,14 @@ def _ollama_models_to_check(config: dict[str, Any], ollama: dict[str, Any]) -> l
     local_critic = config.get("local_critic", {})
     if isinstance(local_critic, dict):
         text = str(local_critic.get("model") or "").strip()
+        if text and text not in models:
+            models.append(text)
+    # ai_fallback.model (例如 catty-7b) 在 cloud 超时后被立即调用。如果它没在 ollama
+    # 注册表里,_pull_ollama_model 会尝试 pull,本地 Modelfile 派生的模型 pull 会失败但
+    # 至少给出明确报错;比"runtime 第一条用户消息才发现 404"要好得多。
+    ai_fallback = config.get("ai_fallback", {})
+    if isinstance(ai_fallback, dict):
+        text = str(ai_fallback.get("model") or "").strip()
         if text and text not in models:
             models.append(text)
     return models
@@ -304,7 +319,7 @@ def _start_ollama(ollama: dict[str, Any], config: dict[str, Any], config_dir: Pa
         if _as_bool(ollama.get("below_normal_priority"), default=True):
             creationflags |= getattr(subprocess, "BELOW_NORMAL_PRIORITY_CLASS", 0)
 
-    subprocess.Popen(
+    proc = subprocess.Popen(
         [str(executable), "serve"],
         cwd=str(config_dir),
         env=env,
@@ -312,10 +327,31 @@ def _start_ollama(ollama: dict[str, Any], config: dict[str, Any], config_dir: Pa
         stderr=subprocess.DEVNULL,
         creationflags=creationflags,
     )
+
+    affinity_label = ""
+    affinity_raw = ollama.get("cpu_affinity_mask")
+    if affinity_raw not in (None, "", 0) and os.name == "nt":
+        try:
+            mask = int(affinity_raw, 0) if isinstance(affinity_raw, str) else int(affinity_raw)
+        except (TypeError, ValueError):
+            mask = 0
+        if mask > 0:
+            try:
+                import ctypes
+                # PROCESS_SET_INFORMATION (0x0200) | PROCESS_QUERY_INFORMATION (0x0400)
+                hproc = ctypes.windll.kernel32.OpenProcess(0x0200 | 0x0400, False, proc.pid)
+                if hproc:
+                    ok = ctypes.windll.kernel32.SetProcessAffinityMask(hproc, mask)
+                    ctypes.windll.kernel32.CloseHandle(hproc)
+                    if ok:
+                        affinity_label = f", affinity={hex(mask)}"
+            except Exception:  # noqa: BLE001
+                pass
+
     if num_thread:
-        print(f"Ollama OLLAMA_NUM_THREAD={num_thread}, BelowNormal priority")
+        print(f"Ollama OLLAMA_NUM_THREAD={num_thread}, BelowNormal priority{affinity_label}")
     else:
-        print("Ollama starting with default thread count, BelowNormal priority")
+        print(f"Ollama starting with default thread count, BelowNormal priority{affinity_label}")
     api_url = str(ollama.get("api_url") or "http://127.0.0.1:11434").strip()
     _wait_ollama_ready(api_url, float(ollama.get("startup_timeout_seconds") or 60))
 
@@ -331,6 +367,104 @@ def _start_ollama(ollama: dict[str, Any], config: dict[str, Any], config_dir: Pa
                 env=env,
                 timeout_seconds=float(ollama.get("pull_timeout_seconds") or 1800),
             )
+
+    # 把人格烧进 derived 模型(catty-7b),让 fallback 调用不再发 system prompt
+    _ensure_catty_derived_model(config, executable, config_dir, env)
+
+
+def _ensure_catty_derived_model(
+    config: dict[str, Any],
+    executable: Path,
+    config_dir: Path,
+    env: dict[str, str],
+) -> None:
+    """Build a Catty-flavored Ollama model from a base model + persona Modelfile.
+
+    Reads ``ai_fallback.derived_model_name`` (default ``catty-7b``) and
+    ``ai_fallback.base_model`` (default ``qwen2.5:7b``). Skips if disabled or
+    base model isn't pulled yet.
+    """
+    fallback = config.get("ai_fallback")
+    if not isinstance(fallback, dict):
+        return
+    if not _as_bool(fallback.get("enabled"), default=False):
+        return
+    # 默认不在 bot 启动时主动 create——人家会从远端单独控制烧模型,启动时只有人为
+    # 把 auto_build_derived_model=true 打开后才会自己 build。
+    if not _as_bool(fallback.get("auto_build_derived_model"), default=False):
+        return
+    derived_name = str(fallback.get("derived_model_name") or "catty-7b").strip()
+    base_model = str(fallback.get("base_model") or "qwen2.5:7b").strip()
+    if not derived_name or not base_model:
+        return
+    if not _model_available(executable, base_model, cwd=config_dir, env=env):
+        print(f"derived model skipped: base {base_model} not pulled yet")
+        return
+
+    # Import builder lazily; needs src on sys.path
+    import sys as _sys
+    src_dir = config_dir / "src"
+    if str(src_dir) not in _sys.path:
+        _sys.path.insert(0, str(src_dir))
+    try:
+        from catty_qq_ai.modelfile_builder import (
+            build_modelfile_content,
+            content_signature,
+            read_recorded_signature,
+            write_modelfile_if_changed,
+            write_recorded_signature,
+        )
+    except ImportError as exc:
+        print(f"derived model skipped: cannot import modelfile_builder ({exc})")
+        return
+
+    chat = config.get("chat") if isinstance(config.get("chat"), dict) else {}
+    system_prompt = str(chat.get("system_prompt") or "")
+    num_ctx = int(fallback.get("num_ctx") or 4096)
+    try:
+        temperature = float(fallback.get("temperature") if fallback.get("temperature") is not None else 0.7)
+    except (TypeError, ValueError):
+        temperature = 0.7
+    extra_body = fallback.get("extra_body") if isinstance(fallback.get("extra_body"), dict) else {}
+    nt_raw = (extra_body.get("options") or {}).get("num_thread") if isinstance(extra_body.get("options"), dict) else None
+    num_thread: int | None
+    try:
+        num_thread = int(nt_raw) if nt_raw is not None else None
+    except (TypeError, ValueError):
+        num_thread = None
+
+    content = build_modelfile_content(
+        base_model,
+        system_prompt,
+        num_ctx=num_ctx,
+        temperature=temperature,
+        num_thread=num_thread,
+    )
+    modelfile_path = config_dir / "tools" / "catty_modelfile" / f"{derived_name}.Modelfile"
+    file_changed = write_modelfile_if_changed(modelfile_path, content)
+    new_sig = content_signature(content)
+    old_sig = read_recorded_signature(modelfile_path)
+    already_built = _model_available(executable, derived_name, cwd=config_dir, env=env)
+
+    if not file_changed and old_sig == new_sig and already_built:
+        print(f"Catty derived model {derived_name} already up to date (sig {new_sig[:12]})")
+        return
+
+    print(f"Building Catty derived model {derived_name} from {base_model} (sig {new_sig[:12]})")
+    try:
+        subprocess.run(
+            [str(executable), "create", derived_name, "-f", str(modelfile_path)],
+            cwd=str(config_dir),
+            env=env,
+            check=True,
+            timeout=600,
+        )
+        write_recorded_signature(modelfile_path, new_sig)
+        print(f"Catty derived model {derived_name} created ✓")
+    except subprocess.CalledProcessError as exc:
+        print(f"failed to create derived model {derived_name}: {exc}")
+    except subprocess.TimeoutExpired:
+        print(f"derived model {derived_name} create timed out")
 
 
 def _start_local_training(local_training: dict[str, Any], config_dir: Path) -> None:

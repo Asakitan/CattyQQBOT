@@ -13,6 +13,54 @@ from export_reply_gate_dataset import export_all_datasets
 from mc_idle_ping import ping_mc_server
 
 
+def _chat_activity_path(config_path: Path) -> Path:
+    return config_path.parent / "training" / "catty_activity.json"
+
+
+def _read_chat_activity(config_path: Path) -> dict[str, Any]:
+    path = _chat_activity_path(config_path)
+    try:
+        with path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except FileNotFoundError:
+        return {}
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def _chat_idle_decision(
+    training: dict[str, Any],
+    config_path: Path,
+    now: float,
+    *,
+    idle_interval: int,
+    active_interval: int,
+) -> tuple[bool, str, int] | None:
+    """如果开启 chat idle 检查,返回最终决定;否则返回 None。"""
+    if not _as_bool(training.get("chat_idle_check_enabled"), default=True):
+        return None
+    idle_minutes = max(float(training.get("chat_idle_min_minutes") or 30.0), 0.0)
+    activity = _read_chat_activity(config_path)
+    last_user = activity.get("last_user_message_at")
+    if not isinstance(last_user, (int, float)) or last_user <= 0:
+        return True, "no chat activity recorded yet, safe to train", idle_interval
+    idle_for = max(now - float(last_user), 0.0)
+    needed = idle_minutes * 60
+    if idle_for < needed:
+        remaining_min = max(int((needed - idle_for) / 60), 1)
+        return (
+            False,
+            f"chat idle only {int(idle_for / 60)}m, need {int(idle_minutes)}m (~{remaining_min}m to go)",
+            active_interval,
+        )
+    return (
+        True,
+        f"chat idle for {int(idle_for / 60)}m (>= {int(idle_minutes)}m), safe to train",
+        idle_interval,
+    )
+
+
 def _load_config(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8-sig") as file:
         data = json.load(file)
@@ -205,7 +253,16 @@ def _idle_decision(
         return True, "idle gate disabled", idle_interval
 
     now = time.time()
-    # MC idle gating 是主导条件——开启后无视时间窗口，按"MC 真的没人"判断
+
+    # Chat idle 跟 MC idle 两个独立 gate, 都启用时都必须满足才允许训练。
+    chat_decision = _chat_idle_decision(
+        training,
+        config_path,
+        now,
+        idle_interval=idle_interval,
+        active_interval=active_interval,
+    )
+    mc_decision = None
     if state is not None:
         mc_decision = _mc_idle_decision(
             training,
@@ -214,8 +271,17 @@ def _idle_decision(
             idle_interval=idle_interval,
             active_interval=active_interval,
         )
-        if mc_decision is not None:
-            return mc_decision
+
+    if chat_decision is not None or mc_decision is not None:
+        # 两个 gate 都通过才训练
+        decisions = [d for d in (chat_decision, mc_decision) if d is not None]
+        if all(d[0] for d in decisions):
+            joined_reason = " | ".join(d[1] for d in decisions)
+            return True, joined_reason, idle_interval
+        for d in decisions:
+            if not d[0]:
+                return d
+        return True, "all gates open", idle_interval
 
     local_time = time.localtime(now)
     start_hour = int(training.get("idle_start_hour") or 2)
@@ -292,32 +358,125 @@ def _run_training_task(
     print(f"{task_name}: running {mode} local training command: {rendered}")
     env = dict(os.environ, CATTY_TRAINING_MODE=mode, CATTY_TRAINING_TASK=task_name)
     creationflags = 0
-    if mode == "busy" and os.name == "nt":
-        creationflags = getattr(subprocess, "IDLE_PRIORITY_CLASS", 0)
-    try:
-        subprocess.run(
-            rendered,
-            cwd=str(config_path.parent),
-            shell=True,
-            check=True,
-            env=env,
-            timeout=timeout_seconds if timeout_seconds > 0 else None,
-            creationflags=creationflags,
-        )
-    except subprocess.TimeoutExpired:
-        print(f"{task_name}: {mode} training timed out after {timeout_seconds} seconds")
+    if os.name == "nt":
+        # Training 用 idle priority,绝不抢 MC/系统 CPU
+        creationflags |= getattr(subprocess, "IDLE_PRIORITY_CLASS", 0)
+
+    # Watchdog 自己每个 tick 重读 config 拿 chat_idle/MC 参数
+    check_interval = max(float((state.get("__chat_kill_check_interval__") or 15.0)), 5.0)
+
+    rc, kill_reason = _run_training_with_watchdog(
+        rendered=rendered,
+        cwd=str(config_path.parent),
+        env=env,
+        creationflags=creationflags,
+        timeout_seconds=timeout_seconds,
+        check_interval=check_interval,
+        config_path=config_path,
+        task_name=task_name,
+        train_start_ts=time.time(),
+    )
+    if kill_reason:
+        print(f"{task_name}: {mode} training killed by watchdog: {kill_reason}")
         state[latest_key] = count
         return
-    except subprocess.CalledProcessError as exc:
-        if exc.returncode == 2:
-            print(f"{task_name}: {mode} training skipped by safe wrapper")
-            state[latest_key] = count
-            return
-        raise
+    if rc == 2:
+        print(f"{task_name}: {mode} training skipped by safe wrapper")
+        state[latest_key] = count
+        return
+    if rc != 0:
+        print(f"{task_name}: training exited with code {rc}")
+        state[latest_key] = count
+        return
     state[trained_key] = count
     state[latest_key] = count
     if task_name == "reply_gate":
         state["trained_samples"] = count
+
+
+def _terminate_train_proc(proc: subprocess.Popen, *, reason: str) -> None:
+    print(f"watchdog: terminating training proc (reason: {reason})")
+    try:
+        proc.terminate()
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        proc.wait(timeout=5)
+        return
+    except subprocess.TimeoutExpired:
+        pass
+    try:
+        proc.kill()
+    except Exception:  # noqa: BLE001
+        pass
+    try:
+        proc.wait(timeout=3)
+    except subprocess.TimeoutExpired:
+        pass
+
+
+def _run_training_with_watchdog(
+    *,
+    rendered: str,
+    cwd: str,
+    env: dict[str, str],
+    creationflags: int,
+    timeout_seconds: int,
+    check_interval: float,
+    config_path: Path,
+    task_name: str,
+    train_start_ts: float,
+) -> tuple[int, str | None]:
+    """Run training command as a subprocess, watchdog every check_interval secs.
+
+    Kill triggers (any one):
+      - catty_activity.json last_user_message_at > train_start_ts (someone messaged)
+      - MC players online (if mc_idle_check_enabled)
+      - timeout_seconds exceeded (if > 0)
+
+    Returns (return_code, kill_reason). kill_reason is None on natural completion.
+    """
+    # Re-fetch training cfg fresh each tick so config changes apply
+    config = _load_config(config_path)
+    training = config.get("local_training", {}) if isinstance(config.get("local_training"), dict) else {}
+
+    proc = subprocess.Popen(
+        rendered,
+        cwd=cwd,
+        shell=True,
+        env=env,
+        creationflags=creationflags,
+    )
+    deadline = (train_start_ts + timeout_seconds) if timeout_seconds and timeout_seconds > 0 else None
+
+    while True:
+        try:
+            rc = proc.wait(timeout=check_interval)
+            return rc, None
+        except subprocess.TimeoutExpired:
+            pass
+
+        # 1) chat activity 在训练启动后被刷新?
+        activity = _read_chat_activity(config_path)
+        last_user = activity.get("last_user_message_at")
+        if isinstance(last_user, (int, float)) and float(last_user) > train_start_ts:
+            _terminate_train_proc(proc, reason=f"catty got a new user message at {last_user}")
+            return -1, "chat activity resumed"
+
+        # 2) MC 玩家上线?
+        if _as_bool(training.get("mc_idle_check_enabled"), default=False):
+            host = str(training.get("mc_server_host") or "localhost").strip() or "localhost"
+            port = int(training.get("mc_server_port") or 26843)
+            timeout = max(float(training.get("mc_ping_timeout_seconds") or 5.0), 0.5)
+            online, players = ping_mc_server(host, port, timeout=timeout)
+            if online and players > 0:
+                _terminate_train_proc(proc, reason=f"MC has {players} players online")
+                return -1, "MC players online"
+
+        # 3) 超时
+        if deadline and time.time() > deadline:
+            _terminate_train_proc(proc, reason=f"timeout {timeout_seconds}s")
+            return -1, f"timeout {timeout_seconds}s"
 
 
 def run_once(config_path: Path) -> int:

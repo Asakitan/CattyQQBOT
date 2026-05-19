@@ -82,6 +82,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "mc_server_host": "localhost",
         "mc_server_port": 26843,
         "mc_ping_timeout_seconds": 3.0,
+        "strip_system_messages": False,
     },
     "audit_ai": {
         "base_url": "",
@@ -485,6 +486,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_AI_FALLBACK_MC_SERVER_HOST", ai_fallback.get("mc_server_host"))
     _set_env("CATTY_AI_FALLBACK_MC_SERVER_PORT", ai_fallback.get("mc_server_port"))
     _set_env("CATTY_AI_FALLBACK_MC_PING_TIMEOUT_SECONDS", ai_fallback.get("mc_ping_timeout_seconds"))
+    _set_env("CATTY_AI_FALLBACK_STRIP_SYSTEM_MESSAGES", ai_fallback.get("strip_system_messages"))
 
     audit_ai = _section(data, "audit_ai")
     _set_env("CATTY_AUDIT_AI_BASE_URL", audit_ai.get("base_url"))
@@ -607,6 +609,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_GROUP_REQUIRE_MENTION_OR_PREFIX", chat.get("group_require_mention_or_prefix"))
     _set_env("CATTY_GROUP_HISTORY_SCOPE", chat.get("group_history_scope"))
     _set_env("CATTY_HISTORY_TURNS", chat.get("history_turns"))
+    _set_env("CATTY_CPU_AFFINITY_MASK", chat.get("cpu_affinity_mask"))
     _set_env("CATTY_DIRECTED_KEYWORDS", chat.get("directed_keywords"), json_value=True)
     _set_env("CATTY_IGNORED_USER_IDS", chat.get("ignored_user_ids"), json_value=True)
     _set_env("CATTY_IGNORE_MARKED_BOTS", chat.get("ignore_marked_bots"))

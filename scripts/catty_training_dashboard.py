@@ -105,6 +105,15 @@ def _ollama_options(*, temperature: object, max_tokens: int, extra_body: dict[st
 def _route_config(config: dict[str, Any]) -> dict[str, Any]:
     ai = _json_object(config.get("ai"))
     local_critic = _json_object(config.get("local_critic"))
+    # local_critic is deprecated. Fall through to ai_fallback (catty-7b) when
+    # it is disabled, empty, or its model string is blank — otherwise the GUI
+    # surfaces a stale config field instead of the model that's actually in use.
+    lc_enabled = bool(local_critic.get("enabled", False))
+    lc_model = str(local_critic.get("model") or "").strip()
+    if not local_critic or not lc_enabled or not lc_model:
+        fallback = _json_object(config.get("ai_fallback"))
+        if str(fallback.get("model") or "").strip():
+            local_critic = fallback
     training = _json_object(config.get("local_training"))
     timeout = float(training.get("model_test_request_timeout") or local_critic.get("request_timeout") or 60)
     local_critic_extra_body = _json_object(local_critic.get("extra_body"))
@@ -453,6 +462,16 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
     notebook.add(audit_text, text="GLM audit")
     notebook.add(log_text, text="Log")
 
+    # Conversation tab: live feed of recent user messages + bot replies
+    convo_text = ScrolledText(notebook, height=12, wrap="word", font=("Microsoft YaHei UI", 10))
+    convo_text.configure(state="disabled")
+    convo_text.tag_configure("user", foreground="#1f6feb")
+    convo_text.tag_configure("assistant", foreground="#cf222e")
+    convo_text.tag_configure("meta", foreground="#57606a")
+    convo_text.tag_configure("idle", foreground="#1a7f37", font=("Microsoft YaHei UI", 9, "italic"))
+    notebook.add(convo_text, text="Conversation")
+    convo_state = {"offset": 0, "last_size": 0, "header_done": False}
+
     test_frame = ttk.Frame(notebook)
     notebook.add(test_frame, text="Ollama test")
 
@@ -568,8 +587,10 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
         def worker() -> None:
             try:
                 result = run_model_test(config_path, prompt, thinking=thinking_enabled)
-            except Exception as exc:
-                root.after(0, lambda: finish_error(exc, request_id=request_id))
+            except Exception as exc:  # noqa: BLE001
+                # Python 3.14: `exc` is deleted at block exit, so capture it by
+                # binding it as a default argument before the lambda is scheduled.
+                root.after(0, lambda captured=exc: finish_error(captured, request_id=request_id))
             else:
                 root.after(0, lambda: finish_success(result, request_id=request_id))
 
@@ -626,18 +647,111 @@ def _run_gui(config_path: Path, poll_seconds: float) -> None:
     ask_button.configure(command=ask_model)
     save_button.configure(command=save_score, state="disabled")
 
+    def _append_convo(text: str, tag: str = "") -> None:
+        convo_text.configure(state="normal")
+        if tag:
+            convo_text.insert("end", text, tag)
+        else:
+            convo_text.insert("end", text)
+        convo_text.see("end")
+        convo_text.configure(state="disabled")
+
+    def _refresh_conversation() -> None:
+        base_dir = config_path.parent
+        feed_path = base_dir / "logs" / "conversation_feed.jsonl"
+        if not feed_path.exists():
+            if not convo_state["header_done"]:
+                _append_convo(
+                    "等待 catty bot 写入 conversation_feed.jsonl ...\n", "meta"
+                )
+                convo_state["header_done"] = True
+            return
+        try:
+            stat = feed_path.stat()
+        except OSError:
+            return
+        # File rotated/truncated? Reset offset.
+        if stat.st_size < convo_state["offset"]:
+            convo_state["offset"] = 0
+        if stat.st_size == convo_state["offset"]:
+            return
+        try:
+            with feed_path.open("r", encoding="utf-8") as f:
+                f.seek(convo_state["offset"])
+                chunk = f.read()
+                convo_state["offset"] = f.tell()
+        except OSError:
+            return
+        for line in chunk.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                obj = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            ts = obj.get("ts")
+            kind = obj.get("kind") or "?"
+            scope = obj.get("scope") or "?"
+            text = (obj.get("text") or "").rstrip()
+            img = obj.get("image_count") or 0
+            ts_str = (
+                time.strftime("%H:%M:%S", time.localtime(float(ts)))
+                if isinstance(ts, (int, float)) else "??:??:??"
+            )
+            if kind == "user":
+                sender = obj.get("sender_name") or obj.get("sender_id") or "?"
+                header = f"[{ts_str}] {scope} {sender}: "
+                _append_convo(header, "meta")
+                _append_convo(text or "(empty)", "user")
+                if img:
+                    _append_convo(f"  [+{img} img]", "meta")
+                _append_convo("\n")
+            elif kind == "assistant":
+                header = f"[{ts_str}] → 笨猫 ({scope}): "
+                _append_convo(header, "meta")
+                _append_convo(text or "(empty)", "assistant")
+                if img:
+                    _append_convo(f"  [+{img} img]", "meta")
+                _append_convo("\n")
+            else:
+                _append_convo(f"[{ts_str}] {kind} {scope}: {text}\n", "meta")
+
+    def _activity_summary() -> str:
+        path = config_path.parent / "training" / "catty_activity.json"
+        try:
+            with path.open("r", encoding="utf-8") as f:
+                data = json.load(f) or {}
+        except (FileNotFoundError, json.JSONDecodeError, OSError):
+            return "  (no activity recorded yet)"
+        bits: list[str] = []
+        for key, label in (("last_user_message_at", "last_user"), ("last_reply_at", "last_reply")):
+            v = data.get(key)
+            if isinstance(v, (int, float)) and v > 0:
+                age = max(time.time() - float(v), 0.0)
+                if age < 60:
+                    age_s = f"{int(age)}s ago"
+                elif age < 3600:
+                    age_s = f"{int(age / 60)}m ago"
+                else:
+                    age_s = f"{int(age / 3600)}h ago"
+                bits.append(f"{label}={age_s}")
+        return "  " + (" | ".join(bits) if bits else "(no activity recorded yet)")
+
     def refresh() -> None:
         snapshot = build_snapshot(config_path)
         summary_var.set(
             "enabled={enabled}  auto_train={auto_train}  watch={watch}s  "
-            "audit_model={model}  audit_temperature={temperature}".format(
+            "audit_model={model}  audit_temperature={temperature}\nactivity:{activity}".format(
                 enabled=snapshot["enabled"],
                 auto_train=snapshot["auto_train_on_startup"],
                 watch=snapshot["watch_interval_seconds"],
                 model=snapshot["audit_model"] or "-",
                 temperature=snapshot["audit_temperature"],
+                activity=_activity_summary(),
             )
         )
+        _refresh_conversation()
 
         datasets = snapshot["datasets"]
         progress_lines = [
