@@ -77,6 +77,11 @@ from .reply_markers import (
 )
 from . import activity_feed
 from .session_cache import SessionCache, format_session_list_for_owner
+from .latex_renderer import (
+    chunk_to_segments,
+    replace_latex_with_placeholders,
+    restore_latex_placeholders,
+)
 from .star_resonance_memory import build_star_resonance_context
 from .strinova_memory import build_strinova_context
 from .web_search import format_search_context, search_image_urls, search_web
@@ -1972,9 +1977,8 @@ def _semantic_reply_split_prompt() -> str:
         f"拆分方法两种都行：(A) 输出 {REPLY_SPLIT_MARKER}；(B) 直接换行 \\n。系统都接住。"
         "被拆的前几条结尾少用句号/感叹号，自然些。"
         f"上限 {max_chunks} 条；超短回复（<15 字）单条。"
-        "**重要：QQ 群是纯文本环境，完全不渲染 LaTeX/Markdown**——不要输出 `\\[`、`\\frac`、`\\sqrt`、`\\int`、`**加粗**`、` ```代码块``` ` 这类标记，群友看到就是一堆反斜杠。"
-        "技术回答（数学/代码/公式）用 Unicode 符号和纯文本表达：x² x³ ⁻¹ ½ × ÷ ∫ √ π ∞ → ≤ ≥ ≠ Δ Σ；或者用 x^2、sqrt(x)、int_0^1 这种 plain text；"
-        "代码就直接写代码内容，不要 ``` 包；分点用换行+「1)」「2)」即可（系统会按段落保持完整，不会按行拆消息）。"
+        "**数学/公式**：系统会自动把 LaTeX 块渲染成图片再发出去，你**可以放心**用 `\\[ ... \\]`（display math）或 `\\( ... \\)`（inline math）包公式（不要用单 $ ... $，会被忽略）。matplotlib mathtext 子集支持 \\frac、\\sqrt、\\int、\\sum、\\lim、上下标、希腊字母、\\boxed 等常用；array、tikz、自定义宏不支持，复杂表格用纯文本。"
+        "**Markdown**：QQ 群不渲染 Markdown,不要 **加粗**/`代码`/# 标题/``` 代码块 ```;代码直接写正文,分点用换行+「1)」「2)」。"
     )
 
 
@@ -3042,6 +3046,7 @@ def _compose_reply_message(
     text: str = "",
     emoji_entry: EmojiEntry | None = None,
     quote: bool = False,
+    latex_sources: list[str] | None = None,
 ) -> Message:
     message = Message()
     if quote:
@@ -3049,7 +3054,17 @@ def _compose_reply_message(
         if quote_segment is not None:
             message += quote_segment
     if text.strip():
-        message += Message(text)
+        # 含 LaTeX 占位符 → 拆成 [text, image, text, ...] 交叉段;
+        # 渲染失败 chunk_to_segments 内部会 fallback 回 \[源码\] 文本。
+        if latex_sources and "\x00LATEX_" in text:
+            for part in chunk_to_segments(text, latex_sources):
+                if part.kind == "text":
+                    if part.content.strip():
+                        message += Message(part.content)
+                elif part.kind == "latex":
+                    message += MessageSegment.image(file=part.content)
+        else:
+            message += Message(text)
     if emoji_entry is not None:
         message += _emoji_segment(emoji_entry)
     return message if message else Message(text)
@@ -3834,12 +3849,17 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         if emoji_entry is not None:
             _remember_emoji_choice(event, emoji_entry)
             logger.info("Selected emoji for reply: %s", emoji_entry.path)
-        chunks = _reply_chunks(reply)
+        # 把 reply 里的 LaTeX 块占位符化:chunks 内只剩短占位符,_reply_chunks 切段时
+        # 不会切到公式中间;发送时 _compose_reply_message 看到占位符再渲染成图片消息段。
+        # history/memory 用 reply 原文(含 \[源码\]),不污染持久化。
+        reply_for_send, latex_sources = replace_latex_with_placeholders(reply)
+        chunks = _reply_chunks(reply_for_send)
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
-        _append_history(history_key, incoming.history_content, "\n".join(chunks) if chunks else reply)
+        history_text = restore_latex_placeholders("\n".join(chunks), latex_sources) if chunks else reply
+        _append_history(history_key, incoming.history_content, history_text)
         if special_care_context and chunks:
-            memory_store.record_special_care_reply_sent(event, "\n".join(chunks))
+            memory_store.record_special_care_reply_sent(event, history_text)
 
         delay_seconds = max(config.catty_reply_human_split_delay_seconds, 0.0)
         quote_pending = _should_quote_chat_reply(
@@ -3849,17 +3869,26 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             bot_continuation=bool(state.get("catty_recent_bot_continuation")),
         )
         for chunk in chunks[:-1]:
-            _remember_bot_reply_for_event(event, chunk)
-            await matcher.send(_compose_reply_message(event, text=chunk, quote=quote_pending))
+            _remember_bot_reply_for_event(event, restore_latex_placeholders(chunk, latex_sources))
+            await matcher.send(
+                _compose_reply_message(event, text=chunk, quote=quote_pending, latex_sources=latex_sources)
+            )
             quote_pending = False
             _mark_consumed_reply_source_if_sent(event, state)
             if delay_seconds:
                 await asyncio.sleep(delay_seconds)
         if nsfw_image_segments:
             if chunks:
-                _remember_bot_reply_for_event(event, chunks[-1])
+                _remember_bot_reply_for_event(event, restore_latex_placeholders(chunks[-1], latex_sources))
                 try:
-                    await matcher.send(_compose_reply_message(event, text=chunks[-1], quote=quote_pending))
+                    await matcher.send(
+                        _compose_reply_message(
+                            event,
+                            text=chunks[-1],
+                            quote=quote_pending,
+                            latex_sources=latex_sources,
+                        )
+                    )
                 except OnebotActionFailed as exc:
                     logger.warning(f"NSFW caption send failed (napcat timeout?): {exc}")
                 quote_pending = False
@@ -3914,7 +3943,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish()
         if emoji_entry:
             if chunks:
-                _remember_bot_reply_for_event(event, chunks[-1])
+                _remember_bot_reply_for_event(event, restore_latex_placeholders(chunks[-1], latex_sources))
                 if config.catty_reply_mix_emoji_with_text:
                     _mark_consumed_reply_source_if_sent(event, state)
                     await matcher.finish(
@@ -3923,9 +3952,17 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                             text=chunks[-1],
                             emoji_entry=emoji_entry,
                             quote=quote_pending,
+                            latex_sources=latex_sources,
                         )
                     )
-                await matcher.send(_compose_reply_message(event, text=chunks[-1], quote=quote_pending))
+                await matcher.send(
+                    _compose_reply_message(
+                        event,
+                        text=chunks[-1],
+                        quote=quote_pending,
+                        latex_sources=latex_sources,
+                    )
+                )
                 quote_pending = False
                 _mark_consumed_reply_source_if_sent(event, state)
                 if delay_seconds:
@@ -3935,5 +3972,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish(_compose_reply_message(event, emoji_entry=emoji_entry, quote=quote_pending))
         _mark_consumed_reply_source_if_sent(event, state)
         final_message = chunks[-1] if chunks else "喵喵！猫猫现在很忙哦，等一下再来找人家～"
-        _remember_bot_reply_for_event(event, final_message)
-        await matcher.finish(_compose_reply_message(event, text=final_message, quote=quote_pending))
+        _remember_bot_reply_for_event(event, restore_latex_placeholders(final_message, latex_sources) if chunks else final_message)
+        await matcher.finish(
+            _compose_reply_message(event, text=final_message, quote=quote_pending, latex_sources=latex_sources)
+        )
