@@ -144,6 +144,31 @@ def build_semantic_perception_prompt() -> str:
     )
 
 
+def build_meme_sending_prompt(marker_prefix: str, marker_suffix: str) -> str:
+    return (
+        "主动发梗图能力："
+        "需要给群友看一张具体的梗图/网图(不是猫娘表情包)时,在回复正文里**原样输出标记**: "
+        f"{marker_prefix}搜索关键词{marker_suffix}"
+        "——程序看到这个标记会去网上搜图,下载下来作为图片消息段插到这个位置发出去。"
+        "什么时候用："
+        "1) 群友明确要看图/梗图('图呢'/'来张梗图'/'有图吗'/'发个截图我看看'),且话题落到某个具体梗/角色/场景上,你已经说出图名或梗名;"
+        "2) 你自己讲了一个具体梗('和成天下'/'金闪闪点和成天下'/'雪豹闭嘴'等)而文字解释不够带感,配一张原图比文字更直接;"
+        "3) 用户问'XX 长啥样/什么样子'指向有视觉特征的角色/物品/梗图。"
+        "什么时候**不要**用："
+        "a) 日常闲聊、撒娇、傲娇、情绪反应——这些用本地猫娘表情库(EMOJI_QUERY),不要走 MEME;"
+        "b) 一轮已经发过梗图就别连续再发,过度刷图会被群友嫌弃;"
+        "c) 群友只是顺嘴提了个词没要图,不要硬塞;"
+        "d) 严肃排错/解释/教学/道歉场景,图会打断节奏。"
+        "关键词写法:**写能搜到具体那张图的词**,不要写抽象情绪。"
+        f"好例子: {marker_prefix}和成天下 表情包{marker_suffix} / "
+        f"{marker_prefix}金闪闪 点和成天下{marker_suffix} / "
+        f"{marker_prefix}雪豹闭嘴{marker_suffix}。"
+        f"坏例子(不要这样写): {marker_prefix}梗图{marker_suffix} / {marker_prefix}土豪{marker_suffix} / {marker_prefix}搞笑{marker_suffix}——太宽泛,搜出来不对味。"
+        "标记**原样输出**,不要解释、不要变形、不要省略前后缀;搜不到图就让该位置自然空着,不影响主回复。"
+        "MEME 和 EMOJI_QUERY 是两个独立能力,可以同条回复都用——MEME 给群友看具体梗图,EMOJI_QUERY 末尾给猫娘情绪贴图。"
+    )
+
+
 def build_image_literacy_prompt() -> str:
     return (
         "图片/表情/梗图理解："

@@ -9,12 +9,12 @@ from pathlib import Path
 import random
 import re
 import time
-from typing import DefaultDict
+from typing import Any, DefaultDict
 
 import httpx
 from nonebot import get_bots, get_driver, get_plugin_config, logger, on_message, on_notice
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, PokeNotifyEvent, PrivateMessageEvent
-from nonebot.adapters.onebot.v11 import Bot, Message, MessageEvent, MessageSegment
+from nonebot.adapters.onebot.v11 import Bot, Message, MessageEvent, MessageSegment, NoticeEvent
 from nonebot.adapters.onebot.v11.exception import ActionFailed as OnebotActionFailed
 from nonebot.matcher import Matcher
 from nonebot.plugin import PluginMetadata
@@ -60,6 +60,7 @@ from .persona_prompts import (
     build_disambiguation_examples_prompt,
     build_group_meme_literacy_prompt,
     build_image_literacy_prompt,
+    build_meme_sending_prompt,
     build_persona_memory_prompt,
     build_reply_intelligence_prompt,
     build_reply_self_check_prompt,
@@ -70,10 +71,19 @@ from .persona_prompts import (
 from .reply_markers import (
     EMOJI_QUERY_PREFIX,
     EMOJI_QUERY_SUFFIX,
+    INLINE_IMAGE_PLACEHOLDER,
+    MEME_QUERY_PREFIX,
+    MEME_QUERY_SUFFIX,
     NO_REPLY_MARKER,
     REPLY_SPLIT_MARKER,
     TRAILING_CHAT_PUNCTUATION,
     extract_emoji_query as _extract_emoji_query,
+    extract_inline_images as _extract_inline_images,
+    extract_meme_queries as _extract_meme_queries,
+    replace_meme_placeholders as _replace_meme_placeholders,
+    split_chunk_with_image_placeholders as _split_chunk_with_image_placeholders,
+    strip_inline_image_markers as _strip_inline_image_markers,
+    strip_inline_image_placeholders as _strip_inline_image_placeholders,
 )
 from . import activity_feed
 from .session_cache import SessionCache, format_session_list_for_owner
@@ -1749,6 +1759,54 @@ async def _choose_or_download_emoji(
     return None
 
 
+async def _fetch_meme_image_uri(query: str) -> str:
+    """搜图 + 下载 + 转 base64:// URI。失败返回空串(让占位符被静默丢弃)。
+
+    走 DuckDuckGo 图片搜索拿候选 URL,然后下载第一张能拿到 image/* 内容的图,
+    转成 base64:// URI 喂给 OneBot v11 ``MessageSegment.image``。base64 比 http URL 直传
+    稳得多——QQ 客户端从国外图床拉图经常失败(referer/防盗链/网络墙)。
+    """
+    if not query.strip():
+        return ""
+    try:
+        image_urls = await search_image_urls(config, query, max_results=4)
+    except (httpx.HTTPError, ValueError) as exc:
+        logger.warning(f"Meme search failed for {query!r}: {exc}")
+        return ""
+    if not image_urls:
+        logger.info("Meme search returned no candidates for %r", query)
+        return ""
+
+    for image_url in image_urls:
+        try:
+            image_data, content_type = await download_binary(config, image_url)
+        except httpx.HTTPError as exc:
+            logger.info(f"Meme candidate download failed ({image_url}): {exc}")
+            continue
+        if not image_data:
+            continue
+        if content_type and not content_type.lower().startswith("image/"):
+            continue
+        return "base64://" + base64.b64encode(image_data).decode("ascii")
+    logger.info("All meme candidates failed to download for %r", query)
+    return ""
+
+
+async def _resolve_meme_queries(reply: str) -> str:
+    """把 ``reply`` 里所有 ``<<<CATTY_MEME:词>>>`` 标记拉图后替换成 INLINE_IMAGE 标记。
+
+    并发拉所有 query;某条拉不到就让对应 INLINE_IMAGE 标记位置变空(让该 meme 自然消失,
+    其余文本和图片不受影响)。
+    """
+    cleaned, queries = _extract_meme_queries(reply)
+    if not queries:
+        return reply
+    logger.info("Resolving %s meme query/queries: %s", len(queries), [q for _idx, q in queries])
+    tasks = [_fetch_meme_image_uri(query) for _idx, query in queries]
+    uris = await asyncio.gather(*tasks, return_exceptions=False)
+    return _replace_meme_placeholders(cleaned, list(uris))
+
+
 def _build_messages(
     event: MessageEvent,
     key: str,
@@ -1786,6 +1844,9 @@ def _build_messages(
     messages.append({"role": "system", "content": build_scenario_playbook_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": build_scene_discrimination_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": build_reply_intelligence_prompt(NO_REPLY_MARKER)})
+    messages.append(
+        {"role": "system", "content": build_meme_sending_prompt(MEME_QUERY_PREFIX, MEME_QUERY_SUFFIX)}
+    )
     if config.catty_reply_self_check_enabled:
         messages.append(
             {
@@ -3063,24 +3124,34 @@ def _compose_reply_message(
     emoji_entry: EmojiEntry | None = None,
     quote: bool = False,
     latex_sources: list[str] | None = None,
+    inline_image_urls: list[str] | None = None,
 ) -> Message:
     message = Message()
     if quote:
         quote_segment = _reply_quote_segment(event)
         if quote_segment is not None:
             message += quote_segment
-    if text.strip():
-        # 含 LaTeX 占位符 → 拆成 [text, image, text, ...] 交叉段;
-        # 渲染失败 chunk_to_segments 内部会 fallback 回 \[源码\] 文本。
-        if latex_sources and "\x00LATEX_" in text:
-            for part in chunk_to_segments(text, latex_sources):
-                if part.kind == "text":
-                    if part.content.strip():
-                        message += Message(part.content)
-                elif part.kind == "latex":
-                    message += MessageSegment.image(file=part.content)
-        else:
-            message += Message(text)
+    if text.strip() or (inline_image_urls and "\x00IMG_" in text):
+        # 先按 INLINE_IMAGE 占位符 (\x00IMG_n\x00) 切;每个 text 段再按 LaTeX 占位符切。
+        # 这样一条 chunk 里可以同时有 普通文本 + LaTeX 公式 + 梗图,顺序保留。
+        image_parts = _split_chunk_with_image_placeholders(text, inline_image_urls or [])
+        if not image_parts:
+            image_parts = [("text", text)]
+        for kind, content in image_parts:
+            if kind == "image":
+                if content:
+                    message += MessageSegment.image(file=content)
+                continue
+            # kind == "text"
+            if latex_sources and "\x00LATEX_" in content:
+                for part in chunk_to_segments(content, latex_sources):
+                    if part.kind == "text":
+                        if part.content.strip():
+                            message += Message(part.content)
+                    elif part.kind == "latex":
+                        message += MessageSegment.image(file=part.content)
+            elif content.strip():
+                message += Message(content)
     if emoji_entry is not None:
         message += _emoji_segment(emoji_entry)
     return message if message else Message(text)
@@ -3264,22 +3335,38 @@ observe_matcher = on_message(priority=5, block=False)
 
 
 def _poke_allowed(bot: Bot, event: PokeNotifyEvent) -> bool:
-    if str(event.target_id) != str(bot.self_id) or str(event.user_id) == str(bot.self_id):
+    if str(event.target_id) != str(bot.self_id):
+        logger.info(
+            f"[poke-debug] reject target_id={event.target_id!r} self_id={bot.self_id!r} "
+            f"user_id={event.user_id!r} group_id={getattr(event, 'group_id', None)!r}"
+        )
+        return False
+    if str(event.user_id) == str(bot.self_id):
+        logger.info("[poke-debug] reject self-poke")
         return False
     if event.group_id is not None:
         if not config.catty_enable_group:
+            logger.info("[poke-debug] reject group disabled")
             return False
         if config.catty_allowed_group_ids and int(event.group_id) not in config.catty_allowed_group_ids:
+            logger.info(f"[poke-debug] reject group {event.group_id} not allowed")
             return False
     else:
         if not config.catty_enable_private:
+            logger.info("[poke-debug] reject private disabled")
             return False
     if config.catty_allowed_user_ids and int(event.user_id) not in config.catty_allowed_user_ids:
+        logger.info(f"[poke-debug] reject user {event.user_id} not allowed")
         return False
     return True
 
 
 async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
+    logger.info(
+        f"[poke-debug] _poke_rule fired notice_type={getattr(event, 'notice_type', '?')} "
+        f"sub_type={getattr(event, 'sub_type', '?')} user_id={event.user_id} "
+        f"target_id={event.target_id} group_id={getattr(event, 'group_id', None)}"
+    )
     if not _poke_allowed(bot, event):
         return False
     # 防刷屏：同一用户在同一会话短时间内连续戳，只回第一下
@@ -3312,6 +3399,28 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
 
 
 poke_matcher = on_notice(rule=_poke_rule, priority=55, block=True)
+
+
+# DEBUG: 临时捕获所有 notice 事件,定位戳一戳不响应的问题
+_notice_debug_matcher = on_notice(priority=1, block=False)
+
+
+@_notice_debug_matcher.handle()
+async def _debug_log_any_notice(bot: Bot, event: NoticeEvent) -> None:
+    try:
+        notice_type = getattr(event, "notice_type", None)
+        sub_type = getattr(event, "sub_type", None)
+        user_id = getattr(event, "user_id", None)
+        target_id = getattr(event, "target_id", None)
+        group_id = getattr(event, "group_id", None)
+        logger.info(
+            f"[poke-debug] any notice arrived: cls={type(event).__name__} "
+            f"notice_type={notice_type!r} sub_type={sub_type!r} "
+            f"user_id={user_id!r} target_id={target_id!r} group_id={group_id!r} "
+            f"self_id={bot.self_id!r}"
+        )
+    except Exception as exc:
+        logger.warning(f"[poke-debug] failed to log notice: {exc}")
 
 
 @keyword_reply_matcher.handle()
@@ -3854,7 +3963,12 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish()
 
         reply, emoji_query = _extract_emoji_query(reply)
-        _save_assistant_training_sample(event, incoming, messages, reply, emoji_query=emoji_query)
+        # 梗图标记 <<<CATTY_MEME:词>>> 拉图 → 替换成 INLINE_IMAGE 标记。多模态 AI 也可能直接
+        # 在 _extract_content 阶段把 image_url 转成 INLINE_IMAGE,所以 reply 里两类来源混存。
+        reply = await _resolve_meme_queries(reply)
+        _save_assistant_training_sample(
+            event, incoming, messages, _strip_inline_image_markers(reply), emoji_query=emoji_query,
+        )
         emoji_entry = await _choose_or_download_emoji(event, emoji_query, incoming, image_analysis) if emoji_query else None
         if emoji_query and emoji_entry is None:
             logger.info("Emoji query did not resolve to an image: %s", emoji_query)
@@ -3865,14 +3979,21 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         if emoji_entry is not None:
             _remember_emoji_choice(event, emoji_entry)
             logger.info("Selected emoji for reply: %s", emoji_entry.path)
-        # 把 reply 里的 LaTeX 块占位符化:chunks 内只剩短占位符,_reply_chunks 切段时
-        # 不会切到公式中间;发送时 _compose_reply_message 看到占位符再渲染成图片消息段。
-        # history/memory 用 reply 原文(含 \[源码\]),不污染持久化。
+        # 把 reply 里的 LaTeX 块和 INLINE_IMAGE 标记都占位符化(分别 \x00LATEX_n\x00 / \x00IMG_n\x00):
+        # chunks 内只剩短占位符,_reply_chunks 切段时不会切到公式或图片标记中间;
+        # 发送时 _compose_reply_message 看到占位符再渲染成图片消息段。
+        # history/memory 用文本+[图片]兜底,base64 不进 prompt token。
         reply_for_send, latex_sources = replace_latex_with_placeholders(reply)
+        reply_for_send, inline_image_urls = _extract_inline_images(reply_for_send)
         chunks = _reply_chunks(reply_for_send)
         if image_description and not image_description_cached:
             memory_store.remember_image_summary(event, image_description)
-        history_text = restore_latex_placeholders("\n".join(chunks), latex_sources) if chunks else reply
+        if chunks:
+            history_text = _strip_inline_image_placeholders(
+                restore_latex_placeholders("\n".join(chunks), latex_sources)
+            )
+        else:
+            history_text = _strip_inline_image_markers(reply)
         _append_history(history_key, incoming.history_content, history_text)
         if special_care_context and chunks:
             memory_store.record_special_care_reply_sent(event, history_text)
@@ -3884,10 +4005,22 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             group_filter_context=group_filter_context,
             bot_continuation=bool(state.get("catty_recent_bot_continuation")),
         )
+
+        def _chunk_to_history(chunk_text: str) -> str:
+            return _strip_inline_image_placeholders(
+                restore_latex_placeholders(chunk_text, latex_sources)
+            )
+
         for chunk in chunks[:-1]:
-            _remember_bot_reply_for_event(event, restore_latex_placeholders(chunk, latex_sources))
+            _remember_bot_reply_for_event(event, _chunk_to_history(chunk))
             await matcher.send(
-                _compose_reply_message(event, text=chunk, quote=quote_pending, latex_sources=latex_sources)
+                _compose_reply_message(
+                    event,
+                    text=chunk,
+                    quote=quote_pending,
+                    latex_sources=latex_sources,
+                    inline_image_urls=inline_image_urls,
+                )
             )
             quote_pending = False
             _mark_consumed_reply_source_if_sent(event, state)
@@ -3895,7 +4028,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 await asyncio.sleep(delay_seconds)
         if nsfw_image_segments:
             if chunks:
-                _remember_bot_reply_for_event(event, restore_latex_placeholders(chunks[-1], latex_sources))
+                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]))
                 try:
                     await matcher.send(
                         _compose_reply_message(
@@ -3903,6 +4036,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                             text=chunks[-1],
                             quote=quote_pending,
                             latex_sources=latex_sources,
+                            inline_image_urls=inline_image_urls,
                         )
                     )
                 except OnebotActionFailed as exc:
@@ -3959,7 +4093,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish()
         if emoji_entry:
             if chunks:
-                _remember_bot_reply_for_event(event, restore_latex_placeholders(chunks[-1], latex_sources))
+                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]))
                 if config.catty_reply_mix_emoji_with_text:
                     _mark_consumed_reply_source_if_sent(event, state)
                     await matcher.finish(
@@ -3969,6 +4103,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                             emoji_entry=emoji_entry,
                             quote=quote_pending,
                             latex_sources=latex_sources,
+                            inline_image_urls=inline_image_urls,
                         )
                     )
                 await matcher.send(
@@ -3977,6 +4112,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                         text=chunks[-1],
                         quote=quote_pending,
                         latex_sources=latex_sources,
+                        inline_image_urls=inline_image_urls,
                     )
                 )
                 quote_pending = False
@@ -3988,7 +4124,13 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish(_compose_reply_message(event, emoji_entry=emoji_entry, quote=quote_pending))
         _mark_consumed_reply_source_if_sent(event, state)
         final_message = chunks[-1] if chunks else "喵喵！猫猫现在很忙哦，等一下再来找人家～"
-        _remember_bot_reply_for_event(event, restore_latex_placeholders(final_message, latex_sources) if chunks else final_message)
+        _remember_bot_reply_for_event(event, _chunk_to_history(final_message) if chunks else final_message)
         await matcher.finish(
-            _compose_reply_message(event, text=final_message, quote=quote_pending, latex_sources=latex_sources)
+            _compose_reply_message(
+                event,
+                text=final_message,
+                quote=quote_pending,
+                latex_sources=latex_sources,
+                inline_image_urls=inline_image_urls,
+            )
         )

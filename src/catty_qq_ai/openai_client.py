@@ -14,6 +14,7 @@ from PIL import Image, ImageSequence
 
 from .config import Config
 from .mc_status import mc_has_players
+from .reply_markers import INLINE_IMAGE_PREFIX, INLINE_IMAGE_SUFFIX
 
 
 _logger = logging.getLogger("catty_qq_ai")
@@ -110,6 +111,36 @@ def _looks_like_ollama_route(base_url: str, api_key: str, extra_body: dict[str, 
     return parsed.port == 11434 or api_key.strip().lower() == "ollama"
 
 
+# 主 AI 多模态输出里的图片(image_url / base64)在文本里用 INLINE_IMAGE 占位符表达,
+# 让发送链路看到后转成 MessageSegment.image。占位符常量在 reply_markers 里统一定义;
+# history 写入前要 strip 掉(否则 base64 会污染 prompt token)。
+
+
+def _coerce_multimodal_part(item: dict[str, Any]) -> str:
+    """把多模态 content list 里的一项渲染成纯文本片段(含 INLINE_IMAGE 占位符)。"""
+    text = item.get("text") or item.get("content")
+    if isinstance(text, str) and text:
+        return text
+
+    item_type = str(item.get("type") or "").lower()
+    if item_type in {"image_url", "image", "input_image", "output_image"}:
+        url = ""
+        image_url = item.get("image_url")
+        if isinstance(image_url, dict):
+            url = str(image_url.get("url") or "")
+        elif isinstance(image_url, str):
+            url = image_url
+        if not url:
+            url = str(item.get("url") or "")
+        # Gemini 风格: {"type": "image", "data": "<base64>", "mime_type": "image/png"}
+        if not url and isinstance(item.get("data"), str):
+            mime = str(item.get("mime_type") or "image/png")
+            url = f"data:{mime};base64,{item['data']}"
+        if url:
+            return f"{INLINE_IMAGE_PREFIX}{url}{INLINE_IMAGE_SUFFIX}"
+    return ""
+
+
 def _extract_content(data: dict[str, Any]) -> str:
     try:
         choice = data["choices"][0]
@@ -118,24 +149,58 @@ def _extract_content(data: dict[str, Any]) -> str:
 
     message = choice.get("message") or {}
     content = message.get("content")
+    finish_reason = choice.get("finish_reason")
+
     if isinstance(content, str):
         return content.strip()
     if isinstance(content, list):
         parts: list[str] = []
         for item in content:
             if isinstance(item, str):
-                parts.append(item)
+                if item:
+                    parts.append(item)
             elif isinstance(item, dict):
-                text = item.get("text") or item.get("content")
-                if isinstance(text, str):
-                    parts.append(text)
-        return "\n".join(part for part in parts if part).strip()
+                rendered = _coerce_multimodal_part(item)
+                if rendered:
+                    parts.append(rendered)
+        merged = "\n".join(part for part in parts if part).strip()
+        if merged:
+            return merged
+        # content 是 list 但里面没有任何可用的文本或图片,继续往下走兜底
 
-    text = choice.get("text")
-    if isinstance(text, str):
-        return text.strip()
+    # content 为空/None：先看 reasoning_content / reasoning(R1 / QwQ / DeepSeek-Reasoner 风格)
+    reasoning = message.get("reasoning_content") or message.get("reasoning")
+    if isinstance(reasoning, str) and reasoning.strip():
+        _logger.warning(
+            "AI message.content empty but reasoning present; using reasoning as reply. "
+            "finish_reason=%s content=%r reasoning_preview=%r",
+            finish_reason,
+            content,
+            reasoning.strip()[:120],
+        )
+        return reasoning.strip()
 
-    raise OpenAICompatibleError("AI 没有返回可读文本。", repr(data)[:500])
+    # 顶层 text 字段(非 chat / legacy completions)
+    raw_text = choice.get("text")
+    if isinstance(raw_text, str) and raw_text.strip():
+        return raw_text.strip()
+
+    # 真的什么都没有 — 把诊断信息打到日志(整段 response 切片 800 字够定位)
+    _logger.error(
+        "AI returned no readable content. finish_reason=%s content=%r "
+        "message_keys=%s tool_calls=%s response_preview=%r",
+        finish_reason,
+        content,
+        list(message.keys()) if isinstance(message, dict) else type(message).__name__,
+        bool(message.get("tool_calls")) if isinstance(message, dict) else False,
+        repr(data)[:800],
+    )
+    detail = (
+        f"finish_reason={finish_reason} content={content!r} "
+        f"message_keys={list(message.keys()) if isinstance(message, dict) else '?'} "
+        f"raw={repr(data)[:400]}"
+    )
+    raise OpenAICompatibleError("AI 没有返回可读文本。", detail)
 
 
 def _extract_ollama_chat_content(data: dict[str, Any]) -> str:
