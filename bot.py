@@ -7,12 +7,24 @@ if src_path.is_dir():
 
 from catty_config_loader import load_config_to_env
 import nonebot
+from nonebot import logger
 from nonebot.adapters.onebot.v11 import Adapter as OneBotV11Adapter
 
 
 loaded_config = load_config_to_env()
 if loaded_config is not None:
     print(f"Loaded config: {loaded_config}")
+
+_log_dir = Path(__file__).with_name("logs")
+_log_dir.mkdir(parents=True, exist_ok=True)
+logger.add(
+    str(_log_dir / "bot_live.log"),
+    rotation="20 MB",
+    retention=3,
+    encoding="utf-8",
+    level="INFO",
+    enqueue=True,
+)
 
 nonebot.init()
 
