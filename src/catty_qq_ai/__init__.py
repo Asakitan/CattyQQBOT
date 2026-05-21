@@ -1463,6 +1463,54 @@ async def _choose_or_download_emoji(
     return None
 
 
+# 用户回指最近图片时常见说法。命中即程序自动 inject 最近 has_image corpus 条目,
+# 让主 AI 直接看到 vision 描述,不必依赖 AI 主动调 catty_recall。
+# 用窄正则避免过度触发(普通"这个/那个"日常太常见,不算)。
+_RECENT_IMAGE_REFERENCE_RE = re.compile(
+    r"(?:刚才|上次|前面|之前|刚刚|前两|前几|上面)(?:那|这|的)?(?:张|个|条|段)?(?:图|照|图片|截图|帖图)"
+    r"|(?:那|这)(?:张|个|条)?(?:图|照|图片|截图)"
+    r"|(?:还记得|记不记得|认得|认识|看清|看不清|没看清|认不出|看出来)(?:这|那|刚才|上次|前面|之前)?(?:张|个|条)?(?:图|照|图片|截图)?"
+    r"|(?:这|那)图(?:是|说|意思|什么|啥)"
+)
+
+
+def _references_recent_image(text: str) -> bool:
+    if not text or "图" not in text and "照" not in text and "截图" not in text:
+        return False
+    return bool(_RECENT_IMAGE_REFERENCE_RE.search(text))
+
+
+def _build_recent_image_reference_hint(event: MessageEvent, incoming: ExtractedMessage) -> str:
+    """检测用户消息含图片回指 → 从 corpus 拉最近 has_image 条目 inject 给主 AI。
+
+    返回拼好的 system message 文本(空字符串表示无需 inject)。
+    """
+    if not _references_recent_image(incoming.text):
+        return ""
+    try:
+        recent_images = memory_store.collect_recent_image_descriptions(event, limit=3)
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"collect_recent_image_descriptions failed: {exc}")
+        return ""
+    if not recent_images:
+        return ""
+    lines: list[str] = [
+        "用户这一句明显在回指**之前出现过的图片**(『那张/刚才那张/认得这张』之类)。"
+        "下面给出当前会话最近的图片记忆(corpus 里 has_image 条目,时间倒序),"
+        "请你**优先在这几条里找用户指代的那张**,认出来就基于 vision 描述回答;"
+        "如果都对不上,可以用一句猫娘口吻说『人家也没看清这张是啥喵～主人形容下』,"
+        "不要硬猜也不要否认有图。"
+    ]
+    for index, img in enumerate(recent_images, 1):
+        ts = img.get("time", "")[:19]
+        speaker = img.get("display_name") or img.get("user_id") or "群友"
+        lines.append(f"{index}. [{ts}] {speaker}: {img.get('text', '')}")
+    lines.append(
+        "如果需要更早的图(超出本会话最近 3 张),再考虑调 catty_recall(keywords=『图片内容 关键词』)查 corpus。"
+    )
+    return "\n".join(lines)
+
+
 def _build_messages(
     event: MessageEvent,
     key: str,
@@ -1564,6 +1612,13 @@ def _build_messages(
     memory_context = memory_store.build_context(event)
     if memory_context:
         messages.append({"role": "system", "content": memory_context})
+    # 程序自动判断:用户消息含图片回指词且当前轮没在发新图时,
+    # 直接从 corpus 拉最近 has_image 条目 inject 给主 AI,不用 AI 主动调 catty_recall。
+    # 命中场景:『刚才那张图』『认得这张吗』『前面那个截图』等。
+    if not incoming.has_image:
+        recent_image_hint = _build_recent_image_reference_hint(event, incoming)
+        if recent_image_hint:
+            messages.append({"role": "system", "content": recent_image_hint})
     messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     return messages

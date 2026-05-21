@@ -1868,6 +1868,50 @@ class MemoryStore:
             return []
         return sorted(games.keys())
 
+    def collect_recent_image_descriptions(
+        self,
+        event: MessageEvent,
+        *,
+        limit: int = 3,
+    ) -> list[dict[str, Any]]:
+        """从当前 scope corpus 拉最近 ``limit`` 条 has_image=True 的条目。
+
+        给 _build_messages 在用户回指『刚才那张图/认得这张吗』时强 inject 用,
+        让主 AI 直接看到最近图片的 vision 描述,不用再调 catty_recall。
+        """
+        if not self.enabled:
+            return []
+        if isinstance(event, GroupMessageEvent):
+            group = self._data.get("groups", {}).get(str(event.group_id), {})
+            corpus = group.get("corpus", []) if isinstance(group, dict) else []
+        elif isinstance(event, PrivateMessageEvent):
+            user = self._data.get("users", {}).get(str(event.user_id), {})
+            corpus = user.get("private_corpus", []) if isinstance(user, dict) else []
+        else:
+            return []
+        if not isinstance(corpus, list):
+            return []
+        out: list[dict[str, Any]] = []
+        for entry in reversed(corpus):
+            if not isinstance(entry, dict):
+                continue
+            if not entry.get("has_image"):
+                continue
+            text = str(entry.get("text") or "").strip()
+            if not text:
+                continue
+            out.append(
+                {
+                    "time": str(entry.get("time") or ""),
+                    "user_id": str(entry.get("user_id") or ""),
+                    "display_name": str(entry.get("display_name") or ""),
+                    "text": text[:240],
+                }
+            )
+            if len(out) >= max(1, int(limit)):
+                break
+        return out
+
     # ── 游戏摘要周期压缩 ───────────────────────────────────────────────
 
     def due_games_for_summary(self) -> list[str]:
