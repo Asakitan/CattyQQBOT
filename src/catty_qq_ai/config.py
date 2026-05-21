@@ -235,6 +235,14 @@ class Config(BaseModel):
     catty_proactive_active_window_minutes: float = 15.0
     catty_proactive_active_min_messages: int = 5
 
+    # ── 游戏记忆库(独立于 user/group 记忆) ──────────────────────────────
+    # AI 调 catty_web_search 在游戏群拿到结果时自动 sink;AI 也可以主动用
+    # catty_game_remember 写入。catty_game_recall 是双向查询接口。
+    # 文件结构:每个游戏一个 JSON,memory_games/game_{name}.json。
+    catty_memory_game_storage_dir: str = "memory_games"
+    catty_memory_max_game_facts: int = 200  # 每个游戏最多保留多少条事实(超出按时间淘汰最旧)
+    catty_memory_max_game_fact_chars: int = 360  # 单条事实文本上限
+
     # ── 主 AI 工具调用(OpenAI function calling 协议) ──────────────────
     # 主回复时给云端模型挂 catty_recall / catty_user_profile / catty_mc_status 三套 tool schema,
     # 由模型自行判断要不要查询。默认常驻挂载,让上游 prompt cache 命中 tools 部分。

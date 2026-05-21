@@ -13,6 +13,7 @@ import asyncio
 import base64
 import json
 import logging
+import re
 import time
 from dataclasses import dataclass, field
 from typing import Any, Awaitable, Callable
@@ -224,6 +225,77 @@ _MEME_QUERY_SCHEMA: dict[str, Any] = {
 }
 
 
+_GAME_RECALL_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_game_recall",
+        "description": (
+            "查指定游戏的**专属事实记忆库**(独立于群/用户语料,跨群跨用户共用)。"
+            "适用场景:群友/主人聊起某个游戏(角色/版本/活动/机制/玩家事件),你想确认"
+            "之前积累的事实(『上次说的 X 角色削弱是什么时候?』『那个活动奖励是啥?』)。"
+            "游戏名建议小写英文(strinova / star_resonance / minecraft / genshin / 等),也接受中文,"
+            "后端会自动归一化。返回 matches 数组(time/text/source/url)和可选 long_term_summary。"
+            "不知道游戏名时可以先调一次空 keywords 看 total_facts,或者从 list 看猫猫存过哪些游戏。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "game": {
+                    "type": "string",
+                    "description": "游戏标识。小写英文优先,如 `strinova` / `star_resonance` / `minecraft`,也可中文。",
+                },
+                "keywords": {
+                    "type": "string",
+                    "description": "搜索词,空格或逗号分隔,做 substring AND 匹配。留空拿最近 limit 条。",
+                },
+                "limit": {
+                    "type": "integer",
+                    "description": "最多返回多少条,默认 8,上限 50。",
+                    "minimum": 1,
+                    "maximum": 50,
+                },
+            },
+            "required": ["game"],
+        },
+    },
+}
+
+
+_GAME_REMEMBER_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_game_remember",
+        "description": (
+            "把一条**值得长期记住的游戏事实**写入游戏记忆库。适用场景:"
+            "(a) 群友/主人给出了具体的版本/角色/机制信息(『XX 角色 2.0 削弱了大招倍率』);"
+            "(b) 共识结论(『这个 boss 推荐用 X 队伍打』);"
+            "(c) 玩家事件/约定(『主人下周日要打 X 副本,带 Y 队友』)。"
+            "**不要**记:闲聊吐槽、临时情绪、单次玩笑、已经在 catty_recall 拿到的同条。"
+            "去重逻辑:同 text+source 不会重复写入。"
+            "如果 web_search 已经自动收集了相关信息,只在你想补充群友给的额外结论时才写。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "game": {
+                    "type": "string",
+                    "description": "游戏标识,和 catty_game_recall 保持一致。",
+                },
+                "fact": {
+                    "type": "string",
+                    "description": "事实文本,一句话讲清(360 字以内)。带具体名词/数字/时间。",
+                },
+                "tags": {
+                    "type": "string",
+                    "description": "可选,逗号分隔的 1-4 个标签,例如 `角色,削弱,2.0版本`。",
+                },
+            },
+            "required": ["game", "fact"],
+        },
+    },
+}
+
+
 ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_recall": _RECALL_SCHEMA,
     "catty_user_profile": _USER_PROFILE_SCHEMA,
@@ -231,6 +303,8 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_web_search": _WEB_SEARCH_SCHEMA,
     "catty_nsfw_search": _NSFW_SEARCH_SCHEMA,
     "catty_meme_query": _MEME_QUERY_SCHEMA,
+    "catty_game_recall": _GAME_RECALL_SCHEMA,
+    "catty_game_remember": _GAME_REMEMBER_SCHEMA,
 }
 
 
@@ -473,7 +547,38 @@ async def _exec_web_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, 
             "error": f"搜索失败: {exc.__class__.__name__}: {exc}",
             "results": [],
         }
-    return {
+
+    # 在游戏群里搜索成功时,自动 sink top 3 结果到对应游戏记忆库。
+    # 这是高信号场景(用户明确想查 + AI 决定要查),量小、质量稳。
+    sinked_to_game = ""
+    if results and ctx.group_id:
+        game_name = ctx.memory_store.game_for_group(ctx.group_id)
+        if game_name:
+            sink_count = 0
+            for r in results[:3]:
+                snippet = (r.snippet or "").strip()
+                text = f"{r.title.strip()}: {snippet}" if snippet else r.title.strip()
+                if not text:
+                    continue
+                outcome = ctx.memory_store.record_game_fact(
+                    game_name,
+                    text=text,
+                    source=f"web_search:{r.source}" if r.source else "web_search",
+                    url=r.url,
+                    group_id=ctx.group_id,
+                    user_id=ctx.user_id,
+                    tags=[query[:40]],
+                )
+                if outcome.get("ok") and not outcome.get("deduplicated"):
+                    sink_count += 1
+            if sink_count > 0:
+                sinked_to_game = game_name
+                _logger.info(
+                    "web_search auto-sinked %d facts into game memory '%s' (group=%s query=%r)",
+                    sink_count, game_name, ctx.group_id, query,
+                )
+
+    payload: dict[str, Any] = {
         "query": query,
         "count": len(results),
         "results": [
@@ -487,6 +592,9 @@ async def _exec_web_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, 
         ],
         "context_text": format_search_context(query, results),
     }
+    if sinked_to_game:
+        payload["auto_sinked_to_game_memory"] = sinked_to_game
+    return payload
 
 
 async def _exec_nsfw_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
@@ -655,6 +763,38 @@ async def _meme_query_impl(keywords: str, ctx: ToolContext) -> dict[str, Any]:
     }
 
 
+async def _exec_game_recall(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    game = str(args.get("game") or "").strip()
+    if not game:
+        return {"error": "game 不能为空"}
+    keywords = str(args.get("keywords") or "").strip()
+    limit_raw = args.get("limit")
+    try:
+        limit = int(limit_raw) if limit_raw is not None else 8
+    except (TypeError, ValueError):
+        limit = 8
+    return ctx.memory_store.recall_game(game, keywords=keywords, limit=limit)
+
+
+async def _exec_game_remember(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    game = str(args.get("game") or "").strip()
+    fact = str(args.get("fact") or "").strip()
+    if not game:
+        return {"error": "game 不能为空"}
+    if not fact:
+        return {"error": "fact 不能为空"}
+    tags_raw = str(args.get("tags") or "").strip()
+    tags = [t.strip() for t in re.split(r"[,，;；]+", tags_raw) if t.strip()] if tags_raw else None
+    return ctx.memory_store.record_game_fact(
+        game,
+        text=fact,
+        source="ai_remember",
+        group_id=ctx.group_id,
+        user_id=ctx.user_id,
+        tags=tags,
+    )
+
+
 # Executor 注册表:name → async callable
 ToolExecutor = Callable[[dict[str, Any], ToolContext], Awaitable[dict[str, Any]]]
 
@@ -665,6 +805,8 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_web_search": _exec_web_search,
     "catty_nsfw_search": _exec_nsfw_search,
     "catty_meme_query": _exec_meme_query,
+    "catty_game_recall": _exec_game_recall,
+    "catty_game_remember": _exec_game_remember,
 }
 
 
@@ -715,7 +857,7 @@ async def execute_tool_call(
 def tools_system_hint() -> str:
     """常驻 system 提示:告诉主 AI 工具的存在和调用边界。"""
     return (
-        "你接入了六个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
+        "你接入了八个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
         "1. catty_recall — 查历史记忆/语料/长期摘要。用户用'上次/记得/之前/还记得'等时间指代,"
         "且常驻 context 没给答案时再调。\n"
         "2. catty_user_profile — 查用户画像/称呼/性别/是否主人。群里冒出一个你不确定怎么称呼的"
@@ -729,6 +871,14 @@ def tools_system_hint() -> str:
         "6. catty_meme_query — Bing 图片搜索拉一张梗图嵌入回复。**只有特定主题画面需求时调**——"
         "撒娇/玩梗/情绪反应让本地表情库随机配(<<<CATTY_EMOJI_QUERY:意图>>> marker 老路径)更快。"
         "拿到 image_uri 后必须用 <<<CATTY_INLINE_IMAGE:URI>>> 标记嵌入最终回复指定位置。\n"
+        "7. catty_game_recall — 查指定游戏的**专属事实记忆库**(跨群跨用户共用,独立于 catty_recall)。"
+        "群友聊起游戏角色/版本/活动/机制,你想用之前积累的事实回答时调。"
+        "游戏名小写英文优先(strinova / star_resonance / minecraft / genshin),中文也接受。\n"
+        "8. catty_game_remember — 把值得长期记住的游戏事实写入记忆库。"
+        "**只在群友给出了具体名词/数字/版本/共识结论时才记**;闲聊吐槽/单次玩笑不要记。"
+        "在游戏群里调 catty_web_search 时**程序会自动 sink top 3 结果**到对应游戏库,"
+        "你拿到 web_search 返回看到 `auto_sinked_to_game_memory` 字段就说明已自动收集,"
+        "**不要再调 catty_game_remember 写同样的内容**(去重也会拦,但浪费一次工具调用)。\n"
         "通用规则:\n"
         "- 多个 tool 调用可以并发(同一轮发起多个 tool_calls)但**总开销=回复延迟**,能不调就不调。\n"
         "- 拿到 tool 结果后基于结果写最终回复;**禁止复读 tool 返回的 JSON 原文**,"

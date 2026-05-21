@@ -181,6 +181,18 @@ class MemoryStore:
             config.catty_memory_user_storage_dir,
             f"{self.path.stem}_users",
         )
+        self.game_storage_dir = self._resolve_storage_dir(
+            getattr(config, "catty_memory_game_storage_dir", "") or "",
+            f"{self.path.stem}_games",
+        )
+        self.max_game_facts = max(int(getattr(config, "catty_memory_max_game_facts", 200) or 200), 20)
+        self.max_game_fact_chars = max(int(getattr(config, "catty_memory_max_game_fact_chars", 360) or 360), 60)
+        # group_id → game_name 反向索引,从 config.game_context.*_group_ids 推
+        self._group_to_game: dict[str, str] = {}
+        for group_id in getattr(config, "catty_game_context_star_resonance_group_ids", set()) or set():
+            self._group_to_game[str(group_id)] = "star_resonance"
+        for group_id in getattr(config, "catty_game_context_strinova_group_ids", set()) or set():
+            self._group_to_game[str(group_id)] = "strinova"
         self.max_known_members = max(config.catty_memory_max_known_members, 0)
         self.special_group_ids = {str(group_id) for group_id in config.catty_memory_special_group_ids}
         self.summary_interval_minutes = max(config.catty_memory_summary_interval_minutes, 1)
@@ -202,7 +214,7 @@ class MemoryStore:
             float(getattr(config, "catty_memory_save_debounce_seconds", 2.0) or 2.0),
             0.1,
         )
-        self._data: dict[str, Any] = {"users": {}, "groups": {}, "images": {}, "anger": {}}
+        self._data: dict[str, Any] = {"users": {}, "groups": {}, "images": {}, "anger": {}, "games": {}}
         self._dirty: bool = False
         if self.enabled:
             self._load()
@@ -215,7 +227,7 @@ class MemoryStore:
             except Exception as exc:  # noqa: BLE001
                 logger.warning(f"memory_store: refresh pre-flush failed: {exc}")
             self._dirty = False
-        self._data = {"users": {}, "groups": {}, "images": {}, "anger": {}}
+        self._data = {"users": {}, "groups": {}, "images": {}, "anger": {}, "games": {}}
         if self.enabled:
             self._load()
 
@@ -232,6 +244,13 @@ class MemoryStore:
     def _user_file(self, user_id: str) -> Path:
         return self.user_storage_dir / f"user_{_safe_storage_id(user_id)}.json"
 
+    def _game_file(self, game_name: str) -> Path:
+        return self.game_storage_dir / f"game_{_safe_storage_id(game_name)}.json"
+
+    @staticmethod
+    def _normalize_game_name(game: str) -> str:
+        return re.sub(r"[\s/\\]+", "_", str(game or "").strip().lower())
+
     def _load(self) -> None:
         if self.path.exists():
             try:
@@ -245,6 +264,7 @@ class MemoryStore:
                 self._data["anger"] = loaded.get("anger", {}) if isinstance(loaded.get("anger", {}), dict) else {}
         self._load_entity_files(self.user_storage_dir, "user_id", "user_", self._data.setdefault("users", {}))
         self._load_entity_files(self.group_storage_dir, "group_id", "group_", self._data.setdefault("groups", {}))
+        self._load_entity_files(self.game_storage_dir, "game_name", "game_", self._data.setdefault("games", {}))
 
     def _load_entity_files(self, directory: Path, id_key: str, filename_prefix: str, target: dict[str, Any]) -> None:
         if not directory.is_dir():
@@ -304,6 +324,9 @@ class MemoryStore:
         for group_id, group in self._data.get("groups", {}).items():
             if isinstance(group, dict):
                 self._write_entity_file(self._group_file(str(group_id)), "group_id", str(group_id), group)
+        for game_name, game in self._data.get("games", {}).items():
+            if isinstance(game, dict):
+                self._write_entity_file(self._game_file(str(game_name)), "game_name", str(game_name), game)
 
     def flush_sync(self) -> bool:
         """如果有脏数据则真正落盘。返回是否实际写了。供 shutdown / hot-reload 钩子调用。"""
@@ -1694,3 +1717,148 @@ class MemoryStore:
         result["matches"] = matches
         result["match_count"] = len(matches)
         return result
+
+    # ── 游戏记忆库 ──────────────────────────────────────────────────────
+
+    def game_for_group(self, group_id: str | int | None) -> str:
+        """根据 group_id 推这个群对应的游戏名。空字符串 = 不在任何游戏群。"""
+        if group_id is None:
+            return ""
+        return self._group_to_game.get(str(group_id), "")
+
+    def record_game_fact(
+        self,
+        game: str,
+        text: str,
+        *,
+        source: str = "manual",
+        url: str = "",
+        group_id: str = "",
+        user_id: str = "",
+        tags: list[str] | None = None,
+    ) -> dict[str, Any]:
+        """把一条事实写入指定游戏的记忆库。
+
+        返回 ``{"ok": bool, "game": str, "facts_count": int}`` 表示落盘后状态。
+        游戏名做小写归一化;facts 超过 ``max_game_facts`` 时淘汰最旧。
+        """
+        if not self.enabled:
+            return {"ok": False, "error": "memory disabled"}
+        game_name = self._normalize_game_name(game)
+        text = str(text or "").strip()
+        if not game_name:
+            return {"ok": False, "error": "game 名为空"}
+        if not text:
+            return {"ok": False, "error": "fact 文本为空"}
+        if len(text) > self.max_game_fact_chars:
+            text = text[: self.max_game_fact_chars]
+
+        games = self._data.setdefault("games", {})
+        game_record = games.setdefault(game_name, {"facts": []})
+        if not isinstance(game_record.get("facts"), list):
+            game_record["facts"] = []
+        facts: list[dict[str, Any]] = game_record["facts"]
+
+        entry = {
+            "time": _now(),
+            "text": text,
+            "source": str(source or "manual").strip()[:64],
+        }
+        if url:
+            entry["url"] = str(url).strip()[:500]
+        if group_id:
+            entry["group_id"] = str(group_id)
+        if user_id:
+            entry["user_id"] = str(user_id)
+        if tags:
+            entry["tags"] = [str(t).strip() for t in tags if str(t).strip()][:8]
+
+        # 去重:同 text + 同 source 不重复写入
+        dedup_key = (text, entry["source"])
+        for existing in facts[-50:]:  # 只在最近 50 条里查重,避免 O(n) 扫全表
+            if not isinstance(existing, dict):
+                continue
+            if (str(existing.get("text") or ""), str(existing.get("source") or "")) == dedup_key:
+                return {"ok": True, "game": game_name, "facts_count": len(facts), "deduplicated": True}
+
+        facts.append(entry)
+        # LRU 截断:超过 max 时丢最早的
+        if len(facts) > self.max_game_facts:
+            game_record["facts"] = facts[-self.max_game_facts :]
+        game_record["last_updated"] = _now()
+        self._save()
+        return {"ok": True, "game": game_name, "facts_count": len(game_record["facts"])}
+
+    def recall_game(
+        self,
+        game: str,
+        *,
+        keywords: str = "",
+        limit: int = 8,
+    ) -> dict[str, Any]:
+        """查指定游戏的事实记忆库。
+
+        keywords 用空格/逗号分隔,做 substring AND 匹配(大小写不敏感);
+        留空返回最近 ``limit`` 条。
+        """
+        result: dict[str, Any] = {"game": self._normalize_game_name(game), "limit": max(1, min(int(limit or 8), 50))}
+        if not self.enabled:
+            result["error"] = "memory disabled"
+            result["matches"] = []
+            return result
+        game_name = result["game"]
+        if not game_name:
+            result["error"] = "game 名为空"
+            result["matches"] = []
+            return result
+        games = self._data.get("games", {}) if isinstance(self._data.get("games"), dict) else {}
+        game_record = games.get(game_name, {}) if isinstance(games, dict) else {}
+        if not isinstance(game_record, dict):
+            game_record = {}
+        facts = game_record.get("facts", [])
+        if not isinstance(facts, list):
+            facts = []
+        result["total_facts"] = len(facts)
+        summary = str(game_record.get("summary") or "").strip()
+        if summary:
+            result["long_term_summary"] = summary[:600]
+
+        keyword_list = [kw.strip().casefold() for kw in re.split(r"[\s,，;；]+", keywords or "") if kw.strip()]
+        result["keywords"] = keyword_list
+
+        def _match_text(text: str) -> bool:
+            if not keyword_list:
+                return True
+            normalized = text.casefold()
+            return all(kw in normalized for kw in keyword_list)
+
+        matches: list[dict[str, Any]] = []
+        for entry in reversed(facts):  # 倒序遍历,新的优先
+            if len(matches) >= result["limit"]:
+                break
+            if not isinstance(entry, dict):
+                continue
+            text = str(entry.get("text") or "")
+            if not text or not _match_text(text):
+                continue
+            matches.append(
+                {
+                    "time": str(entry.get("time") or ""),
+                    "text": text,
+                    "source": str(entry.get("source") or ""),
+                    "url": str(entry.get("url") or ""),
+                    "group_id": str(entry.get("group_id") or ""),
+                    "tags": list(entry.get("tags") or []),
+                }
+            )
+        result["matches"] = matches
+        result["match_count"] = len(matches)
+        if not facts:
+            result["note"] = f"游戏『{game_name}』暂无任何事实,可以 web_search 后自动收集,或主 AI 主动调 catty_game_remember 写入"
+        return result
+
+    def list_games(self) -> list[str]:
+        games = self._data.get("games", {}) if isinstance(self._data.get("games"), dict) else {}
+        if not isinstance(games, dict):
+            return []
+        return sorted(games.keys())
