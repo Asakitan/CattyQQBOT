@@ -196,20 +196,26 @@ _MEME_QUERY_SCHEMA: dict[str, Any] = {
     "function": {
         "name": "catty_meme_query",
         "description": (
-            "拉一张梗图/网图(Bing 图片搜索)以图代话。**只在你确实想用图加强表达时调用**——"
-            "撒娇/玩梗/情绪反应建议优先用本地表情库(EMOJI_QUERY marker 那条路径,程序自动配),"
-            "只有需要特定主题的画面(角色/场景/具体事物)时才调本 tool。"
+            "拉一张梗图/网图(DuckDuckGo 图片搜索)以图代话。**SFW 内容,群聊和私聊都能用**,"
+            "群友点名想看某个梗/角色/场景的图(『双人马桶』『帝皇黄金马桶』『某个老婆』之类)就放心调。"
+            "**和本地表情库(EMOJI_QUERY)分工**:撒娇/玩梗/情绪反应走 EMOJI_QUERY 自动配;"
+            "群友点名要一张'有具体主题的网图'(角色/作品/梗/物体)时调本 tool。"
             "返回 image_uri 是 base64:// URI;你拿到后**必须在最终回复中**用 "
             "`<<<CATTY_INLINE_IMAGE:URI>>>` 标记把它嵌入想要展示图片的位置,"
             "发送链路会自动转成 QQ 图片消息。"
-            "失败时返回 error,这时直接用文字回复即可,不要拼任何 INLINE_IMAGE 标记。"
+            "整个 tool 内部限 25s,失败/超时会返回 error;这时用文字回复即可,"
+            "可以给 1-2 个备用关键词让群友自己搜,不要拼任何 INLINE_IMAGE 标记。"
         ),
         "parameters": {
             "type": "object",
             "properties": {
                 "keywords": {
                     "type": "string",
-                    "description": "梗图主题。短关键词(1-3 个词),例如『猫猫贴贴』『摸鱼』『傲娇害羞』。",
+                    "description": (
+                        "梗图主题。短关键词(1-4 个词),保留群友说的原语种,可以加 1 个英文备选;"
+                        "示例『双人马桶 double toilet』『帝皇 黄金马桶 Warhammer golden throne』"
+                        "『香奈美 立绘』。不要拼 R-18 / 涩图 这类(本 tool 是 SFW;NSFW 走 catty_nsfw_search)。"
+                    ),
                 },
             },
             "required": ["keywords"],
@@ -241,9 +247,9 @@ class ToolContext:
         [list["NsfwResult"], int], Awaitable[tuple[list[Any], list["NsfwResult"]]]
     ] | None = None
     # 下载二进制(http URL → bytes + content_type),沿用 openai_client.download_binary。
-    # 通过注入避免 tools.py import openai_client(后者 import 链涉及 mc_status,
-    # 已经能用,但保持单向依赖更干净)。
-    download_binary_fn: Callable[[Config, str], Awaitable[tuple[bytes, str]]] | None = None
+    # 类型放宽到 Callable[..., ...] 让 meme 拉图时能传 timeout=10s 强约束,
+    # 不再走 vision_timeout(180s)拖垮整轮 chat completion(120s)。
+    download_binary_fn: Callable[..., Awaitable[tuple[bytes, str]]] | None = None
     # 副作用:executor 把要发的图片塞这里,主回复点收尾时取出来拼到发送链路。
     # 元素类型由 prepare_nsfw_segments_fn 决定(实际是 MessageSegment),tools.py 不依赖具体类型。
     pending_image_segments: list[Any] = field(default_factory=list)
@@ -563,44 +569,90 @@ async def _exec_nsfw_search(args: dict[str, Any], ctx: ToolContext) -> dict[str,
     }
 
 
+_MEME_DOWNLOAD_TIMEOUT = 10.0  # 单个候选下载上限
+_MEME_TOTAL_TIMEOUT = 25.0  # 整个 tool(含搜索+并发下载)总上限
+_MEME_MAX_CANDIDATES = 3  # 并发尝试的候选数,够命中就够;再多浪费带宽
+
+
 async def _exec_meme_query(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     keywords = str(args.get("keywords") or "").strip()
     if not keywords:
         return {"error": "keywords 不能为空"}
     if ctx.download_binary_fn is None:
         return {"error": "运行环境未注入下载器,无法拉图"}
+
     try:
-        image_urls = await search_image_urls(ctx.config, keywords[:80], max_results=4)
+        return await asyncio.wait_for(
+            _meme_query_impl(keywords, ctx),
+            timeout=_MEME_TOTAL_TIMEOUT,
+        )
+    except asyncio.TimeoutError:
+        _logger.info("Meme tool timed out (>%.0fs) for %r", _MEME_TOTAL_TIMEOUT, keywords)
+        return {
+            "error": (
+                f"搜图超过 {int(_MEME_TOTAL_TIMEOUT)}s 没出图,网线可能阻了。"
+                "用文字回应即可,也可以给 1-2 个备用关键词让群友自己搜。"
+            )
+        }
+
+
+async def _meme_query_impl(keywords: str, ctx: ToolContext) -> dict[str, Any]:
+    """实际搜+下载逻辑。被 wait_for 包裹,任何点超 25s 都会被取消。"""
+    try:
+        image_urls = await search_image_urls(ctx.config, keywords[:80], max_results=_MEME_MAX_CANDIDATES * 2)
     except (httpx.HTTPError, ValueError) as exc:
         _logger.warning("Meme search failed for %r: %s", keywords, exc)
         return {"error": f"搜图失败: {exc.__class__.__name__}: {exc}"}
     if not image_urls:
         return {"error": "没找到合适的梗图,用文字回复即可"}
 
-    for image_url in image_urls:
+    candidates = image_urls[:_MEME_MAX_CANDIDATES]
+
+    async def _fetch_one(url: str) -> tuple[bytes, str, str] | None:
         try:
-            image_data, content_type = await ctx.download_binary_fn(ctx.config, image_url)
-        except httpx.HTTPError as exc:
-            _logger.info("Meme candidate download failed (%s): %s", image_url, exc)
-            continue
+            data, content_type = await ctx.download_binary_fn(
+                ctx.config, url, timeout=_MEME_DOWNLOAD_TIMEOUT
+            )
+        except (httpx.HTTPError, asyncio.TimeoutError) as exc:
+            _logger.info("Meme candidate download failed (%s): %s", url, exc)
+            return None
         except Exception as exc:  # noqa: BLE001
             _logger.warning("Meme candidate fetch unexpected error: %s", exc)
-            continue
-        if not image_data:
-            continue
+            return None
+        if not data:
+            return None
         if content_type and not content_type.lower().startswith("image/"):
-            continue
-        uri = "base64://" + base64.b64encode(image_data).decode("ascii")
-        return {
-            "image_uri": uri,
-            "source_url": image_url,
-            "keywords": keywords,
-            "note": (
-                "把这个 image_uri **完整原样**用 <<<CATTY_INLINE_IMAGE:URI>>> 标记嵌进最终回复想展示图的位置。"
-                "切勿把 URI 截断、切勿单独输出 URI,也不要把 source_url 贴出来当链接。"
-            ),
-        }
-    return {"error": "拿到候选 URL 但全部下载失败,用文字回复即可"}
+            return None
+        return data, content_type, url
+
+    tasks = [asyncio.create_task(_fetch_one(url)) for url in candidates]
+    winner: tuple[bytes, str, str] | None = None
+    try:
+        for coro in asyncio.as_completed(tasks):
+            result = await coro
+            if result is not None:
+                winner = result
+                break
+    finally:
+        for task in tasks:
+            if not task.done():
+                task.cancel()
+        # 让取消传播完
+        await asyncio.gather(*tasks, return_exceptions=True)
+
+    if winner is None:
+        return {"error": "拿到候选 URL 但全部下载失败,用文字回复即可"}
+    image_data, _content_type, source_url = winner
+    uri = "base64://" + base64.b64encode(image_data).decode("ascii")
+    return {
+        "image_uri": uri,
+        "source_url": source_url,
+        "keywords": keywords,
+        "note": (
+            "把这个 image_uri **完整原样**用 <<<CATTY_INLINE_IMAGE:URI>>> 标记嵌进最终回复想展示图的位置。"
+            "切勿把 URI 截断、切勿单独输出 URI,也不要把 source_url 贴出来当链接。"
+        ),
+    }
 
 
 # Executor 注册表:name → async callable
