@@ -64,6 +64,7 @@ from .persona_prompts import (
     build_group_meme_literacy_prompt,
     build_image_literacy_prompt,
     build_persona_memory_prompt,
+    build_qq_chat_rhythm_prompt,
     build_reply_intelligence_prompt,
     build_reply_self_check_prompt,
     build_scenario_playbook_prompt,
@@ -1499,6 +1500,7 @@ def _build_messages(
     messages.append({"role": "system", "content": build_scenario_playbook_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": build_scene_discrimination_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": build_reply_intelligence_prompt(NO_REPLY_MARKER)})
+    messages.append({"role": "system", "content": build_qq_chat_rhythm_prompt(REPLY_SPLIT_MARKER)})
     if config.catty_reply_self_check_enabled:
         messages.append(
             {
@@ -1517,7 +1519,7 @@ def _build_messages(
 
     # ─── Layer C: 教学例句，仅冷会话挂（热会话从历史学习风格） ───
     if config.catty_reply_style_examples_enabled and is_cold_session:
-        messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER)})
+        messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER)})
         messages.append({"role": "system", "content": build_disambiguation_examples_prompt(NO_REPLY_MARKER)})
 
     # ─── Layer D: 按事件可能变 ───
@@ -2551,7 +2553,7 @@ def _build_proactive_messages(group_id: str) -> list[ChatMessage]:
             }
         )
     if config.catty_reply_style_examples_enabled:
-        messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER)})
+        messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER)})
     messages.append(
         {
             "role": "system",
