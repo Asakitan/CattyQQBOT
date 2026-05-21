@@ -23,6 +23,8 @@ class KeywordReplyRule(BaseModel):
     keywords: list[str] = Field(default_factory=list)
     reply: str = ""
     enabled: bool = True
+    # 同一会话(以群为单位)在该秒数内不再重复回此规则;0 表示无冷却。
+    cooldown_seconds: float = 0.0
 
     @field_validator("keywords", mode="before")
     @classmethod
@@ -228,6 +230,20 @@ class Config(BaseModel):
     catty_proactive_min_interval_minutes: float = 120.0
     catty_proactive_response_window_minutes: float = 30.0
     catty_proactive_recent_messages: int = 40
+
+    # ── 主 AI 工具调用(OpenAI function calling 协议) ──────────────────
+    # 主回复时给云端模型挂 catty_recall / catty_user_profile / catty_mc_status 三套 tool schema,
+    # 由模型自行判断要不要查询。默认常驻挂载,让上游 prompt cache 命中 tools 部分。
+    # 上游返回 400 或 tool 调度异常时会自动降级一次纯文本回复。
+    catty_tools_enabled: bool = True
+    # 单次主回复最多允许的 tool 调用轮次(防止模型反复循环调 tool)
+    catty_tools_max_rounds: int = 3
+    # 每个 tool 结果的 in-process LRU TTL(秒);0 表示不缓存
+    catty_tools_cache_ttl_seconds: float = 60.0
+    # 单次 tool 调用上限(每轮多个 tool_calls 也算)
+    catty_tools_max_calls_per_round: int = 3
+    # 私聊场景下额外排除哪些 tool;群聊默认全开
+    catty_tools_disabled_in_private: list[str] = Field(default_factory=lambda: ["catty_user_profile"])
 
     catty_temperature: float | None = 0.7
     catty_max_tokens: int | None = 1000

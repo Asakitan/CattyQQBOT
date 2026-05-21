@@ -1491,3 +1491,184 @@ class MemoryStore:
         lines.append("- 如果用户明确要求查看已存储记忆、群友画像或人物信息，可以依据本段记忆回答；没有记录时直说没有。")
         lines.append("- 可以自然少量使用猫系颜文字或动作，如 (ฅ>ω<*ฅ)、(๑•̀ㅂ•́)و✧、ฅฅ；不要刷屏。")
         return "\n".join(lines)
+
+    def lookup_user_profile(self, user_id: str, group_id: str = "") -> dict[str, Any]:
+        """Tool 友好画像查询：合并群成员画像、私聊画像、配置称呼,统一返回 dict。
+
+        即使 enabled=False 也返回 {"user_id": ...} 让 AI 知道功能关了,而不是抛异常。
+        """
+        user_id = str(user_id).strip()
+        group_id = str(group_id or "").strip()
+        result: dict[str, Any] = {
+            "user_id": user_id,
+            "scope": "group" if group_id else "private",
+        }
+        if not user_id:
+            result["error"] = "user_id 为空"
+            return result
+        if not self.enabled:
+            result["error"] = "memory disabled"
+            return result
+        if group_id:
+            result["group_id"] = group_id
+        configured = self._configured_title_for(user_id, group_id or None)
+        result["configured_title"] = configured
+        result["is_configured_owner"] = self._is_configured_owner(user_id, group_id or None)
+        result["title"] = self._title_for(user_id, group_id or None)
+        if group_id:
+            group = self._data.get("groups", {}).get(group_id, {})
+            if isinstance(group, dict):
+                member = group.get("members", {}).get(user_id, {})
+                if isinstance(member, dict):
+                    display = str(member.get("display_name") or "").strip()
+                    if display:
+                        result["display_name"] = display
+                profile = self._profile_for(user_id, group_id)
+                if profile:
+                    result["gender"] = _clean_gender(profile.get("gender"))
+                    impression = str(profile.get("impression") or "").strip()
+                    if impression:
+                        result["impression"] = impression[:200]
+                    evidence = str(profile.get("evidence") or "").strip()
+                    if evidence:
+                        result["evidence"] = evidence[:120]
+                    confidence = str(profile.get("confidence") or "").strip()
+                    if confidence:
+                        result["confidence"] = _clean_confidence(confidence)
+                    updated_at = str(profile.get("updated_at") or "").strip()
+                    if updated_at:
+                        result["updated_at"] = updated_at
+                mentions = group.get("mention_profiles", {}) if isinstance(group, dict) else {}
+                mention_count = 0
+                if isinstance(mentions, dict):
+                    mention_data = mentions.get(user_id, {})
+                    if isinstance(mention_data, dict):
+                        mention_count = int(mention_data.get("count") or 0)
+                if mention_count:
+                    result["mention_count_since_last_summary"] = mention_count
+        user = self._data.get("users", {}).get(user_id, {})
+        if isinstance(user, dict):
+            display = str(user.get("display_name") or "").strip()
+            if display and "display_name" not in result:
+                result["display_name"] = display
+            private_profile = user.get("private_profile", {})
+            if isinstance(private_profile, dict) and private_profile:
+                if "gender" not in result:
+                    result["gender"] = _clean_gender(private_profile.get("gender"))
+                impression = str(private_profile.get("impression") or "").strip()
+                if impression and "impression" not in result:
+                    result["impression"] = impression[:200]
+                if "confidence" not in result:
+                    result["confidence"] = _clean_confidence(private_profile.get("confidence"))
+            summary = str(user.get("private_summary") or "").strip()
+            if summary:
+                result["private_summary"] = summary[:400]
+        return result
+
+    def recall(
+        self,
+        *,
+        user_id: str = "",
+        group_id: str = "",
+        keywords: str = "",
+        limit: int = 8,
+    ) -> dict[str, Any]:
+        """Tool 友好语料/摘要检索：在指定 scope 内 substring 匹配 keywords。
+
+        keywords 为空时返回最近的几条语料 + 摘要。匹配大小写不敏感、忽略空白。
+        """
+        user_id = str(user_id or "").strip()
+        group_id = str(group_id or "").strip()
+        scope = "group" if group_id else "private"
+        limit = max(1, min(int(limit or 8), 20))
+        result: dict[str, Any] = {"scope": scope, "limit": limit}
+        if group_id:
+            result["group_id"] = group_id
+        if user_id:
+            result["user_id"] = user_id
+        if not self.enabled:
+            result["error"] = "memory disabled"
+            return result
+        keyword_list = [kw.strip().casefold() for kw in re.split(r"[\s,，;；]+", keywords or "") if kw.strip()]
+        result["keywords"] = keyword_list
+
+        def _match_text(text: str) -> bool:
+            if not keyword_list:
+                return True
+            normalized = text.casefold()
+            return all(kw in normalized for kw in keyword_list)
+
+        matches: list[dict[str, Any]] = []
+        summary_text = ""
+        if group_id:
+            group = self._data.get("groups", {}).get(group_id, {})
+            if isinstance(group, dict):
+                summary_text = str(group.get("summary") or "").strip()
+                corpus_lists: list[tuple[str, list[Any]]] = []
+                raw_corpus = group.get("corpus", [])
+                if isinstance(raw_corpus, list):
+                    corpus_lists.append(("group_corpus", raw_corpus))
+                mention_profiles = group.get("mention_profiles", {})
+                if isinstance(mention_profiles, dict):
+                    for mention_user_id, mention_data in mention_profiles.items():
+                        if user_id and str(mention_user_id) != user_id:
+                            continue
+                        if isinstance(mention_data, dict):
+                            mention_corpus = mention_data.get("corpus", [])
+                            if isinstance(mention_corpus, list):
+                                corpus_lists.append((f"mention:{mention_user_id}", mention_corpus))
+                for source, corpus in corpus_lists:
+                    for entry in reversed(corpus):
+                        if len(matches) >= limit:
+                            break
+                        if not isinstance(entry, dict):
+                            continue
+                        if user_id and str(entry.get("user_id") or "") != user_id:
+                            continue
+                        text = str(entry.get("text") or "").strip()
+                        if not text or not _match_text(text):
+                            continue
+                        matches.append(
+                            {
+                                "source": source,
+                                "time": str(entry.get("time") or "").strip(),
+                                "user_id": str(entry.get("user_id") or ""),
+                                "display_name": str(entry.get("display_name") or ""),
+                                "text": text[:240],
+                                "has_image": bool(entry.get("has_image")),
+                            }
+                        )
+                    if len(matches) >= limit:
+                        break
+        elif user_id:
+            user = self._data.get("users", {}).get(user_id, {})
+            if isinstance(user, dict):
+                summary_text = str(user.get("private_summary") or "").strip()
+                corpus = user.get("private_corpus", [])
+                if isinstance(corpus, list):
+                    for entry in reversed(corpus):
+                        if len(matches) >= limit:
+                            break
+                        if not isinstance(entry, dict):
+                            continue
+                        text = str(entry.get("text") or "").strip()
+                        if not text or not _match_text(text):
+                            continue
+                        matches.append(
+                            {
+                                "source": "private_corpus",
+                                "time": str(entry.get("time") or "").strip(),
+                                "user_id": user_id,
+                                "display_name": str(entry.get("display_name") or ""),
+                                "text": text[:240],
+                                "has_image": bool(entry.get("has_image")),
+                            }
+                        )
+        else:
+            result["error"] = "需要 group_id 或 user_id"
+            return result
+        if summary_text:
+            result["long_term_summary"] = summary_text[:600]
+        result["matches"] = matches
+        result["match_count"] = len(matches)
+        return result

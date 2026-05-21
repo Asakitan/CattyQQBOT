@@ -50,10 +50,12 @@ from .openai_client import (
     analyze_images_for_reply,
     assess_user_anger,
     chat_completion,
+    chat_completion_with_tools,
     describe_images,
     download_binary,
     local_critic_completion,
 )
+from .tools import ToolContext, available_tool_schemas, execute_tool_call, tools_system_hint
 from .persona_prompts import (
     build_catgirl_examples_prompt,
     build_conversation_flow_prompt,
@@ -153,6 +155,8 @@ _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
 _poke_last_replied_at: dict[str, float] = {}
+# 关键词回复 per-scope per-rule 冷却：key 形如 "group:123:rule:2"，值为 time.monotonic()
+_keyword_reply_last_sent_at: dict[str, float] = {}
 
 ChatMessage = dict[str, object]
 # 会话历史消息数达到该阈值后，跳过教学型例句 prompt（catgirl_examples + disambiguation_examples）。
@@ -286,12 +290,22 @@ def _keyword_matches_text(text: str, keyword: str) -> bool:
     return keyword.casefold() in text.casefold()
 
 
-def _keyword_reply_for_text(text: str) -> str:
-    for rule in config.catty_keyword_replies:
+def _keyword_reply_for_text(text: str, *, scope: str = "") -> str:
+    now = time.monotonic()
+    for idx, rule in enumerate(config.catty_keyword_replies):
         if not _keyword_reply_rule_enabled(rule):
             continue
-        if any(_keyword_matches_text(text, str(keyword)) for keyword in rule.keywords):
-            return rule.reply.strip()
+        if not any(_keyword_matches_text(text, str(keyword)) for keyword in rule.keywords):
+            continue
+        cooldown = max(float(getattr(rule, "cooldown_seconds", 0.0) or 0.0), 0.0)
+        if scope and cooldown > 0:
+            cd_key = f"{scope}:rule:{idx}"
+            last = _keyword_reply_last_sent_at.get(cd_key, 0.0)
+            if now - last < cooldown:
+                # 该规则仍在冷却,尝试下一条规则(让其他无 CD 规则有机会接力)
+                continue
+            _keyword_reply_last_sent_at[cd_key] = now
+        return rule.reply.strip()
     return ""
 
 
@@ -879,6 +893,7 @@ def _apply_runtime_config(new_config: Config) -> None:
     emoji_store = EmojiStore(config)
     legs_picker = LegsPicker(config)
     _legs_last_sent_at.clear()
+    _keyword_reply_last_sent_at.clear()
     _sync_hot_reload_signatures()
     # 旧实例的 background_flush_loop 还会跑(它现在指向脏标记永远 False 的孤儿对象),
     # 给新实例补起一个真正生效的后台 flush 协程。
@@ -1861,6 +1876,9 @@ def _build_messages(
         messages.append({"role": "system", "content": _web_search_plugin_prompt()})
     if getattr(config, "catty_nsfw_search_enabled", False):
         messages.append({"role": "system", "content": _nsfw_search_plugin_prompt()})
+    # function calling tools 提示常驻挂载——schema 走 tools 字段,这里只是给主 AI 解释何时调
+    if getattr(config, "catty_tools_enabled", True):
+        messages.append({"role": "system", "content": tools_system_hint()})
 
     # ─── Layer C: 教学例句，仅冷会话挂（热会话从历史学习风格） ───
     if config.catty_reply_style_examples_enabled and is_cold_session:
@@ -3297,7 +3315,12 @@ async def _expression_repeat_rule(bot: Bot, event: MessageEvent, state: T_State)
 async def _keyword_reply_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
         return False
-    reply = _keyword_reply_for_text(event_plain_text(event))
+    # scope 用会话级 key("group:{id}" / "private:{id}"),让 cooldown_seconds 字段
+    # 按"群为单位"生效 —— 同群内 N 秒内同一关键词规则不会重复触发。
+    reply = _keyword_reply_for_text(
+        event_plain_text(event),
+        scope=_conversation_queue_key(event),
+    )
     if not reply:
         return False
     state["catty_keyword_reply"] = reply
@@ -3912,8 +3935,25 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             bot_continuation_context=bot_continuation_context,
         )
         nsfw_image_segments: list[MessageSegment] = []
+        # Function calling tools 注入:event/memory_store/config 通过 ToolContext 传给 executor。
+        # 实际 tool 执行在 openai_client 的 with_tools 循环里完成,这里只负责暴露 schema + executor。
+        tool_ctx = ToolContext(config=config, memory_store=memory_store, event=event)
+
+        async def _tool_executor(name: str, args_json: str) -> dict[str, object]:
+            return await execute_tool_call(name, args_json, tool_ctx)
+
+        tools_for_main_reply = available_tool_schemas(
+            config, is_private=isinstance(event, PrivateMessageEvent)
+        )
         try:
-            reply = await chat_completion(config, messages)
+            reply = await chat_completion_with_tools(
+                config,
+                messages,
+                tools=tools_for_main_reply,
+                tool_executor=_tool_executor,
+                max_rounds=int(getattr(config, "catty_tools_max_rounds", 3) or 3),
+                max_calls_per_round=int(getattr(config, "catty_tools_max_calls_per_round", 3) or 3),
+            )
             reply, messages = await _resolve_model_requested_web_search(messages, reply)
             reply, messages, nsfw_image_segments = await _resolve_model_requested_nsfw_search(
                 event, messages, reply

@@ -258,6 +258,38 @@ async def _post_chat_completion(
     extra_headers: dict[str, str],
     extra_body: dict[str, Any],
 ) -> str:
+    data = await _post_chat_completion_raw(
+        base_url=base_url,
+        api_key=api_key,
+        model=model,
+        messages=messages,
+        timeout=timeout,
+        proxy=proxy,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        extra_headers=extra_headers,
+        extra_body=extra_body,
+        tools=None,
+    )
+    return _extract_content(data)
+
+
+async def _post_chat_completion_raw(
+    *,
+    base_url: str,
+    api_key: str,
+    model: str,
+    messages: list[ChatMessage],
+    timeout: float,
+    proxy: str,
+    temperature: float | None,
+    max_tokens: int | None,
+    extra_headers: dict[str, str],
+    extra_body: dict[str, Any],
+    tools: list[dict[str, Any]] | None = None,
+    tool_choice: str = "auto",
+) -> dict[str, Any]:
+    """返回完整 response JSON,供 function calling 链路读 tool_calls。"""
     if not base_url.strip():
         raise OpenAICompatibleError("AI 接口地址为空。")
     if not model.strip():
@@ -277,6 +309,9 @@ async def _post_chat_completion(
     if max_tokens is not None:
         payload["max_tokens"] = max_tokens
     payload.update(extra_body)
+    if tools:
+        payload["tools"] = tools
+        payload["tool_choice"] = tool_choice
 
     async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
         response = await client.post(_chat_completions_url(base_url), headers=headers, json=payload)
@@ -286,11 +321,9 @@ async def _post_chat_completion(
         raise OpenAICompatibleError(_catty_http_status_message("AI 接口", response.status_code), detail)
 
     try:
-        data = response.json()
+        return response.json()
     except ValueError as exc:
         raise OpenAICompatibleError("AI 返回的不是 JSON。", response.text[:500]) from exc
-
-    return _extract_content(data)
 
 
 async def _post_ollama_chat(
@@ -571,6 +604,144 @@ async def _post_fallback_chat(config: Config, messages: list[ChatMessage]) -> st
     )
     _mark_fallback_warmed()
     return result
+
+
+async def chat_completion_with_tools(
+    config: Config,
+    messages: list[ChatMessage],
+    *,
+    tools: list[dict[str, Any]] | None,
+    tool_executor: Any | None,
+    max_rounds: int = 3,
+    max_calls_per_round: int = 3,
+) -> str:
+    """OpenAI function calling 主回复循环。
+
+    tools/tool_executor 任一为空 → 退化到 plain chat_completion(完整 fallback 链)。
+    tool 调度过程中云端抛错也直接降级到 chat_completion(保留本地 7B 兜底)。
+    tool_executor 签名:async (name: str, arguments_json: str) -> dict。
+    """
+    if not tools or tool_executor is None:
+        return await chat_completion(config, messages)
+    if not getattr(config, "catty_tools_enabled", True):
+        return await chat_completion(config, messages)
+    if _cloud_is_unhealthy():
+        # 云端冷却期不带 tools 试,直接走 fallback 链。
+        return await chat_completion(config, messages)
+
+    history: list[ChatMessage] = list(messages)
+    for round_idx in range(max(1, max_rounds)):
+        try:
+            data = await _post_chat_completion_raw(
+                base_url=config.catty_openai_base_url,
+                api_key=config.catty_openai_api_key,
+                model=config.catty_openai_model,
+                messages=history,
+                timeout=config.catty_request_timeout,
+                proxy=config.catty_http_proxy,
+                temperature=config.catty_temperature,
+                max_tokens=config.catty_max_tokens,
+                extra_headers=config.catty_openai_extra_headers,
+                extra_body=config.catty_openai_extra_body,
+                tools=tools,
+                tool_choice="auto",
+            )
+        except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
+            _logger.warning(
+                "chat_completion_with_tools: round %d cloud call failed (%s); degrading to plain chat_completion",
+                round_idx,
+                exc.__class__.__name__,
+            )
+            # 降级到 plain 调用,让原有 fallback/cooldown 逻辑接管(它会自己 mark unhealthy)。
+            return await chat_completion(config, messages)
+
+        try:
+            choice = data["choices"][0]
+        except (KeyError, IndexError, TypeError) as exc:
+            raise OpenAICompatibleError("AI 返回格式不符合 Chat Completions。", repr(data)[:500]) from exc
+        message = choice.get("message") or {}
+        tool_calls = message.get("tool_calls") if isinstance(message, dict) else None
+
+        if not tool_calls:
+            # 模型直接给了最终回复
+            if _cloud_is_unhealthy():
+                _mark_cloud_healthy()
+            return _extract_content(data)
+
+        # 协议要求:把 assistant 含 tool_calls 的消息原样写回 history
+        assistant_msg: dict[str, Any] = {
+            "role": "assistant",
+            "tool_calls": tool_calls,
+        }
+        # 保留 content(可能为 None / 空字符串都行,OpenAI 协议允许)
+        if isinstance(message.get("content"), (str, list)):
+            assistant_msg["content"] = message["content"]
+        else:
+            assistant_msg["content"] = None
+        history.append(assistant_msg)
+
+        # 限制每轮最多执行 N 个 tool_call,超出的直接回 truncated 提示
+        executed: list[tuple[str, str, str]] = []  # (call_id, name, args_json)
+        for call in tool_calls[: max(1, max_calls_per_round)]:
+            if not isinstance(call, dict):
+                continue
+            call_id = str(call.get("id") or "").strip()
+            func = call.get("function") if isinstance(call.get("function"), dict) else {}
+            name = str(func.get("name") or "").strip()
+            args_json = func.get("arguments")
+            if not isinstance(args_json, str):
+                try:
+                    args_json = json.dumps(args_json or {}, ensure_ascii=False)
+                except (TypeError, ValueError):
+                    args_json = "{}"
+            if not call_id or not name:
+                continue
+            executed.append((call_id, name, args_json))
+
+        # 并发执行 tool calls(每个都自己有 TTL 缓存,不会真的并发打爆 memory_store)
+        tool_results = await asyncio.gather(
+            *[tool_executor(name, args_json) for _call_id, name, args_json in executed],
+            return_exceptions=True,
+        )
+        for (call_id, name, _args_json), result in zip(executed, tool_results):
+            if isinstance(result, BaseException):
+                payload = {"error": f"{name} 抛异常: {result.__class__.__name__}: {result}"}
+                _logger.warning("Tool %s raised: %s", name, result)
+            elif not isinstance(result, dict):
+                payload = {"value": result}
+            else:
+                payload = result
+            try:
+                content_str = json.dumps(payload, ensure_ascii=False)
+            except (TypeError, ValueError):
+                content_str = json.dumps({"error": "结果无法序列化为 JSON"}, ensure_ascii=False)
+            history.append(
+                {
+                    "role": "tool",
+                    "tool_call_id": call_id,
+                    "name": name,
+                    "content": content_str,
+                }
+            )
+
+        # 处理被截断的 tool_calls:给模型一条提示,下一轮可以继续
+        truncated = len(tool_calls) - len(executed)
+        if truncated > 0:
+            history.append(
+                {
+                    "role": "system",
+                    "content": f"上一轮还有 {truncated} 个 tool 调用被截断,本轮请基于已收到的工具结果继续。",
+                }
+            )
+
+    # 循环达到上限还在调 tool — 强制再发一次纯回复,禁掉 tools。
+    history.append(
+        {
+            "role": "system",
+            "content": "已达到本次主回复的工具调用上限,请直接基于已有信息和上下文给最终回复,不再调用工具。",
+        }
+    )
+    return await chat_completion(config, history)
 
 
 async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
