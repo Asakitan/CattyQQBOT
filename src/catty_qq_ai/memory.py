@@ -928,12 +928,39 @@ class MemoryStore:
             target = 1
         return max(min(target, max(max_daily, 0)), 0)
 
+    def _recent_human_message_count(
+        self,
+        group: dict[str, Any],
+        *,
+        window_minutes: float,
+        now: datetime | None = None,
+    ) -> int:
+        if window_minutes <= 0:
+            return 0
+        corpus = group.get("corpus")
+        if not isinstance(corpus, list) or not corpus:
+            return 0
+        cutoff = (now or datetime.now(timezone.utc)) - timedelta(minutes=window_minutes)
+        count = 0
+        for item in reversed(corpus):
+            if not isinstance(item, dict):
+                continue
+            ts = _parse_time(item.get("time"))
+            if ts is None:
+                continue
+            if _as_aware_utc(ts) < cutoff:
+                break
+            count += 1
+        return count
+
     def due_proactive_group_ids(
         self,
         group_ids: list[str],
         *,
         max_daily: int,
         min_interval_minutes: float,
+        active_window_minutes: float = 0.0,
+        active_min_messages: int = 0,
     ) -> list[str]:
         if not self.enabled:
             return []
@@ -963,6 +990,14 @@ class MemoryStore:
             last_sent = _parse_time(state.get("last_sent_at"))
             if last_sent is not None and (now - last_sent).total_seconds() < max(min_interval_minutes, 1.0) * 60:
                 continue
+            if active_window_minutes > 0 and active_min_messages > 0:
+                recent_count = self._recent_human_message_count(
+                    group,
+                    window_minutes=active_window_minutes,
+                    now=now,
+                )
+                if recent_count < active_min_messages:
+                    continue
             due.append(group_id)
         if changed:
             self._save()

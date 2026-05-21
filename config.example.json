@@ -339,7 +339,9 @@
     "check_interval_seconds": 300,
     "min_interval_minutes": 120,
     "response_window_minutes": 30,
-    "recent_messages": 40
+    "recent_messages": 40,
+    "active_window_minutes": 15,
+    "active_min_messages": 5
   },
   "hot_reload": {
     "enabled": true,

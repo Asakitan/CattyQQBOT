@@ -230,6 +230,10 @@ class Config(BaseModel):
     catty_proactive_min_interval_minutes: float = 120.0
     catty_proactive_response_window_minutes: float = 30.0
     catty_proactive_recent_messages: int = 40
+    # 活跃门槛：最近 active_window_minutes 内群友消息条数 < active_min_messages 时不主动冒泡。
+    # 设为 0 即关闭该门槛(回到旧的"按目标和间隔无脑冒泡"行为)。
+    catty_proactive_active_window_minutes: float = 15.0
+    catty_proactive_active_min_messages: int = 5
 
     # ── 主 AI 工具调用(OpenAI function calling 协议) ──────────────────
     # 主回复时给云端模型挂 catty_recall / catty_user_profile / catty_mc_status 三套 tool schema,
@@ -505,6 +509,8 @@ class Config(BaseModel):
         "catty_proactive_min_interval_minutes",
         "catty_proactive_response_window_minutes",
         "catty_proactive_recent_messages",
+        "catty_proactive_active_window_minutes",
+        "catty_proactive_active_min_messages",
         "catty_reply_human_split_max_chunks",
         "catty_hot_reload_poll_seconds",
         "catty_hot_reload_debounce_seconds",

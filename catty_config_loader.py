@@ -345,6 +345,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "min_interval_minutes": 120,
         "response_window_minutes": 30,
         "recent_messages": 40,
+        "active_window_minutes": 15,
+        "active_min_messages": 5,
     },
     "access": {
         "allowed_user_ids": [],
@@ -717,6 +719,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_PROACTIVE_MIN_INTERVAL_MINUTES", proactive.get("min_interval_minutes"))
     _set_env("CATTY_PROACTIVE_RESPONSE_WINDOW_MINUTES", proactive.get("response_window_minutes"))
     _set_env("CATTY_PROACTIVE_RECENT_MESSAGES", proactive.get("recent_messages"))
+    _set_env("CATTY_PROACTIVE_ACTIVE_WINDOW_MINUTES", proactive.get("active_window_minutes"))
+    _set_env("CATTY_PROACTIVE_ACTIVE_MIN_MESSAGES", proactive.get("active_min_messages"))
 
     access = _section(data, "access")
     _set_env("CATTY_ALLOWED_USER_IDS", access.get("allowed_user_ids"), json_value=True)

@@ -3674,6 +3674,8 @@ async def _proactive_bubble_loop() -> None:
                 group_ids,
                 max_daily=max(config.catty_proactive_max_daily_per_group, 0),
                 min_interval_minutes=max(config.catty_proactive_min_interval_minutes, 1.0),
+                active_window_minutes=max(config.catty_proactive_active_window_minutes, 0.0),
+                active_min_messages=max(config.catty_proactive_active_min_messages, 0),
             )
             for group_id in due_group_ids:
                 try:
