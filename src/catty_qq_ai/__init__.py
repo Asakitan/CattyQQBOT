@@ -55,6 +55,7 @@ from .openai_client import (
     download_binary,
     local_critic_completion,
 )
+from .parsers import strip_catty_markers as _strip_catty_markers
 from .tools import ToolContext, available_tool_schemas, execute_tool_call, tools_system_hint
 from .persona_prompts import (
     build_catgirl_examples_prompt,
@@ -232,11 +233,24 @@ _NSFW_SEARCH_REQUEST_RE = re.compile(r"\[\[CATTY_NSFW_SEARCH:\s*(.*?)\]\]", re.D
 _nsfw_search_cooldowns: dict[str, float] = {}
 
 
+_RESIDUAL_MARKER_KEEP = {"INLINE_IMAGE", "EMOJI_QUERY", "NO_REPLY", "REPLY_SPLIT"}
+
+
 def _sanitize_residual_markers(text: str) -> str:
-    """二轮 chat 偶尔会原样复制搜索 marker，统一在这里清掉，避免 marker 漏到群里。"""
+    """清掉所有 ``<<<CATTY_*>>>`` 和 ``[[CATTY_*]]`` 残留 marker,但保留发送链路/后续 stage 还要用的那几个。
+
+    保留集合(``_RESIDUAL_MARKER_KEEP``):
+    - INLINE_IMAGE: 发送链路 ``MessageSegment.image`` 要识别
+    - EMOJI_QUERY: 下一步 ``_extract_emoji_query`` 提取
+    - NO_REPLY: 下一步 ``_is_no_reply`` 检测
+    - REPLY_SPLIT: 分段发送链路用
+    其它全清(包括过去的 WEB_SEARCH / NSFW_SEARCH / MEME / 未来可能加的新 tool marker)。
+    """
     if not text:
         return ""
-    cleaned = _WEB_SEARCH_REQUEST_RE.sub("", text)
+    cleaned = _strip_catty_markers(text, keep=_RESIDUAL_MARKER_KEEP)
+    # 兼容历史上的 [[CATTY_WEB_SEARCH:...]] / [[CATTY_NSFW_SEARCH:...]] 双方括号写法
+    cleaned = _WEB_SEARCH_REQUEST_RE.sub("", cleaned)
     cleaned = _NSFW_SEARCH_REQUEST_RE.sub("", cleaned)
     cleaned = cleaned.strip()
     if NO_REPLY_MARKER in cleaned and cleaned != NO_REPLY_MARKER:

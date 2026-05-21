@@ -24,6 +24,7 @@ from .config import Config
 from .mc_status import _default_probe
 from .memory import MemoryStore
 from .nsfw_search import NsfwResult, search_nsfw
+from .parsers import lenient_json_object
 from .web_search import format_search_context, search_image_urls, search_web
 
 
@@ -643,12 +644,15 @@ async def execute_tool_call(
     executor = _EXECUTORS.get(name)
     if executor is None:
         return {"error": f"未知 tool: {name}"}
-    try:
-        args = json.loads(arguments_json) if arguments_json.strip() else {}
-    except json.JSONDecodeError as exc:
-        return {"error": f"arguments 不是合法 JSON: {exc.msg}"}
-    if not isinstance(args, dict):
-        return {"error": "arguments 必须是 JSON 对象。"}
+    raw = (arguments_json or "").strip()
+    if not raw:
+        args: dict[str, Any] = {}
+    else:
+        # 走 lenient_json_object 让 fence / 智能引号 / 尾逗号 / 单引号都能恢复。
+        parsed = lenient_json_object(raw)
+        if parsed is None:
+            return {"error": "arguments 不是合法 JSON 对象,无法解析"}
+        args = parsed
     try:
         return await executor(args, ctx)
     except Exception as exc:  # noqa: BLE001

@@ -12,6 +12,7 @@ from nonebot import logger
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, PrivateMessageEvent
 
 from .config import Config
+from .parsers import lenient_json_object
 from .reply_markers import NO_REPLY_MARKER
 
 
@@ -125,22 +126,8 @@ def _sender_name(event: MessageEvent) -> str:
 
 
 def _extract_json_object(text: str) -> dict[str, Any] | None:
-    raw = text.strip()
-    if raw.startswith("```"):
-        raw = re.sub(r"^```(?:json)?\s*", "", raw, flags=re.IGNORECASE)
-        raw = re.sub(r"\s*```$", "", raw)
-    try:
-        loaded = json.loads(raw)
-    except json.JSONDecodeError:
-        start = raw.find("{")
-        end = raw.rfind("}")
-        if start < 0 or end <= start:
-            return None
-        try:
-            loaded = json.loads(raw[start : end + 1])
-        except json.JSONDecodeError:
-            return None
-    return loaded if isinstance(loaded, dict) else None
+    """LLM 输出宽容 JSON 对象解析:统一走 parsers.lenient_json_object。"""
+    return lenient_json_object(text)
 
 
 def _clean_gender(value: Any) -> str:

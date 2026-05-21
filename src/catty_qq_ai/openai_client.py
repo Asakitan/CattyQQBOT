@@ -14,6 +14,7 @@ from PIL import Image, ImageSequence
 
 from .config import Config
 from .mc_status import mc_has_players
+from .parsers import lenient_json_object
 from .reply_markers import INLINE_IMAGE_PREFIX, INLINE_IMAGE_SUFFIX
 
 
@@ -856,20 +857,11 @@ def _json_decision(text: str, key: str) -> bool:
 
 
 def _json_object(text: str) -> dict[str, Any] | None:
-    raw = text.strip()
-    try:
-        loaded = json.loads(raw)
-    except json.JSONDecodeError:
-        start = raw.find("{")
-        end = raw.rfind("}")
-        if start >= 0 and end > start:
-            try:
-                loaded = json.loads(raw[start : end + 1])
-            except json.JSONDecodeError:
-                return None
-        else:
-            return None
-    return loaded if isinstance(loaded, dict) else None
+    """LLM 输出宽容 JSON 解析:fence / 智能引号 / 尾逗号 / 单引号 / mixed text 都能恢复。
+
+    实际逻辑在 parsers.lenient_json_object;保留本函数名是为了不动现有 caller。
+    """
+    return lenient_json_object(text)
 
 
 async def _filter_completion(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 64) -> str:
