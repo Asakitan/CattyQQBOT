@@ -1859,9 +1859,6 @@ def _build_messages(
     messages.append({"role": "system", "content": build_scenario_playbook_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": build_scene_discrimination_prompt(NO_REPLY_MARKER)})
     messages.append({"role": "system", "content": build_reply_intelligence_prompt(NO_REPLY_MARKER)})
-    messages.append(
-        {"role": "system", "content": build_meme_sending_prompt(MEME_QUERY_PREFIX, MEME_QUERY_SUFFIX)}
-    )
     if config.catty_reply_self_check_enabled:
         messages.append(
             {
@@ -1871,12 +1868,10 @@ def _build_messages(
         )
     messages.append({"role": "system", "content": _reply_gate_approved_prompt()})
 
-    # ─── Layer B: 按全局开关，运行期稳定 ───
-    if config.catty_web_search_enabled:
-        messages.append({"role": "system", "content": _web_search_plugin_prompt()})
-    if getattr(config, "catty_nsfw_search_enabled", False):
-        messages.append({"role": "system", "content": _nsfw_search_plugin_prompt()})
-    # function calling tools 提示常驻挂载——schema 走 tools 字段,这里只是给主 AI 解释何时调
+    # ─── Layer B: function calling tools 提示常驻挂载 ───
+    # web_search/nsfw_search/meme 全部走 tools 字段(OpenAI function calling),
+    # 旧的 [[CATTY_WEB_SEARCH]] / [[CATTY_NSFW_SEARCH]] / <<<CATTY_MEME>>> 文本 marker 教学已废弃。
+    # emoji 还是 reply 后置 enrich,保留 EMOJI_QUERY marker 那条老路径。
     if getattr(config, "catty_tools_enabled", True):
         messages.append({"role": "system", "content": tools_system_hint()})
 
@@ -3936,10 +3931,17 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             wake_context=wake_context,
             bot_continuation_context=bot_continuation_context,
         )
-        nsfw_image_segments: list[MessageSegment] = []
         # Function calling tools 注入:event/memory_store/config 通过 ToolContext 传给 executor。
-        # 实际 tool 执行在 openai_client 的 with_tools 循环里完成,这里只负责暴露 schema + executor。
-        tool_ctx = ToolContext(config=config, memory_store=memory_store, event=event)
+        # prepare_nsfw_segments_fn / download_binary_fn 是依赖注入——避免 tools.py 反向 import
+        # __init__.py 里的 _prepare_nsfw_image_segments(它要复用本模块的 sent_registry / cache_dir)。
+        # ctx.pending_image_segments 收集 catty_nsfw_search 下载到的图片 segments,主回复后并入发送。
+        tool_ctx = ToolContext(
+            config=config,
+            memory_store=memory_store,
+            event=event,
+            prepare_nsfw_segments_fn=_prepare_nsfw_image_segments,
+            download_binary_fn=download_binary,
+        )
 
         async def _tool_executor(name: str, args_json: str) -> dict[str, object]:
             return await execute_tool_call(name, args_json, tool_ctx)
@@ -3947,6 +3949,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         tools_for_main_reply = available_tool_schemas(
             config, is_private=isinstance(event, PrivateMessageEvent)
         )
+        nsfw_image_segments: list[MessageSegment] = []
         try:
             reply = await chat_completion_with_tools(
                 config,
@@ -3956,11 +3959,9 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 max_rounds=int(getattr(config, "catty_tools_max_rounds", 3) or 3),
                 max_calls_per_round=int(getattr(config, "catty_tools_max_calls_per_round", 3) or 3),
             )
-            reply, messages = await _resolve_model_requested_web_search(messages, reply)
-            reply, messages, nsfw_image_segments = await _resolve_model_requested_nsfw_search(
-                event, messages, reply
-            )
-            # 兜底：万一 resolver 链出 bug 让 marker 漏出来，砍掉再发
+            nsfw_image_segments = list(tool_ctx.pending_image_segments)
+            # 兜底:旧 marker 教学已经删,理论上不会再漏 [[CATTY_WEB_SEARCH]] / [[CATTY_NSFW_SEARCH]],
+            # 但保留 sanitize 防御被旧 prompt cache / fallback model 残留偶然写出。
             sanitized = _sanitize_residual_markers(reply)
             if sanitized != reply:
                 logger.warning(
@@ -4005,9 +4006,8 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish()
 
         reply, emoji_query = _extract_emoji_query(reply)
-        # 梗图标记 <<<CATTY_MEME:词>>> 拉图 → 替换成 INLINE_IMAGE 标记。多模态 AI 也可能直接
-        # 在 _extract_content 阶段把 image_url 转成 INLINE_IMAGE,所以 reply 里两类来源混存。
-        reply = await _resolve_meme_queries(reply)
+        # 注:梗图现在走 catty_meme_query toolcall,AI 自己把 base64:// URI 嵌入 INLINE_IMAGE 标记。
+        # 多模态 AI 仍可能在 _extract_content 阶段直接产生 INLINE_IMAGE,两条路径都被发送链路统一解析。
         _save_assistant_training_sample(
             event, incoming, messages, _strip_inline_image_markers(reply), emoji_query=emoji_query,
         )

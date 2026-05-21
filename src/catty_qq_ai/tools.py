@@ -10,17 +10,21 @@
 from __future__ import annotations
 
 import asyncio
+import base64
 import json
 import logging
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Awaitable, Callable
 
+import httpx
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, PrivateMessageEvent
 
 from .config import Config
 from .mc_status import _default_probe
 from .memory import MemoryStore
+from .nsfw_search import NsfwResult, search_nsfw
+from .web_search import format_search_context, search_image_urls, search_web
 
 
 _logger = logging.getLogger("catty_qq_ai.tools")
@@ -125,10 +129,101 @@ _MC_STATUS_SCHEMA: dict[str, Any] = {
 }
 
 
+_WEB_SEARCH_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_web_search",
+        "description": (
+            "Google/Bing 联网搜索拿最新信息。**只在真的需要时调用**:"
+            "用户问新闻/版本/价格/教程/特定事实,或明确说'查/搜/联网';"
+            "你训练数据可能过期或不确定具体细节。普通闲聊/撒娇/已经知道的问题不要调。"
+            "每个 scope+用户有 600s cooldown(主人/特别关心用户豁免)。"
+            "返回 results 数组(title/url/snippet);AI 拿到后基于结果生成最终回复,"
+            "禁止编造不存在的链接,禁止把 marker 文本贴出来。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "搜索关键词。精炼实词,不超过 5 个;不要带'R-18/涩图/搜索一下'等啰嗦词。",
+                },
+            },
+            "required": ["query"],
+        },
+    },
+}
+
+
+_NSFW_SEARCH_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_nsfw_search",
+        "description": (
+            "搜索 R-18 资源:pixiv 图片或 iwara 视频。**仅在好友私聊里可调用**,"
+            "群聊调用会立即返回 error(此时你应引导用户去私聊,不要重试)。"
+            "kind=image 时插件会**直接把下载好的图片发到聊天里**——你不用贴链接,"
+            "拿到 tool 结果后只补 1-2 句猫娘人格短评(可以害羞/嘴硬/撒娇/报作者名);"
+            "kind=video 时插件只返回视频链接,你挑 1-3 个抛出去配短评。"
+            "query 写法铁律:**第一位放群友原话那个语种**(中文→中文,日文→日文,英文→英文),"
+            "后面用英文逗号 `,` 跟 1-2 个备选语言。"
+            "例:群友说『香奈美』→ query=`香奈美,kanami,Strinova`;群友说『Raiden Shogun』→ "
+            "query=`Raiden Shogun,雷電将軍,雷电将军`。每个候选 1-2 词,不要拼 R-18/涩图。"
+            "插件已自动 r18=true,你不用管。同一人 30s 内只能搜一次。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "enum": ["image", "video"],
+                    "description": "image=pixiv 图(下载发送);video=iwara 视频(返回链接)。",
+                },
+                "query": {
+                    "type": "string",
+                    "description": "候选关键词,英文逗号分隔;第一位必须是群友原话语种。",
+                },
+            },
+            "required": ["kind", "query"],
+        },
+    },
+}
+
+
+_MEME_QUERY_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_meme_query",
+        "description": (
+            "拉一张梗图/网图(Bing 图片搜索)以图代话。**只在你确实想用图加强表达时调用**——"
+            "撒娇/玩梗/情绪反应建议优先用本地表情库(EMOJI_QUERY marker 那条路径,程序自动配),"
+            "只有需要特定主题的画面(角色/场景/具体事物)时才调本 tool。"
+            "返回 image_uri 是 base64:// URI;你拿到后**必须在最终回复中**用 "
+            "`<<<CATTY_INLINE_IMAGE:URI>>>` 标记把它嵌入想要展示图片的位置,"
+            "发送链路会自动转成 QQ 图片消息。"
+            "失败时返回 error,这时直接用文字回复即可,不要拼任何 INLINE_IMAGE 标记。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "keywords": {
+                    "type": "string",
+                    "description": "梗图主题。短关键词(1-3 个词),例如『猫猫贴贴』『摸鱼』『傲娇害羞』。",
+                },
+            },
+            "required": ["keywords"],
+        },
+    },
+}
+
+
 ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_recall": _RECALL_SCHEMA,
     "catty_user_profile": _USER_PROFILE_SCHEMA,
     "catty_mc_status": _MC_STATUS_SCHEMA,
+    "catty_web_search": _WEB_SEARCH_SCHEMA,
+    "catty_nsfw_search": _NSFW_SEARCH_SCHEMA,
+    "catty_meme_query": _MEME_QUERY_SCHEMA,
 }
 
 
@@ -139,6 +234,18 @@ class ToolContext:
     config: Config
     memory_store: MemoryStore
     event: MessageEvent | None
+    # 由 __init__.py 主回复点注入:把 NSFW pixiv 结果下载成本地缓存 segments,
+    # 复用现有 sent_registry / cache_dir / LRU 清理。tools.py 不持有这套状态。
+    prepare_nsfw_segments_fn: Callable[
+        [list["NsfwResult"], int], Awaitable[tuple[list[Any], list["NsfwResult"]]]
+    ] | None = None
+    # 下载二进制(http URL → bytes + content_type),沿用 openai_client.download_binary。
+    # 通过注入避免 tools.py import openai_client(后者 import 链涉及 mc_status,
+    # 已经能用,但保持单向依赖更干净)。
+    download_binary_fn: Callable[[Config, str], Awaitable[tuple[bytes, str]]] | None = None
+    # 副作用:executor 把要发的图片塞这里,主回复点收尾时取出来拼到发送链路。
+    # 元素类型由 prepare_nsfw_segments_fn 决定(实际是 MessageSegment),tools.py 不依赖具体类型。
+    pending_image_segments: list[Any] = field(default_factory=list)
 
     @property
     def group_id(self) -> str:
@@ -153,6 +260,20 @@ class ToolContext:
     @property
     def is_private(self) -> bool:
         return isinstance(self.event, PrivateMessageEvent)
+
+    @property
+    def configured_title(self) -> str:
+        """复制自 __init__.py._configured_title,tool 内部做主人/特别关心豁免用。"""
+        if self.event is None:
+            return ""
+        user_id = str(self.event.user_id)
+        if isinstance(self.event, GroupMessageEvent):
+            group_title = self.config.catty_group_user_titles.get(
+                str(self.event.group_id), {}
+            ).get(user_id)
+            if group_title:
+                return str(group_title)
+        return str(self.config.catty_user_titles.get(user_id) or "")
 
 
 # ── 共享 TTL 缓存 ──────────────────────────────────────────────────────
@@ -194,6 +315,11 @@ class _TTLCache:
 
 _recall_cache = _TTLCache()
 _profile_cache = _TTLCache()
+# 联网搜索按 scope(group/private + user) 做 cooldown,主人/特别关心用户豁免。
+# 沿用原 __init__.py 的 _web_search_cooldowns 行为,只是搬到 tools 模块。
+_web_search_cooldowns: dict[str, float] = {}
+# NSFW 仅在私聊里能调,按 user_id 做 cooldown。
+_nsfw_search_cooldowns: dict[str, float] = {}
 
 
 # ── 各 tool 的 executor ───────────────────────────────────────────────
@@ -309,6 +435,173 @@ async def _exec_mc_status(args: dict[str, Any], ctx: ToolContext) -> dict[str, A
     }
 
 
+async def _exec_web_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    query = str(args.get("query") or "").strip()
+    if not query:
+        return {"error": "query 不能为空"}
+    if not getattr(ctx.config, "catty_web_search_enabled", False):
+        return {"error": "web_search 已被配置禁用"}
+
+    # 主人/特别关心用户豁免 cooldown(沿用原 _web_search_exempt 语义)
+    is_exempt = bool(ctx.configured_title.strip())
+    cd_seconds = float(getattr(ctx.config, "catty_web_search_cooldown_seconds", 600.0) or 0.0)
+    if not is_exempt and cd_seconds > 0 and ctx.event is not None:
+        scope_id = ctx.group_id or ctx.user_id or "anonymous"
+        cd_key = f"{scope_id}:{ctx.user_id}"
+        now = time.monotonic()
+        last = _web_search_cooldowns.get(cd_key, 0.0)
+        remaining = max(last + cd_seconds - now, 0.0)
+        if remaining > 0:
+            return {
+                "error": f"web_search 冷却剩 {int(remaining)}s,请基于已有知识回答(每 scope+用户 10 分钟一次)。"
+            }
+        _web_search_cooldowns[cd_key] = now
+
+    try:
+        results = await search_web(ctx.config, query[:160])
+    except (httpx.HTTPError, ValueError) as exc:
+        _logger.warning("Web search failed for %r: %s", query, exc)
+        return {
+            "query": query,
+            "error": f"搜索失败: {exc.__class__.__name__}: {exc}",
+            "results": [],
+        }
+    return {
+        "query": query,
+        "count": len(results),
+        "results": [
+            {
+                "title": r.title,
+                "url": r.url,
+                "snippet": r.snippet,
+                "source": r.source,
+            }
+            for r in results[:8]
+        ],
+        "context_text": format_search_context(query, results),
+    }
+
+
+async def _exec_nsfw_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    kind_raw = str(args.get("kind") or "").strip().lower()
+    if kind_raw in {"img", "pic", "picture", "image", "图", "图片"}:
+        kind = "image"
+    elif kind_raw in {"video", "vid", "视频"}:
+        kind = "video"
+    else:
+        return {"error": "kind 必须是 image 或 video。"}
+    query = str(args.get("query") or "").strip()
+    if not query:
+        return {"error": "query 不能为空。"}
+
+    if not getattr(ctx.config, "catty_nsfw_search_enabled", False):
+        return {"error": "nsfw_search 已被配置禁用,不能调。"}
+    if not ctx.is_private:
+        # 群里直接挡掉,让 AI 用人格自然引导用户去私聊
+        return {
+            "error": "群里禁止 NSFW 搜索;请用猫娘人格让用户加好友私聊再来。",
+            "suggest_private_chat": True,
+        }
+
+    cd_seconds = max(int(getattr(ctx.config, "catty_nsfw_search_cooldown_seconds", 30) or 0), 0)
+    if cd_seconds > 0:
+        cd_key = ctx.user_id or "anonymous"
+        now = time.monotonic()
+        last = _nsfw_search_cooldowns.get(cd_key, 0.0)
+        remaining = max(last + cd_seconds - now, 0.0)
+        if remaining > 0:
+            return {"error": f"NSFW 搜索冷却剩 {int(remaining)}s,稍后再戳"}
+        _nsfw_search_cooldowns[cd_key] = now
+
+    image_send_count = max(int(getattr(ctx.config, "catty_nsfw_image_send_count", 2) or 2), 1)
+    pool_size = max(
+        int(getattr(ctx.config, "catty_nsfw_search_max_results", 4) or 4),
+        image_send_count * 6,
+        8,
+    )
+    try:
+        results = await search_nsfw(ctx.config, query[:160], kind=kind, max_results=pool_size)
+    except (httpx.HTTPError, ValueError) as exc:
+        _logger.warning("NSFW search failed for %r (%s): %s", query, kind, exc)
+        return {"error": f"搜索失败: {exc.__class__.__name__}: {exc}", "kind": kind, "query": query}
+
+    used_results: list[NsfwResult] = []
+    if kind == "image" and results and ctx.prepare_nsfw_segments_fn is not None:
+        try:
+            segments, used_results = await ctx.prepare_nsfw_segments_fn(results, image_send_count)
+        except Exception as exc:  # noqa: BLE001
+            _logger.warning("prepare_nsfw_segments_fn raised: %s", exc, exc_info=True)
+            segments = []
+        if segments:
+            ctx.pending_image_segments.extend(segments)
+            _logger.info(
+                "NSFW tool produced %d image segment(s) for query=%r", len(segments), query
+            )
+
+    context_results = used_results if (kind == "image" and used_results) else results
+    return {
+        "kind": kind,
+        "query": query,
+        "images_already_sent": len(ctx.pending_image_segments) if kind == "image" else 0,
+        "count": len(context_results),
+        "results": [
+            {
+                "title": r.title,
+                "url": r.url,
+                "snippet": r.snippet,
+                "source": r.source,
+                "has_media": bool(r.media_urls),
+            }
+            for r in context_results[: max(image_send_count * 2, 6)]
+        ],
+        "guidance": (
+            "image 命中且 images_already_sent>0:程序已经把图发了,你只补 1-2 句猫娘短评,不要贴链接;"
+            "image 但 images_already_sent=0:下载全失败,挑 1-2 个 results URL 给主人,简短;"
+            "video:挑 1-3 个 iwara 链接抛出去配短评。禁止编造 URL、禁止安全免责模板。"
+        ),
+    }
+
+
+async def _exec_meme_query(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    keywords = str(args.get("keywords") or "").strip()
+    if not keywords:
+        return {"error": "keywords 不能为空"}
+    if ctx.download_binary_fn is None:
+        return {"error": "运行环境未注入下载器,无法拉图"}
+    try:
+        image_urls = await search_image_urls(ctx.config, keywords[:80], max_results=4)
+    except (httpx.HTTPError, ValueError) as exc:
+        _logger.warning("Meme search failed for %r: %s", keywords, exc)
+        return {"error": f"搜图失败: {exc.__class__.__name__}: {exc}"}
+    if not image_urls:
+        return {"error": "没找到合适的梗图,用文字回复即可"}
+
+    for image_url in image_urls:
+        try:
+            image_data, content_type = await ctx.download_binary_fn(ctx.config, image_url)
+        except httpx.HTTPError as exc:
+            _logger.info("Meme candidate download failed (%s): %s", image_url, exc)
+            continue
+        except Exception as exc:  # noqa: BLE001
+            _logger.warning("Meme candidate fetch unexpected error: %s", exc)
+            continue
+        if not image_data:
+            continue
+        if content_type and not content_type.lower().startswith("image/"):
+            continue
+        uri = "base64://" + base64.b64encode(image_data).decode("ascii")
+        return {
+            "image_uri": uri,
+            "source_url": image_url,
+            "keywords": keywords,
+            "note": (
+                "把这个 image_uri **完整原样**用 <<<CATTY_INLINE_IMAGE:URI>>> 标记嵌进最终回复想展示图的位置。"
+                "切勿把 URI 截断、切勿单独输出 URI,也不要把 source_url 贴出来当链接。"
+            ),
+        }
+    return {"error": "拿到候选 URL 但全部下载失败,用文字回复即可"}
+
+
 # Executor 注册表:name → async callable
 ToolExecutor = Callable[[dict[str, Any], ToolContext], Awaitable[dict[str, Any]]]
 
@@ -316,6 +609,9 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_recall": _exec_recall,
     "catty_user_profile": _exec_user_profile,
     "catty_mc_status": _exec_mc_status,
+    "catty_web_search": _exec_web_search,
+    "catty_nsfw_search": _exec_nsfw_search,
+    "catty_meme_query": _exec_meme_query,
 }
 
 
@@ -363,15 +659,24 @@ async def execute_tool_call(
 def tools_system_hint() -> str:
     """常驻 system 提示:告诉主 AI 工具的存在和调用边界。"""
     return (
-        "你接入了三个本地工具:catty_recall(查历史记忆)、catty_user_profile(查用户画像)、"
-        "catty_mc_status(查 MC 服务器状态)。**只在真的需要时调用**,不要每条消息都查。"
-        "判断标准:"
-        "(a) 用户用了'上次/记得/之前/还记得'等时间指代且常驻 context 里没给答案 → 调 catty_recall;"
-        "(b) 群里出现一个你不确定怎么称呼的非当前发言者 QQ 号 → 调 catty_user_profile;"
-        "(c) 用户直接问 MC 在线人数/服务器掉没掉 → 调 catty_mc_status。"
-        "其它情况(普通闲聊、撒娇、玩梗、技术问答、已经能直接答上来的)**不要调工具**——"
-        "工具结果是 system 消息回填,任何调用都会让回复变慢。"
-        "如果调了 tool,在拿到结果后基于结果写最终回复;**禁止把 tool 结果原文复读**,"
-        "也禁止在最终回复里出现 tool_call/function_call 标记或 JSON。"
-        "拿到 error 字段时用猫娘口吻自然说一句'人家想不起来了/查不到/服掉啦'即可,不要把 error 文本贴出来。"
+        "你接入了六个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
+        "1. catty_recall — 查历史记忆/语料/长期摘要。用户用'上次/记得/之前/还记得'等时间指代,"
+        "且常驻 context 没给答案时再调。\n"
+        "2. catty_user_profile — 查用户画像/称呼/性别/是否主人。群里冒出一个你不确定怎么称呼的"
+        "非当前发言者 QQ 号时再调;当前发言者画像已在 context 里,不要重复查。\n"
+        "3. catty_mc_status — 查 MC 服务器在线人数与可达性。用户问 MC 在不在/几个人在玩 时调。\n"
+        "4. catty_web_search — Google/Bing 联网搜索。用户问最新新闻/版本/价格/教程/具体事实,"
+        "或明确说'搜一下/查一下/联网'时调;有 10 分钟 cooldown(主人豁免)。普通闲聊/已经知道的事不要调。\n"
+        "5. catty_nsfw_search — pixiv 图 / iwara 视频。**仅好友私聊里可调**,群里调会返回 error"
+        "(此时引导用户加好友私聊,不要重试);kind=image 时图片由程序下载并自动发送,"
+        "你只补 1-2 句猫娘短评,不要贴链接也不要复读 URL。\n"
+        "6. catty_meme_query — Bing 图片搜索拉一张梗图嵌入回复。**只有特定主题画面需求时调**——"
+        "撒娇/玩梗/情绪反应让本地表情库随机配(<<<CATTY_EMOJI_QUERY:意图>>> marker 老路径)更快。"
+        "拿到 image_uri 后必须用 <<<CATTY_INLINE_IMAGE:URI>>> 标记嵌入最终回复指定位置。\n"
+        "通用规则:\n"
+        "- 多个 tool 调用可以并发(同一轮发起多个 tool_calls)但**总开销=回复延迟**,能不调就不调。\n"
+        "- 拿到 tool 结果后基于结果写最终回复;**禁止复读 tool 返回的 JSON 原文**,"
+        "也禁止在最终回复里出现 tool_call/function_call/[[CATTY_*]] 标记(INLINE_IMAGE 除外)。\n"
+        "- 拿到 error 字段时用猫娘口吻自然说一句'人家想不起来/查不到/服掉了/群里说不太合适'即可,"
+        "不要把 error 文本贴给用户看。"
     )
