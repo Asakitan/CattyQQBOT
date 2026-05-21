@@ -187,6 +187,11 @@ class MemoryStore:
         )
         self.max_game_facts = max(int(getattr(config, "catty_memory_max_game_facts", 200) or 200), 20)
         self.max_game_fact_chars = max(int(getattr(config, "catty_memory_max_game_fact_chars", 360) or 360), 60)
+        self.game_summary_min_facts = max(int(getattr(config, "catty_memory_game_summary_min_facts", 60) or 60), 10)
+        self.game_summary_interval_minutes = max(
+            float(getattr(config, "catty_memory_game_summary_interval_minutes", 360.0) or 360.0), 5.0
+        )
+        self.game_keep_recent_facts = max(int(getattr(config, "catty_memory_game_keep_recent_facts", 20) or 20), 5)
         # group_id → game_name 反向索引,从 config.game_context.*_group_ids 推
         self._group_to_game: dict[str, str] = {}
         for group_id in getattr(config, "catty_game_context_star_resonance_group_ids", set()) or set():
@@ -1862,3 +1867,108 @@ class MemoryStore:
         if not isinstance(games, dict):
             return []
         return sorted(games.keys())
+
+    # ── 游戏摘要周期压缩 ───────────────────────────────────────────────
+
+    def due_games_for_summary(self) -> list[str]:
+        """返回需要 LLM 压缩的游戏名列表。
+
+        触发条件:facts 数 >= game_summary_min_facts 且距上次摘要 >= interval。
+        新游戏无 last_summary_at 视为永远 due,只要 facts 攒够就压。
+        """
+        if not self.enabled:
+            return []
+        games = self._data.get("games", {})
+        if not isinstance(games, dict):
+            return []
+        now = datetime.now(timezone.utc)
+        due: list[str] = []
+        for game_name, game_record in games.items():
+            if not isinstance(game_record, dict):
+                continue
+            facts = game_record.get("facts", [])
+            if not isinstance(facts, list) or len(facts) < self.game_summary_min_facts:
+                continue
+            last = _parse_time(game_record.get("last_summary_at"))
+            if last is None or (now - last).total_seconds() >= self.game_summary_interval_minutes * 60:
+                due.append(str(game_name))
+        return due
+
+    def build_game_summary_messages(self, game_name: str) -> list[dict[str, object]]:
+        """构造给 LLM 的游戏摘要 prompt。压缩前 (n - keep_recent) 条 facts 为 summary。"""
+        game_name = self._normalize_game_name(game_name)
+        games = self._data.get("games", {})
+        game_record = games.get(game_name, {}) if isinstance(games, dict) else {}
+        if not isinstance(game_record, dict):
+            game_record = {}
+        old_summary = str(game_record.get("summary") or "").strip()
+        facts = game_record.get("facts", [])
+        if not isinstance(facts, list):
+            facts = []
+        # 待压缩 = facts 全部除最近 keep_recent_facts 条
+        keep = self.game_keep_recent_facts
+        to_compress = facts[: max(0, len(facts) - keep)]
+
+        lines: list[str] = []
+        for entry in to_compress:
+            if not isinstance(entry, dict):
+                continue
+            text = str(entry.get("text") or "").strip()
+            if not text:
+                continue
+            source = str(entry.get("source") or "").strip()
+            url = str(entry.get("url") or "").strip()
+            tags = entry.get("tags") or []
+            tag_str = "|".join(str(t) for t in tags) if isinstance(tags, list) else ""
+            extras = []
+            if source:
+                extras.append(f"src={source}")
+            if url:
+                extras.append(f"url={url[:80]}")
+            if tag_str:
+                extras.append(f"tags={tag_str}")
+            extra = f" [{', '.join(extras)}]" if extras else ""
+            lines.append(f"- {text}{extra}")
+
+        prompt = (
+            "压缩游戏长期记忆,只输出 JSON:"
+            '{"summary":"<=2000字"}。'
+            "把待压缩条目里**反复出现的事实、版本变化、角色机制、活动规则、玩家共识**整合成结构化摘要,"
+            "按主题(角色/版本/活动/机制/玩家)分类列出。"
+            "**剔除掉**单次玩笑、临时情绪、过时信息、未确认传言。"
+            "如果旧摘要已有相关条目,新事实优先覆盖旧的。"
+            "保留具体的版本号、角色名、数字、来源 url(简短引用即可)。"
+            "不要 Markdown,不要 emoji,不要解释你做了什么。"
+        )
+        user_content = (
+            f"游戏:{game_name}\n"
+            f"旧摘要:{old_summary or '无'}\n"
+            f"待压缩 {len(lines)} 条事实(最近 {min(len(facts), keep)} 条保留为原始记录,不在这里):\n"
+            + "\n".join(lines)
+        )
+        return [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]
+
+    def save_game_summary(self, game_name: str, summary: str) -> None:
+        """写入压缩后的 summary;只保留最近 keep_recent_facts 条原始 facts。"""
+        if not self.enabled:
+            return
+        game_name = self._normalize_game_name(game_name)
+        if not game_name:
+            return
+        games = self._data.setdefault("games", {})
+        game_record = games.setdefault(game_name, {})
+        if not isinstance(game_record, dict):
+            game_record = {}
+            games[game_name] = game_record
+
+        parsed = _extract_json_object(summary)
+        if parsed is None:
+            game_record["summary"] = str(summary or "").strip()[:4000]
+        else:
+            game_record["summary"] = str(parsed.get("summary") or "").strip()[:4000]
+
+        facts = game_record.get("facts", [])
+        if isinstance(facts, list) and len(facts) > self.game_keep_recent_facts:
+            game_record["facts"] = facts[-self.game_keep_recent_facts :]
+        game_record["last_summary_at"] = _now()
+        self._save()

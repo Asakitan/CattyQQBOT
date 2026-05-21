@@ -3295,6 +3295,14 @@ async def _summary_loop() -> None:
                 logger.info(f"Updated mentioned member profile for {user_id} in group {group_id}")
             except Exception as exc:
                 logger.warning(f"Failed to summarize mentioned member profile for {user_id} in group {group_id}: {exc}")
+        for game_name in memory_store.due_games_for_summary():
+            try:
+                messages = memory_store.build_game_summary_messages(game_name)
+                summary = await chat_completion(config, messages)
+                memory_store.save_game_summary(game_name, summary)
+                logger.info(f"Compressed game memory summary for '{game_name}'")
+            except Exception as exc:
+                logger.warning(f"Failed to compress game memory for '{game_name}': {exc}")
 
 
 async def _proactive_bubble_loop() -> None:

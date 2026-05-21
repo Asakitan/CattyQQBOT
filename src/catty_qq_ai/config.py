@@ -242,6 +242,11 @@ class Config(BaseModel):
     catty_memory_game_storage_dir: str = "memory_games"
     catty_memory_max_game_facts: int = 200  # 每个游戏最多保留多少条事实(超出按时间淘汰最旧)
     catty_memory_max_game_fact_chars: int = 360  # 单条事实文本上限
+    # 周期性摘要:每个游戏 facts 数 >= min_facts 且距上次摘要 >= interval_minutes 时触发 LLM 压缩,
+    # 摘要后只保留最近 keep_recent_facts 条原始事实,其它压缩进 summary。
+    catty_memory_game_summary_min_facts: int = 60
+    catty_memory_game_summary_interval_minutes: float = 360.0  # 6 小时
+    catty_memory_game_keep_recent_facts: int = 20
 
     # ── 主 AI 工具调用(OpenAI function calling 协议) ──────────────────
     # 主回复时给云端模型挂 catty_recall / catty_user_profile / catty_mc_status 三套 tool schema,

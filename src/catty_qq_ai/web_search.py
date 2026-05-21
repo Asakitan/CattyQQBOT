@@ -3,6 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from html import unescape
 from html.parser import HTMLParser
+import json
+import logging
 import re
 from typing import Any
 from urllib.parse import parse_qs, unquote, urlparse
@@ -11,6 +13,9 @@ from xml.etree import ElementTree
 import httpx
 
 from .config import Config
+
+
+_logger = logging.getLogger("catty_qq_ai.web_search")
 
 
 @dataclass(slots=True)
@@ -285,10 +290,56 @@ def _extract_duckduckgo_vqd(html: str) -> str:
     return ""
 
 
-async def search_image_urls(config: Config, query: str, *, max_results: int = 6) -> list[str]:
-    if not query.strip() or not config.catty_web_search_enabled:
-        return []
-    timeout = config.catty_web_search_request_timeout or config.catty_request_timeout
+# Bing 图片搜索响应里每个图片是 <a class="iusc" m='{"murl":"https://...","turl":"..."}'>;
+# 提取 m 属性内 JSON 的 murl 字段(原图)。HTML 实体可能被 escape 成 &quot;,unescape 后能 json.loads。
+_BING_IUSC_RE = re.compile(r'<a[^>]+class="iusc"[^>]+m="([^"]+)"', re.DOTALL)
+
+
+async def _search_image_urls_bing(
+    config: Config,
+    query: str,
+    *,
+    max_results: int,
+    timeout: float,
+) -> list[str]:
+    """Bing 图片搜索;国内可直连,不依赖 duckduckgo。失败抛 httpx.HTTPError,让 caller fallback。"""
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+        ),
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.6",
+    }
+    params = {"q": query, "form": "HDRSC2", "first": "1"}
+    async with httpx.AsyncClient(
+        timeout=timeout, follow_redirects=True, proxy=config.catty_http_proxy or None
+    ) as client:
+        response = await client.get("https://www.bing.com/images/search", params=params, headers=headers)
+        response.raise_for_status()
+
+    urls: list[str] = []
+    for match in _BING_IUSC_RE.finditer(response.text):
+        raw = unescape(match.group(1))
+        try:
+            payload = json.loads(raw)
+        except json.JSONDecodeError:
+            continue
+        murl = str(payload.get("murl") or "").strip()
+        if murl.startswith("http") and murl not in urls:
+            urls.append(murl)
+        if len(urls) >= max_results:
+            break
+    return urls
+
+
+async def _search_image_urls_duckduckgo(
+    config: Config,
+    query: str,
+    *,
+    max_results: int,
+    timeout: float,
+) -> list[str]:
+    """DuckDuckGo 图片搜索 fallback;国内有时连不上。"""
     headers = {
         "User-Agent": (
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -323,6 +374,34 @@ async def search_image_urls(config: Config, query: str, *, max_results: int = 6)
         if len(urls) >= max_results:
             break
     return urls
+
+
+async def search_image_urls(config: Config, query: str, *, max_results: int = 6) -> list[str]:
+    """图片搜索:bing 优先(国内可直连),duckduckgo 降级兜底(走代理时可能 work)。
+
+    任一源拿到 >= 1 张图就返回;两个都 fail 才返回空列表。
+    单源 timeout 取 catty_web_search_request_timeout(默认 10s)的一半,留余量给 fallback。
+    """
+    if not query.strip() or not config.catty_web_search_enabled:
+        return []
+    total_timeout = float(config.catty_web_search_request_timeout or config.catty_request_timeout or 10.0)
+    per_engine_timeout = max(min(total_timeout / 2, 8.0), 4.0)
+
+    try:
+        urls = await _search_image_urls_bing(config, query, max_results=max_results, timeout=per_engine_timeout)
+        if urls:
+            return urls
+        _logger.info("Bing image search returned 0 urls for %r,fallback to duckduckgo", query)
+    except (httpx.HTTPError, ValueError) as exc:
+        _logger.info("Bing image search failed for %r: %s; fallback to duckduckgo", query, exc)
+
+    try:
+        return await _search_image_urls_duckduckgo(
+            config, query, max_results=max_results, timeout=per_engine_timeout
+        )
+    except (httpx.HTTPError, ValueError) as exc:
+        _logger.warning("DuckDuckGo image search also failed for %r: %s", query, exc)
+        return []
 
 
 def format_search_context(query: str, results: list[WebSearchResult]) -> str:
