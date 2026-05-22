@@ -105,7 +105,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "max_tokens": 800,
         "request_timeout": 60,
         "async_enabled": True,
-        "inline_max_wait_seconds": 3.0,
+        "inline_max_wait_seconds": 15.0,
     },
     "filter": {
         "enabled": True,

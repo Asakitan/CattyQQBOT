@@ -93,8 +93,11 @@ class Config(BaseModel):
     # vision 走异步:消息一进来就 fire-and-forget 启 task,主回复链路最多短等
     # catty_vision_inline_max_wait_seconds 秒;等不到就不带 vision 描述直接回,
     # 后台 task 跑完写 memory_store,下一轮自动复用。
+    # 注:默认值要大于 vision 模型的平均响应时间(8-12s 常见),否则主回复总赶在
+    # vision 完成前就走,看起来像"猫猫不识图"。配合 reply_queue_max_wait_seconds
+    # 排队雪崩防护使用,排队消息超 25s 才丢弃,所以这里给 15s 是安全的。
     catty_vision_async_enabled: bool = True
-    catty_vision_inline_max_wait_seconds: float = 3.0
+    catty_vision_inline_max_wait_seconds: float = 15.0
 
     catty_filter_enabled: bool = True
     catty_filter_base_url: str = ""
