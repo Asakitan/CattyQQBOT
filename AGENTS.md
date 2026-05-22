@@ -31,7 +31,6 @@
 | [src/catty_qq_ai/reply_markers.py](src/catty_qq_ai/reply_markers.py) | `NO_REPLY_MARKER` 等控制标记常量 |
 | [catty_config_loader.py](catty_config_loader.py) | `config.json` → 环境变量 + 启动集成进程 |
 | [catty_integrations.py](catty_integrations.py) | NapCat / Ollama 启动与监管 |
-| ~~scripts/_local_push_pack.py~~ | **已废弃并删除**——之前的命令行部署脚本，硬编码 token + 维护 FILES 列表很糙；现在统一走 Studio 的推送接口（主人手动操作） |
 
 ## Common Commands
 
@@ -59,8 +58,6 @@
 - 推到生产由**主人通过 Studio 的推送接口手动完成**，AI 助手不直接执行部署
 - 不要用 `git diff` / `git status` 推断"要推什么"——主人本地修改可能没及时 commit，git 视角的 "modified" 不等于"待部署清单"
 - **推送完主人会让助手 `git commit` 一次**，把当时推到服务器的代码状态归档到 git，方便日后对照
-
-> 历史：项目曾经有一个 `scripts/_local_push_pack.py` 命令行脚本走 HTTP zip 上传，但因为 token 硬编码 + FILES 清单维护麻烦已废弃删除。
 
 ## Prompt Ownership
 
