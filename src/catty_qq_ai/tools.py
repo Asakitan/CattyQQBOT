@@ -24,6 +24,7 @@ from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, Private
 from .config import Config
 from .hot_trends import fetch_hot_trends, normalize_sources
 from .mc_status import _default_probe
+from .meme_dict import lookup_term
 from .memory import MemoryStore
 from .nsfw_search import NsfwResult, search_nsfw
 from .parsers import lenient_json_object
@@ -418,6 +419,41 @@ _HOT_TRENDS_SCHEMA: dict[str, Any] = {
 }
 
 
+_MEME_EXPLAIN_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_meme_explain",
+        "description": (
+            "查萌娘百科解释一个**网络梗 / ACG 词条 / 角色 / 作品 / 二次元术语**。"
+            "适用场景:群友冒出一个你不认识的网络流行语(yyds/绷不住了/什么的)、"
+            "二次元词条(孤独摇滚/纳西妲/雷电将军)、ACG 作品/角色名字;"
+            "或者你想确认一个梗的精确出处(『永远滴神』出自哪)。"
+            "**萌娘百科只覆盖网络梗 + ACG 范畴**——如果是新闻热点/工业术语/金融/政治名词,"
+            "拿到 error=not_found 时**别重试**,改调 catty_web_search。"
+            "返回 extract 是 360 字以内首段纯文本摘要,resolved_title 是命中后的实际页面"
+            "(yyds 会自动 redirect 到『永远的神』,group/作品别名也会归一化)。"
+            "AI 拿到后用猫娘口吻短句复述给群友(『嗷呜原来 yyds 是永远滴神的缩写~出自...』),"
+            "不要照搬整段 extract,不要贴 URL,不要复读 JSON。"
+            "结果缓存 10 分钟,放心调,不会真的每次戳服务器。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "term": {
+                    "type": "string",
+                    "description": (
+                        "要查的词。1-3 个关键词,保留群友原话语种(中文/日文/英文都行,萌娘都收)。"
+                        "示例:`yyds` / `孤独摇滚` / `Raiden Shogun` / `绷不住了`。"
+                        "不要拼成长句子,不要加『是什么意思』之类的疑问后缀。"
+                    ),
+                },
+            },
+            "required": ["term"],
+        },
+    },
+}
+
+
 _NOW_SCHEMA: dict[str, Any] = {
     "type": "function",
     "function": {
@@ -463,6 +499,7 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_group_game_tag": _GROUP_GAME_TAG_SCHEMA,
     "catty_hot_trends": _HOT_TRENDS_SCHEMA,
     "catty_now": _NOW_SCHEMA,
+    "catty_meme_explain": _MEME_EXPLAIN_SCHEMA,
 }
 
 
@@ -563,6 +600,9 @@ _nsfw_search_cooldowns: dict[str, float] = {}
 # 默认 90s 一次,本身底层已经有 180s 的聚合缓存,这里只是防一个用户连戳。
 _hot_trends_cooldowns: dict[str, float] = {}
 _HOT_TRENDS_COOLDOWN_SECONDS = 90.0
+# 梗百科查询按用户 cooldown,底层已 600s LRU 缓存,这里只防同一人连戳。
+_meme_explain_cooldowns: dict[str, float] = {}
+_MEME_EXPLAIN_COOLDOWN_SECONDS = 30.0
 
 
 # ── 各 tool 的 executor ───────────────────────────────────────────────
@@ -985,6 +1025,24 @@ async def _exec_group_game_tag(args: dict[str, Any], ctx: ToolContext) -> dict[s
     )
 
 
+async def _exec_meme_explain(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    term = str(args.get("term") or "").strip()
+    if not term:
+        return {"error": "term 不能为空"}
+
+    is_exempt = bool(ctx.configured_title.strip())
+    if not is_exempt and _MEME_EXPLAIN_COOLDOWN_SECONDS > 0:
+        cd_key = ctx.user_id or "anonymous"
+        now = time.monotonic()
+        last = _meme_explain_cooldowns.get(cd_key, 0.0)
+        remaining = max(last + _MEME_EXPLAIN_COOLDOWN_SECONDS - now, 0.0)
+        if remaining > 0:
+            return {"error": f"meme_explain 冷却剩 {int(remaining)}s,基于已有知识回答即可"}
+        _meme_explain_cooldowns[cd_key] = now
+
+    return await lookup_term(ctx.config, term)
+
+
 async def _exec_now(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     del ctx  # 纯本地计算,不需要事件上下文
     delta_raw = args.get("delta_days")
@@ -1076,6 +1134,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_group_game_tag": _exec_group_game_tag,
     "catty_hot_trends": _exec_hot_trends,
     "catty_now": _exec_now,
+    "catty_meme_explain": _exec_meme_explain,
 }
 
 
@@ -1126,7 +1185,7 @@ async def execute_tool_call(
 def tools_system_hint() -> str:
     """常驻 system 提示:告诉主 AI 工具的存在和调用边界。"""
     return (
-        "你接入了十二个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
+        "你接入了十三个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
         "1. catty_recall — 查历史记忆/语料/长期摘要。用户用'上次/记得/之前/还记得'等时间指代,"
         "且常驻 context 没给答案时再调。\n"
         "2. catty_user_profile — 查用户画像/称呼/性别/是否主人。群里冒出一个你不确定怎么称呼的"
@@ -1165,6 +1224,11 @@ def tools_system_hint() -> str:
         "用户问『今天几号/星期几/几点了/是不是 XX 节』,或你想根据时段(深夜→唠叨早睡、饭点→吃了没、"
         "周末→放假气氛)/节日(春节/中秋/双十一)做合适反应时才调。"
         "拿到结果别复读 JSON,自然融进回复就好。明天=delta_days=1,后天=2,昨天=-1。\n"
+        "13. catty_meme_explain — 萌娘百科查**网络梗 / ACG 词条 / 角色 / 作品 / 二次元术语**。"
+        "群友冒出一个你不认识的网络流行语(yyds/绷不住了)、二次元词条(孤独摇滚/雷电将军)、角色/作品名;"
+        "或想确认梗的精确出处时调。**只覆盖网络梗 + ACG**——拿到 error=not_found 不要重试,"
+        "如果词是新闻/工业/金融/政治名词改调 catty_web_search。"
+        "结果缓存 10 分钟。拿到 extract 用猫娘口吻短句复述,不要照搬整段,不要贴 URL,不要复读 JSON。\n"
         "通用规则:\n"
         "- 多个 tool 调用可以并发(同一轮发起多个 tool_calls)但**总开销=回复延迟**,能不调就不调。\n"
         "- 拿到 tool 结果后基于结果写最终回复;**禁止复读 tool 返回的 JSON 原文**,"
