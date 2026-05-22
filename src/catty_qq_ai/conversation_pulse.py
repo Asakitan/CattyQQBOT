@@ -58,6 +58,7 @@ class PulseResult:
     observations: list[str]  # 给 AI 的简短人话观察(1-3 条)
     burst_user: str = ""     # 刷屏的用户 display_name(仅 phase=burst 时)
     echo_text: str = ""      # 复读的代表文本(仅 phase=echo 时,截前 30 字)
+    reply_style_hint: str = ""  # 该 phase 下建议的回复风格/段数/字数 cap,空串表示无特殊建议
 
     def to_dict(self) -> dict[str, Any]:
         d: dict[str, Any] = {
@@ -116,6 +117,7 @@ def analyze_pulse(messages: Iterable[_MsgLike], *, now: float) -> PulseResult:
     phase = "normal"
     burst_user = ""
     echo_text = ""
+    reply_style_hint = ""
 
     # ── 冷场检测 ──
     cutoff_cold = now - _COLD_WINDOW_SEC
@@ -129,12 +131,15 @@ def analyze_pulse(messages: Iterable[_MsgLike], *, now: float) -> PulseResult:
             observations.append(
                 f"群里冷了大约 {minutes} 分钟了,你可以轻一点回,或者起个新话题"
             )
+        # 冷场:可以稍长(1-2 段, ≤50 字/段)带一个开放话题,而不是只回一个『嗯』
+        reply_style_hint = "回复段数 1-2,每段 ≤50 字;可以带一个开放话题或提问,引人接话"
         return PulseResult(
             phase=phase,
             msg_count_2min=msg_count_2min,
             participants_2min=participants_2min,
             seconds_since_last=seconds_since_last,
             observations=observations,
+            reply_style_hint=reply_style_hint,
         )
 
     # ── 刷屏检测:同一用户**连续**(无他人插话) >= _BURST_MIN_MSGS 条且在 _BURST_WINDOW_SEC 内 ──
@@ -164,6 +169,8 @@ def analyze_pulse(messages: Iterable[_MsgLike], *, now: float) -> PulseResult:
             f"{burst_user} 刚刚连发了 {burst_count} 条没人接话,可能在抖话痨或玩梗,"
             f"你可以揶揄一下/接梗,也可以短回应,别陪着刷屏"
         )
+        # 刷屏:1 段 ≤ 20 字,精准戳一下,不陪着刷碎
+        reply_style_hint = "回复 1 段, ≤20 字;精准吐槽/接梗,不要拆多条陪着刷屏"
 
     # ── 复读检测:90 秒内 >= 3 条相似文本 ──
     cutoff_echo = now - _ECHO_WINDOW_SEC
@@ -185,6 +192,8 @@ def analyze_pulse(messages: Iterable[_MsgLike], *, now: float) -> PulseResult:
                 f"群里在复读『{echo_text}』({echo_cand[1]} 次),"
                 "你可以跟一下但加猫娘风味,别原样照抄"
             )
+            # 复读:1 段 ≤ 25 字, 接梗但要带猫娘味, 不要复读原文
+            reply_style_hint = "回复 1 段, ≤25 字;在复读基础上加猫娘味/小动作,不要原样照抄"
 
     # ── 热闹检测 ──(冷场/刷屏/复读 优先,只在 phase 还是 normal 时考虑)
     if phase == "normal" and msg_count_2min >= _BUSY_MIN_MSGS and participants_2min >= _BUSY_MIN_PARTICIPANTS:
@@ -193,6 +202,8 @@ def analyze_pulse(messages: Iterable[_MsgLike], *, now: float) -> PulseResult:
             f"最近 2 分钟 {participants_2min} 个人发了 {msg_count_2min} 条,群里很热闹,"
             "回复尽量短句快接,别长篇大论"
         )
+        # 热闹:1-2 段, ≤30 字/段, 跟上节奏
+        reply_style_hint = "回复段数 1-2,每段 ≤30 字;短句快接跟上节奏,别长篇大论"
 
     # 默认 normal 不强行加 observation(避免占 prompt 空间)
     return PulseResult(
@@ -203,6 +214,7 @@ def analyze_pulse(messages: Iterable[_MsgLike], *, now: float) -> PulseResult:
         observations=observations,
         burst_user=burst_user,
         echo_text=echo_text,
+        reply_style_hint=reply_style_hint,
     )
 
 
@@ -211,7 +223,8 @@ def analyze_pulse(messages: Iterable[_MsgLike], *, now: float) -> PulseResult:
 def build_pulse_context(messages: Iterable[_MsgLike], *, now: float) -> str:
     """主回复链路用:给定 deque 返回一段 system prompt 文本。
 
-    phase=normal 不打扰(返回空),其它 phase 输出一行简短上下文 + observations。
+    phase=normal 不打扰(返回空),其它 phase 输出一行简短上下文 + observations
+    + 该 phase 的回复风格 cap(段数/字数)。
     """
     pulse = analyze_pulse(messages, now=now)
     if pulse.phase == "normal":
@@ -225,4 +238,7 @@ def build_pulse_context(messages: Iterable[_MsgLike], *, now: float) -> str:
         "busy": "热闹",
     }.get(pulse.phase, pulse.phase)
     body = "; ".join(pulse.observations)
-    return f"群节奏感知[{label_cn}]: {body}。"
+    main = f"群节奏感知[{label_cn}]: {body}。"
+    if pulse.reply_style_hint:
+        main += f" 回复风格建议: {pulse.reply_style_hint}。"
+    return main
