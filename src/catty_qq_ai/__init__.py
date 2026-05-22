@@ -55,7 +55,8 @@ from .openai_client import (
     download_binary,
     local_critic_completion,
 )
-from .conversation_pulse import build_pulse_context
+from .action_hints import build_action_hints
+from .conversation_pulse import analyze_pulse, build_pulse_context
 from .entity_extractor import build_entity_context
 from .intent_classifier import build_intent_context
 from .parsers import strip_catty_markers as _strip_catty_markers
@@ -1775,8 +1776,12 @@ def _build_messages(
     # normal 节奏不打扰,避免每条消息都灌一段空话占 prompt。
     pulse_key = _conversation_queue_key(event)
     pulse_msgs = _recent_conversation_messages.get(pulse_key)
+    pulse_phase = "normal"
     if pulse_msgs:
-        pulse_context = build_pulse_context(pulse_msgs, now=time.monotonic())
+        pulse_now = time.monotonic()
+        pulse_result = analyze_pulse(pulse_msgs, now=pulse_now)
+        pulse_phase = pulse_result.phase
+        pulse_context = build_pulse_context(pulse_msgs, now=pulse_now)
         if pulse_context:
             messages.append({"role": "system", "content": pulse_context})
     # 入向消息意图分类:question/tease_cat/compliment_cat 等多标签;
@@ -1789,6 +1794,17 @@ def _build_messages(
     entity_context = build_entity_context(incoming.text)
     if entity_context:
         messages.append({"role": "system", "content": entity_context})
+    # 解析层联动建议:交叉 intent + entity + pulse 给具体下一步建议
+    # (例如未来时间+命令 → 建议 catty_remember;qq_id+不是发言者 → 建议 catty_user_profile)。
+    sender_qq_str = str(event.user_id) if event is not None else ""
+    action_hint_context = build_action_hints(
+        incoming.text,
+        has_image=incoming.has_image,
+        pulse_phase=pulse_phase,
+        sender_qq=sender_qq_str,
+    )
+    if action_hint_context:
+        messages.append({"role": "system", "content": action_hint_context})
     messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     return messages
