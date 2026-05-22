@@ -23,8 +23,11 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from datetime import datetime
 from typing import Iterable
+
+from .time_normalizer import normalize_time_entity
 
 
 @dataclass(slots=True)
@@ -32,6 +35,7 @@ class Entity:
     kind: str       # url / time / money / count / at_mention / qq_id
     raw: str        # 原文里的子串
     note: str = ""  # 给 AI 的语义提示(可选,例如 time 类标"未来"/"过去")
+    iso: str = ""   # time 类专用:normalize 出的 ISO 字符串(日期或带时分),空表示 normalize 失败
 
 
 # ── URL ──────────────────────────────────────────────────────────────
@@ -106,10 +110,11 @@ _COUNT_RE = re.compile(
 
 # ── 主提取函数 ────────────────────────────────────────────────────────
 
-def extract_entities(text: str) -> list[Entity]:
+def extract_entities(text: str, *, reference: datetime | None = None) -> list[Entity]:
     """从消息文本提取所有实体,按出现位置排序,无命中返回 []。
 
     去重:同 kind+raw 的二次出现只保留首次。
+    reference: 用于 time 实体的 ISO normalize,默认 ``datetime.now()``。
     """
     if not text or not isinstance(text, str):
         return []
@@ -182,17 +187,28 @@ def extract_entities(text: str) -> list[Entity]:
         if key in seen:
             continue
         seen.add(key)
+        # time 实体补 ISO normalize(失败保持空 iso,不阻塞输出)
+        if ent.kind == "time":
+            iso = normalize_time_entity(ent.raw, ent.note, reference=reference)
+            if iso:
+                ent.iso = iso
         out.append(ent)
     return out
 
 
-def build_entity_context(text: str, *, max_entities: int = 8) -> str:
+def build_entity_context(
+    text: str,
+    *,
+    max_entities: int = 8,
+    reference: datetime | None = None,
+) -> str:
     """主回复链路用:返回一段 system prompt 文本。
 
     无命中或全是 url/at_mention 时返回空(URL 和 @ AI 自己看得见,没必要再标)。
     只对 time/money/count/qq_id 这类容易漏读的实体提示。
+    time 实体如果 normalize 成功,会附带 iso=YYYY-MM-DD 让 AI 直接复用。
     """
-    ents = extract_entities(text)
+    ents = extract_entities(text, reference=reference)
     if not ents:
         return ""
     # 过滤:URL 和 @ 不进 prompt(AI 看得见原文)
@@ -202,7 +218,10 @@ def build_entity_context(text: str, *, max_entities: int = 8) -> str:
     interesting = interesting[:max_entities]
     parts: list[str] = []
     for e in interesting:
-        if e.note:
+        if e.kind == "time" and e.iso:
+            # ISO 比 raw 更精确,优先标 ISO 后括号给 raw 让 AI 知道原话
+            parts.append(f"time={e.iso}(原话『{e.raw}』)")
+        elif e.note:
             parts.append(f"{e.kind}({e.note})={e.raw}")
         else:
             parts.append(f"{e.kind}={e.raw}")
