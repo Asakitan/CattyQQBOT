@@ -700,6 +700,11 @@ async def chat_completion_with_tools(
             executed.append((call_id, name, args_json))
 
         # 并发执行 tool calls(每个都自己有 TTL 缓存,不会真的并发打爆 memory_store)
+        if executed:
+            # info-level 可观察性:每轮记录 AI 触发了哪些 tool + 参数前缀,
+            # 不输出完整 args(NSFW 搜索/笔记内容可能敏感,只截前 80 字看意图)。
+            for _call_id, name, args_json in executed:
+                _logger.info("tool_call: %s args=%s", name, (args_json or "")[:80])
         tool_results = await asyncio.gather(
             *[tool_executor(name, args_json) for _call_id, name, args_json in executed],
             return_exceptions=True,
