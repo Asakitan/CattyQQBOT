@@ -40,7 +40,7 @@
 | 启动 bot | `python bot.py` |
 | 跑测试 | `python -c "import sys; sys.path.insert(0, 'src'); import unittest; unittest.main(module=None, argv=['', 'discover', 'tests'])"`（项目没 pytest，用 stdlib unittest） |
 | 单文件语法 check | `python -m py_compile src/catty_qq_ai/<file>.py` |
-| 推到生产服务器 | **主人手动通过 Studio 推送接口操作**——AI 助手不要自己跑命令；推送完成后主人会让助手 `git commit` 归档当时的状态 |
+| 推到生产服务器 | 通过 Studio 的推送接口操作 ，推送完成后进行Commit |
 | 训练数据导出 | `python scripts/export_reply_gate_dataset.py` |
 | 热重载状态 | bot 运行中自动监控 config.json / memory/*.json / emoji 资源，写入即生效，不必重启 |
 
