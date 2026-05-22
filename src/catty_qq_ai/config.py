@@ -156,6 +156,9 @@ class Config(BaseModel):
     catty_owner_forward_enabled: bool = False
     catty_owner_forward_private_messages: bool = True
     catty_owner_forward_block_ai_reply: bool = True
+    # 猫猫(笨猫人格本身)各平台社交账号:被群友问起"你的 steam"/"猫猫 steam"
+    # 或聊到某游戏想给出猫猫自己对应平台账号时引用,空字符串表示猫猫在那个平台没账号。
+    catty_social_steam: str = ""
     catty_turtle_soup_cooldown_seconds: int = 300
 
     catty_system_prompt: str = "你是一个接入 QQ 的中文 AI 助手，回答要友好、简洁、可靠。"

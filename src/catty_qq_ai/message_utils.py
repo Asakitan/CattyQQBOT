@@ -642,6 +642,11 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, 
         image_directed = config.catty_image_response_enabled and has_image and directed
         directly_requested = mentioned or replied_to_self or used_prefix or directed or image_directed
         if not directly_requested and not special_active:
+            # 群聊纯图(或文字极短)且没有任何指向猫猫的信号 → 直接丢掉,不进 filter。
+            # 过去 filter AI 偶尔会把"群里有人发的没头没尾的图"判成要互动,导致莫名其妙回复图片。
+            text_for_signal = (text_without_prefix or text).strip()
+            if has_image and len(text_for_signal) <= 3:
+                return None
             if not config.catty_filter_enabled:
                 if config.catty_group_require_mention_or_prefix:
                     return None

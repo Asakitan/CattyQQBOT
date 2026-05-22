@@ -297,6 +297,9 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "expression_repeat_include_images": True,
         "expression_repeat_include_text": True,
     },
+    "social": {
+        "steam": "",
+    },
     "emoji": {
         "enabled": True,
         "dir": "emojis",
@@ -627,6 +630,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_IMAGE_RESPONSE_ENABLED", chat.get("image_response_enabled"))
     _set_env("CATTY_IMAGE_VISION_ENABLED", chat.get("image_vision_enabled"))
     _set_env("CATTY_REPLY_QUEUE_MAX_WAIT_SECONDS", chat.get("reply_queue_max_wait_seconds"))
+    social = _section(data, "social")
+    _set_env("CATTY_SOCIAL_STEAM", social.get("steam"))
     _set_env("CATTY_REPLY_MAX_CHARS", chat.get("reply_max_chars"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_ENABLED", chat.get("reply_human_split_enabled"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_PROBABILITY", chat.get("reply_human_split_probability"))

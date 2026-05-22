@@ -288,6 +288,9 @@
     "expression_repeat_include_images": true,
     "expression_repeat_include_text": true
   },
+  "social": {
+    "steam": ""
+  },
   "emoji": {
     "enabled": true,
     "dir": "emojis",

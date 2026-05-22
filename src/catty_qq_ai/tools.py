@@ -296,6 +296,38 @@ _GAME_REMEMBER_SCHEMA: dict[str, Any] = {
 }
 
 
+_SOCIAL_ACCOUNT_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_social_account",
+        "description": (
+            "查询**你(笨猫本人)**在指定平台的社交账号链接,不是主人的。适用场景:"
+            "群友问'猫猫你 steam 多少'、'你 epic 几号'、'本喵在哪个平台玩游戏'、"
+            "或聊到某游戏让你判断它在什么平台后想给出你自己的对应账号"
+            "(例:CS2/Dota2/PUBG/绝地求生 → steam;原神/无畏契约 → 各自官方平台,不在 steam 上)。"
+            "你需要先用常识判断该游戏属于哪个平台,再用 platform 参数查询。"
+            "如果该平台没账号会返回 url 空字符串 + note 说明,这时用猫娘口吻说"
+            "'人家在那个平台没账号啦喵～'之类,不要瞎编 URL。"
+            "**不要**在没人问到的情况下主动调,也不要每次有人提游戏就调。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "platform": {
+                    "type": "string",
+                    "description": (
+                        "平台标识(小写英文),目前支持:steam。"
+                        "未来可能扩展 epic / xbox / psn / origin 等;"
+                        "传未知平台返回 error,你按 error 用猫娘口吻自然说一句即可。"
+                    ),
+                },
+            },
+            "required": ["platform"],
+        },
+    },
+}
+
+
 ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_recall": _RECALL_SCHEMA,
     "catty_user_profile": _USER_PROFILE_SCHEMA,
@@ -305,6 +337,7 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_meme_query": _MEME_QUERY_SCHEMA,
     "catty_game_recall": _GAME_RECALL_SCHEMA,
     "catty_game_remember": _GAME_REMEMBER_SCHEMA,
+    "catty_social_account": _SOCIAL_ACCOUNT_SCHEMA,
 }
 
 
@@ -795,6 +828,29 @@ async def _exec_game_remember(args: dict[str, Any], ctx: ToolContext) -> dict[st
     )
 
 
+async def _exec_social_account(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    platform = str(args.get("platform") or "").strip().lower()
+    if not platform:
+        return {"error": "platform 是必填参数(小写英文,例如 steam)"}
+    # 平台 → config 字段映射;以后加新平台只要在 config.py 加字段 + 这里加 key 即可。
+    platform_field_map = {
+        "steam": "catty_social_steam",
+    }
+    field_name = platform_field_map.get(platform)
+    if field_name is None:
+        return {
+            "error": f"未识别的平台标识 '{platform}',当前只支持: " + ", ".join(sorted(platform_field_map.keys())),
+        }
+    url = str(getattr(ctx.config, field_name, "") or "").strip()
+    if not url:
+        return {
+            "platform": platform,
+            "url": "",
+            "note": "猫猫在这个平台没账号(或者还没设置)",
+        }
+    return {"platform": platform, "url": url}
+
+
 # Executor 注册表:name → async callable
 ToolExecutor = Callable[[dict[str, Any], ToolContext], Awaitable[dict[str, Any]]]
 
@@ -807,6 +863,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_meme_query": _exec_meme_query,
     "catty_game_recall": _exec_game_recall,
     "catty_game_remember": _exec_game_remember,
+    "catty_social_account": _exec_social_account,
 }
 
 
@@ -857,7 +914,7 @@ async def execute_tool_call(
 def tools_system_hint() -> str:
     """常驻 system 提示:告诉主 AI 工具的存在和调用边界。"""
     return (
-        "你接入了八个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
+        "你接入了九个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
         "1. catty_recall — 查历史记忆/语料/长期摘要。用户用'上次/记得/之前/还记得'等时间指代,"
         "且常驻 context 没给答案时再调。\n"
         "2. catty_user_profile — 查用户画像/称呼/性别/是否主人。群里冒出一个你不确定怎么称呼的"
@@ -879,6 +936,10 @@ def tools_system_hint() -> str:
         "在游戏群里调 catty_web_search 时**程序会自动 sink top 3 结果**到对应游戏库,"
         "你拿到 web_search 返回看到 `auto_sinked_to_game_memory` 字段就说明已自动收集,"
         "**不要再调 catty_game_remember 写同样的内容**(去重也会拦,但浪费一次工具调用)。\n"
+        "9. catty_social_account — 查**你自己(笨猫本人)**在指定平台的社交账号链接,不是主人的。"
+        "**只在群友问起你某个平台账号、或聊到某游戏想给出你自己对应平台账号时调**。"
+        "调用前要先用常识判断游戏属于哪个平台(CS2/Dota2/PUBG → steam;原神 → 自有平台不在 steam)。"
+        "没人问就别主动报账号。\n"
         "通用规则:\n"
         "- 多个 tool 调用可以并发(同一轮发起多个 tool_calls)但**总开销=回复延迟**,能不调就不调。\n"
         "- 拿到 tool 结果后基于结果写最终回复;**禁止复读 tool 返回的 JSON 原文**,"
