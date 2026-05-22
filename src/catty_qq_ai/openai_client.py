@@ -623,12 +623,16 @@ async def chat_completion_with_tools(
     tool_executor 签名:async (name: str, arguments_json: str) -> dict。
     """
     if not tools or tool_executor is None:
+        _logger.info("tool_chat: tools/executor empty → fallback to plain chat_completion")
         return await chat_completion(config, messages)
     if not getattr(config, "catty_tools_enabled", True):
+        _logger.info("tool_chat: catty_tools_enabled=False → fallback to plain chat_completion")
         return await chat_completion(config, messages)
     if _cloud_is_unhealthy():
         # 云端冷却期不带 tools 试,直接走 fallback 链。
+        _logger.info("tool_chat: cloud unhealthy → fallback to plain chat_completion (no tools)")
         return await chat_completion(config, messages)
+    _logger.info("tool_chat: starting with %d tools available", len(tools))
 
     history: list[ChatMessage] = list(messages)
     for round_idx in range(max(1, max_rounds)):
