@@ -1222,8 +1222,10 @@ def _append_history(key: str, user_content: str, assistant_content: str) -> None
             text=str(assistant_content or ""),
             triggered_by="chat_completion",
         )
-    except Exception:  # noqa: BLE001
-        pass
+    except Exception as _feed_exc:  # noqa: BLE001
+        # 对称于 record_user_message 的处理(23 轮发现的 _sender_name bug 教训):
+        # 静默吞异常会掩盖长期 bug,改成 log warning 让真实问题浮出来
+        logger.warning(f"activity_feed record_assistant_reply failed: {type(_feed_exc).__name__}: {_feed_exc}")
 
 
 def _build_user_content(incoming: ExtractedMessage, *, image_description: str | None = None) -> object:
