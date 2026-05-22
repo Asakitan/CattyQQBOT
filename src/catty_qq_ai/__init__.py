@@ -3564,8 +3564,10 @@ async def observe_memory(bot: Bot, event: MessageEvent) -> None:
             image_count=len(image_urls),
             extra={"parsing": parsing_extra} if parsing_extra else None,
         )
-    except Exception:  # noqa: BLE001
-        pass
+    except Exception as _feed_exc:  # noqa: BLE001
+        # 历史:这里曾用 `except: pass` 吞所有异常,导致 user feed 长期写不进去且无报警。
+        # 改成 log warning 让真实异常浮出水面;不抛回 nonebot(observe_matcher 仍要继续跑)。
+        logger.warning(f"activity_feed record_user_message failed: {type(_feed_exc).__name__}: {_feed_exc}")
     if isinstance(event, GroupMessageEvent):
         memory_store.remember_corpus_event(
             event,
