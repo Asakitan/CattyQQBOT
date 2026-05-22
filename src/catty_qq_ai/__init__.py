@@ -56,6 +56,7 @@ from .openai_client import (
     local_critic_completion,
 )
 from .parsers import strip_catty_markers as _strip_catty_markers
+from .slang_dict import build_slang_context
 from .tools import ToolContext, available_tool_schemas, execute_tool_call, tools_system_hint
 from .persona_prompts import (
     build_catgirl_examples_prompt,
@@ -1762,6 +1763,11 @@ def _build_messages(
         recent_image_hint = _build_recent_image_reference_hint(event, incoming)
         if recent_image_hint:
             messages.append({"role": "system", "content": recent_image_hint})
+    # 本地 QQ/网络黑话翻译注入:命中『xs/u1s1/awsl/绷不住/破防』等高频缩写时,
+    # 直接告诉 AI 对应中文意思,免得调 catty_meme_explain 浪费一次工具调用。
+    slang_context = build_slang_context(incoming.text)
+    if slang_context:
+        messages.append({"role": "system", "content": slang_context})
     messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     return messages
