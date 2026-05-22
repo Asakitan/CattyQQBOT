@@ -55,6 +55,7 @@ from .openai_client import (
     download_binary,
     local_critic_completion,
 )
+from .conversation_pulse import build_pulse_context
 from .parsers import strip_catty_markers as _strip_catty_markers
 from .slang_dict import build_slang_context
 from .tools import ToolContext, available_tool_schemas, execute_tool_call, tools_system_hint
@@ -1768,6 +1769,14 @@ def _build_messages(
     slang_context = build_slang_context(incoming.text)
     if slang_context:
         messages.append({"role": "system", "content": slang_context})
+    # 群消息节奏感知:冷场/刷屏/复读/热闹时提示 AI 调整发言风格;
+    # normal 节奏不打扰,避免每条消息都灌一段空话占 prompt。
+    pulse_key = _conversation_queue_key(event)
+    pulse_msgs = _recent_conversation_messages.get(pulse_key)
+    if pulse_msgs:
+        pulse_context = build_pulse_context(pulse_msgs, now=time.monotonic())
+        if pulse_context:
+            messages.append({"role": "system", "content": pulse_context})
     messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     return messages
