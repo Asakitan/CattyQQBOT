@@ -56,6 +56,7 @@ from .openai_client import (
     local_critic_completion,
 )
 from .conversation_pulse import build_pulse_context
+from .entity_extractor import build_entity_context
 from .intent_classifier import build_intent_context
 from .parsers import strip_catty_markers as _strip_catty_markers
 from .slang_dict import build_slang_context
@@ -1783,6 +1784,11 @@ def _build_messages(
     intent_context = build_intent_context(incoming.text, has_image=incoming.has_image)
     if intent_context:
         messages.append({"role": "system", "content": intent_context})
+    # 入向消息关键实体提取:time/money/count/qq_id 等容易被 AI 漏读的事实;
+    # URL/@提及 不进 prompt(AI 看得见原文,标会重复)。
+    entity_context = build_entity_context(incoming.text)
+    if entity_context:
+        messages.append({"role": "system", "content": entity_context})
     messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     return messages
