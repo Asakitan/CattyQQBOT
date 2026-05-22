@@ -477,6 +477,51 @@ _REMEMBER_SCHEMA: dict[str, Any] = {
 }
 
 
+_RECALL_NOTES_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_recall_notes",
+        "description": (
+            "查 sticky notes(catty_remember 写的长期备忘),返回未过期条目。"
+            "build_context 已经自动注入**当前发言者**的笔记,所以**不要查当前发言者**——"
+            "适用场景:(a) 群友提到另一个非发言者 QQ,你想看是否对那个 QQ 写过笔记;"
+            "(b) 在群聊里你想看本群整体笔记(本群标签/历史约定);"
+            "(c) AI 不知道自己之前对某用户/群写过什么时复查。"
+            "注意:**catty_recall 查的是 corpus 对话语料,这里查的是结构化笔记**,两者不同。"
+            "返回 user_notes 和/或 group_notes 数组,各项含 text/time/event_date(if any)。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "scope": {
+                    "type": "string",
+                    "enum": ["user", "group", "both"],
+                    "description": (
+                        "user=只查 user_id 的笔记;group=只查 group_id 的笔记;"
+                        "both=两个都查(群聊里查别人时常用)。"
+                    ),
+                },
+                "user_id": {
+                    "type": "string",
+                    "description": "user 笔记的目标 QQ 号(默认当前发言者,但提示已说不要查自己,所以一般要传别人 QQ)。",
+                },
+                "group_id": {
+                    "type": "string",
+                    "description": "group 笔记的目标群号(默认当前群;私聊里传空)。",
+                },
+                "limit": {
+                    "type": "integer",
+                    "description": "每类最多返回 N 条,默认 10,上限 50。",
+                    "minimum": 1,
+                    "maximum": 50,
+                },
+            },
+            "required": ["scope"],
+        },
+    },
+}
+
+
 _MEME_EXPLAIN_SCHEMA: dict[str, Any] = {
     "type": "function",
     "function": {
@@ -559,6 +604,7 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_now": _NOW_SCHEMA,
     "catty_meme_explain": _MEME_EXPLAIN_SCHEMA,
     "catty_remember": _REMEMBER_SCHEMA,
+    "catty_recall_notes": _RECALL_NOTES_SCHEMA,
 }
 
 
@@ -1115,6 +1161,29 @@ async def _exec_remember(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
     )
 
 
+async def _exec_recall_notes(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    scope = str(args.get("scope") or "").strip().lower()
+    if scope not in ("user", "group", "both"):
+        return {"error": "scope 必须是 user/group/both"}
+    limit_raw = args.get("limit")
+    try:
+        limit = int(limit_raw) if limit_raw is not None else 10
+    except (TypeError, ValueError):
+        limit = 10
+    target_user_id = str(args.get("user_id") or "").strip() or ctx.user_id
+    target_group_id = str(args.get("group_id") or "").strip() or ctx.group_id
+
+    call_user = target_user_id if scope in ("user", "both") else ""
+    call_group = target_group_id if scope in ("group", "both") else ""
+    if scope in ("user", "both") and not call_user:
+        return {"error": "scope 需要 user 笔记但没拿到 user_id"}
+    if scope in ("group", "both") and not call_group:
+        return {"error": "scope 需要 group 笔记但当前不是群聊或没传 group_id"}
+    return ctx.memory_store.recall_notes(
+        user_id=call_user, group_id=call_group, limit=limit,
+    )
+
+
 async def _exec_meme_explain(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     term = str(args.get("term") or "").strip()
     if not term:
@@ -1226,6 +1295,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_now": _exec_now,
     "catty_meme_explain": _exec_meme_explain,
     "catty_remember": _exec_remember,
+    "catty_recall_notes": _exec_recall_notes,
 }
 
 
@@ -1276,7 +1346,7 @@ async def execute_tool_call(
 def tools_system_hint() -> str:
     """常驻 system 提示:告诉主 AI 工具的存在和调用边界。"""
     return (
-        "你接入了十四个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
+        "你接入了十五个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
         "1. catty_recall — 查历史记忆/语料/长期摘要。用户用'上次/记得/之前/还记得'等时间指代,"
         "且常驻 context 没给答案时再调。\n"
         "2. catty_user_profile — 查用户画像/称呼/性别/是否主人。群里冒出一个你不确定怎么称呼的"
@@ -1315,6 +1385,11 @@ def tools_system_hint() -> str:
         "用户问『今天几号/星期几/几点了/是不是 XX 节』,或你想根据时段(深夜→唠叨早睡、饭点→吃了没、"
         "周末→放假气氛)/节日(春节/中秋/双十一)做合适反应时才调。"
         "拿到结果别复读 JSON,自然融进回复就好。明天=delta_days=1,后天=2,昨天=-1。\n"
+        "15. catty_recall_notes — 主动查 sticky notes(catty_remember 写的)。"
+        "build_context **已自动注入当前发言者**的笔记,所以**不要查当前发言者**;"
+        "只在(a) 群友提到另一个非发言者 QQ 你想看对那 QQ 写过什么 (b) 想看本群整体笔记 "
+        "(c) 不确定自己之前对某 user/group 写过什么 时调。和 catty_recall 区别:"
+        "catty_recall 查 corpus 对话语料,这个查结构化笔记。\n"
         "14. catty_remember — 把『稳定偏好/边界/约定/群级标签』写入用户/群笔记库,长期沉淀。"
         "和 catty_game_remember 区别:game_remember 给特定游戏库,catty_remember 给当前用户或当前群本身。"
         "**不要**记闲聊吐槽/临时情绪/单次玩笑;只记 (a) 偏好/边界(ttl 90-180) (b) 约定(ttl 到事件结束) "
