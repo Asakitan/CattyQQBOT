@@ -16,6 +16,7 @@ from nonebot import get_bots, get_driver, get_plugin_config, logger, on_message,
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, PokeNotifyEvent, PrivateMessageEvent
 from nonebot.adapters.onebot.v11 import Bot, Message, MessageEvent, MessageSegment, NoticeEvent
 from nonebot.adapters.onebot.v11.exception import ActionFailed as OnebotActionFailed
+from nonebot.adapters.onebot.v11.exception import NetworkError as OnebotNetworkError
 from nonebot.matcher import Matcher
 from nonebot.plugin import PluginMetadata
 from nonebot.typing import T_State
@@ -3478,7 +3479,15 @@ async def handle_expression_repeat(matcher: Matcher, event: MessageEvent, state:
     async with _locks[_conversation_queue_key(event)]:
         repeat_message = str(state["catty_repeat_message"])
         _remember_bot_repeat_for_event(event, repeat_message)
-        await matcher.finish(state["catty_repeat_message"])
+        # 用 send + finish 分开,这样 send 网络超时可以被 catch 不让整轮 matcher 报 ERROR;
+        # finish() 抛 FinishedException 是正常控制流,不能被 try/except 包住。
+        try:
+            await matcher.send(state["catty_repeat_message"])
+        except OnebotNetworkError as exc:
+            logger.warning(f"expression_repeat send timeout/network: {exc}")
+        except OnebotActionFailed as exc:
+            logger.warning(f"expression_repeat send action_failed: {exc}")
+        await matcher.finish()
 
 
 @poke_matcher.handle()
