@@ -339,6 +339,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "group_titles": {},
         "user_titles": {},
         "group_user_titles": {},
+        "game_size_compress_threshold_bytes": 200000,
     },
     "game_context": {
         "star_resonance_group_ids": [],
@@ -718,6 +719,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_GROUP_TITLES", memory.get("group_titles"), json_value=True)
     _set_env("CATTY_USER_TITLES", memory.get("user_titles"), json_value=True)
     _set_env("CATTY_GROUP_USER_TITLES", memory.get("group_user_titles"), json_value=True)
+    _set_env("CATTY_MEMORY_GAME_SIZE_COMPRESS_THRESHOLD_BYTES", memory.get("game_size_compress_threshold_bytes"))
 
     game_context = _section(data, "game_context")
     _set_env("CATTY_GAME_CONTEXT_STAR_RESONANCE_GROUP_IDS", game_context.get("star_resonance_group_ids"), json_value=True)

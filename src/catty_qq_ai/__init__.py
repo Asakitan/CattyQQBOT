@@ -1664,6 +1664,7 @@ def _build_messages(
     web_search_context: str | None = None,
     star_resonance_context: str | None = None,
     strinova_context: str | None = None,
+    other_game_contexts: list[str] | None = None,
     wake_context: str | None = None,
     bot_continuation_context: str | None = None,
 ) -> list[ChatMessage]:
@@ -1742,6 +1743,9 @@ def _build_messages(
         messages.append({"role": "system", "content": star_resonance_context})
     if strinova_context:
         messages.append({"role": "system", "content": strinova_context})
+    for game_ctx in other_game_contexts or []:
+        if game_ctx:
+            messages.append({"role": "system", "content": game_ctx})
     if wake_context:
         messages.append({"role": "system", "content": wake_context})
     if bot_continuation_context:
@@ -3707,16 +3711,37 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             web_search_context = "本轮用户要求联网搜索，但当前配置关闭了 web_search.enabled。请用猫系人格说明联网搜索暂时不可用。"
 
         current_group_id = event.group_id if isinstance(event, GroupMessageEvent) else None
+        # 群标签:除了 config 的内置 group_ids,还要看 memory_store 里主 AI 自己用
+        # catty_group_game_tag 打上的群-游戏关联。任一命中就当成 group_related。
+        memory_tagged_games = (
+            memory_store.get_group_games(current_group_id) if current_group_id is not None else []
+        )
         star_resonance_context = build_star_resonance_context(
             incoming.text,
             group_id=current_group_id,
             group_ids=config.catty_game_context_star_resonance_group_ids,
+            memory_store=memory_store,
+            force_group_related="star_resonance" in memory_tagged_games,
         )
         strinova_context = build_strinova_context(
             incoming.text,
             group_id=current_group_id,
             group_ids=config.catty_game_context_strinova_group_ids,
+            memory_store=memory_store,
+            force_group_related="strinova" in memory_tagged_games,
         )
+        # 其他游戏(非 strinova/star_resonance,由主 AI 用 catty_group_game_tag 标进来):
+        # 当前群被 tag 了哪些游戏,就把那个游戏的动态记忆库拼进 context。
+        other_game_contexts: list[str] = []
+        for game_name in memory_tagged_games:
+            if game_name in {"strinova", "star_resonance"}:
+                continue
+            dynamic = memory_store.build_dynamic_game_context(game_name, recent_facts_limit=6)
+            if not dynamic:
+                continue
+            other_game_contexts.append(
+                f"本群被标记为《{game_name}》相关。猫猫长期积累的事实记忆:\n{dynamic}"
+            )
         wake_context = _wake_context_prompt(
             event,
             incoming,
@@ -3801,6 +3826,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             ),
             star_resonance_context=star_resonance_context,
             strinova_context=strinova_context,
+            other_game_contexts=other_game_contexts,
             wake_context=wake_context,
             bot_continuation_context=bot_continuation_context,
         )

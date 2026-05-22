@@ -333,7 +333,8 @@
     "special_group_active_window_enabled": false,
     "special_group_active_minutes_per_hour": 10,
     "member_mention_threshold": 20,
-    "private_summary_messages": 500
+    "private_summary_messages": 500,
+    "game_size_compress_threshold_bytes": 200000
   },
   "game_context": {
     "star_resonance_group_ids": [],

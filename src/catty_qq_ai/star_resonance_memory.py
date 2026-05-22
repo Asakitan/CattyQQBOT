@@ -74,16 +74,31 @@ def build_star_resonance_context(
     *,
     group_id: int | str | None = None,
     group_ids: Iterable[int | str] | None = None,
+    memory_store: object | None = None,
+    force_group_related: bool = False,
 ) -> str:
+    """拼《星痕共鸣》context。
+
+    静态部分:_MEMORY_LINES + _SOURCES。
+    动态部分:memory_store 不为 None 时,从 game_memory['star_resonance'] 拼 summary + 最近 facts。
+    group_related:config.group_ids / memory_store 群标签 / force_group_related 任一为真触发。
+    """
     keyword_related = is_star_resonance_related(text)
-    group_related = _group_matches(group_id, group_ids)
+    group_related = force_group_related or _group_matches(group_id, group_ids)
     if not keyword_related and not group_related:
         return ""
     memory_lines = (*(_GROUP_MEMORY_LINES if group_related and not keyword_related else ()), *_MEMORY_LINES)
-    return (
+    sections: list[str] = [
         "本轮消息与《星痕共鸣》/Blue Protocol: Star Resonance 相关。以下是本地记忆，可作为回答背景；"
-        "不要把它伪装成实时联网结果。\n"
-        + "\n".join(f"- {line}" for line in memory_lines)
-        + "\n资料来源：\n"
-        + "\n".join(f"- {source}" for source in _SOURCES)
-    )
+        "不要把它伪装成实时联网结果。",
+        "\n".join(f"- {line}" for line in memory_lines),
+    ]
+    if memory_store is not None:
+        try:
+            dynamic = memory_store.build_dynamic_game_context("star_resonance", recent_facts_limit=6)
+        except Exception:
+            dynamic = ""
+        if dynamic:
+            sections.append("猫猫长期积累的星痕共鸣事实记忆(高优先级,版本/职业/活动):\n" + dynamic)
+    sections.append("资料来源：\n" + "\n".join(f"- {source}" for source in _SOURCES))
+    return "\n".join(sections)

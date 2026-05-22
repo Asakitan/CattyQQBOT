@@ -192,6 +192,11 @@ class MemoryStore:
             float(getattr(config, "catty_memory_game_summary_interval_minutes", 360.0) or 360.0), 5.0
         )
         self.game_keep_recent_facts = max(int(getattr(config, "catty_memory_game_keep_recent_facts", 20) or 20), 5)
+        # 单游戏 JSON 文件大小阈值:超过这个就强制触发一次 LLM 压缩,把旧 facts 压成 summary 释放空间
+        self.game_size_compress_threshold_bytes = max(
+            int(getattr(config, "catty_memory_game_size_compress_threshold_bytes", 200_000) or 200_000),
+            10_000,
+        )
         # group_id → game_name 反向索引,从 config.game_context.*_group_ids 推
         self._group_to_game: dict[str, str] = {}
         for group_id in getattr(config, "catty_game_context_star_resonance_group_ids", set()) or set():
@@ -219,7 +224,7 @@ class MemoryStore:
             float(getattr(config, "catty_memory_save_debounce_seconds", 2.0) or 2.0),
             0.1,
         )
-        self._data: dict[str, Any] = {"users": {}, "groups": {}, "images": {}, "anger": {}, "games": {}}
+        self._data: dict[str, Any] = {"users": {}, "groups": {}, "images": {}, "anger": {}, "games": {}, "group_game_tags": {}}
         self._dirty: bool = False
         if self.enabled:
             self._load()
@@ -232,7 +237,7 @@ class MemoryStore:
             except Exception as exc:  # noqa: BLE001
                 logger.warning(f"memory_store: refresh pre-flush failed: {exc}")
             self._dirty = False
-        self._data = {"users": {}, "groups": {}, "images": {}, "anger": {}, "games": {}}
+        self._data = {"users": {}, "groups": {}, "images": {}, "anger": {}, "games": {}, "group_game_tags": {}}
         if self.enabled:
             self._load()
 
@@ -267,6 +272,8 @@ class MemoryStore:
                 self._data["groups"] = loaded.get("groups", {}) if isinstance(loaded.get("groups", {}), dict) else {}
                 self._data["images"] = loaded.get("images", {}) if isinstance(loaded.get("images", {}), dict) else {}
                 self._data["anger"] = loaded.get("anger", {}) if isinstance(loaded.get("anger", {}), dict) else {}
+                tags_raw = loaded.get("group_game_tags", {})
+                self._data["group_game_tags"] = tags_raw if isinstance(tags_raw, dict) else {}
         self._load_entity_files(self.user_storage_dir, "user_id", "user_", self._data.setdefault("users", {}))
         self._load_entity_files(self.group_storage_dir, "group_id", "group_", self._data.setdefault("groups", {}))
         self._load_entity_files(self.game_storage_dir, "game_name", "game_", self._data.setdefault("games", {}))
@@ -317,6 +324,7 @@ class MemoryStore:
             "groups": {},
             "images": self._data.get("images", {}) if isinstance(self._data.get("images"), dict) else {},
             "anger": self._data.get("anger", {}) if isinstance(self._data.get("anger"), dict) else {},
+            "group_game_tags": self._data.get("group_game_tags", {}) if isinstance(self._data.get("group_game_tags"), dict) else {},
             "user_ids": sorted(str(user_id) for user_id in self._data.get("users", {})),
             "group_ids": sorted(str(group_id) for group_id in self._data.get("groups", {})),
             "user_storage_dir": str(self.user_storage_dir),
@@ -1917,7 +1925,10 @@ class MemoryStore:
     def due_games_for_summary(self) -> list[str]:
         """返回需要 LLM 压缩的游戏名列表。
 
-        触发条件:facts 数 >= game_summary_min_facts 且距上次摘要 >= interval。
+        触发条件(满足其一即可):
+        - facts 数 >= game_summary_min_facts 且距上次摘要 >= interval
+        - 游戏单文件大小 >= game_size_compress_threshold_bytes(默认 200KB)且 facts 数 > keep_recent
+
         新游戏无 last_summary_at 视为永远 due,只要 facts 攒够就压。
         """
         if not self.enabled:
@@ -1926,17 +1937,185 @@ class MemoryStore:
         if not isinstance(games, dict):
             return []
         now = datetime.now(timezone.utc)
+        size_threshold = max(
+            int(getattr(self, "game_size_compress_threshold_bytes", 200_000) or 200_000),
+            10_000,
+        )
         due: list[str] = []
         for game_name, game_record in games.items():
             if not isinstance(game_record, dict):
                 continue
             facts = game_record.get("facts", [])
-            if not isinstance(facts, list) or len(facts) < self.game_summary_min_facts:
+            if not isinstance(facts, list):
                 continue
-            last = _parse_time(game_record.get("last_summary_at"))
-            if last is None or (now - last).total_seconds() >= self.game_summary_interval_minutes * 60:
+            facts_count = len(facts)
+
+            # 触发条件 1:数量阈值 + 时间间隔
+            if facts_count >= self.game_summary_min_facts:
+                last = _parse_time(game_record.get("last_summary_at"))
+                if last is None or (now - last).total_seconds() >= self.game_summary_interval_minutes * 60:
+                    due.append(str(game_name))
+                    continue
+
+            # 触发条件 2:单文件 >= 200KB 且还有可压缩的旧 facts
+            if facts_count <= self.game_keep_recent_facts:
+                continue
+            try:
+                size = self._game_file(str(game_name)).stat().st_size
+            except OSError:
+                size = 0
+            if size >= size_threshold:
                 due.append(str(game_name))
         return due
+
+    # ── 群-游戏标签 ────────────────────────────────────────────────────
+
+    def tag_group_with_game(
+        self,
+        group_id: str,
+        game: str,
+        *,
+        confidence: int = 80,
+        reason: str = "",
+    ) -> dict[str, Any]:
+        """给一个群打"和某游戏相关"的标签。主 AI 通过 catty_group_game_tag 调用。
+
+        confidence < 60 拒绝写入,避免把不确定的归类污染长期记忆。
+        同游戏重复 tag 会更新 confidence(取较大值)和 last_updated。
+        """
+        if not self.enabled:
+            return {"ok": False, "error": "memory disabled"}
+        group_id = str(group_id).strip()
+        game_name = self._normalize_game_name(game)
+        if not group_id:
+            return {"ok": False, "error": "group_id 为空"}
+        if not game_name:
+            return {"ok": False, "error": "game 名为空"}
+        confidence = max(0, min(int(confidence or 0), 100))
+        if confidence < 60:
+            return {
+                "ok": False,
+                "error": f"confidence={confidence} 太低,至少需要 60 才打标签。如果你不确定,先 catty_recall 看看历史语料再决定。",
+            }
+        tags_root = self._data.setdefault("group_game_tags", {})
+        if not isinstance(tags_root, dict):
+            tags_root = {}
+            self._data["group_game_tags"] = tags_root
+        group_entry = tags_root.setdefault(group_id, {"games": {}, "first_tagged_at": _now()})
+        if not isinstance(group_entry, dict):
+            group_entry = {"games": {}, "first_tagged_at": _now()}
+            tags_root[group_id] = group_entry
+        games_map = group_entry.setdefault("games", {})
+        if not isinstance(games_map, dict):
+            games_map = {}
+            group_entry["games"] = games_map
+        existing = games_map.get(game_name)
+        if isinstance(existing, dict):
+            existing["confidence"] = max(int(existing.get("confidence") or 0), confidence)
+            existing["last_updated"] = _now()
+            if reason:
+                existing["last_reason"] = str(reason)[:240]
+        else:
+            games_map[game_name] = {
+                "confidence": confidence,
+                "first_tagged_at": _now(),
+                "last_updated": _now(),
+                "last_reason": str(reason or "")[:240],
+            }
+        group_entry["last_updated"] = _now()
+        self._save()
+        return {
+            "ok": True,
+            "group_id": group_id,
+            "game": game_name,
+            "confidence": games_map[game_name]["confidence"],
+            "total_games_in_group": len(games_map),
+        }
+
+    def remove_group_game_tag(self, group_id: str, game: str) -> bool:
+        if not self.enabled:
+            return False
+        group_id = str(group_id).strip()
+        game_name = self._normalize_game_name(game)
+        tags_root = self._data.get("group_game_tags", {})
+        if not isinstance(tags_root, dict):
+            return False
+        group_entry = tags_root.get(group_id)
+        if not isinstance(group_entry, dict):
+            return False
+        games_map = group_entry.get("games", {})
+        if not isinstance(games_map, dict) or game_name not in games_map:
+            return False
+        games_map.pop(game_name, None)
+        if not games_map:
+            tags_root.pop(group_id, None)
+        else:
+            group_entry["last_updated"] = _now()
+        self._save()
+        return True
+
+    def get_group_games(self, group_id: str | int | None, *, min_confidence: int = 60) -> list[str]:
+        """返回这个群被标记的所有游戏名(置信度过滤后,按 confidence 倒序)。"""
+        if not self.enabled or group_id is None:
+            return []
+        tags_root = self._data.get("group_game_tags", {})
+        if not isinstance(tags_root, dict):
+            return []
+        group_entry = tags_root.get(str(group_id))
+        if not isinstance(group_entry, dict):
+            return []
+        games_map = group_entry.get("games", {})
+        if not isinstance(games_map, dict):
+            return []
+        scored: list[tuple[int, str]] = []
+        for game_name, info in games_map.items():
+            if not isinstance(info, dict):
+                continue
+            conf = int(info.get("confidence") or 0)
+            if conf < min_confidence:
+                continue
+            scored.append((conf, str(game_name)))
+        scored.sort(key=lambda pair: pair[0], reverse=True)
+        return [name for _conf, name in scored]
+
+    def build_dynamic_game_context(self, game: str, *, recent_facts_limit: int = 6) -> str:
+        """拼一个游戏的动态记忆 context:long_term_summary + 最近 N 条 facts。
+
+        给 _build_messages 调用,把 game_memory 里 AI 自己写入的内容注入主回复 prompt。
+        留空表示这个游戏没有任何动态记忆,调用方可以直接不挂这段。
+        """
+        if not self.enabled:
+            return ""
+        game_name = self._normalize_game_name(game)
+        if not game_name:
+            return ""
+        games = self._data.get("games", {})
+        if not isinstance(games, dict):
+            return ""
+        record = games.get(game_name)
+        if not isinstance(record, dict):
+            return ""
+        summary = str(record.get("summary") or "").strip()
+        facts = record.get("facts", [])
+        if not isinstance(facts, list):
+            facts = []
+        lines: list[str] = []
+        if summary:
+            lines.append(f"长期摘要:{summary[:800]}")
+        recent: list[str] = []
+        for entry in reversed(facts):
+            if not isinstance(entry, dict):
+                continue
+            text = str(entry.get("text") or "").strip()
+            if not text:
+                continue
+            recent.append(f"- {text[:200]}")
+            if len(recent) >= max(1, int(recent_facts_limit)):
+                break
+        if recent:
+            lines.append("最近事实:")
+            lines.extend(recent)
+        return "\n".join(lines).strip()
 
     def build_game_summary_messages(self, game_name: str) -> list[dict[str, object]]:
         """构造给 LLM 的游戏摘要 prompt。压缩前 (n - keep_recent) 条 facts 为 summary。"""

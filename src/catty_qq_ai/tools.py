@@ -328,6 +328,56 @@ _SOCIAL_ACCOUNT_SCHEMA: dict[str, Any] = {
 }
 
 
+_GROUP_GAME_TAG_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_group_game_tag",
+        "description": (
+            "给**当前这个群**打上『和某游戏相关』的长期标签,这样以后在这个群聊到该游戏时,"
+            "程序会自动把该游戏的长期记忆库(facts + summary)注入主回复 context,你不用再手动 catty_game_recall。"
+            "**只在你非常确定这个群确实在长期聊某游戏时才调**——要求:"
+            "(a) 群里多个不同的人,在多条消息里都聊这个游戏的角色/职业/版本/装备/活动/玩法;"
+            "(b) 或者群本身的群名/简介明确就是这个游戏的群;"
+            "(c) **不要**因为一次零星提及、单个人在玩、或者只是发了个截图就 tag。"
+            "**confidence 必须 >= 60**(0-100),低于 60 程序会拒绝写入,所以宁可不调也别瞎打。"
+            "私聊中调用会返回 error。"
+            "标签一旦写入是长期生效的,以后这个群每条消息都会带这个游戏的 context;"
+            "如果发现群其实跟该游戏关联不强,可以传 remove=true 移除标签。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "game": {
+                    "type": "string",
+                    "description": (
+                        "游戏标识,小写英文优先(strinova / star_resonance / minecraft / genshin / valorant 等),"
+                        "中文也接受(原神/星痕共鸣)。和 catty_game_recall/remember 保持一致。"
+                    ),
+                },
+                "confidence": {
+                    "type": "integer",
+                    "description": (
+                        "你对'这个群和这个游戏长期相关'的判断置信度(0-100)。"
+                        "必须 >= 60 才会被接受;>= 80 表示很确定;100 表示这就是游戏本群。"
+                    ),
+                    "minimum": 0,
+                    "maximum": 100,
+                },
+                "reason": {
+                    "type": "string",
+                    "description": "可选,一句话写为什么打这个标签(便于日后审计/回滚)。",
+                },
+                "remove": {
+                    "type": "boolean",
+                    "description": "传 true 表示移除当前群的这个游戏标签(发现打错或不再相关时用)。默认 false。",
+                },
+            },
+            "required": ["game"],
+        },
+    },
+}
+
+
 ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_recall": _RECALL_SCHEMA,
     "catty_user_profile": _USER_PROFILE_SCHEMA,
@@ -338,6 +388,7 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_game_recall": _GAME_RECALL_SCHEMA,
     "catty_game_remember": _GAME_REMEMBER_SCHEMA,
     "catty_social_account": _SOCIAL_ACCOUNT_SCHEMA,
+    "catty_group_game_tag": _GROUP_GAME_TAG_SCHEMA,
 }
 
 
@@ -828,6 +879,34 @@ async def _exec_game_remember(args: dict[str, Any], ctx: ToolContext) -> dict[st
     )
 
 
+async def _exec_group_game_tag(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    if ctx.event is None or not isinstance(ctx.event, GroupMessageEvent):
+        return {"error": "catty_group_game_tag 只能在群聊里调,私聊调用无效"}
+    group_id = ctx.group_id
+    if not group_id:
+        return {"error": "拿不到当前群 ID"}
+    game = str(args.get("game") or "").strip()
+    if not game:
+        return {"error": "game 是必填参数"}
+    if bool(args.get("remove")):
+        removed = ctx.memory_store.remove_group_game_tag(group_id, game)
+        return {
+            "ok": removed,
+            "removed": removed,
+            "group_id": group_id,
+            "game": game,
+            "note": "已移除标签" if removed else "本群没有这个游戏标签,无需移除",
+        }
+    confidence = int(args.get("confidence") or 80)
+    reason = str(args.get("reason") or "")
+    return ctx.memory_store.tag_group_with_game(
+        group_id,
+        game,
+        confidence=confidence,
+        reason=reason,
+    )
+
+
 async def _exec_social_account(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     platform = str(args.get("platform") or "").strip().lower()
     if not platform:
@@ -864,6 +943,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_game_recall": _exec_game_recall,
     "catty_game_remember": _exec_game_remember,
     "catty_social_account": _exec_social_account,
+    "catty_group_game_tag": _exec_group_game_tag,
 }
 
 
@@ -914,7 +994,7 @@ async def execute_tool_call(
 def tools_system_hint() -> str:
     """常驻 system 提示:告诉主 AI 工具的存在和调用边界。"""
     return (
-        "你接入了九个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
+        "你接入了十个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
         "1. catty_recall — 查历史记忆/语料/长期摘要。用户用'上次/记得/之前/还记得'等时间指代,"
         "且常驻 context 没给答案时再调。\n"
         "2. catty_user_profile — 查用户画像/称呼/性别/是否主人。群里冒出一个你不确定怎么称呼的"
@@ -940,6 +1020,10 @@ def tools_system_hint() -> str:
         "**只在群友问起你某个平台账号、或聊到某游戏想给出你自己对应平台账号时调**。"
         "调用前要先用常识判断游戏属于哪个平台(CS2/Dota2/PUBG → steam;原神 → 自有平台不在 steam)。"
         "没人问就别主动报账号。\n"
+        "10. catty_group_game_tag — 给**当前群**打『和某游戏相关』的长期标签,以后这个群聊该游戏就自动注入游戏记忆库 context。"
+        "**只在你非常确定群本身就是这个游戏的群(多人多消息长期讨论 / 群名简介明确)时才调**;"
+        "confidence 必须 >= 60 才接受,所以宁可不调也别瞎打;一次零星提及不要打标签。"
+        "私聊里调返回 error。发现标错了可以 remove=true 移除。\n"
         "通用规则:\n"
         "- 多个 tool 调用可以并发(同一轮发起多个 tool_calls)但**总开销=回复延迟**,能不调就不调。\n"
         "- 拿到 tool 结果后基于结果写最终回复;**禁止复读 tool 返回的 JSON 原文**,"

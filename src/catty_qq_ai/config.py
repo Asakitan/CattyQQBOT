@@ -258,6 +258,9 @@ class Config(BaseModel):
     catty_memory_game_summary_min_facts: int = 60
     catty_memory_game_summary_interval_minutes: float = 360.0  # 6 小时
     catty_memory_game_keep_recent_facts: int = 20
+    # 单游戏 JSON 文件超过此字节数,强制触发一次 LLM 压缩(走和 due_games_for_summary 同一通道),
+    # 避免长期积累让 game_<name>.json 无限膨胀。默认 200KB。
+    catty_memory_game_size_compress_threshold_bytes: int = 200_000
 
     # ── 主 AI 工具调用(OpenAI function calling 协议) ──────────────────
     # 主回复时给云端模型挂 catty_recall / catty_user_profile / catty_mc_status 三套 tool schema,

@@ -68,16 +68,31 @@ def build_strinova_context(
     *,
     group_id: int | str | None = None,
     group_ids: Iterable[int | str] | None = None,
+    memory_store: object | None = None,
+    force_group_related: bool = False,
 ) -> str:
+    """拼《卡拉彼丘》/Strinova 的 context。
+
+    - 静态部分:_MEMORY_LINES + _SOURCES(硬编码 baseline 资料)。
+    - 动态部分:如果传了 memory_store,把 game_memory['strinova'] 的 summary + 最近 facts 也拼进去。
+    - group_related 判定:config.group_ids 命中 / memory_store 给当前群打了 strinova 标签 / force_group_related=True 任一即触发。
+    """
     keyword_related = is_strinova_related(text)
-    group_related = _group_matches(group_id, group_ids)
+    group_related = force_group_related or _group_matches(group_id, group_ids)
     if not keyword_related and not group_related:
         return ""
     memory_lines = (*(_GROUP_MEMORY_LINES if group_related and not keyword_related else ()), *_MEMORY_LINES)
-    return (
+    sections: list[str] = [
         "本轮消息与《卡拉彼丘》/Strinova 相关。以下是本地记忆，可作为回答背景；"
-        "不要把它伪装成实时联网结果，也不要覆盖当前人格 prompt。\n"
-        + "\n".join(f"- {line}" for line in memory_lines)
-        + "\n资料来源：\n"
-        + "\n".join(f"- {source}" for source in _SOURCES)
-    )
+        "不要把它伪装成实时联网结果，也不要覆盖当前人格 prompt。",
+        "\n".join(f"- {line}" for line in memory_lines),
+    ]
+    if memory_store is not None:
+        try:
+            dynamic = memory_store.build_dynamic_game_context("strinova", recent_facts_limit=6)
+        except Exception:
+            dynamic = ""
+        if dynamic:
+            sections.append("猫猫长期积累的 Strinova 事实记忆(高优先级,版本/活动/玩家共识):\n" + dynamic)
+    sections.append("资料来源：\n" + "\n".join(f"- {source}" for source in _SOURCES))
+    return "\n".join(sections)
