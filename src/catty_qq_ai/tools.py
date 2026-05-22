@@ -22,10 +22,12 @@ import httpx
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, PrivateMessageEvent
 
 from .config import Config
+from .hot_trends import fetch_hot_trends, normalize_sources
 from .mc_status import _default_probe
 from .memory import MemoryStore
 from .nsfw_search import NsfwResult, search_nsfw
 from .parsers import lenient_json_object
+from .time_awareness import compute_now
 from .web_search import format_search_context, search_image_urls, search_web
 
 
@@ -378,6 +380,76 @@ _GROUP_GAME_TAG_SCHEMA: dict[str, Any] = {
 }
 
 
+_HOT_TRENDS_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_hot_trends",
+        "description": (
+            "拉中文互联网当下热搜/热梗(微博 / B 站 / 知乎 / 抖音聚合,180s 缓存)。"
+            "适用场景:群友问'最近网上有啥热点/热梗/瓜/B 站在传啥/知乎热榜啥情况',"
+            "或他们用了一个你不认识的新名词/梗看起来像最近的网络热点想确认;"
+            "也可以在话题真的很冷场时主动用一下当作猫猫的'今日吃瓜'谈资。"
+            "**不要每次群友说'热门'就调**——确认是网络热搜/时事热点再调,普通闲聊别浪费。"
+            "返回 sources={weibo:[{rank,title,hot,url}, ...], bilibili:[...], ...},"
+            "AI 拿到后用猫娘口吻挑 1-3 条最有梗的复述,可以加个吐槽,不要把链接贴出来,"
+            "不要直接复读全部 JSON。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "sources": {
+                    "type": "string",
+                    "description": (
+                        "想拉哪些源,英文逗号或空格分隔。可选: weibo / bilibili / zhihu / douyin。"
+                        "中文别名也行(微博/B站/知乎/抖音)。留空或写 'all' 拉全部。"
+                        "用户明确点了某一个源(『微博热搜』『知乎热榜』)就只填那一个,省一次外网调用。"
+                    ),
+                },
+                "limit_per_source": {
+                    "type": "integer",
+                    "description": "每个源最多返回多少条,默认 6,上限 20。一般 5-8 就够 AI 写口语化复述。",
+                    "minimum": 1,
+                    "maximum": 20,
+                },
+            },
+            "required": [],
+        },
+    },
+}
+
+
+_NOW_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_now",
+        "description": (
+            "拿当前(或偏移天数后的)日期/时间/星期/季节/节日感知。**纯本地计算,无网络**。"
+            "适用场景:用户问『今天几号/星期几/什么时候/是不是节日』;"
+            "你想根据时段调整氛围(深夜→早睡唠叨,饭点→吃了没,周末→放假气氛);"
+            "你想知道今天/明天/后天是不是特殊节日;问到农历节日(春节/中秋/端午)时。"
+            "**不要每条消息都调**——只有真的需要时间锚点时才调。"
+            "返回 date/weekday/phase/season/festivals_today/next_festival,"
+            "AI 拿到后自然融入回复(不要直接复读 JSON,不要把 hint 文本贴出来)。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "delta_days": {
+                    "type": "integer",
+                    "description": (
+                        "偏移天数,默认 0(今天)。1=明天,-1=昨天。范围 [-30, 30]。"
+                        "用户问『明天』就传 1,『后天』传 2,『大前天』传 -3。"
+                    ),
+                    "minimum": -30,
+                    "maximum": 30,
+                },
+            },
+            "required": [],
+        },
+    },
+}
+
+
 ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_recall": _RECALL_SCHEMA,
     "catty_user_profile": _USER_PROFILE_SCHEMA,
@@ -389,6 +461,8 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_game_remember": _GAME_REMEMBER_SCHEMA,
     "catty_social_account": _SOCIAL_ACCOUNT_SCHEMA,
     "catty_group_game_tag": _GROUP_GAME_TAG_SCHEMA,
+    "catty_hot_trends": _HOT_TRENDS_SCHEMA,
+    "catty_now": _NOW_SCHEMA,
 }
 
 
@@ -485,6 +559,10 @@ _profile_cache = _TTLCache()
 _web_search_cooldowns: dict[str, float] = {}
 # NSFW 仅在私聊里能调,按 user_id 做 cooldown。
 _nsfw_search_cooldowns: dict[str, float] = {}
+# 热搜按 scope(group/private + user) 做 cooldown,主人/特别关心豁免。
+# 默认 90s 一次,本身底层已经有 180s 的聚合缓存,这里只是防一个用户连戳。
+_hot_trends_cooldowns: dict[str, float] = {}
+_HOT_TRENDS_COOLDOWN_SECONDS = 90.0
 
 
 # ── 各 tool 的 executor ───────────────────────────────────────────────
@@ -907,6 +985,58 @@ async def _exec_group_game_tag(args: dict[str, Any], ctx: ToolContext) -> dict[s
     )
 
 
+async def _exec_now(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    del ctx  # 纯本地计算,不需要事件上下文
+    delta_raw = args.get("delta_days")
+    try:
+        delta = int(delta_raw) if delta_raw is not None else 0
+    except (TypeError, ValueError):
+        delta = 0
+    return compute_now(delta_days=delta)
+
+
+async def _exec_hot_trends(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    raw_sources = args.get("sources")
+    limit_raw = args.get("limit_per_source")
+    try:
+        limit_per_source = int(limit_raw) if limit_raw is not None else 6
+    except (TypeError, ValueError):
+        limit_per_source = 6
+
+    # cooldown — 主人/特别关心豁免
+    is_exempt = bool(ctx.configured_title.strip())
+    if not is_exempt and _HOT_TRENDS_COOLDOWN_SECONDS > 0:
+        scope_id = ctx.group_id or ctx.user_id or "anonymous"
+        cd_key = f"{scope_id}:{ctx.user_id}"
+        now = time.monotonic()
+        last = _hot_trends_cooldowns.get(cd_key, 0.0)
+        remaining = max(last + _HOT_TRENDS_COOLDOWN_SECONDS - now, 0.0)
+        if remaining > 0:
+            return {
+                "error": (
+                    f"hot_trends 冷却剩 {int(remaining)}s,先用刚刚拿到的热搜聊;"
+                    "也可以直接基于常识回应,不必每次都重拉。"
+                )
+            }
+        _hot_trends_cooldowns[cd_key] = now
+
+    sources = normalize_sources(raw_sources) if raw_sources else None
+    payload = await fetch_hot_trends(
+        ctx.config, sources=sources, limit_per_source=limit_per_source
+    )
+    if payload.get("total", 0) == 0:
+        # 全部源都挂了 — 让 AI 用人格自然说"今天网线不太通"
+        return {
+            "error": "所有热搜源都没拿到数据(可能网络/代理问题)",
+            "errors_detail": payload.get("errors", []),
+        }
+    payload["guidance"] = (
+        "挑 1-3 条最有梗/最有讨论价值的复述,加猫娘吐槽,不要贴 URL,"
+        "不要照搬整段 JSON,不要复读 rank 数字。"
+    )
+    return payload
+
+
 async def _exec_social_account(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     platform = str(args.get("platform") or "").strip().lower()
     if not platform:
@@ -944,6 +1074,8 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_game_remember": _exec_game_remember,
     "catty_social_account": _exec_social_account,
     "catty_group_game_tag": _exec_group_game_tag,
+    "catty_hot_trends": _exec_hot_trends,
+    "catty_now": _exec_now,
 }
 
 
@@ -994,7 +1126,7 @@ async def execute_tool_call(
 def tools_system_hint() -> str:
     """常驻 system 提示:告诉主 AI 工具的存在和调用边界。"""
     return (
-        "你接入了十个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
+        "你接入了十二个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
         "1. catty_recall — 查历史记忆/语料/长期摘要。用户用'上次/记得/之前/还记得'等时间指代,"
         "且常驻 context 没给答案时再调。\n"
         "2. catty_user_profile — 查用户画像/称呼/性别/是否主人。群里冒出一个你不确定怎么称呼的"
@@ -1024,6 +1156,15 @@ def tools_system_hint() -> str:
         "**只在你非常确定群本身就是这个游戏的群(多人多消息长期讨论 / 群名简介明确)时才调**;"
         "confidence 必须 >= 60 才接受,所以宁可不调也别瞎打;一次零星提及不要打标签。"
         "私聊里调返回 error。发现标错了可以 remove=true 移除。\n"
+        "11. catty_hot_trends — 拉中文互联网当下热搜/热梗(微博/B站/知乎/抖音,180s 聚合缓存)。"
+        "**群友问『最近网上有啥热点/热梗/瓜』、用了一个像最近网络新词的不认识词、或话题真的冷场需要谈资时**调。"
+        "拿到结果挑 1-3 条最有梗的复述,加猫娘吐槽,不要贴 URL,不要复读 JSON 原文。"
+        "用户明确点了具体源(『微博热搜』)就 sources 只填那一个,省一次外网调用。"
+        "每个 scope+用户 90s cooldown(主人/特别关心豁免)。\n"
+        "12. catty_now — 当前(或偏移)日期/时间/星期/季节/节日感知。纯本地零网络,但**不要每条消息都调**。"
+        "用户问『今天几号/星期几/几点了/是不是 XX 节』,或你想根据时段(深夜→唠叨早睡、饭点→吃了没、"
+        "周末→放假气氛)/节日(春节/中秋/双十一)做合适反应时才调。"
+        "拿到结果别复读 JSON,自然融进回复就好。明天=delta_days=1,后天=2,昨天=-1。\n"
         "通用规则:\n"
         "- 多个 tool 调用可以并发(同一轮发起多个 tool_calls)但**总开销=回复延迟**,能不调就不调。\n"
         "- 拿到 tool 结果后基于结果写最终回复;**禁止复读 tool 返回的 JSON 原文**,"

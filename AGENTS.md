@@ -39,7 +39,7 @@
 | 启动 bot | `python bot.py` |
 | 跑测试 | `python -c "import sys; sys.path.insert(0, 'src'); import unittest; unittest.main(module=None, argv=['', 'discover', 'tests'])"`（项目没 pytest，用 stdlib unittest） |
 | 单文件语法 check | `python -m py_compile src/catty_qq_ai/<file>.py` |
-| 推到生产服务器 | 通过 Studio 的推送接口操作 ，推送完成后进行Commit |
+| 推到生产服务器 | 助手通过 `rpwsh-local` MCP 的 `push_zip` 推送(本地 dir/file → zip 流式上传 → 远端解压),推送成功后 `git commit` 归档 |
 | 训练数据导出 | `python scripts/export_reply_gate_dataset.py` |
 | 热重载状态 | bot 运行中自动监控 config.json / memory/*.json / emoji 资源，写入即生效，不必重启 |
 
@@ -55,9 +55,10 @@
 **生产服务器和 git 仓库是两套独立通道，互不影响**：
 
 - `git push` 只是把代码备份到 GitHub（origin），**不会触发任何部署**
-- 推到生产由**主人通过 Studio 的推送接口手动完成**，AI 助手不直接执行部署
-- 不要用 `git diff` / `git status` 推断"要推什么"——主人本地修改可能没及时 commit，git 视角的 "modified" 不等于"待部署清单"
-- **推送完主人会让助手 `git commit` 一次**，把当时推到服务器的代码状态归档到 git，方便日后对照
+- 推到生产由**助手通过 `rpwsh-local` MCP 的 `push_zip` 工具**完成：本地改完的 `src/` 或单个文件 → 打 zip → 流式上传 → 远端解压到对应路径。服务器有自动重启，推完不必额外做拉起。
+- **铁律顺序：先 `push_zip` 推到远端 → 成功后再 `git commit` 归档**。`git commit` 是把"已经推到生产"的代码状态写进 git 历史，不是触发部署。
+- 不要用 `git diff` / `git status` 推断"要推什么"——主人本地修改可能没及时 commit，git 视角的 "modified" 不等于"待部署清单"。
+- 助手主动改完代码不要默认推送；除非用户明确说"推一下"/"部署"/"上服"/"上线"，否则只完成本地改动 + 测试，把待推清单告诉主人由他确认。
 
 ## Prompt Ownership
 
