@@ -1767,13 +1767,19 @@ def _build_messages(
         recent_image_hint = _build_recent_image_reference_hint(event, incoming)
         if recent_image_hint:
             messages.append({"role": "system", "content": recent_image_hint})
+    # 本地解析层:每层可通过 config.catty_parsing_layers_disabled 单独关闭(运维用)。
+    # 默认全开;disabled list 里的名字会被跳过。
+    _disabled_layers = set(getattr(config, "catty_parsing_layers_disabled", None) or [])
+
     # 本地 QQ/网络黑话翻译注入:命中『xs/u1s1/awsl/绷不住/破防』等高频缩写时,
     # 直接告诉 AI 对应中文意思,免得调 catty_meme_explain 浪费一次工具调用。
-    slang_context = build_slang_context(incoming.text)
-    if slang_context:
-        messages.append({"role": "system", "content": slang_context})
+    if "slang" not in _disabled_layers:
+        slang_context = build_slang_context(incoming.text)
+        if slang_context:
+            messages.append({"role": "system", "content": slang_context})
     # 群消息节奏感知:冷场/刷屏/复读/热闹时提示 AI 调整发言风格;
     # normal 节奏不打扰,避免每条消息都灌一段空话占 prompt。
+    # pulse_phase 始终算(action_hints 依赖它),但是否注入 prompt 受 disabled 控制。
     pulse_key = _conversation_queue_key(event)
     pulse_msgs = _recent_conversation_messages.get(pulse_key)
     pulse_phase = "normal"
@@ -1781,30 +1787,34 @@ def _build_messages(
         pulse_now = time.monotonic()
         pulse_result = analyze_pulse(pulse_msgs, now=pulse_now)
         pulse_phase = pulse_result.phase
-        pulse_context = build_pulse_context(pulse_msgs, now=pulse_now)
-        if pulse_context:
-            messages.append({"role": "system", "content": pulse_context})
+        if "pulse" not in _disabled_layers:
+            pulse_context = build_pulse_context(pulse_msgs, now=pulse_now)
+            if pulse_context:
+                messages.append({"role": "system", "content": pulse_context})
     # 入向消息意图分类:question/tease_cat/compliment_cat 等多标签;
     # 给 AI 反应方向建议(撒娇/嘴硬/给答案/调 tool),减少 AI 自己空想意图的负担。
-    intent_context = build_intent_context(incoming.text, has_image=incoming.has_image)
-    if intent_context:
-        messages.append({"role": "system", "content": intent_context})
+    if "intent" not in _disabled_layers:
+        intent_context = build_intent_context(incoming.text, has_image=incoming.has_image)
+        if intent_context:
+            messages.append({"role": "system", "content": intent_context})
     # 入向消息关键实体提取:time/money/count/qq_id 等容易被 AI 漏读的事实;
     # URL/@提及 不进 prompt(AI 看得见原文,标会重复)。
-    entity_context = build_entity_context(incoming.text)
-    if entity_context:
-        messages.append({"role": "system", "content": entity_context})
+    if "entity" not in _disabled_layers:
+        entity_context = build_entity_context(incoming.text)
+        if entity_context:
+            messages.append({"role": "system", "content": entity_context})
     # 解析层联动建议:交叉 intent + entity + pulse 给具体下一步建议
     # (例如未来时间+命令 → 建议 catty_remember;qq_id+不是发言者 → 建议 catty_user_profile)。
-    sender_qq_str = str(event.user_id) if event is not None else ""
-    action_hint_context = build_action_hints(
-        incoming.text,
-        has_image=incoming.has_image,
-        pulse_phase=pulse_phase,
-        sender_qq=sender_qq_str,
-    )
-    if action_hint_context:
-        messages.append({"role": "system", "content": action_hint_context})
+    if "hints" not in _disabled_layers:
+        sender_qq_str = str(event.user_id) if event is not None else ""
+        action_hint_context = build_action_hints(
+            incoming.text,
+            has_image=incoming.has_image,
+            pulse_phase=pulse_phase,
+            sender_qq=sender_qq_str,
+        )
+        if action_hint_context:
+            messages.append({"role": "system", "content": action_hint_context})
     messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     return messages

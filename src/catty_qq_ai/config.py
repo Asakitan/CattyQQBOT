@@ -270,6 +270,10 @@ class Config(BaseModel):
     # 由模型自行判断要不要查询。默认常驻挂载,让上游 prompt cache 命中 tools 部分。
     # 上游返回 400 或 tool 调度异常时会自动降级一次纯文本回复。
     catty_tools_enabled: bool = True
+    # 本地解析层(在 system prompt 注入前运行) — 出问题时可临时关掉某层。
+    # 合法值: slang / pulse / intent / entity / hints
+    # 留空表示全部启用(默认推荐)。例如 ["hints"] 表示只关 hints,其它都开。
+    catty_parsing_layers_disabled: list[str] = Field(default_factory=list)
     # 单次主回复最多允许的 tool 调用轮次(防止模型反复循环调 tool)
     catty_tools_max_rounds: int = 3
     # 每个 tool 结果的 in-process LRU TTL(秒);0 表示不缓存
