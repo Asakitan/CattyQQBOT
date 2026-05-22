@@ -3552,7 +3552,7 @@ async def observe_memory(bot: Bot, event: MessageEvent) -> None:
     # 顺手附上本地解析层 hit 摘要,方便回放调试看每条消息触发了哪些层
     try:
         scope = _conversation_queue_key(event)
-        sender_name = _sender_name(event)
+        sender_name = _display_name(event)
         text = event_plain_text(event)
         image_urls = extract_image_urls(event)
         parsing_extra = _summarize_text_parsing_for_feed(text)
