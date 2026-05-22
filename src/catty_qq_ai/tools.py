@@ -419,6 +419,55 @@ _HOT_TRENDS_SCHEMA: dict[str, Any] = {
 }
 
 
+_REMEMBER_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_remember",
+        "description": (
+            "把一条**值得长期记住的事实**写入用户/群笔记库(独立于 corpus 对话记录,"
+            "独立于周期 summary 写的 impression 画像)。"
+            "适用场景:"
+            "(a) 用户/群友给出了稳定的偏好或边界(『叫我学长不要叫笨蛋』『不喜欢吃辣』);"
+            "(b) 明确的约定/承诺(『下周日 8 点开黑』『答应了帮主人查 X』);"
+            "(c) 群级长期标签(『这是猫粉俱乐部群』『主要聊 CS2』,**注意 ≠ catty_group_game_tag**:"
+            "    group_game_tag 严格只挂游戏标签且要 confidence≥60;remember 是更软的事实)。"
+            "**不要**记:闲聊吐槽、临时情绪、单次玩笑、已经在 catty_recall/profile 拿到的同条。"
+            "TTL 默认 30 天;偏好/边界写 ttl_days=180,约定写到事件结束日期相应的天数。"
+            "去重:同 text 在未过期范围内不重复写。"
+            "写入后下次主回复自动注入到 system context,你不用再读。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "scope": {
+                    "type": "string",
+                    "enum": ["user", "group"],
+                    "description": (
+                        "user=记到当前发言者的画像笔记(跨群通用,主人/特别关心 user 也用这个);"
+                        "group=记到当前群的群级笔记(整个群范围)。"
+                    ),
+                },
+                "text": {
+                    "type": "string",
+                    "description": "笔记文本(≤200 字),一句话写清。带具体名词/数字/时间最好。",
+                },
+                "ttl_days": {
+                    "type": "integer",
+                    "description": "过期天数;0 表示永久,不传默认 30。偏好/边界写 90-180,临时约定写到事件结束。",
+                    "minimum": 0,
+                    "maximum": 730,
+                },
+                "tags": {
+                    "type": "string",
+                    "description": "可选,逗号分隔 1-3 个标签(『偏好』/『约定』/『边界』/『梗』)。",
+                },
+            },
+            "required": ["scope", "text"],
+        },
+    },
+}
+
+
 _MEME_EXPLAIN_SCHEMA: dict[str, Any] = {
     "type": "function",
     "function": {
@@ -500,6 +549,7 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_hot_trends": _HOT_TRENDS_SCHEMA,
     "catty_now": _NOW_SCHEMA,
     "catty_meme_explain": _MEME_EXPLAIN_SCHEMA,
+    "catty_remember": _REMEMBER_SCHEMA,
 }
 
 
@@ -1025,6 +1075,35 @@ async def _exec_group_game_tag(args: dict[str, Any], ctx: ToolContext) -> dict[s
     )
 
 
+async def _exec_remember(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    scope = str(args.get("scope") or "").strip().lower()
+    text = str(args.get("text") or "").strip()
+    if not scope or not text:
+        return {"error": "scope 和 text 都不能为空"}
+    ttl_raw = args.get("ttl_days")
+    try:
+        ttl_days = int(ttl_raw) if ttl_raw is not None else None
+    except (TypeError, ValueError):
+        ttl_days = None
+    tags_raw = str(args.get("tags") or "").strip()
+    tags = [t.strip() for t in re.split(r"[,，;；]+", tags_raw) if t.strip()] if tags_raw else None
+    # 自动用当前事件填 user_id / group_id
+    user_id = ctx.user_id if scope == "user" else ""
+    group_id = ctx.group_id if scope == "group" else ""
+    if scope == "group" and not group_id:
+        return {"error": "scope=group 但当前不是群聊"}
+    if scope == "user" and not user_id:
+        return {"error": "拿不到当前发言用户 ID"}
+    return ctx.memory_store.record_note(
+        scope=scope,
+        text=text,
+        user_id=user_id,
+        group_id=group_id,
+        ttl_days=ttl_days,
+        tags=tags,
+    )
+
+
 async def _exec_meme_explain(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     term = str(args.get("term") or "").strip()
     if not term:
@@ -1135,6 +1214,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_hot_trends": _exec_hot_trends,
     "catty_now": _exec_now,
     "catty_meme_explain": _exec_meme_explain,
+    "catty_remember": _exec_remember,
 }
 
 
@@ -1185,7 +1265,7 @@ async def execute_tool_call(
 def tools_system_hint() -> str:
     """常驻 system 提示:告诉主 AI 工具的存在和调用边界。"""
     return (
-        "你接入了十三个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
+        "你接入了十四个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
         "1. catty_recall — 查历史记忆/语料/长期摘要。用户用'上次/记得/之前/还记得'等时间指代,"
         "且常驻 context 没给答案时再调。\n"
         "2. catty_user_profile — 查用户画像/称呼/性别/是否主人。群里冒出一个你不确定怎么称呼的"
@@ -1224,6 +1304,10 @@ def tools_system_hint() -> str:
         "用户问『今天几号/星期几/几点了/是不是 XX 节』,或你想根据时段(深夜→唠叨早睡、饭点→吃了没、"
         "周末→放假气氛)/节日(春节/中秋/双十一)做合适反应时才调。"
         "拿到结果别复读 JSON,自然融进回复就好。明天=delta_days=1,后天=2,昨天=-1。\n"
+        "14. catty_remember — 把『稳定偏好/边界/约定/群级标签』写入用户/群笔记库,长期沉淀。"
+        "和 catty_game_remember 区别:game_remember 给特定游戏库,catty_remember 给当前用户或当前群本身。"
+        "**不要**记闲聊吐槽/临时情绪/单次玩笑;只记 (a) 偏好/边界(ttl 90-180) (b) 约定(ttl 到事件结束) "
+        "(c) 群本身特征。写入后下次主回复 system context 自动加载,你不用再读。\n"
         "13. catty_meme_explain — 萌娘百科查**网络梗 / ACG 词条 / 角色 / 作品 / 二次元术语**。"
         "群友冒出一个你不认识的网络流行语(yyds/绷不住了)、二次元词条(孤独摇滚/雷电将军)、角色/作品名;"
         "或想确认梗的精确出处时调。**只覆盖网络梗 + ACG**——拿到 error=not_found 不要重试,"

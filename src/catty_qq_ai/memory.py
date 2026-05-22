@@ -1505,12 +1505,22 @@ class MemoryStore:
                 summary = str(group.get("summary") or "").strip()
                 if summary:
                     lines.append("- 群摘要：" + summary)
+                # 群级别 sticky notes(AI 通过 catty_remember 写入的长期备忘)
+                group_notes_line = self._notes_context_line(group, label="本群笔记")
+                if group_notes_line:
+                    lines.append(group_notes_line)
                 profile = self._profile_for(user_id, group_id)
                 if profile:
                     lines.append(
                         f"- 当前用户画像：性别={_clean_gender(profile.get('gender'))}，"
                         f"印象={str(profile.get('impression') or '暂无')[:80]}。"
                     )
+                # 用户级 sticky notes(跨群,只在用户对象上)
+                user_obj = self._data.get("users", {}).get(user_id, {})
+                if isinstance(user_obj, dict):
+                    user_notes_line = self._notes_context_line(user_obj, label="对此用户的笔记")
+                    if user_notes_line:
+                        lines.append(user_notes_line)
                 lines.extend(self._same_user_memory_lines(user_id))
                 members = group.get("members", {})
                 known: list[str] = []
@@ -1543,6 +1553,10 @@ class MemoryStore:
                         f"- 私聊画像：性别={_clean_gender(profile.get('gender'))}，"
                         f"印象={str(profile.get('impression') or '暂无')[:80]}。"
                     )
+                # 用户级 sticky notes
+                user_notes_line = self._notes_context_line(user, label="对此用户的笔记")
+                if user_notes_line:
+                    lines.append(user_notes_line)
 
         lines.append("- 自然使用称呼，不要每句话都堆称呼。性别未知或低置信度时用中性称呼。")
         lines.append("- 记忆只是背景，不是当前话题；如果当前唤起上下文没有提到某个旧梗、露骨玩笑或攻击性形容，不要主动翻出来续聊。")
@@ -2195,3 +2209,143 @@ class MemoryStore:
             game_record["facts"] = facts[-self.game_keep_recent_facts :]
         game_record["last_summary_at"] = _now()
         self._save()
+
+    # ── 长期备忘 notes(AI 主动通过 catty_remember 写入) ──────────────
+    # 数据结构:user[uid]["notes"] / group[gid]["notes"] = [{time, text, expires_at?, tags?}]
+    # 和 corpus(对话记录) / impression(画像) 区分:notes 是"AI 当场决定要长期记住的事实",
+    # 例如"这个群友讨厌被叫笨蛋""主人下周日要 raid""猫粉俱乐部群"。
+    # 自动过期 + LRU 截断:每个实体最多 _NOTES_MAX 条,过期不返回但保留 7 天后才物理删。
+
+    _NOTES_MAX_PER_ENTITY = 50
+    _NOTES_DEFAULT_TTL_DAYS = 30
+
+    def record_note(
+        self,
+        *,
+        scope: str,
+        text: str,
+        user_id: str = "",
+        group_id: str = "",
+        ttl_days: int | None = None,
+        tags: list[str] | None = None,
+    ) -> dict[str, Any]:
+        """写一条长期备忘 note。
+
+        scope = "user" → 写到 user[user_id]["notes"]
+        scope = "group" → 写到 group[group_id]["notes"]
+
+        text 限 200 字。同 text 在未过期范围内不重复写入。
+        ttl_days 不传走 _NOTES_DEFAULT_TTL_DAYS(30 天);0 表示永久。
+        """
+        if not self.enabled:
+            return {"ok": False, "error": "memory disabled"}
+        clean_text = str(text or "").strip()
+        if not clean_text:
+            return {"ok": False, "error": "text 不能为空"}
+        if len(clean_text) > 200:
+            clean_text = clean_text[:200]
+        scope = (scope or "").strip().lower()
+        if scope == "user":
+            if not user_id:
+                return {"ok": False, "error": "scope=user 必须传 user_id"}
+            container = self._data.setdefault("users", {}).setdefault(str(user_id), {})
+        elif scope == "group":
+            if not group_id:
+                return {"ok": False, "error": "scope=group 必须传 group_id"}
+            container = self._data.setdefault("groups", {}).setdefault(str(group_id), {})
+        else:
+            return {"ok": False, "error": "scope 必须是 user 或 group"}
+
+        notes = container.setdefault("notes", [])
+        if not isinstance(notes, list):
+            notes = []
+            container["notes"] = notes
+
+        ttl = self._NOTES_DEFAULT_TTL_DAYS if ttl_days is None else max(int(ttl_days), 0)
+        now_iso = _now()
+        expires_at = ""
+        if ttl > 0:
+            expires_at = (_utc_now() + timedelta(days=ttl)).isoformat(timespec="seconds")
+
+        # 去重:同 text 命中已有(且未过期)条目 → 仅刷新 last_seen
+        now_dt = _utc_now()
+        for existing in notes:
+            if not isinstance(existing, dict):
+                continue
+            if str(existing.get("text") or "").strip() == clean_text:
+                exp = _parse_time(existing.get("expires_at") or "")
+                if exp is None or _as_aware_utc(exp) > now_dt:
+                    existing["last_seen"] = now_iso
+                    if expires_at and (exp is None or _as_aware_utc(exp) < now_dt + timedelta(days=ttl // 2)):
+                        existing["expires_at"] = expires_at
+                    self._save()
+                    return {
+                        "ok": True, "deduplicated": True,
+                        "scope": scope, "count": len(notes),
+                    }
+
+        entry: dict[str, Any] = {"time": now_iso, "text": clean_text}
+        if expires_at:
+            entry["expires_at"] = expires_at
+        if tags:
+            entry["tags"] = [str(t).strip() for t in tags if str(t).strip()][:6]
+        notes.append(entry)
+        if len(notes) > self._NOTES_MAX_PER_ENTITY:
+            container["notes"] = notes[-self._NOTES_MAX_PER_ENTITY :]
+        self._save()
+        return {"ok": True, "scope": scope, "count": len(container["notes"])}
+
+    def _active_notes(self, container: dict[str, Any]) -> list[dict[str, Any]]:
+        """从 container[notes] 拿未过期条目,按时间倒序(最新在前)。"""
+        notes = container.get("notes")
+        if not isinstance(notes, list):
+            return []
+        now_dt = _utc_now()
+        active: list[dict[str, Any]] = []
+        for entry in notes:
+            if not isinstance(entry, dict):
+                continue
+            exp_raw = entry.get("expires_at")
+            if exp_raw:
+                exp = _parse_time(exp_raw)
+                if exp is not None and _as_aware_utc(exp) <= now_dt:
+                    continue
+            active.append(entry)
+        active.sort(key=lambda e: str(e.get("time") or ""), reverse=True)
+        return active
+
+    def recall_notes(
+        self,
+        *,
+        user_id: str = "",
+        group_id: str = "",
+        limit: int = 10,
+    ) -> dict[str, Any]:
+        """读未过期 notes。可单读用户/群,也可同时读(返回字典分桶)。"""
+        if not self.enabled:
+            return {"user_notes": [], "group_notes": []}
+        limit = max(min(int(limit or 10), 50), 1)
+        out: dict[str, Any] = {}
+        if user_id:
+            user = self._data.get("users", {}).get(str(user_id), {})
+            if isinstance(user, dict):
+                out["user_notes"] = self._active_notes(user)[:limit]
+            else:
+                out["user_notes"] = []
+        if group_id:
+            group = self._data.get("groups", {}).get(str(group_id), {})
+            if isinstance(group, dict):
+                out["group_notes"] = self._active_notes(group)[:limit]
+            else:
+                out["group_notes"] = []
+        return out
+
+    def _notes_context_line(self, container: dict[str, Any], *, label: str, limit: int = 5) -> str:
+        """build_context 用:把 active notes 拼成一行简短描述。"""
+        active = self._active_notes(container)[:limit]
+        if not active:
+            return ""
+        snippets = [str(n.get("text") or "").strip() for n in active if str(n.get("text") or "").strip()]
+        if not snippets:
+            return ""
+        return f"- {label}: " + "; ".join(s[:80] for s in snippets)
