@@ -63,6 +63,7 @@ from .parsers import strip_catty_markers as _strip_catty_markers
 from .slang_dict import build_slang_context
 from .time_awareness import build_time_context
 from .tools import ToolContext, available_tool_schemas, execute_tool_call, tools_system_hint
+from .topic_classifier import build_topic_context
 from .persona_prompts import (
     build_catgirl_examples_prompt,
     build_conversation_flow_prompt,
@@ -1804,6 +1805,12 @@ def _build_messages(
         intent_context = build_intent_context(incoming.text, has_image=incoming.has_image)
         if intent_context:
             messages.append({"role": "system", "content": intent_context})
+    # 入向消息话题领域:gaming/tech/food/relationship 等多标签;
+    # 和 intent 互补 — intent 看『想干啥』,topic 看『在聊啥』,给 AI 基调反应建议。
+    if "topic" not in _disabled_layers:
+        topic_context = build_topic_context(incoming.text)
+        if topic_context:
+            messages.append({"role": "system", "content": topic_context})
     # 入向消息关键实体提取:time/money/count/qq_id 等容易被 AI 漏读的事实;
     # URL/@提及 不进 prompt(AI 看得见原文,标会重复)。
     if "entity" not in _disabled_layers:

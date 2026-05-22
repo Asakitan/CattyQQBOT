@@ -45,6 +45,7 @@ for _name, _file in (
     ("intent_classifier", "intent_classifier.py"),
     ("conversation_pulse", "conversation_pulse.py"),
     ("slang_dict", "slang_dict.py"),
+    ("topic_classifier", "topic_classifier.py"),
     ("action_hints", "action_hints.py"),
 ):
     _load(_name, _file)
@@ -56,6 +57,7 @@ _ic = sys.modules["catty_qq_ai.intent_classifier"]
 _ee = sys.modules["catty_qq_ai.entity_extractor"]
 _ah = sys.modules["catty_qq_ai.action_hints"]
 _ta = sys.modules["catty_qq_ai.time_awareness"]
+_tc = sys.modules["catty_qq_ai.topic_classifier"]
 
 
 @dataclass
@@ -80,7 +82,7 @@ def main() -> int:
     p.add_argument(
         "--layer",
         action="append",
-        choices=["time", "slang", "pulse", "intent", "entity", "hints"],
+        choices=["time", "slang", "pulse", "intent", "topic", "entity", "hints"],
         help="只显示这些层(可重复);默认显示全部",
     )
     p.add_argument(
@@ -90,7 +92,7 @@ def main() -> int:
     )
     args = p.parse_args()
 
-    layers = set(args.layer) if args.layer else {"time", "slang", "pulse", "intent", "entity", "hints"}
+    layers = set(args.layer) if args.layer else {"time", "slang", "pulse", "intent", "topic", "entity", "hints"}
 
     if args.reference:
         try:
@@ -144,6 +146,11 @@ def main() -> int:
     if "intent" in layers:
         out = _ic.build_intent_context(args.text)
         _dump("intent", out)
+        total += len(out)
+
+    if "topic" in layers:
+        out = _tc.build_topic_context(args.text)
+        _dump("topic", out)
         total += len(out)
 
     if "entity" in layers:
