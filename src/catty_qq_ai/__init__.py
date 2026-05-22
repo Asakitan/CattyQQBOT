@@ -1242,6 +1242,145 @@ def _image_analysis_description(image_analysis: dict[str, object]) -> str:
     return "\n".join(lines).strip()
 
 
+# ── 异步 vision 调度 ───────────────────────────────────────────────
+# 视觉模型(analyze_images_for_reply / describe_images)耗时长(timeout 可达 120s+),
+# 以前在 handle_chat 内 await 串行执行,把主回复整个卡住,同会话后续消息排队,
+# 等锁释放就集中爆出回复 —— 这正是主人吐槽的"卡了之后爆一大堆"。
+# 改造:消息一进来在 observe_memory 里 fire-and-forget 启 task,主回复链路只短等
+# catty_vision_inline_max_wait_seconds 秒,等不到就不带 vision 描述直接回;
+# 后台 task 跑完写 memory_store.remember_image_record,下一轮同图自动复用。
+@dataclass(slots=True)
+class _VisionResult:
+    image_analysis: dict[str, Any]
+    description: str
+
+
+_vision_tasks: dict[str, asyncio.Task] = {}
+_vision_results: dict[str, _VisionResult] = {}
+_vision_done_events: dict[str, asyncio.Event] = {}
+_VISION_RESULT_CACHE_MAX = 64
+
+
+def _vision_cache_key(image_keys: list[str]) -> str:
+    keys = [key.strip() for key in image_keys if key.strip()]
+    return "|".join(keys) if keys else ""
+
+
+def _vision_cache_lookup(image_keys: list[str]) -> _VisionResult | None:
+    """同时考虑进程内 fresh 结果和 memory_store 落盘缓存。"""
+    cache_key = _vision_cache_key(image_keys)
+    if not cache_key:
+        return None
+    fresh = _vision_results.get(cache_key)
+    if fresh is not None:
+        return fresh
+    summary = memory_store.get_image_summary(image_keys)
+    if summary:
+        return _VisionResult(image_analysis={}, description=summary)
+    return None
+
+
+def _schedule_vision_async(
+    image_keys: list[str],
+    image_urls: list[str],
+    context: str,
+) -> asyncio.Event | None:
+    """没跑过 vision 就在后台启 task,返回 done event 给短等用;命中缓存返回 None。"""
+    if not image_urls or not image_keys:
+        return None
+    if not config.catty_image_vision_enabled:
+        return None
+    if not config.catty_vision_async_enabled:
+        return None
+    if not (config.catty_vision_api_key.strip() or _has_api_key()):
+        return None
+    cache_key = _vision_cache_key(image_keys)
+    if not cache_key:
+        return None
+    if cache_key in _vision_results:
+        return None
+    if memory_store.get_image_summary(image_keys):
+        return None
+    existing_event = _vision_done_events.get(cache_key)
+    if existing_event is not None:
+        return existing_event
+    done_event = asyncio.Event()
+    _vision_done_events[cache_key] = done_event
+
+    short_key = cache_key[:24]
+
+    async def _runner() -> None:
+        try:
+            analysis: dict[str, Any] = {}
+            description = ""
+            try:
+                analysis = await analyze_images_for_reply(config, image_urls, context)
+                description = _image_analysis_description(analysis)
+            except OpenAICompatibleError as exc:
+                logger.warning(f"Async vision analyze failed for {short_key}: {exc}")
+            except httpx.HTTPError as exc:
+                logger.warning(f"Async vision analyze transport error for {short_key}: {exc}")
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"Async vision analyze unexpected error for {short_key}: {exc}")
+            if not description:
+                try:
+                    description = await describe_images(config, image_urls, context)
+                except OpenAICompatibleError as exc:
+                    logger.warning(f"Async vision describe failed for {short_key}: {exc}")
+                except httpx.HTTPError as exc:
+                    logger.warning(f"Async vision describe transport error for {short_key}: {exc}")
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(f"Async vision describe unexpected error for {short_key}: {exc}")
+            if description:
+                try:
+                    memory_store.remember_image_record(image_keys, description)
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(f"Async vision failed to write image record {short_key}: {exc}")
+            _vision_results[cache_key] = _VisionResult(image_analysis=analysis, description=description)
+            # 简单 LRU:超过上限就丢最早的一批,避免长期跑累积。
+            if len(_vision_results) > _VISION_RESULT_CACHE_MAX:
+                for stale_key in list(_vision_results.keys())[: len(_vision_results) - _VISION_RESULT_CACHE_MAX]:
+                    _vision_results.pop(stale_key, None)
+        finally:
+            done_event.set()
+            _vision_tasks.pop(cache_key, None)
+            # done_event 留 60s 给后到的等待者复用,之后清掉
+            async def _evict_event() -> None:
+                await asyncio.sleep(60.0)
+                _vision_done_events.pop(cache_key, None)
+            asyncio.create_task(_evict_event(), name=f"catty-vision-evict-{short_key}")
+
+    task = asyncio.create_task(_runner(), name=f"catty-vision-{short_key}")
+    _vision_tasks[cache_key] = task
+    return done_event
+
+
+async def _await_vision_briefly(image_keys: list[str], max_wait: float) -> _VisionResult | None:
+    """缓存优先,没命中就最多等 max_wait 秒,超时返回 None(主回复继续不卡)。"""
+    cached = _vision_cache_lookup(image_keys)
+    if cached is not None:
+        return cached
+    if not image_keys or max_wait <= 0:
+        return None
+    cache_key = _vision_cache_key(image_keys)
+    if not cache_key:
+        return None
+    event = _vision_done_events.get(cache_key)
+    if event is None:
+        return None
+    try:
+        await asyncio.wait_for(event.wait(), timeout=max_wait)
+    except asyncio.TimeoutError:
+        logger.info(
+            f"Vision wait timed out at {max_wait:.1f}s for {cache_key[:24]}; main reply continues without image description"
+        )
+        return None
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"Vision wait unexpected error for {cache_key[:24]}: {exc}")
+        return None
+    return _vision_cache_lookup(image_keys)
+
+
 def _emoji_segment(entry: EmojiEntry) -> MessageSegment:
     return MessageSegment.image(file=entry.path.resolve().as_uri())
 
@@ -2993,6 +3132,13 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
         return False
     state["catty_replied_to_self"] = replied_to_self
     state["catty_incoming"] = incoming
+    # reply gate 已经放行,确认这条会进主回复路径——立刻 fire-and-forget vision,
+    # 后续 handle_chat 拿到 lock 后短等就能用上结果,不再卡 chat_completion。
+    if incoming.has_image and incoming.image_urls:
+        try:
+            _schedule_vision_async(incoming.image_keys, incoming.image_urls, incoming.history_content)
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"schedule_vision_async failed in rule: {exc}")
     return True
 
 
@@ -3439,7 +3585,28 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
     history_key = build_history_key(event, config)
     queue_key = _conversation_queue_key(event)
 
+    # 同会话锁排队时记下入队时刻——拿到锁后若已经等了太久,直接放弃当前消息,
+    # 避免视觉/AI 卡顿后积压的消息一窝蜂全回出去(就是主人吐槽的"爆一大堆")。
+    enqueue_started_at = time.monotonic()
+    queue_was_busy = _locks[queue_key].locked()
+
     async with _locks[queue_key]:
+        queue_wait_seconds = time.monotonic() - enqueue_started_at
+        queue_abandon_threshold = max(
+            float(getattr(config, "catty_reply_queue_max_wait_seconds", 25.0) or 0.0),
+            0.0,
+        )
+        if queue_was_busy and queue_abandon_threshold > 0 and queue_wait_seconds >= queue_abandon_threshold:
+            logger.info(
+                "Abandoning queued reply (waited %.1fs >= %.1fs threshold): user=%s scope=%s text=%s",
+                queue_wait_seconds,
+                queue_abandon_threshold,
+                event.user_id,
+                queue_key,
+                incoming.text[:60],
+            )
+            await matcher.finish()
+
         anger_context = ""
         if isinstance(event, GroupMessageEvent) and config.catty_filter_anger_enabled and not group_filter_context:
             cooldown_remaining = memory_store.user_anger_cooldown_remaining_seconds(event)
@@ -3567,27 +3734,28 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         image_analysis: dict[str, object] = {}
         emoji_context = ""
         if incoming.has_image and config.catty_image_vision_enabled:
-            image_description = memory_store.get_image_summary(incoming.image_keys)
-            image_description_cached = bool(image_description)
-            if not image_description:
-                try:
-                    image_analysis = await analyze_images_for_reply(config, incoming.image_urls, incoming.history_content)
-                    image_description = _image_analysis_description(image_analysis)
-                    if image_description:
-                        memory_store.remember_image_record(incoming.image_keys, image_description)
-                except OpenAICompatibleError as exc:
-                    logger.warning(f"Image recognition failed, falling back to image URLs: {exc}")
-                except httpx.HTTPError as exc:
-                    logger.warning(f"Image recognition transport error, falling back to image URLs: {exc}")
-            if not image_description and not image_description_cached:
-                try:
-                    image_description = await describe_images(config, incoming.image_urls, incoming.history_content)
-                    if image_description:
-                        memory_store.remember_image_record(incoming.image_keys, image_description)
-                except OpenAICompatibleError as exc:
-                    logger.warning(f"Image recognition failed, falling back to image URLs: {exc}")
-                except httpx.HTTPError as exc:
-                    logger.warning(f"Image recognition transport error, falling back to image URLs: {exc}")
+            # 先查持久缓存:命中=旧图,corpus 已经写过,后面不重复写。
+            persistent_summary = memory_store.get_image_summary(incoming.image_keys)
+            if persistent_summary:
+                image_description = persistent_summary
+                image_description_cached = True
+            else:
+                # 没命中持久缓存:_rule 已经 fire-and-forget schedule 过 vision,
+                # 这里冗余调度一次防漏,再最多短等几秒。等不到就不带描述往下走,
+                # 后台 task 跑完会写 memory_store,下一轮自动复用。
+                _schedule_vision_async(
+                    incoming.image_keys,
+                    incoming.image_urls,
+                    incoming.history_content,
+                )
+                max_wait = max(
+                    float(getattr(config, "catty_vision_inline_max_wait_seconds", 3.0) or 0.0),
+                    0.0,
+                )
+                vision_result = await _await_vision_briefly(incoming.image_keys, max_wait)
+                if vision_result is not None:
+                    image_description = vision_result.description or None
+                    image_analysis = vision_result.image_analysis or {}
             if image_analysis and config.catty_emoji_enabled:
                 tags_value = image_analysis.get("emotion_tags")
                 tags = [str(tag) for tag in tags_value] if isinstance(tags_value, list) else []

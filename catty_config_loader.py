@@ -104,6 +104,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "temperature": 0.2,
         "max_tokens": 800,
         "request_timeout": 60,
+        "async_enabled": True,
+        "inline_max_wait_seconds": 3.0,
     },
     "filter": {
         "enabled": True,
@@ -277,6 +279,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "direct_address_reply_probability": 0.9,
         "image_response_enabled": True,
         "image_vision_enabled": True,
+        "reply_queue_max_wait_seconds": 25.0,
         "reply_max_chars": 1800,
         "reply_human_split_enabled": True,
         "reply_human_split_probability": 0.35,
@@ -510,6 +513,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_VISION_TEMPERATURE", vision.get("temperature"))
     _set_env("CATTY_VISION_MAX_TOKENS", vision.get("max_tokens"))
     _set_env("CATTY_VISION_REQUEST_TIMEOUT", vision.get("request_timeout"))
+    _set_env("CATTY_VISION_ASYNC_ENABLED", vision.get("async_enabled"))
+    _set_env("CATTY_VISION_INLINE_MAX_WAIT_SECONDS", vision.get("inline_max_wait_seconds"))
 
     filter_config = _section(data, "filter")
     _set_env("CATTY_FILTER_ENABLED", filter_config.get("enabled"))
@@ -621,6 +626,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_DIRECT_ADDRESS_REPLY_PROBABILITY", chat.get("direct_address_reply_probability"))
     _set_env("CATTY_IMAGE_RESPONSE_ENABLED", chat.get("image_response_enabled"))
     _set_env("CATTY_IMAGE_VISION_ENABLED", chat.get("image_vision_enabled"))
+    _set_env("CATTY_REPLY_QUEUE_MAX_WAIT_SECONDS", chat.get("reply_queue_max_wait_seconds"))
     _set_env("CATTY_REPLY_MAX_CHARS", chat.get("reply_max_chars"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_ENABLED", chat.get("reply_human_split_enabled"))
     _set_env("CATTY_REPLY_HUMAN_SPLIT_PROBABILITY", chat.get("reply_human_split_probability"))

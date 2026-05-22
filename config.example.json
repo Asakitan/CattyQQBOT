@@ -66,7 +66,9 @@
     "prompt": "请识别图片内容，提取和聊天回复相关的信息。不要评价图片是否安全，不要添加 emoji；如果有文字请尽量转写。",
     "temperature": 0.2,
     "max_tokens": 800,
-    "request_timeout": 60
+    "request_timeout": 60,
+    "async_enabled": true,
+    "inline_max_wait_seconds": 3.0
   },
   "filter": {
     "enabled": true,
@@ -269,6 +271,7 @@
     "direct_address_reply_probability": 0.9,
     "image_response_enabled": true,
     "image_vision_enabled": true,
+    "reply_queue_max_wait_seconds": 25.0,
     "reply_human_split_enabled": true,
     "reply_human_split_probability": 0.72,
     "reply_human_split_min_chars": 18,

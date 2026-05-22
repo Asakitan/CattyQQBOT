@@ -90,6 +90,11 @@ class Config(BaseModel):
     catty_vision_temperature: float | None = 0.2
     catty_vision_max_tokens: int | None = 800
     catty_vision_request_timeout: float | None = None
+    # vision 走异步:消息一进来就 fire-and-forget 启 task,主回复链路最多短等
+    # catty_vision_inline_max_wait_seconds 秒;等不到就不带 vision 描述直接回,
+    # 后台 task 跑完写 memory_store,下一轮自动复用。
+    catty_vision_async_enabled: bool = True
+    catty_vision_inline_max_wait_seconds: float = 3.0
 
     catty_filter_enabled: bool = True
     catty_filter_base_url: str = ""
@@ -176,6 +181,9 @@ class Config(BaseModel):
     catty_direct_address_reply_probability: float = 0.9
     catty_image_response_enabled: bool = True
     catty_image_vision_enabled: bool = True
+    # 同会话排队雪崩防护:消息在锁队列里等待超这个秒数就放弃当前消息,
+    # 避免视觉/AI 卡顿后积压消息一起爆出来。
+    catty_reply_queue_max_wait_seconds: float = 25.0
     catty_emoji_enabled: bool = True
     catty_emoji_dir: str = "emojis"
     catty_emoji_download_dir: str = "emojis/downloaded"
@@ -475,6 +483,8 @@ class Config(BaseModel):
         "catty_vision_temperature",
         "catty_vision_max_tokens",
         "catty_vision_request_timeout",
+        "catty_vision_inline_max_wait_seconds",
+        "catty_reply_queue_max_wait_seconds",
         "catty_filter_temperature",
         "catty_filter_max_tokens",
         "catty_filter_request_timeout",
