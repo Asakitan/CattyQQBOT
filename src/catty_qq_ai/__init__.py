@@ -58,13 +58,13 @@ from .openai_client import (
 )
 from .action_hints import build_action_hints
 from .conversation_pulse import analyze_pulse, build_pulse_context
-from .entity_extractor import build_entity_context
-from .intent_classifier import build_intent_context
+from .entity_extractor import build_entity_context, extract_entities
+from .intent_classifier import build_intent_context, classify_intent
 from .parsers import strip_catty_markers as _strip_catty_markers
-from .slang_dict import build_slang_context
+from .slang_dict import annotate_slang, build_slang_context
 from .time_awareness import build_time_context
 from .tools import ToolContext, available_tool_schemas, execute_tool_call, tools_system_hint
-from .topic_classifier import build_topic_context
+from .topic_classifier import build_topic_context, classify_topic
 from .persona_prompts import (
     build_catgirl_examples_prompt,
     build_conversation_flow_prompt,
@@ -506,6 +506,36 @@ def _display_name(event: MessageEvent) -> str:
 
 def _event_message_id(event: MessageEvent) -> str:
     return str(getattr(event, "message_id", "") or getattr(event, "id", "") or "")
+
+
+def _summarize_text_parsing_for_feed(text: str) -> dict | None:
+    """把本地解析层对一条 incoming text 的判定 compact 化,给 conversation_feed extra 用。
+
+    只放 text-only 层(slang/intent/topic/entity),不含 pulse/hints(那些依赖上下文 phase)。
+    全空返回 None,让 feed entry 不带 parsing 字段。
+    """
+    if not text:
+        return None
+    summary: dict = {}
+    try:
+        slang_hits = [t for t, _ in annotate_slang(text)]
+        if slang_hits:
+            summary["slang"] = slang_hits[:8]
+        intent_tags = classify_intent(text)
+        if intent_tags:
+            summary["intent"] = intent_tags
+        topic_tags = classify_topic(text)
+        if topic_tags:
+            summary["topic"] = topic_tags
+        ents = extract_entities(text)
+        if ents:
+            summary["entities"] = [
+                {"k": e.kind, "r": e.raw[:40], **({"iso": e.iso} if e.iso else {})}
+                for e in ents[:5]
+            ]
+    except Exception:  # noqa: BLE001 — 解析失败时不阻塞 feed 写入
+        return None
+    return summary or None
 
 
 def _remember_recent_conversation_event(event: MessageEvent, incoming: ExtractedMessage | None = None) -> None:
@@ -3519,17 +3549,20 @@ async def observe_memory(bot: Bot, event: MessageEvent) -> None:
         return
     _remember_recent_conversation_event(event)
     # activity feed: 训练 idle gate + dashboard conversation feed 都用这个
+    # 顺手附上本地解析层 hit 摘要,方便回放调试看每条消息触发了哪些层
     try:
         scope = _conversation_queue_key(event)
         sender_name = _sender_name(event)
         text = event_plain_text(event)
         image_urls = extract_image_urls(event)
+        parsing_extra = _summarize_text_parsing_for_feed(text)
         activity_feed.record_user_message(
             scope=scope,
             sender_name=sender_name,
             sender_id=str(event.user_id),
             text=text,
             image_count=len(image_urls),
+            extra={"parsing": parsing_extra} if parsing_extra else None,
         )
     except Exception:  # noqa: BLE001
         pass
