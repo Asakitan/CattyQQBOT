@@ -40,6 +40,7 @@ def _load(name: str, fname: str):
 
 for _name, _file in (
     ("time_normalizer", "time_normalizer.py"),
+    ("time_awareness", "time_awareness.py"),
     ("entity_extractor", "entity_extractor.py"),
     ("intent_classifier", "intent_classifier.py"),
     ("conversation_pulse", "conversation_pulse.py"),
@@ -54,6 +55,7 @@ _cp = sys.modules["catty_qq_ai.conversation_pulse"]
 _ic = sys.modules["catty_qq_ai.intent_classifier"]
 _ee = sys.modules["catty_qq_ai.entity_extractor"]
 _ah = sys.modules["catty_qq_ai.action_hints"]
+_ta = sys.modules["catty_qq_ai.time_awareness"]
 
 
 @dataclass
@@ -78,7 +80,7 @@ def main() -> int:
     p.add_argument(
         "--layer",
         action="append",
-        choices=["slang", "pulse", "intent", "entity", "hints"],
+        choices=["time", "slang", "pulse", "intent", "entity", "hints"],
         help="只显示这些层(可重复);默认显示全部",
     )
     p.add_argument(
@@ -88,7 +90,7 @@ def main() -> int:
     )
     args = p.parse_args()
 
-    layers = set(args.layer) if args.layer else {"slang", "pulse", "intent", "entity", "hints"}
+    layers = set(args.layer) if args.layer else {"time", "slang", "pulse", "intent", "entity", "hints"}
 
     if args.reference:
         try:
@@ -123,6 +125,11 @@ def main() -> int:
     print(f"[pulse]    phase={args.pulse}  sender_qq={args.sender_qq}  reference={ref.isoformat(timespec='minutes')}")
     print(f"[layers]   {sorted(layers)}")
     print()
+
+    if "time" in layers:
+        out = _ta.build_time_context(reference=ref)
+        _dump("time", out)
+        total += len(out)
 
     if "slang" in layers:
         out = _sd.build_slang_context(args.text)

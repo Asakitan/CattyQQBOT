@@ -61,6 +61,7 @@ from .entity_extractor import build_entity_context
 from .intent_classifier import build_intent_context
 from .parsers import strip_catty_markers as _strip_catty_markers
 from .slang_dict import build_slang_context
+from .time_awareness import build_time_context
 from .tools import ToolContext, available_tool_schemas, execute_tool_call, tools_system_hint
 from .persona_prompts import (
     build_catgirl_examples_prompt,
@@ -1770,6 +1771,12 @@ def _build_messages(
     # 本地解析层:每层可通过 config.catty_parsing_layers_disabled 单独关闭(运维用)。
     # 默认全开;disabled list 里的名字会被跳过。
     _disabled_layers = set(getattr(config, "catty_parsing_layers_disabled", None) or [])
+
+    # 当前时刻自动注入(替代 AI 主动调 catty_now 一次):日期/星期/时段/节日/季节
+    if "time" not in _disabled_layers:
+        time_context = build_time_context()
+        if time_context:
+            messages.append({"role": "system", "content": time_context})
 
     # 本地 QQ/网络黑话翻译注入:命中『xs/u1s1/awsl/绷不住/破防』等高频缩写时,
     # 直接告诉 AI 对应中文意思,免得调 catty_meme_explain 浪费一次工具调用。

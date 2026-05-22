@@ -234,6 +234,19 @@ def compute_now(*, delta_days: int = 0, reference: datetime | None = None) -> di
     return result
 
 
+def build_time_context(*, reference: datetime | None = None) -> str:
+    """主回复链路用:返回一段 system prompt 文本,自动注入当前时刻 + 节日。
+
+    让 AI 不必主动调 catty_now tool 就知道时间/星期/时段/节日,减少一次工具轮次。
+    详细查询(偏移天数)仍可通过 catty_now tool。
+    """
+    payload = compute_now(reference=reference)
+    body = format_for_prompt(payload)
+    if not body:
+        return ""
+    return f"当前时刻: {body}。你回应时可以参考时段氛围(深夜→唠叨早睡、饭点→吃了没、节日→祝福),但**不要每条都报时**。"
+
+
 def format_for_prompt(payload: dict[str, Any]) -> str:
     """把 compute_now 结果整成一句话便于 LLM 拼 prompt。"""
     parts: list[str] = []
