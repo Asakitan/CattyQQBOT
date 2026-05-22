@@ -56,6 +56,7 @@ from .openai_client import (
     local_critic_completion,
 )
 from .conversation_pulse import build_pulse_context
+from .intent_classifier import build_intent_context
 from .parsers import strip_catty_markers as _strip_catty_markers
 from .slang_dict import build_slang_context
 from .tools import ToolContext, available_tool_schemas, execute_tool_call, tools_system_hint
@@ -1777,6 +1778,11 @@ def _build_messages(
         pulse_context = build_pulse_context(pulse_msgs, now=time.monotonic())
         if pulse_context:
             messages.append({"role": "system", "content": pulse_context})
+    # 入向消息意图分类:question/tease_cat/compliment_cat 等多标签;
+    # 给 AI 反应方向建议(撒娇/嘴硬/给答案/调 tool),减少 AI 自己空想意图的负担。
+    intent_context = build_intent_context(incoming.text, has_image=incoming.has_image)
+    if intent_context:
+        messages.append({"role": "system", "content": intent_context})
     messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     return messages
