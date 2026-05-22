@@ -2228,6 +2228,7 @@ class MemoryStore:
         group_id: str = "",
         ttl_days: int | None = None,
         tags: list[str] | None = None,
+        event_date: str = "",
     ) -> dict[str, Any]:
         """写一条长期备忘 note。
 
@@ -2236,6 +2237,10 @@ class MemoryStore:
 
         text 限 200 字。同 text 在未过期范围内不重复写入。
         ttl_days 不传走 _NOTES_DEFAULT_TTL_DAYS(30 天);0 表示永久。
+        event_date(ISO YYYY-MM-DD)如果传:
+        - 自动算 ttl_days = (event_date - today).days + 7 (事件日期 + 7 天缓冲)
+        - 存到 entry["event_date"], build_context 会优先展示并显示倒计时
+        - 已过的事件日期 ttl 仍保留 7 天给 AI 回忆"刚过去的事"
         """
         if not self.enabled:
             return {"ok": False, "error": "memory disabled"}
@@ -2260,6 +2265,19 @@ class MemoryStore:
         if not isinstance(notes, list):
             notes = []
             container["notes"] = notes
+
+        # 如果传了 event_date,根据它推 ttl_days(覆盖 caller 传的 ttl_days)
+        parsed_event_date = ""
+        if event_date:
+            try:
+                ev = datetime.fromisoformat(str(event_date).strip()).date()
+                today = _utc_now().date()
+                derived_ttl = max((ev - today).days + 7, 7)  # 至少 7 天保留(已过事件留给 AI 回忆)
+                ttl_days = derived_ttl
+                parsed_event_date = ev.isoformat()
+            except ValueError:
+                # 非法日期:忽略 event_date,仍按原 ttl_days 走
+                parsed_event_date = ""
 
         ttl = self._NOTES_DEFAULT_TTL_DAYS if ttl_days is None else max(int(ttl_days), 0)
         now_iso = _now()
@@ -2289,6 +2307,8 @@ class MemoryStore:
             entry["expires_at"] = expires_at
         if tags:
             entry["tags"] = [str(t).strip() for t in tags if str(t).strip()][:6]
+        if parsed_event_date:
+            entry["event_date"] = parsed_event_date
         notes.append(entry)
         if len(notes) > self._NOTES_MAX_PER_ENTITY:
             container["notes"] = notes[-self._NOTES_MAX_PER_ENTITY :]
@@ -2341,11 +2361,56 @@ class MemoryStore:
         return out
 
     def _notes_context_line(self, container: dict[str, Any], *, label: str, limit: int = 5) -> str:
-        """build_context 用:把 active notes 拼成一行简短描述。"""
-        active = self._active_notes(container)[:limit]
+        """build_context 用:把 active notes 拼成一行简短描述。
+
+        带 event_date 的 note 优先排在前面,并显示倒计时『还剩 N 天』/『今天』/『已过 N 天』。
+        """
+        active = self._active_notes(container)
         if not active:
             return ""
-        snippets = [str(n.get("text") or "").strip() for n in active if str(n.get("text") or "").strip()]
+        # 按"有 event_date 的优先 + event_date 越近越前" 重排
+        today = _utc_now().date()
+
+        def _sort_key(n: dict[str, Any]) -> tuple[int, int]:
+            ev_raw = n.get("event_date")
+            if not ev_raw:
+                return (1, 0)  # 无 event_date 排后
+            try:
+                ev = datetime.fromisoformat(str(ev_raw)).date()
+                days = (ev - today).days
+                # 未来的优先(days >= 0 排在 days < 0 之前),近的越前
+                if days >= 0:
+                    return (0, days)
+                else:
+                    return (2, -days)  # 已过的排最后
+            except ValueError:
+                return (1, 0)
+
+        active.sort(key=_sort_key)
+        chosen = active[:limit]
+        snippets: list[str] = []
+        for n in chosen:
+            text = str(n.get("text") or "").strip()
+            if not text:
+                continue
+            ev_raw = n.get("event_date")
+            if ev_raw:
+                try:
+                    ev = datetime.fromisoformat(str(ev_raw)).date()
+                    days = (ev - today).days
+                    if days == 0:
+                        prefix = "[今天]"
+                    elif days == 1:
+                        prefix = "[明天]"
+                    elif days > 1:
+                        prefix = f"[还剩{days}天]"
+                    else:
+                        prefix = f"[已过{-days}天]"
+                    snippets.append(f"{prefix}{text[:70]}")
+                    continue
+                except ValueError:
+                    pass
+            snippets.append(text[:80])
         if not snippets:
             return ""
-        return f"- {label}: " + "; ".join(s[:80] for s in snippets)
+        return f"- {label}: " + "; ".join(snippets)

@@ -461,6 +461,15 @@ _REMEMBER_SCHEMA: dict[str, Any] = {
                     "type": "string",
                     "description": "可选,逗号分隔 1-3 个标签(『偏好』/『约定』/『边界』/『梗』)。",
                 },
+                "event_date": {
+                    "type": "string",
+                    "description": (
+                        "可选 ISO 日期 YYYY-MM-DD。**专给『约定/事件/计划』用**:"
+                        "比如『明天 8 点开黑』→ event_date='2026-05-24'(用 catty_now/entity 给的 ISO)。"
+                        "传了之后自动算 ttl 到事件 + 7 天缓冲,build_context 自动显示倒计时『还剩 1 天』。"
+                        "偏好/边界不要传 event_date(那不是事件)。"
+                    ),
+                },
             },
             "required": ["scope", "text"],
         },
@@ -1087,6 +1096,7 @@ async def _exec_remember(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
         ttl_days = None
     tags_raw = str(args.get("tags") or "").strip()
     tags = [t.strip() for t in re.split(r"[,，;；]+", tags_raw) if t.strip()] if tags_raw else None
+    event_date = str(args.get("event_date") or "").strip()
     # 自动用当前事件填 user_id / group_id
     user_id = ctx.user_id if scope == "user" else ""
     group_id = ctx.group_id if scope == "group" else ""
@@ -1101,6 +1111,7 @@ async def _exec_remember(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
         group_id=group_id,
         ttl_days=ttl_days,
         tags=tags,
+        event_date=event_date,
     )
 
 
@@ -1307,7 +1318,9 @@ def tools_system_hint() -> str:
         "14. catty_remember — 把『稳定偏好/边界/约定/群级标签』写入用户/群笔记库,长期沉淀。"
         "和 catty_game_remember 区别:game_remember 给特定游戏库,catty_remember 给当前用户或当前群本身。"
         "**不要**记闲聊吐槽/临时情绪/单次玩笑;只记 (a) 偏好/边界(ttl 90-180) (b) 约定(ttl 到事件结束) "
-        "(c) 群本身特征。写入后下次主回复 system context 自动加载,你不用再读。\n"
+        "(c) 群本身特征。**约定/事件**额外传 event_date(ISO YYYY-MM-DD)——用 entity 解析出的 iso 直接喂,"
+        "ttl 自动算,build_context 倒计时『还剩 N 天/今天/明天』自动展示。"
+        "写入后下次主回复 system context 自动加载,你不用再读。\n"
         "13. catty_meme_explain — 萌娘百科查**网络梗 / ACG 词条 / 角色 / 作品 / 二次元术语**。"
         "群友冒出一个你不认识的网络流行语(yyds/绷不住了)、二次元词条(孤独摇滚/雷电将军)、角色/作品名;"
         "或想确认梗的精确出处时调。**只覆盖网络梗 + ACG**——拿到 error=not_found 不要重试,"
