@@ -179,6 +179,10 @@ affection_store = AffectionStore(config)
 # 持久化到 memory_dir/story_arcs.json,重启不丢。
 from .story_arc import StoryArcStore, build_story_arc_prompt
 story_arc_store = StoryArcStore(config.catty_memory_path)
+# Per-user vibe profile: 轻量自动学习每个 user_id 的调调(techie/tease/playful/...),
+# 让笨猫对不同人有差异化反应基调。持久化到 memory_dir/user_vibes.json。
+from .user_vibe import UserVibeStore
+user_vibe_store = UserVibeStore(config.catty_memory_path)
 _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
@@ -1971,6 +1975,12 @@ def _build_messages(
         _last_active_at = _get_session_cache().last_access_at(key)
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"session_cache.last_access_at failed: {exc}")
+    # Per-user vibe profile: 记录这一条用户消息(自动分类 vibe+topics 更新画像),
+    # 下次回复时 PromptManager 注入 catty_user_vibe 段告诉 LLM 对方调调
+    try:
+        user_vibe_store.record_message(str(event.user_id), incoming.text or "")
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"user_vibe_store.record_message failed: {exc}")
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,
@@ -1988,6 +1998,10 @@ def _build_messages(
         "reply_self_check_enabled": bool(config.catty_reply_self_check_enabled),
         "reply_style_examples_enabled": bool(config.catty_reply_style_examples_enabled),
         "last_active_at": _last_active_at,
+        # Per-user vibe profile: 让 register_catty_persona 拿 store + user_id 去 lazy
+        # 读 profile,low confidence 自动返回空字符串(不污染 prompt)
+        "user_vibe_store": user_vibe_store,
+        "user_id": str(event.user_id),
     })
     # LayerD/E 散装 context 统一注册到 PromptManager,享受同样的 prompt_order / prompts_disabled
     # 配置能力。order 600+ 表示挂在 character_card / world_info 之后、接近 chat history。
@@ -4636,6 +4650,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(memory_store.background_flush_loop())
     asyncio.create_task(affection_store.background_flush_loop())
     asyncio.create_task(story_arc_store.background_flush_loop())
+    asyncio.create_task(user_vibe_store.background_flush_loop())
 
 
 @get_driver().on_shutdown
@@ -4672,6 +4687,15 @@ async def _flush_story_arc_store_on_shutdown() -> None:
             logger.info("story_arc_store: flushed dirty data on shutdown")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"story_arc_store: shutdown flush failed: {exc}")
+
+
+@get_driver().on_shutdown
+async def _flush_user_vibe_store_on_shutdown() -> None:
+    try:
+        if user_vibe_store.flush_sync():
+            logger.info("user_vibe_store: flushed dirty data on shutdown")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"user_vibe_store: shutdown flush failed: {exc}")
 
 
 @chat_matcher.handle()

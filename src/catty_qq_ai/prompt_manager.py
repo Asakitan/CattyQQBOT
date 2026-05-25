@@ -336,6 +336,20 @@ def register_catty_persona(
             order=320,
         )
 
+    # === User Vibe Profile - 对方画像 (order=460 在 anti_repetition 之前) ===
+    user_vibe_store = ctx.get("user_vibe_store")
+    user_id = ctx.get("user_id", "")
+    if user_vibe_store is not None and user_id:
+        from . import user_vibe as _uv
+        mgr.register(
+            "catty_user_vibe",
+            content_fn=lambda: _uv.build_user_vibe_prompt(
+                user_vibe_store.profile_for(user_id),
+                user_display=user_display,
+            ),
+            order=460,
+        )
+
     # === Anti-Repetition Tracker - 防复读 (order=480 紧贴 post_history 之前) ===
     from . import anti_repetition as _ar
     mgr.register(
