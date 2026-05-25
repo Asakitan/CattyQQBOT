@@ -56,8 +56,9 @@ pip install -e .
 
 ```powershell
 copy config.example.json config.json
-notepad config.json
 ```
+
+然后用任意编辑器打开 `config.json` 填好。
 
 至少填好 `ai.base_url` / `ai.api_key` / `ai.model`：
 
@@ -65,7 +66,7 @@ notepad config.json
 {
   "ai": {
     "base_url": "https://api.openai.com/v1",
-    "api_key": "你的 API Key",
+    "api_key": "<API Key>",
     "model": "gpt-4o-mini"
   }
 }
@@ -160,7 +161,7 @@ python bot.py
 **人工分段**：AI 长回复会按本地概率追加分段提示，由模型按语义自己决定拆几段 / 发几条；
 分段间等待 `chat.reply_human_split_delay_seconds`，最多 `reply_human_split_max_chunks` 条。
 
-清空当前会话：
+清空当前会话（**仅 Bot owner 可发**，群里其他人发同样的话不响应）：
 
 ```text
 ai reset
@@ -192,9 +193,9 @@ memory_users/user_<QQ>.json
 ```json
 {
   "memory": {
-    "user_titles":        { "993255714": "主任" },
-    "group_titles":       { "168538447": "社员" },
-    "group_user_titles":  { "168538447": { "993255714": "主任" } }
+    "user_titles":        { "<用户QQ>": "群主" },
+    "group_titles":       { "<群号>": "社员" },
+    "group_user_titles":  { "<群号>": { "<用户QQ>": "群主" } }
   }
 }
 ```
@@ -204,7 +205,7 @@ memory_users/user_<QQ>.json
 ```json
 {
   "game_context": {
-    "star_resonance_group_ids": [477970838],
+    "star_resonance_group_ids": [],
     "strinova_group_ids":       []
   }
 }
@@ -213,14 +214,14 @@ memory_users/user_<QQ>.json
 目前内置《星痕共鸣》/ Blue Protocol: Star Resonance 和《卡拉彼丘》/ Strinova 的轻量本地语料，
 需要赛季 / 强度榜 / 兑换码这类最新信息时仍然建议触发联网搜索。
 
-查看当前 scope 的记忆：
+查看当前 scope 的记忆（**仅 Bot owner 可发**，避免内部状态被群友刷出来）：
 
 ```text
 ai 查看记忆
 ai 查看人物信息
 ```
 
-清空当前 scope 的待压缩缓存（保留长期摘要 / 画像）：
+清空当前 scope 的待压缩缓存（**仅 Bot owner 可发**，保留长期摘要 / 画像）：
 
 ```text
 ai 清空缓存
@@ -282,7 +283,7 @@ prompt cache 前缀命中可让输入 token 走 0.1× 价。
 历史攒到 12 条（≈6 轮）后自动**跳过教学型例句**（节省约 30~40% system token），
 冷会话依旧挂全套例句保证起手风格。
 
-主人在**私聊里**才能列会话（群里发同样的话不响应）：
+Bot owner（`qq.owner_qq` 配置的 QQ 号）在**私聊里**才能列会话（群里发同样的话不响应）：
 
 ```text
 ai 会话列表
@@ -307,7 +308,7 @@ ai 列会话
 - 走 `audit_ai`（审核 / 判断 / 训练成果审批）做成果验收，审核模型只输出
   `allow_apply / allow_merge / next_suggestions` JSON，不直接执行命令
 - `auto_fill_training_commands=true` 时，空 train 命令会落到项目内安全 wrapper
-  `scripts/local_lora_train.py`，wrapper 只跑你配置的 `backend_command`，不让主 AI 跑任意 shell
+  `scripts/local_lora_train.py`，wrapper 只跑配置里指定的 `backend_command`，不让主 AI 跑任意 shell
 - 闲时判定：默认按本地时间 + 安静时间窗，或开 `mc_idle_check_enabled` 走
   **MC Server List Ping**——MC 有人在线绝不训，无人持续 `mc_idle_min_minutes` 才允许启训
 - MC 不可达按"不训"处理，保护游戏不被误抢资源
@@ -376,7 +377,7 @@ ai 列会话
 | `/vibe_reset <qq>` | 清掉用户画像 |
 | `收藏` / `存表情` / `/saveemoji` | 把当前 / 引用 / 最近群图入表情库（可带 tag） |
 
-主人自己积分恒为 `OWNER_INFINITY_POINTS`、等级恒为 `LEVEL_CAP`；免每日签到次数限制。
+Owner 本身（即 `qq.owner_qq` 配置的 QQ）积分恒为 `OWNER_INFINITY_POINTS`、等级恒为 `LEVEL_CAP`，免每日签到次数限制。
 
 ---
 
@@ -456,4 +457,4 @@ ai 列会话
 
 ---
 
-> 主人，1.0.0 整版的笨猫长好啦～ 部署完记得先用小号测一轮，别一上来就让她去主力群里炸毛喵 ฅฅ
+> 1.0.0 整版的笨猫长好啦~ 部署完先用小号测一轮，别一上来就把她拉去主力群里炸毛喵 ฅฅ
