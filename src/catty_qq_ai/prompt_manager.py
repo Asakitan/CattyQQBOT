@@ -29,6 +29,7 @@
     |   195 | catty_scene_discrimination  | (extra)          | persona_prompts.build_scene_discrimination_prompt |
     |   200 | catty_daily_life            | (catty-specific) | daily_life.build_daily_life_prompt |
     |   205 | catty_daily_goals           | (catty-specific) | catty_goals.build_catty_goals_prompt |
+    |   207 | catty_reunion               | (catty-specific) | catty_reunion.build_reunion_prompt |
     |   210 | catty_qq_chat_rhythm        | (extra)          | persona_prompts.build_qq_chat_rhythm_prompt |
     |   220 | catty_reply_self_check      | (extra)          | persona_prompts.build_reply_self_check_prompt |
     |   230 | catty_image_literacy        | (conditional)    | persona_prompts.build_image_literacy_prompt |
@@ -360,6 +361,16 @@ def register_catty_persona(
             is_owner=is_owner,
         ),
         order=205,
+    )
+    # Catty Reunion - 久别重逢 (idle 时长 → 反差化重逢语气). 用 ctx['last_active_at']
+    # 计算距上次活跃多久, > 6h/1d/1w 三档自动注入不同重逢 hint。pure function,
+    # warm 档(< 6h)返回 ""不打扰; 主人池跟普通用户池分桶。
+    from . import catty_reunion as _cr
+    _last_active = ctx.get("last_active_at")
+    mgr.register(
+        "catty_reunion",
+        content_fn=lambda: _cr.build_reunion_prompt(_last_active, is_owner=is_owner),
+        order=207,
     )
     if "world_info" not in legacy_disabled:
         mgr.register(
