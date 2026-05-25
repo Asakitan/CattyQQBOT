@@ -2093,6 +2093,23 @@ def _build_messages(
         disabled=list(getattr(config, "catty_prompts_disabled", None) or []),
     )
     messages.extend(_st_manager.build_messages())
+    # SillyTavern 风「first_mes 冷启」: 第一次对话没有任何 chat history 时,
+    # 把 character_card.first_mes 作为 assistant 第一条消息塞进去 — ST 文档:
+    # 『模型对 first_mes 的模仿强度高于任何其他字段』(对句长/语气/反差链 anchor 极强)。
+    # 不影响后续对话: 一旦 history_messages 非空,这条就不再塞。
+    # 可通过 catty_prompts_disabled = ["catty_first_mes"] 关闭。
+    if is_cold_session and "catty_first_mes" not in (getattr(config, "catty_prompts_disabled", None) or []):
+        try:
+            from .character_card import get_first_mes as _get_first_mes
+            _first_mes = _get_first_mes(ctx={
+                "char": "笨猫", "user": _user_real_display,
+                "group": _group_real_display,
+                "last_active_at": _last_active_at,
+            }, user_display=_user_real_display)
+            if _first_mes and _first_mes.strip():
+                messages.append({"role": "assistant", "content": _first_mes})
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"first_mes cold-start failed (non-fatal): {exc}")
     messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     return messages
