@@ -224,6 +224,8 @@ ASSETS_DIR = Path(__file__).resolve().parent / "assets"
 PAWS_SHEET_PATH = ASSETS_DIR / "paws_sheet.png"
 PUSHEEN_PATH = ASSETS_DIR / "pusheen.png"
 
+# cache 是 module 级,bot 进程启动时填一次;升级 scipy/numpy 后需重启 bot
+# 让本 module 重新 import,这两个 cache 才会被新算法重建
 _PAW_CROPS_CACHE: list[Image.Image] | None = None
 _PUSHEEN_CACHE: Image.Image | None = None
 
