@@ -2117,7 +2117,12 @@ async def _build_messages(
         order_override=list(getattr(config, "catty_prompt_order", None) or []),
         disabled=list(getattr(config, "catty_prompts_disabled", None) or []),
     )
-    messages.extend(_st_manager.build_messages())
+    # token budget: 从 config.catty_prompt_max_tokens 读上限 (默认 None = 不 trim, 兼容老行为)。
+    # 超 budget 时按 order 倒序 trim 非保护段 (world_info / dialogue_examples / disambiguation 之类),
+    # _PROTECTED_IDENTIFIERS (main_intel/identity_anchor/char_description/personality/scenario/
+    # character_book/persona_memory/reply_self_check/post_history) 永远保留。
+    _prompt_max_tokens = getattr(config, "catty_prompt_max_tokens", None)
+    messages.extend(_st_manager.build_messages(max_tokens=_prompt_max_tokens))
     # SillyTavern 风「first_mes 冷启」: 第一次对话没有任何 chat history 时,
     # 把 character_card.first_mes 作为 assistant 第一条消息塞进去 — ST 文档:
     # 『模型对 first_mes 的模仿强度高于任何其他字段』(对句长/语气/反差链 anchor 极强)。
@@ -2198,7 +2203,10 @@ def _is_memory_cache_clear_request(text: str) -> bool:
 
 _SIGNIN_KEYWORDS = {
     "签到", "猫猫签到", "笨猫签到", "/签到", "/checkin", "checkin",
-    "每日签到", "今日签到", "我要签到",
+    "每日签到", "今日签到", "我要签到", "我想签到",
+    # 常见叠词/语气变体 — 群友实测会发的形态
+    "签到签到", "签个到", "来签到", "签到啦", "签到呀", "签到喵",
+    "签到嗷呜", "签到一下", "打卡", "我签到", "签个到喵",
 }
 _POINTS_QUERY_KEYWORDS = {
     "我的积分", "积分查询", "查积分", "查看积分", "查询积分",
@@ -2208,8 +2216,21 @@ _POINTS_QUERY_KEYWORDS = {
 }
 
 
+_SIGNIN_NEG_TOKENS = ("取消", "不签", "别签", "怎么签", "什么是", "签不到", "不想签", "不要签")
+
+
 def _is_signin_request(text: str) -> bool:
-    return _compact_text(text) in _SIGNIN_KEYWORDS
+    """精确集合优先;短文本 (≤8 chars) 且含『签到/打卡』也算 — 兜住『签到签到』
+    『嗷呜签到』之类口语变体。带否定词的直接拒。
+    """
+    c = _compact_text(text)
+    if c in _SIGNIN_KEYWORDS:
+        return True
+    if len(c) <= 8 and ("签到" in c or "打卡" in c):
+        if any(neg in c for neg in _SIGNIN_NEG_TOKENS):
+            return False
+        return True
+    return False
 
 
 def _is_points_query_request(text: str) -> bool:
@@ -3862,8 +3883,9 @@ _VIBE_CMD_RE = re.compile(r"^\s*/?(vibe_show|vibe_reset)(?:\s+(\d{4,12}))?\s*$",
 #   /aff_add_points <qq> <n>   加(可负)积分
 #   /aff_set_exp <qq> <n>      设好感度经验
 #   /aff_reset <qq>            整条记录归零
+#   /aff_force_checkin <qq>    强制给某人记一次今日签到(无视已签限制,正常入账)
 _AFF_ADMIN_RE = re.compile(
-    r"^\s*/?(aff_show|aff_reset_signin|aff_set_points|aff_add_points|aff_set_exp|aff_reset)"
+    r"^\s*/?(aff_show|aff_reset_signin|aff_set_points|aff_add_points|aff_set_exp|aff_reset|aff_force_checkin)"
     r"(?:\s+(\d{4,12}))?(?:\s+(-?\d+))?\s*$",
     re.IGNORECASE,
 )
@@ -4348,6 +4370,18 @@ async def handle_aff_admin(matcher: Matcher, event: MessageEvent, state: T_State
                 ))
             await matcher.finish(Message(
                 f"喵呜~ QQ:{target_qq} 本来就没记录,不用重置啦 ฅฅ"
+            ))
+
+        elif cmd == "aff_force_checkin":
+            res = affection_store.admin_force_checkin_today(target_qq)
+            if res.get("is_owner"):
+                await matcher.finish(Message(
+                    f"喵~ 给主人补/强制签到完成嗷呜:Lv MAX, +{res.get('gained',0)} (无限余额) ฅฅ"
+                ))
+            await matcher.finish(Message(
+                f"喵~ QQ:{target_qq} 强制签到完成 ฅฅ\n"
+                f"  · base {res.get('base',0)} + Lv{res.get('level',1)} bonus {res.get('bonus',0)} = +{res.get('gained',0)}\n"
+                f"  · 现在余额: {res.get('balance',0)}"
             ))
     except FinishedException:
         raise

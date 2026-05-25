@@ -58,6 +58,41 @@ from dataclasses import dataclass, field
 from typing import Any, Callable
 
 
+# ── Token budget 保护段(任何情况下都不 trim 掉) ──────────────────────────
+# 这些是笨猫人格 / 身份 / 主回复策略的核心, 一旦 trim 掉就『不像笨猫了』。
+# 用户可通过 config.catty_prompt_protected_identifiers 追加(不能减少基础保护)。
+_PROTECTED_IDENTIFIERS: frozenset[str] = frozenset({
+    "catty_main_intel",            # 主回复智能策略
+    "catty_identity_anchor",       # 元身份反 AI 锚定
+    "catty_char_description",      # 角色基础描述
+    "catty_char_personality",      # 角色性格
+    "catty_scenario",              # 场景
+    "catty_character_book",        # 角色私货 + scope_lorebook (BFS 输出)
+    "catty_persona_memory",        # 人格记忆
+    "catty_reply_self_check",      # 回复自检(防 客服腔)
+    "catty_post_history",          # post-history (jailbreak 段)
+})
+
+
+def estimate_tokens(text: str) -> int:
+    """粗略估算文本 token 数 — 中文按 1 char ≈ 1 token, ASCII 按 4 chars ≈ 1 token。
+
+    GPT-5.5 / Claude 中文 tokenizer 大致是 1 token ≈ 1-1.5 字, ASCII 4 字 ≈ 1 token。
+    不调用真实 tokenizer (cl100k_base / o200k_base) 避免引入 tiktoken 依赖,
+    精度够用作 budget gate (差 10-20% 不影响判断 trim 哪段)。
+    """
+    if not text:
+        return 0
+    cn_count = 0
+    ascii_count = 0
+    for ch in text:
+        if "一" <= ch <= "鿿" or "　" <= ch <= "〿" or "＀" <= ch <= "￯":
+            cn_count += 1
+        else:
+            ascii_count += 1
+    return cn_count + (ascii_count + 3) // 4
+
+
 @dataclass
 class PromptEntry:
     identifier: str
@@ -88,6 +123,13 @@ class PromptManager:
 
     def __init__(self) -> None:
         self._entries: list[PromptEntry] = []
+        # build_messages 跑完后会写: 给 dashboard/debug 看 token 占用 + trim 历史
+        self.last_trim_report: dict[str, Any] = {
+            "total_estimated_tokens": 0,
+            "final_estimated_tokens": 0,
+            "trimmed_identifiers": [],
+            "max_tokens": None,
+        }
 
     def register(
         self,
@@ -145,14 +187,55 @@ class PromptManager:
                 if e.identifier in position_map:
                     e.order = position_map[e.identifier]
 
-    def build_messages(self) -> list[dict[str, str]]:
-        """按 order 升序输出非空 entry 的 system messages。"""
+    def build_messages(
+        self,
+        *,
+        max_tokens: int | None = None,
+        extra_protected: frozenset[str] | None = None,
+    ) -> list[dict[str, str]]:
+        """按 order 升序输出非空 entry 的 system messages。
+
+        ST 风 token budget:
+        - max_tokens=None (默认): 全输出, 不 trim, 兼容老行为
+        - max_tokens=N: 估算总 token, 超 N 时按 order 倒序 trim 非保护段直到 ≤ N
+          (后段先丢: world_info / dialogue_examples / catgirl_examples / disambiguation 之类)
+          保护段(_PROTECTED_IDENTIFIERS + extra_protected) 永远不 trim
+
+        last_trim_report 记录 trim 历史给 dashboard 看。
+        """
         sorted_entries = sorted(self._entries, key=lambda e: (e.order, e.identifier))
-        out: list[dict[str, str]] = []
+        # 先 materialize 一遍, 保留 (entry, mat, tokens) 三元组用于 trim 决策
+        materialized: list[tuple[PromptEntry, dict[str, str], int]] = []
         for entry in sorted_entries:
             mat = entry.materialize()
-            if mat is not None:
-                out.append(mat)
+            if mat is None:
+                continue
+            tokens = estimate_tokens(mat["content"])
+            materialized.append((entry, mat, tokens))
+        original_total = sum(t for _, _, t in materialized)
+        total_tokens = original_total
+        trimmed_ids: list[str] = []
+
+        if max_tokens is not None and total_tokens > max_tokens:
+            protect = _PROTECTED_IDENTIFIERS | (extra_protected or frozenset())
+            # 按 order 倒序遍历 (后段先 trim), 跳过保护段
+            for i in range(len(materialized) - 1, -1, -1):
+                if total_tokens <= max_tokens:
+                    break
+                entry, _mat, tokens = materialized[i]
+                if entry.identifier in protect:
+                    continue
+                materialized[i] = (entry, {}, 0)  # mark 删除
+                trimmed_ids.append(entry.identifier)
+                total_tokens -= tokens
+
+        out = [mat for _, mat, _ in materialized if mat]
+        self.last_trim_report = {
+            "total_estimated_tokens": original_total,
+            "final_estimated_tokens": total_tokens,
+            "trimmed_identifiers": trimmed_ids,
+            "max_tokens": max_tokens,
+        }
         return out
 
     def __len__(self) -> int:
