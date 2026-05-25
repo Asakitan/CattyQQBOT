@@ -50,26 +50,35 @@ def _sanitize_collection_name(scope: str) -> str:
 
 
 class CattyRAGStore:
-    """ChromaDB-based per-scope 向量记忆。enabled=False 时全部 no-op。"""
+    """ChromaDB-based per-scope 向量记忆。enabled=False 时全部 no-op。
 
-    def __init__(self, memory_path: str | Path) -> None:
+    Embedding 优先级:
+    1. config.catty_openai_* 配置存在 → OpenAIEmbeddingFunction (推荐, 不依赖本地 ONNX)
+       需要 host 支持 /v1/embeddings 端点 + model 'text-embedding-3-small' 或类似
+    2. fallback: chromadb 默认 ONNX (all-MiniLM-L6-v2)
+       Python 3.14+ 上 onnxruntime wheel DLL 不兼容会自动 disable
+    """
+
+    def __init__(self, memory_path: str | Path, config: Any = None) -> None:
         p = Path(memory_path).expanduser()
         if not p.is_absolute():
             p = p.resolve()
         self._persist_dir = p.parent / "chroma"
         self._lock = threading.RLock()
+        self._config = config
         self._client = None
+        self._embedding_fn = None  # 显式传给 collection, 不用 chromadb default
+        self._embedding_source: str = ""  # debug: "openai" / "onnx" / ""
         self._collections: dict[str, Any] = {}  # scope → collection (cache)
         self._enabled = False
         self._init_error: str = ""
         self._try_init()
 
     def _try_init(self) -> None:
-        """Try-import chromadb + 初始化 PersistentClient. 失败则 disabled。
+        """Try-import chromadb + 初始化 PersistentClient + 选 embedding backend.
 
-        额外预检: chromadb 默认 embedding 用 ONNX, 需要 onnxruntime 能 import + DLL OK。
-        Python 3.14+ 上 onnxruntime 1.26.0 wheel 不兼容 (DLL init 失败), 提前 abort 避免
-        backfill 时反复 silent fail。
+        embedding 优先 OpenAI compatible (无 ONNX 依赖, Python 3.14 兼容),
+        fallback ONNX (Python 3.14 已知 DLL fail → disable)。
         """
         try:
             import chromadb  # type: ignore
@@ -77,30 +86,87 @@ class CattyRAGStore:
             self._init_error = f"chromadb not installed: {exc}"
             logger.warning("catty_rag: chromadb not installed, RAG disabled — pip install chromadb to enable")
             return
-        # 预检 onnxruntime — chromadb 默认 embedding 必依赖
-        try:
-            import onnxruntime  # type: ignore  # noqa: F401
-        except Exception as exc:  # noqa: BLE001
-            self._init_error = (
-                f"onnxruntime broken on this Python: {exc} "
-                "(Python 3.14+ 可能不兼容 onnxruntime 1.26.0 wheel — "
-                "降级 Python 到 3.12/3.13 或者切到 OpenAI embeddings API)"
-            )
+        # 选 embedding backend
+        ef = self._try_openai_embedding()
+        if ef is None:
+            ef = self._try_onnx_embedding()
+        if ef is None:
+            self._init_error = "no embedding backend available (OpenAI 配置缺失 + ONNX DLL fail)"
             logger.warning(
-                "catty_rag: onnxruntime 不可用, RAG disabled. "
-                "Python 3.14+ + onnxruntime wheel DLL 不兼容是已知问题。"
-                "解决方法: 1) 降 Python 到 3.12/3.13, 或 2) 给 chromadb 配 OpenAIEmbeddingFunction "
-                "(需要 catty_openai_* 主模型 host 支持 /embeddings 端点)。"
+                "catty_rag: 无可用 embedding backend, RAG disabled. "
+                "配 catty_openai_* + host 支持 /v1/embeddings 端点 (推荐), "
+                "或修复 Python<3.14 onnxruntime DLL 问题。"
             )
             return
+        self._embedding_fn = ef
         try:
             self._persist_dir.mkdir(parents=True, exist_ok=True)
             self._client = chromadb.PersistentClient(path=str(self._persist_dir))
             self._enabled = True
-            logger.info(f"catty_rag: chromadb initialized at {self._persist_dir}")
+            logger.info(
+                f"catty_rag: chromadb initialized at {self._persist_dir} (embedding={self._embedding_source})"
+            )
         except Exception as exc:  # noqa: BLE001
             self._init_error = f"chromadb init failed: {exc}"
             logger.warning(f"catty_rag: init failed, RAG disabled — {exc}")
+
+    def _try_openai_embedding(self):  # noqa: ANN202
+        """优先尝试 OpenAI compatible /v1/embeddings (无 ONNX 依赖, Python 3.14 兼容)。
+
+        从 config.catty_openai_api_key + catty_openai_base_url 复用。
+        模型名优先 config.catty_embedding_model, 默认 'text-embedding-3-small'。
+        host 不支持 /embeddings 端点会在第一次 upsert 时 fail, 这里只检查配置存在。
+        """
+        if self._config is None:
+            return None
+        api_key = getattr(self._config, "catty_openai_api_key", "") or ""
+        base_url = getattr(self._config, "catty_openai_base_url", "") or ""
+        if not api_key or not base_url:
+            return None
+        # base_url 可能是 /v1/chat/completions 这样的完整路径, 取到 /v1
+        api_base = base_url.rstrip("/")
+        if "/chat/completions" in api_base:
+            api_base = api_base.split("/chat/completions")[0]
+        if not api_base.endswith("/v1"):
+            # 不强制 /v1 后缀, 因为有的 host 没有 /v1; OpenAI client 会按 base/embeddings 拼
+            pass
+        model_name = (
+            getattr(self._config, "catty_embedding_model", "")
+            or "text-embedding-3-small"
+        )
+        try:
+            from chromadb.utils import embedding_functions  # type: ignore
+            ef = embedding_functions.OpenAIEmbeddingFunction(
+                api_key=api_key,
+                api_base=api_base,
+                model_name=model_name,
+            )
+            self._embedding_source = f"openai:{model_name}@{api_base}"
+            logger.info(f"catty_rag: using OpenAI embedding ({model_name} @ {api_base})")
+            return ef
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"catty_rag: OpenAIEmbeddingFunction init failed: {exc}")
+            return None
+
+    def _try_onnx_embedding(self):  # noqa: ANN202
+        """Fallback: chromadb 默认 ONNX (all-MiniLM-L6-v2). Python 3.14 上 DLL fail."""
+        try:
+            import onnxruntime  # type: ignore  # noqa: F401
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(
+                f"catty_rag: onnxruntime 不可用 ({exc}); "
+                "Python 3.14+ + onnxruntime wheel DLL 不兼容是已知问题"
+            )
+            return None
+        try:
+            from chromadb.utils import embedding_functions  # type: ignore
+            ef = embedding_functions.ONNXMiniLM_L6_V2()
+            self._embedding_source = "onnx:all-MiniLM-L6-v2"
+            logger.info("catty_rag: using ONNX embedding (all-MiniLM-L6-v2 local)")
+            return ef
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"catty_rag: ONNX embedding init failed: {exc}")
+            return None
 
     @property
     def enabled(self) -> bool:
@@ -121,6 +187,7 @@ class CattyRAGStore:
                 col = self._client.get_or_create_collection(
                     name=name,
                     metadata={"scope": scope, "hnsw:space": "cosine"},
+                    embedding_function=self._embedding_fn,
                 )
                 self._collections[name] = col
                 return col

@@ -199,7 +199,7 @@ scope_lorebook_store = ScopeLorebookStore(config.catty_memory_path)
 # 让笨猫『记得久远的事』 — 关键词没命中但语义相近的旧对话也能召回。
 # graceful fallback: chromadb 未装时 store._enabled=False, add/query 全部 no-op。
 from .catty_rag import CattyRAGStore
-catty_rag_store = CattyRAGStore(config.catty_memory_path)
+catty_rag_store = CattyRAGStore(config.catty_memory_path, config=config)
 _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
