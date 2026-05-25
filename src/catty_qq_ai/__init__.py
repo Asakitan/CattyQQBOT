@@ -766,6 +766,12 @@ def _remember_bot_reply_for_event(event: MessageEvent, text: str) -> None:
         _ar_record(scope, text)
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"anti_repetition record failed (non-fatal): {exc}")
+    # Catty RAG: 把笨猫这条 assistant reply 也向量化存进 per-scope chromadb,
+    # 让下次 query 能召回笨猫之前怎么回的(避免重复 + 一致性 + 角色发展记忆)。
+    try:
+        catty_rag_store.add(scope, text, role="assistant", user_id=str(event.user_id))
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"catty_rag_store.add (assistant) failed: {exc}")
     # 每次猫猫对该用户实际回复一次,+1 好感度(主人 / 已 cap 用户自动 no-op);
     # 内部对一条用户消息只计一次,分段发送不会重复刷分。
     _credit_affection_for_event_once(event)
