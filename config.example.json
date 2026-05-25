@@ -286,7 +286,10 @@
     "expression_repeat_threshold": 2,
     "expression_repeat_window_seconds": 20,
     "expression_repeat_include_images": true,
-    "expression_repeat_include_text": true
+    "expression_repeat_include_text": true,
+    "_st_prompts_note": "SillyTavern 风 PromptManager 配置(只影响 ST 风新模块,不影响散装 persona_prompts)。prompt_order: 列表里 identifier 按位置 (i+1)*100 排序;留空用默认 order。prompts_disabled: 单独关任一段。合法 identifier 包括: catty_daily_life / catty_world_info / catty_story_arc / catty_char_description / catty_char_personality / catty_scenario / catty_mes_example / catty_post_history",
+    "prompt_order": [],
+    "prompts_disabled": []
   },
   "social": {
     "steam": ""

@@ -396,7 +396,11 @@ class Config(BaseModel):
             raise ValueError("catty_local_critic_mode must be reply_gate_only or reply_gate_and_critic")
         return aliases[normalized]
 
-    @field_validator("catty_trigger_prefixes", "catty_directed_keywords", "catty_web_search_engines", mode="before")
+    @field_validator(
+        "catty_trigger_prefixes", "catty_directed_keywords", "catty_web_search_engines",
+        "catty_prompt_order", "catty_prompts_disabled",
+        mode="before",
+    )
     @classmethod
     def parse_prefixes(cls, value: Any) -> Any:
         if value is None:

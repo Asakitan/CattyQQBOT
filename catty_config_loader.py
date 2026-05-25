@@ -296,6 +296,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "expression_repeat_window_seconds": 20,
         "expression_repeat_include_images": True,
         "expression_repeat_include_text": True,
+        "prompt_order": [],
+        "prompts_disabled": [],
     },
     "social": {
         "steam": "",
@@ -664,6 +666,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_EXPRESSION_REPEAT_WINDOW_SECONDS", chat.get("expression_repeat_window_seconds"))
     _set_env("CATTY_EXPRESSION_REPEAT_INCLUDE_IMAGES", chat.get("expression_repeat_include_images"))
     _set_env("CATTY_EXPRESSION_REPEAT_INCLUDE_TEXT", chat.get("expression_repeat_include_text"))
+    # SillyTavern 风 PromptManager: 让主人通过 config.json 调 ST 风段顺序/单独关
+    _set_env("CATTY_PROMPT_ORDER", chat.get("prompt_order"), json_value=True)
+    _set_env("CATTY_PROMPTS_DISABLED", chat.get("prompts_disabled"), json_value=True)
 
     emoji = _section(data, "emoji")
     _set_env("CATTY_EMOJI_ENABLED", emoji.get("enabled"))

@@ -1885,44 +1885,19 @@ def _build_messages(
     history_messages = list(_get_session_cache().get(key))
     is_cold_session = len(history_messages) < HOT_SESSION_MIN_MESSAGES
 
-    # ─── Layer A: 完全稳定的人格 + 流水线，最大化 prompt cache prefix 命中 ───
+    # ─── Layer A → 全部移到 PromptManager (在 affection 之后统一注册) ───
+    # 留下 catty_system_prompt 原文(persona_memory 拿它当 base)和 reply_gate_approved 这两段散装,
+    # 其它人格/流水线/教学例句 都被 register_catty_persona() 接管。
     system_prompt = config.catty_system_prompt.strip()
-    if system_prompt:
-        messages.append({"role": "system", "content": system_prompt})
-    persona_memory = build_persona_memory_prompt(system_prompt)
-    if persona_memory:
-        messages.append({"role": "system", "content": persona_memory})
-    messages.append({"role": "system", "content": build_group_meme_literacy_prompt()})
-    messages.append({"role": "system", "content": build_conversation_flow_prompt()})
-    messages.append({"role": "system", "content": build_semantic_perception_prompt()})
-    messages.append({"role": "system", "content": build_scenario_playbook_prompt(NO_REPLY_MARKER)})
-    messages.append({"role": "system", "content": build_scene_discrimination_prompt(NO_REPLY_MARKER)})
-    messages.append({"role": "system", "content": build_reply_intelligence_prompt(NO_REPLY_MARKER)})
-    messages.append({"role": "system", "content": build_qq_chat_rhythm_prompt(REPLY_SPLIT_MARKER)})
-    if config.catty_reply_self_check_enabled:
-        messages.append(
-            {
-                "role": "system",
-                "content": build_reply_self_check_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER),
-            }
-        )
     messages.append({"role": "system", "content": _reply_gate_approved_prompt()})
 
     # ─── Layer B: function calling tools 提示常驻挂载 ───
     # web_search/nsfw_search/meme 全部走 tools 字段(OpenAI function calling),
     # 旧的 [[CATTY_WEB_SEARCH]] / [[CATTY_NSFW_SEARCH]] / <<<CATTY_MEME>>> 文本 marker 教学已废弃。
-    # emoji 还是 reply 后置 enrich,保留 EMOJI_QUERY marker 那条老路径。
     if getattr(config, "catty_tools_enabled", True):
         messages.append({"role": "system", "content": tools_system_hint()})
 
-    # ─── Layer C: 教学例句，仅冷会话挂（热会话从历史学习风格） ───
-    if config.catty_reply_style_examples_enabled and is_cold_session:
-        messages.append({"role": "system", "content": build_catgirl_examples_prompt(NO_REPLY_MARKER, REPLY_SPLIT_MARKER)})
-        messages.append({"role": "system", "content": build_disambiguation_examples_prompt(NO_REPLY_MARKER)})
-
-    # ─── Layer D: 按事件可能变 ───
-    if image_description:
-        messages.append({"role": "system", "content": build_image_literacy_prompt()})
+    # ─── Layer D: 按事件可能变(image_literacy 已迁到 register_catty_persona,这里走 has_image flag) ───
     if _force_direct_reply_enabled(event, incoming):
         messages.append({"role": "system", "content": _direct_reply_required_prompt(incoming)})
     if semantic_reply_split:
@@ -1959,40 +1934,38 @@ def _build_messages(
         _user_affection_level = int(_level)
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"affection persona_hint failed (non-fatal): {exc}")
-    # SillyTavern 风 PromptManager: 把 ST 风新模块(daily_life / world_info / story_arc)
-    # 统一注册,按 order 排序,接受 config.catty_prompt_order + catty_prompts_disabled 配置。
-    # 不替换现有 persona_prompts 散装 append(那批是 Layer A-D 走自己的逻辑)。
-    _st_manager = PromptManager()
+    # SillyTavern 风 PromptManager 全量注册: 把笨猫所有 ST 风段
+    # (main_intel / identity_anchor / char_description / personality / scenario
+    #  / persona_memory / group_meme_literacy / conversation_flow / semantic_perception
+    #  / scenario_playbook / scene_discrimination / qq_chat_rhythm / reply_self_check
+    #  / image_literacy / daily_life / world_info / story_arc / catgirl_examples
+    #  / disambiguation / mes_example / post_history) 全部统一注册按 order 排,
+    # 接受 config.catty_prompt_order + catty_prompts_disabled 配置。
+    # 老的散装 Layer A persona_prompts append 已被 register_catty_persona 接管。
     _arc_scope = _conversation_queue_key(event)
-    # story_arc 的 maybe_auto_trigger 必须在 build_story_arc_prompt 之前调,
-    # 否则当前 user_text 命中的 arc 这一轮还没注入。放在 register 之前。
     if "story_arc" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
         try:
             story_arc_store.maybe_auto_trigger(_arc_scope, incoming.text or "")
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"story_arc auto_trigger failed (non-fatal): {exc}")
-    if "daily_life" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
-        _st_manager.register(
-            "catty_daily_life",
-            content_fn=lambda: build_daily_life_prompt(_arc_scope),
-            order=200,
-        )
-    if "world_info" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
-        _st_manager.register(
-            "catty_world_info",
-            content_fn=lambda: build_world_info_block(
-                incoming.text or "", _arc_scope, position="after_char",
-                affection_level=_user_affection_level, is_owner=_user_is_owner,
-            ),
-            order=300,
-        )
-    if "story_arc" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
-        _st_manager.register(
-            "catty_story_arc",
-            content_fn=lambda: build_story_arc_prompt(story_arc_store.get_active(_arc_scope)),
-            order=350,
-        )
-    # 应用 JSON 配置覆盖(catty_prompt_order 重排, catty_prompts_disabled 单独关)
+    _st_manager = PromptManager()
+    from .prompt_manager import register_catty_persona as _register_catty_persona
+    _register_catty_persona(_st_manager, {
+        "config": config,
+        "scope": _arc_scope,
+        "user_text": incoming.text or "",
+        "user_display": "用户",  # TODO 后续从 incoming/event 拿真实昵称
+        "affection_level": _user_affection_level,
+        "is_owner": _user_is_owner,
+        "has_image": bool(image_description),
+        "story_arc_store": story_arc_store,
+        "no_reply_marker": NO_REPLY_MARKER,
+        "reply_split_marker": REPLY_SPLIT_MARKER,
+        "system_prompt": system_prompt,
+        "is_cold_session": is_cold_session,
+        "reply_self_check_enabled": bool(config.catty_reply_self_check_enabled),
+        "reply_style_examples_enabled": bool(config.catty_reply_style_examples_enabled),
+    })
     _st_manager.apply_config(
         order_override=list(getattr(config, "catty_prompt_order", None) or []),
         disabled=list(getattr(config, "catty_prompts_disabled", None) or []),
@@ -3078,7 +3051,7 @@ async def _resolve_no_reply(
 # placeholder 池拆分:通用池(任何用户)+ 主人专属池(只在 owner 触发时才抽)。
 # 通用池**严禁**含"主人"字眼,免得群友被错称为主人。
 _SLOW_REPLY_PLACEHOLDER_LINES: tuple[str, ...] = (
-    # 自称池:人家 / 奴 / 猫猫 / 笨猫 / 喵 (5 种,严禁"我")
+    # 自称池:人家 / 奴 / 猫猫 / 笨猫 / 喵 / 爪爪 (6 种,严禁"我")
     "嗯…猫猫先想想喵～(尾巴轻轻晃)",
     "唔…让人家整理一下喵～(爪爪挠头)",
     "稍等下喵～猫猫脑袋在转(转圈圈)",
@@ -3128,7 +3101,7 @@ def _placeholder_prompt(is_owner: bool) -> str:
         "你需要立刻先说一句『等等喵』类的占位话,让对方知道你看到了正在想,不要冷场。\n"
         "要求:\n"
         "1) 只输出 1 句话,8-25 字左右,**禁止**多段、禁止换行\n"
-        "2) 自称只能用『人家』『奴』『猫猫』『笨猫』『喵』这 5 种之一,**严禁**用代词『我』\n"
+        "2) 自称只能用『人家』『奴』『猫猫』『笨猫』『喵』『爪爪』这 6 种之一,**严禁**用代词『我』\n"
         f"3) {addr_rule}\n"
         "4) 必须带猫系小动作或颜文字之一:(尾巴摇)/(爪爪)/(歪头)/(脑袋转)/ฅฅ/嗷呜～/喵呜/喵～\n"
         "5) 语气活泼可爱,可以带点傲娇『哼~才不是…』『别催嘛』\n"
@@ -4211,7 +4184,7 @@ async def _generate_affection_caption(
                 f"\n【本次状态】{scene_brief}\n"
                 f"【对方身份】{_affection_owner_tag(event)}\n"
                 "\n要求:\n"
-                "1) 保持笨猫傲娇可爱人格,自称只能从 **人家 / 奴 / 猫猫 / 笨猫 / 喵** 这 5 个里选,"
+                "1) 保持笨猫傲娇可爱人格,自称只能从 **人家 / 奴 / 猫猫 / 笨猫 / 喵 / 爪爪** 这 6 个里选,"
                 "**严禁**用代词『我』,也不要裸开头『喵~...』丢自称\n"
                 "2) 主人才能叫『主人』(撒娇可加『笨蛋主人』『杂鱼主人』);非主人一律叫『你』(违反 = 严重 bug)\n"
                 "3) 1-2 句短话,带猫系动作或颜文字(蹭蹭/尾巴摇/(=^ω^=)/ฅฅ 等)\n"
@@ -4237,7 +4210,7 @@ async def _generate_affection_caption(
     text = text.replace(NO_REPLY_MARKER, "").strip()
     if not text or len(text) > 200:
         return None
-    # 第一人称『我』违反约束,降级到模板(自称池只能是 人家/奴/猫猫/笨猫/喵)
+    # 第一人称『我』违反约束,降级到模板(自称池只能是 人家/奴/猫猫/笨猫/喵/爪爪)
     if "我" in text:
         return None
     return text
@@ -4379,7 +4352,7 @@ async def _generate_legs_caption(event: MessageEvent, user_text: str) -> str:
                 f"\n【对方身份】{addr_rule}\n"
                 "现在请只生成那段正文，要求：\n"
                 "1) 保持笨猫的傲娇人格，像 QQ 现聊，嘴硬里带点心虚和被拷打后的炸毛感；\n"
-                "2) 自称只能用『人家』『奴』『猫猫』『笨猫』『喵』5 种之一,**严禁**用代词『我』；\n"
+                "2) 自称只能用『人家』『奴』『猫猫』『笨猫』『喵』『爪爪』6 种之一,**严禁**用代词『我』；\n"
                 "3) 参考这种节奏，但不要机械照抄："
                 "『才、才没专门拍很多呢！ / 也就被你们拷打到相册翻冒烟的程度……（耳朵心虚抖抖） / 库存宣布封印，别再把猫猫当腿图打印机啦喵！』；\n"
                 "4) 由你自己判断怎么断句最自然：可以 1 段，也可以拆成 2-3 段；"
