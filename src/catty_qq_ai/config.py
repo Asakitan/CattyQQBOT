@@ -307,6 +307,13 @@ class Config(BaseModel):
     # 合法值: slang / pulse / intent / entity / hints
     # 留空表示全部启用(默认推荐)。例如 ["hints"] 表示只关 hints,其它都开。
     catty_parsing_layers_disabled: list[str] = Field(default_factory=list)
+    # SillyTavern 风 PromptManager 配置(只影响 ST 风新模块: daily_life / world_info / story_arc)
+    # 列表里出现的 identifier 按 (i+1)*100 排序;不出现的保持模块默认 order。
+    # 合法值: catty_daily_life / catty_world_info / catty_story_arc
+    # 留空 → 用各模块默认 order
+    catty_prompt_order: list[str] = Field(default_factory=list)
+    # 单独关闭某段 ST 风 prompt。同上 identifier。
+    catty_prompts_disabled: list[str] = Field(default_factory=list)
     # 单次主回复最多允许的 tool 调用轮次(防止模型反复循环调 tool)
     catty_tools_max_rounds: int = 3
     # 每个 tool 结果的 in-process LRU TTL(秒);0 表示不缓存

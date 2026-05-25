@@ -74,6 +74,7 @@ from .author_note import (
 from .character_card import CATTY_CARD, build_character_card_messages, get_post_history
 from .conversation_pulse import analyze_pulse, build_pulse_context
 from .daily_life import build_daily_life_prompt
+from .prompt_manager import PromptManager
 from .world_info import build_world_info_block, find_triggered_entries
 from .entity_extractor import build_entity_context, extract_entities
 from .intent_classifier import build_intent_context, classify_intent
@@ -1926,47 +1927,45 @@ def _build_messages(
         _user_affection_level = int(_level)
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"affection persona_hint failed (non-fatal): {exc}")
-    # SillyTavern 风「角色 scenario / 今日状态」: 每个 scope 每天一个确定性 mood,
-    # 让笨猫有「自己的生活」(不同群不同天不一样,同 scope 一天内一致)。
-    # 类比 ST 的 charPersonality+scenario:角色当前正在做什么、刚才发生了什么、心情底色。
-    if "daily_life" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
-        try:
-            _daily_life_prompt = build_daily_life_prompt(_conversation_queue_key(event))
-            if _daily_life_prompt:
-                messages.append({"role": "system", "content": _daily_life_prompt})
-        except Exception as exc:  # noqa: BLE001
-            logger.debug(f"daily_life prompt failed (non-fatal): {exc}")
-    # SillyTavern 风 World Info (after_char position): 关键词触发的 scenario 注入。
-    # 命中「考试/失眠/想你/生日/...」时给笨猫一段预设的反应模板,既稳定又有「角色感」。
-    # 每条 entry 有 cooldown,不会同 scope 短期反复触发。
-    # 传 affection_level + is_owner: 让暧昧/NSFW entry 按好感度走不同模板(陌生人冷处理,熟人走反差链)。
-    if "world_info" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
-        try:
-            _world_info_after = build_world_info_block(
-                incoming.text or "",
-                _conversation_queue_key(event),
-                position="after_char",
-                affection_level=_user_affection_level,
-                is_owner=_user_is_owner,
-            )
-            if _world_info_after:
-                messages.append({"role": "system", "content": _world_info_after})
-        except Exception as exc:  # noqa: BLE001
-            logger.debug(f"world_info after_char failed (non-fatal): {exc}")
-    # SillyTavern 风「story arc」: per-scope 多小时滚动故事线,让笨猫能跨条消息追同一话题。
-    # 比 world_info 单次反应更连贯(『刚才主人说要画图怎么样啦?』『还在加班吗?』)。
-    # 先扫用户当前消息触发自动 arc(关键词:生病/出差/分手/考完了/...),
-    # 再把所有 active arc 注入 prompt。
+    # SillyTavern 风 PromptManager: 把 ST 风新模块(daily_life / world_info / story_arc)
+    # 统一注册,按 order 排序,接受 config.catty_prompt_order + catty_prompts_disabled 配置。
+    # 不替换现有 persona_prompts 散装 append(那批是 Layer A-D 走自己的逻辑)。
+    _st_manager = PromptManager()
+    _arc_scope = _conversation_queue_key(event)
+    # story_arc 的 maybe_auto_trigger 必须在 build_story_arc_prompt 之前调,
+    # 否则当前 user_text 命中的 arc 这一轮还没注入。放在 register 之前。
     if "story_arc" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
         try:
-            _arc_scope = _conversation_queue_key(event)
             story_arc_store.maybe_auto_trigger(_arc_scope, incoming.text or "")
-            _active_arcs = story_arc_store.get_active(_arc_scope)
-            _arc_prompt = build_story_arc_prompt(_active_arcs)
-            if _arc_prompt:
-                messages.append({"role": "system", "content": _arc_prompt})
         except Exception as exc:  # noqa: BLE001
-            logger.debug(f"story_arc inject failed (non-fatal): {exc}")
+            logger.debug(f"story_arc auto_trigger failed (non-fatal): {exc}")
+    if "daily_life" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
+        _st_manager.register(
+            "catty_daily_life",
+            content_fn=lambda: build_daily_life_prompt(_arc_scope),
+            order=200,
+        )
+    if "world_info" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
+        _st_manager.register(
+            "catty_world_info",
+            content_fn=lambda: build_world_info_block(
+                incoming.text or "", _arc_scope, position="after_char",
+                affection_level=_user_affection_level, is_owner=_user_is_owner,
+            ),
+            order=300,
+        )
+    if "story_arc" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
+        _st_manager.register(
+            "catty_story_arc",
+            content_fn=lambda: build_story_arc_prompt(story_arc_store.get_active(_arc_scope)),
+            order=350,
+        )
+    # 应用 JSON 配置覆盖(catty_prompt_order 重排, catty_prompts_disabled 单独关)
+    _st_manager.apply_config(
+        order_override=list(getattr(config, "catty_prompt_order", None) or []),
+        disabled=list(getattr(config, "catty_prompts_disabled", None) or []),
+    )
+    messages.extend(_st_manager.build_messages())
     if web_search_context:
         messages.append({"role": "system", "content": web_search_context})
     if star_resonance_context:
@@ -2136,6 +2135,48 @@ def _is_signin_request(text: str) -> bool:
 
 def _is_points_query_request(text: str) -> bool:
     return _compact_text(text) in _POINTS_QUERY_KEYWORDS
+
+
+# 主人收藏表情命令:支持 "收藏" / "收藏这个" / "存表情" / "加表情库" 等开头,
+# 后面可选跟 tag(空格或#分隔)。例:
+#   "收藏"                → 拿图,AI 生成 tag
+#   "收藏 开心 喵呜"      → tag=["开心","喵呜"]
+#   "收藏#开心#无奈"     → tag=["开心","无奈"]
+#   "存表情 大笑"         → tag=["大笑"]
+_EMOJI_SAVE_PREFIXES: tuple[str, ...] = (
+    "收藏表情", "收藏这个表情", "收藏这个", "收藏图", "收藏",
+    "存表情", "存这个表情", "存这个", "存图",
+    "加表情", "加表情库", "入库",
+    "/saveemoji", "/saveemoji ", "/emoji ",
+)
+
+
+def _parse_emoji_save_request(text: str) -> tuple[bool, list[str]]:
+    """识别主人收藏表情命令。返回 (是否命中, tag 列表)。
+    命中条件:文本以收藏前缀开头(剥除空白/标点),后面接空白/分隔符或字符串结束。
+    """
+    stripped = text.strip()
+    if not stripped:
+        return False, []
+    # 按长度倒序匹配避免 "收藏" 提前命中 "收藏表情"
+    sorted_prefixes = sorted(_EMOJI_SAVE_PREFIXES, key=len, reverse=True)
+    matched_prefix = ""
+    for prefix in sorted_prefixes:
+        if stripped == prefix or stripped.startswith(prefix):
+            # 确保 prefix 后是空白/标点/字符串末尾(避免"收藏夹"误命中)
+            tail = stripped[len(prefix):]
+            if not tail or tail[0] in " 　\t,，.。:：;；#":
+                matched_prefix = prefix
+                break
+    if not matched_prefix:
+        return False, []
+    rest = stripped[len(matched_prefix):].strip(" 　\t,，.。:：;；")
+    if not rest:
+        return True, []
+    # 拆 tag:空格/逗号/#/分号 全可
+    raw_tags = re.split(r"[\s,，;；#]+", rest)
+    tags = [t.strip().lower() for t in raw_tags if t.strip()]
+    return True, tags
 
 
 def _is_memory_view_request(text: str) -> bool:
@@ -3650,6 +3691,20 @@ async def _keyword_reply_rule(bot: Bot, event: MessageEvent, state: T_State) -> 
     return True
 
 
+async def _emoji_save_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    """主人收藏表情命令:只有 catty_owner_qq 能触发,文本以收藏前缀开头。"""
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    if not _event_is_owner(event):
+        return False
+    text = event_plain_text(event)
+    matched, tags = _parse_emoji_save_request(text)
+    if not matched:
+        return False
+    state["catty_emoji_save_tags"] = tags
+    return True
+
+
 async def _affection_command_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     """匹配 签到 / 我的积分 / 好感度查询 这类命令,在主回复 AI 之前短路掉。
 
@@ -3719,6 +3774,7 @@ async def _legs_picture_rule(bot: Bot, event: MessageEvent, state: T_State) -> b
 
 
 keyword_reply_matcher = on_message(rule=_keyword_reply_rule, priority=40, block=True)
+emoji_save_matcher = on_message(rule=_emoji_save_rule, priority=41, block=True)
 affection_command_matcher = on_message(rule=_affection_command_rule, priority=42, block=True)
 legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
@@ -3837,6 +3893,149 @@ async def handle_keyword_reply(matcher: Matcher, event: MessageEvent, state: T_S
                 text=reply,
                 quote=isinstance(event, GroupMessageEvent),
             )
+        )
+
+
+async def _extract_reply_image_urls(bot: Bot, event: MessageEvent) -> list[str]:
+    """从主人引用的消息里抽 image URL(走 OneBot get_msg)。失败/无图返回空。"""
+    urls: list[str] = []
+    for message_id in reply_message_ids(event):
+        try:
+            msg = await bot.get_msg(message_id=_coerce_message_id(message_id))
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"emoji_save: get_msg({message_id}) failed: {exc}")
+            continue
+        # msg 可能是 dict 或 Message 对象;统一遍历 segments
+        segments_raw = msg.get("message") if isinstance(msg, dict) else getattr(msg, "message", None)
+        if isinstance(segments_raw, str):
+            # 极少数 OneBot 返回 raw text,不含图,放弃
+            continue
+        if segments_raw is None:
+            continue
+        for seg in segments_raw:
+            seg_type = (seg.get("type") if isinstance(seg, dict) else getattr(seg, "type", "")) or ""
+            if seg_type not in {"image", "mface"}:
+                continue
+            data = seg.get("data") if isinstance(seg, dict) else getattr(seg, "data", {}) or {}
+            url = str(data.get("url") or "").strip()
+            if url:
+                urls.append(url)
+    return urls
+
+
+async def _generate_emoji_tags_via_vision(image_url: str, hint: str = "") -> tuple[str, list[str]]:
+    """对一张图调 vision AI 生成 (meaning, tags) — 给"主人留空 tag 自动收藏"用。
+    失败时返回 ("主人收藏", ["主人收藏"]) 兜底。
+    """
+    if not (config.catty_vision_api_key.strip() or _has_api_key()):
+        return "主人收藏的表情", ["主人收藏"]
+    try:
+        analysis = await analyze_images_for_reply(
+            config,
+            [image_url],
+            (
+                "主人要把这张图收藏成 QQ 聊天表情包。请只输出 JSON:"
+                '{"emotion_tags":[最多 5 个中文标签],"emoji_query":"一句话场景"}。'
+                f"参考信息:{hint[:120]}" if hint else ""
+            ),
+        )
+    except (OpenAICompatibleError, httpx.HTTPError, OSError) as exc:
+        logger.warning(f"emoji_save vision tag gen failed: {exc}")
+        return "主人收藏的表情", ["主人收藏"]
+    raw_tags = analysis.get("emotion_tags") if isinstance(analysis, dict) else None
+    tags: list[str] = []
+    if isinstance(raw_tags, list):
+        for t in raw_tags:
+            tag = str(t).strip().lower()
+            if tag and tag not in tags:
+                tags.append(tag)
+    eq = str((analysis or {}).get("emoji_query") or (analysis or {}).get("expression") or "").strip()
+    if eq and eq.lower() not in tags:
+        tags.insert(0, eq.lower())
+    meaning = eq or (" ".join(tags[:3]) if tags else "主人收藏的表情")
+    if not tags:
+        tags = ["主人收藏"]
+    return meaning, tags[:6]
+
+
+@emoji_save_matcher.handle()
+async def handle_emoji_save(
+    bot: Bot, matcher: Matcher, event: MessageEvent, state: T_State
+) -> None:
+    # rule 已经 guard 主人,这里再防御一次
+    if not _event_is_owner(event):
+        return
+    user_tags: list[str] = list(state.get("catty_emoji_save_tags") or [])
+
+    async with _locks[_conversation_queue_key(event)]:
+        # 图源优先级: (1) 本条消息附图 → (2) 引用消息附图 → (3) 最近 5min 群图
+        image_urls = extract_image_urls(event)
+        source = "self"
+        if not image_urls:
+            image_urls = await _extract_reply_image_urls(bot, event)
+            source = "reply"
+        if not image_urls:
+            image_urls = _recent_image_urls_for_scope(_conversation_queue_key(event))
+            source = "recent"
+        if not image_urls:
+            await matcher.finish(Message(
+                "喵呜~ 人家没找到要收藏的图嗷呜!主人可以:\n"
+                "1) 发图+『收藏』\n2) 引用一条带图消息+『收藏』\n"
+                "3) 上条群消息有图,直接发『收藏』也行\n"
+                "tag 可以跟在后面(『收藏 开心 喵呜』),留空奴会自己看图取 tag ฅฅ"
+            ))
+
+        url = image_urls[0]
+        # 下载图
+        try:
+            image_data, content_type = await download_binary(config, url)
+        except (httpx.HTTPError, OSError) as exc:
+            logger.warning(f"emoji_save download failed url={url[:80]}: {exc}")
+            await matcher.finish(Message(f"喵呜~ 图下不下来嗷呜({exc.__class__.__name__}),主人换张图再试 ฅฅ"))
+        if content_type and not content_type.lower().startswith("image/"):
+            await matcher.finish(Message("喵呜~ 这个 URL 不是图片嗷呜,主人换一张吧 ฅฅ"))
+
+        # tag 处理:主人给了用主人的;没给跑 vision 自动生
+        auto_generated = False
+        if user_tags:
+            tags = user_tags
+            meaning = " ".join(user_tags[:3])[:50] or "主人收藏的表情"
+        else:
+            meaning, tags = await _generate_emoji_tags_via_vision(
+                url, hint=event_plain_text(event)[:60]
+            )
+            auto_generated = True
+
+        # 存表情库
+        try:
+            entry = emoji_store.save_downloaded(
+                image_data=image_data,
+                content_type=content_type,
+                source_url=url,
+                meaning=meaning,
+                tags=tags,
+                interest=100,  # 主人钦点 = 最高优先级
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"emoji_save save_downloaded failed: {exc}")
+            await matcher.finish(Message(f"喵呜~ 存表情库失败嗷呜({exc.__class__.__name__}),主人查下日志 ฅฅ"))
+
+        if entry is None:
+            await matcher.finish(Message("喵呜~ emoji_store 没启用或返回空嗷呜!主人检查下配置 ฅฅ"))
+
+        tags_str = " / ".join(tags[:6]) if tags else "(无)"
+        gen_hint = "(奴自己看图生成的标签)" if auto_generated else "(主人钦定的标签)"
+        src_hint = {"self": "主人本条消息", "reply": "引用消息", "recent": "最近群图"}.get(source, source)
+        reply = (
+            f"喵~ 已收藏到表情库啦!ฅฅ\n"
+            f"图源:{src_hint}\n"
+            f"标签:{tags_str} {gen_hint}\n"
+            f"含义:{meaning[:40]}\n"
+            f"文件:{entry.path.name}"
+        )
+        _remember_bot_reply_for_event(event, reply)
+        await matcher.finish(
+            _compose_reply_message(event, text=reply, quote=isinstance(event, GroupMessageEvent))
         )
 
 
