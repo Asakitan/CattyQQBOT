@@ -17,6 +17,7 @@ from nonebot.adapters.onebot.v11 import GroupMessageEvent, PokeNotifyEvent, Priv
 from nonebot.adapters.onebot.v11 import Bot, Message, MessageEvent, MessageSegment, NoticeEvent
 from nonebot.adapters.onebot.v11.exception import ActionFailed as OnebotActionFailed
 from nonebot.adapters.onebot.v11.exception import NetworkError as OnebotNetworkError
+from nonebot.exception import FinishedException
 from nonebot.matcher import Matcher
 from nonebot.plugin import PluginMetadata
 from nonebot.typing import T_State
@@ -3818,6 +3819,18 @@ async def _keyword_reply_rule(bot: Bot, event: MessageEvent, state: T_State) -> 
 
 
 _VIBE_CMD_RE = re.compile(r"^\s*/?(vibe_show|vibe_reset)(?:\s+(\d{4,12}))?\s*$", re.IGNORECASE)
+# 主人 only 的 affection 管理命令: 改别人的签到/积分/经验状态。
+#   /aff_show <qq>             查概况
+#   /aff_reset_signin <qq>     重置某用户"今日已签到"标记(让他能再签一次)
+#   /aff_set_points <qq> <n>   设积分
+#   /aff_add_points <qq> <n>   加(可负)积分
+#   /aff_set_exp <qq> <n>      设好感度经验
+#   /aff_reset <qq>            整条记录归零
+_AFF_ADMIN_RE = re.compile(
+    r"^\s*/?(aff_show|aff_reset_signin|aff_set_points|aff_add_points|aff_set_exp|aff_reset)"
+    r"(?:\s+(\d{4,12}))?(?:\s+(-?\d+))?\s*$",
+    re.IGNORECASE,
+)
 
 
 async def _vibe_command_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
@@ -3837,6 +3850,24 @@ async def _vibe_command_rule(bot: Bot, event: MessageEvent, state: T_State) -> b
         return False
     state["catty_vibe_cmd"] = match.group(1).lower()
     state["catty_vibe_qq"] = (match.group(2) or "").strip()
+    return True
+
+
+async def _aff_admin_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    """主人 only 的 affection 管理命令路由。"""
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    if not _event_is_owner(event):
+        return False
+    text = event_plain_text(event)
+    if not text:
+        return False
+    match = _AFF_ADMIN_RE.match(text)
+    if not match:
+        return False
+    state["catty_aff_admin_cmd"] = match.group(1).lower()
+    state["catty_aff_admin_qq"] = (match.group(2) or "").strip()
+    state["catty_aff_admin_num"] = (match.group(3) or "").strip()
     return True
 
 
@@ -3926,6 +3957,7 @@ keyword_reply_matcher = on_message(rule=_keyword_reply_rule, priority=40, block=
 emoji_save_matcher = on_message(rule=_emoji_save_rule, priority=41, block=True)
 affection_command_matcher = on_message(rule=_affection_command_rule, priority=42, block=True)
 vibe_command_matcher = on_message(rule=_vibe_command_rule, priority=43, block=True)
+aff_admin_matcher = on_message(rule=_aff_admin_rule, priority=44, block=True)
 legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
 expression_repeat_matcher = on_message(rule=_expression_repeat_rule, priority=50, block=True)
@@ -4159,6 +4191,88 @@ async def handle_vibe_command(matcher: Matcher, event: MessageEvent, state: T_St
             await matcher.finish(Message(
                 f"喵呜~ QQ:{target_qq} 本来就没画像哦,不用 reset 啦~"
             ))
+
+
+@aff_admin_matcher.handle()
+async def handle_aff_admin(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    """主人专属:管理任意用户的签到/积分/经验状态。"""
+    if not _event_is_owner(event):
+        return
+    cmd = str(state.get("catty_aff_admin_cmd") or "")
+    target_qq = str(state.get("catty_aff_admin_qq") or "").strip()
+    num_raw = str(state.get("catty_aff_admin_num") or "").strip()
+
+    if not target_qq:
+        await matcher.finish(Message(
+            "杂鱼主人~ 要指定 QQ 号嗷呜!例:`/aff_show 123456` ฅฅ"
+        ))
+
+    needs_num = cmd in ("aff_set_points", "aff_add_points", "aff_set_exp")
+    if needs_num and not num_raw:
+        await matcher.finish(Message(
+            f"哼~ `{cmd}` 要带数值嗷呜!例:`/{cmd} {target_qq} 100` ฅฅ"
+        ))
+
+    try:
+        if cmd == "aff_show":
+            summary = affection_store.summary(target_qq)
+            if summary.get("is_owner"):
+                await matcher.finish(Message(
+                    f"喵~ QQ:{target_qq} 是主人本人啦,积分无限、等级 MAX,人家管不动主人嗷呜 ฅฅ"
+                ))
+            lines = [
+                f"喵~ QQ:{target_qq} 的小账本 ฅฅ",
+                f"  · 积分: {summary.get('points', 0)}",
+                f"  · 等级: Lv{summary.get('level', 1)} (exp {summary.get('exp', 0)})",
+                f"  · 上次签到: {summary.get('last_checkin_date') or '从没'} ({summary.get('last_checkin_amount', 0)} 分)",
+                f"  · 累计签到: {summary.get('total_checkins', 0)} 次",
+                f"  · 累计消费: {summary.get('total_consumed', 0)}",
+            ]
+            await matcher.finish(Message("\n".join(lines)))
+
+        elif cmd == "aff_reset_signin":
+            res = affection_store.admin_reset_signin_today(target_qq)
+            if res.get("was_signed_today"):
+                await matcher.finish(Message(
+                    f"喵~ QQ:{target_qq} 今天的签到记录被笨猫擦掉啦,他可以再签一次嗷呜 ฅฅ"
+                ))
+            await matcher.finish(Message(
+                f"哼~ QQ:{target_qq} 今天本来就没签过,不用重置啦 ฅฅ"
+            ))
+
+        elif cmd == "aff_set_points":
+            res = affection_store.admin_set_points(target_qq, int(num_raw))
+            await matcher.finish(Message(
+                f"喵~ QQ:{target_qq} 的积分被笨猫从 {res['points_before']} 改成 {res['points_after']} 啦 ฅฅ"
+            ))
+
+        elif cmd == "aff_add_points":
+            res = affection_store.admin_add_points(target_qq, int(num_raw))
+            sign = "+" if res["delta"] >= 0 else ""
+            await matcher.finish(Message(
+                f"喵~ QQ:{target_qq} 积分 {sign}{res['delta']},现在 {res['points_after']} 嗷呜 ฅฅ"
+            ))
+
+        elif cmd == "aff_set_exp":
+            res = affection_store.admin_set_exp(target_qq, int(num_raw))
+            await matcher.finish(Message(
+                f"喵~ QQ:{target_qq} 好感度 exp {res['exp_before']}→{res['exp_after']}, "
+                f"等级 Lv{res['level_before']}→Lv{res['level_after']} ฅฅ"
+            ))
+
+        elif cmd == "aff_reset":
+            res = affection_store.admin_reset_record(target_qq)
+            if res.get("existed"):
+                await matcher.finish(Message(
+                    f"哼~ QQ:{target_qq} 的整本账被笨猫撕掉啦,从零开始喵 ฅฅ"
+                ))
+            await matcher.finish(Message(
+                f"喵呜~ QQ:{target_qq} 本来就没记录,不用重置啦 ฅฅ"
+            ))
+    except FinishedException:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        await matcher.finish(Message(f"喵呜~ 笨猫执行失败嗷呜: {exc}"))
 
 
 @emoji_save_matcher.handle()

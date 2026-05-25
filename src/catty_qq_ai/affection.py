@@ -17,7 +17,7 @@
 - get_points 永远返回 OWNER_INFINITY_POINTS
 - consume_points 永远成功且不真正扣
 - get_level_and_exp 永远返回 (LEVEL_CAP, exp)
-- 签到也允许,但实际不影响余额(只刷下 last_checkin 留档)
+- 签到不受"今日已签"限制(可反复签),余额本来就无限,只刷 last_checkin 留档
 """
 from __future__ import annotations
 
@@ -235,8 +235,9 @@ class AffectionStore:
         with self._lock:
             rec = self._record(uid)
             last = str(rec.get("last_checkin_date") or "")
-            if last == today:
-                level = LEVEL_CAP if self.is_owner(uid) else _level_from_exp(int(rec.get("exp") or 0))
+            # 主人豁免每日一次限制,可反复签;普通用户仍只能一次
+            if last == today and not self.is_owner(uid):
+                level = _level_from_exp(int(rec.get("exp") or 0))
                 return {
                     "success": False,
                     "already": True,
@@ -356,6 +357,71 @@ class AffectionStore:
                 "balance_after": new_balance,
                 "cost": cost,
             }
+
+    # ── 主人管理接口:命令调用,不对普通用户路径开放 ────────────────
+    def admin_reset_signin_today(self, user_id: str | int) -> dict[str, Any]:
+        """清掉某用户的"今日已签到"标记,让他可以再签一次。"""
+        uid = str(user_id)
+        with self._lock:
+            rec = self._record(uid)
+            had = str(rec.get("last_checkin_date") or "") == _today_local()
+            rec["last_checkin_date"] = ""
+            rec["updated_at"] = _now_iso()
+            self._dirty = True
+        return {"ok": True, "user_id": uid, "was_signed_today": had}
+
+    def admin_set_points(self, user_id: str | int, value: int) -> dict[str, Any]:
+        """直接把某用户积分设成 value(>=0)。主人本身不受影响(永远无限)。"""
+        uid = str(user_id)
+        new_val = max(int(value), 0)
+        with self._lock:
+            rec = self._record(uid)
+            old = int(rec.get("points") or 0)
+            rec["points"] = new_val
+            rec["updated_at"] = _now_iso()
+            self._dirty = True
+        return {"ok": True, "user_id": uid, "points_before": old, "points_after": new_val}
+
+    def admin_add_points(self, user_id: str | int, delta: int) -> dict[str, Any]:
+        """给某用户加(或减)积分。结果 clamp 到 [0, +∞)。"""
+        uid = str(user_id)
+        with self._lock:
+            rec = self._record(uid)
+            old = int(rec.get("points") or 0)
+            new_val = max(old + int(delta), 0)
+            rec["points"] = new_val
+            rec["updated_at"] = _now_iso()
+            self._dirty = True
+        return {"ok": True, "user_id": uid, "points_before": old, "points_after": new_val, "delta": new_val - old}
+
+    def admin_set_exp(self, user_id: str | int, value: int) -> dict[str, Any]:
+        """直接把某用户好感度经验设成 value(>=0),会触发等级重算。"""
+        uid = str(user_id)
+        new_val = max(int(value), 0)
+        with self._lock:
+            rec = self._record(uid)
+            old = int(rec.get("exp") or 0)
+            rec["exp"] = new_val
+            rec["updated_at"] = _now_iso()
+            self._dirty = True
+        return {
+            "ok": True,
+            "user_id": uid,
+            "exp_before": old,
+            "exp_after": new_val,
+            "level_before": _level_from_exp(old),
+            "level_after": _level_from_exp(new_val),
+        }
+
+    def admin_reset_record(self, user_id: str | int) -> dict[str, Any]:
+        """整条记录清空(积分/经验/签到/消费 全归零)。主人本人调这个无意义,因为他永远无限。"""
+        uid = str(user_id)
+        with self._lock:
+            existed = uid in self._data
+            self._data.pop(uid, None)
+            if existed:
+                self._dirty = True
+        return {"ok": True, "user_id": uid, "existed": existed}
 
     # ── persona prompt 注入辅助 ───────────────────────────────────
     def persona_hint(self, user_id: str | int) -> str:
