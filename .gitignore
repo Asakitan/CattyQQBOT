@@ -27,3 +27,4 @@ backup/
 .sync_tmp/
 .claude/
 pictures/
+AGENTS.md
