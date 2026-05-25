@@ -65,6 +65,8 @@ from .openai_client import (
 )
 from .action_hints import build_action_hints
 from .conversation_pulse import analyze_pulse, build_pulse_context
+from .daily_life import build_daily_life_prompt
+from .world_info import build_world_info_block, find_triggered_entries
 from .entity_extractor import build_entity_context, extract_entities
 from .intent_classifier import build_intent_context, classify_intent
 from .parsers import strip_catty_markers as _strip_catty_markers
@@ -1892,6 +1894,30 @@ def _build_messages(
             messages.append({"role": "system", "content": affection_hint})
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"affection persona_hint failed (non-fatal): {exc}")
+    # SillyTavern 风「角色 scenario / 今日状态」: 每个 scope 每天一个确定性 mood,
+    # 让笨猫有「自己的生活」(不同群不同天不一样,同 scope 一天内一致)。
+    # 类比 ST 的 charPersonality+scenario:角色当前正在做什么、刚才发生了什么、心情底色。
+    if "daily_life" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
+        try:
+            _daily_life_prompt = build_daily_life_prompt(_conversation_queue_key(event))
+            if _daily_life_prompt:
+                messages.append({"role": "system", "content": _daily_life_prompt})
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"daily_life prompt failed (non-fatal): {exc}")
+    # SillyTavern 风 World Info (after_char position): 关键词触发的 scenario 注入。
+    # 命中「考试/失眠/想你/生日/...」时给笨猫一段预设的反应模板,既稳定又有「角色感」。
+    # 每条 entry 有 cooldown,不会同 scope 短期反复触发。
+    if "world_info" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
+        try:
+            _world_info_after = build_world_info_block(
+                incoming.text or "",
+                _conversation_queue_key(event),
+                position="after_char",
+            )
+            if _world_info_after:
+                messages.append({"role": "system", "content": _world_info_after})
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"world_info after_char failed (non-fatal): {exc}")
     if web_search_context:
         messages.append({"role": "system", "content": web_search_context})
     if star_resonance_context:
