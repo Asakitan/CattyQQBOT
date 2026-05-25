@@ -44,9 +44,11 @@ from .message_utils import (
 )
 from .affection import (
     AffectionStore,
+    LEVEL_CAP,
     image_cost_for_quality,
     predict_checkin_range,
 )
+from .affection_card import prune_cards as _prune_affection_cards, render_card_to_file as _render_affection_card
 from .emoji_store import EmojiEntry, EmojiStore
 from .legs_picker import LegsPicker, is_legs_trigger, random_legs_reply
 from .memory import MemoryStore
@@ -3644,74 +3646,80 @@ async def handle_keyword_reply(matcher: Matcher, event: MessageEvent, state: T_S
         )
 
 
-def _format_signin_reply(event: MessageEvent, result: dict) -> str:
-    is_owner = bool(result.get("is_owner"))
-    if result.get("already"):
-        bal = result.get("balance", 0)
-        last_amt = result.get("last_amount", 0)
-        if is_owner:
-            return (
-                "哼,主人你今天已经签过啦~ 人家给主人留的是无限积分啦笨蛋,"
-                "随便画图都不会少的喵 (尾巴摇摇) ฅฅ"
-            )
-        return (
-            f"嗷呜~ 今天已经签过啦笨蛋!上次拿了 {last_amt} 分,目前余额 {bal} 分。"
-            f"明天再来才有的领喵~ ฅฅ"
-        )
-    gained = int(result.get("gained", 0))
-    level = int(result.get("level", 1))
-    bonus = int(result.get("bonus", 0))
-    base = int(result.get("base", 0))
-    if is_owner:
-        return (
-            f"哼~ 主人签到啦!今天加成 +{bonus},总共 {gained} 分(本来就是无限啦笨蛋)~"
-            f" 人家专门给主人留了 Lv MAX 待遇喵 ฅฅ"
-        )
-    bal = int(result.get("balance", 0))
-    # 给一个亲昵度档位提示
-    if level >= 8:
-        tone = "今天也最喜欢你啦~ 蹭蹭"
-    elif level >= 5:
-        tone = "和你越来越熟啦~"
-    elif level >= 3:
-        tone = "继续多来陪人家聊天嘛~"
-    else:
-        tone = "新人也加油签到吧喵~"
-    return (
-        f"喵~ 签到成功啦!基础 {base} + 好感加成 {bonus} = 今天领到 {gained} 分,"
-        f"当前余额 {bal} 分。好感等级 Lv{level}/10。{tone} ฅฅ"
-    )
-
-
-def _format_points_query_reply(event: MessageEvent, summary: dict) -> str:
-    if summary.get("is_owner"):
-        return (
-            "主人的积分是 ∞(无限啦笨蛋),好感等级 Lv MAX。"
-            "随便画图都不会扣的喵~ 人家可是最听主人话的笨猫 ฅฅ"
-        )
-    pts = int(summary.get("points", 0))
-    level = int(summary.get("level", 1))
-    exp = int(summary.get("exp", 0))
-    to_next = int(summary.get("exp_to_next_level", 0))
-    last_date = str(summary.get("last_checkin_date", "") or "")
-    lo, hi = summary.get("checkin_range_today", (0, 0))
-    today_status = (
-        f"今天已签到啦(发『签到』也只能拿一次喵)" if last_date == _today_local_str() else
-        f"今天还没签到~ 现在签能拿 {lo}-{hi} 分,快发『签到』喵!"
-    )
-    next_line = (
-        f"再攒 {to_next} 好感度能升 Lv{level+1}~" if level < 10 else "已经满级啦超厉害!"
-    )
-    return (
-        f"喵~ 当前余额 {pts} 分,好感等级 Lv{level}/10 (经验 {exp})。{next_line}\n"
-        f"画图消耗:low=20 / medium=50 / high=100。\n"
-        f"{today_status}"
-    )
-
-
 def _today_local_str() -> str:
     from datetime import date as _date
     return _date.today().isoformat()
+
+
+def _affection_caption_signin(result: dict) -> str:
+    """签到短文案,卡片承担数字展示;这里只给猫娘 1-2 句口吻。"""
+    is_owner = bool(result.get("is_owner"))
+    if result.get("already"):
+        if is_owner:
+            return "哼~ 主人今天已经签过啦笨蛋,反正是无限积分嘛 (尾巴摇摇) ฅฅ"
+        return "嗷呜~ 今天已经签过啦!明天再来才有的领喵~ ฅฅ"
+    if is_owner:
+        return "喵~ 主人签到啦!卡卡奉上嗷呜~ (=^ω^=) ฅฅ"
+    level = int(result.get("level", 1))
+    if level >= 8:
+        return "签到完成啦~ 今天也最喜欢你啦,蹭蹭 ฅฅ"
+    if level >= 5:
+        return "签到完成嗷呜~ 和你越来越熟啦,继续聊聊嘛 ฅฅ"
+    if level >= 3:
+        return "签到啦~ 多来陪人家说说话嘛,好感会涨的喵~ ฅฅ"
+    return "签到成功喵!新人也加油攒积分嗷呜~ ฅฅ"
+
+
+def _affection_caption_summary(summary: dict) -> str:
+    """积分查询短文案。"""
+    if summary.get("is_owner"):
+        return "喵~ 这是主人的卡卡哦,积分∞、Lv MAX (=^ω^=) ฅฅ"
+    last_date = str(summary.get("last_checkin_date", "") or "")
+    if last_date != _today_local_str():
+        return "喵~ 这是主人的积分卡!今天还没签到呢,发『签到』来领分嗷呜~ ฅฅ"
+    return "喵~ 这是主人的卡卡,看下今天的状态嘛 ฅฅ"
+
+
+def _send_affection_card(
+    event: MessageEvent,
+    *,
+    mode: str,
+    summary: dict,
+    today_gained: int | None = None,
+) -> "MessageSegment | None":
+    """根据 summary 渲染像素卡并返回 image segment。失败 (PIL/写盘问题) 返回 None。"""
+    user_id = str(event.user_id)
+    is_owner = bool(summary.get("is_owner"))
+    level = int(summary.get("level", 1))
+    points = int(summary.get("points", 0))
+    exp = int(summary.get("exp", 0))
+    next_lv_at = summary.get("next_level_at_exp")
+    exp_next = int(next_lv_at) if isinstance(next_lv_at, int) else None
+    checked_in = bool(summary.get("last_checkin_date") == _today_local_str())
+    title = "OWNER CARD" if is_owner else "CATTY CARD"
+    try:
+        out_path = _render_affection_card(
+            output_dir=Path("pictures/affection_cards"),
+            user_id=user_id,
+            title=title,
+            level=level,
+            points=points,
+            exp_current=exp,
+            exp_next_level=exp_next,
+            is_owner=is_owner,
+            checked_in_today=checked_in,
+            last_amount=int(summary.get("last_checkin_amount") or 0),
+            today_gained=today_gained,
+            mode=mode,
+        )
+        try:
+            _prune_affection_cards(Path("pictures/affection_cards"), max_files=200)
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"affection_card prune failed (non-fatal): {exc}")
+        return MessageSegment.image(file=out_path.resolve().as_uri())
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"affection_card render failed: {exc}")
+        return None
 
 
 @affection_command_matcher.handle()
@@ -3719,22 +3727,36 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
     cmd = str(state.get("catty_affection_cmd") or "")
     user_id = str(event.user_id)
     async with _locks[_conversation_queue_key(event)]:
+        today_gained: int | None = None
         if cmd == "signin":
             result = affection_store.daily_checkin(user_id)
-            reply = _format_signin_reply(event, result)
+            caption = _affection_caption_signin(result)
+            # 签到成功时把当次金额传给卡片底栏
+            if result.get("success") and not result.get("already"):
+                today_gained = int(result.get("gained") or 0)
+            summary = affection_store.summary(user_id)
+            card_mode = "signin" if today_gained is not None else "summary"
+            image_segment = _send_affection_card(
+                event, mode=card_mode, summary=summary, today_gained=today_gained,
+            )
         elif cmd == "points":
             summary = affection_store.summary(user_id)
-            reply = _format_points_query_reply(event, summary)
+            caption = _affection_caption_summary(summary)
+            image_segment = _send_affection_card(
+                event, mode="summary", summary=summary,
+            )
         else:
             return
-        _remember_bot_reply_for_event(event, reply)
-        await matcher.finish(
-            _compose_reply_message(
-                event,
-                text=reply,
-                quote=isinstance(event, GroupMessageEvent),
-            )
+
+        _remember_bot_reply_for_event(event, caption)
+
+        # 组装消息: 文本 caption + 像素卡片;图渲染失败就退化只发文本
+        msg = _compose_reply_message(
+            event, text=caption, quote=isinstance(event, GroupMessageEvent),
         )
+        if image_segment is not None:
+            msg = msg + image_segment
+        await matcher.finish(msg)
 
 
 async def _generate_legs_caption(user_text: str) -> str:
