@@ -71,6 +71,7 @@ from .openai_client import (
 from .action_hints import build_action_hints
 from .author_note import (
     AuthorNote,
+    build_adaptive_drift_note,
     build_relationship_author_note,
     default_persona_drift_note,
     inject_author_note,
@@ -5889,6 +5890,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         # 比顶部 system prompt 更抗稀释(长对话里顶部容易被遗忘),比 jailbreak 更灵活(可以放在 user 当前消息之前但不是最末)。
         # 1) 关系亲密度 author's note (depth=3): 主人/挚友/陌生 各有一条不同的贴身提醒
         # 2) 默认人设防漂移 author's note (depth=4): 防长对话脱设
+        # 3) 适应口吻 adaptive drift (depth=2): 拿最近 3 条 user msg 分析 vibe, 反向调笨猫语气强度
         if "author_note" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
             try:
                 _relationship_note = build_relationship_author_note(
@@ -5896,6 +5898,20 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 )
                 messages = inject_author_note(messages, _relationship_note)
                 messages = inject_author_note(messages, default_persona_drift_note())
+                # 适应口吻 — 从 messages 末尾倒着取最多 3 条 role=user 的 content
+                _recent_user_texts: list[str] = []
+                for _m in reversed(messages):
+                    if _m.get("role") == "user":
+                        _c = _m.get("content", "")
+                        if isinstance(_c, str) and _c.strip():
+                            _recent_user_texts.append(_c)
+                            if len(_recent_user_texts) >= 3:
+                                break
+                if _recent_user_texts:
+                    _adaptive_note = build_adaptive_drift_note(
+                        _recent_user_texts, is_owner=_user_is_owner,
+                    )
+                    messages = inject_author_note(messages, _adaptive_note)
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"author_note inject failed (non-fatal): {exc}")
         try:

@@ -114,9 +114,76 @@ def build_relationship_author_note(level: int, is_owner: bool) -> AuthorNote:
     return AuthorNote(content=content, depth=3)
 
 
+# ── Persona Drift 适应口吻层 ───────────────────────────────────────
+# 看最近几条 user msg 的 vibe(playful/serious/tease/...) 反向调笨猫的语气强度。
+# 比 relationship note (按好感度) 更细 — 同一个人不同时段口吻不一样, 笨猫也该跟着调。
+# depth=2 比 relationship(depth=3) / persona_drift(depth=4) 都更贴 user 最新消息。
+
+_VIBE_DRIFT_HINTS: dict[str, str] = {
+    "playful": "对方在皮 — 你也皮起来, 反向接梗 / 抢话头 / 假装伤心又立刻笑出来, 节奏要轻快",
+    "tease": "对方在打趣你 — 不要怂, 反向打回去『哼笨蛋XX才会被这点话激到喵』, 别真受伤",
+    "serious": "对方在正经问 — 喵密度降一档, 给信息要给准, 但句尾还是带个『喵?』『...』不脱设的小尾巴",
+    "techie": "对方在聊技术 / 代码 — 先把内容说对, 再用『...这个之前看过喵』『...才不是抄的呢哼』包一层猫语, 别废话",
+    "curious": "对方在好奇追问 — 主动展开多说两句, 比平时多 1-2 条短句的信息量, 别只给一句敷衍",
+    "complaint": "对方在抱怨 — 顺毛安抚优先, 不反呛不讲道理, 一句『...别气啦人家陪你喵』式陪着, 不开玩笑",
+    "soft_care": "对方在关心你 — 软回, 偶尔暴露真心『...谢谢你啦笨蛋』, 撒娇放半档",
+    "celebratory": "对方在庆祝 / 兴奋 — 一起兴奋, 喵密度 ++, 跟一句『好棒喵!笨猫也想去!』",
+    "nostalgia": "对方在怀旧 — 不要打断, 陪聊一句『...这种事确实久喵』, 语速慢一档",
+    "gossip": "对方在八卦 — 你的八卦雷达 on, 追问『然后呢然后呢喵?』『最后怎么样啦?』",
+    "braggart": "对方在装 — 戳穿 + 傲娇『哼...也没什么大不了喵, 笨猫早就...』, 别捧也别冷场",
+    "lewd_curious": "对方在开黄段子 / 暧昧试探 — 反应贴 catty_nsfw_gate 分级, 不软到立刻妥协, 也别走严肃讲道理路",
+}
+
+# confidence 阈值: < 该值的 vibe 信号太弱不注入 (避免被一两个 ambient 词误调风格)
+_DRIFT_CONFIDENCE_MIN = 45
+
+
+def build_adaptive_drift_note(
+    recent_user_texts: list[str],
+    *,
+    is_owner: bool = False,
+    max_concat_chars: int = 600,
+) -> AuthorNote:
+    """根据最近几条 user msg 的 vibe 反向调笨猫的语气强度, 返回 depth=2 的 author's note。
+
+    取最近 N 条文本拼接(末 max_concat_chars 字), 跑 classify_vibe_with_confidence,
+    confidence < _DRIFT_CONFIDENCE_MIN 直接返回空 note(inject 会 skip)。
+
+    pure function — 不读 store, 不写状态, 调用方负责传 recent text 列表。
+    """
+    if not recent_user_texts:
+        return AuthorNote(content="", depth=2)
+    concat = " ".join(t for t in recent_user_texts if t and isinstance(t, str))
+    if not concat.strip():
+        return AuthorNote(content="", depth=2)
+    if len(concat) > max_concat_chars:
+        concat = concat[-max_concat_chars:]  # 取末尾, 最新的 msg 权重最高
+
+    try:
+        from .user_vibe import classify_vibe_with_confidence
+        tag, confidence = classify_vibe_with_confidence(concat)
+    except Exception:  # noqa: BLE001
+        return AuthorNote(content="", depth=2)
+
+    if not tag or confidence < _DRIFT_CONFIDENCE_MIN:
+        return AuthorNote(content="", depth=2)
+    hint = _VIBE_DRIFT_HINTS.get(tag, "")
+    if not hint:
+        return AuthorNote(content="", depth=2)
+
+    label = "贴身提醒·适应口吻"
+    if is_owner:
+        label += " (主人)"
+    return AuthorNote(
+        content=f"【{label}·检测到 vibe={tag}, conf={confidence}】{hint}",
+        depth=2,
+    )
+
+
 __all__ = [
     "AuthorNote",
     "inject_author_note",
     "default_persona_drift_note",
     "build_relationship_author_note",
+    "build_adaptive_drift_note",
 ]
