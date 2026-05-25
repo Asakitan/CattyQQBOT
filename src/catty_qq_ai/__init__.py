@@ -1797,6 +1797,38 @@ def _references_recent_image(text: str) -> bool:
     return bool(_RECENT_IMAGE_REFERENCE_RE.search(text))
 
 
+# 用户文本里出现这些词时,可以判定『他想让猫猫看本条消息附带的图』,值得 eager 跑 vision。
+# 反之(用户发图但只说"哈哈" 或 跟图无关的话),vision 跑了也没人用,纯浪费 API 调用。
+_IMAGE_ATTENTION_HINTS: tuple[str, ...] = (
+    "图", "图片", "照", "截图", "梗图", "表情", "立绘", "封面", "壁纸", "图里",
+    "看看", "看一下", "看下", "瞅瞅", "瞧瞧", "看一眼", "看清", "看不清",
+    "识别", "解释", "解读", "评价", "讲讲", "说说",
+    "什么", "啥", "怎么", "为啥", "为什么", "怎么回事",
+    "这是", "这个", "这张", "这图", "那是", "那个", "那张",
+    "认得", "认识", "认出", "认不出", "知道",
+    "好笑", "搞笑", "可爱", "好看", "丑",
+    "懂", "看懂", "没看懂",
+)
+
+
+def _user_text_wants_image_attention(text: str) -> bool:
+    """用户文本暗示『需要猫猫看附带的图』。命中即可 eager 跑 vision,否则懒加载。
+    保守:命中关键词或带问号短句才 True;无图关键词且无问号 → False(节流)。
+    """
+    if not text:
+        return False
+    t = text.strip()
+    if not t:
+        return False
+    for kw in _IMAGE_ATTENTION_HINTS:
+        if kw in t:
+            return True
+    # 短问句(<=15 字 + 含 ? / !)即使无图关键词也可能在问图,放过
+    if len(t) <= 15 and any(c in t for c in "?？!！"):
+        return True
+    return False
+
+
 def _build_recent_image_reference_hint(event: MessageEvent, incoming: ExtractedMessage) -> str:
     """检测用户消息含图片回指 → 从 corpus 拉最近 has_image 条目 inject 给主 AI。
 
@@ -2791,6 +2823,62 @@ def _fallback_required_reply(event: MessageEvent, incoming: ExtractedMessage) ->
     return f"在呢喵～人家接到了，刚刚差点没回不该的；{addr}这句奴会认真接。"
 
 
+# Reply gate 廉价启发式初筛 — 在调本地 critic LLM 之前,纯规则把"明显不该回复"的
+# 群消息直接 drop,省掉一次 Ollama/critic 调用。
+# 保守原则:任何指向猫猫(mentioned/replied/prefix/directed)或私聊永远 fallthrough
+# 让 critic 判;只在群聊里"100% 没指向 + 内容空洞"才 drop。
+_REPLY_GATE_DROP_SHORT_PURE: frozenset[str] = frozenset({
+    # 纯感叹/语气词,长度都 ≤4 字,撞概率很低
+    "嗯", "额", "呃", "噢", "哦", "哎", "唉", "嘿", "哼", "哇", "啊", "呀", "咦", "唔", "嗷",
+    "草", "艹", "卧槽", "我去", "操", "靠", "妈的", "卧艹",
+    "666", "777", "888", "6", "8", "+1", "+10086",
+    "笑死", "笑", "难绷", "绷不住", "绷", "活了", "蚌", "蚌埠", "蚌埠住了",
+    "悲", "泪", "泪目", "醉了", "醉", "乐", "乐死", "乐了", "好乐",
+    "玩坏了", "好家伙", "抽象", "好抽象", "离谱", "牛", "牛逼", "nb", "牛批", "nbnb",
+    "ok", "okok", "好", "好的", "行", "行吧", "可以", "收到", "收", "嗯嗯", "嗯呢",
+    "拜拜", "886", "晚安", "早", "早安", "早", "睡了",
+    "...", "......", "。。", "。。。", "。。。。",
+    "tql", "yyds", "nm", "qsl", "xswl",
+    "真的", "真的吗", "确实", "对", "对的", "是的", "是", "no", "不是", "不",
+    "🐱", "😂", "🤣", "💀", "🤔", "😭", "🙏", "👍",
+})
+
+_REPLY_GATE_PUNCT_OR_EMOJI_RE = re.compile(r"^[\s\W_]+$")
+
+
+def _cheap_reply_prefilter(event: MessageEvent, incoming: ExtractedMessage) -> tuple[bool, str]:
+    """便宜启发式初筛 - 明显该 NO_REPLY 的直接 drop。返回 (should_continue, drop_reason)。
+    保守:宁可放过让 critic 再看,也别在这层误杀。
+    """
+    # 私聊永远 fallthrough(私聊每条都该被 critic/AI 看)
+    if isinstance(event, PrivateMessageEvent):
+        return True, ""
+    # 任何明确指向猫猫的信号(@ / 引用 / 触发前缀 / directed keyword)都 fallthrough
+    if incoming.directly_requested or incoming.mentioned or incoming.replied_to_self:
+        return True, ""
+    # 主人发的群消息也 fallthrough(主人闲聊可能要看,不在这砍)
+    if _event_is_owner(event):
+        return True, ""
+    # 带图消息 fallthrough(图片场景复杂,让 critic 判)
+    if incoming.has_image:
+        return True, ""
+    text = (incoming.text or "").strip()
+    if not text:
+        # 无文字无图,通常上层已经过滤掉了;保守 fallthrough
+        return True, ""
+    compact = re.sub(r"[\s　]+", "", text).lower()
+    # 规则 1: 命中"纯感叹/语气词/缩写黑名单"集合 → drop
+    if compact in _REPLY_GATE_DROP_SHORT_PURE:
+        return False, f"prefilter:short-emote:{compact!r}"
+    # 规则 2: 1-3 字符 + 全部不是中日韩字母数字 → drop (纯符号/纯 emoji)
+    if len(compact) <= 3 and _REPLY_GATE_PUNCT_OR_EMOJI_RE.match(compact):
+        return False, f"prefilter:punct-only:{text[:40]!r}"
+    # 规则 3: 整段全是 emoji + 符号(无任何 CJK / latin / digit)且 ≤8 字符 → drop
+    if len(compact) <= 8 and not re.search(r"[一-鿿぀-ヿA-Za-z0-9]", compact):
+        return False, f"prefilter:emoji-stream:{text[:40]!r}"
+    return True, ""
+
+
 async def _local_reply_gate_allows(
     event: MessageEvent,
     incoming: ExtractedMessage,
@@ -2805,6 +2893,20 @@ async def _local_reply_gate_allows(
             "should_reply": True,
             "confidence": 100,
             "reason": "direct trigger; skipped local reply gate",
+            "skipped_model": True,
+        }
+    # ── 廉价启发式初筛:明显该 NO_REPLY 的群消息直接 drop,省掉一次 critic 调用 ──
+    continue_to_critic, drop_reason = _cheap_reply_prefilter(event, incoming)
+    if not continue_to_critic:
+        logger.info(
+            f"reply gate prefilter drop: user={event.user_id} "
+            f"group={getattr(event, 'group_id', '')} reason={drop_reason}"
+        )
+        return False, {
+            "should_reply": False,
+            "confidence": 95,
+            "reason": drop_reason,
+            "prefilter_drop": True,
             "skipped_model": True,
         }
     if not config.catty_local_critic_reply_gate_enabled:
@@ -3658,9 +3760,11 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
         return False
     state["catty_replied_to_self"] = replied_to_self
     state["catty_incoming"] = incoming
-    # reply gate 已经放行,确认这条会进主回复路径——立刻 fire-and-forget vision,
-    # 后续 handle_chat 拿到 lock 后短等就能用上结果,不再卡 chat_completion。
-    if incoming.has_image and incoming.image_urls:
+    # reply gate 已经放行,确认这条会进主回复路径。
+    # 但 vision 改成按需:只在『用户文本里提到要看图』(_user_text_wants_image_attention)
+    # 时才 eager 跑,否则懒加载——主 AI 看 [图片数量:N] hint 自己判断要不要追问/识别。
+    # 这样『有人发个图但只说哈哈/哦哦』就不再无脑触发 vision API 浪费配额。
+    if incoming.has_image and incoming.image_urls and _user_text_wants_image_attention(incoming.text):
         try:
             _schedule_vision_async(incoming.image_keys, incoming.image_urls, incoming.history_content)
         except Exception as exc:  # noqa: BLE001
@@ -4796,22 +4900,31 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 image_description = persistent_summary
                 image_description_cached = True
             else:
-                # 没命中持久缓存:_rule 已经 fire-and-forget schedule 过 vision,
-                # 这里冗余调度一次防漏,再最多短等几秒。等不到就不带描述往下走,
-                # 后台 task 跑完会写 memory_store,下一轮自动复用。
-                _schedule_vision_async(
-                    incoming.image_keys,
-                    incoming.image_urls,
-                    incoming.history_content,
-                )
-                max_wait = max(
-                    float(getattr(config, "catty_vision_inline_max_wait_seconds", 3.0) or 0.0),
-                    0.0,
-                )
-                vision_result = await _await_vision_briefly(incoming.image_keys, max_wait)
-                if vision_result is not None:
-                    image_description = vision_result.description or None
-                    image_analysis = vision_result.image_analysis or {}
+                # 按需识别:_rule 阶段已经按"用户文本是否提及图"决定要不要 eager schedule。
+                # 这里再判一次:如果用户文本里没有图相关词(_user_text_wants_image_attention=False),
+                # 就不在 handle_chat 兜底里 schedule 也不短等,把节省下来的 3s + API 配额省掉。
+                # 主 AI 仍能看到 history 里 [图片数量:N] 这条 hint,需要详情时它会用 tool 调
+                # catty_recall 等机制(或者用户下一句问到时再走 vision)。
+                if _user_text_wants_image_attention(incoming.text):
+                    _schedule_vision_async(
+                        incoming.image_keys,
+                        incoming.image_urls,
+                        incoming.history_content,
+                    )
+                    max_wait = max(
+                        float(getattr(config, "catty_vision_inline_max_wait_seconds", 3.0) or 0.0),
+                        0.0,
+                    )
+                    vision_result = await _await_vision_briefly(incoming.image_keys, max_wait)
+                    if vision_result is not None:
+                        image_description = vision_result.description or None
+                        image_analysis = vision_result.image_analysis or {}
+                else:
+                    logger.info(
+                        f"vision lazy-skip: user={event.user_id} "
+                        f"group={getattr(event, 'group_id', '')} "
+                        f"text={(incoming.text or '')[:60]!r}"
+                    )
             if image_analysis and config.catty_emoji_enabled:
                 tags_value = image_analysis.get("emotion_tags")
                 tags = [str(tag) for tag in tags_value] if isinstance(tags_value, list) else []
