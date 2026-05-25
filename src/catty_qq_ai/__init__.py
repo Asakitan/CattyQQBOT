@@ -4242,15 +4242,28 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
 
         for chunk in chunks[:-1]:
             _remember_bot_reply_for_event(event, _chunk_to_history(chunk))
-            await matcher.send(
-                _compose_reply_message(
-                    event,
-                    text=chunk,
-                    quote=quote_pending,
-                    latex_sources=latex_sources,
-                    inline_image_urls=inline_image_urls,
+            # NapCat → QQ 网关偶发 retcode=1200 "网络连接异常",原本裸 send
+            # 抛 ActionFailed 让整轮 matcher 死掉,后面 nsfw_image_segments 里的
+            # imagegen 图也跟着不发了(主人观察到的"画图卡住没下文")。这里 catch
+            # 让前段失败不影响后段 + 图片发送。
+            try:
+                await matcher.send(
+                    _compose_reply_message(
+                        event,
+                        text=chunk,
+                        quote=quote_pending,
+                        latex_sources=latex_sources,
+                        inline_image_urls=inline_image_urls,
+                    )
                 )
-            )
+            except OnebotActionFailed as exc:
+                logger.warning(
+                    f"chunk send (pre-tail) failed, continue to next chunk/image: {exc}"
+                )
+            except OnebotNetworkError as exc:
+                logger.warning(
+                    f"chunk send (pre-tail) network timeout, continue: {exc}"
+                )
             quote_pending = False
             _mark_consumed_reply_source_if_sent(event, state)
             if delay_seconds:
