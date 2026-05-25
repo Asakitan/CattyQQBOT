@@ -1329,6 +1329,11 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
         # 不发完整 chunked end frame,导致 httpx 等到 read timeout 报模糊错误。
         # 用 HTTP/1.1 走 chunked,行为更可预测。
         "http2": False,
+        # 关掉 keep-alive 连接池:实测 catty 同一 payload 直接 httpx.post 拿到 200,
+        # 但 catty 进程内偶发 504 elapsed=69s——疑似长持有 client 的 keep-alive
+        # 连接 stale, 复用时 ai.hugou.cc 那边已经断了导致 5xx。
+        # 每个 imagegen 请求强制建新 TCP, 避免任何 stale connection 干扰。
+        "limits": httpx.Limits(max_keepalive_connections=0, max_connections=10),
     }
     if proxy_str:
         client_kwargs["proxy"] = proxy_str
@@ -1439,11 +1444,12 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
                 )
                 await asyncio.sleep(5.0)
                 continue
-            # 其他 5xx(主要 504/524) = 上游慢/CF 反代超时, 第 N 次 retry 降级到最小配置
+            # 其他 5xx(主要 504/524) = 上游慢/CF 反代超时/瞬时网络, 第 N 次 retry 降级到最小配置
+            # 把 body 也 log 出来,排查 504 body 是 nginx 上游 timeout 错误页 / Caddy 错误页 / 空
             _logger.warning(
                 "imagegen API status=%d (RETRY with DOWNGRADE) elapsed=%.1fs attempt=%d/%d "
-                "mode=%s size=%s quality=%s prompt_len=%d %s",
-                status, elapsed, attempt, max_attempts, mode_hint, cur_size, cur_quality, len(cur_prompt), via_chain,
+                "mode=%s size=%s quality=%s prompt_len=%d %s body=%s",
+                status, elapsed, attempt, max_attempts, mode_hint, cur_size, cur_quality, len(cur_prompt), via_chain, body_preview,
             )
             cur_size = "1024x1024"
             cur_quality = "low"
