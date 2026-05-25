@@ -101,6 +101,26 @@ class PromptManager:
             enabled=enabled, content_fn=content_fn,
         ))
 
+    def register_static(
+        self,
+        identifier: str,
+        content: str,
+        *,
+        order: int = 100,
+        role: str = "system",
+    ) -> None:
+        """已经计算好的字符串直接注册(空字符串自动跳过)。
+
+        和 register() 的区别是 content 已是字符串而非 callable,
+        适合 LayerD/E 各种已经在外部完成 build 的 context。
+        """
+        if not content or not str(content).strip():
+            return
+        self._entries.append(PromptEntry(
+            identifier=identifier, order=order, role=role,
+            enabled=True, content_fn=lambda c=content: c,
+        ))
+
     def apply_config(
         self,
         *,

@@ -1974,60 +1974,48 @@ def _build_messages(
         "reply_self_check_enabled": bool(config.catty_reply_self_check_enabled),
         "reply_style_examples_enabled": bool(config.catty_reply_style_examples_enabled),
     })
-    _st_manager.apply_config(
-        order_override=list(getattr(config, "catty_prompt_order", None) or []),
-        disabled=list(getattr(config, "catty_prompts_disabled", None) or []),
-    )
-    messages.extend(_st_manager.build_messages())
-    if web_search_context:
-        messages.append({"role": "system", "content": web_search_context})
-    if star_resonance_context:
-        messages.append({"role": "system", "content": star_resonance_context})
-    if strinova_context:
-        messages.append({"role": "system", "content": strinova_context})
-    for game_ctx in other_game_contexts or []:
-        if game_ctx:
-            messages.append({"role": "system", "content": game_ctx})
-    if wake_context:
-        messages.append({"role": "system", "content": wake_context})
-    if bot_continuation_context:
-        messages.append({"role": "system", "content": bot_continuation_context})
-    if emoji_context:
-        messages.append({"role": "system", "content": emoji_context})
-    # IDE 风「最近 tool 调用日志」:让 AI 看到本会话已对这个 scope 调过哪些 tool,避免重复
-    # 同 tool+同参数(浪费一次工具调用 + 让回复变慢)。
-    _recent_tools_line = recent_tool_calls_context(_conversation_queue_key(event))
-    if _recent_tools_line:
-        messages.append({"role": "system", "content": _recent_tools_line})
-    memory_context = memory_store.build_context(event)
-    if memory_context:
-        messages.append({"role": "system", "content": memory_context})
-    # 程序自动判断:用户消息含图片回指词且当前轮没在发新图时,
-    # 直接从 corpus 拉最近 has_image 条目 inject 给主 AI,不用 AI 主动调 catty_recall。
-    # 命中场景:『刚才那张图』『认得这张吗』『前面那个截图』等。
-    if not incoming.has_image:
-        recent_image_hint = _build_recent_image_reference_hint(event, incoming)
-        if recent_image_hint:
-            messages.append({"role": "system", "content": recent_image_hint})
-    # 本地解析层:每层可通过 config.catty_parsing_layers_disabled 单独关闭(运维用)。
-    # 默认全开;disabled list 里的名字会被跳过。
+    # LayerD/E 散装 context 统一注册到 PromptManager,享受同样的 prompt_order / prompts_disabled
+    # 配置能力。order 600+ 表示挂在 character_card / world_info 之后、接近 chat history。
+    # 这些 context 是 runtime conditional/动态值,所以走 register_static(已经计算好的字符串)。
     _disabled_layers = set(getattr(config, "catty_parsing_layers_disabled", None) or [])
+    # 游戏/搜索/wake/emoji 这些"事件性 context"
+    _st_manager.register_static("catty_web_search", web_search_context or "", order=600)
+    _st_manager.register_static("catty_star_resonance", star_resonance_context or "", order=610)
+    _st_manager.register_static("catty_strinova", strinova_context or "", order=620)
+    for _i, _gc in enumerate(other_game_contexts or []):
+        _st_manager.register_static(f"catty_other_game_{_i}", _gc or "", order=625 + _i)
+    _st_manager.register_static("catty_wake", wake_context or "", order=630)
+    _st_manager.register_static("catty_bot_continuation", bot_continuation_context or "", order=635)
+    _st_manager.register_static("catty_emoji_hint", emoji_context or "", order=640)
+    # IDE 风「最近 tool 调用日志」
+    _st_manager.register_static(
+        "catty_recent_tools",
+        recent_tool_calls_context(_conversation_queue_key(event)) or "",
+        order=650,
+    )
+    # 记忆 + 最近图片回指
+    try:
+        _memory_ctx = memory_store.build_context(event)
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"memory_store.build_context failed: {exc}")
+        _memory_ctx = ""
+    _st_manager.register_static("catty_memory", _memory_ctx or "", order=700)
+    if not incoming.has_image:
+        try:
+            _recent_image_hint = _build_recent_image_reference_hint(event, incoming)
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"_build_recent_image_reference_hint failed: {exc}")
+            _recent_image_hint = ""
+        _st_manager.register_static("catty_recent_image_ref", _recent_image_hint or "", order=710)
 
-    # 当前时刻自动注入(替代 AI 主动调 catty_now 一次):日期/星期/时段/节日/季节
+    # ── 本地解析层(每层可通过 catty_parsing_layers_disabled 单独关) ──
+    # 时间(日期/星期/时段/节日/季节)
     if "time" not in _disabled_layers:
-        time_context = build_time_context()
-        if time_context:
-            messages.append({"role": "system", "content": time_context})
-
-    # 本地 QQ/网络黑话翻译注入:命中『xs/u1s1/awsl/绷不住/破防』等高频缩写时,
-    # 直接告诉 AI 对应中文意思,免得调 catty_meme_explain 浪费一次工具调用。
+        _st_manager.register_static("catty_time", build_time_context() or "", order=750)
+    # QQ 黑话翻译
     if "slang" not in _disabled_layers:
-        slang_context = build_slang_context(incoming.text)
-        if slang_context:
-            messages.append({"role": "system", "content": slang_context})
-    # 群消息节奏感知:冷场/刷屏/复读/热闹时提示 AI 调整发言风格;
-    # normal 节奏不打扰,避免每条消息都灌一段空话占 prompt。
-    # pulse_phase 始终算(action_hints 依赖它),但是否注入 prompt 受 disabled 控制。
+        _st_manager.register_static("catty_slang", build_slang_context(incoming.text) or "", order=760)
+    # 群消息 pulse / 节奏
     pulse_key = _conversation_queue_key(event)
     pulse_msgs = _recent_conversation_messages.get(pulse_key)
     pulse_phase = "normal"
@@ -2036,39 +2024,46 @@ def _build_messages(
         pulse_result = analyze_pulse(pulse_msgs, now=pulse_now)
         pulse_phase = pulse_result.phase
         if "pulse" not in _disabled_layers:
-            pulse_context = build_pulse_context(pulse_msgs, now=pulse_now)
-            if pulse_context:
-                messages.append({"role": "system", "content": pulse_context})
-    # 入向消息意图分类:question/tease_cat/compliment_cat 等多标签;
-    # 给 AI 反应方向建议(撒娇/嘴硬/给答案/调 tool),减少 AI 自己空想意图的负担。
+            _st_manager.register_static(
+                "catty_pulse",
+                build_pulse_context(pulse_msgs, now=pulse_now) or "",
+                order=770,
+            )
+    # 入向意图 / 话题 / 实体 / hints
     if "intent" not in _disabled_layers:
-        intent_context = build_intent_context(incoming.text, has_image=incoming.has_image)
-        if intent_context:
-            messages.append({"role": "system", "content": intent_context})
-    # 入向消息话题领域:gaming/tech/food/relationship 等多标签;
-    # 和 intent 互补 — intent 看『想干啥』,topic 看『在聊啥』,给 AI 基调反应建议。
+        _st_manager.register_static(
+            "catty_intent",
+            build_intent_context(incoming.text, has_image=incoming.has_image) or "",
+            order=780,
+        )
     if "topic" not in _disabled_layers:
-        topic_context = build_topic_context(incoming.text)
-        if topic_context:
-            messages.append({"role": "system", "content": topic_context})
-    # 入向消息关键实体提取:time/money/count/qq_id 等容易被 AI 漏读的事实;
-    # URL/@提及 不进 prompt(AI 看得见原文,标会重复)。
+        _st_manager.register_static(
+            "catty_topic",
+            build_topic_context(incoming.text) or "",
+            order=790,
+        )
     if "entity" not in _disabled_layers:
-        entity_context = build_entity_context(incoming.text)
-        if entity_context:
-            messages.append({"role": "system", "content": entity_context})
-    # 解析层联动建议:交叉 intent + entity + pulse 给具体下一步建议
-    # (例如未来时间+命令 → 建议 catty_remember;qq_id+不是发言者 → 建议 catty_user_profile)。
+        _st_manager.register_static(
+            "catty_entity",
+            build_entity_context(incoming.text) or "",
+            order=795,
+        )
     if "hints" not in _disabled_layers:
         sender_qq_str = str(event.user_id) if event is not None else ""
-        action_hint_context = build_action_hints(
-            incoming.text,
-            has_image=incoming.has_image,
-            pulse_phase=pulse_phase,
-            sender_qq=sender_qq_str,
+        _st_manager.register_static(
+            "catty_action_hints",
+            build_action_hints(
+                incoming.text, has_image=incoming.has_image,
+                pulse_phase=pulse_phase, sender_qq=sender_qq_str,
+            ) or "",
+            order=799,
         )
-        if action_hint_context:
-            messages.append({"role": "system", "content": action_hint_context})
+    # apply_config 一次应用所有 order_override / disabled,然后 build_messages
+    _st_manager.apply_config(
+        order_override=list(getattr(config, "catty_prompt_order", None) or []),
+        disabled=list(getattr(config, "catty_prompts_disabled", None) or []),
+    )
+    messages.extend(_st_manager.build_messages())
     messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     return messages
