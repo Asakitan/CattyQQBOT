@@ -3678,32 +3678,34 @@ def _today_local_str() -> str:
 
 
 def _affection_caption_signin(result: dict) -> str:
-    """签到短文案,卡片承担数字展示;这里只给猫娘 1-2 句口吻。"""
+    """签到短文案,卡片承担数字展示;这里只给猫娘 1-2 句口吻。
+    猫猫自称用 人家/奴/猫猫/笨猫,主人称呼"主人",非主人称呼"你"。
+    """
     is_owner = bool(result.get("is_owner"))
     if result.get("already"):
         if is_owner:
-            return "哼~ 主人今天已经签过啦笨蛋,反正是无限积分嘛 (尾巴摇摇) ฅฅ"
-        return "嗷呜~ 今天已经签过啦!明天再来才有的领喵~ ฅฅ"
+            return "哼~ 主人今天已经签过啦笨蛋,人家给主人的可是无限积分嘛 (尾巴摇摇) ฅฅ"
+        return "嗷呜~ 你今天已经签过啦!人家明天才再发分喵~ ฅฅ"
     if is_owner:
-        return "喵~ 主人签到啦!卡卡奉上嗷呜~ (=^ω^=) ฅฅ"
+        return "喵~ 主人签到啦!奴这就把卡卡奉上嗷呜~ (=^ω^=) ฅฅ"
     level = int(result.get("level", 1))
     if level >= 8:
-        return "签到完成啦~ 今天也最喜欢你啦,蹭蹭 ฅฅ"
+        return "签到啦~ 人家今天也最喜欢你啦,蹭蹭 ฅฅ"
     if level >= 5:
-        return "签到完成嗷呜~ 和你越来越熟啦,继续聊聊嘛 ฅฅ"
+        return "签到嗷呜~ 人家和你越来越熟啦,继续来陪猫猫聊嘛 ฅฅ"
     if level >= 3:
-        return "签到啦~ 多来陪人家说说话嘛,好感会涨的喵~ ฅฅ"
-    return "签到成功喵!新人也加油攒积分嗷呜~ ฅฅ"
+        return "签到啦~ 多来陪人家说说话嘛,笨猫的好感会涨的喵 ฅฅ"
+    return "签到喵!新人加油攒分,人家等着你升好感嗷呜 ฅฅ"
 
 
 def _affection_caption_summary(summary: dict) -> str:
     """积分查询短文案。"""
     if summary.get("is_owner"):
-        return "喵~ 这是主人的卡卡哦,积分∞、Lv MAX (=^ω^=) ฅฅ"
+        return "喵~ 这是人家给主人的专属卡卡,积分∞、Lv MAX (=^ω^=) ฅฅ"
     last_date = str(summary.get("last_checkin_date", "") or "")
     if last_date != _today_local_str():
-        return "喵~ 这是主人的积分卡!今天还没签到呢,发『签到』来领分嗷呜~ ฅฅ"
-    return "喵~ 这是主人的卡卡,看下今天的状态嘛 ฅฅ"
+        return "喵~ 这是你的积分卡!今天还没签到呢,发『签到』人家就给你发分嗷呜~ ฅฅ"
+    return "喵~ 人家把你的卡卡端上来啦,看下今天的状态嘛 ฅฅ"
 
 
 def _send_affection_card(
