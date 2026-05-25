@@ -3056,62 +3056,27 @@ _REPLY_GATE_URL_OR_PLACEHOLDER_RE = re.compile(
 
 
 def _cheap_reply_prefilter(event: MessageEvent, incoming: ExtractedMessage) -> tuple[bool, str]:
-    """便宜启发式初筛 - 明显该 NO_REPLY 的直接 drop。返回 (should_continue, drop_reason)。
-    保守:宁可放过让 critic 再看,也别在这层误杀。
+    """**白名单瘦身模式**(主人 v3 指令):
+    只有真正『指向/提到猫猫』的群消息才进 critic,其他默认 drop。
+    返回 (should_continue, drop_reason)。
 
-    v2 加了 4 个规则:别人 @ 别人 / 重复模式 / 纯数字 / URL-only / bot 自介。
+    注:私聊在 _local_reply_gate_allows 已经更早短路(直接 reply 不进 critic
+    也不进本函数),所以这里只处理群消息。
+
+    白名单(让 critic 判)2 类:
+    1. 主人发的群消息 — 最高优先级
+    2. directly_requested / mentioned / replied_to_self — 强指向猫猫
+       (`directly_requested` 涵盖 @/前缀/引用/directed keyword 多种触发,
+        包括含『猫猫/笨猫/喵』等 catty_directed_keywords → 自动覆盖"提到猫猫")
+
+    其他全部 drop。原 v2 的 8 条细规则(短感叹/重复/数字/URL/bot 自介/
+    别人@别人 等)合并成"默认 drop"一刀切 — 它们都属于非定向群消息。
     """
-    # 私聊永远 fallthrough(私聊每条都该被 critic/AI 看)
-    if isinstance(event, PrivateMessageEvent):
-        return True, ""
-    # 任何明确指向猫猫的信号(@ / 引用 / 触发前缀 / directed keyword)都 fallthrough
-    if incoming.directly_requested or incoming.mentioned or incoming.replied_to_self:
-        return True, ""
-    # 主人发的群消息也 fallthrough(主人闲聊可能要看,不在这砍)
     if _event_is_owner(event):
         return True, ""
-    # 带图消息 fallthrough(图片场景复杂,让 critic 判)
-    if incoming.has_image:
+    if incoming.directly_requested or incoming.mentioned or incoming.replied_to_self:
         return True, ""
-    # 规则 4: 群里 @ 了别人(不是猫猫),drop — 已经过 incoming.mentioned=False 这关,
-    # 说明这条消息 @ 的肯定不是猫猫,大概率是群友之间互相 @,与猫猫无关
-    try:
-        self_id = str(getattr(event, "self_id", "") or "")
-        if self_id and mentions_other_user(self_id, event):
-            return False, "prefilter:at-someone-else"
-    except Exception:  # noqa: BLE001
-        pass
-
-    text = (incoming.text or "").strip()
-    if not text:
-        # 无文字无图,通常上层已经过滤掉了;保守 fallthrough
-        return True, ""
-    compact = re.sub(r"[\s　]+", "", text).lower()
-    # 规则 1: 命中"纯感叹/语气词/缩写黑名单"集合 → drop
-    if compact in _REPLY_GATE_DROP_SHORT_PURE:
-        return False, f"prefilter:short-emote:{compact!r}"
-    # 规则 2: 1-3 字符 + 全部不是中日韩字母数字 → drop (纯符号/纯 emoji)
-    if len(compact) <= 3 and _REPLY_GATE_PUNCT_OR_EMOJI_RE.match(compact):
-        return False, f"prefilter:punct-only:{text[:40]!r}"
-    # 规则 3: 整段全是 emoji + 符号(无任何 CJK / latin / digit)且 ≤8 字符 → drop
-    if len(compact) <= 8 and not re.search(r"[一-鿿぀-ヿA-Za-z0-9]", compact):
-        return False, f"prefilter:emoji-stream:{text[:40]!r}"
-    # 规则 5: 重复模式 - 1-4 字符 group 连续 ≥3 次,且总长 ≤24(『哈哈哈哈』『kkkkk』
-    # 『笑死笑死笑死』『6666666』『啊啊啊啊啊』);限长避免长文本中段巧合命中
-    if len(compact) <= 24 and _REPLY_GATE_REPEAT_RE.match(compact):
-        return False, f"prefilter:repeat:{text[:40]!r}"
-    # 规则 6: 纯数字 ≤8 位 → drop(段位汇报/比分/年份/邮编/手机号片段,与猫猫无关)
-    # 注:超长数字(>8 位)可能是订单号/QQ 号截图,可能在求助,保守不砍
-    if compact.isdigit() and len(compact) <= 8:
-        return False, f"prefilter:digits-only:{compact!r}"
-    # 规则 7: URL only / 系统占位文字 ([图片] [表情] [链接] [分享])
-    # 这种通常是别人转发或系统消息,没有问句/对话语义
-    if _REPLY_GATE_URL_OR_PLACEHOLDER_RE.match(compact):
-        return False, f"prefilter:url-or-placeholder:{text[:40]!r}"
-    # 规则 8: bot 自介模式(Q群管家XX/签到小助手 等) — 复用 message_utils 的判定
-    if _looks_like_bot_self_intro(text):
-        return False, "prefilter:bot-self-intro"
-    return True, ""
+    return False, "prefilter:not-addressed-to-catty"
 
 
 async def _local_reply_gate_allows(
@@ -3121,6 +3086,14 @@ async def _local_reply_gate_allows(
     group_filter_context: str = "",
     special_care_context: str = "",
 ) -> tuple[bool, dict[str, object]]:
+    # 私聊:直接 reply,不走 critic(主人要求 "私聊就不用 filter 了")
+    if isinstance(event, PrivateMessageEvent):
+        return True, {
+            "should_reply": True,
+            "confidence": 100,
+            "reason": "private chat bypass; skipped local reply gate",
+            "skipped_model": True,
+        }
     direct_required = _force_direct_reply_enabled(event, incoming)
     fallback_allowed = direct_required or incoming.directly_requested
     if direct_required:
