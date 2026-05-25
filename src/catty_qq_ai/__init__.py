@@ -3677,10 +3677,8 @@ def _today_local_str() -> str:
     return _date.today().isoformat()
 
 
-def _affection_caption_signin(result: dict) -> str:
-    """签到短文案,卡片承担数字展示;这里只给猫娘 1-2 句口吻。
-    猫猫自称用 人家/奴/猫猫/笨猫,主人称呼"主人",非主人称呼"你"。
-    """
+def _fallback_caption_signin(result: dict) -> str:
+    """签到 AI 生成失败时的兜底文案,1-2 句猫娘短话。"""
     is_owner = bool(result.get("is_owner"))
     if result.get("already"):
         if is_owner:
@@ -3698,14 +3696,92 @@ def _affection_caption_signin(result: dict) -> str:
     return "签到喵!新人加油攒分,人家等着你升好感嗷呜 ฅฅ"
 
 
-def _affection_caption_summary(summary: dict) -> str:
-    """积分查询短文案。"""
+def _fallback_caption_summary(summary: dict) -> str:
+    """积分查询 AI 生成失败时的兜底文案。"""
     if summary.get("is_owner"):
         return "喵~ 这是人家给主人的专属卡卡,积分∞、Lv MAX (=^ω^=) ฅฅ"
     last_date = str(summary.get("last_checkin_date", "") or "")
     if last_date != _today_local_str():
         return "喵~ 这是你的积分卡!今天还没签到呢,发『签到』人家就给你发分嗷呜~ ฅฅ"
     return "喵~ 人家把你的卡卡端上来啦,看下今天的状态嘛 ฅฅ"
+
+
+def _affection_owner_tag(event: MessageEvent) -> str:
+    """给 AI 生成用的『当前用户身份』提示串。"""
+    owner_qq = str(getattr(config, "catty_owner_qq", "") or "").strip()
+    is_owner = bool(owner_qq) and str(event.user_id) == owner_qq
+    if is_owner:
+        return "对方是你的主人,称呼用『主人』(撒娇/暧昧时可点缀『笨蛋主人』『杂鱼主人』)"
+    return "对方不是主人(只是普通用户/群友),称呼一律用『你』,**禁止**叫他『主人』"
+
+
+async def _generate_affection_caption(
+    event: MessageEvent, *, scene_brief: str, user_text: str,
+) -> str | None:
+    """让笨猫人格 AI 自己写 1-2 句签到/查询 caption。失败/超时返回 None,
+    由调用方拿 fallback 兜底。
+    """
+    if not _has_api_key():
+        return None
+    system_prompt = config.catty_system_prompt.strip()
+    messages: list[ChatMessage] = []
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    messages.append(
+        {
+            "role": "system",
+            "content": (
+                "情境:用户刚刚发了签到/查积分命令,程序已经处理完账务并马上会附上一张『像素积分卡』图片。"
+                "你现在只需要写一段 1-2 句的猫娘短文案配着图发,数字(等级/积分/今日得分)全部由卡片承担,**禁止**罗列具体数字。\n"
+                f"\n【本次状态】{scene_brief}\n"
+                f"【对方身份】{_affection_owner_tag(event)}\n"
+                "\n要求:\n"
+                "1) 保持笨猫傲娇可爱人格,自称只能用『人家』『奴』『猫猫』『笨猫』,绝不裸开头『喵~...』丢自称\n"
+                "2) 主人才能叫『主人』;非主人一律叫『你』(违反 = 严重 bug)\n"
+                "3) 1-2 句短话,带猫系动作或颜文字(蹭蹭/尾巴摇/(=^ω^=)/ฅฅ 等)\n"
+                "4) 不要罗列『+XX 分』『余额 YY』这种数字,卡片里已经画出来了\n"
+                "5) 不要拒绝、不要解释自己是 AI、不要 Markdown、不要分段标记\n"
+                "6) 只输出正文 1-2 句,不要前缀/不要说明"
+            ),
+        }
+    )
+    messages.append({"role": "user", "content": user_text.strip() or "签到"})
+    try:
+        reply = await chat_completion(config, messages)
+    except OpenAICompatibleError as exc:
+        logger.warning(f"affection caption AI failed, fallback: {exc}")
+        return None
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"affection caption AI unexpected error, fallback: {exc}")
+        return None
+    text = _sanitize_residual_markers(reply or "")
+    text = text.replace(NO_REPLY_MARKER, "").strip()
+    if not text or len(text) > 200:
+        return None
+    return text
+
+
+def _signin_scene_brief(result: dict) -> str:
+    if result.get("already"):
+        if result.get("is_owner"):
+            return "主人今天已经签过了(无限积分,这次只是再点了一下)"
+        return f"今天已经签过了,余额 {result.get('balance', 0)},上次拿了 {result.get('last_amount', 0)}"
+    if result.get("is_owner"):
+        return f"主人首次签到成功,基础 {result.get('base', 0)} + Lv MAX 加成 {result.get('bonus', 0)} = {result.get('gained', 0)} (无限余额)"
+    return (
+        f"普通用户首次签到成功,基础 {result.get('base', 0)} + Lv{result.get('level', 1)} 加成 {result.get('bonus', 0)}"
+        f" = 拿到 {result.get('gained', 0)} 分,新余额 {result.get('balance', 0)}"
+    )
+
+
+def _summary_scene_brief(summary: dict) -> str:
+    if summary.get("is_owner"):
+        return "主人查积分(无限积分,Lv MAX)"
+    level = summary.get("level", 1)
+    points = summary.get("points", 0)
+    last_date = str(summary.get("last_checkin_date", "") or "")
+    today_status = "今天已签到" if last_date == _today_local_str() else "今天还没签到(可以提醒他发『签到』)"
+    return f"普通用户查积分,Lv{level},余额 {points},{today_status}"
 
 
 def _send_affection_card(
@@ -3754,22 +3830,33 @@ def _send_affection_card(
 async def handle_affection_command(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     cmd = str(state.get("catty_affection_cmd") or "")
     user_id = str(event.user_id)
+    user_text = event_plain_text(event)
     async with _locks[_conversation_queue_key(event)]:
         today_gained: int | None = None
         if cmd == "signin":
             result = affection_store.daily_checkin(user_id)
-            caption = _affection_caption_signin(result)
             # 签到成功时把当次金额传给卡片底栏
             if result.get("success") and not result.get("already"):
                 today_gained = int(result.get("gained") or 0)
             summary = affection_store.summary(user_id)
             card_mode = "signin" if today_gained is not None else "summary"
+            ai_caption = await _generate_affection_caption(
+                event,
+                scene_brief=_signin_scene_brief(result),
+                user_text=user_text,
+            )
+            caption = ai_caption if ai_caption else _fallback_caption_signin(result)
             image_segment = _send_affection_card(
                 event, mode=card_mode, summary=summary, today_gained=today_gained,
             )
         elif cmd == "points":
             summary = affection_store.summary(user_id)
-            caption = _affection_caption_summary(summary)
+            ai_caption = await _generate_affection_caption(
+                event,
+                scene_brief=_summary_scene_brief(summary),
+                user_text=user_text,
+            )
+            caption = ai_caption if ai_caption else _fallback_caption_summary(summary)
             image_segment = _send_affection_card(
                 event, mode="summary", summary=summary,
             )
