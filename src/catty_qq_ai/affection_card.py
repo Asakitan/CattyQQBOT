@@ -11,6 +11,7 @@ GBC 风配色 + 5x7 自制像素字模 + 几何心形,完全不依赖外部 TTF 
 from __future__ import annotations
 
 import hashlib
+import random
 import time
 from pathlib import Path
 from typing import Optional
@@ -215,6 +216,66 @@ def _exp_bar(draw: ImageDraw.ImageDraw, x: int, y: int, width: int, height: int,
         draw.rectangle((x + 1, y + 1, x + filled, y + height - 2), fill=fill)
 
 
+# ── 像素猫爪印 ───────────────────────────────────────────────────────
+# 5x6 经典像素 paw print:3 个脚趾(上面 2 行)+ 圆形肉垫(下面 4 行)
+# 视觉上比 7x5 4 脚趾的更紧凑,在 96x120 画布里不抢戏
+_PAW_TEMPLATE: list[str] = [
+    "X.X.X",   # 3 脚趾上行
+    "X.X.X",   # 3 脚趾下行(脚趾 2px 高,看着像小肉球)
+    ".....",   # 间隔
+    ".XXX.",   # 肉垫顶
+    "XXXXX",   # 肉垫中(最宽)
+    ".XXX.",   # 肉垫底
+]
+PAW_W = 5
+PAW_H = 6
+
+
+def _draw_paw(draw: ImageDraw.ImageDraw, x0: int, y0: int,
+              color: tuple[int, int, int]) -> None:
+    """以 (x0, y0) 为左上角画一个 5x6 猫爪印。"""
+    for ry, row in enumerate(_PAW_TEMPLATE):
+        for rx, c in enumerate(row):
+            if c == "X":
+                draw.point((x0 + rx, y0 + ry), fill=color)
+
+
+def _scatter_paws(
+    draw: ImageDraw.ImageDraw,
+    *,
+    band_y_min: int,
+    band_y_max: int,
+    band_x_min: int,
+    band_x_max: int,
+    color: tuple[int, int, int] = HEART_EDGE,
+    count_range: tuple[int, int] = (2, 3),
+    min_gap: int = 3,
+    rng: random.Random | None = None,
+) -> int:
+    """在指定矩形 band 内随机散布 1-3 个爪印,横向不重叠(min_gap 像素间距)。
+
+    返回实际画上去的爪印数量(可能 < count 上限,如果空间不足)。
+    band_y_max/band_x_max 是允许 paw 左上角的最大坐标(已 留出 PAW_W/PAW_H 空间)。
+    """
+    r = rng or random
+    if band_y_max < band_y_min or band_x_max < band_x_min:
+        return 0
+    n = r.randint(*count_range)
+    used_xs: list[int] = []
+    placed = 0
+    for _ in range(n):
+        # 最多试 8 次避免和已放的横向重叠;失败就放弃这个
+        for _try in range(8):
+            x = r.randint(band_x_min, band_x_max)
+            if all(abs(x - ux) >= PAW_W + min_gap for ux in used_xs):
+                y = r.randint(band_y_min, band_y_max)
+                _draw_paw(draw, x, y, color)
+                used_xs.append(x)
+                placed += 1
+                break
+    return placed
+
+
 # ── 渲染主函数 ───────────────────────────────────────────────────────
 
 CANVAS_W = 96
@@ -287,6 +348,24 @@ def render_card(
     # 底栏背景
     footer_top = CANVAS_H - 14
     draw.rectangle((3, footer_top, CANVAS_W - 4, CANVAS_H - 4), fill=DARK)
+
+    # 爪印散布(POINTS 大数字下方、footer 上方的空白带)
+    # 每次随机 2-3 个,位置每次不同,体现"猫猫来盖章"的活泼感
+    big_y_bottom = big_y + GLYPH_H * 2  # 大数字底部 (scale=2)
+    paw_band_top = big_y_bottom + 2
+    paw_band_bot = footer_top - 1 - PAW_H
+    paw_band_x_min = 5
+    paw_band_x_max = CANVAS_W - 5 - PAW_W
+    if paw_band_bot >= paw_band_top and paw_band_x_max > paw_band_x_min:
+        _scatter_paws(
+            draw,
+            band_y_min=paw_band_top,
+            band_y_max=paw_band_bot,
+            band_x_min=paw_band_x_min,
+            band_x_max=paw_band_x_max,
+            color=HEART_EDGE,  # 深粉,在米黄背景上显眼且和心形呼应
+            count_range=(2, 3),
+        )
 
     # ── 底栏内容 ─────────────────────────────────────────────
     if mode == "signin":
