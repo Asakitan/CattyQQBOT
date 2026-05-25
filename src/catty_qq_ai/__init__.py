@@ -58,6 +58,7 @@ from .openai_client import (
     analyze_images_for_reply,
     assess_user_anger,
     chat_completion,
+    chat_completion_instant,
     chat_completion_with_tools,
     describe_images,
     download_binary,
@@ -2712,7 +2713,7 @@ def _fallback_required_reply(incoming: ExtractedMessage) -> str:
         return "在呢喵～你回复到人家啦，笨猫这次不装死，主人要接着说什么？"
     if incoming.mentioned and not incoming.text.strip():
         return "在呢喵～主人喊笨猫啦，要人家做什么？"
-    return "在呢喵～人家接到了，刚刚差点没回不该的；主人这句我会认真接。"
+    return "在呢喵～人家接到了，刚刚差点没回不该的；主人这句奴会认真接。"
 
 
 async def _local_reply_gate_allows(
@@ -2898,19 +2899,89 @@ async def _resolve_no_reply(
 
 
 _SLOW_REPLY_PLACEHOLDER_LINES: tuple[str, ...] = (
+    # 自称池:人家 / 奴 / 猫猫 / 笨猫 / 喵 (5 种,严禁"我")。AI 失败兜底用。
     "嗯…猫猫先想想喵～(尾巴轻轻晃)",
     "唔…让人家整理一下喵～(爪爪挠头)",
     "稍等下喵～猫猫脑袋在转(转圈圈)",
     "等等~~人家在翻记忆库喵 ฅฅ",
     "马上来嗷呜～(尾巴竖起来)",
-    "哼~才不是不理你呢，让人家想想啦喵",
+    "哼~才不是不理你呢,人家想想啦喵",
+    "奴这就给主人查~稍等下嗷呜 ฅฅ",
+    "笨猫还在想…别催别催嗷呜～(炸毛)",
+    "喵呜～脑袋一时转不过来,等等人家",
+    "唔嗯…让奴翻翻笔记喵～(爪爪翻页)",
+    "等下喵～猫猫脑子有点转不动了哼",
+    "稍等嗷呜~人家在认真想啦(歪头)",
+    "马上~奴这边在赶啦,主人坐稳 ฅฅ",
+    "诶?这个有点难,人家想下喵～",
+    "笨猫思考中...请勿打扰(尾巴竖起警告)",
+    "等等等等~猫猫还在码字哼(爪爪疾走)",
+    "唔…让奴慢慢理给主人听喵～",
+    "稍候喵,人家在整理思路 ฅฅ",
+    "嗷呜～别急啦,奴马上回话",
+    "哼,猫猫又不是机器人,让人家想想嘛",
+    "等下下喵~笨猫脑袋热了在散热(冒烟)",
+    "奴这就到~等一小会儿喵呜",
+    "唔～脑袋装得太满,人家先理清一下喵",
+    "再等下嗷呜～猫猫不是不理你啦",
+    "笨猫还在敲爪爪,主人稍等 ฅฅ",
+    "喵?这题人家得想想…",
 )
+
+
+_PLACEHOLDER_PROMPT = (
+    "情境:你是笨猫,刚刚收到了一条 QQ 消息,主回复要花点时间生成。"
+    "你需要立刻先说一句『等等喵』类的占位话,让对方知道你看到了正在想,不要冷场。\n"
+    "要求:\n"
+    "1) 只输出 1 句话,8-25 字左右,**禁止**多段、禁止换行\n"
+    "2) 自称只能用『人家』『奴』『猫猫』『笨猫』『喵』这 5 种之一,**严禁**用代词『我』\n"
+    "3) 必须带猫系小动作或颜文字之一:(尾巴摇)/(爪爪)/(歪头)/(脑袋转)/ฅฅ/嗷呜～/喵呜/喵～\n"
+    "4) 语气活泼可爱,可以带点傲娇『哼~才不是…』『别催嘛』\n"
+    "5) 内容要扣『正在想/正在查/正在码爪爪/脑袋热了』这种『还没好,先垫一句』的语义,"
+    "**不要**承诺具体答案、不要解释自己是 AI、不要 Markdown\n"
+    "6) 只输出正文,不要前缀『等等喵:』『占位:』这种标签"
+)
+
+
+async def _generate_placeholder_line() -> str | None:
+    """让 spark 写一句 placeholder。失败/超时/无效输出返回 None,调用方用例句兜底。"""
+    if not bool(getattr(config, "catty_filter_enabled", False)):
+        return None
+    if not (
+        config.catty_filter_api_key or config.catty_audit_ai_api_key or config.catty_openai_api_key
+    ):
+        return None
+    try:
+        reply = await chat_completion_instant(
+            config,
+            [
+                {"role": "system", "content": _PLACEHOLDER_PROMPT},
+                {"role": "user", "content": "立刻给一句占位话,让对方知道笨猫在想了"},
+            ],
+            fallback_max_tokens=64,
+        )
+    except OpenAICompatibleError as exc:
+        logger.info(f"placeholder spark failed (fallback to lines): {exc}")
+        return None
+    except Exception as exc:  # noqa: BLE001
+        logger.info(f"placeholder spark unexpected (fallback to lines): {type(exc).__name__}: {exc}")
+        return None
+    text = _sanitize_residual_markers(reply or "")
+    text = text.replace(NO_REPLY_MARKER, "").strip()
+    # 多行/超长一概不要(placeholder 必须短)
+    if not text or "\n" in text or len(text) > 60:
+        return None
+    # 禁词检查:猫猫第一人称用「我」就当 AI 没遵守约束,回退例句
+    if "我" in text:
+        return None
+    return text
 
 
 def _spawn_slow_reply_placeholder(matcher: Matcher, event: MessageEvent) -> asyncio.Task | None:
     """启动一个后台 task:超过配置阈值还没回就先 send 一句轻量占位。
 
     完成 / 异常 / cancel 都不影响主回复链路。返回 task 句柄供 caller finally cancel。
+    优先用 spark (chat_completion_instant) 生成,失败回退到例句池。
     """
     try:
         delay = float(getattr(config, "catty_slow_reply_placeholder_seconds", 0.0) or 0.0)
@@ -2924,11 +2995,16 @@ def _spawn_slow_reply_placeholder(matcher: Matcher, event: MessageEvent) -> asyn
             await asyncio.sleep(delay)
         except asyncio.CancelledError:
             return
-        try:
+        # 醒来后立即先试 spark;它本身也走网络但 spark 比主模型快得多
+        line = await _generate_placeholder_line()
+        source = "spark"
+        if not line:
             line = random.choice(_SLOW_REPLY_PLACEHOLDER_LINES)
+            source = "fallback"
+        try:
             await matcher.send(Message(line))
             logger.info(
-                f"slow_reply_placeholder sent after {delay:.1f}s: user={event.user_id} "
+                f"slow_reply_placeholder[{source}] sent after {delay:.1f}s: user={event.user_id} "
                 f"group={getattr(event, 'group_id', '')} line={line!r}"
             )
         except asyncio.CancelledError:
@@ -3733,10 +3809,14 @@ def _affection_owner_tag(event: MessageEvent) -> str:
 async def _generate_affection_caption(
     event: MessageEvent, *, scene_brief: str, user_text: str,
 ) -> str | None:
-    """让笨猫人格 AI 自己写 1-2 句签到/查询 caption。失败/超时返回 None,
-    由调用方拿 fallback 兜底。
+    """让笨猫人格 AI 自己写 1-2 句签到/查询 caption。走 spark(filter 路由) 快出文案,
+    失败/超时返回 None,由调用方拿 fallback 兜底。
     """
-    if not _has_api_key():
+    # spark 走 catty_filter_* 路由,需要 filter_enabled 才行;否则降级到主模型
+    use_instant = bool(getattr(config, "catty_filter_enabled", False)) and (
+        config.catty_filter_api_key or config.catty_audit_ai_api_key or config.catty_openai_api_key
+    )
+    if not use_instant and not _has_api_key():
         return None
     system_prompt = config.catty_system_prompt.strip()
     messages: list[ChatMessage] = []
@@ -3751,8 +3831,9 @@ async def _generate_affection_caption(
                 f"\n【本次状态】{scene_brief}\n"
                 f"【对方身份】{_affection_owner_tag(event)}\n"
                 "\n要求:\n"
-                "1) 保持笨猫傲娇可爱人格,自称只能用『人家』『奴』『猫猫』『笨猫』,绝不裸开头『喵~...』丢自称\n"
-                "2) 主人才能叫『主人』;非主人一律叫『你』(违反 = 严重 bug)\n"
+                "1) 保持笨猫傲娇可爱人格,自称只能从 **人家 / 奴 / 猫猫 / 笨猫 / 喵** 这 5 个里选,"
+                "**严禁**用代词『我』,也不要裸开头『喵~...』丢自称\n"
+                "2) 主人才能叫『主人』(撒娇可加『笨蛋主人』『杂鱼主人』);非主人一律叫『你』(违反 = 严重 bug)\n"
                 "3) 1-2 句短话,带猫系动作或颜文字(蹭蹭/尾巴摇/(=^ω^=)/ฅฅ 等)\n"
                 "4) 不要罗列『+XX 分』『余额 YY』这种数字,卡片里已经画出来了\n"
                 "5) 不要拒绝、不要解释自己是 AI、不要 Markdown、不要分段标记\n"
@@ -3762,7 +3843,10 @@ async def _generate_affection_caption(
     )
     messages.append({"role": "user", "content": user_text.strip() or "签到"})
     try:
-        reply = await chat_completion(config, messages)
+        if use_instant:
+            reply = await chat_completion_instant(config, messages, fallback_max_tokens=200)
+        else:
+            reply = await chat_completion(config, messages)
     except OpenAICompatibleError as exc:
         logger.warning(f"affection caption AI failed, fallback: {exc}")
         return None
@@ -3772,6 +3856,9 @@ async def _generate_affection_caption(
     text = _sanitize_residual_markers(reply or "")
     text = text.replace(NO_REPLY_MARKER, "").strip()
     if not text or len(text) > 200:
+        return None
+    # 第一人称『我』违反约束,降级到模板(自称池只能是 人家/奴/猫猫/笨猫/喵)
+    if "我" in text:
         return None
     return text
 
@@ -4338,7 +4425,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish(Message(choose_turtle_soup(soup_key)))
 
         if not _has_api_key():
-            await matcher.finish(Message("还没有配置 API Key，先在 config.json 里填好 ai.api_key 再来找我。"))
+            await matcher.finish(Message("还没有配置 API Key，先在 config.json 里填好 ai.api_key 再来找人家。"))
 
         web_search_context = ""
         web_search_query = extract_web_search_query(incoming.text)

@@ -944,6 +944,16 @@ def _json_object(text: str) -> dict[str, Any] | None:
     return lenient_json_object(text)
 
 
+async def chat_completion_instant(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 80) -> str:
+    """走 catty_filter_* 配置(spark 这种小快模型)的瞬时完成。
+
+    用途:placeholder 等候语、签到/积分卡 caption 这种 1-2 句猫娘短话——
+    主回复模型 (gpt-5.5 等) 响应慢,这里需要『立刻』出文案不能等。
+    复用 _filter_completion 的路由逻辑;无 spark 配置时自动回退到 audit/openai。
+    """
+    return await _filter_completion(config, messages, fallback_max_tokens=fallback_max_tokens)
+
+
 async def _filter_completion(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 64) -> str:
     use_filter_route = bool(config.catty_filter_model.strip())
     base_url = (
