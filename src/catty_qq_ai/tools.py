@@ -1350,16 +1350,12 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
         request_call = lambda c: c.post(url, headers=headers, json=payload)
 
     mode_hint = "edit" if input_image_bytes else "generate"
-    # 524 真凶诊断:主人贴的 ai.hugou.cc 账单显示一次 gpt-image-2 实际 198s 完成,
-    # 但 catty 124s 收到 server=cloudflare 的 524。结论:
-    #   ai.hugou.cc origin 完成 198s = 计费 198s,但它在 CF 反代后面,
-    #   CF Free/Pro 默认 Origin Connection Timeout=100s,catty↔origin 124s 时
-    #   CF 边缘提前给 catty 524。
-    # 推论:同 prompt 重试仍然 198s 上游 > 100s CF 限,重试也 524。
-    # 唯一根治:ai.hugou.cc 侧改 CF Origin Connection Timeout(主人控制)。
-    # 客户端 mitigation:第 2 次 retry **强制降级到最小配置**(quality=low + 1024x1024 + 截短 prompt),
-    # 让上游 <60s 完成,绕开 CF 100s 限。这虽然画质/细节降级,但能从"完全画不出"变成"有图就行"。
-    max_attempts = 2
+    # 524 真凶诊断(已通过 IP 直连绕过):ai.hugou.cc CF Free/Pro Origin Timeout 100s 给 catty 524。
+    # 现在 imagegen 走 IP 直连不再撞 CF,但仍可能遇到两类瞬时错误:
+    #   1) 504 上游 codex provider 慢回(用降级配置重试: low + 1024x1024 + prompt[:300])
+    #   2) 503 + auth_unavailable: providers=codex 鉴权偶发失效(主人确认重试就好,不降级)
+    # 所以 max_attempts=3:足够覆盖 504 降级 + auth 失败再来一次。
+    max_attempts = 3
     backoff_seconds = 3.0
     response = None
     elapsed = 0.0
@@ -1425,19 +1421,30 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
 
         elapsed = time.monotonic() - started
         status = response.status_code
-        # 524/502/504 = ai.hugou.cc 前面 CF 反代层 100s 硬断;同 prompt 重试必然再 524
-        # 所以第 2 次 retry 强制降级到最小配置(让上游 <60s 完成绕开 CF 100s)
         if status in (502, 503, 504, 524) and attempt < max_attempts:
             hdrs = response.headers
             via_chain = ", ".join(
                 f"{k}={hdrs.get(k, '-')}" for k in ("server", "via", "cf-ray", "cf-cache-status", "x-served-by")
             )
+            body_preview = response.text[:200]
+            # auth_unavailable: 上游 codex provider 鉴权偶发失效, 秒回 503, 降级没用。
+            # 原 prompt/size/quality 不动直接重试, backoff 长一点(5s) 让 backend 恢复。
+            is_auth = "auth_unavailable" in body_preview or "no auth available" in body_preview
+            if is_auth:
+                _logger.warning(
+                    "imagegen API status=%d (RETRY auth_unavailable, no downgrade) elapsed=%.1fs "
+                    "attempt=%d/%d mode=%s size=%s quality=%s prompt_len=%d %s body=%s",
+                    status, elapsed, attempt, max_attempts, mode_hint,
+                    cur_size, cur_quality, len(cur_prompt), via_chain, body_preview,
+                )
+                await asyncio.sleep(5.0)
+                continue
+            # 其他 5xx(主要 504/524) = 上游慢/CF 反代超时, 第 N 次 retry 降级到最小配置
             _logger.warning(
                 "imagegen API status=%d (RETRY with DOWNGRADE) elapsed=%.1fs attempt=%d/%d "
                 "mode=%s size=%s quality=%s prompt_len=%d %s",
                 status, elapsed, attempt, max_attempts, mode_hint, cur_size, cur_quality, len(cur_prompt), via_chain,
             )
-            # 降级:强制最小配置让 origin <60s 完成,绕开 CF 100s 限
             cur_size = "1024x1024"
             cur_quality = "low"
             cur_prompt = cur_prompt[:300] if len(cur_prompt) > 300 else cur_prompt
@@ -1447,7 +1454,7 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
             )
             await asyncio.sleep(backoff_seconds)
             continue
-        break  # 200 或 non-retryable error,跳出
+        break  # 200 或 non-retryable error, 跳出
 
     # 把降级后的实际参数同步回原变量,让后续日志看到 ground truth
     size = cur_size
