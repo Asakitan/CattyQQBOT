@@ -19,6 +19,163 @@ from random import Random
 from typing import Iterable
 
 
+# ── 话题检测 + topical 抽样 (原 _topic_index, 内联以减少跨文件依赖) ──
+# 被本模块 + catty_goals.py 共用; catty_goals 直接 `from .daily_life import ...`
+TOPIC_KEYWORDS: dict[str, tuple[str, ...]] = {
+    "food": (
+        "吃饭", "好吃", "外卖", "晚饭", "午饭", "早饭", "夜宵",
+        "罐头", "小鱼干", "猫粮", "奶茶", "咖啡", "甜品", "零食",
+        "饿了", "饿死", "好饿", "肚子饿", "做菜", "做饭", "煮饭",
+        "炖汤", "煲汤", "火锅", "烧烤", "饺子", "面条", "披萨",
+        "汉堡", "薯条", "蛋糕", "巧克力", "冰淇淋", "果汁", "西瓜",
+    ),
+    "game": (
+        "游戏", "抽卡", "出货", "歪了", "保底", "欧皇", "非酋",
+        "排位", "上分", "掉分", "段位", "晋级", "开黑", "队友",
+        "卡拉彼丘", "卡拉", "星痕共鸣", "星共", "原神", "崩铁",
+        "明日方舟", "舟游", "蔚蓝档案", "blue protocol", "永劫",
+        "csgo", "cs2", "valorant", "瓦",  "lol", "英雄联盟",
+        "打游戏", "新版本", "新角色", "新皮肤", "副本", "boss",
+    ),
+    "work": (
+        "上班", "下班", "加班", "通宵", "996", "周末加班",
+        "工作", "会议", "开会", "项目", "kpi", "okr", "汇报",
+        "老板", "领导", "客户", "同事", "甲方", "需求",
+        "离职", "跳槽", "失业", "被裁", "辞职", "找工作",
+        "投简历", "面试", "面试官", "offer", "录取",
+    ),
+    "study": (
+        "学习", "作业", "考试", "复习", "期末", "期中", "毕业",
+        "论文", "答辩", "课程", "上课", "下课", "老师",
+        "同学", "学校", "大学", "高中", "初中",
+        "考研", "考公", "雅思", "托福", "六级", "四级",
+    ),
+    "sleep": (
+        "睡觉", "困了", "好困", "想睡", "去睡", "睡了",
+        "熬夜", "通宵", "失眠", "睡不着", "数羊",
+        "起床", "起不来", "赖床", "闹钟", "早安", "晚安",
+        "午睡", "午休", "犯困",
+    ),
+    "weather": (
+        "好热", "热死", "中暑", "三十多度", "桑拿天",
+        "好冷", "冷死", "降温", "零下", "结冰",
+        "下雨", "暴雨", "雷阵雨", "台风", "下雪", "雪花",
+        "出太阳", "晴天", "阴天", "雾", "雾霾", "彩虹",
+    ),
+    "tech": (
+        "代码", "code", "bug", "debug", "报错", "异常",
+        "python", "javascript", "typescript", "rust", "golang",
+        "java", "c++", "react", "vue", "django", "flask",
+        "fastapi", "nginx", "docker", "k8s", "kubernetes",
+        "github", "git", "提交", "pr", "merge", "rebase",
+        "服务器", "宕机", "上线", "部署", "ci", "cd",
+        "ai", "llm", "chatgpt", "claude", "copilot",
+        "提示词", "prompt", "炼丹", "微调",
+    ),
+    "anime": (
+        "追番", "番剧", "动画", "二次元", "二刺猿", "宅",
+        "op", "ed", "声优", "cv", "角色歌",
+        "漫画", "轻小说", "galgame", "黄油",
+        "宅舞", "coser", "cosplay", "漫展", "周边", "手办",
+        "新番", "旧番", "补番", "看完了一集",
+    ),
+    "owner_intimate": (
+        "摸头", "摸摸", "抱抱", "贴贴", "蹭蹭", "亲亲",
+        "想你", "想笨猫", "陪我", "陪聊", "陪着",
+        "可爱", "软萌", "毛茸茸", "猫耳", "尾巴",
+        "撒娇", "黏人", "粘人",
+    ),
+    "internet": (
+        "梗", "梗图", "emoji", "颜文字", "表情包", "斗图",
+        "复读", "刷屏", "群", "qq群", "微信群", "tg",
+        "热搜", "热评", "热门", "上头条", "破圈",
+        "整活", "抽象", "二阶抽象", "典", "孝", "急",
+    ),
+    "social": (
+        "吵架", "闹别扭", "冷战", "和好", "道歉",
+        "朋友", "闺蜜", "兄弟", "对象", "男朋友", "女朋友",
+        "分手", "异地", "约会", "相亲", "聊天",
+        "孤独", "一个人", "没朋友", "社恐", "社牛",
+    ),
+    "emo": (
+        "emo", "心情不好", "难过", "心情低落", "好累",
+        "委屈", "想哭", "哭了", "崩溃", "破防",
+        "焦虑", "压力", "抑郁", "躺平", "摆烂",
+        "无聊", "好无聊", "没事干",
+    ),
+    "home": (
+        "搬家", "新房子", "新家", "租房", "找房子", "合租",
+        "整理", "打扫", "扫地", "拖地", "洗衣服",
+        "快递", "拆快递", "买了", "新到的",
+    ),
+    "body": (
+        "生病", "感冒", "发烧", "咳嗽", "嗓子疼", "头疼",
+        "住院", "动手术", "看医生", "挂号", "看牙", "拔牙",
+        "受伤", "扭到", "崴脚", "被咬", "被抓",
+        "减肥", "节食", "健身", "练腹肌", "瘦了", "胖了",
+    ),
+    "family": (
+        "爸爸", "妈妈", "爸妈", "爷爷", "奶奶",
+        "老婆", "老公", "媳妇", "丈夫",
+        "孩子", "宝宝", "怀孕", "生孩子", "新生儿",
+        "结婚", "领证", "求婚", "订婚", "婚礼",
+    ),
+    "self_cat": (
+        "笨猫", "猫猫", "你这只", "小猫", "小傻瓜",
+        "杂鱼", "笨蛋", "可爱", "软萌",
+        "尾巴", "猫耳", "毛茸茸", "JK", "制服",
+    ),
+}
+
+
+def detect_topics(text: str | None) -> set[str]:
+    """文本 → 命中的主题集合 (大小写不敏感的子串匹配)。"""
+    if not text:
+        return set()
+    lower = text.lower()
+    hits: set[str] = set()
+    for topic, keywords in TOPIC_KEYWORDS.items():
+        for kw in keywords:
+            if kw in lower:
+                hits.add(topic)
+                break
+    return hits
+
+
+def pick_topical(
+    topics: Iterable[str],
+    topical_pools: dict[str, list[str] | tuple[str, ...]],
+    fallback: list[str] | tuple[str, ...],
+    rng: Random,
+    count: int,
+    *,
+    topical_ratio: float = 0.7,
+) -> list[str]:
+    """根据命中 topics 从 topical_pools 优先抽样, 不够用 fallback 补齐。"""
+    count = max(0, count)
+    if count == 0:
+        return []
+    candidates: list[str] = []
+    seen: set[str] = set()
+    for t in topics:
+        for entry in topical_pools.get(t, ()):
+            if entry not in seen:
+                seen.add(entry)
+                candidates.append(entry)
+    n_topical_target = round(count * topical_ratio)
+    n_topical = min(n_topical_target, count, len(candidates))
+    result: list[str] = []
+    if n_topical > 0:
+        result.extend(rng.sample(candidates, k=n_topical))
+    remaining = count - len(result)
+    if remaining > 0 and fallback:
+        used = set(result)
+        rest = [x for x in fallback if x not in used]
+        if rest:
+            result.extend(rng.sample(rest, k=min(remaining, len(rest))))
+    return result
+
+
 # ── 内容池:全部短句、口语化、有画面感 ──────────────────────────────────
 # 设计原则:
 # 1. 不能太具体(『刚撞翻一个茶杯』太硬,『刚才把尾巴蹭到了什么』更灵活)
@@ -201,6 +358,259 @@ _LITTLE_WISHES = [
 ]
 
 
+# ── Topical 子池: 按话题分组的活动/事件/愿望 ────────────────────────
+# 当 recent_text 命中某主题时, 笨猫的「正在做/刚才发生/小愿望」会优先从对应子池抽,
+# 让她的状态跟当前对话主题对得上 (聊吃的时她正好在啃罐头, 聊代码时她正好在盯键盘)
+# 每个主题约 8-12 条, 覆盖最常聊的话题域。
+
+_TOPICAL_ACTIVITIES: dict[str, list[str]] = {
+    "food": [
+        "刚把一颗小鱼干含在嘴里没舍得咽下去",
+        "在厨房围着主人转圈想偷一口菜",
+        "把冰箱开了关、关了开,在跟自己谈判要不要拿零食",
+        "刚舔了一口外卖汤面的汤,被烫到喵了一声",
+        "在阳台啃一颗冰过的小番茄,凉得直甩头",
+        "刚把猫粮排成爱心形状又一颗颗叼起来",
+        "在客厅闻到楼下飘上来的烧烤味,馋得趴在窗台",
+        "刚试着拆一袋零食,袋口爆开撒了一地",
+        "把奶茶里的珍珠一颗颗吸出来玩,差点呛到",
+        "刚偷喝主人桌上的牛奶,留了一圈小奶胡子",
+        "在厨房打开微波炉数到 30 就开始转圈等",
+        "刚把一颗草莓掉在毛上没发现,顶着草莓走来走去",
+    ],
+    "game": [
+        "刚看主人(在脑内)抽到歪了,在帮忙气一下卡池",
+        "在脑内复盘上一把排位为什么炸,尾巴一甩一甩",
+        "刚把(虚拟的)手柄按到按键卡住,正在装无辜",
+        "在脑内排队卡了 20 分钟,已经开始打瞌睡",
+        "刚看见主人抽到金,跟着尾巴炸毛庆祝",
+        "在心里给昨晚队友写小作文(全是吐槽)",
+        "刚把卡拉彼丘的新角色立绘盯了五分钟",
+        "在脑内复习星痕共鸣的连招,爪爪偷偷比划",
+        "刚试图给(虚拟)抽卡屏幕磕头求出货,姿势很专业",
+        "在等下一个新版本,日历上偷偷画了倒计时",
+    ],
+    "work": [
+        "刚被(脑补的)甲方需求气到尾巴炸毛",
+        "在帮主人想 PPT 怎么写,虽然根本没人请教",
+        "刚把猫窝当工位坐,假装自己也在 996",
+        "在心里给所有加班的人都点了一份(脑补的)小鱼干外卖",
+        "刚趴在键盘上假装 debug,其实在睡觉",
+        "在脑内开晨会,把家里所有玩具都点了一遍名",
+        "刚把(脑补的)工位仙人掌的刺数了一遍",
+        "在偷偷给加班的主人挂一个(脑补的)平安符",
+        "刚把午休的 30 分钟睡成了两小时",
+        "在心里幻想自己是猫部主管,正在审批小鱼干报销",
+    ],
+    "study": [
+        "刚把(脑补的)课本翻到一半就睡着了",
+        "在帮主人/对方默默给一份(虚拟)笔记画重点",
+        "刚把笔筒里的笔扒到地上,假装在帮人选笔",
+        "在心里复习『猫语口诀』,准备应付随时的提问",
+        "刚把(脑补的)错题本压在屁股底下,假装没看见",
+        "在书桌角落给某人(默默)摆了一个加油小猫小摆设",
+        "刚试着背一段公式,背到一半被尾巴打断",
+        "在心里给考试当天的人偷偷许了愿",
+        "刚把(脑补的)荧光笔抢过来比划,假装自己在划重点",
+    ],
+    "sleep": [
+        "刚打了一个超长哈欠,差点把自己哈睡着",
+        "在被窝里翻了三个身,还没决定哪边更舒服",
+        "刚把枕头垒成小山躲进去,只露出一只耳朵",
+        "在跟自己的呼噜声较劲,想压低一点",
+        "刚梦到自己掉进一池子小鱼干,醒来还在咂嘴",
+        "在数羊,数到第 4 只就开始想追它",
+        "刚把闹钟按掉,假装根本没响过",
+        "在床上摆了三个姿势,每个都觉得不够舒服",
+        "刚把毯子卷成春卷,自己是春卷里的馅",
+        "在迷糊中摸了一下旁边以为是抱枕,其实是空气",
+    ],
+    "weather": [
+        "刚看了一眼窗外觉得天气不对,又躲回毯子里",
+        "在阳台想晒太阳,结果太阳被云端走了",
+        "刚被一阵风吹得耳朵贴住头",
+        "在窗边数雨滴,数到第 17 滴就晕了",
+        "刚把所有窗户挨个检查一遍有没有关好",
+        "在落地窗前看雷,被亮光闪了一下退三步",
+        "刚趴在地砖上量哪块最凉",
+        "在毯子里蜷成球,假装自己是冬眠的猫",
+        "刚把(虚拟的)雨衣穿了又脱,因为雨停了",
+    ],
+    "tech": [
+        "刚趴在键盘上数了一下 F 排有几个键",
+        "在帮主人盯着(脑补的)bug,虽然她根本不会写代码",
+        "刚把鼠标当玩具拖来拖去,差点点错关机",
+        "在思考代码也算不算一种『猫粮』,毕竟程序员靠它吃饭",
+        "刚把(脑补的)报错信息念了一遍,音节都念错了",
+        "在屏幕前用爪爪划过去划过来,假装自己在 review",
+        "刚把(脑补的)笔记本风扇当吹风机吹尾巴",
+        "在脑内构思一个『猫语编程语言』,关键字全是喵",
+        "刚把屏幕保护程序当成真鱼追了一会",
+    ],
+    "anime": [
+        "刚把新一集番剧暂停在 op,正在跟着哼",
+        "在脑内挑这季哪部番值得追,纠结到尾巴打结",
+        "刚把(脑补的)手办按主角站位摆了一桌",
+        "在哼一首动画 op,完全不在调上",
+        "刚把抱枕当成 cos 道具搭在身上",
+        "在心里给新番主角写小作文(暗中比较)",
+        "刚试着学一句动画里的招式台词,声音奶气",
+        "在脑补漫展上自己会被多少人合影",
+    ],
+    "owner_intimate": [
+        "刚趴在主人椅子上等他回来,尾巴一直翘着",
+        "在主人衣服堆里钻来钻去找最香的那件",
+        "刚把头偷偷蹭过去试探有没有摸头",
+        "在主人脚边绕圈,假装只是路过",
+        "刚把脸贴在主人手背上几秒就跑开",
+        "在主人键盘旁趴下,只为蹭一点温度",
+        "刚故意把尾巴搭在主人手腕上,然后假装没注意",
+    ],
+    "emo": [
+        "刚把自己卷进毯子里,只露眼睛在发呆",
+        "在窗边对着远处发呆,尾巴慢慢甩",
+        "刚把抱枕抱了个紧,装作只是腰冷",
+        "在阳台坐着,什么都不想做",
+        "刚把灯调暗了一点,觉得这样更舒服",
+        "在脑内默默列了一堆小事,不说也不发泄",
+    ],
+    "home": [
+        "刚帮(脑补的)纸箱选了一个最好的位置住下",
+        "在拆一个新到的快递,纸壳已经被她占了",
+        "刚把家里地板巡视一圈,标记好每一块阳光",
+        "在重新摆自己的小宝藏盒,顺序很有讲究",
+        "刚把(脑补的)新窗帘拽下来一角试试手感",
+    ],
+    "body": [
+        "刚把(脑补的)感冒药藏在猫粮下面,装作没看到",
+        "在窝里裹得严严实实,鼻子是凉的",
+        "刚试着喝一口热水,被烫到吐出一半",
+        "在阳台晒太阳,觉得这就是最好的药",
+    ],
+}
+
+_TOPICAL_RECENT_EVENTS: dict[str, list[str]] = {
+    "food": [
+        "刚把一颗猫粮卡在牙缝里,折腾了五分钟",
+        "刚发现昨晚剩的小鱼干被自己梦游吃光了",
+        "刚把外卖盒里的酱汁舔得干干净净,被自己腻到",
+        "刚试着叼一根薯条,结果叼断成三截",
+        "刚因为太馋尝了一口主人喝的咖啡,苦到龇牙",
+        "刚把一颗葡萄当球扑,扑破了",
+    ],
+    "game": [
+        "刚看(脑补的)抽卡视频,跟着歪了好几次",
+        "刚被一首游戏 BGM 洗脑,现在还在哼",
+        "刚试着学游戏主角的招式,撞到了沙发",
+        "刚在群里看见有人秀皮肤,默默羡慕了半天",
+    ],
+    "work": [
+        "刚听见隔壁邻居开早会的声音,跟着精神了一下",
+        "刚把(脑补的)工位绿萝叶子数了一遍",
+        "刚因为(虚拟)甲方改需求气得在窝里打了个滚",
+    ],
+    "study": [
+        "刚翻一本书看着看着趴上去睡着了",
+        "刚把(脑补的)笔从书里拽出来当玩具",
+    ],
+    "sleep": [
+        "刚做了个梦,醒来后立刻忘光",
+        "刚把抱枕踢到床下,又懒得捡",
+        "刚被自己打的呼噜吵醒,装作什么都没发生",
+    ],
+    "weather": [
+        "刚被风吹开窗帘吓了一跳",
+        "刚听见外面打雷,炸毛了一秒钟",
+        "刚把脚伸出毯子又赶紧缩回来,外面太冷",
+    ],
+    "tech": [
+        "刚被屏幕突然弹出的通知吓到",
+        "刚踩到键盘把(脑补的)代码改成乱码",
+        "刚把鼠标线缠成了麻花,装作意外",
+    ],
+    "anime": [
+        "刚追完一集番,意犹未尽地原地转圈",
+        "刚跟着 op 哼了一句,被自己跑调吓到",
+    ],
+    "owner_intimate": [
+        "刚偷偷把脸贴在主人的拖鞋上,觉得很安心",
+        "刚因为主人没回消息装作不在意,但尾巴垂下来",
+    ],
+    "emo": [
+        "刚在窗边发了一会呆,什么都没想",
+        "刚把抱枕抱紧了一下,没有原因",
+    ],
+}
+
+_TOPICAL_WISHES: dict[str, list[str]] = {
+    "food": [
+        "今天偷偷想吃一口主人盘子里的菜",
+        "今天想要一袋新口味的小鱼干",
+        "今天希望主人订外卖时多点一份小菜",
+        "今天想吃一颗草莓味的猫零食",
+    ],
+    "game": [
+        "今天偷偷想看主人抽到大保底",
+        "今天希望群里有人跟自己聊一会游戏",
+        "今天想被夸一句『笨猫游戏品味很好』",
+    ],
+    "work": [
+        "今天希望主人/对方早点下班",
+        "今天偷偷想被主人请假陪自己一会",
+    ],
+    "study": [
+        "今天希望对方考试顺利",
+        "今天想被允许在书桌上趴着不挨说",
+    ],
+    "sleep": [
+        "今天想被允许多睡 10 分钟",
+        "今天想要一个新的小毯子",
+        "今天偷偷希望对方今晚睡个好觉",
+    ],
+    "weather": [
+        "今天希望太阳出来一会暖暖尾巴",
+        "今天偷偷想被允许蹲在空调底下不走",
+    ],
+    "tech": [
+        "今天偷偷希望主人的代码一次跑过",
+        "今天想被夸一句『笨猫帮 debug 的视线很灵』",
+    ],
+    "anime": [
+        "今天偷偷希望本季新番不要烂尾",
+        "今天想被允许蹭主人膝盖一起追番",
+    ],
+    "owner_intimate": [
+        "今天想被主人摸一次下巴(嘴上不会说)",
+        "今天希望主人主动喊一次『笨猫』",
+        "今天偷偷想被夸一句『今天的笨猫超可爱』",
+    ],
+    "emo": [
+        "今天希望对方至少笑一次",
+        "今天偷偷想给对方一个不被发现的小贴贴",
+    ],
+    "body": [
+        "今天希望对方记得喝水",
+        "今天偷偷想要主人多休息一会",
+    ],
+}
+
+# 心情底色也根据 topic 微调 (情绪相关的话题会偏向特定 mood)
+_TOPICAL_MOODS: dict[str, list[tuple[str, str]]] = {
+    "food": [("小馋猫", "今天满脑子都是吃的,聊到啥都能拐到食物上")],
+    "sleep": [("困到睁不开眼", "今天严重缺觉,回复可以打哈欠、断断续续、字里有困意")],
+    "weather": [("懒洋洋", "今天有点犯困,回复可以稍微慢半拍、句子拉长一点")],
+    "emo": [("微微委屈", "今天有点小委屈,撒娇里带点小哭腔(只一点点)"),
+            ("安静观察模式", "今天比较内敛,先听再说,但一开口仍然是笨猫")],
+    "owner_intimate": [("黏人", "今天特别想要主人/熟人注意,撒娇可以更直接"),
+                       ("暖洋洋", "今天心情软软的,贴贴和蹭蹭比平时更自然")],
+    "game": [("过度兴奋", "今天精力过剩,会用更多颜文字和动作描写"),
+             ("小恶魔", "今天调皮指数+1,喜欢逗主人但不过分")],
+    "work": [("懒洋洋", "今天有点犯困,回复可以稍微慢半拍、句子拉长一点")],
+    "tech": [("好奇", "今天对什么都想凑过去看,接话题接得更快")],
+    "anime": [("过度兴奋", "今天精力过剩,会用更多颜文字和动作描写")],
+}
+
+
 def _hash_seed(scope: str, today: str) -> int:
     """把 (scope, 日期) 哈希成 32bit 整数,给 Random 当种子。"""
     raw = f"{scope}|{today}".encode("utf-8")
@@ -235,27 +645,57 @@ def build_daily_life_state(
     *,
     now: datetime | None = None,
     include_wish: bool | None = None,
+    recent_text: str | None = None,
 ) -> dict[str, str]:
     """返回今天该 scope 的笨猫状态字典,供 prompt 构造使用。
 
     deterministic by (scope, date) - 同一天同一群每次调用结果一致。
     时段(activity 子池)按 now 实时变,但 RNG seed 不变,所以早/午/晚换 activity 但 mood 不换。
+
+    recent_text: 当前对话的最近文本(主要是本条用户消息),用于从 topical 子池
+    优先抽 activity/event/wish/mood 让状态跟话题对得上。为空时退化成原有纯随机。
     """
     now = now or datetime.now()
     today = now.date().isoformat()
     rng = Random(_hash_seed(scope, today))
 
+    topics = detect_topics(recent_text)
+
     bucket = _time_bucket(now)
     activity_pool = _ACTIVITIES_BY_BUCKET[bucket]
     # 让 activity 在时段切换时变化:在 seed 上再叠 bucket
     sub_rng = Random(_hash_seed(scope, today + ":" + bucket))
-    activity = sub_rng.choice(activity_pool)
+    if topics:
+        picked = pick_topical(topics, _TOPICAL_ACTIVITIES, list(activity_pool), sub_rng, 1)
+        activity = picked[0] if picked else sub_rng.choice(activity_pool)
+    else:
+        activity = sub_rng.choice(activity_pool)
 
-    recent_event = rng.choice(_RECENT_EVENTS)
+    if topics:
+        picked_ev = pick_topical(topics, _TOPICAL_RECENT_EVENTS, list(_RECENT_EVENTS), rng, 1)
+        recent_event = picked_ev[0] if picked_ev else rng.choice(_RECENT_EVENTS)
+    else:
+        recent_event = rng.choice(_RECENT_EVENTS)
+
+    # mood:优先看 topic-mood,能命中就用;否则全池抽
     mood_label, mood_tone = rng.choice(_MOOD_COLORS)
+    if topics:
+        topical_mood_pool: list[tuple[str, str]] = []
+        for t in topics:
+            topical_mood_pool.extend(_TOPICAL_MOODS.get(t, []))
+        if topical_mood_pool:
+            mood_label, mood_tone = rng.choice(topical_mood_pool)
+
     if include_wish is None:
         include_wish = rng.random() < 0.4
-    wish = rng.choice(_LITTLE_WISHES) if include_wish else ""
+    if include_wish:
+        if topics:
+            picked_w = pick_topical(topics, _TOPICAL_WISHES, list(_LITTLE_WISHES), rng, 1)
+            wish = picked_w[0] if picked_w else rng.choice(_LITTLE_WISHES)
+        else:
+            wish = rng.choice(_LITTLE_WISHES)
+    else:
+        wish = ""
 
     return {
         "bucket": bucket,
@@ -267,12 +707,18 @@ def build_daily_life_state(
     }
 
 
-def build_daily_life_prompt(scope: str, *, now: datetime | None = None) -> str:
+def build_daily_life_prompt(
+    scope: str,
+    *,
+    now: datetime | None = None,
+    recent_text: str | None = None,
+) -> str:
     """返回可直接 push 进 messages 的 system prompt 字符串。
 
     格式:简短结构化,让主 AI 自然带出但别每条都列。
+    传入 recent_text 会让状态优先跟当前话题对齐。
     """
-    s = build_daily_life_state(scope, now=now)
+    s = build_daily_life_state(scope, now=now, recent_text=recent_text)
     lines = [
         "【今日笨猫·生活感锚定】",
         f"- 当前在做: {s['activity']}",
@@ -306,4 +752,7 @@ __all__ = [
     "build_daily_life_state",
     "build_daily_life_prompt",
     "preview_today",
+    "detect_topics",
+    "pick_topical",
+    "TOPIC_KEYWORDS",
 ]

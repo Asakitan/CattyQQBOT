@@ -94,6 +94,7 @@ class ScopeLorebookStore:
         self._path = p.parent / "scope_lorebooks.json"
         self._lock = threading.RLock()
         self._data: dict[str, list[ScopeLoreEntry]] = {}
+        self._meta: dict[str, dict[str, Any]] = {}  # per-scope metadata: last_summary_date 等
         self._last_access: dict[str, float] = {}
         self._dirty = False
         self._load()
@@ -123,6 +124,11 @@ class ScopeLorebookStore:
             if parsed:
                 self._data[str(sc)] = parsed
                 self._last_access[str(sc)] = now
+        meta = raw.get("meta") or {}
+        if isinstance(meta, dict):
+            for sc, m in meta.items():
+                if isinstance(m, dict):
+                    self._meta[str(sc)] = dict(m)
 
     def _atomic_write(self) -> None:
         self._path.parent.mkdir(parents=True, exist_ok=True)
@@ -133,6 +139,7 @@ class ScopeLorebookStore:
                 sc: [e.to_payload() for e in entries]
                 for sc, entries in self._data.items()
             },
+            "meta": {sc: dict(m) for sc, m in self._meta.items() if m},
         }
         text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
         try:
