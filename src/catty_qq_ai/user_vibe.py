@@ -37,67 +37,34 @@ _MAX_TOPIC_TAGS = 5
 
 
 # ── 关键词 → tag 分类器(本地 zero-cost,不调 LLM) ────────────────────
-# vibe 分类: 多 keyword 命中 → 选最强匹配的;持平默认 playful
-_VIBE_KEYWORDS: dict[str, tuple[str, ...]] = {
-    "techie": (
-        "代码", "python", "java", "javascript", "ts", "react", "vue", "linux",
-        "docker", "kubectl", "k8s", "git", "github", "bug", "报错", "stack",
-        "算法", "数据结构", "接口", "数据库", "sql", "正则", "shell", "命令行",
-        "服务器", "deploy", "测试", "调试", "merge", "pr ", "ci/", "regex",
-    ),
-    "lewd_curious": (
-        "色色", "涩涩", "h", "艹", "操", "床", "胸", "腿", "腹黑", "黄",
-        "色图", "擦边", "性感", "JK", "白丝", "黑丝", "猫娘的尾巴",
-        "羞羞", "想xx", "腿玩年",
-    ),
-    "tease": (
-        "杂鱼", "笨蛋", "笨猫", "傻猫", "蠢", "弱", "孩子",
-        "哼哼", "嘿嘿嘿", "嘻嘻", "嗷", "你这个", "你居然", "哈?",
-    ),
-    "serious": (
-        "为什么", "如何", "怎么做", "讨论", "请教", "分析", "原因", "依据",
-        "建议", "方案", "原理", "区别", "对比", "评价", "总结", "看法",
-    ),
-    "playful": (
-        "笑死", "蚌埠", "绝", "牛", "666", "草", "yyds", "awsl",
-        "贴贴", "蹭蹭", "可爱", "好玩", "xs", "嘿嘿", "嘻嘻",
-        "玩玩", "整活", "嗨翻",
-    ),
-}
+# vibe 分类: 多 keyword 命中 → 选最强匹配的;持平按 dict 顺序定胜(techie 优先)。
+# topic 分类: 一条消息可命中多个 topic。
+# 关键词都从 data/{vibe,topic}_keywords/<tag>.json 加载,改库就动 JSON 不用碰 .py。
+# 文件丢或损坏 → RuntimeError 直接挂掉(关键数据 fail-fast,不静默退化)。
+_VIBE_TAGS: tuple[str, ...] = ("techie", "lewd_curious", "tease", "serious", "playful")
+_TOPIC_TAGS: tuple[str, ...] = ("gaming", "tech", "food", "random", "emo", "study", "meta")
+_DATA_ROOT = Path(__file__).resolve().parent / "data"
 
-# topic 分类: 一条消息可命中多个 topic
-_TOPIC_KEYWORDS: dict[str, tuple[str, ...]] = {
-    "gaming": (
-        "游戏", "原神", "崩铁", "卡拉彼丘", "strinova", "明日方舟",
-        "minecraft", "我的世界", "mc", "csgo", "valorant", "联机", "组队",
-        "副本", "本子", "刷", "技能", "boss", "段位", "打游戏",
-    ),
-    "tech": (
-        "代码", "python", "java", "前端", "后端", "ai", "openai", "claude",
-        "github", "linux", "docker", "服务器", "算法", "数据库", "网络",
-        "调试", "deploy", "运维",
-    ),
-    "food": (
-        "吃", "喝", "饭", "好吃", "饿", "馋", "外卖", "烤", "煮",
-        "螺蛳粉", "火锅", "烧烤", "小鱼干", "罐头", "牛奶",
-    ),
-    "random": (
-        "今天", "天气", "下雨", "好热", "好冷", "上班", "下班", "通勤",
-        "出门", "回家", "睡觉", "起床",
-    ),
-    "emo": (
-        "难过", "emo", "崩溃", "心累", "委屈", "失恋", "孤独", "一个人",
-        "想家", "压力大",
-    ),
-    "study": (
-        "考试", "复习", "ddl", "deadline", "作业", "论文", "毕设",
-        "答辩", "上课", "学校", "老师", "刷题",
-    ),
-    "meta": (
-        "你是", "ai", "bot", "助手", "程序", "扮演", "测试", "笨猫",
-        "猫猫", "猫娘",
-    ),
-}
+
+def _load_keyword_groups(subdir: str, tags: tuple[str, ...]) -> dict[str, tuple[str, ...]]:
+    base = _DATA_ROOT / subdir
+    out: dict[str, tuple[str, ...]] = {}
+    for tag in tags:
+        path = base / f"{tag}.json"
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8-sig"))
+        except OSError as exc:
+            raise RuntimeError(f"{subdir}/{tag}.json missing: {exc}") from exc
+        except json.JSONDecodeError as exc:
+            raise RuntimeError(f"{subdir}/{tag}.json bad JSON: {exc}") from exc
+        if not isinstance(raw, list):
+            raise RuntimeError(f"{subdir}/{tag}.json must be a JSON array")
+        out[tag] = tuple(str(k) for k in raw if k)
+    return out
+
+
+_VIBE_KEYWORDS: dict[str, tuple[str, ...]] = _load_keyword_groups("vibe_keywords", _VIBE_TAGS)
+_TOPIC_KEYWORDS: dict[str, tuple[str, ...]] = _load_keyword_groups("topic_keywords", _TOPIC_TAGS)
 
 
 def _lower(text: str) -> str:

@@ -1,0 +1,25 @@
+[
+  "代码", "python", "java", "javascript", "ts", "c++", "c#", "rust",
+  "golang", "php", "ruby", "swift", "kotlin", "scala", "haskell", "lua",
+
+  "react", "vue", "svelte", "nextjs", "django", "flask", "spring",
+  "express", "nodejs", "node.js", "npm", "yarn", "pnpm", "webpack",
+  "vite", "tailwind", "fastapi", "rails",
+
+  "linux", "docker", "kubectl", "k8s", "kubernetes", "nginx", "apache",
+  "redis", "postgres", "mysql", "mongodb", "kafka", "rabbitmq", "es ",
+  "elasticsearch", "prometheus", "grafana",
+
+  "git", "github", "gitlab", "vscode", "vim", "neovim", "idea", "pycharm",
+  "webstorm", "jetbrains",
+
+  "算法", "数据结构", "接口", "api", "数据库", "sql", "正则", "regex",
+  "shell", "命令行", "服务器", "deploy", "部署", "测试", "调试", "debug",
+  "merge", "rebase", "pr ", "ci/", "cd/", "pipeline", "架构", "重构",
+  "refactor", "函数", "变量", "类", "封装", "继承", "多态", "异步",
+  "await", "async", "promise", "并发", "线程", "进程", "协程", "递归",
+  "栈", "队列", "链表", "哈希", "缓存", "锁", "事务",
+
+  "bug", "报错", "stack", "异常", "exception", "崩溃", "日志", "log",
+  "排查", "troubleshoot", "复现", "trace", "core dump", "oom"
+]
