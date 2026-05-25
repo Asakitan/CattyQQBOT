@@ -75,15 +75,43 @@ _PROTECTED_IDENTIFIERS: frozenset[str] = frozenset({
 })
 
 
-def estimate_tokens(text: str) -> int:
-    """粗略估算文本 token 数 — 中文按 1 char ≈ 1 token, ASCII 按 4 chars ≈ 1 token。
+# tiktoken 优先 (精确), fallback 粗略估算。Python 3.14 兼容 (tiktoken 0.13.0+ 有 cp314 wheel)。
+_TIKTOKEN_ENC = None
+_TIKTOKEN_TRIED = False
 
-    GPT-5.5 / Claude 中文 tokenizer 大致是 1 token ≈ 1-1.5 字, ASCII 4 字 ≈ 1 token。
-    不调用真实 tokenizer (cl100k_base / o200k_base) 避免引入 tiktoken 依赖,
-    精度够用作 budget gate (差 10-20% 不影响判断 trim 哪段)。
+
+def _get_tiktoken_encoder():  # noqa: ANN202
+    """lazy load tiktoken encoder. 优先 o200k_base (gpt-4o/5+), fallback cl100k_base。"""
+    global _TIKTOKEN_ENC, _TIKTOKEN_TRIED
+    if _TIKTOKEN_TRIED:
+        return _TIKTOKEN_ENC
+    _TIKTOKEN_TRIED = True
+    try:
+        import tiktoken  # type: ignore
+        try:
+            _TIKTOKEN_ENC = tiktoken.get_encoding("o200k_base")
+        except Exception:  # noqa: BLE001
+            _TIKTOKEN_ENC = tiktoken.get_encoding("cl100k_base")
+    except Exception:  # noqa: BLE001
+        _TIKTOKEN_ENC = None
+    return _TIKTOKEN_ENC
+
+
+def estimate_tokens(text: str) -> int:
+    """估算文本 token 数 — tiktoken 优先 (精确), fallback 粗略 (中文 1c≈1t / ASCII 4c≈1t)。
+
+    GPT-5+ / Claude / gpt-4o 都用 o200k_base 风格 tokenizer, 精确数 budget gate 用。
+    tiktoken 装失败时 fallback 估算精度 ±10-20%, 不影响判断 trim 哪段。
     """
     if not text:
         return 0
+    enc = _get_tiktoken_encoder()
+    if enc is not None:
+        try:
+            return len(enc.encode(text, disallowed_special=()))
+        except Exception:  # noqa: BLE001
+            pass  # fall through to estimate
+    # fallback 粗略估算
     cn_count = 0
     ascii_count = 0
     for ch in text:
