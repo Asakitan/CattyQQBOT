@@ -21,6 +21,11 @@ from typing import Any, Awaitable, Callable
 import httpx
 from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, PrivateMessageEvent
 
+from .affection import (
+    AffectionStore,
+    image_cost_for_quality,
+    predict_checkin_range,
+)
 from .config import Config
 from .hot_trends import fetch_hot_trends, normalize_sources
 from .mc_status import _default_probe
@@ -686,6 +691,9 @@ class ToolContext:
     config: Config
     memory_store: MemoryStore
     event: MessageEvent | None
+    # 签到积分/好感度 store; imagegen 走它扣分,主人豁免。
+    # __init__.py 在装配时注入;留 None 兼容老路径(本地调用不传也不崩)。
+    affection_store: "AffectionStore | None" = None
     # 由 __init__.py 主回复点注入:把 NSFW pixiv 结果下载成本地缓存 segments,
     # 复用现有 sent_registry / cache_dir / LRU 清理。tools.py 不持有这套状态。
     prepare_nsfw_segments_fn: Callable[
@@ -1245,6 +1253,30 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
     if output_format not in _IMAGEGEN_FMT_TO_EXT:
         output_format = "png"
 
+    # ── 签到积分扣费 (主人豁免;余额不够告诉 AI 让她提醒用户签到) ──
+    image_cost = image_cost_for_quality(quality)
+    affection = getattr(ctx, "affection_store", None)
+    if affection is not None and image_cost > 0:
+        balance = affection.get_points(ctx.user_id) if ctx.user_id else 0
+        if not affection.is_owner(ctx.user_id) and balance < image_cost:
+            level, _exp = affection.get_level_and_exp(ctx.user_id)
+            lo, hi = predict_checkin_range(level)
+            return {
+                "error": "积分不够,无法生图",
+                "balance": balance,
+                "cost": image_cost,
+                "shortfall": image_cost - balance,
+                "user_level": level,
+                "today_checkin_estimate": f"{lo}-{hi}",
+                "user_facing_hint": (
+                    f"用猫娘口吻提醒用户:他当前只有 {balance} 积分,这张图(quality={quality})要 {image_cost} 分,"
+                    f"还差 {image_cost - balance} 分。让他发『签到』来领今天的积分,"
+                    f"他现在好感等级 Lv{level},今天签到大概能拿 {lo}-{hi} 分。"
+                    "傲娇但要把要点说全:差多少、要 Lv 几、发『签到』两个字就能领。"
+                    "**禁止**自己再调一次 catty_imagegen 重复发。"
+                ),
+            }
+
     base_url = str(getattr(ctx.config, "catty_imagegen_base_url", "") or getattr(ctx.config, "catty_openai_base_url", "") or "").strip().rstrip("/")
     api_key = str(getattr(ctx.config, "catty_imagegen_api_key", "") or getattr(ctx.config, "catty_openai_api_key", "") or "").strip()
     model = str(getattr(ctx.config, "catty_imagegen_model", "gpt-image-2") or "gpt-image-2").strip()
@@ -1545,6 +1577,16 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
         len(prompt), prompt[:300],
         f"...(+{len(prompt)-300} chars)" if len(prompt) > 300 else "",
     )
+    # 真正扣积分(主人内部判定为 ok 但不变余额)。失败这里不发生:check 阶段已 guard,
+    # 这里只是把已生成图的成本落账。
+    consume_result: dict[str, Any] = {}
+    if affection is not None and image_cost > 0 and ctx.user_id:
+        try:
+            consume_result = affection.consume_points(ctx.user_id, image_cost)
+        except Exception as exc:  # noqa: BLE001
+            _logger.warning("imagegen: consume_points failed (image still sent): %s", exc)
+    balance_after = int(consume_result.get("balance_after", -1))
+    is_owner_charge = bool(consume_result.get("is_owner"))
     return {
         "image_sent": True,
         "mode": mode,
@@ -1554,9 +1596,17 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
         "bytes": len(image_bytes),
         "elapsed_seconds": round(elapsed, 1),
         "input_image_used": bool(input_image_bytes),
+        "cost": image_cost,
+        "balance_after": balance_after,
+        "is_owner_charge": is_owner_charge,
         "guidance": (
             "图已经程序自动发出去了,你只需补 1-2 句猫娘短评(『画好啦~主人看看喜不喜欢喵 ฅฅ』)。"
             "**禁止**贴 base64 / file 路径 / image_uri 到回复里;**禁止**再调一次 catty_imagegen 重复发。"
+            + (
+                ""
+                if is_owner_charge
+                else f" 本次消耗 {image_cost} 积分,该用户剩余 {balance_after} 分(余额低于 100 时可以提一句『再画就要签到啦喵~』,不用强调)。"
+            )
         ),
     }
 

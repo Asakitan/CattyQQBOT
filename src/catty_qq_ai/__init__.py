@@ -42,6 +42,11 @@ from .message_utils import (
     reply_message_ids,
     split_reply,
 )
+from .affection import (
+    AffectionStore,
+    image_cost_for_quality,
+    predict_checkin_range,
+)
 from .emoji_store import EmojiEntry, EmojiStore
 from .legs_picker import LegsPicker, is_legs_trigger, random_legs_reply
 from .memory import MemoryStore
@@ -156,6 +161,7 @@ _apply_bot_cpu_affinity(config)
 memory_store = MemoryStore(config)
 emoji_store = EmojiStore(config)
 legs_picker = LegsPicker(config)
+affection_store = AffectionStore(config)
 _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
@@ -668,6 +674,30 @@ def _remember_bot_conversation_message(
     )
 
 
+_affection_credited_message_ids: "OrderedDict[str, float]" = OrderedDict()
+_AFFECTION_CREDITED_MAX = 2048
+
+
+def _credit_affection_for_event_once(event: MessageEvent) -> None:
+    """对一条用户原始消息只 +1 好感度,避免分段发送被重复刷分。
+    用 user_id + message_id 当 dedupe key,LRU 截断防膨胀。
+    """
+    msg_id = str(getattr(event, "message_id", "") or "")
+    user_id = str(event.user_id)
+    if not user_id:
+        return
+    key = f"{user_id}:{msg_id}" if msg_id else f"{user_id}:no-mid:{time.time():.0f}"
+    if key in _affection_credited_message_ids:
+        return
+    _affection_credited_message_ids[key] = time.time()
+    while len(_affection_credited_message_ids) > _AFFECTION_CREDITED_MAX:
+        _affection_credited_message_ids.popitem(last=False)
+    try:
+        affection_store.add_exp(user_id, amount=1)
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"affection add_exp failed (non-fatal): {exc}")
+
+
 def _remember_bot_reply_for_event(event: MessageEvent, text: str) -> None:
     _remember_bot_conversation_message(
         _conversation_queue_key(event),
@@ -675,6 +705,9 @@ def _remember_bot_reply_for_event(event: MessageEvent, text: str) -> None:
         text=text,
         target_user_id=str(event.user_id),
     )
+    # 每次猫猫对该用户实际回复一次,+1 好感度(主人 / 已 cap 用户自动 no-op);
+    # 内部对一条用户消息只计一次,分段发送不会重复刷分。
+    _credit_affection_for_event_once(event)
 
 
 def _remember_bot_repeat_for_event(event: MessageEvent, text: str) -> None:
@@ -995,17 +1028,23 @@ def _remember_hot_reload_config_signature(path: Path | None, signature: tuple[in
 
 
 def _apply_runtime_config(new_config: Config) -> None:
-    global config, memory_store, emoji_store, legs_picker
+    global config, memory_store, emoji_store, legs_picker, affection_store
     # 切实例前先把旧 memory_store 待写的脏数据落盘,避免 hot reload 丢失最近的记忆。
     try:
         if memory_store.flush_sync():
             logger.info("memory_store: flushed dirty data before hot reload")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"memory_store: pre-reload flush failed: {exc}")
+    try:
+        if affection_store.flush_sync():
+            logger.info("affection_store: flushed dirty data before hot reload")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"affection_store: pre-reload flush failed: {exc}")
     config = new_config
     memory_store = MemoryStore(config)
     emoji_store = EmojiStore(config)
     legs_picker = LegsPicker(config)
+    affection_store = AffectionStore(config)
     _legs_last_sent_at.clear()
     _keyword_reply_last_sent_at.clear()
     _sync_hot_reload_signatures()
@@ -1013,6 +1052,7 @@ def _apply_runtime_config(new_config: Config) -> None:
     # 给新实例补起一个真正生效的后台 flush 协程。
     try:
         asyncio.create_task(memory_store.background_flush_loop())
+        asyncio.create_task(affection_store.background_flush_loop())
     except RuntimeError:
         # _apply_runtime_config 也会在启动早期/同步上下文里被调用,那时没 event loop,
         # 启动钩子 start_memory_summary_loop 会负责把第一份 task 起起来,这里跳过即可。
@@ -1843,6 +1883,13 @@ def _build_messages(
         messages.append({"role": "system", "content": special_care_context})
     if anger_context:
         messages.append({"role": "system", "content": anger_context})
+    # 好感度等级 → 决定笨猫对当前用户的亲密程度,主人永远 MAX。
+    try:
+        affection_hint = affection_store.persona_hint(str(event.user_id))
+        if affection_hint:
+            messages.append({"role": "system", "content": affection_hint})
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"affection persona_hint failed (non-fatal): {exc}")
     if web_search_context:
         messages.append({"role": "system", "content": web_search_context})
     if star_resonance_context:
@@ -1992,6 +2039,26 @@ def _is_memory_cache_clear_request(text: str) -> bool:
         "清空当前缓存",
         "清空当前记忆缓存",
     }
+
+
+_SIGNIN_KEYWORDS = {
+    "签到", "猫猫签到", "笨猫签到", "/签到", "/checkin", "checkin",
+    "每日签到", "今日签到", "我要签到",
+}
+_POINTS_QUERY_KEYWORDS = {
+    "我的积分", "积分查询", "查积分", "查看积分", "查询积分",
+    "猫猫我的积分", "/积分", "/points", "points",
+    "我的好感度", "好感度", "好感", "查好感", "查看好感",
+    "猫猫好感度", "/好感", "/affection",
+}
+
+
+def _is_signin_request(text: str) -> bool:
+    return _compact_text(text) in _SIGNIN_KEYWORDS
+
+
+def _is_points_query_request(text: str) -> bool:
+    return _compact_text(text) in _POINTS_QUERY_KEYWORDS
 
 
 def _is_memory_view_request(text: str) -> bool:
@@ -3398,6 +3465,51 @@ async def _keyword_reply_rule(bot: Bot, event: MessageEvent, state: T_State) -> 
     return True
 
 
+async def _affection_command_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    """匹配 签到 / 我的积分 / 好感度查询 这类命令,在主回复 AI 之前短路掉。
+
+    必须指向猫猫(@/引用/触发前缀/直呼"猫猫"等)才触发,避免群里有人随口
+    发"签到"被命中(他可能在别的 bot 那签到,跟猫猫没关系)。私聊默认指向猫猫。
+    """
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    text = event_plain_text(event)
+    if not text:
+        return False
+    cmd: str = ""
+    if _is_signin_request(text):
+        cmd = "signin"
+    elif _is_points_query_request(text):
+        cmd = "points"
+    else:
+        # 文本可能形如 "猫猫 签到" / "笨猫，我的积分"——先用 extract_incoming_message
+        # 把前缀/@ 剥掉再判定一次,顺便确认 directly_requested。
+        replied_to_self = await _reply_targets_self(bot, event)
+        incoming = extract_incoming_message(
+            str(bot.self_id), event, config, replied_to_self=replied_to_self
+        )
+        if incoming is None or not incoming.directly_requested:
+            return False
+        stripped = incoming.text.strip()
+        if _is_signin_request(stripped):
+            cmd = "signin"
+        elif _is_points_query_request(stripped):
+            cmd = "points"
+        else:
+            return False
+        state["catty_affection_cmd"] = cmd
+        return True
+    # 第一轮命中了完整短语,但仍要确认是指向猫猫的
+    replied_to_self = await _reply_targets_self(bot, event)
+    incoming = extract_incoming_message(
+        str(bot.self_id), event, config, replied_to_self=replied_to_self
+    )
+    if incoming is None or not incoming.directly_requested:
+        return False
+    state["catty_affection_cmd"] = cmd
+    return True
+
+
 async def _legs_picture_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     if not legs_picker.enabled:
         return False
@@ -3422,6 +3534,7 @@ async def _legs_picture_rule(bot: Bot, event: MessageEvent, state: T_State) -> b
 
 
 keyword_reply_matcher = on_message(rule=_keyword_reply_rule, priority=40, block=True)
+affection_command_matcher = on_message(rule=_affection_command_rule, priority=42, block=True)
 legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
 expression_repeat_matcher = on_message(rule=_expression_repeat_rule, priority=50, block=True)
@@ -3531,6 +3644,99 @@ async def handle_keyword_reply(matcher: Matcher, event: MessageEvent, state: T_S
         )
 
 
+def _format_signin_reply(event: MessageEvent, result: dict) -> str:
+    is_owner = bool(result.get("is_owner"))
+    if result.get("already"):
+        bal = result.get("balance", 0)
+        last_amt = result.get("last_amount", 0)
+        if is_owner:
+            return (
+                "哼,主人你今天已经签过啦~ 人家给主人留的是无限积分啦笨蛋,"
+                "随便画图都不会少的喵 (尾巴摇摇) ฅฅ"
+            )
+        return (
+            f"嗷呜~ 今天已经签过啦笨蛋!上次拿了 {last_amt} 分,目前余额 {bal} 分。"
+            f"明天再来才有的领喵~ ฅฅ"
+        )
+    gained = int(result.get("gained", 0))
+    level = int(result.get("level", 1))
+    bonus = int(result.get("bonus", 0))
+    base = int(result.get("base", 0))
+    if is_owner:
+        return (
+            f"哼~ 主人签到啦!今天加成 +{bonus},总共 {gained} 分(本来就是无限啦笨蛋)~"
+            f" 人家专门给主人留了 Lv MAX 待遇喵 ฅฅ"
+        )
+    bal = int(result.get("balance", 0))
+    # 给一个亲昵度档位提示
+    if level >= 8:
+        tone = "今天也最喜欢你啦~ 蹭蹭"
+    elif level >= 5:
+        tone = "和你越来越熟啦~"
+    elif level >= 3:
+        tone = "继续多来陪人家聊天嘛~"
+    else:
+        tone = "新人也加油签到吧喵~"
+    return (
+        f"喵~ 签到成功啦!基础 {base} + 好感加成 {bonus} = 今天领到 {gained} 分,"
+        f"当前余额 {bal} 分。好感等级 Lv{level}/10。{tone} ฅฅ"
+    )
+
+
+def _format_points_query_reply(event: MessageEvent, summary: dict) -> str:
+    if summary.get("is_owner"):
+        return (
+            "主人的积分是 ∞(无限啦笨蛋),好感等级 Lv MAX。"
+            "随便画图都不会扣的喵~ 人家可是最听主人话的笨猫 ฅฅ"
+        )
+    pts = int(summary.get("points", 0))
+    level = int(summary.get("level", 1))
+    exp = int(summary.get("exp", 0))
+    to_next = int(summary.get("exp_to_next_level", 0))
+    last_date = str(summary.get("last_checkin_date", "") or "")
+    lo, hi = summary.get("checkin_range_today", (0, 0))
+    today_status = (
+        f"今天已签到啦(发『签到』也只能拿一次喵)" if last_date == _today_local_str() else
+        f"今天还没签到~ 现在签能拿 {lo}-{hi} 分,快发『签到』喵!"
+    )
+    next_line = (
+        f"再攒 {to_next} 好感度能升 Lv{level+1}~" if level < 10 else "已经满级啦超厉害!"
+    )
+    return (
+        f"喵~ 当前余额 {pts} 分,好感等级 Lv{level}/10 (经验 {exp})。{next_line}\n"
+        f"画图消耗:low=20 / medium=50 / high=100。\n"
+        f"{today_status}"
+    )
+
+
+def _today_local_str() -> str:
+    from datetime import date as _date
+    return _date.today().isoformat()
+
+
+@affection_command_matcher.handle()
+async def handle_affection_command(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    cmd = str(state.get("catty_affection_cmd") or "")
+    user_id = str(event.user_id)
+    async with _locks[_conversation_queue_key(event)]:
+        if cmd == "signin":
+            result = affection_store.daily_checkin(user_id)
+            reply = _format_signin_reply(event, result)
+        elif cmd == "points":
+            summary = affection_store.summary(user_id)
+            reply = _format_points_query_reply(event, summary)
+        else:
+            return
+        _remember_bot_reply_for_event(event, reply)
+        await matcher.finish(
+            _compose_reply_message(
+                event,
+                text=reply,
+                quote=isinstance(event, GroupMessageEvent),
+            )
+        )
+
+
 async def _generate_legs_caption(user_text: str) -> str:
     if not _has_api_key():
         return random_legs_reply()
@@ -3612,7 +3818,8 @@ async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_St
 
         image_segment = MessageSegment.image(file=picture.resolve().as_uri())
         sent = False
-        last_exc: OnebotActionFailed | None = None
+        last_exc: Exception | None = None
+        # 同 imagegen 路径:ActionFailed 不 retry(可能已送达,retry 会重复),NetworkError 才 retry。
         for attempt in range(2):
             try:
                 await matcher.send(Message(image_segment))
@@ -3622,11 +3829,15 @@ async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_St
                 break
             except OnebotActionFailed as exc:
                 last_exc = exc
+                logger.warning(f"Legs image send ActionFailed (no retry to avoid dup): {exc}")
+                break
+            except OnebotNetworkError as exc:
+                last_exc = exc
                 if attempt == 0:
-                    logger.warning(f"Legs image send failed (attempt 1, retry in 2s): {exc}")
+                    logger.warning(f"Legs image send NetworkError (attempt 1, retry in 2s): {exc}")
                     await asyncio.sleep(2.0)
                 else:
-                    logger.warning(f"Legs image send failed twice (giving up): {exc}")
+                    logger.warning(f"Legs image send NetworkError twice (giving up): {exc}")
         if not sent and last_exc is not None:
             try:
                 await matcher.send(Message("喵呜…图被 QQ 风控拦掉了嗷呜，主人过会儿再试 (尾巴垂垂) ฅฅ"))
@@ -3801,6 +4012,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(_local_critic_warmup_loop())
     asyncio.create_task(cache.background_flush_loop())
     asyncio.create_task(memory_store.background_flush_loop())
+    asyncio.create_task(affection_store.background_flush_loop())
 
 
 @get_driver().on_shutdown
@@ -3819,6 +4031,15 @@ async def _flush_memory_store_on_shutdown() -> None:
             logger.info("memory_store: flushed dirty data on shutdown")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"memory_store: shutdown flush failed: {exc}")
+
+
+@get_driver().on_shutdown
+async def _flush_affection_store_on_shutdown() -> None:
+    try:
+        if affection_store.flush_sync():
+            logger.info("affection_store: flushed dirty data on shutdown")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"affection_store: shutdown flush failed: {exc}")
 
 
 @chat_matcher.handle()
@@ -4116,6 +4337,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             config=config,
             memory_store=memory_store,
             event=event,
+            affection_store=affection_store,
             prepare_nsfw_segments_fn=_prepare_nsfw_image_segments,
             download_binary_fn=download_binary,
             input_image_urls=list(incoming.image_urls or []),
@@ -4292,8 +4514,11 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             retry_count = 0
             for seg in nsfw_image_segments:
                 sent = False
-                last_exc: OnebotActionFailed | None = None
-                for attempt in range(2):  # 1 次原始 + 1 次重试，对付瞬时 NT timeout
+                last_exc: Exception | None = None
+                # ActionFailed(retcode=1200 等)语义模糊:图很可能已经送达,只是 napcat 没拿到
+                # NT 的确认包,retry 会让 QQ 收到重复图(主人观察到的"偶尔发两次")。
+                # 所以 ActionFailed 不 retry。NetworkError 是 HTTP 层 napcat 都没碰到,可以安全 retry 1 次。
+                for attempt in range(2):
                     try:
                         await matcher.send(Message(seg))
                         sent = True
@@ -4303,14 +4528,20 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                         break
                     except OnebotActionFailed as exc:
                         last_exc = exc
+                        logger.warning(
+                            f"NSFW image send ActionFailed (no retry to avoid dup): {exc}"
+                        )
+                        break
+                    except OnebotNetworkError as exc:
+                        last_exc = exc
                         if attempt == 0:
                             logger.warning(
-                                f"NSFW image send failed (attempt 1, will retry in 2s): {exc}"
+                                f"NSFW image send NetworkError (attempt 1, retry in 2s): {exc}"
                             )
                             await asyncio.sleep(2.0)
                         else:
                             logger.warning(
-                                f"NSFW image send failed twice (giving up, likely QQ NSFW filter): {exc}"
+                                f"NSFW image send NetworkError twice (giving up): {exc}"
                             )
                 if sent:
                     sent_count += 1
