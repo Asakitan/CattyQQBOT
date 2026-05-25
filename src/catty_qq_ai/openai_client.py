@@ -1084,6 +1084,81 @@ async def classify_catty_mood(config: Config, text: str) -> list[tuple[str, floa
     return out
 
 
+async def summarize_scope_lore(
+    config: Config,
+    history_excerpt: str,
+    scope_label: str = "",
+) -> list[dict]:
+    """让主模型 (5.5) 从 scope 最近对话总结出值得长期记下来的 lorebook entry。
+
+    走主 chat_completion (不是 spark) — 总结质量需要 5.5 的判断力, spark 太傻。
+    返回 list of {"keys": [...], "content": "..."} (0-3 条), 失败 / 无输出返回 []。
+
+    每条 entry:
+    - keys: 1-3 个关键词, 以后命中 user_text substring 时触发 prompt 注入
+    - content: 一句口语化的『这个群值得记的事』, 给笨猫长期记忆用
+    """
+    history_excerpt = (history_excerpt or "").strip()
+    if not history_excerpt:
+        return []
+    prompt = (
+        "你在帮一只 QQ 群猫娘机器人(『笨猫』)整理她对当前群聊场景的『长期记忆』。\n"
+        "下面是这个 scope 最近的一段对话历史。你的任务:**从中挑出 0-3 条**值得笨猫长期记住的"
+        "『这个群专属的小事』,做成 lorebook 条目。\n\n"
+        "**该挑的**(请选这类):\n"
+        "- 这个群特有的梗 / 黑话 / 内部段子(以后再听到能接住)\n"
+        "- 重要群友的特征 / 偏好 / 称呼 (比如『张三特别喜欢被叫小张』)\n"
+        "- 群规 / 风气 / 重大事件(比如『这群禁止水深夜话题』)\n"
+        "- 群里反复出现的话题或关键人物\n\n"
+        "**不要挑的**:\n"
+        "- 一次性闲聊 / 笑话(没复现价值)\n"
+        "- 个人隐私 / 敏感信息(隐私优先于记忆)\n"
+        "- 笨猫自己的人设(已经写在 character_card 里了, 不需要再记)\n"
+        "- 完全 trivial 的事(早安/吃饭这种)\n\n"
+        f"当前 scope 标签: {scope_label or '<unknown>'}\n\n"
+        "对话历史:\n"
+        "------\n"
+        f"{history_excerpt[-6000:]}\n"
+        "------\n\n"
+        "**严格输出 JSON**(不要解释、不要 markdown、不要多余字段):\n"
+        "{\"entries\":[{\"keys\":[\"关键词1\",\"关键词2\"],\"content\":\"该记的事(口语化,30-100 字)\"}]}\n\n"
+        "- keys 数组 1-3 个, 每个关键词 2-6 个中文字最好(以后 substring 命中触发)\n"
+        "- content 30-100 字, 口语化, 描述清楚『这个群有这么个事』即可\n"
+        "- 没值得挑的就 entries: []\n"
+        "- 最多 3 条, 宁缺毋滥"
+    )
+    try:
+        reply = await chat_completion(
+            config,
+            [
+                {"role": "system", "content": "你是一个对话总结器, 严格按 JSON 输出。"},
+                {"role": "user", "content": prompt},
+            ],
+        )
+    except Exception:  # noqa: BLE001
+        return []
+    parsed = _json_object(reply)
+    if not isinstance(parsed, dict):
+        return []
+    raw_entries = parsed.get("entries")
+    if not isinstance(raw_entries, list):
+        return []
+    out: list[dict] = []
+    for item in raw_entries[:3]:  # 最多 3 条
+        if not isinstance(item, dict):
+            continue
+        raw_keys = item.get("keys")
+        content = item.get("content")
+        if not isinstance(raw_keys, list) or not isinstance(content, str):
+            continue
+        keys = [str(k).strip() for k in raw_keys if str(k).strip()]
+        content = content.strip()
+        if not keys or not content:
+            continue
+        out.append({"keys": keys[:3], "content": content[:300]})  # content 硬上限 300 字
+    return out
+
+
 async def should_request_reply_split(config: Config, user_content: str, *, min_chars: int) -> bool:
     if not config.catty_filter_enabled:
         return False

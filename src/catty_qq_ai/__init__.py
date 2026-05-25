@@ -62,6 +62,7 @@ from .openai_client import (
     chat_completion_instant,
     chat_completion_with_tools,
     classify_catty_mood,
+    summarize_scope_lore,
     describe_images,
     download_binary,
     local_critic_completion,
@@ -189,6 +190,10 @@ user_vibe_store = UserVibeStore(config.catty_memory_path)
 # 让连续对话不再每条独立 — 被惹到下一句不会立刻笑嘻嘻,落盘到 catty_moods.json。
 from .catty_mood import CattyMoodStore
 catty_mood_store = CattyMoodStore(config.catty_memory_path)
+# Scope Lorebook: 主模型(5.5) 从 scope 对话历史总结的『这个群专属小事』,
+# 长期记忆。per-scope 200KB cap + LRU 压缩,落盘 scope_lorebooks.json。
+from .scope_lorebook import ScopeLorebookStore
+scope_lorebook_store = ScopeLorebookStore(config.catty_memory_path)
 _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
@@ -3866,6 +3871,12 @@ _CATTY_STATUS_RE = re.compile(
     r"^\s*/?(catty_status|status|笨猫状态|猫猫状态)\s*$",
     re.IGNORECASE,
 )
+# 主人专属 Scope Lorebook 命令 (/lore_show /lore_remove <id> /lore_summarize)
+# 让笨猫从当前 scope 对话总结出『这个群专属小事』作为长期记忆 lorebook entry。
+_LORE_CMD_RE = re.compile(
+    r"^\s*/?(lore_show|lore_remove|lore_summarize)(?:\s+(\S+))?\s*$",
+    re.IGNORECASE,
+)
 
 
 async def _vibe_command_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
@@ -3916,6 +3927,23 @@ async def _catty_status_rule(bot: Bot, event: MessageEvent, state: T_State) -> b
     if not text:
         return False
     return bool(_CATTY_STATUS_RE.match(text))
+
+
+async def _lore_cmd_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    """主人 only 的 scope lorebook 命令 (/lore_show /lore_remove /lore_summarize)。"""
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    if not _event_is_owner(event):
+        return False
+    text = event_plain_text(event)
+    if not text:
+        return False
+    match = _LORE_CMD_RE.match(text)
+    if not match:
+        return False
+    state["catty_lore_cmd"] = match.group(1).lower()
+    state["catty_lore_arg"] = (match.group(2) or "").strip()
+    return True
 
 
 async def _emoji_save_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
@@ -4006,6 +4034,7 @@ affection_command_matcher = on_message(rule=_affection_command_rule, priority=42
 vibe_command_matcher = on_message(rule=_vibe_command_rule, priority=43, block=True)
 aff_admin_matcher = on_message(rule=_aff_admin_rule, priority=44, block=True)
 catty_status_matcher = on_message(rule=_catty_status_rule, priority=45, block=True)
+lore_cmd_matcher = on_message(rule=_lore_cmd_rule, priority=46, block=True)
 legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
 expression_repeat_matcher = on_message(rule=_expression_repeat_rule, priority=50, block=True)
@@ -4422,6 +4451,20 @@ async def handle_catty_status(matcher: Matcher, event: MessageEvent) -> None:
             lines.append(f"👤 user_vibe: <错误 {exc}>")
         lines.append("")
 
+        # scope_lorebook
+        try:
+            lore_entries = scope_lorebook_store.list_entries(scope)
+            lore_size_kb = scope_lorebook_store.scope_byte_size(scope) / 1024.0
+            lines.append("📚 学到的事 (scope_lorebook)")
+            lines.append(f"  · 共 {len(lore_entries)} 条 · ~{lore_size_kb:.1f}KB / 200KB")
+            for e in lore_entries[:3]:
+                lines.append(f"  · [{e.identifier[:14]}...] {'/'.join(e.keys)}: {e.content[:50]}{'...' if len(e.content) > 50 else ''}")
+            if len(lore_entries) > 3:
+                lines.append(f"  · (还有 {len(lore_entries) - 3} 条 — /lore_show 看全)")
+        except Exception as exc:  # noqa: BLE001
+            lines.append(f"📚 scope_lorebook: <错误 {exc}>")
+        lines.append("")
+
         # affection
         try:
             summary = affection_store.summary(owner_qq)
@@ -4439,6 +4482,109 @@ async def handle_catty_status(matcher: Matcher, event: MessageEvent) -> None:
         raise
     except Exception as exc:  # noqa: BLE001
         await matcher.finish(Message(f"喵呜~ dashboard 拼接失败: {exc}"))
+
+
+@lore_cmd_matcher.handle()
+async def handle_lore_cmd(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    """主人专属 scope lorebook 管理 + 强制触发学习。"""
+    if not _event_is_owner(event):
+        return
+    cmd = str(state.get("catty_lore_cmd") or "")
+    arg = str(state.get("catty_lore_arg") or "").strip()
+    scope = _conversation_queue_key(event)
+    try:
+        if cmd == "lore_show":
+            entries = scope_lorebook_store.list_entries(scope)
+            if not entries:
+                await matcher.finish(Message(
+                    f"喵~ 当前 scope ({scope}) 还没学到啥嗷呜, 主人可以用 /lore_summarize 让笨猫总结一次 ฅฅ"
+                ))
+            size_kb = scope_lorebook_store.scope_byte_size(scope) / 1024.0
+            lines: list[str] = [
+                f"🐾 笨猫学到的事 · {scope}",
+                f"共 {len(entries)} 条 · ~{size_kb:.1f}KB / 200KB",
+                "━" * 18,
+            ]
+            for e in entries:
+                keys_str = " / ".join(e.keys)
+                lines.append(f"[{e.identifier}] hits={e.hit_count}")
+                lines.append(f"  keys: {keys_str}")
+                lines.append(f"  · {e.content}")
+            await matcher.finish(Message("\n".join(lines)))
+
+        elif cmd == "lore_remove":
+            if not arg:
+                await matcher.finish(Message(
+                    "杂鱼主人~ 要带 identifier 嗷呜!例: `/lore_remove scope_lore_a1b2c3d4` ฅฅ"
+                ))
+            removed = scope_lorebook_store.remove_entry(scope, arg)
+            if removed:
+                await matcher.finish(Message(
+                    f"喵~ 已经删掉 {arg} 啦, 笨猫不记得这事了 ฅฅ"
+                ))
+            await matcher.finish(Message(
+                f"哼~ 没找到 identifier={arg} 的 entry, 用 /lore_show 看看实际 id 嗷呜"
+            ))
+
+        elif cmd == "lore_summarize":
+            # 拿 session_cache 当前 scope 的 history 喂给 5.5 总结
+            cache = _get_session_cache()
+            history = cache.get(scope) or []
+            if not history:
+                await matcher.finish(Message(
+                    "喵呜~ 当前 scope 还没有对话历史可总结嗷呜, 先聊点东西再来吧 ฅฅ"
+                ))
+            # 拼 history excerpt (role: content) — 只取 user + assistant 文本
+            excerpt_lines: list[str] = []
+            for msg in history[-40:]:  # 最多 40 条
+                if not isinstance(msg, dict):
+                    continue
+                role = str(msg.get("role") or "")
+                content = msg.get("content")
+                if not isinstance(content, str) or not content.strip():
+                    continue
+                if role not in ("user", "assistant"):
+                    continue
+                excerpt_lines.append(f"{role}: {content.strip()[:500]}")
+            if not excerpt_lines:
+                await matcher.finish(Message(
+                    "喵呜~ 历史里没有可总结的文本嗷呜 ฅฅ"
+                ))
+            await matcher.send(Message(
+                f"喵~ 笨猫开始用 5.5 给 {scope} 总结上下文了, 请稍等 (这次会调一次主模型) ฅฅ"
+            ))
+            try:
+                entries_data = await summarize_scope_lore(
+                    config,
+                    history_excerpt="\n".join(excerpt_lines),
+                    scope_label=scope,
+                )
+            except Exception as exc:  # noqa: BLE001
+                await matcher.finish(Message(f"喵呜~ 总结失败嗷呜: {exc}"))
+            if not entries_data:
+                await matcher.finish(Message(
+                    "喵~ 5.5 看了一遍觉得当前对话没啥值得长期记的, 总结返回 0 条 ฅฅ"
+                ))
+            added: list[str] = []
+            for ed in entries_data:
+                entry = scope_lorebook_store.add_entry(
+                    scope,
+                    keys=ed.get("keys", []),
+                    content=ed.get("content", ""),
+                )
+                if entry:
+                    added.append(f"[{entry.identifier}] {' / '.join(entry.keys)}: {entry.content}")
+            if not added:
+                await matcher.finish(Message(
+                    "喵呜~ 5.5 给的总结都格式不合规, 一条都没入库 ฅฅ"
+                ))
+            await matcher.finish(Message(
+                f"喵~ 学到了 {len(added)} 条新的小事嗷呜:\n" + "\n".join(added)
+            ))
+    except FinishedException:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        await matcher.finish(Message(f"喵呜~ lore 命令执行失败嗷呜: {exc}"))
 
 
 @emoji_save_matcher.handle()
@@ -5026,6 +5172,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(story_arc_store.background_flush_loop())
     asyncio.create_task(user_vibe_store.background_flush_loop())
     asyncio.create_task(catty_mood_store.background_flush_loop())
+    asyncio.create_task(scope_lorebook_store.background_flush_loop())
 
 
 @get_driver().on_shutdown
@@ -5053,6 +5200,15 @@ async def _flush_catty_mood_store_on_shutdown() -> None:
             logger.info("catty_mood_store: flushed mood states on shutdown")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"catty_mood_store: shutdown flush failed: {exc}")
+
+
+@get_driver().on_shutdown
+async def _flush_scope_lorebook_on_shutdown() -> None:
+    try:
+        if scope_lorebook_store.flush_sync():
+            logger.info("scope_lorebook_store: flushed lore entries on shutdown")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"scope_lorebook_store: shutdown flush failed: {exc}")
 
 
 @get_driver().on_shutdown
