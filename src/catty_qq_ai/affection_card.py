@@ -280,10 +280,10 @@ def _load_paw_crops() -> list[Image.Image]:
 
     alpha = np.array(sheet.split()[-1])
     mask = alpha > 128
-    # 关键:先 dilation 5 像素让脚趾跟主肉垫连成一片(参考图里它们隔 2-4 像素),
-    # 在膨胀后的 mask 上 label,这样每个『爪整体(肉垫+所有脚趾)』算一个 component。
-    # bbox 还是从原 mask 取,只是组件归属用 dilated label。
-    dilated = ndimage.binary_dilation(mask, iterations=5)
+    # 关键:先 dilation 让脚趾跟主肉垫连成一片(参考图小爪脚趾隔得远)。
+    # iter 10 够把所有 paw 的脚趾跟肉垫粘成单一连通区,bbox 还从原 mask 取,
+    # 只是组件归属用 dilated label。
+    dilated = ndimage.binary_dilation(mask, iterations=10)
     labeled, n_comp = ndimage.label(dilated)
     # 每个膨胀组件 → 它包含的原 mask 像素的 bbox
     candidates: list[tuple[int, tuple[int, int, int, int]]] = []
