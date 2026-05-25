@@ -216,176 +216,204 @@ def _exp_bar(draw: ImageDraw.ImageDraw, x: int, y: int, width: int, height: int,
         draw.rectangle((x + 1, y + 1, x + filled, y + height - 2), fill=fill)
 
 
-# ── 像素猫爪印 ───────────────────────────────────────────────────────
-# 9x8 基础模板:4 脚趾(对称等距,2 行)+ 圆形大肉垫(5 行)
-# 参考主人提供的萌系猫爪 reference:矮胖 chubby,4 趾对称,大圆肉垫贴底
-# scatter 时按 size_mult ∈ {1,2,3} 放大成 9x8 / 18x16 / 27x24,
-# 每爪再 0-360° 随机旋转 → 视觉接近上方 29x25 心形,每爪都不一样
-_PAW_TEMPLATE: list[str] = [
-    ".X.X.X.X.",   # 4 脚趾上 (列 1,3,5,7,完美等距)
-    ".X.X.X.X.",   # 4 脚趾下行(脚趾 2 高,饱满感)
-    ".........",   # 间隔
-    "..XXXXX..",   # 肉垫顶 (5 宽)
-    ".XXXXXXX.",   # 肉垫往宽 (7)
-    "XXXXXXXXX",   # 肉垫最宽 (9)
-    ".XXXXXXX.",   # 肉垫收 (7)
-    "..XXXXX..",   # 肉垫底圆 (5)
-]
-PAW_BASE_W = 9
-PAW_BASE_H = 8
-
-
-# ── 真实图片素材加载(主人给的萌系参考图)─────────────────────────────
-# 主人需要把图保存到下面两个路径,代码就用真实图片;不存在则 fallback 到像素模板。
-# paws_sheet.png : 9 个爪子的 grid(3x3),自动按等距 cell 切片 + 裁掉透明 padding
-# pusheen.png    : 单张猫猫图,贴在卡片右下角
+# ── 高分辨率 paw / Pusheen(原图分辨率 + alpha threshold 削彩边) ─────────
+# 关键:LANCZOS 缩小和 NEAREST 旋转都会产生半透明 fringe 像素,paste 后看起来"花"。
+# 修复:每步 resize/rotate 后用 _alpha_threshold 把 alpha 二值化(全透 or 全不透),
+# 彻底消除彩色 fringe。这样 360° 任意角度旋转都干净。
 ASSETS_DIR = Path(__file__).resolve().parent / "assets"
 PAWS_SHEET_PATH = ASSETS_DIR / "paws_sheet.png"
 PUSHEEN_PATH = ASSETS_DIR / "pusheen.png"
 
 _PAW_CROPS_CACHE: list[Image.Image] | None = None
-_PAW_CROPS_LOADED = False
 _PUSHEEN_CACHE: Image.Image | None = None
-_PUSHEEN_LOADED = False
-
-
-def _load_paw_crops() -> list[Image.Image] | None:
-    """加载 paws_sheet.png 并按 3x3 grid 切片成 9 个独立爪子 RGBA 子图。
-    每个 cell 自动 getbbox() 去除透明 padding,保留爪子最紧凑的形状。
-    """
-    global _PAW_CROPS_CACHE, _PAW_CROPS_LOADED
-    if _PAW_CROPS_LOADED:
-        return _PAW_CROPS_CACHE
-    _PAW_CROPS_LOADED = True
-    if not PAWS_SHEET_PATH.exists():
-        return None
-    try:
-        sheet = Image.open(PAWS_SHEET_PATH).convert("RGBA")
-    except Exception:
-        return None
-    w, h = sheet.size
-    cell_w, cell_h = w // 3, h // 3
-    if cell_w <= 0 or cell_h <= 0:
-        return None
-    crops: list[Image.Image] = []
-    for ry in range(3):
-        for rx in range(3):
-            cell = sheet.crop((rx * cell_w, ry * cell_h,
-                               (rx + 1) * cell_w, (ry + 1) * cell_h))
-            bbox = cell.getbbox()
-            if bbox is None:
-                continue
-            paw = cell.crop(bbox)
-            if paw.size[0] >= 3 and paw.size[1] >= 3:
-                crops.append(paw)
-    if not crops:
-        return None
-    _PAW_CROPS_CACHE = crops
-    return crops
-
-
-def _load_pusheen() -> Image.Image | None:
-    """加载 pusheen.png(单张猫猫图)+ 裁掉透明 padding。"""
-    global _PUSHEEN_CACHE, _PUSHEEN_LOADED
-    if _PUSHEEN_LOADED:
-        return _PUSHEEN_CACHE
-    _PUSHEEN_LOADED = True
-    if not PUSHEEN_PATH.exists():
-        return None
-    try:
-        img = Image.open(PUSHEEN_PATH).convert("RGBA")
-        bbox = img.getbbox()
-        if bbox:
-            img = img.crop(bbox)
-        _PUSHEEN_CACHE = img
-    except Exception:
-        return None
-    return _PUSHEEN_CACHE
-
-
-def _pick_random_paw_image(
-    *,
-    target_w: int,
-    color_tint: tuple[int, int, int] | None = None,
-    rng: random.Random | None = None,
-) -> Image.Image:
-    """优先用主人给的真实爪图随机挑一个 resize 到 target_w;
-    asset 缺失就 fallback 到像素模板 _PAW_TEMPLATE。
-    """
-    r = rng or random
-    crops = _load_paw_crops()
-    if crops:
-        paw = r.choice(crops)
-        # 等比 resize
-        scale = target_w / paw.width
-        new_h = max(3, int(round(paw.height * scale)))
-        new_w = max(3, int(round(paw.width * scale)))
-        return paw.resize((new_w, new_h), resample=Image.Resampling.NEAREST)
-    # Fallback:像素模板 + 根据 target_w 选 size_mult
-    tint = color_tint or HEART_EDGE
-    size_mult = max(1, target_w // PAW_BASE_W)
-    return _render_paw_image(size_mult, tint)
-
-
-def _render_paw_image(size_mult: int, color: tuple[int, int, int]) -> Image.Image:
-    """生成单个爪印的 RGBA 子图,透明背景。
-    每个 X 像素扩成 size_mult × size_mult 块,保持像素风。
-    """
-    w = PAW_BASE_W * size_mult
-    h = PAW_BASE_H * size_mult
-    img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    for ry, row in enumerate(_PAW_TEMPLATE):
-        for rx, c in enumerate(row):
-            if c == "X":
-                x0, y0 = rx * size_mult, ry * size_mult
-                d.rectangle((x0, y0, x0 + size_mult - 1, y0 + size_mult - 1), fill=color)
-    return img
 
 
 def _bbox_overlap(a: tuple[int, int, int, int], b: tuple[int, int, int, int]) -> bool:
     return not (a[2] <= b[0] or b[2] <= a[0] or a[3] <= b[1] or b[3] <= a[1])
 
 
-def _paste_paw_text_aware(
-    target: Image.Image,
-    paw_img: Image.Image,
-    x: int,
-    y: int,
-    *,
-    bg_color: tuple[int, int, int] = BG,
-    fade_alpha: int = 95,
-) -> None:
-    """粘贴爪印 — 印到背景色上完全不透明,印到字/边框等非背景像素上半透明混合。
-
-    主人需求:『印到字体上的部分就半透明』。
-    实现:逐像素检查 target 当前颜色,如果不是 BG(米黄背景) → 用 fade_alpha
-    (default 95/255 ≈ 37%)与 target 混合,字体仍可读但爪印颜色还在,
-    像"猫猫的爪印章按下去但字盖在上面"。
+def _alpha_threshold(img: Image.Image, threshold: int = 128) -> Image.Image:
+    """硬 alpha:像素 alpha < threshold → 完全透明,≥ threshold → 完全不透。
+    消除 LANCZOS / NEAREST rotate 产生的半透明 fringe(那些半透像素 paste 后
+    跟卡片背景混色,看起来就是"花"的彩噪点)。
     """
-    pw, ph = paw_img.size
+    if img.mode != "RGBA":
+        return img
+    img = img.copy()
+    pixels = img.load()
+    for y in range(img.height):
+        for x in range(img.width):
+            r, g, b, a = pixels[x, y]
+            pixels[x, y] = (r, g, b, 255 if a >= threshold else 0)
+    return img
+
+
+def _load_paw_crops() -> list[Image.Image]:
+    """从 paws_sheet.png 用连通组件算法切出独立爪子(不依赖 grid 等距假设)。
+
+    旧版 3x3 等距切 + getbbox 假设各爪居中且 cell 间无渗入,主人参考图实际
+    grid 不严格等距 / 个别 cell 边界处描边渗入隔壁,导致切错。
+    新版用 scipy.ndimage.label 在 alpha mask 上找所有连通区,按面积排序取前
+    9 个,每个紧贴非透明像素 bbox 裁出,与 grid 位置无关。
+    """
+    global _PAW_CROPS_CACHE
+    if _PAW_CROPS_CACHE is not None:
+        return _PAW_CROPS_CACHE
+    if not PAWS_SHEET_PATH.exists():
+        _PAW_CROPS_CACHE = []
+        return []
+    try:
+        sheet = Image.open(PAWS_SHEET_PATH).convert("RGBA")
+    except Exception:
+        _PAW_CROPS_CACHE = []
+        return []
+    sheet = _alpha_threshold(sheet, 128)
+    try:
+        import numpy as np
+        from scipy import ndimage
+    except ImportError:
+        # scipy 不可用 → 回退到老的 grid 切片
+        _PAW_CROPS_CACHE = _load_paw_crops_grid_fallback(sheet)
+        return _PAW_CROPS_CACHE
+
+    alpha = np.array(sheet.split()[-1])
+    mask = alpha > 128
+    # 关键:先 dilation 5 像素让脚趾跟主肉垫连成一片(参考图里它们隔 2-4 像素),
+    # 在膨胀后的 mask 上 label,这样每个『爪整体(肉垫+所有脚趾)』算一个 component。
+    # bbox 还是从原 mask 取,只是组件归属用 dilated label。
+    dilated = ndimage.binary_dilation(mask, iterations=5)
+    labeled, n_comp = ndimage.label(dilated)
+    # 每个膨胀组件 → 它包含的原 mask 像素的 bbox
+    candidates: list[tuple[int, tuple[int, int, int, int]]] = []
+    for i in range(1, n_comp + 1):
+        region_in_orig = (labeled == i) & mask
+        ys, xs = np.where(region_in_orig)
+        if len(xs) < 50:  # 真噪点过滤
+            continue
+        x0, x1 = int(xs.min()), int(xs.max()) + 1
+        y0, y1 = int(ys.min()), int(ys.max()) + 1
+        # 原 mask 像素数作面积权重
+        candidates.append((int(region_in_orig.sum()), (x0, y0, x1, y1)))
+    candidates.sort(key=lambda kv: -kv[0])
+    crops: list[Image.Image] = []
+    for area, box in candidates[:9]:
+        paw = sheet.crop(box)
+        if paw.width >= 3 and paw.height >= 3:
+            crops.append(paw)
+    _PAW_CROPS_CACHE = crops
+    return crops
+
+
+def _load_paw_crops_grid_fallback(sheet: Image.Image) -> list[Image.Image]:
+    """scipy 不可用时的 fallback:3x3 grid 等距切。"""
+    w, h = sheet.size
+    cell_w, cell_h = w // 3, h // 3
+    pad_x, pad_y = max(1, cell_w // 8), max(1, cell_h // 8)
+    crops: list[Image.Image] = []
+    for ry in range(3):
+        for rx in range(3):
+            cell = sheet.crop((
+                rx * cell_w + pad_x, ry * cell_h + pad_y,
+                (rx + 1) * cell_w - pad_x, (ry + 1) * cell_h - pad_y,
+            ))
+            bbox = cell.getbbox()
+            if bbox is None:
+                continue
+            paw = cell.crop(bbox)
+            if paw.width >= 3 and paw.height >= 3:
+                crops.append(paw)
+    return crops
+
+
+def _load_pusheen() -> Image.Image | None:
+    """加载 Pusheen 原图,floodfill 抠掉网格背景,alpha threshold 清边。"""
+    global _PUSHEEN_CACHE
+    if _PUSHEEN_CACHE is not None:
+        return _PUSHEEN_CACHE
+    if not PUSHEEN_PATH.exists():
+        return None
+    try:
+        img = Image.open(PUSHEEN_PATH).convert("RGBA")
+        for corner in ((0, 0), (img.width - 1, 0),
+                       (0, img.height - 1), (img.width - 1, img.height - 1)):
+            try:
+                ImageDraw.floodfill(img, corner, (0, 0, 0, 0), thresh=40)
+            except Exception:
+                pass
+        bbox = img.getbbox()
+        if bbox:
+            img = img.crop(bbox)
+        _PUSHEEN_CACHE = _alpha_threshold(img, 128)
+    except Exception:
+        return None
+    return _PUSHEEN_CACHE
+
+
+def _resize_rgba_sharp_alpha(
+    img: Image.Image, new_w: int, new_h: int,
+) -> Image.Image:
+    """RGBA 全通道 NEAREST 缩放 — 保持像素艺术风格。
+
+    原图本身是像素艺术(肉垫色块 + 外圈描边),LANCZOS 会把这种"块状色"插值成
+    渐变,违背风格。NEAREST 直接采样最近像素,放大缩小都保持每个像素的纯色,
+    符合 catty 卡片字 / 心形的同一像素风。
+    """
+    if img.mode != "RGBA":
+        img = img.convert("RGBA")
+    return img.resize((new_w, new_h), Image.Resampling.NEAREST)
+
+
+def _prepare_paw_rotated(
+    paw: Image.Image, target_w: int, angle: float,
+) -> Image.Image:
+    """爪图 resize → rotate → alpha threshold:零 fringe + 高分辨率细节。
+
+    - 先 alpha threshold(crops 加载时已 threshold,但保险)
+    - resize 用 _resize_rgba_sharp_alpha(RGB LANCZOS + alpha NEAREST)避免棕框
+    - rotate 用 NEAREST(整数像素旋转,无色彩 anti-aliasing)
+    - rotate 后再 alpha threshold 一次清最后边缘
+    """
+    paw = _alpha_threshold(paw, 128)
+    if paw.width != target_w:
+        scale = target_w / paw.width
+        new_h = max(8, int(round(paw.height * scale)))
+        paw = _resize_rgba_sharp_alpha(paw, target_w, new_h)
+        paw = _alpha_threshold(paw, 128)
+    rotated = paw.rotate(angle, resample=Image.Resampling.NEAREST, expand=True)
+    return _alpha_threshold(rotated, 128)
+
+
+def _paste_text_aware(
+    target: Image.Image, src: Image.Image, x: int, y: int,
+    *, bg_color: tuple[int, int, int] = BG, fade_on_text: int = 110,
+) -> None:
+    """逐像素 paste:src alpha=0 跳过;target 是 BG → 完全 paste;
+    target 是字/边框/已贴元素 → fade_on_text/255 比例混合(主人要求"印到字上半透明")。
+    """
+    pw, ph = src.size
     tw, th = target.size
-    target_pixels = target.load()
-    paw_pixels = paw_img.load()
-    fade_ratio = fade_alpha / 255.0
-    inv_ratio = 1.0 - fade_ratio
+    sp = src.load()
+    tp = target.load()
+    fade = fade_on_text / 255.0
+    inv = 1.0 - fade
     for py in range(ph):
         for px in range(pw):
-            sr, sg, sb, sa = paw_pixels[px, py]
-            if sa == 0:
+            sr, sg, sb, sa = sp[px, py]
+            if sa < 128:
                 continue
             tx, ty = x + px, y + py
             if not (0 <= tx < tw and 0 <= ty < th):
                 continue
-            t_pixel = target_pixels[tx, ty]
-            tr, tg, tb = t_pixel[0], t_pixel[1], t_pixel[2]
+            t = tp[tx, ty]
+            tr, tg, tb = t[0], t[1], t[2]
             if (tr, tg, tb) == bg_color:
-                target_pixels[tx, ty] = (sr, sg, sb)
+                tp[tx, ty] = (sr, sg, sb)
             else:
-                nr = int(sr * fade_ratio + tr * inv_ratio)
-                ng = int(sg * fade_ratio + tg * inv_ratio)
-                nb = int(sb * fade_ratio + tb * inv_ratio)
-                target_pixels[tx, ty] = (nr, ng, nb)
+                tp[tx, ty] = (
+                    int(sr * fade + tr * inv),
+                    int(sg * fade + tg * inv),
+                    int(sb * fade + tb * inv),
+                )
 
 
 def _scatter_paws(
@@ -395,21 +423,21 @@ def _scatter_paws(
     band_y_max: int,
     band_x_min: int,
     band_x_max: int,
-    color: tuple[int, int, int] = HEART_EDGE,
     count_range: tuple[int, int] = (1, 3),
-    target_widths: tuple[int, ...] = (8, 14, 22),
+    target_widths: tuple[int, ...] = (60, 100, 140),
     forbidden_boxes: list[tuple[int, int, int, int]] | None = None,
     rng: random.Random | None = None,
 ) -> int:
-    """在指定 band 内散布 1-3 个爪印,优先用主人给的真实图(随机挑一种),
-    asset 缺失则 fallback 到像素模板。每个 size 不同 + 0-360° 随机旋转。
-
-    - target_widths: 每爪从这里随机选一个目标宽度 → 大小各异
-    - forbidden_boxes: 爪印不能盖到的 bbox(例:Pusheen 猫猫位置)
-    - text-aware paste:背景不透、字/边框/已粘贴的猫上半透
+    """大画布上散 1-3 个高分辨率原图爪:
+    - target_widths: 大画布像素(默认 60/100/140,接近原图分辨率)
+    - 360° 完全随机旋转(NEAREST + alpha threshold,零 fringe)
+    - 9 种 paw 随机挑,size 优先不重复
+    - 反 bbox 重叠 + 避开 forbidden_boxes (Pusheen)
+    - text-aware paste:盖到字上半透明
     """
     r = rng or random
-    if band_y_max < band_y_min or band_x_max < band_x_min:
+    crops = _load_paw_crops()
+    if not crops or band_y_max < band_y_min or band_x_max < band_x_min:
         return 0
     forbidden = list(forbidden_boxes or [])
     n = r.randint(*count_range)
@@ -417,31 +445,29 @@ def _scatter_paws(
     used_widths: list[int] = []
     placed = 0
     for _ in range(n):
-        # 优先选没用过的 width → 大小都不同
         remaining = [w for w in target_widths if w not in used_widths]
         target_w = r.choice(remaining or list(target_widths))
         angle = r.uniform(0.0, 360.0)
-        paw = _pick_random_paw_image(target_w=target_w, color_tint=color, rng=r)
-        rotated = paw.rotate(angle, resample=Image.Resampling.NEAREST, expand=True)
+        paw = r.choice(crops)
+        rotated = _prepare_paw_rotated(paw, target_w, angle)
         rw, rh = rotated.size
         max_x = band_x_max - rw
         max_y = band_y_max - rh
         if max_x < band_x_min or max_y < band_y_min:
-            # 太大放不下,降到更小的 width 再试
-            for fallback_w in sorted(target_widths):
-                if fallback_w >= target_w:
+            # 太大,降到更小 target_w 再试
+            for fw in sorted(target_widths):
+                if fw >= target_w:
                     continue
-                paw = _pick_random_paw_image(target_w=fallback_w, color_tint=color, rng=r)
-                rotated = paw.rotate(angle, resample=Image.Resampling.NEAREST, expand=True)
+                rotated = _prepare_paw_rotated(paw, fw, angle)
                 rw, rh = rotated.size
-                if rw <= (band_x_max - band_x_min) and rh <= (band_y_max - band_y_min):
-                    target_w = fallback_w
+                if rw <= band_x_max - band_x_min and rh <= band_y_max - band_y_min:
+                    target_w = fw
                     max_x = band_x_max - rw
                     max_y = band_y_max - rh
                     break
             else:
                 continue
-        # 反重叠:不能跟已放的爪印 或 forbidden_boxes(猫猫) 重叠
+        # 反重叠 retry
         for _try in range(20):
             x = r.randint(band_x_min, max_x)
             y = r.randint(band_y_min, max_y)
@@ -450,7 +476,7 @@ def _scatter_paws(
                 continue
             if any(_bbox_overlap(box, b) for b in forbidden):
                 continue
-            _paste_paw_text_aware(target, rotated, x, y)
+            _paste_text_aware(target, rotated, x, y)
             placed_boxes.append(box)
             used_widths.append(target_w)
             placed += 1
@@ -461,26 +487,29 @@ def _scatter_paws(
 def _paste_pusheen_bottom_right(
     target: Image.Image,
     *,
-    footer_top: int,
-    canvas_w: int,
-    target_w: int = 26,
-    margin_x: int = 4,
-    margin_y: int = 1,
+    footer_top_sm: int,
+    canvas_w_sm: int,
+    target_w_large: int = 150,
+    margin_x_sm: int = 4,
+    margin_y_sm: int = 1,
+    scale: int = 6,
 ) -> tuple[int, int, int, int] | None:
-    """加载 Pusheen 图,贴右下角(刚好贴在 footer 上沿),返回 bbox 给 scatter avoid。
-    asset 缺失返回 None,不放猫。
+    """大画布上贴 Pusheen 右下角(footer 上沿)。坐标参数是小画布坐标(×scale)。
+    target_w_large 直接是大画布像素;LANCZOS 缩小 + alpha threshold 削彩边。
     """
     pusheen = _load_pusheen()
-    if pusheen is None:
-        return None
-    if target_w < 6 or pusheen.width <= 0:
+    if pusheen is None or pusheen.width <= 0:
         return None
     aspect = pusheen.height / pusheen.width
-    new_w = target_w
-    new_h = max(6, int(round(new_w * aspect)))
-    resized = pusheen.resize((new_w, new_h), resample=Image.Resampling.NEAREST)
-    x = canvas_w - margin_x - new_w
-    y = footer_top - margin_y - new_h
+    new_w = target_w_large
+    new_h = max(8, int(round(new_w * aspect)))
+    if new_w != pusheen.width:
+        resized = _resize_rgba_sharp_alpha(pusheen, new_w, new_h)
+        resized = _alpha_threshold(resized, 128)
+    else:
+        resized = pusheen
+    x = canvas_w_sm * scale - margin_x_sm * scale - new_w
+    y = footer_top_sm * scale - margin_y_sm * scale - new_h
     if x < 0 or y < 0:
         return None
     target.paste(resized, (x, y), resized)
@@ -560,33 +589,8 @@ def render_card(
     footer_top = CANVAS_H - 14
     draw.rectangle((3, footer_top, CANVAS_W - 4, CANVAS_H - 4), fill=DARK)
 
-    # 1) 先放 Pusheen 到右下角(贴 footer 上沿)
-    pusheen_box = _paste_pusheen_bottom_right(
-        img, footer_top=footer_top, canvas_w=CANVAS_W, target_w=26,
-    )
-
-    # 2) 再散爪印:band 放宽到包含 POINTS 大数字 + 下方空白带
-    # 1-3 个,每爪 target_width 不同(8/14/22 → 旋转后接近爱心 29x25),
-    # 0-360° 旋转;优先用主人给的真实图(assets/paws_sheet.png 缺失则 fallback
-    # 像素模板)。爪 bbox 避开 Pusheen,所以"不会盖到猫猫身上"。
-    # text-aware paste 让盖到字上的部分半透,像猫猫盖印章。
-    paw_band_top = points_label_y + GLYPH_H + 1
-    paw_band_bot = footer_top - 1
-    paw_band_x_min = 4
-    paw_band_x_max = CANVAS_W - 4
-    if paw_band_bot > paw_band_top and paw_band_x_max > paw_band_x_min:
-        _scatter_paws(
-            img,
-            band_y_min=paw_band_top,
-            band_y_max=paw_band_bot,
-            band_x_min=paw_band_x_min,
-            band_x_max=paw_band_x_max,
-            color=HEART_EDGE,  # fallback 像素模板时用
-            count_range=(1, 3),
-            target_widths=(8, 14, 22),
-            forbidden_boxes=[pusheen_box] if pusheen_box else None,
-        )
-
+    # paw + Pusheen 等大画布渲染完之后再画底栏文字(在大画布上)
+    # 这里只占位 — 实际 paste 在最后 NEAREST 放大后做
     # ── 底栏内容 ─────────────────────────────────────────────
     if mode == "signin":
         if is_owner:
@@ -614,7 +618,28 @@ def render_card(
     _draw_text(draw, 5, 4, "*", ACCENT, scale=1)
     _draw_text(draw, CANVAS_W - 10, 4, "*", ACCENT, scale=1)
 
-    return img.resize((CANVAS_W * SCALE, CANVAS_H * SCALE), Image.Resampling.NEAREST)
+    # NEAREST 6x 放大小画布 → 大画布上 paste 接近原图分辨率的 paw + Pusheen
+    # (避免在小画布上 paste 导致分辨率丢失)
+    large = img.resize((CANVAS_W * SCALE, CANVAS_H * SCALE),
+                       Image.Resampling.NEAREST)
+    pusheen_box = _paste_pusheen_bottom_right(
+        large, footer_top_sm=footer_top, canvas_w_sm=CANVAS_W,
+        target_w_large=150, scale=SCALE,
+    )
+    paw_band_top = (lv_label_y + GLYPH_H + 1) * SCALE
+    paw_band_bot = (footer_top - 1) * SCALE
+    paw_band_x_min = 4 * SCALE
+    paw_band_x_max = (CANVAS_W - 4) * SCALE
+    if paw_band_bot > paw_band_top and paw_band_x_max > paw_band_x_min:
+        _scatter_paws(
+            large,
+            band_y_min=paw_band_top, band_y_max=paw_band_bot,
+            band_x_min=paw_band_x_min, band_x_max=paw_band_x_max,
+            count_range=(1, 3),
+            target_widths=(60, 100, 140),  # 大画布像素,接近原图分辨率
+            forbidden_boxes=[pusheen_box] if pusheen_box else None,
+        )
+    return large
 
 
 def render_card_to_file(
