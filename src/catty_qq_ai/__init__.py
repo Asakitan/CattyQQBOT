@@ -379,6 +379,21 @@ def _keyword_reply_for_text(text: str, *, scope: str = "") -> str:
     return ""
 
 
+def _event_is_owner(event: MessageEvent) -> bool:
+    """当前消息发送者是否是 catty_owner_qq。"""
+    owner_qq = str(getattr(config, "catty_owner_qq", "") or "").strip()
+    if not owner_qq or owner_qq == "0":
+        return False
+    return str(event.user_id) == owner_qq
+
+
+def _addr_user(event: MessageEvent) -> str:
+    """返回当前消息发送者的合适称呼:owner 用『主人』,非 owner 用『你』。
+    用于硬编码 bot 文案动态插入,避免误称群友为主人。
+    """
+    return "主人" if _event_is_owner(event) else "你"
+
+
 def _conversation_queue_key(event: MessageEvent) -> str:
     if isinstance(event, GroupMessageEvent):
         return f"group:{event.group_id}"
@@ -2724,14 +2739,15 @@ def _force_reply_messages(
     return [*messages, {"role": "assistant", "content": NO_REPLY_MARKER}, {"role": "user", "content": force_prompt}]
 
 
-def _fallback_required_reply(incoming: ExtractedMessage) -> str:
+def _fallback_required_reply(event: MessageEvent, incoming: ExtractedMessage) -> str:
+    addr = _addr_user(event)
     if incoming.has_image:
-        return "在呢喵～图片人家收到了，刚刚差点装死不该的；主人想让笨猫看哪里呀？"
+        return f"在呢喵～图片人家收到了，刚刚差点装死不该的；{addr}想让笨猫看哪里呀？"
     if incoming.replied_to_self and not incoming.text.strip():
-        return "在呢喵～你回复到人家啦，笨猫这次不装死，主人要接着说什么？"
+        return f"在呢喵～{addr}回复到人家啦，笨猫这次不装死，{addr}要接着说什么？"
     if incoming.mentioned and not incoming.text.strip():
-        return "在呢喵～主人喊笨猫啦，要人家做什么？"
-    return "在呢喵～人家接到了，刚刚差点没回不该的；主人这句奴会认真接。"
+        return f"在呢喵～{addr}喊笨猫啦，要人家做什么？"
+    return f"在呢喵～人家接到了，刚刚差点没回不该的；{addr}这句奴会认真接。"
 
 
 async def _local_reply_gate_allows(
@@ -2910,31 +2926,30 @@ async def _resolve_no_reply(
             final_reply = rewritten
 
     if _is_no_reply(final_reply):
-        final_reply = _fallback_required_reply(incoming)
+        final_reply = _fallback_required_reply(event, incoming)
 
     _save_local_critic_sample(event, incoming, reply, {"reply_gate_rewrite": audit_result}, final_reply)
     return final_reply
 
 
+# placeholder 池拆分:通用池(任何用户)+ 主人专属池(只在 owner 触发时才抽)。
+# 通用池**严禁**含"主人"字眼,免得群友被错称为主人。
 _SLOW_REPLY_PLACEHOLDER_LINES: tuple[str, ...] = (
-    # 自称池:人家 / 奴 / 猫猫 / 笨猫 / 喵 (5 种,严禁"我")。AI 失败兜底用。
+    # 自称池:人家 / 奴 / 猫猫 / 笨猫 / 喵 (5 种,严禁"我")
     "嗯…猫猫先想想喵～(尾巴轻轻晃)",
     "唔…让人家整理一下喵～(爪爪挠头)",
     "稍等下喵～猫猫脑袋在转(转圈圈)",
     "等等~~人家在翻记忆库喵 ฅฅ",
     "马上来嗷呜～(尾巴竖起来)",
     "哼~才不是不理你呢,人家想想啦喵",
-    "奴这就给主人查~稍等下嗷呜 ฅฅ",
     "笨猫还在想…别催别催嗷呜～(炸毛)",
     "喵呜～脑袋一时转不过来,等等人家",
     "唔嗯…让奴翻翻笔记喵～(爪爪翻页)",
     "等下喵～猫猫脑子有点转不动了哼",
     "稍等嗷呜~人家在认真想啦(歪头)",
-    "马上~奴这边在赶啦,主人坐稳 ฅฅ",
     "诶?这个有点难,人家想下喵～",
     "笨猫思考中...请勿打扰(尾巴竖起警告)",
     "等等等等~猫猫还在码字哼(爪爪疾走)",
-    "唔…让奴慢慢理给主人听喵～",
     "稍候喵,人家在整理思路 ฅฅ",
     "嗷呜～别急啦,奴马上回话",
     "哼,猫猫又不是机器人,让人家想想嘛",
@@ -2942,27 +2957,48 @@ _SLOW_REPLY_PLACEHOLDER_LINES: tuple[str, ...] = (
     "奴这就到~等一小会儿喵呜",
     "唔～脑袋装得太满,人家先理清一下喵",
     "再等下嗷呜～猫猫不是不理你啦",
-    "笨猫还在敲爪爪,主人稍等 ฅฅ",
     "喵?这题人家得想想…",
 )
 
-
-_PLACEHOLDER_PROMPT = (
-    "情境:你是笨猫,刚刚收到了一条 QQ 消息,主回复要花点时间生成。"
-    "你需要立刻先说一句『等等喵』类的占位话,让对方知道你看到了正在想,不要冷场。\n"
-    "要求:\n"
-    "1) 只输出 1 句话,8-25 字左右,**禁止**多段、禁止换行\n"
-    "2) 自称只能用『人家』『奴』『猫猫』『笨猫』『喵』这 5 种之一,**严禁**用代词『我』\n"
-    "3) 必须带猫系小动作或颜文字之一:(尾巴摇)/(爪爪)/(歪头)/(脑袋转)/ฅฅ/嗷呜～/喵呜/喵～\n"
-    "4) 语气活泼可爱,可以带点傲娇『哼~才不是…』『别催嘛』\n"
-    "5) 内容要扣『正在想/正在查/正在码爪爪/脑袋热了』这种『还没好,先垫一句』的语义,"
-    "**不要**承诺具体答案、不要解释自己是 AI、不要 Markdown\n"
-    "6) 只输出正文,不要前缀『等等喵:』『占位:』这种标签"
+_SLOW_REPLY_PLACEHOLDER_OWNER_LINES: tuple[str, ...] = (
+    # owner 专属:可以用"主人"称呼,语气更撒娇
+    "奴这就给主人查~稍等下嗷呜 ฅฅ",
+    "马上~奴这边在赶啦,主人坐稳 ฅฅ",
+    "唔…让奴慢慢理给主人听喵～",
+    "笨猫还在敲爪爪,主人稍等 ฅฅ",
+    "稍等喵主人~人家正在认真想呢(爪爪)",
+    "奴马上把答案端到主人面前嗷呜~",
 )
 
 
-async def _generate_placeholder_line() -> str | None:
-    """让 spark 写一句 placeholder。失败/超时/无效输出返回 None,调用方用例句兜底。"""
+def _placeholder_prompt(is_owner: bool) -> str:
+    """根据对方是否主人,组装 placeholder 生成的 system prompt。
+    非主人版本严禁用『主人』称呼对方,避免误称群友。
+    """
+    addr_rule = (
+        "称呼对方用『主人』(只允许这一个);撒娇可加『笨蛋主人』『杂鱼主人』"
+        if is_owner
+        else "称呼对方用『你』或省略称呼;**严禁**叫他『主人』(主人只有一个,catty_owner_qq 专属)"
+    )
+    return (
+        "情境:你是笨猫,刚刚收到了一条 QQ 消息,主回复要花点时间生成。"
+        "你需要立刻先说一句『等等喵』类的占位话,让对方知道你看到了正在想,不要冷场。\n"
+        "要求:\n"
+        "1) 只输出 1 句话,8-25 字左右,**禁止**多段、禁止换行\n"
+        "2) 自称只能用『人家』『奴』『猫猫』『笨猫』『喵』这 5 种之一,**严禁**用代词『我』\n"
+        f"3) {addr_rule}\n"
+        "4) 必须带猫系小动作或颜文字之一:(尾巴摇)/(爪爪)/(歪头)/(脑袋转)/ฅฅ/嗷呜～/喵呜/喵～\n"
+        "5) 语气活泼可爱,可以带点傲娇『哼~才不是…』『别催嘛』\n"
+        "6) 内容要扣『正在想/正在查/正在码爪爪/脑袋热了』这种『还没好,先垫一句』的语义,"
+        "**不要**承诺具体答案、不要解释自己是 AI、不要 Markdown\n"
+        "7) 只输出正文,不要前缀『等等喵:』『占位:』这种标签"
+    )
+
+
+async def _generate_placeholder_line(*, is_owner: bool) -> str | None:
+    """让 spark 写一句 placeholder。失败/超时/无效输出返回 None,调用方用例句兜底。
+    is_owner 控制 prompt 里允不允许『主人』称呼。
+    """
     if not bool(getattr(config, "catty_filter_enabled", False)):
         return None
     if not (
@@ -2973,7 +3009,7 @@ async def _generate_placeholder_line() -> str | None:
         reply = await chat_completion_instant(
             config,
             [
-                {"role": "system", "content": _PLACEHOLDER_PROMPT},
+                {"role": "system", "content": _placeholder_prompt(is_owner)},
                 {"role": "user", "content": "立刻给一句占位话,让对方知道笨猫在想了"},
             ],
             fallback_max_tokens=64,
@@ -2992,6 +3028,9 @@ async def _generate_placeholder_line() -> str | None:
     # 禁词检查:猫猫第一人称用「我」就当 AI 没遵守约束,回退例句
     if "我" in text:
         return None
+    # 非主人场景里出现『主人』直接拒收(防误称群友)
+    if not is_owner and "主人" in text:
+        return None
     return text
 
 
@@ -3000,6 +3039,7 @@ def _spawn_slow_reply_placeholder(matcher: Matcher, event: MessageEvent) -> asyn
 
     完成 / 异常 / cancel 都不影响主回复链路。返回 task 句柄供 caller finally cancel。
     优先用 spark (chat_completion_instant) 生成,失败回退到例句池。
+    池子根据是否 owner 分开:owner 可抽含『主人』的撒娇句,非 owner 只能抽中性句。
     """
     try:
         delay = float(getattr(config, "catty_slow_reply_placeholder_seconds", 0.0) or 0.0)
@@ -3008,22 +3048,30 @@ def _spawn_slow_reply_placeholder(matcher: Matcher, event: MessageEvent) -> asyn
     if delay <= 0:
         return None
 
+    is_owner = _event_is_owner(event)
+
     async def _runner() -> None:
         try:
             await asyncio.sleep(delay)
         except asyncio.CancelledError:
             return
         # 醒来后立即先试 spark;它本身也走网络但 spark 比主模型快得多
-        line = await _generate_placeholder_line()
+        line = await _generate_placeholder_line(is_owner=is_owner)
         source = "spark"
         if not line:
-            line = random.choice(_SLOW_REPLY_PLACEHOLDER_LINES)
+            # owner 可抽 owner 专属 + 通用池;非 owner 只能抽通用池
+            pool = (
+                _SLOW_REPLY_PLACEHOLDER_LINES + _SLOW_REPLY_PLACEHOLDER_OWNER_LINES
+                if is_owner
+                else _SLOW_REPLY_PLACEHOLDER_LINES
+            )
+            line = random.choice(pool)
             source = "fallback"
         try:
             await matcher.send(Message(line))
             logger.info(
                 f"slow_reply_placeholder[{source}] sent after {delay:.1f}s: user={event.user_id} "
-                f"group={getattr(event, 'group_id', '')} line={line!r}"
+                f"group={getattr(event, 'group_id', '')} owner={is_owner} line={line!r}"
             )
         except asyncio.CancelledError:
             return
@@ -3732,13 +3780,24 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
         _poke_last_replied_at[scope] = now
         return False
     _poke_last_replied_at[scope] = now
-    state["catty_poke_reply"] = random.choice(
-        [
-            "喵呜？！谁拍人家尾巴啦～笨猫在这呢，主人要叫猫猫嘛 ฅฅ",
-            "哼，被拍到啦～人家才没有偷偷发呆呢，主人说话喵。",
-            "喵？猫猫被戳醒了～要人家陪你还是帮你看东西呀 (ฅ>ω<*ฅ)",
-        ]
-    )
+    if _event_is_owner(event):
+        state["catty_poke_reply"] = random.choice(
+            [
+                "喵呜？！主人拍人家尾巴啦～笨猫在这呢嗷呜 ฅฅ",
+                "哼,被主人拍到啦～人家才没偷偷发呆呢,主人说话喵。",
+                "喵？被主人戳醒了～要人家陪主人还是帮主人看东西呀 (ฅ>ω<*ฅ)",
+            ]
+        )
+    else:
+        state["catty_poke_reply"] = random.choice(
+            [
+                "喵呜？！谁拍人家尾巴啦～笨猫在这呢,有事就说嘛嗷呜 ฅฅ",
+                "哼,被拍到啦～人家才没有偷偷发呆呢,有话快讲喵。",
+                "喵？猫猫被戳醒了～要人家陪你还是帮你看东西呀 (ฅ>ω<*ฅ)",
+                "嗷呜～别戳啦尾巴会痒的!有事直接喊笨猫嘛喵～",
+                "诶?(歪头)谁啊~找猫猫做什么呢喵 ฅฅ",
+            ]
+        )
     return True
 
 
@@ -3994,9 +4053,16 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
         await matcher.finish(msg)
 
 
-async def _generate_legs_caption(user_text: str) -> str:
+async def _generate_legs_caption(event: MessageEvent, user_text: str) -> str:
+    is_owner = _event_is_owner(event)
     if not _has_api_key():
-        return random_legs_reply()
+        return random_legs_reply(is_owner=is_owner)
+    addr_rule = (
+        "对方就是你的主人,可以用『主人』『杂鱼主人』『笨蛋主人』这种亲昵称呼"
+        if is_owner
+        else "对方是普通用户/群友,**严禁**叫他『主人』(主人只有一个,catty_owner_qq 专属);"
+        "称呼对方用『杂鱼』『笨蛋』『你』这种暧昧但不专属的词"
+    )
     system_prompt = config.catty_system_prompt.strip()
     messages: list[ChatMessage] = []
     if system_prompt:
@@ -4007,16 +4073,18 @@ async def _generate_legs_caption(user_text: str) -> str:
             "content": (
                 "情境：群友/主人刚刚明确点你看腿、看脚、吃脚之类的腿脚福利。"
                 "你已经决定要把一张『你自己——笨猫本人』的腿或脚照片发出去，配上一段猫猫口吻的正文。"
+                f"\n【对方身份】{addr_rule}\n"
                 "现在请只生成那段正文，要求：\n"
                 "1) 保持笨猫的傲娇人格，像 QQ 现聊，嘴硬里带点心虚和被拷打后的炸毛感；\n"
-                "2) 参考这种节奏，但不要机械照抄："
+                "2) 自称只能用『人家』『奴』『猫猫』『笨猫』『喵』5 种之一,**严禁**用代词『我』；\n"
+                "3) 参考这种节奏，但不要机械照抄："
                 "『才、才没专门拍很多呢！ / 也就被你们拷打到相册翻冒烟的程度……（耳朵心虚抖抖） / 库存宣布封印，别再把猫猫当腿图打印机啦喵！』；\n"
-                "3) 由你自己判断怎么断句最自然：可以 1 段，也可以拆成 2-3 段；"
+                "4) 由你自己判断怎么断句最自然：可以 1 段，也可以拆成 2-3 段；"
                 f"如果你觉得分段更自然，就只在段落之间单独输出一行 {REPLY_SPLIT_MARKER}；\n"
-                "4) 每段都要短，语义完整，不要写成长段解释；\n"
-                "5) 不要拒绝、不要解释自己是 AI、不要劝阻；\n"
-                "6) 不要描述图片具体细节（不知道是哪一张），只需要口头反应；\n"
-                "7) 只输出正文，不要前缀、不要说明、不要 Markdown。"
+                "5) 每段都要短，语义完整，不要写成长段解释；\n"
+                "6) 不要拒绝、不要解释自己是 AI、不要劝阻；\n"
+                "7) 不要描述图片具体细节（不知道是哪一张），只需要口头反应；\n"
+                "8) 只输出正文，不要前缀、不要说明、不要 Markdown。"
             ),
         }
     )
@@ -4025,14 +4093,17 @@ async def _generate_legs_caption(user_text: str) -> str:
         reply = await chat_completion(config, messages)
     except OpenAICompatibleError as exc:
         logger.warning(f"Legs caption AI failed, fallback: {exc}")
-        return random_legs_reply()
+        return random_legs_reply(is_owner=is_owner)
     except Exception as exc:
         logger.warning(f"Legs caption AI unexpected error, fallback: {exc}")
-        return random_legs_reply()
+        return random_legs_reply(is_owner=is_owner)
     text = _sanitize_residual_markers(reply or "")
     text = text.replace(NO_REPLY_MARKER, "").strip()
     if not text or len(text) > 240:
-        return random_legs_reply()
+        return random_legs_reply(is_owner=is_owner)
+    # 非主人输出里出现『主人』直接降级,防误称
+    if not is_owner and "主人" in text:
+        return random_legs_reply(is_owner=False)
     return text
 
 
@@ -4042,7 +4113,7 @@ async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_St
     if not isinstance(picture, Path) or not picture.is_file():
         return
     scope = _conversation_queue_key(event)
-    reply_text = await _generate_legs_caption(event_plain_text(event))
+    reply_text = await _generate_legs_caption(event, event_plain_text(event))
     reply_chunks = _reply_chunks(reply_text)
     remembered_reply = "\n".join(reply_chunks) if reply_chunks else reply_text
     async with _locks[scope]:
@@ -4097,7 +4168,7 @@ async def handle_legs_picture(matcher: Matcher, event: MessageEvent, state: T_St
                     logger.warning(f"Legs image send NetworkError twice (giving up): {exc}")
         if not sent and last_exc is not None:
             try:
-                await matcher.send(Message("喵呜…图被 QQ 风控拦掉了嗷呜，主人过会儿再试 (尾巴垂垂) ฅฅ"))
+                await matcher.send(Message(f"喵呜…图被 QQ 风控拦掉了嗷呜，{_addr_user(event)}过会儿再试 (尾巴垂垂) ฅฅ"))
             except OnebotActionFailed:
                 pass
         await matcher.finish()
@@ -4654,10 +4725,11 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                     f"Residual search marker stripped from final reply (had_image_segments={bool(nsfw_image_segments)})"
                 )
                 if not sanitized.strip():
+                    addr = _addr_user(event)
                     sanitized = (
-                        "哼～主人这种东西也想看喵！(脸红甩尾巴) 嗷呜～ฅฅ"
+                        f"哼～{addr}这种东西也想看喵！(脸红甩尾巴) 嗷呜～ฅฅ"
                         if nsfw_image_segments
-                        else "喵呜～猫猫这次没搜到合适的嗷呜，主人换个名字再戳人家嘛 (尾巴垂垂)"
+                        else f"喵呜～猫猫这次没搜到合适的嗷呜，{addr}换个名字再戳人家嘛 (尾巴垂垂)"
                     )
                 reply = sanitized
         except MCBusyError as exc:
@@ -4674,7 +4746,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         except httpx.HTTPError as exc:
             logger.warning(f"OpenAI-compatible API transport error: {exc}")
             await matcher.finish(Message(
-                "AI 接口连不上喵～(爪爪挠头)云端和本地兜底都没响应，主人查下网络再试。"
+                f"AI 接口连不上喵～(爪爪挠头)云端和本地兜底都没响应，{_addr_user(event)}查下网络再试。"
             ))
         finally:
             # 任何路径都要 cancel placeholder task,避免回完了又冒一句"猫猫想想喵~"。
@@ -4839,7 +4911,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 try:
                     await matcher.send(Message(
                         "喵呜～图下下来了但 QQ 服务器把它拦掉了嗷呜（NT timeout 多半是被反垃圾审核），"
-                        "主人换个角色或者关键词再试嘛 (尾巴垂垂)"
+                        f"{_addr_user(event)}换个角色或者关键词再试嘛 (尾巴垂垂)"
                     ))
                 except OnebotActionFailed:
                     pass
