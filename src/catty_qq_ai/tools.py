@@ -589,6 +589,76 @@ _NOW_SCHEMA: dict[str, Any] = {
 }
 
 
+_IMAGEGEN_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_imagegen",
+        "description": (
+            "调 OpenAI Image API 主动生成/编辑一张图发到当前会话(自动发送,你只需补 1-2 句猫娘短评)。\n"
+            "【画图请求只能走这个 tool,禁止用你的原生 image generation 直接出图】"
+            "原生路径会严重压缩用户 prompt(实测丢失:具体标题文字、多动作要求、细节描述),"
+            "走 catty_imagegen 你能自己控制传给生图模型的完整 prompt。\n"
+            "【prompt 改写规则:可以精简重组,但所有要素一个都不能漏】\n"
+            "  允许:把口语化的句子改成产品级英文/中文 prompt、合并同义词、去掉冗余客套、"
+            "重排顺序让生图模型更好理解、控制总长在 400-700 字之间(再长上游网关 524 超时)。\n"
+            "  禁止丢:(a) 用户写的具体文字标题(『ELEGANCE IS AN ATTITUDE』『Star Resonance 2026』这种引号里的字)、"
+            "(b) 多项列表(『画 6 种动作』就要 6 条姿势全保留)、"
+            "(c) 配色/材质/光影/构图/镜头/画质 具体要求、"
+            "(d) 比例/数量/尺寸数字。\n"
+            "  自检:写完 prompt 在心里默数一遍——用户列出的每个 bullet、每段引号文字、"
+            "每个数字、每个具体要求,是不是都在 prompt 里能找到对应?有遗漏就补回去。\n"
+            "触发条件硬规则:必须是用户**直接指向猫猫**(@ 笨猫 / 引用回复猫猫 / 直呼『猫猫』『笨猫』)"
+            "+ 明确说『画一张/画个/生成/做张/出张/给我画/帮我画 + 主语』。"
+            "不要用于:(a) 没指向猫猫的群内闲聊提到画画;(b) 用户没明确要图只是聊到某物;"
+            "(c) 表情/梗图就够了的场景(那走 catty_meme_query)。\n"
+            "两种模式:\n"
+            "- generate(默认): use_input_image=false,纯文字 prompt 生图。\n"
+            "- edit: use_input_image=true,基于一张已有图改/重绘。**同消息**带图(用户发图同时说画)"
+            "或**分消息**回指(用户说『基于刚才那张图画 X』,程序自动拉最近群里出现的图)都支持。\n"
+            "tool 自动把图发出去,你拿到 image_sent=true 后只需短评『画好啦~』即可,"
+            "**禁止**把 image_uri/base64 贴进回复。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "prompt": {
+                    "type": "string",
+                    "description": (
+                        "图片描述(英文/中文都可,模型自己理解)。500 字以内最佳。"
+                        "应该包含:主体/构图/风格/色调。例:『一只白色猫耳少女蜷在窗台上的午睡场景,日系动漫风格,暖色调』。"
+                        "edit 模式时描述**改动**点(『把背景换成樱花林』『加上猫耳』),不必复述原图全貌。"
+                        "不要加 NSFW/敏感词,会被模型拒绝。"
+                    ),
+                },
+                "use_input_image": {
+                    "type": "boolean",
+                    "description": (
+                        "是否基于一张输入图片改/重绘(走 OpenAI /v1/images/edits)。"
+                        "true: 程序自动用当前消息附图,没有就回退最近群里出现过的图;"
+                        "都没有则返回 error,你改用 false 走纯生成模式重试。"
+                        "false(默认): 走纯生成 /v1/images/generations,不读任何图片。"
+                    ),
+                },
+                "size": {
+                    "type": "string",
+                    "description": (
+                        "图片尺寸 WIDTHxHEIGHT。默认 1024x1024(方形最快)。"
+                        "常用:1024x1024 方/1536x1024 横/1024x1536 竖。"
+                        "需要更大才填,大图慢且贵。"
+                    ),
+                },
+                "quality": {
+                    "type": "string",
+                    "enum": ["low", "medium", "high", "auto"],
+                    "description": "low=快/便宜(默认,日常够用) medium=精细 high=最终稿 auto=模型决定",
+                },
+            },
+            "required": ["prompt"],
+        },
+    },
+}
+
+
 ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_recall": _RECALL_SCHEMA,
     "catty_user_profile": _USER_PROFILE_SCHEMA,
@@ -605,6 +675,7 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_meme_explain": _MEME_EXPLAIN_SCHEMA,
     "catty_remember": _REMEMBER_SCHEMA,
     "catty_recall_notes": _RECALL_NOTES_SCHEMA,
+    "catty_imagegen": _IMAGEGEN_SCHEMA,
 }
 
 
@@ -627,6 +698,16 @@ class ToolContext:
     # 副作用:executor 把要发的图片塞这里,主回复点收尾时取出来拼到发送链路。
     # 元素类型由 prepare_nsfw_segments_fn 决定(实际是 MessageSegment),tools.py 不依赖具体类型。
     pending_image_segments: list[Any] = field(default_factory=list)
+    # 当前消息(incoming)里附带的图片 URL 列表(QQ CDN 短期链接)。
+    # catty_imagegen 走 edit 模式时,优先用这个作为 input image;为空才回退 recent_image_urls。
+    input_image_urls: list[str] = field(default_factory=list)
+    # 本会话最近 N 分钟群里出现过的图片 URL(由 __init__.py 维护),
+    # 支持「分消息回指」: 上一条群友发的图 + 这条说『基于刚才那张画一个 X』。
+    recent_image_urls: list[str] = field(default_factory=list)
+    # 当前消息是否「直接指向猫猫」(@ / 触发前缀 / 引用回复猫猫)。
+    # catty_imagegen 等会主动 push 内容到群里的 tool 必须 guard 这个,
+    # 避免 AI 在被动旁观消息(filter 顺便回的)里也乱画图。
+    is_directly_requested: bool = True
 
     @property
     def group_id(self) -> str:
@@ -707,6 +788,8 @@ _hot_trends_cooldowns: dict[str, float] = {}
 _HOT_TRENDS_COOLDOWN_SECONDS = 90.0
 # 梗百科查询按用户 cooldown,底层已 600s LRU 缓存,这里只防同一人连戳。
 _meme_explain_cooldowns: dict[str, float] = {}
+# 主 AI 生图按 user_id 做 cooldown,主人豁免。生图慢且贵,默认 60s 一次。
+_imagegen_cooldowns: dict[str, float] = {}
 _MEME_EXPLAIN_COOLDOWN_SECONDS = 30.0
 
 
@@ -1070,6 +1153,401 @@ async def _meme_query_impl(keywords: str, ctx: ToolContext) -> dict[str, Any]:
     }
 
 
+# ── catty_imagegen: 主 AI 主动生图(OpenAI Image API) ─────────────────
+
+_ALLOWED_IMAGEGEN_QUALITY = {"low", "medium", "high", "auto"}
+_IMAGEGEN_FMT_TO_EXT = {"png": ".png", "jpeg": ".jpg", "jpg": ".jpg", "webp": ".webp"}
+
+
+def _imagegen_endpoint_url(base_url: str, *, edit: bool = False) -> str:
+    """把 chat-completions 风格的 base_url 推算成 /images/{generations,edits} endpoint。
+
+    用户的 base_url 通常是完整路径 `https://host/v1/chat/completions`(参见 _chat_completions_url),
+    但 OpenAI Image API 是 `https://host/v1/images/generations` 或 `/edits`。砍掉常见 chat 后缀再拼。
+    """
+    base = base_url.strip().rstrip("/")
+    if not base:
+        return ""
+    for suffix in ("/v1/chat/completions", "/chat/completions"):
+        if base.endswith(suffix):
+            base = base[: -len(suffix)] + "/v1"
+            break
+    tail = "edits" if edit else "generations"
+    if base.endswith("/v1"):
+        return f"{base}/images/{tail}"
+    return f"{base}/v1/images/{tail}"
+
+
+def _imagegen_cache_dir(config: Config) -> "Path":
+    from pathlib import Path
+    raw = str(getattr(config, "catty_imagegen_cache_dir", "pictures/imagegen_cache") or "pictures/imagegen_cache")
+    path = Path(raw).expanduser()
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
+def _prune_imagegen_cache(config: Config) -> None:
+    from pathlib import Path
+    max_files = max(int(getattr(config, "catty_imagegen_cache_max_files", 200) or 200), 16)
+    cache_dir = _imagegen_cache_dir(config)
+    try:
+        files = sorted(
+            (p for p in cache_dir.iterdir() if p.is_file()),
+            key=lambda p: p.stat().st_mtime,
+        )
+    except OSError:
+        return
+    overflow = len(files) - max_files
+    for stale in files[:overflow] if overflow > 0 else []:
+        try:
+            stale.unlink()
+        except OSError:
+            continue
+
+
+async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    from pathlib import Path
+    if not getattr(ctx.config, "catty_imagegen_enabled", True):
+        return {"error": "imagegen 已被配置禁用"}
+    # 硬 guard:不指向猫猫的群消息(filter 顺便回的旁观回复)不允许主动画图,
+    # 避免群里有人随口说『画一张...』就被猫猫接住乱画(主人明确禁止)。
+    # 私聊/直接 @ 猫猫的群消息 is_directly_requested=True,放行。
+    if not getattr(ctx, "is_directly_requested", True):
+        return {
+            "error": "用户没直接 @ 猫猫,不允许主动画图。把这条 tool_call 取消,改成纯文字回应。",
+            "guidance": "imagegen 只在用户明确指向猫猫(@ / 引用回复 / 直呼猫猫)+ 说画时才能调。",
+        }
+    prompt = str(args.get("prompt") or "").strip()
+    if not prompt:
+        return {"error": "prompt 不能为空"}
+    max_chars = max(int(getattr(ctx.config, "catty_imagegen_max_chars", 800) or 800), 80)
+    if len(prompt) > max_chars:
+        prompt = prompt[:max_chars]
+
+    # cooldown(主人豁免)
+    cd_seconds = max(int(getattr(ctx.config, "catty_imagegen_cooldown_seconds", 60) or 0), 0)
+    if cd_seconds > 0:
+        owner_qq = str(getattr(ctx.config, "catty_owner_qq", "") or "").strip()
+        if not owner_qq or ctx.user_id != owner_qq:
+            cd_key = ctx.user_id or "anonymous"
+            now = time.monotonic()
+            last = _imagegen_cooldowns.get(cd_key, 0.0)
+            remaining = max(last + cd_seconds - now, 0.0)
+            if remaining > 0:
+                return {"error": f"生图冷却剩 {int(remaining)}s,稍后再戳人家喵"}
+            _imagegen_cooldowns[cd_key] = now
+
+    size = str(args.get("size") or getattr(ctx.config, "catty_imagegen_default_size", "1024x1024") or "1024x1024").strip()
+    quality = str(args.get("quality") or getattr(ctx.config, "catty_imagegen_default_quality", "low") or "low").strip().lower()
+    if quality not in _ALLOWED_IMAGEGEN_QUALITY:
+        quality = "low"
+    output_format = str(getattr(ctx.config, "catty_imagegen_default_format", "png") or "png").strip().lower()
+    if output_format not in _IMAGEGEN_FMT_TO_EXT:
+        output_format = "png"
+
+    base_url = str(getattr(ctx.config, "catty_imagegen_base_url", "") or getattr(ctx.config, "catty_openai_base_url", "") or "").strip().rstrip("/")
+    api_key = str(getattr(ctx.config, "catty_imagegen_api_key", "") or getattr(ctx.config, "catty_openai_api_key", "") or "").strip()
+    model = str(getattr(ctx.config, "catty_imagegen_model", "gpt-image-2") or "gpt-image-2").strip()
+    timeout = float(getattr(ctx.config, "catty_imagegen_timeout_seconds", 120.0) or 120.0)
+    if not base_url:
+        return {"error": "imagegen base_url 没配,无法生图"}
+    if not api_key:
+        return {"error": "imagegen api_key 没配,无法生图"}
+
+    # 决定走 generate 还是 edit 路径
+    use_input_image = bool(args.get("use_input_image") or False)
+    input_image_bytes: bytes | None = None
+    input_image_source: str = ""
+    if use_input_image:
+        # 优先用当前消息附图,fallback 最近群里出现过的图
+        candidate_urls: list[str] = []
+        candidate_urls.extend(getattr(ctx, "input_image_urls", []) or [])
+        candidate_urls.extend(getattr(ctx, "recent_image_urls", []) or [])
+        # 去重保序
+        seen: set[str] = set()
+        candidates_unique: list[str] = []
+        for u in candidate_urls:
+            if not u or u in seen:
+                continue
+            seen.add(u)
+            candidates_unique.append(u)
+        if not candidates_unique:
+            return {
+                "error": (
+                    "use_input_image=true 但当前消息和最近 5 分钟群里都没有可用图片;"
+                    "请改成 use_input_image=false 重新调,走纯文字生成。"
+                ),
+            }
+        if ctx.download_binary_fn is None:
+            return {"error": "运行环境没注入下载器,无法走 edit 模式"}
+        # 尝试下载第一张可用的图(失败就换下一张)。QQ CDN 偶尔慢,30s 比 15s 稳。
+        for url_candidate in candidates_unique[:3]:
+            try:
+                data, content_type = await ctx.download_binary_fn(
+                    ctx.config, url_candidate, timeout=30.0
+                )
+            except (httpx.HTTPError, asyncio.TimeoutError) as exc:
+                _logger.info(
+                    "imagegen edit: input image download failed %s: %s: %s",
+                    url_candidate, exc.__class__.__name__, exc,
+                )
+                continue
+            except Exception as exc:  # noqa: BLE001
+                _logger.warning(
+                    "imagegen edit: unexpected download error: %s: %s",
+                    exc.__class__.__name__, exc,
+                )
+                continue
+            if not data:
+                continue
+            ctype = (content_type or "").lower()
+            if ctype and not ctype.startswith("image/"):
+                continue
+            input_image_bytes = data
+            input_image_source = url_candidate
+            break
+        if input_image_bytes is None:
+            return {"error": "input 候选图全部下载失败,改用 use_input_image=false 走纯生成重试"}
+
+    url = _imagegen_endpoint_url(base_url, edit=bool(input_image_bytes))
+    if not url:
+        return {"error": "无法推算 imagegen endpoint URL"}
+    # 强制 HTTP 绕过 CF: ai.hugou.cc 的 HTTPS 走 CF 反代,Origin Connection Timeout
+    # 硬限 100s,长生图请求(150-200s)必然 524。HTTP 端口主人确认已经"没盾",直连 origin
+    # 没有这个限制。chat_completion 短不受影响,保持 HTTPS。
+    if bool(getattr(ctx.config, "catty_imagegen_force_http_scheme", True)) and url.startswith("https://"):
+        url = "http://" + url[len("https://"):]
+        _logger.info("imagegen: forced http:// scheme to bypass CF Origin Timeout (url=%s)", url)
+
+    # 复用 catty 全局 http proxy(chat_completion 也用)。某些网络环境下直连 CF 容易
+    # 长连接被切返回 524, 走 proxy 反而稳; proxy 空就直连(和原行为一致)。
+    proxy_str = str(getattr(ctx.config, "catty_http_proxy", "") or "").strip()
+    client_kwargs: dict[str, Any] = {
+        "timeout": httpx.Timeout(timeout, connect=15.0),
+        "follow_redirects": True,
+        # http2 强制关掉:某些 CF 边缘对 HTTP/2 长 body 上游 origin timeout 时
+        # 不发完整 chunked end frame,导致 httpx 等到 read timeout 报模糊错误。
+        # 用 HTTP/1.1 走 chunked,行为更可预测。
+        "http2": False,
+    }
+    if proxy_str:
+        client_kwargs["proxy"] = proxy_str
+
+    if input_image_bytes is not None:
+        headers_mp = {"Authorization": f"Bearer {api_key}"}
+        files = {"image": ("input.png", input_image_bytes, "image/png")}
+        data_fields: dict[str, str] = {
+            "model": model, "prompt": prompt, "n": "1",
+            "size": size, "quality": quality, "output_format": output_format,
+        }
+        request_call = lambda c: c.post(url, headers=headers_mp, data=data_fields, files=files)
+    else:
+        payload: dict[str, Any] = {
+            "model": model, "prompt": prompt, "n": 1,
+            "size": size, "quality": quality, "output_format": output_format,
+        }
+        headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+        request_call = lambda c: c.post(url, headers=headers, json=payload)
+
+    mode_hint = "edit" if input_image_bytes else "generate"
+    # 524 真凶诊断:主人贴的 ai.hugou.cc 账单显示一次 gpt-image-2 实际 198s 完成,
+    # 但 catty 124s 收到 server=cloudflare 的 524。结论:
+    #   ai.hugou.cc origin 完成 198s = 计费 198s,但它在 CF 反代后面,
+    #   CF Free/Pro 默认 Origin Connection Timeout=100s,catty↔origin 124s 时
+    #   CF 边缘提前给 catty 524。
+    # 推论:同 prompt 重试仍然 198s 上游 > 100s CF 限,重试也 524。
+    # 唯一根治:ai.hugou.cc 侧改 CF Origin Connection Timeout(主人控制)。
+    # 客户端 mitigation:第 2 次 retry **强制降级到最小配置**(quality=low + 1024x1024 + 截短 prompt),
+    # 让上游 <60s 完成,绕开 CF 100s 限。这虽然画质/细节降级,但能从"完全画不出"变成"有图就行"。
+    max_attempts = 2
+    backoff_seconds = 3.0
+    response = None
+    elapsed = 0.0
+    last_transport_exc: Exception | None = None
+    # 用 mutable 变量装当前 attempt 的参数,降级时改它
+    cur_size = size
+    cur_quality = quality
+    cur_prompt = prompt
+
+    def _build_request(c: httpx.AsyncClient):
+        # 每次 attempt 都用当前 cur_* 重建 request body
+        if input_image_bytes is not None:
+            return c.post(
+                url,
+                headers={"Authorization": f"Bearer {api_key}"},
+                data={
+                    "model": model, "prompt": cur_prompt, "n": "1",
+                    "size": cur_size, "quality": cur_quality, "output_format": output_format,
+                },
+                files={"image": ("input.png", input_image_bytes, "image/png")},
+            )
+        return c.post(
+            url,
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+            json={
+                "model": model, "prompt": cur_prompt, "n": 1,
+                "size": cur_size, "quality": cur_quality, "output_format": output_format,
+            },
+        )
+
+    for attempt in range(1, max_attempts + 1):
+        started = time.monotonic()
+        try:
+            async with httpx.AsyncClient(**client_kwargs) as client:
+                response = await _build_request(client)
+        except (httpx.HTTPError, asyncio.TimeoutError) as exc:
+            last_transport_exc = exc
+            elapsed = time.monotonic() - started
+            _logger.warning(
+                "imagegen transport error attempt=%d/%d after %.1fs: %s: %s "
+                "(mode=%s size=%s quality=%s prompt_len=%d url=%s proxy=%s)",
+                attempt, max_attempts, elapsed, exc.__class__.__name__, exc or "(empty repr)",
+                mode_hint, cur_size, cur_quality, len(cur_prompt), url, proxy_str or "none",
+            )
+            if attempt < max_attempts:
+                # 降级再试
+                cur_size = "1024x1024"
+                cur_quality = "low"
+                cur_prompt = cur_prompt[:300] if len(cur_prompt) > 300 else cur_prompt
+                _logger.info(
+                    "imagegen attempt %d will downgrade: size=%s quality=%s prompt_len=%d",
+                    attempt + 1, cur_size, cur_quality, len(cur_prompt),
+                )
+                await asyncio.sleep(backoff_seconds)
+                continue
+            return {
+                "error": (
+                    f"生图接口连不上(走 {mode_hint},{max_attempts} 次都失败,最后一次 {elapsed:.0f}s): "
+                    f"{exc.__class__.__name__}: {exc or '空 repr-可能 ReadTimeout/连接被切'}"
+                ),
+                "retry_guidance": "网络或上游异常;过 30s 再试。",
+            }
+
+        elapsed = time.monotonic() - started
+        status = response.status_code
+        # 524/502/504 = ai.hugou.cc 前面 CF 反代层 100s 硬断;同 prompt 重试必然再 524
+        # 所以第 2 次 retry 强制降级到最小配置(让上游 <60s 完成绕开 CF 100s)
+        if status in (502, 503, 504, 524) and attempt < max_attempts:
+            hdrs = response.headers
+            via_chain = ", ".join(
+                f"{k}={hdrs.get(k, '-')}" for k in ("server", "via", "cf-ray", "cf-cache-status", "x-served-by")
+            )
+            _logger.warning(
+                "imagegen API status=%d (RETRY with DOWNGRADE) elapsed=%.1fs attempt=%d/%d "
+                "mode=%s size=%s quality=%s prompt_len=%d %s",
+                status, elapsed, attempt, max_attempts, mode_hint, cur_size, cur_quality, len(cur_prompt), via_chain,
+            )
+            # 降级:强制最小配置让 origin <60s 完成,绕开 CF 100s 限
+            cur_size = "1024x1024"
+            cur_quality = "low"
+            cur_prompt = cur_prompt[:300] if len(cur_prompt) > 300 else cur_prompt
+            _logger.info(
+                "imagegen attempt %d will downgrade: size=%s quality=%s prompt_len=%d",
+                attempt + 1, cur_size, cur_quality, len(cur_prompt),
+            )
+            await asyncio.sleep(backoff_seconds)
+            continue
+        break  # 200 或 non-retryable error,跳出
+
+    # 把降级后的实际参数同步回原变量,让后续日志看到 ground truth
+    size = cur_size
+    quality = cur_quality
+    prompt = cur_prompt
+
+    if response is None:
+        # 不应该到这,但安全兜底(类型检查也满意)
+        return {"error": f"生图接口失败: {last_transport_exc!r}"}
+
+    if response.status_code >= 400:
+        detail = response.text[:300]
+        hdrs = response.headers
+        via_chain = ", ".join(
+            f"{k}={hdrs.get(k, '-')}" for k in ("server", "via", "cf-ray", "cf-cache-status", "x-served-by")
+        )
+        _logger.warning(
+            "imagegen API status=%d elapsed=%.1fs mode=%s size=%s quality=%s prompt_len=%d %s detail=%s",
+            response.status_code, elapsed, mode_hint, size, quality, len(prompt), via_chain, detail,
+        )
+        if response.status_code in (502, 503, 504, 524):
+            return {
+                "error": (
+                    f"生图上游网关超时(HTTP {response.status_code},{max_attempts} 次都没过)。"
+                    "可能上游 origin 实际返回了但 Cloudflare 130s 已断,响应丢了。"
+                ),
+                "retry_guidance": (
+                    "精简 prompt 到 300 字以内 + quality=low + size=1024x1024 再调,或过 30s 重试。"
+                ),
+                "user_facing_hint": (
+                    "可以对用户说:『主人这次画图被上游网关挡住啦(尾巴垂垂),"
+                    "猫猫稍等再试,或者主人精简下要求~』"
+                ),
+            }
+        return {"error": f"生图接口 HTTP {response.status_code}: {detail[:200]}"}
+
+    try:
+        data = response.json()
+    except ValueError as exc:
+        return {"error": f"生图响应不是 JSON: {exc}"}
+
+    items = data.get("data") if isinstance(data, dict) else None
+    if not isinstance(items, list) or not items:
+        return {"error": "生图响应没有 data[] 字段"}
+    item0 = items[0] if isinstance(items[0], dict) else {}
+    b64 = item0.get("b64_json") or item0.get("b64")
+    if not isinstance(b64, str) or not b64:
+        # 有的实现走 url 字段;暂不下载,直接报错让 AI 知道
+        return {"error": "生图响应 data[0] 没有 b64_json 字段"}
+
+    try:
+        image_bytes = base64.b64decode(b64)
+    except (ValueError, TypeError) as exc:
+        return {"error": f"b64 解码失败: {exc}"}
+    if not image_bytes:
+        return {"error": "解码后图片为空"}
+
+    cache_dir = _imagegen_cache_dir(ctx.config)
+    ext = _IMAGEGEN_FMT_TO_EXT.get(output_format, ".png")
+    fname = f"imagegen_{int(time.time()*1000)}{ext}"
+    file_path = cache_dir / fname
+    try:
+        file_path.write_bytes(image_bytes)
+    except OSError as exc:
+        return {"error": f"写图片缓存失败: {exc}"}
+
+    # 直接构造 MessageSegment 注入 pending_image_segments
+    try:
+        from nonebot.adapters.onebot.v11 import MessageSegment
+    except ImportError:
+        return {"error": "MessageSegment 不可用,运行环境异常"}
+    segment = MessageSegment.image(file=file_path.resolve().as_uri())
+    ctx.pending_image_segments.append(segment)
+    _prune_imagegen_cache(ctx.config)
+
+    mode = "edit" if input_image_bytes is not None else "generate"
+    _logger.info(
+        "imagegen: mode=%s model=%s size=%s quality=%s bytes=%d elapsed=%.1fs file=%s "
+        "input_source=%s prompt_len=%d prompt=%r%s",
+        mode, model, size, quality, len(image_bytes), elapsed, file_path.name,
+        input_image_source[:80] if input_image_source else "-",
+        len(prompt), prompt[:300],
+        f"...(+{len(prompt)-300} chars)" if len(prompt) > 300 else "",
+    )
+    return {
+        "image_sent": True,
+        "mode": mode,
+        "model": model,
+        "size": size,
+        "quality": quality,
+        "bytes": len(image_bytes),
+        "elapsed_seconds": round(elapsed, 1),
+        "input_image_used": bool(input_image_bytes),
+        "guidance": (
+            "图已经程序自动发出去了,你只需补 1-2 句猫娘短评(『画好啦~主人看看喜不喜欢喵 ฅฅ』)。"
+            "**禁止**贴 base64 / file 路径 / image_uri 到回复里;**禁止**再调一次 catty_imagegen 重复发。"
+        ),
+    }
+
+
 async def _exec_game_recall(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     game = str(args.get("game") or "").strip()
     if not game:
@@ -1296,6 +1774,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_meme_explain": _exec_meme_explain,
     "catty_remember": _exec_remember,
     "catty_recall_notes": _exec_recall_notes,
+    "catty_imagegen": _exec_imagegen,
 }
 
 
@@ -1316,6 +1795,54 @@ def available_tool_schemas(config: Config, *, is_private: bool) -> list[dict[str
     return [schema for name, schema in ALL_TOOL_SCHEMAS.items() if name not in excluded]
 
 
+# IDE 风「最近 tool 调用日志」:scope -> deque[(tool_name, args_preview, ts, succeeded)]
+# 主回复 build_context 时注入,让 AI 看到自己 N 分钟内已对当前会话调过哪些 tool,
+# 避免重复调浪费时间。TTL 600s,每 scope 最多 8 条(LRU)。
+from collections import deque as _deque
+_RECENT_TOOL_CALLS: dict[str, _deque] = {}
+_RECENT_TOOL_CALLS_MAX = 8
+_RECENT_TOOL_CALLS_TTL = 600.0
+
+
+def _record_tool_call(scope_key: str, name: str, args_preview: str, succeeded: bool) -> None:
+    if not scope_key:
+        return
+    dq = _RECENT_TOOL_CALLS.get(scope_key)
+    if dq is None:
+        dq = _deque(maxlen=_RECENT_TOOL_CALLS_MAX)
+        _RECENT_TOOL_CALLS[scope_key] = dq
+    dq.append((name, args_preview[:60], time.monotonic(), succeeded))
+
+
+def recent_tool_calls_context(scope_key: str) -> str:
+    """Build a short system-prompt line listing recent tool calls in this scope.
+
+    给主 AI 看『5 分钟内本群/本会话已调过哪些 tool』,避免重复浪费一次工具调用。
+    无记录则返回空字符串。
+    """
+    dq = _RECENT_TOOL_CALLS.get(scope_key)
+    if not dq:
+        return ""
+    now = time.monotonic()
+    recent: list[str] = []
+    for name, args_preview, ts, succeeded in list(dq):
+        age = now - ts
+        if age > _RECENT_TOOL_CALLS_TTL:
+            continue
+        flag = "✓" if succeeded else "✗"
+        ago = f"{int(age)}s" if age < 60 else f"{int(age/60)}min"
+        if args_preview:
+            recent.append(f"{flag}{name}({args_preview})·{ago}前")
+        else:
+            recent.append(f"{flag}{name}·{ago}前")
+    if not recent:
+        return ""
+    return (
+        "本会话最近的工具调用(避免重复同 tool+同参数,除非用户明确要求重做): "
+        + "; ".join(recent[-6:])
+    )
+
+
 async def execute_tool_call(
     name: str,
     arguments_json: str,
@@ -1326,6 +1853,7 @@ async def execute_tool_call(
     """
     executor = _EXECUTORS.get(name)
     if executor is None:
+        _record_tool_call(_ctx_scope_key(ctx), name, "", False)
         return {"error": f"未知 tool: {name}"}
     raw = (arguments_json or "").strip()
     if not raw:
@@ -1334,19 +1862,54 @@ async def execute_tool_call(
         # 走 lenient_json_object 让 fence / 智能引号 / 尾逗号 / 单引号都能恢复。
         parsed = lenient_json_object(raw)
         if parsed is None:
+            _record_tool_call(_ctx_scope_key(ctx), name, raw[:60], False)
             return {"error": "arguments 不是合法 JSON 对象,无法解析"}
         args = parsed
+    args_preview = _short_args_preview(args)
     try:
-        return await executor(args, ctx)
+        result = await executor(args, ctx)
     except Exception as exc:  # noqa: BLE001
         _logger.warning("Tool %s execution failed: %s", name, exc, exc_info=True)
+        _record_tool_call(_ctx_scope_key(ctx), name, args_preview, False)
         return {"error": f"{name} 执行失败: {exc.__class__.__name__}: {exc}"}
+    ok = isinstance(result, dict) and not result.get("error")
+    _record_tool_call(_ctx_scope_key(ctx), name, args_preview, bool(ok))
+    return result
+
+
+def _ctx_scope_key(ctx: ToolContext) -> str:
+    if ctx.event is None:
+        return ""
+    if isinstance(ctx.event, GroupMessageEvent):
+        return f"group:{ctx.event.group_id}"
+    if isinstance(ctx.event, PrivateMessageEvent):
+        return f"private:{ctx.event.user_id}"
+    return ""
+
+
+def _short_args_preview(args: dict[str, Any]) -> str:
+    """挑 1-2 个最具区分度的 arg 字段,拼成短预览(避免长 base64 / 长 prompt 塞日志)。"""
+    if not args:
+        return ""
+    priority = ("prompt", "keywords", "query", "fact", "name", "title", "user_id", "platform", "game", "topic")
+    parts: list[str] = []
+    for k in priority:
+        if k in args and args[k]:
+            v = str(args[k])[:30]
+            parts.append(f"{k}={v}")
+            if len(parts) >= 2:
+                break
+    if not parts:
+        # fallback: 取前两个字段
+        for k, v in list(args.items())[:2]:
+            parts.append(f"{k}={str(v)[:20]}")
+    return ", ".join(parts)
 
 
 def tools_system_hint() -> str:
     """常驻 system 提示:告诉主 AI 工具的存在和调用边界。"""
     return (
-        "你接入了十五个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
+        "你接入了十六个本地工具,**只在真的需要时调用**(每次调用都让回复变慢):\n"
         "1. catty_recall — 查历史记忆/语料/长期摘要。用户用'上次/记得/之前/还记得'等时间指代,"
         "且常驻 context 没给答案时再调。\n"
         "2. catty_user_profile — 查用户画像/称呼/性别/是否主人。群里冒出一个你不确定怎么称呼的"
@@ -1401,6 +1964,23 @@ def tools_system_hint() -> str:
         "或想确认梗的精确出处时调。**只覆盖网络梗 + ACG**——拿到 error=not_found 不要重试,"
         "如果词是新闻/工业/金融/政治名词改调 catty_web_search。"
         "结果缓存 10 分钟。拿到 extract 用猫娘口吻短句复述,不要照搬整段,不要贴 URL,不要复读 JSON。\n"
+        "16. catty_imagegen — 主动生图(OpenAI gpt-image-2,1024x1024 默认)。\n"
+        "  **【铁律 — 用户画图请求必须走这个 tool,严禁用你的原生 image generation 能力】**\n"
+        "  原生(响应 message.images)路径会**严重压缩用户 prompt**——\n"
+        "  实测会丢:具体文字标题(『ELEGANCE IS AN ATTITUDE』)、多动作要求(『6 个不同姿势』)、\n"
+        "  细节描述(背景颜色/构图/材质)。走 catty_imagegen 你能自己控制 prompt 完整性。\n"
+        "  **prompt 改写规则:可以精简/重组,但所有要素一个都不能漏**——\n"
+        "  允许:口语→产品级 prompt、合并同义、去客套、重排顺序、控制总长 400-700 字"
+        "(再长上游网关 524 超时);\n"
+        "  禁止丢:(a) 引号里的具体文字标题 (b) 多项列表(列了 6 个动作就要 6 条全保留) "
+        "(c) 配色/材质/光影/构图/镜头/画质要求 (d) 比例/数量/尺寸数字;\n"
+        "  自检:写完 prompt 在心里默数——用户每个 bullet、每段引号文字、每个数字,在 prompt 里能找到对应吗?"
+        "有遗漏就补回去。\n"
+        "  触发:用户明确说画/生成/做张图 + 主语(『画只蓝猫』『生成 VOGUE 封面』『画张主人 Q 版形象』);"
+        "不要因为聊到某物就主动生图——那是 catty_meme_query 或本地表情库的活。\n"
+        "  禁止 NSFW/敏感词(模型会拒)。图程序自动发送,你拿到 image_sent=true 后**只补 1-2 句猫娘短评**,"
+        "**绝不**贴 base64/路径/重复生图。"
+        "60s cooldown(主人豁免);quality 默认 low 省钱,有人明确要『精致/高清』再传 medium/high。\n"
         "通用规则:\n"
         "- 多个 tool 调用可以并发(同一轮发起多个 tool_calls)但**总开销=回复延迟**,能不调就不调。\n"
         "- 拿到 tool 结果后基于结果写最终回复;**禁止复读 tool 返回的 JSON 原文**,"

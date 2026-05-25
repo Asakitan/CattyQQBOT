@@ -51,6 +51,39 @@ class Config(BaseModel):
     catty_openai_extra_headers: dict[str, str] = Field(default_factory=dict)
     catty_openai_extra_body: dict[str, Any] = Field(default_factory=dict)
 
+    # 主 AI 主动生图(catty_imagegen tool)— 走 OpenAI Image API。
+    # base_url/api_key 留空则复用上面 catty_openai_* 同一通道(codex/gpt-5.5 同 host 都行)。
+    # 默认 low quality 1024x1024,省钱;主 AI 可在 args 里覆盖。
+    catty_imagegen_enabled: bool = True
+    catty_imagegen_base_url: str = ""
+    catty_imagegen_api_key: str = ""
+    catty_imagegen_model: str = "gpt-image-2"
+    catty_imagegen_default_size: str = "1024x1024"
+    catty_imagegen_default_quality: str = "low"
+    catty_imagegen_default_format: str = "png"
+    catty_imagegen_cooldown_seconds: int = 60
+    # 生图慢:gpt-image-2 high quality 大图可能要 200s+,默认 300s 给足。
+    catty_imagegen_timeout_seconds: float = 300.0
+    catty_imagegen_max_chars: int = 2000
+    # 写本地缓存目录(napcat 走本地文件比 base64 inline 大图稳)。相对路径 = bot cwd
+    catty_imagegen_cache_dir: str = "pictures/imagegen_cache"
+    # 缓存目录最多保留 N 张,LRU(超出删最老)
+    catty_imagegen_cache_max_files: int = 200
+    # 把 imagegen 请求的 https:// 强制改成 http:// 绕过上游 CF 反代 100s Origin Timeout 硬限。
+    # 主人贴的账单实测 OpenAI gpt-image-2 经常 150-200s 才完成,HTTPS 走 CF 边缘 124s 就 524,
+    # HTTP 直连 origin 没有这个限制。chat_completion 短不受影响,保持 HTTPS。
+    catty_imagegen_force_http_scheme: bool = True
+
+    # 慢请求 placeholder:主回复 chat_completion 进入后超过该秒数没回,先 send 一句轻量占位
+    # 避免用户以为 bot 卡死了/被忽略了。0 或负数 = 禁用。
+    catty_slow_reply_placeholder_seconds: float = 8.0
+    # 占位消息后台 task 异常时静默(主回复链路不能被打断)
+    catty_slow_reply_placeholder_max_messages: int = 1
+
+    # IDE 多 tab 风格的会话排队:每群最多 N 个并发回复(默认 3),不同用户能并行;
+    # 同一用户在同群仍串行(防同人乱序爆消息)。0 或负数 = 退化回老的一群一把大锁。
+    catty_reply_group_concurrency: int = 3
+
     # 主 AI 不可用时的本地 fallback（默认指向项目内 Ollama qwen2.5:7b）
     catty_ai_fallback_enabled: bool = False
     catty_ai_fallback_base_url: str = ""
@@ -284,7 +317,9 @@ class Config(BaseModel):
     catty_tools_disabled_in_private: list[str] = Field(default_factory=lambda: ["catty_user_profile"])
 
     catty_temperature: float | None = 0.7
-    catty_max_tokens: int | None = 1000
+    # 拉高 max_tokens 默认值——gpt-5.5 调 catty_imagegen 时 tool_calls 和最终回复
+    # 都要装下,12800 偶尔不够长 prompt 转写 + 多轮 + 短评。改 32000 给足缓冲。
+    catty_max_tokens: int | None = 32000
     catty_request_timeout: float = 60.0
     catty_reply_max_chars: int = 1800
     catty_reply_human_split_enabled: bool = True

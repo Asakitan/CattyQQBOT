@@ -22,10 +22,20 @@ _BOT_FLAG_STRING_ATTRS = ("role", "category", "sub_type", "type", "user_type", "
 _BOT_FLAG_STRING_VALUES = {"bot", "robot", "official_bot", "qqbot", "officialrobot", "official_robot"}
 
 # 启发式机器人自介模板:大概率是另一个机器人在自介,普通用户不会这么说
+# 真人 @ 笨猫的消息(mentioned=True)会跳过这个匹配——
+# 真人会把"Q 群管家""签到助手"等名字当**话题对象**说("画一张白丝Q群管家""@猫猫 帮我配置群管家"),
+# 老的全文 substring 匹配把这种合法消息也拦了。所以这里只用强自介信号:开头是"我是 / 这里是 / 在下"
+# 后面再跟管家/小助手等名词。
 _BOT_INTRO_PATTERNS = (
     re.compile(r"暂时还?不能(?:和|跟|与)你?(?:对话|交流|聊天|回复)"),
     re.compile(r"我是.{0,12}(?:机器人|小助手|助手|管家|bot|BOT|AI|ai)(?:[，,。！!？?～~\s]|$)"),
-    re.compile(r"群管家|签到小助手|签到助手|Q群管家|qq群管家", re.IGNORECASE),
+    # 严格自介:行首/开头 1-6 字 → 名字 → 句尾标点 or 短句结尾。避免把"画一张白丝Q群管家"这种话题词
+    # 错杀。例:✅ "Q群管家上线啦"  ✅ "群管家来啦"  ❌ "画一张Q群管家"  ❌ "@猫猫 群管家咋用"
+    re.compile(
+        r"(?:^|[\s。！!？?])(?:Q群管家|qq群管家|群管家|签到小助手|签到助手)"
+        r"(?:[在为是已上来]|[，,。！!？?～~\s]|上线|来啦|启动|为您|为你|开始|已就绪)",
+        re.IGNORECASE,
+    ),
 )
 
 
@@ -183,6 +193,25 @@ def _control_text_sources(event: MessageEvent) -> list[str]:
     return sources
 
 
+def _render_at_segment(seg: Any) -> str:
+    """把 at segment 渲染成可见 @文本,保留 AI 能看懂的 nickname/qq 信息。
+
+    NapCat 的 at segment 通常带 data={'qq': '12345', 'name': '昵称'(可选)},
+    历史 _plain_text 只 join type=text 直接丢了 at,导致用户『画一个符合 @某某 的画像』
+    猫猫看到的是『画一个符合  的画像』(name 段空白),完全不知道画谁。
+    """
+    data = getattr(seg, "data", None) or {}
+    name = str(data.get("name") or "").strip()
+    qq = str(data.get("qq") or "").strip()
+    if name and qq:
+        return f"@{name}(QQ:{qq})"
+    if name:
+        return f"@{name}"
+    if qq:
+        return f"@QQ_{qq}"
+    return ""
+
+
 def _control_code_values(text: str, code_type: str, key: str) -> list[str]:
     values: list[str] = []
     for match in _CONTROL_TAG_PATTERN.finditer(text):
@@ -202,8 +231,21 @@ def _strip_control_codes(text: str) -> str:
 
 
 def _plain_text(event: MessageEvent) -> str:
-    text = "".join(_message_text_segments(event))
-    if not text.strip():
+    # 按 segment 顺序拼:text 原文 + at -> "@<nickname>(QQ:xxx)"。
+    # 这样『画一个符合 @某某 的画像』猫猫看到的是『画一个符合 @某某(QQ:12345) 的画像』,
+    # AI 能拿到画谁的明确信息。其他控制码(reply/face/image 等)由后续处理或 strip。
+    parts: list[str] = []
+    self_id_to_skip: str | None = None  # 不去掉 @ 笨猫自己的标记,让 AI 知道被 @
+    for seg in getattr(event, "message", []) or []:
+        seg_type = getattr(seg, "type", "")
+        if seg_type == "text":
+            parts.append(str((getattr(seg, "data", None) or {}).get("text", "")))
+        elif seg_type == "at":
+            rendered = _render_at_segment(seg)
+            if rendered:
+                parts.append(rendered)
+    text = "".join(parts).strip()
+    if not text:
         text = _raw_message_text(event)
     return _strip_control_codes(text)
 

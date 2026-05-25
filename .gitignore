@@ -25,3 +25,4 @@ tools/
 tests/
 backup/
 .sync_tmp/
+.claude/

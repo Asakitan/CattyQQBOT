@@ -63,7 +63,7 @@ from .intent_classifier import build_intent_context, classify_intent
 from .parsers import strip_catty_markers as _strip_catty_markers
 from .slang_dict import annotate_slang, build_slang_context
 from .time_awareness import build_time_context
-from .tools import ToolContext, available_tool_schemas, execute_tool_call, tools_system_hint
+from .tools import ToolContext, available_tool_schemas, execute_tool_call, recent_tool_calls_context, tools_system_hint
 from .topic_classifier import build_topic_context, classify_topic
 from .persona_prompts import (
     build_catgirl_examples_prompt,
@@ -183,6 +183,36 @@ def _get_session_cache() -> "SessionCache":
     return _session_cache
 
 _locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
+# IDE 多 tab 风格的会话排队:
+# - _user_in_scope_locks: 同一用户在同群/私聊里串行(防同人乱序爆消息)
+# - _group_concurrency_semas: 每群一个 Semaphore(catty_reply_group_concurrency),
+#   不同用户在同群可以并发回复(替代老的"一群一把大锁全 serialize")
+# 私聊没有 group sema,只用 user lock(本来就一人一会话)。
+_user_in_scope_locks: DefaultDict[str, asyncio.Lock] = defaultdict(asyncio.Lock)
+_group_concurrency_semas: dict[str, asyncio.Semaphore] = {}
+
+
+def _user_in_scope_lock_key(event: MessageEvent) -> str:
+    if isinstance(event, GroupMessageEvent):
+        return f"group:{event.group_id}:user:{event.user_id}"
+    return f"private:{event.user_id}"
+
+
+def _group_concurrency_sema_for(event: MessageEvent) -> asyncio.Semaphore | None:
+    """每群一个 Semaphore,惰性创建。私聊返回 None(本来 user lock 已足够)。"""
+    if not isinstance(event, GroupMessageEvent):
+        return None
+    n = int(getattr(config, "catty_reply_group_concurrency", 3) or 0)
+    if n <= 0:
+        return None  # 0/负数 = 禁用并发,回退到老的一把大锁(用 _locks[group:GID])
+    key = f"group:{event.group_id}"
+    sema = _group_concurrency_semas.get(key)
+    if sema is None:
+        sema = asyncio.Semaphore(n)
+        _group_concurrency_semas[key] = sema
+    return sema
+
+
 _hot_reload_config_path: Path | None = None
 _hot_reload_config_signature: tuple[int, int] | None = None
 _hot_reload_emoji_signature: tuple[tuple[str, int, int], ...] = ()
@@ -331,6 +361,42 @@ def _conversation_queue_key(event: MessageEvent) -> str:
     if isinstance(event, GroupMessageEvent):
         return f"group:{event.group_id}"
     return f"private:{event.user_id}"
+
+
+# 按 scope 滚动维护「最近 N 分钟出现过的图片 URL」, 给 imagegen edit 模式做
+# 「分消息回指」: 上一条群友发的图 + 这条说『基于刚才那张画一个 X』。
+# TTL 300s,maxlen 6 张/scope,避免长留 QQ CDN URL(本来就短期失效)。
+from collections import deque as _ImgDeque
+_RECENT_IMAGE_URLS_BY_SCOPE: dict[str, _ImgDeque] = {}
+_RECENT_IMAGE_URLS_TTL = 300.0
+_RECENT_IMAGE_URLS_MAX = 6
+
+
+def _track_image_urls_for_scope(scope_key: str, urls: list[str]) -> None:
+    if not scope_key or not urls:
+        return
+    dq = _RECENT_IMAGE_URLS_BY_SCOPE.get(scope_key)
+    if dq is None:
+        dq = _ImgDeque(maxlen=_RECENT_IMAGE_URLS_MAX)
+        _RECENT_IMAGE_URLS_BY_SCOPE[scope_key] = dq
+    now = time.monotonic()
+    for url in urls:
+        if not url:
+            continue
+        dq.append((now, url))
+
+
+def _recent_image_urls_for_scope(scope_key: str) -> list[str]:
+    dq = _RECENT_IMAGE_URLS_BY_SCOPE.get(scope_key)
+    if not dq:
+        return []
+    now = time.monotonic()
+    out: list[str] = []
+    for ts, url in reversed(dq):
+        if now - ts > _RECENT_IMAGE_URLS_TTL:
+            continue
+        out.append(url)
+    return out
 
 
 def _reply_source_key(event: MessageEvent, message_id: str) -> str:
@@ -1582,7 +1648,7 @@ async def _enrich_emoji_metadata_with_vision_ai(
         tags.append(query)
     updated = emoji_store.update_metadata(entry, meaning=meaning, tags=tags, source=entry.source, priority=entry.priority)
     if updated is not None:
-        logger.info("Updated emoji metadata with vision AI: %s -> %s [%s]", entry.path.name, meaning, ", ".join(tags[:8]))
+        logger.info(f"Updated emoji metadata with vision AI: {entry.path.name} -> {meaning} [{', '.join(tags[:8])}]")
         return updated
     return entry
 
@@ -1604,7 +1670,7 @@ async def _choose_or_download_emoji(
 
     entry = emoji_store.adopt_downloaded(query, tags=tags)
     if entry is not None:
-        logger.info("Adopted downloaded emoji for query %s: %s", query, entry.path)
+        logger.info(f"Adopted downloaded emoji for query {query}: {entry.path}")
         return await _enrich_emoji_metadata_with_vision_ai(entry, query=query, context_text=incoming.text)
 
     image_urls = list(incoming.image_urls)
@@ -1614,7 +1680,7 @@ async def _choose_or_download_emoji(
         except (httpx.HTTPError, ValueError) as exc:
             logger.warning(f"Failed to search emoji image for {query}: {exc}")
         if not image_urls:
-            logger.info("No downloadable emoji image found for query %s", query)
+            logger.info(f"No downloadable emoji image found for query {query}")
             return None
 
     for image_url in image_urls[:6]:
@@ -1637,7 +1703,7 @@ async def _choose_or_download_emoji(
             logger.warning(f"Failed to save missing emoji candidate for {query}: {exc}")
             continue
         if entry is not None:
-            logger.info("Downloaded emoji image for query %s: %s", query, entry.path)
+            logger.info(f"Downloaded emoji image for query {query}: {entry.path}")
             return await _enrich_emoji_metadata_with_vision_ai(entry, query=query, context_text=incoming.text)
     return None
 
@@ -1792,6 +1858,11 @@ def _build_messages(
         messages.append({"role": "system", "content": bot_continuation_context})
     if emoji_context:
         messages.append({"role": "system", "content": emoji_context})
+    # IDE 风「最近 tool 调用日志」:让 AI 看到本会话已对这个 scope 调过哪些 tool,避免重复
+    # 同 tool+同参数(浪费一次工具调用 + 让回复变慢)。
+    _recent_tools_line = recent_tool_calls_context(_conversation_queue_key(event))
+    if _recent_tools_line:
+        messages.append({"role": "system", "content": _recent_tools_line})
     memory_context = memory_store.build_context(event)
     if memory_context:
         messages.append({"role": "system", "content": memory_context})
@@ -1942,8 +2013,21 @@ def _is_memory_view_request(text: str) -> bool:
     }
     if compact in explicit_commands:
         return True
+    # 模糊匹配:view_words ∩ memory_words 才触发。但要排除真的是画图请求误中招
+    # (实测 user="读取他在群里的发言,画一个符合他的画像" 含 "读取" + "画像" 被误判,
+    #  导致 build_memory_view 把 D:\ 路径和群 JSON 文件名泄露到群里)。
     view_words = ("查看", "看看", "显示", "调出", "读取", "列出")
     memory_words = ("记忆", "存储", "人物信息", "群友信息", "画像")
+    # 画图/生图意图词:出现任何一个就肯定不是 memory view 命令
+    drawing_intent_words = (
+        "画", "绘", "画一", "生成", "做张", "做个", "出张", "出图",
+        "帮我画", "给我画", "来一张", "来一幅", "生图",
+    )
+    # 长度上限:真的 memory view 命令通常 < 16 字,长描述句子大概率是别的意图
+    if len(compact) > 20:
+        return False
+    if any(word in compact for word in drawing_intent_words):
+        return False
     return any(word in compact for word in view_words) and any(word in compact for word in memory_words)
 
 
@@ -2218,10 +2302,10 @@ async def _warm_local_critic_model() -> None:
         response = await client.post(_ollama_native_generate_url(), json=payload)
     response.raise_for_status()
     if not _local_critic_warmup_success_logged:
-        logger.info("Ollama warmup loaded model %s with keep_alive=%s", model, keep_alive)
+        logger.info(f"Ollama warmup loaded model {model} with keep_alive={keep_alive}")
         _local_critic_warmup_success_logged = True
     else:
-        logger.debug("Ollama warmup refreshed model %s", model)
+        logger.debug(f"Ollama warmup refreshed model {model}")
 
 
 async def _local_critic_warmup_loop() -> None:
@@ -2703,6 +2787,52 @@ async def _resolve_no_reply(
     return final_reply
 
 
+_SLOW_REPLY_PLACEHOLDER_LINES: tuple[str, ...] = (
+    "嗯…猫猫先想想喵～(尾巴轻轻晃)",
+    "唔…让人家整理一下喵～(爪爪挠头)",
+    "稍等下喵～猫猫脑袋在转(转圈圈)",
+    "等等~~人家在翻记忆库喵 ฅฅ",
+    "马上来嗷呜～(尾巴竖起来)",
+    "哼~才不是不理你呢，让人家想想啦喵",
+)
+
+
+def _spawn_slow_reply_placeholder(matcher: Matcher, event: MessageEvent) -> asyncio.Task | None:
+    """启动一个后台 task:超过配置阈值还没回就先 send 一句轻量占位。
+
+    完成 / 异常 / cancel 都不影响主回复链路。返回 task 句柄供 caller finally cancel。
+    """
+    try:
+        delay = float(getattr(config, "catty_slow_reply_placeholder_seconds", 0.0) or 0.0)
+    except (TypeError, ValueError):
+        delay = 0.0
+    if delay <= 0:
+        return None
+
+    async def _runner() -> None:
+        try:
+            await asyncio.sleep(delay)
+        except asyncio.CancelledError:
+            return
+        try:
+            line = random.choice(_SLOW_REPLY_PLACEHOLDER_LINES)
+            await matcher.send(Message(line))
+            logger.info(
+                f"slow_reply_placeholder sent after {delay:.1f}s: user={event.user_id} "
+                f"group={getattr(event, 'group_id', '')} line={line!r}"
+            )
+        except asyncio.CancelledError:
+            return
+        except OnebotNetworkError as exc:
+            logger.warning(f"slow_reply_placeholder send network error: {exc}")
+        except OnebotActionFailed as exc:
+            logger.warning(f"slow_reply_placeholder send action_failed: {exc}")
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"slow_reply_placeholder unexpected: {type(exc).__name__}: {exc}")
+
+    return asyncio.create_task(_runner())
+
+
 async def _apply_local_critic(
     event: MessageEvent,
     incoming: ExtractedMessage,
@@ -3171,10 +3301,9 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
         incoming.opportunistic = False
         state["catty_recent_bot_continuation"] = True
         logger.info(
-            "Promoted recent bot continuation to main AI: user=%s group=%s remaining=%s",
-            event.user_id,
-            getattr(event, "group_id", ""),
-            _bot_reply_continuation_remaining(event),
+            f"Promoted recent bot continuation to main AI: user={event.user_id} "
+            f"group={getattr(event, 'group_id', '')} "
+            f"remaining={_bot_reply_continuation_remaining(event)}"
         )
     if replied_to_self and _has_consumed_reply_source(event):
         duplicate_result = {
@@ -3558,6 +3687,10 @@ async def observe_memory(bot: Bot, event: MessageEvent) -> None:
         text = event_plain_text(event)
         image_urls = extract_image_urls(event)
         parsing_extra = _summarize_text_parsing_for_feed(text)
+        # 滚动维护 scope 最近图片 URL,供 catty_imagegen edit 模式做「分消息回指」
+        # (用户「基于刚才那张图画 X」时拉这里)。
+        if image_urls:
+            _track_image_urls_for_scope(scope, image_urls)
         activity_feed.record_user_message(
             scope=scope,
             sender_name=sender_name,
@@ -3691,6 +3824,18 @@ async def _flush_memory_store_on_shutdown() -> None:
 @chat_matcher.handle()
 async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     incoming: ExtractedMessage = state["catty_incoming"]
+    # 入口可观察性：397 次 chat_matcher 触发后 0 下文 INFO 日志的诊断盲区,
+    # 一行 entry log 直接看 user/group/directly_requested 和文本(完整 + 长度)。
+    # 长 prompt(VOGUE 风格、多行描述)不截断,否则会让排查"消息没收全"时误以为 incoming
+    # 被截了。实际 incoming.text 完整传 AI,这里只是日志显示。
+    _t = incoming.text or ""
+    logger.info(
+        f"handle_chat enter: user={event.user_id} "
+        f"group={getattr(event, 'group_id', '')} "
+        f"directed={incoming.directly_requested} mentioned={incoming.mentioned} "
+        f"has_image={incoming.has_image} text_len={len(_t)} text={_t[:400]!r}"
+        + (f" ...(+{len(_t)-400} chars)" if len(_t) > 400 else "")
+    )
     group_filter_context = str(state.get("catty_group_filter_context") or "")
     special_care_context = str(state.get("catty_special_care_context") or "")
     gate_result = state.get("catty_reply_gate_result")
@@ -3701,13 +3846,25 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
     )
     history_key = build_history_key(event, config)
     queue_key = _conversation_queue_key(event)
+    # IDE 多 tab 风格的会话排队:
+    # 1) user_lock: 同一用户在同群/私聊里串行(防同人乱序)
+    # 2) group_sema: 每群最多 N 并发(catty_reply_group_concurrency),不同用户可并行
+    # 老代码用 _locks[group:GID] 一群一把大锁,A 慢就阻所有人,Abandon 风暴(71s/111s)
+    # 用 AsyncExitStack 把 user_lock(必有) + group_sema(私聊为 None) 串起来,
+    # 不用 fork 也不用把 handle_chat 300+ 行缩进。
+    user_lock = _user_in_scope_locks[_user_in_scope_lock_key(event)]
+    group_sema = _group_concurrency_sema_for(event)
 
-    # 同会话锁排队时记下入队时刻——拿到锁后若已经等了太久,直接放弃当前消息,
-    # 避免视觉/AI 卡顿后积压的消息一窝蜂全回出去(就是主人吐槽的"爆一大堆")。
     enqueue_started_at = time.monotonic()
-    queue_was_busy = _locks[queue_key].locked()
+    queue_was_busy = user_lock.locked() or (
+        group_sema is not None and group_sema._value <= 0  # type: ignore[attr-defined]
+    )
 
-    async with _locks[queue_key]:
+    import contextlib as _ctxlib
+    async with _ctxlib.AsyncExitStack() as _lock_stack:
+        await _lock_stack.enter_async_context(user_lock)
+        if group_sema is not None:
+            await _lock_stack.enter_async_context(group_sema)
         queue_wait_seconds = time.monotonic() - enqueue_started_at
         queue_abandon_threshold = max(
             float(getattr(config, "catty_reply_queue_max_wait_seconds", 25.0) or 0.0),
@@ -3715,12 +3872,9 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         )
         if queue_was_busy and queue_abandon_threshold > 0 and queue_wait_seconds >= queue_abandon_threshold:
             logger.info(
-                "Abandoning queued reply (waited %.1fs >= %.1fs threshold): user=%s scope=%s text=%s",
-                queue_wait_seconds,
-                queue_abandon_threshold,
-                event.user_id,
-                queue_key,
-                incoming.text[:60],
+                f"Abandoning queued reply (waited {queue_wait_seconds:.1f}s >= "
+                f"{queue_abandon_threshold:.1f}s threshold): user={event.user_id} "
+                f"scope={queue_key} text={incoming.text[:60]!r}"
             )
             await matcher.finish()
 
@@ -3765,21 +3919,27 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
 
         memory_store.remember_event(event)
 
-        if _is_memory_cache_clear_request(incoming.text):
+        # 管理类命令(memory view / cache clear / history reset / session list 等)
+        # 只允许主人触发,避免外人偶然命中关键词导致内部状态(D:\ 路径、群 JSON、群摘要)
+        # 泄露到群里。判定规则:消息里有命令意图 AND 发言人是 catty_owner_qq。
+        # 非主人触发就当作普通消息走正常主 AI 回复路径。
+        _owner_qq_str = str(getattr(config, "catty_owner_qq", "") or "").strip()
+        _is_owner = bool(_owner_qq_str) and str(event.user_id) == _owner_qq_str
+
+        if _is_owner and _is_memory_cache_clear_request(incoming.text):
             _reset_history(history_key)
             result = memory_store.clear_cache(event)
             await matcher.finish(Message(f"{result}\n会话上下文也清掉啦。"))
 
-        if _is_memory_view_request(incoming.text):
+        if _is_owner and _is_memory_view_request(incoming.text):
             await matcher.finish(Message(memory_store.build_memory_view(event)))
 
-        if _is_reset_request(incoming.text):
+        if _is_owner and _is_reset_request(incoming.text):
             _reset_history(history_key)
             await matcher.finish(Message("上下文清掉啦。"))
 
-        if _is_session_list_request(incoming.text):
-            owner_qq = int(getattr(config, "catty_owner_qq", 0) or 0)
-            if isinstance(event, PrivateMessageEvent) and owner_qq > 0 and int(event.user_id) == owner_qq:
+        if _is_owner and _is_session_list_request(incoming.text):
+            if isinstance(event, PrivateMessageEvent):
                 await matcher.finish(
                     Message(format_session_list_for_owner(_get_session_cache()))
                 )
@@ -3947,12 +4107,20 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         # prepare_nsfw_segments_fn / download_binary_fn 是依赖注入——避免 tools.py 反向 import
         # __init__.py 里的 _prepare_nsfw_image_segments(它要复用本模块的 sent_registry / cache_dir)。
         # ctx.pending_image_segments 收集 catty_nsfw_search 下载到的图片 segments,主回复后并入发送。
+        # 给 imagegen edit 模式喂 input image URL:
+        # - input_image_urls: 当前消息附图(用户「同消息」: 发图+@猫猫说画)
+        # - recent_image_urls: 最近 N 分钟群里出现的图(用户「分消息」回指: 上一条群友图 + 这条说『基于刚才那张画 X』)
+        # - is_directly_requested: 硬 guard - 没指向猫猫的 opportunistic 旁观回复不许 push 内容到群
+        _recent_imgs = _recent_image_urls_for_scope(_conversation_queue_key(event))
         tool_ctx = ToolContext(
             config=config,
             memory_store=memory_store,
             event=event,
             prepare_nsfw_segments_fn=_prepare_nsfw_image_segments,
             download_binary_fn=download_binary,
+            input_image_urls=list(incoming.image_urls or []),
+            recent_image_urls=_recent_imgs,
+            is_directly_requested=bool(incoming.directly_requested),
         )
 
         async def _tool_executor(name: str, args_json: str) -> dict[str, object]:
@@ -3962,6 +4130,10 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             config, is_private=isinstance(event, PrivateMessageEvent)
         )
         nsfw_image_segments: list[MessageSegment] = []
+        # 慢请求 placeholder:超过 catty_slow_reply_placeholder_seconds 没回就先发个轻量占位,
+        # 避免用户以为 bot 卡死了或被忽略了(实测群里 chat_completion 偶尔 30s+,被排队的用户
+        # 等到 25s 又被 abandon,全程哑巴非常糟糕)。
+        placeholder_task = _spawn_slow_reply_placeholder(matcher, event)
         try:
             reply = await chat_completion_with_tools(
                 config,
@@ -4002,6 +4174,10 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             await matcher.finish(Message(
                 "AI 接口连不上喵～(爪爪挠头)云端和本地兜底都没响应，主人查下网络再试。"
             ))
+        finally:
+            # 任何路径都要 cancel placeholder task,避免回完了又冒一句"猫猫想想喵~"。
+            if placeholder_task is not None and not placeholder_task.done():
+                placeholder_task.cancel()
 
         reply = await _apply_local_critic(event, incoming, messages, reply)
 
@@ -4009,11 +4185,10 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             if state.get("catty_recent_bot_continuation"):
                 _decrement_bot_reply_continuation(event)
             logger.info(
-                "Main AI chose NO_REPLY after wake context: user=%s group=%s continuation_remaining=%s text=%s",
-                event.user_id,
-                getattr(event, "group_id", ""),
-                _bot_reply_continuation_remaining(event),
-                incoming.text[:80],
+                f"Main AI chose NO_REPLY after wake context: user={event.user_id} "
+                f"group={getattr(event, 'group_id', '')} "
+                f"continuation_remaining={_bot_reply_continuation_remaining(event)} "
+                f"text={incoming.text[:80]!r}"
             )
             await matcher.finish()
 
@@ -4025,14 +4200,14 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         )
         emoji_entry = await _choose_or_download_emoji(event, emoji_query, incoming, image_analysis) if emoji_query else None
         if emoji_query and emoji_entry is None:
-            logger.info("Emoji query did not resolve to an image: %s", emoji_query)
+            logger.info(f"Emoji query did not resolve to an image: {emoji_query}")
         if emoji_entry is None and not emoji_query and _should_auto_emoji_reply(incoming, reply):
             emoji_entry = _choose_auto_emoji(event, reply, incoming)
             if emoji_entry is None:
                 logger.info("Auto emoji skipped because no local emoji entry is available")
         if emoji_entry is not None:
             _remember_emoji_choice(event, emoji_entry)
-            logger.info("Selected emoji for reply: %s", emoji_entry.path)
+            logger.info(f"Selected emoji for reply: {emoji_entry.path}")
         # 把 reply 里的 LaTeX 块和 INLINE_IMAGE 标记都占位符化(分别 \x00LATEX_n\x00 / \x00IMG_n\x00):
         # chunks 内只剩短占位符,_reply_chunks 切段时不会切到公式或图片标记中间;
         # 发送时 _compose_reply_message 看到占位符再渲染成图片消息段。

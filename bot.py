@@ -1,3 +1,4 @@
+import logging
 import sys
 from pathlib import Path
 
@@ -8,6 +9,7 @@ if src_path.is_dir():
 from catty_config_loader import load_config_to_env
 import nonebot
 from nonebot import logger
+from nonebot.log import logger_id, default_format
 from nonebot.adapters.onebot.v11 import Adapter as OneBotV11Adapter
 
 
@@ -17,6 +19,24 @@ if loaded_config is not None:
 
 _log_dir = Path(__file__).with_name("logs")
 _log_dir.mkdir(parents=True, exist_ok=True)
+
+# 干掉 nonebot 默认的 stderr sink: 它按 LOG_LEVEL=DEBUG 跑, 会把 matcher 优先级检查
+# 这种纯噪音全刷到控制台。我们重建三条 sink:
+#   1. stderr 只收 INFO+
+#   2. bot_live.log 只收 INFO+, 滚动归档
+#   3. logs/YYYY-MM-DD-debug.txt 只收 DEBUG, 按日切割, 保留 7 天
+try:
+    logger.remove(logger_id)
+except ValueError:
+    pass
+
+logger.add(
+    sys.stderr,
+    level="INFO",
+    format=default_format,
+    diagnose=False,
+)
+
 logger.add(
     str(_log_dir / "bot_live.log"),
     rotation="20 MB",
@@ -25,6 +45,44 @@ logger.add(
     level="INFO",
     enqueue=True,
 )
+
+logger.add(
+    str(_log_dir / "{time:YYYY-MM-DD}-debug.txt"),
+    rotation="00:00",
+    retention="7 days",
+    encoding="utf-8",
+    level="DEBUG",
+    filter=lambda record: record["level"].name == "DEBUG",
+    format=default_format,
+    enqueue=True,
+)
+
+
+# stdlib logging → loguru 桥接:openai_client / tools / web_search / hot_trends 等
+# 大量模块用 _logger = logging.getLogger("catty_qq_ai.xxx"),它们的 INFO 因为 stdlib
+# 默认 root level=WARNING 一直被吞掉,导致 tool_chat / tool_call / fallback routing 等
+# 关键 observability 日志在 bot_live.log 里完全看不见。加 InterceptHandler 把这些
+# 桥接到 loguru, 同时把 catty_qq_ai.* 的 stdlib level 显式调到 INFO。
+class _InterceptHandler(logging.Handler):
+    def emit(self, record: logging.LogRecord) -> None:
+        try:
+            level = logger.level(record.levelname).name
+        except ValueError:
+            level = record.levelno
+        frame, depth = logging.currentframe(), 2
+        while frame and frame.f_code.co_filename == logging.__file__:
+            frame = frame.f_back
+            depth += 1
+        logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
+
+
+_intercept = _InterceptHandler()
+for _name in ("catty_qq_ai", "nonebot"):
+    _lg = logging.getLogger(_name)
+    _lg.setLevel(logging.INFO)
+    if not any(isinstance(h, _InterceptHandler) for h in _lg.handlers):
+        _lg.addHandler(_intercept)
+    _lg.propagate = False
 
 nonebot.init()
 

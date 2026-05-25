@@ -77,15 +77,36 @@ class MCBusyError(OpenAICompatibleError):
     """MC server has players online and local fallback is gated off."""
 
 
+# 同一错误码多个 catty 变体——避免连续 503 时用户看到同一句死板提示;
+# random.choice 让群友觉得猫猫真的"每次都在挣扎",而不是机器复读。
+_HTTP_503_VARIANTS = (
+    "喵呜～{svc}那边人太多挤爆了（503），主人 30 秒后再戳人家一下嘛 ฅฅ",
+    "嗷呜～{svc}炸毛了（503），猫猫帮你按 F5 几次都没用，等半分钟再来叭(尾巴垂垂)",
+    "哼…{svc}今天闹脾气（503），人家也没办法喵，30s 后重戳大概率好啦~",
+    "{svc}排队人太多了喵（503）！主人稍等半分钟，猫猫会接着回的~",
+)
+_HTTP_429_VARIANTS = (
+    "喵呜~{svc}嫌猫猫戳太快啦（429），让人家缓 1 分钟再试嘛(爪爪)",
+    "哼…{svc}限流了（429），主人冷静一下喵，等 60 秒猫猫就能接着回~",
+    "嗷呜~{svc}说人家戳得太频繁（429），等会儿就好啦 ฅฅ",
+)
+_HTTP_5XX_VARIANTS = (
+    "喵呜～{svc}临时炸毛了（{code}），主人稍后再戳一下喵 ฅฅ",
+    "嗷呜～{svc}那边好像在抢修（{code}），等会儿再来叭(尾巴轻晃)",
+    "{svc}打了个喷嚏（{code}），猫猫也没辙喵，主人等 1-2 分钟再戳~",
+)
+
+
 def _catty_http_status_message(service_name: str, status_code: int) -> str:
+    import random as _random
     if status_code == 503:
-        return f"喵呜，{service_name}那边暂时忙到炸毛了（503），主人稍后再戳一下猫猫吧。"
+        return _random.choice(_HTTP_503_VARIANTS).format(svc=service_name)
     if status_code == 429:
-        return f"喵呜，{service_name}被戳太快啦（429），主人让猫猫缓一小会儿再试。"
+        return _random.choice(_HTTP_429_VARIANTS).format(svc=service_name)
     if status_code in {401, 403}:
         return f"喵呜，{service_name}不让猫猫进去（{status_code}），主人检查一下 API Key 或权限。"
     if 500 <= status_code < 600:
-        return f"喵呜，{service_name}那边临时炸毛了（{status_code}），主人稍后再试一下。"
+        return _random.choice(_HTTP_5XX_VARIANTS).format(svc=service_name, code=status_code)
     return f"喵呜，{service_name}请求没过（{status_code}），主人检查一下配置或稍后再试。"
 
 
@@ -142,6 +163,32 @@ def _coerce_multimodal_part(item: dict[str, Any]) -> str:
     return ""
 
 
+def _render_message_images(message: dict[str, Any]) -> str:
+    """gpt-5.5 / codex 网关把原生生成的图放在 message.images 字段, 不走 content 也不走 tool_calls。
+
+    每项格式 {"type": "image_url", "image_url": {"url": "data:image/png;base64,..."}}
+    或 {"type": "image", "image_url": "..."} 等变体。
+    拼成 INLINE_IMAGE marker 序列让发送链路自动渲染成 MessageSegment.image。
+    """
+    if not isinstance(message, dict):
+        return ""
+    images = message.get("images")
+    if not isinstance(images, list) or not images:
+        return ""
+    parts: list[str] = []
+    for item in images:
+        if isinstance(item, str):
+            if item:
+                parts.append(f"{INLINE_IMAGE_PREFIX}{item}{INLINE_IMAGE_SUFFIX}")
+            continue
+        if not isinstance(item, dict):
+            continue
+        rendered = _coerce_multimodal_part(item)
+        if rendered:
+            parts.append(rendered)
+    return "\n".join(parts)
+
+
 def _extract_content(data: dict[str, Any]) -> str:
     try:
         choice = data["choices"][0]
@@ -153,7 +200,10 @@ def _extract_content(data: dict[str, Any]) -> str:
     finish_reason = choice.get("finish_reason")
 
     if isinstance(content, str):
-        return content.strip()
+        # content 有文本,但有些模型(gpt-5.5)同时把图放在 message.images 字段——
+        # 文本+图都拼上,让发送链路一起处理。
+        rendered = (content.strip() + "\n" + _render_message_images(message)).strip()
+        return rendered
     if isinstance(content, list):
         parts: list[str] = []
         for item in content:
@@ -165,9 +215,25 @@ def _extract_content(data: dict[str, Any]) -> str:
                 if rendered:
                     parts.append(rendered)
         merged = "\n".join(part for part in parts if part).strip()
+        images_inline = _render_message_images(message)
+        if images_inline:
+            merged = (merged + "\n" + images_inline).strip() if merged else images_inline
         if merged:
             return merged
         # content 是 list 但里面没有任何可用的文本或图片,继续往下走兜底
+
+    # content 为空/None:gpt-5.5 / codex 网关常把原生生成的图直接放 message.images 字段
+    # (不走 tool_calls 也不走 content),老逻辑直接当 error 处理,导致用户看到"AI 没有返回可读文本"
+    # 实际上模型已经把图生好了。这里识别这种格式,把图转成 INLINE_IMAGE marker 让发送链路渲染。
+    images_only = _render_message_images(message)
+    if images_only:
+        _logger.info(
+            "AI returned native images-only response (no text), rendered as INLINE_IMAGE. "
+            "finish_reason=%s image_count=%d",
+            finish_reason,
+            len(message.get("images") or []) if isinstance(message, dict) else 0,
+        )
+        return images_only
 
     # content 为空/None：先看 reasoning_content / reasoning(R1 / QwQ / DeepSeek-Reasoner 风格)
     reasoning = message.get("reasoning_content") or message.get("reasoning")
@@ -708,7 +774,12 @@ async def chat_completion_with_tools(
             # info-level 可观察性:每轮记录 AI 触发了哪些 tool + 参数前缀,
             # 不输出完整 args(NSFW 搜索/笔记内容可能敏感,只截前 80 字看意图)。
             for _call_id, name, args_json in executed:
-                _logger.info("tool_call: %s args=%s", name, (args_json or "")[:80])
+                _aj = args_json or ""
+                _logger.info(
+                    "tool_call: %s args_len=%d args=%s%s",
+                    name, len(_aj), _aj[:400],
+                    f"...(+{len(_aj)-400} chars)" if len(_aj) > 400 else "",
+                )
         tool_results = await asyncio.gather(
             *[tool_executor(name, args_json) for _call_id, name, args_json in executed],
             return_exceptions=True,
