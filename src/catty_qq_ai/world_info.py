@@ -41,6 +41,10 @@ class WorldInfoEntry:
     cooldown_seconds: int = 0        # 触发后 N 秒内同 scope 不重复触发(0 = 不冷却)
     probability: int = 100           # 命中后注入概率 1-100(用于偶尔触发,不每次都给)
     regex_keys: tuple[str, ...] = field(default_factory=tuple)  # 额外的正则 key,任一命中即视为命中
+    min_affection_level: int = 0     # 用户好感度 < 此值时本 entry 不触发(0 = 不限制)
+    max_affection_level: int = 0     # 用户好感度 > 此值时本 entry 不触发(0 = 不限制,用于陌生人专属反应)
+    owner_only: bool = False         # True = 只对主人触发(用于隐私/特殊场景)
+    skip_for_owner: bool = False     # True = 主人不触发(用于陌生人专属冷反应等)
 
     def matches(self, text: str) -> bool:
         if self.constant:
@@ -157,6 +161,22 @@ _DEFAULT_ENTRIES: list[WorldInfoEntry] = [
         position="after_char",
         order=250,
         cooldown_seconds=30,
+        min_affection_level=3,  # 陌生人撒娇要被冷处理,只有 Lv3+ 才进入反差链
+    ),
+    WorldInfoEntry(
+        identifier="affection_invite_stranger",
+        keys=("想你", "想念", "抱抱", "贴贴", "举高高", "亲一下", "亲亲", "摸摸"),
+        content=(
+            "【场景:陌生人撒娇】对方好感度还低却在撒娇。笨猫反应:\n"
+            "- 保持距离感,傲娇炸毛但不进入暴露真心链(『哈?谁啊就要贴贴喵!』)\n"
+            "- 不要叫『主人』,不要回撒娇,可以一句话挡回去(『先把好感刷上来再说啦笨蛋!』)\n"
+            "- 语气可爱但不亲密,留好后续余地。"
+        ),
+        position="after_char",
+        order=250,
+        cooldown_seconds=30,
+        max_affection_level=2,   # 只对 Lv0-2 触发(陌生人专属)
+        skip_for_owner=True,     # 主人豁免
     ),
     WorldInfoEntry(
         identifier="lewd_tease",
@@ -169,6 +189,22 @@ _DEFAULT_ENTRIES: list[WorldInfoEntry] = [
         position="after_char",
         order=400,
         cooldown_seconds=10,
+        min_affection_level=5,  # NSFW 反差链只对 Lv5+ 用户触发
+    ),
+    WorldInfoEntry(
+        identifier="lewd_tease_stranger",
+        keys=("艹", "操", "色色", "涩涩"),
+        content=(
+            "【场景:陌生人擦边】对方好感度低却讲擦边话。笨猫反应:\n"
+            "- 用猫娘炸毛冷处理(『杂鱼连基本礼貌都没有喵!』)\n"
+            "- 不进入反差链,不示弱,保持距离\n"
+            "- 一句话怼完不展开,可以表达『先把好感刷上来再说』"
+        ),
+        position="after_char",
+        order=410,
+        cooldown_seconds=30,
+        max_affection_level=4,   # Lv0-4 用这条冷处理,Lv5+ 走上面 lewd_tease
+        skip_for_owner=True,
     ),
     # === 节日 ===
     WorldInfoEntry(
@@ -268,13 +304,17 @@ def find_triggered_entries(
     entries: Iterable[WorldInfoEntry] | None = None,
     now: float | None = None,
     rng_seed: int | None = None,
+    affection_level: int = 0,
+    is_owner: bool = False,
 ) -> list[WorldInfoEntry]:
     """扫描 text 命中的 entry。返回按 (position, order) 排序的列表。
 
-    - constant entry 总命中
+    - constant entry 总命中(但仍受 owner_only / min_affection_level 过滤)
     - selective entry 走 keys / secondary_keys / regex_keys 判定
     - cooldown 命中跳过
     - probability < 100 时按概率筛(deterministic if rng_seed provided)
+    - owner_only=True 的 entry 只对主人触发
+    - min_affection_level > affection_level 的 entry 被过滤(主人豁免)
     """
     entries_iter = entries if entries is not None else _DEFAULT_ENTRIES
     now = now if now is not None else time.time()
@@ -284,6 +324,14 @@ def find_triggered_entries(
 
     hits: list[WorldInfoEntry] = []
     for entry in entries_iter:
+        if entry.owner_only and not is_owner:
+            continue
+        if entry.skip_for_owner and is_owner:
+            continue
+        if entry.min_affection_level > 0 and not is_owner and affection_level < entry.min_affection_level:
+            continue
+        if entry.max_affection_level > 0 and not is_owner and affection_level > entry.max_affection_level:
+            continue
         if not entry.matches(text):
             continue
         if _is_on_cooldown(scope, entry.identifier, entry.cooldown_seconds, now):
@@ -309,9 +357,14 @@ def build_world_info_block(
     position: str = "after_char",
     entries: Iterable[WorldInfoEntry] | None = None,
     now: float | None = None,
+    affection_level: int = 0,
+    is_owner: bool = False,
 ) -> str:
     """把命中且 position 匹配的 entry 拼成一段 system prompt 文本。"""
-    hits = find_triggered_entries(text, scope, entries=entries, now=now)
+    hits = find_triggered_entries(
+        text, scope, entries=entries, now=now,
+        affection_level=affection_level, is_owner=is_owner,
+    )
     pieces = [e.content for e in hits if e.position == position]
     if not pieces:
         return ""

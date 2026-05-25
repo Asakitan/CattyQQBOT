@@ -64,6 +64,13 @@ from .openai_client import (
     local_critic_completion,
 )
 from .action_hints import build_action_hints
+from .author_note import (
+    AuthorNote,
+    build_relationship_author_note,
+    default_persona_drift_note,
+    inject_author_note,
+)
+from .character_card import CATTY_CARD, build_character_card_messages, get_post_history
 from .conversation_pulse import analyze_pulse, build_pulse_context
 from .daily_life import build_daily_life_prompt
 from .world_info import build_world_info_block, find_triggered_entries
@@ -1888,10 +1895,15 @@ def _build_messages(
     if anger_context:
         messages.append({"role": "system", "content": anger_context})
     # 好感度等级 → 决定笨猫对当前用户的亲密程度,主人永远 MAX。
+    _user_affection_level: int = 0
+    _user_is_owner: bool = False
     try:
         affection_hint = affection_store.persona_hint(str(event.user_id))
         if affection_hint:
             messages.append({"role": "system", "content": affection_hint})
+        _user_is_owner = affection_store.is_owner(str(event.user_id))
+        _level, _exp = affection_store.get_level_and_exp(str(event.user_id))
+        _user_affection_level = int(_level)
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"affection persona_hint failed (non-fatal): {exc}")
     # SillyTavern 风「角色 scenario / 今日状态」: 每个 scope 每天一个确定性 mood,
@@ -1907,12 +1919,15 @@ def _build_messages(
     # SillyTavern 风 World Info (after_char position): 关键词触发的 scenario 注入。
     # 命中「考试/失眠/想你/生日/...」时给笨猫一段预设的反应模板,既稳定又有「角色感」。
     # 每条 entry 有 cooldown,不会同 scope 短期反复触发。
+    # 传 affection_level + is_owner: 让暧昧/NSFW entry 按好感度走不同模板(陌生人冷处理,熟人走反差链)。
     if "world_info" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
         try:
             _world_info_after = build_world_info_block(
                 incoming.text or "",
                 _conversation_queue_key(event),
                 position="after_char",
+                affection_level=_user_affection_level,
+                is_owner=_user_is_owner,
             )
             if _world_info_after:
                 messages.append({"role": "system", "content": _world_info_after})
@@ -4493,6 +4508,19 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         # 避免用户以为 bot 卡死了或被忽略了(实测群里 chat_completion 偶尔 30s+,被排队的用户
         # 等到 25s 又被 abandon,全程哑巴非常糟糕)。
         placeholder_task = _spawn_slow_reply_placeholder(matcher, event)
+        # SillyTavern 风「Author's Note 深度注入」: 在 chat history 倒数第 N 条之前插入贴身提醒。
+        # 比顶部 system prompt 更抗稀释(长对话里顶部容易被遗忘),比 jailbreak 更灵活(可以放在 user 当前消息之前但不是最末)。
+        # 1) 关系亲密度 author's note (depth=3): 主人/挚友/陌生 各有一条不同的贴身提醒
+        # 2) 默认人设防漂移 author's note (depth=4): 防长对话脱设
+        if "author_note" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
+            try:
+                _relationship_note = build_relationship_author_note(
+                    level=_user_affection_level, is_owner=_user_is_owner,
+                )
+                messages = inject_author_note(messages, _relationship_note)
+                messages = inject_author_note(messages, default_persona_drift_note())
+            except Exception as exc:  # noqa: BLE001
+                logger.debug(f"author_note inject failed (non-fatal): {exc}")
         try:
             reply = await chat_completion_with_tools(
                 config,
