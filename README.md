@@ -416,14 +416,6 @@ ai 列会话
 | `local_training.enabled` / `mc_idle_check_enabled` | `false` / `false` | 本地训练 / MC 闲时判定 |
 | `hot_reload.enabled` / `restart_on_code_change` | `true` / `true` | 热重载 / 代码改动自动重启 |
 
-### 本地 fallback 备忘
-
-`config.json` 顶层可以保留一个 `ai_local_backup` 节点存档本地 Ollama 配置，loader 会忽略它——
-纯人工备忘。云挂了 / 想试本地时把它整段拷贝覆盖 `ai` 节点即可一秒切换；切回云就反向操作。
-配合 `ollama.extra_models: ["qwen2.5:7b"]` 启动时自动预拉取，切换时不用等下载。
-
-> 6 核 CPU 上 Qwen2.5-7B Q4 单轮约 18~30 秒，仅适合云宕机兜底 / 私聊 / 冒泡，
-> 不建议作为群聊主回复。
 
 ```json
 {
