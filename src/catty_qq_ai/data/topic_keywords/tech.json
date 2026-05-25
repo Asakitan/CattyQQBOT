@@ -31,5 +31,22 @@
   "字节", "阿里", "腾讯", "美团", "滴滴", "百度", "京东", "拼多多",
   "网易", "华为", "小米", "蚂蚁", "字节跳动",
   "微软", "谷歌", "苹果", "meta", "facebook", "openai", "anthropic",
-  "nvidia", "amd", "intel"
+  "nvidia", "amd", "intel",
+
+  "ai agent", "agent", "cot", "chain of thought", "tool use", "function call",
+  "stable diffusion", "sd ", "midjourney", "mj", "novelai", "comfyui",
+  "lora", "checkpoint", "controlnet",
+  "terminal", "shell", "ssh", "scp", "rsync", "tmux", "screen",
+  "vim配置", "neovim配置", "init.lua", "init.vim", "dotfiles",
+  "macos", "osx", "ventura", "sonoma", "sequoia",
+  "win11", "win10", "win7", "wsl", "wsl2", "powershell", "pwsh",
+  "homebrew", "brew", "scoop", "chocolatey", "winget",
+  "包管理", "依赖管理", "lock 文件", "yarn.lock", "package-lock",
+  "containers", "k3s", "k0s", "podman", "rancher",
+  "monorepo", "lerna", "nx", "turborepo",
+  "微前端", "spa", "ssr", "ssg", "isr",
+  "嵌入式", "stm32", "arduino", "树莓派", "raspberry pi",
+  "fpga", "verilog", "vhdl", "硬件描述语言",
+  "操作系统课", "网络课", "数据结构课", "算法课",
+  "leetcode", "力扣", "牛客", "codewars", "atcoder"
 ]
