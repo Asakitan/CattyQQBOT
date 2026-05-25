@@ -30,6 +30,7 @@
     |   200 | catty_daily_life            | (catty-specific) | daily_life.build_daily_life_prompt |
     |   205 | catty_daily_goals           | (catty-specific) | catty_goals.build_catty_goals_prompt |
     |   207 | catty_reunion               | (catty-specific) | catty_reunion.build_reunion_prompt |
+    |   208 | catty_session_spice         | (catty-specific) | session_spice.build_session_spice_prompt |
     |   210 | catty_qq_chat_rhythm        | (extra)          | persona_prompts.build_qq_chat_rhythm_prompt |
     |   220 | catty_reply_self_check      | (extra)          | persona_prompts.build_reply_self_check_prompt |
     |   230 | catty_image_literacy        | (conditional)    | persona_prompts.build_image_literacy_prompt |
@@ -547,6 +548,19 @@ def register_catty_persona(
         content_fn=lambda: _cr.build_reunion_prompt(_last_active, is_owner=is_owner),
         order=207,
     )
+    # Catty Session Spice - per (scope, user, date) 微风味 — 同对话同人当天稳定,
+    # 不同人/不同天会变。三轴(微情绪/身体小动作偏好/自称-口头禅偏好), 主人池加亲密向。
+    # ST 风『不同 persona / 不同人不同反应』的 stateless 实现 —— 不存档, pure deterministic。
+    _spice_user_id = ctx.get("user_id", "") or ""
+    if _spice_user_id and scope:
+        from . import session_spice as _ss
+        mgr.register(
+            "catty_session_spice",
+            content_fn=lambda: _ss.build_session_spice_prompt(
+                scope, _spice_user_id, is_owner=is_owner,
+            ),
+            order=208,
+        )
     if "world_info" not in legacy_disabled:
         mgr.register(
             "catty_world_info",
