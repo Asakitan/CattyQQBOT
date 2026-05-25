@@ -2214,10 +2214,26 @@ _POINTS_QUERY_KEYWORDS = {
     "猫猫我的积分", "/积分", "/points", "points",
     "我的好感度", "好感度", "好感", "查好感", "查看好感",
     "猫猫好感度", "/好感", "/affection",
+    # 扩充群友常用变体 — 主人反馈"群友指向猫猫查好感"很多自然说法之前没命中
+    "我的好感", "查我的好感", "查询好感", "看好感", "看看好感",
+    "看一下好感", "我和你好感", "我跟你好感", "我俩好感", "咱俩好感",
+    "我多少分", "我有多少分", "我多少好感", "我的等级", "查等级", "看等级",
+    "我等级", "我什么等级", "等级是多少", "好感是多少", "积分是多少",
+    "我是几级", "我几级", "/level", "level", "/lv", "lv",
+    "我的状态", "状态查询", "状态卡", "好感卡", "积分卡",
+    "笨猫好感", "笨猫积分", "笨猫等级",
 }
 
 
 _SIGNIN_NEG_TOKENS = ("取消", "不签", "别签", "怎么签", "什么是", "签不到", "不想签", "不要签")
+
+# 查询类否定词:含『怎么』『如何』『教』这类是在问规则,不是查询自己的数值
+_POINTS_QUERY_NEG_TOKENS = (
+    "怎么", "如何", "教", "什么是", "啥是", "解释", "讲讲",
+    "不要", "不查", "别查", "取消", "怎么查", "怎么看",
+)
+# 弱匹配关键词:短文本含这些字眼且无否定 → 视作查询
+_POINTS_QUERY_SOFT_TOKENS = ("好感", "积分", "等级", "好感度")
 
 
 def _is_signin_request(text: str) -> bool:
@@ -2235,7 +2251,19 @@ def _is_signin_request(text: str) -> bool:
 
 
 def _is_points_query_request(text: str) -> bool:
-    return _compact_text(text) in _POINTS_QUERY_KEYWORDS
+    """精确集合优先;短文本 (≤10 chars) 含『好感/积分/等级』且不在否定词 → 弱匹配。
+
+    扩松匹配是为了兜住群友自然口语(『猫猫好感』『看我等级』『我多少分』之类),
+    主人反馈很多群友的查询说法之前没命中。带否定词的直接拒(问规则不是查数值)。
+    """
+    c = _compact_text(text)
+    if c in _POINTS_QUERY_KEYWORDS:
+        return True
+    if len(c) <= 10 and any(t in c for t in _POINTS_QUERY_SOFT_TOKENS):
+        if any(neg in c for neg in _POINTS_QUERY_NEG_TOKENS):
+            return False
+        return True
+    return False
 
 
 # 主人收藏表情命令:支持 "收藏" / "收藏这个" / "存表情" / "加表情库" 等开头,
