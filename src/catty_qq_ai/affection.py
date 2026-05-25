@@ -413,6 +413,42 @@ class AffectionStore:
             "level_after": _level_from_exp(new_val),
         }
 
+    def admin_force_checkin_today(self, user_id: str | int) -> dict[str, Any]:
+        """强制给某用户记一次今日签到 — 无视"今日已签"限制,直接走签到逻辑加分留档。
+        主人调用这个等价于一次正常签到(留档不动余额)。普通用户:base+bonus 入账,
+        last_checkin_date/last_checkin_amount/total_checkins 都刷新。
+        """
+        uid = str(user_id)
+        today = _today_local()
+        with self._lock:
+            rec = self._record(uid)
+            level = LEVEL_CAP if self.is_owner(uid) else _level_from_exp(int(rec.get("exp") or 0))
+            base = random.randint(CHECKIN_BASE_MIN, CHECKIN_BASE_MAX)
+            bonus = _checkin_bonus_for_level(level)
+            gained = min(base + bonus, CHECKIN_TOTAL_CAP)
+            if self.is_owner(uid):
+                rec["last_checkin_date"] = today
+                rec["last_checkin_amount"] = gained
+                rec["total_checkins"] = int(rec.get("total_checkins") or 0) + 1
+                rec["updated_at"] = _now_iso()
+                self._dirty = True
+                return {
+                    "ok": True, "is_owner": True, "user_id": uid,
+                    "gained": gained, "base": base, "bonus": bonus,
+                    "level": LEVEL_CAP, "balance": OWNER_INFINITY_POINTS,
+                }
+            rec["points"] = int(rec.get("points") or 0) + gained
+            rec["last_checkin_date"] = today
+            rec["last_checkin_amount"] = gained
+            rec["total_checkins"] = int(rec.get("total_checkins") or 0) + 1
+            rec["updated_at"] = _now_iso()
+            self._dirty = True
+            return {
+                "ok": True, "is_owner": False, "user_id": uid,
+                "gained": gained, "base": base, "bonus": bonus,
+                "level": level, "balance": int(rec["points"]),
+            }
+
     def admin_reset_record(self, user_id: str | int) -> dict[str, Any]:
         """整条记录清空(积分/经验/签到/消费 全归零)。主人本人调这个无意义,因为他永远无限。"""
         uid = str(user_id)
