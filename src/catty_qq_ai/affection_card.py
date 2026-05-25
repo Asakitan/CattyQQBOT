@@ -423,64 +423,83 @@ def _scatter_paws(
     band_y_max: int,
     band_x_min: int,
     band_x_max: int,
-    count_range: tuple[int, int] = (1, 3),
-    target_widths: tuple[int, ...] = (60, 100, 140),
+    count: int = 3,
+    target_widths: tuple[int, ...] = (60, 90, 130),
     forbidden_boxes: list[tuple[int, int, int, int]] | None = None,
     rng: random.Random | None = None,
+    angle_range: tuple[float, float] = (-45.0, 15.0),
+    scatter_zone_x_ratio: float = 0.62,
+    scatter_zone_y_ratio: float = 0.55,
 ) -> int:
-    """大画布上散 1-3 个高分辨率原图爪:
-    - target_widths: 大画布像素(默认 60/100/140,接近原图分辨率)
-    - 360° 完全随机旋转(NEAREST + alpha threshold,零 fringe)
-    - 9 种 paw 随机挑,size 优先不重复
-    - 反 bbox 重叠 + 避开 forbidden_boxes (Pusheen)
-    - text-aware paste:盖到字上半透明
+    """『左下角散开 3 爪』布局 — 主人最新需求:
+    - count 默认 3,size 优先不重复(3 档)
+    - 区域限定:band 左下 ~62% 宽 × ~55% 高(右上让位给 Pusheen + INF 数字)
+    - 角度随机 [-45°, +15°]:PIL 负角=顺时针(向右倾) / 正角=逆时针(向左倾)
+      → 总体朝右上方,但每爪角度自由偏差,看着自然不机械
+    - bbox 互不重叠(主人要求"脚印不要重叠")
+    - 避开 Pusheen forbidden_box
+    - text-aware paste:盖到字/边框上的像素半透
     """
     r = rng or random
     crops = _load_paw_crops()
     if not crops or band_y_max < band_y_min or band_x_max < band_x_min:
         return 0
     forbidden = list(forbidden_boxes or [])
-    n = r.randint(*count_range)
+    # 限定左下角散布区
+    bw = band_x_max - band_x_min
+    bh = band_y_max - band_y_min
+    scatter_x_max = band_x_min + int(bw * scatter_zone_x_ratio)
+    scatter_y_min = band_y_min + int(bh * (1.0 - scatter_zone_y_ratio))
+    scatter_x_min = band_x_min
+    scatter_y_max = band_y_max
     placed_boxes: list[tuple[int, int, int, int]] = []
     used_widths: list[int] = []
     placed = 0
-    for _ in range(n):
+    for _ in range(count):
+        # size 优先选未用过的 → 大小各异
         remaining = [w for w in target_widths if w not in used_widths]
-        target_w = r.choice(remaining or list(target_widths))
-        angle = r.uniform(0.0, 360.0)
-        paw = r.choice(crops)
-        rotated = _prepare_paw_rotated(paw, target_w, angle)
-        rw, rh = rotated.size
-        max_x = band_x_max - rw
-        max_y = band_y_max - rh
-        if max_x < band_x_min or max_y < band_y_min:
-            # 太大,降到更小 target_w 再试
-            for fw in sorted(target_widths):
-                if fw >= target_w:
+        tw = r.choice(remaining or list(target_widths))
+        # 角度随机
+        angle = r.uniform(*angle_range)
+        # 试不同 paw + 位置组合,直到放下不重叠
+        placed_here = False
+        for outer in range(8):
+            paw = r.choice(crops)
+            rotated = _prepare_paw_rotated(paw, tw, angle)
+            rw, rh = rotated.size
+            max_x = scatter_x_max - rw
+            max_y = scatter_y_max - rh
+            # 太大就降到下一档 size 再试
+            if max_x < scatter_x_min or max_y < scatter_y_min:
+                for fw in sorted(target_widths):
+                    if fw >= tw:
+                        continue
+                    rotated = _prepare_paw_rotated(paw, fw, angle)
+                    rw, rh = rotated.size
+                    if (scatter_x_max - rw >= scatter_x_min
+                            and scatter_y_max - rh >= scatter_y_min):
+                        tw = fw
+                        max_x = scatter_x_max - rw
+                        max_y = scatter_y_max - rh
+                        break
+                else:
                     continue
-                rotated = _prepare_paw_rotated(paw, fw, angle)
-                rw, rh = rotated.size
-                if rw <= band_x_max - band_x_min and rh <= band_y_max - band_y_min:
-                    target_w = fw
-                    max_x = band_x_max - rw
-                    max_y = band_y_max - rh
-                    break
-            else:
-                continue
-        # 反重叠 retry
-        for _try in range(20):
-            x = r.randint(band_x_min, max_x)
-            y = r.randint(band_y_min, max_y)
-            box = (x, y, x + rw, y + rh)
-            if any(_bbox_overlap(box, b) for b in placed_boxes):
-                continue
-            if any(_bbox_overlap(box, b) for b in forbidden):
-                continue
-            _paste_text_aware(target, rotated, x, y)
-            placed_boxes.append(box)
-            used_widths.append(target_w)
-            placed += 1
-            break
+            for _try in range(20):
+                x = r.randint(scatter_x_min, max_x)
+                y = r.randint(scatter_y_min, max_y)
+                box = (x, y, x + rw, y + rh)
+                if any(_bbox_overlap(box, b) for b in placed_boxes):
+                    continue
+                if any(_bbox_overlap(box, b) for b in forbidden):
+                    continue
+                _paste_text_aware(target, rotated, x, y)
+                placed_boxes.append(box)
+                used_widths.append(tw)
+                placed += 1
+                placed_here = True
+                break
+            if placed_here:
+                break
     return placed
 
 
@@ -631,13 +650,15 @@ def render_card(
     paw_band_x_min = 4 * SCALE
     paw_band_x_max = (CANVAS_W - 4) * SCALE
     if paw_band_bot > paw_band_top and paw_band_x_max > paw_band_x_min:
+        # 主人布局:3 个脚印在左下角散开,角度 [-45°, +15°] 随机,互不重叠
         _scatter_paws(
             large,
             band_y_min=paw_band_top, band_y_max=paw_band_bot,
             band_x_min=paw_band_x_min, band_x_max=paw_band_x_max,
-            count_range=(1, 3),
-            target_widths=(60, 100, 140),  # 大画布像素,接近原图分辨率
+            count=3,
+            target_widths=(60, 90, 130),
             forbidden_boxes=[pusheen_box] if pusheen_box else None,
+            angle_range=(-45.0, 15.0),
         )
     return large
 
