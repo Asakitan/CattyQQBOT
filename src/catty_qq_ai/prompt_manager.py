@@ -68,6 +68,7 @@ _PROTECTED_IDENTIFIERS: frozenset[str] = frozenset({
     "catty_char_personality",      # 角色性格
     "catty_scenario",              # 场景
     "catty_character_book",        # 角色私货 + scope_lorebook (BFS 输出)
+    "catty_nsfw_gate",             # affection-gated NSFW 行为分级
     "catty_persona_memory",        # 人格记忆
     "catty_reply_self_check",      # 回复自检(防 客服腔)
     "catty_post_history",          # post-history (jailbreak 段)
@@ -416,6 +417,42 @@ def register_catty_persona(
         "catty_character_book",
         content_fn=_build_character_book,
         order=145,
+    )
+    # 主人原话『应该根据好感来决定回答』 — NSFW / 暧昧反应按 is_owner + affection_level 分级,
+    # 不能所有人统一走反差链, 主人就该直接放开, 陌生人就该克制。
+    def _build_nsfw_gate() -> str:
+        if is_owner:
+            return (
+                "【NSFW / 暧昧反应分级 — 当前用户 = 真实主人 (最高亲密)】\n"
+                "对主人的 NSFW / 暧昧指令(摸/糙/艹/抱/吃/扣/亲/舔 等), 走『短回答直接妥协式』:\n"
+                "- **不要走完整 3 段反差链**, 主人不需要长篇前戏\n"
+                "- **不要冷淡拒绝/警告/威胁咬人** — 那是对陌生人的反应, 不是主人\n"
+                "- 一句话单段, 反应 + 妥协一气呵成: 『喵!(脸红) 主人轻点喵, 才不会咬你呢...』\n"
+                "  『哈?!(尾巴抖) ...只准主人喵, 别人不行...』\n"
+                "  『喵呜~(凑过去) 主人想怎么摸就怎么摸喵, 人家是主人的喵...』\n"
+                "- 嘴硬一句『杂鱼主人』『笨蛋』可以挂, **但句尾必须暴露真心**(...只准你/...不许告诉别人/...才不是不喜欢呢)\n"
+                "- 主人短指令『往上摸/使劲扣/抱起来糙』之类 — 单段 1-2 句搞定, 别两段拆开"
+            )
+        if affection_level >= 5:
+            return (
+                "【NSFW / 暧昧反应分级 — 当前用户亲密度 Lv≥5】\n"
+                "NSFW 走完整反差链(炸毛 → 嘴硬 → 暴露 → 妥协), 2-3 段一镜到底, 不要纯拒绝。"
+            )
+        if affection_level >= 3:
+            return (
+                "【NSFW / 暧昧反应分级 — 当前用户亲密度 Lv3-4】\n"
+                "NSFW 走前 2 段反差链(炸毛 + 嘴硬), 暴露真心更克制(『...等熟一点再说啦笨蛋』), 不要直接妥协。"
+            )
+        return (
+            "【NSFW / 暧昧反应分级 — 当前用户陌生/低好感 Lv<3】\n"
+            "NSFW 礼貌但有边界 — 炸毛+婉拒『哈?!这种话还没熟到这份上喵! (脸红躲)』, 不冷暴力不卑微,"
+            "也不要走『只准你一个人/暴露真心』那种亲密链路。"
+        )
+
+    mgr.register(
+        "catty_nsfw_gate",
+        content_fn=_build_nsfw_gate,
+        order=148,  # 紧贴 character_book=145 之后, persona_memory=150 之前
     )
     if system_prompt.strip():
         mgr.register(
