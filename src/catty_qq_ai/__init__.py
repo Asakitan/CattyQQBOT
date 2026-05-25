@@ -4458,8 +4458,9 @@ async def handle_catty_status(matcher: Matcher, event: MessageEvent) -> None:
         try:
             lore_entries = scope_lorebook_store.list_entries(scope)
             lore_size_kb = scope_lorebook_store.scope_byte_size(scope) / 1024.0
+            last_summary = scope_lorebook_store.last_summary_date(scope) or "从未"
             lines.append("📚 学到的事 (scope_lorebook)")
-            lines.append(f"  · 共 {len(lore_entries)} 条 · ~{lore_size_kb:.1f}KB / 200KB")
+            lines.append(f"  · 共 {len(lore_entries)} 条 · ~{lore_size_kb:.1f}KB / 200KB · 上次自动总结: {last_summary}")
             for e in lore_entries[:3]:
                 lines.append(f"  · [{e.identifier[:14]}...] {'/'.join(e.keys)}: {e.content[:50]}{'...' if len(e.content) > 50 else ''}")
             if len(lore_entries) > 3:
@@ -5126,6 +5127,82 @@ async def _summary_loop() -> None:
                 logger.warning(f"Failed to compress game memory for '{game_name}': {exc}")
 
 
+async def _scope_lore_auto_summary_loop() -> None:
+    """每天自动让 5.5 给活跃 scope 总结一次 lorebook entry — 主人原诉求『AI 自己每天总结』。
+
+    节流原则(三道闸):
+    1. **per-scope per-day max 1 次** — was_summarized_on(scope, today) 严格闸
+    2. **scope 必须近期活跃** — last_active_at 在 6 小时内, 死透的 scope 不打扰
+    3. **history 至少 10 条** — 对话量太少 5.5 总结不出东西, 浪费 token
+    4. **每个 loop tick 最多处理 3 scope** — 避免重启时一次跑 100 个把 5.5 干爆
+
+    启动后先 sleep 600s 让 bot 稳定 + 主线对话先享受 API 资源, 再进主循环。
+    主循环每 1800s (30 分钟) 检查一次, scope 全部走完一遍后就 sleep, 下个 tick 重新扫。
+    """
+    await asyncio.sleep(600)  # 启动期不打扰
+    _MIN_HISTORY = 10
+    _MAX_SCOPES_PER_TICK = 3
+    _ACTIVE_WINDOW_S = 6 * 3600  # 近 6 小时活跃才算 "活跃 scope"
+    while True:
+        try:
+            await asyncio.sleep(1800)  # 30 分钟一次
+            if not _has_api_key():
+                continue
+            cache = _get_session_cache()
+            now = time.time()
+            today = time.strftime("%Y-%m-%d", time.localtime(now))
+            processed = 0
+            for key, msg_count, last_at in cache.list_sessions():
+                if processed >= _MAX_SCOPES_PER_TICK:
+                    break
+                # 闸 1: 今天总结过 → skip
+                if scope_lorebook_store.was_summarized_on(key, today):
+                    continue
+                # 闸 2: 近 6 小时没活动 → skip
+                if last_at <= 0 or (now - last_at) > _ACTIVE_WINDOW_S:
+                    continue
+                # 闸 3: history 太少 → skip
+                history = cache.get(key) or []
+                excerpt_lines: list[str] = []
+                for msg in history[-40:]:
+                    if not isinstance(msg, dict):
+                        continue
+                    role = str(msg.get("role") or "")
+                    content = msg.get("content")
+                    if not isinstance(content, str) or not content.strip():
+                        continue
+                    if role not in ("user", "assistant"):
+                        continue
+                    excerpt_lines.append(f"{role}: {content.strip()[:500]}")
+                if len(excerpt_lines) < _MIN_HISTORY:
+                    continue
+                # 通过三道闸 → 调 5.5 总结
+                try:
+                    entries_data = await summarize_scope_lore(
+                        config,
+                        history_excerpt="\n".join(excerpt_lines),
+                        scope_label=key,
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(f"scope_lore auto-summary 失败 [{key}]: {exc}")
+                    continue
+                # 不管返回啥都标记今天跑过(0 条也算 — 避免反复试)
+                scope_lorebook_store.mark_summarized_on(key, today)
+                added = 0
+                for ed in entries_data or []:
+                    if scope_lorebook_store.add_entry(
+                        key, keys=ed.get("keys", []), content=ed.get("content", "")
+                    ):
+                        added += 1
+                if added > 0:
+                    logger.info(f"scope_lore auto-summary [{key}]: +{added} entries (今天 lock 24h)")
+                processed += 1
+        except asyncio.CancelledError:
+            break
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"_scope_lore_auto_summary_loop tick error: {exc}")
+
+
 async def _proactive_bubble_loop() -> None:
     while True:
         await asyncio.sleep(max(config.catty_proactive_check_interval_seconds, 60.0))
@@ -5176,6 +5253,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(user_vibe_store.background_flush_loop())
     asyncio.create_task(catty_mood_store.background_flush_loop())
     asyncio.create_task(scope_lorebook_store.background_flush_loop())
+    asyncio.create_task(_scope_lore_auto_summary_loop())
 
 
 @get_driver().on_shutdown

@@ -281,6 +281,27 @@ class ScopeLorebookStore:
             entries = self._data.get(scope) or []
             return sum(self._entry_byte_size(e) for e in entries)
 
+    # ── 后台 auto-summary 节流支持 ─────────────────────────────────
+    def was_summarized_on(self, scope: str, date_str: str) -> bool:
+        """检查 scope 是否在指定日期(YYYY-MM-DD) 已总结过。"""
+        with self._lock:
+            m = self._meta.get(scope) or {}
+            return str(m.get("last_summary_date") or "") == date_str
+
+    def mark_summarized_on(self, scope: str, date_str: str) -> None:
+        """记录 scope 在指定日期总结过(节流标记)。"""
+        with self._lock:
+            m = self._meta.setdefault(scope, {})
+            m["last_summary_date"] = date_str
+            m["last_summary_at"] = time.time()
+            self._dirty = True
+
+    def last_summary_date(self, scope: str) -> str:
+        """返回 scope 上次总结日期(YYYY-MM-DD), 没有返回 ''。"""
+        with self._lock:
+            m = self._meta.get(scope) or {}
+            return str(m.get("last_summary_date") or "")
+
 
 __all__ = [
     "ScopeLoreEntry",
