@@ -26,6 +26,7 @@ import re
 import threading
 import time
 from collections import Counter, deque
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -34,6 +35,10 @@ _MAX_TOTAL_USERS = 500
 _RECENT_MSG_WINDOW = 20  # 每个 user 滚动窗口大小
 _MIN_MSGS_FOR_CONFIDENCE = 5  # 至少 5 条才给画像
 _MAX_TOPIC_TAGS = 5
+_CLASSIFIER_CACHE_SIZE = 1024  # 高频群聊重复消息的分类结果 cache
+_CLASSIFIER_TEXT_CAP = 280     # cache key 上限,超长消息走 no-cache 路径
+_HIT_STRONG_MIN_LEN = 2        # 关键词 ≥2 字符算"强信号",1 字符容易子串假阳性
+_HIT_STRONG_WEIGHT = 2         # 强信号的权重倍数
 
 
 # ── 关键词 → tag 分类器(本地 zero-cost,不调 LLM) ────────────────────
@@ -50,9 +55,14 @@ _VIBE_TAGS: tuple[str, ...] = (
     "tease", "playful",
 )
 _TOPIC_TAGS: tuple[str, ...] = (
+    # 原 16 类
     "gaming", "tech", "food", "random", "emo", "study", "meta",
     "entertainment", "music", "travel", "shopping", "work", "love",
     "pet", "creative", "sns",
+    # 新 14 类(覆盖运动/汽车/理财/健康/时事/玄学/二次元/收藏/美妆/穿搭/家居/育儿/科普/买房)
+    "fitness", "car", "finance", "health", "politics", "spirit",
+    "otaku", "collection", "beauty", "fashion", "household",
+    "parenting", "science", "house",
 )
 _DATA_ROOT = Path(__file__).resolve().parent / "data"
 
@@ -82,30 +92,72 @@ def _lower(text: str) -> str:
     return (text or "").lower()
 
 
-def _classify_vibe(text: str) -> str | None:
-    """单条消息推断 vibe 标签,返回最强匹配或 None。"""
-    lower = _lower(text)
+def _hit_score(lower: str, keys: tuple[str, ...]) -> int:
+    """统计关键词命中得分:命中 1 个 1 字符词 = 1 分;命中 1 个 ≥2 字符词 = 2 分。
+
+    长度加权解决纯 hit count 偏好"关键词多的类"(techie 540 vs gossip 200)的问题,
+    也减少单字关键词(『腿』『胸』『分』『了』)子串假阳性的影响 — 长词命中更可信。
+    """
+    score = 0
+    for k in keys:
+        if k in lower:
+            score += _HIT_STRONG_WEIGHT if len(k) >= _HIT_STRONG_MIN_LEN else 1
+    return score
+
+
+@lru_cache(maxsize=_CLASSIFIER_CACHE_SIZE)
+def _classify_vibe_cached(lower: str) -> str | None:
     if not lower:
         return None
     best_tag: str | None = None
-    best_hits = 0
-    for tag, keys in _VIBE_KEYWORDS.items():
-        hits = sum(1 for k in keys if k in lower)
-        if hits > best_hits:
-            best_hits, best_tag = hits, tag
+    best_score = 0
+    # _VIBE_TAGS 顺序定义了持平时谁赢(早出现的优先,见 _VIBE_TAGS 注释)。
+    for tag in _VIBE_TAGS:
+        score = _hit_score(lower, _VIBE_KEYWORDS[tag])
+        if score > best_score:
+            best_score, best_tag = score, tag
     return best_tag
 
 
-def _classify_topics(text: str) -> list[str]:
-    """单条消息打多 topic 标签。"""
-    lower = _lower(text)
+@lru_cache(maxsize=_CLASSIFIER_CACHE_SIZE)
+def _classify_topics_cached(lower: str) -> tuple[str, ...]:
     if not lower:
-        return []
-    out = []
-    for tag, keys in _TOPIC_KEYWORDS.items():
-        if any(k in lower for k in keys):
-            out.append(tag)
-    return out
+        return ()
+    return tuple(
+        tag
+        for tag, keys in _TOPIC_KEYWORDS.items()
+        if any(k in lower for k in keys)
+    )
+
+
+def _classify_vibe(text: str) -> str | None:
+    """单条消息推断 vibe 标签,返回最强匹配或 None。
+
+    长度加权 + tag 顺序兜底:hit_score = Σ(1 if len(k)==1 else 2),持平按 _VIBE_TAGS 顺序。
+    超长消息(>_CLASSIFIER_TEXT_CAP)绕过 cache,避免长尾消息把 cache 撑爆。
+    """
+    lower = _lower(text)
+    if len(lower) > _CLASSIFIER_TEXT_CAP:
+        return _classify_vibe_cached.__wrapped__(lower)  # 直接调底层,不进 cache
+    return _classify_vibe_cached(lower)
+
+
+def _classify_topics(text: str) -> list[str]:
+    """单条消息打多 topic 标签(可命中多个)。"""
+    lower = _lower(text)
+    if len(lower) > _CLASSIFIER_TEXT_CAP:
+        return list(_classify_topics_cached.__wrapped__(lower))
+    return list(_classify_topics_cached(lower))
+
+
+def classifier_cache_info() -> dict[str, Any]:
+    """诊断:返回 vibe + topic cache 的命中率,方便调优 cache size。"""
+    v = _classify_vibe_cached.cache_info()
+    t = _classify_topics_cached.cache_info()
+    return {
+        "vibe": {"hits": v.hits, "misses": v.misses, "size": v.currsize, "max": v.maxsize},
+        "topic": {"hits": t.hits, "misses": t.misses, "size": t.currsize, "max": t.maxsize},
+    }
 
 
 # ── 用户画像 store ─────────────────────────────────────────────────
