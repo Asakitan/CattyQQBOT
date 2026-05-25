@@ -201,6 +201,83 @@ class CattyRAGStore:
                 logger.debug(f"catty_rag.clear_scope failed: {exc}")
                 return False
 
+    def backfill_memory(self, memory_store: Any) -> int:
+        """从 memory_store 导入所有 group/private/mention summaries 到 RAG (idempotent upsert)。
+
+        - group summary → scope=`group:<id>`, role=memory_summary
+        - private user summary → scope=`private:<id>`, role=memory_summary
+        - member-in-group mention summary → scope=`group:<id>`, role=member_profile
+        返回 add 数 (含 upsert)。
+        """
+        if not self._enabled:
+            return 0
+        try:
+            data = getattr(memory_store, "_data", {}) or {}
+        except Exception:  # noqa: BLE001
+            return 0
+        count = 0
+        # groups
+        for group_id, group in (data.get("groups") or {}).items():
+            if not isinstance(group, dict):
+                continue
+            summary = str(group.get("summary") or "").strip()
+            if summary:
+                try:
+                    ts = float(group.get("last_summary_at") or 0.0) or time.time()
+                    self.add(f"group:{group_id}", summary, role="memory_summary", user_id="", ts=ts)
+                    count += 1
+                except Exception:  # noqa: BLE001
+                    continue
+        # private users + mentions
+        for user_id, user in (data.get("users") or {}).items():
+            if not isinstance(user, dict):
+                continue
+            priv = str(user.get("private_summary") or "").strip()
+            if priv:
+                try:
+                    ts = float(user.get("last_private_summary_at") or 0.0) or time.time()
+                    self.add(f"private:{user_id}", priv, role="memory_summary",
+                             user_id=str(user_id), ts=ts)
+                    count += 1
+                except Exception:  # noqa: BLE001
+                    pass
+            mentions = user.get("mentions") or {}
+            if isinstance(mentions, dict):
+                for group_id, mention in mentions.items():
+                    text = str(mention).strip() if not isinstance(mention, dict) else str(mention.get("summary") or "").strip()
+                    if text:
+                        try:
+                            self.add(f"group:{group_id}", text, role="member_profile",
+                                     user_id=str(user_id))
+                            count += 1
+                        except Exception:  # noqa: BLE001
+                            continue
+        return count
+
+    def backfill_lorebook(self, scope_lorebook_store: Any) -> int:
+        """从 scope_lorebook 导入所有 entries 到 RAG (idempotent upsert)。"""
+        if not self._enabled:
+            return 0
+        try:
+            data = getattr(scope_lorebook_store, "_data", {}) or {}
+        except Exception:  # noqa: BLE001
+            return 0
+        count = 0
+        for scope, entries in data.items():
+            for entry in entries or []:
+                try:
+                    self.add(
+                        scope,
+                        getattr(entry, "content", ""),
+                        role="lore_entry",
+                        user_id="",
+                        ts=float(getattr(entry, "created_at", 0.0) or 0.0) or time.time(),
+                    )
+                    count += 1
+                except Exception:  # noqa: BLE001
+                    continue
+        return count
+
     def prune_old_docs(self, scope: str, *, keep_recent: int = _MAX_PER_SCOPE_DOCS) -> int:
         """drop 超出上限的最老文档(按 ts metadata 排序)。返回删除数。"""
         if not self._enabled or not scope:

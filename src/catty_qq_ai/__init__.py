@@ -5352,6 +5352,54 @@ async def _scope_lore_auto_summary_loop() -> None:
             logger.warning(f"_scope_lore_auto_summary_loop tick error: {exc}")
 
 
+async def _catty_rag_backfill_once() -> None:
+    """启动后跑一次, 把已有 memory_store + scope_lorebook 数据 backfill 到 chromadb RAG。
+
+    idempotent (upsert), 重启可以再跑覆盖同 doc_id 不重复存。
+    sleep 60s 让 bot 先稳定起来再跑(embedding 计算消耗 CPU)。
+    """
+    await asyncio.sleep(60)
+    if not catty_rag_store.enabled:
+        logger.info("catty_rag: backfill skipped (RAG disabled)")
+        return
+    try:
+        n_mem = catty_rag_store.backfill_memory(memory_store)
+        n_lore = catty_rag_store.backfill_lorebook(scope_lorebook_store)
+        logger.info(f"catty_rag backfill: +{n_mem} memory summaries, +{n_lore} lore entries")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"catty_rag backfill failed: {exc}")
+
+
+async def _catty_rag_prune_loop() -> None:
+    """后台定时 prune RAG collection 防膨胀 — 每个 scope 上限 2000 docs。
+
+    sleep 900s 启动期不打扰 + 30 min 一次, 遍历活跃 scope (session_cache)。
+    chromadb upsert 不会自动 evict, 需要主动 prune 老 docs。
+    """
+    await asyncio.sleep(900)
+    if not catty_rag_store.enabled:
+        return
+    while True:
+        try:
+            await asyncio.sleep(1800)
+            cache = _get_session_cache()
+            total_dropped = 0
+            for key, _msg_count, _last_at in cache.list_sessions():
+                try:
+                    dropped = catty_rag_store.prune_old_docs(key, keep_recent=2000)
+                    if dropped > 0:
+                        total_dropped += dropped
+                        logger.info(f"catty_rag prune [{key}]: dropped {dropped} old docs")
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"catty_rag prune [{key}] failed: {exc}")
+            if total_dropped > 0:
+                logger.info(f"catty_rag prune tick: total dropped {total_dropped}")
+        except asyncio.CancelledError:
+            break
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"_catty_rag_prune_loop tick error: {exc}")
+
+
 async def _proactive_bubble_loop() -> None:
     while True:
         await asyncio.sleep(max(config.catty_proactive_check_interval_seconds, 60.0))
@@ -5403,6 +5451,8 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(catty_mood_store.background_flush_loop())
     asyncio.create_task(scope_lorebook_store.background_flush_loop())
     asyncio.create_task(_scope_lore_auto_summary_loop())
+    asyncio.create_task(_catty_rag_backfill_once())
+    asyncio.create_task(_catty_rag_prune_loop())
 
 
 @get_driver().on_shutdown
