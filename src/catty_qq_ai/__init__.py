@@ -3817,6 +3817,29 @@ async def _keyword_reply_rule(bot: Bot, event: MessageEvent, state: T_State) -> 
     return True
 
 
+_VIBE_CMD_RE = re.compile(r"^\s*/?(vibe_show|vibe_reset)(?:\s+(\d{4,12}))?\s*$", re.IGNORECASE)
+
+
+async def _vibe_command_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    """主人 only 的 vibe 管理命令: `/vibe_show <qq>` 或 `/vibe_reset <qq>`。
+
+    不带 qq 时,show 默认查自己,reset 拒绝(避免误清主人自己)。
+    """
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    if not _event_is_owner(event):
+        return False
+    text = event_plain_text(event)
+    if not text:
+        return False
+    match = _VIBE_CMD_RE.match(text)
+    if not match:
+        return False
+    state["catty_vibe_cmd"] = match.group(1).lower()
+    state["catty_vibe_qq"] = (match.group(2) or "").strip()
+    return True
+
+
 async def _emoji_save_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     """主人收藏表情命令:只有 catty_owner_qq 能触发,文本以收藏前缀开头。"""
     if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
@@ -3902,6 +3925,7 @@ async def _legs_picture_rule(bot: Bot, event: MessageEvent, state: T_State) -> b
 keyword_reply_matcher = on_message(rule=_keyword_reply_rule, priority=40, block=True)
 emoji_save_matcher = on_message(rule=_emoji_save_rule, priority=41, block=True)
 affection_command_matcher = on_message(rule=_affection_command_rule, priority=42, block=True)
+vibe_command_matcher = on_message(rule=_vibe_command_rule, priority=43, block=True)
 legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
 expression_repeat_matcher = on_message(rule=_expression_repeat_rule, priority=50, block=True)
@@ -4082,6 +4106,59 @@ async def _generate_emoji_tags_via_vision(image_url: str, hint: str = "") -> tup
     if not tags:
         tags = ["主人收藏"]
     return meaning, tags[:6]
+
+
+@vibe_command_matcher.handle()
+async def handle_vibe_command(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    """主人用 `/vibe_show <qq>` 看用户画像 / `/vibe_reset <qq>` 清画像。"""
+    if not _event_is_owner(event):
+        return
+    cmd = str(state.get("catty_vibe_cmd") or "")
+    target_qq = str(state.get("catty_vibe_qq") or "").strip()
+    if cmd == "vibe_show":
+        if not target_qq:
+            target_qq = str(event.user_id)
+        try:
+            profile = user_vibe_store.profile_for(target_qq)
+        except Exception as exc:  # noqa: BLE001
+            await matcher.finish(Message(f"喵呜~ profile 读取失败嗷呜: {exc}"))
+        if not profile or int(profile.get("message_count") or 0) == 0:
+            await matcher.finish(Message(
+                f"哼~ QQ:{target_qq} 笨猫还没见过他几次喵,没有画像~ ฅฅ"
+            ))
+        vibe = profile.get("vibe_tag") or "—"
+        topics = profile.get("topic_tags") or []
+        msg_count = int(profile.get("message_count") or 0)
+        confidence = int(profile.get("confidence") or 0)
+        lines = [
+            f"喵~ QQ:{target_qq} 笨猫的画像 ฅฅ",
+            f"  · 主调: {vibe}",
+            f"  · 常聊: {' / '.join(topics) if topics else '—'}",
+            f"  · 累计消息: {msg_count} 条 (置信度 {confidence}%)",
+        ]
+        await matcher.finish(Message("\n".join(lines)))
+    elif cmd == "vibe_reset":
+        if not target_qq:
+            await matcher.finish(Message(
+                "杂鱼主人~ reset 必须指定 QQ 号嗷呜!例:`/vibe_reset 123456` ฅฅ"
+            ))
+        try:
+            with user_vibe_store._lock:  # noqa: SLF001
+                existed = target_qq in user_vibe_store._data  # noqa: SLF001
+                user_vibe_store._data.pop(target_qq, None)  # noqa: SLF001
+                user_vibe_store._last_access.pop(target_qq, None)  # noqa: SLF001
+                if existed:
+                    user_vibe_store._dirty = True  # noqa: SLF001
+        except Exception as exc:  # noqa: BLE001
+            await matcher.finish(Message(f"喵呜~ reset 失败嗷呜: {exc}"))
+        if existed:
+            await matcher.finish(Message(
+                f"哼~ QQ:{target_qq} 的画像被笨猫忘掉啦,从头开始重新学喵 ฅฅ"
+            ))
+        else:
+            await matcher.finish(Message(
+                f"喵呜~ QQ:{target_qq} 本来就没画像哦,不用 reset 啦~"
+            ))
 
 
 @emoji_save_matcher.handle()
