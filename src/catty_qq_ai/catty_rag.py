@@ -233,35 +233,66 @@ class CattyRAGStore:
         *,
         top_k: int = 3,
         min_similarity: float = _RECALL_MIN_SIMILARITY,
+        boost_recency: bool = True,
     ) -> list[tuple[float, str, dict[str, Any]]]:
         """语义召回 top-K (score, text, metadata)。score 是余弦相似度 [0,1]。
 
         score < min_similarity 的过滤掉。无结果返回 []。
+
+        boost_recency (default True):
+        - 内部 fetch top_k*3 候选, 按 ts 给 score 加权重排序后切 top_k
+        - 加权: <24h *1.30 / <7d *1.15 / <30d *1.05 / 更老 *1.00
+        - 返回的 score 仍是 raw similarity (下游显示 + age 自然交代时效), boosted 只用于排序
+        - 目的: 最近发生的事更容易被召回, 几周前的旧记忆次要
         """
         if not self._enabled or not scope or not query_text or not query_text.strip():
             return []
         col = self._get_collection(scope)
         if col is None:
             return []
+        # boost 模式下拿 top_k*3 候选给重排序留余量, 否则照原样
+        fetch_n = top_k * 3 if boost_recency else top_k
+        fetch_n = max(1, min(fetch_n, _MAX_RECALL_TOP_K))
         try:
             res = col.query(
                 query_texts=[query_text.strip()[:1000]],
-                n_results=max(1, min(top_k, _MAX_RECALL_TOP_K)),
+                n_results=fetch_n,
             )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"catty_rag.query failed: {exc}")
             return []
-        out: list[tuple[float, str, dict[str, Any]]] = []
         docs = (res.get("documents") or [[]])[0] or []
         metas = (res.get("metadatas") or [[]])[0] or []
         dists = (res.get("distances") or [[]])[0] or []
+        now = time.time()
+        candidates: list[tuple[float, float, str, dict[str, Any]]] = []  # (raw, boosted, text, meta)
         for doc, meta, dist in zip(docs, metas, dists):
             # chromadb cosine distance 是 1-similarity, score = 1 - distance
             score = 1.0 - float(dist)
             if score < min_similarity:
                 continue
-            out.append((score, str(doc), dict(meta or {})))
-        return out
+            meta_d = dict(meta or {})
+            if boost_recency:
+                ts = float(meta_d.get("ts") or 0.0)
+                if ts > 0:
+                    age_s = max(0.0, now - ts)
+                    if age_s < 86400:
+                        mult = 1.30
+                    elif age_s < 7 * 86400:
+                        mult = 1.15
+                    elif age_s < 30 * 86400:
+                        mult = 1.05
+                    else:
+                        mult = 1.00
+                else:
+                    mult = 1.00
+                boosted = score * mult
+            else:
+                boosted = score
+            candidates.append((score, boosted, str(doc), meta_d))
+        # 按 boosted score 倒序排序, 切 top_k. 不 boost 时 boosted==score 行为不变。
+        candidates.sort(key=lambda c: -c[1])
+        return [(raw, doc, meta) for raw, _boosted, doc, meta in candidates[:top_k]]
 
     def total_docs(self, scope: str) -> int:
         """诊断: 当前 scope 总文档数。"""
