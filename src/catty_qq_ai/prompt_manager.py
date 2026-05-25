@@ -598,6 +598,17 @@ def register_catty_persona(
             order=460,
         )
 
+    # === Catty RAG - 向量召回 (order=458, user_vibe=460 之前) ===
+    # 用当前 user_text 在 chromadb 找语义近的旧对话 top-K, 注入 prompt 让笨猫记得久远的事。
+    rag_store = ctx.get("catty_rag_store")
+    if rag_store is not None:
+        from . import catty_rag as _crag
+        mgr.register(
+            "catty_rag_recall",
+            content_fn=lambda: _crag.build_rag_recall_prompt(rag_store, scope, user_text, top_k=3),
+            order=458,
+        )
+
     # === Anti-Repetition Tracker - 防复读 (order=480 紧贴 post_history 之前) ===
     from . import anti_repetition as _ar
     mgr.register(

@@ -195,6 +195,11 @@ catty_mood_store = CattyMoodStore(config.catty_memory_path)
 # 长期记忆。per-scope 200KB cap + LRU 压缩,落盘 scope_lorebooks.json。
 from .scope_lorebook import ScopeLorebookStore
 scope_lorebook_store = ScopeLorebookStore(config.catty_memory_path)
+# Catty RAG: chromadb 向量记忆 — per-scope chat history 向量化 + 语义召回 top-K。
+# 让笨猫『记得久远的事』 — 关键词没命中但语义相近的旧对话也能召回。
+# graceful fallback: chromadb 未装时 store._enabled=False, add/query 全部 no-op。
+from .catty_rag import CattyRAGStore
+catty_rag_store = CattyRAGStore(config.catty_memory_path)
 _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
@@ -2002,6 +2007,16 @@ async def _build_messages(
         )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"catty_mood_store.record_text_async failed: {exc}")
+    # Catty RAG: 把 user 消息向量化存进 per-scope chromadb (graceful fallback if no chromadb)
+    try:
+        catty_rag_store.add(
+            _arc_scope,
+            incoming.text or "",
+            role="user",
+            user_id=str(event.user_id),
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"catty_rag_store.add failed: {exc}")
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,
@@ -2028,6 +2043,8 @@ async def _build_messages(
         # Scope lorebook: AI 5.5 学到的『这个群专属小事』, _build_character_book BFS pool 里
         # 跟 hardcoded character_book 一起递归扫描, 命中时刷 hit_count。
         "scope_lorebook_store": scope_lorebook_store,
+        # Catty RAG: chromadb 向量召回 store, prompt_manager 用 user_text query top-K 历史
+        "catty_rag_store": catty_rag_store,
     })
     # LayerD/E 散装 context 统一注册到 PromptManager,享受同样的 prompt_order / prompts_disabled
     # 配置能力。order 600+ 表示挂在 character_card / world_info 之后、接近 chat history。
@@ -4579,6 +4596,20 @@ async def handle_catty_status(matcher: Matcher, event: MessageEvent) -> None:
                 lines.append(f"  · (还有 {len(lore_entries) - 3} 条 — /lore_show 看全)")
         except Exception as exc:  # noqa: BLE001
             lines.append(f"📚 scope_lorebook: <错误 {exc}>")
+        lines.append("")
+
+        # catty_rag (chromadb 向量记忆)
+        try:
+            rag_enabled = catty_rag_store.enabled
+            lines.append("🔍 向量记忆 (catty_rag / chromadb)")
+            if rag_enabled:
+                rag_docs = catty_rag_store.total_docs(scope)
+                lines.append(f"  · 状态: ✓ 已启用 · 当前 scope: {rag_docs} 条历史")
+            else:
+                err = catty_rag_store.init_error or "未知"
+                lines.append(f"  · 状态: ✗ 禁用 ({err[:50]})")
+        except Exception as exc:  # noqa: BLE001
+            lines.append(f"🔍 catty_rag: <错误 {exc}>")
         lines.append("")
 
         # affection
