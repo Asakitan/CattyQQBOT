@@ -184,6 +184,10 @@ story_arc_store = StoryArcStore(config.catty_memory_path)
 # 让笨猫对不同人有差异化反应基调。持久化到 memory_dir/user_vibes.json。
 from .user_vibe import UserVibeStore
 user_vibe_store = UserVibeStore(config.catty_memory_path)
+# Catty mood: 笨猫自己当下心情(per-scope 8 维向量,跨多轮连续衰减)。
+# 让连续对话不再每条独立 — 被惹到下一句不会立刻笑嘻嘻,落盘到 catty_moods.json。
+from .catty_mood import CattyMoodStore
+catty_mood_store = CattyMoodStore(config.catty_memory_path)
 _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
@@ -1982,6 +1986,11 @@ def _build_messages(
         user_vibe_store.record_message(str(event.user_id), incoming.text or "")
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"user_vibe_store.record_message failed: {exc}")
+    # Catty mood: 喂入 user_text 更新 scope mood 状态(跨多轮累积+衰减)
+    try:
+        catty_mood_store.record_text(_arc_scope, incoming.text or "")
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"catty_mood_store.record_text failed: {exc}")
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,
@@ -2003,6 +2012,8 @@ def _build_messages(
         # 读 profile,low confidence 自动返回空字符串(不污染 prompt)
         "user_vibe_store": user_vibe_store,
         "user_id": str(event.user_id),
+        # Catty mood: 让 register_catty_persona 用 scope 拉当前 mood 注入 prompt
+        "catty_mood_store": catty_mood_store,
     })
     # LayerD/E 散装 context 统一注册到 PromptManager,享受同样的 prompt_order / prompts_disabled
     # 配置能力。order 600+ 表示挂在 character_card / world_info 之后、接近 chat history。
@@ -4859,6 +4870,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(affection_store.background_flush_loop())
     asyncio.create_task(story_arc_store.background_flush_loop())
     asyncio.create_task(user_vibe_store.background_flush_loop())
+    asyncio.create_task(catty_mood_store.background_flush_loop())
 
 
 @get_driver().on_shutdown
@@ -4877,6 +4889,15 @@ async def _flush_memory_store_on_shutdown() -> None:
             logger.info("memory_store: flushed dirty data on shutdown")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"memory_store: shutdown flush failed: {exc}")
+
+
+@get_driver().on_shutdown
+async def _flush_catty_mood_store_on_shutdown() -> None:
+    try:
+        if catty_mood_store.flush_sync():
+            logger.info("catty_mood_store: flushed mood states on shutdown")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"catty_mood_store: shutdown flush failed: {exc}")
 
 
 @get_driver().on_shutdown

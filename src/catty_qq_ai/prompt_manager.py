@@ -400,6 +400,18 @@ def register_catty_persona(
             order=320,
         )
 
+    # === Catty Mood - 笨猫自己当下心情 (order=255, 紧贴 daily_life 之后) ===
+    # 跨多轮累积+时间衰减的 8 维 mood 向量,让连续对话不再每条独立。
+    # 主维度 < 阈值时返回空字符串(baseline 不打扰默认人格)。
+    mood_store = ctx.get("catty_mood_store")
+    if mood_store is not None:
+        from . import catty_mood as _cm
+        mgr.register(
+            "catty_mood",
+            content_fn=lambda: _cm.build_catty_mood_prompt(mood_store, scope),
+            order=255,
+        )
+
     # === User Vibe Profile - 对方画像 (order=460 在 anti_repetition 之前) ===
     user_vibe_store = ctx.get("user_vibe_store")
     user_id = ctx.get("user_id", "")
