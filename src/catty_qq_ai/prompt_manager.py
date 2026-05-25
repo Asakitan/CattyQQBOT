@@ -242,6 +242,39 @@ def register_catty_persona(
         content_fn=lambda: _cc.get_scenario(ctx=macro_ctx),
         order=140,
     )
+    # ST V2 character_book: 嵌入式 lorebook — character_card 自带的笨猫私货 entry
+    # (尾巴/猫粮/弦化/欧泊阵营/睡眠/呼噜...),命中 user_text 关键词时拼一段注入。
+    # 不走 world_info.py 的 cooldown(这些是"角色私货",触发即注入),用 order=145 让它紧跟 scenario。
+    def _build_character_book() -> str:
+        try:
+            book = getattr(_cc.CATTY_CARD, "character_book", ()) or ()
+            if not book:
+                return ""
+            text_lower = (user_text or "").lower()
+            hits: list[tuple[int, str, str]] = []  # (order, identifier, content)
+            for entry in book:
+                if getattr(entry, "constant", False):
+                    hits.append((entry.order, entry.identifier, entry.content))
+                    continue
+                for k in (entry.keys or ()):
+                    if not k:
+                        continue
+                    key_str = k if entry.case_sensitive else k.lower()
+                    haystack = user_text if entry.case_sensitive else text_lower
+                    if key_str in haystack:
+                        hits.append((entry.order, entry.identifier, entry.content))
+                        break
+            if not hits:
+                return ""
+            hits.sort(key=lambda h: (h[0], h[1]))
+            return "【笨猫·角色私货 (character_book)】\n" + "\n".join(h[2] for h in hits)
+        except Exception:  # noqa: BLE001
+            return ""
+    mgr.register(
+        "catty_character_book",
+        content_fn=_build_character_book,
+        order=145,
+    )
     if system_prompt.strip():
         mgr.register(
             "catty_persona_memory",
