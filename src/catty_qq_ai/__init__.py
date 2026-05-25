@@ -61,6 +61,7 @@ from .openai_client import (
     chat_completion,
     chat_completion_instant,
     chat_completion_with_tools,
+    classify_catty_mood,
     describe_images,
     download_binary,
     local_critic_completion,
@@ -1877,7 +1878,7 @@ def _build_recent_image_reference_hint(event: MessageEvent, incoming: ExtractedM
     return "\n".join(lines)
 
 
-def _build_messages(
+async def _build_messages(
     event: MessageEvent,
     key: str,
     incoming: ExtractedMessage,
@@ -1986,11 +1987,15 @@ def _build_messages(
         user_vibe_store.record_message(str(event.user_id), incoming.text or "")
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"user_vibe_store.record_message failed: {exc}")
-    # Catty mood: 喂入 user_text 更新 scope mood 状态(跨多轮累积+衰减)
+    # Catty mood: 主人正在把硬关键词分类迁到 spark async classifier。
+    # _build_messages 是 sync 函数不能直接 await record_text_async — 救火期只走纯衰减,
+    # 主人把 _build_messages 改 async / spark classifier 接入完成后,把这段恢复回
+    # `await catty_mood_store.record_text_async(_arc_scope, incoming.text or "",
+    #                                          classifier=lambda t: classify_catty_mood(config, t))`
     try:
-        catty_mood_store.record_text(_arc_scope, incoming.text or "")
+        catty_mood_store.record_decay_only(_arc_scope)
     except Exception as exc:  # noqa: BLE001
-        logger.debug(f"catty_mood_store.record_text failed: {exc}")
+        logger.debug(f"catty_mood_store.record_decay_only failed: {exc}")
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,
@@ -3099,6 +3104,11 @@ async def _resolve_no_reply(
         logger.warning(f"Forced reply transport error: {exc}")
     else:
         rewritten = _sanitize_residual_markers(rewritten)
+        try:
+            from . import regex_script as _rs
+            rewritten = _rs.apply_output_scripts(rewritten, is_owner=_event_is_owner(event))
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"regex_script apply_output_scripts failed (forced reply): {exc}")
         if rewritten.strip() and not _is_no_reply(rewritten):
             final_reply = rewritten
 
@@ -3308,6 +3318,13 @@ async def _apply_local_critic(
             if rewritten.strip():
                 final_reply = rewritten
     final_reply = _sanitize_residual_markers(final_reply)
+    # ST 风 Regex Script — LLM 漏检最后一道防线:破设定话术 / 客服拒绝 / 重复尾巴词折叠 /
+    # 称呼防御网(非主人误用『主人』兜底替换)。is_owner 从外层 event 推断。
+    try:
+        from . import regex_script as _rs
+        final_reply = _rs.apply_output_scripts(final_reply, is_owner=_event_is_owner(event))
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"regex_script apply_output_scripts failed: {exc}")
     if not final_reply.strip():
         final_reply = NO_REPLY_MARKER
 
@@ -5199,7 +5216,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         if not emoji_context:
             emoji_context = _generic_emoji_context(incoming)
         semantic_reply_split = await _should_request_semantic_reply_split(incoming)
-        messages = _build_messages(
+        messages = await _build_messages(
             event,
             history_key,
             incoming,

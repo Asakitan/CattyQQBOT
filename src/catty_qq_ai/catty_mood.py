@@ -9,17 +9,21 @@ laughing 维度被 annoyed 压制,prompt 注入「还在生闷气」段,
 LLM 自然走"嘴硬+尾巴一甩"路线。
 
 维度(8 维,各 0-100 baseline=50):
-- happy     开心   (yay/嘿嘿/太好了)
-- excited   兴奋   (牛/绝/炸裂/嗷嗷嗷)
-- annoyed   烦躁   (服了/烦死/操/草)
-- shy       害羞   (脸红/羞/抱抱/亲亲) → 暧昧链触发
-- sad       难过   (呜呜/55555/委屈/难过)
-- sleepy    困倦   (好困/熬夜/想睡)
-- sulky     生闷气 (哼/不理你/讨厌/走开) → 跟 happy 互斥,持续最长
-- bored     无聊   (无聊/没意思/划水)
+- happy     开心
+- excited   兴奋
+- annoyed   烦躁
+- shy       害羞 → 暧昧链触发
+- sad       难过
+- sleepy    困倦
+- sulky     生闷气 → 跟 happy 互斥,持续最长
+- bored     无聊
+
+分类不再用固定关键词,改成 caller 传入的 async classifier(走 spark 小模型)。
+caller 用 `await store.record_text_async(scope, text, classifier=...)` 喂入消息,
+classifier 返回 [(dim, delta)] 列表; classifier 失败 / 无命中时返回 [] — 当轮只走衰减。
 
 更新规则:
-- 命中关键词 → 主维度 +Δ,互斥维度 -Δ/2
+- 命中维度 → 主维度 +Δ,互斥维度 -Δ/2
 - 时间衰减: 每 60 秒所有维度向 50 baseline 回归 1 点 (sulky 0.5/min 慢一倍)
 - prompt 注入阈值: max(dim) > 65 才注入,< 65 不打扰默认人格
 
@@ -30,6 +34,7 @@ from __future__ import annotations
 import json
 import threading
 import time
+from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -48,18 +53,9 @@ _DIMS: tuple[str, ...] = (
     "happy", "excited", "annoyed", "shy", "sad", "sleepy", "sulky", "bored",
 )
 
-# 关键词触发表 — 命中后主维度 +Δ,互斥维度按 _OPPONENTS 表 -Δ/2
-# 关键词都用 substring 命中,case-insensitive。
-_TRIGGERS: dict[str, tuple[tuple[str, ...], float]] = {
-    "happy":   (("开心", "好棒", "太好了", "yay", "yay~", "嘿嘿", "嘻嘻", "good", "nice", "ok啦", "okk", "好耶"), 15.0),
-    "excited": (("兴奋", "牛逼", "牛b", "绝了", "yyds", "炸裂", "嗷嗷嗷", "卧槽牛", "wuhu", "妙啊", "妙哇"), 14.0),
-    "annoyed": (("服了", "我服", "无语", "烦死", "真烦", "烦死了", "操", "草", "傻逼", "脑残", "妈的", "tmd", "破事"), 16.0),
-    "shy":     (("脸红", "害羞", "羞死", "抱抱", "亲亲", "贴贴", "蹭蹭", "亲一口", "摸摸头", "嫁给我", "结婚"), 18.0),
-    "sad":     (("难过", "伤心", "委屈", "呜呜", "55555", "想哭", "好惨", "心碎", "失恋", "emo"), 14.0),
-    "sleepy":  (("好困", "想睡", "熬夜", "通宵", "肝完", "肝到", "睡了", "晚安", "瞌睡"), 10.0),
-    "sulky":   (("哼", "不理你", "讨厌", "走开", "滚", "懒得理", "别烦", "不和你玩"), 16.0),
-    "bored":   (("无聊", "没意思", "划水", "好闲", "刷手机", "摆烂", "躺平"), 10.0),
-}
+# classifier 签名: 接收 text,返回 [(dim, delta)] 列表;
+# dim 必须在 _DIMS 内,delta 推荐 0-20 区间(超过 _MAX-baseline 也会被 clamp)。
+MoodClassifier = Callable[[str], Awaitable[list[tuple[str, float]]]]
 
 # 互斥关系:命中 key 时给 opponents 各 -Δ/2(让心情切换有合理对冲)
 _OPPONENTS: dict[str, tuple[str, ...]] = {
@@ -140,17 +136,25 @@ def _decay_toward_baseline(state: _MoodState, now: float) -> None:
     state.last_update_at = now
 
 
-def _classify_text(text: str) -> list[tuple[str, float]]:
-    """对单条 text 返回命中的 (dim, delta) 列表。"""
-    if not text:
+def _sanitize_triggers(raw: list[tuple[str, float]] | None) -> list[tuple[str, float]]:
+    """过滤 classifier 返回值: 只保留合法 dim、delta clamp 到 [0, 50]。"""
+    if not raw:
         return []
-    lower = text.lower()
     out: list[tuple[str, float]] = []
-    for dim, (keys, delta) in _TRIGGERS.items():
-        for k in keys:
-            if k and k in lower:
-                out.append((dim, delta))
-                break
+    for item in raw:
+        try:
+            dim, delta = item
+        except (TypeError, ValueError):
+            continue
+        if dim not in _DIMS:
+            continue
+        try:
+            d = float(delta)
+        except (TypeError, ValueError):
+            continue
+        if d <= 0:
+            continue
+        out.append((dim, min(d, 50.0)))
     return out
 
 
@@ -235,11 +239,10 @@ class CattyMoodStore:
             self._data.pop(sc, None)
             self._last_access.pop(sc, None)
 
-    def record_text(self, scope: str, text: str) -> None:
-        """喂一条 user_text 进来,更新 scope mood。"""
-        if not scope or not text or not text.strip():
-            return
-        triggers = _classify_text(text)
+    def _apply_triggers(self, scope: str, triggers: list[tuple[str, float]]) -> None:
+        """把 (dim, delta) 列表应用到 scope 状态: 主维度 +Δ, 互斥维度 -Δ/2,
+        同时 decay 到 now。triggers 为空时只走衰减(不动维度但刷新 last_update_at)。
+        """
         now = time.time()
         with self._lock:
             state = self._data.get(scope) or _MoodState()
@@ -255,6 +258,33 @@ class CattyMoodStore:
             self._last_access[scope] = now
             self._evict_lru()
             self._dirty = True
+
+    async def record_text_async(
+        self,
+        scope: str,
+        text: str,
+        *,
+        classifier: MoodClassifier,
+    ) -> None:
+        """走 async classifier(通常是 spark)对 text 分类后落入 mood 状态。
+
+        classifier 异常 / 超时由调用方在 classifier 内部处理并返回 [];
+        本方法只负责把结果应用上去(空列表 → 只衰减不更新)。
+        """
+        if not scope or not text or not text.strip():
+            return
+        try:
+            raw = await classifier(text)
+        except Exception:  # noqa: BLE001 — classifier 失败当作无命中,只衰减
+            raw = []
+        triggers = _sanitize_triggers(raw)
+        self._apply_triggers(scope, triggers)
+
+    def record_decay_only(self, scope: str) -> None:
+        """只触发衰减不喂分类结果(用在不想/无法跑 spark 的兜底路径上)。"""
+        if not scope:
+            return
+        self._apply_triggers(scope, [])
 
     def snapshot(self, scope: str) -> dict[str, float]:
         """返回当前 mood dims(衰减到 now 后的)。无记录返回全 baseline。"""

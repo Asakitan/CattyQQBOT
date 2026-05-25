@@ -1018,6 +1018,72 @@ async def should_reply_to_group_message(config: Config, message_text: str, *, ha
     return _json_decision(reply, "reply")
 
 
+_CATTY_MOOD_DIMS: tuple[str, ...] = (
+    "happy", "excited", "annoyed", "shy", "sad", "sleepy", "sulky", "bored",
+)
+_CATTY_MOOD_BASE_DELTA = 18.0  # weight=1.0 时的 delta 上限
+
+
+async def classify_catty_mood(config: Config, text: str) -> list[tuple[str, float]]:
+    """让 spark 小模型判断一条用户消息会触发笨猫哪些情绪维度。
+
+    返回 [(dim, delta)] 列表, delta = weight * _CATTY_MOOD_BASE_DELTA;
+    走 catty_filter_* 路由(spark), 无 filter 配置则回退 audit/openai。
+    LLM 失败、JSON 解析失败、无命中 → 返回 []。
+    """
+    if not text or not text.strip():
+        return []
+    if not (config.catty_filter_api_key or config.catty_audit_ai_api_key or config.catty_openai_api_key):
+        return []
+    prompt = (
+        "你是QQ猫娘机器人『笨猫』的情绪分类器。读用户这一条消息，判断它会让笨猫产生哪些情绪反应。"
+        "8 个情绪维度:\n"
+        "- happy   开心(好消息/被夸/有趣/逗笑)\n"
+        "- excited 兴奋(惊喜/激动/牛 b 事/突发好运)\n"
+        "- annoyed 烦躁(冒犯/吐槽/无理/重复打扰)\n"
+        "- shy     害羞(暧昧/亲密/告白/性暗示)\n"
+        "- sad     难过(分享负面/伤心事/委屈)\n"
+        "- sleepy  困倦(深夜/熬夜/晚安/疲惫)\n"
+        "- sulky   生闷气(被指责/被嫌弃/赶人/羞辱)\n"
+        "- bored   无聊(无意义闲话/划水/没话找话)\n\n"
+        "只输出 JSON: {\"hits\":[{\"dim\":\"happy\",\"weight\":0.8}, ...]}\n"
+        "- weight 在 [0.0, 1.0]，1.0 = 极强，0.5 = 中等，0.0 = 完全没\n"
+        "- 只输出 weight >= 0.3 的维度，最多 3 个\n"
+        "- 没有命中就 hits: []\n"
+        "- 不要解释，不要多余字段"
+    )
+    try:
+        reply = await _filter_completion(
+            config,
+            [{"role": "system", "content": prompt}, {"role": "user", "content": text.strip()}],
+            fallback_max_tokens=120,
+        )
+    except Exception:  # noqa: BLE001
+        return []
+    parsed = _json_object(reply)
+    if not isinstance(parsed, dict):
+        return []
+    hits = parsed.get("hits")
+    if not isinstance(hits, list):
+        return []
+    out: list[tuple[str, float]] = []
+    for item in hits:
+        if not isinstance(item, dict):
+            continue
+        dim = item.get("dim")
+        if not isinstance(dim, str) or dim not in _CATTY_MOOD_DIMS:
+            continue
+        try:
+            w = float(item.get("weight", 0.0))
+        except (TypeError, ValueError):
+            continue
+        if w < 0.3:
+            continue
+        w = min(max(w, 0.0), 1.0)
+        out.append((dim, round(w * _CATTY_MOOD_BASE_DELTA, 2)))
+    return out
+
+
 async def should_request_reply_split(config: Config, user_content: str, *, min_chars: int) -> bool:
     if not config.catty_filter_enabled:
         return False
