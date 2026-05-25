@@ -1950,11 +1950,19 @@ def _build_messages(
             logger.debug(f"story_arc auto_trigger failed (non-fatal): {exc}")
     _st_manager = PromptManager()
     from .prompt_manager import register_catty_persona as _register_catty_persona
+    # 取真实昵称给 {{user}} macro 替换 — 优先 configured_title(主人/特别关心),
+    # 否则用 sender.card/nickname,最后 fallback QQ 号。这样 character_card 里
+    # {{user}}: "主人" 才会显示为真名而不是『用户』。
+    _user_real_display = _configured_title(event).strip() or _display_name(event)
+    _group_real_display = ""
+    if isinstance(event, GroupMessageEvent):
+        _group_real_display = str(getattr(event, "group_name", "") or f"群{event.group_id}")
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,
         "user_text": incoming.text or "",
-        "user_display": "用户",  # TODO 后续从 incoming/event 拿真实昵称
+        "user_display": _user_real_display,
+        "group_display": _group_real_display,
         "affection_level": _user_affection_level,
         "is_owner": _user_is_owner,
         "has_image": bool(image_description),

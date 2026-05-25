@@ -19,6 +19,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Any
 
 
 @dataclass(frozen=True)
@@ -195,41 +196,50 @@ CATTY_CARD = CharacterCard(
 )
 
 
-# ── 简单 macro 替换 ────────────────────────────────────────────────────
-# ST 用 {{char}} / {{user}} 等占位。我们不接 ST,直接走 LLM,
-# 把它们替换成对应字面值 — char 名字固定『笨猫』,user 走运行时 user_display。
-def render_macros(text: str, *, char_name: str = "笨猫", user_display: str = "用户") -> str:
-    if not text:
-        return text
-    return (
-        text.replace("{{char}}", char_name)
-            .replace("{{user}}", user_display)
-    )
+# ── Macro 替换(完整 ST 风) ────────────────────────────────────────────
+# 走 macros.render 支持 {{char}}/{{user}}/{{date}}/{{time}}/{{weekday}}/
+# {{idleDuration}}/{{lastUserMessage}}/{{random::a::b}}/{{pick::a::b}} 等。
+from . import macros as _macros
+
+
+def render_macros(text: str, *, char_name: str = "笨猫", user_display: str = "用户", **extra: Any) -> str:
+    """老入口:只传 char/user 用 macros.render 替换。新代码用 _render_with_ctx 走 full ctx。"""
+    return _macros.render(text, {"char": char_name, "user": user_display, **extra})
+
+
+def _render_with_ctx(text: str, ctx: dict[str, Any] | None) -> str:
+    return _macros.render(text, ctx)
 
 
 # ── 各段访问器(被 PromptManager 调用,lazy) ──────────────────────────
-def get_description(card: CharacterCard = CATTY_CARD, *, user_display: str = "用户") -> str:
-    return render_macros(card.description, user_display=user_display)
+def get_description(card: CharacterCard = CATTY_CARD, *, ctx: dict[str, Any] | None = None, user_display: str = "用户") -> str:
+    full_ctx = {"char": card.name, "user": user_display, **(ctx or {})}
+    return _render_with_ctx(card.description, full_ctx)
 
 
-def get_personality(card: CharacterCard = CATTY_CARD) -> str:
-    return render_macros(card.personality)
+def get_personality(card: CharacterCard = CATTY_CARD, *, ctx: dict[str, Any] | None = None) -> str:
+    full_ctx = {"char": card.name, **(ctx or {})}
+    return _render_with_ctx(card.personality, full_ctx)
 
 
-def get_scenario(card: CharacterCard = CATTY_CARD) -> str:
-    return render_macros(card.scenario)
+def get_scenario(card: CharacterCard = CATTY_CARD, *, ctx: dict[str, Any] | None = None) -> str:
+    full_ctx = {"char": card.name, **(ctx or {})}
+    return _render_with_ctx(card.scenario, full_ctx)
 
 
-def get_first_mes(card: CharacterCard = CATTY_CARD, *, user_display: str = "用户") -> str:
-    return render_macros(card.first_mes, user_display=user_display)
+def get_first_mes(card: CharacterCard = CATTY_CARD, *, ctx: dict[str, Any] | None = None, user_display: str = "用户") -> str:
+    full_ctx = {"char": card.name, "user": user_display, **(ctx or {})}
+    return _render_with_ctx(card.first_mes, full_ctx)
 
 
-def get_mes_example(card: CharacterCard = CATTY_CARD, *, user_display: str = "用户") -> str:
-    return render_macros(card.mes_example, user_display=user_display)
+def get_mes_example(card: CharacterCard = CATTY_CARD, *, ctx: dict[str, Any] | None = None, user_display: str = "用户") -> str:
+    full_ctx = {"char": card.name, "user": user_display, **(ctx or {})}
+    return _render_with_ctx(card.mes_example, full_ctx)
 
 
-def get_post_history(card: CharacterCard = CATTY_CARD) -> str:
-    return render_macros(card.post_history)
+def get_post_history(card: CharacterCard = CATTY_CARD, *, ctx: dict[str, Any] | None = None) -> str:
+    full_ctx = {"char": card.name, **(ctx or {})}
+    return _render_with_ctx(card.post_history, full_ctx)
 
 
 # 兼容旧 API

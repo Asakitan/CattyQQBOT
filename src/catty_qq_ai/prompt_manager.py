@@ -183,6 +183,15 @@ def register_catty_persona(
     is_cold_session = bool(ctx.get("is_cold_session", False))
     self_check_enabled = bool(ctx.get("reply_self_check_enabled", True))
     style_examples_enabled = bool(ctx.get("reply_style_examples_enabled", True))
+    # 完整 macro ctx,传给 character_card 各段做 {{user}}/{{date}}/{{idleDuration}} 等替换
+    macro_ctx = {
+        "char": "笨猫",
+        "user": user_display,
+        "group": ctx.get("group_display", ""),
+        "last_user_message": ctx.get("last_user_message", ""),
+        "last_char_message": ctx.get("last_char_message", ""),
+        "last_active_at": ctx.get("last_active_at"),
+    }
 
     # 兼容老开关:catty_parsing_layers_disabled 里的 daily_life/world_info/story_arc 依然生效
     legacy_disabled = set(getattr(cfg, "catty_parsing_layers_disabled", None) or [])
@@ -200,17 +209,17 @@ def register_catty_persona(
     )
     mgr.register(
         "catty_char_description",
-        content_fn=lambda: _cc.get_description(user_display=user_display),
+        content_fn=lambda: _cc.get_description(ctx=macro_ctx, user_display=user_display),
         order=120,
     )
     mgr.register(
         "catty_char_personality",
-        content_fn=lambda: _cc.get_personality(),
+        content_fn=lambda: _cc.get_personality(ctx=macro_ctx),
         order=130,
     )
     mgr.register(
         "catty_scenario",
-        content_fn=lambda: _cc.get_scenario(),
+        content_fn=lambda: _cc.get_scenario(ctx=macro_ctx),
         order=140,
     )
     if system_prompt.strip():
@@ -303,14 +312,14 @@ def register_catty_persona(
         )
         mgr.register(
             "catty_mes_example",
-            content_fn=lambda: _cc.get_mes_example(user_display=user_display),
+            content_fn=lambda: _cc.get_mes_example(ctx=macro_ctx, user_display=user_display),
             order=320,
         )
 
     # === post_history (jailbreak slot) - 最末 ===
     mgr.register(
         "catty_post_history",
-        content_fn=lambda: _cc.get_post_history(),
+        content_fn=lambda: _cc.get_post_history(ctx=macro_ctx),
         order=500,
     )
 
