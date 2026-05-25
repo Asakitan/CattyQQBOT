@@ -664,6 +664,66 @@ _IMAGEGEN_SCHEMA: dict[str, Any] = {
 }
 
 
+_STORY_ARC_SET_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_story_arc_set",
+        "description": (
+            "在当前会话开一条「故事线/scenario」,接下来 3 小时内你回复时会持续带上这个话题。\n"
+            "适用场景:你和对方刚开始一个会跨多条消息的事情(主人答应给你画图、约好周末去哪儿、"
+            "主人说在写论文你想关心、群友约你一起做什么),把它沉淀成 arc 后续可以自然推进。\n"
+            "不要为单次反应开 arc(那只是即兴回复,不需要持久化)。一个 scope 同时最多 2 条。\n"
+            "title 要短(≤20 字符,例『等主人画的图』『主人在写论文』),"
+            "context 写 1-2 句让未来的你知道怎么续推这个话题(40-150 字)。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "短标题,≤20 字符,核心一句话。例『等主人画的图』",
+                },
+                "context": {
+                    "type": "string",
+                    "description": (
+                        "1-2 句话给未来的你看的『当前情景』:"
+                        "对方答应/告诉你什么 + 你应该带什么语气推进。"
+                        "例『主人答应给笨猫画一张戴蝴蝶结的,从下午就开始期待,聊到这个要带点兴奋。』"
+                    ),
+                },
+                "ttl_hours": {
+                    "type": "number",
+                    "description": "持续小时数,默认 3,范围 0.5-12。短话题用 1,长期约定用 6+。",
+                },
+            },
+            "required": ["title", "context"],
+        },
+    },
+}
+
+_STORY_ARC_CLEAR_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_story_arc_clear",
+        "description": (
+            "结束当前会话的某条 story arc(话题解决了/收尾了/对方明确说不聊了)。"
+            "传 title 精确匹配现有 arc 的标题;传不存在的 title 不报错。"
+            "如果想清空全部 arc 传 title='*'。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "要清掉的 arc 标题(精确匹配),或 '*' 清全部。",
+                },
+            },
+            "required": ["title"],
+        },
+    },
+}
+
+
 ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_recall": _RECALL_SCHEMA,
     "catty_user_profile": _USER_PROFILE_SCHEMA,
@@ -681,6 +741,8 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_remember": _REMEMBER_SCHEMA,
     "catty_recall_notes": _RECALL_NOTES_SCHEMA,
     "catty_imagegen": _IMAGEGEN_SCHEMA,
+    "catty_story_arc_set": _STORY_ARC_SET_SCHEMA,
+    "catty_story_arc_clear": _STORY_ARC_CLEAR_SCHEMA,
 }
 
 
@@ -716,6 +778,11 @@ class ToolContext:
     # catty_imagegen 等会主动 push 内容到群里的 tool 必须 guard 这个,
     # 避免 AI 在被动旁观消息(filter 顺便回的)里也乱画图。
     is_directly_requested: bool = True
+    # SillyTavern 风 story_arc 写入入口:catty_story_arc_set/clear 走它。
+    # 留 None 兼容老路径,executor 自己 guard。
+    story_arc_store: "Any | None" = None
+    # 当前 scope key("group:xxx" / "private:xxx"),__init__ 传进来给 story_arc executor 用。
+    scope_key: str = ""
 
     @property
     def group_id(self) -> str:
@@ -1611,6 +1678,65 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
     }
 
 
+async def _exec_story_arc_set(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    if ctx.story_arc_store is None or not ctx.scope_key:
+        return {"error": "story_arc 不可用(store 未注入或 scope 缺失)"}
+    title = str(args.get("title") or "").strip()
+    context = str(args.get("context") or "").strip()
+    if not title or not context:
+        return {"error": "title 和 context 都必填"}
+    try:
+        ttl_hours = float(args.get("ttl_hours") or 3.0)
+    except (TypeError, ValueError):
+        ttl_hours = 3.0
+    ttl_hours = min(max(ttl_hours, 0.5), 12.0)
+    ttl_seconds = int(ttl_hours * 3600)
+    try:
+        arc = ctx.story_arc_store.add_arc(
+            ctx.scope_key, title, context,
+            ttl_seconds=ttl_seconds, origin="ai_tool",
+        )
+    except Exception as exc:  # noqa: BLE001
+        return {"error": f"add_arc 失败: {exc}"}
+    _logger.info(
+        "story_arc_set: scope=%s title=%r ttl_h=%.1f origin=ai_tool",
+        ctx.scope_key, arc.title, ttl_hours,
+    )
+    return {
+        "ok": True,
+        "identifier": arc.identifier,
+        "title": arc.title,
+        "ttl_hours": ttl_hours,
+        "guidance": (
+            f"已开启 arc『{arc.title}』,接下来 {ttl_hours:.1f} 小时同 scope 回复都会带这个话题。"
+            "你只需用一句话自然推进当前话题即可,不要复述 arc 内容。"
+        ),
+    }
+
+
+async def _exec_story_arc_clear(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    if ctx.story_arc_store is None or not ctx.scope_key:
+        return {"error": "story_arc 不可用"}
+    title = str(args.get("title") or "").strip()
+    if not title:
+        return {"error": "title 必填(用 '*' 清全部)"}
+    try:
+        if title == "*":
+            removed = ctx.story_arc_store.clear_scope(ctx.scope_key)
+            _logger.info("story_arc_clear: scope=%s cleared all (%d)", ctx.scope_key, removed)
+            return {"ok": True, "cleared": removed, "guidance": "已清空当前 scope 所有 arc。"}
+        # 按 title 精确匹配
+        active = ctx.story_arc_store.get_active(ctx.scope_key)
+        target = next((a for a in active if a.title == title), None)
+        if target is None:
+            return {"ok": True, "cleared": 0, "note": f"没找到 title='{title}' 的 active arc(可能已过期)"}
+        ctx.story_arc_store.clear_arc(ctx.scope_key, target.identifier)
+        _logger.info("story_arc_clear: scope=%s title=%r", ctx.scope_key, title)
+        return {"ok": True, "cleared": 1, "title": title}
+    except Exception as exc:  # noqa: BLE001
+        return {"error": f"clear 失败: {exc}"}
+
+
 async def _exec_game_recall(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     game = str(args.get("game") or "").strip()
     if not game:
@@ -1838,6 +1964,8 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_remember": _exec_remember,
     "catty_recall_notes": _exec_recall_notes,
     "catty_imagegen": _exec_imagegen,
+    "catty_story_arc_set": _exec_story_arc_set,
+    "catty_story_arc_clear": _exec_story_arc_clear,
 }
 
 

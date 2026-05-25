@@ -4681,6 +4681,9 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             input_image_urls=list(incoming.image_urls or []),
             recent_image_urls=_recent_imgs,
             is_directly_requested=bool(incoming.directly_requested),
+            # SillyTavern 风 story_arc 写入入口:catty_story_arc_set/clear executor 通过这两字段写
+            story_arc_store=story_arc_store,
+            scope_key=_conversation_queue_key(event),
         )
 
         async def _tool_executor(name: str, args_json: str) -> dict[str, object]:
