@@ -336,6 +336,14 @@ def register_catty_persona(
             order=320,
         )
 
+    # === Anti-Repetition Tracker - 防复读 (order=480 紧贴 post_history 之前) ===
+    from . import anti_repetition as _ar
+    mgr.register(
+        "catty_anti_repetition",
+        content_fn=lambda: _ar.build_anti_repetition_prompt(scope),
+        order=480,
+    )
+
     # === post_history (jailbreak slot) - 最末 ===
     mgr.register(
         "catty_post_history",

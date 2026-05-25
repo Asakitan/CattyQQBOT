@@ -71,6 +71,10 @@ class SessionCache:
         self._dirty.add(key)
         self._evict_lru()
 
+    def last_access_at(self, key: str) -> float | None:
+        """返回该 scope 上次访问 epoch seconds(用于 macros {{idleDuration}})。空 = 没访问过。"""
+        return self._last_access.get(key)
+
     def pop(self, key: str) -> list[ChatMessage] | None:
         """删除会话（内存 + 盘上）。"""
         msgs = self._sessions.pop(key, None)

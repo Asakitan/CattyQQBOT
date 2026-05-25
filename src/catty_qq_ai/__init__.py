@@ -731,12 +731,20 @@ def _credit_affection_for_event_once(event: MessageEvent) -> None:
 
 
 def _remember_bot_reply_for_event(event: MessageEvent, text: str) -> None:
+    scope = _conversation_queue_key(event)
     _remember_bot_conversation_message(
-        _conversation_queue_key(event),
+        scope,
         bot_id=str(getattr(event, "self_id", "") or ""),
         text=text,
         target_user_id=str(event.user_id),
     )
+    # Anti-repetition: 扫笨猫这条回复里用了哪些被跟踪的猫系词,记录到 per-scope 滑窗
+    # 下一轮 prompt 装配如果命中过度重复就给 AI 注入「换个表达」提醒
+    try:
+        from .anti_repetition import record_bot_reply as _ar_record
+        _ar_record(scope, text)
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"anti_repetition record failed (non-fatal): {exc}")
     # 每次猫猫对该用户实际回复一次,+1 好感度(主人 / 已 cap 用户自动 no-op);
     # 内部对一条用户消息只计一次,分段发送不会重复刷分。
     _credit_affection_for_event_once(event)
@@ -1957,6 +1965,12 @@ def _build_messages(
     _group_real_display = ""
     if isinstance(event, GroupMessageEvent):
         _group_real_display = str(getattr(event, "group_name", "") or f"群{event.group_id}")
+    # last_active_at 用于 macros {{idleDuration}} — 从 session_cache 拿,首轮 None
+    _last_active_at = None
+    try:
+        _last_active_at = _get_session_cache().last_access_at(key)
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"session_cache.last_access_at failed: {exc}")
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,
@@ -1973,6 +1987,7 @@ def _build_messages(
         "is_cold_session": is_cold_session,
         "reply_self_check_enabled": bool(config.catty_reply_self_check_enabled),
         "reply_style_examples_enabled": bool(config.catty_reply_style_examples_enabled),
+        "last_active_at": _last_active_at,
     })
     # LayerD/E 散装 context 统一注册到 PromptManager,享受同样的 prompt_order / prompts_disabled
     # 配置能力。order 600+ 表示挂在 character_card / world_info 之后、接近 chat history。
