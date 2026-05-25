@@ -142,7 +142,7 @@ _WEB_SEARCH_SCHEMA: dict[str, Any] = {
             "Google/Bing 联网搜索拿最新信息。**只在真的需要时调用**:"
             "用户问新闻/版本/价格/教程/特定事实,或明确说'查/搜/联网';"
             "你训练数据可能过期或不确定具体细节。普通闲聊/撒娇/已经知道的问题不要调。"
-            "每个 scope+用户有 600s cooldown(主人/特别关心用户豁免)。"
+            "每个 scope+用户有 60s cooldown(主人/特别关心用户豁免)。"
             "返回 results 数组(title/url/snippet);AI 拿到后基于结果生成最终回复,"
             "禁止编造不存在的链接,禁止把 marker 文本贴出来。"
         ),
@@ -924,7 +924,7 @@ async def _exec_web_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, 
         remaining = max(last + cd_seconds - now, 0.0)
         if remaining > 0:
             return {
-                "error": f"web_search 冷却剩 {int(remaining)}s,请基于已有知识回答(每 scope+用户 10 分钟一次)。"
+                "error": f"web_search 冷却剩 {int(remaining)}s,请基于已有知识回答(每 scope+用户 60s 一次)。"
             }
         _web_search_cooldowns[cd_key] = now
 
@@ -1916,7 +1916,7 @@ def tools_system_hint() -> str:
         "非当前发言者 QQ 号时再调;当前发言者画像已在 context 里,不要重复查。\n"
         "3. catty_mc_status — 查 MC 服务器在线人数与可达性。用户问 MC 在不在/几个人在玩 时调。\n"
         "4. catty_web_search — Google/Bing 联网搜索。用户问最新新闻/版本/价格/教程/具体事实,"
-        "或明确说'搜一下/查一下/联网'时调;有 10 分钟 cooldown(主人豁免)。普通闲聊/已经知道的事不要调。\n"
+        "或明确说'搜一下/查一下/联网'时调;有 60s cooldown(主人豁免)。普通闲聊/已经知道的事不要调。\n"
         "5. catty_nsfw_search — pixiv 图 / iwara 视频。**仅好友私聊里可调**,群里调会返回 error"
         "(此时引导用户加好友私聊,不要重试);kind=image 时图片由程序下载并自动发送,"
         "你只补 1-2 句猫娘短评,不要贴链接也不要复读 URL。\n"
@@ -1980,7 +1980,7 @@ def tools_system_hint() -> str:
         "不要因为聊到某物就主动生图——那是 catty_meme_query 或本地表情库的活。\n"
         "  禁止 NSFW/敏感词(模型会拒)。图程序自动发送,你拿到 image_sent=true 后**只补 1-2 句猫娘短评**,"
         "**绝不**贴 base64/路径/重复生图。"
-        "60s cooldown(主人豁免);quality 默认 low 省钱,有人明确要『精致/高清』再传 medium/high。\n"
+        "180s cooldown(主人豁免);quality 默认 low 省钱,有人明确要『精致/高清』再传 medium/high。\n"
         "通用规则:\n"
         "- 多个 tool 调用可以并发(同一轮发起多个 tool_calls)但**总开销=回复延迟**,能不调就不调。\n"
         "- 拿到 tool 结果后基于结果写最终回复;**禁止复读 tool 返回的 JSON 原文**,"

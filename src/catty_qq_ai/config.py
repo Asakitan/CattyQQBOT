@@ -61,7 +61,7 @@ class Config(BaseModel):
     catty_imagegen_default_size: str = "1024x1024"
     catty_imagegen_default_quality: str = "low"
     catty_imagegen_default_format: str = "png"
-    catty_imagegen_cooldown_seconds: int = 60
+    catty_imagegen_cooldown_seconds: int = 180
     # 生图慢:gpt-image-2 high quality 大图可能要 200s+,默认 300s 给足。
     catty_imagegen_timeout_seconds: float = 300.0
     catty_imagegen_max_chars: int = 2000
@@ -176,7 +176,7 @@ class Config(BaseModel):
     catty_local_training_collect_assistant_samples: bool = True
     catty_local_training_assistant_samples_path: str = "training/assistant_reply_samples.jsonl"
     catty_web_search_enabled: bool = True
-    catty_web_search_cooldown_seconds: int = 600
+    catty_web_search_cooldown_seconds: int = 60
     catty_web_search_max_results: int = 5
     catty_web_search_request_timeout: float | None = 10.0
     catty_web_search_engines: list[str] = Field(default_factory=lambda: ["google", "bing"])
