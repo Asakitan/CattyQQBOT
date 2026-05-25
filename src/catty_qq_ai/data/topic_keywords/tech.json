@@ -1,5 +1,35 @@
 [
-  "代码", "python", "java", "前端", "后端", "ai", "openai", "claude",
-  "github", "linux", "docker", "服务器", "算法", "数据库", "网络",
-  "调试", "deploy", "运维"
+  "代码", "源码", "脚本", "程序", "软件", "应用", "app",
+  "python", "java", "javascript", "ts", "c++", "c#", "rust",
+  "golang", "前端", "后端", "全栈", "客户端", "服务端", "中台",
+
+  "ai", "openai", "claude", "gemini", "chatgpt", "gpt", "llama",
+  "qwen", "deepseek", "copilot", "cursor", "windsurf",
+  "大模型", "llm", "transformer", "prompt", "提示词", "微调", "rag",
+  "向量", "embedding", "huggingface", "ollama", "pytorch", "tensorflow",
+
+  "github", "gitlab", "git", "linux", "ubuntu", "mac", "macbook",
+  "windows", "wsl", "docker", "k8s", "kubernetes", "服务器", "云服务",
+  "aws", "azure", "gcp", "阿里云", "腾讯云", "华为云",
+
+  "算法", "数据结构", "数据库", "sql", "redis", "mysql", "postgres",
+  "mongodb", "网络", "tcp", "http", "https", "api", "接口",
+  "调试", "debug", "deploy", "部署", "运维", "测试",
+
+  "程序员", "程序媛", "开发", "工程师", "码农", "码畜", "搬砖",
+  "架构师", "全栈", "运维", "测试", "dba", "前端工程师", "后端工程师",
+  "算法工程师", "数据工程师", "ai工程师", "ml工程师",
+
+  "学编程", "学代码", "写代码", "自学", "培训班", "训练营",
+
+  "vscode", "idea", "pycharm", "vim", "neovim", "emacs", "jetbrains",
+  "webstorm", "goland", "rider", "xcode", "android studio",
+
+  "笔记本", "台式机", "工作站", "显卡", "gpu", "cpu", "内存", "ram",
+  "硬盘", "ssd", "nvme", "屏幕", "显示器", "键盘", "鼠标",
+
+  "字节", "阿里", "腾讯", "美团", "滴滴", "百度", "京东", "拼多多",
+  "网易", "华为", "小米", "蚂蚁", "字节跳动",
+  "微软", "谷歌", "苹果", "meta", "facebook", "openai", "anthropic",
+  "nvidia", "amd", "intel"
 ]

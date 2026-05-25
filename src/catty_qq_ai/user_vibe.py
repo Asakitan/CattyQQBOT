@@ -42,7 +42,11 @@ _MAX_TOPIC_TAGS = 5
 # 关键词都从 data/{vibe,topic}_keywords/<tag>.json 加载,改库就动 JSON 不用碰 .py。
 # 文件丢或损坏 → RuntimeError 直接挂掉(关键数据 fail-fast,不静默退化)。
 _VIBE_TAGS: tuple[str, ...] = ("techie", "lewd_curious", "tease", "serious", "playful")
-_TOPIC_TAGS: tuple[str, ...] = ("gaming", "tech", "food", "random", "emo", "study", "meta")
+_TOPIC_TAGS: tuple[str, ...] = (
+    "gaming", "tech", "food", "random", "emo", "study", "meta",
+    "entertainment", "music", "travel", "shopping", "work", "love",
+    "pet", "creative", "sns",
+)
 _DATA_ROOT = Path(__file__).resolve().parent / "data"
 
 
