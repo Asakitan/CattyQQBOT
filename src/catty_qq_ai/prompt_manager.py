@@ -245,25 +245,56 @@ def register_catty_persona(
     # ST V2 character_book: 嵌入式 lorebook — character_card 自带的笨猫私货 entry
     # (尾巴/猫粮/弦化/欧泊阵营/睡眠/呼噜...),命中 user_text 关键词时拼一段注入。
     # 不走 world_info.py 的 cooldown(这些是"角色私货",触发即注入),用 order=145 让它紧跟 scenario。
+    #
+    # 【ST 风递归扫描 (recursive scan)】参考 SillyTavern Lorebook:
+    #   depth 0 haystack = user_text;每层扫到的 entry.content 并入下层 haystack,
+    #   让 A.content 里出现 B.key 的链式触发也能命中(笨猫"知道得更多")。
+    #   max_depth=3 + 总 hit cap=12 防止 prompt 撑爆;已 triggered 的 entry 不再扫。
+    _LB_MAX_DEPTH = 3
+    _LB_MAX_HITS = 12
+
     def _build_character_book() -> str:
         try:
-            book = getattr(_cc.CATTY_CARD, "character_book", ()) or ()
+            book = list(getattr(_cc.CATTY_CARD, "character_book", ()) or [])
             if not book:
                 return ""
-            text_lower = (user_text or "").lower()
             hits: list[tuple[int, str, str]] = []  # (order, identifier, content)
-            for entry in book:
-                if getattr(entry, "constant", False):
-                    hits.append((entry.order, entry.identifier, entry.content))
-                    continue
-                for k in (entry.keys or ()):
-                    if not k:
+            triggered: set[str] = set()
+            cs_haystack = user_text or ""           # case-sensitive haystack
+            lower_haystack = cs_haystack.lower()    # case-insensitive haystack
+
+            for depth in range(_LB_MAX_DEPTH):
+                new_layer: list[tuple[int, str, str]] = []
+                for entry in book:
+                    if entry.identifier in triggered:
                         continue
-                    key_str = k if entry.case_sensitive else k.lower()
-                    haystack = user_text if entry.case_sensitive else text_lower
-                    if key_str in haystack:
-                        hits.append((entry.order, entry.identifier, entry.content))
+                    if len(hits) + len(new_layer) >= _LB_MAX_HITS:
                         break
+                    # constant entry 只在 depth 0 加,避免每层重复
+                    if getattr(entry, "constant", False):
+                        if depth == 0:
+                            new_layer.append((entry.order, entry.identifier, entry.content))
+                            triggered.add(entry.identifier)
+                        continue
+                    for k in (entry.keys or ()):
+                        if not k:
+                            continue
+                        key_str = k if entry.case_sensitive else k.lower()
+                        haystack = cs_haystack if entry.case_sensitive else lower_haystack
+                        if key_str in haystack:
+                            new_layer.append((entry.order, entry.identifier, entry.content))
+                            triggered.add(entry.identifier)
+                            break
+                if not new_layer:
+                    break  # 这一层没新命中 → 终止递归
+                hits.extend(new_layer)
+                if len(hits) >= _LB_MAX_HITS:
+                    break
+                # 下一层 haystack 把这一层的 content 拼进去,实现链式触发
+                extension = "\n".join(h[2] for h in new_layer)
+                cs_haystack = f"{cs_haystack}\n{extension}"
+                lower_haystack = cs_haystack.lower()
+
             if not hits:
                 return ""
             hits.sort(key=lambda h: (h[0], h[1]))
