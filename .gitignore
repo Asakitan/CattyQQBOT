@@ -26,3 +26,4 @@ tests/
 backup/
 .sync_tmp/
 .claude/
+pictures/
