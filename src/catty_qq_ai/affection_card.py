@@ -217,60 +217,143 @@ def _exp_bar(draw: ImageDraw.ImageDraw, x: int, y: int, width: int, height: int,
 
 
 # ── 像素猫爪印 ───────────────────────────────────────────────────────
-# 5x6 经典像素 paw print:3 个脚趾(上面 2 行)+ 圆形肉垫(下面 4 行)
-# 视觉上比 7x5 4 脚趾的更紧凑,在 96x120 画布里不抢戏
+# 5x6 基础模板:3 脚趾(上 2 行)+ 圆肉垫(下 3 行)
+# scatter 时按 size_mult ∈ {2,3,4} 放大成 10x12 / 15x18 / 20x24,
+# 每爪再 0-360° 随机旋转 → 视觉上和上面 29x25 心形"差不多大",每爪都不一样
 _PAW_TEMPLATE: list[str] = [
     "X.X.X",   # 3 脚趾上行
-    "X.X.X",   # 3 脚趾下行(脚趾 2px 高,看着像小肉球)
+    "X.X.X",   # 3 脚趾下行
     ".....",   # 间隔
     ".XXX.",   # 肉垫顶
     "XXXXX",   # 肉垫中(最宽)
     ".XXX.",   # 肉垫底
 ]
-PAW_W = 5
-PAW_H = 6
+PAW_BASE_W = 5
+PAW_BASE_H = 6
 
 
-def _draw_paw(draw: ImageDraw.ImageDraw, x0: int, y0: int,
-              color: tuple[int, int, int]) -> None:
-    """以 (x0, y0) 为左上角画一个 5x6 猫爪印。"""
+def _render_paw_image(size_mult: int, color: tuple[int, int, int]) -> Image.Image:
+    """生成单个爪印的 RGBA 子图,透明背景。
+    每个 X 像素扩成 size_mult × size_mult 块,保持像素风。
+    """
+    w = PAW_BASE_W * size_mult
+    h = PAW_BASE_H * size_mult
+    img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
     for ry, row in enumerate(_PAW_TEMPLATE):
         for rx, c in enumerate(row):
             if c == "X":
-                draw.point((x0 + rx, y0 + ry), fill=color)
+                x0, y0 = rx * size_mult, ry * size_mult
+                d.rectangle((x0, y0, x0 + size_mult - 1, y0 + size_mult - 1), fill=color)
+    return img
+
+
+def _bbox_overlap(a: tuple[int, int, int, int], b: tuple[int, int, int, int]) -> bool:
+    return not (a[2] <= b[0] or b[2] <= a[0] or a[3] <= b[1] or b[3] <= a[1])
+
+
+def _paste_paw_text_aware(
+    target: Image.Image,
+    paw_img: Image.Image,
+    x: int,
+    y: int,
+    *,
+    bg_color: tuple[int, int, int] = BG,
+    fade_alpha: int = 95,
+) -> None:
+    """粘贴爪印 — 印到背景色上完全不透明,印到字/边框等非背景像素上半透明混合。
+
+    主人需求:『印到字体上的部分就半透明』。
+    实现:逐像素检查 target 当前颜色,如果不是 BG(米黄背景) → 用 fade_alpha
+    (default 95/255 ≈ 37%)与 target 混合,字体仍可读但爪印颜色还在,
+    像"猫猫的爪印章按下去但字盖在上面"。
+    """
+    pw, ph = paw_img.size
+    tw, th = target.size
+    target_pixels = target.load()
+    paw_pixels = paw_img.load()
+    fade_ratio = fade_alpha / 255.0
+    inv_ratio = 1.0 - fade_ratio
+    for py in range(ph):
+        for px in range(pw):
+            sr, sg, sb, sa = paw_pixels[px, py]
+            if sa == 0:
+                continue
+            tx, ty = x + px, y + py
+            if not (0 <= tx < tw and 0 <= ty < th):
+                continue
+            t_pixel = target_pixels[tx, ty]
+            tr, tg, tb = t_pixel[0], t_pixel[1], t_pixel[2]
+            if (tr, tg, tb) == bg_color:
+                target_pixels[tx, ty] = (sr, sg, sb)
+            else:
+                nr = int(sr * fade_ratio + tr * inv_ratio)
+                ng = int(sg * fade_ratio + tg * inv_ratio)
+                nb = int(sb * fade_ratio + tb * inv_ratio)
+                target_pixels[tx, ty] = (nr, ng, nb)
 
 
 def _scatter_paws(
-    draw: ImageDraw.ImageDraw,
+    target: Image.Image,
     *,
     band_y_min: int,
     band_y_max: int,
     band_x_min: int,
     band_x_max: int,
     color: tuple[int, int, int] = HEART_EDGE,
-    count_range: tuple[int, int] = (2, 3),
-    min_gap: int = 3,
+    count_range: tuple[int, int] = (1, 3),
+    size_mults: tuple[int, ...] = (2, 3, 4),
     rng: random.Random | None = None,
 ) -> int:
-    """在指定矩形 band 内随机散布 1-3 个爪印,横向不重叠(min_gap 像素间距)。
+    """在指定 band 内散布 1-3 个爪印,每个 size 随机 + 角度 0-360° 随机。
 
-    返回实际画上去的爪印数量(可能 < count 上限,如果空间不足)。
-    band_y_max/band_x_max 是允许 paw 左上角的最大坐标(已 留出 PAW_W/PAW_H 空间)。
+    - target: 主 canvas(RGB Image),paste 用 text-aware:背景上不透,字上半透
+    - size_mults: 每爪从这里随机选一个 → 大小各异(主人要求)
+    - 角度 0-360° 完全随机(主人要求)
+    - 反 bbox 重叠(爪印之间):最多试 12 次,失败就降 size 或放弃
+    - 旋转后用 expand=True 拿到 bounding box,NEAREST 重采样保持像素风
     """
     r = rng or random
     if band_y_max < band_y_min or band_x_max < band_x_min:
         return 0
     n = r.randint(*count_range)
-    used_xs: list[int] = []
+    placed_boxes: list[tuple[int, int, int, int]] = []
+    used_sizes: list[int] = []
     placed = 0
     for _ in range(n):
-        # 最多试 8 次避免和已放的横向重叠;失败就放弃这个
-        for _try in range(8):
-            x = r.randint(band_x_min, band_x_max)
-            if all(abs(x - ux) >= PAW_W + min_gap for ux in used_xs):
-                y = r.randint(band_y_min, band_y_max)
-                _draw_paw(draw, x, y, color)
-                used_xs.append(x)
+        # 优先选没用过的 size,实在没了 fallback 全集 → 让"每爪大小不同"尽量成立
+        remaining = [s for s in size_mults if s not in used_sizes]
+        size_mult = r.choice(remaining or list(size_mults))
+        angle = r.uniform(0.0, 360.0)
+        paw = _render_paw_image(size_mult, color)
+        rotated = paw.rotate(angle, resample=Image.Resampling.NEAREST, expand=True)
+        rw, rh = rotated.size
+        max_x = band_x_max - rw
+        max_y = band_y_max - rh
+        if max_x < band_x_min or max_y < band_y_min:
+            # 这个 size+angle 组合超出 band,降级 size 再试一次
+            for fallback_size in sorted(size_mults):
+                if fallback_size >= size_mult:
+                    continue
+                paw = _render_paw_image(fallback_size, color)
+                rotated = paw.rotate(angle, resample=Image.Resampling.NEAREST, expand=True)
+                rw, rh = rotated.size
+                if rw <= (band_x_max - band_x_min) and rh <= (band_y_max - band_y_min):
+                    size_mult = fallback_size
+                    max_x = band_x_max - rw
+                    max_y = band_y_max - rh
+                    break
+            else:
+                continue
+        # 反重叠:最多试 12 次找一个不和已放重叠的位置(爪印之间不互相叠)
+        for _try in range(12):
+            x = r.randint(band_x_min, max_x)
+            y = r.randint(band_y_min, max_y)
+            box = (x, y, x + rw, y + rh)
+            if not any(_bbox_overlap(box, b) for b in placed_boxes):
+                _paste_paw_text_aware(target, rotated, x, y)
+                placed_boxes.append(box)
+                used_sizes.append(size_mult)
                 placed += 1
                 break
     return placed
@@ -349,22 +432,24 @@ def render_card(
     footer_top = CANVAS_H - 14
     draw.rectangle((3, footer_top, CANVAS_W - 4, CANVAS_H - 4), fill=DARK)
 
-    # 爪印散布(POINTS 大数字下方、footer 上方的空白带)
-    # 每次随机 2-3 个,位置每次不同,体现"猫猫来盖章"的活泼感
-    big_y_bottom = big_y + GLYPH_H * 2  # 大数字底部 (scale=2)
-    paw_band_top = big_y_bottom + 2
-    paw_band_bot = footer_top - 1 - PAW_H
-    paw_band_x_min = 5
-    paw_band_x_max = CANVAS_W - 5 - PAW_W
-    if paw_band_bot >= paw_band_top and paw_band_x_max > paw_band_x_min:
+    # 爪印散布:band 放宽到包含 POINTS 大数字 + 下方空白带,允许盖到字体
+    # 1-3 个,size 各异(2/3/4 mult → 10x12 / 15x18 / 20x24 base),0-360° 随机旋转
+    # 视觉上接近上方 29x25 心形大小;text-aware paste 让盖到字上的部分半透明,
+    # 像"猫猫盖印章时字露出来"
+    paw_band_top = points_label_y + GLYPH_H + 1  # POINTS 标签下方,即大数字顶
+    paw_band_bot = footer_top - 1
+    paw_band_x_min = 4
+    paw_band_x_max = CANVAS_W - 4
+    if paw_band_bot > paw_band_top and paw_band_x_max > paw_band_x_min:
         _scatter_paws(
-            draw,
+            img,
             band_y_min=paw_band_top,
             band_y_max=paw_band_bot,
             band_x_min=paw_band_x_min,
             band_x_max=paw_band_x_max,
-            color=HEART_EDGE,  # 深粉,在米黄背景上显眼且和心形呼应
-            count_range=(2, 3),
+            color=HEART_EDGE,  # 深粉,跟心形呼应
+            count_range=(1, 3),
+            size_mults=(2, 3, 4),
         )
 
     # ── 底栏内容 ─────────────────────────────────────────────
