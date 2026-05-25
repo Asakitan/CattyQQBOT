@@ -40,6 +40,45 @@ _CLASSIFIER_TEXT_CAP = 280     # cache key 上限,超长消息走 no-cache 路�
 _HIT_STRONG_MIN_LEN = 2        # 关键词 ≥2 字符算"强信号",1 字符容易子串假阳性
 _HIT_STRONG_WEIGHT = 2         # 强信号的权重倍数
 
+# 算法版本号 — 改 _hit_score / boundary / 加权逻辑时 +1。
+# 当前 v2: 长度加权 + 显式 _VIBE_TAGS 顺序 + boundary-aware ASCII match。
+# (cache 是 process-local 重启即失效;此版本号给未来 disk-based cache / metric tagging 用)
+_CLASSIFIER_VERSION = 2
+
+# ASCII word chars: ascii letters + digits + underscore
+# (lower 已经统一小写,只列小写字母即可)
+_ASCII_WORD_CHARS = frozenset("abcdefghijklmnopqrstuvwxyz0123456789_")
+
+
+def _is_ascii_token(k: str) -> bool:
+    """关键词全由 ASCII a-z0-9_ 组成 → 是个独立 token,需 word boundary 匹配;
+    否则(中文/混合/带空格/带标点)走原始子串匹配。"""
+    return bool(k) and all(c in _ASCII_WORD_CHARS for c in k)
+
+
+def _boundary_aware_in(lower: str, k: str) -> bool:
+    """boundary-aware 子串匹配:ASCII 关键词不允许被同类字符夹住。
+
+    例:
+    - "h" 不会误中 "hello"(被 'ello' 紧跟,边界不成立)
+    - "ts" 不会误中 "tests"(被 't' 和 'es' 夹住)
+    - "rust ts kotlin" 中 "ts" 命中
+    - "今天" 命中 "今"(中文不走 boundary 检查)
+    """
+    if not _is_ascii_token(k):
+        return k in lower
+    idx = lower.find(k)
+    klen = len(k)
+    n = len(lower)
+    while idx >= 0:
+        left_ok = idx == 0 or lower[idx - 1] not in _ASCII_WORD_CHARS
+        right_idx = idx + klen
+        right_ok = right_idx >= n or lower[right_idx] not in _ASCII_WORD_CHARS
+        if left_ok and right_ok:
+            return True
+        idx = lower.find(k, idx + 1)
+    return False
+
 
 # ── 关键词 → tag 分类器(本地 zero-cost,不调 LLM) ────────────────────
 # vibe 分类: 多 keyword 命中 → 选最强匹配的;持平按 dict 顺序定胜(techie 优先)。
@@ -97,26 +136,33 @@ def _hit_score(lower: str, keys: tuple[str, ...]) -> int:
 
     长度加权解决纯 hit count 偏好"关键词多的类"(techie 540 vs gossip 200)的问题,
     也减少单字关键词(『腿』『胸』『分』『了』)子串假阳性的影响 — 长词命中更可信。
+    boundary-aware:ASCII 关键词(『h』『ts』『pr』)按 word boundary 匹配,
+    不会被同类字符夹住而误中(『hello』不会触发『h』,『tests』不会触发『ts』)。
     """
     score = 0
     for k in keys:
-        if k in lower:
+        if _boundary_aware_in(lower, k):
             score += _HIT_STRONG_WEIGHT if len(k) >= _HIT_STRONG_MIN_LEN else 1
     return score
 
 
 @lru_cache(maxsize=_CLASSIFIER_CACHE_SIZE)
-def _classify_vibe_cached(lower: str) -> str | None:
+def _classify_vibe_full_cached(lower: str) -> tuple[str | None, int, int]:
+    """返回 (best_tag, best_score, second_best_score),caller 算 confidence。"""
     if not lower:
-        return None
+        return None, 0, 0
     best_tag: str | None = None
     best_score = 0
+    second_best = 0
     # _VIBE_TAGS 顺序定义了持平时谁赢(早出现的优先,见 _VIBE_TAGS 注释)。
     for tag in _VIBE_TAGS:
         score = _hit_score(lower, _VIBE_KEYWORDS[tag])
         if score > best_score:
+            second_best = best_score
             best_score, best_tag = score, tag
-    return best_tag
+        elif score > second_best:
+            second_best = score
+    return best_tag, best_score, second_best
 
 
 @lru_cache(maxsize=_CLASSIFIER_CACHE_SIZE)
@@ -126,7 +172,7 @@ def _classify_topics_cached(lower: str) -> tuple[str, ...]:
     return tuple(
         tag
         for tag, keys in _TOPIC_KEYWORDS.items()
-        if any(k in lower for k in keys)
+        if any(_boundary_aware_in(lower, k) for k in keys)
     )
 
 
@@ -136,10 +182,44 @@ def _classify_vibe(text: str) -> str | None:
     长度加权 + tag 顺序兜底:hit_score = Σ(1 if len(k)==1 else 2),持平按 _VIBE_TAGS 顺序。
     超长消息(>_CLASSIFIER_TEXT_CAP)绕过 cache,避免长尾消息把 cache 撑爆。
     """
+    tag, _b, _s = _classify_vibe_full(text)
+    return tag
+
+
+def _classify_vibe_full(text: str) -> tuple[str | None, int, int]:
+    """同 _classify_vibe 但返回完整 (tag, best_score, second_best_score) 供 caller 算 confidence。"""
     lower = _lower(text)
     if len(lower) > _CLASSIFIER_TEXT_CAP:
-        return _classify_vibe_cached.__wrapped__(lower)  # 直接调底层,不进 cache
-    return _classify_vibe_cached(lower)
+        return _classify_vibe_full_cached.__wrapped__(lower)
+    return _classify_vibe_full_cached(lower)
+
+
+def classify_vibe_with_confidence(text: str) -> tuple[str | None, int]:
+    """公开 API:返回 (vibe_tag, confidence 0-100) 让 caller 做阈值过滤。
+
+    confidence 启发式:
+    - best_score == 0 → (None, 0)
+    - best_score == 1 (单 1 字符词命中) → 30 (极弱信号)
+    - best_score == 2 (单 ≥2 字符词命中) → 55 (基础信号)
+    - 区分度大 (best > 2 * second) → +25 加成,clamp 95
+    - 否则按 best/(best+second+1) 比例,scale 到 40-90
+    """
+    tag, best, second = _classify_vibe_full(text)
+    if tag is None or best == 0:
+        return None, 0
+    if best == 1:
+        conf = 30
+    elif best == 2:
+        conf = 55
+    elif second == 0:
+        conf = min(95, 60 + best * 3)
+    elif best >= 2 * second:
+        conf = min(95, 55 + best * 2)
+    else:
+        # 接近持平,confidence 拉低
+        ratio = best / (best + second + 1)
+        conf = max(35, int(40 + ratio * 50))
+    return tag, conf
 
 
 def _classify_topics(text: str) -> list[str]:
@@ -151,10 +231,11 @@ def _classify_topics(text: str) -> list[str]:
 
 
 def classifier_cache_info() -> dict[str, Any]:
-    """诊断:返回 vibe + topic cache 的命中率,方便调优 cache size。"""
-    v = _classify_vibe_cached.cache_info()
+    """诊断:返回 vibe + topic cache 的命中率 + algorithm version,方便调优 cache size。"""
+    v = _classify_vibe_full_cached.cache_info()
     t = _classify_topics_cached.cache_info()
     return {
+        "version": _CLASSIFIER_VERSION,
         "vibe": {"hits": v.hits, "misses": v.misses, "size": v.currsize, "max": v.maxsize},
         "topic": {"hits": t.hits, "misses": t.misses, "size": t.currsize, "max": t.maxsize},
     }
@@ -369,4 +450,6 @@ def build_user_vibe_prompt(profile: dict[str, Any], user_display: str = "用户"
 __all__ = [
     "UserVibeStore",
     "build_user_vibe_prompt",
+    "classify_vibe_with_confidence",
+    "classifier_cache_info",
 ]
