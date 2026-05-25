@@ -3859,6 +3859,13 @@ _AFF_ADMIN_RE = re.compile(
     r"(?:\s+(\d{4,12}))?(?:\s+(-?\d+))?\s*$",
     re.IGNORECASE,
 )
+# 主人专属 /catty_status (别名 /status / /笨猫状态) — 一站式 dashboard 看所有
+# catty layers (daily_life / daily_goals / reunion / mood / story_arc / vibe / affection)
+# 当前 scope + 当前用户(主人本人) 的真实状态。纯只读, blast radius 0。
+_CATTY_STATUS_RE = re.compile(
+    r"^\s*/?(catty_status|status|笨猫状态|猫猫状态)\s*$",
+    re.IGNORECASE,
+)
 
 
 async def _vibe_command_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
@@ -3897,6 +3904,18 @@ async def _aff_admin_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool
     state["catty_aff_admin_qq"] = (match.group(2) or "").strip()
     state["catty_aff_admin_num"] = (match.group(3) or "").strip()
     return True
+
+
+async def _catty_status_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    """主人 only 的 /catty_status dashboard 命令。"""
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    if not _event_is_owner(event):
+        return False
+    text = event_plain_text(event)
+    if not text:
+        return False
+    return bool(_CATTY_STATUS_RE.match(text))
 
 
 async def _emoji_save_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
@@ -3986,6 +4005,7 @@ emoji_save_matcher = on_message(rule=_emoji_save_rule, priority=41, block=True)
 affection_command_matcher = on_message(rule=_affection_command_rule, priority=42, block=True)
 vibe_command_matcher = on_message(rule=_vibe_command_rule, priority=43, block=True)
 aff_admin_matcher = on_message(rule=_aff_admin_rule, priority=44, block=True)
+catty_status_matcher = on_message(rule=_catty_status_rule, priority=45, block=True)
 legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
 expression_repeat_matcher = on_message(rule=_expression_repeat_rule, priority=50, block=True)
@@ -4301,6 +4321,124 @@ async def handle_aff_admin(matcher: Matcher, event: MessageEvent, state: T_State
         raise
     except Exception as exc:  # noqa: BLE001
         await matcher.finish(Message(f"喵呜~ 笨猫执行失败嗷呜: {exc}"))
+
+
+@catty_status_matcher.handle()
+async def handle_catty_status(matcher: Matcher, event: MessageEvent) -> None:
+    """主人专属:一站式 dashboard 看所有 catty layers 当前快照。"""
+    if not _event_is_owner(event):
+        return
+    try:
+        from . import catty_goals as _cg
+        from . import catty_reunion as _cr
+        from . import daily_life as _dl
+        scope = _conversation_queue_key(event)
+        owner_qq = str(event.user_id)
+
+        lines: list[str] = ["🐾 笨猫 · 全状态 dashboard"]
+        lines.append("━" * 18)
+        lines.append(f"📍 scope: {scope} | 你: 主人 (QQ:{owner_qq})")
+        lines.append("")
+
+        # daily_life
+        try:
+            dl_s = _dl.build_daily_life_state(scope)
+            lines.append("🌅 今日状态 (daily_life)")
+            lines.append(f"  · 时段: {dl_s['bucket']}")
+            lines.append(f"  · 在做: {dl_s['activity']}")
+            lines.append(f"  · 刚才: {dl_s['recent_event']}")
+            lines.append(f"  · 心情底色: {dl_s['mood_label']}")
+            if dl_s["wish"]:
+                lines.append(f"  · 小愿望: {dl_s['wish']}")
+        except Exception as exc:  # noqa: BLE001
+            lines.append(f"🌅 daily_life: <错误 {exc}>")
+        lines.append("")
+
+        # daily_goals
+        try:
+            goals = _cg.get_today_goals(scope, affection_level=10, is_owner=True, count=3)
+            lines.append("💭 今日小心思 (daily_goals)")
+            for g in goals:
+                lines.append(f"  · {g}")
+        except Exception as exc:  # noqa: BLE001
+            lines.append(f"💭 daily_goals: <错误 {exc}>")
+        lines.append("")
+
+        # reunion
+        try:
+            last_active = _get_session_cache().last_access_at(scope)
+        except Exception:
+            last_active = None
+        try:
+            r = _cr.reunion_snapshot(last_active, is_owner=True)
+            lines.append("🕐 久别重逢 (catty_reunion)")
+            lines.append(
+                f"  · idle: {r['idle_human']} → level={r['level']} "
+                f"({'会注入 prompt' if r['would_inject'] else '不打扰(warm)'})"
+            )
+        except Exception as exc:  # noqa: BLE001
+            lines.append(f"🕐 reunion: <错误 {exc}>")
+        lines.append("")
+
+        # catty_mood
+        try:
+            mood = catty_mood_store.snapshot(scope)
+            ordered = sorted(mood.items(), key=lambda kv: kv[1], reverse=True)
+            top = ordered[:3]
+            lines.append("🌈 实时心情 (catty_mood) — 前 3 维")
+            for dim, val in top:
+                bar = "█" * int(val // 10)
+                lines.append(f"  · {dim:8} {val:5.1f} {bar}")
+        except Exception as exc:  # noqa: BLE001
+            lines.append(f"🌈 mood: <错误 {exc}>")
+        lines.append("")
+
+        # story_arc
+        try:
+            active_arc = story_arc_store.get_active(scope)
+            lines.append("📖 当前 story arc")
+            if active_arc:
+                ttl_min = int(active_arc.remaining_seconds() / 60) if hasattr(active_arc, "remaining_seconds") else "?"
+                title = getattr(active_arc, "title", "?")
+                lines.append(f"  · {title} (TTL ~{ttl_min} min)")
+            else:
+                lines.append("  · <无>")
+        except Exception as exc:  # noqa: BLE001
+            lines.append(f"📖 story_arc: <错误 {exc}>")
+        lines.append("")
+
+        # user_vibe
+        try:
+            profile = user_vibe_store.profile_for(owner_qq)
+            lines.append("👤 你的画像 (user_vibe)")
+            vibe = profile.get("vibe_tag") or "<未定型>"
+            topics = profile.get("topic_tags") or []
+            msg_count = profile.get("message_count", 0)
+            confidence = profile.get("confidence", 0)
+            lines.append(f"  · 主调: {vibe} | 累计 {msg_count} 条 | 置信度 {confidence}%")
+            if topics:
+                lines.append(f"  · 常聊: {' / '.join(topics[:5])}")
+        except Exception as exc:  # noqa: BLE001
+            lines.append(f"👤 user_vibe: <错误 {exc}>")
+        lines.append("")
+
+        # affection
+        try:
+            summary = affection_store.summary(owner_qq)
+            lines.append("💖 好感度 (affection)")
+            if summary.get("is_owner"):
+                lines.append(f"  · Lv{summary.get('level', '?')} ∞ | 积分 ∞ (主人豁免)")
+                lines.append(f"  · 累计签到 {summary.get('total_checkins', 0)} 次")
+            else:
+                lines.append(f"  · Lv{summary.get('level', '?')} | exp {summary.get('exp', 0)} | 积分 {summary.get('points', 0)}")
+        except Exception as exc:  # noqa: BLE001
+            lines.append(f"💖 affection: <错误 {exc}>")
+
+        await matcher.finish(Message("\n".join(lines)))
+    except FinishedException:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        await matcher.finish(Message(f"喵呜~ dashboard 拼接失败: {exc}"))
 
 
 @emoji_save_matcher.handle()
