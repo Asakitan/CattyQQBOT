@@ -217,19 +217,22 @@ def _exp_bar(draw: ImageDraw.ImageDraw, x: int, y: int, width: int, height: int,
 
 
 # ── 像素猫爪印 ───────────────────────────────────────────────────────
-# 5x6 基础模板:3 脚趾(上 2 行)+ 圆肉垫(下 3 行)
-# scatter 时按 size_mult ∈ {2,3,4} 放大成 10x12 / 15x18 / 20x24,
-# 每爪再 0-360° 随机旋转 → 视觉上和上面 29x25 心形"差不多大",每爪都不一样
+# 9x8 基础模板:4 脚趾(对称等距,2 行)+ 圆形大肉垫(5 行)
+# 参考主人提供的萌系猫爪 reference:矮胖 chubby,4 趾对称,大圆肉垫贴底
+# scatter 时按 size_mult ∈ {1,2,3} 放大成 9x8 / 18x16 / 27x24,
+# 每爪再 0-360° 随机旋转 → 视觉接近上方 29x25 心形,每爪都不一样
 _PAW_TEMPLATE: list[str] = [
-    "X.X.X",   # 3 脚趾上行
-    "X.X.X",   # 3 脚趾下行
-    ".....",   # 间隔
-    ".XXX.",   # 肉垫顶
-    "XXXXX",   # 肉垫中(最宽)
-    ".XXX.",   # 肉垫底
+    ".X.X.X.X.",   # 4 脚趾上 (列 1,3,5,7,完美等距)
+    ".X.X.X.X.",   # 4 脚趾下行(脚趾 2 高,饱满感)
+    ".........",   # 间隔
+    "..XXXXX..",   # 肉垫顶 (5 宽)
+    ".XXXXXXX.",   # 肉垫往宽 (7)
+    "XXXXXXXXX",   # 肉垫最宽 (9)
+    ".XXXXXXX.",   # 肉垫收 (7)
+    "..XXXXX..",   # 肉垫底圆 (5)
 ]
-PAW_BASE_W = 5
-PAW_BASE_H = 6
+PAW_BASE_W = 9
+PAW_BASE_H = 8
 
 
 def _render_paw_image(size_mult: int, color: tuple[int, int, int]) -> Image.Image:
@@ -449,7 +452,7 @@ def render_card(
             band_x_max=paw_band_x_max,
             color=HEART_EDGE,  # 深粉,跟心形呼应
             count_range=(1, 3),
-            size_mults=(2, 3, 4),
+            size_mults=(1, 2, 3),  # 9x8 / 18x16 / 27x24,接近爱心 29x25
         )
 
     # ── 底栏内容 ─────────────────────────────────────────────
