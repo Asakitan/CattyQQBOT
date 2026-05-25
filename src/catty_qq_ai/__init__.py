@@ -34,6 +34,7 @@ from .features import (
 )
 from .message_utils import (
     ExtractedMessage,
+    _looks_like_bot_self_intro,
     build_history_key,
     event_plain_text,
     expression_message_signature,
@@ -2898,25 +2899,50 @@ def _fallback_required_reply(event: MessageEvent, incoming: ExtractedMessage) ->
 _REPLY_GATE_DROP_SHORT_PURE: frozenset[str] = frozenset({
     # 纯感叹/语气词,长度都 ≤4 字,撞概率很低
     "嗯", "额", "呃", "噢", "哦", "哎", "唉", "嘿", "哼", "哇", "啊", "呀", "咦", "唔", "嗷",
-    "草", "艹", "卧槽", "我去", "操", "靠", "妈的", "卧艹",
-    "666", "777", "888", "6", "8", "+1", "+10086",
+    "草", "艹", "卧槽", "我去", "操", "靠", "妈的", "卧艹", "wc", "wcnm", "wtf",
+    "666", "777", "888", "6", "8", "+1", "+10086", "+2", "+3",
     "笑死", "笑", "难绷", "绷不住", "绷", "活了", "蚌", "蚌埠", "蚌埠住了",
     "悲", "泪", "泪目", "醉了", "醉", "乐", "乐死", "乐了", "好乐",
     "玩坏了", "好家伙", "抽象", "好抽象", "离谱", "牛", "牛逼", "nb", "牛批", "nbnb",
     "ok", "okok", "好", "好的", "行", "行吧", "可以", "收到", "收", "嗯嗯", "嗯呢",
     "拜拜", "886", "晚安", "早", "早安", "早", "睡了",
     "...", "......", "。。", "。。。", "。。。。",
-    "tql", "yyds", "nm", "qsl", "xswl",
+    "tql", "yyds", "nm", "qsl", "xswl", "xs", "dbq", "swl", "zsbd", "qaq",
     "真的", "真的吗", "确实", "对", "对的", "是的", "是", "no", "不是", "不",
     "🐱", "😂", "🤣", "💀", "🤔", "😭", "🙏", "👍",
+    # 扩充常见群口头禅(主人反馈塞太多,加强初筛)
+    "前排", "后排", "码住", "mark", "蹲", "蹲一个", "求蹲", "顶起", "顶",
+    "上号", "速速", "冲", "冲冲冲", "冲鸭", "起飞",
+    "典", "孝", "急", "麻", "寄", "蚌", "绷", "唐", "典中典",
+    "破防", "破大防", "麻了", "上头", "上头了",
+    "rua", "rrua", "awa", "qwq", "uwu", "owo",
+    "学到了", "学废了", "学到",
+    "同", "同感", "同款", "已购", "已经",
+    "23", "233", "23333", "2333333",
+    "凉了", "完了", "完蛋", "栽了", "炸了", "翻车了",
+    "诶?", "啊?", "啊?!", "啊咧", "哎呀", "哎哟", "嗨呀",
+    "嗯?", "诶", "诶诶", "诶嘿", "嗯哼",
+    "kkkk", "kkkkk", "hhhh", "hhhhh", "23333",
+    "睡觉", "去睡", "下播", "下机", "撤了", "润了", "润",
+    "在", "在的", "在呢",  # 注意:这些是"在场签到",非问句不该回
 })
 
 _REPLY_GATE_PUNCT_OR_EMOJI_RE = re.compile(r"^[\s\W_]+$")
+# 重复模式: 1-4 字的小 group 至少出现 3 次 (kkk / 哈哈哈 / 笑死笑死笑死 / 啊啊啊啊啊)
+# Non-greedy 让单字 group 优先,避免 "哈哈" 被当成 group 漏命中 "哈哈哈" 重复
+_REPLY_GATE_REPEAT_RE = re.compile(r"^(.{1,4}?)(?:\1){2,}[\s.,~～!！?？]*$")
+# URL only 或 [图片]/[表情]/[链接]/[分享] 等纯占位文字
+_REPLY_GATE_URL_OR_PLACEHOLDER_RE = re.compile(
+    r"^(?:https?://\S+|\[?(?:图|图片|表情|链接|分享|视频|动画表情|app分享)\]?\s*)+$",
+    re.IGNORECASE,
+)
 
 
 def _cheap_reply_prefilter(event: MessageEvent, incoming: ExtractedMessage) -> tuple[bool, str]:
     """便宜启发式初筛 - 明显该 NO_REPLY 的直接 drop。返回 (should_continue, drop_reason)。
     保守:宁可放过让 critic 再看,也别在这层误杀。
+
+    v2 加了 4 个规则:别人 @ 别人 / 重复模式 / 纯数字 / URL-only / bot 自介。
     """
     # 私聊永远 fallthrough(私聊每条都该被 critic/AI 看)
     if isinstance(event, PrivateMessageEvent):
@@ -2930,6 +2956,15 @@ def _cheap_reply_prefilter(event: MessageEvent, incoming: ExtractedMessage) -> t
     # 带图消息 fallthrough(图片场景复杂,让 critic 判)
     if incoming.has_image:
         return True, ""
+    # 规则 4: 群里 @ 了别人(不是猫猫),drop — 已经过 incoming.mentioned=False 这关,
+    # 说明这条消息 @ 的肯定不是猫猫,大概率是群友之间互相 @,与猫猫无关
+    try:
+        self_id = str(getattr(event, "self_id", "") or "")
+        if self_id and mentions_other_user(self_id, event):
+            return False, "prefilter:at-someone-else"
+    except Exception:  # noqa: BLE001
+        pass
+
     text = (incoming.text or "").strip()
     if not text:
         # 无文字无图,通常上层已经过滤掉了;保守 fallthrough
@@ -2944,6 +2979,21 @@ def _cheap_reply_prefilter(event: MessageEvent, incoming: ExtractedMessage) -> t
     # 规则 3: 整段全是 emoji + 符号(无任何 CJK / latin / digit)且 ≤8 字符 → drop
     if len(compact) <= 8 and not re.search(r"[一-鿿぀-ヿA-Za-z0-9]", compact):
         return False, f"prefilter:emoji-stream:{text[:40]!r}"
+    # 规则 5: 重复模式 - 1-4 字符 group 连续 ≥3 次,且总长 ≤24(『哈哈哈哈』『kkkkk』
+    # 『笑死笑死笑死』『6666666』『啊啊啊啊啊』);限长避免长文本中段巧合命中
+    if len(compact) <= 24 and _REPLY_GATE_REPEAT_RE.match(compact):
+        return False, f"prefilter:repeat:{text[:40]!r}"
+    # 规则 6: 纯数字 ≤8 位 → drop(段位汇报/比分/年份/邮编/手机号片段,与猫猫无关)
+    # 注:超长数字(>8 位)可能是订单号/QQ 号截图,可能在求助,保守不砍
+    if compact.isdigit() and len(compact) <= 8:
+        return False, f"prefilter:digits-only:{compact!r}"
+    # 规则 7: URL only / 系统占位文字 ([图片] [表情] [链接] [分享])
+    # 这种通常是别人转发或系统消息,没有问句/对话语义
+    if _REPLY_GATE_URL_OR_PLACEHOLDER_RE.match(compact):
+        return False, f"prefilter:url-or-placeholder:{text[:40]!r}"
+    # 规则 8: bot 自介模式(Q群管家XX/签到小助手 等) — 复用 message_utils 的判定
+    if _looks_like_bot_self_intro(text):
+        return False, "prefilter:bot-self-intro"
     return True, ""
 
 
