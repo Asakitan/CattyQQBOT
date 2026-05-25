@@ -1987,15 +1987,15 @@ async def _build_messages(
         user_vibe_store.record_message(str(event.user_id), incoming.text or "")
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"user_vibe_store.record_message failed: {exc}")
-    # Catty mood: 主人正在把硬关键词分类迁到 spark async classifier。
-    # _build_messages 是 sync 函数不能直接 await record_text_async — 救火期只走纯衰减,
-    # 主人把 _build_messages 改 async / spark classifier 接入完成后,把这段恢复回
-    # `await catty_mood_store.record_text_async(_arc_scope, incoming.text or "",
-    #                                          classifier=lambda t: classify_catty_mood(config, t))`
+    # Catty mood: 走 spark async classifier 喂入 user_text,失败时 classifier 内部回 [] 只衰减。
     try:
-        catty_mood_store.record_decay_only(_arc_scope)
+        await catty_mood_store.record_text_async(
+            _arc_scope,
+            incoming.text or "",
+            classifier=lambda t: classify_catty_mood(config, t),
+        )
     except Exception as exc:  # noqa: BLE001
-        logger.debug(f"catty_mood_store.record_decay_only failed: {exc}")
+        logger.debug(f"catty_mood_store.record_text_async failed: {exc}")
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,
