@@ -174,6 +174,10 @@ memory_store = MemoryStore(config)
 emoji_store = EmojiStore(config)
 legs_picker = LegsPicker(config)
 affection_store = AffectionStore(config)
+# story_arc 是 SillyTavern 风「scenario 跨多消息延续」: per-scope 多小时滚动话题。
+# 持久化到 memory_dir/story_arcs.json,重启不丢。
+from .story_arc import StoryArcStore, build_story_arc_prompt
+story_arc_store = StoryArcStore(config.catty_memory_path)
 _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
@@ -1934,6 +1938,20 @@ def _build_messages(
                 messages.append({"role": "system", "content": _world_info_after})
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"world_info after_char failed (non-fatal): {exc}")
+    # SillyTavern 风「story arc」: per-scope 多小时滚动故事线,让笨猫能跨条消息追同一话题。
+    # 比 world_info 单次反应更连贯(『刚才主人说要画图怎么样啦?』『还在加班吗?』)。
+    # 先扫用户当前消息触发自动 arc(关键词:生病/出差/分手/考完了/...),
+    # 再把所有 active arc 注入 prompt。
+    if "story_arc" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
+        try:
+            _arc_scope = _conversation_queue_key(event)
+            story_arc_store.maybe_auto_trigger(_arc_scope, incoming.text or "")
+            _active_arcs = story_arc_store.get_active(_arc_scope)
+            _arc_prompt = build_story_arc_prompt(_active_arcs)
+            if _arc_prompt:
+                messages.append({"role": "system", "content": _arc_prompt})
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"story_arc inject failed (non-fatal): {exc}")
     if web_search_context:
         messages.append({"role": "system", "content": web_search_context})
     if star_resonance_context:
@@ -4252,6 +4270,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(cache.background_flush_loop())
     asyncio.create_task(memory_store.background_flush_loop())
     asyncio.create_task(affection_store.background_flush_loop())
+    asyncio.create_task(story_arc_store.background_flush_loop())
 
 
 @get_driver().on_shutdown
@@ -4279,6 +4298,15 @@ async def _flush_affection_store_on_shutdown() -> None:
             logger.info("affection_store: flushed dirty data on shutdown")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"affection_store: shutdown flush failed: {exc}")
+
+
+@get_driver().on_shutdown
+async def _flush_story_arc_store_on_shutdown() -> None:
+    try:
+        if story_arc_store.flush_sync():
+            logger.info("story_arc_store: flushed dirty data on shutdown")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"story_arc_store: shutdown flush failed: {exc}")
 
 
 @chat_matcher.handle()
