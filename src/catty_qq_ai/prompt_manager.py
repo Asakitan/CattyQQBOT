@@ -252,12 +252,32 @@ def register_catty_persona(
     #   depth 0 haystack = user_text;每层扫到的 entry.content 并入下层 haystack,
     #   让 A.content 里出现 B.key 的链式触发也能命中(笨猫"知道得更多")。
     #   max_depth=3 + 总 hit cap=12 防止 prompt 撑爆;已 triggered 的 entry 不再扫。
+    #
+    # 【scope_lorebook 集成】 AI 5.5 总结出的 per-scope『这个群专属小事』也并入 BFS pool,
+    #   命中时调 store.mark_hit() 刷 hit_count(LRU 评分用)。order 给 1000 让它排在 hardcoded
+    #   之后但 prompt 段同段输出。
     _LB_MAX_DEPTH = 3
     _LB_MAX_HITS = 12
+    scope_lore_store = ctx.get("scope_lorebook_store")
 
     def _build_character_book() -> str:
         try:
-            book = list(getattr(_cc.CATTY_CARD, "character_book", ()) or [])
+            from types import SimpleNamespace
+            hardcoded = list(getattr(_cc.CATTY_CARD, "character_book", ()) or [])
+            # scope_lorebook entries → duck-type 成跟 CharacterBookEntry 兼容的 shape
+            scope_entries: list = []
+            if scope_lore_store is not None and scope:
+                for se in scope_lore_store.list_entries(scope):
+                    scope_entries.append(SimpleNamespace(
+                        identifier=se.identifier,
+                        keys=tuple(se.keys),
+                        content=se.content,
+                        order=1000,         # 排 hardcoded (200-) 之后
+                        constant=False,     # 必须靠关键词命中
+                        case_sensitive=False,
+                        _is_scope=True,     # 标记位, 命中时调 mark_hit
+                    ))
+            book = hardcoded + scope_entries
             if not book:
                 return ""
             hits: list[tuple[int, str, str]] = []  # (order, identifier, content)
@@ -286,6 +306,12 @@ def register_catty_persona(
                         if key_str in haystack:
                             new_layer.append((entry.order, entry.identifier, entry.content))
                             triggered.add(entry.identifier)
+                            # scope_lorebook 命中刷 hit_count + last_hit_at
+                            if getattr(entry, "_is_scope", False) and scope_lore_store is not None:
+                                try:
+                                    scope_lore_store.mark_hit(scope, entry.identifier)
+                                except Exception:  # noqa: BLE001
+                                    pass
                             break
                 if not new_layer:
                     break  # 这一层没新命中 → 终止递归
@@ -346,7 +372,7 @@ def register_catty_persona(
     if "daily_life" not in legacy_disabled:
         mgr.register(
             "catty_daily_life",
-            content_fn=lambda: _dl.build_daily_life_prompt(scope),
+            content_fn=lambda: _dl.build_daily_life_prompt(scope, recent_text=user_text),
             order=200,
         )
     # Catty Daily Goals - 今日小心思 (内在动机). deterministic by (scope, date, user-tier),
@@ -359,6 +385,7 @@ def register_catty_persona(
             scope,
             affection_level=aff_level,
             is_owner=is_owner,
+            recent_text=user_text,
         ),
         order=205,
     )

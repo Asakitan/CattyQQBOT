@@ -2024,6 +2024,9 @@ async def _build_messages(
         "user_id": str(event.user_id),
         # Catty mood: 让 register_catty_persona 用 scope 拉当前 mood 注入 prompt
         "catty_mood_store": catty_mood_store,
+        # Scope lorebook: AI 5.5 学到的『这个群专属小事』, _build_character_book BFS pool 里
+        # 跟 hardcoded character_book 一起递归扫描, 命中时刷 hit_count。
+        "scope_lorebook_store": scope_lorebook_store,
     })
     # LayerD/E 散装 context 统一注册到 PromptManager,享受同样的 prompt_order / prompts_disabled
     # 配置能力。order 600+ 表示挂在 character_card / world_info 之后、接近 chat history。
