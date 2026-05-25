@@ -28,6 +28,7 @@
     |   190 | catty_scenario_playbook     | (extra)          | persona_prompts.build_scenario_playbook_prompt |
     |   195 | catty_scene_discrimination  | (extra)          | persona_prompts.build_scene_discrimination_prompt |
     |   200 | catty_daily_life            | (catty-specific) | daily_life.build_daily_life_prompt |
+    |   205 | catty_daily_goals           | (catty-specific) | catty_goals.build_catty_goals_prompt |
     |   210 | catty_qq_chat_rhythm        | (extra)          | persona_prompts.build_qq_chat_rhythm_prompt |
     |   220 | catty_reply_self_check      | (extra)          | persona_prompts.build_reply_self_check_prompt |
     |   230 | catty_image_literacy        | (conditional)    | persona_prompts.build_image_literacy_prompt |
@@ -347,6 +348,19 @@ def register_catty_persona(
             content_fn=lambda: _dl.build_daily_life_prompt(scope),
             order=200,
         )
+    # Catty Daily Goals - 今日小心思 (内在动机). deterministic by (scope, date, user-tier),
+    # 让笨猫每天有自己想做的小事, 驱动她主动找机会暴露 / 实施 / 暗示。
+    # 跟 daily_life 解耦(后者是状态, 这里是意图),tier 按 is_owner / affection_level 分桶。
+    from . import catty_goals as _cg
+    mgr.register(
+        "catty_daily_goals",
+        content_fn=lambda: _cg.build_catty_goals_prompt(
+            scope,
+            affection_level=aff_level,
+            is_owner=is_owner,
+        ),
+        order=205,
+    )
     if "world_info" not in legacy_disabled:
         mgr.register(
             "catty_world_info",
