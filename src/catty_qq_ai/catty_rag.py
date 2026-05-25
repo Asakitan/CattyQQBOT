@@ -65,12 +65,33 @@ class CattyRAGStore:
         self._try_init()
 
     def _try_init(self) -> None:
-        """Try-import chromadb + 初始化 PersistentClient. 失败则 disabled."""
+        """Try-import chromadb + 初始化 PersistentClient. 失败则 disabled。
+
+        额外预检: chromadb 默认 embedding 用 ONNX, 需要 onnxruntime 能 import + DLL OK。
+        Python 3.14+ 上 onnxruntime 1.26.0 wheel 不兼容 (DLL init 失败), 提前 abort 避免
+        backfill 时反复 silent fail。
+        """
         try:
             import chromadb  # type: ignore
         except ImportError as exc:
             self._init_error = f"chromadb not installed: {exc}"
-            logger.warning(f"catty_rag: chromadb not installed, RAG disabled — pip install chromadb to enable")
+            logger.warning("catty_rag: chromadb not installed, RAG disabled — pip install chromadb to enable")
+            return
+        # 预检 onnxruntime — chromadb 默认 embedding 必依赖
+        try:
+            import onnxruntime  # type: ignore  # noqa: F401
+        except Exception as exc:  # noqa: BLE001
+            self._init_error = (
+                f"onnxruntime broken on this Python: {exc} "
+                "(Python 3.14+ 可能不兼容 onnxruntime 1.26.0 wheel — "
+                "降级 Python 到 3.12/3.13 或者切到 OpenAI embeddings API)"
+            )
+            logger.warning(
+                "catty_rag: onnxruntime 不可用, RAG disabled. "
+                "Python 3.14+ + onnxruntime wheel DLL 不兼容是已知问题。"
+                "解决方法: 1) 降 Python 到 3.12/3.13, 或 2) 给 chromadb 配 OpenAIEmbeddingFunction "
+                "(需要 catty_openai_* 主模型 host 支持 /embeddings 端点)。"
+            )
             return
         try:
             self._persist_dir.mkdir(parents=True, exist_ok=True)
@@ -215,11 +236,20 @@ class CattyRAGStore:
             data = getattr(memory_store, "_data", {}) or {}
         except Exception:  # noqa: BLE001
             return 0
+        groups_n = len(data.get("groups") or {})
+        users_n = len(data.get("users") or {})
+        # debug: 看 _data 实际加载量 + 第一个 group 的 keys (诊断为啥 +0)
+        sample_keys = ""
+        if groups_n > 0:
+            first_g = next(iter(data["groups"].values()), {})
+            sample_keys = ", ".join(list(first_g.keys())[:8]) if isinstance(first_g, dict) else "<not dict>"
+        logger.info(f"catty_rag.backfill_memory: groups={groups_n} users={users_n} sample_group_keys=[{sample_keys}]")
         count = 0
-        # groups
+        # groups: group["summary"] + group["member_profiles"][user_id]["impression"]
         for group_id, group in (data.get("groups") or {}).items():
             if not isinstance(group, dict):
                 continue
+            # group-level summary (整群对话总结)
             summary = str(group.get("summary") or "").strip()
             if summary:
                 try:
@@ -227,8 +257,44 @@ class CattyRAGStore:
                     self.add(f"group:{group_id}", summary, role="memory_summary", user_id="", ts=ts)
                     count += 1
                 except Exception:  # noqa: BLE001
-                    continue
-        # private users + mentions
+                    pass
+            # member-in-group profiles (每个群友的笨猫印象)
+            member_profiles = group.get("member_profiles") or {}
+            if isinstance(member_profiles, dict):
+                for mp_user_id, prof in member_profiles.items():
+                    if not isinstance(prof, dict):
+                        continue
+                    parts: list[str] = []
+                    impression = str(prof.get("impression") or "").strip()
+                    evidence = str(prof.get("evidence") or "").strip()
+                    display = str(prof.get("display_name") or "").strip()
+                    title = str(prof.get("inferred_title") or "").strip()
+                    if display or title:
+                        parts.append(f"{display or title}")
+                    if impression:
+                        parts.append(f"印象: {impression}")
+                    if evidence:
+                        parts.append(f"依据: {evidence[:120]}")
+                    text = " | ".join(parts).strip()
+                    if text:
+                        try:
+                            ts_raw = prof.get("updated_at") or ""
+                            try:
+                                from datetime import datetime as _dt
+                                ts = _dt.fromisoformat(str(ts_raw).replace("Z", "+00:00")).timestamp()
+                            except Exception:  # noqa: BLE001
+                                ts = time.time()
+                            self.add(
+                                f"group:{group_id}",
+                                text,
+                                role="member_profile",
+                                user_id=str(mp_user_id),
+                                ts=ts,
+                            )
+                            count += 1
+                        except Exception:  # noqa: BLE001
+                            continue
+        # private users: user["private_summary"] + user["profile"]
         for user_id, user in (data.get("users") or {}).items():
             if not isinstance(user, dict):
                 continue
@@ -241,17 +307,31 @@ class CattyRAGStore:
                     count += 1
                 except Exception:  # noqa: BLE001
                     pass
-            mentions = user.get("mentions") or {}
-            if isinstance(mentions, dict):
-                for group_id, mention in mentions.items():
-                    text = str(mention).strip() if not isinstance(mention, dict) else str(mention.get("summary") or "").strip()
-                    if text:
-                        try:
-                            self.add(f"group:{group_id}", text, role="member_profile",
-                                     user_id=str(user_id))
-                            count += 1
-                        except Exception:  # noqa: BLE001
-                            continue
+            # 私聊 user 也有 profile (gender/title/impression) 可以入 RAG 给 private:scope
+            profile = user.get("profile") or {}
+            if isinstance(profile, dict):
+                impression = str(profile.get("impression") or "").strip()
+                title = str(profile.get("inferred_title") or "").strip()
+                gender = str(profile.get("gender") or "").strip()
+                parts: list[str] = []
+                if title:
+                    parts.append(title)
+                if gender:
+                    parts.append(f"性别: {gender}")
+                if impression:
+                    parts.append(f"印象: {impression}")
+                text = " | ".join(parts).strip()
+                if text:
+                    try:
+                        self.add(
+                            f"private:{user_id}",
+                            text,
+                            role="user_profile",
+                            user_id=str(user_id),
+                        )
+                        count += 1
+                    except Exception:  # noqa: BLE001
+                        pass
         return count
 
     def backfill_lorebook(self, scope_lorebook_store: Any) -> int:
