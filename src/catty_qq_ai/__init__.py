@@ -2595,16 +2595,38 @@ async def _build_messages(
     )
     _can_reach_deep = _user_max_stage >= 8
     # 新 deep hit 时 roll 一次突破 (sticky 续杯不 roll — 上次已 roll 过)
-    # maybe_trigger_breakthrough 内部已经过滤 owner/Lv10, 所以这里安全 roll
+    # 主人原话『一直要求色色, 5 次 20%, 10 次 100%』:
+    #   每次 deep hit 累加 24h 滑窗计数, ramp 1→0.89% / 5→20% / 10→100%; 突破成功 reset.
+    # maybe_trigger_breakthrough 内部已经过滤 owner/Lv10, 所以这里安全 roll.
     _breakthrough_outcome: str | None = None
-    if _hit_deep and not _sticky_active:
+    _deep_request_count = 0
+    if _hit_deep and not _sticky_active and not _user_is_owner and _user_affection_level < 10:
         try:
-            from .affection_scorer import maybe_trigger_breakthrough as _maybe_breakthrough
+            from .affection_scorer import (
+                maybe_trigger_breakthrough as _maybe_breakthrough,
+                record_deep_nsfw_request as _record_deep,
+                reset_deep_nsfw_count as _reset_deep,
+                _ramp_breakthrough_chance as _ramp_chance,
+            )
+            _deep_request_count = _record_deep(str(event.user_id))
             _breakthrough_outcome = _maybe_breakthrough(
                 _utxt,
                 affection_level=_user_affection_level,
                 is_owner=_user_is_owner,
+                request_count=_deep_request_count,
             )
+            _chance = _ramp_chance(_deep_request_count)
+            if _breakthrough_outcome:
+                _reset_deep(str(event.user_id))
+                logger.info(
+                    f"deep_nsfw_ramp: user={event.user_id} count={_deep_request_count} "
+                    f"chance={_chance*100:.1f}% → ★ BREAKTHROUGH ({_breakthrough_outcome}), reset to 0"
+                )
+            else:
+                logger.info(
+                    f"deep_nsfw_ramp: user={event.user_id} count={_deep_request_count} "
+                    f"chance={_chance*100:.1f}% no breakthrough (next try +)"
+                )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"breakthrough roll failed (non-fatal): {exc}")
     # 决定是否进 spark:

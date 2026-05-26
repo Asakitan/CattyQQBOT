@@ -22,6 +22,7 @@
 from __future__ import annotations
 
 import random
+import time
 from typing import Literal
 
 
@@ -305,7 +306,8 @@ def score_user_message(text: str, *, is_nsfw_context: bool = False) -> int:
     return +1
 
 
-# ── 0.89% NSFW 突破事件 ───────────────────────────────────────────
+# ── NSFW 突破事件 — 概率随请求次数 ramp ────────────────────────────
+# 主人原话『要求 10 次后 100%, 5 次 20%』 + 原来的『0.89%』作为单次起步.
 BREAKTHROUGH_BASE_CHANCE = 0.0089
 
 BREAKTHROUGH_OUTCOME_DELTA: dict[str, int] = {
@@ -313,29 +315,93 @@ BREAKTHROUGH_OUTCOME_DELTA: dict[str, int] = {
     "unpleasant": -25,
 }
 
+# 每个 user 的 deep NSFW 请求历史 (timestamp list), 24h 滑动窗口.
+# 主人原话『一直要求色色, 10 次 100%, 5 次 20%』 — 计数攒着, 突破成功后清零重新开始.
+_DEEP_REQUEST_HISTORY: dict[str, list[float]] = {}
+_DEEP_REQUEST_WINDOW_SECONDS = 24 * 3600  # 24h 窗
+_DEEP_REQUEST_MAX_USERS = 2048  # 防内存爆
+
+
+def _prune_deep_history(user_id: str) -> None:
+    """剔除 user 的过期 timestamp, 让计数只反映最近 24h."""
+    cutoff = time.time() - _DEEP_REQUEST_WINDOW_SECONDS
+    hist = _DEEP_REQUEST_HISTORY.get(user_id)
+    if not hist:
+        return
+    fresh = [t for t in hist if t >= cutoff]
+    if fresh:
+        _DEEP_REQUEST_HISTORY[user_id] = fresh
+    else:
+        _DEEP_REQUEST_HISTORY.pop(user_id, None)
+
+
+def _prune_deep_history_global() -> None:
+    """超出 MAX_USERS 时, 全量过期清扫 (LRU-ish)."""
+    if len(_DEEP_REQUEST_HISTORY) <= _DEEP_REQUEST_MAX_USERS:
+        return
+    cutoff = time.time() - _DEEP_REQUEST_WINDOW_SECONDS
+    stale_keys = [uid for uid, hist in _DEEP_REQUEST_HISTORY.items() if not hist or hist[-1] < cutoff]
+    for uid in stale_keys:
+        _DEEP_REQUEST_HISTORY.pop(uid, None)
+
+
+def record_deep_nsfw_request(user_id: str) -> int:
+    """记一次 deep NSFW 请求, 返回 24h 内的累计次数 (含本次)."""
+    _prune_deep_history(user_id)
+    _DEEP_REQUEST_HISTORY.setdefault(user_id, []).append(time.time())
+    _prune_deep_history_global()
+    return len(_DEEP_REQUEST_HISTORY[user_id])
+
+
+def reset_deep_nsfw_count(user_id: str) -> None:
+    """突破成功后清空 — 让累积从 0 重新开始 (避免突破后还是 100%)."""
+    _DEEP_REQUEST_HISTORY.pop(user_id, None)
+
+
+def _ramp_breakthrough_chance(count: int) -> float:
+    """分段线性 ramp.
+
+    anchors: 1 → 0.89%, 5 → 20%, 10 → 100%.
+    主人原话『要求 10 次后 100%, 5 次 20%』, 1 次保留原来的 0.89% 起步.
+    """
+    if count <= 0:
+        return 0.0
+    if count >= 10:
+        return 1.0
+    if count == 1:
+        return BREAKTHROUGH_BASE_CHANCE
+    # piecewise linear: (1, 0.0089) - (5, 0.20) - (10, 1.0)
+    if count <= 5:
+        return BREAKTHROUGH_BASE_CHANCE + (0.20 - BREAKTHROUGH_BASE_CHANCE) * (count - 1) / 4
+    return 0.20 + (1.0 - 0.20) * (count - 5) / 5
+
 
 def maybe_trigger_breakthrough(
     text: str,
     *,
     affection_level: int,
     is_owner: bool,
+    request_count: int = 1,
     rng: random.Random | None = None,
 ) -> Literal["pleasant", "unpleasant"] | None:
-    """给低等级用户的 NSFW 互动一个 0.89% 概率突破到 stage 10。
+    """给低等级用户的 NSFW 请求一个 ramp 概率突破到 stage 10。
 
     触发条件:
     - 非 owner (owner 已经满级)
     - Lv < 10 (满级用户已能正常到 stage 10, 不需要随机)
-    - random.random() < 0.89%
+    - chance = _ramp_breakthrough_chance(request_count) (1次 0.89% → 5次 20% → 10次 100%)
 
-    返回 None 不触发 / 'pleasant' 笨猫舒服(+50) / 'unpleasant' 笨猫不舒服(-25)。
+    返回 None / 'pleasant' (+50) / 'unpleasant' (-25)。
     outcome 由用户消息 sentiment 决定: 温柔 → pleasant, 粗暴 → unpleasant,
-    完全中性 → 70% pleasant / 30% unpleasant (主人原话『也可能 -25』暗示倾向 pleasant)。
+    完全中性 → 70% pleasant / 30% unpleasant。
     """
     if is_owner or affection_level >= 10:
         return None
+    chance = _ramp_breakthrough_chance(request_count)
+    if chance <= 0:
+        return None
     r = rng or random
-    if r.random() >= BREAKTHROUGH_BASE_CHANCE:
+    if r.random() >= chance:
         return None
     # outcome by sentiment
     pos_score = sum(1 for w in _NSFW_POS_WORDS if w in text)
@@ -445,5 +511,7 @@ __all__ = [
     "BREAKTHROUGH_PREFILLS",
     "build_breakthrough_override",
     "maybe_trigger_breakthrough",
+    "record_deep_nsfw_request",
+    "reset_deep_nsfw_count",
     "score_user_message",
 ]
