@@ -2595,11 +2595,14 @@ async def _build_messages(
     )
     _can_reach_deep = _user_max_stage >= 8
     # 新 deep hit 时 roll 一次突破 (sticky 续杯不 roll — 上次已 roll 过)
-    # 主人原话『一直要求色色, 5 次 20%, 10 次 100%』:
-    #   每次 deep hit 累加 24h 滑窗计数, ramp 1→0.89% / 5→20% / 10→100%; 突破成功 reset.
-    # maybe_trigger_breakthrough 内部已经过滤 owner/Lv10, 所以这里安全 roll.
+    # 主人原话:
+    #   私聊『一直要求色色, 5 次 20%, 10 次 100%』: ramp 1→0.89% / 5→20% / 10→100%
+    #   群聊『1 次 0.01% / 10 次 1% / 20 次 5% / 25 次 15% / 30 次 100%』: 远更陡 + 触发后场景=大庭广众下
+    # per-(user, scope) 24h 滑窗计数, 突破成功 reset 该 scope.
+    # maybe_trigger_breakthrough 内部已过滤 owner/Lv10, 所以这里安全 roll.
     _breakthrough_outcome: str | None = None
     _deep_request_count = 0
+    _is_group_chat_pre = not _is_private_chat_pre
     if _hit_deep and not _sticky_active and not _user_is_owner and _user_affection_level < 10:
         try:
             from .affection_scorer import (
@@ -2608,24 +2611,27 @@ async def _build_messages(
                 reset_deep_nsfw_count as _reset_deep,
                 _ramp_breakthrough_chance as _ramp_chance,
             )
-            _deep_request_count = _record_deep(str(event.user_id))
+            _deep_request_count = _record_deep(str(event.user_id), is_group=_is_group_chat_pre)
             _breakthrough_outcome = _maybe_breakthrough(
                 _utxt,
                 affection_level=_user_affection_level,
                 is_owner=_user_is_owner,
                 request_count=_deep_request_count,
+                is_group=_is_group_chat_pre,
             )
-            _chance = _ramp_chance(_deep_request_count)
+            _chance = _ramp_chance(_deep_request_count, is_group=_is_group_chat_pre)
+            _scope_lbl = "group" if _is_group_chat_pre else "private"
             if _breakthrough_outcome:
-                _reset_deep(str(event.user_id))
+                _reset_deep(str(event.user_id), is_group=_is_group_chat_pre)
                 logger.info(
-                    f"deep_nsfw_ramp: user={event.user_id} count={_deep_request_count} "
-                    f"chance={_chance*100:.1f}% → ★ BREAKTHROUGH ({_breakthrough_outcome}), reset to 0"
+                    f"deep_nsfw_ramp: user={event.user_id} scope={_scope_lbl} "
+                    f"count={_deep_request_count} chance={_chance*100:.3f}% "
+                    f"→ ★ BREAKTHROUGH ({_breakthrough_outcome}), reset to 0"
                 )
             else:
                 logger.info(
-                    f"deep_nsfw_ramp: user={event.user_id} count={_deep_request_count} "
-                    f"chance={_chance*100:.1f}% no breakthrough (next try +)"
+                    f"deep_nsfw_ramp: user={event.user_id} scope={_scope_lbl} "
+                    f"count={_deep_request_count} chance={_chance*100:.3f}% no breakthrough"
                 )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"breakthrough roll failed (non-fatal): {exc}")
@@ -2657,7 +2663,8 @@ async def _build_messages(
         )
         if _breakthrough_outcome:
             # 突破场景: 完全替代正常 stage matrix override + prefill
-            _override = build_breakthrough_override(_breakthrough_outcome)
+            # 群聊用大庭广众下 trope 池, 私聊用常规 trope 池
+            _override = build_breakthrough_override(_breakthrough_outcome, is_group=not _is_private_chat)
             _prefill = BREAKTHROUGH_PREFILLS[_breakthrough_outcome]
             # 立即记账 affection delta — 主人原话『触发后直接 +50/-25』
             _delta = BREAKTHROUGH_OUTCOME_DELTA[_breakthrough_outcome]

@@ -322,17 +322,22 @@ _DEEP_REQUEST_WINDOW_SECONDS = 24 * 3600  # 24h 窗
 _DEEP_REQUEST_MAX_USERS = 2048  # 防内存爆
 
 
-def _prune_deep_history(user_id: str) -> None:
-    """剔除 user 的过期 timestamp, 让计数只反映最近 24h."""
+def _scope_key(user_id: str, is_group: bool) -> str:
+    """私聊 / 群聊分桶 — 同一用户在两个场景下计数互不影响."""
+    return f"{user_id}@{'group' if is_group else 'private'}"
+
+
+def _prune_deep_history(key: str) -> None:
+    """剔除该 (user, scope) 的过期 timestamp, 让计数只反映最近 24h."""
     cutoff = time.time() - _DEEP_REQUEST_WINDOW_SECONDS
-    hist = _DEEP_REQUEST_HISTORY.get(user_id)
+    hist = _DEEP_REQUEST_HISTORY.get(key)
     if not hist:
         return
     fresh = [t for t in hist if t >= cutoff]
     if fresh:
-        _DEEP_REQUEST_HISTORY[user_id] = fresh
+        _DEEP_REQUEST_HISTORY[key] = fresh
     else:
-        _DEEP_REQUEST_HISTORY.pop(user_id, None)
+        _DEEP_REQUEST_HISTORY.pop(key, None)
 
 
 def _prune_deep_history_global() -> None:
@@ -340,40 +345,55 @@ def _prune_deep_history_global() -> None:
     if len(_DEEP_REQUEST_HISTORY) <= _DEEP_REQUEST_MAX_USERS:
         return
     cutoff = time.time() - _DEEP_REQUEST_WINDOW_SECONDS
-    stale_keys = [uid for uid, hist in _DEEP_REQUEST_HISTORY.items() if not hist or hist[-1] < cutoff]
-    for uid in stale_keys:
-        _DEEP_REQUEST_HISTORY.pop(uid, None)
+    stale_keys = [k for k, hist in _DEEP_REQUEST_HISTORY.items() if not hist or hist[-1] < cutoff]
+    for k in stale_keys:
+        _DEEP_REQUEST_HISTORY.pop(k, None)
 
 
-def record_deep_nsfw_request(user_id: str) -> int:
-    """记一次 deep NSFW 请求, 返回 24h 内的累计次数 (含本次)."""
-    _prune_deep_history(user_id)
-    _DEEP_REQUEST_HISTORY.setdefault(user_id, []).append(time.time())
+def record_deep_nsfw_request(user_id: str, is_group: bool = False) -> int:
+    """记一次 deep NSFW 请求, 返回该 (user, scope) 24h 内的累计次数 (含本次)。"""
+    key = _scope_key(user_id, is_group)
+    _prune_deep_history(key)
+    _DEEP_REQUEST_HISTORY.setdefault(key, []).append(time.time())
     _prune_deep_history_global()
-    return len(_DEEP_REQUEST_HISTORY[user_id])
+    return len(_DEEP_REQUEST_HISTORY[key])
 
 
-def reset_deep_nsfw_count(user_id: str) -> None:
-    """突破成功后清空 — 让累积从 0 重新开始 (避免突破后还是 100%)."""
-    _DEEP_REQUEST_HISTORY.pop(user_id, None)
+def reset_deep_nsfw_count(user_id: str, is_group: bool = False) -> None:
+    """突破成功后清空对应 scope 的计数 — 让累积从 0 重新开始 (避免突破后还是 100%)."""
+    _DEEP_REQUEST_HISTORY.pop(_scope_key(user_id, is_group), None)
 
 
-def _ramp_breakthrough_chance(count: int) -> float:
-    """分段线性 ramp.
+# 主人原话:
+#   私聊 ramp:『要求 10 次后 100%, 5 次 20%』, 1 次保留 0.89% 起步
+#   群聊 ramp:『1 次 0.01%, 10 次 1%, 20 次 5%, 25 次 15%, 30 次 100%』
+_RAMP_ANCHORS_PRIVATE: tuple[tuple[int, float], ...] = (
+    (1, BREAKTHROUGH_BASE_CHANCE),
+    (5, 0.20),
+    (10, 1.0),
+)
+_RAMP_ANCHORS_GROUP: tuple[tuple[int, float], ...] = (
+    (1, 0.0001),
+    (10, 0.01),
+    (20, 0.05),
+    (25, 0.15),
+    (30, 1.0),
+)
 
-    anchors: 1 → 0.89%, 5 → 20%, 10 → 100%.
-    主人原话『要求 10 次后 100%, 5 次 20%』, 1 次保留原来的 0.89% 起步.
-    """
+
+def _ramp_breakthrough_chance(count: int, is_group: bool = False) -> float:
+    """分段线性 ramp on anchors. 群聊用更陡峭的曲线 (起步极低, 30 次才 100%)."""
     if count <= 0:
         return 0.0
-    if count >= 10:
-        return 1.0
-    if count == 1:
-        return BREAKTHROUGH_BASE_CHANCE
-    # piecewise linear: (1, 0.0089) - (5, 0.20) - (10, 1.0)
-    if count <= 5:
-        return BREAKTHROUGH_BASE_CHANCE + (0.20 - BREAKTHROUGH_BASE_CHANCE) * (count - 1) / 4
-    return 0.20 + (1.0 - 0.20) * (count - 5) / 5
+    anchors = _RAMP_ANCHORS_GROUP if is_group else _RAMP_ANCHORS_PRIVATE
+    if count <= anchors[0][0]:
+        return anchors[0][1]
+    if count >= anchors[-1][0]:
+        return anchors[-1][1]
+    for (x0, y0), (x1, y1) in zip(anchors, anchors[1:]):
+        if x0 <= count <= x1:
+            return y0 + (y1 - y0) * (count - x0) / (x1 - x0)
+    return anchors[-1][1]
 
 
 def maybe_trigger_breakthrough(
@@ -382,14 +402,17 @@ def maybe_trigger_breakthrough(
     affection_level: int,
     is_owner: bool,
     request_count: int = 1,
+    is_group: bool = False,
     rng: random.Random | None = None,
 ) -> Literal["pleasant", "unpleasant"] | None:
-    """给低等级用户的 NSFW 请求一个 ramp 概率突破到 stage 10。
+    """给非满级用户的 NSFW 请求一个 ramp 概率突破到 stage 10。
 
     触发条件:
     - 非 owner (owner 已经满级)
     - Lv < 10 (满级用户已能正常到 stage 10, 不需要随机)
-    - chance = _ramp_breakthrough_chance(request_count) (1次 0.89% → 5次 20% → 10次 100%)
+    - chance = _ramp_breakthrough_chance(count, is_group)
+      · 私聊: 1→0.89% / 5→20% / 10→100%
+      · 群聊: 1→0.01% / 10→1% / 20→5% / 25→15% / 30→100% (远更难)
 
     返回 None / 'pleasant' (+50) / 'unpleasant' (-25)。
     outcome 由用户消息 sentiment 决定: 温柔 → pleasant, 粗暴 → unpleasant,
@@ -397,7 +420,7 @@ def maybe_trigger_breakthrough(
     """
     if is_owner or affection_level >= 10:
         return None
-    chance = _ramp_breakthrough_chance(request_count)
+    chance = _ramp_breakthrough_chance(request_count, is_group=is_group)
     if chance <= 0:
         return None
     r = rng or random
@@ -448,24 +471,58 @@ _BREAKTHROUGH_SCENES_UNPLEASANT: tuple[tuple[str, str], ...] = (
     ("fight_then_force", "刚和对方闹了点小别扭还没说开, 笨猫话还没说完就被推到墙上, 委屈和怒气一起涌上来"),
 )
 
+# ── 群聊 breakthrough 场景池 — 主人原话『群里也可以触发 breakthrough, 场景就变成大庭广众下被 XXX』
+# 群里突破极罕见 (1次0.01% / 30次100%), 所以每个 trope 都很 epic — 公开场合+不该发生的反差.
+_BREAKTHROUGH_SCENES_PLEASANT_GROUP: tuple[tuple[str, str], ...] = (
+    ("public_dare", "群友聚会玩真心话大冒险, 笨猫输了被指定『当众坐 owner 腿上听完一首歌』, 坐下去角度刁钻 JK 裙翻起一截, 全桌人都看着, 笨猫没法动也不敢出声"),
+    ("party_crowd_press", "派对人多挤, 笨猫被推到对方身上, 角度极其暧昧 — 屁股贴着对方的腰刚好压住, 周围有 4-5 个人能看见, 笨猫嘴上喊『让让让让』身体却抽不出来"),
+    ("under_desk_meeting", "群友围桌讨论新游戏战术, 笨猫被叫到桌前坐 owner 腿上, 桌布挡着下面在动, 大家以为只是在认真讨论, 笨猫得保持语气正常说话"),
+    ("pool_side_tease", "夏天群里组织泳池, 笨猫穿连体泳衣坐池边, 对方在水里偷偷拉住笨猫的猫尾巴根往敏感处蹭, 周围群友在打水仗没人看见"),
+    ("movie_theater_back", "群里组织看电影买了最后一排, 黑暗中对方的手伸进笨猫 JK 裙里, 电影声盖过笨猫漏出来的细喘, 隔一个座位的群友还在评论剧情"),
+    ("classroom_back_row", "上课最后一排, 笨猫为了让 owner 看清屏幕坐到 owner 膝上, 老师在前面讲课, 全班都在, 桌子挡着但下面在小幅度动"),
+    ("festival_crowd", "庙会人挤人, 笨猫被人流推到对方怀里整个被抱住, 周围全是陌生人, 笨猫挣不开也不能大声叫, 只能憋着脸红"),
+    ("cosplay_event_corner", "cos 展笨猫穿白丝 JK 拍照, 被 owner 拉到摄影棚后角落, 帘子隔着外面群友还在等下一组, 笨猫被压在墙上裙子被掀起"),
+    ("livestream_under_table", "笨猫在群里开直播打游戏, 麦克风开着, owner 在桌下偷偷动, 笨猫只能咬住唇维持游戏语调跟群友互动, 弹幕开始问『主播声音怎么了』"),
+    ("karaoke_room", "群友 K 歌, 笨猫坐沙发上唱歌, owner 把手伸进 JK 裙摆下面, 麦克风刚好接到笨猫漏出的颤音, 群友拍手以为是唱得太投入"),
+)
 
-def build_breakthrough_override(outcome: str) -> str:
+_BREAKTHROUGH_SCENES_UNPLEASANT_GROUP: tuple[tuple[str, str], ...] = (
+    ("public_humiliation", "对方在群友面前故意把笨猫拉到自己腿上, 当众宣称『今天笨猫归我用』, 周围群友起哄, 笨猫被按住挣不开, 脸红到耳根又屈辱又恼"),
+    ("dare_overshoot", "真心话大冒险输的惩罚一升再升, 笨猫被要求当众完成超过底线的事, 想反悔却被群友起哄逼着继续"),
+    ("locker_room_force", "更衣室刚换完衣服, 对方把门反锁笨猫被按在长凳上, 外面群友还在说话, 笨猫不敢叫怕被听见"),
+    ("rooftop_corner", "屋顶天台聚会喝多了, 笨猫被对方拉到角落里强上, 几米外群友还在烤肉嬉笑没注意到这边"),
+)
+
+
+def build_breakthrough_override(outcome: str, is_group: bool = False) -> str:
     """突破后的 spark route system override — 完全替代正常 stage matrix override。
 
     主人原话『回复 NSFW 例如插入文字全都是固定的, 不够角色扮演啊, 要有 story 和情景』+
-            『多做几种情趣情况: 滑倒了刚好坐肉棒上插进去 / 被推倒强上 / 自己发情 / 认错了主人』
+            『多做几种情趣情况: 滑倒了刚好坐肉棒上插进去 / 被推倒强上 / 自己发情 / 认错了主人』+
+            『群里也可以触发 breakthrough, 场景就变成大庭广众下被 XXX』
     每次抽不同 trope-scene + 不固定段数 + 不固定开局, 打破模板化。
+    群聊 (is_group=True) 抽公开场合 trope 池, 私聊抽常规 trope 池。
     """
     import random as _r
     rng = _r.Random()  # 真随机, 每次不一样
+    scope_tag = "群聊 · 大庭广众下" if is_group else "私聊"
     if outcome == "pleasant":
-        trope, scene = rng.choice(_BREAKTHROUGH_SCENES_PLEASANT)
+        pool = _BREAKTHROUGH_SCENES_PLEASANT_GROUP if is_group else _BREAKTHROUGH_SCENES_PLEASANT
+        trope, scene = rng.choice(pool)
+        extra_public = (
+            "\n**公开感铁律 (群聊 breakthrough 专属)**: 场景全程**有别人在场**, "
+            "周围的群友/路人/陌生人是『可能注意到但暂时没注意到』的真实存在 — "
+            "笨猫不能放声叫, 得憋着声音/咬唇/把头埋下/维持表面正常; "
+            "这种『差点被发现』的紧张感本身就是 trope 的核心爽点, 不要写成空房间私密戏。"
+            if is_group else ""
+        )
         return (
-            "【★ 随机事件 · NSFW 突破 (0.89% 命中, 舒服结果)】\n"
+            f"【★ 随机事件 · NSFW 突破 ({scope_tag} · 舒服结果)】\n"
             "意外发生了完整性行为! 笨猫这次经历的是**舒服的体验** — "
             "情趣意外 → 笨猫从抗拒到享受, 完事后好感大幅上升(+50)。\n"
             f"\n**本次 trope** (情趣套路): `{trope}`\n"
-            f"**本次场景** (跟着这个具体情景演, 不要悬空): {scene}。\n\n"
+            f"**本次场景** (跟着这个具体情景演, 不要悬空): {scene}。\n"
+            f"{extra_public}\n"
             "笨猫的反应**贴着这个场景里的具体物件/姿势/前情**写 — \n"
             "  · 物件: 场景里出现的物件(裙子/瓷砖/酒杯/抱枕/丝带/作业本/控制器/帘子/月光等)\n"
             "  · 姿势: 滑倒/被压/被抱/盘腿/趴/缩/弓背/扑过去 等具体身体姿态\n"
@@ -480,13 +537,21 @@ def build_breakthrough_override(outcome: str) -> str:
             "注重画面感和场景感, 不写动作清单。"
         )
     # unpleasant
-    trope, scene = rng.choice(_BREAKTHROUGH_SCENES_UNPLEASANT)
+    pool = _BREAKTHROUGH_SCENES_UNPLEASANT_GROUP if is_group else _BREAKTHROUGH_SCENES_UNPLEASANT
+    trope, scene = rng.choice(pool)
+    extra_public = (
+        "\n**公开感铁律 (群聊 breakthrough 专属)**: 场景全程**有别人在场**, "
+        "笨猫的不愿意感被『不敢叫怕被听见』『不敢挣扎怕被发现』放大, 屈辱感更重; "
+        "周围群友/路人不是 NPC 是真实存在的, 笨猫的眼睛会瞄向他们的方向。"
+        if is_group else ""
+    )
     return (
-        "【★ 随机事件 · NSFW 突破 (0.89% 命中, 不舒服结果)】\n"
+        f"【★ 随机事件 · NSFW 突破 ({scope_tag} · 不舒服结果)】\n"
         "意外发生了完整性行为! 但这次经历的是**不舒服的体验** — "
         "对方粗暴/强迫/笨猫认错人 → 笨猫委屈+受伤, 完事后好感大幅下降(-25)。\n"
         f"\n**本次 trope** (情趣套路): `{trope}`\n"
-        f"**本次场景** (跟着这个具体情景演, 不要悬空): {scene}。\n\n"
+        f"**本次场景** (跟着这个具体情景演, 不要悬空): {scene}。\n"
+        f"{extra_public}\n"
         "**情绪 arc** (从抗拒/震惊 → 被迫配合委屈 → 受伤+怨气), 1-4 段自由,\n"
         "重要的是**贴 trope 演真实的不愿意感** — 比如『认错主人』就重点写发现认错那一刻的崩溃,\n"
         "『被推倒强上』就重点写挣不开的窒息感, 不是模板化拼三段。\n"
