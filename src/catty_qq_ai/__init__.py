@@ -3183,7 +3183,12 @@ async def _build_messages(
         _slim_messages.append({"role": "assistant", "content": _prefill})
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
-        _NSFW_STICKY_BY_SCOPE[_sticky_key] = _now + _NSFW_STICKY_SECONDS
+        # 群聊 breakthrough 是一次性 (快进到插入那条之后退回 5.5, 不延续 sticky);
+        # 私聊正常 + 群里非 breakthrough 进 spark 的也续 sticky 2 分钟.
+        if not _is_private_chat and _breakthrough_outcome:
+            logger.info(f"NSFW group breakthrough: one-shot, no sticky (key={_sticky_key})")
+        else:
+            _NSFW_STICKY_BY_SCOPE[_sticky_key] = _now + _NSFW_STICKY_SECONDS
         _src = "deep_kw" if _hit_deep else "sticky"
         _chan = "private" if _is_private_chat else "group"
         if not _breakthrough_outcome:  # breakthrough 已单独 log 过, 不重复
