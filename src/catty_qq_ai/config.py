@@ -163,7 +163,7 @@ class Config(BaseModel):
     catty_local_critic_max_tokens: int | None = 16
     catty_local_critic_request_timeout: float | None = 4.0
     catty_local_critic_rewrite_when_score_below: int = 0
-    catty_local_critic_reply_gate_enabled: bool = True
+    catty_local_critic_reply_gate_enabled: bool = False  # 主人:指向猫猫的全交主 AI 自己判断
     catty_local_critic_reply_gate_min_confidence: int = 55
     catty_local_critic_reply_gate_examples: int = 0
     catty_local_critic_reply_gate_max_tokens: int | None = 16
