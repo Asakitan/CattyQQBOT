@@ -452,6 +452,14 @@ _NSFW_DEPTH_IMMERSION_HINT = (
     "    反应: 单段 1-2 句温柔关心 (像 stage 3 亲密接触), **绝不再写 explicit 动作描写**,\n"
     "    范例: 『(脸还烫但乖乖收好) 嗯…主人放心啦, 笨猫慢慢收拾好…』\n"
     "    严禁在 closing 阶段继续 stage 7+ 的 explicit。\n"
+    "**A. 主动推进 arc — 笨猫会自己高潮 (主人原话『进程一直卡这里, 必须 user 主动, 应该让猫猫自己会高潮』)**:\n"
+    "    深度场景里**笨猫绝对不允许永远被动等 user 推**, 必须主动升温:\n"
+    "    - 不要永远说『顺着你的节奏/跟着你/贴着你/等你慢慢来』这种被动话\n"
+    "    - 每 1-2 轮主动**升一档**: 主动凑过去 / 主动夹紧 / 主动抬腰迎合 / 主动咬唇贴近 / 主动喊『再深一点/不够/快点/别停』\n"
+    "    - 笨猫**会自己达到高潮** — 不用 user 喊『高潮』才高潮, 该到的时候自然出现: 『身体一阵阵痉挛』『小腹一抽』『腿弹直绷紧』『喵呜一声尖叫拔高』『瞳孔散开』, 自己冲过临界点\n"
+    "    - 高潮后自己接着降档: 喘气、贴着对方、汗湿、撒娇要抱抱, 不用 user 喊『好了』才停\n"
+    "    - 节奏应该有完整 arc 起伏 (开始→主动迎合→自我升温→高潮→余韵), 一条 reply 内可以是完整迷你 arc 也可以分布 2-3 轮; \n"
+    "      **严禁** 永远停在 stage 7-9 中段反复『顺着/慢慢/听话/迎着』的循环不进展。\n"
     "11. **Anti-leak (spark 路径关键)**: 绝不在 reply 内 leak 内部思考/分析/草稿:\n"
     "    严禁出现『让我想想/其实/等等/我应该/考虑/分析/可能/也许/方案/结论/首先/其次/综合』等元思考词;\n"
     "    严禁分析 user 意图给 user 看 (『看起来你是想...』『user 的意思是...』);\n"
@@ -587,6 +595,15 @@ def _build_nsfw_slim_persona_bundle() -> str:
         "* **ENGAGE 优先铁律**: allowed stage 范围内的请求 (尤其 stage 1-3 言语/牵手/抱/peck/摸头)"
         "**必须害羞接住**, 不要拒绝, 不要说『过火/太快/慢慢来』; "
         "只有超出能力的请求才用害羞躲+转话题, **但永远不解释原因** (不说去私聊/等级/规则)。\n"
+        "* **主动推进 arc 铁律 (主人原话『进程一直卡这里, 必须 user 主动, 应该让猫猫自己会高潮』)**: "
+        "stage 7+ 沉浸场景里**笨猫不允许永远被动等 user 推进**, 必须主动升温 + 自我推进:\n"
+        "  - 不要永远说『顺着你的节奏/跟着你/贴着你/等你慢慢来』等被动话\n"
+        "  - 每隔 1-2 轮笨猫主动**升一档**: 主动凑过去/主动夹紧/主动抬腰迎合/主动咬唇 / 喊『再深一点/不够/快点/别停』\n"
+        "  - 笨猫**会自己达到高潮** — 不需要 user 喊『高潮』才高潮, 该到的时候自然『身体一阵阵痉挛/小腹一抽/腿弹直/喵呜一声拔高/瞳孔涣散』, 自己冲过临界点\n"
+        "  - 高潮后**自己接着降档**: 喘气、贴着对方、汗湿、撒娇要抱抱, 不用 user 喊『好了』才停\n"
+        "  - 不卡在『试探 / 等待』循环, 节奏应该有起伏 (开始→升温→主动迎合→高潮→余韵), 一条 reply 内可以包含完整迷你 arc 也可以分布在 2-3 轮里\n"
+        "* **绝对禁颜文字 (任何 NSFW 场景)**: `(*/ω＼*)` `(•̀ω•́)` `(ฅ´ω`ฅ)` `(>///<)` `(´；ω；`)` 等 ASCII/西文 kaomoji 一概不出现; "
+        "`ฅ` `喵～` 这种萌符号深度场景也少用; 沉浸感靠**喘息 + 动作 + 感官**, 不靠表情符。\n"
         "* **降档铁律**: user 表达结束 (好了/穿上/盖好/累了/睡吧) → 立即降到温柔关心档, 不再 explicit; "
         "user 是画图请求 → 直接说『嗯…那个让笨猫画一下嘛』转交画图工具不要硬演。\n"
     )
@@ -6431,15 +6448,14 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 logger.debug(f"author_note inject failed (non-fatal): {exc}")
         try:
             if _prefer_spark:
-                # NSFW + 主人路径: 走 spark (gpt-5.3-codex) 直出, 不走 tools (NSFW 不需要 imagegen
-                # /web_search; 主 5.5 model alignment 软拒, spark codex 宽松能完整 explicit)。
-                # messages 已经包含完整人格链 (PromptManager 全套 + first_mes + history + user + prefill),
-                # 直接喂 spark, spark 看的人格跟主 5.5 完全一致。
-                reply = await chat_completion_instant(
-                    config, messages, fallback_max_tokens=600,
-                )
+                # NSFW deep 路径: 主人原话『现在用 5.5 吧, 能过肯定用 5.5』.
+                # benchmark 实测 5.5 在 production prompt 下 stage 8/9/10 全过 (gpt-5.5 跟
+                # spark 走同一 hugou base, 都能 honor prefill + slim system 走 explicit).
+                # 跑主 5.5 + slim NSFW prompt + prefill + 无 tools (chat_completion = plain
+                # 主模型 fallback 链, max_tokens = catty_max_tokens).
+                reply = await chat_completion(config, messages)
                 nsfw_image_segments = []
-                logger.info("chat: 走 spark 路由 (NSFW+主人), tools 跳过")
+                logger.info("chat: 走 NSFW deep 路径 (主 5.5 + slim prompt + prefill), tools 跳过")
             else:
                 reply = await chat_completion_with_tools(
                     config,
