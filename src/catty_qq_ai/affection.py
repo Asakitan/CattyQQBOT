@@ -42,7 +42,7 @@ _LEVEL_CUMULATIVE_EXP: list[int] = [0]
 for _c in _LEVEL_UP_COSTS:
     _LEVEL_CUMULATIVE_EXP.append(_LEVEL_CUMULATIVE_EXP[-1] + _c)
 MAX_LEVEL_EXP: int = _LEVEL_CUMULATIVE_EXP[LEVEL_CAP - 1]  # 到达 Lv10 所需累计 exp
-DAILY_EXP_CAP = 100  # 每天单用户最多累积 100 好感度,防刷屏
+DAILY_EXP_CAP = 0  # 0 = 不限,主人要求"每天好感度没有上限";> 0 才启用单日 cap
 
 CHECKIN_BASE_MIN = 200
 CHECKIN_BASE_MAX = 300
@@ -330,15 +330,19 @@ class AffectionStore:
                 if str(rec.get("daily_exp_date") or "") != today:
                     rec["daily_exp_date"] = today
                     rec["daily_exp_count"] = 0
-                daily = int(rec.get("daily_exp_count") or 0)
-                room = max(DAILY_EXP_CAP - daily, 0)
-                if room <= 0:
-                    return {
-                        "added": 0, "exp": old_exp, "level": old_level,
-                        "level_up": False, "capped": True,
-                    }
-                actual = min(amount, room)
-                rec["daily_exp_count"] = daily + actual
+                if DAILY_EXP_CAP > 0:
+                    daily = int(rec.get("daily_exp_count") or 0)
+                    room = max(DAILY_EXP_CAP - daily, 0)
+                    if room <= 0:
+                        return {
+                            "added": 0, "exp": old_exp, "level": old_level,
+                            "level_up": False, "capped": True,
+                        }
+                    actual = min(amount, room)
+                    rec["daily_exp_count"] = daily + actual
+                else:
+                    actual = amount
+                    rec["daily_exp_count"] = int(rec.get("daily_exp_count") or 0) + actual
             else:
                 # 扣分: clamp to >= 0, 不动 daily_exp_count
                 actual = max(amount, -old_exp)

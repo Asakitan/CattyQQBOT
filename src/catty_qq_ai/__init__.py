@@ -4311,36 +4311,22 @@ async def _affection_command_rule(bot: Bot, event: MessageEvent, state: T_State)
 
     必须指向猫猫(@/引用/触发前缀/直呼"猫猫"等)才触发,避免群里有人随口
     发"签到"被命中(他可能在别的 bot 那签到,跟猫猫没关系)。私聊默认指向猫猫。
+
+    完全匹配优先:直接用 _is_signin_request / _is_points_query_request(它们内部
+    已经做 _compact_text 标准化 + 集合精确匹配 + 短文本弱匹配),不命中直接 return,
+    省掉每条群消息的 _reply_targets_self → bot.get_msg API 调用。
     """
     if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
         return False
     text = event_plain_text(event)
     if not text:
         return False
-    cmd: str = ""
-    if _is_signin_request(text):
-        cmd = "signin"
-    elif _is_points_query_request(text):
-        cmd = "points"
-    else:
-        # 文本可能形如 "猫猫 签到" / "笨猫，我的积分"——先用 extract_incoming_message
-        # 把前缀/@ 剥掉再判定一次,顺便确认 directly_requested。
-        replied_to_self = await _reply_targets_self(bot, event)
-        incoming = extract_incoming_message(
-            str(bot.self_id), event, config, replied_to_self=replied_to_self
-        )
-        if incoming is None or not incoming.directly_requested:
-            return False
-        stripped = incoming.text.strip()
-        if _is_signin_request(stripped):
-            cmd = "signin"
-        elif _is_points_query_request(stripped):
-            cmd = "points"
-        else:
-            return False
-        state["catty_affection_cmd"] = cmd
-        return True
-    # 第一轮命中了完整短语,但仍要确认是指向猫猫的
+    is_signin = _is_signin_request(text)
+    is_query = _is_points_query_request(text) if not is_signin else False
+    if not (is_signin or is_query):
+        return False
+    cmd = "signin" if is_signin else "points"
+    # 命中关键字后仍要确认指向猫猫(防群友跟别的 bot 签到误命中)
     replied_to_self = await _reply_targets_self(bot, event)
     incoming = extract_incoming_message(
         str(bot.self_id), event, config, replied_to_self=replied_to_self
