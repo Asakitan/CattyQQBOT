@@ -3604,8 +3604,10 @@ async def _build_messages(
         # 全部不放进 spark 上下文, 避免模型链式分析 + 元术语 leak。
         # history 过滤掉 assistant 软拒回复, 防 spark continue 之前的拒绝 pattern。
         # 主人 logs (2026-05-26 17:40-18:00) 显示 12 条截断太短 — 14 轮对话被砍,
-        # 笨猫每 1-2 轮就换场景从头开始. 扩到 50 条 (~25 轮, 主人原话『history 更多一点』).
-        _NSFW_SLIM_HISTORY_MAX = 50  # ~25 轮 (从 24→50, 主人要求更多 context 延续场景)
+        # 笨猫每 1-2 轮就换场景从头开始. 扩到 24 条后 msgs=25 触发 hugou.cc 上游
+        # ConnectTimeout (20:35-20:44 logs 全 timeout) — total prompt 撑到 16000+ tokens
+        # 上游 5.3-codex-spark 处理不动. 砍回 20 条 (~10 轮) 平衡场景延续 + 上游稳定.
+        _NSFW_SLIM_HISTORY_MAX = 20  # ~10 轮 (50 过大导致 ConnectTimeout, 砍回 20)
         _slim_persona = _build_nsfw_slim_persona_bundle()
         # 【cache 友好结构】把大块 _override (~3000 chars, 对主人静态) 移到 persona 后, 让
         # [persona + override] (~5000 chars / ~2500 tokens) 成为稳定 prefix 每轮 cache hit.
