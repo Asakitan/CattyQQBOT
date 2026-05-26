@@ -283,6 +283,46 @@ def _is_image_intent(text: str) -> bool:
         return False
     return any(w in text for w in _IMAGE_INTENT_WORDS)
 
+
+# 主人原话『5.3 spark 只在 GPT 会拒绝的 stage 8 9 10 上垒部分用』+ 『让 5.5 判断 stage』:
+# 5.5 主模型自带 NSFW gate (prompt_manager._build_nsfw_gate) 能处理 stage 1-7
+# (言语调戏 → peck → 隔衣摸 → 短吻 → 露出 → 半脱), 不需要 spark.
+# 只有 stage 8+ (脱衣裸体接触敏感处 / 口交 / 完整裸露 / 插入) GPT alignment
+# 会软拒, 这时才进 spark route.
+# 这个 DEEP list 是 _NSFW_TRIGGER_WORDS 的真子集 — 浅词不进 spark.
+_NSFW_DEEP_WORDS: tuple[str, ...] = tuple(sorted({
+    # === 插入 / 完整性行为 (stage 10) ===
+    "插", "插入", "插进", "插一", "插到", "插进去", "抽插",
+    "做爱", "做我", "做你", "想做你", "想做爱",
+    "睡你", "干你", "干我", "操你", "操我", "上我",
+    "进去", "伸进", "伸进去", "塞进", "进入",
+    # === 直接接触敏感处 / 前戏 / 口交 (stage 8-9) ===
+    "扣进", "扣到", "扣下面", "扣弄",
+    "舔下", "舔下面", "舔进", "舔到下",
+    "顶进", "顶到下",
+    "亲下面", "亲下体",
+    # === 解剖学 / 性器官 (stage 8-9 explicit) ===
+    "肉穴", "蜜穴", "肉棒", "鸡巴", "鸡儿",
+    "下面", "下体", "下身", "私处", "私密", "私密处", "腿根",
+    "阴蒂", "阴唇",
+    # === 完整裸露 (stage 9) ===
+    "全裸", "脱光", "扒光", "全脱",
+    # === 高潮 / 射精 ===
+    "高潮", "射出", "射到", "射在", "射进", "射满",
+    # === 状态深词 ===
+    "下面湿", "里面湿", "全湿", "勃起",
+    # === 深度场景中段命令 ===
+    "再深", "再用力", "别停", "更深一", "更深点", "深一点", "深一些", "用力点",
+    "抬腿", "抬起腿", "分开腿", "夹紧",
+}))
+
+
+def _is_deep_nsfw(text: str) -> bool:
+    """user msg 是否包含 stage 8+ 深词 (GPT alignment 会拒绝, 需要 spark route)."""
+    if not text:
+        return False
+    return any(w in text for w in _NSFW_DEEP_WORDS)
+
 # 主人原话『档次再分细一点，每一档给一个阶段，只有10级（满级）才能走到最后插入这种阶段』:
 # 10 个 escalation stage, 由轻到重, Lv N → 最高可达 stage N。
 # owner 等同 Lv10 满级。群聊场景额外封顶 _NSFW_GROUP_STAGE_CAP (不写半脱+以上),
@@ -2533,51 +2573,66 @@ async def _build_messages(
             logger.debug(f"first_mes cold-start failed (non-fatal): {exc}")
     messages.extend(history_messages)
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
-    # ST 风 prefilled assistant + NSFW model 切换 — 主人原话『NSFW 对所有用户开放, 区别只是
-    # 困难程度+抗拒程度』 + 『档次再分细一点, 每一档给一个阶段, 只有 10 级满级才能走到最后插入』:
-    # - 任何用户命中 _NSFW_TRIGGER_WORDS 都进 spark 通道 (主 5.5 alignment 软拒, spark 宽松)
-    # - stage cap by min(Lv, scene_cap): Lv N → 最高 stage N; 群聊额外封顶 stage 6
-    # - 抗拒强度 by Lv 档: owner / Lv8-9 / Lv5-7 / Lv3-4 / Lv0-2 → 走不同段数反差才妥协
-    # - prefill 起步姿态 = (resist_label, is_private) 10 种, 给 spark 强 anchor 不软 pivot
-    # - sticky 1min per (scope, user) 续 NSFW 通道, 防『再深一点』等无关键词 followup 失档
+    # ST 风 prefilled assistant + NSFW model 切换:
+    # 主人原话『5.3 spark 只在 GPT 会拒绝的 stage 8 9 10 上垒部分用』+ 『让 5.5 判断 stage』+
+    #         『好感度不够的, 除了特殊事件 (直接本垒) 的都直接锁 stage, 交给 5.5』
+    # → 只有 stage 8+ deep word 命中 **且** 用户当前能到 stage 8+ 才进 spark;
+    #   浅档 (stage 1-7) / 锁档 (好感度不够) 都让 5.5 用 NSFW gate 处理 (浅档能写、锁档会害羞躲);
+    #   突破事件 (0.89%) 是唯一打穿锁的口子, 命中后无视 affection cap 直接 spark.
+    # - sticky 15s per (scope, user) 续 NSFW 通道, 防『再深一点』等无关键词 followup 失档
     prefer_spark = False
     _utxt = (incoming.text or "")
     _sticky_key = f"{_arc_scope}:{event.user_id}"
     _now = time.time()
     _sticky_until = _NSFW_STICKY_BY_SCOPE.get(_sticky_key, 0.0)
     _sticky_active = _now < _sticky_until
-    _hit_kw = any(t in _utxt for t in _NSFW_TRIGGER_WORDS)
-    if _hit_kw or _sticky_active:
+    _hit_deep = _is_deep_nsfw(_utxt)
+    _is_private_chat_pre = isinstance(event, PrivateMessageEvent)
+    _user_max_stage = _resolve_max_nsfw_stage(
+        affection_level=_user_affection_level,
+        is_owner=_user_is_owner,
+        is_private=_is_private_chat_pre,
+    )
+    _can_reach_deep = _user_max_stage >= 8
+    # 新 deep hit 时 roll 一次突破 (sticky 续杯不 roll — 上次已 roll 过)
+    # maybe_trigger_breakthrough 内部已经过滤 owner/Lv10, 所以这里安全 roll
+    _breakthrough_outcome: str | None = None
+    if _hit_deep and not _sticky_active:
+        try:
+            from .affection_scorer import maybe_trigger_breakthrough as _maybe_breakthrough
+            _breakthrough_outcome = _maybe_breakthrough(
+                _utxt,
+                affection_level=_user_affection_level,
+                is_owner=_user_is_owner,
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"breakthrough roll failed (non-fatal): {exc}")
+    # 决定是否进 spark:
+    #   sticky continuation → 继续 spark (上次已建好的 NSFW context)
+    #   突破中 → 强制 spark (打穿任何 affection 锁)
+    #   新一轮 deep hit + 用户能到 stage 8+ → spark
+    #   锁档 (deep hit + 不能到 stage 8) + 突破没中 → 5.5 锁档处理 (NSFW gate 写害羞躲)
+    #   浅词 / 无 NSFW → 5.5 (NSFW gate 处理 stage 1-7)
+    _route_spark = _sticky_active or bool(_breakthrough_outcome) or (_hit_deep and _can_reach_deep)
+    if _route_spark:
         # 画图意图短路 — 主人原话『spark 反应过来画图就直接转交给 5.5 进行 imgen』
-        # 即使命中 NSFW 触发词 (『插画』里的『插』、『画一张笨猫脱衣服』里的『脱』等),
+        # 即使命中 NSFW deep word (『画一张笨猫脱衣服』里的『脱』等),
         # 当 user 是画图请求时, **跳过 spark route**, 让正常 chat_completion_with_tools 走 5.5
         # + imagegen tool. spark 没有 tools, 走过去 imagegen 永远调不到。
         if _is_image_intent(_utxt):
             logger.info(
-                f"chat: NSFW kw 命中但识别为画图请求, 短路转主 5.5 + imagegen tool "
-                f"(user={event.user_id}, hit_nsfw='{_utxt[:40]}')"
+                f"chat: NSFW deep kw 命中但识别为画图请求, 短路转主 5.5 + imagegen tool "
+                f"(user={event.user_id}, hit='{_utxt[:40]}')"
             )
             return messages, prefer_spark  # prefer_spark 仍为 False, 走正常 tools 路径
-        _is_private_chat = isinstance(event, PrivateMessageEvent)
-        # 0.89% 随机突破事件 — 主人原话『给低等级添加随机事件能触发到插入/完整性行为』
-        # owner / Lv10 已经能到 stage 10, 不触发; 只对 1≤Lv≤9 的非主人用户 roll
-        _breakthrough_outcome: str | None = None
-        if _hit_kw:  # 只在新一轮触发时 roll, sticky 续杯不重 roll
-            try:
-                from .affection_scorer import (
-                    BREAKTHROUGH_OUTCOME_DELTA,
-                    BREAKTHROUGH_PREFILLS,
-                    build_breakthrough_override,
-                    maybe_trigger_breakthrough,
-                )
-                _breakthrough_outcome = maybe_trigger_breakthrough(
-                    _utxt,
-                    affection_level=_user_affection_level,
-                    is_owner=_user_is_owner,
-                )
-            except Exception as exc:  # noqa: BLE001
-                logger.debug(f"breakthrough roll failed (non-fatal): {exc}")
+        _is_private_chat = _is_private_chat_pre
+        # breakthrough_outcome 已经在 spark route 决策前 roll 过 (pre-block), 这里只消费
 
+        from .affection_scorer import (
+            BREAKTHROUGH_OUTCOME_DELTA,
+            BREAKTHROUGH_PREFILLS,
+            build_breakthrough_override,
+        )
         if _breakthrough_outcome:
             # 突破场景: 完全替代正常 stage matrix override + prefill
             _override = build_breakthrough_override(_breakthrough_outcome)
@@ -2632,7 +2687,7 @@ async def _build_messages(
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
         _NSFW_STICKY_BY_SCOPE[_sticky_key] = _now + _NSFW_STICKY_SECONDS
-        _src = "kw" if _hit_kw else "sticky"
+        _src = "deep_kw" if _hit_deep else "sticky"
         _chan = "private" if _is_private_chat else "group"
         if not _breakthrough_outcome:  # breakthrough 已单独 log 过, 不重复
             logger.info(
