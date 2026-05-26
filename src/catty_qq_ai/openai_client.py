@@ -979,6 +979,40 @@ async def chat_completion_instant(config: Config, messages: list[ChatMessage], *
     return await _filter_completion(config, messages, fallback_max_tokens=fallback_max_tokens)
 
 
+async def chat_completion_nsfw_spark(config: Config, messages: list[ChatMessage], *, max_tokens: int = 800) -> str:
+    """NSFW deep 路径专用 — 走 catty_nsfw_spark_model (默认 gpt-5.3-codex).
+
+    主人原话『nsfw 8 9 10 阶段换 5.3-codex』 — benchmark 实测 5.5 在真 production
+    prompt 下软拒『太露骨/不能继续』, 5.3-codex 24/24 通过 stage 8/9/10.
+
+    走 catty_filter_base_url + catty_filter_api_key (跟 spark 同 host), 但 model 单独配,
+    跟 _filter_completion 的 catty_filter_model (mood classifier 等用) 解耦.
+    """
+    nsfw_model = (config.catty_nsfw_spark_model or "").strip() or config.catty_filter_model
+    base_url = (
+        config.catty_filter_base_url
+        or config.catty_audit_ai_base_url
+        or config.catty_openai_base_url
+    )
+    api_key = (
+        config.catty_filter_api_key
+        or config.catty_audit_ai_api_key
+        or config.catty_openai_api_key
+    )
+    return await _post_chat_completion(
+        base_url=base_url,
+        api_key=api_key,
+        model=nsfw_model,
+        messages=messages,
+        timeout=config.catty_request_timeout,
+        proxy=config.catty_http_proxy,
+        temperature=config.catty_temperature,
+        max_tokens=max_tokens,
+        extra_headers=config.catty_filter_extra_headers or config.catty_openai_extra_headers,
+        extra_body=config.catty_filter_extra_body or config.catty_openai_extra_body,
+    )
+
+
 async def _filter_completion(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 64) -> str:
     use_filter_route = bool(config.catty_filter_model.strip())
     base_url = (

@@ -55,6 +55,7 @@ from .emoji_store import EmojiEntry, EmojiStore
 from .legs_picker import LegsPicker, is_legs_trigger, random_legs_reply
 from .memory import MemoryStore
 from .openai_client import (
+    chat_completion_nsfw_spark,
     MCBusyError,
     OpenAICompatibleError,
     analyze_images_for_reply,
@@ -6503,14 +6504,18 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 logger.debug(f"author_note inject failed (non-fatal): {exc}")
         try:
             if _prefer_spark:
-                # NSFW deep 路径: 主人原话『现在用 5.5 吧, 能过肯定用 5.5』.
-                # benchmark 实测 5.5 在 production prompt 下 stage 8/9/10 全过 (gpt-5.5 跟
-                # spark 走同一 hugou base, 都能 honor prefill + slim system 走 explicit).
-                # 跑主 5.5 + slim NSFW prompt + prefill + 无 tools (chat_completion = plain
-                # 主模型 fallback 链, max_tokens = catty_max_tokens).
-                reply = await chat_completion(config, messages)
+                # NSFW deep 路径: 主人原话『5.5 还是不行啊, 换 5.3-codex 吧, nsfw 8 9 10 阶段』.
+                # 实测: 5.5 在真 production prompt 下仍软拒『太露骨/不能继续写』(截图验证),
+                # 即使加了 8-phase + 主动推进 arc + 全套禁拒词规则也顶不住 alignment.
+                # 5.3-codex (不带 -spark) benchmark 24/24 全过 stage 8/9/10.
+                # 走 catty_nsfw_spark_model (默认 gpt-5.3-codex, filter base + filter key),
+                # 跟 catty_filter_model (mood classifier 等用) 解耦.
+                reply = await chat_completion_nsfw_spark(config, messages, max_tokens=800)
                 nsfw_image_segments = []
-                logger.info("chat: 走 NSFW deep 路径 (主 5.5 + slim prompt + prefill), tools 跳过")
+                logger.info(
+                    f"chat: 走 NSFW deep 路径 (model={config.catty_nsfw_spark_model or config.catty_filter_model}), "
+                    f"tools 跳过"
+                )
             else:
                 reply = await chat_completion_with_tools(
                     config,

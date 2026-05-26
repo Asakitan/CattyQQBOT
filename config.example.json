@@ -75,6 +75,7 @@
     "base_url": "",
     "api_key": "",
     "model": "",
+    "nsfw_spark_model": "",
     "extra_headers": {},
     "extra_body": {},
     "temperature": 0,

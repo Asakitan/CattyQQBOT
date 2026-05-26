@@ -112,6 +112,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "base_url": "",
         "api_key": "",
         "model": "",
+        "nsfw_spark_model": "",
         "extra_headers": {},
         "extra_body": {},
         "temperature": 0,
@@ -542,6 +543,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FILTER_BASE_URL", filter_config.get("base_url"))
     _set_env("CATTY_FILTER_API_KEY", filter_config.get("api_key"))
     _set_env("CATTY_FILTER_MODEL", filter_config.get("model"))
+    # NSFW deep 路径专用 model (默认 gpt-5.3-codex, 跟 filter 同 base/key 但 model 单独配)
+    _set_env("CATTY_NSFW_SPARK_MODEL", filter_config.get("nsfw_spark_model"))
     _set_env("CATTY_FILTER_EXTRA_HEADERS", filter_config.get("extra_headers"), json_value=True)
     _set_env("CATTY_FILTER_EXTRA_BODY", filter_config.get("extra_body"), json_value=True)
     _set_env("CATTY_FILTER_TEMPERATURE", filter_config.get("temperature"))
