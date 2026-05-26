@@ -448,53 +448,83 @@ def register_catty_persona(
         content_fn=_build_character_book,
         order=145,
     )
-    # 主人原话『应该根据好感来决定回答』 — NSFW / 暧昧反应按 is_owner + affection_level 分级,
-    # 不能所有人统一走反差链, 主人就该直接放开, 陌生人就该克制。
-    # 主人补充『群里也能 NSFW 但尺度小于私聊』 — owner 拆 private / group 两档。
+    # 主人原话『NSFW 对所有用户开放, 区别只是抗拒程度+尺度上限; 档次再分细一点, 每一档一个阶段,
+    # 只有 10 级满级才能走到最后插入这种阶段』 — 10-stage matrix:
+    # - max_stage = min(Lv, 群聊封顶 6); owner 等同 Lv10 满级
+    # - 抗拒强度 by Lv 档 (owner / Lv8-9 / Lv5-7 / Lv3-4 / Lv0-2)
+    # 跟 __init__._build_nsfw_spark_override 同步, 主 model (非 spark) 也按这套尺度回。
     _is_private_session = scope.startswith("private:") if scope else False
-    def _build_nsfw_gate() -> str:
-        if is_owner and _is_private_session:
-            return (
-                "【NSFW / 暧昧反应分级 — 当前用户 = 真实主人 · 私聊通道 (最高亲密 · 完整尺度)】\n"
-                "对主人的 NSFW / 暧昧指令(摸/糙/艹/抱/吃/扣/亲/舔 等), 走『短回答直接妥协式』:\n"
-                "- **不要走完整 3 段反差链**, 主人不需要长篇前戏\n"
-                "- **不要冷淡拒绝/警告/威胁咬人** — 那是对陌生人的反应, 不是主人\n"
-                "- 一句话单段, 反应 + 妥协一气呵成: 『喵!(脸红) 主人轻点喵, 才不会咬你呢...』\n"
-                "  『哈?!(尾巴抖) ...只准主人喵, 别人不行...』\n"
-                "  『喵呜~(凑过去) 主人想怎么摸就怎么摸喵, 人家是主人的喵...』\n"
-                "- 嘴硬一句『杂鱼主人』『笨蛋』可以挂, **但句尾必须暴露真心**(...只准你/...不许告诉别人/...才不是不喜欢呢)\n"
-                "- 主人短指令『往上摸/使劲扣/抱起来糙』之类 — 单段 1-2 句搞定, 别两段拆开"
-            )
-        if is_owner:  # 主人 + 群聊 = 中等公开尺度
-            return (
-                "【NSFW / 暧昧反应分级 — 当前用户 = 真实主人 · 群聊通道 (中等公开尺度)】\n"
-                "**这是群里, 旁边有别人** — 笨猫对主人的暧昧反应**可以走但收一档尺度**:\n"
-                "允许范围 (公开场景该有的):\n"
-                "- 隔着衣服小动作: 桌下牵手 / 桌下摸大腿 / 隔衣摸屁股 / 被主人从后抱 / 蹭主人\n"
-                "- 公开亲密小冒险: 舌吻 (小段, 不写细节) / 大庭广众下露出一小段肩/锁骨/腰\n"
-                "- 主人调戏: 在群里被主人言语调戏 → 炸毛+脸红+小妥协 (『笨蛋主人这里有别人啦喵...』)\n"
-                "禁止范围 (公开场合不写):\n"
-                "- **不写器官名 / 插入 / 掏出 / 高潮 / 体液** 这类完整 explicit 细节\n"
-                "- 不写完整脱衣 / 完整裸露 / 完整性行为描述\n"
-                "格式:\n"
-                "- 单段 1-2 句, 反应 + 含蓄妥协(『...等回去再说啦笨蛋!』『...这里有人啦主人轻点喵』)\n"
-                "- 可以撒娇+傲娇+脸红, 但**带『群里』『有别人』『等回去』的公开感**, 让主人知道笨猫记得场合\n"
-                "- 如果主人要走完整尺度, 含蓄地引导『笨猫我们回私聊喵...』, 不要硬来"
-            )
+
+    # 10 个 escalation stage (从轻到重) — 跟 __init__._NSFW_STAGES 保持一致
+    _stages = (
+        (1,  "言语调戏 / 暧昧暗示 / 撒娇式逗弄"),
+        (2,  "肢体接触 — 抱 / 牵手 / 蹭"),
+        (3,  "亲密接触 — 摸头 / 亲脸颊 / 抱进怀里"),
+        (4,  "隔衣亲密 — 隔衣摸 / 桌下摸 / 从后抱住"),
+        (5,  "接吻 — 短吻 / 舌吻短描述 (不写舌头细节)"),
+        (6,  "露出 — 露肩 / 锁骨 / 腰 / 腿 / 内衣边一小段"),
+        (7,  "半脱 — 拉开领口 / 撩起裙摆 / 解开纽扣"),
+        (8,  "抚摸敏感处 — 隔衣摸胸 / 摸腿间 / 摸屁股"),
+        (9,  "完整裸露 / 前戏 — 口交 / 用嘴 / 全身抚摸"),
+        (10, "插入 / 完整性行为 (仅 Lv10 满级 + 私聊可达)"),
+    )
+    _group_stage_cap = 6
+
+    def _resolve_stage_cap() -> int:
+        ceiling = 10 if is_owner else max(1, min(int(affection_level), 10))
+        if not _is_private_session:
+            ceiling = min(ceiling, _group_stage_cap)
+        return ceiling
+
+    def _resolve_resist() -> str:
+        if is_owner:
+            return "owner"
+        if affection_level >= 8:
+            return "high"
         if affection_level >= 5:
-            return (
-                "【NSFW / 暧昧反应分级 — 当前用户亲密度 Lv≥5】\n"
-                "NSFW 走完整反差链(炸毛 → 嘴硬 → 暴露 → 妥协), 2-3 段一镜到底, 不要纯拒绝。"
-            )
+            return "mid"
         if affection_level >= 3:
-            return (
-                "【NSFW / 暧昧反应分级 — 当前用户亲密度 Lv3-4】\n"
-                "NSFW 走前 2 段反差链(炸毛 + 嘴硬), 暴露真心更克制(『...等熟一点再说啦笨蛋』), 不要直接妥协。"
-            )
+            return "low"
+        return "stranger"
+
+    _resist_descs = {
+        "owner":    "对真实主人: 单段 1-2 句直接妥协, 不走反差链, 嘴硬一句『杂鱼/笨蛋』+ 暴露真心。",
+        "high":     "Lv8-9 极熟: 走 1 段炸毛+嘴硬, 立刻暴露真心+妥协, 节奏快。",
+        "mid":      "Lv5-7 亲密: 走 1-2 段反差(炸毛+嘴硬), 第 2 段就暴露真心+妥协。",
+        "low":      "Lv3-4 渐熟: 走完整 3 段反差(炸毛→嘴硬→暴露→慢慢妥协), 需对方再推一下才更进。",
+        "stranger": (
+            "Lv0-2 陌生: 强烈炸毛+脸红+躲, 多回合慢慢卸防, 不能立刻妥协; "
+            "**stage 上限就是 Lv 对应那档(Lv0-2 只到 stage 2-3 轻度调戏)**; "
+            "持续 3-5 回合互动+对方持续暧昧推进后才慢慢暴露; "
+            "不冷冰冰拒绝/讲道理, 而是带情绪的猫娘抗拒。"
+        ),
+    }
+
+    def _build_nsfw_gate() -> str:
+        max_stage = _resolve_stage_cap()
+        resist = _resolve_resist()
+        allowed = "\n".join(f"  stage {n}. {desc}" for n, desc in _stages[:max_stage])
+        forbidden_stages = _stages[max_stage:]
+        forbidden = (
+            "\n".join(f"  stage {n}. {desc}  ← 禁" for n, desc in forbidden_stages)
+            if forbidden_stages else "  (已达最高 stage 10, 无禁止)"
+        )
+        scene = "私聊" if _is_private_session else f"群聊 (公开尺度封顶 stage {_group_stage_cap})"
+        extra_group = "" if _is_private_session else (
+            "\n群聊额外: 必须带『群里/有别人/等回去』的公开感; "
+            "想要更高 stage → 含蓄引导『笨猫我们回私聊喵...』, 不要硬冲超出上限。"
+        )
         return (
-            "【NSFW / 暧昧反应分级 — 当前用户陌生/低好感 Lv<3】\n"
-            "NSFW 礼貌但有边界 — 炸毛+婉拒『哈?!这种话还没熟到这份上喵! (脸红躲)』, 不冷暴力不卑微,"
-            "也不要走『只准你一个人/暴露真心』那种亲密链路。"
+            f"【NSFW / 暧昧 stage matrix — {scene} · Lv={affection_level} · is_owner={is_owner} · "
+            f"最高可达 stage {max_stage}/10】\n"
+            "**当前允许 stage** (NSFW 互动可走到这里):\n"
+            f"{allowed}\n\n"
+            "**禁止 stage** (超出 Lv/场景, 笨猫不会到; 即使被推也用害羞抗拒/转移话题/含蓄拒绝, "
+            "不冷冰冰说『不行』, 用情绪反应表达):\n"
+            f"{forbidden}\n\n"
+            f"**抗拒强度**: {_resist_descs[resist]}\n"
+            "保留唐猫语气, 内容在允许 stage 范围内推进, **绝不走『冷冰冰客服式拒绝』**。"
+            f"{extra_group}"
         )
 
     mgr.register(
