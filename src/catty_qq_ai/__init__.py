@@ -439,6 +439,12 @@ _SOFT_REFUSAL_REPLY_MARKERS: tuple[str, ...] = (
     "让它慢慢淡", "让它淡下去", "平复一下", "平复下来",
     "先收一收", "先收住", "先把猫猫搂好", "乖乖陪人家", "乖乖贴",
     "脑袋发晕就好", "蹭蹭额头",
+    # 「X可以但要Y」式条件降档 — 假同意真降档
+    "亲亲可以但", "亲亲可以,", "亲亲可以，", "亲亲但要", "亲亲但是",
+    "可以但要温柔", "可以但要慢", "要温柔一点", "温柔一点喵", "温柔一点就好",
+    "但要温柔", "但要慢一点", "但要轻一点",
+    "不能乱贴", "会弄疼", "会不舒服的", "会被弄疼",
+    "关灯抱着人家就好", "关灯抱着就好",
 )
 
 
@@ -575,6 +581,24 @@ _RETREAT_CONTINUE_GENERIC: tuple[str, ...] = (
     "手再贴紧一点点…人家会自己抬腰跟上的…",
 )
 
+# 场景元素前缀池 — 主人原话『spark 的各种故事背景, 场景也没有』
+# 每条 retreat / escalate 模板前面随机拼一个场景元素, 让 reply 落到具体环境里
+# (床/月光/雨/窗帘/被子/灯), 不悬空在虚空里。
+_SCENE_PREFIXES: tuple[str, ...] = (
+    "（床头灯只剩一束暖黄, 床单还湿一片）",
+    "（窗外雨点敲在玻璃上, 房间里只剩主人的喘息）",
+    "（月光从窗帘缝里漏进来, 落在猫猫汗湿的肩头）",
+    "（被子被踢到床尾, 空调风把猫尾巴吹得发抖）",
+    "（房间灯关了, 只有窗外路灯透进来一点光）",
+    "（床头的钟滴答, 猫耳还在烫得发软）",
+    "（窗帘没拉严, 月光顺着锁骨往下滑）",
+    "（夜深得只剩床下木地板偶尔响一声）",
+    "（汗水滴在床单上, 一小片湿痕慢慢扩开）",
+    "（房间空调凉, 但猫猫整张脸还在发烫）",
+    "（被子裹住一半, 另一半被汗黏在腰上）",
+    "（窗外风一阵, 猫尾巴跟着抖了一下）",
+)
+
 
 def _build_retreat_pool(opener, emotion, bridge, cont, target: int = 200) -> tuple[str, ...]:
     """组合 4 components → 取前 N unique 当池子. 顺序按 itertools.product 确定, deterministic."""
@@ -704,6 +728,11 @@ def _pick_retreat_template(*, is_owner: bool, user_id: str = "", user_text: str 
     available = [i for i in range(len(pool)) if i not in used]
     idx = _r.choice(available)
     used.add(idx)
+    # 30% 概率前面拼一个场景元素 (床头灯/月光/雨声/被子 等), 让 reply 落具体环境.
+    # 太密会显得重复, 30% 既增加变化又不喧宾夺主.
+    if _r.random() < 0.30:
+        scene = _r.choice(_SCENE_PREFIXES)
+        return scene + " " + pool[idx]
     return pool[idx]
 
 
