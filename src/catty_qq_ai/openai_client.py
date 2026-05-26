@@ -324,6 +324,8 @@ async def _post_chat_completion(
     max_tokens: int | None,
     extra_headers: dict[str, str],
     extra_body: dict[str, Any],
+    enable_cache: bool = False,
+    cache_depth: int = 2,
 ) -> str:
     data = await _post_chat_completion_raw(
         base_url=base_url,
@@ -337,8 +339,36 @@ async def _post_chat_completion(
         extra_headers=extra_headers,
         extra_body=extra_body,
         tools=None,
+        enable_cache=enable_cache,
+        cache_depth=cache_depth,
     )
     return _extract_content(data)
+
+
+def _log_cache_stats(data: dict[str, Any], model: str) -> None:
+    """从 chat completion response 提取 cache hit 统计 + log.
+
+    Anthropic 字段: usage.cache_read_input_tokens / usage.cache_creation_input_tokens / usage.input_tokens
+    OpenAI 字段:    usage.prompt_tokens_details.cached_tokens / usage.prompt_tokens
+    """
+    usage = data.get("usage") or {}
+    # Anthropic 风格
+    cache_read = int(usage.get("cache_read_input_tokens") or 0)
+    cache_create = int(usage.get("cache_creation_input_tokens") or 0)
+    input_tokens = int(usage.get("input_tokens") or 0)
+    # OpenAI 风格 (兜底)
+    if not (cache_read or cache_create):
+        prompt_details = usage.get("prompt_tokens_details") or {}
+        cache_read = int(prompt_details.get("cached_tokens") or 0)
+        input_tokens = int(usage.get("prompt_tokens") or 0) - cache_read
+    total_input = cache_read + cache_create + input_tokens
+    if total_input <= 0:
+        return
+    hit_rate = cache_read / total_input
+    _logger.info(
+        f"cache stats model={model[:20]} read={cache_read} create={cache_create} "
+        f"new={input_tokens} hit={hit_rate:.0%}"
+    )
 
 
 async def _post_chat_completion_raw(
@@ -355,8 +385,17 @@ async def _post_chat_completion_raw(
     extra_body: dict[str, Any],
     tools: list[dict[str, Any]] | None = None,
     tool_choice: str = "auto",
+    enable_cache: bool = False,
+    cache_depth: int = 2,
 ) -> dict[str, Any]:
-    """返回完整 response JSON,供 function calling 链路读 tool_calls。"""
+    """返回完整 response JSON,供 function calling 链路读 tool_calls。
+
+    enable_cache: ST PR #3085 风 Anthropic Prompt Caching 注入 — 给 messages 末尾倒数
+        depth/depth+2 处 role 切换 + system 末尾打 cache_control: ephemeral breakpoint,
+        header 加 anthropic-beta: prompt-caching-2024-07-31. 仅 Claude/Anthropic 协议生效;
+        OpenAI native 是 implicit caching 不需要此参数.
+    cache_depth: 倒数第 N 处 role 切换打 breakpoint, ST 推荐 2.
+    """
     if not base_url.strip():
         raise OpenAICompatibleError("AI 接口地址为空。")
     if not model.strip():
@@ -367,6 +406,26 @@ async def _post_chat_completion_raw(
         "Content-Type": "application/json",
         **extra_headers,
     }
+    # === ST PR #3085 移植: cache_control 注入 (Anthropic Prompt Caching) ===
+    # 主人原话『prompt 也更聪明一点不要一直变不能 hit cache』.
+    # 调用方传 enable_cache=True 时, 给 messages 注入最多 3 个 message-level breakpoint
+    # (depth 和 depth+2 处 role 切换 + system 末尾) + 加 anthropic-beta header.
+    # OpenAI native 收到 cache_control 字段会忽略 (unknown field); Claude / 中间人走
+    # Claude 协议时才真正命中 cache.
+    if enable_cache:
+        from .prompt_cache import cachingAtDepthForClaude, inject_system_tail_cache, is_claude_endpoint
+        try:
+            # 深拷贝避免修改调用方 messages (会被多次注入污染)
+            import copy
+            messages = copy.deepcopy(messages)
+            cachingAtDepthForClaude(messages, cachingAtDepth=cache_depth)
+            inject_system_tail_cache(messages)
+            # 仅 Claude endpoint 加 anthropic-beta header (避免 OpenAI 报 unknown header)
+            if is_claude_endpoint(base_url, model):
+                headers["anthropic-beta"] = "prompt-caching-2024-07-31"
+        except Exception as exc:  # noqa: BLE001
+            _logger.warning(f"prompt cache 注入失败 (降级到无 cache): {exc}")
+
     payload: dict[str, Any] = {
         "model": model,
         "messages": messages,
@@ -391,11 +450,15 @@ async def _post_chat_completion_raw(
 
         if response.status_code < 400:
             try:
-                return response.json()
+                data = response.json()
             except ValueError as exc:
                 raise OpenAICompatibleError(
                     "AI 返回的不是 JSON。", response.text[:500],
                 ) from exc
+            # === cache hit 监测 (Anthropic / OpenAI 都会返回 usage.*_cached_tokens) ===
+            if enable_cache:
+                _log_cache_stats(data, model)
+            return data
 
         detail = response.text[:500]
         if not (500 <= response.status_code < 600):
@@ -741,6 +804,8 @@ async def chat_completion_with_tools(
                 extra_body=config.catty_openai_extra_body,
                 tools=tools,
                 tool_choice="auto",
+                enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
+                cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
             )
         except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
             _logger.warning(
@@ -1019,6 +1084,8 @@ async def chat_completion_codex_instant(
         max_tokens=max_tokens,
         extra_headers=config.catty_filter_extra_headers or config.catty_openai_extra_headers,
         extra_body=config.catty_filter_extra_body or config.catty_openai_extra_body,
+        enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
+        cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
     )
 
 

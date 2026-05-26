@@ -157,6 +157,14 @@ class Config(BaseModel):
     # 例: 主 model = gpt-5.5, fallback = gpt-5.3-codex-spark.
     catty_nsfw_fallback_model: str = ""
     catty_nsfw_softrefuse_threshold: int = 2
+    # Anthropic Prompt Caching (ST PR #3085 移植) — 显式注入 cache_control: ephemeral.
+    # OpenAI native 是 implicit caching 不需要; Claude / 中间人走 Claude 协议时需要显式标记.
+    # 启用后 spark + 主路径都注入 4 个 breakpoint (system tail + messages depth 2/4 + tools tail),
+    # log cache_read_input_tokens / cache_creation_input_tokens 监测命中率.
+    # 主人原话: prompt 也更聪明一点不要一直变不能 hit cache.
+    catty_prompt_cache_enabled: bool = False
+    # cache_control 注入的 depth (从 messages 末尾倒数第 N 处 role 切换). ST 默认 2.
+    catty_prompt_cache_depth: int = 2
     catty_filter_group_batch_messages: int = 200
     catty_filter_group_batch_seconds: float = 1200.0
     catty_filter_anger_enabled: bool = False  # 主人:每条群消息都喂 spark 判耐心太烧
