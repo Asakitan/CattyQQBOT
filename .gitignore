@@ -29,3 +29,4 @@ backup/
 pictures/
 AGENTS.md
 .vscode/
+.cache/
