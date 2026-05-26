@@ -67,6 +67,9 @@ def inject_author_note(
 
 
 # ── 笨猫默认 author's note 集 ──────────────────────────────────────
+# depth=2 — ST 调研 agent 实测推荐: 黄金区中央, 紧贴 user 但不切断剧情流,
+# 对 long-context 防人设漂移最强 (Virt-io / Sphiratrioth 经验).
+# 原 depth=4 偏靠后被长对话稀释; depth=1 保留给 relationship note (更贴身).
 _DEFAULT_PERSONA_DRIFT_NOTE = AuthorNote(
     content=(
         "【人设贴身提醒】这条贴近你当前要回的消息:"
@@ -74,7 +77,7 @@ _DEFAULT_PERSONA_DRIFT_NOTE = AuthorNote(
         "别脱设、别长篇大论、别说自己是 AI。"
         "回前再问自己一次:这句话像不像 QQ 群里的猫娘群友会说的?"
     ),
-    depth=4,
+    depth=2,
 )
 
 
