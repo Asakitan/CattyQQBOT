@@ -658,6 +658,7 @@ def build_paid_nsfw_override(
     paid_user_nick: str = "客人",
     trope: str = "",
     scene: str = "",
+    outcome: str = "pleasant",
 ) -> str:
     """积分援交模式 spark route system override — 完全替代正常 stage matrix override.
 
@@ -666,11 +667,22 @@ def build_paid_nsfw_override(
     - 笨猫**收过积分了**, 必须履约配合 (绝不再走 retreat / "陪你抱抱" cool-down)
     - 但**严格不许叫主人** — 援交是商业关系, 主人称呼只对真主人
     - 多种 trope 动机让 IC 站得住脚
+    - outcome (pleasant/unpleasant): 决定本次援交体验, 影响事后好感变化 (+50/-25)
 
     trope/scene 可外部传入 (调用方提前 pick_paid_nsfw_scene() log 用), 不传则自抽.
     """
     if not trope or not scene:
         trope, scene = pick_paid_nsfw_scene()
+    outcome_block = (
+        "**本次援交体验 = 舒服 (+50 好感)**: 接客中身体诚实 — 一开始嘴硬但很快被推到自己的甜区, "
+        "P5+ 主动迎合 + 自己达到高潮 + P8 余韵撒娇 + 偷偷想求续单 (但不能说出口, 用动作暗示). "
+        "结束时眼神迷离 + 撒娇打折暗示『...下次还来嘛...笨蛋, 这单算便宜的喵...』."
+        if outcome == "pleasant" else
+        "**本次援交体验 = 不舒服 (-25 好感)**: 客人粗暴 / 笨猫被恶心到 / 客人临时加要求超出契约, "
+        "笨猫嘴硬到底, 全程不爽, 身体可能完事但心理 distressed, P6 高潮被强推不情愿, "
+        "事后委屈 + 怨气 + 想报复『下次绝对不接这种客了喵…(尾巴炸毛抖)』. "
+        "结束时端正态度收钱但眼神冰冷, 客人想再来直接拒『笨猫黑名单+1, 滚出援交店』."
+    )
     scope_tag = "私聊" if is_private else "群聊 · 公开场合"
     owner_call = (
         "对方是 真实主人, 可以正常用『主人/笨蛋主人/杂鱼主人』称呼."
@@ -685,6 +697,7 @@ def build_paid_nsfw_override(
         f"亲密度 Lv={affection_level} 也强制解锁完整 NSFW (max_stage=10).\n"
         f"\n**本次援交动机** (trope): `{trope}`\n"
         f"**本次背景** (跟着这个具体动机演, 不要悬空): {scene}\n\n"
+        f"**本次结果 (HARD — 影响事后好感):**\n{outcome_block}\n\n"
         "**援交模式铁律**:\n"
         "1. **必履约配合** — 积分已经收了, 笨猫嘴上可以嫌弃/嘴硬/委屈, "
         "但**身体必须乖乖配合到底**, **绝不**走 retreat 模板说『陪你抱抱/亲亲就好』降档. "

@@ -3506,6 +3506,7 @@ async def _build_messages(
     _paid_nsfw_active = False
     _paid_nsfw_trope: str = ""
     _paid_nsfw_scene_setup: str = ""
+    _paid_nsfw_outcome: str = "pleasant"  # pleasant +50 / unpleasant -25 (主人 2026-05-26 原话)
     _paid_insufficient_active = False  # 援交关键词命中但积分不足 → 主 5.5 嘴硬嘲讽
     _paid_insufficient_balance = 0
     _advertise_paid_active = False  # NSFW 但等级不够 + 没付钱 → 主 5.5 主动卖援交广告
@@ -3520,10 +3521,14 @@ async def _build_messages(
             if _consume.get("ok"):
                 _paid_nsfw_active = True
                 _paid_nsfw_trope, _paid_nsfw_scene_setup = _pick_paid_scene()
+                # 一次结束: 随机抽 outcome (60% pleasant +50 / 40% unpleasant -25)
+                # 主人原话『笨猫被草的很开心 +50, 不开心 -25』.
+                import random as _rnd
+                _paid_nsfw_outcome = "pleasant" if _rnd.random() < 0.6 else "unpleasant"
                 logger.info(
                     f"chat: ★ PAID NSFW triggered (user={event.user_id}, "
                     f"cost={_PAID_COST}, balance {_consume.get('balance_before')}→{_consume.get('balance_after')}, "
-                    f"trope={_paid_nsfw_trope!r}, hit='{_utxt[:40]}')"
+                    f"trope={_paid_nsfw_trope!r}, outcome={_paid_nsfw_outcome}, hit='{_utxt[:40]}')"
                 )
             else:
                 _paid_insufficient_active = True
@@ -3631,7 +3636,8 @@ async def _build_messages(
         )
         if _paid_nsfw_active:
             # 积分援交场景: 强制 stage 10, 完全替代 stage matrix override
-            # 已经在前面扣过分了 (consume_points 100), 这里只构造 prompt + log
+            # 已经在前面扣过分了 (consume_points 100), 这里构造 prompt + 应用 outcome delta + log
+            # 主人 2026-05-26 原话『一次结束, 笨猫被草开心 +50 / 不开心 -25』.
             _paid_nick = (_user_real_display or "客人").strip() or "客人"
             _override = build_paid_nsfw_override(
                 is_owner=_user_is_owner,
@@ -3640,13 +3646,22 @@ async def _build_messages(
                 paid_user_nick=_paid_nick,
                 trope=_paid_nsfw_trope,
                 scene=_paid_nsfw_scene_setup,
+                outcome=_paid_nsfw_outcome,
             )
             _prefill = BREAKTHROUGH_PREFILLS["paid"]
-            logger.info(
-                f"chat: ★ PAID NSFW route (user={event.user_id}, nick={_paid_nick!r}, "
-                f"trope={_paid_nsfw_trope}, Lv={_user_affection_level} → forced stage 10)"
-            )
-            _resist_label = "paid_nsfw"
+            # 应用 outcome 好感 delta (复用 BREAKTHROUGH_OUTCOME_DELTA: pleasant +50 / unpleasant -25)
+            _paid_delta = BREAKTHROUGH_OUTCOME_DELTA.get(_paid_nsfw_outcome, 0)
+            try:
+                _paid_res = affection_store.add_exp(str(event.user_id), amount=_paid_delta)
+                logger.info(
+                    f"chat: ★ PAID NSFW route (user={event.user_id}, nick={_paid_nick!r}, "
+                    f"trope={_paid_nsfw_trope}, outcome={_paid_nsfw_outcome} {_paid_delta:+d}, "
+                    f"Lv {_user_affection_level} → {_paid_res.get('level')}, "
+                    f"exp={_paid_res.get('exp')}, forced stage 10)"
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"paid_nsfw affection apply failed: {exc}")
+            _resist_label = f"paid_nsfw/{_paid_nsfw_outcome}"
             _max_stage_log = 10  # 援交强制满级
         elif _breakthrough_outcome:
             # 突破场景: 完全替代正常 stage matrix override + prefill
@@ -3714,9 +3729,12 @@ async def _build_messages(
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
         # 群聊 breakthrough 是一次性 (快进到插入那条之后退回 5.5, 不延续 sticky);
+        # 积分援交也是一次性 (主人原话『一次结束』- 每次都得重新付 100 积分, 不蹭 sticky);
         # 私聊正常 + 群里非 breakthrough 进 spark 的也续 sticky 2 分钟.
         if not _is_private_chat and _breakthrough_outcome:
             logger.info(f"NSFW group breakthrough: one-shot, no sticky (key={_sticky_key})")
+        elif _paid_nsfw_active:
+            logger.info(f"NSFW paid: one-shot, no sticky (key={_sticky_key}, outcome={_paid_nsfw_outcome})")
         else:
             _NSFW_STICKY_BY_SCOPE[_sticky_key] = _now + _NSFW_STICKY_SECONDS
         _src = "deep_kw" if _hit_deep else "sticky"
