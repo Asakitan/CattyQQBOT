@@ -361,7 +361,7 @@ def reset_deep_nsfw_count(user_id: str, is_group: bool = False) -> None:
     """突破成功后清空对应 scope 的计数 — 让累积从 0 重新开始 (避免突破后还是 100%)."""
     _DEEP_REQUEST_HISTORY.pop(_scope_key(user_id, is_group), None)
 #   私聊 ramp:『要求 10 次后 100%, 5 次 20%』, 1 次保留 0.89% 起步
-#   群聊 ramp:『1 次 0.01%, 10 次 1%, 20 次 5%, 25 次 15%, 30 次 100%』
+#   群聊 ramp(主人砍到 20 次 100%):『1 次 0.01% / 7 次 1% / 13 次 5% / 17 次 15% / 20 次 100%』
 _RAMP_ANCHORS_PRIVATE: tuple[tuple[int, float], ...] = (
     (1, BREAKTHROUGH_BASE_CHANCE),
     (5, 0.20),
@@ -369,15 +369,15 @@ _RAMP_ANCHORS_PRIVATE: tuple[tuple[int, float], ...] = (
 )
 _RAMP_ANCHORS_GROUP: tuple[tuple[int, float], ...] = (
     (1, 0.0001),
-    (10, 0.01),
-    (20, 0.05),
-    (25, 0.15),
-    (30, 1.0),
+    (7, 0.01),
+    (13, 0.05),
+    (17, 0.15),
+    (20, 1.0),
 )
 
 
 def _ramp_breakthrough_chance(count: int, is_group: bool = False) -> float:
-    """分段线性 ramp on anchors. 群聊用更陡峭的曲线 (起步极低, 30 次才 100%)."""
+    """分段线性 ramp on anchors. 群聊用更陡峭的曲线 (起步极低, 20 次到 100%)."""
     if count <= 0:
         return 0.0
     anchors = _RAMP_ANCHORS_GROUP if is_group else _RAMP_ANCHORS_PRIVATE
@@ -407,7 +407,7 @@ def maybe_trigger_breakthrough(
     - Lv < 10 (满级用户已能正常到 stage 10, 不需要随机)
     - chance = _ramp_breakthrough_chance(count, is_group)
       · 私聊: 1→0.89% / 5→20% / 10→100%
-      · 群聊: 1→0.01% / 10→1% / 20→5% / 25→15% / 30→100% (远更难)
+      · 群聊: 1→0.01% / 7→1% / 13→5% / 17→15% / 20→100% (主人砍到 20 次)
 
     返回 None / 'pleasant' (+50) / 'unpleasant' (-25)。
     outcome 由用户消息 sentiment 决定: 温柔 → pleasant, 粗暴 → unpleasant,
