@@ -148,7 +148,7 @@ class Config(BaseModel):
     catty_filter_request_timeout: float | None = 10.0
     catty_filter_group_batch_messages: int = 200
     catty_filter_group_batch_seconds: float = 1200.0
-    catty_filter_anger_enabled: bool = True
+    catty_filter_anger_enabled: bool = False  # 主人:每条群消息都喂 spark 判耐心太烧
     catty_filter_anger_warn_threshold: int = 60
     catty_filter_anger_mute_threshold: int = 100
     catty_filter_anger_cooldown_seconds: int = 3600
