@@ -55,13 +55,12 @@ from .emoji_store import EmojiEntry, EmojiStore
 from .legs_picker import LegsPicker, is_legs_trigger, random_legs_reply
 from .memory import MemoryStore
 from .openai_client import (
-    chat_completion_nsfw_spark,
+    chat_completion_codex_instant,
     MCBusyError,
     OpenAICompatibleError,
     analyze_images_for_reply,
     assess_user_anger,
     chat_completion,
-    chat_completion_instant,
     chat_completion_with_tools,
     classify_catty_mood,
     summarize_scope_lore,
@@ -4531,13 +4530,13 @@ async def _generate_placeholder_line(*, is_owner: bool) -> str | None:
     ):
         return None
     try:
-        reply = await chat_completion_instant(
+        reply = await chat_completion_codex_instant(
             config,
             [
                 {"role": "system", "content": _placeholder_prompt(is_owner)},
                 {"role": "user", "content": "立刻给一句占位话,让对方知道笨猫在想了"},
             ],
-            fallback_max_tokens=64,
+            max_tokens=64,
         )
     except OpenAICompatibleError as exc:
         logger.info(f"placeholder spark failed (fallback to lines): {exc}")
@@ -6125,7 +6124,7 @@ async def _generate_affection_caption(
     messages.append({"role": "user", "content": user_text.strip() or "签到"})
     try:
         if use_instant:
-            reply = await chat_completion_instant(config, messages, fallback_max_tokens=200)
+            reply = await chat_completion_codex_instant(config, messages, max_tokens=200)
         else:
             reply = await chat_completion(config, messages)
     except OpenAICompatibleError as exc:
@@ -7124,7 +7123,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                     _spark_messages = list(messages)
                     _spark_messages.insert(-1, {"role": "system", "content": _trope_hint})
 
-                reply = await chat_completion_nsfw_spark(
+                reply = await chat_completion_codex_instant(
                     config, _spark_messages, max_tokens=800, model_override=_chosen_model,
                 )
                 _was_refusal = _is_soft_refusal_reply(reply)

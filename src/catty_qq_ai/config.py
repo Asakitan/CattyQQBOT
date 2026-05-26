@@ -149,6 +149,10 @@ class Config(BaseModel):
     # NSFW deep 路径 (stage 8/9/10) 专用 model. 空时 fallback 到 catty_filter_model.
     # **不 hardcode 默认值**, 主人在 config.json 里设.
     catty_nsfw_spark_model: str = ""
+    # placeholder / 签到 caption 短回复路径专用 model (主人原话: 不要 spark, 走 5.3-codex).
+    # chat_completion_codex_instant 优先级: model_override > codex_instant_model > nsfw_spark_model > filter_model.
+    # 空时 fallback 到 nsfw_spark_model 或 filter_model. **不 hardcode 默认值**, 在 config.json 里设.
+    catty_codex_instant_model: str = ""
     # 累计软拒达 threshold 后自动切的 fallback model (默认空 → 用 catty_filter_model = spark).
     # 例: 主 model = gpt-5.5, fallback = gpt-5.3-codex-spark.
     catty_nsfw_fallback_model: str = ""
