@@ -304,39 +304,59 @@ class AffectionStore:
             }
 
     def add_exp(self, user_id: str | int, amount: int = 1) -> dict[str, Any]:
-        """累积好感度,带每日 cap。返回 {added, exp, level, level_up}。"""
+        """累积/扣减好感度。amount 可正可负 — 主人原话『好的+1, 不好的-1, 性事件 ±50/-25』。
+
+        - amount > 0: 按 DAILY_EXP_CAP 限制每日累积上限 (防刷屏)
+        - amount < 0: **不受 daily cap 限制** (扣分应立即生效, 不能因为今天已经赚满 100 就免责)
+        - amount == 0: 返回当前状态
+        - owner: 永远满级, 任何 delta 都被吞掉
+        - exp 下限 clamp 到 0 (不能负 exp), 上限 clamp 到 MAX_LEVEL_EXP
+
+        返回 {added, exp, level, level_up, level_down?, capped?}。
+        """
         uid = str(user_id)
-        if amount <= 0:
+        if amount == 0:
             level, exp = self.get_level_and_exp(uid)
             return {"added": 0, "exp": exp, "level": level, "level_up": False}
         if self.is_owner(uid):
             return {"added": 0, "exp": MAX_LEVEL_EXP, "level": LEVEL_CAP, "level_up": False}
-        today = _today_local()
         with self._lock:
             rec = self._record(uid)
-            if str(rec.get("daily_exp_date") or "") != today:
-                rec["daily_exp_date"] = today
-                rec["daily_exp_count"] = 0
-            daily = int(rec.get("daily_exp_count") or 0)
-            room = max(DAILY_EXP_CAP - daily, 0)
-            if room <= 0:
-                exp = int(rec.get("exp") or 0)
-                return {"added": 0, "exp": exp, "level": _level_from_exp(exp), "level_up": False, "capped": True}
-            actual = min(amount, room)
             old_exp = int(rec.get("exp") or 0)
-            new_exp = old_exp + actual
             old_level = _level_from_exp(old_exp)
+
+            if amount > 0:
+                today = _today_local()
+                if str(rec.get("daily_exp_date") or "") != today:
+                    rec["daily_exp_date"] = today
+                    rec["daily_exp_count"] = 0
+                daily = int(rec.get("daily_exp_count") or 0)
+                room = max(DAILY_EXP_CAP - daily, 0)
+                if room <= 0:
+                    return {
+                        "added": 0, "exp": old_exp, "level": old_level,
+                        "level_up": False, "capped": True,
+                    }
+                actual = min(amount, room)
+                rec["daily_exp_count"] = daily + actual
+            else:
+                # 扣分: clamp to >= 0, 不动 daily_exp_count
+                actual = max(amount, -old_exp)
+
+            new_exp = max(0, min(old_exp + actual, MAX_LEVEL_EXP))
             new_level = _level_from_exp(new_exp)
             rec["exp"] = new_exp
-            rec["daily_exp_count"] = daily + actual
             rec["updated_at"] = _now_iso()
             self._dirty = True
-            return {
+            out = {
                 "added": actual,
                 "exp": new_exp,
                 "level": new_level,
                 "level_up": new_level > old_level,
             }
+            if new_level < old_level:
+                out["level_down"] = True
+            return out
 
     def consume_points(self, user_id: str | int, cost: int) -> dict[str, Any]:
         """扣积分。返回 {ok, balance_before, balance_after, cost, level, shortfall}。"""

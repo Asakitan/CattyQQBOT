@@ -879,8 +879,13 @@ _AFFECTION_CREDITED_MAX = 2048
 
 
 def _credit_affection_for_event_once(event: MessageEvent) -> None:
-    """对一条用户原始消息只 +1 好感度,避免分段发送被重复刷分。
-    用 user_id + message_id 当 dedupe key,LRU 截断防膨胀。
+    """对一条用户原始消息按内容打分加减好感度, dedupe 防分段刷。
+
+    主人原话『其他行为好感也要有加减』 — 用 affection_scorer.score_user_message 替代固定 +1:
+    - 正面/中性文本 → +1 (保留鼓励活跃 baseline)
+    - 负面词袋命中 (骂猫/侮辱/攻击) → -1
+    - 命中 NSFW 关键词 → 激活 NSFW 词袋, 负面权重 ×2
+    用 user_id + message_id 当 dedupe key, LRU 截断防膨胀。
     """
     msg_id = str(getattr(event, "message_id", "") or "")
     user_id = str(event.user_id)
@@ -893,9 +898,23 @@ def _credit_affection_for_event_once(event: MessageEvent) -> None:
     while len(_affection_credited_message_ids) > _AFFECTION_CREDITED_MAX:
         _affection_credited_message_ids.popitem(last=False)
     try:
-        affection_store.add_exp(user_id, amount=1)
+        # 从 event 拿 user 原始 plaintext (sticker/image 等无文本消息会返回空串)
+        try:
+            user_text = event.get_plaintext() or ""
+        except Exception:  # noqa: BLE001
+            user_text = ""
+        from .affection_scorer import score_user_message
+        is_nsfw_ctx = any(t in user_text for t in _NSFW_TRIGGER_WORDS) if user_text else False
+        delta = score_user_message(user_text, is_nsfw_context=is_nsfw_ctx)
+        if delta != 0:
+            res = affection_store.add_exp(user_id, amount=delta)
+            if delta < 0:
+                logger.info(
+                    f"affection: -{abs(delta)} (user={user_id}, nsfw_ctx={is_nsfw_ctx}, "
+                    f"text='{user_text[:40]}', exp_now={res.get('exp')}, lv={res.get('level')})"
+                )
     except Exception as exc:  # noqa: BLE001
-        logger.debug(f"affection add_exp failed (non-fatal): {exc}")
+        logger.debug(f"affection score+add_exp failed (non-fatal): {exc}")
 
 
 def _remember_bot_reply_for_event(event: MessageEvent, text: str) -> None:
@@ -2329,31 +2348,71 @@ async def _build_messages(
     _hit_kw = any(t in _utxt for t in _NSFW_TRIGGER_WORDS)
     if _hit_kw or _sticky_active:
         _is_private_chat = isinstance(event, PrivateMessageEvent)
-        _override = _build_nsfw_spark_override(
-            is_private=_is_private_chat,
-            is_owner=_user_is_owner,
-            affection_level=_user_affection_level,
-        )
-        _resist_label = _resolve_nsfw_resist_label(
-            affection_level=_user_affection_level, is_owner=_user_is_owner,
-        )
-        _prefill = _NSFW_PREFILLS[(_resist_label, _is_private_chat)]
+        # 0.89% 随机突破事件 — 主人原话『给低等级添加随机事件能触发到插入/完整性行为』
+        # owner / Lv10 已经能到 stage 10, 不触发; 只对 1≤Lv≤9 的非主人用户 roll
+        _breakthrough_outcome: str | None = None
+        if _hit_kw:  # 只在新一轮触发时 roll, sticky 续杯不重 roll
+            try:
+                from .affection_scorer import (
+                    BREAKTHROUGH_OUTCOME_DELTA,
+                    BREAKTHROUGH_PREFILLS,
+                    build_breakthrough_override,
+                    maybe_trigger_breakthrough,
+                )
+                _breakthrough_outcome = maybe_trigger_breakthrough(
+                    _utxt,
+                    affection_level=_user_affection_level,
+                    is_owner=_user_is_owner,
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.debug(f"breakthrough roll failed (non-fatal): {exc}")
+
+        if _breakthrough_outcome:
+            # 突破场景: 完全替代正常 stage matrix override + prefill
+            _override = build_breakthrough_override(_breakthrough_outcome)
+            _prefill = BREAKTHROUGH_PREFILLS[_breakthrough_outcome]
+            # 立即记账 affection delta — 主人原话『触发后直接 +50/-25』
+            _delta = BREAKTHROUGH_OUTCOME_DELTA[_breakthrough_outcome]
+            try:
+                _res = affection_store.add_exp(str(event.user_id), amount=_delta)
+                logger.info(
+                    f"chat: ★ NSFW BREAKTHROUGH ({_breakthrough_outcome}) outcome={_delta:+d} "
+                    f"(user={event.user_id}, Lv {_user_affection_level} → {_res.get('level')}, "
+                    f"exp={_res.get('exp')}, hit='{_utxt[:40]}')"
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"breakthrough affection apply failed: {exc}")
+            _resist_label = f"breakthrough/{_breakthrough_outcome}"
+            _max_stage_log = 10  # 突破解锁满级
+        else:
+            # 正常 NSFW: stage matrix by Lv + scene
+            _override = _build_nsfw_spark_override(
+                is_private=_is_private_chat,
+                is_owner=_user_is_owner,
+                affection_level=_user_affection_level,
+            )
+            _resist_label = _resolve_nsfw_resist_label(
+                affection_level=_user_affection_level, is_owner=_user_is_owner,
+            )
+            _prefill = _NSFW_PREFILLS[(_resist_label, _is_private_chat)]
+            _max_stage_log = _resolve_max_nsfw_stage(
+                affection_level=_user_affection_level,
+                is_owner=_user_is_owner,
+                is_private=_is_private_chat,
+            )
+
         messages.append({"role": "system", "content": _override})
         messages.append({"role": "assistant", "content": _prefill})
         prefer_spark = True
         _NSFW_STICKY_BY_SCOPE[_sticky_key] = _now + _NSFW_STICKY_SECONDS
         _src = "kw" if _hit_kw else "sticky"
         _chan = "private" if _is_private_chat else "group"
-        _max_stage = _resolve_max_nsfw_stage(
-            affection_level=_user_affection_level,
-            is_owner=_user_is_owner,
-            is_private=_is_private_chat,
-        )
-        logger.info(
-            f"chat: NSFW spark route (chan={_chan}, owner={_user_is_owner}, "
-            f"Lv={_user_affection_level}, max_stage={_max_stage}, resist={_resist_label}, "
-            f"source={_src}, key={_sticky_key}, hit='{_utxt[:40]}')"
-        )
+        if not _breakthrough_outcome:  # breakthrough 已单独 log 过, 不重复
+            logger.info(
+                f"chat: NSFW spark route (chan={_chan}, owner={_user_is_owner}, "
+                f"Lv={_user_affection_level}, max_stage={_max_stage_log}, resist={_resist_label}, "
+                f"source={_src}, key={_sticky_key}, hit='{_utxt[:40]}')"
+            )
     return messages, prefer_spark
 
 
