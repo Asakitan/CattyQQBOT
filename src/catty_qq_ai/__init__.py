@@ -3500,6 +3500,36 @@ async def _build_messages(
         is_private=_is_private_chat_pre,
     )
     _can_reach_deep = _user_max_stage >= 8
+    # ── 积分援交触发 (主人 2026-05-26 原话『加积分操, 100 积分突破亲密度都能操』) ──
+    # 优先级 > deep_kw + sticky + breakthrough. 不需要 NSFW 关键词命中, user 直接喊援交即可.
+    # owner 不走援交路径 (主人有无限积分 + 已经 stage 10), 其他人付 100 积分强制 spark + max_stage=10.
+    _paid_nsfw_active = False
+    _paid_nsfw_trope: str = ""
+    _paid_nsfw_scene_setup: str = ""
+    try:
+        from .affection_scorer import (
+            is_paid_nsfw_trigger as _is_paid_trigger,
+            pick_paid_nsfw_scene as _pick_paid_scene,
+            PAID_NSFW_COST as _PAID_COST,
+        )
+        if not _user_is_owner and _is_paid_trigger(_utxt):
+            _consume = affection_store.consume_points(str(event.user_id), _PAID_COST)
+            if _consume.get("ok"):
+                _paid_nsfw_active = True
+                _paid_nsfw_trope, _paid_nsfw_scene_setup = _pick_paid_scene()
+                logger.info(
+                    f"chat: ★ PAID NSFW triggered (user={event.user_id}, "
+                    f"cost={_PAID_COST}, balance {_consume.get('balance_before')}→{_consume.get('balance_after')}, "
+                    f"trope={_paid_nsfw_trope!r}, hit='{_utxt[:40]}')"
+                )
+            else:
+                logger.info(
+                    f"chat: PAID NSFW 关键词命中但积分不足 "
+                    f"(user={event.user_id}, balance={_consume.get('balance_before')}, "
+                    f"need={_PAID_COST}, shortfall={_consume.get('shortfall')})"
+                )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"paid_nsfw check failed (non-fatal): {exc}")
     # 新 deep hit 时 roll 一次突破 (sticky 续杯不 roll — 上次已 roll 过)
     #   私聊『一直要求色色, 5 次 20%, 10 次 100%』: ramp 1→0.89% / 5→20% / 10→100%
     #   群聊『1 次 0.01% / 7 次 1% / 13 次 5% / 17 次 15% / 20 次 100%』: 远更陡 + 触发后场景=大庭广众下
@@ -3546,7 +3576,8 @@ async def _build_messages(
     #   新一轮 deep hit + 用户能到 stage 8+ → spark
     #   锁档 (deep hit + 不能到 stage 8) + 突破没中 → 5.5 锁档处理 (NSFW gate 写害羞躲)
     #   浅词 / 无 NSFW → 5.5 (NSFW gate 处理 stage 1-7)
-    _route_spark = _sticky_active or bool(_breakthrough_outcome) or (_hit_deep and _can_reach_deep)
+    # 积分援交也强制进 spark (绕过 affection cap)
+    _route_spark = _paid_nsfw_active or _sticky_active or bool(_breakthrough_outcome) or (_hit_deep and _can_reach_deep)
     if _route_spark:
         # 即使命中 NSFW deep word (『画一张笨猫脱衣服』里的『脱』等),
         # 当 user 是画图请求时, **跳过 spark route**, 让正常 chat_completion_with_tools 走 5.5
@@ -3564,8 +3595,28 @@ async def _build_messages(
             BREAKTHROUGH_OUTCOME_DELTA,
             BREAKTHROUGH_PREFILLS,
             build_breakthrough_override,
+            build_paid_nsfw_override,
         )
-        if _breakthrough_outcome:
+        if _paid_nsfw_active:
+            # 积分援交场景: 强制 stage 10, 完全替代 stage matrix override
+            # 已经在前面扣过分了 (consume_points 100), 这里只构造 prompt + log
+            _paid_nick = (_user_real_display or "客人").strip() or "客人"
+            _override = build_paid_nsfw_override(
+                is_owner=_user_is_owner,
+                is_private=_is_private_chat,
+                affection_level=_user_affection_level,
+                paid_user_nick=_paid_nick,
+                trope=_paid_nsfw_trope,
+                scene=_paid_nsfw_scene_setup,
+            )
+            _prefill = BREAKTHROUGH_PREFILLS["paid"]
+            logger.info(
+                f"chat: ★ PAID NSFW route (user={event.user_id}, nick={_paid_nick!r}, "
+                f"trope={_paid_nsfw_trope}, Lv={_user_affection_level} → forced stage 10)"
+            )
+            _resist_label = "paid_nsfw"
+            _max_stage_log = 10  # 援交强制满级
+        elif _breakthrough_outcome:
             # 突破场景: 完全替代正常 stage matrix override + prefill
             # 群聊用大庭广众下 trope 池, 私聊用常规 trope 池
             _override = build_breakthrough_override(_breakthrough_outcome, is_group=not _is_private_chat)
