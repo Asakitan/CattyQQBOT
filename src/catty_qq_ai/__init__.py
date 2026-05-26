@@ -206,6 +206,9 @@ _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
 _poke_last_replied_at: dict[str, float] = {}
+# Catty mood spark classifier 节流: 每会话 60s 最多调一次, 其他时间只衰减不烧 spark
+_MOOD_CLASSIFY_MIN_INTERVAL_SECONDS = 60.0
+_mood_classify_last_at: dict[str, float] = {}
 # NSFW spark 路径 sticky: 任何用户触发后 _NSFW_STICKY_SECONDS 内, 即使 followup 句没命中关键词
 # 也默认走 spark (用户引导『再深一点』『继续』可能不带触发词但仍在 NSFW 通道)。
 # key = f"{scope}:{user_id}" — 每个 session+用户独立, 不影响其它对话。
@@ -2476,15 +2479,22 @@ async def _build_messages(
         user_vibe_store.record_message(str(event.user_id), incoming.text or "")
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"user_vibe_store.record_message failed: {exc}")
-    # Catty mood: 走 spark async classifier 喂入 user_text,失败时 classifier 内部回 [] 只衰减。
+    # Catty mood: 走 spark async classifier 喂入 user_text。节流到每会话 60s 一次,
+    # 其他帧只 record_decay_only (不烧 spark, 情绪自然衰减回 baseline)。
     try:
-        await catty_mood_store.record_text_async(
-            _arc_scope,
-            incoming.text or "",
-            classifier=lambda t: classify_catty_mood(config, t),
-        )
+        _mood_now = time.monotonic()
+        _mood_last = _mood_classify_last_at.get(_arc_scope, 0.0)
+        if _mood_now - _mood_last >= _MOOD_CLASSIFY_MIN_INTERVAL_SECONDS:
+            _mood_classify_last_at[_arc_scope] = _mood_now
+            await catty_mood_store.record_text_async(
+                _arc_scope,
+                incoming.text or "",
+                classifier=lambda t: classify_catty_mood(config, t),
+            )
+        else:
+            catty_mood_store.record_decay_only(_arc_scope)
     except Exception as exc:  # noqa: BLE001
-        logger.debug(f"catty_mood_store.record_text_async failed: {exc}")
+        logger.debug(f"catty_mood throttle/record failed: {exc}")
     # Catty RAG: 把 user 消息向量化存进 per-scope chromadb (graceful fallback if no chromadb)
     try:
         catty_rag_store.add(
