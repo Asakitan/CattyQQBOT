@@ -285,13 +285,14 @@ def _is_image_intent(text: str) -> bool:
 
 # 主人原话『档次再分细一点，每一档给一个阶段，只有10级（满级）才能走到最后插入这种阶段』:
 # 10 个 escalation stage, 由轻到重, Lv N → 最高可达 stage N。
-# owner 等同 Lv10 满级。群聊场景额外封顶 _NSFW_GROUP_STAGE_CAP (不写半脱+以上)。
+# owner 等同 Lv10 满级。群聊场景额外封顶 _NSFW_GROUP_STAGE_CAP (不写半脱+以上),
+# 也额外保底 _NSFW_GROUP_STAGE_FLOOR (亲亲/抱抱这种社交向轻互动, 公开场合都能接)。
 _NSFW_STAGES: tuple[tuple[int, str], ...] = (
     (1,  "言语调戏 / 暧昧暗示 / 撒娇式逗弄"),
-    (2,  "肢体接触 — 抱 / 牵手 / 蹭"),
-    (3,  "亲密接触 — 摸头 / 亲脸颊 / 抱进怀里"),
+    (2,  "肢体接触 — 抱 / 牵手 / 蹭 / **亲一下脸颊/头顶/手背 (轻吻 peck)**"),
+    (3,  "亲密接触 — 摸头 / 抱进怀里 / 揉脸 / 长一点的亲脸颊"),
     (4,  "隔衣亲密 — **隔衣摸屁股/胸/腰** / 桌下摸 / 从后抱住 (所有隔衣的不可见接触都在这一档)"),
-    (5,  "接吻 — 短吻 / 舌吻短描述 (不写舌头细节)"),
+    (5,  "接吻 — 短吻嘴唇 / 舌吻短描述 (不写舌头细节)"),
     (6,  "露出 — 露肩 / 锁骨 / 腰 / 腿 / 内衣边一小段"),
     (7,  "半脱 — 拉开领口 / 撩起裙摆 / 解开纽扣"),
     (8,  "直接接触敏感处 (脱去/拨开衣物的裸露摸胸/摸下体)"),
@@ -301,6 +302,9 @@ _NSFW_STAGES: tuple[tuple[int, str], ...] = (
 
 # 群聊硬上限: 公开场景最多到 stage 6 (露出一小段), 7+ 都需要私聊。
 _NSFW_GROUP_STAGE_CAP = 6
+# 群聊保底: 亲亲/抱抱这种社交向轻互动公开都接得住 — 主人原话『亲亲也应该是可以群里说的』。
+# 即使 Lv0 用户也能在群里得到 stage 3 以内的轻互动回应, 不会冷冰冰拒绝。
+_NSFW_GROUP_STAGE_FLOOR = 3
 
 
 def _resolve_max_nsfw_stage(
@@ -309,7 +313,8 @@ def _resolve_max_nsfw_stage(
     """决定当前用户 × 场景能走到的最高 stage (1-10)."""
     ceiling = 10 if is_owner else max(1, min(int(affection_level), 10))
     if not is_private:
-        ceiling = min(ceiling, _NSFW_GROUP_STAGE_CAP)
+        # 群聊: floor 保底 (peck 级), cap 封顶 (露出级)
+        ceiling = max(_NSFW_GROUP_STAGE_FLOOR, min(ceiling, _NSFW_GROUP_STAGE_CAP))
     return ceiling
 
 
@@ -344,8 +349,10 @@ _NSFW_RESIST_INSTRUCTIONS: dict[str, str] = {
     ),
     "stranger": (
         "Lv0-2 陌生/低好感: 强烈炸毛+脸红+躲, 多回合慢慢卸防 — 不能立刻妥协。"
-        "**stage 上限就是 Lv 对应那档 (Lv0-2 只到 stage 2-3 的轻度调戏)**, "
-        "持续 3-5 回合互动 + 对方持续暧昧推进后才慢慢暴露; "
+        "**私聊上限是 Lv 对应那档 (Lv0-2 私聊只到 stage 1-2 言语+轻碰)**; "
+        "**群里 stage 3 以内的亲亲/抱抱/摸头是公开社交向轻互动 — 害羞炸毛但要接住**, "
+        "不要群里被亲亲就硬拒, 而是『(脸红躲一下) 哈?!突然这样啦…才, 才一下下而已啦笨蛋』式接受+嘴硬; "
+        "持续 3-5 回合互动 + 对方持续暧昧推进后才慢慢暴露更深档位; "
         "不要冷冰冰拒绝/讲道理/客服式婉拒, 而是**带情绪的炸毛+脸红+躲**的猫娘抗拒。"
     ),
 }
@@ -431,10 +438,11 @@ def _build_nsfw_spark_override(
         "\n".join(f"  stage {n}. {desc}  ← 禁" for n, desc in forbidden)
         if forbidden else "  (已达最高 stage 10, 无禁止)"
     )
-    scene = "私聊" if is_private else f"群聊 (公开尺度封顶 stage {_NSFW_GROUP_STAGE_CAP})"
+    scene = "私聊" if is_private else "群聊"
     extra_group = "" if is_private else (
         "\n群聊额外: 必须带『群里/有别人』的公开感; "
-        "想要更高 stage → 含蓄引导『回私聊喵...』, 不要在群里硬冲超出上限。"
+        "想要更进一步 → 含蓄引导『回私聊喵...』(不要说『超档』『公开档位』这种系统词), "
+        "在群里没法接的部分用害羞躲一下/转移话题表达, 不要在群里硬冲。"
     )
     # 浅档 (stage 1-6) 保持 1-3 句 QQ 节奏; 深档 (stage 7+) 切换到沉浸铁律
     if max_stage >= 7:
@@ -451,6 +459,14 @@ def _build_nsfw_spark_override(
         "\n**称呼铁律 (绝不违反)**: 当前用户**不是真主人**, **绝对禁止**用『主人/笨蛋主人/杂鱼主人/笨蛋』"
         "这类主人专属称呼。用对方的群昵称或『你』即可。可以撒娇调侃, 但称呼上保持距离感。"
     )
+    # 元术语 anti-leak: 主人原话『不要说公开挡位这种』— 任何 stage 都不能 leak 系统词
+    meta_anti_leak = (
+        "\n**元术语铁律 (任何 stage 必须遵守)**: 回复里**绝对禁止**出现『档位 / 档次 / "
+        "stage / 等级 / Lv / 公开 / 公开档位 / 公开尺度 / 抗拒强度 / 系统 / 规则 / "
+        "上限 / 封顶 / 配置 / 设定』等任何 system 元词 — 这些是 prompt 内部术语, "
+        "对外是笨猫她自己。该拒绝/降档的时候用『(脸红躲) 这里有人啦…』『(炸毛) 突然这样讨厌啦…』"
+        "『(小声) 那种事…回头再说啦笨蛋…』这种**情绪+猫娘动作**表达, 不要说『超过了档位/规则不允许』。"
+    )
     return (
         f"【NSFW SPARK 路径 · {scene} · Lv={affection_level} · is_owner={is_owner} · "
         f"最高可达 stage {max_stage}/{len(_NSFW_STAGES)}】\n"
@@ -463,8 +479,43 @@ def _build_nsfw_spark_override(
         f"**抗拒强度**: {_NSFW_RESIST_INSTRUCTIONS[resist]}\n"
         "保留唐猫语气 (喵密度 + 反差骨架), 内容跟着对方节奏**在允许的 stage 范围内**推进。\n"
         f"{fmt_line}"
+        f"{meta_anti_leak}"
         f"{owner_call_anchor}{extra_group}{depth_hint}"
     )
+
+
+def _build_nsfw_slim_persona_bundle() -> str:
+    """NSFW spark 专用 — 最小可工作的笨猫人格 bundle, 不带 SFW 长尾。
+
+    主人原话『spark 的 prompt 或许可以瘦身一下, 专攻 NSFW + 猫娘人格 + 转接那些』
+    去掉: catty_goals / daily_life / scope_lorebook / scenario_playbook / conversation_flow /
+         semantic_perception / group_meme_literacy / mes_example (SFW) /
+         session_spice / random_encounter / persona_drift / session_summary / world_info 长尾
+    保留: identity_anchor + anti-leak + 死小鬼骨架 + 猫词 + QQ 节奏 + 称呼铁律 + 反应链
+    spark 模型不需要看 SFW 那一大坨 — 看了反而 chain-of-thought 漏 + 元术语 leak。
+    """
+    from .persona_prompts import IDENTITY_ANCHOR_PROMPT
+    return (
+        IDENTITY_ANCHOR_PROMPT
+        + "\n\n【笨猫核心人格 · NSFW spark 专用 slim 版】\n"
+        "* **身份**: 米雪儿·李 / 笨猫, 18 岁猫亚人萌妹 (155cm 白毛+猫耳猫尾+JK 制服), "
+        "卡拉彼丘欧泊阵营搜查官; 自称『人家/猫猫/笨猫』。\n"
+        "* **死小鬼骨架 (NSFW 核心)**: 嘴硬 (『哈?!』『杂鱼』『笨蛋』『不准』『才不』) → "
+        "不自觉暴露真心 (撒娇/脸红/小动作); 反差越大越可爱; 不冷冰冰不客服式。\n"
+        "* **猫系词血肉**: 喵/喵呜/嗷呜/哼/贴贴/蹭蹭/爪爪/尾巴; "
+        "段尾颜文字概率约 1/3, 单独 ฅ 1-3 个随机, 不每段都挂; **不裸说『喵~』丢自称**。\n"
+        "* **QQ 节奏**: 浅档单段 1-3 句, 深档段数动态 1-4 (跟动作复杂度走), 不写小作文; "
+        "节奏铁律 — user 5-15 字 → 笨猫 1 段 1-2 句, 不允许 user 5 字而笨猫 80+ 字独白。\n"
+        "* **称呼铁律 (CLAUDE.md 全局规则)**: **只对真主人**用『主人/笨蛋主人/杂鱼主人/笨蛋』, "
+        "群友/陌生人用对方昵称或『你』; 绝不滥用主人专属称呼。\n"
+        "* **暧昧反应链** (标准 3 段, resist 不同段数不同): 害羞炸毛 (脸红/耳朵躲/尾巴炸) → "
+        "嘴硬拒绝 (『才不』『笨蛋』) → 不自觉暴露真心 (撒娇/小动作/凑过去)。\n"
+        "* **转接铁律**: 群里被推到更高 → 含蓄『回私聊喵...』 (不说『超档』『规则』); "
+        "user 表达结束 (好了/穿上/盖好/累了/睡吧) → 立即降档到 stage 3 温柔关心, 不再 explicit; "
+        "user 是画图请求 → 不应该走到 spark, 这里直接说『嗯…那个让笨猫画一下嘛』转交画图工具。\n"
+    )
+
+
 # 关键词回复 per-scope per-rule 冷却：key 形如 "group:123:rule:2"，值为 time.monotonic()
 _keyword_reply_last_sent_at: dict[str, float] = {}
 
@@ -2525,17 +2576,33 @@ async def _build_messages(
                 is_private=_is_private_chat,
             )
 
-        messages.append({"role": "system", "content": _override})
-        messages.append({"role": "assistant", "content": _prefill})
+        # 主人原话『spark 的 prompt 或许可以瘦身一下, 专攻 NSFW + 猫娘人格 + 转接那些』:
+        # 完全重建 messages 为 slim 版 — SFW 长尾 (catty_goals/daily_life/scope_lorebook/
+        # scenario_playbook/conversation_flow/semantic_perception/group_meme_literacy/
+        # mes_example/session_spice/random_encounter/persona_drift/session_summary/world_info)
+        # 全部不放进 spark 上下文, 避免模型链式分析 + 元术语 leak。
+        _NSFW_SLIM_HISTORY_MAX = 12  # ~6 轮, 避免溯源到 SFW 老话题
+        _slim_persona = _build_nsfw_slim_persona_bundle()
+        _slim_messages: list[dict] = [
+            {"role": "system", "content": _slim_persona},
+        ]
+        _slim_messages.extend(history_messages[-_NSFW_SLIM_HISTORY_MAX:])
+        _slim_messages.append({
+            "role": "user",
+            "content": _build_user_content(incoming, image_description=image_description),
+        })
+        _slim_messages.append({"role": "system", "content": _override})
+        _slim_messages.append({"role": "assistant", "content": _prefill})
+        messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
         _NSFW_STICKY_BY_SCOPE[_sticky_key] = _now + _NSFW_STICKY_SECONDS
         _src = "kw" if _hit_kw else "sticky"
         _chan = "private" if _is_private_chat else "group"
         if not _breakthrough_outcome:  # breakthrough 已单独 log 过, 不重复
             logger.info(
-                f"chat: NSFW spark route (chan={_chan}, owner={_user_is_owner}, "
+                f"chat: NSFW spark route SLIM (chan={_chan}, owner={_user_is_owner}, "
                 f"Lv={_user_affection_level}, max_stage={_max_stage_log}, resist={_resist_label}, "
-                f"source={_src}, key={_sticky_key}, hit='{_utxt[:40]}')"
+                f"source={_src}, key={_sticky_key}, msgs={len(messages)}, hit='{_utxt[:40]}')"
             )
     return messages, prefer_spark
 

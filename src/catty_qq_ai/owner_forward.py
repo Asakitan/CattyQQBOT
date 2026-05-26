@@ -28,6 +28,18 @@ _PENDING_FLAGS: "OrderedDict[str, dict]" = OrderedDict()
 _PENDING_TTL_SECONDS = 7 * 24 * 3600
 _PENDING_MAX = 64
 
+# 陌生人/临时会话私聊 — 给对方一句猫娘版加好友提示, 主人原话『私聊要提示加好友才回复』。
+# per-user 6h 冷却避免对方多发就被刷屏。
+_STRANGER_HINT_TEMPLATES: tuple[str, ...] = (
+    "嗨嗨～是新朋友嘛?ฅ 笨猫临时会话不太爱回啦, 想正经聊呢主人申请加个好友先呗～",
+    "(歪头) 这边是临时窗口呀…猫猫记不住路诶, 先加个好友再讲嘛, 嗷呜～",
+    "诶？陌生人?(耳朵竖起来) 笨猫只跟好友列表里的人讲话啦, 加好友戳一下哦ฅ",
+    "(尾巴摇摇) 想聊就先加好友嘛, 临时会话猫猫看不懂的喵～",
+)
+_STRANGER_HINT_LAST_AT: "OrderedDict[str, float]" = OrderedDict()
+_STRANGER_HINT_COOLDOWN_SECONDS = 6 * 3600
+_STRANGER_HINT_MAX = 256
+
 
 def init(config: Config) -> None:
     """主插件启动时调用一次，把 Config 实例传进来。"""
@@ -114,6 +126,42 @@ async def _send_to_owner(bot: Bot, message: str | Message) -> None:
         await bot.send_private_msg(user_id=owner_qq, message=message)
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"owner_forward: failed to deliver message to owner: {exc}")
+
+
+def _should_hint_stranger(user_id: int) -> bool:
+    """6h 内对同一 stranger 只提示一次, 防对方刷屏猫猫刷屏。"""
+    if user_id <= 0:
+        return False
+    now = time.time()
+    last = _STRANGER_HINT_LAST_AT.get(str(user_id), 0.0)
+    if now - last < _STRANGER_HINT_COOLDOWN_SECONDS:
+        return False
+    return True
+
+
+def _mark_stranger_hinted(user_id: int) -> None:
+    if user_id <= 0:
+        return
+    key = str(user_id)
+    _STRANGER_HINT_LAST_AT.pop(key, None)
+    _STRANGER_HINT_LAST_AT[key] = time.time()
+    while len(_STRANGER_HINT_LAST_AT) > _STRANGER_HINT_MAX:
+        _STRANGER_HINT_LAST_AT.popitem(last=False)
+
+
+async def _send_stranger_friend_hint(bot: Bot, user_id: int) -> None:
+    """给陌生人/临时会话回一句猫娘版加好友提示。带 6h per-user 冷却。"""
+    if not _should_hint_stranger(user_id):
+        return
+    # 用 user_id 做轮换种子, 同一人 6h 内不会回, 不同人轮不同 template
+    import random as _r
+    text = _r.Random(int(user_id) + int(time.time() // 60)).choice(_STRANGER_HINT_TEMPLATES)
+    try:
+        await bot.send_private_msg(user_id=user_id, message=text)
+        _mark_stranger_hinted(user_id)
+        logger.info(f"owner_forward: hinted stranger {user_id} to add friend")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"owner_forward: failed to hint stranger {user_id}: {exc}")
 
 
 # ---------- request handlers ----------
@@ -220,9 +268,11 @@ async def _handle_private(
     raw_message = str(getattr(event, "message", "") or "")
     if raw_message and raw_message.strip() != raw_text:
         lines.append(f"原始 message：{raw_message[:300]}")
-    lines.append("（非好友/临时会话只转发不回复；好友私聊会让猫猫直接回。）")
+    lines.append("（非好友/临时会话已转发；猫猫会给对方回一句加好友提示。）")
     await _send_to_owner(bot, "\n".join(lines))
     logger.info(f"owner_forward: relayed private message from {sender_qq} sub_type={sub_type or 'unknown'} to owner")
+    # 主人原话『私聊要提示加好友才回复』— 给陌生人回一句猫娘版加好友提示 (6h per-user 冷却)
+    await _send_stranger_friend_hint(bot, sender_qq)
     if _should_block_ai_reply():
         matcher.stop_propagation()
         await matcher.finish()

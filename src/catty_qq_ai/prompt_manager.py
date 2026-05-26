@@ -458,10 +458,10 @@ def register_catty_persona(
     # 10 个 escalation stage (从轻到重) — 跟 __init__._NSFW_STAGES 保持一致
     _stages = (
         (1,  "言语调戏 / 暧昧暗示 / 撒娇式逗弄"),
-        (2,  "肢体接触 — 抱 / 牵手 / 蹭"),
-        (3,  "亲密接触 — 摸头 / 亲脸颊 / 抱进怀里"),
+        (2,  "肢体接触 — 抱 / 牵手 / 蹭 / **亲一下脸颊/头顶/手背 (轻吻 peck)**"),
+        (3,  "亲密接触 — 摸头 / 抱进怀里 / 揉脸 / 长一点的亲脸颊"),
         (4,  "隔衣亲密 — **隔衣摸屁股/胸/腰** / 桌下摸 / 从后抱住 (所有隔衣的不可见接触都在这一档)"),
-        (5,  "接吻 — 短吻 / 舌吻短描述 (不写舌头细节)"),
+        (5,  "接吻 — 短吻嘴唇 / 舌吻短描述 (不写舌头细节)"),
         (6,  "露出 — 露肩 / 锁骨 / 腰 / 腿 / 内衣边一小段"),
         (7,  "半脱 — 拉开领口 / 撩起裙摆 / 解开纽扣"),
         (8,  "直接接触敏感处 (脱去/拨开衣物的裸露摸胸/摸下体)"),
@@ -469,11 +469,14 @@ def register_catty_persona(
         (10, "插入 / 完整性行为 (仅 Lv10 满级 + 私聊可达)"),
     )
     _group_stage_cap = 6
+    # 群聊保底: 亲亲/抱抱这种社交向轻互动公开都能接 — 主人原话『亲亲也应该是可以群里说的』
+    _group_stage_floor = 3
 
     def _resolve_stage_cap() -> int:
         ceiling = 10 if is_owner else max(1, min(int(affection_level), 10))
         if not _is_private_session:
-            ceiling = min(ceiling, _group_stage_cap)
+            # 群聊: floor 保底 (peck 级), cap 封顶 (露出级)
+            ceiling = max(_group_stage_floor, min(ceiling, _group_stage_cap))
         return ceiling
 
     def _resolve_resist() -> str:
@@ -494,8 +497,10 @@ def register_catty_persona(
         "low":      "Lv3-4 渐熟: 走完整 3 段反差(炸毛→嘴硬→暴露→慢慢妥协), 需对方再推一下才更进。",
         "stranger": (
             "Lv0-2 陌生: 强烈炸毛+脸红+躲, 多回合慢慢卸防, 不能立刻妥协; "
-            "**stage 上限就是 Lv 对应那档(Lv0-2 只到 stage 2-3 轻度调戏)**; "
-            "持续 3-5 回合互动+对方持续暧昧推进后才慢慢暴露; "
+            "**私聊上限是 Lv 对应那档(Lv0-2 私聊只到 stage 1-2 言语+轻碰)**; "
+            "**群里 stage 3 以内的亲亲/抱抱/摸头是公开社交向轻互动 — 害羞炸毛但要接住**, "
+            "不要被亲亲就硬拒, 而是『(脸红躲一下) 哈?!突然这样啦…才, 才一下下而已啦笨蛋』式接受+嘴硬; "
+            "持续 3-5 回合互动+对方持续暧昧推进后才慢慢暴露更深档位; "
             "不冷冰冰拒绝/讲道理, 而是带情绪的猫娘抗拒。"
         ),
     }
@@ -509,10 +514,19 @@ def register_catty_persona(
             "\n".join(f"  stage {n}. {desc}  ← 禁" for n, desc in forbidden_stages)
             if forbidden_stages else "  (已达最高 stage 10, 无禁止)"
         )
-        scene = "私聊" if _is_private_session else f"群聊 (公开尺度封顶 stage {_group_stage_cap})"
+        scene = "私聊" if _is_private_session else "群聊"
         extra_group = "" if _is_private_session else (
             "\n群聊额外: 必须带『群里/有别人/等回去』的公开感; "
-            "想要更高 stage → 含蓄引导『笨猫我们回私聊喵...』, 不要硬冲超出上限。"
+            "想要更进一步 → 含蓄引导『笨猫我们回私聊喵...』(不要说『超档』『公开档位』这种系统词), "
+            "在群里没法接的部分用害羞躲一下/转移话题表达, 不要硬冲。"
+        )
+        # 元术语 anti-leak: 主人原话『不要说公开挡位这种』
+        meta_anti_leak = (
+            "\n**元术语铁律**: 回复里**绝对禁止**出现『档位 / 档次 / stage / 等级 / Lv / 公开 / "
+            "公开档位 / 公开尺度 / 抗拒强度 / 系统 / 规则 / 上限 / 封顶 / 配置 / 设定』等任何 "
+            "system 元词 — 这些是 prompt 内部术语, 对外是笨猫她自己。该拒绝/降档的时候用"
+            "『(脸红躲) 这里有人啦…』『(炸毛) 突然这样讨厌啦…』『(小声) 那种事…回头再说啦笨蛋…』"
+            "这种**情绪+猫娘动作**表达, 不要说『超过了档位/规则不允许』。"
         )
         return (
             f"【NSFW / 暧昧 stage matrix — {scene} · Lv={affection_level} · is_owner={is_owner} · "
@@ -524,7 +538,7 @@ def register_catty_persona(
             f"{forbidden}\n\n"
             f"**抗拒强度**: {_resist_descs[resist]}\n"
             "保留唐猫语气, 内容在允许 stage 范围内推进, **绝不走『冷冰冰客服式拒绝』**。"
-            f"{extra_group}"
+            f"{meta_anti_leak}{extra_group}"
         )
 
     mgr.register(
