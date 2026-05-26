@@ -80,6 +80,11 @@ class Config(BaseModel):
     # 占位消息后台 task 异常时静默(主回复链路不能被打断)
     catty_slow_reply_placeholder_max_messages: int = 1
 
+    # ST 风 random encounter — 每条 reply 触发『本轮主动小开场』hint 的概率(0-1)。
+    # 不是 push 主动消息(catty 是 reactive), 而是当用户 reply 时偶尔笨猫会冒一句
+    # 自己的小事开场,让对话不再 100% 被动响应。0 = 禁用,>0.10 会很吵不建议。
+    catty_random_encounter_chance: float = 0.03
+
     # IDE 多 tab 风格的会话排队:每群最多 N 个并发回复(默认 3),不同用户能并行;
     # 同一用户在同群仍串行(防同人乱序爆消息)。0 或负数 = 退化回老的一群一把大锁。
     catty_reply_group_concurrency: int = 3
@@ -240,8 +245,8 @@ class Config(BaseModel):
     catty_legs_pictures_dir: str = "pictures"
     catty_legs_cooldown_seconds: float = 3.0
     # 戳一戳：避免被刷屏。同一用户在同一会话内的最小回复间隔与回应概率
-    catty_poke_cooldown_seconds: float = 45.0
-    catty_poke_reply_probability: float = 0.85
+    catty_poke_cooldown_seconds: float = 12.0
+    catty_poke_reply_probability: float = 1.0
     catty_memory_enabled: bool = True
     catty_memory_path: str = "memory.json"
     catty_memory_group_storage_dir: str = ""
