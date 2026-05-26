@@ -31,6 +31,7 @@
     |   205 | catty_daily_goals           | (catty-specific) | catty_goals.build_catty_goals_prompt |
     |   207 | catty_reunion               | (catty-specific) | catty_reunion.build_reunion_prompt |
     |   208 | catty_session_spice         | (catty-specific) | session_spice.build_session_spice_prompt |
+    |   209 | catty_random_encounter      | (catty-specific) | random_encounter.maybe_build_random_encounter_prompt |
     |   210 | catty_qq_chat_rhythm        | (extra)          | persona_prompts.build_qq_chat_rhythm_prompt |
     |   220 | catty_reply_self_check      | (extra)          | persona_prompts.build_reply_self_check_prompt |
     |   230 | catty_image_literacy        | (conditional)    | persona_prompts.build_image_literacy_prompt |
@@ -560,6 +561,19 @@ def register_catty_persona(
                 scope, _spice_user_id, is_owner=is_owner,
             ),
             order=208,
+        )
+    # Catty Random Encounter - 每条 reply N% 概率触发『本轮主动小开场』hint。
+    # 非 deterministic, 每次都 random 抽; chance 走 config.catty_random_encounter_chance。
+    # 让 catty 不只是被动 reply, 偶尔会冒一句『对了对了我刚才...』, 更像活的猫娘。
+    _re_chance = float(getattr(cfg, "catty_random_encounter_chance", 0.03) or 0.0)
+    if _re_chance > 0:
+        from . import random_encounter as _re
+        mgr.register(
+            "catty_random_encounter",
+            content_fn=lambda: _re.maybe_build_random_encounter_prompt(
+                chance=_re_chance, is_owner=is_owner,
+            ),
+            order=209,
         )
     if "world_info" not in legacy_disabled:
         mgr.register(
