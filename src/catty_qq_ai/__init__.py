@@ -6924,20 +6924,22 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 # NSFW deep 路径: 默认走 catty_nsfw_spark_model (主人测 5.5 在 production
                 # prompt 下 83% 通过). 累计 N 次软拒 (per-scope) 后自动切 fallback model
                 # (5.3-codex-spark). 收到非软拒 reply 重置计数回主 model.
-                _chosen_model = _pick_nsfw_model_for(_sticky_key)
+                # 注意 _sticky_key 是 _build_messages 局部变量, 这里需重新算 (跨函数)
+                _nsfw_scope_key = f"{_conversation_queue_key(event)}:{event.user_id}"
+                _chosen_model = _pick_nsfw_model_for(_nsfw_scope_key)
                 reply = await chat_completion_nsfw_spark(
                     config, messages, max_tokens=800, model_override=_chosen_model,
                 )
                 _was_refusal = _is_soft_refusal_reply(reply)
-                _record_nsfw_reply_outcome(_sticky_key, _was_refusal)
+                _record_nsfw_reply_outcome(_nsfw_scope_key, _was_refusal)
                 if _was_refusal:
-                    _new_count = _NSFW_SOFT_REFUSE_COUNT.get(_sticky_key, 0)
+                    _new_count = _NSFW_SOFT_REFUSE_COUNT.get(_nsfw_scope_key, 0)
                     logger.warning(
                         f"NSFW soft-refusal model={_chosen_model} count={_new_count} "
-                        f"key={_sticky_key} → retreat template (orig={reply[:60]!r})"
+                        f"key={_nsfw_scope_key} → retreat template (orig={reply[:60]!r})"
                     )
                     reply = _pick_retreat_template(
-                        is_owner=_user_is_owner,
+                        is_owner=_is_owner,
                         user_id=str(event.user_id),
                     )
                 else:
