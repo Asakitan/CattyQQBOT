@@ -212,8 +212,23 @@ _mood_classify_last_at: dict[str, float] = {}
 # NSFW spark 路径 sticky: 任何用户触发后 _NSFW_STICKY_SECONDS 内, 即使 followup 句没命中关键词
 # 也默认走 spark (用户引导『再深一点』『继续』可能不带触发词但仍在 NSFW 通道)。
 # key = f"{scope}:{user_id}" — 每个 session+用户独立, 不影响其它对话。
-_NSFW_STICKY_SECONDS = 15.0  # 主人要求缩到 15 秒以内 — 避免长时间影响无关后续消息
+_NSFW_STICKY_SECONDS = 120.0  # 2 分钟内同一 user/scope 都继续走 NSFW spark
 _NSFW_STICKY_BY_SCOPE: dict[str, float] = {}
+# 连续 idle 消息计数 (没 NSFW 内容的 user 消息) — 达 _NSFW_STICKY_IDLE_LIMIT 自动退 sticky.
+# 也检测明确 closing 语义 (好了/累了/睡吧 等) 直接退出.
+_NSFW_STICKY_IDLE_COUNT: dict[str, int] = {}
+_NSFW_STICKY_IDLE_LIMIT = 3
+_NSFW_CLOSING_INTENT_WORDS: tuple[str, ...] = (
+    "好了", "到这里", "停一下", "停吧", "休息", "睡吧", "累了", "穿上",
+    "穿好", "盖好", "清理", "收拾", "不要再", "别再", "够了", "可以了",
+    "不玩了", "结束", "拜拜", "晚安",
+)
+
+
+def _is_nsfw_closing(text: str) -> bool:
+    if not text:
+        return False
+    return any(w in text for w in _NSFW_CLOSING_INTENT_WORDS)
 # image intent short-circuit (画图请求识别后转交 5.5 + imagegen tool) 兜底处理。
 _NSFW_TRIGGER_WORDS: tuple[str, ...] = tuple(sorted({
     # === 单字 (灵敏命中, false positive 由 image short-circuit 兜底) ===
@@ -2745,6 +2760,25 @@ async def _build_messages(
     _sticky_until = _NSFW_STICKY_BY_SCOPE.get(_sticky_key, 0.0)
     _sticky_active = _now < _sticky_until
     _hit_deep = _is_deep_nsfw(_utxt)
+    # 主人原话『2 分钟内都 NSFW, 但是判定到结束/2-3 次都没 NSFW 继续就直接结束』:
+    # closing intent (好了/累了/睡吧) → 立即退 sticky.
+    # 浅词 idle (sticky_active 期间 user 既没 deep 也没 closing) → counter+1, 达 limit 退 sticky.
+    # 新 deep hit → reset counter.
+    if _sticky_active and _is_nsfw_closing(_utxt):
+        _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
+        _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
+        _sticky_active = False
+        logger.info(f"NSFW sticky: closing intent → exit (key={_sticky_key}, hit='{_utxt[:30]}')")
+    elif _sticky_active and not _hit_deep:
+        _idle = _NSFW_STICKY_IDLE_COUNT.get(_sticky_key, 0) + 1
+        _NSFW_STICKY_IDLE_COUNT[_sticky_key] = _idle
+        if _idle >= _NSFW_STICKY_IDLE_LIMIT:
+            _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
+            _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
+            _sticky_active = False
+            logger.info(f"NSFW sticky: {_idle} consecutive no-NSFW msgs → exit (key={_sticky_key})")
+    elif _hit_deep:
+        _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
     _is_private_chat_pre = isinstance(event, PrivateMessageEvent)
     _user_max_stage = _resolve_max_nsfw_stage(
         affection_level=_user_affection_level,
