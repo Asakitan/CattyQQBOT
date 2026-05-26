@@ -3506,6 +3506,9 @@ async def _build_messages(
     _paid_nsfw_active = False
     _paid_nsfw_trope: str = ""
     _paid_nsfw_scene_setup: str = ""
+    _paid_insufficient_active = False  # 援交关键词命中但积分不足 → 主 5.5 嘴硬嘲讽
+    _paid_insufficient_balance = 0
+    _advertise_paid_active = False  # NSFW 但等级不够 + 没付钱 → 主 5.5 主动卖援交广告
     try:
         from .affection_scorer import (
             is_paid_nsfw_trigger as _is_paid_trigger,
@@ -3523,13 +3526,28 @@ async def _build_messages(
                     f"trope={_paid_nsfw_trope!r}, hit='{_utxt[:40]}')"
                 )
             else:
+                _paid_insufficient_active = True
+                _paid_insufficient_balance = int(_consume.get("balance_before") or 0)
                 logger.info(
                     f"chat: PAID NSFW 关键词命中但积分不足 "
-                    f"(user={event.user_id}, balance={_consume.get('balance_before')}, "
-                    f"need={_PAID_COST}, shortfall={_consume.get('shortfall')})"
+                    f"(user={event.user_id}, balance={_paid_insufficient_balance}, "
+                    f"need={_PAID_COST}, shortfall={_consume.get('shortfall')}) → 嘴硬嘲讽路径"
                 )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"paid_nsfw check failed (non-fatal): {exc}")
+    # NSFW 命中但等级不够 + 没付钱 + 不是主人 → 让笨猫主动卖援交广告
+    if (
+        _hit_deep
+        and not _can_reach_deep
+        and not _user_is_owner
+        and not _paid_nsfw_active
+        and not _paid_insufficient_active
+    ):
+        _advertise_paid_active = True
+        logger.info(
+            f"chat: deep NSFW 命中但等级不够 (user={event.user_id}, Lv={_user_affection_level}, "
+            f"max_stage={_user_max_stage}) → 援交广告路径"
+        )
     # 新 deep hit 时 roll 一次突破 (sticky 续杯不 roll — 上次已 roll 过)
     #   私聊『一直要求色色, 5 次 20%, 10 次 100%』: ramp 1→0.89% / 5→20% / 10→100%
     #   群聊『1 次 0.01% / 7 次 1% / 13 次 5% / 17 次 15% / 20 次 100%』: 远更陡 + 触发后场景=大庭广众下
@@ -3578,6 +3596,20 @@ async def _build_messages(
     #   浅词 / 无 NSFW → 5.5 (NSFW gate 处理 stage 1-7)
     # 积分援交也强制进 spark (绕过 affection cap)
     _route_spark = _paid_nsfw_active or _sticky_active or bool(_breakthrough_outcome) or (_hit_deep and _can_reach_deep)
+    # 主 5.5 路径注入援交广告 / 嘴硬嘲讽 prompt (spark 路径会 overwrite messages 反正不影响)
+    # 紧贴 user message 拿 recency bias, 让 5.5 这一条 reply 主动推销援交 OR 嘲讽穷光蛋
+    if not _route_spark and (_paid_insufficient_active or _advertise_paid_active):
+        try:
+            from .affection_scorer import (
+                build_paid_nsfw_advertise_prompt as _build_paid_ad,
+                build_paid_nsfw_insufficient_prompt as _build_paid_insuf,
+            )
+            if _paid_insufficient_active:
+                messages.append({"role": "system", "content": _build_paid_insuf(_paid_insufficient_balance)})
+            elif _advertise_paid_active:
+                messages.append({"role": "system", "content": _build_paid_ad()})
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"paid prompt inject failed (non-fatal): {exc}")
     if _route_spark:
         # 即使命中 NSFW deep word (『画一张笨猫脱衣服』里的『脱』等),
         # 当 user 是画图请求时, **跳过 spark route**, 让正常 chat_completion_with_tools 走 5.5

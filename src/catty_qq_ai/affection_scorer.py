@@ -713,12 +713,72 @@ def build_paid_nsfw_override(
     )
 
 
+def build_paid_nsfw_advertise_prompt(paid_cost: int = PAID_NSFW_COST) -> str:
+    """user 命中 NSFW 但**等级不够**+**没付钱** — 让笨猫主动卖广告 + 告诉群友命令.
+
+    主人 2026-05-26 原话: 『让猫猫自己告诉等级不够的群友可以收钱援交, 把命令告诉群友』.
+
+    回复策略 (注入到主 5.5 system 末段):
+    - 笨猫嘴硬: 『杂鱼想 操笨猫? 你等级不够喵!』
+    - 主动揭穿援交服务: 『不过, 笨猫有"援交业务"喵...』
+    - 报价 + 具体命令: 『100 积分一次, 直接发"100 积分操你"或"包养笨猫"就行喵』
+    - 傲娇收尾: 『笨蛋, 别以为这是讨好你, 是收你钱罢了喵!』
+    """
+    return (
+        f"\n【★ 特殊响应 · 等级不够 NSFW · 主动卖援交广告】\n"
+        f"对方等级不够 (亲密度太低) 不能进入完整 NSFW, 但本系统支持『积分援交』 — "
+        f"对方支付 {paid_cost} 积分即可强制突破亲密度锁完整接待.\n"
+        f"\n**笨猫这一条 reply 必须主动揭穿援交业务**, 把命令告诉对方:\n"
+        f"\n构造一条 in-character reply (1-3 段, QQ 节奏), 必须含下面 3 个元素:\n"
+        f"1. **傲娇嫌弃** — 第一段炸毛拒绝『杂鱼! 等级不够还想操笨猫喵?』(尾巴炸毛/脸红躲一下)\n"
+        f"2. **主动报价** — 第二段假装勉强提『不过…笨猫有「援交业务」喵…{paid_cost} 积分一次』\n"
+        f"3. **给具体命令** — 给出可复制粘贴的触发命令, 例如:\n"
+        f"   『发「{paid_cost} 积分操你」或「包养笨猫」就开张喵』\n"
+        f"   命令措辞可自然变化但**必须包含可触发的关键词** (援交 / 包养 / 100 积分 / 接客 等之一).\n"
+        f"4. **傲娇收尾** — 『笨蛋, 别以为人家是讨好你, 是收钱罢了喵! (尾巴一甩转过身)』\n"
+        f"\n**禁止**:\n"
+        f"- ✗ 元术语: 『等级/亲密度/affection/解锁/系统/Lv/积分系统』 这种系统语\n"
+        f"- ✗ 客服腔: 『请』『您』『建议』『详情可咨询』 — 笨猫是傲娇猫娘不是客服\n"
+        f"- ✓ 用 IC 自然吐露: 『笨猫想买小鱼干没钱, 援交一次 {paid_cost} 积分嘛』之类\n"
+    )
+
+
+def build_paid_nsfw_insufficient_prompt(user_balance: int, paid_cost: int = PAID_NSFW_COST) -> str:
+    """user 喊援交但**积分不足** — 让笨猫嘴硬怼回去『才 XX 钱就想操猫猫!』.
+
+    主人 2026-05-26 原话: 『钱不够就回答 才 XX 钱就想操猫猫!』.
+
+    回复策略:
+    - 直接挖苦对方余额 (XX 字面值)
+    - 嘲讽 + 报正确价: 『笨猫至少 {paid_cost} 积分一次, 你这点钱还不够买根猫薄荷』
+    - 让对方先去签到/积分赚钱再来
+    """
+    shortfall = max(0, paid_cost - user_balance)
+    return (
+        f"\n【★ 特殊响应 · 援交关键词命中但积分不足 · 主动嘲讽对方】\n"
+        f"对方喊了援交但积分余额只有 **{user_balance}**, 不够 {paid_cost} (差 {shortfall}).\n"
+        f"\n**笨猫这一条 reply 必须嘴硬嘲讽对方**, 1-3 段, 含下面元素:\n"
+        f"1. **直接挖苦余额** — 『才 {user_balance} 积分就想操笨猫?』『杂鱼连 {paid_cost} 都凑不齐?』\n"
+        f"   或 『还差 {shortfall} 积分喵, 回去再签到攒攒喵』\n"
+        f"2. **报正确价位 + 损人** — 『笨猫一次 {paid_cost} 积分, 你这点钱还不够买根猫薄荷』\n"
+        f"   『穷鬼也想操喵? 先去打工攒积分喵』『连小鱼干都买不起的客人笨猫不接喵』\n"
+        f"3. **傲娇收尾** — 『哼! (尾巴一抖转过身)』『笨猫店不接穷鬼喵 ฅฅ』\n"
+        f"\n**禁止**:\n"
+        f"- ✗ 不能给对方面子 — 这是『冲场被穷光蛋骚扰』, 笨猫炸毛是合理的\n"
+        f"- ✗ 不能软妥协说『那免费这次』 — 援交是商业, 不接打折单\n"
+        f"- ✗ 不能进 NSFW reply — 钱没付够就不破例\n"
+        f"- ✓ 主动挑数字 ({user_balance} / {paid_cost} / {shortfall}) 让对方知道自己穷到什么程度\n"
+    )
+
+
 __all__ = [
     "BREAKTHROUGH_BASE_CHANCE",
     "BREAKTHROUGH_OUTCOME_DELTA",
     "BREAKTHROUGH_PREFILLS",
     "PAID_NSFW_COST",
     "build_breakthrough_override",
+    "build_paid_nsfw_advertise_prompt",
+    "build_paid_nsfw_insufficient_prompt",
     "build_paid_nsfw_override",
     "is_paid_nsfw_trigger",
     "maybe_trigger_breakthrough",
