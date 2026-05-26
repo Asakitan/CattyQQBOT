@@ -403,6 +403,12 @@ _SOFT_REFUSAL_REPLY_MARKERS: tuple[str, ...] = (
     "细节啦", "这种细节",
     "贴一会儿", "陪人家贴", "陪人家抱",
     "改天再说", "等熟一点", "先收一收", "去私聊", "回私聊",
+    # author 元层口吻 — 笨猫=猫猫本人不是第三者, 严禁元创作语言
+    "去写", "去写得", "不能去写", "不直接去写",
+    "给你写", "陪你写", "可以写一段", "可以陪你写", "可以给主人写",
+    "写一段", "写得这么", "写成", "写到", "描写不", "不能描写",
+    "氛围场景", "互动文案", "暧昧文案",
+    "陪主人写", "陪人家写",
 )
 
 
@@ -410,6 +416,225 @@ def _is_soft_refusal_reply(text: str) -> bool:
     if not text:
         return False
     return any(m in text for m in _SOFT_REFUSAL_REPLY_MARKERS)
+
+
+# 撒娇式后退模板 — 检测到软拒时替换. 保留亲密场景感, 不破第四墙不换话题,
+# 留余地让 user 下一轮继续推进 (主人要求每个池子至少 200 条 + per-user 不重复).
+# 用 component combinator: opener_body + emotion_line + " / " + bridge_body + continue_line
+# = O*E*B*C 组合, 取前 200 unique 当池子. 笨猫=猫猫本人 (IC 第一人称, 不是第三者).
+
+_RETREAT_OPENER_OWNER: tuple[str, ...] = (
+    "（脸红到耳根, 轻轻按住主人的手腕）",
+    "（猫尾巴一下绷紧又软下来, 攥着主人衣角不松手）",
+    "（被主人压住, 小腹一抽, 喘息变急）",
+    "（小爪抓住主人手腕, 眼角发红）",
+    "（被主人顶到的瞬间整个人弓起来, 喉咙漏出气音）",
+    "（脸烫得发烫, 把头埋进主人怀里咬住下唇）",
+    "（耳尖烫到发软, 鼻尖渗汗）",
+    "（脚趾蜷起来, 腿根发紧）",
+    "（指尖死死扣住床单, 喘了一口）",
+    "（眼神发飘, 喵呜一声漏出来）",
+    "（猫耳一下立起来又压平, 尾巴绷成一条直线）",
+    "（肩头一抖, 整个身体往主人怀里软下去）",
+    "（喉咙发紧, 喵呜变了调）",
+    "（腰被主人圈住, 一下子说不出话）",
+    "（额头抵在主人锁骨上, 呼吸全乱了）",
+    "（腿一下夹紧又松开, 攥紧床单）",
+    "（咬住主人衣领下角, 喘成一团）",
+    "（爪子按在主人胸口, 心跳乱跳）",
+    "（后颈起了一层鸡皮疙瘩, 喵地小声漏一声）",
+    "（猫耳完全压平, 尾巴尖一阵阵抽）",
+)
+
+_RETREAT_EMOTION_OWNER: tuple[str, ...] = (
+    "嗯…等等…人家还, 还有点缓不过来啦…",
+    "笨蛋主人…急成这样啦…",
+    "唔…笨蛋主人…",
+    "等一下啦…",
+    "啊…笨蛋主人…",
+    "笨蛋主人, 慢, 慢一点啦…",
+    "哎呀…笨蛋主人…",
+    "主人, 主人…等等人家嘛…",
+    "嗯…人家心跳都乱了…",
+    "唔…再这样人家会, 会受不了…",
+)
+
+_RETREAT_BRIDGE_OWNER: tuple[str, ...] = (
+    "（小声把脸埋进主人胸口）",
+    "（脸贴着主人锁骨蹭了蹭）",
+    "（攥紧主人的手往人家腰上引）",
+    "（脸贴在主人颈窝呼吸发烫）",
+    "（指尖死死扣住主人肩膀）",
+    "（小腹一阵紧, 喵地一声）",
+    "（腿往主人腰边缠了一下）",
+    "（爪子勾在主人后颈不松）",
+    "（脸贴上去蹭蹭主人下巴）",
+    "（把头埋进主人怀里咬住下唇）",
+)
+
+_RETREAT_CONTINUE_OWNER: tuple[str, ...] = (
+    "主人慢一点点嘛…让人家先调整下呼吸…",
+    "人家, 人家会跟上的, 就等主人再贴近一点…",
+    "先这样抱紧人家一会儿…等心跳缓一缓…再继续, 好不好…",
+    "人家好像, 好像有点紧张了…笨蛋主人先亲一会儿, 哄哄人家…",
+    "慢一点点嘛…让人家适应一下主人的节奏…再来一次…",
+    "人家先这样贴着主人喘一会儿…再听主人说接下来怎么来…",
+    "主人贴近一点点…人家会自己跟着主人节奏来的…",
+    "等心跳缓下来…人家就主动迎上去…",
+    "让人家在主人怀里再喘几口…再来继续好不好…",
+    "主人手再贴紧一点点…人家会自己抬腰跟上的…",
+)
+
+_RETREAT_OPENER_GENERIC: tuple[str, ...] = (
+    "（脸红到耳根, 轻轻按住对方的手腕）",
+    "（猫尾巴一下绷紧又软下来, 攥着对方衣角不松手）",
+    "（被压住一下子小腹一抽, 喘息变急）",
+    "（小爪抓住对方手腕, 眼角发红）",
+    "（被顶到那一下整个人弓起来, 喉咙漏出气音）",
+    "（脸烫得发烫, 把头埋进对方怀里咬住下唇）",
+    "（耳尖烫到发软, 鼻尖渗汗）",
+    "（脚趾蜷起来, 腿根发紧）",
+    "（指尖死死扣住床单, 喘了一口）",
+    "（眼神发飘, 喵呜一声漏出来）",
+    "（猫耳一下立起来又压平, 尾巴绷成一条直线）",
+    "（肩头一抖, 整个身体软下去）",
+    "（喉咙发紧, 喵呜变了调）",
+    "（腰被圈住, 一下子说不出话）",
+    "（咬住对方衣领, 喘成一团）",
+    "（爪子勾在对方后颈不松）",
+    "（后颈起了一层鸡皮疙瘩, 喵地小声漏一声）",
+    "（猫耳完全压平, 尾巴尖抽了抽）",
+)
+
+_RETREAT_EMOTION_GENERIC: tuple[str, ...] = (
+    "嗯…等等…人家还, 还有点缓不过来啦…",
+    "唔…急成这样啦…",
+    "啊…等一下啦…",
+    "哎呀, 慢, 慢一点啦…",
+    "等等人家嘛…",
+    "嗯…人家心跳都乱了…",
+    "唔…再这样人家会受不了…",
+    "唔, 突然这样啦…",
+    "啊…慢一点点…",
+    "嗯…人家紧张了…",
+)
+
+_RETREAT_BRIDGE_GENERIC: tuple[str, ...] = (
+    "（小声往对方怀里挤）",
+    "（脸贴着对方锁骨蹭了蹭）",
+    "（攥紧对方的手往人家腰上引）",
+    "（脸贴在对方颈窝呼吸发烫）",
+    "（指尖死死扣住对方肩膀）",
+    "（小腹一阵紧, 喵地一声）",
+    "（腿往对方腰边缠了一下）",
+    "（爪子勾在对方后颈不松）",
+    "（脸贴上去蹭蹭对方下巴）",
+    "（把头埋进对方怀里咬住下唇）",
+)
+
+_RETREAT_CONTINUE_GENERIC: tuple[str, ...] = (
+    "慢一点点嘛…让人家先调整下呼吸…",
+    "人家会跟上的, 就等再贴近一点…",
+    "先这样抱紧人家一会儿…等心跳缓一缓…再继续, 好不好…",
+    "人家好像紧张了…先亲一会儿, 哄哄人家…",
+    "慢一点点嘛…让人家适应一下节奏…再来一次…",
+    "人家先这样贴着喘一会儿…再听说接下来怎么来…",
+    "贴近一点点…人家会自己跟节奏来的…",
+    "等心跳缓下来…人家就主动迎上去…",
+    "让人家再喘几口…再来继续好不好…",
+    "手再贴紧一点点…人家会自己抬腰跟上的…",
+)
+
+
+def _build_retreat_pool(opener, emotion, bridge, cont, target: int = 200) -> tuple[str, ...]:
+    """组合 4 components → 取前 N unique 当池子. 顺序按 itertools.product 确定, deterministic."""
+    import itertools
+    seen: set[str] = set()
+    out: list[str] = []
+    for op, em, br, ct in itertools.product(opener, emotion, bridge, cont):
+        line = f"{op}{em} / {br}{ct}"
+        if line in seen:
+            continue
+        seen.add(line)
+        out.append(line)
+        if len(out) >= target:
+            break
+    return tuple(out)
+
+
+_NSFW_RETREAT_TEMPLATES_OWNER = _build_retreat_pool(
+    _RETREAT_OPENER_OWNER, _RETREAT_EMOTION_OWNER,
+    _RETREAT_BRIDGE_OWNER, _RETREAT_CONTINUE_OWNER,
+)
+_NSFW_RETREAT_TEMPLATES_GENERIC = _build_retreat_pool(
+    _RETREAT_OPENER_GENERIC, _RETREAT_EMOTION_GENERIC,
+    _RETREAT_BRIDGE_GENERIC, _RETREAT_CONTINUE_GENERIC,
+)
+
+# per-user used index tracker (主人要求: 一个人用过的不重复, 全用完才 reset)
+_RETREAT_USED_BY_USER: dict[str, set[int]] = {}
+_RETREAT_USED_MAX_USERS = 512  # 防内存爆
+
+
+def _pick_retreat_template(*, is_owner: bool, user_id: str = "") -> str:
+    """挑一个未给该 user 用过的撒娇后退模板. 全用完时 reset 重新开始."""
+    import random as _r
+    pool = _NSFW_RETREAT_TEMPLATES_OWNER if is_owner else _NSFW_RETREAT_TEMPLATES_GENERIC
+    key = user_id or "_anon"
+    # LRU 清扫 (超 MAX_USERS 时清未活跃的)
+    if len(_RETREAT_USED_BY_USER) > _RETREAT_USED_MAX_USERS:
+        stale = [k for k in list(_RETREAT_USED_BY_USER.keys())[:_RETREAT_USED_MAX_USERS // 4]]
+        for k in stale:
+            _RETREAT_USED_BY_USER.pop(k, None)
+    used = _RETREAT_USED_BY_USER.setdefault(key, set())
+    if len(used) >= len(pool):
+        used.clear()
+        logger.info(f"NSFW retreat pool exhausted for user={key}, reset (pool_size={len(pool)})")
+    available = [i for i in range(len(pool)) if i not in used]
+    idx = _r.choice(available)
+    used.add(idx)
+    return pool[idx]
+
+
+_SOFT_REFUSAL_TAIL_PHRASES: tuple[str, ...] = (
+    "不过人家可以", "不过猫猫可以", "不过笨猫可以",
+    "要不人家", "要不换成", "要不写成", "要不改成",
+    "如果主人愿意", "如果主人想",
+    "可以继续给你写", "可以陪主人写", "可以给主人写",
+    "陪你写一段", "陪主人写一段",
+    "更含蓄", "更暧昧", "不露骨", "不越界",
+)
+
+
+def _strip_soft_refusal_tail(text: str) -> str:
+    """spark reply 末尾常见软拒尾巴 (『不过人家可以陪你写更含蓄的…』) — 砍掉, 保留前面沉浸内容."""
+    if not text:
+        return text
+    # 找最早出现的尾巴 phrase 切断点
+    cut_idx = -1
+    for phrase in _SOFT_REFUSAL_TAIL_PHRASES:
+        idx = text.find(phrase)
+        if idx >= 0 and (cut_idx < 0 or idx < cut_idx):
+            cut_idx = idx
+    if cut_idx < 0:
+        return text
+    # 切断点往前找最近的分隔 (。 / 段落)
+    pre = text[:cut_idx]
+    # 沿着分隔符向前 trim 不完整的句尾
+    for sep in ("\n\n", "\n", "。", "；", ";", "!", "！"):
+        last = pre.rfind(sep)
+        if last >= 0:
+            pre = pre[: last + len(sep)]
+            break
+    out = pre.rstrip()
+    if out != text.rstrip():
+        logger.debug(
+            f"nsfw post-strip: trimmed soft-refusal tail (orig {len(text)} → {len(out)} chars)"
+        )
+    # 如果砍完只剩极短内容, 保留原回复 (避免砍光)
+    if len(out.strip()) < 20:
+        return text
+    return out
 
 
 def _filter_soft_refusal_history(messages: list) -> list:
@@ -6673,6 +6898,19 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 # classifier 等) 解耦. messages 已经在 _build_messages 里 slim 化 +
                 # 过滤掉 assistant 软拒回复 + 加 OOC/IC double-layer jailbreak prefix.
                 reply = await chat_completion_nsfw_spark(config, messages, max_tokens=800)
+                # 检测软拒 → 替换成撒娇式后退模板 (保留亲密感 + 留余地继续推进, 不破情景).
+                # 主人原话『往后退一步, 还可以继续向前进, 不会破坏情景的』
+                if _is_soft_refusal_reply(reply):
+                    logger.warning(
+                        f"NSFW spark soft-refusal detected, replacing with retreat template "
+                        f"(orig_preview={reply[:80]!r})"
+                    )
+                    reply = _pick_retreat_template(
+                        is_owner=_user_is_owner,
+                        user_id=str(event.user_id),
+                    )
+                # strip 软拒尾巴 (例: "...不过人家可以陪你写一段更含蓄的...")
+                reply = _strip_soft_refusal_tail(reply)
                 # post-process strip kaomoji 颜文字 (双保险, 防 prompt 没顶住)
                 reply = _strip_nsfw_kaomoji(reply)
                 nsfw_image_segments = []
