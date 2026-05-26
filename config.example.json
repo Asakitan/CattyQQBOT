@@ -76,6 +76,8 @@
     "api_key": "",
     "model": "",
     "nsfw_spark_model": "",
+    "nsfw_fallback_model": "",
+    "nsfw_softrefuse_threshold": 2,
     "extra_headers": {},
     "extra_body": {},
     "temperature": 0,

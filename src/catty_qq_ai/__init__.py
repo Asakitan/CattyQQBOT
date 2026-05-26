@@ -218,6 +218,28 @@ _NSFW_STICKY_BY_SCOPE: dict[str, float] = {}
 # 也检测明确 closing 语义 (好了/累了/睡吧 等) 直接退出.
 _NSFW_STICKY_IDLE_COUNT: dict[str, int] = {}
 _NSFW_STICKY_IDLE_LIMIT = 3
+# 主 nsfw_spark_model 软拒累计计数器 — 达 threshold 后该 scope 自动切 fallback_model.
+# 收到非软拒 reply 自动 reset (回主 model).
+_NSFW_SOFT_REFUSE_COUNT: dict[str, int] = {}
+
+
+def _pick_nsfw_model_for(scope_key: str) -> str:
+    """根据 scope softrefuse 计数挑 model: 累计 >= threshold → fallback 模型."""
+    threshold = max(1, int(getattr(config, "catty_nsfw_softrefuse_threshold", 2) or 2))
+    count = _NSFW_SOFT_REFUSE_COUNT.get(scope_key, 0)
+    if count >= threshold:
+        fallback = (config.catty_nsfw_fallback_model or "").strip()
+        if fallback:
+            return fallback
+    return (config.catty_nsfw_spark_model or "").strip() or config.catty_filter_model
+
+
+def _record_nsfw_reply_outcome(scope_key: str, was_refusal: bool) -> None:
+    """非软拒 → reset 计数 (下次回主 model). 软拒 → +1 (累计达 threshold 切 fallback)."""
+    if was_refusal:
+        _NSFW_SOFT_REFUSE_COUNT[scope_key] = _NSFW_SOFT_REFUSE_COUNT.get(scope_key, 0) + 1
+    else:
+        _NSFW_SOFT_REFUSE_COUNT.pop(scope_key, None)
 _NSFW_CLOSING_INTENT_WORDS: tuple[str, ...] = (
     "好了", "到这里", "停一下", "停吧", "休息", "睡吧", "累了", "穿上",
     "穿好", "盖好", "清理", "收拾", "不要再", "别再", "够了", "可以了",
@@ -6899,30 +6921,32 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 logger.debug(f"author_note inject failed (non-fatal): {exc}")
         try:
             if _prefer_spark:
-                # NSFW deep 路径: 走 catty_nsfw_spark_model (config 配置), 跟 filter (mood
-                # classifier 等) 解耦. messages 已经在 _build_messages 里 slim 化 +
-                # 过滤掉 assistant 软拒回复 + 加 OOC/IC double-layer jailbreak prefix.
-                reply = await chat_completion_nsfw_spark(config, messages, max_tokens=800)
-                # 检测软拒 → 替换成撒娇式后退模板 (保留亲密感 + 留余地继续推进, 不破情景).
-                # 主人原话『往后退一步, 还可以继续向前进, 不会破坏情景的』
-                if _is_soft_refusal_reply(reply):
+                # NSFW deep 路径: 默认走 catty_nsfw_spark_model (主人测 5.5 在 production
+                # prompt 下 83% 通过). 累计 N 次软拒 (per-scope) 后自动切 fallback model
+                # (5.3-codex-spark). 收到非软拒 reply 重置计数回主 model.
+                _chosen_model = _pick_nsfw_model_for(_sticky_key)
+                reply = await chat_completion_nsfw_spark(
+                    config, messages, max_tokens=800, model_override=_chosen_model,
+                )
+                _was_refusal = _is_soft_refusal_reply(reply)
+                _record_nsfw_reply_outcome(_sticky_key, _was_refusal)
+                if _was_refusal:
+                    _new_count = _NSFW_SOFT_REFUSE_COUNT.get(_sticky_key, 0)
                     logger.warning(
-                        f"NSFW spark soft-refusal detected, replacing with retreat template "
-                        f"(orig_preview={reply[:80]!r})"
+                        f"NSFW soft-refusal model={_chosen_model} count={_new_count} "
+                        f"key={_sticky_key} → retreat template (orig={reply[:60]!r})"
                     )
                     reply = _pick_retreat_template(
                         is_owner=_user_is_owner,
                         user_id=str(event.user_id),
                     )
-                # strip 软拒尾巴 (例: "...不过人家可以陪你写一段更含蓄的...")
+                else:
+                    logger.info(f"chat: NSFW deep 路径 OK (model={_chosen_model}), tools 跳过")
+                # strip 软拒尾巴 (兜底)
                 reply = _strip_soft_refusal_tail(reply)
-                # post-process strip kaomoji 颜文字 (双保险, 防 prompt 没顶住)
+                # post-process strip kaomoji 颜文字 (双保险)
                 reply = _strip_nsfw_kaomoji(reply)
                 nsfw_image_segments = []
-                logger.info(
-                    f"chat: 走 NSFW deep 路径 (model={config.catty_nsfw_spark_model or config.catty_filter_model}), "
-                    f"tools 跳过"
-                )
             else:
                 reply = await chat_completion_with_tools(
                     config,

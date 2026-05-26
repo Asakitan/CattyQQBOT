@@ -146,10 +146,13 @@ class Config(BaseModel):
     catty_filter_temperature: float | None = 0.0
     catty_filter_max_tokens: int | None = 64
     catty_filter_request_timeout: float | None = 10.0
-    # NSFW deep 路径 (stage 8/9/10) 专用 model — benchmark 实测 5.5 在真 production
-    # prompt 下仍软拒『太露骨/不能继续写』, 而 5.3-codex (不带 -spark) 24/24 全过.
-    # 空时 fallback 到 catty_filter_model. **不 hardcode 默认值**, 主人在 config.json 里设.
+    # NSFW deep 路径 (stage 8/9/10) 专用 model. 空时 fallback 到 catty_filter_model.
+    # **不 hardcode 默认值**, 主人在 config.json 里设.
     catty_nsfw_spark_model: str = ""
+    # 累计软拒达 threshold 后自动切的 fallback model (默认空 → 用 catty_filter_model = spark).
+    # 例: 主 model = gpt-5.5, fallback = gpt-5.3-codex-spark.
+    catty_nsfw_fallback_model: str = ""
+    catty_nsfw_softrefuse_threshold: int = 2
     catty_filter_group_batch_messages: int = 200
     catty_filter_group_batch_seconds: float = 1200.0
     catty_filter_anger_enabled: bool = False  # 主人:每条群消息都喂 spark 判耐心太烧
