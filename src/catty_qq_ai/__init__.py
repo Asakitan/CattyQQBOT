@@ -1166,6 +1166,37 @@ _NSFW_KAOMOJI_RE = re.compile(
 )
 
 
+# NSFW reply post-process: 替换裸露『我/我的』为『人家/猫猫/笨猫』第一人称自称.
+# 主人原话『又在说我了, NSFW 里面能不能用程序替换我成爪爪/人家?』
+# 模型偶尔会生成『我被主人抱紧』『我红着脸回吻』这种, 跟人格不符.
+# rotation: '我' → '人家'(70%) / '猫猫'(20%) / '笨猫'(10%) 加随机感.
+_FIRST_PERSON_ALIASES: tuple[str, ...] = ("人家", "人家", "人家", "人家", "人家", "人家", "人家", "猫猫", "猫猫", "笨猫")
+
+
+def _replace_first_person_nsfw(text: str) -> str:
+    """裸露的『我/我的/让我』替换成笨猫自称."""
+    if not text or "我" not in text:
+        return text
+    import random as _r
+    out: list[str] = []
+    i = 0
+    while i < len(text):
+        ch = text[i]
+        if ch == "我":
+            # 处理 '我的'/'我们' 等组合
+            nxt = text[i + 1] if i + 1 < len(text) else ""
+            alias = _r.choice(_FIRST_PERSON_ALIASES)
+            out.append(alias)
+            i += 1
+            continue
+        out.append(ch)
+        i += 1
+    result = "".join(out)
+    if result != text:
+        logger.debug(f"nsfw first-person rewrite: '我' → 人家/猫猫/笨猫 ({len(text)} chars)")
+    return result
+
+
 def _strip_nsfw_kaomoji(text: str) -> str:
     if not text:
         return text
@@ -6948,6 +6979,8 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                 reply = _strip_soft_refusal_tail(reply)
                 # post-process strip kaomoji 颜文字 (双保险)
                 reply = _strip_nsfw_kaomoji(reply)
+                # 替换裸露『我』→『人家/猫猫/笨猫』 (NSFW 自称强制)
+                reply = _replace_first_person_nsfw(reply)
                 nsfw_image_segments = []
             else:
                 reply = await chat_completion_with_tools(
