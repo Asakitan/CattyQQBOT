@@ -34,7 +34,14 @@ from .config import Config
 
 
 LEVEL_CAP = 10
-EXP_PER_LEVEL = 100  # 每升一级需要的好感度经验; level = min(exp//100 + 1, 10)
+# 每级升级所需新增经验:索引 i 即 Lv(i+1) → Lv(i+2)
+# 主人:1→2=10, 2→3=15, 3→4=20, 4→5=25, 5→6=30, 6→7=35, 7→8=50, 8→9=100, 9→10=200
+_LEVEL_UP_COSTS: list[int] = [10, 15, 20, 25, 30, 35, 50, 100, 200]
+# 累计经验门槛(索引即 level-1):Lv1 起点 0,Lv2 起点 10,...,Lv10 起点 485
+_LEVEL_CUMULATIVE_EXP: list[int] = [0]
+for _c in _LEVEL_UP_COSTS:
+    _LEVEL_CUMULATIVE_EXP.append(_LEVEL_CUMULATIVE_EXP[-1] + _c)
+MAX_LEVEL_EXP: int = _LEVEL_CUMULATIVE_EXP[LEVEL_CAP - 1]  # 到达 Lv10 所需累计 exp
 DAILY_EXP_CAP = 100  # 每天单用户最多累积 100 好感度,防刷屏
 
 CHECKIN_BASE_MIN = 200
@@ -62,7 +69,20 @@ def _now_iso() -> str:
 def _level_from_exp(exp: int) -> int:
     if exp <= 0:
         return 1
-    return min(int(exp // EXP_PER_LEVEL) + 1, LEVEL_CAP)
+    # 找最大的 i 使 _LEVEL_CUMULATIVE_EXP[i] <= exp,返回 i+1(即对应 level)
+    for i in range(LEVEL_CAP - 1, -1, -1):
+        if exp >= _LEVEL_CUMULATIVE_EXP[i]:
+            return i + 1
+    return 1
+
+
+def _next_level_exp(level: int) -> int | None:
+    """升到 (level+1) 所需的累计 exp;已满级返回 None。"""
+    if level >= LEVEL_CAP:
+        return None
+    if level < 1:
+        return _LEVEL_CUMULATIVE_EXP[1]
+    return _LEVEL_CUMULATIVE_EXP[level]
 
 
 def _checkin_bonus_for_level(level: int) -> int:
@@ -200,7 +220,7 @@ class AffectionStore:
     def get_level_and_exp(self, user_id: str | int) -> tuple[int, int]:
         uid = str(user_id)
         if self.is_owner(uid):
-            return LEVEL_CAP, EXP_PER_LEVEL * LEVEL_CAP
+            return LEVEL_CAP, MAX_LEVEL_EXP
         with self._lock:
             exp = int(self._record(uid).get("exp") or 0)
         return _level_from_exp(exp), exp
@@ -210,7 +230,7 @@ class AffectionStore:
         level, exp = self.get_level_and_exp(uid)
         with self._lock:
             rec = dict(self._record(uid)) if not self.is_owner(uid) else {}
-        next_lv_exp = (level * EXP_PER_LEVEL) if level < LEVEL_CAP else None
+        next_lv_exp = _next_level_exp(level)
         lo, hi = predict_checkin_range(level)
         return {
             "user_id": uid,
@@ -290,7 +310,7 @@ class AffectionStore:
             level, exp = self.get_level_and_exp(uid)
             return {"added": 0, "exp": exp, "level": level, "level_up": False}
         if self.is_owner(uid):
-            return {"added": 0, "exp": EXP_PER_LEVEL * LEVEL_CAP, "level": LEVEL_CAP, "level_up": False}
+            return {"added": 0, "exp": MAX_LEVEL_EXP, "level": LEVEL_CAP, "level_up": False}
         today = _today_local()
         with self._lock:
             rec = self._record(uid)

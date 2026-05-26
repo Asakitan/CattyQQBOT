@@ -146,6 +146,27 @@ def _draw_text_centered(draw: ImageDraw.ImageDraw, cx: int, y: int, text: str,
     _draw_text(draw, cx - w // 2, y, text, color, spacing=spacing, scale=scale)
 
 
+def _fmt_compact(n: int) -> str:
+    """像素卡数字紧凑显示:1234 → 1.2K,12345 → 12K,1234567 → 1.2M。
+
+    - < 1000:原样
+    - 1000~999999:K 单位(< 10 保留 1 位小数且去末尾 .0,>= 10 取整)
+    - 1000000+:M 单位(规则同上)
+    """
+    if n < 1000:
+        return str(n)
+    if n < 1_000_000:
+        v, unit = n / 1000.0, "K"
+    else:
+        v, unit = n / 1_000_000.0, "M"
+    if v < 10:
+        s = f"{v:.1f}"
+        if s.endswith(".0"):
+            s = s[:-2]
+        return f"{s}{unit}"
+    return f"{int(v)}{unit}"
+
+
 def _draw_border(draw: ImageDraw.ImageDraw, x0: int, y0: int, x1: int, y1: int,
                  color: tuple[int, int, int]) -> None:
     # 1px 矩形边框
@@ -601,7 +622,7 @@ def render_card(
     points_label_y = sep_y + 3
     _draw_text_centered(draw, CANVAS_W // 2, points_label_y, "POINTS", DARK, scale=1)
 
-    points_text = "INF" if is_owner else str(points)
+    points_text = "INF" if is_owner else _fmt_compact(points)
     big_y = points_label_y + GLYPH_H + 1
     _draw_text_centered(draw, CANVAS_W // 2, big_y, points_text,
                         ACCENT if not is_owner else GREEN, scale=2)
@@ -617,7 +638,7 @@ def render_card(
         if is_owner:
             line = "OWNER MAX"
         else:
-            line = f"+{today_gained or 0} GOT IT"
+            line = f"+{_fmt_compact(today_gained or 0)} GOT IT"
         _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, line, BG, scale=1)
     else:
         if is_owner or exp_next_level is None or exp_next_level <= 0:
@@ -627,7 +648,7 @@ def render_card(
             # 上一行 EXP 数字
             _draw_text_centered(
                 draw, CANVAS_W // 2, footer_top + 1,
-                f"EXP {exp_current}/{exp_next_level}", BG, scale=1
+                f"EXP {_fmt_compact(exp_current)}/{_fmt_compact(exp_next_level)}", BG, scale=1
             )
             status_y = footer_top + 1 + GLYPH_H + 1
             if status_y + GLYPH_H <= CANVAS_H - 4:
