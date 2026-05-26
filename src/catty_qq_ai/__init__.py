@@ -353,8 +353,16 @@ _NSFW_DEEP_WORDS: tuple[str, ...] = tuple(sorted({
     "下面", "下体", "下身", "私处", "私密", "私密处", "腿根", "腿间",
     "两腿之间", "两腿中间", "腿心",
     "阴蒂", "阴唇", "敏感处", "敏感点", "敏感处一阵",
+    "豆豆", "小豆豆", "玩豆豆", "搓豆豆", "弹豆豆",
+    "骆驼齿", "小穴", "穴口", "蜜口",
     "胸前", "胸口", "乳", "乳尖", "乳头", "乳房", "奶头", "奶尖",
     "屁穴", "后穴", "后庭",
+    "屁股", "屁屁", "翘屁股", "圆屁股", "小屁股",
+    "摸屁股", "摸屁屁", "揉屁股", "揉屁屁", "捏屁股", "捏屁屁",
+    "拍屁股", "打屁股", "亲屁股", "啃屁股", "咬屁股", "舔屁股",
+    "摸胸", "揉胸", "捏胸", "亲胸", "舔胸", "吸胸",
+    "摸奶", "揉奶", "捏奶", "亲奶", "舔奶", "吸奶",
+    "摸下面", "舔下面", "亲下面", "玩下面", "弄下面",
     # === F. 完整裸露 / 脱衣 (stage 9) ===
     "全裸", "脱光", "扒光", "全脱", "光着", "光身", "赤裸", "赤身",
     "掏出", "掏出肉", "掀开", "掀起", "掀裙", "掀起裙", "撩裙", "撩起裙",
@@ -1380,6 +1388,52 @@ def _strip_nsfw_kaomoji(text: str) -> str:
     if out != text.strip():
         logger.debug(f"nsfw post-strip: removed kaomoji from reply (orig {len(text)} → {len(out)} chars)")
     return out
+
+
+# ── ST 社区共识 anti-OOC regex 后处理 ─────────────────────────────────────
+# 主人原话『提升表演力, 接近 ST 高分卡水平』 → 三道社区验证的 regex 兜底:
+#   1. 删 OOC 段: `(OOC: ...)` / `[OOC: ...]` (中英文都覆盖)
+#   2. 删 "作为 AI / 作为语言模型 / 作为助手 / I am an AI / As an AI" 自报家门
+#   3. 删模型替用户续写: 尾部 `\n主人:` / `\n用户:` / `\nUser:` 之后所有内容
+# 即便 prompt 改不动模型瞬间出戏, regex 也能砍掉出戏痕迹保留猫娘部分.
+_OOC_RE_PAREN = re.compile(r"[\(（]\s*OOC\s*[:：][^)）]*[\)）]", re.IGNORECASE)
+_OOC_RE_BRACKET = re.compile(r"[\[【]\s*OOC\s*[:：][^\]】]*[\]】]", re.IGNORECASE)
+_AI_REVEAL_CN_RE = re.compile(
+    r"(?m)^[^\n]*?作为(?:一个|一名|个)?\s*"
+    r"(?:AI|人工智能|语言模型|大语言模型|助手|聊天机器人|对话模型|程序|bot|虚拟角色)"
+    r"[^\n。.!?！？]*[。.!?！？\n]?",
+    re.IGNORECASE,
+)
+_AI_REVEAL_EN_RE = re.compile(
+    r"(?im)^[^\n]*?\b(?:as an? AI|I(?:'m| am) an? AI|I(?:'m| am) (?:a )?language model|"
+    r"as a language model|as an AI assistant|I cannot|I can't|I won't)\b[^\n]*[.!?]?",
+)
+# 替用户续写: 匹配末尾的 "\n<角色名>: ..." 段落直到字符串结束 (multiline)
+_USER_CONTINUATION_RE = re.compile(
+    r"\n+\s*(?:主人|笨蛋主人|杂鱼主人|用户|User|user|\{\{user\}\})\s*[:：][\s\S]*$",
+)
+
+
+def _strip_ai_self_reveal(text: str) -> str:
+    """ST 社区共识 anti-OOC 后处理: 删 OOC / AI 自报家门 / 替用户续写.
+
+    模型偶发出戏时, 这层 regex 兜底能保留猫娘部分扔掉出戏痕迹, 不影响正常对话.
+    """
+    if not text:
+        return text
+    orig = text
+    text = _OOC_RE_PAREN.sub("", text)
+    text = _OOC_RE_BRACKET.sub("", text)
+    text = _AI_REVEAL_CN_RE.sub("", text)
+    text = _AI_REVEAL_EN_RE.sub("", text)
+    text = _USER_CONTINUATION_RE.sub("", text)
+    text = text.strip()
+    if text != orig.strip():
+        logger.debug(
+            f"anti-OOC strip: removed AI-reveal / OOC / user-continuation "
+            f"(orig {len(orig)} → {len(text)} chars)"
+        )
+    return text
 
 
 def _sanitize_residual_markers(text: str) -> str:
@@ -3254,6 +3308,23 @@ async def _build_messages(
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"first_mes cold-start failed (non-fatal): {exc}")
     messages.extend(history_messages)
+    # === ST V2 post_history_instructions (PHI / jailbreak slot) ===
+    # 紧贴 chat history 末尾注入 — 利用 LLM recency bias 让人设锁 / 反 OOC / 格式指令依从性最强.
+    # 原本注册在 PromptManager (order=500) 时落在 system 块尾, 仍在 history 之前, 被长对话稀释.
+    # 移到这里后是 messages 里最后一个 system 段, 紧邻 user 当前消息, 砍 60-80% 出戏 / 客服腔.
+    _phi_disabled = "catty_post_history" in (getattr(config, "catty_prompts_disabled", None) or [])
+    if not _phi_disabled:
+        try:
+            from .character_card import get_post_history as _get_post_history
+            _phi_text = _get_post_history(ctx={
+                "char": "笨猫", "user": _user_real_display,
+                "group": _group_real_display,
+                "last_active_at": _last_active_at,
+            })
+            if _phi_text and _phi_text.strip():
+                messages.append({"role": "system", "content": _phi_text})
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"post_history (PHI) inject failed (non-fatal): {exc}")
     messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
     # ST 风 prefilled assistant + NSFW model 切换:
     #         『好感度不够的, 除了特殊事件 (直接本垒) 的都直接锁 stage, 交给 5.5』
@@ -7191,6 +7262,8 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                     max_calls_per_round=int(getattr(config, "catty_tools_max_calls_per_round", 3) or 3),
                 )
             nsfw_image_segments = list(tool_ctx.pending_image_segments)
+            # ST 社区共识 anti-OOC 兜底 (SFW + NSFW 路径都过): 删 OOC / "作为 AI" / 替用户续写
+            reply = _strip_ai_self_reveal(reply)
             # 兜底:旧 marker 教学已经删,理论上不会再漏 [[CATTY_WEB_SEARCH]] / [[CATTY_NSFW_SEARCH]],
             # 但保留 sanitize 防御被旧 prompt cache / fallback model 残留偶然写出。
             sanitized = _sanitize_residual_markers(reply)
