@@ -40,13 +40,16 @@
     |   300 | catty_world_info            | worldInfoAfter   | world_info.build_world_info_block |
     |   320 | catty_mes_example           | dialogueExamples | character_card.get_mes_example |
     |   350 | catty_story_arc             | (catty-specific) | story_arc.build_story_arc_prompt |
-    |   500 | catty_post_history          | jailbreak        | character_card.get_post_history |
+    |  (PHI)| catty_post_history          | jailbreak (PHI)  | character_card.get_post_history  ← 注入位置: history 之后 |
 
 注:
-- catty_post_history 走 prepend(role=system + content_only),
-  但**真正紧贴 user 最后一条**的注入由 author_note.inject_author_note 完成,
-  这里只是 prompt 链路最后的保险段
+- catty_post_history (PHI / jailbreak slot) **不在 PromptManager 注册** —
+  ST V2 标准位置是 chat history 之后 (紧贴 user 最后消息之前),
+  利用 LLM recency bias 让人设锁 / 反 OOC / 格式指令依从性最强.
+  真正的注入由 __init__._build_messages 在 messages.extend(history) 之后完成.
+- author_note (depth=2/3/4) 在 history 中段倒数第 N 条之前插入贴身提醒, 是人设防漂移的中段闸.
 - chatHistory 在 PromptManager **之外**追加(messages.extend(history) + 当前 user message)
+- 最终顺序: system 块 → [first_mes 冷会话] → history → PHI (post_history) → user 当前消息
 
 JSON 配置示例(config.json 顶层):
     {
@@ -783,12 +786,12 @@ def register_catty_persona(
         order=480,
     )
 
-    # === post_history (jailbreak slot) - 最末 ===
-    mgr.register(
-        "catty_post_history",
-        content_fn=lambda: _cc.get_post_history(ctx=macro_ctx),
-        order=500,
-    )
+    # === post_history (jailbreak slot) ===
+    # ST V2 标准: post_history_instructions 注入位置是 **chat history 之后**,
+    # 紧贴 user 最后消息之前 — 不是 system 块尾. 利用 LLM recency bias 让人设锁依从性最强.
+    # 因此这里不再注册到 PromptManager. 真正的注入由 __init__._build_messages 在
+    # messages.extend(history) 之后、append(user_msg) 之前完成.
+    # 主人可通过 config.catty_prompts_disabled=["catty_post_history"] 关掉 PHI 注入.
 
 
 __all__ = [
