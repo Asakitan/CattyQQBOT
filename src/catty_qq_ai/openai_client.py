@@ -380,17 +380,42 @@ async def _post_chat_completion_raw(
         payload["tools"] = tools
         payload["tool_choice"] = tool_choice
 
-    async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
-        response = await client.post(_chat_completions_url(base_url), headers=headers, json=payload)
+    # 主人:任何 5xx 自动 retry 3 次(共 4 次尝试),3 次都失败才上抛
+    # 4xx 是 client error,重试也是一样的错,不重试
+    last_error: OpenAICompatibleError | None = None
+    for attempt in range(4):
+        async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
+            response = await client.post(
+                _chat_completions_url(base_url), headers=headers, json=payload,
+            )
 
-    if response.status_code >= 400:
+        if response.status_code < 400:
+            try:
+                return response.json()
+            except ValueError as exc:
+                raise OpenAICompatibleError(
+                    "AI 返回的不是 JSON。", response.text[:500],
+                ) from exc
+
         detail = response.text[:500]
-        raise OpenAICompatibleError(_catty_http_status_message("AI 接口", response.status_code), detail)
+        if not (500 <= response.status_code < 600):
+            # 4xx 直接抛,无重试意义
+            raise OpenAICompatibleError(
+                _catty_http_status_message("AI 接口", response.status_code), detail,
+            )
 
-    try:
-        return response.json()
-    except ValueError as exc:
-        raise OpenAICompatibleError("AI 返回的不是 JSON。", response.text[:500]) from exc
+        last_error = OpenAICompatibleError(
+            _catty_http_status_message("AI 接口", response.status_code), detail,
+        )
+        if attempt < 3:
+            backoff = 0.5 * (2 ** attempt)  # 0.5 / 1.0 / 2.0 s
+            _logger.info(
+                f"AI 接口 {response.status_code} retry {attempt + 1}/3 after {backoff}s"
+            )
+            await asyncio.sleep(backoff)
+
+    assert last_error is not None
+    raise last_error
 
 
 async def _post_ollama_chat(
