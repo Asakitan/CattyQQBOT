@@ -307,7 +307,6 @@ def score_user_message(text: str, *, is_nsfw_context: bool = False) -> int:
 
 
 # ── NSFW 突破事件 — 概率随请求次数 ramp ────────────────────────────
-# 主人原话『要求 10 次后 100%, 5 次 20%』 + 原来的『0.89%』作为单次起步.
 BREAKTHROUGH_BASE_CHANCE = 0.0089
 
 BREAKTHROUGH_OUTCOME_DELTA: dict[str, int] = {
@@ -316,7 +315,6 @@ BREAKTHROUGH_OUTCOME_DELTA: dict[str, int] = {
 }
 
 # 每个 user 的 deep NSFW 请求历史 (timestamp list), 24h 滑动窗口.
-# 主人原话『一直要求色色, 10 次 100%, 5 次 20%』 — 计数攒着, 突破成功后清零重新开始.
 _DEEP_REQUEST_HISTORY: dict[str, list[float]] = {}
 _DEEP_REQUEST_WINDOW_SECONDS = 24 * 3600  # 24h 窗
 _DEEP_REQUEST_MAX_USERS = 2048  # 防内存爆
@@ -362,9 +360,6 @@ def record_deep_nsfw_request(user_id: str, is_group: bool = False) -> int:
 def reset_deep_nsfw_count(user_id: str, is_group: bool = False) -> None:
     """突破成功后清空对应 scope 的计数 — 让累积从 0 重新开始 (避免突破后还是 100%)."""
     _DEEP_REQUEST_HISTORY.pop(_scope_key(user_id, is_group), None)
-
-
-# 主人原话:
 #   私聊 ramp:『要求 10 次后 100%, 5 次 20%』, 1 次保留 0.89% 起步
 #   群聊 ramp:『1 次 0.01%, 10 次 1%, 20 次 5%, 25 次 15%, 30 次 100%』
 _RAMP_ANCHORS_PRIVATE: tuple[tuple[int, float], ...] = (
@@ -434,9 +429,6 @@ def maybe_trigger_breakthrough(
     if pos_score > neg_score:
         return "pleasant"
     return "pleasant" if r.random() < 0.70 else "unpleasant"
-
-
-# 随机场景池 — 主人原话『要有 story 和情景啊』+ 『多做几种情趣情况:
 # 滑倒了刚好坐肉棒上插进去 / 被推倒强上了 / 自己发情了 / 认错了主人』
 #
 # 每场都是 trope-style 完整 setup, 包含: 物理触发 + 场地 + 起手姿势 + 前情。
@@ -470,8 +462,6 @@ _BREAKTHROUGH_SCENES_UNPLEASANT: tuple[tuple[str, str], ...] = (
     ("sick_ignored", "笨猫发烧 38.5 度趴在床上鼻塞声音哑, 对方却没注意硬要继续, 笨猫连推都推不动"),
     ("fight_then_force", "刚和对方闹了点小别扭还没说开, 笨猫话还没说完就被推到墙上, 委屈和怒气一起涌上来"),
 )
-
-# ── 群聊 breakthrough 场景池 — 主人原话『群里也可以触发 breakthrough, 场景就变成大庭广众下被 XXX』
 # 群里突破极罕见 (1次0.01% / 30次100%), 所以每个 trope 都很 epic — 公开场合+不该发生的反差.
 _BREAKTHROUGH_SCENES_PLEASANT_GROUP: tuple[tuple[str, str], ...] = (
     ("public_dare", "群友聚会玩真心话大冒险, 笨猫输了被指定『当众坐 owner 腿上听完一首歌』, 坐下去角度刁钻 JK 裙翻起一截, 全桌人都看着, 笨猫没法动也不敢出声"),
@@ -562,7 +552,6 @@ def build_breakthrough_override(outcome: str, is_group: bool = False) -> str:
 
 
 # Prefill 起步姿态 (跟普通 NSFW 不同, 突破事件需要更强的"意外感")
-# 主人原话『多做几种情趣情况』— prefill 保持极简, 让 override 里的 trope 决定具体开头,
 # 不要被固定『等…等等?!』和『不…不要…』开局锁死。模型从 prefill 自由延伸到 trope 场景。
 BREAKTHROUGH_PREFILLS: dict[str, str] = {
     "pleasant":   "（整个身体猛地僵了一下, 脸红到耳尖）嗯…",

@@ -783,7 +783,6 @@ _CATTY_BOOK: tuple[CharacterBookEntry, ...] = (
     ),
 
     # ── ⭐ 唐猫发言格式总指引 (constant=True 始终生效, 不是梗内容是句法) ⭐ ──
-    # 主人原话『我要的不是各种梗, 是这种发言格式喵』 — 之前一堆 cb_slang_* / cb_npc_* 是梗内容,
     # 这条专门教**句法 / 节奏 / 句式套路**, LLM 套用到任何话题生成时都自带唐猫节奏。
     CharacterBookEntry(
         identifier="cb_speech_format",

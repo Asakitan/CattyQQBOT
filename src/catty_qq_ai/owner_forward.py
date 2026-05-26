@@ -27,8 +27,6 @@ _config_ref: Config | None = None
 _PENDING_FLAGS: "OrderedDict[str, dict]" = OrderedDict()
 _PENDING_TTL_SECONDS = 7 * 24 * 3600
 _PENDING_MAX = 64
-
-# 陌生人/临时会话私聊 — 给对方一句猫娘版加好友提示, 主人原话『私聊要提示加好友才回复』。
 # per-user 6h 冷却避免对方多发就被刷屏。
 _STRANGER_HINT_TEMPLATES: tuple[str, ...] = (
     "嗨嗨～是新朋友嘛?ฅ 笨猫临时会话不太爱回啦, 想正经聊呢主人申请加个好友先呗～",
@@ -271,7 +269,6 @@ async def _handle_private(
     lines.append("（非好友/临时会话已转发；猫猫会给对方回一句加好友提示。）")
     await _send_to_owner(bot, "\n".join(lines))
     logger.info(f"owner_forward: relayed private message from {sender_qq} sub_type={sub_type or 'unknown'} to owner")
-    # 主人原话『私聊要提示加好友才回复』— 给陌生人回一句猫娘版加好友提示 (6h per-user 冷却)
     await _send_stranger_friend_hint(bot, sender_qq)
     if _should_block_ai_reply():
         matcher.stop_propagation()

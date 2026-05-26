@@ -226,7 +226,6 @@ def build_scenario_playbook_prompt(no_reply_marker: str) -> str:
 
 
 def build_scene_discrimination_prompt(no_reply_marker: str) -> str:
-    # 主人原话『内部流程不要 leak, 也别再说"不要把流程说出来"』 — 那句话本身也是 leak,
     # 让模型"知道有 6 步流水线"就会被诱导报告"我先想了 6 步…"。直接给规则不命名流程。
     return (
         "**接话前先在心里过一遍这几条** (只内部判断, 不要把这些步骤名/编号/标签说给 user):\n"
