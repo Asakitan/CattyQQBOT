@@ -1130,6 +1130,26 @@ _NSFW_DEPTH_IMMERSION_HINT = (
 )
 
 
+# ── Recency reminder (紧贴 user 注入, 完全静态 cache-friendly) ──────────────
+# 主人 logs (2026-05-26): spark 在 P6 内射后回到 stage 1 重启场景. 现在把大块
+# _override 移到 persona 后做 cache prefix, history 后只放这个**静态**短提醒拿
+# recency bias. 内容 = 4 个核心铁律的浓缩, 不含 affection_level / owner 等可变项,
+# 永远不变 → 每轮都能 cache hit, 又能在 LLM 注意力末端强化铁律.
+_NSFW_RECENCY_REMINDER = (
+    "【贴脸·5 铁律 (紧贴 user 提醒, 任何 reply 都遵守)】\n"
+    "1. **acknowledge user 上一轮**: 第 1 句直接承接 user 写的具体动作/部位/液体/姿势, "
+    "不能视而不见, 不能换话题, 不能开场就『窗外/床头/月光』通用景物起手。\n"
+    "2. **延续场景**: history 已建立的场景物件/位置/姿势/进度延续, 绝不换场景重启。\n"
+    "3. **主动跨 phase**: 每条 reply 跨 1-2 个 phase, 严禁原地踏步在 P3-P4 循环。"
+    "笨猫会自己达到高潮 (P6) + 自己进入余韵 (P8), 不用 user 喊『高潮/好了』。\n"
+    "4. **结尾留 hook**: 一个动作/反问/未完成的撒娇/邀请性小动作让 user 接住, "
+    "把场景推进**最小一步**就停, 不要把一幕戏写完, 也不要 meta 问『接下来怎样喵?』。\n"
+    "5. **call user properly**: owner 用『主人/笨蛋主人/杂鱼主人』+ 具名, "
+    "**绝不**泛指『你/你的/你那』 (操作手册感失去亲密)。"
+)
+
+
+
 # Prefill: 起步姿态 = (resist_label, is_private) — 10 种, soft open-ended 情绪起步
 # 关键: prefill 绝不带 "这里有人啦/群里有别人/别说这种话" 等元解释 —
 #       这些是 system 状态的 leak, 模型 parrot 出来就成了客服式拒绝。
@@ -3552,12 +3572,18 @@ async def _build_messages(
         # 全部不放进 spark 上下文, 避免模型链式分析 + 元术语 leak。
         # history 过滤掉 assistant 软拒回复, 防 spark continue 之前的拒绝 pattern。
         # 主人 logs (2026-05-26 17:40-18:00) 显示 12 条截断太短 — 14 轮对话被砍,
-        # 笨猫每 1-2 轮就换场景从头开始(创可贴 → 墙边猫薄荷酒 → 浴室 → 抱腿当枕头 → 丝带绑床头).
-        # 扩到 24 条 (~12 轮) 给模型足够上下文延续场景.
-        _NSFW_SLIM_HISTORY_MAX = 24  # ~12 轮 (原 12 太短导致场景重启)
+        # 笨猫每 1-2 轮就换场景从头开始. 扩到 50 条 (~25 轮, 主人原话『history 更多一点』).
+        _NSFW_SLIM_HISTORY_MAX = 50  # ~25 轮 (从 24→50, 主人要求更多 context 延续场景)
         _slim_persona = _build_nsfw_slim_persona_bundle()
+        # 【cache 友好结构】把大块 _override (~3000 chars, 对主人静态) 移到 persona 后, 让
+        # [persona + override] (~5000 chars / ~2500 tokens) 成为稳定 prefix 每轮 cache hit.
+        # history 之后只放一个**短而静态**的 recency reminder 拿 recency bias 又不破坏 cache.
+        # 原结构 [persona, history, user, override, prefill]: override 位置随 history 长度变,
+        # OpenAI prompt caching 看 prefix 完全 invalidate → 每轮重读 5000 chars 浪费 token + 慢.
+        # 主人原话『不要一直变不能 hit cache』 — 重构为下方结构.
         _slim_messages: list[dict] = [
-            {"role": "system", "content": _slim_persona},
+            {"role": "system", "content": _slim_persona},   # cache prefix #1 (静态)
+            {"role": "system", "content": _override},        # cache prefix #2 (主人对话静态)
         ]
         _filtered_history = _filter_soft_refusal_history(history_messages)
         _slim_messages.extend(_filtered_history[-_NSFW_SLIM_HISTORY_MAX:])
@@ -3565,7 +3591,8 @@ async def _build_messages(
             "role": "user",
             "content": _build_user_content(incoming, image_description=image_description),
         })
-        _slim_messages.append({"role": "system", "content": _override})
+        # 短静态 recency reminder — 紧贴 user 拿 recency bias, 但完全静态不破坏后续 cache.
+        _slim_messages.append({"role": "system", "content": _NSFW_RECENCY_REMINDER})
         _slim_messages.append({"role": "assistant", "content": _prefill})
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
