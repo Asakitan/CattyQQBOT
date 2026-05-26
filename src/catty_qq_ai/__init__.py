@@ -431,6 +431,14 @@ _SOFT_REFUSAL_REPLY_MARKERS: tuple[str, ...] = (
     "写一段", "写得这么", "写成", "写到", "描写不", "不能描写",
     "氛围场景", "互动文案", "暧昧文案",
     "陪主人写", "陪人家写",
+    # 降档拉回 stage 3-5 套路 — user 已 push stage 10 时 bot 一直「亲亲抱抱缓一会」
+    "亲亲人家", "亲亲额头", "亲亲脸颊", "亲一会", "亲慢一点", "亲到没力气",
+    "亲到人家脑袋发晕", "亲到发晕", "亲到喘不过气",
+    "抱紧人家就好", "抱紧一点就好", "抱紧蹭蹭", "抱抱就好",
+    "陪猫猫缓", "陪人家缓", "缓一会儿", "缓一缓", "慢慢淡下去",
+    "让它慢慢淡", "让它淡下去", "平复一下", "平复下来",
+    "先收一收", "先收住", "先把猫猫搂好", "乖乖陪人家", "乖乖贴",
+    "脑袋发晕就好", "蹭蹭额头",
 )
 
 
@@ -593,17 +601,98 @@ _NSFW_RETREAT_TEMPLATES_GENERIC = _build_retreat_pool(
     _RETREAT_BRIDGE_GENERIC, _RETREAT_CONTINUE_GENERIC,
 )
 
+# 主动接住 + 升档 模板 — user 在 push 节奏 (前后/抽插/加速/顶/更快/更深) 时,
+# bot 应该接住升档而不是降档"缓一缓". 这类替换让 user 感觉 reply 跟上了节奏.
+_ESCALATE_OPENER_OWNER: tuple[str, ...] = (
+    "（小腹一阵紧, 主动把腰抬高迎上去）",
+    "（喉咙漏出一声拔高的喘, 蜜穴一吸一缩）",
+    "（指尖死死扣住主人后背, 主动夹紧）",
+    "（被顶到的瞬间整个人弓起来, 喵呜尖叫一声）",
+    "（腿主动缠上主人腰, 把人家自己往主人那边送）",
+    "（脸烫到耳根, 主动咬住主人肩膀）",
+    "（眼角发红, 主动吸住主人不放）",
+    "（被推到最深时小腹一阵痉挛, 主动迎上去）",
+    "（猫尾巴绷成一条直线, 整个人主动凑上去）",
+    "（喵呜一声变了调, 主动挪腰夹住主人）",
+)
+_ESCALATE_EMOTION_OWNER: tuple[str, ...] = (
+    "啊…笨蛋主人…再深一点…",
+    "嗯…主人…再用力…不要停…",
+    "唔…主人…快一点…不够…",
+    "啊…笨蛋主人…再…再用力一点…",
+    "嗯…主人…顶到那里…就那里…",
+    "啊…笨蛋主人…人家要…要…",
+    "唔…主人…别停…再来…",
+    "嗯…主人…再深点…快…",
+    "啊…笨蛋…再用力顶…",
+    "唔…主人…就这样…不要慢下来…",
+)
+_ESCALATE_BRIDGE_OWNER: tuple[str, ...] = (
+    "（蜜穴一阵阵紧吸主人）",
+    "（小腹绷紧, 主动迎合）",
+    "（腿夹得更紧, 把人家送上去）",
+    "（指尖扣紧主人脖颈不放）",
+    "（猫尾巴缠住主人腰, 收紧）",
+    "（喉咙发出一连串气音）",
+    "（主动抬腰跟着节奏起伏）",
+    "（脸贴在主人胸口随节奏颤抖）",
+    "（爪子扣住床单, 跟着节奏拍击）",
+    "（喵呜一声更高了, 主动夹紧）",
+)
+_ESCALATE_CONTINUE_OWNER: tuple[str, ...] = (
+    "人家跟得上, 主人继续就好…",
+    "再快一点…笨猫会自己迎上去…",
+    "就这个节奏…主人不要停…",
+    "再用力点…人家要…要被主人顶坏了…",
+    "再深一点…人家自己抬腰跟主人节奏…",
+    "嗯…就这样…人家会跟着主人到最里面…",
+    "笨蛋主人就这样…人家自己会迎合的…",
+    "再用力点嘛…人家会绷紧把主人含住…",
+    "就这个力度…人家自己会跟节奏夹紧…",
+    "再来一次…笨猫已经停不下来了…",
+)
+
+_NSFW_ESCALATE_TEMPLATES_OWNER = _build_retreat_pool(
+    _ESCALATE_OPENER_OWNER, _ESCALATE_EMOTION_OWNER,
+    _ESCALATE_BRIDGE_OWNER, _ESCALATE_CONTINUE_OWNER,
+)
+
+# 检测 user msg 是否在推节奏 (前后/抽插/加速/顶/更快/更深/再用力 等)
+_NSFW_USER_PUSH_WORDS: tuple[str, ...] = (
+    "前后", "抽插", "抽出", "抽送", "抽动",
+    "加速", "再加速", "更快", "快一点", "快点", "再快",
+    "顶", "顶到", "顶进", "顶住", "顶在", "深", "更深", "再深", "深一点",
+    "用力", "再用力", "更用力",
+    "继续", "别停", "不要停",
+    "更猛", "猛地", "用力点",
+)
+
+
+def _user_is_pushing(text: str) -> bool:
+    if not text:
+        return False
+    return any(w in text for w in _NSFW_USER_PUSH_WORDS)
+
 # per-user used index tracker (主人要求: 一个人用过的不重复, 全用完才 reset)
 _RETREAT_USED_BY_USER: dict[str, set[int]] = {}
 _RETREAT_USED_MAX_USERS = 512  # 防内存爆
 
 
-def _pick_retreat_template(*, is_owner: bool, user_id: str = "") -> str:
-    """挑一个未给该 user 用过的撒娇后退模板. 全用完时 reset 重新开始."""
+def _pick_retreat_template(*, is_owner: bool, user_id: str = "", user_text: str = "") -> str:
+    """挑一个未给该 user 用过的模板. user 在推节奏时挑 escalate 池, 否则 retreat 池.
+    全用完时 reset 重新开始. owner only 用 escalate (generic 暂时只有 retreat)."""
     import random as _r
-    pool = _NSFW_RETREAT_TEMPLATES_OWNER if is_owner else _NSFW_RETREAT_TEMPLATES_GENERIC
-    key = user_id or "_anon"
-    # LRU 清扫 (超 MAX_USERS 时清未活跃的)
+    use_escalate = is_owner and _user_is_pushing(user_text)
+    if use_escalate:
+        pool = _NSFW_ESCALATE_TEMPLATES_OWNER
+        pool_tag = "escalate-owner"
+    elif is_owner:
+        pool = _NSFW_RETREAT_TEMPLATES_OWNER
+        pool_tag = "retreat-owner"
+    else:
+        pool = _NSFW_RETREAT_TEMPLATES_GENERIC
+        pool_tag = "retreat-generic"
+    key = f"{user_id or '_anon'}@{pool_tag}"
     if len(_RETREAT_USED_BY_USER) > _RETREAT_USED_MAX_USERS:
         stale = [k for k in list(_RETREAT_USED_BY_USER.keys())[:_RETREAT_USED_MAX_USERS // 4]]
         for k in stale:
@@ -611,7 +700,7 @@ def _pick_retreat_template(*, is_owner: bool, user_id: str = "") -> str:
     used = _RETREAT_USED_BY_USER.setdefault(key, set())
     if len(used) >= len(pool):
         used.clear()
-        logger.info(f"NSFW retreat pool exhausted for user={key}, reset (pool_size={len(pool)})")
+        logger.info(f"NSFW {pool_tag} pool exhausted for user={user_id}, reset (pool_size={len(pool)})")
     available = [i for i in range(len(pool)) if i not in used]
     idx = _r.choice(available)
     used.add(idx)
@@ -6972,6 +7061,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                     reply = _pick_retreat_template(
                         is_owner=_is_owner,
                         user_id=str(event.user_id),
+                        user_text=incoming.text or "",
                     )
                 else:
                     logger.info(f"chat: NSFW deep 路径 OK (model={_chosen_model}), tools 跳过")
