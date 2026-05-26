@@ -4,13 +4,20 @@
 GBC 风配色 + 5x7 自制像素字模 + 几何心形,完全不依赖外部 TTF 字体,
 跨平台跑。
 
+GIF 动画(主人需求):24 帧 / 12 fps / 2s loop,首尾帧周期对齐:
+- 心形跳动(等级越高跳越快/越大)
+- Pusheen 呼吸(等级越高呼吸越快/越开心)
+- 3 个爪子上下浮动(相位错开,漂浮感)
+- 头顶冒♥/★粒子,飘高变大渐淡消失(等级越高 spawn 越频繁)
+
 主入口:
-- render_card(...) → PIL.Image    通用渲染
-- render_card_to_file(...) → Path 写盘并返回路径,供 MessageSegment.image 用
+- render_card(...) → PIL.Image    单帧静态渲染(GIF 首帧,fallback 用)
+- render_card_to_file(...) → Path 写盘 GIF,供 MessageSegment.image 用
 """
 from __future__ import annotations
 
 import hashlib
+import math
 import random
 import time
 from pathlib import Path
@@ -558,11 +565,464 @@ def _paste_pusheen_bottom_right(
     return (x, y, x + new_w, y + new_h)
 
 
+# ── GIF 动画参数 ─────────────────────────────────────────────────────
+# 主人选 24 帧 / 12 fps / 克制型;周期 = 1.92s,首尾帧能自然衔接 loop。
+GIF_TOTAL_FRAMES = 24
+GIF_DURATION_MS = 80  # 12 fps
+
+
+def _heart_pulse_scale(frame_idx: int, level: int) -> float:
+    """心跳 scale。等级越高 period 越短(跳得越快)+ amplitude 越大。
+
+    克制档:Lv1 周期 14 帧(0.86Hz) amp 0.04 → 1.00~1.04
+            Lv10 周期 6 帧(2.0Hz)   amp 0.12 → 1.00~1.12
+    """
+    lv = max(1, min(level, 10))
+    period = 14 - (lv - 1) * 8 / 9.0
+    amp = 0.04 + (lv - 1) * 0.009
+    phase = 2.0 * math.pi * frame_idx / period
+    # (1+sin)/2 保证 scale ≥ 1.0(心只放大不缩小)
+    return 1.0 + amp * (1.0 + math.sin(phase)) / 2.0
+
+
+def _pusheen_breathe_scale(frame_idx: int, level: int) -> tuple[float, float]:
+    """Pusheen 呼吸 (w_scale, h_scale)。吸气高+略瘦,呼气低+略扁(体积守恒)。
+
+    克制档:Lv1 周期 24 帧 amp 0.05;Lv10 周期 12 帧 amp 0.10。
+    """
+    lv = max(1, min(level, 10))
+    period = 24 - (lv - 1) * 12 / 9.0
+    amp = 0.05 + (lv - 1) * 0.005
+    phase = 2.0 * math.pi * frame_idx / period
+    h = 1.0 + amp * math.sin(phase)
+    w = 1.0 - amp * math.sin(phase) * 0.4
+    return w, h
+
+
+def _paw_float_offset_sm(frame_idx: int, paw_index: int) -> int:
+    """爪子上下浮动 y_offset(小画布像素,±2 → 大画布 ±12 px)。
+    3 个爪子相位错开(120° / 0.33),漂浮感不机械。
+    """
+    phase = 2.0 * math.pi * (frame_idx / GIF_TOTAL_FRAMES + paw_index * 0.33)
+    return int(round(2.0 * math.sin(phase)))
+
+
+def _particle_spawn_period(level: int) -> int:
+    """粒子 spawn 周期(帧)。Lv1=18,Lv10=6(克制档)。"""
+    lv = max(1, min(level, 10))
+    return max(6, 18 - (lv - 1) * 12 // 9)
+
+
+PARTICLE_LIFETIME = 18  # 帧 (1.5s @ 12fps)
+PARTICLE_VY_LARGE = 5   # 每帧上升 px(大画布)
+
+
+def _particles_for_frame(
+    frame_idx: int, level: int, spawn_anchor_lg: tuple[int, int],
+    layout_seed: int,
+) -> list[tuple[str, tuple[int, int, int], int, int, int, float]]:
+    """确定性算出当前帧所有 active 粒子,(char, color, x_lg, y_lg, draw_scale, alpha)。
+
+    粒子在每 _particle_spawn_period(level) 帧生成,生命 PARTICLE_LIFETIME 帧。
+    deterministic:用 (layout_seed + birth_frame) 当 RNG seed,GIF 重生成参数一致。
+    """
+    period = _particle_spawn_period(level)
+    out: list[tuple[str, tuple[int, int, int], int, int, int, float]] = []
+    for age in range(PARTICLE_LIFETIME):
+        birth_frame = frame_idx - age
+        # 让粒子在所有 birth_frame % period == 0 时刻生成(允许 birth_frame<0,GIF loop 头)
+        if birth_frame % period != 0:
+            continue
+        prng = random.Random(layout_seed * 977 + birth_frame * 31 + 13)
+        x_off = prng.randint(-22, 38)  # 头部上方偏右
+        choice = prng.random()
+        if choice < 0.55:
+            char, color = "♥", HEART_FILL
+        elif choice < 0.85:
+            char, color = "★", ACCENT
+        else:
+            char, color = "♥", (255, 196, 92)  # 暖黄心
+        draw_scale = 1 + min(2, age // 6)  # 1→2→3 渐大
+        if age < 12:
+            alpha = 1.0
+        else:
+            alpha = max(0.0, 1.0 - (age - 12) / 6.0)
+        x = spawn_anchor_lg[0] + x_off
+        y = spawn_anchor_lg[1] - PARTICLE_VY_LARGE * age
+        out.append((char, color, x, y, draw_scale, alpha))
+    return out
+
+
+def _draw_particle_at(
+    target: Image.Image, char: str, color: tuple[int, int, int],
+    x: int, y: int, scale: int, alpha: float,
+) -> None:
+    """像素粒子绘制 — 用 GLYPHS 5x7 字模,alpha 用 BG blend 模拟。"""
+    glyph = GLYPHS.get(char) or GLYPHS.get(char.upper())
+    if glyph is None or alpha <= 0.01:
+        return
+    r, g, b = color
+    bgr, bgg, bgb = BG
+    a = max(0.0, min(1.0, alpha))
+    fill = (
+        int(r * a + bgr * (1 - a)),
+        int(g * a + bgg * (1 - a)),
+        int(b * a + bgb * (1 - a)),
+    )
+    draw = ImageDraw.Draw(target)
+    tw, th = target.size
+    for ry in range(GLYPH_H):
+        line = glyph[ry]
+        for rx in range(GLYPH_W):
+            if line[rx] != "1":
+                continue
+            px = x + rx * scale
+            py = y + ry * scale
+            if 0 <= px < tw and 0 <= py < th:
+                draw.rectangle((px, py, px + scale - 1, py + scale - 1), fill=fill)
+
+
+# ── 心形 sprite(可任意 scale 缩放) ──────────────────────────────────
+
+def _make_heart_sprite_sm(level: int, is_owner: bool) -> Image.Image:
+    """生成包含心形 + LEVEL 数字的 RGBA sprite(模板原尺寸 29x25)。
+    后续 NEAREST 缩放到任意 scale,心 + 数字同步缩放。
+    """
+    sprite = Image.new("RGBA", (HEART_TPL_W, HEART_TPL_H), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(sprite)
+    for ry, row in enumerate(_HEART_TEMPLATE):
+        for rx, c in enumerate(row):
+            if c == "1":
+                draw.point((rx, ry), fill=HEART_FILL + (255,))
+            elif c == "2":
+                draw.point((rx, ry), fill=HEART_EDGE + (255,))
+    if is_owner:
+        lv_text, lv_scale = "MAX", 1
+    elif level >= 10:
+        lv_text, lv_scale = str(level), 1
+    else:
+        lv_text, lv_scale = str(level), 2
+    text_w = _text_width(lv_text, spacing=1, scale=lv_scale)
+    text_h = GLYPH_H * lv_scale
+    cy = 9  # 心形视觉中心(跟原 _draw_heart heart_visual_cy 一致)
+    tx = HEART_TPL_W // 2 - text_w // 2
+    ty = cy - text_h // 2
+    _draw_text(draw, tx, ty, lv_text, WHITE + (255,), scale=lv_scale)
+    return sprite
+
+
+def _paste_sprite_scaled(
+    target: Image.Image, sprite: Image.Image,
+    center_lg: tuple[int, int], base_scale: int,
+    scale_x: float = 1.0, scale_y: float = 1.0,
+) -> tuple[int, int, int, int]:
+    """sprite NEAREST 缩放到 (W*base_scale*sx, H*base_scale*sy),paste 到大画布中心。
+    返回 paste bbox。
+    """
+    sw = max(1, int(round(sprite.width * base_scale * scale_x)))
+    sh = max(1, int(round(sprite.height * base_scale * scale_y)))
+    scaled = sprite.resize((sw, sh), Image.Resampling.NEAREST)
+    scaled = _alpha_threshold(scaled, 128)
+    x = center_lg[0] - sw // 2
+    y = center_lg[1] - sh // 2
+    target.paste(scaled, (x, y), scaled)
+    return (x, y, x + sw, y + sh)
+
+
+# ── 爪子布局(跨帧复用) ────────────────────────────────────────────
+
+def _decide_paw_layout(
+    *,
+    band_y_min: int, band_y_max: int,
+    band_x_min: int, band_x_max: int,
+    count: int = 3,
+    target_widths: tuple[int, ...] = (60, 90, 130),
+    forbidden_boxes: list[tuple[int, int, int, int]] | None = None,
+    rng: random.Random | None = None,
+    angle_range: tuple[float, float] = (-45.0, 15.0),
+    scatter_zone_x_ratio: float = 0.62,
+    scatter_zone_y_ratio: float = 0.55,
+) -> list[tuple[Image.Image, int, int]]:
+    """决定 3 个爪子的位置 + 旋转 + 大小,返回 (rotated_img, base_x, base_y) 列表。
+    布局只跑一次,所有帧共用 — 帧间只加 y_offset 浮动。
+    """
+    r = rng or random
+    crops = _load_paw_crops()
+    if not crops or band_y_max < band_y_min or band_x_max < band_x_min:
+        return []
+    forbidden = list(forbidden_boxes or [])
+    bw = band_x_max - band_x_min
+    bh = band_y_max - band_y_min
+    scatter_x_max = band_x_min + int(bw * scatter_zone_x_ratio)
+    scatter_y_min = band_y_min + int(bh * (1.0 - scatter_zone_y_ratio))
+    scatter_x_min = band_x_min
+    scatter_y_max = band_y_max
+    placed_boxes: list[tuple[int, int, int, int]] = []
+    used_widths: list[int] = []
+    layout: list[tuple[Image.Image, int, int]] = []
+    for _ in range(count):
+        remaining = [w for w in target_widths if w not in used_widths]
+        tw = r.choice(remaining or list(target_widths))
+        angle = r.uniform(*angle_range)
+        placed_here = False
+        for _outer in range(8):
+            paw = r.choice(crops)
+            rotated = _prepare_paw_rotated(paw, tw, angle)
+            rw, rh = rotated.size
+            max_x = scatter_x_max - rw
+            max_y = scatter_y_max - rh
+            if max_x < scatter_x_min or max_y < scatter_y_min:
+                for fw in sorted(target_widths):
+                    if fw >= tw:
+                        continue
+                    rotated = _prepare_paw_rotated(paw, fw, angle)
+                    rw, rh = rotated.size
+                    if (scatter_x_max - rw >= scatter_x_min
+                            and scatter_y_max - rh >= scatter_y_min):
+                        tw = fw
+                        max_x = scatter_x_max - rw
+                        max_y = scatter_y_max - rh
+                        break
+                else:
+                    continue
+            for _try in range(20):
+                x = r.randint(scatter_x_min, max_x)
+                y = r.randint(scatter_y_min, max_y)
+                box = (x, y, x + rw, y + rh)
+                if any(_bbox_overlap(box, b) for b in placed_boxes):
+                    continue
+                if any(_bbox_overlap(box, b) for b in forbidden):
+                    continue
+                layout.append((rotated, x, y))
+                placed_boxes.append(box)
+                used_widths.append(tw)
+                placed_here = True
+                break
+            if placed_here:
+                break
+    return layout
+
+
 # ── 渲染主函数 ───────────────────────────────────────────────────────
 
 CANVAS_W = 96
 CANVAS_H = 120
 SCALE = 6  # NEAREST 放大倍数,输出 576 x 720
+
+
+def _render_static_base_small(
+    *,
+    title: str,
+    points: int,
+    exp_current: int,
+    exp_next_level: int | None,
+    is_owner: bool,
+    checked_in_today: bool,
+    today_gained: int | None,
+    mode: str,
+) -> tuple[Image.Image, dict]:
+    """渲染 GIF 各帧共享的静态层(小画布):边框/标题/LEVEL 标签/分隔/POINTS/底栏/星星。
+    心形、Pusheen、爪子、粒子是动态层,每帧单独画。
+    返回 (base_img_sm, layout_meta)。layout_meta 给主渲染器算位置。
+    """
+    img = Image.new("RGB", (CANVAS_W, CANVAS_H), BG)
+    draw = ImageDraw.Draw(img)
+
+    # 双层边框
+    _draw_border(draw, 0, 0, CANVAS_W - 1, CANVAS_H - 1, DARK)
+    _draw_border(draw, 2, 2, CANVAS_W - 3, CANVAS_H - 3, DARK)
+
+    # 标题条
+    draw.rectangle((3, 3, CANVAS_W - 4, 13), fill=DARK)
+    title_text = title[:14]
+    _draw_text_centered(draw, CANVAS_W // 2, 5, title_text, BG, scale=1)
+
+    # 心形位置预留(不画心 — 心在大画布动态层画)
+    heart_top_y = 16
+    heart_bottom_y = heart_top_y + HEART_TPL_H - 1
+    lv_label_y = heart_bottom_y + 2
+    _draw_text_centered(draw, CANVAS_W // 2, lv_label_y, "LEVEL", DARK, scale=1)
+
+    # 分隔虚线
+    sep_y = lv_label_y + GLYPH_H + 2
+    for x in range(6, CANVAS_W - 6, 3):
+        draw.point((x, sep_y), fill=GRAY)
+
+    # POINTS
+    points_label_y = sep_y + 3
+    _draw_text_centered(draw, CANVAS_W // 2, points_label_y, "POINTS", DARK, scale=1)
+    points_text = "INF" if is_owner else _fmt_compact(points)
+    big_y = points_label_y + GLYPH_H + 1
+    _draw_text_centered(draw, CANVAS_W // 2, big_y, points_text,
+                        ACCENT if not is_owner else GREEN, scale=2)
+
+    # 底栏
+    footer_top = CANVAS_H - 14
+    draw.rectangle((3, footer_top, CANVAS_W - 4, CANVAS_H - 4), fill=DARK)
+    if mode == "signin":
+        if is_owner:
+            line = "OWNER MAX"
+        else:
+            line = f"+{_fmt_compact(today_gained or 0)} GOT IT"
+        _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, line, BG, scale=1)
+    else:
+        if is_owner or exp_next_level is None or exp_next_level <= 0:
+            tip = "OWNER MAX" if is_owner else "MAX LV"
+            _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, tip, BG, scale=1)
+        else:
+            _draw_text_centered(
+                draw, CANVAS_W // 2, footer_top + 1,
+                f"EXP {_fmt_compact(exp_current)}/{_fmt_compact(exp_next_level)}", BG, scale=1
+            )
+            status_y = footer_top + 1 + GLYPH_H + 1
+            if status_y + GLYPH_H <= CANVAS_H - 4:
+                status_txt = "DAILY DONE" if checked_in_today else "GET DAILY!"
+                color = GREEN if checked_in_today else ACCENT
+                _draw_text_centered(draw, CANVAS_W // 2, status_y, status_txt, color, scale=1)
+
+    # 角落星星
+    _draw_text(draw, 5, 4, "*", ACCENT, scale=1)
+    _draw_text(draw, CANVAS_W - 10, 4, "*", ACCENT, scale=1)
+
+    layout = {
+        "heart_top_y_sm": heart_top_y,
+        "heart_center_y_sm": heart_top_y + 9,  # 心形视觉中心
+        "lv_label_y_sm": lv_label_y,
+        "footer_top_sm": footer_top,
+    }
+    return img, layout
+
+
+def render_card_frames(
+    *,
+    title: str,
+    level: int,
+    points: int,
+    exp_current: int = 0,
+    exp_next_level: int | None = None,
+    is_owner: bool = False,
+    checked_in_today: bool = False,
+    last_amount: int = 0,
+    today_gained: int | None = None,
+    mode: str = "summary",
+    layout_seed: int | None = None,
+) -> list[Image.Image]:
+    """渲染 GIF 的 GIF_TOTAL_FRAMES 帧。layout_seed 控制爪子布局/粒子初值的随机。
+
+    流程:
+    1) 静态 base 小画布 → NEAREST 6x → 大画布 base
+    2) 心形 sprite + Pusheen RGBA 预生成(每帧 NEAREST 缩放重 paste)
+    3) 爪子布局一次决定(跨帧共享,帧间只 y_offset)
+    4) 每帧 base.copy() + 画心 + Pusheen + 爪 + 粒子
+    """
+    seed = layout_seed if layout_seed is not None else random.randint(0, 1 << 30)
+    rng = random.Random(seed)
+
+    base_sm, lay = _render_static_base_small(
+        title=title, points=points, exp_current=exp_current,
+        exp_next_level=exp_next_level, is_owner=is_owner,
+        checked_in_today=checked_in_today, today_gained=today_gained,
+        mode=mode,
+    )
+    base_lg = base_sm.resize((CANVAS_W * SCALE, CANVAS_H * SCALE),
+                             Image.Resampling.NEAREST)
+
+    # 心形位置(大画布中心 x、心视觉中心 y)
+    heart_cx_lg = (CANVAS_W // 2) * SCALE
+    heart_cy_lg = lay["heart_center_y_sm"] * SCALE
+    heart_sprite = _make_heart_sprite_sm(level, is_owner)
+
+    # Pusheen 基础尺寸(大画布 px) + 锚定位置(bottom-right)
+    pusheen = _load_pusheen()
+    pusheen_data: dict | None = None
+    if pusheen is not None and pusheen.width > 0:
+        target_w_lg = 150
+        aspect = pusheen.height / pusheen.width
+        target_h_lg = max(8, int(round(target_w_lg * aspect)))
+        pusheen_base = _resize_rgba_sharp_alpha(pusheen, target_w_lg, target_h_lg)
+        pusheen_base = _alpha_threshold(pusheen_base, 128)
+        margin_x_sm, margin_y_sm = 4, 1
+        anchor_x = CANVAS_W * SCALE - margin_x_sm * SCALE - target_w_lg
+        anchor_bottom_y = lay["footer_top_sm"] * SCALE - margin_y_sm * SCALE
+        anchor_y = anchor_bottom_y - target_h_lg
+        if anchor_x >= 0 and anchor_y >= 0:
+            pusheen_data = {
+                "img": pusheen_base,
+                "w": target_w_lg, "h": target_h_lg,
+                "anchor_x": anchor_x, "anchor_y": anchor_y,
+                "anchor_bottom_y": anchor_bottom_y,
+            }
+
+    pusheen_box = None
+    if pusheen_data:
+        pusheen_box = (
+            pusheen_data["anchor_x"], pusheen_data["anchor_y"],
+            pusheen_data["anchor_x"] + pusheen_data["w"],
+            pusheen_data["anchor_y"] + pusheen_data["h"],
+        )
+
+    # 爪子布局(跨帧)
+    paw_band_top = (lay["lv_label_y_sm"] + GLYPH_H + 1) * SCALE
+    paw_band_bot = (lay["footer_top_sm"] - 1) * SCALE
+    paw_band_x_min = 4 * SCALE
+    paw_band_x_max = (CANVAS_W - 4) * SCALE
+    paw_layout: list[tuple[Image.Image, int, int]] = []
+    if paw_band_bot > paw_band_top and paw_band_x_max > paw_band_x_min:
+        paw_layout = _decide_paw_layout(
+            band_y_min=paw_band_top, band_y_max=paw_band_bot,
+            band_x_min=paw_band_x_min, band_x_max=paw_band_x_max,
+            count=3, target_widths=(60, 90, 130),
+            forbidden_boxes=[pusheen_box] if pusheen_box else None,
+            rng=rng, angle_range=(-45.0, 15.0),
+        )
+
+    # 粒子锚点:Pusheen 头顶左偏(头在左上角)
+    if pusheen_data:
+        particle_anchor = (
+            pusheen_data["anchor_x"] + pusheen_data["w"] // 3,
+            pusheen_data["anchor_y"] - 2,  # 略高于 Pusheen 顶部
+        )
+    else:
+        particle_anchor = None
+
+    frames: list[Image.Image] = []
+    for fi in range(GIF_TOTAL_FRAMES):
+        frame = base_lg.copy()
+
+        # 1) 心跳(scale 同步 x/y)
+        s = _heart_pulse_scale(fi, level)
+        _paste_sprite_scaled(frame, heart_sprite,
+                             (heart_cx_lg, heart_cy_lg), SCALE,
+                             scale_x=s, scale_y=s)
+
+        # 2) Pusheen 呼吸(锚定底部中线,看起来吸地呼吸)
+        if pusheen_data:
+            wx, hy = _pusheen_breathe_scale(fi, level)
+            new_w = max(8, int(round(pusheen_data["w"] * wx)))
+            new_h = max(8, int(round(pusheen_data["h"] * hy)))
+            puff = pusheen_data["img"].resize((new_w, new_h),
+                                              Image.Resampling.NEAREST)
+            puff = _alpha_threshold(puff, 128)
+            cx = pusheen_data["anchor_x"] + pusheen_data["w"] // 2
+            paste_x = cx - new_w // 2
+            paste_y = pusheen_data["anchor_bottom_y"] - new_h
+            frame.paste(puff, (paste_x, paste_y), puff)
+
+        # 3) 爪子浮动
+        for idx, (paw_img, base_x, base_y) in enumerate(paw_layout):
+            y_off = _paw_float_offset_sm(fi, idx) * SCALE
+            _paste_text_aware(frame, paw_img, base_x, base_y + y_off)
+
+        # 4) 头顶粒子
+        if particle_anchor:
+            for char, color, x, y, sc, alpha in _particles_for_frame(
+                fi, level, particle_anchor, layout_seed=seed,
+            ):
+                _draw_particle_at(frame, char, color, x, y, sc, alpha)
+
+        frames.append(frame)
+
+    return frames
 
 
 def render_card(
@@ -575,115 +1035,30 @@ def render_card(
     is_owner: bool = False,
     checked_in_today: bool = False,
     last_amount: int = 0,
-    today_gained: int | None = None,   # 本次签到得分(签到模式才传)
-    mode: str = "summary",              # "summary" 或 "signin"
+    today_gained: int | None = None,
+    mode: str = "summary",
 ) -> Image.Image:
-    img = Image.new("RGB", (CANVAS_W, CANVAS_H), BG)
-    draw = ImageDraw.Draw(img)
-
-    # 外边框 + 内描线(双层框看起来更像素卡)
-    _draw_border(draw, 0, 0, CANVAS_W - 1, CANVAS_H - 1, DARK)
-    _draw_border(draw, 2, 2, CANVAS_W - 3, CANVAS_H - 3, DARK)
-
-    # 标题条背景 + 文字
-    draw.rectangle((3, 3, CANVAS_W - 4, 13), fill=DARK)
-    title_text = title[:14]
-    _draw_text_centered(draw, CANVAS_W // 2, 5, title_text, BG, scale=1)
-
-    # 心形 + 等级数字(白色高对比,居中放心形视觉重心)
-    heart_top_y = 16
-    heart_bbox = _draw_heart(draw, CANVAS_W // 2, heart_top_y)
-    if is_owner:
-        lv_text = "MAX"
-        lv_scale = 1
-    elif level >= 10:
-        lv_text = str(level)
-        lv_scale = 1  # 双位数不放大,避免撑出心形
-    else:
-        lv_text = str(level)
-        lv_scale = 2
-    glyph_h_scaled = GLYPH_H * lv_scale
-    # 模板视觉中心 y ≈ top_y + 9(两圆中心高)。数字居中放在这附近
-    heart_visual_cy = heart_top_y + 9
-    text_y = heart_visual_cy - glyph_h_scaled // 2
-    _draw_text_centered(draw, CANVAS_W // 2, text_y, lv_text, WHITE, scale=lv_scale)
-
-    # LEVEL 标签紧贴心形下沿
-    heart_bottom_y = heart_bbox[3]
-    lv_label_y = heart_bottom_y + 2
-    _draw_text_centered(draw, CANVAS_W // 2, lv_label_y, "LEVEL", DARK, scale=1)
-
-    # 分隔虚线
-    sep_y = lv_label_y + GLYPH_H + 2
-    for x in range(6, CANVAS_W - 6, 3):
-        draw.point((x, sep_y), fill=GRAY)
-
-    # POINTS 标签 + 大数字
-    points_label_y = sep_y + 3
-    _draw_text_centered(draw, CANVAS_W // 2, points_label_y, "POINTS", DARK, scale=1)
-
-    points_text = "INF" if is_owner else _fmt_compact(points)
-    big_y = points_label_y + GLYPH_H + 1
-    _draw_text_centered(draw, CANVAS_W // 2, big_y, points_text,
-                        ACCENT if not is_owner else GREEN, scale=2)
-
-    # 底栏背景
-    footer_top = CANVAS_H - 14
-    draw.rectangle((3, footer_top, CANVAS_W - 4, CANVAS_H - 4), fill=DARK)
-
-    # paw + Pusheen 等大画布渲染完之后再画底栏文字(在大画布上)
-    # 这里只占位 — 实际 paste 在最后 NEAREST 放大后做
-    # ── 底栏内容 ─────────────────────────────────────────────
-    if mode == "signin":
-        if is_owner:
-            line = "OWNER MAX"
-        else:
-            line = f"+{_fmt_compact(today_gained or 0)} GOT IT"
-        _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, line, BG, scale=1)
-    else:
-        if is_owner or exp_next_level is None or exp_next_level <= 0:
-            tip = "OWNER MAX" if is_owner else "MAX LV"
-            _draw_text_centered(draw, CANVAS_W // 2, footer_top + 3, tip, BG, scale=1)
-        else:
-            # 上一行 EXP 数字
-            _draw_text_centered(
-                draw, CANVAS_W // 2, footer_top + 1,
-                f"EXP {_fmt_compact(exp_current)}/{_fmt_compact(exp_next_level)}", BG, scale=1
-            )
-            status_y = footer_top + 1 + GLYPH_H + 1
-            if status_y + GLYPH_H <= CANVAS_H - 4:
-                status_txt = "DAILY DONE" if checked_in_today else "GET DAILY!"
-                color = GREEN if checked_in_today else ACCENT
-                _draw_text_centered(draw, CANVAS_W // 2, status_y, status_txt, color, scale=1)
-
-    # 角落像素星星点缀
-    _draw_text(draw, 5, 4, "*", ACCENT, scale=1)
-    _draw_text(draw, CANVAS_W - 10, 4, "*", ACCENT, scale=1)
-
-    # NEAREST 6x 放大小画布 → 大画布上 paste 接近原图分辨率的 paw + Pusheen
-    # (避免在小画布上 paste 导致分辨率丢失)
-    large = img.resize((CANVAS_W * SCALE, CANVAS_H * SCALE),
-                       Image.Resampling.NEAREST)
-    pusheen_box = _paste_pusheen_bottom_right(
-        large, footer_top_sm=footer_top, canvas_w_sm=CANVAS_W,
-        target_w_large=150, scale=SCALE,
+    """单帧渲染(取 GIF 首帧)— 兜底/兼容用,正式发卡走 GIF。"""
+    frames = render_card_frames(
+        title=title, level=level, points=points,
+        exp_current=exp_current, exp_next_level=exp_next_level,
+        is_owner=is_owner, checked_in_today=checked_in_today,
+        last_amount=last_amount, today_gained=today_gained, mode=mode,
     )
-    paw_band_top = (lv_label_y + GLYPH_H + 1) * SCALE
-    paw_band_bot = (footer_top - 1) * SCALE
-    paw_band_x_min = 4 * SCALE
-    paw_band_x_max = (CANVAS_W - 4) * SCALE
-    if paw_band_bot > paw_band_top and paw_band_x_max > paw_band_x_min:
-        # 主人布局:3 个脚印在左下角散开,角度 [-45°, +15°] 随机,互不重叠
-        _scatter_paws(
-            large,
-            band_y_min=paw_band_top, band_y_max=paw_band_bot,
-            band_x_min=paw_band_x_min, band_x_max=paw_band_x_max,
-            count=3,
-            target_widths=(60, 90, 130),
-            forbidden_boxes=[pusheen_box] if pusheen_box else None,
-            angle_range=(-45.0, 15.0),
-        )
-    return large
+    return frames[0] if frames else Image.new("RGB", (CANVAS_W * SCALE, CANVAS_H * SCALE), BG)
+
+
+def _frames_to_gif_palette(frames: list[Image.Image]) -> list[Image.Image]:
+    """所有帧量化到第一帧的 palette,避免 GIF 跨帧调色板闪烁。"""
+    if not frames:
+        return frames
+    master = frames[0].convert(
+        "P", palette=Image.Palette.ADAPTIVE, colors=128, dither=Image.Dither.NONE,
+    )
+    out = [master]
+    for f in frames[1:]:
+        out.append(f.quantize(palette=master, dither=Image.Dither.NONE))
+    return out
 
 
 def render_card_to_file(
@@ -701,18 +1076,23 @@ def render_card_to_file(
     today_gained: int | None = None,
     mode: str = "summary",
 ) -> Path:
+    """渲染并写盘 GIF。返回 .gif 路径,QQ 客户端原生支持。"""
     output_dir.mkdir(parents=True, exist_ok=True)
-    img = render_card(
+    frames = render_card_frames(
         title=title, level=level, points=points,
         exp_current=exp_current, exp_next_level=exp_next_level,
         is_owner=is_owner, checked_in_today=checked_in_today,
         last_amount=last_amount, today_gained=today_gained, mode=mode,
     )
-    # 文件名:user_id + 时间戳哈希,避免缓存冲撞
     stamp = f"{user_id}_{mode}_{int(time.time())}"
     digest = hashlib.md5(stamp.encode("utf-8")).hexdigest()[:10]
-    out = output_dir / f"affection_{user_id}_{mode}_{digest}.png"
-    img.save(out, format="PNG", optimize=True)
+    out = output_dir / f"affection_{user_id}_{mode}_{digest}.gif"
+    palette_frames = _frames_to_gif_palette(frames)
+    palette_frames[0].save(
+        out, format="GIF", save_all=True,
+        append_images=palette_frames[1:],
+        duration=GIF_DURATION_MS, loop=0, optimize=True, disposal=2,
+    )
     return out
 
 
@@ -722,7 +1102,8 @@ def prune_cards(output_dir: Path, max_files: int = 200) -> None:
         return
     try:
         files = sorted(
-            (p for p in output_dir.iterdir() if p.is_file() and p.suffix.lower() == ".png"),
+            (p for p in output_dir.iterdir()
+             if p.is_file() and p.suffix.lower() in (".gif", ".png")),
             key=lambda p: p.stat().st_mtime,
         )
     except OSError:
