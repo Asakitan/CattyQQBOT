@@ -2220,19 +2220,38 @@ _EXECUTORS: dict[str, ToolExecutor] = {
 
 # ── 对外 API ───────────────────────────────────────────────────────────
 
+# 主人 2026-05-28 C3: tool schemas singleton cache. 同一 (enabled, is_private, excluded_set)
+# 输入永远返回同一个 list 对象 + 内容字节一致, 让 Anthropic cache key 跨调用稳定.
+# 5 分钟 TTL 不必要 (tool schemas 在 catty 生命期内基本不变).
+_TOOL_SCHEMAS_CACHE: dict[tuple, list[dict[str, Any]]] = {}
+
+
 def available_tool_schemas(config: Config, *, is_private: bool) -> list[dict[str, Any]]:
-    """按场景挑出本次主回复应该挂的 tool schemas。
+    """按场景挑出本次主回复应该挂的 tool schemas (module-level singleton cache).
 
     主人选择的是'始终挂载',所以默认返回全部三个;但允许通过 config 在私聊里
     剔除特定 tool(默认私聊不挂 catty_user_profile,私聊只有一个人没必要查别人画像)。
+
+    主人 2026-05-28: 同一 (enabled, is_private, excluded_set) cache 同一 list 对象,
+    避免每轮重新构造让 tools schemas 字节飘移破 cache. ALL_TOOL_SCHEMAS 本身是 module-level
+    常量, 这里只 cache 过滤后的 list 复用.
     """
-    if not getattr(config, "catty_tools_enabled", True):
+    enabled = bool(getattr(config, "catty_tools_enabled", True))
+    if not enabled:
         return []
-    excluded: set[str] = set()
+    excluded_list: list[str] = []
     if is_private:
         for name in getattr(config, "catty_tools_disabled_in_private", []) or []:
-            excluded.add(str(name).strip())
-    return [schema for name, schema in ALL_TOOL_SCHEMAS.items() if name not in excluded]
+            excluded_list.append(str(name).strip())
+    excluded_key = tuple(sorted(set(excluded_list)))
+    cache_key = (enabled, is_private, excluded_key)
+    cached = _TOOL_SCHEMAS_CACHE.get(cache_key)
+    if cached is not None:
+        return cached
+    excluded_set = set(excluded_key)
+    result = [schema for name, schema in ALL_TOOL_SCHEMAS.items() if name not in excluded_set]
+    _TOOL_SCHEMAS_CACHE[cache_key] = result
+    return result
 
 
 # IDE 风「最近 tool 调用日志」:scope -> deque[(tool_name, args_preview, ts, succeeded)]

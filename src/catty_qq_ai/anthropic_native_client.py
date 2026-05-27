@@ -421,6 +421,12 @@ def _log_native_usage(data: dict[str, Any], model: str) -> None:
         "native /v1/messages model=%s read=%d create=%d new=%d hit=%.0f%%%s",
         (model or "")[:20], cache_read, cache_create, input_tokens, hit_rate * 100, compaction_flag,
     )
+    # 主人 2026-05-28 C6: 推送到 dashboard 让前端实时显示 cache hit ratio
+    try:
+        from . import dashboard_state as _dash
+        _dash.push_cache_stats(model, usage)
+    except Exception:  # noqa: BLE001
+        pass
 
 
 async def post_messages_native(
@@ -627,10 +633,41 @@ async def post_messages_native(
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"prefix hash compute failed: {exc}")
 
+    # 主人 2026-05-28 C5: 改成 streaming + buffer 完整 message 再返回.
+    # 外层 chat_completion 接口仍返回 str (兼容), 内部走 SDK stream() async iterator.
+    # 流式优势:
+    # 1. usage / cache stats 反馈早 (final_message.usage)
+    # 2. 中间 chunk 能 push 到 dashboard 实时显示 (C6 用)
+    # 3. 不会因为长回复 timeout (HTTP 接收时间均摊到每个 chunk)
+    # SDK streaming API: `client.messages.stream(**create_kwargs)` 返回 context manager,
+    # `await stream.get_final_message()` 拿完整 Message 对象.
     try:
-        response = await client.messages.create(**create_kwargs)
+        async with client.messages.stream(**create_kwargs) as stream:
+            try:
+                from . import dashboard_state as _dash
+                _stream_id = _dash.start_stream(model=model)
+            except Exception:  # noqa: BLE001
+                _dash = None
+                _stream_id = None
+            try:
+                async for event in stream:
+                    # event 类型多样: MessageStart, ContentBlockStart, ContentBlockDelta,
+                    # ContentBlockStop, MessageDelta, MessageStop, etc. 不需要逐个处理,
+                    # SDK 内部维护完整 message buffer. 但可以把 text delta 推到 dashboard.
+                    if _dash is not None and _stream_id is not None:
+                        try:
+                            _dash.push_event(_stream_id, event)
+                        except Exception:  # noqa: BLE001
+                            pass
+                response = await stream.get_final_message()
+            finally:
+                if _dash is not None and _stream_id is not None:
+                    try:
+                        _dash.end_stream(_stream_id)
+                    except Exception:  # noqa: BLE001
+                        pass
     except Exception as exc:
-        logger.warning("anthropic /v1/messages call failed: %s", exc)
+        logger.warning("anthropic /v1/messages stream call failed: %s", exc)
         raise
 
     data = _native_response_to_openai_shape(response)
