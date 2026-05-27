@@ -875,6 +875,17 @@ async def chat_completion_with_tools(
         # 云端冷却期不带 tools 试,直接走 fallback 链。
         _logger.info("tool_chat: cloud unhealthy → fallback to plain chat_completion (no tools)")
         return await chat_completion(config, messages)
+    # 主人 2026-05-28: native /v1/messages 路径享受 cache hit 100% (5min TTL prefix 命中).
+    # with_tools 走 OpenAI-compat /chat/completions 经中转层时 cache 不能命中 (NewAPI 不
+    # 透传 OpenAI-style cache_control 字段). native_enabled=true 时直接降到 plain
+    # chat_completion 保 cache hit, **暂时牺牲 tool calling**. 真正修复需要 Anthropic
+    # tools 格式 converter + tool_use/tool_result blocks 处理, 工程量大留后续 commit.
+    if getattr(config, "catty_anthropic_native_enabled", False):
+        _logger.info(
+            "tool_chat: native_enabled=True → bypass tools for cache hit, going plain chat_completion (tools dropped: %d)",
+            len(tools),
+        )
+        return await chat_completion(config, messages)
     _logger.info("tool_chat: starting with %d tools available", len(tools))
 
     history: list[ChatMessage] = list(messages)
