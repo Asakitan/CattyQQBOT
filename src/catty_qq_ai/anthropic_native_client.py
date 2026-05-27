@@ -35,14 +35,15 @@ _DEFAULT_BETAS = (
 def _split_system_and_messages(messages: list[dict]) -> tuple[list[dict], list[dict]]:
     """OpenAI 风格 messages → Anthropic native 分离 system / 对话.
 
-    /v1/messages 协议: system 是顶层字段 (list of TextBlock), messages 数组只含 user/assistant.
-
-    catty 的 prompt_manager 把所有 system 段都注册在顶部 (role=system 连续段),
-    后面才是 user/assistant 对话. 所以"提到顶层"的语义清晰.
+    /v1/messages 协议: system 是顶层字段 (list of TextBlock), messages 数组**绝对不能**
+    含 role=system 的元素 (会 400 "Unexpected role system"). catty 的 prompt_manager
+    在顶部连续注册若干 system 段, 中间还可能动态插 system (author_note / user_vibe /
+    NSFW gate / reply_self_check 等 order 460+ 的"动态段"), 所以这里必须把**全部**
+    role=system 都提到顶层 system blocks (按原顺序), 不能只提顶部连续段.
 
     cache_control 的 native 位置: 在 block 上, 不在 message 顶层. prompt_cache.py 已经
     把 system message 的 content 转成 list[{type:text,text,cache_control?}] 格式,
-    所以这里直接复用 block 即可.
+    所以这里直接复用 block 即可保留 cache 标记.
 
     Args:
         messages: OpenAI 风格 ChatMessage list
@@ -54,7 +55,6 @@ def _split_system_and_messages(messages: list[dict]) -> tuple[list[dict], list[d
     """
     system_blocks: list[dict] = []
     other_messages: list[dict] = []
-    seen_non_system = False
 
     for msg in messages:
         if not isinstance(msg, dict):
@@ -62,8 +62,9 @@ def _split_system_and_messages(messages: list[dict]) -> tuple[list[dict], list[d
         role = msg.get("role")
         content = msg.get("content")
 
-        if role == "system" and not seen_non_system:
-            # 顶部连续 system 段全部提到顶层 system 字段
+        if role == "system":
+            # **所有** role=system 都提到顶层 system 字段, 按原 messages 顺序保留语义.
+            # 中间夹的 system (动态段) 也算 prompt 一部分, 拼到 top-level 上下文里效果相同.
             if isinstance(content, str):
                 system_blocks.append({"type": "text", "text": content})
             elif isinstance(content, list):
@@ -74,8 +75,6 @@ def _split_system_and_messages(messages: list[dict]) -> tuple[list[dict], list[d
                         system_blocks.append(dict(blk))
             # 其它非 str/list content 类型 (None, dict, etc.) 跳过避免污染
         else:
-            if role in ("user", "assistant"):
-                seen_non_system = True
             # 保留原始 message (可能含 multimodal content list)
             other_messages.append(msg)
 
