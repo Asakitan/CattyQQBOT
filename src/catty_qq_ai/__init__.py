@@ -62,7 +62,6 @@ from .openai_client import (
     assess_user_anger,
     chat_completion,
     chat_completion_with_tools,
-    classify_catty_mood,
     summarize_scope_lore,
     describe_images,
     download_binary,
@@ -271,12 +270,8 @@ def _looks_like_prompt_injection(text: str) -> tuple[bool, int]:
     text_low = text.lower()
     hits = sum(1 for kw in _PROMPT_INJECTION_KEYWORDS if kw in text_low)
     return hits >= _PROMPT_INJECTION_MIN_HITS, hits
-# Catty mood spark classifier 节流: 每会话 60s 最多调一次, 其他时间只衰减不烧 spark
-_MOOD_CLASSIFY_MIN_INTERVAL_SECONDS = 60.0
-_mood_classify_last_at: dict[str, float] = {}
-# fire-and-forget task tracker — 避免 asyncio.create_task 没 ref 被 GC 提前回收
-# 主人 2026-05-28: 主回复路径不能再被 spark 503 retry 卡 3.5s, mood/picture 这种后台分类都改后台跑
-_mood_bg_tasks: set[asyncio.Task[None]] = set()
+# 主人 2026-05-28: mood spark classifier 全停, 只保留 record_decay_only 时间衰减;
+# 节流变量与 bg task tracker 已无 reader/writer, 删除.
 # NSFW spark 路径 sticky: 任何用户触发后 _NSFW_STICKY_SECONDS 内, 即使 followup 句没命中关键词
 # 也默认走 spark (用户引导『再深一点』『继续』可能不带触发词但仍在 NSFW 通道)。
 # key = f"{scope}:{user_id}" — 每个 session+用户独立, 不影响其它对话。
@@ -4273,30 +4268,12 @@ async def _build_messages(
         user_details_store.record_message(str(event.user_id), incoming.text or "")
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"user_details_store.record_message failed: {exc}")
-    # Catty mood: 走 spark async classifier 喂入 user_text。节流到每会话 60s 一次,
-    # 其他帧只 record_decay_only (不烧 spark, 情绪自然衰减回 baseline)。
-    # 主人 2026-05-28: classifier 走 spark/filter route 同 host (localhost:3000), 上游 503 时
-    # _post_chat_completion_raw 会 retry 0.5+1.0+2.0=3.5s 才放弃 -- 之前在主回复路径上同步等,
-    # 把所有用户的发消息延迟拖到 4+ 秒。现在改 fire-and-forget, mood 后台慢慢算下一轮再用。
+    # 主人 2026-05-28: filter AI 路径全停 — mood classifier 不再调 GLM/spark 小模型,
+    # 只做时间衰减回 baseline. 情绪感知交给主 AI sonnet 自己读上下文.
     try:
-        _mood_now = time.monotonic()
-        _mood_last = _mood_classify_last_at.get(_arc_scope, 0.0)
-        if _mood_now - _mood_last >= _MOOD_CLASSIFY_MIN_INTERVAL_SECONDS:
-            _mood_classify_last_at[_arc_scope] = _mood_now
-            _mood_task = asyncio.create_task(
-                catty_mood_store.record_text_async(
-                    _arc_scope,
-                    incoming.text or "",
-                    classifier=lambda t: classify_catty_mood(config, t),
-                ),
-                name=f"catty-mood-{_arc_scope}",
-            )
-            _mood_bg_tasks.add(_mood_task)
-            _mood_task.add_done_callback(_mood_bg_tasks.discard)
-        else:
-            catty_mood_store.record_decay_only(_arc_scope)
+        catty_mood_store.record_decay_only(_arc_scope)
     except Exception as exc:  # noqa: BLE001
-        logger.debug(f"catty_mood throttle/record failed: {exc}")
+        logger.debug(f"catty_mood record_decay_only failed: {exc}")
     # Catty RAG: 把 user 消息向量化存进 per-scope chromadb (graceful fallback if no chromadb)
     try:
         catty_rag_store.add(
