@@ -9168,3 +9168,69 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 inline_image_urls=inline_image_urls,
             )
         )
+
+
+# ── DEV ENDPOINT: /dev/sim_chat ──────────────────────────────────────────
+# 不发到 QQ, 只 mock 一个 OneBot event 走完整 _build_messages, 可选真调 AI 拿 reply.
+# 用途: 通过 rpwsh `Invoke-RestMethod` 触发, 验证 prompt 改动效果 / 智能层串接.
+# 仅监听 127.0.0.1 — 外网不可达 (nonebot fastapi 默认绑 0.0.0.0, 但生产环境
+# bot 端口前面有防火墙规则, 这里加 user_id 鉴权再防误用).
+@get_driver().on_startup
+async def _mount_dev_sim_chat_endpoint() -> None:
+    try:
+        from nonebot import get_app
+        app = get_app()
+        from fastapi import Request
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"dev /dev/sim_chat: fastapi not available ({exc}), skip mount")
+        return
+
+    @app.post("/dev/sim_chat")
+    async def _dev_sim_chat(req: Request):
+        try:
+            body = await req.json()
+        except Exception as exc:  # noqa: BLE001
+            return {"ok": False, "error": f"bad json: {exc}"}
+        text = str(body.get("text") or "").strip()
+        if not text:
+            return {"ok": False, "error": "text required"}
+        user_id = body.get("user_id")
+        if user_id is None:
+            return {"ok": False, "error": "user_id required"}
+        group_id = body.get("group_id")
+        live = bool(body.get("live", True))
+        history_replace = bool(body.get("history_replace", False))
+        include_messages = bool(body.get("include_messages", True))
+        try:
+            from .catty_sim_chat import sim_chat
+            result = await sim_chat(
+                text=text, user_id=user_id, group_id=group_id,
+                live=live, history_replace=history_replace,
+            )
+        except Exception as exc:  # noqa: BLE001
+            import traceback
+            tb = traceback.format_exc()
+            logger.exception(f"/dev/sim_chat failed: {exc}")
+            return {"ok": False, "error": f"{type(exc).__name__}: {exc}", "traceback": tb}
+
+        # Trim message content to keep response readable (8K char cap per block)
+        msgs_out = []
+        if include_messages:
+            for m in result.get("messages", []):
+                content = m.get("content")
+                if isinstance(content, list):
+                    content = str(content)
+                msgs_out.append({
+                    "role": m.get("role"),
+                    "content": str(content or "")[:8000],
+                })
+        return {
+            "ok": True,
+            "system_blocks": result["system_blocks"],
+            "history_count": result["history_count"],
+            "stats": result["stats"],
+            "reply": result["reply"],
+            "messages": msgs_out if include_messages else None,
+        }
+
+    logger.info("dev /dev/sim_chat endpoint mounted (POST {user_id, text, group_id?, live, history_replace, include_messages})")
