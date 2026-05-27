@@ -5247,6 +5247,8 @@ def _opportunistic_reply_prompt() -> str:
 
 
 def _reply_gate_approved_prompt() -> str:
+    # 名字带 "reply_gate" 是历史遗留 — 2026-05-27 reply gate 已停, 但本函数返回的
+    # NO_REPLY 决策 prompt 仍然在用 (给主 AI 看的接话引导, 不是本地 critic).
     # → 去掉「本轮消息已经通过入口唤起…交给主 AI 结合上下文判断」这种 system 元描述,
     #   只留必要的 NO_REPLY 决策规则。判断本身仍然要模型做(避免无脑接所有消息),
     #   但不再 leak 内部 gate 状态给模型让它"思考半天该不该回"。
@@ -5318,10 +5320,15 @@ def _local_critic_enabled() -> bool:
 
 
 def _local_critic_reply_gate_only() -> bool:
+    # 名字遗留 — 2026-05-27 reply gate 已停 (_rule 走本地确定性判断, 不再调本地 critic).
+    # 本函数现在的实际语义: "local critic 是不是只跑 reply gate, 不跑 post-check rewrite".
+    # mode = "reply_gate_only" 时 post_check_enabled 才 False; 任何其他 mode → post-check 启用.
     return config.catty_local_critic_mode == "reply_gate_only"
 
 
 def _local_critic_post_check_enabled() -> bool:
+    # post-check rewrite 是主 AI 出完回复后用本地 critic 二次打分/改写 — 跟已停的 reply gate 是两件事,
+    # 不在本次 kill 范围内, 保留.
     return _local_critic_enabled() and not _local_critic_reply_gate_only()
 
 
@@ -5398,6 +5405,17 @@ def _positive_int(value: int | None, default: int, *, minimum: int = 0) -> int:
     except (TypeError, ValueError):
         parsed = default
     return max(parsed, minimum)
+
+
+# ── [DEPRECATED 2026-05-27 reply gate kill] ─────────────────────────────────
+# 下面这一组函数 (_local_reply_gate_timeout / _local_reply_gate_max_tokens /
+# _local_reply_gate_extra_body / _reply_gate_examples_context /
+# _local_reply_gate_messages / _local_reply_gate_says_reply /
+# _local_reply_gate_confidence / _fallback_reply_decision_context /
+# _cheap_reply_prefilter) 全部属于已停用的 reply gate (本地 critic AI 判要不要回复).
+# 主人 2026-05-27 原话『reply gate停了』, _rule 改成纯本地确定性判断, 这些函数已无调用方.
+# 保留代码壳以备日后恢复, 不要在新逻辑里调用它们.
+# ────────────────────────────────────────────────────────────────────────────
 
 
 def _local_reply_gate_timeout() -> float:
@@ -5694,6 +5712,7 @@ def _local_reply_gate_says_reply(result: dict[str, object]) -> bool:
 
 
 def _fallback_reply_decision_context(gate_result: dict[str, object]) -> str:
+    # [DEPRECATED 2026-05-27 reply gate kill] gate_result 现在永远是 {}, 这里始终走 early return.
     if not gate_result.get("fallback"):
         return ""
     payload = {
@@ -5808,7 +5827,9 @@ _REPLY_GATE_URL_OR_PLACEHOLDER_RE = re.compile(
 
 
 def _cheap_reply_prefilter(event: MessageEvent, incoming: ExtractedMessage) -> tuple[bool, str]:
-    """**白名单瘦身模式**(主人 v3 指令):
+    """[DEPRECATED 2026-05-27 reply gate kill] _local_reply_gate_allows 已不调本函数.
+
+    **白名单瘦身模式**(主人 v3 指令):
     只有真正『指向/提到猫猫』的群消息才进 critic,其他默认 drop。
     返回 (should_continue, drop_reason)。
 

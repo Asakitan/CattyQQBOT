@@ -188,6 +188,9 @@ class Config(BaseModel):
     catty_local_critic_max_tokens: int | None = 16
     catty_local_critic_request_timeout: float | None = 4.0
     catty_local_critic_rewrite_when_score_below: int = 0
+    # ── [DEPRECATED 2026-05-27 reply gate kill] ──────────────────────────
+    # reply gate 整个停了, 下面这些字段已不被读取. 保留 schema 兼容旧 config.json,
+    # 不要在新逻辑里读它们. 真正决定要不要回的逻辑在 __init__.py 的 _rule 里 (本地确定性判断).
     catty_local_critic_reply_gate_enabled: bool = False  # 主人:指向猫猫的全交主 AI 自己判断
     catty_local_critic_reply_gate_min_confidence: int = 55
     catty_local_critic_reply_gate_examples: int = 0
