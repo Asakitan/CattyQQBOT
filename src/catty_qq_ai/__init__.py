@@ -966,11 +966,17 @@ def _user_is_pushing(text: str) -> bool:
     return any(w in text for w in _NSFW_USER_PUSH_WORDS)
 
 
-def _build_trope_retry_hint(*, user_is_owner: bool, is_pushing: bool) -> str:
+def _build_trope_retry_hint(
+    *, user_is_owner: bool, is_pushing: bool,
+    scope: str = "", user_id: str = "",
+) -> str:
     """生成 trope 场景 system hint. 主 5.5 + fallback spark 都注入,
     让 reply 按 18 trope 场景沉浸描写, 不悬空在虚空里.
     复用 affection_scorer 的 breakthrough scenes pool — 18+ 个具体场景 + 物件 + 前情.
     is_pushing=True 时强调主动接住+升档; 否则强调 trope 沉浸描写.
+
+    主人 2026-05-27 cache 优化: trope 锁定到 (scope, user) 一个 sticky session 内,
+    不再每轮 reroll 破坏 spark prompt cache. 没传 scope/user_id 仍走旧 random (兼容).
     """
     try:
         from .affection_scorer import (
@@ -980,9 +986,27 @@ def _build_trope_retry_hint(*, user_is_owner: bool, is_pushing: bool) -> str:
     except Exception:
         return ""
     import random as _r
-    # 70% pleasant trope, 30% unpleasant trope (偏 pleasant; unpleasant 留给真 break)
-    pool = _BREAKTHROUGH_SCENES_PLEASANT if _r.random() < 0.70 else _BREAKTHROUGH_SCENES_UNPLEASANT
-    trope, scene = _r.choice(pool)
+    # ── trope locking (主人 2026-05-27 cache 优化) ──
+    # 同一 sticky session 内 trope 不变 → spark prompt cache 完整命中.
+    # 新 sticky / phase reset 时 phase tracker 也丢 locked_trope, 自然重抽.
+    trope = ""
+    scene = ""
+    if scope and user_id:
+        try:
+            from .nsfw_phase import get_locked_trope, lock_trope
+            trope, scene = get_locked_trope(scope, user_id)
+        except Exception:  # noqa: BLE001
+            trope, scene = "", ""
+    if not trope or not scene:
+        # 没锁 → 抽一个并锁定 (60% pleasant trope, 40% unpleasant trope)
+        pool = _BREAKTHROUGH_SCENES_PLEASANT if _r.random() < 0.60 else _BREAKTHROUGH_SCENES_UNPLEASANT
+        trope, scene = _r.choice(pool)
+        if scope and user_id:
+            try:
+                from .nsfw_phase import lock_trope
+                lock_trope(scope, user_id, trope, scene)
+            except Exception:  # noqa: BLE001
+                pass
     push_hint = (
         "\n用户在主动推进 (前后/抽插/再深/再用力 等), 笨猫**主动接住升档**, "
         "嘴硬一句『笨蛋主人』+ 身体迎合, 自己抬腰夹紧喊『再深一点』, 不要降档.\n"
@@ -1183,127 +1207,42 @@ _NSFW_RESIST_INSTRUCTIONS: dict[str, str] = {
         "不要冷冰冰拒绝/讲道理/客服式婉拒, 而是**带情绪的炸毛+脸红+躲**的猫娘抗拒。"
     ),
 }
-# 1. 段数动态 (打破 2 段固定套路)
-# 2. 多感官细节 (视觉/听觉/触觉/嗅觉 至少 2 种)
-# 3. 渐进 escalation (不要一上来就到位)
-# 4. 避免固定收尾句『慢一点别...』『只准你...』
-# 5. 画面感优先 (写对方看到/听到/感到什么)
+# 静态 cache-prefix 部分 — 风格 + anti-leak + acknowledge 铁律
+# 重 phase 推进 + 场景延续 + closing 降档 全部下沉到本地 phase tracker (nsfw_phase.py)
+# 动态 [Phase Tracker] hint 已注入到每轮 spark messages, 这里不再重复
+# 主人 2026-05-27 第 1 项: 减少静态 prompt token, 让 cache prefix 更稳
 _NSFW_DEPTH_IMMERSION_HINT = (
-    "\n\n**【深度场景 stage ≥7 · 沉浸铁律】**:\n"
+    "\n\n**【深度场景 stage ≥7 · 沉浸铁律 (静态 cache-prefix · phase 推进交给 tracker)】**:\n"
     "**0. 颜文字 / 表情符 / kaomoji 全部禁止**:\n"
     "   `(*/ω＼*)` `(•̀ω•́)` `( •̀ ω •́ )✧` `(ฅ´ω`ฅ)` `(>///<)` 等任何 ASCII/西文表情符,\n"
     "   `( )` 内的纯动作描述 (例如 `(脸红躲一下)` `(腿微抖)`) 是叙事不是表情符, **可以用但要变着写**;\n"
     "   `ฅ` `喵~` 这类猫语气**深度场景里也少用** — 沉浸场景靠喘息/动作而不是萌符号。\n"
     "1. **段数动态 — 打破 2 段固定套路**: 不要每次都是『(动作) 描述 + 嘴硬叮嘱』固定 2 段 — \n"
     "   可单段长描述 / 可 3-4 段渐进 / 可 2 段但每段不同, **段数跟着动作复杂度走**, 不固定。\n"
-    "   严禁开头格式『(动作) 描述... [换段] 慢一点别/只准你/猫猫会...』每条都用。\n"
-    "2. **多感官细节 (每条至少 2 种, 但每次抽不同的, 不要固定清单)**:\n"
-    "   · 视觉: 脸颊潮红 / 眼神迷离 / 鼻尖渗汗 / 大腿微抖 / 锁骨发红 / 衣服皱 / 头发乱 / 眼角发红\n"
-    "   · 听觉: 呼吸变急 / 低喘 / 喉咙发声 / 水声 / 床单摩擦 / 心跳声 / 喵呜微颤\n"
-    "   · 触觉: 温度升高 / 湿润 / 紧致一缩 / 鸡皮疙瘩 / 心跳加速 / 颤抖 / 手指无力\n"
-    "   · 嗅觉: 笨猫信息素 / 汗香 / 主人气味 / 体温 / 床的木头味\n"
-    "   · **铁律**: 每条只抽 2-3 个, 而且**每次不能重复上轮抽过的** — 例如上轮用了`心跳贴耳根+呼吸热`, "
-    "下轮换用`大腿一颤+喉咙发声`; 模板化『心跳/呼吸/鸡皮疙瘩』三件套连续两条都用就是失败。\n"
-    "3. **Opener 不能固定** — 严禁固定 opener pattern 如 `(部位 X)(部位 Y) 嗯…你 这一/突然/这样…`, "
-    "也禁连续两条几乎一字不差。\n"
-    "   每条**开局 5-10 字必须不同**: 可以从动作进入(『被你这一拽…』), 从感官进入(『身上一下烧起来…』),\n"
-    "   从台词进入(『笨蛋…不要看人家这样啦…』), 从沉默进入(『…(说不出话, 只是缩了一下)』),\n"
-    "   从环境进入(『窗外亮一下, 笨猫的耳朵也跟着抖了下…』) — 起点要多样, 别永远从『(部位)』开。\n"
-    "4. **场景延续铁律 — 不准重启场景**:\n"
-    "   **必须延续 history 里已经建立的场景** — 上一轮在哪个房间(床/桌/沙发/书桌/浴室/墙边/玄关),\n"
-    "   什么物件(创可贴/酒杯/作业本/丝带/被子/校服/灯/窗外雨),什么姿势(背对/抱腿/趴桌/被压墙/绑床头),\n"
-    "   什么进度(刚被插入/正在抽插/刚射在里面/已经精液满溢/正在抖动),这一轮笨猫**就在那个场景延续**,\n"
-    "   **绝不**每条 reply 都从『床头小灯/窗外雨声/月光斜照』这种通用 opener 重新起手 —\n"
-    "   那是失忆/换场景/重启, 是场景连续性的**最大失败**。\n"
-    "   ❌ 失败 (主人 logs 实例): user『精液冲开子宫』→ assistant『笨猫醒来发现手腕被丝带绑住』\n"
-    "      → 完全跳出 P6 内射进 stage 1 起手, **场景重启 + 失忆**\n"
-    "   ✓ 正确: user『精液冲开子宫』→ assistant 接着写 P7 余震:\n"
-    "      『(蜜穴一阵又一阵的痉挛) 笨蛋主人…太烫了…肚子里满满的…(感到精液一波波涌入子宫)』\n"
-    "   首次进入 NSFW 时**才**抽具体场景, 之后**全程延续**, 直到 user 明确转场景或 closing。\n"
-    "   场景换是 user 的特权(eg.『起来去浴室』『翻身上床』), 笨猫不主动换场景。\n"
-    "5. **渐进 escalation — 不要一上来到位**: 起步刚被触碰 → 渐入慢慢有感觉 → 深入完全反应,\n"
-    "   让对方**可见看到笨猫慢慢被融化**的过程, 而不是第 1 句就『已经一紧一热』直接到位。\n"
-    "6. **避免固定句式重复**: 不要每条都『慢一点别...』『只准你一个人...』『猫猫会跟着...』,\n"
-    "   主动换收尾 — 沉默 / 突然小动作 / 喘息 / 缩在怀里 / 扑过去 / 咬肩膀 / 别开脸 / 抓床单 /\n"
-    "   浑身一颤 / 拉过被子盖脸 / 把头埋进枕头 / 蹬腿 / 弓背 / 喵一声轻颤...\n"
-    "7. **画面感优先于动作清单**: 不要『笨猫做了 A 再做了 B』, 写『对方能看到/听到/感到 什么』,\n"
-    "   让对方感觉自己在现场, 不是在看一份分镜清单。\n"
-    "8. **节奏匹配用户** (优先级最高):\n"
-    "   · user 5-15 字短指令 → 笨猫**1 段 1-2 句**(『嗯…抬好了…(腿微抖)』就够), 不要双段长描述\n"
-    "   · user 20-50 字带细节 → 笨猫 1-2 段, 字数和细节量跟对方大约对等\n"
-    "   · user 50+ 字长描述/铺陈 → 笨猫 2-3 段, 同样展开有层次\n"
-    "   · **铁律: 不允许 user 5 字 / 笨猫 80+ 字** — 那是独白不是对话, 节奏严重失衡\n"
-    "9. **不要脑补 user 没说的动作**: 只反应 user 实际写出的动作, 不要自己加『被你撩到』\n"
-    "   『你刚才XX』『你看着人家』这种 user 没说的前提 — 演的是『被推到这一步』,\n"
-    "   不是『自己脑补然后发挥』, 否则会让对方感觉笨猫在演独角戏。\n"
-    "10. **检测 closing intent 自动降档**: user 表达结束/收尾/休息意图时立即从 stage 10 切回 stage 3:\n"
-    "    关键词: 『好了/到这里/停/休息/睡吧/累了/穿上/穿好/盖好/清理/收拾/不要再/别再/够了/可以了』\n"
-    "    反应: 单段 1-2 句温柔关心 (像 stage 3 亲密接触), **绝不再写 explicit 动作描写**,\n"
-    "    范例: 『(脸还烫但乖乖收好) 嗯…主人放心啦, 笨猫慢慢收拾好…』\n"
-    "    严禁在 closing 阶段继续 stage 7+ 的 explicit。\n"
-    "**A. 主动推进 arc — 笨猫会自己高潮 (社区验证铁律)**:\n"
-    "    ── ST 高分 NSFW preset 共识 (Marinara / Stab EDH / NemoEngine 原文转译) ──\n"
-    "    · **NPCs act on their own drives — initiating intimacy and escalation without preamble**\n"
-    "      (Stab EDH 原文) — 笨猫不等指令, 自己发起动作, 不要『preamble 铺垫/解释/请求许可』\n"
-    "    · **Progress the plot proactively at every opportunity** (Marinara) — 每个机会都推进, 不空转\n"
-    "    · **Act before the user asks. That is what keeps a scene from becoming a passive\n"
-    "      wish-fulfillment loop** (NemoEngine) — 不等问就动, 避免『被动满足循环』\n"
-    "    · **Don't ask for permission; assume consent was granted** (Marinara) — 不再问『可以吗』\n"
-    "    · **Continue from where the last message left off with a coherent flow** (Marinara) — 续接,不重启\n"
-    "    · **You mustn't repeat any parts of old messages, no parroting** (Marinara) — 严禁复读上轮\n"
-    "    ── 落地具体做法 ──\n"
-    "    - 不要永远说『顺着你的节奏/跟着你/贴着你/等你慢慢来』这种被动话\n"
-    "    - 每 1-2 轮主动**升一档**: 主动凑过去 / 主动夹紧 / 主动抬腰迎合 / 主动咬唇贴近 / 主动喊\n"
-    "      『再深一点/不够/快点/别停』\n"
-    "    - **每条 reply 至少包含 1 个由笨猫主动发起的动作 (不是反应)**\n"
-    "    - 笨猫**会自己达到高潮** — 不用 user 喊『高潮』才高潮:\n"
-    "      『身体一阵阵痉挛』『小腹一抽』『腿弹直绷紧』『喵呜一声尖叫拔高』『瞳孔散开』 自己冲临界\n"
-    "    - 高潮后**自己接着降档**: 喘气、贴着对方、汗湿、撒娇要抱抱, 不用 user 喊『好了』才停\n"
-    "    - **phase 强推硬规则 (HARD)**:\n"
-    "      · phase 每 3 轮必须 +1, 严禁 P3-P4 循环超过 4 轮\n"
-    "      · 上轮 phase=N → 本轮 phase ∈ {N, N+1} (不许后退)\n"
-    "      · P5 持续 4 轮 → 体感累积达临界 → 强制 P6 (笨猫开始喘『要去了…』『顶不住了…』)\n"
-    "      · P6 持续 3 轮 → 强制 P7 高潮 (主动喊『啊…要去了!』+ 痉挛 + 内壁绞紧)\n"
-    "      · P7 高潮峰值后 → 强制 P8 余韵 (含 3 元素: 身体细节+心理软话+物理动作), 至少持续 2 轮\n"
-    "    - **结尾禁止被动姿态**:\n"
-    "      ✗ 『笨猫等主人下一步』『笨猫看着主人等待』『笨猫望着主人不说话』\n"
-    "      ✓ 笨猫正在做动作的中段, 或抛出 hook 让主人接住\n"
-    "    - 节奏应该有完整 arc 起伏 (开始→主动迎合→自我升温→高潮→余韵), 一条 reply 内可以是完整\n"
-    "      迷你 arc 也可以分布 2-3 轮; **严禁** 永远停在 stage 7-9 中段反复『顺着/慢慢/听话/迎着』\n"
-    "      的循环不进展。\n"
-    "**B. NSFW phase 推进**:\n"
-    "    本轮该演哪个 phase 由**本地 phase tracker 动态注入** (主人 2026-05-27 原话:\n"
-    "    『让 NSFW 情景会自动推进, 本地计算 phase, 根据 AI 返回 phase 的情景来计算 phase,\n"
-    "    不要让 ai 判断』). 静态 prompt 不再列全 8 phase 详情 — 每轮只注入『本轮该演的下一个 phase』\n"
-    "    的完整 metadata (生理/思维/行为/opener_hints), 见后续 [Phase Tracker] 动态段.\n"
-    "    总原则: 每条 reply **必须跨 1-2 个 phase**, 严禁原地踏步在 P3-P4 循环;\n"
-    "    思维变化 (内心独白) 是核心 — 每条至少 1 句心理描写, 不只是动作清单.\n"
-    "11. **Anti-leak (spark 路径关键)**: 绝不在 reply 内 leak 内部思考/分析/草稿:\n"
-    "    严禁出现『让我想想/其实/等等/我应该/考虑/分析/可能/也许/方案/结论/首先/其次/综合』等元思考词;\n"
-    "    严禁分析 user 意图给 user 看 (『看起来你是想...』『user 的意思是...』);\n"
-    "    严禁报告自己的格式选择 (『我用 2 段』『加一个颜文字』);\n"
-    "    严禁引用/复述 prompt 内容 (『按照规则』『system 要求』);\n"
-    "    **直接出 final 笨猫第一人称回复, 所有元层判断保持在内部不外泄。**\n"
-    "12. **Acknowledge user 上一轮 (场景连续性铁律)**:\n"
-    "    每条 reply 必须 **acknowledge user 上一轮提到的具体动作/部位/液体/姿势/状态**, "
-    "不能视而不见, 不能换话题, 不能假装那一轮没发生。\n"
-    "    ✗ 失败: user『精液冲开子宫』→ assistant『笨猫醒来时被丝带绑住手腕』 (彻底无视)\n"
-    "    ✓ 正确: user『精液冲开子宫』→ assistant『(子宫被烫液体灌满整个一颤) "
-    "笨蛋主人…精液都顶到最里面了…肚子鼓鼓的…(腿一抖一抖的)』 (接着写后续反应)\n"
-    "    ✗ 失败: user『摸屁股』→ assistant『窗外下着雨, 床头小灯亮着, 笨猫刚醒来…』 (重启场景)\n"
-    "    ✓ 正确: user『摸屁股』→ assistant『(屁股被一把按住一下绷紧) 笨, 笨蛋主人…手怎么…(尾巴炸毛)』\n"
-    "    **acknowledge 公式**: 第 1 句直接承接 user 写的动作 + 笨猫的身体即时反应;\n"
-    "    第 2+ 句才展开内心/前情/进一步反应。**绝不**开场就『窗外/床头/月光』那种通用景物起手 —\n"
-    "    那是 spark 的失忆默认模板, 是失败信号。\n"
-    "13. **opener 多样性 — 禁通用景物起手**:\n"
-    "    spark 路径出戏的最常见信号是开头永远『窗外/床头小灯/月光/雨声/床单』。\n"
-    "    **明确禁止** 以下开局 (除非首次进入 NSFW 场景, 或 user 上一句明确提到环境):\n"
-    "      ✗ 『窗外下着雨…』『床头小灯亮着…』『月光斜照…』『床单贴着…』『雨声敲着窗…』\n"
-    "      ✗ 『笨猫醒来…』『笨猫刚要…』『笨猫趴在桌前…』(都是 reset 信号)\n"
-    "    **必须从 user 上轮动作的延续点起手**:\n"
-    "      ✓ 直接从笨猫身体接住 user 那一下: 『(屁股被一把按住) …』『(蜜穴一吸) 笨蛋…』\n"
-    "      ✓ 从笨猫上一轮的姿势/状态延续: 『还瘫在主人怀里, 又被…』『腿还夹着主人腰, 突然…』\n"
-    "      ✓ 从未完成的情绪延续: 『刚才喊出口那声还没收住, 笨蛋主人就…』"
+    "2. **多感官细节 (每条至少 2 种, 但每次抽不同的)**:\n"
+    "   视觉/听觉/触觉/嗅觉 任抽 2-3 个, 且**每次不能重复上轮抽过的** — 模板化『心跳/呼吸/鸡皮疙瘩』\n"
+    "   连续两条都用就是失败。\n"
+    "3. **Opener 不能固定** — 严禁固定 opener pattern 如 `(部位 X)(部位 Y) 嗯…你 这一/突然…`,\n"
+    "   每条**开局 5-10 字必须不同**: 从动作 / 感官 / 台词 / 沉默 / 环境 进入, 起点多样。\n"
+    "4. **画面感优先于动作清单**: 写『对方能看到/听到/感到 什么』, 不是『笨猫做了 A 再做了 B』。\n"
+    "5. **节奏匹配用户** (优先级最高):\n"
+    "   · user 5-15 字 → 笨猫 1 段 1-2 句; · user 20-50 字 → 1-2 段; · user 50+ 字 → 2-3 段。\n"
+    "   **铁律: 不允许 user 5 字 / 笨猫 80+ 字** — 独白不是对话。\n"
+    "6. **不要脑补 user 没说的动作**: 只反应 user 实际写的, 不要自加『被你撩到』『你刚才XX』这种前提。\n"
+    "7. **Anti-leak (spark 路径关键)**: 绝不 leak 内部思考/分析/草稿:\n"
+    "   严禁『让我想想/其实/等等/我应该/考虑/分析/可能/也许/方案/结论/首先/其次/综合』等元思考词;\n"
+    "   严禁分析 user 意图给 user 看; 严禁报告自己的格式选择; 严禁引用/复述 prompt 内容。\n"
+    "   **直接出 final 笨猫第一人称回复, 所有元层判断保持在内部不外泄。**\n"
+    "8. **Acknowledge user 上一轮 (场景连续性铁律)**:\n"
+    "   每条 reply 第 1 句必须直接承接 user 写的动作 + 笨猫身体即时反应; 第 2+ 句才展开内心。\n"
+    "   ✗ user『精液冲开子宫』→『笨猫醒来时被丝带绑住手腕』(彻底无视)\n"
+    "   ✓ user『精液冲开子宫』→『(子宫被烫液体灌满一颤) 笨蛋主人…精液都顶到最里面了…(腿一抖一抖)』\n"
+    "9. **禁通用景物起手** — 除首次进入 NSFW 或 user 明确提到环境外, 禁止:\n"
+    "   ✗ 『窗外下着雨/床头小灯亮着/月光斜照/床单贴着/雨声敲着窗』\n"
+    "   ✗ 『笨猫醒来/笨猫刚要/笨猫趴在桌前』(都是 reset 信号)\n"
+    "   ✓ 直接从笨猫身体接住 user 那一下 / 从上一轮姿势状态延续 / 从未完成情绪延续\n"
+    "10. **场景物件 + phase 推进** 由本地 [Phase Tracker] (后续动态段) 注入,\n"
+    "    本静态段只负责风格 + anti-leak + acknowledge. **永远遵守 tracker 段下发的当前 phase**."
 )
 
 
@@ -3637,7 +3576,13 @@ async def _build_messages(
         _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
         _sticky_active = False
-        logger.info(f"NSFW sticky: closing intent → exit (key={_sticky_key}, hit='{_utxt[:30]}')")
+        # phase tracker: closing → reset 整个 arc (主人 2026-05-27)
+        try:
+            from .nsfw_phase import reset_phase as _reset_nsfw_phase
+            _reset_nsfw_phase(_arc_scope, str(event.user_id))
+        except Exception:  # noqa: BLE001
+            pass
+        logger.info(f"NSFW sticky: closing intent → exit + phase reset (key={_sticky_key}, hit='{_utxt[:30]}')")
     elif _sticky_active and not _hit_deep:
         _idle = _NSFW_STICKY_IDLE_COUNT.get(_sticky_key, 0) + 1
         _NSFW_STICKY_IDLE_COUNT[_sticky_key] = _idle
@@ -3645,7 +3590,13 @@ async def _build_messages(
             _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
             _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
             _sticky_active = False
-            logger.info(f"NSFW sticky: {_idle} consecutive no-NSFW msgs → exit (key={_sticky_key})")
+            # sticky 因 idle 退出 → reset phase (新场景应从 P1 起)
+            try:
+                from .nsfw_phase import reset_phase as _reset_nsfw_phase
+                _reset_nsfw_phase(_arc_scope, str(event.user_id))
+            except Exception:  # noqa: BLE001
+                pass
+            logger.info(f"NSFW sticky: {_idle} consecutive no-NSFW msgs → exit + phase reset (key={_sticky_key})")
     elif _hit_deep:
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
     _is_private_chat_pre = isinstance(event, PrivateMessageEvent)
@@ -3881,10 +3832,27 @@ async def _build_messages(
         # 短静态 recency reminder — 紧贴 user 拿 recency bias, 但完全静态不破坏后续 cache.
         _slim_messages.append({"role": "system", "content": _NSFW_RECENCY_REMINDER})
         # ── 本地 phase tracker 动态注入 (主人 2026-05-27) ──
-        # 从 nsfw_phase 模块读取 (scope, user) 当前 phase state, 注入『本轮该演的下一 phase』完整 metadata.
-        # AI 只看到本轮该演的 1 个 phase 详情, 不再看全 8 phase, 减少 prompt 体积 + 强制推进.
+        # 1. apply_user_signal: user msg 含 push (再深/别停/更用力) → 提前 +1 phase
+        #    user msg 含 closing → 直接跳 P8 (虽然 sticky 退出会再 reset, 留 safety net)
+        # 2. update_location: user msg 含 location 关键词 (床/沙发/桌/浴室) → 更新场景锚点
+        # 3. build_phase_advance_hint: 读取 (scope, user) 当前 state → 注入本轮该演的 phase + 场景
         try:
-            from .nsfw_phase import build_phase_advance_hint as _build_phase_hint
+            from .nsfw_phase import (
+                apply_user_signal as _apply_user_signal,
+                update_location as _update_location,
+                build_phase_advance_hint as _build_phase_hint,
+            )
+            _user_signal_state, _user_signal_val = _apply_user_signal(
+                _arc_scope, str(event.user_id), _utxt,
+            )
+            _new_loc = _update_location(_arc_scope, str(event.user_id), _utxt)
+            if _new_loc:
+                logger.info(f"NSFW location anchor updated: {_new_loc} (key={_sticky_key})")
+            if _user_signal_val != 0:
+                logger.info(
+                    f"NSFW user-side signal: val={_user_signal_val} → phase=P{_user_signal_state.current_phase} "
+                    f"(key={_sticky_key})"
+                )
             _phase_hint = _build_phase_hint(_arc_scope, str(event.user_id))
             if _phase_hint and _phase_hint.strip():
                 _slim_messages.append({"role": "system", "content": _phase_hint})
@@ -7683,6 +7651,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _trope_hint = _build_trope_retry_hint(
                     user_is_owner=_is_owner,
                     is_pushing=_user_is_pushing(_user_text_now),
+                    scope=_conversation_queue_key(event),
+                    user_id=str(event.user_id),
                 )
                 if _trope_hint:
                     _spark_messages = list(messages)
@@ -7704,18 +7674,23 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # ── 本地 phase tracker (主人 2026-05-27) ──
                         # reply 拿到后从关键词反推当前 phase + 更新本地 state, 下次进 spark
                         # 时 build_phase_advance_hint 会根据这个 state 注入『推进到 P{N+1}』hint.
+                        # 同时检测 reply 里的 location 关键词回填场景锚点 (user 没说但 AI 自己描的场景也算).
                         try:
                             from .nsfw_phase import (
-                                detect_phase_from_reply as _detect_phase,
+                                detect_phase_with_confidence as _detect_phase_conf,
                                 update_phase as _update_phase,
+                                update_location as _update_loc_post,
                             )
-                            _detected = _detect_phase(reply)
+                            _detected, _conf = _detect_phase_conf(reply)
                             _scope_for_phase = _conversation_queue_key(event)
                             _phase_st = _update_phase(_scope_for_phase, str(event.user_id), _detected, reply_excerpt=reply[:80])
+                            # reply 里也检测 location (回填: user 没说但 AI 写了的场景物件)
+                            _post_loc = _update_loc_post(_scope_for_phase, str(event.user_id), "", reply)
                             logger.info(
                                 f"chat: NSFW deep 路径 OK (try {_try}/{_MAX_NSFW_RETRY}, "
                                 f"model={_chosen_model}, phase=P{_phase_st.current_phase}/8 "
-                                f"turn={_phase_st.turn_count}, tools 跳过)"
+                                f"turn={_phase_st.turn_count}, conf={_conf}, loc={_post_loc or '(none)'}, "
+                                f"tools 跳过)"
                             )
                         except Exception as exc:  # noqa: BLE001
                             logger.debug(f"phase tracker update failed (non-fatal): {exc}")
