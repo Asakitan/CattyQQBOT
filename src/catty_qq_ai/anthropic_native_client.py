@@ -427,7 +427,18 @@ def _log_native_usage(data: dict[str, Any], model: str) -> None:
     # 主人 2026-05-28 C6: 推送到 dashboard 让前端实时显示 cache hit ratio
     try:
         from . import dashboard_state as _dash
-        _dash.push_cache_stats(model, usage)
+        # 主人 2026-05-28: 把 scope_key (qq_private_xxx / qq_group_xxx) 也带上, 让 dashboard 按 scope 显示
+        _scope_for_dash = ""
+        try:
+            from .openai_client import get_current_scope_key
+            _scope_for_dash = get_current_scope_key() or ""
+        except Exception:  # noqa: BLE001
+            pass
+        _dash.push_cache_stats(
+            _scope_for_dash or model,  # fallback 到 model 兼容老 dashboard
+            usage,
+            model=model,
+        )
     except Exception:  # noqa: BLE001
         pass
 

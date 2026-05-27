@@ -57,6 +57,15 @@ h2 { font-size: 14px; margin: 16px 0 8px; color: #555; }
 <div id="diag" style="background:#eef;border:1px solid #99c;padding:6px;font:12px monospace;color:#039;margin-bottom:8px;">DIAG: HTML 加载完成, JS 未执行 — 如果一直停在这, 说明 script 块没跑或语法错</div>
 
 <div class="section">
+  <h2>Context Window 实时 (最新 1 条 chat)</h2>
+  <div id="ctx-live">等待 cache_stats…</div>
+  <div style="margin-top:8px; font-size:11px; color:#888;">
+    📌 <b>1M context</b> 是模型 input 上限, 跟 cache 独立. <b>cache_read 9 折</b>计费让长会话省钱.
+    1h TTL: 5min 后再发也能命中 (5min TTL 已失效).
+  </div>
+</div>
+
+<div class="section">
   <h2>Context Window (最近 5 个 scope)</h2>
   <div id="scope-list" class="scope-list">
     <div class="row" style="font-weight:bold; color:#555;">
@@ -65,9 +74,9 @@ h2 { font-size: 14px; margin: 16px 0 8px; color: #555; }
     <div id="scope-rows">等待 cache_stats 推送…</div>
   </div>
   <div class="legend">
-    <span><i style="background:#2ea44f"></i>cache_read (90% off)</span>
-    <span><i style="background:#f1c40f"></i>cache_create (1.25x)</span>
-    <span><i style="background:#3498db"></i>input (base)</span>
+    <span><i style="background:#2ea44f"></i>cache_read (10% 计费)</span>
+    <span><i style="background:#f1c40f"></i>cache_create (200% 计费, 1h TTL)</span>
+    <span><i style="background:#3498db"></i>input (100% 计费)</span>
     <span><i style="background:#e67e22"></i>output</span>
   </div>
 </div>
@@ -99,10 +108,56 @@ function diag(step) {
   console.log('[catty dash] diag:', step);
 }
 diag('step1: script started');
-const scopeMap = new Map();  // model -> {read, create, input, output, hit, last_ts}
+const scopeMap = new Map();  // scope -> {model, read, create, input, output, hit, last_ts, total_context, billed_input_equiv, saved_pct}
 const activeStreams = new Map();  // stream_id -> {text, model, started}
 const eventsBox = document.getElementById('events');
 const statusEl = document.getElementById('status');
+const CONTEXT_LIMIT = 1000000;  // 1M context (Sonnet 4.6 / Opus 4.7 1M 模式)
+
+function renderContextLive() {
+  const rows = [...scopeMap.entries()].sort((a,b) => b[1].last_ts - a[1].last_ts);
+  if (rows.length === 0) {
+    document.getElementById('ctx-live').innerHTML = '等待 cache_stats…';
+    return;
+  }
+  const [scope, s] = rows[0];  // 最新 1 条
+  const total = s.total_context || (s.read + s.create + s.input);
+  const ctxPct = (total / CONTEXT_LIMIT * 100).toFixed(2);
+  const billed = s.billed_input_equiv || 0;
+  const savedPct = s.saved_pct || 0;
+  const hitClass = s.hit < 0.3 ? 'hit-bad' : s.hit < 0.6 ? 'hit-mid' : 'hit-good';
+  const fmt = n => (n >= 1000 ? (n/1000).toFixed(1)+'K' : n.toString());
+  document.getElementById('ctx-live').innerHTML = `
+    <div style="font:13px ui-monospace,monospace;">
+      <div><b>scope</b>: ${scope} &nbsp;·&nbsp; <b>model</b>: ${s.model || '(unknown)'}</div>
+      <div style="margin-top:6px;">
+        <b>Total context</b>: ${fmt(total)} / 1M tokens (<b>${ctxPct}%</b> of 1M)
+        <div class="bar" style="margin-top:3px;">
+          <div style="width:${Math.min(ctxPct, 100)}%; background:linear-gradient(90deg,#2ea44f,#3498db,#f1c40f);"></div>
+        </div>
+      </div>
+      <div style="margin-top:8px;">
+        <b>Token 分布</b>:
+        <span style="color:#2ea44f">R ${fmt(s.read)}</span> /
+        <span style="color:#f1c40f">C ${fmt(s.create)}</span> /
+        <span style="color:#3498db">I ${fmt(s.input)}</span> /
+        <span style="color:#e67e22">O ${fmt(s.output)}</span>
+      </div>
+      <div style="margin-top:8px; padding:8px; background:#f0f8ff; border-radius:4px;">
+        <b>💰 计费估算</b> (1h TTL 价格): <span style="color:#2ea44f;font-weight:bold">${fmt(billed)} 等价 input token</span>
+        <br>
+        <span style="font-size:11px; color:#555;">
+          (raw total ${fmt(total)} - 不用 cache 全价就是 ${fmt(total)}, 现在只算 ${fmt(billed)},
+          <b style="color:#27ae60">省 ${savedPct.toFixed(1)}%</b>)
+        </span>
+      </div>
+      <div style="margin-top:6px;">
+        <b>Cache 命中率</b>: <span class="${hitClass}">${(s.hit*100).toFixed(1)}%</span>
+        ${s.hit < 0.5 ? ' ⚠️ 命中率低 — 可能是首次 chat 或 cache 过期' : ''}
+      </div>
+    </div>
+  `;
+}
 
 function renderScopes() {
   const rows = [...scopeMap.entries()].sort((a,b) => b[1].last_ts - a[1].last_ts).slice(0, 5);
@@ -180,12 +235,17 @@ function connectSSE() {
     }
     if (payload.type === 'cache_stats') {
       scopeMap.set(payload.scope || 'unknown', {
+        model: payload.model || '',
         read: payload.cache_read, create: payload.cache_create,
         input: payload.input_tokens, output: payload.output_tokens,
         hit: payload.hit_ratio, last_ts: payload.ts,
+        total_context: payload.total_context || 0,
+        billed_input_equiv: payload.billed_input_equiv || 0,
+        saved_pct: payload.saved_pct || 0,
       });
+      renderContextLive();
       renderScopes();
-      appendEvent(`cache_stats ${payload.scope} hit=${(payload.hit_ratio*100).toFixed(0)}% R=${payload.cache_read} C=${payload.cache_create}`);
+      appendEvent(`cache_stats ${payload.scope} hit=${(payload.hit_ratio*100).toFixed(0)}% R=${payload.cache_read} C=${payload.cache_create} billed=${payload.billed_input_equiv || 0}`);
     } else if (payload.type === 'stream_start') {
       activeStreams.set(payload.stream_id, { text: '', model: payload.model, started: payload.ts });
       renderStreams();

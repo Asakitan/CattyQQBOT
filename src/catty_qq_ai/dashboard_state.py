@@ -102,21 +102,37 @@ def end_stream(stream_id: str, final_usage: dict[str, Any] | None = None) -> Non
     })
 
 
-def push_cache_stats(scope: str, usage: dict[str, Any]) -> None:
-    """anthropic_native_client._log_native_usage 调用, 把 cache 命中率推到 dashboard."""
+def push_cache_stats(scope: str, usage: dict[str, Any], *, model: str = "") -> None:
+    """anthropic_native_client._log_native_usage 调用, 把 cache 命中率 + context window 占用推到 dashboard.
+
+    主人 2026-05-28: 加 model 参数 + 算计费 token equiv (cache_read*0.1 + cache_create*2.0 + input).
+    1h TTL cache_create 倍数=2.0, 5min=1.25. dashboard 据此显示实际计费 token 节省比例.
+    """
     cache_read = int(usage.get("cache_read_input_tokens") or 0)
     cache_create = int(usage.get("cache_creation_input_tokens") or 0)
     input_tokens = int(usage.get("input_tokens") or 0)
-    total = cache_read + cache_create + input_tokens
-    hit = (cache_read / total) if total > 0 else 0.0
+    output_tokens = int(usage.get("output_tokens") or 0)
+    total_context = cache_read + cache_create + input_tokens  # 实际 input context 占用
+    hit = (cache_read / total_context) if total_context > 0 else 0.0
+    # 计费 token 等价 (Anthropic 定价系数, 假设 1h TTL):
+    # - cache_read: 0.1x (90% off)
+    # - cache_create: 2.0x (1h TTL write)
+    # - new input: 1.0x base
+    billed_input_equiv = int(cache_read * 0.1 + cache_create * 2.0 + input_tokens * 1.0)
+    # 不用 cache 的话 = total_context * 1.0
+    saved_pct = (1 - billed_input_equiv / total_context) * 100 if total_context > 0 else 0.0
     _broadcast({
         "type": "cache_stats",
         "scope": scope,
+        "model": model or "",
         "cache_read": cache_read,
         "cache_create": cache_create,
         "input_tokens": input_tokens,
-        "output_tokens": int(usage.get("output_tokens") or 0),
+        "output_tokens": output_tokens,
         "hit_ratio": hit,
+        "total_context": total_context,
+        "billed_input_equiv": billed_input_equiv,
+        "saved_pct": saved_pct,
         "ts": time.time(),
     })
 
