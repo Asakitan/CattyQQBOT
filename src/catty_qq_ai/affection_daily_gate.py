@@ -97,7 +97,10 @@ def build_daily_affection_gate(
     *,
     is_owner: bool = False,
 ) -> str:
-    """返回日常对话好感度反应分桶 prompt 段。tier 5 档之一, 输出 ≤ 350 字符。"""
+    """返回日常对话好感度反应分桶 prompt 段。tier 5 档之一, 输出 ≤ 350 字符.
+
+    保留兼容老调用方; 新代码请用 build_daily_gate_skeleton + build_daily_gate_params 拆分.
+    """
     tier = _resolve_tier(affection_level, is_owner)
     rules = _TIER_RULES[tier]
     return _DAILY_GATE_TEMPLATE.format(
@@ -113,6 +116,53 @@ def build_daily_affection_gate(
     )
 
 
+# 主人 2026-05-28 prompt 优化 C3c: 拆 cache-stable 骨架 + dynamic params 指针.
+# 骨架 (~1800c, 完整 5 档描述) → cache 友好, 跨 scope/sender/Lv 100% byte 一致.
+# params (~80c, 当前 Lv 指针) → dynamic 小段, sweep inline.
+_TIER_LV_RANGE = {
+    "stranger": "Lv 0-2 (陌生)",
+    "acquaint": "Lv 3-4 (半熟)",
+    "close": "Lv 5-7 (亲近)",
+    "deep": "Lv 8-10 (深熟)",
+    "owner": "真主人 (无视 Lv 直接走此档)",
+}
+_DAILY_GATE_SKELETON_TEXT = (
+    "【笨猫·日常 SFW 反应档 · 完整 5 档骨架定义】\n"
+    "(本轮 Lv/is_owner/tier 看下面 [DYNAMIC_CONTEXT] 里 catty_daily_affection_gate_params 段)\n\n"
+    + "\n\n".join(
+        f"**[{tier}]** ({_TIER_LV_RANGE[tier]})\n"
+        f"  - 撒娇浓度: {rules['sajiao']}\n"
+        f"  - 主动度: {rules['proactive']}\n"
+        f"  - 称呼范围 (对对方): {rules['addr']}\n"
+        f"  - 可写动作/小动作池: {rules['actions']}\n"
+        f"  - 结尾钩子风格: {rules['hook']}\n"
+        f"  - 禁忌词 (低档绝不出现): {rules['forbidden']}"
+        for tier, rules in _TIER_RULES.items()
+    )
+    + "\n\n**铁律**: 选一档贯穿这一条回复, 不要跨档混用. 这是日常 SFW 风格闸, 跟 NSFW gate (catty_nsfw_gate_skeleton) 是两套维度."
+)
+
+
+def build_daily_gate_skeleton() -> str:
+    """完整 5 档静态骨架 — cache 友好, 跨 scope/sender/Lv byte 一致."""
+    return _DAILY_GATE_SKELETON_TEXT
+
+
+def build_daily_gate_params(
+    affection_level: int = 0,
+    *,
+    is_owner: bool = False,
+) -> str:
+    """动态参数 — 只 ~80 字符, 引用上面骨架对应档位."""
+    tier = _resolve_tier(affection_level, is_owner)
+    return (
+        f"【日常 SFW 反应档·本轮参数】Lv={affection_level} · is_owner={is_owner} · tier={tier}.\n"
+        f"→ 看 catty_daily_affection_gate_skeleton 里 [{tier}] 那档 6 个维度执行 (撒娇/主动/称呼/动作/钩子/禁忌)."
+    )
+
+
 __all__ = [
     "build_daily_affection_gate",
+    "build_daily_gate_skeleton",
+    "build_daily_gate_params",
 ]

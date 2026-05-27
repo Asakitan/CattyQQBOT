@@ -2345,9 +2345,10 @@ def _build_nsfw_slim_persona_bundle() -> str:
 _keyword_reply_last_sent_at: dict[str, float] = {}
 
 ChatMessage = dict[str, object]
-# 会话历史消息数达到该阈值后，跳过教学型例句 prompt（catgirl_examples + disambiguation_examples）。
-# 6 轮 user+assistant = 12 条消息。
-HOT_SESSION_MIN_MESSAGES = 12
+# 会话历史消息数达到该阈值后跳过教学型例句 prompt (catgirl_examples / disambiguation / mes_example).
+# 主人 2026-05-28 prompt 优化: 12→6 (3 轮 user+assistant = 6 条) — 让示例段更早停, 节省 ~9K tokens/轮.
+# AI 看 3 轮真实对话就能学到口吻, 不需要 6 轮示例.
+HOT_SESSION_MIN_MESSAGES = 6
 _session_cache: "SessionCache | None" = None
 
 
@@ -4461,6 +4462,30 @@ async def _build_messages(
             )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"catty_current_sender_info register failed: {exc}")
+    # 主人 2026-05-28 prompt 优化 C3b: PHI (post_history_instructions) 挪到 boundary 前 cache.
+    # 之前注入位置在 history 之后 current user 之前 (ST 风 recency bias), 但 sweep 会捕获
+    # 它 inline 到 [DYNAMIC_CONTEXT] → 每轮重发 ~1500c. PHI 内容 100% 静态 (无 macro 引用),
+    # 改成 register_static order=440 (boundary 455 之前), 直接进 cache. 每轮节省 ~1500c.
+    # AI 看 system 段开头跟末尾 effect 差不多 — character lock + reply format + pacing 等指令
+    # 稳定生效不依赖 recency.
+    _phi_disabled_static = "catty_post_history" in (getattr(config, "catty_prompts_disabled", None) or [])
+    if not _phi_disabled_static:
+        try:
+            from .character_card import get_post_history as _get_post_history_static
+            _phi_text_static = _get_post_history_static(ctx={
+                "char": "笨猫", "user": _user_display_for_macros,
+                "group": _group_real_display,
+                "last_active_at": _last_active_at,
+            })
+            if _phi_text_static and _phi_text_static.strip():
+                _st_manager.register_static(
+                    "catty_post_history",
+                    _phi_text_static,
+                    order=440,  # static, pre-boundary — 入 cache
+                )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"PHI static register failed: {exc}")
+
     # LayerD/E 散装 context 统一注册到 PromptManager,享受同样的 prompt_order / prompts_disabled
     # 配置能力。order 600+ 表示挂在 character_card / world_info 之后、接近 chat history。
     # 这些 context 是 runtime conditional/动态值,所以走 register_static(已经计算好的字符串)。
@@ -4656,27 +4681,7 @@ async def _build_messages(
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"first_mes cold-start failed (non-fatal): {exc}")
     messages.extend(history_messages)
-    # === ST V2 post_history_instructions (PHI / jailbreak slot) ===
-    # 紧贴 chat history 末尾注入 — 利用 LLM recency bias 让人设锁 / 反 OOC / 格式指令依从性最强.
-    # 原本注册在 PromptManager (order=500) 时落在 system 块尾, 仍在 history 之前, 被长对话稀释.
-    # 移到这里后是 messages 里最后一个 system 段, 紧邻 user 当前消息, 砍 60-80% 出戏 / 客服腔.
-    # 主人 2026-05-28: jailbreak 段已从 _CATTY_POST_HISTORY 内部注释 (CRITICAL + ABSOLUTE BANS),
-    # 保留的人设部分 (REPLY FORMAT / PACING / FORMAT / NSFW 妥协路径 / 角色锁 / NO NARRATION) 继续注入。
-    _phi_disabled = "catty_post_history" in (getattr(config, "catty_prompts_disabled", None) or [])
-    if not _phi_disabled:
-        try:
-            from .character_card import get_post_history as _get_post_history
-            # 主人 2026-05-28 cache fix: PHI 也用 scope-stable user (群聊用「用户」, 私聊用真名).
-            # 不然群里换人 PHI 字节漂 → system_blocks 末尾段动 → cache prefix miss.
-            _phi_text = _get_post_history(ctx={
-                "char": "笨猫", "user": _user_display_for_macros,
-                "group": _group_real_display,
-                "last_active_at": _last_active_at,
-            })
-            if _phi_text and _phi_text.strip():
-                messages.append({"role": "system", "content": _phi_text})
-        except Exception as exc:  # noqa: BLE001
-            logger.debug(f"post_history (PHI) inject failed (non-fatal): {exc}")
+    # PHI 已在 register_catty_persona 之后 register_static (order=440) 注册到 cache 区.
     # 主人 2026-05-28: current user msg 把 _dynamic_context_text (boundary 后所有动态段 inline)
     # 拼到内容前. 这样动态段不再以 system role 出现, system_blocks 跨轮字节稳定 → cache prefix hit.
     _user_content_raw = _build_user_content(incoming, image_description=image_description)
