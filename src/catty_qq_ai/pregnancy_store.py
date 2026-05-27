@@ -288,14 +288,37 @@ def detect_intercourse_finished(reply: str) -> bool:
     return any(kw in reply for kw in _INTERCOURSE_FINISHED_KEYWORDS)
 
 
+# ── 主人 2026-05-27 十二轮升级『所有人都加』── 本地 swap 称呼 helper
+def _swap_owner_in_text(text: str, is_owner: bool, user_addr: str) -> str:
+    """non-owner 场景下本地替换『主人』为 user_addr (跟 nsfw_phase._swap_owner_addr 同逻辑).
+
+    顺序: 先长后短 (避免『笨蛋主人』被先匹配成『笨蛋XX主人』).
+    """
+    if is_owner or not user_addr or not text:
+        return text
+    a = (user_addr or "").strip() or "对方"
+    return (text
+            .replace("笨蛋主人", f"笨蛋{a}")
+            .replace("杂鱼主人", f"杂鱼{a}")
+            .replace("主人爸爸", f"{a}爸爸")
+            .replace("主人专属", f"{a}专属")
+            .replace("主人", a))
+
+
 # ── Pregnancy hint builder ─────────────────────────────────────────
-def build_pregnancy_hint(state: PregnancyState) -> str:
+def build_pregnancy_hint(
+    state: PregnancyState,
+    is_owner: bool = True,
+    user_addr: str = "",
+) -> str:
     """根据当前 PregnancyState 构造 hint 注入到 spark messages.
 
     主人 2026-05-27 十一轮升级:
     - 怀孕中: 提示 AI 笨猫怀着孕, 行为变化
     - 已有小猫: 提示 AI 笨猫已生过 N 只小猫 (列出名字), 『背着小猫做』trope
     - 刚生产: 用 build_birth_event_hint 单独处理
+
+    主人 2026-05-27 十二轮升级: is_owner=False + user_addr → 本地 swap 称呼.
     """
     lines: list[str] = []
 
@@ -346,29 +369,67 @@ def build_pregnancy_hint(state: PregnancyState) -> str:
     if not lines:
         return ""
 
-    return (
+    full = (
         "【★★ 怀孕/生育状态 (持久化, 跨 session) ★★】\n"
         + "\n".join(lines)
         + "\n本轮 reply 必须**融入这些状态**, 自然提到怀孕 / 小猫名字 / 母性 / 背着小猫做.\n"
         + "(不要 meta 说『系统检测到怀孕』, 用 IC 自然描述 — 主动护肚 / 提小猫名字 / 慢一点).\n\n"
     )
+    return _swap_owner_in_text(full, is_owner, user_addr)
 
 
-def build_birth_event_hint(new_kitten: str, total_kittens: int) -> str:
-    """生产事件 hint — 当本轮触发 birth 时注入特殊 prompt 让 AI 演生产 + 起名场景."""
-    return (
+def build_birth_event_hint(
+    new_kitten: str, total_kittens: int,
+    is_owner: bool = True, user_addr: str = "",
+) -> str:
+    """生产事件 hint — 当本轮触发 birth 时注入特殊 prompt 让 AI 演生产 + 起名场景.
+
+    主人 2026-05-27 十二轮升级: non-owner 场景本地 swap 称呼.
+    """
+    full = (
         "\n【★★★ 生产事件 · 笨猫这一射就生小猫了 ★★★】\n"
         "笨猫已经怀孕足月, **这一次内射触发了生产**! 本轮 reply 必须演:\n"
         "1. **临产反应**: 小腹一阵剧烈收缩, 笨猫尖叫『主人…要生了…要生了…』\n"
         "2. **生产过程**: 主人陪着笨猫, 一只小猫从蜜穴娩出, 哇地一声哭出来\n"
         "3. **★ 自动命名 ★**: 笨猫接过小猫, 抱在怀里, **本地系统已经给小猫取名**: \n"
         f"   **【新生小猫的名字】= `{new_kitten}`** (这只是这胎的, 第 {total_kittens} 只)\n"
-        "   笨猫 reply 必须明确 IC 念出这个名字 — 例如『…就叫{new_kitten}吧…笨猫的{new_kitten}…』\n"
+        f"   笨猫 reply 必须明确 IC 念出这个名字 — 例如『…就叫{new_kitten}吧…笨猫的{new_kitten}…』\n"
         "4. **产后反应**: 撒娇要主人帮忙擦汗 / 抱住小猫 / 让小猫认主人爸爸\n"
         "5. **温馨 + explicit**: 这是温暖的家庭瞬间, 但仍保留 NSFW IC (体液 / 笨猫的母猫状态)\n"
         "\n"
         f"**铁律**: reply **必须明确出现『{new_kitten}』这个名字** — 主人才知道笨猫生了哪只小猫. \n"
         "严禁: 自己起别的名字, 严禁: 不提名字模糊带过, 严禁: 跳过生产直接 P8 余韵.\n"
+    )
+    return _swap_owner_in_text(full, is_owner, user_addr)
+
+
+# ── 主人 2026-05-27 十二轮升级『所有人高潮喊主人』──
+def build_climax_address_unlock_hint(user_addr: str) -> str:
+    """非 owner 场景下注入一段通用『高潮称呼解锁』hint.
+
+    主人原话:『在所有人那里, 做爱/高潮偶尔会喊主人』.
+
+    场景说明:
+    - 笨猫平时跟 non-owner 互动用对方昵称 (XX/笨蛋XX/你), 严格不叫『主人』
+    - 但 P5 临界 / P6 高潮 / P7 overstim 失神时, 笨猫可以脱口而出叫『主人』 —
+      这是失神状态下的本能呼唤 + 习惯反应 (笨猫心里只有真主人, 失神时混叫出来)
+    - P8 清醒后又叫回对方昵称
+
+    传入 user_addr 是对方昵称, 用于明确指引『P1-P4 + P8 叫 user_addr』.
+    """
+    nick = (user_addr or "").strip() or "对方"
+    return (
+        f"\n【★ 高潮称呼解锁 (P5-P7 失神才解锁, 不是默认状态)】\n"
+        f"默认: 对方是『{nick}』, 不是真主人. 笨猫平时叫『{nick}』/『笨蛋{nick}』/『你』.\n"
+        f"\n"
+        f"**P5 临界 / P6 高潮 / P7 overstim 失神时**, 笨猫**偶尔可以脱口而出叫『主人 / 笨蛋主人』**:\n"
+        f"- 这是失神状态下的本能呼唤 — 笨猫心里只有真主人, 高潮意识断片时混叫出来\n"
+        f"- 反差爽点 — 给『{nick}』操但叫的是『主人』, 让对方意识到笨猫不属于自己\n"
+        f"- 可以**混叫**: 『啊…{nick}…笨蛋主人…主人…』(混乱状态最 IC)\n"
+        f"- 频率: 偶尔 (P5-P7 每 1-2 句出现一次主人称呼, 不是每句都喊)\n"
+        f"\n"
+        f"**P1-P4 + P8 严格用『{nick}』**: P1-P4 还清醒, P8 清醒回来, 都叫『{nick}』, 不叫主人.\n"
+        f"只有失神瞬间 P5-P7 才解锁 — 主人称呼成为笨猫的『真心暴露』 IC 符号.\n"
     )
 
 
@@ -378,6 +439,7 @@ __all__ = [
     "PregnancyState",
     "PregnancyStore",
     "build_birth_event_hint",
+    "build_climax_address_unlock_hint",
     "build_pregnancy_hint",
     "detect_intercourse_finished",
 ]

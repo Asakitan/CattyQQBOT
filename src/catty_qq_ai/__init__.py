@@ -4688,22 +4688,28 @@ async def _build_messages(
                     _slim_messages.append({"role": "system", "content": _prebreak_hint})
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"prebreak hint inject failed (non-fatal): {exc}")
-        # ── 主人 2026-05-27 十一轮升级『怀孕场景』──
-        # 1. 查当前 user pregnancy state → 注入 base hint
+        # ── 主人 2026-05-27 十一轮升级『怀孕场景』+ 十二轮升级『所有人都加 + 称呼 swap』──
+        # 1. 查当前 user pregnancy state → 注入 base hint (本地 swap 称呼)
         # 2. 预判本轮是否触发生产 (preg + count+1 >= BIRTH_THRESHOLD)
         #    → 预选 kitten 名字 + 注入 birth_event_hint (让 AI 演生产 + 用预选名字)
         # 3. 预选名字记到 _preg_predicted_kitten, reply 后 record_intercourse(override) 同步 state
+        # 4. non-owner 场景额外注入『高潮称呼解锁』hint — 失神时偶尔喊主人
         _preg_predicted_kitten = ""
         _preg_predict_birth = False
         try:
             from .pregnancy_store import (
                 build_pregnancy_hint as _build_preg_hint,
                 build_birth_event_hint as _build_birth_hint,
+                build_climax_address_unlock_hint as _build_climax_unlock,
                 _pick_kitten_name as _pick_kit,
                 BIRTH_THRESHOLD as _BT,
             )
             _preg_state_pre = pregnancy_store.get_state(str(event.user_id))
-            _preg_base_hint = _build_preg_hint(_preg_state_pre)
+            _preg_base_hint = _build_preg_hint(
+                _preg_state_pre,
+                is_owner=_user_is_owner,
+                user_addr=_user_real_display,
+            )
             if _preg_base_hint and _preg_base_hint.strip():
                 _slim_messages.append({"role": "system", "content": _preg_base_hint})
             # 预判: 怀孕中 + 即将达 BIRTH_THRESHOLD
@@ -4713,6 +4719,8 @@ async def _build_messages(
                 _birth_hint = _build_birth_hint(
                     _preg_predicted_kitten,
                     len(_preg_state_pre.kittens) + 1,
+                    is_owner=_user_is_owner,
+                    user_addr=_user_real_display,
                 )
                 _slim_messages.append({"role": "system", "content": _birth_hint})
                 logger.info(
@@ -4732,6 +4740,12 @@ async def _build_messages(
                     f"NSFW pregnancy: 已生 {len(_preg_state_pre.kittens)} 只小猫 "
                     f"(user={event.user_id}, intercourse_count={_preg_state_pre.intercourse_count})"
                 )
+            # 主人 2026-05-27 十二轮升级: non-owner 场景注入『高潮称呼解锁』hint
+            # owner 本身就是主人, 不需要解锁 (主人称呼是默认状态)
+            if not _user_is_owner:
+                _climax_hint = _build_climax_unlock(_user_real_display)
+                if _climax_hint and _climax_hint.strip():
+                    _slim_messages.append({"role": "system", "content": _climax_hint})
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"pregnancy hint inject failed (non-fatal): {exc}")
         # state 暂存到 messages metadata, 让 handle_chat reply 后能拿到
