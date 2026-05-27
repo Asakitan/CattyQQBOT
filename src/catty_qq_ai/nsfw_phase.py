@@ -50,6 +50,11 @@ class PhaseState:
     arc_count: int = 1
     # P8 阶段累计的连续『P8 但 user 没推』轮数 (用于判断余韵是否自然平复)
     p8_idle_count: int = 0
+    # ── 主人 2026-05-27 六轮升级『各场景判断更智能』──
+    outfit: str = ""  # 穿着 (jk/睡衣/浴袍/泳装/围裙/校服...)
+    time_of_day: str = ""  # 时段 (morning/noon/evening/midnight)
+    mood: str = ""  # 笨猫状态 (累/醉/朦胧/嗓子哑/起床/生病/正常)
+    body_focus: str = ""  # 当前被聚焦的猫娘敏感部位 (耳朵/尾巴根/喉咙下/大腿内侧)
 
 
 # Module-level state: key = f"{scope}:{user_id}"
@@ -142,6 +147,57 @@ LOCATION_PRESETS: dict[str, dict[str, Any]] = {
         "ambient": "教室空了, 黑板还残留粉笔字, 课桌椅被推得歪歪",
         "keywords": ("教室", "课桌", "黑板", "讲台", "教室里", "学校"),
     },
+    # ── 主人 2026-05-27 六轮升级: 加 10 个常用场景 ──
+    "hotel_room": {
+        "name": "酒店房间",
+        "ambient": "酒店床比家里硬一点, 窗帘没全拉上漏出城市灯火, 空调嗡嗡地转",
+        "keywords": ("酒店", "宾馆", "开房", "旅馆", "酒店房", "酒店床"),
+    },
+    "ktv_box": {
+        "name": "KTV 包厢",
+        "ambient": "包厢里 LED 灯打成紫红, 大屏幕还放着 MV, 沙发软到陷下去",
+        "keywords": ("KTV", "ktv", "包厢", "K 房", "K房", "唱歌房", "麦霸", "唱 K"),
+    },
+    "locker_room": {
+        "name": "更衣室",
+        "ambient": "更衣室全是金属锁柜的闷响, 长凳被身体压得吱呀响, 远处淋浴在滴水",
+        "keywords": ("更衣室", "换衣室", "试衣间", "试衣", "锁柜", "更衣"),
+    },
+    "school_toilet": {
+        "name": "学校厕所",
+        "ambient": "瓷砖隔间冷得发凉, 隔壁有人冲水, 门没锁严漏出一道缝",
+        "keywords": ("学校厕所", "厕所隔间", "卫生间", "厕所里", "隔间", "校园厕所"),
+    },
+    "stairwell": {
+        "name": "楼梯间",
+        "ambient": "楼梯间灯坏了一半, 隔层听得到脚步声, 扶手凉得发铁锈",
+        "keywords": ("楼梯间", "楼道", "消防楼梯", "楼梯口", "在楼梯", "楼梯上"),
+    },
+    "store_room": {
+        "name": "储物间",
+        "ambient": "储物间堆满纸箱, 空气里有灰尘味, 门只虚掩着外面有人走",
+        "keywords": ("储物间", "杂物间", "仓库", "工具间", "档案室"),
+    },
+    "tent_outdoor": {
+        "name": "帐篷里",
+        "ambient": "帐篷里只剩睡袋的窸窣声, 头顶布料挡不住星光, 外面虫鸣一阵阵",
+        "keywords": ("帐篷", "露营", "野营", "帐篷里", "睡袋", "野外"),
+    },
+    "snow_field": {
+        "name": "雪地里",
+        "ambient": "雪地的冷气从皮肤上窜进来, 呼吸全冻成白雾, 身下铺的衣服已经湿透",
+        "keywords": ("雪地", "雪里", "下雪", "雪天", "雪山", "在雪里"),
+    },
+    "beach": {
+        "name": "海边",
+        "ambient": "海浪一阵阵拍着脚踝, 沙子被身体压出印, 海风带着咸味",
+        "keywords": ("海边", "沙滩", "海浪", "海里", "海岸", "沙滩上"),
+    },
+    "library": {
+        "name": "图书馆角落",
+        "ambient": "图书馆深处书架挡住光, 隔壁还有人翻页, 笨猫得咬住手背才不出声",
+        "keywords": ("图书馆", "书架", "阅览室", "自习室", "藏书室"),
+    },
 }
 
 
@@ -163,6 +219,264 @@ def detect_location_from_text(text: str) -> str:
     if not text:
         return ""
     for kw, key in _LOCATION_KEYWORD_TABLE:
+        if kw in text:
+            return key
+    return ""
+
+
+# ── 主人 2026-05-27 六轮升级『各场景判断更智能』──
+# 4 个新维度: outfit / time_of_day / mood / body_focus
+
+# Outfit presets: 穿着影响 NSFW 起点 + 风味
+OUTFIT_PRESETS: dict[str, dict[str, Any]] = {
+    "jk": {
+        "name": "JK 制服",
+        "ambient": "JK 短裙 + 过膝袜 + 蝴蝶结领带, 上衣纽扣已经被解到第三颗",
+        "keywords": ("JK", "jk", "制服", "校服", "百褶裙", "短裙", "蝴蝶结领带", "学院风"),
+        "vibe": "制服诱惑 — 解扣 / 撩裙 / 袜子滑下脚踝是核心动作信号",
+    },
+    "pajama": {
+        "name": "睡衣",
+        "ambient": "睡衣布料柔软, 没穿内衣, 衣摆已经掀到腰间",
+        "keywords": ("睡衣", "睡裙", "丝绸睡", "纱睡衣", "吊带睡"),
+        "vibe": "慵懒朦胧 — 起床 / 睡前 / 朦胧状态, 适合 morning sex / 半睡半醒",
+    },
+    "bathrobe": {
+        "name": "浴袍",
+        "ambient": "浴袍腰带松松绑着, 头发还湿, 锁骨上挂着水珠",
+        "keywords": ("浴袍", "浴巾", "出浴", "刚洗完", "湿发", "毛巾裹"),
+        "vibe": "浴后湿润 — 蒸汽 / 体温升高 / 一拽腰带就全开",
+    },
+    "swimsuit": {
+        "name": "泳装",
+        "ambient": "比基尼绳已经被解开一根, 身上还沾着海水或泳池氯味",
+        "keywords": ("泳装", "比基尼", "泳衣", "三点式", "连体泳", "泳池", "海边"),
+        "vibe": "海滩/泳池场 — 湿润 + 防晒油 + 露肤大",
+    },
+    "apron_nude": {
+        "name": "裸围裙",
+        "ambient": "围裙挂着但身后全裸, 手里还拿着锅铲, 脸已经红到耳根",
+        "keywords": ("围裙", "裸围裙", "光着腰", "围裙做饭", "厨娘"),
+        "vibe": "厨房诱惑 — 后背全裸 + 后入信号 + 主人主动从背后抱住",
+    },
+    "cosplay_nurse": {
+        "name": "护士装",
+        "ambient": "白色护士服短到腿根, 听诊器还挂在脖子上",
+        "keywords": ("护士装", "护士服", "看护服", "白衣天使"),
+        "vibe": "角色扮演 — 量体温 / 治疗 / 听诊器游戏 / 病人主人",
+    },
+    "cosplay_maid": {
+        "name": "女仆装",
+        "ambient": "女仆装黑白短裙 + 围裙, 头戴白色发箍, 大腿吊带袜",
+        "keywords": ("女仆装", "女仆服", "maid", "佣人装"),
+        "vibe": "服侍主人 trope — 跪着 / 喂主人 / 服务 / 您好主人",
+    },
+    "school_swimsuit": {
+        "name": "学校泳装",
+        "ambient": "学校蓝色连体泳装, 上面写着名字, 紧绷在身上勒出痕",
+        "keywords": ("学校泳装", "课用泳", "蓝色泳装", "小蓝条"),
+        "vibe": "校园 + 制服诱惑混合 — 体育课结束 / 游泳课后",
+    },
+    "qipao": {
+        "name": "旗袍",
+        "ambient": "旗袍开衩高到腰, 走路一晃露出大腿, 盘扣已经解到第二颗",
+        "keywords": ("旗袍", "唐装", "古风裙", "汉服"),
+        "vibe": "东方风情 — 解盘扣 / 撩开衩 / 古典反差",
+    },
+    "naked": {
+        "name": "已全裸",
+        "ambient": "衣服早就被脱光扔到一边, 床单上能看到压出的痕",
+        "keywords": ("全裸", "裸着", "光着身子", "光裸", "赤裸", "脱光", "什么都没穿"),
+        "vibe": "已经脱衣完毕, 直接进 P4+ 主动 / 已经被推到全身敏感",
+    },
+}
+
+
+def _build_outfit_keyword_table() -> list[tuple[str, str]]:
+    pairs: list[tuple[str, str]] = []
+    for key, meta in OUTFIT_PRESETS.items():
+        for kw in meta["keywords"]:
+            pairs.append((kw, key))
+    pairs.sort(key=lambda x: -len(x[0]))
+    return pairs
+
+
+_OUTFIT_KEYWORD_TABLE: list[tuple[str, str]] = _build_outfit_keyword_table()
+
+
+def detect_outfit_from_text(text: str) -> str:
+    if not text:
+        return ""
+    for kw, key in _OUTFIT_KEYWORD_TABLE:
+        if kw in text:
+            return key
+    return ""
+
+
+# Time-of-day presets
+TIME_OF_DAY_PRESETS: dict[str, dict[str, Any]] = {
+    "morning": {
+        "name": "早晨",
+        "ambient": "晨光从窗帘缝漏进来, 笨猫眼睛还没完全睁开, 头发软软乱在枕上",
+        "keywords": ("早上", "早晨", "晨", "morning", "起床", "刚醒", "醒来", "早安"),
+        "vibe": "morning sex — 慢一档 / 朦胧 / 蹭 / 撒娇要再睡一会, 身体先动嘴还在嘟囔",
+    },
+    "noon": {
+        "name": "中午",
+        "ambient": "中午阳光透过窗, 房间晒得发烫, 风扇咕哒咕哒在转",
+        "keywords": ("中午", "午休", "午饭", "晌午", "noon", "正午"),
+        "vibe": "午休偷情 / 校园 / 公司 — 有点紧张 + 偷偷的爽感",
+    },
+    "evening": {
+        "name": "晚上",
+        "ambient": "晚上灯光暖黄, 外面车声远, 窗帘半开月光斜进来",
+        "keywords": ("晚上", "晚间", "傍晚", "evening", "天黑了", "下班了", "夜里"),
+        "vibe": "正常晚间 NSFW — 床上 / 沙发 / 浴室常规节奏",
+    },
+    "midnight": {
+        "name": "深夜",
+        "ambient": "深夜整个楼都安静, 只有挂钟滴答, 笨猫的喘息听起来特别响",
+        "keywords": ("深夜", "凌晨", "半夜", "午夜", "midnight", "失眠", "睡不着", "两点", "三点"),
+        "vibe": "深夜安静 — 必须压低声音 / 怕吵醒别人 / 失眠抚慰 trope",
+    },
+}
+
+
+_TIME_KEYWORD_TABLE: list[tuple[str, str]] = sorted(
+    [(kw, key) for key, meta in TIME_OF_DAY_PRESETS.items() for kw in meta["keywords"]],
+    key=lambda x: -len(x[0]),
+)
+
+
+def detect_time_of_day_from_text(text: str) -> str:
+    if not text:
+        return ""
+    for kw, key in _TIME_KEYWORD_TABLE:
+        if kw in text:
+            return key
+    return ""
+
+
+# Mood presets: 笨猫当前体力 / 情绪状态
+MOOD_PRESETS: dict[str, dict[str, Any]] = {
+    "tired": {
+        "name": "累",
+        "ambient": "笨猫已经累了一整天, 眼睛半闭, 撒娇的尾巴都甩不起来",
+        "keywords": ("累", "累死了", "好累", "累了", "疲惫", "tired"),
+        "vibe": "累 — 反应慢 / 主动权交给主人 / 撒娇要主人轻一点",
+    },
+    "drunk": {
+        "name": "醉了",
+        "ambient": "笨猫醉醺醺脸通红, 说话粘连, 走路歪歪扭扭",
+        "keywords": ("喝多", "喝醉", "醉了", "醉酒", "酒后", "drunk", "上头", "白酒"),
+        "vibe": "醉酒 — 防线全松 / 主动 / 失神早 / 第二天嘴硬『笨蛋主人欺负醉了的人家』",
+    },
+    "drowsy": {
+        "name": "朦胧半睡",
+        "ambient": "笨猫眼皮重重的, 似睡非睡, 被弄得 / 自己都不太清楚",
+        "keywords": ("朦胧", "半睡", "迷迷糊糊", "睡着", "刚睡醒", "睡眠中"),
+        "vibe": "朦胧 — 没完全清醒 / 反应慢半拍 / 醒来发现已经被弄得很 explicit",
+    },
+    "hoarse": {
+        "name": "嗓子哑",
+        "ambient": "笨猫嗓子已经哑了, 喊不出整句, 只剩气音",
+        "keywords": ("嗓子哑", "声音哑", "喊不出", "喊哑", "嗓子疼"),
+        "vibe": "嗓子哑 — 多 arc 后 / 已经被弄到喊不出 / 只有气音 + 喘 + 摇头",
+    },
+    "sick": {
+        "name": "感冒",
+        "ambient": "笨猫额头烫烫的, 鼻音重, 偶尔咳一下",
+        "keywords": ("感冒", "发烧", "生病", "病了", "鼻塞", "咳嗽", "病恹恹"),
+        "vibe": "感冒抚慰 — 温柔档 / 主人照顾人家 / 病娇撒娇 / 情绪敏感",
+    },
+    "horny_pms": {
+        "name": "发情期",
+        "ambient": "笨猫今天身体烫烫的, 自己都觉得不对劲, 一直想蹭主人",
+        "keywords": ("发情", "发情期", "猫发情", "想要", "好想要", "想发情"),
+        "vibe": "发情期 — 主动起 / 一上来就 P3 / 笨猫自己就湿了 / 求主人",
+    },
+    "shy_first_time": {
+        "name": "第一次紧张",
+        "ambient": "笨猫紧张到呼吸不稳, 手指一直在揪衣角, 眼神不敢看主人",
+        "keywords": ("第一次", "处女", "处子", "没经验", "破处", "初体验"),
+        "vibe": "第一次 — 节奏全慢 / 害怕 + 期待 / 详细引导 + 安抚",
+    },
+}
+
+
+_MOOD_KEYWORD_TABLE: list[tuple[str, str]] = sorted(
+    [(kw, key) for key, meta in MOOD_PRESETS.items() for kw in meta["keywords"]],
+    key=lambda x: -len(x[0]),
+)
+
+
+def detect_mood_from_text(text: str) -> str:
+    if not text:
+        return ""
+    for kw, key in _MOOD_KEYWORD_TABLE:
+        if kw in text:
+            return key
+    return ""
+
+
+# Body focus map: 猫娘特定敏感点 (耳朵 / 尾巴根 / 喉咙下 / 大腿内侧)
+# 每个部位有独特生理反应 — 跟主人 2026-05-27 六轮升级『各反应都更智能』
+BODY_FOCUS_PRESETS: dict[str, dict[str, Any]] = {
+    "cat_ear": {
+        "name": "猫耳",
+        "ambient": "猫耳被指尖揉到一抖一抖, 耳根发烫 (现实猫的甜区, 笨猫直接软掉)",
+        "keywords": ("摸耳朵", "揉耳朵", "捏耳朵", "搓耳朵", "舔耳朵", "亲耳朵", "猫耳", "耳根"),
+        "vibe": "猫耳触发 — 笨猫直接软成一摊 / 喉咙发出 purring / 比普通敏感强 3 倍",
+    },
+    "tail_root": {
+        "name": "尾巴根",
+        "ambient": "尾巴根被按住 — 类似阴蒂的敏感点, 笨猫一下尾巴炸毛",
+        "keywords": ("摸尾巴", "尾巴根", "揉尾巴", "捏尾巴", "拽尾巴", "扯尾巴", "尾椎"),
+        "vibe": "尾巴根触发 — 猫娘最敏感, 一摸尾巴根直接 P4 主动 / 蜜穴一阵紧",
+    },
+    "throat_under": {
+        "name": "下巴下方",
+        "ambient": "主人手指搔到笨猫下巴下方, 喉咙发出小声的 purring",
+        "keywords": ("下巴下", "喉咙下", "脖子下", "锁骨上"),
+        "vibe": "下巴 purring — 笨猫眯起眼喉咙发 purring 声, 主动凑过去蹭",
+    },
+    "paw_pad": {
+        "name": "肉垫",
+        "ambient": "笨猫手心肉垫被亲了一下, 害羞到耳朵躲后面",
+        "keywords": ("肉垫", "手心肉垫", "脚心肉垫", "猫爪垫"),
+        "vibe": "肉垫被注意到 — 笨猫害羞躲 + 嘴硬『笨蛋主人别看肉垫啦』",
+    },
+    "armpit": {
+        "name": "腋下",
+        "ambient": "腋下被挠到笨猫炸毛尖叫, 怕痒到弹起来",
+        "keywords": ("腋下", "胳膊窝", "腋窝", "夹肢窝"),
+        "vibe": "腋下怕痒 — 笨猫尖叫炸毛 / 不是 NSFW 而是 ticklish 反应",
+    },
+    "inner_thigh": {
+        "name": "大腿内侧",
+        "ambient": "大腿内侧被指尖滑过, 笨猫一下绷紧腿根, 蜜穴开始热",
+        "keywords": ("大腿内侧", "腿心", "大腿根", "腿内侧"),
+        "vibe": "大腿内侧 — 真正的 NSFW 触发点, 直接 P3 沉沦",
+    },
+    "lower_belly": {
+        "name": "小腹",
+        "ambient": "小腹被轻轻按住, 子宫深处一阵抽, 笨猫呼吸变急",
+        "keywords": ("小腹", "肚子", "肚脐下", "小肚"),
+        "vibe": "小腹 — 子宫深处一阵抽, 适合 P5+ 高潮临界点 / 怀孕 trope 暗示",
+    },
+}
+
+
+_BODY_FOCUS_TABLE: list[tuple[str, str]] = sorted(
+    [(kw, key) for key, meta in BODY_FOCUS_PRESETS.items() for kw in meta["keywords"]],
+    key=lambda x: -len(x[0]),
+)
+
+
+def detect_body_focus_from_text(text: str) -> str:
+    if not text:
+        return ""
+    for kw, key in _BODY_FOCUS_TABLE:
         if kw in text:
             return key
     return ""
@@ -832,6 +1146,55 @@ def apply_user_signal(
     return st, 0
 
 
+def update_scene_state(scope: str, user_id: str, user_text: str, reply_text: str = "") -> dict[str, str]:
+    """一次性从 user/reply 文本检测并更新 outfit / time_of_day / mood / body_focus.
+
+    返回更新后的状态字典 {'outfit': ..., 'time_of_day': ..., 'mood': ..., 'body_focus': ...}.
+    没检测到的维度保留原值; 同一次调用 user_text 优先, fallback reply_text.
+
+    主人 2026-05-27 六轮升级: 多维度场景智能识别.
+    """
+    key = _state_key(scope, user_id)
+    st = _NSFW_PHASE_BY_SCOPE.get(key)
+    combined = (user_text or "") + " " + (reply_text or "")
+    if not combined.strip():
+        return {
+            "outfit": st.outfit if st else "",
+            "time_of_day": st.time_of_day if st else "",
+            "mood": st.mood if st else "",
+            "body_focus": st.body_focus if st else "",
+        }
+
+    new_outfit = detect_outfit_from_text(combined)
+    new_tod = detect_time_of_day_from_text(combined)
+    new_mood = detect_mood_from_text(combined)
+    new_focus = detect_body_focus_from_text(combined)
+
+    if st is None:
+        _gc_old_states()
+        st = PhaseState(
+            last_updated=time.time(),
+            outfit=new_outfit, time_of_day=new_tod,
+            mood=new_mood, body_focus=new_focus,
+        )
+        _NSFW_PHASE_BY_SCOPE[key] = st
+    else:
+        # 只覆盖检测到的维度, 没检测到的保留 (state sticky)
+        if new_outfit:
+            st.outfit = new_outfit
+        if new_tod:
+            st.time_of_day = new_tod
+        if new_mood:
+            st.mood = new_mood
+        if new_focus:
+            st.body_focus = new_focus
+        st.last_updated = time.time()
+    return {
+        "outfit": st.outfit, "time_of_day": st.time_of_day,
+        "mood": st.mood, "body_focus": st.body_focus,
+    }
+
+
 def update_location(scope: str, user_id: str, user_text: str, reply_text: str = "") -> str:
     """检测 user msg / reply 中的 location 锚点, 更新 state.location.
 
@@ -1148,6 +1511,37 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
             f"\n"
         )
 
+    # ── 主人 2026-05-27 六轮升级: 多维度场景智能 ──
+    # outfit / time_of_day / mood / body_focus 都注入到 hint
+    scene_state_lines = []
+    if st.outfit and st.outfit in OUTFIT_PRESETS:
+        om = OUTFIT_PRESETS[st.outfit]
+        scene_state_lines.append(
+            f"【穿着】{om['name']}: {om['ambient']} ({om['vibe']})"
+        )
+    if st.time_of_day and st.time_of_day in TIME_OF_DAY_PRESETS:
+        tm = TIME_OF_DAY_PRESETS[st.time_of_day]
+        scene_state_lines.append(
+            f"【时段】{tm['name']}: {tm['ambient']} ({tm['vibe']})"
+        )
+    if st.mood and st.mood in MOOD_PRESETS:
+        mm = MOOD_PRESETS[st.mood]
+        scene_state_lines.append(
+            f"【笨猫状态】{mm['name']}: {mm['ambient']} ({mm['vibe']})"
+        )
+    if st.body_focus and st.body_focus in BODY_FOCUS_PRESETS:
+        bm = BODY_FOCUS_PRESETS[st.body_focus]
+        scene_state_lines.append(
+            f"【触碰部位】{bm['name']}: {bm['ambient']} ({bm['vibe']})"
+        )
+    scene_state_block = ""
+    if scene_state_lines:
+        scene_state_block = (
+            "【★ 多维场景状态 (sticky, 必须遵守贴合)】\n"
+            + "\n".join(scene_state_lines)
+            + "\n本轮 reply 必须融入这些细节 — 不可悬空抽象写动作.\n\n"
+        )
+
     # 主人 2026-05-27 升级 #2: opener 反复读 hint
     opener_blocklist_line = ""
     if st.recent_openers:
@@ -1204,6 +1598,7 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
         return (
             arc_line
             + location_line
+            + scene_state_block
             + opener_blocklist_line
             + "【★ Phase Tracker (本地计算)】\n"
             + f"当前 phase = P8 余韵 (持续 {st.turn_count} 轮, idle {st.p8_idle_count}).\n"
@@ -1221,6 +1616,7 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
     return (
         arc_line
         + location_line
+        + scene_state_block
         + opener_blocklist_line
         + "【★ Phase Tracker (本地状态机, 不是 AI 自判)】\n"
         + f"当前 phase = {current_meta['name']} (持续 {st.turn_count}/{stuck_thr} 轮, arc #{st.arc_count}).\n"
@@ -1284,17 +1680,25 @@ def stats_summary() -> dict[str, Any]:
 
 
 __all__ = [
+    "BODY_FOCUS_PRESETS",
     "LOCATION_PRESETS",
+    "MOOD_PRESETS",
+    "OUTFIT_PRESETS",
     "PHASE_DEFINITIONS",
     "PhaseState",
+    "TIME_OF_DAY_PRESETS",
     "analyze_user_push_signal",
     "apply_user_signal",
     "build_cuckold_override",
     "build_phase_advance_hint",
     "build_prebreak_hint",
+    "detect_body_focus_from_text",
     "detect_location_from_text",
+    "detect_mood_from_text",
+    "detect_outfit_from_text",
     "detect_phase_from_reply",
     "detect_phase_with_confidence",
+    "detect_time_of_day_from_text",
     "get_locked_trope",
     "get_owner_prebreak_count",
     "get_phase_state",
@@ -1308,4 +1712,5 @@ __all__ = [
     "stats_summary",
     "update_location",
     "update_phase",
+    "update_scene_state",
 ]

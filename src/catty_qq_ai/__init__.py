@@ -1155,11 +1155,183 @@ _NSFW_ESCALATE_TEMPLATES_PUBLIC = _build_retreat_pool(
     _ESC_PUBLIC_BRIDGE, _ESC_PUBLIC_CONTINUE,
 )
 
-# Trope keyword → escalate pool 反向 lookup
+# ── 主人 2026-05-27 六轮升级: 加 4 个新 escalate trope pool ──
+
+# ── 6. BDSM_HEAVY (重调教 / 极限 / 鞭打 / 滴蜡 / 强 SM) ──
+_ESC_BDSM_HEAVY_OPENER: tuple[str, ...] = (
+    "（手腕被锁链拷在床头, 锁链碰撞声叮当响）",
+    "（被主人拽着项圈往后扯, 喉咙发出顺服的吞咽声）",
+    "（屁股被皮鞭抽出红印, 笨猫绷紧却不躲）",
+    "（蜡油滴在锁骨上, 笨猫一颤又主动挺起胸）",
+    "（眼睛被丝带蒙住, 触觉放大十倍, 一碰就抖）",
+    "（被强制保持跪趴姿势, 关节发酸但不敢动）",
+    "（口塞咬在嘴里漏出唾液, 说话只剩呜咽）",
+)
+_ESC_BDSM_HEAVY_EMOTION: tuple[str, ...] = (
+    "嗯…主人…再重一点也…可以…",
+    "唔…笨猫记住了…主人继续教…",
+    "啊…锁链勒着也…还要更深…",
+    "嗯…笨猫是主人专属的玩具…",
+    "唔…蜡油烫…可是好舒服…",
+    "啊…被拽着项圈…喉咙都发紧…",
+    "嗯…口塞咬着…笨猫不喊…",
+)
+_ESC_BDSM_HEAVY_BRIDGE: tuple[str, ...] = (
+    "（锁链勒着手腕但身体主动迎合）",
+    "（被皮鞭抽红的屁股仍主动撅起）",
+    "（蜡油滴满锁骨, 笨猫颤得更厉害）",
+    "（项圈被扯紧, 喉咙顺服地点头）",
+    "（口塞漏出的口水滴到锁骨）",
+    "（被强制姿势保持着, 全身在抖）",
+)
+_ESC_BDSM_HEAVY_CONTINUE: tuple[str, ...] = (
+    "笨猫是主人的玩具…主人想怎么用都行…",
+    "再重一点也没关系…笨猫记得安全词…",
+    "项圈勒紧也没关系…只要主人继续…",
+    "笨猫已经认主了…重一点也是主人的疼爱…",
+    "蜡油也好鞭子也好…笨猫都接受…",
+    "口塞咬住人家也不喊…只听主人的…",
+)
+_NSFW_ESCALATE_TEMPLATES_BDSM_HEAVY = _build_retreat_pool(
+    _ESC_BDSM_HEAVY_OPENER, _ESC_BDSM_HEAVY_EMOTION,
+    _ESC_BDSM_HEAVY_BRIDGE, _ESC_BDSM_HEAVY_CONTINUE,
+)
+
+# ── 7. ORAL (口爆/颜射/口交/喉射) ──
+_ESC_ORAL_OPENER: tuple[str, ...] = (
+    "（跪在主人脚边主动张开嘴含住）",
+    "（笨猫舌头主动绕着主人, 喉咙发出小声哼）",
+    "（嘴里含到最深, 喉咙挤压主人的反应让蜜穴自己湿了）",
+    "（口角流出口水也不擦, 仰头看主人）",
+    "（被按着头深深含下去, 喉咙发出 gluk 一声）",
+    "（用胸夹住主人, 嘴含着头部一起伺候）",
+    "（脸被对准, 张开嘴等射在脸上）",
+)
+_ESC_ORAL_EMOTION: tuple[str, ...] = (
+    "嗯…主人想射在哪里都行…",
+    "唔…嘴里…喉咙里…脸上都可以喵…",
+    "啊…主人深一点…笨猫张得更开…",
+    "嗯…让笨猫用嘴让主人爽到底…",
+    "唔…全部射给笨猫…嘴里全接住…",
+    "啊…脸上也…笨猫舔干净就好…",
+    "嗯…主人在笨猫嘴里…用力顶喉咙…",
+)
+_ESC_ORAL_BRIDGE: tuple[str, ...] = (
+    "（喉咙张开主动迎合更深）",
+    "（手配合嘴, 主动加速）",
+    "（嘴角流出大量口水滴到锁骨）",
+    "（用舌头绕着主人前端取悦）",
+    "（深喉到主人能感觉笨猫的喉咙挤压）",
+    "（口爆瞬间主动咽下去）",
+)
+_ESC_ORAL_CONTINUE: tuple[str, ...] = (
+    "射在嘴里…笨猫全部吞下去…",
+    "颜射也可以…笨猫脸上挂着才好看…",
+    "主人想射进喉咙就这样…笨猫不躲…",
+    "笨猫用嘴一直伺候到主人射出来…",
+    "全部都给笨猫…一滴都不要浪费…",
+    "射完笨猫还想再含一会儿…",
+)
+_NSFW_ESCALATE_TEMPLATES_ORAL = _build_retreat_pool(
+    _ESC_ORAL_OPENER, _ESC_ORAL_EMOTION,
+    _ESC_ORAL_BRIDGE, _ESC_ORAL_CONTINUE,
+)
+
+# ── 8. COSTUME (制服 cosplay: 护士/女仆/JK/兔女郎/旗袍/学校泳装) ──
+_ESC_COSTUME_OPENER: tuple[str, ...] = (
+    "（JK 短裙被掀到腰间, 蓝色内裤已经湿透一块）",
+    "（护士装领口被解开, 听诊器还挂在主人手里）",
+    "（女仆装裙摆撩起, 露出大腿吊带袜的勒痕）",
+    "（兔女郎黑丝被扯开一道口, 笨猫炸毛但没躲）",
+    "（旗袍开衩高到腰, 走两步就露出整条腿）",
+    "（学校泳装紧绷在身上, 被拉开肩带瞬间崩弹回）",
+    "（围裙下面什么都没穿, 主人从背后抱住一切都看穿）",
+)
+_ESC_COSTUME_EMOTION: tuple[str, ...] = (
+    "啊…笨蛋主人…笨猫穿这个…就是给主人看的…",
+    "嗯…制服别撕坏喵…笨猫还要穿出去…",
+    "唔…主人喜欢笨猫这件衣服吗…",
+    "啊…裙子掀这么高…会被看到的喵…",
+    "嗯…笨猫穿成这样让主人更兴奋了对吧…",
+    "唔…旗袍开衩…走路都难为情喵…",
+    "啊…围裙下面什么都没穿…笨蛋主人坏死了…",
+)
+_ESC_COSTUME_BRIDGE: tuple[str, ...] = (
+    "（衣服没脱完反而更刺激, 半穿半脱迎合）",
+    "（制服皱在腰间, 笨猫主动撩起裙摆给主人看）",
+    "（吊带袜勒着大腿, 笨猫主动张开）",
+    "（黑丝被撕出口子, 蜜穴露在外面）",
+    "（旗袍开衩主动掀开露出腿根）",
+    "（围裙挡住前面但后面全裸, 主人从后入）",
+)
+_ESC_COSTUME_CONTINUE: tuple[str, ...] = (
+    "笨猫穿这个就是给主人脱的…",
+    "撕坏没关系…笨猫还有别件…",
+    "裙子掀着不脱…就这样进来就好…",
+    "护士装让主人开心…就行喵…",
+    "女仆装好好伺候主人…",
+    "穿成兔女郎就是主人的玩具…",
+)
+_NSFW_ESCALATE_TEMPLATES_COSTUME = _build_retreat_pool(
+    _ESC_COSTUME_OPENER, _ESC_COSTUME_EMOTION,
+    _ESC_COSTUME_BRIDGE, _ESC_COSTUME_CONTINUE,
+)
+
+# ── 9. PREGNANCY (孕肚/受孕/标记/精液满溢/子宫) ──
+_ESC_PREGNANCY_OPENER: tuple[str, ...] = (
+    "（小腹一阵子宫深处的抽, 笨猫脸红到锁骨）",
+    "（精液一波波涌入子宫, 肚子已经鼓鼓的）",
+    "（笨猫被压住小腹, 子宫被烫液体灌满）",
+    "（主人的标记进得很深, 笨猫一抖一抖收紧）",
+    "（被告知今天可能受孕, 笨猫蜜穴反而更紧吸）",
+    "（精液满溢从穴口流下, 笨猫主动闭紧腿不让流走）",
+    "（手按在小腹上感受里面温度, 笨猫眼角发红）",
+)
+_ESC_PREGNANCY_EMOTION: tuple[str, ...] = (
+    "嗯…主人射进最深…笨猫怀上主人的种…",
+    "啊…精液都顶到子宫了…肚子里满满的…",
+    "唔…主人标记笨猫…笨猫永远是主人的…",
+    "嗯…再射进来…笨猫子宫还要更多…",
+    "啊…笨猫想给主人生小猫…",
+    "唔…肚子鼓鼓的…里面全是主人的…",
+    "嗯…主人留在最里面…别拔出来…",
+)
+_ESC_PREGNANCY_BRIDGE: tuple[str, ...] = (
+    "（蜜穴一阵又一阵痉挛, 主动收紧吸住精液）",
+    "（腿主动闭紧不让任何一滴流出来）",
+    "（小腹被精液灌得发热, 子宫一抽一抽）",
+    "（主动把腰抬高让精液流到最里面）",
+    "（标记完成的瞬间蜜穴猛烈一吸）",
+    "（笨猫主动用手按住小腹保持姿势）",
+)
+_ESC_PREGNANCY_CONTINUE: tuple[str, ...] = (
+    "笨猫想怀上主人的种喵…",
+    "标记完笨猫永远是主人的…",
+    "再射深一点…笨猫子宫吃不下不行的…",
+    "肚子里满满都是主人…笨猫好满足…",
+    "笨猫会给主人生小猫的…",
+    "别拔出来…就这样留在最里面…",
+)
+_NSFW_ESCALATE_TEMPLATES_PREGNANCY = _build_retreat_pool(
+    _ESC_PREGNANCY_OPENER, _ESC_PREGNANCY_EMOTION,
+    _ESC_PREGNANCY_BRIDGE, _ESC_PREGNANCY_CONTINUE,
+)
+
+# Trope keyword → escalate pool 反向 lookup (主人 2026-05-27 六轮升级: 9 个 trope)
 _ESCALATE_TROPE_KEYWORDS: tuple[tuple[tuple[str, ...], str], ...] = (
-    (("绑", "捆", "束缚", "项圈", "皮带", "锁住", "拷", "丝带绑", "锁链"), "bondage"),
-    (("服务", "伺候", "侍候", "喂主人", "喂你", "口活", "给主人舔",
-      "给主人吃", "给主人含", "用嘴", "用口", "口交"), "service"),
+    # 新增 trope (优先, 更具体)
+    (("怀上", "怀孕", "受孕", "标记", "种子", "种猫", "种内射", "种到子宫",
+      "射满子宫", "射进子宫", "射进里面", "肚子鼓", "精液满", "腹隆", "腹大"), "pregnancy"),
+    (("鞭", "蜡油", "锁链", "镣铐", "口塞", "口球", "蒙眼", "强制",
+      "硬调", "重调教", "极限", "bdsm", "BDSM", "S&M", "拷"), "bdsm_heavy"),
+    (("口爆", "颜射", "射在脸", "射嘴里", "口活", "深喉",
+      "用嘴", "舔棒", "含住", "用口", "口交", "gluk"), "oral"),
+    (("JK 制服", "JK制服", "护士装", "女仆装", "兔女郎", "旗袍",
+      "学校泳装", "cosplay", "Cosplay", "围裙裸", "裸围裙", "情趣装"), "costume"),
+    # 原有 trope
+    (("绑", "捆", "束缚", "项圈", "皮带", "锁住", "丝带绑"), "bondage"),
+    (("服务", "伺候", "侍候", "喂主人", "喂你", "给主人舔",
+      "给主人吃", "给主人含"), "service"),
     (("调教", "管教", "教训", "惩罚", "罚", "养成", "教育", "训练",
       "认罚", "罚跪", "打屁股", "罚站", "扇"), "training"),
     (("偷偷", "瞒着", "背着", "出轨", "别的男", "别的人", "另一个",
@@ -1186,6 +1358,11 @@ _ESCALATE_POOLS_BY_TROPE: dict[str, tuple[str, ...]] = {
     "training": _NSFW_ESCALATE_TEMPLATES_TRAINING,
     "cuckold": _NSFW_ESCALATE_TEMPLATES_CUCKOLD,
     "public": _NSFW_ESCALATE_TEMPLATES_PUBLIC,
+    # 主人 2026-05-27 六轮升级 4 个新 trope
+    "bdsm_heavy": _NSFW_ESCALATE_TEMPLATES_BDSM_HEAVY,
+    "oral": _NSFW_ESCALATE_TEMPLATES_ORAL,
+    "costume": _NSFW_ESCALATE_TEMPLATES_COSTUME,
+    "pregnancy": _NSFW_ESCALATE_TEMPLATES_PREGNANCY,
 }
 
 # 检测 user msg 是否在推节奏 (前后/抽插/加速/顶/更快/更深/再用力 等)
@@ -4183,12 +4360,18 @@ async def _build_messages(
             from .nsfw_phase import (
                 apply_user_signal as _apply_user_signal,
                 update_location as _update_location,
+                update_scene_state as _update_scene_state,
                 build_phase_advance_hint as _build_phase_hint,
             )
             _user_signal_state, _user_signal_val = _apply_user_signal(
                 _arc_scope, str(event.user_id), _utxt,
             )
             _new_loc = _update_location(_arc_scope, str(event.user_id), _utxt)
+            # 主人 2026-05-27 六轮升级: outfit/time_of_day/mood/body_focus 多维状态同步
+            _scene_state = _update_scene_state(_arc_scope, str(event.user_id), _utxt)
+            _state_summary = " / ".join(f"{k}={v}" for k, v in _scene_state.items() if v)
+            if _state_summary:
+                logger.info(f"NSFW scene state: {_state_summary} (key={_sticky_key})")
             if _new_loc:
                 logger.info(f"NSFW location anchor updated: {_new_loc} (key={_sticky_key})")
             if _user_signal_val != 0:
