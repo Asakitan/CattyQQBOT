@@ -52,7 +52,9 @@ h2 { font-size: 14px; margin: 16px 0 8px; color: #555; }
 </style>
 </head>
 <body>
-<h1>🐾 Catty Dashboard <span id="status" class="status-off">SSE 未连接</span></h1>
+<h1>🐾 Catty Dashboard <span id="status" class="status-off">SSE 未连接</span> <span id="build" style="font-size:11px;color:#aaa;font-weight:normal;">build=__BUILD_TS__</span></h1>
+<div id="js-err" style="display:none;background:#ffe;border:1px solid #f0c;padding:6px;font:12px monospace;color:#c00;margin-bottom:8px;"></div>
+<div id="diag" style="background:#eef;border:1px solid #99c;padding:6px;font:12px monospace;color:#039;margin-bottom:8px;">DIAG: HTML 加载完成, JS 未执行 — 如果一直停在这, 说明 script 块没跑或语法错</div>
 
 <div class="section">
   <h2>Context Window (最近 5 个 scope)</h2>
@@ -81,10 +83,26 @@ h2 { font-size: 14px; margin: 16px 0 8px; color: #555; }
 </div>
 
 <script>
+// 全局 JS 错误捕获 → 显示到页面 (诊断 cache / 加载问题)
+window.onerror = function(msg, src, line, col, err) {
+  const box = document.getElementById('js-err');
+  if (box) {
+    box.style.display = 'block';
+    box.textContent = `JS ERROR: ${msg} @ ${src}:${line}:${col}`;
+  }
+  return false;
+};
+console.log('[catty dash] script start, build=__BUILD_TS__');
+function diag(step) {
+  const el = document.getElementById('diag');
+  if (el) el.textContent = 'DIAG: ' + step;
+  console.log('[catty dash] diag:', step);
+}
+diag('step1: script started');
 const scopeMap = new Map();  // model -> {read, create, input, output, hit, last_ts}
 const activeStreams = new Map();  // stream_id -> {text, model, started}
 const eventsBox = document.getElementById('events');
-const status = document.getElementById('status');
+const statusEl = document.getElementById('status');
 
 function renderScopes() {
   const rows = [...scopeMap.entries()].sort((a,b) => b[1].last_ts - a[1].last_ts).slice(0, 5);
@@ -129,16 +147,37 @@ function renderStreams() {
 
 function appendEvent(line) {
   const ts = new Date().toLocaleTimeString();
-  eventsBox.textContent = `[${ts}] ${line}\n` + eventsBox.textContent.split('\n').slice(0, 30).join('\n');
+  eventsBox.textContent = `[${ts}] ${line}\\n` + eventsBox.textContent.split('\\n').slice(0, 30).join('\\n');
 }
 
+function setConnected() {
+  statusEl.textContent ='SSE 已连接';
+  statusEl.className ='status-on';
+}
+function setReconnecting() {
+  statusEl.textContent ='SSE 重连中…';
+  statusEl.className ='status-off';
+}
 function connectSSE() {
+  diag('step3: connectSSE called');
+  statusEl.textContent ='SSE 连接中…';
   const es = new EventSource('/dashboard/sse');
-  es.onopen = () => { status.textContent = 'SSE 已连接'; status.className = 'status-on'; };
-  es.onerror = () => { status.textContent = 'SSE 重连中…'; status.className = 'status-off'; };
+  diag('step4: EventSource created, readyState=' + es.readyState);
+  console.log('[catty dash] EventSource created, readyState=', es.readyState);
+  es.onopen = () => { diag('step5: SSE OPEN'); console.log('[catty dash] SSE OPEN'); setConnected(); };
+  es.onerror = (e) => {
+    diag('step5x: SSE ERROR readyState=' + es.readyState);
+    console.warn('[catty dash] SSE ERROR', es.readyState, e);
+    setReconnecting();
+  };
   es.onmessage = (e) => {
+    // 兜底: 部分浏览器/中间链路下 onopen 不 fire, 第一次 onmessage 也算 connected
+    if (statusEl.className !== 'status-on') setConnected();
     let payload;
-    try { payload = JSON.parse(e.data); } catch { return; }
+    try { payload = JSON.parse(e.data); } catch (err) {
+      console.warn('[catty dash] JSON parse fail', err, e.data.slice(0, 100));
+      return;
+    }
     if (payload.type === 'cache_stats') {
       scopeMap.set(payload.scope || 'unknown', {
         read: payload.cache_read, create: payload.cache_create,
@@ -161,16 +200,45 @@ function connectSSE() {
     }
   };
 }
-connectSSE();
+diag('step2: about to call connectSSE');
+try {
+  connectSSE();
+} catch (err) {
+  diag('step2x: connectSSE threw ' + err.message);
+}
 </script>
 </body>
 </html>
 """
 
 
-async def dashboard_html() -> str:
-    """GET /dashboard - HTML 主页"""
-    return _DASHBOARD_HTML
+_JS_TEST_HTML = (
+    "<!DOCTYPE html><html><head><meta charset=utf-8>"
+    "<title>JS test</title></head><body>"
+    "<h1 id=t style='font-family:monospace;color:#c00'>JS 未跑 (如果一直停在这, 浏览器或中间设备屏蔽了 inline script)</h1>"
+    "<script>document.getElementById('t').textContent='JS 跑了 OK';document.getElementById('t').style.color='#0a0';</script>"
+    "<p>EventSource API 检测:</p>"
+    "<p id=es>未检测</p>"
+    "<script>const es_ok=typeof EventSource!=='undefined';document.getElementById('es').textContent='EventSource API: '+(es_ok?'可用 OK':'不可用');document.getElementById('es').style.color=es_ok?'#0a0':'#c00';</script>"
+    "<p>实际尝试连 SSE:</p>"
+    "<p id=sse>未尝试</p>"
+    "<script>try{const e=new EventSource('/dashboard/sse');e.onopen=()=>{document.getElementById('sse').textContent='SSE: onopen OK';document.getElementById('sse').style.color='#0a0';};e.onerror=()=>{document.getElementById('sse').textContent='SSE: onerror readyState='+e.readyState;document.getElementById('sse').style.color='#c00';};e.onmessage=(m)=>{document.getElementById('sse').textContent='SSE: 收到 = '+m.data.slice(0,80);document.getElementById('sse').style.color='#0a0';};}catch(err){document.getElementById('sse').textContent='SSE: 构造异常 '+err.message;}</script>"
+    "</body></html>"
+)
+
+
+async def dashboard_html(test_mode: bool = False) -> str:
+    """GET /dashboard - HTML 主页. 注入 build_ts 帮主人区分浏览器是否拿旧 cache.
+
+    test_mode: 如果环境变量 CATTY_DASH_TEST=1 → 返回极简 JS test page.
+    这是 hot-reload 友好的开关 (老 closure 不带 query param 也能用).
+    """
+    import os
+    import datetime
+    if test_mode or os.environ.get("CATTY_DASH_TEST") == "1":
+        return _JS_TEST_HTML
+    build_ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return _DASHBOARD_HTML.replace("__BUILD_TS__", build_ts)
 
 
 async def dashboard_state() -> dict:
@@ -214,9 +282,39 @@ def mount_dashboard_routes() -> bool:
         logger.warning("dashboard: fastapi not available (%s), skip mount", exc)
         return False
 
+    @app.get("/dashboard/_js_test", response_class=HTMLResponse)
+    async def _dash_js_test():
+        # 极简 inline script 测试 — 如果浏览器/中间设备过滤 inline JS, 这个也跑不起来
+        html = (
+            "<!DOCTYPE html><html><head><meta charset=utf-8>"
+            "<title>JS test</title></head><body>"
+            "<h1 id=t style='font-family:monospace;color:#c00'>JS 未跑 (如果一直停在这, 浏览器或中间设备屏蔽了 inline script)</h1>"
+            "<script>document.getElementById('t').textContent='JS 跑了 OK';document.getElementById('t').style.color='#0a0';</script>"
+            "<p>另外测一下 EventSource 是否可用:</p>"
+            "<p id=es>EventSource API: 未检测</p>"
+            "<script>const es_ok=typeof EventSource!=='undefined';document.getElementById('es').textContent='EventSource API: '+(es_ok?'可用 OK':'不可用 (浏览器禁了)');document.getElementById('es').style.color=es_ok?'#0a0':'#c00';</script>"
+            "<p>实际尝试连 SSE:</p>"
+            "<p id=sse>SSE: 未尝试</p>"
+            "<script>try{const e=new EventSource('/dashboard/sse');e.onopen=()=>{document.getElementById('sse').textContent='SSE: onopen 触发 OK';document.getElementById('sse').style.color='#0a0';};e.onerror=()=>{document.getElementById('sse').textContent='SSE: onerror readyState='+e.readyState;document.getElementById('sse').style.color='#c00';};e.onmessage=(m)=>{document.getElementById('sse').textContent='SSE: 收到 msg = '+m.data.slice(0,80);document.getElementById('sse').style.color='#0a0';};}catch(err){document.getElementById('sse').textContent='SSE: 构造异常 '+err.message;}</script>"
+            "</body></html>"
+        )
+        return HTMLResponse(
+            content=html,
+            headers={"Cache-Control": "no-cache, no-store, must-revalidate"},
+        )
+
     @app.get("/dashboard", response_class=HTMLResponse)
-    async def _dash_html():
-        return HTMLResponse(content=await dashboard_html())
+    async def _dash_html(test: str = ""):
+        # 主人 2026-05-28: dashboard HTML 加 no-cache, 避免浏览器拿旧版导致 JS bug 修了不生效
+        # ?test=1 → 极简 JS test page (诊断浏览器是否阻断 inline script)
+        return HTMLResponse(
+            content=await dashboard_html(test_mode=bool(test)),
+            headers={
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0",
+            },
+        )
 
     @app.get("/dashboard/state", response_class=JSONResponse)
     async def _dash_state():
