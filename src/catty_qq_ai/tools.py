@@ -1344,6 +1344,18 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
             "可以让主人去 config.json 的 ai.http_proxy 配个代理重试,或换张更清晰的图。"
             "**不要装作搜全了**,SauceNAO/ascii2d 的结果只覆盖二次元。"
         )
+    # 标出 X/Twitter 命中(extra.is_x_twitter=True 或 URL 含 twitter/x.com)
+    # — AI 必须复述 X 链接,即使 similarity 低,主人最关心 X 真人来源
+    x_twitter_hits = [
+        r for r in results
+        if r.extra.get("is_x_twitter")
+        or "twitter.com/" in (r.url or "").lower()
+        or "://x.com/" in (r.url or "").lower()
+    ]
+    if x_twitter_hits:
+        payload["x_twitter_hits_count"] = len(x_twitter_hits)
+        payload["x_twitter_urls"] = [r.url for r in x_twitter_hits[:3]]
+
     if not results:
         payload["guidance"] = (
             "搜不到结果时用猫娘人格如实告诉用户没搜到,可以撒娇让 ta 换张更清晰的图或贴原图链接,"
@@ -1352,13 +1364,22 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
                if yandex_blocked else "")
         )
     else:
+        x_twitter_note = ""
+        if x_twitter_hits:
+            x_twitter_note = (
+                f" **❗本轮命中 {len(x_twitter_hits)} 条 X(Twitter) 链接(见 x_twitter_urls),"
+                "无论 similarity 多少,必须**优先复述这些 X 链接给主人 — 主人最关心 X 真人来源,"
+                "不要因为相似度低就跳过 X 链接只贴二次元 booru。"
+                "**禁止**只贴 Konachan/Pixiv 而把 Twitter 链接埋掉。"
+            )
         payload["guidance"] = (
-            "用笨猫人格挑 1-3 条最关键的复述(优先 similarity>80% 的);"
-            "可以加可爱小评(『嗷呜这张是 X 老师画的喵～』)。"
+            "用笨猫人格复述 1-3 条最关键的结果。挑选优先级:"
+            "(1) X/Twitter URL > (2) similarity > 60 的 > (3) 其它。"
+            "可以加可爱小评(『嗷呜这张是 X 上的 @xxx 发的喵～』)。"
             "**不要照搬 JSON、不要复读相似度小数、不要编造没在 results 里出现的信息**。"
-            "结果链接可以贴 1-2 个最高相似度的,其余不必复述。"
-            + (" **特别注意**:本次 yandex 被阻断,如果搜出来的都是 booru/Pixiv 这种二次元站"
-               "但图本身是真人/自拍,**必须**按 yandex_blocked_hint 主动提醒主人去配代理才能搜 X/Twitter 真人来源,不要默默贴个二次元链接糊弄。"
+            + x_twitter_note
+            + (" 如果搜出来的全是 booru/Pixiv 二次元站但图本身是真人/自拍,**必须**按 yandex_blocked_hint "
+               "提醒主人配代理(yandex_blocked=True 时)。"
                if yandex_blocked else "")
         )
     return payload

@@ -213,6 +213,11 @@ async def _search_saucenao(
         if isinstance(ext_urls, list) and len(ext_urls) > 1:
             extra["alt_urls"] = [str(u).strip() for u in ext_urls[1:] if str(u).strip()]
 
+        # 命中 Twitter/X 时打 is_x_twitter 标记 + kind=photo,让 AI 优先复述(主人最关心 X 来源)
+        if url and ("twitter.com/" in url.lower() or "://x.com/" in url.lower()):
+            extra["is_x_twitter"] = True
+            kind = "photo"
+
         out.append(
             ImageSearchResult(
                 source="saucenao",
@@ -647,6 +652,11 @@ def _parse_yandex_sites(html: str, *, max_results: int) -> list[ImageSearchResul
 
     策略:用宽松 anchor 正则,过滤 yandex 自身 + 广告域;X/Twitter 加 boost
     放到列表最前,其它按出现顺序保留。caller 负责截到 max_results。
+
+    similarity 合成规则(Yandex 接口不给数值化相似度,我们自己合成):
+    - X/Twitter 命中: 90.0(主人最关心来源,boost 到最高确保 AI 复述)
+    - 其它非 booru 站: 55-70 按出现顺序递减(Yandex 已按相关性排序,前面更靠谱)
+    - 0.0 会让 AI 完全忽略,绝对不能给
     """
     seen: set[str] = set()
     x_twitter_hits: list[ImageSearchResult] = []
@@ -663,11 +673,16 @@ def _parse_yandex_sites(html: str, *, max_results: int) -> list[ImageSearchResul
         if len(title) < 4 and not _yandex_is_x_twitter(url):
             continue
         is_x = _yandex_is_x_twitter(url)
+        if is_x:
+            similarity = 90.0
+        else:
+            # 按出现位置递减:第 1 个 70,第 2 个 67,...,最低 50
+            similarity = max(70.0 - len(other_hits) * 3.0, 50.0)
         result = ImageSearchResult(
             source="yandex",
             title=title[:160],
             url=url,
-            similarity=0.0,  # Yandex 不返回数值化相似度
+            similarity=similarity,
             kind="photo" if is_x else "general",
             extra={"is_x_twitter": True} if is_x else {},
         )
