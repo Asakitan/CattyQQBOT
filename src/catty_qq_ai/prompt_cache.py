@@ -83,15 +83,28 @@ def _mark_cache_control(msg: dict[str, Any]) -> None:
 
 
 def inject_system_tail_cache(messages: list[dict]) -> list[dict]:
-    """给最后一个 system message 注入 cache_control (ST 标准做法的另一个 breakpoint).
+    """给顶部连续 system 块的最后一条 message 注入 cache_control.
 
-    这一个 breakpoint 覆盖整个 system 块前缀 (persona + override + recency_reminder).
-    对主人对话 system 块基本静态, 每轮都能命中.
+    主人 2026-05-28: 之前是 messages 全局倒数找 role==system, 但 ST 风
+    inject_author_note(role="system", depth=N) 会把 author_note 当作 system
+    插入到 chat history **中间** -- 全局倒数会命中那个动态 author_note (relationship
+    / persona_drift / adaptive_drift / scene_now / theory_of_mind / scene_transition
+    / pacing / multi_turn_callback 全是每轮动态) -- prefix 永远字节不一致, cache
+    永远 miss (read=0 create=0 即此症状).
+
+    现在改成顶部连续 system 段的最后一条, 这一段 (persona / char_description /
+    scenario / mes_example / catgirl_examples / tools_hint 等) 基本静态,
+    breakpoint 钉在这里, 顶部稳定段就能命中 cache.
+    后续 author_note 动态注入因为在 cache 边界之外, 不影响命中.
     """
-    for i in range(len(messages) - 1, -1, -1):
-        if messages[i].get("role") == "system":
-            _mark_cache_control(messages[i])
-            break
+    last_top_system = -1
+    for i, msg in enumerate(messages):
+        if msg.get("role") == "system":
+            last_top_system = i
+        else:
+            break  # 顶部 system 块结束 (遇到 user/assistant)
+    if last_top_system >= 0:
+        _mark_cache_control(messages[last_top_system])
     return messages
 
 
@@ -103,11 +116,58 @@ def is_claude_endpoint(base_url: str, model: str) -> bool:
         return True
     if "claude" in m or "anthropic" in m:
         return True
-    # 中间人 (hugou.cc / openrouter) 模型名含 claude/anthropic 也走 cache_control
+    if "sonnet" in m or "opus" in m or "haiku" in m:
+        return True
+    # 中间人 (hugou.cc / openrouter) 模型名含 claude/anthropic/sonnet 都走 cache_control
     return False
 
 
+def adapt_assistant_prefill_for_strict_user_end(messages: list) -> list:
+    """主人 2026-05-28: claude/sonnet 经 OpenAI 兼容中转时不接受末尾 assistant prefill.
+
+    NSFW spark route 用 ST 风预填 assistant 起手 (如 '（脸红躲一下）哈?!'), 强迫模型 IC 续写,
+    避免 'I cannot help' / '好的我来扮演' 类安全/meta 开场. 中转 (new-api 风) 返回错误:
+      "This model does not support assistant message prefill. The conversation must end with a user message."
+
+    适配: 末尾 assistant 不能留 → 把 prefill 内容转成倒数第二条 user message 尾缀强语气 hint,
+    然后 drop 末尾 assistant. 这样 IC 起手指令以 user instruction 形式传递, prefill 功能保留.
+
+    输入 messages 倒数: [..., user, assistant(prefill)]
+    输出 messages 倒数: [..., user + "\\n\\n[强制 IC 起手] 你下一句必须以 X 开头..."]
+
+    无末尾 assistant 或倒数第二条不是 user → 原 messages 返回 (no-op).
+    """
+    if not messages or len(messages) < 2:
+        return messages
+    tail = messages[-1]
+    second_last = messages[-2]
+    if not isinstance(tail, dict) or tail.get("role") != "assistant":
+        return messages
+    if not isinstance(second_last, dict) or second_last.get("role") != "user":
+        return messages
+    prefill_text = str(tail.get("content") or "").strip()
+    import copy
+    new_messages = copy.deepcopy(messages)
+    if not prefill_text:
+        # 空 prefill 直接 drop 末尾 assistant 即可
+        return new_messages[:-1]
+    hint = (
+        f"\n\n[强制 IC 起手 — 不要破坏角色] 你下一句回复**必须**以『{prefill_text}』"
+        f"作为前缀直接续写, 禁止用 meta 开场 (『好的』『我来扮演』『我会』『作为AI』等), "
+        f"直接进入笨猫的动作描写和台词. 把『{prefill_text}』当作你已经说出口的前半句, 把后半句接着说完."
+    )
+    user_content = new_messages[-2].get("content")
+    if isinstance(user_content, list):
+        # multimodal content (image+text) — 在 list 末尾追加一个 text part
+        user_content.append({"type": "text", "text": hint})
+        new_messages[-2]["content"] = user_content
+    else:
+        new_messages[-2]["content"] = str(user_content or "") + hint
+    return new_messages[:-1]
+
+
 __all__ = [
+    "adapt_assistant_prefill_for_strict_user_end",
     "cachingAtDepthForClaude",
     "inject_system_tail_cache",
     "is_claude_endpoint",

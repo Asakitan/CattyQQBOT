@@ -426,6 +426,30 @@ async def _post_chat_completion_raw(
         except Exception as exc:  # noqa: BLE001
             _logger.warning(f"prompt cache 注入失败 (降级到无 cache): {exc}")
 
+    # 主人 2026-05-28: claude/sonnet 经中转拒末尾 assistant prefill → 把 prefill 内容
+    # 转成倒数第二条 user 尾缀强语气 hint, 保留 IC 起手机制. 真 Anthropic native API
+    # 走 /v1/messages (不是这里的 chat/completions), 所以这里所有 claude 都是中转.
+    import sys as _sys_debug
+    try:
+        from .prompt_cache import adapt_assistant_prefill_for_strict_user_end, is_claude_endpoint
+        _tail_role = messages[-1].get("role") if (messages and isinstance(messages[-1], dict)) else "?"
+        _is_claude = is_claude_endpoint(base_url, model)
+        print(
+            f"[prefill-debug] model={model!r} base_url={base_url!r} is_claude={_is_claude} "
+            f"tail_role={_tail_role} n_msgs={len(messages)}",
+            file=_sys_debug.stderr, flush=True,
+        )
+        if _is_claude and _tail_role == "assistant":
+            _before = len(messages)
+            messages = adapt_assistant_prefill_for_strict_user_end(messages)
+            print(
+                f"[prefill-debug] adapted: {_before} → {len(messages)} msgs, "
+                f"new tail role={messages[-1].get('role') if messages else '?'}",
+                file=_sys_debug.stderr, flush=True,
+            )
+    except Exception as exc:  # noqa: BLE001
+        print(f"[prefill-debug] adapt failed: {type(exc).__name__}: {exc}", file=_sys_debug.stderr, flush=True)
+
     payload: dict[str, Any] = {
         "model": model,
         "messages": messages,
