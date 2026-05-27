@@ -592,6 +592,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_USE_JIEBA", _nlu("use_jieba"))
     _set_env("CATTY_USE_TEXT2VEC", _nlu("use_text2vec"))
     _set_env("CATTY_USE_HANLP", _nlu("use_hanlp"))
+    _set_env("CATTY_TEXT2VEC_USE_ONNX", _nlu("text2vec_use_onnx"))
     _set_env("CATTY_TEXT2VEC_MODEL_NAME", _nlu("text2vec_model_name"))
     _set_env("CATTY_HANLP_PIPELINE", _nlu("hanlp_pipeline"))
     _set_env("CATTY_TEXT2VEC_TOPIC_THRESHOLD", _nlu("text2vec_topic_threshold"))

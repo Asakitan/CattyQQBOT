@@ -181,6 +181,10 @@ class Config(BaseModel):
     catty_use_jieba: bool = False
     catty_use_text2vec: bool = False
     catty_use_hanlp: bool = False
+    # 主人 2026-05-28 phase 6: ONNX runtime fast path (单 embed 2-3ms vs torch 50-85ms).
+    # 开后 text2vec_engine 优先 ONNX, 失败自动 fallback torch. 默认 False.
+    # 需要 optimum + onnxruntime 装好 (pip install "optimum[onnxruntime]").
+    catty_text2vec_use_onnx: bool = False
     # 主人 2026-05-28 phase 5: 换 BGE small (~95MB, 512 dim) — 中文 STS 比
     # text2vec-base-chinese 公开榜准 2-3pp. 模型大小同级, 加载速度类似.
     # 切换后 prototype hash 自动 invalidate, 启动重 build ~30s.
