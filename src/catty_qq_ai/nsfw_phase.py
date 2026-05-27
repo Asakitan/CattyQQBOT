@@ -2387,6 +2387,47 @@ def reset_owner_prebreak(scope: str, user_id: str) -> None:
     _OWNER_PREBREAK_BY_SCOPE.pop(f"{scope}:{user_id}", None)
 
 
+# ── NSFW Grantee (主人 2026-05-28) ──
+# 主人指定群友(@/昵称/QQ号) 进 NSFW 命令后, 被指定群友在 sticky 内获得 NSFW 满级权限.
+# 跟 NSFW sticky 同生命周期 — sticky 退出 (closing intent / idle limit / phase reset)
+# 时由调用方 revoke_all_nsfw_grantees(scope) 一起清空.
+# 不持久化(跟 sticky 一样 in-memory): 重启后 sticky 没了, grantee 也跟着没了, 符合主人原话
+# "在这个对话周期里".
+_NSFW_GRANTEE_BY_SCOPE: dict[str, set[str]] = {}
+
+
+def grant_nsfw(scope: str, target_user_id: str) -> None:
+    """把 target_user_id 加入 scope 的 NSFW grantee 名单. 重复 grant 幂等."""
+    if not scope or not target_user_id:
+        return
+    bucket = _NSFW_GRANTEE_BY_SCOPE.setdefault(scope, set())
+    bucket.add(str(target_user_id))
+
+
+def is_nsfw_granted(scope: str, user_id: str) -> bool:
+    """该 user 在 scope 内有没有被主人主动 grant NSFW 权限."""
+    if not scope or not user_id:
+        return False
+    bucket = _NSFW_GRANTEE_BY_SCOPE.get(scope)
+    if not bucket:
+        return False
+    return str(user_id) in bucket
+
+
+def revoke_all_nsfw_grantees(scope: str) -> int:
+    """sticky 退出时一次清空整个 scope 的所有 grantee. 返回被清的数量."""
+    bucket = _NSFW_GRANTEE_BY_SCOPE.pop(scope, None)
+    if not bucket:
+        return 0
+    return len(bucket)
+
+
+def list_nsfw_grantees(scope: str) -> set[str]:
+    """诊断 / 日志用: 返回当前 scope 的 grantee 副本."""
+    bucket = _NSFW_GRANTEE_BY_SCOPE.get(scope)
+    return set(bucket) if bucket else set()
+
+
 # ── Cuckold 命令解析 ──
 # 主人 + @某群友 + 出轨触发词 → 指定笨猫去和那个群友 NSFW
 _CUCKOLD_COMMAND_WORDS: tuple[str, ...] = (
@@ -2922,13 +2963,17 @@ __all__ = [
     "get_locked_trope",
     "get_owner_prebreak_count",
     "get_phase_state",
+    "grant_nsfw",
+    "is_nsfw_granted",
     "is_owner_already_broken",
+    "list_nsfw_grantees",
     "lock_trope",
     "parse_cuckold_command",
     "record_owner_prebreak",
     "record_reply_opener",
     "reset_owner_prebreak",
     "reset_phase",
+    "revoke_all_nsfw_grantees",
     "stats_summary",
     "update_location",
     "update_phase",

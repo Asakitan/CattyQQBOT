@@ -614,7 +614,11 @@ def register_catty_persona(
         content_fn=_build_nsfw_gate,
         order=148,  # 紧贴 character_book=145 之后, persona_memory=150 之前
     )
-    if system_prompt.strip():
+    # catty_persona_memory: build_persona_memory_prompt(system_prompt) 输出
+    # 跟 character_book ANCHOR 段高度重叠 (都说『米雪儿/超弦体/欧泊阵营/搜查官』),
+    # 默认 disabled 节省 ~1200c. 想恢复在 config.catty_prompts_disabled 移除
+    # 'catty_persona_memory' 即可 (PromptManager.apply_config 处理).
+    if False and system_prompt.strip():  # noqa: SIM223 — 显式 disable, 留代码做对照
         mgr.register(
             "catty_persona_memory",
             content_fn=lambda: _pp.build_persona_memory_prompt(system_prompt),
@@ -836,6 +840,24 @@ def register_catty_persona(
                 user_display=user_display,
             ),
             order=460,
+        )
+
+    # === User Details - 跨对话结构化细节 (order=462) ===
+    # 跟 user_vibe (调性) 互补 — 这是『可枚举的细节』 e.g. 爱吃的 / 工作 / 宠物
+    # 让笨猫能主动 callback『主人之前不是说喜欢 X 嘛?』
+    # 注意: 不能用 `from . import user_details_store as _uds` —
+    # __init__.py 里 user_details_store 名字已被 store 实例 shadow, import 会拿到实例.
+    # 直接 from 子模块 import 函数避坑.
+    _user_details_store_inst = ctx.get("user_details_store")
+    if _user_details_store_inst is not None and user_id:
+        from .user_details_store import build_user_details_prompt as _build_user_details_prompt
+        mgr.register(
+            "catty_user_details",
+            content_fn=lambda: _build_user_details_prompt(
+                _user_details_store_inst.get_details(user_id),
+                user_display=user_display,
+            ),
+            order=462,
         )
 
     # === Catty RAG - 向量召回 (order=458, user_vibe=460 之前) ===

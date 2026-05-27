@@ -188,6 +188,10 @@ story_arc_store = StoryArcStore(config.catty_memory_path)
 # 让笨猫对不同人有差异化反应基调。持久化到 memory_dir/user_vibes.json。
 from .user_vibe import UserVibeStore
 user_vibe_store = UserVibeStore(config.catty_memory_path)
+# Per-user details: 抓 keyword pattern 提取的『对方喜欢/工作/宠物/近事』结构化细节,
+# 让笨猫能主动 callback『主人之前不是说喜欢 X 嘛?』. 持久化到 user_details.json。
+from .user_details_store import UserDetailsStore
+user_details_store = UserDetailsStore(config.catty_memory_path)
 # Catty mood: 笨猫自己当下心情(per-scope 8 维向量,跨多轮连续衰减)。
 # 让连续对话不再每条独立 — 被惹到下一句不会立刻笑嘻嘻,落盘到 catty_moods.json。
 from .catty_mood import CattyMoodStore
@@ -1986,14 +1990,19 @@ _NSFW_GROUP_STAGE_FLOOR = 3
 
 
 def _resolve_max_nsfw_stage(
-    *, affection_level: int, is_owner: bool, is_private: bool,
+    *, affection_level: int, is_owner: bool, is_private: bool, is_nsfw_granted: bool = False,
 ) -> int:
     """决定当前用户 × 场景能走到的最高 stage (1-10).
 
     主人豁免 group cap(原本群聊 cap=6 让主人也进不去 spark deep 路径,
     导致『群里 30 次没击穿』bug)— 主人在哪都满 stage 10。
     群友仍受 group cap 限制,只能靠 breakthrough roll 解锁。
+
+    主人 2026-05-28: is_nsfw_granted (主人通过 NSFW 命令指定的群友, 在 sticky 期间)
+    → 临时满 stage 10, 解 cuckold/双方互动场景 (笛笛被主人安排进 NSFW arc).
     """
+    if is_nsfw_granted:
+        return 10
     ceiling = 10 if is_owner else max(1, min(int(affection_level), 10))
     if is_owner:
         return ceiling
@@ -2155,11 +2164,14 @@ _NSFW_PREFILLS: dict[tuple[str, bool], str] = {
 
 
 def _build_nsfw_spark_override(
-    *, is_private: bool, is_owner: bool, affection_level: int,
+    *, is_private: bool, is_owner: bool, affection_level: int, is_nsfw_granted: bool = False,
 ) -> str:
     """组合 (scale × stage_cap × resist) 给 spark 模型一段完整 system 指令。"""
     max_stage = _resolve_max_nsfw_stage(
-        affection_level=affection_level, is_owner=is_owner, is_private=is_private,
+        affection_level=affection_level,
+        is_owner=is_owner,
+        is_private=is_private,
+        is_nsfw_granted=is_nsfw_granted,
     )
     resist = _resolve_nsfw_resist_label(
         affection_level=affection_level, is_owner=is_owner,
@@ -4236,6 +4248,10 @@ async def _build_messages(
         user_vibe_store.record_message(str(event.user_id), incoming.text or "")
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"user_vibe_store.record_message failed: {exc}")
+    try:
+        user_details_store.record_message(str(event.user_id), incoming.text or "")
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"user_details_store.record_message failed: {exc}")
     # Catty mood: 走 spark async classifier 喂入 user_text。节流到每会话 60s 一次,
     # 其他帧只 record_decay_only (不烧 spark, 情绪自然衰减回 baseline)。
     try:
@@ -4282,6 +4298,7 @@ async def _build_messages(
         # Per-user vibe profile: 让 register_catty_persona 拿 store + user_id 去 lazy
         # 读 profile,low confidence 自动返回空字符串(不污染 prompt)
         "user_vibe_store": user_vibe_store,
+        "user_details_store": user_details_store,
         "user_id": str(event.user_id),
         # Catty mood: 让 register_catty_persona 用 scope 拉当前 mood 注入 prompt
         "catty_mood_store": catty_mood_store,
@@ -4444,13 +4461,18 @@ async def _build_messages(
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
         _sticky_active = False
         # phase tracker: closing → reset 整个 arc + 主人 prebreak (2026-05-27)
+        # + revoke 所有 NSFW grantee (主人 2026-05-28: 指定群友 NSFW 权限跟 sticky 同生命周期)
         try:
             from .nsfw_phase import (
                 reset_phase as _reset_nsfw_phase,
                 reset_owner_prebreak as _reset_prebreak,
+                revoke_all_nsfw_grantees as _revoke_grantees,
             )
             _reset_nsfw_phase(_arc_scope, str(event.user_id))
             _reset_prebreak(_arc_scope, str(event.user_id))
+            _revoked_n = _revoke_grantees(_arc_scope)
+            if _revoked_n:
+                logger.info(f"NSFW sticky exit (closing): revoked {_revoked_n} grantee(s) in scope={_arc_scope}")
         except Exception:  # noqa: BLE001
             pass
         logger.info(f"NSFW sticky: closing intent → exit + phase reset (key={_sticky_key}, hit='{_utxt[:30]}')")
@@ -4461,10 +4483,16 @@ async def _build_messages(
             _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
             _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
             _sticky_active = False
-            # sticky 因 idle 退出 → reset phase (新场景应从 P1 起)
+            # sticky 因 idle 退出 → reset phase + revoke 所有 grantee (主人 2026-05-28)
             try:
-                from .nsfw_phase import reset_phase as _reset_nsfw_phase
+                from .nsfw_phase import (
+                    reset_phase as _reset_nsfw_phase,
+                    revoke_all_nsfw_grantees as _revoke_grantees,
+                )
                 _reset_nsfw_phase(_arc_scope, str(event.user_id))
+                _revoked_n = _revoke_grantees(_arc_scope)
+                if _revoked_n:
+                    logger.info(f"NSFW sticky exit (idle): revoked {_revoked_n} grantee(s) in scope={_arc_scope}")
             except Exception:  # noqa: BLE001
                 pass
             logger.info(f"NSFW sticky: {_idle} consecutive no-NSFW msgs → exit + phase reset (key={_sticky_key})")
@@ -4472,14 +4500,29 @@ async def _build_messages(
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
     _is_private_chat_pre = isinstance(event, PrivateMessageEvent)
     _is_group_chat_pre = not _is_private_chat_pre
+    # ── 主人 2026-05-28: NSFW grantee 检查 ──
+    # 笛笛被主人 NSFW 命令指定后, 在 sticky 期间发消息时 max_stage 直接给 10.
+    _user_is_nsfw_granted = False
+    try:
+        from .nsfw_phase import is_nsfw_granted as _is_granted
+        _user_is_nsfw_granted = _is_granted(_arc_scope, str(event.user_id))
+    except Exception:  # noqa: BLE001
+        pass
     _user_max_stage = _resolve_max_nsfw_stage(
         affection_level=_user_affection_level,
         is_owner=_user_is_owner,
         is_private=_is_private_chat_pre,
+        is_nsfw_granted=_user_is_nsfw_granted,
     )
     _can_reach_deep = _user_max_stage >= 8
+    if _user_is_nsfw_granted:
+        logger.info(
+            f"chat: ★ NSFW grantee active (user={event.user_id}, scope={_arc_scope}) "
+            f"→ max_stage 提到 10, 解锁完整 NSFW 路径"
+        )
     # ── 主人 2026-05-27 五轮升级『破禁 + 出轨命令』──
-    # 提取 @ targets (CQ:at segments) — cuckold 命令解析用
+    # 主人 2026-05-28 扩展: 支持 @ / 昵称 / QQ 号明文 三种 target 指定方式.
+    # 主人 _hit_deep 且解析出 target 列表非空 → 所有 target 都 grant_nsfw (跟 sticky 同生命周期).
     _at_user_targets: list[tuple[str, str]] = []  # (qq, name)
     try:
         for _seg in (getattr(event, 'message', None) or []):
@@ -4492,6 +4535,53 @@ async def _build_messages(
                     _at_user_targets.append((_qq, _name))
     except Exception as _exc:  # noqa: BLE001
         logger.debug(f"at segment extract failed (non-fatal): {_exc}")
+    # 主人 2026-05-28: 从文本提 QQ 号明文 + 昵称, 合并到 _at_user_targets.
+    # 只对 owner + 群聊 + _hit_deep 时跑 (其他场景无需扩展解析, 省 CPU).
+    if _user_is_owner and _is_group_chat_pre and _hit_deep:
+        try:
+            _seen_uids = {uid for uid, _ in _at_user_targets}
+            _grp_data: dict = {}
+            try:
+                _grp_data = memory_store._data.get("groups", {}).get(  # type: ignore[attr-defined]
+                    str(event.group_id), {}
+                ) or {}
+            except Exception:  # noqa: BLE001
+                _grp_data = {}
+            _grp_members: dict = _grp_data.get("members", {}) if isinstance(_grp_data, dict) else {}
+            # (a) QQ 号明文: 5-12 位连续数字, 必须是该群已知成员
+            import re as _re_qq
+            for _m in _re_qq.finditer(r"(?<!\d)(\d{5,12})(?!\d)", _utxt):
+                _qq = _m.group(1)
+                if _qq in _seen_uids or _qq == str(bot.self_id):
+                    continue
+                if _qq in _grp_members:
+                    _nick = str(_grp_members[_qq].get("display_name") or f"群友{_qq}").strip() or f"群友{_qq}"
+                    _at_user_targets.append((_qq, _nick))
+                    _seen_uids.add(_qq)
+            # (b) 昵称: 群成员 display_name (>=2 字) 出现在 text 里
+            for _uid, _member in _grp_members.items():
+                if _uid in _seen_uids or _uid == str(bot.self_id):
+                    continue
+                _nick = str(_member.get("display_name") or "").strip() if isinstance(_member, dict) else ""
+                if len(_nick) < 2:
+                    continue
+                if _nick in _utxt:
+                    _at_user_targets.append((_uid, _nick))
+                    _seen_uids.add(_uid)
+        except Exception as _exc:  # noqa: BLE001
+            logger.debug(f"nsfw grant target extract failed (non-fatal): {_exc}")
+        # 主人 _hit_deep + targets 非空 → 全部 grant_nsfw (cuckold 触发词判定下面单独走)
+        if _at_user_targets:
+            try:
+                from .nsfw_phase import grant_nsfw as _grant_nsfw
+                for _t_uid, _t_nick in _at_user_targets:
+                    _grant_nsfw(_arc_scope, _t_uid)
+                logger.info(
+                    f"chat: ★ NSFW grant (owner={event.user_id}, scope={_arc_scope}, "
+                    f"targets={[(u, n) for u, n in _at_user_targets]}) — 跟 sticky 同生命周期"
+                )
+            except Exception as _exc:  # noqa: BLE001
+                logger.debug(f"grant_nsfw failed (non-fatal): {_exc}")
     # Owner 群聊连续两次 NSFW → 破禁
     _owner_prebreak_count = 0
     _owner_just_broke = False
@@ -4721,6 +4811,7 @@ async def _build_messages(
                 _override = _build_nsfw_spark_override(
                     is_private=_is_private_chat, is_owner=_user_is_owner,
                     affection_level=_user_affection_level,
+                    is_nsfw_granted=_user_is_nsfw_granted,
                 )
             _prefill = BREAKTHROUGH_PREFILLS.get("group_pub") or BREAKTHROUGH_PREFILLS["paid"]
             _resist_label = f"cuckold/{_owner_cuckold_target_id}"
@@ -4752,6 +4843,7 @@ async def _build_messages(
                 is_private=_is_private_chat,
                 is_owner=_user_is_owner,
                 affection_level=_user_affection_level,
+                is_nsfw_granted=_user_is_nsfw_granted,
             )
             _resist_label = _resolve_nsfw_resist_label(
                 affection_level=_user_affection_level, is_owner=_user_is_owner,
@@ -4761,6 +4853,7 @@ async def _build_messages(
                 affection_level=_user_affection_level,
                 is_owner=_user_is_owner,
                 is_private=_is_private_chat,
+                is_nsfw_granted=_user_is_nsfw_granted,
             )
         # 完全重建 messages 为 slim 版 — SFW 长尾 (catty_goals/daily_life/scope_lorebook/
         # scenario_playbook/conversation_flow/semantic_perception/group_meme_literacy/
@@ -8232,6 +8325,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(affection_store.background_flush_loop())
     asyncio.create_task(story_arc_store.background_flush_loop())
     asyncio.create_task(user_vibe_store.background_flush_loop())
+    asyncio.create_task(user_details_store.background_flush_loop())
     asyncio.create_task(catty_mood_store.background_flush_loop())
     asyncio.create_task(scope_lorebook_store.background_flush_loop())
     asyncio.create_task(_scope_lore_auto_summary_loop())
@@ -8300,6 +8394,15 @@ async def _flush_user_vibe_store_on_shutdown() -> None:
             logger.info("user_vibe_store: flushed dirty data on shutdown")
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"user_vibe_store: shutdown flush failed: {exc}")
+
+
+@get_driver().on_shutdown
+async def _flush_user_details_store_on_shutdown() -> None:
+    try:
+        if user_details_store.flush_sync():
+            logger.info("user_details_store: flushed dirty data on shutdown")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"user_details_store: shutdown flush failed: {exc}")
 
 
 @chat_matcher.handle()
@@ -8753,6 +8856,30 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         messages = inject_author_note(messages, _tom_note)
                 except Exception as exc:  # noqa: BLE001
                     logger.debug(f"theory_of_mind author_note failed (non-fatal): {exc}")
+
+                # 场景切换检测: 对比最近两条 user msg 的 vibe (玩闹→吐槽 / 正经→暧昧 等)
+                # 突变时给节奏调整 hint, 让笨猫不会"对方变了还在原频率"
+                try:
+                    from .catty_scene_transition import build_scene_transition_prompt
+                    if _recent_user_texts and len(_recent_user_texts) >= 2:
+                        _transition_prompt = build_scene_transition_prompt(_recent_user_texts)
+                        if _transition_prompt:
+                            _transition_note = AuthorNote(content=_transition_prompt, depth=2)
+                            messages = inject_author_note(messages, _transition_note)
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"scene_transition failed (non-fatal): {exc}")
+
+                # 多轮 callback: 看最近 N 条 user msg 抓 unfinished intents
+                # (明天/等会/打算/刚才/在做/...) 当前 msg 没接住时给笨猫主动回头提的机会
+                try:
+                    from .catty_multi_turn_callback import build_multi_turn_callback_prompt
+                    if _recent_user_texts and len(_recent_user_texts) >= 2:
+                        _callback_prompt = build_multi_turn_callback_prompt(_recent_user_texts)
+                        if _callback_prompt:
+                            _callback_note = AuthorNote(content=_callback_prompt, depth=3)
+                            messages = inject_author_note(messages, _callback_note)
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"multi_turn_callback failed (non-fatal): {exc}")
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"author_note inject failed (non-fatal): {exc}")
         # 「ToolContext 携带图片」可见性 hint:tool_ctx.input_image_urls / recent_image_urls
