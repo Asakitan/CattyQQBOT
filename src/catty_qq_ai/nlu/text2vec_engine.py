@@ -3,7 +3,8 @@
 主人 2026-05-28 plan: 给 daily_life topic / affection_scorer emotion /
 theory_of_mind trend 提供 encoder-only 语义向量, 算 cosine 相似度.
 
-模型: shibing624/text2vec-base-chinese (~100MB, 768 dim).
+默认模型: BAAI/bge-small-zh-v1.5 (~95MB, 512 dim). 主人 2026-05-28 phase 5
+切换. 之前用 shibing624/text2vec-base-chinese (~100MB, 768 dim).
 特性:
 - HF 走 hf-mirror.com 镜像 (大陆环境), 加载前注入 HF_ENDPOINT
 - lazy load (第一次 embed 时加载, 阻塞 2-5s)
@@ -52,7 +53,7 @@ def _is_enabled() -> bool:
 def _get_model_name() -> str:
     cfg = _config()
     name = getattr(cfg, "catty_text2vec_model_name", "") if cfg else ""
-    return name or "shibing624/text2vec-base-chinese"
+    return name or "BAAI/bge-small-zh-v1.5"
 
 
 def _setup_hf_endpoint() -> None:

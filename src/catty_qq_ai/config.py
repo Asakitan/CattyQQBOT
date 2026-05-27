@@ -181,7 +181,11 @@ class Config(BaseModel):
     catty_use_jieba: bool = False
     catty_use_text2vec: bool = False
     catty_use_hanlp: bool = False
-    catty_text2vec_model_name: str = "shibing624/text2vec-base-chinese"
+    # 主人 2026-05-28 phase 5: 换 BGE small (~95MB, 512 dim) — 中文 STS 比
+    # text2vec-base-chinese 公开榜准 2-3pp. 模型大小同级, 加载速度类似.
+    # 切换后 prototype hash 自动 invalidate, 启动重 build ~30s.
+    # 老主人 config 已配 shibing624 时此默认不生效, 想换需手动改 config.json.
+    catty_text2vec_model_name: str = "BAAI/bge-small-zh-v1.5"
     catty_hanlp_pipeline: str = "FINE_ELECTRA_SMALL_ZH"
     catty_text2vec_topic_threshold: float = 0.55
     catty_text2vec_emotion_threshold: float = 0.45
