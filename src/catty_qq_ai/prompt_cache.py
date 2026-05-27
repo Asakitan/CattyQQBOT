@@ -50,16 +50,23 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
         messages: ChatMessage list (会就地修改 + 返回相同 list)
         cachingAtDepth: 保留兼容, 不再生效
     """
-    # 主人 2026-05-28: 先数 messages 里 user 数量. 至少要 2 个 user (1 个 history + 1 个
-    # current) 才能稳定标 cache marker. 只 1 个 user (current) 时不标 — 它内容每次变,
-    # 标了也只是写 cache 但下次永远 miss.
+    # 主人 2026-05-28: Anthropic 写 cache 的硬性要求 — cache_control 必须**至少有 1 个
+    # 在 messages 数组上** (standalone test 验证 system-only cache_control = cache_create=0).
+    # 多个 breakpoints 设计: Anthropic 找最长匹配 prefix → 即使 messages 末尾 user content
+    # 每次变, system 末尾 marker (inject_system_tail_cache 标的 boundary block) 那个
+    # breakpoint 还能 hit prefix 段.
     user_indices = [i for i, m in enumerate(messages) if isinstance(m, dict) and m.get("role") == "user"]
-    if len(user_indices) < 2:
+    if not user_indices:
         return messages
-    # 标在第一个 user (= 最早的 history user). 这条在 catty_history_turns=16 滚动内
-    # 字节稳定, cache prefix = tools + system + messages[0..first_user_idx 含 marker]
-    # 每轮请求 prefix 字节一致 → cache hit.
+    # 策略: 永远标 messages 数组的**第一个 user** + 当 user >= 2 时, 也标当前(最后)
+    # user 一次. 单 user 场景(只 current user)就标 current — 让 cache 至少写入, sys[21]
+    # 那个 breakpoint 仍能跨请求 hit.
     _mark_cache_control(messages[user_indices[0]])
+    # 若有 history user (>= 2 个 user), 额外在最后一个 user (current) 也标 marker.
+    # Anthropic 4 breakpoints 上限: sys[boundary] + msg[first_user] + msg[last_user] = 3,
+    # 留 1 个余量给 tools cache (CC 不加, catty 也不加).
+    if len(user_indices) >= 2:
+        _mark_cache_control(messages[user_indices[-1]])
     return messages
 
 

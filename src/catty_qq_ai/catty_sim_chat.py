@@ -168,6 +168,14 @@ async def sim_chat(
     reply = "[dry-run: live=False, 未调 AI]"
     if live:
         try:
+            # 主人 2026-05-28: sim_chat 也要 set_current_scope_key, 让 anthropic metadata.user_id
+            # 注入 (cache routing). 主 handle_chat 入口已经 set, 但 sim_chat 是 dev endpoint
+            # 旁路, 不经过 handle_chat → contextvar 是 None → metadata 不发. 这里补上.
+            try:
+                from .openai_client import set_current_scope_key
+                set_current_scope_key(key)
+            except Exception:  # noqa: BLE001
+                pass
             reply_obj = await chat_completion(cfg, messages)
             reply = str(reply_obj or "[AI returned empty]")
         except Exception as exc:  # noqa: BLE001

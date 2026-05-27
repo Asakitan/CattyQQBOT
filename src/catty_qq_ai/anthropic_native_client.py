@@ -574,7 +574,19 @@ async def post_messages_native(
         for i, m in enumerate(stable_msgs):
             txt = _json.dumps(m, sort_keys=True, ensure_ascii=False)
             h = hashlib.sha256(txt.encode("utf-8")).hexdigest()[:8]
-            cur_stable_msgs_dump.append({"i": i, "role": m.get("role", ""), "h": h, "len": len(txt)})
+            # 主人 2026-05-28: dump content head 让 diff 时能看具体内容差异
+            content = m.get("content") if isinstance(m, dict) else None
+            if isinstance(content, str):
+                head = content[:80]
+            elif isinstance(content, list) and content:
+                first_blk = content[0] if isinstance(content[0], dict) else {}
+                head = str(first_blk.get("text", ""))[:80] if first_blk.get("type") == "text" else f"[{first_blk.get('type', '?')}]"
+            else:
+                head = ""
+            cur_stable_msgs_dump.append({
+                "i": i, "role": m.get("role", ""), "h": h, "len": len(txt),
+                "head": head.replace("\n", "\\n"),
+            })
         prev = _last_diff_snapshot.get("snapshot")
         if prev is not None:
             # diff system blocks
@@ -613,13 +625,15 @@ async def post_messages_native(
                         "cur_h": (cv or {}).get("h"),
                         "prev_len": (pv or {}).get("len"),
                         "cur_len": (cv or {}).get("len"),
+                        "cur_head": (cv or {}).get("head", ""),
                     })
             if msgs_changed:
                 logger.info("cache_diff stable_msgs_changed_count=%d", len(msgs_changed))
                 for c in msgs_changed[:10]:
                     logger.info(
-                        "  msg_diff [%d] role=%s %s→%s len %s→%s",
+                        "  msg_diff [%d] role=%s %s→%s len %s→%s cur_head=%s",
                         c["i"], c["role"], c["prev_h"], c["cur_h"], c["prev_len"], c["cur_len"],
+                        c.get("cur_head", ""),
                     )
         _last_diff_snapshot["snapshot"] = {"sys": cur_sys_blocks_dump, "msgs": cur_stable_msgs_dump}
         # 主人 2026-05-28: 加完整 sys_blocks dump 一次性看顺序对不对
@@ -632,6 +646,31 @@ async def post_messages_native(
                 )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"prefix hash compute failed: {exc}")
+
+    # 主人 2026-05-28 调试: dump 实际发出去的 create_kwargs 看 cache_control 是不是真带上
+    try:
+        import json as _jdbg
+        _sys = create_kwargs.get("system") or []
+        _msgs = create_kwargs.get("messages") or []
+        _sys_cc = sum(
+            1 for b in _sys if isinstance(b, dict) and "cache_control" in b
+        ) if isinstance(_sys, list) else 0
+        _msg_cc = 0
+        for m in _msgs:
+            content = m.get("content") if isinstance(m, dict) else None
+            if isinstance(content, list):
+                for blk in content:
+                    if isinstance(blk, dict) and "cache_control" in blk:
+                        _msg_cc += 1
+        logger.info(
+            "actual_kwargs: system_blocks=%d (%d with cc), messages=%d (%d cc), metadata=%s, betas_header=%s",
+            len(_sys) if isinstance(_sys, list) else -1, _sys_cc,
+            len(_msgs), _msg_cc,
+            create_kwargs.get("metadata"),
+            headers.get("anthropic-beta", "")[:80],
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"actual_kwargs dump failed: {exc}")
 
     # 主人 2026-05-28 C5: 改成 streaming + buffer 完整 message 再返回.
     # 外层 chat_completion 接口仍返回 str (兼容), 内部走 SDK stream() async iterator.
