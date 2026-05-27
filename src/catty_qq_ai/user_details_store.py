@@ -87,22 +87,64 @@ def _legacy_extract_details(text: str) -> dict[str, list[str]]:
 
 
 # ── HanLP NER → field 映射 rule layer (commit 3) ───────────────────────
+# 主人 2026-05-28 phase 5: 4 个 rule bag 大扩, 加现代职业 / popular 菜 / 新狗品种.
 
-_PET_NOUNS = ("猫", "狗", "鱼", "鸟", "鹦鹉", "龟", "兔子", "兔", "仓鼠", "柯基", "金毛", "哈士奇")
-_PET_VERBS = ("养", "有")
-_WORKPLACE_HINTS = ("公司", "上班", "工作", "单位", "学校", "大学")
-_FAVORITE_VERBS = ("喜欢", "爱", "最爱", "超爱")
-_RECENT_VERBS = ("去", "做", "买", "吃", "玩", "看", "追", "学")
+_PET_NOUNS = (
+    # 通用
+    "猫", "狗", "鱼", "鸟", "鹦鹉", "龟", "兔子", "兔", "仓鼠",
+    # 狗品种
+    "柯基", "金毛", "哈士奇", "泰迪", "比熊", "拉布拉多", "柴犬",
+    "萨摩耶", "边牧", "博美", "雪纳瑞", "贵宾", "斗牛犬", "小鹿犬",
+    # 猫品种
+    "英短", "美短", "布偶", "橘猫", "三花", "蓝猫", "缅因", "波斯",
+    # 其它
+    "鹅", "蜥蜴", "蜘蛛", "刺猬", "豚鼠", "龙猫",
+)
+_PET_VERBS = ("养", "有", "撸", "领养", "买", "捡", "抱回", "新买")
+_WORKPLACE_HINTS = (
+    "公司", "上班", "工作", "单位", "学校", "大学",
+    "office", "厂", "总部", "事务所", "工作室", "团队",
+)
+_FAVORITE_VERBS = (
+    "喜欢", "爱", "最爱", "超爱", "真的爱", "超级喜欢", "好喜欢",
+    "萌到爆", "戳到", "本命",
+)
+_RECENT_VERBS = (
+    "去", "做", "买", "吃", "玩", "看", "追", "学",
+    "刚", "才", "刚才", "刚刚", "新买", "新装", "新办",
+    "下载", "安装", "订", "试", "听",
+)
 _FOOD_WORDS = (
-    "饭", "菜", "面", "肉", "鱼", "汤", "粥", "粉", "饺", "包子", "馒头",
+    # 主食
+    "饭", "菜", "面", "肉", "汤", "粥", "粉", "饺", "包子", "馒头",
+    # 肉类
     "排骨", "鸡", "鸭", "鹅", "虾", "蟹", "牛", "猪", "羊", "豆腐", "鸡蛋",
-    "披萨", "汉堡", "薯条", "蛋糕", "奶茶", "咖啡", "面包", "甜品",
+    # 西式
+    "披萨", "汉堡", "薯条", "蛋糕", "面包", "甜品",
+    # 饮品
+    "奶茶", "咖啡", "果汁", "啤酒", "可乐",
+    # 中式特色 (主人 plan 强调火锅/螺蛳粉等现代高频)
+    "火锅", "烤鱼", "烤串", "烧烤", "麻辣烫", "麻辣香锅",
+    "螺蛳粉", "酸辣粉", "炒粉", "拉面", "乌冬", "凉皮",
+    "寿司", "刺身", "天妇罗", "炸鸡", "关东煮",
+    "麻婆豆腐", "回锅肉", "鱼香肉丝", "宫保鸡丁", "红烧肉", "糖醋里脊",
+    "煲仔饭", "盖浇饭", "炒饭", "烤冷面", "煎饼", "肉夹馍",
+    "海底捞", "黄焖鸡", "卤味", "凉菜",
 )
 _JOB_TABLE = (
+    # 传统
     "程序员", "工程师", "设计师", "学生", "医生", "老师", "律师", "司机",
     "厨师", "护士", "经理", "销售", "运营", "产品", "测试", "前端", "后端",
     "全栈", "架构师", "运维", "实习生", "博士", "硕士", "研究员", "讲师",
     "教授", "会计", "出纳", "导演", "记者", "编辑",
+    # 现代 / 新职业 (主人 plan 强调)
+    "主播", "UP主", "UP 主", "博主", "自媒体", "电商", "客服",
+    "网约车司机", "外卖员", "快递员", "代驾", "民宿主", "店主",
+    "独立游戏开发者", "前端架构师", "DevOps", "SRE", "数据分析师",
+    "心理咨询师", "瑜伽教练", "私教", "健身教练",
+    "插画师", "原画师", "动画师", "声优", "歌手", "翻译",
+    "策划", "项目经理", "scrum master", "QA", "DBA",
+    "网红", "带货主播", "KOL", "博士生", "硕士生", "研究生",
 )
 
 
@@ -147,36 +189,62 @@ def _map_entities_to_slots(
         if w in _JOB_TABLE:
             _add("job", w)
 
-    # pet: token 含宠物名词 + 前 3 tokens 内有 养/有
+    # pet: token 含宠物名词 + 前 5 tokens 内有 养/有 (主人 2026-05-28: 扩到 5
+    # 修 "我老婆养了一只柯基" 这种主语 + 宠物 + 量词隔开的 case)
     for i, w in enumerate(tokens):
         if any(p in w for p in _PET_NOUNS):
-            window = tokens[max(0, i - 3): i]
+            window = tokens[max(0, i - 5): i]
             if any(v in window for v in _PET_VERBS):
                 _add("pet", w)
 
-    # favorite_foods / hobby: 喜欢/爱 后跟名词
+    # favorite_foods / hobby: 喜欢/爱 后跟名词或动名词
+    # HanLP 把"摄影"/"拍照"等动名词判 VV (动词), 也算 hobby. 但跳 NT (time noun) / AD.
     for i, (w, p) in enumerate(pos_pairs):
         if w in _FAVORITE_VERBS:
-            # 看后两个 token
             for j in range(i + 1, min(i + 4, len(pos_pairs))):
                 next_w, next_p = pos_pairs[j]
-                if next_p.startswith("N") or next_p.startswith("v"):
+                # 跳过时间词 (NT) 和副词 (AD), 这些不是 hobby 主体
+                if next_p in ("NT", "AD", "CD", "M", "AS", "DEC"):
+                    continue
+                if next_p.startswith("N") or next_p.startswith("V") or next_p.startswith("v"):
                     if any(f in next_w for f in _FOOD_WORDS):
                         _add("favorite_foods", next_w)
                     elif len(next_w) >= 2:
                         _add("hobby", next_w)
                     break
 
-    # recent_event: DATE entity + 后续 verb (去/做/买/吃) + 名词
-    if dates:
+    # recent_event: 后续 verb (去/做/买/吃) + NP (主人 2026-05-28: 不再强制要 DATE
+    # entity, 因为"新买的拉布拉多""刚下载的游戏"这种没明显时间锚但语义清楚的也要抓)
+    has_recent_signal = bool(dates) or any(
+        w in {"刚", "才", "刚刚", "刚才", "今天", "昨天", "前天", "最近", "新", "上周", "周末", "下周"}
+        for w in tokens
+    )
+    if has_recent_signal:
         for i, (w, p) in enumerate(pos_pairs):
             if w in _RECENT_VERBS:
-                # 拼 verb + 后一个 NP
-                if i + 1 < len(pos_pairs):
-                    next_w, _np = pos_pairs[i + 1]
-                    snippet = f"{w}{next_w}"
-                    _add("recent_event", snippet)
-                    break
+                # 拼 verb + 后续 NP (跳过中间助词 "了" 等)
+                # 看 verb 后最多 3 个 token, 跳过 AS/DEC/M/CD 助词, 命中 N/NN/NR 就拼
+                next_parts: list[str] = []
+                for j in range(i + 1, min(i + 4, len(pos_pairs))):
+                    next_w, np = pos_pairs[j]
+                    if np in ("AS", "DEC", "M"):
+                        next_parts.append(next_w)  # "了" 这种助词带上, 让 snippet 自然
+                        continue
+                    if np in ("NT", "AD", "CD"):
+                        break  # 时间/副词/数字 = NP 边界
+                    if np.startswith("N") or np.startswith("V"):
+                        next_parts.append(next_w)
+                        # 看再下一个是不是同类 NP (灌篮+高手), 是就拼
+                        if j + 1 < len(pos_pairs):
+                            next_w2, np2 = pos_pairs[j + 1]
+                            if np2.startswith("N"):
+                                next_parts.append(next_w2)
+                        break
+                if next_parts:
+                    snippet = w + "".join(next_parts)
+                    if len(snippet) >= 3:
+                        _add("recent_event", snippet)
+                break  # 一句一个 recent_event
 
     return out
 
