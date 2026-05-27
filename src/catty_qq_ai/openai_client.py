@@ -899,6 +899,8 @@ async def chat_completion_with_tools(
             *[tool_executor(name, args_json) for _call_id, name, args_json in executed],
             return_exceptions=True,
         )
+        # Phase B1: 收集成功的 tool result 给 cascade 检查用
+        cascade_inputs: list[tuple[str, Any]] = []
         for (call_id, name, _args_json), result in zip(executed, tool_results):
             if isinstance(result, BaseException):
                 payload = {"error": f"{name} 抛异常: {result.__class__.__name__}: {result}"}
@@ -907,6 +909,7 @@ async def chat_completion_with_tools(
                 payload = {"value": result}
             else:
                 payload = result
+                cascade_inputs.append((name, payload))
             try:
                 content_str = json.dumps(payload, ensure_ascii=False)
             except (TypeError, ValueError):
@@ -917,6 +920,29 @@ async def chat_completion_with_tools(
                     "tool_call_id": call_id,
                     "name": name,
                     "content": content_str,
+                }
+            )
+
+        # Phase B1: tool cascade — 看上一轮 tool 结果, 给 AI 一个『下一步推荐调 X』hint
+        if cascade_inputs:
+            try:
+                from .tool_cascade import build_post_tool_hint
+                _cascade_hint = build_post_tool_hint(cascade_inputs)
+                if _cascade_hint:
+                    history.append({"role": "system", "content": _cascade_hint})
+            except Exception as _cascade_exc:  # noqa: BLE001
+                _logger.debug("tool_cascade check failed (non-fatal): %s", _cascade_exc)
+
+        # Phase B3: tool result post-process hint — 防 AI 拿到 result 后复读 JSON / 列字段名
+        if executed:
+            history.append(
+                {
+                    "role": "system",
+                    "content": (
+                        "请基于以上 tool 结果**用笨猫口吻**回答, **绝不**复读 JSON 字段名 "
+                        "(如 'long_term_summary' / 'matches' / 'extract' 等), "
+                        "**绝不**贴原始字典/数组. 把结果挑出 1-2 个有用点用猫娘语气短句串起来即可."
+                    ),
                 }
             )
 
