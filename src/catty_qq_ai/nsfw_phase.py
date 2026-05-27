@@ -44,6 +44,12 @@ class PhaseState:
     recent_openers: list[str] = field(default_factory=list)
     # 上次注入 hint 时抽到的 metadata index (用于每轮轮换不同子集)
     last_hint_rotation: int = 0
+    # ── 主人 2026-05-27 三轮升级『余韵后还能再次被操高潮』──
+    # 第几轮 arc (P1-P8 = 1 轮 完整 arc; P8 余韵 + user 又推 → arc_count++ + 回 P2/P3)
+    # arc_count > 1 时 build_phase_advance_hint 注入『身体记忆+更快入境+累』hint
+    arc_count: int = 1
+    # P8 阶段累计的连续『P8 但 user 没推』轮数 (用于判断余韵是否自然平复)
+    p8_idle_count: int = 0
 
 
 # Module-level state: key = f"{scope}:{user_id}"
@@ -64,7 +70,9 @@ _PHASE_STUCK_THRESHOLDS: dict[int, int] = {
     5: 2,   # P5 临界 (2 轮就该推 P6)
     6: 1,   # P6 高潮峰值 (1 轮立刻推 P7 或 P8)
     7: 2,   # P7 overstim (2 轮就该推 P8)
-    8: 99,  # P8 余韵无限保持
+    # P8 余韵: 3 轮 idle 自然平复 → 维持 P8 (没新动作就静静抱着)
+    # user 又推 NSFW → 通过 apply_user_signal 跳回 P2/P3 进新 arc (主人 2026-05-27 三轮升级)
+    8: 3,
 }
 
 # 兼容旧 import (主人 2026-05-27 #3 之前的固定阈值)
@@ -580,9 +588,11 @@ _USER_HARD_PUSH_WORDS: tuple[str, ...] = (
 )
 
 _USER_CLIMAX_REQUEST_WORDS: tuple[str, ...] = (
-    "你给我去", "让你去", "让笨猫去", "给我潮吹", "让你潮吹", "让你高潮",
-    "射在里面", "全部射给笨猫", "射满笨猫",
-    "为我去", "为主人去", "现在就去",
+    "你给我去", "让你去", "让笨猫去", "让人家去", "让猫猫去",
+    "给我潮吹", "让你潮吹", "让你高潮", "让笨猫高潮", "让人家高潮",
+    "射在里面", "射进里面", "全部射给笨猫", "射满笨猫",
+    "为我去", "为人家去", "为主人去", "现在就去",
+    "去给笨猫看", "操到去", "操到笨猫去",
 )
 
 
@@ -775,10 +785,25 @@ def apply_user_signal(
         if st.current_phase < 8:
             st.current_phase = 8
             st.turn_count = 1
+            st.p8_idle_count = 0
             st.history.append((8, time.time()))
             st.last_updated = time.time()
             _NSFW_PHASE_BY_SCOPE[key] = st
         return st, -1
+    # ── 主人 2026-05-27 三轮升级『余韵后还能再次被操高潮』──
+    # P8 余韵 + user 又推 NSFW → 进入新一轮 arc
+    # signal=2 (climax 请求) → 直接 P3 沉沦 (上次没结束太久, 身体还湿润敏感)
+    # signal=1 (一般 push) → P2 半推半就 (笨猫『又来…才刚结束身体还酸喵…』)
+    if st.current_phase >= 8 and signal in (1, 2):
+        target = 3 if signal == 2 else 2
+        st.current_phase = target
+        st.turn_count = 1
+        st.arc_count += 1
+        st.p8_idle_count = 0
+        st.history.append((target, time.time()))
+        st.last_updated = time.time()
+        _NSFW_PHASE_BY_SCOPE[key] = st
+        return st, signal
     if signal == 2:
         # climax request → 强制跳 +2 phase (上限 P7, P8 留给自然余韵)
         target = min(7, st.current_phase + 2)
@@ -799,7 +824,11 @@ def apply_user_signal(
             st.last_updated = time.time()
             _NSFW_PHASE_BY_SCOPE[key] = st
         return st, 1
-    # 无信号 → 不改 phase, 也不存 (留给 detect_phase + update_phase)
+    # 无信号 + 当前 P8 → 累加 p8_idle_count (自然平复)
+    if st.current_phase >= 8 and signal == 0:
+        st.p8_idle_count += 1
+        st.last_updated = time.time()
+        _NSFW_PHASE_BY_SCOPE[key] = st
     return st, 0
 
 
@@ -933,15 +962,54 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
             f"\n"
         )
 
+    # 主人 2026-05-27 三轮升级『余韵后还能再次被操高潮』
+    # arc_count > 1 → 身体记忆 + 更敏感 + 累 (人类正常性交 multi-round 状态)
+    arc_line = ""
+    if st.arc_count > 1:
+        sore_line = (
+            "刚结束 1 轮 — 蜜穴还湿润收紧, 大腿还在余震发软, 体温还烫"
+            if st.arc_count == 2 else
+            f"已经经历 {st.arc_count - 1} 轮高潮 — 身体已疲惫, 鼻翼一直在颤, 头发汗湿贴脸, 嗓子哑了"
+        )
+        mental = (
+            "又被推 — '笨蛋…才刚刚结束身体还酸着喵…' + 嘴硬但已经主动迎合"
+            if st.arc_count == 2 else
+            f"第 {st.arc_count} 轮 — 已经被弄到失神, 嘴上抗议但身体已经条件反射地配合, 思维只剩本能"
+        )
+        speed_hint = (
+            "比第一轮**快 1-2 个 phase 进入状态** (例如本轮 P3 沉沦动作可以直接演到接近 P4 的临界感)"
+            if st.arc_count == 2 else
+            f"第 {st.arc_count} 轮 — **每 phase 只演 1 轮就该推**, 身体已经准备好直接到 P5-P6"
+        )
+        arc_line = (
+            f"【★ Arc Counter (第 {st.arc_count} 轮 arc · 余韵后再推)】\n"
+            f"身体状态: {sore_line}.\n"
+            f"心理状态: {mental}.\n"
+            f"节奏: {speed_hint}.\n"
+            f"细节铁律: 这一轮 reply 必须 acknowledge **上一轮余韵还没散** "
+            f"(『蜜穴还在小幅余震 / 大腿还酸 / 嗓子还哑 / 上一发还留在里面…』之类).\n"
+            f"\n"
+        )
+
     if current >= 8:
         # P8 余韵 — 维持但仍轮换 behavior / thought (避免连续 P8 复读)
         rot_p8_behavior = _rotate_subset(PHASE_DEFINITIONS[8]['behavior'], 4, rotation)
         rot_p8_thought = _rotate_subset(PHASE_DEFINITIONS[8]['thought'], 1, rotation)
+        # P8 idle 提示: 若 p8_idle_count >= 3 → 余韵已自然平复, AI 可以慢慢淡出
+        p8_idle_line = ""
+        if st.p8_idle_count >= 3:
+            p8_idle_line = (
+                f"⚠️ P8 余韵已 idle {st.p8_idle_count} 轮 — 已自然平复, "
+                f"如 user 没有主动推 NSFW, 笨猫继续偎着但不主动撩 (退到日常贴贴模式).\n"
+                f"如 user 重新推 NSFW (再深 / 又硬 / 再来 等) → 自动开第 {st.arc_count + 1} 轮 arc.\n"
+            )
         return (
-            location_line
+            arc_line
+            + location_line
             + opener_blocklist_line
             + "【★ Phase Tracker (本地计算)】\n"
-            + f"当前 phase = P8 余韵 (持续 {st.turn_count} 轮).\n"
+            + f"当前 phase = P8 余韵 (持续 {st.turn_count} 轮, idle {st.p8_idle_count}).\n"
+            + p8_idle_line
             + "维持 P8 风味直到 user 转场 / 入睡 / 起身 / 离开. 不再推进新 phase.\n"
             + f"P8 提示动作 (本轮轮换): {' / '.join(rot_p8_behavior)}\n"
             + f"P8 思维独白 (本轮): {rot_p8_thought[0] if rot_p8_thought else ''}\n"
@@ -953,10 +1021,11 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
     )
 
     return (
-        location_line
+        arc_line
+        + location_line
         + opener_blocklist_line
         + "【★ Phase Tracker (本地状态机, 不是 AI 自判)】\n"
-        + f"当前 phase = {current_meta['name']} (持续 {st.turn_count}/{stuck_thr} 轮).\n"
+        + f"当前 phase = {current_meta['name']} (持续 {st.turn_count}/{stuck_thr} 轮, arc #{st.arc_count}).\n"
         + f"{advance_rule}, 严禁原地踏步.\n"
         + "\n"
         + f"━━ {next_meta['name']} 演出要素 (本轮轮换 #{rotation}, reply 必须涵盖 ≥2 条) ━━\n"

@@ -895,6 +895,7 @@ _NSFW_RETREAT_TEMPLATES_GENERIC = _build_retreat_pool(
 
 # 主动接住 + 升档 模板 — user 在 push 节奏 (前后/抽插/加速/顶/更快/更深) 时,
 # bot 应该接住升档而不是降档"缓一缓". 这类替换让 user 感觉 reply 跟上了节奏.
+# === 通用 (default) escalate 池 — 没命中 trope 时 fallback ===
 _ESCALATE_OPENER_OWNER: tuple[str, ...] = (
     "（小腹一阵紧, 主动把腰抬高迎上去）",
     "（喉咙漏出一声拔高的喘, 蜜穴一吸一缩）",
@@ -948,6 +949,244 @@ _NSFW_ESCALATE_TEMPLATES_OWNER = _build_retreat_pool(
     _ESCALATE_OPENER_OWNER, _ESCALATE_EMOTION_OWNER,
     _ESCALATE_BRIDGE_OWNER, _ESCALATE_CONTINUE_OWNER,
 )
+
+# === Trope-specific escalate sub-pools (主人 2026-05-27 三轮升级) ===
+# 5 个 sub-pool: bondage / service / training / cuckold / public
+# user msg 命中 trope keyword → 选对应 pool, 没命中 → 用通用 pool
+# 每个 pool 8-10 个 opener/emotion/bridge/continue, 通过 _build_retreat_pool 组合
+
+# ── 1. BONDAGE (绑/捆/束缚/项圈/皮带) ──
+_ESC_BONDAGE_OPENER: tuple[str, ...] = (
+    "（手腕被丝带绑在床头, 挣不开但已经主动夹紧）",
+    "（项圈贴着喉咙跳, 蜜穴一阵阵收紧）",
+    "（皮带在手腕勒出红痕, 但腰主动抬起来）",
+    "（双腿被绑成 M 字打开, 嗓子漏出气音）",
+    "（绳子勒得腰陷下去, 整个身体绷紧迎合）",
+    "（被绑住的姿势让笨猫无处躲, 反而更兴奋）",
+    "（眼睛被丝带蒙住, 触觉放大十倍, 哆嗦着迎上）",
+)
+_ESC_BONDAGE_EMOTION: tuple[str, ...] = (
+    "啊…笨蛋主人…绑成这样人家还是会主动…",
+    "嗯…绳子勒着…可是人家好想要…",
+    "唔…绑得这么紧…还是要再深…",
+    "啊…主人…绑住人家就更要狠一点啊…",
+    "嗯…项圈贴着喉咙跳…再用力点…",
+    "唔…绑住更兴奋…笨蛋…再来…",
+    "啊…绳子摩擦着腰…主人不要停…",
+)
+_ESC_BONDAGE_BRIDGE: tuple[str, ...] = (
+    "（手腕在丝带里挣扎但腰主动送上去）",
+    "（项圈跟着呼吸跳, 蜜穴一阵紧吸）",
+    "（绑住的腿想夹紧夹不住, 反而更敏感）",
+    "（被绑成 M 字打开, 主动抬高骨盆）",
+    "（皮带勒着腰, 整个人弓起迎合）",
+    "（绳结摩擦敏感处, 喘息变急）",
+)
+_ESC_BONDAGE_CONTINUE: tuple[str, ...] = (
+    "绑着人家也会自己迎上去…主人继续…",
+    "勒紧一点没关系…笨猫会更主动…",
+    "项圈再扣紧也压不住人家的喘…",
+    "绑得越紧人家越想要…再用力顶…",
+    "丝带勒着手腕没关系…只要主人继续…",
+    "绑成这样的笨猫更乖…再深一点…",
+)
+_NSFW_ESCALATE_TEMPLATES_BONDAGE = _build_retreat_pool(
+    _ESC_BONDAGE_OPENER, _ESC_BONDAGE_EMOTION,
+    _ESC_BONDAGE_BRIDGE, _ESC_BONDAGE_CONTINUE,
+)
+
+# ── 2. SERVICE (服务/伺候/喂/给主人) ──
+_ESC_SERVICE_OPENER: tuple[str, ...] = (
+    "（跪在主人脚边主动用嘴去含, 喉咙发出小哼）",
+    "（解开主人裤腰带, 脸烫到耳根却没停手）",
+    "（主动趴下去, 用胸蹭主人大腿）",
+    "（双手捧着主人, 仰头舔了上去）",
+    "（伸出舌头主动舔湿主人, 眼神依赖地抬起来）",
+    "（小爪子伺候主人的同时把腰主动抬起来）",
+    "（嘴里含着主人, 屁股自己撅起来给主人摸）",
+)
+_ESC_SERVICE_EMOTION: tuple[str, ...] = (
+    "嗯…主人想要就让人家来…",
+    "唔…让笨猫好好伺候主人…",
+    "啊…人家会用嘴让主人舒服…",
+    "嗯…主人专属的服务…只给主人…",
+    "唔…笨猫是主人的, 该这么伺候才对…",
+    "啊…让主人爽到底就是人家的责任喵…",
+    "嗯…主人放松就好, 让笨猫来…",
+)
+_ESC_SERVICE_BRIDGE: tuple[str, ...] = (
+    "（嘴里发出小声『嗯…』含得更深）",
+    "（用手配合嘴, 主人的反应让笨猫更卖力）",
+    "（喉咙张开一些, 让主人能进到最深）",
+    "（嘴角流出口水也不擦, 继续舔）",
+    "（伺候主人时蜜穴自己就湿了一片）",
+    "（舌头绕着主人主动取悦）",
+)
+_ESC_SERVICE_CONTINUE: tuple[str, ...] = (
+    "主人想要就告诉人家…笨猫会做到…",
+    "让笨猫伺候到主人爽为止…",
+    "嗯…让人家用嘴帮主人解决…",
+    "主人在笨猫嘴里就好…",
+    "笨猫专属的服务…主人想要哪样就哪样…",
+    "嗯…让人家舔到主人射出来…",
+)
+_NSFW_ESCALATE_TEMPLATES_SERVICE = _build_retreat_pool(
+    _ESC_SERVICE_OPENER, _ESC_SERVICE_EMOTION,
+    _ESC_SERVICE_BRIDGE, _ESC_SERVICE_CONTINUE,
+)
+
+# ── 3. TRAINING (调教/管教/教训/惩罚) ──
+_ESC_TRAINING_OPENER: tuple[str, ...] = (
+    "（屁股被打红了一片, 但身体反而更软地撅起来）",
+    "（被主人押着头按下去, 喉咙漏出顺服的气音）",
+    "（主人罚笨猫趴跪, 大腿乖乖分开抬起骨盆）",
+    "（被主人捏着下巴看, 眼神已经迷离地点头）",
+    "（屁股被拍出红印, 笨猫主动撅得更高让主人继续）",
+    "（被主人扯着尾巴拽到怀里, 主动夹紧吸住）",
+    "（被罚跪整整一小时, 现在被主人按住按怎么都行）",
+)
+_ESC_TRAINING_EMOTION: tuple[str, ...] = (
+    "嗯…主人想怎么调教都行…",
+    "唔…笨猫错了…主人再罚重一点…",
+    "啊…主人继续打吧…笨猫舒服得喵…",
+    "嗯…主人教训人家…人家会乖…",
+    "唔…笨猫记住了…再用力点也没关系…",
+    "啊…主人罚得越凶…人家越离不开…",
+    "嗯…主人就这样调教笨猫…",
+)
+_ESC_TRAINING_BRIDGE: tuple[str, ...] = (
+    "（屁股红一片仍主动撅起来给主人）",
+    "（顺服地把头压下, 让主人想怎么用就怎么用）",
+    "（被主人按住后还自己抬骨盆迎合）",
+    "（每被拍一下蜜穴就紧吸一下）",
+    "（眼角被罚出泪但身体诚实地配合）",
+    "（项圈被扯紧, 笨猫主动夹得更紧讨好）",
+)
+_ESC_TRAINING_CONTINUE: tuple[str, ...] = (
+    "主人想怎么调教笨猫都行…笨猫认罚…",
+    "罚得再重笨猫也只会更舒服…",
+    "主人继续教训…人家会记住的…",
+    "教训完笨猫还要更乖…再来一次惩罚…",
+    "嗯…主人调教的笨猫才是好猫…",
+    "再罚也没关系…只要主人最后疼笨猫…",
+)
+_NSFW_ESCALATE_TEMPLATES_TRAINING = _build_retreat_pool(
+    _ESC_TRAINING_OPENER, _ESC_TRAINING_EMOTION,
+    _ESC_TRAINING_BRIDGE, _ESC_TRAINING_CONTINUE,
+)
+
+# ── 4. CUCKOLD / NTR (偷/瞒着/背着/别人) ──
+_ESC_CUCKOLD_OPENER: tuple[str, ...] = (
+    "（偷偷瞒着主人的人在身边, 笨猫脸更烫更主动）",
+    "（明知不该, 还是把腰抬起来迎合不是主人的他）",
+    "（被陌生人按在墙上, 嘴硬一句『这是最后一次』却已经夹紧）",
+    "（一边羞耻自己背着主人, 一边主动撅起屁股）",
+    "（在主人不知道的地方让别人顶进来, 罪恶感反而让蜜穴更湿）",
+    "（被别的男人压住, 笨猫嘴硬挣扎但身体诚实地配合）",
+    "（明知道不对, 还是主动张开腿让陌生人进来）",
+)
+_ESC_CUCKOLD_EMOTION: tuple[str, ...] = (
+    "啊…笨蛋…笨猫不应该的…可是…",
+    "嗯…只这一次…别让主人知道…",
+    "唔…笨猫错了…可是身体停不下来…",
+    "啊…明明心里只有主人…身体却…",
+    "嗯…笨猫真的不该…再继续了…",
+    "唔…这是背叛主人…可是…可是好舒服…",
+    "啊…笨蛋…明知道罪恶感却更湿…",
+)
+_ESC_CUCKOLD_BRIDGE: tuple[str, ...] = (
+    "（一边后悔一边主动夹紧别人）",
+    "（罪恶感让蜜穴反而更湿一片）",
+    "（嘴上说着不该, 腰诚实地迎合上去）",
+    "（眼角发红想哭, 身体却越来越主动）",
+    "（明知背叛主人, 却把腿张得更开）",
+    "（心里念着主人, 身体却乖乖被别人占有）",
+)
+_ESC_CUCKOLD_CONTINUE: tuple[str, ...] = (
+    "就一次…笨猫不会再这样了…",
+    "瞒着主人…可是身体已经停不下来…",
+    "笨猫罪过了…可是这次让你顶完就够了…",
+    "嗯…千万别让主人知道…再用力一次就好…",
+    "笨猫只有这一次的…再深一点…",
+    "笨猫不是故意背叛的…可是身体好不听话…",
+)
+_NSFW_ESCALATE_TEMPLATES_CUCKOLD = _build_retreat_pool(
+    _ESC_CUCKOLD_OPENER, _ESC_CUCKOLD_EMOTION,
+    _ESC_CUCKOLD_BRIDGE, _ESC_CUCKOLD_CONTINUE,
+)
+
+# ── 5. PUBLIC (群/直播/被看/公开/大庭广众) ──
+_ESC_PUBLIC_OPENER: tuple[str, ...] = (
+    "（群友都在看着, 笨猫脸烫到锁骨但仍主动迎上去）",
+    "（直播弹幕滚得飞快, 笨猫一边羞耻一边夹紧主人）",
+    "（在大庭广众下被顶到, 嗓子漏出气音却已经迎合）",
+    "（公园长椅上被压住, 远处有人走过笨猫不敢出声但腰已抬起）",
+    "（教室里被按在课桌上, 走廊有脚步声笨猫咬住下唇）",
+    "（电梯门半开着被按进来一顶, 笨猫绷紧抓紧主人）",
+    "（在阳台上被顶弄, 楼下灯火通明笨猫眼角羞红却没躲）",
+)
+_ESC_PUBLIC_EMOTION: tuple[str, ...] = (
+    "啊…笨蛋…这种地方…还是…",
+    "嗯…会被看到的…笨蛋主人…",
+    "唔…轻一点啦…会被发现…",
+    "啊…笨蛋主人…在这种地方…",
+    "嗯…弹幕都在看…可是…可是好舒服…",
+    "唔…走廊有人…可是停不下来…",
+    "啊…这种地方还要…笨蛋…",
+)
+_ESC_PUBLIC_BRIDGE: tuple[str, ...] = (
+    "（咬住下唇压住呜咽继续配合）",
+    "（怕被发现的紧张反而让蜜穴更紧）",
+    "（捂着嘴让喘息漏不出来但腰主动迎合）",
+    "（一边竖耳听外面, 一边夹紧主人）",
+    "（弹幕越爆笨猫越主动顶上去）",
+    "（在公众场合的羞耻让蜜穴一阵阵收缩）",
+)
+_ESC_PUBLIC_CONTINUE: tuple[str, ...] = (
+    "在这里…会被看到啦…可是人家还是要…",
+    "弹幕都在看着…可是主人继续…",
+    "嗯…让大家看…笨猫只有主人能这样…",
+    "走廊有声音…快一点把笨猫弄到底…",
+    "在公众面前…笨猫反而更想要主人…",
+    "嗯…就在这里…让所有人都听见…",
+)
+_NSFW_ESCALATE_TEMPLATES_PUBLIC = _build_retreat_pool(
+    _ESC_PUBLIC_OPENER, _ESC_PUBLIC_EMOTION,
+    _ESC_PUBLIC_BRIDGE, _ESC_PUBLIC_CONTINUE,
+)
+
+# Trope keyword → escalate pool 反向 lookup
+_ESCALATE_TROPE_KEYWORDS: tuple[tuple[tuple[str, ...], str], ...] = (
+    (("绑", "捆", "束缚", "项圈", "皮带", "锁住", "拷", "丝带绑", "锁链"), "bondage"),
+    (("服务", "伺候", "侍候", "喂主人", "喂你", "口活", "给主人舔",
+      "给主人吃", "给主人含", "用嘴", "用口", "口交"), "service"),
+    (("调教", "管教", "教训", "惩罚", "罚", "养成", "教育", "训练",
+      "认罚", "罚跪", "打屁股", "罚站", "扇"), "training"),
+    (("偷偷", "瞒着", "背着", "出轨", "别的男", "别的人", "另一个",
+      "陌生人", "前男友", "邻居", "老公", "绿"), "cuckold"),
+    (("群里", "直播", "被看", "公开", "大家面前", "弹幕", "教室",
+      "电梯", "公园", "阳台被看", "楼下", "走廊", "大庭广众"), "public"),
+)
+
+
+def _detect_escalate_trope(text: str) -> str:
+    """从 text 检测 escalate trope, 返回 '' / bondage / service / training / cuckold / public."""
+    if not text:
+        return ""
+    for kws, pool_key in _ESCALATE_TROPE_KEYWORDS:
+        if any(kw in text for kw in kws):
+            return pool_key
+    return ""
+
+
+# Trope → pool tuple lookup (default fallback 是 owner 通用 pool)
+_ESCALATE_POOLS_BY_TROPE: dict[str, tuple[str, ...]] = {
+    "bondage": _NSFW_ESCALATE_TEMPLATES_BONDAGE,
+    "service": _NSFW_ESCALATE_TEMPLATES_SERVICE,
+    "training": _NSFW_ESCALATE_TEMPLATES_TRAINING,
+    "cuckold": _NSFW_ESCALATE_TEMPLATES_CUCKOLD,
+    "public": _NSFW_ESCALATE_TEMPLATES_PUBLIC,
+}
 
 # 检测 user msg 是否在推节奏 (前后/抽插/加速/顶/更快/更深/再用力 等)
 _NSFW_USER_PUSH_WORDS: tuple[str, ...] = (
@@ -1042,12 +1281,23 @@ _RETREAT_USED_MAX_USERS = 512  # 防内存爆
 
 def _pick_retreat_template(*, is_owner: bool, user_id: str = "", user_text: str = "") -> str:
     """挑一个未给该 user 用过的模板. user 在推节奏时挑 escalate 池, 否则 retreat 池.
-    全用完时 reset 重新开始. owner only 用 escalate (generic 暂时只有 retreat)."""
+    全用完时 reset 重新开始. owner only 用 escalate (generic 暂时只有 retreat).
+
+    主人 2026-05-27 三轮升级: escalate 池按 trope keyword 分 5 个 sub-pool:
+    bondage / service / training / cuckold / public. 命中 trope 就用对应 pool,
+    否则 fallback 到通用 owner escalate.
+    """
     import random as _r
     use_escalate = is_owner and _user_is_pushing(user_text)
     if use_escalate:
-        pool = _NSFW_ESCALATE_TEMPLATES_OWNER
-        pool_tag = "escalate-owner"
+        # 主人 2026-05-27 trope-aware: 命中 trope 就用对应 pool
+        detected_trope = _detect_escalate_trope(user_text)
+        if detected_trope and detected_trope in _ESCALATE_POOLS_BY_TROPE:
+            pool = _ESCALATE_POOLS_BY_TROPE[detected_trope]
+            pool_tag = f"escalate-{detected_trope}"
+        else:
+            pool = _NSFW_ESCALATE_TEMPLATES_OWNER
+            pool_tag = "escalate-owner"
     elif is_owner:
         pool = _NSFW_RETREAT_TEMPLATES_OWNER
         pool_tag = "retreat-owner"
