@@ -154,21 +154,20 @@ def inject_system_tail_cache(messages: list[dict]) -> list[dict]:
     Anthropic Prompt Caching 要求 prefix 字节级一致才命中; 这一改让 cache 真正吃到
     stable persona/character_card/world_info/qq_rhythm/examples 等几 K 段。
     """
-    # Phase A3: 优先找 boundary marker
-    for i, msg in enumerate(messages):
-        if msg.get("role") != "system":
-            break  # 离开顶部 system 块, 停止 (boundary 必须在顶部 system 块内)
-        if _has_marker_in_content(msg.get("content"), _CACHE_BOUNDARY_MARKER):
-            _mark_cache_control(msg)
-            return messages
-
-    # fallback: 老逻辑 (顶部连续 system 末尾)
+    # 主人 2026-05-28 prompt 优化 C2: 修 bug — 之前在 boundary marker 处直接 return,
+    # 但 sweep 漏掉的场景 / 异常路径下 boundary 之后还可能有 sys 段, 不标会让 cache prefix
+    # 不完整. 正确做法: **同时记录 boundary_idx 和 last_top_sys, 标在两者较后的位置**
+    # (实际上几乎总是 boundary_idx == last_top_sys, 但万一不同就用 last_top_sys 兜底).
+    boundary_idx = -1
     last_top_system = -1
     for i, msg in enumerate(messages):
-        if msg.get("role") == "system":
-            last_top_system = i
-        else:
-            break
+        if msg.get("role") != "system":
+            break  # 离开顶部 system 块
+        last_top_system = i
+        if boundary_idx < 0 and _has_marker_in_content(msg.get("content"), _CACHE_BOUNDARY_MARKER):
+            boundary_idx = i
+
+    # 标在顶部最后一个 sys (可能等于 boundary, 可能是 boundary 之后某段 sweep 漏的 sys)
     if last_top_system >= 0:
         _mark_cache_control(messages[last_top_system])
     return messages

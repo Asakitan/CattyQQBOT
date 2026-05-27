@@ -38,7 +38,16 @@ _DEFAULT_BETAS_LIST: list[str] = [
     # 主人 2026-05-28: 启用 1h cache TTL — Anthropic 已 GA, beta header 在
     # extended-cache-ttl-2025-04-11. cache_control: {ttl: '1h'} 必须搭这个 header.
     "extended-cache-ttl-2025-04-11",
+    # 主人 2026-05-28: 启用 cache 诊断 beta — Anthropic 返回 diagnostics.cache_miss_reason
+    # 告诉每次 cache miss 原因 (system_changed / tools_changed / messages_changed / etc.)
+    # 调试 cache 命中率上不去的黄金工具.
+    "cache-diagnosis-2026-04-07",
 ]
+
+
+# 主人 2026-05-28 C2: 记录每个 scope 上一次 chat completion 的 message_id, 用来给
+# 下一次请求传 diagnostics.previous_message_id, 让 Anthropic 告诉我们 cache miss 原因.
+_LAST_MESSAGE_ID_BY_SCOPE: dict[str, str] = {}
 
 
 def _build_beta_header(extra_betas: list[str] | None = None) -> str:
@@ -533,12 +542,22 @@ async def post_messages_native(
         # convert_openai_tool_to_anthropic 对已经是 Anthropic 格式的 tool 原样返回
         create_kwargs["tools"] = [convert_openai_tool_to_anthropic(t) for t in tools]
 
-    # 主人 2026-05-28: metadata.user_id 注入 (Anthropic cache routing 关键).
-    # CC `messages.create(metadata={user_id: ...})` 用 metadata.user_id 路由请求到同
-    # backend, 同 scope cache 物理位置稳定. 这是 catty session 管理的本质实现.
+    # 主人 2026-05-28: metadata.user_id 注入 (Anthropic abuse detection / rate limit).
     # 私聊: user_id="qq_private_<uid>"; 群聊: user_id="qq_group_<gid>"
     if metadata_user_id:
         create_kwargs["metadata"] = {"user_id": metadata_user_id}
+
+    # 主人 2026-05-28 C2: cache_diagnostics beta — 让 Anthropic 自己告诉我们 cache miss 原因.
+    # 传上一次同 scope request 的 message_id, Anthropic 返回 diagnostics.cache_miss_reason
+    # (system_changed / tools_changed / messages_changed / model_changed / metadata_changed).
+    _prev_msg_id = ""
+    try:
+        if metadata_user_id:
+            _prev_msg_id = _LAST_MESSAGE_ID_BY_SCOPE.get(metadata_user_id, "")
+        if _prev_msg_id:
+            create_kwargs["diagnostics"] = {"previous_message_id": _prev_msg_id}
+    except Exception:  # noqa: BLE001
+        pass
 
     # server-side compaction (compact-2026-01-12)
     if enable_compaction:
@@ -761,6 +780,43 @@ async def post_messages_native(
     except Exception as exc:
         logger.warning("anthropic /v1/messages stream call failed: %s", exc)
         raise
+
+    # 主人 2026-05-28 C2: 保存 message_id 供下次 diagnostics 用 + 解析 cache_miss_reason
+    try:
+        msg_id = getattr(response, "id", "") or ""
+        if metadata_user_id and msg_id:
+            _LAST_MESSAGE_ID_BY_SCOPE[metadata_user_id] = msg_id
+        # 解析 diagnostics.cache_miss_reason (Anthropic 自己告诉我们为啥 miss)
+        diag = getattr(response, "diagnostics", None)
+        if diag is not None:
+            miss_reason = getattr(diag, "cache_miss_reason", None)
+            if miss_reason is not None:
+                # miss_reason 可能是 dict / Pydantic model, 都安全 stringify
+                miss_type = getattr(miss_reason, "type", None) or (
+                    miss_reason.get("type") if isinstance(miss_reason, dict) else ""
+                )
+                miss_details = ""
+                try:
+                    if hasattr(miss_reason, "model_dump"):
+                        miss_details = str(miss_reason.model_dump())[:300]
+                    elif isinstance(miss_reason, dict):
+                        miss_details = str(miss_reason)[:300]
+                    else:
+                        miss_details = str(miss_reason)[:300]
+                except Exception:  # noqa: BLE001
+                    miss_details = "<unparseable>"
+                logger.info(
+                    "cache_miss_reason scope=%s type=%s prev_msg=%s details=%s",
+                    metadata_user_id or "?", miss_type, _prev_msg_id[:24] or "(none)", miss_details,
+                )
+            else:
+                # 没 miss_reason 字段 — 说明上一次 prev_msg 找到匹配 (cache hit)
+                logger.info(
+                    "cache hit scope=%s prev_msg=%s msg_id=%s",
+                    metadata_user_id or "?", _prev_msg_id[:24] or "(none)", msg_id[:24],
+                )
+    except Exception as _diag_exc:  # noqa: BLE001
+        logger.debug(f"diagnostics parse failed (non-fatal): {_diag_exc}")
 
     data = _native_response_to_openai_shape(response)
     _log_native_usage(data, model)
