@@ -67,17 +67,13 @@ _DETAIL_PATTERNS: list[tuple[re.Pattern, str]] = [
 ]
 
 
-def _extract_details(text: str) -> dict[str, list[str]]:
-    """从单条 user msg 抓所有命中的细节. 返回 {field: [snippet, ...]}.
-
-    snippet 是 group 提取后 strip 过的纯内容 (不含主语 '我/人家').
-    """
+def _legacy_extract_details(text: str) -> dict[str, list[str]]:
+    """旧 regex pattern 抽细节. 保留作 fallback + NLU 路径求 union."""
     if not text:
         return {}
     out: dict[str, list[str]] = {}
     for pat, field in _DETAIL_PATTERNS:
         for m in pat.finditer(text):
-            # 取最后一个非空 group 作为 detail content
             groups = [g for g in m.groups() if g]
             if not groups:
                 continue
@@ -88,6 +84,136 @@ def _extract_details(text: str) -> dict[str, list[str]]:
                 detail = detail[:30]
             out.setdefault(field, []).append(detail)
     return out
+
+
+# ── HanLP NER → field 映射 rule layer (commit 3) ───────────────────────
+
+_PET_NOUNS = ("猫", "狗", "鱼", "鸟", "鹦鹉", "龟", "兔子", "兔", "仓鼠", "柯基", "金毛", "哈士奇")
+_PET_VERBS = ("养", "有")
+_WORKPLACE_HINTS = ("公司", "上班", "工作", "单位", "学校", "大学")
+_FAVORITE_VERBS = ("喜欢", "爱", "最爱", "超爱")
+_RECENT_VERBS = ("去", "做", "买", "吃", "玩", "看", "追", "学")
+_FOOD_WORDS = (
+    "饭", "菜", "面", "肉", "鱼", "汤", "粥", "粉", "饺", "包子", "馒头",
+    "排骨", "鸡", "鸭", "鹅", "虾", "蟹", "牛", "猪", "羊", "豆腐", "鸡蛋",
+    "披萨", "汉堡", "薯条", "蛋糕", "奶茶", "咖啡", "面包", "甜品",
+)
+_JOB_TABLE = (
+    "程序员", "工程师", "设计师", "学生", "医生", "老师", "律师", "司机",
+    "厨师", "护士", "经理", "销售", "运营", "产品", "测试", "前端", "后端",
+    "全栈", "架构师", "运维", "实习生", "博士", "硕士", "研究员", "讲师",
+    "教授", "会计", "出纳", "导演", "记者", "编辑",
+)
+
+
+def _map_entities_to_slots(
+    text: str,
+    entities: dict[str, list],
+    existing: dict[str, list[str]],
+) -> dict[str, list[str]]:
+    """把 HanLP entities + POS 转成 user_details 槽位.
+
+    existing 是 legacy regex 已抽到的细节, 用于 dedupe (避免双填).
+    rule layer ~50 行, 不调外部.
+    """
+    out: dict[str, list[str]] = {}
+    pos_pairs: list[tuple[str, str]] = entities.get("POS") or []
+    tokens: list[str] = [w for w, _p in pos_pairs] if pos_pairs else []
+    token_set = set(tokens)
+    locs: list[str] = entities.get("LOC") or []
+    orgs: list[str] = entities.get("ORG") or []
+    dates: list[str] = entities.get("DATE") or []
+
+    def _add(field: str, val: str) -> None:
+        val = val.strip()
+        if not val or len(val) < 2 or len(val) > 30:
+            return
+        cur = existing.get(field, [])
+        out_list = out.setdefault(field, [])
+        if val in cur or val in out_list:
+            return
+        # substring 包含也算重 (e.g. legacy 已存 '柯基', 别再加 '一只柯基')
+        if any(val in c or c in val for c in (cur + out_list)):
+            return
+        out_list.append(val)
+
+    # workplace: ORG/LOC + token 含 workplace hint
+    if (orgs or locs) and any(h in tokens for h in _WORKPLACE_HINTS):
+        for e in orgs + locs:
+            _add("workplace", e)
+
+    # job: 30 职业查表 ∩ tokens
+    for w in tokens:
+        if w in _JOB_TABLE:
+            _add("job", w)
+
+    # pet: token 含宠物名词 + 前 3 tokens 内有 养/有
+    for i, w in enumerate(tokens):
+        if any(p in w for p in _PET_NOUNS):
+            window = tokens[max(0, i - 3): i]
+            if any(v in window for v in _PET_VERBS):
+                _add("pet", w)
+
+    # favorite_foods / hobby: 喜欢/爱 后跟名词
+    for i, (w, p) in enumerate(pos_pairs):
+        if w in _FAVORITE_VERBS:
+            # 看后两个 token
+            for j in range(i + 1, min(i + 4, len(pos_pairs))):
+                next_w, next_p = pos_pairs[j]
+                if next_p.startswith("N") or next_p.startswith("v"):
+                    if any(f in next_w for f in _FOOD_WORDS):
+                        _add("favorite_foods", next_w)
+                    elif len(next_w) >= 2:
+                        _add("hobby", next_w)
+                    break
+
+    # recent_event: DATE entity + 后续 verb (去/做/买/吃) + 名词
+    if dates:
+        for i, (w, p) in enumerate(pos_pairs):
+            if w in _RECENT_VERBS:
+                # 拼 verb + 后一个 NP
+                if i + 1 < len(pos_pairs):
+                    next_w, _np = pos_pairs[i + 1]
+                    snippet = f"{w}{next_w}"
+                    _add("recent_event", snippet)
+                    break
+
+    return out
+
+
+def _extract_details(text: str) -> dict[str, list[str]]:
+    """从单条 user msg 抓所有命中的细节. 返回 {field: [snippet, ...]}.
+
+    主人 2026-05-28: 加 HanLP NER union 路径.
+    - legacy regex 永远跑 (保 recall + 第一次启动时 hanlp 没加载也能用)
+    - 配 catty_use_hanlp 开 → 再跑 HanLP NER + rule layer, 跟 legacy 结果求 union
+    - HanLP 失败 / 短文本 / 关闭 → 仅 legacy
+    """
+    legacy = _legacy_extract_details(text)
+    if not text:
+        return legacy
+    try:
+        from nonebot import get_driver
+        cfg = get_driver().config
+    except Exception:
+        return legacy
+    if not bool(getattr(cfg, "catty_use_hanlp", False)):
+        return legacy
+    try:
+        from .nlu import hanlp_engine
+    except Exception:
+        return legacy
+    entities = hanlp_engine.extract_entities_sync(text)
+    if not entities:
+        return legacy
+    nlu = _map_entities_to_slots(text, entities, legacy)
+    if not nlu:
+        return legacy
+    # union: legacy slots + nlu slots
+    merged: dict[str, list[str]] = {k: list(v) for k, v in legacy.items()}
+    for field, items in nlu.items():
+        merged.setdefault(field, []).extend(items)
+    return merged
 
 
 # ── Store ───────────────────────────────────────────────────────────────

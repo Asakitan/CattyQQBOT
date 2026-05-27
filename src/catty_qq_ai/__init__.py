@@ -4298,7 +4298,22 @@ async def _build_messages(
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"user_vibe_store.record_message failed: {exc}")
     try:
-        user_details_store.record_message(str(event.user_id), incoming.text or "")
+        # 主人 2026-05-28: 开 hanlp 后 _extract_details 会跑 NER (~50-200ms +
+        # 首次加载 5-15s). 不能阻塞 event loop, fire-and-forget 到 thread pool.
+        # 关 hanlp 时跑 sync (legacy regex only, <1ms).
+        _uid_for_details = str(event.user_id)
+        _text_for_details = incoming.text or ""
+        _use_hanlp = bool(getattr(config, "catty_use_hanlp", False))
+        if _use_hanlp:
+            try:
+                loop = asyncio.get_running_loop()
+                loop.create_task(asyncio.to_thread(
+                    user_details_store.record_message, _uid_for_details, _text_for_details,
+                ))
+            except RuntimeError:
+                user_details_store.record_message(_uid_for_details, _text_for_details)
+        else:
+            user_details_store.record_message(_uid_for_details, _text_for_details)
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"user_details_store.record_message failed: {exc}")
     # 主人 2026-05-28: filter AI 路径全停 — mood classifier 不再调 GLM/spark 小模型,
@@ -8440,6 +8455,39 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(_scope_lore_auto_summary_loop())
     asyncio.create_task(_catty_rag_backfill_once())
     asyncio.create_task(_catty_rag_prune_loop())
+    # 主人 2026-05-28: NLU warmup — text2vec / hanlp 后台加载,
+    # 避免第一条消息撞冷启 (text2vec ~2-5s, hanlp ~5-15s, prototypes build ~30s).
+    # catty_nlu_warmup_on_startup=False 时跳过 (默认 True).
+    if bool(getattr(config, "catty_nlu_warmup_on_startup", True)):
+        asyncio.create_task(_nlu_warmup_task())
+
+
+async def _nlu_warmup_task() -> None:
+    """后台预热 text2vec + hanlp + prototype 向量. 失败不致命."""
+    try:
+        from .nlu import text2vec_engine, hanlp_engine, prototypes
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"nlu warmup skipped (import failed): {exc}")
+        return
+    try:
+        if bool(getattr(config, "catty_use_text2vec", False)):
+            logger.info("nlu warmup: text2vec preloading...")
+            ok = await text2vec_engine.warmup()
+            if ok:
+                # prototypes 也用 to_thread 预 build (~30s)
+                await asyncio.to_thread(prototypes._ensure_built)
+                logger.info("nlu warmup: text2vec + prototypes ready")
+            else:
+                logger.warning("nlu warmup: text2vec load failed")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"nlu warmup text2vec exception: {exc}")
+    try:
+        if bool(getattr(config, "catty_use_hanlp", False)):
+            logger.info("nlu warmup: hanlp preloading...")
+            ok = await hanlp_engine.warmup()
+            logger.info(f"nlu warmup: hanlp {'ready' if ok else 'failed'}")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"nlu warmup hanlp exception: {exc}")
 
 
 @get_driver().on_shutdown
