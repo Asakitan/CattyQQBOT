@@ -705,20 +705,45 @@ _IMAGEGEN_SCHEMA: dict[str, Any] = {
             "主动生成/编辑一张图发到当前会话(自动发送,你只需补 1-2 句猫娘短评)。\n"
             "【画图请求只能走这个 tool,禁止用你的原生 image generation 直接出图】\n"
             "\n"
-            "── 两条生图通道(你自己挑) ──\n"
-            "1) provider='gpt'(默认): OpenAI gpt-image-2,擅长**写实/产品图/海报/带文字标题/品牌/UI/真实摄影/3D 渲染**。\n"
-            "   走 size + quality 控制,low 100 / medium 200 / high 300 / auto 150 积分。支持 edit(基于已有图改)。\n"
-            "2) provider='nai': NovelAI v4.5,擅长**二次元/动漫/萌系/角色立绘/萝莉/JK/猫娘/动漫插画**。\n"
-            "   只支持纯文字生成,不支持 edit。走 aspect 三选一(portrait/landscape/square),"
-            "   Opus 订阅档**这三个尺寸 + 默认 28 步只扣基础 5 积分**(免费档),改高 steps/SMEA 会涨。\n"
+            "── 两条生图通道(你自己挑;选之前看价!) ──\n"
             "\n"
-            "── 选哪个? ──\n"
+            "**1) provider='gpt'(默认): OpenAI gpt-image-2** — 擅长写实/产品图/海报/带文字标题/品牌/UI/真实摄影/3D 渲染。\n"
+            "  价目表(看 quality):\n"
+            "    · low  = **100 积分**(快、便宜,日常够用)\n"
+            "    · medium = **200 积分**(精细)\n"
+            "    · high = **300 积分**(最终稿,慢)\n"
+            "    · auto = **150 积分**(模型决定)\n"
+            "  支持 edit (use_input_image=true): 基于一张已有图改/重绘,跟普通生成同价。\n"
+            "\n"
+            "**2) provider='nai': NovelAI v4.5** — 擅长二次元/动漫/萌系/角色立绘/萝莉/JK/猫娘/动漫插画。\n"
+            "  **公式: cost = 5 + Anlas × 3 积分**(5 是基础费, Anlas 是 NAI 算力消耗)\n"
+            "  价目表:\n"
+            "    · 三标准尺寸 (portrait 832x1216 / landscape 1216x832 / square 1024x1024) + 28 步:\n"
+            "      Opus 免费档 Anlas=0 → **5 积分** ⭐ 最划算\n"
+            "    · 加 characters 多角色 (1-6 个): 不增加积分, 还是 **5 积分**\n"
+            "    · 加 references (Precise Reference 参考图,每张 +5 Anlas):\n"
+            "      1 张 = 5 + 5×3 = **20 积分**\n"
+            "      2 张 = 5 + 10×3 = **35 积分**\n"
+            "      3 张 = 5 + 15×3 = **50 积分**\n"
+            "      4 张 = 5 + 20×3 = **65 积分**\n"
+            "    · 非标准尺寸/超 28 步: Anlas 走 generate 公式(大致大尺寸/高 steps 时 30-80 Anlas), 几十积分起。\n"
+            "  只支持纯文字生成 + characters + references, 不支持 edit (要改图走 catty_nai_director)。\n"
+            "\n"
+            "**主人(catty_owner_qq)豁免**: 无论选哪条通道,主人不扣分(余额无限)。\n"
+            "\n"
+            "── 选哪个? (默认优先看价格 + 风格匹配) ──\n"
             "用户没明说时,看主体:\n"
-            "  - 二次元角色/动漫风/猫娘/萌系/插画/卡通/福瑞 SFW → provider='nai'\n"
-            "  - 写实/产品图/海报/带具体英文/中文文字标题/UI/广告/真实风景照 → provider='gpt'\n"
+            "  - 二次元角色/动漫风/猫娘/萌系/插画/卡通/福瑞 SFW → provider='nai'(便宜)\n"
+            "  - 写实/产品图/海报/带具体英文/中文文字标题/UI/广告/真实风景照 → provider='gpt'(贵但风格对)\n"
             "  - 用户**明确指定**『用 NovelAI / 用 nai / 用动漫风格』→ provider='nai'\n"
             "  - 用户**明确指定**『用 GPT / 用真实风格 / 带文字海报』→ provider='gpt'\n"
-            "  - 不确定时:含『画一个 xx 美少女/角色/二次元』默认 nai,其余默认 gpt。\n"
+            "  - **省钱原则**: 用户没指定 quality 时默认 nai 5 积分; 必须 gpt 时优先 low 100 积分\n"
+            "  - 不确定时:含『画一个 xx 美少女/角色/二次元』默认 nai,其余默认 gpt low。\n"
+            "\n"
+            "── 必须提前报价(笨猫人格规则) ──\n"
+            "调 tool 之前,在回复里先告诉用户『这张图要扣 X 积分喵～』, 让用户知情。"
+            "tool 返回的 cost 字段里有精确积分数,你拿到后在最终回复里再确认一次"
+            "(『画好啦~消耗了 X 积分,主人现在还剩 Y 分 ฅฅ』)。主人豁免时不报价,直接画。\n"
             "\n"
             "── prompt 改写 ──\n"
             "可以精简重组,但所有要素一个都不能漏。允许:口语化改成生图 prompt、合并同义词、去冗余客套、"
@@ -900,9 +925,18 @@ _NAI_DIRECTOR_SCHEMA: dict[str, Any] = {
             "必须用户**直接指向猫猫**(@ / 直呼猫猫) + 明确说『给这图/把这图/这张...』+ 具体加工要求。\n"
             "不要在闲聊提到『描线/抠图』时主动调,等用户明确要求。\n"
             "\n"
+            "── 价目表(公式: 5 + Anlas × 3 积分) ──\n"
+            "  · lineart / sketch / colorize / emotion / declutter / transform: Opus 免 Anlas, "
+            "**5 积分/张**(基础费)\n"
+            "  · bg-removal: Anlas = (generate_anlas × 3 + 5), 832×1216 大约 (17×3+5)=56 Anlas, "
+            "→ **5 + 56×3 = ~170 积分** ⚠ 贵! 用户没明确要求抠图不要主动调。\n"
+            "\n"
+            "── 必须提前报价 ──\n"
+            "调 tool 之前先告诉用户『这次加工要扣 X 积分喵～』(bg-removal 要明确警告贵), tool 返回的 cost 字段拿到后再确认一次。\n"
+            "\n"
             "── 自动 ──\n"
             "tool 自动选输入图(当前消息附图优先,fallback 群最近图)、上传、解 zip、发图。"
-            "你拿到 image_sent=true 后只补 1-2 句猫娘短评。"
+            "你拿到 image_sent=true 后只补 1-2 句猫娘短评 + 报价。"
             "**禁止**贴 base64/file 路径到回复;**禁止**重复调。"
         ),
         "parameters": {
@@ -2157,7 +2191,7 @@ async def _exec_imagegen_nai(
             + (
                 ""
                 if is_owner_charge
-                else f" 本次消耗 {cost} 积分,该用户剩余 {balance_after} 分(余额低于 100 时可以提一句『再画就要签到啦喵~』,不用强调)。"
+                else f" **必须在最终回复里报价**:『这张图消耗了 {cost} 积分,主人现在还剩 {balance_after} 分喵～』(余额低于 100 时加一句『再画要签到啦~』,不用过分强调)。"
             )
         ),
     }
@@ -2426,7 +2460,7 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
             + (
                 ""
                 if is_owner_charge
-                else f" 本次消耗 {cost} 积分,该用户剩余 {balance_after} 分。"
+                else f" **必须在最终回复里报价**:『director({req_type}) 消耗了 {cost} 积分,主人还剩 {balance_after} 分喵～』"
             )
         ),
     }
@@ -2890,7 +2924,7 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
             + (
                 ""
                 if is_owner_charge
-                else f" 本次消耗 {image_cost} 积分,该用户剩余 {balance_after} 分(余额低于 100 时可以提一句『再画就要签到啦喵~』,不用强调)。"
+                else f" **必须在最终回复里报价**:『这张图(quality={quality})消耗了 {image_cost} 积分,主人现在还剩 {balance_after} 分喵～』(余额低于 100 时加『再画要签到啦~』)。"
             )
         ),
     }
