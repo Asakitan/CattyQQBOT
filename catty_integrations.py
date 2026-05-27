@@ -255,11 +255,22 @@ def _ollama_models_to_check(config: dict[str, Any], ollama: dict[str, Any]) -> l
     # ai_fallback.model (例如 catty-7b) 在 cloud 超时后被立即调用。如果它没在 ollama
     # 注册表里,_pull_ollama_model 会尝试 pull,本地 Modelfile 派生的模型 pull 会失败但
     # 至少给出明确报错;比"runtime 第一条用户消息才发现 404"要好得多。
+    # 主人 2026-05-28: ai_fallback 改云端 deepseek 后, base_url 是 api.deepseek.com,
+    # 不能再无条件 ollama pull "deepseek-v4-flash" (会 timeout 1800s). 只在 base_url
+    # 是本地 (localhost / 127.0.0.1 / 空 / 含 ollama) 时才 pull.
     ai_fallback = config.get("ai_fallback", {})
     if isinstance(ai_fallback, dict):
-        text = str(ai_fallback.get("model") or "").strip()
-        if text and text not in models:
-            models.append(text)
+        fallback_url = str(ai_fallback.get("base_url") or "").lower()
+        is_local_fallback = (
+            not fallback_url
+            or "localhost" in fallback_url
+            or "127.0.0.1" in fallback_url
+            or "ollama" in fallback_url
+        )
+        if is_local_fallback:
+            text = str(ai_fallback.get("model") or "").strip()
+            if text and text not in models:
+                models.append(text)
     return models
 
 
