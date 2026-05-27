@@ -21,6 +21,7 @@
     "skip_if_napcat_running": true
   },
   "ai": {
+    "_note": "主人 2026-05-28: 走 Anthropic native /v1/messages 必须 anthropic_native_enabled=true. 否则 catty 退回 OpenAI-compat /v1/chat/completions, 中转 (NewAPI) 转 Anthropic 会因 messages[role=system] 报 400 'Unexpected role system'. native 路径同时启用 prompt caching + metadata.user_id 路由 + 4 个 cache_control breakpoints.",
     "base_url": "https://api.openai.com/v1",
     "api_key": "",
     "model": "gpt-4o-mini",
@@ -29,7 +30,10 @@
     "temperature": 0.7,
     "max_tokens": 1000,
     "request_timeout": 60,
-    "http_proxy": ""
+    "http_proxy": "",
+    "anthropic_native_enabled": false,
+    "compaction_enabled": false,
+    "compaction_trigger_tokens": 150000
   },
   "ai_fallback": {
     "enabled": false,
