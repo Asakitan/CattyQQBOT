@@ -7573,6 +7573,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # 这里走 OneBot get_msg 把 reply 图拉出来,合并到 input_image_urls 让搜图/imagegen 都能看到。
         # 仅在当前消息没附图 + 存在 reply 时拉(避免每条消息都发 API 请求增加延迟)。
         _tool_input_images: list[str] = list(incoming.image_urls or [])
+        _tool_input_image_source = "current" if _tool_input_images else ""
         if not _tool_input_images and reply_message_ids(event):
             try:
                 _reply_imgs = await _extract_reply_image_urls(bot, event)
@@ -7581,6 +7582,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _reply_imgs = []
             if _reply_imgs:
                 _tool_input_images.extend(_reply_imgs)
+                _tool_input_image_source = "reply"
                 logger.info(
                     f"tool ctx: added {len(_reply_imgs)} reply image(s) for {event.user_id}@"
                     f"{getattr(event, 'group_id', 'private')}"
@@ -7639,6 +7641,26 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     messages = inject_author_note(messages, _adaptive_note)
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"author_note inject failed (non-fatal): {exc}")
+        # 「ToolContext 携带图片」可见性 hint:tool_ctx.input_image_urls / recent_image_urls
+        # 不在 messages 里,AI 看不到——主人之前问『帮我搜下作者』(引用图),AI 不知道 reply
+        # 图已经拉到 ctx 里,直接退化成 web_search 搜『作者』两个字跑去查百科。这里把图源摘要
+        # 显式注入 system 让 AI 知道『我现在确实有图可以丢给 catty_image_search』。
+        # 紧贴 user 当前消息(messages.insert(-1, ...))确保不被长 history 稀释。
+        if _tool_input_images:
+            _img_count = len(_tool_input_images)
+            _src_label = {
+                "reply": f"用户在**引用消息**里附了 {_img_count} 张图(当前消息纯文字,图在 reply 里)",
+                "current": f"用户在**当前消息**里附了 {_img_count} 张图",
+            }.get(_tool_input_image_source, f"上下文里有 {_img_count} 张图")
+            _img_hint = (
+                f"[ToolContext 图源就位] {_src_label}。"
+                "如果用户的请求涉及『搜/查/找/认 + 作者/画师/出处/原图/谁画的/这谁/什么番/X 推主』,"
+                "**必须直接调 catty_image_search**(image_url 参数留空,tool 会自动取 input 图);"
+                "**禁止**因为『没看到图链接』就走 catty_web_search 搜文字——文字搜索只能拿到"
+                "百科/晋江/阅文这种泛页,反向认图必须把图喂给搜图引擎。"
+                "kind 选择:二次元 illust → artwork;真人/自拍/X 推 → photo;不确定 → auto。"
+            )
+            messages.insert(-1, {"role": "system", "content": _img_hint})
         try:
             if _prefer_spark:
                 # NSFW deep 路径: 默认走 catty_nsfw_spark_model (5.5) — 主人要多用 5.5.
