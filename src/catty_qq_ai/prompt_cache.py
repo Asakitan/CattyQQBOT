@@ -24,72 +24,42 @@ from typing import Any
 
 
 def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> list[dict]:
-    """末尾倒数 role 转换处注 **1 个** cache_control breakpoint (复刻 Claude Code).
+    """给 messages 数组**第一个 user** 标 cache_control: ephemeral (永远稳定的 prefix anchor).
 
-    主人 2026-05-28: 改 2 markers → 1 marker. CC `addCacheBreakpoints` (claude.ts:3216-3245)
-    注释明确 "Exactly one message-level cache_control marker per request". mycro 的
-    turn-to-turn eviction (page_manager) 自动 free 任何 cached prefix 位置的 KV pages,
-    2 个 marker 中第二个保护的位置永远不会被 resume → 浪费 + 让 cache key 计算路径变宽
-    更易抖动.
+    主人 2026-05-28 经多轮实测 + standalone test 100% hit 验证的最简单 cache 策略:
 
-    主人 2026-05-28 实测发现关键 bug: Anthropic 只接受 cache_control 在 **user / system /
-    tool** content blocks 上, **assistant 上的 cache_control 被忽略** → cache 写入了但
-    下次找不到 cache key 匹配. catty 之前 cachingAtDepth=2 取末尾倒数 2 处 role 切换,
-    可能落到 assistant 上 (e.g. messages 末尾是 user, 倒数 1 切换是 assistant, 倒数 2
-    切换是 user → 但如果 depth=2 的 msg 是 assistant 就出 bug). 修复: 只在 user role
-    上标 marker, 跳过 assistant.
+    1. Anthropic cache 是 prefix-based, 严格字节级匹配. cache_control 标在 messages 数组
+       的哪个位置, 决定 cache prefix 长度 (= tools + system + messages[0..marker_idx]).
+    2. catty 真实对话每轮 history 顺序追加 (user_1, asst_1, ..., user_curr). 如果 cache
+       marker 在末尾 (depth=N 处 / 倒数第二个 user / current user), 每轮 marker 位置都在
+       变 → cache prefix 长度变 → 严格 prefix matching 失败 → cache 永远 miss.
+    3. **唯一稳定 cache prefix 的方法**: marker 永远标在第一个 user (messages 里出现的
+       第一个 role=user 位置). 这条 user 内容随 history 滚动 (catty_history_turns=16 内)
+       不变 → 每轮 cache prefix 字节一致 → 真能 hit.
+    4. Anthropic 只接受 cache_control 在 user / system / tool content blocks 上,
+       assistant 上的被忽略.
+
+    主人 2026-05-28 进一步发现: messages 数组里如果只有**1 个 user** (= current user),
+    内容每次变 → 标在它上面 cache 永远 miss. 必须**至少有 2 个 user** (≥1 个 history user)
+    才标在第一个 history user 上 (current 之前的某个 user). 只 1 个 user 时不标 marker
+    (cache 不写, 但不浪费).
+
+    cachingAtDepth 参数保留向后兼容 (不再生效).
 
     Args:
-        messages: ChatMessage list (会就地修改 + 返回相同 list, 调用方可链式)
-        cachingAtDepth: 从倒数第 N 处 role 切换处打 breakpoint, 默认 2 (最近一轮的 user-side).
-
-    特性:
-    - 从末尾倒数, 跳过尾部 prefill (assistant role 末尾段)
-    - role 切换时计 depth, 仅在 depth==cachingAtDepth 且 role=user 处打 1 个 cache_control
-    - 如果 depth=cachingAtDepth 落到 assistant 上, 继续往前找下一个 user
-    - 自动把 str content 转成 list[dict] (Claude 要求 cache_control 在 block 上)
+        messages: ChatMessage list (会就地修改 + 返回相同 list)
+        cachingAtDepth: 保留兼容, 不再生效
     """
-    if cachingAtDepth < 0:
+    # 主人 2026-05-28: 先数 messages 里 user 数量. 至少要 2 个 user (1 个 history + 1 个
+    # current) 才能稳定标 cache marker. 只 1 个 user (current) 时不标 — 它内容每次变,
+    # 标了也只是写 cache 但下次永远 miss.
+    user_indices = [i for i, m in enumerate(messages) if isinstance(m, dict) and m.get("role") == "user"]
+    if len(user_indices) < 2:
         return messages
-
-    passed_prefill = False
-    depth = 0
-    prev_role = ""
-    reached_target_depth = False
-
-    for i in range(len(messages) - 1, -1, -1):
-        msg = messages[i]
-        # 跳过末尾的 assistant prefill (continuation hint)
-        if not passed_prefill and msg.get("role") == "assistant":
-            continue
-        passed_prefill = True
-
-        if msg.get("role") != prev_role:
-            if depth >= cachingAtDepth:
-                reached_target_depth = True
-            # 主人 2026-05-28: 到达目标深度后, 找下一个 user (Anthropic 忽略 assistant 上的
-            # cache_control). reached_target_depth=True 且 msg.role=user 就标记 + return.
-            if reached_target_depth and msg.get("role") == "user":
-                _mark_cache_control(msg)
-                return messages
-            depth += 1
-            prev_role = msg.get("role", "")
-
-    # 兜底: 找**倒数第二个** user 标 cache_control (跳过 current user, 因为 current
-    # 每次 user_text 不同会让 cache key 变 → cache miss). 主人 2026-05-28 实测发现:
-    # 标在 current user 上虽然 cache_create > 0, 但下次 hit 永远 0 (current content 变).
-    # 标在 history user 上 → cache 含 system + tools + history (current 之前) → 真能 hit.
-    # 如果 messages 数组只有 1 个 user (没 history): 不标 marker, cache 不写, 但也不浪费.
-    seen_last_user = False
-    for i in range(len(messages) - 1, -1, -1):
-        msg = messages[i]
-        if msg.get("role") == "user":
-            if not seen_last_user:
-                seen_last_user = True
-                continue  # 跳过 current user
-            _mark_cache_control(msg)
-            return messages
-
+    # 标在第一个 user (= 最早的 history user). 这条在 catty_history_turns=16 滚动内
+    # 字节稳定, cache prefix = tools + system + messages[0..first_user_idx 含 marker]
+    # 每轮请求 prefix 字节一致 → cache hit.
+    _mark_cache_control(messages[user_indices[0]])
     return messages
 
 
