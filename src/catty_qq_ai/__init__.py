@@ -9555,6 +9555,18 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
 # 用途: 通过 rpwsh `Invoke-RestMethod` 触发, 验证 prompt 改动效果 / 智能层串接.
 # 仅监听 127.0.0.1 — 外网不可达 (nonebot fastapi 默认绑 0.0.0.0, 但生产环境
 # bot 端口前面有防火墙规则, 这里加 user_id 鉴权再防误用).
+# 主人 2026-05-28 C6: FastAPI dashboard 路由 (catty context window + cache 监控)
+@get_driver().on_startup
+async def _mount_catty_dashboard() -> None:
+    try:
+        from .dashboard import mount_dashboard_routes
+        ok = mount_dashboard_routes()
+        if ok:
+            logger.info("catty dashboard ready: http://127.0.0.1:8080/dashboard")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"catty dashboard mount failed (non-fatal): {exc}")
+
+
 @get_driver().on_startup
 async def _mount_dev_sim_chat_endpoint() -> None:
     try:
