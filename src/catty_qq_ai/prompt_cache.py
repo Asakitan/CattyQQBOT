@@ -24,16 +24,21 @@ from typing import Any
 
 
 def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> list[dict]:
-    """ST PR #3085 算法移植 — 末尾倒数 role 转换处注 2 个 breakpoint (depth 和 depth+2).
+    """末尾倒数 role 转换处注 **1 个** cache_control breakpoint (复刻 Claude Code).
+
+    主人 2026-05-28: 改 2 markers → 1 marker. CC `addCacheBreakpoints` (claude.ts:3216-3245)
+    注释明确 "Exactly one message-level cache_control marker per request". mycro 的
+    turn-to-turn eviction (page_manager) 自动 free 任何 cached prefix 位置的 KV pages,
+    2 个 marker 中第二个保护的位置永远不会被 resume → 浪费 + 让 cache key 计算路径变宽
+    更易抖动.
 
     Args:
         messages: ChatMessage list (会就地修改 + 返回相同 list, 调用方可链式)
-        cachingAtDepth: 从倒数第 N 处 role 切换开始打 breakpoint, 推荐偶数.
-            默认 2: 最近第 2 + 第 4 处 role 切换打 breakpoint, 覆盖最近一两轮.
+        cachingAtDepth: 从倒数第 N 处 role 切换处打 breakpoint, 默认 2 (最近一轮的 user-side).
 
     特性:
     - 从末尾倒数, 跳过尾部 prefill (assistant role 末尾段)
-    - role 切换时计 depth, 打 cache_control 在 content 最后一个 block
+    - role 切换时计 depth, 仅在 depth==cachingAtDepth 处打 1 个 cache_control
     - 自动把 str content 转成 list[dict] (Claude 要求 cache_control 在 block 上)
     """
     if cachingAtDepth < 0:
@@ -51,10 +56,10 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
         passed_prefill = True
 
         if msg.get("role") != prev_role:
-            if depth == cachingAtDepth or depth == cachingAtDepth + 2:
+            if depth == cachingAtDepth:
                 _mark_cache_control(msg)
-            if depth == cachingAtDepth + 2:
-                break
+                # 仅 1 个 marker, 打完立刻 return (复刻 CC 行为)
+                return messages
             depth += 1
             prev_role = msg.get("role", "")
 
