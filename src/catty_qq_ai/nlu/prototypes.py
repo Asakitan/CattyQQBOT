@@ -117,9 +117,10 @@ def _compute_hash() -> str:
     h = hashlib.sha256()
     cfg_name = "shibing624/text2vec-base-chinese"
     try:
-        from nonebot import get_driver
+        from nonebot import get_plugin_config
+        from ..config import Config
         cfg_name = (
-            getattr(get_driver().config, "catty_text2vec_model_name", "")
+            getattr(get_plugin_config(Config), "catty_text2vec_model_name", "")
             or cfg_name
         )
     except Exception:
@@ -259,8 +260,9 @@ def _ensure_built() -> bool:
 
 def _get_model_name_safe() -> str:
     try:
-        from nonebot import get_driver
-        return getattr(get_driver().config, "catty_text2vec_model_name", "") or ""
+        from nonebot import get_plugin_config
+        from ..config import Config
+        return getattr(get_plugin_config(Config), "catty_text2vec_model_name", "") or ""
     except Exception:
         return ""
 

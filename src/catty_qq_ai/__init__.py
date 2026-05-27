@@ -3005,12 +3005,7 @@ def _credit_affection_for_event_once(event: MessageEvent) -> None:
         # 主人 2026-05-28: 开了 text2vec → score_user_message 会 embed (~50ms +
         # 首次加载 2-5s), 不能阻塞 event loop. fire-and-forget 到 thread pool.
         # 关 text2vec 时也跑 to_thread (开销 ~0.1ms 可忽略, 统一路径).
-        use_t2v = False
-        try:
-            from nonebot import get_driver
-            use_t2v = bool(getattr(get_driver().config, "catty_use_text2vec", False))
-        except Exception:
-            pass
+        use_t2v = bool(getattr(config, "catty_use_text2vec", False))
         if use_t2v:
             try:
                 loop = asyncio.get_running_loop()

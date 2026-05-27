@@ -166,8 +166,9 @@ def detect_trend(recent_user_texts: list[str]) -> str:
     legacy = _legacy_detect_trend(recent_user_texts)
 
     try:
-        from nonebot import get_driver
-        cfg = get_driver().config
+        from nonebot import get_plugin_config
+        from .config import Config
+        cfg = get_plugin_config(Config)
     except Exception:
         return legacy
     if not bool(getattr(cfg, "catty_use_text2vec", False)):

@@ -40,8 +40,9 @@ _MAX_TEXT_LEN = 200  # 长文截断 (NER 模型对长文吃 CPU 严重)
 
 def _config() -> Any:
     try:
-        from nonebot import get_driver
-        return get_driver().config
+        from nonebot import get_plugin_config
+        from ..config import Config
+        return get_plugin_config(Config)
     except Exception:
         return None
 

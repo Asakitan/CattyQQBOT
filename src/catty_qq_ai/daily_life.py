@@ -154,8 +154,9 @@ def detect_topics(text: str | None) -> set[str]:
     if not text:
         return hits_regex
     try:
-        from nonebot import get_driver
-        cfg = get_driver().config
+        from nonebot import get_plugin_config
+        from .config import Config
+        cfg = get_plugin_config(Config)
     except Exception:
         return hits_regex
     if not bool(getattr(cfg, "catty_use_text2vec", False)):

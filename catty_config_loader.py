@@ -578,6 +578,29 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FILTER_ANGER_MUTE_THRESHOLD", filter_config.get("anger_mute_threshold"))
     _set_env("CATTY_FILTER_ANGER_COOLDOWN_SECONDS", filter_config.get("anger_cooldown_seconds"))
 
+    # ── Local NLU enrichment (jieba + text2vec + HanLP) ───────────────
+    # 主人 2026-05-28: 加 encoder-only 本地 NLU 增强层. config.json 可以放顶层
+    # "catty_use_jieba": true 或 nlu section. 两种写法都支持.
+    nlu = data.get("nlu", {}) if isinstance(data.get("nlu"), dict) else {}
+    def _nlu(key: str, default: Any = None) -> Any:
+        # 优先 nlu section, 没有就读 top-level
+        if key in nlu:
+            return nlu.get(key)
+        # top-level fallback (主人最爱直接顶层 toggle)
+        flat_key = f"catty_{key}" if not key.startswith("catty_") else key
+        return data.get(flat_key, default)
+    _set_env("CATTY_USE_JIEBA", _nlu("use_jieba"))
+    _set_env("CATTY_USE_TEXT2VEC", _nlu("use_text2vec"))
+    _set_env("CATTY_USE_HANLP", _nlu("use_hanlp"))
+    _set_env("CATTY_TEXT2VEC_MODEL_NAME", _nlu("text2vec_model_name"))
+    _set_env("CATTY_HANLP_PIPELINE", _nlu("hanlp_pipeline"))
+    _set_env("CATTY_TEXT2VEC_TOPIC_THRESHOLD", _nlu("text2vec_topic_threshold"))
+    _set_env("CATTY_TEXT2VEC_EMOTION_THRESHOLD", _nlu("text2vec_emotion_threshold"))
+    _set_env("CATTY_TEXT2VEC_TREND_THRESHOLD", _nlu("text2vec_trend_threshold"))
+    _set_env("CATTY_NLU_CACHE_DIR", _nlu("nlu_cache_dir"))
+    _set_env("CATTY_NLU_WARMUP_ON_STARTUP", _nlu("nlu_warmup_on_startup"))
+    _set_env("CATTY_NLU_HF_ENDPOINT", _nlu("nlu_hf_endpoint"))
+
     local_critic = _section(data, "local_critic")
     local_critic_extra_body = local_critic.get("extra_body")
     if not isinstance(local_critic_extra_body, dict):

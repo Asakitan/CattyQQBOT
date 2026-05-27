@@ -37,8 +37,9 @@ _MAX_TEXT_LEN: int = 256  # 模型 max position embeddings
 
 def _config() -> Any:
     try:
-        from nonebot import get_driver
-        return get_driver().config
+        from nonebot import get_plugin_config
+        from ..config import Config
+        return get_plugin_config(Config)
     except Exception:
         return None
 

@@ -67,8 +67,9 @@ _LOAD_LOCK = threading.Lock()
 def _is_enabled() -> bool:
     """读 config 看 catty_use_jieba 是否开. 避免 import cycle 用 lazy import."""
     try:
-        from nonebot import get_driver
-        config = get_driver().config
+        from nonebot import get_plugin_config
+        from ..config import Config
+        config = get_plugin_config(Config)
         return bool(getattr(config, "catty_use_jieba", False))
     except Exception:
         return False
