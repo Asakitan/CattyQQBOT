@@ -7255,7 +7255,7 @@ async def _flush_user_vibe_store_on_shutdown() -> None:
 
 
 @chat_matcher.handle()
-async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_State) -> None:
     incoming: ExtractedMessage = state["catty_incoming"]
     # 入口可观察性：397 次 chat_matcher 触发后 0 下文 INFO 日志的诊断盲区,
     # 一行 entry log 直接看 user/group/directly_requested 和文本(完整 + 长度)。
@@ -7567,6 +7567,24 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
         # - recent_image_urls: 最近 N 分钟群里出现的图(用户「分消息」回指: 上一条群友图 + 这条说『基于刚才那张画 X』)
         # - is_directly_requested: 硬 guard - 没指向猫猫的 opportunistic 旁观回复不许 push 内容到群
         _recent_imgs = _recent_image_urls_for_scope(_conversation_queue_key(event))
+        # 拉 reply 引用消息里的图作为 tool 可见图源:
+        # 主人在群里引用一张图问『猫猫帮我查作者』时,extract_image_urls 只看当前消息 segment,
+        # 不会包含 reply 图——结果 catty_image_search 找不到图源退化成 web_search 搜"作者"两个字。
+        # 这里走 OneBot get_msg 把 reply 图拉出来,合并到 input_image_urls 让搜图/imagegen 都能看到。
+        # 仅在当前消息没附图 + 存在 reply 时拉(避免每条消息都发 API 请求增加延迟)。
+        _tool_input_images: list[str] = list(incoming.image_urls or [])
+        if not _tool_input_images and reply_message_ids(event):
+            try:
+                _reply_imgs = await _extract_reply_image_urls(bot, event)
+            except Exception as _reply_exc:  # noqa: BLE001
+                logger.debug(f"tool ctx: reply image extraction failed: {_reply_exc}")
+                _reply_imgs = []
+            if _reply_imgs:
+                _tool_input_images.extend(_reply_imgs)
+                logger.info(
+                    f"tool ctx: added {len(_reply_imgs)} reply image(s) for {event.user_id}@"
+                    f"{getattr(event, 'group_id', 'private')}"
+                )
         tool_ctx = ToolContext(
             config=config,
             memory_store=memory_store,
@@ -7574,7 +7592,7 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
             affection_store=affection_store,
             prepare_nsfw_segments_fn=_prepare_nsfw_image_segments,
             download_binary_fn=download_binary,
-            input_image_urls=list(incoming.image_urls or []),
+            input_image_urls=_tool_input_images,
             recent_image_urls=_recent_imgs,
             is_directly_requested=bool(incoming.directly_requested),
             # SillyTavern 风 story_arc 写入入口:catty_story_arc_set/clear executor 通过这两字段写
