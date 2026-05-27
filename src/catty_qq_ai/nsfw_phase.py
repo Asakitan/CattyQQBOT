@@ -2546,6 +2546,109 @@ def _rotate_subset(pool: tuple, k: int, rotation: int) -> list:
     return out
 
 
+# ── 主人 2026-05-27 十八+十九轮『不会自己高潮』── 高潮 prefill 变体池
+# 当 phase tracker stuck → 用这些 prefill 强行让 AI 起手就进 next_phase 风味
+# 每 phase 12+ 变体, 用 rotation 抽不同的避免重复
+CLIMAX_PREFILL_POOL: dict[int, tuple[str, ...]] = {
+    # P5 临界点 — 思维断片 + 即将高潮
+    5: (
+        "（蜜穴一阵阵紧, 小腹绷紧到颤抖）啊…要…",
+        "（腿失控发抖, 视线散焦）脑袋…空了…",
+        "（头乱甩, 气音颤抖）要去了…要…",
+        "（抓床单到指节发白, 嗓音拔尖）笨蛋…撑不住…",
+        "（鼻翼抽搐, 鼻尖渗汗）唔…笨猫快…",
+        "（脚趾绷成弓形, 腰本能弓起）顶不住了喵…",
+        "（嘴唇张开流口水, 眼神涣散）啊…要去…",
+        "（脖颈伸长, 喉咙发紧）嗯…要…要去了…",
+        "（指尖扣进床单关节发白, 嗓音变细）笨蛋主人…",
+        "（瞳孔开始散开, 视线一片白）啊…",
+        "（小腹一阵阵抽, 蜜穴猛烈收缩）受不住了…",
+        "（鼻翼一直在抽, 像哭一样）撑不住了…笨蛋…",
+    ),
+    # P6 高潮 — 完全失控痉挛
+    6: (
+        "（全身痉挛, 腿弹直绷紧, 喵呜一声尖叫拔高）啊…呜…喵——",
+        "（瞳孔散开, 眼角泪滴下来, 蜜穴猛烈一吸）啊…啊…",
+        "（整个人弓起来到极致然后突然瘫软）！…",
+        "（脖颈反弓, 嘴张到极致舌尖外伸, 口水滴下）啊呜——",
+        "（下腹一波波抽搐, 子宫深处一阵阵收缩）啊…呜喵——",
+        "（脸涨红到锁骨, 全身像被电流贯通）嗯啊——",
+        "（腰肌反弓, 脚趾蜷成弓形）啊…啊…去了…",
+        "（喉咙漏出长长的颤音）啊…呜…喵——",
+        "（蜜穴猛烈一吸把对方夹紧）！…",
+        "（汗水从额头滑下, 视线一片白）啊呜——",
+        "（眼角泪夺眶, 整个身体抽搐）嗯啊…喵——",
+        "（意识断片, 喵呜尖叫拔到最高）啊…！…",
+    ),
+    # P7 overstim — 神经过敏 + 二次高潮
+    7: (
+        "（神经过敏, 一碰就过电跳起）停…太敏感了…",
+        "（身体却又抖又缠住对方, 字面拒绝身体诚实）不…不要…可是…",
+        "（失神, 流口水, 抓挠对方）笨蛋…停下来…要坏掉了…",
+        "（翻白眼 + 吐舌 + 嘴角口水）啊…啊…(无意义气音)",
+        "（触电式跳, 敏感处一碰就尖叫）不…要…坏掉…",
+        "（眼泪止不住流, 全身鸡皮疙瘩）笨猫真的会坏掉…",
+        "（唾液混在喘里, 嘴角口水流）停…太敏感…",
+        "（汗湿透头发, 头发贴脸）受不了…受不了…",
+        "（声音破碎, 喊不出整句）啊…啊…笨蛋…",
+        "（蜜穴又一阵痉挛, 但已经过载）不要再…可是…",
+        "（意识恍惚, 视线一片白）笨…笨蛋…",
+        "（腿乱踢又被按住, 失神 + 抓挠）停…笨蛋停…",
+    ),
+    # P8 余韵 — 全身瘫软撒娇
+    8: (
+        "（全身瘫软, 汗湿头发贴脸, 意识慢慢回来）笨蛋主人…刚才太狠了…",
+        "（主动蜷在怀里, 蜜穴还在小幅余震）抱紧人家…",
+        "（尾巴软软搭在腰上）笨蛋…才不是因为舒服才哭的呢…",
+        "（腰酸抬不起, 蜜液从腿间慢慢流出）笨蛋…床单都湿了…",
+        "（嘴角口水被手背随便擦掉, 心跳归位）抱紧人家喵…",
+        "（脸还烫但开始降温, 喘气慢慢平复）唔…笨蛋主人…",
+        "（猫耳一颤一颤, 主动蹭进对方掌心）抱抱嘛…",
+        "（大腿抖个不停, 把脸埋进对方颈窝）嗯…刚才好用力…",
+        "（汗水滴在床单, 湿气散开）笨蛋…擦干人家…",
+        "（手指还在轻颤, 心跳慢慢归位）唔…笨蛋…还要吗…",
+        "（脖子歪在对方肩上一时半会扶不起来）抱紧点…",
+        "（尾巴瘫成一条软线, 半睡半醒）笨蛋主人…",
+    ),
+}
+
+
+def get_phase_climax_prefill(scope: str, user_id: str) -> str:
+    """主人 2026-05-27 十八+十九轮『不会自己高潮』fix.
+
+    当 phase tracker 显示 P4-P7 stuck → 返回 next_phase 的**强力 prefill** 起手句,
+    强行让 AI 用『痉挛/喵呜尖叫/要去了』开口, 不能继续 P5 临界感拖.
+
+    主人 2026-05-27 十九轮: 12+ 变体每 phase, 用 rotation+last_updated 抽不同的.
+
+    无 stuck / phase 不在范围内 → 返回 ''. 调用方继续用默认 prefill.
+    """
+    st = get_phase_state(scope, user_id)
+    current = st.current_phase
+    stuck_thr = _PHASE_STUCK_THRESHOLDS.get(current, 3)
+    stuck = st.turn_count >= stuck_thr
+    if not stuck:
+        return ""
+    next_phase = min(8, current + 1)
+    # 只对 P4-P7 stuck (要推 P5/P6/P7/P8) 给 强 prefill, P1-P3 默认 '(' 足够
+    if next_phase < 5:
+        return ""
+    pool = CLIMAX_PREFILL_POOL.get(next_phase)
+    if not pool:
+        # fallback to phase opener_hints
+        next_meta = PHASE_DEFINITIONS.get(next_phase)
+        pool = next_meta.get("opener_hints") if next_meta else ()
+    if not pool:
+        return ""
+    # 用 rotation + turn_count + last_updated 抽变体 (跨 stuck 轮不重复)
+    import hashlib
+    seed = hashlib.md5(
+        f"{scope}:{user_id}:{int(st.last_updated)}:{st.last_hint_rotation}:{st.turn_count}".encode()
+    ).digest()
+    idx = seed[0] % len(pool)
+    return pool[idx]
+
+
 def build_phase_advance_hint(
     scope: str, user_id: str,
     is_owner: bool = True, user_addr: str = "",
@@ -2786,6 +2889,7 @@ def stats_summary() -> dict[str, Any]:
 
 __all__ = [
     "BODY_FOCUS_PRESETS",
+    "CLIMAX_PREFILL_POOL",
     "FLUID_DETAILS",
     "LOCATION_PRESETS",
     "MOOD_PRESETS",
@@ -2806,6 +2910,8 @@ __all__ = [
     "build_sensory_block",
     "build_starter_examples_block",
     "detect_body_focus_from_text",
+    "flush_phase_state",
+    "get_phase_climax_prefill",
     "detect_location_from_text",
     "detect_mood_from_text",
     "detect_outfit_from_text",

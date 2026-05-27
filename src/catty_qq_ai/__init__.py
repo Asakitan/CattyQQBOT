@@ -2107,11 +2107,12 @@ _NSFW_RECENCY_REMINDER = (
     "也禁止 meta 问『接下来怎样喵?』『主人想做什么?』。\n"
     "8. **call user properly**: owner 用『主人/笨蛋主人/杂鱼主人』+ 具名,\n"
     "  **绝不**泛指『你/你的/你那/你这』 (操作手册感失去亲密)。\n"
-    "9. **★ QQ 短句风格 (主人 2026-05-27 十四+十五轮)** NSFW reply 必须 QQ 连发短句:\n"
-    "  - **默认 1 段** (15-50 字, 1 动作括号 + 1 句台词). 这是常态. 大部分场景都是 1 段.\n"
+    "9. **★ QQ 短句风格 (主人 2026-05-27 十四+十五+十八轮)** NSFW reply 必须 QQ 连发短句:\n"
+    "  - **默认 1 段** (15-50 字, 1 动作括号 + 1 句台词). 这是常态.\n"
+    "  - **P5-P7 高潮场景例外**: 1 段可以 50-80 字 (含痉挛+尖叫+内心独白), 因为是关键转折.\n"
     "  - **少数 2 段** (动作很复杂时), 每段 ≤30 字.\n"
-    "  - **严禁 3 段或以上** — 主人明确反馈过 3 段太长. 即使想分 3 段, 也压缩到 2 段.\n"
-    "  - **严禁** 每段 > 50 字 / 每段堆 2+ 动作括号 / 每段塞 3+ 句话.\n"
+    "  - **严禁 3 段或以上** — 主人明确反馈过 3 段太长. 压回 2 段.\n"
+    "  - **严禁** 每段堆 2+ 动作括号 / 每段塞 3+ 句话.\n"
     "  - **严禁** 把场景描述 + 反应 + 后续动作分成 3 个独立段 — 合并到 1 段.\n"
     "  \n"
     "  **正面范例 (默认 1 段)**: 『(往怀里缩) 笨蛋…才不要呢哼.』\n"
@@ -4946,6 +4947,19 @@ async def _build_messages(
             "predicted_kitten": _preg_predicted_kitten,
             "will_give_birth": _preg_predict_birth,
         }
+        # ── 主人 2026-05-27 十八轮『还是不会自己高潮』── phase stuck 时强力 prefill
+        # P5 卡 2 轮 + 没自己推 P6 → prefill 改成『(全身痉挛) 啊…呜…喵——』强行起手
+        try:
+            from .nsfw_phase import get_phase_climax_prefill as _get_climax_pre
+            _climax_pre = _get_climax_pre(_arc_scope, str(event.user_id))
+            if _climax_pre:
+                _prefill = _climax_pre
+                logger.info(
+                    f"NSFW phase stuck climax prefill override: {_climax_pre[:30]!r} "
+                    f"(key={_sticky_key})"
+                )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"climax prefill override failed (non-fatal): {exc}")
         _slim_messages.append({"role": "assistant", "content": _prefill})
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
@@ -5824,96 +5838,23 @@ async def _local_reply_gate_allows(
     group_filter_context: str = "",
     special_care_context: str = "",
 ) -> tuple[bool, dict[str, object]]:
-    # 私聊:直接 reply,不走 critic(主人要求 "私聊就不用 filter 了")
+    """[DEPRECATED 2026-05-27] reply gate 整个停了 — 主人原话 "reply gate停了".
+
+    现在 _rule 直接做本地确定性判断, 不再调本函数. 这里保留壳是为兼容历史调用点
+    (其它分支/工具脚本可能还引用), 行为退化成: 私聊/主人/direct/directly_requested
+    全放行, 其他 drop, **不调 critic AI**, **不打 INFO 日志**.
+
+    如需恢复 critic gate, 翻 git 历史看 commit before reply-gate-kill.
+    """
     if isinstance(event, PrivateMessageEvent):
-        return True, {
-            "should_reply": True,
-            "confidence": 100,
-            "reason": "private chat bypass; skipped local reply gate",
-            "skipped_model": True,
-        }
-    direct_required = _force_direct_reply_enabled(event, incoming)
-    fallback_allowed = direct_required or incoming.directly_requested
-    if direct_required:
-        return True, {
-            "should_reply": True,
-            "confidence": 100,
-            "reason": "direct trigger; skipped local reply gate",
-            "skipped_model": True,
-        }
-    # ── 廉价启发式初筛:明显该 NO_REPLY 的群消息直接 drop,省掉一次 critic 调用 ──
-    continue_to_critic, drop_reason = _cheap_reply_prefilter(event, incoming)
-    if not continue_to_critic:
-        logger.info(
-            f"reply gate prefilter drop: user={event.user_id} "
-            f"group={getattr(event, 'group_id', '')} reason={drop_reason}"
-        )
-        return False, {
-            "should_reply": False,
-            "confidence": 95,
-            "reason": drop_reason,
-            "prefilter_drop": True,
-            "skipped_model": True,
-        }
-    if not config.catty_local_critic_reply_gate_enabled:
-        return fallback_allowed, {
-            "should_reply": fallback_allowed,
-            "confidence": 100 if fallback_allowed else 0,
-            "reason": "reply gate disabled; using deterministic fallback",
-            "fallback": True,
-        }
-    if not _local_critic_enabled():
-        return fallback_allowed, {
-            "should_reply": fallback_allowed,
-            "confidence": 100 if fallback_allowed else 0,
-            "reason": "reply gate unavailable; using deterministic fallback",
-            "fallback": True,
-        }
-
-    try:
-        gate_reply = await _local_critic_completion_with_retry(
-            _local_reply_gate_messages(
-                event,
-                incoming,
-                group_filter_context=group_filter_context,
-                special_care_context=special_care_context,
-            ),
-            label="Local reply gate",
-            timeout=_local_reply_gate_timeout(),
-            max_tokens=_local_reply_gate_max_tokens(),
-            extra_body=_local_reply_gate_extra_body(),
-        )
-    except OpenAICompatibleError as exc:
-        logger.warning(f"Local reply gate API error: {exc}")
-        return fallback_allowed, {
-            "should_reply": fallback_allowed,
-            "confidence": 100 if fallback_allowed else 0,
-            "reason": f"reply gate API error: {exc}",
-            "fallback": True,
-        }
-    except httpx.HTTPError as exc:
-        detail = _http_error_detail(exc)
-        logger.warning(f"Local reply gate transport error: {detail}")
-        return fallback_allowed, {
-            "should_reply": fallback_allowed,
-            "confidence": 100 if fallback_allowed else 0,
-            "reason": f"reply gate transport error: {detail}",
-            "fallback": True,
-        }
-
-    gate_result = _local_critic_json_object(gate_reply) or {
-        "should_reply": fallback_allowed,
-        "confidence": 100 if fallback_allowed else 0,
-        "reason": "reply gate returned non-JSON output",
-        "raw": gate_reply[:500],
-        "fallback": True,
-    }
-    allowed = direct_required or _local_reply_gate_says_reply(gate_result)
-    if direct_required and not _local_reply_gate_says_reply(gate_result):
-        gate_result["forced_by_direct_trigger"] = True
-        gate_result["should_reply"] = True
-        gate_result["confidence"] = max(_local_reply_gate_confidence(gate_result), 100)
-    return allowed, gate_result
+        return True, {"should_reply": True, "reason": "private bypass", "skipped_model": True}
+    if _event_is_owner(event):
+        return True, {"should_reply": True, "reason": "owner bypass", "skipped_model": True}
+    if _force_direct_reply_enabled(event, incoming):
+        return True, {"should_reply": True, "reason": "direct trigger", "skipped_model": True}
+    if incoming.directly_requested or incoming.mentioned or incoming.replied_to_self:
+        return True, {"should_reply": True, "reason": "directed-to-catty", "skipped_model": True}
+    return False, {"should_reply": False, "reason": "not-addressed-to-catty", "skipped_model": True}
 
 
 def _save_local_critic_sample(
@@ -6693,14 +6634,9 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
             f"remaining={_bot_reply_continuation_remaining(event)}"
         )
     if replied_to_self and _has_consumed_reply_source(event):
-        duplicate_result = {
-            "should_reply": False,
-            "confidence": 100,
-            "reason": "duplicate reply source already handled",
-            "deduplicated_reply_source": True,
-        }
-        state["catty_reply_gate_result"] = duplicate_result
-        _save_local_critic_sample(event, incoming, "reply_gate", {"reply_gate": duplicate_result}, NO_REPLY_MARKER)
+        # 主人 2026-05-27: reply gate 整个停, dedup 不再走 _save_local_critic_sample,
+        # state["catty_reply_gate_result"] 留个空 dict 占位让 handle_chat 的 isinstance(dict) 通过.
+        state["catty_reply_gate_result"] = {}
         return False
     group_filter_context = ""
     special_care_context = ""
@@ -6728,27 +6664,25 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
             return False
         if special_care_context:
             state["catty_special_care_context"] = special_care_context
-    gate_allowed, gate_result = await _local_reply_gate_allows(
-        event,
-        incoming,
-        group_filter_context=group_filter_context,
-        special_care_context=special_care_context,
-    )
-    state["catty_reply_gate_result"] = gate_result
-    _save_local_critic_sample(
-        event,
-        incoming,
-        "reply_gate",
-        {"reply_gate": gate_result},
-        "approved" if gate_allowed else NO_REPLY_MARKER,
-    )
+    # ── 主人 2026-05-27: reply gate 整个停 ──
+    # 原本这里调 _local_reply_gate_allows 让本地 critic AI 判要不要回, 现在改成纯本地确定性判断:
+    # 私聊 / 主人 / direct_required / directly_requested / mentioned / replied_to_self → 放行
+    # 其他 (非定向群消息) → drop, 且不打 INFO 日志保持控制台安静
+    # _save_local_critic_sample("reply_gate", ...) 调用也一并停掉, 不再为 gate 收集训练样本.
+    # state["catty_reply_gate_result"] 保留空 dict 占位, handle_chat 的 _fallback_reply_decision_context
+    # 看到没 "fallback" 标记会返回空, 无副作用.
+    state["catty_reply_gate_result"] = {}
+    if isinstance(event, PrivateMessageEvent):
+        gate_allowed = True
+    elif _event_is_owner(event):
+        gate_allowed = True
+    elif _force_direct_reply_enabled(event, incoming):
+        gate_allowed = True
+    elif incoming.directly_requested or incoming.mentioned or incoming.replied_to_self:
+        gate_allowed = True
+    else:
+        gate_allowed = False
     if not gate_allowed:
-        logger.debug(
-            "Reply gate/fallback rejected message before main AI: user=%s group=%s reason=%s",
-            event.user_id,
-            getattr(event, "group_id", ""),
-            gate_result.get("reason") if isinstance(gate_result, dict) else "",
-        )
         return False
     state["catty_replied_to_self"] = replied_to_self
     state["catty_incoming"] = incoming
