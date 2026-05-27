@@ -94,6 +94,10 @@ class Config(BaseModel):
     # 基础 5 积分,多 1 Anlas +3 积分(三个标准尺寸 + 默认 28 steps 时 Anlas=0,只扣 5)
     catty_imagegen_nai_base_points: int = 5
     catty_imagegen_nai_points_per_anlas: int = 3
+    # 专用 HTTP/SOCKS proxy 走 NovelAI 上行 — 远端国内服务器到 image.novelai.net
+    # 真实 IP 被墙时填这个, 其他路径(napcat / chat completion)不受影响。
+    # 留空 = 直连。支持 http://user:pass@host:port 和 socks5://user:pass@host:port。
+    catty_imagegen_nai_http_proxy: str = ""
 
     # 慢请求 placeholder:主回复 chat_completion 进入后超过该秒数没回,先 send 一句轻量占位
     # 避免用户以为 bot 卡死了/被忽略了。0 或负数 = 禁用。

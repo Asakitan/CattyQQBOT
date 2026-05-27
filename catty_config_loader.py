@@ -554,6 +554,7 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_IMAGEGEN_NAI_TIMEOUT_SECONDS", nai.get("timeout_seconds"))
     _set_env("CATTY_IMAGEGEN_NAI_BASE_POINTS", nai.get("base_points"))
     _set_env("CATTY_IMAGEGEN_NAI_POINTS_PER_ANLAS", nai.get("points_per_anlas"))
+    _set_env("CATTY_IMAGEGEN_NAI_HTTP_PROXY", nai.get("http_proxy"))
 
     vision = _section(data, "vision")
     _set_env("CATTY_VISION_BASE_URL", vision.get("base_url"))

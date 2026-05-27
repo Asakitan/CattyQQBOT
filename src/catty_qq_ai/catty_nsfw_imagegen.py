@@ -460,7 +460,12 @@ async def maybe_generate_image(
         payload["parameters"]["director_reference_secondary_strength_values"] = [0.0] * n
         payload["parameters"]["director_reference_information_extracted"] = [1.0] * n
 
-    proxy_str = str(getattr(config, "catty_http_proxy", "") or "").strip()
+    # NAI 专用 proxy 优先 (远端国内服务器到 image.novelai.net 真 IP 被墙时填),
+    # fallback 全局 proxy, 再 fallback 直连。
+    proxy_str = (
+        str(getattr(config, "catty_imagegen_nai_http_proxy", "") or "").strip()
+        or str(getattr(config, "catty_http_proxy", "") or "").strip()
+    )
     timeout = float(getattr(config, "catty_imagegen_nai_timeout_seconds", 180.0) or 180.0)
     client_kwargs: dict[str, Any] = {
         "timeout": httpx.Timeout(timeout, connect=15.0),

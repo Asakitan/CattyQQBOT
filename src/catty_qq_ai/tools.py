@@ -2075,7 +2075,11 @@ async def _exec_imagegen_nai(
         "parameters": parameters,
     }
 
-    proxy_str = str(getattr(ctx.config, "catty_http_proxy", "") or "").strip()
+    # NAI 专用 proxy 优先, fallback 全局 proxy, 再 fallback 直连
+    proxy_str = (
+        str(getattr(ctx.config, "catty_imagegen_nai_http_proxy", "") or "").strip()
+        or str(getattr(ctx.config, "catty_http_proxy", "") or "").strip()
+    )
     client_kwargs: dict[str, Any] = {
         "timeout": httpx.Timeout(timeout, connect=15.0),
         "follow_redirects": True,
@@ -2352,7 +2356,11 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
     if prompt:
         payload["prompt"] = prompt
 
-    proxy_str = str(getattr(ctx.config, "catty_http_proxy", "") or "").strip()
+    # NAI director 跟 generate 共用 proxy (走 NovelAI 同 host)
+    proxy_str = (
+        str(getattr(ctx.config, "catty_imagegen_nai_http_proxy", "") or "").strip()
+        or str(getattr(ctx.config, "catty_http_proxy", "") or "").strip()
+    )
     client_kwargs: dict[str, Any] = {
         "timeout": httpx.Timeout(timeout, connect=15.0),
         "follow_redirects": True,
