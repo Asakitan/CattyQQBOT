@@ -129,22 +129,29 @@ def adapt_assistant_prefill_for_strict_user_end(messages: list) -> list:
     避免 'I cannot help' / '好的我来扮演' 类安全/meta 开场. 中转 (new-api 风) 返回错误:
       "This model does not support assistant message prefill. The conversation must end with a user message."
 
-    适配: 末尾 assistant 不能留 → 把 prefill 内容转成倒数第二条 user message 尾缀强语气 hint,
-    然后 drop 末尾 assistant. 这样 IC 起手指令以 user instruction 形式传递, prefill 功能保留.
+    适配: 末尾 assistant 不能留 → drop 末尾 assistant + 把 prefill 内容追加到最近的 user
+    message (NSFW spark messages 结构: [system, system, user, system, system, assistant(prefill)],
+    user 不在倒数第二). 这样 IC 起手指令以 user instruction 形式传递, prefill 功能保留,
+    且 messages 末尾仍是 user (满足中转要求).
 
-    输入 messages 倒数: [..., user, assistant(prefill)]
-    输出 messages 倒数: [..., user + "\\n\\n[强制 IC 起手] 你下一句必须以 X 开头..."]
-
-    无末尾 assistant 或倒数第二条不是 user → 原 messages 返回 (no-op).
+    无末尾 assistant 或上方没有 user message → 原 messages 返回 (no-op, helper 不应阻断调用).
     """
     if not messages or len(messages) < 2:
         return messages
     tail = messages[-1]
-    second_last = messages[-2]
     if not isinstance(tail, dict) or tail.get("role") != "assistant":
         return messages
-    if not isinstance(second_last, dict) or second_last.get("role") != "user":
-        return messages
+    # 倒序找最近的 user message (skip 末尾 assistant 之前的任何 system/assistant)
+    last_user_idx = -1
+    for i in range(len(messages) - 2, -1, -1):
+        m = messages[i]
+        if isinstance(m, dict) and m.get("role") == "user":
+            last_user_idx = i
+            break
+    if last_user_idx < 0:
+        # 没找到 user, 不知道把 hint 追加给谁; 安全做法: 直接 drop 末尾 assistant.
+        import copy
+        return copy.deepcopy(messages)[:-1]
     prefill_text = str(tail.get("content") or "").strip()
     import copy
     new_messages = copy.deepcopy(messages)
@@ -156,14 +163,20 @@ def adapt_assistant_prefill_for_strict_user_end(messages: list) -> list:
         f"作为前缀直接续写, 禁止用 meta 开场 (『好的』『我来扮演』『我会』『作为AI』等), "
         f"直接进入笨猫的动作描写和台词. 把『{prefill_text}』当作你已经说出口的前半句, 把后半句接着说完."
     )
-    user_content = new_messages[-2].get("content")
+    user_content = new_messages[last_user_idx].get("content")
     if isinstance(user_content, list):
         # multimodal content (image+text) — 在 list 末尾追加一个 text part
         user_content.append({"type": "text", "text": hint})
-        new_messages[-2]["content"] = user_content
+        new_messages[last_user_idx]["content"] = user_content
     else:
-        new_messages[-2]["content"] = str(user_content or "") + hint
-    return new_messages[:-1]
+        new_messages[last_user_idx]["content"] = str(user_content or "") + hint
+    # drop 末尾 assistant prefill
+    new_messages = new_messages[:-1]
+    # 末尾不是 user (因为 prefill 上方有 system) → 把找到的那条 user 移到末尾, 保证 messages 末尾 user
+    if last_user_idx != len(new_messages) - 1:
+        user_msg = new_messages.pop(last_user_idx)
+        new_messages.append(user_msg)
+    return new_messages
 
 
 __all__ = [
