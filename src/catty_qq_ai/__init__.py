@@ -205,6 +205,11 @@ catty_rag_store = CattyRAGStore(config.catty_memory_path, config=config)
 # per-user 持久化跨 session, 阈值 30 (受孕) / 40 (生产), 落盘 pregnancy.json
 from .pregnancy_store import PregnancyStore
 pregnancy_store = PregnancyStore(config.catty_memory_path)
+# 主人 2026-05-27 十六轮 BUG FIX『为什么一直不主动高潮』
+# 根因: bot 重启清空 _NSFW_PHASE_BY_SCOPE → phase 永远回 P1 → 推不到 P6
+# Fix: 落盘 nsfw_phase_state.json, 启动 reload
+from .nsfw_phase import _set_phase_state_path
+_set_phase_state_path(config.catty_memory_path)
 # spark route 预判 (在 _build_messages 注入 birth event hint 时记下预选 kitten 名字),
 # handle_chat reply 后用这个 hint 决定的名字调 record_intercourse(override=...) 保证 state 跟 reply 同步
 _PREGNANCY_PREDICT_BY_USER: dict[str, dict[str, Any]] = {}
@@ -3324,6 +3329,18 @@ def _reload_runtime_config_from_path(path: Path) -> bool:
     _apply_runtime_config(new_config)
     logger.info(f"Hot reloaded config.json: {path}")
     return True
+
+
+async def _nsfw_phase_flush_loop() -> None:
+    """主人 2026-05-27 十六轮 BUG FIX: 每 3s flush phase state 到 disk, 跨 bot 重启保留."""
+    import asyncio
+    from .nsfw_phase import flush_phase_state
+    while True:
+        try:
+            await asyncio.sleep(3.0)
+            flush_phase_state()
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"nsfw_phase flush loop error (non-fatal): {exc}")
 
 
 async def _hot_reload_loop() -> None:
@@ -8226,6 +8243,7 @@ async def start_memory_summary_loop() -> None:
         f"(persistence={cache.persistence_enabled}, max={cache.max_sessions})"
     )
     asyncio.create_task(_hot_reload_loop())
+    asyncio.create_task(_nsfw_phase_flush_loop())
     asyncio.create_task(_summary_loop())
     asyncio.create_task(_proactive_bubble_loop())
     asyncio.create_task(_local_critic_warmup_loop())

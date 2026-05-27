@@ -19,8 +19,11 @@ State 持久化:
 """
 from __future__ import annotations
 
+import json
+import threading
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
+from pathlib import Path
 from typing import Any
 
 
@@ -61,6 +64,97 @@ class PhaseState:
 
 # Module-level state: key = f"{scope}:{user_id}"
 _NSFW_PHASE_BY_SCOPE: dict[str, PhaseState] = {}
+# ── 主人 2026-05-27 十六轮 BUG FIX『为什么一直不主动高潮』──
+# 根因: bot 重启清空 _NSFW_PHASE_BY_SCOPE → phase 永远回 P1 → 推不到 P6 主动高潮
+# 修复: 状态落盘 nsfw_phase_state.json, bot 启动时 reload, 跨重启保留 phase 进度
+_PHASE_STATE_LOCK = threading.RLock()
+_PHASE_STATE_FILE: Path | None = None
+_PHASE_STATE_DIRTY = False
+
+
+def _set_phase_state_path(memory_path: str | Path) -> None:
+    """初始化 phase state 落盘路径 + 加载已有 state (chat handler 启动时调一次)."""
+    global _PHASE_STATE_FILE
+    mem = Path(memory_path).expanduser()
+    if not mem.is_absolute():
+        mem = mem.resolve()
+    _PHASE_STATE_FILE = mem.parent / "nsfw_phase_state.json"
+    _load_phase_state()
+
+
+def _load_phase_state() -> None:
+    """启动时 load. 30min 内的 state 才 keep, 超时的自动丢."""
+    if _PHASE_STATE_FILE is None or not _PHASE_STATE_FILE.exists():
+        return
+    try:
+        raw = json.loads(_PHASE_STATE_FILE.read_text(encoding="utf-8-sig"))
+    except (OSError, json.JSONDecodeError):
+        return
+    if not isinstance(raw, dict):
+        return
+    by_scope = raw.get("by_scope") if isinstance(raw.get("by_scope"), dict) else {}
+    now = time.time()
+    with _PHASE_STATE_LOCK:
+        for key, record in by_scope.items():
+            if not isinstance(record, dict):
+                continue
+            try:
+                last_updated = float(record.get("last_updated", 0.0))
+                # 超过 30min 的 state 不 reload (反正调 get_phase_state 也会 return default)
+                if now - last_updated > _NSFW_PHASE_EXPIRY_SECONDS:
+                    continue
+                _NSFW_PHASE_BY_SCOPE[str(key)] = PhaseState(
+                    current_phase=int(record.get("current_phase", 1)),
+                    turn_count=int(record.get("turn_count", 0)),
+                    last_updated=last_updated,
+                    last_reply_excerpt=str(record.get("last_reply_excerpt", "")),
+                    history=list(record.get("history") or []),
+                    location=str(record.get("location", "")),
+                    location_ambient=str(record.get("location_ambient", "")),
+                    locked_trope=str(record.get("locked_trope", "")),
+                    locked_trope_scene=str(record.get("locked_trope_scene", "")),
+                    recent_openers=list(record.get("recent_openers") or []),
+                    last_hint_rotation=int(record.get("last_hint_rotation", 0)),
+                    arc_count=int(record.get("arc_count", 1)),
+                    p8_idle_count=int(record.get("p8_idle_count", 0)),
+                    outfit=str(record.get("outfit", "")),
+                    time_of_day=str(record.get("time_of_day", "")),
+                    mood=str(record.get("mood", "")),
+                    body_focus=str(record.get("body_focus", "")),
+                    personality_facet=str(record.get("personality_facet", "")),
+                )
+            except Exception:  # noqa: BLE001
+                continue
+
+
+def _mark_phase_state_dirty() -> None:
+    """标记需要 flush (调用方在每次 update 后调一次)."""
+    global _PHASE_STATE_DIRTY
+    _PHASE_STATE_DIRTY = True
+
+
+def flush_phase_state() -> bool:
+    """落盘 (atomic write). chat handler / background loop 调用. 返回 True 如果实际写了."""
+    global _PHASE_STATE_DIRTY
+    if _PHASE_STATE_FILE is None:
+        return False
+    with _PHASE_STATE_LOCK:
+        if not _PHASE_STATE_DIRTY:
+            return False
+        try:
+            _PHASE_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+            tmp = _PHASE_STATE_FILE.with_suffix(_PHASE_STATE_FILE.suffix + ".tmp")
+            payload = {
+                "version": 1,
+                "by_scope": {k: asdict(v) for k, v in _NSFW_PHASE_BY_SCOPE.items()},
+            }
+            text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+            tmp.write_text(text, encoding="utf-8")
+            tmp.replace(_PHASE_STATE_FILE)
+            _PHASE_STATE_DIRTY = False
+            return True
+        except Exception:  # noqa: BLE001
+            return False
 _NSFW_PHASE_EXPIRY_SECONDS = 1800  # 30min 无新更新 → 视为新场景 reset
 _MAX_STATES = 256  # 防内存爆 — 超过时回收最旧 25%
 _RECENT_OPENER_CAP = 3  # 保留最近 N 条 reply opener 用于反复读
@@ -2048,6 +2142,7 @@ def update_phase(
     st.last_updated = now
     if reply_excerpt:
         st.last_reply_excerpt = reply_excerpt[:80]
+    _mark_phase_state_dirty()
     return st
 
 
@@ -2120,6 +2215,7 @@ def apply_user_signal(
         st.p8_idle_count += 1
         st.last_updated = time.time()
         _NSFW_PHASE_BY_SCOPE[key] = st
+    _mark_phase_state_dirty()
     return st, 0
 
 
@@ -2171,6 +2267,7 @@ def update_scene_state(scope: str, user_id: str, user_text: str, reply_text: str
         if new_facet:
             st.personality_facet = new_facet
         st.last_updated = time.time()
+    _mark_phase_state_dirty()
     return {
         "outfit": st.outfit, "time_of_day": st.time_of_day,
         "mood": st.mood, "body_focus": st.body_focus,
@@ -2202,15 +2299,12 @@ def update_location(scope: str, user_id: str, user_text: str, reply_text: str = 
         st.location = new_loc
         st.location_ambient = LOCATION_PRESETS[new_loc]["ambient"]
         st.last_updated = time.time()
+    _mark_phase_state_dirty()
     return new_loc
 
 
 def lock_trope(scope: str, user_id: str, trope: str, scene: str) -> None:
-    """援交场景下首轮抽中的 trope sticky 内不 reroll (cache 友好).
-
-    主人 2026-05-27 原话『不要一直变不能 hit cache』 — random 每轮换 trope 会破坏
-    spark route 的 prompt cache. 第一次抽中后 sticky_seconds 内锁定.
-    """
+    """援交场景下首轮抽中的 trope sticky 内不 reroll (cache 友好)."""
     key = _state_key(scope, user_id)
     st = _NSFW_PHASE_BY_SCOPE.get(key)
     if st is None:
@@ -2221,6 +2315,7 @@ def lock_trope(scope: str, user_id: str, trope: str, scene: str) -> None:
         st.locked_trope = trope
         st.locked_trope_scene = scene
         st.last_updated = time.time()
+    _mark_phase_state_dirty()
 
 
 def get_locked_trope(scope: str, user_id: str) -> tuple[str, str]:
@@ -2232,6 +2327,7 @@ def get_locked_trope(scope: str, user_id: str) -> tuple[str, str]:
 def reset_phase(scope: str, user_id: str) -> None:
     """场景结束 / 主动退 (closing intent / sticky exit) → reset to P1."""
     _NSFW_PHASE_BY_SCOPE.pop(_state_key(scope, user_id), None)
+    _mark_phase_state_dirty()
 
 
 # ── 主人 2026-05-27 五轮升级『破禁 + 出轨命令』──
@@ -2661,11 +2757,13 @@ def record_reply_opener(scope: str, user_id: str, reply: str) -> None:
         _gc_old_states()
         st = PhaseState(last_updated=time.time(), recent_openers=[snippet])
         _NSFW_PHASE_BY_SCOPE[key] = st
+        _mark_phase_state_dirty()
         return
     st.recent_openers.append(snippet)
     if len(st.recent_openers) > _RECENT_OPENER_CAP:
         st.recent_openers = st.recent_openers[-_RECENT_OPENER_CAP:]
     st.last_updated = time.time()
+    _mark_phase_state_dirty()
 
 
 def stats_summary() -> dict[str, Any]:
