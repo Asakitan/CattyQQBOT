@@ -108,8 +108,23 @@ async def sim_chat(
     from .message_utils import build_history_key, extract_incoming_message
     from .openai_client import chat_completion
 
-    uid = int(user_id)
-    gid = int(group_id) if group_id is not None else None
+    # 主人 2026-05-28: dev/sim_chat 支持非数字 user_id (e.g. 'owner_test') 用作 mock —
+    # 数字直接用, 非数字 hash 出稳定正整数作 fake QQ. group_id 同理.
+    def _to_qq_id(val: int | str, fallback_label: str) -> int:
+        if isinstance(val, int):
+            return val
+        s = str(val).strip()
+        if not s:
+            raise ValueError(f"{fallback_label} 为空")
+        try:
+            return int(s)
+        except ValueError:
+            import hashlib
+            digest = hashlib.md5(s.encode()).digest()
+            return int.from_bytes(digest[:6], "big")  # 6 字节 → 0..2^48, 不溢 QQ 号位数感
+
+    uid = _to_qq_id(user_id, "user_id")
+    gid = _to_qq_id(group_id, "group_id") if group_id is not None else None
     if gid:
         event = _make_mock_group_event(uid, gid, text)
     else:
