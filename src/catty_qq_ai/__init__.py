@@ -3826,10 +3826,14 @@ async def _build_messages(
         _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
         _sticky_active = False
-        # phase tracker: closing → reset 整个 arc (主人 2026-05-27)
+        # phase tracker: closing → reset 整个 arc + 主人 prebreak (2026-05-27)
         try:
-            from .nsfw_phase import reset_phase as _reset_nsfw_phase
+            from .nsfw_phase import (
+                reset_phase as _reset_nsfw_phase,
+                reset_owner_prebreak as _reset_prebreak,
+            )
             _reset_nsfw_phase(_arc_scope, str(event.user_id))
+            _reset_prebreak(_arc_scope, str(event.user_id))
         except Exception:  # noqa: BLE001
             pass
         logger.info(f"NSFW sticky: closing intent → exit + phase reset (key={_sticky_key}, hit='{_utxt[:30]}')")
@@ -3850,12 +3854,76 @@ async def _build_messages(
     elif _hit_deep:
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
     _is_private_chat_pre = isinstance(event, PrivateMessageEvent)
+    _is_group_chat_pre = not _is_private_chat_pre
     _user_max_stage = _resolve_max_nsfw_stage(
         affection_level=_user_affection_level,
         is_owner=_user_is_owner,
         is_private=_is_private_chat_pre,
     )
     _can_reach_deep = _user_max_stage >= 8
+    # ── 主人 2026-05-27 五轮升级『破禁 + 出轨命令』──
+    # 提取 @ targets (CQ:at segments) — cuckold 命令解析用
+    _at_user_targets: list[tuple[str, str]] = []  # (qq, name)
+    try:
+        for _seg in (getattr(event, 'message', None) or []):
+            if getattr(_seg, 'type', '') == 'at':
+                _data = getattr(_seg, 'data', None) or {}
+                _qq = str(_data.get('qq') or '').strip()
+                _name = str(_data.get('name') or '').strip()
+                # 排除 @ 笨猫本身
+                if _qq and _qq != str(bot.self_id):
+                    _at_user_targets.append((_qq, _name))
+    except Exception as _exc:  # noqa: BLE001
+        logger.debug(f"at segment extract failed (non-fatal): {_exc}")
+    # Owner 群聊连续两次 NSFW → 破禁
+    _owner_prebreak_count = 0
+    _owner_just_broke = False
+    _owner_already_broken = False
+    if _user_is_owner and _is_group_chat_pre and _hit_deep:
+        try:
+            from .nsfw_phase import (
+                record_owner_prebreak as _rec_prebreak,
+                is_owner_already_broken as _is_already_broken,
+            )
+            # 检查已破禁状态 (sticky 内 prebreak count >= 2)
+            _owner_already_broken = _is_already_broken(_arc_scope, str(event.user_id))
+            _owner_prebreak_count, _owner_just_broke = _rec_prebreak(_arc_scope, str(event.user_id))
+            if _owner_just_broke:
+                logger.info(
+                    f"chat: ★★ OWNER PREBREAK triggered (user={event.user_id}, scope={_arc_scope}, "
+                    f"count={_owner_prebreak_count}/2) — 群聊破禁仪式启动"
+                )
+            elif _owner_already_broken:
+                logger.info(
+                    f"chat: OWNER prebreak 延续中 (user={event.user_id}, scope={_arc_scope}, "
+                    f"count={_owner_prebreak_count})"
+                )
+            else:
+                logger.info(
+                    f"chat: OWNER 群聊 NSFW 第 1 次 (count={_owner_prebreak_count}, "
+                    f"再来一次破禁): scope={_arc_scope}"
+                )
+        except Exception as _exc:  # noqa: BLE001
+            logger.debug(f"owner prebreak check failed (non-fatal): {_exc}")
+    # Owner cuckold 指令 (@某群友 + 出轨触发词) → 进 cuckold mode
+    _owner_cuckold_target_id = ""
+    _owner_cuckold_target_nick = ""
+    if _user_is_owner and _at_user_targets:
+        try:
+            from .nsfw_phase import parse_cuckold_command as _parse_cuck
+            _cuck_uid = _parse_cuck(_utxt, [uid for uid, _ in _at_user_targets])
+            if _cuck_uid:
+                _owner_cuckold_target_id = _cuck_uid
+                _owner_cuckold_target_nick = next(
+                    (n for u, n in _at_user_targets if u == _cuck_uid), ""
+                ) or f"群友{_cuck_uid}"
+                logger.info(
+                    f"chat: ★★ OWNER CUCKOLD command (user={event.user_id}, "
+                    f"target={_owner_cuckold_target_id} `{_owner_cuckold_target_nick}`, "
+                    f"hit='{_utxt[:40]}') — 强制 cuckold trope spark"
+                )
+        except Exception as _exc:  # noqa: BLE001
+            logger.debug(f"cuckold parse failed (non-fatal): {_exc}")
     # ── 积分援交触发 (主人 2026-05-26 原话『加积分操, 100 积分突破亲密度都能操』) ──
     # 优先级 > deep_kw + sticky + breakthrough. 不需要 NSFW 关键词命中, user 直接喊援交即可.
     # owner 不走援交路径 (主人有无限积分 + 已经 stage 10), 其他人付 100 积分强制 spark + max_stage=10.
@@ -3916,7 +3984,6 @@ async def _build_messages(
     # maybe_trigger_breakthrough 内部已过滤 owner/Lv10, 所以这里安全 roll.
     _breakthrough_outcome: str | None = None
     _deep_request_count = 0
-    _is_group_chat_pre = not _is_private_chat_pre
     if _hit_deep and not _sticky_active and not _user_is_owner and _user_affection_level < 10:
         try:
             from .affection_scorer import (
@@ -3956,7 +4023,13 @@ async def _build_messages(
     #   锁档 (deep hit + 不能到 stage 8) + 突破没中 → 5.5 锁档处理 (NSFW gate 写害羞躲)
     #   浅词 / 无 NSFW → 5.5 (NSFW gate 处理 stage 1-7)
     # 积分援交也强制进 spark (绕过 affection cap)
-    _route_spark = _paid_nsfw_active or _sticky_active or bool(_breakthrough_outcome) or (_hit_deep and _can_reach_deep)
+    # 主人 2026-05-27 五轮升级: 破禁仪式 (just_broke 或 already_broken) 和 cuckold 命令都强制 spark
+    _route_spark = (
+        _paid_nsfw_active or _sticky_active or bool(_breakthrough_outcome)
+        or _owner_just_broke or _owner_already_broken
+        or bool(_owner_cuckold_target_id)
+        or (_hit_deep and _can_reach_deep)
+    )
     # 主 5.5 路径注入援交广告 / 嘴硬嘲讽 prompt (spark 路径会 overwrite messages 反正不影响)
     # 紧贴 user message 拿 recency bias, 让 5.5 这一条 reply 主动推销援交 OR 嘲讽穷光蛋
     if not _route_spark and (_paid_insufficient_active or _advertise_paid_active):
@@ -4019,6 +4092,26 @@ async def _build_messages(
                 logger.warning(f"paid_nsfw affection apply failed: {exc}")
             _resist_label = f"paid_nsfw/{_paid_nsfw_outcome}"
             _max_stage_log = 10  # 援交强制满级
+        elif _owner_cuckold_target_id:
+            # 主人 2026-05-27 五轮升级: cuckold 命令 — 完全替代 override
+            # 主人 @某群友 + 出轨触发词 → 笨猫被命令去和那个群友 NSFW (心里念主人)
+            try:
+                from .nsfw_phase import build_cuckold_override as _build_cuck
+                _override = _build_cuck(_owner_cuckold_target_nick, _owner_cuckold_target_id)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"cuckold override build failed: {exc}")
+                # fallback: 走正常 owner NSFW
+                _override = _build_nsfw_spark_override(
+                    is_private=_is_private_chat, is_owner=_user_is_owner,
+                    affection_level=_user_affection_level,
+                )
+            _prefill = BREAKTHROUGH_PREFILLS.get("group_pub") or BREAKTHROUGH_PREFILLS["paid"]
+            _resist_label = f"cuckold/{_owner_cuckold_target_id}"
+            _max_stage_log = 10
+            logger.info(
+                f"chat: ★★ OWNER CUCKOLD route → target=`{_owner_cuckold_target_nick}` "
+                f"(QQ {_owner_cuckold_target_id}), forced stage 10"
+            )
         elif _breakthrough_outcome:
             # 突破场景: 完全替代正常 stage matrix override + prefill
             # 群聊用大庭广众下 trope 池, 私聊用常规 trope 池
@@ -4108,6 +4201,24 @@ async def _build_messages(
                 _slim_messages.append({"role": "system", "content": _phase_hint})
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"phase tracker hint inject failed (non-fatal): {exc}")
+        # ── 主人 2026-05-27 五轮升级: prebreak hint (群聊破禁) ──
+        # 只在群聊 + owner + NSFW 时注入. cuckold 命令场景不注入 prebreak (override 已覆盖).
+        if (
+            _user_is_owner and _is_group_chat_pre
+            and not _owner_cuckold_target_id  # cuckold override 优先
+            and _owner_prebreak_count > 0
+        ):
+            try:
+                from .nsfw_phase import build_prebreak_hint as _build_prebreak
+                _prebreak_hint = _build_prebreak(
+                    count=_owner_prebreak_count,
+                    just_broke=_owner_just_broke,
+                    already_broken=_owner_already_broken and not _owner_just_broke,
+                )
+                if _prebreak_hint and _prebreak_hint.strip():
+                    _slim_messages.append({"role": "system", "content": _prebreak_hint})
+            except Exception as exc:  # noqa: BLE001
+                logger.debug(f"prebreak hint inject failed (non-fatal): {exc}")
         _slim_messages.append({"role": "assistant", "content": _prefill})
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
