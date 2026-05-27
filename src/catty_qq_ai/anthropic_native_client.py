@@ -186,13 +186,174 @@ def _extract_applied_edits(response: Any) -> list[dict]:
     return edits
 
 
+def _convert_history_for_anthropic(messages: list[dict]) -> list[dict]:
+    """把 OpenAI 风格 tool history → Anthropic native messages.
+
+    OpenAI 多轮 tool 格式 (chat_completion_with_tools 写回 history):
+        [{role: assistant, content: ..., tool_calls: [{id, type:function, function:{name, arguments_json}}]},
+         {role: tool, tool_call_id, name, content},   ← 一个或连续多个
+         {role: assistant, content: ...}]
+
+    Anthropic 多轮 tool 格式:
+        [{role: assistant, content: [{type:text}, {type:tool_use, id, name, input}]},
+         {role: user, content: [{type:tool_result, tool_use_id, content}]},   ← 连续 tool result 合一条
+         {role: assistant, content: [{type:text}]}]
+
+    其它 role 原样透传. system message 不在此处理 (_split_system_and_messages 负责).
+    """
+    import json as _json
+
+    result: list[dict] = []
+    pending_tool_results: list[dict] = []
+
+    def flush_tool_results() -> None:
+        nonlocal pending_tool_results
+        if pending_tool_results:
+            result.append({"role": "user", "content": list(pending_tool_results)})
+            pending_tool_results = []
+
+    for msg in messages:
+        if not isinstance(msg, dict):
+            continue
+        role = msg.get("role")
+        if role == "tool":
+            # OpenAI tool result → Anthropic tool_result block
+            tool_use_id = str(msg.get("tool_call_id") or "")
+            raw_content = msg.get("content")
+            if isinstance(raw_content, str):
+                tr_content: Any = raw_content
+            elif isinstance(raw_content, list):
+                tr_content = raw_content
+            else:
+                try:
+                    tr_content = _json.dumps(raw_content or "", ensure_ascii=False)
+                except (TypeError, ValueError):
+                    tr_content = str(raw_content)
+            pending_tool_results.append({
+                "type": "tool_result",
+                "tool_use_id": tool_use_id,
+                "content": tr_content,
+            })
+        elif role == "assistant" and msg.get("tool_calls"):
+            # OpenAI assistant.tool_calls → Anthropic content blocks (text + tool_use)
+            flush_tool_results()
+            content = msg.get("content")
+            blocks: list[dict] = []
+            if isinstance(content, str) and content.strip():
+                blocks.append({"type": "text", "text": content})
+            elif isinstance(content, list):
+                for blk in content:
+                    if isinstance(blk, dict) and blk.get("type") == "text":
+                        text_val = blk.get("text") or ""
+                        if text_val:
+                            blocks.append({"type": "text", "text": text_val})
+            for tc in msg.get("tool_calls") or []:
+                if not isinstance(tc, dict):
+                    continue
+                func = tc.get("function") if isinstance(tc.get("function"), dict) else {}
+                args_str = func.get("arguments")
+                if isinstance(args_str, str):
+                    try:
+                        args_dict = _json.loads(args_str) if args_str.strip() else {}
+                    except (ValueError, TypeError):
+                        args_dict = {}
+                elif isinstance(args_str, dict):
+                    args_dict = args_str
+                else:
+                    args_dict = {}
+                blocks.append({
+                    "type": "tool_use",
+                    "id": str(tc.get("id") or ""),
+                    "name": str(func.get("name") or ""),
+                    "input": args_dict,
+                })
+            if not blocks:
+                # 极端情况: 空 blocks, 给一个占位 text 避免 Anthropic 报 empty content
+                blocks.append({"type": "text", "text": ""})
+            result.append({"role": "assistant", "content": blocks})
+        else:
+            flush_tool_results()
+            result.append(msg)
+
+    flush_tool_results()
+    return result
+
+
+def convert_openai_tool_to_anthropic(openai_tool: dict) -> dict:
+    """OpenAI function-calling 工具定义 → Anthropic tool 定义.
+
+    OpenAI 格式:
+        {"type": "function", "function": {"name": ..., "description": ..., "parameters": {...}}}
+
+    Anthropic 格式:
+        {"name": ..., "description": ..., "input_schema": {...}}
+
+    若入参已经是 Anthropic 格式 (含 name + input_schema) 则原样返回.
+    """
+    if not isinstance(openai_tool, dict):
+        return openai_tool  # 让 SDK 自己抛错
+    # 已经是 Anthropic 格式 (有 input_schema 或者顶层 name 没 type=function 嵌套)
+    if "input_schema" in openai_tool and "name" in openai_tool:
+        return openai_tool
+    # 标准 OpenAI 格式 {"type": "function", "function": {...}}
+    if openai_tool.get("type") == "function" and isinstance(openai_tool.get("function"), dict):
+        fn = openai_tool["function"]
+        return {
+            "name": fn.get("name", ""),
+            "description": fn.get("description", "") or "",
+            "input_schema": fn.get("parameters") or {"type": "object", "properties": {}},
+        }
+    # OpenAI 简化格式 (无 type=function 嵌套但有 name + parameters)
+    if "name" in openai_tool and "parameters" in openai_tool:
+        return {
+            "name": openai_tool["name"],
+            "description": openai_tool.get("description", "") or "",
+            "input_schema": openai_tool["parameters"],
+        }
+    return openai_tool
+
+
+def _extract_tool_uses(raw_blocks: list[dict]) -> list[dict]:
+    """从 native response.content 提取 tool_use blocks (Anthropic format).
+
+    Returns list of {"id", "name", "input"} dict (Anthropic native format).
+    """
+    tool_uses: list[dict] = []
+    for blk in raw_blocks or []:
+        if isinstance(blk, dict) and blk.get("type") == "tool_use":
+            tool_uses.append({
+                "id": blk.get("id", ""),
+                "name": blk.get("name", ""),
+                "input": blk.get("input") or {},
+            })
+    return tool_uses
+
+
 def _native_response_to_openai_shape(response: Any) -> dict[str, Any]:
     """anthropic.types.Message → OpenAI chat completion shape.
 
     让 chat_completion 上层完全无感切换. 额外字段以 `_native_*` 前缀传递.
+
+    Tool use blocks 同时以 Anthropic native (在 _native_raw_content) 和 OpenAI-style
+    tool_calls (在 message.tool_calls) 两种形式提供, 兼容两种上层调用方.
     """
+    import json as _json
     text, raw_blocks = _extract_text_and_raw(response)
     applied_edits = _extract_applied_edits(response)
+    tool_uses = _extract_tool_uses(raw_blocks)
+
+    # 把 Anthropic tool_use blocks 转 OpenAI tool_calls 格式给上层 with_tools loop
+    openai_tool_calls: list[dict] = []
+    for tu in tool_uses:
+        try:
+            args_json = _json.dumps(tu.get("input") or {}, ensure_ascii=False)
+        except (TypeError, ValueError):
+            args_json = "{}"
+        openai_tool_calls.append({
+            "id": tu.get("id", ""),
+            "type": "function",
+            "function": {"name": tu.get("name", ""), "arguments": args_json},
+        })
 
     usage_obj = getattr(response, "usage", None)
     if hasattr(usage_obj, "model_dump"):
@@ -202,20 +363,25 @@ def _native_response_to_openai_shape(response: Any) -> dict[str, Any]:
     else:
         usage = {}
 
+    message_dict: dict[str, Any] = {
+        "role": "assistant",
+        "content": text,
+        "_native_raw_content": raw_blocks,
+    }
+    if openai_tool_calls:
+        message_dict["tool_calls"] = openai_tool_calls
+
     return {
         "choices": [
             {
-                "message": {
-                    "role": "assistant",
-                    "content": text,
-                    "_native_raw_content": raw_blocks,
-                },
+                "message": message_dict,
                 "finish_reason": getattr(response, "stop_reason", None) or "stop",
             }
         ],
         "usage": usage,
         "model": getattr(response, "model", ""),
         "_native_applied_edits": applied_edits,
+        "_native_tool_uses": tool_uses,
     }
 
 
@@ -307,6 +473,9 @@ async def post_messages_native(
         timeout=timeout,
     )
 
+    # Pre-step: OpenAI 风格 tool history (role=tool, assistant.tool_calls) → Anthropic
+    # native (assistant.content=[tool_use], user.content=[tool_result]).
+    messages = _convert_history_for_anthropic(messages)
     # 拆分顶部 system + 对话, 并 normalize multimodal content
     system_blocks, other_messages = _split_system_and_messages(messages)
     other_messages = [_normalize_message_content(m) for m in other_messages]
@@ -321,7 +490,9 @@ async def post_messages_native(
     if temperature is not None:
         create_kwargs["temperature"] = temperature
     if tools:
-        create_kwargs["tools"] = tools
+        # 自动检测 + 转换 OpenAI tools 格式到 Anthropic 格式
+        # convert_openai_tool_to_anthropic 对已经是 Anthropic 格式的 tool 原样返回
+        create_kwargs["tools"] = [convert_openai_tool_to_anthropic(t) for t in tools]
 
     # server-side compaction (compact-2026-01-12)
     if enable_compaction:
@@ -371,6 +542,61 @@ async def post_messages_native(
     return data
 
 
+async def post_messages_native_data(
+    config: Any,  # Config 类型, 避免循环 import
+    messages: list[dict],
+    *,
+    tools: list[dict] | None = None,
+) -> dict[str, Any]:
+    """走 native /v1/messages, 返回完整 OpenAI-compat response dict (含 tool_calls).
+
+    给 chat_completion_with_tools 用 — 它需要 dict 形式 response 才能跑 tool calling
+    loop (检查 message.tool_calls, 提取 function name/args, 执行, 写 result 回 history).
+    跟 _post_anthropic_native_chat 区别: 它返回纯 text (str), 这个返回完整 dict.
+
+    复用 prompt_cache.py 同款 cache_control 注入逻辑 (cachingAtDepthForClaude +
+    inject_system_tail_cache) 让 native + with_tools 路径也享受 cache hit.
+    """
+    _cache_enable = bool(getattr(config, "catty_prompt_cache_enabled", True))
+    _non_system_count = sum(
+        1 for m in messages
+        if isinstance(m, dict) and m.get("role") in ("user", "assistant")
+    )
+    _cache_depth_base = int(getattr(config, "catty_prompt_cache_depth", 2))
+    _cache_depth_dynamic = 4 if _non_system_count >= 12 else _cache_depth_base
+
+    prepared_messages = messages
+    if _cache_enable:
+        import copy as _copy
+
+        from .prompt_cache import (
+            cachingAtDepthForClaude,
+            inject_system_tail_cache,
+        )
+        try:
+            prepared_messages = _copy.deepcopy(messages)
+            cachingAtDepthForClaude(prepared_messages, cachingAtDepth=_cache_depth_dynamic)
+            inject_system_tail_cache(prepared_messages)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("native_data path: cache injection failed (%s), 降级到无 cache", exc)
+            prepared_messages = messages
+
+    return await post_messages_native(
+        base_url=config.catty_openai_base_url,
+        api_key=config.catty_openai_api_key,
+        model=config.catty_openai_model,
+        messages=prepared_messages,
+        max_tokens=config.catty_max_tokens or 4096,
+        temperature=config.catty_temperature,
+        timeout=float(config.catty_request_timeout),
+        enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
+        compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
+        tools=tools,
+    )
+
+
 __all__ = [
     "post_messages_native",
+    "post_messages_native_data",
+    "convert_openai_tool_to_anthropic",
 ]

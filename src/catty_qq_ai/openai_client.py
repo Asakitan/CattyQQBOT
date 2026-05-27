@@ -875,38 +875,41 @@ async def chat_completion_with_tools(
         # 云端冷却期不带 tools 试,直接走 fallback 链。
         _logger.info("tool_chat: cloud unhealthy → fallback to plain chat_completion (no tools)")
         return await chat_completion(config, messages)
-    # 主人 2026-05-28: native /v1/messages 路径享受 cache hit 100% (5min TTL prefix 命中).
-    # with_tools 走 OpenAI-compat /chat/completions 经中转层时 cache 不能命中 (NewAPI 不
-    # 透传 OpenAI-style cache_control 字段). native_enabled=true 时直接降到 plain
-    # chat_completion 保 cache hit, **暂时牺牲 tool calling**. 真正修复需要 Anthropic
-    # tools 格式 converter + tool_use/tool_result blocks 处理, 工程量大留后续 commit.
-    if getattr(config, "catty_anthropic_native_enabled", False):
-        _logger.info(
-            "tool_chat: native_enabled=True → bypass tools for cache hit, going plain chat_completion (tools dropped: %d)",
-            len(tools),
-        )
-        return await chat_completion(config, messages)
-    _logger.info("tool_chat: starting with %d tools available", len(tools))
+    # 主人 2026-05-28: native_enabled 时 with_tools 走 native /v1/messages 完整 tool
+    # calling loop (post_messages_native_data 自动转换 OpenAI tools → Anthropic tools
+    # 格式 + history 里 OpenAI 风格 tool 消息 → Anthropic native tool_use/tool_result
+    # blocks), 享受 cache hit 100% 同时保留 tool 调用能力.
+    _native_route = bool(getattr(config, "catty_anthropic_native_enabled", False))
+    if _native_route:
+        _logger.info("tool_chat: starting with %d tools available (native /v1/messages)", len(tools))
+    else:
+        _logger.info("tool_chat: starting with %d tools available (OpenAI-compat)", len(tools))
 
     history: list[ChatMessage] = list(messages)
     for round_idx in range(max(1, max_rounds)):
         try:
-            data = await _post_chat_completion_raw(
-                base_url=config.catty_openai_base_url,
-                api_key=config.catty_openai_api_key,
-                model=config.catty_openai_model,
-                messages=history,
-                timeout=config.catty_request_timeout,
-                proxy=config.catty_http_proxy,
-                temperature=config.catty_temperature,
-                max_tokens=config.catty_max_tokens,
-                extra_headers=config.catty_openai_extra_headers,
-                extra_body=config.catty_openai_extra_body,
-                tools=tools,
-                tool_choice="auto",
-                enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
-                cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
-            )
+            if _native_route:
+                from .anthropic_native_client import post_messages_native_data
+                data = await post_messages_native_data(
+                    config, history, tools=tools,
+                )
+            else:
+                data = await _post_chat_completion_raw(
+                    base_url=config.catty_openai_base_url,
+                    api_key=config.catty_openai_api_key,
+                    model=config.catty_openai_model,
+                    messages=history,
+                    timeout=config.catty_request_timeout,
+                    proxy=config.catty_http_proxy,
+                    temperature=config.catty_temperature,
+                    max_tokens=config.catty_max_tokens,
+                    extra_headers=config.catty_openai_extra_headers,
+                    extra_body=config.catty_openai_extra_body,
+                    tools=tools,
+                    tool_choice="auto",
+                    enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
+                    cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
+                )
         except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
             _logger.warning(
                 "chat_completion_with_tools: round %d cloud call failed (%s); degrading to plain chat_completion",
