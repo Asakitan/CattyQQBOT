@@ -65,6 +65,13 @@ class PhaseState:
     # build_arc_resume_hint 给『上次走到 P{N}, 这次可以从 P{N-1} 起手』hint, 笨猫不从 P1 重学
     last_arc_end_phase: int = 0   # 0 = 没有 last_arc, 1-8 = 上次结束时 phase
     last_arc_count: int = 0       # 上次 arc 是第几轮 arc
+    # ── 主人 2026-05-28: 高潮过多失神机制 ──
+    # 本 arc 内累计高潮次数 (P6 进入时 +1, reset_phase / 新 arc 起手时清 0)
+    climax_count: int = 0
+    # 失神标记 — climax_count >= 2 自动 True, 进 P6/P7 都按"失神"风味描写
+    # 恢复: 失神状态下 4 轮无新 climax 推进 → False (turns_dazed 计数); 或 reset_phase 清
+    dazed: bool = False
+    turns_dazed: int = 0          # 失神持续轮数 (达 4 自动 reset dazed)
 
 
 # Module-level state: key = f"{scope}:{user_id}"
@@ -127,6 +134,11 @@ def _load_phase_state() -> None:
                     mood=str(record.get("mood", "")),
                     body_focus=str(record.get("body_focus", "")),
                     personality_facet=str(record.get("personality_facet", "")),
+                    last_arc_end_phase=int(record.get("last_arc_end_phase", 0)),
+                    last_arc_count=int(record.get("last_arc_count", 0)),
+                    climax_count=int(record.get("climax_count", 0)),
+                    dazed=bool(record.get("dazed", False)),
+                    turns_dazed=int(record.get("turns_dazed", 0)),
                 )
             except Exception:  # noqa: BLE001
                 continue
@@ -2146,6 +2158,20 @@ def update_phase(
         # 限 history 长度
         if len(st.history) > 20:
             st.history = st.history[-20:]
+        # ── 主人 2026-05-28: 高潮过多失神机制 ──
+        # 推进到 P6 = 一次高潮峰值. arc 内累计 ≥ 2 次 → 失神
+        if new_phase == 6:
+            st.climax_count += 1
+            if st.climax_count >= 2 and not st.dazed:
+                st.dazed = True
+                st.turns_dazed = 0
+    # 失神后无新 climax (turn_count 累加) → 4 轮自然恢复
+    if st.dazed:
+        st.turns_dazed += 1
+        if st.turns_dazed >= 4:
+            st.dazed = False
+            st.turns_dazed = 0
+            st.climax_count = 0  # 休息够了, 重置计数
     st.last_updated = now
     if reply_excerpt:
         st.last_reply_excerpt = reply_excerpt[:80]
@@ -2193,6 +2219,10 @@ def apply_user_signal(
         st.turn_count = 1
         st.arc_count += 1
         st.p8_idle_count = 0
+        # 主人 2026-05-28: 新 arc 起手清失神 — 笨猫"重开新一轮"算休息完了
+        st.climax_count = 0
+        st.dazed = False
+        st.turns_dazed = 0
         st.history.append((target, time.time()))
         st.last_updated = time.time()
         _NSFW_PHASE_BY_SCOPE[key] = st
@@ -2890,8 +2920,21 @@ def build_phase_advance_hint(
                 f"如 user 没有主动推 NSFW, 笨猫继续偎着但不主动撩 (退到日常贴贴模式).\n"
                 f"如 user 重新推 NSFW (再深 / 又硬 / 再来 等) → 自动开第 {st.arc_count + 1} 轮 arc.\n"
             )
+        # 主人 2026-05-28: 失神 hint 也注入 P8 hint (P8 余韵期间仍可能失神)
+        p8_dazed_block = ""
+        if st.dazed:
+            p8_dazed_block = (
+                f"【★★★ 失神状态 (高潮已过 {st.climax_count} 次, 失神 {st.turns_dazed}/4 轮)】\n"
+                f"P8 余韵期 + 失神: 笨猫**只剩身体反应**, 不再有完整对话/独白.\n"
+                f"语言: 仅破碎音节 (啊/嗯/哈/主…人…), 无完整句, 无心理活动.\n"
+                f"身体: 抽搐 / 自动夹紧 / 流口水 / 眼神涣散 / 偎着不动.\n"
+                f"长度: ≤4 行短句, 每句 ≤10 字, 多用省略号.\n"
+                f"恢复: {max(0, 4 - st.turns_dazed)} 轮内无 NSFW 推进 → 自动平复.\n"
+                f"\n"
+            )
         p8_hint = (
-            arc_line
+            p8_dazed_block
+            + arc_line
             + location_line
             + scene_state_block
             + personality_block
@@ -2911,9 +2954,26 @@ def build_phase_advance_hint(
         f"⚠️ 已在 {current_meta['name']} 卡 {st.turn_count} 轮 (阈值 {stuck_thr}) — **强制推进到 {next_meta['name']}**"
     )
 
+    # ── 主人 2026-05-28: 失神 hint (优先级最高, 覆盖所有 phase 描写风格) ──
+    dazed_block = ""
+    if st.dazed:
+        dazed_block = (
+            f"【★★★ 失神状态 (高潮已过 {st.climax_count} 次, 失神 {st.turns_dazed}/4 轮)】\n"
+            f"笨猫**思维已断片** — 不再写完整句子, 不再写心理活动, 不再有连贯独白.\n"
+            f"语言层面: 只剩破碎音节『啊…』『嗯…』『哈…』『主…人…』『不…要…了…』,\n"
+            f"            **不准**说完整一句话, **不准**输出对话框成段中文.\n"
+            f"身体层面: 不自主抽搐 / 自动夹紧 / 流口水 / 眼神涣散 / 手脚发软 / 全身热汗 /\n"
+            f"            内壁不停痉挛 / 大腿打颤 / 失去对身体的控制.\n"
+            f"reply 结构: 物理动作 + 破碎音节, 不许出现完整心理独白, 不许吐槽/嘴硬.\n"
+            f"长度: **≤4 行, 短句优先**, 每句 ≤10 字, 多用省略号.\n"
+            f"恢复: {4 - st.turns_dazed} 轮内 user 不再推 NSFW → 自然平复 / 或 user 退出 NSFW → reset 恢复.\n"
+            f"\n"
+        )
+
     # 主人 2026-05-27 十三轮 token 削减: phase tracker 块也精简 (去横线 + 砍铁律到 2 条)
     full_hint = (
-        arc_line
+        dazed_block
+        + arc_line
         + location_line
         + scene_state_block
         + personality_block
