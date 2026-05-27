@@ -55,16 +55,30 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
     # 多个 breakpoints 设计: Anthropic 找最长匹配 prefix → 即使 messages 末尾 user content
     # 每次变, system 末尾 marker (inject_system_tail_cache 标的 boundary block) 那个
     # breakpoint 还能 hit prefix 段.
+    # 主人 2026-05-28 C3: CC 风格 — 让 cache prefix 包含整个 history, 而不是只到 msg[0].
+    # 之前: cache_control 标 msg[0] (first user), prefix = sys + msg[0] = ~6K, 浪费 history.
+    # 现在: 同时标 user_indices[0] (头 anchor) + user_indices[-2] (上一轮 user, byte 稳定).
+    # cache prefix 含完整 history (到上一轮 user), cache_create 涨到 ~20K+.
+    #
+    # 为什么标 user_indices[-2] 而非 [-1]:
+    # - [-1] = 当前 user msg, 内容每轮变 (volatile) → cache 永远 miss
+    # - [-2] = 上一轮 user msg, 已固化进 history (byte 稳定) → cache 命中
+    # - 上一轮 assistant reply 也在 prefix 里 (在 user[-2] 之前), 完整 history 进 cache
+    #
+    # Anthropic 注: cache_control 只在 user / system / tool blocks 生效, assistant 上被忽略.
+    # 所以必须用 user_indices, 不能用 messages[-2] (可能是 assistant).
     user_indices = [i for i, m in enumerate(messages) if isinstance(m, dict) and m.get("role") == "user"]
     if not user_indices:
         return messages
-    # 主人 2026-05-28 多轮实验结论:
-    # - 标 [msg[0]+msg[-1]]: cache_read=0 (Anthropic 只持久化 longest=msg[-1]=current user 每次变)
-    # - 标 [msg[0]] only:    cache_read=0 (longest=msg[0] prefix=sys[ALL]+msg[0], sys 末尾动态 → miss)
-    # - sys-only:           cache_create=0 (Anthropic 拒绝 sys-only cache)
-    # 最终方案: msg[0] cache_control + 把 boundary 后的 system dynamic 段全部 inline 到
-    # current user msg content (不进 system_blocks), 这样 sys[ALL] 字节稳定, msg[0] prefix 能 hit.
+    # 标 msg[user_indices[0]] (history 头) — 单 user 场景就这一个 anchor
     _mark_cache_control(messages[user_indices[0]])
+    # 标 msg[user_indices[-2]] (上一轮 user, history 里最新固化的 user msg) — 多 user 场景才有
+    # 这让 prefix 包含完整 history, cache_create 大幅增加.
+    if len(user_indices) >= 3:
+        # ≥3 个 user: 至少 [first_user, history_user(s), current_user], -2 是中间或上一轮
+        anchor_idx = user_indices[-2]
+        if anchor_idx != user_indices[0]:  # 避免单 history 场景重复标
+            _mark_cache_control(messages[anchor_idx])
     return messages
 
 
