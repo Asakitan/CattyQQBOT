@@ -413,7 +413,12 @@ async def _post_chat_completion_raw(
     # OpenAI native 收到 cache_control 字段会忽略 (unknown field); Claude / 中间人走
     # Claude 协议时才真正命中 cache.
     if enable_cache:
-        from .prompt_cache import cachingAtDepthForClaude, inject_system_tail_cache, is_claude_endpoint
+        from .prompt_cache import (
+            cachingAtDepthForClaude,
+            inject_system_tail_cache,
+            inject_tools_cache,
+            is_claude_endpoint,
+        )
         try:
             # 深拷贝避免修改调用方 messages (会被多次注入污染)
             import copy
@@ -423,6 +428,10 @@ async def _post_chat_completion_raw(
             # 仅 Claude endpoint 加 anthropic-beta header (避免 OpenAI 报 unknown header)
             if is_claude_endpoint(base_url, model):
                 headers["anthropic-beta"] = "prompt-caching-2024-07-31"
+                # P5: Claude tools[-1] cache_control (4th breakpoint, 跟 message 那 3 个配对).
+                # 中转层若不识别该字段会忽略; 失败时 try/except 兜底降级到无 tools cache.
+                if tools:
+                    tools = inject_tools_cache(tools)
         except Exception as exc:  # noqa: BLE001
             _logger.warning(f"prompt cache 注入失败 (降级到无 cache): {exc}")
 

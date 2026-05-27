@@ -119,13 +119,17 @@ def build_ambient_prompt(messages: list[AmbientMessage]) -> str:
     now = time.time()
     lines = ["【笨猫·周边对话 (ambient, 听到但没人直接叫你)】"]
     for m in messages:
-        age_min = max(0, int((now - m.ts) / 60))
-        if age_min < 1:
+        age_s = max(0.0, now - m.ts)
+        if age_s < 120:
             age_label = "刚刚"
-        elif age_min < 60:
-            age_label = f"{age_min} 分钟前"
+        elif age_s < 5 * 60:
+            age_label = "几分钟前"
+        elif age_s < 15 * 60:
+            age_label = "十几分钟前"
+        elif age_s < 30 * 60:
+            age_label = "半小时内"
         else:
-            age_label = f"{age_min // 60} 小时前"
+            age_label = "半小时前"
         nick = m.nickname or "?"
         lines.append(f"- [{age_label}] {nick}: {m.text}")
     lines.append(

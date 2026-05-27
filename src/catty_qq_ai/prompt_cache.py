@@ -134,6 +134,30 @@ def inject_system_tail_cache(messages: list[dict]) -> list[dict]:
     return messages
 
 
+def inject_tools_cache(tools: list[dict]) -> list[dict]:
+    """给 tools 列表最后一个 entry 加 cache_control 用掉 Anthropic 第 4 个 breakpoint.
+
+    tools schema 内容稳定 (function 定义不变), 单独 cache 后 Claude 不用每次重算 tool 段;
+    用掉 4 个 breakpoint 中的 tools[-1] 那一个, 跟 system tail + 倒数 N + 倒数 N+2 配对.
+
+    OpenAI native 收到 cache_control 字段会忽略 (跟 message 那侧逻辑一致),
+    但调用方仍建议只对 Claude endpoint 调用以避免中转层严格校验.
+
+    返回新 list (浅拷贝最后一个 dict + 加字段), 不修改入参.
+    """
+    if not tools:
+        return tools
+    new_tools = list(tools[:-1])
+    last = tools[-1]
+    if isinstance(last, dict):
+        last_copy = dict(last)
+        last_copy["cache_control"] = {"type": "ephemeral"}
+        new_tools.append(last_copy)
+    else:
+        new_tools.append(last)
+    return new_tools
+
+
 def is_claude_endpoint(base_url: str, model: str) -> bool:
     """判断当前 endpoint 是否走 Claude / Anthropic 协议 — 决定要不要注入 cache_control."""
     bu = (base_url or "").lower()
@@ -209,5 +233,6 @@ __all__ = [
     "adapt_assistant_prefill_for_strict_user_end",
     "cachingAtDepthForClaude",
     "inject_system_tail_cache",
+    "inject_tools_cache",
     "is_claude_endpoint",
 ]

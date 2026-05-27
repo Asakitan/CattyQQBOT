@@ -1079,7 +1079,7 @@ class MemoryStore:
             image = "+图" if item.get("has_image") else ""
             temperature_prefix = ""
             if include_temperature:
-                temperature_prefix = f"[温度{temperature:.2f}/{_temperature_label(temperature)}] "
+                temperature_prefix = f"[{_temperature_label(temperature)}] "
             lines.append(f"{temperature_prefix}{name}({user_id}{image}): {text}")
         return lines
 
@@ -1092,7 +1092,7 @@ class MemoryStore:
         prompt = (
             '压缩QQ群长期记忆，省token。只输出JSON：'
             '{"summary":"<=2500字","members":[{"user_id":"QQ","display_name":"名","gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}]}。'
-            f"语料行前的温度0-1表示当前话题热度；低于{CONTENT_TEMPERATURE_SUMMARY_COLD_THRESHOLD:.2f}的旧梗、脏话、攻击性/露骨玩笑只作背景，"
+            "语料行前的[热]/[降温]/[冷]标签表示当前话题热度；[冷]档的旧梗、脏话、攻击性/露骨玩笑只作背景，"
             "除非多次重复或明确是稳定偏好/事实，否则不要写进摘要或人物画像，避免以后主动复读。"
             "只写有证据的信息；性别不确定写未知；不要Markdown/emoji。"
         )
@@ -1138,7 +1138,7 @@ class MemoryStore:
                 f"群摘要：{summary}",
                 f"互动分：{self._interaction_score(state)}/100；今日群友消息：{int(state.get('daily_human_messages') or 0)}；今日已主动冒泡：{int(state.get('daily_sent') or 0)}。",
                 f"上次主动冒泡无人回应：{sadness}",
-                "记忆温度规则：近期群聊里的温度越低，说明越像旧梗/冷掉的话题；低温内容不要主动续，除非群友重新提起。",
+                "记忆温度规则：[冷]/[降温]标签说明像旧梗/冷掉的话题；[冷]内容不要主动续，除非群友重新提起。",
                 "已知群友：" + ("；".join(known) if known else "暂无"),
                 "近期群聊：",
                 "\n".join(recent_lines[-(recent_limit or self.proactive_recent_messages) :]) if recent_lines else "暂无热话题",
@@ -1155,7 +1155,7 @@ class MemoryStore:
         prompt = (
             '压缩QQ私聊记忆，省token。只输出JSON：'
             '{"summary":"<=2500字","profile":{"gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}}。'
-            "语料行前的温度0-1表示当前话题热度；低温旧梗、一次性玩笑或情绪化片段只作背景，"
+            "语料行前的[热]/[降温]/[冷]标签表示当前话题热度；[冷]档的旧梗、一次性玩笑或情绪化片段只作背景，"
             "除非反复出现或是稳定偏好/边界，否则不要写进长期摘要。"
             "只写偏好、事实、称呼、边界；不要Markdown/emoji。"
         )
@@ -1176,7 +1176,7 @@ class MemoryStore:
         prompt = (
             '根据群里50次提到某人的上下文做短画像。只输出JSON：'
             '{"user_id":"QQ","gender":"男/女/未知","title":"称呼","impression":"<=140字","evidence":"<=60字","confidence":"低/中/高"}。'
-            "语料行前的温度0-1表示当前话题热度；低温单次调侃、脏梗或攻击性称呼不要当成人物稳定特征。"
+            "语料行前的[热]/[降温]/[冷]标签表示当前话题热度；[冷]档单次调侃、脏梗或攻击性称呼不要当成人物稳定特征。"
             "只根据上下文证据；不要Markdown/emoji。"
         )
         user_content = (

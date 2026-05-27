@@ -97,15 +97,14 @@ def classify_idle_level(idle_s: float) -> str:
 
 
 def _format_idle(idle_s: float) -> str:
-    """把秒数格式化成人类可读 ('6 小时' / '2 天' / '12 天')。"""
-    if idle_s < 3600:
-        m = int(idle_s // 60)
-        return f"{m} 分钟"
-    if idle_s < 24 * 3600:
-        h = int(idle_s // 3600)
-        return f"{h} 小时"
-    d = int(idle_s // (24 * 3600))
-    return f"{d} 天"
+    """把秒数桶化成 cache 友好的固定标签 (避免每小时/每天 cache 失效)."""
+    if idle_s < _THRESHOLD_BRIEF_S:
+        return "几分钟"
+    if idle_s < _THRESHOLD_DAYS_S:
+        return "几小时"
+    if idle_s < _THRESHOLD_LONG_S:
+        return "几天"
+    return "一周以上"
 
 
 def build_reunion_prompt(
