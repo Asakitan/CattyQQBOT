@@ -234,17 +234,46 @@ def compute_now(*, delta_days: int = 0, reference: datetime | None = None) -> di
     return result
 
 
+_FESTIVAL_THEMED_HINTS: dict[str, str] = {
+    # 主人 2026-05-28: 节日命中时附加主题 hint, 让笨猫主动节日表达 (不是只祝福)
+    "情人节": "今天情人节, 笨猫可以主动撒娇/索要拥抱/暗示想要主人特别对待, NSFW 路径可以走情人节专属 trope",
+    "白色情人节": "白色情人节(男方回礼日), 笨猫可以主动暗示『主人欠人家一份礼物喵』",
+    "七夕": "今天七夕, 笨猫可以主动撒娇/玩牛郎织女 trope/暗示一年一会的浪漫, NSFW 可以走『一年一见特别许愿』",
+    "中秋节": "今天中秋, 笨猫可以主动提赏月/吃月饼/抱抱主人喵, 营造团圆暖意",
+    "春节": "今天春节, 笨猫穿红色喜庆/拜年/讨红包/主动撒娇要压岁钱",
+    "元宵节": "今天元宵节, 笨猫提汤圆/看花灯/猜灯谜的氛围",
+    "端午节": "今天端午, 笨猫可以提粽子/赛龙舟氛围, 比较平和",
+    "圣诞节": "今天圣诞, 笨猫戴红帽 trope/讨礼物/暗示想要主人当圣诞礼物",
+    "万圣节": "今天万圣, 笨猫扮 cosplay (女巫/吸血鬼/猫娘加 cos)/主动 trick or treat",
+    "儿童节": "今天儿童节, 笨猫可以主动卖萌讨糖/扮幼态 (撒娇额度 ↑)",
+}
+
+
 def build_time_context(*, reference: datetime | None = None) -> str:
     """主回复链路用:返回一段 system prompt 文本,自动注入当前时刻 + 节日。
 
     让 AI 不必主动调 catty_now tool 就知道时间/星期/时段/节日,减少一次工具轮次。
     详细查询(偏移天数)仍可通过 catty_now tool。
+
+    主人 2026-05-28: 命中节日时附加主题 hint, 让笨猫主动 themed 表达
+    (七夕→撒娇浪漫, 中秋→提赏月, 圣诞→讨礼物 等).
     """
     payload = compute_now(reference=reference)
     body = format_for_prompt(payload)
     if not body:
         return ""
-    return f"当前时刻: {body}。你回应时可以参考时段氛围(深夜→唠叨早睡、饭点→吃了没、节日→祝福),但**不要每条都报时**。"
+    base = f"当前时刻: {body}。你回应时可以参考时段氛围(深夜→唠叨早睡、饭点→吃了没、节日→祝福),但**不要每条都报时**。"
+    # 节日主题 hint (boundary 之后的 dynamic 段, 不破 stable cache)
+    festivals = payload.get("festivals_today") or []
+    themed_lines = []
+    for f in festivals:
+        name = f.get("name", "")
+        hint = _FESTIVAL_THEMED_HINTS.get(name)
+        if hint:
+            themed_lines.append(f"  · {hint}")
+    if themed_lines:
+        base = base + "\n【节日 themed hint】\n" + "\n".join(themed_lines)
+    return base
 
 
 def format_for_prompt(payload: dict[str, Any]) -> str:

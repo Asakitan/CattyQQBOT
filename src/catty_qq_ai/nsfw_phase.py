@@ -23,6 +23,7 @@ import json
 import threading
 import time
 from dataclasses import dataclass, field, asdict
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -548,6 +549,12 @@ TIME_OF_DAY_PRESETS: dict[str, dict[str, Any]] = {
         "keywords": ("晚上", "晚间", "傍晚", "evening", "天黑了", "下班了", "夜里"),
         "vibe": "正常晚间 NSFW — 床上 / 沙发 / 浴室常规节奏",
     },
+    "afternoon": {
+        "name": "下午",
+        "ambient": "下午光线斜进来, 房间发懒, 笨猫蜷在沙发/床上半睡半醒, 容易犯困",
+        "keywords": ("下午", "afternoon", "午后", "刚睡醒", "回笼觉"),
+        "vibe": "午后慵懒 — 半睡半醒被叫醒 / 刚回笼觉被欺负, 反应慢半拍带困意",
+    },
     "midnight": {
         "name": "深夜",
         "ambient": "深夜整个楼都安静, 只有挂钟滴答, 笨猫的喘息听起来特别响",
@@ -555,6 +562,41 @@ TIME_OF_DAY_PRESETS: dict[str, dict[str, Any]] = {
         "vibe": "深夜安静 — 必须压低声音 / 怕吵醒别人 / 失眠抚慰 trope",
     },
 }
+
+
+def _outfit_from_month(month: int) -> str:
+    """主人 2026-05-28: 现实月份 → 默认 outfit (跟 OUTFIT_PRESETS 对齐).
+
+    update_scene_state fallback: user msg 没指定 outfit + state 也空时填这个.
+    主人明说 outfit 仍然 override (state sticky), 这只是没 hint 时的合理默认.
+
+    映射: 春秋 jk / 夏 swimsuit-style / 冬 pajama 暖装
+    (主人想要的"季节驱动 outfit", 用现有 preset, 不新建 preset 避免膨胀)
+    """
+    if 3 <= month <= 5:
+        return "jk"        # 春: 学院制服, 大众默认
+    if 6 <= month <= 8:
+        return "swimsuit"  # 夏: 泳装 (海边/泳池 trope 高频)
+    if 9 <= month <= 11:
+        return "jk"        # 秋: jk 仍然合适
+    return "pajama"        # 冬 (12, 1, 2): 暖睡衣
+
+
+def _time_of_day_from_hour(hour: int) -> str:
+    """主人 2026-05-28: 现实时间 → time_of_day key (跟 TIME_OF_DAY_PRESETS 对齐).
+
+    主回复链路在 update_scene_state 内, 若 user msg + reply 都没检测到时段词,
+    用此 fallback 填充. 让 NSFW arc 自动跟现实时刻 (凌晨 3 点开 → midnight 描写).
+    """
+    if 5 <= hour < 11:
+        return "morning"
+    if 11 <= hour < 14:
+        return "noon"
+    if 14 <= hour < 19:
+        return "afternoon"
+    if 19 <= hour < 23:
+        return "evening"
+    return "midnight"  # 23-5 深夜
 
 
 _TIME_KEYWORD_TABLE: list[tuple[str, str]] = sorted(
@@ -2282,6 +2324,13 @@ def update_scene_state(scope: str, user_id: str, user_text: str, reply_text: str
     new_mood = detect_mood_from_text(combined)
     new_focus = detect_body_focus_from_text(combined)
     new_facet = detect_personality_from_text(combined)
+    # 主人 2026-05-28: time_of_day + outfit 没明确检测到时, 用现实时间 / 月份 fallback.
+    # 只影响 NSFW spark hint (build_phase_advance_hint), 不破主路径 stable system cache.
+    _now_for_fallback = datetime.now()
+    if not new_tod and not (st and st.time_of_day):
+        new_tod = _time_of_day_from_hour(_now_for_fallback.hour)
+    if not new_outfit and not (st and st.outfit):
+        new_outfit = _outfit_from_month(_now_for_fallback.month)
 
     if st is None:
         _gc_old_states()
