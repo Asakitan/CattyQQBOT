@@ -74,6 +74,30 @@ class Config(BaseModel):
     # HTTP 直连 origin 没有这个限制。chat_completion 短不受影响,保持 HTTPS。
     catty_imagegen_force_http_scheme: bool = True
 
+    # ── NovelAI 路径(provider="nai") ──
+    # 主 AI 在 catty_imagegen tool 里选 provider="nai" 时走这条; 二次元/动漫/角色立绘适用。
+    # 三个标准尺寸: portrait 832x1216 / landscape 1216x832 / square 1024x1024
+    # Opus tier3 订阅在这三档 + steps<=28 + n_samples=1 是免费的(Anlas=0)。
+    catty_imagegen_nai_enabled: bool = False
+    catty_imagegen_nai_token: str = ""
+    catty_imagegen_nai_model: str = "nai-diffusion-4-5-full"
+    # references(vibe transfer / precise reference): v4.5/v4 实测 500, 只有 v3 后端还接受。
+    # 检测到 args.references 时自动 fallback 到这个模型,同时剥离 v4 特有字段。
+    catty_imagegen_nai_vibe_fallback_model: str = "nai-diffusion-3"
+    catty_imagegen_nai_default_aspect: str = "portrait"  # portrait / landscape / square
+    catty_imagegen_nai_steps: int = 28
+    catty_imagegen_nai_scale: float = 5.0
+    catty_imagegen_nai_sampler: str = "k_euler_ancestral"
+    catty_imagegen_nai_noise_schedule: str = "karras"
+    catty_imagegen_nai_default_negative: str = (
+        "lowres, worst quality, low quality, bad anatomy, bad hands, "
+        "missing fingers, extra fingers, watermark, signature, jpeg artifacts"
+    )
+    catty_imagegen_nai_timeout_seconds: float = 180.0
+    # 基础 5 积分,多 1 Anlas +3 积分(三个标准尺寸 + 默认 28 steps 时 Anlas=0,只扣 5)
+    catty_imagegen_nai_base_points: int = 5
+    catty_imagegen_nai_points_per_anlas: int = 3
+
     # 慢请求 placeholder:主回复 chat_completion 进入后超过该秒数没回,先 send 一句轻量占位
     # 避免用户以为 bot 卡死了/被忽略了。0 或负数 = 禁用。
     catty_slow_reply_placeholder_seconds: float = 30.0

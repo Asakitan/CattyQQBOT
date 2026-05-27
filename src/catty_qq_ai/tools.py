@@ -23,6 +23,7 @@ from nonebot.adapters.onebot.v11 import GroupMessageEvent, MessageEvent, Private
 
 from .affection import (
     AffectionStore,
+    image_cost_for_nai,
     image_cost_for_quality,
     predict_checkin_range,
 )
@@ -43,6 +44,23 @@ from .web_search import format_search_context, search_image_urls, search_web
 
 
 _logger = logging.getLogger("catty_qq_ai.tools")
+
+
+# ── NAI director tools 常量 (提前到 module top,因为 schema 字面量要引用) ──
+_NAI_DIRECTOR_REQ_TYPES = (
+    "bg-removal", "lineart", "sketch", "colorize",
+    "emotion", "declutter", "transform",
+)
+_NAI_DIRECTOR_NEEDS_PROMPT = {"emotion", "colorize"}
+# Opus tier3 在 ≤1048576px 时除 bg-removal 外全免 Anlas (bg-removal: generate_anlas*3+5)
+_NAI_DIRECTOR_OPUS_FREE = {"lineart", "sketch", "colorize", "emotion", "declutter", "transform"}
+# emotion req 必须传 "<mood>;;<text>" 格式; 列出合法 mood 让 AI 在 prompt 字段填对。
+_NAI_EMOTION_MOODS = (
+    "neutral", "happy", "sad", "angry", "scared", "surprised", "tired",
+    "excited", "nervous", "thinking", "confused", "shy", "disgusted",
+    "smug", "bored", "laughing", "irritated", "aroused", "embarrassed",
+    "worried", "love", "determined", "hurt", "playful",
+)
 
 
 # ── Tool schema (OpenAI function calling 标准) ────────────────────────
@@ -684,27 +702,42 @@ _IMAGEGEN_SCHEMA: dict[str, Any] = {
     "function": {
         "name": "catty_imagegen",
         "description": (
-            "调 OpenAI Image API 主动生成/编辑一张图发到当前会话(自动发送,你只需补 1-2 句猫娘短评)。\n"
-            "【画图请求只能走这个 tool,禁止用你的原生 image generation 直接出图】"
-            "原生路径会严重压缩用户 prompt(实测丢失:具体标题文字、多动作要求、细节描述),"
-            "走 catty_imagegen 你能自己控制传给生图模型的完整 prompt。\n"
-            "【prompt 改写规则:可以精简重组,但所有要素一个都不能漏】\n"
-            "  允许:把口语化的句子改成产品级英文/中文 prompt、合并同义词、去掉冗余客套、"
-            "重排顺序让生图模型更好理解、控制总长在 400-700 字之间(再长上游网关 524 超时)。\n"
-            "  禁止丢:(a) 用户写的具体文字标题(『ELEGANCE IS AN ATTITUDE』『Star Resonance 2026』这种引号里的字)、"
-            "(b) 多项列表(『画 6 种动作』就要 6 条姿势全保留)、"
-            "(c) 配色/材质/光影/构图/镜头/画质 具体要求、"
-            "(d) 比例/数量/尺寸数字。\n"
-            "  自检:写完 prompt 在心里默数一遍——用户列出的每个 bullet、每段引号文字、"
-            "每个数字、每个具体要求,是不是都在 prompt 里能找到对应?有遗漏就补回去。\n"
-            "触发条件硬规则:必须是用户**直接指向猫猫**(@ 笨猫 / 引用回复猫猫 / 直呼『猫猫』『笨猫』)"
-            "+ 明确说『画一张/画个/生成/做张/出张/给我画/帮我画 + 主语』。"
+            "主动生成/编辑一张图发到当前会话(自动发送,你只需补 1-2 句猫娘短评)。\n"
+            "【画图请求只能走这个 tool,禁止用你的原生 image generation 直接出图】\n"
+            "\n"
+            "── 两条生图通道(你自己挑) ──\n"
+            "1) provider='gpt'(默认): OpenAI gpt-image-2,擅长**写实/产品图/海报/带文字标题/品牌/UI/真实摄影/3D 渲染**。\n"
+            "   走 size + quality 控制,low 100 / medium 200 / high 300 / auto 150 积分。支持 edit(基于已有图改)。\n"
+            "2) provider='nai': NovelAI v4.5,擅长**二次元/动漫/萌系/角色立绘/萝莉/JK/猫娘/动漫插画**。\n"
+            "   只支持纯文字生成,不支持 edit。走 aspect 三选一(portrait/landscape/square),"
+            "   Opus 订阅档**这三个尺寸 + 默认 28 步只扣基础 5 积分**(免费档),改高 steps/SMEA 会涨。\n"
+            "\n"
+            "── 选哪个? ──\n"
+            "用户没明说时,看主体:\n"
+            "  - 二次元角色/动漫风/猫娘/萌系/插画/卡通/福瑞 SFW → provider='nai'\n"
+            "  - 写实/产品图/海报/带具体英文/中文文字标题/UI/广告/真实风景照 → provider='gpt'\n"
+            "  - 用户**明确指定**『用 NovelAI / 用 nai / 用动漫风格』→ provider='nai'\n"
+            "  - 用户**明确指定**『用 GPT / 用真实风格 / 带文字海报』→ provider='gpt'\n"
+            "  - 不确定时:含『画一个 xx 美少女/角色/二次元』默认 nai,其余默认 gpt。\n"
+            "\n"
+            "── prompt 改写 ──\n"
+            "可以精简重组,但所有要素一个都不能漏。允许:口语化改成生图 prompt、合并同义词、去冗余客套、"
+            "重排顺序让模型理解、控制 400-700 字。\n"
+            "  禁止丢:(a) 用户写的具体文字标题(『ELEGANCE IS AN ATTITUDE』『Star Resonance 2026』引号里的字)、"
+            "(b) 多项列表(『画 6 种动作』就要 6 条全保留)、"
+            "(c) 配色/材质/光影/构图/镜头/画质 具体要求、(d) 比例/数量/尺寸数字。\n"
+            "  对 NAI: 用**英文 danbooru 标签风**最稳(逗号分隔: 1girl, white hair, cat ears, ...),"
+            "中文 NAI 也认但效果差。\n"
+            "  对 GPT: 用**自然英文或中文描述句**,带主体/构图/风格/色调。\n"
+            "\n"
+            "── 触发条件硬规则 ──\n"
+            "必须是用户**直接指向猫猫**(@ 笨猫 / 引用回复猫猫 / 直呼『猫猫』『笨猫』)+ 明确说『画一张/画个/生成/做张/出张/给我画/帮我画 + 主语』。"
             "不要用于:(a) 没指向猫猫的群内闲聊提到画画;(b) 用户没明确要图只是聊到某物;"
             "(c) 表情/梗图就够了的场景(那走 catty_meme_query)。\n"
-            "两种模式:\n"
+            "\n"
+            "── 输入图片(只 gpt 支持) ──\n"
             "- generate(默认): use_input_image=false,纯文字 prompt 生图。\n"
-            "- edit: use_input_image=true,基于一张已有图改/重绘。**同消息**带图(用户发图同时说画)"
-            "或**分消息**回指(用户说『基于刚才那张图画 X』,程序自动拉最近群里出现的图)都支持。\n"
+            "- edit(只 gpt): use_input_image=true,基于一张已有图改/重绘。**同消息**带图或**分消息**回指都行。\n"
             "tool 自动把图发出去,你拿到 image_sent=true 后只需短评『画好啦~』即可,"
             "**禁止**把 image_uri/base64 贴进回复。"
         ),
@@ -714,36 +747,188 @@ _IMAGEGEN_SCHEMA: dict[str, Any] = {
                 "prompt": {
                     "type": "string",
                     "description": (
-                        "图片描述(英文/中文都可,模型自己理解)。500 字以内最佳。"
-                        "应该包含:主体/构图/风格/色调。例:『一只白色猫耳少女蜷在窗台上的午睡场景,日系动漫风格,暖色调』。"
-                        "edit 模式时描述**改动**点(『把背景换成樱花林』『加上猫耳』),不必复述原图全貌。"
+                        "图片描述。500 字以内最佳。\n"
+                        "- gpt: 用自然英文/中文描述句,含主体/构图/风格/色调。"
+                        "例:『一只白色猫耳少女蜷在窗台午睡,日系动漫风格,暖色调』。\n"
+                        "- nai: 用英文 danbooru 标签风,逗号分隔。"
+                        "例:『1girl, white hair, cat ears, school uniform, sleeping on windowsill, warm lighting, anime style』。\n"
+                        "edit 模式(仅 gpt)描述**改动**点,不必复述原图全貌。"
                         "不要加 NSFW/敏感词,会被模型拒绝。"
+                    ),
+                },
+                "provider": {
+                    "type": "string",
+                    "enum": ["gpt", "nai"],
+                    "description": (
+                        "走哪条生图通道。默认 gpt。"
+                        "二次元/动漫/角色立绘选 nai;写实/产品图/带文字海报选 gpt。"
+                        "用户明确说『用 NovelAI』就 nai,说『用 GPT/真实风』就 gpt。"
+                    ),
+                },
+                "aspect": {
+                    "type": "string",
+                    "enum": ["portrait", "landscape", "square"],
+                    "description": (
+                        "**仅 nai 用**。三选一: portrait=832x1216(立绘,默认) / landscape=1216x832(横构图/场景) / square=1024x1024(头像/方形)。"
+                        "Opus 订阅档这三档免 Anlas。gpt 走 size 字段,不用填这个。"
+                    ),
+                },
+                "negative_prompt": {
+                    "type": "string",
+                    "description": (
+                        "**仅 nai 用**。不希望出现的元素(英文 danbooru tag,逗号分隔)。"
+                        "不填用默认: lowres/bad anatomy/watermark/jpeg artifacts。"
+                        "想强调『没胡子/没眼镜/没背景人物』之类才填,日常不用填。"
                     ),
                 },
                 "use_input_image": {
                     "type": "boolean",
                     "description": (
-                        "是否基于一张输入图片改/重绘(走 OpenAI /v1/images/edits)。"
-                        "true: 程序自动用当前消息附图,没有就回退最近群里出现过的图;"
-                        "都没有则返回 error,你改用 false 走纯生成模式重试。"
-                        "false(默认): 走纯生成 /v1/images/generations,不读任何图片。"
+                        "**仅 gpt 用**(nai 走 generate 不支持 edit)。"
+                        "true: 走 /v1/images/edits,程序自动用当前消息附图,没有就回退最近群里出现过的图;"
+                        "都没有则返回 error,你改成 false 走纯生成重试。"
+                        "false(默认): 纯文字生成,不读任何图片。"
                     ),
                 },
                 "size": {
                     "type": "string",
                     "description": (
-                        "图片尺寸 WIDTHxHEIGHT。默认 1024x1024(方形最快)。"
-                        "常用:1024x1024 方/1536x1024 横/1024x1536 竖。"
-                        "需要更大才填,大图慢且贵。"
+                        "**仅 gpt 用**。图片尺寸 WIDTHxHEIGHT。默认 1024x1024。"
+                        "常用:1024x1024 方/1536x1024 横/1024x1536 竖。需要更大才填。"
                     ),
                 },
                 "quality": {
                     "type": "string",
                     "enum": ["low", "medium", "high", "auto"],
-                    "description": "low=快/便宜(默认,日常够用) medium=精细 high=最终稿 auto=模型决定",
+                    "description": (
+                        "**仅 gpt 用**。low=快/便宜(默认,100 积分) medium=精细(200) high=最终稿(300) auto=模型决定(150)。"
+                        "nai 走 aspect + steps,基础 5 积分。"
+                    ),
+                },
+                "characters": {
+                    "type": "array",
+                    "description": (
+                        "**仅 nai 用,多角色场景才填**。每项一个角色,最多 6 个。"
+                        "用户说『画两个人,左边 A,右边 B』时填两项,position 给『left』『right』。"
+                        "单角色不要填,留空让 NAI 自己布局。"
+                    ),
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "prompt": {
+                                "type": "string",
+                                "description": "这个角色的英文 danbooru tag(例 '1girl, blonde hair, school uniform')。",
+                            },
+                            "negative_prompt": {
+                                "type": "string",
+                                "description": "这个角色不要的元素(例 'twintails')。可选。",
+                            },
+                            "position": {
+                                "type": "string",
+                                "enum": [
+                                    "auto", "left", "center", "right",
+                                    "top-left", "top", "top-right",
+                                    "bottom-left", "bottom", "bottom-right",
+                                ],
+                                "description": (
+                                    "角色在画面里的位置。'auto'(默认)= AI 自己决定(AI's Choice)。"
+                                    "其他值会映射成 NAI 网格坐标。多角色时建议每个明确指定。"
+                                ),
+                            },
+                        },
+                        "required": ["prompt"],
+                    },
+                },
+                "references": {
+                    "type": "array",
+                    "description": (
+                        "**仅 nai 用,Vibe Transfer/Precise Reference**。"
+                        "用户**消息附带图片**或要求『参考刚才那张图的画风』时填。"
+                        "每项一个参考图,最多 4 个。"
+                        "tool 自动从当前消息附图 / 群最近图按顺序取(顺序 = 你 references 数组的长度)。"
+                        "不带参考图就不填这个字段。"
+                        "**注意**: NAI v4.5 后端不支持 vibe transfer,带 references 时模型会自动回退到 v3, "
+                        "画风会更老派,Anlas 也不再免费(默认尺寸+steps 会扣到 ~56 积分/张)。"
+                    ),
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "extracted": {
+                                "type": "number",
+                                "description": (
+                                    "信息提取程度 0-1(默认 0.6)。"
+                                    "高(0.8+)= Precise Reference(抓更多角色/线条细节);"
+                                    "低(0.3-)= Vibe Transfer(只迁移整体氛围/画风)。"
+                                ),
+                            },
+                            "strength": {
+                                "type": "number",
+                                "description": "迁移强度 0-1(默认 0.6)。值越大新图越贴近参考图。",
+                            },
+                        },
+                    },
                 },
             },
             "required": ["prompt"],
+        },
+    },
+}
+
+
+_NAI_DIRECTOR_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_nai_director",
+        "description": (
+            "调 NovelAI Director Tools 对**一张已有图片**做加工(线稿/抠图/上色/换情绪/去杂物等)。\n"
+            "**前置条件**: 用户消息里**必须有图片**(用户当前消息附图最优,没有则用群最近 5 分钟图)。\n"
+            "没有图直接告诉用户『需要先发一张图过来再加工』,**不要**自己调 catty_imagegen 先生成一张再 director。\n"
+            "\n"
+            "── 7 个工具(req_type) ──\n"
+            "- 'lineart': 把彩图变线稿(黑白线条),适合『画成线稿/转线条/extract 线稿』。不用 prompt。\n"
+            "- 'sketch': 转草图/铅笔稿,适合『画成铅笔稿/sketch 风』。不用 prompt。\n"
+            "- 'colorize': 给黑白线稿/灰度图上色。prompt 可选(描述目标色调:『warm sunset tones』『anime soft pastel』);defry 控制褪色程度 0-5,默认 0。\n"
+            "- 'emotion': 改变角色情绪表情。prompt **必填**,格式严格『<mood>;;<额外描述>』,mood 必须从下面选:\n"
+            "    neutral, happy, sad, angry, scared, surprised, tired, excited, nervous, thinking, "
+            "confused, shy, disgusted, smug, bored, laughing, irritated, aroused, embarrassed, "
+            "worried, love, determined, hurt, playful。例 prompt='happy;;wide bright smile'。defry 0-5 控制情绪强度。\n"
+            "- 'declutter': 自动去除背景杂物/水印/弹幕,保留主体。不用 prompt。\n"
+            "- 'bg-removal': 抠图,背景变透明 PNG。不用 prompt。**注意:此项 Anlas 消耗高,会扣较多积分。**\n"
+            "- 'transform': 图像变形重绘(高级,效果不稳定)。不用 prompt,defry 0-5 控制变形强度。\n"
+            "\n"
+            "── 触发条件 ──\n"
+            "必须用户**直接指向猫猫**(@ / 直呼猫猫) + 明确说『给这图/把这图/这张...』+ 具体加工要求。\n"
+            "不要在闲聊提到『描线/抠图』时主动调,等用户明确要求。\n"
+            "\n"
+            "── 自动 ──\n"
+            "tool 自动选输入图(当前消息附图优先,fallback 群最近图)、上传、解 zip、发图。"
+            "你拿到 image_sent=true 后只补 1-2 句猫娘短评。"
+            "**禁止**贴 base64/file 路径到回复;**禁止**重复调。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "req_type": {
+                    "type": "string",
+                    "enum": list(_NAI_DIRECTOR_REQ_TYPES),
+                    "description": "选哪个 director 工具。emotion 和 colorize 看 prompt 描述。",
+                },
+                "prompt": {
+                    "type": "string",
+                    "description": (
+                        "emotion **必填**: '<mood>;;<text>' (例 'happy;;bright smile')。"
+                        "colorize 可选(色调描述)。其他类型留空。"
+                    ),
+                },
+                "defry": {
+                    "type": "integer",
+                    "description": (
+                        "0-5 整数,部分 director 工具用(colorize/emotion/transform)。"
+                        "默认 0。emotion 时控制情绪强度,值大变化越大。"
+                    ),
+                },
+            },
+            "required": ["req_type"],
         },
     },
 }
@@ -827,6 +1012,7 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_remember": _REMEMBER_SCHEMA,
     "catty_recall_notes": _RECALL_NOTES_SCHEMA,
     "catty_imagegen": _IMAGEGEN_SCHEMA,
+    "catty_nai_director": _NAI_DIRECTOR_SCHEMA,
     "catty_story_arc_set": _STORY_ARC_SET_SCHEMA,
     "catty_story_arc_clear": _STORY_ARC_CLEAR_SCHEMA,
 }
@@ -1476,10 +1662,753 @@ async def _meme_query_impl(keywords: str, ctx: ToolContext) -> dict[str, Any]:
     }
 
 
-# ── catty_imagegen: 主 AI 主动生图(OpenAI Image API) ─────────────────
+# ── catty_imagegen: 主 AI 主动生图(OpenAI Image API + NovelAI) ─────────
 
 _ALLOWED_IMAGEGEN_QUALITY = {"low", "medium", "high", "auto"}
 _IMAGEGEN_FMT_TO_EXT = {"png": ".png", "jpeg": ".jpg", "jpg": ".jpg", "webp": ".webp"}
+
+# NovelAI 三个标准尺寸(主人指定默认)。Opus 订阅档这三个 + steps<=28 + 单张时免 Anlas。
+_NAI_ASPECT_MAP: dict[str, tuple[int, int]] = {
+    "portrait": (832, 1216),
+    "landscape": (1216, 832),
+    "square": (1024, 1024),
+}
+
+# NAI v4 PositionMap: 合法离散坐标 {0.1, 0.3, 0.5, 0.7, 0.9}。语义化位置 → (x, y)。
+# auto = (0, 0) 是 AUTO 哨兵, use_coords 会因此置 False(AI's Choice)。
+_NAI_POSITION_MAP: dict[str, tuple[float, float]] = {
+    "auto": (0.0, 0.0),
+    "center": (0.5, 0.5),
+    "left": (0.1, 0.5),
+    "right": (0.9, 0.5),
+    "top": (0.5, 0.1),
+    "bottom": (0.5, 0.9),
+    "top-left": (0.1, 0.1),
+    "top-right": (0.9, 0.1),
+    "bottom-left": (0.1, 0.9),
+    "bottom-right": (0.9, 0.9),
+}
+_NAI_VIBE_REFERENCE_MAX = 4  # NAI UI 实测上限 4 张参考图
+
+# 这两个常量在 module top 提前定义,因为下方 `_NAI_DIRECTOR_SCHEMA` 字面量初始化时要引用。
+_NAI_IMAGE_ENDPOINT = "https://image.novelai.net/ai/generate-image"
+_NAI_AUGMENT_ENDPOINT = "https://image.novelai.net/ai/augment-image"
+
+
+def _nai_predict_anlas(
+    width: int,
+    height: int,
+    steps: int,
+    *,
+    sm: bool = False,
+    sm_dyn: bool = False,
+    n_samples: int = 1,
+) -> int:
+    """NovelAI Anlas 消耗预测(v3/v4/v4.5 通用公式)。
+
+    Opus tier3 在 1048576 像素以下 + steps<=28 + n_samples=1 实测免费(diff=0),
+    所以扣费基于这个公式 + 调用方在 Opus 免费档时把结果当 0 处理。
+    公式来源: LlmKira/novelai-python _cost.py + tapwavezodiac wiki。
+    """
+    import math
+    r = max(int(width) * int(height), 65536)
+    smea_factor = 1.4 if sm_dyn else (1.2 if sm else 1.0)
+    per_sample = math.ceil(
+        2.951823174884865e-21 * r
+        + 5.753298233447344e-7 * r * int(steps)
+    ) * smea_factor
+    per_sample = max(int(per_sample), 2)
+    return per_sample * max(int(n_samples), 1)
+
+
+def _nai_is_opus_free(width: int, height: int, steps: int, n_samples: int) -> bool:
+    """三个标准尺寸 + steps<=28 + 单张时 Opus tier3 免 Anlas。"""
+    return (
+        int(width) * int(height) <= 1048576
+        and int(steps) <= 28
+        and int(n_samples) <= 1
+    )
+
+
+def _nai_director_billable_anlas(req_type: str, width: int, height: int) -> int:
+    """Director tools 在 Opus tier3 的 billable Anlas。
+
+    - bg-removal: cost*3+5 (cost=generate_anlas at steps=28)
+    - 其他在 ≤1048576px Opus 档全 0; 大尺寸时 fallback 到 generate_anlas
+    """
+    base = _nai_predict_anlas(width, height, 28)
+    if req_type == "bg-removal":
+        return base * 3 + 5
+    if req_type in _NAI_DIRECTOR_OPUS_FREE and width * height <= 1048576:
+        return 0
+    return base
+
+
+def _resize_to_vibe_reference_png(data: bytes) -> str:
+    """把任意图片(PNG/JPEG/WEBP)读出来,resize 到 448x448(letterbox 黑底)再 base64 PNG。
+
+    NAI v4 reference_image_multiple 字段固定吃 448x448 PNG base64。
+    """
+    from PIL import Image as PILImage
+    import io
+    src = PILImage.open(io.BytesIO(data)).convert("RGBA")
+    canvas = PILImage.new("RGBA", (448, 448), (0, 0, 0, 0))
+    # letterbox: 保持宽高比缩放到 448 内,居中贴
+    src.thumbnail((448, 448), PILImage.LANCZOS)
+    off_x = (448 - src.width) // 2
+    off_y = (448 - src.height) // 2
+    canvas.paste(src, (off_x, off_y), src)
+    buf = io.BytesIO()
+    canvas.convert("RGB").save(buf, format="PNG")
+    return base64.b64encode(buf.getvalue()).decode("ascii")
+
+
+def _png_jpg_dimensions(data: bytes) -> tuple[int, int]:
+    """从 PNG/JPEG/WEBP 字节流读 (width, height),用 PIL,不 reify decode。"""
+    from PIL import Image as PILImage
+    import io
+    with PILImage.open(io.BytesIO(data)) as im:
+        return int(im.width), int(im.height)
+
+
+def _to_png_base64(data: bytes) -> str:
+    """把任意图片字节统一转 PNG base64(NAI augment-image 输入要 PNG base64)。"""
+    from PIL import Image as PILImage
+    import io
+    with PILImage.open(io.BytesIO(data)) as im:
+        if im.mode not in ("RGBA", "RGB", "L"):
+            im = im.convert("RGBA")
+        buf = io.BytesIO()
+        im.save(buf, format="PNG")
+    return base64.b64encode(buf.getvalue()).decode("ascii")
+
+
+async def _exec_imagegen_nai(
+    *,
+    prompt: str,
+    negative_prompt: str,
+    aspect: str,
+    ctx: ToolContext,
+    characters: list[dict[str, Any]] | None = None,
+    references: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """NovelAI 生图执行器。被 _exec_imagegen 在 provider='nai' 时调用。
+
+    返回结构和 _exec_imagegen 保持一致(image_sent / mode / cost / balance_after / guidance)。
+
+    characters: 多角色数组,每项 {prompt, negative_prompt?, position?}。最多 6 个。
+    references: vibe transfer/precise reference 数组,每项 {extracted?, strength?}。
+                数量决定从 ctx.input_image_urls / recent_image_urls 取多少张参考图。
+                最多 _NAI_VIBE_REFERENCE_MAX=4 张。
+    """
+    from pathlib import Path
+    if not getattr(ctx.config, "catty_imagegen_nai_enabled", False):
+        return {
+            "error": "NovelAI 通道未启用,请改用 provider='gpt' 重试",
+            "guidance": "config.json imagegen.nai.enabled=true 才可用。",
+        }
+    token = str(getattr(ctx.config, "catty_imagegen_nai_token", "") or "").strip()
+    if not token:
+        return {"error": "NovelAI token 未配置"}
+
+    aspect_key = (aspect or "").strip().lower() or str(
+        getattr(ctx.config, "catty_imagegen_nai_default_aspect", "portrait") or "portrait"
+    ).strip().lower()
+    if aspect_key not in _NAI_ASPECT_MAP:
+        aspect_key = "portrait"
+    width, height = _NAI_ASPECT_MAP[aspect_key]
+
+    steps = max(int(getattr(ctx.config, "catty_imagegen_nai_steps", 28) or 28), 1)
+    scale = float(getattr(ctx.config, "catty_imagegen_nai_scale", 5.0) or 5.0)
+    sampler = str(getattr(ctx.config, "catty_imagegen_nai_sampler", "k_euler_ancestral") or "k_euler_ancestral").strip()
+    noise_schedule = str(getattr(ctx.config, "catty_imagegen_nai_noise_schedule", "karras") or "karras").strip()
+    model = str(getattr(ctx.config, "catty_imagegen_nai_model", "nai-diffusion-4-5-full") or "nai-diffusion-4-5-full").strip()
+    timeout = float(getattr(ctx.config, "catty_imagegen_nai_timeout_seconds", 180.0) or 180.0)
+    default_neg = str(getattr(ctx.config, "catty_imagegen_nai_default_negative", "") or "").strip()
+    base_points = int(getattr(ctx.config, "catty_imagegen_nai_base_points", 5) or 5)
+    pts_per_anlas = int(getattr(ctx.config, "catty_imagegen_nai_points_per_anlas", 3) or 3)
+
+    neg = (negative_prompt or "").strip() or default_neg
+    has_refs = bool(references)
+
+    # references(vibe transfer): v4.5/v4 实测 500, 只有 v3 后端接受。带 references 时强制 v3 model。
+    vibe_fallback = str(
+        getattr(ctx.config, "catty_imagegen_nai_vibe_fallback_model", "nai-diffusion-3")
+        or "nai-diffusion-3"
+    ).strip()
+    if has_refs and not model.startswith("nai-diffusion-3"):
+        _logger.info("imagegen[nai] references requested, fallback model %s → %s", model, vibe_fallback)
+        model = vibe_fallback
+
+    # Anlas 预测(Opus 免费档归零; 带 references 走 i2i 计价不享受免费档)
+    predicted_anlas = _nai_predict_anlas(width, height, steps, n_samples=1)
+    if not has_refs and _nai_is_opus_free(width, height, steps, 1):
+        billable_anlas = 0
+    else:
+        billable_anlas = predicted_anlas
+    cost = image_cost_for_nai(billable_anlas, base=base_points, per_anlas=pts_per_anlas)
+
+    # ── 积分扣费 guard(主人豁免;余额不够告诉 AI 让她提醒用户签到) ──
+    affection = getattr(ctx, "affection_store", None)
+    if affection is not None and cost > 0 and ctx.user_id:
+        balance = affection.get_points(ctx.user_id)
+        if not affection.is_owner(ctx.user_id) and balance < cost:
+            level, _exp = affection.get_level_and_exp(ctx.user_id)
+            lo, hi = predict_checkin_range(level)
+            return {
+                "error": "积分不够,无法生图",
+                "balance": balance,
+                "cost": cost,
+                "shortfall": cost - balance,
+                "user_level": level,
+                "today_checkin_estimate": f"{lo}-{hi}",
+                "user_facing_hint": (
+                    f"用猫娘口吻提醒用户:他当前只有 {balance} 积分,这张图(NAI/{aspect_key})要 {cost} 分,"
+                    f"还差 {cost - balance} 分。让他发『签到』来领今天的积分,"
+                    f"他现在好感等级 Lv{level},今天签到大概能拿 {lo}-{hi} 分。"
+                    "傲娇但要把要点说全:差多少、要 Lv 几、发『签到』两个字就能领。"
+                    "**禁止**自己再调一次 catty_imagegen 重复发。"
+                ),
+            }
+
+    # cooldown 复用 gpt 路径的全局 dict(同 user_id 的 cd 桶)
+    cd_seconds = max(int(getattr(ctx.config, "catty_imagegen_cooldown_seconds", 60) or 0), 0)
+    if cd_seconds > 0:
+        owner_qq = str(getattr(ctx.config, "catty_owner_qq", "") or "").strip()
+        if not owner_qq or ctx.user_id != owner_qq:
+            cd_key = ctx.user_id or "anonymous"
+            now = time.monotonic()
+            last = _imagegen_cooldowns.get(cd_key, 0.0)
+            remaining = max(last + cd_seconds - now, 0.0)
+            if remaining > 0:
+                return {"error": f"生图冷却剩 {int(remaining)}s,稍后再戳人家喵"}
+            _imagegen_cooldowns[cd_key] = now
+
+    # ── v4 系列必须传结构化 v4_prompt/v4_negative_prompt,v3 沿用旧 schema ──
+    parameters: dict[str, Any] = {
+        "width": width,
+        "height": height,
+        "scale": scale,
+        "sampler": sampler,
+        "steps": steps,
+        "n_samples": 1,
+        "seed": 0,
+        "negative_prompt": neg,
+        "ucPreset": 0,
+        "qualityToggle": True,
+        "sm": False,
+        "sm_dyn": False,
+        "dynamic_thresholding": False,
+        "cfg_rescale": 0,
+        "noise_schedule": noise_schedule,
+        "legacy": False,
+    }
+    # ── characters: 多角色配置 (最多 6 个) ──
+    chars = [c for c in (characters or []) if isinstance(c, dict) and (c.get("prompt") or "").strip()]
+    chars = chars[:6]
+    char_prompts: list[dict[str, Any]] = []
+    char_captions: list[dict[str, Any]] = []
+    neg_captions: list[dict[str, Any]] = []
+    use_coords = False
+    for c in chars:
+        cp = (c.get("prompt") or "").strip()
+        cu = (c.get("negative_prompt") or "").strip()
+        pos_key = (c.get("position") or "auto").strip().lower()
+        cx, cy = _NAI_POSITION_MAP.get(pos_key, (0.0, 0.0))
+        if cx > 0 or cy > 0:
+            use_coords = True
+        char_prompts.append({
+            "prompt": cp,
+            "uc": cu,
+            "center": {"x": cx, "y": cy},
+            "enabled": True,
+        })
+        char_captions.append({"char_caption": cp, "centers": [{"x": cx, "y": cy}]})
+        neg_captions.append({"char_caption": cu, "centers": [{"x": cx, "y": cy}]})
+
+    # ── references: vibe transfer / precise reference (最多 4 张) ──
+    refs = [r if isinstance(r, dict) else {} for r in (references or [])][:_NAI_VIBE_REFERENCE_MAX]
+    reference_b64: list[str] = []
+    reference_extracted: list[float] = []
+    reference_strength: list[float] = []
+    if refs:
+        # 从 ctx 拿候选图 URL (同当前消息 > 群最近)
+        candidate_urls: list[str] = []
+        candidate_urls.extend(getattr(ctx, "input_image_urls", []) or [])
+        candidate_urls.extend(getattr(ctx, "recent_image_urls", []) or [])
+        seen: set[str] = set()
+        candidates_unique: list[str] = []
+        for u in candidate_urls:
+            if not u or u in seen:
+                continue
+            seen.add(u)
+            candidates_unique.append(u)
+        if len(candidates_unique) < len(refs):
+            return {
+                "error": (
+                    f"references 要 {len(refs)} 张参考图,但当前消息和群最近图只够 "
+                    f"{len(candidates_unique)} 张。少填几项 references 或叫用户多发几张参考图。"
+                ),
+            }
+        if ctx.download_binary_fn is None:
+            return {"error": "运行环境没注入下载器,无法走 reference 模式"}
+        # 下载 + resize 到 448×448 PNG base64
+        for i, r in enumerate(refs):
+            ref_url = candidates_unique[i]
+            try:
+                data, ctype = await ctx.download_binary_fn(
+                    ctx.config, ref_url, timeout=30.0
+                )
+            except (httpx.HTTPError, asyncio.TimeoutError) as exc:
+                _logger.info("imagegen[nai] reference download failed %s: %s", ref_url, exc)
+                return {"error": f"参考图 #{i+1} 下载失败,过 30s 再试或减少 references 数量"}
+            if not data:
+                return {"error": f"参考图 #{i+1} 内容为空"}
+            try:
+                ref_b64 = _resize_to_vibe_reference_png(data)
+            except Exception as exc:  # noqa: BLE001
+                _logger.warning("imagegen[nai] reference resize failed: %s", exc)
+                return {"error": f"参考图 #{i+1} 转 PNG 失败: {exc}"}
+            reference_b64.append(ref_b64)
+            try:
+                ex_v = float(r.get("extracted") if r.get("extracted") is not None else 0.6)
+            except (TypeError, ValueError):
+                ex_v = 0.6
+            try:
+                st_v = float(r.get("strength") if r.get("strength") is not None else 0.6)
+            except (TypeError, ValueError):
+                st_v = 0.6
+            reference_extracted.append(max(0.0, min(1.0, ex_v)))
+            reference_strength.append(max(0.0, min(1.0, st_v)))
+
+    if model.startswith("nai-diffusion-4"):
+        parameters["params_version"] = 3
+        parameters["v4_prompt"] = {
+            "caption": {"base_caption": prompt, "char_captions": char_captions},
+            "use_coords": use_coords,
+            "use_order": True,
+        }
+        parameters["v4_negative_prompt"] = {
+            "caption": {"base_caption": neg, "char_captions": neg_captions},
+            "legacy_uc": False,
+        }
+        parameters["characterPrompts"] = char_prompts
+        if char_prompts and use_coords:
+            parameters["use_coords"] = True
+
+    if reference_b64:
+        parameters["reference_image_multiple"] = reference_b64
+        parameters["reference_information_extracted_multiple"] = reference_extracted
+        parameters["reference_strength_multiple"] = reference_strength
+        parameters["normalize_reference_strength_multiple"] = True
+
+    payload: dict[str, Any] = {
+        "input": prompt,
+        "model": model,
+        "action": "generate",
+        "parameters": parameters,
+    }
+
+    proxy_str = str(getattr(ctx.config, "catty_http_proxy", "") or "").strip()
+    client_kwargs: dict[str, Any] = {
+        "timeout": httpx.Timeout(timeout, connect=15.0),
+        "follow_redirects": True,
+        "http2": False,
+        "limits": httpx.Limits(max_keepalive_connections=0, max_connections=10),
+    }
+    if proxy_str:
+        client_kwargs["proxy"] = proxy_str
+
+    started = time.monotonic()
+    try:
+        async with httpx.AsyncClient(**client_kwargs) as client:
+            response = await client.post(
+                _NAI_IMAGE_ENDPOINT,
+                headers={
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": "application/json",
+                    "Accept": "*/*",
+                },
+                json=payload,
+            )
+    except (httpx.HTTPError, asyncio.TimeoutError) as exc:
+        elapsed = time.monotonic() - started
+        _logger.warning(
+            "imagegen[nai] transport error after %.1fs: %s: %s (model=%s %dx%d steps=%d prompt_len=%d)",
+            elapsed, exc.__class__.__name__, exc or "(empty repr)",
+            model, width, height, steps, len(prompt),
+        )
+        return {
+            "error": f"NovelAI 接口连不上(elapsed {elapsed:.0f}s): {exc.__class__.__name__}: {exc}",
+            "retry_guidance": "网络或上游异常;过 30s 再试,或改 provider='gpt'。",
+        }
+
+    elapsed = time.monotonic() - started
+    if response.status_code != 200:
+        detail = response.text[:400]
+        _logger.warning(
+            "imagegen[nai] status=%d elapsed=%.1fs model=%s %dx%d steps=%d prompt_len=%d body=%s",
+            response.status_code, elapsed, model, width, height, steps, len(prompt), detail,
+        )
+        # NAI 402 = Anlas 不够; 401/403 = token 失效; 429 = 速率
+        if response.status_code == 401:
+            return {"error": "NovelAI token 失效或未授权,改 provider='gpt' 重试"}
+        if response.status_code == 402:
+            return {"error": "NovelAI 账户 Anlas 余额不足,改 provider='gpt' 重试或精简到三个标准尺寸"}
+        if response.status_code == 429:
+            return {"error": "NovelAI 触发速率限制,30 秒后再试或改 provider='gpt'"}
+        return {"error": f"NovelAI HTTP {response.status_code}: {detail[:300]}"}
+
+    # 响应是 zip,里面有 image_0.png
+    try:
+        import io
+        import zipfile
+        zf = zipfile.ZipFile(io.BytesIO(response.content))
+        names = zf.namelist()
+        if not names:
+            return {"error": "NovelAI 响应 zip 是空的"}
+        image_bytes = zf.read(names[0])
+    except zipfile.BadZipFile:
+        # 偶尔上游会回 application/json 错误,但 status=200(罕见)
+        preview = response.content[:200]
+        try:
+            preview_text = preview.decode("utf-8", errors="replace")
+        except Exception:
+            preview_text = repr(preview)
+        return {"error": f"NovelAI 响应不是 zip: {preview_text[:200]}"}
+    except (OSError, ValueError) as exc:
+        return {"error": f"NovelAI zip 解包失败: {exc}"}
+
+    if not image_bytes:
+        return {"error": "NovelAI 解包后图片为空"}
+
+    cache_dir = _imagegen_cache_dir(ctx.config)
+    fname = f"nai_{int(time.time()*1000)}.png"
+    file_path = cache_dir / fname
+    try:
+        file_path.write_bytes(image_bytes)
+    except OSError as exc:
+        return {"error": f"写图片缓存失败: {exc}"}
+
+    try:
+        from nonebot.adapters.onebot.v11 import MessageSegment
+    except ImportError:
+        return {"error": "MessageSegment 不可用,运行环境异常"}
+    segment = MessageSegment.image(file=file_path.resolve().as_uri())
+    ctx.pending_image_segments.append(segment)
+    _prune_imagegen_cache(ctx.config)
+
+    _logger.info(
+        "imagegen[nai]: model=%s aspect=%s %dx%d steps=%d bytes=%d elapsed=%.1fs "
+        "anlas_predicted=%d billable_anlas=%d cost=%d file=%s prompt=%r",
+        model, aspect_key, width, height, steps, len(image_bytes), elapsed,
+        predicted_anlas, billable_anlas, cost, file_path.name,
+        prompt[:300] + ("...(+%d)" % (len(prompt) - 300) if len(prompt) > 300 else ""),
+    )
+
+    consume_result: dict[str, Any] = {}
+    if affection is not None and cost > 0 and ctx.user_id:
+        try:
+            consume_result = affection.consume_points(ctx.user_id, cost)
+        except Exception as exc:  # noqa: BLE001
+            _logger.warning("imagegen[nai]: consume_points failed (image still sent): %s", exc)
+    balance_after = int(consume_result.get("balance_after", -1))
+    is_owner_charge = bool(consume_result.get("is_owner"))
+
+    return {
+        "image_sent": True,
+        "mode": "generate",
+        "provider": "nai",
+        "model": model,
+        "aspect": aspect_key,
+        "size": f"{width}x{height}",
+        "steps": steps,
+        "bytes": len(image_bytes),
+        "elapsed_seconds": round(elapsed, 1),
+        "anlas_predicted": predicted_anlas,
+        "anlas_billable": billable_anlas,
+        "cost": cost,
+        "balance_after": balance_after,
+        "is_owner_charge": is_owner_charge,
+        "guidance": (
+            "图已经程序自动发出去了,你只需补 1-2 句猫娘短评(『画好啦~主人看看喜不喜欢喵 ฅฅ』)。"
+            "**禁止**贴 base64 / file 路径 / image_uri 到回复里;**禁止**再调一次 catty_imagegen 重复发。"
+            + (
+                ""
+                if is_owner_charge
+                else f" 本次消耗 {cost} 积分,该用户剩余 {balance_after} 分(余额低于 100 时可以提一句『再画就要签到啦喵~』,不用强调)。"
+            )
+        ),
+    }
+
+
+async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    """NovelAI Director Tools (/ai/augment-image): lineart/sketch/colorize/emotion/declutter/bg-removal/transform。"""
+    from pathlib import Path
+    if not getattr(ctx.config, "catty_imagegen_enabled", True):
+        return {"error": "imagegen 已被配置禁用"}
+    if not getattr(ctx.config, "catty_imagegen_nai_enabled", False):
+        return {"error": "NovelAI 通道未启用 (imagegen.nai.enabled=false)"}
+    if not getattr(ctx, "is_directly_requested", True):
+        return {
+            "error": "用户没直接 @ 猫猫,不允许主动调 director tool。",
+            "guidance": "director 只能在用户明确指向猫猫(@ / 引用回复 / 直呼猫猫) + 明确要求加工时调。",
+        }
+    req_type = str(args.get("req_type") or "").strip().lower()
+    if req_type not in _NAI_DIRECTOR_REQ_TYPES:
+        return {"error": f"req_type 必须是 {list(_NAI_DIRECTOR_REQ_TYPES)} 之一,收到: {req_type!r}"}
+
+    prompt = str(args.get("prompt") or "").strip()
+    if req_type == "emotion":
+        if not prompt or ";;" not in prompt:
+            return {
+                "error": (
+                    "emotion 必须传 prompt='<mood>;;<text>' 格式,例 'happy;;wide bright smile'。"
+                    f"合法 mood: {', '.join(_NAI_EMOTION_MOODS)}。"
+                ),
+            }
+        mood_part = prompt.split(";;", 1)[0].strip().lower()
+        if mood_part not in _NAI_EMOTION_MOODS:
+            return {
+                "error": (
+                    f"emotion mood 不合法({mood_part!r})。从这里选: {', '.join(_NAI_EMOTION_MOODS)}"
+                ),
+            }
+    try:
+        defry = int(args.get("defry") or 0)
+    except (TypeError, ValueError):
+        defry = 0
+    defry = max(0, min(5, defry))
+
+    token = str(getattr(ctx.config, "catty_imagegen_nai_token", "") or "").strip()
+    if not token:
+        return {"error": "NovelAI token 未配置"}
+    timeout = float(getattr(ctx.config, "catty_imagegen_nai_timeout_seconds", 180.0) or 180.0)
+    base_points = int(getattr(ctx.config, "catty_imagegen_nai_base_points", 5) or 5)
+    pts_per_anlas = int(getattr(ctx.config, "catty_imagegen_nai_points_per_anlas", 3) or 3)
+
+    # 拿输入图: 当前消息附图优先, fallback 群最近图
+    candidate_urls: list[str] = []
+    candidate_urls.extend(getattr(ctx, "input_image_urls", []) or [])
+    candidate_urls.extend(getattr(ctx, "recent_image_urls", []) or [])
+    seen: set[str] = set()
+    candidates_unique: list[str] = []
+    for u in candidate_urls:
+        if not u or u in seen:
+            continue
+        seen.add(u)
+        candidates_unique.append(u)
+    if not candidates_unique:
+        return {
+            "error": "director tool 需要一张输入图片,但当前消息和群最近 5 分钟都没有可用图片。",
+            "guidance": "让用户先把要加工的图发出来,再让你调这个 tool。",
+        }
+    if ctx.download_binary_fn is None:
+        return {"error": "运行环境没注入下载器,无法走 director 模式"}
+
+    image_bytes_input: bytes | None = None
+    input_image_source: str = ""
+    for url_candidate in candidates_unique[:3]:
+        try:
+            data, ctype = await ctx.download_binary_fn(
+                ctx.config, url_candidate, timeout=30.0
+            )
+        except (httpx.HTTPError, asyncio.TimeoutError) as exc:
+            _logger.info("director: input image download failed %s: %s", url_candidate, exc)
+            continue
+        except Exception as exc:  # noqa: BLE001
+            _logger.warning("director: unexpected download error: %s: %s", exc.__class__.__name__, exc)
+            continue
+        if not data:
+            continue
+        if ctype and not ctype.lower().startswith("image/"):
+            continue
+        image_bytes_input = data
+        input_image_source = url_candidate
+        break
+    if image_bytes_input is None:
+        return {"error": "input 候选图全部下载失败"}
+
+    # 拿尺寸 + 转 PNG base64
+    try:
+        in_w, in_h = _png_jpg_dimensions(image_bytes_input)
+    except Exception as exc:  # noqa: BLE001
+        return {"error": f"输入图解码失败: {exc}"}
+    try:
+        image_b64 = _to_png_base64(image_bytes_input)
+    except Exception as exc:  # noqa: BLE001
+        return {"error": f"输入图转 PNG base64 失败: {exc}"}
+
+    # 算 anlas + 积分
+    billable_anlas = _nai_director_billable_anlas(req_type, in_w, in_h)
+    cost = image_cost_for_nai(billable_anlas, base=base_points, per_anlas=pts_per_anlas)
+
+    affection = getattr(ctx, "affection_store", None)
+    if affection is not None and cost > 0 and ctx.user_id:
+        balance = affection.get_points(ctx.user_id)
+        if not affection.is_owner(ctx.user_id) and balance < cost:
+            level, _exp = affection.get_level_and_exp(ctx.user_id)
+            lo, hi = predict_checkin_range(level)
+            return {
+                "error": "积分不够,无法 director",
+                "balance": balance,
+                "cost": cost,
+                "shortfall": cost - balance,
+                "user_level": level,
+                "today_checkin_estimate": f"{lo}-{hi}",
+                "user_facing_hint": (
+                    f"用猫娘口吻提醒用户:他当前只有 {balance} 积分,这次 director({req_type})要 {cost} 分,"
+                    f"还差 {cost - balance} 分。让他发『签到』来领今天的积分,"
+                    f"他现在好感等级 Lv{level},今天签到大概能拿 {lo}-{hi} 分。"
+                    "**禁止**自己再调一次 catty_nai_director 重复发。"
+                ),
+            }
+
+    cd_seconds = max(int(getattr(ctx.config, "catty_imagegen_cooldown_seconds", 60) or 0), 0)
+    if cd_seconds > 0:
+        owner_qq = str(getattr(ctx.config, "catty_owner_qq", "") or "").strip()
+        if not owner_qq or ctx.user_id != owner_qq:
+            cd_key = ctx.user_id or "anonymous"
+            now = time.monotonic()
+            last = _imagegen_cooldowns.get(cd_key, 0.0)
+            remaining = max(last + cd_seconds - now, 0.0)
+            if remaining > 0:
+                return {"error": f"生图冷却剩 {int(remaining)}s,稍后再戳人家喵"}
+            _imagegen_cooldowns[cd_key] = now
+
+    payload: dict[str, Any] = {
+        "req_type": req_type,
+        "width": in_w,
+        "height": in_h,
+        "image": image_b64,
+        "defry": defry,
+    }
+    if prompt:
+        payload["prompt"] = prompt
+
+    proxy_str = str(getattr(ctx.config, "catty_http_proxy", "") or "").strip()
+    client_kwargs: dict[str, Any] = {
+        "timeout": httpx.Timeout(timeout, connect=15.0),
+        "follow_redirects": True,
+        "http2": False,
+        "limits": httpx.Limits(max_keepalive_connections=0, max_connections=10),
+    }
+    if proxy_str:
+        client_kwargs["proxy"] = proxy_str
+
+    started = time.monotonic()
+    try:
+        async with httpx.AsyncClient(**client_kwargs) as client:
+            response = await client.post(
+                _NAI_AUGMENT_ENDPOINT,
+                headers={
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": "application/json",
+                    "Accept": "*/*",
+                },
+                json=payload,
+            )
+    except (httpx.HTTPError, asyncio.TimeoutError) as exc:
+        elapsed = time.monotonic() - started
+        _logger.warning(
+            "director[%s] transport error after %.1fs: %s: %s (%dx%d)",
+            req_type, elapsed, exc.__class__.__name__, exc or "(empty repr)", in_w, in_h,
+        )
+        return {
+            "error": f"NovelAI director 接口连不上({elapsed:.0f}s): {exc.__class__.__name__}: {exc}",
+            "retry_guidance": "网络或上游异常;过 30s 再试。",
+        }
+
+    elapsed = time.monotonic() - started
+    if response.status_code != 200:
+        detail = response.text[:400]
+        _logger.warning(
+            "director[%s] status=%d elapsed=%.1fs %dx%d body=%s",
+            req_type, response.status_code, elapsed, in_w, in_h, detail,
+        )
+        if response.status_code == 401:
+            return {"error": "NovelAI token 失效或未授权"}
+        if response.status_code == 402:
+            return {"error": "NovelAI 账户 Anlas 余额不足"}
+        if response.status_code == 429:
+            return {"error": "NovelAI 触发速率限制,30 秒后再试"}
+        if response.status_code == 400:
+            return {"error": f"director payload 不合法: {detail[:300]}"}
+        return {"error": f"NovelAI director HTTP {response.status_code}: {detail[:300]}"}
+
+    try:
+        import io
+        import zipfile
+        zf = zipfile.ZipFile(io.BytesIO(response.content))
+        names = zf.namelist()
+        if not names:
+            return {"error": "director 响应 zip 是空的"}
+        out_image_bytes = zf.read(names[0])
+    except zipfile.BadZipFile:
+        preview = response.content[:200]
+        try:
+            preview_text = preview.decode("utf-8", errors="replace")
+        except Exception:
+            preview_text = repr(preview)
+        return {"error": f"director 响应不是 zip: {preview_text[:200]}"}
+    except (OSError, ValueError) as exc:
+        return {"error": f"director zip 解包失败: {exc}"}
+
+    if not out_image_bytes:
+        return {"error": "director 解包后图片为空"}
+
+    cache_dir = _imagegen_cache_dir(ctx.config)
+    fname = f"director_{req_type.replace('-', '_')}_{int(time.time()*1000)}.png"
+    file_path = cache_dir / fname
+    try:
+        file_path.write_bytes(out_image_bytes)
+    except OSError as exc:
+        return {"error": f"写图片缓存失败: {exc}"}
+
+    try:
+        from nonebot.adapters.onebot.v11 import MessageSegment
+    except ImportError:
+        return {"error": "MessageSegment 不可用,运行环境异常"}
+    segment = MessageSegment.image(file=file_path.resolve().as_uri())
+    ctx.pending_image_segments.append(segment)
+    _prune_imagegen_cache(ctx.config)
+
+    _logger.info(
+        "director[%s]: %dx%d bytes=%d elapsed=%.1fs anlas=%d cost=%d file=%s source=%s",
+        req_type, in_w, in_h, len(out_image_bytes), elapsed,
+        billable_anlas, cost, file_path.name, input_image_source[:80] if input_image_source else "-",
+    )
+
+    consume_result: dict[str, Any] = {}
+    if affection is not None and cost > 0 and ctx.user_id:
+        try:
+            consume_result = affection.consume_points(ctx.user_id, cost)
+        except Exception as exc:  # noqa: BLE001
+            _logger.warning("director: consume_points failed (image still sent): %s", exc)
+    balance_after = int(consume_result.get("balance_after", -1))
+    is_owner_charge = bool(consume_result.get("is_owner"))
+
+    return {
+        "image_sent": True,
+        "tool": "nai_director",
+        "req_type": req_type,
+        "size": f"{in_w}x{in_h}",
+        "bytes": len(out_image_bytes),
+        "elapsed_seconds": round(elapsed, 1),
+        "anlas_billable": billable_anlas,
+        "cost": cost,
+        "balance_after": balance_after,
+        "is_owner_charge": is_owner_charge,
+        "guidance": (
+            f"director({req_type}) 已自动发图。你只需补 1-2 句猫娘短评。"
+            "**禁止**贴 base64/file 路径到回复;**禁止**再调一次 catty_nai_director 重复发。"
+            + (
+                ""
+                if is_owner_charge
+                else f" 本次消耗 {cost} 积分,该用户剩余 {balance_after} 分。"
+            )
+        ),
+    }
 
 
 def _imagegen_endpoint_url(base_url: str, *, edit: bool = False) -> str:
@@ -1546,6 +2475,26 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
     max_chars = max(int(getattr(ctx.config, "catty_imagegen_max_chars", 800) or 800), 80)
     if len(prompt) > max_chars:
         prompt = prompt[:max_chars]
+
+    # ── provider 分流: 'nai' 走 NovelAI, 其余走 OpenAI Image API ──
+    provider = str(args.get("provider") or "gpt").strip().lower()
+    if provider == "nai":
+        if bool(args.get("use_input_image")):
+            # NAI 不支持 edit, 把 use_input_image 显式拒掉, AI 才不会以为 silently 忽略了
+            return {
+                "error": "NovelAI 不支持 use_input_image=true(没有 img2img 走全图改的功能)。"
+                "改 provider='gpt' 走 edit 模式,或保持 use_input_image=false 重试。",
+            }
+        chars_arg = args.get("characters")
+        refs_arg = args.get("references")
+        return await _exec_imagegen_nai(
+            prompt=prompt,
+            negative_prompt=str(args.get("negative_prompt") or "").strip(),
+            aspect=str(args.get("aspect") or "").strip(),
+            ctx=ctx,
+            characters=chars_arg if isinstance(chars_arg, list) else None,
+            references=refs_arg if isinstance(refs_arg, list) else None,
+        )
 
     # cooldown(主人豁免)
     cd_seconds = max(int(getattr(ctx.config, "catty_imagegen_cooldown_seconds", 60) or 0), 0)
@@ -2213,6 +3162,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_remember": _exec_remember,
     "catty_recall_notes": _exec_recall_notes,
     "catty_imagegen": _exec_imagegen,
+    "catty_nai_director": _exec_nai_director,
     "catty_story_arc_set": _exec_story_arc_set,
     "catty_story_arc_clear": _exec_story_arc_clear,
 }

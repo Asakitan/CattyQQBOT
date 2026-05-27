@@ -110,6 +110,16 @@ def image_cost_for_quality(quality: str) -> int:
     return IMAGE_COST_LOW
 
 
+def image_cost_for_nai(anlas: int, *, base: int = 5, per_anlas: int = 3) -> int:
+    """NovelAI 路径积分计算。
+
+    主人规则: 基础 5 积分 / 张, 多 1 Anlas + 3 积分。
+    Opus tier3 在三个标准尺寸 + 默认 28 steps + 单张 时 anlas=0, 只扣 base。
+    """
+    a = max(int(anlas or 0), 0)
+    return max(int(base), 0) + a * max(int(per_anlas), 0)
+
+
 class AffectionStore:
     """积分 + 好感度持久化层。
 
