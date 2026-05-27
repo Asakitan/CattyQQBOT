@@ -213,6 +213,15 @@ class Config(BaseModel):
     catty_nsfw_pixiv_cookie: str = ""
     catty_nsfw_pixiv_image_size: str = "regular"
 
+    # 反向搜图(catty_image_search tool):SauceNAO / trace.moe / ascii2d / iqdb
+    # 多引擎并发,问出「谁画的/什么番/角色/出处」。SauceNAO 需 API key (saucenao.com 注册免费),
+    # 没填会自动跳过 saucenao 走其它引擎。trace.moe / ascii2d / iqdb 无需 key。
+    catty_image_search_enabled: bool = True
+    catty_image_search_saucenao_api_key: str = ""
+    catty_image_search_cooldown_seconds: int = 60
+    catty_image_search_max_results: int = 5
+    catty_image_search_request_timeout: float | None = 15.0
+
     catty_owner_qq: int = 0
     catty_owner_forward_enabled: bool = False
     catty_owner_forward_private_messages: bool = True

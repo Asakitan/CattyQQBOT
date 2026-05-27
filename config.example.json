@@ -231,6 +231,13 @@
     "pixiv_cookie": "",
     "pixiv_image_size": "regular"
   },
+  "image_search": {
+    "enabled": true,
+    "saucenao_api_key": "",
+    "cooldown_seconds": 60,
+    "max_results": 5,
+    "request_timeout": 15
+  },
   "owner_forward": {
     "enabled": false,
     "owner_qq": 0,

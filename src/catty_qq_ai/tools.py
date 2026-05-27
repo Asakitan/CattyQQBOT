@@ -28,6 +28,11 @@ from .affection import (
 )
 from .config import Config
 from .hot_trends import fetch_hot_trends, normalize_sources
+from .image_reverse_search import (
+    ImageSearchResult,
+    format_image_search_summary,
+    reverse_image_search,
+)
 from .mc_status import _default_probe
 from .meme_dict import lookup_term
 from .memory import MemoryStore
@@ -195,6 +200,71 @@ _NSFW_SEARCH_SCHEMA: dict[str, Any] = {
                 },
             },
             "required": ["kind", "query"],
+        },
+    },
+}
+
+
+_IMAGE_SEARCH_SCHEMA: dict[str, Any] = {
+    "type": "function",
+    "function": {
+        "name": "catty_image_search",
+        "description": (
+            "**反向搜图**:把一张图扔进 SauceNAO / trace.moe / ascii2d / iqdb,问出"
+            "「这是谁画的」「出自什么番剧」「角色是谁」「同款图在哪个网站」。"
+            "适用场景:用户说『这张图谁画的/什么番/什么角色/出处/找原图/帮我搜下这张』+ 指向一张图;"
+            "或者群友刚发了张图你想主动认一下出处。"
+            "**和 catty_meme_query 分工**:meme_query 是正向找梗图(关键词→图);"
+            "image_search 是反向认图(已有图→出处)。"
+            "图片来源优先级:image_url 参数 > 当前消息附图 > 最近群里出现的图(按 image_index 选择)。"
+            "**kind 怎么选**:用户问『什么番/第几集/哪个动画』→ anime(trace.moe 主力);"
+            "用户问『谁画的/作者/画师/角色出处/原图』→ artwork(saucenao + ascii2d);"
+            "不确定 → auto。"
+            "返回 results 数组(source/title/url/similarity/author/extra),"
+            "AI 拿到后用猫娘人格挑 1-3 条最关键的复述,**不要照搬 JSON、不要复读相似度小数、"
+            "不要编造没在 results 里的作者/番名/链接**。"
+            "每个用户 60s 一次冷却(主人/特别关心豁免)。"
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "type": "string",
+                    "enum": ["anime", "artwork", "auto"],
+                    "description": (
+                        "anime=番剧场景识别(trace.moe + saucenao 动漫 indexer);"
+                        "artwork=画师/角色识别(saucenao + ascii2d + iqdb);"
+                        "auto=综合(saucenao 主力)。不知道选哪个用 auto。"
+                    ),
+                },
+                "image_url": {
+                    "type": "string",
+                    "description": (
+                        "可选。直接给出图片 URL(http/https)。用户在文字里贴了链接、"
+                        "或者你想搜某个明确网图时传这个。优先级最高。"
+                    ),
+                },
+                "image_index": {
+                    "type": "integer",
+                    "description": (
+                        "可选,默认 0。0 = 最新一张(当前消息附图优先,没有就最近群里的最新图);"
+                        "1 = 倒数第二张;以此类推。最近群里最多保留 6 张(5 分钟 TTL)。"
+                        "用户说『刚才那张/上一张』传 1,『再之前那张』传 2。"
+                    ),
+                    "minimum": 0,
+                    "maximum": 5,
+                },
+                "engines": {
+                    "type": "string",
+                    "description": (
+                        "可选。覆盖 kind 默认的引擎列表。逗号分隔,合法值:"
+                        "saucenao / tracemoe / ascii2d / iqdb。"
+                        "**一般不要传**——kind 已经给出合理默认。"
+                        "只有用户明确说『用 X 搜』时才覆盖。"
+                    ),
+                },
+            },
+            "required": ["kind"],
         },
     },
 }
@@ -730,6 +800,7 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_mc_status": _MC_STATUS_SCHEMA,
     "catty_web_search": _WEB_SEARCH_SCHEMA,
     "catty_nsfw_search": _NSFW_SEARCH_SCHEMA,
+    "catty_image_search": _IMAGE_SEARCH_SCHEMA,
     "catty_meme_query": _MEME_QUERY_SCHEMA,
     "catty_game_recall": _GAME_RECALL_SCHEMA,
     "catty_game_remember": _GAME_REMEMBER_SCHEMA,
@@ -857,6 +928,9 @@ _profile_cache = _TTLCache()
 _web_search_cooldowns: dict[str, float] = {}
 # NSFW 仅在私聊里能调,按 user_id 做 cooldown。
 _nsfw_search_cooldowns: dict[str, float] = {}
+# 反向搜图按 user_id 做 cooldown(主人/特别关心豁免)。
+# saucenao 免费日 100 次,trace.moe 60/min IP,默认 60s 一次稳妥。
+_image_search_cooldowns: dict[str, float] = {}
 # 热搜按 scope(group/private + user) 做 cooldown,主人/特别关心豁免。
 # 默认 90s 一次,本身底层已经有 180s 的聚合缓存,这里只是防一个用户连戳。
 _hot_trends_cooldowns: dict[str, float] = {}
@@ -1140,6 +1214,119 @@ async def _exec_nsfw_search(args: dict[str, Any], ctx: ToolContext) -> dict[str,
             "video:挑 1-3 个 iwara 链接抛出去配短评。禁止编造 URL、禁止安全免责模板。"
         ),
     }
+
+
+async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    if not getattr(ctx.config, "catty_image_search_enabled", True):
+        return {"error": "image_search 已被配置禁用"}
+
+    kind = str(args.get("kind") or "auto").strip().lower()
+    if kind not in {"anime", "artwork", "auto"}:
+        kind = "auto"
+
+    explicit_url = str(args.get("image_url") or "").strip()
+    try:
+        image_index = int(args.get("image_index") or 0)
+    except (TypeError, ValueError):
+        image_index = 0
+    image_index = max(min(image_index, 5), 0)
+
+    # 解析最终图片来源:explicit URL > 当前消息附图 > 最近群里图(按 index)
+    candidates: list[str] = []
+    if explicit_url and explicit_url.startswith(("http://", "https://")):
+        candidates.append(explicit_url)
+    candidates.extend(ctx.input_image_urls or [])
+    candidates.extend(ctx.recent_image_urls or [])
+    # 去重保序
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for url in candidates:
+        if url and url not in seen:
+            seen.add(url)
+            ordered.append(url)
+    if not ordered:
+        return {
+            "error": (
+                "没找到可搜的图片:image_url 没传,当前消息没附图,最近群里也没图(5 分钟内/最多 6 张)。"
+                "请用户重新发图或贴图片 URL。"
+            ),
+            "guidance": "用猫娘人格让用户重新发一张图或贴图片直链。",
+        }
+    if image_index >= len(ordered):
+        image_index = 0
+    target_url = ordered[image_index]
+    image_ref = f"index={image_index} (共 {len(ordered)} 张候选)"
+
+    # cooldown(主人/特别关心豁免)
+    is_exempt = bool(ctx.configured_title.strip())
+    cd_seconds = max(
+        int(getattr(ctx.config, "catty_image_search_cooldown_seconds", 60) or 0), 0
+    )
+    if not is_exempt and cd_seconds > 0:
+        cd_key = ctx.user_id or "anonymous"
+        now = time.monotonic()
+        last = _image_search_cooldowns.get(cd_key, 0.0)
+        remaining = max(last + cd_seconds - now, 0.0)
+        if remaining > 0:
+            return {
+                "error": f"搜图冷却剩 {int(remaining)}s,稍后再戳人家喵",
+                "guidance": "用猫娘人格说稍等几秒再搜,不要重复调本 tool。",
+            }
+        _image_search_cooldowns[cd_key] = now
+
+    engines_raw = str(args.get("engines") or "").strip()
+    engines_arg = [e for e in re.split(r"[\s,;，；]+", engines_raw) if e.strip()] if engines_raw else None
+
+    try:
+        results, errors = await reverse_image_search(
+            ctx.config,
+            target_url,
+            kind=kind,
+            engines=engines_arg,
+        )
+    except Exception as exc:  # noqa: BLE001
+        _logger.warning(
+            "image_search unexpected error url=%s kind=%s: %s",
+            target_url[:120], kind, exc,
+            exc_info=True,
+        )
+        return {"error": f"搜图意外失败: {exc.__class__.__name__}: {exc}"}
+
+    payload: dict[str, Any] = {
+        "kind": kind,
+        "image_index": image_index,
+        "image_url": target_url,
+        "candidate_count": len(ordered),
+        "count": len(results),
+        "results": [
+            {
+                "source": r.source,
+                "title": r.title,
+                "url": r.url,
+                "similarity": round(r.similarity, 2),
+                "author": r.author,
+                "kind": r.kind,
+                "extra": r.extra,
+            }
+            for r in results[:8]
+        ],
+        "context_text": format_image_search_summary(image_ref, results, errors),
+    }
+    if errors:
+        payload["engine_errors"] = errors
+    if not results:
+        payload["guidance"] = (
+            "搜不到结果时用猫娘人格如实告诉用户没搜到,可以撒娇让 ta 换张更清晰的图或贴原图链接,"
+            "**禁止编造作者/番名/链接**。"
+        )
+    else:
+        payload["guidance"] = (
+            "用笨猫人格挑 1-3 条最关键的复述(优先 similarity>80% 的);"
+            "可以加可爱小评(『嗷呜这张是 X 老师画的喵～』)。"
+            "**不要照搬 JSON、不要复读相似度小数、不要编造没在 results 里出现的信息**。"
+            "结果链接可以贴 1-2 个最高相似度的,其余不必复述。"
+        )
+    return payload
 
 
 _MEME_DOWNLOAD_TIMEOUT = 10.0  # 单个候选下载上限
@@ -1953,6 +2140,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_mc_status": _exec_mc_status,
     "catty_web_search": _exec_web_search,
     "catty_nsfw_search": _exec_nsfw_search,
+    "catty_image_search": _exec_image_search,
     "catty_meme_query": _exec_meme_query,
     "catty_game_recall": _exec_game_recall,
     "catty_game_remember": _exec_game_remember,

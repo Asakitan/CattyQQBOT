@@ -259,6 +259,13 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "pixiv_cookie": "",
         "pixiv_image_size": "regular",
     },
+    "image_search": {
+        "enabled": True,
+        "saucenao_api_key": "",
+        "cooldown_seconds": 60,
+        "max_results": 5,
+        "request_timeout": 15,
+    },
     "owner_forward": {
         "enabled": False,
         "owner_qq": 0,
@@ -630,6 +637,13 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_NSFW_IMAGE_SEND_COUNT", nsfw_search.get("image_send_count"))
     _set_env("CATTY_NSFW_PIXIV_COOKIE", nsfw_search.get("pixiv_cookie"))
     _set_env("CATTY_NSFW_PIXIV_IMAGE_SIZE", nsfw_search.get("pixiv_image_size"))
+
+    image_search = _section(data, "image_search")
+    _set_env("CATTY_IMAGE_SEARCH_ENABLED", image_search.get("enabled"))
+    _set_env("CATTY_IMAGE_SEARCH_SAUCENAO_API_KEY", image_search.get("saucenao_api_key"))
+    _set_env("CATTY_IMAGE_SEARCH_COOLDOWN_SECONDS", image_search.get("cooldown_seconds"))
+    _set_env("CATTY_IMAGE_SEARCH_MAX_RESULTS", image_search.get("max_results"))
+    _set_env("CATTY_IMAGE_SEARCH_REQUEST_TIMEOUT", image_search.get("request_timeout"))
 
     owner_forward = _section(data, "owner_forward")
     _set_env("CATTY_OWNER_FORWARD_ENABLED", owner_forward.get("enabled"))
