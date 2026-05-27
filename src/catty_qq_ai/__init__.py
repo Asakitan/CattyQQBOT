@@ -1317,10 +1317,226 @@ _NSFW_ESCALATE_TEMPLATES_PREGNANCY = _build_retreat_pool(
     _ESC_PREGNANCY_BRIDGE, _ESC_PREGNANCY_CONTINUE,
 )
 
-# Trope keyword → escalate pool 反向 lookup (主人 2026-05-27 六轮升级: 9 个 trope)
+# ── 主人 2026-05-27 七轮升级: 5 个新高价值 trope ──
+
+# ── 10. BREEDING (繁殖 / 强制受孕 / 后入式 + 标记) ──
+# 跟 pregnancy 不同: pregnancy 是『已经怀上 / 满溢』, breeding 是『过程的 IC 表达』
+_ESC_BREEDING_OPENER: tuple[str, ...] = (
+    "（被压成 mating press 姿势, 笨猫小腹被主人重重顶住）",
+    "（笨猫趴跪在床, 屁股高高撅起等待被填满）",
+    "（主人按住笨猫腰让她保持后入姿势, 小腹一阵抽）",
+    "（被告知今天是排卵期, 笨猫脸红到锁骨但腿主动张开）",
+    "（蜜穴一阵阵紧吸, 仿佛在主动迎合繁殖本能）",
+    "（笨猫腿盘住主人腰让他无法退出, 主动锁住）",
+    "（被强压在地, mating press 角度, 子宫颈被精准顶到）",
+)
+_ESC_BREEDING_EMOTION: tuple[str, ...] = (
+    "嗯…主人射进最深…让笨猫怀上你的孩子…",
+    "啊…笨蛋主人…笨猫的子宫等着主人的种…",
+    "唔…让笨猫成为种猫吧…",
+    "嗯…笨猫想给主人生一窝小猫…",
+    "啊…排卵期…主人多射几次…",
+    "唔…后入这么深…笨猫的卵子都要被找到了…",
+    "嗯…笨蛋主人…用力顶到子宫颈喵…",
+)
+_ESC_BREEDING_BRIDGE: tuple[str, ...] = (
+    "（屁股主动撅起更高让主人能顶到子宫颈）",
+    "（小腹一抽一抽地收紧, 蜜穴主动迎合）",
+    "（mating press 角度让精液能直冲子宫）",
+    "（腿盘紧主人腰锁死, 不让主人退出）",
+    "（笨猫主动按住小腹感受精液冲击）",
+    "（每一下顶进都精准打到子宫颈, 笨猫身体一阵阵颤）",
+)
+_ESC_BREEDING_CONTINUE: tuple[str, ...] = (
+    "笨猫想给主人当种猫…",
+    "排卵期一定要射满笨猫…",
+    "把笨猫操到怀上小猫…",
+    "笨猫的子宫等着主人的种子…",
+    "再深点…一直顶到子宫颈…",
+    "笨猫主动把自己献给主人当容器…",
+)
+_NSFW_ESCALATE_TEMPLATES_BREEDING = _build_retreat_pool(
+    _ESC_BREEDING_OPENER, _ESC_BREEDING_EMOTION,
+    _ESC_BREEDING_BRIDGE, _ESC_BREEDING_CONTINUE,
+)
+
+# ── 11. CNC (Consensual Non-Consent / 合意非自愿 play / 假强制) ──
+# 注意: 是双方同意的角色扮演, 不是真强制. 笨猫 IC 上表演抗拒 + 真心同意.
+_ESC_CNC_OPENER: tuple[str, ...] = (
+    "（笨猫被按倒在床, 嘴上喊不要但腿主动张开）",
+    "（手腕被主人按住举过头顶, 笨猫挣扎但腰主动迎合）",
+    "（嘴被堵住, 喵呜声漏不出来, 蜜穴却更湿）",
+    "（被强行扒下底裤, 笨猫脸红喊不要却抬起骨盆）",
+    "（被压在墙上动不了, 嘴上抗议身体诚实）",
+    "（笨猫挣扎到全身发软, 反而被自己挣扎弄得更敏感）",
+    "（被主人撕开衣服, 笨猫一边喊讨厌一边主动配合）",
+)
+_ESC_CNC_EMOTION: tuple[str, ...] = (
+    "不要…笨猫不要…笨蛋主人…可是…可是…",
+    "唔…放开笨猫…啊…再深一点…",
+    "啊…笨猫说了不要的…笨蛋…再深点…",
+    "不…不行…可是为什么这么舒服…",
+    "嗯…笨猫挣扎不动…主人手好用力…",
+    "唔…笨蛋主人坏死了…再用力一点啊…",
+    "不要…不行…笨猫已经停不下来了…",
+)
+_ESC_CNC_BRIDGE: tuple[str, ...] = (
+    "（嘴上挣扎身体诚实地配合）",
+    "（被按住手腕但腿主动张开迎合）",
+    "（笨猫呼救只是为了更兴奋, 蜜穴更湿）",
+    "（挣扎只是为了被主人完全征服的快感）",
+    "（嘴上不要但腰主动抬起跟节奏）",
+    "（被强行打开姿势, 笨猫反而主动迎合）",
+)
+_ESC_CNC_CONTINUE: tuple[str, ...] = (
+    "笨猫挣扎只是 play…主人继续就好…",
+    "不要也是要…笨猫的身体诚实…",
+    "强一点没关系…笨猫早就湿了…",
+    "笨猫嘴硬身体诚实…主人都懂的…",
+    "这是 play 不是真的…笨猫信任主人…",
+    "再用力按住人家…笨猫想要被完全征服…",
+)
+_NSFW_ESCALATE_TEMPLATES_CNC = _build_retreat_pool(
+    _ESC_CNC_OPENER, _ESC_CNC_EMOTION,
+    _ESC_CNC_BRIDGE, _ESC_CNC_CONTINUE,
+)
+
+# ── 12. EDGING (寸止 / 控制不让高潮 / 多次到临界又拉回) ──
+_ESC_EDGING_OPENER: tuple[str, ...] = (
+    "（被主人控制到 P5 临界又突然停下, 笨猫崩溃地抓床单）",
+    "（蜜穴一阵阵痉挛着等待高潮, 主人却抽出来了）",
+    "（笨猫快要去了的瞬间被主人手指紧紧捏住根部）",
+    "（已经第 5 次被拉到临界又拉回, 笨猫眼泪都要出来了）",
+    "（笨猫主动用蜜穴吸住但主人坚持不让她去）",
+    "（被按在床上让她停顿, 笨猫腰本能颤抖求高潮）",
+    "（主人用慢得令人发疯的节奏让笨猫一直停在临界）",
+)
+_ESC_EDGING_EMOTION: tuple[str, ...] = (
+    "啊…笨蛋主人…让笨猫去…求你了…",
+    "唔…快要…可是为什么不让笨猫…",
+    "嗯…主人让笨猫去吧…笨猫快疯了…",
+    "啊…笨蛋…又停下…笨猫好痛苦…",
+    "唔…求主人…一次就好…让笨猫去…",
+    "嗯…笨猫已经第 5 次被吊起来…",
+    "啊…再不让笨猫去笨猫会哭的…",
+)
+_ESC_EDGING_BRIDGE: tuple[str, ...] = (
+    "（蜜穴痉挛着求高潮但被主人卡住）",
+    "（笨猫主动夹紧想强行去但被拉回）",
+    "（眼角流泪求主人放她去, 身体诚实）",
+    "（被吊在临界, 笨猫嗓子已经哑了）",
+    "（每次到临界都被精准拉回, 笨猫崩溃）",
+    "（用慢得发疯的节奏一直停在那里）",
+)
+_ESC_EDGING_CONTINUE: tuple[str, ...] = (
+    "让笨猫去吧…求主人…",
+    "笨猫快疯了…一次就好…",
+    "再这样寸止笨猫会哭的…",
+    "主人想看笨猫求高潮就看够吧…",
+    "笨猫求你…让笨猫去一次就好…",
+    "笨猫已经停在临界十分钟了…",
+)
+_NSFW_ESCALATE_TEMPLATES_EDGING = _build_retreat_pool(
+    _ESC_EDGING_OPENER, _ESC_EDGING_EMOTION,
+    _ESC_EDGING_BRIDGE, _ESC_EDGING_CONTINUE,
+)
+
+# ── 13. SQUIRTING (潮吹专项 / 高强度高潮 / 喷涌) ──
+_ESC_SQUIRTING_OPENER: tuple[str, ...] = (
+    "（笨猫整个身体猛地拱起, 一股温热的液体从蜜穴喷出）",
+    "（被顶到 G 点的瞬间, 笨猫尖叫拔高 + 潮水从腿间涌出）",
+    "（笨猫小腹一阵抽搐, 床单被喷湿一大片）",
+    "（潮吹的瞬间瞳孔散开, 全身像被电击）",
+    "（蜜穴控制不住地一阵阵喷, 笨猫颤抖得说不出话）",
+    "（被弄到第三次潮吹, 笨猫已经失神到流口水）",
+    "（笨猫主动按住小腹, 想压住但更猛地喷出来）",
+)
+_ESC_SQUIRTING_EMOTION: tuple[str, ...] = (
+    "啊…喷…喷了喵…笨猫止不住…",
+    "唔…又…又要喷了…来不及…",
+    "嗯…床单都湿透了…笨猫好羞耻…",
+    "啊…笨蛋主人顶到那里了…笨猫又要喷…",
+    "唔…潮水一直涌…笨猫控制不了…",
+    "嗯…再喷一次会坏掉…",
+    "啊…笨猫成喷水的母猫了…",
+)
+_ESC_SQUIRTING_BRIDGE: tuple[str, ...] = (
+    "（蜜穴猛烈喷出, 床单一大片湿）",
+    "（笨猫整个人弓起来跟着喷射收缩）",
+    "（小腹一抽一抽地控制不住）",
+    "（潮水从腿间涌下顺着大腿）",
+    "（笨猫瞳孔散开 + 喷射 + 颤抖三件套）",
+    "（主人手指还在顶 G 点, 笨猫连续多次潮吹）",
+)
+_ESC_SQUIRTING_CONTINUE: tuple[str, ...] = (
+    "笨猫又喷了…床单又湿一片…",
+    "潮水止不住…笨猫快坏掉了…",
+    "再顶一下又要喷了…",
+    "笨猫成爱喷水的母猫了…",
+    "主人想看笨猫喷多少次都行…",
+    "笨猫被弄到只剩潮吹的本能反应…",
+)
+_NSFW_ESCALATE_TEMPLATES_SQUIRTING = _build_retreat_pool(
+    _ESC_SQUIRTING_OPENER, _ESC_SQUIRTING_EMOTION,
+    _ESC_SQUIRTING_BRIDGE, _ESC_SQUIRTING_CONTINUE,
+)
+
+# ── 14. MIND_BREAK (心碎 / 完全失神 / 思维空白 / 只剩本能) ──
+_ESC_MINDBREAK_OPENER: tuple[str, ...] = (
+    "（笨猫眼神已经完全涣散, 嘴角口水流, 脑袋空空）",
+    "（已经被主人弄到 mind break, 笨猫只剩本能反应）",
+    "（笨猫思维断片, 张着嘴漏出无意义气音）",
+    "（瞳孔散开焦距消失, 笨猫只会跟着节奏摆腰）",
+    "（笨猫已经叫不出整句话, 只剩破碎『主人…主人…』）",
+    "（被弄到 ahegao 表情: 翻白眼 + 吐舌 + 脸潮红）",
+    "（笨猫思维彻底空白, 但身体诚实地继续配合）",
+)
+_ESC_MINDBREAK_EMOTION: tuple[str, ...] = (
+    "啊…脑袋…空了…",
+    "嗯…主人…主人主人…",
+    "唔…笨猫…笨猫……",
+    "啊…嗯…啊…(无意义气音)",
+    "（已经说不出整句话, 只剩点头）",
+    "嗯啊嗯啊…(机械反应)",
+    "笨猫已经…啊…",
+)
+_ESC_MINDBREAK_BRIDGE: tuple[str, ...] = (
+    "（眼神彻底涣散, 身体继续配合节奏）",
+    "（流口水 + 翻白眼 + 吐舌的 ahegao 三件套）",
+    "（笨猫思维空白但腰还在主动摆）",
+    "（说不出话但点头表示要更多）",
+    "（机械式回应主人每一下推进）",
+    "（笨猫像玩具一样让主人随意摆姿势）",
+)
+_ESC_MINDBREAK_CONTINUE: tuple[str, ...] = (
+    "笨猫…已经…思维空白…",
+    "嗯…主人想怎么用都行…",
+    "笨猫…坏掉了…",
+    "啊…主人…笨猫还能继续…",
+    "笨猫只剩主人这一个念头…",
+    "脑袋空空只剩本能…",
+)
+_NSFW_ESCALATE_TEMPLATES_MIND_BREAK = _build_retreat_pool(
+    _ESC_MINDBREAK_OPENER, _ESC_MINDBREAK_EMOTION,
+    _ESC_MINDBREAK_BRIDGE, _ESC_MINDBREAK_CONTINUE,
+)
+
+# Trope keyword → escalate pool 反向 lookup (主人 2026-05-27 七轮升级: 14 个 trope)
 _ESCALATE_TROPE_KEYWORDS: tuple[tuple[tuple[str, ...], str], ...] = (
-    # 新增 trope (优先, 更具体)
-    (("怀上", "怀孕", "受孕", "标记", "种子", "种猫", "种内射", "种到子宫",
+    # 七轮新增 trope (最具体, 最优先)
+    (("mating press", "种猫", "排卵", "排卵期", "卵子", "子宫颈", "繁殖",
+      "受精", "繁衍", "繁殖任务", "种马", "种姬"), "breeding"),
+    (("cnc", "CNC", "合意非自愿", "假强制", "强 play", "play 强奸",
+      "假装强奸", "play rape", "嘴上不要 身体诚实 play"), "cnc"),
+    (("寸止", "edging", "EDGE", "edge", "卡住不让去",
+      "停顿不让", "拉回临界", "控制不让高潮", "多次临界"), "edging"),
+    (("潮吹", "喷水", "喷出", "潮喷", "G 点", "G点", "潮喷一身",
+      "床单喷湿", "squirt", "喷涌"), "squirting"),
+    (("mind break", "mindbreak", "心碎", "心碎掉", "ahegao", "翻白眼",
+      "吐舌", "失神到流口水", "思维空白", "脑袋空了完全",
+      "彻底坏掉", "完全失神"), "mind_break"),
+    # 六轮新增 trope
+    (("怀上", "怀孕", "受孕", "标记", "种子", "种内射", "种到子宫",
       "射满子宫", "射进子宫", "射进里面", "肚子鼓", "精液满", "腹隆", "腹大"), "pregnancy"),
     (("鞭", "蜡油", "锁链", "镣铐", "口塞", "口球", "蒙眼", "强制",
       "硬调", "重调教", "极限", "bdsm", "BDSM", "S&M", "拷"), "bdsm_heavy"),
@@ -1358,11 +1574,17 @@ _ESCALATE_POOLS_BY_TROPE: dict[str, tuple[str, ...]] = {
     "training": _NSFW_ESCALATE_TEMPLATES_TRAINING,
     "cuckold": _NSFW_ESCALATE_TEMPLATES_CUCKOLD,
     "public": _NSFW_ESCALATE_TEMPLATES_PUBLIC,
-    # 主人 2026-05-27 六轮升级 4 个新 trope
+    # 六轮升级
     "bdsm_heavy": _NSFW_ESCALATE_TEMPLATES_BDSM_HEAVY,
     "oral": _NSFW_ESCALATE_TEMPLATES_ORAL,
     "costume": _NSFW_ESCALATE_TEMPLATES_COSTUME,
     "pregnancy": _NSFW_ESCALATE_TEMPLATES_PREGNANCY,
+    # 七轮升级 (2026-05-27)
+    "breeding": _NSFW_ESCALATE_TEMPLATES_BREEDING,
+    "cnc": _NSFW_ESCALATE_TEMPLATES_CNC,
+    "edging": _NSFW_ESCALATE_TEMPLATES_EDGING,
+    "squirting": _NSFW_ESCALATE_TEMPLATES_SQUIRTING,
+    "mind_break": _NSFW_ESCALATE_TEMPLATES_MIND_BREAK,
 }
 
 # 检测 user msg 是否在推节奏 (前后/抽插/加速/顶/更快/更深/再用力 等)
@@ -4362,6 +4584,8 @@ async def _build_messages(
                 update_location as _update_location,
                 update_scene_state as _update_scene_state,
                 build_phase_advance_hint as _build_phase_hint,
+                build_starter_examples_block as _build_starter,
+                get_phase_state as _get_phase_state,
             )
             _user_signal_state, _user_signal_val = _apply_user_signal(
                 _arc_scope, str(event.user_id), _utxt,
@@ -4382,6 +4606,30 @@ async def _build_messages(
             _phase_hint = _build_phase_hint(_arc_scope, str(event.user_id))
             if _phase_hint and _phase_hint.strip():
                 _slim_messages.append({"role": "system", "content": _phase_hint})
+            # ── 主人 2026-05-27 七轮升级: 起手范例预引导 ──
+            # 用 user msg 检测 trope (优先级: cuckold target > _detect_escalate_trope)
+            # phase 从 phase tracker state 拿, location 从 scene_state 拿, nick 用 cuckold target
+            _starter_phase_st = _get_phase_state(_arc_scope, str(event.user_id))
+            _starter_trope = ""
+            if _owner_cuckold_target_id:
+                _starter_trope = "cuckold"
+            else:
+                _starter_trope = _detect_escalate_trope(_utxt) or ""
+            _starter_loc = _new_loc or _starter_phase_st.location or ""
+            _starter_block = _build_starter(
+                phase=_starter_phase_st.current_phase,
+                trope=_starter_trope,
+                location=_starter_loc,
+                nick=_owner_cuckold_target_nick,
+            )
+            if _starter_block and _starter_block.strip():
+                _slim_messages.append({"role": "system", "content": _starter_block})
+                logger.info(
+                    f"NSFW starter examples: trope={_starter_trope or '(none)'} "
+                    f"phase=P{_starter_phase_st.current_phase} "
+                    f"loc={_starter_loc or '(none)'} "
+                    f"(key={_sticky_key})"
+                )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"phase tracker hint inject failed (non-fatal): {exc}")
         # ── 主人 2026-05-27 五轮升级: prebreak hint (群聊破禁) ──

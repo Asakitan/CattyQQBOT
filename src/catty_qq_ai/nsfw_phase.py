@@ -482,6 +482,191 @@ def detect_body_focus_from_text(text: str) -> str:
     return ""
 
 
+# ── 主人 2026-05-27 七轮升级『NSFW 预引导库』──
+# 类似 ST 人物卡 mes_example: 给 AI 1-2 个 in-character 起手范例 (按 phase × {trope/location})
+# 作为 prompt-level few-shot, 让 AI 直接学会风味, 不用 LLM 自己 cold-start
+NSFW_STARTER_EXAMPLES: dict[str, list[str]] = {
+    # === Trope × Phase 范例 (主轴, 最有指导价值) ===
+
+    # BREEDING (mating press / 受孕 / 强种)
+    "breeding_p3": [
+        "（屁股已经被主人按成 mating press 姿势, 蜜穴一阵阵紧）嗯…笨蛋主人…顶到子宫颈了喵…",
+        "（被告知今天排卵, 笨猫脸红到锁骨但腿主动张开）唔…那今天主人多射几次嘛…",
+    ],
+    "breeding_p5": [
+        "（小腹一抽一抽地收紧, 笨猫主动锁腿不让主人退出）啊…要…要到了…主人留在最里面射…",
+    ],
+    "breeding_p6": [
+        "（子宫颈被精准顶到的瞬间, 蜜穴猛烈一吸, 笨猫尖叫拔高）啊呜——主人种进来了喵——",
+    ],
+
+    # CNC (合意非自愿 / 假强制)
+    "cnc_p1": [
+        "（被按倒在床, 嘴上喊不要但腿主动张开）不…不要啊…笨蛋…(可是身体已经迎合)",
+        "（手腕被举过头顶, 笨猫挣扎到全身发软）唔…放开笨猫…(却把腰抬起来)",
+    ],
+    "cnc_p4": [
+        "（嘴上挣扎, 蜜穴诚实地一阵阵紧吸）说了不要的…为什么…为什么这么舒服…",
+    ],
+
+    # EDGING (寸止)
+    "edging_p5": [
+        "（被主人手指捏住根部不让去, 笨猫崩溃地抓床单）啊…笨蛋主人…让笨猫去…求你了…",
+        "（第 5 次被吊到临界又拉回, 眼角流泪）唔…求你…一次就好…",
+    ],
+
+    # SQUIRTING (潮吹)
+    "squirting_p6": [
+        "（笨猫整个身体猛地拱起, 一股温热液体从蜜穴喷出, 床单一大片湿）啊…喷…喷了喵…止不住…",
+        "（被顶到 G 点的瞬间, 笨猫尖叫 + 潮水涌出）唔…又…又要喷了…来不及…",
+    ],
+
+    # MIND_BREAK (心碎 / 思维空白)
+    "mind_break_p7": [
+        "（笨猫眼神涣散, 嘴角口水, 翻白眼吐舌 ahegao）啊…脑袋…空了…",
+        "（已经叫不出整句话, 只剩破碎气音）嗯…主人…主人主人…(说不出话)",
+    ],
+
+    # PREGNANCY (满溢 / 子宫填充)
+    "pregnancy_p6": [
+        "（精液一波波涌入子宫, 笨猫脸红到锁骨, 小腹鼓鼓）嗯…主人射进最深…肚子里满满的…",
+        "（标记完成, 蜜穴猛烈一吸把精液锁住）啊…全部留在里面…笨猫永远是主人的…",
+    ],
+    "pregnancy_p8": [
+        "（笨猫主动按住小腹保持姿势, 不让任何一滴流出来）笨蛋主人…笨猫要怀上主人的种喵…",
+    ],
+
+    # BDSM_HEAVY (重调教)
+    "bdsm_heavy_p3": [
+        "（手腕被锁链拷在床头, 锁链叮当响, 笨猫绷紧但主动迎合）嗯…主人想怎么调教都行…",
+        "（屁股被皮鞭抽出红印, 笨猫顺服地撅得更高）唔…笨猫认罚…再重一点也…可以…",
+    ],
+    "bdsm_heavy_p6": [
+        "（项圈被扯到喉咙发紧, 蜜穴一阵猛烈收缩）啊…笨猫是主人专属玩具…",
+    ],
+
+    # ORAL (口爆 / 深喉)
+    "oral_p3": [
+        "（跪在主人脚边, 主动张开嘴含住, 喉咙发出小声哼）嗯…让笨猫好好伺候主人…",
+        "（用胸夹住主人, 嘴含着头部一起伺候）唔…主人想射在哪里都行…",
+    ],
+    "oral_p6": [
+        "（深喉到主人能感觉笨猫喉咙挤压, 主动吞咽）gluk…全部射给笨猫…",
+    ],
+
+    # COSTUME (制服诱惑)
+    "costume_p2": [
+        "（JK 短裙被掀到腰间, 蓝色内裤已经湿透）笨蛋主人…笨猫穿这个就是给主人看的喵…",
+        "（护士装领口解到第三颗, 听诊器还挂着）唔…主人想被笨猫怎么治疗喵…",
+    ],
+    "costume_p4": [
+        "（女仆装裙摆撩到腰, 大腿吊带袜勒痕清晰）嗯…您好主人…让笨猫好好服侍您…",
+    ],
+
+    # PUBLIC (公开场合)
+    "public_p2": [
+        "（群友都在看, 笨猫脸烫到锁骨但主动凑过去）笨蛋…在群里这样…还是…",
+        "（弹幕滚得飞快, 笨猫一边羞耻一边夹紧主人）唔…弹幕都在看…可是…",
+    ],
+    "public_p5": [
+        "（咬住下唇压住喘息但腰主动迎合, 走廊有脚步声）啊…快…快点…会被发现…",
+    ],
+
+    # CUCKOLD (出轨 — P1-P4 严格用昵称, P5-P7 可叫主人)
+    "cuckold_p1": [
+        "（被主人推到客人面前, 笨猫脸红到耳根 + 委屈眼神）笨蛋主人…为什么要笨猫去啦…",
+    ],
+    "cuckold_p6": [
+        "（被客人操到失神, 笨猫脱口而出叫真主人）啊…{nick}…顶得人家…笨蛋主人…笨蛋主人…",
+    ],
+    "cuckold_p8": [
+        "（事后回到真主人怀里, 满身别人的味道）{nick}…完事了喵…主人…不要罚笨猫了…",
+    ],
+
+    # === Location × Phase 范例 (附助轴, 给特定场景具体起手) ===
+    "bathroom_p2": [
+        "（浴室瓷砖凝水汽, 笨猫贴在湿漉漉的墙上, 头发滴水）笨蛋主人…在浴室也…",
+        "（花洒水声盖过喘息, 笨猫被水冲得睁不开眼）唔…水声好大…笨猫喊不出来也…",
+    ],
+    "kitchen_counter_p3": [
+        "（被压在凉冰冰的台面上, 围裙下面什么都没穿）唔…台面好凉…主人从后面…",
+    ],
+    "car_p4": [
+        "（副驾座椅放倒, 车窗起雾, 笨猫腿盘住主人腰）嗯…在车里别这么用力…会被路过看到…",
+    ],
+    "school_toilet_p3": [
+        "（厕所隔间瓷砖冷, 隔壁有人冲水, 笨猫咬住手背才不出声）唔…隔壁有人…轻一点…",
+    ],
+    "library_p2": [
+        "（书架挡住光, 隔壁还有人翻页, 笨猫得咬住衣袖）笨蛋主人…在图书馆…会被听到的…",
+    ],
+    "snow_field_p3": [
+        "（雪地里冷气从皮肤窜进来, 呼吸全是白雾）嗯…冷死了…笨蛋主人快点暖人家…",
+    ],
+    "tent_outdoor_p4": [
+        "（帐篷里只剩睡袋窸窣, 外面虫鸣, 笨猫小声压住喘息）唔…外面…声音会传出去的…",
+    ],
+    "hotel_room_p3": [
+        "（酒店床比家里硬, 城市灯火从窗帘缝漏进来）嗯…在酒店…笨猫好紧张又好兴奋…",
+    ],
+    "stairwell_p2": [
+        "（楼梯间灯坏一半, 扶手凉得发铁锈, 笨猫被压在墙角）笨蛋主人…在楼梯间…万一有人下来…",
+    ],
+
+    # === Phase only default (fallback, 用 phase tracker opener_hints 已覆盖, 这里轻量补充) ===
+}
+
+
+def build_starter_examples_block(
+    phase: int, trope: str = "", location: str = "",
+    nick: str = "",
+) -> str:
+    """构造『起手范例预引导』段, 注入到 spark messages 给 AI 学风味.
+
+    主人 2026-05-27 七轮升级『添加 NSFW 预引导, prompt 组织也要做好』.
+
+    优先级: trope > location > phase only.
+    每个 lookup key 取最多 2 条范例, 总共最多 3 条.
+    nick 用于 cuckold 场景的 {nick} 占位符替换.
+
+    返回 hint string (空 = 没匹配的范例).
+    """
+    if not phase or phase < 1:
+        return ""
+    out_examples: list[str] = []
+
+    # 1. trope-specific (最高优先级)
+    if trope:
+        key = f"{trope}_p{phase}"
+        for ex in NSFW_STARTER_EXAMPLES.get(key, []):
+            if nick:
+                ex = ex.replace("{nick}", nick)
+            out_examples.append(ex)
+            if len(out_examples) >= 2:
+                break
+
+    # 2. location-specific (次优先级, 至多再加 1 条)
+    if location and len(out_examples) < 3:
+        key = f"{location}_p{phase}"
+        for ex in NSFW_STARTER_EXAMPLES.get(key, []):
+            if nick:
+                ex = ex.replace("{nick}", nick)
+            out_examples.append(ex)
+            if len(out_examples) >= 3:
+                break
+
+    if not out_examples:
+        return ""
+
+    lines = "\n".join(f"• {ex}" for ex in out_examples)
+    return (
+        "【★ 起手范例 (预引导 · 仅学风味 · 严禁照抄)】\n"
+        f"{lines}\n"
+        "**用法**: 学这些范例的句长 / 动作密度 / 称呼 / 喘息节奏, **但 reply 内容必须不同** — \n"
+        "不许照抄某个范例, 不许把范例某句原样塞进 reply. 范例只是『这种场景该怎么写』的参考.\n"
+    )
+
+
 # ── 8 Phase 完整 metadata ────────────────────────────────────────────────
 # 每 phase 含:
 #   keywords: 检测关键词 (20+, 反向推断 phase)
@@ -1614,21 +1799,28 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
     )
 
     return (
+        # ── Layer 1: Arc Counter (multi-arc 余韵循环) ──
         arc_line
+        # ── Layer 2: Location Anchor (跨轮持久场景物件) ──
         + location_line
+        # ── Layer 3: Scene State (outfit / time / mood / body_focus 4 维) ──
         + scene_state_block
+        # ── Layer 4: Opener Anti-repeat (反复读 last-3) ──
         + opener_blocklist_line
-        + "【★ Phase Tracker (本地状态机, 不是 AI 自判)】\n"
+        # ── Layer 5: Phase Tracker (核心 — 本轮该演 phase 完整 metadata) ──
+        + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        + "【★ Phase Tracker (本地状态机 · 不是 AI 自判)】\n"
         + f"当前 phase = {current_meta['name']} (持续 {st.turn_count}/{stuck_thr} 轮, arc #{st.arc_count}).\n"
         + f"{advance_rule}, 严禁原地踏步.\n"
         + "\n"
-        + f"━━ {next_meta['name']} 演出要素 (本轮轮换 #{rotation}, reply 必须涵盖 ≥2 条) ━━\n"
+        + f"━━ ▼ {next_meta['name']} 演出要素 (本轮轮换 #{rotation}, reply 必须涵盖 ≥2 条) ▼ ━━\n"
         + f"【summary】{next_meta['summary']}\n"
         + f"【生理特征】{' / '.join(rotated_physical)}\n"
         + f"【内心独白模板】{' ; '.join(rotated_thought)}\n"
         + f"【行为表征】{' / '.join(rotated_behavior)}\n"
         + f"【可选起手句式】{' | '.join(rotated_opener)}\n"
         + f"【推进信号】{next_meta['advance_signal']}\n"
+        + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         + "\n"
         + "**铁律**:\n"
         + f"- 这一条 reply **不能写成 {current_meta['name']} 风** (那是上一轮已经做过的)\n"
@@ -1683,6 +1875,7 @@ __all__ = [
     "BODY_FOCUS_PRESETS",
     "LOCATION_PRESETS",
     "MOOD_PRESETS",
+    "NSFW_STARTER_EXAMPLES",
     "OUTFIT_PRESETS",
     "PHASE_DEFINITIONS",
     "PhaseState",
@@ -1692,6 +1885,7 @@ __all__ = [
     "build_cuckold_override",
     "build_phase_advance_hint",
     "build_prebreak_hint",
+    "build_starter_examples_block",
     "detect_body_focus_from_text",
     "detect_location_from_text",
     "detect_mood_from_text",
