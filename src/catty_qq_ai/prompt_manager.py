@@ -342,11 +342,14 @@ def register_catty_persona(
         content_fn=lambda: _pp.build_reply_intelligence_prompt(no_reply),
         order=100,
     )
-    mgr.register(
-        "catty_identity_anchor",
-        content_fn=lambda: _pp.IDENTITY_ANCHOR_PROMPT,
-        order=110,
-    )
+    # catty_identity_anchor: IDENTITY_ANCHOR_PROMPT 已在 build_reply_self_check_prompt
+    # step 1 内嵌, 单独一段是 100% 重复 (省 ~666c). 显式 disable 留代码做对照.
+    if False:  # noqa: SIM223 — disable, identity 已经在 reply_self_check 里
+        mgr.register(
+            "catty_identity_anchor",
+            content_fn=lambda: _pp.IDENTITY_ANCHOR_PROMPT,
+            order=110,
+        )
     mgr.register(
         "catty_char_description",
         content_fn=lambda: _cc.get_description(ctx=macro_ctx, user_display=user_display),
@@ -724,12 +727,44 @@ def register_catty_persona(
             content_fn=lambda: _sa.build_story_arc_prompt(arc_store.get_active(scope)),
             order=350,
         )
+        # Catty Arc Pusher (order=352): 看 active arc 跟 current msg 关联度,
+        # 给具体 push (推进 arc 进度) 或 callback (回头提) hint, 让 arc 不只是被动列着
+        from .catty_arc_pusher import build_arc_pusher_prompt as _build_arc_pusher
+        mgr.register(
+            "catty_arc_pusher",
+            content_fn=lambda: _build_arc_pusher(
+                arc_store.get_active(scope), user_text,
+            ),
+            order=352,
+        )
 
     # === QQ 节奏 + 自检 + image + 示例 (后段) ===
     mgr.register(
         "catty_qq_chat_rhythm",
         content_fn=lambda: _pp.build_qq_chat_rhythm_prompt(split_marker),
         order=210,
+    )
+
+    # === Catty Length Intent (order=217) - 本轮回复长度推荐 ===
+    # 比硬编码 1-3 句规则更精准: 看 user msg + scene 推断 short/medium/long/flex
+    # scene_tag 从 catty_scene_detector 拿 (lazy 计算, 同一轮 cache 一份)
+    def _build_length_intent() -> str:
+        try:
+            from .catty_length_intent import build_length_intent_prompt
+            scene_tag = ""
+            try:
+                from .catty_scene_detector import detect_scene
+                scene_tag = detect_scene(user_text)
+            except Exception:  # noqa: BLE001
+                pass
+            return build_length_intent_prompt(user_text, scene_tag=scene_tag)
+        except Exception:  # noqa: BLE001
+            return ""
+
+    mgr.register(
+        "catty_length_intent",
+        content_fn=_build_length_intent,
+        order=217,
     )
 
     # === Catty Initiative (order=212) - 主动行为机会检测 ===
@@ -797,6 +832,16 @@ def register_catty_persona(
             content_fn=lambda: _pp.build_image_literacy_prompt(),
             order=230,
         )
+        # Catty Image Reaction (order=232): 根据 image_description 关键词命中给具体
+        # 情绪反应 hint (食物→馋 / 狗→警觉 / 帅哥→吃醋 / 等).
+        _image_desc = ctx.get("image_description", "") or ""
+        if _image_desc:
+            from .catty_image_reaction import build_image_reaction_prompt as _build_image_reaction
+            mgr.register(
+                "catty_image_reaction",
+                content_fn=lambda: _build_image_reaction(_image_desc),
+                order=232,
+            )
     # 示例对话只在冷会话(<HOT_SESSION 阈值)注入 — 热会话从历史里就能学到口吻,
     # 这两段加起来 ~1.5K token,省下 30-40% system prompt 体积。
     if style_examples_enabled and is_cold_session:

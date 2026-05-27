@@ -4292,6 +4292,7 @@ async def _build_messages(
         "affection_level": _user_affection_level,
         "is_owner": _user_is_owner,
         "has_image": bool(image_description),
+        "image_description": image_description or "",
         "story_arc_store": story_arc_store,
         "no_reply_marker": NO_REPLY_MARKER,
         "reply_split_marker": REPLY_SPLIT_MARKER,
@@ -8887,6 +8888,17 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             messages = inject_author_note(messages, _transition_note)
                 except Exception as exc:  # noqa: BLE001
                     logger.debug(f"scene_transition failed (non-fatal): {exc}")
+
+                # 对话节奏感知: 看 messages 末尾结构判断 user_burst/catty_burst/silence_invite,
+                # 给笨猫节奏调整 hint (该收着/该等等/该静默)
+                try:
+                    from .catty_pacing import build_pacing_prompt
+                    _pacing_prompt = build_pacing_prompt(messages)
+                    if _pacing_prompt:
+                        _pacing_note = AuthorNote(content=_pacing_prompt, depth=2)
+                        messages = inject_author_note(messages, _pacing_note)
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"pacing failed (non-fatal): {exc}")
 
                 # 多轮 callback: 看最近 N 条 user msg 抓 unfinished intents
                 # (明天/等会/打算/刚才/在做/...) 当前 msg 没接住时给笨猫主动回头提的机会
