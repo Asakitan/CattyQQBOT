@@ -689,6 +689,9 @@ def register_catty_persona(
     # Catty Session Spice - per (scope, user, date) 微风味 — 同对话同人当天稳定,
     # 不同人/不同天会变。三轴(微情绪/身体小动作偏好/自称-口头禅偏好), 主人池加亲密向。
     # ST 风『不同 persona / 不同人不同反应』的 stateless 实现 —— 不存档, pure deterministic。
+    # Phase A3: session_spice / random_encounter 移到 order 470/472 (dynamic 区),
+    # 避免污染 stable prefix 让 prompt cache miss. cache boundary marker (order=455)
+    # 之前的段是 stable, 之后的段是 dynamic.
     _spice_user_id = ctx.get("user_id", "") or ""
     if _spice_user_id and scope:
         from . import session_spice as _ss
@@ -697,7 +700,7 @@ def register_catty_persona(
             content_fn=lambda: _ss.build_session_spice_prompt(
                 scope, _spice_user_id, is_owner=is_owner,
             ),
-            order=208,
+            order=470,  # Phase A3: was 208, moved to dynamic 区 (per-day stable but moved by plan)
         )
     # Catty Random Encounter - 每条 reply N% 概率触发『本轮主动小开场』hint。
     # 非 deterministic, 每次都 random 抽; chance 走 config.catty_random_encounter_chance。
@@ -710,8 +713,24 @@ def register_catty_persona(
             content_fn=lambda: _re.maybe_build_random_encounter_prompt(
                 chance=_re_chance, is_owner=is_owner,
             ),
-            order=209,
+            order=472,  # Phase A3: was 209, 真随机段移到 dynamic 区
         )
+
+    # === Phase A3: Cache Boundary Marker (order=455) ===
+    # 给 prompt_cache.inject_system_tail_cache 一个稳定 anchor: 打 cache_control 在这里,
+    # 它前面所有 stable system 段 (order < 455) 进 cache, 后面所有 dynamic 段
+    # (order >= 460, e.g. session_spice / random_encounter / user_vibe / user_details /
+    # anti_repetition) 在 cache 边界外, 不影响 prefix 字节一致.
+    # marker 内容是固定文本, content 稳定 → cache 字节级一致.
+    _CACHE_BOUNDARY_TEXT = (
+        "<<<CACHE_BOUNDARY:catty_stable_prefix>>> "
+        "(以下是 per-request 动态段, 不影响以上稳定 prefix 的 prompt cache.)"
+    )
+    mgr.register(
+        "catty_cache_boundary",
+        content_fn=lambda: _CACHE_BOUNDARY_TEXT,
+        order=455,
+    )
     if "world_info" not in legacy_disabled:
         mgr.register(
             "catty_world_info",

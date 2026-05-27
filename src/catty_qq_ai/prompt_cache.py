@@ -82,27 +82,53 @@ def _mark_cache_control(msg: dict[str, Any]) -> None:
             last["cache_control"] = {"type": "ephemeral"}
 
 
+_CACHE_BOUNDARY_MARKER = "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"
+
+
+def _has_marker_in_content(content: object, marker: str) -> bool:
+    """检测 message.content (可能是 str 或 list[dict]) 是否含 boundary marker."""
+    if isinstance(content, str):
+        return marker in content
+    if isinstance(content, list):
+        for blk in content:
+            if isinstance(blk, dict):
+                text = str(blk.get("text", ""))
+                if marker in text:
+                    return True
+    return False
+
+
 def inject_system_tail_cache(messages: list[dict]) -> list[dict]:
-    """给顶部连续 system 块的最后一条 message 注入 cache_control.
+    """给 stable system prefix 末尾打 cache_control: ephemeral breakpoint.
 
-    主人 2026-05-28: 之前是 messages 全局倒数找 role==system, 但 ST 风
-    inject_author_note(role="system", depth=N) 会把 author_note 当作 system
-    插入到 chat history **中间** -- 全局倒数会命中那个动态 author_note (relationship
-    / persona_drift / adaptive_drift / scene_now / theory_of_mind / scene_transition
-    / pacing / multi_turn_callback 全是每轮动态) -- prefix 永远字节不一致, cache
-    永远 miss (read=0 create=0 即此症状).
+    Phase A3 (2026-05-28 后): 优先找 _CACHE_BOUNDARY_MARKER segment, 打 cache_control
+    在它上面. boundary 是 prompt_manager register 的固定文本段 (order=455), 它前面
+    所有 stable system 段在 cache 内, 它后面所有 dynamic system 段 (session_spice,
+    random_encounter, user_vibe, user_details, anti_repetition 等, order >= 460) 在
+    cache 边界外不影响 prefix 字节一致.
 
-    现在改成顶部连续 system 段的最后一条, 这一段 (persona / char_description /
-    scenario / mes_example / catgirl_examples / tools_hint 等) 基本静态,
-    breakpoint 钉在这里, 顶部稳定段就能命中 cache.
-    后续 author_note 动态注入因为在 cache 边界之外, 不影响命中.
+    fallback (没有 boundary marker): 退化为老逻辑 - 找顶部连续 system 段的最后一条.
+    主人 2026-05-28 之前的 fix: 改 global 倒数找 system → 顶部连续 (避免 author_note
+    动态 system 污染 cache key).
+
+    Anthropic Prompt Caching 要求 prefix 字节级一致才命中; 这一改让 cache 真正吃到
+    stable persona/character_card/world_info/qq_rhythm/examples 等几 K 段。
     """
+    # Phase A3: 优先找 boundary marker
+    for i, msg in enumerate(messages):
+        if msg.get("role") != "system":
+            break  # 离开顶部 system 块, 停止 (boundary 必须在顶部 system 块内)
+        if _has_marker_in_content(msg.get("content"), _CACHE_BOUNDARY_MARKER):
+            _mark_cache_control(msg)
+            return messages
+
+    # fallback: 老逻辑 (顶部连续 system 末尾)
     last_top_system = -1
     for i, msg in enumerate(messages):
         if msg.get("role") == "system":
             last_top_system = i
         else:
-            break  # 顶部 system 块结束 (遇到 user/assistant)
+            break
     if last_top_system >= 0:
         _mark_cache_control(messages[last_top_system])
     return messages
