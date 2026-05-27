@@ -3640,6 +3640,15 @@ def _append_history(key: str, user_content: str, assistant_content: str) -> None
     elif max_messages == 0:
         history = []
     cache.set(key, history)
+    # 主人 2026-05-28 fix: session 改立即写盘, 不 debounce.
+    # 主人原话『胶布场景没了』 — 根因: bot 频繁重启 (我 push 多个 fix 触发 24+ 次重启),
+    # session debounce 2s 写盘窗口被 SIGTERM 吃掉, dirty 内存丢, 旧文件被新短 history 覆盖.
+    # 改成 _append_history 后立刻 flush_sync, 保证每轮对话写盘原子完成, 跨重启不丢.
+    # 代价: 每轮多一次 ~1-5ms 磁盘 IO (SSD 可忽略). on_shutdown hook 仍保留作兜底.
+    try:
+        cache.flush_sync()
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"session_cache flush_sync after _append_history failed: {exc}")
     # 给训练 idle gate + dashboard conversation feed 用
     try:
         activity_feed.record_assistant_reply(
