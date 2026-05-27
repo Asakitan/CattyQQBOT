@@ -9489,12 +9489,14 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     try:
                         from .catty_nsfw_imagegen import maybe_generate_image as _maybe_nsfw_img
                         from .nsfw_phase import get_phase_state as _get_phase_state_fresh
+                        # _arc_scope 在 _build_messages 函数里, handle_chat 拿不到 → 用同样的 helper 重算
+                        _nsfw_img_scope = _conversation_queue_key(event)
                         _phase_st_for_draw = _get_phase_state_fresh(
-                            _arc_scope, str(event.user_id),
+                            _nsfw_img_scope, str(event.user_id),
                         )
                         _nsfw_seg = await _maybe_nsfw_img(
                             config=config,
-                            scope_key=_arc_scope,
+                            scope_key=_nsfw_img_scope,
                             user_id=str(event.user_id),
                             phase_state=_phase_st_for_draw,
                             affection_store=affection_store,
