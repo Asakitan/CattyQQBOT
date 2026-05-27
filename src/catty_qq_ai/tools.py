@@ -1339,12 +1339,10 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
     if yandex_blocked:
         payload["yandex_blocked"] = True
         payload["yandex_blocked_hint"] = (
-            "Yandex 在国内 IP 被整体区域阻断(返回『service is under construction』stub),"
-            "本次没拿到 Yandex 结果——这是真人/自拍/X(Twitter) 搜图的主力引擎,缺它命中率会很低。"
-            "**必须**用猫娘人格自然告诉主人:这张是真人/自拍类的话,Yandex 搜不到来源,要去 "
-            "config.json 的 ai.http_proxy 配个代理(主人就能搜 X/Twitter 自拍了);"
-            "现在能给的只是 SauceNAO/ascii2d 的二次元站结果(Konachan/Pixiv 这类),"
-            "真人来源在国内 IP 上确实抓不到嗷呜。**不要装作搜全了**。"
+            "Yandex(ya.ru 备用域名也)拿到 stub 页,这是真人/X 搜图主力引擎不可用。"
+            "用猫娘人格告诉主人:Yandex 这次没回数据,真人/X 来源搜不到;"
+            "可以让主人去 config.json 的 ai.http_proxy 配个代理重试,或换张更清晰的图。"
+            "**不要装作搜全了**,SauceNAO/ascii2d 的结果只覆盖二次元。"
         )
     if not results:
         payload["guidance"] = (

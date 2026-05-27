@@ -610,6 +610,7 @@ async def _search_iqdb(
 # ---------- Yandex(真实照片 / 自拍 / X(Twitter) 强项) ----------
 
 # 屏蔽的域名(yandex 自身导航/广告/CDN)——anchor 落在这些域名都不算结果。
+# 含 yandex.com / ya.ru 两个主域名(实际请求走 ya.ru,但页内还有 yandex.com 链接)。
 _YANDEX_BLOCKED_HOSTS = (
     "yandex.com", "yandex.ru", "yandex.net", "yandex.by", "yandex.kz",
     "yastatic.net", "ya.ru",
@@ -676,10 +677,10 @@ def _parse_yandex_sites(html: str, *, max_results: int) -> list[ImageSearchResul
     return (x_twitter_hits + other_hits)[:max_results]
 
 
-# Yandex 对中国大陆 IP 整体 region block,返回一个 ~1.8KB 的 stub 页:
-# `<h1>The service is under construction. We will be back soon.</h1>`
-# 这条文案是 Yandex 的标准区域阻断响应,**不是临时维护**,直连国内服务器永远拿不到结果。
-# 检测到 stub 页 → 抛 ``YandexRegionBlockedError``,caller 可以告诉用户去配代理。
+# 历史:之前用 ``yandex.com/images/search``,但 yandex.com 把整个 /images 子路径
+# 对中国大陆 IP 整体区域阻断,返回 ~1.8KB stub 页『service is under construction』。
+# 实测同公司的 ``ya.ru/images/search`` 没被阻断(2026-05-27 验证可达,返回完整结果页),
+# 所以现在统一走 ya.ru。stub 检测仍保留 — 万一某天 ya.ru 也被阻断,可以一眼看出来。
 class YandexRegionBlockedError(RuntimeError):
     """Yandex 区域阻断 — HTML 命中 stub 文案『service is under construction』。"""
 
@@ -695,21 +696,25 @@ def _is_yandex_region_block(html: str) -> bool:
     )
 
 
+# 走 ya.ru,不走 yandex.com — yandex.com/images 在中国大陆被整体区域阻断。
+# 实测 ya.ru/images/search?rpt=imageview&url=... 在国内 IP 上能拿到完整结果页(2026-05-27)。
+_YANDEX_SEARCH_URL = "https://ya.ru/images/search"
+
+
 async def _search_yandex(
     client: httpx.AsyncClient,
     image_url: str,
     *,
     max_results: int,
 ) -> list[ImageSearchResult]:
-    """Yandex 反向搜图。对真人照片 / 自拍 / X(Twitter) 最强,SauceNAO 主覆盖二次元。
+    """Yandex 反向搜图(走 ya.ru 域名绕过 yandex.com 的区域阻断)。
 
+    对真人照片 / 自拍 / X(Twitter) 覆盖最强,SauceNAO 主覆盖二次元 illust。
     走 ``cbir_page=sites`` 直接进 "Sites containing this image" 标签,
-    解析 HTML 抓 source pages。**Yandex 对中国大陆 IP 整体区域阻断**,
-    直连国内服务器会拿到 stub 页(『service is under construction』),
-    必须配 ``catty_http_proxy``(httpx client 已经接全局代理) 才能用。
+    解析 HTML 抓 source pages。
 
     Raises:
-        YandexRegionBlockedError: 命中区域阻断 stub 页(让 caller 标记 yandex_blocked)。
+        YandexRegionBlockedError: 万一 ya.ru 也被阻断(返回 stub 页),让 caller 提示。
     """
     params = {
         "rpt": "imageview",
@@ -718,9 +723,9 @@ async def _search_yandex(
     }
     try:
         response = await client.get(
-            "https://yandex.com/images/search",
+            _YANDEX_SEARCH_URL,
             params=params,
-            headers=_common_headers("https://yandex.com/"),
+            headers=_common_headers("https://ya.ru/"),
         )
     except httpx.HTTPError as exc:
         logger.info("yandex request failed: %s: %s", exc.__class__.__name__, exc)
@@ -732,13 +737,12 @@ async def _search_yandex(
         return []
     if _is_yandex_region_block(response.text):
         logger.warning(
-            "yandex region-blocked (got 'under construction' stub, len=%d). "
-            "国内 IP 必须配 catty_http_proxy 才能用 Yandex 反向搜图。",
+            "yandex (ya.ru) region-blocked: got 'under construction' stub (len=%d). "
+            "之前 yandex.com 被阻断已切到 ya.ru,如果连 ya.ru 都被屏蔽就只能配 http_proxy 了。",
             len(response.text),
         )
         raise YandexRegionBlockedError(
-            "Yandex 区域阻断(国内 IP 直连 → service is under construction stub)。"
-            "需要配 catty_http_proxy 走代理。"
+            "Yandex 区域阻断(ya.ru 也返回 stub)。需要配 catty_http_proxy 走代理。"
         )
     try:
         return _parse_yandex_sites(response.text, max_results=max_results)
