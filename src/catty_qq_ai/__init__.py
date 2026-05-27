@@ -9503,7 +9503,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         if _nsfw_seg is not None:
                             nsfw_image_segments.append(_nsfw_seg)
                     except Exception as exc:  # noqa: BLE001
-                        logger.debug(f"nsfw_imagegen auto-draw failed (non-fatal): {exc}")
+                        logger.warning(
+                            f"nsfw_imagegen auto-draw failed (non-fatal): "
+                            f"{exc.__class__.__name__}: {exc}"
+                        )
             else:
                 reply = await chat_completion_with_tools(
                     config,
