@@ -155,12 +155,11 @@ def build_adaptive_drift_note(
     is_owner: bool = False,
     max_concat_chars: int = 600,
 ) -> AuthorNote:
-    """根据最近几条 user msg 的 vibe 反向调笨猫的语气强度, 返回 depth=2 的 author's note。
+    """根据最近几条 user msg 的 vibe 反向调笨猫的语气强度, 返回 depth=2 的 author's note.
 
-    取最近 N 条文本拼接(末 max_concat_chars 字), 跑 classify_vibe_with_confidence,
-    confidence < _DRIFT_CONFIDENCE_MIN 直接返回空 note(inject 会 skip)。
-
-    pure function — 不读 store, 不写状态, 调用方负责传 recent text 列表。
+    主人 2026-05-28 prompt 优化 C3e: 拆 cache 骨架 + dynamic 指针. 完整 12 vibe 库
+    走 build_adaptive_drift_skeleton() → register_static 入 cache. 这个函数仅返回
+    ~50c 短指针 'vibe=X conf=Y → 看 skeleton 对应那条'.
     """
     if not recent_user_texts:
         return AuthorNote(content="", depth=2)
@@ -168,7 +167,7 @@ def build_adaptive_drift_note(
     if not concat.strip():
         return AuthorNote(content="", depth=2)
     if len(concat) > max_concat_chars:
-        concat = concat[-max_concat_chars:]  # 取末尾, 最新的 msg 权重最高
+        concat = concat[-max_concat_chars:]
 
     try:
         from .user_vibe import classify_vibe_with_confidence
@@ -178,17 +177,28 @@ def build_adaptive_drift_note(
 
     if not tag or confidence < _DRIFT_CONFIDENCE_MIN:
         return AuthorNote(content="", depth=2)
-    hint = _VIBE_DRIFT_HINTS.get(tag, "")
-    if not hint:
+    if tag not in _VIBE_DRIFT_HINTS:
         return AuthorNote(content="", depth=2)
 
-    label = "贴身提醒·适应口吻"
-    if is_owner:
-        label += " (主人)"
+    owner_tag = " (主人)" if is_owner else ""
     return AuthorNote(
-        content=f"【{label}·检测到 vibe={tag}, conf={confidence}】{hint}",
+        content=f"【适应口吻·本轮指针{owner_tag}】vibe={tag} conf={confidence} → 看 catty_adaptive_drift_skeleton 里 [{tag}] 那条执行.",
         depth=2,
     )
+
+
+def build_adaptive_drift_skeleton() -> str:
+    """完整 12 vibe drift 库静态骨架 — cache 友好, byte 稳定.
+
+    返回所有 vibe tag 对应的应对 hint, AI 通过 dynamic pointer 里的 vibe tag 自己查.
+    """
+    lines = ["【适应口吻·完整 vibe 应对库】"]
+    lines.append(
+        "(本轮检测到的 vibe 看 [DYNAMIC_CONTEXT] 里 catty_adaptive_drift_pointer; 没检测到 vibe 时本段不生效.)"
+    )
+    for tag, hint in _VIBE_DRIFT_HINTS.items():
+        lines.append(f"[{tag}] {hint}")
+    return "\n".join(lines)
 
 
 __all__ = [
@@ -197,4 +207,5 @@ __all__ = [
     "default_persona_drift_note",
     "build_relationship_author_note",
     "build_adaptive_drift_note",
+    "build_adaptive_drift_skeleton",
 ]

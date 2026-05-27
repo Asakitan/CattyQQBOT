@@ -71,8 +71,6 @@ from .action_hints import build_action_hints
 from .author_note import (
     AuthorNote,
     build_adaptive_drift_note,
-    build_relationship_author_note,
-    default_persona_drift_note,
     inject_author_note,
 )
 from .character_card import CATTY_CARD, build_character_card_messages, get_post_history
@@ -4462,6 +4460,19 @@ async def _build_messages(
             )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"catty_current_sender_info register failed: {exc}")
+    # 主人 2026-05-28 prompt 优化 C3e: adaptive_drift vibe 库静态骨架 register 到 cache.
+    # 完整 12 vibe drift 应对库 (~600c byte 稳定) → cache 友好.
+    # handle_chat 后续 build_adaptive_drift_note 只输出 ~50c 短指针.
+    try:
+        from .author_note import build_adaptive_drift_skeleton as _build_drift_skeleton
+        _st_manager.register_static(
+            "catty_adaptive_drift_skeleton",
+            _build_drift_skeleton(),
+            order=149,  # static, pre-boundary
+        )
+    except Exception as _drift_sk_exc:  # noqa: BLE001
+        logger.debug(f"adaptive_drift_skeleton register failed: {_drift_sk_exc}")
+
     # 主人 2026-05-28 prompt 优化 C3b: PHI (post_history_instructions) 挪到 boundary 前 cache.
     # 之前注入位置在 history 之后 current user 之前 (ST 风 recency bias), 但 sweep 会捕获
     # 它 inline 到 [DYNAMIC_CONTEXT] → 每轮重发 ~1500c. PHI 内容 100% 静态 (无 macro 引用),
@@ -9233,12 +9244,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 except Exception:  # noqa: BLE001
                     pass
 
-                _relationship_note = build_relationship_author_note(
-                    level=_user_affection_level, is_owner=_user_is_owner,
-                )
-                messages = inject_author_note(messages, _relationship_note)
-                messages = inject_author_note(messages, default_persona_drift_note())
-                # 适应口吻 — 从 messages 末尾倒着取最多 3 条 role=user 的 content
+                # 主人 2026-05-28 prompt 优化 C3e: 砍 3 个跟 cache 段重叠的 author_note —
+                # - relationship_note: 跟 catty_daily_affection_gate_skeleton (5 档) 重叠
+                # - default_persona_drift_note: 跟 catty_post_history (PHI) + reply_self_check 重叠
+                # - scene_now_note: 跟 catty_daily_life 重叠
+                # 每轮节省 ~500c dynamic.
                 _recent_user_texts: list[str] = []
                 for _m in reversed(messages):
                     if _m.get("role") == "user":
@@ -9248,46 +9258,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             if len(_recent_user_texts) >= 3:
                                 break
                 if _recent_user_texts:
+                    # adaptive_drift: 现在只 inject ~50c 短指针 (引用 catty_adaptive_drift_skeleton)
                     _adaptive_note = build_adaptive_drift_note(
                         _recent_user_texts, is_owner=_user_is_owner,
                     )
                     messages = inject_author_note(messages, _adaptive_note)
-
-                # ST 风『现在的笨猫·此刻场景』author_note (depth=2):
-                # 把 daily_life + session_spice + reunion 凝缩到 ≤300 字贴近 user 最后消息,
-                # LLM recency bias 让这一层比 system 块顶部的 daily_life 更难被忽略,
-                # 强迫每条 reply 都带一点"现场感"
-                try:
-                    from .catty_scene_now import build_scene_now_note
-                    from .daily_life import build_daily_life_state
-                    from .session_spice import pick_session_scene, pick_session_spice
-                    from .catty_reunion import classify_idle_level
-                    _ds = build_daily_life_state(_arc_scope_an, recent_text=incoming.text or "")
-                    _spice_tuple = pick_session_spice(
-                        _arc_scope_an, str(event.user_id), is_owner=_user_is_owner,
-                    )
-                    _scene_tuple = pick_session_scene(
-                        _arc_scope_an, str(event.user_id), is_owner=_user_is_owner,
-                    )
-                    # 把 scene location 注入 daily_state 的 activity 字段, 让 scene_now 拿到此刻位置
-                    if _scene_tuple and _scene_tuple[0]:
-                        _ds = dict(_ds)
-                        _ds["activity"] = _scene_tuple[0].replace("现在人在: ", "")
-                    _idle_s = 0.0
-                    if _last_active_at:
-                        import time as _t
-                        _idle_s = max(0.0, _t.time() - float(_last_active_at))
-                    _reunion_lvl = classify_idle_level(_idle_s)
-                    _scene_note = build_scene_now_note(
-                        daily_state=_ds,
-                        spice=_spice_tuple,
-                        reunion_level=_reunion_lvl,
-                        is_owner=_user_is_owner,
-                        user_display=_user_real_display,
-                    )
-                    messages = inject_author_note(messages, _scene_note)
-                except Exception as exc:  # noqa: BLE001
-                    logger.debug(f"scene_now author_note failed (non-fatal): {exc}")
 
                 # 笨猫『读心』author_note (depth=2): 看最近 3-5 条 user msg
                 # 推断对方心理 trend (累/求肯定/试探/孤独/皮/暧昧/敷衍), 让笨猫
