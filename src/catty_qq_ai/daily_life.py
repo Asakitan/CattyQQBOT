@@ -142,13 +142,48 @@ def _legacy_detect_topics(text: str | None) -> set[str]:
     return hits
 
 
-def detect_topics(text: str | None) -> set[str]:
+def _compute_topics_nlu(text: str, cache: "object | None" = None) -> set[str]:
+    """走 text2vec + prototype 算 topic 命中. 已在 caller 保证 text 非空且 cfg 开.
+
+    embed 走 cache.get_or_compute_embed (commit 1 phase 5), 跟 score/trend 共享.
+    """
+    hits_regex = _legacy_detect_topics(text)
+    try:
+        from .nlu import text2vec_engine, prototypes
+        from nonebot import get_plugin_config
+        from .config import Config
+        cfg = get_plugin_config(Config)
+    except Exception:
+        return hits_regex
+    if cache is not None and hasattr(cache, "get_or_compute_embed"):
+        emb = cache.get_or_compute_embed(text, lambda: text2vec_engine.embed_sync(text))
+    else:
+        emb = text2vec_engine.embed_sync(text)
+    if emb is None:
+        return hits_regex
+    proto = prototypes.get_topic_prototypes()
+    if proto is None or proto.shape[0] != len(prototypes.TOPIC_ORDER):
+        return hits_regex
+    try:
+        sims = proto @ emb
+    except Exception:
+        return hits_regex
+    threshold = float(getattr(cfg, "catty_text2vec_topic_threshold", 0.55))
+    hits_emb = {
+        topic for topic, s in zip(prototypes.TOPIC_ORDER, sims) if float(s) >= threshold
+    }
+    return hits_regex | hits_emb
+
+
+def detect_topics(text: str | None, *, cache: "object | None" = None) -> set[str]:
     """文本 → 命中的主题集合.
 
     主人 2026-05-28: 加 text2vec embedding union 路径.
     - 旧 keyword 永远跑 (保 recall, 不丢命中)
     - 配 text2vec 开 → 加 cosine 相似度 ≥ threshold 的命中也加进 set
     - 失败 / 关闭 / 空文本 → 仅 keyword 行为, 跟旧版完全一致
+
+    Phase 5 优化: 接受 NLURequestCache, 单 request 内同 text 不重复 embed.
     """
     hits_regex = _legacy_detect_topics(text)
     if not text:
@@ -162,32 +197,22 @@ def detect_topics(text: str | None) -> set[str]:
     if not bool(getattr(cfg, "catty_use_text2vec", False)):
         return hits_regex
 
-    try:
-        from .nlu import text2vec_engine, prototypes
-    except Exception:
-        return hits_regex
-
-    emb = text2vec_engine.embed_sync(text)
-    if emb is None:
-        return hits_regex
-    proto = prototypes.get_topic_prototypes()
-    if proto is None or proto.shape[0] != len(prototypes.TOPIC_ORDER):
-        return hits_regex
-    try:
-        sims = proto @ emb  # (N_topics,), proto 跟 emb 都已 L2-normalize
-    except Exception:
-        return hits_regex
-    threshold = float(getattr(cfg, "catty_text2vec_topic_threshold", 0.55))
-    hits_emb = {
-        topic for topic, s in zip(prototypes.TOPIC_ORDER, sims) if float(s) >= threshold
-    }
-    return hits_regex | hits_emb
+    # cache 参数优先, 没传时自动查 contextvar (caller 透明)
+    if cache is None:
+        try:
+            from .nlu.request_cache import get_current_cache
+            cache = get_current_cache()
+        except Exception:
+            cache = None
+    if cache is not None and hasattr(cache, "get_or_compute_topics"):
+        return cache.get_or_compute_topics(text, lambda: _compute_topics_nlu(text, cache=cache))
+    return _compute_topics_nlu(text)
 
 
-async def detect_topics_async(text: str | None) -> set[str]:
+async def detect_topics_async(text: str | None, *, cache: "object | None" = None) -> set[str]:
     """异步版本 — async caller (主 reply pipeline) 用. 不阻塞 event loop."""
     import asyncio
-    return await asyncio.to_thread(detect_topics, text)
+    return await asyncio.to_thread(detect_topics, text, cache=cache)
 
 
 def pick_topical(

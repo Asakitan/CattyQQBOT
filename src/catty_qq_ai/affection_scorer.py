@@ -307,35 +307,27 @@ _POS_EMOTIONS = frozenset({"joy", "tenderness", "admiration", "gratitude"})
 _NEG_EMOTIONS = frozenset({"annoyance", "sadness", "fear"})
 
 
-def score_user_message(text: str, *, is_nsfw_context: bool = False) -> int:
-    """根据消息内容评估这条 user message 对好感度的贡献 (-2, -1, 0, +1)。
+def _compute_emotion_score(
+    text: str,
+    is_nsfw_context: bool,
+    legacy: int,
+    cache: "object | None" = None,
+) -> int:
+    """走 text2vec emotion prototype 算 delta. caller 已确保 text 非空 + cfg 开.
 
-    主人 2026-05-28: 加 text2vec 8-emotion prototype 路径.
-    - 高 confidence (>= threshold) → 用 emotion 分类决定 delta
-    - 低 confidence / 关闭 / 失败 → fallback 到旧词袋打分
-    - NSFW 上下文 + fear 主导 → -2 (NSFW 中的恐惧 = 严重信号)
-
-    is_nsfw_context: 当前消息是否在 NSFW 通道里 (legacy 路径用; NLU 路径用于 fear 加权)。
+    embed 走 cache.get_or_compute_embed, 跟 topics/trend 共享 embedding.
     """
-    legacy = _legacy_score_user_message(text, is_nsfw_context=is_nsfw_context)
-    if not text or not text.strip():
-        return legacy
-
     try:
+        from .nlu import text2vec_engine, prototypes
         from nonebot import get_plugin_config
         from .config import Config
         cfg = get_plugin_config(Config)
     except Exception:
         return legacy
-    if not bool(getattr(cfg, "catty_use_text2vec", False)):
-        return legacy
-
-    try:
-        from .nlu import text2vec_engine, prototypes
-    except Exception:
-        return legacy
-
-    emb = text2vec_engine.embed_sync(text)
+    if cache is not None and hasattr(cache, "get_or_compute_embed"):
+        emb = cache.get_or_compute_embed(text, lambda: text2vec_engine.embed_sync(text))
+    else:
+        emb = text2vec_engine.embed_sync(text)
     if emb is None:
         return legacy
     proto = prototypes.get_emotion_prototypes()
@@ -358,6 +350,48 @@ def score_user_message(text: str, *, is_nsfw_context: bool = False) -> int:
     if primary in _NEG_EMOTIONS:
         return -1
     return 0  # neutral 主导 → 不动 affection
+
+
+def score_user_message(
+    text: str,
+    *,
+    is_nsfw_context: bool = False,
+    cache: "object | None" = None,
+) -> int:
+    """根据消息内容评估这条 user message 对好感度的贡献 (-2, -1, 0, +1)。
+
+    主人 2026-05-28: 加 text2vec 8-emotion prototype 路径.
+    - 高 confidence (>= threshold) → 用 emotion 分类决定 delta
+    - 低 confidence / 关闭 / 失败 → fallback 到旧词袋打分
+    - NSFW 上下文 + fear 主导 → -2 (NSFW 中的恐惧 = 严重信号)
+
+    Phase 5: 接受 NLURequestCache, 同 (text, is_nsfw) 不重复 embed.
+    """
+    legacy = _legacy_score_user_message(text, is_nsfw_context=is_nsfw_context)
+    if not text or not text.strip():
+        return legacy
+
+    try:
+        from nonebot import get_plugin_config
+        from .config import Config
+        cfg = get_plugin_config(Config)
+    except Exception:
+        return legacy
+    if not bool(getattr(cfg, "catty_use_text2vec", False)):
+        return legacy
+
+    if cache is None:
+        try:
+            from .nlu.request_cache import get_current_cache
+            cache = get_current_cache()
+        except Exception:
+            cache = None
+    if cache is not None and hasattr(cache, "get_or_compute_emotion"):
+        return cache.get_or_compute_emotion(
+            text, is_nsfw_context,
+            lambda: _compute_emotion_score(text, is_nsfw_context, legacy, cache=cache),
+        )
+    return _compute_emotion_score(text, is_nsfw_context, legacy)
 
 
 # ── NSFW 突破事件 — 概率随请求次数 ramp ────────────────────────────

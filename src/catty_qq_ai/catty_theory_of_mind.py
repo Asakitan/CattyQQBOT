@@ -118,8 +118,29 @@ _EMB_CACHE: "dict[int, object]" = {}
 _EMB_CACHE_MAX = 256
 
 
-def _cached_embed(text: str) -> object | None:
-    """带 LRU 的 embed. text 用 hash key, 缓存命中省 ~50ms."""
+def _cached_embed(text: str, cache: "object | None" = None) -> object | None:
+    """带 LRU 的 embed. text 用 hash key.
+
+    Phase 5: 接受 NLURequestCache. 优先查 request cache, 没命中再走 LRU.
+    LRU 保留作 cross-request 兜底 (theory_of_mind 滑窗多 reply 复用同样 5 条消息).
+
+    cache=None 时自动查 contextvar (caller 透明).
+    """
+    if not text:
+        return None
+    if cache is None:
+        try:
+            from .nlu.request_cache import get_current_cache
+            cache = get_current_cache()
+        except Exception:
+            cache = None
+    if cache is not None and hasattr(cache, "get_or_compute_embed"):
+        return cache.get_or_compute_embed(text, lambda: _cross_request_embed(text))
+    return _cross_request_embed(text)
+
+
+def _cross_request_embed(text: str) -> object | None:
+    """跨 request 的 LRU 缓存路径 — 给没有 request cache 的 caller 用."""
     try:
         from .nlu import text2vec_engine
     except Exception:
@@ -128,7 +149,6 @@ def _cached_embed(text: str) -> object | None:
         return None
     key = hash(text)
     if key in _EMB_CACHE:
-        # 移到 LRU 末尾 (dict 保插入顺序)
         v = _EMB_CACHE.pop(key)
         _EMB_CACHE[key] = v
         return v
@@ -144,16 +164,14 @@ def _cached_embed(text: str) -> object | None:
     return v
 
 
-def detect_trend(recent_user_texts: list[str]) -> str:
+def detect_trend(recent_user_texts: list[str], *, cache: "object | None" = None) -> str:
     """看最近 N 条返回最强 trend tag, 空 / 无信号返回 ""。
 
     短回连续 4 条 → short_dry 优先 (length-only 规则放最前).
     其他按语义路径 (text2vec centroid vs trend prototype) + 词袋 fallback.
 
     主人 2026-05-28: 加 embedding centroid 升级.
-    - 关 text2vec / 失败 → 仅 legacy
-    - 开 text2vec + 高置信度 (≥0.50) → 用 embedding 结果
-    - 开但低置信度 → fallback 旧词袋
+    Phase 5: 接受 NLURequestCache, 同条消息 (跟其他 NLU caller 共享) 不重复 embed.
     """
     if not recent_user_texts:
         return ""
@@ -179,12 +197,12 @@ def detect_trend(recent_user_texts: list[str]) -> str:
     except Exception:
         return legacy
 
-    # 每条 msg → embedding (带 LRU 缓存)
+    # 每条 msg → embedding (走 cache, request cache 优先)
     embs = []
     for t in recent_user_texts:
         if not t or not t.strip():
             continue
-        v = _cached_embed(t)
+        v = _cached_embed(t, cache=cache)
         if v is not None:
             embs.append(v)
     if not embs:
@@ -215,18 +233,20 @@ def build_theory_of_mind_note(
     recent_user_texts: list[str],
     *,
     is_owner: bool = False,
+    cache: "object | None" = None,
 ) -> AuthorNote:
     """根据最近 N 条 user msg 推断对方心理 trend, 返回 depth=2 AuthorNote。
 
     recent_user_texts: 倒序的最近 user msg list (caller 提供, 通常 3-5 条)
     is_owner: 是否真主人 (影响 hint 措辞)
+    cache: 可选 NLURequestCache, 跨 NLU caller 共享 embedding
 
     返回空 note 时 inject_author_note 自动跳过。
     """
     if not recent_user_texts:
         return AuthorNote(content="", depth=2)
 
-    trend = detect_trend(recent_user_texts)
+    trend = detect_trend(recent_user_texts, cache=cache)
     if not trend:
         return AuthorNote(content="", depth=2)
 

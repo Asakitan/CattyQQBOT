@@ -4203,6 +4203,18 @@ async def _build_messages(
 ) -> list[ChatMessage]:
     messages: list[ChatMessage] = []
 
+    # 主人 2026-05-28 phase 5: per-request NLU cache. 同一条 incoming.text 之前
+    # 被 embed 3-4 次 (detect_topics + score_user_message + detect_trend centroid),
+    # 浪费 ~150ms/reply. 在 _build_messages 入口 bind contextvar, 整个 pipeline 内
+    # 所有 NLU caller (含 thread pool 内的 score/trend) 透明享受同一 cache.
+    # 用 ContextVar.set/reset 配对, function 结束自动 cleanup, 不污染 caller scope.
+    _nlu_cache_token = None
+    try:
+        from .nlu.request_cache import NLURequestCache, _active_cache
+        _nlu_cache_token = _active_cache.set(NLURequestCache())
+    except Exception:
+        _nlu_cache_token = None
+
     # 提前读历史以判定会话热度：≥ HOT_SESSION_MIN_MESSAGES 条历史时跳过最长的教学例句，
     # 模型已经能从历史里看到自身口吻，省下大约 30-40% 的 system token。
     history_messages = list(_get_session_cache().get(key))
@@ -4866,6 +4878,12 @@ async def _build_messages(
                 f"chat: NSFW deep kw 命中但识别为画图请求, 短路转主 5.5 + imagegen tool "
                 f"(user={event.user_id}, hit='{_utxt[:40]}')"
             )
+            if _nlu_cache_token is not None:
+                try:
+                    from .nlu.request_cache import _active_cache
+                    _active_cache.reset(_nlu_cache_token)
+                except Exception:
+                    pass
             return messages, prefer_spark  # prefer_spark 仍为 False, 走正常 tools 路径
         _is_private_chat = _is_private_chat_pre
         # breakthrough_outcome 已经在 spark route 决策前 roll 过 (pre-block), 这里只消费
@@ -5179,6 +5197,12 @@ async def _build_messages(
                 f"Lv={_user_affection_level}, max_stage={_max_stage_log}, resist={_resist_label}, "
                 f"source={_src}, key={_sticky_key}, msgs={len(messages)}, hit='{_utxt[:40]}')"
             )
+    if _nlu_cache_token is not None:
+        try:
+            from .nlu.request_cache import _active_cache
+            _active_cache.reset(_nlu_cache_token)
+        except Exception:
+            pass
     return messages, prefer_spark
 
 
