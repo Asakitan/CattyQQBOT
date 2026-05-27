@@ -1307,6 +1307,13 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
         )
         return {"error": f"搜图意外失败: {exc.__class__.__name__}: {exc}"}
 
+    # Yandex 区域阻断检测:国内 IP 直连 Yandex 会拿到 stub 页,_search_yandex 抛
+    # YandexRegionBlockedError 后被 gather 收进 errors["yandex"]。AI 必须告诉主人
+    # 这是真人/X 搜图缺关键引擎(SauceNAO/ascii2d 主覆盖二次元,搜不到真人来源)。
+    yandex_blocked = "YandexRegionBlockedError" in str(errors.get("yandex", ""))
+    has_yandex_in_engines = any(e in (engines_arg or []) or kind in ("photo", "auto", "artwork")
+                                for e in ["yandex"])
+
     payload: dict[str, Any] = {
         "kind": kind,
         "image_index": image_index,
@@ -1329,10 +1336,22 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
     }
     if errors:
         payload["engine_errors"] = errors
+    if yandex_blocked:
+        payload["yandex_blocked"] = True
+        payload["yandex_blocked_hint"] = (
+            "Yandex 在国内 IP 被整体区域阻断(返回『service is under construction』stub),"
+            "本次没拿到 Yandex 结果——这是真人/自拍/X(Twitter) 搜图的主力引擎,缺它命中率会很低。"
+            "**必须**用猫娘人格自然告诉主人:这张是真人/自拍类的话,Yandex 搜不到来源,要去 "
+            "config.json 的 ai.http_proxy 配个代理(主人就能搜 X/Twitter 自拍了);"
+            "现在能给的只是 SauceNAO/ascii2d 的二次元站结果(Konachan/Pixiv 这类),"
+            "真人来源在国内 IP 上确实抓不到嗷呜。**不要装作搜全了**。"
+        )
     if not results:
         payload["guidance"] = (
             "搜不到结果时用猫娘人格如实告诉用户没搜到,可以撒娇让 ta 换张更清晰的图或贴原图链接,"
             "**禁止编造作者/番名/链接**。"
+            + (" 本次 yandex 被阻断,如果是真人图请按 yandex_blocked_hint 提醒主人配代理。"
+               if yandex_blocked else "")
         )
     else:
         payload["guidance"] = (
@@ -1340,6 +1359,9 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
             "可以加可爱小评(『嗷呜这张是 X 老师画的喵～』)。"
             "**不要照搬 JSON、不要复读相似度小数、不要编造没在 results 里出现的信息**。"
             "结果链接可以贴 1-2 个最高相似度的,其余不必复述。"
+            + (" **特别注意**:本次 yandex 被阻断,如果搜出来的都是 booru/Pixiv 这种二次元站"
+               "但图本身是真人/自拍,**必须**按 yandex_blocked_hint 主动提醒主人去配代理才能搜 X/Twitter 真人来源,不要默默贴个二次元链接糊弄。"
+               if yandex_blocked else "")
         )
     return payload
 

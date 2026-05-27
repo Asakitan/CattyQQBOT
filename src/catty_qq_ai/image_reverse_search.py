@@ -676,6 +676,25 @@ def _parse_yandex_sites(html: str, *, max_results: int) -> list[ImageSearchResul
     return (x_twitter_hits + other_hits)[:max_results]
 
 
+# Yandex 对中国大陆 IP 整体 region block,返回一个 ~1.8KB 的 stub 页:
+# `<h1>The service is under construction. We will be back soon.</h1>`
+# 这条文案是 Yandex 的标准区域阻断响应,**不是临时维护**,直连国内服务器永远拿不到结果。
+# 检测到 stub 页 → 抛 ``YandexRegionBlockedError``,caller 可以告诉用户去配代理。
+class YandexRegionBlockedError(RuntimeError):
+    """Yandex 区域阻断 — HTML 命中 stub 文案『service is under construction』。"""
+
+
+def _is_yandex_region_block(html: str) -> bool:
+    if not html or len(html) > 8000:
+        # 真实结果页 >50KB,stub 页固定 ~1.8KB;>8K 几乎不可能是 stub
+        return False
+    lowered = html.lower()
+    return (
+        "service is under construction" in lowered
+        or "will be back soon" in lowered
+    )
+
+
 async def _search_yandex(
     client: httpx.AsyncClient,
     image_url: str,
@@ -685,8 +704,12 @@ async def _search_yandex(
     """Yandex 反向搜图。对真人照片 / 自拍 / X(Twitter) 最强,SauceNAO 主覆盖二次元。
 
     走 ``cbir_page=sites`` 直接进 "Sites containing this image" 标签,
-    解析 HTML 抓 source pages。国内通常需要 ``catty_http_proxy``,
-    httpx client 已经接了 config 里的全局代理设置。
+    解析 HTML 抓 source pages。**Yandex 对中国大陆 IP 整体区域阻断**,
+    直连国内服务器会拿到 stub 页(『service is under construction』),
+    必须配 ``catty_http_proxy``(httpx client 已经接全局代理) 才能用。
+
+    Raises:
+        YandexRegionBlockedError: 命中区域阻断 stub 页(让 caller 标记 yandex_blocked)。
     """
     params = {
         "rpt": "imageview",
@@ -707,6 +730,16 @@ async def _search_yandex(
             "yandex status=%d body=%s", response.status_code, response.text[:200]
         )
         return []
+    if _is_yandex_region_block(response.text):
+        logger.warning(
+            "yandex region-blocked (got 'under construction' stub, len=%d). "
+            "国内 IP 必须配 catty_http_proxy 才能用 Yandex 反向搜图。",
+            len(response.text),
+        )
+        raise YandexRegionBlockedError(
+            "Yandex 区域阻断(国内 IP 直连 → service is under construction stub)。"
+            "需要配 catty_http_proxy 走代理。"
+        )
     try:
         return _parse_yandex_sites(response.text, max_results=max_results)
     except Exception as exc:  # noqa: BLE001
