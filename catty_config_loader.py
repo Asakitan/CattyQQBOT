@@ -545,7 +545,6 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_IMAGEGEN_NAI_ENABLED", nai.get("enabled"))
     _set_env("CATTY_IMAGEGEN_NAI_TOKEN", nai.get("token"))
     _set_env("CATTY_IMAGEGEN_NAI_MODEL", nai.get("model"))
-    _set_env("CATTY_IMAGEGEN_NAI_VIBE_FALLBACK_MODEL", nai.get("vibe_fallback_model"))
     _set_env("CATTY_IMAGEGEN_NAI_DEFAULT_ASPECT", nai.get("default_aspect"))
     _set_env("CATTY_IMAGEGEN_NAI_STEPS", nai.get("steps"))
     _set_env("CATTY_IMAGEGEN_NAI_SCALE", nai.get("scale"))

@@ -81,9 +81,6 @@ class Config(BaseModel):
     catty_imagegen_nai_enabled: bool = False
     catty_imagegen_nai_token: str = ""
     catty_imagegen_nai_model: str = "nai-diffusion-4-5-full"
-    # references(vibe transfer / precise reference): v4.5/v4 实测 500, 只有 v3 后端还接受。
-    # 检测到 args.references 时自动 fallback 到这个模型,同时剥离 v4 特有字段。
-    catty_imagegen_nai_vibe_fallback_model: str = "nai-diffusion-3"
     catty_imagegen_nai_default_aspect: str = "portrait"  # portrait / landscape / square
     catty_imagegen_nai_steps: int = 28
     catty_imagegen_nai_scale: float = 5.0

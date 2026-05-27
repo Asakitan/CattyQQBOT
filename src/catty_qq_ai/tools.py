@@ -842,13 +842,13 @@ _IMAGEGEN_SCHEMA: dict[str, Any] = {
                 "references": {
                     "type": "array",
                     "description": (
-                        "**仅 nai 用,Vibe Transfer/Precise Reference**。"
-                        "用户**消息附带图片**或要求『参考刚才那张图的画风』时填。"
+                        "**仅 nai 用,Precise Reference (V4.5 Director Tools)**。"
+                        "用户**消息附带图片**或要求『参考这张图的角色/画风』时填。"
                         "每项一个参考图,最多 4 个。"
                         "tool 自动从当前消息附图 / 群最近图按顺序取(顺序 = 你 references 数组的长度)。"
                         "不带参考图就不填这个字段。"
-                        "**注意**: NAI v4.5 后端不支持 vibe transfer,带 references 时模型会自动回退到 v3, "
-                        "画风会更老派,Anlas 也不再免费(默认尺寸+steps 会扣到 ~56 积分/张)。"
+                        "extracted/strength 默认 1.0/1.0 抓最大角色细节。"
+                        "**Anlas**: Precise Reference 每张额外加 5 Anlas(主人 5+anlas*3 公式扣积分)。"
                     ),
                     "items": {
                         "type": "object",
@@ -1744,22 +1744,30 @@ def _nai_director_billable_anlas(req_type: str, width: int, height: int) -> int:
     return base
 
 
-def _resize_to_vibe_reference_png(data: bytes) -> str:
-    """把任意图片(PNG/JPEG/WEBP)读出来,resize 到 448x448(letterbox 黑底)再 base64 PNG。
+def _resize_to_director_reference_png(data: bytes) -> str:
+    """把任意图片(PNG/JPEG/WEBP)读出来 → 等比缩到 1024x1536 letterbox 黑底居中 → PNG base64。
 
-    NAI v4 reference_image_multiple 字段固定吃 448x448 PNG base64。
+    NAI v4.5 Precise Reference (director_reference_images) 标准格式,
+    跟 novelai-sdk crop_and_resize 一致。
     """
     from PIL import Image as PILImage
     import io
-    src = PILImage.open(io.BytesIO(data)).convert("RGBA")
-    canvas = PILImage.new("RGBA", (448, 448), (0, 0, 0, 0))
-    # letterbox: 保持宽高比缩放到 448 内,居中贴
-    src.thumbnail((448, 448), PILImage.LANCZOS)
-    off_x = (448 - src.width) // 2
-    off_y = (448 - src.height) // 2
-    canvas.paste(src, (off_x, off_y), src)
+    src = PILImage.open(io.BytesIO(data)).convert("RGB")
+    tgt_w, tgt_h = 1024, 1536
+    src_w, src_h = src.size
+    src_ratio = src_w / src_h
+    tgt_ratio = tgt_w / tgt_h
+    if src_ratio > tgt_ratio:
+        new_w = tgt_w
+        new_h = int(tgt_w / src_ratio)
+    else:
+        new_h = tgt_h
+        new_w = int(tgt_h * src_ratio)
+    resized = src.resize((new_w, new_h), PILImage.LANCZOS)
+    canvas = PILImage.new("RGB", (tgt_w, tgt_h), (0, 0, 0))
+    canvas.paste(resized, ((tgt_w - new_w) // 2, (tgt_h - new_h) // 2))
     buf = io.BytesIO()
-    canvas.convert("RGB").save(buf, format="PNG")
+    canvas.save(buf, format="PNG")
     return base64.b64encode(buf.getvalue()).decode("ascii")
 
 
@@ -1831,21 +1839,15 @@ async def _exec_imagegen_nai(
     neg = (negative_prompt or "").strip() or default_neg
     has_refs = bool(references)
 
-    # references(vibe transfer): v4.5/v4 实测 500, 只有 v3 后端接受。带 references 时强制 v3 model。
-    vibe_fallback = str(
-        getattr(ctx.config, "catty_imagegen_nai_vibe_fallback_model", "nai-diffusion-3")
-        or "nai-diffusion-3"
-    ).strip()
-    if has_refs and not model.startswith("nai-diffusion-3"):
-        _logger.info("imagegen[nai] references requested, fallback model %s → %s", model, vibe_fallback)
-        model = vibe_fallback
-
-    # Anlas 预测(Opus 免费档归零; 带 references 走 i2i 计价不享受免费档)
+    # Anlas 预测(Opus 免费档归零; 带 references 走 Precise Reference 加 5 Anlas/张)
     predicted_anlas = _nai_predict_anlas(width, height, steps, n_samples=1)
-    if not has_refs and _nai_is_opus_free(width, height, steps, 1):
+    if _nai_is_opus_free(width, height, steps, 1):
         billable_anlas = 0
     else:
         billable_anlas = predicted_anlas
+    if has_refs:
+        # Precise Reference 每张额外 5 Anlas (NAI 官方文档)
+        billable_anlas += 5 * min(len(references or []), _NAI_VIBE_REFERENCE_MAX)
     cost = image_cost_for_nai(billable_anlas, base=base_points, per_anlas=pts_per_anlas)
 
     # ── 积分扣费 guard(主人豁免;余额不够告诉 AI 让她提醒用户签到) ──
@@ -1884,7 +1886,7 @@ async def _exec_imagegen_nai(
                 return {"error": f"生图冷却剩 {int(remaining)}s,稍后再戳人家喵"}
             _imagegen_cooldowns[cd_key] = now
 
-    # ── v4 系列必须传结构化 v4_prompt/v4_negative_prompt,v3 沿用旧 schema ──
+    # ── v4 系列必须传结构化 v4_prompt/v4_negative_prompt + SDK 全套字段 ──
     parameters: dict[str, Any] = {
         "width": width,
         "height": height,
@@ -1892,16 +1894,25 @@ async def _exec_imagegen_nai(
         "sampler": sampler,
         "steps": steps,
         "n_samples": 1,
-        "seed": 0,
+        "seed": int(time.time()) & 0xFFFFFFFF,
         "negative_prompt": neg,
-        "ucPreset": 0,
+        "ucPreset": 1,
         "qualityToggle": True,
         "sm": False,
         "sm_dyn": False,
+        "autoSmea": False,
         "dynamic_thresholding": False,
-        "cfg_rescale": 0,
+        "cfg_rescale": 0.0,
         "noise_schedule": noise_schedule,
         "legacy": False,
+        "legacy_uc": False,
+        "legacy_v3_extend": False,
+        "deliberate_euler_ancestral_bug": False,
+        "prefer_brownian": True,
+        "strength": 0.7,
+        "add_original_image": False,
+        "controlnet_strength": 1.0,
+        "normalize_reference_strength_multiple": False,
     }
     # ── characters: 多角色配置 (最多 6 个) ──
     chars = [c for c in (characters or []) if isinstance(c, dict) and (c.get("prompt") or "").strip()]
@@ -1926,13 +1937,16 @@ async def _exec_imagegen_nai(
         char_captions.append({"char_caption": cp, "centers": [{"x": cx, "y": cy}]})
         neg_captions.append({"char_caption": cu, "centers": [{"x": cx, "y": cy}]})
 
-    # ── references: vibe transfer / precise reference (最多 4 张) ──
+    # ── references: Precise Reference (director_reference_*, 最多 4 张) ──
+    # 注意: AI 传入的 extracted/strength 在 SDK 语义里对应:
+    #   extracted (0-1) → director_reference_secondary_strength_values = 1 - fidelity
+    #   strength  (0-1) → director_reference_strength_values
+    # 默认 fidelity=1.0 strength=1.0 抓最大角色细节
     refs = [r if isinstance(r, dict) else {} for r in (references or [])][:_NAI_VIBE_REFERENCE_MAX]
-    reference_b64: list[str] = []
-    reference_extracted: list[float] = []
-    reference_strength: list[float] = []
+    director_ref_b64: list[str] = []
+    director_ref_strength: list[float] = []
+    director_ref_secondary: list[float] = []  # = 1 - fidelity
     if refs:
-        # 从 ctx 拿候选图 URL (同当前消息 > 群最近)
         candidate_urls: list[str] = []
         candidate_urls.extend(getattr(ctx, "input_image_urls", []) or [])
         candidate_urls.extend(getattr(ctx, "recent_image_urls", []) or [])
@@ -1952,7 +1966,6 @@ async def _exec_imagegen_nai(
             }
         if ctx.download_binary_fn is None:
             return {"error": "运行环境没注入下载器,无法走 reference 模式"}
-        # 下载 + resize 到 448×448 PNG base64
         for i, r in enumerate(refs):
             ref_url = candidates_unique[i]
             try:
@@ -1965,21 +1978,24 @@ async def _exec_imagegen_nai(
             if not data:
                 return {"error": f"参考图 #{i+1} 内容为空"}
             try:
-                ref_b64 = _resize_to_vibe_reference_png(data)
+                ref_b64 = _resize_to_director_reference_png(data)
             except Exception as exc:  # noqa: BLE001
                 _logger.warning("imagegen[nai] reference resize failed: %s", exc)
                 return {"error": f"参考图 #{i+1} 转 PNG 失败: {exc}"}
-            reference_b64.append(ref_b64)
+            director_ref_b64.append(ref_b64)
+            # AI 写的 extracted 字段在 SDK 等于 fidelity, 高 extracted = 低 secondary
             try:
-                ex_v = float(r.get("extracted") if r.get("extracted") is not None else 0.6)
+                fidelity = float(r.get("extracted") if r.get("extracted") is not None else 1.0)
             except (TypeError, ValueError):
-                ex_v = 0.6
+                fidelity = 1.0
             try:
-                st_v = float(r.get("strength") if r.get("strength") is not None else 0.6)
+                strength = float(r.get("strength") if r.get("strength") is not None else 1.0)
             except (TypeError, ValueError):
-                st_v = 0.6
-            reference_extracted.append(max(0.0, min(1.0, ex_v)))
-            reference_strength.append(max(0.0, min(1.0, st_v)))
+                strength = 1.0
+            fidelity = max(0.0, min(1.0, fidelity))
+            strength = max(0.0, min(1.0, strength))
+            director_ref_strength.append(strength)
+            director_ref_secondary.append(round(1.0 - fidelity, 2))
 
     if model.startswith("nai-diffusion-4"):
         parameters["params_version"] = 3
@@ -1993,19 +2009,24 @@ async def _exec_imagegen_nai(
             "legacy_uc": False,
         }
         parameters["characterPrompts"] = char_prompts
-        if char_prompts and use_coords:
-            parameters["use_coords"] = True
+        parameters["use_coords"] = use_coords
 
-    if reference_b64:
-        parameters["reference_image_multiple"] = reference_b64
-        parameters["reference_information_extracted_multiple"] = reference_extracted
-        parameters["reference_strength_multiple"] = reference_strength
-        parameters["normalize_reference_strength_multiple"] = True
+    if director_ref_b64:
+        n = len(director_ref_b64)
+        parameters["director_reference_images"] = director_ref_b64
+        parameters["director_reference_descriptions"] = [
+            {"caption": {"base_caption": "character&style", "char_captions": []}, "legacy_uc": False}
+            for _ in range(n)
+        ]
+        parameters["director_reference_strength_values"] = director_ref_strength
+        parameters["director_reference_secondary_strength_values"] = director_ref_secondary
+        parameters["director_reference_information_extracted"] = [1.0] * n
 
     payload: dict[str, Any] = {
         "input": prompt,
         "model": model,
         "action": "generate",
+        "use_new_shared_trial": True,
         "parameters": parameters,
     }
 
