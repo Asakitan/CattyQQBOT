@@ -339,6 +339,27 @@ async def post_messages_native(
             }
         }
 
+    # 主人 2026-05-28 cache 诊断: 算 system + messages 的 sha256, 对比同 scope 连发
+    # 时 prefix 是否字节一致. cache_create > 0 但 cache_read=0 表示 Anthropic 在写 cache
+    # 但 catty 下一轮 prefix hash 不同 → 找不到上次的 cache. 用 prefix_hash log 可以
+    # 看出 5min TTL 内同 scope 是否字节稳定 (sys hash 同→应该 cache hit).
+    try:
+        import hashlib
+        import json as _json
+        sys_hash = hashlib.sha256(
+            _json.dumps(system_blocks, sort_keys=True, ensure_ascii=False).encode("utf-8")
+        ).hexdigest()[:12]
+        stable_msgs = other_messages[:-1] if other_messages else []
+        msg_hash = hashlib.sha256(
+            _json.dumps(stable_msgs, sort_keys=True, ensure_ascii=False).encode("utf-8")
+        ).hexdigest()[:12]
+        logger.info(
+            "prefix_hash sys=%s stable_msgs=%s sys_blocks=%d msgs=%d",
+            sys_hash, msg_hash, len(system_blocks), len(other_messages),
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"prefix hash compute failed: {exc}")
+
     try:
         response = await client.messages.create(**create_kwargs)
     except Exception as exc:

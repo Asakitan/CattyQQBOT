@@ -298,6 +298,25 @@ class CattyMoodStore:
 
 
 # ── prompt 注入 ──────────────────────────────────────────────────
+def _mood_intensity_label(val: float) -> str:
+    """把 mood 数值 (0-100) 桶化成离散档位字符串, 让 prompt 文本 byte 稳定.
+
+    主人 2026-05-28 复刻 CC cache 策略: 连续衰减数值 (`{val:.0f}/100`) 每分钟都变,
+    prompt 字面漂移破 cache prefix. 改成 3 档离散字符串后, 同档内文本恒定,
+    cross-archive 才会重写 (合理可接受).
+
+    档位划分 (基于 _INJECT_THRESHOLD=65 + _MAX=100):
+        65-70:  轻微   (临阈值, 不显眼)
+        70-80:  明显
+        80-100: 强烈
+    """
+    if val >= 80.0:
+        return "强烈"
+    if val >= 70.0:
+        return "明显"
+    return "轻微"
+
+
 def build_catty_mood_prompt(store: CattyMoodStore, scope: str) -> str:
     """根据 scope 当前 mood 返回 prompt 段。主维度 < 阈值返回 ""。"""
     if not scope:
@@ -308,7 +327,8 @@ def build_catty_mood_prompt(store: CattyMoodStore, scope: str) -> str:
     top_dim, top_val = ordered[0]
     if top_val < _INJECT_THRESHOLD:
         return ""  # 都在 baseline 附近,不打扰
-    lines = [f"【笨猫·当下心情 (mood)】主调 = {top_dim} ({top_val:.0f}/100)"]
+    # 主人 2026-05-28: 离散档位代替连续数值, 让同档内 prompt byte-exact stable 让 cache hit.
+    lines = [f"【笨猫·当下心情 (mood)】主调 = {top_dim} ({_mood_intensity_label(top_val)})"]
     primary_hint = _MOOD_HINTS_ZH.get(top_dim)
     if primary_hint:
         lines.append(f"- {primary_hint}")
@@ -318,7 +338,7 @@ def build_catty_mood_prompt(store: CattyMoodStore, scope: str) -> str:
         if sec_val > _BASELINE and (top_val - sec_val) <= _BLEND_SECONDARY_DELTA:
             sec_hint = _MOOD_HINTS_ZH.get(sec_dim)
             if sec_hint:
-                lines.append(f"- 次调 {sec_dim} ({sec_val:.0f}/100): {sec_hint}")
+                lines.append(f"- 次调 {sec_dim} ({_mood_intensity_label(sec_val)}): {sec_hint}")
                 lines.append(f"(主+次混合 — 笨猫这条回复应该带『{top_dim}+{sec_dim}』的复合反应)")
     lines.append("(mood 是跨多轮累积的连续状态,会随时间衰减回 baseline;不要复述给用户听。)")
     return "\n".join(lines)

@@ -248,11 +248,16 @@ def build_time_context(*, reference: datetime | None = None) -> str:
 
 
 def format_for_prompt(payload: dict[str, Any]) -> str:
-    """把 compute_now 结果整成一句话便于 LLM 拼 prompt。"""
+    """把 compute_now 结果整成一句话便于 LLM 拼 prompt.
+
+    主人 2026-05-28 cache 诊断: 原 `HH:MM` 每分钟变破 prompt cache (5min TTL 内
+    cache miss). 改成 hour 精度 `HH 时`, 同小时内 byte stable. 精确分钟仍可
+    通过 catty_now tool 查询.
+    """
     parts: list[str] = []
     parts.append(payload.get("date", ""))
     parts.append(payload.get("weekday", ""))
-    parts.append(f"{payload.get('hour', 0):02d}:{payload.get('minute', 0):02d}")
+    parts.append(f"{payload.get('hour', 0):02d} 时")
     parts.append(f"({payload.get('phase', '')})")
     if payload.get("is_weekend"):
         parts.append("[周末]")

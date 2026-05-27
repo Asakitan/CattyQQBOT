@@ -471,7 +471,6 @@ async def _post_chat_completion_raw(
         from .prompt_cache import (
             cachingAtDepthForClaude,
             inject_system_tail_cache,
-            inject_tools_cache,
             is_claude_endpoint,
         )
         try:
@@ -483,10 +482,11 @@ async def _post_chat_completion_raw(
             # 仅 Claude endpoint 加 anthropic-beta header (避免 OpenAI 报 unknown header)
             if is_claude_endpoint(base_url, model):
                 headers["anthropic-beta"] = "prompt-caching-2024-07-31"
-                # P5: Claude tools[-1] cache_control (4th breakpoint, 跟 message 那 3 个配对).
-                # 中转层若不识别该字段会忽略; 失败时 try/except 兜底降级到无 tools cache.
-                if tools:
-                    tools = inject_tools_cache(tools)
+                # 主人 2026-05-28: 不给 tools[-1] 加 cache_control (复刻 CC). CC
+                # toolToAPISchema (claude.ts) 完全不带 cacheControl 参数, 仅在
+                # MCP needsToolBasedCacheMarker=true 场景才 fallback 到 tool-based
+                # cache strategy. catty 无 MCP, 加 tools cache 反而让 tools 序列化
+                # 字节差异破 cache 命中 (77% breaks per CC promptCacheBreakDetection).
         except Exception as exc:  # noqa: BLE001
             _logger.warning(f"prompt cache 注入失败 (降级到无 cache): {exc}")
 
