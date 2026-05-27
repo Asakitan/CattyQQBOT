@@ -607,6 +607,113 @@ async def _search_iqdb(
     return real[:max_results]
 
 
+# ---------- Yandex(真实照片 / 自拍 / X(Twitter) 强项) ----------
+
+# 屏蔽的域名(yandex 自身导航/广告/CDN)——anchor 落在这些域名都不算结果。
+_YANDEX_BLOCKED_HOSTS = (
+    "yandex.com", "yandex.ru", "yandex.net", "yandex.by", "yandex.kz",
+    "yastatic.net", "ya.ru",
+    "google.com", "googleadservices.com", "googletagmanager.com",
+    "doubleclick.net", "schema.org", "w3.org",
+)
+
+# 直接抓所有外链 anchor;Yandex HTML 结构每年都会变,精确解析 class
+# 名(``CbirSites-Item`` / ``serp-item`` / ``Link``)经常失效——退一步用
+# href + visible text 的宽松匹配,然后用 ``_YANDEX_BLOCKED_HOSTS`` 做反向
+# 过滤。anchor text 太短(< 2 字符)或纯空白也过滤。
+_YANDEX_ANCHOR_RE = re.compile(
+    r'<a[^>]+href="(https?://[^"]+)"[^>]*>([^<]{1,160})</a>',
+    re.IGNORECASE,
+)
+
+
+def _yandex_host_blocked(url: str) -> bool:
+    lowered = url.lower()
+    return any(host in lowered for host in _YANDEX_BLOCKED_HOSTS)
+
+
+def _yandex_is_x_twitter(url: str) -> bool:
+    lowered = url.lower()
+    return (
+        "twitter.com/" in lowered
+        or "://x.com/" in lowered
+        or ".twimg.com/" in lowered
+    )
+
+
+def _parse_yandex_sites(html: str, *, max_results: int) -> list[ImageSearchResult]:
+    """从 Yandex 反向搜图结果 HTML 抽取 source pages。
+
+    策略:用宽松 anchor 正则,过滤 yandex 自身 + 广告域;X/Twitter 加 boost
+    放到列表最前,其它按出现顺序保留。caller 负责截到 max_results。
+    """
+    seen: set[str] = set()
+    x_twitter_hits: list[ImageSearchResult] = []
+    other_hits: list[ImageSearchResult] = []
+    for match in _YANDEX_ANCHOR_RE.finditer(html):
+        url = match.group(1).strip()
+        title = unescape(match.group(2)).strip()
+        if not url or not title or _yandex_host_blocked(url):
+            continue
+        if url in seen:
+            continue
+        seen.add(url)
+        # 短文本通常是 nav/按钮(『首页』『搜索』之类),不当成结果
+        if len(title) < 4 and not _yandex_is_x_twitter(url):
+            continue
+        is_x = _yandex_is_x_twitter(url)
+        result = ImageSearchResult(
+            source="yandex",
+            title=title[:160],
+            url=url,
+            similarity=0.0,  # Yandex 不返回数值化相似度
+            kind="photo" if is_x else "general",
+            extra={"is_x_twitter": True} if is_x else {},
+        )
+        (x_twitter_hits if is_x else other_hits).append(result)
+        if len(x_twitter_hits) + len(other_hits) >= max_results * 3:
+            break
+    return (x_twitter_hits + other_hits)[:max_results]
+
+
+async def _search_yandex(
+    client: httpx.AsyncClient,
+    image_url: str,
+    *,
+    max_results: int,
+) -> list[ImageSearchResult]:
+    """Yandex 反向搜图。对真人照片 / 自拍 / X(Twitter) 最强,SauceNAO 主覆盖二次元。
+
+    走 ``cbir_page=sites`` 直接进 "Sites containing this image" 标签,
+    解析 HTML 抓 source pages。国内通常需要 ``catty_http_proxy``,
+    httpx client 已经接了 config 里的全局代理设置。
+    """
+    params = {
+        "rpt": "imageview",
+        "url": image_url,
+        "cbir_page": "sites",
+    }
+    try:
+        response = await client.get(
+            "https://yandex.com/images/search",
+            params=params,
+            headers=_common_headers("https://yandex.com/"),
+        )
+    except httpx.HTTPError as exc:
+        logger.info("yandex request failed: %s: %s", exc.__class__.__name__, exc)
+        return []
+    if response.status_code >= 400:
+        logger.info(
+            "yandex status=%d body=%s", response.status_code, response.text[:200]
+        )
+        return []
+    try:
+        return _parse_yandex_sites(response.text, max_results=max_results)
+    except Exception as exc:  # noqa: BLE001
+        logger.info("yandex parse failed: %s", exc)
+        return []
+
+
 # ---------- 顶层调度 ----------
 
 _ENGINE_REGISTRY = {
@@ -615,13 +722,18 @@ _ENGINE_REGISTRY = {
     "trace.moe": _search_tracemoe,
     "ascii2d": _search_ascii2d,
     "iqdb": _search_iqdb,
+    "yandex": _search_yandex,
 }
 
 _KIND_DEFAULT_ENGINES = {
     "anime": ["tracemoe", "saucenao"],
-    "artwork": ["saucenao", "ascii2d", "iqdb"],
-    "auto": ["saucenao", "ascii2d", "tracemoe"],
-    "general": ["saucenao", "ascii2d", "tracemoe"],
+    # 真人照片 / 自拍 / X(Twitter) / 新闻配图:Yandex 比 SauceNAO 强很多
+    "photo": ["yandex", "saucenao"],
+    # 画师 / 角色 / illustration:SauceNAO + ascii2d 二次元强,Yandex 补真人/cosplay
+    "artwork": ["saucenao", "ascii2d", "iqdb", "yandex"],
+    # auto:同时撒 saucenao(二次元)和 yandex(真人),覆盖最广
+    "auto": ["saucenao", "yandex", "ascii2d", "tracemoe"],
+    "general": ["saucenao", "yandex", "ascii2d", "tracemoe"],
 }
 
 

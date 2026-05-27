@@ -210,19 +210,23 @@ _IMAGE_SEARCH_SCHEMA: dict[str, Any] = {
     "function": {
         "name": "catty_image_search",
         "description": (
-            "**反向搜图**:把一张图扔进 SauceNAO / trace.moe / ascii2d / iqdb,问出"
-            "「这是谁画的」「出自什么番剧」「角色是谁」「同款图在哪个网站」。"
-            "适用场景:用户说『这张图谁画的/什么番/什么角色/出处/找原图/帮我搜下这张』+ 指向一张图;"
+            "**反向搜图**:把一张图扔进 SauceNAO / Yandex / trace.moe / ascii2d / iqdb,问出"
+            "「这是谁画的」「出自什么番剧」「角色是谁」「这是谁的自拍/推文/X(Twitter)账号」「同款图在哪个网站」。"
+            "适用场景:用户说『这张图谁画的/什么番/什么角色/出处/找原图/帮我搜下这张/这是谁的推/X 账号』+ 指向一张图;"
             "或者群友刚发了张图你想主动认一下出处。"
             "**和 catty_meme_query 分工**:meme_query 是正向找梗图(关键词→图);"
             "image_search 是反向认图(已有图→出处)。"
             "图片来源优先级:image_url 参数 > 当前消息附图 > 最近群里出现的图(按 image_index 选择)。"
-            "**kind 怎么选**:用户问『什么番/第几集/哪个动画』→ anime(trace.moe 主力);"
-            "用户问『谁画的/作者/画师/角色出处/原图』→ artwork(saucenao + ascii2d);"
-            "不确定 → auto。"
+            "**kind 怎么选**(很重要!):"
+            "用户问『什么番/第几集/哪个动画』→ anime(trace.moe 主力);"
+            "用户问『谁画的/作者/画师/角色出处/原图(二次元 illust)』→ artwork(saucenao + ascii2d);"
+            "**真人自拍/cosplay/Coser/网红/真人写真/这是谁/X(Twitter)推主/推特上的图/Instagram → photo**"
+            "(Yandex 主力,SauceNAO 对真人照片基本搜不到,**别走 artwork**);"
+            "不确定二次元还是真人 → auto(同时撒 saucenao + yandex)。"
             "返回 results 数组(source/title/url/similarity/author/extra),"
             "AI 拿到后用猫娘人格挑 1-3 条最关键的复述,**不要照搬 JSON、不要复读相似度小数、"
-            "不要编造没在 results 里的作者/番名/链接**。"
+            "不要编造没在 results 里的作者/番名/链接**。X/Twitter 命中时记得点出来"
+            "(『嗷呜这张应该是 X 上的 @xxx 发的喵～』),主人对真人来源最关心。"
             "每个用户 60s 一次冷却(主人/特别关心豁免)。"
         ),
         "parameters": {
@@ -230,11 +234,13 @@ _IMAGE_SEARCH_SCHEMA: dict[str, Any] = {
             "properties": {
                 "kind": {
                     "type": "string",
-                    "enum": ["anime", "artwork", "auto"],
+                    "enum": ["anime", "artwork", "photo", "auto"],
                     "description": (
                         "anime=番剧场景识别(trace.moe + saucenao 动漫 indexer);"
-                        "artwork=画师/角色识别(saucenao + ascii2d + iqdb);"
-                        "auto=综合(saucenao 主力)。不知道选哪个用 auto。"
+                        "artwork=二次元画师/角色识别(saucenao + ascii2d + iqdb,**不适合真人照片**);"
+                        "photo=真人自拍/cosplay/X(Twitter)/Instagram(yandex + saucenao,**真人/写真专用**);"
+                        "auto=综合(saucenao + yandex 同撒,覆盖二次元 + 真人)。"
+                        "图里有真人脸/明显是自拍 → 用 photo;不确定是不是真人 → auto。"
                     ),
                 },
                 "image_url": {
@@ -258,7 +264,7 @@ _IMAGE_SEARCH_SCHEMA: dict[str, Any] = {
                     "type": "string",
                     "description": (
                         "可选。覆盖 kind 默认的引擎列表。逗号分隔,合法值:"
-                        "saucenao / tracemoe / ascii2d / iqdb。"
+                        "saucenao / tracemoe / ascii2d / iqdb / yandex。"
                         "**一般不要传**——kind 已经给出合理默认。"
                         "只有用户明确说『用 X 搜』时才覆盖。"
                     ),
@@ -1221,7 +1227,7 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
         return {"error": "image_search 已被配置禁用"}
 
     kind = str(args.get("kind") or "auto").strip().lower()
-    if kind not in {"anime", "artwork", "auto"}:
+    if kind not in {"anime", "artwork", "photo", "auto"}:
         kind = "auto"
 
     explicit_url = str(args.get("image_url") or "").strip()
