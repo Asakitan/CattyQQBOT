@@ -222,6 +222,9 @@ pregnancy_store = PregnancyStore(config.catty_memory_path)
 # Fix: 落盘 nsfw_phase_state.json, 启动 reload
 from .nsfw_phase import _set_phase_state_path
 _set_phase_state_path(config.catty_memory_path)
+# 主人 2026-05-28: NSFW 自动生图(笨猫被插入后每 3 turn 一张), counter 落盘跨重启保留。
+from .catty_nsfw_imagegen import init_counter_path as _nsfw_imagegen_init
+_nsfw_imagegen_init(config.catty_memory_path)
 # spark route 预判 (在 _build_messages 注入 birth event hint 时记下预选 kitten 名字),
 # handle_chat reply 后用这个 hint 决定的名字调 record_intercourse(override=...) 保证 state 跟 reply 同步
 _PREGNANCY_PREDICT_BY_USER: dict[str, dict[str, Any]] = {}
@@ -3406,10 +3409,12 @@ async def _nsfw_phase_flush_loop() -> None:
     """主人 2026-05-27 十六轮 BUG FIX: 每 3s flush phase state 到 disk, 跨 bot 重启保留."""
     import asyncio
     from .nsfw_phase import flush_phase_state
+    from .catty_nsfw_imagegen import flush_counter as _nsfw_img_flush
     while True:
         try:
             await asyncio.sleep(3.0)
             flush_phase_state()
+            _nsfw_img_flush()
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"nsfw_phase flush loop error (non-fatal): {exc}")
 
@@ -4740,6 +4745,11 @@ async def _build_messages(
             )
             _reset_nsfw_phase(_arc_scope, str(event.user_id))
             _reset_prebreak(_arc_scope, str(event.user_id))
+            try:
+                from .catty_nsfw_imagegen import reset_counter as _reset_nsfw_img_counter
+                _reset_nsfw_img_counter(_arc_scope, str(event.user_id))
+            except Exception:
+                pass
             _revoked_n = _revoke_grantees(_arc_scope)
             if _revoked_n:
                 logger.info(f"NSFW sticky exit (closing): revoked {_revoked_n} grantee(s) in scope={_arc_scope}")
@@ -4780,6 +4790,11 @@ async def _build_messages(
                     revoke_all_nsfw_grantees as _revoke_grantees,
                 )
                 _reset_nsfw_phase(_arc_scope, str(event.user_id))
+                try:
+                    from .catty_nsfw_imagegen import reset_counter as _reset_nsfw_img_counter
+                    _reset_nsfw_img_counter(_arc_scope, str(event.user_id))
+                except Exception:
+                    pass
                 _revoked_n = _revoke_grantees(_arc_scope)
                 if _revoked_n:
                     logger.info(f"NSFW sticky exit (idle): revoked {_revoked_n} grantee(s) in scope={_arc_scope}")
@@ -9488,6 +9503,27 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 # 替换裸露『我』→『人家/猫猫/笨猫』 (NSFW 自称强制)
                 reply = _replace_first_person_nsfw(reply)
                 nsfw_image_segments = []
+                # 主人 2026-05-28: 笨猫第一次被插入(phase>=4)后,每 3 turn 自动 NAI 画一张,扣 10 积分。
+                # 触发由 catty_nsfw_imagegen.maybe_generate_image 自己判断,这里只在 reply 成功时调一次。
+                if not _was_refusal:
+                    try:
+                        from .catty_nsfw_imagegen import maybe_generate_image as _maybe_nsfw_img
+                        from .nsfw_phase import get_phase_state as _get_phase_state_fresh
+                        _phase_st_for_draw = _get_phase_state_fresh(
+                            _arc_scope, str(event.user_id),
+                        )
+                        _nsfw_seg = await _maybe_nsfw_img(
+                            config=config,
+                            scope_key=_arc_scope,
+                            user_id=str(event.user_id),
+                            phase_state=_phase_st_for_draw,
+                            affection_store=affection_store,
+                            current_reply=reply,
+                        )
+                        if _nsfw_seg is not None:
+                            nsfw_image_segments.append(_nsfw_seg)
+                    except Exception as exc:  # noqa: BLE001
+                        logger.debug(f"nsfw_imagegen auto-draw failed (non-fatal): {exc}")
             else:
                 reply = await chat_completion_with_tools(
                     config,
