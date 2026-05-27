@@ -32,13 +32,21 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
     2 个 marker 中第二个保护的位置永远不会被 resume → 浪费 + 让 cache key 计算路径变宽
     更易抖动.
 
+    主人 2026-05-28 实测发现关键 bug: Anthropic 只接受 cache_control 在 **user / system /
+    tool** content blocks 上, **assistant 上的 cache_control 被忽略** → cache 写入了但
+    下次找不到 cache key 匹配. catty 之前 cachingAtDepth=2 取末尾倒数 2 处 role 切换,
+    可能落到 assistant 上 (e.g. messages 末尾是 user, 倒数 1 切换是 assistant, 倒数 2
+    切换是 user → 但如果 depth=2 的 msg 是 assistant 就出 bug). 修复: 只在 user role
+    上标 marker, 跳过 assistant.
+
     Args:
         messages: ChatMessage list (会就地修改 + 返回相同 list, 调用方可链式)
         cachingAtDepth: 从倒数第 N 处 role 切换处打 breakpoint, 默认 2 (最近一轮的 user-side).
 
     特性:
     - 从末尾倒数, 跳过尾部 prefill (assistant role 末尾段)
-    - role 切换时计 depth, 仅在 depth==cachingAtDepth 处打 1 个 cache_control
+    - role 切换时计 depth, 仅在 depth==cachingAtDepth 且 role=user 处打 1 个 cache_control
+    - 如果 depth=cachingAtDepth 落到 assistant 上, 继续往前找下一个 user
     - 自动把 str content 转成 list[dict] (Claude 要求 cache_control 在 block 上)
     """
     if cachingAtDepth < 0:
@@ -47,6 +55,7 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
     passed_prefill = False
     depth = 0
     prev_role = ""
+    reached_target_depth = False
 
     for i in range(len(messages) - 1, -1, -1):
         msg = messages[i]
@@ -56,12 +65,30 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
         passed_prefill = True
 
         if msg.get("role") != prev_role:
-            if depth == cachingAtDepth:
+            if depth >= cachingAtDepth:
+                reached_target_depth = True
+            # 主人 2026-05-28: 到达目标深度后, 找下一个 user (Anthropic 忽略 assistant 上的
+            # cache_control). reached_target_depth=True 且 msg.role=user 就标记 + return.
+            if reached_target_depth and msg.get("role") == "user":
                 _mark_cache_control(msg)
-                # 仅 1 个 marker, 打完立刻 return (复刻 CC 行为)
                 return messages
             depth += 1
             prev_role = msg.get("role", "")
+
+    # 兜底: 找**倒数第二个** user 标 cache_control (跳过 current user, 因为 current
+    # 每次 user_text 不同会让 cache key 变 → cache miss). 主人 2026-05-28 实测发现:
+    # 标在 current user 上虽然 cache_create > 0, 但下次 hit 永远 0 (current content 变).
+    # 标在 history user 上 → cache 含 system + tools + history (current 之前) → 真能 hit.
+    # 如果 messages 数组只有 1 个 user (没 history): 不标 marker, cache 不写, 但也不浪费.
+    seen_last_user = False
+    for i in range(len(messages) - 1, -1, -1):
+        msg = messages[i]
+        if msg.get("role") == "user":
+            if not seen_last_user:
+                seen_last_user = True
+                continue  # 跳过 current user
+            _mark_cache_control(msg)
+            return messages
 
     return messages
 

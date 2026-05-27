@@ -25,6 +25,10 @@ from typing import Any
 
 logger = logging.getLogger("catty_qq_ai.anthropic_native")
 
+# 主人 2026-05-28 cache 诊断: module-level 最近一次 system_blocks + stable_msgs
+# 快照, 用于 per-block diff log 找出真实对话 prefix 漂移源.
+_last_diff_snapshot: dict[str, Any] = {}
+
 _DEFAULT_BETAS = (
     "prompt-caching-2024-07-31,"
     "compact-2026-01-12,"
@@ -511,9 +515,8 @@ async def post_messages_native(
         }
 
     # 主人 2026-05-28 cache 诊断: 算 system + messages 的 sha256, 对比同 scope 连发
-    # 时 prefix 是否字节一致. cache_create > 0 但 cache_read=0 表示 Anthropic 在写 cache
-    # 但 catty 下一轮 prefix hash 不同 → 找不到上次的 cache. 用 prefix_hash log 可以
-    # 看出 5min TTL 内同 scope 是否字节稳定 (sys hash 同→应该 cache hit).
+    # 时 prefix 是否字节一致. 真实对话 sys/stable_msgs hash 每轮都变 → 加 per-block diff
+    # 跟上次比较, 找出具体哪个 block 漂移.
     try:
         import hashlib
         import json as _json
@@ -524,10 +527,88 @@ async def post_messages_native(
         msg_hash = hashlib.sha256(
             _json.dumps(stable_msgs, sort_keys=True, ensure_ascii=False).encode("utf-8")
         ).hexdigest()[:12]
+        # 看 cache_control 字段在哪 (诊断: 应该挂在 boundary block 上)
+        cc_positions = []
+        for i, blk in enumerate(system_blocks):
+            if isinstance(blk, dict) and "cache_control" in blk:
+                cc_positions.append(f"sys[{i}]={blk.get('cache_control')}")
+        for i, m in enumerate(other_messages):
+            content = m.get("content") if isinstance(m, dict) else None
+            if isinstance(content, list):
+                for bi, blk in enumerate(content):
+                    if isinstance(blk, dict) and "cache_control" in blk:
+                        cc_positions.append(f"msg[{i}/{m.get('role')}].content[{bi}]={blk.get('cache_control')}")
         logger.info(
-            "prefix_hash sys=%s stable_msgs=%s sys_blocks=%d msgs=%d",
+            "prefix_hash sys=%s stable_msgs=%s sys_blocks=%d msgs=%d cache_control=%s",
             sys_hash, msg_hash, len(system_blocks), len(other_messages),
+            "|".join(cc_positions) if cc_positions else "NONE",
         )
+        # per-block diff vs 上次 (module-level, 简单近似 — 不区分 scope, 多 user 并发会混)
+        cur_sys_blocks_dump = []
+        for i, blk in enumerate(system_blocks):
+            text = (blk.get("text") if isinstance(blk, dict) else "") or ""
+            h = hashlib.sha256(text.encode("utf-8")).hexdigest()[:8]
+            cur_sys_blocks_dump.append({"i": i, "h": h, "len": len(text), "head": text[:50]})
+        cur_stable_msgs_dump = []
+        for i, m in enumerate(stable_msgs):
+            txt = _json.dumps(m, sort_keys=True, ensure_ascii=False)
+            h = hashlib.sha256(txt.encode("utf-8")).hexdigest()[:8]
+            cur_stable_msgs_dump.append({"i": i, "role": m.get("role", ""), "h": h, "len": len(txt)})
+        prev = _last_diff_snapshot.get("snapshot")
+        if prev is not None:
+            # diff system blocks
+            prev_sys = prev.get("sys", [])
+            sys_changed = []
+            for i in range(max(len(prev_sys), len(cur_sys_blocks_dump))):
+                pv = prev_sys[i] if i < len(prev_sys) else None
+                cv = cur_sys_blocks_dump[i] if i < len(cur_sys_blocks_dump) else None
+                if pv is None or cv is None or pv.get("h") != cv.get("h"):
+                    sys_changed.append({
+                        "i": i,
+                        "prev_h": (pv or {}).get("h"),
+                        "cur_h": (cv or {}).get("h"),
+                        "prev_len": (pv or {}).get("len"),
+                        "cur_len": (cv or {}).get("len"),
+                        "cur_head": (cv or {}).get("head", "")[:60].replace("\n", "\\n"),
+                    })
+            if sys_changed:
+                logger.info("cache_diff sys_blocks_changed_count=%d", len(sys_changed))
+                for c in sys_changed[:15]:
+                    logger.info(
+                        "  sys_diff [%d] %s→%s len %s→%s head=%s",
+                        c["i"], c["prev_h"], c["cur_h"], c["prev_len"], c["cur_len"], c["cur_head"],
+                    )
+            # diff stable msgs
+            prev_msgs = prev.get("msgs", [])
+            msgs_changed = []
+            for i in range(max(len(prev_msgs), len(cur_stable_msgs_dump))):
+                pv = prev_msgs[i] if i < len(prev_msgs) else None
+                cv = cur_stable_msgs_dump[i] if i < len(cur_stable_msgs_dump) else None
+                if pv is None or cv is None or pv.get("h") != cv.get("h"):
+                    msgs_changed.append({
+                        "i": i,
+                        "role": (cv or {}).get("role"),
+                        "prev_h": (pv or {}).get("h"),
+                        "cur_h": (cv or {}).get("h"),
+                        "prev_len": (pv or {}).get("len"),
+                        "cur_len": (cv or {}).get("len"),
+                    })
+            if msgs_changed:
+                logger.info("cache_diff stable_msgs_changed_count=%d", len(msgs_changed))
+                for c in msgs_changed[:10]:
+                    logger.info(
+                        "  msg_diff [%d] role=%s %s→%s len %s→%s",
+                        c["i"], c["role"], c["prev_h"], c["cur_h"], c["prev_len"], c["cur_len"],
+                    )
+        _last_diff_snapshot["snapshot"] = {"sys": cur_sys_blocks_dump, "msgs": cur_stable_msgs_dump}
+        # 主人 2026-05-28: 加完整 sys_blocks dump 一次性看顺序对不对
+        if prev is None:  # 仅在第一次 dump (没历史对照时) 输出完整列表
+            logger.info("full_sys_blocks_dump count=%d", len(cur_sys_blocks_dump))
+            for c in cur_sys_blocks_dump:
+                logger.info(
+                    "  full [%d] h=%s len=%d head=%s",
+                    c["i"], c["h"], c["len"], c["head"].replace("\n", "\\n"),
+                )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"prefix hash compute failed: {exc}")
 

@@ -687,8 +687,11 @@ def register_catty_persona(
     if "daily_life" not in legacy_disabled:
         mgr.register(
             "catty_daily_life",
+            # 主人 2026-05-28: was order=200 (boundary 前), recent_text=user_text 让 mood/activity
+            # 对齐话题导致 prompt byte 漂移 → cache miss. 整段移到 boundary 之后保留功能 +
+            # cache prefix 不受影响.
             content_fn=lambda: _dl.build_daily_life_prompt(scope, recent_text=user_text),
-            order=200,
+            order=458,
         )
     # Catty Daily Goals - 今日小心思 (内在动机). deterministic by (scope, date, user-tier),
     # 让笨猫每天有自己想做的小事, 驱动她主动找机会暴露 / 实施 / 暗示。
@@ -702,7 +705,7 @@ def register_catty_persona(
             is_owner=is_owner,
             recent_text=user_text,
         ),
-        order=205,
+        order=459,  # 主人 2026-05-28: was 205, recent_text 让 prompt byte 漂移 → 移到 boundary 之后保 cache
     )
     # Catty Reunion - 久别重逢 (idle 时长 → 反差化重逢语气). 用 ctx['last_active_at']
     # 计算距上次活跃多久, > 6h/1d/1w 三档自动注入不同重逢 hint。pure function,
@@ -766,13 +769,13 @@ def register_catty_persona(
                 user_text, scope, position="after_char",
                 affection_level=aff_level, is_owner=is_owner,
             ),
-            order=300,
+            order=469,  # 主人 2026-05-28: was 300, user_text BFS 关键词触发让 prefix 挤位 → cache miss
         )
     if "story_arc" not in legacy_disabled and arc_store is not None:
         mgr.register(
             "catty_story_arc",
             content_fn=lambda: _sa.build_story_arc_prompt(arc_store.get_active(scope)),
-            order=350,
+            order=350,  # 同 scope stable, 留 boundary 前 cache prefix
         )
         # Catty Arc Pusher (order=352): 看 active arc 跟 current msg 关联度,
         # 给具体 push (推进 arc 进度) 或 callback (回头提) hint, 让 arc 不只是被动列着
@@ -782,7 +785,7 @@ def register_catty_persona(
             content_fn=lambda: _build_arc_pusher(
                 arc_store.get_active(scope), user_text,
             ),
-            order=352,
+            order=471,  # 主人 2026-05-28: was 352, arc + user_text 触发让 prefix 漂移 → cache miss
         )
 
     # === QQ 节奏 + 自检 + image + 示例 (后段) ===
@@ -811,7 +814,8 @@ def register_catty_persona(
     mgr.register(
         "catty_length_intent",
         content_fn=_build_length_intent,
-        order=217,
+        order=466,  # 主人 2026-05-28: 原 order=217 在 boundary 之前导致条件注入让 prefix 挤位
+                    # → cache miss. 移到 boundary 之后 dynamic 区 (跟 session_spice/random_encounter 同档).
     )
 
     # === Catty Initiative (order=212) - 主动行为机会检测 ===
@@ -834,7 +838,8 @@ def register_catty_persona(
     mgr.register(
         "catty_initiative",
         content_fn=_build_initiative,
-        order=212,
+        order=464,  # 主人 2026-05-28: 原 order=212 (boundary 前) 信号驱动条件注入让 prefix 漂移
+                    # → cache miss. 移到 boundary 之后 dynamic 区.
     )
 
     # === Catty Action Palette (order=215) - 今日动作候选池 ===
@@ -871,7 +876,7 @@ def register_catty_persona(
     mgr.register(
         "catty_scene_detector",
         content_fn=_build_scene_detector,
-        order=222,
+        order=461,  # 主人 2026-05-28: was 222, user_text 触发场景判定让 prefix 漂移 → cache miss
     )
 
     # === Phase C: Hard filter 深化 5 件套 ===
@@ -896,7 +901,8 @@ def register_catty_persona(
         except Exception:  # noqa: BLE001
             return ""
 
-    mgr.register("catty_subtext_decoder", content_fn=_build_subtext_decoder, order=224)
+    mgr.register("catty_subtext_decoder", content_fn=_build_subtext_decoder, order=462)
+    # 主人 2026-05-28: was 224, user_text 触发弦外之音让 prefix 漂移 → cache miss
 
     # C3 catty_contradiction_detector (order=225) - 言行矛盾 (不要又要 / 反讽假夸 / 经典傲娇)
     def _build_contradiction() -> str:
@@ -906,7 +912,8 @@ def register_catty_persona(
         except Exception:  # noqa: BLE001
             return ""
 
-    mgr.register("catty_contradiction_detector", content_fn=_build_contradiction, order=225)
+    mgr.register("catty_contradiction_detector", content_fn=_build_contradiction, order=463)
+    # 主人 2026-05-28: was 225, user_text 触发矛盾检测让 prefix 漂移 → cache miss
 
     # C5 catty_topic_recency (order=226) - 话题新鲜度 (新话题 vs 5 轮内聊过的老话题)
     _recent_user_texts_for_filter = ctx.get("recent_user_texts") or []
@@ -918,7 +925,8 @@ def register_catty_persona(
             except Exception:  # noqa: BLE001
                 return ""
 
-        mgr.register("catty_topic_recency", content_fn=_build_topic_recency, order=226)
+        mgr.register("catty_topic_recency", content_fn=_build_topic_recency, order=468)
+        # 主人 2026-05-28: 原 order=226 在 boundary 前, user_text 触发新话题让 prefix 挤位 → cache miss
 
     # C4 catty_relationship_pulse (order=464) - 关系升降温 (用 user_vibe_store 内 vibe_history 算)
     _pulse_user_vibe_store = ctx.get("user_vibe_store")
@@ -936,7 +944,7 @@ def register_catty_persona(
         mgr.register(
             "catty_image_literacy",
             content_fn=lambda: _pp.build_image_literacy_prompt(),
-            order=230,
+            order=465,  # 主人 2026-05-28: was 230, has_image 触发条件让 prefix 漂移 → cache miss
         )
         # Catty Image Reaction (order=232): 根据 image_description 关键词命中给具体
         # 情绪反应 hint (食物→馋 / 狗→警觉 / 帅哥→吃醋 / 等).
@@ -946,7 +954,7 @@ def register_catty_persona(
             mgr.register(
                 "catty_image_reaction",
                 content_fn=lambda: _build_image_reaction(_image_desc),
-                order=232,
+                order=467,  # 主人 2026-05-28: was 232, image_description 让 prefix 漂移 → cache miss
             )
     # 示例对话只在冷会话(<HOT_SESSION 阈值)注入 — 热会话从历史里就能学到口吻,
     # 这两段加起来 ~1.5K token,省下 30-40% system prompt 体积。
