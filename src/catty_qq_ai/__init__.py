@@ -4648,6 +4648,10 @@ async def _build_messages(
                 nick=_owner_cuckold_target_nick,
                 is_owner=_user_is_owner,
                 user_addr=_user_real_display,
+                # 主人 2026-05-27 十轮升级: 新增 mood/outfit/personality 维度 lookup
+                mood=_scene_state.get("mood") or _starter_phase_st.mood,
+                outfit=_scene_state.get("outfit") or _starter_phase_st.outfit,
+                personality=_scene_state.get("personality_facet") or _starter_phase_st.personality_facet,
             )
             if _starter_block and _starter_block.strip():
                 _slim_messages.append({"role": "system", "content": _starter_block})
