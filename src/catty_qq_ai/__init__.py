@@ -8471,12 +8471,15 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 # 主 5.5 + fallback 都注入 trope hint (主人要 5.5 也按 18 trope 场景写,
                 # 不只是 alignment-driven 隐藏拒绝).
                 _spark_messages = messages
+                # 主人 2026-05-27 bug fix: _user_real_display 是 _build_messages 的 local,
+                # handle_chat scope 没有, 在这里 inline 算 user_addr
+                _spark_user_addr = (_configured_title(event).strip() or _display_name(event))
                 _trope_hint = _build_trope_retry_hint(
                     user_is_owner=_is_owner,
                     is_pushing=_user_is_pushing(_user_text_now),
                     scope=_conversation_queue_key(event),
                     user_id=str(event.user_id),
-                    user_addr=_user_real_display,
+                    user_addr=_spark_user_addr,
                 )
                 if _trope_hint:
                     _spark_messages = list(messages)
