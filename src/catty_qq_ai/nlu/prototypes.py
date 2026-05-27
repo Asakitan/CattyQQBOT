@@ -63,45 +63,47 @@ EMOTION_ORDER: list[str] = list(EMOTION_PROTOTYPES.keys())
 
 
 # ── Trend 原型 (6 类多轮趋势) ───────────────────────────────────────────
-# 跟 catty_theory_of_mind 对齐, 但 short_dry 是 length-only 规则不入语义
+# 严格对齐 catty_theory_of_mind._TREND_DEFS 的 tag 名 (但 short_dry 是 length-only 不入)
 TREND_PROTOTYPES: dict[str, list[str]] = {
     "burned_out": [
         "好累不想动了",
         "今天累死了真的不行",
         "我已经累瘫了没力气",
-        "服了 真的不想再做了",
+        "服了 真的不想再做了破防了",
     ],
     "seeking_approval": [
-        "我这样对不对",
-        "你觉得我做的好吗",
-        "是不是我做错了",
-        "我会不会很烦人",
+        "你看我做的怎么样",
+        "我这样厉害吗",
+        "我刚搞定了一件事 夸我",
+        "今天我抽到 ssr 厉害吧",
+        "我赢了 看我",
     ],
-    "curious_engaged": [
+    "probing": [
+        "你为什么这样说",
+        "真的吗 你确定吗",
+        "你是不是骗我",
+        "你怎么知道的",
         "为什么会这样",
-        "原理是什么",
-        "教我一下吧",
-        "这个怎么做的",
-        "好神奇展开讲讲",
-    ],
-    "venting": [
-        "今天遇到一个 sb",
-        "气死我了真的服",
-        "凭什么这样对我",
-        "我要疯了",
-    ],
-    "cooling_off": [
-        "嗯",
-        "哦 这样啊",
-        "好的吧",
-        "随便吧",
-        "无所谓",
     ],
     "lonely": [
         "陪我聊聊天好吗",
         "没人懂我",
         "一个人好寂寞",
-        "想找人说话",
+        "在吗 醒着吗",
+        "想找人说话无聊死了",
+    ],
+    "playful_streak": [
+        "哈哈哈笑死我了",
+        "草 这个梗太皮了",
+        "嘿嘿 整活儿",
+        "搞笑 我就玩你",
+    ],
+    "intimate_warming": [
+        "想你了笨猫",
+        "想抱抱猫猫",
+        "贴贴蹭蹭一下",
+        "好可爱 撒娇一下",
+        "亲亲笨猫主人想你",
     ],
 }
 TREND_ORDER: list[str] = list(TREND_PROTOTYPES.keys())

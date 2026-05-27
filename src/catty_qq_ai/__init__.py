@@ -9007,9 +9007,20 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 try:
                     from .catty_theory_of_mind import build_theory_of_mind_note
                     if _recent_user_texts:
-                        _tom_note = build_theory_of_mind_note(
-                            _recent_user_texts, is_owner=_user_is_owner,
-                        )
+                        # 主人 2026-05-28: 开 text2vec 后 detect_trend 内会 embed
+                        # 3-5 条 msg (LRU 缓存复用上轮, 没缓存时 30-100ms).
+                        # 包 to_thread 不阻塞 event loop.
+                        _use_t2v_now = bool(getattr(config, "catty_use_text2vec", False))
+                        if _use_t2v_now:
+                            _tom_note = await asyncio.to_thread(
+                                build_theory_of_mind_note,
+                                _recent_user_texts,
+                                is_owner=_user_is_owner,
+                            )
+                        else:
+                            _tom_note = build_theory_of_mind_note(
+                                _recent_user_texts, is_owner=_user_is_owner,
+                            )
                         messages = inject_author_note(messages, _tom_note)
                 except Exception as exc:  # noqa: BLE001
                     logger.debug(f"theory_of_mind author_note failed (non-fatal): {exc}")

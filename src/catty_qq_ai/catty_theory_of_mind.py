@@ -92,30 +92,18 @@ def _short_response_count(texts: list[str]) -> int:
     return sum(1 for t in texts if t and len(t.strip()) <= 3)
 
 
-def detect_trend(recent_user_texts: list[str]) -> str:
-    """看最近 N 条返回最强 trend tag, 空 / 无信号返回 ""。
-
-    短回连续 4 条 → short_dry 优先 (这个信号最强).
-    其他按 (匹配数 / 阈值) 比例 + 优先级排序.
-    """
+def _legacy_detect_trend(recent_user_texts: list[str]) -> str:
+    """旧关键词命中阈值打分 — 保留作 fallback / 低 confidence 兜底."""
     if not recent_user_texts:
         return ""
-
-    # 特殊处理: 短回连续多条
-    sc = _short_response_count(recent_user_texts)
-    if sc >= 4:
-        return "short_dry"
-
     concat = " ".join(t for t in recent_user_texts if t).lower()
     if not concat.strip():
         return ""
-
     best_tag = ""
     best_ratio = 0.0
     for tag, keywords, threshold, _ in _TREND_DEFS:
         if tag == "short_dry":
-            continue  # 已单独处理
-        # 命中次数 = 唯一关键词命中数 (避免单词重复算多次, "累累累" 只算 1)
+            continue
         hits = sum(1 for k in keywords if k in concat)
         if hits >= threshold:
             ratio = hits / threshold
@@ -123,6 +111,103 @@ def detect_trend(recent_user_texts: list[str]) -> str:
                 best_ratio = ratio
                 best_tag = tag
     return best_tag
+
+
+# ── 5-msg in-memory LRU embedding cache (避免滑窗复用同消息重复 embed) ──
+_EMB_CACHE: "dict[int, object]" = {}
+_EMB_CACHE_MAX = 256
+
+
+def _cached_embed(text: str) -> object | None:
+    """带 LRU 的 embed. text 用 hash key, 缓存命中省 ~50ms."""
+    try:
+        from .nlu import text2vec_engine
+    except Exception:
+        return None
+    if not text:
+        return None
+    key = hash(text)
+    if key in _EMB_CACHE:
+        # 移到 LRU 末尾 (dict 保插入顺序)
+        v = _EMB_CACHE.pop(key)
+        _EMB_CACHE[key] = v
+        return v
+    v = text2vec_engine.embed_sync(text)
+    if v is None:
+        return None
+    _EMB_CACHE[key] = v
+    while len(_EMB_CACHE) > _EMB_CACHE_MAX:
+        try:
+            _EMB_CACHE.pop(next(iter(_EMB_CACHE)))
+        except StopIteration:
+            break
+    return v
+
+
+def detect_trend(recent_user_texts: list[str]) -> str:
+    """看最近 N 条返回最强 trend tag, 空 / 无信号返回 ""。
+
+    短回连续 4 条 → short_dry 优先 (length-only 规则放最前).
+    其他按语义路径 (text2vec centroid vs trend prototype) + 词袋 fallback.
+
+    主人 2026-05-28: 加 embedding centroid 升级.
+    - 关 text2vec / 失败 → 仅 legacy
+    - 开 text2vec + 高置信度 (≥0.50) → 用 embedding 结果
+    - 开但低置信度 → fallback 旧词袋
+    """
+    if not recent_user_texts:
+        return ""
+
+    # 短回连续多条 — length-only 规则置顶
+    sc = _short_response_count(recent_user_texts)
+    if sc >= 4:
+        return "short_dry"
+
+    legacy = _legacy_detect_trend(recent_user_texts)
+
+    try:
+        from nonebot import get_driver
+        cfg = get_driver().config
+    except Exception:
+        return legacy
+    if not bool(getattr(cfg, "catty_use_text2vec", False)):
+        return legacy
+
+    try:
+        from .nlu import prototypes
+    except Exception:
+        return legacy
+
+    # 每条 msg → embedding (带 LRU 缓存)
+    embs = []
+    for t in recent_user_texts:
+        if not t or not t.strip():
+            continue
+        v = _cached_embed(t)
+        if v is not None:
+            embs.append(v)
+    if not embs:
+        return legacy
+    try:
+        import numpy as np
+        stacked = np.stack(embs, axis=0)
+        centroid = stacked.mean(axis=0)
+        norm = float(np.linalg.norm(centroid))
+        if norm < 1e-9:
+            return legacy
+        centroid = centroid / norm
+        proto = prototypes.get_trend_prototypes()
+        if proto is None or proto.shape[0] != len(prototypes.TREND_ORDER):
+            return legacy
+        sims = proto @ centroid
+        idx = int(sims.argmax())
+        conf = float(sims[idx])
+    except Exception:
+        return legacy
+    threshold = float(getattr(cfg, "catty_text2vec_trend_threshold", 0.50))
+    if conf < threshold:
+        return legacy
+    return prototypes.TREND_ORDER[idx]
 
 
 def build_theory_of_mind_note(
