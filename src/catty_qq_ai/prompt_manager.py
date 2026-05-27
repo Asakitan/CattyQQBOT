@@ -727,12 +727,66 @@ def register_catty_persona(
         content_fn=lambda: _pp.build_qq_chat_rhythm_prompt(split_marker),
         order=210,
     )
+
+    # === Catty Initiative (order=212) - 主动行为机会检测 ===
+    # 信号驱动 — 检测对方状态/敏感词/idle 后给具体『该主动做 X』hint
+    # 跟 random_encounter (3% 随机) 互补, 这是 signal-triggered
+    _last_active_at_init = ctx.get("last_active_at")
+    def _build_initiative() -> str:
+        try:
+            import time as _t
+            from .catty_initiative import build_initiative_prompt
+            _idle = 0.0
+            if _last_active_at_init:
+                _idle = max(0.0, _t.time() - float(_last_active_at_init))
+            return build_initiative_prompt(
+                user_text, idle_seconds=_idle, is_owner=is_owner,
+            )
+        except Exception:  # noqa: BLE001
+            return ""
+
+    mgr.register(
+        "catty_initiative",
+        content_fn=_build_initiative,
+        order=212,
+    )
+
+    # === Catty Action Palette (order=215) - 今日动作候选池 ===
+    # 给 AI 具体动作词库 (打哈欠/伸懒腰/蹭尾巴/...) 让回复带具象动作而非"动了一下"
+    def _build_action_palette() -> str:
+        try:
+            from .catty_action_palette import build_action_palette_prompt
+            return build_action_palette_prompt(scope, pool_count=6)
+        except Exception:  # noqa: BLE001
+            return ""
+
+    mgr.register(
+        "catty_action_palette",
+        content_fn=_build_action_palette,
+        order=215,
+    )
     if self_check_enabled:
         mgr.register(
             "catty_reply_self_check",
             content_fn=lambda: _pp.build_reply_self_check_prompt(no_reply, split_marker),
             order=220,
         )
+
+    # === Catty Scene Detector (order=222) - per-message 临时场景检测 ===
+    # 当前一条消息的场景 (求助/吐槽/暧昧/求关心/夸奖/八卦/无聊/...), 短期一次性反应风格
+    # 跟 user_vibe(长期画像) / catty_mood(累积情绪) 互补 — 这是 instant scene
+    def _build_scene_detector() -> str:
+        try:
+            from .catty_scene_detector import build_scene_detector_prompt
+            return build_scene_detector_prompt(user_text)
+        except Exception:  # noqa: BLE001
+            return ""
+
+    mgr.register(
+        "catty_scene_detector",
+        content_fn=_build_scene_detector,
+        order=222,
+    )
     if has_image:
         mgr.register(
             "catty_image_literacy",

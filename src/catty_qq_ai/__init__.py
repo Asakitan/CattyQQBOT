@@ -8740,6 +8740,19 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     messages = inject_author_note(messages, _scene_note)
                 except Exception as exc:  # noqa: BLE001
                     logger.debug(f"scene_now author_note failed (non-fatal): {exc}")
+
+                # 笨猫『读心』author_note (depth=2): 看最近 3-5 条 user msg
+                # 推断对方心理 trend (累/求肯定/试探/孤独/皮/暧昧/敷衍), 让笨猫
+                # 表现"懂对方"的智能感 — 不是孤立看当前一条
+                try:
+                    from .catty_theory_of_mind import build_theory_of_mind_note
+                    if _recent_user_texts:
+                        _tom_note = build_theory_of_mind_note(
+                            _recent_user_texts, is_owner=_user_is_owner,
+                        )
+                        messages = inject_author_note(messages, _tom_note)
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"theory_of_mind author_note failed (non-fatal): {exc}")
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"author_note inject failed (non-fatal): {exc}")
         # 「ToolContext 携带图片」可见性 hint:tool_ctx.input_image_urls / recent_image_urls
