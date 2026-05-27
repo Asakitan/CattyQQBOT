@@ -5862,15 +5862,16 @@ async def _local_reply_gate_allows(
     """[DEPRECATED 2026-05-27] reply gate 整个停了 — 主人原话 "reply gate停了".
 
     现在 _rule 直接做本地确定性判断, 不再调本函数. 这里保留壳是为兼容历史调用点
-    (其它分支/工具脚本可能还引用), 行为退化成: 私聊/主人/direct/directly_requested
-    全放行, 其他 drop, **不调 critic AI**, **不打 INFO 日志**.
+    (其它分支/工具脚本可能还引用), 行为退化成: 私聊/direct/directly_requested 全放行,
+    其他 drop (包括主人在群里发的非定向消息), **不调 critic AI**, **不打 INFO 日志**.
+
+    主人 2026-05-27 fix 二轮: 删掉 owner bypass 跟 _rule 对齐 —
+    主人在群里发纯图/无指向闲聊不该被放行 (会触发笨猫乱回).
 
     如需恢复 critic gate, 翻 git 历史看 commit before reply-gate-kill.
     """
     if isinstance(event, PrivateMessageEvent):
         return True, {"should_reply": True, "reason": "private bypass", "skipped_model": True}
-    if _event_is_owner(event):
-        return True, {"should_reply": True, "reason": "owner bypass", "skipped_model": True}
     if _force_direct_reply_enabled(event, incoming):
         return True, {"should_reply": True, "reason": "direct trigger", "skipped_model": True}
     if incoming.directly_requested or incoming.mentioned or incoming.replied_to_self:
@@ -6687,15 +6688,16 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
             state["catty_special_care_context"] = special_care_context
     # ── 主人 2026-05-27: reply gate 整个停 ──
     # 原本这里调 _local_reply_gate_allows 让本地 critic AI 判要不要回, 现在改成纯本地确定性判断:
-    # 私聊 / 主人 / direct_required / directly_requested / mentioned / replied_to_self → 放行
-    # 其他 (非定向群消息) → drop, 且不打 INFO 日志保持控制台安静
+    # 私聊 / direct_required / directly_requested / mentioned / replied_to_self → 放行
+    # 其他 (非定向群消息, 包括主人在群里发的非定向消息) → drop, 且不打 INFO 日志保持控制台安静
+    # 主人 2026-05-27 fix 二轮: 删掉 owner bypass — 之前主人在群里发纯图/无指向闲聊都被 bypass 放行,
+    # 触发笨猫乱回 (实际 case: 主人发 NSFW 私聊截图给群友看, 笨猫把截图当画图请求乱评论).
+    # 主人和群友一样要求"指向猫猫"信号才放行, 主人的 admin 命令在其它 matcher (priority 35-50) 截胡.
     # _save_local_critic_sample("reply_gate", ...) 调用也一并停掉, 不再为 gate 收集训练样本.
     # state["catty_reply_gate_result"] 保留空 dict 占位, handle_chat 的 _fallback_reply_decision_context
     # 看到没 "fallback" 标记会返回空, 无副作用.
     state["catty_reply_gate_result"] = {}
     if isinstance(event, PrivateMessageEvent):
-        gate_allowed = True
-    elif _event_is_owner(event):
         gate_allowed = True
     elif _force_direct_reply_enabled(event, incoming):
         gate_allowed = True
