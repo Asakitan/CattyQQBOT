@@ -842,6 +842,20 @@ def register_catty_persona(
             order=460,
         )
 
+    # === Ambient Eavesdrop - 群里周边对话 (order=265) ===
+    # 排除当前发言者后的 ambient buffer (≤30 min, ≤6 条), 让笨猫表现"在场旁听"感.
+    # 仅群聊有意义 (私聊 ambient=空), build_ambient_prompt 自动返回 "" 跳过.
+    _ambient_store_inst = ctx.get("ambient_store")
+    if _ambient_store_inst is not None and scope and user_id:
+        from .ambient_eavesdrop import build_ambient_prompt as _build_ambient_prompt
+        mgr.register(
+            "catty_ambient_chatter",
+            content_fn=lambda: _build_ambient_prompt(
+                _ambient_store_inst.get_ambient(scope, exclude_user_id=user_id),
+            ),
+            order=265,
+        )
+
     # === User Details - 跨对话结构化细节 (order=462) ===
     # 跟 user_vibe (调性) 互补 — 这是『可枚举的细节』 e.g. 爱吃的 / 工作 / 宠物
     # 让笨猫能主动 callback『主人之前不是说喜欢 X 嘛?』

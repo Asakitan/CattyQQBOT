@@ -192,6 +192,11 @@ user_vibe_store = UserVibeStore(config.catty_memory_path)
 # 让笨猫能主动 callback『主人之前不是说喜欢 X 嘛?』. 持久化到 user_details.json。
 from .user_details_store import UserDetailsStore
 user_details_store = UserDetailsStore(config.catty_memory_path)
+# Ambient eavesdrop: per-scope in-memory buffer 累积群里所有 msg (包括非 @ 笨猫的),
+# 让笨猫被触发时拉最近 ambient 注入 prompt 表现"听到了群里 X 在聊 Y"的在场感。
+# 不持久化, 重启清空 (跟 sticky 同性质).
+from .ambient_eavesdrop import AmbientStore
+ambient_store = AmbientStore()
 # Catty mood: 笨猫自己当下心情(per-scope 8 维向量,跨多轮连续衰减)。
 # 让连续对话不再每条独立 — 被惹到下一句不会立刻笑嘻嘻,落盘到 catty_moods.json。
 from .catty_mood import CattyMoodStore
@@ -4299,6 +4304,7 @@ async def _build_messages(
         # 读 profile,low confidence 自动返回空字符串(不污染 prompt)
         "user_vibe_store": user_vibe_store,
         "user_details_store": user_details_store,
+        "ambient_store": ambient_store,
         "user_id": str(event.user_id),
         # Catty mood: 让 register_catty_persona 用 scope 拉当前 mood 注入 prompt
         "catty_mood_store": catty_mood_store,
@@ -8075,6 +8081,19 @@ async def observe_memory(bot: Bot, event: MessageEvent) -> None:
     if str(event.user_id) == str(bot.self_id):
         return
     _remember_recent_conversation_event(event)
+    # Ambient eavesdrop: 群里所有 msg (包括非 @ 笨猫的) push 到 in-memory buffer,
+    # 笨猫被触发时拉最近 ambient 注入 prompt 表现"在场"感.
+    # observe_matcher 已经 priority=5 block=False 走全部 message events, 完美 piggy-back.
+    if isinstance(event, GroupMessageEvent):
+        try:
+            ambient_store.record(
+                scope=_conversation_queue_key(event),
+                user_id=str(event.user_id),
+                nickname=_display_name(event),
+                text=event_plain_text(event),
+            )
+        except Exception:  # noqa: BLE001
+            pass  # ambient 是 best-effort, 失败不影响主流
     # activity feed: 训练 idle gate + dashboard conversation feed 都用这个
     # 顺手附上本地解析层 hit 摘要,方便回放调试看每条消息触发了哪些层
     try:
@@ -9361,3 +9380,29 @@ async def _mount_dev_sim_chat_endpoint() -> None:
         }
 
     logger.info("dev /dev/sim_chat endpoint mounted (POST {user_id, text, group_id?, live, history_replace, include_messages})")
+
+    @app.post("/dev/ambient_inject")
+    async def _dev_ambient_inject(req: Request):
+        """开发用: 往 ambient_store 注入一条假 group msg, 测试 ambient prompt 注入流程.
+        Body: {scope, user_id, nickname, text}
+        """
+        try:
+            body = await req.json()
+        except Exception as exc:  # noqa: BLE001
+            return {"ok": False, "error": f"bad json: {exc}"}
+        scope = str(body.get("scope") or "")
+        if not scope:
+            return {"ok": False, "error": "scope required"}
+        try:
+            ambient_store.record(
+                scope=scope,
+                user_id=str(body.get("user_id") or ""),
+                nickname=str(body.get("nickname") or ""),
+                text=str(body.get("text") or ""),
+            )
+            snap = ambient_store.snapshot()
+            return {"ok": True, "scope_buffer_size": snap.get(scope, 0), "all_scopes": snap}
+        except Exception as exc:  # noqa: BLE001
+            return {"ok": False, "error": f"{type(exc).__name__}: {exc}"}
+
+    logger.info("dev /dev/ambient_inject endpoint mounted (POST {scope, user_id, nickname, text})")
