@@ -16,6 +16,10 @@ dependencies = [
   "Pillow>=10.0.0",
   "pydantic>=2.0.0",
   "matplotlib>=3.8.0",
+  # 主人 2026-05-28: Anthropic 原生 /v1/messages + cache_control + context_management
+  # (compact-2026-01-12) 走 NewAPI SG relay 字节级透传, MAX OAuth 下 cache 静默 0
+  # 但 input>150K 自动 server-side compaction 触发省 token.
+  "anthropic>=0.45.0",
 ]
 
 [project.optional-dependencies]

@@ -345,6 +345,61 @@ async def _post_chat_completion(
     return _extract_content(data)
 
 
+async def _post_anthropic_native_chat(
+    config: Config, messages: list[ChatMessage]
+) -> str:
+    """走 anthropic SDK 的 /v1/messages 路径 — Anthropic 原生协议.
+
+    主人 2026-05-28: NewAPI SG relay pass_through_body_enabled=true 字节级透传 body,
+    catty 可以直接发原生请求享受 3 个 beta:
+      prompt-caching-2024-07-31, compact-2026-01-12, context-management-2025-06-27
+    server-side compaction 在 input>150K 时自动触发并在 response 插 compaction block.
+
+    cache_control 注入沿用 prompt_cache.py 同款 (system tail + cachingAtDepthForClaude),
+    然后由 anthropic_native_client 分离顶部 system 段到顶层 system 字段.
+    """
+    from .anthropic_native_client import post_messages_native
+
+    # 复用现有 cache_control 注入逻辑 (cachingAtDepthForClaude + inject_system_tail_cache)
+    # 让 native 路径和 OpenAI-compat 路径享受同款 4 breakpoints (system tail + history depth N/N+2)
+    _cache_enable = bool(getattr(config, "catty_prompt_cache_enabled", True))
+    _non_system_count = sum(
+        1 for m in messages
+        if isinstance(m, dict) and m.get("role") in ("user", "assistant")
+    )
+    _cache_depth_base = int(getattr(config, "catty_prompt_cache_depth", 2))
+    _cache_depth_dynamic = 4 if _non_system_count >= 12 else _cache_depth_base
+
+    prepared_messages = messages
+    if _cache_enable:
+        import copy
+
+        from .prompt_cache import (
+            cachingAtDepthForClaude,
+            inject_system_tail_cache,
+        )
+        try:
+            prepared_messages = copy.deepcopy(messages)
+            cachingAtDepthForClaude(prepared_messages, cachingAtDepth=_cache_depth_dynamic)
+            inject_system_tail_cache(prepared_messages)
+        except Exception as exc:  # noqa: BLE001
+            _logger.warning("native path: cache injection failed (%s), 降级到无 cache", exc)
+            prepared_messages = messages
+
+    data = await post_messages_native(
+        base_url=config.catty_openai_base_url,
+        api_key=config.catty_openai_api_key,
+        model=config.catty_openai_model,
+        messages=prepared_messages,
+        max_tokens=config.catty_max_tokens or 4096,
+        temperature=config.catty_temperature,
+        timeout=float(config.catty_request_timeout),
+        enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
+        compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
+    )
+    return _extract_content(data)
+
+
 def _log_cache_stats(data: dict[str, Any], model: str) -> None:
     """从 chat completion response 提取 cache hit 统计 + log.
 
@@ -988,6 +1043,23 @@ async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
             config.catty_ai_fallback_model,
         )
         return await _post_fallback_chat(config, messages)
+
+    # Anthropic native /v1/messages 分支 (主人 2026-05-28: NewAPI SG relay 透传 body 已开,
+    # context_management server-side compaction 已在 Anthropic 端激活).
+    # 失败降级走原 OpenAI-compat /chat/completions 路径 (兜底保证主链路不挂).
+    if getattr(config, "catty_anthropic_native_enabled", False):
+        try:
+            result = await _post_anthropic_native_chat(config, messages)
+            if _cloud_is_unhealthy():
+                _logger.info("chat_completion: native path recovered, clearing cooldown")
+                _mark_cloud_healthy()
+            return result
+        except Exception as native_exc:  # noqa: BLE001
+            _logger.warning(
+                "chat_completion: native /v1/messages failed (%s), fallback to /chat/completions",
+                native_exc.__class__.__name__,
+            )
+            # 不熔断 (cloud_unhealthy 不标记), 直接降级到 OpenAI-compat 同一中转端点
 
     # 正常走云。
     # Phase A: 主回复路径补 enable_cache (之前 bug: 只 with_tools / codex_instant 路径有 cache).

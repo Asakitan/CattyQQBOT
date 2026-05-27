@@ -171,6 +171,17 @@ class Config(BaseModel):
     catty_prompt_cache_enabled: bool = True
     # cache_control 注入的 depth (从 messages 末尾倒数第 N 处 role 切换). ST 默认 2.
     catty_prompt_cache_depth: int = 2
+    # ── Anthropic native /v1/messages 路径 (主人 2026-05-28: NewAPI SG relay
+    # pass_through_body_enabled=true 后, 中转层字节级透传 body 含 cache_control /
+    # context_management / metadata. 切换该开关后 catty 走 anthropic SDK 发原生请求,
+    # 享受 server-side compaction (compact-2026-01-12) — input>150K 自动 server 端摘要.
+    # OAuth MAX 下 cache_creation/read 静默 0 不是 bug; 未来换付费 sk-ant-api03- key
+    # 自动享 90% cache 折扣.
+    catty_anthropic_native_enabled: bool = False
+    # server-side compaction (compact-2026-01-12 beta). 自动在 input>trigger_tokens 时
+    # server 端跑摘要并在 response.content 里插 compaction block + applied_edits[] 标记.
+    catty_compaction_enabled: bool = False
+    catty_compaction_trigger_tokens: int = 150000  # Anthropic 默认 150K
     catty_filter_group_batch_messages: int = 200
     catty_filter_group_batch_seconds: float = 1200.0
     # ── Local NLU enrichment (jieba / text2vec / HanLP) ─────────────────

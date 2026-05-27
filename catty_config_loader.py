@@ -494,6 +494,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_MAX_TOKENS", ai.get("max_tokens"))
     _set_env("CATTY_REQUEST_TIMEOUT", ai.get("request_timeout"))
     _set_env("CATTY_HTTP_PROXY", ai.get("http_proxy"))
+    # 主人 2026-05-28: Anthropic 原生 /v1/messages + server-side compaction
+    _set_env("CATTY_ANTHROPIC_NATIVE_ENABLED", ai.get("anthropic_native_enabled"))
+    _set_env("CATTY_COMPACTION_ENABLED", ai.get("compaction_enabled"))
+    _set_env("CATTY_COMPACTION_TRIGGER_TOKENS", ai.get("compaction_trigger_tokens"))
 
     ai_fallback = _section(data, "ai_fallback")
     _set_env("CATTY_AI_FALLBACK_ENABLED", ai_fallback.get("enabled"))
