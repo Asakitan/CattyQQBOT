@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import contextvars
 from io import BytesIO
 import json
 import logging
@@ -345,6 +346,46 @@ async def _post_chat_completion(
     return _extract_content(data)
 
 
+# 主人 2026-05-28: contextvar 让 scope_key 跨 async/await 透传, 不破坏 chat_completion 签名.
+# bot handler (handle_chat / handle_group_msg 等) 入口 set, 内部 _post_anthropic_native_chat
+# 读取生成 metadata.user_id 让 Anthropic 路由到同一 cache backend.
+_current_scope_key_var: contextvars.ContextVar[str | None] = contextvars.ContextVar(
+    "catty_current_scope_key", default=None,
+)
+
+
+def set_current_scope_key(scope_key: str | None) -> contextvars.Token:
+    """bot handler 入口调用, 设置当前对话 scope (private:<uid> / group:<gid>).
+
+    返回的 token 可用于 reset (一般不需要, async task 自动隔离 contextvar).
+    """
+    return _current_scope_key_var.set(scope_key)
+
+
+def get_current_scope_key() -> str | None:
+    """读当前 async context 的 scope_key. None 时不发 metadata (兼容老代码)."""
+    return _current_scope_key_var.get()
+
+
+def _scope_to_metadata_user_id(scope_key: str | None) -> str | None:
+    """scope key (private:123 / group:456) → Anthropic metadata.user_id 格式.
+
+    Anthropic 文档要求 user_id 不能含 PII (name / email / phone). QQ 号是不可逆映射不算
+    name, 但稳妥起见加前缀 qq_ 区分类型.
+    """
+    if not scope_key:
+        return None
+    sk = scope_key.strip()
+    if sk.startswith("private:"):
+        return f"qq_private_{sk[len('private:'):]}"
+    if sk.startswith("group:"):
+        # 处理 group:gid 和 group:gid:user:uid 两种 (后者主人虽用 group_history_scope=group
+        # 不会出现, 但兼容 group_history_scope=user 时也工作).
+        rest = sk[len("group:"):]
+        return f"qq_group_{rest.replace(':', '_')}"
+    return f"qq_scope_{sk.replace(':', '_').replace('/', '_')}"
+
+
 async def _post_anthropic_native_chat(
     config: Config, messages: list[ChatMessage]
 ) -> str:
@@ -401,6 +442,7 @@ async def _post_anthropic_native_chat(
         timeout=float(config.catty_request_timeout),
         enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
         compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
+        metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
     )
     return _extract_content(data)
 
@@ -897,6 +939,7 @@ async def chat_completion_with_tools(
                 from .anthropic_native_client import post_messages_native_data
                 data = await post_messages_native_data(
                     config, history, tools=tools,
+                    metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
                 )
             else:
                 data = await _post_chat_completion_raw(
@@ -1272,6 +1315,7 @@ async def _post_with_fallback(
                     timeout=float(timeout),
                     enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
                     compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
+                    metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
                 )
                 return _extract_content(data)
         return await _post_chat_completion(

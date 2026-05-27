@@ -722,7 +722,11 @@ def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, 
     if has_image:
         history_content = f"{history_content}\n[图片数量: {len(image_urls)}]"
     if isinstance(event, GroupMessageEvent):
-        history_content = f"{_sender_name(event)}({event.user_id}): {final_text}"
+        # 主人 2026-05-28: history 用数字 QQ 号替代 nickname 让 history bytes 跨请求稳定
+        # (nickname 来自 memory/sender.card 实时读, 可能变 → 破 cache). QQ 号是稳定的
+        # 不可逆 ID. 模型回复时通过 system 末尾的 "QQ→昵称" 映射表 (1-2 token/user) 知道
+        # 具体名字. 这样 cache prefix 在群里多用户场景下也能稳定 hit.
+        history_content = f"[QQ:{event.user_id}] {final_text}"
         if has_image:
             history_content = f"{history_content}\n[图片数量: {len(image_urls)}]"
 

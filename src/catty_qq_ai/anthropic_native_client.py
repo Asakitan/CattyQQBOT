@@ -29,11 +29,22 @@ logger = logging.getLogger("catty_qq_ai.anthropic_native")
 # 快照, 用于 per-block diff log 找出真实对话 prefix 漂移源.
 _last_diff_snapshot: dict[str, Any] = {}
 
-_DEFAULT_BETAS = (
-    "prompt-caching-2024-07-31,"
-    "compact-2026-01-12,"
-    "context-management-2025-06-27"
-)
+# 主人 2026-05-28: beta header list 必须 sort + dedupe 后再 join, 跨调用顺序一致才
+# 不破 cache (CC promptCacheBreakDetection.ts:289 同款做法).
+_DEFAULT_BETAS_LIST: list[str] = [
+    "prompt-caching-2024-07-31",
+    "compact-2026-01-12",
+    "context-management-2025-06-27",
+]
+
+
+def _build_beta_header(extra_betas: list[str] | None = None) -> str:
+    """合并默认 betas + extra_betas, sort + dedupe, 用 `,` 连接生成 anthropic-beta header."""
+    combined = list(_DEFAULT_BETAS_LIST)
+    if extra_betas:
+        combined.extend(extra_betas)
+    # 去重 + 排序保证字节稳定 (set 内部哈希序 sorted 才确定)
+    return ",".join(sorted({b.strip() for b in combined if b and b.strip()}))
 
 
 def _split_system_and_messages(messages: list[dict]) -> tuple[list[dict], list[dict]]:
@@ -426,6 +437,7 @@ async def post_messages_native(
     extra_betas: list[str] | None = None,
     tools: list[dict] | None = None,
     extra_headers: dict[str, str] | None = None,
+    metadata_user_id: str | None = None,
 ) -> dict[str, Any]:
     """走 anthropic AsyncAnthropic SDK 发 /v1/messages, 返回 OpenAI-compat shape response.
 
@@ -454,11 +466,7 @@ async def post_messages_native(
             "anthropic SDK 未安装. 请运行 pip install anthropic>=0.45.0"
         ) from exc
 
-    betas = _DEFAULT_BETAS
-    if extra_betas:
-        betas = betas + "," + ",".join(extra_betas)
-
-    headers: dict[str, str] = {"anthropic-beta": betas}
+    headers: dict[str, str] = {"anthropic-beta": _build_beta_header(extra_betas)}
     if extra_headers:
         headers.update(extra_headers)
 
@@ -497,6 +505,13 @@ async def post_messages_native(
         # 自动检测 + 转换 OpenAI tools 格式到 Anthropic 格式
         # convert_openai_tool_to_anthropic 对已经是 Anthropic 格式的 tool 原样返回
         create_kwargs["tools"] = [convert_openai_tool_to_anthropic(t) for t in tools]
+
+    # 主人 2026-05-28: metadata.user_id 注入 (Anthropic cache routing 关键).
+    # CC `messages.create(metadata={user_id: ...})` 用 metadata.user_id 路由请求到同
+    # backend, 同 scope cache 物理位置稳定. 这是 catty session 管理的本质实现.
+    # 私聊: user_id="qq_private_<uid>"; 群聊: user_id="qq_group_<gid>"
+    if metadata_user_id:
+        create_kwargs["metadata"] = {"user_id": metadata_user_id}
 
     # server-side compaction (compact-2026-01-12)
     if enable_compaction:
@@ -628,6 +643,7 @@ async def post_messages_native_data(
     messages: list[dict],
     *,
     tools: list[dict] | None = None,
+    metadata_user_id: str | None = None,
 ) -> dict[str, Any]:
     """走 native /v1/messages, 返回完整 OpenAI-compat response dict (含 tool_calls).
 
@@ -673,6 +689,7 @@ async def post_messages_native_data(
         messages=prepared_messages,
         max_tokens=config.catty_max_tokens or 4096,
         temperature=config.catty_temperature,
+        metadata_user_id=metadata_user_id,
         timeout=float(config.catty_request_timeout),
         enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
         compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),

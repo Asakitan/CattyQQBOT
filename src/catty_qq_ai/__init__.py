@@ -4441,6 +4441,46 @@ async def _build_messages(
                 build_pulse_context(pulse_msgs, now=pulse_now) or "",
                 order=770,
             )
+    # 主人 2026-05-28: QQ → 昵称映射 (history 里 [QQ:xxx] 在这里给具体名字).
+    # 群消息 history 用数字 QQ 替代 nickname 让 history bytes 稳定 (cache 友好).
+    # 主人原话: 只附加"当前对话/唤起 catty 的人 + 相关的 QQ id" (sender + at 目标).
+    # boundary 之后段 (order=775) 不影响 cache prefix.
+    try:
+        from .message_utils import _sender_name as _cattyget_sender_name
+        _qq_nick_map: dict[str, str] = {}
+        # 1. 当前 sender (唤起 catty 的人)
+        if event is not None:
+            _sender_qq = str(event.user_id)
+            _sender_nick = _cattyget_sender_name(event)
+            if _sender_qq and _sender_nick and _sender_qq != _sender_nick:
+                _qq_nick_map[_sender_qq] = _sender_nick
+            # 2. message 里 at 的相关 QQ (被 @ 的人 — catty 当前 turn 要回复/称呼的对象)
+            try:
+                for _seg in (getattr(event, 'message', None) or []):
+                    if getattr(_seg, 'type', '') == 'at':
+                        _data = getattr(_seg, 'data', None) or {}
+                        _qq = str(_data.get('qq') or '').strip()
+                        _name = str(_data.get('name') or '').strip()
+                        # 排除 @ 笨猫本身 + 排除已收录的 sender
+                        if _qq and _qq != str(bot.self_id) and _qq not in _qq_nick_map and _name:
+                            _qq_nick_map[_qq] = _name
+            except Exception:  # noqa: BLE001
+                pass
+        if _qq_nick_map:
+            _qq_nick_lines = ["【当前对话相关 QQ → 昵称映射】"]
+            for _qq, _nick in _qq_nick_map.items():
+                _qq_nick_lines.append(f"- [QQ:{_qq}] = 昵称「{_nick}」")
+            _qq_nick_lines.append(
+                "(history 里 [QQ:数字] 是发言人/@对象的 QQ 标识, 回复时按需用上面的昵称称呼对应的人)"
+            )
+            _st_manager.register_static(
+                "catty_qq_nickname_map",
+                "\n".join(_qq_nick_lines),
+                order=775,
+            )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"catty_qq_nickname_map register failed: {exc}")
+
     # 入向意图 / 话题 / 实体 / hints
     if "intent" not in _disabled_layers:
         _st_manager.register_static(
@@ -8616,6 +8656,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         else ""
     )
     history_key = build_history_key(event, config)
+    # 主人 2026-05-28: 设置 scope contextvar 让 LLM 调用层自动取出当前 scope 作为
+    # Anthropic metadata.user_id (cache routing 关键). async task 内 contextvar 自动隔离.
+    try:
+        from .openai_client import set_current_scope_key
+        set_current_scope_key(history_key)
+    except Exception:  # noqa: BLE001
+        pass
     queue_key = _conversation_queue_key(event)
     # IDE 多 tab 风格的会话排队:
     # 1) user_lock: 同一用户在同群/私聊里串行(防同人乱序)
