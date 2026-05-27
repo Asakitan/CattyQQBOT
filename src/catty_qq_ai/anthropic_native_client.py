@@ -35,6 +35,9 @@ _DEFAULT_BETAS_LIST: list[str] = [
     "prompt-caching-2024-07-31",
     "compact-2026-01-12",
     "context-management-2025-06-27",
+    # 主人 2026-05-28: 启用 1h cache TTL — Anthropic 已 GA, beta header 在
+    # extended-cache-ttl-2025-04-11. cache_control: {ttl: '1h'} 必须搭这个 header.
+    "extended-cache-ttl-2025-04-11",
 ]
 
 

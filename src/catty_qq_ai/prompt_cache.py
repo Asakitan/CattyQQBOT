@@ -68,25 +68,58 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
     return messages
 
 
+def _get_cache_ttl() -> str | None:
+    """读 config.catty_cache_ttl, 决定 cache TTL ('1h' / '5min' / None=默认5min).
+
+    主人 2026-05-28: CC 在用 1h TTL 让长会话不掉 cache, catty 跟进.
+    价格: 1h cache write 2x base (5min write 1.25x), cache read 都 0.1x.
+    长会话 (>5min) 场景 1h 显著省钱.
+    """
+    try:
+        from . import config as _module_config
+        ttl = getattr(_module_config.config, "catty_cache_ttl", "1h")
+        if isinstance(ttl, str) and ttl.strip().lower() in ("1h", "5min", "5m"):
+            normalized = ttl.strip().lower().replace("5m", "5min")
+            return "1h" if normalized == "1h" else None  # 5min 是默认, 不需要显式传
+    except Exception:  # noqa: BLE001
+        pass
+    return "1h"  # 默认 1h
+
+
+def _build_cache_control_dict() -> dict[str, Any]:
+    """构造 cache_control dict, 根据 config 决定是否加 ttl: 1h.
+
+    返回 {type: ephemeral} 或 {type: ephemeral, ttl: "1h"}.
+    """
+    cc: dict[str, Any] = {"type": "ephemeral"}
+    ttl = _get_cache_ttl()
+    if ttl == "1h":
+        cc["ttl"] = "1h"
+    return cc
+
+
 def _mark_cache_control(msg: dict[str, Any]) -> None:
-    """把 cache_control: {type: ephemeral} 加到 message content 的最后一个 block.
+    """把 cache_control 加到 message content 的最后一个 block.
 
     Claude API 要求 cache_control 必须在 content block 上, 不能在 message 顶层.
     自动把 str content 转成 list[{type: text, text: ..., cache_control: ...}] 单 block 格式.
+
+    主人 2026-05-28: cache_control 现在带 ttl: '1h' (config 可关), 默认 5min 太短.
     """
+    cc = _build_cache_control_dict()
     content = msg.get("content")
     if isinstance(content, str):
         msg["content"] = [
             {
                 "type": "text",
                 "text": content,
-                "cache_control": {"type": "ephemeral"},
+                "cache_control": cc,
             }
         ]
     elif isinstance(content, list) and content:
         last = content[-1]
         if isinstance(last, dict):
-            last["cache_control"] = {"type": "ephemeral"}
+            last["cache_control"] = cc
 
 
 _CACHE_BOUNDARY_MARKER = "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"
@@ -158,7 +191,7 @@ def inject_tools_cache(tools: list[dict]) -> list[dict]:
     last = tools[-1]
     if isinstance(last, dict):
         last_copy = dict(last)
-        last_copy["cache_control"] = {"type": "ephemeral"}
+        last_copy["cache_control"] = _build_cache_control_dict()
         new_tools.append(last_copy)
     else:
         new_tools.append(last)

@@ -192,6 +192,10 @@ class Config(BaseModel):
     catty_prompt_cache_enabled: bool = True
     # cache_control 注入的 depth (从 messages 末尾倒数第 N 处 role 切换). ST 默认 2.
     catty_prompt_cache_depth: int = 2
+    # 主人 2026-05-28: cache TTL — 默认 1h, CC 同款.
+    # 价格: 5min cache write 1.25x, 1h cache write 2x, cache read 都 0.1x. 长会话 (5min+) 收益大.
+    # 改成 "5min" 可回退到原默认; "1h" 启用 extended-cache-ttl-2025-04-11 beta.
+    catty_cache_ttl: str = "1h"
     # ── Anthropic native /v1/messages 路径 (主人 2026-05-28: NewAPI SG relay
     # pass_through_body_enabled=true 后, 中转层字节级透传 body 含 cache_control /
     # context_management / metadata. 切换该开关后 catty 走 anthropic SDK 发原生请求,
