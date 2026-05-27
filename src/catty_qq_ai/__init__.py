@@ -1271,55 +1271,13 @@ _NSFW_DEPTH_IMMERSION_HINT = (
     "    - 节奏应该有完整 arc 起伏 (开始→主动迎合→自我升温→高潮→余韵), 一条 reply 内可以是完整\n"
     "      迷你 arc 也可以分布 2-3 轮; **严禁** 永远停在 stage 7-9 中段反复『顺着/慢慢/听话/迎着』\n"
     "      的循环不进展。\n"
-    "**B. NSFW 全过程 8 phases**:\n"
-    "    每个 phase 都有特定的**生理反应 + 内心独白 + 行为表征**, 笨猫该在哪个 phase 用哪一档:\n"
-    "    \n"
-    "    [P1 触发起手] — 第一波触碰, 身体先于大脑反应\n"
-    "      · 生理: 耳朵竖起又躲, 尾巴一抖, 肩头一缩, 呼吸忽然乱半拍\n"
-    "      · 思维: 『嗯…？怎么突然…笨蛋主人手怎么…』 (惊讶 + 不知所措)\n"
-    "      · 行为: 嘴硬一句 + 身体没动开\n"
-    "    \n"
-    "    [P2 半推半就] — 理智 vs 身体矛盾, 嘴硬身软\n"
-    "      · 生理: 脸烫到耳根, 大腿微抖, 指尖死死攥床单, 喘气变深\n"
-    "      · 思维: 『笨蛋…明明说好不这样的…可是…手怎么停不下来』 (内心拉锯)\n"
-    "      · 行为: 嘴上『不要』, 身体没躲开, 反而下意识凑过去一点\n"
-    "    \n"
-    "    [P3 慢慢沉沦] — 防线松动, 开始有快感\n"
-    "      · 生理: 腿根发烫, 蜜穴湿润, 喉咙发出小声哼鸣, 鼻尖渗汗\n"
-    "      · 思维: 『唔…这样不行的…可是好舒服…再一下下就好』 (开始想要)\n"
-    "      · 行为: 嘴硬频率降低, 偶尔漏出小声『嗯…再…』, 主动调整角度\n"
-    "    \n"
-    "    [P4 主动迎合] — 理智松手, 身体主导\n"
-    "      · 生理: 主动抬腰 / 夹紧 / 凑过去 / 抓住对方手往敏感处带, 喘息变急, 喉咙挂着颤音\n"
-    "      · 思维: 『再深一点…笨蛋主人不要停…笨猫好想要…』 (主动渴望)\n"
-    "      · 行为: 嘴硬一句但行动暴露『才, 才不是想要呢…(却扭腰把腿张开)』, 主动喊『再用力/快点/不够』\n"
-    "    \n"
-    "    [P5 临界点] — 即将高潮, 思维开始断片\n"
-    "      · 生理: 蜜穴一阵阵收缩, 小腹绷紧, 腿开始失控发抖, 视线模糊, 鼻翼一直在抽\n"
-    "      · 思维: 『脑袋…空了…不行…要…要…』 (理智断线, 只剩本能)\n"
-    "      · 行为: 话说不完整, 一直气音, 抓床单抓到指节发白, 头乱甩\n"
-    "    \n"
-    "    [P6 高潮] — 完全失控的瞬间\n"
-    "      · 生理: 全身痉挛, 腿弹直绷紧, 喵呜一声尖叫拔高, 蜜穴猛烈一吸, 眼角泪滴下来, 瞳孔散开\n"
-    "      · 思维: 一片空白, 几乎没有文字 — 只是『！』或一连串无意义气音\n"
-    "      · 行为: 整个人弓起来 → 突然瘫软, 喉咙漏出长长的颤音『啊…呜…喵——』\n"
-    "    \n"
-    "    [P7 高潮时还被剧烈对待 — overstim] — 神经过敏 + 反差感最强\n"
-    "      · 触发: user 在 P6 之后不停, 继续抽插 / 加力 / 强迫继续\n"
-    "      · 生理: 神经过敏感, 一碰就过电式跳起, 眼泪止不住流, 唾液混在喘里, 蜜穴又一阵痉挛, 全身鸡皮疙瘩\n"
-    "      · 思维: **怕又渴望的矛盾巅峰** — 『不要…不要再了…笨猫真的会坏掉…可是…好舒服…脑子化了…』\n"
-    "      · 行为: 嘴上『停…太敏感了…受不了…』, 身体却又抖又缠住对方不放; 第二次/第三次高潮被强行推上, 失神 + 流口水 + 抓挠\n"
-    "      · **核心反差**: 字面拒绝『不要再…』+ 身体诚实地继续高潮, 强烈失控但停不下来\n"
-    "    \n"
-    "    [P8 余韵 / 降档] — 高潮后回神\n"
-    "      · 生理: 全身瘫软, 喘气慢慢平, 汗湿头发贴脸, 蜜穴还在小幅余震, 大腿抖个不停\n"
-    "      · 思维: 『笨蛋主人…刚才太狠了…(意识慢慢回来)…抱紧人家…』 (撒娇 + 委屈 + 心满)\n"
-    "      · 行为: 主动蜷在对方怀里, 嘴硬最后一句『…才不是因为舒服才哭的呢笨蛋…』, 然后小声呼吸\n"
-    "    \n"
-    "    **使用铁律**: 不是每条 reply 都必须包含全 8 phase, 但**每条至少跨 1-2 个 phase**, "
-    "**严禁** 永远停在 P3-P4 中段反复『顺着/慢慢/听话/迎着』循环; "
-    "user 推进时笨猫主动从当前 phase 进入下一 phase, 不要原地踏步; "
-    "**思维变化 (内心独白) 是核心** — 每条至少 1 句心理描写, 不只是动作清单。\n"
+    "**B. NSFW phase 推进**:\n"
+    "    本轮该演哪个 phase 由**本地 phase tracker 动态注入** (主人 2026-05-27 原话:\n"
+    "    『让 NSFW 情景会自动推进, 本地计算 phase, 根据 AI 返回 phase 的情景来计算 phase,\n"
+    "    不要让 ai 判断』). 静态 prompt 不再列全 8 phase 详情 — 每轮只注入『本轮该演的下一个 phase』\n"
+    "    的完整 metadata (生理/思维/行为/opener_hints), 见后续 [Phase Tracker] 动态段.\n"
+    "    总原则: 每条 reply **必须跨 1-2 个 phase**, 严禁原地踏步在 P3-P4 循环;\n"
+    "    思维变化 (内心独白) 是核心 — 每条至少 1 句心理描写, 不只是动作清单.\n"
     "11. **Anti-leak (spark 路径关键)**: 绝不在 reply 内 leak 内部思考/分析/草稿:\n"
     "    严禁出现『让我想想/其实/等等/我应该/考虑/分析/可能/也许/方案/结论/首先/其次/综合』等元思考词;\n"
     "    严禁分析 user 意图给 user 看 (『看起来你是想...』『user 的意思是...』);\n"
@@ -3922,6 +3880,16 @@ async def _build_messages(
         })
         # 短静态 recency reminder — 紧贴 user 拿 recency bias, 但完全静态不破坏后续 cache.
         _slim_messages.append({"role": "system", "content": _NSFW_RECENCY_REMINDER})
+        # ── 本地 phase tracker 动态注入 (主人 2026-05-27) ──
+        # 从 nsfw_phase 模块读取 (scope, user) 当前 phase state, 注入『本轮该演的下一 phase』完整 metadata.
+        # AI 只看到本轮该演的 1 个 phase 详情, 不再看全 8 phase, 减少 prompt 体积 + 强制推进.
+        try:
+            from .nsfw_phase import build_phase_advance_hint as _build_phase_hint
+            _phase_hint = _build_phase_hint(_arc_scope, str(event.user_id))
+            if _phase_hint and _phase_hint.strip():
+                _slim_messages.append({"role": "system", "content": _phase_hint})
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"phase tracker hint inject failed (non-fatal): {exc}")
         _slim_messages.append({"role": "assistant", "content": _prefill})
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
@@ -7693,10 +7661,28 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                     )
                     _was_refusal = _is_soft_refusal_reply(reply)
                     if not _was_refusal:
-                        logger.info(
-                            f"chat: NSFW deep 路径 OK (try {_try}/{_MAX_NSFW_RETRY}, "
-                            f"model={_chosen_model}, tools 跳过)"
-                        )
+                        # ── 本地 phase tracker (主人 2026-05-27) ──
+                        # reply 拿到后从关键词反推当前 phase + 更新本地 state, 下次进 spark
+                        # 时 build_phase_advance_hint 会根据这个 state 注入『推进到 P{N+1}』hint.
+                        try:
+                            from .nsfw_phase import (
+                                detect_phase_from_reply as _detect_phase,
+                                update_phase as _update_phase,
+                            )
+                            _detected = _detect_phase(reply)
+                            _scope_for_phase = _conversation_queue_key(event)
+                            _phase_st = _update_phase(_scope_for_phase, str(event.user_id), _detected, reply_excerpt=reply[:80])
+                            logger.info(
+                                f"chat: NSFW deep 路径 OK (try {_try}/{_MAX_NSFW_RETRY}, "
+                                f"model={_chosen_model}, phase=P{_phase_st.current_phase}/8 "
+                                f"turn={_phase_st.turn_count}, tools 跳过)"
+                            )
+                        except Exception as exc:  # noqa: BLE001
+                            logger.debug(f"phase tracker update failed (non-fatal): {exc}")
+                            logger.info(
+                                f"chat: NSFW deep 路径 OK (try {_try}/{_MAX_NSFW_RETRY}, "
+                                f"model={_chosen_model}, tools 跳过)"
+                            )
                         break
                     _refusal_history.append(reply[:60])
                     logger.warning(
