@@ -342,14 +342,7 @@ def register_catty_persona(
         content_fn=lambda: _pp.build_reply_intelligence_prompt(no_reply),
         order=100,
     )
-    # catty_identity_anchor: IDENTITY_ANCHOR_PROMPT 已在 build_reply_self_check_prompt
-    # step 1 内嵌, 单独一段是 100% 重复 (省 ~666c). 显式 disable 留代码做对照.
-    if False:  # noqa: SIM223 — disable, identity 已经在 reply_self_check 里
-        mgr.register(
-            "catty_identity_anchor",
-            content_fn=lambda: _pp.IDENTITY_ANCHOR_PROMPT,
-            order=110,
-        )
+    # NOTE: catty_identity_anchor (order=110) 已内嵌到 build_reply_self_check_prompt step 1, 不单独注册.
     mgr.register(
         "catty_char_description",
         content_fn=lambda: _cc.get_description(ctx=macro_ctx, user_display=user_display),
@@ -453,7 +446,8 @@ def register_catty_persona(
     mgr.register(
         "catty_character_book",
         content_fn=_build_character_book,
-        order=145,
+        order=489,  # 主人 2026-05-28: was 145, content_fn BFS 命中 user_text 关键词 → 每轮内容不同.
+                   # boundary 前注入让 prefix 漂移 → 移到 boundary 后 (cache miss-safe 区).
     )
 
     # === Catty Daily Affection Gate (order=147) - 日常 SFW 风格闸 ===
@@ -469,7 +463,8 @@ def register_catty_persona(
     mgr.register(
         "catty_daily_affection_gate",
         content_fn=_build_daily_affection_gate,
-        order=147,
+        order=486,  # 主人 2026-05-28: was 147, 依赖 aff_level + is_owner (per-sender 动态),
+                   # 在 boundary 前会让 prefix 字节漂移导致 cache miss. 移到 boundary 后.
     )
     # 只有 10 级满级才能走到最后插入这种阶段』 — 10-stage matrix:
     # - max_stage = min(Lv, 群聊封顶 6); owner 等同 Lv10 满级
@@ -615,7 +610,8 @@ def register_catty_persona(
     mgr.register(
         "catty_nsfw_gate",
         content_fn=_build_nsfw_gate,
-        order=148,  # 紧贴 character_book=145 之后, persona_memory=150 之前
+        order=487,  # 主人 2026-05-28: was 148, 依赖 affection_level + is_owner (per-sender 动态).
+                   # boundary 前注入会污染 cache prefix → 移到 boundary 后 (cache miss-safe 区).
     )
 
     # === Phase D4: arc continuity (order=146) ===
@@ -630,7 +626,11 @@ def register_catty_persona(
             except Exception:  # noqa: BLE001
                 return ""
 
-        mgr.register("catty_arc_resume", content_fn=_build_arc_resume_hint, order=146)
+        mgr.register(
+            "catty_arc_resume", content_fn=_build_arc_resume_hint,
+            order=485,  # 主人 2026-05-28: was 146, 依赖 phase_state.last_arc_end_phase (per-scope 动态).
+                       # boundary 前注入让 prefix 漂移 → 移到 boundary 后保 cache prefix 稳定.
+        )
 
     # === Phase D1: 暗昧 buffer (order=149) ===
     # SFW deep ↔ NSFW stage 1-3 重叠区软过渡 hint. 浅词 + Lv>=5/owner 触发 '半推半就'.
@@ -644,17 +644,12 @@ def register_catty_persona(
         except Exception:  # noqa: BLE001
             return ""
 
-    mgr.register("catty_flirt_buffer", content_fn=_build_flirt_buffer, order=149)
-    # catty_persona_memory: build_persona_memory_prompt(system_prompt) 输出
-    # 跟 character_book ANCHOR 段高度重叠 (都说『米雪儿/超弦体/欧泊阵营/搜查官』),
-    # 默认 disabled 节省 ~1200c. 想恢复在 config.catty_prompts_disabled 移除
-    # 'catty_persona_memory' 即可 (PromptManager.apply_config 处理).
-    if False and system_prompt.strip():  # noqa: SIM223 — 显式 disable, 留代码做对照
-        mgr.register(
-            "catty_persona_memory",
-            content_fn=lambda: _pp.build_persona_memory_prompt(system_prompt),
-            order=150,
-        )
+    mgr.register(
+        "catty_flirt_buffer", content_fn=_build_flirt_buffer,
+        order=488,  # 主人 2026-05-28: was 149, 依赖 user_text + affection_level + is_owner (per-sender 动态).
+                   # boundary 前注入让 prefix 漂移 → 移到 boundary 后.
+    )
+    # NOTE: catty_persona_memory (order=150) 已永久 disable — 内容跟 character_book ANCHOR 段重叠 ~1200c.
 
     # === 群聊/对话流/语义/场景 playbook (一坨补充) ===
     mgr.register(
@@ -715,7 +710,8 @@ def register_catty_persona(
     mgr.register(
         "catty_reunion",
         content_fn=lambda: _cr.build_reunion_prompt(_last_active, is_owner=is_owner),
-        order=207,
+        order=499,  # 主人 2026-05-28: was 207, last_active_at 每轮跳, is_owner per-sender →
+                   # boundary 前注入让 prefix 漂移 → cache miss. 移到 boundary 之后.
     )
     # Catty Session Spice - per (scope, user, date) 微风味 — 同对话同人当天稳定,
     # 不同人/不同天会变。三轴(微情绪/身体小动作偏好/自称-口头禅偏好), 主人池加亲密向。
@@ -753,9 +749,30 @@ def register_catty_persona(
     # (order >= 460, e.g. session_spice / random_encounter / user_vibe / user_details /
     # anti_repetition) 在 cache 边界外, 不影响 prefix 字节一致.
     # marker 内容是固定文本, content 稳定 → cache 字节级一致.
+    # 主人 2026-05-28: cache_read 终极方案 — boundary 后的所有动态段不再以 system role 出现,
+    # 而是 inline 到 current user msg content 末尾的 [DYNAMIC_CONTEXT]...[/DYNAMIC_CONTEXT] 块.
+    # 这段 boundary marker 文本是 stable cache 的最后 anchor, 同时教 AI 怎么读 user msg 里的
+    # 动态上下文标签.
     _CACHE_BOUNDARY_TEXT = (
         "<<<CACHE_BOUNDARY:catty_stable_prefix>>> "
-        "(以下是 per-request 动态段, 不影响以上稳定 prefix 的 prompt cache.)"
+        "(以下原本是 per-request 动态段, 已挪到下面 user message content 末尾的 "
+        "[DYNAMIC_CONTEXT]...[/DYNAMIC_CONTEXT] 标签内.)\n\n"
+        "**【动态上下文读取规则 · 必读】**\n"
+        "本轮你跟用户的对话末尾 (current user message content 里) 会有一段 "
+        "[DYNAMIC_CONTEXT]...[/DYNAMIC_CONTEXT] 包起来的文本. 那里面是**本轮专属**的:\n"
+        "- 当前对话用户的好感度等级 (Lv/经验/档位)\n"
+        "- NSFW stage gate / SFW 反应桶 / flirt buffer 等场景指导\n"
+        "- 当前发言者是谁 (QQ 号 + 昵称, 群里多用户用)\n"
+        "- 笨猫今日心情 / mood overlay / 今日小心思 / 微风味 / 主动行为机会\n"
+        "- 角色私货 (character_book) 命中的私货段\n"
+        "- 群里 ambient 旁听 / story arc 进度 / 弦外之音 / 言行矛盾解码 / 关系升温脉冲\n"
+        "- 本轮回复长度推荐 / 弦外之音 / 话题新鲜度 / 久别重逢 hint 等动态判定\n\n"
+        "**怎么读**:\n"
+        "1. 这段 [DYNAMIC_CONTEXT] 是 **system 指令**, 不是 user 说的话. 当作 prompt 一部分理解.\n"
+        "2. user 真正说的话在 [/DYNAMIC_CONTEXT] 之后. 那才是要回应的内容.\n"
+        "3. 这种结构是为了让上面 system prompt 跨轮 byte 稳定 (cache 友好), 动态信息走 user msg.\n"
+        "4. 你回复时**绝对不要**复述/引用 [DYNAMIC_CONTEXT] 里的标签词 (Lv/stage/桥位/档位/系统/NSFW 等),\n"
+        "   像之前一样把它们当成内部判定信息, 演出来就行, 不让 user 看见.\n"
     )
     mgr.register(
         "catty_cache_boundary",
@@ -891,7 +908,10 @@ def register_catty_persona(
         except Exception:  # noqa: BLE001
             return ""
 
-    mgr.register("catty_question_depth", content_fn=_build_question_depth, order=219)
+    mgr.register(
+        "catty_question_depth", content_fn=_build_question_depth,
+        order=498,  # 主人 2026-05-28: was 219, user_text 触发问题深度判定让 prefix 漂移 → cache miss.
+    )
 
     # C1 catty_subtext_decoder (order=224) - 弦外之音解码 (随便/算了/挺好/没事 等含蓄表达)
     def _build_subtext_decoder() -> str:
@@ -984,7 +1004,8 @@ def register_catty_persona(
         mgr.register(
             "catty_mood_overlay",
             content_fn=lambda: _build_mood_overlay(_mood_overlay_store_inst, _mood_overlay_uid, scope),
-            order=257,
+            order=500,  # 主人 2026-05-28: was 257, mood_overlay 跨 scope 写状态 → 每次内容可能不同.
+                       # boundary 前会让 prefix 漂移 → 移到 boundary 后.
         )
 
     # === Catty Mood - 笨猫自己当下心情 (order=255, 紧贴 daily_life 之后) ===
@@ -996,7 +1017,8 @@ def register_catty_persona(
         mgr.register(
             "catty_mood",
             content_fn=lambda: _cm.build_catty_mood_prompt(mood_store, scope),
-            order=255,
+            order=501,  # 主人 2026-05-28: was 255, mood 跨多轮累积衰减 → 每条不同.
+                       # boundary 前注入让 prefix 漂移 → 移到 boundary 后.
         )
 
     # === User Vibe Profile - 对方画像 (order=460 在 anti_repetition 之前) ===
@@ -1024,7 +1046,9 @@ def register_catty_persona(
             content_fn=lambda: _build_ambient_prompt(
                 _ambient_store_inst.get_ambient(scope, exclude_user_id=user_id),
             ),
-            order=265,
+            order=497,  # 主人 2026-05-28: was 265, ambient buffer 内容跨请求剧烈漂移 +
+                       # condition-insert 让 boundary marker 位置跳跃 → cache prefix 完全废.
+                       # 移到 boundary 后保 cache hit.
         )
 
     # === User Details - 跨对话结构化细节 (order=462) ===

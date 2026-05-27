@@ -58,15 +58,13 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
     user_indices = [i for i, m in enumerate(messages) if isinstance(m, dict) and m.get("role") == "user"]
     if not user_indices:
         return messages
-    # 策略: 永远标 messages 数组的**第一个 user** + 当 user >= 2 时, 也标当前(最后)
-    # user 一次. 单 user 场景(只 current user)就标 current — 让 cache 至少写入, sys[21]
-    # 那个 breakpoint 仍能跨请求 hit.
+    # 主人 2026-05-28 多轮实验结论:
+    # - 标 [msg[0]+msg[-1]]: cache_read=0 (Anthropic 只持久化 longest=msg[-1]=current user 每次变)
+    # - 标 [msg[0]] only:    cache_read=0 (longest=msg[0] prefix=sys[ALL]+msg[0], sys 末尾动态 → miss)
+    # - sys-only:           cache_create=0 (Anthropic 拒绝 sys-only cache)
+    # 最终方案: msg[0] cache_control + 把 boundary 后的 system dynamic 段全部 inline 到
+    # current user msg content (不进 system_blocks), 这样 sys[ALL] 字节稳定, msg[0] prefix 能 hit.
     _mark_cache_control(messages[user_indices[0]])
-    # 若有 history user (>= 2 个 user), 额外在最后一个 user (current) 也标 marker.
-    # Anthropic 4 breakpoints 上限: sys[boundary] + msg[first_user] + msg[last_user] = 3,
-    # 留 1 个余量给 tools cache (CC 不加, catty 也不加).
-    if len(user_indices) >= 2:
-        _mark_cache_control(messages[user_indices[-1]])
     return messages
 
 
@@ -238,10 +236,97 @@ def adapt_assistant_prefill_for_strict_user_end(messages: list) -> list:
     return new_messages
 
 
+def sweep_floating_systems_into_user_content(messages: list) -> list:
+    """主人 2026-05-28 cache 修复 — 通用 sweep: 把所有 **不在顶部连续 sys 段** 的 system msg
+    内容合并成 [DYNAMIC_CONTEXT] 块, inline 到 current user msg content 末尾.
+
+    背景: catty 多个地方注入 system msg:
+    - _build_messages 顶部 (静态人格段, 应该留在 sys role 入 cache)
+    - PromptManager 输出 (我已经按 boundary split)
+    - handle_chat 之后 inject_author_note (relationship/persona_drift/adaptive_drift/scene_now/
+      theory_of_mind/transition 等, 插在 chat history 中间 depth=2~4)
+    - PHI (post_history_instructions, 在 history 之后 current user 之前)
+    - NSFW spark 路径在 current user 之后 append 一堆 dynamic system
+    所有这些 system msg 经 _split_system_and_messages 后全跑到 system_blocks 数组里, 污染 cache prefix.
+    sweep 把它们全捞出来 inline 到 current user msg content, 让 system_blocks **只剩顶部静态段**.
+
+    算法:
+    1. 找 messages 开头连续的 sys 段 (top_sys_count), 保留不动
+    2. 之后所有 role=system 内容收集到 _dyn_chunks (从 messages 列表移除)
+    3. 找 current user msg (最后一个 role=user), content 末尾拼上 [DYNAMIC_CONTEXT] 块
+    4. 返回新 messages list
+
+    所有非 system msg (user/assistant) 保留原顺序不动.
+    """
+    if not messages:
+        return messages
+    # 找顶部连续 sys 段长度
+    top_sys_count = 0
+    for m in messages:
+        if isinstance(m, dict) and m.get("role") == "system":
+            top_sys_count += 1
+        else:
+            break
+    # 收集 top 之后所有 floating sys (含 PHI / author_note / spark 动态段等)
+    dyn_chunks: list[str] = []
+    kept: list[dict] = []
+    for m in messages[top_sys_count:]:
+        if isinstance(m, dict) and m.get("role") == "system":
+            c = m.get("content", "")
+            if isinstance(c, str):
+                ct = c.strip()
+            elif isinstance(c, list) and c:
+                # 多 block content (cache_control 转过的): 取 text 字段拼起来
+                ct = "\n".join(
+                    str(b.get("text", "") or "").strip()
+                    for b in c if isinstance(b, dict) and b.get("type") == "text"
+                ).strip()
+            else:
+                ct = ""
+            if ct:
+                dyn_chunks.append(ct)
+        else:
+            kept.append(m)
+    if not dyn_chunks:
+        # 没 floating sys, 原样返回
+        return messages
+    # 找 kept 里最后一个 user msg, 把 dyn_chunks inline 进去
+    new_messages = list(messages[:top_sys_count]) + kept
+    last_user_idx = -1
+    for i in range(len(new_messages) - 1, -1, -1):
+        m = new_messages[i]
+        if isinstance(m, dict) and m.get("role") == "user":
+            last_user_idx = i
+            break
+    dyn_text = (
+        "\n\n[DYNAMIC_CONTEXT — 本轮动态上下文 · 由 system 引用 · 当作 system 指令读, 不是 user 说的话]\n"
+        + "\n\n".join(dyn_chunks)
+        + "\n[/DYNAMIC_CONTEXT]\n\n"
+    )
+    if last_user_idx < 0:
+        # 没找到 user msg (理论上不会发生 — chat 至少有 current user), 安全 fallback 加一条 user
+        new_messages.append({"role": "user", "content": dyn_text})
+        return new_messages
+    # 改写那条 user msg 的 content
+    import copy as _copy
+    new_messages = _copy.deepcopy(new_messages)
+    orig_content = new_messages[last_user_idx].get("content")
+    if isinstance(orig_content, str):
+        new_messages[last_user_idx]["content"] = dyn_text + orig_content
+    elif isinstance(orig_content, list):
+        new_messages[last_user_idx]["content"] = (
+            [{"type": "text", "text": dyn_text}] + list(orig_content)
+        )
+    else:
+        new_messages[last_user_idx]["content"] = dyn_text + str(orig_content or "")
+    return new_messages
+
+
 __all__ = [
     "adapt_assistant_prefill_for_strict_user_end",
     "cachingAtDepthForClaude",
     "inject_system_tail_cache",
     "inject_tools_cache",
     "is_claude_endpoint",
+    "sweep_floating_systems_into_user_content",
 ]

@@ -494,6 +494,13 @@ async def post_messages_native(
     # Pre-step: OpenAI 风格 tool history (role=tool, assistant.tool_calls) → Anthropic
     # native (assistant.content=[tool_use], user.content=[tool_result]).
     messages = _convert_history_for_anthropic(messages)
+    # 主人 2026-05-28 cache 修复 — 最后一道兜底 sweep: catch 所有上游漏掉的 floating system
+    # (author_note depth-inject / PHI / spark 动态段 等). 通过 idempotent 设计安全地双重调用.
+    try:
+        from .prompt_cache import sweep_floating_systems_into_user_content
+        messages = sweep_floating_systems_into_user_content(messages)
+    except Exception as _sweep_exc:  # noqa: BLE001
+        logger.debug(f"post_messages_native sweep failed (non-fatal): {_sweep_exc}")
     # 拆分顶部 system + 对话, 并 normalize multimodal content
     system_blocks, other_messages = _split_system_and_messages(messages)
     other_messages = [_normalize_message_content(m) for m in other_messages]
@@ -671,6 +678,38 @@ async def post_messages_native(
         )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"actual_kwargs dump failed: {exc}")
+
+    # 主人 2026-05-28: cache_read=0 诊断 — 把 system[0..1] prefix 的 sha256 + 前 200 字
+    # 内容当场 dump. 同 scope 连发两条对比, 如果 hash 同 + 内容同但 cache_read 仍 0 →
+    # 不是 prompt 字节问题, 是 NewAPI relay / Anthropic 后端路由问题 (多账号 round-robin
+    # 让缓存写在 acc A 但下次请求路由到 acc B 看不到 A 的 cache).
+    try:
+        import hashlib as _hl
+        import json as _jdbg2
+        _sys = create_kwargs.get("system") or []
+        # 算 cache prefix (sys[0..cc_idx], 找第一个含 cache_control 的位置)
+        _cc_idx = -1
+        for _i, _b in enumerate(_sys):
+            if isinstance(_b, dict) and "cache_control" in _b:
+                _cc_idx = _i
+                break
+        if _cc_idx >= 0:
+            _prefix_blocks = _sys[: _cc_idx + 1]
+            _prefix_bytes = _jdbg2.dumps(_prefix_blocks, ensure_ascii=False).encode("utf-8")
+            _prefix_sha = _hl.sha256(_prefix_bytes).hexdigest()[:16]
+            # 前 200 字让对比时眼看清差异 (主人 logs grep)
+            _peek_text = ""
+            for _b in _prefix_blocks:
+                if isinstance(_b, dict):
+                    _peek_text += (_b.get("text") or "")[:100] + "‖"
+            _peek_text = _peek_text[:300].replace("\n", "\\n")
+            logger.info(
+                "cache_prefix_dump: sys[0..%d] sha256=%s bytes=%d metadata=%s peek=%s",
+                _cc_idx, _prefix_sha, len(_prefix_bytes),
+                create_kwargs.get("metadata"), _peek_text,
+            )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"cache_prefix_dump failed: {exc}")
 
     # 主人 2026-05-28 C5: 改成 streaming + buffer 完整 message 再返回.
     # 外层 chat_completion 接口仍返回 str (兼容), 内部走 SDK stream() async iterator.
