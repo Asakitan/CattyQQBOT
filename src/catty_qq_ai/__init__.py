@@ -4303,10 +4303,24 @@ async def _build_messages(
         )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"catty_rag_store.add failed: {exc}")
+    # Phase C5: 算 recent_user_texts 给 topic_recency / 其他 filter 用
+    # 倒序最近 6 条 user msg (含当前一条, [0] 是当前)
+    _recent_user_texts_for_ctx: list[str] = [incoming.text or ""]
+    try:
+        for _m in reversed(history_messages):
+            if isinstance(_m, dict) and _m.get("role") == "user":
+                _c = _m.get("content", "")
+                if isinstance(_c, str) and _c.strip():
+                    _recent_user_texts_for_ctx.append(_c)
+                    if len(_recent_user_texts_for_ctx) >= 6:
+                        break
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"recent_user_texts compute failed: {exc}")
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,
         "user_text": incoming.text or "",
+        "recent_user_texts": _recent_user_texts_for_ctx,
         "user_display": _user_real_display,
         "group_display": _group_real_display,
         "affection_level": _user_affection_level,

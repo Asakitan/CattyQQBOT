@@ -845,6 +845,64 @@ def register_catty_persona(
         content_fn=_build_scene_detector,
         order=222,
     )
+
+    # === Phase C: Hard filter 深化 5 件套 ===
+    # 抓新角度 (弦外之音 / 问题深度 / 矛盾 / 关系动态 / 话题新鲜度), 跟已有 13 层不重叠.
+    # 全部 stateless lambda + lazy, 命中才生效, 出错 silent skip.
+
+    # C2 catty_question_depth (order=219) - 问题深度等级 (L0 闲聊 / L1 浅技术 / L2 深技术 / L3 评估 / L4 哲学)
+    def _build_question_depth() -> str:
+        try:
+            from .catty_question_depth import build_question_depth_prompt
+            return build_question_depth_prompt(user_text)
+        except Exception:  # noqa: BLE001
+            return ""
+
+    mgr.register("catty_question_depth", content_fn=_build_question_depth, order=219)
+
+    # C1 catty_subtext_decoder (order=224) - 弦外之音解码 (随便/算了/挺好/没事 等含蓄表达)
+    def _build_subtext_decoder() -> str:
+        try:
+            from .catty_subtext_decoder import build_subtext_decoder_prompt
+            return build_subtext_decoder_prompt(user_text)
+        except Exception:  # noqa: BLE001
+            return ""
+
+    mgr.register("catty_subtext_decoder", content_fn=_build_subtext_decoder, order=224)
+
+    # C3 catty_contradiction_detector (order=225) - 言行矛盾 (不要又要 / 反讽假夸 / 经典傲娇)
+    def _build_contradiction() -> str:
+        try:
+            from .catty_contradiction_detector import build_contradiction_prompt
+            return build_contradiction_prompt(user_text)
+        except Exception:  # noqa: BLE001
+            return ""
+
+    mgr.register("catty_contradiction_detector", content_fn=_build_contradiction, order=225)
+
+    # C5 catty_topic_recency (order=226) - 话题新鲜度 (新话题 vs 5 轮内聊过的老话题)
+    _recent_user_texts_for_filter = ctx.get("recent_user_texts") or []
+    if _recent_user_texts_for_filter:
+        def _build_topic_recency() -> str:
+            try:
+                from .catty_topic_recency import build_topic_recency_prompt
+                return build_topic_recency_prompt(user_text, _recent_user_texts_for_filter)
+            except Exception:  # noqa: BLE001
+                return ""
+
+        mgr.register("catty_topic_recency", content_fn=_build_topic_recency, order=226)
+
+    # C4 catty_relationship_pulse (order=464) - 关系升降温 (用 user_vibe_store 内 vibe_history 算)
+    _pulse_user_vibe_store = ctx.get("user_vibe_store")
+    if _pulse_user_vibe_store is not None and user_id:
+        def _build_relationship_pulse() -> str:
+            try:
+                from .catty_relationship_pulse import build_relationship_pulse_prompt
+                return build_relationship_pulse_prompt(_pulse_user_vibe_store, user_id)
+            except Exception:  # noqa: BLE001
+                return ""
+
+        mgr.register("catty_relationship_pulse", content_fn=_build_relationship_pulse, order=464)
     if has_image:
         mgr.register(
             "catty_image_literacy",
