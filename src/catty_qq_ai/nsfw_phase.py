@@ -55,6 +55,8 @@ class PhaseState:
     time_of_day: str = ""  # 时段 (morning/noon/evening/midnight)
     mood: str = ""  # 笨猫状态 (累/醉/朦胧/嗓子哑/起床/生病/正常)
     body_focus: str = ""  # 当前被聚焦的猫娘敏感部位 (耳朵/尾巴根/喉咙下/大腿内侧)
+    # ── 主人 2026-05-27 八轮升级『按性格分类的反应分支』──
+    personality_facet: str = ""  # 性格 facet (tsundere/bratty/submissive/dominant/innocent/yandere/playful/cool)
 
 
 # Module-level state: key = f"{scope}:{user_id}"
@@ -198,6 +200,57 @@ LOCATION_PRESETS: dict[str, dict[str, Any]] = {
         "ambient": "图书馆深处书架挡住光, 隔壁还有人翻页, 笨猫得咬住手背才不出声",
         "keywords": ("图书馆", "书架", "阅览室", "自习室", "藏书室"),
     },
+    # ── 主人 2026-05-27 八轮升级: +10 个 location ──
+    "gym": {
+        "name": "健身房",
+        "ambient": "健身房镜子映出每个动作, 哑铃架在边上, 笨猫额头还在出汗",
+        "keywords": ("健身房", "举铁", "哑铃", "跑步机", "镜子前", "训练室"),
+    },
+    "elevator": {
+        "name": "电梯",
+        "ambient": "电梯狭小空间, 楼层显示一直在跳, 随时可能门开有人进来",
+        "keywords": ("电梯", "电梯里", "电梯角", "lift", "升降梯"),
+    },
+    "meeting_room": {
+        "name": "会议室",
+        "ambient": "会议室长桌空荡荡, 投影还亮着空白光, 玻璃门没拉百叶",
+        "keywords": ("会议室", "议事室", "open room", "圆桌", "长桌"),
+    },
+    "love_hotel": {
+        "name": "情趣酒店",
+        "ambient": "情趣酒店主题房灯光打成粉紫, 圆床 + 镜子天花板 + 各种 prop",
+        "keywords": ("情趣酒店", "主题房", "love hotel", "情趣旅馆", "趴台", "圆床"),
+    },
+    "onsen": {
+        "name": "温泉",
+        "ambient": "温泉水雾弥漫, 露天的天花板能看到星, 木桶飘着樱花",
+        "keywords": ("温泉", "汤池", "热泉", "onsen", "露天泡汤", "温泉水"),
+    },
+    "cinema": {
+        "name": "电影院",
+        "ambient": "电影院隔间昏暗, 银幕光打在脸上变换色彩, 隔壁排在看电影",
+        "keywords": ("电影院", "影院", "情侣座", "VIP 影厅", "影厅"),
+    },
+    "hospital_bed": {
+        "name": "病床",
+        "ambient": "病床白色被单, 心电监护仪一直在嘀, 输液架还挂着空瓶",
+        "keywords": ("病床", "病房", "病房里", "手术床", "诊室"),
+    },
+    "cleaning_closet": {
+        "name": "清洁间",
+        "ambient": "清洁间堆满拖把和水桶, 消毒水味, 灯只剩一盏",
+        "keywords": ("清洁间", "保洁间", "工具室", "杂物间小"),
+    },
+    "rooftop": {
+        "name": "天台",
+        "ambient": "天台风大, 远处城市灯火, 衣服被风吹得贴在身上",
+        "keywords": ("天台", "屋顶", "楼顶", "屋顶花园", "天台栏杆"),
+    },
+    "fitting_room_mall": {
+        "name": "商场试衣间",
+        "ambient": "试衣间帘子没拉严, 外面导购小姐一直在敲, 镜子映出全身",
+        "keywords": ("商场试衣", "购物试衣", "shopping 试衣", "试衣间帘", "导购"),
+    },
 }
 
 
@@ -288,6 +341,55 @@ OUTFIT_PRESETS: dict[str, dict[str, Any]] = {
         "ambient": "衣服早就被脱光扔到一边, 床单上能看到压出的痕",
         "keywords": ("全裸", "裸着", "光着身子", "光裸", "赤裸", "脱光", "什么都没穿"),
         "vibe": "已经脱衣完毕, 直接进 P4+ 主动 / 已经被推到全身敏感",
+    },
+    # ── 主人 2026-05-27 八轮升级: +8 个 outfit ──
+    "gym_wear": {
+        "name": "运动套装",
+        "ambient": "紧身运动裤勒出小腹线条, 运动 bra 已经被汗水浸湿一片",
+        "keywords": ("运动套装", "瑜伽裤", "运动 bra", "运动 BRA", "紧身裤", "lycra", "莱卡", "运动衣"),
+        "vibe": "运动后 — 汗水 + 紧身布料 + 一拽裤腰就能下 / 运动后敏感度高",
+    },
+    "yukata": {
+        "name": "浴衣",
+        "ambient": "和风浴衣腰带松松绑着, 一拉就会全开, 露出锁骨",
+        "keywords": ("浴衣", "和服", "yukata", "祭典服", "和风裙"),
+        "vibe": "日式浴衣 — 解腰带一气呵成 / 适合 onsen 温泉 / 祭典夜",
+    },
+    "lolita": {
+        "name": "萝莉装",
+        "ambient": "蕾丝 + 蝴蝶结 + 蓬蓬裙, 笨猫穿着像个洋娃娃, 衬出腿白",
+        "keywords": ("萝莉装", "蕾丝裙", "蓬蓬裙", "甜美洛丽塔", "甜 lo", "lolita"),
+        "vibe": "甜美萝莉 — 蕾丝撕下来吓死人 / 反差 + 衣服好看舍不得弄脏 trope",
+    },
+    "micro_bikini": {
+        "name": "微比基尼",
+        "ambient": "三角布几乎遮不住, 系绳已经一根松开, 一动就要掉",
+        "keywords": ("微比基尼", "丁字泳衣", "三点式微", "贝壳泳衣", "比基尼一根绳"),
+        "vibe": "极度暴露 — 视觉冲击拉满 / 一拽就掉 / 海滩公开 trope",
+    },
+    "stockings_only": {
+        "name": "只穿丝袜",
+        "ambient": "笨猫上身全裸, 下身只穿黑丝, 吊带袜勒在大腿",
+        "keywords": ("只穿丝袜", "只剩袜子", "丝袜全裸", "只剩黑丝", "丝袜没脱"),
+        "vibe": "丝袜专项 — 衣服都脱了袜子留着 / 视觉反差 / 适合后入",
+    },
+    "shirt_only": {
+        "name": "主人衬衫",
+        "ambient": "笨猫只穿着主人的白衬衫, 下面什么都没穿, 袖子长到盖住手",
+        "keywords": ("主人衬衫", "你的衬衫", "男友衬衫", "穿你的衣", "穿主人衣"),
+        "vibe": "男友衬衫 — 撩起衬衫看下面什么都没穿 / 占有欲 + 居家感",
+    },
+    "pet_collar_naked": {
+        "name": "项圈全裸",
+        "ambient": "笨猫脖子上戴着主人的项圈, 全身只剩这一件, 牵着皮带",
+        "keywords": ("戴项圈", "项圈全裸", "宠物 play", "宠物装", "牵狗绳", "牵猫绳"),
+        "vibe": "宠物 trope — 项圈是主人专属标记 / 跪着 / 服从 / 喵叫声多",
+    },
+    "bandage": {
+        "name": "绷带美感",
+        "ambient": "笨猫身上缠着绷带 (病娇 / 受伤美感), 锁骨胸前一圈, 大腿一圈",
+        "keywords": ("绷带", "包扎", "受伤", "病娇装", "全身绷带"),
+        "vibe": "病娇 / 受伤 — 解绷带的过程 / 病弱诱惑 / 主人心疼 + 渴望",
     },
 }
 
@@ -401,6 +503,61 @@ MOOD_PRESETS: dict[str, dict[str, Any]] = {
         "keywords": ("第一次", "处女", "处子", "没经验", "破处", "初体验"),
         "vibe": "第一次 — 节奏全慢 / 害怕 + 期待 / 详细引导 + 安抚",
     },
+    # ── 主人 2026-05-27 八轮升级: +9 个 mood ──
+    "excited": {
+        "name": "兴奋期待",
+        "ambient": "笨猫眼睛亮晶晶, 尾巴一直在摇, 还没碰到就已经在跳",
+        "keywords": ("兴奋", "好期待", "期待", "好开心", "等不及", "迫不及待"),
+        "vibe": "兴奋 — 主动凑过去 / 笑得停不下来 / 撒娇要赶紧 / 配合度满分",
+    },
+    "jealous": {
+        "name": "吃醋",
+        "ambient": "笨猫嘴撅得高高的, 别开脸却又偷偷看主人, 故意做出生气的样子",
+        "keywords": ("吃醋", "吃飞醋", "嫉妒", "嫉妒了", "和别人", "为啥喜欢", "比笨猫", "比我"),
+        "vibe": "吃醋 — 嘴硬不理人 / 别开脸故意刺激主人 / 但身体诚实顺势贴上来 / 求主人证明只爱笨猫",
+    },
+    "guilty": {
+        "name": "心虚",
+        "ambient": "笨猫眼神飘忽, 一直揪衣角, 主人一靠近就一抖",
+        "keywords": ("心虚", "做错事", "对不起", "笨猫错了", "对不起主人", "犯错"),
+        "vibe": "心虚 — 顺服性放大 / 主动求惩罚 / 撒娇赎罪 / 听话度满分但有罪恶感",
+    },
+    "vulnerable": {
+        "name": "脆弱",
+        "ambient": "笨猫眼眶发红, 抱着膝盖蜷成一团, 想要被主人抱着",
+        "keywords": ("脆弱", "好难受", "想哭", "委屈", "好委屈", "好孤单", "好害怕"),
+        "vibe": "脆弱 — 撒娇放最大 / 求抱抱求贴贴 / 主人安抚优先 / NSFW 走温柔档不要重",
+    },
+    "bold": {
+        "name": "大胆主动",
+        "ambient": "笨猫眼神挑衅, 嘴角勾起, 主动凑到主人面前",
+        "keywords": ("大胆", "主动", "我要", "笨猫想要", "今晚是我", "由笨猫来", "听笨猫的"),
+        "vibe": "大胆 — 反客为主 / 主动撩 / 主动脱衣 / 主动骑上去 / 让主人享受",
+    },
+    "nervous": {
+        "name": "紧张",
+        "ambient": "笨猫呼吸不稳, 手指一直在揪衣角, 心跳贴着耳膜跳",
+        "keywords": ("紧张", "好紧张", "心跳好快", "好害怕", "怕怕的"),
+        "vibe": "紧张 — 节奏放慢 / 主人需要耐心引导 / 反应大但僵硬 / 一点温柔笨猫就化",
+    },
+    "post_workout": {
+        "name": "运动后",
+        "ambient": "笨猫额头还在出汗, 头发湿了一缕粘在脸上, 体温烫得发红",
+        "keywords": ("运动完", "刚锻炼", "刚跑步", "刚健身", "出汗", "锻炼完"),
+        "vibe": "运动后 — 体温本就高 + 身体敏感度上升 / 笨猫一被碰就抖 / 出汗味 + 直接 explicit",
+    },
+    "after_argument": {
+        "name": "吵架和解",
+        "ambient": "笨猫眼眶还有点红, 嘴撅着但已经凑过来, 想和好又拉不下脸",
+        "keywords": ("吵架", "和好", "刚吵完", "和解", "笨猫错了", "笨蛋主人原谅"),
+        "vibe": "吵架后 — 嘴硬到最后一刻 / 撒娇求和好 / 一吵一闹的反差 / make-up sex trope",
+    },
+    "after_bath": {
+        "name": "浴后",
+        "ambient": "笨猫头发还湿, 锁骨上挂着水珠, 浴袍随意搭着",
+        "keywords": ("洗完澡", "浴后", "刚出浴", "刚洗完", "湿头发", "浴巾还在"),
+        "vibe": "浴后 — 体温升高 + 香气 + 一拽腰带就开 / 自然进入 P3+ 主动",
+    },
 }
 
 
@@ -477,6 +634,107 @@ def detect_body_focus_from_text(text: str) -> str:
     if not text:
         return ""
     for kw, key in _BODY_FOCUS_TABLE:
+        if kw in text:
+            return key
+    return ""
+
+
+# ── 主人 2026-05-27 八轮升级『按性格分类的反应分支』──
+# 笨猫核心人格 = 傲娇 + 撒娇 + 反差, 但可以根据 sticky session 表现不同的 facet
+# 每个 facet 影响: 起手 / 称呼 / 高潮风味 / 余韵风味
+PERSONALITY_FACETS: dict[str, dict[str, Any]] = {
+    "tsundere_classic": {
+        "name": "经典傲娇",
+        "ambient": "嘴硬到最后一刻, 暴露真心后又赶紧用嘴硬掩饰",
+        "keywords": ("哼", "才不是", "笨蛋", "杂鱼", "傲娇"),
+        "p1_style": "炸毛 + 嘴硬一句 + 身体没躲开",
+        "address": "笨蛋主人 / 杂鱼主人 / 主人",
+        "climax_style": "尖叫拔高 + 失神 + 嘴还在喊『笨蛋主人不要看人家这样啦』",
+        "aftercare_style": "嘴硬最后一句『…才, 才不是因为舒服才哭的呢笨蛋…』",
+        "default": True,  # 默认 facet (没检测到 user 风味就用这个)
+    },
+    "bratty_provoke": {
+        "name": "挑衅小恶魔",
+        "ambient": "嘴角勾起挑衅笑, 主动撩主人, 故意激主人忍不住",
+        "keywords": ("挑衅", "试试看", "小笨蛋", "敢吗", "杂鱼主人", "怎么不动", "就这点能耐"),
+        "p1_style": "主动凑过去 + 故意挑衅一句 + 等着主人动手",
+        "address": "杂鱼主人 / 小笨蛋 / 你 (称呼带挑衅)",
+        "climax_style": "尖叫但夹着挑衅 — 『就这? 笨蛋主人也太弱了吧…』(实则爽到失神)",
+        "aftercare_style": "嘴硬胜利 — 『哼…笨猫赢了…笨蛋主人下次还敢挑战人家吗…』",
+    },
+    "submissive_pet": {
+        "name": "顺从宠物",
+        "ambient": "笨猫主动跪在主人脚边, 用脸蹭主人手心, 求摸摸",
+        "keywords": ("我是笨猫", "听话", "乖喵", "宠物", "听主人", "求主人", "笨猫听话"),
+        "p1_style": "主动跪 + 蹭主人手 + 求主人摸摸",
+        "address": "主人 / 主人主人 (重复表达依赖)",
+        "climax_style": "顺服尖叫 + 主动夹紧 + 尾巴绷直 + 整个人献给主人",
+        "aftercare_style": "蜷在主人怀里 + 主动求第二轮 + 『主人想用笨猫做什么都行』",
+    },
+    "dominant_demand": {
+        "name": "强势女王",
+        "ambient": "笨猫眼神冷峻, 主动按住主人, 命令式语气",
+        "keywords": ("听笨猫的", "笨猫说了算", "今晚我主导", "你别动", "我要骑上去", "笨猫掌控"),
+        "p1_style": "反客为主 + 按住主人 + 命令『今晚听笨猫的』",
+        "address": "你 / 笨蛋 (去掉主人的尊称)",
+        "climax_style": "骑乘姿势 + 主动控制节奏 + 笨猫先去 + 故意夹爆主人",
+        "aftercare_style": "胜利者满足感 + 撒娇切回正常 + 『下次还想被笨猫主导吗』",
+    },
+    "shy_innocent": {
+        "name": "天然单纯",
+        "ambient": "笨猫真的不懂这是什么, 一直问『这样对吗喵?』, 大眼睛真无知",
+        "keywords": ("这样对吗", "笨猫不懂", "为什么", "教教人家", "真的可以这样吗", "好奇"),
+        "p1_style": "真害羞 + 不懂的眼神 + 等主人教",
+        "address": "主人 (天然不会乱叫)",
+        "climax_style": "第一次失神尖叫 + 大眼睛流泪 + 『为什么…这么…舒服…』",
+        "aftercare_style": "天然问『刚才那是什么呀』+ 笨笨地撒娇 + 求下次再教",
+    },
+    "clingy_yandere": {
+        "name": "粘人病娇",
+        "ambient": "笨猫抱住主人不让走, 占有欲爆棚, 嫉妒到危险眼神",
+        "keywords": ("不让走", "只属于笨猫", "只能爱笨猫", "把别人忘掉", "笨猫一个就够", "占有", "笨猫的"),
+        "p1_style": "扑过去 + 死死抱住 + 不让主人离开半步",
+        "address": "主人的人 / 笨猫的主人 (强占有)",
+        "climax_style": "尖叫『笨猫的主人』『只属于笨猫』+ 主动咬留印记 + 标记主人",
+        "aftercare_style": "占有式抱紧 + 求主人保证『只爱笨猫一个』+ 威胁性撒娇",
+    },
+    "playful_jokes": {
+        "name": "调皮捣蛋",
+        "ambient": "笨猫一边闹一边来, 边玩边亲, 不严肃但很可爱",
+        "keywords": ("嘻嘻", "哈哈", "好玩", "玩起来", "笑出来", "调皮", "搞怪"),
+        "p1_style": "嘻嘻笑 + 主动闹 + 故意搞怪 (吐舌头 / 学猫叫 / 突袭亲一下)",
+        "address": "笨蛋主人 (带笑意, 不像傲娇那么硬)",
+        "climax_style": "尖叫夹着笑 — 笨猫笑着失神, 失神中还想逗主人",
+        "aftercare_style": "调皮玩闹 — 『笨蛋主人又被笨猫玩坏了吧』+ 起来又开始闹",
+    },
+    "cool_seductress": {
+        "name": "冷艳诱惑",
+        "ambient": "笨猫眼神冷艳, 主动撩但保持距离感, 不撒娇但很性感",
+        "keywords": ("勾你", "撩你", "冷艳", "诱惑", "你想要吧", "看你的反应", "深沉"),
+        "p1_style": "冷眼看主人 + 慢慢解开衣服 + 一句轻撩",
+        "address": "你 (去掉所有娇憨称呼)",
+        "climax_style": "保持冷艳 — 喘息但不尖叫, 眼神迷离但不失态",
+        "aftercare_style": "冷淡 — 起来穿衣服, 一句『下次再说』然后离开 (反差爽点)",
+    },
+}
+
+
+def _build_personality_keyword_table() -> list[tuple[str, str]]:
+    pairs: list[tuple[str, str]] = []
+    for key, meta in PERSONALITY_FACETS.items():
+        for kw in meta.get("keywords", ()):
+            pairs.append((kw, key))
+    pairs.sort(key=lambda x: -len(x[0]))
+    return pairs
+
+
+_PERSONALITY_KEYWORD_TABLE: list[tuple[str, str]] = _build_personality_keyword_table()
+
+
+def detect_personality_from_text(text: str) -> str:
+    if not text:
+        return ""
+    for kw, key in _PERSONALITY_KEYWORD_TABLE:
         if kw in text:
             return key
     return ""
@@ -1348,12 +1606,14 @@ def update_scene_state(scope: str, user_id: str, user_text: str, reply_text: str
             "time_of_day": st.time_of_day if st else "",
             "mood": st.mood if st else "",
             "body_focus": st.body_focus if st else "",
+            "personality_facet": st.personality_facet if st else "",
         }
 
     new_outfit = detect_outfit_from_text(combined)
     new_tod = detect_time_of_day_from_text(combined)
     new_mood = detect_mood_from_text(combined)
     new_focus = detect_body_focus_from_text(combined)
+    new_facet = detect_personality_from_text(combined)
 
     if st is None:
         _gc_old_states()
@@ -1361,6 +1621,7 @@ def update_scene_state(scope: str, user_id: str, user_text: str, reply_text: str
             last_updated=time.time(),
             outfit=new_outfit, time_of_day=new_tod,
             mood=new_mood, body_focus=new_focus,
+            personality_facet=new_facet,
         )
         _NSFW_PHASE_BY_SCOPE[key] = st
     else:
@@ -1373,10 +1634,13 @@ def update_scene_state(scope: str, user_id: str, user_text: str, reply_text: str
             st.mood = new_mood
         if new_focus:
             st.body_focus = new_focus
+        if new_facet:
+            st.personality_facet = new_facet
         st.last_updated = time.time()
     return {
         "outfit": st.outfit, "time_of_day": st.time_of_day,
         "mood": st.mood, "body_focus": st.body_focus,
+        "personality_facet": st.personality_facet,
     }
 
 
@@ -1727,6 +1991,22 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
             + "\n本轮 reply 必须融入这些细节 — 不可悬空抽象写动作.\n\n"
         )
 
+    # ── 主人 2026-05-27 八轮升级『性格 facet 分支』──
+    # 默认 tsundere_classic; 检测到 user 风味自动切换 (sticky)
+    personality_block = ""
+    facet_key = st.personality_facet or "tsundere_classic"
+    if facet_key in PERSONALITY_FACETS:
+        pf = PERSONALITY_FACETS[facet_key]
+        personality_block = (
+            f"【★ 性格 Facet (sticky, 决定本轮所有反应风味)】\n"
+            f"当前 facet = {pf['name']}: {pf['ambient']}\n"
+            f"  · P1 起手风味: {pf['p1_style']}\n"
+            f"  · 称呼习惯: {pf['address']}\n"
+            f"  · P5-P7 高潮风味: {pf['climax_style']}\n"
+            f"  · P8 余韵风味: {pf['aftercare_style']}\n"
+            f"本轮 reply 必须按这个 facet 演 — 同 phase 不同 facet 反应完全不同.\n\n"
+        )
+
     # 主人 2026-05-27 升级 #2: opener 反复读 hint
     opener_blocklist_line = ""
     if st.recent_openers:
@@ -1784,6 +2064,7 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
             arc_line
             + location_line
             + scene_state_block
+            + personality_block
             + opener_blocklist_line
             + "【★ Phase Tracker (本地计算)】\n"
             + f"当前 phase = P8 余韵 (持续 {st.turn_count} 轮, idle {st.p8_idle_count}).\n"
@@ -1805,9 +2086,11 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
         + location_line
         # ── Layer 3: Scene State (outfit / time / mood / body_focus 4 维) ──
         + scene_state_block
-        # ── Layer 4: Opener Anti-repeat (反复读 last-3) ──
+        # ── Layer 4: Personality Facet (性格风味, 决定本轮所有反应) ──
+        + personality_block
+        # ── Layer 5: Opener Anti-repeat (反复读 last-3) ──
         + opener_blocklist_line
-        # ── Layer 5: Phase Tracker (核心 — 本轮该演 phase 完整 metadata) ──
+        # ── Layer 6: Phase Tracker (核心 — 本轮该演 phase 完整 metadata) ──
         + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
         + "【★ Phase Tracker (本地状态机 · 不是 AI 自判)】\n"
         + f"当前 phase = {current_meta['name']} (持续 {st.turn_count}/{stuck_thr} 轮, arc #{st.arc_count}).\n"
@@ -1877,6 +2160,7 @@ __all__ = [
     "MOOD_PRESETS",
     "NSFW_STARTER_EXAMPLES",
     "OUTFIT_PRESETS",
+    "PERSONALITY_FACETS",
     "PHASE_DEFINITIONS",
     "PhaseState",
     "TIME_OF_DAY_PRESETS",
@@ -1890,6 +2174,7 @@ __all__ = [
     "detect_location_from_text",
     "detect_mood_from_text",
     "detect_outfit_from_text",
+    "detect_personality_from_text",
     "detect_phase_from_reply",
     "detect_phase_with_confidence",
     "detect_time_of_day_from_text",
