@@ -636,10 +636,18 @@ async def download_binary(config: Config, url: str, *, timeout: float | None = N
 
 
 def _fallback_is_configured(config: Config) -> bool:
-    # 代码层面硬关闭本地 AI fallback：忽略 ai_fallback.* 配置，永远不路由到本地模型。
-    # 云端调用失败时直接把云端的异常抛给上层，不再尝试本地兜底。
-    del config
-    return False
+    # 主人 2026-05-28: 恢复真实判断 — 主人意图『sonnet 主, deepseek 备, 所有部分自动 fallback』.
+    # 之前 (5 月初) 硬关闭是因为本地 ollama qwen 推理慢; 现在 ai_fallback 指向 deepseek API,
+    # 性能跟主 cloud 接近, 让所有路径都能在 sonnet 失败时自动降到 deepseek.
+    if not bool(getattr(config, "catty_ai_fallback_enabled", False)):
+        return False
+    if not str(getattr(config, "catty_ai_fallback_base_url", "") or "").strip():
+        return False
+    if not str(getattr(config, "catty_ai_fallback_api_key", "") or "").strip():
+        return False
+    if not str(getattr(config, "catty_ai_fallback_model", "") or "").strip():
+        return False
+    return True
 
 
 def _fallback_should_strip_system(config: Config) -> bool:
@@ -947,6 +955,16 @@ async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
         return await _post_fallback_chat(config, messages)
 
     # 正常走云。
+    # Phase A: 主回复路径补 enable_cache (之前 bug: 只 with_tools / codex_instant 路径有 cache).
+    # 动态 cache_depth: 热 session (history>=12 条 user/assistant) → 4, 冷 → 2.
+    # depth=4 多覆盖 history (热 session prefix 稳定到更深), depth=2 避免冷 session 频繁 invalidate.
+    _cache_enable = bool(getattr(config, "catty_prompt_cache_enabled", True))
+    _non_system_count = sum(
+        1 for m in messages
+        if isinstance(m, dict) and m.get("role") in ("user", "assistant")
+    )
+    _cache_depth_base = int(getattr(config, "catty_prompt_cache_depth", 2))
+    _cache_depth_dynamic = 4 if _non_system_count >= 12 else _cache_depth_base
     try:
         result = await _post_chat_completion(
             base_url=config.catty_openai_base_url,
@@ -959,6 +977,8 @@ async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
             max_tokens=config.catty_max_tokens,
             extra_headers=config.catty_openai_extra_headers,
             extra_body=config.catty_openai_extra_body,
+            enable_cache=_cache_enable,
+            cache_depth=_cache_depth_dynamic,
         )
         # 云端成功:清除任何残留 unhealthy 标记
         if _cloud_is_unhealthy():
@@ -1061,6 +1081,48 @@ async def chat_completion_instant(config: Config, messages: list[ChatMessage], *
     return await _filter_completion(config, messages, fallback_max_tokens=fallback_max_tokens)
 
 
+async def _post_with_fallback(
+    config: Config,
+    *,
+    base_url: str,
+    api_key: str,
+    model: str,
+    messages: list[ChatMessage],
+    timeout: float,
+    temperature: float | None,
+    max_tokens: int | None,
+    extra_headers: dict[str, str],
+    extra_body: dict[str, Any],
+    enable_cache: bool = False,
+    cache_depth: int = 2,
+    label: str = "",
+) -> str:
+    """主 endpoint 调用失败 → 自动 fallback 到 ai_fallback config (sonnet → deepseek).
+
+    主人 2026-05-28: 覆盖 spark / filter / mood / anger / summarize 等所有路径.
+    vision 除外 (主人原话 'vision 不用 fallback', 因 deepseek-v4-flash 不支持图).
+    主回复 chat_completion 已有 fallback 链, 本函数给小模型短路径用.
+    """
+    try:
+        return await _post_chat_completion(
+            base_url=base_url, api_key=api_key, model=model,
+            messages=messages, timeout=timeout, proxy=config.catty_http_proxy,
+            temperature=temperature, max_tokens=max_tokens,
+            extra_headers=extra_headers, extra_body=extra_body,
+            enable_cache=enable_cache, cache_depth=cache_depth,
+        )
+    except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
+        if not _fallback_is_configured(config):
+            raise
+        _logger.warning(
+            "%s cloud call failed (%s); falling back to %s",
+            label or "primary",
+            exc.__class__.__name__,
+            config.catty_ai_fallback_model,
+        )
+        return await _post_fallback_chat(config, messages)
+
+
 async def chat_completion_codex_instant(
     config: Config,
     messages: list[ChatMessage],
@@ -1093,19 +1155,20 @@ async def chat_completion_codex_instant(
         or config.catty_audit_ai_api_key
         or config.catty_openai_api_key
     )
-    return await _post_chat_completion(
+    return await _post_with_fallback(
+        config,
         base_url=base_url,
         api_key=api_key,
         model=nsfw_model,
         messages=messages,
         timeout=config.catty_request_timeout,
-        proxy=config.catty_http_proxy,
         temperature=config.catty_temperature,
         max_tokens=max_tokens,
         extra_headers=config.catty_filter_extra_headers or config.catty_openai_extra_headers,
         extra_body=config.catty_filter_extra_body or config.catty_openai_extra_body,
         enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
         cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
+        label=f"codex_instant({nsfw_model})",
     )
 
 
@@ -1124,7 +1187,8 @@ async def _filter_completion(config: Config, messages: list[ChatMessage], *, fal
     model = config.catty_filter_model if use_filter_route else (config.catty_audit_ai_model or config.catty_openai_model)
     temperature = config.catty_filter_temperature if use_filter_route else config.catty_audit_ai_temperature
     max_tokens = config.catty_filter_max_tokens if use_filter_route else config.catty_audit_ai_max_tokens
-    return await _post_chat_completion(
+    return await _post_with_fallback(
+        config,
         base_url=base_url,
         api_key=api_key,
         model=model,
@@ -1134,7 +1198,6 @@ async def _filter_completion(config: Config, messages: list[ChatMessage], *, fal
             or config.catty_audit_ai_request_timeout
             or config.catty_request_timeout
         ),
-        proxy=config.catty_http_proxy,
         temperature=temperature,
         max_tokens=max_tokens or fallback_max_tokens,
         extra_headers=(
@@ -1147,6 +1210,7 @@ async def _filter_completion(config: Config, messages: list[ChatMessage], *, fal
             or config.catty_audit_ai_extra_body
             or config.catty_openai_extra_body
         ),
+        label=f"filter({model})",
     )
 
 
