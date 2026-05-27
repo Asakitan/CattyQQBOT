@@ -777,16 +777,23 @@ _ENGINE_REGISTRY = {
     "yandex": _search_yandex,
 }
 
+# 主人定铁律: saucenao 和 yandex 是**高等级优选**,所有 kind 默认都把这两个放在最前。
+# 其它引擎(ascii2d / iqdb / tracemoe) 是辅助 fallback,补主力引擎搜不到的边角场景。
 _KIND_DEFAULT_ENGINES = {
-    "anime": ["tracemoe", "saucenao"],
-    # 真人照片 / 自拍 / X(Twitter) / 新闻配图:Yandex 比 SauceNAO 强很多
+    # 番剧场景识别:trace.moe 是专用引擎,放第 1;saucenao 的 anime indexer 补充;yandex 补 cos/真人
+    "anime": ["tracemoe", "saucenao", "yandex"],
+    # 真人 / 自拍 / X(Twitter):yandex 第 1(对真人来源最强),saucenao Twitter index 补充
     "photo": ["yandex", "saucenao"],
-    # 画师 / 角色 / illustration:SauceNAO + ascii2d 二次元强,Yandex 补真人/cosplay
-    "artwork": ["saucenao", "ascii2d", "iqdb", "yandex"],
-    # auto:同时撒 saucenao(二次元)和 yandex(真人),覆盖最广
+    # 画师 / 角色 / illustration:saucenao 第 1(二次元 illust 之王),yandex 第 2 兜真人 cos
+    "artwork": ["saucenao", "yandex", "ascii2d", "iqdb"],
+    # auto: 主力 saucenao + yandex 同撒,ascii2d / tracemoe 补充
     "auto": ["saucenao", "yandex", "ascii2d", "tracemoe"],
     "general": ["saucenao", "yandex", "ascii2d", "tracemoe"],
 }
+
+# 高等级优选引擎:这两个的结果在排序时获得额外权重,排在非优选引擎结果之前
+# (即使非优选引擎的 similarity 数值更高,也排在 saucenao/yandex 之后)。
+_PRIORITY_SOURCES = ("saucenao", "yandex")
 
 
 def _normalize_engine_list(raw: Any) -> list[str]:
@@ -886,7 +893,14 @@ async def reverse_image_search(
                 pooled[key] = r
 
     results = list(pooled.values())
-    results.sort(key=lambda r: (r.similarity, r.source == "saucenao"), reverse=True)
+    # 排序 key: (优选引擎权重, similarity)
+    # - 优选引擎(saucenao / yandex) 的所有结果都排在非优选之前
+    # - 同优选/非优选组内,按 similarity 倒序
+    # 这样保证主力引擎的命中永远先被 AI 看到,即使 ascii2d/iqdb 的相似度数值更高也排后面。
+    def _sort_key(r: ImageSearchResult) -> tuple[int, float]:
+        priority = 1 if r.source in _PRIORITY_SOURCES else 0
+        return (priority, r.similarity)
+    results.sort(key=_sort_key, reverse=True)
 
     if not results and not errors:
         errors["_"] = f"所有引擎都没拿到匹配(engines={selected})"

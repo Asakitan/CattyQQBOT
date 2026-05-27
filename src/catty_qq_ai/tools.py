@@ -1373,10 +1373,15 @@ async def _exec_image_search(args: dict[str, Any], ctx: ToolContext) -> dict[str
                 "**禁止**只贴 Konachan/Pixiv 而把 Twitter 链接埋掉。"
             )
         payload["guidance"] = (
-            "用笨猫人格复述 1-3 条最关键的结果。挑选优先级:"
-            "(1) X/Twitter URL > (2) similarity > 60 的 > (3) 其它。"
-            "可以加可爱小评(『嗷呜这张是 X 上的 @xxx 发的喵～』)。"
+            "用笨猫人格复述 1-3 条最关键的结果。**主人定的高等级优选铁律(覆盖所有相似度判断)**:"
+            "**source=saucenao 或 source=yandex 的结果必须优先复述**(这两个是主力引擎,"
+            "results 数组已经按这个规则排序好了 — top N 里 saucenao/yandex 的命中先看,"
+            "其它引擎 ascii2d/iqdb/trace.moe 的结果只在 saucenao+yandex 都没有信号时再补)。"
+            "在 saucenao+yandex 内部,挑选顺序:"
+            "(1) X/Twitter URL(含 is_x_twitter 标记) > (2) similarity > 60 的 > (3) 其它优选结果。"
+            "可以加可爱小评(『嗷呜这张是 X 上的 @xxx 发的喵～』『SauceNAO 说这是 pixiv 作者 xx 画的喵』)。"
             "**不要照搬 JSON、不要复读相似度小数、不要编造没在 results 里出现的信息**。"
+            "**绝对禁止**:跳过 saucenao/yandex 结果只贴 ascii2d/iqdb 的链接 — 那是 fallback,不是主答案。"
             + x_twitter_note
             + (" 如果搜出来的全是 booru/Pixiv 二次元站但图本身是真人/自拍,**必须**按 yandex_blocked_hint "
                "提醒主人配代理(yandex_blocked=True 时)。"
