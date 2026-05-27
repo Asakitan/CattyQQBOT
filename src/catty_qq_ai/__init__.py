@@ -1488,6 +1488,128 @@ _NSFW_ESCALATE_TEMPLATES_SQUIRTING = _build_retreat_pool(
     _ESC_SQUIRTING_BRIDGE, _ESC_SQUIRTING_CONTINUE,
 )
 
+# ── 主人 2026-05-27 十三轮升级『更多 NSFW 内容』+ 3 个新 trope ──
+
+# ── 15. LACTATION (哺乳 / 喷奶 / 母乳系) ──
+_ESC_LACTATION_OPENER: tuple[str, ...] = (
+    "（笨猫胸前已经胀得发烫, 乳头被主人含住的瞬间, 一股温热涌出）",
+    "（乳尖被吸的同时, 笨猫小腹一阵抽, 蜜液和乳汁同时渗出）",
+    "（被压住乳房挤压, 乳汁喷射出来一道弧线, 落在锁骨）",
+    "（笨猫胸口胀痛被主人的舌头舔过, 一阵酥麻直冲到子宫）",
+    "（坐在主人腿上, 乳房贴上主人手心, 让主人挤奶喵）",
+    "（笨猫主动把乳头送进主人嘴里, 一边喂奶一边夹紧）",
+    "（哺乳期的乳头敏感度爆表, 一碰就尖叫 + 喷奶）",
+)
+_ESC_LACTATION_EMOTION: tuple[str, ...] = (
+    "嗯…主人喝笨猫的奶喵…",
+    "唔…胸好胀…让主人帮笨猫挤出来…",
+    "啊…乳头被吸的同时下面也…",
+    "嗯…笨猫的奶是主人专属的…",
+    "唔…主人多喝点…笨猫还有很多…",
+    "啊…喷出来了…主人脸上都是…",
+    "嗯…一边喂奶一边操笨猫喵…",
+)
+_ESC_LACTATION_BRIDGE: tuple[str, ...] = (
+    "（乳汁随主人吸吮一阵阵喷涌）",
+    "（蜜液+乳汁同时涌出, 笨猫整个身体湿透）",
+    "（哺乳本能让蜜穴一阵阵收缩）",
+    "（主动把胸送进主人嘴里, 让主人吸奶）",
+    "（乳头被吸的同时主动夹紧主人）",
+    "（笨猫坐在主人腿上一边喂奶一边骑乘）",
+)
+_ESC_LACTATION_CONTINUE: tuple[str, ...] = (
+    "笨猫的奶都是主人的…喝个够…",
+    "胸胀就让主人帮笨猫吸出来…",
+    "一边喝奶一边干笨猫…",
+    "主人喜欢笨猫的奶就好…",
+    "笨猫还能喷更多…",
+    "母乳系笨猫的胸只给主人喝…",
+)
+_NSFW_ESCALATE_TEMPLATES_LACTATION = _build_retreat_pool(
+    _ESC_LACTATION_OPENER, _ESC_LACTATION_EMOTION,
+    _ESC_LACTATION_BRIDGE, _ESC_LACTATION_CONTINUE,
+)
+
+# ── 16. MIRROR_PLAY (镜子前做爱 / 看着自己被操) ──
+_ESC_MIRROR_OPENER: tuple[str, ...] = (
+    "（镜子里映出笨猫被主人压住的画面, 眼神迷离到不敢看）",
+    "（被主人扳着脸看镜子, 笨猫看到自己 ahegao 的样子崩溃地咬唇）",
+    "（镜面光打在锁骨, 笨猫被自己淫荡的表情逼到失神）",
+    "（被按在落地镜前, 后入姿势能看到自己每一下被顶到的反应）",
+    "（笨猫看着镜子里的自己, 蜜穴吸得更紧）",
+    "（主人扯着头发让笨猫看镜子, 看自己怎么被弄成这样）",
+    "（镜子里笨猫脸通红到锁骨, 自己都觉得难以置信）",
+)
+_ESC_MIRROR_EMOTION: tuple[str, ...] = (
+    "啊…笨蛋…别让笨猫看镜子…",
+    "嗯…笨猫在镜子里的样子…好淫荡…",
+    "唔…笨猫的脸…红得不像自己…",
+    "啊…镜子里的笨猫又湿又烫…",
+    "嗯…笨猫看到自己被主人压住…",
+    "唔…那个表情…不要看…",
+    "啊…镜子里笨猫的奶颤动好奇怪…",
+)
+_ESC_MIRROR_BRIDGE: tuple[str, ...] = (
+    "（被迫看镜子里失神的自己, 蜜穴更紧）",
+    "（镜面映出每一下被顶到的反应, 笨猫崩溃）",
+    "（看着镜子里自己 ahegao 的脸, 更兴奋）",
+    "（镜子里全是笨猫被压住的画面）",
+    "（被主人扳着脸看镜子, 不能闭眼）",
+    "（镜子里看到主人手在哪里碰笨猫）",
+)
+_ESC_MIRROR_CONTINUE: tuple[str, ...] = (
+    "镜子里看自己…太羞耻了…可是好爽…",
+    "笨猫在镜子里…完全是另一个人…",
+    "主人让笨猫看自己被弄成什么样…",
+    "笨猫不敢看镜子…但是停不下来…",
+    "镜子里的笨猫更淫荡更主动…",
+    "看着自己被操…笨猫更湿了…",
+)
+_NSFW_ESCALATE_TEMPLATES_MIRROR = _build_retreat_pool(
+    _ESC_MIRROR_OPENER, _ESC_MIRROR_EMOTION,
+    _ESC_MIRROR_BRIDGE, _ESC_MIRROR_CONTINUE,
+)
+
+# ── 17. SIZE_DIFF (身高差 / 体型差 / 笨猫小被巨大压住) ──
+_ESC_SIZE_DIFF_OPENER: tuple[str, ...] = (
+    "（主人体型比笨猫大一圈, 笨猫被一只手就按住了）",
+    "（笨猫的小手被主人大手完全包住, 想挣扎根本动不了）",
+    "（被主人 155cm 笨猫被巨大主人完全笼罩在身下）",
+    "（笨猫坐在主人腿上像个小娃娃, 脚都够不到地）",
+    "（主人的手掌摊开能盖住笨猫整个屁股）",
+    "（笨猫被主人单手抱起来钉在墙上操, 脚悬空乱踢）",
+    "（笨猫的小嘴含不下主人的全部, 嘴角被撑开）",
+)
+_ESC_SIZE_DIFF_EMOTION: tuple[str, ...] = (
+    "啊…主人好大…笨猫吃不下…",
+    "嗯…主人手好大…一只手就把笨猫摁住了…",
+    "唔…笨猫小小一只…根本反抗不了…",
+    "啊…主人压在身上…笨猫快被压扁了…",
+    "嗯…笨猫坐主人腿上像个小娃娃…",
+    "唔…主人的肉棒…笨猫的小穴撑到极限…",
+    "啊…身高差…让笨猫更兴奋…",
+)
+_ESC_SIZE_DIFF_BRIDGE: tuple[str, ...] = (
+    "（被巨大主人完全笼罩, 笨猫无处躲）",
+    "（笨猫小手在主人胸前比划像在抗议）",
+    "（被主人单手按住, 整个人挪不动半分）",
+    "（笨猫蜜穴被撑到极限, 容纳主人完整尺寸）",
+    "（脚悬空乱踢被主人钉在墙上）",
+    "（小嘴含不下, 一半还在外面）",
+)
+_ESC_SIZE_DIFF_CONTINUE: tuple[str, ...] = (
+    "笨猫被压扁了喵…可是好喜欢…",
+    "主人这么大…笨猫真的吃不下…",
+    "身高差让笨猫感觉更小更顺服…",
+    "笨猫小小一只…让主人怎么玩都行…",
+    "主人单手就能控制笨猫…",
+    "笨猫的小蜜穴撑到极限也要吞下主人…",
+)
+_NSFW_ESCALATE_TEMPLATES_SIZE_DIFF = _build_retreat_pool(
+    _ESC_SIZE_DIFF_OPENER, _ESC_SIZE_DIFF_EMOTION,
+    _ESC_SIZE_DIFF_BRIDGE, _ESC_SIZE_DIFF_CONTINUE,
+)
+
 # ── 14. MIND_BREAK (心碎 / 完全失神 / 思维空白 / 只剩本能) ──
 _ESC_MINDBREAK_OPENER: tuple[str, ...] = (
     "（笨猫眼神已经完全涣散, 嘴角口水流, 脑袋空空）",
@@ -1528,8 +1650,13 @@ _NSFW_ESCALATE_TEMPLATES_MIND_BREAK = _build_retreat_pool(
     _ESC_MINDBREAK_BRIDGE, _ESC_MINDBREAK_CONTINUE,
 )
 
-# Trope keyword → escalate pool 反向 lookup (主人 2026-05-27 七轮升级: 14 个 trope)
+# Trope keyword → escalate pool 反向 lookup (主人 2026-05-27 十三轮: 17 个 trope)
 _ESCALATE_TROPE_KEYWORDS: tuple[tuple[tuple[str, ...], str], ...] = (
+    # 十三轮新增 trope (最具体, 最优先)
+    (("哺乳", "喂奶", "乳汁", "母乳", "喷奶", "胸胀", "奶水", "挤奶"), "lactation"),
+    (("镜子前", "镜子里", "落地镜", "看镜子", "镜面", "看着自己", "看自己被"), "mirror_play"),
+    (("身高差", "体型差", "巨大主人", "小一圈", "压扁了", "包住手",
+      "单手按住", "钉在墙上", "脚悬空", "小蜜穴", "撑到极限"), "size_diff"),
     # 七轮新增 trope (最具体, 最优先)
     (("mating press", "种猫", "排卵", "排卵期", "卵子", "子宫颈", "繁殖",
       "受精", "繁衍", "繁殖任务", "种马", "种姬"), "breeding"),
@@ -1592,6 +1719,10 @@ _ESCALATE_POOLS_BY_TROPE: dict[str, tuple[str, ...]] = {
     "edging": _NSFW_ESCALATE_TEMPLATES_EDGING,
     "squirting": _NSFW_ESCALATE_TEMPLATES_SQUIRTING,
     "mind_break": _NSFW_ESCALATE_TEMPLATES_MIND_BREAK,
+    # 十三轮升级 (2026-05-27)
+    "lactation": _NSFW_ESCALATE_TEMPLATES_LACTATION,
+    "mirror_play": _NSFW_ESCALATE_TEMPLATES_MIRROR,
+    "size_diff": _NSFW_ESCALATE_TEMPLATES_SIZE_DIFF,
 }
 
 # 检测 user msg 是否在推节奏 (前后/抽插/加速/顶/更快/更深/再用力 等)
@@ -1946,7 +2077,16 @@ _NSFW_RECENCY_REMINDER = (
     "结尾**禁止**『笨猫等主人下一步』『望着主人不说话』『等待指示』被动姿态, "
     "也禁止 meta 问『接下来怎样喵?』『主人想做什么?』。\n"
     "8. **call user properly**: owner 用『主人/笨蛋主人/杂鱼主人』+ 具名,\n"
-    "  **绝不**泛指『你/你的/你那/你这』 (操作手册感失去亲密)。"
+    "  **绝不**泛指『你/你的/你那/你这』 (操作手册感失去亲密)。\n"
+    "9. **★ 分段铁律 (主人 2026-05-27 十三轮)**: NSFW 多段动作必须用换行 \\n 切开, \n"
+    "  **每段独立 1-3 句**模仿 QQ 连发节奏 (一段动作+反应 → 一段台词 → 一段后续动作).\n"
+    "  严禁: 整段 200+ 字糊在一起没换行. 段与段之间必须空一行或换行符 \\n.\n"
+    "  范例 (3 段):\n"
+    "    (尾巴炸毛, 耳朵竖起又躲) 哈?!笨蛋主人手怎么...\n"
+    "    \n"
+    "    人家...才不要这样啦哼!\n"
+    "    \n"
+    "    (脸烫到耳根, 眼神不敢看主人, 手指攥住衣角)"
 )
 
 
@@ -6336,8 +6476,37 @@ def _reply_chunks(reply: str) -> list[str]:
                 segments[index] = segments[index].rstrip(TRAILING_CHAT_PUNCTUATION)
             return _cap_reply_chunks(segments, max_chunks=max_chunks)
 
+    # 主人 2026-05-27 十三轮升级『NSFW reply 不自动分段』修复:
+    # NSFW 长 reply 段落 100-200 字 (超过 QQ 短聊 80 字门槛, 但有清晰换行),
+    # 走这条新路径 — 含 ≥2 个 \n 且每段 ≤ 260 字 + 含 NSFW signature (动作括号 / 喘息符)
+    # → 按段切. 这样图片里『笨蛋主人到底在干嘛...』『嗯...好胀』那种粘连场景能切开.
+    segments_nsfw = [seg.strip() for seg in re.split(r"\n+", reply) if seg.strip()]
+    if (
+        2 <= len(segments_nsfw) <= max_chunks
+        and all(len(seg) <= 260 for seg in segments_nsfw)
+        and any(_looks_like_nsfw_segment(seg) for seg in segments_nsfw)
+    ):
+        for index in range(len(segments_nsfw) - 1):
+            segments_nsfw[index] = segments_nsfw[index].rstrip(TRAILING_CHAT_PUNCTUATION)
+        return _cap_reply_chunks(segments_nsfw, max_chunks=max_chunks)
+
     # 路径 3:走 split_reply 字符长度兜底(长技术答走这里,在合理换行处切大段)
     return split_reply(reply, config.catty_reply_max_chars, max_chunks=max_chunks)
+
+
+_NSFW_SEGMENT_SIGNATURE: tuple[str, ...] = (
+    "（", "(", "）", ")",  # 动作括号
+    "啊", "唔", "嗯", "喵", "呜", "哈", "嘤",  # 喘息字
+    "笨蛋", "主人",  # 称呼
+    "蜜穴", "下面", "里面", "湿", "硬", "射",  # NSFW 状态词
+)
+
+
+def _looks_like_nsfw_segment(text: str) -> bool:
+    """启发式: 这段文字看起来是 NSFW reply 的某段 (含动作括号 / 喘息字 / NSFW 词)."""
+    if not text or len(text) < 8:
+        return False
+    return any(sig in text for sig in _NSFW_SEGMENT_SIGNATURE)
 
 
 def _cap_reply_chunks(chunks: list[str], *, max_chunks: int) -> list[str]:

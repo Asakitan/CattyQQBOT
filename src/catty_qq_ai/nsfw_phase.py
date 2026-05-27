@@ -737,19 +737,20 @@ def build_sensory_block(phase: int, rotation: int = 0) -> str:
 
     lines = []
     if smells:
-        lines.append(f"【嗅觉】{' / '.join(smells)}")
+        lines.append(f"嗅: {' / '.join(smells)}")
     if sounds:
-        lines.append(f"【听觉】{' / '.join(sounds)}")
+        lines.append(f"听: {' / '.join(sounds)}")
     if fluids:
-        lines.append(f"【液体】{' / '.join(fluids)}")
+        lines.append(f"液: {' / '.join(fluids)}")
     if sensations:
-        lines.append(f"【触觉】{' / '.join(sensations)}")
+        lines.append(f"触: {' / '.join(sensations)}")
     if not lines:
         return ""
+    # 主人 2026-05-27 十三轮 token 削减: 砍 heading + 尾句
     return (
-        "【★ 感官细节锚 (本轮可融入 ≥2 维)】\n"
+        "【★ 感官 (融 ≥2)】\n"
         + "\n".join(lines)
-        + "\n本轮 reply 必须含 ≥2 个感官细节 — 不悬空抽象写动作.\n\n"
+        + "\n\n"
     )
 
 
@@ -2501,33 +2502,26 @@ def build_phase_advance_hint(
 
     # ── 主人 2026-05-27 六轮升级: 多维度场景智能 ──
     # outfit / time_of_day / mood / body_focus 都注入到 hint
+    # 主人 2026-05-27 十三轮 token 削减: 砍 ambient 行, 只留 name + vibe (vibe 更指导性).
     scene_state_lines = []
     if st.outfit and st.outfit in OUTFIT_PRESETS:
         om = OUTFIT_PRESETS[st.outfit]
-        scene_state_lines.append(
-            f"【穿着】{om['name']}: {om['ambient']} ({om['vibe']})"
-        )
+        scene_state_lines.append(f"【穿】{om['name']}: {om['vibe']}")
     if st.time_of_day and st.time_of_day in TIME_OF_DAY_PRESETS:
         tm = TIME_OF_DAY_PRESETS[st.time_of_day]
-        scene_state_lines.append(
-            f"【时段】{tm['name']}: {tm['ambient']} ({tm['vibe']})"
-        )
+        scene_state_lines.append(f"【时段】{tm['name']}: {tm['vibe']}")
     if st.mood and st.mood in MOOD_PRESETS:
         mm = MOOD_PRESETS[st.mood]
-        scene_state_lines.append(
-            f"【笨猫状态】{mm['name']}: {mm['ambient']} ({mm['vibe']})"
-        )
+        scene_state_lines.append(f"【状态】{mm['name']}: {mm['vibe']}")
     if st.body_focus and st.body_focus in BODY_FOCUS_PRESETS:
         bm = BODY_FOCUS_PRESETS[st.body_focus]
-        scene_state_lines.append(
-            f"【触碰部位】{bm['name']}: {bm['ambient']} ({bm['vibe']})"
-        )
+        scene_state_lines.append(f"【触碰】{bm['name']}: {bm['vibe']}")
     scene_state_block = ""
     if scene_state_lines:
         scene_state_block = (
-            "【★ 多维场景状态 (sticky, 必须遵守贴合)】\n"
+            "【★ 场景状态】\n"
             + "\n".join(scene_state_lines)
-            + "\n本轮 reply 必须融入这些细节 — 不可悬空抽象写动作.\n\n"
+            + "\n\n"
         )
 
     # ── 主人 2026-05-27 十轮升级『更多感官细节』──
@@ -2537,23 +2531,21 @@ def build_phase_advance_hint(
     # ── 主人 2026-05-27 八轮升级『性格 facet 分支』──
     # 默认 tsundere_classic; 检测到 user 风味自动切换 (sticky)
     # 主人 2026-05-27 九轮升级: non-owner 场景下 facet metadata 字符串本地 swap 称呼
+    # 主人 2026-05-27 十三轮 token 削减: 砍 ambient 行 + 砍尾句
     personality_block = ""
     facet_key = st.personality_facet or "tsundere_classic"
     if facet_key in PERSONALITY_FACETS:
         pf = PERSONALITY_FACETS[facet_key]
-        # 本地 replace owner 称呼为 user_addr (不让 AI prompt 处理)
         pf_p1 = _swap_owner_addr(pf['p1_style'], is_owner, user_addr)
         pf_addr = _swap_owner_addr(pf['address'], is_owner, user_addr)
         pf_climax = _swap_owner_addr(pf['climax_style'], is_owner, user_addr)
         pf_aftercare = _swap_owner_addr(pf['aftercare_style'], is_owner, user_addr)
         personality_block = (
-            f"【★ 性格 Facet (sticky, 决定本轮所有反应风味)】\n"
-            f"当前 facet = {pf['name']}: {pf['ambient']}\n"
-            f"  · P1 起手风味: {pf_p1}\n"
-            f"  · 称呼习惯: {pf_addr}\n"
-            f"  · P5-P7 高潮风味: {pf_climax}\n"
-            f"  · P8 余韵风味: {pf_aftercare}\n"
-            f"本轮 reply 必须按这个 facet 演 — 同 phase 不同 facet 反应完全不同.\n\n"
+            f"【★ 性格 {pf['name']}】\n"
+            f"  起手: {pf_p1}\n"
+            f"  称呼: {pf_addr}\n"
+            f"  P5-P7 高潮: {pf_climax}\n"
+            f"  P8 余韵: {pf_aftercare}\n\n"
         )
 
     # 主人 2026-05-27 升级 #2: opener 反复读 hint
@@ -2630,40 +2622,25 @@ def build_phase_advance_hint(
         f"⚠️ 已在 {current_meta['name']} 卡 {st.turn_count} 轮 (阈值 {stuck_thr}) — **强制推进到 {next_meta['name']}**"
     )
 
+    # 主人 2026-05-27 十三轮 token 削减: phase tracker 块也精简 (去横线 + 砍铁律到 2 条)
     full_hint = (
-        # ── Layer 1: Arc Counter (multi-arc 余韵循环) ──
         arc_line
-        # ── Layer 2: Location Anchor (跨轮持久场景物件) ──
         + location_line
-        # ── Layer 3: Scene State (outfit / time / mood / body_focus 4 维) ──
         + scene_state_block
-        # ── Layer 4: Personality Facet (性格风味, 决定本轮所有反应) ──
         + personality_block
-        # ── Layer 5: Sensory Detail (感官细节锚, smell/sound/fluid/sensation) ──
         + sensory_block
-        # ── Layer 6: Opener Anti-repeat (反复读 last-3) ──
         + opener_blocklist_line
-        # ── Layer 7: Phase Tracker (核心 — 本轮该演 phase 完整 metadata) ──
-        + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        + "【★ Phase Tracker (本地状态机 · 不是 AI 自判)】\n"
-        + f"当前 phase = {current_meta['name']} (持续 {st.turn_count}/{stuck_thr} 轮, arc #{st.arc_count}).\n"
-        + f"{advance_rule}, 严禁原地踏步.\n"
-        + "\n"
-        + f"━━ ▼ {next_meta['name']} 演出要素 (本轮轮换 #{rotation}, reply 必须涵盖 ≥2 条) ▼ ━━\n"
-        + f"【summary】{next_meta['summary']}\n"
-        + f"【生理特征】{' / '.join(rotated_physical)}\n"
-        + f"【内心独白模板】{' ; '.join(rotated_thought)}\n"
-        + f"【行为表征】{' / '.join(rotated_behavior)}\n"
-        + f"【可选起手句式】{' | '.join(rotated_opener)}\n"
-        + f"【推进信号】{next_meta['advance_signal']}\n"
-        + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        + "\n"
-        + "**铁律**:\n"
-        + f"- 这一条 reply **不能写成 {current_meta['name']} 风** (那是上一轮已经做过的)\n"
-        + f"- 必须演出 {next_meta['name']} 的生理 + 思维 + 行为 至少 2 个维度\n"
-        + "- 不要 meta 说『进入下一阶段』『phase X』- 用动作 / 喘息 / 内心独白自然演出\n"
+        + f"【★ Phase {current_meta['name']} → {next_meta['name']}】 "
+        + f"(持续 {st.turn_count}/{stuck_thr}, arc#{st.arc_count}, rot#{rotation})\n"
+        + f"{advance_rule}.\n"
+        + f"summary: {next_meta['summary']}\n"
+        + f"生理: {' / '.join(rotated_physical)}\n"
+        + f"心声: {' ; '.join(rotated_thought)}\n"
+        + f"行为: {' / '.join(rotated_behavior)}\n"
+        + f"起手: {' | '.join(rotated_opener)}\n"
+        + f"推进信号: {next_meta['advance_signal']}\n"
+        + f"**铁律**: 本轮**不写 {current_meta['name']} 风**, 必须演 {next_meta['name']} 生理/思维/行为 ≥2 维度.\n"
     )
-    # 主人 2026-05-27 九轮升级: non-owner 场景下整个 hint 过一遍 swap, 不让 AI 处理称呼
     return _swap_owner_addr(full_hint, is_owner, user_addr)
 
 
