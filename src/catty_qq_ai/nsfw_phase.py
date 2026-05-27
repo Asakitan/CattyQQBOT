@@ -2158,15 +2158,16 @@ def update_phase(
         # 限 history 长度
         if len(st.history) > 20:
             st.history = st.history[-20:]
-        # ── 主人 2026-05-28: 高潮过多失神机制 ──
-        # 推进到 P6 = 一次高潮峰值. arc 内累计 ≥ 2 次 → 失神
+        # ── 主人 2026-05-28: 高潮过多失神机制 (跨 arc 累计) ──
+        # 推进到 P6 = 一次高潮峰值. 累计 ≥ 2 次 → 失神
         if new_phase == 6:
             st.climax_count += 1
-            if st.climax_count >= 2 and not st.dazed:
+            st.turns_dazed = 0  # 新高潮 → 重置失神倒计时
+            if st.climax_count >= 2:
                 st.dazed = True
-                st.turns_dazed = 0
     # 失神后无新 climax (turn_count 累加) → 4 轮自然恢复
-    if st.dazed:
+    # 仅在没新 phase 推进 (new_phase ≤ 0 or ≤ current) 时 +1, 防止 phase 升级也算"无 climax"
+    if st.dazed and (new_phase <= 0 or new_phase < 6):
         st.turns_dazed += 1
         if st.turns_dazed >= 4:
             st.dazed = False
@@ -2219,10 +2220,10 @@ def apply_user_signal(
         st.turn_count = 1
         st.arc_count += 1
         st.p8_idle_count = 0
-        # 主人 2026-05-28: 新 arc 起手清失神 — 笨猫"重开新一轮"算休息完了
-        st.climax_count = 0
-        st.dazed = False
-        st.turns_dazed = 0
+        # 主人 2026-05-28 修正: 新 arc 起手**不清** climax_count / dazed —
+        # 改成跨 arc 累计. 主人多次 push 高潮 → 累计 climax → dazed 持续到 4 轮无新 push
+        # 或退出 NSFW (reset_phase) 才清.
+        # 之前 per-arc 清 0 永远到不了 2 (phase tracker 不许 P7→P6 回退, 单 arc 最多 1 次 P6).
         st.history.append((target, time.time()))
         st.last_updated = time.time()
         _NSFW_PHASE_BY_SCOPE[key] = st

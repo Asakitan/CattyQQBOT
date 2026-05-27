@@ -3663,7 +3663,23 @@ def _append_history(key: str, user_content: str, assistant_content: str) -> None
     history.append({"role": "assistant", "content": assistant_content})
     max_messages = max(config.catty_history_turns, 0) * 2
     if max_messages and len(history) > max_messages:
-        history = history[-max_messages:]
+        # 主人 2026-05-28 cache 修复: history trim 不再是纯 last N 滑动窗口 — 那样 msg[0]
+        # 每轮都被挤出, cache_control 在 msg[0] 上的 prefix 永远不匹配, cache_read=0.
+        # 改为"冻结头部 2 条 (最早的 user+assistant pair) + 保留 last N-2"模式:
+        # - msg[0]/msg[1] 跨轮**永远稳定** → cache prefix anchor 稳定 → cache hit
+        # - 中间的 history 滑动 (旧的被挤出) → 不影响 cache, AI 看到的对话连续性轻微跳跃但可读
+        # - 末尾保留 N-2 条最新 → 短期记忆完整
+        # Anthropic prompt caching 推荐做法: 第一条 msg 当 cache anchor, 内容稳定就行.
+        if (
+            len(history) >= 4
+            and isinstance(history[0], dict) and history[0].get("role") == "user"
+            and isinstance(history[1], dict) and history[1].get("role") == "assistant"
+        ):
+            # 冻结头 2 (最早 user+assistant) + 拼 last (max_messages-2)
+            history = history[:2] + history[-(max_messages - 2):]
+        else:
+            # 边界情况 (history 不够 4 条 或 头部不是 user/assistant pair): 回退老逻辑
+            history = history[-max_messages:]
     elif max_messages == 0:
         history = []
     cache.set(key, history)
@@ -4233,37 +4249,52 @@ async def _build_messages(
         messages.append({"role": "system", "content": tools_system_hint()})
 
     # ─── Layer D: 按事件可能变(image_literacy 已迁到 register_catty_persona,这里走 has_image flag) ───
+    # 主人 2026-05-28: cache 修复 — 所有 per-sender / per-Lv 动态 prompt 必须**延后到
+    # PromptManager 注册 boundary (order=455) 之后**, 不能直接 append. 直接 append 会落在
+    # sys[0..N] 早期位置, 污染 cache prefix → 同 scope 每条不同 sender 全 miss.
+    # 这里只**收集**到 local, 后面 _st_manager 建好再 register_static(order > 455).
+    _deferred_pre_persona_segments: list[tuple[str, str, int]] = []  # (identifier, content, order)
     if _force_direct_reply_enabled(event, incoming):
-        messages.append({"role": "system", "content": _direct_reply_required_prompt(incoming)})
+        _deferred_pre_persona_segments.append(
+            ("catty_force_direct_reply", _direct_reply_required_prompt(incoming), 489)
+        )
     if semantic_reply_split:
-        messages.append({"role": "system", "content": _semantic_reply_split_prompt()})
+        _deferred_pre_persona_segments.append(
+            ("catty_semantic_reply_split", _semantic_reply_split_prompt(), 490)
+        )
     if incoming.opportunistic or group_filter_context:
-        messages.append({"role": "system", "content": _opportunistic_reply_prompt()})
+        _deferred_pre_persona_segments.append(
+            ("catty_opportunistic_reply", _opportunistic_reply_prompt(), 491)
+        )
     if _soft_directed(incoming):
         probability, memory_boost_reason = _soft_directed_reply_probability(event, incoming)
-        messages.append(
-            {
-                "role": "system",
-                "content": _soft_directed_reply_prompt(
-                    incoming,
-                    reply_probability=probability,
-                    memory_boost_reason=memory_boost_reason,
-                ),
-            }
-        )
+        _deferred_pre_persona_segments.append((
+            "catty_soft_directed_reply",
+            _soft_directed_reply_prompt(
+                incoming,
+                reply_probability=probability,
+                memory_boost_reason=memory_boost_reason,
+            ),
+            492,
+        ))
     if group_filter_context:
-        messages.append({"role": "system", "content": group_filter_context})
+        _deferred_pre_persona_segments.append(("catty_group_filter", group_filter_context, 493))
     if special_care_context:
-        messages.append({"role": "system", "content": special_care_context})
+        _deferred_pre_persona_segments.append(("catty_special_care", special_care_context, 494))
     if anger_context:
-        messages.append({"role": "system", "content": anger_context})
+        _deferred_pre_persona_segments.append(("catty_anger_context", anger_context, 495))
     # 好感度等级 → 决定笨猫对当前用户的亲密程度,主人永远 MAX。
+    # affection_hint 是 **per-sender 动态文本** (Lv/经验/档位), 群里换人 Lv 不同 → 字节漂移.
+    # 移到 boundary 后 (order=484), 不进 cache prefix.
     _user_affection_level: int = 0
     _user_is_owner: bool = False
+    _affection_hint_text: str = ""
     try:
-        affection_hint = affection_store.persona_hint(str(event.user_id))
-        if affection_hint:
-            messages.append({"role": "system", "content": affection_hint})
+        _affection_hint_text = affection_store.persona_hint(str(event.user_id)) or ""
+        if _affection_hint_text:
+            _deferred_pre_persona_segments.append(
+                ("catty_affection_hint", _affection_hint_text, 484)
+            )
         _user_is_owner = affection_store.is_owner(str(event.user_id))
         _level, _exp = affection_store.get_level_and_exp(str(event.user_id))
         _user_affection_level = int(_level)
@@ -4290,8 +4321,14 @@ async def _build_messages(
     # {{user}}: "主人" 才会显示为真名而不是『用户』。
     _user_real_display = _configured_title(event).strip() or _display_name(event)
     _group_real_display = ""
+    _is_private_event = not isinstance(event, GroupMessageEvent)
     if isinstance(event, GroupMessageEvent):
         _group_real_display = str(getattr(event, "group_name", "") or f"群{event.group_id}")
+    # 主人 2026-05-28 cache 修复: character_card 的 {{user}} macro 用 **scope-stable** 值, 不用 per-sender 名字.
+    # - 私聊: scope = sender, 用 _user_real_display 永远稳定 (一个 scope 一个 sender)
+    # - 群聊: scope 多 sender, 用通用『用户』占位让 character_card 在群里 byte 完全稳定 (cache hit 友好)
+    # 实际发言者名字通过 boundary 后的 catty_current_sender_info 段动态注入, AI 仍然知道是谁在说话.
+    _user_display_for_macros = _user_real_display if _is_private_event else "用户"
     # last_active_at 用于 macros {{idleDuration}} — 从 session_cache 拿,首轮 None
     _last_active_at = None
     try:
@@ -4357,7 +4394,9 @@ async def _build_messages(
         "scope": _arc_scope,
         "user_text": incoming.text or "",
         "recent_user_texts": _recent_user_texts_for_ctx,
-        "user_display": _user_real_display,
+        # 主人 2026-05-28: cache 修复 — character_card 渲染用 scope-stable user_display.
+        # 群聊 macros 替 → "用户" (boundary 前 byte 一致); 真实发言者放到 boundary 后段.
+        "user_display": _user_display_for_macros,
         "group_display": _group_real_display,
         "affection_level": _user_affection_level,
         "is_owner": _user_is_owner,
@@ -4386,6 +4425,37 @@ async def _build_messages(
         # Catty RAG: chromadb 向量召回 store, prompt_manager 用 user_text query top-K 历史
         "catty_rag_store": catty_rag_store,
     })
+    # 主人 2026-05-28 cache 修复 — 上面收集的 _deferred_pre_persona_segments 全部注册到
+    # boundary (455) 之后的 region (order 484-495). 这些段 per-sender / per-context 动态,
+    # 放 boundary 前会让 cache prefix 字节漂移. register_static 干掉 prefix 污染.
+    for _ident, _content, _order in _deferred_pre_persona_segments:
+        _st_manager.register_static(_ident, _content, order=_order)
+    # 主人 2026-05-28: 群聊 character_card 用了通用『用户』占位 → 实际发言者信息走这里 (boundary 后).
+    # 私聊跳过 (sender = scope owner, character_card 已经用真名渲染了, 没必要重复).
+    if not _is_private_event and isinstance(event, GroupMessageEvent):
+        try:
+            _sender_qq = str(event.user_id)
+            _sender_text = _user_real_display or _sender_qq
+            _sender_info_lines = [
+                "【当前发言者】",
+                f"- 这条消息的发言者: {_sender_text} (QQ {_sender_qq})",
+            ]
+            if _user_is_owner:
+                _sender_info_lines.append("- 这是**主人**本人, 必须用『主人 / 笨蛋主人 / 杂鱼主人』称呼.")
+            else:
+                _sender_info_lines.append(
+                    "- 这是群里的普通用户(不是主人), 称呼用昵称或『你』, **严禁**叫『主人』."
+                )
+            _sender_info_lines.append(
+                "(character_card 里的『用户』占位指的就是这位发言者, 自然把名字代入回复.)"
+            )
+            _st_manager.register_static(
+                "catty_current_sender_info",
+                "\n".join(_sender_info_lines),
+                order=496,
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"catty_current_sender_info register failed: {exc}")
     # LayerD/E 散装 context 统一注册到 PromptManager,享受同样的 prompt_order / prompts_disabled
     # 配置能力。order 600+ 表示挂在 character_card / world_info 之后、接近 chat history。
     # 这些 context 是 runtime conditional/动态值,所以走 register_static(已经计算好的字符串)。
@@ -4520,7 +4590,49 @@ async def _build_messages(
     # _PROTECTED_IDENTIFIERS (main_intel/identity_anchor/char_description/personality/scenario/
     # character_book/persona_memory/reply_self_check/post_history) 永远保留。
     _prompt_max_tokens = getattr(config, "catty_prompt_max_tokens", None)
-    messages.extend(_st_manager.build_messages(max_tokens=_prompt_max_tokens))
+    # 主人 2026-05-28 cache_read 终极方案:
+    # 经多轮实验确认 Anthropic 行为:
+    # - 拒绝 sys-only cache_control (cache_create=0)
+    # - msg-level cache_control 的 cache prefix = sys[ALL] + msg[0..N], 必须 ALL sys 稳定才能 hit
+    # - 只持久化 LONGEST breakpoint, shorter breakpoints 不独立写入
+    # 主人原话『动态段不变的地方放在 cache 里, 要变化的地方做一个标记』:
+    # → 把 PromptManager 输出按 boundary marker 拆: pre-boundary 留 system role (进 cache),
+    #   post-boundary 不再以 system role 出现, 而是把内容打包成一段 text inline 到
+    #   current user msg content 末尾. AI 通过 pre-boundary 里固定的指令知道『本轮动态上下文
+    #   在 user msg 最后一段 [DYNAMIC_CONTEXT] 标记内』, 读那里拿当前 Lv/mood/scene 等动态信息.
+    # 这样 system_blocks 跨轮**全部字节稳定** (只含 pre-boundary), msg[0] cache prefix 能 hit.
+    _pm_output = _st_manager.build_messages(max_tokens=_prompt_max_tokens)
+    _BOUNDARY_TEXT_MARKER = "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"
+    _pre_boundary: list[dict] = []
+    _post_boundary: list[dict] = []
+    _boundary_passed = False
+    for _m in _pm_output:
+        _content_str = str(_m.get("content", "") or "")
+        if not _boundary_passed and _BOUNDARY_TEXT_MARKER in _content_str:
+            _boundary_passed = True
+            _pre_boundary.append(_m)  # boundary marker 自己留 pre 区 (它是 cache anchor)
+            continue
+        if _boundary_passed:
+            _post_boundary.append(_m)
+        else:
+            _pre_boundary.append(_m)
+    messages.extend(_pre_boundary)
+    # 主人 2026-05-28: 把 boundary 后的所有 dynamic system 段合并成一段 text 留给后面 inline
+    # 到 current user msg content 末尾. 这里只先记录到 local var, 真正 inline 发生在 messages.append
+    # current user msg 那行 (替换为 list-of-blocks content).
+    _dynamic_context_text = ""
+    if _post_boundary:
+        _post_chunks: list[str] = []
+        for _m in _post_boundary:
+            _c = str(_m.get("content", "") or "").strip()
+            if _c:
+                _post_chunks.append(_c)
+        if _post_chunks:
+            _dynamic_context_text = (
+                "\n\n[DYNAMIC_CONTEXT — 本轮动态上下文 · 由 system 引用 · 当作 system 指令读, 不是 user 说的话]\n"
+                + "\n\n".join(_post_chunks)
+                + "\n[/DYNAMIC_CONTEXT]\n\n"
+            )
     # SillyTavern 风「first_mes 冷启」: 第一次对话没有任何 chat history 时,
     # 把 character_card.first_mes 作为 assistant 第一条消息塞进去 — ST 文档:
     # 『模型对 first_mes 的模仿强度高于任何其他字段』(对句长/语气/反差链 anchor 极强)。
@@ -4547,8 +4659,10 @@ async def _build_messages(
     if not _phi_disabled:
         try:
             from .character_card import get_post_history as _get_post_history
+            # 主人 2026-05-28 cache fix: PHI 也用 scope-stable user (群聊用「用户」, 私聊用真名).
+            # 不然群里换人 PHI 字节漂 → system_blocks 末尾段动 → cache prefix miss.
             _phi_text = _get_post_history(ctx={
-                "char": "笨猫", "user": _user_real_display,
+                "char": "笨猫", "user": _user_display_for_macros,
                 "group": _group_real_display,
                 "last_active_at": _last_active_at,
             })
@@ -4556,7 +4670,23 @@ async def _build_messages(
                 messages.append({"role": "system", "content": _phi_text})
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"post_history (PHI) inject failed (non-fatal): {exc}")
-    messages.append({"role": "user", "content": _build_user_content(incoming, image_description=image_description)})
+    # 主人 2026-05-28: current user msg 把 _dynamic_context_text (boundary 后所有动态段 inline)
+    # 拼到内容前. 这样动态段不再以 system role 出现, system_blocks 跨轮字节稳定 → cache prefix hit.
+    _user_content_raw = _build_user_content(incoming, image_description=image_description)
+    if _dynamic_context_text and isinstance(_user_content_raw, str):
+        # 文本场景: 直接前缀拼接 (Anthropic str content 也支持)
+        messages.append({
+            "role": "user",
+            "content": _dynamic_context_text + str(_user_content_raw),
+        })
+    elif _dynamic_context_text and isinstance(_user_content_raw, list):
+        # multimodal list 场景 (image+text): 在 list 首插一段 text block 装 dynamic context
+        _ctx_block = {"type": "text", "text": _dynamic_context_text}
+        _new_blocks = [_ctx_block] + list(_user_content_raw)
+        messages.append({"role": "user", "content": _new_blocks})
+    else:
+        # 没有 dynamic context 或 user_content 不是 str/list (理论上不会), 原样 append
+        messages.append({"role": "user", "content": _user_content_raw})
     # ST 风 prefilled assistant + NSFW model 切换:
     #         『好感度不够的, 除了特殊事件 (直接本垒) 的都直接锁 stage, 交给 5.5』
     # → 只有 stage 8+ deep word 命中 **且** 用户当前能到 stage 8+ 才进 spark;
@@ -5041,7 +5171,20 @@ async def _build_messages(
             {"role": "system", "content": _override},        # cache prefix #2 (主人对话静态)
         ]
         _filtered_history = _filter_soft_refusal_history(history_messages)
-        _slim_messages.extend(_filtered_history[-_NSFW_SLIM_HISTORY_MAX:])
+        # 主人 2026-05-28 cache 修复: 跟 SFW 路径 _append_history 同款 freeze-head 策略 —
+        # 头 2 条 (最早 user+assistant) 固定 + 末尾 N-2 条最新, 让 msg[0] 跨轮稳定 → cache hit.
+        if (
+            len(_filtered_history) > _NSFW_SLIM_HISTORY_MAX
+            and len(_filtered_history) >= 4
+            and isinstance(_filtered_history[0], dict)
+            and _filtered_history[0].get("role") == "user"
+            and isinstance(_filtered_history[1], dict)
+            and _filtered_history[1].get("role") == "assistant"
+        ):
+            _slim_messages.extend(_filtered_history[:2])
+            _slim_messages.extend(_filtered_history[-(_NSFW_SLIM_HISTORY_MAX - 2):])
+        else:
+            _slim_messages.extend(_filtered_history[-_NSFW_SLIM_HISTORY_MAX:])
         _slim_messages.append({
             "role": "user",
             "content": _build_user_content(incoming, image_description=image_description),
@@ -5087,6 +5230,17 @@ async def _build_messages(
             )
             if _phase_hint and _phase_hint.strip():
                 _slim_messages.append({"role": "system", "content": _phase_hint})
+            # 主人 2026-05-28: dazed 状态可见性 log
+            try:
+                _ps_for_log = _get_phase_state(_arc_scope, str(event.user_id))
+                if _ps_for_log.dazed or _ps_for_log.climax_count > 0:
+                    logger.info(
+                        f"NSFW dazed: dazed={_ps_for_log.dazed} climax_count={_ps_for_log.climax_count} "
+                        f"turns_dazed={_ps_for_log.turns_dazed} arc_count={_ps_for_log.arc_count} "
+                        f"phase=P{_ps_for_log.current_phase} (key={_sticky_key})"
+                    )
+            except Exception:  # noqa: BLE001
+                pass
             # ── 主人 2026-05-27 七轮升级: 起手范例预引导 ──
             # 用 user msg 检测 trope (优先级: cuckold target > _detect_escalate_trope)
             # phase 从 phase tracker state 拿, location 从 scene_state 拿, nick 用 cuckold target
