@@ -875,13 +875,32 @@ NSFW_STARTER_EXAMPLES: dict[str, list[str]] = {
 }
 
 
+def _swap_owner_addr(text: str, is_owner: bool, user_addr: str) -> str:
+    """non-owner 场景下本地替换『主人』为 user_addr.
+
+    主人 2026-05-27 九轮升级原话『not owner 你不要 prompt 替换主人, 本地做替换就行了』.
+    顺序: 先长后短 (避免『笨蛋主人』被先匹配成『笨蛋{addr}主人』).
+    """
+    if is_owner or not user_addr or not text:
+        return text
+    a = (user_addr or "").strip() or "对方"
+    return (text
+            .replace("笨蛋主人", f"笨蛋{a}")
+            .replace("杂鱼主人", f"杂鱼{a}")
+            .replace("主人专属", f"{a}专属")
+            .replace("主人", a))
+
+
 def build_starter_examples_block(
     phase: int, trope: str = "", location: str = "",
     nick: str = "",
+    is_owner: bool = True,
+    user_addr: str = "",
 ) -> str:
     """构造『起手范例预引导』段, 注入到 spark messages 给 AI 学风味.
 
     主人 2026-05-27 七轮升级『添加 NSFW 预引导, prompt 组织也要做好』.
+    主人 2026-05-27 九轮升级: is_owner=False 时**本地直接替换称呼** (不让 AI 处理).
 
     优先级: trope > location > phase only.
     每个 lookup key 取最多 2 条范例, 总共最多 3 条.
@@ -899,6 +918,8 @@ def build_starter_examples_block(
         for ex in NSFW_STARTER_EXAMPLES.get(key, []):
             if nick:
                 ex = ex.replace("{nick}", nick)
+            # 主人 2026-05-27 九轮升级: 本地替换 (不让 AI 处理)
+            ex = _swap_owner_addr(ex, is_owner, user_addr)
             out_examples.append(ex)
             if len(out_examples) >= 2:
                 break
@@ -909,6 +930,7 @@ def build_starter_examples_block(
         for ex in NSFW_STARTER_EXAMPLES.get(key, []):
             if nick:
                 ex = ex.replace("{nick}", nick)
+            ex = _swap_owner_addr(ex, is_owner, user_addr)
             out_examples.append(ex)
             if len(out_examples) >= 3:
                 break
@@ -1916,7 +1938,10 @@ def _rotate_subset(pool: tuple, k: int, rotation: int) -> list:
     return out
 
 
-def build_phase_advance_hint(scope: str, user_id: str) -> str:
+def build_phase_advance_hint(
+    scope: str, user_id: str,
+    is_owner: bool = True, user_addr: str = "",
+) -> str:
     """根据当前 phase state 构造下一轮 spark prompt 注入 hint.
 
     核心规则:
@@ -1926,6 +1951,9 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
     - 注入下一 phase 的完整提示 (生理/思维/行为/opener_hints) — 每轮轮换不同子集
     - 注入当前 location ambient (跨轮持久化, 不每轮重抽场景)
     - 注入最近 3 条 reply opener (反复读 hint)
+
+    主人 2026-05-27 九轮升级:
+    - is_owner=False + user_addr → personality facet hint 加称呼替换提示
     """
     st = get_phase_state(scope, user_id)
     current = st.current_phase
@@ -1993,17 +2021,23 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
 
     # ── 主人 2026-05-27 八轮升级『性格 facet 分支』──
     # 默认 tsundere_classic; 检测到 user 风味自动切换 (sticky)
+    # 主人 2026-05-27 九轮升级: non-owner 场景下 facet metadata 字符串本地 swap 称呼
     personality_block = ""
     facet_key = st.personality_facet or "tsundere_classic"
     if facet_key in PERSONALITY_FACETS:
         pf = PERSONALITY_FACETS[facet_key]
+        # 本地 replace owner 称呼为 user_addr (不让 AI prompt 处理)
+        pf_p1 = _swap_owner_addr(pf['p1_style'], is_owner, user_addr)
+        pf_addr = _swap_owner_addr(pf['address'], is_owner, user_addr)
+        pf_climax = _swap_owner_addr(pf['climax_style'], is_owner, user_addr)
+        pf_aftercare = _swap_owner_addr(pf['aftercare_style'], is_owner, user_addr)
         personality_block = (
             f"【★ 性格 Facet (sticky, 决定本轮所有反应风味)】\n"
             f"当前 facet = {pf['name']}: {pf['ambient']}\n"
-            f"  · P1 起手风味: {pf['p1_style']}\n"
-            f"  · 称呼习惯: {pf['address']}\n"
-            f"  · P5-P7 高潮风味: {pf['climax_style']}\n"
-            f"  · P8 余韵风味: {pf['aftercare_style']}\n"
+            f"  · P1 起手风味: {pf_p1}\n"
+            f"  · 称呼习惯: {pf_addr}\n"
+            f"  · P5-P7 高潮风味: {pf_climax}\n"
+            f"  · P8 余韵风味: {pf_aftercare}\n"
             f"本轮 reply 必须按这个 facet 演 — 同 phase 不同 facet 反应完全不同.\n\n"
         )
 
@@ -2060,7 +2094,7 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
                 f"如 user 没有主动推 NSFW, 笨猫继续偎着但不主动撩 (退到日常贴贴模式).\n"
                 f"如 user 重新推 NSFW (再深 / 又硬 / 再来 等) → 自动开第 {st.arc_count + 1} 轮 arc.\n"
             )
-        return (
+        p8_hint = (
             arc_line
             + location_line
             + scene_state_block
@@ -2073,13 +2107,14 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
             + f"P8 提示动作 (本轮轮换): {' / '.join(rot_p8_behavior)}\n"
             + f"P8 思维独白 (本轮): {rot_p8_thought[0] if rot_p8_thought else ''}\n"
         )
+        return _swap_owner_addr(p8_hint, is_owner, user_addr)
 
     advance_rule = (
         f"本轮 **必须推进到 {next_meta['name']}**" if not stuck else
         f"⚠️ 已在 {current_meta['name']} 卡 {st.turn_count} 轮 (阈值 {stuck_thr}) — **强制推进到 {next_meta['name']}**"
     )
 
-    return (
+    full_hint = (
         # ── Layer 1: Arc Counter (multi-arc 余韵循环) ──
         arc_line
         # ── Layer 2: Location Anchor (跨轮持久场景物件) ──
@@ -2110,6 +2145,8 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
         + f"- 必须演出 {next_meta['name']} 的生理 + 思维 + 行为 至少 2 个维度\n"
         + "- 不要 meta 说『进入下一阶段』『phase X』- 用动作 / 喘息 / 内心独白自然演出\n"
     )
+    # 主人 2026-05-27 九轮升级: non-owner 场景下整个 hint 过一遍 swap, 不让 AI 处理称呼
+    return _swap_owner_addr(full_hint, is_owner, user_addr)
 
 
 def record_reply_opener(scope: str, user_id: str, reply: str) -> None:
