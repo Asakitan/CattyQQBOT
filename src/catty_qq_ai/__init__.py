@@ -7483,16 +7483,38 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                     _spark_messages = list(messages)
                     _spark_messages.insert(-1, {"role": "system", "content": _trope_hint})
 
-                reply = await chat_completion_codex_instant(
-                    config, _spark_messages, max_tokens=800, model_override=_chosen_model,
-                )
-                _was_refusal = _is_soft_refusal_reply(reply)
+                # 主人 2026-05-26 原话『NSFW 中间被拒直接拦截重新发, 3 次后 fallback』:
+                # 软拒 reply 不发给 user, 同回合内 retry 最多 3 次, 全失败才用 retreat 模板兜底.
+                # 每次 retry 自然温度抖动给不同 reply, 避免 deterministic 重复软拒.
+                _MAX_NSFW_RETRY = 3
+                _was_refusal = True
+                reply = ""
+                _refusal_history: list[str] = []  # 收集每次软拒原文用于 log
+                for _try in range(1, _MAX_NSFW_RETRY + 1):
+                    reply = await chat_completion_codex_instant(
+                        config, _spark_messages, max_tokens=800, model_override=_chosen_model,
+                    )
+                    _was_refusal = _is_soft_refusal_reply(reply)
+                    if not _was_refusal:
+                        logger.info(
+                            f"chat: NSFW deep 路径 OK (try {_try}/{_MAX_NSFW_RETRY}, "
+                            f"model={_chosen_model}, tools 跳过)"
+                        )
+                        break
+                    _refusal_history.append(reply[:60])
+                    logger.warning(
+                        f"NSFW soft-refusal (try {_try}/{_MAX_NSFW_RETRY}, "
+                        f"model={_chosen_model}, orig={reply[:80]!r}) — 拦截 + retry"
+                    )
                 _record_nsfw_reply_outcome(_nsfw_scope_key, _was_refusal)
                 if _was_refusal:
+                    # 3 次 retry 全软拒 → 用 retreat 模板兜底
                     _new_count = _NSFW_SOFT_REFUSE_COUNT.get(_nsfw_scope_key, 0)
                     logger.warning(
-                        f"NSFW soft-refusal model={_chosen_model} count={_new_count} "
-                        f"key={_nsfw_scope_key} → retreat template (orig={reply[:60]!r})"
+                        f"NSFW soft-refusal exhausted {_MAX_NSFW_RETRY} retries "
+                        f"→ retreat template fallback (model={_chosen_model}, "
+                        f"count={_new_count}, key={_nsfw_scope_key}, "
+                        f"refusals={_refusal_history!r})"
                     )
                     reply = _pick_retreat_template(
                         is_owner=_is_owner,
@@ -7501,9 +7523,11 @@ async def handle_chat(matcher: Matcher, event: MessageEvent, state: T_State) -> 
                     )
                 else:
                     _tag = "fallback+trope" if _is_using_fallback else "main"
-                    logger.info(
-                        f"chat: NSFW deep 路径 OK ({_tag} model={_chosen_model}), tools 跳过"
-                    )
+                    if len(_refusal_history) > 0:
+                        logger.info(
+                            f"chat: NSFW deep 路径 recovered after {len(_refusal_history)} retries "
+                            f"({_tag} model={_chosen_model})"
+                        )
                 # strip 软拒尾巴 (兜底)
                 reply = _strip_soft_refusal_tail(reply)
                 # post-process strip kaomoji 颜文字 (双保险)
