@@ -8668,6 +8668,23 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # 3) 适应口吻 adaptive drift (depth=2): 拿最近 3 条 user msg 分析 vibe, 反向调笨猫语气强度
         if "author_note" not in (getattr(config, "catty_parsing_layers_disabled", None) or []):
             try:
+                # handle_chat scope 没自带这些变量(_build_messages 局部不外泄),本地重算
+                _user_is_owner = False
+                _user_affection_level = 0
+                try:
+                    _user_is_owner = affection_store.is_owner(str(event.user_id))
+                    _lv, _ = affection_store.get_level_and_exp(str(event.user_id))
+                    _user_affection_level = int(_lv)
+                except Exception:  # noqa: BLE001
+                    pass
+                _user_real_display = _configured_title(event).strip() or _display_name(event)
+                _arc_scope_an = _conversation_queue_key(event)
+                _last_active_at = None
+                try:
+                    _last_active_at = _get_session_cache().last_access_at(history_key)
+                except Exception:  # noqa: BLE001
+                    pass
+
                 _relationship_note = build_relationship_author_note(
                     level=_user_affection_level, is_owner=_user_is_owner,
                 )
@@ -8687,6 +8704,42 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         _recent_user_texts, is_owner=_user_is_owner,
                     )
                     messages = inject_author_note(messages, _adaptive_note)
+
+                # ST 风『现在的笨猫·此刻场景』author_note (depth=2):
+                # 把 daily_life + session_spice + reunion 凝缩到 ≤300 字贴近 user 最后消息,
+                # LLM recency bias 让这一层比 system 块顶部的 daily_life 更难被忽略,
+                # 强迫每条 reply 都带一点"现场感"
+                try:
+                    from .catty_scene_now import build_scene_now_note
+                    from .daily_life import build_daily_life_state
+                    from .session_spice import pick_session_scene, pick_session_spice
+                    from .catty_reunion import classify_idle_level
+                    _ds = build_daily_life_state(_arc_scope_an, recent_text=incoming.text or "")
+                    _spice_tuple = pick_session_spice(
+                        _arc_scope_an, str(event.user_id), is_owner=_user_is_owner,
+                    )
+                    _scene_tuple = pick_session_scene(
+                        _arc_scope_an, str(event.user_id), is_owner=_user_is_owner,
+                    )
+                    # 把 scene location 注入 daily_state 的 activity 字段, 让 scene_now 拿到此刻位置
+                    if _scene_tuple and _scene_tuple[0]:
+                        _ds = dict(_ds)
+                        _ds["activity"] = _scene_tuple[0].replace("现在人在: ", "")
+                    _idle_s = 0.0
+                    if _last_active_at:
+                        import time as _t
+                        _idle_s = max(0.0, _t.time() - float(_last_active_at))
+                    _reunion_lvl = classify_idle_level(_idle_s)
+                    _scene_note = build_scene_now_note(
+                        daily_state=_ds,
+                        spice=_spice_tuple,
+                        reunion_level=_reunion_lvl,
+                        is_owner=_user_is_owner,
+                        user_display=_user_real_display,
+                    )
+                    messages = inject_author_note(messages, _scene_note)
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"scene_now author_note failed (non-fatal): {exc}")
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"author_note inject failed (non-fatal): {exc}")
         # 「ToolContext 携带图片」可见性 hint:tool_ctx.input_image_urls / recent_image_urls

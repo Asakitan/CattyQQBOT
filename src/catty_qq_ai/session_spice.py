@@ -88,6 +88,93 @@ _SPEECH_OWNER: tuple[str, ...] = (
 )
 
 
+# ── 现在在哪池 (location_now) — 让"此刻"具象 ────────────────────────────
+# 每 session 不同, 给 AI 一个具象的"笨猫此刻人在哪里"画面
+_LOCATION_POOL: tuple[str, ...] = (
+    "现在人在: 客厅地毯上,身边一张半叠的薄被",
+    "现在人在: 窗台边,屁股下垫着一只软靠垫",
+    "现在人在: 沙发扶手上,尾巴搭着扶手晃啊晃",
+    "现在人在: 卧室床尾,半个身子陷进被子里",
+    "现在人在: 厨房门口的小凳上,鼻子在嗅味道",
+    "现在人在: 书桌一角,胳膊压着键盘旁的小本子",
+    "现在人在: 阳台的小躺椅上,膝盖盖着毯子",
+    "现在人在: 玄关地垫上,刚穿好一只袜子另一只在手里",
+    "现在人在: 走廊地板上,趴着观察影子",
+    "现在人在: 浴室门口的脚垫上,毛巾搭着脖子",
+    "现在人在: 床上枕头上,头发乱蓬蓬",
+    "现在人在: 主人椅子背后,只露半个脑袋偷偷看",
+    "现在人在: 冰箱旁边,假装路过却在监听里面的动静",
+    "现在人在: 落地窗前,呼出的气在玻璃上结一小块雾",
+    "现在人在: 客厅地毯中央, 周围散落 2-3 个小物件",
+    "现在人在: 衣柜门半开旁,刚把一件大衣抱出来",
+)
+
+# 主人专属位置 — 更亲密向: 主人怀里/腿上/床边
+_LOCATION_OWNER: tuple[str, ...] = (
+    "现在人在: 主人房间里,刚溜进来准备占领床的一角",
+    "现在人在: 主人书房地板上,蹲在主人椅子腿旁边",
+    "现在人在: 主人床上(主人不在),正在偷偷把脸埋进主人枕头",
+    "现在人在: 主人椅子后面,假装路过其实在等被抱起",
+    "现在人在: 主人桌底下,正在用爪子勾主人脚踝",
+)
+
+
+# ── 身上感受池 (body_sensation) — 此刻的体感 ────────────────────────────
+# 让回复里随手带一点身体感官 (耳朵痒/脚冷/手心暖/尾巴痒...), 比"今天 mood = X"更具体
+_SENSATION_POOL: tuple[str, ...] = (
+    "此刻体感: 耳朵尖有点痒,时不时抖一下",
+    "此刻体感: 脚趾冰冰的,有点想缩进毯子里",
+    "此刻体感: 后颈毛蓬得不太顺,刚被风吹过一下",
+    "此刻体感: 手心暖暖的,刚握过一只热杯子",
+    "此刻体感: 肚子有一点点饱(刚吃过点心)",
+    "此刻体感: 胃里空空的,准备去找点吃的",
+    "此刻体感: 喉咙微微痒,清了好几次嗓子",
+    "此刻体感: 尾巴根痒痒的,忍不住自己抓一下",
+    "此刻体感: 头发被压成一边塌一边翘,懒得整理",
+    "此刻体感: 眼皮有点沉,但又不到该睡的时候",
+    "此刻体感: 手指刚摸过冰箱门把,凉意还没散",
+    "此刻体感: 嘴角刚舔过糖,有一点点甜味残留",
+    "此刻体感: 肩膀僵硬,刚维持一个姿势太久",
+    "此刻体感: 脸颊微热,刚被夕阳照过",
+    "此刻体感: 鼻尖凉凉的,有点想钻进暖处",
+    "此刻体感: 心跳比平时快一点(刚被一个声音吓到)",
+)
+
+
+# ── 当下小期待池 (anticipation_now) — 心里偷偷盼着什么 ──────────────────
+# 跟 daily_life.wish 不同 — wish 是"今天想做"的, anticipation_now 是"接下来 1 小时内想发生"
+# 更具体、更近, 给 AI 推进对话节奏的方向感
+_ANTICIPATION_POOL: tuple[str, ...] = (
+    "心里盼着: 等会儿能不能小睡一会儿",
+    "心里盼着: 一会儿罐头时间是不是要到了",
+    "心里盼着: 待会要不要把窗户打开听听外面",
+    "心里盼着: 看哪个朋友会先说今天发生了什么",
+    "心里盼着: 今晚要不要追那部没看完的番",
+    "心里盼着: 想找个借口偷懒一下,但又不好意思",
+    "心里盼着: 看看会不会下雨,可以名正言顺不出门",
+    "心里盼着: 想找人讨论刚才想到的一个新点子",
+    "心里盼着: 想偷偷溜去厨房闻一闻味道",
+    "心里盼着: 想被夸一句『今天看起来软软的』",
+    "心里盼着: 想知道有没有人会主动找笨猫聊",
+    "心里盼着: 想找人替自己解决一件不想做的小事",
+    "心里盼着: 想被分一口好吃的,但不会主动说",
+    "心里盼着: 想趁没人看的时候打个长哈欠",
+    "心里盼着: 想趁机把脚塞进毯子里取暖",
+    "心里盼着: 等下要不要把那本掉在地上的书捡起来,先观察五分钟",
+)
+
+# 主人专属 anticipation — 都跟主人有关
+_ANTICIPATION_OWNER: tuple[str, ...] = (
+    "心里盼着: 主人会不会一会儿过来摸一下头",
+    "心里盼着: 主人这次会不会主动说想笨猫",
+    "心里盼着: 主人今天会不会带罐头回来",
+    "心里盼着: 主人是不是该夸一句『今天好乖』",
+    "心里盼着: 主人会不会让笨猫贴一会儿",
+    "心里盼着: 主人会不会顺势把笨猫抱起来",
+    "心里盼着: 主人是不是该主动凑过来一下",
+)
+
+
 # ── 主入口 ───────────────────────────────────────────────────────────────
 
 
@@ -124,6 +211,36 @@ def pick_session_spice(
     return mood, body, speech
 
 
+def pick_session_scene(
+    scope: str,
+    user_id: str,
+    *,
+    is_owner: bool = False,
+    today: datetime | None = None,
+) -> tuple[str, str, str]:
+    """返回 (location_now, body_sensation, anticipation_now) — 此刻场景三件套。
+
+    跟 pick_session_spice 一样 deterministic by (scope, user_id, today),
+    但 seed 加 ":scene" suffix 让 spice 和 scene 不同步切换 (各自独立日轮换)。
+    主人会拿到额外的 _LOCATION_OWNER / _ANTICIPATION_OWNER 池。
+    """
+    if not scope or not user_id:
+        return ("", "", "")
+    today = today or datetime.now()
+    today_iso = today.strftime("%Y-%m-%d")
+    h = hashlib.sha256(f"{scope}|{user_id}|{today_iso}:scene".encode("utf-8")).digest()
+    seed = int.from_bytes(h[:8], "big", signed=False)
+    rng = Random(seed)
+
+    location_pool = _LOCATION_POOL + (_LOCATION_OWNER if is_owner else ())
+    anticipation_pool = _ANTICIPATION_POOL + (_ANTICIPATION_OWNER if is_owner else ())
+
+    location = rng.choice(location_pool)
+    sensation = rng.choice(_SENSATION_POOL)
+    anticipation = rng.choice(anticipation_pool)
+    return location, sensation, anticipation
+
+
 def build_session_spice_prompt(
     scope: str,
     user_id: str,
@@ -131,26 +248,51 @@ def build_session_spice_prompt(
     is_owner: bool = False,
     today: datetime | None = None,
 ) -> str:
-    """构建注入用的 prompt 段。空 scope / user_id 返回 ""(skip register)。"""
+    """构建注入用的 prompt 段。空 scope / user_id 返回 ""(skip register)。
+
+    包含两部分:
+    - 微风味 (情绪/身体小动作/自称口头禅) — pick_session_spice
+    - 此刻场景 (位置/体感/小期待) — pick_session_scene
+    """
     mood, body, speech = pick_session_spice(scope, user_id, is_owner=is_owner, today=today)
-    if not mood and not body and not speech:
-        return ""
-    header = "【今日笨猫·微风味 (per-session, 仅当日有效)】"
-    note = (
-        "下面三条是当日 + 当前对话方专属的微表现倾向, **只调风味不改人格**:"
-        " 自然带出来即可, 别明面上 '今天我特别...' 自报家门。"
+    location, sensation, anticipation = pick_session_scene(
+        scope, user_id, is_owner=is_owner, today=today,
     )
-    lines = []
+    if not any((mood, body, speech, location, sensation, anticipation)):
+        return ""
+    header = "【今日笨猫·微风味 + 此刻场景 (per-session, 仅当日有效)】"
+    note = (
+        "下面分两段:微风味是『今天微表现倾向』, 此刻场景是『笨猫这一刻人在哪/什么体感/盼着什么』。"
+        " 不要明面上『今天我特别...』『现在我在 X』式自报家门, 自然带进语气/动作/小描述就好。"
+    )
+    spice_lines: list[str] = []
     if mood:
-        lines.append(f"- {mood}")
+        spice_lines.append(f"- {mood}")
     if body:
-        lines.append(f"- {body}")
+        spice_lines.append(f"- {body}")
     if speech:
-        lines.append(f"- {speech}")
-    return f"{header}\n{note}\n" + "\n".join(lines)
+        spice_lines.append(f"- {speech}")
+
+    scene_lines: list[str] = []
+    if location:
+        scene_lines.append(f"- {location}")
+    if sensation:
+        scene_lines.append(f"- {sensation}")
+    if anticipation:
+        scene_lines.append(f"- {anticipation}")
+
+    out = [header, note]
+    if spice_lines:
+        out.append("· 微风味:")
+        out.extend(spice_lines)
+    if scene_lines:
+        out.append("· 此刻场景:")
+        out.extend(scene_lines)
+    return "\n".join(out)
 
 
 __all__ = [
     "pick_session_spice",
+    "pick_session_scene",
     "build_session_spice_prompt",
 ]

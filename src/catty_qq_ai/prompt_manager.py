@@ -73,6 +73,7 @@ _PROTECTED_IDENTIFIERS: frozenset[str] = frozenset({
     "catty_char_personality",      # 角色性格
     "catty_scenario",              # 场景
     "catty_character_book",        # 角色私货 + scope_lorebook (BFS 输出)
+    "catty_daily_affection_gate",  # affection-gated 日常 SFW 行为分级
     "catty_nsfw_gate",             # affection-gated NSFW 行为分级
     "catty_persona_memory",        # 人格记忆
     "catty_reply_self_check",      # 回复自检(防 客服腔)
@@ -450,6 +451,22 @@ def register_catty_persona(
         "catty_character_book",
         content_fn=_build_character_book,
         order=145,
+    )
+
+    # === Catty Daily Affection Gate (order=147) - 日常 SFW 风格闸 ===
+    # 5 档 Lv 分桶『撒娇浓度/主动度/动作池/称呼范围/结尾钩子』, 跟 catty_nsfw_gate(=148) 配对.
+    # 关键作用: 让 LLM 在日常对话也按 Lv 分档反应, 而不是"按平均人格"答, 增强不同人不同感.
+    def _build_daily_affection_gate() -> str:
+        try:
+            from .affection_daily_gate import build_daily_affection_gate
+            return build_daily_affection_gate(aff_level, is_owner=is_owner)
+        except Exception:  # noqa: BLE001
+            return ""
+
+    mgr.register(
+        "catty_daily_affection_gate",
+        content_fn=_build_daily_affection_gate,
+        order=147,
     )
     # 只有 10 级满级才能走到最后插入这种阶段』 — 10-stage matrix:
     # - max_stage = min(Lv, 群聊封顶 6); owner 等同 Lv10 满级
