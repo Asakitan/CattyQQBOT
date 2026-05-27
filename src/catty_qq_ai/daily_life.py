@@ -128,8 +128,8 @@ TOPIC_KEYWORDS: dict[str, tuple[str, ...]] = {
 }
 
 
-def detect_topics(text: str | None) -> set[str]:
-    """文本 → 命中的主题集合 (大小写不敏感的子串匹配)。"""
+def _legacy_detect_topics(text: str | None) -> set[str]:
+    """旧 keyword 子串匹配 — 保留作 fallback / 跟 NLU 求 union."""
     if not text:
         return set()
     lower = text.lower()
@@ -140,6 +140,53 @@ def detect_topics(text: str | None) -> set[str]:
                 hits.add(topic)
                 break
     return hits
+
+
+def detect_topics(text: str | None) -> set[str]:
+    """文本 → 命中的主题集合.
+
+    主人 2026-05-28: 加 text2vec embedding union 路径.
+    - 旧 keyword 永远跑 (保 recall, 不丢命中)
+    - 配 text2vec 开 → 加 cosine 相似度 ≥ threshold 的命中也加进 set
+    - 失败 / 关闭 / 空文本 → 仅 keyword 行为, 跟旧版完全一致
+    """
+    hits_regex = _legacy_detect_topics(text)
+    if not text:
+        return hits_regex
+    try:
+        from nonebot import get_driver
+        cfg = get_driver().config
+    except Exception:
+        return hits_regex
+    if not bool(getattr(cfg, "catty_use_text2vec", False)):
+        return hits_regex
+
+    try:
+        from .nlu import text2vec_engine, prototypes
+    except Exception:
+        return hits_regex
+
+    emb = text2vec_engine.embed_sync(text)
+    if emb is None:
+        return hits_regex
+    proto = prototypes.get_topic_prototypes()
+    if proto is None or proto.shape[0] != len(prototypes.TOPIC_ORDER):
+        return hits_regex
+    try:
+        sims = proto @ emb  # (N_topics,), proto 跟 emb 都已 L2-normalize
+    except Exception:
+        return hits_regex
+    threshold = float(getattr(cfg, "catty_text2vec_topic_threshold", 0.55))
+    hits_emb = {
+        topic for topic, s in zip(prototypes.TOPIC_ORDER, sims) if float(s) >= threshold
+    }
+    return hits_regex | hits_emb
+
+
+async def detect_topics_async(text: str | None) -> set[str]:
+    """异步版本 — async caller (主 reply pipeline) 用. 不阻塞 event loop."""
+    import asyncio
+    return await asyncio.to_thread(detect_topics, text)
 
 
 def pick_topical(

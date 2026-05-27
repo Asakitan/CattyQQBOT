@@ -2988,14 +2988,37 @@ def _credit_affection_for_event_once(event: MessageEvent) -> None:
             user_text = ""
         from .affection_scorer import score_user_message
         is_nsfw_ctx = any(t in user_text for t in _NSFW_TRIGGER_WORDS) if user_text else False
-        delta = score_user_message(user_text, is_nsfw_context=is_nsfw_ctx)
-        if delta != 0:
-            res = affection_store.add_exp(user_id, amount=delta)
-            if delta < 0:
-                logger.info(
-                    f"affection: -{abs(delta)} (user={user_id}, nsfw_ctx={is_nsfw_ctx}, "
-                    f"text='{user_text[:40]}', exp_now={res.get('exp')}, lv={res.get('level')})"
-                )
+
+        def _score_and_apply() -> None:
+            try:
+                delta = score_user_message(user_text, is_nsfw_context=is_nsfw_ctx)
+                if delta != 0:
+                    res = affection_store.add_exp(user_id, amount=delta)
+                    if delta < 0:
+                        logger.info(
+                            f"affection: -{abs(delta)} (user={user_id}, nsfw_ctx={is_nsfw_ctx}, "
+                            f"text='{user_text[:40]}', exp_now={res.get('exp')}, lv={res.get('level')})"
+                        )
+            except Exception as exc:  # noqa: BLE001
+                logger.debug(f"affection score+add_exp inner failed: {exc}")
+
+        # 主人 2026-05-28: 开了 text2vec → score_user_message 会 embed (~50ms +
+        # 首次加载 2-5s), 不能阻塞 event loop. fire-and-forget 到 thread pool.
+        # 关 text2vec 时也跑 to_thread (开销 ~0.1ms 可忽略, 统一路径).
+        use_t2v = False
+        try:
+            from nonebot import get_driver
+            use_t2v = bool(getattr(get_driver().config, "catty_use_text2vec", False))
+        except Exception:
+            pass
+        if use_t2v:
+            try:
+                loop = asyncio.get_running_loop()
+                loop.create_task(asyncio.to_thread(_score_and_apply))
+            except RuntimeError:
+                _score_and_apply()  # 无 running loop fallback sync
+        else:
+            _score_and_apply()
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"affection score+add_exp failed (non-fatal): {exc}")
 

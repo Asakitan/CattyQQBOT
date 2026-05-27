@@ -288,11 +288,8 @@ _NSFW_NEG_WORDS: tuple[str, ...] = (
 )
 
 
-def score_user_message(text: str, *, is_nsfw_context: bool = False) -> int:
-    """根据消息内容评估这条 user message 对好感度的贡献 (-1, 0, +1)。
-
-    is_nsfw_context: 当前消息是否在 NSFW 通道里 (会激活 NSFW 词袋, 负面权重 ×2)。
-    """
+def _legacy_score_user_message(text: str, *, is_nsfw_context: bool = False) -> int:
+    """旧词袋打分 — 保留作 fallback / threshold 不确定时兜底."""
     if not text or not text.strip():
         return 0
     pos = sum(1 for w in _POS_WORDS if w in text)
@@ -302,8 +299,64 @@ def score_user_message(text: str, *, is_nsfw_context: bool = False) -> int:
         neg += sum(1 for w in _NSFW_NEG_WORDS if w in text) * 2  # NSFW 负面更重
     if neg > pos:
         return -1
-    # 正面或中性 → +1 (保留 baseline 鼓励活跃, 跟原 add_exp(1) 行为兼容)
     return +1
+
+
+# 正/负/中性 情感类别映射 (跟 nlu/prototypes.py EMOTION_ORDER 对齐)
+_POS_EMOTIONS = frozenset({"joy", "tenderness", "admiration", "gratitude"})
+_NEG_EMOTIONS = frozenset({"annoyance", "sadness", "fear"})
+
+
+def score_user_message(text: str, *, is_nsfw_context: bool = False) -> int:
+    """根据消息内容评估这条 user message 对好感度的贡献 (-2, -1, 0, +1)。
+
+    主人 2026-05-28: 加 text2vec 8-emotion prototype 路径.
+    - 高 confidence (>= threshold) → 用 emotion 分类决定 delta
+    - 低 confidence / 关闭 / 失败 → fallback 到旧词袋打分
+    - NSFW 上下文 + fear 主导 → -2 (NSFW 中的恐惧 = 严重信号)
+
+    is_nsfw_context: 当前消息是否在 NSFW 通道里 (legacy 路径用; NLU 路径用于 fear 加权)。
+    """
+    legacy = _legacy_score_user_message(text, is_nsfw_context=is_nsfw_context)
+    if not text or not text.strip():
+        return legacy
+
+    try:
+        from nonebot import get_driver
+        cfg = get_driver().config
+    except Exception:
+        return legacy
+    if not bool(getattr(cfg, "catty_use_text2vec", False)):
+        return legacy
+
+    try:
+        from .nlu import text2vec_engine, prototypes
+    except Exception:
+        return legacy
+
+    emb = text2vec_engine.embed_sync(text)
+    if emb is None:
+        return legacy
+    proto = prototypes.get_emotion_prototypes()
+    if proto is None or proto.shape[0] != len(prototypes.EMOTION_ORDER):
+        return legacy
+    try:
+        sims = proto @ emb
+    except Exception:
+        return legacy
+    threshold = float(getattr(cfg, "catty_text2vec_emotion_threshold", 0.45))
+    idx = int(sims.argmax())
+    conf = float(sims[idx])
+    if conf < threshold:
+        return legacy
+    primary = prototypes.EMOTION_ORDER[idx]
+    if primary in _POS_EMOTIONS:
+        return +1
+    if primary == "fear" and is_nsfw_context:
+        return -2  # NSFW 中真害怕 = 强信号
+    if primary in _NEG_EMOTIONS:
+        return -1
+    return 0  # neutral 主导 → 不动 affection
 
 
 # ── NSFW 突破事件 — 概率随请求次数 ramp ────────────────────────────
