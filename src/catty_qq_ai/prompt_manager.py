@@ -922,11 +922,12 @@ def register_catty_persona(
 
     # C4 catty_relationship_pulse (order=464) - 关系升降温 (用 user_vibe_store 内 vibe_history 算)
     _pulse_user_vibe_store = ctx.get("user_vibe_store")
-    if _pulse_user_vibe_store is not None and user_id:
+    _pulse_uid = ctx.get("user_id", "") or ""
+    if _pulse_user_vibe_store is not None and _pulse_uid:
         def _build_relationship_pulse() -> str:
             try:
                 from .catty_relationship_pulse import build_relationship_pulse_prompt
-                return build_relationship_pulse_prompt(_pulse_user_vibe_store, user_id)
+                return build_relationship_pulse_prompt(_pulse_user_vibe_store, _pulse_uid)
             except Exception:  # noqa: BLE001
                 return ""
 
@@ -969,11 +970,12 @@ def register_catty_persona(
     # === Phase D2: 跨 scope mood overlay (order=257, mood=255 之后) ===
     # 主人私聊 P7/P8 reset 时写入 mood_overlay_store, 10 min 内跨 scope 切群聊仍带余韵.
     _mood_overlay_store_inst = ctx.get("mood_overlay_store")
-    if _mood_overlay_store_inst is not None and user_id and scope:
+    _mood_overlay_uid = ctx.get("user_id", "") or ""
+    if _mood_overlay_store_inst is not None and _mood_overlay_uid and scope:
         from .mood_overlay_store import build_mood_overlay_prompt as _build_mood_overlay
         mgr.register(
             "catty_mood_overlay",
-            content_fn=lambda: _build_mood_overlay(_mood_overlay_store_inst, user_id, scope),
+            content_fn=lambda: _build_mood_overlay(_mood_overlay_store_inst, _mood_overlay_uid, scope),
             order=257,
         )
 
