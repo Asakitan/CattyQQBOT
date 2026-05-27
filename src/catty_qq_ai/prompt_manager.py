@@ -617,6 +617,20 @@ def register_catty_persona(
         content_fn=_build_nsfw_gate,
         order=148,  # 紧贴 character_book=145 之后, persona_memory=150 之前
     )
+
+    # === Phase D1: 暗昧 buffer (order=149) ===
+    # SFW deep ↔ NSFW stage 1-3 重叠区软过渡 hint. 浅词 + Lv>=5/owner 触发 '半推半就'.
+    # 不动主路由 (浅词本来就走 5.5 gate), 只调描写风格.
+    def _build_flirt_buffer() -> str:
+        try:
+            from .catty_flirt_buffer import build_flirt_buffer_prompt
+            return build_flirt_buffer_prompt(
+                user_text, affection_level=aff_level, is_owner=is_owner,
+            )
+        except Exception:  # noqa: BLE001
+            return ""
+
+    mgr.register("catty_flirt_buffer", content_fn=_build_flirt_buffer, order=149)
     # catty_persona_memory: build_persona_memory_prompt(system_prompt) 输出
     # 跟 character_book ANCHOR 段高度重叠 (都说『米雪儿/超弦体/欧泊阵营/搜查官』),
     # 默认 disabled 节省 ~1200c. 想恢复在 config.catty_prompts_disabled 移除
@@ -936,6 +950,17 @@ def register_catty_persona(
             "catty_mes_example",
             content_fn=lambda: _cc.get_mes_example(ctx=macro_ctx, user_display=user_display),
             order=320,
+        )
+
+    # === Phase D2: 跨 scope mood overlay (order=257, mood=255 之后) ===
+    # 主人私聊 P7/P8 reset 时写入 mood_overlay_store, 10 min 内跨 scope 切群聊仍带余韵.
+    _mood_overlay_store_inst = ctx.get("mood_overlay_store")
+    if _mood_overlay_store_inst is not None and user_id and scope:
+        from .mood_overlay_store import build_mood_overlay_prompt as _build_mood_overlay
+        mgr.register(
+            "catty_mood_overlay",
+            content_fn=lambda: _build_mood_overlay(_mood_overlay_store_inst, user_id, scope),
+            order=257,
         )
 
     # === Catty Mood - 笨猫自己当下心情 (order=255, 紧贴 daily_life 之后) ===

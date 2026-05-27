@@ -197,6 +197,10 @@ user_details_store = UserDetailsStore(config.catty_memory_path)
 # 不持久化, 重启清空 (跟 sticky 同性质).
 from .ambient_eavesdrop import AmbientStore
 ambient_store = AmbientStore()
+# Phase D2: 跨 scope mood overlay — 主人私聊 NSFW P7/P8 后, 10 min 内切群聊仍有余韵.
+# per-user_id (不是 scope) 短期 store, 不持久化.
+from .mood_overlay_store import MoodOverlayStore
+mood_overlay_store = MoodOverlayStore()
 # Catty mood: 笨猫自己当下心情(per-scope 8 维向量,跨多轮连续衰减)。
 # 让连续对话不再每条独立 — 被惹到下一句不会立刻笑嘻嘻,落盘到 catty_moods.json。
 from .catty_mood import CattyMoodStore
@@ -4340,6 +4344,7 @@ async def _build_messages(
         "user_vibe_store": user_vibe_store,
         "user_details_store": user_details_store,
         "ambient_store": ambient_store,
+        "mood_overlay_store": mood_overlay_store,
         "user_id": str(event.user_id),
         # Catty mood: 让 register_catty_persona 用 scope 拉当前 mood 注入 prompt
         "catty_mood_store": catty_mood_store,
@@ -4501,6 +4506,26 @@ async def _build_messages(
         _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
         _sticky_active = False
+        # Phase D2: reset 之前先写 mood_overlay (仅 owner + phase >=7 时)
+        if _user_is_owner:
+            try:
+                from .nsfw_phase import get_phase_state as _get_phase_state
+                _ps = _get_phase_state(_arc_scope, str(event.user_id))
+                _cur_phase = int(getattr(_ps, "current_phase", 0) or 0)
+                _arc_cnt = int(getattr(_ps, "arc_count", 1) or 1)
+                if _cur_phase >= 7:
+                    mood_overlay_store.write(
+                        user_id=str(event.user_id),
+                        from_scope=_arc_scope,
+                        phase_at_end=_cur_phase,
+                        arc_count=_arc_cnt,
+                    )
+                    logger.info(
+                        f"mood_overlay write: user={event.user_id} phase=P{_cur_phase} "
+                        f"arc#{_arc_cnt} from_scope={_arc_scope} (closing)"
+                    )
+            except Exception as exc:  # noqa: BLE001
+                logger.debug(f"mood_overlay write (closing) failed: {exc}")
         # phase tracker: closing → reset 整个 arc + 主人 prebreak (2026-05-27)
         # + revoke 所有 NSFW grantee (主人 2026-05-28: 指定群友 NSFW 权限跟 sticky 同生命周期)
         try:
@@ -4524,6 +4549,26 @@ async def _build_messages(
             _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
             _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
             _sticky_active = False
+            # Phase D2: idle reset 也写 overlay (仅 owner + phase>=7)
+            if _user_is_owner:
+                try:
+                    from .nsfw_phase import get_phase_state as _get_phase_state
+                    _ps = _get_phase_state(_arc_scope, str(event.user_id))
+                    _cur_phase = int(getattr(_ps, "current_phase", 0) or 0)
+                    _arc_cnt = int(getattr(_ps, "arc_count", 1) or 1)
+                    if _cur_phase >= 7:
+                        mood_overlay_store.write(
+                            user_id=str(event.user_id),
+                            from_scope=_arc_scope,
+                            phase_at_end=_cur_phase,
+                            arc_count=_arc_cnt,
+                        )
+                        logger.info(
+                            f"mood_overlay write: user={event.user_id} phase=P{_cur_phase} "
+                            f"arc#{_arc_cnt} from_scope={_arc_scope} (idle)"
+                        )
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"mood_overlay write (idle) failed: {exc}")
             # sticky 因 idle 退出 → reset phase + revoke 所有 grantee (主人 2026-05-28)
             try:
                 from .nsfw_phase import (
