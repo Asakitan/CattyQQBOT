@@ -361,14 +361,37 @@ _IMAGE_INTENT_WORDS: tuple[str, ...] = (
     "生成图", "生成一张", "生成图片", "生成插画", "生成一幅",
     "做张图", "做一张图", "做个图",
     "来一张", "来张图",
-    "二次元", "插画", "动漫图", "原画", "线稿", "立绘", "头像",
+    # 主人 2026-05-27 十七轮 fix: 砍 '插画' 单独 (会被 NSFW '抽插画X' 误命中),
+    # 改成只命中 '张插画 / 画插画 / 来插画' 等显式画图动词搭配
+    "二次元", "动漫图", "原画", "线稿", "立绘", "头像",
+    "张插画", "画插画", "来插画", "出插画",
     "图片", "图像", "图一张",
+)
+
+# 主人 2026-05-27 十七轮 fix: NSFW explicit 动作词 — 出现这些就**不是**画图请求
+# 即使误命中 image_intent 也 override (例如『抽插画圈』 误中 '画X' / '插画')
+_IMAGE_INTENT_NSFW_OVERRIDE_WORDS: tuple[str, ...] = (
+    "抽插", "抽送", "插入", "插进", "插到", "插着",
+    "操我", "操你", "操猫", "操她", "操他", "干你", "干我",
+    "射进", "射满", "内射", "射在", "精液", "蜜穴", "蜜液",
+    "高潮", "潮吹", "潮喷", "勃起",
+    "肉棒", "鸡巴", "下体", "阴茎",
+    "舔下", "舔进", "扣下", "扣进",
+    "做爱", "做我", "做你",
 )
 
 
 def _is_image_intent(text: str) -> bool:
-    """user msg 是否在请求画图 (即使命中 NSFW 触发词也应让位给 imagegen tool)."""
+    """user msg 是否在请求画图 (即使命中 NSFW 触发词也应让位给 imagegen tool).
+
+    主人 2026-05-27 十七轮 fix:
+    - 如 text 含 explicit NSFW 动作词 (抽插/内射/蜜穴等) → 强制返 False
+      (避免『抽插画圈』『画一下蜜穴』这种 NSFW 上下文被画图意图劫持)
+    """
     if not text:
+        return False
+    # NSFW explicit 动作优先 — 即使含 image_intent 也判 False
+    if any(w in text for w in _IMAGE_INTENT_NSFW_OVERRIDE_WORDS):
         return False
     return any(w in text for w in _IMAGE_INTENT_WORDS)
 # 5.5 主模型自带 NSFW gate (prompt_manager._build_nsfw_gate) 能处理 stage 1-7
