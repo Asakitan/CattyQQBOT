@@ -7675,17 +7675,21 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # reply 拿到后从关键词反推当前 phase + 更新本地 state, 下次进 spark
                         # 时 build_phase_advance_hint 会根据这个 state 注入『推进到 P{N+1}』hint.
                         # 同时检测 reply 里的 location 关键词回填场景锚点 (user 没说但 AI 自己描的场景也算).
+                        # 主人 2026-05-27 升级 #2: 记录 reply opener 到 recent_openers, 下轮注入反复读 hint.
                         try:
                             from .nsfw_phase import (
                                 detect_phase_with_confidence as _detect_phase_conf,
                                 update_phase as _update_phase,
                                 update_location as _update_loc_post,
+                                record_reply_opener as _record_opener,
                             )
                             _detected, _conf = _detect_phase_conf(reply)
                             _scope_for_phase = _conversation_queue_key(event)
                             _phase_st = _update_phase(_scope_for_phase, str(event.user_id), _detected, reply_excerpt=reply[:80])
                             # reply 里也检测 location (回填: user 没说但 AI 写了的场景物件)
                             _post_loc = _update_loc_post(_scope_for_phase, str(event.user_id), "", reply)
+                            # 记录 opener 用于下轮反复读 hint
+                            _record_opener(_scope_for_phase, str(event.user_id), reply)
                             logger.info(
                                 f"chat: NSFW deep 路径 OK (try {_try}/{_MAX_NSFW_RETRY}, "
                                 f"model={_chosen_model}, phase=P{_phase_st.current_phase}/8 "

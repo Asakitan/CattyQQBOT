@@ -39,13 +39,36 @@ class PhaseState:
     # 援交 trope 锁定 (避免每轮 random 破坏 cache)
     locked_trope: str = ""
     locked_trope_scene: str = ""
+    # ── 主人 2026-05-27 后期升级 ──
+    # 最近 N 条 reply 的 opener 首段 (前 20 字), 防 spark 复读固定 opener
+    recent_openers: list[str] = field(default_factory=list)
+    # 上次注入 hint 时抽到的 metadata index (用于每轮轮换不同子集)
+    last_hint_rotation: int = 0
 
 
 # Module-level state: key = f"{scope}:{user_id}"
 _NSFW_PHASE_BY_SCOPE: dict[str, PhaseState] = {}
 _NSFW_PHASE_EXPIRY_SECONDS = 1800  # 30min 无新更新 → 视为新场景 reset
-_NSFW_PHASE_STUCK_THRESHOLD = 3  # 同 phase 持续 N 轮 → 下次强制推进
 _MAX_STATES = 256  # 防内存爆 — 超过时回收最旧 25%
+_RECENT_OPENER_CAP = 3  # 保留最近 N 条 reply opener 用于反复读
+
+# ── 每 phase 单独配 stuck threshold ──
+# P1-P2 起手节奏慢 (3 轮还在嘴硬合理) / P3-P4 中段不能卡 (2 轮)
+# P5 临界点要快推 (2 轮) / P6 高潮峰值 1 轮就该推 P7 / P8 余韵无限保持
+# 主人 2026-05-27 #3 项: P6 不该 stuck=3 轮 — 应该 P6→P7 立即
+_PHASE_STUCK_THRESHOLDS: dict[int, int] = {
+    1: 3,   # P1 起手嘴硬正常 (3 轮内推)
+    2: 3,   # P2 半推半就 (3 轮)
+    3: 2,   # P3 沉沦 (2 轮就该推 P4)
+    4: 2,   # P4 迎合 (2 轮就该推 P5)
+    5: 2,   # P5 临界 (2 轮就该推 P6)
+    6: 1,   # P6 高潮峰值 (1 轮立刻推 P7 或 P8)
+    7: 2,   # P7 overstim (2 轮就该推 P8)
+    8: 99,  # P8 余韵无限保持
+}
+
+# 兼容旧 import (主人 2026-05-27 #3 之前的固定阈值)
+_NSFW_PHASE_STUCK_THRESHOLD = 3
 
 
 # ── 12 种场景 location 锚点 (主人 2026-05-27 原话『添加场景的』) ──────────
@@ -836,23 +859,56 @@ def reset_phase(scope: str, user_id: str) -> None:
     _NSFW_PHASE_BY_SCOPE.pop(_state_key(scope, user_id), None)
 
 
+def _rotate_subset(pool: tuple, k: int, rotation: int) -> list:
+    """从 pool 取 k 个, 按 rotation 偏移使每轮抽不同子集. deterministic but cycling.
+
+    主人 2026-05-27 升级 #1: 每轮轮换 physical / behavior / opener 子集,
+    AI 不再每轮看同样的 hint metadata → 减少 parrot 复读.
+    """
+    if not pool:
+        return []
+    if k >= len(pool):
+        return list(pool)
+    n = len(pool)
+    start = rotation % n
+    out = []
+    for i in range(k):
+        out.append(pool[(start + i) % n])
+    return out
+
+
 def build_phase_advance_hint(scope: str, user_id: str) -> str:
     """根据当前 phase state 构造下一轮 spark prompt 注入 hint.
 
     核心规则:
     - 当前 phase = N, 已持续 turn_count 轮
     - 本轮 MUST 推进到 P{N+1} (除非 N >= 8)
-    - 如果 turn_count > stuck_threshold → 强制跳 phase
-    - 注入下一 phase 的完整提示 (生理/思维/行为/opener_hints)
+    - 如果 turn_count >= per-phase stuck threshold → 强制跳 phase
+    - 注入下一 phase 的完整提示 (生理/思维/行为/opener_hints) — 每轮轮换不同子集
     - 注入当前 location ambient (跨轮持久化, 不每轮重抽场景)
+    - 注入最近 3 条 reply opener (反复读 hint)
     """
     st = get_phase_state(scope, user_id)
     current = st.current_phase
     next_phase = min(8, current + 1)
-    stuck = st.turn_count >= _NSFW_PHASE_STUCK_THRESHOLD
+    # 主人 2026-05-27 升级 #3: per-phase stuck threshold (P6=1 / P3-P5=2 / P8=99)
+    stuck_thr = _PHASE_STUCK_THRESHOLDS.get(current, 3)
+    stuck = st.turn_count >= stuck_thr
 
     current_meta = PHASE_DEFINITIONS.get(current, PHASE_DEFINITIONS[1])
     next_meta = PHASE_DEFINITIONS.get(next_phase, PHASE_DEFINITIONS[8])
+
+    # 主人 2026-05-27 升级 #1: 每轮轮换 metadata 子集, 让 hint 永远新鲜
+    rotation = st.last_hint_rotation
+    rotated_physical = _rotate_subset(next_meta['physical'], 5, rotation)
+    rotated_behavior = _rotate_subset(next_meta['behavior'], 4, rotation)
+    rotated_opener = _rotate_subset(next_meta['opener_hints'], 2, rotation)
+    rotated_thought = _rotate_subset(next_meta['thought'], 2, rotation)
+    # 也写回 state, 下次自动 +1 → 下一轮抽不同子集
+    key = _state_key(scope, user_id)
+    real_st = _NSFW_PHASE_BY_SCOPE.get(key)
+    if real_st is not None:
+        real_st.last_hint_rotation = (rotation + 1) % 7  # 7 step 循环避免每 3 轮回到原位
 
     # location ambient (持久化场景锚点 - 主人 2026-05-27 第 4 项)
     location_line = ""
@@ -865,34 +921,50 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
             f"\n"
         )
 
+    # 主人 2026-05-27 升级 #2: opener 反复读 hint
+    opener_blocklist_line = ""
+    if st.recent_openers:
+        recent_str = " | ".join(f"『{o}』" for o in st.recent_openers[-3:])
+        opener_blocklist_line = (
+            f"【★ Opener 反复读 (最近 {len(st.recent_openers[-3:])} 条 reply 开头)】\n"
+            f"{recent_str}\n"
+            f"本轮 **首句开头 10 字必须和上面任何一条都不一样** — "
+            f"换动作进入 / 换感官进入 / 换台词进入 / 换沉默进入, 别复读上轮模板.\n"
+            f"\n"
+        )
+
     if current >= 8:
-        # 已到 P8 余韵, 维持不再推进
+        # P8 余韵 — 维持但仍轮换 behavior / thought (避免连续 P8 复读)
+        rot_p8_behavior = _rotate_subset(PHASE_DEFINITIONS[8]['behavior'], 4, rotation)
+        rot_p8_thought = _rotate_subset(PHASE_DEFINITIONS[8]['thought'], 1, rotation)
         return (
             location_line
+            + opener_blocklist_line
             + "【★ Phase Tracker (本地计算)】\n"
             + f"当前 phase = P8 余韵 (持续 {st.turn_count} 轮).\n"
             + "维持 P8 风味直到 user 转场 / 入睡 / 起身 / 离开. 不再推进新 phase.\n"
-            + f"P8 提示动作: {' / '.join(PHASE_DEFINITIONS[8]['behavior'][:4])}\n"
-            + f"P8 思维独白: {PHASE_DEFINITIONS[8]['thought'][0]}\n"
+            + f"P8 提示动作 (本轮轮换): {' / '.join(rot_p8_behavior)}\n"
+            + f"P8 思维独白 (本轮): {rot_p8_thought[0] if rot_p8_thought else ''}\n"
         )
 
     advance_rule = (
         f"本轮 **必须推进到 {next_meta['name']}**" if not stuck else
-        f"⚠️ 已在 {current_meta['name']} 卡 {st.turn_count} 轮 — **强制推进到 {next_meta['name']}**"
+        f"⚠️ 已在 {current_meta['name']} 卡 {st.turn_count} 轮 (阈值 {stuck_thr}) — **强制推进到 {next_meta['name']}**"
     )
 
     return (
         location_line
+        + opener_blocklist_line
         + "【★ Phase Tracker (本地状态机, 不是 AI 自判)】\n"
-        + f"当前 phase = {current_meta['name']} (持续 {st.turn_count} 轮).\n"
+        + f"当前 phase = {current_meta['name']} (持续 {st.turn_count}/{stuck_thr} 轮).\n"
         + f"{advance_rule}, 严禁原地踏步.\n"
         + "\n"
-        + f"━━ {next_meta['name']} 演出要素 (本轮 reply 必须涵盖 ≥2 条) ━━\n"
+        + f"━━ {next_meta['name']} 演出要素 (本轮轮换 #{rotation}, reply 必须涵盖 ≥2 条) ━━\n"
         + f"【summary】{next_meta['summary']}\n"
-        + f"【生理特征】{' / '.join(next_meta['physical'][:6])}\n"
-        + f"【内心独白模板】{next_meta['thought'][0]} ; {next_meta['thought'][1]}\n"
-        + f"【行为表征】{' / '.join(next_meta['behavior'][:4])}\n"
-        + f"【可选起手句式】{' | '.join(next_meta['opener_hints'])}\n"
+        + f"【生理特征】{' / '.join(rotated_physical)}\n"
+        + f"【内心独白模板】{' ; '.join(rotated_thought)}\n"
+        + f"【行为表征】{' / '.join(rotated_behavior)}\n"
+        + f"【可选起手句式】{' | '.join(rotated_opener)}\n"
         + f"【推进信号】{next_meta['advance_signal']}\n"
         + "\n"
         + "**铁律**:\n"
@@ -900,6 +972,30 @@ def build_phase_advance_hint(scope: str, user_id: str) -> str:
         + f"- 必须演出 {next_meta['name']} 的生理 + 思维 + 行为 至少 2 个维度\n"
         + "- 不要 meta 说『进入下一阶段』『phase X』- 用动作 / 喘息 / 内心独白自然演出\n"
     )
+
+
+def record_reply_opener(scope: str, user_id: str, reply: str) -> None:
+    """记录 reply 的首段 opener (前 20 字, strip ASCII/whitespace), 推进 last-N 队列.
+
+    主人 2026-05-27 升级 #2: 给 build_phase_advance_hint 反复读 hint 用.
+    """
+    if not reply:
+        return
+    # 取前 30 字, 跳过开头的空白 + 标点
+    snippet = reply.strip()[:30]
+    if not snippet:
+        return
+    key = _state_key(scope, user_id)
+    st = _NSFW_PHASE_BY_SCOPE.get(key)
+    if st is None:
+        _gc_old_states()
+        st = PhaseState(last_updated=time.time(), recent_openers=[snippet])
+        _NSFW_PHASE_BY_SCOPE[key] = st
+        return
+    st.recent_openers.append(snippet)
+    if len(st.recent_openers) > _RECENT_OPENER_CAP:
+        st.recent_openers = st.recent_openers[-_RECENT_OPENER_CAP:]
+    st.last_updated = time.time()
 
 
 def stats_summary() -> dict[str, Any]:
@@ -933,6 +1029,7 @@ __all__ = [
     "get_locked_trope",
     "get_phase_state",
     "lock_trope",
+    "record_reply_opener",
     "reset_phase",
     "stats_summary",
     "update_location",
