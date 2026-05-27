@@ -30,19 +30,34 @@ try:
 except ValueError:
     pass
 
-# 主人 2026-05-27: 屏蔽 nonebot 框架的『每条消息触发一次 matcher』INFO 噪音.
-# observe_matcher (catty_qq_ai catch-all priority=5) 接所有消息记 corpus/feed,
-# 群活跃时每秒 N 条消息都会让 nonebot 打两行 INFO:
-#   nonebot:_run_matcher:438 - Event will be handled by Matcher(...)
-#   nonebot:simple_run:864 - Matcher(...) running complete
-# 业务路径(handle_chat enter / NSFW route 等)在 catty_qq_ai 模块自己打 INFO, 不受此过滤.
-# chat_matcher 命中也会被一起屏掉, 但业务 INFO 仍能看清主回复链路, 不丢可观察性.
+# 主人 2026-05-27: 屏蔽『每条消息触发』的纯噪音 INFO, 让面板只显示业务相关日志.
+# nonebot._run_matcher 实际在 nonebot.message 模块, simple_run 在 nonebot 子模块,
+# 所以用 startswith('nonebot') 覆盖整个 nonebot.* namespace.
+#
+# 屏蔽的三类:
+#   (1) nonebot._run_matcher/simple_run: catch-all observe_matcher 每消息打 2 条 matcher 命中/完成
+#   (2) nonebot.handle_event 的 [message.group.normal] / [message.private] / [notice.*]: SUCCESS
+#       级 incoming 消息明细 (不相关消息内容直接在面板裸露). [message_sent] 保留, 让主人能看笨猫回了啥.
+#   (3) catty_qq_ai._hot_reload_loop 的 INFO: corpus 每写一次 memory.json → signature 变 →
+#       打一条 "Hot reloaded memory files". 功能正常但纯噪音. warning/error 保留 (refresh 失败要看到).
+#
+# 业务路径 (handle_chat enter / NSFW route 等) 在 catty_qq_ai 模块自己打 INFO, 不受此过滤.
 def _drop_nonebot_matcher_noise(record: "dict") -> bool:
-    # nonebot._run_matcher 实际在 nonebot.message 模块, simple_run 在 nonebot 子模块,
-    # 所以用 startswith('nonebot') 覆盖整个 nonebot.* namespace.
     name = record.get("name") or ""
-    if name.startswith("nonebot") and record.get("function") in ("_run_matcher", "simple_run"):
+    func = record.get("function") or ""
+    if name.startswith("nonebot") and func in ("_run_matcher", "simple_run"):
         return False
+    if name.startswith("nonebot") and func == "handle_event":
+        msg = str(record.get("message") or "")
+        # 只屏蔽 incoming event, 保留 [message_sent] (笨猫自己发的)
+        if "[message_sent]" not in msg:
+            return False
+    if name == "catty_qq_ai" and func == "_hot_reload_loop":
+        # 只屏蔽 INFO 级 refresh 成功, warning/error (refresh 失败) 保留
+        level = record.get("level")
+        level_name = level.name if level is not None else ""
+        if level_name == "INFO":
+            return False
     return True
 
 
