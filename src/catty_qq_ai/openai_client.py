@@ -370,7 +370,12 @@ async def _post_anthropic_native_chat(
     _cache_depth_base = int(getattr(config, "catty_prompt_cache_depth", 2))
     _cache_depth_dynamic = 4 if _non_system_count >= 12 else _cache_depth_base
 
-    prepared_messages = messages
+    # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill,
+    # 用 adapter 把 prefill 内容追加到最近 user message + drop 末尾 assistant.
+    from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
+    messages_for_native = adapt_assistant_prefill_for_strict_user_end(messages)
+
+    prepared_messages = messages_for_native
     if _cache_enable:
         import copy
 
@@ -379,12 +384,12 @@ async def _post_anthropic_native_chat(
             inject_system_tail_cache,
         )
         try:
-            prepared_messages = copy.deepcopy(messages)
+            prepared_messages = copy.deepcopy(messages_for_native)
             cachingAtDepthForClaude(prepared_messages, cachingAtDepth=_cache_depth_dynamic)
             inject_system_tail_cache(prepared_messages)
         except Exception as exc:  # noqa: BLE001
             _logger.warning("native path: cache injection failed (%s), 降级到无 cache", exc)
-            prepared_messages = messages
+            prepared_messages = messages_for_native
 
     data = await post_messages_native(
         base_url=config.catty_openai_base_url,
@@ -1223,8 +1228,52 @@ async def _post_with_fallback(
     主人 2026-05-28: 覆盖 spark / filter / mood / anger / summarize 等所有路径.
     vision 除外 (主人原话 'vision 不用 fallback', 因 deepseek-v4-flash 不支持图).
     主回复 chat_completion 已有 fallback 链, 本函数给小模型短路径用.
+
+    主人 2026-05-28: native_enabled + Claude endpoint 时, 也走 native /v1/messages
+    (绕开 NewAPI 中转层 OpenAI→Anthropic 转换 bug: codex_instant 等路径 OpenAI-compat
+    带 role=system 被中转层转 Anthropic 时不提到顶层 system, Anthropic 直接 400 拒收).
     """
     try:
+        # native /v1/messages 路径优先 (Claude endpoint + native_enabled)
+        if getattr(config, "catty_anthropic_native_enabled", False):
+            from .prompt_cache import is_claude_endpoint
+            if is_claude_endpoint(base_url, model):
+                from .anthropic_native_client import post_messages_native
+                from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
+                # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill
+                # ("This model does not support assistant message prefill. The conversation
+                # must end with a user message."). NSFW spark / codex_instant 等路径会用
+                # 末尾 assistant prefill 引导 IC 起手, 用同款 adapter 把 prefill 内容追加
+                # 到最近的 user message + drop 末尾 assistant.
+                messages_for_native = adapt_assistant_prefill_for_strict_user_end(messages)
+                # 注入 cache_control (同 _post_anthropic_native_chat 同款路径)
+                _cache_enable = enable_cache
+                prepared_messages = messages_for_native
+                if _cache_enable:
+                    import copy as _copy
+                    from .prompt_cache import (
+                        cachingAtDepthForClaude,
+                        inject_system_tail_cache,
+                    )
+                    try:
+                        prepared_messages = _copy.deepcopy(messages_for_native)
+                        cachingAtDepthForClaude(prepared_messages, cachingAtDepth=cache_depth)
+                        inject_system_tail_cache(prepared_messages)
+                    except Exception as cache_exc:  # noqa: BLE001
+                        _logger.warning("%s native cache inject failed (%s)", label or "native", cache_exc)
+                        prepared_messages = messages_for_native
+                data = await post_messages_native(
+                    base_url=base_url,
+                    api_key=api_key,
+                    model=model,
+                    messages=prepared_messages,
+                    max_tokens=max_tokens or 4096,
+                    temperature=temperature,
+                    timeout=float(timeout),
+                    enable_compaction=bool(getattr(config, "catty_compaction_enabled", False)),
+                    compaction_trigger_tokens=int(getattr(config, "catty_compaction_trigger_tokens", 150_000)),
+                )
+                return _extract_content(data)
         return await _post_chat_completion(
             base_url=base_url, api_key=api_key, model=model,
             messages=messages, timeout=timeout, proxy=config.catty_http_proxy,
@@ -1233,6 +1282,17 @@ async def _post_with_fallback(
             enable_cache=enable_cache, cache_depth=cache_depth,
         )
     except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
+        if not _fallback_is_configured(config):
+            raise
+        _logger.warning(
+            "%s cloud call failed (%s); falling back to %s",
+            label or "primary",
+            exc.__class__.__name__,
+            config.catty_ai_fallback_model,
+        )
+        return await _post_fallback_chat(config, messages)
+    except Exception as exc:  # noqa: BLE001
+        # native SDK 抛的 anthropic.* 异常不属于上面捕获范围; 让它也走 fallback
         if not _fallback_is_configured(config):
             raise
         _logger.warning(

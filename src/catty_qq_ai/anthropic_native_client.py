@@ -565,7 +565,11 @@ async def post_messages_native_data(
     _cache_depth_base = int(getattr(config, "catty_prompt_cache_depth", 2))
     _cache_depth_dynamic = 4 if _non_system_count >= 12 else _cache_depth_base
 
-    prepared_messages = messages
+    # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill
+    from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
+    messages_for_native = adapt_assistant_prefill_for_strict_user_end(messages)
+
+    prepared_messages = messages_for_native
     if _cache_enable:
         import copy as _copy
 
@@ -574,12 +578,12 @@ async def post_messages_native_data(
             inject_system_tail_cache,
         )
         try:
-            prepared_messages = _copy.deepcopy(messages)
+            prepared_messages = _copy.deepcopy(messages_for_native)
             cachingAtDepthForClaude(prepared_messages, cachingAtDepth=_cache_depth_dynamic)
             inject_system_tail_cache(prepared_messages)
         except Exception as exc:  # noqa: BLE001
             logger.warning("native_data path: cache injection failed (%s), 降级到无 cache", exc)
-            prepared_messages = messages
+            prepared_messages = messages_for_native
 
     return await post_messages_native(
         base_url=config.catty_openai_base_url,
