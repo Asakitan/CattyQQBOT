@@ -30,35 +30,38 @@ try:
 except ValueError:
     pass
 
-# 主人 2026-05-27: 屏蔽『每条消息触发』的纯噪音 INFO, 让面板只显示业务相关日志.
+# 主人 2026-05-27: 『每条消息触发』的纯噪音 INFO 不进 stderr/bot_live.log, 改路由到 noise.log
+# 让 AI 还能 grep 排查, 但主人面板/主日志干净.
 # nonebot._run_matcher 实际在 nonebot.message 模块, simple_run 在 nonebot 子模块,
 # 所以用 startswith('nonebot') 覆盖整个 nonebot.* namespace.
 #
-# 屏蔽的三类:
+# 三类被分流到 noise.log:
 #   (1) nonebot._run_matcher/simple_run: catch-all observe_matcher 每消息打 2 条 matcher 命中/完成
 #   (2) nonebot.handle_event 的 [message.group.normal] / [message.private] / [notice.*]: SUCCESS
-#       级 incoming 消息明细 (不相关消息内容直接在面板裸露). [message_sent] 保留, 让主人能看笨猫回了啥.
+#       级 incoming 消息明细. [message_sent] 留在主日志, 让主人能看笨猫回了啥.
 #   (3) catty_qq_ai._hot_reload_loop 的 INFO: corpus 每写一次 memory.json → signature 变 →
-#       打一条 "Hot reloaded memory files". 功能正常但纯噪音. warning/error 保留 (refresh 失败要看到).
+#       打一条 "Hot reloaded memory files". 功能正常但纯噪音. warning/error 保留在主日志 (refresh 失败要看到).
 #
 # 业务路径 (handle_chat enter / NSFW route 等) 在 catty_qq_ai 模块自己打 INFO, 不受此过滤.
-def _drop_nonebot_matcher_noise(record: "dict") -> bool:
+def _is_panel_noise(record: "dict") -> bool:
     name = record.get("name") or ""
     func = record.get("function") or ""
     if name.startswith("nonebot") and func in ("_run_matcher", "simple_run"):
-        return False
+        return True
     if name.startswith("nonebot") and func == "handle_event":
         msg = str(record.get("message") or "")
-        # 只屏蔽 incoming event, 保留 [message_sent] (笨猫自己发的)
         if "[message_sent]" not in msg:
-            return False
+            return True
     if name == "catty_qq_ai" and func == "_hot_reload_loop":
-        # 只屏蔽 INFO 级 refresh 成功, warning/error (refresh 失败) 保留
         level = record.get("level")
         level_name = level.name if level is not None else ""
         if level_name == "INFO":
-            return False
-    return True
+            return True
+    return False
+
+
+def _drop_panel_noise(record: "dict") -> bool:
+    return not _is_panel_noise(record)
 
 
 logger.add(
@@ -66,7 +69,7 @@ logger.add(
     level="INFO",
     format=default_format,
     diagnose=False,
-    filter=_drop_nonebot_matcher_noise,
+    filter=_drop_panel_noise,
 )
 
 logger.add(
@@ -76,7 +79,18 @@ logger.add(
     encoding="utf-8",
     level="INFO",
     enqueue=True,
-    filter=_drop_nonebot_matcher_noise,
+    filter=_drop_panel_noise,
+)
+
+# 噪音独立归档: AI / 排查脚本可 grep noise.log; 主人面板/bot_live.log 看不到.
+logger.add(
+    str(_log_dir / "noise.log"),
+    rotation="20 MB",
+    retention=3,
+    encoding="utf-8",
+    level="DEBUG",
+    enqueue=True,
+    filter=_is_panel_noise,
 )
 
 logger.add(
