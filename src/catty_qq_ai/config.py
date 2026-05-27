@@ -149,6 +149,11 @@ class Config(BaseModel):
     # NSFW deep 路径 (stage 8/9/10) 专用 model. 空时 fallback 到 catty_filter_model.
     # **不 hardcode 默认值**, 主人在 config.json 里设.
     catty_nsfw_spark_model: str = ""
+    # NSFW spark 独立 base_url / api_key (主人 2026-05-27 选项 2):
+    # 空时 fallback 到 catty_filter_base_url / catty_filter_api_key (跟 mood classifier 同站).
+    # 配上时 nsfw_spark_model 走独立 endpoint (例如 deepseek 官方), mood classifier 仍走 filter.
+    catty_nsfw_spark_base_url: str = ""
+    catty_nsfw_spark_api_key: str = ""
     # placeholder / 签到 caption 短回复路径专用 model (主人原话: 不要 spark, 走 5.3-codex).
     # chat_completion_codex_instant 优先级: model_override > codex_instant_model > nsfw_spark_model > filter_model.
     # 空时 fallback 到 nsfw_spark_model 或 filter_model. **不 hardcode 默认值**, 在 config.json 里设.

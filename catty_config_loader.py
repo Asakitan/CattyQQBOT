@@ -113,6 +113,8 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "api_key": "",
         "model": "",
         "nsfw_spark_model": "",
+        "nsfw_spark_base_url": "",
+        "nsfw_spark_api_key": "",
         "codex_instant_model": "",
         "nsfw_fallback_model": "",
         "nsfw_softrefuse_threshold": 2,
@@ -555,6 +557,9 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_FILTER_MODEL", filter_config.get("model"))
     # NSFW deep 路径专用 model (默认 gpt-5.3-codex, 跟 filter 同 base/key 但 model 单独配)
     _set_env("CATTY_NSFW_SPARK_MODEL", filter_config.get("nsfw_spark_model"))
+    # NSFW spark 独立 endpoint (主人 2026-05-27 选项 2): 空时 fallback 到 filter base/key
+    _set_env("CATTY_NSFW_SPARK_BASE_URL", filter_config.get("nsfw_spark_base_url"))
+    _set_env("CATTY_NSFW_SPARK_API_KEY", filter_config.get("nsfw_spark_api_key"))
     # placeholder / 签到 caption 等短回复路径专用 model (主人原话: 不要走 spark, 走 5.3-codex).
     # 空时 fallback 到 nsfw_spark_model 或 filter_model.
     _set_env("CATTY_CODEX_INSTANT_MODEL", filter_config.get("codex_instant_model"))

@@ -1063,13 +1063,16 @@ async def chat_completion_codex_instant(
         or (config.catty_nsfw_spark_model or "").strip()
         or config.catty_filter_model
     )
+    # nsfw_spark 独立 endpoint (主人 2026-05-27 选项 2): 配上就走独立, 空时走 filter 同站
     base_url = (
-        config.catty_filter_base_url
+        (config.catty_nsfw_spark_base_url or "").strip()
+        or config.catty_filter_base_url
         or config.catty_audit_ai_base_url
         or config.catty_openai_base_url
     )
     api_key = (
-        config.catty_filter_api_key
+        (config.catty_nsfw_spark_api_key or "").strip()
+        or config.catty_filter_api_key
         or config.catty_audit_ai_api_key
         or config.catty_openai_api_key
     )
