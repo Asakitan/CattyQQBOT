@@ -201,6 +201,13 @@ scope_lorebook_store = ScopeLorebookStore(config.catty_memory_path)
 # graceful fallback: chromadb 未装时 store._enabled=False, add/query 全部 no-op。
 from .catty_rag import CattyRAGStore
 catty_rag_store = CattyRAGStore(config.catty_memory_path, config=config)
+# Pregnancy store (主人 2026-05-27 十一轮升级『怀孕场景 + 生小猫 + 自动起名』)
+# per-user 持久化跨 session, 阈值 30 (受孕) / 40 (生产), 落盘 pregnancy.json
+from .pregnancy_store import PregnancyStore
+pregnancy_store = PregnancyStore(config.catty_memory_path)
+# spark route 预判 (在 _build_messages 注入 birth event hint 时记下预选 kitten 名字),
+# handle_chat reply 后用这个 hint 决定的名字调 record_intercourse(override=...) 保证 state 跟 reply 同步
+_PREGNANCY_PREDICT_BY_USER: dict[str, dict[str, Any]] = {}
 _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
@@ -4681,6 +4688,59 @@ async def _build_messages(
                     _slim_messages.append({"role": "system", "content": _prebreak_hint})
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"prebreak hint inject failed (non-fatal): {exc}")
+        # ── 主人 2026-05-27 十一轮升级『怀孕场景』──
+        # 1. 查当前 user pregnancy state → 注入 base hint
+        # 2. 预判本轮是否触发生产 (preg + count+1 >= BIRTH_THRESHOLD)
+        #    → 预选 kitten 名字 + 注入 birth_event_hint (让 AI 演生产 + 用预选名字)
+        # 3. 预选名字记到 _preg_predicted_kitten, reply 后 record_intercourse(override) 同步 state
+        _preg_predicted_kitten = ""
+        _preg_predict_birth = False
+        try:
+            from .pregnancy_store import (
+                build_pregnancy_hint as _build_preg_hint,
+                build_birth_event_hint as _build_birth_hint,
+                _pick_kitten_name as _pick_kit,
+                BIRTH_THRESHOLD as _BT,
+            )
+            _preg_state_pre = pregnancy_store.get_state(str(event.user_id))
+            _preg_base_hint = _build_preg_hint(_preg_state_pre)
+            if _preg_base_hint and _preg_base_hint.strip():
+                _slim_messages.append({"role": "system", "content": _preg_base_hint})
+            # 预判: 怀孕中 + 即将达 BIRTH_THRESHOLD
+            if _preg_state_pre.is_pregnant and (_preg_state_pre.pregnancy_count + 1) >= _BT:
+                _preg_predicted_kitten = _pick_kit(existing=_preg_state_pre.kittens)
+                _preg_predict_birth = True
+                _birth_hint = _build_birth_hint(
+                    _preg_predicted_kitten,
+                    len(_preg_state_pre.kittens) + 1,
+                )
+                _slim_messages.append({"role": "system", "content": _birth_hint})
+                logger.info(
+                    f"NSFW pregnancy: ★★★ 即将生产 (user={event.user_id}, "
+                    f"preg_count={_preg_state_pre.pregnancy_count}+1>={_BT}, "
+                    f"predicted_kitten={_preg_predicted_kitten!r}, "
+                    f"total_kittens={len(_preg_state_pre.kittens) + 1})"
+                )
+            elif _preg_state_pre.is_pregnant:
+                logger.info(
+                    f"NSFW pregnancy: 怀孕中 (user={event.user_id}, "
+                    f"preg_count={_preg_state_pre.pregnancy_count}/{_BT}, "
+                    f"kittens={len(_preg_state_pre.kittens)})"
+                )
+            elif _preg_state_pre.kittens:
+                logger.info(
+                    f"NSFW pregnancy: 已生 {len(_preg_state_pre.kittens)} 只小猫 "
+                    f"(user={event.user_id}, intercourse_count={_preg_state_pre.intercourse_count})"
+                )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"pregnancy hint inject failed (non-fatal): {exc}")
+        # state 暂存到 messages metadata, 让 handle_chat reply 后能拿到
+        # (因为 _build_messages 返回 messages, handle_chat 没法直接拿这两个 local)
+        # 用 module-level dict by user_id 跨 函数边界传递
+        _PREGNANCY_PREDICT_BY_USER[str(event.user_id)] = {
+            "predicted_kitten": _preg_predicted_kitten,
+            "will_give_birth": _preg_predict_birth,
+        }
         _slim_messages.append({"role": "assistant", "content": _prefill})
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
@@ -6236,6 +6296,11 @@ def _looks_like_qq_short_chat(reply: str) -> bool:
 
 def _reply_chunks(reply: str) -> list[str]:
     max_chunks = max(config.catty_reply_human_split_max_chunks, 1)
+
+    # 主人 2026-05-27: NSFW 长 reply (deepseek-v4-flash) 段落间默认双换行,
+    # OneBot 原样发到 QQ 显示成大空白卡片很丑. collapse \n\n+ → \n 保留段落感无空行.
+    # 短聊本来没空行不受影响; REPLY_SPLIT_MARKER 是单字符串不会被 regex 误伤.
+    reply = re.sub(r"\n\s*\n+", "\n", reply)
 
     # 路径 1:AI 字面输出了 REPLY_SPLIT_MARKER
     if REPLY_SPLIT_MARKER in reply:
@@ -8529,6 +8594,33 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                                 f"chat: NSFW deep 路径 OK (try {_try}/{_MAX_NSFW_RETRY}, "
                                 f"model={_chosen_model}, tools 跳过)"
                             )
+                        # ── 主人 2026-05-27 十一轮升级『怀孕计数』──
+                        # spark reply 含 explicit 内射词 → record_intercourse + 同步预选 kitten
+                        try:
+                            from .pregnancy_store import (
+                                detect_intercourse_finished as _detect_inter,
+                            )
+                            if _detect_inter(reply):
+                                _predict_meta = _PREGNANCY_PREDICT_BY_USER.pop(
+                                    str(event.user_id), None,
+                                ) or {}
+                                _override_name = _predict_meta.get("predicted_kitten", "")
+                                _preg_result = pregnancy_store.record_intercourse(
+                                    str(event.user_id),
+                                    override_kitten_name=_override_name,
+                                )
+                                _preg_st_after = _preg_result["state"]
+                                logger.info(
+                                    f"chat: ★ pregnancy event={_preg_result['event']} "
+                                    f"(user={event.user_id}, "
+                                    f"intercourse={_preg_st_after.intercourse_count}, "
+                                    f"is_pregnant={_preg_st_after.is_pregnant}, "
+                                    f"preg_count={_preg_st_after.pregnancy_count}, "
+                                    f"kittens={len(_preg_st_after.kittens)}, "
+                                    f"new_kitten={_preg_result['new_kitten']!r})"
+                                )
+                        except Exception as exc:  # noqa: BLE001
+                            logger.debug(f"pregnancy record failed (non-fatal): {exc}")
                         break
                     _refusal_history.append(reply[:60])
                     logger.warning(
