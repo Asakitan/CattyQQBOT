@@ -173,6 +173,23 @@ class Config(BaseModel):
     catty_prompt_cache_depth: int = 2
     catty_filter_group_batch_messages: int = 200
     catty_filter_group_batch_seconds: float = 1200.0
+    # ── Local NLU enrichment (jieba / text2vec / HanLP) ─────────────────
+    # 主人 2026-05-28 确认: 加 encoder-only 本地 NLU 增强层, 不生成不算 LLM.
+    # 每个 toggle 独立, 失败 graceful fallback 到 legacy regex 路径.
+    # Commit 1 上 jieba; Commit 2 上 text2vec; Commit 3 上 hanlp.
+    # 默认全 False, 每 commit 部署+验证后主人手动 flip 到 True.
+    catty_use_jieba: bool = False
+    catty_use_text2vec: bool = False
+    catty_use_hanlp: bool = False
+    catty_text2vec_model_name: str = "shibing624/text2vec-base-chinese"
+    catty_hanlp_pipeline: str = "FINE_ELECTRA_SMALL_ZH"
+    catty_text2vec_topic_threshold: float = 0.55
+    catty_text2vec_emotion_threshold: float = 0.45
+    catty_text2vec_trend_threshold: float = 0.50
+    catty_nlu_cache_dir: str = "src/catty_qq_ai/data/nlu_cache"
+    catty_nlu_warmup_on_startup: bool = True
+    # 大陆环境 HuggingFace 镜像 (空时不强制改 HF_ENDPOINT, 用环境变量原值)
+    catty_nlu_hf_endpoint: str = "https://hf-mirror.com"
     catty_filter_anger_enabled: bool = False  # 主人:每条群消息都喂 spark 判耐心太烧
     catty_filter_anger_warn_threshold: int = 60
     catty_filter_anger_mute_threshold: int = 100
