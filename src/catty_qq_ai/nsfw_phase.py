@@ -60,6 +60,11 @@ class PhaseState:
     body_focus: str = ""  # 当前被聚焦的猫娘敏感部位 (耳朵/尾巴根/喉咙下/大腿内侧)
     # ── 主人 2026-05-27 八轮升级『按性格分类的反应分支』──
     personality_facet: str = ""  # 性格 facet (tsundere/bratty/submissive/dominant/innocent/yandere/playful/cool)
+    # ── Phase D4 2026-05-28: 跨轮 arc continuity ──
+    # 上次 arc 结束时的 phase (1-8) + arc_count, soft_reset 后保留, 新 arc 起手时
+    # build_arc_resume_hint 给『上次走到 P{N}, 这次可以从 P{N-1} 起手』hint, 笨猫不从 P1 重学
+    last_arc_end_phase: int = 0   # 0 = 没有 last_arc, 1-8 = 上次结束时 phase
+    last_arc_count: int = 0       # 上次 arc 是第几轮 arc
 
 
 # Module-level state: key = f"{scope}:{user_id}"
@@ -2325,9 +2330,51 @@ def get_locked_trope(scope: str, user_id: str) -> tuple[str, str]:
 
 
 def reset_phase(scope: str, user_id: str) -> None:
-    """场景结束 / 主动退 (closing intent / sticky exit) → reset to P1."""
-    _NSFW_PHASE_BY_SCOPE.pop(_state_key(scope, user_id), None)
+    """场景结束 / 主动退 (closing intent / sticky exit) → soft reset (Phase D4).
+
+    Phase D4: 不直接 pop, 而是保留 last_arc_end_phase + last_arc_count 字段供
+    build_arc_resume_hint 用. 30 min 内 (PhaseState expiry) 新 arc 起手时可以拿到
+    上次的进度, 笨猫不从 P1 完全重学 — 提示『上次到 P{N}, 这次可以从 P{N-1} 起手』.
+    """
+    key = _state_key(scope, user_id)
+    old = _NSFW_PHASE_BY_SCOPE.get(key)
+    if old is None:
+        return
+    # 保留 last_arc 摘要, 其他字段全 reset
+    _NSFW_PHASE_BY_SCOPE[key] = PhaseState(
+        current_phase=1,
+        turn_count=0,
+        last_arc_end_phase=int(old.current_phase),
+        last_arc_count=int(old.arc_count),
+    )
     _mark_phase_state_dirty()
+
+
+def build_arc_resume_hint(scope: str, user_id: str) -> str:
+    """Phase D4: 看 last_arc_end_phase 是否有值, 给新 arc 起手 hint.
+
+    仅当 current_phase == 1 + last_arc_end_phase >= 4 时返回 hint (P4 主动迎合以上才有意义).
+    P3 以下 reset 重起没价值. 跨 30 min PhaseState expiry 后 state 失效, 自动返回 "".
+    """
+    state = get_phase_state(scope, user_id)
+    if state.current_phase != 1:
+        return ""  # 已经推进过 arc, 不需要 resume hint
+    last_phase = int(state.last_arc_end_phase or 0)
+    last_arc = int(state.last_arc_count or 0)
+    if last_phase < 4:
+        return ""
+    # 起手建议从 P{last_phase - 1} 开始, 至少 P2 (不要回 P1 完全重学)
+    resume_from = max(2, last_phase - 1)
+    return (
+        f"【笨猫·arc 续命 (上次到 P{last_phase}, 共 {last_arc} 轮 arc)】\n"
+        f"距上次 arc 结束在 30 min 内, 这是 same scope 内的**新 arc 起手**. "
+        f"笨猫**不要从 P1 完全重学**, 可以从 **P{resume_from}** 起步 — "
+        f"身体还记得刚才的感觉 (location/outfit/mood 也可以延用上次的), "
+        f"心理仍有余韵但被新一轮 trigger 重新打开. "
+        f"具体: 起手 reply 加一句『...又想要了吗笨蛋(脸更红了)』式承接, "
+        f"动作描述跳过 P1-P{resume_from-1} 的『初始害羞/试探』, "
+        f"直接进 P{resume_from} 对应行为. 节奏比纯新 arc 快 1-2 phase."
+    )
 
 
 # ── 主人 2026-05-27 五轮升级『破禁 + 出轨命令』──

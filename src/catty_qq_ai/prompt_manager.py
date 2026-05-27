@@ -618,6 +618,20 @@ def register_catty_persona(
         order=148,  # 紧贴 character_book=145 之后, persona_memory=150 之前
     )
 
+    # === Phase D4: arc continuity (order=146) ===
+    # 看 phase_state.last_arc_end_phase 是否有值, 新 arc 起手时给『从 P{N-1} 起手』hint
+    # 让笨猫不从 P1 完全重学, 跨 arc 身体记忆延续.
+    _user_id_for_arc = ctx.get("user_id", "") or ""
+    if scope and _user_id_for_arc:
+        def _build_arc_resume_hint() -> str:
+            try:
+                from .nsfw_phase import build_arc_resume_hint as _arc_resume
+                return _arc_resume(scope, _user_id_for_arc)
+            except Exception:  # noqa: BLE001
+                return ""
+
+        mgr.register("catty_arc_resume", content_fn=_build_arc_resume_hint, order=146)
+
     # === Phase D1: 暗昧 buffer (order=149) ===
     # SFW deep ↔ NSFW stage 1-3 重叠区软过渡 hint. 浅词 + Lv>=5/owner 触发 '半推半就'.
     # 不动主路由 (浅词本来就走 5.5 gate), 只调描写风格.

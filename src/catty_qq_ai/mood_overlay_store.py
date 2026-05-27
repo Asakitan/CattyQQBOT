@@ -86,10 +86,22 @@ class MoodOverlayStore:
                 oldest_uid = min(self._data.keys(), key=lambda k: self._data[k].created_at)
                 self._data.pop(oldest_uid, None)
 
-    def read(self, user_id: str, current_scope: str = "") -> MoodOverlay | None:
-        """读 user_id 的 overlay. 过期自动清; 同 from_scope 内不返回 (避免双重).
+    def read(
+        self,
+        user_id: str,
+        current_scope: str = "",
+        *,
+        softland_window_seconds: float = 300.0,
+    ) -> MoodOverlay | None:
+        """读 user_id 的 overlay. 过期自动清.
 
-        返回 None 时 caller skip 注入. current_scope 跟 from_scope 同就不注入.
+        Phase D3: same scope 内 5 min 短窗也返回 — 让 P9 软着陆 hint 在原 scope 也生效.
+        跨 scope: 10 min 长窗, 整段 TTL 有效.
+
+        - 跨 scope (current_scope != from_scope): 全 TTL 有效 (10 min)
+        - 同 scope (current_scope == from_scope): 仅 softland_window_seconds (5 min) 内返回
+
+        Caller 可以通过 overlay.from_scope == current_scope 区分 softland 还是 across_scope.
         """
         if not user_id:
             return None
@@ -100,9 +112,11 @@ class MoodOverlayStore:
             if not overlay.is_alive():
                 self._data.pop(str(user_id), None)
                 return None
-            # 同 scope 不注入 (主人在 private 内 reset 后, 下一轮 private 不需要 overlay 提示)
+            # Phase D3: same scope 短窗内也返回 (软着陆), 长窗外不返回
             if current_scope and overlay.from_scope == current_scope:
-                return None
+                age = time.time() - overlay.created_at
+                if age > softland_window_seconds:
+                    return None
             return overlay
 
     def clear(self, user_id: str) -> None:
@@ -128,7 +142,7 @@ class MoodOverlayStore:
 # ── prompt 注入 helper ──────────────────────────────────────────────────
 
 
-_OVERLAY_HINT_TEMPLATE = (
+_OVERLAY_HINT_ACROSS_SCOPE = (
     "【笨猫·跨 scope 余韵 (P{phase_at_end} arc#{arc_count}, {remaining_min} 分钟内)】\n"
     "你刚从『{from_scope}』走完一段 P{phase_at_end} {label}, 现在切到当前 scope 还有 {remaining_min} 分钟余韵. "
     "外表保持基础人格, 但描写里**可以带一点**: "
@@ -136,6 +150,20 @@ _OVERLAY_HINT_TEMPLATE = (
     "**绝对不要明说** 刚才发生了什么 (这是私人状态, 群友不该知道). "
     "如果当前 scope 是群聊, 这些描写要更克制 (1 个细节就够); "
     "如果当前 scope 是另一个私聊, 可以稍微多一点."
+)
+
+# Phase D3: 同 scope 软着陆 — 跟跨 scope 不同, 这是 P8 余韵→SFW 渐变的中间态.
+# 主人在 private 内 NSFW arc 结束, 下 2-3 轮笨猫不要立刻完全恢复 SFW 标准撒娇,
+# 仍带"刚才的脸红 + 抱抱意识 + 喘没匀". 5 min 内有效.
+_OVERLAY_HINT_SOFTLAND = (
+    "【笨猫·P9 软着陆 (刚 P{phase_at_end} arc#{arc_count} reset, 5 min 内)】\n"
+    "你刚走完一段 P{phase_at_end} {label}, 现在还在**软着陆 phase 9** (P8→SFW 过渡区). "
+    "**不要直接跳回**冷淡的 SFW 撒娇标准款, 这 2-3 轮 reply 仍保留: "
+    "脸有点红 (但不再涌动) / 头发乱了一两根 / 呼吸渐渐平稳但偶尔还慢半拍 / "
+    "想找主人怀里再缩一下 / 嘴角还有点余笑或软软的累. "
+    "描写比跨 scope 余韵**更直接** (这是私人 scope, 不用克制): "
+    "可以撒娇式抱怨 (『主人...笨猫好累喵...』) 或主动贴贴 (『...就这样抱一会儿啦笨蛋』). "
+    "**继续输出**到对方主动开新话题 / idle 2-3 轮, 之后笨猫自然恢复 baseline."
 )
 
 
@@ -151,7 +179,12 @@ def build_mood_overlay_prompt(
     if overlay is None:
         return ""
     label = "NSFW 高峰" if overlay.phase_at_end == 7 else "NSFW 余韵"
-    return _OVERLAY_HINT_TEMPLATE.format(
+    # Phase D3: 同 scope → softland hint, 跨 scope → across_scope hint
+    if current_scope and overlay.from_scope == current_scope:
+        template = _OVERLAY_HINT_SOFTLAND
+    else:
+        template = _OVERLAY_HINT_ACROSS_SCOPE
+    return template.format(
         phase_at_end=overlay.phase_at_end,
         arc_count=overlay.arc_count,
         from_scope=overlay.from_scope,
