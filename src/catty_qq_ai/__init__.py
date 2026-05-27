@@ -9306,13 +9306,21 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         _save_assistant_training_sample(
             event, incoming, messages, _strip_inline_image_markers(reply), emoji_query=emoji_query,
         )
-        emoji_entry = await _choose_or_download_emoji(event, emoji_query, incoming, image_analysis) if emoji_query else None
-        if emoji_query and emoji_entry is None:
-            logger.info(f"Emoji query did not resolve to an image: {emoji_query}")
-        if emoji_entry is None and not emoji_query and _should_auto_emoji_reply(incoming, reply):
-            emoji_entry = _choose_auto_emoji(event, reply, incoming)
-            if emoji_entry is None:
-                logger.info("Auto emoji skipped because no local emoji entry is available")
+        # 主人 2026-05-28: NSFW 模式 (走 spark 路径) 不发表情 — 沉浸感优先,
+        # AI 抽的 emoji_query 也丢掉, _should_auto_emoji_reply 也跳过.
+        _nsfw_no_emoji = bool(_prefer_spark)
+        if _nsfw_no_emoji:
+            if emoji_query:
+                logger.info(f"NSFW mode: dropped emoji_query={emoji_query!r}")
+            emoji_entry = None
+        else:
+            emoji_entry = await _choose_or_download_emoji(event, emoji_query, incoming, image_analysis) if emoji_query else None
+            if emoji_query and emoji_entry is None:
+                logger.info(f"Emoji query did not resolve to an image: {emoji_query}")
+            if emoji_entry is None and not emoji_query and _should_auto_emoji_reply(incoming, reply):
+                emoji_entry = _choose_auto_emoji(event, reply, incoming)
+                if emoji_entry is None:
+                    logger.info("Auto emoji skipped because no local emoji entry is available")
         if emoji_entry is not None:
             _remember_emoji_choice(event, emoji_entry)
             logger.info(f"Selected emoji for reply: {emoji_entry.path}")
