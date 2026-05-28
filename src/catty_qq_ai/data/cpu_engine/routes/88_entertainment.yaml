@@ -20,7 +20,7 @@
 
 - name: ent_anime_001
   intent: question
-  keywords: [动漫, 动画, 番剧, 二次元, 追番, 番组]
+  keywords: [推荐动漫, 推荐番, 动漫好看, 番剧好看, 追番推荐, 二次元推荐, 推荐番剧]
   utterances:
     - 推荐个动漫
     - 这个番好看吗
@@ -71,7 +71,7 @@
 
 - name: ent_novel_001
   intent: question
-  keywords: [小说, 看小说, 推荐书, 网文, 看书]
+  keywords: [推荐小说, 看什么小说, 推荐书, 网文推荐, 看什么书, 书单推荐]
   utterances:
     - 推荐个小说
     - 看什么小说
@@ -122,7 +122,7 @@
 
 - name: ent_streamer_001
   intent: question
-  keywords: [主播, 直播, 看直播, 弹幕, 老鼠]
+  keywords: [推荐主播, 主播推荐, 看什么直播, 直播间推荐]
   utterances:
     - 看直播
     - 主播推荐
@@ -170,7 +170,7 @@
 
 - name: ent_meme_video_001
   intent: question
-  keywords: [b 站, bilibili, up 主, 短视频, 抖音, 快手]
+  keywords: [推荐 up 主, b 站 推荐, 推荐短视频, up 主 推荐, 抖音 推荐, bilibili 推荐]
   utterances:
     - 看 b 站
     - up 主推荐

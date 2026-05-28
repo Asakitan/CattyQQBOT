@@ -1,9 +1,10 @@
-# 技术 / 编程 / 工具问询 routes (S6 R12 NLU 节点扩充, buffered 1/10)
-# 主人 2026-05-29: intent=question/info_request, 不在 strong_intents, CPU 直接 emit.
+# 技术 / 编程 / 工具问询 routes (R16 全面收紧 keywords - 防 github 单词误命中)
+# 主人 2026-05-29 截图: 用户 "你 github 搜一下" 被 random 抽到 "冲突 pull --rebase"
+# 根因: tech_git_001 keyword "github" 单独命中. 修: 单词级 → 指向 bot 的短语级.
 
 - name: tech_python_001
   intent: info_request
-  keywords: [python, 蟒蛇, python3, 学 python, py脚本]
+  keywords: [怎么学 python, python 入门, 教教我 python, py 脚本怎么写, 学 python]
   utterances:
     - python 怎么学
     - python 入门
@@ -19,7 +20,7 @@
 
 - name: tech_git_001
   intent: info_request
-  keywords: [git, github, gitlab, git pull, git push, 代码仓库]
+  keywords: [git 怎么用, github 教程, 怎么用 git, git 入门, git pull 冲突, git push 失败, 怎么 fork]
   utterances:
     - git 怎么用
     - github 教程
@@ -35,7 +36,7 @@
 
 - name: tech_bug_001
   intent: complaint
-  keywords: [bug, 报错, debug, 调试, 报错信息, traceback]
+  keywords: [出 bug 了, 这报错, 报错信息看不懂, 怎么 debug, traceback 看不懂, 调试不出来]
   utterances:
     - 又出 bug 了
     - 这报错看不懂
@@ -52,7 +53,7 @@
 
 - name: tech_ide_001
   intent: question
-  keywords: [vscode, pycharm, ide, 编辑器, 写代码用啥]
+  keywords: [用什么 ide, vscode 怎么样, pycharm 好不好, 写代码用什么, 编辑器推荐]
   utterances:
     - 用什么 ide
     - vscode 怎么样
@@ -68,7 +69,7 @@
 
 - name: tech_linux_001
   intent: question
-  keywords: [linux, ubuntu, debian, archlinux, 命令行]
+  keywords: [linux 怎么用, ubuntu 推荐, 装 linux, linux 入门, archlinux 怎么样, 哪个 linux 发行版]
   utterances:
     - linux 怎么用
     - ubuntu 还是 archlinux
@@ -84,7 +85,7 @@
 
 - name: tech_docker_001
   intent: info_request
-  keywords: [docker, 容器, dockerfile, k8s, kubernetes]
+  keywords: [docker 怎么用, 容器化部署, dockerfile 写法, k8s 入门, kubernetes 学习]
   utterances:
     - docker 怎么用
     - 容器化部署
@@ -100,7 +101,7 @@
 
 - name: tech_db_001
   intent: question
-  keywords: [mysql, postgres, sqlite, 数据库, redis, mongodb]
+  keywords: [mysql 怎么用, postgres 怎么样, sqlite 适合, redis 是什么, 数据库怎么选, mongodb 适合]
   utterances:
     - mysql 怎么用
     - postgres vs mysql
@@ -116,7 +117,7 @@
 
 - name: tech_ai_001
   intent: question
-  keywords: [chatgpt, gpt, claude, llm, ai 模型, deepseek]
+  keywords: [chatgpt 怎么样, claude 怎么样, deepseek 强不强, llm 是什么, 推荐 ai 模型, ai 模型对比]
   utterances:
     - chatgpt 怎么用
     - claude 和 gpt 哪个好
@@ -132,7 +133,7 @@
 
 - name: tech_api_001
   intent: question
-  keywords: [api, rest api, restful, 接口调用, http 请求]
+  keywords: [api 怎么调, rest 接口设计, http 请求格式, 怎么写 api, 调用接口报错]
   utterances:
     - api 怎么调
     - rest 接口设计
@@ -148,7 +149,7 @@
 
 - name: tech_git_branch_001
   intent: question
-  keywords: [分支, branch, merge, rebase, cherry-pick]
+  keywords: [git 分支, merge 还是 rebase, cherry-pick 怎么用, feature 分支策略, git branch 管理]
   utterances:
     - git 分支怎么管
     - merge 还是 rebase
