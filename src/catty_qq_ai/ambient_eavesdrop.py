@@ -30,8 +30,8 @@ from dataclasses import dataclass
 
 _MAX_AMBIENT_PER_SCOPE = 20      # per scope deque size — 30 min 内大概 20 条够拉
 _AMBIENT_TTL_SECONDS = 30 * 60   # 30 分钟过期, 太久的 ambient 没意义
-_PROMPT_MAX_COUNT = 6            # prompt 段最多展示 6 条
-_TEXT_TRIM_CHARS = 80            # 单条文本截断
+_PROMPT_MAX_COUNT = 3            # 主人 2026-05-28 C15-6: 6→3, 群聊 ambient 砍半
+_TEXT_TRIM_CHARS = 50            # 主人 2026-05-28 C15-6: 80→50, 单条截更短
 
 
 @dataclass

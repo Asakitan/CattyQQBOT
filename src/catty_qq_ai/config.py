@@ -314,7 +314,7 @@ class Config(BaseModel):
     catty_private_require_prefix: bool = False
     catty_group_require_mention_or_prefix: bool = True
     catty_group_history_scope: str = "group"
-    catty_history_turns: int = 6  # 主人 2026-05-28 C14: 16→6 (12 条), 主人原话"8-12 条刚好"
+    catty_history_turns: int = 3  # 主人 2026-05-28 C15-6: 6→3 (6 条), 强模型 + 8.4K cache 锁人格, history 给最近延续就够
     catty_session_cache_persistence_enabled: bool = True
     catty_session_cache_dir: str = "sessions"
     catty_session_cache_max_sessions: int = 200
