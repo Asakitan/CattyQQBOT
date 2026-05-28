@@ -5077,6 +5077,7 @@ async def _build_messages(
     _paid_nsfw_trope: str = ""
     _paid_nsfw_scene_setup: str = ""
     _paid_nsfw_outcome: str = "pleasant"  # pleasant +50 / unpleasant -25 (主人 2026-05-26 原话)
+    _paid_is_continuation = False  # sticky 续杯 (不重复扣分, 也不重复结算好感 delta)
     _paid_insufficient_active = False  # 援交关键词命中但积分不足 → 主 5.5 嘴硬嘲讽
     _paid_insufficient_balance = 0
     _paid_insufficient_cost = 0  # 不足时的应付价位 (私聊 100 / 群聊溢价 1500)
@@ -5093,10 +5094,33 @@ async def _build_messages(
             pick_paid_nsfw_scene as _pick_paid_scene,
             PAID_NSFW_COST as _PAID_COST,
             GROUP_PAID_NSFW_COST as _GROUP_PAID_COST,
+            get_paid_sticky as _get_paid_sticky,
+            open_paid_sticky as _open_paid_sticky,
+            close_paid_sticky as _close_paid_sticky,
         )
+        # 援交 sticky 续杯: 好友申请『包养』自动接收 / 上次援交开的窗口未过期 → 复用 meta 不重复扣分
+        _paid_sticky_meta = None if _user_is_owner else _get_paid_sticky(_sticky_key)
+        # closing intent (好了/累了/睡吧) → 提前关窗, 落回普通处理 (跟 NSFW sticky 同语义)
+        if _paid_sticky_meta is not None and _is_nsfw_closing(_utxt):
+            _close_paid_sticky(_sticky_key)
+            _paid_sticky_meta = None
+            logger.info(f"chat: PAID NSFW sticky closing intent → exit (user={event.user_id}, hit='{_utxt[:30]}')")
         _paid_kw_hit = _is_paid_trigger(_utxt)
         _premium_kw_hit = _is_group_premium(_utxt)
-        if not _user_is_owner and (_paid_kw_hit or _premium_kw_hit):
+        if _paid_sticky_meta is not None:
+            _paid_nsfw_active = True
+            _paid_is_continuation = True
+            _paid_cost_applied = int(_paid_sticky_meta.get("cost") or _PAID_COST)
+            _paid_nsfw_trope = str(_paid_sticky_meta.get("trope") or "")
+            _paid_nsfw_scene_setup = str(_paid_sticky_meta.get("scene") or "")
+            _paid_nsfw_outcome = str(_paid_sticky_meta.get("outcome") or "pleasant")
+            if not _paid_nsfw_trope or not _paid_nsfw_scene_setup:
+                _paid_nsfw_trope, _paid_nsfw_scene_setup = _pick_paid_scene()
+            logger.info(
+                f"chat: ★ PAID NSFW sticky continuation (user={event.user_id}, "
+                f"trope={_paid_nsfw_trope!r}, outcome={_paid_nsfw_outcome}, no recharge)"
+            )
+        elif not _user_is_owner and (_paid_kw_hit or _premium_kw_hit):
             if _is_group_chat_pre and not _premium_kw_hit:
                 # 群聊普通包养 → 诱导加好友私聊, 不扣分, 这一条不进 NSFW
                 _group_induce_active = True
@@ -5117,6 +5141,11 @@ async def _build_messages(
                     # 主人原话『笨猫被草的很开心 +50, 不开心 -25』.
                     import random as _rnd
                     _paid_nsfw_outcome = "pleasant" if _rnd.random() < 0.6 else "unpleasant"
+                    # 开援交 sticky 窗口: 后续私聊续杯不重复扣分 (主人 2026-05-29 sticky nsfw 时间)
+                    _open_paid_sticky(
+                        _sticky_key, trope=_paid_nsfw_trope, scene=_paid_nsfw_scene_setup,
+                        outcome=_paid_nsfw_outcome, cost=_cost,
+                    )
                     logger.info(
                         f"chat: ★ PAID NSFW triggered [{_scope_lbl}] (user={event.user_id}, "
                         f"cost={_cost}, balance {_consume.get('balance_before')}→{_consume.get('balance_after')}, "
@@ -5288,17 +5317,25 @@ async def _build_messages(
             )
             _prefill = BREAKTHROUGH_PREFILLS["paid"]
             # 应用 outcome 好感 delta (复用 BREAKTHROUGH_OUTCOME_DELTA: pleasant +50 / unpleasant -25)
+            # sticky 续杯不重复结算 (delta 只在开窗那次 charge 算一次)
             _paid_delta = BREAKTHROUGH_OUTCOME_DELTA.get(_paid_nsfw_outcome, 0)
-            try:
-                _paid_res = affection_store.add_exp(str(event.user_id), amount=_paid_delta)
+            if _paid_is_continuation:
                 logger.info(
-                    f"chat: ★ PAID NSFW route (user={event.user_id}, nick={_paid_nick!r}, "
-                    f"trope={_paid_nsfw_trope}, outcome={_paid_nsfw_outcome} {_paid_delta:+d}, "
-                    f"Lv {_user_affection_level} → {_paid_res.get('level')}, "
-                    f"exp={_paid_res.get('exp')}, forced stage 10)"
+                    f"chat: ★ PAID NSFW route [sticky continuation] (user={event.user_id}, "
+                    f"nick={_paid_nick!r}, trope={_paid_nsfw_trope}, outcome={_paid_nsfw_outcome}, "
+                    f"no delta re-apply, forced stage 10)"
                 )
-            except Exception as exc:  # noqa: BLE001
-                logger.warning(f"paid_nsfw affection apply failed: {exc}")
+            else:
+                try:
+                    _paid_res = affection_store.add_exp(str(event.user_id), amount=_paid_delta)
+                    logger.info(
+                        f"chat: ★ PAID NSFW route (user={event.user_id}, nick={_paid_nick!r}, "
+                        f"trope={_paid_nsfw_trope}, outcome={_paid_nsfw_outcome} {_paid_delta:+d}, "
+                        f"Lv {_user_affection_level} → {_paid_res.get('level')}, "
+                        f"exp={_paid_res.get('exp')}, forced stage 10)"
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(f"paid_nsfw affection apply failed: {exc}")
             _resist_label = f"paid_nsfw/{_paid_nsfw_outcome}"
             _max_stage_log = 10  # 援交强制满级
         elif _owner_cuckold_target_id:
@@ -5651,12 +5688,13 @@ async def _build_messages(
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
         # 群聊 breakthrough 是一次性 (快进到插入那条之后退回 5.5, 不延续 sticky);
-        # 积分援交也是一次性 (主人原话『一次结束』- 每次都得重新付 100 积分, 不蹭 sticky);
+        # 积分援交走独立 paid sticky 窗口 (主人 2026-05-29: 不蹭普通 _NSFW_STICKY_BY_SCOPE,
+        #   续杯由 _PAID_NSFW_STICKY 控制, 窗口内不重复扣分, 120s/closing 退出);
         # 私聊正常 + 群里非 breakthrough 进 spark 的也续 sticky 2 分钟.
         if not _is_private_chat and _breakthrough_outcome:
             logger.info(f"NSFW group breakthrough: one-shot, no sticky (key={_sticky_key})")
         elif _paid_nsfw_active:
-            logger.info(f"NSFW paid: one-shot, no sticky (key={_sticky_key}, outcome={_paid_nsfw_outcome})")
+            logger.info(f"NSFW paid: 走 paid sticky 窗口 (key={_sticky_key}, outcome={_paid_nsfw_outcome}, continuation={_paid_is_continuation})")
         else:
             _NSFW_STICKY_BY_SCOPE[_sticky_key] = _now + _NSFW_STICKY_SECONDS
         _src = "deep_kw" if _hit_deep else "sticky"

@@ -769,6 +769,52 @@ def pick_paid_nsfw_scene() -> tuple[str, str]:
     return _r.Random().choice(_PAID_NSFW_SCENES)
 
 
+# ──── 援交 sticky 窗口 (主人 2026-05-29 好友申请自动接收) ───────────────────
+# 现有援交是 one-shot (每次重付 100). 好友申请『包养』自动接收后, 开一段 sticky 窗口,
+# 窗口内对方私聊续杯走完整援交 NSFW 不重复扣分, 复用 handle_chat 的 NSFW sticky 退出机制
+# (closing intent / idle / 超时) 同步关闭. 不持久化, 重启清空 (跟 _NSFW_STICKY 同性质)。
+PAID_NSFW_STICKY_SECONDS = 120.0
+_PAID_NSFW_STICKY: dict[str, dict] = {}  # sticky_key -> {trope, scene, outcome, cost, until}
+_PAID_NSFW_STICKY_MAX = 2048  # 防内存爆
+
+
+def open_paid_sticky(
+    sticky_key: str, *, trope: str, scene: str, outcome: str, cost: int
+) -> None:
+    """开一段援交 sticky 窗口. sticky_key 对齐 handle_chat 的 f'{scope}:{user_id}'."""
+    if not sticky_key:
+        return
+    _PAID_NSFW_STICKY[sticky_key] = {
+        "trope": trope,
+        "scene": scene,
+        "outcome": outcome,
+        "cost": int(cost),
+        "until": time.time() + PAID_NSFW_STICKY_SECONDS,
+    }
+    if len(_PAID_NSFW_STICKY) > _PAID_NSFW_STICKY_MAX:
+        now = time.time()
+        for k in [k for k, v in _PAID_NSFW_STICKY.items() if v.get("until", 0) < now]:
+            _PAID_NSFW_STICKY.pop(k, None)
+
+
+def get_paid_sticky(sticky_key: str) -> dict | None:
+    """取援交 sticky meta, 过期自动清并返回 None."""
+    if not sticky_key:
+        return None
+    meta = _PAID_NSFW_STICKY.get(sticky_key)
+    if meta is None:
+        return None
+    if time.time() >= float(meta.get("until", 0)):
+        _PAID_NSFW_STICKY.pop(sticky_key, None)
+        return None
+    return meta
+
+
+def close_paid_sticky(sticky_key: str) -> None:
+    """关闭援交 sticky 窗口 (跟 NSFW sticky 退出同步调用)."""
+    _PAID_NSFW_STICKY.pop(sticky_key, None)
+
+
 def build_paid_nsfw_override(
     *,
     is_owner: bool = False,
@@ -953,6 +999,10 @@ __all__ = [
     "BREAKTHROUGH_PREFILLS",
     "PAID_NSFW_COST",
     "GROUP_PAID_NSFW_COST",
+    "PAID_NSFW_STICKY_SECONDS",
+    "open_paid_sticky",
+    "get_paid_sticky",
+    "close_paid_sticky",
     "build_breakthrough_override",
     "build_group_paid_induce_prompt",
     "build_paid_nsfw_advertise_prompt",

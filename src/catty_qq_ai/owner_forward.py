@@ -162,6 +162,101 @@ async def _send_stranger_friend_hint(bot: Bot, user_id: int) -> None:
         logger.warning(f"owner_forward: failed to hint stranger {user_id}: {exc}")
 
 
+# ---------- 援交『包养』自动接收好友 ----------
+
+def _is_paid_auto_accept_enabled() -> bool:
+    config = _get_config()
+    if config is None:
+        return False
+    return bool(getattr(config, "catty_owner_forward_paid_auto_accept_enabled", False))
+
+
+async def _try_paid_friend_accept(
+    bot: Bot, user_id: int, flag: str, *, source: str
+) -> None:
+    """『包养笨猫』命中 → (有 flag 则)自动同意好友 + 扣 100 积分.
+
+    够 → 开援交 sticky 窗口 + 主动私聊开场, 对方下一句私聊由 handle_chat 走完整 NSFW。
+    不够 → 主动私聊嘴硬催签到。
+    source ∈ {'friend_request', 'temp_msg'}, 仅用于日志/通知。
+    """
+    if user_id <= 0:
+        return
+    try:
+        from .affection_scorer import (
+            pick_paid_nsfw_scene,
+            open_paid_sticky,
+            PAID_NSFW_COST,
+            BREAKTHROUGH_PREFILLS,
+        )
+        from . import affection_store
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"owner_forward: paid auto-accept import failed: {exc}")
+        return
+
+    # 1) 有 pending flag 才能同意好友 (临时会话无 flag 时只回提示, 不凭空加好友)
+    accepted = False
+    if flag:
+        try:
+            await bot.set_friend_add_request(flag=flag, approve=True)
+            accepted = True
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"owner_forward: paid auto-accept set_friend_add_request failed: {exc}")
+
+    # 2) 扣 100 积分
+    consume = affection_store.consume_points(str(user_id), PAID_NSFW_COST)
+    balance_before = int(consume.get("balance_before") or 0)
+    if consume.get("ok"):
+        # 够 → 开 sticky 窗口 + 主动开场
+        import random as _r
+        trope, scene = pick_paid_nsfw_scene()
+        outcome = "pleasant" if _r.random() < 0.6 else "unpleasant"
+        sticky_key = f"private:{user_id}:{user_id}"
+        open_paid_sticky(
+            sticky_key, trope=trope, scene=scene, outcome=outcome, cost=PAID_NSFW_COST,
+        )
+        opener = (
+            f"{BREAKTHROUGH_PREFILLS['paid']}"
+            f"积分收到了喵…哼，笨猫这就履约。想要就现在私聊笨猫嘛，"
+            f"接下来这会儿人家都…都听你的喵（脸红炸毛甩尾巴）ฅฅ"
+        )
+        try:
+            await bot.send_private_msg(user_id=user_id, message=opener)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"owner_forward: paid opener send failed to {user_id}: {exc}")
+        logger.info(
+            f"owner_forward: ★ PAID friend auto-accept [{source}] (user={user_id}, "
+            f"accepted={accepted}, cost={PAID_NSFW_COST}, "
+            f"balance {balance_before}→{consume.get('balance_after')}, "
+            f"trope={trope!r}, outcome={outcome})"
+        )
+        await _send_to_owner(
+            bot,
+            f"[包养自动接收] QQ {user_id} 发了包养关键词({source})喵～\n"
+            f"已{'同意好友 + ' if accepted else ''}扣 {PAID_NSFW_COST} 积分"
+            f"(余 {consume.get('balance_after')})进援交 sticky，结果 {outcome}。",
+        )
+    else:
+        # 不够 → 嘴硬催签到
+        nag = (
+            f"哼，才 {balance_before} 积分就想包养笨猫？连 {PAID_NSFW_COST} 都凑不齐喵！"
+            f"先发『签到』攒够积分再来啦杂鱼～(尾巴一甩) ฅฅ"
+        )
+        try:
+            await bot.send_private_msg(user_id=user_id, message=nag)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"owner_forward: paid nag send failed to {user_id}: {exc}")
+        logger.info(
+            f"owner_forward: PAID friend auto-accept 积分不足 [{source}] (user={user_id}, "
+            f"accepted={accepted}, balance={balance_before}, need={PAID_NSFW_COST}) → 催签到"
+        )
+        await _send_to_owner(
+            bot,
+            f"[包养自动接收] QQ {user_id} 发了包养关键词({source})但积分不足喵～\n"
+            f"已{'同意好友，' if accepted else ''}积分 {balance_before} < {PAID_NSFW_COST}，已催他签到。",
+        )
+
+
 # ---------- request handlers ----------
 
 async def _request_rule(event: FriendRequestEvent | GroupRequestEvent) -> bool:
@@ -179,6 +274,15 @@ async def _handle_request(bot: Bot, event: FriendRequestEvent | GroupRequestEven
     comment = str(getattr(event, "comment", "") or "")
     flag = str(getattr(event, "flag", "") or "")
     if isinstance(event, FriendRequestEvent):
+        # 援交『包养』自动接收: 附言命中关键词 → 自动同意 + 扣分, 不再转发主人手动处理
+        if _is_paid_auto_accept_enabled():
+            try:
+                from .affection_scorer import is_paid_nsfw_trigger
+                if is_paid_nsfw_trigger(comment):
+                    await _try_paid_friend_accept(bot, user_id, flag, source="friend_request")
+                    return
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"owner_forward: paid friend-request check failed: {exc}")
         _remember_pending(user_id, flag, "friend", "friend")
         text = (
             "[好友申请] 有人想加猫猫做好友嗷呜～\n"
@@ -244,6 +348,22 @@ async def _handle_private(
 
     # 2) 非主人好友私聊 → 放行给主聊天链路直接回复；陌生人/临时会话才转发给主人
     sub_type = _private_message_sub_type(event)
+    # 援交『包养』自动接收: 陌生人/临时会话命中关键词 → 同意 pending 好友申请 + 扣分, 不转发主人
+    if _should_forward_private_message(event) and _is_paid_auto_accept_enabled() and raw_text:
+        _paid_handled = False
+        try:
+            from .affection_scorer import is_paid_nsfw_trigger
+            if is_paid_nsfw_trigger(raw_text):
+                pending = _pop_pending(str(sender_qq))
+                flag = str(pending.get("flag", "")) if pending else ""
+                await _try_paid_friend_accept(bot, sender_qq, flag, source="temp_msg")
+                _paid_handled = True
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"owner_forward: paid temp-msg check failed: {exc}")
+        # finish() 抛 FinishedException 须在 try 外, 避免被上面 except 吞掉
+        if _paid_handled:
+            matcher.stop_propagation()
+            await matcher.finish()
     if not _should_forward_private_message(event):
         logger.debug(
             f"owner_forward: private message from {sender_qq} sub_type={sub_type or 'unknown'} allowed to AI"
