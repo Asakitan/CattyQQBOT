@@ -10010,9 +10010,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             _enr_hash = _hashlib2.md5(
                 str(_enriched_user_content_for_history).encode("utf-8", "ignore")
             ).hexdigest()[:8]
+            _enr_len = len(str(_enriched_user_content_for_history))
             logger.info(
-                "enriched_diag: scope=%s enriched_user=%dc#%s (下轮 m[-3] hash 应等此)",
-                history_key, len(str(_enriched_user_content_for_history)), _enr_hash,
+                f"enriched_diag: scope={history_key} enriched_user={_enr_len}c#{_enr_hash} (下轮 m[-3] hash 应等此)"
             )
         except Exception:  # noqa: BLE001
             pass
