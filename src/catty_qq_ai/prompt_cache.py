@@ -144,20 +144,22 @@ def inject_system_tail_cache(messages: list[dict]) -> list[dict]:
     Anthropic Prompt Caching 要求 prefix 字节级一致才命中; 这一改让 cache 真正吃到
     stable persona/character_card/world_info/qq_rhythm/examples 等几 K 段。
     """
-    # 主人 2026-05-28 C7-4: 回退 sweep 后, sys 段含动态段 (recency/phase_hint/starter/preg/
-    # climax/arc_counter/trope), 标 last_top_system 让 prefix 含动态段, 每轮字节漂移 →
-    # cache 永远 miss (实测 11:05/11:06 sys_blocks=5 cache_control=sys[4] = trope 动态段,
-    # 100% miss). 改成**优先 boundary_idx (静态前缀末锚点) → prefix 字节稳定 → cache 命中**.
-    # SFW 主路径 PromptManager order=455 register boundary, NSFW spark 路径手动 append marker 段.
-    # fallback last_top_system 兼容无 boundary 异常路径.
+    # 主人 2026-05-28 C8: 全局扫描 boundary, fallback 仍用顶部连续段末尾.
+    # 之前 bug: 循环遇到非 system msg 就 break, 错过 inject_author_note 中间插入后的
+    # boundary marker (boundary 在 history 中间夹的 author_note 后面那段 system 里).
+    # 修复: boundary 全局扫描所有 role=system msg; fallback last_top_system 仍记顶部连续段
+    # (保证 fallback 路径标在静态段附近, 不标到动态尾段).
     boundary_idx = -1
     last_top_system = -1
+    top_continuous_ended = False
     for i, msg in enumerate(messages):
         if msg.get("role") != "system":
-            break  # 离开顶部 system 块
-        last_top_system = i
+            top_continuous_ended = True
+            continue  # 不 break, 继续全局扫描 boundary
+        if not top_continuous_ended:
+            last_top_system = i  # 仅在顶部连续段记 last_top
         if boundary_idx < 0 and _has_marker_in_content(msg.get("content"), _CACHE_BOUNDARY_MARKER):
-            boundary_idx = i
+            boundary_idx = i  # boundary 全局扫描
 
     target = boundary_idx if boundary_idx >= 0 else last_top_system
     if target >= 0:

@@ -20,7 +20,10 @@
 """
 from __future__ import annotations
 
+import hashlib
+import json
 import logging
+import uuid
 from typing import Any
 
 logger = logging.getLogger("catty_qq_ai.anthropic_native")
@@ -29,18 +32,15 @@ logger = logging.getLogger("catty_qq_ai.anthropic_native")
 # 快照, 用于 per-block diff log 找出真实对话 prefix 漂移源.
 _last_diff_snapshot: dict[str, Any] = {}
 
-# 主人 2026-05-28: beta header list 必须 sort + dedupe 后再 join, 跨调用顺序一致才
-# 不破 cache (CC promptCacheBreakDetection.ts:289 同款做法).
+# 主人 2026-05-28 C8: 默认 betas 列表对齐 CC 角色扮演场景 (claude-code-best/src/services/api/claude.ts).
+# 删: prompt-caching-2024-07-31 + extended-cache-ttl-2025-04-11 (已 GA, MD section 1.6 + 6 推荐删).
+# 加: interleaved-thinking-2025-05-14 + prompt-caching-scope-2026-01-05 (CC 角色扮演标配).
+# 保留: context-management-2025-06-27, compact-2026-01-12, cache-diagnosis-2026-04-07.
 _DEFAULT_BETAS_LIST: list[str] = [
-    "prompt-caching-2024-07-31",
-    "compact-2026-01-12",
+    "interleaved-thinking-2025-05-14",
     "context-management-2025-06-27",
-    # 主人 2026-05-28: 启用 1h cache TTL — Anthropic 已 GA, beta header 在
-    # extended-cache-ttl-2025-04-11. cache_control: {ttl: '1h'} 必须搭这个 header.
-    "extended-cache-ttl-2025-04-11",
-    # 主人 2026-05-28: 启用 cache 诊断 beta — Anthropic 返回 diagnostics.cache_miss_reason
-    # 告诉每次 cache miss 原因 (system_changed / tools_changed / messages_changed / etc.)
-    # 调试 cache 命中率上不去的黄金工具.
+    "prompt-caching-scope-2026-01-05",
+    "compact-2026-01-12",
     "cache-diagnosis-2026-04-07",
 ]
 
@@ -48,6 +48,10 @@ _DEFAULT_BETAS_LIST: list[str] = [
 # 主人 2026-05-28 C2: 记录每个 scope 上一次 chat completion 的 message_id, 用来给
 # 下一次请求传 diagnostics.previous_message_id, 让 Anthropic 告诉我们 cache miss 原因.
 _LAST_MESSAGE_ID_BY_SCOPE: dict[str, str] = {}
+
+# 主人 2026-05-28 C8: catty 启动时生成的 session_id, 跟 CC getAPIMetadata 同款做 metadata.user_id
+# JSON 字段. NewAPI relay 如果按 user_id hash 选账号, 同一 session 稳定路由同一账号 → cache 命中.
+_BOT_SESSION_ID: str = uuid.uuid4().hex[:16]
 
 
 def _build_beta_header(extra_betas: list[str] | None = None) -> str:
@@ -495,7 +499,12 @@ async def post_messages_native(
             "anthropic SDK 未安装. 请运行 pip install anthropic>=0.45.0"
         ) from exc
 
-    headers: dict[str, str] = {"anthropic-beta": _build_beta_header(extra_betas)}
+    # 主人 2026-05-28 C8: 显式设 anthropic-version + anthropic-beta, 对齐 MD section 9.1 模板.
+    # anthropic-version 在 anthropic-beta 前面 (key 顺序), 确保 NewAPI relay 看到的 header 一致.
+    headers: dict[str, str] = {
+        "anthropic-version": "2023-06-01",
+        "anthropic-beta": _build_beta_header(extra_betas),
+    }
     if extra_headers:
         headers.update(extra_headers)
 
@@ -537,10 +546,22 @@ async def post_messages_native(
         # convert_openai_tool_to_anthropic 对已经是 Anthropic 格式的 tool 原样返回
         create_kwargs["tools"] = [convert_openai_tool_to_anthropic(t) for t in tools]
 
-    # 主人 2026-05-28: metadata.user_id 注入 (Anthropic abuse detection / rate limit).
-    # 私聊: user_id="qq_private_<uid>"; 群聊: user_id="qq_group_<gid>"
+    # 主人 2026-05-28 C8: metadata.user_id 对齐 CC getAPIMetadata 同款 JSON 结构.
+    # CC: JSON.stringify({device_id, session_id, account_uuid}).
+    # catty: {device_id: catty_<scope_hash>, session_id: _BOT_SESSION_ID, scope: <orig>}.
+    # 关键修复: NewAPI relay 如果按 user_id hash 选账号, JSON 字符串稳定路由同一账号 →
+    # cache 写读同账号 → cache hit. 之前短字符串 "qq_private_xxx" 可能让不同次请求路由不同账号.
     if metadata_user_id:
-        create_kwargs["metadata"] = {"user_id": metadata_user_id}
+        scope_hash = hashlib.sha256(metadata_user_id.encode("utf-8")).hexdigest()[:16]
+        cc_style_user_id = json.dumps(
+            {
+                "device_id": f"catty_{scope_hash}",
+                "session_id": _BOT_SESSION_ID,
+                "scope": metadata_user_id,
+            },
+            separators=(",", ":"),
+        )
+        create_kwargs["metadata"] = {"user_id": cc_style_user_id}
 
     # 主人 2026-05-28 C2: cache_diagnostics 通过 extra_body 传 (SDK 不支持顶层 diagnostics 参数).
     # NOTE: anthropic Python SDK ≤ 0.49.x 没 diagnostics kwarg, 必须走 extra_body 透传到 HTTP body.
