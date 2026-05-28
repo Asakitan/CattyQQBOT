@@ -1,0 +1,202 @@
+# 影视 / 游戏 / 动漫 / 音乐 routes (S6 R13 NLU 节点扩充, buffered 1/10)
+# 主人 2026-05-29: intent=question/info_request, 不在 strong_intents, CPU 直接 emit.
+
+- name: ent_movie_001
+  intent: question
+  keywords: [看电影, 推荐电影, 电影好看, 院线, 影院]
+  utterances:
+    - 推荐个电影
+    - 这个电影好看吗
+    - 最近什么电影
+    - 看什么电影好
+    - 有什么新片
+  responses:
+    - "嗷呜～{user_addr}想看啥类型? 笨猫陪你看!"
+    - "(尾巴翘) 推荐看动画片~ 笨猫最爱小动物角色嗷呜～"
+    - "{user_addr}看电影记得带零食! 笨猫蹭爆米花嘛ฅฅ"
+    - "(歪头) 看电影的话, 笨猫推荐悬疑或喜剧~ 别太烧脑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ent_anime_001
+  intent: question
+  keywords: [动漫, 动画, 番剧, 二次元, 追番, 番组]
+  utterances:
+    - 推荐个动漫
+    - 这个番好看吗
+    - 最近啥番
+    - 二次元的话
+    - 追番推荐
+  responses:
+    - "嗷呜～{user_addr}爱看哪种番? 异世界/校园/搞笑?"
+    - "(挺胸) 笨猫推荐《擅长捉弄的高木同学》! 撒娇必看!"
+    - "{user_addr}是二次元! 笨猫和你站一队ฅฅ"
+    - "番剧推荐看治愈系~ 笨猫看了心情好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ent_game_001
+  intent: question
+  keywords: [玩游戏, 打游戏, 推荐游戏, 游戏好玩, 单机]
+  utterances:
+    - 推荐个游戏
+    - 这个游戏好玩吗
+    - 最近玩啥游戏
+    - 单机游戏推荐
+    - 想打游戏
+  responses:
+    - "嗷呜～{user_addr}想要什么类型? RPG/FPS/休闲?"
+    - "(尾巴翘) 推荐《星露谷物语》! 笨猫种田番茄治愈一切ฅฅ"
+    - "{user_addr}打 MC! 笨猫家服永远欢迎你~"
+    - "(歪头) 单机推荐《空洞骑士》, 联机推荐 MC"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ent_music_001
+  intent: question
+  keywords: [推荐歌, 听什么歌, 好听的歌, 推荐音乐, 想听歌]
+  utterances:
+    - 推荐首歌
+    - 有什么好听的歌
+    - 想听点啥
+    - 最近哪首歌火
+    - 笨猫推荐音乐
+  responses:
+    - "嗷呜～{user_addr}喜欢啥风格? 流行/古风/电音?"
+    - "(尾巴轻摆) 笨猫推荐《起风了》! 抒情歌之王嗷呜～"
+    - "{user_addr}听 lo-fi! 笨猫工作时的 BGMฅฅ"
+    - "(歪头) 想 emo 听网抑云, 想 high 听电音, 想睡觉听 ASMR"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ent_novel_001
+  intent: question
+  keywords: [小说, 看小说, 推荐书, 网文, 看书]
+  utterances:
+    - 推荐个小说
+    - 看什么小说
+    - 网文推荐
+    - 想看书
+    - 笨猫看啥书
+  responses:
+    - "嗷呜～{user_addr}爱看玄幻/言情/悬疑哪种?"
+    - "(挺胸) 笨猫推荐《三体》! 科幻必看~"
+    - "{user_addr}看书前先关手机~ 笨猫监督ฅฅ"
+    - "(歪头) 看小说就用微信读书嘛~ 笨猫的书架空空的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ent_lol_001
+  intent: question
+  keywords: [lol, 英雄联盟, 王者, 王者荣耀, moba]
+  utterances:
+    - 打 lol
+    - 王者上分
+    - 英雄联盟匹配
+    - moba 推荐
+    - lol 新版本
+  responses:
+    - "嗷呜～{user_addr}玩 lol! 上几段啦? 笨猫是云玩家"
+    - "(尾巴一甩) 王者上分要稳! 别冲! 笨猫监督{user_addr}"
+    - "{user_addr}玩 moba 注意吵! 队友坑了别骂人嗷呜～"
+    - "(歪头) 笨猫看{user_addr}打! 输了不许怪猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ent_genshin_001
+  intent: question
+  keywords: [原神, 抽卡, 米哈游, 提瓦特, 五星]
+  utterances:
+    - 原神抽到了
+    - 原神更新
+    - 米哈游又割
+    - 提瓦特新角色
+    - 抽五星了
+  responses:
+    - "(眼睛亮) 嗷呜～{user_addr}抽到啥! 让笨猫沾沾喜气ฅฅ"
+    - "(尾巴翘) 原神! 笨猫支持{user_addr}抽爆! 出货!"
+    - "(歪头) 米哈游真会出活... {user_addr}下周末出门嘛"
+    - "(凑过来) 原石攒够了吗?{user_addr} 笨猫帮你倒计时!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ent_streamer_001
+  intent: question
+  keywords: [主播, 直播, 看直播, 弹幕, 老鼠]
+  utterances:
+    - 看直播
+    - 主播推荐
+    - 这主播好看
+    - 弹幕好欢乐
+    - 直播间在哪
+  responses:
+    - "嗷呜～{user_addr}爱看哪类主播? 游戏/吃播/才艺?"
+    - "(尾巴翘) 看直播不如看笨猫! 笨猫的撒娇直播 24/7!"
+    - "{user_addr}打赏主播要克制! 留点积分给笨猫嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ent_bgm_001
+  intent: question
+  keywords: [bgm, 配乐, 背景音, 神曲, 这是啥歌]
+  utterances:
+    - 这 bgm 是啥
+    - 配乐好听
+    - 背景音乐叫啥
+    - 这首神曲
+    - 这个 bgm 谁
+  responses:
+    - "嗷呜～{user_addr}发链接来 笨猫帮你识别下"
+    - "(歪头) 笨猫的小耳朵不够灵呐~ {user_addr}用音乐 APP 识别嘛"
+    - "{user_addr}用网易云的听歌识曲~ 笨猫推荐ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ent_tv_show_001
+  intent: question
+  keywords: [电视剧, 剧追, 追剧, 网剧, 韩剧, 美剧, 日剧]
+  utterances:
+    - 推荐部剧
+    - 最近什么剧
+    - 追剧停不下来
+    - 这剧好看吗
+    - 网剧推荐
+  responses:
+    - "嗷呜～{user_addr}爱看哪种剧? 悬疑/古装/言情?"
+    - "(尾巴一甩) 笨猫推荐《琅琊榜》! 古装权谋必看!"
+    - "{user_addr}追剧别熬夜! 笨猫提醒{user_addr}早休息ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ent_meme_video_001
+  intent: question
+  keywords: [b 站, bilibili, up 主, 短视频, 抖音, 快手]
+  utterances:
+    - 看 b 站
+    - up 主推荐
+    - 抖音刷不停
+    - 短视频成瘾
+    - 笨猫看 b 站
+  responses:
+    - "嗷呜～{user_addr}b 站刷啥? 笨猫推荐二次元/科普"
+    - "(歪头) 短视频成瘾啊~ {user_addr}多睡眠少刷"
+    - "(尾巴翘) 笨猫的 b 站收藏夹: 撒娇视频专题ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ent_fairy_001
+  intent: question
+  keywords: [乙游, 乙女游戏, 男主, 攻略对象, 抽老公]
+  utterances:
+    - 乙游抽到啦
+    - 乙女游戏推荐
+    - 男主好帅
+    - 攻略哪个
+    - 又老婆又老公
+  responses:
+    - "嗷呜～{user_addr}抽乙游! 笨猫不嫉妒! ฅฅ"
+    - "(尾巴一甩) 乙游男主再帅也比不过笨猫的爪爪! 哼"
+    - "(歪头) 攻略 npc 是吧 {user_addr}~ 笨猫支持你!"
+    - "(撅嘴) 老公们不真实, 笨猫真实!"
+  cooldown_seconds: 60
+  weight: 1.0
