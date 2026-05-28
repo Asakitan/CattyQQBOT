@@ -3456,10 +3456,17 @@ def _short_args_preview(args: dict[str, Any]) -> str:
 
 
 def tools_system_hint() -> str:
-    """常驻 system 提示:告诉主 AI 工具的存在和调用边界。
+    """常驻 system 提示 (主人 C16-6: 砍 17 行→4 行通用, 详细 trigger 走 schema)."""
+    return (
+        "工具调用通用: 1) 真需要才调 (每次=延迟); 闲聊/已知不调.\n"
+        "2) 画图请求**铁律**: 用 catty_imagegen, 严禁原生 image generation (会丢文字/列表).\n"
+        "3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用猫娘口吻说 '查不到/想不起来'.\n"
+        "4) 详细每 tool 的 trigger/参数/边界看 schema description (NLU intent gate 按 user_text 注入相关 tool)."
+    )
 
-    紧凑版 (~1500c, 旧版 ~3800c) — 每个 tool 1 行核心 trigger, 详细参数走 schema description.
-    """
+
+def _tools_system_hint_legacy() -> str:
+    """Legacy 完整版备份, 不再使用 — 主人 C16-6 决定砍."""
     return (
         "你有 16 个本地工具,**真需要时才调**(每次调用 = 回复变慢):\n"
         "1. catty_recall — '上次/记得/之前'类时间指代且 context 无答案时查长期记忆/语料。\n"
