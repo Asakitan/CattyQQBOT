@@ -311,13 +311,16 @@ async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
     **不要 AI 写角色锁** (1girl/1boy/白发/黑影等), 那些由 characterPrompts 锁定。
     AI 只描述: 体位/动作/表情/分泌物/场景/光线。
     """
-    # 主人 2026-05-29: NSFW caption 一律走 chat_completion_codex_instant (DeepSeek 通道:
-    # catty_codex_instant_model + spark/filter/audit endpoint), 避开主 Opus 通道省 token +
-    # 跟主 AI 出 catty_imagegen tool_call 同一条 DeepSeek bypass 链对齐.
-    # codex_instant 内部有 endpoint 优先级 + fallback, 这里只判断 model 是否配上.
-    _codex_model = (getattr(config, "catty_codex_instant_model", "") or "").strip()
-    _spark_model = (getattr(config, "catty_nsfw_spark_model", "") or "").strip()
-    if not (_codex_model or _spark_model):
+    # 主人 2026-05-29: 修复 — 旧实现走 chat_completion_codex_instant, 但 codex_instant
+    # 内部 model 优先级是 codex_instant_model > nsfw_spark_model > filter_model, 而 config
+    # 没配 codex_instant_model, nsfw_spark_model = claude-sonnet-4-6 → 实际 caption 依然
+    # 跑主 sonnet (每 3 turn 烧 sonnet token + 经 NewAPI relay 不省钱). 改成直接调
+    # ai_fallback (DeepSeek 官方端点) 跟 catty_imagegen 的 _deepseek_imagegen_plan 对齐.
+    _fb_base = str(getattr(config, "catty_ai_fallback_base_url", "") or "").strip()
+    _fb_key = str(getattr(config, "catty_ai_fallback_api_key", "") or "").strip()
+    _fb_model = str(getattr(config, "catty_ai_fallback_model", "") or "").strip()
+    if not (_fb_base and _fb_key and _fb_model):
+        logger.info("nsfw_imagegen compose: ai_fallback (DeepSeek) 未配齐, 跳过 caption 生成")
         return ""
 
     phase_brief = _PHASE_BRIEF.get(int(phase), "笨猫被插入中")
@@ -358,16 +361,35 @@ async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
         "请输出 base caption tags:"
     )
 
-    # 走 chat_completion_codex_instant 通道 (DeepSeek). NewAPI SG relay 中转 OpenAI-compat →
-    # Anthropic 时不接受 messages[role=system], 把 system prompt 合并到 user message 头部.
-    combined_user = system_prompt + "\n\n---\n\n" + user_prompt
+    # 直接调 ai_fallback (DeepSeek 官方 endpoint), 跟 tools._deepseek_imagegen_plan 一脉同源.
+    # 走 _post_chat_completion_raw 让 deepseek 直接出 caption tags, 不经过任何 sonnet/relay 中转.
     raw = ""
     try:
-        from .openai_client import chat_completion_codex_instant
-        raw = await chat_completion_codex_instant(
-            config,
-            [{"role": "user", "content": combined_user}],
+        from .openai_client import _post_chat_completion_raw
+        timeout = float(
+            getattr(config, "catty_ai_fallback_request_timeout", 60.0)
+            or getattr(config, "catty_request_timeout", 60.0)
+            or 60.0
+        )
+        proxy = str(getattr(config, "catty_http_proxy", "") or "")
+        response = await _post_chat_completion_raw(
+            base_url=_fb_base,
+            api_key=_fb_key,
+            model=_fb_model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            timeout=timeout,
+            proxy=proxy,
+            temperature=0.6,
             max_tokens=400,
+            extra_headers={},
+            extra_body={},
+        )
+        raw = str(response["choices"][0]["message"]["content"] or "")
+        logger.info(
+            f"nsfw_imagegen compose: deepseek ({_fb_model}) caption_len={len(raw)} phase=P{phase}"
         )
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"nsfw_imagegen compose caption failed: {exc.__class__.__name__}: {exc}")

@@ -145,7 +145,7 @@ def get_state_snapshot() -> dict[str, Any]:
                 "stream_id": s.stream_id,
                 "model": s.model,
                 "started_at": s.started_at,
-                "text_preview": s.text_buffer[:200],
+                "text_preview": s.text_buffer[:125],
                 "text_len": len(s.text_buffer),
                 "last_event": s.last_event_type,
             }

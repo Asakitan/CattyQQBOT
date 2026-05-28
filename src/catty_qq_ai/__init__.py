@@ -4767,16 +4767,18 @@ async def _build_messages(
                 messages.append({"role": "assistant", "content": _first_mes})
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"first_mes cold-start failed (non-fatal): {exc}")
-    # 主人 2026-05-28 Phase 2 (plan-cattyCacheFixAndPromptSlim): NLU 驱动的 history 压缩.
+    # 主人 2026-05-28 Phase 3 (plan-cattyCacheFixAndPromptSlim): monotonic history trim.
     # 私聊 ≤catty_prompt_budget_private (默认5000) / 群聊 ≤catty_prompt_budget_group (默认3000).
-    # 按 cosine + recency 筛 history, 永远保留 keep_recent 末尾 N 条 (私聊 2/群聊 4, 指代时 +N).
-    # NLU 失败 / disabled → 走原 history_messages, 不阻塞业务.
+    # Cache-safe 设计: per-scope anchor checkpoint. 同 scope 多轮 anchor 不变 → history
+    # [anchor:] 前缀字节稳定 → Anthropic cache prefix hit. 超 budget 时 anchor 一次性
+    # 大跳 (剩 70% budget 留余量) → 1 次 cache miss → 之后稳定多轮.
+    # 失败 / disabled → 走原 history_messages, 不阻塞业务.
     try:
         if (
             getattr(config, "catty_prompt_compressor_enabled", False)
             and history_messages
         ):
-            from .nlu.prompt_compressor import compress_history, detect_anaphora
+            from .nlu.prompt_compressor import monotonic_history_trim
             _budget_total = (
                 int(getattr(config, "catty_prompt_budget_private", 5000))
                 if _is_private_event
@@ -4789,27 +4791,21 @@ async def _build_messages(
                 if _is_private_event
                 else int(getattr(config, "catty_compressor_history_keep_recent_group", 4))
             )
-            # 指代/省略 query → keep_recent +N (对话连续性兜底)
-            _query_for_compress = getattr(incoming, "text", "") or ""
-            if detect_anaphora(_query_for_compress):
-                _keep_recent += int(
-                    getattr(config, "catty_compressor_history_extend_when_anaphora", 2)
-                )
             _orig_n = len(history_messages)
-            history_messages = compress_history(
+            history_messages = monotonic_history_trim(
                 history_messages,
-                query=_query_for_compress,
+                scope_id=key,
                 target_tokens=_history_budget,
                 keep_recent=_keep_recent,
             )
             if len(history_messages) != _orig_n:
                 logger.debug(
-                    "prompt_compressor: history %d→%d (budget=%d keep=%d private=%s)",
+                    "monotonic_trim: history %d→%d (budget=%d keep=%d private=%s scope=%s)",
                     _orig_n, len(history_messages),
-                    _history_budget, _keep_recent, _is_private_event,
+                    _history_budget, _keep_recent, _is_private_event, key,
                 )
     except Exception as _pc_exc:  # noqa: BLE001
-        logger.debug(f"prompt_compressor history compress failed (non-fatal): {_pc_exc}")
+        logger.debug(f"monotonic history trim failed (non-fatal): {_pc_exc}")
     messages.extend(history_messages)
     # PHI 已在 register_catty_persona 之后 register_static (order=440) 注册到 cache 区.
     # 主人 2026-05-28: current user msg 把 _dynamic_context_text (boundary 后所有动态段 inline)
@@ -9339,6 +9335,18 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     f"tool ctx: added {len(_reply_imgs)} reply image(s) for {event.user_id}@"
                     f"{getattr(event, 'group_id', 'private')}"
                 )
+        # 主人 2026-05-28 C15-7: NLU intent gate — user msg 含画图/搜/记等关键词才发对应 tool
+        # 不命中 tools=[], 省 ~21K bytes input. 命中时 AI 看完整 description 决策.
+        # 主人 2026-05-29: 提前赋值供 ToolContext.user_text 用 (catty_imagegen agent 模式拿原话)
+        _user_text_for_intent = ""
+        try:
+            _user_text_for_intent = str(event.get_plaintext() or "").strip()
+        except Exception:  # noqa: BLE001
+            try:
+                _user_text_for_intent = str(getattr(event, "raw_message", "") or "").strip()
+            except Exception:  # noqa: BLE001
+                pass
+
         tool_ctx = ToolContext(
             config=config,
             memory_store=memory_store,
@@ -9352,21 +9360,12 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             # SillyTavern 风 story_arc 写入入口:catty_story_arc_set/clear executor 通过这两字段写
             story_arc_store=story_arc_store,
             scope_key=_conversation_queue_key(event),
+            # 主人 2026-05-29: catty_imagegen agent 模式拿原话喂给 deepseek 出 plan
+            user_text=_user_text_for_intent,
         )
 
         async def _tool_executor(name: str, args_json: str) -> dict[str, object]:
             return await execute_tool_call(name, args_json, tool_ctx)
-
-        # 主人 2026-05-28 C15-7: NLU intent gate — user msg 含画图/搜/记等关键词才发对应 tool
-        # 不命中 tools=[], 省 ~21K bytes input. 命中时 AI 看完整 description 决策.
-        _user_text_for_intent = ""
-        try:
-            _user_text_for_intent = str(event.get_plaintext() or "").strip()
-        except Exception:  # noqa: BLE001
-            try:
-                _user_text_for_intent = str(getattr(event, "raw_message", "") or "").strip()
-            except Exception:  # noqa: BLE001
-                pass
         _has_image_for_intent = bool(getattr(incoming, "has_image", False))
         tools_for_main_reply = available_tool_schemas(
             config,

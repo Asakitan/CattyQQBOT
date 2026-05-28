@@ -75,7 +75,7 @@ h2 { font-size: 14px; margin: 16px 0 8px; color: #555; }
   </div>
   <div class="legend">
     <span><i style="background:#2ea44f"></i>cache_read (10% 计费)</span>
-    <span><i style="background:#f1c40f"></i>cache_create (200% 计费, 1h TTL)</span>
+    <span><i style="background:#f1c40f"></i>cache_create (125% 计费, 1h TTL)</span>
     <span><i style="background:#3498db"></i>input (100% 计费)</span>
     <span><i style="background:#e67e22"></i>output</span>
   </div>

@@ -1114,6 +1114,12 @@ async def chat_completion_with_tools(
         )
         # Phase B1: 收集成功的 tool result 给 cascade 检查用
         cascade_inputs: list[tuple[str, Any]] = []
+        # 主人 2026-05-29: tool short-circuit — executor return dict 含 "_short_circuit_reply"
+        # 字段时, 直接 return 那段文本作为最终回复, 跳过 follow-up 主 AI 调用. 用于
+        # catty_imagegen agent 模式 (tool 内部叫 deepseek 出 prompt+短评 + 把图 push 到群,
+        # 主 sonnet 不需要再发 100K+ follow-up — 杜绝 cache miss 二次炸 + tool_use 配对 500).
+        # 只在单 tool_call 一轮短路, 多 call 时让主 AI 接着综合.
+        short_circuit_reply: str | None = None
         for (call_id, name, _args_json), result in zip(executed, tool_results):
             if isinstance(result, BaseException):
                 payload = {"error": f"{name} 抛异常: {result.__class__.__name__}: {result}"}
@@ -1123,8 +1129,24 @@ async def chat_completion_with_tools(
             else:
                 payload = result
                 cascade_inputs.append((name, payload))
+            if (
+                len(executed) == 1
+                and isinstance(payload, dict)
+                and isinstance(payload.get("_short_circuit_reply"), str)
+                and payload["_short_circuit_reply"].strip()
+            ):
+                short_circuit_reply = payload["_short_circuit_reply"].strip()
+                _logger.info(
+                    "tool_chat: %s short-circuit return (reply_len=%d, skip follow-up)",
+                    name, len(short_circuit_reply),
+                )
+            # 写 history 时剥掉 _short_circuit_* 内部 sentinel, 避免污染 follow-up token
+            payload_for_history = (
+                {k: v for k, v in payload.items() if not str(k).startswith("_short_circuit") and k != "_deepseek_plan"}
+                if isinstance(payload, dict) else payload
+            )
             try:
-                content_str = json.dumps(payload, ensure_ascii=False)
+                content_str = json.dumps(payload_for_history, ensure_ascii=False)
             except (TypeError, ValueError):
                 content_str = json.dumps({"error": "结果无法序列化为 JSON"}, ensure_ascii=False)
             history.append(
@@ -1135,6 +1157,11 @@ async def chat_completion_with_tools(
                     "content": content_str,
                 }
             )
+
+        if short_circuit_reply:
+            if _cloud_is_unhealthy():
+                _mark_cloud_healthy()
+            return short_circuit_reply
 
         # Phase B1: tool cascade — 看上一轮 tool 结果, 给 AI 一个『下一步推荐调 X』hint
         if cascade_inputs:

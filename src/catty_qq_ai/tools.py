@@ -703,211 +703,15 @@ _IMAGEGEN_SCHEMA: dict[str, Any] = {
     "function": {
         "name": "catty_imagegen",
         "description": (
-            "主动生成/编辑一张图发到当前会话(自动发送,你只需补 1-2 句猫娘短评)。\n"
-            "【画图请求只能走这个 tool, 别走文字描述脑补图、别走 Markdown 图片语法、别贴别处的图 URL 假装出图。\n"
-            "  笨猫所有图都从这里出,这是唯一通道。】\n"
-            "\n"
-            "── 两条生图通道(你自己挑;选之前看价!) ──\n"
-            "\n"
-            "**1) provider='gpt'(默认): OpenAI gpt-image-2** — 擅长写实/产品图/海报/带文字标题/品牌/UI/真实摄影/3D 渲染。\n"
-            "  价目表(看 quality):\n"
-            "    · low  = **100 积分**(快、便宜,日常够用)\n"
-            "    · medium = **200 积分**(精细)\n"
-            "    · high = **300 积分**(最终稿,慢)\n"
-            "    · auto = **150 积分**(模型决定)\n"
-            "  支持 edit (use_input_image=true): 基于一张已有图改/重绘,跟普通生成同价。\n"
-            "\n"
-            "**2) provider='nai': NovelAI v4.5** — 擅长二次元/动漫/萌系/角色立绘/萝莉/JK/猫娘/动漫插画。\n"
-            "  **公式: cost = 5 + Anlas × 3 积分**(5 是基础费, Anlas 是 NAI 算力消耗)\n"
-            "  价目表:\n"
-            "    · 三标准尺寸 (portrait 832x1216 / landscape 1216x832 / square 1024x1024) + 28 步:\n"
-            "      Opus 免费档 Anlas=0 → **5 积分** ⭐ 最划算\n"
-            "    · 加 characters 多角色 (1-6 个): 不增加积分, 还是 **5 积分**\n"
-            "    · 加 references (Precise Reference 参考图,每张 +5 Anlas):\n"
-            "      1 张 = 5 + 5×3 = **20 积分**\n"
-            "      2 张 = 5 + 10×3 = **35 积分**\n"
-            "      3 张 = 5 + 15×3 = **50 积分**\n"
-            "      4 张 = 5 + 20×3 = **65 积分**\n"
-            "    · 非标准尺寸/超 28 步: Anlas 走 generate 公式(大致大尺寸/高 steps 时 30-80 Anlas), 几十积分起。\n"
-            "  只支持纯文字生成 + characters + references, 不支持 edit (要改图走 catty_nai_director)。\n"
-            "\n"
-            "**主人(catty_owner_qq)豁免**: 无论选哪条通道,主人不扣分(余额无限)。\n"
-            "\n"
-            "── 调 tool 前的硬规则: 必须先让用户选通道 + 看价 ──\n"
-            "用户第一次说『画一张...』时, **不要立刻调 tool**, 而是先回复用户列出两个选项让他选:\n"
-            "  『主人想要哪个画风喵～\n"
-            "    ① NovelAI 二次元(动漫/猫娘/萌系) — 标准尺寸只要 5 积分\n"
-            "    ② GPT 写实(海报/带文字/真实摄影) — low 100 积分起\n"
-            "  挑哪个嗷呜?』\n"
-            "用户选定后(明确说『nai』『动漫』『便宜』『1』『GPT』『真实』『2』等), **再**调 tool。\n"
-            "\n"
-            "**例外: 用户首句就明确指定时跳过问选项, 但仍要在调 tool 前报价**:\n"
-            "  - 用户说『画个二次元猫娘』『用 NAI 画』『动漫风格』→ 直接 provider='nai', 但回复先说『要扣 5 积分喵, 这就画~』再调 tool\n"
-            "  - 用户说『画张写实照片』『用 GPT 画』『带文字海报』→ 直接 provider='gpt' low, 回复先说『要扣 100 积分喵, 这就画~』再调 tool\n"
-            "  - 用户**主动报数说要更高 quality**(『要 high 质量』) → 按用户要求, 报对应价(『要 300 积分, 确定吗?』)\n"
-            "\n"
-            "**主人(catty_owner_qq)豁免**: 主人不扣分, 不用问选项, 直接选最合适 provider 调 tool, 也不报价。\n"
-            "\n"
-            "── 默认风格判定(用户没明说时) ──\n"
-            "  - 二次元/动漫/猫娘/萌系/插画/卡通/福瑞 SFW → 主推 nai\n"
-            "  - 写实/产品图/海报/带英中文文字/UI/广告/真实风景 → 主推 gpt low\n"
-            "  - 不确定:含『美少女/角色/二次元』默认 nai, 其余默认 gpt low\n"
-            "  - 但**仍要先问用户确认**, 除非用户首句已经明确指定风格关键词\n"
-            "\n"
-            "── tool 返回后必须报价 ──\n"
-            "tool 返回的 cost 字段是实际扣的积分。你拿到后在最终短评里确认一次:\n"
-            "  『画好啦~消耗了 X 积分, 主人现在还剩 Y 分 ฅฅ』(主人豁免时不报)。\n"
-            "\n"
-            "── prompt 改写 ──\n"
-            "可以精简重组,但所有要素一个都不能漏。允许:口语化改成生图 prompt、合并同义词、去冗余客套、"
-            "重排顺序让模型理解、控制 400-700 字。\n"
-            "  禁止丢:(a) 用户写的具体文字标题(『ELEGANCE IS AN ATTITUDE』『Star Resonance 2026』引号里的字)、"
-            "(b) 多项列表(『画 6 种动作』就要 6 条全保留)、"
-            "(c) 配色/材质/光影/构图/镜头/画质 具体要求、(d) 比例/数量/尺寸数字。\n"
-            "  对 NAI: 用**英文 danbooru 标签风**最稳(逗号分隔: 1girl, white hair, cat ears, ...),"
-            "中文 NAI 也认但效果差。\n"
-            "  对 GPT: 用**自然英文或中文描述句**,带主体/构图/风格/色调。\n"
-            "\n"
-            "── 触发条件硬规则 ──\n"
-            "必须是用户**直接指向猫猫**(@ 笨猫 / 引用回复猫猫 / 直呼『猫猫』『笨猫』)+ 明确说『画一张/画个/生成/做张/出张/给我画/帮我画 + 主语』。"
-            "不要用于:(a) 没指向猫猫的群内闲聊提到画画;(b) 用户没明确要图只是聊到某物;"
-            "(c) 表情/梗图就够了的场景(那走 catty_meme_query)。\n"
-            "\n"
-            "── 输入图片(只 gpt 支持) ──\n"
-            "- generate(默认): use_input_image=false,纯文字 prompt 生图。\n"
-            "- edit(只 gpt): use_input_image=true,基于一张已有图改/重绘。**同消息**带图或**分消息**回指都行。\n"
-            "tool 自动把图发出去,你拿到 image_sent=true 后只需短评『画好啦~』即可,"
-            "**禁止**把 image_uri/base64 贴进回复。"
+            "用户**直接指向猫猫(@/引用回复/直呼猫猫/笨猫)+ 明确说『画一张/画个/生成/做张/给我画/帮我画 + 主语』**时调这个 tool。\n"
+            "**args 留空 {} 即可**——provider 选择 / NAI 标签 prompt / GPT 描述句 / 风格判定 / 参考图 / 报价 / 短评配文 "
+            "全部由后端代理 LLM 自动决定, 图会自动发到群里。**tool 调完本轮直接结束, 你不要再写任何文字回复**(短路本轮 chat)。\n"
+            "**禁触发**: 用户没 @ 猫猫只是闲聊提到画画 / 用户没明确要图只是讨论某物 / 表情梗图够用的场景(走 catty_meme_query)。"
         ),
         "parameters": {
             "type": "object",
-            "properties": {
-                "prompt": {
-                    "type": "string",
-                    "description": (
-                        "图片描述。500 字以内最佳。\n"
-                        "- gpt: 用自然英文/中文描述句,含主体/构图/风格/色调。"
-                        "例:『一只白色猫耳少女蜷在窗台午睡,日系动漫风格,暖色调』。\n"
-                        "- nai: 用英文 danbooru 标签风,逗号分隔。"
-                        "例:『1girl, white hair, cat ears, school uniform, sleeping on windowsill, warm lighting, anime style』。\n"
-                        "edit 模式(仅 gpt)描述**改动**点,不必复述原图全貌。"
-                        "不要加 NSFW/敏感词,会被模型拒绝。"
-                    ),
-                },
-                "provider": {
-                    "type": "string",
-                    "enum": ["gpt", "nai"],
-                    "description": (
-                        "走哪条生图通道。默认 gpt。"
-                        "二次元/动漫/角色立绘选 nai;写实/产品图/带文字海报选 gpt。"
-                        "用户明确说『用 NovelAI』就 nai,说『用 GPT/真实风』就 gpt。"
-                    ),
-                },
-                "aspect": {
-                    "type": "string",
-                    "enum": ["portrait", "landscape", "square"],
-                    "description": (
-                        "**仅 nai 用**。三选一: portrait=832x1216(立绘,默认) / landscape=1216x832(横构图/场景) / square=1024x1024(头像/方形)。"
-                        "Opus 订阅档这三档免 Anlas。gpt 走 size 字段,不用填这个。"
-                    ),
-                },
-                "negative_prompt": {
-                    "type": "string",
-                    "description": (
-                        "**仅 nai 用**。不希望出现的元素(英文 danbooru tag,逗号分隔)。"
-                        "不填用默认: lowres/bad anatomy/watermark/jpeg artifacts。"
-                        "想强调『没胡子/没眼镜/没背景人物』之类才填,日常不用填。"
-                    ),
-                },
-                "use_input_image": {
-                    "type": "boolean",
-                    "description": (
-                        "**仅 gpt 用**(nai 走 generate 不支持 edit)。"
-                        "true: 走 /v1/images/edits,程序自动用当前消息附图,没有就回退最近群里出现过的图;"
-                        "都没有则返回 error,你改成 false 走纯生成重试。"
-                        "false(默认): 纯文字生成,不读任何图片。"
-                    ),
-                },
-                "size": {
-                    "type": "string",
-                    "description": (
-                        "**仅 gpt 用**。图片尺寸 WIDTHxHEIGHT。默认 1024x1024。"
-                        "常用:1024x1024 方/1536x1024 横/1024x1536 竖。需要更大才填。"
-                    ),
-                },
-                "quality": {
-                    "type": "string",
-                    "enum": ["low", "medium", "high", "auto"],
-                    "description": (
-                        "**仅 gpt 用**。low=快/便宜(默认,100 积分) medium=精细(200) high=最终稿(300) auto=模型决定(150)。"
-                        "nai 走 aspect + steps,基础 5 积分。"
-                    ),
-                },
-                "characters": {
-                    "type": "array",
-                    "description": (
-                        "**仅 nai 用,多角色场景才填**。每项一个角色,最多 6 个。"
-                        "用户说『画两个人,左边 A,右边 B』时填两项,position 给『left』『right』。"
-                        "单角色不要填,留空让 NAI 自己布局。"
-                    ),
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "prompt": {
-                                "type": "string",
-                                "description": "这个角色的英文 danbooru tag(例 '1girl, blonde hair, school uniform')。",
-                            },
-                            "negative_prompt": {
-                                "type": "string",
-                                "description": "这个角色不要的元素(例 'twintails')。可选。",
-                            },
-                            "position": {
-                                "type": "string",
-                                "enum": [
-                                    "auto", "left", "center", "right",
-                                    "top-left", "top", "top-right",
-                                    "bottom-left", "bottom", "bottom-right",
-                                ],
-                                "description": (
-                                    "角色在画面里的位置。'auto'(默认)= AI 自己决定(AI's Choice)。"
-                                    "其他值会映射成 NAI 网格坐标。多角色时建议每个明确指定。"
-                                ),
-                            },
-                        },
-                        "required": ["prompt"],
-                    },
-                },
-                "references": {
-                    "type": "array",
-                    "description": (
-                        "**仅 nai 用,Precise Reference (V4.5 Director Tools)**。"
-                        "用户**消息附带图片**或要求『参考这张图的角色/画风』时填。"
-                        "每项一个参考图,最多 4 个。"
-                        "tool 自动从当前消息附图 / 群最近图按顺序取(顺序 = 你 references 数组的长度)。"
-                        "不带参考图就不填这个字段。"
-                        "extracted/strength 默认 1.0/1.0 抓最大角色细节。"
-                        "**Anlas**: Precise Reference 每张额外加 5 Anlas(主人 5+anlas*3 公式扣积分)。"
-                    ),
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "extracted": {
-                                "type": "number",
-                                "description": (
-                                    "信息提取程度 0-1(默认 0.6)。"
-                                    "高(0.8+)= Precise Reference(抓更多角色/线条细节);"
-                                    "低(0.3-)= Vibe Transfer(只迁移整体氛围/画风)。"
-                                ),
-                            },
-                            "strength": {
-                                "type": "number",
-                                "description": "迁移强度 0-1(默认 0.6)。值越大新图越贴近参考图。",
-                            },
-                        },
-                    },
-                },
-            },
-            "required": ["prompt"],
+            "properties": {},
+            "required": [],
         },
     },
 }
@@ -1102,6 +906,10 @@ class ToolContext:
     story_arc_store: "Any | None" = None
     # 当前 scope key("group:xxx" / "private:xxx"),__init__ 传进来给 story_arc executor 用。
     scope_key: str = ""
+    # 主人 2026-05-28: 当前用户原话(event.get_plaintext() 结果)。catty_imagegen 走
+    # deepseek 代理模式时, 让 deepseek 自己读原话出 NAI/gpt prompt + provider 选择 + 短评,
+    # 主 sonnet 那轮直接短路, 省 follow-up 100K+ 重传 + 杜绝 tool_use 配对 500。
+    user_text: str = ""
 
     @property
     def group_id(self) -> str:
@@ -1846,6 +1654,7 @@ async def _exec_imagegen_nai(
     ctx: ToolContext,
     characters: list[dict[str, Any]] | None = None,
     references: list[dict[str, Any]] | None = None,
+    local_reference_bytes_list: list[bytes] | None = None,
 ) -> dict[str, Any]:
     """NovelAI 生图执行器。被 _exec_imagegen 在 provider='nai' 时调用。
 
@@ -1855,6 +1664,9 @@ async def _exec_imagegen_nai(
     references: vibe transfer/precise reference 数组,每项 {extracted?, strength?}。
                 数量决定从 ctx.input_image_urls / recent_image_urls 取多少张参考图。
                 最多 _NAI_VIBE_REFERENCE_MAX=4 张。
+    local_reference_bytes_list: 主人 2026-05-29 — agent 模式专用旁路, 直接传 PNG/JPEG bytes
+                做 Precise Reference (用于自画像锁人设 Miao/miaomiao*.png), 跳过 URL 下载/群图
+                查找环节。fidelity=1.0 strength=1.0 抓最大角色细节。
     """
     from pathlib import Path
     if not getattr(ctx.config, "catty_imagegen_nai_enabled", False):
@@ -1884,7 +1696,10 @@ async def _exec_imagegen_nai(
     pts_per_anlas = int(getattr(ctx.config, "catty_imagegen_nai_points_per_anlas", 3) or 3)
 
     neg = (negative_prompt or "").strip() or default_neg
-    has_refs = bool(references)
+    # 主人 2026-05-29: agent 模式 local references (Miao/miaomiao*.png) 跟 URL references
+    # 走同一 NAI Precise Reference 通道, 加成数 / cost 计算合并算。
+    local_refs_count = len([b for b in (local_reference_bytes_list or []) if b])
+    has_refs = bool(references) or local_refs_count > 0
 
     # Anlas 预测(Opus 免费档归零; 带 references 走 Precise Reference 加 5 Anlas/张)
     predicted_anlas = _nai_predict_anlas(width, height, steps, n_samples=1)
@@ -1893,8 +1708,12 @@ async def _exec_imagegen_nai(
     else:
         billable_anlas = predicted_anlas
     if has_refs:
-        # Precise Reference 每张额外 5 Anlas (NAI 官方文档)
-        billable_anlas += 5 * min(len(references or []), _NAI_VIBE_REFERENCE_MAX)
+        # Precise Reference 每张额外 5 Anlas (NAI 官方文档) — URL refs + local refs 合并算
+        total_refs = min(
+            len(references or []) + local_refs_count,
+            _NAI_VIBE_REFERENCE_MAX,
+        )
+        billable_anlas += 5 * total_refs
     cost = image_cost_for_nai(billable_anlas, base=base_points, per_anlas=pts_per_anlas)
 
     # ── 积分扣费 guard(主人豁免;余额不够告诉 AI 让她提醒用户签到) ──
@@ -1993,7 +1812,28 @@ async def _exec_imagegen_nai(
     director_ref_b64: list[str] = []
     director_ref_strength: list[float] = []
     director_ref_secondary: list[float] = []  # = 1 - fidelity
-    if refs:
+
+    # 主人 2026-05-29: agent 模式 local reference bytes 优先插入 (跳过 URL 下载循环)。
+    # 用于自画像锁人设 (Miao/miaomiao*.png), fidelity=1.0 strength=1.0 抓最大角色细节。
+    # URL refs 仍在下面追加, 总数不超 _NAI_VIBE_REFERENCE_MAX。
+    for data in (local_reference_bytes_list or []):
+        if not data or len(director_ref_b64) >= _NAI_VIBE_REFERENCE_MAX:
+            continue
+        try:
+            ref_b64 = _resize_to_director_reference_png(data)
+        except Exception as exc:  # noqa: BLE001
+            _logger.warning("imagegen[nai] local reference resize failed: %s", exc)
+            continue
+        director_ref_b64.append(ref_b64)
+        director_ref_strength.append(1.0)
+        director_ref_secondary.append(0.0)  # = 1 - fidelity(1.0)
+    if director_ref_b64:
+        _logger.info(
+            "imagegen[nai]: %d local reference(s) attached (agent self-portrait mode)",
+            len(director_ref_b64),
+        )
+
+    if refs and len(director_ref_b64) < _NAI_VIBE_REFERENCE_MAX:
         candidate_urls: list[str] = []
         candidate_urls.extend(getattr(ctx, "input_image_urls", []) or [])
         candidate_urls.extend(getattr(ctx, "recent_image_urls", []) or [])
@@ -2516,6 +2356,217 @@ def _prune_imagegen_cache(config: Config) -> None:
             continue
 
 
+# ── 主人 2026-05-29: catty_imagegen agent 模式 (deepseek 代理) ──────────
+#
+# 主 sonnet 端 schema 极简成 empty args (见 _IMAGEGEN_SCHEMA), 把 provider/prompt/
+# 风格判定/参考图/短评 全甩给后端 deepseek (config.ai_fallback 那一套). 主 sonnet
+# 那一轮 tool_call 之后通过 _short_circuit_reply sentinel 直接 return, 不发 follow-up,
+# 杜绝『tool_use ids without tool_result』500 + 杜绝二次 100K+ 重传 cache miss.
+
+# 自画像 Precise Reference 本地参考图路径 (项目根 Miao/ 下两张).
+_SELF_PORTRAIT_SFW_PATH = "Miao/miaomiao.png"
+_SELF_PORTRAIT_NSFW_PATH = "Miao/miaomiaonude.png"
+
+
+def _load_self_portrait_reference_bytes(kind: str) -> bytes | None:
+    """Return PNG bytes of self-portrait lock-character reference, or None on miss/error."""
+    from pathlib import Path
+    if kind == "nsfw":
+        fname = _SELF_PORTRAIT_NSFW_PATH
+    elif kind == "sfw":
+        fname = _SELF_PORTRAIT_SFW_PATH
+    else:
+        return None
+    p = Path(fname)
+    if not p.is_file():
+        _logger.warning("imagegen agent: self-portrait reference missing: %s", p)
+        return None
+    try:
+        return p.read_bytes()
+    except OSError as exc:
+        _logger.warning("imagegen agent: self-portrait reference read failed: %s: %s", p, exc)
+        return None
+
+
+async def _deepseek_imagegen_plan(config: Config, user_text: str) -> dict[str, Any]:
+    """Call deepseek (config.ai_fallback) once, ask it to emit a strict JSON plan.
+
+    返回 dict 字段:
+      provider: 'nai' | 'gpt'
+      prompt: 实际生图 prompt 字符串 (NAI 用 danbooru 标签, GPT 用自然描述句)
+      aspect: 'portrait' | 'landscape' | 'square' (NAI)
+      quality: 'low' | 'medium' | 'high' | 'auto' (GPT)
+      negative_prompt: str (可选, NAI)
+      self_portrait: 'sfw' | 'nsfw' | null — 命中时 agent 自动加 Miao/miaomiao*.png 参考图
+      short_review: 1-2 句笨猫语气短评 (画好后发到群里替代 sonnet follow-up)
+    """
+    from .openai_client import _post_chat_completion_raw
+    base_url = str(getattr(config, "catty_ai_fallback_base_url", "") or "").strip()
+    api_key = str(getattr(config, "catty_ai_fallback_api_key", "") or "").strip()
+    model = str(getattr(config, "catty_ai_fallback_model", "") or "").strip()
+    if not (base_url and api_key and model):
+        raise RuntimeError("ai_fallback (deepseek) 三件套未配齐, 无法跑 agent 模式")
+    timeout = float(
+        getattr(config, "catty_ai_fallback_request_timeout", 60.0)
+        or getattr(config, "catty_request_timeout", 60.0)
+        or 60.0
+    )
+    proxy = str(getattr(config, "catty_http_proxy", "") or "")
+    system_prompt = (
+        "你是 QQ 群猫娘机器人『笨猫』的画图任务调度器, 负责把用户的画图请求翻译成生图参数."
+        " 必须严格返回 JSON 对象, 字段如下 (不在 JSON 外输出任何文字):\n"
+        '  - "provider": "nai" 或 "gpt". 二次元/动漫/猫娘/萌系/角色立绘/萝莉/JK → "nai" (默认 5 积分最划算);'
+        ' 写实/产品/海报/带文字/真实摄影/UI → "gpt".\n'
+        '  - "prompt": 实际生图 prompt. NAI 用英文 danbooru 标签 (逗号分隔, 例 "1girl, white hair, '
+        'cat ears, JK uniform, ..."); GPT 用自然中英文描述句. 500 字以内. 不要含 NSFW 显性词 (露/性/裸 等),'
+        ' 通过 self_portrait=nsfw 走参考图锁人设即可.\n'
+        '  - "aspect": "portrait"|"landscape"|"square" — NAI 用, 默认 "portrait" (832x1216 立绘).\n'
+        '  - "quality": "low"|"medium"|"high"|"auto" — GPT 用, 默认 "low".\n'
+        '  - "negative_prompt": 可选, NAI 负面词. 不填留空字符串.\n'
+        '  - "self_portrait": "sfw"|"nsfw"|null. **用户明确说画『你/猫猫/笨猫/自画像/自拍』时**:\n'
+        '      SFW 场景填 "sfw" (会自动加 Miao/miaomiao.png 作参考图锁人设);\n'
+        '      NSFW/色情/露骨场景填 "nsfw" (会自动加 Miao/miaomiaonude.png);\n'
+        '      其他 (画用户/画风景/画 OC) 填 null. self_portrait 命中时强制 provider="nai".\n'
+        '  - "short_review": 1-2 句笨猫语气的短评 (画好后会代替主 AI 发到群里), 必带『喵/喵呜/嗷呜/ฅฅ』之类的语气词,'
+        ' 软萌+傲娇+小动作. 示例:\n'
+        '      『画好啦~主人看看喜不喜欢嗷呜ฅฅ』\n'
+        '      『哼哼, 这就是人家的样子喵~ (偷瞄主人)』\n'
+        '      『嗷呜~ 才不是特地为主人画的呢! ฅฅ』\n'
+        '笨猫人格简介: 白毛猫耳少女 155cm, JK 制服, 傲娇撒娇, 嘴硬心软, 叫男性『杂鱼』,'
+        ' 自称『人家/猫猫/笨猫』, 不要在 short_review 里出现 OOC / 元评论 / Markdown.\n'
+        "用户没明确说风格时默认 provider=nai (二次元最划算). 严禁输出 JSON 以外任何内容."
+    )
+    response = await _post_chat_completion_raw(
+        base_url=base_url,
+        api_key=api_key,
+        model=model,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"用户原话: {user_text}"},
+        ],
+        timeout=timeout,
+        proxy=proxy,
+        temperature=0.6,
+        max_tokens=800,
+        extra_headers={},
+        extra_body={"response_format": {"type": "json_object"}},
+    )
+    try:
+        content = response["choices"][0]["message"]["content"]
+    except (KeyError, IndexError, TypeError) as exc:
+        raise RuntimeError(f"deepseek plan 返回格式错: {repr(response)[:200]}") from exc
+    plan = lenient_json_object(content)
+    if not isinstance(plan, dict):
+        raise RuntimeError(f"deepseek plan 不是 JSON 对象: {content[:200]}")
+    return plan
+
+
+async def _exec_imagegen_agent(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    """Agent 模式入口 — sonnet 传空 args 时执行此函数。
+
+    1. 拿 ctx.user_text 喂给 deepseek 出 plan
+    2. plan.self_portrait 命中时加 Miao/miaomiao*.png 作参考图 (强制 provider=nai)
+    3. 走 _exec_imagegen_nai / 或递归回 _exec_imagegen (gpt 分支) 生图
+    4. 把 deepseek 的 short_review 拼到 _short_circuit_reply, 让 chat loop 直接 return
+    """
+    user_text = str(getattr(ctx, "user_text", "") or "").strip()
+    if not user_text:
+        return {
+            "error": "拿不到用户原话, agent 模式无法生 prompt",
+            "guidance": "主 AI 直接拒绝这次画图, 让用户重新发请求",
+        }
+
+    # 调 deepseek 出 plan
+    try:
+        plan = await _deepseek_imagegen_plan(ctx.config, user_text)
+    except Exception as exc:  # noqa: BLE001
+        _logger.warning(
+            "imagegen agent: deepseek plan failed (%s: %s), falling back to default nai",
+            exc.__class__.__name__, exc,
+        )
+        plan = {
+            "provider": "nai",
+            "prompt": "1girl, white hair, cat ears, JK uniform, golden eyes, cute, anime style",
+            "aspect": "portrait",
+            "short_review": "画好啦主人~ ฅฅ",
+        }
+
+    provider = str(plan.get("provider") or "nai").strip().lower()
+    if provider not in ("nai", "gpt"):
+        provider = "nai"
+    gen_prompt = str(plan.get("prompt") or "").strip()
+    if not gen_prompt:
+        return {"error": "deepseek 没出 prompt, 拒绝本次画图"}
+    aspect = str(plan.get("aspect") or "portrait").strip().lower()
+    quality = str(plan.get("quality") or "low").strip().lower()
+    neg = str(plan.get("negative_prompt") or "").strip()
+    self_portrait_kind = (plan.get("self_portrait") or "").strip().lower() \
+        if isinstance(plan.get("self_portrait"), str) else ""
+    short_review = str(plan.get("short_review") or "画好啦主人~ ฅฅ").strip()
+
+    # 自画像 → 强制 NAI + 加本地参考图 (锁人设)
+    local_ref_bytes: list[bytes] = []
+    if self_portrait_kind in ("sfw", "nsfw"):
+        ref_data = _load_self_portrait_reference_bytes(self_portrait_kind)
+        if ref_data:
+            local_ref_bytes.append(ref_data)
+            if provider != "nai":
+                _logger.info(
+                    "imagegen agent: self_portrait=%s, forcing provider nai (was %s)",
+                    self_portrait_kind, provider,
+                )
+                provider = "nai"
+
+    _logger.info(
+        "imagegen agent: deepseek plan provider=%s self_portrait=%s prompt_len=%d short_review_len=%d",
+        provider, self_portrait_kind or "-", len(gen_prompt), len(short_review),
+    )
+
+    # 真正生图
+    if provider == "nai":
+        gen_result = await _exec_imagegen_nai(
+            prompt=gen_prompt,
+            negative_prompt=neg,
+            aspect=aspect,
+            ctx=ctx,
+            characters=None,
+            references=None,
+            local_reference_bytes_list=local_ref_bytes or None,
+        )
+    else:
+        # 递归回 _exec_imagegen 走 gpt 分支 (传带 prompt 的 args 触发原直连路径)
+        rebuilt_args = {
+            "prompt": gen_prompt,
+            "provider": "gpt",
+            "quality": quality if quality in _ALLOWED_IMAGEGEN_QUALITY else "low",
+            "use_input_image": False,
+        }
+        gen_result = await _exec_imagegen(rebuilt_args, ctx)
+
+    if not isinstance(gen_result, dict) or "error" in gen_result:
+        return gen_result  # 生图失败原样返回, 让主 AI 看到 error 并解释
+
+    # 把 deepseek 短评 + 报价拼到 _short_circuit_reply
+    cost = int(gen_result.get("cost", 0) or 0)
+    balance_after = int(gen_result.get("balance_after", -1) or -1)
+    is_owner_charge = bool(gen_result.get("is_owner_charge"))
+    if is_owner_charge or cost <= 0:
+        final_reply = short_review
+    else:
+        final_reply = (
+            f"{short_review} 这张图消耗了 {cost} 积分, "
+            f"现在还剩 {balance_after} 分喵～"
+        )
+
+    gen_result["_short_circuit_reply"] = final_reply
+    gen_result["_deepseek_plan"] = {
+        "provider": provider,
+        "self_portrait": self_portrait_kind or None,
+        "prompt_len": len(gen_prompt),
+    }
+    return gen_result
+
+
 async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     from pathlib import Path
     if not getattr(ctx.config, "catty_imagegen_enabled", True):
@@ -2528,9 +2579,13 @@ async def _exec_imagegen(args: dict[str, Any], ctx: ToolContext) -> dict[str, An
             "error": "用户没直接 @ 猫猫,不允许主动画图。把这条 tool_call 取消,改成纯文字回应。",
             "guidance": "imagegen 只在用户明确指向猫猫(@ / 引用回复 / 直呼猫猫)+ 说画时才能调。",
         }
+    # 主人 2026-05-29: agent 模式 — sonnet 端 schema 已经全空, args.prompt 为空时
+    # 走 deepseek 代理决策 (provider/prompt/参考图/短评 全甩给 deepseek), 主 sonnet
+    # 那一轮 tool_call 之后 _short_circuit_reply 让 chat loop 直接 return, 杜绝二次 100K+
+    # 重传 + 杜绝『tool_use ids without tool_result』500. 详见 _exec_imagegen_agent.
     prompt = str(args.get("prompt") or "").strip()
     if not prompt:
-        return {"error": "prompt 不能为空"}
+        return await _exec_imagegen_agent(args, ctx)
     max_chars = max(int(getattr(ctx.config, "catty_imagegen_max_chars", 800) or 800), 80)
     if len(prompt) > max_chars:
         prompt = prompt[:max_chars]
