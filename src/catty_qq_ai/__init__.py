@@ -4547,7 +4547,7 @@ async def _build_messages(
         _st_manager.register_static(
             "catty_adaptive_drift_skeleton",
             _build_drift_skeleton(),
-            order=473,  # P5.2: 移到 boundary 后
+            order=146,  # 主人 2026-05-29 Round 19: 473→146 byte-stable skeleton 进 cache prefix
         )
     except Exception as _drift_sk_exc:  # noqa: BLE001
         logger.debug(f"adaptive_drift_skeleton register failed: {_drift_sk_exc}")
@@ -4815,11 +4815,19 @@ async def _build_messages(
     # post_boundary 动态段每轮会变, 放 user 之后只影响 last chunk, 不破坏 prefix hash.
     _user_content_raw = _build_user_content(incoming, image_description=image_description)
     messages.append({"role": "user", "content": _user_content_raw})
+    # 主人 2026-05-29 Round 19: 合并 post-boundary 段成 1 个 system msg.
+    # 群聊 dump 显示 31 个 post-boundary system msg → cache prefix 末尾散乱.
+    # 合并后: msg array 末尾 1 个 dynamic sys, msg[0..N-1] = pre-boundary sys + history + user 完全稳定.
+    # DeepSeek cache 应该能命中前 N 条 token. 跨轮 byte 稳定靠 prompt_manager 的 sorted_entries (按 order).
     if _post_boundary:
+        _post_chunks: list[str] = []
         for _post_msg in _post_boundary:
             _post_content = str(_post_msg.get("content", "") or "").strip()
             if _post_content:
-                messages.append({"role": "system", "content": _post_content})
+                _post_chunks.append(_post_content)
+        if _post_chunks:
+            _merged_post = "\n\n".join(_post_chunks)
+            messages.append({"role": "system", "content": _merged_post})
     # ST 风 prefilled assistant + NSFW model 切换:
     #         『好感度不够的, 除了特殊事件 (直接本垒) 的都直接锁 stage, 交给 5.5』
     # → 只有 stage 8+ deep word 命中 **且** 用户当前能到 stage 8+ 才进 spark;
@@ -5071,35 +5079,54 @@ async def _build_messages(
     _paid_nsfw_outcome: str = "pleasant"  # pleasant +50 / unpleasant -25 (主人 2026-05-26 原话)
     _paid_insufficient_active = False  # 援交关键词命中但积分不足 → 主 5.5 嘴硬嘲讽
     _paid_insufficient_balance = 0
+    _paid_insufficient_cost = 0  # 不足时的应付价位 (私聊 100 / 群聊溢价 1500)
     _advertise_paid_active = False  # NSFW 但等级不够 + 没付钱 → 主 5.5 主动卖援交广告
+    _group_induce_active = False  # 群聊普通『包养』→ 诱导加好友私聊 (不扣分, 非 NSFW)
+    # 主人 2026-05-29 两档分流:
+    #   私聊: 命中援交关键词 → 100 积分一次, 完整展开
+    #   群聊: 普通包养 → 诱导加私聊 (非 NSFW); 显式群聊溢价 (1500/群里/公开) → 1500 积分群里破例
     try:
         from .affection_scorer import (
             is_paid_nsfw_trigger as _is_paid_trigger,
+            is_group_premium_nsfw_trigger as _is_group_premium,
             pick_paid_nsfw_scene as _pick_paid_scene,
             PAID_NSFW_COST as _PAID_COST,
+            GROUP_PAID_NSFW_COST as _GROUP_PAID_COST,
         )
         if not _user_is_owner and _is_paid_trigger(_utxt):
-            _consume = affection_store.consume_points(str(event.user_id), _PAID_COST)
-            if _consume.get("ok"):
-                _paid_nsfw_active = True
-                _paid_nsfw_trope, _paid_nsfw_scene_setup = _pick_paid_scene()
-                # 一次结束: 随机抽 outcome (60% pleasant +50 / 40% unpleasant -25)
-                # 主人原话『笨猫被草的很开心 +50, 不开心 -25』.
-                import random as _rnd
-                _paid_nsfw_outcome = "pleasant" if _rnd.random() < 0.6 else "unpleasant"
+            if _is_group_chat_pre and not _is_group_premium(_utxt):
+                # 群聊普通包养 → 诱导加好友私聊, 不扣分, 这一条不进 NSFW
+                _group_induce_active = True
                 logger.info(
-                    f"chat: ★ PAID NSFW triggered (user={event.user_id}, "
-                    f"cost={_PAID_COST}, balance {_consume.get('balance_before')}→{_consume.get('balance_after')}, "
-                    f"trope={_paid_nsfw_trope!r}, outcome={_paid_nsfw_outcome}, hit='{_utxt[:40]}')"
+                    f"chat: 群聊『包养』命中但无溢价标记 (user={event.user_id}) "
+                    f"→ 诱导加私聊路径 (私聊 {_PAID_COST} / 群聊溢价 {_GROUP_PAID_COST})"
                 )
             else:
-                _paid_insufficient_active = True
-                _paid_insufficient_balance = int(_consume.get("balance_before") or 0)
-                logger.info(
-                    f"chat: PAID NSFW 关键词命中但积分不足 "
-                    f"(user={event.user_id}, balance={_paid_insufficient_balance}, "
-                    f"need={_PAID_COST}, shortfall={_consume.get('shortfall')}) → 嘴硬嘲讽路径"
-                )
+                # 私聊 (100) 或 群聊溢价 (1500): 扣分进完整 arc
+                _cost = _GROUP_PAID_COST if _is_group_chat_pre else _PAID_COST
+                _scope_lbl = "群聊溢价" if _is_group_chat_pre else "私聊"
+                _consume = affection_store.consume_points(str(event.user_id), _cost)
+                if _consume.get("ok"):
+                    _paid_nsfw_active = True
+                    _paid_nsfw_trope, _paid_nsfw_scene_setup = _pick_paid_scene()
+                    # 一次结束: 随机抽 outcome (60% pleasant +50 / 40% unpleasant -25)
+                    # 主人原话『笨猫被草的很开心 +50, 不开心 -25』.
+                    import random as _rnd
+                    _paid_nsfw_outcome = "pleasant" if _rnd.random() < 0.6 else "unpleasant"
+                    logger.info(
+                        f"chat: ★ PAID NSFW triggered [{_scope_lbl}] (user={event.user_id}, "
+                        f"cost={_cost}, balance {_consume.get('balance_before')}→{_consume.get('balance_after')}, "
+                        f"trope={_paid_nsfw_trope!r}, outcome={_paid_nsfw_outcome}, hit='{_utxt[:40]}')"
+                    )
+                else:
+                    _paid_insufficient_active = True
+                    _paid_insufficient_balance = int(_consume.get("balance_before") or 0)
+                    _paid_insufficient_cost = _cost
+                    logger.info(
+                        f"chat: PAID NSFW 关键词命中但积分不足 [{_scope_lbl}] "
+                        f"(user={event.user_id}, balance={_paid_insufficient_balance}, "
+                        f"need={_cost}, shortfall={_consume.get('shortfall')}) → 嘴硬嘲讽路径"
+                    )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"paid_nsfw check failed (non-fatal): {exc}")
     # NSFW 命中但等级不够 + 没付钱 + 不是主人 → 让笨猫主动卖援交广告
@@ -5109,6 +5136,7 @@ async def _build_messages(
         and not _user_is_owner
         and not _paid_nsfw_active
         and not _paid_insufficient_active
+        and not _group_induce_active
     ):
         _advertise_paid_active = True
         logger.info(
@@ -5170,16 +5198,24 @@ async def _build_messages(
     )
     # 主 5.5 路径注入援交广告 / 嘴硬嘲讽 prompt (spark 路径会 overwrite messages 反正不影响)
     # 紧贴 user message 拿 recency bias, 让 5.5 这一条 reply 主动推销援交 OR 嘲讽穷光蛋
-    if not _route_spark and (_paid_insufficient_active or _advertise_paid_active):
+    if not _route_spark and (
+        _paid_insufficient_active or _advertise_paid_active or _group_induce_active
+    ):
         try:
             from .affection_scorer import (
                 build_paid_nsfw_advertise_prompt as _build_paid_ad,
                 build_paid_nsfw_insufficient_prompt as _build_paid_insuf,
+                build_group_paid_induce_prompt as _build_group_induce,
             )
             # 主人 2026-05-28 cache fix: paid hint inline 到 user content, 不 append system.
             _paid_content = ""
-            if _paid_insufficient_active:
-                _paid_content = _build_paid_insuf(_paid_insufficient_balance)
+            if _group_induce_active:
+                _paid_content = _build_group_induce()
+            elif _paid_insufficient_active:
+                _paid_content = _build_paid_insuf(
+                    _paid_insufficient_balance,
+                    _paid_insufficient_cost or _PAID_COST,
+                )
             elif _advertise_paid_active:
                 _paid_content = _build_paid_ad()
             if _paid_content:
@@ -5745,6 +5781,15 @@ def _is_points_query_request(text: str) -> bool:
     主人反馈很多群友的查询说法之前没命中。带否定词的直接拒(问规则不是查数值)。
     """
     c = _compact_text(text)
+    # 主人 2026-05-29 BUG FIX: 『100积分包养』之类含『积分』但其实是援交意图的消息,
+    # 之前被 ≤10 字弱匹配当成查卡短路掉 (block=True), 援交流程根本进不去。
+    # 援交/包养关键词命中时, 这条不是查卡 → 让它落到 chat_matcher 走付费 NSFW 分流。
+    try:
+        from .affection_scorer import is_paid_nsfw_trigger as _is_paid_kw
+        if _is_paid_kw(c):
+            return False
+    except Exception:  # noqa: BLE001
+        pass
     if c in _POINTS_QUERY_KEYWORDS:
         return True
     if len(c) <= 10 and any(t in c for t in _POINTS_QUERY_SOFT_TOKENS):

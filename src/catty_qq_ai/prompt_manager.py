@@ -370,7 +370,7 @@ def register_catty_persona(
             mgr.register_static(
                 "catty_character_book_skeleton",
                 _cb_skeleton,
-                order=470,  # P5.2: 移到 boundary 后 → sweep inline 到 user content, cache prefix 干净
+                order=145,  # 主人 2026-05-29 Round 19: 470→145 byte-stable 段进 cache prefix (boundary=455 前)
             )
     except Exception as _cb_sk_exc:  # noqa: BLE001
         logger.debug(f"character_book_skeleton register failed: {_cb_sk_exc}")
@@ -476,7 +476,7 @@ def register_catty_persona(
         mgr.register_static(
             "catty_daily_affection_gate_skeleton",
             _build_daily_gate_skeleton(),
-            order=471,  # P5.2: 移到 boundary 后
+            order=147,  # 主人 2026-05-29 Round 19: 471→147 byte-stable skeleton 进 cache prefix
         )
 
         def _build_daily_gate_params_fn() -> str:
@@ -568,7 +568,7 @@ def register_catty_persona(
     mgr.register_static(
         "catty_nsfw_gate_skeleton",
         _NSFW_GATE_SKELETON,
-        order=472,  # P5.2: 移到 boundary 后
+        order=148,  # 主人 2026-05-29 Round 19: 472→148 静态骨架进 cache prefix (boundary=455 前)
     )
 
     # ─── 动态参数: 只 ~200 字符, 引用上面骨架 ───
