@@ -3666,23 +3666,23 @@ def _append_history(key: str, user_content: str, assistant_content: str) -> None
     history.append({"role": "user", "content": user_content})
     history.append({"role": "assistant", "content": assistant_content})
     max_messages = max(config.catty_history_turns, 0) * 2
-    if max_messages and len(history) > max_messages:
-        # 主人 2026-05-28 cache 修复: history trim 不再是纯 last N 滑动窗口 — 那样 msg[0]
-        # 每轮都被挤出, cache_control 在 msg[0] 上的 prefix 永远不匹配, cache_read=0.
-        # 改为"冻结头部 2 条 (最早的 user+assistant pair) + 保留 last N-2"模式:
-        # - msg[0]/msg[1] 跨轮**永远稳定** → cache prefix anchor 稳定 → cache hit
-        # - 中间的 history 滑动 (旧的被挤出) → 不影响 cache, AI 看到的对话连续性轻微跳跃但可读
-        # - 末尾保留 N-2 条最新 → 短期记忆完整
-        # Anthropic prompt caching 推荐做法: 第一条 msg 当 cache anchor, 内容稳定就行.
+    # 主人 2026-05-28 C4 — batch trim 让 cache lookback 命中:
+    # 之前: 每轮新增 2 条挤出 2 条 → msg[2..end] 跨轮全在滑 → Anthropic 20-block lookback
+    #       找不到子集匹配 → cache_read 卡在 sys 部分 (6.4K), history 永远不进 cache.
+    # 现在: append-only 到 max_messages*2 才一次性 trim 回 max_messages.
+    #       这样 max_messages 轮内 history 完全 append-only (byte 稳定),
+    #       Anthropic lookback 命中之前 cache 的 history prefix, cache_read 大涨.
+    #       trim 只在每 max_messages 轮发生 1 次 (cache 失效 1 次), 之后又能持续命中.
+    trim_threshold = max_messages * 2 if max_messages else 0
+    if trim_threshold and len(history) > trim_threshold:
+        # 触发 batch trim — 一次性砍回 max_messages 长度
         if (
             len(history) >= 4
             and isinstance(history[0], dict) and history[0].get("role") == "user"
             and isinstance(history[1], dict) and history[1].get("role") == "assistant"
         ):
-            # 冻结头 2 (最早 user+assistant) + 拼 last (max_messages-2)
             history = history[:2] + history[-(max_messages - 2):]
         else:
-            # 边界情况 (history 不够 4 条 或 头部不是 user/assistant pair): 回退老逻辑
             history = history[-max_messages:]
     elif max_messages == 0:
         history = []
