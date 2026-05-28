@@ -87,6 +87,13 @@ h2 { font-size: 14px; margin: 16px 0 8px; color: #555; }
 </div>
 
 <div class="section">
+  <h2>对话历史 <span id="dialog-count" style="color:#888; font-weight:normal;"></span>
+    <span style="font-size:11px;color:#aaa;font-weight:normal;margin-left:8px;">新的在下面,旧的往上挤</span>
+  </h2>
+  <div id="dialog-stack" style="max-height:480px; overflow-y:auto; display:flex; flex-direction:column; gap:6px;">无对话历史</div>
+</div>
+
+<div class="section">
   <h2>最近事件 (实时滚动)</h2>
   <div id="events" class="stream-preview" style="max-height:180px;">等待…</div>
 </div>
@@ -110,9 +117,21 @@ function diag(step) {
 diag('step1: script started');
 const scopeMap = new Map();  // scope -> {model, read, create, input, output, hit, last_ts, total_context, billed_input_equiv, saved_pct}
 const activeStreams = new Map();  // stream_id -> {text, model, started}
+const dialogHistory = [];  // 对话堆栈: 新的 push 到末尾 (底部), 满 30 条从顶部 shift 丢弃
+const DIALOG_MAX = 30;
 const eventsBox = document.getElementById('events');
 const statusEl = document.getElementById('status');
 const CONTEXT_LIMIT = 1000000;  // 1M context (Sonnet 4.6 / Opus 4.7 1M 模式)
+
+function modelBadgeStyle(model) {
+  // DeepSeek 蓝紫, Claude Sonnet/Opus 紫红, 其他灰
+  const m = (model || '').toLowerCase();
+  if (m.includes('deepseek')) return 'background:#5b8dee;color:#fff';
+  if (m.includes('opus')) return 'background:#9b59b6;color:#fff';
+  if (m.includes('sonnet') || m.includes('claude')) return 'background:#7d3c98;color:#fff';
+  if (m.includes('gpt') || m.includes('openai')) return 'background:#27ae60;color:#fff';
+  return 'background:#95a5a6;color:#fff';
+}
 
 function renderContextLive() {
   const rows = [...scopeMap.entries()].sort((a,b) => b[1].last_ts - a[1].last_ts);
@@ -205,6 +224,42 @@ function appendEvent(line) {
   eventsBox.textContent = `[${ts}] ${line}\\n` + eventsBox.textContent.split('\\n').slice(0, 30).join('\\n');
 }
 
+function appendDialog(item) {
+  // 主人 2026-05-28: 对话堆栈, 新的进来 push 到末尾(底部), 旧的位置不变
+  // 超过 DIALOG_MAX 从顶部丢弃 -> 视觉上是"旧的被挤上去 → 顶部消失"
+  dialogHistory.push(item);
+  while (dialogHistory.length > DIALOG_MAX) dialogHistory.shift();
+  renderDialogStack();
+}
+
+function renderDialogStack() {
+  const el = document.getElementById('dialog-stack');
+  const cnt = document.getElementById('dialog-count');
+  cnt.textContent = dialogHistory.length > 0 ? `(${dialogHistory.length}/${DIALOG_MAX})` : '';
+  if (dialogHistory.length === 0) {
+    el.innerHTML = '无对话历史';
+    return;
+  }
+  // 时间正序: 旧在上, 新在下 (符合"挤上去"语义 + 聊天窗口风格)
+  el.innerHTML = dialogHistory.map(d => {
+    const ts = new Date((d.ended_ts || d.started || 0) * 1000).toLocaleTimeString();
+    const dur = (d.duration_s || 0).toFixed(1);
+    const preview = (d.text || '(空)').replace(/</g, '&lt;');
+    return `
+      <div style="border:1px solid #e1e4e8; border-radius:4px; padding:6px 8px; background:#fafbfc;">
+        <div style="font-size:11px; color:#666; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+          <span style="${modelBadgeStyle(d.model)}; padding:1px 6px; border-radius:3px; font-size:10px;">${d.model || '?'}</span>
+          <span style="color:#999;">${ts}</span>
+          <span>· ${dur}s · ${(d.text || '').length} 字</span>
+        </div>
+        <div style="font-family:ui-monospace,monospace; font-size:12px; white-space:pre-wrap; word-wrap:break-word; max-height:140px; overflow-y:auto; color:#222;">${preview}</div>
+      </div>
+    `;
+  }).join('');
+  // 自动滚到底部, 让最新对话可见
+  el.scrollTop = el.scrollHeight;
+}
+
 function setConnected() {
   statusEl.textContent ='SSE 已连接';
   statusEl.className ='status-on';
@@ -254,6 +309,18 @@ function connectSSE() {
       const s = activeStreams.get(payload.stream_id);
       if (s) { s.text += payload.delta_text || ''; renderStreams(); }
     } else if (payload.type === 'stream_end') {
+      const s = activeStreams.get(payload.stream_id);
+      if (s) {
+        // 把这条对话沉淀到 dialog 堆栈, 旧的会被挤上去
+        appendDialog({
+          model: s.model || '',
+          stream_id: payload.stream_id,
+          started: s.started,
+          ended_ts: payload.ts,
+          duration_s: payload.duration_s || 0,
+          text: s.text || '',
+        });
+      }
       activeStreams.delete(payload.stream_id);
       renderStreams();
       appendEvent(`stream_end ${payload.stream_id} duration=${payload.duration_s.toFixed(1)}s text_len=${payload.text_len}`);

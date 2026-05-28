@@ -56,17 +56,25 @@ def start_stream(model: str = "") -> str:
 def push_event(stream_id: str, event: Any) -> None:
     """anthropic_native_client 每个 stream event 调用一次. event 是 anthropic SDK 的
     RawMessageStartEvent / RawContentBlockDeltaEvent 等. 提取 text delta + 类型推到 SSE.
+
+    主人 2026-05-28: 加 dict 形态支持 — OpenAI compat path (DeepSeek) 模拟流式时直接
+    传 {"delta_text": "...", "event_type": "..."} 不需要 SDK event 对象.
     """
     state = _ACTIVE_STREAMS.get(stream_id)
     if state is None:
         return
-    event_type = type(event).__name__
+    # === dict 形态 (OpenAI compat / DeepSeek 模拟流式) ===
+    if isinstance(event, dict):
+        event_type = event.get("event_type", "dict_delta")
+        delta_text = event.get("delta_text", "") or ""
+    else:
+        # === Anthropic SDK event 对象 ===
+        event_type = type(event).__name__
+        delta_text = ""
+        delta = getattr(event, "delta", None)
+        if delta is not None:
+            delta_text = getattr(delta, "text", "") or ""
     state.last_event_type = event_type
-    # 提取 text delta (anthropic 流式 text 主要在 ContentBlockDeltaEvent.delta.text)
-    delta_text = ""
-    delta = getattr(event, "delta", None)
-    if delta is not None:
-        delta_text = getattr(delta, "text", "") or ""
     if delta_text:
         state.text_buffer += delta_text
     # broadcast 简化: 只推 text delta + event_type, 避免序列化复杂 SDK 对象
@@ -103,24 +111,39 @@ def end_stream(stream_id: str, final_usage: dict[str, Any] | None = None) -> Non
 
 
 def push_cache_stats(scope: str, usage: dict[str, Any], *, model: str = "") -> None:
-    """anthropic_native_client._log_native_usage 调用, 把 cache 命中率 + context window 占用推到 dashboard.
+    """把 cache 命中率 + context window 占用推到 dashboard.
 
-    主人 2026-05-28: 加 model 参数 + 算计费 token equiv (cache_read*0.1 + cache_create*2.0 + input).
-    1h TTL cache_create 倍数=2.0, 5min=1.25. dashboard 据此显示实际计费 token 节省比例.
+    优先识别 DeepSeek 风格 (prompt_cache_hit_tokens / prompt_cache_miss_tokens),
+    否则走 Anthropic 风格 (cache_read_input_tokens / cache_creation_input_tokens).
+
+    主人 2026-05-28: 加 DeepSeek 字段识别 — DeepSeek 无 cache_create 概念
+    (服务端自动 KV cache, 不分 read/create), 计费: hit 0.1x, miss 1.0x.
+    Anthropic 计费: read 0.1x, create 2.0x (1h TTL), input 1.0x.
     """
-    cache_read = int(usage.get("cache_read_input_tokens") or 0)
-    cache_create = int(usage.get("cache_creation_input_tokens") or 0)
-    input_tokens = int(usage.get("input_tokens") or 0)
-    output_tokens = int(usage.get("output_tokens") or 0)
-    total_context = cache_read + cache_create + input_tokens  # 实际 input context 占用
-    hit = (cache_read / total_context) if total_context > 0 else 0.0
-    # 计费 token 等价 (Anthropic 定价系数, 假设 1h TTL):
-    # - cache_read: 0.1x (90% off)
-    # - cache_create: 2.0x (1h TTL write)
-    # - new input: 1.0x base
-    billed_input_equiv = int(cache_read * 0.1 + cache_create * 2.0 + input_tokens * 1.0)
-    # 不用 cache 的话 = total_context * 1.0
-    saved_pct = (1 - billed_input_equiv / total_context) * 100 if total_context > 0 else 0.0
+    # === DeepSeek 风格 (优先识别) ===
+    ds_hit = int(usage.get("prompt_cache_hit_tokens") or 0)
+    ds_miss = int(usage.get("prompt_cache_miss_tokens") or 0)
+    if ds_hit or ds_miss:
+        cache_read = ds_hit
+        cache_create = 0  # DeepSeek 无 cache_create
+        input_tokens = ds_miss
+        output_tokens = int(usage.get("completion_tokens") or 0)
+        total_context = cache_read + input_tokens
+        hit = (cache_read / total_context) if total_context > 0 else 0.0
+        # DeepSeek 计费系数: hit 0.1x, miss 1.0x
+        billed_input_equiv = int(cache_read * 0.1 + input_tokens * 1.0)
+        saved_pct = (1 - billed_input_equiv / total_context) * 100 if total_context > 0 else 0.0
+    else:
+        # === Anthropic 风格 (原逻辑) ===
+        cache_read = int(usage.get("cache_read_input_tokens") or 0)
+        cache_create = int(usage.get("cache_creation_input_tokens") or 0)
+        input_tokens = int(usage.get("input_tokens") or 0)
+        output_tokens = int(usage.get("output_tokens") or 0)
+        total_context = cache_read + cache_create + input_tokens
+        hit = (cache_read / total_context) if total_context > 0 else 0.0
+        # Anthropic 定价系数 (1h TTL): cache_read 0.1x / cache_create 2.0x / input 1.0x
+        billed_input_equiv = int(cache_read * 0.1 + cache_create * 2.0 + input_tokens * 1.0)
+        saved_pct = (1 - billed_input_equiv / total_context) * 100 if total_context > 0 else 0.0
     _broadcast({
         "type": "cache_stats",
         "scope": scope,

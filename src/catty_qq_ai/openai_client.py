@@ -531,6 +531,13 @@ def _log_cache_stats(data: dict[str, Any], model: str) -> None:
                 _DEEPSEEK_LOW_HIT_STREAK = 0  # 提醒后重置, 避免刷屏
         else:
             _DEEPSEEK_LOW_HIT_STREAK = 0
+        # 主人 2026-05-28: 推 dashboard (DeepSeek 路径 cache 实时显示)
+        try:
+            from . import dashboard_state as _dash
+            _scope = get_current_scope_key() or ""
+            _dash.push_cache_stats(_scope or model, usage, model=model)
+        except Exception:  # noqa: BLE001
+            pass
         return
 
     # === (2) Anthropic 风格 ===
@@ -707,47 +714,88 @@ async def _post_chat_completion_raw(
         payload["tools"] = normalize_openai_tool_schemas(tools)
         payload["tool_choice"] = tool_choice
 
-    # 主人:任何 5xx 自动 retry 3 次(共 4 次尝试),3 次都失败才上抛
-    # 4xx 是 client error,重试也是一样的错,不重试
-    last_error: OpenAICompatibleError | None = None
-    for attempt in range(4):
-        async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
-            response = await client.post(
-                _chat_completions_url(base_url), headers=headers, json=payload,
-            )
+    # === Dashboard stream lifecycle hook (DeepSeek / OpenAI compat 路径) ===
+    # 主人 2026-05-28: 让非 Anthropic 路径也能在 dashboard 上看到对话.
+    # 模拟流式: 收到完整 response 后一次性 push 完整 text 当一个 delta, 然后 end_stream.
+    # finally 块兜底清理 active stream (失败 raise 路径).
+    _dash_stream_id: str | None = None
+    try:
+        from . import dashboard_state as _dash_mod
+        _dash_stream_id = _dash_mod.start_stream(model=model)
+    except Exception:  # noqa: BLE001
+        pass
 
-        if response.status_code < 400:
-            try:
-                data = response.json()
-            except ValueError as exc:
+    try:
+        # 主人:任何 5xx 自动 retry 3 次(共 4 次尝试),3 次都失败才上抛
+        # 4xx 是 client error,重试也是一样的错,不重试
+        last_error: OpenAICompatibleError | None = None
+        for attempt in range(4):
+            async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
+                response = await client.post(
+                    _chat_completions_url(base_url), headers=headers, json=payload,
+                )
+
+            if response.status_code < 400:
+                try:
+                    data = response.json()
+                except ValueError as exc:
+                    raise OpenAICompatibleError(
+                        "AI 返回的不是 JSON。", response.text[:500],
+                    ) from exc
+                # === cache hit 监测 (DeepSeek / Anthropic / OpenAI 都识别) ===
+                # 主人 2026-05-28: 改为始终调用, 函数内部自己判断有无 cache 字段
+                # (DeepSeek 路径 enable_cache=False 但仍想看 prompt_cache_hit_tokens).
+                _log_cache_stats(data, model)
+                # === Dashboard: 推完整 text 当一次 delta + end_stream ===
+                if _dash_stream_id:
+                    try:
+                        _text = ""
+                        _choices = data.get("choices") or []
+                        if _choices:
+                            _msg = _choices[0].get("message") or {}
+                            _content = _msg.get("content")
+                            if isinstance(_content, str):
+                                _text = _content
+                            elif _content is not None:
+                                _text = str(_content)
+                        if _text:
+                            _dash_mod.push_event(_dash_stream_id, {
+                                "delta_text": _text,
+                                "event_type": "openai_completion",
+                            })
+                        _dash_mod.end_stream(_dash_stream_id, final_usage=data.get("usage"))
+                        _dash_stream_id = None  # 标记已清理, finally 不再重复 end
+                    except Exception:  # noqa: BLE001
+                        pass
+                return data
+
+            detail = response.text[:500]
+            if not (500 <= response.status_code < 600):
+                # 4xx 直接抛,无重试意义
                 raise OpenAICompatibleError(
-                    "AI 返回的不是 JSON。", response.text[:500],
-                ) from exc
-            # === cache hit 监测 (DeepSeek / Anthropic / OpenAI 都识别) ===
-            # 主人 2026-05-28: 改为始终调用, 函数内部自己判断有无 cache 字段
-            # (DeepSeek 路径 enable_cache=False 但仍想看 prompt_cache_hit_tokens).
-            _log_cache_stats(data, model)
-            return data
+                    _catty_http_status_message("AI 接口", response.status_code), detail,
+                )
 
-        detail = response.text[:500]
-        if not (500 <= response.status_code < 600):
-            # 4xx 直接抛,无重试意义
-            raise OpenAICompatibleError(
+            last_error = OpenAICompatibleError(
                 _catty_http_status_message("AI 接口", response.status_code), detail,
             )
+            if attempt < 3:
+                backoff = 0.5 * (2 ** attempt)  # 0.5 / 1.0 / 2.0 s
+                _logger.info(
+                    f"AI 接口 {response.status_code} retry {attempt + 1}/3 after {backoff}s"
+                )
+                await asyncio.sleep(backoff)
 
-        last_error = OpenAICompatibleError(
-            _catty_http_status_message("AI 接口", response.status_code), detail,
-        )
-        if attempt < 3:
-            backoff = 0.5 * (2 ** attempt)  # 0.5 / 1.0 / 2.0 s
-            _logger.info(
-                f"AI 接口 {response.status_code} retry {attempt + 1}/3 after {backoff}s"
-            )
-            await asyncio.sleep(backoff)
-
-    assert last_error is not None
-    raise last_error
+        assert last_error is not None
+        raise last_error
+    finally:
+        # 异常路径兜底清理 (200 OK 后 _dash_stream_id 已设 None, 这里只处理 raise 出去的情况)
+        if _dash_stream_id:
+            try:
+                from . import dashboard_state as _dash_mod2
+                _dash_mod2.end_stream(_dash_stream_id)
+            except Exception:  # noqa: BLE001
+                pass
 
 
 async def _post_ollama_chat(
