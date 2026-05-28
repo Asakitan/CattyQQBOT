@@ -67,17 +67,12 @@ from typing import Any, Callable
 # 这些是笨猫人格 / 身份 / 主回复策略的核心, 一旦 trim 掉就『不像笨猫了』。
 # 用户可通过 config.catty_prompt_protected_identifiers 追加(不能减少基础保护)。
 _PROTECTED_IDENTIFIERS: frozenset[str] = frozenset({
-    # 主人 2026-05-28 P5.1: 合并 main_intel/char_desc/char_personality/scenario/
-    # reply_self_check 5 项到单段 catty_core_persona (~2.2K, vs 旧 6.4K).
-    # CLAUDE.md 基线 (2475 token) 实证 < 3K 能完美上人格. 旧 6 项已停止 register.
-    "catty_core_persona",          # P5.1 新核心人格 (cache prefix base)
-    "catty_character_book_skeleton",  # hardcoded entries 完整骨架 (cache-stable, pre-boundary)
-    "catty_character_book_hits",   # BFS 命中 id 指针 + scope_lorebook content (dynamic)
-    "catty_daily_affection_gate_skeleton",  # 日常 SFW 5 档完整骨架 (cache-stable, pre-boundary)
-    "catty_daily_affection_gate_params",    # 日常 SFW 本轮参数 (dynamic pointer)
-    "catty_nsfw_gate_skeleton",    # NSFW stage matrix 完整骨架 (cache-stable, pre-boundary)
-    "catty_nsfw_gate_params",      # NSFW 本轮参数 (dynamic pointer, post-boundary)
-    "catty_post_history",          # post-history (jailbreak 段, PHI 注入位置特殊)
+    # 主人 2026-05-28 P5 架构重构: cache prefix 只留 catty_core_persona 一段 (~2.2K).
+    # 所有 background skeleton (character_book/affection_gate/nsfw_gate/adaptive_drift)
+    # 和 PHI 都移到 boundary 后 (order >= 460), 通过 sweep_floating_systems inline 到
+    # user content [DYNAMIC_CONTEXT] 段, 不再进 cache prefix.
+    # 唯一 PROTECTED = catty_core_persona, 旧 12 项 → 1 项.
+    "catty_core_persona",          # P5.1 新核心人格 (cache prefix base, ~2175 tokens o200k)
 })
 
 
@@ -375,7 +370,7 @@ def register_catty_persona(
             mgr.register_static(
                 "catty_character_book_skeleton",
                 _cb_skeleton,
-                order=143,  # static, pre-boundary — 完整 hardcoded entries 进 cache
+                order=470,  # P5.2: 移到 boundary 后 → sweep inline 到 user content, cache prefix 干净
             )
     except Exception as _cb_sk_exc:  # noqa: BLE001
         logger.debug(f"character_book_skeleton register failed: {_cb_sk_exc}")
@@ -481,7 +476,7 @@ def register_catty_persona(
         mgr.register_static(
             "catty_daily_affection_gate_skeleton",
             _build_daily_gate_skeleton(),
-            order=147,  # static, pre-boundary — cache 友好 5 档完整骨架
+            order=471,  # P5.2: 移到 boundary 后
         )
 
         def _build_daily_gate_params_fn() -> str:
@@ -573,7 +568,7 @@ def register_catty_persona(
     mgr.register_static(
         "catty_nsfw_gate_skeleton",
         _NSFW_GATE_SKELETON,
-        order=148,  # static, pre-boundary — cache 友好的完整 stage matrix 骨架
+        order=472,  # P5.2: 移到 boundary 后
     )
 
     # ─── 动态参数: 只 ~200 字符, 引用上面骨架 ───
@@ -628,30 +623,31 @@ def register_catty_persona(
     # NOTE: catty_persona_memory (order=150) 已永久 disable — 内容跟 character_book ANCHOR 段重叠 ~1200c.
 
     # === 群聊/对话流/语义/场景 playbook (一坨补充) ===
+    # P5.2: 移到 boundary 后 (sweep inline 到 user content, cache prefix 干净)
     mgr.register(
         "catty_group_meme_literacy",
         content_fn=lambda: _pp.build_group_meme_literacy_prompt(),
-        order=160,
+        order=460,
     )
     mgr.register(
         "catty_conversation_flow",
         content_fn=lambda: _pp.build_conversation_flow_prompt(),
-        order=170,
+        order=461,
     )
     mgr.register(
         "catty_semantic_perception",
         content_fn=lambda: _pp.build_semantic_perception_prompt(),
-        order=180,
+        order=462,
     )
     mgr.register(
         "catty_scenario_playbook",
         content_fn=lambda: _pp.build_scenario_playbook_prompt(no_reply),
-        order=190,
+        order=463,
     )
     mgr.register(
         "catty_scene_discrimination",
         content_fn=lambda: _pp.build_scene_discrimination_prompt(no_reply),
-        order=195,
+        order=464,  # P5.2: 移到 boundary 后
     )
 
     # === ST 风新模块: daily_life / world_info / story_arc ===
@@ -725,7 +721,7 @@ def register_catty_persona(
         mgr.register(
             "catty_story_arc",
             content_fn=lambda: _sa.build_story_arc_prompt(arc_store.get_active(scope)),
-            order=350,  # 同 scope stable, 留 boundary 前 cache prefix
+            order=468,  # P5.2: 移到 boundary 后
         )
         # Catty Arc Pusher: 看 active arc 跟 current msg 关联度, 给推进/回调 hint.
         from .catty_arc_pusher import build_arc_pusher_prompt as _build_arc_pusher
@@ -738,10 +734,11 @@ def register_catty_persona(
         )
 
     # === QQ 节奏 + 自检 + image + 示例 (后段) ===
+    # P5.2: 移到 boundary 后
     mgr.register(
         "catty_qq_chat_rhythm",
         content_fn=lambda: _pp.build_qq_chat_rhythm_prompt(split_marker),
-        order=210,
+        order=465,
     )
 
     # 主人 2026-05-28 C16-1: 砍 catty_length_intent / catty_initiative dynamic register —
@@ -762,7 +759,7 @@ def register_catty_persona(
     mgr.register(
         "catty_action_palette",
         content_fn=_build_action_palette,
-        order=215,
+        order=466,  # P5.2: 移到 boundary 后
     )
     # 主人 2026-05-28 P5.1: catty_reply_self_check 已内嵌到 catty_core_persona §7 自检铁律,
     # 不再独立 register. self_check_enabled flag 保留 (后续若需独立增强可重新加).
@@ -800,20 +797,21 @@ def register_catty_persona(
     # 示例对话只在冷会话(<HOT_SESSION 阈值)注入 — 热会话从历史里就能学到口吻,
     # 这两段加起来 ~1.5K token,省下 30-40% system prompt 体积。
     if style_examples_enabled and is_cold_session:
+        # P5.2: 冷会话 example 段移到 boundary 后
         mgr.register(
             "catty_catgirl_examples",
             content_fn=lambda: _pp.build_catgirl_examples_prompt(no_reply, split_marker),
-            order=240,
+            order=478,
         )
         mgr.register(
             "catty_disambiguation",
             content_fn=lambda: _pp.build_disambiguation_examples_prompt(no_reply),
-            order=250,
+            order=479,
         )
         mgr.register(
             "catty_mes_example",
             content_fn=lambda: _cc.get_mes_example(ctx=macro_ctx, user_display=user_display),
-            order=320,
+            order=480,
         )
 
     # 主人 2026-05-28 C16-1: 砍 catty_mood_overlay dynamic register —

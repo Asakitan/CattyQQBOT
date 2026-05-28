@@ -866,6 +866,201 @@ ALL_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
     "catty_nai_director": _NAI_DIRECTOR_SCHEMA,
     "catty_story_arc_set": _STORY_ARC_SET_SCHEMA,
     "catty_story_arc_clear": _STORY_ARC_CLEAR_SCHEMA,
+    "catty_recall_user_messages": {  # P5.6: 跟 lazy schema 字节一致 (本来就该是 lazy)
+        "type": "function",
+        "function": {
+            "name": "catty_recall_user_messages",
+            "description": "拉某群友最近 N 条消息 (群聊接梗用, 默认 history per-user 时必备)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "user_id": {"type": "string", "description": "目标 QQ 号"},
+                    "count": {"type": "integer", "description": "要拉的条数 (1-20, 默认 8)", "minimum": 1, "maximum": 20},
+                },
+                "required": ["user_id"],
+            },
+        },
+    },
+}
+
+
+# ── P5.5 Lazy Tool Schema (OpenAI native 格式, AI 决定调时只看 name + 短描述) ──
+# 主人 2026-05-28 plan-cattyCacheFixAndPromptSlim P5.5:
+# - description ≤30 字, 极简告知 AI "这是干啥的"
+# - parameters 保留 required schema (AI 仍能填正确 args), 但 properties description 砍到 5 字
+# - 配合 catty_tools_lazy_schema_enabled flag (默认 True) 切换全量 / lazy
+# - Anthropic native 格式由 convert_openai_tool_to_anthropic 自动转 (anthropic_native_client.py)
+#   两种 API 输出字节稳定 = cache key 跨调用稳定
+def _make_lazy_schema(name: str, short_desc: str, props: dict[str, dict], required: list[str]) -> dict:
+    """生成 lazy schema. short_desc ≤30 字, props 每个 description 砍到 ≤5 字."""
+    return {
+        "type": "function",
+        "function": {
+            "name": name,
+            "description": short_desc,
+            "parameters": {
+                "type": "object",
+                "properties": props,
+                "required": required,
+            },
+        },
+    }
+
+
+_LAZY_TOOL_SCHEMAS: dict[str, dict[str, Any]] = {
+    "catty_recall": _make_lazy_schema(
+        "catty_recall", "拉某 scope 历史消息",
+        {
+            "scope": {"type": "string", "enum": ["current_group", "current_user", "specific_user"], "description": "范围"},
+            "keywords": {"type": "string", "description": "关键词"},
+            "user_id": {"type": "string", "description": "QQ 号"},
+            "limit": {"type": "integer", "description": "条数"},
+        },
+        ["scope"],
+    ),
+    "catty_user_profile": _make_lazy_schema(
+        "catty_user_profile", "查某 QQ 用户画像",
+        {
+            "user_id": {"type": "string", "description": "QQ 号"},
+            "group_id": {"type": "string", "description": "群号"},
+        },
+        ["user_id"],
+    ),
+    "catty_mc_status": _make_lazy_schema(
+        "catty_mc_status", "MC server 状态", {}, [],
+    ),
+    "catty_web_search": _make_lazy_schema(
+        "catty_web_search", "联网搜索 (新闻/查询)",
+        {
+            "query": {"type": "string", "description": "查询词"},
+            "num_results": {"type": "integer", "description": "条数"},
+        },
+        ["query"],
+    ),
+    "catty_nsfw_search": _make_lazy_schema(
+        "catty_nsfw_search", "pixiv/iwara R-18 搜 (私聊限定)",
+        {
+            "kind": {"type": "string", "enum": ["image", "video"], "description": "类型"},
+            "query": {"type": "string", "description": "关键词"},
+        },
+        ["kind", "query"],
+    ),
+    "catty_image_search": _make_lazy_schema(
+        "catty_image_search", "反向搜图 (问出处/作者)",
+        {
+            "kind": {"type": "string", "enum": ["anime", "artwork", "photo", "auto"], "description": "类型"},
+            "image_url": {"type": "string", "description": "图 URL"},
+            "image_index": {"type": "integer", "description": "倒序索引"},
+            "engines": {"type": "string", "description": "引擎"},
+        },
+        ["kind"],
+    ),
+    "catty_meme_query": _make_lazy_schema(
+        "catty_meme_query", "拉梗图 (SFW)",
+        {"keywords": {"type": "string", "description": "关键词"}},
+        ["keywords"],
+    ),
+    "catty_game_recall": _make_lazy_schema(
+        "catty_game_recall", "查游戏事实库",
+        {
+            "game": {"type": "string", "description": "游戏名"},
+            "keywords": {"type": "string", "description": "关键词"},
+            "limit": {"type": "integer", "description": "条数"},
+        },
+        ["game"],
+    ),
+    "catty_game_remember": _make_lazy_schema(
+        "catty_game_remember", "记游戏事实",
+        {
+            "game": {"type": "string", "description": "游戏名"},
+            "fact": {"type": "string", "description": "事实"},
+            "tags": {"type": "string", "description": "标签"},
+        },
+        ["game", "fact"],
+    ),
+    "catty_social_account": _make_lazy_schema(
+        "catty_social_account", "查猫猫某平台账号",
+        {"platform": {"type": "string", "description": "平台"}},
+        ["platform"],
+    ),
+    "catty_group_game_tag": _make_lazy_schema(
+        "catty_group_game_tag", "给群打游戏标签 (confidence≥60)",
+        {
+            "game": {"type": "string", "description": "游戏名"},
+            "confidence": {"type": "integer", "description": "0-100"},
+            "reason": {"type": "string", "description": "原因"},
+            "remove": {"type": "boolean", "description": "移除"},
+        },
+        ["game"],
+    ),
+    "catty_hot_trends": _make_lazy_schema(
+        "catty_hot_trends", "拉热搜 (微博/B站/知乎/抖音)",
+        {
+            "sources": {"type": "string", "description": "源"},
+            "limit_per_source": {"type": "integer", "description": "条数"},
+        },
+        [],
+    ),
+    "catty_now": _make_lazy_schema(
+        "catty_now", "拿当前时间/日期/节日",
+        {"delta_days": {"type": "integer", "description": "偏移天"}},
+        [],
+    ),
+    "catty_meme_explain": _make_lazy_schema(
+        "catty_meme_explain", "萌娘百科查梗/词条",
+        {"term": {"type": "string", "description": "词"}},
+        ["term"],
+    ),
+    "catty_remember": _make_lazy_schema(
+        "catty_remember", "写长期笔记 (偏好/约定/边界)",
+        {
+            "scope": {"type": "string", "enum": ["user", "group"], "description": "范围"},
+            "text": {"type": "string", "description": "笔记文本"},
+            "ttl_days": {"type": "integer", "description": "TTL 天"},
+            "tags": {"type": "string", "description": "标签"},
+            "event_date": {"type": "string", "description": "ISO 日期"},
+        },
+        ["scope", "text"],
+    ),
+    "catty_recall_notes": _make_lazy_schema(
+        "catty_recall_notes", "查 sticky 笔记 (查别人/查群)",
+        {
+            "scope": {"type": "string", "enum": ["user", "group", "both"], "description": "范围"},
+            "user_id": {"type": "string", "description": "QQ"},
+            "group_id": {"type": "string", "description": "群"},
+            "limit": {"type": "integer", "description": "条数"},
+        },
+        ["scope"],
+    ),
+    "catty_imagegen": _IMAGEGEN_SCHEMA,  # 已是 lazy 模式 (args 空, fca36bb)
+    "catty_nai_director": _make_lazy_schema(
+        "catty_nai_director", "NAI 改图 (抠图/线稿/上色等)",
+        {
+            "action": {"type": "string", "description": "动作"},
+            "image_url": {"type": "string", "description": "图 URL"},
+            "prompt": {"type": "string", "description": "prompt"},
+        },
+        ["action"],
+    ),
+    "catty_story_arc_set": _make_lazy_schema(
+        "catty_story_arc_set", "开 story arc (跨多轮故事线)",
+        {
+            "title": {"type": "string", "description": "标题"},
+            "summary": {"type": "string", "description": "概要"},
+        },
+        ["title"],
+    ),
+    "catty_story_arc_clear": _make_lazy_schema(
+        "catty_story_arc_clear", "结束 story arc", {}, [],
+    ),
+    "catty_recall_user_messages": _make_lazy_schema(
+        "catty_recall_user_messages", "拉某群友最近 N 条消息 (群聊接梗用)",
+        {
+            "user_id": {"type": "string", "description": "QQ"},
+            "count": {"type": "integer", "description": "条数 1-20"},
+        },
+        ["user_id"],
+    ),
 }
 
 
@@ -3232,6 +3427,67 @@ async def _exec_hot_trends(args: dict[str, Any], ctx: ToolContext) -> dict[str, 
     return payload
 
 
+# ── P5.6 catty_recall_user_messages: on-demand 群聊 history ─────────
+# 主人 2026-05-28 plan-cattyCacheFixAndPromptSlim P5.6:
+# 默认 history per-user (P5.4). 群聊时 AI 看不到别人 history. 当 user msg 提到
+# @某人 / "X 怎么说" / "X 刚才聊啥" 时, AI 调本 tool 拉某 QQ 最近 N 条消息.
+# 不增加默认 prompt size — 真要才拉.
+async def _exec_recall_user_messages(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
+    target_user_id = str(args.get("user_id") or "").strip()
+    if not target_user_id:
+        return {"error": "user_id 必填 (要拉哪个 QQ 的消息)"}
+    try:
+        count = int(args.get("count") or 8)
+    except (TypeError, ValueError):
+        count = 8
+    count = max(1, min(count, 20))  # cap 1-20
+
+    if not ctx.group_id:
+        return {"error": "本 tool 只在群聊里能调; 私聊本身就是 per-user 不需要"}
+
+    # session key 复合 (group_id, user_id) — 跟 build_history_key 同款
+    scope_key = f"group:{ctx.group_id}:user:{target_user_id}"
+    try:
+        from . import _get_session_cache  # type: ignore
+        cache = _get_session_cache()
+        msgs = list(cache.get(scope_key) or [])
+    except Exception as exc:  # noqa: BLE001
+        return {"error": f"无法拉 session_cache: {exc.__class__.__name__}"}
+
+    if not msgs:
+        return {
+            "user_id": target_user_id,
+            "group_id": ctx.group_id,
+            "count": 0,
+            "messages": [],
+            "note": f"该 QQ ({target_user_id}) 在本群无 history 记录 (可能从未发言 / 被 prune)",
+        }
+
+    # 取末尾 N 条 + 简短 dump (role + content 前 80 字符)
+    recent = msgs[-count:]
+    dumped = []
+    for m in recent:
+        if not isinstance(m, dict):
+            continue
+        role = str(m.get("role", "?"))
+        content = m.get("content", "")
+        if isinstance(content, list):
+            content = " ".join(
+                str(b.get("text", "")) for b in content
+                if isinstance(b, dict) and b.get("type") == "text"
+            )
+        content_str = str(content)[:120]
+        dumped.append({"role": role, "content": content_str})
+
+    return {
+        "user_id": target_user_id,
+        "group_id": ctx.group_id,
+        "count": len(dumped),
+        "messages": dumped,
+        "note": "QQ 群里这个用户的最近对话 history. 用来接梗 / 回顾 / 找上下文.",
+    }
+
+
 async def _exec_social_account(args: dict[str, Any], ctx: ToolContext) -> dict[str, Any]:
     platform = str(args.get("platform") or "").strip().lower()
     if not platform:
@@ -3279,6 +3535,7 @@ _EXECUTORS: dict[str, ToolExecutor] = {
     "catty_nai_director": _exec_nai_director,
     "catty_story_arc_set": _exec_story_arc_set,
     "catty_story_arc_clear": _exec_story_arc_clear,
+    "catty_recall_user_messages": _exec_recall_user_messages,  # P5.6 on-demand group history
 }
 
 
@@ -3333,6 +3590,11 @@ _INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
     "catty_mc_status": ("MC", "minecraft", "我的世界", "服务器", "mc 在线"),
     "catty_story_arc_set": ("开 arc", "记一个故事", "story arc", "开始一条"),
     "catty_story_arc_clear": ("结束 arc", "清掉故事", "arc clear"),
+    # P5.6: 群聊提到 @某人 / "X 怎么说" / "X 刚才聊啥" 时 AI 拉 per-user history
+    "catty_recall_user_messages": (
+        "他怎么说", "她怎么说", "他刚才", "她刚才", "他之前", "她之前",
+        "刚才聊啥", "之前聊啥", "聊了什么", "刚才在说", "前面说",
+    ),
 }
 
 
@@ -3392,9 +3654,14 @@ def available_tool_schemas(
             excluded_list.append(str(name).strip())
     excluded_set = set(excluded_list)
 
+    # 主人 2026-05-28 P5.5: lazy schema 默认开 — description ≤30 字, properties 极简.
+    # 砍 ~3K tools description tokens. Anthropic 走 convert_openai_tool_to_anthropic 转格式.
+    _lazy = bool(getattr(config, "catty_tools_lazy_schema_enabled", True))
+    _schema_pool = _LAZY_TOOL_SCHEMAS if _lazy else ALL_TOOL_SCHEMAS
+
     # 按命中意图选 tools, exclude 私聊禁用的
     result = [
-        schema for name, schema in ALL_TOOL_SCHEMAS.items()
+        schema for name, schema in _schema_pool.items()
         if name in intent_hits and name not in excluded_set
     ]
     return result

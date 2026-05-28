@@ -4536,15 +4536,13 @@ async def _build_messages(
             )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"catty_current_sender_info register failed: {exc}")
-    # 主人 2026-05-28 prompt 优化 C3e: adaptive_drift vibe 库静态骨架 register 到 cache.
-    # 完整 12 vibe drift 应对库 (~600c byte 稳定) → cache 友好.
-    # handle_chat 后续 build_adaptive_drift_note 只输出 ~50c 短指针.
+    # 主人 2026-05-28 P5.2: adaptive_drift skeleton 移到 boundary 后, 不再占 cache prefix.
     try:
         from .author_note import build_adaptive_drift_skeleton as _build_drift_skeleton
         _st_manager.register_static(
             "catty_adaptive_drift_skeleton",
             _build_drift_skeleton(),
-            order=149,  # static, pre-boundary
+            order=473,  # P5.2: 移到 boundary 后
         )
     except Exception as _drift_sk_exc:  # noqa: BLE001
         logger.debug(f"adaptive_drift_skeleton register failed: {_drift_sk_exc}")
@@ -4555,23 +4553,10 @@ async def _build_messages(
     # 改成 register_static order=440 (boundary 455 之前), 直接进 cache. 每轮节省 ~1500c.
     # AI 看 system 段开头跟末尾 effect 差不多 — character lock + reply format + pacing 等指令
     # 稳定生效不依赖 recency.
-    _phi_disabled_static = "catty_post_history" in (getattr(config, "catty_prompts_disabled", None) or [])
-    if not _phi_disabled_static:
-        try:
-            from .character_card import get_post_history as _get_post_history_static
-            _phi_text_static = _get_post_history_static(ctx={
-                "char": "笨猫", "user": _user_display_for_macros,
-                "group": _group_real_display,
-                "last_active_at": _last_active_at,
-            })
-            if _phi_text_static and _phi_text_static.strip():
-                _st_manager.register_static(
-                    "catty_post_history",
-                    _phi_text_static,
-                    order=440,  # static, pre-boundary — 入 cache
-                )
-        except Exception as exc:  # noqa: BLE001
-            logger.debug(f"PHI static register failed: {exc}")
+    # 主人 2026-05-28 P5.1+P5.2: PHI 内容 (NSFW 妥协 + CHARACTER LOCK + REPLY FORMAT)
+    # 已合并到 catty_core_persona §4/5/6. 这里 disable PHI 独立 register 避免重复.
+    # 主人 catty_prompts_disabled=["catty_post_history"] 可手动重启.
+    _phi_disabled_static = True  # P5.1 内嵌, 默认关
 
     # LayerD/E 散装 context 统一注册到 PromptManager,享受同样的 prompt_order / prompts_disabled
     # 配置能力。order 600+ 表示挂在 character_card / world_info 之后、接近 chat history。
@@ -4807,7 +4792,25 @@ async def _build_messages(
     except Exception as _pc_exc:  # noqa: BLE001
         logger.debug(f"monotonic history trim failed (non-fatal): {_pc_exc}")
     messages.extend(history_messages)
-    # PHI 已在 register_catty_persona 之后 register_static (order=440) 注册到 cache 区.
+    # 主人 2026-05-28 P5.3: 每 N 轮 reminder inject (长对话防人格漂移).
+    # core_persona 在 cache prefix 一次注入, 长对话 末段 recency bias 会淡化 →
+    # 每 N 轮 (default 6) 在 messages 末尾 inject 精简 5 铁律 (~150 token).
+    # author_note depth=2 = 黄金区, 紧贴 user 当前消息但不在最末.
+    try:
+        if (
+            getattr(config, "catty_persona_reminder_enabled", True)
+            and history_messages  # 第一轮不 inject (cold session 已有 first_mes)
+        ):
+            from .catty_persona_reminder import should_inject_reminder, build_reminder_text
+            from .author_note import AuthorNote, inject_author_note
+            _n = int(getattr(config, "catty_persona_reminder_every_n_turns", 6))
+            if should_inject_reminder(key, _n):
+                _note = AuthorNote(content=build_reminder_text(), depth=2)
+                messages = inject_author_note(messages, _note)
+                logger.debug("persona_reminder injected (scope=%s, every=%d)", key, _n)
+    except Exception as _pr_exc:  # noqa: BLE001
+        logger.debug(f"persona_reminder inject failed (non-fatal): {_pr_exc}")
+    # PHI 已在 P5.1+P5.2 内嵌 catty_core_persona, 不再独立 register.
     # 主人 2026-05-28: current user msg 把 _dynamic_context_text (boundary 后所有动态段 inline)
     # 拼到内容前. 这样动态段不再以 system role 出现, system_blocks 跨轮字节稳定 → cache prefix hit.
     _user_content_raw = _build_user_content(incoming, image_description=image_description)

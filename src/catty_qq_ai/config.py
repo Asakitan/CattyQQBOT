@@ -279,6 +279,17 @@ class Config(BaseModel):
     # history 段在总 budget 里的占比. P4 调到 0.2 (10K × 0.2 = 2K history,
     # 群聊 7K × 0.2 = 1.4K), 剩余给 sys 6K + tools 1K + dynamic 1.5K + current 0.5K.
     catty_compressor_history_budget_ratio: float = 0.2
+    # ── P5.5 Lazy tool schema (description ≤30 字, properties 极简) ────
+    # 主人 2026-05-28 plan-cattyCacheFixAndPromptSlim P5.5:
+    # 砍 ~3K tool schema description. OpenAI native 由 _LAZY_TOOL_SCHEMAS 直接返回,
+    # Anthropic native 由 convert_openai_tool_to_anthropic 自动转 (cache 字节稳定).
+    catty_tools_lazy_schema_enabled: bool = True
+    # ── P5.3 每 N 轮人格 reminder ────────────────────────────────────
+    # 长对话防人格漂移. P5.1 core_persona 在 cache prefix 一次 inject, 长对话末段
+    # 因 LLM recency bias 可能淡化. 每 N 轮在 user msg 附近 (depth=2) 注入精简
+    # (~150 token) 5 铁律 reminder, 解决漂移.
+    catty_persona_reminder_enabled: bool = True
+    catty_persona_reminder_every_n_turns: int = 6
     # ── Cache 诊断日志 (Phase 1.4): 默认关闭, 主人按需打开 ────────────────
     # 打开后会往 logs/cache_debug.log 打 cache_control 标位 + system_blocks 字节诊断.
     catty_cache_diag_enabled: bool = False
@@ -354,7 +365,10 @@ class Config(BaseModel):
     catty_enable_group: bool = True
     catty_private_require_prefix: bool = False
     catty_group_require_mention_or_prefix: bool = True
-    catty_group_history_scope: str = "group"
+    # 主人 2026-05-28 P5.4: 每个 QQ 号一个独立 user session.
+    # "group" = 共享 (默认旧值), "user" = per-user (group_id + user_id 复合 key).
+    # ambient_eavesdrop/proactive/catty_mood 保持 _conversation_queue_key (群级) 看群里在场感.
+    catty_group_history_scope: str = "user"
     catty_history_turns: int = 3  # 主人 2026-05-28 C15-6: 6→3 (6 条), 强模型 + 8.4K cache 锁人格, history 给最近延续就够
     catty_session_cache_persistence_enabled: bool = True
     catty_session_cache_dir: str = "sessions"
