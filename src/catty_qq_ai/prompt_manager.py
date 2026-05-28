@@ -623,26 +623,27 @@ def register_catty_persona(
     # NOTE: catty_persona_memory (order=150) 已永久 disable — 内容跟 character_book ANCHOR 段重叠 ~1200c.
 
     # === 群聊/对话流/语义/场景 playbook (一坨补充) ===
-    # P5.2: 移到 boundary 后 (sweep inline 到 user content, cache prefix 干净)
+    # 主人 2026-05-29 Round 20: 跨 sender/跨轮 byte-stable 的 4 段移到 boundary 前 (149-152).
+    # 进 cache prefix 后 group cache 命中量 +~1000 token (实测 group 185840951 从 39% 提升空间).
     mgr.register(
         "catty_group_meme_literacy",
         content_fn=lambda: _pp.build_group_meme_literacy_prompt(),
-        order=460,
+        order=149,  # Round 20: 460→149 跨 sender static, 入 cache prefix
     )
     mgr.register(
         "catty_conversation_flow",
         content_fn=lambda: _pp.build_conversation_flow_prompt(),
-        order=461,
+        order=150,  # Round 20: 461→150 跨 sender static
     )
     mgr.register(
         "catty_semantic_perception",
         content_fn=lambda: _pp.build_semantic_perception_prompt(),
-        order=462,
+        order=151,  # Round 20: 462→151 跨 sender static
     )
     mgr.register(
         "catty_scenario_playbook",
         content_fn=lambda: _pp.build_scenario_playbook_prompt(no_reply),
-        order=463,
+        order=463,  # 看 no_reply 状态 (binary), 仍 post-boundary
     )
     mgr.register(
         "catty_scene_discrimination",
@@ -760,7 +761,7 @@ def register_catty_persona(
     mgr.register(
         "catty_action_palette",
         content_fn=_build_action_palette,
-        order=466,  # P5.2: 移到 boundary 后
+        order=466,  # per-scope per-day deterministic — 跨天变化, 留 boundary 后 (主人 2026-05-29 Round 20: 不算 static)
     )
     # 主人 2026-05-28 P5.1: catty_reply_self_check 已内嵌到 catty_core_persona §7 自检铁律,
     # 不再独立 register. self_check_enabled flag 保留 (后续若需独立增强可重新加).
