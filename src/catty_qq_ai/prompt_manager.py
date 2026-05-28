@@ -67,18 +67,17 @@ from typing import Any, Callable
 # 这些是笨猫人格 / 身份 / 主回复策略的核心, 一旦 trim 掉就『不像笨猫了』。
 # 用户可通过 config.catty_prompt_protected_identifiers 追加(不能减少基础保护)。
 _PROTECTED_IDENTIFIERS: frozenset[str] = frozenset({
-    "catty_main_intel",            # 主回复智能策略
-    "catty_char_description",      # 角色基础描述
-    "catty_char_personality",      # 角色性格
-    "catty_scenario",              # 场景
+    # 主人 2026-05-28 P5.1: 合并 main_intel/char_desc/char_personality/scenario/
+    # reply_self_check 5 项到单段 catty_core_persona (~2.2K, vs 旧 6.4K).
+    # CLAUDE.md 基线 (2475 token) 实证 < 3K 能完美上人格. 旧 6 项已停止 register.
+    "catty_core_persona",          # P5.1 新核心人格 (cache prefix base)
     "catty_character_book_skeleton",  # hardcoded entries 完整骨架 (cache-stable, pre-boundary)
     "catty_character_book_hits",   # BFS 命中 id 指针 + scope_lorebook content (dynamic)
     "catty_daily_affection_gate_skeleton",  # 日常 SFW 5 档完整骨架 (cache-stable, pre-boundary)
     "catty_daily_affection_gate_params",    # 日常 SFW 本轮参数 (dynamic pointer)
     "catty_nsfw_gate_skeleton",    # NSFW stage matrix 完整骨架 (cache-stable, pre-boundary)
     "catty_nsfw_gate_params",      # NSFW 本轮参数 (dynamic pointer, post-boundary)
-    "catty_reply_self_check",      # 回复自检(防 客服腔)
-    "catty_post_history",          # post-history (jailbreak 段)
+    "catty_post_history",          # post-history (jailbreak 段, PHI 注入位置特殊)
 })
 
 
@@ -337,27 +336,17 @@ def register_catty_persona(
     # 兼容老开关:catty_parsing_layers_disabled 里的 daily_life/world_info/story_arc 依然生效
     legacy_disabled = set(getattr(cfg, "catty_parsing_layers_disabled", None) or [])
 
-    # === ST main / charDescription / charPersonality / scenario (固定挂) ===
+    # === P5.1 核心人格 (合并 main_intel/char_desc/char_personality/scenario/
+    # reply_self_check 5 项到单段 ~2.2K, cache prefix base) ===
+    # 主人 2026-05-28 plan-cattyCacheFixAndPromptSlim P5.1:
+    # CLAUDE.md 基线 (2475 token) 实证 < 3K 能完美上人格 → 砍 6.4K 旧 5 项, 新 2.2K 单段.
+    # 旧 build_reply_intelligence_prompt / get_description / get_personality /
+    # get_scenario / build_reply_self_check_prompt 已不再 register, 内容内嵌到 core_persona.
+    from . import catty_core_persona as _ccp
     mgr.register(
-        "catty_main_intel",
-        content_fn=lambda: _pp.build_reply_intelligence_prompt(no_reply),
+        "catty_core_persona",
+        content_fn=lambda: _ccp.CATTY_CORE_PERSONA,
         order=100,
-    )
-    # NOTE: catty_identity_anchor (order=110) 已内嵌到 build_reply_self_check_prompt step 1, 不单独注册.
-    mgr.register(
-        "catty_char_description",
-        content_fn=lambda: _cc.get_description(ctx=macro_ctx, user_display=user_display),
-        order=120,
-    )
-    mgr.register(
-        "catty_char_personality",
-        content_fn=lambda: _cc.get_personality(ctx=macro_ctx),
-        order=130,
-    )
-    mgr.register(
-        "catty_scenario",
-        content_fn=lambda: _cc.get_scenario(ctx=macro_ctx),
-        order=140,
     )
     # ST V2 character_book: 嵌入式 lorebook — character_card 自带的笨猫私货 entry
     # (尾巴/猫粮/弦化/欧泊阵营/睡眠/呼噜...),命中 user_text 关键词时拼一段注入。
@@ -775,7 +764,9 @@ def register_catty_persona(
         content_fn=_build_action_palette,
         order=215,
     )
-    if self_check_enabled:
+    # 主人 2026-05-28 P5.1: catty_reply_self_check 已内嵌到 catty_core_persona §7 自检铁律,
+    # 不再独立 register. self_check_enabled flag 保留 (后续若需独立增强可重新加).
+    if self_check_enabled and False:  # P5.1 disabled, 留代码以便 toggle
         mgr.register(
             "catty_reply_self_check",
             content_fn=lambda: _pp.build_reply_self_check_prompt(no_reply, split_marker),
