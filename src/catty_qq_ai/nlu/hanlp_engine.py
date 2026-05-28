@@ -67,8 +67,41 @@ def _setup_hf_endpoint() -> None:
         os.environ["HF_ENDPOINT"] = endpoint
 
 
+_PIPELINE_FALLBACK_CHAIN: tuple[str, ...] = (
+    # 优先尝试小模型 (~80MB), 4 核 CPU 单 call ~50-200ms.
+    "FINE_ELECTRA_SMALL_ZH",
+    "CLOSE_TOK_POS_NER_SRL_DEP_SDP_CON_ELECTRA_SMALL_ZH",
+    # 兜底极小模型 (~30MB, 仅 tok+pos+ner, 没 srl/dep/sdp/con) — 我们也只用 tok/pos/ner
+    "CLOSE_TOK_POS_NER_ELECTRA_SMALL_ZH",
+)
+
+
+def _try_load_pipeline(hanlp_mod: Any, name: str) -> Any | None:
+    """单个 pipeline 尝试加载. 失败返回 None + log."""
+    pipeline_const = getattr(hanlp_mod.pretrained.mtl, name, None)
+    if pipeline_const is None:
+        logger.debug("hanlp pipeline name not found in pretrained.mtl: %s", name)
+        return None
+    try:
+        logger.info("loading hanlp pipeline: %s (first call ~5-15s, ~80MB DL)", name)
+        pipeline = hanlp_mod.load(pipeline_const)
+        logger.info("hanlp pipeline ready: %s", name)
+        return pipeline
+    except Exception as exc:  # noqa: BLE001
+        import traceback
+        logger.warning(
+            "hanlp pipeline %s load failed: %s: %s",
+            name, type(exc).__name__, exc,
+        )
+        logger.debug("hanlp load traceback:\n%s", traceback.format_exc())
+        return None
+
+
 def _load_blocking() -> Any | None:
-    """同步加载 HanLP pipeline. 第一次会下模型 ~80MB."""
+    """同步加载 HanLP pipeline. 第一次会下模型 ~80MB.
+
+    主人 2026-05-28 v2: pipeline fallback chain, 任一成功即用; 全失败才 mark FAILED.
+    """
     global _PIPELINE, _LOAD_FAILED
     if _LOAD_FAILED:
         return None
@@ -82,20 +115,41 @@ def _load_blocking() -> Any | None:
         try:
             _setup_hf_endpoint()
             import hanlp  # type: ignore
-            pipeline_name = _get_pipeline_name()
-            logger.info("loading hanlp pipeline: %s (first call ~ 5-15s)", pipeline_name)
-            # hanlp.load 接受预定义常量字符串
-            pipeline_const = getattr(hanlp.pretrained.mtl, pipeline_name, None)
-            if pipeline_const is None:
-                # fallback to small chinese multi-task
-                pipeline_const = hanlp.pretrained.mtl.CLOSE_TOK_POS_NER_SRL_DEP_SDP_CON_ELECTRA_SMALL_ZH
-            _PIPELINE = hanlp.load(pipeline_const)
-            logger.info("hanlp ready")
-            return _PIPELINE
-        except Exception as exc:
-            logger.warning("hanlp load failed, falling back to None: %s", exc)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(
+                "hanlp import failed (pip install hanlp?): %s: %s",
+                type(exc).__name__, exc,
+            )
             _LOAD_FAILED = True
             return None
+
+        # 先试用户配置的, 然后 fallback chain
+        preferred = _get_pipeline_name()
+        tried: list[str] = []
+        candidates: list[str] = [preferred] if preferred else []
+        for name in _PIPELINE_FALLBACK_CHAIN:
+            if name not in candidates:
+                candidates.append(name)
+
+        for name in candidates:
+            tried.append(name)
+            pipeline = _try_load_pipeline(hanlp, name)
+            if pipeline is not None:
+                _PIPELINE = pipeline
+                # 跑一次 dummy 推理热身, 避免首次真实 call 卡 5-15s
+                try:
+                    pipeline("热身", tasks=("tok", "pos", "ner"))
+                    logger.info("hanlp warmup ok (used %s)", name)
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning("hanlp warmup call failed (still usable): %s", exc)
+                return _PIPELINE
+
+        logger.warning(
+            "hanlp load: all pipelines failed (tried %s), falling back to legacy regex NER",
+            tried,
+        )
+        _LOAD_FAILED = True
+        return None
 
 
 def is_hanlp_available() -> bool:
