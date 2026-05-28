@@ -7570,12 +7570,14 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
         try:
             self_id = str(getattr(bot, "self_id", "") or "")
             _ce_incoming = extract_incoming_message(self_id, event, config)
+            # 主人 2026-05-29 v3.2: 严 gate, 只接 mentioned (@ 笨猫) 或 used_prefix
+            # (trigger_prefix '猫娘'/'笨猫'/'米雪儿' 开头). 去掉 directed 和
+            # replied_to_self - 截图反馈用户引用 bot 后说 "你 github 搜一下" 也被
+            # 接到, 不算真正"指向". "所有的指向都需要经过 trigger direct".
             _ce_directed = bool(
                 _ce_incoming and (
                     _ce_incoming.mentioned
-                    or _ce_incoming.directed
                     or _ce_incoming.used_prefix
-                    or _ce_incoming.replied_to_self
                 )
             )
         except Exception:  # noqa: BLE001
