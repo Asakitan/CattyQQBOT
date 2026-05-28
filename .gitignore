@@ -32,3 +32,5 @@ AGENTS.md
 .cache/
 .local/
 Miao/
+.tmp/
+diagnostics/
