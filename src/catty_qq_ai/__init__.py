@@ -7488,6 +7488,29 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
 
     user_id = str(event.user_id)
 
+    # 主人 2026-05-29 fix v3: 群聊必须『指向笨猫』才让 CPU 引擎接.
+    # 之前 bug: 群友在群里说『你好吗』, CPU L1 status_how_are_you_001 命中
+    # 就回了, 误打扰群聊. 跟 chat_matcher 的 _rule 同样要求 directed gate.
+    # 私聊默认就是指向, 直接放行.
+    # 主人 2026-05-29 v3.1: 主人在群里跟别人聊天也不该被 CPU 接 — 群聊任何人
+    # (含主人) 都必须 mentioned/directed/used_prefix/replied_to_self 才放行.
+    if isinstance(event, GroupMessageEvent):
+        try:
+            self_id = str(getattr(bot, "self_id", "") or "")
+            _ce_incoming = extract_incoming_message(self_id, event, config)
+            _ce_directed = bool(
+                _ce_incoming and (
+                    _ce_incoming.mentioned
+                    or _ce_incoming.directed
+                    or _ce_incoming.used_prefix
+                    or _ce_incoming.replied_to_self
+                )
+            )
+        except Exception:  # noqa: BLE001
+            _ce_directed = False
+        if not _ce_directed:
+            return False  # 群聊未指向笨猫 → 透传, 不让 CPU 接话
+
     # 主人 2026-05-29 fix v2: NSFW 上下文 CPU 引擎完全不介入 - 两路检测:
     # 1. nsfw_phase tracker 的 current_phase >= P3 (持续场景, 30min 内有过)
     # 2. user_text 自身含 NSFW phase >= P3 关键词 (主人重启 NSFW 或场景过期后再开)
