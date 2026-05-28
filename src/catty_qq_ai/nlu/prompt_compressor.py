@@ -42,6 +42,26 @@ def get_protected_identifiers() -> frozenset[str]:
         return frozenset()
 
 
+# ── Phase 3 monotonic anchor (per-scope, in-memory) ──────────────────────
+# 主人 2026-05-28 P3 设计: 同 scope 多轮间 anchor 不变 → messages 前缀字节稳定
+# → Anthropic cache prefix hit. 只在超 budget 时一次大跳 (一次 reset 后稳定多轮).
+# bot 重启时丢失 (内存 dict), 重启后第一轮从 0 重建, 之后稳定.
+_HISTORY_ANCHORS: dict[str, int] = {}
+
+
+def reset_scope_anchor(scope_id: str | None = None) -> None:
+    """重置 scope anchor (主人 / 测试用). scope_id=None → 清全部."""
+    if scope_id is None:
+        _HISTORY_ANCHORS.clear()
+    else:
+        _HISTORY_ANCHORS.pop(scope_id, None)
+
+
+def get_scope_anchor(scope_id: str) -> int:
+    """读 anchor (诊断 / 测试用)."""
+    return _HISTORY_ANCHORS.get(scope_id, 0)
+
+
 # ── 指代/省略检测 (动态扩展 keep_recent) ──────────────────────────
 # 主人决策: 配置项 + 动态. NLU 判断 query 含指代 → keep_recent +N.
 _ANAPHORA_PATTERN = re.compile(
@@ -243,6 +263,84 @@ def _fallback_recency_only(
         picked.insert(0, m)
         acc += t
     return picked + reserved
+
+
+# ───────────────────────────────────────────────────────────────
+# monotonic_history_trim (Phase 3): cache-friendly anchor checkpoint
+# ───────────────────────────────────────────────────────────────
+
+
+def monotonic_history_trim(
+    history: list[dict],
+    *,
+    scope_id: str,
+    target_tokens: int,
+    keep_recent: int = 2,
+    cut_ratio: float = 0.3,
+) -> list[dict]:
+    """Cache-friendly history trim — anchor checkpoint pattern.
+
+    主人 2026-05-28 P3 设计:
+    Anthropic prompt cache 看 messages 序列 prefix 字节哈希, 不只是 cache_control.
+    任何 query-driven 重排都会让 prefix 字节漂移 → cache miss.
+
+    方案: per-scope anchor checkpoint
+    - 同 scope 多轮间, anchor 不动 → history[anchor:] 前缀字节稳定 → cache hit
+    - 当 history[anchor:] 超 budget 时, anchor 大跳一段 (剩 (1-cut_ratio) × budget,
+      留余量避免下轮立即再触), 1 次 cache reset, 之后稳定多轮直到下次超 budget
+
+    Args:
+        history: 完整 history list (append-only, 时序)
+        scope_id: per-scope 持久化标识 (catty session key)
+        target_tokens: history 段 token budget
+        keep_recent: 末尾必保 N 条 (anchor 不能超过 n - keep_recent)
+        cut_ratio: 触 budget 时砍多大比例 (0.3 = 砍后剩 70% budget)
+
+    Returns:
+        history[new_anchor:] — anchor 之后的部分.
+
+    Cache 行为:
+    - anchor 不变的轮 (大多数): prefix 字节稳定 → cache hit
+    - anchor 跳跃的轮 (~每 N 轮一次): 1 次 cache miss, 之后稳定
+    """
+    n = len(history)
+    if n == 0:
+        return history
+
+    anchor = _HISTORY_ANCHORS.get(scope_id, 0)
+    # 越界保护 (history 被外部修剪过): 重锚到 keep_recent
+    if anchor >= n:
+        anchor = max(n - keep_recent, 0)
+        _HISTORY_ANCHORS[scope_id] = anchor
+
+    window = history[anchor:]
+    window_tokens = sum(count_tokens(_msg_text(m)) for m in window)
+
+    if window_tokens <= target_tokens:
+        # 没超 budget, anchor 不动 → 字节稳定
+        return window
+
+    # 超 budget: anchor 大跳, 砍到 (1 - cut_ratio) × budget 留余量
+    cut_to = max(int(target_tokens * (1.0 - cut_ratio)), 100)
+    acc = 0
+    new_anchor = anchor
+    # 从末尾倒数累加, 找新 anchor 满足总 ≤ cut_to 且保 keep_recent 条
+    for i in range(n - 1, anchor - 1, -1):
+        t = count_tokens(_msg_text(history[i]))
+        if acc + t > cut_to and (n - i) > keep_recent:
+            new_anchor = i + 1
+            break
+        acc += t
+    # 不超过 n - keep_recent (强保 keep_recent 末尾)
+    new_anchor = min(max(new_anchor, 0), max(n - keep_recent, 0))
+
+    if new_anchor != anchor:
+        _HISTORY_ANCHORS[scope_id] = new_anchor
+        logger.info(
+            "monotonic_trim[%s]: anchor %d→%d (n=%d, budget=%d, kept=%d tok)",
+            scope_id, anchor, new_anchor, n, target_tokens, acc,
+        )
+    return history[new_anchor:]
 
 
 # ───────────────────────────────────────────────────────────────
@@ -525,7 +623,10 @@ def dynamic_tool_picker(
 
 
 __all__ = [
-    "compress_history",
+    "compress_history",            # Phase 2 NLU 排序版 (cache-unsafe, deprecated)
+    "monotonic_history_trim",      # Phase 3 cache-safe anchor checkpoint
+    "reset_scope_anchor",
+    "get_scope_anchor",
     "select_user_details",
     "select_summary_paragraphs",
     "dynamic_tool_picker",

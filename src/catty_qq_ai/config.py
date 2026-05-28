@@ -254,18 +254,13 @@ class Config(BaseModel):
     catty_nlu_warmup_on_startup: bool = True
     # 大陆环境 HuggingFace 镜像 (空时不强制改 HF_ENDPOINT, 用环境变量原值)
     catty_nlu_hf_endpoint: str = "https://hf-mirror.com"
-    # ── Prompt Compressor (Phase 2): NLU 驱动的相关性裁剪 ────────────────
-    # 主人 2026-05-28 plan-cattyCacheFixAndPromptSlim: 私聊 ≤5000 / 群聊 ≤3000 tokens,
-    # 超出部分用 text2vec/jieba/HanLP 按相关性筛 history + user_details + summary,
-    # persona 段强制保留 (_PROTECTED_IDENTIFIERS 白名单).
-    # NLU 失败/超 budget 一律降级到现状逻辑, 不阻塞业务.
-    #
-    # 主人 2026-05-28 ⚠️ 默认 OFF:启用后 compressor 按 query 排序 history,
-    # 同 scope 不同轮 query 不同 → history 字节漂移 → Anthropic cache prefix
-    # 字节哈希不匹配 → cache miss (只 create 不 read). cache-friendly 重设计
-    # 见 Phase 3 (monotonic compression: 同 scope 后轮只能是前轮的 superset).
-    # 主人想测压缩效果时可手动开, 但会牺牲 cache hit.
-    catty_prompt_compressor_enabled: bool = False
+    # ── Prompt Compressor (Phase 3): monotonic anchor checkpoint ──────────
+    # 主人 2026-05-28 plan-cattyCacheFixAndPromptSlim Phase 3:
+    # 私聊 ≤5000 / 群聊 ≤3000 tokens. Cache-safe 设计: per-scope anchor 不动
+    # → history 前缀字节稳定 → Anthropic cache prefix hit. 超 budget 时 anchor
+    # 一次大跳 (剩 70% budget 留余量) → 1 次 cache miss → 之后稳定多轮.
+    # NLU 失败 / disabled → 走原 history_messages, 不阻塞业务.
+    catty_prompt_compressor_enabled: bool = True
     catty_prompt_budget_private: int = 5000
     catty_prompt_budget_group: int = 3000
     # history 强制保留最近 N 条 (不进相关性排序). 主人决策: 配置项 + 动态扩展.
