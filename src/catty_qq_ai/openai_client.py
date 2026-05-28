@@ -928,6 +928,20 @@ async def _post_chat_completion_raw(
         # include_usage: 让最后一个 chunk 返回 usage (DeepSeek / OpenAI 都支持)
         payload["stream_options"] = {"include_usage": True}
 
+    # 主人 2026-05-29 Round 6: 加 user 字段做 cache namespace 隔离, 防多 prefix 互相 evict.
+    # 实测: 5 次 sim_chat 同 prefix_hash 但 hit 交替 99.5%/35% — DeepSeek 后端 LRU 把
+    # catty 的多种 prefix (私聊/群聊/spark/imagegen/summary) 互相 evict. OpenAI 标准的
+    # `user` 字段让后端按 user 分桶 → 不同 prefix 不再互相 evict.
+    try:
+        from .prompt_cache import is_claude_endpoint
+        if not is_claude_endpoint(base_url, model):
+            _scope = get_current_scope_key() or ""
+            if _scope:
+                # 用 scope_key 作 namespace (private:xxx / group:xxx / summary:group:xxx 等)
+                payload["user"] = _scope
+    except Exception:  # noqa: BLE001
+        pass
+
     # === Dashboard stream lifecycle hook (DeepSeek / OpenAI compat 路径) ===
     # 主人 2026-05-28: 让非 Anthropic 路径也能在 dashboard 上看到对话.
     # stream=True: chunk-by-chunk push (helper 内部已做)

@@ -85,6 +85,7 @@ async def sim_chat(
     group_id: int | str | None = None,
     live: bool = True,
     history_replace: bool = False,
+    with_tools: bool = True,
 ) -> dict[str, Any]:
     """模拟一条 incoming message, 走 _build_messages 拼完整 prompt, 可选调 AI 拿 reply.
 
@@ -94,6 +95,9 @@ async def sim_chat(
         group_id: 群号. None 则为私聊
         live: True → 真调 AI 拿 reply; False → 只拼 prompt, reply = "[dry-run]"
         history_replace: True → 用空 history 模拟冷会话; False → 用 scope 当前真 history
+        with_tools: True → 调 chat_completion_with_tools (含 catty tool schemas, 真实主对话
+            路径, cache hit_rate 对齐生产); False → 调 chat_completion (无 tools, 更纯净
+            的 prompt cache 测试, 主人 2026-05-29 Round 6 加 with_tools 让 sim 命中率 ≈ 真实).
 
     Returns:
         {
@@ -106,7 +110,7 @@ async def sim_chat(
     """
     from . import _build_messages, config as _module_config  # circular-safe deferred
     from .message_utils import build_history_key, extract_incoming_message
-    from .openai_client import chat_completion
+    from .openai_client import chat_completion, chat_completion_with_tools
 
     # 主人 2026-05-28: dev/sim_chat 支持非数字 user_id (e.g. 'owner_test') 用作 mock —
     # 数字直接用, 非数字 hash 出稳定正整数作 fake QQ. group_id 同理.
@@ -176,8 +180,49 @@ async def sim_chat(
                 set_current_scope_key(key)
             except Exception:  # noqa: BLE001
                 pass
-            reply_obj = await chat_completion(cfg, messages)
-            reply = str(reply_obj or "[AI returned empty]")
+            # 主人 2026-05-29 Round 6: with_tools=True (默认) 走真实主对话路径
+            # (chat_completion_with_tools + available_tool_schemas), 让 sim 命中率对齐生产.
+            # 之前 chat_completion 无 tools, sim 测出 99% 但生产 65% 差距大.
+            if with_tools:
+                try:
+                    from . import memory_store, affection_store
+                    from .tools import (
+                        available_tool_schemas, execute_tool_call, ToolContext,
+                    )
+                    from nonebot.adapters.onebot.v11 import PrivateMessageEvent
+                    _is_private = isinstance(event, PrivateMessageEvent)
+                    _user_text = text
+                    _tools = available_tool_schemas(
+                        cfg,
+                        is_private=_is_private,
+                        user_text=_user_text,
+                        has_image=bool(getattr(incoming, "has_image", False)),
+                    )
+                    # 构 ToolContext (sim 模式只需基础 3 字段, 其它走 default)
+                    _ctx = ToolContext(
+                        config=cfg,
+                        memory_store=memory_store,
+                        event=event,
+                        affection_store=affection_store,
+                    )
+                    async def _executor(name: str, args_json: str) -> dict[str, object]:
+                        return await execute_tool_call(name, args_json, _ctx)
+                    reply_obj = await chat_completion_with_tools(
+                        cfg, messages,
+                        tools=_tools,
+                        tool_executor=_executor,
+                        max_rounds=int(getattr(cfg, "catty_tools_max_rounds", 3) or 3),
+                        max_calls_per_round=int(getattr(cfg, "catty_tools_max_calls_per_round", 3) or 3),
+                    )
+                except Exception as _wt_exc:
+                    # tool-path 失败 fallback 到 plain chat_completion (兼容老 sim 测试)
+                    reply_obj = await chat_completion(cfg, messages)
+                    reply = f"[with_tools fallback: {type(_wt_exc).__name__}: {_wt_exc}] " + str(reply_obj or "")
+                else:
+                    reply = str(reply_obj or "[AI returned empty]")
+            else:
+                reply_obj = await chat_completion(cfg, messages)
+                reply = str(reply_obj or "[AI returned empty]")
         except Exception as exc:  # noqa: BLE001
             reply = f"[sim_chat: chat_completion failed — {type(exc).__name__}: {exc}]"
 
