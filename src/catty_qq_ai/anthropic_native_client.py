@@ -458,6 +458,100 @@ def _convert_history_for_anthropic(messages: list[dict]) -> list[dict]:
     return result
 
 
+def _sanitize_tool_pairs(messages: list[dict]) -> list[dict]:
+    """Anthropic 硬约束: assistant.tool_use[id] 必须紧跟一条 user 含对应 tool_result.
+    catty history rotation / batch trim / 中间插 system 会切断配对 → API 返回
+    `status_code=500, messages.N: tool_use ids were found without tool_result blocks`.
+
+    兜底: 扫描配对, 删除孤立 tool_use 和 tool_result blocks, 保证发请求时全部配对.
+    主人 2026-05-28 C19: 500 根因 fix, 在 _convert_history_for_anthropic 后立刻调用.
+    """
+    if not messages:
+        return messages
+
+    sanitized: list[dict] = []
+    dropped_uses = 0
+    dropped_results = 0
+
+    for idx, msg in enumerate(messages):
+        if not isinstance(msg, dict):
+            sanitized.append(msg)
+            continue
+
+        role = msg.get("role")
+        content = msg.get("content")
+
+        if role == "assistant" and isinstance(content, list):
+            tool_use_ids = [
+                b.get("id") for b in content
+                if isinstance(b, dict) and b.get("type") == "tool_use" and b.get("id")
+            ]
+            if tool_use_ids:
+                next_msg = messages[idx + 1] if idx + 1 < len(messages) else None
+                next_results: set[str] = set()
+                if isinstance(next_msg, dict) and next_msg.get("role") == "user":
+                    next_content = next_msg.get("content")
+                    if isinstance(next_content, list):
+                        for b in next_content:
+                            if isinstance(b, dict) and b.get("type") == "tool_result":
+                                tr_id = b.get("tool_use_id")
+                                if tr_id:
+                                    next_results.add(tr_id)
+                orphans = {tid for tid in tool_use_ids if tid not in next_results}
+                if orphans:
+                    new_content: list[dict] = []
+                    for b in content:
+                        if (
+                            isinstance(b, dict)
+                            and b.get("type") == "tool_use"
+                            and b.get("id") in orphans
+                        ):
+                            dropped_uses += 1
+                            continue
+                        new_content.append(b)
+                    if not new_content:
+                        new_content.append({"type": "text", "text": "[tool call dropped]"})
+                    msg = {**msg, "content": new_content}
+
+        elif role == "user" and isinstance(content, list):
+            has_tool_result = any(
+                isinstance(b, dict) and b.get("type") == "tool_result" for b in content
+            )
+            if has_tool_result:
+                prev_msg = sanitized[-1] if sanitized else None
+                prev_uses: set[str] = set()
+                if isinstance(prev_msg, dict) and prev_msg.get("role") == "assistant":
+                    prev_content = prev_msg.get("content")
+                    if isinstance(prev_content, list):
+                        for b in prev_content:
+                            if isinstance(b, dict) and b.get("type") == "tool_use":
+                                uid = b.get("id")
+                                if uid:
+                                    prev_uses.add(uid)
+                new_content_u: list[dict] = []
+                for b in content:
+                    if isinstance(b, dict) and b.get("type") == "tool_result":
+                        if b.get("tool_use_id") in prev_uses:
+                            new_content_u.append(b)
+                        else:
+                            dropped_results += 1
+                    else:
+                        new_content_u.append(b)
+                if not new_content_u:
+                    continue
+                msg = {**msg, "content": new_content_u}
+
+        sanitized.append(msg)
+
+    if dropped_uses or dropped_results:
+        logger.warning(
+            "tool pair sanitize: dropped %d orphan tool_use + %d orphan tool_result",
+            dropped_uses, dropped_results,
+        )
+
+    return sanitized
+
+
 def _normalize_anthropic_input_schema(schema: Any) -> dict:
     """规范化 Anthropic input_schema — 对齐 VSCode tool 序列化:
     - 必须是 dict, 否则替换成空 object schema
@@ -697,6 +791,9 @@ async def post_messages_native(
     # Pre-step: OpenAI 风格 tool history (role=tool, assistant.tool_calls) → Anthropic
     # native (assistant.content=[tool_use], user.content=[tool_result]).
     messages = _convert_history_for_anthropic(messages)
+    # 主人 2026-05-28 C19: tool_use/tool_result 配对兜底 — history rotation / batch
+    # trim 切断配对 → Anthropic 500. 在转换格式之后立刻 sanitize, 删孤立 block.
+    messages = _sanitize_tool_pairs(messages)
     # 主人 2026-05-28 C11 重启 sweep: 主人贴 10:34-10:36 sweep 时代 cache hit 85%+ 实证.
     # 回退 sweep 后 sys_blocks 含动态段, NewAPI relay 看 sys 数组不稳定 → cache miss.
     # 重启让 sys 段只剩静态 (persona+override+supplement), 动态段 inline 到 user [DYNAMIC_CONTEXT].
