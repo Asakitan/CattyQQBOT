@@ -37,15 +37,12 @@ _last_diff_snapshot: dict[str, Any] = {}
 # 加: interleaved-thinking-2025-05-14 + prompt-caching-scope-2026-01-05 (CC 角色扮演标配).
 # 保留: context-management-2025-06-27, compact-2026-01-12, cache-diagnosis-2026-04-07.
 _DEFAULT_BETAS_LIST: list[str] = [
-    # 主人 2026-05-28 C18 (vscode 公式): beta 全删冗余, 只留 vscode 用的标准 betas.
-    # 删除原因 (之前都是盲摸加的):
-    # - "prompt-caching-2024-07-31": cache_control 已 GA, 不需 beta header
-    # - "prompt-caching-scope-2026-01-05": catty 没用 scoped cache
-    # - "compact-2026-01-12": 主人 catty_compaction_enabled 默认关闭
-    # - "cache-diagnosis-2026-04-07": 调试用, 生产不需
+    # 主人 2026-05-28 C18 → C18-fix: 17:26 实测删 prompt-caching 后 NewAPI relay 返
+    # 500 InternalServerError. 主人 C13 commit 早就贴过 "NewAPI relay 不识别 cache 没这个
+    # beta" — vscode 直连 anthropic API 已 GA, 但 catty 走 NewAPI relay 仍需 beta header
+    # 触发 cache 转发. 加回 prompt-caching-2024-07-31.
+    "prompt-caching-2024-07-31",
     # 保留 (vscode chatEndpoint.ts:228-249 同款):
-    # - interleaved-thinking-2025-05-14: 让 thinking + tool use 交错 (主人 opus/sonnet 都支持)
-    # - context-management-2025-06-27: context editing edits 用 (主人开 compaction 时需要)
     "interleaved-thinking-2025-05-14",
     "context-management-2025-06-27",
 ]
