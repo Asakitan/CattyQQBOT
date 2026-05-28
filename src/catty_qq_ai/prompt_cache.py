@@ -24,30 +24,48 @@ from typing import Any
 
 
 def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> list[dict]:
-    """10:08 黄金标位: user_indices[0] + user_indices[-1] 两个 marker.
+    """vscode messagesApi.ts:593-604 公式: 倒数 2 条可缓存 messages 末 block 标 cache_control.
 
-    主人 2026-05-28 C13 关键修复: log 实证 10:08:32 cache_control 标 msg[0/user] + msg[20/user]
-    (= user_indices[0] + user_indices[-1]), 10:08:52 第二轮 cache_read=6396 hit=51% ✅.
+    主人 2026-05-28 C18 (基于 microsoft/vscode 调研):
+    之前的 user_indices[0] + user_indices[-1] 在 history batch trim (40→20) 时 user[0] 漂移,
+    那条 cache prefix 直接废. vscode 标"倒数 2 条 messages"在稳态下够用, 即使第一条 TTL 过期/漂移
+    还有第二条 fallback, 最多丢 1 轮对话而不是整段 cache reset.
 
-    之前 C7-2/C10/C12 各种瞎改 (messages[-1] / noop), 都比不上 10:08 这个 3 marker 设计.
-    人家承认错的, 直接复刻 10:08 设计.
+    标位逻辑:
+    - 从 messages 末尾倒序遍历, 找到第一条 content 含可缓存 block 的 → 标
+    - 继续倒序, 找到第二条可缓存的 → 标
+    - 最多标 2 条 (cachingAtDepth 参数控制)
+    - 跳过 thinking_block / redacted_thinking_block (Anthropic 限制, 不能标 cache)
 
-    标位:
-    - user_indices[0]: 头 anchor, history 第一条 user, byte 稳定 (history append-only)
-    - user_indices[-1]: current user, 触发 cache write (Anthropic 必须有 messages-level marker
-      才会写 cache prefix; 没有的话静默忽略 → cache_create=0)
+    参考: vscode extensions/copilot/src/platform/endpoint/node/messagesApi.ts:593-604
     """
-    user_indices = [
-        i for i, m in enumerate(messages)
-        if isinstance(m, dict) and m.get("role") == "user"
-    ]
-    if not user_indices:
+    if not messages:
         return messages
-    _mark_cache_control(messages[user_indices[0]])
-    if len(user_indices) >= 2:
-        last_idx = user_indices[-1]
-        if last_idx != user_indices[0]:
-            _mark_cache_control(messages[last_idx])
+    marked = 0
+    for i in range(len(messages) - 1, -1, -1):
+        if marked >= cachingAtDepth:
+            break
+        m = messages[i]
+        if not isinstance(m, dict):
+            continue
+        # 只标 user/assistant; system 由 inject_system_tail_cache 处理
+        if m.get("role") not in ("user", "assistant"):
+            continue
+        content = m.get("content")
+        # 检查 content 是否含可缓存 block (跳 thinking)
+        if isinstance(content, str) and content.strip():
+            _mark_cache_control(m)
+            marked += 1
+        elif isinstance(content, list):
+            # 倒序找最后一个非 thinking 的 block
+            has_cacheable = any(
+                isinstance(b, dict)
+                and b.get("type") not in ("thinking", "redacted_thinking")
+                for b in content
+            )
+            if has_cacheable:
+                _mark_cache_control(m)
+                marked += 1
     return messages
 
 
@@ -82,12 +100,14 @@ def _build_cache_control_dict() -> dict[str, Any]:
 
 
 def _mark_cache_control(msg: dict[str, Any]) -> None:
-    """把 cache_control 加到 message content 的最后一个 block.
+    """把 cache_control 加到 message content 的最后一个**可缓存** block.
 
     Claude API 要求 cache_control 必须在 content block 上, 不能在 message 顶层.
     自动把 str content 转成 list[{type: text, text: ..., cache_control: ...}] 单 block 格式.
 
-    主人 2026-05-28: cache_control 现在带 ttl: '1h' (config 可关), 默认 5min 太短.
+    主人 2026-05-28 C18 (vscode messagesApi.ts contentBlockSupportsCacheControl):
+    跳过 thinking_block / redacted_thinking_block — Anthropic 限制这俩不能标 cache.
+    倒序找最后一个非 thinking 的 block 标 cache_control.
     """
     cc = _build_cache_control_dict()
     content = msg.get("content")
@@ -100,9 +120,12 @@ def _mark_cache_control(msg: dict[str, Any]) -> None:
             }
         ]
     elif isinstance(content, list) and content:
-        last = content[-1]
-        if isinstance(last, dict):
-            last["cache_control"] = cc
+        # 倒序找最后一个可缓存 block (跳 thinking / redacted_thinking)
+        for i in range(len(content) - 1, -1, -1):
+            blk = content[i]
+            if isinstance(blk, dict) and blk.get("type") not in ("thinking", "redacted_thinking"):
+                blk["cache_control"] = cc
+                return
 
 
 _CACHE_BOUNDARY_MARKER = "<<<CACHE_BOUNDARY:catty_stable_prefix>>>"

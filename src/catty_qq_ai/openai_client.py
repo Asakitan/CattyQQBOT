@@ -396,46 +396,17 @@ async def _post_anthropic_native_chat(
       prompt-caching-2024-07-31, compact-2026-01-12, context-management-2025-06-27
     server-side compaction 在 input>150K 时自动触发并在 response 插 compaction block.
 
-    cache_control 注入沿用 prompt_cache.py 同款 (system tail + cachingAtDepthForClaude),
-    然后由 anthropic_native_client 分离顶部 system 段到顶层 system 字段.
+    主人 2026-05-28 C18 (vscode 公式): cache_control 单一 owner —
+    全部在 post_messages_native 内部 sweep+split_system 之后由
+    _apply_anthropic_cache_breakpoints 统一标. caller 不再插 marker.
     """
     from .anthropic_native_client import post_messages_native
 
-    # 复用现有 cache_control 注入逻辑 (cachingAtDepthForClaude + inject_system_tail_cache)
-    # 让 native 路径和 OpenAI-compat 路径享受同款 4 breakpoints (system tail + history depth N/N+2)
-    _cache_enable = bool(getattr(config, "catty_prompt_cache_enabled", True))
-    _non_system_count = sum(
-        1 for m in messages
-        if isinstance(m, dict) and m.get("role") in ("user", "assistant")
-    )
-    _cache_depth_base = int(getattr(config, "catty_prompt_cache_depth", 2))
-    _cache_depth_dynamic = 4 if _non_system_count >= 12 else _cache_depth_base
-
-    # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill,
-    # 用 adapter 把 prefill 内容追加到最近 user message + drop 末尾 assistant.
-    from .prompt_cache import (
-        adapt_assistant_prefill_for_strict_user_end,
-        sweep_floating_systems_into_user_content,
-    )
+    # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill
+    from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
     messages_for_native = adapt_assistant_prefill_for_strict_user_end(messages)
-    # 主人 2026-05-28 C11 重启 sweep: sys 只剩静态 → cache hit. 动态 sys 段 inline 到 user content.
-    messages_for_native = sweep_floating_systems_into_user_content(messages_for_native)
-
+    # sweep 和 cache_control 标位都已由 post_messages_native 内部统一处理.
     prepared_messages = messages_for_native
-    if _cache_enable:
-        import copy
-
-        from .prompt_cache import (
-            cachingAtDepthForClaude,
-            inject_system_tail_cache,
-        )
-        try:
-            prepared_messages = copy.deepcopy(messages_for_native)
-            cachingAtDepthForClaude(prepared_messages, cachingAtDepth=_cache_depth_dynamic)
-            inject_system_tail_cache(prepared_messages)
-        except Exception as exc:  # noqa: BLE001
-            _logger.warning("native path: cache injection failed (%s), 降级到无 cache", exc)
-            prepared_messages = messages_for_native
 
     data = await post_messages_native(
         base_url=config.catty_openai_base_url,
@@ -1306,31 +1277,11 @@ async def _post_with_fallback(
             from .prompt_cache import is_claude_endpoint
             if is_claude_endpoint(base_url, model):
                 from .anthropic_native_client import post_messages_native
-                from .prompt_cache import (
-                    adapt_assistant_prefill_for_strict_user_end,
-                    sweep_floating_systems_into_user_content,
-                )
-                # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill.
-                # 用 adapter 把 prefill 内容追加到最近的 user message + drop 末尾 assistant.
-                messages_for_native = adapt_assistant_prefill_for_strict_user_end(messages)
-                # 主人 2026-05-28 C11 重启 sweep: sys 只剩静态 → cache hit, history+动态段 inline user.
-                messages_for_native = sweep_floating_systems_into_user_content(messages_for_native)
-                # 注入 cache_control (同 _post_anthropic_native_chat 同款路径)
-                _cache_enable = enable_cache
-                prepared_messages = messages_for_native
-                if _cache_enable:
-                    import copy as _copy
-                    from .prompt_cache import (
-                        cachingAtDepthForClaude,
-                        inject_system_tail_cache,
-                    )
-                    try:
-                        prepared_messages = _copy.deepcopy(messages_for_native)
-                        cachingAtDepthForClaude(prepared_messages, cachingAtDepth=cache_depth)
-                        inject_system_tail_cache(prepared_messages)
-                    except Exception as cache_exc:  # noqa: BLE001
-                        _logger.warning("%s native cache inject failed (%s)", label or "native", cache_exc)
-                        prepared_messages = messages_for_native
+                from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
+                # 主人 2026-05-28 C18: caller 不标 cache_control, 全由 post_messages_native
+                # 内部 _apply_anthropic_cache_breakpoints 单一 owner 处理 (vscode 公式).
+                # sweep 也在 post_messages_native 内部做, 这里只做 prefill adapter.
+                prepared_messages = adapt_assistant_prefill_for_strict_user_end(messages)
                 data = await post_messages_native(
                     base_url=base_url,
                     api_key=api_key,

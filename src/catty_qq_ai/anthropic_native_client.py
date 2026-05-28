@@ -37,15 +37,17 @@ _last_diff_snapshot: dict[str, Any] = {}
 # 加: interleaved-thinking-2025-05-14 + prompt-caching-scope-2026-01-05 (CC 角色扮演标配).
 # 保留: context-management-2025-06-27, compact-2026-01-12, cache-diagnosis-2026-04-07.
 _DEFAULT_BETAS_LIST: list[str] = [
-    # 主人 2026-05-28 C13: 加回 prompt-caching-2024-07-31 — 10:08 黄金状态有这个 beta,
-    # 删了之后 NewAPI relay 不识别 cache. MD 说"已 GA"是错的, NewAPI 路径仍需 beta header.
-    # 不加 extended-cache-ttl-2025-04-11 (主人保 5min TTL, 不需要).
-    "prompt-caching-2024-07-31",
+    # 主人 2026-05-28 C18 (vscode 公式): beta 全删冗余, 只留 vscode 用的标准 betas.
+    # 删除原因 (之前都是盲摸加的):
+    # - "prompt-caching-2024-07-31": cache_control 已 GA, 不需 beta header
+    # - "prompt-caching-scope-2026-01-05": catty 没用 scoped cache
+    # - "compact-2026-01-12": 主人 catty_compaction_enabled 默认关闭
+    # - "cache-diagnosis-2026-04-07": 调试用, 生产不需
+    # 保留 (vscode chatEndpoint.ts:228-249 同款):
+    # - interleaved-thinking-2025-05-14: 让 thinking + tool use 交错 (主人 opus/sonnet 都支持)
+    # - context-management-2025-06-27: context editing edits 用 (主人开 compaction 时需要)
     "interleaved-thinking-2025-05-14",
     "context-management-2025-06-27",
-    "prompt-caching-scope-2026-01-05",
-    "compact-2026-01-12",
-    "cache-diagnosis-2026-04-07",
 ]
 
 
@@ -65,6 +67,72 @@ def _build_beta_header(extra_betas: list[str] | None = None) -> str:
         combined.extend(extra_betas)
     # 去重 + 排序保证字节稳定 (set 内部哈希序 sorted 才确定)
     return ",".join(sorted({b.strip() for b in combined if b and b.strip()}))
+
+
+def _apply_anthropic_cache_breakpoints(
+    system_blocks: list[dict] | None,
+    messages: list[dict],
+    tools: list[dict] | None,
+) -> None:
+    """单一 owner 标 Anthropic cache_control 4 breakpoint (vscode messagesApi.ts 公式).
+
+    主人 2026-05-28 C18: 移植 microsoft/vscode addToolsAndSystemCacheControl +
+    addMessagesApiCacheControl 公式. 4 breakpoint 满配:
+      1. tools[-1] 顶层 cache_control (Anthropic native tools 字段格式)
+      2. system_blocks[-1] 末 block cache_control (跳 thinking)
+      3. messages 倒数第 1 条「可缓存」block cache_control
+      4. messages 倒数第 2 条「可缓存」block cache_control (TTL fallback)
+
+    参考: extensions/copilot/src/platform/endpoint/node/messagesApi.ts:558-604
+    设计要点: 跳过 thinking_block / redacted_thinking_block (Anthropic 限制),
+    最多 2 条 messages 给 fallback ‒ 一条 TTL 过期还有另一条 anchor 防止整段 cache reset.
+
+    in-place 修改, 调用前请确保 system_blocks / messages / tools 是最终请求数据.
+    """
+    from .prompt_cache import _build_cache_control_dict
+    cc = _build_cache_control_dict()
+
+    # 1. tools[-1] (Anthropic native: 顶层 cache_control 字段)
+    if tools:
+        for i in range(len(tools) - 1, -1, -1):
+            if isinstance(tools[i], dict):
+                tools[i]["cache_control"] = cc
+                break
+
+    # 2. system_blocks[-1] 末 block (跳 thinking)
+    if system_blocks:
+        for i in range(len(system_blocks) - 1, -1, -1):
+            blk = system_blocks[i]
+            if (
+                isinstance(blk, dict)
+                and blk.get("type") not in ("thinking", "redacted_thinking")
+            ):
+                blk["cache_control"] = cc
+                break
+
+    # 3 + 4. messages 倒数 2 条可缓存 message 末 block
+    marked = 0
+    for i in range(len(messages) - 1, -1, -1):
+        if marked >= 2:
+            break
+        m = messages[i]
+        if not isinstance(m, dict):
+            continue
+        if m.get("role") not in ("user", "assistant"):
+            continue
+        content = m.get("content")
+        if isinstance(content, str) and content.strip():
+            # str content → 包成 list block 加 cache_control
+            m["content"] = [{"type": "text", "text": content, "cache_control": cc}]
+            marked += 1
+        elif isinstance(content, list) and content:
+            # 倒序找最后一个可缓存 block (跳 thinking)
+            for j in range(len(content) - 1, -1, -1):
+                blk = content[j]
+                if isinstance(blk, dict) and blk.get("type") not in ("thinking", "redacted_thinking"):
+                    blk["cache_control"] = cc
+                    marked += 1
+                    break
 
 
 def _split_system_and_messages(messages: list[dict]) -> tuple[list[dict], list[dict]]:
@@ -558,6 +626,26 @@ async def post_messages_native(
         # convert_openai_tool_to_anthropic 对已经是 Anthropic 格式的 tool 原样返回
         create_kwargs["tools"] = [convert_openai_tool_to_anthropic(t) for t in tools]
 
+    # 主人 2026-05-28 C18 (vscode messagesApi.ts 公式): 4 breakpoint 满配 + 单一 owner.
+    # 参考: extensions/copilot/src/platform/endpoint/node/messagesApi.ts:558-604
+    # 设计原则: cache_control placement 必须由请求层最后一刻单一函数收口,
+    # prompt 渲染层 / caller 层不要瞎插 marker (multiple owners 会冲突 → cache miss).
+    # 4 breakpoint 分配:
+    #   1. tools[-1] 顶层 cache_control (vscode addToolsAndSystemCacheControl)
+    #   2. system_blocks[-1] 末 block cache_control
+    #   3. messages 倒数第 1 条「可缓存」block cache_control
+    #   4. messages 倒数第 2 条「可缓存」block cache_control (TTL 漂移 fallback)
+    try:
+        from .prompt_cache import is_claude_endpoint
+        if is_claude_endpoint(base_url, model):
+            _apply_anthropic_cache_breakpoints(
+                create_kwargs.get("system"),
+                create_kwargs["messages"],
+                create_kwargs.get("tools"),
+            )
+    except Exception as _cc_exc:  # noqa: BLE001
+        logger.debug(f"cache_control 标位失败 (non-fatal): {_cc_exc}")
+
     # 主人 2026-05-28 C13: metadata.user_id 回短字符串 — 10:08 黄金状态实证短字符串 cache hit.
     # C8 改 JSON 是错的诊断, NewAPI 不按 metadata hash 路由账号. 短字符串 'qq_private_xxx' 工作.
     if metadata_user_id:
@@ -909,42 +997,19 @@ async def post_messages_native_data(
     loop (检查 message.tool_calls, 提取 function name/args, 执行, 写 result 回 history).
     跟 _post_anthropic_native_chat 区别: 它返回纯 text (str), 这个返回完整 dict.
 
-    复用 prompt_cache.py 同款 cache_control 注入逻辑 (cachingAtDepthForClaude +
-    inject_system_tail_cache) 让 native + with_tools 路径也享受 cache hit.
+    主人 2026-05-28 C18 (vscode 公式): cache_control 单一 owner — 全部在
+    post_messages_native 内部 sweep+split_system 之后由 _apply_anthropic_cache_breakpoints
+    统一标. caller 层 (这里) 不再插 cache_control marker, 避免 multiple owners 冲突.
     """
-    _cache_enable = bool(getattr(config, "catty_prompt_cache_enabled", True))
-    _non_system_count = sum(
-        1 for m in messages
-        if isinstance(m, dict) and m.get("role") in ("user", "assistant")
-    )
-    _cache_depth_base = int(getattr(config, "catty_prompt_cache_depth", 2))
-    _cache_depth_dynamic = 4 if _non_system_count >= 12 else _cache_depth_base
-
     # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill
     from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
     messages_for_native = adapt_assistant_prefill_for_strict_user_end(messages)
-
-    prepared_messages = messages_for_native
-    if _cache_enable:
-        import copy as _copy
-
-        from .prompt_cache import (
-            cachingAtDepthForClaude,
-            inject_system_tail_cache,
-        )
-        try:
-            prepared_messages = _copy.deepcopy(messages_for_native)
-            cachingAtDepthForClaude(prepared_messages, cachingAtDepth=_cache_depth_dynamic)
-            inject_system_tail_cache(prepared_messages)
-        except Exception as exc:  # noqa: BLE001
-            logger.warning("native_data path: cache injection failed (%s), 降级到无 cache", exc)
-            prepared_messages = messages_for_native
 
     return await post_messages_native(
         base_url=config.catty_openai_base_url,
         api_key=config.catty_openai_api_key,
         model=config.catty_openai_model,
-        messages=prepared_messages,
+        messages=messages_for_native,
         max_tokens=config.catty_max_tokens or 4096,
         temperature=config.catty_temperature,
         metadata_user_id=metadata_user_id,
