@@ -770,10 +770,14 @@ async def post_messages_native(
     # 1. usage / cache stats 反馈早 (final_message.usage)
     # 2. 中间 chunk 能 push 到 dashboard 实时显示 (C6 用)
     # 3. 不会因为长回复 timeout (HTTP 接收时间均摊到每个 chunk)
-    # SDK streaming API: `client.messages.stream(**create_kwargs)` 返回 context manager,
+    # SDK streaming API: `client.beta.messages.stream(**create_kwargs)` 返回 context manager,
     # `await stream.get_final_message()` 拿完整 Message 对象.
+    # 主人 2026-05-28 C9 关键修复: 用 client.beta.messages.stream 走 **beta endpoint**, 跟 CC
+    # (claude.ts:549 anthropic.beta.messages.create) 完全一致. Anthropic 服务端通过 beta endpoint
+    # 识别请求支持 prompt-caching / cache-diagnosis 等 beta 特性. 之前用 client.messages.stream
+    # 走 stable endpoint, Anthropic 可能静默忽略 cache_control 字段 → cache 永久 0 hit.
     try:
-        async with client.messages.stream(**create_kwargs) as stream:
+        async with client.beta.messages.stream(**create_kwargs) as stream:
             try:
                 from . import dashboard_state as _dash
                 _stream_id = _dash.start_stream(model=model)
