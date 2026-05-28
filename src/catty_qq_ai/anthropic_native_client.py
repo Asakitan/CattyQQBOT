@@ -186,29 +186,34 @@ def _apply_anthropic_cache_breakpoints(
                 blk["cache_control"] = cc
                 break
 
-    # 3 + 4. messages 倒数 2 条可缓存 message 末 block
-    marked = 0
-    for i in range(len(messages) - 1, -1, -1):
-        if marked >= 2:
-            break
-        m = messages[i]
-        if not isinstance(m, dict):
-            continue
-        if m.get("role") not in ("user", "assistant"):
-            continue
-        content = m.get("content")
-        if isinstance(content, str) and content.strip():
-            # str content → 包成 list block 加 cache_control
-            m["content"] = [{"type": "text", "text": content, "cache_control": cc}]
-            marked += 1
-        elif isinstance(content, list) and content:
-            # 倒序找最后一个可缓存 block (跳 thinking)
-            for j in range(len(content) - 1, -1, -1):
-                blk = content[j]
-                if isinstance(blk, dict) and blk.get("type") not in ("thinking", "redacted_thinking"):
-                    blk["cache_control"] = cc
-                    marked += 1
-                    break
+    # 3 + 4. 主人 2026-05-28 P5 post-fix: 砍 messages 倒数 2 条 cache_control 标位.
+    # 根因: P5.2 把 14 段移到 boundary 后, sweep inline 到 user msg [DYNAMIC_CONTEXT].
+    # user msg 含 affection/scene/mood/time 等动态值, 每轮字节漂移 → messages[-2/-1]
+    # 标 cache_control 必 miss (Anthropic 看不到 prefix 匹配). 砍掉这两层让 system
+    # prefix (sys[-1] 标位) 独立稳定 cache hit. 长对话 cache miss layer 不再污染.
+    # 旧 4 breakpoint 公式 (vscode messagesApi.ts) 在 P5 架构下不适用.
+    # 若主人需要回退, 取消下方 if False: 注释即可恢复.
+    if False:  # P5 post-fix: messages 倒数 2 条 cache_control 已禁用
+        marked = 0
+        for i in range(len(messages) - 1, -1, -1):
+            if marked >= 2:
+                break
+            m = messages[i]
+            if not isinstance(m, dict):
+                continue
+            if m.get("role") not in ("user", "assistant"):
+                continue
+            content = m.get("content")
+            if isinstance(content, str) and content.strip():
+                m["content"] = [{"type": "text", "text": content, "cache_control": cc}]
+                marked += 1
+            elif isinstance(content, list) and content:
+                for j in range(len(content) - 1, -1, -1):
+                    blk = content[j]
+                    if isinstance(blk, dict) and blk.get("type") not in ("thinking", "redacted_thinking"):
+                        blk["cache_control"] = cc
+                        marked += 1
+                        break
 
 
 def _split_system_and_messages(messages: list[dict]) -> tuple[list[dict], list[dict]]:
