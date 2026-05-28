@@ -732,7 +732,7 @@ async def maybe_generate_image(
             "legacy_v3_extend": False,
             "deliberate_euler_ancestral_bug": False,
             "prefer_brownian": True,
-            "strength": 0.7,
+            "strength": 0.85,
             "add_original_image": False,
             "controlnet_strength": 1.0,
             "normalize_reference_strength_multiple": False,
