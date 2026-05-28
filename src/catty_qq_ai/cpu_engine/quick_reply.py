@@ -306,17 +306,26 @@ def _parse_entry(entry: dict[str, Any], source: str) -> QuickReplyBucket | None:
 
 
 _GLOBAL_POOLS: dict[str, QuickReplyPool] = {}
+# 主人 2026-05-29 热重载: 记录 yaml mtime, 变化时 reset 单例.
+_POOL_MTIME: dict[str, float] = {}
 
 
 def get_pool(replies_dir: str | Path, category: str) -> QuickReplyPool:
-    """惰性单例 (启动后第一次访问 load, 后续复用). 主要给 __init__ 调用方用."""
+    """惰性单例. 主人 2026-05-29 热重载: lazy 检查 yaml mtime, 变了重新 load."""
     key = f"{replies_dir}::{category}"
-    pool = _GLOBAL_POOLS.get(key)
-    if pool is None:
+    yaml_path = Path(replies_dir) / f"{category}.yaml"
+    try:
+        cur_mtime = yaml_path.stat().st_mtime
+    except OSError:
+        cur_mtime = 0.0
+    cached_mtime = _POOL_MTIME.get(key, -1.0)
+    if key not in _GLOBAL_POOLS or cur_mtime != cached_mtime:
         pool = load_pool_from_dir(replies_dir, category=category)
         _GLOBAL_POOLS[key] = pool
-    return pool
+        _POOL_MTIME[key] = cur_mtime
+    return _GLOBAL_POOLS[key]
 
 
 def reset_pools_for_test() -> None:
     _GLOBAL_POOLS.clear()
+    _POOL_MTIME.clear()

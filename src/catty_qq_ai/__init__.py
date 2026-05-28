@@ -6212,6 +6212,28 @@ async def _cpu_engine_warmup_loop() -> None:
         logger.exception(f"[cpu_engine] startup warmup failed: {exc}")
 
 
+async def _cpu_engine_routes_watch_loop() -> None:
+    """S6 热重载: 每 60s 扫 routes/ yaml mtime, 变了自动 reload L1+L2.
+    主人 2026-05-29: push yaml zero-restart 自动生效.
+    composer/quick_reply 是 lazy 加载, get_composer/get_pool 内置 mtime 比较自动重 load.
+    """
+    if not _CPU_ENGINE_IMPORT_OK or _cpu_engine_get_router is None:
+        return
+    if not getattr(config, "catty_cpu_engine_enabled", False):
+        return
+    while True:
+        try:
+            await asyncio.sleep(60)
+            router = _cpu_engine_get_router(config)
+            if router is not None and getattr(router, "ready", False):
+                if hasattr(router, "reload_routes_if_changed"):
+                    await asyncio.to_thread(router.reload_routes_if_changed)
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"[cpu_engine.watch_loop] error: {exc}")
+
+
 async def _cpu_engine_evolution_daily_loop() -> None:
     """S4.6 每日 DeepSeek 评审进化 loop. enabled=False 时纯睡眠."""
     if not _CPU_ENGINE_IMPORT_OK:
@@ -9512,6 +9534,7 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(_proactive_bubble_loop())
     asyncio.create_task(_local_critic_warmup_loop())
     asyncio.create_task(_cpu_engine_warmup_loop())
+    asyncio.create_task(_cpu_engine_routes_watch_loop())
     asyncio.create_task(_cpu_engine_evolution_daily_loop())
     asyncio.create_task(cache.background_flush_loop())
     asyncio.create_task(memory_store.background_flush_loop())

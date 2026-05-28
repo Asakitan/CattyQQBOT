@@ -324,21 +324,29 @@ def load_composer_from_json(json_path: str | Path) -> FragmentComposer:
 
 
 _GLOBAL_COMPOSERS: dict[str, FragmentComposer] = {}
+# 主人 2026-05-29 热重载: 记录 fragments json 的 mtime, 变化时 reset 单例.
+_FRAG_MTIME: dict[str, float] = {}
 
 
 def get_composer(fragments_dir: str | Path, name: str) -> FragmentComposer:
+    """单例缓存. 主人 2026-05-29 热重载: lazy 检查 json mtime, 变了重新 load."""
     key = f"{fragments_dir}::{name}"
-    comp = _GLOBAL_COMPOSERS.get(key)
-    if comp is None:
-        comp = load_composer_from_json(Path(fragments_dir) / f"{name}.json")
-        # 启动时 prepare embeddings (复用 bge ONNX)
+    json_path = Path(fragments_dir) / f"{name}.json"
+    try:
+        cur_mtime = json_path.stat().st_mtime
+    except OSError:
+        cur_mtime = 0.0
+    cached_mtime = _FRAG_MTIME.get(key, -1.0)
+    if key not in _GLOBAL_COMPOSERS or cur_mtime != cached_mtime:
+        comp = load_composer_from_json(json_path)
         try:
             from ..nlu.text2vec_engine import embed_sync_batch  # type: ignore
             comp.prepare_embeddings(embed_sync_batch)
         except Exception:  # noqa: BLE001
             pass
         _GLOBAL_COMPOSERS[key] = comp
-    return comp
+        _FRAG_MTIME[key] = cur_mtime
+    return _GLOBAL_COMPOSERS[key]
 
 
 def reset_composers_for_test() -> None:

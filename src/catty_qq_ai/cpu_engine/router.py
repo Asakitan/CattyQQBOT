@@ -60,6 +60,9 @@ class CPUEngineRouter:
         self._cat_suffixes: list[str] = list(
             getattr(config, "catty_cpu_engine_cat_suffixes", []) or []
         )
+        # 主人 2026-05-29 热重载: 记录 routes/ 目录下所有 yaml 的 mtime,
+        # _routes_watch_loop 每 60s 扫描, 任何 mtime 变化触发 reload_routes().
+        self._routes_mtime_signature: str = ""
 
     @property
     def enabled(self) -> bool:
@@ -125,6 +128,8 @@ class CPUEngineRouter:
             return
 
         self._ready = True
+        # 初始化 mtime signature, 后续 reload 用
+        self._routes_mtime_signature = self._compute_routes_mtime_signature(routes_dir)
         logger.info(
             f"[cpu_engine] ready: L1={self._keyword_matcher is not None}, "
             f"L2={self._semantic_router is not None}, "
@@ -135,6 +140,63 @@ class CPUEngineRouter:
     @property
     def beg_pool(self) -> Any | None:
         return self._beg_pool
+
+    @staticmethod
+    def _compute_routes_mtime_signature(routes_dir: Path) -> str:
+        """所有 yaml 的 (相对路径, mtime) 拼成签名串. 任何 yaml 变化 → 签名变."""
+        if not routes_dir.exists():
+            return ""
+        parts: list[str] = []
+        for yaml_path in sorted(routes_dir.glob("*.yaml")):
+            try:
+                mt = yaml_path.stat().st_mtime
+                parts.append(f"{yaml_path.name}:{mt:.3f}")
+            except OSError:
+                continue
+        return "|".join(parts)
+
+    def reload_routes_if_changed(self) -> bool:
+        """热重载: 检测 routes/ yaml mtime, 变了重建 L1+L2. 返回 True 表示真重载.
+
+        主人 2026-05-29: 之前推 yaml 必须 touch __init__.py 重启 bot 才生效,
+        现在改成后台 watch loop 每 60s 调一次, 零重启更新 routes.
+        """
+        if not self._enabled or not self._ready:
+            return False
+        routes_dir = Path(getattr(self._config, "catty_cpu_engine_routes_dir", ""))
+        if not routes_dir.exists():
+            return False
+        new_sig = self._compute_routes_mtime_signature(routes_dir)
+        if new_sig == self._routes_mtime_signature:
+            return False
+        old_sig = self._routes_mtime_signature
+        logger.info(
+            f"[cpu_engine.reload] routes mtime changed, hot-reload triggered. "
+            f"old_files={old_sig.count('|')+1 if old_sig else 0} "
+            f"new_files={new_sig.count('|')+1}"
+        )
+        # 重建 L1
+        try:
+            keyword_routes = load_kw_routes(routes_dir)
+            new_matcher = KeywordMatcher(keyword_routes)
+            self._keyword_matcher = new_matcher
+        except Exception as exc:
+            logger.warning(f"[cpu_engine.reload] L1 rebuild failed: {exc}")
+        # 重建 L2 (重新 embed all utterances)
+        try:
+            from ..nlu.text2vec_engine import embed_sync_batch  # type: ignore
+            semantic_routes = load_sem_routes(routes_dir)
+            new_sr = SemanticRouter(semantic_routes, embed_batch_fn=embed_sync_batch)
+            new_sr.prepare()
+            self._semantic_router = new_sr
+        except Exception as exc:
+            logger.warning(f"[cpu_engine.reload] L2 rebuild failed: {exc}")
+        self._routes_mtime_signature = new_sig
+        logger.info(
+            f"[cpu_engine.reload] done: L1={self._keyword_matcher is not None}, "
+            f"L2={self._semantic_router is not None}"
+        )
+        return True
 
     def route_sync(
         self,
