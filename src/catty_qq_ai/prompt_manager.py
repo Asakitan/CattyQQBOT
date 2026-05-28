@@ -409,13 +409,13 @@ def register_catty_persona(
             book = hardcoded + scope_entries
             if not book:
                 return ""
-            # BFS hit collection — 同原算法但只 collect (order, id, content, is_scope)
-            hits: list[tuple[int, str, str, bool]] = []
+            # BFS hit collection — 同原算法 collect (order, id, content, is_scope, is_constant)
+            hits: list[tuple[int, str, str, bool, bool]] = []
             triggered: set[str] = set()
             cs_haystack = user_text or ""
             lower_haystack = cs_haystack.lower()
             for depth in range(_LB_MAX_DEPTH):
-                new_layer: list[tuple[int, str, str, bool]] = []
+                new_layer: list[tuple[int, str, str, bool, bool]] = []
                 for entry in book:
                     if entry.identifier in triggered:
                         continue
@@ -424,7 +424,7 @@ def register_catty_persona(
                     is_scope = getattr(entry, "_is_scope", False)
                     if getattr(entry, "constant", False):
                         if depth == 0:
-                            new_layer.append((entry.order, entry.identifier, entry.content, is_scope))
+                            new_layer.append((entry.order, entry.identifier, entry.content, is_scope, True))
                             triggered.add(entry.identifier)
                         continue
                     for k in (entry.keys or ()):
@@ -433,7 +433,7 @@ def register_catty_persona(
                         key_str = k if entry.case_sensitive else k.lower()
                         haystack = cs_haystack if entry.case_sensitive else lower_haystack
                         if key_str in haystack:
-                            new_layer.append((entry.order, entry.identifier, entry.content, is_scope))
+                            new_layer.append((entry.order, entry.identifier, entry.content, is_scope, False))
                             triggered.add(entry.identifier)
                             if is_scope and scope_lore_store is not None:
                                 try:
@@ -453,15 +453,15 @@ def register_catty_persona(
             if not hits:
                 return ""
             hits.sort(key=lambda h: (h[0], h[1]))
-            # 拆分: hardcoded 命中只输出 id (引用骨架), scope_lorebook 命中输出完整 content
-            hardcoded_ids = [h[1] for h in hits if not h[3]]
+            # 主人 2026-05-28 C15-8: skeleton 含 constant 完整 + keyword 索引一行.
+            # hits dynamic 只输出 keyword 触发的 hardcoded 完整 content (constant 已在 skeleton).
+            keyword_hits = [(h[1], h[2]) for h in hits if not h[3] and not h[4]]
             scope_contents = [h[2] for h in hits if h[3]]
             lines: list[str] = []
-            if hardcoded_ids:
-                lines.append(
-                    "【character_book·本轮命中】" + ", ".join(hardcoded_ids)
-                    + " → 看 catty_character_book_skeleton 里对应 entry 内容."
-                )
+            if keyword_hits:
+                lines.append("【character_book·本轮命中 (按下面内容演)】")
+                for identifier, content in keyword_hits:
+                    lines.append(f"\n— {identifier}\n{content}")
             if scope_contents:
                 lines.append("【scope_lorebook·本轮命中 (per-scope 学的群专属小事)】")
                 lines.extend(scope_contents)
