@@ -5285,6 +5285,18 @@ async def _build_messages(
             {"role": "system", "content": _override},        # cache prefix #2 (主人对话静态)
             {"role": "system", "content": _NSFW_SPARK_STABLE_BOUNDARY_TEXT},  # cache prefix #3 + boundary
         ]
+        # 主人 2026-05-28: spark 的所有 hint (phase/starter/prebreak/preg/birth/climax)
+        # 也要让主路径 sonnet 看到 — 不然主路径 reply 不知道笨猫怀孕了, 写不出怀孕剧情.
+        # helper 注入到主路径 messages 时插在最后 user msg 之前 (不破 prompt 顺序).
+        def _inject_into_both(content: str) -> None:
+            if not content or not str(content).strip():
+                return
+            seg = {"role": "system", "content": content}
+            _slim_messages.append(seg)
+            if messages and isinstance(messages[-1], dict) and messages[-1].get("role") == "user":
+                messages.insert(-1, dict(seg))
+            else:
+                messages.append(dict(seg))
         _filtered_history = _filter_soft_refusal_history(history_messages)
         # 主人 2026-05-28 C4 NSFW: batch slice — 跟 SFW _append_history 同款策略.
         # 之前: 每次 last SLIM_HISTORY_MAX (20), 每轮滑窗 → cache lookback 找不到子集.
@@ -5351,7 +5363,7 @@ async def _build_messages(
                 user_addr=_user_real_display,
             )
             if _phase_hint and _phase_hint.strip():
-                _slim_messages.append({"role": "system", "content": _phase_hint})
+                _inject_into_both(_phase_hint)
             # 主人 2026-05-28: dazed 状态可见性 log
             try:
                 _ps_for_log = _get_phase_state(_arc_scope, str(event.user_id))
@@ -5386,7 +5398,7 @@ async def _build_messages(
                 personality=_scene_state.get("personality_facet") or _starter_phase_st.personality_facet,
             )
             if _starter_block and _starter_block.strip():
-                _slim_messages.append({"role": "system", "content": _starter_block})
+                _inject_into_both(_starter_block)
                 logger.info(
                     f"NSFW starter examples: trope={_starter_trope or '(none)'} "
                     f"phase=P{_starter_phase_st.current_phase} "
@@ -5410,7 +5422,7 @@ async def _build_messages(
                     already_broken=_owner_already_broken and not _owner_just_broke,
                 )
                 if _prebreak_hint and _prebreak_hint.strip():
-                    _slim_messages.append({"role": "system", "content": _prebreak_hint})
+                    _inject_into_both(_prebreak_hint)
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"prebreak hint inject failed (non-fatal): {exc}")
         # ── 主人 2026-05-27 十一轮升级『怀孕场景』+ 十二轮升级『所有人都加 + 称呼 swap』──
@@ -5436,7 +5448,7 @@ async def _build_messages(
                 user_addr=_user_real_display,
             )
             if _preg_base_hint and _preg_base_hint.strip():
-                _slim_messages.append({"role": "system", "content": _preg_base_hint})
+                _inject_into_both(_preg_base_hint)
             # 预判: 怀孕中 + 即将达 BIRTH_THRESHOLD
             if _preg_state_pre.is_pregnant and (_preg_state_pre.pregnancy_count + 1) >= _BT:
                 _preg_predicted_kitten = _pick_kit(existing=_preg_state_pre.kittens)
@@ -5447,7 +5459,7 @@ async def _build_messages(
                     is_owner=_user_is_owner,
                     user_addr=_user_real_display,
                 )
-                _slim_messages.append({"role": "system", "content": _birth_hint})
+                _inject_into_both(_birth_hint)
                 logger.info(
                     f"NSFW pregnancy: ★★★ 即将生产 (user={event.user_id}, "
                     f"preg_count={_preg_state_pre.pregnancy_count}+1>={_BT}, "
@@ -5470,7 +5482,7 @@ async def _build_messages(
             if not _user_is_owner:
                 _climax_hint = _build_climax_unlock(_user_real_display)
                 if _climax_hint and _climax_hint.strip():
-                    _slim_messages.append({"role": "system", "content": _climax_hint})
+                    _inject_into_both(_climax_hint)
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"pregnancy hint inject failed (non-fatal): {exc}")
         # state 暂存到 messages metadata, 让 handle_chat reply 后能拿到
@@ -9603,6 +9615,60 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     max_rounds=int(getattr(config, "catty_tools_max_rounds", 3) or 3),
                     max_calls_per_round=int(getattr(config, "catty_tools_max_calls_per_round", 3) or 3),
                 )
+                # 主人 2026-05-28: 主路径也跑 phase tracker + record_intercourse, 跟 spark 对齐.
+                # 之前 only_spark 路径有这两段 → 主路径 (sonnet) reply 后 NSFW 状态完全不更新,
+                # phase/location/opener/preg_count 全 stale → 笨猫连续 30+ 次内射 pregnancy.json 0 .
+                try:
+                    from .nsfw_phase import (
+                        detect_phase_with_confidence as _detect_phase_conf_main,
+                        update_phase as _update_phase_main,
+                        update_location as _update_loc_main,
+                        record_reply_opener as _record_opener_main,
+                    )
+                    _detected_main, _conf_main = _detect_phase_conf_main(reply)
+                    _scope_for_phase_main = _conversation_queue_key(event)
+                    _phase_st_main = _update_phase_main(
+                        _scope_for_phase_main, str(event.user_id),
+                        _detected_main, reply_excerpt=reply[:80],
+                    )
+                    _post_loc_main = _update_loc_main(
+                        _scope_for_phase_main, str(event.user_id), "", reply,
+                    )
+                    _record_opener_main(_scope_for_phase_main, str(event.user_id), reply)
+                    logger.info(
+                        f"chat: main 路径 phase tracker (phase=P{_phase_st_main.current_phase}/8 "
+                        f"turn={_phase_st_main.turn_count}, conf={_conf_main}, "
+                        f"loc={_post_loc_main or '(none)'}, climax={_phase_st_main.climax_count}, "
+                        f"dazed={_phase_st_main.dazed})"
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"main path phase tracker update failed: {exc}")
+                # 怀孕计数 (主路径) — 跟 spark 路径同款逻辑
+                try:
+                    from .pregnancy_store import (
+                        detect_intercourse_finished as _detect_inter_main,
+                    )
+                    if _detect_inter_main(reply):
+                        _predict_meta_main = _PREGNANCY_PREDICT_BY_USER.pop(
+                            str(event.user_id), None,
+                        ) or {}
+                        _override_name_main = _predict_meta_main.get("predicted_kitten", "")
+                        _preg_result_main = pregnancy_store.record_intercourse(
+                            str(event.user_id),
+                            override_kitten_name=_override_name_main,
+                        )
+                        _preg_st_after_main = _preg_result_main["state"]
+                        logger.info(
+                            f"chat: ★ pregnancy event={_preg_result_main['event']} "
+                            f"(main path, user={event.user_id}, "
+                            f"intercourse={_preg_st_after_main.intercourse_count}, "
+                            f"is_pregnant={_preg_st_after_main.is_pregnant}, "
+                            f"preg_count={_preg_st_after_main.pregnancy_count}, "
+                            f"kittens={len(_preg_st_after_main.kittens)}, "
+                            f"new_kitten={_preg_result_main['new_kitten']!r})"
+                        )
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"pregnancy record failed in main path (non-fatal): {exc}")
             # extend (不覆盖) — 上面 NSFW spark 分支已经把 nsfw_imagegen 自动生图的
             # _nsfw_seg append 进去, 这里再合并 SFW 路径 tool_ctx 收集的图片 segments.
             nsfw_image_segments.extend(tool_ctx.pending_image_segments)
