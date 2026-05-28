@@ -7968,6 +7968,29 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
         ) or "杂鱼"
     )
     pool_pick: str | None = None
+
+    # L0 Composer: 主人戳猫 优先走 mood-aware 拼装层 (poke_owner.json 78K+ 组合)
+    if is_poke_owner:
+        try:
+            from .cpu_engine.composer import get_composer as _ce_get_composer
+            _poke_frag_dir = Path(getattr(
+                config, "catty_cpu_engine_routes_dir", "src/catty_qq_ai/data/cpu_engine/routes",
+            )).parent / "fragments"
+            _poke_comp = _ce_get_composer(_poke_frag_dir, "poke_owner")
+            if _poke_comp.bodies:
+                pool_pick = _poke_comp.compose(
+                    user_id=str(event.user_id),
+                    affection_level=int(poke_level),
+                    render_vars={"user_nickname": str(poke_nickname)},
+                    cat_suffixes=list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []),
+                )
+        except Exception as _ce_poke_exc:  # noqa: BLE001
+            logger.debug(f"[composer.poke_owner] fail: {_ce_poke_exc}")
+
+    if pool_pick:
+        state["catty_poke_reply"] = pool_pick
+        return True
+
     try:
         from .cpu_engine.quick_reply import get_pool as _ce_get_pool
 
