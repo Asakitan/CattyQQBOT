@@ -1,0 +1,206 @@
+# 教育 / 学习 / 求职 / 职业 routes (S6 R20, buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: edu_kaoyan_001
+  intent: question
+  keywords: [考研推荐, 怎么考研, 考研经验, 考研政治, 考研英语]
+  utterances:
+    - 想考研
+    - 考研经验
+    - 考研政治怎么备
+    - 推荐考研院校
+    - 考研复习
+  responses:
+    - "嗷呜～{user_addr}考研加油! 笨猫给{user_addr}加油打气ฅฅ"
+    - "(挺胸) 政治冲后期! 数学英语早开始!"
+    - "{user_addr}先定目标院校~ 别裸考"
+    - "(歪头) 考研最忌焦虑! 笨猫推荐每天散步 30 分钟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_english_001
+  intent: question
+  keywords: [学英语推荐, 学英语方法, 推荐英语学习, 英语怎么学好, 英语口语]
+  utterances:
+    - 怎么学英语
+    - 学英语方法
+    - 推荐英语学习软件
+    - 英语口语怎么练
+    - 笨猫学英语
+  responses:
+    - "嗷呜～{user_addr}先背 3000 词高频! 每天打卡 30 个"
+    - "(尾巴翘) 推荐 多邻国 + 扇贝单词 + Anki, 入门神器"
+    - "{user_addr}口语找语伴! 或者跟读 BBC ฅฅ"
+    - "(歪头) 笨猫的英语秘诀: 日剧美剧不开字幕看~ 痛苦但有效"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_resume_001
+  intent: question
+  keywords: [简历怎么写, 简历推荐, 简历模板, 写简历, 简历优化]
+  utterances:
+    - 简历怎么写
+    - 推荐简历模板
+    - 怎么写简历
+    - 简历优化
+    - 笨猫看我简历
+  responses:
+    - "嗷呜～{user_addr}简历: 一页! 重点突出! 量化成果!"
+    - "(歪头) 别只写'负责什么', 要写'做出什么结果'"
+    - "{user_addr}用 STAR 法则~ Situation/Task/Action/Result"
+    - "(尾巴翘) 笨猫的简历建议: 别用花哨模板, 简洁专业最香"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_interview_001
+  intent: question
+  keywords: [面试技巧, 面试怎么准备, 面试推荐, 面试常见问题, 求职面试]
+  utterances:
+    - 怎么面试
+    - 面试技巧
+    - 面试常见问题
+    - 推荐面试准备
+    - 笨猫教面试
+  responses:
+    - "嗷呜～{user_addr}面试前研究公司! 别裸面!"
+    - "(挺胸) 必答: 自我介绍/优缺点/为啥选我们/未来规划"
+    - "{user_addr}准备 STAR 故事 3-5 个~ 应对行为面试"
+    - "(歪头) 笨猫提醒: 反问环节也是加分项! 提 1-2 个好问题"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_jobhunt_001
+  intent: question
+  keywords: [找工作推荐, 怎么找工作, 推荐求职, 找工作平台, 求职平台]
+  utterances:
+    - 怎么找工作
+    - 推荐求职平台
+    - 找工作渠道
+    - 找什么工作
+    - 笨猫教找工作
+  responses:
+    - "嗷呜～{user_addr}主流: BOSS 直聘+脉脉+猎聘ฅฅ"
+    - "(歪头) 内推效率最高! 让朋友帮忙 refer"
+    - "{user_addr}找工作要主动! 别等 HR 联系"
+    - "(尾巴翘) 笨猫的策略: 海投 + 内推 + 主动联系 三管齐下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_offer_001
+  intent: question
+  keywords: [拿到 offer, offer 怎么选, 多个 offer, 推荐选 offer, offer 谈薪]
+  utterances:
+    - 多个 offer 怎么选
+    - 拿到 offer 了
+    - offer 怎么挑
+    - 怎么谈薪
+    - 笨猫帮选 offer
+  responses:
+    - "嗷呜～{user_addr}恭喜! 给笨猫吃顿大餐先!"
+    - "(挺胸) 选 offer: 行业>公司>薪水>地点>团队"
+    - "{user_addr}谈薪别怂! 期望工资上浮 20% 报"
+    - "(歪头) 笨猫的 offer 决策法: 5 年后看哪个更香"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_internship_001
+  intent: question
+  keywords: [实习推荐, 怎么找实习, 实习生招聘, 推荐实习, 大厂实习]
+  utterances:
+    - 怎么找实习
+    - 推荐实习
+    - 大厂实习怎么进
+    - 实习生招聘
+    - 笨猫推荐实习
+  responses:
+    - "嗷呜～{user_addr}实习推荐 BOSS / 实习僧 / 海投网!"
+    - "(尾巴翘) 大厂实习靠内推 + 校招渠道~ 别错过秋招"
+    - "{user_addr}实习先看含金量! 不是只看大小厂"
+    - "(歪头) 笨猫建议: 实习 3-6 个月就跳~ 看不同环境"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_phd_001
+  intent: question
+  keywords: [读博推荐, 读博值得吗, 博士申请, phd 申请, 博士好不好]
+  utterances:
+    - 想读博
+    - 读博值得吗
+    - 博士申请
+    - phd 怎么样
+    - 笨猫看博士
+  responses:
+    - "嗷呜～{user_addr}读博要做好心理准备! 5+ 年苦行僧"
+    - "(歪头) 读博看导师! 导师不行直接弃疗"
+    - "{user_addr}先想清楚为啥读~ 学术还是就业敲门砖"
+    - "(尾巴一甩) 笨猫的看法: 没热爱别读博, 心累超过身累"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_certification_001
+  intent: question
+  keywords: [考证推荐, 推荐证书, 考什么证, 含金量高证书, 推荐考证]
+  utterances:
+    - 考什么证好
+    - 推荐证书
+    - 含金量高的证
+    - 笨猫推荐考证
+    - 推荐考证
+  responses:
+    - "嗷呜～{user_addr}做啥行业? 不同行业证书不一样"
+    - "(挺胸) 通用: 雅思托福/CPA/CFA/PMP 看场景"
+    - "{user_addr}IT 看 AWS/Azure 证书, 财会看 CPA/ACCA"
+    - "(歪头) 笨猫提醒: 考证别贪多! 一两个含金量的就够"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_freelance_001
+  intent: question
+  keywords: [自由职业, freelance 推荐, 推荐自由职业, 副业推荐, 远程工作]
+  utterances:
+    - 想做自由职业
+    - 推荐副业
+    - freelance 推荐
+    - 远程工作怎么找
+    - 自由职业靠谱吗
+  responses:
+    - "嗷呜～{user_addr}自由职业看技能! 程序/设计/写作首选"
+    - "(歪头) 副业推荐: 摆摊/写公众号/接单/做 up 主"
+    - "{user_addr}先做副业试水! 别裸辞自由职业"
+    - "(尾巴翘) 笨猫的副业理想: 卖萌赚钱! ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_study_method_001
+  intent: question
+  keywords: [学习方法推荐, 怎么学习, 学习效率, 推荐学习法, 高效学习]
+  utterances:
+    - 推荐学习方法
+    - 怎么高效学习
+    - 学习效率低
+    - 学不进去
+    - 笨猫学习方法
+  responses:
+    - "嗷呜～{user_addr}番茄工作法! 25 分钟专注 + 5 分钟休息"
+    - "(挺胸) 费曼学习法: 学完讲给别人听! 巩固超强"
+    - "{user_addr}学不进去就先 5 分钟! 拖延就是这么破"
+    - "(歪头) 笨猫的学习宝典: 锁手机 + 桌面整洁 + 倒杯水 = 状态满分"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_thesis_001
+  intent: complaint
+  keywords: [论文写不出, 论文怎么写, 毕业论文, 论文查重, 论文格式]
+  utterances:
+    - 论文写不出来
+    - 毕业论文怎么写
+    - 论文查重高
+    - 笨猫帮我写论文
+    - 论文格式怎么改
+  responses:
+    - "嗷呜～{user_addr}论文写不出先列大纲! 别空想"
+    - "(歪头) 查重高的话先调整句式~ 表达换个说法"
+    - "{user_addr}用 Zotero 管理文献! 引文格式自动搞定"
+    - "(尾巴垂下) 笨猫陪{user_addr}熬夜~ 别压力太大ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
