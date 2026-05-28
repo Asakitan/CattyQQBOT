@@ -859,36 +859,6 @@ async def _post_chat_completion_raw(
             )
             # 主人 2026-05-29 Round 1: per-msg hash 定位 history 中段漂移
             _logger.info(f"per_msg_hash: {h.get('per_msg', '')}")
-            # 主人 2026-05-29 Round 1: dump 真实 messages 到磁盘, 后续 download + diff
-            # 找复杂注入的字节漂移源 (simulator 简化场景 98% 但实际 67% — 差距在 catty
-            # _build_messages 复杂注入). 每 scope 保留最近 6 个 dump (LRU).
-            try:
-                import os
-                import time
-                from pathlib import Path
-                _dump_root = Path("D:/CattyQQAI/logs/req_dumps")
-                _dump_root.mkdir(parents=True, exist_ok=True)
-                _scope = (get_current_scope_key() or "noscope").replace(
-                    ":", "_",
-                ).replace("/", "_").replace("\\", "_")
-                _ts = int(time.time() * 1000)
-                _dump = _dump_root / f"{_scope}_{_ts}.json"
-                with open(_dump, "w", encoding="utf-8") as _f:
-                    json.dump({
-                        "model": model,
-                        "messages": messages,
-                        "tools": tools,
-                        "usage_at_call": None,  # 填充: 拿到 response 后填
-                    }, _f, ensure_ascii=False, indent=2)
-                # LRU keep 6
-                _olds = sorted(_dump_root.glob(f"{_scope}_*.json"))
-                for _o in _olds[:-6]:
-                    try:
-                        _o.unlink()
-                    except Exception:  # noqa: BLE001
-                        pass
-            except Exception as _dump_exc:  # noqa: BLE001
-                _logger.debug(f"req dump failed (non-fatal): {_dump_exc}")
     except Exception as exc:  # noqa: BLE001
         _logger.warning(f"deepseek prefix opt 失败 (降级到原 messages): {exc}")
 
@@ -928,25 +898,50 @@ async def _post_chat_completion_raw(
         # include_usage: 让最后一个 chunk 返回 usage (DeepSeek / OpenAI 都支持)
         payload["stream_options"] = {"include_usage": True}
 
-    # 主人 2026-05-29 Round 6+7: 细粒度 user namespace (scope + sys_md5) 防同 user 内
-    # 多 prefix 类型 LRU evict. 实测同 scope_key 同 prefix_hash 但 hit 仍交替 9984/3968 —
-    # DeepSeek 后端在 user 内还有 cache unit LRU. 加 sys_md5 区分 prefix 类型让
-    # 不同类型 (私聊普通/spark/imagegen) 走独立 namespace.
+    # 主人 2026-05-29 Round 10 回滚: 完全不传 user 字段, 让 DeepSeek 后端公共前缀检测
+    # 跨所有 catty 请求自动落盘共享 cache 池. 之前 Round 6 user=scope_key, Round 7 升级
+    # scope+sys_md5 — 反而让每种 prefix 独立 namespace 都 cold start (主人 dashboard
+    # 看到 67% / 27% 是各自独立 cache cold 的结果).
+    # DeepSeek 文档明确: "多请求公共前缀检测落盘" — 不传 user 时自动跨请求共享 prefix.
+
+    # 主人 2026-05-29 Round 10: dump 完整 payload 到磁盘 (验证 user/stream 等改动真生效)
+    # 放在 payload 完整构造之后, 在 retry loop 之前.
     try:
-        from .prompt_cache import is_claude_endpoint, compute_prefix_hash
-        if not is_claude_endpoint(base_url, model):
-            _scope = get_current_scope_key() or ""
-            # 算当前 messages 的 sys_md5 作为 prefix 类型签名
+        import time as _t
+        from pathlib import Path as _Path
+        _dump_root = _Path("D:/CattyQQAI/logs/req_dumps")
+        _dump_root.mkdir(parents=True, exist_ok=True)
+        _scope_safe = (get_current_scope_key() or "noscope").replace(
+            ":", "_",
+        ).replace("/", "_").replace("\\", "_")
+        _ts = int(_t.time() * 1000)
+        _dump = _dump_root / f"{_scope_safe}_{_ts}.json"
+        _dump_obj = {
+            "model": model,
+            "base_url_head": base_url[:50],
+            "payload_keys": sorted(payload.keys()),
+            "payload_user": payload.get("user"),
+            "payload_stream": payload.get("stream", False),
+            "stream_param": stream,
+            "enable_cache_param": enable_cache,
+            "scope_key": get_current_scope_key(),
+            "messages": messages,
+            "tools": tools,
+        }
+        _dump_str = json.dumps(_dump_obj, ensure_ascii=False, indent=2, default=str)
+        _dump.write_text(_dump_str, encoding="utf-8")
+        _olds = sorted(_dump_root.glob(f"{_scope_safe}_*.json"))
+        for _o in _olds[:-8]:
             try:
-                _h = compute_prefix_hash(messages, tools=tools, n=5)
-                _sig = (_h.get("sys_md5") or "")[:8]
+                _o.unlink()
             except Exception:  # noqa: BLE001
-                _sig = ""
-            if _scope:
-                # OpenAI user ≤ 64 chars: scope_key + sig 拼接
-                payload["user"] = f"{_scope}|{_sig}" if _sig else _scope
-    except Exception:  # noqa: BLE001
-        pass
+                pass
+    except Exception as _dump_exc:  # noqa: BLE001
+        import traceback as _tb
+        _logger.warning(
+            f"req dump failed: {type(_dump_exc).__name__}: {_dump_exc}\n"
+            + _tb.format_exc()[:600],
+        )
 
     # === Dashboard stream lifecycle hook (DeepSeek / OpenAI compat 路径) ===
     # 主人 2026-05-28: 让非 Anthropic 路径也能在 dashboard 上看到对话.
