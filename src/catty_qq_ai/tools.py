@@ -2089,31 +2089,46 @@ async def _exec_imagegen_nai(
     if proxy_str:
         client_kwargs["proxy"] = proxy_str
 
-    started = time.monotonic()
-    try:
-        async with httpx.AsyncClient(**client_kwargs) as client:
-            response = await client.post(
-                _NAI_IMAGE_ENDPOINT,
-                headers={
-                    "Authorization": f"Bearer {token}",
-                    "Content-Type": "application/json",
-                    "Accept": "*/*",
-                },
-                json=payload,
+    # socksio 冷启动: 前 1-2 次 ConnectError 0.4s, 第 3 次起 OK. 加 3 次重试.
+    response = None
+    elapsed = 0.0
+    last_exc: Exception | None = None
+    for attempt in range(1, 4):
+        started = time.monotonic()
+        try:
+            async with httpx.AsyncClient(**client_kwargs) as client:
+                response = await client.post(
+                    _NAI_IMAGE_ENDPOINT,
+                    headers={
+                        "Authorization": f"Bearer {token}",
+                        "Content-Type": "application/json",
+                        "Accept": "*/*",
+                    },
+                    json=payload,
+                )
+            elapsed = time.monotonic() - started
+            break
+        except (httpx.HTTPError, asyncio.TimeoutError) as exc:
+            elapsed = time.monotonic() - started
+            last_exc = exc
+            _logger.info(
+                "imagegen[nai] attempt %d/3 transport error after %.1fs: %s: %s",
+                attempt, elapsed, exc.__class__.__name__, exc or "(empty repr)",
             )
-    except (httpx.HTTPError, asyncio.TimeoutError) as exc:
-        elapsed = time.monotonic() - started
-        _logger.warning(
-            "imagegen[nai] transport error after %.1fs: %s: %s (model=%s %dx%d steps=%d prompt_len=%d)",
-            elapsed, exc.__class__.__name__, exc or "(empty repr)",
-            model, width, height, steps, len(prompt),
-        )
-        return {
-            "error": f"NovelAI 接口连不上(elapsed {elapsed:.0f}s): {exc.__class__.__name__}: {exc}",
-            "retry_guidance": "网络或上游异常;过 30s 再试,或改 provider='gpt'。",
-        }
-
-    elapsed = time.monotonic() - started
+            if attempt < 3:
+                await asyncio.sleep(1.5)
+                continue
+            _logger.warning(
+                "imagegen[nai] transport error after %.1fs (3 attempts): %s: %s (model=%s %dx%d steps=%d prompt_len=%d)",
+                elapsed, exc.__class__.__name__, exc or "(empty repr)",
+                model, width, height, steps, len(prompt),
+            )
+            return {
+                "error": f"NovelAI 接口连不上(3 次重试都失败,elapsed {elapsed:.0f}s): {exc.__class__.__name__}: {exc}",
+                "retry_guidance": "网络或 proxy 异常;过 30s 再试,或改 provider='gpt'。",
+            }
+    if response is None:
+        return {"error": f"NovelAI 重试 3 次都失败: {last_exc!r}"}
     if response.status_code != 200:
         detail = response.text[:400]
         _logger.warning(
@@ -2370,30 +2385,45 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
     if proxy_str:
         client_kwargs["proxy"] = proxy_str
 
-    started = time.monotonic()
-    try:
-        async with httpx.AsyncClient(**client_kwargs) as client:
-            response = await client.post(
-                _NAI_AUGMENT_ENDPOINT,
-                headers={
-                    "Authorization": f"Bearer {token}",
-                    "Content-Type": "application/json",
-                    "Accept": "*/*",
-                },
-                json=payload,
+    # socksio 冷启动: 前 1-2 次 ConnectError 0.4s, 加 3 次重试
+    response = None
+    elapsed = 0.0
+    last_exc: Exception | None = None
+    for attempt in range(1, 4):
+        started = time.monotonic()
+        try:
+            async with httpx.AsyncClient(**client_kwargs) as client:
+                response = await client.post(
+                    _NAI_AUGMENT_ENDPOINT,
+                    headers={
+                        "Authorization": f"Bearer {token}",
+                        "Content-Type": "application/json",
+                        "Accept": "*/*",
+                    },
+                    json=payload,
+                )
+            elapsed = time.monotonic() - started
+            break
+        except (httpx.HTTPError, asyncio.TimeoutError) as exc:
+            elapsed = time.monotonic() - started
+            last_exc = exc
+            _logger.info(
+                "director[%s] attempt %d/3 transport error after %.1fs: %s: %s",
+                req_type, attempt, elapsed, exc.__class__.__name__, exc or "(empty repr)",
             )
-    except (httpx.HTTPError, asyncio.TimeoutError) as exc:
-        elapsed = time.monotonic() - started
-        _logger.warning(
-            "director[%s] transport error after %.1fs: %s: %s (%dx%d)",
-            req_type, elapsed, exc.__class__.__name__, exc or "(empty repr)", in_w, in_h,
-        )
-        return {
-            "error": f"NovelAI director 接口连不上({elapsed:.0f}s): {exc.__class__.__name__}: {exc}",
-            "retry_guidance": "网络或上游异常;过 30s 再试。",
-        }
-
-    elapsed = time.monotonic() - started
+            if attempt < 3:
+                await asyncio.sleep(1.5)
+                continue
+            _logger.warning(
+                "director[%s] transport error after %.1fs (3 attempts): %s: %s (%dx%d)",
+                req_type, elapsed, exc.__class__.__name__, exc or "(empty repr)", in_w, in_h,
+            )
+            return {
+                "error": f"NovelAI director 接口连不上(3 次都失败, {elapsed:.0f}s): {exc.__class__.__name__}: {exc}",
+                "retry_guidance": "网络或 proxy 异常;过 30s 再试。",
+            }
+    if response is None:
+        return {"error": f"NovelAI director 重试 3 次都失败: {last_exc!r}"}
     if response.status_code != 200:
         detail = response.text[:400]
         _logger.warning(

@@ -476,24 +476,41 @@ async def maybe_generate_image(
     if proxy_str:
         client_kwargs["proxy"] = proxy_str
 
-    started = time.monotonic()
-    try:
-        async with httpx.AsyncClient(**client_kwargs) as client:
-            response = await client.post(
-                NAI_ENDPOINT,
-                headers={
-                    "Authorization": f"Bearer {token}",
-                    "Content-Type": "application/json",
-                    "Accept": "*/*",
-                },
-                json=payload,
+    # socksio 冷启动: 前 1-2 次 ConnectError 0.4s, 第 3 次起 OK. 加 3 次重试.
+    response = None
+    elapsed = 0.0
+    last_exc = None
+    for attempt in range(1, 4):
+        started = time.monotonic()
+        try:
+            async with httpx.AsyncClient(**client_kwargs) as client:
+                response = await client.post(
+                    NAI_ENDPOINT,
+                    headers={
+                        "Authorization": f"Bearer {token}",
+                        "Content-Type": "application/json",
+                        "Accept": "*/*",
+                    },
+                    json=payload,
+                )
+            elapsed = time.monotonic() - started
+            break
+        except (httpx.HTTPError, asyncio.TimeoutError) as exc:
+            elapsed = time.monotonic() - started
+            last_exc = exc
+            logger.info(
+                f"nsfw_imagegen attempt {attempt}/3 transport error after {elapsed:.1f}s: "
+                f"{exc.__class__.__name__}: {exc} (user={user_id}, turn={turn_count})"
             )
-    except (httpx.HTTPError, asyncio.TimeoutError) as exc:
-        elapsed = time.monotonic() - started
-        logger.warning(
-            f"nsfw_imagegen transport error after {elapsed:.1f}s: "
-            f"{exc.__class__.__name__}: {exc} (user={user_id}, turn={turn_count})"
-        )
+            if attempt < 3:
+                await asyncio.sleep(1.5)
+                continue
+            logger.warning(
+                f"nsfw_imagegen transport error after {elapsed:.1f}s (3 attempts): "
+                f"{exc.__class__.__name__}: {exc} (user={user_id}, turn={turn_count})"
+            )
+            return None
+    if response is None:
         return None
 
     elapsed = time.monotonic() - started
