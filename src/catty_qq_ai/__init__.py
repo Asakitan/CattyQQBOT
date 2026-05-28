@@ -36,6 +36,7 @@ from .message_utils import (
     ExtractedMessage,
     _looks_like_bot_self_intro,
     build_history_key,
+    contains_at_all,
     event_plain_text,
     expression_message_signature,
     extract_incoming_message,
@@ -2653,6 +2654,10 @@ def _has_api_key() -> bool:
 
 def _keyword_reply_event_allowed(event: MessageEvent) -> bool:
     if config.catty_allowed_user_ids and int(event.user_id) not in config.catty_allowed_user_ids:
+        return False
+    # 群广播 @全体成员 一律不接 keyword_reply / 主人 only 命令(主人 2026-05-28 反馈):
+    # 通知性消息哪怕恰好含 MC/我的世界 等关键词,也不该被笨猫接话。
+    if isinstance(event, GroupMessageEvent) and contains_at_all(event):
         return False
     if isinstance(event, GroupMessageEvent):
         if not config.catty_enable_group:
@@ -9762,6 +9767,15 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         _phase_st_for_draw = _get_phase_state_fresh(
                             _nsfw_img_scope, str(event.user_id),
                         )
+                        # 主人 2026-05-30: 把 (主人原话 + 最近对话 + 怀孕状态) 一起喂给
+                        # _compose_base_caption — 让 deepseek 真正看到当前 turn 场景而不是
+                        # 只看一句 reply 默写床上 missionary. recent_messages 直接传 spark
+                        # _spark_messages (含本轮 trope_hint inline 后的版本), composer 自己
+                        # 会扒尾部 6 条 user/assistant + strip CATTY_INTERNAL.
+                        try:
+                            _preg_st_for_draw = pregnancy_store.get_state(str(event.user_id))
+                        except Exception:  # noqa: BLE001
+                            _preg_st_for_draw = None
                         _nsfw_seg = await _maybe_nsfw_img(
                             config=config,
                             scope_key=_nsfw_img_scope,
@@ -9769,6 +9783,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             phase_state=_phase_st_for_draw,
                             affection_store=affection_store,
                             current_reply=reply,
+                            user_text=_user_text_now,
+                            recent_messages=_spark_messages,
+                            pregnancy_state=_preg_st_for_draw,
                         )
                         if _nsfw_seg is not None:
                             nsfw_image_segments.append(_nsfw_seg)

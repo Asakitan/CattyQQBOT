@@ -364,16 +364,33 @@ def expression_message_signature(
 
 
 def _mentioned_self(self_id: str, event: MessageEvent) -> bool:
-    target_ids = {str(self_id), "all"}
+    # 只认精准 @ 笨猫,不再把 @全体(qq=all)算成 @ 自己。
+    # @全体是广播性质,笨猫接话会很出戏(主人 2026-05-28: 群里 36进16 通知被笨猫接『不』就是这个 bug)。
+    # 真正的群广播由下方 contains_at_all + extract_incoming_message 入口硬拦。
+    self_str = str(self_id)
     for segment in event.message:
         if segment.type != "at":
             continue
         target = str(segment.data.get("qq", "")).strip()
-        if target in target_ids:
+        if target == self_str:
             return True
     for text in _control_text_sources(event):
         for target in _control_code_values(text, "at", "qq"):
-            if target in target_ids:
+            if str(target).strip() == self_str:
+                return True
+    return False
+
+
+def contains_at_all(event: MessageEvent) -> bool:
+    """检测消息里是否包含 @全体成员(OneBot at segment qq=all)。"""
+    for segment in event.message:
+        if segment.type != "at":
+            continue
+        if str(segment.data.get("qq", "")).strip() == "all":
+            return True
+    for text in _control_text_sources(event):
+        for target in _control_code_values(text, "at", "qq"):
+            if str(target).strip() == "all":
                 return True
     return False
 
@@ -659,6 +676,17 @@ def _sender_name(event: MessageEvent) -> str:
 
 def extract_incoming_message(self_id: str, event: MessageEvent, config: Config, *, replied_to_self: bool = False) -> ExtractedMessage | None:
     if not _allowed_by_config(event, config):
+        return None
+
+    # 硬拦 @全体成员 的群广播:这种消息本质是通知/公告,不是对话,笨猫接话很出戏
+    # (主人 2026-05-28 反馈:36进16 通知被笨猫回『不』,需要彻底屏蔽)。
+    # 即使广播里同时 @ 了笨猫或带"猫猫"字样,也认为是广播性质,不进 AI 路径。
+    if isinstance(event, GroupMessageEvent) and contains_at_all(event):
+        _logger.info(
+            "at-all guard: dropped group broadcast from user=%s group=%s",
+            getattr(event, "user_id", "?"),
+            getattr(event, "group_id", "?"),
+        )
         return None
 
     text = _plain_text(event)
