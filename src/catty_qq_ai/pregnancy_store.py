@@ -6,18 +6,23 @@
 - 自己给小猫命名
 - 已生小猫后『背着小猫做』trope
 
+主人 2026-05-29 升级『按笨猫高潮计数』:
+- 旧版触发是 reply 命中内射关键词 (射进/内射/精液...), 漏检严重 —
+  40-50 次内射实际只算进 6 次 (AI 用词没正好命中词库).
+- 改成 nsfw_phase 的高潮信号: 每次 phase 推进到 P6 (高潮峰值) = 笨猫高潮一次,
+  由调用方 (handle_chat 两条链路) 判断 climax 发生后调 record_intercourse().
+- 阈值同步下调: 15 次高潮 → 怀孕, 怀孕后 30 次高潮 → 生小猫.
+
 设计:
 - per-user state (跟 user_id 关联, owner / 非 owner 都有自己的 pregnancy history)
 - 持久化到 catty_memory_path 同目录下 pregnancy.json
-- 触发: spark NSFW reply 含『射进/内射/精液/子宫填满』等 explicit 内射关键词
-  → record_intercourse(user_id) → 自动判断 conception / birth / normal
 
 State machine:
-    [free] -- 30 次内射 --> [pregnant 怀孕中]
-    [pregnant] -- 40 次内射 --> [give_birth 生产]
+    [free] -- 15 次高潮 --> [pregnant 怀孕中]
+    [pregnant] -- 30 次高潮 --> [give_birth 生产]
     [give_birth] -- (起名 + kittens.append) --> [free, kittens 累计++]
 
-阈值可配 (默认 30 / 40).
+阈值可配 (默认 15 / 30).
 """
 from __future__ import annotations
 
@@ -33,8 +38,8 @@ from nonebot import logger
 
 
 # ── 阈值配置 ─────────────────────────────────────────────────────────
-PREGNANCY_THRESHOLD = 30  # 累计内射 N 次 → 怀孕
-BIRTH_THRESHOLD = 40       # 怀孕中再 N 次 → 生小猫
+PREGNANCY_THRESHOLD = 15  # 累计高潮 N 次 → 怀孕
+BIRTH_THRESHOLD = 30       # 怀孕中再高潮 N 次 → 生小猫
 MAX_KITTENS_PER_USER = 50  # per user 最多生 50 只小猫 (防止 list 爆炸)
 
 
@@ -174,7 +179,7 @@ class PregnancyStore:
             )
 
     def record_intercourse(self, user_id: str, override_kitten_name: str = "") -> dict[str, Any]:
-        """记录一次内射. 自动触发 conception / birth 状态转移.
+        """记录一次笨猫高潮 (P6 峰值). 自动触发 conception / birth 状态转移.
 
         Args:
             user_id: 用户 ID
@@ -200,7 +205,7 @@ class PregnancyStore:
             new_kitten = ""
 
             if st.is_pregnant:
-                # 怀孕中: pregnancy_count++ → 达 BIRTH_THRESHOLD 生产
+                # 怀孕中: 每次高潮 pregnancy_count++ → 达 BIRTH_THRESHOLD 生产
                 st.pregnancy_count += 1
                 if st.pregnancy_count >= BIRTH_THRESHOLD:
                     # 生产!
@@ -216,7 +221,7 @@ class PregnancyStore:
                     st.last_birth_at = now
                     event_tag = "gave_birth"
             else:
-                # 非孕: intercourse_count++ → 达 PREGNANCY_THRESHOLD 受孕
+                # 非孕: 每次高潮 intercourse_count++ → 达 PREGNANCY_THRESHOLD 受孕
                 st.intercourse_count += 1
                 if st.intercourse_count >= PREGNANCY_THRESHOLD:
                     st.is_pregnant = True
@@ -277,45 +282,6 @@ def _pick_kitten_name(existing: list[str]) -> str:
         # 池子用完, 给个唯一后缀
         return f"小猫{len(existing) + 1}号"
     return random.choice(available)
-
-
-# ── Reply detection (内射事件) ────────────────────────────────────
-# 主人 2026-05-27 十一轮升级: spark reply 含这些 explicit 内射词才计数.
-# 主人 2026-05-28 bug 修复: 关键词覆盖大扩 — 之前 reply 含"射进来""精液顺着大腿"等
-# 描写未命中, 导致 30+ 次内射 pregnancy.json 从未生成.
-# 必须是 explicit 内射 (P6+ 高潮射进里面), 不是普通 NSFW 都计.
-_INTERCOURSE_FINISHED_KEYWORDS: tuple[str, ...] = (
-    # 射 + 方位
-    "射进", "射进来", "射进去", "射进里面", "射进子宫", "射进最深",
-    "射在里", "射到里", "射到最", "射到深", "射到子宫",
-    # 射满
-    "射满", "射满子宫", "射满肚子", "射进满",
-    # 内射类
-    "内射", "全部射给", "种内射", "种子射进", "种到子宫",
-    "射满了", "射出来了", "射在最深", "射给笨猫",
-    # 精液描写
-    "精液冲入", "精液灌满", "精液满溢", "精液填满", "精液留在",
-    "精液顺着", "精液滴", "精液淌", "精液烫",
-    "种子留在", "种子注入", "种子灌",
-    # 灌满
-    "灌满子宫", "灌满肚子", "灌进肚", "灌得满满",
-    "子宫被填满", "子宫被烫", "子宫被灌",
-    # 留在
-    "全部留在里面", "留在最里面", "留在子宫", "留在肚子",
-    # 上一发 / 上一次
-    "上一发精液", "上一发的精", "上次的精液", "前一发",
-    # 注入 / 释放完成
-    "注入子宫", "释放进", "释放到深处",
-    # 直接状态
-    "怀上", "怀上了", "标记完成", "把笨猫填满", "填满笨猫",
-)
-
-
-def detect_intercourse_finished(reply: str) -> bool:
-    """reply 是否含 explicit 内射事件 (用于判定该计 +1)."""
-    if not reply:
-        return False
-    return any(kw in reply for kw in _INTERCOURSE_FINISHED_KEYWORDS)
 
 
 # ── 主人 2026-05-27 十二轮升级『所有人都加』── 本地 swap 称呼 helper
@@ -457,5 +423,4 @@ __all__ = [
     "build_birth_event_hint",
     "build_climax_address_unlock_hint",
     "build_pregnancy_hint",
-    "detect_intercourse_finished",
 ]

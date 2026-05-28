@@ -5080,6 +5080,7 @@ async def _build_messages(
     _paid_insufficient_active = False  # 援交关键词命中但积分不足 → 主 5.5 嘴硬嘲讽
     _paid_insufficient_balance = 0
     _paid_insufficient_cost = 0  # 不足时的应付价位 (私聊 100 / 群聊溢价 1500)
+    _paid_cost_applied = 0  # 实际扣掉的价位 (私聊 100 / 群聊溢价 1500), 注入 override 用
     _advertise_paid_active = False  # NSFW 但等级不够 + 没付钱 → 主 5.5 主动卖援交广告
     _group_induce_active = False  # 群聊普通『包养』→ 诱导加好友私聊 (不扣分, 非 NSFW)
     # 主人 2026-05-29 两档分流:
@@ -5093,8 +5094,10 @@ async def _build_messages(
             PAID_NSFW_COST as _PAID_COST,
             GROUP_PAID_NSFW_COST as _GROUP_PAID_COST,
         )
-        if not _user_is_owner and _is_paid_trigger(_utxt):
-            if _is_group_chat_pre and not _is_group_premium(_utxt):
+        _paid_kw_hit = _is_paid_trigger(_utxt)
+        _premium_kw_hit = _is_group_premium(_utxt)
+        if not _user_is_owner and (_paid_kw_hit or _premium_kw_hit):
+            if _is_group_chat_pre and not _premium_kw_hit:
                 # 群聊普通包养 → 诱导加好友私聊, 不扣分, 这一条不进 NSFW
                 _group_induce_active = True
                 logger.info(
@@ -5108,6 +5111,7 @@ async def _build_messages(
                 _consume = affection_store.consume_points(str(event.user_id), _cost)
                 if _consume.get("ok"):
                     _paid_nsfw_active = True
+                    _paid_cost_applied = _cost
                     _paid_nsfw_trope, _paid_nsfw_scene_setup = _pick_paid_scene()
                     # 一次结束: 随机抽 outcome (60% pleasant +50 / 40% unpleasant -25)
                     # 主人原话『笨猫被草的很开心 +50, 不开心 -25』.
@@ -5214,7 +5218,7 @@ async def _build_messages(
             elif _paid_insufficient_active:
                 _paid_content = _build_paid_insuf(
                     _paid_insufficient_balance,
-                    _paid_insufficient_cost or _PAID_COST,
+                    _paid_insufficient_cost,
                 )
             elif _advertise_paid_active:
                 _paid_content = _build_paid_ad()
@@ -5280,6 +5284,7 @@ async def _build_messages(
                 trope=_paid_nsfw_trope,
                 scene=_paid_nsfw_scene_setup,
                 outcome=_paid_nsfw_outcome,
+                cost=_paid_cost_applied,
             )
             _prefill = BREAKTHROUGH_PREFILLS["paid"]
             # 应用 outcome 好感 delta (复用 BREAKTHROUGH_OUTCOME_DELTA: pleasant +50 / unpleasant -25)
@@ -10251,16 +10256,23 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # 时 build_phase_advance_hint 会根据这个 state 注入『推进到 P{N+1}』hint.
                         # 同时检测 reply 里的 location 关键词回填场景锚点 (user 没说但 AI 自己描的场景也算).
                         # 主人 2026-05-27 升级 #2: 记录 reply opener 到 recent_openers, 下轮注入反复读 hint.
+                        _preg_climaxed_this_turn = False
                         try:
                             from .nsfw_phase import (
                                 detect_phase_with_confidence as _detect_phase_conf,
                                 update_phase as _update_phase,
                                 update_location as _update_loc_post,
                                 record_reply_opener as _record_opener,
+                                get_phase_state as _get_phase_state_pre,
                             )
                             _detected, _conf = _detect_phase_conf(reply)
                             _scope_for_phase = _conversation_queue_key(event)
+                            # 主人 2026-05-29: 怀孕按笨猫高潮(P6)计数 — 抓本轮推进进 P6 的瞬间
+                            _climax_before = _get_phase_state_pre(
+                                _scope_for_phase, str(event.user_id),
+                            ).climax_count
                             _phase_st = _update_phase(_scope_for_phase, str(event.user_id), _detected, reply_excerpt=reply[:80])
+                            _preg_climaxed_this_turn = _phase_st.climax_count > _climax_before
                             # reply 里也检测 location (回填: user 没说但 AI 写了的场景物件)
                             _post_loc = _update_loc_post(_scope_for_phase, str(event.user_id), "", reply)
                             # 记录 opener 用于下轮反复读 hint
@@ -10277,13 +10289,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                                 f"chat: NSFW deep 路径 OK (try {_try}/{_MAX_NSFW_RETRY}, "
                                 f"model={_chosen_model}, tools 跳过)"
                             )
-                        # ── 主人 2026-05-27 十一轮升级『怀孕计数』──
-                        # spark reply 含 explicit 内射词 → record_intercourse + 同步预选 kitten
+                        # ── 主人 2026-05-29 升级『怀孕按笨猫高潮(P6)计数』──
+                        # 本轮 phase 推进进 P6 (高潮峰值) = 笨猫高潮一次 → record + 同步预选 kitten
                         try:
-                            from .pregnancy_store import (
-                                detect_intercourse_finished as _detect_inter,
-                            )
-                            if _detect_inter(reply):
+                            if _preg_climaxed_this_turn:
                                 _predict_meta = _PREGNANCY_PREDICT_BY_USER.pop(
                                     str(event.user_id), None,
                                 ) or {}
@@ -10295,7 +10304,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                                 _preg_st_after = _preg_result["state"]
                                 logger.info(
                                     f"chat: ★ pregnancy event={_preg_result['event']} "
-                                    f"(user={event.user_id}, "
+                                    f"(climax, user={event.user_id}, "
                                     f"intercourse={_preg_st_after.intercourse_count}, "
                                     f"is_pregnant={_preg_st_after.is_pregnant}, "
                                     f"preg_count={_preg_st_after.pregnancy_count}, "
@@ -10456,18 +10465,27 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 # 主人 2026-05-28: 主路径也跑 phase tracker + record_intercourse, 跟 spark 对齐.
                 # 之前 only_spark 路径有这两段 → 主路径 (sonnet) reply 后 NSFW 状态完全不更新,
                 # phase/location/opener/preg_count 全 stale → 笨猫连续 30+ 次内射 pregnancy.json 0 .
+                _preg_climaxed_this_turn_main = False
                 try:
                     from .nsfw_phase import (
                         detect_phase_with_confidence as _detect_phase_conf_main,
                         update_phase as _update_phase_main,
                         update_location as _update_loc_main,
                         record_reply_opener as _record_opener_main,
+                        get_phase_state as _get_phase_state_pre_main,
                     )
                     _detected_main, _conf_main = _detect_phase_conf_main(reply)
                     _scope_for_phase_main = _conversation_queue_key(event)
+                    # 主人 2026-05-29: 怀孕按笨猫高潮(P6)计数 — 抓本轮推进进 P6 的瞬间
+                    _climax_before_main = _get_phase_state_pre_main(
+                        _scope_for_phase_main, str(event.user_id),
+                    ).climax_count
                     _phase_st_main = _update_phase_main(
                         _scope_for_phase_main, str(event.user_id),
                         _detected_main, reply_excerpt=reply[:80],
+                    )
+                    _preg_climaxed_this_turn_main = (
+                        _phase_st_main.climax_count > _climax_before_main
                     )
                     _post_loc_main = _update_loc_main(
                         _scope_for_phase_main, str(event.user_id), "", reply,
@@ -10481,12 +10499,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     )
                 except Exception as exc:  # noqa: BLE001
                     logger.debug(f"main path phase tracker update failed: {exc}")
-                # 怀孕计数 (主路径) — 跟 spark 路径同款逻辑
+                # 怀孕计数 (主路径) — 跟 spark 路径同款逻辑, 按笨猫高潮(P6)计数
                 try:
-                    from .pregnancy_store import (
-                        detect_intercourse_finished as _detect_inter_main,
-                    )
-                    if _detect_inter_main(reply):
+                    if _preg_climaxed_this_turn_main:
                         _predict_meta_main = _PREGNANCY_PREDICT_BY_USER.pop(
                             str(event.user_id), None,
                         ) or {}
@@ -10498,7 +10513,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         _preg_st_after_main = _preg_result_main["state"]
                         logger.info(
                             f"chat: ★ pregnancy event={_preg_result_main['event']} "
-                            f"(main path, user={event.user_id}, "
+                            f"(main path climax, user={event.user_id}, "
                             f"intercourse={_preg_st_after_main.intercourse_count}, "
                             f"is_pregnant={_preg_st_after_main.is_pregnant}, "
                             f"preg_count={_preg_st_after_main.pregnancy_count}, "
