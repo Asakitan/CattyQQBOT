@@ -126,20 +126,17 @@ _TIER_LV_RANGE = {
     "deep": "Lv 8-10 (深熟)",
     "owner": "真主人 (无视 Lv 直接走此档)",
 }
+# 主人 2026-05-28 C16-7: 5 档 × 6 维度详细 → 5 档 × 1 行核心. 强模型理解分桶, 不需详细灌输每个维度.
 _DAILY_GATE_SKELETON_TEXT = (
-    "【笨猫·日常 SFW 反应档 · 完整 5 档骨架定义】\n"
-    "(本轮 Lv/is_owner/tier 看下面 [DYNAMIC_CONTEXT] 里 catty_daily_affection_gate_params 段)\n\n"
-    + "\n\n".join(
-        f"**[{tier}]** ({_TIER_LV_RANGE[tier]})\n"
-        f"  - 撒娇浓度: {rules['sajiao']}\n"
-        f"  - 主动度: {rules['proactive']}\n"
-        f"  - 称呼范围 (对对方): {rules['addr']}\n"
-        f"  - 可写动作/小动作池: {rules['actions']}\n"
-        f"  - 结尾钩子风格: {rules['hook']}\n"
-        f"  - 禁忌词 (低档绝不出现): {rules['forbidden']}"
+    "【笨猫·日常 SFW 反应档】 (本轮 Lv/tier 看 catty_daily_affection_gate_params)\n"
+    + "\n".join(
+        f"[{tier}] ({_TIER_LV_RANGE[tier]}): "
+        f"撒娇 {rules['sajiao'].split('—')[0].strip()}; "
+        f"称呼 {rules['addr'].split('—')[0].strip()[:30]}; "
+        f"动作 {rules['actions'].split('—')[0].strip()[:30]}."
         for tier, rules in _TIER_RULES.items()
     )
-    + "\n\n**铁律**: 选一档贯穿这一条回复, 不要跨档混用. 这是日常 SFW 风格闸, 跟 NSFW gate (catty_nsfw_gate_skeleton) 是两套维度."
+    + "\n选一档贯穿不跨档混用. 跟 NSFW gate 是两套维度."
 )
 
 

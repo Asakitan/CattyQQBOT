@@ -903,17 +903,11 @@ def build_character_book_skeleton() -> str:
             blocks.append(f"\n【{entry.identifier}】\n{entry.content}")
     if keyword_entries:
         blocks.append(
-            "\n— 关键词触发索引 (仅触发时生效) —"
-            "\n(本轮命中看 [DYNAMIC_CONTEXT] catty_character_book_hits, 完整 content 注入那里; 未命中当背景知识)"
+            "\n— 关键词触发索引 (仅触发时生效, 完整 content 命中时 dynamic 注入) —"
         )
         for entry in keyword_entries:
-            keys_str = "/".join(str(k) for k in (entry.keys or ()) if k)[:40]
-            content_first_line = (entry.content or "").split("\n", 1)[0]
-            # 去掉标签前缀 [笨猫·xxx]: 取冒号后的实际描述
-            if ":" in content_first_line[:30]:
-                content_first_line = content_first_line.split(":", 1)[1].strip()
-            hint = content_first_line[:35]
-            blocks.append(f"- {entry.identifier} [{keys_str}] — {hint}")
+            keys_str = "/".join(str(k) for k in (entry.keys or ()) if k)[:30]
+            blocks.append(f"- {entry.identifier}[{keys_str}]")
     return "\n".join(blocks)
 
 
