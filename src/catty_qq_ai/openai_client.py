@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import base64
 import contextvars
+from collections import deque
 from io import BytesIO
 import json
 import logging
@@ -485,18 +486,58 @@ async def _post_anthropic_native_chat(
     return _extract_content(data)
 
 
+# DeepSeek rolling hit_rate 监控 (主人目标 95-98%, 掉到 90% warn)
+# maxlen=20: 最近 20 次请求滑动平均, 平滑单次噪声
+_DEEPSEEK_CACHE_ROLLING: deque[tuple[int, int]] = deque(maxlen=20)
+_DEEPSEEK_LOW_HIT_STREAK = 0  # 连续 < 90% 的次数, 连 3 次才 warn
+
+
 def _log_cache_stats(data: dict[str, Any], model: str) -> None:
     """从 chat completion response 提取 cache hit 统计 + log.
 
-    Anthropic 字段: usage.cache_read_input_tokens / usage.cache_creation_input_tokens / usage.input_tokens
-    OpenAI 字段:    usage.prompt_tokens_details.cached_tokens / usage.prompt_tokens
+    优先级 (单次请求只走一条分支):
+    1. DeepSeek 风格: usage.prompt_cache_hit_tokens / usage.prompt_cache_miss_tokens
+       (DeepSeek 独有字段, 分开 hit/miss 比 OpenAI cached_tokens 更精确)
+    2. Anthropic 风格: usage.cache_read_input_tokens / usage.cache_creation_input_tokens
+    3. OpenAI 风格 (兜底): usage.prompt_tokens_details.cached_tokens / usage.prompt_tokens
     """
+    global _DEEPSEEK_LOW_HIT_STREAK
     usage = data.get("usage") or {}
-    # Anthropic 风格
+
+    # === (1) DeepSeek 风格 ===
+    ds_hit = int(usage.get("prompt_cache_hit_tokens") or 0)
+    ds_miss = int(usage.get("prompt_cache_miss_tokens") or 0)
+    if ds_hit or ds_miss:
+        total = ds_hit + ds_miss
+        hit_rate = ds_hit / total if total > 0 else 0.0
+        # rolling 平均 (最近 20 次)
+        _DEEPSEEK_CACHE_ROLLING.append((ds_hit, total))
+        roll_hits = sum(h for h, _ in _DEEPSEEK_CACHE_ROLLING)
+        roll_total = sum(t for _, t in _DEEPSEEK_CACHE_ROLLING)
+        roll_rate = roll_hits / roll_total if roll_total > 0 else 0.0
+        _logger.info(
+            f"cache stats(deepseek) model={model[:20]} hit={ds_hit} "
+            f"miss={ds_miss} hit_rate={hit_rate:.0%} "
+            f"rolling{len(_DEEPSEEK_CACHE_ROLLING)}={roll_rate:.0%}",
+        )
+        # rolling 命中率连续 3 次 < 90% → warn (主人目标 95-98%)
+        if len(_DEEPSEEK_CACHE_ROLLING) >= 5 and roll_rate < 0.9:
+            _DEEPSEEK_LOW_HIT_STREAK += 1
+            if _DEEPSEEK_LOW_HIT_STREAK >= 3:
+                _logger.warning(
+                    f"deepseek cache rolling hit_rate dropped to {roll_rate:.0%} "
+                    f"(target 95-98%), check prefix stability",
+                )
+                _DEEPSEEK_LOW_HIT_STREAK = 0  # 提醒后重置, 避免刷屏
+        else:
+            _DEEPSEEK_LOW_HIT_STREAK = 0
+        return
+
+    # === (2) Anthropic 风格 ===
     cache_read = int(usage.get("cache_read_input_tokens") or 0)
     cache_create = int(usage.get("cache_creation_input_tokens") or 0)
     input_tokens = int(usage.get("input_tokens") or 0)
-    # OpenAI 风格 (兜底)
+    # === (3) OpenAI 风格 (兜底) ===
     if not (cache_read or cache_create):
         prompt_details = usage.get("prompt_tokens_details") or {}
         cache_read = int(prompt_details.get("cached_tokens") or 0)
@@ -590,6 +631,52 @@ async def _post_chat_completion_raw(
         except Exception as exc:  # noqa: BLE001
             _logger.warning(f"prompt cache 注入失败 (降级到无 cache): {exc}")
 
+    # === DeepSeek KV cache 前缀稳定优化 (OpenAI compat path 专属) ===
+    # 主人 2026-05-28: DeepSeek 硬盘缓存是服务端自动 token 级精确前缀匹配,
+    # 不需要 cache_control 字段, 但前缀必须字节稳定. 仅在非 Claude 端点跑.
+    # 参考: dist/deepseek硬盘缓存规则.txt + QwenLM/qwen-code#4065.
+    try:
+        from .prompt_cache import (
+            compute_prefix_hash,
+            is_claude_endpoint,
+            merge_consecutive_system_messages,
+            stabilize_tools_order,
+            strip_all_cache_control,
+        )
+        if not is_claude_endpoint(base_url, model):
+            import copy as _copy
+            messages = _copy.deepcopy(messages)
+            # (a) strip 残留 cache_control (防 DeepSeek 未来严格校验未知字段)
+            stripped = strip_all_cache_control(messages, tools)
+            if stripped > 0:
+                _logger.debug(
+                    "deepseek prefix opt: stripped %d cache_control", stripped,
+                )
+            # (b) 合并开头连续 system → 单条 (前缀更紧凑)
+            merged = merge_consecutive_system_messages(messages)
+            if merged > 0:
+                _logger.debug(
+                    "deepseek prefix opt: merged %d system blocks", merged,
+                )
+            # (c) tools 字典序排锁死 (QwenLM 翻车: 顺序变→97.5%→81.5%)
+            if tools:
+                tools = _copy.deepcopy(tools)
+                reordered = stabilize_tools_order(tools)
+                if reordered:
+                    _logger.debug(
+                        "deepseek prefix opt: tools reordered to lexicographic",
+                    )
+            # (d) 前缀 hash 诊断 (对比上一轮看是否漂移)
+            h = compute_prefix_hash(messages, tools, n=5)
+            _logger.info(
+                f"prefix_hash model={model[:20]} sys_count={h['sys_count']} "
+                f"msg_count={h['msg_count']} sys_md5={h['sys_md5']} "
+                f"first_user_md5={h['first_user_md5']} "
+                f"tools_count={h['tools_count']} tools_md5={h['tools_md5']}",
+            )
+    except Exception as exc:  # noqa: BLE001
+        _logger.warning(f"deepseek prefix opt 失败 (降级到原 messages): {exc}")
+
     # 主人 2026-05-28: claude/sonnet 经中转拒末尾 assistant prefill → 把 prefill 内容
     # 追加到最近的 user message 作为强语气 hint (NSFW spark messages 末尾结构是
     # [..., user, system, system, assistant(prefill)], user 不在倒数第二) + drop 末尾
@@ -636,9 +723,10 @@ async def _post_chat_completion_raw(
                 raise OpenAICompatibleError(
                     "AI 返回的不是 JSON。", response.text[:500],
                 ) from exc
-            # === cache hit 监测 (Anthropic / OpenAI 都会返回 usage.*_cached_tokens) ===
-            if enable_cache:
-                _log_cache_stats(data, model)
+            # === cache hit 监测 (DeepSeek / Anthropic / OpenAI 都识别) ===
+            # 主人 2026-05-28: 改为始终调用, 函数内部自己判断有无 cache 字段
+            # (DeepSeek 路径 enable_cache=False 但仍想看 prompt_cache_hit_tokens).
+            _log_cache_stats(data, model)
             return data
 
         detail = response.text[:500]

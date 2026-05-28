@@ -364,11 +364,187 @@ def sweep_floating_systems_into_user_content(messages: list) -> list:
     return new_messages
 
 
+# ============================================================================
+# DeepSeek KV cache 前缀稳定优化工具集 (OpenAI compat path 专用)
+# 主人 2026-05-28: DeepSeek 硬盘缓存是服务端自动 token 级精确前缀匹配, 不需要
+# cache_control 字段, 但前缀必须字节稳定. 这组工具用于 _post_chat_completion_raw
+# 在发请求前对 messages/tools 做规整, 让 cache 命中率稳到 95-98%.
+# 参考: dist/deepseek硬盘缓存规则.txt + QwenLM/qwen-code#4065 翻车案例.
+# ============================================================================
+
+
+def strip_all_cache_control(
+    messages: list[dict], tools: list[dict] | None = None,
+) -> int:
+    """深扫所有 message.content blocks + tools, pop cache_control 字段.
+
+    DeepSeek OpenAI compat 端点忽略未知字段, 但 strip 掉能减少网络传输 + 让
+    prefix_hash 诊断日志更干净. 与 anthropic_native_client._strip_existing_cache_control
+    保持独立 (Anthropic 模块自包含).
+    """
+    stripped = 0
+    for m in messages:
+        if not isinstance(m, dict):
+            continue
+        content = m.get("content")
+        if isinstance(content, list):
+            for blk in content:
+                if isinstance(blk, dict) and blk.pop("cache_control", None) is not None:
+                    stripped += 1
+    if tools:
+        for t in tools:
+            if isinstance(t, dict) and t.pop("cache_control", None) is not None:
+                stripped += 1
+    return stripped
+
+
+def merge_consecutive_system_messages(messages: list[dict]) -> int:
+    """合并 messages 开头连续的 role=system 段成单条 (content 用 \\n\\n 拼接).
+
+    返回合并掉的条数 (减少的 messages 长度).
+    in-place 修改 messages.
+
+    content 形态处理:
+    - str: 直接拼
+    - list[{type:text, text}]: 提取 text 拼成 str (DeepSeek OpenAI compat 标准是 str)
+    - 其他: str() fallback
+    """
+    if not messages:
+        return 0
+    head_sys_idx: list[int] = []
+    for i, m in enumerate(messages):
+        if isinstance(m, dict) and m.get("role") == "system":
+            head_sys_idx.append(i)
+        else:
+            break
+    if len(head_sys_idx) < 2:
+        return 0
+
+    def _to_text(c: object) -> str:
+        if isinstance(c, str):
+            return c
+        if isinstance(c, list):
+            parts: list[str] = []
+            for blk in c:
+                if isinstance(blk, dict):
+                    t = blk.get("text")
+                    if isinstance(t, str):
+                        parts.append(t)
+            return "\n\n".join(parts)
+        return str(c or "")
+
+    merged_text = "\n\n".join(_to_text(messages[i].get("content")) for i in head_sys_idx)
+    keep = head_sys_idx[0]
+    messages[keep]["content"] = merged_text
+    # 倒序删除其余 head_sys_idx
+    for i in reversed(head_sys_idx[1:]):
+        del messages[i]
+    return len(head_sys_idx) - 1
+
+
+def stabilize_tools_order(tools: list[dict]) -> int:
+    """tools 数组按 function.name 字典序排序 (in-place), 返回是否发生重排 (0/1).
+
+    应对 QwenLM/qwen-code#4065 实测翻车: tools 顺序变 → 命中 97.5% → 81.5%.
+    DeepSeek 不依赖 tools 顺序做语义判断, 字典序排序无副作用且锁死前缀字节.
+    """
+    if not tools or len(tools) < 2:
+        return 0
+
+    def _key(t: object) -> str:
+        if not isinstance(t, dict):
+            return ""
+        fn = t.get("function")
+        if isinstance(fn, dict):
+            n = fn.get("name")
+            if isinstance(n, str):
+                return n
+        n = t.get("name")
+        return n if isinstance(n, str) else ""
+
+    original = [_key(t) for t in tools]
+    tools.sort(key=_key)
+    sorted_keys = [_key(t) for t in tools]
+    return 1 if original != sorted_keys else 0
+
+
+def compute_prefix_hash(
+    messages: list[dict], tools: list[dict] | None = None, n: int = 5,
+) -> dict[str, Any]:
+    """计算 messages 前 N 条 + tools 序列的 content hash, 诊断前缀漂移用.
+
+    返回 {
+        "sys_count": int,
+        "msg_count": int,
+        "sys_md5": "xxxxxxxx",         # 前 N 条 system 段拼接后 md5[:8]
+        "first_user_md5": "xxxxxxxx",  # 第一条 user msg content md5[:8]
+        "tools_count": int,
+        "tools_md5": "xxxxxxxx",       # tools 序列化后 md5[:8]
+    }
+    """
+    import hashlib
+    import json
+
+    def _to_text(c: object) -> str:
+        if isinstance(c, str):
+            return c
+        if isinstance(c, list):
+            parts: list[str] = []
+            for blk in c:
+                if isinstance(blk, dict):
+                    t = blk.get("text")
+                    if isinstance(t, str):
+                        parts.append(t)
+            return "\n\n".join(parts)
+        return str(c or "")
+
+    def _md5_8(s: str) -> str:
+        return hashlib.md5(s.encode("utf-8", errors="replace")).hexdigest()[:8]
+
+    sys_count = 0
+    sys_parts: list[str] = []
+    first_user_text = ""
+    head = messages[:n] if messages else []
+    for m in head:
+        if not isinstance(m, dict):
+            continue
+        role = m.get("role")
+        if role == "system":
+            sys_count += 1
+            sys_parts.append(_to_text(m.get("content")))
+        elif role == "user" and not first_user_text:
+            first_user_text = _to_text(m.get("content"))
+
+    tools_count = 0
+    tools_serialized = ""
+    if tools:
+        tools_count = len(tools)
+        try:
+            tools_serialized = json.dumps(
+                tools, sort_keys=True, separators=(",", ":"), ensure_ascii=False,
+            )
+        except Exception:
+            tools_serialized = str(tools)
+
+    return {
+        "sys_count": sys_count,
+        "msg_count": len(messages),
+        "sys_md5": _md5_8("\n\n".join(sys_parts)),
+        "first_user_md5": _md5_8(first_user_text),
+        "tools_count": tools_count,
+        "tools_md5": _md5_8(tools_serialized),
+    }
+
+
 __all__ = [
     "adapt_assistant_prefill_for_strict_user_end",
     "cachingAtDepthForClaude",
+    "compute_prefix_hash",
     "inject_system_tail_cache",
     "inject_tools_cache",
     "is_claude_endpoint",
+    "merge_consecutive_system_messages",
+    "stabilize_tools_order",
+    "strip_all_cache_control",
     "sweep_floating_systems_into_user_content",
 ]

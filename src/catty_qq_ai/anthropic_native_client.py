@@ -168,6 +168,43 @@ def _apply_anthropic_cache_breakpoints(
     from .prompt_cache import _build_cache_control_dict
     cc = _build_cache_control_dict()
 
+    # 主人 2026-05-28 cache diag: dump sys block hash + sizes (诊断 cache miss)
+    try:
+        import hashlib
+        _diag_sys = []
+        if system_blocks:
+            for _i, _blk in enumerate(system_blocks):
+                if isinstance(_blk, dict) and _blk.get("type") == "text":
+                    _txt = str(_blk.get("text", ""))
+                    _h = hashlib.md5(_txt.encode("utf-8", "ignore")).hexdigest()[:8]
+                    _diag_sys.append(f"sys[{_i}]={len(_txt)}c#{_h}")
+        _diag_msgs = []
+        if messages:
+            for _i, _m in enumerate(messages[-3:]):
+                if not isinstance(_m, dict):
+                    continue
+                _r = _m.get("role", "?")
+                _c = _m.get("content", "")
+                if isinstance(_c, str):
+                    _txt = _c
+                elif isinstance(_c, list):
+                    _txt = " ".join(
+                        str(b.get("text", "")) for b in _c
+                        if isinstance(b, dict) and b.get("type") == "text"
+                    )
+                else:
+                    _txt = ""
+                _h = hashlib.md5(_txt.encode("utf-8", "ignore")).hexdigest()[:8]
+                _diag_msgs.append(f"m[-{3-_i}]({_r})={len(_txt)}c#{_h}")
+        logger.info(
+            "cache_diag: sys=[%s] tail_msgs=[%s] tools=%d",
+            " ".join(_diag_sys),
+            " ".join(_diag_msgs),
+            len(tools or []),
+        )
+    except Exception as _exc:  # noqa: BLE001
+        logger.debug(f"cache_diag log failed: {_exc}")
+
     # 1. tools[-1] (Anthropic native: 顶层 cache_control 字段)
     if tools:
         for i in range(len(tools) - 1, -1, -1):
