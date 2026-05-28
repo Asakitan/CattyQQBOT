@@ -130,13 +130,17 @@ CHARACTER_BOY_UC = "male face, light skin, visible eyes, normal man body, realis
 # AI composer 失败时的兜底 base caption (默认中性场景, AI 失败就回 P4 missionary)
 # {{nsfw}}, {{explicit}} 必带 — NAI v4.5 默认 SFW 滤镜, 不带就画 SFW
 DEFAULT_BASE_CAPTION = (
-    "{{nsfw}}, {{explicit}}, {{2 figures, hetero}}, kissing, hugging, on bed, indoor, "
+    "{{1boy with 1girl}}, {{hetero couple together}}, {{2 figures, hetero}}, "
+    "{{nsfw}}, {{explicit}}, kissing, hugging, on bed, indoor, "
     "anime style, dramatic lighting, romantic atmosphere"
 )
 DEFAULT_NEGATIVE = (
     "lowres, worst quality, bad anatomy, bad hands, watermark, signature, "
     "jpeg artifacts, multiple girls, multiple boys, futanari, "
-    "solo, 1girl alone, single character, single person, only one person, no male, "
+    # 主人 2026-05-30: 用 {{}} 给 solo 拒绝 tag 提权 — Precise Reference (solo 笨猫) 把
+    # 单人构图也锁过来了, characterPrompts 里的 1boy 黑影渲不出来 → 主人在画面里消失.
+    "{{{solo}}}, {{{1girl alone}}}, {{{single character}}}, {{{single person}}}, "
+    "{{{only one person}}}, {{{no male}}}, {{empty space}}, {{missing partner}}, "
     "male skin color visible, realistic male body, three figures, 3 figures, "
     "censored, mosaic censoring, bar censor, "
     "sfw, safe, family friendly, clothed sex, fully clothed"
@@ -580,14 +584,20 @@ async def _compose_base_caption(
 
     # 强补关键 tag (P1-P3 还没插入, 不强补 penetration; P4-P7 才强补)
     # nsfw / explicit 无论 phase 都必带 (NAI v4.5 不带就走 SFW 滤镜)
+    # 主人 2026-05-30 BUG FIX『画面里主人没了』:
+    #   reference 锁松开 (1.0 → 0.85/0.7) 后还是要给双人构图加一道语义保险, 让 NAI
+    #   明确知道画面里**必须有 1boy 和 1girl 一起**, 不是只画女主.
     lowered = cleaned.lower()
     extra: list[str] = []
+    # 双人锁放最前 (NAI v4.5 越靠前权重越大)
+    if "1boy with 1girl" not in lowered and "hetero couple" not in lowered:
+        extra.append("{{1boy with 1girl}}, {{hetero couple together}}")
+    if "2 figures" not in lowered and "hetero" not in lowered:
+        extra.append("{{2 figures, hetero}}")
     if "nsfw" not in lowered:
         extra.append("{{nsfw}}")
     if "explicit" not in lowered:
         extra.append("{{explicit}}")
-    if "2 figures" not in lowered and "hetero" not in lowered:
-        extra.append("{{2 figures, hetero}}")
     if 4 <= phase_int <= 7 and not any(k in lowered for k in ("sex", "penetration", "vaginal", "fucked")):
         extra.append("{{vaginal penetration}}, {{sex}}")
     if extra:
@@ -757,18 +767,27 @@ async def maybe_generate_image(
 
     # Precise Reference (director_reference_*) — 有 reference 才加
     if director_ref_b64_list:
+        # 主人 2026-05-30 BUG FIX『画面里主人没了』:
+        #   - 旧设 strength=1.0 + information_extracted=1.0 + description="character&style"
+        #     把 reference 图(solo 笨猫)的**单人构图**也复制了 → characterPrompts 里的
+        #     1boy 黑影主人渲不出来 → 主人在画面里消失.
+        #   - 新设:
+        #     description="character" (只锁人物, 不锁 style/构图)
+        #     strength=0.85 (人物特征还锁但稍松, 留 15% 给 characterPrompts 加第二人)
+        #     information_extracted=0.7 (从 ref 只抽 70% 特征 — 脸/发型/猫耳/瞳色,
+        #     剩 30% 让 base_caption 的 {{2 figures, hetero}} 决定双人构图)
         n = len(director_ref_b64_list)
         payload["parameters"]["director_reference_images"] = director_ref_b64_list
         payload["parameters"]["director_reference_descriptions"] = [
             {
-                "caption": {"base_caption": "character&style", "char_captions": []},
+                "caption": {"base_caption": "character", "char_captions": []},
                 "legacy_uc": False,
             }
             for _ in range(n)
         ]
-        payload["parameters"]["director_reference_strength_values"] = [1.0] * n
+        payload["parameters"]["director_reference_strength_values"] = [0.85] * n
         payload["parameters"]["director_reference_secondary_strength_values"] = [0.0] * n
-        payload["parameters"]["director_reference_information_extracted"] = [1.0] * n
+        payload["parameters"]["director_reference_information_extracted"] = [0.7] * n
 
     # NAI 专用 proxy 优先 (远端国内服务器到 image.novelai.net 真 IP 被墙时填),
     # fallback 全局 proxy, 再 fallback 直连。
