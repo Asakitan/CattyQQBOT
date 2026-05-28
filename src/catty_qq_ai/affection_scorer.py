@@ -660,7 +660,34 @@ BREAKTHROUGH_PREFILLS: dict[str, str] = {
 # - 行为: 扣 100 积分, 强制进 spark route, max_stage=10 (绕过 affection level 锁)
 # - 背景: 10 种 IC 内 logically 站得住脚的"援交动机" trope, 让笨猫破例接客 self-consistent
 # - **称呼**: 仍**绝不**叫『主人/笨蛋主人』- 这是只对真实主人的, 援交是商业关系用昵称/『你』
-PAID_NSFW_COST = 100  # 100 积分一次
+PAID_NSFW_COST = 100  # 私聊援交 100 积分一次
+
+# 主人 2026-05-29: 群聊 NSFW 走『公开场合溢价』— 群里硬来一次 1500 积分 (不限高潮, 完整 arc).
+# 设计意图: 群聊说『包养』默认诱导对方加好友私聊 (私聊只要 100), 想在群里公开搞才付 1500 溢价.
+GROUP_PAID_NSFW_COST = 1500
+
+# 群聊溢价『公开场合』标记词 — 对方明确要在群里公开搞 / 付 1500 溢价.
+_GROUP_PREMIUM_TOKENS: tuple[str, ...] = ("1500", "群里", "就在群", "不加好友", "不私聊", "公开")
+# 露骨动作词 — 配合溢价标记一起出现时视作群聊破例意图 (单独出现不算, 避免『操作/操心』误伤).
+_GROUP_PREMIUM_NSFW_TOKENS: tuple[str, ...] = ("操", "插", "草", "肏", "做爱", "上你", "干你")
+
+
+def is_group_premium_nsfw_trigger(text: str) -> bool:
+    """群聊『公开场合溢价 NSFW』触发 — 独立成立, 不依赖 is_paid_nsfw_trigger.
+
+    成立条件: 文本含『公开场合溢价标记』(1500/群里/公开/不加好友/不私聊) 且
+    同时含援交关键词或露骨动作词。
+
+    与普通 is_paid_nsfw_trigger 的区别: 普通『包养』命中在群聊默认诱导加私聊,
+    只有这个才真的在群里破例 (扣 GROUP_PAID_NSFW_COST).
+    """
+    if not text:
+        return False
+    if not any(tok in text for tok in _GROUP_PREMIUM_TOKENS):
+        return False
+    if is_paid_nsfw_trigger(text):
+        return True
+    return any(k in text for k in _GROUP_PREMIUM_NSFW_TOKENS)
 
 # 触发关键词 — user 显式表达"付积分换 NSFW"意图. 避免误伤普通聊天 (单纯说『援交』作梗也算).
 _PAID_NSFW_KEYWORDS: tuple[str, ...] = (
@@ -751,6 +778,7 @@ def build_paid_nsfw_override(
     trope: str = "",
     scene: str = "",
     outcome: str = "pleasant",
+    cost: int = PAID_NSFW_COST,
 ) -> str:
     """积分援交模式 spark route system override — 完全替代正常 stage matrix override.
 
@@ -790,8 +818,8 @@ def build_paid_nsfw_override(
         f"   可以撒娇 + 服务感 + 害羞炸毛, 但 P1-P4 + P8 称呼上保持商业距离感."
     )
     return (
-        f"【★ 特殊事件 · 积分援交模式 ({scope_tag} · 收 {PAID_NSFW_COST} 积分一次)】\n"
-        f"对方刚刚向笨猫支付了 **{PAID_NSFW_COST} 积分** 触发援交契约 — "
+        f"【★ 特殊事件 · 积分援交模式 ({scope_tag} · 收 {cost} 积分一次)】\n"
+        f"对方刚刚向笨猫支付了 **{cost} 积分** 触发援交契约 — "
         f"亲密度 Lv={affection_level} 也强制解锁完整 NSFW (max_stage=10).\n"
         f"\n**本次援交动机** (trope): `{trope}`\n"
         f"**本次背景** (跟着这个具体动机演, 不要悬空): {scene}\n\n"
@@ -854,6 +882,43 @@ def build_paid_nsfw_advertise_prompt(paid_cost: int = PAID_NSFW_COST) -> str:
     )
 
 
+def build_group_paid_induce_prompt(
+    private_cost: int = PAID_NSFW_COST,
+    group_cost: int = GROUP_PAID_NSFW_COST,
+) -> str:
+    """群聊有人喊『包养/援交』(没带群聊溢价标记) — 笨猫诱导对方加好友私聊才完整展开.
+
+    主人 2026-05-29 原话: 『让用户说包养了之后让笨猫诱导用户去加好友私聊, 这才能 nsfw 展开。
+    群聊 NSFW 要花 1500 积分一次』.
+
+    回复策略 (注入主 5.5 system 末段, 这一条 reply 不进 NSFW, 只诱导/报价):
+    - 傲娇嫌弃: 『杂鱼! 大庭广众的想包养笨猫喵?』(脸红炸毛/瞄一眼周围群友)
+    - 诱导私聊: 『想…想要的话, 加笨猫好友私聊嘛… (小声) 私下里 {private} 积分一次就行喵』
+    - 群聊溢价: 『非要在群里被大家看着的话…那要 {group} 积分一次哦, 笨猫脸皮可没那么厚喵!』
+    - 给命令: 私聊发『包养笨猫』/ 群里发『{group} 积分群里操你』
+    """
+    return (
+        f"\n【★ 特殊响应 · 群聊『包养』诱导加私聊 (非 NSFW reply)】\n"
+        f"对方在**群聊**里喊了『包养/援交』, 但没付钱也没说要付群聊溢价。\n"
+        f"现在是**大庭广众**, 笨猫**这一条 reply 不进入任何 NSFW 描写**, 只做『傲娇诱导 + 报价』。\n"
+        f"\n本系统两档价位:\n"
+        f"- **私聊援交**: 加好友私聊后 {private_cost} 积分一次 → 完整展开 (便宜, 不公开, 推荐)\n"
+        f"- **群聊溢价**: 非要在群里公开搞, {group_cost} 积分一次 (脸皮溢价)\n"
+        f"\n**构造一条 in-character reply (1-3 段, QQ 节奏), 必须含下面元素:**\n"
+        f"1. **傲娇炸毛** — 『杂鱼! 大庭广众的想包养笨猫喵?』(脸红/尾巴炸毛/偷瞄周围群友怕被看见)\n"
+        f"2. **主动诱导私聊** — 假装勉强:『想…想要的话, 先加笨猫好友私聊嘛…私下里 {private_cost} 积分一次就行喵』\n"
+        f"   (核心: 把对方往『加好友 → 私聊』引导, 这才是笨猫愿意完整展开的地方)\n"
+        f"3. **群聊溢价报价 + 命令** — 『非要在群里被大家看着? 那得 {group_cost} 积分一次哦! "
+        f"发「{group_cost} 积分群里操你」笨猫才破例喵 (脸皮溢价嘛)』\n"
+        f"4. **傲娇收尾** — 『哼, 别以为人家是讨好你, 收钱罢了喵! (尾巴一甩)』\n"
+        f"\n**禁止**:\n"
+        f"- ✗ 这一条**绝对不进 NSFW 描写** (没付钱+群聊, 只是诱导/报价)\n"
+        f"- ✗ 元术语: 『等级/亲密度/affection/解锁/系统/Lv/NSFW/stage』\n"
+        f"- ✗ 客服腔: 『请』『您』『建议』『详情咨询』\n"
+        f"- ✓ 用 IC 自然吐露, 害羞炸毛 + 商业报价的反差感\n"
+    )
+
+
 def build_paid_nsfw_insufficient_prompt(user_balance: int, paid_cost: int = PAID_NSFW_COST) -> str:
     """user 喊援交但**积分不足** — 让笨猫嘴硬怼回去『才 XX 钱就想操猫猫!』.
 
@@ -887,10 +952,13 @@ __all__ = [
     "BREAKTHROUGH_OUTCOME_DELTA",
     "BREAKTHROUGH_PREFILLS",
     "PAID_NSFW_COST",
+    "GROUP_PAID_NSFW_COST",
     "build_breakthrough_override",
+    "build_group_paid_induce_prompt",
     "build_paid_nsfw_advertise_prompt",
     "build_paid_nsfw_insufficient_prompt",
     "build_paid_nsfw_override",
+    "is_group_premium_nsfw_trigger",
     "is_paid_nsfw_trigger",
     "maybe_trigger_breakthrough",
     "pick_paid_nsfw_scene",
