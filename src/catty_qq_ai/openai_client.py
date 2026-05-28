@@ -928,17 +928,23 @@ async def _post_chat_completion_raw(
         # include_usage: 让最后一个 chunk 返回 usage (DeepSeek / OpenAI 都支持)
         payload["stream_options"] = {"include_usage": True}
 
-    # 主人 2026-05-29 Round 6: 加 user 字段做 cache namespace 隔离, 防多 prefix 互相 evict.
-    # 实测: 5 次 sim_chat 同 prefix_hash 但 hit 交替 99.5%/35% — DeepSeek 后端 LRU 把
-    # catty 的多种 prefix (私聊/群聊/spark/imagegen/summary) 互相 evict. OpenAI 标准的
-    # `user` 字段让后端按 user 分桶 → 不同 prefix 不再互相 evict.
+    # 主人 2026-05-29 Round 6+7: 细粒度 user namespace (scope + sys_md5) 防同 user 内
+    # 多 prefix 类型 LRU evict. 实测同 scope_key 同 prefix_hash 但 hit 仍交替 9984/3968 —
+    # DeepSeek 后端在 user 内还有 cache unit LRU. 加 sys_md5 区分 prefix 类型让
+    # 不同类型 (私聊普通/spark/imagegen) 走独立 namespace.
     try:
-        from .prompt_cache import is_claude_endpoint
+        from .prompt_cache import is_claude_endpoint, compute_prefix_hash
         if not is_claude_endpoint(base_url, model):
             _scope = get_current_scope_key() or ""
+            # 算当前 messages 的 sys_md5 作为 prefix 类型签名
+            try:
+                _h = compute_prefix_hash(messages, tools=tools, n=5)
+                _sig = (_h.get("sys_md5") or "")[:8]
+            except Exception:  # noqa: BLE001
+                _sig = ""
             if _scope:
-                # 用 scope_key 作 namespace (private:xxx / group:xxx / summary:group:xxx 等)
-                payload["user"] = _scope
+                # OpenAI user ≤ 64 chars: scope_key + sig 拼接
+                payload["user"] = f"{_scope}|{_sig}" if _sig else _scope
     except Exception:  # noqa: BLE001
         pass
 
