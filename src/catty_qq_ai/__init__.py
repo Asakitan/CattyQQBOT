@@ -8841,6 +8841,11 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(user_details_store.background_flush_loop())
     asyncio.create_task(catty_mood_store.background_flush_loop())
     asyncio.create_task(scope_lorebook_store.background_flush_loop())
+    # 主人 2026-05-28 真正的 bug 修复: PregnancyStore 之前完全没注册 flush loop,
+    # 每次 record_intercourse 累加 → 重启全 lost → pregnancy.json 从未生成.
+    # log 显示 2026-05-27 / 2026-05-28 多次触发 "★ pregnancy event=intercourse=1"
+    # 但 intercourse 永远是 1 (跨日重启 reset).
+    asyncio.create_task(pregnancy_store.background_flush_loop())
     asyncio.create_task(_scope_lore_auto_summary_loop())
     asyncio.create_task(_catty_rag_backfill_once())
     asyncio.create_task(_catty_rag_prune_loop())
