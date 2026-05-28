@@ -9636,6 +9636,46 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             f"{exc.__class__.__name__}: {exc}"
                         )
             else:
+                # 主人 2026-05-29: catty_imagegen 意图命中时切 DeepSeek codex_instant 替主 AI
+                # 出 tool_call (省 Opus token + 避开 OOC 触发). 仅当 tools_for_main_reply 含
+                # catty_imagegen 且 codex_instant 三件套配齐时启用 router; 否则走主云通道.
+                _router_base = ""
+                _router_key = ""
+                _router_model = ""
+                _router_label = ""
+                try:
+                    _has_imagegen_tool = any(
+                        isinstance(_t, dict)
+                        and (
+                            (_t.get("function") or {}).get("name") == "catty_imagegen"
+                            or _t.get("name") == "catty_imagegen"
+                        )
+                        for _t in (tools_for_main_reply or [])
+                    )
+                except Exception:  # noqa: BLE001
+                    _has_imagegen_tool = False
+                if _has_imagegen_tool:
+                    _cand_model = (getattr(config, "catty_codex_instant_model", "") or "").strip()
+                    _cand_base = (
+                        (getattr(config, "catty_nsfw_spark_base_url", "") or "").strip()
+                        or (getattr(config, "catty_filter_base_url", "") or "").strip()
+                        or (getattr(config, "catty_audit_ai_base_url", "") or "").strip()
+                    )
+                    _cand_key = (
+                        (getattr(config, "catty_nsfw_spark_api_key", "") or "").strip()
+                        or (getattr(config, "catty_filter_api_key", "") or "").strip()
+                        or (getattr(config, "catty_audit_ai_api_key", "") or "").strip()
+                    )
+                    if _cand_model and _cand_base and _cand_key:
+                        _router_model = _cand_model
+                        _router_base = _cand_base
+                        _router_key = _cand_key
+                        _router_label = "deepseek_imagegen"
+                        logger.info(
+                            "chat: catty_imagegen intent hit → routing tool-call via "
+                            "codex_instant(%s) to bypass main AI (省 Opus token + 避 OOC)",
+                            _cand_model,
+                        )
                 reply = await chat_completion_with_tools(
                     config,
                     messages,
@@ -9643,6 +9683,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     tool_executor=_tool_executor,
                     max_rounds=int(getattr(config, "catty_tools_max_rounds", 3) or 3),
                     max_calls_per_round=int(getattr(config, "catty_tools_max_calls_per_round", 3) or 3),
+                    router_base_url=_router_base,
+                    router_api_key=_router_key,
+                    router_model=_router_model,
+                    router_label=_router_label,
                 )
                 # 主人 2026-05-28: 主路径也跑 phase tracker + record_intercourse, 跟 spark 对齐.
                 # 之前 only_spark 路径有这两段 → 主路径 (sonnet) reply 后 NSFW 状态完全不更新,

@@ -311,13 +311,13 @@ async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
     **不要 AI 写角色锁** (1girl/1boy/白发/黑影等), 那些由 characterPrompts 锁定。
     AI 只描述: 体位/动作/表情/分泌物/场景/光线。
     """
-    # 主人 2026-05-28: filter AI 路径全停, audit_ai api_key 也空, chat_completion_instant
-    # 走 _filter_completion → fallback audit_ai (api_key 空必失败) → 触发 deepseek fallback,
-    # 日志里报 'filter(GLM-5.1) cloud call failed'. 直接走主 AI endpoint (catty_openai_*) 不绕路.
-    base_url = str(getattr(config, "catty_openai_base_url", "") or "").strip()
-    api_key = str(getattr(config, "catty_openai_api_key", "") or "").strip()
-    model = str(getattr(config, "catty_openai_model", "") or "").strip()
-    if not (base_url and api_key and model):
+    # 主人 2026-05-29: NSFW caption 一律走 chat_completion_codex_instant (DeepSeek 通道:
+    # catty_codex_instant_model + spark/filter/audit endpoint), 避开主 Opus 通道省 token +
+    # 跟主 AI 出 catty_imagegen tool_call 同一条 DeepSeek bypass 链对齐.
+    # codex_instant 内部有 endpoint 优先级 + fallback, 这里只判断 model 是否配上.
+    _codex_model = (getattr(config, "catty_codex_instant_model", "") or "").strip()
+    _spark_model = (getattr(config, "catty_nsfw_spark_model", "") or "").strip()
+    if not (_codex_model or _spark_model):
         return ""
 
     phase_brief = _PHASE_BRIEF.get(int(phase), "笨猫被插入中")
@@ -358,43 +358,17 @@ async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
         "请输出 base caption tags:"
     )
 
-    # 直接 OpenAI-compat /chat/completions 一次性调主 AI, 不走主回复链 (那里有 cache + native
-    # /v1/messages 等重逻辑). 失败返回空让 caller fallback DEFAULT_BASE_CAPTION.
-    chat_url = base_url.rstrip("/")
-    if chat_url.endswith("/v1"):
-        chat_url = f"{chat_url}/chat/completions"
-    elif not chat_url.endswith("/chat/completions"):
-        chat_url = f"{chat_url}/chat/completions"
-    # NewAPI SG relay 中转 OpenAI-compat → Anthropic 时, 不接受 messages[role=system].
-    # 把 system prompt 合并到 user message 头部解决.
+    # 走 chat_completion_codex_instant 通道 (DeepSeek). NewAPI SG relay 中转 OpenAI-compat →
+    # Anthropic 时不接受 messages[role=system], 把 system prompt 合并到 user message 头部.
     combined_user = system_prompt + "\n\n---\n\n" + user_prompt
-    payload_body = {
-        "model": model,
-        "messages": [
-            {"role": "user", "content": combined_user},
-        ],
-        "temperature": 0.7,
-        "max_tokens": 400,
-        "stream": False,
-    }
     raw = ""
     try:
-        async with httpx.AsyncClient(timeout=httpx.Timeout(20.0, connect=10.0)) as client:
-            r = await client.post(
-                chat_url,
-                headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-                json=payload_body,
-            )
-        if r.status_code == 200:
-            data = r.json()
-            try:
-                raw = data["choices"][0]["message"]["content"] or ""
-            except (KeyError, IndexError, TypeError):
-                raw = ""
-        else:
-            logger.warning(
-                f"nsfw_imagegen compose caption HTTP {r.status_code}: {r.text[:200]}"
-            )
+        from .openai_client import chat_completion_codex_instant
+        raw = await chat_completion_codex_instant(
+            config,
+            [{"role": "user", "content": combined_user}],
+            max_tokens=400,
+        )
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"nsfw_imagegen compose caption failed: {exc.__class__.__name__}: {exc}")
         return ""

@@ -117,6 +117,68 @@ def _chat_completions_url(base_url: str) -> str:
     return f"{base_url}/chat/completions"
 
 
+def _normalize_openai_tool_parameters(params: Any) -> dict[str, Any]:
+    """规范化 OpenAI tool parameters — 对齐 VSCode tool 序列化:
+    - 必须是 dict
+    - type 强制 "object"
+    - 必须含 properties dict
+    - 剥离 $schema 字段 (供应商对 JSON Schema meta 字段处理不一致, 部分中转直接拒)
+    """
+    if not isinstance(params, dict):
+        return {"type": "object", "properties": {}}
+    normalized = {k: v for k, v in params.items() if k != "$schema"}
+    normalized["type"] = "object"
+    if not isinstance(normalized.get("properties"), dict):
+        normalized["properties"] = {}
+    return normalized
+
+
+def normalize_openai_tool_schemas(tools: list[dict[str, Any]] | None) -> list[dict[str, Any]]:
+    """把任意形态的 tool 定义统一规整成标准 OpenAI function-calling 形态:
+        {"type": "function", "function": {"name", "description", "parameters": {...}}}
+    """
+    if not tools:
+        return []
+    out: list[dict[str, Any]] = []
+    for t in tools:
+        if not isinstance(t, dict):
+            continue
+        # 已是标准 OpenAI 形态
+        if t.get("type") == "function" and isinstance(t.get("function"), dict):
+            fn = t["function"]
+            out.append({
+                "type": "function",
+                "function": {
+                    "name": fn.get("name", ""),
+                    "description": fn.get("description", "") or "",
+                    "parameters": _normalize_openai_tool_parameters(fn.get("parameters")),
+                },
+            })
+            continue
+        # Anthropic 形态 (name + input_schema) → 转 OpenAI
+        if "input_schema" in t and "name" in t:
+            out.append({
+                "type": "function",
+                "function": {
+                    "name": t["name"],
+                    "description": t.get("description", "") or "",
+                    "parameters": _normalize_openai_tool_parameters(t.get("input_schema")),
+                },
+            })
+            continue
+        # 简化形态 (name + parameters)
+        if "name" in t and "parameters" in t:
+            out.append({
+                "type": "function",
+                "function": {
+                    "name": t["name"],
+                    "description": t.get("description", "") or "",
+                    "parameters": _normalize_openai_tool_parameters(t.get("parameters")),
+                },
+            })
+    return out
+
+
 def _ollama_chat_url(base_url: str) -> str:
     base = base_url.strip().rstrip("/")
     for suffix in ("/v1/chat/completions", "/chat/completions", "/v1", "/api/chat", "/api"):
@@ -555,7 +617,7 @@ async def _post_chat_completion_raw(
         payload["max_tokens"] = max_tokens
     payload.update(extra_body)
     if tools:
-        payload["tools"] = tools
+        payload["tools"] = normalize_openai_tool_schemas(tools)
         payload["tool_choice"] = tool_choice
 
     # 主人:任何 5xx 自动 retry 3 次(共 4 次尝试),3 次都失败才上抛
@@ -896,12 +958,22 @@ async def chat_completion_with_tools(
     tool_executor: Any | None,
     max_rounds: int = 3,
     max_calls_per_round: int = 3,
+    router_base_url: str = "",
+    router_api_key: str = "",
+    router_model: str = "",
+    router_label: str = "",
 ) -> str:
     """OpenAI function calling 主回复循环。
 
     tools/tool_executor 任一为空 → 退化到 plain chat_completion(完整 fallback 链)。
     tool 调度过程中云端抛错也直接降级到 chat_completion(保留本地 7B 兜底)。
     tool_executor 签名:async (name: str, arguments_json: str) -> dict。
+
+    router_* 参数: 三件套都填时, 把这次 tool 调用整段切到 router endpoint
+    (例如 catty_imagegen 意图命中 → 切 DeepSeek codex_instant 替主 AI 出 tool_call,
+    省 Opus token 并避开 OOC 触发). 不带 router 时走 catty_openai_* 主通道.
+    Native /v1/messages (catty_anthropic_native_enabled=True) 与 router 互斥, 一旦
+    router 三件套齐就强制 OpenAI-compat 路径.
     """
     if not tools or tool_executor is None:
         _logger.info("tool_chat: tools/executor empty → fallback to plain chat_completion")
@@ -909,16 +981,23 @@ async def chat_completion_with_tools(
     if not getattr(config, "catty_tools_enabled", True):
         _logger.info("tool_chat: catty_tools_enabled=False → fallback to plain chat_completion")
         return await chat_completion(config, messages)
-    if _cloud_is_unhealthy():
-        # 云端冷却期不带 tools 试,直接走 fallback 链。
+    _router_active = bool(router_base_url.strip() and router_api_key.strip() and router_model.strip())
+    if _cloud_is_unhealthy() and not _router_active:
+        # 云端冷却期不带 tools 试,直接走 fallback 链 (router 走独立 endpoint, 不受主云冷却影响)。
         _logger.info("tool_chat: cloud unhealthy → fallback to plain chat_completion (no tools)")
         return await chat_completion(config, messages)
     # 主人 2026-05-28: native_enabled 时 with_tools 走 native /v1/messages 完整 tool
     # calling loop (post_messages_native_data 自动转换 OpenAI tools → Anthropic tools
     # 格式 + history 里 OpenAI 风格 tool 消息 → Anthropic native tool_use/tool_result
     # blocks), 享受 cache hit 100% 同时保留 tool 调用能力.
-    _native_route = bool(getattr(config, "catty_anthropic_native_enabled", False))
-    if _native_route:
+    # router 模式强制走 OpenAI-compat (DeepSeek 等不走 Anthropic /v1/messages).
+    _native_route = bool(getattr(config, "catty_anthropic_native_enabled", False)) and not _router_active
+    if _router_active:
+        _logger.info(
+            "tool_chat: router=%s model=%s starting with %d tools (OpenAI-compat, bypass main AI)",
+            router_label or "custom", router_model, len(tools),
+        )
+    elif _native_route:
         _logger.info("tool_chat: starting with %d tools available (native /v1/messages)", len(tools))
     else:
         _logger.info("tool_chat: starting with %d tools available (OpenAI-compat)", len(tools))
@@ -931,6 +1010,23 @@ async def chat_completion_with_tools(
                 data = await post_messages_native_data(
                     config, history, tools=tools,
                     metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
+                )
+            elif _router_active:
+                data = await _post_chat_completion_raw(
+                    base_url=router_base_url,
+                    api_key=router_api_key,
+                    model=router_model,
+                    messages=history,
+                    timeout=config.catty_request_timeout,
+                    proxy=config.catty_http_proxy,
+                    temperature=config.catty_temperature,
+                    max_tokens=config.catty_max_tokens,
+                    extra_headers={},
+                    extra_body={},
+                    tools=tools,
+                    tool_choice="auto",
+                    enable_cache=False,
+                    cache_depth=2,
                 )
             else:
                 data = await _post_chat_completion_raw(

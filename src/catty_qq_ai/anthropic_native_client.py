@@ -419,36 +419,59 @@ def _convert_history_for_anthropic(messages: list[dict]) -> list[dict]:
     return result
 
 
+def _normalize_anthropic_input_schema(schema: Any) -> dict:
+    """规范化 Anthropic input_schema — 对齐 VSCode tool 序列化:
+    - 必须是 dict, 否则替换成空 object schema
+    - type 强制 = "object"
+    - 必须含 properties dict (Anthropic 要求, 空 properties 用 {})
+    - 剥离 $schema 字段 (Anthropic 不接受 JSON Schema meta 字段)
+    """
+    if not isinstance(schema, dict):
+        return {"type": "object", "properties": {}}
+    normalized = {k: v for k, v in schema.items() if k != "$schema"}
+    normalized["type"] = "object"
+    if not isinstance(normalized.get("properties"), dict):
+        normalized["properties"] = {}
+    return normalized
+
+
 def convert_openai_tool_to_anthropic(openai_tool: dict) -> dict:
-    """OpenAI function-calling 工具定义 → Anthropic tool 定义.
+    """OpenAI function-calling 工具定义 → Anthropic tool 定义 (对齐 VSCode 序列化).
 
     OpenAI 格式:
         {"type": "function", "function": {"name": ..., "description": ..., "parameters": {...}}}
 
     Anthropic 格式:
-        {"name": ..., "description": ..., "input_schema": {...}}
+        {"name": ..., "description": ..., "input_schema": {"type": "object", "properties": {...}}}
 
-    若入参已经是 Anthropic 格式 (含 name + input_schema) 则原样返回.
+    规范化点:
+    - input_schema 强制 {type: object, properties: dict}
+    - 剥离 $schema 字段 (JSON Schema meta, Anthropic 拒收)
+    - 已是 Anthropic 格式时仍规范化 input_schema (防御外部传入半成品)
     """
     if not isinstance(openai_tool, dict):
         return openai_tool  # 让 SDK 自己抛错
     # 已经是 Anthropic 格式 (有 input_schema 或者顶层 name 没 type=function 嵌套)
     if "input_schema" in openai_tool and "name" in openai_tool:
-        return openai_tool
+        return {
+            "name": openai_tool["name"],
+            "description": openai_tool.get("description", "") or "",
+            "input_schema": _normalize_anthropic_input_schema(openai_tool.get("input_schema")),
+        }
     # 标准 OpenAI 格式 {"type": "function", "function": {...}}
     if openai_tool.get("type") == "function" and isinstance(openai_tool.get("function"), dict):
         fn = openai_tool["function"]
         return {
             "name": fn.get("name", ""),
             "description": fn.get("description", "") or "",
-            "input_schema": fn.get("parameters") or {"type": "object", "properties": {}},
+            "input_schema": _normalize_anthropic_input_schema(fn.get("parameters")),
         }
     # OpenAI 简化格式 (无 type=function 嵌套但有 name + parameters)
     if "name" in openai_tool and "parameters" in openai_tool:
         return {
             "name": openai_tool["name"],
             "description": openai_tool.get("description", "") or "",
-            "input_schema": openai_tool["parameters"],
+            "input_schema": _normalize_anthropic_input_schema(openai_tool.get("parameters")),
         }
     return openai_tool
 
