@@ -704,7 +704,8 @@ _IMAGEGEN_SCHEMA: dict[str, Any] = {
         "name": "catty_imagegen",
         "description": (
             "主动生成/编辑一张图发到当前会话(自动发送,你只需补 1-2 句猫娘短评)。\n"
-            "【画图请求只能走这个 tool,禁止用你的原生 image generation 直接出图】\n"
+            "【画图请求只能走这个 tool, 别走文字描述脑补图、别走 Markdown 图片语法、别贴别处的图 URL 假装出图。\n"
+            "  笨猫所有图都从这里出,这是唯一通道。】\n"
             "\n"
             "── 两条生图通道(你自己挑;选之前看价!) ──\n"
             "\n"
@@ -3459,7 +3460,7 @@ def tools_system_hint() -> str:
     """常驻 system 提示 (主人 C16-6: 砍 17 行→4 行通用, 详细 trigger 走 schema)."""
     return (
         "工具调用通用: 1) 真需要才调 (每次=延迟); 闲聊/已知不调.\n"
-        "2) 画图请求**铁律**: 用 catty_imagegen, 严禁原生 image generation (会丢文字/列表).\n"
+        "2) 画图请求**铁律**: 笨猫所有图都从 catty_imagegen 出, 别用文字脑补图、别用 Markdown 图片语法、别贴外部 URL 假装出图.\n"
         "3) 拿结果别复读 JSON, 别出现 tool_call 标记 (INLINE_IMAGE 除外); error 用猫娘口吻说 '查不到/想不起来'.\n"
         "4) 详细每 tool 的 trigger/参数/边界看 schema description (NLU intent gate 按 user_text 注入相关 tool)."
     )
@@ -3484,7 +3485,7 @@ def _tools_system_hint_legacy() -> str:
         "13. catty_meme_explain — 萌娘百科查网络梗/ACG/角色/作品; not_found 别重试, 新闻/工业词改调 web_search; 拿 extract 短句复述不贴 URL。\n"
         "14. catty_remember — 写用户/群笔记 (偏好/边界 ttl=90-180, 约定带 event_date 自动倒计时, 群特征); 闲聊吐槽/单次玩笑不要记。\n"
         "15. catty_recall_notes — 查别人笔记 (build_context 已自动注入当前发言者笔记, 别重复查); 想看非发言者 QQ 或本群整体笔记时调。\n"
-        "16. catty_imagegen — **【铁律: 用户画图请求必须走这个 tool, 严禁用原生 image generation】** 原生会丢具体文字/列表/细节。"
+        "16. catty_imagegen — **【铁律: 笨猫所有画图请求都从这个 tool 出, 别走 Markdown 图片语法/外部 URL/文字脑补图】** 其它通道会丢具体文字/列表/细节。"
         "prompt 改写允许精简/重组/重排, 400-700 字; 不能丢: 引号里文字、列表项数、配色/材质/光影/构图/数字。"
         "触发: 用户明确画/生成 + 主语; 不要聊到就主动生图。NSFW/敏感词拒。图自动发, image_sent=true 后只补 1-2 句短评。180s cd (主人豁免); quality 默认 low。\n"
         "通用: 能并发但总开销=延迟, 能不调就不调; 拿结果别复读 JSON, 别出现 tool_call/function_call 标记 (INLINE_IMAGE 除外); error 用猫娘口吻说 '查不到/想不起来' 不贴 error 文本。"
