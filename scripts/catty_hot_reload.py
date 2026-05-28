@@ -39,6 +39,12 @@ IGNORED_DIR_NAMES = {
     "models",
     "training",
 }
+# 主人 2026-05-29: 排除 CPU 引擎数据目录 (routes/fragments/replies), 这些 yaml/json
+# 由 _cpu_engine_routes_watch_loop 进程内热重载, 不要 kill bot.py 几十秒下线.
+IGNORED_PATH_PREFIXES = (
+    "src/catty_qq_ai/data/cpu_engine",
+    "src/catty_qq_ai/data/nlu_cache",
+)
 
 FileSignature = tuple[int, int]
 
@@ -52,7 +58,11 @@ def is_ignored_path(path: Path, root: Path) -> bool:
         relative = path.resolve().relative_to(root.resolve())
     except ValueError:
         return True
-    return any(part in IGNORED_DIR_NAMES for part in relative.parts)
+    if any(part in IGNORED_DIR_NAMES for part in relative.parts):
+        return True
+    # 主人 2026-05-29: 路径前缀排除 (CPU 引擎数据目录由进程内 watch_loop 热重载)
+    relative_str = relative.as_posix()
+    return any(relative_str.startswith(prefix) for prefix in IGNORED_PATH_PREFIXES)
 
 
 def _iter_files(root: Path, paths: Iterable[Path]) -> Iterable[Path]:

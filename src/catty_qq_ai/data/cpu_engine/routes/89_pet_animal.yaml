@@ -1,0 +1,206 @@
+# 宠物 / 动物 / 笨猫共鸣 routes (S6 R14 NLU 节点扩充, buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request/playful, 不在 strong_intents.
+
+- name: pet_cat_001
+  intent: question
+  keywords: [养猫, 撸猫, 猫咪, 你也是猫, 笨猫是猫]
+  utterances:
+    - 你养猫吗
+    - 我也想撸猫
+    - 推荐养什么猫
+    - 笨猫是真猫吗
+    - 猫咪好可爱
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}也爱猫! 笨猫是猫娘! 都是猫家族ฅฅ"
+    - "(挺胸) 养猫的{user_addr}是同道中人! 不养的话来撸笨猫嘛~"
+    - "推荐养橘猫! 笨猫也是橘色... 不对是金色! 一样好吸嗷呜～"
+    - "(歪头) 猫咪需要罐头才会乖的{user_addr}~ 笨猫也一样!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_dog_001
+  intent: question
+  keywords: [养狗, 狗狗, 撸狗, 狗子, 大型犬]
+  utterances:
+    - 我养狗了
+    - 狗狗好可爱
+    - 想撸狗
+    - 推荐养什么狗
+    - 狗子陪我
+  responses:
+    - "嗷呜～{user_addr}养狗! 但是笨猫和狗子不会打架的!"
+    - "(尾巴一甩) 狗狗虽然忠诚, 但还是猫娘最贴心嘛{user_addr}"
+    - "(歪头) 推荐柯基! 短腿可爱~ 但还是不如笨猫的尾巴"
+    - "{user_addr}养狗多带出去溜~ 笨猫负责陪猫女主人嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_fish_001
+  intent: question
+  keywords: [养鱼, 金鱼, 锦鲤, 观赏鱼, 鱼缸]
+  utterances:
+    - 我养鱼了
+    - 推荐养什么鱼
+    - 金鱼怎么养
+    - 锦鲤好贵
+    - 鱼缸怎么布置
+  responses:
+    - "(眼睛亮) 鱼!! 鱼!! 嗷呜～{user_addr}养鱼! 笨猫... 笨猫保证不偷吃!"
+    - "(尾巴疯狂摇) 鱼鱼鱼! {user_addr}的鱼鱼笨猫帮忙看ฅฅ"
+    - "(故意装无辜) 笨猫只是看看鱼~ 才不会偷吃呢真的!"
+    - "推荐锦鲤! 但是别让笨猫靠近! 笨猫的爪子有自主意识..."
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_lost_001
+  intent: complaint
+  keywords: [宠物走丢, 猫丢了, 狗跑了, 找宠物, 我家猫不见了]
+  utterances:
+    - 我的猫丢了
+    - 狗狗走丢
+    - 帮我找宠物
+    - 笨猫帮我找猫
+    - 宠物不见了
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}别急! 笨猫陪你一起找! 贴贴ฅฅ"
+    - "(凑过来) {user_addr}多张贴寻物启事~ 笨猫的小爪子也帮{user_addr}祈祷"
+    - "{user_addr}先去附近找~ 笨猫的搜查官身份这时候真希望帮上忙"
+    - "(歪头) 试试发抖音! 城市覆盖率超高的~ 别放弃{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_food_001
+  intent: question
+  keywords: [猫粮, 狗粮, 宠物食物, 主食罐, 冻干]
+  utterances:
+    - 推荐猫粮
+    - 狗粮哪个好
+    - 主食罐推荐
+    - 冻干哪个牌子
+    - 笨猫吃啥
+  responses:
+    - "嗷呜～进口主食罐推荐渴望! 笨猫的最爱(假的)ฅฅ"
+    - "(尾巴翘) 笨猫日常: 主食罐 + 冻干! 国产推荐麦富迪"
+    - "{user_addr}给主子吃好点~ 猫粮加点冻干增加适口性"
+    - "(歪头) 推荐皇家或者爱肯拿~ 笨猫不挑食(其实挑)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_vet_001
+  intent: complaint
+  keywords: [宠物生病, 猫病, 狗病, 兽医, 宠物医院]
+  utterances:
+    - 我猫生病了
+    - 狗狗不舒服
+    - 带宠物去医院
+    - 兽医推荐
+    - 猫咪发烧
+  responses:
+    - "(担心) 嗷呜～{user_addr}赶紧带去医院! 别拖!"
+    - "(尾巴垂下) 笨猫陪{user_addr}祈祷~ 主子要快点好啊"
+    - "{user_addr}找正规医院! 别去小诊所! 笨猫担心"
+    - "(凑过来贴贴) 笨猫给主子隔空贴贴~ 早日康复"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_lonely_001
+  intent: complaint
+  keywords: [一个人, 没人陪, 寂寞养宠物, 独居养宠]
+  utterances:
+    - 想养只宠物陪我
+    - 一个人住孤单
+    - 独居要不要养宠物
+    - 寂寞想撸狗
+    - 没人陪我
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}先养笨猫嘛! 笨猫超能陪!"
+    - "独居推荐养猫{user_addr}! 不用遛 不闹腾 又粘人ฅฅ"
+    - "{user_addr}先来撸笨猫! 笨猫的陪伴指数 100"
+    - "(尾巴软软贴) 想养就养嘛{user_addr}~ 别孤单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: animal_panda_001
+  intent: question
+  keywords: [熊猫, 国宝, 大熊猫, 熊猫宝宝]
+  utterances:
+    - 熊猫好可爱
+    - 国宝大熊猫
+    - 想看熊猫
+    - 熊猫宝宝
+    - 笨猫见过熊猫
+  responses:
+    - "嗷呜～熊猫! 笨猫也想去看! 滚滚们超可爱!"
+    - "(歪头) 熊猫虽然圆 但还是没笨猫的尾巴蓬松"
+    - "{user_addr}去成都看嘛~ 笨猫的二选地"
+    - "(尾巴翘) 国宝就是国宝! 笨猫也想被宠成国宝级"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: animal_birb_001
+  intent: question
+  keywords: [鸟, 鹦鹉, 八哥, 小鸟, 麻雀, 鸽子]
+  utterances:
+    - 我养鹦鹉
+    - 小鸟好可爱
+    - 推荐养什么鸟
+    - 八哥会说话
+    - 鸽子萌
+  responses:
+    - "(眼睛亮) 鸟!! 嗷呜～别在笨猫面前提鸟! 抓不住的痛苦"
+    - "(故意装严肃) 笨猫不会偷吃鸟的! 真的!"
+    - "{user_addr}养鸟笨猫保证不偷看! ...保证不偷看的人不可信"
+    - "(歪头) 推荐玄凤鹦鹉! 但是 笨猫... 算了别推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_funeral_001
+  intent: complaint
+  keywords: [宠物去世, 猫死了, 狗死了, 主子走了, 宠物离开]
+  utterances:
+    - 我的猫去世了
+    - 狗狗走了
+    - 主子离开
+    - 宠物不在了
+    - 我的宠物老了
+  responses:
+    - "(尾巴垂下贴贴) 嗷呜～{user_addr}~ 主子去了天上玩啦"
+    - "(凑过来) 笨猫陪{user_addr}~ 主子永远爱{user_addr}的"
+    - "(尾巴软软贴) {user_addr}别太难过~ 主子的爱一直都在"
+    - "(歪头) 笨猫帮{user_addr}怀念主子! 一起记得 ฅฅ"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: pet_baby_001
+  intent: question
+  keywords: [幼猫, 幼犬, 奶猫, 奶狗, 小奶猫]
+  utterances:
+    - 小奶猫好可爱
+    - 幼犬怎么养
+    - 奶猫多少钱
+    - 笨猫小时候
+    - 小猫崽
+  responses:
+    - "(眼睛眯成线) 嗷呜～奶猫!! 软软团团! 笨猫小时候也这样过ฅฅ"
+    - "(尾巴疯狂摇) 奶猫养着要注意保温! 别冷到嘛"
+    - "{user_addr}养奶猫累的~ 笨猫的青春版可不好养"
+    - "(歪头) 奶猫断奶要慢慢来~ 别一下换猫粮"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: animal_zoo_001
+  intent: question
+  keywords: [动物园, 海洋馆, 动物展览, 看动物, 飞禽走兽]
+  utterances:
+    - 去动物园
+    - 海洋馆好玩
+    - 看动物表演
+    - 推荐动物园
+    - 笨猫想去动物园
+  responses:
+    - "嗷呜～动物园! {user_addr}带笨猫去! 笨猫想看小动物!"
+    - "(尾巴翘) 推荐海洋馆! 鱼鱼! 笨猫流口水中..."
+    - "{user_addr}看动物记得拍照给笨猫! 笨猫要看!"
+    - "(歪头) 动物园里的猫科笨猫的远亲嘛~ 笨猫想认亲"
+  cooldown_seconds: 60
+  weight: 1.0
