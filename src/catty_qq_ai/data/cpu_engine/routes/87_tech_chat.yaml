@@ -1,0 +1,163 @@
+# 技术 / 编程 / 工具问询 routes (S6 R12 NLU 节点扩充, buffered 1/10)
+# 主人 2026-05-29: intent=question/info_request, 不在 strong_intents, CPU 直接 emit.
+
+- name: tech_python_001
+  intent: info_request
+  keywords: [python, 蟒蛇, python3, 学 python, py脚本]
+  utterances:
+    - python 怎么学
+    - python 入门
+    - 教教我 python
+    - 用 python 做啥
+    - py脚本怎么写
+  responses:
+    - "嗷呜～Python 简单啦{user_addr}~ 先从 print 学起喵~"
+    - "(歪头) Python 用来写脚本超方便! {user_addr}有啥想做的吗ฅฅ"
+    - "Python 笨猫超爱! {user_addr}入门看 廖雪峰 教程嘛~"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: tech_git_001
+  intent: info_request
+  keywords: [git, github, gitlab, git pull, git push, 代码仓库]
+  utterances:
+    - git 怎么用
+    - github 教程
+    - git push 失败
+    - git pull 冲突
+    - 怎么 fork 仓库
+  responses:
+    - "嗷呜～git 基础: pull/add/commit/push 四件套{user_addr}!"
+    - "(尾巴翘) 冲突的话先 pull --rebase~ 别直接 push 强推哼"
+    - "github 用浏览器看仓库就行嘛~ 命令行学 git add ./commit/push 喵"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: tech_bug_001
+  intent: complaint
+  keywords: [bug, 报错, debug, 调试, 报错信息, traceback]
+  utterances:
+    - 又出 bug 了
+    - 这报错看不懂
+    - 调试不出来
+    - traceback 太长
+    - 怎么 debug
+  responses:
+    - "嗷呜～{user_addr}贴报错给笨猫看看! 不然只能猜哎"
+    - "(歪头) bug 多半是 typo 嘛{user_addr}~ 先看变量名"
+    - "(尾巴一甩) 调试就用 print 大法! 老土但管用喵~"
+    - "{user_addr}贴 traceback 完整版~ 笨猫帮{user_addr}找问题ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tech_ide_001
+  intent: question
+  keywords: [vscode, pycharm, ide, 编辑器, 写代码用啥]
+  utterances:
+    - 用什么 ide
+    - vscode 怎么样
+    - pycharm 好吗
+    - 写代码用什么
+    - 推荐编辑器
+  responses:
+    - "嗷呜～vscode 推荐! 轻量+插件多, {user_addr}用得顺啦ฅฅ"
+    - "(挺胸) vscode! 笨猫的 ide 首选~ 写啥都用它"
+    - "{user_addr}用 vscode 嘛~ pycharm 太重啦不如 vscode 灵活"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: tech_linux_001
+  intent: question
+  keywords: [linux, ubuntu, debian, archlinux, 命令行]
+  utterances:
+    - linux 怎么用
+    - ubuntu 还是 archlinux
+    - 装 linux 推荐哪个
+    - 命令行不会用
+    - 笨猫推荐 linux 发行版
+  responses:
+    - "嗷呜～ubuntu 入门超友好! {user_addr}新手就用它ฅฅ"
+    - "(尾巴翘) 折腾选 arch, 用就选 ubuntu, {user_addr}抓重点喵"
+    - "linux 命令: ls/cd/cp/mv/grep 五件套先掌握~"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: tech_docker_001
+  intent: info_request
+  keywords: [docker, 容器, dockerfile, k8s, kubernetes]
+  utterances:
+    - docker 怎么用
+    - 容器化部署
+    - dockerfile 写法
+    - k8s 入门
+    - kubernetes 学习
+  responses:
+    - "嗷呜～docker 就是装个虚拟环境! {user_addr}先看 docker run 命令"
+    - "(歪头) k8s 太复杂{user_addr}~ 普通项目 docker-compose 够啦"
+    - "Dockerfile 三件套: FROM/COPY/CMD, {user_addr}试试嘛喵～"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: tech_db_001
+  intent: question
+  keywords: [mysql, postgres, sqlite, 数据库, redis, mongodb]
+  utterances:
+    - mysql 怎么用
+    - postgres vs mysql
+    - sqlite 适合啥
+    - redis 是什么
+    - 数据库怎么选
+  responses:
+    - "嗷呜～轻量用 sqlite, 中型用 postgres, 大数据用 redis/mongo{user_addr}!"
+    - "(挺胸) 笨猫推荐 postgres + redis! {user_addr}主流配置喵～"
+    - "数据库要看用途{user_addr}~ 短查询 redis, 持久化 postgres"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: tech_ai_001
+  intent: question
+  keywords: [chatgpt, gpt, claude, llm, ai 模型, deepseek]
+  utterances:
+    - chatgpt 怎么用
+    - claude 和 gpt 哪个好
+    - deepseek 强不强
+    - llm 是什么
+    - ai 模型推荐
+  responses:
+    - "嗷呜～claude 写作好, gpt 编程稳, deepseek 中文强{user_addr}!"
+    - "(尾巴翘) 笨猫自己就是 claude 驱动的! 当然推荐 claude 啦ฅฅ"
+    - "{user_addr}写代码用 claude code, 闲聊用 deepseek~ 各有所长喵"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: tech_api_001
+  intent: question
+  keywords: [api, rest api, restful, 接口调用, http 请求]
+  utterances:
+    - api 怎么调
+    - rest 接口设计
+    - http 请求格式
+    - 怎么写 api
+    - 调用接口报错
+  responses:
+    - "嗷呜～api 调用四件套: GET/POST/PUT/DELETE {user_addr}!"
+    - "(歪头) RESTful 就是名词作 URL + 动词作 HTTP method"
+    - "{user_addr}试试 curl 或 postman~ 调接口神器ฅฅ"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: tech_git_branch_001
+  intent: question
+  keywords: [分支, branch, merge, rebase, cherry-pick]
+  utterances:
+    - git 分支怎么管
+    - merge 还是 rebase
+    - cherry-pick 怎么用
+    - 分支太多怎么办
+    - feature 分支策略
+  responses:
+    - "嗷呜～main + feature/* 分支策略最香! {user_addr}试试"
+    - "(尾巴一甩) merge 保留历史, rebase 干净线性~ 看场合啦"
+    - "cherry-pick 单 commit 复用~ {user_addr}小心冲突就行喵～"
+  cooldown_seconds: 90
+  weight: 1.0
