@@ -128,8 +128,9 @@ CHARACTER_BOY_TAGS = (
 CHARACTER_BOY_UC = "male face, light skin, visible eyes, normal man body, realistic male"
 
 # AI composer 失败时的兜底 base caption (默认中性场景, AI 失败就回 P4 missionary)
+# {{nsfw}}, {{explicit}} 必带 — NAI v4.5 默认 SFW 滤镜, 不带就画 SFW
 DEFAULT_BASE_CAPTION = (
-    "{{2 figures, hetero}}, kissing, hugging, on bed, indoor, "
+    "{{nsfw}}, {{explicit}}, {{2 figures, hetero}}, kissing, hugging, on bed, indoor, "
     "anime style, dramatic lighting, romantic atmosphere"
 )
 DEFAULT_NEGATIVE = (
@@ -137,7 +138,8 @@ DEFAULT_NEGATIVE = (
     "jpeg artifacts, multiple girls, multiple boys, futanari, "
     "solo, 1girl alone, single character, single person, only one person, no male, "
     "male skin color visible, realistic male body, three figures, 3 figures, "
-    "censored, mosaic censoring, bar censor"
+    "censored, mosaic censoring, bar censor, "
+    "sfw, safe, family friendly, clothed sex, fully clothed"
 )
 
 # v4.5 是默认模型 (支持 characterPrompts 双角色 + director_reference Precise Reference)
@@ -327,6 +329,7 @@ async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
         "**NAI v4.5 提权语法**: `{{tag}}` 加权 1.1x。把**关键体位/性行为**用 {{}} 提权。\n"
         "\n"
         "**必带类型(必须都覆盖)**:\n"
+        "  0) **NSFW 锁(NAI v4.5 默认 SFW 滤镜, 不带这两个就只画 SFW)**: `{{nsfw}}, {{explicit}}`\n"
         "  1) **场景锁**: `{{2 figures, hetero}}` (因为只有这样 NAI 才同时画两人)\n"
         "  2) **性行为强度按 phase 选(P1-P3 不要写 penetration!)**:\n"
         "     - P1 暧昧: `{{blush}}, looking at viewer, close-up`, NO sex tags\n"
@@ -410,8 +413,13 @@ async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
     cleaned = ", ".join(part.strip() for part in cleaned.splitlines() if part.strip())
 
     # 强补关键 tag (P1-P3 还没插入, 不强补 penetration; P4-P7 才强补)
+    # nsfw / explicit 无论 phase 都必带 (NAI v4.5 不带就走 SFW 滤镜)
     lowered = cleaned.lower()
     extra: list[str] = []
+    if "nsfw" not in lowered:
+        extra.append("{{nsfw}}")
+    if "explicit" not in lowered:
+        extra.append("{{explicit}}")
     if "2 figures" not in lowered and "hetero" not in lowered:
         extra.append("{{2 figures, hetero}}")
     if 4 <= int(phase) <= 7 and not any(k in lowered for k in ("sex", "penetration", "vaginal", "fucked")):
