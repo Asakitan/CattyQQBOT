@@ -528,6 +528,19 @@ def _log_cache_stats(data: dict[str, Any], model: str) -> None:
             f"miss={ds_miss} hit_rate={hit_rate:.0%} "
             f"rolling{len(_DEEPSEEK_CACHE_ROLLING)}={roll_rate:.0%}",
         )
+        # 主人 2026-05-29 Round 1: 显眼 HIT_TARGET 状态 (grep 用), 目标 95-98%
+        _target_min = 0.95
+        if roll_rate >= _target_min:
+            _status = "OK"
+        else:
+            _gap = int((_target_min - roll_rate) * 100)
+            _status = f"LOW(-{_gap}pp)"
+        _logger.info(
+            f"HIT_TARGET model={model[:20]} this={hit_rate:.1%} "
+            f"rolling{len(_DEEPSEEK_CACHE_ROLLING)}={roll_rate:.1%} "
+            f"target=95-98% status={_status} "
+            f"hit_tok={ds_hit} miss_tok={ds_miss}",
+        )
         # rolling 命中率连续 3 次 < 90% → warn (主人目标 95-98%)
         if len(_DEEPSEEK_CACHE_ROLLING) >= 5 and roll_rate < 0.9:
             _DEEPSEEK_LOW_HIT_STREAK += 1
@@ -844,6 +857,38 @@ async def _post_chat_completion_raw(
                 f"first_user_md5={h['first_user_md5']} "
                 f"tools_count={h['tools_count']} tools_md5={h['tools_md5']}",
             )
+            # 主人 2026-05-29 Round 1: per-msg hash 定位 history 中段漂移
+            _logger.info(f"per_msg_hash: {h.get('per_msg', '')}")
+            # 主人 2026-05-29 Round 1: dump 真实 messages 到磁盘, 后续 download + diff
+            # 找复杂注入的字节漂移源 (simulator 简化场景 98% 但实际 67% — 差距在 catty
+            # _build_messages 复杂注入). 每 scope 保留最近 6 个 dump (LRU).
+            try:
+                import os
+                import time
+                from pathlib import Path
+                _dump_root = Path("D:/CattyQQAI/logs/req_dumps")
+                _dump_root.mkdir(parents=True, exist_ok=True)
+                _scope = (get_current_scope_key() or "noscope").replace(
+                    ":", "_",
+                ).replace("/", "_").replace("\\", "_")
+                _ts = int(time.time() * 1000)
+                _dump = _dump_root / f"{_scope}_{_ts}.json"
+                with open(_dump, "w", encoding="utf-8") as _f:
+                    json.dump({
+                        "model": model,
+                        "messages": messages,
+                        "tools": tools,
+                        "usage_at_call": None,  # 填充: 拿到 response 后填
+                    }, _f, ensure_ascii=False, indent=2)
+                # LRU keep 6
+                _olds = sorted(_dump_root.glob(f"{_scope}_*.json"))
+                for _o in _olds[:-6]:
+                    try:
+                        _o.unlink()
+                    except Exception:  # noqa: BLE001
+                        pass
+            except Exception as _dump_exc:  # noqa: BLE001
+                _logger.debug(f"req dump failed (non-fatal): {_dump_exc}")
     except Exception as exc:  # noqa: BLE001
         _logger.warning(f"deepseek prefix opt 失败 (降级到原 messages): {exc}")
 

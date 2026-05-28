@@ -1106,6 +1106,38 @@ class MemoryStore:
             acc += t
         return picked
 
+    @staticmethod
+    def _compact_profiles_for_prompt(profiles: Any, max_chars: int = 2000) -> str:
+        """主人 2026-05-29 Round 1: 把 group['member_profiles'] dict 压缩成精简 JSON.
+
+        - 按 updated_at 倒序取最近活跃的, 字符数累加 ≤ max_chars
+        - 只保留 display_name / title / gender / impression / confidence (省字)
+        - 防止几十个 member_profiles dump 出 30K+ chars 撑爆 summary prompt
+        """
+        if not isinstance(profiles, dict) or not profiles:
+            return "{}"
+        items: list[tuple[str, str, dict]] = []
+        for uid, p in profiles.items():
+            if isinstance(p, dict):
+                items.append((str(p.get("updated_at") or ""), str(uid), p))
+        items.sort(key=lambda x: x[0], reverse=True)
+        selected: dict[str, dict[str, Any]] = {}
+        acc = 2  # "{}"
+        for _, uid, p in items:
+            compact = {}
+            for k in ("display_name", "title", "gender", "impression", "confidence"):
+                v = p.get(k)
+                if v:
+                    compact[k] = v
+            if not compact:
+                continue
+            entry = json.dumps({uid: compact}, ensure_ascii=False)
+            if acc + len(entry) > max_chars and selected:
+                break
+            selected[uid] = compact
+            acc += len(entry)
+        return json.dumps(selected, ensure_ascii=False)
+
     def build_summary_messages(self, group_id: str) -> list[dict[str, object]]:
         group = self._data.get("groups", {}).get(group_id, {})
         corpus = group.get("corpus", []) if isinstance(group, dict) else []
@@ -1127,11 +1159,15 @@ class MemoryStore:
             "除非多次重复或明确是稳定偏好/事实，否则不要写进摘要或人物画像，避免以后主动复读。"
             "只写有证据的信息；性别不确定写未知；不要Markdown/emoji。"
         )
-        # 旧摘要在 prompt 里也截断, 防上轮误产超长摘要污染新轮.
+        # 主人 2026-05-29 Round 1: 旧摘要 + 旧画像 双侧截断, 防 build_summary_messages
+        # input 撑到 16K+ (实测有过 first_user_len=36513 chars 的 case).
         old_summary_trim = old_summary[:_summary_max]
+        old_profiles_compact = self._compact_profiles_for_prompt(
+            old_profiles, max_chars=_corpus_max,  # 复用 corpus_max_tokens 当 char cap
+        )
         user_content = (
             f"群:{group_id}\n旧摘要:{old_summary_trim or '无'}\n"
-            f"旧画像:{json.dumps(old_profiles, ensure_ascii=False)}\n"
+            f"旧画像:{old_profiles_compact}\n"
             + "\n".join(lines)
         )
         return [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]

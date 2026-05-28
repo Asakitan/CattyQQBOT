@@ -9058,42 +9058,62 @@ async def observe_memory(bot: Bot, event: MessageEvent) -> None:
 
 
 async def _summary_loop() -> None:
+    # 主人 2026-05-29 Round 1: 给 summary loop 每个调用设 scope_key.
+    # 主人 2026-05-29 Round 2: 启动后立即跑一次 (不等 60s), 加速 cache 真实数据采集.
+    from .openai_client import set_current_scope_key
+    _first_tick = True
     while True:
-        await asyncio.sleep(60)
+        if not _first_tick:
+            await asyncio.sleep(60)
+        else:
+            await asyncio.sleep(15)  # 启动后 15s 跑首轮 (留给 bot 初始化完成)
+            _first_tick = False
         if not _has_api_key():
             continue
         for group_id in memory_store.due_group_ids():
             try:
+                set_current_scope_key(f"summary:group:{group_id}")
                 messages = memory_store.build_summary_messages(group_id)
                 summary = await chat_completion_summary(config, messages)
                 memory_store.save_group_summary(group_id, summary)
                 logger.info(f"Updated group memory summary for {group_id}")
             except Exception as exc:
                 logger.warning(f"Failed to summarize group memory for {group_id}: {exc}")
+            finally:
+                set_current_scope_key(None)
         for user_id in memory_store.due_private_user_ids():
             try:
+                set_current_scope_key(f"summary:private:{user_id}")
                 messages = memory_store.build_private_summary_messages(user_id)
                 summary = await chat_completion_summary(config, messages)
                 memory_store.save_private_summary(user_id, summary)
                 logger.info(f"Updated private memory summary for {user_id}")
             except Exception as exc:
                 logger.warning(f"Failed to summarize private memory for {user_id}: {exc}")
+            finally:
+                set_current_scope_key(None)
         for group_id, user_id in memory_store.due_mentioned_members():
             try:
+                set_current_scope_key(f"summary:mention:{group_id}:{user_id}")
                 messages = memory_store.build_member_mention_summary_messages(group_id, user_id)
                 summary = await chat_completion_summary(config, messages)
                 memory_store.save_member_mention_summary(group_id, user_id, summary)
                 logger.info(f"Updated mentioned member profile for {user_id} in group {group_id}")
             except Exception as exc:
                 logger.warning(f"Failed to summarize mentioned member profile for {user_id} in group {group_id}: {exc}")
+            finally:
+                set_current_scope_key(None)
         for game_name in memory_store.due_games_for_summary():
             try:
+                set_current_scope_key(f"summary:game:{game_name}")
                 messages = memory_store.build_game_summary_messages(game_name)
                 summary = await chat_completion_summary(config, messages)
                 memory_store.save_game_summary(game_name, summary)
                 logger.info(f"Compressed game memory summary for '{game_name}'")
             except Exception as exc:
                 logger.warning(f"Failed to compress game memory for '{game_name}': {exc}")
+            finally:
+                set_current_scope_key(None)
 
 
 async def _scope_lore_auto_summary_loop() -> None:

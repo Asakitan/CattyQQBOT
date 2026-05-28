@@ -616,6 +616,16 @@ def compute_prefix_hash(
         except Exception:
             tools_serialized = str(tools)
 
+    # 主人 2026-05-29 Round 1 诊断: per-message hash 定位 history 中段漂移
+    # 输出每条 message 的 (role, len, md5) 拼成短字符串, 直接 log 出来对比两次请求.
+    per_msg: list[str] = []
+    for i, m in enumerate(messages[:20]):  # 只算前 20 条 (头部 prefix 才进 cache)
+        if not isinstance(m, dict):
+            continue
+        r = m.get("role", "?")[:1]  # s/u/a/t (system/user/assistant/tool)
+        c = _to_text(m.get("content"))
+        per_msg.append(f"{i}{r}{len(c)}#{_md5_8(c)}")
+
     return {
         "sys_count": sys_count,
         "msg_count": len(messages),
@@ -623,6 +633,7 @@ def compute_prefix_hash(
         "first_user_md5": _md5_8(first_user_text),
         "tools_count": tools_count,
         "tools_md5": _md5_8(tools_serialized),
+        "per_msg": " ".join(per_msg),  # 诊断: 每条 message 的 idx + role + len + md5
     }
 
 

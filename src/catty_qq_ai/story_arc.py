@@ -1022,6 +1022,21 @@ class StoryArcStore:
         return None
 
 
+def _bucket_elapsed_minutes(m: int) -> str:
+    """主人 2026-05-29 Round 3: elapsed_min 分桶, 避免每分钟 +1 破坏 cache prefix.
+
+    实测一个 177→178 分钟差异让后续 6000+ chars 全 miss. 改桶后同桶 N 分钟内字节稳定.
+    """
+    if m < 5: return "刚开始"
+    if m < 15: return "5+ 分钟前"
+    if m < 30: return "15+ 分钟前"
+    if m < 60: return "30+ 分钟前"
+    if m < 120: return "1+ 小时前"
+    if m < 240: return "几小时前"
+    if m < 720: return "半天前"
+    return "好久前"
+
+
 def build_story_arc_prompt(arcs: list[StoryArc], now: float | None = None) -> str:
     """把 active arc 拼成给 LLM 的 system prompt。空时返回 ""。"""
     if not arcs:
@@ -1031,7 +1046,8 @@ def build_story_arc_prompt(arcs: list[StoryArc], now: float | None = None) -> st
     for arc in arcs:
         elapsed_min = int((now - arc.created_at) / 60)
         suffix = "(快收尾或推进)" if arc.is_fading(now) else ""
-        lines.append(f"- 【{arc.title}】(开始于 {elapsed_min} 分钟前){suffix}")
+        # 主人 2026-05-29 Round 3: bucketed elapsed_min (cache 友好)
+        lines.append(f"- 【{arc.title}】(开始于{_bucket_elapsed_minutes(elapsed_min)}){suffix}")
         lines.append(f"  {arc.context}")
     lines.append(
         "聊天时可以自然带出这些话题(『刚才主人说...怎么样啦?』『还在...吗?』),"

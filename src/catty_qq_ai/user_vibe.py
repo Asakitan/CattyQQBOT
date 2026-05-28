@@ -442,6 +442,27 @@ _VIBE_HINTS_ZH: dict[str, str] = {
 }
 
 
+def _bucket_msg_count(n: int) -> str:
+    """主人 2026-05-29 Round 2: msg_count 分桶, 避免精确数字每次 +1 破坏 cache prefix.
+
+    每条新消息 message_count+=1 → 整段 prompt 字节漂移 → DeepSeek cache 后续 9K chars
+    全 miss. 实测一次 429→430 让 hit_rate 卡 44%. 改桶位后同桶 N 轮内字节稳定.
+    """
+    if n < 10: return "新熟悉"
+    if n < 50: return "几十条"
+    if n < 200: return "100+ 条"
+    if n < 500: return "几百条"
+    if n < 1000: return "500+ 条"
+    if n < 5000: return "1000+ 条"
+    return "5000+ 条"
+
+
+def _bucket_confidence(c: int) -> str:
+    if c >= 80: return "高"
+    if c >= 50: return "中"
+    return "低"
+
+
 def build_user_vibe_prompt(profile: dict[str, Any], user_display: str = "用户") -> str:
     """根据 profile 返回给 LLM 的「对方画像」段。confidence 不够返回 ""。"""
     if not profile:
@@ -452,7 +473,10 @@ def build_user_vibe_prompt(profile: dict[str, Any], user_display: str = "用户"
         return ""
     vibe = profile.get("vibe_tag")
     topics = profile.get("topic_tags") or []
-    lines = [f"【对方画像】『{user_display}』(累计 {msg_count} 条消息,置信度 {confidence}%):"]
+    # 主人 2026-05-29 Round 2: bucketed msg_count + confidence (cache 友好)
+    lines = [
+        f"【对方画像】『{user_display}』({_bucket_msg_count(msg_count)},置信度{_bucket_confidence(confidence)}):"
+    ]
     if vibe and vibe in _VIBE_HINTS_ZH:
         lines.append(f"- 主调:{vibe} — {_VIBE_HINTS_ZH[vibe]}")
     if topics:
