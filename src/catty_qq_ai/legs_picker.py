@@ -113,8 +113,28 @@ LEG_TRIGGER_PATTERNS: tuple[re.Pattern[str], ...] = (
 logger = logging.getLogger(__name__)
 
 
-def random_legs_reply(*, is_owner: bool = False, user_nickname: str = "", user_id: str = "") -> str:
-    """随机抽一句腿图回复。v2 加 user_id 启用 A 算法去重."""
+def random_legs_reply(*, is_owner: bool = False, user_nickname: str = "", user_id: str = "", affection_level: int = 0) -> str:
+    """随机抽一句腿图回复。v3 三层货架: composer mood-aware → yaml pool → 硬编码."""
+
+    # L0 Composer mood-aware (主人 owner 优先 135K 组合; user 版下轮加)
+    if is_owner:
+        try:
+            from .cpu_engine.composer import get_composer as _ce_get_composer
+            from pathlib import Path as _Path
+            fragments_dir = _Path(__file__).resolve().parent / "data" / "cpu_engine" / "fragments"
+            comp = _ce_get_composer(fragments_dir, "legs_owner")
+            if comp.bodies:
+                text = comp.compose(
+                    user_id=str(user_id),
+                    affection_level=int(affection_level) if affection_level else None,
+                    render_vars={"user_nickname": user_nickname or "主人"},
+                )
+                if text:
+                    return text
+        except Exception:  # noqa: BLE001
+            pass
+
+    # L1 yaml pool
     try:
         from .cpu_engine.quick_reply import get_pool as _ce_get_pool
         from pathlib import Path as _Path

@@ -9048,10 +9048,15 @@ async def _generate_legs_caption(event: MessageEvent, user_text: str) -> str:
     user_nickname = "主人" if is_owner else (
         getattr(event.sender, "card", None) or getattr(event.sender, "nickname", None) or "杂鱼"
     )
+    try:
+        _legs_level, _ = affection_store.get_level_and_exp(event.user_id)
+    except Exception:  # noqa: BLE001
+        _legs_level = 0
     reply = random_legs_reply(
         is_owner=is_owner,
         user_nickname=str(user_nickname),
         user_id=str(event.user_id),
+        affection_level=int(_legs_level),
     )
     logger.info(f"[quick_reply.legs] uid={event.user_id} caption={reply[:60]!r}")
     return reply
