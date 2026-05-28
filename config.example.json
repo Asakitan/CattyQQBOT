@@ -373,5 +373,13 @@
     "poll_seconds": 1.5,
     "debounce_seconds": 1,
     "restart_on_code_change": true
+  },
+  "nlu": {
+    "_note": "本地 NLU 三件套: jieba 分词 + text2vec 语义 (ONNX 加速) + HanLP NER. 启用后 catty 用本地 NLU 替代部分 LLM 调用 (topic/emotion/intent classification, theory_of_mind centroid, user_details NER 等), A/B 实测准确率 50%→87%. 默认全关, 主人 toggle 开.",
+    "use_jieba": false,
+    "use_text2vec": false,
+    "use_hanlp": false,
+    "text2vec_use_onnx": true,
+    "nlu_warmup_on_startup": false
   }
 }
