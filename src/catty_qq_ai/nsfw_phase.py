@@ -2922,16 +2922,14 @@ def build_phase_advance_hint(
         )
 
     # 主人 2026-05-27 升级 #2: opener 反复读 hint
-    opener_blocklist_line = ""
-    if st.recent_openers:
-        recent_str = " | ".join(f"『{o}』" for o in st.recent_openers[-3:])
-        opener_blocklist_line = (
-            f"【★ Opener 反复读 (最近 {len(st.recent_openers[-3:])} 条 reply 开头)】\n"
-            f"{recent_str}\n"
-            f"本轮 **首句开头 10 字必须和上面任何一条都不一样** — "
-            f"换动作进入 / 换感官进入 / 换台词进入 / 换沉默进入, 别复读上轮模板.\n"
-            f"\n"
-        )
+    # 主人 2026-05-29 Round 9: 去掉 opener 具体内容 (recent_str 每轮变 → cache miss).
+    # AI 看 history 自然能避免复读, 不需要再 inject 具体 opener 列表. 保留铁律说明 (字节稳定).
+    opener_blocklist_line = (
+        "【★ Opener 反复读铁律】\n"
+        "本轮 **首句开头 10 字必须和 history 里最近 reply 任何一条都不一样** — "
+        "换动作进入 / 换感官进入 / 换台词进入 / 换沉默进入, 别复读上轮模板.\n"
+        "\n"
+    ) if st.recent_openers else ""
 
     # 主人 2026-05-27 三轮升级『余韵后还能再次被操高潮』
     # arc_count > 1 → 身体记忆 + 更敏感 + 累 (人类正常性交 multi-round 状态)
@@ -3033,8 +3031,11 @@ def build_phase_advance_hint(
         + personality_block
         + sensory_block
         + opener_blocklist_line
+        # 主人 2026-05-29 Round 9: bucket turn_count / arc_count 防 cache miss
+        # (st.turn_count 每轮 +1, arc_count 跨轮变化, 直接字符串拼接破坏 prefix 字节稳定)
         + f"【★ Phase {current_meta['name']} → {next_meta['name']}】 "
-        + f"(持续 {st.turn_count}/{stuck_thr}, arc#{st.arc_count}, rot#{rotation})\n"
+        + f"({'首轮' if st.turn_count == 0 else ('卡顿' if st.turn_count >= stuck_thr else '进行中')}, "
+        + f"{'首 arc' if st.arc_count <= 1 else '多 arc'})\n"
         + f"{advance_rule}.\n"
         + f"summary: {next_meta['summary']}\n"
         + f"生理: {' / '.join(rotated_physical)}\n"

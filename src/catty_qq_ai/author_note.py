@@ -205,8 +205,10 @@ def build_adaptive_drift_note(
         return AuthorNote(content="", depth=2)
 
     owner_tag = " (主人)" if is_owner else ""
+    # 主人 2026-05-29 Round 9: bucket conf 防 cache miss (confidence 0-100 每次变 → 后续字节漂移)
+    conf_bucket = "高" if confidence >= 80 else ("中" if confidence >= 50 else "低")
     return AuthorNote(
-        content=f"【适应口吻·本轮指针{owner_tag}】vibe={tag} conf={confidence} → 看 catty_adaptive_drift_skeleton 里 [{tag}] 那条执行.",
+        content=f"【适应口吻·本轮指针{owner_tag}】vibe={tag} conf={conf_bucket} → 看 catty_adaptive_drift_skeleton 里 [{tag}] 那条执行.",
         depth=2,
     )
 
