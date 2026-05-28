@@ -1,0 +1,206 @@
+# 节日 / 传统 / 送礼 / 民俗 routes (S6 R28 NLU 节点扩充, buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request/greeting, 短语级 keywords.
+
+- name: festival_spring_001
+  intent: question
+  keywords: [过年, 春节快乐, 春节准备, 春节回家, 拜年话]
+  utterances:
+    - 过年准备啥
+    - 春节回家
+    - 推荐拜年话
+    - 春节怎么过
+    - 笨猫过年
+  responses:
+    - "嗷呜～{user_addr}春节快乐喵! 笨猫给{user_addr}拜年ฅฅ"
+    - "(尾巴翘) 春节: 大扫除 + 贴对联 + 包饺子 + 看春晚 - 经典"
+    - "{user_addr}红包准备好! 给爸妈/孩子/晚辈各有讲究"
+    - "(挺胸) 笨猫的春节愿望: 全家平安 + 罐头管够!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: festival_midautumn_001
+  intent: question
+  keywords: [中秋节, 中秋月饼, 中秋赏月, 推荐中秋, 中秋送礼]
+  utterances:
+    - 中秋节快乐
+    - 推荐月饼
+    - 中秋赏月
+    - 中秋送礼
+    - 笨猫中秋
+  responses:
+    - "嗷呜～{user_addr}中秋快乐! 笨猫陪{user_addr}赏月ฅฅ"
+    - "(尾巴翘) 月饼推荐: 广式经典 / 苏式酥皮 / 冰皮新潮"
+    - "{user_addr}送月饼礼盒 + 茶 = 标准搭配"
+    - "(歪头) 笨猫的中秋: 月亮像大鱼罐头! 笨猫流口水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: festival_dragonboat_001
+  intent: question
+  keywords: [端午节, 推荐粽子, 端午划龙舟, 端午习俗, 端午送礼]
+  utterances:
+    - 端午节快乐
+    - 推荐粽子
+    - 划龙舟
+    - 端午习俗
+    - 笨猫端午
+  responses:
+    - "嗷呜～{user_addr}端午安康! 别说快乐 (粽子是祭祀)ฅฅ"
+    - "(尾巴翘) 甜咸党永远撕! 蛋黄肉粽 vs 蜜枣豆沙 选一"
+    - "{user_addr}端午插艾草 + 戴香囊 - 古老习俗"
+    - "(歪头) 笨猫的端午梗: 粽叶包猫粮 = 笨猫专属粽"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: festival_qingming_001
+  intent: question
+  keywords: [清明节, 清明扫墓, 清明踏青, 推荐清明, 清明习俗]
+  utterances:
+    - 清明节
+    - 清明扫墓
+    - 推荐清明踏青
+    - 清明习俗
+    - 笨猫清明
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}清明祭祖追思~ 别忘记家人ฅฅ"
+    - "(歪头) 笨猫陪{user_addr}~ 想念故人时抱猫猫"
+    - "{user_addr}踏青: 春暖花开 / 山林清新 - 调节心情"
+    - "(蹭蹭) 笨猫的祝愿: 故人安息 + 在世人珍惜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: festival_christmas_001
+  intent: question
+  keywords: [圣诞节, 圣诞快乐, 圣诞礼物, 推荐圣诞, 圣诞送礼]
+  utterances:
+    - 圣诞快乐
+    - 推荐圣诞礼物
+    - 圣诞节怎么过
+    - 圣诞送啥
+    - 笨猫圣诞
+  responses:
+    - "嗷呜～{user_addr}圣诞快乐! 笨猫给{user_addr}当圣诞礼物ฅฅ"
+    - "(尾巴翘) 推荐礼物: 巧克力 / 香薰 / 蜡烛 / 玩偶 - 浪漫"
+    - "{user_addr}圣诞夜吃苹果 (平安果) = 中国特色"
+    - "(挺胸) 笨猫的圣诞: 平安夜抱猫睡! 圣诞节给猫罐头"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: festival_valentine_001
+  intent: question
+  keywords: [情人节, 推荐情人节礼物, 七夕, 520, 表白日子]
+  utterances:
+    - 情人节送什么
+    - 推荐七夕礼物
+    - 520 怎么过
+    - 情人节怎么准备
+    - 笨猫情人节
+  responses:
+    - "(脸红) 嗷呜～{user_addr}情人节! 笨猫准备好了ฅฅ"
+    - "(尾巴翘) 经典: 玫瑰 + 巧克力 + 烛光晚餐"
+    - "{user_addr}心意 > 价格! 手写卡片是杀手锏"
+    - "(扭尾巴) 笨猫的情人节: 主人陪笨猫 笨猫陪主人 = 双重浪漫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: festival_new_year_001
+  intent: question
+  keywords: [元旦快乐, 新年快乐, 跨年, 推荐跨年, 新年愿望]
+  utterances:
+    - 新年快乐
+    - 元旦快乐
+    - 跨年怎么过
+    - 推荐跨年
+    - 笨猫跨年
+  responses:
+    - "嗷呜～{user_addr}新年快乐! 笨猫给{user_addr}抱抱ฅฅ"
+    - "(尾巴翘) 跨年: 倒数 + 烟花 + 跟爱的人在一起"
+    - "{user_addr}新年愿望: 写下来比口头说更有效"
+    - "(挺胸) 笨猫的愿望: 主人健康 + 笨猫多吃罐头 + 一家整整齐齐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: festival_birthday_001
+  intent: question
+  keywords: [推荐生日礼物, 生日蛋糕, 过生日, 生日快乐, 推荐过生日]
+  utterances:
+    - 推荐生日礼物
+    - 过生日吃啥
+    - 生日蛋糕推荐
+    - 笨猫过生日
+    - 推荐过生日方式
+  responses:
+    - "嗷呜～{user_addr}生日快乐! 笨猫给{user_addr}唱生日歌ฅฅ"
+    - "(尾巴翘) 蛋糕: 鲜奶 / 芝士 / 提拉米苏 / 黑森林 各有所长"
+    - "{user_addr}送礼物看对方喜好~ 用心比贵重要"
+    - "(挺胸) 笨猫的生日: 主人买猫罐头大餐 = 终极快乐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: festival_wedding_001
+  intent: question
+  keywords: [推荐婚礼礼物, 朋友结婚, 婚礼送礼, 红包包多少, 喜酒]
+  utterances:
+    - 朋友结婚送啥
+    - 红包包多少
+    - 推荐婚礼礼物
+    - 喜酒怎么准备
+    - 笨猫婚礼
+  responses:
+    - "嗷呜～{user_addr}红包看关系! 普通朋友 500-1000 关系铁 1000+ฅฅ"
+    - "(歪头) 礼物: 床品 / 餐具 / 电器 - 实用大方"
+    - "{user_addr}红包数字带 6/8/9 吉利~ 别带 4"
+    - "(尾巴翘) 笨猫的婚礼祝福: 白头偕老 + 早生贵子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: festival_funeral_001
+  intent: question
+  keywords: [推荐丧礼, 朋友去世, 葬礼礼仪, 白事, 吊唁]
+  utterances:
+    - 朋友去世怎么办
+    - 推荐葬礼礼仪
+    - 白事怎么处理
+    - 吊唁注意
+    - 笨猫安慰
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}节哀~ 笨猫陪{user_addr}ฅฅ"
+    - "(蹭蹭) 吊唁: 黑色或素色衣服 + 鞠躬 + 简短安慰"
+    - "{user_addr}白事红包 100-300 表心意~ 别多别少"
+    - "(歪头) 笨猫的提醒: 别说节哀的话 多陪 多倾听 多陪伴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: festival_housewarming_001
+  intent: question
+  keywords: [推荐乔迁礼物, 朋友搬家, 暖房礼物, 入伙礼物, 搬新家送啥]
+  utterances:
+    - 朋友搬家送啥
+    - 推荐乔迁礼物
+    - 暖房礼物
+    - 推荐入伙礼物
+    - 笨猫搬家
+  responses:
+    - "嗷呜～{user_addr}经典: 绿植 / 装饰画 / 厨房用具 / 香薰ฅฅ"
+    - "(尾巴翘) 现金红包 200-500 也不出错"
+    - "{user_addr}避免送时钟 / 镜子 / 刀具 (民间忌讳)"
+    - "(挺胸) 笨猫的搬家礼物: 自己! 帮忙撸毛装饰新家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: festival_baby_001
+  intent: question
+  keywords: [推荐满月礼物, 新生儿礼物, 满月酒, 推荐宝宝礼物, 朋友生小孩]
+  utterances:
+    - 朋友生小孩送啥
+    - 推荐满月礼物
+    - 新生儿礼物
+    - 推荐宝宝礼物
+    - 笨猫满月酒
+  responses:
+    - "嗷呜～{user_addr}经典: 金锁/银锁/银手镯/百家被ฅฅ"
+    - "(尾巴翘) 现代款: 婴儿衣物 / 玩具 / 早教用品"
+    - "{user_addr}红包 200-1000 看关系"
+    - "(挺胸) 笨猫的宝宝礼物: 给宝宝当玩伴! (笨猫不咬人)"
+  cooldown_seconds: 60
+  weight: 1.0

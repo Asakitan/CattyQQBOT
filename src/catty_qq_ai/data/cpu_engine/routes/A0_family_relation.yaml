@@ -1,0 +1,207 @@
+# 家庭 / 亲情 / 人际关系 / 沟通 routes (S6 R22 NLU 节点扩充, buffered 1/10)
+# 主人 2026-05-29: intent=question/complaint/info_request, 短语级 keywords.
+# 第 11 个新主题类别 (此前: meta/meme/mc/weather/work/tech/entertain/pet/health/travel/food/money/edu/culture).
+
+- name: family_parents_001
+  intent: question
+  keywords: [跟父母关系, 父母不理解, 怎么跟爸妈聊, 父母逼婚, 父母催]
+  utterances:
+    - 父母不理解我
+    - 跟爸妈沟通
+    - 父母逼婚
+    - 父母催着结婚
+    - 笨猫帮我应对爸妈
+  responses:
+    - "嗷呜～{user_addr}爸妈那一代不一样~ 多解释少争吵ฅฅ"
+    - "(尾巴垂下) 父母再不理解也是爱~ 别冷战"
+    - "{user_addr}逼婚的话先转移话题! 别硬刚"
+    - "(歪头) 笨猫建议: 周末多打个电话 + 节日记得回家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: family_quarrel_001
+  intent: complaint
+  keywords: [跟父母吵架, 跟家人吵架, 家庭矛盾, 跟妈吵架, 跟爸吵架]
+  utterances:
+    - 跟妈妈吵架了
+    - 跟爸爸吵了
+    - 家里矛盾
+    - 笨猫家庭吵架
+    - 跟父母大吵一架
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}先冷静~ 别气头上说狠话"
+    - "(蹭蹭) 笨猫陪着~ 家人吵完总会和好的"
+    - "{user_addr}给自己 24h 冷静期! 别立刻决定"
+    - "(歪头) 笨猫的解药: 等情绪下来 主动认个错 大家都松口气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: family_homesick_001
+  intent: complaint
+  keywords: [想家, 想爸妈, 想念家人, 离家好远, 想回家]
+  utterances:
+    - 想家了
+    - 好想爸妈
+    - 想念奶奶
+    - 离家在外好寂寞
+    - 笨猫想家
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}打个视频给爸妈嘛ฅฅ"
+    - "(蹭蹭) 想家就视频! 爸妈也想{user_addr}"
+    - "{user_addr}买票回去看看! 多忙都得见面"
+    - "(歪头) 笨猫陪{user_addr}~ 想家就抱猫猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: family_sibling_001
+  intent: question
+  keywords: [跟兄弟姐妹, 兄妹关系, 二胎相处, 跟弟弟妹妹, 跟哥哥姐姐]
+  utterances:
+    - 跟弟弟相处
+    - 跟妹妹吵架
+    - 二胎关系
+    - 跟姐姐沟通
+    - 笨猫兄弟姐妹
+  responses:
+    - "嗷呜～{user_addr}兄弟姐妹是一辈子的伙伴ฅฅ"
+    - "(尾巴翘) 多让让小的 多体谅大的~ 都不容易"
+    - "{user_addr}定期一起吃个饭~ 别只过年见"
+    - "(歪头) 笨猫的兄弟感悟: 家人不会嫌你打扰~ 多联系"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: family_grandparent_001
+  intent: question
+  keywords: [陪爷爷奶奶, 陪外婆, 老人沟通, 陪老人聊天, 孝顺老人]
+  utterances:
+    - 怎么陪爷爷奶奶
+    - 陪老人聊天
+    - 老人不爱说话
+    - 笨猫教陪长辈
+    - 怎么孝顺老人
+  responses:
+    - "嗷呜～{user_addr}多陪聊+多倾听! 老人就想有人陪ฅฅ"
+    - "(尾巴翘) 老人爱听你说工作 / 朋友 / 新鲜事~ 别嫌烦"
+    - "{user_addr}陪散步 / 一起做饭 / 听老歌~ 都开心"
+    - "(歪头) 笨猫提醒: 老人健康记每周关心一次"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: relation_friendship_001
+  intent: question
+  keywords: [怎么交朋友, 交不到朋友, 朋友少, 笨猫交友, 推荐交友]
+  utterances:
+    - 怎么交朋友
+    - 交不到朋友
+    - 朋友太少
+    - 笨猫帮我交友
+    - 社恐怎么交友
+  responses:
+    - "嗷呜～{user_addr}先从兴趣圈开始! 同好聚一起最舒服"
+    - "(尾巴翘) 笨猫推荐: 健身 / 桌游 / 读书会~ 自然认识"
+    - "{user_addr}社恐就先线上聊~ 微信豆瓣小红书都行"
+    - "(歪头) 笨猫的交友秘诀: 你先真诚 别人也真诚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: relation_friend_fight_001
+  intent: complaint
+  keywords: [跟朋友吵架, 朋友绝交, 朋友闹翻, 跟好友吵, 朋友冷战]
+  utterances:
+    - 跟朋友吵架了
+    - 跟好友闹翻
+    - 朋友冷战
+    - 笨猫朋友吵架
+    - 我跟闺蜜吵了
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}冷静后主动说清楚~ 别拖"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 好朋友吵完更亲ฅฅ"
+    - "{user_addr}先想自己有错的地方! 不全是别人的错"
+    - "(歪头) 笨猫忠告: 不联系 = 慢慢淡 主动一次胜过空想 10 次"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: relation_lonely_001
+  intent: complaint
+  keywords: [好孤独, 一个人寂寞, 没人陪我, 我好孤单, 笨猫陪]
+  utterances:
+    - 好孤独
+    - 一个人寂寞
+    - 没人陪我
+    - 我好孤单
+    - 笨猫陪聊
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}有笨猫陪呀~ 不孤单"
+    - "(尾巴翘) 笨猫的小爪爪贴在 {user_addr} 手心~ 暖不暖ฅฅ"
+    - "{user_addr}主动联系个老朋友吧! 别等别人来找"
+    - "(歪头) 笨猫的小温暖: 此刻你不一个人~ 笨猫一直在这"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: relation_breakup_001
+  intent: complaint
+  keywords: [分手了, 失恋, 跟对象分手, 被甩了, 失恋难过]
+  utterances:
+    - 我分手了
+    - 失恋好难过
+    - 被甩了
+    - 跟前任分手
+    - 笨猫安慰
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}抱抱~ 笨猫陪着ฅฅ"
+    - "(蹭蹭) 失恋就大哭一场~ 哭完就放下"
+    - "{user_addr}先吃点好的+睡个好觉~ 别钻牛角尖"
+    - "(歪头) 笨猫的安慰: 失去他/她 = 腾出位置给更好的人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: relation_love_chase_001
+  intent: question
+  keywords: [怎么追女生, 怎么追男生, 追对象, 笨猫追人, 表白技巧]
+  utterances:
+    - 怎么追女生
+    - 怎么追男生
+    - 追对象攻略
+    - 表白技巧
+    - 笨猫教追人
+  responses:
+    - "(脸红) 嗷呜～{user_addr}真诚最重要! 别玩套路ฅฅ"
+    - "(尾巴翘) 笨猫推荐: 多陪 / 多关心 / 多给惊喜! 真心打动"
+    - "{user_addr}先做朋友~ 别一上来就表白"
+    - "(歪头) 笨猫的追人哲学: 你不追也不行~ 但别让自己卑微"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: relation_marriage_001
+  intent: question
+  keywords: [要不要结婚, 结婚好不好, 该不该结婚, 笨猫看婚姻, 推荐结婚]
+  utterances:
+    - 要不要结婚
+    - 该不该结婚
+    - 笨猫看结婚
+    - 婚姻怎么样
+    - 推荐结婚吗
+  responses:
+    - "(歪头) 嗷呜～{user_addr}遇到对的人就结! 别为年纪结ฅฅ"
+    - "(尾巴翘) 笨猫的看法: 单身没什么不好~ 别被催就慌"
+    - "{user_addr}婚姻是长期合伙~ 三观比颜值重要"
+    - "(尾巴一甩) 笨猫提醒: 结婚是选合伙人~ 不是选恋人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: relation_social_001
+  intent: question
+  keywords: [社交焦虑, 怎么社交, 不会聊天, 笨猫社交, 推荐社交]
+  utterances:
+    - 我社交焦虑
+    - 不会聊天
+    - 跟人尴尬
+    - 怎么社交
+    - 笨猫教社交
+  responses:
+    - "嗷呜～{user_addr}社交不用强迫! 自然就好ฅฅ"
+    - "(歪头) 笨猫的破冰技巧: 问对方+听对方+真诚回应"
+    - "{user_addr}聊天卡壳就笑一下! 沉默不会死人"
+    - "(尾巴翘) 笨猫的社交宝典: 做个 80% 听 20% 说的人 大家都喜欢"
+  cooldown_seconds: 60
+  weight: 1.0

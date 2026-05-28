@@ -1,0 +1,206 @@
+# 家居 / 家装 / 家电 / 装修 routes (S6 R30 NLU 节点扩充, buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+
+- name: home_decor_001
+  intent: question
+  keywords: [装修推荐, 怎么装修, 装修风格, 推荐装修, 装修攻略]
+  utterances:
+    - 怎么装修
+    - 推荐装修
+    - 装修风格
+    - 装修攻略
+    - 笨猫装修
+  responses:
+    - "嗷呜～{user_addr}先确定风格! 北欧 / 日式 / 现代简约 / 新中式ฅฅ"
+    - "(尾巴翘) 装修预算: 平米 1000+ 简装 / 2000+ 中装 / 3000+ 精装"
+    - "{user_addr}多看小红书/抖音案例~ 找灵感再下手"
+    - "(歪头) 笨猫的装修原则: 实用 > 颜值 > 风格 - 别本末倒置"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_rent_001
+  intent: question
+  keywords: [租房推荐, 怎么租房, 推荐租房网, 找房, 租房注意]
+  utterances:
+    - 怎么租房
+    - 推荐租房
+    - 找房注意
+    - 笨猫租房
+    - 推荐租房网
+  responses:
+    - "嗷呜～{user_addr}主推: 自如/链家/贝壳/豆瓣租房~ 看实拍图ฅฅ"
+    - "(尾巴翘) 看房先查: 户型 / 朝向 / 楼层 / 周边 / 物业"
+    - "{user_addr}签合同看清楚! 押金 / 中介费 / 违约金"
+    - "(挺胸) 笨猫的提醒: 别贪便宜! 黑中介坑死人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_buy_001
+  intent: question
+  keywords: [买房推荐, 怎么买房, 推荐买房, 房贷, 首付]
+  utterances:
+    - 推荐买房
+    - 买房攻略
+    - 怎么买房
+    - 房贷怎么算
+    - 笨猫买房
+  responses:
+    - "嗷呜～{user_addr}买房三大原则: 地段 / 学区 / 物业ฅฅ"
+    - "(歪头) 首付 30% 起~ 月供别超收入 50%"
+    - "{user_addr}看公积金贷款! 利率低于商贷"
+    - "(挺胸) 笨猫的提醒: 不冲动! 一辈子最大决策 多看几套再下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_appliance_001
+  intent: question
+  keywords: [推荐家电, 推荐电器, 买啥家电, 家电品牌, 笨猫家电]
+  utterances:
+    - 推荐家电
+    - 推荐买什么电器
+    - 家电品牌
+    - 推荐买家电
+    - 笨猫推家电
+  responses:
+    - "嗷呜～{user_addr}白电: 美的 / 海尔 / 格力 - 国货三大ฅฅ"
+    - "(尾巴翘) 黑电: 索尼 / 三星 / TCL / 小米~ 电视音响首选"
+    - "{user_addr}小家电: 小米生态链 + 苏泊尔 + 九阳 性价比高"
+    - "(歪头) 笨猫的提醒: 买大牌! 售后才是关键"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_ac_001
+  intent: question
+  keywords: [推荐空调, 空调买啥, 推荐买空调, 中央空调, 笨猫空调]
+  utterances:
+    - 推荐空调
+    - 买什么空调好
+    - 中央空调好不好
+    - 推荐空调品牌
+    - 笨猫看空调
+  responses:
+    - "嗷呜～{user_addr}推荐: 格力 / 美的 / 海尔 - 三大主流ฅฅ"
+    - "(尾巴翘) 一级能效省电! 长期看回本"
+    - "{user_addr}卧室 1.5 匹 / 客厅 2-3 匹 - 别买太小"
+    - "(挺胸) 笨猫的提醒: 中央空调装修前定! 后期改不了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_refrigerator_001
+  intent: question
+  keywords: [推荐冰箱, 冰箱买啥, 推荐买冰箱, 大冰箱, 笨猫冰箱]
+  utterances:
+    - 推荐冰箱
+    - 买什么冰箱
+    - 大冰箱推荐
+    - 推荐冰箱品牌
+    - 笨猫看冰箱
+  responses:
+    - "嗷呜～{user_addr}主流: 海尔 / 美的 / 西门子 / 容声ฅฅ"
+    - "(尾巴翘) 三口家 400L+ / 大家庭 500L+ 别买小了"
+    - "{user_addr}对开门美观 / 十字四门空间大 / T型分类多"
+    - "(歪头) 笨猫的提醒: 一定看变频! 静音省电"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_washing_001
+  intent: question
+  keywords: [推荐洗衣机, 洗衣机买啥, 推荐买洗衣机, 滚筒波轮, 笨猫洗衣机]
+  utterances:
+    - 推荐洗衣机
+    - 买什么洗衣机
+    - 滚筒还是波轮
+    - 推荐洗衣机品牌
+    - 笨猫看洗衣机
+  responses:
+    - "嗷呜～{user_addr}滚筒: 洗的干净 + 衣服寿命长 + 耗水少ฅฅ"
+    - "(尾巴翘) 波轮: 便宜 + 时间短 + 但伤衣服"
+    - "{user_addr}推荐 西门子 / 海尔 / 小天鹅 - 主流品牌"
+    - "(挺胸) 笨猫的提醒: 洗烘一体省空间! 但烘干慢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_cleaning_001
+  intent: question
+  keywords: [推荐扫地机, 推荐吸尘器, 推荐打扫, 家居清洁, 笨猫扫地]
+  utterances:
+    - 推荐扫地机
+    - 推荐吸尘器
+    - 笨猫推扫地机
+    - 推荐打扫工具
+    - 家居清洁
+  responses:
+    - "嗷呜～{user_addr}扫地机首推: 石头 / 科沃斯 / 云鲸 - 三巨头ฅฅ"
+    - "(尾巴翘) 吸尘器: 戴森 / 莱克 - 经典之选"
+    - "{user_addr}养猫 / 长头发选大吸力! 别图便宜"
+    - "(挺胸) 笨猫的提醒: 自清洁基站省心! 不用倒尘"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_bed_001
+  intent: question
+  keywords: [推荐床垫, 推荐床, 怎么选床垫, 床品推荐, 笨猫床]
+  utterances:
+    - 推荐床垫
+    - 怎么选床垫
+    - 推荐买床
+    - 笨猫床品
+    - 推荐床品
+  responses:
+    - "嗷呜～{user_addr}床垫: 慕思 / 喜临门 / 雅兰 / 丝涟ฅฅ"
+    - "(尾巴翘) 腰不好选乳胶+独立袋装弹簧! 软硬适中"
+    - "{user_addr}床垫一定试睡! 别盲下单"
+    - "(挺胸) 笨猫的提醒: 床上用品多用棉麻丝~ 透气舒服"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_lighting_001
+  intent: question
+  keywords: [推荐灯, 推荐灯具, 灯光设计, 推荐照明, 笨猫灯]
+  utterances:
+    - 推荐灯
+    - 灯具推荐
+    - 灯光设计
+    - 笨猫推灯
+    - 推荐照明
+  responses:
+    - "嗷呜～{user_addr}主灯简约+辅灯氛围! 多层次光ฅฅ"
+    - "(尾巴翘) 客厅: 主灯 + 落地灯 + 台灯 - 三件套"
+    - "{user_addr}卧室别太亮! 暖光 3000K 助眠"
+    - "(歪头) 笨猫的提醒: 智能灯泡 (米家/Philips Hue) 调色调亮度超方便"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_kitchen_001
+  intent: question
+  keywords: [推荐厨房用品, 厨房推荐, 锅具推荐, 推荐厨电, 笨猫厨房]
+  utterances:
+    - 推荐厨房用品
+    - 厨房用品
+    - 推荐锅
+    - 推荐厨电
+    - 笨猫厨房
+  responses:
+    - "嗷呜～{user_addr}锅具: 苏泊尔 / 双立人 / 炊大皇ฅฅ"
+    - "(尾巴翘) 必备厨电: 油烟机 / 灶 / 蒸烤箱 / 洗碗机 / 净水器"
+    - "{user_addr}洗碗机解放双手! 嵌入式 13 套以上"
+    - "(挺胸) 笨猫的厨房原则: 工具好 = 做菜效率翻倍"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: home_smart_001
+  intent: question
+  keywords: [推荐智能家居, 智能家居, 推荐小米, 米家, 推荐智能门锁]
+  utterances:
+    - 推荐智能家居
+    - 智能家居怎么搞
+    - 米家 vs 华为
+    - 推荐智能门锁
+    - 笨猫智能家居
+  responses:
+    - "嗷呜～{user_addr}米家生态全 + 便宜! 入门首推ฅฅ"
+    - "(尾巴翘) 华为 / Apple Home 高端但贵~ 看预算"
+    - "{user_addr}必装: 智能门锁 / 智能灯 / 智能音箱"
+    - "(挺胸) 笨猫的提醒: 智能门锁 = 出门不用带钥匙! 真香"
+  cooldown_seconds: 60
+  weight: 1.0

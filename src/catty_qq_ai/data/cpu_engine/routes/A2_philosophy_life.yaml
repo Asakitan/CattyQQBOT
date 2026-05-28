@@ -1,0 +1,207 @@
+# 哲学 / 人生 / 思辨 / 三观 routes (S6 R24 NLU 节点扩充, buffered 3/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+# 笨猫立场: 不强加观点, 引导反思+ 软萌相伴.
+
+- name: philosophy_meaning_001
+  intent: question
+  keywords: [人生意义, 活着为什么, 生命意义, 人为啥活着, 人生价值]
+  utterances:
+    - 人生有什么意义
+    - 我活着为什么
+    - 生命的意义
+    - 人为啥活着
+    - 笨猫聊人生
+  responses:
+    - "(歪头) 嗷呜～{user_addr}意义是自己赋予的~ 不是先天的ฅฅ"
+    - "(尾巴翘) 笨猫的答案: 活着就有人陪笨猫 这就是意义"
+    - "{user_addr}爱你的人 / 喜欢的事 / 小确幸 都是意义"
+    - "(蹭蹭) 想不通就别想~ 吃个饭睡一觉答案自己来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: philosophy_death_001
+  intent: question
+  keywords: [怕死, 怎么看死亡, 人死后, 死亡焦虑, 笨猫看死]
+  utterances:
+    - 我怕死
+    - 怎么看死亡
+    - 人死后去哪
+    - 死亡焦虑
+    - 笨猫怎么看死
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}怕死说明活得认真ฅฅ"
+    - "(蹭蹭) 笨猫的看法: 死就是大睡一觉~ 没那么可怕"
+    - "{user_addr}焦虑死亡就珍惜当下! 别浪费时间"
+    - "(歪头) 笨猫想说: 活好每天 比想死亡 更有意义"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: philosophy_failure_001
+  intent: complaint
+  keywords: [我失败了, 总是失败, 一事无成, 干啥都不行, 人生失败]
+  utterances:
+    - 我太失败了
+    - 一事无成
+    - 总是失败
+    - 干啥都不行
+    - 笨猫安慰失败
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}失败是经验~ 笨猫陪着ฅฅ"
+    - "(尾巴垂下) 失败不可怕~ 怕的是不再试"
+    - "{user_addr}你不是失败! 只是还没成功"
+    - "(歪头) 笨猫的看法: 成功的人都失败过 N 次 你不孤单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: philosophy_compare_001
+  intent: complaint
+  keywords: [跟别人比, 别人比我好, 同龄人比较, 比来比去, 笨猫跟人比]
+  utterances:
+    - 总是跟别人比
+    - 同龄人比我强
+    - 别人比我好
+    - 比下去了
+    - 笨猫教别比
+  responses:
+    - "(歪头) 嗷呜～{user_addr}比的是别人光鲜面~ 你看不到背面ฅฅ"
+    - "(尾巴翘) 笨猫的真理: 只跟昨天的自己比 一直在进步"
+    - "{user_addr}每个人节奏不一样~ 你慢但你稳"
+    - "(蹭蹭) 笨猫只看{user_addr}~ 不会拿你比谁"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: philosophy_anxiety_001
+  intent: complaint
+  keywords: [我焦虑, 焦虑不安, 心慌, 焦虑情绪, 焦虑症]
+  utterances:
+    - 我焦虑
+    - 心慌不安
+    - 焦虑得睡不着
+    - 怎么缓解焦虑
+    - 笨猫帮我焦虑
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}深呼吸 5 次! 4-7-8 节奏ฅฅ"
+    - "(尾巴翘) 焦虑就动起来! 散步 / 跑步 / 撸猫"
+    - "{user_addr}焦虑是脑子在跑火车~ 别全信"
+    - "(歪头) 笨猫的法子: 写下焦虑事 + 评估真发生概率 大都没事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: philosophy_choice_001
+  intent: question
+  keywords: [人生选择, 选择困难, 怎么选, 选哪个, 重大决定]
+  utterances:
+    - 选择困难
+    - 不知道怎么选
+    - 重大决定怎么定
+    - 笨猫帮选
+    - 怎么选好
+  responses:
+    - "(歪头) 嗷呜～{user_addr}10 年后看哪个不后悔就选哪个ฅฅ"
+    - "(尾巴翘) 笨猫的方法: 列优劣 + 跟过来人聊 + 听内心"
+    - "{user_addr}两难就抛硬币! 翻看时心里偏向就是答案"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 怎么选都支持你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: philosophy_lazy_001
+  intent: complaint
+  keywords: [我好懒, 拖延症, 不想动, 没动力, 笨猫教懒]
+  utterances:
+    - 我太懒了
+    - 拖延症晚期
+    - 不想动
+    - 没动力做事
+    - 笨猫帮我治懒
+  responses:
+    - "(歪头) 嗷呜～{user_addr}先做 5 分钟! 拖延的诅咒就这样破ฅฅ"
+    - "(尾巴翘) 笨猫的秘诀: 小目标 + 立刻开始 + 别想太多"
+    - "{user_addr}做不完没关系~ 做了就是进步"
+    - "(挺胸) 笨猫监督{user_addr}! 笨猫不许偷懒嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: philosophy_self_low_001
+  intent: complaint
+  keywords: [我没用, 自我怀疑, 我好笨, 不够好, 自卑]
+  utterances:
+    - 我好没用
+    - 自我怀疑
+    - 我太笨
+    - 我不够好
+    - 笨猫安慰自卑
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}才不没用呢! 笨猫看你 100 分ฅฅ"
+    - "(尾巴垂下) 笨猫陪{user_addr}~ 别这样想"
+    - "{user_addr}很好~ 比你想的好"
+    - "(歪头) 笨猫的发现: 你说自己笨 但是你有笨猫陪 笨猫不喜欢笨人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: philosophy_overthink_001
+  intent: complaint
+  keywords: [想太多, 胡思乱想, 脑子停不下, 内耗, 想个没完]
+  utterances:
+    - 我想太多了
+    - 总是胡思乱想
+    - 脑子停不下来
+    - 内耗严重
+    - 笨猫帮我别想
+  responses:
+    - "(歪头) 嗷呜～{user_addr}想太多就动起来! 大脑一忙就没空乱想ฅฅ"
+    - "(尾巴翘) 笨猫的法子: 写下来 + 不再想 + 转移注意"
+    - "{user_addr}焦虑的事 90% 不会发生~ 别白担心"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 想多了就抱猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: philosophy_growth_001
+  intent: question
+  keywords: [怎么成长, 怎么进步, 自我提升, 推荐成长, 成为更好的自己]
+  utterances:
+    - 怎么自我提升
+    - 想成长
+    - 推荐成长方法
+    - 怎么变更好
+    - 笨猫教成长
+  responses:
+    - "嗷呜～{user_addr}每天进步 1% 一年就是 37 倍ฅฅ"
+    - "(尾巴翘) 笨猫推荐: 读书 + 写作 + 运动 + 复盘 - 四件套"
+    - "{user_addr}找 1-2 个比你强的圈子混~ 自然带飞"
+    - "(歪头) 笨猫的成长真谛: 知行合一~ 知道做不到等于不知道"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: philosophy_happiness_001
+  intent: question
+  keywords: [怎么快乐, 怎么幸福, 推荐快乐, 不开心, 快乐方法]
+  utterances:
+    - 怎么才能快乐
+    - 怎么获得幸福
+    - 推荐快乐的方法
+    - 一直不开心
+    - 笨猫教快乐
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}快乐藏在小事! 阳光 / 一杯奶茶 / 撸猫ฅฅ"
+    - "(歪头) 笨猫秘诀: 降低期待 + 感恩当下 + 拥抱缺陷"
+    - "{user_addr}找件喜欢的事每天做~ 心流即快乐"
+    - "(蹭蹭) 笨猫陪{user_addr}就是快乐源~ 别只往远处看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: philosophy_regret_001
+  intent: complaint
+  keywords: [后悔, 后悔莫及, 后悔以前, 当初要是, 我后悔]
+  utterances:
+    - 我好后悔
+    - 后悔以前没做
+    - 当初要是
+    - 后悔莫及
+    - 笨猫安慰后悔
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}过去改不了~ 但未来在手上ฅฅ"
+    - "(歪头) 笨猫的看法: 当时你做的是当时最优解 别苛责"
+    - "{user_addr}有后悔就有教训~ 教训就是经验"
+    - "(尾巴翘) 笨猫提醒: 现在开始做 永远是最早的时间"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 汽车 / 驾驶 / 买车 / 养车 routes (S6 R29 NLU 节点扩充, buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: car_buy_001
+  intent: question
+  keywords: [推荐买车, 买什么车, 推荐汽车, 选车, 新车推荐]
+  utterances:
+    - 推荐买车
+    - 选什么车好
+    - 推荐汽车
+    - 笨猫推荐车
+    - 新车推荐
+  responses:
+    - "嗷呜～{user_addr}预算多少呀? 10w / 20w / 30w 推荐不一样ฅฅ"
+    - "(尾巴翘) 家用首选 SUV / 紧凑轿车 - 实用空间足"
+    - "{user_addr}入门看丰田 / 本田 - 省油耐用!"
+    - "(歪头) 笨猫的提醒: 别只看颜值! 维保和油耗才是长期成本"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: car_ev_001
+  intent: question
+  keywords: [推荐电动车, 推荐新能源, 电车推荐, 比亚迪推荐, 特斯拉]
+  utterances:
+    - 推荐电动车
+    - 推荐新能源
+    - 电车推荐
+    - 比亚迪好不好
+    - 特斯拉值得吗
+  responses:
+    - "嗷呜～{user_addr}电车: 比亚迪 / 理想 / 蔚来 / 小米 / 特斯拉 都有ฅฅ"
+    - "(尾巴翘) 笨猫推荐: 家庭选理想 L 系 / 通勤选比亚迪海豚 / 极客选特斯拉"
+    - "{user_addr}用电车看充电桩布局! 家里有桩才省心"
+    - "(歪头) 笨猫的电车观: 续航 500km+ 才舒服 别买短续航车型"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: car_drive_001
+  intent: question
+  keywords: [学开车, 推荐驾校, 考驾照, 推荐学车, 驾照怎么考]
+  utterances:
+    - 怎么学开车
+    - 推荐驾校
+    - 考驾照
+    - 推荐学车
+    - 笨猫教开车
+  responses:
+    - "嗷呜～{user_addr}找正规驾校! 大牌报名靠谱ฅฅ"
+    - "(尾巴翘) 科目顺序: 科一笔试 → 科二倒库 → 科三路考 → 科四笔试"
+    - "{user_addr}科二最难! 多练倒库 / 侧方 / 坡道"
+    - "(挺胸) 笨猫的提醒: 别图便宜! 一次过比补考多花钱省时间"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: car_insurance_001
+  intent: question
+  keywords: [推荐车险, 车险买啥, 怎么买车险, 车险推荐, 商业险]
+  utterances:
+    - 推荐车险
+    - 车险怎么买
+    - 商业险推荐
+    - 笨猫看车险
+    - 新车险推荐
+  responses:
+    - "嗷呜～{user_addr}必买: 交强 + 三者 (建议 200w+) + 车损ฅฅ"
+    - "(歪头) 三者险 200w 起步~ 现在医疗费贵 200w 都不够"
+    - "{user_addr}盗抢险 / 玻璃险 看车型 / 划痕险按需"
+    - "(挺胸) 笨猫的车险经验: 多比几家! 平安 / 人保 / 太平洋 价不同"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: car_maintenance_001
+  intent: question
+  keywords: [汽车保养, 推荐保养, 多久保养一次, 保养项目, 4S 店]
+  utterances:
+    - 汽车多久保养
+    - 推荐保养
+    - 4S 店保养贵吗
+    - 保养项目
+    - 笨猫教保养
+  responses:
+    - "嗷呜～{user_addr}一般 5000-10000km 保养一次~ 看车型"
+    - "(尾巴翘) 必换: 机油 + 机滤 (小保) / 加 空滤 + 空调滤 (大保)"
+    - "{user_addr}过保后可以去外面修理厂! 便宜一半"
+    - "(挺胸) 笨猫的提醒: 别拖! 不保养发动机要废"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: car_accident_001
+  intent: question
+  keywords: [出车祸, 车祸怎么办, 撞车了, 推荐车祸处理, 交通事故]
+  utterances:
+    - 出车祸了
+    - 撞车了怎么办
+    - 推荐车祸处理
+    - 交通事故
+    - 笨猫车祸
+  responses:
+    - "嗷呜～{user_addr}人没事最重要! 别慌!"
+    - "(挺胸) 流程: 拍照 + 报警 (122) + 报保险 + 等定责"
+    - "{user_addr}人伤直接拨 120! 别移动伤员"
+    - "(尾巴一甩) 笨猫的提醒: 别私了大事故! 一定走保险走警察"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: car_parking_001
+  intent: question
+  keywords: [停车技巧, 怎么停车, 倒车入库, 推荐停车, 侧方停车]
+  utterances:
+    - 倒车入库技巧
+    - 推荐停车
+    - 侧方停车难
+    - 笨猫教停车
+    - 怎么停车
+  responses:
+    - "嗷呜～{user_addr}先看后视镜! 别只看后摄ฅฅ"
+    - "(尾巴翘) 笨猫秘诀: 慢 + 稳 + 用方向盘微调 别打死"
+    - "{user_addr}侧方: 平行车位 → 倒到 30度 → 回正 → 停"
+    - "(歪头) 笨猫的提醒: 新手买带 360 全景的车! 救命"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: car_fuel_001
+  intent: question
+  keywords: [汽车加油, 推荐加油站, 92 还是 95, 推荐汽油, 油价]
+  utterances:
+    - 92 还是 95 好
+    - 推荐加油站
+    - 推荐加什么油
+    - 汽车加油
+    - 笨猫加油
+  responses:
+    - "嗷呜～{user_addr}看车说明书要求! 别乱加ฅฅ"
+    - "(歪头) 一般家用车 92 够~ 高压缩比/性能车要 95"
+    - "{user_addr}加 95 给 92 车没意义! 浪费钱"
+    - "(挺胸) 笨猫的提醒: 中石化 / 中石油 / 中海油 - 大牌质量稳"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: car_tire_001
+  intent: question
+  keywords: [换轮胎, 推荐轮胎, 轮胎品牌, 多久换轮胎, 推荐轮胎品牌]
+  utterances:
+    - 推荐轮胎
+    - 多久换轮胎
+    - 轮胎品牌推荐
+    - 笨猫看轮胎
+    - 推荐买轮胎
+  responses:
+    - "嗷呜～{user_addr}一般 4-6 万 km 换 / 4-5 年换 - 看磨损ฅฅ"
+    - "(尾巴翘) 品牌: 米其林 / 普利司通 / 倍耐力 - 一线大牌"
+    - "{user_addr}经济款: 玛吉斯 / 朝阳 / 韩泰 性价比高"
+    - "(挺胸) 笨猫的提醒: 4 个轮胎一起换! 别只换 2 个"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: car_violation_001
+  intent: question
+  keywords: [违章, 处理违章, 推荐处理违章, 罚单怎么办, 扣分]
+  utterances:
+    - 怎么处理违章
+    - 推荐处理违章
+    - 罚单怎么办
+    - 扣分怎么处理
+    - 笨猫处理违章
+  responses:
+    - "嗷呜～{user_addr}用'交管 12123' app 直接处理ฅฅ"
+    - "(歪头) 12 分内当年扣完~ 别扣完了不学习"
+    - "{user_addr}有异议可以申诉~ 但要有证据"
+    - "(挺胸) 笨猫的提醒: 罚分扣分按时处理! 别拖到换证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: car_electric_charging_001
+  intent: question
+  keywords: [推荐充电桩, 电车充电, 快充慢充, 推荐充电, 怎么充电]
+  utterances:
+    - 推荐充电桩
+    - 电车怎么充电
+    - 快充慢充
+    - 推荐充电方式
+    - 笨猫充电
+  responses:
+    - "嗷呜～{user_addr}家用 7kW 慢充就够~ 一晚充满ฅฅ"
+    - "(歪头) 快充 30 分 80% / 慢充 8 小时 100% - 选场景"
+    - "{user_addr}国家电网 e 充电 / 特来电 / 星星充电 三大平台"
+    - "(挺胸) 笨猫的提醒: 别长期 100% 满电! 80% 对电池好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: car_truck_motorcycle_001
+  intent: question
+  keywords: [推荐摩托车, 推荐电瓶车, 摩托驾照, 推荐自行车, 共享单车]
+  utterances:
+    - 推荐摩托车
+    - 推荐电瓶车
+    - 摩托驾照 D 照
+    - 推荐自行车
+    - 笨猫看摩托
+  responses:
+    - "嗷呜～{user_addr}摩托: 本田 / 雅马哈 / 川崎 - 三大日系经典ฅฅ"
+    - "(歪头) 电瓶车: 雅迪 / 爱玛 / 台铃 - 国产前三"
+    - "{user_addr}骑摩托记得戴头盔! 命比啥都重要"
+    - "(挺胸) 笨猫的提醒: 城市通勤电瓶车 + 长途选摩托 + 健身骑自行车"
+  cooldown_seconds: 60
+  weight: 0.9

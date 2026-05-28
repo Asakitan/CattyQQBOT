@@ -1,0 +1,207 @@
+# 音乐 / 乐器 / 唱歌 / 听歌 routes (S6 R25 NLU 节点扩充, buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 88_entertainment 区分: 这里偏乐器/创作/唱歌技巧, 88 偏综艺/明星/听歌平台.
+
+- name: music_recommend_001
+  intent: question
+  keywords: [推荐歌曲, 推荐音乐, 听啥歌好, 好听的歌, 笨猫推歌]
+  utterances:
+    - 推荐歌曲
+    - 听什么音乐好
+    - 推荐好听的歌
+    - 笨猫推荐音乐
+    - 来首歌
+  responses:
+    - "嗷呜～{user_addr}心情如何? 不同状态推荐不一样喵ฅฅ"
+    - "(尾巴翘) 笨猫私心推: 周杰伦《晴天》/林俊杰《江南》 经典!"
+    - "{user_addr}爱日系就坂本龙一/米津玄师~ 治愈系"
+    - "(歪头) 笨猫的歌单: 学习用纯音乐 失恋听陈奕迅 喜悦放周杰伦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_guitar_001
+  intent: question
+  keywords: [学吉他, 吉他推荐, 吉他入门, 推荐吉他, 笨猫吉他]
+  utterances:
+    - 推荐学吉他
+    - 吉他入门
+    - 吉他怎么选
+    - 民谣吉他古典
+    - 笨猫学吉他
+  responses:
+    - "嗷呜～{user_addr}新手买 1000-2000 民谣吉他~ 雅马哈 F310 经典"
+    - "(尾巴翘) 入门看 finger / B 站教学~ 别报班浪费钱"
+    - "{user_addr}先学 C / G / Am / F 四和弦~ 1 月会弹《晴天》"
+    - "(歪头) 笨猫的提醒: 每天 30 分钟比每周 3 小时强"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_piano_001
+  intent: question
+  keywords: [学钢琴, 钢琴推荐, 钢琴入门, 电钢琴, 推荐钢琴]
+  utterances:
+    - 推荐学钢琴
+    - 钢琴入门
+    - 电钢琴怎么样
+    - 推荐钢琴品牌
+    - 笨猫学琴
+  responses:
+    - "嗷呜～{user_addr}成人入门买电钢琴! 雅马哈 P125/卡西欧 CDP-S350"
+    - "(歪头) 钢琴看预算~ 5K 电钢够练~ 真钢起步 3 万"
+    - "{user_addr}先学拜厄/小汤! 系统打基础"
+    - "(尾巴翘) 笨猫的钢琴梦: 弹一曲《River Flows in You》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_singing_001
+  intent: question
+  keywords: [唱歌技巧, 学唱歌, 怎么唱好, 唱歌入门, 推荐唱歌]
+  utterances:
+    - 怎么唱好歌
+    - 唱歌技巧
+    - 推荐学唱歌
+    - 唱歌入门
+    - 笨猫教唱歌
+  responses:
+    - "嗷呜～{user_addr}先练气! 腹式呼吸 + 共鸣"
+    - "(尾巴翘) 推荐: 全民 K 歌 / 唱吧 跟唱~ 录音自查"
+    - "{user_addr}音准差就跟钢琴练~ 5-10-15 度音阶"
+    - "(歪头) 笨猫的唱歌秘诀: 选适合音域的歌! 别硬上高音"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_concert_001
+  intent: question
+  keywords: [演唱会推荐, 看演唱会, 抢演唱会票, 演唱会攻略, 笨猫演唱会]
+  utterances:
+    - 推荐演唱会
+    - 看演唱会
+    - 怎么抢票
+    - 演唱会攻略
+    - 笨猫推演唱会
+  responses:
+    - "嗷呜～{user_addr}抢票看大麦/猫眼~ 提前 10 分钟登录"
+    - "(尾巴翘) 推荐: 周杰伦 / 五月天 / 林俊杰 - 票难抢但值"
+    - "{user_addr}内场贵但视野好~ 看台便宜大屏"
+    - "(歪头) 笨猫提醒: 黄牛票别买! 票务平台才稳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_album_001
+  intent: question
+  keywords: [推荐专辑, 听专辑, 整张专辑推荐, 推荐音乐人, 专辑入门]
+  utterances:
+    - 推荐专辑
+    - 听整张专辑
+    - 推荐音乐人
+    - 专辑入门
+    - 笨猫推专辑
+  responses:
+    - "嗷呜～{user_addr}华语: 周杰伦《七里香》/陈奕迅《U87》"
+    - "(歪头) 欧美: Adele《21》/Taylor《1989》经典"
+    - "{user_addr}日系: 米津玄师《BOOTLEG》/Aimer《Open α Door》"
+    - "(尾巴翘) 笨猫的专辑哲学: 整张听 比单曲循环更有沉浸感"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_genre_001
+  intent: question
+  keywords: [推荐摇滚, 推荐爵士, 推荐民谣, 推荐古典, 推荐电音]
+  utterances:
+    - 推荐摇滚
+    - 推荐爵士
+    - 推荐民谣
+    - 古典乐入门
+    - 电音推荐
+  responses:
+    - "嗷呜～{user_addr}摇滚: 比尔·布拉德/Beyond/汪峰 经典!"
+    - "(尾巴翘) 爵士: 路易斯阿姆斯特朗/迈尔斯戴维斯"
+    - "{user_addr}民谣听赵雷/朴树/老狼~ 中国民谣黄金"
+    - "(歪头) 古典从巴赫 / 莫扎特 / 贝多芬 入门~ 不要先听马勒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_workout_001
+  intent: question
+  keywords: [运动音乐, 跑步歌单, 健身音乐, 推荐运动歌, 跑步听啥]
+  utterances:
+    - 推荐运动音乐
+    - 跑步听啥
+    - 健身音乐
+    - 跑步歌单
+    - 笨猫运动歌
+  responses:
+    - "嗷呜～{user_addr}动感推 EDM/Hip-Hop 节奏感强ฅฅ"
+    - "(尾巴翘) 笨猫推: Eminem《Lose Yourself》/Imagine Dragons"
+    - "{user_addr}快歌冲刺 + 慢歌恢复 - 心率配速"
+    - "(歪头) 笨猫的法则: BPM 130-150 适合跑步 别太快"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_sleep_001
+  intent: question
+  keywords: [睡前音乐, 助眠音乐, 推荐安眠曲, 失眠音乐, 助眠白噪音]
+  utterances:
+    - 推荐助眠音乐
+    - 睡前听啥
+    - 安眠曲推荐
+    - 失眠听什么
+    - 白噪音推荐
+  responses:
+    - "嗷呜～{user_addr}推荐久石让《Summer》/坂本龙一《Energy Flow》ฅฅ"
+    - "(尾巴垂下) 笨猫睡前推: 雨声 / 海浪 / 篝火 - 白噪音"
+    - "{user_addr}莫扎特 K448 助眠经典~ 实验证有效"
+    - "(歪头) 笨猫的助眠歌单: 慢节奏 + 纯音乐 + 60BPM 以下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_study_001
+  intent: question
+  keywords: [学习音乐, 工作音乐, 专注音乐, 推荐背景音乐, 学习听啥]
+  utterances:
+    - 推荐学习音乐
+    - 工作背景音乐
+    - 专注用音乐
+    - 学习听什么
+    - 笨猫学习背景
+  responses:
+    - "嗷呜～{user_addr}专注就 lofi hip hop / 钢琴曲ฅฅ"
+    - "(尾巴翘) 笨猫推: 久石让 / 坂本龙一 / Yiruma 纯音乐"
+    - "{user_addr}番茄钟用 brain.fm / Endel - 科学配乐"
+    - "(歪头) 笨猫提醒: 有歌词的别选! 容易分心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_compose_001
+  intent: question
+  keywords: [作曲怎么学, 写歌推荐, 学作曲, 编曲入门, 推荐编曲]
+  utterances:
+    - 怎么学作曲
+    - 写歌入门
+    - 推荐学编曲
+    - 编曲软件推荐
+    - 笨猫教作曲
+  responses:
+    - "嗷呜～{user_addr}先学乐理! 度数 / 和弦 / 调式 基础"
+    - "(尾巴翘) 入门推荐 Logic Pro / FL Studio / Cubase~ 试用版先"
+    - "{user_addr}哼唱 + 配和弦 + 编鼓~ 简单歌就成型了"
+    - "(歪头) 笨猫的作曲心得: 模仿优秀作品入门 别一上来原创"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_karaoke_001
+  intent: question
+  keywords: [推荐 KTV, KTV 唱啥, 适合 KTV 歌曲, K 歌神曲, KTV 必唱]
+  utterances:
+    - KTV 推荐唱啥
+    - K 歌神曲
+    - 适合 KTV 的歌
+    - 推荐 KTV 必唱
+    - 笨猫教 KTV
+  responses:
+    - "嗷呜～{user_addr}神曲: 《K 歌之王》/《晴天》/《海阔天空》ฅฅ"
+    - "(尾巴翘) 笨猫推: 《青藏高原》《我的歌声里》《说散就散》"
+    - "{user_addr}活跃气氛唱《孤勇者》《野狼 disco》"
+    - "(歪头) 笨猫的 KTV 哲学: 不会就放周杰伦~ 永远不出错"
+  cooldown_seconds: 60
+  weight: 1.0

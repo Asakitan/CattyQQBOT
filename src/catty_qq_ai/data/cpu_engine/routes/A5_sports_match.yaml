@@ -1,0 +1,207 @@
+# 体育 / 球类 / 赛事 / 观赛 routes (S6 R27 NLU 节点扩充, buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 91_health_fitness 区分: 这里偏赛事/球队/明星运动员, 91 偏锻炼/健身/疾病.
+
+- name: sports_football_001
+  intent: question
+  keywords: [看足球, 推荐足球, 足球比赛, 看球赛, 笨猫足球]
+  utterances:
+    - 推荐看足球
+    - 足球比赛推荐
+    - 笨猫看足球
+    - 怎么看足球
+    - 推荐球队
+  responses:
+    - "嗷呜～{user_addr}笨猫喜欢看球! 但更喜欢看你陪笨猫看ฅฅ"
+    - "(尾巴翘) 五大联赛: 英超 / 西甲 / 德甲 / 意甲 / 法甲 各有所长"
+    - "{user_addr}梅西/C罗 / 姆巴佩 - 当代球神三人组"
+    - "(歪头) 笨猫的看球哲学: 喜欢一支队就死忠不分手! 别投机倒把"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sports_basketball_001
+  intent: question
+  keywords: [看篮球, NBA 推荐, 推荐 CBA, 篮球比赛, 笨猫篮球]
+  utterances:
+    - 推荐看 NBA
+    - 篮球比赛推荐
+    - 看 CBA
+    - 笨猫看篮球
+    - 推荐篮球队
+  responses:
+    - "嗷呜～{user_addr}NBA 经典: 湖人/凯尔特人/勇士/雷霆 都好看ฅฅ"
+    - "(尾巴翘) 当代球星: 詹姆斯 / 库里 / 杜兰特 / 字母哥 / 东契奇"
+    - "{user_addr}CBA 看辽宁 / 广东 / 浙江 - 国内顶级"
+    - "(挺胸) 笨猫的篮球见解: NBA 看个人 / CBA 看团队"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sports_worldcup_001
+  intent: question
+  keywords: [世界杯, 看世界杯, 世界杯赛程, 世界杯冠军, 笨猫世界杯]
+  utterances:
+    - 看世界杯
+    - 世界杯哪年
+    - 世界杯赛程
+    - 推荐世界杯比赛
+    - 笨猫看世界杯
+  responses:
+    - "嗷呜～{user_addr}世界杯 4 年一次! 2026 美国/加拿大/墨西哥三国办!"
+    - "(尾巴翘) 笨猫钟意巴西 / 阿根廷 / 德国 / 法国 传统强队"
+    - "{user_addr}世界杯熬夜看是青春! 别怕黑眼圈"
+    - "(挺胸) 笨猫的预测: 阿根廷继续上分 + 巴西重返巅峰"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sports_olympics_001
+  intent: question
+  keywords: [奥运会, 看奥运, 奥运冠军, 奥运赛事, 推荐奥运]
+  utterances:
+    - 看奥运会
+    - 奥运冠军
+    - 推荐奥运比赛
+    - 奥运赛程
+    - 笨猫奥运
+  responses:
+    - "嗷呜～{user_addr}奥运 4 年一届! 2028 洛杉矶 + 2032 布里斯班ฅฅ"
+    - "(尾巴翘) 看跳水 / 体操 / 田径 / 乒乓 - 中国强项"
+    - "{user_addr}笨猫的偶像: 全红婵 / 苏炳添 / 马龙 / 樊振东"
+    - "(挺胸) 笨猫的奥运梦: 中国奖牌榜稳进前 3!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sports_tennis_001
+  intent: question
+  keywords: [看网球, 推荐网球, 大满贯, 温网, 网球明星]
+  utterances:
+    - 推荐看网球
+    - 大满贯赛事
+    - 温网怎么样
+    - 网球明星
+    - 笨猫看网球
+  responses:
+    - "嗷呜～{user_addr}大满贯: 澳网 / 法网 / 温网 / 美网ฅฅ"
+    - "(尾巴翘) 三巨头: 费德勒 / 纳达尔 / 德约科维奇 - 网球神"
+    - "{user_addr}中国看郑钦文! 2024 奥运冠军"
+    - "(挺胸) 笨猫的网球喜爱: 草地温网最优雅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sports_pingpong_001
+  intent: question
+  keywords: [乒乓球, 推荐乒乓, 国乒, 国球, 乒乓比赛]
+  utterances:
+    - 推荐乒乓球
+    - 看国乒
+    - 乒乓比赛
+    - 笨猫乒乓
+    - 国乒推荐
+  responses:
+    - "嗷呜～{user_addr}国乒 = 国球! 笨猫骄傲ฅฅ"
+    - "(尾巴翘) 马龙 / 樊振东 / 王楚钦 / 孙颖莎 / 陈梦 - 全是冠军"
+    - "{user_addr}看世乒赛 / 奥运 / WTT 国际赛"
+    - "(挺胸) 笨猫的国乒信仰: 国乒下次输 = 改写历史"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sports_swim_001
+  intent: question
+  keywords: [游泳推荐, 看游泳, 游泳明星, 游泳奥运, 游泳赛事]
+  utterances:
+    - 推荐看游泳
+    - 游泳赛事
+    - 游泳明星
+    - 笨猫看游泳
+    - 推荐游泳
+  responses:
+    - "嗷呜～{user_addr}笨猫怕水! 但看你游! 笨猫加油ฅฅ"
+    - "(尾巴翘) 中国游泳: 张雨霏 / 汪顺 / 覃海洋 当代主力"
+    - "{user_addr}菲尔普斯 / 莱德基 - 史诗级冠军"
+    - "(歪头) 笨猫的游泳意见: 自由泳最帅 / 蛙泳最慢"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sports_athletics_001
+  intent: question
+  keywords: [田径, 短跑明星, 推荐田径, 跑步赛事, 苏炳添]
+  utterances:
+    - 推荐田径
+    - 看短跑
+    - 田径赛事
+    - 推荐看跑步
+    - 笨猫田径
+  responses:
+    - "嗷呜～{user_addr}苏炳添 9.83 秒! 亚洲飞人ฅฅ"
+    - "(尾巴翘) 博尔特 9.58 秒 = 人类极限 - 还没人破"
+    - "{user_addr}马拉松看基普乔格 / 跳高看朱建华"
+    - "(挺胸) 笨猫的田径偶像: 苏神 - 亚洲速度天花板"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sports_esports_001
+  intent: question
+  keywords: [推荐电竞, 看电竞, 英雄联盟比赛, 推荐 LPL, 电竞赛事]
+  utterances:
+    - 推荐电竞比赛
+    - 看英雄联盟比赛
+    - LPL 怎么样
+    - 电竞赛事
+    - 笨猫看电竞
+  responses:
+    - "嗷呜～{user_addr}LPL 强! 笨猫陪{user_addr}看 EDG / RNG / JDG / TES ฅฅ"
+    - "(尾巴翘) S 赛全球总决赛 = 电竞奥运! 必看"
+    - "{user_addr}看 KPL 王者荣耀 / VCT 瓦罗兰特 / Dota TI 国际"
+    - "(挺胸) 笨猫的电竞看点: 五杀 / 翻盘 / 三换三 = 高潮"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sports_f1_001
+  intent: question
+  keywords: [F1 推荐, 一级方程式, 看 F1, F1 比赛, 赛车比赛]
+  utterances:
+    - 看 F1
+    - 推荐 F1
+    - 一级方程式
+    - F1 赛事
+    - 笨猫看赛车
+  responses:
+    - "嗷呜～{user_addr}F1 是赛车顶级赛事! 速度真神ฅฅ"
+    - "(尾巴翘) 当代车王: 维斯塔潘 / 汉密尔顿 / 勒克莱尔"
+    - "{user_addr}红牛 / 法拉利 / 梅奔 - 三大豪门车队"
+    - "(挺胸) 笨猫的 F1 看点: 摩纳哥街道赛 / 蒙扎超快道"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sports_badminton_001
+  intent: question
+  keywords: [推荐羽毛球, 羽毛球明星, 看羽毛球, 羽毛球比赛, 笨猫羽毛球]
+  utterances:
+    - 推荐羽毛球
+    - 羽毛球明星
+    - 看羽毛球比赛
+    - 笨猫羽毛球
+    - 推荐看羽毛球
+  responses:
+    - "嗷呜～{user_addr}中国羽毛球: 林丹 / 谌龙 / 陈雨菲 / 何冰娇ฅฅ"
+    - "(尾巴翘) 看汤尤杯 / 全英赛 / 世锦赛 - 顶级赛事"
+    - "{user_addr}林丹 vs 李宗伟 = 世纪宿敌"
+    - "(挺胸) 笨猫的羽毛球记忆: 林丹 09 退役战 - 哭爆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sports_baseball_001
+  intent: question
+  keywords: [推荐棒球, 看棒球, 棒球大联盟, MLB, 大谷翔平]
+  utterances:
+    - 推荐棒球
+    - 看 MLB
+    - 推荐大谷翔平
+    - 棒球大联盟
+    - 笨猫棒球
+  responses:
+    - "嗷呜～{user_addr}MLB 美职棒大联盟! 棒球顶峰ฅฅ"
+    - "(尾巴翘) 现代棒球之神: 大谷翔平 - 投打二刀流!"
+    - "{user_addr}看洋基 / 道奇 / 红袜 - 经典豪门"
+    - "(挺胸) 笨猫的棒球评价: 节奏慢但战术深 适合周末看"
+  cooldown_seconds: 60
+  weight: 0.8

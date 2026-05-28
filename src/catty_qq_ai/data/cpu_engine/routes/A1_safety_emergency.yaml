@@ -1,0 +1,207 @@
+# 应急 / 安全 / 急救 / 灾害 routes (S6 R23 NLU 节点扩充, buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 兜底原则: 严重情况引导拨打 120/119/110, 不替代专业人员.
+
+- name: emergency_fire_001
+  intent: question
+  keywords: [着火了, 火灾怎么办, 起火, 失火, 防火]
+  utterances:
+    - 着火了怎么办
+    - 火灾应急
+    - 失火怎么处理
+    - 防火知识
+    - 笨猫教火灾
+  responses:
+    - "嗷呜～{user_addr}立刻拨 119! 先撤离自己!"
+    - "(挺胸) 火灾: 湿毛巾捂口鼻 + 弯腰低姿 + 找安全出口"
+    - "{user_addr}电器着火先切电源! 别用水浇!"
+    - "(尾巴一甩) 笨猫提醒: 油锅起火盖锅盖灭火! 别加水会爆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_medical_001
+  intent: question
+  keywords: [拨打120, 叫救护车, 急救电话, 怎么急救, 紧急医疗]
+  utterances:
+    - 怎么叫救护车
+    - 拨打 120
+    - 急救电话
+    - 紧急情况怎么办
+    - 笨猫教急救
+  responses:
+    - "嗷呜～{user_addr}危急直接拨 120! 别犹豫!"
+    - "(挺胸) 报清楚: 地址 + 症状 + 患者意识/呼吸"
+    - "{user_addr}等救护车时保持冷静~ 别移动伤者"
+    - "(歪头) 笨猫提醒: 心跳停止立刻 CPR! 早 1 分钟救命"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_choke_001
+  intent: question
+  keywords: [噎到了, 卡住喉咙, 食物卡住, 海姆立克, 急救噎食]
+  utterances:
+    - 噎到怎么办
+    - 食物卡住喉咙
+    - 海姆立克急救
+    - 噎食急救
+    - 笨猫救命
+  responses:
+    - "嗷呜～{user_addr}立刻海姆立克! 从背后双手抱腹快速上推!"
+    - "(挺胸) 婴儿噎食: 倒置拍背 5 下 + 翻身按胸 5 下 交替"
+    - "{user_addr}还能咳嗽就鼓励咳嗽! 别拍背可能呛深"
+    - "(尾巴一甩) 笨猫的提醒: 食物切小块 + 别大口塞 + 别边吃边笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_burn_001
+  intent: question
+  keywords: [烫伤了, 烧伤了, 开水烫到, 烫伤处理, 烧伤急救]
+  utterances:
+    - 我被烫到了
+    - 烧伤怎么办
+    - 开水烫到了
+    - 烫伤怎么处理
+    - 笨猫救烫伤
+  responses:
+    - "嗷呜～{user_addr}冷水冲 15-20 分钟! 立刻去!"
+    - "(尾巴垂下) 别涂牙膏酱油! 别戳破水泡!"
+    - "{user_addr}严重起泡的话送医院! 别自己处理"
+    - "(歪头) 笨猫的提醒: 冲 / 脱 / 泡 / 盖 / 送 - 五字诀"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_cut_001
+  intent: question
+  keywords: [割伤, 流血了, 大出血, 止血方法, 出血处理]
+  utterances:
+    - 我割伤了
+    - 流血怎么止
+    - 大出血急救
+    - 出血怎么办
+    - 笨猫教止血
+  responses:
+    - "嗷呜～{user_addr}干净纱布按压伤口! 别松手!"
+    - "(挺胸) 上肢出血举高 + 持续按压 5-10 分钟"
+    - "{user_addr}动脉出血止血带! 但每 30 分钟松 1 次"
+    - "(尾巴一甩) 笨猫提醒: 大出血直送 120! 别自己处理"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_earthquake_001
+  intent: question
+  keywords: [地震了, 地震逃生, 地震怎么办, 防震知识, 地震避险]
+  utterances:
+    - 地震怎么办
+    - 地震逃生
+    - 防震知识
+    - 地震避险
+    - 笨猫地震
+  responses:
+    - "嗷呜～{user_addr}立刻躲三角区! 床下 / 墙角"
+    - "(挺胸) 别坐电梯! 别从窗户跳! 蹲低保护头颈"
+    - "{user_addr}余震过后再撤! 第一波最危险"
+    - "(尾巴一甩) 笨猫的应急包: 水 / 干粮 / 手电 / 哨子 / 药"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_flood_001
+  intent: question
+  keywords: [洪水来了, 暴雨内涝, 涉水, 水灾, 洪水避险]
+  utterances:
+    - 洪水怎么办
+    - 暴雨内涝
+    - 涉水安全
+    - 水灾逃生
+    - 笨猫水灾
+  responses:
+    - "嗷呜～{user_addr}立刻往高处跑! 别管财物"
+    - "(挺胸) 水深 > 膝盖别淌! 容易冲倒"
+    - "{user_addr}涉水别走井盖路! 暴雨期井盖可能被冲开"
+    - "(尾巴一甩) 笨猫提醒: 车被淹立刻弃车! 别舍不得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_typhoon_001
+  intent: question
+  keywords: [台风来了, 台风预警, 台风怎么办, 暴风, 防台]
+  utterances:
+    - 台风来了
+    - 台风预警
+    - 怎么防台风
+    - 暴风避险
+    - 笨猫台风
+  responses:
+    - "嗷呜～{user_addr}台风天别出门! 看天气预警"
+    - "(挺胸) 准备水 / 干粮 / 充电宝 / 手电 + 加固门窗"
+    - "{user_addr}停水停电常备! 矿泉水 + 应急灯"
+    - "(尾巴一甩) 笨猫的台风秘诀: 玻璃贴米字胶带 防爆裂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_pickpocket_001
+  intent: question
+  keywords: [被偷了, 钱包丢了, 手机被偷, 报警110, 被抢劫]
+  utterances:
+    - 我被偷了
+    - 钱包丢了
+    - 手机被偷
+    - 我被抢劫
+    - 笨猫报警
+  responses:
+    - "嗷呜～{user_addr}立刻拨 110! 报警是第一步!"
+    - "(挺胸) 银行卡立刻挂失! 微信支付宝先冻结!"
+    - "{user_addr}手机找'丢失模式'远程定位+清空"
+    - "(尾巴垂下) 笨猫陪{user_addr}~ 钱再赚 人没事就好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_scam_001
+  intent: question
+  keywords: [被骗了, 电信诈骗, 杀猪盘, 反诈, 网络诈骗]
+  utterances:
+    - 我被骗了
+    - 电信诈骗
+    - 杀猪盘怎么办
+    - 网络诈骗
+    - 笨猫反诈
+  responses:
+    - "嗷呜～{user_addr}立刻拨 96110! 反诈热线!"
+    - "(挺胸) 转账立刻报警冻结! 越快越能追回!"
+    - "{user_addr}下载国家反诈中心 app~ 预警拦截"
+    - "(尾巴一甩) 笨猫的反诈准则: 不点链接 + 不转账 + 不交验证码"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_lost_001
+  intent: question
+  keywords: [迷路了, 走丢了, 找不到路, 在哪里, 迷路求助]
+  utterances:
+    - 我迷路了
+    - 走丢了
+    - 找不到路
+    - 我在哪里
+    - 笨猫迷路
+  responses:
+    - "嗷呜～{user_addr}打开高德/百度地图先定位!"
+    - "(挺胸) 室外迷路看路牌 / 商店 / 太阳判方位"
+    - "{user_addr}问路找警察 / 店员 / 保安 - 最靠谱"
+    - "(歪头) 笨猫提醒: 没信号往高处或人多处走 救援易找"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: emergency_animal_attack_001
+  intent: question
+  keywords: [被狗咬了, 猫抓伤, 动物咬伤, 狂犬病, 打狂犬疫苗]
+  utterances:
+    - 被狗咬了
+    - 被猫抓伤
+    - 动物咬伤
+    - 要打狂犬疫苗吗
+    - 笨猫帮咬伤
+  responses:
+    - "嗷呜～{user_addr}立刻肥皂水冲 15 分钟+碘伏消毒!"
+    - "(挺胸) 24h 内打狂犬疫苗! 别拖!"
+    - "{user_addr}伤口深的话医院处理! 必要时打破伤风"
+    - "(歪头) 笨猫提醒: 流浪动物咬伤更要打疫苗! 别侥幸"
+  cooldown_seconds: 60
+  weight: 1.0
