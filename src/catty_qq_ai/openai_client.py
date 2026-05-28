@@ -1241,6 +1241,25 @@ def _json_object(text: str) -> dict[str, Any] | None:
     return lenient_json_object(text)
 
 
+async def chat_completion_summary(config: Config, messages: list[ChatMessage]) -> str:
+    """专用后台总结路径：优先走 ai_fallback (deepseek)，避免烧主 AI (opus/sonnet) token。
+
+    主人 2026-05-28: 群/私聊/成员/游戏摘要属于后台批处理, deepseek-v4-flash 完全够用,
+    没必要每天用 opus 烧 ¥. fallback 不可用或调用失败时回退到 chat_completion (主 AI)。
+    """
+    if _fallback_is_configured(config):
+        try:
+            return await _post_fallback_chat(config, messages)
+        except MCBusyError:
+            _logger.info("chat_completion_summary: MC busy, falling back to main AI for summary")
+        except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:  # noqa: BLE001
+            _logger.warning(
+                "chat_completion_summary: ai_fallback failed (%s), falling back to main AI",
+                exc.__class__.__name__,
+            )
+    return await chat_completion(config, messages)
+
+
 async def chat_completion_instant(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 80) -> str:
     """走 catty_filter_* 配置(spark 这种小快模型)的瞬时完成。
 
@@ -1534,9 +1553,11 @@ async def summarize_scope_lore(
     history_excerpt: str,
     scope_label: str = "",
 ) -> list[dict]:
-    """让主模型 (5.5) 从 scope 最近对话总结出值得长期记下来的 lorebook entry。
+    """从 scope 最近对话总结出值得长期记下来的 lorebook entry。
 
-    走主 chat_completion (不是 spark) — 总结质量需要 5.5 的判断力, spark 太傻。
+    主人 2026-05-28: 改走 chat_completion_summary (deepseek 优先), 和其它后台
+    总结 (_summary_loop 4 段) 统一,不烧 opus token. deepseek-v4-flash 做 JSON
+    提取够用; ai_fallback 不可用时自动回退到主 AI。
     返回 list of {"keys": [...], "content": "..."} (0-3 条), 失败 / 无输出返回 []。
 
     每条 entry:
@@ -1573,7 +1594,7 @@ async def summarize_scope_lore(
         "- 最多 3 条, 宁缺毋滥"
     )
     try:
-        reply = await chat_completion(
+        reply = await chat_completion_summary(
             config,
             [
                 {"role": "system", "content": "你是一个对话总结器, 严格按 JSON 输出。"},
