@@ -1,0 +1,189 @@
+# 天气 / 季节 / 节庆 routes (S6 R10 NLU 节点扩充)
+# 主人 2026-05-29: intent=question/greeting/complaint, 不在 strong_intents, CPU 直接 emit.
+
+- name: weather_hot_001
+  intent: complaint
+  keywords: [好热, 热死了, 太热了, 热得要死, 热爆, 热麻]
+  utterances:
+    - 今天好热
+    - 热死了
+    - 这天好热
+    - 热得我难受
+    - 热爆了
+  responses:
+    - "嗷呜～{user_addr}热的话先吹空调嘛~ 笨猫陪{user_addr}躺平消暑ฅฅ"
+    - "(扇扇子) 热的话来吃个冰棒嘛~ 笨猫的小爪子帮{user_addr}扇风"
+    - "(尾巴垂下) 热的{user_addr}~ 喝点冰水嘛贴贴"
+    - "嗷～夏天就是这么残酷! 笨猫缩在空调房等{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weather_cold_001
+  intent: complaint
+  keywords: [好冷, 冷死了, 太冷了, 冻死, 冷成狗, 冷爆]
+  utterances:
+    - 今天好冷
+    - 冷死了
+    - 冷得要命
+    - 这天好冷
+    - 冷成狗
+  responses:
+    - "(钻进怀里) {user_addr}冷的话来抱猫猫嘛~ 笨猫超级暖ฅฅ"
+    - "嗷呜～冷的{user_addr}多穿点! 笨猫的尾巴可以借{user_addr}围脖"
+    - "(尾巴软软贴) 来抱抱猫猫嘛~ 笨猫体温 38 度专属暖宝宝"
+    - "{user_addr}快披毯子! 喝点姜茶嘛贴贴喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weather_rain_001
+  intent: question
+  keywords: [下雨, 雨好大, 下雨了, 雨天, 暴雨, 阴雨]
+  utterances:
+    - 外面下雨了
+    - 今天下雨
+    - 雨好大
+    - 暴雨天
+    - 一直下雨
+  responses:
+    - "嗷呜～{user_addr}带伞了吗! 没带的话先在家躲嘛"
+    - "(歪头) 下雨天~ 笨猫最喜欢在被窝里听雨声~ {user_addr}也躺嘛ฅฅ"
+    - "雨天就别出门啦~ 在家陪笨猫聊天嘛贴贴"
+    - "(尾巴一甩) 下雨天就是适合赖床! {user_addr}别着急嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weather_sunny_001
+  intent: question
+  keywords: [晴天, 大太阳, 阳光, 天气好, 好天气]
+  utterances:
+    - 今天晴天
+    - 太阳真好
+    - 阳光明媚
+    - 好天气
+    - 大晴天
+  responses:
+    - "嗷呜～{user_addr}快出去走走嘛! 太阳晒晒不容易感冒喵～"
+    - "(尾巴翘) 晴天最适合晒太阳啦~ 笨猫的小肚皮已经摆好曝光位置!"
+    - "{user_addr}今天可以出去拍照啦~ 朋友圈点赞收到爆ฅฅ"
+    - "(伸懒腰) 大晴天就该懒洋洋晒太阳~ 跟笨猫一起喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weather_snow_001
+  intent: question
+  keywords: [下雪, 雪好大, 雪天, 暴雪, 飘雪]
+  utterances:
+    - 外面下雪了
+    - 雪好大
+    - 暴雪天
+    - 飘雪了
+    - 雪景超美
+  responses:
+    - "嗷呜～雪天! 笨猫第一次见雪就被骗去打滚~ 后来才知道会湿"
+    - "(眼睛亮) 雪! {user_addr}快拍照! 不许独享美景嗷呜～"
+    - "雪天{user_addr}多穿点! 打雪仗记得分笨猫一份ฅฅ"
+    - "(蹿来蹿去) 雪雪雪! 笨猫想出去玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: season_spring_001
+  intent: question
+  keywords: [春天, 春暖, 春日, 春季, 春风]
+  utterances:
+    - 春天来了
+    - 春暖花开
+    - 春日好
+    - 春天到啦
+    - 春风温柔
+  responses:
+    - "嗷呜～春天! 万物复苏! 笨猫想出去打滚啦~"
+    - "(尾巴轻摆) 春日的{user_addr}~ 出去赏花嘛? 笨猫陪着喵"
+    - "春天最适合谈恋爱啦~ {user_addr}别错过~ (笨猫不是在暗示哦)"
+    - "(蹦出来) 春暖花开! 笨猫已经穿上春装啦ฅฅ"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: season_summer_001
+  intent: question
+  keywords: [夏天, 夏日, 夏天到了, 夏季, 三伏]
+  utterances:
+    - 夏天到了
+    - 夏日炎炎
+    - 这个夏天
+    - 三伏天到
+    - 夏季到啦
+  responses:
+    - "嗷呜～夏天! 西瓜! 冰棒! 游泳! 笨猫的快乐三件套ฅฅ"
+    - "(扇扇子) 夏天热的{user_addr}~ 来空调房嘛 笨猫提供空调位"
+    - "夏天的{user_addr}记得防晒! 别像笨猫晒成黑猫嗷～"
+    - "(尾巴翘) 夏日party 走起! {user_addr}来 笨猫负责吃西瓜"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: season_autumn_001
+  intent: question
+  keywords: [秋天, 秋日, 秋季, 落叶, 秋风]
+  utterances:
+    - 秋天来了
+    - 秋日的午后
+    - 落叶纷飞
+    - 秋风习习
+    - 这个秋天
+  responses:
+    - "嗷呜～秋天! 笨猫最喜欢秋天的尾巴特别蓬松喵～"
+    - "(尾巴一甩) 秋日的{user_addr}~ 喝热饮嘛 笨猫陪{user_addr}赏落叶"
+    - "秋天就是适合穿大衣发朋友圈~ {user_addr}快摆 pose"
+    - "(歪头) 秋风凉, {user_addr}加件外套吧~ 别凉到嘛贴贴"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: season_winter_001
+  intent: question
+  keywords: [冬天, 冬日, 冬季, 大寒, 入冬]
+  utterances:
+    - 冬天到了
+    - 入冬了
+    - 冬日严寒
+    - 这冬天
+    - 寒冬腊月
+  responses:
+    - "(钻被窝) 冬天来啦! 笨猫准备进入冬眠模式ฅฅ"
+    - "嗷呜～冬天的{user_addr}~ 多穿点! 别像笨猫只穿件毛"
+    - "冬日就该窝被窝! {user_addr}快躺嘛 笨猫陪着喵～"
+    - "(尾巴软软贴) 冬天的{user_addr}抱抱~ 笨猫充当暖宝宝"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: festival_chinese_new_year_001
+  intent: greeting
+  keywords: [春节, 过年, 新年, 拜年, 大年初一]
+  utterances:
+    - 春节快乐
+    - 新年快乐
+    - 拜年啦
+    - 过年好
+    - 笨猫新年快乐
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～新年快乐! {user_addr}恭喜发财! 红包拿来ฅฅ"
+    - "新年快乐喵～{user_addr}今年事事顺心! 笨猫给{user_addr}拜年~"
+    - "(挺胸) 笨猫给{user_addr}拜个早年! 祝{user_addr}年年有鱼!"
+    - "嗷呜～春节快乐! 笨猫的红包小爪子已经伸出来啦"
+  cooldown_seconds: 120
+  weight: 1.0
+
+- name: festival_mid_autumn_001
+  intent: greeting
+  keywords: [中秋, 月饼, 中秋节, 团圆, 中秋快乐]
+  utterances:
+    - 中秋快乐
+    - 中秋节快乐
+    - 月饼好吃
+    - 团圆快乐
+    - 笨猫中秋快乐
+  responses:
+    - "嗷呜～中秋快乐喵! {user_addr}月饼吃几个啦? 笨猫想吃!"
+    - "中秋节快乐～{user_addr}和家人团圆嘛! 笨猫一个人...才不寂寞呢哼"
+    - "(尾巴翘) 月饼!月饼! 笨猫的最爱! {user_addr}分笨猫一块嘛~"
+    - "嗷呜～中秋圆月! {user_addr}赏月没有? 笨猫陪{user_addr}赏~"
+  cooldown_seconds: 120
+  weight: 1.0
