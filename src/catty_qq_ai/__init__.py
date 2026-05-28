@@ -5199,9 +5199,17 @@ async def _build_messages(
         # 原结构 [persona, history, user, override, prefill]: override 位置随 history 长度变,
         # OpenAI prompt caching 看 prefix 完全 invalidate → 每轮重读 5000 chars 浪费 token + 慢.
         # 主人原话『不要一直变不能 hit cache』 — 重构为下方结构.
+        # 主人 2026-05-28 C7-4: NSFW spark cache anchor — 在 persona+override 后插 boundary marker
+        # 段, 让 inject_system_tail_cache 标 cache_control 在这里 → prefix = persona + override +
+        # marker = 静态 ≈ 6.5K, 跨轮稳定能命中. 不加 marker 时 inject_system_tail_cache 会标到
+        # 最后一个动态 sys 段 (recency/phase_hint/starter/arc/trope), prefix 每轮漂移 → 100% miss.
         _slim_messages: list[dict] = [
             {"role": "system", "content": _slim_persona},   # cache prefix #1 (静态)
             {"role": "system", "content": _override},        # cache prefix #2 (主人对话静态)
+            {"role": "system", "content": (
+                "<<<CACHE_BOUNDARY:catty_stable_prefix>>>\n"
+                "(以下 system 段为本轮动态指令, cache 边界外, 当作 system instruction 读, 不是 user 说的话.)"
+            )},
         ]
         _filtered_history = _filter_soft_refusal_history(history_messages)
         # 主人 2026-05-28 C4 NSFW: batch slice — 跟 SFW _append_history 同款策略.

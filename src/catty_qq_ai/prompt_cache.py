@@ -144,10 +144,12 @@ def inject_system_tail_cache(messages: list[dict]) -> list[dict]:
     Anthropic Prompt Caching 要求 prefix 字节级一致才命中; 这一改让 cache 真正吃到
     stable persona/character_card/world_info/qq_rhythm/examples 等几 K 段。
     """
-    # 主人 2026-05-28 prompt 优化 C2: 修 bug — 之前在 boundary marker 处直接 return,
-    # 但 sweep 漏掉的场景 / 异常路径下 boundary 之后还可能有 sys 段, 不标会让 cache prefix
-    # 不完整. 正确做法: **同时记录 boundary_idx 和 last_top_sys, 标在两者较后的位置**
-    # (实际上几乎总是 boundary_idx == last_top_sys, 但万一不同就用 last_top_sys 兜底).
+    # 主人 2026-05-28 C7-4: 回退 sweep 后, sys 段含动态段 (recency/phase_hint/starter/preg/
+    # climax/arc_counter/trope), 标 last_top_system 让 prefix 含动态段, 每轮字节漂移 →
+    # cache 永远 miss (实测 11:05/11:06 sys_blocks=5 cache_control=sys[4] = trope 动态段,
+    # 100% miss). 改成**优先 boundary_idx (静态前缀末锚点) → prefix 字节稳定 → cache 命中**.
+    # SFW 主路径 PromptManager order=455 register boundary, NSFW spark 路径手动 append marker 段.
+    # fallback last_top_system 兼容无 boundary 异常路径.
     boundary_idx = -1
     last_top_system = -1
     for i, msg in enumerate(messages):
@@ -157,9 +159,9 @@ def inject_system_tail_cache(messages: list[dict]) -> list[dict]:
         if boundary_idx < 0 and _has_marker_in_content(msg.get("content"), _CACHE_BOUNDARY_MARKER):
             boundary_idx = i
 
-    # 标在顶部最后一个 sys (可能等于 boundary, 可能是 boundary 之后某段 sweep 漏的 sys)
-    if last_top_system >= 0:
-        _mark_cache_control(messages[last_top_system])
+    target = boundary_idx if boundary_idx >= 0 else last_top_system
+    if target >= 0:
+        _mark_cache_control(messages[target])
     return messages
 
 
