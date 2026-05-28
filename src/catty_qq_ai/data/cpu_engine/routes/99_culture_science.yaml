@@ -1,0 +1,206 @@
+# 文化 / 科普 / 历史 / 法律 routes (S6 R21, buffered 10/10 周期完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: culture_history_001
+  intent: question
+  keywords: [推荐历史书, 历史好书, 学历史, 推荐历史人物, 中国历史]
+  utterances:
+    - 推荐历史书
+    - 历史好看吗
+    - 学历史怎么入门
+    - 推荐讲历史
+    - 中国历史推荐
+  responses:
+    - "嗷呜～{user_addr}入门《史记》/《明朝那些事儿》ฅฅ"
+    - "(尾巴翘) 笨猫推荐先看通史~ 再选个朝代深入"
+    - "{user_addr}爱听历史故事推荐 袁腾飞/王立群~"
+    - "(歪头) 笨猫的历史观: 看完《资治通鉴》就懂中国政治"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: science_space_001
+  intent: question
+  keywords: [推荐天文, 天文科普, 太空探索, 推荐天文书, 宇宙好奇]
+  utterances:
+    - 天文知识推荐
+    - 推荐太空书
+    - 宇宙怎么样
+    - 推荐天文科普
+    - 笨猫聊宇宙
+  responses:
+    - "嗷呜～推荐《时间简史》入门! 笨猫看不懂但好崇拜"
+    - "(尾巴翘) 想看星空就去新疆/西藏 - 银河肉眼可见ฅฅ"
+    - "{user_addr}下载 Stellarium 看星图~ 免费"
+    - "(歪头) 笨猫的疑问: 黑洞洞里是不是有更多猫罐头"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: science_physics_001
+  intent: question
+  keywords: [物理推荐, 推荐物理书, 量子物理, 学物理, 推荐量子]
+  utterances:
+    - 物理推荐书
+    - 推荐学物理
+    - 量子物理科普
+    - 笨猫学物理
+    - 物理入门
+  responses:
+    - "嗷呜～{user_addr}入门《六个简单的概念》/《量子力学讲什么》"
+    - "(歪头) 量子力学最迷! 但要数学基础"
+    - "{user_addr}先看费曼的科普书! 通俗易懂"
+    - "(尾巴翘) 笨猫的物理梗: 薛定谔的猫是笨猫的远亲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: law_consult_001
+  intent: question
+  keywords: [咨询法律, 法律问题, 推荐律师, 法律建议, 怎么找律师]
+  utterances:
+    - 法律咨询
+    - 推荐律师
+    - 法律建议
+    - 怎么找律师
+    - 笨猫聊法律
+  responses:
+    - "嗷呜～{user_addr}严重情况直接联系律师! 别耽误"
+    - "(歪头) 笨猫不是律师~ 复杂问题别只听笨猫的"
+    - "{user_addr}小问题可以 12348 免费法律咨询热线"
+    - "(尾巴一甩) 笨猫提醒: 签合同前 一定 看清条款!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: law_consumer_001
+  intent: question
+  keywords: [消费维权, 投诉商家, 商家欺诈, 网购退货, 12315]
+  utterances:
+    - 怎么消费维权
+    - 投诉商家
+    - 被商家骗了
+    - 网购退货纠纷
+    - 12315 有用吗
+  responses:
+    - "嗷呜～{user_addr}先跟商家沟通! 不行再投诉"
+    - "(挺胸) 拨打 12315 - 全国统一消费者投诉热线!"
+    - "{user_addr}网购维权用平台! 淘宝京东都有客服仲裁"
+    - "(歪头) 笨猫的维权秘诀: 保留聊天截图 + 转账记录 + 商品照"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: science_psychology_001
+  intent: question
+  keywords: [推荐心理学, 心理学入门, 推荐心理书, 心理学好不好, 笨猫学心理]
+  utterances:
+    - 推荐心理学书
+    - 心理学入门
+    - 推荐学心理学
+    - 心理学好玩吗
+    - 笨猫教心理
+  responses:
+    - "嗷呜～{user_addr}入门《心理学与生活》ฅฅ"
+    - "(尾巴翘) 推荐《思考快与慢》~ 行为经济学的圣经"
+    - "{user_addr}爱故事看《天才在左疯子在右》"
+    - "(歪头) 笨猫的心理学: 不会读心 但是会猜你饿不饿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: culture_calligraphy_001
+  intent: question
+  keywords: [学书法推荐, 书法入门, 推荐书法, 怎么练字, 钢笔字推荐]
+  utterances:
+    - 推荐学书法
+    - 怎么练字
+    - 书法入门
+    - 钢笔字推荐
+    - 笨猫练字
+  responses:
+    - "嗷呜～{user_addr}先从楷书开始! 颜柳基础"
+    - "(歪头) 推荐《田英章楷书》/田蕴章兄弟字帖~ 现代王者"
+    - "{user_addr}钢笔字看自己喜好~ 田英章/卢中南/任政"
+    - "(尾巴翘) 笨猫练字的秘诀: 每天 1 页! 100 天有变化"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: culture_chess_001
+  intent: question
+  keywords: [推荐下棋, 学围棋, 推荐围棋, 中国象棋, 国际象棋推荐]
+  utterances:
+    - 推荐下棋
+    - 学围棋
+    - 推荐学围棋
+    - 中国象棋怎么学
+    - 国际象棋推荐
+  responses:
+    - "嗷呜～{user_addr}围棋深! 国际象棋快! 各有所长"
+    - "(挺胸) 围棋推荐弈城/野狐~ AI 对弈练习"
+    - "{user_addr}中国象棋大众~ 民间高手如云"
+    - "(尾巴翘) 笨猫想学AlphaGo战胜人类的招"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: edu_news_001
+  intent: question
+  keywords: [推荐看新闻, 推荐新闻, 看什么新闻, 新闻 APP 推荐, 时政新闻]
+  utterances:
+    - 推荐看什么新闻
+    - 看什么新闻好
+    - 新闻 APP 推荐
+    - 时政新闻
+    - 笨猫推荐新闻
+  responses:
+    - "嗷呜～{user_addr}用 财新/华尔街日报/经济学人 看深度"
+    - "(歪头) 国内: 澎湃/凤凰网/新京报 - 深度新闻"
+    - "{user_addr}国际: BBC/NYT 双语阅读练英语"
+    - "(尾巴翘) 笨猫的新闻原则: 多看不同立场~ 别只看一家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: culture_fortune_001
+  intent: question
+  keywords: [星座运势, 星座推荐, 今日运势, 塔罗占卜, 算命有用吗]
+  utterances:
+    - 今日运势
+    - 推荐星座
+    - 塔罗准吗
+    - 算命有用
+    - 笨猫算命
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫不算命~ 但相信好运在自己手里ฅฅ"
+    - "(尾巴翘) 星座娱乐看看就好~ 别太当真喵"
+    - "{user_addr}塔罗有时候是心理暗示~ 想好的就好"
+    - "(假装严肃) 笨猫的算命: 主人吃了鱼罐头就是好运一天"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: culture_etiquette_001
+  intent: question
+  keywords: [推荐礼仪, 商务礼仪, 餐桌礼仪, 推荐礼节, 中国礼仪]
+  utterances:
+    - 推荐学礼仪
+    - 商务礼仪
+    - 餐桌礼仪
+    - 中国礼仪
+    - 笨猫教礼仪
+  responses:
+    - "嗷呜～{user_addr}礼仪入门: 微笑 + 倾听 + 客气 三件套ฅฅ"
+    - "(挺胸) 餐桌礼仪: 长辈先动筷! 别敲碗 别说话喷食物"
+    - "{user_addr}商务多观察~ 入乡随俗"
+    - "(歪头) 笨猫的礼仪心得: 真诚 > 形式"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: culture_environment_001
+  intent: question
+  keywords: [环保推荐, 怎么环保, 推荐环保, 节能减排, 垃圾分类]
+  utterances:
+    - 怎么环保
+    - 推荐环保
+    - 节能减排
+    - 垃圾分类怎么搞
+    - 笨猫环保
+  responses:
+    - "嗷呜～{user_addr}日常: 少用塑料/自带水杯/节约纸张"
+    - "(歪头) 垃圾分类记口诀: 可回收/有害/厨余/其他"
+    - "{user_addr}少叫外卖! 一次性餐具污染大"
+    - "(尾巴翘) 笨猫的环保宣言: 每用一张纸 就少卖一根鱼干!"
+  cooldown_seconds: 60
+  weight: 0.9
