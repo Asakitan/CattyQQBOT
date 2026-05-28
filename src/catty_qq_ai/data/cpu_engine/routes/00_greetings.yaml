@@ -6,7 +6,7 @@
 
 - name: greet_morning_001
   intent: greeting
-  keywords: [早安, 早上好, 早呀]
+  keywords: [早安, 早上好, 早呀, 起床, 醒了]
   utterances:
     - 早安
     - 主人早呀
@@ -38,7 +38,7 @@
 
 - name: greet_hello_001
   intent: greeting
-  keywords: [你好, 嗨, hi, hello, 哈喽]
+  keywords: [你好, 嗨, hi, hello, 哈喽, 在吗, 有人吗, 猫猫在, 米雪儿在]
   utterances:
     - 你好
     - 嗨米雪儿

@@ -33,7 +33,7 @@
 
 - name: status_tired_001
   intent: complaint
-  keywords: [好累, 累死了, 累惨, 我累, 疲倦]
+  keywords: [好累, 累死了, 累惨, 我累, 疲倦, 累炸, 累瘫]
   utterances:
     - 我好累
     - 累死了

@@ -20,7 +20,7 @@
 
 - name: compliment_smart_001
   intent: compliment_cat
-  keywords: [真聪明, 你聪明, 真厉害, 好厉害]
+  keywords: [真聪明, 你聪明, 真厉害, 好厉害, 厉害, 牛逼, 牛批]
   utterances:
     - 你真聪明啊
     - 米雪儿好厉害
@@ -48,7 +48,7 @@
 
 - name: compliment_like_001
   intent: tease_cat
-  keywords: [我喜欢你, 喜欢猫猫, 喜欢米雪儿]
+  keywords: [我喜欢你, 喜欢猫猫, 喜欢米雪儿, 爱你, 我爱你]
   utterances:
     - 我喜欢你
     - 米雪儿我喜欢你

@@ -1,5 +1,8 @@
 [build-system]
-requires = ["setuptools>=68", "Cython>=3.0", "numpy>=1.26,<2"]
+# 主人 2026-05-28: 不在 build-system 锁 numpy/Cython, 因为远端 Python 3.14
+# numpy 1.26 没有 cp314 wheel 会触发源码编译 + 需要 MSVC. cython 真要写 .pyx
+# 时通过 [cpu-engine] optional 装, setup.py 用 try/except 兼容缺失.
+requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
