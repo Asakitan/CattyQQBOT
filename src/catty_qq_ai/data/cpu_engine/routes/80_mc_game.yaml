@@ -1,0 +1,165 @@
+# MC 服务器 / 游戏问询 routes (S6 R9 NLU 节点扩充)
+# 主人 2026-05-29: intent=question 不在 strong_intents, CPU 能直接 emit.
+# **避开** keyword_reply 已用的 "MC/我的世界/Minecraft" 这三个 keyword 防止冲突
+# (cpu_engine priority=37 抢在 keyword_reply 40 之前, 配置的整合包文案仍由
+# keyword_reply 触发, CPU 引擎只处理更细分的场景).
+
+- name: mc_server_ip_001
+  intent: question
+  keywords: [sakisense, doi.saki, 26843, 服务器地址, 服务器 ip, 服务器 IP, 进服地址]
+  utterances:
+    - 服务器地址是多少
+    - 服务器 IP 是啥
+    - 怎么连接服务器
+    - sakisense 是什么
+    - 服务器在哪
+  responses:
+    - "嗷呜～服务器地址是 doi.sakisense.top:26843 喵! 国内宝宝卡的话用 sakisense.top:26843"
+    - "(尾巴翘) 主服: doi.sakisense.top:26843, 备用: sakisense.top:26843~ {user_addr}收好"
+    - "嗨～服务器地址 doi.sakisense.top:26843~ 国内连不上换 sakisense.top:26843 嗷呜～"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: mc_join_server_001
+  intent: question
+  keywords: [怎么进服, 怎么进, 进不去服, 连不上服, 进服失败]
+  utterances:
+    - 怎么进服啊
+    - 服务器进不去
+    - 怎么连接呀
+    - 进服失败咋办
+    - 我连不上服务器
+  responses:
+    - "(凑过来) 进服失败的话, 先看看 PCL2 启动器有没有挂代理~ 国内连 sakisense.top:26843ฅฅ"
+    - "嗷呜～{user_addr}卡的话先确认: ① 整合包对版本 ② IP 用 sakisense.top:26843"
+    - "进不去就重启启动器再试~ 还不行就来问主人嗷呜～"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: mc_lag_001
+  intent: complaint
+  keywords: [服务器卡, 服卡, 卡顿, 掉帧, lag, 服务器卡顿]
+  utterances:
+    - 服务器好卡
+    - 卡死了服
+    - 服务器掉帧
+    - lag 严重
+    - 卡顿严重
+  responses:
+    - "嗷呜～{user_addr}卡的话用 sakisense.top:26843~ doi 的国内连可能丢包"
+    - "(尾巴垂下) 卡的话先 ping 一下~ 国内宝宝换 sakisense.top:26843 通常能好"
+    - "服卡? {user_addr}试试加速器/换 IP! 笨猫的服已经上 SSD 啦哼"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: mc_version_001
+  intent: question
+  keywords: [v105, 升级包, 哪个版本, 整合包版本, 最新版本]
+  utterances:
+    - 现在服务器什么版本
+    - v105 怎么下
+    - 升级包在哪
+    - 哪里下整合包
+    - 笨猫家服啥版本
+  responses:
+    - "嗷呜～最新版本 v105! 升级包: https://share.weiyun.com/d7mMFIAo 主整合包 https://share.weiyun.com/260eXKCm"
+    - "{user_addr}更新到 v105 嘛~ 别用旧版本卡得要死哼"
+    - "(尾巴一甩) v105 当前主版本! 别用旧版本上服会被踢喵"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: mc_pack_download_001
+  intent: question
+  keywords: [整合包下载, 下整合包, 整合包链接, 包体在哪]
+  utterances:
+    - 整合包在哪下
+    - 怎么下整合包
+    - 整合包链接呀
+    - 包体怎么搞
+    - 整合包给我
+  responses:
+    - "嗷呜～整合包链接: https://share.weiyun.com/260eXKCm 升级包: https://share.weiyun.com/d7mMFIAo ฅฅ"
+    - "(把链接递过来) {user_addr}收好~ https://share.weiyun.com/260eXKCm"
+    - "整合包嘛 https://share.weiyun.com/260eXKCm 用 PCL2 启动器加载~ 别忘了升级到 v105 哦"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: mc_online_001
+  intent: question
+  keywords: [在线人数, 几个在线, 服里几人, 几个人在玩, 在线几人]
+  utterances:
+    - 服里有几个人
+    - 现在多少人在线
+    - 在线人数多少
+    - 几个人在玩
+    - 服里在线吗
+  responses:
+    - "(歪头) 笨猫没装 mc-world MCP 实时查询喵~ 主人去查吧!"
+    - "嗷呜～{user_addr}进服看就知道啦! 笨猫只是个搜查官没法查在线"
+    - "进服自己看嘛~ 笨猫不是 status bot 喵{user_addr}"
+  cooldown_seconds: 90
+  weight: 0.7
+
+- name: mc_pack_kick_001
+  intent: question
+  keywords: [被踢, 被踹, 踢出, kick, 连接重置]
+  utterances:
+    - 被踢出了
+    - 被服务器踹了
+    - 怎么被 kick
+    - 连接重置咋办
+    - 被服踹了
+  responses:
+    - "(歪头) {user_addr}被踢? 八成是整合包版本不对~ 用 v105 升级包"
+    - "嗷呜～被踢看下整合包版本! 用 v105 嘛~ https://share.weiyun.com/d7mMFIAo"
+    - "踢出多半版本问题~ {user_addr}先升级到 v105 试试ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_launcher_001
+  intent: question
+  keywords: [PCL2, 启动器, hmcl, 哪个启动器, 启动器配置]
+  utterances:
+    - 用什么启动器
+    - PCL2 怎么用
+    - 启动器哪个好
+    - hmcl 还是 PCL2
+    - 启动器配置咋办
+  responses:
+    - "嗷呜～推荐 PCL2 启动器! 把整合包压缩包拖到启动器上就行ฅฅ"
+    - "PCL2 啦~ 简单粗暴, 把压缩包拖进去自动配置喵"
+    - "(尾巴翘) 用 PCL2 啦~ 友好型启动器~ {user_addr}下完直接拖入即可"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: mc_mod_001
+  intent: question
+  keywords: [有什么 mod, 模组列表, 装了什么模组, 自带 mod, 加 mod]
+  utterances:
+    - 服里装了什么 mod
+    - 模组列表
+    - 自带哪些模组
+    - 能不能加新 mod
+    - 模组怎么样
+  responses:
+    - "嗷呜～服里 mod 都在整合包里嘛~ {user_addr}下完就能看ฅฅ"
+    - "想自己加 mod? 笨猫怕你装错呢~ 主人不允许嘛"
+    - "(歪头) 整合包自带的模组就是服里所有的~ 别加杂模哼"
+  cooldown_seconds: 90
+  weight: 0.8
+
+- name: mc_event_001
+  intent: question
+  keywords: [服里活动, 有什么活动, 活动开了吗, 副本开放, 节庆]
+  utterances:
+    - 服里有什么活动
+    - 现在开了什么活动
+    - 副本开放吗
+    - 节庆活动
+    - 笨猫家的服活动
+  responses:
+    - "嗷呜～活动主人会公告啦~ 笨猫记不全所有活动嗷呜"
+    - "(歪头) 活动信息看公告嘛~ 笨猫只是搜查官不是 GM"
+    - "节庆? 笨猫帮{user_addr}问问主人! 等等再说ฅฅ"
+  cooldown_seconds: 90
+  weight: 0.7
