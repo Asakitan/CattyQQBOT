@@ -8877,30 +8877,24 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
     user_text = event_plain_text(event)
     async with _locks[_conversation_queue_key(event)]:
         today_gained: int | None = None
+        # 主人 2026-05-29: 签到/积分查询全部走 CPU 模板池 (S5 quick_reply yaml),
+        # 不再调 AI 生成 caption - 这种 deterministic 命令浪费 token + 慢 1-3s.
+        # 真要 AI 文案时用 #ai signin (TODO) 显式触发, 否则 pool 出.
         if cmd == "signin":
             result = affection_store.daily_checkin(user_id)
-            # 签到成功时把当次金额传给卡片底栏
             if result.get("success") and not result.get("already"):
                 today_gained = int(result.get("gained") or 0)
             summary = affection_store.summary(user_id)
             card_mode = "signin" if today_gained is not None else "summary"
-            ai_caption = await _generate_affection_caption(
-                event,
-                scene_brief=_signin_scene_brief(result),
-                user_text=user_text,
-            )
-            caption = ai_caption if ai_caption else _fallback_caption_signin(result)
+            caption = _fallback_caption_signin(result)
+            logger.info(f"[quick_reply.signin] uid={user_id} caption={caption[:60]!r}")
             image_segment = _send_affection_card(
                 event, mode=card_mode, summary=summary, today_gained=today_gained,
             )
         elif cmd == "points":
             summary = affection_store.summary(user_id)
-            ai_caption = await _generate_affection_caption(
-                event,
-                scene_brief=_summary_scene_brief(summary),
-                user_text=user_text,
-            )
-            caption = ai_caption if ai_caption else _fallback_caption_summary(summary)
+            caption = _fallback_caption_summary(summary)
+            logger.info(f"[quick_reply.points] uid={user_id} caption={caption[:60]!r}")
             image_segment = _send_affection_card(
                 event, mode="summary", summary=summary,
             )
@@ -8920,6 +8914,16 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
 
 async def _generate_legs_caption(event: MessageEvent, user_text: str) -> str:
     is_owner = _event_is_owner(event)
+    # 主人 2026-05-29: 腿图 caption 默认走 CPU 模板池 (legs.yaml 19 句),
+    # 不浪费 token 让 AI 现编. 真要 AI 文案可以 #ai 触发主链路.
+    user_nickname = "主人" if is_owner else (
+        getattr(event.sender, "card", None) or getattr(event.sender, "nickname", None) or "杂鱼"
+    )
+    reply = random_legs_reply(is_owner=is_owner, user_nickname=str(user_nickname))
+    logger.info(f"[quick_reply.legs] uid={event.user_id} caption={reply[:60]!r}")
+    return reply
+
+    # 下面 AI 路径保留作为未来 #ai legs 显式触发 (当前不可达)
     if not _has_api_key():
         return random_legs_reply(is_owner=is_owner)
     addr_rule = (
