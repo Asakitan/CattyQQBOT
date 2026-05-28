@@ -1,0 +1,207 @@
+# 视频创作 / 剪辑 / 直播 / UP主 routes (S6 R51 NLU 节点扩充, 第四周期 buffered 10/10 周期完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B3 photography (照片) 区分: 这里专注视频/剪辑/直播/自媒体.
+
+- name: video_editing_001
+  intent: question
+  keywords: [推荐视频剪辑, 推荐剪辑软件, 推荐 PR, 推荐剪映, 笨猫剪辑]
+  utterances:
+    - 推荐视频剪辑
+    - 推荐剪辑软件
+    - 推荐 PR
+    - 推荐剪映
+    - 笨猫剪辑
+  responses:
+    - "嗷呜～{user_addr}专业: Premiere Pro / Final Cut Pro / DaVinciฅฅ"
+    - "(尾巴翘) 入门: 剪映 / Vlogger / 必剪 - 移动端"
+    - "{user_addr}剪辑师选达芬奇! 调色业界标准"
+    - "(挺胸) 笨猫的提醒: 软件不重要! 内容才重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: video_youtube_001
+  intent: question
+  keywords: [推荐 YouTube, 推荐做 YouTube, 推荐 b 站, 推荐做 up主, 笨猫 up主]
+  utterances:
+    - 推荐 YouTube
+    - 推荐做 YouTube
+    - 推荐 b 站
+    - 推荐做 up主
+    - 笨猫 up主
+  responses:
+    - "嗷呜～{user_addr}国内 B 站 / 抖音 / 快手 / 西瓜ฅฅ"
+    - "(尾巴翘) 国外 YouTube + Twitch - 收益高"
+    - "{user_addr}先定位 + 找差异化 + 持续更新"
+    - "(挺胸) 笨猫的提醒: 不是一天暴富! 坚持 1+ 年才出头"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: video_livestream_002
+  intent: question
+  keywords: [推荐做直播, 直播怎么搞, 推荐直播设备, 推荐直播平台, 笨猫做直播]
+  utterances:
+    - 推荐做直播
+    - 直播怎么搞
+    - 推荐直播设备
+    - 推荐直播平台
+    - 笨猫做直播
+  responses:
+    - "嗷呜～{user_addr}入门: 手机 + 麦 + 补光灯 - 基础ฅฅ"
+    - "(尾巴翘) 进阶: 相机 + 声卡 + 三机位 - 专业"
+    - "{user_addr}平台: 抖音 / 快手 / B 站 / 视频号"
+    - "(挺胸) 笨猫的提醒: 直播很辛苦! 心态要稳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: video_short_001
+  intent: question
+  keywords: [推荐短视频, 推荐做抖音, 推荐做快手, 短视频技巧, 笨猫短视频]
+  utterances:
+    - 推荐短视频
+    - 推荐做抖音
+    - 推荐做快手
+    - 短视频技巧
+    - 笨猫短视频
+  responses:
+    - "嗷呜～{user_addr}前 3 秒抓住人! 不然刷走ฅฅ"
+    - "(尾巴翘) 黄金结构: 钩子 + 干货 + 反转 + 互动"
+    - "{user_addr}抖音偏年轻 / 快手偏老铁 / 视频号偏成熟"
+    - "(挺胸) 笨猫的提醒: 内容垂直! 别啥都做"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: video_color_001
+  intent: question
+  keywords: [推荐调色, 推荐 LUT, 推荐 DaVinci, 推荐调色软件, 笨猫调色]
+  utterances:
+    - 推荐调色
+    - 推荐 LUT
+    - 推荐 DaVinci
+    - 推荐调色软件
+    - 笨猫调色
+  responses:
+    - "嗷呜～{user_addr}专业: DaVinci Resolve - 调色之王ฅฅ"
+    - "(尾巴翘) PR / FCP 调色基础 / DV 调色专业"
+    - "{user_addr}LUT: 一键风格化 - 法国电影 / 复古 / 青橙"
+    - "(挺胸) 笨猫的提醒: 别过度调色! 自然 > 风格"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: video_audio_001
+  intent: question
+  keywords: [推荐视频配音, 推荐配乐, 推荐音效, 推荐 BGM, 笨猫配乐]
+  utterances:
+    - 推荐视频配音
+    - 推荐配乐
+    - 推荐音效
+    - 推荐 BGM
+    - 笨猫配乐
+  responses:
+    - "嗷呜～{user_addr}免版税: Epidemic / Artlist / 网易音乐ฅฅ"
+    - "(尾巴翘) 国产: 剪映自带音乐 / 抖音音乐"
+    - "{user_addr}配音: 配音猫 / 微软 TTS / 自己读"
+    - "(挺胸) 笨猫的提醒: 别用版权音乐商用! 会被打"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: video_thumb_001
+  intent: question
+  keywords: [推荐封面, 推荐视频封面, 推荐缩略图, 视频缩略图, 笨猫封面]
+  utterances:
+    - 推荐封面
+    - 推荐视频封面
+    - 推荐缩略图
+    - 视频缩略图设计
+    - 笨猫封面
+  responses:
+    - "嗷呜～{user_addr}3 大要素: 人脸 + 大字 + 强对比ฅฅ"
+    - "(尾巴翘) 用 Canva / Photoshop / 创可贴 - 模板多"
+    - "{user_addr}封面点击率决定流量! 多试 A/B 测"
+    - "(挺胸) 笨猫的提醒: 别标题党! 内容跟不上掉粉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: video_storyboard_001
+  intent: question
+  keywords: [推荐脚本, 推荐分镜, 推荐故事板, 视频脚本怎么写, 笨猫脚本]
+  utterances:
+    - 推荐脚本
+    - 推荐分镜
+    - 推荐故事板
+    - 视频脚本怎么写
+    - 笨猫脚本
+  responses:
+    - "嗷呜～{user_addr}框架: 开篇 + 矛盾 + 解决 + 升华ฅฅ"
+    - "(尾巴翘) 分镜画在纸 / 用 Storyboarder 软件"
+    - "{user_addr}脚本预演! 别拍了再剪头疼"
+    - "(挺胸) 笨猫的提醒: 1 分钟视频 = 100 字脚本"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: video_gear_001
+  intent: question
+  keywords: [推荐视频设备, 推荐录像机, 推荐摄影机, 推荐 GoPro, 笨猫视频设备]
+  utterances:
+    - 推荐视频设备
+    - 推荐录像机
+    - 推荐摄影机
+    - 推荐 GoPro
+    - 笨猫视频设备
+  responses:
+    - "嗷呜～{user_addr}入门: 手机 + 稳定器 + 补光 - 千元搞定ฅฅ"
+    - "(尾巴翘) 进阶: 微单 (索尼 ZV-E1) / 单反 (R6)"
+    - "{user_addr}运动: GoPro / Insta360 - 防抖防水"
+    - "(挺胸) 笨猫的提醒: 别一上来万元设备! 浪费"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: video_animation_001
+  intent: question
+  keywords: [推荐动画, 推荐 AE, 推荐 MG 动画, 推荐做动画, 笨猫动画]
+  utterances:
+    - 推荐动画
+    - 推荐 AE
+    - 推荐 MG 动画
+    - 推荐做动画
+    - 笨猫动画
+  responses:
+    - "嗷呜～{user_addr}专业: After Effects + Cinema 4DฅฅMG 动画神器"
+    - "(尾巴翘) 入门: Animaker / Vyond / Doodly"
+    - "{user_addr}2D 用 AE / 3D 用 Blender (开源) / C4D (专业)"
+    - "(挺胸) 笨猫的提醒: 动画难! 收入也高"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: video_vlogger_001
+  intent: question
+  keywords: [推荐 vlog, 推荐 vlogger, 推荐做 vlog, 推荐生活记录, 笨猫 vlog]
+  utterances:
+    - 推荐 vlog
+    - 推荐 vlogger
+    - 推荐做 vlog
+    - 推荐生活记录
+    - 笨猫 vlog
+  responses:
+    - "嗷呜～{user_addr}vlog: 个人化 + 真实 + 有趣 - 三件套ฅฅ"
+    - "(尾巴翘) 设备: 手机 + 麦 + 稳定器 = 起步"
+    - "{user_addr}内容: 旅行 / 学习 / 工作 / 美食 - 个人生活"
+    - "(挺胸) 笨猫的提醒: 别只拍流水账! 找故事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: video_revenue_001
+  intent: question
+  keywords: [推荐自媒体变现, 推荐视频收益, 推荐广告, 推荐带货, 笨猫变现]
+  utterances:
+    - 推荐自媒体变现
+    - 推荐视频收益
+    - 推荐广告
+    - 推荐带货
+    - 笨猫变现
+  responses:
+    - "嗷呜～{user_addr}主流: 广告 / 带货 / 直播 / 知识付费ฅฅ"
+    - "(尾巴翘) 平台分成: 抖音星图 / B 站花火 - 接商单"
+    - "{user_addr}1w 粉是临界! 上来才有商机"
+    - "(挺胸) 笨猫的提醒: 别只追变现! 内容是根"
+  cooldown_seconds: 60
+  weight: 1.0

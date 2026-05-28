@@ -1,0 +1,207 @@
+# 电商深度 / 直播带货 / 优惠券 / 退货 / 海淘 routes (S6 R44 NLU 节点扩充, 第四周期 buffered 3/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+# 跟 97 shop_taobao 区分: 这里深入电商场景细节.
+
+- name: ecom_livestream_001
+  intent: question
+  keywords: [推荐直播带货, 推荐直播, 推荐李佳琦, 推荐辛巴, 笨猫直播]
+  utterances:
+    - 推荐直播带货
+    - 推荐看直播
+    - 直播带货怎么样
+    - 推荐主播
+    - 笨猫直播
+  responses:
+    - "嗷呜～{user_addr}头部: 李佳琦 / 辛巴 / 罗永浩 / 董宇辉ฅฅ"
+    - "(尾巴翘) 看品类: 美妆找李佳琦 / 食品找辛巴 / 数码找罗"
+    - "{user_addr}别冲动!直播带货容易剁手"
+    - "(挺胸) 笨猫的提醒: 看完睡一觉再下单! 别熬夜买"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ecom_coupon_001
+  intent: question
+  keywords: [推荐优惠券, 推荐淘宝优惠, 推荐折扣, 优惠券哪里领, 笨猫优惠券]
+  utterances:
+    - 推荐优惠券
+    - 推荐淘宝优惠
+    - 推荐折扣
+    - 优惠券哪里领
+    - 笨猫优惠券
+  responses:
+    - "嗷呜～{user_addr}返利平台: 高佣联盟 / 花生日记 / 一淘ฅฅ"
+    - "(尾巴翘) 淘宝 88vip / 京东 plus / 拼多多省 - 必开"
+    - "{user_addr}双 11 / 618 / 38 妇女节 - 大促时期"
+    - "(挺胸) 笨猫的提醒: 别为优惠买不必要的! 浪费"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ecom_return_001
+  intent: question
+  keywords: [推荐退货, 怎么退货, 推荐退款, 退货纠纷, 笨猫退货]
+  utterances:
+    - 怎么退货
+    - 推荐退货
+    - 推荐退款
+    - 退货纠纷
+    - 笨猫退货
+  responses:
+    - "嗷呜～{user_addr}7 天无理由! 别拆吊牌别用ฅฅ"
+    - "(尾巴翘) 淘宝走平台仅退款 / 京东上门取 / 拼多多便捷"
+    - "{user_addr}质量问题留拍照证据! 客服不答应找平台"
+    - "(挺胸) 笨猫的提醒: 拒收最快! 直接退回包裹"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ecom_logistics_001
+  intent: question
+  keywords: [推荐快递, 物流推荐, 推荐快递公司, 推荐查物流, 笨猫快递]
+  utterances:
+    - 推荐快递
+    - 物流推荐
+    - 推荐快递公司
+    - 推荐查物流
+    - 笨猫快递
+  responses:
+    - "嗷呜～{user_addr}顺丰快但贵 / 京东自营快 / 三通一达便宜ฅฅ"
+    - "(尾巴翘) 查物流: 快递 100 / 菜鸟裹裹 - 多家整合"
+    - "{user_addr}急件用顺丰特快 / 大件用德邦"
+    - "(挺胸) 笨猫的提醒: 收件签名前先验货! 别直接签"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ecom_haitao_001
+  intent: question
+  keywords: [推荐海淘, 推荐海外购, 推荐转运, 推荐黑五, 笨猫海淘]
+  utterances:
+    - 推荐海淘
+    - 推荐海外购
+    - 推荐转运
+    - 推荐黑五
+    - 笨猫海淘
+  responses:
+    - "嗷呜～{user_addr}转运: 万邦 / 林邦 / 美邮宝 / DHL ฅฅ"
+    - "(尾巴翘) 黑五感恩节美国大促! 比国内 618 还狠"
+    - "{user_addr}海淘看自己买信用卡 + 转运 + 关税"
+    - "(挺胸) 笨猫的提醒: 算清关税! 别冲动 (奢侈品高税)"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ecom_payment_001
+  intent: question
+  keywords: [推荐支付, 推荐支付宝, 推荐微信支付, 推荐花呗, 笨猫支付]
+  utterances:
+    - 推荐支付
+    - 推荐支付宝
+    - 推荐微信支付
+    - 推荐花呗
+    - 笨猫支付
+  responses:
+    - "嗷呜～{user_addr}支付宝 + 微信 = 中国移动支付双雄ฅฅ"
+    - "(尾巴翘) 花呗 / 信用卡 - 短期周转 OK"
+    - "{user_addr}别用借呗! 利率高"
+    - "(挺胸) 笨猫的提醒: 别开太多分期! 利息累积可怕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ecom_fake_001
+  intent: complaint
+  keywords: [推荐识别假货, 假货怎么办, 推荐辨别真假, 推荐验货, 笨猫假货]
+  utterances:
+    - 推荐识别假货
+    - 假货怎么办
+    - 推荐辨别真假
+    - 推荐验货
+    - 笨猫假货
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}假货举报! 12315 + 平台ฅฅ"
+    - "(歪头) 高仿看做工/线头/字体! 细节露馅"
+    - "{user_addr}奢侈品上得物 / 真我等鉴定平台 / 50-100/次"
+    - "(挺胸) 笨猫的提醒: 大牌官方/旗舰店买! 别贪便宜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ecom_review_001
+  intent: question
+  keywords: [推荐看评价, 怎么看真假评价, 推荐刷单识别, 推荐评价, 笨猫评价]
+  utterances:
+    - 怎么看真假评价
+    - 推荐看评价
+    - 推荐刷单识别
+    - 推荐评价
+    - 笨猫评价
+  responses:
+    - "嗷呜～{user_addr}看追评! 刷单一般不追评ฅฅ"
+    - "(尾巴翘) 看带图评价 + 长文 + 时间分布"
+    - "{user_addr}差评看商家回复! 应对态度反映品质"
+    - "(挺胸) 笨猫的提醒: 5 分好评太完美的可疑! 4.5-4.8 真实"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ecom_brand_official_001
+  intent: question
+  keywords: [推荐官方旗舰店, 推荐天猫, 推荐自营, 推荐品牌专卖, 笨猫官旗]
+  utterances:
+    - 推荐官方旗舰店
+    - 推荐天猫
+    - 推荐自营
+    - 推荐品牌专卖
+    - 笨猫官旗
+  responses:
+    - "嗷呜～{user_addr}官旗保真! 但价格高 5-15%ฅฅ"
+    - "(尾巴翘) 京东自营物流快 + 售后好"
+    - "{user_addr}天猫国际查海外货源真假"
+    - "(挺胸) 笨猫的提醒: 重要东西买官旗! 便宜的随意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ecom_secondhand_001
+  intent: question
+  keywords: [推荐闲鱼, 推荐二手, 推荐转转, 推荐买二手, 笨猫二手]
+  utterances:
+    - 推荐二手
+    - 推荐闲鱼
+    - 推荐转转
+    - 推荐买二手
+    - 笨猫二手
+  responses:
+    - "嗷呜～{user_addr}主流: 闲鱼 / 转转 / 红布林 / 得物ฅฅ"
+    - "(尾巴翘) 闲鱼 C2C 灵活 / 转转 B2C 验过货"
+    - "{user_addr}电子产品上转转 / 服饰看闲鱼 / 奢侈品红布林"
+    - "(挺胸) 笨猫的提醒: 二手当面交易! 别先付定金"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ecom_subscription_001
+  intent: question
+  keywords: [推荐订阅, 推荐买会员, 推荐 plus, 推荐 88vip, 笨猫订阅]
+  utterances:
+    - 推荐订阅
+    - 推荐买会员
+    - 推荐 plus
+    - 推荐 88vip
+    - 笨猫订阅
+  responses:
+    - "嗷呜～{user_addr}必开: 淘宝 88vip / 京东 plus / 拼多多省ฅฅ"
+    - "(尾巴翘) 优酷 / 爱奇艺 / 腾讯视频 - 三选一"
+    - "{user_addr}音乐: QQ 音乐 / 网易云 - 国内主流"
+    - "(挺胸) 笨猫的提醒: 别开太多! 算下用得着的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ecom_bargain_001
+  intent: question
+  keywords: [推荐讨价, 推荐砍价, 推荐拼多多砍价, 推荐讲价, 笨猫砍价]
+  utterances:
+    - 推荐讨价
+    - 推荐砍价
+    - 推荐拼多多砍价
+    - 推荐讲价
+    - 笨猫砍价
+  responses:
+    - "嗷呜～{user_addr}线下讲价: 三件起步打折 + 现金优惠ฅฅ"
+    - "(尾巴翘) 拼多多砍价: 拉新人各 0.01-0.5 / 几十人砍下"
+    - "{user_addr}别太低! 商家亏本不卖"
+    - "(挺胸) 笨猫的提醒: 别为砍价拉太多人! 友情不值"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,207 @@
+# 效率工具 / 笔记软件 / 自动化 / Notion routes (S6 R48 NLU 节点扩充, 第四周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B9 career_office 区分: 这里专注现代效率工具 / 笔记 / 自动化.
+
+- name: prod_notion_001
+  intent: question
+  keywords: [推荐 Notion, Notion 怎么用, 推荐用 Notion, Notion 模板, 笨猫 Notion]
+  utterances:
+    - 推荐 Notion
+    - Notion 怎么用
+    - 推荐用 Notion
+    - Notion 模板
+    - 笨猫 Notion
+  responses:
+    - "嗷呜～{user_addr}Notion 是笔记+数据库+协作 一体ฅฅ"
+    - "(尾巴翘) 用途: 知识库 / 项目管理 / 个人 OKR / 日记"
+    - "{user_addr}模板: 官方模板 / Notion 中文社区"
+    - "(挺胸) 笨猫的提醒: 别过度复杂! 简洁高效"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: prod_obsidian_001
+  intent: question
+  keywords: [推荐 Obsidian, 推荐双链笔记, 推荐 Roam, 推荐 Logseq, 笨猫 Obsidian]
+  utterances:
+    - 推荐 Obsidian
+    - 推荐双链笔记
+    - 推荐 Roam
+    - 推荐 Logseq
+    - 笨猫 Obsidian
+  responses:
+    - "嗷呜～{user_addr}Obsidian: 本地 + Markdown + 双链 - 极客最爱ฅฅ"
+    - "(尾巴翘) 同步用 iCloud / 同步盘 / 官方 Sync"
+    - "{user_addr}插件: Dataview / Templater / Calendar - 必装"
+    - "(挺胸) 笨猫的提醒: 别上来折腾插件! 先写笔记"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: prod_todo_001
+  intent: question
+  keywords: [推荐 todo, 推荐待办, 推荐任务管理, 推荐 todolist, 笨猫待办]
+  utterances:
+    - 推荐 todo
+    - 推荐待办
+    - 推荐任务管理
+    - 推荐 todolist
+    - 笨猫待办
+  responses:
+    - "嗷呜～{user_addr}主流: Todoist / TickTick / Microsoft To DoฅฅiCloud 提醒事项也强"
+    - "(尾巴翘) 滴答清单 (TickTick 国内版) - 性价比高"
+    - "{user_addr}原则: 一日 3 件重要事! 别贪多"
+    - "(挺胸) 笨猫的提醒: 完成打勾的快乐 = 多巴胺源"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: prod_calendar_001
+  intent: question
+  keywords: [推荐日历, 推荐日程, 推荐 Google Calendar, 推荐 Fantastical, 笨猫日历]
+  utterances:
+    - 推荐日历
+    - 推荐日程
+    - 推荐 Google Calendar
+    - 推荐 Fantastical
+    - 笨猫日历
+  responses:
+    - "嗷呜～{user_addr}主流: Google / Apple / Outlook 日历ฅฅ"
+    - "(尾巴翘) Fantastical 高端: 智能解析 + 漂亮 UI"
+    - "{user_addr}用日历做时间块 (Time Block)! 安排专注时段"
+    - "(挺胸) 笨猫的提醒: 别只记会议! 个人时间也记"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: prod_pomodoro_001
+  intent: question
+  keywords: [推荐番茄钟, 番茄工作法, 推荐 Pomodoro, 推荐专注 app, 笨猫番茄]
+  utterances:
+    - 推荐番茄钟
+    - 番茄工作法
+    - 推荐 Pomodoro
+    - 推荐专注 app
+    - 笨猫番茄
+  responses:
+    - "嗷呜～{user_addr}25 分钟专注 + 5 分钟休息 = 1 个番茄钟ฅฅ"
+    - "(尾巴翘) 推荐: Forest / Bear Focus / Be Focused"
+    - "{user_addr}4 个番茄后长休 15-30 分钟!"
+    - "(挺胸) 笨猫的提醒: 关掉社交! 不然番茄被打断"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: prod_clipboard_001
+  intent: question
+  keywords: [推荐剪贴板, 推荐 Paste, 推荐 PopClip, 推荐 Alfred, 笨猫剪贴板]
+  utterances:
+    - 推荐剪贴板
+    - 推荐 Paste
+    - 推荐 PopClip
+    - 推荐 Alfred
+    - 笨猫剪贴板
+  responses:
+    - "嗷呜～{user_addr}Mac: Paste / Maccy - 剪贴板历史ฅฅ"
+    - "(尾巴翘) Alfred: 启动器 + 剪贴板 + 工作流 - 神器"
+    - "{user_addr}Windows: Ditto / ClipboardFusion"
+    - "(挺胸) 笨猫的提醒: 装上回不去! 大大提速"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: prod_automation_001
+  intent: question
+  keywords: [推荐自动化, 推荐 Zapier, 推荐 IFTTT, 推荐 Make, 笨猫自动化]
+  utterances:
+    - 推荐自动化
+    - 推荐 Zapier
+    - 推荐 IFTTT
+    - 推荐 Make
+    - 笨猫自动化
+  responses:
+    - "嗷呜～{user_addr}Zapier: 5000+ app 互联 - 老牌ฅฅ"
+    - "(尾巴翘) Make (Integromat): 可视化 + 复杂工作流"
+    - "{user_addr}IFTTT 入门 / Zapier 进阶 / Make 高级"
+    - "(挺胸) 笨猫的提醒: 自动化前先想清楚流程!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: prod_keyboard_001
+  intent: question
+  keywords: [推荐快捷键, 推荐键盘提速, 推荐效率快捷键, Keyboard Maestro, 笨猫快捷键]
+  utterances:
+    - 推荐快捷键
+    - 推荐键盘提速
+    - 推荐效率快捷键
+    - Keyboard Maestro
+    - 笨猫快捷键
+  responses:
+    - "嗷呜～{user_addr}Mac: Keyboard Maestro / BetterTouchToolฅฅ"
+    - "(尾巴翘) Windows: AutoHotkey - 万能自动化"
+    - "{user_addr}必学: Cmd+Tab / Cmd+Space - 系统级"
+    - "(挺胸) 笨猫的提醒: 鼠标手痛? 学快捷键! 救手"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: prod_screen_001
+  intent: question
+  keywords: [推荐截屏, 推荐截图, 推荐录屏, 推荐 Snipaste, 笨猫截图]
+  utterances:
+    - 推荐截屏
+    - 推荐截图
+    - 推荐录屏
+    - 推荐 Snipaste
+    - 笨猫截图
+  responses:
+    - "嗷呜～{user_addr}Windows: Snipaste / ShareX - 截图标注ฅฅ"
+    - "(尾巴翘) Mac: 自带 Cmd+Shift+3/4/5 - 够用"
+    - "{user_addr}录屏: OBS / Camtasia / ScreenFlow"
+    - "(挺胸) 笨猫的提醒: GIF 录屏用 LICEcap / Kap - 小巧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: prod_pdf_001
+  intent: question
+  keywords: [推荐 PDF 编辑, 推荐 PDF 工具, PDF 转 Word, 推荐 PDF 阅读, 笨猫 PDF]
+  utterances:
+    - 推荐 PDF 编辑
+    - 推荐 PDF 工具
+    - PDF 转 Word
+    - 推荐 PDF 阅读
+    - 笨猫 PDF
+  responses:
+    - "嗷呜～{user_addr}主流: Adobe Acrobat - 老牌专业ฅฅ"
+    - "(尾巴翘) 平替: Foxit / WPS PDF / PDFelement"
+    - "{user_addr}转换: SmallPDF / iLovePDF - 在线免费"
+    - "(挺胸) 笨猫的提醒: PDF 编辑Mac 用 PDF Expert"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: prod_translate_001
+  intent: question
+  keywords: [推荐翻译, 推荐翻译软件, 推荐 DeepL, 推荐字典, 笨猫翻译]
+  utterances:
+    - 推荐翻译
+    - 推荐翻译软件
+    - 推荐 DeepL
+    - 推荐字典
+    - 笨猫翻译
+  responses:
+    - "嗷呜～{user_addr}DeepL 质量最好 / 谷歌翻译覆盖多ฅฅ"
+    - "(尾巴翘) 国产: 百度翻译 / 有道 / 腾讯翻译君"
+    - "{user_addr}AI 时代: ChatGPT / Claude 翻译更好"
+    - "(挺胸) 笨猫的提醒: 重要文件别只 AI! 找人校对"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: prod_writing_001
+  intent: question
+  keywords: [推荐写作软件, 推荐 Typora, 推荐 Bear, 推荐 Markdown, 笨猫写作]
+  utterances:
+    - 推荐写作软件
+    - 推荐 Typora
+    - 推荐 Bear
+    - 推荐 Markdown
+    - 笨猫写作
+  responses:
+    - "嗷呜～{user_addr}Markdown: Typora / iA Writer / Mark TextฅฅMarkdown 必学"
+    - "(尾巴翘) 全平台: Bear / Ulysses - 漂亮极简"
+    - "{user_addr}长文用 Scrivener - 写小说论文专业"
+    - "(挺胸) 笨猫的提醒: 工具不重要! 内容才重要"
+  cooldown_seconds: 60
+  weight: 1.0

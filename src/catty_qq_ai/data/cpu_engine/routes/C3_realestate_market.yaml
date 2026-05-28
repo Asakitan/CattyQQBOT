@@ -1,0 +1,207 @@
+# 房产 / 楼市 / 买房政策 / 学区 / 中介 routes (S6 R45 NLU 节点扩充, 第四周期 buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A8 home_decor (装修家电) 区分: 这里专注买房/楼市/政策.
+
+- name: real_market_001
+  intent: question
+  keywords: [推荐楼市, 楼市行情, 房价走势, 推荐看房市, 笨猫楼市]
+  utterances:
+    - 推荐楼市
+    - 楼市行情
+    - 房价走势
+    - 推荐看房市
+    - 笨猫楼市
+  responses:
+    - "嗷呜～{user_addr}房住不炒! 现在楼市以稳为主ฅฅ"
+    - "(尾巴翘) 一线核心区抗跌 / 三四线小心"
+    - "{user_addr}看人口流入 + 产业 + 教育 - 决定房价"
+    - "(挺胸) 笨猫的提醒: 别加杠杆炒房! 政策紧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: real_policy_001
+  intent: question
+  keywords: [推荐买房政策, 限购, 限售, 推荐限购城市, 笨猫房政策]
+  utterances:
+    - 推荐买房政策
+    - 限购怎么算
+    - 限售
+    - 推荐限购城市
+    - 笨猫房政策
+  responses:
+    - "嗷呜～{user_addr}一线限购紧! 北上深杭社保年限要 5+ฅฅ"
+    - "(尾巴翘) 二三线限购松 / 部分取消 - 看具体政策"
+    - "{user_addr}先查户籍 + 社保 + 资格"
+    - "(挺胸) 笨猫的提醒: 政策一直变! 买前一周查最新"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: real_loan_001
+  intent: question
+  keywords: [推荐房贷, 公积金贷款, 推荐组合贷, 推荐商贷, 笨猫房贷]
+  utterances:
+    - 推荐房贷
+    - 公积金贷款
+    - 推荐组合贷
+    - 推荐商贷
+    - 笨猫房贷
+  responses:
+    - "嗷呜～{user_addr}公积金贷最便宜! 利率 2.85-3.25%ฅฅ"
+    - "(尾巴翘) 组合贷: 公积金 + 商贷 - 平衡"
+    - "{user_addr}首套 LPR-20bp / 二套 LPR+20bp - 看政策"
+    - "(挺胸) 笨猫的提醒: 月供不超收入 50%!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: real_school_001
+  intent: question
+  keywords: [推荐学区房, 学区房, 推荐学区, 推荐买学区, 笨猫学区]
+  utterances:
+    - 推荐学区房
+    - 学区房值得吗
+    - 推荐学区
+    - 推荐买学区
+    - 笨猫学区
+  responses:
+    - "嗷呜～{user_addr}学区房政策变! 多校划片趋势ฅฅ"
+    - "(尾巴翘) 顶级学区: 北京西城海淀 / 上海徐汇杨浦 - 死贵"
+    - "{user_addr}买前查最新学区划分! 别只看老政策"
+    - "(挺胸) 笨猫的提醒: 学区房别透支! 别砸全部"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: real_2nd_house_001
+  intent: question
+  keywords: [推荐二手房, 二手房怎么挑, 推荐看二手房, 二手房交易, 笨猫二手房]
+  utterances:
+    - 推荐二手房
+    - 二手房怎么挑
+    - 推荐看二手房
+    - 二手房交易
+    - 笨猫二手房
+  responses:
+    - "嗷呜～{user_addr}二手房: 房龄 + 学区 + 物业 - 关键ฅฅ"
+    - "(尾巴翘) 房龄超 20 年公积金贷不了!"
+    - "{user_addr}看房别只看装修! 看户型 / 朝向 / 楼层"
+    - "(挺胸) 笨猫的提醒: 砍价别怕! 二手房可砍 5-10%"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: real_agent_001
+  intent: question
+  keywords: [推荐中介, 推荐房产中介, 链家贝壳, 推荐中介费, 笨猫中介]
+  utterances:
+    - 推荐中介
+    - 推荐房产中介
+    - 链家贝壳
+    - 推荐中介费
+    - 笨猫中介
+  responses:
+    - "嗷呜～{user_addr}主流: 链家 / 贝壳 / 中原 / 我爱我家ฅฅ"
+    - "(尾巴翘) 链家中介费 2.7% - 略高但服务好"
+    - "{user_addr}小中介 1-2% - 看靠不靠谱"
+    - "(挺胸) 笨猫的提醒: 中介费可砍! 别一口价"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: real_new_house_001
+  intent: question
+  keywords: [推荐新房, 新房怎么买, 推荐买新房, 推荐期房, 笨猫新房]
+  utterances:
+    - 推荐新房
+    - 新房怎么买
+    - 推荐买新房
+    - 推荐期房
+    - 笨猫新房
+  responses:
+    - "嗷呜～{user_addr}新房看开发商! 央企国企稳ฅฅ"
+    - "(尾巴翘) 期房风险大! 烂尾楼频出"
+    - "{user_addr}现房安全 + 期房便宜 - 看预算和心理"
+    - "(挺胸) 笨猫的提醒: 万科 / 保利 / 中海 - 信得过"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: real_tax_001
+  intent: question
+  keywords: [推荐购房税费, 房产税, 推荐二手房税, 契税, 笨猫房产税]
+  utterances:
+    - 推荐购房税费
+    - 房产税
+    - 推荐二手房税
+    - 契税多少
+    - 笨猫房产税
+  responses:
+    - "嗷呜～{user_addr}首套 90 平内契税 1% / 90+ 1.5%ฅฅ"
+    - "(尾巴翘) 二手房: 满 5 唯一免增 / 不满 5 收增值税"
+    - "{user_addr}个税 1% (差额 20%) - 看具体情况"
+    - "(挺胸) 笨猫的提醒: 算清税费! 别买的时候被坑"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: real_property_001
+  intent: question
+  keywords: [推荐物业, 物业费, 推荐物业公司, 推荐选物业, 笨猫物业]
+  utterances:
+    - 推荐物业
+    - 物业费贵不贵
+    - 推荐物业公司
+    - 推荐选物业
+    - 笨猫物业
+  responses:
+    - "嗷呜～{user_addr}一线物业: 万科 / 龙湖 / 绿城 / 保利ฅฅ"
+    - "(尾巴翘) 物业费 1-5 元/平/月 - 看档次"
+    - "{user_addr}物业好生活质量翻倍! 选大牌物业"
+    - "(挺胸) 笨猫的提醒: 别拖物业费! 影响小区"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: real_renting_out_001
+  intent: question
+  keywords: [推荐出租, 房子出租, 推荐出租房子, 推荐房东, 笨猫出租]
+  utterances:
+    - 推荐出租房子
+    - 房子怎么出租
+    - 推荐出租
+    - 推荐房东
+    - 笨猫出租
+  responses:
+    - "嗷呜～{user_addr}找中介省事! 自如 / 蛋壳 / 链家ฅฅ"
+    - "(尾巴翘) 自己挂闲鱼 / 58 / 房天下 - 省中介费"
+    - "{user_addr}签合同详细! 押金 / 退租 / 损坏 - 都写清"
+    - "(挺胸) 笨猫的提醒: 别拖租客欠租! 走法律途径"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: real_yard_001
+  intent: question
+  keywords: [推荐别墅, 推荐院子, 推荐独栋, 推荐排屋, 笨猫别墅]
+  utterances:
+    - 推荐别墅
+    - 推荐院子
+    - 推荐独栋
+    - 推荐排屋
+    - 笨猫别墅
+  responses:
+    - "嗷呜～{user_addr}别墅: 独栋 / 双拼 / 联排 / 叠墅 - 4 类ฅฅ"
+    - "(尾巴翘) 一线远郊 / 二线核心 - 都不便宜"
+    - "{user_addr}维护成本高! 物业 + 装修 + 维修 - 月几千"
+    - "(挺胸) 笨猫的提醒: 别墅养!需要稳定收入"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: real_overseas_001
+  intent: question
+  keywords: [推荐海外房产, 推荐买海外房, 移民房产, 推荐境外房产, 笨猫海外房]
+  utterances:
+    - 推荐海外房产
+    - 推荐买海外房
+    - 移民房产
+    - 推荐境外房产
+    - 笨猫海外房
+  responses:
+    - "嗷呜～{user_addr}热门: 日本 / 泰国 / 马来 / 欧洲 - 各有所长ฅฅ"
+    - "(尾巴翘) 日本东京公寓 + 泰国曼谷 - 性价比高"
+    - "{user_addr}注意: 汇率 / 持有税 / 出租政策"
+    - "(挺胸) 笨猫的提醒: 海外房产投资有风险! 别 ALL IN"
+  cooldown_seconds: 60
+  weight: 0.7

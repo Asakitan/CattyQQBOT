@@ -1,0 +1,207 @@
+# 健康 / 常见病 / 医生 / 就医 routes (S6 R47 NLU 节点扩充, 第四周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/complaint, 短语级 keywords.
+# 跟 91 health_fitness / A1 safety_emergency 区分: 这里专注具体常见病 + 就医建议.
+
+- name: disease_cold_001
+  intent: complaint
+  keywords: [感冒了, 推荐感冒, 推荐感冒药, 流鼻涕, 笨猫感冒]
+  utterances:
+    - 我感冒了
+    - 推荐感冒药
+    - 流鼻涕怎么办
+    - 笨猫感冒
+    - 鼻塞
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}多喝水 + 早睡 + 维 Cฅฅ"
+    - "(歪头) 普通感冒 7 天自愈! 别滥用抗生素"
+    - "{user_addr}严重 + 高烧 + 不退 - 看医生 别拖"
+    - "(蹭蹭) 笨猫陪{user_addr}~ 抱猫缓解不舒服"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_headache_001
+  intent: complaint
+  keywords: [头疼, 推荐头痛, 推荐缓解头痛, 偏头痛, 笨猫头疼]
+  utterances:
+    - 我头疼
+    - 推荐头痛
+    - 推荐缓解头痛
+    - 偏头痛
+    - 笨猫头疼
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}头疼好辛苦~ 笨猫陪着ฅฅ"
+    - "(歪头) 闭眼 + 冰敷 + 安静环境 - 偏头痛救星"
+    - "{user_addr}吃布洛芬 / 对乙酰氨基酚 - 不能频繁吃"
+    - "(挺胸) 笨猫的提醒: 持续 + 剧烈 + 一侧 - 看医生"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_stomach_001
+  intent: complaint
+  keywords: [胃疼, 推荐胃病, 推荐胃痛, 胃酸反流, 笨猫胃疼]
+  utterances:
+    - 我胃疼
+    - 推荐胃病
+    - 推荐胃痛
+    - 胃酸反流
+    - 笨猫胃疼
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}胃疼! 笨猫心疼ฅฅ"
+    - "(歪头) 别吃辣 + 别熬夜 + 三餐规律 - 养胃"
+    - "{user_addr}奥美拉唑 / 多潘立酮 - 胃药常用"
+    - "(挺胸) 笨猫的提醒: 反复胃痛 - 胃镜查 别拖出胃癌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_insomnia_001
+  intent: complaint
+  keywords: [失眠, 推荐失眠, 推荐睡不着, 推荐改善睡眠, 笨猫失眠]
+  utterances:
+    - 我失眠
+    - 推荐失眠
+    - 睡不着觉
+    - 推荐改善睡眠
+    - 笨猫失眠
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}失眠好痛苦~ 笨猫陪着ฅฅ"
+    - "(歪头) 睡前 1 小时关屏 / 喝温奶 / 4-7-8 呼吸法"
+    - "{user_addr}严重失眠看心理科! 别硬扛"
+    - "(蹭蹭) 笨猫的提醒: 别熬夜! 早睡早起调时钟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_back_pain_001
+  intent: complaint
+  keywords: [腰疼, 推荐腰疼, 推荐颈椎病, 推荐肩膀疼, 笨猫腰疼]
+  utterances:
+    - 我腰疼
+    - 推荐腰疼
+    - 推荐颈椎病
+    - 肩膀疼
+    - 笨猫腰疼
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}腰肩颈疼! 久坐打工人ฅฅ"
+    - "(歪头) 拉伸 + 调整坐姿 + 站立办公 - 缓解"
+    - "{user_addr}严重去骨科 / 推拿 / 针灸"
+    - "(挺胸) 笨猫的提醒: 工作 1 小时活动 5 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_dental_001
+  intent: complaint
+  keywords: [牙疼, 推荐牙痛, 推荐牙医, 推荐看牙, 笨猫牙疼]
+  utterances:
+    - 我牙疼
+    - 推荐牙痛
+    - 推荐牙医
+    - 推荐看牙
+    - 笨猫牙疼
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}牙疼最折磨人! 笨猫心疼ฅฅ"
+    - "(挺胸) 立刻看牙医! 拖只会更严重"
+    - "{user_addr}冰敷脸 + 布洛芬 - 临时缓解"
+    - "(歪头) 笨猫的提醒: 每年洗牙 1 次! 早查早治"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_eye_001
+  intent: complaint
+  keywords: [眼睛疼, 眼睛红, 推荐眼药水, 推荐眼科, 笨猫眼睛]
+  utterances:
+    - 眼睛疼
+    - 眼睛红
+    - 推荐眼药水
+    - 推荐眼科
+    - 笨猫眼睛
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}多看绿色 + 远眺 + 别用屏太久ฅฅ"
+    - "(歪头) 干眼: 人工泪液 + 眨眼 / 红眼: 别揉 - 看医生"
+    - "{user_addr}近视加深去配镜复查"
+    - "(挺胸) 笨猫的提醒: 20-20-20 法则! 每 20 分看 20 尺远 20 秒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_allergy_001
+  intent: complaint
+  keywords: [过敏, 推荐过敏, 推荐过敏反应, 推荐荨麻疹, 笨猫过敏]
+  utterances:
+    - 我过敏
+    - 推荐过敏
+    - 推荐过敏反应
+    - 荨麻疹
+    - 笨猫过敏
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}先离开过敏原! 别接触ฅฅ"
+    - "(歪头) 抗组胺: 氯雷他定 / 西替利嗪 - 不嗜睡"
+    - "{user_addr}严重肿胀 / 呼吸困难 - 立刻就医!"
+    - "(挺胸) 笨猫的提醒: 查过敏原! 防止再发"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_diabetes_001
+  intent: question
+  keywords: [推荐糖尿病, 推荐血糖, 推荐糖尿病饮食, 推荐胰岛素, 笨猫糖尿病]
+  utterances:
+    - 推荐糖尿病
+    - 推荐血糖
+    - 推荐糖尿病饮食
+    - 推荐胰岛素
+    - 笨猫糖尿病
+  responses:
+    - "嗷呜～{user_addr}糖尿病: 控糖 + 运动 + 监测 - 三大件ฅฅ"
+    - "(尾巴翘) 饮食: 低 GI + 蛋白质 + 蔬菜"
+    - "{user_addr}口服药 / 胰岛素 - 看类型和病情"
+    - "(挺胸) 笨猫的提醒: 听医嘱! 别擅自停药"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_hypertension_001
+  intent: question
+  keywords: [推荐高血压, 推荐血压, 推荐降压药, 高血压饮食, 笨猫高血压]
+  utterances:
+    - 推荐高血压
+    - 推荐血压
+    - 推荐降压药
+    - 高血压饮食
+    - 笨猫高血压
+  responses:
+    - "嗷呜～{user_addr}高血压: 低盐 + 控糖 + 适量运动 + 戒烟酒ฅฅ"
+    - "(尾巴翘) 监测! 每天早晚量"
+    - "{user_addr}降压药每天定时! 别漏服"
+    - "(挺胸) 笨猫的提醒: 控好血压 - 防中风心梗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_doctor_001
+  intent: question
+  keywords: [推荐挂号, 推荐看医生, 推荐医院, 推荐三甲, 笨猫看医生]
+  utterances:
+    - 推荐挂号
+    - 推荐看医生
+    - 推荐医院
+    - 推荐三甲医院
+    - 笨猫看医生
+  responses:
+    - "嗷呜～{user_addr}三甲优先! 大病专家挂号ฅฅ"
+    - "(尾巴翘) 推荐挂号: 微信 / 支付宝 / 医院 app"
+    - "{user_addr}互联网医院方便! 复诊开药"
+    - "(挺胸) 笨猫的提醒: 大病专科医院! 别只看综合"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: disease_pediatric_001
+  intent: question
+  keywords: [推荐儿科, 推荐孩子生病, 推荐儿童医院, 推荐小儿, 笨猫儿科]
+  utterances:
+    - 推荐儿科
+    - 推荐孩子生病
+    - 推荐儿童医院
+    - 推荐小儿
+    - 笨猫儿科
+  responses:
+    - "嗷呜～{user_addr}儿童医院专科强! 别挂综合儿科ฅฅ"
+    - "(尾巴翘) 北京儿童医院 / 上海儿童医学中心 - 顶尖"
+    - "{user_addr}发烧高度警惕! 38.5+ 退烧药 + 物理降温"
+    - "(挺胸) 笨猫的提醒: 孩子用药看体重! 别按成人给"
+  cooldown_seconds: 60
+  weight: 1.0

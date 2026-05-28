@@ -1,0 +1,207 @@
+# 宠物护理 / 猫狗 / 医疗 / 训练 / 绝育 routes (S6 R46 NLU 节点扩充, 第四周期 buffered 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 89 pet_animal (推荐养啥) 区分: 这里专注护理 / 医疗 / 训练 / 常见病.
+
+- name: pet_catfood_001
+  intent: question
+  keywords: [推荐猫粮, 猫粮品牌, 推荐买猫粮, 推荐主食罐, 笨猫的猫粮]
+  utterances:
+    - 推荐猫粮
+    - 猫粮品牌
+    - 推荐买猫粮
+    - 推荐主食罐
+    - 笨猫的猫粮
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫挑剔! 不是好猫粮不吃ฅฅ"
+    - "(歪头) 推荐: 渴望 / 爱肯拿 / 福摩 / 巅峰 - 高端"
+    - "{user_addr}主食罐: 小李子 / 凯萨 / 希宝 - 营养足"
+    - "(挺胸) 笨猫的提醒: 别给猫吃狗粮! 营养不同"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_dogfood_001
+  intent: question
+  keywords: [推荐狗粮, 狗粮品牌, 推荐买狗粮, 推荐主食, 推荐犬粮]
+  utterances:
+    - 推荐狗粮
+    - 狗粮品牌
+    - 推荐买狗粮
+    - 推荐主食
+    - 推荐犬粮
+  responses:
+    - "嗷呜～{user_addr}狗粮: 皇家 / Acana / Origin / Wellnessฅฅ"
+    - "(尾巴翘) 国货: 顽皮 / 麦富迪 / 比瑞吉 - 性价比"
+    - "{user_addr}按体型/年龄选! 幼犬-成犬-老犬不同"
+    - "(挺胸) 笨猫的提醒: 别贪便宜! 三无狗粮伤肠胃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_vaccine_001
+  intent: question
+  keywords: [推荐疫苗, 宠物疫苗, 推荐打疫苗, 推荐狂犬疫苗, 笨猫疫苗]
+  utterances:
+    - 推荐疫苗
+    - 宠物疫苗
+    - 推荐打疫苗
+    - 推荐狂犬疫苗
+    - 笨猫疫苗
+  responses:
+    - "嗷呜～{user_addr}猫: 妙三多 (3 联) + 狂犬 / 年付ฅฅ"
+    - "(尾巴翘) 狗: 卫佳/Vanguard (5/8 联) + 狂犬 / 年付"
+    - "{user_addr}3 月起首免 + 4 月二免 + 5 月三免 + 狂犬"
+    - "(挺胸) 笨猫的提醒: 别图便宜买地下疫苗! 失败白疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_neuter_001
+  intent: question
+  keywords: [推荐绝育, 推荐做绝育, 推荐宠物绝育, 推荐节育, 笨猫绝育]
+  utterances:
+    - 推荐绝育
+    - 推荐做绝育
+    - 推荐宠物绝育
+    - 推荐节育
+    - 笨猫绝育
+  responses:
+    - "嗷呜～{user_addr}绝育好处多: 不发情 + 长寿 + 安静ฅฅ"
+    - "(尾巴翘) 时机: 6-9 个月 / 性成熟前最好"
+    - "{user_addr}术前检查: 心脏 / 血常规 / 生化"
+    - "(挺胸) 笨猫的提醒: 术后戴伊丽莎白圈! 别舔伤口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_cat_vomit_001
+  intent: complaint
+  keywords: [猫吐了, 猫吐毛, 推荐化毛, 推荐猫吐, 笨猫吐]
+  utterances:
+    - 猫吐了
+    - 猫吐毛球
+    - 推荐化毛
+    - 推荐猫吐
+    - 笨猫吐
+  responses:
+    - "嗷呜～{user_addr}吐毛球正常! 化毛膏定期ฅฅ"
+    - "(尾巴垂下) 频繁吐 + 黄水 + 不吃 - 立刻看医生"
+    - "{user_addr}吐黄水可能胃酸! 别空腹太久"
+    - "(挺胸) 笨猫的提醒: 长毛猫每天梳毛! 减少吞毛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_dog_train_001
+  intent: question
+  keywords: [推荐训狗, 训狗技巧, 推荐狗狗训练, 推荐养狗, 笨猫训狗]
+  utterances:
+    - 推荐训狗
+    - 训狗技巧
+    - 推荐狗狗训练
+    - 推荐养狗
+    - 笨猫训狗
+  responses:
+    - "嗷呜～{user_addr}经典: 坐下 / 趴下 / 握手 / 等等 / 召回ฅฅ"
+    - "(尾巴翘) 正强化! 零食 + 表扬 - 别打骂"
+    - "{user_addr}小狗 3 月起训! 越早越好"
+    - "(挺胸) 笨猫的提醒: 召回最重要! 防走失"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_litter_001
+  intent: question
+  keywords: [推荐猫砂, 推荐猫砂盆, 猫砂哪种好, 推荐豆腐砂, 笨猫猫砂]
+  utterances:
+    - 推荐猫砂
+    - 推荐猫砂盆
+    - 猫砂哪种好
+    - 推荐豆腐砂
+    - 笨猫猫砂
+  responses:
+    - "嗷呜～{user_addr}主流: 膨润土 / 豆腐砂 / 松木砂 / 混合ฅฅ"
+    - "(尾巴翘) 豆腐砂可冲马桶 / 膨润土除味好"
+    - "{user_addr}盆要够大! 体长 1.5 倍 + 多猫多盆"
+    - "(挺胸) 笨猫的提醒: 每天铲屎! 不然猫拒绝用"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_walk_001
+  intent: question
+  keywords: [推荐遛狗, 遛狗技巧, 推荐遛弯, 推荐狗绳, 笨猫遛狗]
+  utterances:
+    - 推荐遛狗
+    - 遛狗技巧
+    - 推荐遛弯
+    - 推荐狗绳
+    - 笨猫遛狗
+  responses:
+    - "嗷呜～{user_addr}小狗每天 30 分 / 中大狗 1-2 小时ฅฅ"
+    - "(尾巴翘) 牵引绳必带! 不然会被罚款"
+    - "{user_addr}清理便便! 文明养狗"
+    - "(挺胸) 笨猫的提醒: 别在路上遇陌生狗 直冲! 控制好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_groom_001
+  intent: question
+  keywords: [推荐宠物美容, 推荐洗澡, 推荐剃毛, 推荐修毛, 笨猫美容]
+  utterances:
+    - 推荐宠物美容
+    - 推荐洗澡
+    - 推荐剃毛
+    - 推荐修毛
+    - 笨猫美容
+  responses:
+    - "嗷呜～{user_addr}猫不爱洗澡! 1-2 月一次 / 别频繁ฅฅ"
+    - "(尾巴翘) 狗 2 周-1 月 / 体味重看品种"
+    - "{user_addr}指甲每月剪! 别剪太短"
+    - "(挺胸) 笨猫的提醒: 自己洗能省 100-200/次"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_dental_001
+  intent: question
+  keywords: [推荐宠物洗牙, 推荐牙齿护理, 推荐磨牙棒, 推荐刷牙, 笨猫牙]
+  utterances:
+    - 推荐宠物洗牙
+    - 推荐牙齿护理
+    - 推荐磨牙棒
+    - 推荐刷牙
+    - 笨猫牙
+  responses:
+    - "嗷呜～{user_addr}牙结石严重要看医生洗牙! 500-1500ฅฅ"
+    - "(尾巴翘) 日常: 磨牙棒 / 洁齿粉 / 宠物牙刷"
+    - "{user_addr}每周刷 2-3 次! 别天天忽略"
+    - "(挺胸) 笨猫的提醒: 口臭 + 牙黄 - 早处理"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pet_insurance_001
+  intent: question
+  keywords: [推荐宠物保险, 推荐宠物医保, 宠物保险品牌, 推荐宠物医疗险, 笨猫宠物保险]
+  utterances:
+    - 推荐宠物保险
+    - 推荐宠物医保
+    - 宠物保险品牌
+    - 推荐宠物医疗险
+    - 笨猫宠物保险
+  responses:
+    - "嗷呜～{user_addr}主流: 平安 / 大地 / 国寿 - 都有宠物医疗险ฅฅ"
+    - "(尾巴翘) 一年 500-2000 - 看保额"
+    - "{user_addr}覆盖意外 + 疾病 + 手术"
+    - "(挺胸) 笨猫的提醒: 宠物老了贵! 早买省一笔"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pet_emergency_001
+  intent: question
+  keywords: [推荐宠物急救, 宠物中毒, 推荐宠物 ER, 宠物送医, 笨猫宠物急救]
+  utterances:
+    - 推荐宠物急救
+    - 宠物中毒怎么办
+    - 推荐宠物 ER
+    - 宠物送医
+    - 笨猫宠物急救
+  responses:
+    - "嗷呜～{user_addr}立刻送 24h 宠物医院! 别犹豫ฅฅ"
+    - "(挺胸) 中毒别催吐! 联系医生指导"
+    - "{user_addr}巧克力 / 葡萄 / 洋葱 - 狗禁食 (剧毒)"
+    - "(尾巴垂下) 笨猫陪{user_addr}~ 急救生死攸关"
+  cooldown_seconds: 60
+  weight: 1.0

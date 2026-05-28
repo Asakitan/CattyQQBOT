@@ -1,0 +1,207 @@
+# 金融 / 投资 / ETF / 基金 深度 routes (S6 R43 NLU 节点扩充, 第四周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 97 money_shopping 区分: 这里深入投资工具 / 资产配置 / 财务规划.
+
+- name: invest_etf_001
+  intent: question
+  keywords: [推荐 ETF, 推荐指数基金, 推荐宽基, 推荐买 ETF, 笨猫 ETF]
+  utterances:
+    - 推荐 ETF
+    - 推荐指数基金
+    - 推荐宽基
+    - 推荐买 ETF
+    - 笨猫 ETF
+  responses:
+    - "嗷呜～{user_addr}入门: 沪深 300 / 中证 500 / 创业板 50ฅฅ"
+    - "(尾巴翘) 海外: 标普 500 / 纳指 100 - 长期持有"
+    - "{user_addr}定投 ETF 是普通人致富路径之一"
+    - "(挺胸) 笨猫的提醒: 别追热点 ETF! 长期持有为主"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: invest_fund_001
+  intent: question
+  keywords: [推荐基金, 推荐主动基金, 推荐买基金, 推荐定投, 笨猫基金]
+  utterances:
+    - 推荐基金
+    - 推荐主动基金
+    - 推荐买基金
+    - 推荐定投
+    - 笨猫基金
+  responses:
+    - "嗷呜～{user_addr}基金: 主动 vs 被动 - 长期看被动赢ฅฅ"
+    - "(尾巴翘) 平台: 蛋卷 / 且慢 / 天天基金 - 主流"
+    - "{user_addr}定投每月扣 500-1000~ 长期复利"
+    - "(挺胸) 笨猫的提醒: 别看排行榜买! 看长期收益"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: invest_stock_strategy_001
+  intent: question
+  keywords: [推荐选股, 价值投资, 推荐选股方法, 推荐技术分析, 笨猫选股]
+  utterances:
+    - 推荐选股
+    - 推荐价值投资
+    - 推荐选股方法
+    - 推荐技术分析
+    - 笨猫选股
+  responses:
+    - "嗷呜～{user_addr}两派: 价值投资 (巴菲特) vs 技术分析 (K线)ฅฅ"
+    - "(尾巴翘) 看公司: 财报 + 行业 + 管理层 + 护城河"
+    - "{user_addr}别听消息! 别炒短线! 普通人玩不过机构"
+    - "(挺胸) 笨猫的提醒: 看不懂的别买! 巴菲特原则"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: invest_us_stock_001
+  intent: question
+  keywords: [推荐美股, 推荐买美股, 美股开户, 推荐美股 ETF, 笨猫美股]
+  utterances:
+    - 推荐美股
+    - 推荐买美股
+    - 美股开户
+    - 推荐美股 ETF
+    - 笨猫美股
+  responses:
+    - "嗷呜～{user_addr}入门: 标普 500 / 纳指 100 ETFฅฅ"
+    - "(尾巴翘) 七巨头: AAPL/MSFT/GOOG/NVDA/META/AMZN/TSLA"
+    - "{user_addr}开户: 老虎 / 富途 / 嘉信 / IB"
+    - "(挺胸) 笨猫的提醒: 美股波动大! 别加杠杆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: invest_gold_001
+  intent: question
+  keywords: [推荐黄金, 推荐买金, 黄金 ETF, 黄金价格, 笨猫黄金]
+  utterances:
+    - 推荐黄金
+    - 推荐买金
+    - 黄金 ETF
+    - 黄金价格
+    - 笨猫黄金
+  responses:
+    - "嗷呜～{user_addr}方式: 实物金 / 纸黄金 / 黄金 ETF / 黄金基金ฅฅ"
+    - "(尾巴翘) 黄金避险! 不确定时期升值"
+    - "{user_addr}投资类: 黄金 ETF 流动性最好"
+    - "(挺胸) 笨猫的提醒: 别 ALL IN 黄金! 5-10% 资产配置即可"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: invest_bond_001
+  intent: question
+  keywords: [推荐债券, 推荐国债, 推荐债基, 推荐债券基金, 笨猫债券]
+  utterances:
+    - 推荐债券
+    - 推荐国债
+    - 推荐债基
+    - 推荐债券基金
+    - 笨猫债券
+  responses:
+    - "嗷呜～{user_addr}债券: 国债 / 公司债 / 地方债 - 稳定收益ฅฅ"
+    - "(尾巴翘) 国债年化 2-3% / 信用债 4-6% - 看风险"
+    - "{user_addr}债基适合: 求稳 + 抗股市波动"
+    - "(挺胸) 笨猫的提醒: 债券适合中老年 + 资产配置压舱石"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: invest_house_001
+  intent: question
+  keywords: [推荐买房投资, 推荐房产投资, 推荐 REIT, 房地产投资, 笨猫 REIT]
+  utterances:
+    - 推荐房产投资
+    - 推荐买房投资
+    - 推荐 REIT
+    - 房地产投资
+    - 笨猫 REIT
+  responses:
+    - "嗷呜～{user_addr}REIT: 不动产证券化 - 5-10% 年化ฅฅ"
+    - "(尾巴翘) 国内 REIT 2021 上市 - 公募基础设施基金"
+    - "{user_addr}直接买房 vs REIT - 流动性 REIT 高"
+    - "(挺胸) 笨猫的提醒: 房住不炒! 投资属性减弱"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: invest_dollar_001
+  intent: question
+  keywords: [推荐换美元, 美元理财, 美元投资, 推荐换汇, 笨猫美元]
+  utterances:
+    - 推荐换美元
+    - 美元理财
+    - 美元投资
+    - 推荐换汇
+    - 笨猫美元
+  responses:
+    - "嗷呜～{user_addr}5w 美金/人/年 - 个人换汇额度ฅฅ"
+    - "(尾巴翘) 美元理财: 美债 / 美股 ETF / 美元存款"
+    - "{user_addr}银行换汇手续费低! 别去黑市"
+    - "(挺胸) 笨猫的提醒: 美元投资有汇率风险! 看长期"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: invest_insurance_001
+  intent: question
+  keywords: [推荐保险, 推荐重疾险, 推荐医疗险, 推荐寿险, 笨猫保险]
+  utterances:
+    - 推荐保险
+    - 推荐重疾险
+    - 推荐医疗险
+    - 推荐寿险
+    - 笨猫保险
+  responses:
+    - "嗷呜～{user_addr}必备: 医疗险 + 重疾险 + 意外险 + 寿险ฅฅ"
+    - "(尾巴翘) 医疗险百万医疗 几百块/年 - 性价比之王"
+    - "{user_addr}重疾险一辈子保 30-50w 保额"
+    - "(挺胸) 笨猫的提醒: 别买分红险! 收益低不如基金"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: invest_pension_001
+  intent: question
+  keywords: [推荐养老, 推荐养老金, 推荐养老理财, 个人养老金, 笨猫养老]
+  utterances:
+    - 推荐养老
+    - 推荐养老金
+    - 推荐养老理财
+    - 个人养老金
+    - 笨猫养老
+  responses:
+    - "嗷呜～{user_addr}三大支柱: 社保 + 企业年金 + 个人养老金ฅฅ"
+    - "(尾巴翘) 个人养老金 1.2w/年 - 抵税!"
+    - "{user_addr}早投资! 复利 30 年差别巨大"
+    - "(挺胸) 笨猫的提醒: 别完全靠社保! 通胀会吃光"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: invest_allocation_001
+  intent: question
+  keywords: [推荐资产配置, 资产配置怎么做, 推荐分散投资, 推荐财务规划, 笨猫配置]
+  utterances:
+    - 推荐资产配置
+    - 资产配置怎么做
+    - 推荐分散投资
+    - 推荐财务规划
+    - 笨猫配置
+  responses:
+    - "嗷呜～{user_addr}经典: 股 50% + 债 30% + 现 10% + 金 10%ฅฅ"
+    - "(尾巴翘) 年纪越大 债券比例越高! 100 - 年龄 = 股权占比"
+    - "{user_addr}3-6 月生活费现金 应急储备"
+    - "(挺胸) 笨猫的提醒: 别只投一类! 分散是免费午餐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: invest_tax_001
+  intent: question
+  keywords: [推荐报税, 推荐个税, 推荐税务筹划, 个税专项扣除, 笨猫税务]
+  utterances:
+    - 推荐个税
+    - 推荐报税
+    - 推荐税务筹划
+    - 个税专项扣除
+    - 笨猫税务
+  responses:
+    - "嗷呜～{user_addr}专项扣除: 房贷 / 房租 / 子女教育 / 赡养老人ฅฅ"
+    - "(尾巴翘) 每年 3-6 月汇算清缴! 多退少补"
+    - "{user_addr}个人养老金抵税 1.2w/年 - 划算"
+    - "(挺胸) 笨猫的提醒: 别偷税! 现在大数据 跑不掉"
+  cooldown_seconds: 60
+  weight: 1.0

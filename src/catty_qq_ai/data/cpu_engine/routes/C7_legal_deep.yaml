@@ -1,0 +1,207 @@
+# 法律深度 / 离婚 / 继承 / 合同 / 工伤 / 赔偿 routes (S6 R49 NLU 节点扩充, 第四周期 buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+# 跟 99 culture_science (law_consult/law_consumer 浅触) 区分: 这里专注具体场景.
+
+- name: legal_divorce_001
+  intent: question
+  keywords: [推荐离婚, 离婚程序, 推荐离婚律师, 离婚财产, 笨猫离婚]
+  utterances:
+    - 推荐离婚
+    - 离婚程序
+    - 推荐离婚律师
+    - 离婚财产分割
+    - 笨猫离婚
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}离婚不容易~ 想清楚再决定ฅฅ"
+    - "(歪头) 程序: 协议离婚 (民政) / 诉讼离婚 (法院)"
+    - "{user_addr}财产: 婚后共同 50/50 / 婚前个人留"
+    - "(挺胸) 笨猫的提醒: 大额财产先咨询律师! 别吃亏"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: legal_inheritance_001
+  intent: question
+  keywords: [推荐遗嘱, 推荐继承, 推荐遗产, 继承人, 笨猫继承]
+  utterances:
+    - 推荐遗嘱
+    - 推荐继承
+    - 推荐遗产
+    - 继承人
+    - 笨猫继承
+  responses:
+    - "嗷呜～{user_addr}遗嘱: 自书 / 公证 / 录音录像 / 代书 / 打印ฅฅ"
+    - "(尾巴翘) 法定继承顺位: 1 配偶/子女/父母 2 兄妹/祖父母"
+    - "{user_addr}遗嘱公证最权威! 防止纠纷"
+    - "(挺胸) 笨猫的提醒: 早立遗嘱! 别等才后悔"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: legal_contract_001
+  intent: question
+  keywords: [推荐合同, 推荐签合同, 推荐看合同, 合同纠纷, 笨猫合同]
+  utterances:
+    - 推荐合同
+    - 推荐签合同
+    - 推荐看合同
+    - 合同纠纷
+    - 笨猫合同
+  responses:
+    - "嗷呜～{user_addr}签合同前 100% 看完! 别只签字ฅฅ"
+    - "(尾巴翘) 必看: 权利 / 义务 / 违约责任 / 解除条款"
+    - "{user_addr}金额大请律师审! 几百块省后面几万"
+    - "(挺胸) 笨猫的提醒: 别签空白合同! 别让对方填"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: legal_workinjury_001
+  intent: question
+  keywords: [推荐工伤, 工伤认定, 推荐工伤赔偿, 推荐工伤申报, 笨猫工伤]
+  utterances:
+    - 推荐工伤
+    - 工伤认定
+    - 推荐工伤赔偿
+    - 推荐工伤申报
+    - 笨猫工伤
+  responses:
+    - "嗷呜～{user_addr}30 天内单位申报! 否则自己 1 年内ฅฅ"
+    - "(尾巴翘) 工伤鉴定 → 伤残等级 → 赔偿"
+    - "{user_addr}医疗费 + 护理费 + 一次性赔偿 + 工伤津贴"
+    - "(挺胸) 笨猫的提醒: 别忍气吞声! 工伤是法定权益"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: legal_labor_dispute_001
+  intent: complaint
+  keywords: [推荐劳动仲裁, 推荐被裁员, 推荐欠薪, 推荐离职补偿, 笨猫劳动仲裁]
+  utterances:
+    - 推荐劳动仲裁
+    - 被裁员了
+    - 推荐欠薪
+    - 推荐离职补偿
+    - 笨猫劳动纠纷
+  responses:
+    - "嗷呜～{user_addr}劳动仲裁免费! 1 年内申请ฅฅ"
+    - "(尾巴翘) N+1 (违法解除 2N) 看具体情况"
+    - "{user_addr}欠薪找劳动监察 / 仲裁 - 双重保障"
+    - "(挺胸) 笨猫的提醒: 留好证据! 微信 / 邮件 / 工资条"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: legal_traffic_001
+  intent: question
+  keywords: [推荐交通事故责任, 推荐车祸赔偿, 推荐交通事故律师, 全责赔偿, 笨猫交通事故]
+  utterances:
+    - 推荐交通事故责任
+    - 推荐车祸赔偿
+    - 推荐交通事故律师
+    - 全责赔偿
+    - 笨猫交通事故
+  responses:
+    - "嗷呜～{user_addr}交警出责任认定书 - 先看责任划分ฅฅ"
+    - "(尾巴翘) 全责对方 → 你赔 / 对方全责 → 对方赔"
+    - "{user_addr}赔偿: 医疗 + 误工 + 护理 + 残疾 + 精神"
+    - "(挺胸) 笨猫的提醒: 走保险走交警! 别私了大事故"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: legal_loan_dispute_001
+  intent: complaint
+  keywords: [推荐借钱不还, 推荐欠款追讨, 推荐借条, 推荐起诉欠款, 笨猫欠款]
+  utterances:
+    - 推荐借钱不还
+    - 推荐欠款追讨
+    - 推荐借条
+    - 推荐起诉欠款
+    - 笨猫欠款
+  responses:
+    - "嗷呜～{user_addr}借条必备 + 转账记录 = 证据双保险ฅฅ"
+    - "(尾巴翘) 起诉前先催告 - 录音留证"
+    - "{user_addr}3 年诉讼时效! 别等过期"
+    - "(挺胸) 笨猫的提醒: 别借给关系不铁的! 防伤情"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: legal_ip_001
+  intent: question
+  keywords: [推荐版权, 推荐侵权, 推荐知识产权, 推荐商标, 笨猫版权]
+  utterances:
+    - 推荐版权
+    - 推荐侵权
+    - 推荐知识产权
+    - 推荐商标
+    - 笨猫版权
+  responses:
+    - "嗷呜～{user_addr}原创自动享版权! 但登记保护更强ฅฅ"
+    - "(尾巴翘) 商标: 国知局申请 - 1-2 年下证"
+    - "{user_addr}侵权: 发律师函 → 起诉 → 索赔"
+    - "(挺胸) 笨猫的提醒: 用 AI 生图注意版权! 别擅自商用"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: legal_consumer_dispute_001
+  intent: complaint
+  keywords: [推荐购物维权, 推荐 3.15 维权, 推荐欺诈赔偿, 推荐消费投诉, 笨猫消费维权]
+  utterances:
+    - 推荐购物维权
+    - 推荐 3.15 维权
+    - 推荐欺诈赔偿
+    - 推荐消费投诉
+    - 笨猫消费维权
+  responses:
+    - "嗷呜～{user_addr}消法: 欺诈 3 倍赔偿 (最低 500)ฅฅ"
+    - "(尾巴翘) 食品安全 10 倍赔偿 (最低 1000)"
+    - "{user_addr}先平台投诉 → 12315 → 法院"
+    - "(挺胸) 笨猫的提醒: 留发票 / 截图 / 录像 - 证据"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: legal_criminal_001
+  intent: question
+  keywords: [推荐刑法, 推荐犯罪, 推荐刑事案件, 推荐量刑, 笨猫刑法]
+  utterances:
+    - 推荐刑法
+    - 推荐犯罪
+    - 推荐刑事案件
+    - 推荐量刑
+    - 笨猫刑法
+  responses:
+    - "嗷呜～{user_addr}刑事案找专业刑辩律师! 别普通律师ฅฅ"
+    - "(尾巴翘) 取保候审条件: 罪轻 + 不串供 + 不逃跑"
+    - "{user_addr}刑期: 看罪行 / 自首 / 立功 - 综合判定"
+    - "(挺胸) 笨猫的提醒: 别犯罪! 后果不可承受"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: legal_admin_001
+  intent: question
+  keywords: [推荐行政复议, 推荐行政诉讼, 推荐告政府, 推荐民告官, 笨猫行政]
+  utterances:
+    - 推荐行政复议
+    - 推荐行政诉讼
+    - 推荐告政府
+    - 推荐民告官
+    - 笨猫行政
+  responses:
+    - "嗷呜～{user_addr}先行政复议 → 不服再行政诉讼ฅฅ"
+    - "(尾巴翘) 复议 60 天内 / 诉讼 6 个月内"
+    - "{user_addr}找专业行政律师 - 流程复杂"
+    - "(挺胸) 笨猫的提醒: 民告官有难度! 准备充分"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: legal_child_001
+  intent: question
+  keywords: [推荐抚养权, 推荐探视权, 推荐子女抚养, 推荐抚养费, 笨猫抚养]
+  utterances:
+    - 推荐抚养权
+    - 推荐探视权
+    - 推荐子女抚养
+    - 推荐抚养费
+    - 笨猫抚养
+  responses:
+    - "嗷呜～{user_addr}2 岁内随母 / 8 岁内综合 / 8+ 听本人意愿ฅฅ"
+    - "(尾巴翘) 抚养费一般月收入 20-30%"
+    - "{user_addr}探视权法定! 对方阻挠可申请强制执行"
+    - "(挺胸) 笨猫的提醒: 别用孩子要挟! 伤孩子最深"
+  cooldown_seconds: 60
+  weight: 0.9
