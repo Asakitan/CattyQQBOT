@@ -17,7 +17,6 @@ import hashlib
 from pathlib import Path
 
 from .persona_prompts import (
-    CHARACTER_SYNC_PROMPT,
     IDENTITY_ANCHOR_PROMPT,
     NSFW_RULE_SYNC_PROMPT,
 )
@@ -48,7 +47,6 @@ def build_modelfile_content(
     if user_prompt:
         parts.append(user_prompt)
     parts.append(IDENTITY_ANCHOR_PROMPT)
-    parts.append(CHARACTER_SYNC_PROMPT)
     parts.append(NSFW_RULE_SYNC_PROMPT)
     parts.append(_COMPACT_CORE_RULES)
     combined = "\n\n".join(parts).strip()
