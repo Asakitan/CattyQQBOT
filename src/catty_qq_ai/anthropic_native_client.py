@@ -596,8 +596,10 @@ async def post_messages_native(
     # 主人 2026-05-28 cache 诊断: 算 system + messages 的 sha256, 对比同 scope 连发
     # 时 prefix 是否字节一致. 真实对话 sys/stable_msgs hash 每轮都变 → 加 per-block diff
     # 跟上次比较, 找出具体哪个 block 漂移.
+    # C8 fix: 删 `import hashlib` (顶部已 import). 函数内有 import 会让整个函数 hashlib
+    # 变 local variable, 但改动 4 的 metadata.user_id JSON 在它之前用 hashlib.sha256,
+    # 导致 UnboundLocalError (11:57 log 实证) → opus 调用失败 fallback 到 deepseek.
     try:
-        import hashlib
         import json as _json
         sys_hash = hashlib.sha256(
             _json.dumps(system_blocks, sort_keys=True, ensure_ascii=False).encode("utf-8")
