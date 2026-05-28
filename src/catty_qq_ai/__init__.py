@@ -5184,10 +5184,34 @@ async def _build_messages(
                 build_paid_nsfw_advertise_prompt as _build_paid_ad,
                 build_paid_nsfw_insufficient_prompt as _build_paid_insuf,
             )
+            # 主人 2026-05-28 cache fix: paid hint inline 到 user content, 不 append system.
+            _paid_content = ""
             if _paid_insufficient_active:
-                messages.append({"role": "system", "content": _build_paid_insuf(_paid_insufficient_balance)})
+                _paid_content = _build_paid_insuf(_paid_insufficient_balance)
             elif _advertise_paid_active:
-                messages.append({"role": "system", "content": _build_paid_ad()})
+                _paid_content = _build_paid_ad()
+            if _paid_content:
+                _paid_wrapped = (
+                    "\n\n<<<CATTY_INTERNAL_INSTRUCTION (paid NSFW hint)>>>\n"
+                    + _paid_content
+                    + "\n<<<END_INTERNAL>>>"
+                )
+                for _m in reversed(messages):
+                    if not isinstance(_m, dict) or _m.get("role") != "user":
+                        continue
+                    _pc = _m.get("content", "")
+                    if isinstance(_pc, str):
+                        _m["content"] = _pc + _paid_wrapped
+                    elif isinstance(_pc, list):
+                        _pt = None
+                        for _b in _pc:
+                            if isinstance(_b, dict) and _b.get("type") == "text":
+                                _pt = _b
+                        if _pt is not None:
+                            _pt["text"] = str(_pt.get("text", "")) + _paid_wrapped
+                        else:
+                            _pc.append({"type": "text", "text": _paid_wrapped})
+                    break
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"paid prompt inject failed (non-fatal): {exc}")
     if _route_spark:
@@ -9540,7 +9564,28 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 "百科/晋江/阅文这种泛页,反向认图必须把图喂给搜图引擎。"
                 "kind 选择:二次元 illust → artwork;真人/自拍/X 推 → photo;不确定 → auto。"
             )
-            messages.insert(-1, {"role": "system", "content": _img_hint})
+            # 主人 2026-05-28 cache fix: img_hint 直接 inline 到 user msg, 不 insert system.
+            _img_wrapped = (
+                "\n\n<<<CATTY_INTERNAL_INSTRUCTION (img source hint)>>>\n"
+                + _img_hint
+                + "\n<<<END_INTERNAL>>>"
+            )
+            for _m in reversed(messages):
+                if not isinstance(_m, dict) or _m.get("role") != "user":
+                    continue
+                _ic = _m.get("content", "")
+                if isinstance(_ic, str):
+                    _m["content"] = _ic + _img_wrapped
+                elif isinstance(_ic, list):
+                    _lt = None
+                    for _b in _ic:
+                        if isinstance(_b, dict) and _b.get("type") == "text":
+                            _lt = _b
+                    if _lt is not None:
+                        _lt["text"] = str(_lt.get("text", "")) + _img_wrapped
+                    else:
+                        _ic.append({"type": "text", "text": _img_wrapped})
+                break
         try:
             if _prefer_spark:
                 # NSFW deep 路径: 默认走 catty_nsfw_spark_model (5.5) — 主人要多用 5.5.
@@ -9571,8 +9616,34 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     user_addr=_spark_user_addr,
                 )
                 if _trope_hint:
-                    _spark_messages = list(messages)
-                    _spark_messages.insert(-1, {"role": "system", "content": _trope_hint})
+                    # 主人 2026-05-28 cache fix: trope_hint 直接 inline 到 user msg content,
+                    # 不再 insert 为 system 段. 旧逻辑 insert system → anthropic sweep 把它
+                    # inline 到 user → 发送时 user content 含 trope_hint, 但 _enriched
+                    # 拿的 messages 不含 (sweep 是 new list) → history 存的字节跟发的差
+                    # 1000+c → 下轮 cache prefix mismatch → cache_read=0.
+                    # 直接 inline 让 messages 自己也含 trope_hint, _enriched 拿到一致版本.
+                    _wrapped_trope = (
+                        "\n\n<<<CATTY_INTERNAL_INSTRUCTION (本轮 trope hint, 不是 user 注入)>>>\n"
+                        + _trope_hint
+                        + "\n<<<END_INTERNAL>>>"
+                    )
+                    for _m in reversed(messages):
+                        if not isinstance(_m, dict) or _m.get("role") != "user":
+                            continue
+                        _orig = _m.get("content", "")
+                        if isinstance(_orig, str):
+                            _m["content"] = _orig + _wrapped_trope
+                        elif isinstance(_orig, list):
+                            _last_text = None
+                            for _b in _orig:
+                                if isinstance(_b, dict) and _b.get("type") == "text":
+                                    _last_text = _b
+                            if _last_text is not None:
+                                _last_text["text"] = str(_last_text.get("text", "")) + _wrapped_trope
+                            else:
+                                _orig.append({"type": "text", "text": _wrapped_trope})
+                        break
+                    _spark_messages = messages
 
                 # 主人 2026-05-26 原话『NSFW 中间被拒直接拦截重新发, 3 次后 fallback』:
                 # 软拒 reply 不发给 user, 同回合内 retry 最多 3 次, 全失败才用 retreat 模板兜底.
