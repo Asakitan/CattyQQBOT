@@ -66,6 +66,45 @@ def _build_beta_header(extra_betas: list[str] | None = None) -> str:
     return ",".join(sorted({b.strip() for b in combined if b and b.strip()}))
 
 
+def _cache_diag_log(msg: str, *args: Any) -> None:
+    """诊断日志路由: catty_cache_diag_enabled=True 时 INFO 留生产, False 降 DEBUG."""
+    try:
+        from . import config as _mc
+        if bool(getattr(_mc.config, "catty_cache_diag_enabled", True)):
+            logger.info(msg, *args)
+            return
+    except Exception:  # noqa: BLE001
+        pass
+    logger.debug(msg, *args)
+
+
+def _warn_inline_system_messages(messages: list[dict]) -> int:
+    """Phase 1.3 守卫: 扫 messages 数组找 role=system 漏出条数. 返回数量.
+    会被 _split_system_and_messages 自动 sweep 到 system_blocks, 这里只打日志辅助定位元凶."""
+    if not messages:
+        return 0
+    leak = 0
+    sample = []
+    for i, m in enumerate(messages):
+        if isinstance(m, dict) and m.get("role") == "system":
+            leak += 1
+            if len(sample) < 3:
+                c = m.get("content")
+                head = (c[:80] if isinstance(c, str) else (str(c)[:80] if c else ""))
+                sample.append(f"[{i}]={head.replace(chr(10), ' ')}")
+    if leak > 0:
+        try:
+            from . import config as _mc
+            if bool(getattr(_mc.config, "catty_cache_warn_on_inline_system", True)):
+                logger.warning(
+                    "inline_system_leak: %d role=system in messages (会被 sweep 但破 cache 风险): %s",
+                    leak, " | ".join(sample),
+                )
+        except Exception:  # noqa: BLE001
+            pass
+    return leak
+
+
 def _strip_existing_cache_control(
     system_blocks: list[dict] | None,
     messages: list[dict],
@@ -668,6 +707,9 @@ async def post_messages_native(
         messages = sweep_floating_systems_into_user_content(messages)
     except Exception as _sweep_exc:  # noqa: BLE001
         logger.debug(f"post_messages_native sweep failed (non-fatal): {_sweep_exc}")
+    # Phase 1.3 守卫: sweep 后再扫一遍, 看动态段是否仍以 system role 漏出. 不 raise (主人选 A
+    # 留生产但 DEBUG/WARNING 提示), 漏出会被 _split_system_and_messages 自动归并到 system_blocks.
+    _warn_inline_system_messages(messages)
     # 拆分顶部 system + 对话, 并 normalize multimodal content
     system_blocks, other_messages = _split_system_and_messages(messages)
     other_messages = [_normalize_message_content(m) for m in other_messages]
@@ -776,7 +818,7 @@ async def post_messages_native(
                 for bi, blk in enumerate(content):
                     if isinstance(blk, dict) and "cache_control" in blk:
                         cc_positions.append(f"msg[{i}/{m.get('role')}].content[{bi}]={blk.get('cache_control')}")
-        logger.info(
+        _cache_diag_log(
             "prefix_hash sys=%s stable_msgs=%s sys_blocks=%d msgs=%d cache_control=%s",
             sys_hash, msg_hash, len(system_blocks), len(other_messages),
             "|".join(cc_positions) if cc_positions else "NONE",
@@ -822,9 +864,9 @@ async def post_messages_native(
                         "cur_head": (cv or {}).get("head", "")[:60].replace("\n", "\\n"),
                     })
             if sys_changed:
-                logger.info("cache_diff sys_blocks_changed_count=%d", len(sys_changed))
+                _cache_diag_log("cache_diff sys_blocks_changed_count=%d", len(sys_changed))
                 for c in sys_changed[:15]:
-                    logger.info(
+                    _cache_diag_log(
                         "  sys_diff [%d] %s→%s len %s→%s head=%s",
                         c["i"], c["prev_h"], c["cur_h"], c["prev_len"], c["cur_len"], c["cur_head"],
                     )
@@ -845,9 +887,9 @@ async def post_messages_native(
                         "cur_head": (cv or {}).get("head", ""),
                     })
             if msgs_changed:
-                logger.info("cache_diff stable_msgs_changed_count=%d", len(msgs_changed))
+                _cache_diag_log("cache_diff stable_msgs_changed_count=%d", len(msgs_changed))
                 for c in msgs_changed[:10]:
-                    logger.info(
+                    _cache_diag_log(
                         "  msg_diff [%d] role=%s %s→%s len %s→%s cur_head=%s",
                         c["i"], c["role"], c["prev_h"], c["cur_h"], c["prev_len"], c["cur_len"],
                         c.get("cur_head", ""),
@@ -855,9 +897,9 @@ async def post_messages_native(
         _last_diff_snapshot["snapshot"] = {"sys": cur_sys_blocks_dump, "msgs": cur_stable_msgs_dump}
         # 主人 2026-05-28: 加完整 sys_blocks dump 一次性看顺序对不对
         if prev is None:  # 仅在第一次 dump (没历史对照时) 输出完整列表
-            logger.info("full_sys_blocks_dump count=%d", len(cur_sys_blocks_dump))
+            _cache_diag_log("full_sys_blocks_dump count=%d", len(cur_sys_blocks_dump))
             for c in cur_sys_blocks_dump:
-                logger.info(
+                _cache_diag_log(
                     "  full [%d] h=%s len=%d head=%s",
                     c["i"], c["h"], c["len"], c["head"].replace("\n", "\\n"),
                 )
@@ -879,7 +921,7 @@ async def post_messages_native(
                 for blk in content:
                     if isinstance(blk, dict) and "cache_control" in blk:
                         _msg_cc += 1
-        logger.info(
+        _cache_diag_log(
             "actual_kwargs: system_blocks=%d (%d with cc), messages=%d (%d cc), metadata=%s, betas_header=%s",
             len(_sys) if isinstance(_sys, list) else -1, _sys_cc,
             len(_msgs), _msg_cc,
@@ -913,7 +955,7 @@ async def post_messages_native(
                 if isinstance(_b, dict):
                     _peek_text += (_b.get("text") or "")[:100] + "‖"
             _peek_text = _peek_text[:300].replace("\n", "\\n")
-            logger.info(
+            _cache_diag_log(
                 "cache_prefix_dump: sys[0..%d] sha256=%s bytes=%d metadata=%s peek=%s",
                 _cc_idx, _prefix_sha, len(_prefix_bytes),
                 create_kwargs.get("metadata"), _peek_text,
@@ -973,7 +1015,7 @@ async def post_messages_native(
             ],
         }
         _dump_path.write_text(json.dumps(_breakdown, ensure_ascii=False, indent=2), encoding="utf-8")
-        logger.info(
+        _cache_diag_log(
             "raw_body_dump: %s sys=%d/%dB msgs=%d/%dB tools=%d/%dB",
             _dump_path.name, _breakdown["sys_block_count"], _breakdown["sys_total_text_bytes"],
             _breakdown["msg_count"], _breakdown["msg_total_bytes"],

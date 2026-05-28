@@ -206,6 +206,15 @@ class Config(BaseModel):
     # 用来跟踪 cache miss 原因. NewAPI / 中转 relay 不识别 diagnostics 字段时第二轮会 500.
     # 默认 OFF, 只有直连 anthropic.com 时才打开.
     catty_cache_diag_previous_message_id_enabled: bool = False
+    # 主人 2026-05-28 Phase 1.4: cache 诊断 INFO 日志总开关.
+    # True (默认) → prefix_hash / cache_diff / actual_kwargs / cache_prefix_dump / raw_body_dump
+    #                走 INFO level 留生产 (爪爪日后回查).
+    # False → 降到 DEBUG level, 默认 logger 阈值看不到, 日志体积降低.
+    catty_cache_diag_enabled: bool = True
+    # 主人 2026-05-28 Phase 1.3: native 入口扫到 messages 含 role=system 时打 WARNING.
+    # 守卫 _post_boundary 等动态段意外以 system role 漏出, 帮助定位 cache miss 元凶.
+    # 不影响生产 (会 sweep 到 system_blocks), 仅诊断辅助.
+    catty_cache_warn_on_inline_system: bool = True
     # ── Anthropic native /v1/messages 路径 (主人 2026-05-28: NewAPI SG relay
     # pass_through_body_enabled=true 后, 中转层字节级透传 body 含 cache_control /
     # context_management / metadata. 切换该开关后 catty 走 anthropic SDK 发原生请求,
