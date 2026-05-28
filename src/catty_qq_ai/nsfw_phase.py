@@ -2846,17 +2846,21 @@ def build_phase_advance_hint(
     current_meta = PHASE_DEFINITIONS.get(current, PHASE_DEFINITIONS[1])
     next_meta = PHASE_DEFINITIONS.get(next_phase, PHASE_DEFINITIONS[8])
 
-    # 主人 2026-05-27 升级 #1: 每轮轮换 metadata 子集, 让 hint 永远新鲜
-    rotation = st.last_hint_rotation
+    # 主人 2026-05-29 Round 5 cache fix: rotation 改为 phase-based 而非 per-turn.
+    # 旧逻辑: rotation 每轮 +1 → 每次 spark inject 的 sensory/physical/behavior 子集不同
+    # → user content 字节漂移 → DeepSeek cache miss (实测 74% 卡这里).
+    # 新逻辑: 用 next_phase 作 rotation, 同 phase 多轮 sensory 字节稳定 (cache 命中),
+    # phase 切换 (P3→P4 等关键节点) 才换 sensory → 仍保留 hint 新鲜感.
+    rotation = int(next_phase) % 7
     rotated_physical = _rotate_subset(next_meta['physical'], 5, rotation)
     rotated_behavior = _rotate_subset(next_meta['behavior'], 4, rotation)
     rotated_opener = _rotate_subset(next_meta['opener_hints'], 2, rotation)
     rotated_thought = _rotate_subset(next_meta['thought'], 2, rotation)
-    # 也写回 state, 下次自动 +1 → 下一轮抽不同子集
+    # 不再每轮 +1 (cache 友好). 保留 state 字段兼容老 session_cache 序列化.
     key = _state_key(scope, user_id)
     real_st = _NSFW_PHASE_BY_SCOPE.get(key)
     if real_st is not None:
-        real_st.last_hint_rotation = (rotation + 1) % 7  # 7 step 循环避免每 3 轮回到原位
+        real_st.last_hint_rotation = rotation  # 同步当前 phase rotation, 便于诊断
 
     # location ambient (持久化场景锚点 - 主人 2026-05-27 第 4 项)
     location_line = ""
