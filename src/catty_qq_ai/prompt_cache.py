@@ -468,6 +468,74 @@ def stabilize_tools_order(tools: list[dict]) -> int:
     return 1 if original != sorted_keys else 0
 
 
+# 历史 user 里的 inline 动态段 — 每次内容都变 (author_note / PHI / NSFW spark /
+# vibe / 时间感等), 留在 history 会让 first_user_md5 每次都变 → DeepSeek 从 sys
+# 段之后全 miss. current turn 最后一条 user 必须保留完整版给 LLM 读, 但 history
+# 中的旧 user 只该保留主人原始问答.
+import re as _re_inline_strip
+
+_INLINE_DYNAMIC_CONTEXT_RE = _re_inline_strip.compile(
+    r"\n*\[DYNAMIC_CONTEXT[^\]]*\].*?\[/DYNAMIC_CONTEXT\]\n*",
+    flags=_re_inline_strip.DOTALL,
+)
+_INLINE_INTERNAL_INSTRUCTION_RE = _re_inline_strip.compile(
+    r"\n*<<<CATTY_INTERNAL_INSTRUCTION.*?<<<END_INTERNAL>>>\n*",
+    flags=_re_inline_strip.DOTALL,
+)
+
+
+def strip_inline_dynamic_segments_from_history(messages: list[dict]) -> int:
+    """剥离历史 user message 里的 inline 动态段, 保留 current turn 最后一条 user 不动.
+
+    背景: 主人 commits 828fb43 / 45be439 把 floating system 段 inline 到 user
+    content 末尾 (防 cache_control 污染), 但每次动态段内容都变 (author_note /
+    PHI / NSFW spark / vibe / 时间感), 导致上一轮的 enriched user 留在历史中
+    → first_user_md5 每次都变 → DeepSeek 从 sys 段之后全 miss
+    (实测: 6656 hit / 4827 miss / 58% hit_rate, 跟 CherryHQ/cherry-studio#14695
+    同款翻车).
+
+    修复: history 中的 user 只保留主人原始问答, current turn 最后一条 user 不动
+    (LLM 必须读到完整动态段). 这样 sys + history user/asst 全字节稳定, DeepSeek
+    cache 能从前缀末端一路命中到 history 倒数第二条.
+
+    in-place 修改 messages. 返回剥离段数 (诊断用).
+    """
+    if not messages:
+        return 0
+    # 找最后一条 user 的 index — 不能 strip 它
+    last_user_idx = -1
+    for i in range(len(messages) - 1, -1, -1):
+        m = messages[i]
+        if isinstance(m, dict) and m.get("role") == "user":
+            last_user_idx = i
+            break
+
+    stripped = 0
+    for i, m in enumerate(messages):
+        if i == last_user_idx:
+            continue  # current turn 不动
+        if not isinstance(m, dict) or m.get("role") != "user":
+            continue
+        content = m.get("content")
+        if isinstance(content, str):
+            new_content, n1 = _INLINE_DYNAMIC_CONTEXT_RE.subn("", content)
+            new_content, n2 = _INLINE_INTERNAL_INSTRUCTION_RE.subn("", new_content)
+            if n1 or n2:
+                m["content"] = new_content
+                stripped += n1 + n2
+        elif isinstance(content, list):
+            for blk in content:
+                if isinstance(blk, dict) and blk.get("type") == "text":
+                    txt = blk.get("text", "")
+                    if isinstance(txt, str):
+                        new_txt, n1 = _INLINE_DYNAMIC_CONTEXT_RE.subn("", txt)
+                        new_txt, n2 = _INLINE_INTERNAL_INSTRUCTION_RE.subn("", new_txt)
+                        if n1 or n2:
+                            blk["text"] = new_txt
+                            stripped += n1 + n2
+    return stripped
+
+
 def compute_prefix_hash(
     messages: list[dict], tools: list[dict] | None = None, n: int = 5,
 ) -> dict[str, Any]:
@@ -546,5 +614,6 @@ __all__ = [
     "merge_consecutive_system_messages",
     "stabilize_tools_order",
     "strip_all_cache_control",
+    "strip_inline_dynamic_segments_from_history",
     "sweep_floating_systems_into_user_content",
 ]

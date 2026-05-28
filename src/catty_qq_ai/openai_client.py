@@ -649,6 +649,7 @@ async def _post_chat_completion_raw(
             merge_consecutive_system_messages,
             stabilize_tools_order,
             strip_all_cache_control,
+            strip_inline_dynamic_segments_from_history,
         )
         if not is_claude_endpoint(base_url, model):
             import copy as _copy
@@ -658,6 +659,15 @@ async def _post_chat_completion_raw(
             if stripped > 0:
                 _logger.debug(
                     "deepseek prefix opt: stripped %d cache_control", stripped,
+                )
+            # (a2) 剥离历史 user 里的 inline 动态段 (主人 22:08 case: 历史 first_user_md5
+            # 每次都变 → 6656 hit / 4827 miss / 58%. 这步让 history user 字节稳定.
+            # current turn 最后一条 user 保留完整版给 LLM 读.)
+            strip_hist = strip_inline_dynamic_segments_from_history(messages)
+            if strip_hist > 0:
+                _logger.debug(
+                    "deepseek prefix opt: stripped %d inline dynamic seg from history",
+                    strip_hist,
                 )
             # (b) 合并开头连续 system → 单条 (前缀更紧凑)
             merged = merge_consecutive_system_messages(messages)
