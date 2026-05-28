@@ -7487,6 +7487,22 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
     is_owner = _event_is_owner(event)
 
     user_id = str(event.user_id)
+
+    # 主人 2026-05-29 fix v2: NSFW 上下文 CPU 引擎完全不介入 - 两路检测:
+    # 1. nsfw_phase tracker 的 current_phase >= P3 (持续场景, 30min 内有过)
+    # 2. user_text 自身含 NSFW phase >= P3 关键词 (主人重启 NSFW 或场景过期后再开)
+    # 任一命中 → 直接 return False 透传, 不跑 router, 不打日志.
+    # 用户进入 NSFW 期待主 AI 完整 prompt+lore+phase tracker, CPU 模板没机会插话.
+    try:
+        from .nsfw_phase import get_phase_state as _ce_get_phase_state, detect_phase_from_reply as _ce_detect_phase
+        _ce_nsfw_threshold = int(getattr(config, "catty_strong_nsfw_phase_threshold", 3))
+        _ce_phase = int(getattr(_ce_get_phase_state(scope, user_id), "current_phase", 1))
+        _ce_user_phase = int(_ce_detect_phase(text) or 0)
+        if _ce_phase >= _ce_nsfw_threshold or _ce_user_phase >= _ce_nsfw_threshold:
+            return False
+    except Exception:  # noqa: BLE001
+        pass
+
     if is_owner:
         user_nickname = "主人"
     else:
@@ -7568,7 +7584,10 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
         # L4 失败 → 当作低信心强互动处理 (fall through)
 
     if not getattr(config, "catty_credit_enabled", False):
-        logger.info(
+        # 主人 2026-05-29 fix v3: 这条降 DEBUG. 强互动 + credit_disabled 时 cpu_engine
+        # 什么都没做就透传, 没必要在 INFO 级污染线上日志 (每条消息都打一条).
+        # 真要排查时打开 DEBUG 在 logs/YYYY-MM-DD-debug.txt 找.
+        logger.debug(
             f"[cpu_engine] strong={strong.reason or 'low_conf_l4_failed'} "
             f"credit_disabled, transparently pass to L5"
         )
