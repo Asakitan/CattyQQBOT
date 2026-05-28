@@ -413,9 +413,13 @@ async def _post_anthropic_native_chat(
 
     # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill,
     # 用 adapter 把 prefill 内容追加到最近 user message + drop 末尾 assistant.
-    from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
+    from .prompt_cache import (
+        adapt_assistant_prefill_for_strict_user_end,
+        sweep_floating_systems_into_user_content,
+    )
     messages_for_native = adapt_assistant_prefill_for_strict_user_end(messages)
-    # 主人 2026-05-28 C7-3: 回退 sweep — 动态 sys 段恢复 system role (避免 Claude safety 拒绝).
+    # 主人 2026-05-28 C11 重启 sweep: sys 只剩静态 → cache hit. 动态 sys 段 inline 到 user content.
+    messages_for_native = sweep_floating_systems_into_user_content(messages_for_native)
 
     prepared_messages = messages_for_native
     if _cache_enable:
@@ -1302,13 +1306,15 @@ async def _post_with_fallback(
             from .prompt_cache import is_claude_endpoint
             if is_claude_endpoint(base_url, model):
                 from .anthropic_native_client import post_messages_native
-                from .prompt_cache import adapt_assistant_prefill_for_strict_user_end
-                # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill
-                # ("This model does not support assistant message prefill. The conversation
-                # must end with a user message."). 用 adapter 把 prefill 内容追加到最近的
-                # user message + drop 末尾 assistant.
+                from .prompt_cache import (
+                    adapt_assistant_prefill_for_strict_user_end,
+                    sweep_floating_systems_into_user_content,
+                )
+                # 主人 2026-05-28: native /v1/messages 不接受末尾 assistant prefill.
+                # 用 adapter 把 prefill 内容追加到最近的 user message + drop 末尾 assistant.
                 messages_for_native = adapt_assistant_prefill_for_strict_user_end(messages)
-                # 主人 2026-05-28 C7-3: 回退 sweep — 动态 sys 段恢复 system role (避免 Claude safety 拒绝).
+                # 主人 2026-05-28 C11 重启 sweep: sys 只剩静态 → cache hit, history+动态段 inline user.
+                messages_for_native = sweep_floating_systems_into_user_content(messages_for_native)
                 # 注入 cache_control (同 _post_anthropic_native_chat 同款路径)
                 _cache_enable = enable_cache
                 prepared_messages = messages_for_native

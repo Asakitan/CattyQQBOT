@@ -526,8 +526,16 @@ async def post_messages_native(
     # Pre-step: OpenAI 风格 tool history (role=tool, assistant.tool_calls) → Anthropic
     # native (assistant.content=[tool_use], user.content=[tool_result]).
     messages = _convert_history_for_anthropic(messages)
-    # 主人 2026-05-28 C7-3: 回退 sweep — sweep 把动态 sys 段 inline 到 user content,
-    # Claude 把 NSFW 信号当 user 主动请求触发 safety 拒绝. 动态 sys 段恢复 system role.
+    # 主人 2026-05-28 C11 重启 sweep: 主人贴 10:34-10:36 sweep 时代 cache hit 85%+ 实证.
+    # 回退 sweep 后 sys_blocks 含动态段, NewAPI relay 看 sys 数组不稳定 → cache miss.
+    # 重启让 sys 段只剩静态 (persona+override+supplement), 动态段 inline 到 user [DYNAMIC_CONTEXT].
+    # history 不进 cache (messages marker C10 已删), 只 sys static prefix 进 cache. 拒绝问题
+    # 另外修 (扩 soft-refusal 关键词等).
+    try:
+        from .prompt_cache import sweep_floating_systems_into_user_content
+        messages = sweep_floating_systems_into_user_content(messages)
+    except Exception as _sweep_exc:  # noqa: BLE001
+        logger.debug(f"post_messages_native sweep failed (non-fatal): {_sweep_exc}")
     # 拆分顶部 system + 对话, 并 normalize multimodal content
     system_blocks, other_messages = _split_system_and_messages(messages)
     other_messages = [_normalize_message_content(m) for m in other_messages]
