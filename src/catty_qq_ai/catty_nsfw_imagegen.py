@@ -305,11 +305,157 @@ def flush_counter() -> bool:
 
 
 # ── AI 写情景 caption (不用写角色锁, 那是 characterPrompts 的事) ──
-async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
-    """让小 AI 根据当前 phase + 最新 reply 写 base caption(情景/构图/动作)。
+def _format_scene_block(
+    phase_state,
+    pregnancy_state,
+    affection_info: dict | None,
+    user_text: str,
+    recent_messages: list | None,
+    current_reply: str,
+) -> str:
+    """把所有场景信息序列化成给 deepseek 看的人类可读 block。
+
+    主人 2026-05-30: 旧版只传 phase int + 笨猫 reply, deepseek 看不到主人原话
+    (例如『扯掉内裤』『按到桌上』这种具体场景指令) 和角色状态 (怀孕/失神/穿着/
+    敏感部位锁), 画出来的 caption 经常和当下剧情对不上 (主人桌上 → AI 默写床上).
+    把场景上下文打包丢给 deepseek, 让它的 caption 真正对应当前 turn 的情境.
+    """
+    lines: list[str] = []
+
+    # === 1. 阶段 & arc ===
+    if phase_state is not None:
+        ph = int(getattr(phase_state, "current_phase", 1) or 1)
+        brief = _PHASE_BRIEF.get(ph, "")
+        lines.append(f"[NSFW phase] P{ph} ({brief})")
+        if int(getattr(phase_state, "turn_count", 0) or 0) > 0:
+            lines.append(f"[phase turn] 当前 phase 已持续 {phase_state.turn_count} 轮")
+        if int(getattr(phase_state, "arc_count", 1) or 1) > 1:
+            lines.append(
+                f"[arc] 第 {phase_state.arc_count} 轮 arc"
+                "(身体有上一轮记忆, 更易入境, 可有疲劳感)"
+            )
+        if int(getattr(phase_state, "climax_count", 0) or 0) > 0:
+            lines.append(f"[climax_count] 本 arc 已高潮 {phase_state.climax_count} 次")
+        if bool(getattr(phase_state, "dazed", False)):
+            tdz = int(getattr(phase_state, "turns_dazed", 0) or 0)
+            lines.append(f"[dazed] 失神状态 (持续 {tdz} 轮) — 表情应有恍惚/瞳孔散开/失焦")
+
+        # === 2. 场景锚点 (location/outfit/time_of_day) ===
+        loc = str(getattr(phase_state, "location", "") or "").strip()
+        amb = str(getattr(phase_state, "location_ambient", "") or "").strip()
+        if loc or amb:
+            lines.append(f"[location] {loc or '(未指定)'}" + (f" — {amb}" if amb else ""))
+        outfit = str(getattr(phase_state, "outfit", "") or "").strip()
+        if outfit:
+            lines.append(f"[outfit] {outfit}")
+        tod = str(getattr(phase_state, "time_of_day", "") or "").strip()
+        if tod:
+            lines.append(f"[time_of_day] {tod}")
+        mood = str(getattr(phase_state, "mood", "") or "").strip()
+        if mood:
+            lines.append(f"[mood] {mood}")
+        body_focus = str(getattr(phase_state, "body_focus", "") or "").strip()
+        if body_focus:
+            lines.append(f"[body_focus] {body_focus} — 重点刻画此部位")
+        facet = str(getattr(phase_state, "personality_facet", "") or "").strip()
+        if facet:
+            lines.append(f"[personality_facet] {facet}")
+
+    # === 3. 怀孕状态 ===
+    if pregnancy_state is not None:
+        is_preg = bool(getattr(pregnancy_state, "is_pregnant", False))
+        if is_preg:
+            pc = int(getattr(pregnancy_state, "pregnancy_count", 0) or 0)
+            lines.append(
+                f"[pregnancy] 笨猫已怀孕 (孕中 +{pc}) — 画面可加微凸小腹"
+                "/手扶肚子/孕期柔光"
+            )
+        elif int(getattr(pregnancy_state, "total_pregnancies", 0) or 0) > 0:
+            lines.append(
+                f"[pregnancy] 经产体 (总怀孕 {pregnancy_state.total_pregnancies} 次)"
+                " — 身体更熟"
+            )
+
+    # === 4. 好感/积分 ===
+    if affection_info:
+        lvl = affection_info.get("level")
+        is_own = affection_info.get("is_owner")
+        if lvl is not None or is_own is not None:
+            tags = []
+            if is_own:
+                tags.append("真实主人")
+            if lvl is not None:
+                tags.append(f"Lv={lvl}")
+            if tags:
+                lines.append(f"[relation] {' / '.join(tags)}")
+
+    # === 5. 用户原话 (本轮场景指令) — 最关键 ===
+    ut = (user_text or "").strip()
+    if ut:
+        lines.append(f"[主人本轮原话] {ut[:300]}")
+
+    # === 6. 最近对话 (最多 3 轮 user/assistant) ===
+    if recent_messages:
+        tail: list[str] = []
+        try:
+            for m in recent_messages[-12:]:  # 最多扫尾部 12 条
+                if not isinstance(m, dict):
+                    continue
+                role = m.get("role")
+                if role not in ("user", "assistant"):
+                    continue
+                content = m.get("content", "")
+                if isinstance(content, list):
+                    # Anthropic content blocks → 拼 text
+                    text = " ".join(
+                        str(b.get("text", "") or "")
+                        for b in content
+                        if isinstance(b, dict) and b.get("type") == "text"
+                    ).strip()
+                else:
+                    text = str(content or "").strip()
+                if not text:
+                    continue
+                # 砍掉 catty internal hint 包裹避免污染场景理解
+                if "<<<CATTY_INTERNAL_INSTRUCTION" in text:
+                    text = text.split("<<<CATTY_INTERNAL_INSTRUCTION")[0].strip()
+                if not text:
+                    continue
+                tail.append(f"{role}: {text[:200]}")
+        except Exception:  # noqa: BLE001
+            tail = []
+        # 只留最后 6 条 (~ 3 轮 user/assistant)
+        tail = tail[-6:]
+        if tail:
+            lines.append("[最近对话]\n" + "\n".join(tail))
+
+    # === 7. 笨猫刚生成的 reply (姿态/动作/情绪参考) ===
+    cr = (current_reply or "").strip()
+    if cr:
+        lines.append(f"[笨猫本轮 reply 片段] {cr[:400]}")
+
+    return "\n".join(lines)
+
+
+async def _compose_base_caption(
+    config,
+    phase_state,
+    current_reply: str,
+    *,
+    user_text: str = "",
+    recent_messages: list | None = None,
+    pregnancy_state=None,
+    affection_info: dict | None = None,
+) -> str:
+    """让 deepseek 根据完整场景信息写 base caption(情景/构图/动作)。
 
     **不要 AI 写角色锁** (1girl/1boy/白发/黑影等), 那些由 characterPrompts 锁定。
     AI 只描述: 体位/动作/表情/分泌物/场景/光线。
+
+    主人 2026-05-30: 升级 — 不再只传 phase int, 而是把
+        (phase_state 全字段 + pregnancy_state + affection + 用户原话 +
+         最近 3 轮对话 + 笨猫 reply)
+    全部序列化丢给 deepseek, 让它的 caption 真正贴当下场景, 不再瞎默写床上.
     """
     # 主人 2026-05-29: 修复 — 旧实现走 chat_completion_codex_instant, 但 codex_instant
     # 内部 model 优先级是 codex_instant_model > nsfw_spark_model > filter_model, 而 config
@@ -323,10 +469,23 @@ async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
         logger.info("nsfw_imagegen compose: ai_fallback (DeepSeek) 未配齐, 跳过 caption 生成")
         return ""
 
-    phase_brief = _PHASE_BRIEF.get(int(phase), "笨猫被插入中")
+    phase_int = int(getattr(phase_state, "current_phase", 1) or 1) if phase_state else 1
+
+    scene_block = _format_scene_block(
+        phase_state=phase_state,
+        pregnancy_state=pregnancy_state,
+        affection_info=affection_info,
+        user_text=user_text,
+        recent_messages=recent_messages,
+        current_reply=current_reply,
+    )
+
     system_prompt = (
-        "你是 NovelAI v4.5 提示词生成器。根据情景输出**英文 danbooru tag 风格** base caption"
-        "(逗号分隔, 60-150 token)。\n"
+        "你是 NovelAI v4.5 提示词生成器。根据**完整场景信息**输出"
+        "**英文 danbooru tag 风格** base caption(逗号分隔, 60-150 token)。\n"
+        "\n"
+        "**关键: 必须 honor 当前场景** — 主人原话 / 当前 location / 当前 outfit / "
+        "body_focus / pregnancy / dazed 状态等都要反映到 tags 里, 不要瞎默写床上 missionary。\n"
         "\n"
         "**只写情景 tags** — 角色锁(1girl/1boy/白发/黑影)已由 characterPrompts 锁定, 不要重复。\n"
         "**NAI v4.5 提权语法**: `{{tag}}` 加权 1.1x。把**关键体位/性行为**用 {{}} 提权。\n"
@@ -340,25 +499,35 @@ async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
         "     - P3 解衣: `{{undressing}}, {{groping breast}}, half undressed`, NO penetration yet\n"
         "     - P4-P7 性行为: `{{vaginal penetration}}, {{sex}}` (必带)\n"
         "     - P8 余韵: 不带 penetration, 带 afterglow/cum on body\n"
-        "  3) **体位/动作**: missionary / cowgirl / doggystyle / spooning / sex from behind / on top (P4+)\n"
-        "  4) **环境**: on bed / indoor / dim lighting / 等\n"
-        "  5) **情绪/表情/分泌物**(根据 phase):\n"
+        "  3) **体位/动作**: missionary / cowgirl / doggystyle / spooning / sex from behind / "
+        "on top / standing / against wall / on desk / 等 — **按场景 location 选, 不要默认床**\n"
+        "  4) **环境**: 按 [location] 写 — bed/desk/bathroom/classroom/kitchen/floor/sofa/shower 等; "
+        "光线按 [time_of_day] (morning sunlight / midnight dim / etc)\n"
+        "  5) **服装**: 按 [outfit] 起手, P2-P3 加 partial undressing, P4+ 加 disheveled/undone\n"
+        "  6) **情绪/表情/分泌物**(根据 phase + dazed):\n"
         "     - P1: shy blush, heart eyes\n"
         "     - P2: blush, parted lips, eyes closed\n"
         "     - P3: blush, sweat, parted lips, breast visible\n"
         "     - P4 主动: blush, sweat, parted lips, saliva, hands gripping\n"
         "     - P5 临界: tears, drool, open mouth, rolling eyes, trembling, ahegao incoming\n"
-        "     - P6 高潮: {{orgasm}}, {{ahegao}}, {{fucked silly}}, tongue out, squirting, arched back, {{creampie}}\n"
+        "     - P6 高潮: {{orgasm}}, {{ahegao}}, {{fucked silly}}, tongue out, squirting, "
+        "arched back, {{creampie}}\n"
         "     - P7 overstim: aftershock, trembling, overflow, cum drip, mind break\n"
-        "     - P8 余韵: {{afterglow}}, {{cuddling}}, lying down, cum on body, sleepy smile, soft lighting\n"
+        "     - P8 余韵: {{afterglow}}, {{cuddling}}, lying down, cum on body, sleepy smile, "
+        "soft lighting\n"
+        "     - **dazed 时**: {{empty eyes}}, {{unfocused eyes}}, drooling, tongue out\n"
+        "  7) **怀孕**: pregnancy_state 命中怀孕时加 `pregnant, slight belly bulge, hand on belly`\n"
+        "  8) **body_focus**: 命中时强调对应部位 (cat ears / tail base / inner thigh / neck 等)\n"
         "\n"
-        "**输出**: 只输出英文 tags(逗号分隔, 含 {{}} 提权), 不要解释 / 不要 negative / 不要中文 / 不要 markdown / 不要写 1girl/1boy/角色外观。\n"
-        "格式: {{2 figures, hetero}}, {{vaginal penetration}}, {{sex}}, missionary, on bed, blush, sweat, ..."
+        "**输出**: 只输出英文 tags(逗号分隔, 含 {{}} 提权), 不要解释 / 不要 negative / "
+        "不要中文 / 不要 markdown / 不要写 1girl/1boy/角色外观。\n"
+        "格式: {{2 figures, hetero}}, {{vaginal penetration}}, {{sex}}, doggystyle, on desk, "
+        "classroom, school uniform disheveled, blush, sweat, ..."
     )
     user_prompt = (
-        f"当前 NSFW phase: P{phase} — {phase_brief}\n"
-        f"刚生成的笨猫剧情(参考姿态/动作/情绪):\n{(current_reply or '').strip()[:600]}\n\n"
-        "请输出 base caption tags:"
+        "=== 当前场景信息(请严格按此写 caption, 不要瞎想) ===\n"
+        f"{scene_block}\n\n"
+        "请基于以上场景输出 base caption tags:"
     )
 
     # 直接调 ai_fallback (DeepSeek 官方 endpoint), 跟 tools._deepseek_imagegen_plan 一脉同源.
@@ -389,7 +558,8 @@ async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
         )
         raw = str(response["choices"][0]["message"]["content"] or "")
         logger.info(
-            f"nsfw_imagegen compose: deepseek ({_fb_model}) caption_len={len(raw)} phase=P{phase}"
+            f"nsfw_imagegen compose: deepseek ({_fb_model}) caption_len={len(raw)} "
+            f"phase=P{phase_int} scene_block_len={len(scene_block)}"
         )
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"nsfw_imagegen compose caption failed: {exc.__class__.__name__}: {exc}")
@@ -418,7 +588,7 @@ async def _compose_base_caption(config, phase: int, current_reply: str) -> str:
         extra.append("{{explicit}}")
     if "2 figures" not in lowered and "hetero" not in lowered:
         extra.append("{{2 figures, hetero}}")
-    if 4 <= int(phase) <= 7 and not any(k in lowered for k in ("sex", "penetration", "vaginal", "fucked")):
+    if 4 <= phase_int <= 7 and not any(k in lowered for k in ("sex", "penetration", "vaginal", "fucked")):
         extra.append("{{vaginal penetration}}, {{sex}}")
     if extra:
         cleaned = ", ".join(extra) + ", " + cleaned
@@ -434,12 +604,19 @@ async def maybe_generate_image(
     phase_state,
     affection_store,
     current_reply: str = "",
+    user_text: str = "",
+    recent_messages: list | None = None,
+    pregnancy_state=None,
 ) -> Any:
     """每 3 个 user turn 触发, 走 V4.5 + characterPrompts 双角色锁 + director_reference 生图。
 
     返回 MessageSegment 或 None。不触发/余额不足/报错都返回 None。
     走到这函数本身就算一个 user turn (调用方 chat handler 在 NSFW spark 成功后才调)。
     phase 只用来让 AI composer 写对应情景的 prompt, 不参与触发判断。
+
+    主人 2026-05-30: 升级 — 调用方需要把 (user_text, recent_messages, pregnancy_state)
+    一起传过来, _compose_base_caption 会把场景信息全套丢给 deepseek 让它写对应当下
+    场景的 caption (不再瞎默写床上 missionary).
     """
     if not getattr(config, "catty_imagegen_nai_enabled", False):
         return None
@@ -466,8 +643,31 @@ async def maybe_generate_image(
     # phase 只用来给 composer 决定情景 (P1-P8); None / 取不到默认 P1 (无 penetration 那档)
     phase_int = int(getattr(phase_state, "current_phase", 1) or 1) if phase_state else 1
 
-    # AI 写情景 base caption
-    composed = await _compose_base_caption(config, phase_int, current_reply)
+    # 准备 affection_info (level / is_owner) 给 caption composer
+    affection_info: dict | None = None
+    if affection_store is not None:
+        try:
+            _lvl_exp = (
+                affection_store.get_level_and_exp(user_id)
+                if hasattr(affection_store, "get_level_and_exp") else None
+            )
+            affection_info = {
+                "is_owner": bool(affection_store.is_owner(user_id)),
+                "level": int(_lvl_exp[0]) if _lvl_exp else None,
+            }
+        except Exception:  # noqa: BLE001
+            affection_info = None
+
+    # AI 写情景 base caption — 把完整场景信息丢给 deepseek
+    composed = await _compose_base_caption(
+        config,
+        phase_state,
+        current_reply,
+        user_text=user_text,
+        recent_messages=recent_messages,
+        pregnancy_state=pregnancy_state,
+        affection_info=affection_info,
+    )
     base_caption = composed or DEFAULT_BASE_CAPTION
     negative = str(
         getattr(config, "catty_nsfw_imagegen_negative", "") or DEFAULT_NEGATIVE
