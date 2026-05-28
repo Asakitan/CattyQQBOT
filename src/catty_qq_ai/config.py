@@ -261,8 +261,11 @@ class Config(BaseModel):
     # 一次大跳 (剩 70% budget 留余量) → 1 次 cache miss → 之后稳定多轮.
     # NLU 失败 / disabled → 走原 history_messages, 不阻塞业务.
     catty_prompt_compressor_enabled: bool = True
-    catty_prompt_budget_private: int = 5000
-    catty_prompt_budget_group: int = 3000
+    # 主人 2026-05-28 P4: 实测 sys PROTECTED 段(身份锚定)~5.6K floor, tools 3.5K,
+    # 严格 5K 数学上要砍 persona → 人格漂移. 现实 budget 10K total = sys ~6K +
+    # tools lazy ~1K + dynamic ~1.5K + history ~1.5K + current ~0.5K. 群聊同步松绑.
+    catty_prompt_budget_private: int = 10000
+    catty_prompt_budget_group: int = 7000
     # history 强制保留最近 N 条 (不进相关性排序). 主人决策: 配置项 + 动态扩展.
     catty_compressor_history_keep_recent_private: int = 2
     catty_compressor_history_keep_recent_group: int = 4
@@ -273,9 +276,9 @@ class Config(BaseModel):
     catty_compressor_summary_top_paragraphs: int = 3
     # cosine 相似度 + 时间衰减 → 综合 score 中, recency 占比 (0=纯语义, 1=纯时序)
     catty_compressor_recency_weight: float = 0.3
-    # history 段在总 budget 里的占比 (剩余给 system + current msg)
-    # 总 5000 × 0.4 = 2000 给 history 是经验值, 主人可调
-    catty_compressor_history_budget_ratio: float = 0.4
+    # history 段在总 budget 里的占比. P4 调到 0.2 (10K × 0.2 = 2K history,
+    # 群聊 7K × 0.2 = 1.4K), 剩余给 sys 6K + tools 1K + dynamic 1.5K + current 0.5K.
+    catty_compressor_history_budget_ratio: float = 0.2
     # ── Cache 诊断日志 (Phase 1.4): 默认关闭, 主人按需打开 ────────────────
     # 打开后会往 logs/cache_debug.log 打 cache_control 标位 + system_blocks 字节诊断.
     catty_cache_diag_enabled: bool = False
