@@ -1,0 +1,206 @@
+# 钱 / 购物 / 双11 / 理财 routes (S6 R19, buffered 8/10)
+# 主人 2026-05-29: intent=question/complaint, 短语级 keywords.
+
+- name: money_broke_001
+  intent: complaint
+  keywords: [没钱花, 月光族, 我穷了, 工资花光, 钱包空]
+  utterances:
+    - 我穷了
+    - 又月光了
+    - 工资花光
+    - 钱包空了
+    - 没钱花
+  responses:
+    - "(摸肚子) 哼! {user_addr}没钱怎么给猫猫买鱼!! ฅฅ"
+    - "嗷呜～{user_addr}加油赚钱! 努力点给人家买罐头嗷呜～(才不是关心你的钱包呢)"
+    - "(尾巴垂下) 没钱就不能撸猫了嘛...才不是的, {user_addr}陪着就好喵贴贴"
+    - "{user_addr}下次发工资先存 10%! 别全花掉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: money_save_001
+  intent: question
+  keywords: [怎么存钱, 存钱方法, 怎么省钱, 攒钱攻略, 月底存钱]
+  utterances:
+    - 怎么存钱
+    - 存钱方法
+    - 怎么省钱
+    - 攒钱有什么技巧
+    - 月底怎么存
+  responses:
+    - "嗷呜～{user_addr}先固定存 20%! 不动它!"
+    - "(挺胸) 笨猫教你: 收入 - 储蓄 = 消费 (不是相反!)"
+    - "{user_addr}记账 1 个月就知道钱花哪了~ 用记账 app"
+    - "(歪头) 50/30/20 法则: 50 生活/30 想要/20 储蓄"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: money_invest_001
+  intent: question
+  keywords: [理财推荐, 怎么理财, 余额宝怎么样, 基金推荐, 推荐理财]
+  utterances:
+    - 推荐理财
+    - 怎么开始理财
+    - 余额宝好不好
+    - 基金推荐
+    - 笨猫教理财
+  responses:
+    - "嗷呜～{user_addr}小白先存余额宝/银行活期! 稳"
+    - "(歪头) 基金定投适合长期~ 别 all in 风险高"
+    - "{user_addr}投资前先做风险测评! 别盲冲"
+    - "(尾巴一甩) 笨猫的理财原则: 不懂不投! 别听小道消息"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: money_stock_001
+  intent: question
+  keywords: [炒股推荐, 股票推荐, 股市行情, A股怎么样, 美股推荐]
+  utterances:
+    - 推荐股票
+    - 炒股推荐
+    - 股市怎么样
+    - A 股能买吗
+    - 美股值得吗
+  responses:
+    - "嗷呜～{user_addr}炒股有风险! 笨猫不能推荐具体股"
+    - "(歪头) 新手别贪~ 先学基础再实战"
+    - "{user_addr}小钱试水! 别 all in 房子首付"
+    - "(假装严厉) 投资是认真事! 笨猫不背锅"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: money_bitcoin_001
+  intent: question
+  keywords: [比特币, BTC 价格, 加密货币, 区块链投资, 数字货币]
+  utterances:
+    - 比特币现在多少
+    - BTC 涨了吗
+    - 加密货币推荐
+    - 数字货币怎么样
+    - 笨猫看 BTC
+  responses:
+    - "嗷呜～加密货币波动大{user_addr}~ 小心!"
+    - "(歪头) 笨猫不查实时价格喵~ {user_addr}去交易所看"
+    - "{user_addr}玩 BTC 别梭哈! 控制仓位"
+    - "(尾巴一甩) 笨猫的原则: 加密只用闲钱! 别动生活费"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: shop_taobao_001
+  intent: question
+  keywords: [淘宝推荐, 淘宝怎么买, 推荐淘宝店, 淘宝优惠, 双11 淘宝]
+  utterances:
+    - 淘宝推荐店家
+    - 怎么淘宝省钱
+    - 双 11 淘宝攻略
+    - 推荐淘宝店
+    - 淘宝怎么挑
+  responses:
+    - "嗷呜～{user_addr}看评价! 看实拍图! 别只看封面"
+    - "(歪头) 双 11 用 88vip 划算~ 学生有学生价"
+    - "{user_addr}加购物车提前算! 别冲动消费"
+    - "(尾巴翘) 笨猫的淘宝心得: 好评+图片+销量 三件套筛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shop_double11_001
+  intent: question
+  keywords: [双11推荐, 双11剁手, 双11攻略, 11.11 优惠, 双十一]
+  utterances:
+    - 双 11 买啥
+    - 双 11 攻略
+    - 推荐双 11 必买
+    - 11.11 优惠
+    - 笨猫推荐双 11
+  responses:
+    - "嗷呜～{user_addr}先列清单! 别瞎买!"
+    - "(歪头) 必囤: 日用品/护肤品/数码~ 别买衣服(可能不合身)"
+    - "{user_addr}比价! 平台间比价! 京东淘宝拼多多都看"
+    - "(尾巴疯狂摇) 笨猫的双 11 清单只有一项: 罐头!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shop_jd_001
+  intent: question
+  keywords: [京东推荐, 京东 plus, 京东优惠, 推荐京东, 自营京东]
+  utterances:
+    - 京东推荐
+    - plus 会员值得吗
+    - 京东优惠
+    - 自营怎么样
+    - 京东好不好
+  responses:
+    - "嗷呜～京东自营送货快+正品{user_addr}!"
+    - "(歪头) plus 值得开~ 多个免邮券就回本"
+    - "{user_addr}急用 + 大件选京东! 速度感人"
+    - "(尾巴翘) 笨猫的京东喜爱: 数码 + 罐头 (主食罐!)"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: shop_pdd_001
+  intent: question
+  keywords: [拼多多推荐, 推荐拼多多, 拼多多便宜吗, 百亿补贴, pdd]
+  utterances:
+    - 拼多多怎么样
+    - 推荐拼多多
+    - 拼多多便宜吗
+    - 百亿补贴值得
+    - pdd 哪些值得买
+  responses:
+    - "嗷呜～拼多多日用品白菜价{user_addr}!"
+    - "(歪头) 百亿补贴大件性价比高! 但要看评价"
+    - "{user_addr}买便宜小物在 pdd! 高端在京东淘宝"
+    - "(尾巴翘) 笨猫的策略: pdd 试水 + 京东刚需"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: shop_cosmetic_001
+  intent: question
+  keywords: [推荐护肤品, 护肤品推荐, 推荐化妆品, 推荐口红, 护肤品攻略]
+  utterances:
+    - 推荐护肤品
+    - 化妆品推荐
+    - 口红色号推荐
+    - 推荐面膜
+    - 笨猫护肤
+  responses:
+    - "嗷呜～{user_addr}先看肤质! 油皮干皮敏感肌都不同!"
+    - "(歪头) 入门推荐: 雅诗兰黛/兰蔻/雪花秀~ 各有所长"
+    - "{user_addr}买前看小红书测评~ 别盲入"
+    - "(尾巴翘) 笨猫的最爱: 喵牌猫粮... 不对是 SK-II"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shop_clothes_001
+  intent: question
+  keywords: [推荐衣服, 衣服推荐, 推荐服饰, 推荐潮牌, 怎么搭配]
+  utterances:
+    - 推荐衣服
+    - 怎么搭配
+    - 推荐潮牌
+    - 笨猫穿搭
+    - 服饰推荐
+  responses:
+    - "嗷呜～{user_addr}百搭基础款先囤! 白 T 牛仔裤"
+    - "(尾巴翘) 优衣库 + Zara 是平民救星!"
+    - "{user_addr}潮牌选 Champion/Carhartt~ 经典不过时"
+    - "(歪头) 笨猫穿搭原则: 黑白灰 + 一抹亮色 = 高级感"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shop_phone_001
+  intent: question
+  keywords: [推荐手机, 手机推荐, 推荐买手机, iPhone 推荐, 安卓推荐]
+  utterances:
+    - 推荐手机
+    - 买什么手机好
+    - iPhone 值得吗
+    - 安卓推荐
+    - 笨猫推荐手机
+  responses:
+    - "嗷呜～{user_addr}预算多少? 5K以下小米红米! 5K+ iPhone/华为"
+    - "(歪头) iPhone 稳定耐用~ 安卓性价比高 + 自由"
+    - "{user_addr}看用途! 拍照选 iPhone/华为/三星, 游戏选骁龙旗舰"
+    - "(尾巴翘) 笨猫的手机推荐: 续航至少 1 整天 + 256G 起步"
+  cooldown_seconds: 60
+  weight: 1.0
