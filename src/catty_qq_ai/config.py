@@ -254,6 +254,30 @@ class Config(BaseModel):
     catty_nlu_warmup_on_startup: bool = True
     # 大陆环境 HuggingFace 镜像 (空时不强制改 HF_ENDPOINT, 用环境变量原值)
     catty_nlu_hf_endpoint: str = "https://hf-mirror.com"
+    # ── Prompt Compressor (Phase 2): NLU 驱动的相关性裁剪 ────────────────
+    # 主人 2026-05-28 plan-cattyCacheFixAndPromptSlim: 私聊 ≤5000 / 群聊 ≤3000 tokens,
+    # 超出部分用 text2vec/jieba/HanLP 按相关性筛 history + user_details + summary,
+    # persona 段强制保留 (_PROTECTED_IDENTIFIERS 白名单).
+    # NLU 失败/超 budget 一律降级到现状逻辑, 不阻塞业务.
+    catty_prompt_compressor_enabled: bool = True
+    catty_prompt_budget_private: int = 5000
+    catty_prompt_budget_group: int = 3000
+    # history 强制保留最近 N 条 (不进相关性排序). 主人决策: 配置项 + 动态扩展.
+    catty_compressor_history_keep_recent_private: int = 2
+    catty_compressor_history_keep_recent_group: int = 4
+    # 当 NLU 判断 query 含指代/上下文依赖 (代词/省略) 时, history 额外保留 +N 条.
+    catty_compressor_history_extend_when_anaphora: int = 2
+    # user_details / summary 的 top-K 选取数
+    catty_compressor_user_details_top_k: int = 5
+    catty_compressor_summary_top_paragraphs: int = 3
+    # cosine 相似度 + 时间衰减 → 综合 score 中, recency 占比 (0=纯语义, 1=纯时序)
+    catty_compressor_recency_weight: float = 0.3
+    # history 段在总 budget 里的占比 (剩余给 system + current msg)
+    # 总 5000 × 0.4 = 2000 给 history 是经验值, 主人可调
+    catty_compressor_history_budget_ratio: float = 0.4
+    # ── Cache 诊断日志 (Phase 1.4): 默认关闭, 主人按需打开 ────────────────
+    # 打开后会往 logs/cache_debug.log 打 cache_control 标位 + system_blocks 字节诊断.
+    catty_cache_diag_enabled: bool = False
     catty_filter_anger_enabled: bool = False  # 主人:每条群消息都喂 spark 判耐心太烧
     catty_filter_anger_warn_threshold: int = 60
     catty_filter_anger_mute_threshold: int = 100

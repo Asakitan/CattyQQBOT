@@ -4767,6 +4767,49 @@ async def _build_messages(
                 messages.append({"role": "assistant", "content": _first_mes})
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"first_mes cold-start failed (non-fatal): {exc}")
+    # 主人 2026-05-28 Phase 2 (plan-cattyCacheFixAndPromptSlim): NLU 驱动的 history 压缩.
+    # 私聊 ≤catty_prompt_budget_private (默认5000) / 群聊 ≤catty_prompt_budget_group (默认3000).
+    # 按 cosine + recency 筛 history, 永远保留 keep_recent 末尾 N 条 (私聊 2/群聊 4, 指代时 +N).
+    # NLU 失败 / disabled → 走原 history_messages, 不阻塞业务.
+    try:
+        if (
+            getattr(config, "catty_prompt_compressor_enabled", False)
+            and history_messages
+        ):
+            from .nlu.prompt_compressor import compress_history, detect_anaphora
+            _budget_total = (
+                int(getattr(config, "catty_prompt_budget_private", 5000))
+                if _is_private_event
+                else int(getattr(config, "catty_prompt_budget_group", 3000))
+            )
+            _hist_ratio = float(getattr(config, "catty_compressor_history_budget_ratio", 0.4))
+            _history_budget = max(int(_budget_total * _hist_ratio), 500)
+            _keep_recent = (
+                int(getattr(config, "catty_compressor_history_keep_recent_private", 2))
+                if _is_private_event
+                else int(getattr(config, "catty_compressor_history_keep_recent_group", 4))
+            )
+            # 指代/省略 query → keep_recent +N (对话连续性兜底)
+            _query_for_compress = getattr(incoming, "text", "") or ""
+            if detect_anaphora(_query_for_compress):
+                _keep_recent += int(
+                    getattr(config, "catty_compressor_history_extend_when_anaphora", 2)
+                )
+            _orig_n = len(history_messages)
+            history_messages = compress_history(
+                history_messages,
+                query=_query_for_compress,
+                target_tokens=_history_budget,
+                keep_recent=_keep_recent,
+            )
+            if len(history_messages) != _orig_n:
+                logger.debug(
+                    "prompt_compressor: history %d→%d (budget=%d keep=%d private=%s)",
+                    _orig_n, len(history_messages),
+                    _history_budget, _keep_recent, _is_private_event,
+                )
+    except Exception as _pc_exc:  # noqa: BLE001
+        logger.debug(f"prompt_compressor history compress failed (non-fatal): {_pc_exc}")
     messages.extend(history_messages)
     # PHI 已在 register_catty_persona 之后 register_static (order=440) 注册到 cache 区.
     # 主人 2026-05-28: current user msg 把 _dynamic_context_text (boundary 后所有动态段 inline)
