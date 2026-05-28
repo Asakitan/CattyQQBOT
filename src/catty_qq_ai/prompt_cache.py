@@ -482,6 +482,12 @@ _INLINE_INTERNAL_INSTRUCTION_RE = _re_inline_strip.compile(
     r"\n*<<<CATTY_INTERNAL_INSTRUCTION.*?<<<END_INTERNAL>>>\n*",
     flags=_re_inline_strip.DOTALL,
 )
+# 主人 2026-05-28 plan-quizzical-crane Step 5: 历史 user 开头 [QQ:数字] 发言者前缀剥离.
+# 群聊场景每条 user 开头都带不同的 [QQ:发言者ID], 历史里完全没用 (LLM 看 current turn 知道
+# 当前是谁) 且每条字节都不同 → DeepSeek cache 命中率从 history[0] 开始全 miss.
+# 主人原话: "依赖 QQ 号, QQ 号不放 cache 里面就行了, 不要一次性把 QQ 号都喂给 AI,
+# 只喂发言的不就行了? 还有发言提到的?" → 剥开头, 中部 @QQ mention 保留.
+_HISTORY_SPEAKER_PREFIX_RE = _re_inline_strip.compile(r"^\[QQ:\d+\]\s*")
 
 
 def strip_inline_dynamic_from_text(text: str) -> str:
@@ -526,16 +532,18 @@ def strip_inline_dynamic_segments_from_history(messages: list[dict]) -> int:
     stripped = 0
     for i, m in enumerate(messages):
         if i == last_user_idx:
-            continue  # current turn 不动
+            continue  # current turn 不动 (含 QQ 号让 LLM 知道当前发言者)
         if not isinstance(m, dict) or m.get("role") != "user":
             continue
         content = m.get("content")
         if isinstance(content, str):
             new_content, n1 = _INLINE_DYNAMIC_CONTEXT_RE.subn("", content)
             new_content, n2 = _INLINE_INTERNAL_INSTRUCTION_RE.subn("", new_content)
-            if n1 or n2:
+            # 主人 2026-05-28 Step 5: 剥开头 [QQ:数字] 发言者前缀 (cache 字节稳定)
+            new_content, n3 = _HISTORY_SPEAKER_PREFIX_RE.subn("", new_content)
+            if n1 or n2 or n3:
                 m["content"] = new_content
-                stripped += n1 + n2
+                stripped += n1 + n2 + n3
         elif isinstance(content, list):
             for blk in content:
                 if isinstance(blk, dict) and blk.get("type") == "text":
@@ -543,9 +551,10 @@ def strip_inline_dynamic_segments_from_history(messages: list[dict]) -> int:
                     if isinstance(txt, str):
                         new_txt, n1 = _INLINE_DYNAMIC_CONTEXT_RE.subn("", txt)
                         new_txt, n2 = _INLINE_INTERNAL_INSTRUCTION_RE.subn("", new_txt)
-                        if n1 or n2:
+                        new_txt, n3 = _HISTORY_SPEAKER_PREFIX_RE.subn("", new_txt)
+                        if n1 or n2 or n3:
                             blk["text"] = new_txt
-                            stripped += n1 + n2
+                            stripped += n1 + n2 + n3
     return stripped
 
 

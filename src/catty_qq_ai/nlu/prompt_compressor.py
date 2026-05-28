@@ -291,32 +291,36 @@ def monotonic_history_trim(
     scope_id: str,
     target_tokens: int,
     keep_recent: int = 2,
-    cut_ratio: float = 0.3,
+    cut_ratio: float = 0.5,
+    jump_threshold_ratio: float = 1.5,
 ) -> list[dict]:
     """Cache-friendly history trim — anchor checkpoint pattern.
 
-    主人 2026-05-28 P3 设计:
+    主人 2026-05-28 P3 设计 + plan-quizzical-crane Step 4 调阈值:
     Anthropic prompt cache 看 messages 序列 prefix 字节哈希, 不只是 cache_control.
     任何 query-driven 重排都会让 prefix 字节漂移 → cache miss.
 
     方案: per-scope anchor checkpoint
     - 同 scope 多轮间, anchor 不动 → history[anchor:] 前缀字节稳定 → cache hit
-    - 当 history[anchor:] 超 budget 时, anchor 大跳一段 (剩 (1-cut_ratio) × budget,
-      留余量避免下轮立即再触), 1 次 cache reset, 之后稳定多轮直到下次超 budget
+    - 当 history[anchor:] **大幅**超 budget (jump_threshold_ratio × target) 时, anchor 大跳,
+      跳后剩 (1 - cut_ratio) × budget 留余量, 1 次 cache reset, 之后稳定多轮.
 
     Args:
         history: 完整 history list (append-only, 时序)
         scope_id: per-scope 持久化标识 (catty session key)
         target_tokens: history 段 token budget
         keep_recent: 末尾必保 N 条 (anchor 不能超过 n - keep_recent)
-        cut_ratio: 触 budget 时砍多大比例 (0.3 = 砍后剩 70% budget)
+        cut_ratio: 触 budget 时砍多大比例 (0.5 = 砍后剩 50% budget, 主人 2026-05-28
+                   调高让 anchor 多撑几轮; 旧值 0.3 跳后剩 70% 下轮立即又破)
+        jump_threshold_ratio: 触跳阈值倍数 (1.5 = window > target × 1.5 才跳, 主人 2026-05-28
+                              新增. 旧 = 1.0 每轮触发; 1.5 = 5-10 轮触发 1 次, cache 命中率飙升)
 
     Returns:
         history[new_anchor:] — anchor 之后的部分.
 
     Cache 行为:
-    - anchor 不变的轮 (大多数): prefix 字节稳定 → cache hit
-    - anchor 跳跃的轮 (~每 N 轮一次): 1 次 cache miss, 之后稳定
+    - anchor 不变的轮 (大多数, ~每 5-10 轮): prefix 字节稳定 → cache hit
+    - anchor 跳跃的轮 (~每 5-10 轮 1 次): 1 次 cache miss, 之后稳定
     """
     n = len(history)
     if n == 0:
@@ -331,11 +335,13 @@ def monotonic_history_trim(
     window = history[anchor:]
     window_tokens = sum(count_tokens(_msg_text(m)) for m in window)
 
-    if window_tokens <= target_tokens:
-        # 没超 budget, anchor 不动 → 字节稳定
+    # 主人 2026-05-28 plan-quizzical-crane Step 4: 触跳用 target × jump_threshold_ratio.
+    trigger_tokens = int(target_tokens * jump_threshold_ratio)
+    if window_tokens <= trigger_tokens:
+        # 没超 trigger, anchor 不动 → 字节稳定
         return window
 
-    # 超 budget: anchor 大跳, 砍到 (1 - cut_ratio) × budget 留余量
+    # 超 trigger: anchor 大跳, 砍到 (1 - cut_ratio) × target 留余量
     cut_to = max(int(target_tokens * (1.0 - cut_ratio)), 100)
     acc = 0
     new_anchor = anchor

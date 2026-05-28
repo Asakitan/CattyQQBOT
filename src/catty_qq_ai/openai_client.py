@@ -391,6 +391,13 @@ async def _post_chat_completion(
     enable_cache: bool = False,
     cache_depth: int = 2,
 ) -> str:
+    # 主人 2026-05-28 Step 1: 非 Claude 端点 (DeepSeek 等 OpenAI compat) 自动开真流式.
+    # Claude 中间人路径保持非流式 (cache_control 注入 + Anthropic SDK 流式走 native 路径).
+    try:
+        from .prompt_cache import is_claude_endpoint
+        _stream = not is_claude_endpoint(base_url, model)
+    except Exception:  # noqa: BLE001
+        _stream = False
     data = await _post_chat_completion_raw(
         base_url=base_url,
         api_key=api_key,
@@ -405,6 +412,7 @@ async def _post_chat_completion(
         tools=None,
         enable_cache=enable_cache,
         cache_depth=cache_depth,
+        stream=_stream,
     )
     return _extract_content(data)
 
@@ -559,6 +567,135 @@ def _log_cache_stats(data: dict[str, Any], model: str) -> None:
     )
 
 
+async def _stream_chat_completion_attempt(
+    *,
+    url: str,
+    headers: dict[str, str],
+    payload: dict[str, Any],
+    timeout: float,
+    proxy: str,
+    dash_stream_id: str | None,
+    dash_mod: Any,
+) -> dict[str, Any]:
+    """单次流式请求 attempt — 拼接 SSE chunks 成跟非流式相同的 response dict.
+
+    主人 2026-05-28 plan-quizzical-crane Step 1: tool-based summary retrieval 链路
+    依赖流式 (AI 边输出 tool_call delta 边推 dashboard). DeepSeek OpenAI compat 协议:
+    `payload["stream"] = True` + `payload["stream_options"] = {"include_usage": True}`
+    让最后一个 chunk 含 usage.
+
+    成功 → 返回 {"choices": [{"message": {...}, "finish_reason": ...}], "usage": {...}}
+    HTTP 错误 → raise OpenAICompatibleError (exc.status_code 标 5xx, caller 决定重试).
+    """
+    text_accum = ""
+    tool_calls_by_index: dict[int, dict[str, Any]] = {}
+    finish_reason: str | None = None
+    usage: dict[str, Any] | None = None
+    role = "assistant"
+
+    async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
+        async with client.stream(
+            "POST", url, headers=headers, json=payload,
+        ) as response:
+            if response.status_code >= 400:
+                try:
+                    error_text = (await response.aread()).decode("utf-8", "ignore")[:500]
+                except Exception:  # noqa: BLE001
+                    error_text = f"<read failed status={response.status_code}>"
+                err = OpenAICompatibleError(
+                    _catty_http_status_message("AI 接口", response.status_code),
+                    error_text,
+                )
+                err.status_code = response.status_code  # type: ignore[attr-defined]
+                raise err
+
+            async for line in response.aiter_lines():
+                if not line:
+                    continue
+                # SSE 标准行: "data: {...}\n\n", 也兼容无 space "data:{...}"
+                if line.startswith("data:"):
+                    data_str = line[5:].lstrip()
+                elif line.startswith(":"):
+                    # SSE 注释 (keep-alive heartbeat), 跳过
+                    continue
+                else:
+                    continue
+                if not data_str:
+                    continue
+                if data_str == "[DONE]":
+                    break
+                try:
+                    chunk = json.loads(data_str)
+                except (ValueError, json.JSONDecodeError):
+                    continue
+
+                # usage chunk (最后一个; DeepSeek/OpenAI 在 stream_options.include_usage 时返回)
+                if chunk.get("usage"):
+                    usage = chunk["usage"]
+
+                choices = chunk.get("choices") or []
+                if not choices:
+                    continue
+                choice = choices[0]
+                delta = choice.get("delta") or {}
+
+                # role (一般出现在第一个 chunk)
+                if delta.get("role"):
+                    role = delta["role"]
+
+                # 累积 text content
+                content_delta = delta.get("content")
+                if content_delta:
+                    text_accum += content_delta
+                    if dash_stream_id is not None and dash_mod is not None:
+                        try:
+                            dash_mod.push_event(dash_stream_id, {
+                                "delta_text": content_delta,
+                                "event_type": "deepseek_chunk",
+                            })
+                        except Exception:  # noqa: BLE001
+                            pass
+
+                # 累积 tool_calls (按 index 拼名字 + 参数)
+                tc_deltas = delta.get("tool_calls") or []
+                for tc_delta in tc_deltas:
+                    if not isinstance(tc_delta, dict):
+                        continue
+                    idx = tc_delta.get("index", 0)
+                    if idx not in tool_calls_by_index:
+                        tool_calls_by_index[idx] = {
+                            "id": "",
+                            "type": "function",
+                            "function": {"name": "", "arguments": ""},
+                        }
+                    tc = tool_calls_by_index[idx]
+                    if tc_delta.get("id"):
+                        tc["id"] = tc_delta["id"]
+                    if tc_delta.get("type"):
+                        tc["type"] = tc_delta["type"]
+                    fn_delta = tc_delta.get("function") or {}
+                    if fn_delta.get("name"):
+                        tc["function"]["name"] += fn_delta["name"]
+                    if fn_delta.get("arguments"):
+                        tc["function"]["arguments"] += fn_delta["arguments"]
+
+                if choice.get("finish_reason"):
+                    finish_reason = choice["finish_reason"]
+
+    # 拼成跟非流式相同的 dict
+    message: dict[str, Any] = {"role": role, "content": text_accum}
+    if tool_calls_by_index:
+        message["tool_calls"] = [
+            tool_calls_by_index[i] for i in sorted(tool_calls_by_index.keys())
+        ]
+    return {
+        "choices": [
+            {"message": message, "finish_reason": finish_reason or "stop", "index": 0},
+        ],
+        "usage": usage or {},
+    }
+
+
 async def _post_chat_completion_raw(
     *,
     base_url: str,
@@ -575,6 +712,7 @@ async def _post_chat_completion_raw(
     tool_choice: str = "auto",
     enable_cache: bool = False,
     cache_depth: int = 2,
+    stream: bool = False,
 ) -> dict[str, Any]:
     """返回完整 response JSON,供 function calling 链路读 tool_calls。
 
@@ -739,22 +877,67 @@ async def _post_chat_completion_raw(
         payload["tools"] = normalize_openai_tool_schemas(tools)
         payload["tool_choice"] = tool_choice
 
+    # === Streaming params (主人 2026-05-28 Step 1: 真流式) ===
+    if stream:
+        payload["stream"] = True
+        # include_usage: 让最后一个 chunk 返回 usage (DeepSeek / OpenAI 都支持)
+        payload["stream_options"] = {"include_usage": True}
+
     # === Dashboard stream lifecycle hook (DeepSeek / OpenAI compat 路径) ===
     # 主人 2026-05-28: 让非 Anthropic 路径也能在 dashboard 上看到对话.
-    # 模拟流式: 收到完整 response 后一次性 push 完整 text 当一个 delta, 然后 end_stream.
+    # stream=True: chunk-by-chunk push (helper 内部已做)
+    # stream=False: 收到完整 response 后一次性 push 完整 text 当一个 delta
     # finally 块兜底清理 active stream (失败 raise 路径).
     _dash_stream_id: str | None = None
     try:
         from . import dashboard_state as _dash_mod
         _dash_stream_id = _dash_mod.start_stream(model=model)
     except Exception:  # noqa: BLE001
-        pass
+        _dash_mod = None  # type: ignore[assignment]
 
     try:
         # 主人:任何 5xx 自动 retry 3 次(共 4 次尝试),3 次都失败才上抛
         # 4xx 是 client error,重试也是一样的错,不重试
         last_error: OpenAICompatibleError | None = None
         for attempt in range(4):
+            if stream:
+                # === Streaming branch (主人 2026-05-28 Step 1) ===
+                try:
+                    data = await _stream_chat_completion_attempt(
+                        url=_chat_completions_url(base_url),
+                        headers=headers,
+                        payload=payload,
+                        timeout=timeout,
+                        proxy=proxy,
+                        dash_stream_id=_dash_stream_id,
+                        dash_mod=_dash_mod,
+                    )
+                except OpenAICompatibleError as exc:
+                    _status = getattr(exc, "status_code", None)
+                    if _status and 500 <= _status < 600:
+                        # 5xx → retry
+                        last_error = exc
+                        if attempt < 3:
+                            backoff = 0.5 * (2 ** attempt)
+                            _logger.info(
+                                f"AI 接口 (stream) {_status} retry {attempt + 1}/3 after {backoff}s",
+                            )
+                            await asyncio.sleep(backoff)
+                            continue
+                        raise
+                    # 4xx 直接抛
+                    raise
+                _log_cache_stats(data, model)
+                # 流式分支: chunk 已经 chunk-by-chunk 推过, 这里只 end_stream
+                if _dash_stream_id and _dash_mod is not None:
+                    try:
+                        _dash_mod.end_stream(_dash_stream_id, final_usage=data.get("usage"))
+                        _dash_stream_id = None
+                    except Exception:  # noqa: BLE001
+                        pass
+                return data
+
+            # === Non-streaming branch (现有逻辑保留) ===
             async with httpx.AsyncClient(**_client_kwargs(timeout, proxy)) as client:
                 response = await client.post(
                     _chat_completions_url(base_url), headers=headers, json=payload,
@@ -772,7 +955,7 @@ async def _post_chat_completion_raw(
                 # (DeepSeek 路径 enable_cache=False 但仍想看 prompt_cache_hit_tokens).
                 _log_cache_stats(data, model)
                 # === Dashboard: 推完整 text 当一次 delta + end_stream ===
-                if _dash_stream_id:
+                if _dash_stream_id and _dash_mod is not None:
                     try:
                         _text = ""
                         _choices = data.get("choices") or []
@@ -1173,6 +1356,12 @@ async def chat_completion_with_tools(
                     metadata_user_id=_scope_to_metadata_user_id(get_current_scope_key()),
                 )
             elif _router_active:
+                # 主人 2026-05-28 Step 1: 非 Claude 端点开真流式 (chunk push dashboard)
+                try:
+                    from .prompt_cache import is_claude_endpoint
+                    _router_stream = not is_claude_endpoint(router_base_url, router_model)
+                except Exception:  # noqa: BLE001
+                    _router_stream = False
                 data = await _post_chat_completion_raw(
                     base_url=router_base_url,
                     api_key=router_api_key,
@@ -1188,8 +1377,16 @@ async def chat_completion_with_tools(
                     tool_choice="auto",
                     enable_cache=False,
                     cache_depth=2,
+                    stream=_router_stream,
                 )
             else:
+                try:
+                    from .prompt_cache import is_claude_endpoint
+                    _openai_stream = not is_claude_endpoint(
+                        config.catty_openai_base_url, config.catty_openai_model,
+                    )
+                except Exception:  # noqa: BLE001
+                    _openai_stream = False
                 data = await _post_chat_completion_raw(
                     base_url=config.catty_openai_base_url,
                     api_key=config.catty_openai_api_key,
@@ -1205,6 +1402,7 @@ async def chat_completion_with_tools(
                     tool_choice="auto",
                     enable_cache=bool(getattr(config, "catty_prompt_cache_enabled", False)),
                     cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
+                    stream=_openai_stream,
                 )
         except (OpenAICompatibleError, httpx.HTTPError, asyncio.TimeoutError) as exc:
             _logger.warning(

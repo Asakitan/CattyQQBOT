@@ -381,6 +381,73 @@ class Config(BaseModel):
         default_factory=lambda: ["你", "猫猫", "猫娘", "看看", "帮我看看", "这张图", "这个图", "图片", "图里", "评价一下", "怎么回事"]
     )
     catty_keyword_replies: list[KeywordReplyRule] = Field(default_factory=list)
+    # ── CPU 主回复引擎 (BotLibre 风格: Semantic Router + txtai) ────────────
+    # 主人 2026-05-28 plan-cpu-alicebot-nlu-ai:
+    # 普通闲聊走 CPU 引擎 (~零成本/<200ms), 强互动/NSFW/CPU 信心不足才打 DeepSeek.
+    # 默认 enabled=False, 需 bootstrap 种子语料后再切. 关停时透传到现 keyword_reply 链路.
+    catty_cpu_engine_enabled: bool = False
+    catty_cpu_engine_routes_dir: str = "src/catty_qq_ai/data/cpu_engine/routes"
+    catty_cpu_engine_corpus_path: str = "src/catty_qq_ai/data/cpu_engine/corpus/qa_corpus.jsonl"
+    catty_cpu_engine_txtai_index_path: str = "src/catty_qq_ai/data/cpu_engine/corpus/txtai_index"
+    # L2 Semantic Router 阈值: direct≥0.82 直答, candidate∈[0.70,0.82) 标低信心进 L4
+    catty_cpu_engine_l2_threshold_direct: float = 0.82
+    catty_cpu_engine_l2_threshold_candidate: float = 0.70
+    # 群聊阈值上调 (避免抢话)
+    catty_cpu_engine_group_threshold_bonus: float = 0.03
+    # L4 Ollama 风格化: 私聊默认开, 群聊默认关 (延迟+@炸群顾虑)
+    catty_cpu_engine_l4_enabled_private: bool = True
+    catty_cpu_engine_l4_enabled_group: bool = False
+    catty_cpu_engine_l4_timeout_ms: int = 800
+    # 米雪儿语气后缀池 (Script 变量 {cat_suffix} 随机取)
+    catty_cpu_engine_cat_suffixes: list[str] = Field(
+        default_factory=lambda: ["喵～", "喵呜", "ฅฅ", "嗷呜～", "爪爪", "贴贴"]
+    )
+    # 强制走主 AI 的前缀 (绕过 CPU 引擎)
+    catty_cpu_engine_force_ai_prefixes: list[str] = Field(
+        default_factory=lambda: ["#ai", "#aikey", "#refresh"]
+    )
+    # Cython native 模块开关 (失败自动 fallback 纯 Python)
+    catty_cpu_engine_native_enabled: bool = True
+
+    # ── 积分系统 (DeepSeek 调用按 token 扣分, Ollama/CPU 免费) ─────────────
+    # 主人 2026-05-28 plan-cpu-alicebot:
+    # 3 起步占位 + 按真实 prompt/completion token 结算多退少补.
+    # 默认 enabled=False, S3 单独验证 ledger 后再开.
+    catty_credit_enabled: bool = False
+    catty_credit_initial_balance: int = 100
+    catty_credit_daily_signin_amount: int = 30
+    catty_credit_weekly_signin_bonus: int = 50
+    catty_credit_passive_recover_per_hour: int = 5
+    catty_credit_passive_recover_cap: int = 100
+    catty_credit_deepseek_base_cost: int = 3
+    catty_credit_deepseek_per_1k_prompt: int = 2
+    catty_credit_deepseek_per_1k_completion: int = 5
+    catty_credit_persist_path: str = "src/catty_qq_ai/data/credit/user_credits.json"
+    catty_credit_persist_debounce_seconds: float = 5.0
+
+    # ── 强互动判定 (强制走 DeepSeek 的场景, 积分够才放行) ───────────────────
+    # 主人 2026-05-28: NSFW phase>=P3 / 意图 ∈ strong_intents / 情绪强烈 / CPU 信心<阈值.
+    catty_strong_cpu_confidence_threshold: float = 0.7
+    catty_strong_emotion_intensity_threshold: float = 0.7
+    catty_strong_intents: list[str] = Field(
+        default_factory=lambda: ["tease_cat", "compliment_cat", "表白"]
+    )
+    catty_strong_nsfw_phase_threshold: int = 3
+
+    # ── 每日 DeepSeek 自我进化 (审 + 改 CPU 层 template, 带 git 备份 + 自动 rollback) ──
+    # 主人 2026-05-28: 全自动 DeepSeek 评审, 仅采群聊样本 (私聊不进采样池),
+    # score<=2 自动退役/重写, score>=4 加权重, new_routes 灰度入 L2.
+    # 默认关闭, S4 内测后再开.
+    catty_evolution_enabled: bool = False
+    catty_evolution_cron: str = "0 3 * * *"
+    catty_evolution_samples_per_layer: int = 30
+    catty_evolution_judge_model: str = "deepseek-v4-flash"
+    catty_evolution_rollback_neg_feedback_pct: float = 0.2
+    catty_evolution_rollback_score_decline_days: int = 3
+    catty_evolution_sample_only_group: bool = True
+    catty_evolution_logs_dir: str = "src/catty_qq_ai/data/cpu_engine/evolution_logs"
+    catty_evolution_git_commit_enabled: bool = True
+
     catty_soft_directed_reply_probability: float = 0.65
     catty_direct_address_reply_probability: float = 0.9
     catty_image_response_enabled: bool = True
@@ -421,6 +488,13 @@ class Config(BaseModel):
     catty_memory_max_corpus_messages: int = 800
     catty_memory_private_summary_messages: int = 500
     catty_memory_member_mention_threshold: int = 20
+    # 主人 2026-05-28 plan-quizzical-crane Step 3: 总结瘦身 → DeepSeek cache 友好
+    # summary_max_chars: LLM 输出 summary 硬截断字数 (prompt + save 双侧守护)
+    # corpus_max_tokens: 喂给 summary LLM 的语料 token 上限 (防 200+ 条 corpus 撑 8K+ 输入)
+    # member_impression_max_chars: member 短画像 impression 字数 (原 140 改 70)
+    catty_memory_summary_max_chars: int = 1000
+    catty_memory_corpus_max_tokens: int = 2000
+    catty_memory_member_impression_max_chars: int = 70
     catty_memory_reply_boost_enabled: bool = True
     catty_memory_reply_boost_min_corpus_messages: int = 80
     catty_memory_reply_boost_probability_bonus: float = 0.15

@@ -1083,21 +1083,55 @@ class MemoryStore:
             lines.append(f"{temperature_prefix}{name}({user_id}{image}): {text}")
         return lines
 
+    def _corpus_lines_capped(
+        self, corpus: list, max_tokens: int, *, hard_msg_cap: int = 300,
+    ) -> list[str]:
+        """从最新一条倒着累计 corpus lines, 不超 max_tokens token 就停.
+
+        主人 2026-05-28 plan-quizzical-crane Step 3: 喂给总结 LLM 的语料 ≤ 2K token,
+        防止 24+ 条 corpus 撑出 8K+ 总结输入 → 命中爆 cache.
+        """
+        try:
+            from .nlu.prompt_compressor import count_tokens
+        except Exception:  # noqa: BLE001
+            count_tokens = lambda s: max(len(str(s)) // 2, 1)  # noqa: E731
+        all_lines = self._corpus_lines(corpus, hard_msg_cap)
+        picked: list[str] = []
+        acc = 0
+        for line in reversed(all_lines):
+            t = count_tokens(line)
+            if acc + t > max_tokens and picked:
+                break
+            picked.insert(0, line)
+            acc += t
+        return picked
+
     def build_summary_messages(self, group_id: str) -> list[dict[str, object]]:
         group = self._data.get("groups", {}).get(group_id, {})
         corpus = group.get("corpus", []) if isinstance(group, dict) else []
         old_summary = str(group.get("summary") or "") if isinstance(group, dict) else ""
         old_profiles = group.get("member_profiles", {}) if isinstance(group, dict) else {}
-        lines = self._corpus_lines(corpus, min(self.max_corpus_messages, 300))
+        # 主人 2026-05-28 plan-quizzical-crane Step 3: corpus ≤ 2K token + 摘要 ≤ 1000 字.
+        try:
+            from . import config as _cfg
+            _corpus_max = int(getattr(_cfg.config, "catty_memory_corpus_max_tokens", 2000))
+            _summary_max = int(getattr(_cfg.config, "catty_memory_summary_max_chars", 1000))
+        except Exception:  # noqa: BLE001
+            _corpus_max, _summary_max = 2000, 1000
+        lines = self._corpus_lines_capped(corpus, _corpus_max)
         prompt = (
             '压缩QQ群长期记忆，省token。只输出JSON：'
-            '{"summary":"<=2500字","members":[{"user_id":"QQ","display_name":"名","gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}]}。'
+            f'{{"summary":"<={_summary_max}字","members":[{{"user_id":"QQ","display_name":"名",'
+            '"gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}]}。'
             "语料行前的[热]/[降温]/[冷]标签表示当前话题热度；[冷]档的旧梗、脏话、攻击性/露骨玩笑只作背景，"
             "除非多次重复或明确是稳定偏好/事实，否则不要写进摘要或人物画像，避免以后主动复读。"
             "只写有证据的信息；性别不确定写未知；不要Markdown/emoji。"
         )
+        # 旧摘要在 prompt 里也截断, 防上轮误产超长摘要污染新轮.
+        old_summary_trim = old_summary[:_summary_max]
         user_content = (
-            f"群:{group_id}\n旧摘要:{old_summary or '无'}\n旧画像:{json.dumps(old_profiles, ensure_ascii=False)}\n"
+            f"群:{group_id}\n旧摘要:{old_summary_trim or '无'}\n"
+            f"旧画像:{json.dumps(old_profiles, ensure_ascii=False)}\n"
             + "\n".join(lines)
         )
         return [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]
@@ -1151,16 +1185,26 @@ class MemoryStore:
         old_summary = str(user.get("private_summary") or "") if isinstance(user, dict) else ""
         old_profile = user.get("private_profile", {}) if isinstance(user, dict) else {}
         display_name = str(user.get("display_name") or user_id) if isinstance(user, dict) else user_id
-        lines = self._corpus_lines(corpus, self.private_summary_messages)
+        # 主人 2026-05-28 plan-quizzical-crane Step 3: private summary 同样 1000 字 + corpus 2K cap.
+        try:
+            from . import config as _cfg
+            _corpus_max = int(getattr(_cfg.config, "catty_memory_corpus_max_tokens", 2000))
+            _summary_max = int(getattr(_cfg.config, "catty_memory_summary_max_chars", 1000))
+        except Exception:  # noqa: BLE001
+            _corpus_max, _summary_max = 2000, 1000
+        lines = self._corpus_lines_capped(corpus, _corpus_max, hard_msg_cap=self.private_summary_messages)
         prompt = (
             '压缩QQ私聊记忆，省token。只输出JSON：'
-            '{"summary":"<=2500字","profile":{"gender":"男/女/未知","title":"称呼","impression":"<=30字","confidence":"低/中/高"}}。'
+            f'{{"summary":"<={_summary_max}字","profile":{{"gender":"男/女/未知",'
+            '"title":"称呼","impression":"<=30字","confidence":"低/中/高"}}}}。'
             "语料行前的[热]/[降温]/[冷]标签表示当前话题热度；[冷]档的旧梗、一次性玩笑或情绪化片段只作背景，"
             "除非反复出现或是稳定偏好/边界，否则不要写进长期摘要。"
             "只写偏好、事实、称呼、边界；不要Markdown/emoji。"
         )
+        old_summary_trim = old_summary[:_summary_max]
         user_content = (
-            f"用户:{user_id}/{display_name}\n旧摘要:{old_summary or '无'}\n旧画像:{json.dumps(old_profile, ensure_ascii=False)}\n"
+            f"用户:{user_id}/{display_name}\n旧摘要:{old_summary_trim or '无'}\n"
+            f"旧画像:{json.dumps(old_profile, ensure_ascii=False)}\n"
             + "\n".join(lines)
         )
         return [{"role": "system", "content": prompt}, {"role": "user", "content": user_content}]
@@ -1173,9 +1217,16 @@ class MemoryStore:
         old_profiles = group.get("member_profiles", {}) if isinstance(group, dict) else {}
         old_profile = old_profiles.get(user_id, {}) if isinstance(old_profiles, dict) else {}
         lines = self._corpus_lines(corpus, self.member_mention_threshold)
+        # 主人 2026-05-28 plan-quizzical-crane Step 3: member impression 140 → 70 字.
+        try:
+            from . import config as _cfg
+            _imp_max = int(getattr(_cfg.config, "catty_memory_member_impression_max_chars", 70))
+        except Exception:  # noqa: BLE001
+            _imp_max = 70
         prompt = (
             '根据群里50次提到某人的上下文做短画像。只输出JSON：'
-            '{"user_id":"QQ","gender":"男/女/未知","title":"称呼","impression":"<=140字","evidence":"<=60字","confidence":"低/中/高"}。'
+            f'{{"user_id":"QQ","gender":"男/女/未知","title":"称呼","impression":"<={_imp_max}字",'
+            '"evidence":"<=60字","confidence":"低/中/高"}}。'
             "语料行前的[热]/[降温]/[冷]标签表示当前话题热度；[冷]档单次调侃、脏梗或攻击性称呼不要当成人物稳定特征。"
             "只根据上下文证据；不要Markdown/emoji。"
         )
@@ -1187,11 +1238,18 @@ class MemoryStore:
 
     def save_group_summary(self, group_id: str, summary: str) -> None:
         group = self._data.setdefault("groups", {}).setdefault(group_id, {})
+        # 主人 2026-05-28 plan-quizzical-crane Step 3: 硬截断防 LLM 越界 (即使 prompt 写了
+        # <=1000字, LLM 偶尔会塞 2000+ 字进去). cache 友好优先级 > 总结精度.
+        try:
+            from . import config as _cfg
+            _summary_max = int(getattr(_cfg.config, "catty_memory_summary_max_chars", 1000))
+        except Exception:  # noqa: BLE001
+            _summary_max = 1000
         parsed = _extract_json_object(summary)
         if parsed is None:
-            group["summary"] = summary.strip()
+            group["summary"] = summary.strip()[:_summary_max]
         else:
-            group["summary"] = str(parsed.get("summary") or "").strip()
+            group["summary"] = str(parsed.get("summary") or "").strip()[:_summary_max]
             profiles = group.setdefault("member_profiles", {})
             members = group.setdefault("members", {})
             raw_members = parsed.get("members", [])
@@ -1204,11 +1262,17 @@ class MemoryStore:
 
     def save_private_summary(self, user_id: str, summary: str) -> None:
         user = self._data.setdefault("users", {}).setdefault(user_id, {})
+        # 主人 2026-05-28 plan-quizzical-crane Step 3: 硬截断防 LLM 越界.
+        try:
+            from . import config as _cfg
+            _summary_max = int(getattr(_cfg.config, "catty_memory_summary_max_chars", 1000))
+        except Exception:  # noqa: BLE001
+            _summary_max = 1000
         parsed = _extract_json_object(summary)
         if parsed is None:
-            user["private_summary"] = summary.strip()
+            user["private_summary"] = summary.strip()[:_summary_max]
         else:
-            user["private_summary"] = str(parsed.get("summary") or "").strip()
+            user["private_summary"] = str(parsed.get("summary") or "").strip()[:_summary_max]
             raw_profile = parsed.get("profile", {})
             if isinstance(raw_profile, dict):
                 profile = {
@@ -1248,12 +1312,18 @@ class MemoryStore:
         user_id = str(raw_member.get("user_id") or "").strip()
         if not user_id:
             return
+        # 主人 2026-05-28 plan-quizzical-crane Step 3: impression 硬截断 (默认 70 字).
+        try:
+            from . import config as _cfg
+            _imp_max = int(getattr(_cfg.config, "catty_memory_member_impression_max_chars", 70))
+        except Exception:  # noqa: BLE001
+            _imp_max = 70
         profile = {
             "display_name": str(raw_member.get("display_name") or "").strip(),
             "gender": _clean_gender(raw_member.get("gender")),
             "inferred_title": self._safe_title(user_id, group_id, raw_member.get("title")),
-            "impression": str(raw_member.get("impression") or "").strip(),
-            "evidence": str(raw_member.get("evidence") or "").strip(),
+            "impression": str(raw_member.get("impression") or "").strip()[:_imp_max],
+            "evidence": str(raw_member.get("evidence") or "").strip()[:60],
             "confidence": _clean_confidence(raw_member.get("confidence")),
             "updated_at": _now(),
         }
@@ -1502,9 +1572,15 @@ class MemoryStore:
                 lines.append("- 只有配置称呼明确为「主人」的 QQ 才能被叫主人；当前用户不能叫主人。")
             group = self._data.get("groups", {}).get(group_id, {})
             if isinstance(group, dict):
-                summary = str(group.get("summary") or "").strip()
-                if summary:
-                    lines.append("- 群摘要：" + summary)
+                # 主人 2026-05-28 plan-quizzical-crane Step 2: summary 不再被动注入 prompt.
+                # 改成短提示让 AI 用 catty_recall(scope=current_group) 主动拉取, prompt 缩短
+                # → DeepSeek cache 多 prefix 不互相 evict, 命中率上升.
+                summary_present = bool(str(group.get("summary") or "").strip())
+                if summary_present:
+                    lines.append(
+                        "- 本群有长期记忆 (summary + corpus): 需要回忆群里发生过什么时, "
+                        "调 catty_recall(scope=current_group) 拉取. 平时不用调."
+                    )
                 # 群级别 sticky notes(AI 通过 catty_remember 写入的长期备忘)
                 group_notes_line = self._notes_context_line(group, label="本群笔记")
                 if group_notes_line:
@@ -1544,9 +1620,14 @@ class MemoryStore:
                 lines.append("- 只有配置称呼明确为「主人」的 QQ 才能被叫主人；当前用户不能叫主人。")
             user = self._data.get("users", {}).get(user_id, {})
             if isinstance(user, dict):
-                summary = str(user.get("private_summary") or "").strip()
-                if summary:
-                    lines.append("- 私聊摘要：" + summary)
+                # 主人 2026-05-28 plan-quizzical-crane Step 2: private_summary 同样改成短提示,
+                # AI 需要时用 catty_recall(scope=current_user) 主动拉取.
+                summary_present = bool(str(user.get("private_summary") or "").strip())
+                if summary_present:
+                    lines.append(
+                        "- 跟此用户有长期记忆 (private_summary + corpus): 需要回忆以前聊过什么时, "
+                        "调 catty_recall(scope=current_user) 拉取. 平时不用调."
+                    )
                 profile = user.get("private_profile", {})
                 if isinstance(profile, dict) and profile:
                     lines.append(
