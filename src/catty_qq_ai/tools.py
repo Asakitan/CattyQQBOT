@@ -27,6 +27,7 @@ from .affection import (
     image_cost_for_quality,
     predict_checkin_range,
 )
+from .catty_nsfw_imagegen import _curl_post_json as _nai_curl_post_json
 from .config import Config
 from .hot_trends import fetch_hot_trends, normalize_sources
 from .image_reverse_search import (
@@ -2089,73 +2090,54 @@ async def _exec_imagegen_nai(
     if proxy_str:
         client_kwargs["proxy"] = proxy_str
 
-    # socksio 冷启动: 前 1-2 次 ConnectError 0.4s, 第 3 次起 OK. 加 3 次重试.
-    response = None
-    elapsed = 0.0
-    last_exc: Exception | None = None
-    for attempt in range(1, 4):
-        started = time.monotonic()
-        try:
-            async with httpx.AsyncClient(**client_kwargs) as client:
-                response = await client.post(
-                    _NAI_IMAGE_ENDPOINT,
-                    headers={
-                        "Authorization": f"Bearer {token}",
-                        "Content-Type": "application/json",
-                        "Accept": "*/*",
-                    },
-                    json=payload,
-                )
-            elapsed = time.monotonic() - started
-            break
-        except (httpx.HTTPError, asyncio.TimeoutError) as exc:
-            elapsed = time.monotonic() - started
-            last_exc = exc
-            _logger.info(
-                "imagegen[nai] attempt %d/3 transport error after %.1fs: %s: %s",
-                attempt, elapsed, exc.__class__.__name__, exc or "(empty repr)",
-            )
-            if attempt < 3:
-                await asyncio.sleep(1.5)
-                continue
-            _logger.warning(
-                "imagegen[nai] transport error after %.1fs (3 attempts): %s: %s (model=%s %dx%d steps=%d prompt_len=%d)",
-                elapsed, exc.__class__.__name__, exc or "(empty repr)",
-                model, width, height, steps, len(prompt),
-            )
-            return {
-                "error": f"NovelAI 接口连不上(3 次重试都失败,elapsed {elapsed:.0f}s): {exc.__class__.__name__}: {exc}",
-                "retry_guidance": "网络或 proxy 异常;过 30s 再试,或改 provider='gpt'。",
-            }
-    if response is None:
-        return {"error": f"NovelAI 重试 3 次都失败: {last_exc!r}"}
-    if response.status_code != 200:
-        detail = response.text[:400]
+    # 主人 2026-05-28: Python async SOCKS5 实现都有 30-50% ConnectError reset,
+    # subprocess curl.exe 100% 稳. 走 curl.exe.
+    started = time.monotonic()
+    status, body, err = await _nai_curl_post_json(
+        url=_NAI_IMAGE_ENDPOINT,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "Accept": "*/*",
+        },
+        payload=payload,
+        proxy=proxy_str,
+        timeout=timeout,
+    )
+    elapsed = time.monotonic() - started
+    if err or status == 0:
+        _logger.warning(
+            "imagegen[nai] curl error after %.1fs: %s (model=%s %dx%d steps=%d)",
+            elapsed, err, model, width, height, steps,
+        )
+        return {
+            "error": f"NovelAI 接口连不上 ({elapsed:.0f}s): {err}",
+            "retry_guidance": "网络或 proxy 异常;过 30s 再试,或改 provider='gpt'。",
+        }
+    if status != 200:
         _logger.warning(
             "imagegen[nai] status=%d elapsed=%.1fs model=%s %dx%d steps=%d prompt_len=%d body=%s",
-            response.status_code, elapsed, model, width, height, steps, len(prompt), detail,
+            status, elapsed, model, width, height, steps, len(prompt), detail,
         )
-        # NAI 402 = Anlas 不够; 401/403 = token 失效; 429 = 速率
-        if response.status_code == 401:
+        if status == 401:
             return {"error": "NovelAI token 失效或未授权,改 provider='gpt' 重试"}
-        if response.status_code == 402:
+        if status == 402:
             return {"error": "NovelAI 账户 Anlas 余额不足,改 provider='gpt' 重试或精简到三个标准尺寸"}
-        if response.status_code == 429:
+        if status == 429:
             return {"error": "NovelAI 触发速率限制,30 秒后再试或改 provider='gpt'"}
-        return {"error": f"NovelAI HTTP {response.status_code}: {detail[:300]}"}
+        return {"error": f"NovelAI HTTP {status}: {detail[:300]}"}
 
     # 响应是 zip,里面有 image_0.png
     try:
         import io
         import zipfile
-        zf = zipfile.ZipFile(io.BytesIO(response.content))
+        zf = zipfile.ZipFile(io.BytesIO(body))
         names = zf.namelist()
         if not names:
             return {"error": "NovelAI 响应 zip 是空的"}
         image_bytes = zf.read(names[0])
     except zipfile.BadZipFile:
-        # 偶尔上游会回 application/json 错误,但 status=200(罕见)
-        preview = response.content[:200]
+        preview = body[:200]
         try:
             preview_text = preview.decode("utf-8", errors="replace")
         except Exception:
@@ -2376,80 +2358,52 @@ async def _exec_nai_director(args: dict[str, Any], ctx: ToolContext) -> dict[str
         str(getattr(ctx.config, "catty_imagegen_nai_http_proxy", "") or "").strip()
         or str(getattr(ctx.config, "catty_http_proxy", "") or "").strip()
     )
-    client_kwargs: dict[str, Any] = {
-        "timeout": httpx.Timeout(timeout, connect=15.0),
-        "follow_redirects": True,
-        "http2": False,
-        "limits": httpx.Limits(max_keepalive_connections=0, max_connections=10),
-    }
-    if proxy_str:
-        client_kwargs["proxy"] = proxy_str
-
-    # socksio 冷启动: 前 1-2 次 ConnectError 0.4s, 加 3 次重试
-    response = None
-    elapsed = 0.0
-    last_exc: Exception | None = None
-    for attempt in range(1, 4):
-        started = time.monotonic()
-        try:
-            async with httpx.AsyncClient(**client_kwargs) as client:
-                response = await client.post(
-                    _NAI_AUGMENT_ENDPOINT,
-                    headers={
-                        "Authorization": f"Bearer {token}",
-                        "Content-Type": "application/json",
-                        "Accept": "*/*",
-                    },
-                    json=payload,
-                )
-            elapsed = time.monotonic() - started
-            break
-        except (httpx.HTTPError, asyncio.TimeoutError) as exc:
-            elapsed = time.monotonic() - started
-            last_exc = exc
-            _logger.info(
-                "director[%s] attempt %d/3 transport error after %.1fs: %s: %s",
-                req_type, attempt, elapsed, exc.__class__.__name__, exc or "(empty repr)",
-            )
-            if attempt < 3:
-                await asyncio.sleep(1.5)
-                continue
-            _logger.warning(
-                "director[%s] transport error after %.1fs (3 attempts): %s: %s (%dx%d)",
-                req_type, elapsed, exc.__class__.__name__, exc or "(empty repr)", in_w, in_h,
-            )
-            return {
-                "error": f"NovelAI director 接口连不上(3 次都失败, {elapsed:.0f}s): {exc.__class__.__name__}: {exc}",
-                "retry_guidance": "网络或 proxy 异常;过 30s 再试。",
-            }
-    if response is None:
-        return {"error": f"NovelAI director 重试 3 次都失败: {last_exc!r}"}
-    if response.status_code != 200:
-        detail = response.text[:400]
+    # subprocess curl.exe 100% 稳, 走它
+    started = time.monotonic()
+    status, body, err = await _nai_curl_post_json(
+        url=_NAI_AUGMENT_ENDPOINT,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "Accept": "*/*",
+        },
+        payload=payload,
+        proxy=proxy_str,
+        timeout=timeout,
+    )
+    elapsed = time.monotonic() - started
+    if err or status == 0:
+        _logger.warning("director[%s] curl error after %.1fs: %s", req_type, elapsed, err)
+        return {
+            "error": f"NovelAI director 接口连不上 ({elapsed:.0f}s): {err}",
+            "retry_guidance": "网络或 proxy 异常;过 30s 再试。",
+        }
+    if status != 200:
+        detail = body[:400].decode("utf-8", "replace")
         _logger.warning(
             "director[%s] status=%d elapsed=%.1fs %dx%d body=%s",
-            req_type, response.status_code, elapsed, in_w, in_h, detail,
+            req_type, status, elapsed, in_w, in_h, detail,
         )
-        if response.status_code == 401:
+        if status == 401:
             return {"error": "NovelAI token 失效或未授权"}
-        if response.status_code == 402:
+        if status == 402:
             return {"error": "NovelAI 账户 Anlas 余额不足"}
-        if response.status_code == 429:
+        if status == 429:
             return {"error": "NovelAI 触发速率限制,30 秒后再试"}
-        if response.status_code == 400:
+        if status == 400:
             return {"error": f"director payload 不合法: {detail[:300]}"}
-        return {"error": f"NovelAI director HTTP {response.status_code}: {detail[:300]}"}
+        return {"error": f"NovelAI director HTTP {status}: {detail[:300]}"}
 
     try:
         import io
         import zipfile
-        zf = zipfile.ZipFile(io.BytesIO(response.content))
+        zf = zipfile.ZipFile(io.BytesIO(body))
         names = zf.namelist()
         if not names:
             return {"error": "director 响应 zip 是空的"}
         out_image_bytes = zf.read(names[0])
     except zipfile.BadZipFile:
-        preview = response.content[:200]
+        preview = body[:200]
         try:
             preview_text = preview.decode("utf-8", errors="replace")
         except Exception:

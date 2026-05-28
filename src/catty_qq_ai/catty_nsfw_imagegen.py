@@ -19,6 +19,9 @@ from __future__ import annotations
 import asyncio
 import base64
 import json
+import os
+import shutil
+import tempfile
 import threading
 import time
 import zipfile
@@ -28,6 +31,80 @@ from typing import Any
 
 import httpx
 from nonebot import logger
+
+
+async def _curl_post_json(
+    *,
+    url: str,
+    headers: dict[str, str],
+    payload: dict[str, Any],
+    proxy: str = "",
+    timeout: float = 120.0,
+) -> tuple[int, bytes, str]:
+    """走 subprocess curl.exe POST JSON, 返回 (status_code, body_bytes, error_msg)。
+
+    主人 2026-05-28: Python httpx/socksio/httpx-socks/curl_cffi 等所有 async SOCKS5
+    实现连这个 gost proxy 都有 30-50% 偶发 ConnectError reset (Win Error 10054),
+    但 curl.exe 100% 稳定. 改 subprocess curl.exe 绕过 Python SOCKS 实现 bug.
+
+    body 写临时文件读出避免 stdout 二进制 zip 污染 status marker.
+    """
+    curl_exe = shutil.which("curl") or "curl.exe"
+    body_file = tempfile.NamedTemporaryFile(suffix=".bin", delete=False)
+    body_file.close()
+    body_path = body_file.name
+    try:
+        args = [
+            curl_exe, "-sS", "-X", "POST",
+            "--max-time", str(int(timeout)),
+            "-d", "@-",  # payload from stdin
+            "-o", body_path,  # body 写文件
+            "-w", "%{http_code}",  # stdout 只剩 status code
+        ]
+        if proxy:
+            args.extend(["-x", proxy])
+        for k, v in headers.items():
+            args.extend(["-H", f"{k}: {v}"])
+        args.append(url)
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                *args,
+                stdin=asyncio.subprocess.PIPE,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+        except FileNotFoundError as exc:
+            return 0, b"", f"curl not found: {exc}"
+        try:
+            stdout, stderr = await asyncio.wait_for(
+                proc.communicate(json.dumps(payload).encode("utf-8")),
+                timeout=timeout + 5,
+            )
+        except asyncio.TimeoutError:
+            try:
+                proc.kill()
+            except ProcessLookupError:
+                pass
+            return 0, b"", f"curl timeout after {timeout}s"
+        status_str = stdout.strip().decode("ascii", errors="replace")
+        try:
+            status = int(status_str or "0")
+        except ValueError:
+            status = 0
+        body = b""
+        try:
+            with open(body_path, "rb") as f:
+                body = f.read()
+        except OSError:
+            pass
+        if proc.returncode != 0 and status == 0:
+            return 0, body, f"curl exit={proc.returncode} stderr={stderr.decode('utf-8', 'replace')[:300]}"
+        return status, body, ""
+    finally:
+        try:
+            os.unlink(body_path)
+        except OSError:
+            pass
 
 
 # ── 配置默认值 (可被 config 覆盖) ──
@@ -496,63 +573,36 @@ async def maybe_generate_image(
         or str(getattr(config, "catty_http_proxy", "") or "").strip()
     )
     timeout = float(getattr(config, "catty_imagegen_nai_timeout_seconds", 180.0) or 180.0)
-    client_kwargs: dict[str, Any] = {
-        "timeout": httpx.Timeout(timeout, connect=15.0),
-        "follow_redirects": True,
-        "http2": False,
-        "limits": httpx.Limits(max_keepalive_connections=0, max_connections=10),
-    }
-    if proxy_str:
-        client_kwargs["proxy"] = proxy_str
 
-    # socksio 冷启动: 前 1-2 次 ConnectError 0.4s, 第 3 次起 OK. 加 3 次重试.
-    response = None
-    elapsed = 0.0
-    last_exc = None
-    for attempt in range(1, 4):
-        started = time.monotonic()
-        try:
-            async with httpx.AsyncClient(**client_kwargs) as client:
-                response = await client.post(
-                    NAI_ENDPOINT,
-                    headers={
-                        "Authorization": f"Bearer {token}",
-                        "Content-Type": "application/json",
-                        "Accept": "*/*",
-                    },
-                    json=payload,
-                )
-            elapsed = time.monotonic() - started
-            break
-        except (httpx.HTTPError, asyncio.TimeoutError) as exc:
-            elapsed = time.monotonic() - started
-            last_exc = exc
-            logger.info(
-                f"nsfw_imagegen attempt {attempt}/3 transport error after {elapsed:.1f}s: "
-                f"{exc.__class__.__name__}: {exc} (user={user_id}, turn={turn_count})"
-            )
-            if attempt < 3:
-                await asyncio.sleep(1.5)
-                continue
-            logger.warning(
-                f"nsfw_imagegen transport error after {elapsed:.1f}s (3 attempts): "
-                f"{exc.__class__.__name__}: {exc} (user={user_id}, turn={turn_count})"
-            )
-            return None
-    if response is None:
-        return None
-
+    # 主人 2026-05-28: Python async SOCKS5 实现都有 30-50% 偶发 ConnectError reset,
+    # subprocess curl.exe 100% 稳. 走 curl.exe.
+    started = time.monotonic()
+    status, body, err = await _curl_post_json(
+        url=NAI_ENDPOINT,
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "Accept": "*/*",
+        },
+        payload=payload,
+        proxy=proxy_str,
+        timeout=timeout,
+    )
     elapsed = time.monotonic() - started
-    if response.status_code != 200:
-        detail = response.text[:300]
+    if err or status == 0:
         logger.warning(
-            f"nsfw_imagegen status={response.status_code} elapsed={elapsed:.1f}s "
-            f"body={detail} (user={user_id}, turn={turn_count})"
+            f"nsfw_imagegen curl error after {elapsed:.1f}s: {err} (user={user_id}, turn={turn_count})"
+        )
+        return None
+    if status != 200:
+        logger.warning(
+            f"nsfw_imagegen status={status} elapsed={elapsed:.1f}s "
+            f"body={body[:300]!r} (user={user_id}, turn={turn_count})"
         )
         return None
 
     try:
-        zf = zipfile.ZipFile(BytesIO(response.content))
+        zf = zipfile.ZipFile(BytesIO(body))
         names = zf.namelist()
         if not names:
             logger.warning("nsfw_imagegen: zip 是空的")
