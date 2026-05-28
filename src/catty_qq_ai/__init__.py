@@ -10093,7 +10093,16 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 # 就不在 handle_chat 兜底里 schedule 也不短等,把节省下来的 3s + API 配额省掉。
                 # 主 AI 仍能看到 history 里 [图片数量:N] 这条 hint,需要详情时它会用 tool 调
                 # catty_recall 等机制(或者用户下一句问到时再走 vision)。
-                if _user_text_wants_image_attention(incoming.text):
+                # 文本提到图 → eager 读图; 但「专门指向笨猫」(@笨猫/回复笨猫/前缀呼叫/
+                # 明确求助) 带图、哪怕一个字没打, 也是最强的「看这张图」意图, 强制读图。
+                # 只有真正路过的群闲图(无指向)才继续懒加载省 vision 配额。
+                if (
+                    _user_text_wants_image_attention(incoming.text)
+                    or incoming.mentioned
+                    or incoming.replied_to_self
+                    or incoming.used_prefix
+                    or incoming.directly_requested
+                ):
                     _schedule_vision_async(
                         incoming.image_keys,
                         incoming.image_urls,
