@@ -10003,6 +10003,19 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     break
         except Exception as _enrich_exc:  # noqa: BLE001
             logger.debug(f"enriched history content extract failed: {_enrich_exc}")
+        # 主人 2026-05-28 cache diag: dump enriched hash, 下轮 cache_diag 显示 m[-3]
+        # 应该跟这条 enriched_hash 完全一致 (字节稳定 = cache prefix 稳定).
+        try:
+            import hashlib as _hashlib2
+            _enr_hash = _hashlib2.md5(
+                str(_enriched_user_content_for_history).encode("utf-8", "ignore")
+            ).hexdigest()[:8]
+            logger.info(
+                "enriched_diag: scope=%s enriched_user=%dc#%s (下轮 m[-3] hash 应等此)",
+                history_key, len(str(_enriched_user_content_for_history)), _enr_hash,
+            )
+        except Exception:  # noqa: BLE001
+            pass
         _append_history(history_key, _enriched_user_content_for_history, history_text)
         if special_care_context and chunks:
             memory_store.record_special_care_reply_sent(event, history_text)
