@@ -24,37 +24,22 @@ from typing import Any
 
 
 def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> list[dict]:
-    """CC 同款 cache_control 标位: messages 数组**最后一条**消息的 content 最后 block.
+    """主人 2026-05-28 C10 关键修复: noop, 不标 messages-level cache_control marker.
 
-    源码依据 (主人 CC_CACHE_MECHANISM.md section 2 双重确认):
-    - cli.mjs:865-870 (CC 官方反编译): user 末块加 cache_control
-    - cli.mjs:874-879: assistant 末块加 (排除 thinking/redacted_thinking)
-    - claude.ts:3201-3244 (社区版): markerIndex = messages.length - 1
+    log 实证 (12:12:56): cache_miss_reason=messages_changed cache_missed_input_tokens=7785.
+    Anthropic (经 NewAPI OAuth MAX claude-max-sg) 看 messages-level marker 时检查整个
+    messages prefix, messages 每轮变 (新增 user/assistant 轮) → 整个 cache miss,
+    连带 sys[2] static marker 也不返回 read.
 
-    cache 命中机制 (CC_CACHE_MECHANISM.md section 7.2):
-    cache_control 标 messages[-1] 是为了**写入** — 本轮 prefix 写到 cache.
-    **读取**是 Anthropic 从 breakpoint **向更早 block 回溯** (窗口 20 block),
-    找之前写过的更短 prefix 条目. 因此 messages[-1] 内容每轮变 (catty 的 DYNAMIC_CONTEXT)
-    **不影响命中** — 命中是回溯前一轮已写入的更短 prefix.
+    修复: 删 messages marker, 只留 sys[2] (inject_system_tail_cache 标的 boundary).
+    Anthropic 只看 system-level marker → 检查 sys[0..2] static prefix → 字节稳定 → hit.
 
-    主人 2026-05-28 C7-2: 回退 C6 (错误标 user_indices[-2]), 改回 CC 同款 messages[-1].
-    之前以为"current user 每轮变所以 miss" 是误读 Anthropic cache 机制 — 实际靠回溯.
+    跟 MD section 9.1 推荐模板"system 单 marker"完全一致.
+    CC 同款 messages[-1] marker 在 anthropic.com 直连有效, 经 NewAPI relay 路由可能行为不同.
 
     cachingAtDepth 参数保留兼容, 不再生效.
     """
-    if not messages:
-        return messages
-    last_msg = messages[-1]
-    if not isinstance(last_msg, dict):
-        return messages
-    # 跳过 thinking / redacted_thinking 末块 — Anthropic 不接受 cache_control 在这两种
-    # (CC cli.mjs:876-877 显式过滤).
-    content = last_msg.get("content")
-    if isinstance(content, list) and content:
-        last_block = content[-1]
-        if isinstance(last_block, dict) and last_block.get("type") in ("thinking", "redacted_thinking"):
-            return messages
-    _mark_cache_control(last_msg)
+    # noop: 不标 messages-level marker, 让 sys[2] cache_control 独立工作
     return messages
 
 
