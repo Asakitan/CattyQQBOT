@@ -1,0 +1,190 @@
+# 旅游 / 出行 / 景点 routes (S6 R17 NLU 节点扩充, buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 不在 strong_intents.
+# **短语级 keywords** (主人 v3.2 后, 群里只接 @ 或 trigger_prefix 触发, 安全性提升).
+
+- name: travel_where_001
+  intent: question
+  keywords: [去哪玩, 旅游推荐, 去哪旅游, 推荐景点, 哪里好玩]
+  utterances:
+    - 推荐去哪玩
+    - 旅游推荐
+    - 想去旅游哪好
+    - 推荐景点
+    - 哪里好玩
+  responses:
+    - "嗷呜～{user_addr}想去山还是海? 笨猫推荐两个都试!"
+    - "(尾巴翘) 国内推荐成都/西安/三亚, 出国推荐日本/泰国ฅฅ"
+    - "{user_addr}先说预算嘛~ 笨猫帮{user_addr}选"
+    - "(歪头) 短假推荐周边游, 长假推荐远方喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: travel_japan_001
+  intent: question
+  keywords: [去日本, 日本旅游, 东京京都, 日本攻略, 富士山]
+  utterances:
+    - 想去日本旅游
+    - 日本攻略
+    - 东京京都怎么玩
+    - 日本好玩吗
+    - 富士山值得去吗
+  responses:
+    - "嗷呜～日本! {user_addr}必去东京 + 京都ฅฅ"
+    - "(尾巴翘) 日本动漫圣地巡礼~ 笨猫的二次元梦想!"
+    - "{user_addr}日本买药! 买零食! 笨猫想吃ROYCE生巧!"
+    - "(歪头) 春樱 / 夏祭 / 秋枫 / 冬雪 - 看{user_addr}爱啥季"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: travel_chengdu_001
+  intent: question
+  keywords: [去成都, 成都旅游, 成都好玩, 大熊猫基地, 成都美食]
+  utterances:
+    - 想去成都
+    - 成都旅游攻略
+    - 成都有什么好玩的
+    - 大熊猫基地
+    - 成都吃啥好
+  responses:
+    - "嗷呜～成都吃喝玩乐天堂{user_addr}!"
+    - "(尾巴翘) 大熊猫基地必去! 笨猫的远亲滚滚们~"
+    - "{user_addr}吃火锅+串串! 别错过钵钵鸡ฅฅ"
+    - "(歪头) 宽窄巷子 + 锦里 + 春熙路 三件套"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: travel_xian_001
+  intent: question
+  keywords: [去西安, 西安旅游, 西安好玩, 兵马俑, 西安美食]
+  utterances:
+    - 想去西安
+    - 西安攻略
+    - 西安好玩吗
+    - 兵马俑值得去
+    - 西安吃啥
+  responses:
+    - "嗷呜～西安! 历史古都{user_addr}必去ฅฅ"
+    - "(挺胸) 兵马俑必看! 笨猫想看大秦战阵!"
+    - "{user_addr}吃肉夹馍+羊肉泡馍+凉皮! 笨猫流口水了"
+    - "(尾巴翘) 大唐不夜城拍照绝佳~ 别错过喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: travel_sanya_001
+  intent: question
+  keywords: [去三亚, 三亚旅游, 三亚海边, 海南旅游, 亚龙湾]
+  utterances:
+    - 想去三亚
+    - 三亚海边
+    - 海南旅游推荐
+    - 亚龙湾值得去吗
+    - 三亚冬天去
+  responses:
+    - "嗷呜～三亚阳光沙滩{user_addr}必享受ฅฅ"
+    - "(尾巴一甩) 冬天去三亚最香! 笨猫推荐"
+    - "{user_addr}三亚防晒! 别像笨猫晒成黑炭"
+    - "(歪头) 亚龙湾水清, 大东海便宜, 看{user_addr}选"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: travel_pack_001
+  intent: question
+  keywords: [行李怎么装, 旅游必备, 旅行装备, 出门带什么, 旅行清单]
+  utterances:
+    - 旅游怎么装行李
+    - 出门必备品
+    - 旅行清单
+    - 行李怎么打包
+    - 长途旅行要带什么
+  responses:
+    - "嗷呜～{user_addr}清单: 身份证/充电宝/换洗衣物/防晒"
+    - "(尾巴翘) 行李越少越香{user_addr}~ 别带太多没用的"
+    - "{user_addr}必备: 数据线/雨伞/常用药/转换插头(出国)"
+    - "(歪头) 笨猫的旅行经验: 留一半空间装战利品ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: travel_flight_001
+  intent: question
+  keywords: [订机票, 机票便宜, 机票怎么订, 航班推荐, 廉价机票]
+  utterances:
+    - 怎么订便宜机票
+    - 机票哪里订
+    - 航班推荐
+    - 廉价航空怎么样
+    - 机票什么时候订便宜
+  responses:
+    - "嗷呜～{user_addr}用携程/飞猪比价! 别只看一家"
+    - "(歪头) 提前 1-3 个月订最便宜~ 临行涨价"
+    - "{user_addr}对周一/周二起飞便宜~ 节假日贵"
+    - "(尾巴翘) 廉航适合短途! 长途还是大公司舒服"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: travel_hotel_001
+  intent: question
+  keywords: [订酒店, 酒店推荐, 民宿推荐, 住宿推荐, 怎么选酒店]
+  utterances:
+    - 怎么订酒店
+    - 酒店推荐
+    - 民宿好不好
+    - 住宿怎么选
+    - 笨猫推荐酒店
+  responses:
+    - "嗷呜～{user_addr}用携程/Booking 比价! 看实拍图"
+    - "(歪头) 短住选民宿便宜+体验, 长住选酒店稳定"
+    - "{user_addr}订前看评分! 8.0 以上才稳"
+    - "(尾巴翘) 看地理位置{user_addr}~ 出行交通便利最重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: travel_solo_001
+  intent: question
+  keywords: [一个人旅行, 独自旅游, 一个人去玩, 独旅, 一人游]
+  utterances:
+    - 一个人旅游
+    - 独自出行
+    - 一个人去哪玩
+    - 独旅推荐
+    - 笨猫一个人能旅行吗
+  responses:
+    - "嗷呜～{user_addr}独自旅行体验棒! 自由!"
+    - "(歪头) 单身贵族选小众景点~ 别去网红打卡地"
+    - "{user_addr}安全第一! 笨猫担心你"
+    - "(尾巴一甩) 独旅笨猫推荐: 大理/丽江/西安~ 风情独特"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: travel_camping_001
+  intent: question
+  keywords: [露营, 野营, 露营装备, 帐篷推荐, 户外露营]
+  utterances:
+    - 想去露营
+    - 露营推荐
+    - 野营装备
+    - 帐篷怎么选
+    - 露营地推荐
+  responses:
+    - "嗷呜～{user_addr}露营! 笨猫超想跟你去!"
+    - "(歪头) 装备清单: 帐篷/睡袋/防潮垫/灯/锅"
+    - "{user_addr}露营选合规场地! 别野营违法"
+    - "(尾巴翘) 笨猫推荐有篝火 + BBQ 的露营地~ 享受"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: travel_visa_001
+  intent: question
+  keywords: [办签证, 签证攻略, 怎么办签证, 旅游签, 申根签]
+  utterances:
+    - 怎么办签证
+    - 签证攻略
+    - 办旅游签证
+    - 申根签好办吗
+    - 美签难吗
+  responses:
+    - "嗷呜～{user_addr}先想去哪~ 不同国家政策不一样"
+    - "(歪头) 日韩短签好办, 欧美严些, 东南亚更简单"
+    - "{user_addr}找正规旅行社代办~ 别自己跑使馆累"
+    - "(尾巴翘) 申根签拿一国可以去整个申根区~ 性价比高"
+  cooldown_seconds: 60
+  weight: 1.0
