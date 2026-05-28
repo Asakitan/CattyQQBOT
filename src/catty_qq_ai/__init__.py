@@ -5204,20 +5204,27 @@ async def _build_messages(
             {"role": "system", "content": _override},        # cache prefix #2 (主人对话静态)
         ]
         _filtered_history = _filter_soft_refusal_history(history_messages)
-        # 主人 2026-05-28 cache 修复: 跟 SFW 路径 _append_history 同款 freeze-head 策略 —
-        # 头 2 条 (最早 user+assistant) 固定 + 末尾 N-2 条最新, 让 msg[0] 跨轮稳定 → cache hit.
-        if (
-            len(_filtered_history) > _NSFW_SLIM_HISTORY_MAX
-            and len(_filtered_history) >= 4
-            and isinstance(_filtered_history[0], dict)
-            and _filtered_history[0].get("role") == "user"
-            and isinstance(_filtered_history[1], dict)
-            and _filtered_history[1].get("role") == "assistant"
-        ):
-            _slim_messages.extend(_filtered_history[:2])
-            _slim_messages.extend(_filtered_history[-(_NSFW_SLIM_HISTORY_MAX - 2):])
+        # 主人 2026-05-28 C4 NSFW: batch slice — 跟 SFW _append_history 同款策略.
+        # 之前: 每次 last SLIM_HISTORY_MAX (20), 每轮滑窗 → cache lookback 找不到子集.
+        # 现在: append-only 到 SLIM*2 (40) 才一次性 batch slice 回 20.
+        # 这样 20 轮内 history **byte 完全稳定**, Anthropic 20-block lookback 命中, cache_read 大涨.
+        _NSFW_SLIM_BATCH_THRESHOLD = _NSFW_SLIM_HISTORY_MAX * 2  # 40 条触发 batch trim
+        if len(_filtered_history) > _NSFW_SLIM_BATCH_THRESHOLD:
+            # 触发 batch trim — 一次性砍回 SLIM_HISTORY_MAX
+            if (
+                len(_filtered_history) >= 4
+                and isinstance(_filtered_history[0], dict)
+                and _filtered_history[0].get("role") == "user"
+                and isinstance(_filtered_history[1], dict)
+                and _filtered_history[1].get("role") == "assistant"
+            ):
+                _slim_messages.extend(_filtered_history[:2])
+                _slim_messages.extend(_filtered_history[-(_NSFW_SLIM_HISTORY_MAX - 2):])
+            else:
+                _slim_messages.extend(_filtered_history[-_NSFW_SLIM_HISTORY_MAX:])
         else:
-            _slim_messages.extend(_filtered_history[-_NSFW_SLIM_HISTORY_MAX:])
+            # ≤ 40 条: 全部 append-only, 不 trim — 让 cache byte 稳定
+            _slim_messages.extend(_filtered_history)
         _slim_messages.append({
             "role": "user",
             "content": _build_user_content(incoming, image_description=image_description),
