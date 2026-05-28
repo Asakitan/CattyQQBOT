@@ -5395,27 +5395,40 @@ async def _build_messages(
             _append_to_last_user(_slim_messages)
             _append_to_last_user(messages)
         _filtered_history = _filter_soft_refusal_history(history_messages)
-        # 主人 2026-05-28 C4 NSFW: batch slice — 跟 SFW _append_history 同款策略.
-        # 之前: 每次 last SLIM_HISTORY_MAX (20), 每轮滑窗 → cache lookback 找不到子集.
-        # 现在: append-only 到 SLIM*2 (40) 才一次性 batch slice 回 20.
-        # 这样 20 轮内 history **byte 完全稳定**, Anthropic 20-block lookback 命中, cache_read 大涨.
-        _NSFW_SLIM_BATCH_THRESHOLD = _NSFW_SLIM_HISTORY_MAX * 2  # 40 条触发 batch trim
-        if len(_filtered_history) > _NSFW_SLIM_BATCH_THRESHOLD:
-            # 触发 batch trim — 一次性砍回 SLIM_HISTORY_MAX
-            if (
-                len(_filtered_history) >= 4
-                and isinstance(_filtered_history[0], dict)
-                and _filtered_history[0].get("role") == "user"
-                and isinstance(_filtered_history[1], dict)
-                and _filtered_history[1].get("role") == "assistant"
-            ):
-                _slim_messages.extend(_filtered_history[:2])
-                _slim_messages.extend(_filtered_history[-(_NSFW_SLIM_HISTORY_MAX - 2):])
+        # 主人 2026-05-29 Round 16: spark slim history 改用 monotonic_history_trim,
+        # 跟主对话一样的 per-scope anchor checkpoint 机制. 之前 batch slice 取 [前 2 + 后 4]
+        # 后 4 条**每轮滑动** → spark history 字节漂移 → dashboard 真实 spark 68%.
+        # 实测真实 spark dump A vs B: msg[3..6] 每次内容不同 (滑动后 4 条), 只有 msg[1..2] (前 2) 稳定.
+        # monotonic_trim: 同 scope 多轮 anchor 不动 → history[anchor:] 字节稳定 → cache 命中.
+        try:
+            from .nlu.prompt_compressor import monotonic_history_trim as _spark_mono_trim
+            # spark target_tokens 用 SLIM_MAX 估算 token (每条平均 ~150 token, 6 条 ~900 token)
+            _spark_target_tokens = _NSFW_SLIM_HISTORY_MAX * 150
+            _spark_trimmed = _spark_mono_trim(
+                _filtered_history,
+                scope_id=f"spark:{_arc_scope}:{event.user_id}",  # spark 独立 anchor (跟主对话区分)
+                target_tokens=_spark_target_tokens,
+                keep_recent=2,
+            )
+            _slim_messages.extend(_spark_trimmed)
+        except Exception as _spark_trim_exc:
+            # fallback 到原 batch slice
+            logger.debug(f"spark monotonic_trim failed (fallback to batch slice): {_spark_trim_exc}")
+            _NSFW_SLIM_BATCH_THRESHOLD = _NSFW_SLIM_HISTORY_MAX * 2
+            if len(_filtered_history) > _NSFW_SLIM_BATCH_THRESHOLD:
+                if (
+                    len(_filtered_history) >= 4
+                    and isinstance(_filtered_history[0], dict)
+                    and _filtered_history[0].get("role") == "user"
+                    and isinstance(_filtered_history[1], dict)
+                    and _filtered_history[1].get("role") == "assistant"
+                ):
+                    _slim_messages.extend(_filtered_history[:2])
+                    _slim_messages.extend(_filtered_history[-(_NSFW_SLIM_HISTORY_MAX - 2):])
+                else:
+                    _slim_messages.extend(_filtered_history[-_NSFW_SLIM_HISTORY_MAX:])
             else:
-                _slim_messages.extend(_filtered_history[-_NSFW_SLIM_HISTORY_MAX:])
-        else:
-            # ≤ 40 条: 全部 append-only, 不 trim — 让 cache byte 稳定
-            _slim_messages.extend(_filtered_history)
+                _slim_messages.extend(_filtered_history)
         _slim_messages.append({
             "role": "user",
             "content": _build_user_content(incoming, image_description=image_description),
