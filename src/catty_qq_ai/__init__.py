@@ -9297,11 +9297,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 except Exception:  # noqa: BLE001
                     pass
 
-                # 主人 2026-05-28 prompt 优化 C3e: 砍 3 个跟 cache 段重叠的 author_note —
-                # - relationship_note: 跟 catty_daily_affection_gate_skeleton (5 档) 重叠
-                # - default_persona_drift_note: 跟 catty_post_history (PHI) + reply_self_check 重叠
-                # - scene_now_note: 跟 catty_daily_life 重叠
-                # 每轮节省 ~500c dynamic.
+                # 主人 2026-05-28 C16-2: 5 个 author_note (adaptive_drift / theory_of_mind /
+                # scene_transition / pacing / multi_turn_callback) 之前各自 inject 一段 hint,
+                # 群聊 sweep 后总进 msg[20] ~700-1000c. 现合并成 1 个 unified 100 字 summary
+                # (各 NLU 模块取核心 tag/hint, 限 30 字), 1 次 inject depth=2.
+                # NLU detect 仍跑 (用于状态更新/metrics), 只压缩注入 prompt 部分.
                 _recent_user_texts: list[str] = []
                 for _m in reversed(messages):
                     if _m.get("role") == "user":
@@ -9310,22 +9310,32 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             _recent_user_texts.append(_c)
                             if len(_recent_user_texts) >= 3:
                                 break
-                if _recent_user_texts:
-                    # adaptive_drift: 现在只 inject ~50c 短指针 (引用 catty_adaptive_drift_skeleton)
-                    _adaptive_note = build_adaptive_drift_note(
-                        _recent_user_texts, is_owner=_user_is_owner,
-                    )
-                    messages = inject_author_note(messages, _adaptive_note)
 
-                # 笨猫『读心』author_note (depth=2): 看最近 3-5 条 user msg
-                # 推断对方心理 trend (累/求肯定/试探/孤独/皮/暧昧/敷衍), 让笨猫
-                # 表现"懂对方"的智能感 — 不是孤立看当前一条
-                try:
-                    from .catty_theory_of_mind import build_theory_of_mind_note
-                    if _recent_user_texts:
-                        # 主人 2026-05-28: 开 text2vec 后 detect_trend 内会 embed
-                        # 3-5 条 msg (LRU 缓存复用上轮, 没缓存时 30-100ms).
-                        # 包 to_thread 不阻塞 event loop.
+                _unified_hints: list[str] = []
+
+                def _short(s: str, n: int = 30) -> str:
+                    """取 str 第一行前 n 字, 去掉【…】标题, 行内压一行."""
+                    if not s:
+                        return ""
+                    s2 = " ".join(line.strip() for line in s.splitlines() if line.strip())
+                    # 去掉开头【...】标签 (取冒号或 】之后)
+                    if "】" in s2:
+                        s2 = s2.split("】", 1)[1].strip()
+                    return s2[:n].rstrip()
+
+                if _recent_user_texts:
+                    try:
+                        _adaptive_note = build_adaptive_drift_note(
+                            _recent_user_texts, is_owner=_user_is_owner,
+                        )
+                        _ad_short = _short(getattr(_adaptive_note, "content", ""), 28)
+                        if _ad_short:
+                            _unified_hints.append(f"vibe:{_ad_short}")
+                    except Exception as exc:  # noqa: BLE001
+                        logger.debug(f"adaptive_drift failed: {exc}")
+
+                    try:
+                        from .catty_theory_of_mind import build_theory_of_mind_note
                         _use_t2v_now = bool(getattr(config, "catty_use_text2vec", False))
                         if _use_t2v_now:
                             _tom_note = await asyncio.to_thread(
@@ -9337,44 +9347,44 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             _tom_note = build_theory_of_mind_note(
                                 _recent_user_texts, is_owner=_user_is_owner,
                             )
-                        messages = inject_author_note(messages, _tom_note)
-                except Exception as exc:  # noqa: BLE001
-                    logger.debug(f"theory_of_mind author_note failed (non-fatal): {exc}")
+                        _tom_short = _short(getattr(_tom_note, "content", ""), 28)
+                        if _tom_short:
+                            _unified_hints.append(f"读心:{_tom_short}")
+                    except Exception as exc:  # noqa: BLE001
+                        logger.debug(f"theory_of_mind failed: {exc}")
 
-                # 场景切换检测: 对比最近两条 user msg 的 vibe (玩闹→吐槽 / 正经→暧昧 等)
-                # 突变时给节奏调整 hint, 让笨猫不会"对方变了还在原频率"
-                try:
-                    from .catty_scene_transition import build_scene_transition_prompt
-                    if _recent_user_texts and len(_recent_user_texts) >= 2:
-                        _transition_prompt = build_scene_transition_prompt(_recent_user_texts)
-                        if _transition_prompt:
-                            _transition_note = AuthorNote(content=_transition_prompt, depth=2)
-                            messages = inject_author_note(messages, _transition_note)
-                except Exception as exc:  # noqa: BLE001
-                    logger.debug(f"scene_transition failed (non-fatal): {exc}")
+                    if len(_recent_user_texts) >= 2:
+                        try:
+                            from .catty_scene_transition import build_scene_transition_prompt
+                            _transition_prompt = build_scene_transition_prompt(_recent_user_texts)
+                            _tr_short = _short(_transition_prompt, 28)
+                            if _tr_short:
+                                _unified_hints.append(f"切换:{_tr_short}")
+                        except Exception as exc:  # noqa: BLE001
+                            logger.debug(f"scene_transition failed: {exc}")
 
-                # 对话节奏感知: 看 messages 末尾结构判断 user_burst/catty_burst/silence_invite,
-                # 给笨猫节奏调整 hint (该收着/该等等/该静默)
+                        try:
+                            from .catty_multi_turn_callback import build_multi_turn_callback_prompt
+                            _callback_prompt = build_multi_turn_callback_prompt(_recent_user_texts)
+                            _cb_short = _short(_callback_prompt, 28)
+                            if _cb_short:
+                                _unified_hints.append(f"回调:{_cb_short}")
+                        except Exception as exc:  # noqa: BLE001
+                            logger.debug(f"multi_turn_callback failed: {exc}")
+
                 try:
                     from .catty_pacing import build_pacing_prompt
                     _pacing_prompt = build_pacing_prompt(messages)
-                    if _pacing_prompt:
-                        _pacing_note = AuthorNote(content=_pacing_prompt, depth=2)
-                        messages = inject_author_note(messages, _pacing_note)
+                    _pc_short = _short(_pacing_prompt, 28)
+                    if _pc_short:
+                        _unified_hints.append(f"节奏:{_pc_short}")
                 except Exception as exc:  # noqa: BLE001
-                    logger.debug(f"pacing failed (non-fatal): {exc}")
+                    logger.debug(f"pacing failed: {exc}")
 
-                # 多轮 callback: 看最近 N 条 user msg 抓 unfinished intents
-                # (明天/等会/打算/刚才/在做/...) 当前 msg 没接住时给笨猫主动回头提的机会
-                try:
-                    from .catty_multi_turn_callback import build_multi_turn_callback_prompt
-                    if _recent_user_texts and len(_recent_user_texts) >= 2:
-                        _callback_prompt = build_multi_turn_callback_prompt(_recent_user_texts)
-                        if _callback_prompt:
-                            _callback_note = AuthorNote(content=_callback_prompt, depth=3)
-                            messages = inject_author_note(messages, _callback_note)
-                except Exception as exc:  # noqa: BLE001
-                    logger.debug(f"multi_turn_callback failed (non-fatal): {exc}")
+                if _unified_hints:
+                    _unified_text = "【NLU 综合提示】" + " | ".join(_unified_hints)
+                    _unified_note = AuthorNote(content=_unified_text, depth=2)
+                    messages = inject_author_note(messages, _unified_note)
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"author_note inject failed (non-fatal): {exc}")
         # 「ToolContext 携带图片」可见性 hint:tool_ctx.input_image_urls / recent_image_urls

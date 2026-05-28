@@ -698,36 +698,9 @@ def register_catty_persona(
         ),
         order=459,  # dynamic (recent_text + scope+date), post-boundary
     )
-    # Catty Reunion - 久别重逢 (idle 时长 → 反差化重逢语气). > 6h/1d/1w 三档. warm 档返 "".
-    from . import catty_reunion as _cr
-    _last_active = ctx.get("last_active_at")
-    mgr.register(
-        "catty_reunion",
-        content_fn=lambda: _cr.build_reunion_prompt(_last_active, is_owner=is_owner),
-        order=499,  # dynamic (last_active_at + is_owner per-sender), post-boundary
-    )
-    # Catty Session Spice - per (scope, user, date) 微风味. 三轴 stateless deterministic.
-    _spice_user_id = ctx.get("user_id", "") or ""
-    if _spice_user_id and scope:
-        from . import session_spice as _ss
-        mgr.register(
-            "catty_session_spice",
-            content_fn=lambda: _ss.build_session_spice_prompt(
-                scope, _spice_user_id, is_owner=is_owner,
-            ),
-            order=470,  # per-day stable, post-boundary
-        )
-    # Catty Random Encounter - N% 概率『本轮主动小开场』hint, 真随机.
-    _re_chance = float(getattr(cfg, "catty_random_encounter_chance", 0.03) or 0.0)
-    if _re_chance > 0:
-        from . import random_encounter as _re
-        mgr.register(
-            "catty_random_encounter",
-            content_fn=lambda: _re.maybe_build_random_encounter_prompt(
-                chance=_re_chance, is_owner=is_owner,
-            ),
-            order=472,  # random per-call, post-boundary
-        )
+    # 主人 2026-05-28 C16-1: 砍 dynamic register — reunion / session_spice / random_encounter
+    # 每个 ~200-500c hint, 跟 mood / daily_life 重叠功能. NLU 模块仍可独立调,
+    # 但 prompt 不再注入 hint (强模型自己感知). 群聊每轮省 ~1K bytes dynamic.
 
     # === Cache Boundary Marker (order=455) ===
     # boundary 前 = cache-stable system 段, 后 = dynamic 段 (sweep inline 到 user msg [DYNAMIC_CONTEXT]).
@@ -790,46 +763,12 @@ def register_catty_persona(
         order=210,
     )
 
-    # === Catty Length Intent - 本轮回复长度推荐 (short/medium/long/flex) ===
-    def _build_length_intent() -> str:
-        try:
-            from .catty_length_intent import build_length_intent_prompt
-            scene_tag = ""
-            try:
-                from .catty_scene_detector import detect_scene
-                scene_tag = detect_scene(user_text)
-            except Exception:  # noqa: BLE001
-                pass
-            return build_length_intent_prompt(user_text, scene_tag=scene_tag)
-        except Exception:  # noqa: BLE001
-            return ""
-
-    mgr.register(
-        "catty_length_intent",
-        content_fn=_build_length_intent,
-        order=466,  # dynamic (user_text + scene), post-boundary
-    )
-
-    # === Catty Initiative - 主动行为机会检测 (signal-driven, 跟 random_encounter 互补) ===
-    _last_active_at_init = ctx.get("last_active_at")
-    def _build_initiative() -> str:
-        try:
-            import time as _t
-            from .catty_initiative import build_initiative_prompt
-            _idle = 0.0
-            if _last_active_at_init:
-                _idle = max(0.0, _t.time() - float(_last_active_at_init))
-            return build_initiative_prompt(
-                user_text, idle_seconds=_idle, is_owner=is_owner,
-            )
-        except Exception:  # noqa: BLE001
-            return ""
-
-    mgr.register(
-        "catty_initiative",
-        content_fn=_build_initiative,
-        order=464,  # dynamic (user_text + idle + is_owner), post-boundary
-    )
+    # 主人 2026-05-28 C16-1: 砍 catty_length_intent / catty_initiative dynamic register —
+    # length_intent (300c) 跟 reply_self_check 第 5 步『碎句节奏』重叠;
+    # initiative (500c) 跟 random_encounter / mood 功能重叠.
+    # NLU 模块 (catty_length_intent.detect_length_intent / catty_initiative.detect_signals)
+    # 仍可独立调用作为 sampling/metrics, 但 prompt 不注入 hint.
+    # 群聊每轮省 ~800c bytes dynamic.
 
     # === Catty Action Palette - 今日动作候选池 (per-scope per-day deterministic) ===
     def _build_action_palette() -> str:
@@ -851,19 +790,9 @@ def register_catty_persona(
             order=220,
         )
 
-    # === Catty Scene Detector - per-message 临时场景检测 (跟 user_vibe / catty_mood 互补) ===
-    def _build_scene_detector() -> str:
-        try:
-            from .catty_scene_detector import build_scene_detector_prompt
-            return build_scene_detector_prompt(user_text)
-        except Exception:  # noqa: BLE001
-            return ""
-
-    mgr.register(
-        "catty_scene_detector",
-        content_fn=_build_scene_detector,
-        order=461,  # dynamic (user_text), post-boundary
-    )
+    # 主人 2026-05-28 C16-1: 砍 catty_scene_detector dynamic register —
+    # per-msg 场景检测跟 user_vibe (order=460) / character_book_hits (order=489) 重叠.
+    # detect_scene 仍可独立调 (NLU 用), prompt 不注入 hint. 群聊每轮省 ~300c dynamic.
 
     # 主人 2026-05-28 prompt 优化 C3a: 5 个低价值微模块 (subtext_decoder / contradiction_detector /
     # topic_recency / relationship_pulse / question_depth) 已永久砍掉.
@@ -904,17 +833,9 @@ def register_catty_persona(
             order=320,
         )
 
-    # === Phase D2: 跨 scope mood overlay (order=257, mood=255 之后) ===
-    # 主人私聊 P7/P8 reset 时写入 mood_overlay_store, 10 min 内跨 scope 切群聊仍带余韵.
-    _mood_overlay_store_inst = ctx.get("mood_overlay_store")
-    _mood_overlay_uid = ctx.get("user_id", "") or ""
-    if _mood_overlay_store_inst is not None and _mood_overlay_uid and scope:
-        from .mood_overlay_store import build_mood_overlay_prompt as _build_mood_overlay
-        mgr.register(
-            "catty_mood_overlay",
-            content_fn=lambda: _build_mood_overlay(_mood_overlay_store_inst, _mood_overlay_uid, scope),
-            order=500,  # dynamic (cross-scope mood state), post-boundary
-        )
+    # 主人 2026-05-28 C16-1: 砍 catty_mood_overlay dynamic register —
+    # 跨 scope mood overlay 跟 catty_mood (order=501) 重叠 (mood 也含跨轮累积).
+    # mood_overlay_store 状态仍写, 但 prompt 不注入 hint. 群聊每轮省 ~500c dynamic.
 
     # === Catty Mood - 笨猫自己当下心情 (8 维累积+时间衰减, 阈下返 "") ===
     mood_store = ctx.get("catty_mood_store")
@@ -981,13 +902,9 @@ def register_catty_persona(
             order=458,
         )
 
-    # === Anti-Repetition Tracker - 防复读 (order=480 紧贴 post_history 之前) ===
-    from . import anti_repetition as _ar
-    mgr.register(
-        "catty_anti_repetition",
-        content_fn=lambda: _ar.build_anti_repetition_prompt(scope),
-        order=480,
-    )
+    # 主人 2026-05-28 C16-1: 砍 catty_anti_repetition dynamic register —
+    # 防复读已在 reply_self_check 第 13 步『不原样复读上轮』明确, NLU 防复读
+    # tracker 仍可独立 update, 但 prompt 不注入. 群聊每轮省 ~300c dynamic.
 
     # === post_history (jailbreak slot) ===
     # ST V2 标准: post_history_instructions 注入位置是 **chat history 之后**,
