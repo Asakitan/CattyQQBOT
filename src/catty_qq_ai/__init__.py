@@ -8783,14 +8783,15 @@ def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str
         "level": level,
     }
 
-    # L0: Composer 拼装 (目前只有 owner_fresh 场景)
-    if is_owner and not already:
+    # L0: Composer (owner: signin_owner 65K; group user fresh: signin_user 96K; already 走 yaml)
+    if not already:
+        _comp_name = "signin_owner" if is_owner else "signin_user"
         try:
             from .cpu_engine.composer import get_composer as _ce_get_composer
             fragments_dir = Path(getattr(
                 config, "catty_cpu_engine_routes_dir", "src/catty_qq_ai/data/cpu_engine/routes",
             )).parent / "fragments"
-            comp = _ce_get_composer(fragments_dir, "signin_owner")
+            comp = _ce_get_composer(fragments_dir, _comp_name)
             if comp.bodies:
                 text = comp.compose(
                     user_id=str(user_id),
@@ -8801,7 +8802,7 @@ def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str
                 if text:
                     return text
         except Exception as exc:  # noqa: BLE001
-            logger.debug(f"[composer.signin_owner] compose fail: {exc}")
+            logger.debug(f"[composer.{_comp_name}] compose fail: {exc}")
 
     # L1: yaml pool
     try:
