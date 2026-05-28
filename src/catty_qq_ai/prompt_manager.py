@@ -736,11 +736,12 @@ def register_catty_persona(
         )
 
     # === QQ 节奏 + 自检 + image + 示例 (后段) ===
-    # P5.2: 移到 boundary 后
+    # 主人 2026-05-29 Round 21: 465→153, qq_chat_rhythm 入参 split_marker 是固定常量,
+    # 100% byte-stable 跨任何 sender/scope/turn → 入 cache prefix.
     mgr.register(
         "catty_qq_chat_rhythm",
         content_fn=lambda: _pp.build_qq_chat_rhythm_prompt(split_marker),
-        order=465,
+        order=153,
     )
 
     # 主人 2026-05-28 C16-1: 砍 catty_length_intent / catty_initiative dynamic register —

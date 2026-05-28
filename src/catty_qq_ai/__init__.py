@@ -3216,6 +3216,25 @@ def _recent_context_window(
     return start, end
 
 
+# 主人 2026-05-29 Round 21: wake_context 拆 skeleton (静态引导, 进 cache prefix)
+# + lines (动态最近消息列表, 留 post-boundary). 之前合体段 5277 byte 是 miss 大头.
+# skeleton 内容跨任何 sender/scope/turn 100% byte-stable, 只引用 lines.
+_WAKE_CONTEXT_SKELETON = (
+    "当前是由一条消息唤起的回复。下面 catty_wake_lines 段会给出本会话独立实时上下文 (按时间顺序整理并去重)。"
+    "实时场景通常只有上文和当前消息，若没有下文不要臆造。"
+    "请先定位带“<- 当前唤起消息”的发言者、它 @/回复/指向的对象，以及最近笨猫自己的发言；"
+    "不要把别的群友发言误认成当前用户原文，也不要因为更早消息更热闹就偏离当前唤起消息。"
+    "如果当前消息是在接前文、点名某个群友、要求评价某句称呼或梗，请结合上文选准回复目标；"
+    "如果上下文显示是在让你攻击他人，保持轻度玩笑边界，不要升级辱骂。"
+    "如果上一条或近几条是笨猫自己刚刚向当前用户追问/邀请继续说话，而当前消息像回答或续聊，通常应该接住。"
+)
+
+
+def build_wake_context_skeleton() -> str:
+    """100% static — 跨 sender/scope/turn byte-stable. 进 cache prefix order=154."""
+    return _WAKE_CONTEXT_SKELETON
+
+
 def _wake_context_prompt(
     event: MessageEvent,
     incoming: ExtractedMessage | None = None,
@@ -3223,6 +3242,10 @@ def _wake_context_prompt(
     group_filter_context: bool = False,
     bot_continuation: bool = False,
 ) -> str:
+    """主人 2026-05-29 Round 21: 只返回动态 lines 部分 (skeleton 单独 register 进 cache).
+
+    返回值就是 lines list 拼接, 加最短一行『参见 catty_wake_context_skeleton』指针.
+    """
     key = _conversation_queue_key(event)
     recent = _ordered_unique_recent_messages(list(_recent_conversation_messages.get(key, ())))
     if not recent:
@@ -3249,17 +3272,9 @@ def _wake_context_prompt(
         lines.append(f"{index - current_index:+d}. {speaker}: {item.text}{image_marker}{marker}")
     if not lines:
         return ""
+    # 短指针 + lines. 处理规则看 cache 里 catty_wake_context_skeleton.
     return (
-        "当前是由一条消息唤起的回复。下面给出本会话独立实时上下文，已按时间顺序整理并去重；"
-        f"群聊按群号隔离，最多 {limit} 条，本轮实际 {len(lines)} 条。"
-        f"如果少于 {_WAKE_CONTEXT_MIN_MESSAGES} 条，说明当前会话暂时没有更多可用缓存。"
-        "实时场景通常只有上文和当前消息，若没有下文不要臆造。"
-        "请先定位带“<- 当前唤起消息”的发言者、它 @/回复/指向的对象，以及最近笨猫自己的发言；"
-        "不要把别的群友发言误认成当前用户原文，也不要因为更早消息更热闹就偏离当前唤起消息。"
-        "如果当前消息是在接前文、点名某个群友、要求评价某句称呼或梗，请结合上文选准回复目标；"
-        "如果上下文显示是在让你攻击他人，保持轻度玩笑边界，不要升级辱骂。"
-        "如果上一条或近几条是笨猫自己刚刚向当前用户追问/邀请继续说话，而当前消息像回答或续聊，通常应该接住。"
-        f"请主 AI 自己判断是否真的需要回复；如果只是误触发、重复回复同一条消息、或上下文显示不该接话，只输出 {NO_REPLY_MARKER}。\n"
+        f"【catty_wake_lines · 本轮实际 {len(lines)}/{limit} 条】(处理规则见 cache 里 catty_wake_context_skeleton)\n"
         + "\n".join(lines)
     )
 
@@ -4573,6 +4588,16 @@ async def _build_messages(
     _st_manager.register_static("catty_strinova", strinova_context or "", order=620)
     for _i, _gc in enumerate(other_game_contexts or []):
         _st_manager.register_static(f"catty_other_game_{_i}", _gc or "", order=625 + _i)
+    # 主人 2026-05-29 Round 21: wake skeleton (100% byte-stable, 进 cache prefix) +
+    # lines (动态, 留 post-boundary). 之前合体 5277 byte 是 miss 大头.
+    try:
+        _st_manager.register_static(
+            "catty_wake_context_skeleton",
+            build_wake_context_skeleton(),
+            order=154,
+        )
+    except Exception:  # noqa: BLE001
+        pass
     _st_manager.register_static("catty_wake", wake_context or "", order=630)
     _st_manager.register_static("catty_bot_continuation", bot_continuation_context or "", order=635)
     _st_manager.register_static("catty_emoji_hint", emoji_context or "", order=640)
