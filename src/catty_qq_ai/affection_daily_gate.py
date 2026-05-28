@@ -126,17 +126,16 @@ _TIER_LV_RANGE = {
     "deep": "Lv 8-10 (深熟)",
     "owner": "真主人 (无视 Lv 直接走此档)",
 }
-# 主人 2026-05-28 C16-7: 5 档 × 6 维度详细 → 5 档 × 1 行核心. 强模型理解分桶, 不需详细灌输每个维度.
+# 主人 2026-05-29 Round 22 温和瘦身: 588c → ~220c. 5 档 × 1 行极简表.
+# 强模型理解分桶, 6 维度详细砍掉 (params 段指明本轮 tier).
 _DAILY_GATE_SKELETON_TEXT = (
     "【笨猫·日常 SFW 反应档】 (本轮 Lv/tier 看 catty_daily_affection_gate_params)\n"
-    + "\n".join(
-        f"[{tier}] ({_TIER_LV_RANGE[tier]}): "
-        f"撒娇 {rules['sajiao'].split('—')[0].strip()}; "
-        f"称呼 {rules['addr'].split('—')[0].strip()[:30]}; "
-        f"动作 {rules['actions'].split('—')[0].strip()[:30]}."
-        for tier, rules in _TIER_RULES.items()
-    )
-    + "\n选一档贯穿不跨档混用. 跟 NSFW gate 是两套维度."
+    "[stranger] Lv0-2 撒娇1成 用『你』/昵称 禁主人/笨蛋\n"
+    "[acquaint] Lv3-4 撒娇3成 偶『笨蛋』 禁主人\n"
+    "[close] Lv5-7 撒娇5成 偶『笨蛋』 慎主人\n"
+    "[deep] Lv8-10 撒娇7成 爱称+昵称 禁主人\n"
+    "[owner] 真主人 撒娇10成 主人/笨蛋主人/杂鱼主人全开\n"
+    "选一档贯穿不跨档混用."
 )
 
 

@@ -741,31 +741,25 @@ CATTY_CARD = CharacterCard(
 # 骨架 (~3K, 完整 hardcoded entries 一次列出) → cache 友好, byte 稳定.
 # pointer (~100c, 本轮命中 id list) → dynamic, AI 自己从骨架里查对应 entry.
 def build_character_book_skeleton() -> str:
-    """character_book entries 索引骨架 (id + keys + 一行 hint) — 砍版本.
+    """character_book entries 骨架 — 只保留 constant entries (永远生效).
 
-    主人 2026-05-28 C16-3: 之前完整列所有 entries 22.9K bytes 进 cache prefix, 远超主人指标
-    (sys cache prefix ≤ 8.4K). 现砍成:
-    - constant=True entries (唐猫/发言格式 ~2K) 完整保留 (永远命中, cache 友好)
-    - keyword entries 砍成 id + keys + 30 字 hint (~1.5K, 索引)
-    - keyword entry 命中时完整 content 由 dynamic 段 catty_character_book_hits 注入 (max 3 命中).
-    总 skeleton ~3.5K bytes (从 23K 砍 84%).
+    主人 2026-05-29 Round 22: 砍关键词触发索引 (~1700c). keyword entries 命中时由
+    dynamic catty_character_book_hits 注入完整 content, 不需要预先列索引让 AI 知道
+    有这些 keys (BFS 命中机制本地完成, AI 看到注入即可). 总 skeleton ~530c.
+
+    constant=True entries (唐猫/发言格式 ~2K) 完整保留 — 这些是核心人格私货.
     """
     if not _CATTY_BOOK:
         return ""
     blocks: list[str] = ["【笨猫·角色私货库 character_book】"]
     constant_entries = [e for e in _CATTY_BOOK if e.constant]
-    keyword_entries = [e for e in _CATTY_BOOK if not e.constant]
     if constant_entries:
         blocks.append("\n— 常驻段 (始终生效) —")
         for entry in constant_entries:
             blocks.append(f"\n【{entry.identifier}】\n{entry.content}")
-    if keyword_entries:
-        blocks.append(
-            "\n— 关键词触发索引 (仅触发时生效, 完整 content 命中时 dynamic 注入) —"
-        )
-        for entry in keyword_entries:
-            keys_str = "/".join(str(k) for k in (entry.keys or ()) if k)[:30]
-            blocks.append(f"- {entry.identifier}[{keys_str}]")
+    blocks.append(
+        "\n(关键词触发段命中时由 catty_character_book_hits 段动态注入完整 content.)"
+    )
     return "\n".join(blocks)
 
 
