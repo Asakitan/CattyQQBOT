@@ -776,6 +776,55 @@ async def post_messages_native(
     # (claude.ts:549 anthropic.beta.messages.create) 完全一致. Anthropic 服务端通过 beta endpoint
     # 识别请求支持 prompt-caching / cache-diagnosis 等 beta 特性. 之前用 client.messages.stream
     # 走 stable endpoint, Anthropic 可能静默忽略 cache_control 字段 → cache 永久 0 hit.
+
+    # 主人 2026-05-28 C15: raw body dump — 看 sys_blocks / messages / tools 真实 size, 找砍点大头.
+    # 默认开启 (dump 到 D:\CattyQQAI\diagnostics\catty_body_*.json), 主人测一条消息就能看大头.
+    # 不影响 cache (只是写盘, 不动 payload).
+    try:
+        from pathlib import Path as _RawDumpPath
+        import time as _rawdump_time
+        _dump_dir = _RawDumpPath("diagnostics")
+        _dump_dir.mkdir(exist_ok=True, parents=True)
+        _scope_tag = (metadata_user_id or "noscope").replace("/", "_").replace(":", "_")[:32]
+        _dump_path = _dump_dir / f"catty_body_{_scope_tag}_{int(_rawdump_time.time())}.json"
+        _sys_arr = create_kwargs.get("system") or []
+        _msg_arr = create_kwargs.get("messages") or []
+        _tools_arr = create_kwargs.get("tools") or []
+        # 算 size breakdown
+        _breakdown = {
+            "model": create_kwargs.get("model"),
+            "metadata": create_kwargs.get("metadata"),
+            "headers_bytes": sum(len(k) + len(v) for k, v in headers.items()),
+            "headers": headers,
+            "sys_block_count": len(_sys_arr),
+            "sys_blocks_bytes": [
+                {"i": i, "len": len(json.dumps(b, ensure_ascii=False)), "text_len": len((b.get("text") or "") if isinstance(b, dict) else ""), "head": ((b.get("text") or "")[:80] if isinstance(b, dict) else "")[:80]}
+                for i, b in enumerate(_sys_arr)
+            ],
+            "sys_total_text_bytes": sum(len((b.get("text") or "") if isinstance(b, dict) else "") for b in _sys_arr),
+            "msg_count": len(_msg_arr),
+            "msg_bytes": [
+                {"i": i, "role": m.get("role"), "len": len(json.dumps(m, ensure_ascii=False)) if isinstance(m, dict) else 0}
+                for i, m in enumerate(_msg_arr)
+            ],
+            "msg_total_bytes": sum(len(json.dumps(m, ensure_ascii=False)) for m in _msg_arr if isinstance(m, dict)),
+            "tools_count": len(_tools_arr),
+            "tools_total_bytes": sum(len(json.dumps(t, ensure_ascii=False)) for t in _tools_arr if isinstance(t, dict)),
+            "tools_breakdown": [
+                {"name": t.get("name") if isinstance(t, dict) else "?", "desc_len": len((t.get("description") or "") if isinstance(t, dict) else ""), "schema_len": len(json.dumps(t.get("input_schema") or {}, ensure_ascii=False)) if isinstance(t, dict) else 0}
+                for t in _tools_arr
+            ],
+        }
+        _dump_path.write_text(json.dumps(_breakdown, ensure_ascii=False, indent=2), encoding="utf-8")
+        logger.info(
+            "raw_body_dump: %s sys=%d/%dB msgs=%d/%dB tools=%d/%dB",
+            _dump_path.name, _breakdown["sys_block_count"], _breakdown["sys_total_text_bytes"],
+            _breakdown["msg_count"], _breakdown["msg_total_bytes"],
+            _breakdown["tools_count"], _breakdown["tools_total_bytes"],
+        )
+    except Exception as _dump_exc:  # noqa: BLE001
+        logger.debug(f"raw_body_dump failed: {_dump_exc}")
+
     try:
         async with client.beta.messages.stream(**create_kwargs) as stream:
             try:
