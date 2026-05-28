@@ -1,0 +1,207 @@
+# 多语种学习 / 日语 / 法语 / 德语 / 西语 routes (S6 R53 NLU 节点扩充, 第五周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 98 edu_english (英语) 区分: 这里专注非英语小语种.
+
+- name: lang_japanese_001
+  intent: question
+  keywords: [推荐学日语, 推荐日语教程, 推荐日语 N2, JLPT, 笨猫日语]
+  utterances:
+    - 推荐学日语
+    - 推荐日语教程
+    - 推荐日语 N2
+    - JLPT 怎么考
+    - 笨猫日语
+  responses:
+    - "嗷呜～{user_addr}入门: 《大家的日本语》/《新标日》ฅฅ"
+    - "(尾巴翘) 50 音先背! 然后语法 + 单词"
+    - "{user_addr}JLPT 等级: N5 (入门) → N1 (精通)"
+    - "(挺胸) 笨猫的提醒: 看动漫练听力! 别只看字幕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lang_korean_001
+  intent: question
+  keywords: [推荐学韩语, 推荐韩语教程, 推荐 TOPIK, 推荐韩语学习, 笨猫韩语]
+  utterances:
+    - 推荐学韩语
+    - 推荐韩语教程
+    - 推荐 TOPIK
+    - 推荐韩语学习
+    - 笨猫韩语
+  responses:
+    - "嗷呜～{user_addr}入门: 《延世韩国语》/《首尔大学韩国语》ฅฅ"
+    - "(尾巴翘) 韩文字母 (한글) 1 周搞定!"
+    - "{user_addr}TOPIK 等级: I (1-2) / II (3-6)"
+    - "(挺胸) 笨猫的提醒: 看韩剧练听力! 综艺更生活化"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lang_french_001
+  intent: question
+  keywords: [推荐学法语, 推荐法语教程, 推荐 DELF, 推荐法语学习, 笨猫法语]
+  utterances:
+    - 推荐学法语
+    - 推荐法语教程
+    - 推荐 DELF
+    - 推荐法语学习
+    - 笨猫法语
+  responses:
+    - "嗷呜～{user_addr}入门: 《Reflets》/《新无国界法语》ฅฅ"
+    - "(尾巴翘) 法语难发音! 多听多模仿"
+    - "{user_addr}考试: DELF (A1-B2) / DALF (C1-C2) / TCF"
+    - "(挺胸) 笨猫的提醒: 法语阴阳性头疼! 多背"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lang_german_001
+  intent: question
+  keywords: [推荐学德语, 推荐德语教程, 推荐德语 B1, 推荐德语学习, 笨猫德语]
+  utterances:
+    - 推荐学德语
+    - 推荐德语教程
+    - 推荐德语 B1
+    - 推荐德语学习
+    - 笨猫德语
+  responses:
+    - "嗷呜～{user_addr}入门: 《新求精德语》/《当代大学德语》ฅฅ"
+    - "(尾巴翘) 德语语法复杂! 多记格 / 时态"
+    - "{user_addr}考试: 歌德 / 德福 - 留学常用"
+    - "(挺胸) 笨猫的提醒: 德语很有规律! 慢慢就熟"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lang_spanish_001
+  intent: question
+  keywords: [推荐学西语, 推荐西班牙语, 推荐 DELE, 推荐西语学习, 笨猫西语]
+  utterances:
+    - 推荐学西语
+    - 推荐西班牙语
+    - 推荐 DELE
+    - 推荐西语学习
+    - 笨猫西语
+  responses:
+    - "嗷呜～{user_addr}入门: 《现代西班牙语》/《走遍西班牙》ฅฅ"
+    - "(尾巴翘) 西语发音规则! 学完字母会念词"
+    - "{user_addr}考试: DELE (A1-C2) - 通用"
+    - "(挺胸) 笨猫的提醒: 西语是世界第二语种! 实用"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lang_italian_001
+  intent: question
+  keywords: [推荐学意大利语, 推荐意大利语教程, 推荐 CILS, 推荐意语学习, 笨猫意语]
+  utterances:
+    - 推荐学意大利语
+    - 推荐意大利语教程
+    - 推荐 CILS
+    - 推荐意语学习
+    - 笨猫意语
+  responses:
+    - "嗷呜～{user_addr}入门: 《新视线意大利语》/《意大利语 300 小时》ฅฅ"
+    - "(尾巴翘) 留学意大利必备! 马可波罗计划"
+    - "{user_addr}考试: CILS / CELI - 看学校要求"
+    - "(挺胸) 笨猫的提醒: 时态多! 但每个时态有规律"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: lang_russian_001
+  intent: question
+  keywords: [推荐学俄语, 推荐俄语教程, 推荐俄语 ТРКИ, 推荐俄语学习, 笨猫俄语]
+  utterances:
+    - 推荐学俄语
+    - 推荐俄语教程
+    - 推荐俄语 ТРКИ
+    - 推荐俄语学习
+    - 笨猫俄语
+  responses:
+    - "嗷呜～{user_addr}入门: 《大学俄语 (新)》《走遍俄罗斯》ฅฅ"
+    - "(尾巴翘) 西里尔字母 33 个! 先掌握"
+    - "{user_addr}考试: ТРКИ (1-4 级) - 留学俄罗斯"
+    - "(挺胸) 笨猫的提醒: 俄语难! 但学会很酷"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: lang_arabic_001
+  intent: question
+  keywords: [推荐学阿拉伯语, 推荐阿语教程, 推荐 CET-A, 推荐阿拉伯语学习, 笨猫阿语]
+  utterances:
+    - 推荐学阿拉伯语
+    - 推荐阿语教程
+    - 推荐 CET-A
+    - 推荐阿拉伯语学习
+    - 笨猫阿语
+  responses:
+    - "嗷呜～{user_addr}入门: 《阿拉伯语》(北外) / 《新编阿拉伯语》ฅฅ"
+    - "(尾巴翘) 从右往左写! 习惯需要时间"
+    - "{user_addr}方言多! 学标准语 (现代标准阿拉伯语)"
+    - "(挺胸) 笨猫的提醒: 阿语机会少! 但稀缺"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: lang_portuguese_001
+  intent: question
+  keywords: [推荐学葡萄牙语, 推荐葡语教程, 推荐巴西葡语, 推荐葡语学习, 笨猫葡语]
+  utterances:
+    - 推荐学葡萄牙语
+    - 推荐葡语教程
+    - 推荐巴西葡语
+    - 推荐葡语学习
+    - 笨猫葡语
+  responses:
+    - "嗷呜～{user_addr}入门: 《大学葡萄牙语》/《葡萄牙语》(北二外)ฅฅ"
+    - "(尾巴翘) 巴西葡语 vs 欧洲葡语 - 选学习目的"
+    - "{user_addr}考试: CAPLE / CELPE-BRAS - 看国家"
+    - "(挺胸) 笨猫的提醒: 葡语跟西语相似! 学完一个另一个易"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: lang_app_001
+  intent: question
+  keywords: [推荐语言学习 app, 推荐多邻国, 推荐 Duolingo, 推荐外语 app, 笨猫语言 app]
+  utterances:
+    - 推荐语言学习 app
+    - 推荐多邻国
+    - 推荐 Duolingo
+    - 推荐外语 app
+    - 笨猫语言 app
+  responses:
+    - "嗷呜～{user_addr}主流: 多邻国 / Babbel / Memriseฅฅ"
+    - "(尾巴翘) 单词: Anki / Quizlet - 闪卡神器"
+    - "{user_addr}口语: HelloTalk / Tandem - 找语伴"
+    - "(挺胸) 笨猫的提醒: app 是辅助! 别只刷 app"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lang_exam_001
+  intent: question
+  keywords: [推荐语言考试, 推荐留学语言考试, 推荐留学语言, 推荐外语考试, 笨猫语言考试]
+  utterances:
+    - 推荐语言考试
+    - 推荐留学语言考试
+    - 推荐留学语言
+    - 推荐外语考试
+    - 笨猫语言考试
+  responses:
+    - "嗷呜～{user_addr}主流: 雅思 / 托福 / 多邻国英语考试ฅฅ"
+    - "(尾巴翘) 留学: 美加澳新 (托福/雅思) / 英澳 (雅思)"
+    - "{user_addr}小语种留学: 法德意西 - 看具体国家"
+    - "(挺胸) 笨猫的提醒: 报班 OK! 但自学也行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lang_speak_001
+  intent: question
+  keywords: [推荐练外语口语, 推荐口语 partner, 推荐外语口语训练, 推荐外语提升, 笨猫外语口语]
+  utterances:
+    - 推荐练外语口语
+    - 推荐口语 partner
+    - 推荐外语口语训练
+    - 推荐外语提升
+    - 笨猫外语口语
+  responses:
+    - "嗷呜～{user_addr}找语伴: HelloTalk / Tandem / italki - 主流ฅฅ"
+    - "(尾巴翘) 跟读: BBC / VOA / NHK / RFI - 各语种音频"
+    - "{user_addr}厚脸皮! 别怕错 越用越熟"
+    - "(挺胸) 笨猫的提醒: 一个月坚持讲! 突飞猛进"
+  cooldown_seconds: 60
+  weight: 1.0

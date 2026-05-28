@@ -1,0 +1,206 @@
+# 农业 / 三农 / 田园生活 / 养殖 routes (S6 R59 NLU 节点扩充, 第五周期 buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: agri_rice_001
+  intent: question
+  keywords: [推荐种水稻, 推荐水稻栽培, 推荐种田, 推荐袁隆平, 笨猫水稻]
+  utterances:
+    - 推荐种水稻
+    - 推荐水稻栽培
+    - 推荐种田
+    - 推荐袁隆平
+    - 笨猫水稻
+  responses:
+    - "嗷呜～{user_addr}水稻: 中国主粮! 杂交稻袁隆平贡献ฅฅ"
+    - "(尾巴翘) 双季稻 / 单季稻 / 早晚稻 - 看气候"
+    - "{user_addr}育秧 → 移栽 → 田间管理 → 收割"
+    - "(挺胸) 笨猫推荐: 《袁隆平传》/ 致敬"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: agri_wheat_001
+  intent: question
+  keywords: [推荐种小麦, 推荐麦子, 推荐冬小麦, 推荐春小麦, 笨猫小麦]
+  utterances:
+    - 推荐种小麦
+    - 推荐麦子
+    - 推荐冬小麦
+    - 推荐春小麦
+    - 笨猫小麦
+  responses:
+    - "嗷呜～{user_addr}北方主粮! 冬小麦春种秋收ฅฅ"
+    - "(尾巴翘) 良种: 济麦 / 山农 / 中麦 - 主流品种"
+    - "{user_addr}病虫害: 锈病 / 赤霉病 - 防治为先"
+    - "(挺胸) 笨猫的提醒: 化肥适量! 别过度"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: agri_vegetable_002
+  intent: question
+  keywords: [推荐种蔬菜, 推荐大棚, 推荐设施农业, 推荐有机蔬菜, 笨猫蔬菜种植]
+  utterances:
+    - 推荐种蔬菜
+    - 推荐大棚
+    - 推荐设施农业
+    - 推荐有机蔬菜
+    - 笨猫蔬菜种植
+  responses:
+    - "嗷呜～{user_addr}大棚四季种菜! 反季节供应ฅฅ"
+    - "(尾巴翘) 主流: 番茄 / 黄瓜 / 茄子 / 辣椒"
+    - "{user_addr}有机蔬菜: 不打农药 / 利润高"
+    - "(挺胸) 笨猫的提醒: 大棚控温重要! 自动化"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: agri_fruit_001
+  intent: question
+  keywords: [推荐果园, 推荐种水果, 推荐苹果种植, 推荐种植水果, 笨猫果园]
+  utterances:
+    - 推荐果园
+    - 推荐种水果
+    - 推荐苹果种植
+    - 推荐种植水果
+    - 笨猫果园
+  responses:
+    - "嗷呜～{user_addr}主流: 苹果 / 桃 / 梨 / 葡萄 / 草莓ฅฅ"
+    - "(尾巴翘) 果树 3-5 年挂果 / 投资回报慢"
+    - "{user_addr}电商果园直销! 减少中间商"
+    - "(挺胸) 笨猫的提醒: 看气候选品种! 别盲跟"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: agri_chicken_001
+  intent: question
+  keywords: [推荐养鸡, 推荐养殖鸡, 推荐鸡场, 推荐土鸡, 笨猫养鸡]
+  utterances:
+    - 推荐养鸡
+    - 推荐养殖鸡
+    - 推荐鸡场
+    - 推荐土鸡
+    - 笨猫养鸡
+  responses:
+    - "嗷呜～{user_addr}主流: 蛋鸡 / 肉鸡 / 土鸡 - 不同用途ฅฅ"
+    - "(尾巴翘) 笼养 vs 散养 - 效率 vs 口感"
+    - "{user_addr}疫苗 + 防病 + 饲料 - 必备三件套"
+    - "(挺胸) 笨猫的提醒: 鸡瘟可怕! 严防"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: agri_pig_001
+  intent: question
+  keywords: [推荐养猪, 推荐养殖猪, 推荐猪场, 推荐生猪, 笨猫养猪]
+  utterances:
+    - 推荐养猪
+    - 推荐养殖猪
+    - 推荐猪场
+    - 推荐生猪
+    - 笨猫养猪
+  responses:
+    - "嗷呜～{user_addr}主流: 三元猪 (杜洛克 / 长白 / 大白)ฅฅ"
+    - "(尾巴翘) 周期 5-6 个月! 投资回报快"
+    - "{user_addr}非洲猪瘟! 严格生物安全"
+    - "(挺胸) 笨猫的提醒: 大型规模化! 现代化养殖"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: agri_fish_001
+  intent: question
+  keywords: [推荐养鱼, 推荐水产养殖, 推荐渔业, 推荐池塘, 笨猫水产]
+  utterances:
+    - 推荐养鱼
+    - 推荐水产养殖
+    - 推荐渔业
+    - 推荐池塘
+    - 笨猫水产
+  responses:
+    - "嗷呜～{user_addr}淡水: 草鱼 / 鲤鱼 / 鲫鱼 / 罗非ฅฅ"
+    - "(尾巴翘) 海水: 大黄鱼 / 鲈鱼 / 海参 / 三文鱼"
+    - "{user_addr}投放鱼苗 → 喂养 → 防病 → 捕捞"
+    - "(挺胸) 笨猫的提醒: 水质监控! 别污染池塘"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: agri_machinery_001
+  intent: question
+  keywords: [推荐农机, 推荐拖拉机, 推荐收割机, 推荐农业机械, 笨猫农机]
+  utterances:
+    - 推荐农机
+    - 推荐拖拉机
+    - 推荐收割机
+    - 推荐农业机械
+    - 笨猫农机
+  responses:
+    - "嗷呜～{user_addr}国产: 雷沃 / 中联 / 东方红 - 主流ฅฅ"
+    - "(尾巴翘) 进口: 约翰迪尔 / 凯斯 / 久保田 - 高端"
+    - "{user_addr}小农户合作 / 大农场自有"
+    - "(挺胸) 笨猫的提醒: 农机补贴政策! 申请省钱"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: agri_smart_001
+  intent: question
+  keywords: [推荐智慧农业, 推荐数字农业, 推荐物联网农业, 推荐 AI 农业, 笨猫智慧农业]
+  utterances:
+    - 推荐智慧农业
+    - 推荐数字农业
+    - 推荐物联网农业
+    - 推荐 AI 农业
+    - 笨猫智慧农业
+  responses:
+    - "嗷呜～{user_addr}智慧农业: 传感器 + 无人机 + AI - 三件套ฅฅ"
+    - "(尾巴翘) 无人机喷洒 / 大疆农业 - 国货"
+    - "{user_addr}精准农业: 按需施肥 + 节水 + 增产"
+    - "(挺胸) 笨猫的提醒: 国家政策支持! 大方向"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: agri_rural_life_001
+  intent: question
+  keywords: [推荐回农村, 推荐田园生活, 推荐归农, 推荐返乡, 笨猫田园]
+  utterances:
+    - 推荐回农村
+    - 推荐田园生活
+    - 推荐归农
+    - 推荐返乡
+    - 笨猫田园
+  responses:
+    - "嗷呜～{user_addr}田园生活: 慢节奏 + 自然 + 自由ฅฅ"
+    - "(尾巴翘) 李子柒 / 张同学 - 田园代表"
+    - "{user_addr}归农真不容易! 收入波动 + 体力活"
+    - "(挺胸) 笨猫的提醒: 别冲动! 先短住体验"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: agri_organic_001
+  intent: question
+  keywords: [推荐有机农业, 推荐生态农业, 推荐可持续农业, 推荐绿色农业, 笨猫有机]
+  utterances:
+    - 推荐有机农业
+    - 推荐生态农业
+    - 推荐可持续农业
+    - 推荐绿色农业
+    - 笨猫有机
+  responses:
+    - "嗷呜～{user_addr}有机: 不化肥 / 不农药 / 不转基因ฅฅ"
+    - "(尾巴翘) 认证: 中国 / 美国 USDA / 欧盟 - 看市场"
+    - "{user_addr}成本高 + 价格贵 - 看高端市场"
+    - "(挺胸) 笨猫的提醒: 有机不等于野生! 概念有别"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: agri_dairy_001
+  intent: question
+  keywords: [推荐养牛, 推荐奶牛, 推荐肉牛, 推荐养殖牛, 笨猫养牛]
+  utterances:
+    - 推荐养牛
+    - 推荐奶牛
+    - 推荐肉牛
+    - 推荐养殖牛
+    - 笨猫养牛
+  responses:
+    - "嗷呜～{user_addr}奶牛: 荷斯坦 / 西门塔尔 - 主流ฅฅ"
+    - "(尾巴翘) 肉牛: 西门塔尔 / 安格斯 / 利木赞"
+    - "{user_addr}养殖周期长 / 投入大 / 风险高"
+    - "(挺胸) 笨猫的提醒: 行情波动! 别只看高峰期"
+  cooldown_seconds: 60
+  weight: 0.7

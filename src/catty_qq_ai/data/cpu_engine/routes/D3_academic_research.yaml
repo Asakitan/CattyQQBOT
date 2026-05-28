@@ -1,0 +1,207 @@
+# 学术研究 / 论文 / 期刊 / 导师 / 学术写作 routes (S6 R55 NLU 节点扩充, 第五周期 buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+# 跟 98 edu_career (考研/求职) 区分: 这里专注科研生涯细节.
+
+- name: acad_paper_001
+  intent: question
+  keywords: [推荐写论文, 论文怎么写, 推荐学术写作, 推荐论文结构, 笨猫论文]
+  utterances:
+    - 推荐写论文
+    - 论文怎么写
+    - 推荐学术写作
+    - 推荐论文结构
+    - 笨猫论文
+  responses:
+    - "嗷呜～{user_addr}经典结构: 摘要 / 引言 / 方法 / 结果 / 讨论 / 结论ฅฅ"
+    - "(尾巴翘) IMRaD 是国际标准! 先骨架再填肉"
+    - "{user_addr}英文论文用 LaTeX! 中文用 Word"
+    - "(挺胸) 笨猫的提醒: 别拖到最后! 每周写一点"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: acad_journal_001
+  intent: question
+  keywords: [推荐期刊, 推荐 SCI, 推荐 SSCI, 推荐核心期刊, 笨猫期刊]
+  utterances:
+    - 推荐期刊
+    - 推荐 SCI
+    - 推荐 SSCI
+    - 推荐核心期刊
+    - 笨猫期刊
+  responses:
+    - "嗷呜～{user_addr}SCI 1 区顶刊 / 2 区中档 / 3-4 区入门ฅฅ"
+    - "(尾巴翘) 查 IF: Web of Science / 中科院分区"
+    - "{user_addr}国内: SSCI/CSSCI / 北大核心 / EI"
+    - "(挺胸) 笨猫的提醒: 选期刊看影响力 + 自己课题契合"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: acad_advisor_001
+  intent: complaint
+  keywords: [跟导师, 推荐导师关系, 推荐选导师, 推荐导师, 笨猫导师]
+  utterances:
+    - 跟导师不和
+    - 推荐选导师
+    - 推荐导师
+    - 推荐导师关系
+    - 笨猫导师
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}导师重要! 选不对累几年ฅฅ"
+    - "(歪头) 沟通: 主动汇报 + 不冲突 + 明确需求"
+    - "{user_addr}冷暴力 / 压榨 - 申请换导师"
+    - "(挺胸) 笨猫的提醒: 选导师先打听! 师兄姐评价最准"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: acad_literature_001
+  intent: question
+  keywords: [推荐文献综述, 推荐读文献, 推荐 Zotero, 推荐文献管理, 笨猫文献]
+  utterances:
+    - 推荐文献综述
+    - 推荐读文献
+    - 推荐 Zotero
+    - 推荐文献管理
+    - 笨猫文献
+  responses:
+    - "嗷呜～{user_addr}管理工具: Zotero (开源) / EndNote (老牌)ฅฅ"
+    - "(尾巴翘) 读文献: 摘要 + 结论 + 图表 - 先速读"
+    - "{user_addr}文献综述: 先找 review 综述文章入门"
+    - "(挺胸) 笨猫的提醒: 别盲收! 每月精读 3-5 篇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: acad_review_001
+  intent: question
+  keywords: [推荐审稿, 推荐 peer review, 推荐审稿意见, 推荐应对审稿, 笨猫审稿]
+  utterances:
+    - 推荐审稿
+    - 推荐 peer review
+    - 推荐审稿意见
+    - 推荐应对审稿
+    - 笨猫审稿
+  responses:
+    - "嗷呜～{user_addr}审稿先看 reviewer 关切点 / 不要全盘接受ฅฅ"
+    - "(尾巴翘) 回复: 逐条 + 礼貌 + 数据支持"
+    - "{user_addr}大修 → 小修 → 接受 - 看运气和实力"
+    - "(挺胸) 笨猫的提醒: 别气审稿人! 反驳要有理"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: acad_conference_001
+  intent: question
+  keywords: [推荐学术会议, 推荐参会, 推荐学术 conference, 推荐 ICCV CVPR, 笨猫会议]
+  utterances:
+    - 推荐学术会议
+    - 推荐参会
+    - 推荐学术 conference
+    - 推荐 ICCV CVPR
+    - 笨猫会议
+  responses:
+    - "嗷呜～{user_addr}CV: CVPR / ICCV / ECCVฅฅNLP: ACL / EMNLP"
+    - "(尾巴翘) ML: NeurIPS / ICML / ICLR - 顶会"
+    - "{user_addr}参会重要! 见牛人 + 拓人脉 + 学新东西"
+    - "(挺胸) 笨猫的提醒: 海报 + 演讲都试! 锻炼能力"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: acad_grant_001
+  intent: question
+  keywords: [推荐基金申请, 推荐 NSFC, 推荐国自然, 推荐项目申请, 笨猫基金]
+  utterances:
+    - 推荐基金申请
+    - 推荐 NSFC
+    - 推荐国自然
+    - 推荐项目申请
+    - 笨猫基金
+  responses:
+    - "嗷呜～{user_addr}国基: 青年 (35岁内) / 面上 / 重点ฅฅ"
+    - "(尾巴翘) 写本子: 选题 + 创新 + 可行 - 三件套"
+    - "{user_addr}找成功案例研究! 套用结构"
+    - "(挺胸) 笨猫的提醒: 别拖! 截止前 2 月开始"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: acad_phd_002
+  intent: question
+  keywords: [推荐读博, 推荐 PhD, 推荐博后, 推荐博士经验, 笨猫博士]
+  utterances:
+    - 推荐读博
+    - 推荐 PhD
+    - 推荐博后
+    - 推荐博士经验
+    - 笨猫博士
+  responses:
+    - "嗷呜～{user_addr}读博 5+ 年! 心理准备充分ฅฅ"
+    - "(尾巴翘) 看导师 + 课题 + 资源 + 学校"
+    - "{user_addr}博士后 1-2 年 - 转 PI 跳板"
+    - "(挺胸) 笨猫的提醒: 读博压力大! 注意心理健康"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: acad_thesis_002
+  intent: complaint
+  keywords: [推荐毕业论文, 推荐学位论文, 推荐答辩, 推荐毕业季, 笨猫毕业论文]
+  utterances:
+    - 推荐毕业论文
+    - 推荐学位论文
+    - 推荐答辩
+    - 推荐毕业季
+    - 笨猫毕业论文
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}毕业论文! 一辈子最久写的ฅฅ"
+    - "(歪头) 提前 6 个月开题! 别最后赶"
+    - "{user_addr}答辩准备: PPT + 草稿 + 预演"
+    - "(挺胸) 笨猫的提醒: 别紧张! 你最懂自己的研究"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: acad_lab_001
+  intent: complaint
+  keywords: [推荐实验室生活, 推荐课题组, 推荐实验室文化, 推荐组里, 笨猫实验室]
+  utterances:
+    - 推荐实验室生活
+    - 推荐课题组
+    - 推荐实验室文化
+    - 推荐组里
+    - 笨猫实验室
+  responses:
+    - "嗷呜～{user_addr}组氛围决定 5 年体验ฅฅ"
+    - "(尾巴翘) 同门关系处好! 一辈子科研朋友"
+    - "{user_addr}注意工作生活平衡 / 别 7×24 内卷"
+    - "(挺胸) 笨猫的提醒: 别完全把自己献给实验室"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: acad_intl_001
+  intent: question
+  keywords: [推荐留学申请, 推荐 PhD 申请, 推荐套磁, 推荐 SOP, 笨猫申请]
+  utterances:
+    - 推荐留学申请
+    - 推荐 PhD 申请
+    - 推荐套磁
+    - 推荐 SOP
+    - 笨猫申请
+  responses:
+    - "嗷呜～{user_addr}套磁: 找心仪老师邮件 - 简洁 + 个性化ฅฅ"
+    - "(尾巴翘) SOP: 故事化 + 研究兴趣 + 匹配老师"
+    - "{user_addr}推荐信 3 封: 1 大牛 + 2 熟悉"
+    - "(挺胸) 笨猫的提醒: 早准备! 提前 1.5 年申"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: acad_postdoc_001
+  intent: question
+  keywords: [推荐博士后, 推荐 postdoc, 推荐青基, 推荐独立 PI, 笨猫青基]
+  utterances:
+    - 推荐博士后
+    - 推荐 postdoc
+    - 推荐青基
+    - 推荐独立 PI
+    - 笨猫青基
+  responses:
+    - "嗷呜～{user_addr}博后选大牛实验室! 推荐信值钱ฅฅ"
+    - "(尾巴翘) 国内: 博新 / 香江 / 各省 - 各种博后基金"
+    - "{user_addr}海外博后: 帮转海归青基 / 优青"
+    - "(挺胸) 笨猫的提醒: 博后是过渡! 别长期博后"
+  cooldown_seconds: 60
+  weight: 0.8

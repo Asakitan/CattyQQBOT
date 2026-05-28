@@ -1,0 +1,207 @@
+# 心理学深度 / 心理咨询 / 治疗 / 常见心理问题 routes (S6 R52 NLU 节点扩充, 第五周期 buffered 1/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+# 跟 A2 philosophy_life 区分: 这里专注心理治疗 + 常见心理疾病科普.
+
+- name: psych_counselor_001
+  intent: question
+  keywords: [推荐心理咨询, 推荐心理医生, 怎么找心理咨询, 推荐心理咨询师, 笨猫心理咨询]
+  utterances:
+    - 推荐心理咨询
+    - 推荐心理医生
+    - 怎么找心理咨询
+    - 推荐心理咨询师
+    - 笨猫心理咨询
+  responses:
+    - "嗷呜～{user_addr}入门: 简单心理 / 壹心理 / 京东健康 - 平台ฅฅ"
+    - "(尾巴翘) 选有资质 + 经验 + 流派的咨询师"
+    - "{user_addr}价格: 300-2000/小时 - 看资历"
+    - "(挺胸) 笨猫的提醒: 别忍! 心理问题早治早好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psych_depression_001
+  intent: complaint
+  keywords: [推荐抑郁症, 推荐抑郁, 抑郁怎么办, 推荐抑郁治疗, 笨猫抑郁]
+  utterances:
+    - 推荐抑郁症
+    - 推荐抑郁
+    - 抑郁怎么办
+    - 推荐抑郁治疗
+    - 笨猫抑郁
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}抑郁不是矫情~ 是真病ฅฅ"
+    - "(蹭蹭) 立刻看精神科 + 心理咨询 - 双管齐下"
+    - "{user_addr}药物: 舍曲林 / 氟西汀 - 听医生"
+    - "(挺胸) 笨猫陪{user_addr}~ 走出来路虽长 但会到"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psych_anxiety_002
+  intent: complaint
+  keywords: [推荐焦虑症, 焦虑症, 推荐惊恐发作, 推荐焦虑治疗, 笨猫焦虑症]
+  utterances:
+    - 推荐焦虑症
+    - 焦虑症
+    - 推荐惊恐发作
+    - 推荐焦虑治疗
+    - 笨猫焦虑症
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}焦虑症心理+药物治疗ฅฅ"
+    - "(歪头) 急性发作: 4-7-8 呼吸法 / 冰水洗脸 / 抱猫"
+    - "{user_addr}慢性: CBT (认知行为疗法) - 黄金治法"
+    - "(挺胸) 笨猫的提醒: 别只靠药! 配合心理咨询"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psych_ocd_001
+  intent: complaint
+  keywords: [推荐强迫症, 强迫症怎么办, 推荐 OCD, 强迫思维, 笨猫强迫症]
+  utterances:
+    - 推荐强迫症
+    - 强迫症怎么办
+    - 推荐 OCD
+    - 强迫思维
+    - 笨猫强迫症
+  responses:
+    - "嗷呜～{user_addr}强迫症: 反复检查 / 反复洗手 - 典型ฅฅ"
+    - "(尾巴翘) 治疗: ERP (暴露反应预防) - 黄金疗法"
+    - "{user_addr}药物: SSRI 类 (舍曲林 / 帕罗西汀)"
+    - "(挺胸) 笨猫的提醒: 别自我诊断! 找专业评估"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psych_ptsd_001
+  intent: complaint
+  keywords: [推荐 PTSD, 创伤后应激, 推荐心理创伤, 推荐 PTSD 治疗, 笨猫创伤]
+  utterances:
+    - 推荐 PTSD
+    - 创伤后应激
+    - 推荐心理创伤
+    - 推荐 PTSD 治疗
+    - 笨猫创伤
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}PTSD 不可忽视~ 笨猫陪着ฅฅ"
+    - "(歪头) 症状: 闪回 / 噩梦 / 回避 / 高度警觉"
+    - "{user_addr}EMDR (眼动疗法) 对 PTSD 效果好"
+    - "(挺胸) 笨猫的提醒: 立刻心理咨询! 别一个人扛"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: psych_eating_001
+  intent: complaint
+  keywords: [推荐厌食症, 推荐暴食症, 推荐进食障碍, 推荐饮食问题, 笨猫进食障碍]
+  utterances:
+    - 推荐厌食症
+    - 推荐暴食症
+    - 推荐进食障碍
+    - 推荐饮食问题
+    - 笨猫进食障碍
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}进食障碍是病! 不是意志ฅฅ"
+    - "(歪头) 厌食 / 暴食 / 神经性 - 立刻治疗"
+    - "{user_addr}找精神科 + 营养师 + 心理咨询 - 团队"
+    - "(挺胸) 笨猫的提醒: 极严重住院! 拖了致命"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: psych_personality_001
+  intent: question
+  keywords: [推荐 MBTI, 推荐性格测试, 推荐 16 型人格, 推荐 INTJ, 笨猫 MBTI]
+  utterances:
+    - 推荐 MBTI
+    - 推荐性格测试
+    - 推荐 16 型人格
+    - 推荐 INTJ
+    - 笨猫 MBTI
+  responses:
+    - "嗷呜～{user_addr}MBTI 16 型! 自测看 16personalitiesฅฅ"
+    - "(尾巴翘) E/I (内外向) + S/N + T/F + J/P"
+    - "{user_addr}测着玩可以! 别完全信(科学性弱)"
+    - "(挺胸) 笨猫的提醒: 别用 MBTI 给自己设限"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: psych_emotion_001
+  intent: question
+  keywords: [推荐情绪管理, 推荐情商, 推荐 EQ, 情绪控制, 笨猫情商]
+  utterances:
+    - 推荐情绪管理
+    - 推荐情商
+    - 推荐 EQ
+    - 情绪控制
+    - 笨猫情商
+  responses:
+    - "嗷呜～{user_addr}情商 5 大能力: 自我认知 / 自我管理 / 共情 / 关系 / 动力ฅฅ"
+    - "(尾巴翘) 暂停: 数 10 / 深呼吸 / 离开现场"
+    - "{user_addr}写情绪日记! 帮助觉察"
+    - "(挺胸) 笨猫的提醒: 别压抑! 健康表达"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psych_self_esteem_001
+  intent: complaint
+  keywords: [推荐自尊低, 推荐自我价值, 推荐建立自信, 推荐爱自己, 笨猫自尊]
+  utterances:
+    - 推荐自尊低
+    - 推荐自我价值
+    - 推荐建立自信
+    - 推荐爱自己
+    - 笨猫自尊
+  responses:
+    - "嗷呜～{user_addr}自尊 = 接受自己 + 行动 + 关爱ฅฅ"
+    - "(尾巴翘) 列优点清单! 每天 3 个"
+    - "{user_addr}别用社交媒体! 比较是自尊杀手"
+    - "(挺胸) 笨猫的提醒: 你值得被爱! 笨猫先爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psych_meditation_001
+  intent: question
+  keywords: [推荐冥想, 推荐正念, 推荐 mindfulness, 推荐冥想 app, 笨猫冥想]
+  utterances:
+    - 推荐冥想
+    - 推荐正念
+    - 推荐 mindfulness
+    - 推荐冥想 app
+    - 笨猫冥想
+  responses:
+    - "嗷呜～{user_addr}入门: Calm / Headspace / 潮汐 / 小睡眠ฅฅ"
+    - "(尾巴翘) 每天 10 分钟! 长期改变大脑"
+    - "{user_addr}方法: 呼吸觉察 / 身体扫描 / 慈悲冥想"
+    - "(挺胸) 笨猫的提醒: 别强求空白! 觉察就好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psych_addiction_001
+  intent: complaint
+  keywords: [推荐戒烟, 推荐戒酒, 推荐戒手机, 推荐戒瘾, 笨猫戒瘾]
+  utterances:
+    - 推荐戒烟
+    - 推荐戒酒
+    - 推荐戒手机
+    - 推荐戒瘾
+    - 笨猫戒瘾
+  responses:
+    - "嗷呜～{user_addr}成瘾: 戒断难! 找专业帮助ฅฅ"
+    - "(尾巴翘) 戒烟: 尼古丁贴 / 戒烟门诊 / 替代行为"
+    - "{user_addr}手机瘾: 限制 app / 屏幕时间 / 物理隔离"
+    - "(挺胸) 笨猫的提醒: 戒断有反复! 别气馁 慢慢来"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: psych_loneliness_001
+  intent: complaint
+  keywords: [推荐孤独感, 心理孤独, 推荐孤独, 推荐孤单, 笨猫心理孤独]
+  utterances:
+    - 推荐孤独感
+    - 心理孤独
+    - 推荐孤独
+    - 推荐孤单
+    - 笨猫心理孤独
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}孤独和独处不同~ 笨猫陪着ฅฅ"
+    - "(歪头) 主动连接: 找朋友 / 兴趣社群 / 志愿活动"
+    - "{user_addr}独处可贵! 但不能长期"
+    - "(挺胸) 笨猫: 主人有笨猫 不会孤独"
+  cooldown_seconds: 60
+  weight: 1.0

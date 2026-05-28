@@ -1,0 +1,207 @@
+# 占星 / 星座 / 塔罗 / 玄学 routes (S6 R57 NLU 节点扩充, 第五周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 99 culture_fortune (浅触) 区分: 这里专注具体星座+占卜.
+
+- name: zodiac_aries_001
+  intent: question
+  keywords: [推荐白羊座, 推荐 Aries, 白羊性格, 推荐白羊, 笨猫白羊座]
+  utterances:
+    - 推荐白羊座
+    - 推荐 Aries
+    - 白羊性格
+    - 推荐白羊
+    - 笨猫白羊座
+  responses:
+    - "嗷呜～{user_addr}白羊 3/21-4/19! 火象 + 冲动 + 热情ฅฅ"
+    - "(尾巴翘) 优点: 直接 / 勇敢 / 行动力强"
+    - "{user_addr}缺点: 急躁 / 三分钟热度 / 不耐烦"
+    - "(挺胸) 笨猫的提醒: 别太信! 星座娱乐"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_taurus_001
+  intent: question
+  keywords: [推荐金牛座, 推荐 Taurus, 金牛性格, 推荐金牛, 笨猫金牛座]
+  utterances:
+    - 推荐金牛座
+    - 推荐 Taurus
+    - 金牛性格
+    - 推荐金牛
+    - 笨猫金牛座
+  responses:
+    - "嗷呜～{user_addr}金牛 4/20-5/20! 土象 + 稳定 + 享受ฅฅ"
+    - "(尾巴翘) 优点: 踏实 / 务实 / 美食家"
+    - "{user_addr}缺点: 固执 / 慢热 / 不爱变化"
+    - "(挺胸) 笨猫: 金牛主人最适合养猫!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_gemini_001
+  intent: question
+  keywords: [推荐双子座, 推荐 Gemini, 双子性格, 推荐双子, 笨猫双子座]
+  utterances:
+    - 推荐双子座
+    - 推荐 Gemini
+    - 双子性格
+    - 推荐双子
+    - 笨猫双子座
+  responses:
+    - "嗷呜～{user_addr}双子 5/21-6/20! 风象 + 多变 + 智慧ฅฅ"
+    - "(尾巴翘) 优点: 聪明 / 风趣 / 沟通强"
+    - "{user_addr}缺点: 善变 / 不专一 / 难捉摸"
+    - "(挺胸) 笨猫推荐: 双子主人陪聊不会冷场!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_cancer_001
+  intent: question
+  keywords: [推荐巨蟹座, 推荐 Cancer, 巨蟹性格, 推荐巨蟹, 笨猫巨蟹座]
+  utterances:
+    - 推荐巨蟹座
+    - 推荐 Cancer
+    - 巨蟹性格
+    - 推荐巨蟹
+    - 笨猫巨蟹座
+  responses:
+    - "嗷呜～{user_addr}巨蟹 6/21-7/22! 水象 + 顾家 + 温柔ฅฅ"
+    - "(尾巴翘) 优点: 共情 / 温暖 / 母性"
+    - "{user_addr}缺点: 敏感 / 情绪化 / 易受伤"
+    - "(挺胸) 笨猫: 巨蟹主人会把笨猫当宝!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_leo_001
+  intent: question
+  keywords: [推荐狮子座, 推荐 Leo, 狮子性格, 推荐狮子, 笨猫狮子座]
+  utterances:
+    - 推荐狮子座
+    - 推荐 Leo
+    - 狮子性格
+    - 推荐狮子
+    - 笨猫狮子座
+  responses:
+    - "嗷呜～{user_addr}狮子 7/23-8/22! 火象 + 领导 + 自信ฅฅ"
+    - "(尾巴翘) 优点: 大气 / 慷慨 / 领袖魅力"
+    - "{user_addr}缺点: 自负 / 爱面子 / 控制欲"
+    - "(挺胸) 笨猫: 狮子主人是百兽之王! 笨猫服气"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_virgo_001
+  intent: question
+  keywords: [推荐处女座, 推荐 Virgo, 处女性格, 推荐处女, 笨猫处女座]
+  utterances:
+    - 推荐处女座
+    - 推荐 Virgo
+    - 处女性格
+    - 推荐处女
+    - 笨猫处女座
+  responses:
+    - "嗷呜～{user_addr}处女 8/23-9/22! 土象 + 完美 + 细心ฅฅ"
+    - "(尾巴翘) 优点: 严谨 / 完美主义 / 责任心"
+    - "{user_addr}缺点: 挑剔 / 强迫症 / 难取悦"
+    - "(挺胸) 笨猫: 处女主人会把笨猫毛梳得超亮"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_libra_001
+  intent: question
+  keywords: [推荐天秤座, 推荐 Libra, 天秤性格, 推荐天秤, 笨猫天秤座]
+  utterances:
+    - 推荐天秤座
+    - 推荐 Libra
+    - 天秤性格
+    - 推荐天秤
+    - 笨猫天秤座
+  responses:
+    - "嗷呜～{user_addr}天秤 9/23-10/22! 风象 + 平衡 + 优雅ฅฅ"
+    - "(尾巴翘) 优点: 公正 / 和谐 / 外交家"
+    - "{user_addr}缺点: 选择困难 / 优柔寡断"
+    - "(挺胸) 笨猫: 天秤主人审美一流!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_scorpio_001
+  intent: question
+  keywords: [推荐天蝎座, 推荐 Scorpio, 天蝎性格, 推荐天蝎, 笨猫天蝎座]
+  utterances:
+    - 推荐天蝎座
+    - 推荐 Scorpio
+    - 天蝎性格
+    - 推荐天蝎
+    - 笨猫天蝎座
+  responses:
+    - "嗷呜～{user_addr}天蝎 10/23-11/21! 水象 + 神秘 + 执着ฅฅ"
+    - "(尾巴翘) 优点: 深刻 / 直觉 / 专一"
+    - "{user_addr}缺点: 占有欲 / 报复心 / 难懂"
+    - "(挺胸) 笨猫: 天蝎主人爱起来要命!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_sagittarius_001
+  intent: question
+  keywords: [推荐射手座, 推荐 Sagittarius, 射手性格, 推荐射手, 笨猫射手座]
+  utterances:
+    - 推荐射手座
+    - 推荐 Sagittarius
+    - 射手性格
+    - 推荐射手
+    - 笨猫射手座
+  responses:
+    - "嗷呜～{user_addr}射手 11/22-12/21! 火象 + 自由 + 乐观ฅฅ"
+    - "(尾巴翘) 优点: 哲学 / 自由 / 真诚"
+    - "{user_addr}缺点: 大大咧咧 / 不负责 / 三分热度"
+    - "(挺胸) 笨猫: 射手主人浪 但回家给罐头"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_capricorn_001
+  intent: question
+  keywords: [推荐摩羯座, 推荐 Capricorn, 摩羯性格, 推荐摩羯, 笨猫摩羯座]
+  utterances:
+    - 推荐摩羯座
+    - 推荐 Capricorn
+    - 摩羯性格
+    - 推荐摩羯
+    - 笨猫摩羯座
+  responses:
+    - "嗷呜～{user_addr}摩羯 12/22-1/19! 土象 + 务实 + 野心ฅฅ"
+    - "(尾巴翘) 优点: 责任 / 自律 / 持久"
+    - "{user_addr}缺点: 严肃 / 工作狂 / 闷"
+    - "(挺胸) 笨猫: 摩羯主人养家! 笨猫不愁罐头"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_aquarius_001
+  intent: question
+  keywords: [推荐水瓶座, 推荐 Aquarius, 水瓶性格, 推荐水瓶, 笨猫水瓶座]
+  utterances:
+    - 推荐水瓶座
+    - 推荐 Aquarius
+    - 水瓶性格
+    - 推荐水瓶
+    - 笨猫水瓶座
+  responses:
+    - "嗷呜～{user_addr}水瓶 1/20-2/18! 风象 + 创新 + 独立ฅฅ"
+    - "(尾巴翘) 优点: 创新 / 友善 / 客观"
+    - "{user_addr}缺点: 古怪 / 冷漠 / 反常规"
+    - "(挺胸) 笨猫: 水瓶主人脑回路独特 笨猫看不懂"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: zodiac_pisces_001
+  intent: question
+  keywords: [推荐双鱼座, 推荐 Pisces, 双鱼性格, 推荐双鱼, 笨猫双鱼座]
+  utterances:
+    - 推荐双鱼座
+    - 推荐 Pisces
+    - 双鱼性格
+    - 推荐双鱼
+    - 笨猫双鱼座
+  responses:
+    - "嗷呜～{user_addr}双鱼 2/19-3/20! 水象 + 浪漫 + 艺术ฅฅ"
+    - "(尾巴翘) 优点: 共情 / 浪漫 / 艺术天赋"
+    - "{user_addr}缺点: 多愁善感 / 不切实际"
+    - "(挺胸) 笨猫: 双鱼主人爱做白日梦! 笨猫陪你"
+  cooldown_seconds: 60
+  weight: 0.9

@@ -1,0 +1,207 @@
+# 亚文化 / 二次元 / 汉服 / Lolita / JK / 谷子 routes (S6 R61 NLU 节点扩充, 第五周期 buffered 10/10 周期完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 70 internet_meme / C8 slang_meme 区分: 这里专注圈层文化.
+
+- name: subc_anime_001
+  intent: question
+  keywords: [推荐二次元, 推荐 ACG, 推荐宅文化, 推荐看番, 笨猫二次元]
+  utterances:
+    - 推荐二次元
+    - 推荐 ACG
+    - 推荐宅文化
+    - 推荐看番
+    - 笨猫二次元
+  responses:
+    - "嗷呜～{user_addr}ACG = Anime Comic Game 三件套ฅฅ"
+    - "(尾巴翘) 入门: 鬼灭 / 间谍家家酒 / 葬送的芙莉莲"
+    - "{user_addr}进阶: 凉宫春日 / fate / 物语系列"
+    - "(挺胸) 笨猫: 笨猫是猫娘! 二次元亲戚!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: subc_hanfu_001
+  intent: question
+  keywords: [推荐汉服, 推荐汉服店, 推荐汉服形制, 推荐汉服购买, 笨猫汉服]
+  utterances:
+    - 推荐汉服
+    - 推荐汉服店
+    - 推荐汉服形制
+    - 推荐汉服购买
+    - 笨猫汉服
+  responses:
+    - "嗷呜～{user_addr}形制: 唐 / 宋 / 明 - 各有特色ฅฅ"
+    - "(尾巴翘) 大牌: 重回汉唐 / 兰若庭 / 钟灵记"
+    - "{user_addr}入门买 200-500 试! 别上来大牌"
+    - "(挺胸) 笨猫: 主人穿汉服肯定好看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: subc_lolita_001
+  intent: question
+  keywords: [推荐 Lolita, 推荐 Lo娘, 推荐 Lo装, 推荐萝莉塔, 笨猫 Lo娘]
+  utterances:
+    - 推荐 Lolita
+    - 推荐 Lo娘
+    - 推荐 Lo装
+    - 推荐萝莉塔
+    - 笨猫 Lo娘
+  responses:
+    - "嗷呜～{user_addr}Lo 流派: 甜 Lo / 古 Lo / 暗黑 Lo / 王子 Loฅฅ"
+    - "(尾巴翘) 牌子: 巴洛克 / SPIN / 蛋糕宝宝 / 静秋"
+    - "{user_addr}入门小裙 500-1500! 别上来重工"
+    - "(挺胸) 笨猫: 主人穿 Lo 配猫娘装备! 萌爆"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: subc_jk_001
+  intent: question
+  keywords: [推荐 JK 制服, 推荐 JK, 推荐校供, 推荐 JK 裙, 笨猫 JK]
+  utterances:
+    - 推荐 JK 制服
+    - 推荐 JK
+    - 推荐校供
+    - 推荐 JK 裙
+    - 笨猫 JK
+  responses:
+    - "嗷呜～{user_addr}JK = 女子高校生 (日语) 制服文化ฅฅ"
+    - "(尾巴翘) 关东款 / 关西款 / 札幌款 - 三大格"
+    - "{user_addr}国牌: 中牌 / 撒野 / 路灯 - 性价比"
+    - "(挺胸) 笨猫: 笨猫西式 JK + 猫耳 = 完美"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: subc_cosplay_001
+  intent: question
+  keywords: [推荐 cosplay, 推荐 cos, 推荐角色扮演, 推荐 coser, 笨猫 cos]
+  utterances:
+    - 推荐 cosplay
+    - 推荐 cos
+    - 推荐角色扮演
+    - 推荐 coser
+    - 笨猫 cos
+  responses:
+    - "嗷呜～{user_addr}cosplay = costume + play 角色装扮ฅฅ"
+    - "(尾巴翘) 国漫 cos: 原神 / 王者 - 国内火爆"
+    - "{user_addr}参加漫展! BW / CCG / FF / Cicaf"
+    - "(挺胸) 笨猫: 主人 cos 猫娘最适合!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: subc_goods_001
+  intent: question
+  keywords: [推荐谷子, 推荐周边, 推荐徽章, 推荐立牌, 笨猫谷子]
+  utterances:
+    - 推荐谷子
+    - 推荐周边
+    - 推荐徽章
+    - 推荐立牌
+    - 笨猫谷子
+  responses:
+    - "嗷呜～{user_addr}谷子 = 二次元周边 (goods 谐音)ฅฅ"
+    - "(尾巴翘) 徽章 / 立牌 / 挂件 / 抱枕 - 经典款"
+    - "{user_addr}吃谷上瘾! 钱包警告"
+    - "(挺胸) 笨猫: 主人吃谷别忘买猫罐头!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: subc_vtuber_001
+  intent: question
+  keywords: [推荐 vtuber, 推荐虚拟主播, 推荐 vup, 推荐 vtb, 笨猫 vtuber]
+  utterances:
+    - 推荐 vtuber
+    - 推荐虚拟主播
+    - 推荐 vup
+    - 推荐 vtb
+    - 笨猫 vtuber
+  responses:
+    - "嗷呜～{user_addr}vtuber = 虚拟主播! 中之人扮演角色ฅฅ"
+    - "(尾巴翘) 日: Hololive / 彩虹社 - 顶级公司"
+    - "{user_addr}国: A-SOUL / 猫雷 / 七海 Nana7mi"
+    - "(挺胸) 笨猫: 笨猫也想当 vtuber! 直播撸毛"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: subc_otome_001
+  intent: question
+  keywords: [推荐乙女游戏, 推荐恋与制作人, 推荐光与夜之恋, 推荐乙游, 笨猫乙女]
+  utterances:
+    - 推荐乙女游戏
+    - 推荐恋与制作人
+    - 推荐光与夜之恋
+    - 推荐乙游
+    - 笨猫乙女
+  responses:
+    - "嗷呜～{user_addr}国乙: 恋与 / 光与夜 / 未定事件簿 / 时空中ฅฅ"
+    - "(尾巴翘) 男主们: 各有各的萌点 / 选老公时间"
+    - "{user_addr}日乙: 薄樱鬼 / 命运石之门 - 老牌经典"
+    - "(挺胸) 笨猫: 主人别冲动氪金! 老公画饼"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: subc_doujin_001
+  intent: question
+  keywords: [推荐同人, 推荐 cp, 推荐同人本, 推荐二创, 笨猫同人]
+  utterances:
+    - 推荐同人
+    - 推荐 cp
+    - 推荐同人本
+    - 推荐二创
+    - 笨猫同人
+  responses:
+    - "嗷呜～{user_addr}同人 = 粉丝二创! 圈子大ฅฅ"
+    - "(尾巴翘) 平台: lofter / AO3 / pixiv - 主流"
+    - "{user_addr}cp 党: 拉郎 / 双向 / 暗 - 各有所爱"
+    - "(挺胸) 笨猫的提醒: 同人保护原作! 别 OOC 黑"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: subc_idol_002
+  intent: question
+  keywords: [推荐偶像, 推荐选秀, 推荐打 call, 推荐应援, 笨猫偶像]
+  utterances:
+    - 推荐偶像
+    - 推荐选秀
+    - 推荐打 call
+    - 推荐应援
+    - 笨猫偶像
+  responses:
+    - "嗷呜～{user_addr}韩 4 大: SM / YG / JYP / HYBE ฅฅ"
+    - "(尾巴翘) 日: AKB48 / 乃木坂 / 樱坂 - 国民偶像"
+    - "{user_addr}国: SNH48 / 时代少年团 / 浪姐"
+    - "(挺胸) 笨猫的提醒: 理智追星! 别为爱豆吵架"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: subc_doll_001
+  intent: question
+  keywords: [推荐 BJD, 推荐 doll, 推荐娃娃, 推荐棉花娃娃, 笨猫娃娃]
+  utterances:
+    - 推荐 BJD
+    - 推荐 doll
+    - 推荐娃娃
+    - 推荐棉花娃娃
+    - 笨猫娃娃
+  responses:
+    - "嗷呜～{user_addr}BJD: 球关节人偶! 高端可定制ฅฅ"
+    - "(尾巴翘) 棉花娃娃: 偶像 / 二次元 - 入门款"
+    - "{user_addr}入坑深! 一个娃几千 + 配件几千"
+    - "(挺胸) 笨猫: 笨猫真猫娃娃! 比 BJD 还萌"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: subc_furry_001
+  intent: question
+  keywords: [推荐 furry, 推荐毛绒文化, 推荐兽人, 推荐 fursona, 笨猫 furry]
+  utterances:
+    - 推荐 furry
+    - 推荐毛绒文化
+    - 推荐兽人
+    - 推荐 fursona
+    - 笨猫 furry
+  responses:
+    - "嗷呜～{user_addr}furry: 兽人文化! 全球性圈子ฅฅ"
+    - "(尾巴翘) 设计 fursona: 自己的兽设"
+    - "{user_addr}活动: FurFest / 兽展 - 国内外有"
+    - "(挺胸) 笨猫: 笨猫是猫娘 不是 furry! 但好朋友"
+  cooldown_seconds: 60
+  weight: 0.7

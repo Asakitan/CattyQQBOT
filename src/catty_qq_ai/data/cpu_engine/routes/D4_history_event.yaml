@@ -1,0 +1,207 @@
+# 历史人物 / 朝代 / 历史事件 routes (S6 R56 NLU 节点扩充, 第五周期 buffered 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 99 culture_history (推荐历史书) 区分: 这里专注具体朝代/人物/事件.
+
+- name: hist_qin_001
+  intent: question
+  keywords: [推荐秦朝, 推荐秦始皇, 推荐统一六国, 推荐兵马俑, 笨猫秦朝]
+  utterances:
+    - 推荐秦朝
+    - 推荐秦始皇
+    - 推荐统一六国
+    - 推荐兵马俑
+    - 笨猫秦朝
+  responses:
+    - "嗷呜～{user_addr}秦始皇 39 岁统一! 千古一帝ฅฅ"
+    - "(尾巴翘) 度量衡 / 文字 / 车轨 - 统一标准"
+    - "{user_addr}焚书坑儒争议大 / 长城功大于过"
+    - "(挺胸) 笨猫的提醒: 想了解推荐《大秦帝国》小说"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hist_tang_001
+  intent: question
+  keywords: [推荐唐朝, 推荐唐太宗, 推荐李世民, 推荐贞观, 笨猫唐朝]
+  utterances:
+    - 推荐唐朝
+    - 推荐唐太宗
+    - 推荐李世民
+    - 推荐贞观之治
+    - 笨猫唐朝
+  responses:
+    - "嗷呜～{user_addr}唐朝盛世! 长安城百万人口ฅฅ"
+    - "(尾巴翘) 李世民 vs 玄武门之变 - 千古争议"
+    - "{user_addr}武则天: 中国唯一女皇 / 武周时代"
+    - "(挺胸) 笨猫推荐: 看《长安十二时辰》体验唐韵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hist_song_001
+  intent: question
+  keywords: [推荐宋朝, 推荐宋太祖, 推荐宋词, 推荐汴京, 笨猫宋朝]
+  utterances:
+    - 推荐宋朝
+    - 推荐宋太祖
+    - 推荐宋词
+    - 推荐汴京
+    - 笨猫宋朝
+  responses:
+    - "嗷呜～{user_addr}宋朝文化巅峰! GDP 占全球 60%+ฅฅ"
+    - "(尾巴翘) 文人: 苏轼 / 王安石 / 司马光 / 朱熹"
+    - "{user_addr}靖康之耻 → 南宋 → 崖山海战"
+    - "(挺胸) 笨猫推荐: 《清明上河图》看宋代繁华"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hist_ming_001
+  intent: question
+  keywords: [推荐明朝, 推荐朱元璋, 推荐永乐, 推荐郑和, 笨猫明朝]
+  utterances:
+    - 推荐明朝
+    - 推荐朱元璋
+    - 推荐永乐
+    - 推荐郑和
+    - 笨猫明朝
+  responses:
+    - "嗷呜～{user_addr}朱元璋: 乞丐到皇帝! 一代奇才ฅฅ"
+    - "(尾巴翘) 永乐: 修《永乐大典》/ 郑和 7 下西洋"
+    - "{user_addr}崇祯亡国 / 李自成 / 满清入关"
+    - "(挺胸) 笨猫推荐: 《明朝那些事儿》通俗易懂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hist_qing_001
+  intent: question
+  keywords: [推荐清朝, 推荐康熙, 推荐乾隆, 推荐雍正, 笨猫清朝]
+  utterances:
+    - 推荐清朝
+    - 推荐康熙
+    - 推荐乾隆
+    - 推荐雍正
+    - 笨猫清朝
+  responses:
+    - "嗷呜～{user_addr}康乾盛世: 康熙 / 雍正 / 乾隆ฅฅ"
+    - "(尾巴翘) 鸦片战争 / 太平天国 - 由盛转衰"
+    - "{user_addr}慈禧 / 末代皇帝溥仪 - 帝制终结"
+    - "(挺胸) 笨猫推荐: 《雍正王朝》/ 《走向共和》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hist_three_kingdoms_001
+  intent: question
+  keywords: [推荐三国, 推荐曹操, 推荐刘备, 推荐孔明, 笨猫三国]
+  utterances:
+    - 推荐三国
+    - 推荐曹操
+    - 推荐刘备
+    - 推荐孔明
+    - 笨猫三国
+  responses:
+    - "嗷呜～{user_addr}经典: 曹操 (奸雄) / 刘备 (仁君) / 孙权 (制衡)ฅฅ"
+    - "(尾巴翘) 孔明 / 关羽 / 张飞 / 赵云 - 千古名将"
+    - "{user_addr}赤壁 / 官渡 / 夷陵 - 三大战役"
+    - "(挺胸) 笨猫推荐: 《三国演义》/ 央视老版三国"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hist_chunqiu_001
+  intent: question
+  keywords: [推荐春秋, 推荐战国, 推荐孔子, 推荐百家争鸣, 笨猫春秋]
+  utterances:
+    - 推荐春秋
+    - 推荐战国
+    - 推荐孔子
+    - 推荐百家争鸣
+    - 笨猫春秋
+  responses:
+    - "嗷呜～{user_addr}百家争鸣: 儒/道/墨/法/兵 - 中国思想黄金期ฅฅ"
+    - "(尾巴翘) 孔子 / 老子 / 孟子 / 庄子 / 韩非"
+    - "{user_addr}战国七雄 - 秦统一前夜"
+    - "(挺胸) 笨猫推荐: 《大秦帝国》系列"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hist_modern_001
+  intent: question
+  keywords: [推荐近代史, 推荐辛亥革命, 推荐五四运动, 推荐抗战, 笨猫近代史]
+  utterances:
+    - 推荐近代史
+    - 推荐辛亥革命
+    - 推荐五四运动
+    - 推荐抗战
+    - 笨猫近代史
+  responses:
+    - "嗷呜～{user_addr}近代史: 鸦片战争 → 辛亥 → 五四 → 抗战ฅฅ"
+    - "(尾巴翘) 孙中山 / 毛泽东 / 蒋介石 - 风云人物"
+    - "{user_addr}抗战 14 年! 民族灾难也是觉醒"
+    - "(挺胸) 笨猫推荐: 《建国大业》/ 《八佰》/ 《长津湖》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hist_world_war_001
+  intent: question
+  keywords: [推荐二战, 推荐世界大战, 推荐 WW2, 推荐希特勒, 笨猫二战]
+  utterances:
+    - 推荐二战
+    - 推荐世界大战
+    - 推荐 WW2
+    - 推荐希特勒
+    - 笨猫二战
+  responses:
+    - "嗷呜～{user_addr}二战 1939-1945! 改变世界格局ฅฅ"
+    - "(尾巴翘) 同盟国 (美苏英) vs 轴心国 (德意日)"
+    - "{user_addr}诺曼底 / 斯大林格勒 / 太平洋战场"
+    - "(挺胸) 笨猫推荐: 《拯救大兵瑞恩》/ 《钢琴师》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hist_europe_001
+  intent: question
+  keywords: [推荐欧洲史, 推荐罗马帝国, 推荐文艺复兴, 推荐宗教改革, 笨猫欧洲史]
+  utterances:
+    - 推荐欧洲史
+    - 推荐罗马帝国
+    - 推荐文艺复兴
+    - 推荐宗教改革
+    - 笨猫欧洲史
+  responses:
+    - "嗷呜～{user_addr}罗马 1200 年! 古典文明巅峰ฅฅ"
+    - "(尾巴翘) 中世纪 (千年黑暗) → 文艺复兴 (希腊罗马复兴)"
+    - "{user_addr}宗教改革 (路德) → 启蒙运动 → 大航海"
+    - "(挺胸) 笨猫推荐: 《罗马帝国衰亡史》/ 《罗马人的故事》"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: hist_archeology_001
+  intent: question
+  keywords: [推荐考古, 推荐文物, 推荐博物馆, 推荐三星堆, 笨猫考古]
+  utterances:
+    - 推荐考古
+    - 推荐文物
+    - 推荐博物馆
+    - 推荐三星堆
+    - 笨猫考古
+  responses:
+    - "嗷呜～{user_addr}三星堆!神秘文明 - 至今未解ฅฅ"
+    - "(尾巴翘) 故宫 / 国博 / 陕博 - 国内必去"
+    - "{user_addr}国外: 大英 / 卢浮 / 大都会 / 埃及"
+    - "(挺胸) 笨猫推荐: 《国家宝藏》/ 《我在故宫修文物》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hist_revolution_001
+  intent: question
+  keywords: [推荐革命, 推荐法国大革命, 推荐美国独立, 推荐工业革命, 笨猫革命]
+  utterances:
+    - 推荐革命史
+    - 推荐法国大革命
+    - 推荐美国独立
+    - 推荐工业革命
+    - 笨猫革命
+  responses:
+    - "嗷呜～{user_addr}法国大革命: 自由 / 平等 / 博爱 - 现代国家蓝本ฅฅ"
+    - "(尾巴翘) 美国独立: 1776 自由宣言 / 华盛顿"
+    - "{user_addr}工业革命: 1760 蒸汽机 → 现代化"
+    - "(挺胸) 笨猫推荐: 《人类简史》/ 《枪炮病菌钢铁》"
+  cooldown_seconds: 60
+  weight: 0.8

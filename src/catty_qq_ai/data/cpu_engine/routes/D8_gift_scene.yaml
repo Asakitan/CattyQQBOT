@@ -1,0 +1,207 @@
+# 礼物场景 / 男友 / 闺蜜 / 同事 / 领导 routes (S6 R60 NLU 节点扩充, 第五周期 buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A6 festival_tradition 区分: 这里专注送礼对象细分场景.
+
+- name: gift_boyfriend_001
+  intent: question
+  keywords: [推荐男朋友礼物, 推荐男友礼物, 推荐男生礼物, 推荐 BF 礼物, 笨猫男友礼物]
+  utterances:
+    - 推荐男朋友礼物
+    - 推荐男友礼物
+    - 推荐男生礼物
+    - 推荐 BF 礼物
+    - 笨猫男友礼物
+  responses:
+    - "(脸红) 嗷呜～{user_addr}男友礼物!! 想到他笑容ฅฅ"
+    - "(尾巴翘) 经典: 手表 / 球鞋 / 游戏 / 数码 / 衣服"
+    - "{user_addr}走心款: 写信 / 视频 / 手工 - 比贵重要"
+    - "(挺胸) 笨猫的提醒: 别送领带烟酒! 老气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gift_girlfriend_001
+  intent: question
+  keywords: [推荐女朋友礼物, 推荐女友礼物, 推荐女生礼物, 推荐 GF 礼物, 笨猫女友礼物]
+  utterances:
+    - 推荐女朋友礼物
+    - 推荐女友礼物
+    - 推荐女生礼物
+    - 推荐 GF 礼物
+    - 笨猫女友礼物
+  responses:
+    - "嗷呜～{user_addr}女友: 包包 / 口红 / 项链 / 香水ฅฅ"
+    - "(尾巴翘) 浪漫: 玫瑰 + 蛋糕 + 烛光晚餐"
+    - "{user_addr}用心 > 价格! 仪式感重要"
+    - "(挺胸) 笨猫的提醒: 别问她要啥! 自己想"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gift_bestie_001
+  intent: question
+  keywords: [推荐闺蜜礼物, 推荐 bff 礼物, 推荐姐妹礼物, 推荐闺蜜送啥, 笨猫闺蜜礼物]
+  utterances:
+    - 推荐闺蜜礼物
+    - 推荐 bff 礼物
+    - 推荐姐妹礼物
+    - 推荐闺蜜送啥
+    - 笨猫闺蜜礼物
+  responses:
+    - "嗷呜～{user_addr}闺蜜: 护肤品 / 同款饰品 / 美容卡ฅฅ"
+    - "(尾巴翘) 走心: 旅行 / 体验课 / 私人定制"
+    - "{user_addr}定制相册: 你们的故事! 感动哭"
+    - "(挺胸) 笨猫的提醒: 闺蜜送实用 + 情怀 - 都有"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gift_parent_001
+  intent: question
+  keywords: [推荐父母礼物, 推荐爸妈礼物, 推荐爸爸礼物, 推荐妈妈礼物, 笨猫爸妈礼物]
+  utterances:
+    - 推荐父母礼物
+    - 推荐爸妈礼物
+    - 推荐爸爸礼物
+    - 推荐妈妈礼物
+    - 笨猫爸妈礼物
+  responses:
+    - "嗷呜～{user_addr}爸妈: 健康 + 实用 - 最在意ฅฅ"
+    - "(尾巴翘) 妈妈: 护肤品 / 衣服 / 按摩仪"
+    - "{user_addr}爸爸: 茶叶 / 保健品 / 数码 / 衣服"
+    - "(挺胸) 笨猫的提醒: 多陪伴! 比任何礼物都贵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gift_kid_002
+  intent: question
+  keywords: [推荐小孩礼物, 推荐儿童礼物, 推荐孩子礼物, 推荐外甥礼物, 笨猫小孩礼物]
+  utterances:
+    - 推荐小孩礼物
+    - 推荐儿童礼物
+    - 推荐孩子礼物
+    - 推荐外甥礼物
+    - 笨猫小孩礼物
+  responses:
+    - "嗷呜～{user_addr}孩子: 玩具 / 书 / 文具 / 衣服ฅฅ"
+    - "(尾巴翘) 益智: 乐高 / 拼图 / 积木 - 不腻"
+    - "{user_addr}经典: 红包! 小孩最爱"
+    - "(挺胸) 笨猫的提醒: 别送电子产品过早!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gift_colleague_001
+  intent: question
+  keywords: [推荐同事礼物, 推荐离职礼物, 推荐生日同事, 推荐同事送啥, 笨猫同事礼物]
+  utterances:
+    - 推荐同事礼物
+    - 推荐离职礼物
+    - 推荐生日同事
+    - 推荐同事送啥
+    - 笨猫同事礼物
+  responses:
+    - "嗷呜～{user_addr}同事: 中等价位 + 不私人 - 安全ฅฅ"
+    - "(尾巴翘) 安全选: 零食礼盒 / 咖啡 / 文具"
+    - "{user_addr}别送太贵! 显得有目的"
+    - "(挺胸) 笨猫的提醒: 离职礼物多 50-200! 留念"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gift_boss_001
+  intent: question
+  keywords: [推荐领导礼物, 推荐老板礼物, 推荐送领导, 推荐拜访领导, 笨猫领导礼物]
+  utterances:
+    - 推荐领导礼物
+    - 推荐老板礼物
+    - 推荐送领导
+    - 推荐拜访领导
+    - 笨猫领导礼物
+  responses:
+    - "嗷呜～{user_addr}领导: 高端茶叶 / 红酒 / 字画 - 商务礼ฅฅ"
+    - "(尾巴翘) 别太贵! 1000-3000 区间安全"
+    - "{user_addr}避: 烟 / 太私人 / 怪东西"
+    - "(挺胸) 笨猫的提醒: 走心说几句话比礼物本身重要"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gift_teacher_001
+  intent: question
+  keywords: [推荐老师礼物, 推荐教师节礼物, 推荐送老师, 推荐感谢老师, 笨猫老师礼物]
+  utterances:
+    - 推荐老师礼物
+    - 推荐教师节礼物
+    - 推荐送老师
+    - 推荐感谢老师
+    - 笨猫老师礼物
+  responses:
+    - "嗷呜～{user_addr}教师: 鲜花 / 贺卡 / 手工 - 心意ฅฅ"
+    - "(尾巴翘) 实用: 茶杯 / 钢笔 / 围巾 - 别太贵"
+    - "{user_addr}避: 现金 / 购物卡 - 老师不收"
+    - "(挺胸) 笨猫的提醒: 学生成长是最好礼物!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gift_wedding_001
+  intent: question
+  keywords: [推荐结婚礼物, 推荐婚礼礼物, 推荐结婚送啥, 推荐随份子, 笨猫结婚礼物]
+  utterances:
+    - 推荐结婚礼物
+    - 推荐婚礼礼物
+    - 推荐结婚送啥
+    - 推荐随份子
+    - 笨猫结婚礼物
+  responses:
+    - "嗷呜～{user_addr}红包看关系! 普通 500-1000 / 铁哥们 1000+ฅฅ"
+    - "(尾巴翘) 实物: 床品 / 餐具 / 家电 - 实用"
+    - "{user_addr}定制: 婚纱照模型 / 名字饰品 - 唯一"
+    - "(挺胸) 笨猫的提醒: 红包数字带 6 8 9 吉利"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gift_birthday_002
+  intent: question
+  keywords: [推荐生日礼物, 推荐生日送啥, 推荐过生日礼物, 推荐买生日礼物, 笨猫生日]
+  utterances:
+    - 推荐生日礼物
+    - 推荐生日送啥
+    - 推荐过生日礼物
+    - 推荐买生日礼物
+    - 笨猫生日
+  responses:
+    - "嗷呜～{user_addr}生日礼物: 看对方喜好 + 用心ฅฅ"
+    - "(尾巴翘) 通用: 蛋糕 + 鲜花 + 小礼物 三件套"
+    - "{user_addr}走心: 手工 / 定制 / 体验 - 难忘"
+    - "(挺胸) 笨猫的提醒: 写贺卡! 文字最难忘"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gift_thanks_001
+  intent: question
+  keywords: [推荐感谢礼物, 推荐答谢礼, 推荐谢礼, 推荐感谢送啥, 笨猫感谢]
+  utterances:
+    - 推荐感谢礼物
+    - 推荐答谢礼
+    - 推荐谢礼
+    - 推荐感谢送啥
+    - 笨猫感谢
+  responses:
+    - "嗷呜～{user_addr}感谢礼: 不算大 + 走心 + 包装 - 三件套ฅฅ"
+    - "(尾巴翘) 经典: 鲜花 / 茶叶 / 手作"
+    - "{user_addr}小恩小惠: 巧克力 + 卡片 - 走心"
+    - "(挺胸) 笨猫的提醒: 别太贵让人不好意思"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gift_diy_001
+  intent: question
+  keywords: [推荐手工礼物, 推荐 DIY 礼物, 推荐自制礼物, 推荐手作礼物, 笨猫手工礼物]
+  utterances:
+    - 推荐手工礼物
+    - 推荐 DIY 礼物
+    - 推荐自制礼物
+    - 推荐手作礼物
+    - 笨猫手工礼物
+  responses:
+    - "嗷呜～{user_addr}手工无敌走心! 独一无二ฅฅ"
+    - "(尾巴翘) 经典: 编织 / 折纸 / 烘焙 / 相册"
+    - "{user_addr}时间投入越多! 越打动人"
+    - "(挺胸) 笨猫的提醒: 提前 1+ 月开始! 别急"
+  cooldown_seconds: 60
+  weight: 1.0
