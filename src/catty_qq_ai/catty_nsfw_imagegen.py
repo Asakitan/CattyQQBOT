@@ -771,11 +771,15 @@ async def maybe_generate_image(
         #   - 旧设 strength=1.0 + information_extracted=1.0 + description="character&style"
         #     把 reference 图(solo 笨猫)的**单人构图**也复制了 → characterPrompts 里的
         #     1boy 黑影主人渲不出来 → 主人在画面里消失.
-        #   - 新设:
-        #     description="character" (只锁人物, 不锁 style/构图)
-        #     strength=0.85 (人物特征还锁但稍松, 留 15% 给 characterPrompts 加第二人)
-        #     information_extracted=0.7 (从 ref 只抽 70% 特征 — 脸/发型/猫耳/瞳色,
-        #     剩 30% 让 base_caption 的 {{2 figures, hetero}} 决定双人构图)
+        #
+        # 紧急回滚 (22:11 log 实锤): NAI v4.5 API **硬性要求**
+        # director_reference_information_extracted 必须是 EXACTLY 1.0, 改 0.7 直接 400.
+        # 改成只调能调的两个维度:
+        #   - description "character&style" → "character" (只锁人物, 不锁 style)
+        #   - strength_values 1.0 → 0.85 (人物特征还锁, 留余地让 characterPrompts 加第二人)
+        #   - secondary_strength_values 0.0 → 0.0 (保持不传 style/构图)
+        #   - information_extracted 保持 1.0 (NAI API 硬要求)
+        # 剩下的"主人没了"问题靠 caption {{1boy with 1girl}} + 提权负面 solo 解决.
         n = len(director_ref_b64_list)
         payload["parameters"]["director_reference_images"] = director_ref_b64_list
         payload["parameters"]["director_reference_descriptions"] = [
@@ -787,7 +791,7 @@ async def maybe_generate_image(
         ]
         payload["parameters"]["director_reference_strength_values"] = [0.85] * n
         payload["parameters"]["director_reference_secondary_strength_values"] = [0.0] * n
-        payload["parameters"]["director_reference_information_extracted"] = [0.7] * n
+        payload["parameters"]["director_reference_information_extracted"] = [1.0] * n
 
     # NAI 专用 proxy 优先 (远端国内服务器到 image.novelai.net 真 IP 被墙时填),
     # fallback 全局 proxy, 再 fallback 直连。
