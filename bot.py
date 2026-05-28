@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import sys
 from pathlib import Path
@@ -131,10 +132,34 @@ for _name in ("catty_qq_ai", "nonebot"):
         _lg.addHandler(_intercept)
     _lg.propagate = False
 
+# Windows + Python 3.14 asyncio Proactor: 远端 RST 后 _call_connection_lost 调 socket.shutdown()
+# 抛 ConnectionResetError(WinError 10054), 业务无影响, 静默掉避免刷屏.
+def _silence_proactor_connection_reset(loop: asyncio.AbstractEventLoop, context: dict) -> None:
+    exc = context.get("exception")
+    if isinstance(exc, ConnectionResetError) and getattr(exc, "winerror", None) == 10054:
+        return
+    loop.default_exception_handler(context)
+
+
+def _install_loop_exception_handler() -> None:
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    loop.set_exception_handler(_silence_proactor_connection_reset)
+
+
+_install_loop_exception_handler()
+
 nonebot.init()
 
 driver = nonebot.get_driver()
 driver.register_adapter(OneBotV11Adapter)
+
+@driver.on_startup
+async def _reinstall_loop_exception_handler() -> None:
+    asyncio.get_running_loop().set_exception_handler(_silence_proactor_connection_reset)
 
 nonebot.load_plugin("catty_qq_ai")
 
