@@ -101,7 +101,8 @@ class Config(BaseModel):
 
     # 慢请求 placeholder:主回复 chat_completion 进入后超过该秒数没回,先 send 一句轻量占位
     # 避免用户以为 bot 卡死了/被忽略了。0 或负数 = 禁用。
-    catty_slow_reply_placeholder_seconds: float = 30.0
+    # 主人 2026-05-28: 30 → 60,「翻翻笔记」式 placeholder 触发别太急,让 sonnet 多想会儿
+    catty_slow_reply_placeholder_seconds: float = 60.0
     # 占位消息后台 task 异常时静默(主回复链路不能被打断)
     catty_slow_reply_placeholder_max_messages: int = 1
 
