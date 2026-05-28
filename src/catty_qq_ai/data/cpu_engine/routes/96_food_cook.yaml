@@ -1,0 +1,207 @@
+# 美食 / 烹饪 / 外卖 / 口味 routes (S6 R18, buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 40_food.yaml 区分: 这里偏推荐/做菜/外卖, 40 偏吃啥日常.
+
+- name: food_recipe_001
+  intent: question
+  keywords: [怎么做菜, 菜谱推荐, 推荐菜谱, 怎么做这道菜, 做菜教程]
+  utterances:
+    - 推荐个菜谱
+    - 怎么做这道菜
+    - 简单菜谱
+    - 教我做菜
+    - 笨猫怎么做菜
+  responses:
+    - "嗷呜～{user_addr}下厨啦! 笨猫推荐番茄炒蛋(简单不出错)ฅฅ"
+    - "(尾巴翘) 用下厨房 app 查菜谱! 小白也能跟着做"
+    - "{user_addr}先从家常菜开始嘛~ 别一上来就法餐"
+    - "(歪头) 笨猫推荐: 蒸鱼+番茄炒蛋+紫菜蛋花汤 = 完美一餐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_takeaway_001
+  intent: question
+  keywords: [点外卖, 外卖推荐, 美团饿了么, 外卖吃啥, 外卖优惠]
+  utterances:
+    - 推荐点啥外卖
+    - 外卖吃什么好
+    - 美团有什么优惠
+    - 饿了么哪家好
+    - 外卖怎么省钱
+  responses:
+    - "嗷呜～{user_addr}先看口味! 麻辣推荐麻辣烫, 清淡推荐沙拉"
+    - "(尾巴翘) 笨猫的外卖三件套: 外卖+可乐+冰淇淋ฅฅ"
+    - "{user_addr}用 88vip / 美团神券省钱嘛"
+    - "(歪头) 中午吃饱+晚上吃少 = 笨猫的健康原则(其实是吃货原则)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_hotpot_001
+  intent: question
+  keywords: [吃火锅, 火锅推荐, 火锅哪家好, 火锅店推荐, 火锅锅底]
+  utterances:
+    - 想吃火锅
+    - 火锅哪家好
+    - 推荐火锅店
+    - 火锅怎么吃
+    - 红汤还是清汤
+  responses:
+    - "(眼睛亮) 嗷呜～火锅! 笨猫的最爱之一ฅฅ"
+    - "(尾巴疯狂摇) 推荐海底捞/巴奴! 服务和味道都顶"
+    - "{user_addr}红汤+清汤鸳鸯锅最香! 笨猫推荐"
+    - "(歪头) 火锅必点: 嫩牛肉/虾滑/冻豆腐/毛肚~ 黄金组合"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_bbq_001
+  intent: question
+  keywords: [吃烧烤, 烧烤推荐, 烤肉哪家好, 烧烤店推荐, 韩国烤肉]
+  utterances:
+    - 想吃烧烤
+    - 推荐烧烤店
+    - 烤肉哪家好
+    - 韩国烤肉推荐
+    - 笨猫吃烧烤
+  responses:
+    - "嗷呜～烧烤! {user_addr}带笨猫去! 笨猫负责啃骨头ฅฅ"
+    - "(尾巴翘) 推荐韩国烤肉~ 五花肉 + 烤肠 + 米酒!"
+    - "{user_addr}必点: 鸡翅/羊肉串/烤茄子/烤土豆!"
+    - "(歪头) 笨猫的烧烤大忌: 没鱼! 别忘了点烤鱼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_sweet_001
+  intent: question
+  keywords: [吃甜点, 甜品推荐, 推荐蛋糕, 甜品店, 下午茶]
+  utterances:
+    - 推荐甜点
+    - 想吃甜的
+    - 蛋糕哪家好
+    - 下午茶推荐
+    - 笨猫爱甜点
+  responses:
+    - "(眼睛亮) 嗷呜～甜品!! 笨猫最爱抹茶千层ฅฅ"
+    - "(尾巴翘) 推荐 LeTAO / 福州牛角面包店!"
+    - "{user_addr}下午茶: 司康+蛋糕+红茶 = 完美组合"
+    - "(歪头) 笨猫的甜点宣言: 任何时候吃甜的都不会胖(伪)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_milktea_001
+  intent: question
+  keywords: [喝奶茶, 奶茶推荐, 哪家奶茶, 推荐奶茶店, 喜茶奈雪]
+  utterances:
+    - 推荐奶茶
+    - 哪家奶茶好喝
+    - 喜茶还是奈雪
+    - 笨猫推荐奶茶
+    - 想喝奶茶
+  responses:
+    - "嗷呜～奶茶! 喜茶/茶百道/CoCo 各有所长{user_addr}ฅฅ"
+    - "(尾巴疯狂摇) 笨猫推荐: 杨枝甘露/抹茶牛乳/葡萄~"
+    - "{user_addr}少糖少冰! 笨猫监督{user_addr}健康"
+    - "(歪头) 笨猫的奶茶定律: 第二杯半价就买两杯"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_breakfast_001
+  intent: question
+  keywords: [早餐吃啥, 早餐推荐, 推荐早餐, 早饭推荐, 早餐怎么吃]
+  utterances:
+    - 早餐吃什么
+    - 推荐早餐
+    - 早饭吃啥
+    - 营养早餐
+    - 笨猫推荐早餐
+  responses:
+    - "嗷呜～{user_addr}经典: 包子+豆浆+鸡蛋ฅฅ"
+    - "(尾巴翘) 健康款: 燕麦+水果+酸奶~ 笨猫推荐"
+    - "{user_addr}起晚了就便利店搞定! 三明治+咖啡"
+    - "(歪头) 笨猫早餐: 罐头开盖即食(其实是猫罐头)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_spicy_001
+  intent: question
+  keywords: [吃辣, 喜欢辣的, 麻辣推荐, 推荐辣的, 辣度高]
+  utterances:
+    - 喜欢吃辣
+    - 推荐麻辣
+    - 越辣越好
+    - 笨猫吃辣
+    - 推荐辣的
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}重庆人? 笨猫陪你嗷~"
+    - "推荐: 麻辣火锅/水煮鱼/重庆小面/麻辣香锅ฅฅ"
+    - "{user_addr}吃辣记得备可乐降辣~ 别硬扛"
+    - "(歪头) 笨猫怕辣! 但{user_addr}吃笨猫负责拍照打卡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_seafood_001
+  intent: question
+  keywords: [吃海鲜, 海鲜推荐, 大闸蟹, 推荐海鲜, 海鲜大餐]
+  utterances:
+    - 想吃海鲜
+    - 推荐海鲜
+    - 大闸蟹好吃吗
+    - 笨猫推荐海鲜
+    - 海鲜哪家好
+  responses:
+    - "(眼睛亮) 嗷呜～海鲜!! 笨猫的眼神已经发光ฅฅ"
+    - "(尾巴疯狂摇) 推荐: 清蒸鱼/白灼虾/大闸蟹/帝王蟹!"
+    - "{user_addr}秋天吃蟹最香! 笨猫流口水ing"
+    - "(歪头) 海鲜搭白酒~ {user_addr}别贪杯哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_cuisine_chinese_001
+  intent: question
+  keywords: [中餐推荐, 推荐中餐, 中餐馆, 川菜湘菜, 粤菜推荐]
+  utterances:
+    - 中餐推荐
+    - 川菜还是粤菜
+    - 推荐粤菜
+    - 湘菜辣不辣
+    - 笨猫吃中餐
+  responses:
+    - "嗷呜～{user_addr}选: 川菜重辣/粤菜清淡/湘菜咸辣/鲁菜大气ฅฅ"
+    - "(尾巴翘) 笨猫私推: 红烧肉/糖醋里脊/番茄牛腩"
+    - "{user_addr}吃饭注意荤素搭配! 别全肉"
+    - "(歪头) 中餐博大精深~ 笨猫每个菜系都想试试"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_western_001
+  intent: question
+  keywords: [西餐推荐, 推荐西餐, 牛排推荐, 意大利面, 推荐 pasta]
+  utterances:
+    - 西餐推荐
+    - 推荐牛排
+    - 意面哪家好
+    - 笨猫西餐
+    - 推荐意大利菜
+  responses:
+    - "嗷呜～{user_addr}吃西餐! 牛排+红酒最配ฅฅ"
+    - "(尾巴翘) 推荐牛排店: 王品/上海 1930~ 高级感"
+    - "{user_addr}意面选 spaghetti+番茄/海鲜! 经典!"
+    - "(歪头) 西餐要慢慢吃~ 别像中餐三分钟扒完"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: food_diet_health_001
+  intent: question
+  keywords: [健康饮食, 减脂餐, 健康吃, 推荐沙拉, 轻食推荐]
+  utterances:
+    - 健康饮食推荐
+    - 减脂餐怎么吃
+    - 推荐沙拉
+    - 轻食推荐
+    - 笨猫健康饮食
+  responses:
+    - "嗷呜～健康饮食: 蛋白质+蔬菜+少油{user_addr}!"
+    - "(歪头) 减脂期推荐: 鸡胸肉/牛肉/虾仁+绿叶菜+糙米"
+    - "{user_addr}沙拉别全菜! 加点鸡胸肉/三文鱼营养均衡"
+    - "(尾巴翘) 笨猫的健康哲学: 80% 控制 + 20% 放纵 = 持久"
+  cooldown_seconds: 60
+  weight: 1.0
