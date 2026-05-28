@@ -202,6 +202,10 @@ class Config(BaseModel):
     # 改回 5min 原因: 主人观察到 1h + dynamic content 一起 cache 后, Claude 会触发 safety
     # refusal ("我需要在这里停下来"). 短 TTL 让 cache prefix 不会跨多个 user session 持久化.
     catty_cache_ttl: str = "5min"
+    # 主人 2026-05-28 Phase 1.2: 第二轮请求注入 extra_body.diagnostics.previous_message_id
+    # 用来跟踪 cache miss 原因. NewAPI / 中转 relay 不识别 diagnostics 字段时第二轮会 500.
+    # 默认 OFF, 只有直连 anthropic.com 时才打开.
+    catty_cache_diag_previous_message_id_enabled: bool = False
     # ── Anthropic native /v1/messages 路径 (主人 2026-05-28: NewAPI SG relay
     # pass_through_body_enabled=true 后, 中转层字节级透传 body 含 cache_control /
     # context_management / metadata. 切换该开关后 catty 走 anthropic SDK 发原生请求,

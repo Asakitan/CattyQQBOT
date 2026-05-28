@@ -500,6 +500,21 @@ async def _post_chat_completion_raw(
             # 深拷贝避免修改调用方 messages (会被多次注入污染)
             import copy
             messages = copy.deepcopy(messages)
+            # 主人 2026-05-28 Phase 1.2: 标位前先剥所有现存 cache_control (defensive single-owner).
+            # history messages 持久化回来可能含上一轮 cache_control, 叠 2 份会让 relay 第二轮 500.
+            _stripped = 0
+            for _m in messages:
+                if not isinstance(_m, dict):
+                    continue
+                _c = _m.get("content")
+                if isinstance(_c, list):
+                    for _blk in _c:
+                        if isinstance(_blk, dict) and _blk.pop("cache_control", None) is not None:
+                            _stripped += 1
+            if _stripped > 0:
+                _logger.debug(
+                    "openai-compat cache single-owner: stripped %d residual marker(s)", _stripped,
+                )
             cachingAtDepthForClaude(messages, cachingAtDepth=cache_depth)
             inject_system_tail_cache(messages)
             # 仅 Claude endpoint 加 anthropic-beta header (避免 OpenAI 报 unknown header)

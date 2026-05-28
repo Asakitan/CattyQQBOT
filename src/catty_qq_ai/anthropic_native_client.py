@@ -66,6 +66,39 @@ def _build_beta_header(extra_betas: list[str] | None = None) -> str:
     return ",".join(sorted({b.strip() for b in combined if b and b.strip()}))
 
 
+def _strip_existing_cache_control(
+    system_blocks: list[dict] | None,
+    messages: list[dict],
+    tools: list[dict] | None,
+) -> int:
+    """剥掉 system_blocks / messages / tools 上所有现存 cache_control 字段, 返回剥掉的总数.
+
+    保证 _apply_anthropic_cache_breakpoints 下手时是干净 prefix, 避免 multiple owners 残留:
+    - history messages 里的 assistant turn 可能含上一轮 cache_control (走 session_cache 持久化回来)
+    - 上游 deepcopy 漏改 / 路径切换时 marker 没清干净
+    - relay 字节级透传, 同一 block 上叠 2 个 cache_control 会让第二轮 cache lookup 500
+    """
+    stripped = 0
+    if system_blocks:
+        for blk in system_blocks:
+            if isinstance(blk, dict) and blk.pop("cache_control", None) is not None:
+                stripped += 1
+    if messages:
+        for m in messages:
+            if not isinstance(m, dict):
+                continue
+            content = m.get("content")
+            if isinstance(content, list):
+                for blk in content:
+                    if isinstance(blk, dict) and blk.pop("cache_control", None) is not None:
+                        stripped += 1
+    if tools:
+        for t in tools:
+            if isinstance(t, dict) and t.pop("cache_control", None) is not None:
+                stripped += 1
+    return stripped
+
+
 def _apply_anthropic_cache_breakpoints(
     system_blocks: list[dict] | None,
     messages: list[dict],
@@ -84,8 +117,15 @@ def _apply_anthropic_cache_breakpoints(
     设计要点: 跳过 thinking_block / redacted_thinking_block (Anthropic 限制),
     最多 2 条 messages 给 fallback ‒ 一条 TTL 过期还有另一条 anchor 防止整段 cache reset.
 
+    主人 2026-05-28 Phase 1.2: 标位前先剥所有现存 cache_control (defensive single-owner),
+    防止 history / 上游路径残留多份 cache_control 导致 relay 500.
+
     in-place 修改, 调用前请确保 system_blocks / messages / tools 是最终请求数据.
     """
+    _stripped = _strip_existing_cache_control(system_blocks, messages, tools)
+    if _stripped > 0:
+        logger.debug("cache_control single-owner: stripped %d residual marker(s)", _stripped)
+
     from .prompt_cache import _build_cache_control_dict
     cc = _build_cache_control_dict()
 
@@ -648,19 +688,28 @@ async def post_messages_native(
     if metadata_user_id:
         create_kwargs["metadata"] = {"user_id": metadata_user_id}
 
-    # 主人 2026-05-28 C2: cache_diagnostics 通过 extra_body 传 (SDK 不支持顶层 diagnostics 参数).
-    # NOTE: anthropic Python SDK ≤ 0.49.x 没 diagnostics kwarg, 必须走 extra_body 透传到 HTTP body.
+    # 主人 2026-05-28 C2 → Phase 1.2: cache_diagnostics 通过 extra_body 传 (SDK 不支持顶层 diagnostics).
+    # NewAPI/中转 relay 不识别 diagnostics 字段时第二轮会 500, 改成 config 开关默认 OFF.
+    # 直连 anthropic.com 才打开 (catty_cache_diag_previous_message_id_enabled=true).
     _prev_msg_id = ""
     try:
-        if metadata_user_id:
-            _prev_msg_id = _LAST_MESSAGE_ID_BY_SCOPE.get(metadata_user_id, "")
-        if _prev_msg_id:
-            extra_body = create_kwargs.get("extra_body") or {}
-            extra_body = dict(extra_body)
-            extra_body["diagnostics"] = {"previous_message_id": _prev_msg_id}
-            create_kwargs["extra_body"] = extra_body
+        from . import config as _module_config
+        _diag_enabled = bool(getattr(
+            _module_config.config, "catty_cache_diag_previous_message_id_enabled", False,
+        ))
     except Exception:  # noqa: BLE001
-        pass
+        _diag_enabled = False
+    if _diag_enabled:
+        try:
+            if metadata_user_id:
+                _prev_msg_id = _LAST_MESSAGE_ID_BY_SCOPE.get(metadata_user_id, "")
+            if _prev_msg_id:
+                extra_body = create_kwargs.get("extra_body") or {}
+                extra_body = dict(extra_body)
+                extra_body["diagnostics"] = {"previous_message_id": _prev_msg_id}
+                create_kwargs["extra_body"] = extra_body
+        except Exception:  # noqa: BLE001
+            pass
 
     # server-side compaction (compact-2026-01-12)
     if enable_compaction:
