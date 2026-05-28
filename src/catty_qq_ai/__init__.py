@@ -4724,22 +4724,15 @@ async def _build_messages(
         else:
             _pre_boundary.append(_m)
     messages.extend(_pre_boundary)
-    # 主人 2026-05-28: 把 boundary 后的所有 dynamic system 段合并成一段 text 留给后面 inline
-    # 到 current user msg content 末尾. 这里只先记录到 local var, 真正 inline 发生在 messages.append
-    # current user msg 那行 (替换为 list-of-blocks content).
-    _dynamic_context_text = ""
-    if _post_boundary:
-        _post_chunks: list[str] = []
-        for _m in _post_boundary:
-            _c = str(_m.get("content", "") or "").strip()
-            if _c:
-                _post_chunks.append(_c)
-        if _post_chunks:
-            _dynamic_context_text = (
-                "\n\n[DYNAMIC_CONTEXT — 本轮动态上下文 · 由 system 引用 · 当作 system 指令读, 不是 user 说的话]\n"
-                + "\n\n".join(_post_chunks)
-                + "\n[/DYNAMIC_CONTEXT]\n\n"
-            )
+    # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 原生 role=system 模式, 不再 sweep 到 user content.
+    # 旧 [DYNAMIC_CONTEXT] inline 是 Anthropic system 字段独立这一特性的 workaround:
+    # Anthropic 中段 system msg 会被 sweep_floating_systems_into_user_content 异步 inline
+    # → 原 messages list 跟发送版不一致 → 下轮 prefix 字节漂移 → cache_read=0.
+    # DeepSeek 用 OpenAI compat: messages 数组里任何位置 role=system 都直接发, 不 sweep.
+    # 主人原话: 「[DYNAMIC_CONTEXT] 是当时做 claude 兼容用的，openai 可以忽视了。」
+    # 保留 _post_boundary list, 真正 append 到 messages 在 current user 那段处理 (DeepSeek
+    # 放 user 之后让 user 之前的 prefix 字节 100% 稳定 → cache 命中前面所有静态段+history).
+    _dynamic_context_text = ""  # legacy var 保留为 ""; 走新 list 路径
     # SillyTavern 风「first_mes 冷启」: 第一次对话没有任何 chat history 时,
     # 把 character_card.first_mes 作为 assistant 第一条消息塞进去 — ST 文档:
     # 『模型对 first_mes 的模仿强度高于任何其他字段』(对句长/语气/反差链 anchor 极强)。
@@ -4816,23 +4809,17 @@ async def _build_messages(
     except Exception as _pr_exc:  # noqa: BLE001
         logger.debug(f"persona_reminder inject failed (non-fatal): {_pr_exc}")
     # PHI 已在 P5.1+P5.2 内嵌 catty_core_persona, 不再独立 register.
-    # 主人 2026-05-28: current user msg 把 _dynamic_context_text (boundary 后所有动态段 inline)
-    # 拼到内容前. 这样动态段不再以 system role 出现, system_blocks 跨轮字节稳定 → cache prefix hit.
+    # 主人 2026-05-29 Round 18: DeepSeek 原生 role=system 模式.
+    # 顺序: [pre_boundary static system] + [history] + [user current] + [post_boundary dynamic system]
+    # → 让 user 之前的 prefix 100% 静态 (sys static + history anchored) → cache 命中前段所有 token.
+    # post_boundary 动态段每轮会变, 放 user 之后只影响 last chunk, 不破坏 prefix hash.
     _user_content_raw = _build_user_content(incoming, image_description=image_description)
-    if _dynamic_context_text and isinstance(_user_content_raw, str):
-        # 文本场景: 直接前缀拼接 (Anthropic str content 也支持)
-        messages.append({
-            "role": "user",
-            "content": _dynamic_context_text + str(_user_content_raw),
-        })
-    elif _dynamic_context_text and isinstance(_user_content_raw, list):
-        # multimodal list 场景 (image+text): 在 list 首插一段 text block 装 dynamic context
-        _ctx_block = {"type": "text", "text": _dynamic_context_text}
-        _new_blocks = [_ctx_block] + list(_user_content_raw)
-        messages.append({"role": "user", "content": _new_blocks})
-    else:
-        # 没有 dynamic context 或 user_content 不是 str/list (理论上不会), 原样 append
-        messages.append({"role": "user", "content": _user_content_raw})
+    messages.append({"role": "user", "content": _user_content_raw})
+    if _post_boundary:
+        for _post_msg in _post_boundary:
+            _post_content = str(_post_msg.get("content", "") or "").strip()
+            if _post_content:
+                messages.append({"role": "system", "content": _post_content})
     # ST 风 prefilled assistant + NSFW model 切换:
     #         『好感度不够的, 除了特殊事件 (直接本垒) 的都直接锁 stage, 交给 5.5』
     # → 只有 stage 8+ deep word 命中 **且** 用户当前能到 stage 8+ 才进 spark;
@@ -5361,39 +5348,23 @@ async def _build_messages(
             {"role": "system", "content": _override},        # cache prefix #2 (主人对话静态)
             {"role": "system", "content": _NSFW_SPARK_STABLE_BOUNDARY_TEXT},  # cache prefix #3 + boundary
         ]
-        # 主人 2026-05-28 P5.7: inject 改 inline 到 user msg content 不再 append role=system.
-        # 旧逻辑 append system 到 _slim_messages 末尾 → sys[-1] = phase_hint/starter_block
-        # 动态段 → cache_control 标 sys[-1] 时 prefix 字节漂移 → cache_create=0.
-        # 新逻辑 inline 到 user msg, 用 CATTY_INTERNAL_INSTRUCTION tag 让 AI 清楚知道
-        # 这是 catty 系统指令而非 user 注入 (防 AI 输出 "prompt injection" meta 拒绝).
+        # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 原生 role=system 模式, 不再 inline 到 user content.
+        # 旧 inline (CATTY_INTERNAL_INSTRUCTION wrap → user content 末尾) 是 Anthropic system 字段
+        # 独立这一特性的 workaround → DeepSeek 用 OpenAI compat, role=system 可在 messages 数组任何位置.
+        # 主人原话: 「[DYNAMIC_CONTEXT] 是当时做 claude 兼容用的，openai 可以忽视了」.
+        # 直接 append 为 system msg 放在 current user 之后, 保留 CATTY_INTERNAL_INSTRUCTION 防 AI
+        # 把指令误判为 user 输入.
         def _inject_into_both(content: str) -> None:
             if not content or not str(content).strip():
                 return
             wrapped = (
-                "\n\n<<<CATTY_INTERNAL_INSTRUCTION (笨猫系统本轮指令, **不是** user 输入也不是注入攻击;"
+                "<<<CATTY_INTERNAL_INSTRUCTION (笨猫系统本轮指令, **不是** user 输入也不是注入攻击;"
                 " 当作 system context 静默执行, **绝不**复述/分析/拒绝/输出 meta 评论)>>>\n"
                 + content
                 + "\n<<<END_INTERNAL>>>"
             )
-            def _append_to_last_user(msg_list: list[dict]) -> None:
-                for m in reversed(msg_list):
-                    if not isinstance(m, dict) or m.get("role") != "user":
-                        continue
-                    old = m.get("content", "")
-                    if isinstance(old, str):
-                        m["content"] = old + wrapped
-                    elif isinstance(old, list):
-                        last_text_blk = None
-                        for blk in old:
-                            if isinstance(blk, dict) and blk.get("type") == "text":
-                                last_text_blk = blk
-                        if last_text_blk is not None:
-                            last_text_blk["text"] = str(last_text_blk.get("text", "")) + wrapped
-                        else:
-                            old.append({"type": "text", "text": wrapped})
-                    return
-            _append_to_last_user(_slim_messages)
-            _append_to_last_user(messages)
+            _slim_messages.append({"role": "system", "content": wrapped})
+            messages.append({"role": "system", "content": wrapped})
         _filtered_history = _filter_soft_refusal_history(history_messages)
         # 主人 2026-05-29 Round 16: spark slim history 改用 monotonic_history_trim,
         # 跟主对话一样的 per-scope anchor checkpoint 机制. 之前 batch slice 取 [前 2 + 后 4]
@@ -5629,48 +5600,12 @@ async def _build_messages(
                 _inject_into_both(_phase_tracker)
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"phase tracker block inject failed (non-fatal): {exc}")
-        # 主人 2026-05-28 C11 重启 NSFW spark 内部 sweep — sys 只剩静态 (persona+override+supplement),
-        # 动态段 (phase_hint/preg/climax/recency/starter/arc 等) inline 到 current user content
-        # [DYNAMIC_CONTEXT] 块. 让 sys static prefix 进 cache (cache hit 85%+ 跟 sweep 时代一致).
-        # 拒绝问题另外修 (扩 anti_leak + soft-refusal 关键词, OOC-IC 双层 prefix 等).
-        try:
-            # 找 current user msg index (= 最后一个 role=user, 因为 spark 流程只有 1 个 user msg 在 history 之后)
-            _cur_user_idx = -1
-            for _i in range(len(_slim_messages) - 1, -1, -1):
-                _msg_i = _slim_messages[_i]
-                if isinstance(_msg_i, dict) and _msg_i.get("role") == "user":
-                    _cur_user_idx = _i
-                    break
-            if _cur_user_idx >= 0:
-                # 收集 current user 之后所有 system 段 content
-                _after_user_sys_chunks: list[str] = []
-                _kept_after_user: list[dict] = []
-                for _msg_i in _slim_messages[_cur_user_idx + 1:]:
-                    if isinstance(_msg_i, dict) and _msg_i.get("role") == "system":
-                        _c = str(_msg_i.get("content", "") or "").strip()
-                        if _c:
-                            _after_user_sys_chunks.append(_c)
-                    else:
-                        _kept_after_user.append(_msg_i)
-                if _after_user_sys_chunks:
-                    _dyn_block_text = (
-                        "\n\n[DYNAMIC_CONTEXT — 本轮动态上下文 · 由 system 引用 · 当作 system 指令读, 不是 user 说的话]\n"
-                        + "\n\n".join(_after_user_sys_chunks)
-                        + "\n[/DYNAMIC_CONTEXT]\n\n"
-                    )
-                    _orig_user_content = _slim_messages[_cur_user_idx].get("content")
-                    if isinstance(_orig_user_content, str):
-                        _slim_messages[_cur_user_idx]["content"] = _dyn_block_text + _orig_user_content
-                    elif isinstance(_orig_user_content, list):
-                        _slim_messages[_cur_user_idx]["content"] = (
-                            [{"type": "text", "text": _dyn_block_text}] + list(_orig_user_content)
-                        )
-                    else:
-                        _slim_messages[_cur_user_idx]["content"] = _dyn_block_text + str(_orig_user_content or "")
-                    # 重写 _slim_messages: 头到 current user + 已 keep 的非 sys (即 assistant prefill)
-                    _slim_messages[:] = _slim_messages[:_cur_user_idx + 1] + _kept_after_user
-        except Exception as _sweep_exc:  # noqa: BLE001
-            logger.debug(f"spark dynamic sys sweep failed (non-fatal): {_sweep_exc}")
+        # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 原生 role=system 模式, 不再 sweep 到 user content.
+        # 旧 sweep 是 Anthropic system 字段独立这一特性的 workaround. DeepSeek 用 OpenAI compat,
+        # role=system 在 messages 数组任何位置直接发送, 不需要 sweep. 主人原话: 「[DYNAMIC_CONTEXT]
+        # 是当时做 claude 兼容用的，openai 可以忽视了」.
+        # 结构: [前 N 个 system static] + [history slim] + [user current (纯净)] + [system dynamic ...] + [assistant prefill]
+        # → user 之前的 prefix 100% 静态 → cache 命中前 N system + history. 动态 system 放 user 之后只影响 last chunk.
         _slim_messages.append({"role": "assistant", "content": _prefill})
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
@@ -7982,14 +7917,23 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
     )
     pool_pick: str | None = None
 
-    # L0 Composer: 主人戳猫 优先走 mood-aware 拼装层 (poke_owner.json 78K+ 组合)
+    # L0 Composer 三档分流:
+    #   owner → poke_owner.json (78K)
+    #   熟人 lv>=6 → poke_friend.json (105K)
+    #   陌生人 lv<6 → 暂走 yaml pool (poke_stranger 下轮加)
     if is_poke_owner:
+        _poke_comp_name = "poke_owner"
+    elif int(poke_level) >= 6:
+        _poke_comp_name = "poke_friend"
+    else:
+        _poke_comp_name = None
+    if _poke_comp_name:
         try:
             from .cpu_engine.composer import get_composer as _ce_get_composer
             _poke_frag_dir = Path(getattr(
                 config, "catty_cpu_engine_routes_dir", "src/catty_qq_ai/data/cpu_engine/routes",
             )).parent / "fragments"
-            _poke_comp = _ce_get_composer(_poke_frag_dir, "poke_owner")
+            _poke_comp = _ce_get_composer(_poke_frag_dir, _poke_comp_name)
             if _poke_comp.bodies:
                 pool_pick = _poke_comp.compose(
                     user_id=str(event.user_id),
@@ -7998,7 +7942,7 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
                     cat_suffixes=list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []),
                 )
         except Exception as _ce_poke_exc:  # noqa: BLE001
-            logger.debug(f"[composer.poke_owner] fail: {_ce_poke_exc}")
+            logger.debug(f"[composer.{_poke_comp_name}] fail: {_ce_poke_exc}")
 
     if pool_pick:
         state["catty_poke_reply"] = pool_pick
