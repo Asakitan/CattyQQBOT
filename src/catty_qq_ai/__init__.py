@@ -9314,8 +9314,22 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         async def _tool_executor(name: str, args_json: str) -> dict[str, object]:
             return await execute_tool_call(name, args_json, tool_ctx)
 
+        # 主人 2026-05-28 C15-7: NLU intent gate — user msg 含画图/搜/记等关键词才发对应 tool
+        # 不命中 tools=[], 省 ~21K bytes input. 命中时 AI 看完整 description 决策.
+        _user_text_for_intent = ""
+        try:
+            _user_text_for_intent = str(event.get_plaintext() or "").strip()
+        except Exception:  # noqa: BLE001
+            try:
+                _user_text_for_intent = str(getattr(event, "raw_message", "") or "").strip()
+            except Exception:  # noqa: BLE001
+                pass
+        _has_image_for_intent = bool(getattr(incoming, "has_image", False))
         tools_for_main_reply = available_tool_schemas(
-            config, is_private=isinstance(event, PrivateMessageEvent)
+            config,
+            is_private=isinstance(event, PrivateMessageEvent),
+            user_text=_user_text_for_intent,
+            has_image=_has_image_for_intent,
         )
         nsfw_image_segments: list[MessageSegment] = []
         # 慢请求 placeholder:超过 catty_slow_reply_placeholder_seconds 没回就先发个轻量占位,

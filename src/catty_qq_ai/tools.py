@@ -3234,31 +3234,113 @@ _EXECUTORS: dict[str, ToolExecutor] = {
 _TOOL_SCHEMAS_CACHE: dict[tuple, list[dict[str, Any]]] = {}
 
 
-def available_tool_schemas(config: Config, *, is_private: bool) -> list[dict[str, Any]]:
-    """按场景挑出本次主回复应该挂的 tool schemas (module-level singleton cache).
+# 主人 2026-05-28 C15-7: NLU intent → 只发命中意图相关的 tools, 不命中 tools=[]
+# 关键词列表覆盖每个 tool 的常见触发词. 命中 1+ tool 时发对应 tool schema 给 AI,
+# AI 看完整 description 决策. 不命中 → tools=[], 省 20K+ bytes input.
+_INTENT_KEYWORDS: dict[str, tuple[str, ...]] = {
+    "catty_imagegen": (
+        "画", "画一张", "画一个", "画个", "画图", "画张", "出张", "出一张",
+        "给我画", "帮我画", "生成图", "生图", "imagegen", "imggen", "img",
+        "海报", "立绘", "插画", "壁纸", "二次元", "猫娘画",
+    ),
+    "catty_nai_director": (
+        "抠图", "去背景", "transparent", "线稿", "lineart", "sketch", "草图",
+        "上色", "colorize", "情绪", "emotion", "去杂物", "declutter",
+        "变形", "transform", "director", "加工", "修一下",
+    ),
+    "catty_image_search": (
+        "搜图", "反搜", "反向搜", "找原图", "找作者", "谁画的", "出处",
+        "什么番", "哪个动画", "saucenao", "yandex", "tracemoe", "推主",
+        "X 账号", "Twitter", "查作者", "查画师",
+    ),
+    "catty_web_search": (
+        "搜", "搜一下", "查", "查一下", "百度", "谷歌", "google", "bing",
+        "新闻", "最近怎样", "事件", "热搜", "联网", "上网搜",
+    ),
+    "catty_nsfw_search": ("pixiv", "p 站", "色图", "本子", "找一张涩"),
+    "catty_meme_query": (
+        "梗图", "表情", "表情包", "斗图", "搜个梗", "meme",
+    ),
+    "catty_meme_explain": (
+        "这是什么梗", "啥梗", "什么意思", "解释一下", "百科", "梗百科",
+    ),
+    "catty_game_recall": ("游戏记忆", "我之前玩", "我在玩什么", "之前那个游戏"),
+    "catty_game_remember": ("记一下我在玩", "记我玩", "记游戏"),
+    "catty_hot_trends": ("热搜", "热点", "trending", "现在火什么", "今日热搜"),
+    "catty_now": ("现在几点", "几号", "今天日期", "时间", "周几"),
+    "catty_remember": ("帮我记", "记一下", "记下来", "存一下", "笔记", "remember"),
+    "catty_recall_notes": ("查笔记", "之前记的", "笔记里", "recall notes"),
+    "catty_recall": ("上次", "之前", "记得", "那次", "刚才"),
+    "catty_user_profile": ("他是谁", "她是谁", "什么人", "什么样的人", "user profile"),
+    "catty_social_account": ("Steam", "B 站", "bilibili", "youtube", "github", "推特"),
+    "catty_group_game_tag": ("这群玩什么", "群在玩", "group game"),
+    "catty_mc_status": ("MC", "minecraft", "我的世界", "服务器", "mc 在线"),
+    "catty_story_arc_set": ("开 arc", "记一个故事", "story arc", "开始一条"),
+    "catty_story_arc_clear": ("结束 arc", "清掉故事", "arc clear"),
+}
 
-    主人选择的是'始终挂载',所以默认返回全部三个;但允许通过 config 在私聊里
-    剔除特定 tool(默认私聊不挂 catty_user_profile,私聊只有一个人没必要查别人画像)。
 
-    主人 2026-05-28: 同一 (enabled, is_private, excluded_set) cache 同一 list 对象,
-    避免每轮重新构造让 tools schemas 字节飘移破 cache. ALL_TOOL_SCHEMAS 本身是 module-level
-    常量, 这里只 cache 过滤后的 list 复用.
+def _detect_tool_intent(user_text: str, has_image: bool) -> set[str]:
+    """NLU 简易关键词匹配 — 命中返回相关 tool name set, 不命中返回空 set.
+
+    image_search / nai_director 需要 has_image=True (没图不调).
+    """
+    if not user_text:
+        return set()
+    text_lower = user_text.lower()
+    hit: set[str] = set()
+    for tool_name, keywords in _INTENT_KEYWORDS.items():
+        for kw in keywords:
+            if kw.lower() in text_lower:
+                hit.add(tool_name)
+                break
+    # 没有图时去掉 image_search / nai_director
+    if not has_image:
+        hit.discard("catty_image_search")
+        hit.discard("catty_nai_director")
+    return hit
+
+
+def available_tool_schemas(
+    config: Config,
+    *,
+    is_private: bool,
+    user_text: str = "",
+    has_image: bool = False,
+) -> list[dict[str, Any]]:
+    """按 NLU intent 挑 tool schemas — 命中关键词才发对应 tool, 不命中 tools=[].
+
+    主人 2026-05-28 C15-7: 之前每次发全 19 tools (~21K bytes) 浪费 input. 现 NLU gate:
+    user msg 含画图/搜/记等意图关键词才发对应 tool, AI 看完整 description 决策.
+    大部分闲聊 tools=[], 省 20K+ bytes input.
+    保留所有 tool 功能 (description 完整不砍), 只控制何时发.
+
+    Args:
+        config: catty config
+        is_private: True=私聊 (按 catty_tools_disabled_in_private 进一步过滤)
+        user_text: 当前 user msg 文本, 用于 NLU intent 检测
+        has_image: 当前 user msg 是否含图片 (image_search / nai_director 需要)
     """
     enabled = bool(getattr(config, "catty_tools_enabled", True))
     if not enabled:
         return []
+
+    # NLU intent 检测
+    intent_hits = _detect_tool_intent(user_text, has_image)
+    if not intent_hits:
+        return []
+
     excluded_list: list[str] = []
     if is_private:
         for name in getattr(config, "catty_tools_disabled_in_private", []) or []:
             excluded_list.append(str(name).strip())
-    excluded_key = tuple(sorted(set(excluded_list)))
-    cache_key = (enabled, is_private, excluded_key)
-    cached = _TOOL_SCHEMAS_CACHE.get(cache_key)
-    if cached is not None:
-        return cached
-    excluded_set = set(excluded_key)
-    result = [schema for name, schema in ALL_TOOL_SCHEMAS.items() if name not in excluded_set]
-    _TOOL_SCHEMAS_CACHE[cache_key] = result
+    excluded_set = set(excluded_list)
+
+    # 按命中意图选 tools, exclude 私聊禁用的
+    result = [
+        schema for name, schema in ALL_TOOL_SCHEMAS.items()
+        if name in intent_hits and name not in excluded_set
+    ]
     return result
 
 
