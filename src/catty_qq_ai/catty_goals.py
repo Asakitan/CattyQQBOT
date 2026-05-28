@@ -842,14 +842,8 @@ def build_catty_goals_prompt(
     )
     if not goals:
         return ""
-    lines = ["【笨猫·今日小心思 (daily_goals)】"]
-    for g in goals:
-        lines.append(f"- {g}")
-    lines.append(
-        "↑ 这是你今天的内在动机, 会驱动你主动找机会暴露 / 实施 / 暗示, 但**不能直接报告给用户**"
-        "(不要说『人家今天想撒娇 3 次喵』这种)。要像有自己想法的人一样, 在话题合适时自然带出来。"
-    )
-    return "\n".join(lines)
+    # 主人 2026-05-28 C16-10: 多行 → 单行紧凑.
+    return "【今日小心思】" + " | ".join(goals) + " (内在动机自然带出, 不报告.)"
 
 
 __all__ = [

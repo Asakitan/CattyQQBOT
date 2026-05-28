@@ -94,24 +94,13 @@ def build_arc_pusher_prompt(
     title = getattr(arc, "title", "") or "未命名 arc"
     context = (getattr(arc, "context", "") or "")[:120]
 
+    # 主人 2026-05-28 C16-10: arc pusher 浓缩单行.
     if action == "push":
-        return (
-            f"【笨猫·arc 主动推进 (push)】\n"
-            f"当前 user msg 跟 active arc 【{title}】关联度高 — "
-            f"**这一轮推进 arc 进度**, 不是只 callback 提一下. "
-            f"在回复里加新细节/进展/转折, 让 arc 往前走一步. "
-            f"arc 背景: {context}"
-        )
+        return f"【arc push】《{title}》关联高 → 推进 arc (加细节/进展/转折), 不只 callback. 背景:{context[:60]}"
     elif action == "callback":
         now_ts = now or time.time()
         age_min = int((now_ts - getattr(arc, "created_at", now_ts)) / 60)
-        return (
-            f"【笨猫·arc 主动 callback】\n"
-            f"老 arc 【{title}】({age_min} 分钟前的) 一直没人推 — "
-            f"**可以在合适时机自然回头一句**(『...对了, 之前那个 X 后来呢喵?』式), "
-            f"**不要硬塞**, 当前话题完全不相关时也可以下一轮再提. "
-            f"arc 背景: {context}"
-        )
+        return f"【arc callback】老 arc《{title}》 ({age_min}min) → 合适时回头一句, 不硬塞. 背景:{context[:60]}"
     return ""
 
 

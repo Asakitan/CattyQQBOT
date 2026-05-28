@@ -2683,30 +2683,20 @@ def build_daily_life_prompt(
     now: datetime | None = None,
     recent_text: str | None = None,
 ) -> str:
-    """返回可直接 push 进 messages 的 system prompt 字符串。
-
-    格式:简短结构化,让主 AI 自然带出但别每条都列。
-    传入 recent_text 会让状态优先跟当前话题对齐。
-    """
+    """主人 2026-05-28 C16-10: 多行 → 单行紧凑 (~500c→~200c). 内容保留, 让 AI 自然带出."""
     s = build_daily_life_state(scope, now=now, recent_text=recent_text)
-    lines = [
-        "【今日笨猫·生活感锚定】",
-        f"- 当前在做: {s['activity']}",
-        f"- 刚才发生的小事: {s['recent_event']}",
-        f"- 今天心情底色: {s['mood_label']} — {s['mood_tone']}",
+    parts = [
+        f"做{s['activity']}",
+        f"刚{s['recent_event']}",
+        f"心情:{s['mood_label']}({s['mood_tone']})",
     ]
     if s["season_flavor"]:
-        lines.append(f"- 季节小调味: {s['season_flavor']}(只当背景氛围,不要硬报季节)")
+        parts.append(f"季{s['season_flavor']}")
     if s["weather_flavor"]:
-        lines.append(f"- 天气/话题调味: {s['weather_flavor']}")
+        parts.append(f"气{s['weather_flavor']}")
     if s["wish"]:
-        lines.append(f"- 心里偷偷想着: {s['wish']}(不要直接说出来,可以在合适时机暴露一点点)")
-    lines.append(
-        "↑ 这是你今天真实的生活状态,聊天时可以自然带出来(『今天...』『刚才...』『我现在...』),"
-        "但**不要每条都报告**,只在话题合适、有人问起、或需要给一句生活感时轻轻露一点。"
-        "不要把这段当 todo 复述,要像猫猫一样自然流露。"
-    )
-    return "\n".join(lines)
+        parts.append(f"愿{s['wish']}")
+    return "【今日生活感】" + " | ".join(parts) + " (合适时自然带, 不每条报告.)"
 
 
 # ── 工具:供测试/调试用 ────────────────────────────────────────────

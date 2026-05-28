@@ -356,7 +356,7 @@ class Config(BaseModel):
     catty_memory_path: str = "memory.json"
     catty_memory_group_storage_dir: str = ""
     catty_memory_user_storage_dir: str = ""
-    catty_memory_max_known_members: int = 20
+    catty_memory_max_known_members: int = 5  # 主人 2026-05-28 C16-10: 20→5 砍 user content
     catty_memory_special_group_ids: set[int] = Field(default_factory=set)
     catty_special_care_user_ids: set[int] = Field(default_factory=set)
     catty_group_special_care_user_ids: dict[str, set[int]] = Field(default_factory=dict)
