@@ -5267,7 +5267,7 @@ async def _build_messages(
         # 笨猫每 1-2 轮就换场景从头开始. 扩到 24 条后 msgs=25 触发 hugou.cc 上游
         # ConnectTimeout (20:35-20:44 logs 全 timeout) — total prompt 撑到 16000+ tokens
         # 上游 5.3-codex-spark 处理不动. 砍回 20 条 (~10 轮) 平衡场景延续 + 上游稳定.
-        _NSFW_SLIM_HISTORY_MAX = 20  # ~10 轮 (50 过大导致 ConnectTimeout, 砍回 20)
+        _NSFW_SLIM_HISTORY_MAX = 10  # ~5 轮 (主人 2026-05-28 C14: 20→10, 主人原话"8-12 条刚好, 不要 40-50")
         _slim_persona = _build_nsfw_slim_persona_bundle()
         # 【cache 友好结构】把大块 _override (~3000 chars, 对主人静态) 移到 persona 后, 让
         # [persona + override] (~5000 chars / ~2500 tokens) 成为稳定 prefix 每轮 cache hit.
