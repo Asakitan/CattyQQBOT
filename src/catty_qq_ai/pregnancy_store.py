@@ -141,6 +141,19 @@ class PregnancyStore:
             self._dirty = False
             return True
 
+    async def background_flush_loop(self) -> None:
+        """30s 间隔 dirty → flush. 跟 affection_store / user_details_store 同款."""
+        import asyncio
+        while True:
+            try:
+                await asyncio.sleep(30.0)
+                if self._dirty:
+                    self.flush_sync()
+            except asyncio.CancelledError:
+                break
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"pregnancy_store: bg flush failed: {exc}")
+
     # ── 主 API ──────────────────────────────────────────────────────
     def get_state(self, user_id: str) -> PregnancyState:
         """返回 user 状态副本 (不存在时返回新空 state)."""
