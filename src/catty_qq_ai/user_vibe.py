@@ -406,6 +406,23 @@ class UserVibeStore:
                 "last_seen_at": rec["last_seen_at"],
             }
 
+    def get_summary_sync(self, user_id: str) -> str:
+        """CPU 引擎 (cpu_engine.script_ctx) 用的轻量摘要 sync 接口.
+
+        返回单行字符串 (vibe_tag + 置信度 + top topics), 失败返回 "".
+        主人 2026-05-28 plan-cpu-alicebot-nlu-ai S2.3.
+        """
+        profile = self.profile_for(user_id)
+        vibe = profile.get("vibe_tag")
+        if not vibe:
+            return ""
+        confidence = int(profile.get("confidence", 0) or 0)
+        topics = profile.get("topic_tags") or []
+        parts = [str(vibe), f"{confidence}%"]
+        if topics:
+            parts.append("|".join(str(t) for t in topics[:3]))
+        return " ".join(parts)
+
 
 # ── prompt 注入 helper ──────────────────────────────────────────────
 _VIBE_HINTS_ZH: dict[str, str] = {

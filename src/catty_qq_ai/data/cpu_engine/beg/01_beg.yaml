@@ -1,0 +1,91 @@
+# L0_beg 撒娇求充值模板池 (S3.3).
+# 主人 2026-05-28 plan-cpu-alicebot-nlu-ai:
+# 当用户进入强互动场景但积分不够 (< deepseek_base_cost) 时触发.
+# 不试图回答问题, 用米雪儿语气拒绝/撒娇/求充值, 比给一个失人格回复更可爱.
+#
+# 选桶条件: balance ∈ [balance_min, balance_max], affection_level ∈ [affection_min, affection_max]
+# 同时满足多桶时按 weight 随机加权选.
+#
+# 模板支持的变量 (由 cpu_engine/script_ctx 渲染):
+#   {user_nickname}      "主人"/"杂鱼"/具体昵称
+#   {balance}            当前积分
+#   {affection_title}    "陌生人"/"朋友"/"恋人"
+#   {cat_suffix}         随机猫系后缀
+#   {time_of_day}        "morning"/"evening"/"night"
+
+# ── 0 积分桶 ─────────────────────────────────────────────────────
+- name: beg_zero_low_aff
+  balance_min: 0
+  balance_max: 0
+  affection_min: 0
+  affection_max: 2
+  weight: 1.0
+  templates:
+    - "哼! 才不给{user_nickname}回呢～{cat_suffix} 攒够 3 积分人家再认真陪你聊! (转身)"
+    - "(尾巴一甩) 没积分还想撩猫猫? 想得美! 先签个到吧{cat_suffix}"
+    - "{user_nickname}这就想白嫖? 哼, 猫猫可不是免费的喵～攒积分再说啦!"
+
+- name: beg_zero_mid_aff
+  balance_min: 0
+  balance_max: 0
+  affection_min: 3
+  affection_max: 9
+  weight: 1.0
+  templates:
+    - "(嘟嘴) {user_nickname}的积分用光啦~人家也想认真回的{cat_suffix} 签个到再来嘛"
+    - "嗷呜～没积分了喵～{user_nickname}先签到攒点, 猫猫等着哦贴贴"
+    - "(尾巴垂下) 0 积分了人家没力气想长回复啦{cat_suffix} 明天再战嘛"
+
+- name: beg_zero_high_aff
+  balance_min: 0
+  balance_max: 0
+  affection_min: 10
+  affection_max: 99
+  weight: 1.0
+  templates:
+    - "(尾巴垂下) ...{user_nickname}...人家好累喵...积分被吃光啦...(蹭蹭) 明天再来嘛...求求啦嗷呜～"
+    - "({affection_title}{user_nickname}凑过来) 积分没了喵...人家好想认真陪你聊...先签个到嘛贴贴 {cat_suffix}"
+    - "嗷呜～{user_nickname}积分空了啦~(可怜兮兮) 人家不是不想理你, 签到来啦贴贴"
+
+# ── 1-2 积分桶 (差一点点) ───────────────────────────────────────
+- name: beg_low_low_aff
+  balance_min: 1
+  balance_max: 2
+  affection_min: 0
+  affection_max: 2
+  weight: 1.0
+  templates:
+    - "(撇嘴) 才 {balance} 积分? {user_nickname}也太抠了吧! 再攒攒喵～"
+    - "差 1-2 积分就够啦! {user_nickname}签个到不就行了哼{cat_suffix}"
+
+- name: beg_low_mid_aff
+  balance_min: 1
+  balance_max: 2
+  affection_min: 3
+  affection_max: 9
+  weight: 1.0
+  templates:
+    - "(脸红) 还差一点点积分啦{user_nickname}~签个到就够了喵{cat_suffix}"
+    - "嗷呜～{balance} 积分不够正经回复呢{cat_suffix} 主人快签到!"
+
+- name: beg_low_high_aff
+  balance_min: 1
+  balance_max: 2
+  affection_min: 10
+  affection_max: 99
+  weight: 1.0
+  templates:
+    - "(脸红) 想、想要人家正经回答的话...就给人家攒满 3 积分嘛{cat_suffix} 才不是因为想撒娇才说的呢"
+    - "嗷呜～{affection_title}, 就差 {balance} 一点啦~签到一下就够喵贴贴"
+    - "(凑过来) 主人...才差一点点呢...签个到嘛...人家好想认真陪你聊嗷呜～"
+
+# ── 终极兜底 (上面都不匹配时, 任意 balance/affection) ────────────
+- name: beg_fallback
+  balance_min: 0
+  balance_max: 99999
+  affection_min: 0
+  affection_max: 99
+  weight: 0.1
+  templates:
+    - "(歪头) {user_nickname}积分不够喵~签到攒攒再聊吧{cat_suffix}"
+    - "嗷呜～没积分了猫猫聊不动啦~先签到嘛{cat_suffix}"

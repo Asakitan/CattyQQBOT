@@ -6182,6 +6182,41 @@ async def _local_critic_warmup_loop() -> None:
         await asyncio.sleep(interval)
 
 
+async def _cpu_engine_warmup_loop() -> None:
+    """启动时异步初始化 CPU 引擎 (加载 routes + 预算 embeddings).
+
+    enabled=False 时直接退出 loop, 不占资源.
+    异常仅 warn, 业务侧已有 enabled/ready 保护透传到现链路.
+    """
+    if not _CPU_ENGINE_IMPORT_OK or _cpu_engine_get_router is None:
+        return
+    if not getattr(config, "catty_cpu_engine_enabled", False):
+        logger.info("[cpu_engine] catty_cpu_engine_enabled=False, skip warmup")
+        return
+    try:
+        await asyncio.to_thread(_cpu_engine_get_router, config)
+        logger.info("[cpu_engine] startup warmup done")
+    except Exception as exc:  # noqa: BLE001
+        logger.exception(f"[cpu_engine] startup warmup failed: {exc}")
+
+
+async def _cpu_engine_evolution_daily_loop() -> None:
+    """S4.6 每日 DeepSeek 评审进化 loop. enabled=False 时纯睡眠."""
+    if not _CPU_ENGINE_IMPORT_OK:
+        return
+    try:
+        from .cpu_engine.evolution_pipeline import daily_evolution_loop
+    except ImportError as exc:
+        logger.warning(f"[cpu_engine.evolution] import failed: {exc}")
+        return
+    try:
+        await daily_evolution_loop(config, repo_root=".")
+    except asyncio.CancelledError:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        logger.exception(f"[cpu_engine.evolution] loop crashed: {exc}")
+
+
 def _local_critic_event_payload(
     event: MessageEvent,
     incoming: ExtractedMessage,
@@ -7419,6 +7454,176 @@ async def _expression_repeat_rule(bot: Bot, event: MessageEvent, state: T_State)
     return True
 
 
+# ── CPU 主回复引擎 (BotLibre 风格: Semantic Router + txtai) ────────────
+# 主人 2026-05-28 plan-cpu-alicebot-nlu-ai:
+# priority=37 (legs_picture=35 之后, keyword_reply=40 之前). enabled=False
+# 时直接 return False, 现 keyword_reply / handle_chat 链路不受影响.
+try:
+    from .cpu_engine.router import get_router as _cpu_engine_get_router, CPURouteResult as _CPURouteResult
+    _CPU_ENGINE_IMPORT_OK = True
+except Exception as _cpu_engine_import_exc:  # noqa: BLE001
+    logger.warning(f"[cpu_engine] module import failed: {_cpu_engine_import_exc}, engine disabled")
+    _cpu_engine_get_router = None  # type: ignore[assignment]
+    _CPURouteResult = None  # type: ignore[assignment]
+    _CPU_ENGINE_IMPORT_OK = False
+
+
+async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    if not _CPU_ENGINE_IMPORT_OK or _cpu_engine_get_router is None:
+        return False
+    if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    try:
+        router = _cpu_engine_get_router(config)
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"[cpu_engine] get_router failed: {exc}")
+        return False
+    if not router.enabled or not router.ready:
+        return False
+    text = event_plain_text(event)
+    if not text:
+        return False
+    scope = _conversation_queue_key(event)
+    is_owner = _event_is_owner(event)
+
+    user_id = str(event.user_id)
+    if is_owner:
+        user_nickname = "主人"
+    else:
+        user_nickname = (
+            getattr(event.sender, "card", None)
+            or getattr(event.sender, "nickname", None)
+            or "杂鱼"
+        )
+    group_id = str(event.group_id) if isinstance(event, GroupMessageEvent) else ""
+
+    # S3.9: 顺手触发被动恢复 (距上次 >=1h 才加分, 没影响热路径性能)
+    try:
+        from .cpu_engine.credit_helper import passive_recover_step as _ce_passive
+        _ce_passive(affection_store, config, user_id)
+    except Exception:  # noqa: BLE001
+        pass
+
+    def _build_cpu_ctx(intent: str):
+        from .cpu_engine.script_ctx import build_script_ctx
+        return build_script_ctx(
+            user_id=user_id,
+            user_nickname=str(user_nickname),
+            scope_type="group" if isinstance(event, GroupMessageEvent) else "private",
+            intent=intent,
+            affection_get_fn=affection_store.get_level_and_exp,
+            user_vibe_get_fn=user_vibe_store.get_summary_sync,
+            group_id=group_id,
+        )
+
+    try:
+        candidate = router.route_sync(text, scope, is_owner=is_owner, ctx_builder=_build_cpu_ctx)
+    except Exception as exc:  # noqa: BLE001
+        logger.exception(f"[cpu_engine] route_sync raised: {exc}")
+        return False
+
+    # S3: 强互动判定 + 积分门控 + L0_beg
+    try:
+        from .nsfw_phase import get_phase_state as _ce_get_phase_state
+        from .cpu_engine.strong_interaction import is_strong_interaction
+        from .cpu_engine import credit_helper as _ce_credit
+        from .cpu_engine.script_ctx import render as _ce_render
+        from .cpu_engine.router import CPURouteResult as _CE_Result
+    except ImportError as exc:
+        logger.warning(f"[cpu_engine] S3 import failed: {exc}, fallback to S1+S2 behavior")
+        if candidate is None or candidate.is_low_confidence:
+            return False
+        state["catty_cpu_engine_result"] = candidate
+        return True
+
+    try:
+        phase_state = _ce_get_phase_state(scope, user_id)
+        nsfw_phase_int = int(getattr(phase_state, "current_phase", 1))
+    except Exception:  # noqa: BLE001
+        nsfw_phase_int = 1
+
+    cpu_confidence = float(candidate.confidence) if candidate is not None else 0.0
+    cpu_intent = candidate.intent if candidate is not None else ""
+    strong = is_strong_interaction(
+        text=text,
+        intent=cpu_intent,
+        cpu_confidence=cpu_confidence,
+        nsfw_phase=nsfw_phase_int,
+        config=config,
+    )
+
+    if (not strong.is_strong) and candidate is not None and not candidate.is_low_confidence:
+        state["catty_cpu_engine_result"] = candidate
+        return True
+
+    if (not strong.is_strong) and candidate is not None and candidate.is_low_confidence:
+        try:
+            styled = await router.stylize_l4(candidate, text, scope, ctx_builder=_build_cpu_ctx)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"[cpu_engine.L4] stylize_l4 raised: {exc}")
+            styled = None
+        if styled is not None:
+            state["catty_cpu_engine_result"] = styled
+            return True
+        # L4 失败 → 当作低信心强互动处理 (fall through)
+
+    if not getattr(config, "catty_credit_enabled", False):
+        logger.info(
+            f"[cpu_engine] strong={strong.reason or 'low_conf_l4_failed'} "
+            f"credit_disabled, transparently pass to L5"
+        )
+        return False
+
+    if _ce_credit.can_afford_base(affection_store, config, user_id):
+        ok, base_charged, balance_after = _ce_credit.charge_base(
+            affection_store, config, user_id, scope=scope
+        )
+        if ok:
+            state["catty_credit_base_charged"] = base_charged
+            state["catty_credit_strong_reason"] = strong.reason
+            logger.info(
+                f"[cpu_engine] STRONG_INTERACTION uid={user_id} reason={strong.reason} "
+                f"base={base_charged} balance_after={balance_after} -> L5"
+            )
+            return False
+
+    beg_pool = router.beg_pool
+    if beg_pool is None or beg_pool.size == 0:
+        logger.warning(
+            f"[cpu_engine] insufficient credit uid={user_id} but beg_pool empty, "
+            f"pass to L5 (will fail consumption there)"
+        )
+        return False
+
+    try:
+        balance = _ce_credit.get_balance(affection_store, user_id)
+        affection_level, _ = affection_store.get_level_and_exp(user_id)
+        template = beg_pool.pick(balance=balance, affection_level=int(affection_level))
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"[cpu_engine.L0_beg] pick failed: {exc}")
+        template = None
+    if not template:
+        return False
+
+    ctx = _build_cpu_ctx("beg_for_credit")
+    rendered = _ce_render(template, ctx, list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []))
+    state["catty_cpu_engine_result"] = _CE_Result(
+        reply=rendered,
+        confidence=1.0,
+        layer="L0_beg",
+        route_name="beg_pool",
+        intent="beg_for_credit",
+        matched_text=strong.reason,
+        is_low_confidence=False,
+        latency_ms=candidate.latency_ms if candidate else 0.0,
+    )
+    logger.info(
+        f"[cpu_engine.L0_beg] uid={user_id} balance={balance} aff={affection_level} "
+        f"strong={strong.reason} emit beg template"
+    )
+    return True
+
+
 async def _keyword_reply_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
         return False
@@ -7461,6 +7666,28 @@ _LORE_CMD_RE = re.compile(
     r"^\s*/?(lore_show|lore_remove|lore_summarize)(?:\s+(\S+))?\s*$",
     re.IGNORECASE,
 )
+
+# S4.6 主人手动控制 evolution:
+#   #evolve / /evolve              — 立即跑一次 (跳过 rollback 检查)
+#   #rollback_evolution N          — 回滚最近 N 天 (默认 1)
+_EVOLUTION_CMD_RE = re.compile(
+    r"^\s*[#/]?(evolve|rollback_evolution)(?:\s+(\d+))?\s*$",
+    re.IGNORECASE,
+)
+
+
+async def _evolution_cmd_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
+    if str(event.user_id) == str(bot.self_id) or not _event_is_owner(event):
+        return False
+    text = event_plain_text(event)
+    if not text:
+        return False
+    m = _EVOLUTION_CMD_RE.match(text)
+    if not m:
+        return False
+    state["evolution_cmd"] = m.group(1).lower()
+    state["evolution_arg"] = m.group(2) or ""
+    return True
 
 
 async def _vibe_command_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
@@ -7598,6 +7825,7 @@ async def _legs_picture_rule(bot: Bot, event: MessageEvent, state: T_State) -> b
     return True
 
 
+cpu_engine_matcher = on_message(rule=_cpu_engine_rule, priority=37, block=True)
 keyword_reply_matcher = on_message(rule=_keyword_reply_rule, priority=40, block=True)
 emoji_save_matcher = on_message(rule=_emoji_save_rule, priority=41, block=True)
 affection_command_matcher = on_message(rule=_affection_command_rule, priority=42, block=True)
@@ -7605,6 +7833,7 @@ vibe_command_matcher = on_message(rule=_vibe_command_rule, priority=43, block=Tr
 aff_admin_matcher = on_message(rule=_aff_admin_rule, priority=44, block=True)
 catty_status_matcher = on_message(rule=_catty_status_rule, priority=45, block=True)
 lore_cmd_matcher = on_message(rule=_lore_cmd_rule, priority=46, block=True)
+evolution_cmd_matcher = on_message(rule=_evolution_cmd_rule, priority=47, block=True)
 legs_picture_matcher = on_message(rule=_legs_picture_rule, priority=35, block=True)
 chat_matcher = on_message(rule=_rule, priority=60, block=True)
 expression_repeat_matcher = on_message(rule=_expression_repeat_rule, priority=50, block=True)
@@ -7738,6 +7967,46 @@ async def _debug_log_any_notice(bot: Bot, event: NoticeEvent) -> None:
         )
     except Exception as exc:
         logger.warning(f"[poke-debug] failed to log notice: {exc}")
+
+
+@cpu_engine_matcher.handle()
+async def handle_cpu_engine(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    result = state.get("catty_cpu_engine_result")
+    if result is None or not getattr(result, "reply", ""):
+        return
+    reply_text = str(result.reply)
+    scope_key = _conversation_queue_key(event)
+    # S4.6: 记录 emit 进 evolution_logger (失败仅 warn)
+    try:
+        from .cpu_engine.evolution_logger import record_emit
+        record_emit(
+            log_dir=getattr(config, "catty_evolution_logs_dir", "src/catty_qq_ai/data/cpu_engine/evolution_logs"),
+            scope=scope_key,
+            user_id=str(event.user_id),
+            layer=result.layer,
+            route_name=result.route_name,
+            intent=getattr(result, "intent", "") or "",
+            confidence=float(result.confidence),
+            reply=reply_text,
+            user_text=event_plain_text(event),
+            matched_text=getattr(result, "matched_text", "") or "",
+        )
+    except Exception:  # noqa: BLE001
+        pass
+    async with _locks[scope_key]:
+        _remember_bot_reply_for_event(event, reply_text)
+        logger.info(
+            f"[cpu_engine] HIT scope={scope_key} layer={result.layer} "
+            f"route={result.route_name} conf={result.confidence:.2f} "
+            f"lat={result.latency_ms:.0f}ms"
+        )
+        await matcher.finish(
+            _compose_reply_message(
+                event,
+                text=reply_text,
+                quote=isinstance(event, GroupMessageEvent),
+            )
+        )
 
 
 @keyword_reply_matcher.handle()
@@ -8111,6 +8380,71 @@ async def handle_catty_status(matcher: Matcher, event: MessageEvent) -> None:
 
 
 @lore_cmd_matcher.handle()
+@evolution_cmd_matcher.handle()
+async def handle_evolution_cmd(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
+    cmd = str(state.get("evolution_cmd", ""))
+    arg = str(state.get("evolution_arg", ""))
+    if cmd == "evolve":
+        try:
+            from .cpu_engine.evolution_pipeline import run_evolution_once
+        except ImportError as exc:
+            await matcher.finish(f"嗷呜～evolution 模块加载失败喵: {exc}")
+            return
+        await matcher.send("嗷呜～开始进化喵～(取最近 24h 群聊样本喂 DeepSeek 评审, 可能要几分钟)")
+        try:
+            summary = await run_evolution_once(
+                config=config,
+                repo_root=".",
+                force_skip_rollback_check=True,
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.exception(f"[evolution] manual evolve failed: {exc}")
+            await matcher.finish(f"进化炸了喵～: {exc}")
+            return
+        status = summary.get("status", "?")
+        apply_summary = summary.get("apply", {}) or {}
+        msg = (
+            f"嗷呜～进化完啦{status}喵～ {summary.get('samples_count', 0)} 样本, "
+            f"均分 {summary.get('judge_mean_score', '-')}, "
+            f"改写 {apply_summary.get('rewrites', 0)} / 退役 {apply_summary.get('retires', 0)} / "
+            f"新规则 {apply_summary.get('new_routes_added', 0)} / "
+            f"加权 {apply_summary.get('keeps_weighted', 0)}, "
+            f"git pre={apply_summary.get('git_pre_ok', False)} post={apply_summary.get('git_post_ok', False)}"
+        )
+        await matcher.finish(msg)
+        return
+    if cmd == "rollback_evolution":
+        try:
+            from .cpu_engine.evolution_rollback import rollback_n_days
+        except ImportError as exc:
+            await matcher.finish(f"嗷呜～rollback 模块加载失败喵: {exc}")
+            return
+        try:
+            days = int(arg or 1)
+        except ValueError:
+            days = 1
+        if days < 1 or days > 30:
+            await matcher.finish("嗷呜～天数要在 1-30 之间啦主人")
+            return
+        routes_dir = Path(getattr(config, "catty_cpu_engine_routes_dir", "")) if hasattr(config, "catty_cpu_engine_routes_dir") else "src/catty_qq_ai/data/cpu_engine/routes"
+        try:
+            ok, summary_msg = await asyncio.to_thread(
+                rollback_n_days,
+                days=days,
+                repo_root=".",
+                routes_dir=str(routes_dir),
+                learned_dir="src/catty_qq_ai/data/cpu_engine/learned",
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.exception(f"[evolution] rollback failed: {exc}")
+            await matcher.finish(f"回滚炸了喵～: {exc}")
+            return
+        prefix = "嗷呜～回滚成功喵～" if ok else "唔...回滚失败啦哼"
+        await matcher.finish(f"{prefix} {summary_msg}")
+        return
+    await matcher.finish("嗷呜～未知 evolution 命令喵")
+
+
 async def handle_lore_cmd(matcher: Matcher, event: MessageEvent, state: T_State) -> None:
     """主人专属 scope lorebook 管理 + 强制触发学习。"""
     if not _event_is_owner(event):
@@ -8930,6 +9264,8 @@ async def start_memory_summary_loop() -> None:
     asyncio.create_task(_summary_loop())
     asyncio.create_task(_proactive_bubble_loop())
     asyncio.create_task(_local_critic_warmup_loop())
+    asyncio.create_task(_cpu_engine_warmup_loop())
+    asyncio.create_task(_cpu_engine_evolution_daily_loop())
     asyncio.create_task(cache.background_flush_loop())
     asyncio.create_task(memory_store.background_flush_loop())
     asyncio.create_task(affection_store.background_flush_loop())
@@ -9847,6 +10183,26 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     router_model=_router_model,
                     router_label=_router_label,
                 )
+                # S3.8: CPU 引擎预扣 base 后透传到这里, 现在按真实 token 结算
+                _credit_base_charged = state.get("catty_credit_base_charged")
+                if _credit_base_charged and int(_credit_base_charged) > 0:
+                    try:
+                        from . import dashboard_state as _ce_dash
+                        from .cpu_engine.credit_helper import settle_after_response
+                        _ce_scope = _conversation_queue_key(event)
+                        _ce_usage = _ce_dash.pop_latest_usage(_ce_scope)
+                        if _ce_usage is not None:
+                            settle_after_response(
+                                affection_store,
+                                config,
+                                str(event.user_id),
+                                prompt_tokens=int(_ce_usage.get("prompt_tokens", 0)),
+                                completion_tokens=int(_ce_usage.get("completion_tokens", 0)),
+                                base_charged=int(_credit_base_charged),
+                                scope=_ce_scope,
+                            )
+                    except Exception as _ce_settle_exc:  # noqa: BLE001
+                        logger.warning(f"[cpu_engine.credit] settle hook failed: {_ce_settle_exc}")
                 # 主人 2026-05-28: 主路径也跑 phase tracker + record_intercourse, 跟 spark 对齐.
                 # 之前 only_spark 路径有这两段 → 主路径 (sonnet) reply 后 NSFW 状态完全不更新,
                 # phase/location/opener/preg_count 全 stale → 笨猫连续 30+ 次内射 pregnancy.json 0 .

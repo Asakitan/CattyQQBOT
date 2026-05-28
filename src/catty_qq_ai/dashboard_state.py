@@ -41,6 +41,16 @@ _ACTIVE_STREAMS: dict[str, StreamState] = {}
 _COMPLETED_STREAMS: deque[StreamState] = deque(maxlen=_MAX_COMPLETED)
 _SSE_SUBSCRIBERS: list[asyncio.Queue] = []
 
+# 主人 2026-05-28 plan-cpu-alicebot-nlu-ai S3.7:
+# per-user 积分 ledger (内存最近 N 条 + SSE 推送). 持久化的余额在 affection.json,
+# 这里只记 charge/settle/passive_recover/signin 事件用于 dashboard 可视化.
+_CREDIT_LEDGER: deque[dict[str, Any]] = deque(maxlen=200)
+_USER_LATEST_CREDIT: dict[str, dict[str, Any]] = {}
+
+# S3.8: 按 scope 暂存最新 usage, 供 handle_chat 调 settle_after_response 用.
+# push_cache_stats 时写, handle_chat 拿到 reply 后读.
+_LATEST_USAGE_BY_SCOPE: dict[str, dict[str, int]] = {}
+
 
 def start_stream(model: str = "") -> str:
     """创建一个新 stream 记录, 返回 stream_id. anthropic_native_client.post_messages_native
@@ -128,6 +138,13 @@ def push_cache_stats(scope: str, usage: dict[str, Any], *, model: str = "") -> N
         cache_create = 0  # DeepSeek 无 cache_create
         input_tokens = ds_miss
         output_tokens = int(usage.get("completion_tokens") or 0)
+        # S3.8: 暂存供 settle_after_response 用
+        if scope:
+            _LATEST_USAGE_BY_SCOPE[scope] = {
+                "prompt_tokens": cache_read + input_tokens,
+                "completion_tokens": output_tokens,
+                "ts": int(time.time()),
+            }
         total_context = cache_read + input_tokens
         hit = (cache_read / total_context) if total_context > 0 else 0.0
         # DeepSeek 计费系数: hit 0.1x, miss 1.0x
@@ -140,6 +157,13 @@ def push_cache_stats(scope: str, usage: dict[str, Any], *, model: str = "") -> N
         input_tokens = int(usage.get("input_tokens") or 0)
         output_tokens = int(usage.get("output_tokens") or 0)
         total_context = cache_read + cache_create + input_tokens
+        # S3.8: 暂存供 settle_after_response 用 (Anthropic native 路径)
+        if scope:
+            _LATEST_USAGE_BY_SCOPE[scope] = {
+                "prompt_tokens": cache_read + cache_create + input_tokens,
+                "completion_tokens": output_tokens,
+                "ts": int(time.time()),
+            }
         hit = (cache_read / total_context) if total_context > 0 else 0.0
         # Anthropic 定价系数 (1h TTL): cache_read 0.1x / cache_create 2.0x / input 1.0x
         billed_input_equiv = int(cache_read * 0.1 + cache_create * 2.0 + input_tokens * 1.0)
@@ -189,6 +213,62 @@ def get_state_snapshot() -> dict[str, Any]:
     }
 
 
+def push_credit_event(
+    user_id: str,
+    kind: str,
+    *,
+    delta: int = 0,
+    balance_after: int = 0,
+    prompt_tokens: int = 0,
+    completion_tokens: int = 0,
+    scope: str = "",
+    reason: str = "",
+) -> None:
+    """记录 + 广播一条积分事件 (S3.7).
+
+    kind: charge_base / settle_extra / settle_refund / passive_recover / signin / grant / punish
+    """
+    payload = {
+        "type": "credit_event",
+        "ts": time.time(),
+        "user_id": str(user_id),
+        "kind": kind,
+        "delta": int(delta),
+        "balance_after": int(balance_after),
+        "prompt_tokens": int(prompt_tokens),
+        "completion_tokens": int(completion_tokens),
+        "scope": scope,
+        "reason": reason,
+    }
+    _CREDIT_LEDGER.append(payload)
+    _USER_LATEST_CREDIT[str(user_id)] = payload
+    _broadcast(payload)
+
+
+def get_credit_snapshot(*, recent: int = 20) -> dict[str, Any]:
+    """dashboard 用: 拿最近 N 条 ledger + 每用户最新余额."""
+    return {
+        "ledger_recent": list(_CREDIT_LEDGER)[-recent:],
+        "user_latest": dict(_USER_LATEST_CREDIT),
+    }
+
+
+def pop_latest_usage(scope: str, *, max_age_seconds: int = 30) -> dict[str, int] | None:
+    """取并删除给定 scope 的最近 usage (S3.8 settle 用).
+
+    超过 max_age_seconds 视为过期, 返回 None (避免误用其他对话的 usage).
+    """
+    entry = _LATEST_USAGE_BY_SCOPE.pop(scope, None)
+    if entry is None:
+        return None
+    if int(time.time()) - int(entry.get("ts", 0)) > max_age_seconds:
+        return None
+    return {
+        "prompt_tokens": int(entry.get("prompt_tokens", 0)),
+        "completion_tokens": int(entry.get("completion_tokens", 0)),
+    }
+
+
 def subscribe() -> asyncio.Queue:
     """SSE 订阅者注册. 返回 Queue, dashboard SSE handler 从中读 + yield."""
     q: asyncio.Queue = asyncio.Queue(maxsize=200)
@@ -219,7 +299,10 @@ __all__ = [
     "push_event",
     "end_stream",
     "push_cache_stats",
+    "push_credit_event",
+    "pop_latest_usage",
     "get_state_snapshot",
+    "get_credit_snapshot",
     "subscribe",
     "unsubscribe",
 ]

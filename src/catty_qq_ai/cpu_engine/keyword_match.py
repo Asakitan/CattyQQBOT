@@ -1,0 +1,224 @@
+"""L1 精确匹配 (升级版 keyword_reply).
+
+特性:
+- pyahocorasick 多关键词同时扫描 (C 速度), 失败 fallback 到 Python substring
+- 支持子串和正则两种 pattern
+- 每 route 独立冷却 (按 scope), 复用现 keyword_reply 思路
+- 命中即 confidence=1.0 (精确匹配最高信心)
+
+数据源: data/cpu_engine/routes/*.yaml (S1.10 生成)
+每个 yaml 文件是一组 routes:
+
+  - name: greet_morning_001
+    keywords: [早安, 早上好, 早]
+    regex: null
+    responses:
+      - "早安主人～(蹭蹭) {cat_suffix}"
+      - "嗷呜～主人早～{cat_suffix}"
+    cooldown_seconds: 30
+    weight: 1.0
+"""
+
+from __future__ import annotations
+
+import random
+import re
+import time
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any
+
+from loguru import logger
+
+try:
+    import ahocorasick  # type: ignore
+
+    _HAS_AHOCORASICK = True
+except ImportError:
+    _HAS_AHOCORASICK = False
+    ahocorasick = None
+
+try:
+    import yaml  # type: ignore
+
+    _HAS_YAML = True
+except ImportError:
+    _HAS_YAML = False
+    yaml = None
+
+
+@dataclass(slots=True)
+class KeywordRoute:
+    name: str
+    keywords: list[str]
+    responses: list[str]
+    intent: str = "default"
+    regex: re.Pattern[str] | None = None
+    cooldown_seconds: float = 0.0
+    weight: float = 1.0
+
+
+@dataclass(slots=True)
+class KeywordMatchResult:
+    route_name: str
+    response: str
+    confidence: float = 1.0
+    matched_keyword: str = ""
+    intent: str = "default"
+
+
+class KeywordMatcher:
+    """L1 精确匹配引擎.
+
+    线程不安全 - 调用方 (cpu_engine 在 nonebot 事件循环里单线程) 自管.
+    """
+
+    def __init__(self, routes: list[KeywordRoute]) -> None:
+        self._routes: dict[str, KeywordRoute] = {r.name: r for r in routes}
+        self._automaton = self._build_automaton(routes) if _HAS_AHOCORASICK else None
+        self._last_hit_at: dict[tuple[str, str], float] = {}  # (route_name, scope) -> ts
+        logger.info(
+            f"[cpu_engine.L1] loaded {len(routes)} routes, "
+            f"aho-corasick={_HAS_AHOCORASICK}, total_keywords="
+            f"{sum(len(r.keywords) for r in routes)}"
+        )
+
+    @staticmethod
+    def _build_automaton(routes: list[KeywordRoute]) -> Any:
+        a = ahocorasick.Automaton()
+        for route in routes:
+            for kw in route.keywords:
+                kw_low = kw.lower()
+                if not kw_low:
+                    continue
+                a.add_word(kw_low, (route.name, kw))
+        a.make_automaton()
+        return a
+
+    def match(self, text: str, scope: str) -> KeywordMatchResult | None:
+        if not text or not self._routes:
+            return None
+        text_low = text.lower()
+        now = time.monotonic()
+
+        candidates: list[tuple[KeywordRoute, str]] = []
+
+        if self._automaton is not None:
+            seen: set[str] = set()
+            for _end, (route_name, matched_kw) in self._automaton.iter(text_low):
+                if route_name in seen:
+                    continue
+                seen.add(route_name)
+                route = self._routes.get(route_name)
+                if route is None:
+                    continue
+                if self._on_cooldown(route, scope, now):
+                    continue
+                candidates.append((route, matched_kw))
+        else:
+            for route in self._routes.values():
+                if self._on_cooldown(route, scope, now):
+                    continue
+                hit = self._fallback_substring(text_low, route)
+                if hit is not None:
+                    candidates.append((route, hit))
+
+        for route in self._routes.values():
+            if route.regex is None or self._on_cooldown(route, scope, now):
+                continue
+            if route.regex.search(text):
+                candidates.append((route, route.regex.pattern))
+
+        if not candidates:
+            return None
+
+        candidates.sort(key=lambda rk: rk[0].weight, reverse=True)
+        winner_route, winner_kw = candidates[0]
+
+        self._last_hit_at[(winner_route.name, scope)] = now
+        response = random.choice(winner_route.responses) if winner_route.responses else ""
+        return KeywordMatchResult(
+            route_name=winner_route.name,
+            response=response,
+            confidence=1.0,
+            matched_keyword=winner_kw,
+            intent=winner_route.intent,
+        )
+
+    def _on_cooldown(self, route: KeywordRoute, scope: str, now: float) -> bool:
+        if route.cooldown_seconds <= 0:
+            return False
+        last = self._last_hit_at.get((route.name, scope))
+        return last is not None and (now - last) < route.cooldown_seconds
+
+    @staticmethod
+    def _fallback_substring(text_low: str, route: KeywordRoute) -> str | None:
+        for kw in route.keywords:
+            if kw.lower() in text_low:
+                return kw
+        return None
+
+
+def load_routes_from_dir(routes_dir: str | Path) -> list[KeywordRoute]:
+    routes_dir = Path(routes_dir)
+    if not routes_dir.exists():
+        logger.warning(f"[cpu_engine.L1] routes_dir not found: {routes_dir}")
+        return []
+    if not _HAS_YAML:
+        logger.warning("[cpu_engine.L1] PyYAML not installed, cannot load routes")
+        return []
+
+    routes: list[KeywordRoute] = []
+    for yaml_path in sorted(routes_dir.glob("*.yaml")):
+        try:
+            with yaml_path.open(encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+        except Exception as exc:
+            logger.warning(f"[cpu_engine.L1] failed to load {yaml_path}: {exc}")
+            continue
+        if not isinstance(data, list):
+            logger.warning(f"[cpu_engine.L1] {yaml_path} root must be a list, got {type(data).__name__}")
+            continue
+        for entry in data:
+            route = _parse_entry(entry, source=yaml_path.name)
+            if route is not None:
+                routes.append(route)
+
+    return routes
+
+
+def _parse_entry(entry: dict[str, Any], source: str) -> KeywordRoute | None:
+    if not isinstance(entry, dict):
+        logger.warning(f"[cpu_engine.L1] {source}: entry must be dict, got {type(entry).__name__}")
+        return None
+    name = entry.get("name")
+    keywords = entry.get("keywords") or []
+    responses = entry.get("responses") or []
+    regex_pattern = entry.get("regex")
+    if not name or not isinstance(name, str):
+        logger.warning(f"[cpu_engine.L1] {source}: entry missing 'name'")
+        return None
+    if not responses:
+        logger.warning(f"[cpu_engine.L1] {source}/{name}: no responses, skipped")
+        return None
+    if not keywords and not regex_pattern:
+        logger.warning(f"[cpu_engine.L1] {source}/{name}: need keywords or regex, skipped")
+        return None
+
+    regex_obj: re.Pattern[str] | None = None
+    if regex_pattern:
+        try:
+            regex_obj = re.compile(regex_pattern)
+        except re.error as exc:
+            logger.warning(f"[cpu_engine.L1] {source}/{name}: invalid regex '{regex_pattern}': {exc}")
+            return None
+
+    return KeywordRoute(
+        name=name,
+        keywords=[str(k) for k in keywords if str(k).strip()],
+        responses=[str(r) for r in responses if str(r).strip()],
+        intent=str(entry.get("intent", "default")),
+        regex=regex_obj,
+        cooldown_seconds=float(entry.get("cooldown_seconds", 0.0)),
+        weight=float(entry.get("weight", 1.0)),
+    )

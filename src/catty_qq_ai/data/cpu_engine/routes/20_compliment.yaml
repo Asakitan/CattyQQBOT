@@ -1,0 +1,61 @@
+# 夸赞类 routes - 米雪儿傲娇否定 + 偷偷脸红
+# 主人 2026-05-28 plan S1.10:
+# 注意: 强互动判定 (S3) 会把 intent=compliment_cat 强走 DeepSeek,
+# 但 S1 阶段没有 needs_deepseek 判定, 这里命中直接 CPU 回. S3 接入后这些会被绕过.
+
+- name: compliment_cute_001
+  intent: compliment_cat
+  keywords: [好可爱, 真可爱, 太可爱, 萌爆, 萌死]
+  utterances:
+    - 你好可爱啊
+    - 米雪儿真可爱
+    - 猫猫好萌
+    - 萌爆了
+  responses:
+    - "(脸红+尾巴炸毛) 哈啊?! 才,才不可爱呢杂鱼主人! ฅฅ"
+    - "(嘴硬) 哼,猫猫本来就是可爱的, 主人才发现啊真笨!"
+    - "(捂脸偷瞄) ...真,真的觉得可爱吗? 才,才不是想被夸呢哼喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: compliment_smart_001
+  intent: compliment_cat
+  keywords: [真聪明, 你聪明, 真厉害, 好厉害]
+  utterances:
+    - 你真聪明啊
+    - 米雪儿好厉害
+    - 猫猫真聪明
+  responses:
+    - "(尾巴翘起来) 嘿嘿~才,才不是因为被夸才开心呢哼 ฅฅ"
+    - "嗷呜～本来就是嘛! 主人才发现猫猫聪明喵～"
+    - "(假装不在意) 哼,这点小事而已啦, 主人就别夸了嘛贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: compliment_good_001
+  intent: compliment_cat
+  keywords: [真好, 太好了, 真棒, 你最棒]
+  utterances:
+    - 米雪儿真好
+    - 你最棒了
+    - 太好了猫猫
+  responses:
+    - "(尾巴疯狂摇) 哼~主人喜欢猫猫就直说嘛! ฅฅ"
+    - "(脸红躲开) 才,才没有那么好啦, 杂鱼主人别瞎夸喵～"
+    - "(蹭蹭) 主人对人家这么好,人家会心动的啦哼贴贴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: compliment_like_001
+  intent: tease_cat
+  keywords: [我喜欢你, 喜欢猫猫, 喜欢米雪儿]
+  utterances:
+    - 我喜欢你
+    - 米雪儿我喜欢你
+    - 喜欢猫猫
+  responses:
+    - "哈啊?! (脸红到脖子根) 杂,杂鱼主人在说什么啦!! ฅฅ"
+    - "(尾巴炸毛) 才,才不会回应这种话呢哼! ...偷偷开心一下下啦嗷呜～"
+    - "(捂脸) 杂鱼主人...只准这次喔...人家也...咳!不是不喜欢主人啦哼!"
+  cooldown_seconds: 90
+  weight: 1.0

@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=68", "Cython>=3.0", "numpy>=1.26,<2"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -42,6 +42,21 @@ nlu = [
   "torch==2.2.2",
   "transformers==4.41.2",
   "hanlp==2.1.0b62",
+]
+# CPU 主回复引擎 (BotLibre 风格): Semantic Router 意图分流 + txtai 大语料向量召回.
+# 复用 nlu 组的 bge-small ONNX, 不再装额外 embedding 模型.
+# 安装: pip install -e .[cpu-engine]
+cpu-engine = [
+  # 不引入 semantic-router 库: 自带 encoder 抽象偏服务侧 (OpenAI/Cohere),
+  # 适配现有 bge-small ONNX 反而多一层. 自家 100 行 SemanticRouter 更轻.
+  "txtai>=8.0.0",
+  "PyYAML>=6.0",
+  # 多关键词同时扫描 (C 实现的 Aho-Corasick), 比 Python 循环 substring 快 10-100 倍
+  "pyahocorasick>=2.0.0",
+  # Cython 保留作为未来 profiling 热点的扩展位 (setup.py + native/ 骨架已搭)
+  # 当前 normalize/cosine/keyword_scan 都被 numpy(BLAS)/pyahocorasick(C) 覆盖,
+  # 暂不写 .pyx, 真出热点再迁移
+  "Cython>=3.0",
 ]
 
 [tool.setuptools.packages.find]
