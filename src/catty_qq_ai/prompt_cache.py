@@ -70,15 +70,19 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
     user_indices = [i for i, m in enumerate(messages) if isinstance(m, dict) and m.get("role") == "user"]
     if not user_indices:
         return messages
-    # 标 msg[user_indices[0]] (history 头) — 单 user 场景就这一个 anchor
+    # 主人 2026-05-28 C3 改 CC 策略: cache_control 标 user_indices[-1] (current user).
+    # 关键洞见: Anthropic 有 20-token lookback — 标在 current user (即使内容每轮变),
+    # 下次请求 lookback 自动找之前的 prefix 子集匹配, history 也能命中.
+    # 这就是 CC (claude.ts:3201-3244) 的策略 — 写大 cache, lookback 复用历史 prefix.
+    #
+    # 同时保留 user_indices[0] anchor (头) — 让最小 prefix 也有独立 cache, 防 lookback 超 20 token 时 miss.
     _mark_cache_control(messages[user_indices[0]])
-    # 标 msg[user_indices[-2]] (上一轮 user, history 里最新固化的 user msg) — 多 user 场景才有
-    # 这让 prefix 包含完整 history, cache_create 大幅增加.
-    if len(user_indices) >= 3:
-        # ≥3 个 user: 至少 [first_user, history_user(s), current_user], -2 是中间或上一轮
-        anchor_idx = user_indices[-2]
-        if anchor_idx != user_indices[0]:  # 避免单 history 场景重复标
-            _mark_cache_control(messages[anchor_idx])
+    # 多 user 场景: 也标 [-1] (current user) — Anthropic lookback 会让历史 prefix 命中.
+    # cache_create 第一次会大涨 (含整个 history), 后续 read 通过 lookback 复用.
+    if len(user_indices) >= 2:
+        last_user_idx = user_indices[-1]
+        if last_user_idx != user_indices[0]:  # 避免重复标
+            _mark_cache_control(messages[last_user_idx])
     return messages
 
 

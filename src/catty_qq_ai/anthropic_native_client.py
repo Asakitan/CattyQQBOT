@@ -547,15 +547,17 @@ async def post_messages_native(
     if metadata_user_id:
         create_kwargs["metadata"] = {"user_id": metadata_user_id}
 
-    # 主人 2026-05-28 C2: cache_diagnostics beta — 让 Anthropic 自己告诉我们 cache miss 原因.
-    # 传上一次同 scope request 的 message_id, Anthropic 返回 diagnostics.cache_miss_reason
-    # (system_changed / tools_changed / messages_changed / model_changed / metadata_changed).
+    # 主人 2026-05-28 C2: cache_diagnostics 通过 extra_body 传 (SDK 不支持顶层 diagnostics 参数).
+    # NOTE: anthropic Python SDK ≤ 0.49.x 没 diagnostics kwarg, 必须走 extra_body 透传到 HTTP body.
     _prev_msg_id = ""
     try:
         if metadata_user_id:
             _prev_msg_id = _LAST_MESSAGE_ID_BY_SCOPE.get(metadata_user_id, "")
         if _prev_msg_id:
-            create_kwargs["diagnostics"] = {"previous_message_id": _prev_msg_id}
+            extra_body = create_kwargs.get("extra_body") or {}
+            extra_body = dict(extra_body)
+            extra_body["diagnostics"] = {"previous_message_id": _prev_msg_id}
+            create_kwargs["extra_body"] = extra_body
     except Exception:  # noqa: BLE001
         pass
 
