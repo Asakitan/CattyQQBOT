@@ -484,6 +484,19 @@ _INLINE_INTERNAL_INSTRUCTION_RE = _re_inline_strip.compile(
 )
 
 
+def strip_inline_dynamic_from_text(text: str) -> str:
+    """单段文本版本: 剥 [DYNAMIC_CONTEXT...] 和 <<<CATTY_INTERNAL_INSTRUCTION...>>> 段.
+
+    主要给 NLU / token estimator 用 — 让算 token 时看 "主人原话" 版本,
+    不被注入的指令段污染. messages 实际内容不动.
+    """
+    if not text or not isinstance(text, str):
+        return text or ""
+    text = _INLINE_DYNAMIC_CONTEXT_RE.sub("", text)
+    text = _INLINE_INTERNAL_INSTRUCTION_RE.sub("", text)
+    return text
+
+
 def strip_inline_dynamic_segments_from_history(messages: list[dict]) -> int:
     """剥离历史 user message 里的 inline 动态段, 保留 current turn 最后一条 user 不动.
 
@@ -614,6 +627,7 @@ __all__ = [
     "merge_consecutive_system_messages",
     "stabilize_tools_order",
     "strip_all_cache_control",
+    "strip_inline_dynamic_from_text",
     "strip_inline_dynamic_segments_from_history",
     "sweep_floating_systems_into_user_content",
 ]

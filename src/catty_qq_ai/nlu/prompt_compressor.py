@@ -120,12 +120,20 @@ def _cosine(v1: Any, v2: Any) -> float:
 
 # ── helper: 拿 message 的文本表示 ───────────────────────────
 def _msg_text(msg: Any) -> str:
+    """提取 message 的可读文本表示, 给 token 计数 / NLU 相似度用.
+
+    主人 2026-05-28: 剥掉 inline 注入段 ([DYNAMIC_CONTEXT...] / <<<CATTY_INTERNAL_INSTRUCTION...>>>)
+    再算 token. 原因: catty 把每轮动态段 inline 到 user content (~4K chars),
+    monotonic_history_trim 按这个体积算 token 会让 anchor 频繁跳, history prefix
+    字节漂移 → DeepSeek cache miss. 这里只影响 token 估算 / anchor 决策, messages
+    实际发送内容不变 (Anthropic 路径仍 byte-perfect).
+    """
     if not isinstance(msg, dict):
         return ""
     content = msg.get("content")
     if isinstance(content, str):
-        return content
-    if isinstance(content, list):
+        text = content
+    elif isinstance(content, list):
         parts: list[str] = []
         for b in content:
             if not isinstance(b, dict):
@@ -139,8 +147,15 @@ def _msg_text(msg: Any) -> str:
                 parts.append("[tool_result]")
             elif btype == "image":
                 parts.append("[image]")
-        return "\n".join(p for p in parts if p)
-    return ""
+        text = "\n".join(p for p in parts if p)
+    else:
+        return ""
+    # 剥 inline 注入段 (failsafe: import 失败时返回原文, 不影响业务)
+    try:
+        from ..prompt_cache import strip_inline_dynamic_from_text
+        return strip_inline_dynamic_from_text(text)
+    except Exception:
+        return text
 
 
 # ── 拿 compressor 相关 config (lazy import 防 circular) ──────────

@@ -664,11 +664,26 @@ async def _post_chat_completion_raw(
             # 每次都变 → 6656 hit / 4827 miss / 58%. 这步让 history user 字节稳定.
             # current turn 最后一条 user 保留完整版给 LLM 读.)
             strip_hist = strip_inline_dynamic_segments_from_history(messages)
-            if strip_hist > 0:
-                _logger.debug(
-                    "deepseek prefix opt: stripped %d inline dynamic seg from history",
-                    strip_hist,
-                )
+            # 主人 22:16: 命中率没起来, 加 info 级诊断看 strip 实际剥了多少 + first user 实际样子
+            _diag_first_user_preview = ""
+            _diag_first_user_len = 0
+            for _m in messages[:5]:
+                if isinstance(_m, dict) and _m.get("role") == "user":
+                    _c = _m.get("content", "")
+                    if isinstance(_c, list):
+                        for _b in _c:
+                            if isinstance(_b, dict) and _b.get("type") == "text":
+                                _c = _b.get("text", "")
+                                break
+                    if isinstance(_c, str):
+                        _diag_first_user_len = len(_c)
+                        _diag_first_user_preview = _c[:200].replace("\n", "\\n")
+                    break
+            _logger.info(
+                "deepseek prefix opt: strip_inline_history=%d first_user_len=%d "
+                "first_user_head=%r",
+                strip_hist, _diag_first_user_len, _diag_first_user_preview,
+            )
             # (b) 合并开头连续 system → 单条 (前缀更紧凑)
             merged = merge_consecutive_system_messages(messages)
             if merged > 0:
