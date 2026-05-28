@@ -24,22 +24,30 @@ from typing import Any
 
 
 def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> list[dict]:
-    """主人 2026-05-28 C10 关键修复: noop, 不标 messages-level cache_control marker.
+    """10:08 黄金标位: user_indices[0] + user_indices[-1] 两个 marker.
 
-    log 实证 (12:12:56): cache_miss_reason=messages_changed cache_missed_input_tokens=7785.
-    Anthropic (经 NewAPI OAuth MAX claude-max-sg) 看 messages-level marker 时检查整个
-    messages prefix, messages 每轮变 (新增 user/assistant 轮) → 整个 cache miss,
-    连带 sys[2] static marker 也不返回 read.
+    主人 2026-05-28 C13 关键修复: log 实证 10:08:32 cache_control 标 msg[0/user] + msg[20/user]
+    (= user_indices[0] + user_indices[-1]), 10:08:52 第二轮 cache_read=6396 hit=51% ✅.
 
-    修复: 删 messages marker, 只留 sys[2] (inject_system_tail_cache 标的 boundary).
-    Anthropic 只看 system-level marker → 检查 sys[0..2] static prefix → 字节稳定 → hit.
+    之前 C7-2/C10/C12 各种瞎改 (messages[-1] / noop), 都比不上 10:08 这个 3 marker 设计.
+    人家承认错的, 直接复刻 10:08 设计.
 
-    跟 MD section 9.1 推荐模板"system 单 marker"完全一致.
-    CC 同款 messages[-1] marker 在 anthropic.com 直连有效, 经 NewAPI relay 路由可能行为不同.
-
-    cachingAtDepth 参数保留兼容, 不再生效.
+    标位:
+    - user_indices[0]: 头 anchor, history 第一条 user, byte 稳定 (history append-only)
+    - user_indices[-1]: current user, 触发 cache write (Anthropic 必须有 messages-level marker
+      才会写 cache prefix; 没有的话静默忽略 → cache_create=0)
     """
-    # noop: 不标 messages-level marker, 让 sys[2] cache_control 独立工作
+    user_indices = [
+        i for i, m in enumerate(messages)
+        if isinstance(m, dict) and m.get("role") == "user"
+    ]
+    if not user_indices:
+        return messages
+    _mark_cache_control(messages[user_indices[0]])
+    if len(user_indices) >= 2:
+        last_idx = user_indices[-1]
+        if last_idx != user_indices[0]:
+            _mark_cache_control(messages[last_idx])
     return messages
 
 

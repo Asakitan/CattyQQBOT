@@ -37,6 +37,10 @@ _last_diff_snapshot: dict[str, Any] = {}
 # 加: interleaved-thinking-2025-05-14 + prompt-caching-scope-2026-01-05 (CC 角色扮演标配).
 # 保留: context-management-2025-06-27, compact-2026-01-12, cache-diagnosis-2026-04-07.
 _DEFAULT_BETAS_LIST: list[str] = [
+    # 主人 2026-05-28 C13: 加回 prompt-caching-2024-07-31 — 10:08 黄金状态有这个 beta,
+    # 删了之后 NewAPI relay 不识别 cache. MD 说"已 GA"是错的, NewAPI 路径仍需 beta header.
+    # 不加 extended-cache-ttl-2025-04-11 (主人保 5min TTL, 不需要).
+    "prompt-caching-2024-07-31",
     "interleaved-thinking-2025-05-14",
     "context-management-2025-06-27",
     "prompt-caching-scope-2026-01-05",
@@ -554,22 +558,10 @@ async def post_messages_native(
         # convert_openai_tool_to_anthropic 对已经是 Anthropic 格式的 tool 原样返回
         create_kwargs["tools"] = [convert_openai_tool_to_anthropic(t) for t in tools]
 
-    # 主人 2026-05-28 C8: metadata.user_id 对齐 CC getAPIMetadata 同款 JSON 结构.
-    # CC: JSON.stringify({device_id, session_id, account_uuid}).
-    # catty: {device_id: catty_<scope_hash>, session_id: _BOT_SESSION_ID, scope: <orig>}.
-    # 关键修复: NewAPI relay 如果按 user_id hash 选账号, JSON 字符串稳定路由同一账号 →
-    # cache 写读同账号 → cache hit. 之前短字符串 "qq_private_xxx" 可能让不同次请求路由不同账号.
+    # 主人 2026-05-28 C13: metadata.user_id 回短字符串 — 10:08 黄金状态实证短字符串 cache hit.
+    # C8 改 JSON 是错的诊断, NewAPI 不按 metadata hash 路由账号. 短字符串 'qq_private_xxx' 工作.
     if metadata_user_id:
-        scope_hash = hashlib.sha256(metadata_user_id.encode("utf-8")).hexdigest()[:16]
-        cc_style_user_id = json.dumps(
-            {
-                "device_id": f"catty_{scope_hash}",
-                "session_id": _BOT_SESSION_ID,
-                "scope": metadata_user_id,
-            },
-            separators=(",", ":"),
-        )
-        create_kwargs["metadata"] = {"user_id": cc_style_user_id}
+        create_kwargs["metadata"] = {"user_id": metadata_user_id}
 
     # 主人 2026-05-28 C2: cache_diagnostics 通过 extra_body 传 (SDK 不支持顶层 diagnostics 参数).
     # NOTE: anthropic Python SDK ≤ 0.49.x 没 diagnostics kwarg, 必须走 extra_body 透传到 HTTP body.
