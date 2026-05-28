@@ -922,22 +922,37 @@ CATTY_CARD = CharacterCard(
 # 骨架 (~3K, 完整 hardcoded entries 一次列出) → cache 友好, byte 稳定.
 # pointer (~100c, 本轮命中 id list) → dynamic, AI 自己从骨架里查对应 entry.
 def build_character_book_skeleton() -> str:
-    """完整 hardcoded character_book entries 静态骨架 — cache 友好.
+    """character_book entries 索引骨架 (id + keys + 一行 hint) — 砍版本.
 
-    主人 2026-05-28 C15-8 (revert): 回滚 skeleton 砍版 — skeleton 完整列出 entries
-    进 cache prefix (一次写 cache_create, 之后 cache_read 不占新 input), dynamic hits 段
-    只输出 id pointer 引用 skeleton (~50c). 比 skeleton 砍 + dynamic 完整 总输入更小.
-    跨调用 byte 一致 (因为 _CATTY_BOOK 是 module-level 静态 tuple).
+    主人 2026-05-28 C16-3: 之前完整列所有 entries 22.9K bytes 进 cache prefix, 远超主人指标
+    (sys cache prefix ≤ 8.4K). 现砍成:
+    - constant=True entries (唐猫/发言格式 ~2K) 完整保留 (永远命中, cache 友好)
+    - keyword entries 砍成 id + keys + 30 字 hint (~1.5K, 索引)
+    - keyword entry 命中时完整 content 由 dynamic 段 catty_character_book_hits 注入 (max 3 命中).
+    总 skeleton ~3.5K bytes (从 23K 砍 84%).
     """
     if not _CATTY_BOOK:
         return ""
-    blocks: list[str] = ["【笨猫·角色私货库 character_book · 完整骨架】"]
-    blocks.append(
-        "(下面是所有 entry 完整列出, 本轮命中哪些 entry 看 [DYNAMIC_CONTEXT] 里 catty_character_book_hits 段.\n"
-        " 命中的 entry 你按内容演; 未命中的 entry 当背景知识知道就行, 不主动用.)"
-    )
-    for entry in _CATTY_BOOK:
-        blocks.append(f"\n【entry: {entry.identifier}】\n{entry.content}")
+    blocks: list[str] = ["【笨猫·角色私货库 character_book】"]
+    constant_entries = [e for e in _CATTY_BOOK if e.constant]
+    keyword_entries = [e for e in _CATTY_BOOK if not e.constant]
+    if constant_entries:
+        blocks.append("\n— 常驻段 (始终生效) —")
+        for entry in constant_entries:
+            blocks.append(f"\n【{entry.identifier}】\n{entry.content}")
+    if keyword_entries:
+        blocks.append(
+            "\n— 关键词触发索引 (仅触发时生效) —"
+            "\n(本轮命中看 [DYNAMIC_CONTEXT] catty_character_book_hits, 完整 content 注入那里; 未命中当背景知识)"
+        )
+        for entry in keyword_entries:
+            keys_str = "/".join(str(k) for k in (entry.keys or ()) if k)[:40]
+            content_first_line = (entry.content or "").split("\n", 1)[0]
+            # 去掉标签前缀 [笨猫·xxx]: 取冒号后的实际描述
+            if ":" in content_first_line[:30]:
+                content_first_line = content_first_line.split(":", 1)[1].strip()
+            hint = content_first_line[:35]
+            blocks.append(f"- {entry.identifier} [{keys_str}] — {hint}")
     return "\n".join(blocks)
 
 

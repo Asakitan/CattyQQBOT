@@ -371,8 +371,10 @@ def register_catty_persona(
     # 【scope_lorebook 集成】 AI 5.5 总结出的 per-scope『这个群专属小事』也并入 BFS pool,
     #   命中时调 store.mark_hit() 刷 hit_count(LRU 评分用)。order 给 1000 让它排在 hardcoded
     #   之后但 prompt 段同段输出。
-    _LB_MAX_DEPTH = 3
-    _LB_MAX_HITS = 12
+    # 主人 2026-05-28 C16-3: max_hits 12 → 3, max_depth 3 → 2.
+    # skeleton 砍成索引后, hits dynamic 注入完整 content, max=3 限 dynamic ≤ 1.2K.
+    _LB_MAX_DEPTH = 2
+    _LB_MAX_HITS = 3
     scope_lore_store = ctx.get("scope_lorebook_store")
 
     # 主人 2026-05-28 prompt 优化 C3d: character_book 拆 cache-stable 骨架 + dynamic hit pointer.
@@ -453,18 +455,23 @@ def register_catty_persona(
             if not hits:
                 return ""
             hits.sort(key=lambda h: (h[0], h[1]))
-            # 主人 2026-05-28 C15-8 revert: hits 只输出 id pointer (引用 skeleton 完整内容),
-            # scope_lorebook 命中输出完整 content (skeleton 无此段).
-            hardcoded_ids = [h[1] for h in hits if not h[3]]
+            # 主人 2026-05-28 C16-3: skeleton 砍成索引, hits 注入完整 content (constant 跳过,
+            # constant 在 skeleton 完整保留). 配合 _LB_MAX_HITS=3 限 dynamic ≤ ~1.2K.
+            keyword_hits = [
+                (h[1], h[2]) for h in hits
+                if not h[3] and not getattr(
+                    next((e for e in book if e.identifier == h[1]), None),
+                    "constant", False,
+                )
+            ]
             scope_contents = [h[2] for h in hits if h[3]]
             lines: list[str] = []
-            if hardcoded_ids:
-                lines.append(
-                    "【character_book·本轮命中】" + ", ".join(hardcoded_ids)
-                    + " → 看 catty_character_book_skeleton 里对应 entry 内容."
-                )
+            if keyword_hits:
+                lines.append("【character_book·本轮命中 (按下面内容演)】")
+                for identifier, content in keyword_hits:
+                    lines.append(f"\n— {identifier}\n{content}")
             if scope_contents:
-                lines.append("【scope_lorebook·本轮命中 (per-scope 学的群专属小事)】")
+                lines.append("【scope_lorebook·本轮命中 (per-scope)】")
                 lines.extend(scope_contents)
             return "\n".join(lines)
         except Exception:  # noqa: BLE001
