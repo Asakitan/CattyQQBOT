@@ -617,6 +617,12 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_TEXT2VEC_TOPIC_THRESHOLD", _nlu("text2vec_topic_threshold"))
     _set_env("CATTY_TEXT2VEC_EMOTION_THRESHOLD", _nlu("text2vec_emotion_threshold"))
     _set_env("CATTY_TEXT2VEC_TREND_THRESHOLD", _nlu("text2vec_trend_threshold"))
+    # per-topic threshold dict overrides (主人 2026-05-28 v2). config.json 写 dict, 灌成 JSON env.
+    _set_env(
+        "CATTY_TEXT2VEC_TOPIC_THRESHOLD_OVERRIDES",
+        _nlu("text2vec_topic_threshold_overrides"),
+        json_value=True,
+    )
     _set_env("CATTY_NLU_CACHE_DIR", _nlu("nlu_cache_dir"))
     _set_env("CATTY_NLU_WARMUP_ON_STARTUP", _nlu("nlu_warmup_on_startup"))
     _set_env("CATTY_NLU_HF_ENDPOINT", _nlu("nlu_hf_endpoint"))

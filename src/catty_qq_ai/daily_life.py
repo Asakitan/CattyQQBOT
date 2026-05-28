@@ -168,9 +168,13 @@ def _compute_topics_nlu(text: str, cache: "object | None" = None) -> set[str]:
         sims = proto @ emb
     except Exception:
         return hits_regex
-    threshold = float(getattr(cfg, "catty_text2vec_topic_threshold", 0.55))
+    # 主人 2026-05-28 v2: per-topic threshold. food/shopping 这种具象高频要 0.60+
+    # 避免"吃"误触, tech/work/study 这种聚集词簇 0.50 即可.
+    thresholds = prototypes.get_all_topic_thresholds()
     hits_emb = {
-        topic for topic, s in zip(prototypes.TOPIC_ORDER, sims) if float(s) >= threshold
+        topic
+        for topic, s in zip(prototypes.TOPIC_ORDER, sims)
+        if float(s) >= thresholds.get(topic, 0.55)
     }
     return hits_regex | hits_emb
 

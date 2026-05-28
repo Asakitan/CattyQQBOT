@@ -122,6 +122,53 @@ TOPIC_PROTOTYPES: dict[str, list[str]] = {
 TOPIC_ORDER: list[str] = list(TOPIC_PROTOTYPES.keys())
 
 
+# ── Per-topic threshold (主人 2026-05-28 v2) ────────────────────────────
+# BGE embedding 不同 topic 簇的相似度分布密度不同, 单一阈值 (0.55) 不够细:
+# - 具象高频词簇 (food/shopping/weather): "吃"/"买"/"热" 这种动词易误触, 阈值要高
+# - 专业聚集词簇 (tech/work/study/game): 语义聚集度高, 阈值可低
+# - 中性聚类 (anime/internet/social/home/body/sleep/emo/owner/self_cat): 默认 0.55
+# config.json 可通过 catty_text2vec_topic_threshold_overrides dict 进一步覆盖.
+_PER_TOPIC_THRESHOLDS: dict[str, float] = {
+    "food": 0.60,
+    "shopping": 0.62,
+    "weather": 0.58,
+    "family": 0.58,
+    "travel": 0.58,
+    "fitness": 0.58,
+    "movie": 0.58,
+    "music": 0.58,
+    "tech": 0.50,
+    "work": 0.50,
+    "study": 0.50,
+    "game": 0.50,
+    # 其余默认走 catty_text2vec_topic_threshold (0.55)
+}
+
+
+def get_all_topic_thresholds() -> dict[str, float]:
+    """一次性返回所有 topic 的阈值 dict (减少 _compute_topics_nlu 内 config 拉次数).
+
+    优先级: config.json overrides > _PER_TOPIC_THRESHOLDS > catty_text2vec_topic_threshold.
+    """
+    cfg_default = 0.55
+    overrides: dict[str, float] = dict(_PER_TOPIC_THRESHOLDS)
+    try:
+        from nonebot import get_plugin_config
+        from ..config import Config
+        cfg = get_plugin_config(Config)
+        cfg_default = float(getattr(cfg, "catty_text2vec_topic_threshold", 0.55))
+        user_overrides = getattr(cfg, "catty_text2vec_topic_threshold_overrides", None) or {}
+        if isinstance(user_overrides, dict):
+            for k, v in user_overrides.items():
+                try:
+                    overrides[str(k)] = float(v)
+                except (TypeError, ValueError):
+                    continue
+    except Exception:
+        pass
+    return {t: overrides.get(t, cfg_default) for t in TOPIC_ORDER}
+
+
 # ── Emotion 原型 (10 类 × 8 例) ─────────────────────────────────────────
 # 主人 2026-05-28 phase 5: 8→10 类 + 加 excitement/embarrassment, 每类 8 例.
 EMOTION_PROTOTYPES: dict[str, list[str]] = {
@@ -398,4 +445,5 @@ __all__ = [
     "get_topic_prototypes",
     "get_emotion_prototypes",
     "get_trend_prototypes",
+    "get_all_topic_thresholds",
 ]

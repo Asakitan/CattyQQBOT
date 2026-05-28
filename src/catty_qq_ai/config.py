@@ -233,6 +233,10 @@ class Config(BaseModel):
     catty_text2vec_topic_threshold: float = 0.55
     catty_text2vec_emotion_threshold: float = 0.45
     catty_text2vec_trend_threshold: float = 0.50
+    # 主人 2026-05-28 v2: per-topic threshold 覆盖. config.json 可填:
+    # "catty_text2vec_topic_threshold_overrides": {"food": 0.62, "tech": 0.48}
+    # 留空 dict 走 prototypes._PER_TOPIC_THRESHOLDS 默认.
+    catty_text2vec_topic_threshold_overrides: dict[str, float] = Field(default_factory=dict)
     catty_nlu_cache_dir: str = "src/catty_qq_ai/data/nlu_cache"
     catty_nlu_warmup_on_startup: bool = True
     # 大陆环境 HuggingFace 镜像 (空时不强制改 HF_ENDPOINT, 用环境变量原值)
