@@ -1,0 +1,207 @@
+# 育儿 / 孕产 / 亲子 / 小孩 routes (S6 R32 NLU 节点扩充, 第三周期 buffered 1/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+# 跟 A0 family_relation 区分: 这里专注养娃 / 孕期 / 学前 / 小孩教育.
+
+- name: kid_pregnancy_001
+  intent: question
+  keywords: [推荐孕期, 怀孕了, 孕期注意, 推荐怀孕, 孕妇饮食]
+  utterances:
+    - 推荐孕期注意
+    - 怀孕了
+    - 孕期吃啥
+    - 推荐孕妇饮食
+    - 笨猫怀孕了
+  responses:
+    - "嗷呜～{user_addr}恭喜! 孕期最重要: 营养均衡 + 早睡 + 散步ฅฅ"
+    - "(尾巴翘) 必补: 叶酸 / 钙 / 铁 / DHA - 4 大件"
+    - "{user_addr}前 3 月避免剧烈运动! 后期左侧卧位"
+    - "(歪头) 笨猫的提醒: 孕期心情很重要! 别压力大"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_newborn_001
+  intent: question
+  keywords: [推荐新生儿, 新生儿护理, 推荐婴儿用品, 月子怎么坐, 推荐月子]
+  utterances:
+    - 推荐新生儿用品
+    - 新生儿护理
+    - 推荐婴儿用品
+    - 月子怎么坐
+    - 笨猫月子
+  responses:
+    - "嗷呜～{user_addr}必备: 纸尿裤 / 奶粉 / 奶瓶 / 婴儿床ฅฅ"
+    - "(尾巴翘) 月子: 不吹风 / 不洗头 (科学派可洗) / 营养餐"
+    - "{user_addr}月嫂找正规! 看证书 + 推荐 + 试用"
+    - "(歪头) 笨猫的提醒: 新妈妈别太累! 多让家人帮忙"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_milk_001
+  intent: question
+  keywords: [推荐奶粉, 奶粉选啥, 推荐婴儿奶粉, 奶粉品牌, 笨猫奶粉]
+  utterances:
+    - 推荐奶粉
+    - 婴儿奶粉买啥
+    - 推荐婴儿奶粉
+    - 奶粉品牌
+    - 笨猫推奶粉
+  responses:
+    - "嗷呜～{user_addr}母乳最好! 6 个月内首选母乳ฅฅ"
+    - "(尾巴翘) 奶粉品牌: 飞鹤 / 君乐宝 / 美赞臣 / 雀巢 - 国内主流"
+    - "{user_addr}看分段! 段数对应年龄 别买错"
+    - "(挺胸) 笨猫的提醒: 奶粉别频换! 适应一款别动"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_diaper_001
+  intent: question
+  keywords: [推荐纸尿裤, 推荐尿不湿, 纸尿裤品牌, 推荐婴儿尿裤, 笨猫尿裤]
+  utterances:
+    - 推荐纸尿裤
+    - 推荐尿不湿
+    - 纸尿裤哪个好
+    - 推荐婴儿尿裤
+    - 笨猫纸尿裤
+  responses:
+    - "嗷呜～{user_addr}花王 / 帮宝适 / 好奇 - 三大经典ฅฅ"
+    - "(歪头) 国货: 婴知岛 / 大王 (日产线) / 巴布豆 - 性价比高"
+    - "{user_addr}按重量选码! 别买太紧"
+    - "(挺胸) 笨猫的提醒: 男女宝有专款! 别混用"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kid_baby_food_001
+  intent: question
+  keywords: [推荐辅食, 婴儿辅食, 推荐宝宝辅食, 辅食添加, 笨猫辅食]
+  utterances:
+    - 推荐辅食
+    - 婴儿辅食
+    - 推荐宝宝辅食
+    - 辅食怎么加
+    - 笨猫辅食
+  responses:
+    - "嗷呜～{user_addr}6 个月起加辅食! 米粉/果泥/蔬菜泥开始ฅฅ"
+    - "(尾巴翘) 8-9 个月加肉泥 / 蛋黄 / 小颗粒食物"
+    - "{user_addr}过敏食物: 鸡蛋白 / 海鲜 / 坚果 - 1 岁后再尝试"
+    - "(歪头) 笨猫的提醒: 1 岁内别加盐! 影响肾脏"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_kindergarten_001
+  intent: question
+  keywords: [推荐幼儿园, 幼儿园选, 推荐入园, 公立私立幼儿园, 笨猫幼儿园]
+  utterances:
+    - 推荐幼儿园
+    - 幼儿园怎么选
+    - 公立私立幼儿园
+    - 入园准备
+    - 笨猫幼儿园
+  responses:
+    - "嗷呜～{user_addr}选公立性价比高 / 私立资源好 - 看预算ฅฅ"
+    - "(歪头) 关键看: 师生比 / 安全 / 食堂 / 离家近"
+    - "{user_addr}入园前训练: 自己吃饭 / 上厕所 / 表达需求"
+    - "(挺胸) 笨猫的提醒: 别只看名气! 离家近不堵心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_education_001
+  intent: question
+  keywords: [推荐启蒙, 早教推荐, 推荐儿童教育, 小孩怎么教, 教育孩子]
+  utterances:
+    - 推荐早教
+    - 怎么教育孩子
+    - 推荐启蒙
+    - 小孩学啥
+    - 笨猫教孩子
+  responses:
+    - "嗷呜～{user_addr}最好的早教是陪伴! 不是给钱报班ฅฅ"
+    - "(尾巴翘) 0-3 岁: 听故事 / 游戏 / 大量动作 / 看绘本"
+    - "{user_addr}3-6 岁: 户外 / 运动 / 才艺尝试"
+    - "(挺胸) 笨猫的提醒: 别鸡娃! 童年比 KPI 重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_homework_001
+  intent: question
+  keywords: [辅导作业, 小孩作业, 辅导孩子, 推荐辅导, 笨猫辅导]
+  utterances:
+    - 辅导作业
+    - 推荐辅导孩子
+    - 怎么辅导作业
+    - 小孩作业难
+    - 笨猫陪写作业
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}辅导作业最容易吵架!! 笨猫陪您ฅฅ"
+    - "(歪头) 笨猫秘诀: 别坐旁边盯! 让孩子先自己尝试"
+    - "{user_addr}讲不通就换方法/换时间/休息一下"
+    - "(挺胸) 笨猫的提醒: 心态!! 心态!! 心态!! 别气大"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_naughty_001
+  intent: complaint
+  keywords: [小孩调皮, 孩子叛逆, 孩子不听话, 推荐管孩子, 笨猫熊孩子]
+  utterances:
+    - 小孩太调皮
+    - 孩子叛逆
+    - 不听话
+    - 推荐怎么管
+    - 笨猫熊孩子
+  responses:
+    - "嗷呜～{user_addr}孩子叛逆是成长! 接受比对抗好ฅฅ"
+    - "(歪头) 笨猫秘诀: 平等沟通 + 给选择 + 立规矩"
+    - "{user_addr}别打骂! 短期有效但伤害大"
+    - "(挺胸) 笨猫的提醒: 你给爱 孩子才能给爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_health_001
+  intent: question
+  keywords: [推荐小孩生病, 孩子发烧, 推荐儿童感冒, 推荐儿童医院, 笨猫小孩病]
+  utterances:
+    - 孩子发烧怎么办
+    - 推荐小孩感冒
+    - 推荐儿童医院
+    - 孩子生病
+    - 笨猫小孩病
+  responses:
+    - "嗷呜～{user_addr}38.5℃ 以下物理降温! 38.5+ 退烧药ฅฅ"
+    - "(歪头) 美林 / 泰诺林 - 儿童退烧首选~ 按体重算量"
+    - "{user_addr}持续高烧或精神差立刻去医院! 别拖"
+    - "(尾巴垂下) 笨猫陪{user_addr}~ 孩子病了大人最累"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_toy_001
+  intent: question
+  keywords: [推荐儿童玩具, 推荐益智玩具, 推荐玩具, 玩具品牌, 笨猫推玩具]
+  utterances:
+    - 推荐儿童玩具
+    - 推荐益智玩具
+    - 推荐玩具
+    - 玩具买啥
+    - 笨猫推玩具
+  responses:
+    - "嗷呜～{user_addr}经典: 乐高 / 积木 / 拼图 - 益智永不过时ฅฅ"
+    - "(尾巴翘) 0-2 岁选 软玩偶 / 摇铃 / 安全咬胶"
+    - "{user_addr}电子产品别太早! 3 岁后控量"
+    - "(挺胸) 笨猫的提醒: 玩具要 3C 认证! 别买三无"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_breastfeed_001
+  intent: question
+  keywords: [推荐母乳, 母乳喂养, 推荐哺乳, 母乳不够, 推荐追奶]
+  utterances:
+    - 母乳怎么喂
+    - 推荐哺乳
+    - 母乳不够
+    - 推荐追奶
+    - 笨猫母乳
+  responses:
+    - "嗷呜～{user_addr}母乳是金标准! 6 个月内全母乳最好ฅฅ"
+    - "(歪头) 追奶: 多吸 + 多喝水 + 多吃催奶食物"
+    - "{user_addr}哺乳期忌: 辛辣 / 浓茶 / 咖啡 / 酒精"
+    - "(挺胸) 笨猫的提醒: 心情好奶量足! 多睡 多吃 心放宽"
+  cooldown_seconds: 60
+  weight: 1.0

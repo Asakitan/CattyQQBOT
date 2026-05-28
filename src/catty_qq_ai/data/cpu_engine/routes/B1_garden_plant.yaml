@@ -1,0 +1,206 @@
+# 园艺 / 植物 / 养花 / 绿植 routes (S6 R33 NLU 节点扩充, 第三周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+
+- name: plant_indoor_001
+  intent: question
+  keywords: [推荐绿植, 推荐室内植物, 推荐净化空气植物, 适合室内, 笨猫绿植]
+  utterances:
+    - 推荐绿植
+    - 推荐室内植物
+    - 推荐净化空气植物
+    - 适合室内
+    - 笨猫推绿植
+  responses:
+    - "嗷呜～{user_addr}入门: 绿萝 / 吊兰 / 龟背竹 / 龙血树 - 4 大经典ฅฅ"
+    - "(尾巴翘) 净化空气: 虎尾兰 / 常春藤 / 芦荟 - NASA 认证"
+    - "{user_addr}懒人首选多肉! 个把月浇一次水"
+    - "(歪头) 笨猫的提醒: 室内通风很重要! 植物 + 通风双 buff"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plant_flower_001
+  intent: question
+  keywords: [推荐养花, 推荐买花, 花卉品种, 推荐盆花, 笨猫花]
+  utterances:
+    - 推荐养花
+    - 推荐买花
+    - 花卉品种推荐
+    - 推荐盆花
+    - 笨猫养花
+  responses:
+    - "嗷呜～{user_addr}经典: 玫瑰 / 月季 / 茉莉 / 栀子 / 茶花ฅฅ"
+    - "(尾巴翘) 长寿花 / 蝴蝶兰 - 室内开花长期供"
+    - "{user_addr}新手别贪多! 1-2 盆开始 慢慢加"
+    - "(挺胸) 笨猫的提醒: 注意光照! 不同花需求不同"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plant_water_001
+  intent: question
+  keywords: [多久浇水, 植物浇水, 推荐浇水, 浇水频率, 笨猫浇水]
+  utterances:
+    - 植物多久浇水
+    - 推荐浇水
+    - 浇水频率
+    - 怎么浇水
+    - 笨猫浇水
+  responses:
+    - "嗷呜～{user_addr}土干了再浇透! 别小水勤浇ฅฅ"
+    - "(歪头) 一般 3-7 天一次~ 看季节 / 温度 / 植物种类"
+    - "{user_addr}多肉/仙人掌干透再浇! 1-2 周一次"
+    - "(挺胸) 笨猫的提醒: 浇水时间最好早晨! 别中午烈日下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plant_sun_001
+  intent: question
+  keywords: [植物晒太阳, 推荐光照, 推荐阳光植物, 多久晒太阳, 笨猫植物]
+  utterances:
+    - 植物要晒太阳吗
+    - 推荐光照植物
+    - 推荐阳光植物
+    - 多久晒太阳
+    - 笨猫植物光照
+  responses:
+    - "嗷呜～{user_addr}多数室内植物喜散光! 别暴晒ฅฅ"
+    - "(尾巴翘) 阳台党: 月季 / 茉莉 / 三角梅 - 必晒"
+    - "{user_addr}耐阴: 绿萝 / 龟背竹 / 蕨类 - 没阳光也行"
+    - "(歪头) 笨猫的提醒: 夏天烈日下用遮阳网! 别晒死叶"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plant_dying_001
+  intent: complaint
+  keywords: [植物快死了, 黄叶, 推荐救活植物, 叶子蔫, 笨猫植物死]
+  utterances:
+    - 植物快死了
+    - 黄叶怎么办
+    - 叶子蔫了
+    - 推荐救活植物
+    - 笨猫植物死
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}先停浇水! 黄叶通常是涝ฅฅ"
+    - "(歪头) 烂根: 挖出来 / 修烂根 / 重新栽 / 杀菌"
+    - "{user_addr}先观察 1 周! 别一感冒就吃药"
+    - "(挺胸) 笨猫的提醒: 植物比人扛 / 别慌 / 90% 能救"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plant_succulent_001
+  intent: question
+  keywords: [推荐多肉, 多肉植物, 推荐买多肉, 多肉品种, 笨猫多肉]
+  utterances:
+    - 推荐多肉
+    - 多肉植物
+    - 推荐买多肉
+    - 多肉品种
+    - 笨猫多肉
+  responses:
+    - "嗷呜～{user_addr}入门: 玉露 / 桃之卵 / 黄丽 / 子持莲花ฅฅ"
+    - "(尾巴翘) 进阶: 法师 / 紫罗兰女王 / 蓝石莲 - 颜值党"
+    - "{user_addr}多肉要透气盆! 别用塑料盆"
+    - "(挺胸) 笨猫的提醒: 多肉懒人养~ 但忌涝 / 干透再浇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plant_vegetable_001
+  intent: question
+  keywords: [推荐阳台种菜, 推荐种菜, 阳台菜园, 种什么菜, 笨猫种菜]
+  utterances:
+    - 推荐阳台种菜
+    - 阳台菜园
+    - 推荐种菜
+    - 种啥菜好
+    - 笨猫种菜
+  responses:
+    - "嗷呜～{user_addr}阳台党: 番茄 / 黄瓜 / 辣椒 / 香菜 - 都好种ฅฅ"
+    - "(尾巴翘) 叶菜: 小白菜 / 生菜 / 茼蒿 - 1 个月就吃"
+    - "{user_addr}种菜防虫: 草木灰 / 大蒜水 / 辣椒水"
+    - "(挺胸) 笨猫的提醒: 自己种的吃着特别香! 健康无农药"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plant_pruning_001
+  intent: question
+  keywords: [推荐修剪, 修剪植物, 推荐剪枝, 怎么修剪, 笨猫修剪]
+  utterances:
+    - 推荐修剪植物
+    - 怎么修剪
+    - 推荐剪枝
+    - 植物修剪
+    - 笨猫修剪
+  responses:
+    - "嗷呜～{user_addr}修剪原则: 病虫枝 / 枯枝 / 内向枝 - 都剪掉ฅฅ"
+    - "(歪头) 月季 / 茶花 / 茉莉 都要修剪~ 多开花"
+    - "{user_addr}修剪时间: 早春 / 花后 - 别冬天修"
+    - "(挺胸) 笨猫的提醒: 修剪刀消毒! 别交叉感染"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: plant_pest_001
+  intent: complaint
+  keywords: [植物长虫, 推荐杀虫, 蚜虫, 红蜘蛛, 笨猫虫]
+  utterances:
+    - 植物长虫
+    - 蚜虫怎么治
+    - 推荐杀虫
+    - 红蜘蛛怎么办
+    - 笨猫植物长虫
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}蚜虫用肥皂水! 喷喷立死ฅฅ"
+    - "(歪头) 红蜘蛛喷水 + 吡虫啉~ 多几次就好"
+    - "{user_addr}介壳虫用酒精擦 + 涂抹"
+    - "(挺胸) 笨猫的提醒: 通风 + 别淋雨 = 减少虫害"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: plant_seed_001
+  intent: question
+  keywords: [推荐种子, 推荐播种, 怎么育苗, 推荐买种子, 笨猫种子]
+  utterances:
+    - 推荐种子
+    - 推荐播种
+    - 怎么育苗
+    - 推荐买种子
+    - 笨猫种子
+  responses:
+    - "嗷呜～{user_addr}买种子推荐: 京东 / 淘宝大店 - 别买太便宜ฅฅ"
+    - "(尾巴翘) 育苗: 浸种 24 小时 → 蛭石播 → 保湿 → 出芽"
+    - "{user_addr}买当年新种子! 老种子发芽率低"
+    - "(挺胸) 笨猫的提醒: 育苗别贪多! 出芽率 50% 算好"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: plant_fertilizer_001
+  intent: question
+  keywords: [推荐肥料, 推荐施肥, 怎么施肥, 缓释肥, 笨猫肥料]
+  utterances:
+    - 推荐肥料
+    - 推荐施肥
+    - 怎么施肥
+    - 缓释肥推荐
+    - 笨猫施肥
+  responses:
+    - "嗷呜～{user_addr}懒人首选缓释肥! 撒一次管 3 个月ฅฅ"
+    - "(尾巴翘) 开花用磷钾肥 / 叶子绿用氮肥 / 大爱通用肥"
+    - "{user_addr}花多多 1 号 / 奥绿 318S - 经典推荐"
+    - "(挺胸) 笨猫的提醒: 少量多次! 别一次施多了烧根"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: plant_tree_001
+  intent: question
+  keywords: [推荐盆景, 推荐盆栽树, 推荐种树, 笨猫盆景, 庭院树]
+  utterances:
+    - 推荐盆景
+    - 推荐盆栽树
+    - 庭院种啥树
+    - 推荐种树
+    - 笨猫盆景
+  responses:
+    - "嗷呜～{user_addr}入门盆景: 罗汉松 / 黄杨 / 金弹子ฅฅ"
+    - "(尾巴翘) 庭院树: 桂花 / 紫薇 / 玉兰 / 樱花 - 季节美"
+    - "{user_addr}阳台党选小巧! 别种太大压垮"
+    - "(挺胸) 笨猫的提醒: 盆景修剪是艺术! 慢工出细活"
+  cooldown_seconds: 60
+  weight: 0.8

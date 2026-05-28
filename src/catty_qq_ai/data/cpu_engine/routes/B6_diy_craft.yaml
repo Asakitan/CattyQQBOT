@@ -1,0 +1,206 @@
+# DIY / 手工 / 手作 / 编织 routes (S6 R38 NLU 节点扩充, 第三周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: diy_craft_001
+  intent: question
+  keywords: [推荐手工, 推荐DIY, DIY 教程, 推荐手作, 笨猫手工]
+  utterances:
+    - 推荐手工
+    - 推荐 DIY
+    - 推荐手作
+    - 手工教程
+    - 笨猫推手工
+  responses:
+    - "嗷呜～{user_addr}入门: 折纸 / 串珠 / 滴胶 / 黏土 - 4 大经典ฅฅ"
+    - "(尾巴翘) 看 B 站 / 抖音教程! 零基础也能上手"
+    - "{user_addr}先小作品入门 + 慢慢复杂化"
+    - "(歪头) 笨猫的提醒: 别贪材料! 先用完一套再买新的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: diy_origami_001
+  intent: question
+  keywords: [推荐折纸, 折纸教程, 推荐学折纸, 折纸花, 笨猫折纸]
+  utterances:
+    - 推荐折纸
+    - 折纸教程
+    - 推荐学折纸
+    - 折纸花
+    - 笨猫折纸
+  responses:
+    - "嗷呜～{user_addr}入门: 千纸鹤 / 玫瑰 / 心 / 飞机 - 经典款ฅฅ"
+    - "(尾巴翘) 进阶: 川崎玫瑰 / 蝴蝶 / 立体动物"
+    - "{user_addr}专业折纸纸厚度合适! 别用打印纸"
+    - "(挺胸) 笨猫的提醒: 折前先看完整教程! 别折一半懵了"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: diy_knit_001
+  intent: question
+  keywords: [推荐编织, 推荐毛线, 编织教程, 推荐织毛衣, 笨猫编织]
+  utterances:
+    - 推荐编织
+    - 推荐毛线
+    - 推荐学编织
+    - 织毛衣
+    - 笨猫编织
+  responses:
+    - "嗷呜～{user_addr}入门: 围巾 / 帽子 / 杯垫 - 简单平针ฅฅ"
+    - "(尾巴翘) 进阶: 毛衣 / 玩偶 / 包包 - 需要更多技法"
+    - "{user_addr}毛线选: 羊毛舒适 / 棉线透气 / 化纤便宜"
+    - "(挺胸) 笨猫的提醒: 第一件别贪复杂! 围巾起家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: diy_clay_001
+  intent: question
+  keywords: [推荐粘土, 推荐做粘土, 粘土教程, 推荐黏土, 笨猫粘土]
+  utterances:
+    - 推荐粘土
+    - 推荐做粘土
+    - 粘土教程
+    - 推荐黏土
+    - 笨猫粘土
+  responses:
+    - "嗷呜～{user_addr}超轻黏土最易上手! 安全无毒ฅฅ"
+    - "(尾巴翘) 入门: 小动物 / 食物 / 卡通人物"
+    - "{user_addr}晾干 24 小时定型! 加保护漆更持久"
+    - "(挺胸) 笨猫的提醒: 多种颜色混合! 出新颜色更有趣"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: diy_painting_001
+  intent: question
+  keywords: [推荐画画, 推荐学绘画, 推荐画材, 油画水彩, 笨猫画画]
+  utterances:
+    - 推荐学画画
+    - 推荐画画
+    - 推荐画材
+    - 油画水彩
+    - 笨猫画画
+  responses:
+    - "嗷呜～{user_addr}入门: 水彩 / 马克笔 / 彩铅 - 简单上手ฅฅ"
+    - "(尾巴翘) 进阶: 油画 / 丙烯 / 国画 - 需要工作室"
+    - "{user_addr}画材: 樱花 / 辉柏嘉 / 温莎牛顿 - 经典品牌"
+    - "(挺胸) 笨猫的提醒: 别买最贵! 先用普通的练手"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: diy_calligraphy_002
+  intent: question
+  keywords: [推荐学钢笔字, 推荐硬笔书法, 推荐练字本, 推荐字帖, 钢笔字帖]
+  utterances:
+    - 推荐学钢笔字
+    - 推荐硬笔书法
+    - 推荐字帖
+    - 钢笔字怎么练
+    - 笨猫硬笔
+  responses:
+    - "嗷呜～{user_addr}田英章 / 田蕴章 / 卢中南 - 当代名家ฅฅ"
+    - "(尾巴翘) 笔: 英雄 / 凌美 / 百乐 - 不同价位"
+    - "{user_addr}每天 1 页 + 100 天有变化"
+    - "(挺胸) 笨猫的提醒: 描红 + 临摹 + 默写 - 三步法"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: diy_diamond_001
+  intent: question
+  keywords: [推荐钻石画, 推荐串珠, 推荐DIY手工, 串珠教程, 笨猫串珠]
+  utterances:
+    - 推荐钻石画
+    - 推荐串珠
+    - 串珠教程
+    - 笨猫串珠
+    - 推荐 DIY 手工
+  responses:
+    - "嗷呜～{user_addr}钻石画解压神器! 一颗颗贴上去ฅฅ"
+    - "(尾巴翘) 串珠: 手链 / 项链 / 戒指 / 手机链"
+    - "{user_addr}先小图案再大画! 别上来钻 1m × 1m"
+    - "(挺胸) 笨猫的提醒: 钻石画完封膜! 保色"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: diy_woodwork_001
+  intent: question
+  keywords: [推荐木工, 推荐做木工, 木工工具, 推荐木工 DIY, 笨猫木工]
+  utterances:
+    - 推荐木工
+    - 推荐做木工
+    - 木工工具
+    - 推荐木工 DIY
+    - 笨猫木工
+  responses:
+    - "嗷呜～{user_addr}入门: 小书架 / 杯垫 / 钥匙挂 - 简单ฅฅ"
+    - "(尾巴翘) 工具: 锯 / 刨 / 砂纸 / 钉锤 - 基础四件套"
+    - "{user_addr}木料: 松木便宜 / 橡木中档 / 胡桃木高端"
+    - "(挺胸) 笨猫的提醒: 戴手套和护目镜! 安全第一"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: diy_pottery_001
+  intent: question
+  keywords: [推荐陶艺, 推荐做陶器, 推荐捏陶, 陶艺教程, 笨猫陶艺]
+  utterances:
+    - 推荐陶艺
+    - 推荐做陶器
+    - 推荐捏陶
+    - 陶艺教程
+    - 笨猫陶艺
+  responses:
+    - "嗷呜～{user_addr}陶艺解压神器! 摸泥治愈ฅฅ"
+    - "(尾巴翘) 找陶艺工作室体验~ 烧成再带回"
+    - "{user_addr}入门: 拉坯 / 手捏 / 泥板 - 3 大技法"
+    - "(挺胸) 笨猫的提醒: 拉坯要练! 一开始都歪"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: diy_sewing_001
+  intent: question
+  keywords: [推荐缝纫, 推荐做衣服, 缝纫机推荐, 推荐缝纫机, 笨猫缝纫]
+  utterances:
+    - 推荐缝纫
+    - 推荐做衣服
+    - 推荐缝纫机
+    - 缝纫机选啥
+    - 笨猫缝纫
+  responses:
+    - "嗷呜～{user_addr}入门缝纫机: 兄弟 / 胜家 / 重机ฅฅ"
+    - "(尾巴翘) 简单做: 抱枕 / 杯垫 / 围裙 - 直线缝"
+    - "{user_addr}进阶: 衣服 / 包包 - 看版型 + 锁边"
+    - "(挺胸) 笨猫的提醒: 别买太复杂! 家用够用就好"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: diy_jewelry_001
+  intent: question
+  keywords: [推荐首饰 DIY, 推荐做手链, 推荐做项链, 银饰 DIY, 笨猫首饰]
+  utterances:
+    - 推荐首饰 DIY
+    - 推荐做手链
+    - 推荐做项链
+    - 银饰 DIY
+    - 笨猫首饰
+  responses:
+    - "嗷呜～{user_addr}入门: 手链 / 耳环 / 戒指 - 串珠/金属丝ฅฅ"
+    - "(尾巴翘) 银饰 DIY 需基础工具 + 焊枪 / 入门班"
+    - "{user_addr}材料: 925 银线 / 小珠子 / 五金件"
+    - "(挺胸) 笨猫的提醒: 做完镀防氧化! 长期亮"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: diy_resin_001
+  intent: question
+  keywords: [推荐滴胶, 推荐 UV 胶, 推荐做钥匙扣, 滴胶教程, 笨猫滴胶]
+  utterances:
+    - 推荐滴胶
+    - 推荐 UV 胶
+    - 推荐做钥匙扣
+    - 滴胶教程
+    - 笨猫滴胶
+  responses:
+    - "嗷呜～{user_addr}滴胶最神奇! 浇下去固化变饰品ฅฅ"
+    - "(尾巴翘) UV 胶用紫外线灯 / AB 胶等 24 小时"
+    - "{user_addr}填: 干花 / 闪粉 / 小贴纸 - 漂亮"
+    - "(挺胸) 笨猫的提醒: 开窗通风! 有刺激气味"
+  cooldown_seconds: 60
+  weight: 0.8

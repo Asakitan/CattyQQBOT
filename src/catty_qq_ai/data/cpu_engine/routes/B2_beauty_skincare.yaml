@@ -1,0 +1,207 @@
+# 美容 / 护肤 / 化妆 / 美甲 routes (S6 R34 NLU 节点扩充, 第三周期 buffered 3/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+# 跟 97 shop_cosmetic 区分: 这里专注护肤步骤/皮肤问题/化妆技巧, 97 偏品牌购物.
+
+- name: beauty_skincare_order_001
+  intent: question
+  keywords: [护肤步骤, 推荐护肤顺序, 护肤怎么用, 护肤流程, 笨猫护肤]
+  utterances:
+    - 推荐护肤步骤
+    - 护肤怎么用
+    - 推荐护肤顺序
+    - 护肤流程
+    - 笨猫护肤
+  responses:
+    - "嗷呜～{user_addr}基础: 洁面 → 爽肤水 → 精华 → 乳液 → 防晒ฅฅ"
+    - "(尾巴翘) 晚间: 洁面 → 水 → 精华 → 眼霜 → 面霜"
+    - "{user_addr}防晒是早上必须! 出门 30 分钟前涂"
+    - "(歪头) 笨猫的提醒: 别叠太多! 5 步以内最实用"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: beauty_acne_001
+  intent: complaint
+  keywords: [长痘, 推荐祛痘, 痘痘怎么办, 推荐战痘, 皮肤痘]
+  utterances:
+    - 我长痘了
+    - 推荐祛痘
+    - 痘痘怎么办
+    - 推荐战痘
+    - 笨猫痘痘
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}痘肌别手抠! 越抠越大ฅฅ"
+    - "(歪头) 入门: 水杨酸 / 杜鹃花酸 - 温和有效"
+    - "{user_addr}严重去医院! 痤疮专科开外用药"
+    - "(挺胸) 笨猫的提醒: 痘痘期忌辣 / 熬夜 / 油炸 - 控制饮食"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: beauty_dry_skin_001
+  intent: complaint
+  keywords: [皮肤干, 推荐保湿, 干皮护理, 皮肤起皮, 笨猫皮肤干]
+  utterances:
+    - 我皮肤干
+    - 推荐保湿
+    - 推荐干皮护肤
+    - 皮肤起皮
+    - 笨猫干皮
+  responses:
+    - "嗷呜～{user_addr}干皮三件套: 保湿水 + 精华 + 厚乳/面霜ฅฅ"
+    - "(尾巴翘) 神经酰胺 / 玻尿酸 / 角鲨烷 - 干皮救星"
+    - "{user_addr}面膜每周 2-3 次! 别天天敷"
+    - "(挺胸) 笨猫的提醒: 室内开加湿器! 干燥环境会加重"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: beauty_oily_skin_001
+  intent: complaint
+  keywords: [皮肤油, 推荐控油, 推荐油皮, 出油严重, 大油田]
+  utterances:
+    - 我皮肤油
+    - 推荐控油
+    - 推荐油皮护肤
+    - 出油严重
+    - 笨猫油皮
+  responses:
+    - "嗷呜～{user_addr}油皮: 清爽水 + 轻盈精华 + 啫喱面霜ฅฅ"
+    - "(尾巴翘) 烟酰胺 / 水杨酸 / B5 - 油皮万金油"
+    - "{user_addr}别过度清洁! 会越洗越油"
+    - "(歪头) 笨猫的提醒: 油皮要补水! 油多是因为缺水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: beauty_makeup_001
+  intent: question
+  keywords: [推荐化妆, 化妆步骤, 推荐底妆, 推荐妆容, 笨猫化妆]
+  utterances:
+    - 推荐化妆步骤
+    - 怎么化妆
+    - 推荐底妆
+    - 推荐妆容
+    - 笨猫化妆
+  responses:
+    - "嗷呜～{user_addr}基础: 底妆 → 眉毛 → 眼妆 → 腮红 → 唇妆ฅฅ"
+    - "(尾巴翘) 新手选 BB 霜 / 气垫~ 容易上手"
+    - "{user_addr}日常清淡 / 出门精致 / 别天天浓妆"
+    - "(挺胸) 笨猫的提醒: 卸妆很重要! 比化妆还重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: beauty_lipstick_001
+  intent: question
+  keywords: [推荐口红, 推荐口红色号, 口红品牌, 推荐唇釉, 笨猫口红]
+  utterances:
+    - 推荐口红
+    - 推荐口红色号
+    - 推荐唇釉
+    - 口红品牌
+    - 笨猫口红
+  responses:
+    - "嗷呜～{user_addr}大牌: 阿玛尼 / TF / YSL / 香奶奶ฅฅ"
+    - "(尾巴翘) 平价: 完美日记 / 花西子 / 橘朵 - 国货宝藏"
+    - "{user_addr}色号: 黄皮选偏橙 / 白皮选偏粉 / 冷暖看肤"
+    - "(挺胸) 笨猫的提醒: 别一上来全色号! 选 3-5 支日常足够"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: beauty_eyebrow_001
+  intent: question
+  keywords: [推荐画眉, 眉毛怎么画, 推荐修眉, 半永久眉, 笨猫画眉]
+  utterances:
+    - 推荐画眉
+    - 眉毛怎么画
+    - 推荐修眉
+    - 半永久眉
+    - 笨猫画眉
+  responses:
+    - "嗷呜～{user_addr}新手用眉笔比眉粉好控制ฅฅ"
+    - "(尾巴翘) 画眉: 顺毛 → 框边 → 填色 → 晕染"
+    - "{user_addr}修眉别自己! 找专业修一次模板照着画"
+    - "(歪头) 笨猫的提醒: 眉峰不要太尖! 自然弧度"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: beauty_nails_001
+  intent: question
+  keywords: [推荐美甲, 美甲款式, 推荐美甲, 美甲店, 笨猫美甲]
+  utterances:
+    - 推荐美甲
+    - 美甲款式
+    - 美甲店推荐
+    - 推荐做美甲
+    - 笨猫美甲
+  responses:
+    - "嗷呜～{user_addr}日常款: 法式 / 裸色 / 单色 - 简约百搭ฅฅ"
+    - "(尾巴翘) 美甲店选连锁口碑好! 卫生很重要"
+    - "{user_addr}光疗甲耐磨 / 普通甲油便宜 / 看场景"
+    - "(挺胸) 笨猫的提醒: 美甲间隙休息! 别一直贴 伤指甲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: beauty_hair_001
+  intent: question
+  keywords: [推荐发型, 推荐染发, 推荐烫发, 头发护理, 笨猫发型]
+  utterances:
+    - 推荐发型
+    - 推荐染发
+    - 推荐烫发
+    - 头发护理
+    - 笨猫发型
+  responses:
+    - "嗷呜～{user_addr}发型看脸型! 圆脸长款 / 方脸卷度 / 鹅蛋随便ฅฅ"
+    - "(尾巴翘) 染发选小染 / 烫发选数码烫 - 耐打理"
+    - "{user_addr}发型师找连锁 Tony 总监! 别图便宜"
+    - "(挺胸) 笨猫的提醒: 染烫后用修护洗护! 别用普通的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: beauty_sunscreen_001
+  intent: question
+  keywords: [推荐防晒, 防晒霜推荐, 推荐买防晒, 防晒指数, 笨猫防晒]
+  utterances:
+    - 推荐防晒
+    - 防晒霜推荐
+    - 推荐防晒霜
+    - 推荐买防晒
+    - 笨猫防晒
+  responses:
+    - "嗷呜～{user_addr}日常 SPF30+/通勤 SPF50+/海边 SPF50 PA++++ฅฅ"
+    - "(尾巴翘) 安耐晒 / 资生堂 / 城野医生 - 日系经典"
+    - "{user_addr}国货: 美肤宝 / 薇诺娜 - 性价比高"
+    - "(挺胸) 笨猫的提醒: 防晒 2 小时补涂! 别只涂一次"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: beauty_facemask_001
+  intent: question
+  keywords: [推荐面膜, 面膜怎么用, 推荐买面膜, 面膜品牌, 笨猫面膜]
+  utterances:
+    - 推荐面膜
+    - 面膜怎么用
+    - 推荐面膜品牌
+    - 推荐买面膜
+    - 笨猫面膜
+  responses:
+    - "嗷呜～{user_addr}片状: SK-II / 香缇卡 / 修丽可 - 高端ฅฅ"
+    - "(尾巴翘) 平价: 一叶子 / 御泥坊 / 美迪惠尔 - 大众"
+    - "{user_addr}每周 2-3 次! 别天天敷 (除非急救)"
+    - "(挺胸) 笨猫的提醒: 面膜不超 20 分钟! 干透反而吸水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: beauty_aging_001
+  intent: question
+  keywords: [推荐抗衰, 抗皱推荐, 推荐抗老, 推荐紧致, 笨猫抗老]
+  utterances:
+    - 推荐抗衰
+    - 抗皱推荐
+    - 推荐抗老
+    - 推荐紧致
+    - 笨猫抗老
+  responses:
+    - "嗷呜～{user_addr}成分: 维 A 醇 / 视黄醇 / 玻色因 / 胜肽ฅฅ"
+    - "(尾巴翘) 大牌: 修丽可 CE 精华 / 海蓝之谜 / 莱珀妮"
+    - "{user_addr}30+ 开始抗老! 早晚比晚更好"
+    - "(挺胸) 笨猫的提醒: 抗老 = 防晒 + 睡好 + 补水 - 基础到位再加产品"
+  cooldown_seconds: 60
+  weight: 1.0

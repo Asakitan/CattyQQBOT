@@ -1,0 +1,207 @@
+# 游戏 / Steam / 手游 / 桌游 / 主机 routes (S6 R40 NLU 节点扩充, 第三周期 buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 80_mc_game / 88_entertainment 区分: 这里专注游戏种类推荐.
+
+- name: game_steam_001
+  intent: question
+  keywords: [推荐 Steam, Steam 游戏推荐, 推荐买 Steam, 推荐 PC 游戏, 笨猫 Steam]
+  utterances:
+    - 推荐 Steam 游戏
+    - 推荐买 Steam
+    - 推荐 PC 游戏
+    - Steam 神作
+    - 笨猫 Steam
+  responses:
+    - "嗷呜～{user_addr}神作: 巫师 3 / 荒野大镖客 2 / 黑神话悟空ฅฅ"
+    - "(尾巴翘) 独立: Hades / 空洞骑士 / 茶杯头 / Slay the Spire"
+    - "{user_addr}周末看夏促 / 圣诞促 - 5 折起"
+    - "(挺胸) 笨猫的提醒: 别贪多! 每个游戏认真通"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_console_001
+  intent: question
+  keywords: [推荐 PS5, 推荐 Switch, 推荐主机, 推荐 Xbox, 笨猫主机]
+  utterances:
+    - 推荐 PS5
+    - 推荐 Switch
+    - 推荐主机
+    - 推荐 Xbox
+    - 笨猫主机
+  responses:
+    - "嗷呜～{user_addr}PS5 大作多 / Switch 任天堂独占 / Xbox 性价比ฅฅ"
+    - "(尾巴翘) 必入: 塞尔达 / 战神 / 蜘蛛侠 / 最后的生还者"
+    - "{user_addr}光追看 PS5 / 便携看 Switch / Game Pass 看 Xbox"
+    - "(挺胸) 笨猫的提醒: 主机别买太多! 一个用 5-10 年"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_mobile_001
+  intent: question
+  keywords: [推荐手游, 推荐手机游戏, 推荐 手游, 王者推荐, 笨猫手游]
+  utterances:
+    - 推荐手游
+    - 推荐手机游戏
+    - 王者怎么样
+    - 推荐 MOBA
+    - 笨猫手游
+  responses:
+    - "嗷呜～{user_addr}MOBA: 王者荣耀 / LOL 手游 - 国民级ฅฅ"
+    - "(尾巴翘) 二次元: 原神 / 崩坏星穹 / 鸣潮 - 米哈游霸主"
+    - "{user_addr}吃鸡: 和平精英 / PUBG 手游 - 全民竞技"
+    - "(挺胸) 笨猫的提醒: 控制时间! 手游容易上瘾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_genshin_001
+  intent: question
+  keywords: [推荐原神, 原神角色, 推荐原神角色, 推荐崩坏, 笨猫原神]
+  utterances:
+    - 推荐原神
+    - 原神角色
+    - 推荐原神角色
+    - 推荐崩坏
+    - 笨猫原神
+  responses:
+    - "嗷呜～{user_addr}米哈游全家桶! 原神 / 崩坏 / 绝区零 / 星穹铁道ฅฅ"
+    - "(尾巴翘) 原神角色: 钟离 / 雷神 / 神里 - 强势版本榜"
+    - "{user_addr}抽卡需理性! 别氪佬"
+    - "(挺胸) 笨猫的提醒: 米游社领月卡! 别错过"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_rpg_001
+  intent: question
+  keywords: [推荐 RPG, 推荐角色扮演, 推荐 JRPG, 推荐欧美 RPG, 笨猫 RPG]
+  utterances:
+    - 推荐 RPG
+    - 推荐角色扮演
+    - 推荐 JRPG
+    - 推荐欧美 RPG
+    - 笨猫 RPG
+  responses:
+    - "嗷呜～{user_addr}欧美: 巫师 3 / 上古卷轴 5 / FO4ฅฅ"
+    - "(尾巴翘) 日式 JRPG: 最终幻想 / 女神异闻录 / 异度神剑"
+    - "{user_addr}国产: 古剑 / 仙剑 / 黑神话悟空"
+    - "(挺胸) 笨猫的提醒: RPG 必备耐心! 100h 起步"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_fps_001
+  intent: question
+  keywords: [推荐 FPS, 推荐射击游戏, 推荐枪战, CSGO, 笨猫 FPS]
+  utterances:
+    - 推荐 FPS
+    - 推荐射击游戏
+    - 推荐枪战
+    - CS GO 怎么样
+    - 笨猫 FPS
+  responses:
+    - "嗷呜～{user_addr}竞技: CSGO / 瓦罗兰特 / Apex 英雄ฅฅ"
+    - "(尾巴翘) 单机: 使命召唤系列 / 战地系列 / 极地战嚎"
+    - "{user_addr}国服: 穿越火线 / 暗区突围 / 三角洲"
+    - "(挺胸) 笨猫的提醒: FPS 别熬夜! 眼睛容易累"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_board_001
+  intent: question
+  keywords: [推荐桌游, 推荐狼人杀, 推荐三国杀, 桌游店, 笨猫桌游]
+  utterances:
+    - 推荐桌游
+    - 推荐狼人杀
+    - 推荐三国杀
+    - 桌游店
+    - 笨猫桌游
+  responses:
+    - "嗷呜～{user_addr}经典: 狼人杀 / UNO / 三国杀 - 聚会必备ฅฅ"
+    - "(尾巴翘) 进阶: 卡坦岛 / 璀璨宝石 / 山屋惊魂 / 阿瓦隆"
+    - "{user_addr}线下找桌游店! 上百种试玩"
+    - "(挺胸) 笨猫的提醒: 桌游主要是开心! 别太赌注"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_indie_001
+  intent: question
+  keywords: [推荐独立游戏, 推荐 indie, 推荐小品游戏, 独立游戏推荐, 笨猫独立]
+  utterances:
+    - 推荐独立游戏
+    - 推荐 indie
+    - 推荐小品游戏
+    - 独立游戏推荐
+    - 笨猫独立游戏
+  responses:
+    - "嗷呜～{user_addr}神作: 空洞骑士 / Hades / 茶杯头 / 蔚蓝ฅฅ"
+    - "(尾巴翘) 治愈系: Stardew Valley / 动森"
+    - "{user_addr}叙事强: 看火人 / 艾迪芬奇的记忆 / GRIS"
+    - "(挺胸) 笨猫的提醒: 独立游戏好玩 + 不长 - 适合慢慢品"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_lol_001
+  intent: question
+  keywords: [推荐 LOL, 推荐英雄联盟, LOL 英雄, 推荐英雄, 笨猫 LOL]
+  utterances:
+    - 推荐 LOL
+    - 推荐英雄联盟
+    - LOL 英雄推荐
+    - 推荐英雄
+    - 笨猫 LOL
+  responses:
+    - "嗷呜～{user_addr}新手英雄: 安妮 / 盖伦 / 提莫 - 易上手ฅฅ"
+    - "(尾巴翘) 进阶: 卡萨丁 / 亚索 / 烬 - 操作型"
+    - "{user_addr}补刀练 1 个月! 基础最重要"
+    - "(挺胸) 笨猫的提醒: 别人机劝退! 多打 + 复盘"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_kingdom_001
+  intent: question
+  keywords: [推荐战略游戏, 推荐 SLG, 推荐策略游戏, 文明 6, 笨猫策略]
+  utterances:
+    - 推荐战略游戏
+    - 推荐 SLG
+    - 推荐策略游戏
+    - 文明 6 怎么样
+    - 笨猫策略
+  responses:
+    - "嗷呜～{user_addr}经典: 文明 6 / 帝国时代 4 / 星际争霸ฅฅ"
+    - "(尾巴翘) 全战系列: 三国 / 战锤 / 中世纪 - 国战经典"
+    - "{user_addr}手游: 万国觉醒 / 三国志战略版 / 钢铁雄心"
+    - "(挺胸) 笨猫的提醒: SLG 烧脑! 适合周末长玩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_sandbox_001
+  intent: question
+  keywords: [推荐沙盒, 推荐沙盒游戏, 我的世界, 推荐建造, 笨猫沙盒]
+  utterances:
+    - 推荐沙盒
+    - 推荐沙盒游戏
+    - 我的世界推荐
+    - 推荐建造游戏
+    - 笨猫沙盒
+  responses:
+    - "嗷呜～{user_addr}沙盒之王: 我的世界 / 泰拉瑞亚 / RustฅฅMC 80 文件专门聊"
+    - "(尾巴翘) 太空: Astroneer / Subnautica / 深岩银河"
+    - "{user_addr}国产: 迷你世界 - 国内 MC 替代"
+    - "(挺胸) 笨猫的提醒: 沙盒看创造力! 自己定目标"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: game_kid_001
+  intent: question
+  keywords: [推荐儿童游戏, 推荐益智游戏, 推荐小孩游戏, 推荐学龄游戏, 笨猫儿童游戏]
+  utterances:
+    - 推荐儿童游戏
+    - 推荐益智游戏
+    - 推荐小孩游戏
+    - 学龄游戏
+    - 笨猫儿童游戏
+  responses:
+    - "嗷呜～{user_addr}益智: 纪念碑谷 / 模拟城市 / 动森ฅฅ"
+    - "(尾巴翘) 教育: 数学游戏 / 编程游戏 / 拼图"
+    - "{user_addr}控制时间! 每天 30 分内"
+    - "(挺胸) 笨猫的提醒: 别让孩子接触暴力游戏! 选 PEGI 7+"
+  cooldown_seconds: 60
+  weight: 0.9

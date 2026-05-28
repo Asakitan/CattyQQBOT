@@ -1,0 +1,207 @@
+# 运动 / 锻炼 / 瑜伽 / 跑步 / 健身房 routes (S6 R37 NLU 节点扩充, 第三周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 91 health_fitness 区分: 这里专注具体锻炼项目细节, 91 偏疾病/治病/医院.
+
+- name: workout_running_001
+  intent: question
+  keywords: [推荐跑步, 跑步技巧, 跑步配速, 推荐跑步姿势, 笨猫跑步]
+  utterances:
+    - 推荐跑步
+    - 跑步技巧
+    - 跑步姿势
+    - 推荐配速
+    - 笨猫跑步
+  responses:
+    - "嗷呜～{user_addr}新手 5km 入门! 配速 6-7 分钟/kmฅฅ"
+    - "(尾巴翘) 落地: 前脚掌 / 中足 - 别后跟拍地"
+    - "{user_addr}心率 = 220 - 年龄 × 60-70% 燃脂区"
+    - "(挺胸) 笨猫的提醒: 跑前热身 / 跑后拉伸 - 别伤膝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: workout_yoga_001
+  intent: question
+  keywords: [推荐瑜伽, 瑜伽入门, 推荐瑜伽体式, 推荐做瑜伽, 笨猫瑜伽]
+  utterances:
+    - 推荐瑜伽
+    - 瑜伽入门
+    - 推荐瑜伽体式
+    - 笨猫做瑜伽
+    - 推荐做瑜伽
+  responses:
+    - "嗷呜～{user_addr}入门: 拜日式 + 战士 + 下犬 - 经典三式ฅฅ"
+    - "(尾巴翘) 流派: 哈他 / 阴瑜伽 / 阿斯汤加 / 流瑜伽 - 各有所长"
+    - "{user_addr}哈他温和 / 阴瑜伽柔韧 / 流瑜伽减脂"
+    - "(挺胸) 笨猫的提醒: 别勉强! 瑜伽不竞争 量力而行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: workout_stretch_001
+  intent: question
+  keywords: [推荐拉伸, 拉伸动作, 推荐拉伸运动, 怎么拉伸, 笨猫拉伸]
+  utterances:
+    - 推荐拉伸
+    - 拉伸动作
+    - 推荐拉伸运动
+    - 怎么拉伸
+    - 笨猫拉伸
+  responses:
+    - "嗷呜～{user_addr}静态拉伸每个动作 30 秒! 不弹动ฅฅ"
+    - "(尾巴翘) 早起拉伸: 全身舒展 / 睡前拉伸: 放松助眠"
+    - "{user_addr}腰背疼? 婴儿式 / 猫牛式 - 救星"
+    - "(挺胸) 笨猫的提醒: 拉到酸痛 不到痛! 不能强求"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: workout_squat_001
+  intent: question
+  keywords: [推荐深蹲, 深蹲技巧, 怎么深蹲, 推荐深蹲动作, 笨猫深蹲]
+  utterances:
+    - 推荐深蹲
+    - 深蹲技巧
+    - 怎么深蹲
+    - 推荐深蹲动作
+    - 笨猫深蹲
+  responses:
+    - "嗷呜～{user_addr}深蹲: 膝盖不超脚尖! 屁股后坐ฅฅ"
+    - "(尾巴翘) 自重 100 次 / 杠铃负重 - 看阶段"
+    - "{user_addr}膝盖痛就停! 别硬练 找教练纠正动作"
+    - "(挺胸) 笨猫的提醒: 深蹲是健身之王! 但姿势错=废膝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: workout_pushup_001
+  intent: question
+  keywords: [推荐俯卧撑, 俯卧撑技巧, 推荐胸肌训练, 怎么做俯卧撑, 笨猫俯卧撑]
+  utterances:
+    - 推荐俯卧撑
+    - 俯卧撑技巧
+    - 推荐胸肌训练
+    - 怎么做俯卧撑
+    - 笨猫俯卧撑
+  responses:
+    - "嗷呜～{user_addr}标准: 手与肩同宽 + 身体一条线 + 下到 90°ฅฅ"
+    - "(尾巴翘) 新手: 跪姿俯卧撑 / 上斜俯卧撑 - 降低难度"
+    - "{user_addr}进阶: 钻石俯卧撑 / 下斜 / 单臂"
+    - "(挺胸) 笨猫的提醒: 别撅屁股 别塌腰! 核心收紧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: workout_plank_001
+  intent: question
+  keywords: [推荐平板支撑, 平板支撑技巧, 推荐核心训练, 怎么平板, 笨猫平板]
+  utterances:
+    - 推荐平板支撑
+    - 平板支撑技巧
+    - 推荐核心训练
+    - 怎么做平板
+    - 笨猫平板
+  responses:
+    - "嗷呜～{user_addr}平板: 手肘+脚尖 / 身体一条线 / 核心收紧ฅฅ"
+    - "(尾巴翘) 新手 30 秒-1 分钟 / 进阶 2-3 分钟"
+    - "{user_addr}变式: 侧平板 / 抬腿 / 收膝 - 全方位"
+    - "(挺胸) 笨猫的提醒: 别屁股翘! 别腰塌! 一条线"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: workout_dumbbell_001
+  intent: question
+  keywords: [推荐哑铃, 推荐买哑铃, 哑铃训练, 推荐哑铃动作, 笨猫哑铃]
+  utterances:
+    - 推荐哑铃
+    - 推荐买哑铃
+    - 哑铃训练
+    - 推荐哑铃动作
+    - 笨猫哑铃
+  responses:
+    - "嗷呜～{user_addr}入门: 男 5-10kg / 女 2-5kg / 双只ฅฅ"
+    - "(尾巴翘) 经典: 哑铃推举 / 弯举 / 划船 / 飞鸟"
+    - "{user_addr}进阶买调节哑铃! 多重量切换"
+    - "(挺胸) 笨猫的提醒: 重量选能做 8-12 次力竭的! 别贪重"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: workout_cardio_001
+  intent: question
+  keywords: [推荐有氧, 推荐有氧运动, 有氧时间, 推荐燃脂, 笨猫有氧]
+  utterances:
+    - 推荐有氧
+    - 推荐有氧运动
+    - 有氧时间
+    - 推荐燃脂
+    - 笨猫有氧
+  responses:
+    - "嗷呜～{user_addr}有氧: 跑步 / 单车 / 椭圆机 / 跳绳 / 游泳ฅฅ"
+    - "(尾巴翘) 30 分钟以上才燃脂! 心率 130-150"
+    - "{user_addr}HIIT 高强度间歇! 20 分钟 = 1 小时有氧"
+    - "(挺胸) 笨猫的提醒: 有氧 + 力量结合 - 才不掉肌肉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: workout_gym_001
+  intent: question
+  keywords: [推荐健身房, 推荐健身, 健身计划, 推荐去健身房, 笨猫健身房]
+  utterances:
+    - 推荐健身房
+    - 推荐健身
+    - 健身计划
+    - 推荐去健身房
+    - 笨猫健身房
+  responses:
+    - "嗷呜～{user_addr}找连锁: 乐刻 / 威尔仕 / 一兆韦德 - 大型靠谱ฅฅ"
+    - "(尾巴翘) 新手前 5 次找教练! 学动作 别瞎练"
+    - "{user_addr}每周 3-5 次 / 每次 60-90 分钟 - 标配"
+    - "(挺胸) 笨猫的提醒: 别贪便宜小私教! 受伤就大了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: workout_jump_rope_001
+  intent: question
+  keywords: [推荐跳绳, 跳绳技巧, 推荐跳绳运动, 跳绳燃脂, 笨猫跳绳]
+  utterances:
+    - 推荐跳绳
+    - 跳绳技巧
+    - 推荐跳绳运动
+    - 跳绳燃脂
+    - 笨猫跳绳
+  responses:
+    - "嗷呜～{user_addr}跳绳: 30 分钟 = 跑步 1 小时 - 性价比高ฅฅ"
+    - "(尾巴翘) 入门 100 个一组 + 休息 30 秒 + 再来"
+    - "{user_addr}选无绳跳绳! 室内不打人"
+    - "(挺胸) 笨猫的提醒: 穿减震鞋! 别赤脚跳硬地"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: workout_swimming_001
+  intent: question
+  keywords: [推荐游泳, 游泳技巧, 推荐学游泳, 游泳姿势, 笨猫游泳]
+  utterances:
+    - 推荐游泳
+    - 游泳技巧
+    - 推荐学游泳
+    - 游泳姿势
+    - 笨猫游泳
+  responses:
+    - "嗷呜～{user_addr}游泳: 蛙泳入门 / 自由泳进阶 / 蝶泳高阶ฅฅ"
+    - "(尾巴翘) 全身锻炼! 减脂 + 塑形 + 关节友好"
+    - "{user_addr}新手报教练班! 别野泳"
+    - "(挺胸) 笨猫的提醒: 游完冲淋浴! 别带氯回家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: workout_recovery_001
+  intent: question
+  keywords: [推荐肌肉酸痛, 推荐恢复, 训练后恢复, 推荐放松, 笨猫恢复]
+  utterances:
+    - 肌肉酸痛怎么办
+    - 推荐恢复
+    - 训练后恢复
+    - 推荐放松
+    - 笨猫恢复
+  responses:
+    - "嗷呜～{user_addr}酸痛是正常! 不是受伤 - 1-3 天自愈ฅฅ"
+    - "(尾巴翘) 加速恢复: 拉伸 + 泡沫轴 + 蛋白质 + 睡眠"
+    - "{user_addr}冷热水交替淋浴 - 促进血液循环"
+    - "(挺胸) 笨猫的提醒: 酸痛时低强度运动 比躺着恢复快"
+  cooldown_seconds: 60
+  weight: 1.0
