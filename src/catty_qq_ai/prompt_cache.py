@@ -24,70 +24,37 @@ from typing import Any
 
 
 def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> list[dict]:
-    """给 messages 数组**第一个 user** 标 cache_control: ephemeral (永远稳定的 prefix anchor).
+    """CC 同款 cache_control 标位: messages 数组**最后一条**消息的 content 最后 block.
 
-    主人 2026-05-28 经多轮实测 + standalone test 100% hit 验证的最简单 cache 策略:
+    源码依据 (主人 CC_CACHE_MECHANISM.md section 2 双重确认):
+    - cli.mjs:865-870 (CC 官方反编译): user 末块加 cache_control
+    - cli.mjs:874-879: assistant 末块加 (排除 thinking/redacted_thinking)
+    - claude.ts:3201-3244 (社区版): markerIndex = messages.length - 1
 
-    1. Anthropic cache 是 prefix-based, 严格字节级匹配. cache_control 标在 messages 数组
-       的哪个位置, 决定 cache prefix 长度 (= tools + system + messages[0..marker_idx]).
-    2. catty 真实对话每轮 history 顺序追加 (user_1, asst_1, ..., user_curr). 如果 cache
-       marker 在末尾 (depth=N 处 / 倒数第二个 user / current user), 每轮 marker 位置都在
-       变 → cache prefix 长度变 → 严格 prefix matching 失败 → cache 永远 miss.
-    3. **唯一稳定 cache prefix 的方法**: marker 永远标在第一个 user (messages 里出现的
-       第一个 role=user 位置). 这条 user 内容随 history 滚动 (catty_history_turns=16 内)
-       不变 → 每轮 cache prefix 字节一致 → 真能 hit.
-    4. Anthropic 只接受 cache_control 在 user / system / tool content blocks 上,
-       assistant 上的被忽略.
+    cache 命中机制 (CC_CACHE_MECHANISM.md section 7.2):
+    cache_control 标 messages[-1] 是为了**写入** — 本轮 prefix 写到 cache.
+    **读取**是 Anthropic 从 breakpoint **向更早 block 回溯** (窗口 20 block),
+    找之前写过的更短 prefix 条目. 因此 messages[-1] 内容每轮变 (catty 的 DYNAMIC_CONTEXT)
+    **不影响命中** — 命中是回溯前一轮已写入的更短 prefix.
 
-    主人 2026-05-28 进一步发现: messages 数组里如果只有**1 个 user** (= current user),
-    内容每次变 → 标在它上面 cache 永远 miss. 必须**至少有 2 个 user** (≥1 个 history user)
-    才标在第一个 history user 上 (current 之前的某个 user). 只 1 个 user 时不标 marker
-    (cache 不写, 但不浪费).
+    主人 2026-05-28 C7-2: 回退 C6 (错误标 user_indices[-2]), 改回 CC 同款 messages[-1].
+    之前以为"current user 每轮变所以 miss" 是误读 Anthropic cache 机制 — 实际靠回溯.
 
-    cachingAtDepth 参数保留向后兼容 (不再生效).
-
-    Args:
-        messages: ChatMessage list (会就地修改 + 返回相同 list)
-        cachingAtDepth: 保留兼容, 不再生效
+    cachingAtDepth 参数保留兼容, 不再生效.
     """
-    # 主人 2026-05-28: Anthropic 写 cache 的硬性要求 — cache_control 必须**至少有 1 个
-    # 在 messages 数组上** (standalone test 验证 system-only cache_control = cache_create=0).
-    # 多个 breakpoints 设计: Anthropic 找最长匹配 prefix → 即使 messages 末尾 user content
-    # 每次变, system 末尾 marker (inject_system_tail_cache 标的 boundary block) 那个
-    # breakpoint 还能 hit prefix 段.
-    # 主人 2026-05-28 C3: CC 风格 — 让 cache prefix 包含整个 history, 而不是只到 msg[0].
-    # 之前: cache_control 标 msg[0] (first user), prefix = sys + msg[0] = ~6K, 浪费 history.
-    # 现在: 同时标 user_indices[0] (头 anchor) + user_indices[-2] (上一轮 user, byte 稳定).
-    # cache prefix 含完整 history (到上一轮 user), cache_create 涨到 ~20K+.
-    #
-    # 为什么标 user_indices[-2] 而非 [-1]:
-    # - [-1] = 当前 user msg, 内容每轮变 (volatile) → cache 永远 miss
-    # - [-2] = 上一轮 user msg, 已固化进 history (byte 稳定) → cache 命中
-    # - 上一轮 assistant reply 也在 prefix 里 (在 user[-2] 之前), 完整 history 进 cache
-    #
-    # Anthropic 注: cache_control 只在 user / system / tool blocks 生效, assistant 上被忽略.
-    # 所以必须用 user_indices, 不能用 messages[-2] (可能是 assistant).
-    user_indices = [i for i, m in enumerate(messages) if isinstance(m, dict) and m.get("role") == "user"]
-    if not user_indices:
+    if not messages:
         return messages
-    # 主人 2026-05-28 C6 cache 真相修复: 之前标 user_indices[-1] (current user) 永远 miss.
-    # 因为 current user content 含 [DYNAMIC_CONTEXT] 每轮变 (SFW sweep + NSFW spark 内部
-    # sweep 把 phase_hint/scene_state/preg/climax/recency/random_encounter 等动态段全 inline),
-    # prefix 严格字节匹配在 user[-1] 位置永远失败 → cache_read 死锁在 sys 部分 = 6.4K 上限.
-    #
-    # 真相: Anthropic prompt cache 是 prefix-based, cache_control 必须标在 byte 稳定位置.
-    # "20-token lookback" 是写入侧容差 (找最长可缓存前缀), 不是读取侧子集匹配 — 之前误读了文档.
-    #
-    # 正确标位:
-    # 1. user_indices[0] — 头 anchor, 永远稳定的 prefix anchor (history 第一条 user)
-    # 2. user_indices[-2] — 上一轮 user msg (已固化进 history, byte 稳定), cache 含整个 history
-    #    current user (user_indices[-1]) 不标 — 每轮变, 标了也 miss 还浪费 cache write
-    _mark_cache_control(messages[user_indices[0]])
-    # 标上一轮 user (byte 已固化) — 让 cache 包含整个 history 到上一轮 user 为止.
-    if len(user_indices) >= 2:
-        prev_user_idx = user_indices[-2]
-        if prev_user_idx != user_indices[0]:  # 单/双 user 场景头 anchor 已覆盖, 避免重复标
-            _mark_cache_control(messages[prev_user_idx])
+    last_msg = messages[-1]
+    if not isinstance(last_msg, dict):
+        return messages
+    # 跳过 thinking / redacted_thinking 末块 — Anthropic 不接受 cache_control 在这两种
+    # (CC cli.mjs:876-877 显式过滤).
+    content = last_msg.get("content")
+    if isinstance(content, list) and content:
+        last_block = content[-1]
+        if isinstance(last_block, dict) and last_block.get("type") in ("thinking", "redacted_thinking"):
+            return messages
+    _mark_cache_control(last_msg)
     return messages
 
 
