@@ -5310,7 +5310,12 @@ async def _build_messages(
         # ConnectTimeout (20:35-20:44 logs 全 timeout) — total prompt 撑到 16000+ tokens
         # 上游 5.3-codex-spark 处理不动. 砍回 20 条 (~10 轮) 平衡场景延续 + 上游稳定.
         _NSFW_SLIM_HISTORY_MAX = 6  # 主人 2026-05-28 C15-6: 10→6 (3 轮), 群聊<5K 私聊<4K 目标砍 history
-        _slim_persona = _build_nsfw_slim_persona_bundle()
+        # 主人 2026-05-28 P5.7: NSFW spark 路径用 catty_core_persona (2175 tokens) 替换
+        # _build_nsfw_slim_persona_bundle (2535 tokens). SFW/NSFW 共享同一 cache prefix base.
+        # catty_core_persona §4 已含 NSFW 妥协铁律, §5 含 REPLY FORMAT, §0 含元身份拒认.
+        # 剩 NSFW 表演 phase 矩阵 / 反 OOC 详细 → 留 _NSFW_SPARK_STABLE_BOUNDARY_TEXT 段处理.
+        from .catty_core_persona import CATTY_CORE_PERSONA as _CATTY_CORE_PERSONA
+        _slim_persona = _CATTY_CORE_PERSONA
         # 【cache 友好结构】把大块 _override (~3000 chars, 对主人静态) 移到 persona 后, 让
         # [persona + override] (~5000 chars / ~2500 tokens) 成为稳定 prefix 每轮 cache hit.
         # history 之后只放一个**短而静态**的 recency reminder 拿 recency bias 又不破坏 cache.

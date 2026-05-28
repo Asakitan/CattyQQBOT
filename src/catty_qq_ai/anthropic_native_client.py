@@ -175,9 +175,14 @@ def _apply_anthropic_cache_breakpoints(
                 tools[i]["cache_control"] = cc
                 break
 
-    # 2. system_blocks[-1] 末 block (跳 thinking)
+    # 2. 主人 2026-05-28 P5.7 post-fix: cache_control 标在 system_blocks[0] 第一个 block.
+    # 根因: NSFW spark 路径 sys 末尾是 phase_hint / starter_block 等**动态**段
+    # (每轮变), cache_control 标 sys[-1] → cache prefix 字节漂移 → Anthropic 不 cache
+    # (cache_create=0). SFW 主路径 sys 末尾是 boundary marker 静态, sys[-1] 标也 OK,
+    # 但跨两条路径用 sys[0] (永远是 catty_core_persona 2175 tokens, 跨路径绝对稳定)
+    # 更安全. prefix 仅 catty_core_persona 段, 其他 sys 不入 cache 但保证 hit 稳定.
     if system_blocks:
-        for i in range(len(system_blocks) - 1, -1, -1):
+        for i in range(len(system_blocks)):
             blk = system_blocks[i]
             if (
                 isinstance(blk, dict)
