@@ -2846,11 +2846,10 @@ def build_phase_advance_hint(
     current_meta = PHASE_DEFINITIONS.get(current, PHASE_DEFINITIONS[1])
     next_meta = PHASE_DEFINITIONS.get(next_phase, PHASE_DEFINITIONS[8])
 
-    # 主人 2026-05-29 Round 5 cache fix: rotation 改为 phase-based 而非 per-turn.
-    # 旧逻辑: rotation 每轮 +1 → 每次 spark inject 的 sensory/physical/behavior 子集不同
-    # → user content 字节漂移 → DeepSeek cache miss (实测 74% 卡这里).
-    # 新逻辑: 用 next_phase 作 rotation, 同 phase 多轮 sensory 字节稳定 (cache 命中),
-    # phase 切换 (P3→P4 等关键节点) 才换 sensory → 仍保留 hint 新鲜感.
+    # 主人 2026-05-29 Round 13: rollback Round 12, 保留 Round 5 的 phase-based rotation.
+    # 主人「为了表现力, phase 切换还是不变吧」— 每个 phase 仍有自己 sensory 子集.
+    # 真正的 cache 优化在 Round 14: phase tracker 块从 phase_hint 拆出, 移到所有
+    # inject 之后 (current_u 末尾), 让前面字节稳定.
     rotation = int(next_phase) % 7
     rotated_physical = _rotate_subset(next_meta['physical'], 5, rotation)
     rotated_behavior = _rotate_subset(next_meta['behavior'], 4, rotation)
@@ -3022,17 +3021,65 @@ def build_phase_advance_hint(
             f"\n"
         )
 
-    # 主人 2026-05-27 十三轮 token 削减: phase tracker 块也精简 (去横线 + 砍铁律到 2 条)
-    full_hint = (
+    # 主人 2026-05-29 Round 14: 拆分 phase tracker 块 — 让 cache prefix 不受 phase 影响.
+    # 旧: full_hint 含 dazed+arc+location+scene+personality+sensory+opener+phase tracker 一起 inject
+    # → phase 切换时整块字节漂移 → 后续所有 inject (author_note/trope/...) 字节漂移
+    # → DeepSeek cache 从这里开始全 miss.
+    # 新: build_phase_advance_hint 只返回**稳定 prefix 部分** (dazed/arc/location/scene/personality/sensory/opener),
+    # phase tracker 块通过 build_phase_tracker_block_only 单独 inject 在所有其他 inject 之后.
+    # phase 切换时只有 current_u 最末几百 chars 漂移, 前面所有 cache 都命中.
+    # 注: 把 sensory_block 留在 stable 部分 — sensory 也是 phase-based (rotation=phase%7),
+    # phase 切换时 sensory 也会变. 但 sensory 在 stable 部分会拖累 cache. 让人家把 sensory
+    # 也移到 dynamic suffix (跟 phase tracker 一起后置).
+    stable_hint = (
         dazed_block
         + arc_line
         + location_line
         + scene_state_block
         + personality_block
-        + sensory_block
         + opener_blocklist_line
-        # 主人 2026-05-29 Round 9: bucket turn_count / arc_count 防 cache miss
-        # (st.turn_count 每轮 +1, arc_count 跨轮变化, 直接字符串拼接破坏 prefix 字节稳定)
+    )
+    return _swap_owner_addr(stable_hint, is_owner, user_addr)
+
+
+def build_phase_tracker_block_only(
+    scope: str,
+    user_id: str,
+    *,
+    is_owner: bool = True,
+    user_addr: str = "主人",
+) -> str:
+    """主人 2026-05-29 Round 14: 单独输出 phase tracker 块 (含 sensory + phase 详情).
+
+    catty 主对话路径在 build_phase_advance_hint 输出 stable_hint 后, 经过 author_note /
+    trope_hint 等其他 inject, **最后** 调这个函数把 phase tracker 块 inject 到 current_u
+    末尾. 这样 phase 切换只影响 current_u 末尾几百 chars, 前面 cache prefix 全命中.
+    """
+    if scope is None or user_id is None:
+        return ""
+    key = _state_key(scope, user_id)
+    st = _NSFW_PHASE_BY_SCOPE.get(key)
+    if st is None:
+        return ""
+    current = max(1, min(8, int(st.current_phase or 1)))
+    next_phase = _decide_next_phase(st)
+    current_meta = PHASE_DEFINITIONS.get(current, PHASE_DEFINITIONS[1])
+    next_meta = PHASE_DEFINITIONS.get(next_phase, PHASE_DEFINITIONS[8])
+    rotation = int(next_phase) % 7
+    rotated_physical = _rotate_subset(next_meta['physical'], 5, rotation)
+    rotated_behavior = _rotate_subset(next_meta['behavior'], 4, rotation)
+    rotated_opener = _rotate_subset(next_meta['opener_hints'], 2, rotation)
+    rotated_thought = _rotate_subset(next_meta['thought'], 2, rotation)
+    stuck_thr = STUCK_THRESHOLDS.get(current, 3)
+    advance_rule = (
+        f"⚠️ 已在 {current_meta['name']} 卡 {st.turn_count} 轮 (阈值 {stuck_thr}) — "
+        f"**强制推进到 {next_meta['name']}**."
+        if st.turn_count >= stuck_thr else
+        f"上轮 {current_meta['name']} — 本轮可继续 {current_meta['name']} 或推进到 {next_meta['name']}."
+    )
+    sensory_block = build_sensory_block(phase=next_phase, rotation=rotation)
+    block = (
+        sensory_block
         + f"【★ Phase {current_meta['name']} → {next_meta['name']}】 "
         + f"({'首轮' if st.turn_count == 0 else ('卡顿' if st.turn_count >= stuck_thr else '进行中')}, "
         + f"{'首 arc' if st.arc_count <= 1 else '多 arc'})\n"
@@ -3045,7 +3092,7 @@ def build_phase_advance_hint(
         + f"推进信号: {next_meta['advance_signal']}\n"
         + f"**铁律**: 本轮**不写 {current_meta['name']} 风**, 必须演 {next_meta['name']} 生理/思维/行为 ≥2 维度.\n"
     )
-    return _swap_owner_addr(full_hint, is_owner, user_addr)
+    return _swap_owner_addr(block, is_owner, user_addr)
 
 
 def record_reply_opener(scope: str, user_id: str, reply: str) -> None:
@@ -3111,6 +3158,7 @@ __all__ = [
     "apply_user_signal",
     "build_cuckold_override",
     "build_phase_advance_hint",
+    "build_phase_tracker_block_only",
     "build_prebreak_hint",
     "build_sensory_block",
     "build_starter_examples_block",

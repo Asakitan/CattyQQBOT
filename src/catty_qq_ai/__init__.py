@@ -5602,6 +5602,20 @@ async def _build_messages(
                 )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"climax prefill override failed (non-fatal): {exc}")
+        # 主人 2026-05-29 Round 14: phase tracker 单独 inject 在所有其他 inject 之后
+        # → phase 切换时只影响 current_u 最末几百 chars, 前面 cache prefix 全命中.
+        # 主人原话「phase 能不能放到后面去? 不影响其他的, phase 没有 3000 token 吧?」
+        try:
+            from .nsfw_phase import build_phase_tracker_block_only as _build_phase_tracker
+            _phase_tracker = _build_phase_tracker(
+                _arc_scope, str(event.user_id),
+                is_owner=_user_is_owner,
+                user_addr=_user_real_display,
+            )
+            if _phase_tracker and _phase_tracker.strip():
+                _inject_into_both(_phase_tracker)
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"phase tracker block inject failed (non-fatal): {exc}")
         # 主人 2026-05-28 C11 重启 NSFW spark 内部 sweep — sys 只剩静态 (persona+override+supplement),
         # 动态段 (phase_hint/preg/climax/recency/starter/arc 等) inline 到 current user content
         # [DYNAMIC_CONTEXT] 块. 让 sys static prefix 进 cache (cache hit 85%+ 跟 sweep 时代一致).
@@ -8714,13 +8728,47 @@ def _today_local_str() -> str:
 
 
 def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str = "") -> str:
-    """签到 quick reply. 主人 2026-05-29 v2: 优先 pool (含时段+去重+情绪)."""
+    """签到 quick reply. 主人 2026-05-29 v3: 三层货架
+    L0 Composer 拼装 (90K+ 组合, owner 场景)
+    L1 yaml pool (精品桶)
+    L2 硬编码兜底
+    """
     is_owner = bool(result.get("is_owner"))
     level = int(result.get("level", 1))
     already = bool(result.get("already"))
+    gained = int(result.get("gained", 0))
+    balance = int(result.get("balance", 0))
+    nickname = user_nickname or ("主人" if is_owner else "你")
+    render_vars = {
+        "user_nickname": nickname,
+        "user_addr": "主人" if is_owner else "你",
+        "gained": gained,
+        "balance": balance,
+        "level": level,
+    }
+
+    # L0: Composer 拼装 (目前只有 owner_fresh 场景)
+    if is_owner and not already:
+        try:
+            from .cpu_engine.composer import get_composer as _ce_get_composer
+            fragments_dir = Path(getattr(
+                config, "catty_cpu_engine_routes_dir", "src/catty_qq_ai/data/cpu_engine/routes",
+            )).parent / "fragments"
+            comp = _ce_get_composer(fragments_dir, "signin_owner")
+            if comp.bodies:
+                text = comp.compose(
+                    user_id=str(user_id),
+                    render_vars=render_vars,
+                    cat_suffixes=list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []),
+                )
+                if text:
+                    return text
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"[composer.signin_owner] compose fail: {exc}")
+
+    # L1: yaml pool
     try:
         from .cpu_engine.quick_reply import get_pool as _ce_get_pool
-
         replies_dir = Path(getattr(
             config, "catty_cpu_engine_routes_dir", "src/catty_qq_ai/data/cpu_engine/routes",
         )).parent / "replies"
@@ -8732,12 +8780,7 @@ def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str
                 is_owner=is_owner,
                 user_id=str(user_id),
                 cat_suffixes=list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []),
-                render_vars={
-                    "user_nickname": user_nickname or ("主人" if is_owner else "你"),
-                    "gained": int(result.get("gained", 0)),
-                    "balance": int(result.get("balance", 0)),
-                    "level": level,
-                },
+                render_vars=render_vars,
             )
             if picked:
                 return picked
