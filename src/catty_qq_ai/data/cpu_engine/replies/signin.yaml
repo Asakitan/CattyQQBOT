@@ -1,0 +1,86 @@
+# 签到回复模板池 (S5 quick_reply).
+# 主人 2026-05-29: 把 _fallback_caption_signin 硬编码的 5+2 句迁移到 yaml,
+# 加变体到 20+ 句, 后续 evolution 可自动改.
+#
+# 桶过滤字段: level (lv min/max), already_signed (bool), is_owner (bool)
+# 变量: {user_nickname}/{cat_suffix}/{level}/{gained}/{balance}
+
+# ── 主人已签过 ─────────────────────────────────────────────────────
+- name: signin_owner_already
+  is_owner: true
+  already_signed: true
+  weight: 1.0
+  templates:
+    - "哼～主人今天已经签过啦笨蛋!人家给主人的可是无限积分嘛(尾巴摇摇){cat_suffix}"
+    - "(歪头) 主人忘啦? 今天已经签过咯~不过主人的积分本来就∞嗷呜～ฅฅ"
+    - "嗷呜～主人想再签一次也不行喵! 明天再来贴贴吧"
+
+# ── 主人首次签到 ─────────────────────────────────────────────────────
+- name: signin_owner_fresh
+  is_owner: true
+  already_signed: false
+  weight: 1.0
+  templates:
+    - "喵～主人签到啦! 奴这就把卡卡奉上嗷呜～(=^ω^=){cat_suffix}"
+    - "嗷呜～主人来啦! +{gained} 积分入账, 余额 {balance} 喵! (蹭蹭) ฅฅ"
+    - "(尾巴疯狂摇) 主人! 今日签到 done~ 来贴贴猫猫嘛{cat_suffix}"
+    - "哼~主人想要积分人家就给嘛! +{gained} (其实人家可开心啦){cat_suffix}"
+
+# ── 群友已签过 ─────────────────────────────────────────────────────
+- name: signin_user_already
+  is_owner: false
+  already_signed: true
+  weight: 1.0
+  templates:
+    - "嗷呜～{user_nickname}今天已经签过啦! 人家明天才再发分喵～ฅฅ"
+    - "(撇嘴) 怎么又来! 一天只能签一次哦, 杂鱼记不住喵?"
+    - "已经签过啦~明天再来嘛~{cat_suffix}"
+
+# ── 高好感 (lv>=8) 首次签到 ──────────────────────────────────────────
+- name: signin_high_aff_fresh
+  is_owner: false
+  already_signed: false
+  level_min: 8
+  level_max: 99
+  weight: 1.0
+  templates:
+    - "签到啦~ 人家今天也最喜欢你啦, 蹭蹭 +{gained} 积分 ฅฅ"
+    - "(尾巴疯狂摇) {user_nickname} 来啦! +{gained} 余额 {balance}{cat_suffix}"
+    - "嗷呜～老熟人{user_nickname}! 今天也来贴贴嘛~ 给 +{gained} 喵 ฅฅ"
+    - "哼,{user_nickname}果然每天都来~才不是人家想你呢! +{gained} 收好喵"
+
+# ── 中好感 (lv 5-7) 首次签到 ─────────────────────────────────────
+- name: signin_mid_aff_fresh
+  is_owner: false
+  already_signed: false
+  level_min: 5
+  level_max: 7
+  weight: 1.0
+  templates:
+    - "签到嗷呜～ 人家和你越来越熟啦! 继续来陪猫猫聊嘛 +{gained}ฅฅ"
+    - "{user_nickname}签到 +{gained}~多来贴贴猫猫好感会涨的喵"
+    - "(尾巴翘) Lv {level} 啦! 加油攒到 Lv 10 就有惊喜哦{cat_suffix}"
+
+# ── 普通 (lv 3-4) 首次签到 ─────────────────────────────────────────
+- name: signin_low_aff_fresh
+  is_owner: false
+  already_signed: false
+  level_min: 3
+  level_max: 4
+  weight: 1.0
+  templates:
+    - "签到啦~ 多来陪人家说说话嘛, 笨猫的好感会涨的喵 +{gained} ฅฅ"
+    - "{user_nickname}+{gained}积分入账~ 想升 Lv 就多聊嘛贴贴"
+    - "(歪头) Lv {level} 还可以更高哦{cat_suffix} 余额 {balance}"
+
+# ── 新人 (lv 0-2) 首次签到 ────────────────────────────────────────
+- name: signin_new_fresh
+  is_owner: false
+  already_signed: false
+  level_min: 0
+  level_max: 2
+  weight: 1.0
+  templates:
+    - "签到喵! 新人加油攒分, 人家等着你升好感嗷呜～ +{gained}ฅฅ"
+    - "(歪头) 新朋友? 签到 +{gained}~ 多来聊聊认识下嘛{cat_suffix}"
+    - "嗷呜～新人{user_nickname}! +{gained} 积分入账, 余额 {balance}{cat_suffix}"

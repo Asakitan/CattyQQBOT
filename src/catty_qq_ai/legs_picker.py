@@ -113,11 +113,31 @@ LEG_TRIGGER_PATTERNS: tuple[re.Pattern[str], ...] = (
 logger = logging.getLogger(__name__)
 
 
-def random_legs_reply(*, is_owner: bool = False) -> str:
+def random_legs_reply(*, is_owner: bool = False, user_nickname: str = "") -> str:
     """随机抽一句腿图回复。
+
+    主人 2026-05-29 S5: 优先 cpu_engine 模板池 (legs.yaml 19 句, owner 分桶),
+    池 miss 才走硬编码 16 句兜底.
+
     is_owner=True 时从 owner + 通用两池里抽,可能用『主人』称呼;
     is_owner=False 时只抽通用池,避免误称群友为主人。
     """
+    try:
+        from .cpu_engine.quick_reply import get_pool as _ce_get_pool
+        from pathlib import Path as _Path
+
+        replies_dir = _Path(__file__).resolve().parent / "data" / "cpu_engine" / "replies"
+        pool = _ce_get_pool(replies_dir, "legs")
+        if pool.size > 0:
+            picked = pool.pick(
+                is_owner=is_owner,
+                render_vars={"user_nickname": user_nickname or ("主人" if is_owner else "杂鱼")},
+            )
+            if picked:
+                return picked
+    except Exception:  # noqa: BLE001
+        pass
+
     if is_owner:
         return random.choice(LEGS_REPLY_LINES + LEGS_REPLY_LINES_OWNER)
     return random.choice(LEGS_REPLY_LINES)

@@ -7915,7 +7915,41 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
     _poke_last_replied_at[scope] = now
     # 主人需求:戳猫猫 = 戳猫猫屁股,按身份做不同暧昧反应
     # 主人 → 反差链(嘴硬+脸红+小撒娇);熟人 → 害羞嗔怪;陌生人 → 炸毛警告
-    if _event_is_owner(event):
+    # 主人 2026-05-29 S5: 优先 cpu_engine 模板池 (poke.yaml 18+ 句, 三身份分桶),
+    # 池 miss 才走硬编码 13 句兜底.
+    is_poke_owner = _event_is_owner(event)
+    poke_level = 1
+    if not is_poke_owner:
+        try:
+            poke_level, _exp = affection_store.get_level_and_exp(event.user_id)
+        except Exception:  # noqa: BLE001
+            poke_level = 1
+    poke_nickname = "主人" if is_poke_owner else (
+        getattr(event, "sender", None) and (
+            getattr(event.sender, "card", None) or getattr(event.sender, "nickname", None)
+        ) or "杂鱼"
+    )
+    pool_pick: str | None = None
+    try:
+        from .cpu_engine.quick_reply import get_pool as _ce_get_pool
+
+        replies_dir = Path(getattr(
+            config, "catty_cpu_engine_routes_dir", "src/catty_qq_ai/data/cpu_engine/routes",
+        )).parent / "replies"
+        pool = _ce_get_pool(replies_dir, "poke")
+        if pool.size > 0:
+            pool_pick = pool.pick(
+                level=int(poke_level),
+                is_owner=is_poke_owner,
+                cat_suffixes=list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []),
+                render_vars={"user_nickname": str(poke_nickname)},
+            )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"[quick_reply.poke] pool pick fail: {exc}")
+
+    if pool_pick:
+        state["catty_poke_reply"] = pool_pick
+    elif is_poke_owner:
         state["catty_poke_reply"] = random.choice(
             [
                 "喵?!杂鱼主人戳猫猫屁股做什么啦!(脸炸红)(尾巴爆炸)"
@@ -7930,36 +7964,30 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
                 "...只有主人才可以这样的喵...",
             ]
         )
+    elif poke_level >= 6:
+        state["catty_poke_reply"] = random.choice(
+            [
+                "诶?!戳猫猫屁股啦!(脸红一甩尾)"
+                "...熟归熟,这种地方不能随便戳啦笨蛋!(嘟嘴)",
+                "喂!屁股是禁区啦!(屁股一躲)"
+                "...哼,看在你常来陪猫猫的份上不计较,下次别戳那里了喵~",
+                "呜!被你戳到了!(脸红遮屁股)"
+                "...想戳就只戳爪爪好不好,屁股是私人的喵!",
+            ]
+        )
     else:
-        # 熟人(高好感 lv≥6) 还是陌生人,分别走嗔怪/炸毛
-        try:
-            level, _exp = affection_store.get_level_and_exp(event.user_id)
-        except Exception:  # noqa: BLE001
-            level = 1
-        if level >= 6:
-            state["catty_poke_reply"] = random.choice(
-                [
-                    "诶?!戳猫猫屁股啦!(脸红一甩尾)"
-                    "...熟归熟,这种地方不能随便戳啦笨蛋!(嘟嘴)",
-                    "喂!屁股是禁区啦!(屁股一躲)"
-                    "...哼,看在你常来陪猫猫的份上不计较,下次别戳那里了喵~",
-                    "呜!被你戳到了!(脸红遮屁股)"
-                    "...想戳就只戳爪爪好不好,屁股是私人的喵!",
-                ]
-            )
-        else:
-            state["catty_poke_reply"] = random.choice(
-                [
-                    "嗷!谁戳猫猫屁股啦!(炸毛+尾巴竖直)"
-                    "...哈?才认识就上手喵?走开走开!",
-                    "哈?!陌生人戳猫猫那里干嘛喵!(蹿出去一米)"
-                    "...再戳猫猫就咬你爪子!",
-                    "喵!不许戳屁股!(警告地哈气)"
-                    "...想被猫猫理就先把好感度刷上来再说啦!",
-                    "诶?(警惕)谁啊~手别乱动喵!"
-                    "...猫猫屁股可不是给陌生人摸的!",
-                ]
-            )
+        state["catty_poke_reply"] = random.choice(
+            [
+                "嗷!谁戳猫猫屁股啦!(炸毛+尾巴竖直)"
+                "...哈?才认识就上手喵?走开走开!",
+                "哈?!陌生人戳猫猫那里干嘛喵!(蹿出去一米)"
+                "...再戳猫猫就咬你爪子!",
+                "喵!不许戳屁股!(警告地哈气)"
+                "...想被猫猫理就先把好感度刷上来再说啦!",
+                "诶?(警惕)谁啊~手别乱动喵!"
+                "...猫猫屁股可不是给陌生人摸的!",
+            ]
+        )
     return True
 
 
@@ -8653,15 +8681,45 @@ def _today_local_str() -> str:
 
 
 def _fallback_caption_signin(result: dict) -> str:
-    """签到 AI 生成失败时的兜底文案,1-2 句猫娘短话。"""
+    """签到 AI 生成失败时的兜底文案,1-2 句猫娘短话。
+
+    主人 2026-05-29 S5: 优先从 cpu_engine 模板池 pick (有 20+ 变体),
+    失败 (yaml 丢/pyaml 没装/桶 miss) 才走硬编码 7 句。
+    """
     is_owner = bool(result.get("is_owner"))
-    if result.get("already"):
+    level = int(result.get("level", 1))
+    already = bool(result.get("already"))
+    try:
+        from .cpu_engine.quick_reply import get_pool as _ce_get_pool
+
+        replies_dir = Path(getattr(
+            config, "catty_cpu_engine_routes_dir", "src/catty_qq_ai/data/cpu_engine/routes",
+        )).parent / "replies"
+        pool = _ce_get_pool(replies_dir, "signin")
+        if pool.size > 0:
+            picked = pool.pick(
+                level=level,
+                already_signed=already,
+                is_owner=is_owner,
+                cat_suffixes=list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []),
+                render_vars={
+                    "user_nickname": "主人" if is_owner else "你",
+                    "gained": int(result.get("gained", 0)),
+                    "balance": int(result.get("balance", 0)),
+                    "level": level,
+                },
+            )
+            if picked:
+                return picked
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"[quick_reply.signin] pool pick fail: {exc}, fall back to hardcoded")
+
+    if already:
         if is_owner:
             return "哼~ 主人今天已经签过啦笨蛋,人家给主人的可是无限积分嘛 (尾巴摇摇) ฅฅ"
         return "嗷呜~ 你今天已经签过啦!人家明天才再发分喵~ ฅฅ"
     if is_owner:
         return "喵~ 主人签到啦!奴这就把卡卡奉上嗷呜~ (=^ω^=) ฅฅ"
-    level = int(result.get("level", 1))
     if level >= 8:
         return "签到啦~ 人家今天也最喜欢你啦,蹭蹭 ฅฅ"
     if level >= 5:
@@ -9807,6 +9865,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             has_image=_has_image_for_intent,
         )
         nsfw_image_segments: list[MessageSegment] = []
+        # 主人 2026-05-29: NSFW 自动生图改后台异步, 文字优先发. 详见下方 chunk loop 前的 30s wait.
+        _nsfw_img_task: asyncio.Task | None = None
+        _nsfw_img_task_started_at: float | None = None
+        # 30s 超时后 chunks[-1] 也会作为普通文本提前发, 这里标记防 image send block 重复发.
+        _chunks_last_already_sent = False
         # 慢请求 placeholder:超过 catty_slow_reply_placeholder_seconds 没回就先发个轻量占位,
         # 避免用户以为 bot 卡死了或被忽略了(实测群里 chat_completion 偶尔 30s+,被排队的用户
         # 等到 25s 又被 abandon,全程哑巴非常糟糕)。
@@ -10151,7 +10214,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             _preg_st_for_draw = pregnancy_store.get_state(str(event.user_id))
                         except Exception:  # noqa: BLE001
                             _preg_st_for_draw = None
-                        _nsfw_seg = await _maybe_nsfw_img(
+                        # 主人 2026-05-29: NAI v4.5 出图常 30-90s, 旧版 await 会卡住
+                        # 整个发送流程 → 文字也跟着延迟. 改后台 task, 文字优先发出去,
+                        # chunks loop 前最多再等 30s 看图能不能赶上, 赶不上就先发文字,
+                        # 图就绪后单独追发.
+                        _nsfw_img_task = asyncio.create_task(_maybe_nsfw_img(
                             config=config,
                             scope_key=_nsfw_img_scope,
                             user_id=str(event.user_id),
@@ -10161,12 +10228,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             user_text=_user_text_now,
                             recent_messages=_spark_messages,
                             pregnancy_state=_preg_st_for_draw,
-                        )
-                        if _nsfw_seg is not None:
-                            nsfw_image_segments.append(_nsfw_seg)
+                        ))
+                        _nsfw_img_task_started_at = time.monotonic()
                     except Exception as exc:  # noqa: BLE001
                         logger.warning(
-                            f"nsfw_imagegen auto-draw failed (non-fatal): "
+                            f"nsfw_imagegen auto-draw kick-off failed (non-fatal): "
                             f"{exc.__class__.__name__}: {exc}"
                         )
             else:
@@ -10445,6 +10511,44 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 restore_latex_placeholders(chunk_text, latex_sources)
             )
 
+        # 主人 2026-05-29: NSFW 自动生图 30s 等图阈值. 在开始发 chunks 之前给图最多 30s
+        # (从 task 创建时间算起) 跟上, 跟上就走老路径 chunks[-1]+image 一起发;
+        # 没跟上就让 chunks 先一句一句发, 图后到追发.
+        if _nsfw_img_task is not None and _nsfw_img_task_started_at is not None:
+            _elapsed = time.monotonic() - _nsfw_img_task_started_at
+            _budget = max(0.0, 30.0 - _elapsed)
+            if _budget > 0 and not _nsfw_img_task.done():
+                try:
+                    _nsfw_seg = await asyncio.wait_for(
+                        asyncio.shield(_nsfw_img_task), timeout=_budget,
+                    )
+                    if _nsfw_seg is not None:
+                        nsfw_image_segments.append(_nsfw_seg)
+                    _nsfw_img_task = None
+                except asyncio.TimeoutError:
+                    logger.info(
+                        f"nsfw_imagegen: 30s 还没出图(elapsed={_elapsed:.1f}s, "
+                        f"budget={_budget:.1f}s) → 先发文字, 图后到追发"
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(
+                        f"nsfw_imagegen auto-draw failed (non-fatal): "
+                        f"{exc.__class__.__name__}: {exc}"
+                    )
+                    _nsfw_img_task = None
+            elif _nsfw_img_task.done():
+                # task 在 chunks 切分等步骤里已经完成 → 取结果
+                try:
+                    _nsfw_seg = _nsfw_img_task.result()
+                    if _nsfw_seg is not None:
+                        nsfw_image_segments.append(_nsfw_seg)
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(
+                        f"nsfw_imagegen auto-draw failed (non-fatal): "
+                        f"{exc.__class__.__name__}: {exc}"
+                    )
+                _nsfw_img_task = None
+
         for chunk in chunks[:-1]:
             _remember_bot_reply_for_event(event, _chunk_to_history(chunk))
             # NapCat → QQ 网关偶发 retcode=1200 "网络连接异常",原本裸 send
@@ -10473,8 +10577,51 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             _mark_consumed_reply_source_if_sent(event, state)
             if delay_seconds:
                 await asyncio.sleep(delay_seconds)
-        if nsfw_image_segments:
+        # 主人 2026-05-29: 30s 超时后 task 还在跑 → chunks[-1] 也走一句一句模式提前发,
+        # 然后后台等图就绪, 单独追发. 图就绪用 NAI 自身 timeout (180s) 控制.
+        if _nsfw_img_task is not None:
             if chunks:
+                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]))
+                try:
+                    await matcher.send(
+                        _compose_reply_message(
+                            event,
+                            text=chunks[-1],
+                            quote=quote_pending,
+                            latex_sources=latex_sources,
+                            inline_image_urls=inline_image_urls,
+                        )
+                    )
+                except OnebotActionFailed as exc:
+                    logger.warning(
+                        f"chunks[-1] (image-delayed) ActionFailed: {exc}"
+                    )
+                except OnebotNetworkError as exc:
+                    logger.warning(
+                        f"chunks[-1] (image-delayed) NetworkError: {exc}"
+                    )
+                quote_pending = False
+                _mark_consumed_reply_source_if_sent(event, state)
+                if delay_seconds:
+                    await asyncio.sleep(delay_seconds)
+                _chunks_last_already_sent = True
+            # 等图就绪 (NAI curl timeout 180s 兜底), 拿到后进入下方 image send block 追发.
+            try:
+                _nsfw_seg = await _nsfw_img_task
+                if _nsfw_seg is not None:
+                    nsfw_image_segments.append(_nsfw_seg)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(
+                    f"nsfw_imagegen background await failed: "
+                    f"{exc.__class__.__name__}: {exc}"
+                )
+            _nsfw_img_task = None
+            # 图等回来发现为 None (失败 / 余额不足 / 配额跳过) → chunks 全发完了, 直接 finish.
+            # 否则会落到下方 emoji_entry/fallback 分支再发一次 chunks[-1] 导致重复.
+            if _chunks_last_already_sent and not nsfw_image_segments:
+                await matcher.finish()
+        if nsfw_image_segments:
+            if chunks and not _chunks_last_already_sent:
                 _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]))
                 try:
                     await matcher.send(
