@@ -9616,7 +9616,33 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             )
         else:
             history_text = _strip_inline_image_markers(reply)
-        _append_history(history_key, incoming.history_content, history_text)
+        # 主人 2026-05-28 cache 关键修复: 之前 _append_history 存的 user_content 是纯 text
+        # (incoming.history_content), 但 _build_messages 内部把 [DYNAMIC_CONTEXT] inline
+        # 到 current user msg content 后才发给 Anthropic. 导致:
+        # - 本轮 cache 写入: prefix 含 [user_text + DYNAMIC_CONTEXT_v1]
+        # - 下轮 history 里这条 user msg = 纯 user_text (没 dynamic)
+        # - 下轮 lookback 找子集时 byte 不一致 → 找不到, cache_read 卡 sys 部分.
+        # 修复: 从 messages 取最后一条 user msg 的实际 content (含 dynamic) 作为存档版本.
+        # 这样下轮 history 里的版本跟上轮 cache 写入字节一致, lookback 命中整个 history.
+        _enriched_user_content_for_history = incoming.history_content
+        try:
+            for _m in reversed(messages):
+                if isinstance(_m, dict) and _m.get("role") == "user":
+                    _c = _m.get("content", "")
+                    if isinstance(_c, str) and _c.strip():
+                        _enriched_user_content_for_history = _c
+                    elif isinstance(_c, list) and _c:
+                        # multimodal list — 拼 text 块作为 history 版本
+                        _texts = []
+                        for _b in _c:
+                            if isinstance(_b, dict) and _b.get("type") == "text":
+                                _texts.append(str(_b.get("text", "")))
+                        if _texts:
+                            _enriched_user_content_for_history = "\n".join(_texts)
+                    break
+        except Exception as _enrich_exc:  # noqa: BLE001
+            logger.debug(f"enriched history content extract failed: {_enrich_exc}")
+        _append_history(history_key, _enriched_user_content_for_history, history_text)
         if special_care_context and chunks:
             memory_store.record_special_care_reply_sent(event, history_text)
 
