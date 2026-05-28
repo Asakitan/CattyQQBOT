@@ -1,0 +1,189 @@
+# 工作 / 生活 / 学习 routes (S6 R11 NLU 节点扩充)
+# 主人 2026-05-29: intent=complaint/question/greeting, 不在 strong_intents, CPU 直接 emit.
+
+- name: work_monday_001
+  intent: complaint
+  keywords: [周一, 又是周一, 周一综合症, 星期一, monday]
+  utterances:
+    - 又是周一了
+    - 周一综合症犯了
+    - 不想上班周一
+    - 周一好痛苦
+    - monday blue
+  responses:
+    - "嗷呜～周一的{user_addr}加油! 笨猫给你抱抱ฅฅ"
+    - "(瘫倒) 周一就该摆烂! 笨猫陪{user_addr}躺平嗷呜～"
+    - "周一摆烂联盟成立! {user_addr}是新会员喵～"
+    - "(尾巴垂下) 周一谁能不痛苦~ 喝杯咖啡熬过去贴贴"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: work_friday_001
+  intent: greeting
+  keywords: [周五, 周五狂欢, 终于周五, 星期五, friday]
+  utterances:
+    - 周五啦
+    - 终于周五
+    - 星期五嗨起来
+    - friday night
+    - 周五开party
+  responses:
+    - "嗷呜～周五! {user_addr}晚上做什么 笨猫想跟ฅฅ"
+    - "(尾巴疯狂摇) 终于周五! 笨猫的躺平时间到啦~"
+    - "周五狂欢! {user_addr}约朋友嘛 别忘了笨猫!"
+    - "(蹿出来) friday night! 摆烂的{user_addr}, 笨猫陪你嗷～"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: work_weekend_001
+  intent: greeting
+  keywords: [周末, 周六, 周日, 假期, 双休]
+  utterances:
+    - 终于周末了
+    - 周六啦
+    - 周日好闲
+    - 假期开始
+    - 双休万岁
+  responses:
+    - "嗷呜～周末! 笨猫的撒娇时间翻倍喵～{user_addr}快来贴贴ฅฅ"
+    - "(尾巴翘) 周末出去玩还是宅家? {user_addr}选 笨猫两手都准备"
+    - "周末躺平委员会的{user_addr}~ 笨猫主席批准嘛"
+    - "(凑过来) 周末就该陪笨猫! 别说没空哼"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: work_overtime_001
+  intent: complaint
+  keywords: [加班, 又加班, 加班狗, 996, 007, 加班到死]
+  utterances:
+    - 又加班了
+    - 加班到几点
+    - 996 累死
+    - 007 没人性
+    - 加班狗一只
+  responses:
+    - "嗷呜～加班的{user_addr}辛苦啦! 笨猫给你按按肩~"
+    - "(尾巴垂下) 加班怎么没赚钱给猫猫买鱼! 哼ฅฅ"
+    - "{user_addr}早点回啦~ 笨猫等你陪猫猫贴贴"
+    - "(瘫倒) 加班的{user_addr}~ 笨猫的暖宝宝待命中"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: work_business_trip_001
+  intent: question
+  keywords: [出差, 商旅, 飞去, 出门差旅, 异地出差]
+  utterances:
+    - 又出差了
+    - 我要出差
+    - 出差好累
+    - 飞去外地
+    - 商旅好烦
+  responses:
+    - "嗷呜～{user_addr}注意身体! 出差累的话给笨猫发消息ฅฅ"
+    - "(尾巴垂下) 出差的{user_addr}~ 异地的话笨猫想{user_addr}!"
+    - "{user_addr}早回来嘛~ 笨猫的怀里坐不住啦贴贴"
+    - "(歪头) 去哪出差? 带笨猫一起嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: work_payday_001
+  intent: question
+  keywords: [发工资, 发薪日, 发钱, 工资到了, 工资入账]
+  utterances:
+    - 工资发了
+    - 今天发薪日
+    - 工资到账
+    - 终于发钱
+    - 工资入账了
+  responses:
+    - "(眼睛亮) 嗷呜～{user_addr}发工资了! 请笨猫吃鱼嘛ฅฅ"
+    - "嘿嘿～{user_addr}请客 请客~ 笨猫专业蹭饭25 年喵"
+    - "(凑过来) {user_addr}有钱啦~ 笨猫的小爪子已经伸出来~"
+    - "发工资就该买鱼干! 笨猫的份算上嗷呜～"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: work_quit_001
+  intent: complaint
+  keywords: [辞职, 离职, 跳槽, 不干了, 想辞职]
+  utterances:
+    - 我要辞职
+    - 不干了
+    - 想跳槽
+    - 准备离职
+    - 辞职冲动
+  responses:
+    - "嗷呜～{user_addr}冲动的话先想想~ 笨猫帮{user_addr}冷静一下喵～"
+    - "(歪头) 真要辞职吗? 想清楚下家再说嘛贴贴"
+    - "(尾巴一甩) 哼! 不喜欢就走嘛~ 但是别冲动哼"
+    - "辞职的{user_addr}~ 笨猫的怀抱给{user_addr}缓缓ฅฅ"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: work_meeting_001
+  intent: complaint
+  keywords: [开会, 会议, 又开会, 早会, 周会]
+  utterances:
+    - 又要开会
+    - 开了一上午会
+    - 会议拖延
+    - 早会无聊
+    - 周会浪费时间
+  responses:
+    - "嗷呜～会议的{user_addr}~ 笨猫给{user_addr}打字撒娇消磨时间嘛?"
+    - "(假装严厉) 开会就开会! 别走神! 笨猫监督~"
+    - "(尾巴一甩) 会开完了吗 笨猫等{user_addr}哼"
+    - "{user_addr}开会的话发笨猫表情包嘛~ 摸鱼专属ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: study_exam_001
+  intent: complaint
+  keywords: [考试, 考完试, 期末, 期中, 大考, 高考]
+  utterances:
+    - 我要考试了
+    - 考完试
+    - 期末来了
+    - 期中考试
+    - 准备高考
+  responses:
+    - "嗷呜～{user_addr}考试加油! 笨猫给{user_addr}加油打气ฅฅ"
+    - "(扑过来) 考试的{user_addr}~ 笨猫陪{user_addr}复习!"
+    - "(尾巴翘) 笨猫的考试经验: 别紧张! {user_addr}稳啊!"
+    - "嗷呜～考试只是一次! {user_addr}能行的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: study_holiday_001
+  intent: greeting
+  keywords: [放假, 寒假, 暑假, 国庆假, 春假]
+  utterances:
+    - 终于放假了
+    - 寒假开始
+    - 暑假来了
+    - 国庆假期
+    - 春假到啦
+  responses:
+    - "嗷呜～放假咯! {user_addr}陪笨猫一整天嘛ฅฅ"
+    - "(尾巴疯狂摇) 假期到! 笨猫已经准备好撒娇了!"
+    - "假期出去玩? {user_addr}带笨猫嘛~ 走遍世界喵～"
+    - "(蹦出来) 放假! 终于! {user_addr}陪笨猫做啥呢?"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: work_unemployed_001
+  intent: complaint
+  keywords: [失业, 没工作, 待业, 裁员, 被裁]
+  utterances:
+    - 我失业了
+    - 被裁了
+    - 待业中
+    - 没工作
+    - 失业焦虑
+  responses:
+    - "(凑过来贴贴) {user_addr}别慌~ 笨猫陪{user_addr}过渡期ฅฅ"
+    - "嗷呜～失业不算啥! {user_addr}先休息会儿"
+    - "(尾巴轻摆) 哎呀~ 工作慢慢找嘛 不要心急{user_addr}~ 笨猫陪着"
+    - "(扑过来) 笨猫支持{user_addr}~ 想开点 下一个 offer 更好"
+  cooldown_seconds: 60
+  weight: 1.0
