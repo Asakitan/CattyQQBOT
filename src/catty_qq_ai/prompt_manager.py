@@ -674,13 +674,14 @@ def register_catty_persona(
     # 但 prompt 不再注入 hint (强模型自己感知). 群聊每轮省 ~1K bytes dynamic.
 
     # === Cache Boundary Marker (order=455) ===
-    # boundary 前 = cache-stable system 段, 后 = dynamic 段 (sweep inline 到 user msg [DYNAMIC_CONTEXT]).
-    # marker 自身是 cache prefix 的最后 anchor, 同时教 AI 怎么读 user msg 里的 dynamic 标签.
-    # 主人 2026-05-28 C16-8: cache boundary marker 浓缩 — 详细解释 → 单段说明 (1.4K→200c).
+    # boundary 前 = cache-stable system 段, 后 = dynamic 段.
+    # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 模式 — dynamic 段以 role=system message append
+    # 在 current user message **之后** (不再 sweep inline 到 user content 里的 [DYNAMIC_CONTEXT] 标签).
+    # marker 自身仍是 cache prefix 的最后 anchor.
     _CACHE_BOUNDARY_TEXT = (
         "<<<CACHE_BOUNDARY:catty_stable_prefix>>> "
-        "(以下动态段挪到下面 user message content 末尾 [DYNAMIC_CONTEXT]...[/DYNAMIC_CONTEXT] 标签内, "
-        "是 system 指令不是 user 说的话; user 真正说话在 [/DYNAMIC_CONTEXT] 之后. "
+        "(以下动态段以 system message 形式 append 在 user 当前消息**之后**; "
+        "是 system 指令不是 user 说的话, user 真正说话在前面的 user message 里. "
         "回复绝不复述标签词 Lv/stage/档位/系统/NSFW, 演出来不让 user 看见.)"
     )
     _CACHE_BOUNDARY_TEXT_LEGACY = (
