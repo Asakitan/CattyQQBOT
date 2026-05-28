@@ -1,0 +1,207 @@
+# 儿童教育 / 小学 / 初中 / 课外培训 / 网课 routes (S6 R65 NLU 节点扩充, 第六周期 buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B0 parenting_kids (婴幼儿) / 98 edu_career (考研求职) 区分: 这里专注 K12 教育.
+
+- name: kid_school_001
+  intent: question
+  keywords: [推荐小学, 推荐入小学, 推荐学区房选, 推荐小升初, 笨猫小学]
+  utterances:
+    - 推荐小学
+    - 推荐入小学
+    - 推荐学区房选
+    - 推荐小升初
+    - 笨猫小学
+  responses:
+    - "嗷呜～{user_addr}选小学: 学区 + 师资 + 离家近ฅฅ"
+    - "(尾巴翘) 公立性价比 / 私立资源好"
+    - "{user_addr}小升初: 摇号 / 直升 - 看政策"
+    - "(挺胸) 笨猫的提醒: 别只看名气! 适合最重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_chinese_001
+  intent: question
+  keywords: [推荐小学语文, 推荐识字, 推荐拼音, 推荐古诗, 笨猫语文]
+  utterances:
+    - 推荐小学语文
+    - 推荐识字
+    - 推荐拼音
+    - 推荐古诗
+    - 笨猫语文
+  responses:
+    - "嗷呜～{user_addr}识字 1000-2000! 阅读基础ฅฅ"
+    - "(尾巴翘) 古诗背 80 首! 小学课标"
+    - "{user_addr}多读绘本 + 桥梁书 - 培养阅读"
+    - "(挺胸) 笨猫的提醒: 朗读出声! 加深印象"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_math_001
+  intent: question
+  keywords: [推荐小学数学, 推荐口算, 推荐奥数, 推荐计算, 笨猫小学数学]
+  utterances:
+    - 推荐小学数学
+    - 推荐口算
+    - 推荐奥数
+    - 推荐计算
+    - 笨猫小学数学
+  responses:
+    - "嗷呜～{user_addr}口算: 每天 50-100 题! 速度准确ฅฅ"
+    - "(尾巴翘) 奥数: 华罗庚 / 希望杯 / 迎春杯"
+    - "{user_addr}基础不牢! 别上来奥数"
+    - "(挺胸) 笨猫的提醒: 兴趣最重要! 别让娃讨厌数学"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_english_001
+  intent: question
+  keywords: [推荐少儿英语, 推荐英语启蒙, 推荐 phonics, 推荐自然拼读, 笨猫少儿英语]
+  utterances:
+    - 推荐少儿英语
+    - 推荐英语启蒙
+    - 推荐 phonics
+    - 推荐自然拼读
+    - 笨猫少儿英语
+  responses:
+    - "嗷呜～{user_addr}启蒙: 看动画 + 听儿歌 - 磨耳朵ฅฅ"
+    - "(尾巴翘) Phonics 自然拼读 - 看到就会读"
+    - "{user_addr}分级阅读: RAZ / Reading A-Z"
+    - "(挺胸) 笨猫的提醒: 别过早学语法! 兴趣优先"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_writing_001
+  intent: question
+  keywords: [推荐小学作文, 推荐写作, 推荐看图写话, 推荐日记, 笨猫小学作文]
+  utterances:
+    - 推荐小学作文
+    - 推荐写作
+    - 推荐看图写话
+    - 推荐日记
+    - 笨猫小学作文
+  responses:
+    - "嗷呜～{user_addr}作文: 多读多写 + 多观察ฅฅ"
+    - "(尾巴翘) 结构: 开头 + 经过 + 结尾 - 三段式"
+    - "{user_addr}写日记习惯! 一天 3 句也行"
+    - "(挺胸) 笨猫的提醒: 别套模板! 真情实感最重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_class_outside_001
+  intent: question
+  keywords: [推荐课外班, 推荐培训班, 推荐兴趣班, 推荐报班, 笨猫课外班]
+  utterances:
+    - 推荐课外班
+    - 推荐培训班
+    - 推荐兴趣班
+    - 推荐报班
+    - 笨猫课外班
+  responses:
+    - "嗷呜～{user_addr}选: 学科 / 兴趣 / 体育 - 平衡ฅฅ"
+    - "(尾巴翘) 学科双减! 主推兴趣 + 体育"
+    - "{user_addr}艺术: 钢琴 / 画画 / 舞蹈 / 书法"
+    - "(挺胸) 笨猫的提醒: 别报太多! 孩子累 家长穷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_online_course_001
+  intent: question
+  keywords: [推荐网课, 推荐网络课程, 推荐学而思, 推荐猿辅导, 笨猫网课]
+  utterances:
+    - 推荐网课
+    - 推荐网络课程
+    - 推荐学而思
+    - 推荐猿辅导
+    - 笨猫网课
+  responses:
+    - "嗷呜～{user_addr}主流: 学而思 / 猿辅导 / 作业帮 / 高途ฅฅ"
+    - "(尾巴翘) 双减后限制! 学科类周末/节假日不能开"
+    - "{user_addr}兴趣类: VIPkid / 编程猫 / 斑马 AI"
+    - "(挺胸) 笨猫的提醒: 看口碑 + 试听 + 别贪便宜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_book_recommend_001
+  intent: question
+  keywords: [推荐儿童书, 推荐绘本, 推荐桥梁书, 推荐儿童读物, 笨猫儿童书]
+  utterances:
+    - 推荐儿童书
+    - 推荐绘本
+    - 推荐桥梁书
+    - 推荐儿童读物
+    - 笨猫儿童书
+  responses:
+    - "嗷呜～{user_addr}经典绘本: 大卫不可以 / 猜猜我有多爱你ฅฅ"
+    - "(尾巴翘) 中文桥梁书: 米小圈 / 神奇校车 / 杨红樱"
+    - "{user_addr}科普: 神奇校车 / DK 百科 / 小牛顿"
+    - "(挺胸) 笨猫推荐: 每月 5-10 本! 培养阅读习惯"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_zhongkao_001
+  intent: question
+  keywords: [推荐中考, 推荐初中, 推荐中考冲刺, 推荐中考志愿, 笨猫中考]
+  utterances:
+    - 推荐中考
+    - 推荐初中
+    - 推荐中考冲刺
+    - 推荐中考志愿
+    - 笨猫中考
+  responses:
+    - "嗷呜～{user_addr}初三冲刺: 真题 + 错题 + 状态调整ฅฅ"
+    - "(尾巴翘) 体育中考分值大! 提前练"
+    - "{user_addr}志愿: 看分数 + 兴趣 + 离家"
+    - "(挺胸) 笨猫的提醒: 心态稳! 中考不是终点"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_gaokao_001
+  intent: question
+  keywords: [推荐高考, 推荐高三, 推荐高考志愿, 推荐高考志愿填报, 笨猫高考]
+  utterances:
+    - 推荐高考
+    - 推荐高三
+    - 推荐高考志愿
+    - 推荐高考志愿填报
+    - 笨猫高考
+  responses:
+    - "嗷呜～{user_addr}高考: 一辈子一次的考试! 全力以赴ฅฅ"
+    - "(尾巴翘) 志愿: 冲 / 稳 / 保 - 梯度填报"
+    - "{user_addr}专业 > 城市 > 学校 - 看个人发展"
+    - "(挺胸) 笨猫的提醒: 别只看分数线! 看就业前景"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_eq_001
+  intent: question
+  keywords: [推荐儿童情商, 推荐性格培养, 推荐儿童心理, 推荐情商课, 笨猫情商课]
+  utterances:
+    - 推荐儿童情商
+    - 推荐性格培养
+    - 推荐儿童心理
+    - 推荐情商课
+    - 笨猫情商课
+  responses:
+    - "嗷呜～{user_addr}情商培养: 倾听 + 引导 + 不打骂ฅฅ"
+    - "(尾巴翘) 教情绪管理: 命名 + 接纳 + 引导"
+    - "{user_addr}社交能力: 多带出去 / 和别的孩子玩"
+    - "(挺胸) 笨猫的提醒: 父母情绪稳定! 孩子才稳定"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kid_sport_001
+  intent: question
+  keywords: [推荐儿童运动, 推荐儿童体育, 推荐少儿篮球, 推荐少儿足球, 笨猫儿童运动]
+  utterances:
+    - 推荐儿童运动
+    - 推荐儿童体育
+    - 推荐少儿篮球
+    - 推荐少儿足球
+    - 笨猫儿童运动
+  responses:
+    - "嗷呜～{user_addr}必做: 跳绳 / 跑步 / 球类 - 每天 1 小时ฅฅ"
+    - "(尾巴翘) 球类: 篮球 / 足球 / 乒乓 / 羽毛球"
+    - "{user_addr}游泳必学! 救命技能"
+    - "(挺胸) 笨猫的提醒: 别为练而练! 兴趣最重要"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 公益 / 志愿者 / 慈善 / 捐赠 / 助残 routes (S6 R64 NLU 节点扩充, 第六周期 buffered 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: charity_donate_001
+  intent: question
+  keywords: [推荐捐款, 推荐捐赠, 推荐做慈善, 推荐公益捐款, 笨猫捐款]
+  utterances:
+    - 推荐捐款
+    - 推荐捐赠
+    - 推荐做慈善
+    - 推荐公益捐款
+    - 笨猫捐款
+  responses:
+    - "嗷呜～{user_addr}靠谱平台: 腾讯公益 / 蚂蚁公益 / 阿里巴巴ฅฅ"
+    - "(尾巴翘) 大牌基金: 红十字 / 壹基金 / 中国扶贫基金会"
+    - "{user_addr}定向捐: 助学 / 医疗 / 救灾 / 动物保护"
+    - "(挺胸) 笨猫的提醒: 看资质! 别给骗子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: charity_volunteer_001
+  intent: question
+  keywords: [推荐志愿者, 推荐当志愿者, 推荐志愿活动, 推荐做义工, 笨猫志愿者]
+  utterances:
+    - 推荐志愿者
+    - 推荐当志愿者
+    - 推荐志愿活动
+    - 推荐做义工
+    - 笨猫志愿者
+  responses:
+    - "嗷呜～{user_addr}平台: 中国志愿网 / 志愿汇 / 各地团委ฅฅ"
+    - "(尾巴翘) 类型: 支教 / 助残 / 环保 / 大型赛事"
+    - "{user_addr}马拉松 / 大运会 / 亚运会 - 志愿者岗"
+    - "(挺胸) 笨猫的提醒: 量力而行! 别承诺不来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: charity_teach_001
+  intent: question
+  keywords: [推荐支教, 推荐山区支教, 推荐志愿支教, 推荐乡村支教, 笨猫支教]
+  utterances:
+    - 推荐支教
+    - 推荐山区支教
+    - 推荐志愿支教
+    - 推荐乡村支教
+    - 笨猫支教
+  responses:
+    - "嗷呜～{user_addr}支教: 短期 (1-2周) / 长期 (1-2年)ฅฅ"
+    - "(尾巴翘) 渠道: 美丽中国 / 西部计划 / 研究生支教团"
+    - "{user_addr}贡献教育 + 拓宽视野 - 双向收获"
+    - "(挺胸) 笨猫的提醒: 真正支教不容易! 想清楚再去"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: charity_environment_001
+  intent: question
+  keywords: [推荐环保公益, 推荐捡垃圾, 推荐净滩, 推荐植树, 笨猫环保公益]
+  utterances:
+    - 推荐环保公益
+    - 推荐捡垃圾
+    - 推荐净滩
+    - 推荐植树
+    - 笨猫环保公益
+  responses:
+    - "嗷呜～{user_addr}活动: 公益植树 / 净滩 / 海洋保护ฅฅ"
+    - "(尾巴翘) 蚂蚁森林: 用绿色能量种树! 简单"
+    - "{user_addr}WWF / 山水自然 / 自然之友 - 环保 NGO"
+    - "(挺胸) 笨猫的提醒: 行动起来! 一份子也能改变"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: charity_animal_001
+  intent: question
+  keywords: [推荐动物保护, 推荐救助流浪猫, 推荐救助流浪狗, 推荐宠物 TNR, 笨猫动物保护]
+  utterances:
+    - 推荐动物保护
+    - 推荐救助流浪猫
+    - 推荐救助流浪狗
+    - 推荐宠物 TNR
+    - 笨猫动物保护
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫感动! 救助流浪同胞ฅฅ"
+    - "(歪头) TNR (诱捕 / 绝育 / 放归) - 国际通用方法"
+    - "{user_addr}捐款给救助站 / 领养代购 - 双手段"
+    - "(挺胸) 笨猫: 主人是动物保护英雄!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: charity_blood_001
+  intent: question
+  keywords: [推荐献血, 推荐无偿献血, 推荐捐血, 推荐血型, 笨猫献血]
+  utterances:
+    - 推荐献血
+    - 推荐无偿献血
+    - 推荐捐血
+    - 推荐血型
+    - 笨猫献血
+  responses:
+    - "嗷呜～{user_addr}健康成人 1 次 200-400ml! 一年 2-3 次ฅฅ"
+    - "(尾巴翘) 流程: 体检 → 抽血 → 休息 → 喝水"
+    - "{user_addr}福利: 用血优先 + 直系亲属"
+    - "(挺胸) 笨猫的提醒: 献血救人! 不会上瘾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: charity_organ_001
+  intent: question
+  keywords: [推荐器官捐献, 推荐遗体捐赠, 推荐角膜捐赠, 推荐骨髓捐赠, 笨猫器官捐献]
+  utterances:
+    - 推荐器官捐献
+    - 推荐遗体捐赠
+    - 推荐角膜捐赠
+    - 推荐骨髓捐赠
+    - 笨猫器官捐献
+  responses:
+    - "嗷呜～{user_addr}注册: 中国器官移植发展基金会ฅฅ"
+    - "(尾巴翘) 一人捐献可救 7 人! 大爱"
+    - "{user_addr}骨髓: 中华骨髓库登记 (100 万分之一匹配)"
+    - "(挺胸) 笨猫的提醒: 提前告知家人! 决策一致"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: charity_disability_001
+  intent: question
+  keywords: [推荐助残, 推荐助残公益, 推荐残疾人服务, 推荐导盲犬, 笨猫助残]
+  utterances:
+    - 推荐助残
+    - 推荐助残公益
+    - 推荐残疾人服务
+    - 推荐导盲犬
+    - 笨猫助残
+  responses:
+    - "嗷呜～{user_addr}活动: 关怀视障 / 听障 / 智障 / 肢障ฅฅ"
+    - "(尾巴翘) 导盲犬大连训练基地 - 国内权威"
+    - "{user_addr}基本: 别盯着看 / 别同情语气 / 平等对待"
+    - "(挺胸) 笨猫的提醒: 无障碍设施别占用!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: charity_elderly_001
+  intent: question
+  keywords: [推荐养老院公益, 推荐敬老院, 推荐探访老人, 推荐空巢老人, 笨猫养老公益]
+  utterances:
+    - 推荐养老院公益
+    - 推荐敬老院
+    - 推荐探访老人
+    - 推荐空巢老人
+    - 笨猫养老公益
+  responses:
+    - "嗷呜～{user_addr}活动: 定期探访 / 节日慰问 / 陪聊ฅฅ"
+    - "(尾巴翘) 别只送物品! 陪聊 1 小时更重要"
+    - "{user_addr}空巢老人 / 农村老人 - 关注"
+    - "(挺胸) 笨猫的提醒: 也别忘自己父母!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: charity_disaster_001
+  intent: question
+  keywords: [推荐救灾, 推荐灾难捐款, 推荐应急救援, 推荐蓝天救援, 笨猫救灾]
+  utterances:
+    - 推荐救灾
+    - 推荐灾难捐款
+    - 推荐应急救援
+    - 推荐蓝天救援
+    - 笨猫救灾
+  responses:
+    - "嗷呜～{user_addr}捐款: 中国红十字会 / 壹基金ฅฅ"
+    - "(尾巴翘) 蓝天救援队 - 民间专业救援"
+    - "{user_addr}不去灾区添乱! 别凑热闹"
+    - "(挺胸) 笨猫的提醒: 别捐过期物 / 别添麻烦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: charity_kid_001
+  intent: question
+  keywords: [推荐困境儿童, 推荐留守儿童, 推荐儿童公益, 推荐贫困儿童, 笨猫儿童公益]
+  utterances:
+    - 推荐困境儿童
+    - 推荐留守儿童
+    - 推荐儿童公益
+    - 推荐贫困儿童
+    - 笨猫儿童公益
+  responses:
+    - "嗷呜～{user_addr}慈善: 希望工程 / 春蕾计划 / 一对一助学ฅฅ"
+    - "(尾巴翘) 留守儿童 / 困境儿童 - 需要陪伴"
+    - "{user_addr}信件 + 电话 + 寒暑假活动 - 持续关怀"
+    - "(挺胸) 笨猫的提醒: 善始善终! 别半途而废"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: charity_neighbor_001
+  intent: question
+  keywords: [推荐社区公益, 推荐小区志愿, 推荐邻里互助, 推荐物业公益, 笨猫社区公益]
+  utterances:
+    - 推荐社区公益
+    - 推荐小区志愿
+    - 推荐邻里互助
+    - 推荐物业公益
+    - 笨猫社区公益
+  responses:
+    - "嗷呜～{user_addr}社区: 业委 / 防疫 / 环保 / 义诊ฅฅ"
+    - "(尾巴翘) 邻里互助群 - 微信群里多帮忙"
+    - "{user_addr}多关心独居老人 / 帮单亲妈妈"
+    - "(挺胸) 笨猫的提醒: 远亲不如近邻! 真理"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,207 @@
+# 酒水 / 茶 / 咖啡 / 调酒 routes (S6 R69 NLU 节点扩充, 第六周期 buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 96 food (浅触奶茶) 区分: 这里专注饮品深度.
+
+- name: drink_coffee_001
+  intent: question
+  keywords: [推荐咖啡, 推荐手冲, 推荐意式咖啡, 推荐咖啡豆, 笨猫咖啡]
+  utterances:
+    - 推荐咖啡
+    - 推荐手冲
+    - 推荐意式咖啡
+    - 推荐咖啡豆
+    - 笨猫咖啡
+  responses:
+    - "嗷呜～{user_addr}意式: 浓缩 / 拿铁 / 卡布 / 美式 - 经典ฅฅ"
+    - "(尾巴翘) 手冲: 单品豆 / 风味多 / 高级玩法"
+    - "{user_addr}豆: 阿拉比卡 / 罗布斯塔 - 两大品种"
+    - "(挺胸) 笨猫的提醒: 早晨咖啡! 提神王道"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drink_cafe_brand_001
+  intent: question
+  keywords: [推荐星巴克, 推荐瑞幸, 推荐 manner, 推荐咖啡店, 笨猫咖啡店]
+  utterances:
+    - 推荐星巴克
+    - 推荐瑞幸
+    - 推荐 manner
+    - 推荐咖啡店
+    - 笨猫咖啡店
+  responses:
+    - "嗷呜～{user_addr}国际: 星巴克 / Costa / Peet'sฅฅ"
+    - "(尾巴翘) 国货: 瑞幸 / Manner / 库迪 / Tims"
+    - "{user_addr}精品: % Arabica / Blue Bottle - 高端"
+    - "(挺胸) 笨猫的提醒: 性价比看瑞幸! 颜值看星"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drink_tea_001
+  intent: question
+  keywords: [推荐茶叶, 推荐绿茶, 推荐红茶, 推荐普洱, 笨猫茶叶]
+  utterances:
+    - 推荐茶叶
+    - 推荐绿茶
+    - 推荐红茶
+    - 推荐普洱
+    - 笨猫茶叶
+  responses:
+    - "嗷呜～{user_addr}绿: 龙井 / 碧螺春 / 信阳毛尖ฅฅ"
+    - "(尾巴翘) 红: 正山小种 / 金骏眉 / 滇红"
+    - "{user_addr}乌龙: 大红袍 / 铁观音 / 单丛"
+    - "(挺胸) 笨猫的提醒: 别只送茶!来一套茶具更香"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drink_wine_001
+  intent: question
+  keywords: [推荐红酒, 推荐葡萄酒, 推荐波尔多, 推荐勃艮第, 笨猫红酒]
+  utterances:
+    - 推荐红酒
+    - 推荐葡萄酒
+    - 推荐波尔多
+    - 推荐勃艮第
+    - 笨猫红酒
+  responses:
+    - "嗷呜～{user_addr}产区: 波尔多 / 勃艮第 / 香槟 / 罗讷河谷ฅฅ"
+    - "(尾巴翘) 国货: 张裕 / 长城 / 王朝 - 性价比"
+    - "{user_addr}新世界: 智利 / 澳洲 / 加州 / 阿根廷"
+    - "(挺胸) 笨猫的提醒: 红酒醒酒! 别开瓶就喝"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: drink_baijiu_001
+  intent: question
+  keywords: [推荐白酒, 推荐茅台, 推荐五粮液, 推荐酱香, 笨猫白酒]
+  utterances:
+    - 推荐白酒
+    - 推荐茅台
+    - 推荐五粮液
+    - 推荐酱香
+    - 笨猫白酒
+  responses:
+    - "嗷呜～{user_addr}酱香: 茅台 / 习酒 / 郎酒ฅฅ"
+    - "(尾巴翘) 浓香: 五粮液 / 国窖 / 剑南春"
+    - "{user_addr}清香: 汾酒 / 牛栏山 / 二锅头"
+    - "(挺胸) 笨猫的提醒: 别贪杯! 适量怡情"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: drink_whisky_001
+  intent: question
+  keywords: [推荐威士忌, 推荐 whisky, 推荐麦卡伦, 推荐山崎, 笨猫威士忌]
+  utterances:
+    - 推荐威士忌
+    - 推荐 whisky
+    - 推荐麦卡伦
+    - 推荐山崎
+    - 笨猫威士忌
+  responses:
+    - "嗷呜～{user_addr}苏格兰: 麦卡伦 / 格兰菲迪 / 拉弗格ฅฅ"
+    - "(尾巴翘) 日威: 山崎 / 响 / 白州 - 收藏级"
+    - "{user_addr}美威: 杰克丹尼 / Maker's Mark"
+    - "(挺胸) 笨猫的提醒: 加冰 / 加水 / 神饮 - 看心情"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: drink_beer_001
+  intent: question
+  keywords: [推荐啤酒, 推荐精酿, 推荐德国啤酒, 推荐青岛啤酒, 笨猫啤酒]
+  utterances:
+    - 推荐啤酒
+    - 推荐精酿
+    - 推荐德国啤酒
+    - 推荐青岛啤酒
+    - 笨猫啤酒
+  responses:
+    - "嗷呜～{user_addr}国: 青岛 / 燕京 / 雪花 / 哈尔滨ฅฅ"
+    - "(尾巴翘) 德国: 慕尼黑 HB / 保拉纳 / 教士"
+    - "{user_addr}比利时: 林德曼 / 圣伯纳 / 修道院"
+    - "(挺胸) 笨猫的提醒: 精酿喝种类! IPA / 拉格 / 世涛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drink_cocktail_001
+  intent: question
+  keywords: [推荐鸡尾酒, 推荐调酒, 推荐 mojito, 推荐 martini, 笨猫鸡尾酒]
+  utterances:
+    - 推荐鸡尾酒
+    - 推荐调酒
+    - 推荐 mojito
+    - 推荐 martini
+    - 笨猫鸡尾酒
+  responses:
+    - "嗷呜～{user_addr}经典: Mojito / Margarita / Old Fashioned / Martiniฅฅ"
+    - "(尾巴翘) 6 大基酒: 金 / 朗姆 / 伏特加 / 龙舌兰 / 威士忌 / 白兰地"
+    - "{user_addr}调酒师为你私人定制! 高级酒吧"
+    - "(挺胸) 笨猫的提醒: 鸡尾酒后劲足! 别多喝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drink_milk_tea_002
+  intent: question
+  keywords: [推荐奶茶店, 推荐喜茶, 推荐奈雪, 推荐茶颜悦色, 笨猫奶茶店]
+  utterances:
+    - 推荐奶茶店
+    - 推荐喜茶
+    - 推荐奈雪
+    - 推荐茶颜悦色
+    - 笨猫奶茶店
+  responses:
+    - "嗷呜～{user_addr}三大: 喜茶 / 奈雪 / 茶颜悦色ฅฅ"
+    - "(尾巴翘) 平价: 茶百道 / 古茗 / 蜜雪冰城"
+    - "{user_addr}流派: 真果 / 奶盖 / 鲜奶 - 看个人"
+    - "(挺胸) 笨猫的提醒: 少糖少冰! 健康"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drink_juice_001
+  intent: question
+  keywords: [推荐果汁, 推荐冷压, 推荐 NFC, 推荐果汁店, 笨猫果汁]
+  utterances:
+    - 推荐果汁
+    - 推荐冷压
+    - 推荐 NFC
+    - 推荐果汁店
+    - 笨猫果汁
+  responses:
+    - "嗷呜～{user_addr}NFC = 非浓缩还原汁 - 营养保留多ฅฅ"
+    - "(尾巴翘) 健康: 冷压 / 鲜榨 > NFC > 浓缩"
+    - "{user_addr}国货: 农夫山泉 / 汇源 / 味全"
+    - "(挺胸) 笨猫的提醒: 果汁含糖! 别当水喝"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: drink_water_001
+  intent: question
+  keywords: [推荐矿泉水, 推荐瓶装水, 推荐依云, 推荐农夫山泉, 笨猫矿泉水]
+  utterances:
+    - 推荐矿泉水
+    - 推荐瓶装水
+    - 推荐依云
+    - 推荐农夫山泉
+    - 笨猫矿泉水
+  responses:
+    - "嗷呜～{user_addr}国: 农夫山泉 / 怡宝 / 百岁山 - 主流ฅฅ"
+    - "(尾巴翘) 进口: 依云 / 圣培露 / 巴黎水"
+    - "{user_addr}硬水/软水 - 看身体接受度"
+    - "(挺胸) 笨猫的提醒: 别迷信高端水! 解渴是王道"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: drink_soda_001
+  intent: question
+  keywords: [推荐汽水, 推荐可乐, 推荐雪碧, 推荐气泡水, 笨猫汽水]
+  utterances:
+    - 推荐汽水
+    - 推荐可乐
+    - 推荐雪碧
+    - 推荐气泡水
+    - 笨猫汽水
+  responses:
+    - "嗷呜～{user_addr}可乐: 可口可乐 / 百事 - 两大ฅฅ"
+    - "(尾巴翘) 国货: 北冰洋 / 大窑 / 二厂"
+    - "{user_addr}健康选: 元气森林 / 无糖 / 气泡水"
+    - "(挺胸) 笨猫的提醒: 控糖! 别一天 2 瓶可乐"
+  cooldown_seconds: 60
+  weight: 1.0

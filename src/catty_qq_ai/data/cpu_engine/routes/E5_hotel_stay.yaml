@@ -1,0 +1,207 @@
+# 酒店住宿 / 民宿 / 品牌 / 会员 routes (S6 R67 NLU 节点扩充, 第六周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 95 travel_hotel (浅触) 区分: 这里深入品牌 / 会员 / 类型选择.
+
+- name: hotel_5star_001
+  intent: question
+  keywords: [推荐五星级酒店, 推荐豪华酒店, 推荐丽思卡尔顿, 推荐四季酒店, 笨猫五星酒店]
+  utterances:
+    - 推荐五星级酒店
+    - 推荐豪华酒店
+    - 推荐丽思卡尔顿
+    - 推荐四季酒店
+    - 笨猫五星酒店
+  responses:
+    - "嗷呜～{user_addr}顶级: 四季 / 丽思卡尔顿 / 文华东方 / 半岛ฅฅ"
+    - "(尾巴翘) 万豪集团: JW / 丽思 / 万豪/雅乐轩"
+    - "{user_addr}凯悦: 君悦 / 柏悦 / 凯悦 - 中高端"
+    - "(挺胸) 笨猫的提醒: 别只看星级! 看实际服务"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hotel_boutique_001
+  intent: question
+  keywords: [推荐精品酒店, 推荐设计酒店, 推荐小众酒店, 推荐 boutique, 笨猫精品酒店]
+  utterances:
+    - 推荐精品酒店
+    - 推荐设计酒店
+    - 推荐小众酒店
+    - 推荐 boutique
+    - 笨猫精品酒店
+  responses:
+    - "嗷呜～{user_addr}精品: Aman / Soho House / Ace Hotelฅฅ"
+    - "(尾巴翘) 国内: 阳朔糖舍 / 安缦 / 涵碧楼 / 隐居"
+    - "{user_addr}独特体验! 比连锁酒店有个性"
+    - "(挺胸) 笨猫的提醒: 价格高但体验值! 一辈子记得"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hotel_homestay_001
+  intent: question
+  keywords: [推荐民宿, 推荐 Airbnb, 推荐木鸟, 推荐途家, 笨猫民宿]
+  utterances:
+    - 推荐民宿
+    - 推荐 Airbnb
+    - 推荐木鸟
+    - 推荐途家
+    - 笨猫民宿
+  responses:
+    - "嗷呜～{user_addr}平台: 木鸟 / 途家 / 小猪 - 国内主流ฅฅ"
+    - "(尾巴翘) Airbnb 国际 / 国内退出"
+    - "{user_addr}必看实拍图 + 评分 / 别看官方修图"
+    - "(挺胸) 笨猫的提醒: 联系房东! 沟通确认细节"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hotel_member_001
+  intent: question
+  keywords: [推荐酒店会员, 推荐 Bonvoy, 推荐 World of Hyatt, 推荐 Honors, 笨猫酒店会员]
+  utterances:
+    - 推荐酒店会员
+    - 推荐 Bonvoy
+    - 推荐 World of Hyatt
+    - 推荐 Honors
+    - 笨猫酒店会员
+  responses:
+    - "嗷呜～{user_addr}三大: Bonvoy (万豪) / WOH (凯悦) / Honors (希尔顿)ฅฅ"
+    - "(尾巴翘) 卡: 终身金/钛/铂 - 高级礼遇"
+    - "{user_addr}信用卡升级! 美国运通 / 招行"
+    - "(挺胸) 笨猫的提醒: 入门免费玩! 高级看消费"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hotel_booking_001
+  intent: question
+  keywords: [推荐订酒店, 推荐 Booking, 推荐携程, 推荐 Agoda, 笨猫订酒店]
+  utterances:
+    - 推荐订酒店
+    - 推荐 Booking
+    - 推荐携程
+    - 推荐 Agoda
+    - 笨猫订酒店
+  responses:
+    - "嗷呜～{user_addr}国内: 携程 / 美团 / 飞猪 - 三大ฅฅ"
+    - "(尾巴翘) 国际: Booking / Agoda / Expedia"
+    - "{user_addr}比价: 大平台 + 酒店官网 - 多看"
+    - "(挺胸) 笨猫的提醒: 别只看价格! 看退改政策"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hotel_business_001
+  intent: question
+  keywords: [推荐商务酒店, 推荐汉庭, 推荐如家, 推荐华住, 笨猫商务酒店]
+  utterances:
+    - 推荐商务酒店
+    - 推荐汉庭
+    - 推荐如家
+    - 推荐华住
+    - 笨猫商务酒店
+  responses:
+    - "嗷呜～{user_addr}国内三大: 华住 / 锦江 / 首旅如家ฅฅ"
+    - "(尾巴翘) 中端: 全季 / 桔子 / 亚朵 - 性价比"
+    - "{user_addr}低端: 汉庭 / 如家 / 7 天 - 经济型"
+    - "(挺胸) 笨猫的提醒: 商务出差选连锁! 稳定"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hotel_resort_001
+  intent: question
+  keywords: [推荐度假酒店, 推荐海滩酒店, 推荐海岛酒店, 推荐 resort, 笨猫度假酒店]
+  utterances:
+    - 推荐度假酒店
+    - 推荐海滩酒店
+    - 推荐海岛酒店
+    - 推荐 resort
+    - 笨猫度假酒店
+  responses:
+    - "嗷呜～{user_addr}三亚: 亚特兰蒂斯 / 太阳湾 / 嘉佩乐ฅฅ"
+    - "(尾巴翘) 马尔代夫: 安娜塔拉 / 嘉佩乐 / 瑞吉"
+    - "{user_addr}巴厘岛: 阿雅娜 / 乌玛 / 阿莉拉"
+    - "(挺胸) 笨猫的提醒: 度假酒店包餐性价比高!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hotel_china_brand_001
+  intent: question
+  keywords: [推荐国产酒店, 推荐亚朵, 推荐安缦, 推荐松赞, 笨猫国产酒店]
+  utterances:
+    - 推荐国产酒店
+    - 推荐亚朵
+    - 推荐安缦
+    - 推荐松赞
+    - 笨猫国产酒店
+  responses:
+    - "嗷呜～{user_addr}亚朵: 中端崛起 / 设计感强ฅฅ"
+    - "(尾巴翘) 安缦: 顶奢 / 涵碧楼: 高端定制"
+    - "{user_addr}松赞: 藏地系列 / 隐居: 江南风情"
+    - "(挺胸) 笨猫的提醒: 国产高端崛起! 不输国际"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hotel_breakfast_001
+  intent: question
+  keywords: [推荐酒店早餐, 推荐含早餐, 推荐自助早餐, 推荐酒店餐厅, 笨猫酒店早餐]
+  utterances:
+    - 推荐酒店早餐
+    - 推荐含早餐
+    - 推荐自助早餐
+    - 推荐酒店餐厅
+    - 笨猫酒店早餐
+  responses:
+    - "嗷呜～{user_addr}高端含早餐性价比 + 体验ฅฅ"
+    - "(尾巴翘) 名店: 半岛 / 丽思 / 文华 - 早餐惊艳"
+    - "{user_addr}国内豪华酒店早餐多元! 中西式都有"
+    - "(挺胸) 笨猫的提醒: 含早餐 vs 外面吃 - 算清"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hotel_pool_001
+  intent: question
+  keywords: [推荐酒店泳池, 推荐酒店健身房, 推荐酒店设施, 推荐 SPA 酒店, 笨猫酒店设施]
+  utterances:
+    - 推荐酒店泳池
+    - 推荐酒店健身房
+    - 推荐酒店设施
+    - 推荐 SPA 酒店
+    - 笨猫酒店设施
+  responses:
+    - "嗷呜～{user_addr}必备: 泳池 / 健身房 / SPA - 高端ฅฅ"
+    - "(尾巴翘) 顶楼泳池 + 城市景观 - 颜值最高"
+    - "{user_addr}SPA 体验: 安缦 / 香格里拉 - 一流"
+    - "(挺胸) 笨猫的提醒: 看预订套餐! 设施有差"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hotel_resort_view_001
+  intent: question
+  keywords: [推荐温泉酒店, 推荐悬崖酒店, 推荐山景房, 推荐海景房, 笨猫温泉酒店]
+  utterances:
+    - 推荐温泉酒店
+    - 推荐悬崖酒店
+    - 推荐山景房
+    - 推荐海景房
+    - 笨猫温泉酒店
+  responses:
+    - "嗷呜～{user_addr}国内温泉: 五龙 / 御湯 / 朗丽兹ฅฅ"
+    - "(尾巴翘) 山景: 张家界 / 黄山 - 视觉震撼"
+    - "{user_addr}海景: 三亚 / 厦门 / 青岛 - 选高层"
+    - "(挺胸) 笨猫的提醒: 视野好房型贵! 但值"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hotel_check_in_001
+  intent: question
+  keywords: [推荐酒店入住, 推荐 check in, 推荐前台办理, 推荐酒店押金, 笨猫入住]
+  utterances:
+    - 推荐酒店入住
+    - 推荐 check in
+    - 推荐前台办理
+    - 推荐酒店押金
+    - 笨猫入住
+  responses:
+    - "嗷呜～{user_addr}入住 14:00 / 退房 12:00 - 一般规则ฅฅ"
+    - "(尾巴翘) 押金 200-500/晚! 退房返还"
+    - "{user_addr}信用卡预授权 vs 现金 - 看酒店"
+    - "(挺胸) 笨猫的提醒: 入住时检查! 别等退房算"
+  cooldown_seconds: 60
+  weight: 0.9

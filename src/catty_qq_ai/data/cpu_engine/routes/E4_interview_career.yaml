@@ -1,0 +1,207 @@
+# 求职深度 / 面试 / 谈薪 / 跳槽 / 裸辞 routes (S6 R66 NLU 节点扩充, 第六周期 buffered 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 98 edu_career (浅触简历面试) 区分: 这里专注细节场景.
+
+- name: itv_behavior_001
+  intent: question
+  keywords: [推荐行为面试, 推荐 STAR 法则, 推荐 BEI 面试, 推荐过往经历, 笨猫行为面试]
+  utterances:
+    - 推荐行为面试
+    - 推荐 STAR 法则
+    - 推荐 BEI 面试
+    - 推荐过往经历
+    - 笨猫行为面试
+  responses:
+    - "嗷呜～{user_addr}STAR: Situation + Task + Action + ResultฅฅSTAR 经典"
+    - "(尾巴翘) 准备 5-7 个故事! 覆盖能力 / 团队 / 困难"
+    - "{user_addr}量化结果! 别空话 - 提升 30% / 节省 5w"
+    - "(挺胸) 笨猫的提醒: 别背稿! 自然讲故事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: itv_technical_001
+  intent: question
+  keywords: [推荐技术面, 推荐算法面, 推荐代码面, 推荐 leetcode 面试, 笨猫技术面]
+  utterances:
+    - 推荐技术面
+    - 推荐算法面
+    - 推荐代码面
+    - 推荐 leetcode 面试
+    - 笨猫技术面
+  responses:
+    - "嗷呜～{user_addr}前 100 题 + 公司高频题ฅฅ"
+    - "(尾巴翘) 思路: 暴力 → 优化 → 边界 → 测试"
+    - "{user_addr}写代码: 命名 + 注释 + 测试 - 工程能力"
+    - "(挺胸) 笨猫的提醒: 不会就说! 别瞎写"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: itv_system_design_001
+  intent: question
+  keywords: [推荐系统设计, 推荐架构面, 推荐 system design, 推荐高级面试, 笨猫系统设计]
+  utterances:
+    - 推荐系统设计
+    - 推荐架构面
+    - 推荐 system design
+    - 推荐高级面试
+    - 笨猫系统设计
+  responses:
+    - "嗷呜～{user_addr}框架: 需求 → 估算 → 设计 → 深度ฅฅ"
+    - "(尾巴翘) 常考: 短链 / 推特 / 微信 / 推荐系统"
+    - "{user_addr}书: 《Designing Data-Intensive Applications》"
+    - "(挺胸) 笨猫的提醒: P5+ 必考! 高级岗位"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: itv_salary_neg_001
+  intent: question
+  keywords: [推荐谈薪资, 推荐 offer 谈判, 推荐期望薪资, 推荐谈年薪, 笨猫谈薪]
+  utterances:
+    - 推荐谈薪资
+    - 推荐 offer 谈判
+    - 推荐期望薪资
+    - 推荐谈年薪
+    - 笨猫谈薪
+  responses:
+    - "嗷呜～{user_addr}原则: 不先报 / 高于现在 30%+ฅฅ"
+    - "(尾巴翘) 看市场: 看准 / 脉脉 / 雇主调研"
+    - "{user_addr}争取: 基本工资 + 股票 + 签约金 + 福利"
+    - "(挺胸) 笨猫的提醒: 别接受首报! HR 留余地"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: itv_job_hop_001
+  intent: question
+  keywords: [推荐跳槽, 推荐跳槽时机, 推荐离职, 推荐换工作时机, 笨猫跳槽]
+  utterances:
+    - 推荐跳槽
+    - 推荐跳槽时机
+    - 推荐离职
+    - 推荐换工作时机
+    - 笨猫跳槽
+  responses:
+    - "嗷呜～{user_addr}时机: 年终奖后 / 找好下家 / 不裸辞ฅฅ"
+    - "(尾巴翘) 涨薪: 跳槽涨 30%+ / 内升仅 10-15%"
+    - "{user_addr}避: 频繁跳 / 三年内 - HR 嫌弃"
+    - "(挺胸) 笨猫的提醒: 离职原因别黑前司!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: itv_resignation_001
+  intent: complaint
+  keywords: [推荐裸辞, 推荐辞职, 推荐辞职信, 推荐离职原因, 笨猫裸辞]
+  utterances:
+    - 推荐裸辞
+    - 推荐辞职
+    - 推荐辞职信
+    - 推荐离职原因
+    - 笨猫裸辞
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}裸辞前想清楚! 风险大ฅฅ"
+    - "(歪头) 离职理由: 个人发展 / 职业规划 - 中性"
+    - "{user_addr}流程: 提交 → 交接 → 工资结算 → 社保"
+    - "(挺胸) 笨猫的提醒: 别撕破脸! 行业小 后会有期"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: itv_career_change_001
+  intent: question
+  keywords: [推荐转行, 推荐转岗, 推荐换方向, 推荐转赛道, 笨猫转行]
+  utterances:
+    - 推荐转行
+    - 推荐转岗
+    - 推荐换方向
+    - 推荐转赛道
+    - 笨猫转行
+  responses:
+    - "嗷呜～{user_addr}转行难! 35 岁前更适合ฅฅ"
+    - "(尾巴翘) 步骤: 学习 + 项目 + 转岗 - 渐进"
+    - "{user_addr}稳:行业内转方向 / 风险:跨行业"
+    - "(挺胸) 笨猫的提醒: 看清楚再跳! 别冲动"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: itv_freelance_001
+  intent: question
+  keywords: [推荐自由职业, 推荐 freelancer, 推荐独立创业, 推荐自雇, 笨猫自由职业]
+  utterances:
+    - 推荐自由职业
+    - 推荐 freelancer
+    - 推荐独立创业
+    - 推荐自雇
+    - 笨猫自由职业
+  responses:
+    - "嗷呜～{user_addr}先副业 + 客户积累 + 再 fulltimeฅฅ"
+    - "(尾巴翘) 必备: 自律 / 销售 / 客户管理 / 财务"
+    - "{user_addr}国内: 知识付费 / 设计 / 写作 / 程序"
+    - "(挺胸) 笨猫的提醒: 别裸辞自由! 6 个月备用金"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: itv_age_35_001
+  intent: complaint
+  keywords: [推荐 35 岁危机, 推荐中年危机, 推荐 35 岁失业, 推荐职场年龄歧视, 笨猫 35 岁]
+  utterances:
+    - 推荐 35 岁危机
+    - 推荐中年危机
+    - 推荐 35 岁失业
+    - 推荐职场年龄歧视
+    - 笨猫 35 岁
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}35 岁不可怕! 提前准备ฅฅ"
+    - "(歪头) 转管理 / 走专家 / 副业准备 - 三条路"
+    - "{user_addr}避免被替代: 提升不可替代性"
+    - "(挺胸) 笨猫的提醒: 经验和判断是优势!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: itv_startup_001
+  intent: question
+  keywords: [推荐去创业公司, 推荐创业, 推荐去大厂, 推荐选公司, 笨猫创业公司]
+  utterances:
+    - 推荐去创业公司
+    - 推荐创业
+    - 推荐去大厂
+    - 推荐选公司
+    - 笨猫创业公司
+  responses:
+    - "嗷呜～{user_addr}创业公司: 高风险 + 高成长 / 期权画饼ฅฅ"
+    - "(尾巴翘) 大厂: 稳定 + 标准化 + 升职慢"
+    - "{user_addr}年轻去创业 / 中年看大厂 - 一般规律"
+    - "(挺胸) 笨猫的提醒: 看创始人 + 行业 + 钱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: itv_promotion_001
+  intent: question
+  keywords: [推荐升职, 推荐升职加薪, 推荐内部晋升, 推荐升 P5, 笨猫升职]
+  utterances:
+    - 推荐升职
+    - 推荐升职加薪
+    - 推荐内部晋升
+    - 推荐升 P5
+    - 笨猫升职
+  responses:
+    - "嗷呜～{user_addr}晋升: 业绩 + 影响力 + 关系 - 三件套ฅฅ"
+    - "(尾巴翘) 主动汇报 / 跨部门合作 / 找 sponsor"
+    - "{user_addr}P5 → P6: 难 / 一年内 (1-2 年)"
+    - "(挺胸) 笨猫的提醒: 别只埋头干! 适度展示"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: itv_gap_001
+  intent: complaint
+  keywords: [推荐空窗期, 推荐 gap year, 推荐找不到工作, 推荐失业, 笨猫空窗]
+  utterances:
+    - 推荐空窗期
+    - 推荐 gap year
+    - 推荐找不到工作
+    - 推荐失业
+    - 笨猫空窗
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}空窗不可怕~ 笨猫陪您ฅฅ"
+    - "(歪头) 解释: 学习 / 进修 / 创业 / 旅行 - 自然"
+    - "{user_addr}短: 3 个月内 OK / 长: 6+ 月要解释"
+    - "(挺胸) 笨猫的提醒: 别说在家躺平! HR 介意"
+  cooldown_seconds: 60
+  weight: 1.0

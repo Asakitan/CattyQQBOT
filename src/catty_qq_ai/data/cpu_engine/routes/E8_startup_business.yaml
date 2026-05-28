@@ -1,0 +1,207 @@
+# 创业 / 商业模式 / 融资 / 初创 routes (S6 R70 NLU 节点扩充, 第六周期 buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 E4 interview_career 区分: 这里专注创业本身.
+
+- name: biz_idea_001
+  intent: question
+  keywords: [推荐创业, 推荐创业方向, 推荐创业项目, 推荐 startup, 笨猫创业]
+  utterances:
+    - 推荐创业
+    - 推荐创业方向
+    - 推荐创业项目
+    - 推荐 startup
+    - 笨猫创业
+  responses:
+    - "嗷呜～{user_addr}创业先找痛点! 解决真实问题ฅฅ"
+    - "(尾巴翘) 方向: AI / 跨境电商 / SAAS / 出海"
+    - "{user_addr}MVP 快速验证! 别一上来重资产"
+    - "(挺胸) 笨猫的提醒: 失败率 90%+! 想清楚再下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: biz_model_001
+  intent: question
+  keywords: [推荐商业模式, 推荐 BM, 推荐 business model, 推荐变现, 笨猫商业模式]
+  utterances:
+    - 推荐商业模式
+    - 推荐 BM
+    - 推荐 business model
+    - 推荐变现
+    - 笨猫商业模式
+  responses:
+    - "嗷呜～{user_addr}经典: B2B / B2C / C2C / B2B2Cฅฅ"
+    - "(尾巴翘) 收入: 广告 / 订阅 / 抽成 / SaaS / 增值"
+    - "{user_addr}BMC 商业模式画布: 9 个要素"
+    - "(挺胸) 笨猫的提醒: 闭环 > 单点! 持续盈利"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: biz_funding_001
+  intent: question
+  keywords: [推荐融资, 推荐 VC, 推荐天使轮, 推荐 ABC 轮, 笨猫融资]
+  utterances:
+    - 推荐融资
+    - 推荐 VC
+    - 推荐天使轮
+    - 推荐 ABC 轮
+    - 笨猫融资
+  responses:
+    - "嗷呜～{user_addr}阶段: 种子 → 天使 → A → B → C → IPOฅฅ"
+    - "(尾巴翘) 顶级 VC: 红杉 / IDG / 经纬 / 真格"
+    - "{user_addr}BP: 团队 + 市场 + 模式 + 数据 - 必备"
+    - "(挺胸) 笨猫的提醒: 别为融资创业! 模式好钱自来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: biz_cofounder_001
+  intent: question
+  keywords: [推荐找联合创始人, 推荐 cofounder, 推荐合伙人, 推荐合伙股权, 笨猫合伙人]
+  utterances:
+    - 推荐找联合创始人
+    - 推荐 cofounder
+    - 推荐合伙人
+    - 推荐合伙股权
+    - 笨猫合伙人
+  responses:
+    - "嗷呜～{user_addr}互补: 技术 + 销售 / 产品 + 运营ฅฅ"
+    - "(尾巴翘) 股权: 67/33 / 70/30 / 51/49 - 避免 50/50"
+    - "{user_addr}必签: 股东协议 / 退出机制 / 期权"
+    - "(挺胸) 笨猫的提醒: 别找朋友合伙! 朋友难做"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: biz_team_001
+  intent: question
+  keywords: [推荐组建团队, 推荐招人, 推荐挖人, 推荐初创团队, 笨猫团队]
+  utterances:
+    - 推荐组建团队
+    - 推荐招人
+    - 推荐挖人
+    - 推荐初创团队
+    - 笨猫团队
+  responses:
+    - "嗷呜～{user_addr}先 3-5 人核心! 别上来 20 人ฅฅ"
+    - "(尾巴翘) 找有 startup 经验的! 适应快"
+    - "{user_addr}激励: 现金 + 期权 - 看阶段"
+    - "(挺胸) 笨猫的提醒: 招人慢 / 解雇快 - 经典法则"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: biz_pivot_001
+  intent: question
+  keywords: [推荐转型, 推荐 pivot, 推荐方向调整, 推荐战略转变, 笨猫转型]
+  utterances:
+    - 推荐转型
+    - 推荐 pivot
+    - 推荐方向调整
+    - 推荐战略转变
+    - 笨猫转型
+  responses:
+    - "嗷呜～{user_addr}pivot: 保留核心 + 调整方向ฅฅ"
+    - "(尾巴翘) 时机: 数据不好 / 市场变化 / 钱快没"
+    - "{user_addr}经典: Twitter (从播客转推特) / Slack (从游戏转工具)"
+    - "(挺胸) 笨猫的提醒: 别频繁 pivot! 团队会崩"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: biz_market_001
+  intent: question
+  keywords: [推荐市场调研, 推荐用户调研, 推荐 PMF, 推荐 marketing, 笨猫市场调研]
+  utterances:
+    - 推荐市场调研
+    - 推荐用户调研
+    - 推荐 PMF
+    - 推荐 marketing
+    - 笨猫市场调研
+  responses:
+    - "嗷呜～{user_addr}找 PMF (Product-Market Fit)! 创业核心ฅฅ"
+    - "(尾巴翘) 方法: 访谈 / 问卷 / A/B 测试 / 数据分析"
+    - "{user_addr}用户访谈 100+! 别只问 5 个"
+    - "(挺胸) 笨猫的提醒: 用户嘴上说 vs 实际行为 - 看后者"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: biz_marketing_001
+  intent: question
+  keywords: [推荐获客, 推荐增长, 推荐 growth hacking, 推荐 SEO, 笨猫增长]
+  utterances:
+    - 推荐获客
+    - 推荐增长
+    - 推荐 growth hacking
+    - 推荐 SEO
+    - 笨猫增长
+  responses:
+    - "嗷呜～{user_addr}获客: SEO / SEM / 内容 / 投放 / 裂变ฅฅ"
+    - "(尾巴翘) 留存 > 拉新! 别只看 DAU"
+    - "{user_addr}AARRR 漏斗: Acquisition → Activation → Retention → Revenue → Referral"
+    - "(挺胸) 笨猫的提醒: 数据驱动! 别拍脑袋"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: biz_company_setup_001
+  intent: question
+  keywords: [推荐注册公司, 推荐工商注册, 推荐税务登记, 推荐刻章, 笨猫注册公司]
+  utterances:
+    - 推荐注册公司
+    - 推荐工商注册
+    - 推荐税务登记
+    - 推荐刻章
+    - 笨猫注册公司
+  responses:
+    - "嗷呜～{user_addr}流程: 核名 → 提交 → 领证 → 刻章 → 开户 → 税务ฅฅ"
+    - "(尾巴翘) 找代办: 200-1000 - 省心"
+    - "{user_addr}自己跑: 免费但费时 (1-2 个月)"
+    - "(挺胸) 笨猫的提醒: 注册资本认缴! 别写太大"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: biz_legal_001
+  intent: question
+  keywords: [推荐创业法律, 推荐知识产权创业, 推荐股权设计, 推荐 ESOP, 笨猫创业法律]
+  utterances:
+    - 推荐创业法律
+    - 推荐知识产权创业
+    - 推荐股权设计
+    - 推荐 ESOP
+    - 笨猫创业法律
+  responses:
+    - "嗷呜～{user_addr}必备: 股东协议 / 期权 / 知识产权 / 用工合同ฅฅ"
+    - "(尾巴翘) ESOP (员工期权计划): 10-20% 池子"
+    - "{user_addr}找创业律师! 几万省后面几百万"
+    - "(挺胸) 笨猫的提醒: 商标 + 专利 / 早注册"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: biz_failure_001
+  intent: complaint
+  keywords: [推荐创业失败, 推荐倒闭, 推荐止损, 推荐复盘, 笨猫创业失败]
+  utterances:
+    - 推荐创业失败
+    - 推荐倒闭
+    - 推荐止损
+    - 推荐复盘
+    - 笨猫创业失败
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}创业失败正常! 90%+ 公司倒闭ฅฅ"
+    - "(歪头) 处理: 工资 / 资遣 / 债务 / 知识产权"
+    - "{user_addr}复盘: 为啥失败 / 学到啥 / 下次怎么改"
+    - "(挺胸) 笨猫的提醒: 失败是经验! 别气馁"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: biz_ipo_001
+  intent: question
+  keywords: [推荐 IPO, 推荐上市, 推荐美股上市, 推荐港股上市, 笨猫 IPO]
+  utterances:
+    - 推荐 IPO
+    - 推荐上市
+    - 推荐美股上市
+    - 推荐港股上市
+    - 笨猫 IPO
+  responses:
+    - "嗷呜～{user_addr}IPO: 创业的终极目标! 极少能到ฅฅ"
+    - "(尾巴翘) 选择: A 股 / 港股 / 美股 - 看公司"
+    - "{user_addr}流程: 改制 → 辅导 → 申报 → 路演 → 挂牌"
+    - "(挺胸) 笨猫的提醒: 上市不是终点! 才是开始"
+  cooldown_seconds: 60
+  weight: 0.7

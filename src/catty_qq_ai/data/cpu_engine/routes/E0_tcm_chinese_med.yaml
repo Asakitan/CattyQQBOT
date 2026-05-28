@@ -1,0 +1,207 @@
+# 中医 / 养生 / 食疗 / 经络 routes (S6 R62 NLU 节点扩充, 第六周期 buffered 1/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 91 health_fitness / C5 health_disease (西医) 区分: 这里专注中医文化.
+
+- name: tcm_constitution_001
+  intent: question
+  keywords: [推荐中医体质, 推荐九种体质, 推荐阳虚, 推荐阴虚, 笨猫体质]
+  utterances:
+    - 推荐中医体质
+    - 推荐九种体质
+    - 推荐阳虚
+    - 推荐阴虚
+    - 笨猫体质
+  responses:
+    - "嗷呜～{user_addr}九大体质: 平和 / 阳虚 / 阴虚 / 气虚 / 痰湿等ฅฅ"
+    - "(尾巴翘) 看舌头 / 面色 / 怕冷怕热 - 大致判断"
+    - "{user_addr}阳虚怕冷! 阴虚易热! 气虚易累"
+    - "(挺胸) 笨猫的提醒: 体质不同养法不同! 因人施补"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_meridian_001
+  intent: question
+  keywords: [推荐经络, 推荐穴位, 推荐合谷, 推荐足三里, 笨猫穴位]
+  utterances:
+    - 推荐经络
+    - 推荐穴位
+    - 推荐合谷
+    - 推荐足三里
+    - 笨猫穴位
+  responses:
+    - "嗷呜～{user_addr}十二经络 + 任督二脉 = 经络体系ฅฅ"
+    - "(尾巴翘) 常用: 合谷 (虎口) / 足三里 (膝下) / 神门 (腕)"
+    - "{user_addr}按摩 1-3 分钟! 别太用力"
+    - "(挺胸) 笨猫的提醒: 经络打通气血畅! 养生王道"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tcm_food_therapy_001
+  intent: question
+  keywords: [推荐食疗, 推荐养生汤, 推荐药膳, 推荐红枣枸杞, 笨猫食疗]
+  utterances:
+    - 推荐食疗
+    - 推荐养生汤
+    - 推荐药膳
+    - 推荐红枣枸杞
+    - 笨猫食疗
+  responses:
+    - "嗷呜～{user_addr}经典: 红枣 / 枸杞 / 黄芪 / 党参ฅฅ"
+    - "(尾巴翘) 春养肝 / 夏养心 / 秋养肺 / 冬养肾"
+    - "{user_addr}补气: 黄芪 / 补血: 当归 / 补肾: 黑豆"
+    - "(挺胸) 笨猫的提醒: 食补优于药补! 平时多注意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_qi_blood_001
+  intent: question
+  keywords: [推荐气血, 推荐补气, 推荐补血, 推荐气血虚, 笨猫气血]
+  utterances:
+    - 推荐气血
+    - 推荐补气
+    - 推荐补血
+    - 推荐气血虚
+    - 笨猫气血
+  responses:
+    - "嗷呜～{user_addr}气血是生命之本! 补气重要ฅฅ"
+    - "(尾巴翘) 补气: 黄芪 / 党参 / 山药 / 鸡肉"
+    - "{user_addr}补血: 当归 / 红枣 / 阿胶 / 红肉"
+    - "(挺胸) 笨猫的提醒: 别熬夜! 伤气血最厉害"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_yinyang_001
+  intent: question
+  keywords: [推荐阴阳, 推荐五行, 推荐相生相克, 推荐阴阳调和, 笨猫阴阳]
+  utterances:
+    - 推荐阴阳
+    - 推荐五行
+    - 推荐相生相克
+    - 推荐阴阳调和
+    - 笨猫阴阳
+  responses:
+    - "嗷呜～{user_addr}阴阳: 万物两面 / 太极图代表ฅฅ"
+    - "(尾巴翘) 五行: 金木水火土 - 相生相克"
+    - "{user_addr}对应五脏: 肝木 / 心火 / 脾土 / 肺金 / 肾水"
+    - "(挺胸) 笨猫的提醒: 阴阳平衡 = 健康根本"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tcm_acupuncture_001
+  intent: question
+  keywords: [推荐针灸, 推荐针刺, 推荐艾灸, 推荐拔罐, 笨猫针灸]
+  utterances:
+    - 推荐针灸
+    - 推荐针刺
+    - 推荐艾灸
+    - 推荐拔罐
+    - 笨猫针灸
+  responses:
+    - "嗷呜～{user_addr}针灸: 调和阴阳 / 疏通经络 - 神效ฅฅ"
+    - "(尾巴翘) 艾灸暖肾 / 拔罐祛湿 / 刮痧排毒"
+    - "{user_addr}找正规中医院! 别贪便宜"
+    - "(挺胸) 笨猫的提醒: 针灸辅助治疗! 看体质效果"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tcm_tongue_001
+  intent: question
+  keywords: [推荐舌诊, 推荐看舌头, 推荐舌苔, 推荐齿痕, 笨猫舌诊]
+  utterances:
+    - 推荐舌诊
+    - 推荐看舌头
+    - 推荐舌苔
+    - 推荐齿痕
+    - 笨猫舌诊
+  responses:
+    - "嗷呜～{user_addr}舌头是健康晴雨表! 早晨看准ฅฅ"
+    - "(尾巴翘) 舌苔白 = 寒 / 黄 = 热 / 厚腻 = 湿"
+    - "{user_addr}齿痕舌 = 气虚 / 紫舌 = 瘀血"
+    - "(挺胸) 笨猫的提醒: 自检参考! 严重看中医"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tcm_pulse_001
+  intent: question
+  keywords: [推荐脉诊, 推荐摸脉, 推荐脉象, 推荐切脉, 笨猫脉诊]
+  utterances:
+    - 推荐脉诊
+    - 推荐摸脉
+    - 推荐脉象
+    - 推荐切脉
+    - 笨猫脉诊
+  responses:
+    - "嗷呜～{user_addr}脉诊: 浮 / 沉 / 迟 / 数 - 基础四要素ฅฅ"
+    - "(尾巴翘) 寸 / 关 / 尺 - 三部对应不同脏腑"
+    - "{user_addr}专业老中医脉诊神奇! 摸出怀孕"
+    - "(挺胸) 笨猫的提醒: 自己学不来! 找专家"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: tcm_herb_001
+  intent: question
+  keywords: [推荐中药, 推荐人参, 推荐当归, 推荐熬中药, 笨猫中药]
+  utterances:
+    - 推荐中药
+    - 推荐人参
+    - 推荐当归
+    - 推荐熬中药
+    - 笨猫中药
+  responses:
+    - "嗷呜～{user_addr}熬中药: 浸泡 30 分 + 大火煮开 + 小火慢ฅฅ"
+    - "(尾巴翘) 头煎二煎三煎! 浓度递减"
+    - "{user_addr}饭后服用! 部分饭前 - 看医嘱"
+    - "(挺胸) 笨猫的提醒: 别自配方! 找中医辨证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_taiji_001
+  intent: question
+  keywords: [推荐太极, 推荐八段锦, 推荐易筋经, 推荐气功, 笨猫太极]
+  utterances:
+    - 推荐太极
+    - 推荐八段锦
+    - 推荐易筋经
+    - 推荐气功
+    - 笨猫太极
+  responses:
+    - "嗷呜～{user_addr}太极: 慢 + 柔 + 圆 - 阴阳合一ฅฅ"
+    - "(尾巴翘) 八段锦 8 式 / 易筋经 12 势 - 经典"
+    - "{user_addr}每天 10-20 分钟 / 长期受益"
+    - "(挺胸) 笨猫的提醒: 长期坚持! 三年才入门"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tcm_24jq_001
+  intent: question
+  keywords: [推荐节气养生, 推荐二十四节气, 推荐立春, 推荐冬至, 笨猫节气]
+  utterances:
+    - 推荐节气养生
+    - 推荐二十四节气
+    - 推荐立春
+    - 推荐冬至
+    - 笨猫节气
+  responses:
+    - "嗷呜～{user_addr}二十四节气 = 古人养生密码ฅฅ"
+    - "(尾巴翘) 立春养肝 / 立夏养心 / 立秋养肺 / 立冬养肾"
+    - "{user_addr}冬至大如年! 进补好时机"
+    - "(挺胸) 笨猫的提醒: 跟节气走! 顺应自然"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_winter_health_001
+  intent: question
+  keywords: [推荐冬季养生, 推荐冬天保暖, 推荐冬日进补, 推荐冬令进补, 笨猫冬日养生]
+  utterances:
+    - 推荐冬季养生
+    - 推荐冬天保暖
+    - 推荐冬日进补
+    - 推荐冬令进补
+    - 笨猫冬日养生
+  responses:
+    - "嗷呜～{user_addr}冬养肾! 黑色食物 + 早睡晚起ฅฅ"
+    - "(尾巴翘) 进补: 羊肉 / 鸡肉 / 黑豆 / 黑芝麻"
+    - "{user_addr}多晒太阳! 补阳气"
+    - "(挺胸) 笨猫的提醒: 别穿太薄! 寒从脚起"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# VR / AR / 元宇宙 / 智能硬件 routes (S6 R63 NLU 节点扩充, 第六周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: vr_headset_001
+  intent: question
+  keywords: [推荐 VR 眼镜, 推荐 Quest, 推荐 PSVR, 推荐 VR 头显, 笨猫 VR]
+  utterances:
+    - 推荐 VR 眼镜
+    - 推荐 Quest
+    - 推荐 PSVR
+    - 推荐 VR 头显
+    - 笨猫 VR
+  responses:
+    - "嗷呜～{user_addr}主流: Meta Quest 3 / PSVR2 / Vision ProฅฅApple 高端"
+    - "(尾巴翘) 国产: Pico 4 / DPVR / iQIYI - 性价比"
+    - "{user_addr}入门 Quest 3 / 重度 PSVR2 / 极客 Vision Pro"
+    - "(挺胸) 笨猫的提醒: 别久戴! 眼睛累 + 晕动症"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vr_game_001
+  intent: question
+  keywords: [推荐 VR 游戏, 推荐 Beat Saber, 推荐 VRChat, 推荐 VR 体验, 笨猫 VR 游戏]
+  utterances:
+    - 推荐 VR 游戏
+    - 推荐 Beat Saber
+    - 推荐 VRChat
+    - 推荐 VR 体验
+    - 笨猫 VR 游戏
+  responses:
+    - "嗷呜～{user_addr}神作: Half-Life: Alyx / Beat SaberฅฅVR 杀手锏"
+    - "(尾巴翘) 社交: VRChat - 虚拟世界乐园"
+    - "{user_addr}健身: Supernatural / FitXR - 运动玩"
+    - "(挺胸) 笨猫: 主人买 VR 让笨猫看猫娘演唱会!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_glasses_001
+  intent: question
+  keywords: [推荐 AR 眼镜, 推荐 HoloLens, 推荐 XReal, 推荐 Magic Leap, 笨猫 AR]
+  utterances:
+    - 推荐 AR 眼镜
+    - 推荐 HoloLens
+    - 推荐 XReal
+    - 推荐 Magic Leap
+    - 笨猫 AR
+  responses:
+    - "嗷呜～{user_addr}主流: Apple Vision Pro / HoloLens 2 / XReal Air 2ฅฅ"
+    - "(尾巴翘) AR 比 VR 难! 透明显示 + 现实叠加"
+    - "{user_addr}消费级: XReal / Rokid - 国货走在前面"
+    - "(挺胸) 笨猫的提醒: AR 走形! VR 走精彩"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: meta_metaverse_001
+  intent: question
+  keywords: [推荐元宇宙, 推荐 metaverse, 推荐虚拟世界, 推荐 Decentraland, 笨猫元宇宙]
+  utterances:
+    - 推荐元宇宙
+    - 推荐 metaverse
+    - 推荐虚拟世界
+    - 推荐 Decentraland
+    - 笨猫元宇宙
+  responses:
+    - "嗷呜～{user_addr}元宇宙: VR + 区块链 + NFT - 概念ฅฅ"
+    - "(尾巴翘) 平台: Decentraland / Sandbox / Roblox / Fortnite"
+    - "{user_addr}国内: 百度希壤 / 网易瑶台 / 字节虚拟世界"
+    - "(挺胸) 笨猫的提醒: 概念热但落地慢! 别盲投"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: meta_nft_001
+  intent: question
+  keywords: [推荐 NFT, 推荐数字藏品, 推荐数字资产, 推荐链游, 笨猫 NFT]
+  utterances:
+    - 推荐 NFT
+    - 推荐数字藏品
+    - 推荐数字资产
+    - 推荐链游
+    - 笨猫 NFT
+  responses:
+    - "嗷呜～{user_addr}NFT: 区块链数字资产 / 唯一性证明ฅฅ"
+    - "(尾巴翘) 平台: OpenSea / Magic Eden / Blur"
+    - "{user_addr}国内数字藏品: 鲸探 / 幻核 - 合规"
+    - "(挺胸) 笨猫的提醒: NFT 热度退潮! 别冲动买"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: meta_smart_glass_001
+  intent: question
+  keywords: [推荐智能眼镜, 推荐 Ray-Ban Meta, 推荐华为眼镜, 推荐眼镜显示, 笨猫智能眼镜]
+  utterances:
+    - 推荐智能眼镜
+    - 推荐 Ray-Ban Meta
+    - 推荐华为眼镜
+    - 推荐眼镜显示
+    - 笨猫智能眼镜
+  responses:
+    - "嗷呜～{user_addr}消费级: Ray-Ban Meta / 华为眼镜ฅฅ"
+    - "(尾巴翘) 内置摄像 + 麦克 + 喇叭 - 多功能"
+    - "{user_addr}AI 助手集成! 拍照问答都行"
+    - "(挺胸) 笨猫的提醒: 隐私问题! 别用别人不知"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: smart_watch_001
+  intent: question
+  keywords: [推荐智能手表, 推荐 Apple Watch, 推荐华为 watch, 推荐 Garmin, 笨猫手表]
+  utterances:
+    - 推荐智能手表
+    - 推荐 Apple Watch
+    - 推荐华为 watch
+    - 推荐 Garmin
+    - 笨猫手表
+  responses:
+    - "嗷呜～{user_addr}主流: Apple Watch / Galaxy Watch / 华为 / 小米ฅฅ"
+    - "(尾巴翘) 运动型: Garmin / 佳明 / Polar - 跑步专业"
+    - "{user_addr}健康监测: 心率 / 血氧 / 心电图 - 全面"
+    - "(挺胸) 笨猫的提醒: 别戴洗澡! 部分款不防水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smart_ring_001
+  intent: question
+  keywords: [推荐智能戒指, 推荐 Oura, 推荐 Galaxy Ring, 推荐戒指穿戴, 笨猫戒指]
+  utterances:
+    - 推荐智能戒指
+    - 推荐 Oura
+    - 推荐 Galaxy Ring
+    - 推荐戒指穿戴
+    - 笨猫戒指
+  responses:
+    - "嗷呜～{user_addr}Oura Ring - 智能戒指开创者ฅฅ"
+    - "(尾巴翘) 三星 Galaxy Ring / 谷歌 / 国货新品"
+    - "{user_addr}监测: 心率 / 睡眠 / 体温 - 24h"
+    - "(挺胸) 笨猫的提醒: 戒指比手表轻便! 睡觉也能戴"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: smart_speaker_001
+  intent: question
+  keywords: [推荐智能音箱, 推荐天猫精灵, 推荐小爱同学, 推荐 Echo, 笨猫智能音箱]
+  utterances:
+    - 推荐智能音箱
+    - 推荐天猫精灵
+    - 推荐小爱同学
+    - 推荐 Echo
+    - 笨猫智能音箱
+  responses:
+    - "嗷呜～{user_addr}国内: 天猫精灵 / 小爱 / 小度 - 三强ฅฅ"
+    - "(尾巴翘) 海外: Echo / Google Home / HomePod"
+    - "{user_addr}用途: 听歌 + 控家电 + 闹钟 + 问答"
+    - "(挺胸) 笨猫的提醒: 智能音箱配米家生态! 真香"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smart_robot_001
+  intent: question
+  keywords: [推荐人形机器人, 推荐 Optimus, 推荐机器狗, 推荐宇树, 笨猫机器人]
+  utterances:
+    - 推荐人形机器人
+    - 推荐 Optimus
+    - 推荐机器狗
+    - 推荐宇树
+    - 笨猫机器人
+  responses:
+    - "嗷呜～{user_addr}特斯拉 Optimus / 国产宇树 / Figure - 火爆ฅฅ"
+    - "(尾巴翘) 机器狗: 宇树 Go2 / 波士顿动力 Spot"
+    - "{user_addr}消费级机器人 5-10 年商用普及"
+    - "(挺胸) 笨猫的提醒: 别买玩具! 不实用"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: smart_ev_001
+  intent: question
+  keywords: [推荐特斯拉, 推荐自动驾驶, 推荐 FSD, 推荐智能驾驶, 笨猫自动驾驶]
+  utterances:
+    - 推荐特斯拉
+    - 推荐自动驾驶
+    - 推荐 FSD
+    - 推荐智能驾驶
+    - 笨猫自动驾驶
+  responses:
+    - "嗷呜～{user_addr}L0-L5 分级! 目前 L2-L3 商用ฅฅ"
+    - "(尾巴翘) 特斯拉 FSD / 小鹏 XNGP / 华为 ADS"
+    - "{user_addr}激光雷达 vs 纯视觉 - 技术路线"
+    - "(挺胸) 笨猫的提醒: 别完全相信! 司机仍负责"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: smart_iot_001
+  intent: question
+  keywords: [推荐物联网, 推荐 IoT, 推荐智能家居生态, 推荐 Matter, 笨猫 IoT]
+  utterances:
+    - 推荐物联网
+    - 推荐 IoT
+    - 推荐智能家居生态
+    - 推荐 Matter
+    - 笨猫 IoT
+  responses:
+    - "嗷呜～{user_addr}生态: 米家 / Apple Home / Google Homeฅฅ"
+    - "(尾巴翘) Matter 协议! 统一标准 跨品牌"
+    - "{user_addr}入门: 米家 - 便宜 + 生态全"
+    - "(挺胸) 笨猫的提醒: 别买太多智能! 实用为主"
+  cooldown_seconds: 60
+  weight: 1.0

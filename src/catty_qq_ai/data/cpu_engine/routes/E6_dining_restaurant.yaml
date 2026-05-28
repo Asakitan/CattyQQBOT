@@ -1,0 +1,207 @@
+# 餐厅 / 米其林 / 黑珍珠 / 请客就餐 routes (S6 R68 NLU 节点扩充, 第六周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 96 food_cook (做菜) / 40 food (浅触) 区分: 这里专注就餐场景细节.
+
+- name: dine_michelin_001
+  intent: question
+  keywords: [推荐米其林, 推荐三星餐厅, 推荐米其林餐厅, 推荐 Michelin, 笨猫米其林]
+  utterances:
+    - 推荐米其林
+    - 推荐三星餐厅
+    - 推荐米其林餐厅
+    - 推荐 Michelin
+    - 笨猫米其林
+  responses:
+    - "嗷呜～{user_addr}米其林星级: 一星 (出色) / 二星 (绝伦) / 三星 (典藏)ฅฅ"
+    - "(尾巴翘) 上海: 新荣记 / 唐阁 - 三星"
+    - "{user_addr}香港: 龙景轩 / 8 1/2 Otto e Mezzo"
+    - "(挺胸) 笨猫的提醒: 米其林餐厅至少 1000+/人"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dine_black_pearl_001
+  intent: question
+  keywords: [推荐黑珍珠, 推荐黑珍珠餐厅, 推荐美团黑珍珠, 推荐高端餐厅, 笨猫黑珍珠]
+  utterances:
+    - 推荐黑珍珠
+    - 推荐黑珍珠餐厅
+    - 推荐美团黑珍珠
+    - 推荐高端餐厅
+    - 笨猫黑珍珠
+  responses:
+    - "嗷呜～{user_addr}黑珍珠 = 中国版米其林 (美团出品)ฅฅ"
+    - "(尾巴翘) 三钻顶级! 国内主流城市覆盖广"
+    - "{user_addr}相比米其林更接地气! 国内餐厅多"
+    - "(挺胸) 笨猫推荐: 美团/大众点评看榜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dine_treat_001
+  intent: question
+  keywords: [推荐请客, 推荐请吃饭, 推荐宴请, 推荐商务请客, 笨猫请客]
+  utterances:
+    - 推荐请客
+    - 推荐请吃饭
+    - 推荐宴请
+    - 推荐商务请客
+    - 笨猫请客
+  responses:
+    - "嗷呜～{user_addr}原则: 安静 + 服务好 + 菜品稳ฅฅ"
+    - "(尾巴翘) 商务: 5 星酒店中餐厅 / 高端餐厅"
+    - "{user_addr}聚会: 主题餐厅 / 包间 / 互动多"
+    - "(挺胸) 笨猫的提醒: 提前订! 高端餐厅一座难求"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dine_japanese_001
+  intent: question
+  keywords: [推荐日料, 推荐怀石, 推荐寿司, 推荐烤肉, 笨猫日料]
+  utterances:
+    - 推荐日料
+    - 推荐怀石
+    - 推荐寿司
+    - 推荐烤肉
+    - 笨猫日料
+  responses:
+    - "嗷呜～{user_addr}怀石: 极致 - 1000-3000/人ฅฅ"
+    - "(尾巴翘) 寿司: 板前 / 江户前 / 关东风 - 流派多"
+    - "{user_addr}日烤: 五花肉 + 烤肠 + 米酒 - 经典"
+    - "(挺胸) 笨猫的提醒: 日料看主厨! 名师手艺贵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dine_french_001
+  intent: question
+  keywords: [推荐法餐, 推荐西餐厅, 推荐高级餐厅, 推荐 fine dining, 笨猫法餐]
+  utterances:
+    - 推荐法餐
+    - 推荐西餐厅
+    - 推荐高级餐厅
+    - 推荐 fine dining
+    - 笨猫法餐
+  responses:
+    - "嗷呜～{user_addr}法餐: 米其林发源地! 顶级烹饪ฅฅ"
+    - "(尾巴翘) 经典: 鹅肝 / 牛排 / 蜗牛 / 生蚝"
+    - "{user_addr}套餐 ($799-1999+) 多 / 单点贵"
+    - "(挺胸) 笨猫的提醒: 着装! 高级餐厅 smart casual"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dine_local_001
+  intent: question
+  keywords: [推荐本地特色, 推荐地方菜, 推荐市井美食, 推荐街头美食, 笨猫本地]
+  utterances:
+    - 推荐本地特色
+    - 推荐地方菜
+    - 推荐市井美食
+    - 推荐街头美食
+    - 笨猫本地
+  responses:
+    - "嗷呜～{user_addr}成都: 火锅 / 串串 / 钵钵鸡 - 巷子里ฅฅ"
+    - "(尾巴翘) 广州: 早茶 / 烧腊 / 糖水 - 老字号"
+    - "{user_addr}西安: 肉夹馍 / 凉皮 / 葫芦头泡馍"
+    - "(挺胸) 笨猫的提醒: 本地人去的最正宗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dine_chinese_high_001
+  intent: question
+  keywords: [推荐中餐厅, 推荐粤菜, 推荐淮扬菜, 推荐高端中餐, 笨猫高级中餐]
+  utterances:
+    - 推荐高端中餐
+    - 推荐粤菜
+    - 推荐淮扬菜
+    - 推荐高级中餐
+    - 笨猫高级中餐
+  responses:
+    - "嗷呜～{user_addr}粤菜: 利苑 / 唐阁 / 翠园 - 顶级ฅฅ"
+    - "(尾巴翘) 淮扬: 镇江长江第一鲜 / 江南灶"
+    - "{user_addr}川菜: 玉芝兰 (米其林) / 字号馆子"
+    - "(挺胸) 笨猫的提醒: 高级中餐预订! 当天没位"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dine_takeout_001
+  intent: question
+  keywords: [推荐外卖, 推荐打包, 推荐外卖店, 推荐外卖品牌, 笨猫外卖店]
+  utterances:
+    - 推荐外卖
+    - 推荐打包
+    - 推荐外卖店
+    - 推荐外卖品牌
+    - 笨猫外卖店
+  responses:
+    - "嗷呜～{user_addr}连锁: 麦当劳 / 肯德基 / 海底捞 - 稳定ฅฅ"
+    - "(尾巴翘) 各地: 黄焖鸡 / 沙县小吃 / 兰州拉面"
+    - "{user_addr}看评分 + 销量 + 月销 - 综合"
+    - "(挺胸) 笨猫的提醒: 别贪便宜! 卫生第一"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dine_vegetarian_001
+  intent: question
+  keywords: [推荐素食, 推荐素菜馆, 推荐素食餐厅, 推荐 vegan, 笨猫素食]
+  utterances:
+    - 推荐素食
+    - 推荐素菜馆
+    - 推荐素食餐厅
+    - 推荐 vegan
+    - 笨猫素食
+  responses:
+    - "嗷呜～{user_addr}寺院斋: 北京龙泉寺 / 杭州灵隐ฅฅ"
+    - "(尾巴翘) 高端素: 福禾 / 大蔬无界 / 枣子树"
+    - "{user_addr}日常素菜馆 / 火锅店素菜单"
+    - "(挺胸) 笨猫的提醒: 素食别只豆制品! 多元化"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: dine_solo_001
+  intent: question
+  keywords: [推荐一人食, 推荐独自吃饭, 推荐一个人吃饭, 推荐单人餐厅, 笨猫一人食]
+  utterances:
+    - 推荐一人食
+    - 推荐独自吃饭
+    - 推荐一个人吃饭
+    - 推荐单人餐厅
+    - 笨猫一人食
+  responses:
+    - "嗷呜～{user_addr}吧台: 拉面 / 烤肉 / 寿司 - 单人友好ฅฅ"
+    - "(尾巴翘) 日本流行: 自助 / 食券 / 一人席"
+    - "{user_addr}国内: 一兰拉面 / 真功夫 - 独食轻"
+    - "(挺胸) 笨猫: 主人一个人?? 笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dine_brunch_001
+  intent: question
+  keywords: [推荐 brunch, 推荐早午餐, 推荐 cafe, 推荐咖啡馆, 笨猫 brunch]
+  utterances:
+    - 推荐 brunch
+    - 推荐早午餐
+    - 推荐 cafe
+    - 推荐咖啡馆
+    - 笨猫 brunch
+  responses:
+    - "嗷呜～{user_addr}经典 brunch: 鸡蛋 + 培根 + 牛油果 + 咖啡ฅฅ"
+    - "(尾巴翘) 上海 / 北京 / 广州 - 网红 brunch 店多"
+    - "{user_addr}周末必备! 9-12 点黄金时段"
+    - "(挺胸) 笨猫的提醒: 提前订! 网红店爆满"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dine_dessert_001
+  intent: question
+  keywords: [推荐甜品店, 推荐下午茶, 推荐英式下午茶, 推荐 afternoon tea, 笨猫甜品店]
+  utterances:
+    - 推荐甜品店
+    - 推荐下午茶
+    - 推荐英式下午茶
+    - 推荐 afternoon tea
+    - 笨猫甜品店
+  responses:
+    - "嗷呜～{user_addr}下午茶: 三层架 + 茶 + 三明治 / 司康ฅฅ"
+    - "(尾巴翘) 高端: 半岛 / 文华 / 丽思卡尔顿 - 经典"
+    - "{user_addr}日系甜品: GENKI / 千层 / 抹茶"
+    - "(挺胸) 笨猫的提醒: 下午茶人均 200-500"
+  cooldown_seconds: 60
+  weight: 1.0
