@@ -34,3 +34,5 @@ AGENTS.md
 Miao/
 .tmp/
 diagnostics/
+.github/
+.tmp_diag/
