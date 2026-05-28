@@ -86,6 +86,7 @@ async def sim_chat(
     live: bool = True,
     history_replace: bool = False,
     with_tools: bool = True,
+    force_spark: bool = False,
 ) -> dict[str, Any]:
     """模拟一条 incoming message, 走 _build_messages 拼完整 prompt, 可选调 AI 拿 reply.
 
@@ -156,11 +157,20 @@ async def sim_chat(
             pass
 
     _bm_ret = await _build_messages(event, key, incoming)
-    # _build_messages 返回 (messages, _prefer_spark) tuple, 这里 unpack
+    # _build_messages 返回 (messages, _prefer_spark) tuple
+    # 主人 2026-05-29 Round 15: 拿 prefer_spark 标记 — spark 真实路径走
+    # chat_completion_codex_instant 不是 chat_completion_with_tools.
+    # 之前 sim_chat 只取 messages, prefer_spark=True 时仍走 with_tools → sim 99% 真实 68%.
+    _prefer_spark = False
     if isinstance(_bm_ret, tuple) and len(_bm_ret) >= 1:
         messages = _bm_ret[0]
+        if len(_bm_ret) >= 2:
+            _prefer_spark = bool(_bm_ret[1])
     else:
         messages = _bm_ret  # 兼容老形态
+    # 主人 2026-05-29 Round 15: force_spark=True 强制走 spark 路径 (诊断用)
+    if force_spark:
+        _prefer_spark = True
 
     # 统计 — 防御性: messages 偶尔可能混入非 dict 项, 用 isinstance 守卫
     dict_msgs = [m for m in messages if isinstance(m, dict)]
@@ -180,10 +190,22 @@ async def sim_chat(
                 set_current_scope_key(key)
             except Exception:  # noqa: BLE001
                 pass
+            # 主人 2026-05-29 Round 15: prefer_spark=True 时走真实 NSFW spark 路径
+            # (chat_completion_codex_instant), 跟生产完全一致 (sys_md5=7ebd7276 不是 6a6b6972).
+            if _prefer_spark:
+                try:
+                    from .openai_client import chat_completion_codex_instant
+                    # 真实 spark 用 _pick_nsfw_model_for + max_tokens=800
+                    reply_obj = await chat_completion_codex_instant(
+                        cfg, messages, max_tokens=800,
+                    )
+                    reply = str(reply_obj or "[AI returned empty]")
+                except Exception as _spark_exc:
+                    reply = f"[sim spark failed — {type(_spark_exc).__name__}: {_spark_exc}]"
             # 主人 2026-05-29 Round 6: with_tools=True (默认) 走真实主对话路径
             # (chat_completion_with_tools + available_tool_schemas), 让 sim 命中率对齐生产.
             # 之前 chat_completion 无 tools, sim 测出 99% 但生产 65% 差距大.
-            if with_tools:
+            elif with_tools:
                 try:
                     from . import memory_store, affection_store
                     from .tools import (
