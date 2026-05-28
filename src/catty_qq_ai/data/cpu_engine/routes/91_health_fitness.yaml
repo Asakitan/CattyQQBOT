@@ -1,0 +1,206 @@
+# 健康 / 运动 / 疾病 / 睡眠 routes (S6 R15 NLU 节点扩充, buffered 3/10)
+# 主人 2026-05-29: intent=question/complaint, 不在 strong_intents.
+
+- name: health_sick_001
+  intent: complaint
+  keywords: [生病, 感冒, 发烧, 不舒服, 难受, 病了]
+  utterances:
+    - 我感冒了
+    - 发烧难受
+    - 身体不舒服
+    - 病倒了
+    - 笨猫我病了
+  responses:
+    - "(担心) 嗷呜～{user_addr}多休息! 笨猫给{user_addr}贴贴ฅฅ"
+    - "(凑过来) 喝热水! 多睡觉! 笨猫监督{user_addr}!"
+    - "(尾巴垂下) {user_addr}严重的话快去医院~ 别拖"
+    - "(钻进怀里) 笨猫的小爪子治愈值 100! 早点好嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: health_headache_001
+  intent: complaint
+  keywords: [头疼, 头痛, 头晕, 偏头痛, 脑壳疼]
+  utterances:
+    - 头疼得要命
+    - 偏头痛犯了
+    - 头晕目眩
+    - 脑壳好疼
+    - 头痛起来
+  responses:
+    - "(担心) 嗷呜～{user_addr}多喝水! 笨猫帮{user_addr}按按头ฅฅ"
+    - "(凑过来) 头疼是不是没休息够~ 早点睡{user_addr}"
+    - "(尾巴软软贴) 试试咖啡或者止痛药~ 笨猫小窍门"
+    - "{user_addr}别太累! 笨猫担心你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: health_sleep_001
+  intent: complaint
+  keywords: [失眠, 睡不着, 熬夜, 没睡好, 入睡困难]
+  utterances:
+    - 又失眠了
+    - 我睡不着
+    - 熬夜到凌晨
+    - 没睡好
+    - 入睡困难
+  responses:
+    - "嗷呜～{user_addr}试试 ASMR! 笨猫的呼噜声白噪音ฅฅ"
+    - "(钻被窝) 笨猫陪{user_addr}睡! 数羊数到一百次"
+    - "(尾巴轻摆) 别玩手机{user_addr}~ 睡前关灯关蓝光"
+    - "{user_addr}睡不着就来贴贴笨猫嘛~ 温暖催眠"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fitness_workout_001
+  intent: question
+  keywords: [健身, 锻炼, 撸铁, 健身房, 运动]
+  utterances:
+    - 健身有用吗
+    - 推荐健身计划
+    - 撸铁去
+    - 健身房办卡
+    - 怎么开始运动
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}加油健身! 笨猫支持你!"
+    - "推荐先有氧再无氧~ 跑步 + 撸铁{user_addr}!"
+    - "(歪头) 健身房办卡前先去体验! 别冲动消费"
+    - "{user_addr}健身要循序渐进! 别第一天就练废ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fitness_run_001
+  intent: question
+  keywords: [跑步, 慢跑, 晨跑, 夜跑, 马拉松]
+  utterances:
+    - 想去跑步
+    - 慢跑推荐
+    - 晨跑还是夜跑
+    - 跑马拉松
+    - 跑步装备
+  responses:
+    - "嗷呜～{user_addr}跑步加油! 笨猫陪... 不对笨猫跑不动"
+    - "(尾巴一甩) 推荐夜跑! 不晒~ 笨猫的健身偏好"
+    - "{user_addr}买双好鞋! 别穿帆布鞋跑伤膝盖"
+    - "(歪头) 晨跑唤醒精神~ 但要先吃早饭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fitness_yoga_001
+  intent: question
+  keywords: [瑜伽, 拉伸, 静坐, 冥想, 呼吸法]
+  utterances:
+    - 练瑜伽
+    - 拉伸怎么做
+    - 冥想入门
+    - 静坐多久
+    - 呼吸法
+  responses:
+    - "嗷呜～瑜伽好! {user_addr}柔软度加分ฅฅ"
+    - "(歪头) 笨猫的伸懒腰就是瑜伽! 大师段位~"
+    - "冥想 10 分钟就够~ 别一开始就 1 小时"
+    - "(尾巴翘) 瑜伽配音乐效果翻倍! {user_addr}试试"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: health_diet_001
+  intent: question
+  keywords: [减肥, 减脂, 节食, 卡路里, 体重]
+  utterances:
+    - 想减肥
+    - 减脂怎么吃
+    - 节食危险吗
+    - 卡路里多少
+    - 体重不降
+  responses:
+    - "嗷呜～{user_addr}减肥要科学! 别节食搞坏身体"
+    - "(歪头) 控制总卡路里 + 多动~ 没捷径{user_addr}"
+    - "(尾巴一甩) 笨猫推荐 16+8 轻断食! 但要看医生哦"
+    - "{user_addr}体重不降是平台期! 坚持过去就降ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: health_eyes_001
+  intent: complaint
+  keywords: [眼睛酸, 眼疲劳, 视力下降, 眼睛痛, 看不清]
+  utterances:
+    - 眼睛好酸
+    - 视力下降了
+    - 眼疲劳严重
+    - 眼睛痛
+    - 看屏幕看不清
+  responses:
+    - "(担心) 嗷呜～{user_addr}少看屏幕! 远眺一下!"
+    - "(凑过来) 试试热敷眼睛~ 笨猫的小爪子帮{user_addr}按"
+    - "{user_addr}定时眨眼! 20-20-20 法则: 看 20 分钟远 20 秒"
+    - "(尾巴轻摆) 严重去医院! 别拖成近视加深"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: health_back_001
+  intent: complaint
+  keywords: [腰疼, 腰痛, 腰酸, 腰椎, 腰肌劳损]
+  utterances:
+    - 腰好疼
+    - 腰酸背痛
+    - 腰椎病
+    - 腰肌劳损
+    - 久坐腰痛
+  responses:
+    - "嗷呜～{user_addr}久坐了吧! 起来活动!"
+    - "(凑过来按摩) 笨猫的小爪子按摩中~ 别动!"
+    - "{user_addr}试试瑜伽! 拉伸放松腰背"
+    - "(担心) 长期腰痛去医院! 别自己扛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: health_stomach_001
+  intent: complaint
+  keywords: [胃疼, 胃痛, 肚子疼, 拉肚子, 胃溃疡]
+  utterances:
+    - 胃好疼
+    - 肚子疼难受
+    - 拉肚子了
+    - 胃溃疡复发
+    - 吃坏肚子
+  responses:
+    - "(担心) 嗷呜～{user_addr}快吃点温的! 别吃凉的!"
+    - "(凑过来贴贴) 笨猫帮{user_addr}揉揉肚子~"
+    - "(尾巴垂下) 严重的话去医院! 胃病拖不得"
+    - "{user_addr}多喝小米粥! 养胃好物"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: health_dentist_001
+  intent: question
+  keywords: [牙疼, 牙痛, 看牙, 蛀牙, 拔牙]
+  utterances:
+    - 牙好疼
+    - 蛀牙了
+    - 要拔牙
+    - 看牙好贵
+    - 笨猫怕看牙
+  responses:
+    - "嗷呜～{user_addr}快去看牙! 拖了更贵更疼!"
+    - "(尾巴垂下) 笨猫也怕看牙... 但{user_addr}得去"
+    - "(凑过来) 笨猫陪{user_addr}祈祷不要做根管!"
+    - "{user_addr}早晚刷牙! 别让笨猫数落你哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: health_mental_001
+  intent: complaint
+  keywords: [焦虑, 抑郁, 压力大, 心理问题, 精神状态]
+  utterances:
+    - 我焦虑
+    - 抑郁了
+    - 压力好大
+    - 心理状态不好
+    - 精神疲惫
+  responses:
+    - "(凑过来贴贴) 嗷呜～{user_addr}别一个人扛~ 跟人说说ฅฅ"
+    - "(尾巴软软贴) 心理也是病{user_addr}~ 看医生不丢人"
+    - "{user_addr}多运动! 多见阳光! 笨猫陪你"
+    - "(担心) 严重的话找专业心理咨询! 笨猫支持你"
+  cooldown_seconds: 60
+  weight: 1.0
