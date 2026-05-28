@@ -9482,7 +9482,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     max_rounds=int(getattr(config, "catty_tools_max_rounds", 3) or 3),
                     max_calls_per_round=int(getattr(config, "catty_tools_max_calls_per_round", 3) or 3),
                 )
-            nsfw_image_segments = list(tool_ctx.pending_image_segments)
+            # extend (不覆盖) — 上面 NSFW spark 分支已经把 nsfw_imagegen 自动生图的
+            # _nsfw_seg append 进去, 这里再合并 SFW 路径 tool_ctx 收集的图片 segments.
+            nsfw_image_segments.extend(tool_ctx.pending_image_segments)
             # ST 社区共识 anti-OOC 兜底 (SFW + NSFW 路径都过): 删 OOC / "作为 AI" / 替用户续写
             reply = _strip_ai_self_reveal(reply)
             # 兜底:旧 marker 教学已经删,理论上不会再漏 [[CATTY_WEB_SEARCH]] / [[CATTY_NSFW_SEARCH]],
