@@ -517,13 +517,8 @@ async def post_messages_native(
     # Pre-step: OpenAI 风格 tool history (role=tool, assistant.tool_calls) → Anthropic
     # native (assistant.content=[tool_use], user.content=[tool_result]).
     messages = _convert_history_for_anthropic(messages)
-    # 主人 2026-05-28 cache 修复 — 最后一道兜底 sweep: catch 所有上游漏掉的 floating system
-    # (author_note depth-inject / PHI / spark 动态段 等). 通过 idempotent 设计安全地双重调用.
-    try:
-        from .prompt_cache import sweep_floating_systems_into_user_content
-        messages = sweep_floating_systems_into_user_content(messages)
-    except Exception as _sweep_exc:  # noqa: BLE001
-        logger.debug(f"post_messages_native sweep failed (non-fatal): {_sweep_exc}")
+    # 主人 2026-05-28 C7-3: 回退 sweep — sweep 把动态 sys 段 inline 到 user content,
+    # Claude 把 NSFW 信号当 user 主动请求触发 safety 拒绝. 动态 sys 段恢复 system role.
     # 拆分顶部 system + 对话, 并 normalize multimodal content
     system_blocks, other_messages = _split_system_and_messages(messages)
     other_messages = [_normalize_message_content(m) for m in other_messages]

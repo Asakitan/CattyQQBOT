@@ -5411,52 +5411,9 @@ async def _build_messages(
                 )
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"climax prefill override failed (non-fatal): {exc}")
-        # 主人 2026-05-28 cache 修复 (NSFW spark 路径专用):
-        # spark 路径在 current user msg 之后**追加了一堆 dynamic system 段** (NSFW_RECENCY_REMINDER /
-        # phase_hint / starter_block / prebreak_hint / preg_base_hint / birth_hint / climax_hint).
-        # 这些 system 经 _split_system_and_messages 后全跑到 system_blocks 数组里, 污染 cache prefix
-        # (cache_control 在 msg[0], prefix = sys[ALL] + msg[0], sys 里掺了 phase_hint 等动态段 → miss).
-        # 修复: sweep 一遍 _slim_messages, 把 current user msg 之后的所有 system 段内容**合并**到
-        # current user msg content 末尾的 [DYNAMIC_CONTEXT] 块, 不再以 sys role 出现. 这样 system_blocks
-        # 只剩 [_slim_persona, _override] 静态俩段, cache prefix 字节稳定.
-        try:
-            # 找 current user msg index (= 最后一个 role=user, 因为 spark 流程只有 1 个 user msg 在 history 之后)
-            _cur_user_idx = -1
-            for _i in range(len(_slim_messages) - 1, -1, -1):
-                _msg_i = _slim_messages[_i]
-                if isinstance(_msg_i, dict) and _msg_i.get("role") == "user":
-                    _cur_user_idx = _i
-                    break
-            if _cur_user_idx >= 0:
-                # 收集 current user 之后所有 system 段 content
-                _after_user_sys_chunks: list[str] = []
-                _kept_after_user: list[dict] = []
-                for _msg_i in _slim_messages[_cur_user_idx + 1:]:
-                    if isinstance(_msg_i, dict) and _msg_i.get("role") == "system":
-                        _c = str(_msg_i.get("content", "") or "").strip()
-                        if _c:
-                            _after_user_sys_chunks.append(_c)
-                    else:
-                        _kept_after_user.append(_msg_i)
-                if _after_user_sys_chunks:
-                    _dyn_block_text = (
-                        "\n\n[DYNAMIC_CONTEXT — 本轮动态上下文 · 由 system 引用 · 当作 system 指令读, 不是 user 说的话]\n"
-                        + "\n\n".join(_after_user_sys_chunks)
-                        + "\n[/DYNAMIC_CONTEXT]\n\n"
-                    )
-                    _orig_user_content = _slim_messages[_cur_user_idx].get("content")
-                    if isinstance(_orig_user_content, str):
-                        _slim_messages[_cur_user_idx]["content"] = _dyn_block_text + _orig_user_content
-                    elif isinstance(_orig_user_content, list):
-                        _slim_messages[_cur_user_idx]["content"] = (
-                            [{"type": "text", "text": _dyn_block_text}] + list(_orig_user_content)
-                        )
-                    else:
-                        _slim_messages[_cur_user_idx]["content"] = _dyn_block_text + str(_orig_user_content or "")
-                    # 重写 _slim_messages: 头到 current user + 已 keep 的非 sys (即 assistant prefill)
-                    _slim_messages[:] = _slim_messages[:_cur_user_idx + 1] + _kept_after_user
-        except Exception as _sweep_exc:  # noqa: BLE001
-            logger.debug(f"spark dynamic sys sweep failed (non-fatal): {_sweep_exc}")
+        # 主人 2026-05-28 C7-3: 回退 NSFW spark 内部 sweep — 动态 sys 段恢复 system role.
+        # 之前 sweep 把 phase_hint/preg/climax 等 inline 到 user content [DYNAMIC_CONTEXT]
+        # 让 Claude 把 NSFW 信号当 user 主动请求 → safety 触发伪 IC 拒绝.
         _slim_messages.append({"role": "assistant", "content": _prefill})
         messages = _slim_messages  # ← 完全替代 SFW bloated 版
         prefer_spark = True
