@@ -259,7 +259,13 @@ class Config(BaseModel):
     # 超出部分用 text2vec/jieba/HanLP 按相关性筛 history + user_details + summary,
     # persona 段强制保留 (_PROTECTED_IDENTIFIERS 白名单).
     # NLU 失败/超 budget 一律降级到现状逻辑, 不阻塞业务.
-    catty_prompt_compressor_enabled: bool = True
+    #
+    # 主人 2026-05-28 ⚠️ 默认 OFF:启用后 compressor 按 query 排序 history,
+    # 同 scope 不同轮 query 不同 → history 字节漂移 → Anthropic cache prefix
+    # 字节哈希不匹配 → cache miss (只 create 不 read). cache-friendly 重设计
+    # 见 Phase 3 (monotonic compression: 同 scope 后轮只能是前轮的 superset).
+    # 主人想测压缩效果时可手动开, 但会牺牲 cache hit.
+    catty_prompt_compressor_enabled: bool = False
     catty_prompt_budget_private: int = 5000
     catty_prompt_budget_group: int = 3000
     # history 强制保留最近 N 条 (不进相关性排序). 主人决策: 配置项 + 动态扩展.
