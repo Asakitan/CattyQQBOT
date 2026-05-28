@@ -24,11 +24,26 @@ yaml 格式 (同 BegTemplatePool 风格):
 from __future__ import annotations
 
 import random
+import time
+from collections import defaultdict, deque
 from dataclasses import dataclass, field
+from datetime import datetime
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Deque, Optional
 
 from loguru import logger
+
+
+# 主人 2026-05-29 v2 算法: 防机械感.
+# A) Recently-used 抑制: 同 user 同 category 最近 N 次用过的 (bucket, template_idx)
+#    队列, pick 时降权. 同 bucket 再选 template 时直接排除最近 idx.
+# B) Time-of-day 加权: 桶可声明 time_of_day, 命中当前时段 weight *= 1.5.
+# C) Emotion 适配: 桶可声明 emotion_min/max, 用户消息情绪强度需落区间.
+_RECENT_PICKS: dict[tuple[str, str], Deque[tuple[str, int]]] = defaultdict(
+    lambda: deque(maxlen=6)
+)
+_RECENT_BUCKET_PENALTY = 0.15  # 最近用过的 bucket weight 乘这个
+_TIME_OF_DAY_BOOST = 1.6  # 时段匹配 weight 乘这个
 
 try:
     import yaml  # type: ignore
@@ -50,8 +65,27 @@ class QuickReplyBucket:
     already_signed: Optional[bool] = None
     is_owner: Optional[bool] = None
     scope_type: Optional[str] = None  # private / group / None
+    time_of_day: Optional[str] = None  # morning/noon/afternoon/evening/night/late_night
+    emotion_min: float = 0.0  # 情绪强度下限 0.0-1.0
+    emotion_max: float = 1.0  # 上限
     weight: float = 1.0
     extra_filters: dict[str, Any] = field(default_factory=dict)  # 任意精确匹配字段
+
+
+def _current_time_of_day() -> str:
+    """与 script_ctx._time_of_day_for 一致, 但加 late_night 细分."""
+    hour = datetime.now().hour
+    if 5 <= hour < 11:
+        return "morning"
+    if 11 <= hour < 14:
+        return "noon"
+    if 14 <= hour < 18:
+        return "afternoon"
+    if 18 <= hour < 23:
+        return "evening"
+    if hour >= 23 or hour < 2:
+        return "late_night"
+    return "night"
 
 
 @dataclass(slots=True)
@@ -78,8 +112,17 @@ class QuickReplyPool:
         ctx: ScriptContext | None = None,
         cat_suffixes: list[str] | None = None,
         render_vars: dict[str, Any] | None = None,
+        # v2 算法参数
+        user_id: str = "",
+        emotion_intensity: float = 0.0,
+        time_of_day: str | None = None,
     ) -> str | None:
-        """从匹配的桶里随机选一个模板, 渲染后返回. 无匹配/无模板返回 None."""
+        """加 3 个算法: A) 最近用过的桶/模板抑制 B) 时段加权 C) 情绪适配.
+
+        无匹配/无模板返回 None. user_id 为空时仅启用 B+C, 不启用 A.
+        """
+        now_tod = time_of_day or _current_time_of_day()
+
         candidates: list[QuickReplyBucket] = []
         for bucket in self.buckets:
             if not bucket.templates:
@@ -95,6 +138,8 @@ class QuickReplyPool:
             if bucket.scope_type is not None and scope_type is not None:
                 if bucket.scope_type != scope_type:
                     continue
+            if not (bucket.emotion_min <= emotion_intensity <= bucket.emotion_max):
+                continue
             if bucket.extra_filters and extra:
                 if not all(extra.get(k) == v for k, v in bucket.extra_filters.items()):
                     continue
@@ -102,9 +147,40 @@ class QuickReplyPool:
 
         if not candidates:
             return None
-        weights = [max(b.weight, 0.0001) for b in candidates]
+
+        # A: 最近用过的 bucket 降权
+        recent_key = (user_id, self.category) if user_id else None
+        recent_picks = _RECENT_PICKS[recent_key] if recent_key else deque()
+        recent_buckets = {b for b, _ in recent_picks}
+        recent_template_per_bucket: dict[str, set[int]] = defaultdict(set)
+        for b, idx in recent_picks:
+            recent_template_per_bucket[b].add(idx)
+
+        weights: list[float] = []
+        for b in candidates:
+            w = max(b.weight, 0.0001)
+            # B: 时段匹配加权
+            if b.time_of_day is not None and b.time_of_day == now_tod:
+                w *= _TIME_OF_DAY_BOOST
+            # A: 最近 bucket 降权
+            if b.name in recent_buckets:
+                w *= _RECENT_BUCKET_PENALTY
+            weights.append(w)
+
         winner = random.choices(candidates, weights=weights, k=1)[0]
-        template = random.choice(winner.templates)
+
+        # A 第二层: 同 bucket 内排除最近用过的 template idx
+        used_idx = recent_template_per_bucket.get(winner.name, set())
+        available_idx = [i for i in range(len(winner.templates)) if i not in used_idx]
+        if not available_idx:  # 全用过了, 整桶都允许 (避免无模板可选)
+            available_idx = list(range(len(winner.templates)))
+        chosen_idx = random.choice(available_idx)
+        template = winner.templates[chosen_idx]
+
+        # 记录这次 pick
+        if recent_key is not None:
+            _RECENT_PICKS[recent_key].append((winner.name, chosen_idx))
+
         return self._render(template, ctx, cat_suffixes, render_vars)
 
     @staticmethod
@@ -203,8 +279,11 @@ def _parse_entry(entry: dict[str, Any], source: str) -> QuickReplyBucket | None:
     scope_raw = entry.get("scope_type")
 
     known = {"name", "templates", "level_min", "level_max", "already_signed",
-             "is_owner", "scope_type", "weight"}
+             "is_owner", "scope_type", "weight", "time_of_day", "emotion_min",
+             "emotion_max", "_note"}
     extra_filters = {k: v for k, v in entry.items() if k not in known}
+
+    tod_raw = entry.get("time_of_day")
 
     try:
         return QuickReplyBucket(
@@ -215,6 +294,9 @@ def _parse_entry(entry: dict[str, Any], source: str) -> QuickReplyBucket | None:
             already_signed=bool(already_raw) if isinstance(already_raw, bool) else None,
             is_owner=bool(is_owner_raw) if isinstance(is_owner_raw, bool) else None,
             scope_type=str(scope_raw) if isinstance(scope_raw, str) else None,
+            time_of_day=str(tod_raw) if isinstance(tod_raw, str) else None,
+            emotion_min=float(entry.get("emotion_min", 0.0)),
+            emotion_max=float(entry.get("emotion_max", 1.0)),
             weight=float(entry.get("weight", 1.0)),
             extra_filters=extra_filters,
         )

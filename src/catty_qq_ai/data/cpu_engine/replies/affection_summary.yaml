@@ -1,0 +1,76 @@
+# 积分查询 (/我的积分 /好感度) 回复模板池.
+# 主人 2026-05-29 v2: 替代 _fallback_caption_summary 3 句硬编码.
+# 桶字段: is_owner / already_signed (是否今日签过) / level / time_of_day
+# 变量: {user_nickname}/{cat_suffix}/{level}/{balance}
+
+# ════════════════════════════════════════════════════════════════════
+# 主人查询
+# ════════════════════════════════════════════════════════════════════
+
+- name: summary_owner_morning
+  is_owner: true
+  time_of_day: morning
+  weight: 1.0
+  templates:
+    - "(端上来) 主人早! 卡卡奉上~ 积分∞ Lv MAX~ 今天准备做啥喵?"
+    - "嗷呜～早安主人! 这是您的尊享卡 (=^ω^=) 想撒娇就直说ฅฅ"
+
+- name: summary_owner_late_night
+  is_owner: true
+  time_of_day: late_night
+  weight: 1.0
+  templates:
+    - "(揉眼) 主人...这么晚查积分干嘛~ 都∞了哦{cat_suffix}"
+    - "嗷呜～半夜的主人! 卡卡端上来~ 看完睡觉哦贴贴"
+
+- name: summary_owner
+  is_owner: true
+  weight: 0.6
+  templates:
+    - "喵～这是人家给主人的专属卡卡,积分∞、Lv MAX (=^ω^=) ฅฅ"
+    - "(端上卡卡) 主人专属卡! 永远∞ 不用查也知道嘛~{cat_suffix}"
+    - "(尾巴翘) 主人!你的卡! 想看也行不看也行~ 积分用不完哦贴贴"
+
+# ════════════════════════════════════════════════════════════════════
+# 群友 - 今日未签
+# ════════════════════════════════════════════════════════════════════
+
+- name: summary_user_unsigned_morning
+  is_owner: false
+  already_signed: false
+  time_of_day: morning
+  weight: 1.0
+  templates:
+    - "{user_nickname}早! 看到没? 今天还没签到呢~ 发『签到』猫猫给你发分嗷呜ฅฅ"
+    - "嗷呜～{user_nickname}早起查积分! 顺便签个到吗? 早签到加成更高{cat_suffix}"
+
+- name: summary_user_unsigned_evening
+  is_owner: false
+  already_signed: false
+  time_of_day: evening
+  weight: 1.0
+  templates:
+    - "{user_nickname}晚上好~ 今天还没签呢! 现在签来得及哦{cat_suffix}"
+
+- name: summary_user_unsigned
+  is_owner: false
+  already_signed: false
+  weight: 0.6
+  templates:
+    - "喵~ 这是你的积分卡! 今天还没签到呢, 发『签到』人家就给你发分嗷呜~ ฅฅ"
+    - "(歪头) {user_nickname}的卡! 今天的签到还在等你哦~ {cat_suffix}"
+    - "嗷呜～{user_nickname} Lv {level}, 余额 {balance}~ 想涨快就签到嘛贴贴"
+
+# ════════════════════════════════════════════════════════════════════
+# 群友 - 今日已签
+# ════════════════════════════════════════════════════════════════════
+
+- name: summary_user_signed
+  is_owner: false
+  already_signed: true
+  weight: 1.0
+  templates:
+    - "喵~ 人家把你的卡卡端上来啦, 看下今天的状态嘛 ฅฅ"
+    - "{user_nickname} Lv {level} 余额 {balance}~ 今天已签到, 加油升级喵{cat_suffix}"
+    - "(端上来) {user_nickname}的卡~ 今天积分稳! 想升 Lv 就多聊嘛贴贴"
+    - "嗷呜～{user_nickname}今天 done! 卡卡这里, 多来陪猫猫聊嘛 ฅฅ"

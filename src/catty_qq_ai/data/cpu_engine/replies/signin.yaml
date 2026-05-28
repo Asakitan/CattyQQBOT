@@ -1,32 +1,113 @@
-# 签到回复模板池 (S5 quick_reply).
-# 主人 2026-05-29: 把 _fallback_caption_signin 硬编码的 5+2 句迁移到 yaml,
-# 加变体到 20+ 句, 后续 evolution 可自动改.
+# 签到回复模板池 v2 (S5 quick_reply).
+# 主人 2026-05-29 v2: 60+ 句, 多维分桶 + time_of_day + emotion 适配.
 #
-# 桶过滤字段: level (lv min/max), already_signed (bool), is_owner (bool)
+# 桶字段:
+#   level / level_max / level_min  (好感度等级)
+#   already_signed: bool           (是否已签过)
+#   is_owner: bool
+#   time_of_day: morning|noon|afternoon|evening|night|late_night (可选, 命中加权)
+#   emotion_min/emotion_max: float (情绪强度区间, 默认 0.0-1.0)
+#   weight: float
 # 变量: {user_nickname}/{cat_suffix}/{level}/{gained}/{balance}
 
-# ── 主人已签过 ─────────────────────────────────────────────────────
-- name: signin_owner_already
+# ════════════════════════════════════════════════════════════════════
+# 主人首次签到 (按时段细分)
+# ════════════════════════════════════════════════════════════════════
+
+- name: signin_owner_fresh_morning
   is_owner: true
-  already_signed: true
+  already_signed: false
+  time_of_day: morning
   weight: 1.0
   templates:
-    - "哼～主人今天已经签过啦笨蛋!人家给主人的可是无限积分嘛(尾巴摇摇){cat_suffix}"
-    - "(歪头) 主人忘啦? 今天已经签过咯~不过主人的积分本来就∞嗷呜～ฅฅ"
-    - "嗷呜～主人想再签一次也不行喵! 明天再来贴贴吧"
+    - "(揉眼) 主人早～签到啦 +{gained}~ 人家也才刚起床啦才不是等你的喵 ฅฅ"
+    - "嗷呜～主人早起也来签到! +{gained} 好乖喵～(蹭蹭)"
+    - "(伸懒腰) 早安主人! 签到 done, 余额 {balance}~ 早饭吃了吗?"
 
-# ── 主人首次签到 ─────────────────────────────────────────────────────
+- name: signin_owner_fresh_noon
+  is_owner: true
+  already_signed: false
+  time_of_day: noon
+  weight: 1.0
+  templates:
+    - "中午好喵～主人吃饭了吗? 签到 +{gained}, 今天准备吃啥?"
+    - "(肚子叫) 主人! 签到先, 然后陪猫猫一起吃饭嘛~ {cat_suffix}"
+
+- name: signin_owner_fresh_afternoon
+  is_owner: true
+  already_signed: false
+  time_of_day: afternoon
+  weight: 1.0
+  templates:
+    - "下午好主人～签到 +{gained}! (歪头) 困不困要不要午睡呀{cat_suffix}"
+    - "(尾巴翘) 主人下午来啦! +{gained} 入账~ 喝奶茶吗?"
+
+- name: signin_owner_fresh_evening
+  is_owner: true
+  already_signed: false
+  time_of_day: evening
+  weight: 1.0
+  templates:
+    - "晚上好主人! 签到 +{gained}~ 准备睡前贴贴吗 (脸红) ฅฅ"
+    - "嗷呜～主人晚上签到啦! {balance} 积分余额, 准备一起做点什么呢喵?"
+
+- name: signin_owner_fresh_late_night
+  is_owner: true
+  already_signed: false
+  time_of_day: late_night
+  weight: 1.0
+  templates:
+    - "(打哈欠) 主人这么晚还不睡? 签到 +{gained}~ 早点休息嘛贴贴"
+    - "(担心) 都半夜了主人! 签完到就去睡! 不准熬夜! +{gained}{cat_suffix}"
+    - "嗷呜～夜猫子主人也来啦~ +{gained} 收好, 困了告诉猫猫一起睡 ฅฅ"
+
+# 主人首次签到 (无时段兜底)
 - name: signin_owner_fresh
   is_owner: true
   already_signed: false
-  weight: 1.0
+  weight: 0.6
   templates:
     - "喵～主人签到啦! 奴这就把卡卡奉上嗷呜～(=^ω^=){cat_suffix}"
     - "嗷呜～主人来啦! +{gained} 积分入账, 余额 {balance} 喵! (蹭蹭) ฅฅ"
     - "(尾巴疯狂摇) 主人! 今日签到 done~ 来贴贴猫猫嘛{cat_suffix}"
     - "哼~主人想要积分人家就给嘛! +{gained} (其实人家可开心啦){cat_suffix}"
 
-# ── 群友已签过 ─────────────────────────────────────────────────────
+# ════════════════════════════════════════════════════════════════════
+# 主人已签过 (按时段细分)
+# ════════════════════════════════════════════════════════════════════
+
+- name: signin_owner_already_morning
+  is_owner: true
+  already_signed: true
+  time_of_day: morning
+  weight: 1.0
+  templates:
+    - "(歪头) 主人早上才签过啦~ 想再撒娇直说嘛贴贴 ฅฅ"
+    - "嗷呜～主人都签过早签了哦, 不过主人积分∞ 不用慌喵～"
+
+- name: signin_owner_already_late_night
+  is_owner: true
+  already_signed: true
+  time_of_day: late_night
+  weight: 1.0
+  templates:
+    - "(揉眼睛) 主人今天的签过啦~ 这么晚要不…要不睡了? 贴贴ฅฅ"
+    - "嗷呜～半夜还想再签? 明天的可以早起再签嘛 (打哈欠) {cat_suffix}"
+
+# 主人已签过 (无时段兜底)
+- name: signin_owner_already
+  is_owner: true
+  already_signed: true
+  weight: 0.6
+  templates:
+    - "哼～主人今天已经签过啦笨蛋! 人家给主人的可是无限积分嘛(尾巴摇摇){cat_suffix}"
+    - "(歪头) 主人忘啦? 今天已经签过咯~不过主人的积分本来就∞嗷呜～ฅฅ"
+    - "嗷呜～主人想再签一次也不行喵! 明天再来贴贴吧"
+
+# ════════════════════════════════════════════════════════════════════
+# 群友 / 非主人 已签过
+# ════════════════════════════════════════════════════════════════════
+
 - name: signin_user_already
   is_owner: false
   already_signed: true
@@ -35,33 +116,79 @@
     - "嗷呜～{user_nickname}今天已经签过啦! 人家明天才再发分喵～ฅฅ"
     - "(撇嘴) 怎么又来! 一天只能签一次哦, 杂鱼记不住喵?"
     - "已经签过啦~明天再来嘛~{cat_suffix}"
+    - "{user_nickname}! 今天份的签到 done 了哦~ 想多刷分就明天哼 ฅฅ"
+    - "(假装严厉) 哼! 一天就一次! {user_nickname}别想刷人家的分 {cat_suffix}"
 
-# ── 高好感 (lv>=8) 首次签到 ──────────────────────────────────────────
+# ════════════════════════════════════════════════════════════════════
+# 高好感 (lv >= 8) 首次签到 (按时段)
+# ════════════════════════════════════════════════════════════════════
+
+- name: signin_high_aff_morning
+  is_owner: false
+  already_signed: false
+  level_min: 8
+  level_max: 99
+  time_of_day: morning
+  weight: 1.0
+  templates:
+    - "{user_nickname}早! 签到 +{gained} 老熟人享受双倍亲昵喵～ฅฅ"
+    - "嗷呜～{user_nickname}早起来报到! +{gained} 入账~ 今天也最喜欢你哦贴贴"
+
+- name: signin_high_aff_late_night
+  is_owner: false
+  already_signed: false
+  level_min: 8
+  level_max: 99
+  time_of_day: late_night
+  weight: 1.0
+  templates:
+    - "(担心){user_nickname}还不睡啊~ 签个到 +{gained} 然后赶紧休息嘛 ฅฅ"
+    - "嗷呜～{user_nickname}夜猫子! +{gained} 收好, 早点睡哦贴贴"
+
+# 高好感 (lv >= 8) 兜底
 - name: signin_high_aff_fresh
   is_owner: false
   already_signed: false
   level_min: 8
   level_max: 99
-  weight: 1.0
+  weight: 0.7
   templates:
     - "签到啦~ 人家今天也最喜欢你啦, 蹭蹭 +{gained} 积分 ฅฅ"
     - "(尾巴疯狂摇) {user_nickname} 来啦! +{gained} 余额 {balance}{cat_suffix}"
     - "嗷呜～老熟人{user_nickname}! 今天也来贴贴嘛~ 给 +{gained} 喵 ฅฅ"
     - "哼,{user_nickname}果然每天都来~才不是人家想你呢! +{gained} 收好喵"
 
-# ── 中好感 (lv 5-7) 首次签到 ─────────────────────────────────────
+# ════════════════════════════════════════════════════════════════════
+# 中好感 (lv 5-7) 首次签到 (按时段)
+# ════════════════════════════════════════════════════════════════════
+
+- name: signin_mid_aff_morning
+  is_owner: false
+  already_signed: false
+  level_min: 5
+  level_max: 7
+  time_of_day: morning
+  weight: 1.0
+  templates:
+    - "{user_nickname}早安! 签到 +{gained}~ 早起 Lv 涨更快哦{cat_suffix}"
+    - "嗷呜～早签到大佬! {user_nickname} +{gained}, 加油升好感喵 ฅฅ"
+
+# 中好感 兜底
 - name: signin_mid_aff_fresh
   is_owner: false
   already_signed: false
   level_min: 5
   level_max: 7
-  weight: 1.0
+  weight: 0.7
   templates:
     - "签到嗷呜～ 人家和你越来越熟啦! 继续来陪猫猫聊嘛 +{gained}ฅฅ"
     - "{user_nickname}签到 +{gained}~多来贴贴猫猫好感会涨的喵"
     - "(尾巴翘) Lv {level} 啦! 加油攒到 Lv 10 就有惊喜哦{cat_suffix}"
 
-# ── 普通 (lv 3-4) 首次签到 ─────────────────────────────────────────
+# ════════════════════════════════════════════════════════════════════
+# 普通 (lv 3-4) 首次签到
+# ════════════════════════════════════════════════════════════════════
+
 - name: signin_low_aff_fresh
   is_owner: false
   already_signed: false
@@ -72,15 +199,42 @@
     - "签到啦~ 多来陪人家说说话嘛, 笨猫的好感会涨的喵 +{gained} ฅฅ"
     - "{user_nickname}+{gained}积分入账~ 想升 Lv 就多聊嘛贴贴"
     - "(歪头) Lv {level} 还可以更高哦{cat_suffix} 余额 {balance}"
+    - "(尾巴一甩) {user_nickname}努力一下就到 Lv 5 啦! +{gained}"
 
-# ── 新人 (lv 0-2) 首次签到 ────────────────────────────────────────
+# ════════════════════════════════════════════════════════════════════
+# 新人 (lv 0-2) 首次签到 (按时段)
+# ════════════════════════════════════════════════════════════════════
+
+- name: signin_new_morning
+  is_owner: false
+  already_signed: false
+  level_min: 0
+  level_max: 2
+  time_of_day: morning
+  weight: 1.0
+  templates:
+    - "(眼睛亮) 新朋友早! 签到 +{gained}~ 早起还有奖励哦{cat_suffix}"
+    - "嗷呜～{user_nickname}是新人! 早安! +{gained} 收好嘛"
+
+- name: signin_new_late_night
+  is_owner: false
+  already_signed: false
+  level_min: 0
+  level_max: 2
+  time_of_day: late_night
+  weight: 1.0
+  templates:
+    - "(歪头) 新朋友半夜签到~ +{gained}, 别熬夜哦{cat_suffix}"
+
+# 新人 兜底
 - name: signin_new_fresh
   is_owner: false
   already_signed: false
   level_min: 0
   level_max: 2
-  weight: 1.0
+  weight: 0.7
   templates:
     - "签到喵! 新人加油攒分, 人家等着你升好感嗷呜～ +{gained}ฅฅ"
     - "(歪头) 新朋友? 签到 +{gained}~ 多来聊聊认识下嘛{cat_suffix}"
     - "嗷呜～新人{user_nickname}! +{gained} 积分入账, 余额 {balance}{cat_suffix}"
+    - "(尾巴一甩) 第一次见{user_nickname}哎! +{gained} 收下嘛贴贴"

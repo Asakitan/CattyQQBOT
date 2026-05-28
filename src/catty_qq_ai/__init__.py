@@ -7527,6 +7527,7 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
             user_nickname=str(user_nickname),
             scope_type="group" if isinstance(event, GroupMessageEvent) else "private",
             intent=intent,
+            is_owner=is_owner,
             affection_get_fn=affection_store.get_level_and_exp,
             user_vibe_get_fn=user_vibe_store.get_summary_sync,
             group_id=group_id,
@@ -7941,6 +7942,7 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
             pool_pick = pool.pick(
                 level=int(poke_level),
                 is_owner=is_poke_owner,
+                user_id=str(event.user_id),
                 cat_suffixes=list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []),
                 render_vars={"user_nickname": str(poke_nickname)},
             )
@@ -8022,6 +8024,14 @@ async def handle_cpu_engine(matcher: Matcher, event: MessageEvent, state: T_Stat
     if result is None or not getattr(result, "reply", ""):
         return
     reply_text = str(result.reply)
+    # 主人 2026-05-29 fix: cpu_engine 路径之前漏走称呼防御网, 群里非主人时
+    # yaml 模板里硬编码的『杂鱼主人 / 主人』会被原样发出 (本次 thanks 事故).
+    # 这里和 LLM 主链路 (6920 行) 对齐, 跑一遍 apply_output_scripts 兜底.
+    try:
+        from . import regex_script as _rs
+        reply_text = _rs.apply_output_scripts(reply_text, is_owner=_event_is_owner(event))
+    except Exception as _aos_exc:  # noqa: BLE001
+        logger.debug(f"[cpu_engine] apply_output_scripts failed: {_aos_exc}")
     scope_key = _conversation_queue_key(event)
     # S4.6: 记录 emit 进 evolution_logger (失败仅 warn)
     try:
@@ -8680,12 +8690,8 @@ def _today_local_str() -> str:
     return _date.today().isoformat()
 
 
-def _fallback_caption_signin(result: dict) -> str:
-    """签到 AI 生成失败时的兜底文案,1-2 句猫娘短话。
-
-    主人 2026-05-29 S5: 优先从 cpu_engine 模板池 pick (有 20+ 变体),
-    失败 (yaml 丢/pyaml 没装/桶 miss) 才走硬编码 7 句。
-    """
+def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str = "") -> str:
+    """签到 quick reply. 主人 2026-05-29 v2: 优先 pool (含时段+去重+情绪)."""
     is_owner = bool(result.get("is_owner"))
     level = int(result.get("level", 1))
     already = bool(result.get("already"))
@@ -8701,9 +8707,10 @@ def _fallback_caption_signin(result: dict) -> str:
                 level=level,
                 already_signed=already,
                 is_owner=is_owner,
+                user_id=str(user_id),
                 cat_suffixes=list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []),
                 render_vars={
-                    "user_nickname": "主人" if is_owner else "你",
+                    "user_nickname": user_nickname or ("主人" if is_owner else "你"),
                     "gained": int(result.get("gained", 0)),
                     "balance": int(result.get("balance", 0)),
                     "level": level,
@@ -8729,11 +8736,40 @@ def _fallback_caption_signin(result: dict) -> str:
     return "签到喵!新人加油攒分,人家等着你升好感嗷呜 ฅฅ"
 
 
-def _fallback_caption_summary(summary: dict) -> str:
-    """积分查询 AI 生成失败时的兜底文案。"""
-    if summary.get("is_owner"):
-        return "喵~ 这是人家给主人的专属卡卡,积分∞、Lv MAX (=^ω^=) ฅฅ"
+def _fallback_caption_summary(summary: dict, user_id: str = "", user_nickname: str = "") -> str:
+    """积分查询. 主人 2026-05-29 v2: 优先走 affection_summary yaml pool (含时段+去重)."""
+    is_owner = bool(summary.get("is_owner"))
+    level = int(summary.get("level", 0))
+    balance = int(summary.get("points", 0))
     last_date = str(summary.get("last_checkin_date", "") or "")
+    already = last_date == _today_local_str()
+    try:
+        from .cpu_engine.quick_reply import get_pool as _ce_get_pool
+
+        replies_dir = Path(getattr(
+            config, "catty_cpu_engine_routes_dir", "src/catty_qq_ai/data/cpu_engine/routes",
+        )).parent / "replies"
+        pool = _ce_get_pool(replies_dir, "affection_summary")
+        if pool.size > 0:
+            picked = pool.pick(
+                level=level,
+                already_signed=already,
+                is_owner=is_owner,
+                user_id=str(user_id),
+                cat_suffixes=list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []),
+                render_vars={
+                    "user_nickname": user_nickname or ("主人" if is_owner else "你"),
+                    "balance": balance,
+                    "level": level,
+                },
+            )
+            if picked:
+                return picked
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"[quick_reply.summary] pool fail: {exc}")
+
+    if is_owner:
+        return "喵~ 这是人家给主人的专属卡卡,积分∞、Lv MAX (=^ω^=) ฅฅ"
     if last_date != _today_local_str():
         return "喵~ 这是你的积分卡!今天还没签到呢,发『签到』人家就给你发分嗷呜~ ฅฅ"
     return "喵~ 人家把你的卡卡端上来啦,看下今天的状态嘛 ฅฅ"
@@ -8880,21 +8916,24 @@ async def handle_affection_command(matcher: Matcher, event: MessageEvent, state:
         # 主人 2026-05-29: 签到/积分查询全部走 CPU 模板池 (S5 quick_reply yaml),
         # 不再调 AI 生成 caption - 这种 deterministic 命令浪费 token + 慢 1-3s.
         # 真要 AI 文案时用 #ai signin (TODO) 显式触发, 否则 pool 出.
+        _ce_nickname = "主人" if _event_is_owner(event) else (
+            getattr(event.sender, "card", None) or getattr(event.sender, "nickname", None) or "你"
+        )
         if cmd == "signin":
             result = affection_store.daily_checkin(user_id)
             if result.get("success") and not result.get("already"):
                 today_gained = int(result.get("gained") or 0)
             summary = affection_store.summary(user_id)
             card_mode = "signin" if today_gained is not None else "summary"
-            caption = _fallback_caption_signin(result)
-            logger.info(f"[quick_reply.signin] uid={user_id} caption={caption[:60]!r}")
+            caption = _fallback_caption_signin(result, user_id=user_id, user_nickname=str(_ce_nickname))
+            logger.info(f"[quick_reply.signin] uid={user_id} caption={caption[:80]!r}")
             image_segment = _send_affection_card(
                 event, mode=card_mode, summary=summary, today_gained=today_gained,
             )
         elif cmd == "points":
             summary = affection_store.summary(user_id)
-            caption = _fallback_caption_summary(summary)
-            logger.info(f"[quick_reply.points] uid={user_id} caption={caption[:60]!r}")
+            caption = _fallback_caption_summary(summary, user_id=user_id, user_nickname=str(_ce_nickname))
+            logger.info(f"[quick_reply.points] uid={user_id} caption={caption[:80]!r}")
             image_segment = _send_affection_card(
                 event, mode="summary", summary=summary,
             )
@@ -8919,7 +8958,11 @@ async def _generate_legs_caption(event: MessageEvent, user_text: str) -> str:
     user_nickname = "主人" if is_owner else (
         getattr(event.sender, "card", None) or getattr(event.sender, "nickname", None) or "杂鱼"
     )
-    reply = random_legs_reply(is_owner=is_owner, user_nickname=str(user_nickname))
+    reply = random_legs_reply(
+        is_owner=is_owner,
+        user_nickname=str(user_nickname),
+        user_id=str(event.user_id),
+    )
     logger.info(f"[quick_reply.legs] uid={event.user_id} caption={reply[:60]!r}")
     return reply
 

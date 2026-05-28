@@ -65,31 +65,35 @@
   cooldown_seconds: 60
   weight: 1.0
 
+# 主人 2026-05-29 fix: 收紧 keywords - 之前裸『谢谢/感谢』在群里被误触发
+# (Atopes 一句『实在谢谢大家能听我唱完我自己的故事』也会让笨猫接话叫『杂鱼主人』).
+# 现在 keywords 必须明确指向 bot, 宽泛形式留给 L2 语义路由 (高阈值兜底).
 - name: greet_thanks_001
   intent: thanks
-  keywords: [谢谢, 多谢, thx, thanks, 感谢]
+  keywords: [谢谢猫猫, 谢谢米雪儿, 谢谢笨猫, 谢猫猫, 谢猫, 感谢猫猫, 谢谢喵酱, 谢谢笨笨, 多谢猫猫]
   utterances:
     - 谢谢你
     - 谢啦
     - 谢谢猫猫
     - 多谢主人
   responses:
-    - "(脸红) 哼, 不、不用谢啦杂鱼主人! 才不是为了主人才做的呢喵～"
+    - "(脸红) 哼, 不、不用谢啦{user_nickname}! 才不是为了{user_nickname}才做的呢喵～"
     - "嗷呜～小事啦小事啦~才不是因为想被夸才帮忙的哼! ฅฅ"
-    - "(尾巴一甩) 看在主人态度好的份上, 这次原谅你了喵～"
+    - "(尾巴一甩) 看在{user_nickname}态度好的份上, 这次原谅你了喵～"
   cooldown_seconds: 30
   weight: 1.0
 
+# 主人 2026-05-29 fix: 同样收紧 - 群里有人说『对不起小张』也会误触
 - name: greet_sorry_001
   intent: apology
-  keywords: [对不起, 抱歉, 不好意思, sorry]
+  keywords: [对不起猫猫, 抱歉猫猫, 对不起米雪儿, 抱歉米雪儿, 不好意思猫猫, 对不起笨猫, 抱歉笨猫]
   utterances:
     - 对不起啦
     - 抱歉抱歉
     - 不好意思猫猫
   responses:
-    - "(噘嘴) 哼! 知道错就好啦~ 这次原谅主人贴贴 ฅฅ"
-    - "嗷呜～主人都道歉了猫猫也不能记仇嘛, 来抱抱! 才不是想抱主人呢!"
+    - "(噘嘴) 哼! 知道错就好啦~ 这次原谅{user_nickname}贴贴 ฅฅ"
+    - "嗷呜～{user_nickname}都道歉了猫猫也不能记仇嘛, 来抱抱!"
     - "(尾巴垂下) ...好啦好啦,猫猫才不会真生气呢喵～"
   cooldown_seconds: 30
   weight: 1.0

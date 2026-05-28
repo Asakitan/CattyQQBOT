@@ -36,11 +36,16 @@ class ScriptContext:
     time_of_day: str = "afternoon"  # morning/afternoon/evening/night
     user_vibe: str = ""
     group_lore: str = ""
+    is_owner: bool = False  # 主人 2026-05-29 加: 用于派生 user_addr
 
     def to_render_dict(self, cat_suffix: str) -> dict[str, str]:
+        # 主人 2026-05-29: 加 user_addr 派生字段 (主人/你), 给 routes yaml 用
+        # {user_addr} 引用对方称呼但不暴露真实昵称, 避免在群里误称别人为"主人".
+        user_addr = "主人" if self.is_owner else "你"
         return {
             "cat_suffix": cat_suffix,
             "user_nickname": self.user_nickname,
+            "user_addr": user_addr,
             "scope_type": self.scope_type,
             "intent": self.intent,
             "topic": self.intent,
@@ -56,6 +61,7 @@ _DEFAULT_CAT_SUFFIXES = ["喵～", "喵呜", "ฅฅ", "嗷呜～", "爪爪", "�
 _DEFAULT_RENDER_VARS = {
     "cat_suffix": "喵～",
     "user_nickname": "主人",
+    "user_addr": "你",  # 默认不假设是主人, 安全姿势
     "scope_type": "private",
     "intent": "default",
     "topic": "default",
@@ -125,6 +131,7 @@ def build_script_ctx(
     user_nickname: str,
     scope_type: str,
     intent: str,
+    is_owner: bool = False,
     affection_get_fn: Callable[[str], tuple[int, int]] | None = None,
     user_vibe_get_fn: Callable[[str], str] | None = None,
     group_lore_get_fn: Callable[[str], str] | None = None,
@@ -157,7 +164,7 @@ def build_script_ctx(
 
     return ScriptContext(
         user_id=user_id,
-        user_nickname=user_nickname or "主人",
+        user_nickname=user_nickname or ("主人" if is_owner else "你"),
         scope_type=scope_type,
         intent=intent or "default",
         affection_level=int(level),
@@ -165,6 +172,7 @@ def build_script_ctx(
         time_of_day=_time_of_day_for(),
         user_vibe=vibe,
         group_lore=lore,
+        is_owner=is_owner,
     )
 
 

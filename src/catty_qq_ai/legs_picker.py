@@ -113,15 +113,8 @@ LEG_TRIGGER_PATTERNS: tuple[re.Pattern[str], ...] = (
 logger = logging.getLogger(__name__)
 
 
-def random_legs_reply(*, is_owner: bool = False, user_nickname: str = "") -> str:
-    """随机抽一句腿图回复。
-
-    主人 2026-05-29 S5: 优先 cpu_engine 模板池 (legs.yaml 19 句, owner 分桶),
-    池 miss 才走硬编码 16 句兜底.
-
-    is_owner=True 时从 owner + 通用两池里抽,可能用『主人』称呼;
-    is_owner=False 时只抽通用池,避免误称群友为主人。
-    """
+def random_legs_reply(*, is_owner: bool = False, user_nickname: str = "", user_id: str = "") -> str:
+    """随机抽一句腿图回复。v2 加 user_id 启用 A 算法去重."""
     try:
         from .cpu_engine.quick_reply import get_pool as _ce_get_pool
         from pathlib import Path as _Path
@@ -131,6 +124,7 @@ def random_legs_reply(*, is_owner: bool = False, user_nickname: str = "") -> str
         if pool.size > 0:
             picked = pool.pick(
                 is_owner=is_owner,
+                user_id=str(user_id),
                 render_vars={"user_nickname": user_nickname or ("主人" if is_owner else "杂鱼")},
             )
             if picked:
