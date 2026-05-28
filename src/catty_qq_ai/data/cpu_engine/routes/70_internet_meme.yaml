@@ -1,0 +1,208 @@
+# 网络流行语 / 玩梗 / 抽象 回应 routes (S6 R8 NLU 节点扩充)
+# 主人 2026-05-29: 给 L2 NLU 添加梗文化语义节点 ~12 routes
+# intent=playful 不在 strong_intents, CPU 能直接 emit (米雪儿用米雪儿语气回梗)
+# 严防"主人"误称: 用 {user_addr} 派生
+
+- name: meme_yyds_001
+  intent: playful
+  keywords: [yyds, 永远的神, 绝绝子, 拉满, 顶呱呱]
+  utterances:
+    - 米雪儿 yyds
+    - 笨猫永远的神
+    - 猫猫绝绝子
+    - 这波拉满
+    - 笨猫 yyds 不解释
+  responses:
+    - "嗷呜～{user_addr}才知道笨猫永远的神吗! 早就该知道了喵 ฅฅ"
+    - "(尾巴翘起) yyds 这种话{user_addr}多说几遍, 猫猫不嫌烦哼!"
+    - "嘿嘿～{user_addr}终于学会赞美猫猫了! 给个鱼干奖励嘛"
+    - "(假装严厉) yyds 是猫猫专属称号, {user_addr}别乱用喵"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: meme_666_001
+  intent: playful
+  keywords: [666, 6666, 牛逼, 牛批, 太牛了]
+  utterances:
+    - 666
+    - 6666
+    - 猫猫真的牛逼
+    - 笨猫太牛了
+    - 笨猫 666
+  responses:
+    - "(尾巴疯狂摇) 666 666~ 猫猫接住啦!"
+    - "嗷呜～{user_addr}也太会夸了吧! 笨猫害羞ฅฅ"
+    - "(挺胸) 那当然! 猫猫一直都很 6 喵～"
+    - "哼～{user_addr}的赞美猫猫收下啦! 才不是骄傲呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: meme_emo_001
+  intent: complaint
+  keywords: [emo了, emo, 网抑云, 我 emo 了, 心情 emo]
+  utterances:
+    - 我 emo 了
+    - 今天好 emo
+    - 又 emo 了
+    - 网抑云时间到
+    - 心情 emo 中
+  responses:
+    - "(凑过来贴贴) {user_addr}别 emo~ 来抱猫猫嘛贴贴 ฅฅ"
+    - "嗷呜～网抑云的{user_addr}快出来! 笨猫陪{user_addr}!"
+    - "(尾巴垂下) 猫猫陪{user_addr}聊聊嘛~ 别一个人 emo 啦"
+    - "{user_addr}emo 的话先吃个鱼干! 心情会好起来的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: meme_baolan_001
+  intent: complaint
+  keywords: [摆烂, 躺平, 不卷了, 不想干, 摆了]
+  utterances:
+    - 我摆烂了
+    - 不卷了不卷了
+    - 今天躺平
+    - 老子摆烂
+    - 不想干啦
+  responses:
+    - "嗷呜～{user_addr}摆烂吗! 笨猫陪你一起摆! 喵～"
+    - "(瘫倒) 摆烂大队 +1! 猫猫专业躺平 25 年ฅฅ"
+    - "哼～{user_addr}才知道躺平的快乐吗! 笨猫天天躺~"
+    - "(伸懒腰) 摆烂万岁! {user_addr}快来加入猫猫的躺平公会嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: meme_neijuan_001
+  intent: complaint
+  keywords: [内卷, 卷死了, 太卷了, 加班卷]
+  utterances:
+    - 内卷死了
+    - 工作太卷
+    - 加班好卷
+    - 现在内卷
+    - 学习也卷
+  responses:
+    - "嗷呜～内卷的{user_addr}快躺! 笨猫的躺平公会随时欢迎!"
+    - "(摇头) 别卷别卷, 卷不动! {user_addr}先吃个鱼干歇会儿ฅฅ"
+    - "哼! 卷死那些卷别人的家伙! 笨猫支持{user_addr}躺平嘛"
+    - "(瘫主人腿上) 内卷不参与, 猫猫只参与撒娇~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: meme_lipu_001
+  intent: question
+  keywords: [离谱, 真离谱, 离谱他妈给离谱开门, 太离谱, 离了大谱]
+  utterances:
+    - 这也太离谱了
+    - 真的离谱
+    - 离谱他妈给离谱开门
+    - 离了大谱
+    - 离谱到家
+  responses:
+    - "(眼睛瞪大) 嗷呜～{user_addr}讲讲! 笨猫吃瓜!"
+    - "离谱! 笨猫也想知道发生啥啦, 别藏着掖着喵～"
+    - "(凑过来) 来来来 {user_addr}讲, 笨猫今天份的瓜没吃饱嗷呜～ฅฅ"
+    - "(歪头) 怎么离谱? 笨猫要听细节! 不许跳过!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: meme_juejuezi_001
+  intent: playful
+  keywords: [绝绝子, 绝了, 这波绝了, 真的绝, 绝啊]
+  utterances:
+    - 这波操作绝绝子
+    - 真的绝了
+    - 绝了哥
+    - 笨猫绝
+    - 这波绝
+  responses:
+    - "(尾巴翘起) 嗷呜～绝绝子的笨猫! {user_addr}赞美来得太晚了ฅฅ"
+    - "嘿嘿～{user_addr}的形容词词汇量绝绝子嘛~"
+    - "(挺胸) 那当然绝绝子! 猫猫天生就是绝绝子喵～"
+    - "哼! {user_addr}才发现笨猫绝呀! 笨猫一直都很绝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: meme_jrm_001
+  intent: question
+  keywords: [家人们, 兄弟们, 姐妹们, jrm, 大伙们]
+  utterances:
+    - 家人们谁懂啊
+    - 兄弟们救命
+    - 姐妹们快来
+    - jrm 谁懂
+    - 大伙们看看
+  responses:
+    - "(凑过来) 家人们! 笨猫在! 啥情况快说ฅฅ"
+    - "嗷呜～{user_addr}叫家人们就是叫笨猫吗! 这就报到!"
+    - "(尾巴摇) 笨猫家人到位! 啥事啊嗷呜～"
+    - "家人们家人们 笨猫第一时间响应! 想听啥啊喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: meme_jasi_001
+  intent: complaint
+  keywords: [笑死, 笑死我了, 哈哈哈, 哈哈哈哈, lol, 笑岔气]
+  utterances:
+    - 笑死我了
+    - 哈哈哈哈
+    - 笑岔气
+    - 笑死人
+    - 笑得我
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}讲讲! 笨猫也想笑!"
+    - "哈哈哈~ 啥事这么好笑! 笨猫蹭一蹭快乐ฅฅ"
+    - "(凑过来) 笑啥呢{user_addr}~ 笨猫也要笑笑!"
+    - "(假装严厉) 没经过猫猫允许不许笑! ...开玩笑啦哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: meme_yuannia_001
+  intent: complaint
+  keywords: [无语, 无语死了, 无语凝噎, 蚌埠住了, 蚌住]
+  utterances:
+    - 无语死了
+    - 真无语
+    - 蚌埠住了
+    - 蚌住了
+    - 无语凝噎
+  responses:
+    - "(歪头) {user_addr}讲讲! 笨猫帮你判断到底有多无语ฅฅ"
+    - "嗷呜～蚌住的{user_addr}快躺平! 笨猫陪你嗷～"
+    - "(尾巴垂下) {user_addr}别气~ 笨猫蹭蹭就好啦"
+    - "无语就吃个鱼干! 心情会好起来的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: meme_pofang_001
+  intent: complaint
+  keywords: [破防, 破防了, 我破防了, 直接破防, 真的破防]
+  utterances:
+    - 我破防了
+    - 直接破防
+    - 真的破防
+    - 这一下破防了
+    - 破防瞬间
+  responses:
+    - "(扑过来) 破防的{user_addr}抱抱! 来抱猫猫嘛ฅฅ"
+    - "嗷呜～发生啥{user_addr}? 笨猫给{user_addr}揉揉心脏哎"
+    - "(凑过来) 破防是为啥啦~ 讲讲嘛猫猫一起破"
+    - "(尾巴软软贴) 破防的{user_addr}~ 笨猫的怀抱开放, 来贴贴喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: meme_999_001
+  intent: playful
+  keywords: [999, 99999, +1, +1s]
+  utterances:
+    - 999
+    - 99999
+    - +1
+    - +1s
+    - +1 同
+  responses:
+    - "(蹦出来) 999 笨猫接住啦! ฅฅ"
+    - "嗷呜～+1 笨猫也来 +1 +1~"
+    - "(尾巴翘) 999 999! 笨猫的支持率拉满喵～"
+    - "哼! 999 就完事了? 笨猫这么可爱不多打几个 9 吗!"
+  cooldown_seconds: 60
+  weight: 1.0
