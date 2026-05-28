@@ -317,6 +317,26 @@ def _is_nsfw_closing(text: str) -> bool:
     if not text:
         return False
     return any(w in text for w in _NSFW_CLOSING_INTENT_WORDS)
+
+
+# 普通会话「结束会话」意图词 — 续聊窗口内命中即先回道别再关窗 (跟 NSFW closing 区分开)。
+# 主人 2026-05-29: 『晚安猫猫 / 你去休息吧笨猫 / 我歇了』这类要强制退出会话跟踪。
+# 续聊窗口本就是「正在跟笨猫聊」的语境, 词表可比群聊宽松。
+_SESSION_CLOSING_WORDS: tuple[str, ...] = (
+    "晚安", "睡了", "睡觉", "去睡", "先睡", "洗洗睡", "困了",
+    "拜拜", "再见", "bye", "88", "回见", "回头聊", "明天聊", "改天聊", "下次聊",
+    "不聊了", "不说了", "先这样", "就这样", "先撤", "撤了", "溜了", "闪了",
+    "我歇了", "歇了", "去休息", "你休息", "你去休息", "休息吧", "歇会",
+    "忙去了", "去忙了", "我去忙", "先走了", "有事先走", "走了",
+    "下线", "下了", "下播", "我下了",
+)
+
+
+def _is_session_closing(text: str) -> bool:
+    """普通会话结束意图: 续聊窗口内命中 → 先回道别再关窗。"""
+    if not text:
+        return False
+    return any(w in text for w in _SESSION_CLOSING_WORDS)
 # image intent short-circuit (画图请求识别后转交 5.5 + imagegen tool) 兜底处理。
 _NSFW_TRIGGER_WORDS: tuple[str, ...] = tuple(sorted({
     # === 单字 (灵敏命中, false positive 由 image short-circuit 兜底) ===
@@ -2500,6 +2520,7 @@ class RecentConversationMessage:
 class BotReplyContinuationState:
     expires_at: float
     remaining_messages: int
+    idle_count: int = 0  # 续聊窗口内连续「没直接提到笨猫」(非 mentioned/used_prefix) 的消息数
 
 
 _expression_repeats: DefaultDict[str, ExpressionRepeatState] = defaultdict(ExpressionRepeatState)
@@ -2774,15 +2795,54 @@ def _prune_bot_reply_continuations(now: float) -> None:
         _bot_reply_continuations.pop(key, None)
 
 
-def _mark_bot_reply_continuation(scope: str, target_user_id: str, *, window_seconds: float = 180.0, messages: int = 3) -> None:
+def _mark_bot_reply_continuation(scope: str, target_user_id: str, *, window_seconds: float | None = None, messages: int | None = None) -> None:
     if not target_user_id:
         return
     now = time.monotonic()
     _prune_bot_reply_continuations(now)
-    _bot_reply_continuations[_bot_reply_continuation_key(scope, str(target_user_id))] = BotReplyContinuationState(
+    if window_seconds is None:
+        window_seconds = float(getattr(config, "catty_followup_window_seconds", 25.0) or 25.0)
+    if messages is None:
+        messages = int(getattr(config, "catty_followup_idle_limit", 3) or 3)
+    key = _bot_reply_continuation_key(scope, str(target_user_id))
+    existing = _bot_reply_continuations.get(key)
+    # 续命: 每次笨猫回复都刷新 expires(25s)+remaining, 但保留 idle_count —
+    # idle 计数由 gate 用 mentioned/used_prefix 信号管理 (direct→reset 0, 非direct→+1)。
+    _bot_reply_continuations[key] = BotReplyContinuationState(
         expires_at=now + max(window_seconds, 1.0),
         remaining_messages=max(messages, 1),
+        idle_count=existing.idle_count if existing is not None else 0,
     )
+
+
+def _reset_followup_idle(event: MessageEvent) -> None:
+    """续聊窗口内收到直接指向 (mentioned/used_prefix) 的消息 → idle 计数清零。"""
+    key = _bot_reply_continuation_key(_conversation_queue_key(event), str(event.user_id))
+    state = _bot_reply_continuations.get(key)
+    if state is not None:
+        state.idle_count = 0
+
+
+def _bump_followup_idle_or_close(event: MessageEvent, *, limit: int) -> bool:
+    """续聊窗口内收到「没直接提到笨猫」的蹭窗消息 → idle+1。
+
+    连续达到 limit 次 → pop 关窗, 返回 True (本条落回普通 gate)。未达上限返回 False。
+    """
+    key = _bot_reply_continuation_key(_conversation_queue_key(event), str(event.user_id))
+    state = _bot_reply_continuations.get(key)
+    if state is None:
+        return True
+    state.idle_count += 1
+    if state.idle_count >= max(limit, 1):
+        _bot_reply_continuations.pop(key, None)
+        return True
+    return False
+
+
+def _close_bot_reply_continuation(event: MessageEvent) -> None:
+    """强制关闭续聊窗口 (closing intent 道别后调)。"""
+    key = _bot_reply_continuation_key(_conversation_queue_key(event), str(event.user_id))
+    _bot_reply_continuations.pop(key, None)
 
 
 def _has_bot_reply_continuation(event: MessageEvent) -> bool:
@@ -3089,14 +3149,18 @@ def _credit_affection_for_event_once(event: MessageEvent) -> None:
         logger.debug(f"affection score+add_exp failed (non-fatal): {exc}")
 
 
-def _remember_bot_reply_for_event(event: MessageEvent, text: str) -> None:
+def _remember_bot_reply_for_event(event: MessageEvent, text: str, *, open_continuation: bool = True) -> None:
     scope = _conversation_queue_key(event)
     _remember_bot_conversation_message(
         scope,
         bot_id=str(getattr(event, "self_id", "") or ""),
         text=text,
-        target_user_id=str(event.user_id),
+        # open_continuation=False (closing 道别) → target_user_id="" 跳过开窗
+        target_user_id=str(event.user_id) if open_continuation else "",
     )
+    if not open_continuation:
+        # closing intent 道别后强制关窗, 退出会话跟踪
+        _close_bot_reply_continuation(event)
     # Anti-repetition: 扫笨猫这条回复里用了哪些被跟踪的猫系词,记录到 per-scope 滑窗
     # 下一轮 prompt 装配如果命中过度重复就给 AI 注入「换个表达」提醒
     try:
@@ -3802,10 +3866,12 @@ def _build_user_content(incoming: ExtractedMessage, *, image_description: str | 
     return f"{incoming.history_content}\n图片下载地址：\n{urls}\n请基于这些图片地址和上下文自然回应。"
 
 
-def _emoji_reply_context(image_analysis: dict[str, object], candidates: str) -> str:
-    tags = image_analysis.get("emotion_tags")
-    tag_text = ", ".join(str(tag) for tag in tags) if isinstance(tags, list) else ""
-    candidate_text = candidates or "当前本地表情库没有直接命中的候选；如果很适合发图，可以输出表情意图，程序会尝试联网搜索并下载到表情库。"
+def _build_emoji_skeleton_text() -> str:
+    """主人 2026-05-29 Round 23: 100% byte-stable emoji 规则段, register 到 cache prefix.
+
+    跨 sender/scope/turn/image 字节稳定 — 进 cache prefix 后所有发 emoji 上下文的请求
+    都命中这部分, 不再每轮重发 ~520c.
+    """
     return (
         "本地表情库（猫娘表情包）由你自己判断要不要发——**不要每条都发，也不要从来不发**，"
         "大约每 3~5 条对话挑一条情绪/反应最浓的那条才发，普通陈述、连续刚发过表情、信息密集解释都不发。"
@@ -3821,7 +3887,17 @@ def _emoji_reply_context(image_analysis: dict[str, object], candidates: str) -> 
         f"{EMOJI_QUERY_PREFIX}绷不住笑{EMOJI_QUERY_SUFFIX}。"
         "表情意图可以写候选含义，也可以写贴近语境的情绪/动作/梗图意图；程序按语义匹配且避开最近重复。"
         "严肃排错、道歉、风险提醒、信息密集解释、或表情会打断语气时不要输出标记。"
-        "再强调一遍：**节制使用，不要每条都贴**。\n"
+        "再强调一遍：**节制使用，不要每条都贴**。"
+    )
+
+
+def _emoji_reply_context(image_analysis: dict[str, object], candidates: str) -> str:
+    """主人 2026-05-29 Round 23: 只返回 dynamic 参数 + 1 行短指针. 规则段进了 cache."""
+    tags = image_analysis.get("emotion_tags")
+    tag_text = ", ".join(str(tag) for tag in tags) if isinstance(tags, list) else ""
+    candidate_text = candidates or "当前本地表情库没有直接命中的候选；如果很适合发图，可以输出表情意图，程序会尝试联网搜索并下载到表情库。"
+    return (
+        "【emoji 参数 (规则见 cache 里 catty_emoji_skeleton)】\n"
         f"图片兴趣度：{image_analysis.get('interest', 0)}/100\n"
         f"图片/表情含义：{image_analysis.get('expression') or image_analysis.get('summary') or ''}\n"
         f"情绪标签：{tag_text}\n"
@@ -4349,10 +4425,15 @@ async def _build_messages(
         _deferred_pre_persona_segments.append(
             ("catty_force_direct_reply", _direct_reply_required_prompt(incoming), 489)
         )
+    # 主人 2026-05-29 Round 23: semantic_reply_split prompt 内容 byte-stable
+    # (除 max_chunks 是 config 常量), 跨 sender/scope/turn 都一样, 进 cache prefix 155.
+    # flag=True 时不再注入完整 prompt, 只加一行短指针 (AI 看到拆分允许时去 cache 段查规则).
     if semantic_reply_split:
-        _deferred_pre_persona_segments.append(
-            ("catty_semantic_reply_split", _semantic_reply_split_prompt(), 490)
-        )
+        _deferred_pre_persona_segments.append((
+            "catty_semantic_reply_split_pointer",
+            "【本轮启用 semantic_reply_split】允许拆分回复, 规则看 cache 里 catty_semantic_reply_split_skeleton.",
+            490,
+        ))
     if incoming.opportunistic or group_filter_context:
         _deferred_pre_persona_segments.append(
             ("catty_opportunistic_reply", _opportunistic_reply_prompt(), 491)
@@ -4595,6 +4676,27 @@ async def _build_messages(
             "catty_wake_context_skeleton",
             build_wake_context_skeleton(),
             order=154,
+        )
+    except Exception:  # noqa: BLE001
+        pass
+    # 主人 2026-05-29 Round 23: semantic_reply_split skeleton 永久进 cache prefix
+    # (内容 byte-stable, max_chunks 是 config 常量), flag=True 时只额外加一行短指针.
+    try:
+        _st_manager.register_static(
+            "catty_semantic_reply_split_skeleton",
+            _semantic_reply_split_prompt(),
+            order=155,
+        )
+    except Exception:  # noqa: BLE001
+        pass
+    # 主人 2026-05-29 Round 23: emoji skeleton 永久进 cache prefix.
+    # 旧 _emoji_reply_context 每次返回 520c 规则 + 70c 动态参数 (post-boundary 每轮重发).
+    # 拆后规则段进 cache, 只 dynamic 参数留在 emoji_context 注入位置.
+    try:
+        _st_manager.register_static(
+            "catty_emoji_skeleton",
+            _build_emoji_skeleton_text(),
+            order=156,
         )
     except Exception:  # noqa: BLE001
         pass
@@ -7468,15 +7570,38 @@ async def _rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     recent_bot_continuation = _recent_bot_prompted_user(event)
     _remember_recent_conversation_event(event, incoming)
     if recent_bot_continuation:
-        incoming.needs_filter = False
-        incoming.directly_requested = True
-        incoming.opportunistic = False
-        state["catty_recent_bot_continuation"] = True
-        logger.info(
-            f"Promoted recent bot continuation to main AI: user={event.user_id} "
-            f"group={getattr(event, 'group_id', '')} "
-            f"remaining={_bot_reply_continuation_remaining(event)}"
-        )
+        # 续聊窗口活跃 — 用 trigger/direct 信号 (mentioned/used_prefix) 决定续聊/关窗。
+        # 主人 2026-05-29:
+        #   1. closing intent (晚安/休息吧/我歇了…) → 这条照常回道别, 回完关窗 (open_continuation=False);
+        #   2. direct (@笨猫 / 触发前缀) → idle 计数清零, 满血续窗;
+        #   3. 连续 catty_followup_idle_limit 次没直接提到笨猫 → 关窗, 这条落回普通 gate。
+        _session_closing = _is_session_closing(incoming.text)
+        _followup_directed = bool(incoming.mentioned or incoming.used_prefix)
+        _promote_continuation = True
+        if _session_closing:
+            state["catty_session_closing"] = True
+        elif _followup_directed:
+            _reset_followup_idle(event)
+        else:
+            _idle_limit = int(getattr(config, "catty_followup_idle_limit", 3) or 3)
+            if _bump_followup_idle_or_close(event, limit=_idle_limit):
+                _promote_continuation = False
+                recent_bot_continuation = False
+                logger.info(
+                    f"Followup window closed (连续 {_idle_limit} 次未直接提到笨猫): "
+                    f"user={event.user_id} group={getattr(event, 'group_id', '')}"
+                )
+        if _promote_continuation:
+            incoming.needs_filter = False
+            incoming.directly_requested = True
+            incoming.opportunistic = False
+            state["catty_recent_bot_continuation"] = True
+            logger.info(
+                f"Promoted recent bot continuation to main AI: user={event.user_id} "
+                f"group={getattr(event, 'group_id', '')} "
+                f"remaining={_bot_reply_continuation_remaining(event)} "
+                f"closing={_session_closing} directed={_followup_directed}"
+            )
     if replied_to_self and _has_consumed_reply_source(event):
         # 主人 2026-05-27: reply gate 整个停, dedup 不再走 _save_local_critic_sample,
         # state["catty_reply_gate_result"] 留个空 dict 占位让 handle_chat 的 isinstance(dict) 通过.
@@ -7579,6 +7704,10 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
         return False
     text = event_plain_text(event)
     if not text:
+        return False
+    # 续聊窗口内的 closing intent (晚安/休息吧/我歇了…) → 让路给主链路 chat matcher,
+    # 由主 AI 回道别 + 关窗 (主人 2026-05-29 会话强制结束)。无窗口时正常走 CPU greet_night。
+    if _is_session_closing(text) and _has_bot_reply_continuation(event):
         return False
     scope = _conversation_queue_key(event)
     is_owner = _event_is_owner(event)
@@ -10654,7 +10783,10 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         reply = await _apply_local_critic(event, incoming, messages, reply)
 
         if _is_no_reply(reply):
-            if state.get("catty_recent_bot_continuation"):
+            if state.get("catty_session_closing"):
+                # closing intent 但主 AI 没回道别 → 也关窗退出会话跟踪
+                _close_bot_reply_continuation(event)
+            elif state.get("catty_recent_bot_continuation"):
                 _decrement_bot_reply_continuation(event)
             logger.info(
                 f"Main AI chose NO_REPLY after wake context: user={event.user_id} "
@@ -10829,7 +10961,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         # 然后后台等图就绪, 单独追发. 图就绪用 NAI 自身 timeout (180s) 控制.
         if _nsfw_img_task is not None:
             if chunks:
-                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]))
+                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]), open_continuation=not bool(state.get("catty_session_closing")))
                 try:
                     await matcher.send(
                         _compose_reply_message(
@@ -10870,7 +11002,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 await matcher.finish()
         if nsfw_image_segments:
             if chunks and not _chunks_last_already_sent:
-                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]))
+                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]), open_continuation=not bool(state.get("catty_session_closing")))
                 try:
                     await matcher.send(
                         _compose_reply_message(
@@ -10944,7 +11076,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             await matcher.finish()
         if emoji_entry:
             if chunks:
-                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]))
+                _remember_bot_reply_for_event(event, _chunk_to_history(chunks[-1]), open_continuation=not bool(state.get("catty_session_closing")))
                 if config.catty_reply_mix_emoji_with_text:
                     _mark_consumed_reply_source_if_sent(event, state)
                     await matcher.finish(
@@ -10975,7 +11107,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
             await matcher.finish(_compose_reply_message(event, emoji_entry=emoji_entry, quote=quote_pending))
         _mark_consumed_reply_source_if_sent(event, state)
         final_message = chunks[-1] if chunks else "喵喵！猫猫现在很忙哦，等一下再来找人家～"
-        _remember_bot_reply_for_event(event, _chunk_to_history(final_message) if chunks else final_message)
+        _remember_bot_reply_for_event(event, _chunk_to_history(final_message) if chunks else final_message, open_continuation=not bool(state.get("catty_session_closing")))
         await matcher.finish(
             _compose_reply_message(
                 event,
