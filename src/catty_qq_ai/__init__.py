@@ -7926,7 +7926,7 @@ async def _poke_rule(bot: Bot, event: PokeNotifyEvent, state: T_State) -> bool:
     elif int(poke_level) >= 6:
         _poke_comp_name = "poke_friend"
     else:
-        _poke_comp_name = None
+        _poke_comp_name = "poke_stranger"
     if _poke_comp_name:
         try:
             from .cpu_engine.composer import get_composer as _ce_get_composer
