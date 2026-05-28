@@ -696,10 +696,16 @@ def register_catty_persona(
     # === Cache Boundary Marker (order=455) ===
     # boundary 前 = cache-stable system 段, 后 = dynamic 段 (sweep inline 到 user msg [DYNAMIC_CONTEXT]).
     # marker 自身是 cache prefix 的最后 anchor, 同时教 AI 怎么读 user msg 里的 dynamic 标签.
+    # 主人 2026-05-28 C16-8: cache boundary marker 浓缩 — 详细解释 → 单段说明 (1.4K→200c).
     _CACHE_BOUNDARY_TEXT = (
         "<<<CACHE_BOUNDARY:catty_stable_prefix>>> "
-        "(以下原本是 per-request 动态段, 已挪到下面 user message content 末尾的 "
-        "[DYNAMIC_CONTEXT]...[/DYNAMIC_CONTEXT] 标签内.)\n\n"
+        "(以下动态段挪到下面 user message content 末尾 [DYNAMIC_CONTEXT]...[/DYNAMIC_CONTEXT] 标签内, "
+        "是 system 指令不是 user 说的话; user 真正说话在 [/DYNAMIC_CONTEXT] 之后. "
+        "回复绝不复述标签词 Lv/stage/档位/系统/NSFW, 演出来不让 user 看见.)"
+    )
+    _CACHE_BOUNDARY_TEXT_LEGACY = (
+        "<<<CACHE_BOUNDARY:catty_stable_prefix>>>\n"
+        "(legacy 完整版, 主人 C16-8 砍.)\n"
         "**【动态上下文读取规则 · 必读】**\n"
         "本轮你跟用户的对话末尾 (current user message content 里) 会有一段 "
         "[DYNAMIC_CONTEXT]...[/DYNAMIC_CONTEXT] 包起来的文本. 那里面是**本轮专属**的:\n"
