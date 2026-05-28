@@ -70,19 +70,24 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
     user_indices = [i for i, m in enumerate(messages) if isinstance(m, dict) and m.get("role") == "user"]
     if not user_indices:
         return messages
-    # 主人 2026-05-28 C3 改 CC 策略: cache_control 标 user_indices[-1] (current user).
-    # 关键洞见: Anthropic 有 20-token lookback — 标在 current user (即使内容每轮变),
-    # 下次请求 lookback 自动找之前的 prefix 子集匹配, history 也能命中.
-    # 这就是 CC (claude.ts:3201-3244) 的策略 — 写大 cache, lookback 复用历史 prefix.
+    # 主人 2026-05-28 C6 cache 真相修复: 之前标 user_indices[-1] (current user) 永远 miss.
+    # 因为 current user content 含 [DYNAMIC_CONTEXT] 每轮变 (SFW sweep + NSFW spark 内部
+    # sweep 把 phase_hint/scene_state/preg/climax/recency/random_encounter 等动态段全 inline),
+    # prefix 严格字节匹配在 user[-1] 位置永远失败 → cache_read 死锁在 sys 部分 = 6.4K 上限.
     #
-    # 同时保留 user_indices[0] anchor (头) — 让最小 prefix 也有独立 cache, 防 lookback 超 20 token 时 miss.
+    # 真相: Anthropic prompt cache 是 prefix-based, cache_control 必须标在 byte 稳定位置.
+    # "20-token lookback" 是写入侧容差 (找最长可缓存前缀), 不是读取侧子集匹配 — 之前误读了文档.
+    #
+    # 正确标位:
+    # 1. user_indices[0] — 头 anchor, 永远稳定的 prefix anchor (history 第一条 user)
+    # 2. user_indices[-2] — 上一轮 user msg (已固化进 history, byte 稳定), cache 含整个 history
+    #    current user (user_indices[-1]) 不标 — 每轮变, 标了也 miss 还浪费 cache write
     _mark_cache_control(messages[user_indices[0]])
-    # 多 user 场景: 也标 [-1] (current user) — Anthropic lookback 会让历史 prefix 命中.
-    # cache_create 第一次会大涨 (含整个 history), 后续 read 通过 lookback 复用.
+    # 标上一轮 user (byte 已固化) — 让 cache 包含整个 history 到上一轮 user 为止.
     if len(user_indices) >= 2:
-        last_user_idx = user_indices[-1]
-        if last_user_idx != user_indices[0]:  # 避免重复标
-            _mark_cache_control(messages[last_user_idx])
+        prev_user_idx = user_indices[-2]
+        if prev_user_idx != user_indices[0]:  # 单/双 user 场景头 anchor 已覆盖, 避免重复标
+            _mark_cache_control(messages[prev_user_idx])
     return messages
 
 
