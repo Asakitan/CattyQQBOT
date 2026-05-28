@@ -4292,11 +4292,14 @@ async def _build_messages(
     # 浪费 ~150ms/reply. 在 _build_messages 入口 bind contextvar, 整个 pipeline 内
     # 所有 NLU caller (含 thread pool 内的 score/trend) 透明享受同一 cache.
     # 用 ContextVar.set/reset 配对, function 结束自动 cleanup, 不污染 caller scope.
+    _nlu_cache = None
     _nlu_cache_token = None
     try:
         from .nlu.request_cache import NLURequestCache, _active_cache
-        _nlu_cache_token = _active_cache.set(NLURequestCache())
+        _nlu_cache = NLURequestCache()
+        _nlu_cache_token = _active_cache.set(_nlu_cache)
     except Exception:
+        _nlu_cache = None
         _nlu_cache_token = None
 
     # 提前读历史以判定会话热度：≥ HOT_SESSION_MIN_MESSAGES 条历史时跳过最长的教学例句，
@@ -4457,6 +4460,15 @@ async def _build_messages(
                         break
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"recent_user_texts compute failed: {exc}")
+    # 主人 2026-05-28 v2: prime history embed + 累积 history topics 到 cache.
+    # 前 3 条 history user msg 一次性 batch embed (text2vec 单 call N=1 vs batch N=3
+    # 时间几乎相同, 远快于 detect_trend 内逐条 embed 3 次). 同时 detect_topics 累积
+    # _history_topics 给 NER 消歧 ("猫" 上下文有 pets → 动物而非自称) 用.
+    if _nlu_cache is not None and len(_recent_user_texts_for_ctx) > 1:
+        try:
+            _nlu_cache.prime_history(_recent_user_texts_for_ctx[1:], top_n=3)
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"prime_history failed: {exc}")
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,

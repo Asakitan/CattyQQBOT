@@ -41,6 +41,11 @@ class NLURequestCache:
     _topics: dict[str, set[str]] = field(default_factory=dict, repr=False)
     # emotion key: (text, is_nsfw_context) → delta
     _emotion: dict[tuple[str, bool], int] = field(default_factory=dict, repr=False)
+    # 主人 2026-05-28 v2: history context. prime_history 后填充, 用于歧义消解 /
+    # detect_trend 复用 / 提升 marginal topic 置信度.
+    _history_texts: list[str] = field(default_factory=list, repr=False)
+    _history_topics: set[str] = field(default_factory=set, repr=False)
+    _history_primed: bool = field(default=False, repr=False)
     # 简单 hit counter, 调试观察
     hits: dict[str, int] = field(default_factory=lambda: {"embed": 0, "topics": 0, "emotion": 0}, repr=True)
     misses: dict[str, int] = field(default_factory=lambda: {"embed": 0, "topics": 0, "emotion": 0}, repr=True)
@@ -98,12 +103,76 @@ class NLURequestCache:
             self._emotion[key] = v
             return v
 
+    def prime_history(self, history_texts: list[str], top_n: int = 3) -> None:
+        """一次性 batch embed 最近 N 条 history user msg + 累积 topics.
+
+        主人 2026-05-28 v2:
+        - 用于 detect_trend 等多消息 NLU 复用 (避免每条单独 embed N 次)
+        - 累积 _history_topics 给 NER 消歧用 (e.g. "猫" 上下文有 pets → 动物)
+        - text2vec 不可用时 silently skip (向后兼容)
+        - 幂等: 重复 call 同 cache 实例只 prime 一次
+        """
+        if self._history_primed or not history_texts:
+            return
+        last_n = [t for t in history_texts[-top_n:] if t and isinstance(t, str) and t.strip()]
+        if not last_n:
+            with self._lock:
+                self._history_primed = True
+            return
+
+        # batch embed (text2vec 不可用 → silently skip embed, 但 topics 还会跑)
+        try:
+            from . import text2vec_engine
+            embeds = text2vec_engine.embed_sync_batch(last_n)
+        except Exception:
+            embeds = None
+
+        with self._lock:
+            self._history_texts = list(last_n)
+            if embeds is not None and len(embeds) == len(last_n):
+                for text, emb in zip(last_n, embeds):
+                    if text not in self._embed:
+                        self._embed[text] = emb
+
+        # detect topics on each history msg (走 contextvar, 自动复用上面已 embed)
+        try:
+            from ..daily_life import detect_topics
+            for text in last_n:
+                topics = detect_topics(text)
+                if topics:
+                    with self._lock:
+                        self._history_topics.update(topics)
+                        if text not in self._topics:
+                            self._topics[text] = topics
+        except Exception:
+            pass
+
+        with self._lock:
+            self._history_primed = True
+
+    def get_history_embeds(self) -> "list[Any]":
+        """返回 history msg 的 embed list (跳过 None). 顺序: 最早 → 最近."""
+        with self._lock:
+            out: list[Any] = []
+            for text in self._history_texts:
+                v = self._embed.get(text)
+                if v is not None:
+                    out.append(v)
+            return out
+
+    def get_history_topics(self) -> set[str]:
+        """返回 history msg 累积 topic union (浅 copy)."""
+        with self._lock:
+            return set(self._history_topics)
+
     def stats(self) -> dict[str, Any]:
         with self._lock:
             return {
                 "embed_size": len(self._embed),
                 "topics_size": len(self._topics),
                 "emotion_size": len(self._emotion),
+                "history_msgs": len(self._history_texts),
+                "history_topics": list(self._history_topics),
                 "hits": dict(self.hits),
                 "misses": dict(self.misses),
             }
