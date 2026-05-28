@@ -94,19 +94,19 @@ def cachingAtDepthForClaude(messages: list[dict], cachingAtDepth: int = 2) -> li
 def _get_cache_ttl() -> str | None:
     """读 config.catty_cache_ttl, 决定 cache TTL ('1h' / '5min' / None=默认5min).
 
-    主人 2026-05-28: CC 在用 1h TTL 让长会话不掉 cache, catty 跟进.
-    价格: 1h cache write 2x base (5min write 1.25x), cache read 都 0.1x.
-    长会话 (>5min) 场景 1h 显著省钱.
+    主人 2026-05-28 C7: 改回 5min 默认 — 主人发现 1h cache + dynamic 内容长期持久化
+    会让 Claude 触发 safety refusal, 短 TTL 让 prefix 自然过期不跨多 session 漂移.
+    价格: 5min cache write 1.25x (vs 1h write 2x), cache read 都 0.1x.
     """
     try:
         from . import config as _module_config
-        ttl = getattr(_module_config.config, "catty_cache_ttl", "1h")
+        ttl = getattr(_module_config.config, "catty_cache_ttl", "5min")
         if isinstance(ttl, str) and ttl.strip().lower() in ("1h", "5min", "5m"):
             normalized = ttl.strip().lower().replace("5m", "5min")
-            return "1h" if normalized == "1h" else None  # 5min 是默认, 不需要显式传
+            return "1h" if normalized == "1h" else None  # 5min 是 Anthropic 默认, 不传字段
     except Exception:  # noqa: BLE001
         pass
-    return "1h"  # 默认 1h
+    return None  # 默认 5min (不显式传 ttl 字段)
 
 
 def _build_cache_control_dict() -> dict[str, Any]:
