@@ -8758,6 +8758,7 @@ def _fallback_caption_signin(result: dict, user_id: str = "", user_nickname: str
             if comp.bodies:
                 text = comp.compose(
                     user_id=str(user_id),
+                    affection_level=level,
                     render_vars=render_vars,
                     cat_suffixes=list(getattr(config, "catty_cpu_engine_cat_suffixes", []) or []),
                 )
