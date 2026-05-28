@@ -487,6 +487,11 @@ class Config(BaseModel):
     catty_group_special_care_user_ids: dict[str, set[int]] = Field(default_factory=dict)
     catty_special_care_cooldown_seconds: int = 90
     catty_special_care_response_window_minutes: float = 30.0
+    # 普通会话「续聊窗口」: 笨猫回复某人后, 该用户在窗口内不用 @ 也能续聊。
+    # 主人 2026-05-29: 窗口时长从 180s 砍到 25s (25s 没新消息就退出会话跟踪);
+    # 续聊期间连续 catty_followup_idle_limit 次没直接提到笨猫 (非 mentioned/used_prefix) 也关窗。
+    catty_followup_window_seconds: float = 25.0
+    catty_followup_idle_limit: int = 3
     catty_memory_summary_interval_minutes: int = 30
     catty_memory_max_corpus_messages: int = 800
     catty_memory_private_summary_messages: int = 500
@@ -838,6 +843,8 @@ class Config(BaseModel):
         "catty_reply_human_split_max_chunks",
         "catty_hot_reload_poll_seconds",
         "catty_hot_reload_debounce_seconds",
+        "catty_followup_window_seconds",
+        "catty_followup_idle_limit",
         mode="before",
     )
     @classmethod
