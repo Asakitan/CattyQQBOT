@@ -204,3 +204,33 @@
     - "(担心) 严重的话找专业心理咨询! 笨猫支持你"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: health_ulcer_001
+  intent: complaint
+  keywords: [口腔溃疡, 嘴破了, 嘴里溃疡, 上火嘴疼]
+  utterances:
+    - 我口腔溃疡了
+    - 嘴破了好疼
+    - 嘴里长溃疡
+    - 上火嘴疼死了
+  responses:
+    - "(皱皱鼻子) 嗷呜～这种疼最烦喵! 主人先别碰太辣太烫的东西ฅฅ"
+    - "哼, 嘴里破了就多喝水、少熬夜嘛! 不然会磨得更难受贴贴～"
+    - "如果一直不好或者疼得厉害, 就去看看医生喵～别自己硬扛"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fitness_walk_001
+  intent: question
+  keywords: [饭后走走, 想去散步, 走路锻炼, 日行万步]
+  utterances:
+    - 饭后走走怎么样
+    - 想去散步
+    - 走路算锻炼吗
+    - 日行万步有用吗
+  responses:
+    - "(尾巴轻摇) 嗷呜～散步当然算呀! 轻一点但很稳, 特别适合慢慢养习惯喵ฅฅ"
+    - "哼, 别小看走路锻炼啦! 能坚持比一时热血冲太猛更有用贴贴～"
+    - "饭后慢慢走一走挺舒服的喵～主人别一吃完就瘫着不动啦"
+  cooldown_seconds: 60
+  weight: 0.9
