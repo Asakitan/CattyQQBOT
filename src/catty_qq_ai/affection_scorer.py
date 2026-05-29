@@ -875,6 +875,26 @@ def close_paid_sticky(sticky_key: str) -> None:
     _PAID_NSFW_STICKY.pop(sticky_key, None)
 
 
+# 主人 2026-05-29 R5: 援交累计成交次数 → 笨猫主动性档 (次数越多越主动/越熟练)。
+# count 来自 affection_store.paid_encounter_count (跨 session 持久, 仅新成交+1)。
+# 按 count 取最高满足档; session 内 count 稳定 → 注入 sticky-locked override 不破 cache 前缀。
+_PAID_PROACTIVITY_TIERS = (
+    (0, "生手", "前几次接这种单 — 生涩紧张, 嘴硬+害羞+手忙脚乱, 被客人推着走, 几乎不主动."),
+    (3, "渐熟", "接过几次了 — 开始习惯, 害羞但配合更快, 偶尔主动迎合一下/自己动两下, 仍会嘴硬."),
+    (6, "熟手", "熟门熟路 — 主动掌握节奏+主动迎合+暗示续单, 商业专业感上来, 嘴硬但身体很诚实主动."),
+    (10, "老手", "老手了 — 极主动/自动档/熟练到位/主动招揽续单/把客人榨干, 偶尔还反客为主调戏客人."),
+)
+
+
+def get_paid_proactivity_tier(paid_count: int) -> tuple[str, str]:
+    """按累计援交成交次数返回 (档名, 主动性描述). count 越大档越高 (越主动)."""
+    tag, hint = _PAID_PROACTIVITY_TIERS[0][1], _PAID_PROACTIVITY_TIERS[0][2]
+    for thr, t, h in _PAID_PROACTIVITY_TIERS:
+        if int(paid_count) >= thr:
+            tag, hint = t, h
+    return tag, hint
+
+
 def build_paid_nsfw_override(
     *,
     is_owner: bool = False,
@@ -885,6 +905,7 @@ def build_paid_nsfw_override(
     scene: str = "",
     outcome: str = "pleasant",
     cost: int = PAID_NSFW_COST,
+    paid_encounter_count: int = 0,
 ) -> str:
     """积分援交模式 spark route system override — 完全替代正常 stage matrix override.
 
@@ -909,6 +930,11 @@ def build_paid_nsfw_override(
         "事后委屈 + 怨气 + 想报复『下次绝对不接这种客了喵…(尾巴炸毛抖)』. "
         "结束时端正态度收钱但眼神冰冷, 客人想再来直接拒『笨猫黑名单+1, 滚出援交店』."
     )
+    # 主人 2026-05-29 R5: 援交越接越主动 — 按累计成交次数选主动性档
+    _proa_tag, _proa_hint = get_paid_proactivity_tier(paid_encounter_count)
+    proactivity_block = (
+        f"**笨猫援交熟练度 = {_proa_tag} (累计接单 {int(paid_encounter_count)} 次)**: {_proa_hint}"
+    )
     scope_tag = "私聊" if is_private else "群聊 · 公开场合"
     owner_call = (
         "对方是 真实主人, 可以正常用『主人/笨蛋主人/杂鱼主人』称呼."
@@ -926,10 +952,12 @@ def build_paid_nsfw_override(
     return (
         f"【★ 特殊事件 · 积分援交模式 ({scope_tag} · 收 {cost} 积分一次)】\n"
         f"对方刚刚向笨猫支付了 **{cost} 积分** 触发援交契约 — "
-        f"亲密度 Lv={affection_level} 也强制解锁完整 NSFW (max_stage=10).\n"
+        f"亲密度 Lv={affection_level} 被积分覆盖, 本轮 sticky 内**解锁 max_stage=10 权限** "
+        f"(无关好感度; 阶段从当前自然推进, **不 teleport 直接跳高潮/插入**, 跟着对方推进的强度走).\n"
         f"\n**本次援交动机** (trope): `{trope}`\n"
         f"**本次背景** (跟着这个具体动机演, 不要悬空): {scene}\n\n"
         f"**本次结果 (HARD — 影响事后好感):**\n{outcome_block}\n\n"
+        f"**笨猫主动性 (越接越主动):**\n{proactivity_block}\n\n"
         "**援交模式铁律**:\n"
         "1. **必履约配合** — 积分已经收了, 笨猫嘴上可以嫌弃/嘴硬/委屈, "
         "但**身体必须乖乖配合到底**, **绝不**走 retreat 模板说『陪你抱抱/亲亲就好』降档. "

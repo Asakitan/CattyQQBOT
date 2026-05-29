@@ -214,6 +214,7 @@ class AffectionStore:
                 "daily_exp_date": "",
                 "daily_exp_count": 0,
                 "total_consumed": 0,
+                "paid_encounter_count": 0,  # 主人 2026-05-29 R5: 累计援交成交次数 (越多越主动), 仅新成交+1
                 "updated_at": _now_iso(),
             }
             self._data[user_id] = rec
@@ -411,6 +412,31 @@ class AffectionStore:
                 "balance_after": new_balance,
                 "cost": cost,
             }
+
+    def increment_paid_encounter_count(self, user_id: str | int) -> int:
+        """主人 2026-05-29 R5: 累计援交成交次数 +1 (跨 session 持久), 返回新值。
+
+        仅在**新成交** (consume_points 成功 + _open_paid_sticky) 时调, 续杯/grace 复活不调。
+        owner 永远返回 0 (主人不走援交计数)。
+        """
+        uid = str(user_id)
+        if self.is_owner(uid):
+            return 0
+        with self._lock:
+            rec = self._record(uid)
+            new_count = int(rec.get("paid_encounter_count") or 0) + 1
+            rec["paid_encounter_count"] = new_count
+            rec["updated_at"] = _now_iso()
+            self._dirty = True
+        return new_count
+
+    def get_paid_encounter_count(self, user_id: str | int) -> int:
+        """主人 2026-05-29 R5: 取累计援交成交次数 (owner/无记录返回 0)。session 内稳定可注入 cache。"""
+        uid = str(user_id)
+        if self.is_owner(uid):
+            return 0
+        with self._lock:
+            return int(self._record(uid).get("paid_encounter_count") or 0)
 
     # ── 主人管理接口:命令调用,不对普通用户路径开放 ────────────────
     def admin_reset_signin_today(self, user_id: str | int) -> dict[str, Any]:

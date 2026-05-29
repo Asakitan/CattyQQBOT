@@ -3137,7 +3137,9 @@ def build_phase_tracker_block_only(
     if st is None:
         return ""
     current = max(1, min(8, int(st.current_phase or 1)))
-    next_phase = _decide_next_phase(st)
+    # 主人 2026-05-29 bug fix: _decide_next_phase 未定义 (NameError → 整个 block 静默崩 →
+    # phase tracker 从没注入过, 是「对不上」帮凶). 与 update_phase/build_phase_advance_hint 一致:
+    next_phase = min(8, current + 1)
     current_meta = PHASE_DEFINITIONS.get(current, PHASE_DEFINITIONS[1])
     next_meta = PHASE_DEFINITIONS.get(next_phase, PHASE_DEFINITIONS[8])
     rotation = int(next_phase) % 7
@@ -3145,7 +3147,7 @@ def build_phase_tracker_block_only(
     rotated_behavior = _rotate_subset(next_meta['behavior'], 4, rotation)
     rotated_opener = _rotate_subset(next_meta['opener_hints'], 2, rotation)
     rotated_thought = _rotate_subset(next_meta['thought'], 2, rotation)
-    stuck_thr = STUCK_THRESHOLDS.get(current, 3)
+    stuck_thr = _PHASE_STUCK_THRESHOLDS.get(current, 3)  # 主人 2026-05-29 bug fix: STUCK_THRESHOLDS 未定义
     advance_rule = (
         f"⚠️ 已在 {current_meta['name']} 卡 {st.turn_count} 轮 (阈值 {stuck_thr}) — "
         f"**强制推进到 {next_meta['name']}**."

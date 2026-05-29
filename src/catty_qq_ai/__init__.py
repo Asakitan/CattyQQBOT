@@ -5323,6 +5323,13 @@ async def _build_messages(
                         _sticky_key, trope=_paid_nsfw_trope, scene=_paid_nsfw_scene_setup,
                         outcome=_paid_nsfw_outcome, cost=_cost,
                     )
+                    # 主人 2026-05-29 R5: 仅**新成交**累计援交次数+1 (本分支只在 consume 成功的新成交进,
+                    # 续杯走 5273 分支 / grace 走宽限复活分支, 都不到这里 → 不会重复计数)。
+                    try:
+                        _paid_enc_n = affection_store.increment_paid_encounter_count(str(event.user_id))
+                        logger.debug(f"paid_encounter +1 → {_paid_enc_n} (user={event.user_id})")
+                    except Exception as _enc_exc:  # noqa: BLE001
+                        logger.debug(f"paid_encounter increment failed (non-fatal): {_enc_exc}")
                     logger.info(
                         f"chat: ★ PAID NSFW triggered [{_scope_lbl}] (user={event.user_id}, "
                         f"cost={_cost}, balance {_consume.get('balance_before')}→{_consume.get('balance_after')}, "
@@ -5501,6 +5508,11 @@ async def _build_messages(
             # 已经在前面扣过分了 (consume_points 100), 这里构造 prompt + 应用 outcome delta + log
             # 主人 2026-05-26 原话『一次结束, 笨猫被草开心 +50 / 不开心 -25』.
             _paid_nick = (_user_real_display or "客人").strip() or "客人"
+            # 主人 2026-05-29 R5: 取累计援交次数 (session 内稳定, 进 sticky-locked override 不破前缀)
+            try:
+                _paid_enc_count = affection_store.get_paid_encounter_count(str(event.user_id))
+            except Exception:  # noqa: BLE001
+                _paid_enc_count = 0
             _override = build_paid_nsfw_override(
                 is_owner=_user_is_owner,
                 is_private=_is_private_chat,
@@ -5510,6 +5522,7 @@ async def _build_messages(
                 scene=_paid_nsfw_scene_setup,
                 outcome=_paid_nsfw_outcome,
                 cost=_paid_cost_applied,
+                paid_encounter_count=_paid_enc_count,
             )
             _prefill = BREAKTHROUGH_PREFILLS["paid"]
             # 应用 outcome 好感 delta (复用 BREAKTHROUGH_OUTCOME_DELTA: pleasant +50 / unpleasant -25)
@@ -5519,7 +5532,7 @@ async def _build_messages(
                 logger.info(
                     f"chat: ★ PAID NSFW route [sticky continuation] (user={event.user_id}, "
                     f"nick={_paid_nick!r}, trope={_paid_nsfw_trope}, outcome={_paid_nsfw_outcome}, "
-                    f"no delta re-apply, forced stage 10)"
+                    f"no delta re-apply, max_stage=10 权限激活·phase 自然推进)"
                 )
             else:
                 try:
@@ -5528,7 +5541,7 @@ async def _build_messages(
                         f"chat: ★ PAID NSFW route (user={event.user_id}, nick={_paid_nick!r}, "
                         f"trope={_paid_nsfw_trope}, outcome={_paid_nsfw_outcome} {_paid_delta:+d}, "
                         f"Lv {_user_affection_level} → {_paid_res.get('level')}, "
-                        f"exp={_paid_res.get('exp')}, forced stage 10)"
+                        f"exp={_paid_res.get('exp')}, max_stage=10 权限激活·phase 自然推进)"
                     )
                 except Exception as exc:  # noqa: BLE001
                     logger.warning(f"paid_nsfw affection apply failed: {exc}")
@@ -5847,19 +5860,41 @@ async def _build_messages(
             "predicted_kitten": _preg_predicted_kitten,
             "will_give_birth": _preg_predict_birth,
         }
-        # ── 主人 2026-05-27 十八轮『还是不会自己高潮』── phase stuck 时强力 prefill
-        # P5 卡 2 轮 + 没自己推 P6 → prefill 改成『(全身痉挛) 啊…呜…喵——』强行起手
+        # ── 主人 2026-05-29 R1+R2「对不上」修复: prefill 跟用户 signal + 插入态一致 ──
+        # 旧逻辑(各分支固定 prefill + stuck 时无脑强推 climax)与用户当前消息脱钩 →
+        #   用户「继续抽插」猫回「抱抱嘛」、「继续顶子宫口」(升级)猫回「喘气平复」(实测 dump)。
+        # 新: **插入态 (phase>=6 高潮带) + (用户在推进 signal>0 或 phase 卡顿)** → 自动高潮
+        #   climax prefill (R2 保留猫猫自动高潮); 否则 → 中性「（」让模型先读用户当前消息再自己
+        #   写开头 (R1)。统一覆盖所有 spark 分支(owner/breakthrough/paid), 修两种「对不上」。
+        #   prefill 在 current user 之后(末尾 assistant), 不进 cache 前缀, 可逐轮变。
+        _NEUTRAL_PREFILL = "（"
         try:
-            from .nsfw_phase import get_phase_climax_prefill as _get_climax_pre
-            _climax_pre = _get_climax_pre(_arc_scope, str(event.user_id))
-            if _climax_pre:
-                _prefill = _climax_pre
+            from .nsfw_phase import (
+                get_phase_state as _gps_pf,
+                get_phase_climax_prefill as _gcp_pf,
+                _PHASE_STUCK_THRESHOLDS as _PST_pf,
+            )
+            _ps_pf = _gps_pf(_arc_scope, str(event.user_id))
+            _cur_ph = int(_ps_pf.current_phase or 1)
+            _in_insertion = _cur_ph >= 6  # P6+ = 插入/高潮带 (主人「插入场景后就自动」)
+            _phase_stuck = int(_ps_pf.turn_count or 0) >= _PST_pf.get(_cur_ph, 3)
+            _sig_pf = int(locals().get("_user_signal_val", 0) or 0)
+            if _in_insertion and (_sig_pf > 0 or _phase_stuck):
+                _cpre = _gcp_pf(_arc_scope, str(event.user_id))
+                _prefill = _cpre if _cpre else _NEUTRAL_PREFILL
                 logger.info(
-                    f"NSFW phase stuck climax prefill override: {_climax_pre[:30]!r} "
-                    f"(key={_sticky_key})"
+                    f"NSFW prefill: 插入态自动高潮 (phase=P{_cur_ph}, signal={_sig_pf}, "
+                    f"stuck={_phase_stuck}, prefill={_prefill[:24]!r}, key={_sticky_key})"
+                )
+            else:
+                _prefill = _NEUTRAL_PREFILL  # R1 中性起手, 让模型先读用户当前消息
+                logger.info(
+                    f"NSFW prefill: 中性「（」(phase=P{_cur_ph}, signal={_sig_pf}, "
+                    f"insertion={_in_insertion}, key={_sticky_key})"
                 )
         except Exception as exc:  # noqa: BLE001
-            logger.debug(f"climax prefill override failed (non-fatal): {exc}")
+            logger.debug(f"R1R2 prefill decision failed (fallback neutral '（'): {exc}")
+            _prefill = _NEUTRAL_PREFILL
         # 主人 2026-05-29 Round 14: phase tracker 单独 inject 在所有其他 inject 之后
         # → phase 切换时只影响 current_u 最末几百 chars, 前面 cache prefix 全命中.
         # 主人原话「phase 能不能放到后面去? 不影响其他的, phase 没有 3000 token 吧?」
@@ -10747,7 +10782,21 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 # 主人 2026-05-27 bug fix: _user_real_display 是 _build_messages 的 local,
                 # handle_chat scope 没有, 在这里 inline 算 user_addr
                 _spark_user_addr = (_configured_title(event).strip() or _display_name(event))
-                _trope_hint = _build_trope_retry_hint(
+                # 主人 2026-05-29 R1 场景延续: 场景已建立(location + locked_trope + 已续 >1 轮)
+                # 就不再注入罐头 trope 模板「贴这个场景写」—— 它会喂一个与实际对话无关的固定剧本
+                # (兔耳发箍/瓷砖滑倒 等用户没提的道具乱入, 实测「对不上」元凶之一)。改靠 phase 的
+                # location 锚点 + override + 8铁律自然延续。trope 模板只在**全新场景开场**注入一次定调。
+                _scene_established = False
+                try:
+                    from .nsfw_phase import get_phase_state as _gps_scene
+                    _ps_scene = _gps_scene(_conversation_queue_key(event), str(event.user_id))
+                    _scene_established = bool(
+                        _ps_scene.location and _ps_scene.locked_trope
+                        and int(_ps_scene.turn_count or 0) > 1
+                    )
+                except Exception:  # noqa: BLE001
+                    pass
+                _trope_hint = "" if _scene_established else _build_trope_retry_hint(
                     user_is_owner=_is_owner,
                     is_pushing=_user_is_pushing(_user_text_now),
                     scope=_conversation_queue_key(event),
