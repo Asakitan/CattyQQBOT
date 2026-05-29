@@ -276,6 +276,91 @@ def build_time_context(*, reference: datetime | None = None) -> str:
     return base
 
 
+def build_day_gap_note(
+    prev_turn_at: float | None,
+    *,
+    now: datetime | None = None,
+    is_private: bool = False,
+    is_owner: bool = False,
+    user_display: str = "",
+) -> str:
+    """跨天感知 — 上一轮对话和现在跨了日历天 → 提示笨猫别无缝续昨天的剧情。
+
+    主人 2026-05-29: 修私聊"时间错位"。history 里的对话没带时间戳, LLM 只看历史会把
+    昨晚的睡前/同床那种连续场景原样续演到第二天下午(主人原话: "还在昨天的故事了, 已经
+    第二天了")。这里拿 prev_turn_at(上一轮对话写回时刻, 来自 session_cache.last_turn_at —
+    它不被读路径 .get() 的 LRU 刷新污染)跟现在比对**日历天**, 跨天就显式给"新的一天"信号,
+    由调用方注入成贴近 user 当前消息的 author_note。
+
+    Args:
+        prev_turn_at: 上一轮对话完成的 epoch 秒。None(冷会话/无历史)→ 不注入。
+        now: 当前时间(测试注入), 默认 datetime.now()。
+        is_private: 私聊给强"场景翻篇"指令(沉浸式 RP 才有连续场景); 群聊给轻量一行。
+        is_owner: 主人 → 专属称呼。
+        user_display: 对方称呼字面(主人用不到)。
+
+    Returns:
+        prompt 文本; 同一天 / 无 prev / 时钟异常 → ""。
+    """
+    if prev_turn_at is None:
+        return ""
+    try:
+        prev = float(prev_turn_at)
+    except (TypeError, ValueError):
+        return ""
+    if prev <= 0:
+        return ""
+    now_dt = now if now is not None else datetime.now()
+    try:
+        prev_dt = datetime.fromtimestamp(prev)
+    except (OverflowError, OSError, ValueError):
+        return ""
+    if prev_dt > now_dt:
+        # 时钟回拨 / 异常未来时间 → 不注入
+        return ""
+    day_delta = (now_dt.date() - prev_dt.date()).days
+    if day_delta <= 0:
+        # 同一天 → 不打扰(连续聊 / 短停顿场景), 跨天才需要"新的一天"信号
+        return ""
+
+    now_payload = compute_now(reference=now_dt)
+    phase = now_payload.get("phase", "")
+    weekday = now_payload.get("weekday", "")
+    date_str = now_payload.get("date", "")
+    prev_phase = _phase_for_hour(prev_dt.hour).label
+
+    if day_delta == 1:
+        gap_desc = "隔了一夜(到第二天了)"
+        gap_span = "一晚"
+    elif day_delta <= 3:
+        gap_desc = f"隔了 {day_delta} 天"
+        gap_span = f"{day_delta} 天"
+    else:
+        gap_desc = f"已经隔了 {day_delta} 天(好久没聊了)"
+        gap_span = f"{day_delta} 天"
+
+    who = "主人" if is_owner else (user_display or "对方")
+    # 跨天反差例句要随称呼走 —— 非主人**绝不**能叫"主人"(称呼专属真实主人)。
+    reunion_eg = "『欸主人终于醒啦?』" if is_owner else "『欸你又来啦~』"
+
+    if is_private:
+        return (
+            f"【⏰ 时间跳跃·重要】距上次和{who}对话{gap_desc} — "
+            f"现在是 {date_str} {weekday} {phase}。\n"
+            f"上次聊到那会儿是『{prev_phase}』, 现实里已经过去{gap_span}了。\n"
+            "**别无缝接着上次的场景往下演** — 上次如果停在睡前/夜里/同床/正做某事那种连续剧情, "
+            f"那一幕现在早就翻篇了。开场要体现『新的一天 / 现在是{phase}』"
+            f"(刚睡醒的样子 / 已经是{phase}啦 / 换了个场景), "
+            f"可以自然带一句跨天反差({reunion_eg}『睡了一觉又是新的一天喵』), "
+            "再傲娇/撒娇回这一句。\n"
+            "(只是这一刻的时间校准提示, 影响开场氛围, 别复述给对方听。)"
+        )
+    return (
+        f"【时间提示】距上次在这聊{gap_desc}, 现在是 {date_str} {weekday} {phase} — "
+        "当作新的一天, 别无缝接上次没说完的话头, 可带一句『好久没见』的自然感。"
+    )
+
+
 def format_for_prompt(payload: dict[str, Any]) -> str:
     """把 compute_now 结果整成一句话便于 LLM 拼 prompt.
 

@@ -50,6 +50,10 @@ class SessionCache:
 
         self._sessions: "OrderedDict[str, list[ChatMessage]]" = OrderedDict()
         self._last_access: dict[str, float] = {}
+        # 主人 2026-05-29: last_turn_at 只在 set()(一轮对话完成写回)时更新, 读路径 get()
+        # **不**碰它。_last_access 被 get() 的 LRU 刷新污染(每次读都变 now), 不能用来量
+        # idle/跨天; last_turn_at 才是"上一轮对话真正发生的时刻"。
+        self._last_turn_at: dict[str, float] = {}
         self._dirty: set[str] = set()
         self._loaded = False
 
@@ -65,20 +69,36 @@ class SessionCache:
 
     def set(self, key: str, messages: list[ChatMessage]) -> None:
         """整段写入并标记 dirty。会触发 LRU 淘汰。"""
+        now = time.time()
         self._sessions[key] = list(messages)
         self._sessions.move_to_end(key)
-        self._last_access[key] = time.time()
+        self._last_access[key] = now
+        # 一轮对话写回 = 这一轮真正发生的时刻(read 不更新它, 量 idle/跨天专用)。
+        self._last_turn_at[key] = now
         self._dirty.add(key)
         self._evict_lru()
 
     def last_access_at(self, key: str) -> float | None:
-        """返回该 scope 上次访问 epoch seconds(用于 macros {{idleDuration}})。空 = 没访问过。"""
+        """返回该 scope 上次**访问**(含 get 读路径)epoch seconds。
+
+        注意: get() 的 LRU 刷新会把它顶到 now, 跨请求量 idle 不可靠 —— 量 idle/跨天
+        请用 last_turn_at()。这个保留给 LRU/dashboard 报告。
+        """
         return self._last_access.get(key)
+
+    def last_turn_at(self, key: str) -> float | None:
+        """返回该 scope 上一轮对话**完成写回**的 epoch seconds。空 = 没对话过。
+
+        只由 set()(_append_history 写回一轮)更新, 读路径 get() 不碰 —— 所以跨请求读到
+        的是"上一轮真正发生的时刻", 用来量 idle / 判定跨天 (reunion / 时间跳跃感知)。
+        """
+        return self._last_turn_at.get(key)
 
     def pop(self, key: str) -> list[ChatMessage] | None:
         """删除会话（内存 + 盘上）。"""
         msgs = self._sessions.pop(key, None)
         self._last_access.pop(key, None)
+        self._last_turn_at.pop(key, None)
         self._dirty.discard(key)
         if self._persistence_enabled:
             self._delete_file(key)
@@ -133,15 +153,18 @@ class SessionCache:
             if not isinstance(key, str) or not isinstance(messages, list):
                 continue
             last_access = float(data.get("last_access") or path.stat().st_mtime)
+            # 旧文件没 last_turn → 退回 last_access(对老数据已是最好的"上轮时刻"估计)。
+            last_turn = float(data.get("last_turn") or last_access)
             cleaned: list[ChatMessage] = []
             for item in messages:
                 if isinstance(item, dict) and "role" in item and "content" in item:
                     cleaned.append({"role": str(item["role"]), "content": item["content"]})
-            entries.append((last_access, key, cleaned))
+            entries.append((last_access, last_turn, key, cleaned))
         entries.sort(key=lambda x: x[0])
-        for last_access, key, messages in entries:
+        for last_access, last_turn, key, messages in entries:
             self._sessions[key] = messages
             self._last_access[key] = last_access
+            self._last_turn_at[key] = last_turn
         self._evict_lru()
         return len(self._sessions)
 
@@ -176,6 +199,7 @@ class SessionCache:
         while len(self._sessions) > self._max_sessions:
             oldest_key, _ = self._sessions.popitem(last=False)
             self._last_access.pop(oldest_key, None)
+            self._last_turn_at.pop(oldest_key, None)
             self._dirty.discard(oldest_key)
             if self._persistence_enabled:
                 self._delete_file(oldest_key)
@@ -194,6 +218,7 @@ class SessionCache:
             "key": key,
             "messages": messages,
             "last_access": self._last_access.get(key, time.time()),
+            "last_turn": self._last_turn_at.get(key, self._last_access.get(key, time.time())),
             "saved_at": time.time(),
         }
         try:

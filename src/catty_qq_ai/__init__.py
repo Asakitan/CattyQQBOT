@@ -10387,6 +10387,31 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     _unified_text = "【NLU 综合提示】" + " | ".join(_unified_hints)
                     _unified_note = AuthorNote(content=_unified_text, depth=2)
                     messages = inject_author_note(messages, _unified_note)
+
+                # 主人 2026-05-29: 跨天感知 — 上一轮对话跟现在跨了日历天就提示"新的一天",
+                # 别无缝续昨天的剧情(私聊沉浸 RP 会把昨晚睡前场景演到第二天下午)。
+                # 用 last_turn_at(只在一轮写回时更新, 读路径 get() 不污染)而不是
+                # last_access_at(被 LRU 刷新顶到 now, idle 永远≈0 → 这也是 reunion 失效的根因)。
+                try:
+                    from .time_awareness import build_day_gap_note
+                    _prev_turn_at = _get_session_cache().last_turn_at(history_key)
+                    _is_private_an = not isinstance(event, GroupMessageEvent)
+                    _day_gap_text = build_day_gap_note(
+                        _prev_turn_at,
+                        is_private=_is_private_an,
+                        is_owner=_user_is_owner,
+                        user_display=_user_real_display,
+                    )
+                    if _day_gap_text:
+                        messages = inject_author_note(
+                            messages, AuthorNote(content=_day_gap_text, depth=1),
+                        )
+                        logger.info(
+                            f"day_gap note injected: scope={history_key} "
+                            f"private={_is_private_an} prev_turn_at={_prev_turn_at}"
+                        )
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"day_gap note inject failed (non-fatal): {exc}")
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"author_note inject failed (non-fatal): {exc}")
         # 「ToolContext 携带图片」可见性 hint:tool_ctx.input_image_urls / recent_image_urls
