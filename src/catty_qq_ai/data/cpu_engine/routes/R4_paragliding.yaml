@@ -1,0 +1,207 @@
+# 滑翔伞 / 风筝冲浪 / 风筝飞行 routes (S6 R196 NLU 节点扩充, 第十九周期 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 Q7 flight_sim 区分: 这里专注真实空中运动.
+
+- name: pg_intro_001
+  intent: question
+  keywords: [推荐滑翔伞, 推荐 paragliding, 推荐 paraglide, 推荐滑翔伞入门, 笨猫滑翔伞]
+  utterances:
+    - 推荐滑翔伞
+    - 推荐 paragliding
+    - 推荐 paraglide
+    - 推荐滑翔伞入门
+    - 笨猫滑翔伞
+  responses:
+    - "嗷呜～{user_addr}滑翔伞 - 极致自由空中运动ฅฅ"
+    - "(尾巴翘) 双人 / 单人"
+    - "{user_addr}风 + 山 + 气流"
+    - "(挺胸) 笨猫推荐: 第一次双人体验!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pg_brand_001
+  intent: question
+  keywords: [推荐滑翔伞品牌, 推荐 Ozone, 推荐 Advance, 推荐 Niviuk, 笨猫滑翔伞品牌]
+  utterances:
+    - 推荐滑翔伞品牌
+    - 推荐 Ozone
+    - 推荐 Advance
+    - 推荐 Niviuk
+    - 笨猫滑翔伞品牌
+  responses:
+    - "嗷呜～{user_addr}Ozone - 法国主流ฅฅ"
+    - "(尾巴翘) Advance / Niviuk - 瑞士法国"
+    - "{user_addr}Gin / Skywalk - 主流品牌"
+    - "(挺胸) 笨猫推荐: Ozone Buzz 入门!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pg_grade_001
+  intent: question
+  keywords: [推荐滑翔伞等级, 推荐 EN-A, 推荐 EN-B, 推荐 EN-D, 笨猫滑翔伞等级]
+  utterances:
+    - 推荐滑翔伞等级
+    - 推荐 EN-A
+    - 推荐 EN-B
+    - 推荐 EN-D
+    - 笨猫滑翔伞等级
+  responses:
+    - "嗷呜～{user_addr}EN-A - 新手最稳ฅฅ"
+    - "(尾巴翘) EN-B - 中级 / 主流"
+    - "{user_addr}EN-C / D - 高级竞技"
+    - "(挺胸) 笨猫推荐: 新手 EN-A 起!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pg_destination_001
+  intent: question
+  keywords: [推荐滑翔伞地点, 推荐林芝滑翔伞, 推荐马拉尔, 推荐安纳普尔纳, 笨猫滑翔伞地点]
+  utterances:
+    - 推荐滑翔伞地点
+    - 推荐林芝滑翔伞
+    - 推荐马拉尔
+    - 推荐安纳普尔纳
+    - 笨猫滑翔伞地点
+  responses:
+    - "嗷呜～{user_addr}林芝 / 大理 - 国内首选ฅฅ"
+    - "(尾巴翘) 阿尔卑斯 / Annapurna"
+    - "{user_addr}土耳其 Olüdeniz / 巴厘岛"
+    - "(挺胸) 笨猫推荐: 林芝春季最美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pg_safety_001
+  intent: question
+  keywords: [推荐滑翔伞安全, 推荐应急伞, 推荐头盔, 推荐 GPS 滑翔伞, 笨猫滑翔伞安全]
+  utterances:
+    - 推荐滑翔伞安全
+    - 推荐应急伞
+    - 推荐头盔
+    - 推荐 GPS 滑翔伞
+    - 笨猫滑翔伞安全
+  responses:
+    - "嗷呜～{user_addr}应急伞 + 头盔 + 护具ฅฅ"
+    - "(尾巴翘) Vario - 高度仪"
+    - "{user_addr}对讲机 / SPOT 定位"
+    - "(挺胸) 笨猫的提醒: 风险高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pg_kite_001
+  intent: question
+  keywords: [推荐风筝冲浪, 推荐 kitesurfing, 推荐 kiteboard, 推荐风筝冲浪装备, 笨猫风筝冲浪]
+  utterances:
+    - 推荐风筝冲浪
+    - 推荐 kitesurfing
+    - 推荐 kiteboard
+    - 推荐风筝冲浪装备
+    - 笨猫风筝冲浪
+  responses:
+    - "嗷呜～{user_addr}风筝 + 板 + 风 = 飞翔ฅฅ"
+    - "(尾巴翘) Cabrinha / Naish - 主流"
+    - "{user_addr}双线 / 四线风筝"
+    - "(挺胸) 笨猫推荐: 找教练学!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pg_wing_001
+  intent: question
+  keywords: [推荐 Wing Foil, 推荐冲浪翼, 推荐 wing surfing, 推荐 hydrofoil, 笨猫 Wing Foil]
+  utterances:
+    - 推荐 Wing Foil
+    - 推荐冲浪翼
+    - 推荐 wing surfing
+    - 推荐 hydrofoil
+    - 笨猫 Wing Foil
+  responses:
+    - "嗷呜～{user_addr}Wing Foil - 当下最火新潮ฅฅ"
+    - "(尾巴翘) Duotone / North - 主流"
+    - "{user_addr}水翼 + 充气 wing"
+    - "(挺胸) 笨猫推荐: Wing 学习快!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pg_kite_spot_001
+  intent: question
+  keywords: [推荐风筝冲浪地点, 推荐巴厘岛 kite, 推荐越南 kite, 推荐三亚 kite, 笨猫风筝冲浪地点]
+  utterances:
+    - 推荐风筝冲浪地点
+    - 推荐巴厘岛 kite
+    - 推荐越南 kite
+    - 推荐三亚 kite
+    - 笨猫风筝冲浪地点
+  responses:
+    - "嗷呜～{user_addr}越南 Mui Ne - 亚洲圣地ฅฅ"
+    - "(尾巴翘) 巴厘岛 / 菲律宾"
+    - "{user_addr}国内: 三亚 / 北海"
+    - "(挺胸) 笨猫推荐: Mui Ne 风稳!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pg_balloon_001
+  intent: question
+  keywords: [推荐热气球, 推荐 hot air balloon, 推荐卡帕多奇亚, 推荐土耳其热气球, 笨猫热气球]
+  utterances:
+    - 推荐热气球
+    - 推荐 hot air balloon
+    - 推荐卡帕多奇亚
+    - 推荐土耳其热气球
+    - 笨猫热气球
+  responses:
+    - "嗷呜～{user_addr}土耳其卡帕多奇亚 - 圣地ฅฅ"
+    - "(尾巴翘) 美国阿尔伯克基"
+    - "{user_addr}三晋 / 美国 - 飞行节"
+    - "(挺胸) 笨猫推荐: 卡帕日出热气球!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pg_skydive_001
+  intent: question
+  keywords: [推荐跳伞, 推荐 skydiving, 推荐高空跳伞, 推荐 AFF 跳伞证, 笨猫跳伞]
+  utterances:
+    - 推荐跳伞
+    - 推荐 skydiving
+    - 推荐高空跳伞
+    - 推荐 AFF 跳伞证
+    - 笨猫跳伞
+  responses:
+    - "嗷呜～{user_addr}AFF - 跳伞证书课程ฅฅ"
+    - "(尾巴翘) USPA / 国际通用"
+    - "{user_addr}双人体验 / 单飞证"
+    - "(挺胸) 笨猫推荐: 双人初体验!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pg_basejump_001
+  intent: question
+  keywords: [推荐 BASE jump, 推荐定点跳伞, 推荐 wingsuit, 推荐翼装飞行, 笨猫 BASE]
+  utterances:
+    - 推荐 BASE jump
+    - 推荐定点跳伞
+    - 推荐 wingsuit
+    - 推荐翼装飞行
+    - 笨猫 BASE
+  responses:
+    - "嗷呜～{user_addr}BASE - 极限定点跳伞ฅฅ"
+    - "(尾巴翘) Wingsuit - 翼装飞行"
+    - "{user_addr}极度危险 / 死亡率高"
+    - "(挺胸) 笨猫的提醒: 这是极限运动!"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: pg_gear_001
+  intent: question
+  keywords: [推荐滑翔伞 GPS, 推荐 Flymaster, 推荐 Naviter Oudie, 推荐高度计, 笨猫 vario]
+  utterances:
+    - 推荐滑翔伞 GPS
+    - 推荐 Flymaster
+    - 推荐 Naviter Oudie
+    - 推荐高度计
+    - 笨猫 vario
+  responses:
+    - "嗷呜～{user_addr}Flymaster / Skybean - varioฅฅ"
+    - "(尾巴翘) Naviter Oudie / Sirius"
+    - "{user_addr}XCSoar - 安卓 app"
+    - "(挺胸) 笨猫推荐: 找热气流必备!"
+  cooldown_seconds: 60
+  weight: 0.6

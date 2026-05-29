@@ -1,0 +1,207 @@
+# SUP 桨板 / 皮划艇 / Kayak routes (S6 R195 NLU 节点扩充, 第十九周期 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 P8 diving_surfing 区分: 这里专注桨类水上活动.
+
+- name: sp_sup_intro_001
+  intent: question
+  keywords: [推荐 SUP 桨板, 推荐站立桨板, 推荐 paddle board, 推荐 SUP 入门, 笨猫 SUP]
+  utterances:
+    - 推荐 SUP 桨板
+    - 推荐站立桨板
+    - 推荐 paddle board
+    - 推荐 SUP 入门
+    - 笨猫 SUP
+  responses:
+    - "嗷呜～{user_addr}SUP - 站立桨板 / 入门容易ฅฅ"
+    - "(尾巴翘) 充气板 / 硬板"
+    - "{user_addr}10-12 尺 - 通用"
+    - "(挺胸) 笨猫推荐: 充气板入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_sup_brand_001
+  intent: question
+  keywords: [推荐 SUP 品牌, 推荐 Red Paddle, 推荐 Starboard, 推荐 BOTE, 笨猫 SUP 品牌]
+  utterances:
+    - 推荐 SUP 品牌
+    - 推荐 Red Paddle
+    - 推荐 Starboard
+    - 推荐 BOTE
+    - 笨猫 SUP 品牌
+  responses:
+    - "嗷呜～{user_addr}Red Paddle - 充气板顶级ฅฅ"
+    - "(尾巴翘) Starboard / BOTE / Naish"
+    - "{user_addr}国产: 迪卡侬 / 探路者"
+    - "(挺胸) 笨猫推荐: 入门迪卡侬!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_paddle_001
+  intent: question
+  keywords: [推荐桨, 推荐 SUP 桨, 推荐碳纤桨, 推荐桨长度, 笨猫桨]
+  utterances:
+    - 推荐桨
+    - 推荐 SUP 桨
+    - 推荐碳纤桨
+    - 推荐桨长度
+    - 笨猫桨
+  responses:
+    - "嗷呜～{user_addr}碳纤桨 - 轻便高端ฅฅ"
+    - "(尾巴翘) 玻钢 / 铝合金 - 入门"
+    - "{user_addr}长度 = 身高 + 15-25cm"
+    - "(挺胸) 笨猫推荐: 高端用碳纤维!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sp_kayak_001
+  intent: question
+  keywords: [推荐皮划艇, 推荐 kayak, 推荐独木舟, 推荐皮艇, 笨猫皮划艇]
+  utterances:
+    - 推荐皮划艇
+    - 推荐 kayak
+    - 推荐独木舟
+    - 推荐皮艇
+    - 笨猫皮划艇
+  responses:
+    - "嗷呜～{user_addr}皮艇 (closed) - 漂流 / 海洋ฅฅ"
+    - "(尾巴翘) 划艇 (open) - 平稳"
+    - "{user_addr}充气艇 / 折叠艇"
+    - "(挺胸) 笨猫推荐: 入门坐式划艇!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_kayak_brand_001
+  intent: question
+  keywords: [推荐 kayak 品牌, 推荐 Wilderness Systems, 推荐 Hobie, 推荐 Pelican, 笨猫皮划艇品牌]
+  utterances:
+    - 推荐 kayak 品牌
+    - 推荐 Wilderness Systems
+    - 推荐 Hobie
+    - 推荐 Pelican
+    - 笨猫皮划艇品牌
+  responses:
+    - "嗷呜～{user_addr}Hobie - 脚踏式划艇神ฅฅ"
+    - "(尾巴翘) Wilderness Systems / Old Town"
+    - "{user_addr}Pelican / Sun Dolphin - 性价比"
+    - "(挺胸) 笨猫推荐: Hobie 钓鱼神器!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sp_yoga_001
+  intent: question
+  keywords: [推荐 SUP 瑜伽, 推荐桨板瑜伽, 推荐水上瑜伽, 推荐 SUP yoga, 笨猫 SUP 瑜伽]
+  utterances:
+    - 推荐 SUP 瑜伽
+    - 推荐桨板瑜伽
+    - 推荐水上瑜伽
+    - 推荐 SUP yoga
+    - 笨猫 SUP 瑜伽
+  responses:
+    - "嗷呜～{user_addr}SUP 瑜伽 - 平衡 + 自然ฅฅ"
+    - "(尾巴翘) 宽板 - 12 尺 + 32 寸"
+    - "{user_addr}静水 + 防滑垫"
+    - "(挺胸) 笨猫推荐: 平衡练核心!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_safety_001
+  intent: question
+  keywords: [推荐桨板安全, 推荐救生衣, 推荐脚绳, 推荐桨板防溺, 笨猫桨板安全]
+  utterances:
+    - 推荐桨板安全
+    - 推荐救生衣
+    - 推荐脚绳
+    - 推荐桨板防溺
+    - 笨猫桨板安全
+  responses:
+    - "嗷呜～{user_addr}救生衣 + 脚绳 必备ฅฅ"
+    - "(尾巴翘) 离岸风警惕"
+    - "{user_addr}观察天气 + 队友陪伴"
+    - "(挺胸) 笨猫的提醒: 安全第一!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_race_001
+  intent: question
+  keywords: [推荐桨板比赛, 推荐 SUP race, 推荐马拉松桨板, 推荐 SUP world tour, 笨猫桨板比赛]
+  utterances:
+    - 推荐桨板比赛
+    - 推荐 SUP race
+    - 推荐马拉松桨板
+    - 推荐 SUP world tour
+    - 笨猫桨板比赛
+  responses:
+    - "嗷呜～{user_addr}APP World Tour - 顶级 SUPฅฅ"
+    - "(尾巴翘) Pacific Paddle / Carolina"
+    - "{user_addr}国内 SUP 公开赛"
+    - "(挺胸) 笨猫推荐: 看顶级 racer!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sp_destination_001
+  intent: question
+  keywords: [推荐桨板地点, 推荐三亚 SUP, 推荐海岛 SUP, 推荐桂林漓江, 笨猫桨板地点]
+  utterances:
+    - 推荐桨板地点
+    - 推荐三亚 SUP
+    - 推荐海岛 SUP
+    - 推荐桂林漓江
+    - 笨猫桨板地点
+  responses:
+    - "嗷呜～{user_addr}三亚 / 厦门 / 青岛海湾ฅฅ"
+    - "(尾巴翘) 漓江 / 千岛湖 - 静水"
+    - "{user_addr}巴厘岛 / 普吉岛 / 关岛"
+    - "(挺胸) 笨猫推荐: 静水入门 / 海上进阶!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_white_water_001
+  intent: question
+  keywords: [推荐激流皮划艇, 推荐 white water, 推荐漂流, 推荐 Eskimo roll, 笨猫激流]
+  utterances:
+    - 推荐激流皮划艇
+    - 推荐 white water
+    - 推荐漂流
+    - 推荐 Eskimo roll
+    - 笨猫激流
+  responses:
+    - "嗷呜～{user_addr}激流分级 I-VI ฅฅ"
+    - "(尾巴翘) 入门 Class I-II"
+    - "{user_addr}Eskimo roll - 必学技"
+    - "(挺胸) 笨猫的提醒: 必有教练!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sp_canoe_001
+  intent: question
+  keywords: [推荐独木舟, 推荐 Canadian canoe, 推荐 canoe trip, 推荐 portage, 笨猫独木舟]
+  utterances:
+    - 推荐独木舟
+    - 推荐 Canadian canoe
+    - 推荐 canoe trip
+    - 推荐 portage
+    - 笨猫独木舟
+  responses:
+    - "嗷呜～{user_addr}加拿大独木舟 - 经典ฅฅ"
+    - "(尾巴翘) Algonquin Park 北美圣地"
+    - "{user_addr}双人 / 装备多 / 长途"
+    - "(挺胸) 笨猫推荐: 北美 canoe trip 一生一次!"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: sp_dragon_boat_001
+  intent: question
+  keywords: [推荐龙舟, 推荐赛艇, 推荐 rowing, 推荐皮艇赛艇, 笨猫龙舟]
+  utterances:
+    - 推荐龙舟
+    - 推荐赛艇
+    - 推荐 rowing
+    - 推荐皮艇赛艇
+    - 笨猫龙舟
+  responses:
+    - "嗷呜～{user_addr}龙舟 - 中国传统团体ฅฅ"
+    - "(尾巴翘) 端午节标志"
+    - "{user_addr}赛艇 - 单人 / 双人 / 八人"
+    - "(挺胸) 笨猫推荐: 龙舟集体感强!"
+  cooldown_seconds: 60
+  weight: 0.7

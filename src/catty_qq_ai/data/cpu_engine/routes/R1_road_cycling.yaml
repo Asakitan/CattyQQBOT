@@ -1,0 +1,207 @@
+# 公路自行车 / 山地车 / 自行车装备 / 大组赛 routes (S6 R193 NLU 节点扩充, 第十九周期 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 G2 car_racing 区分: 这里专注自行车运动.
+
+- name: rc_brand_road_001
+  intent: question
+  keywords: [推荐公路车, 推荐 Specialized, 推荐 Trek, 推荐 Cervelo, 笨猫公路车]
+  utterances:
+    - 推荐公路车
+    - 推荐 Specialized
+    - 推荐 Trek
+    - 推荐 Cervelo
+    - 笨猫公路车
+  responses:
+    - "嗷呜～{user_addr}Specialized / Trek - 美系顶ฅฅ"
+    - "(尾巴翘) Cervélo / Pinarello - 意系"
+    - "{user_addr}Canyon - 网购德系"
+    - "(挺胸) 笨猫推荐: 入门 Specialized Allez!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_brand_mtb_001
+  intent: question
+  keywords: [推荐山地车, 推荐 Santa Cruz, 推荐 Yeti, 推荐 Norco, 笨猫山地车]
+  utterances:
+    - 推荐山地车
+    - 推荐 Santa Cruz
+    - 推荐 Yeti
+    - 推荐 Norco
+    - 笨猫山地车
+  responses:
+    - "嗷呜～{user_addr}Santa Cruz / Yeti - 高端ฅฅ"
+    - "(尾巴翘) Trek / Specialized - 主流"
+    - "{user_addr}Marin / Giant - 入门"
+    - "(挺胸) 笨猫推荐: 山地新手 Giant Talon!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rc_frame_material_001
+  intent: question
+  keywords: [推荐车架材质, 推荐碳纤车架, 推荐铝合金车架, 推荐钛合金车架, 笨猫车架]
+  utterances:
+    - 推荐车架材质
+    - 推荐碳纤车架
+    - 推荐铝合金车架
+    - 推荐钛合金车架
+    - 笨猫车架
+  responses:
+    - "嗷呜～{user_addr}碳纤维 - 顶级轻量ฅฅ"
+    - "(尾巴翘) 铝合金 - 性价比"
+    - "{user_addr}钛 / 钢架 - 复古信仰"
+    - "(挺胸) 笨猫推荐: 入门铝合金!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rc_group_001
+  intent: question
+  keywords: [推荐套件, 推荐 Shimano 105, 推荐 SRAM Rival, 推荐 Campagnolo, 笨猫套件]
+  utterances:
+    - 推荐套件
+    - 推荐 Shimano 105
+    - 推荐 SRAM Rival
+    - 推荐 Campagnolo
+    - 笨猫套件
+  responses:
+    - "嗷呜～{user_addr}Shimano: 105 / Ultegra / Dura-Aceฅฅ"
+    - "(尾巴翘) SRAM: Rival / Force / Red"
+    - "{user_addr}Campagnolo - 意大利信仰"
+    - "(挺胸) 笨猫推荐: 105 是黄金!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_wheel_001
+  intent: question
+  keywords: [推荐轮组, 推荐 Zipp, 推荐 Mavic, 推荐 ENVE, 笨猫轮组]
+  utterances:
+    - 推荐轮组
+    - 推荐 Zipp
+    - 推荐 Mavic
+    - 推荐 ENVE
+    - 笨猫轮组
+  responses:
+    - "嗷呜～{user_addr}Zipp 303 / 404 - 经典爬坡冲刺ฅฅ"
+    - "(尾巴翘) Mavic Cosmic - 法国"
+    - "{user_addr}ENVE / Roval - 高端"
+    - "(挺胸) 笨猫推荐: 升级轮组提升大!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rc_helmet_001
+  intent: question
+  keywords: [推荐自行车头盔, 推荐 Giro, 推荐 KASK, 推荐 POC 头盔, 笨猫骑行头盔]
+  utterances:
+    - 推荐自行车头盔
+    - 推荐 Giro
+    - 推荐 KASK
+    - 推荐 POC 头盔
+    - 笨猫骑行头盔
+  responses:
+    - "嗷呜～{user_addr}Giro / KASK - 公路头盔ฅฅ"
+    - "(尾巴翘) POC - 安全设计"
+    - "{user_addr}Bell / Bontrager - 性价比"
+    - "(挺胸) 笨猫的提醒: 头盔必戴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_apparel_001
+  intent: question
+  keywords: [推荐骑行服, 推荐 Castelli, 推荐 Rapha, 推荐骑行裤, 笨猫骑行服]
+  utterances:
+    - 推荐骑行服
+    - 推荐 Castelli
+    - 推荐 Rapha
+    - 推荐骑行裤
+    - 笨猫骑行服
+  responses:
+    - "嗷呜～{user_addr}Rapha - 高端骑行潮牌ฅฅ"
+    - "(尾巴翘) Castelli / Assos - 顶级"
+    - "{user_addr}Pearl Izumi - 性价比"
+    - "(挺胸) 笨猫推荐: 骑行裤垫舒服!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rc_shoes_001
+  intent: question
+  keywords: [推荐骑行鞋, 推荐 Sidi, 推荐 Shimano 骑行鞋, 推荐 Lake, 笨猫骑行鞋]
+  utterances:
+    - 推荐骑行鞋
+    - 推荐 Sidi
+    - 推荐 Shimano 骑行鞋
+    - 推荐 Lake
+    - 笨猫骑行鞋
+  responses:
+    - "嗷呜～{user_addr}Sidi - 意大利骑行鞋之神ฅฅ"
+    - "(尾巴翘) Shimano S-Phyre / Specialized S-Works"
+    - "{user_addr}Lake / Fizik - 高端"
+    - "(挺胸) 笨猫推荐: Sidi 圈内首选!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rc_powermeter_001
+  intent: question
+  keywords: [推荐功率计, 推荐 Garmin Vector, 推荐 Stages, 推荐 4iiii, 笨猫功率计]
+  utterances:
+    - 推荐功率计
+    - 推荐 Garmin Vector
+    - 推荐 Stages
+    - 推荐 4iiii
+    - 笨猫功率计
+  responses:
+    - "嗷呜～{user_addr}Garmin Rally - 双面功率ฅฅ"
+    - "(尾巴翘) Stages / 4iiii - 单面"
+    - "{user_addr}Quarq DZero - 牙盘式"
+    - "(挺胸) 笨猫推荐: 训练必备!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rc_grand_tour_001
+  intent: question
+  keywords: [推荐环法, 推荐 Tour de France, 推荐 Giro d'Italia, 推荐三大环赛, 笨猫环法]
+  utterances:
+    - 推荐环法
+    - 推荐 Tour de France
+    - 推荐 Giro d'Italia
+    - 推荐三大环赛
+    - 笨猫环法
+  responses:
+    - "嗷呜～{user_addr}环法 - 自行车赛皇冠ฅฅ"
+    - "(尾巴翘) 环意 / 环西"
+    - "{user_addr}世锦赛 / 巴黎鲁贝"
+    - "(挺胸) 笨猫推荐: 7 月环法必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_app_001
+  intent: question
+  keywords: [推荐 Strava, 推荐 Zwift, 推荐自行车 app, 推荐骑行训练 app, 笨猫 Strava]
+  utterances:
+    - 推荐 Strava
+    - 推荐 Zwift
+    - 推荐自行车 app
+    - 推荐骑行训练 app
+    - 笨猫 Strava
+  responses:
+    - "嗷呜～{user_addr}Strava - 骑行社交记录ฅฅ"
+    - "(尾巴翘) Zwift - 室内 + VR 骑行"
+    - "{user_addr}行者 / Wahoo Fitness"
+    - "(挺胸) 笨猫推荐: Zwift 冬天解闷!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_route_001
+  intent: question
+  keywords: [推荐骑行路线, 推荐 318 国道, 推荐青海湖骑行, 推荐西藏骑行, 笨猫骑行路线]
+  utterances:
+    - 推荐骑行路线
+    - 推荐 318 国道
+    - 推荐青海湖骑行
+    - 推荐西藏骑行
+    - 笨猫骑行路线
+  responses:
+    - "嗷呜～{user_addr}318 川藏线 - 骑行圣地ฅฅ"
+    - "(尾巴翘) 青海湖 / 环大理"
+    - "{user_addr}台 9 / 北海道 - 海外"
+    - "(挺胸) 笨猫推荐: 318 一生一次!"
+  cooldown_seconds: 60
+  weight: 1.0

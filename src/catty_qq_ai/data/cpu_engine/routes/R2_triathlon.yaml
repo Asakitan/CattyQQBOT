@@ -1,0 +1,207 @@
+# 铁人三项 / 游泳 / IRONMAN routes (S6 R194 NLU 节点扩充, 第十九周期 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 P6 marathon / R1 road_cycling 区分: 这里专注铁三 + 游泳.
+
+- name: tri_distance_001
+  intent: question
+  keywords: [推荐铁三距离, 推荐奥运铁三, 推荐 IRONMAN, 推荐 70.3, 笨猫铁三]
+  utterances:
+    - 推荐铁三距离
+    - 推荐奥运铁三
+    - 推荐 IRONMAN
+    - 推荐 70.3
+    - 笨猫铁三
+  responses:
+    - "嗷呜～{user_addr}奥运: 1.5K 游 + 40K 骑 + 10K 跑ฅฅ"
+    - "(尾巴翘) 70.3 半铁 / 226 大铁"
+    - "{user_addr}Sprint 短距离入门"
+    - "(挺胸) 笨猫推荐: Sprint 起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tri_swim_001
+  intent: question
+  keywords: [推荐游泳, 推荐自由泳, 推荐开放水域, 推荐 TI 自由泳, 笨猫游泳]
+  utterances:
+    - 推荐游泳
+    - 推荐自由泳
+    - 推荐开放水域
+    - 推荐 TI 自由泳
+    - 笨猫游泳
+  responses:
+    - "嗷呜～{user_addr}自由泳 - 铁三主要泳姿ฅฅ"
+    - "(尾巴翘) TI (Total Immersion) - 高效"
+    - "{user_addr}开放水域 - 海/湖训练"
+    - "(挺胸) 笨猫推荐: TI 自由泳入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tri_wetsuit_001
+  intent: question
+  keywords: [推荐铁三服, 推荐 wetsuit, 推荐 Orca, 推荐 ROKA, 笨猫铁三服]
+  utterances:
+    - 推荐铁三服
+    - 推荐 wetsuit
+    - 推荐 Orca
+    - 推荐 ROKA
+    - 笨猫铁三服
+  responses:
+    - "嗷呜～{user_addr}Orca / ROKA / blueseventy - 顶ฅฅ"
+    - "(尾巴翘) 2XU - 性价比"
+    - "{user_addr}厚度 3-5mm / 浮力 + 保暖"
+    - "(挺胸) 笨猫推荐: Orca Predator 神器!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tri_bike_001
+  intent: question
+  keywords: [推荐铁三车, 推荐 TT 车, 推荐 Cervélo P5, 推荐 Trek Speed Concept, 笨猫铁三车]
+  utterances:
+    - 推荐铁三车
+    - 推荐 TT 车
+    - 推荐 Cervélo P5
+    - 推荐 Trek Speed Concept
+    - 笨猫铁三车
+  responses:
+    - "嗷呜～{user_addr}Cervélo P5 / P-Series - 铁三经典ฅฅ"
+    - "(尾巴翘) Trek Speed Concept / Specialized Shiv"
+    - "{user_addr}TT 把 / 气动盘"
+    - "(挺胸) 笨猫推荐: Cervélo 铁三神!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tri_swim_gear_001
+  intent: question
+  keywords: [推荐游泳镜, 推荐 Speedo, 推荐 TYR, 推荐 Arena, 笨猫游泳镜]
+  utterances:
+    - 推荐游泳镜
+    - 推荐 Speedo
+    - 推荐 TYR
+    - 推荐 Arena
+    - 笨猫游泳镜
+  responses:
+    - "嗷呜～{user_addr}TYR / Speedo Fastskin - 比赛ฅฅ"
+    - "(尾巴翘) Arena Cobra / 速干"
+    - "{user_addr}开放水域 + 防雾 / 度数镜"
+    - "(挺胸) 笨猫推荐: ROKA R1 顶级!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: tri_running_001
+  intent: question
+  keywords: [推荐铁三跑步, 推荐配速控制, 推荐 brick training, 推荐转换练习, 笨猫铁三跑]
+  utterances:
+    - 推荐铁三跑步
+    - 推荐配速控制
+    - 推荐 brick training
+    - 推荐转换练习
+    - 笨猫铁三跑
+  responses:
+    - "嗷呜～{user_addr}Brick - 骑完接跑 / 适应换项ฅฅ"
+    - "(尾巴翘) 起跑 5km 别冲 / 慢起"
+    - "{user_addr}转换区: 鞋 / 帽 / 号码布"
+    - "(挺胸) 笨猫推荐: brick 训练关键!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tri_train_plan_001
+  intent: question
+  keywords: [推荐铁三训练, 推荐 Joe Friel, 推荐 80/20 训练, 推荐 IRONMAN 训练, 笨猫铁三训练]
+  utterances:
+    - 推荐铁三训练
+    - 推荐 Joe Friel
+    - 推荐 80/20 训练
+    - 推荐 IRONMAN 训练
+    - 笨猫铁三训练
+  responses:
+    - "嗷呜～{user_addr}Joe Friel 铁三圣经ฅฅ"
+    - "(尾巴翘) 80/20 - 慢 80% / 快 20%"
+    - "{user_addr}TrainingPeaks - 训练 app"
+    - "(挺胸) 笨猫推荐: 长期计划 + 周期化!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tri_race_001
+  intent: question
+  keywords: [推荐 IRONMAN 比赛, 推荐 Kona, 推荐世锦赛, 推荐厦门 IRONMAN, 笨猫 IRONMAN 比赛]
+  utterances:
+    - 推荐 IRONMAN 比赛
+    - 推荐 Kona
+    - 推荐世锦赛
+    - 推荐厦门 IRONMAN
+    - 笨猫 IRONMAN 比赛
+  responses:
+    - "嗷呜～{user_addr}Kona - IRONMAN 世锦赛圣地ฅฅ"
+    - "(尾巴翘) 厦门 / 海口 - 国内"
+    - "{user_addr}尼斯 70.3 / 北海道 / 普吉"
+    - "(挺胸) 笨猫推荐: Kona 终极梦想!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tri_china_001
+  intent: question
+  keywords: [推荐国内铁三, 推荐青海湖铁三, 推荐厦门铁三, 推荐千岛湖, 笨猫国内铁三]
+  utterances:
+    - 推荐国内铁三
+    - 推荐青海湖铁三
+    - 推荐厦门铁三
+    - 推荐千岛湖
+    - 笨猫国内铁三
+  responses:
+    - "嗷呜～{user_addr}厦门 IRONMAN 70.3 - 国内首选ฅฅ"
+    - "(尾巴翘) 海口 IRONMAN / 青海湖"
+    - "{user_addr}千岛湖 / 大连"
+    - "(挺胸) 笨猫推荐: 厦门铁三体验好!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tri_nutrition_001
+  intent: question
+  keywords: [推荐铁三补给, 推荐能量棒, 推荐 Maurten, 推荐 Tailwind, 笨猫补给]
+  utterances:
+    - 推荐铁三补给
+    - 推荐能量棒
+    - 推荐 Maurten
+    - 推荐 Tailwind
+    - 笨猫补给
+  responses:
+    - "嗷呜～{user_addr}Maurten - 顶级凝胶饮料ฅฅ"
+    - "(尾巴翘) Tailwind - 全程饮料"
+    - "{user_addr}电解质盐丸 / 能量棒"
+    - "(挺胸) 笨猫推荐: 大铁靠补给!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tri_recovery_001
+  intent: question
+  keywords: [推荐恢复, 推荐冰浴, 推荐筋膜枪, 推荐 NormaTec, 笨猫恢复]
+  utterances:
+    - 推荐恢复
+    - 推荐冰浴
+    - 推荐筋膜枪
+    - 推荐 NormaTec
+    - 笨猫恢复
+  responses:
+    - "嗷呜～{user_addr}冰浴 / 冷水降炎症ฅฅ"
+    - "(尾巴翘) 筋膜枪 / 泡沫轴"
+    - "{user_addr}NormaTec 气压腿 - 神器"
+    - "(挺胸) 笨猫推荐: 睡眠最重要!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tri_pro_001
+  intent: question
+  keywords: [推荐铁三选手, 推荐 Jan Frodeno, 推荐 Daniela Ryf, 推荐 Patrick Lange, 笨猫铁三选手]
+  utterances:
+    - 推荐铁三选手
+    - 推荐 Jan Frodeno
+    - 推荐 Daniela Ryf
+    - 推荐 Patrick Lange
+    - 笨猫铁三选手
+  responses:
+    - "嗷呜～{user_addr}Jan Frodeno - 铁三传奇ฅฅ"
+    - "(尾巴翘) Daniela Ryf / Lucy Charles"
+    - "{user_addr}Patrick Lange / Gustav Iden"
+    - "(挺胸) 笨猫推荐: Frodeno 老大!"
+  cooldown_seconds: 60
+  weight: 0.7
