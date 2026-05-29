@@ -6650,7 +6650,10 @@ async def _cpu_engine_warmup_loop() -> None:
     except Exception as exc:  # noqa: BLE001
         logger.exception(f"[cpu_engine] startup warmup failed: {exc}")
 
-    # S5.6h: 预热 Ollama catnify (仅 mode=catnify 才需要)
+    # S5.6h: 预热 Ollama catnify + keep_alive=-1 永久锁定 (仅 mode=catnify 才需要)
+    # 主人 2026-05-30: 旧版用 OpenAI-compat /chat/completions 没有 keep_alive,
+    # Ollama 默认 5min idle 后 evict 模型 → 每次 Bot 重启都要 cold start 30-50s.
+    # 新版改用 Ollama 原生 /api/generate + keep_alive=-1, 一次加载永久锁 RAM.
     _l4_mode = str(getattr(config, "catty_cpu_engine_l4_mode", "") or "").lower()
     if _l4_mode != "catnify":
         return
@@ -6664,22 +6667,26 @@ async def _cpu_engine_warmup_loop() -> None:
         if not base_url or not model:
             logger.info("[cpu_engine.catnify_warmup] config missing, skip warmup")
             return
-        # 主人 2026-05-30: warmup 也要传 num_thread=4 限核, 否则 cold load 时 ollama 拉满全核
+        # 主人 2026-05-30: Ollama 原生 /api/generate + keep_alive=-1 (永久锁 RAM)
+        # num_thread=4 限核, 否则 cold load 时 ollama 拉满全核
         payload = {
             "model": model,
-            "messages": [{"role": "user", "content": "hi"}],
-            "temperature": 0,
-            "max_tokens": 1,
-            "options": {"num_thread": 4},
+            "prompt": "hi",
+            "stream": False,
+            "keep_alive": -1,
+            "options": {"num_thread": 4, "num_predict": 1},
         }
-        headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+        headers = {"Content-Type": "application/json"}
+        if api_key and api_key.lower() not in ("", "ollama"):
+            headers["Authorization"] = f"Bearer {api_key}"
         t0 = time.monotonic()
-        async with httpx.AsyncClient(timeout=60.0) as client:
-            resp = await client.post(f"{base_url}/chat/completions", json=payload, headers=headers)
+        async with httpx.AsyncClient(timeout=120.0) as client:  # 120s: cold load 可能 30-50s
+            resp = await client.post(f"{base_url}/api/generate", json=payload, headers=headers)
             resp.raise_for_status()
         elapsed_ms = (time.monotonic() - t0) * 1000.0
         logger.info(
-            f"[cpu_engine.catnify_warmup] ollama warmup OK model={model} latency_ms={elapsed_ms:.0f}"
+            f"[cpu_engine.catnify_warmup] ollama warmup OK model={model} "
+            f"keep_alive=-1 latency_ms={elapsed_ms:.0f}"
         )
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"[cpu_engine.catnify_warmup] ollama warmup failed (非致命): {exc}")
