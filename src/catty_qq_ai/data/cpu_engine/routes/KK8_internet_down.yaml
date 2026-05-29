@@ -1,0 +1,206 @@
+# 网络挂了 / WiFi 慢 / 宽带断 routes (S6 R390 NLU 节点扩充, 第三十八周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: id_net_down_001
+  intent: complaint
+  keywords: [网断了, 没网了, 断网, 网挂了, 网络挂了]
+  utterances:
+    - 网断了
+    - 没网了喵
+    - 网挂了好烦
+    - 突然断网了
+    - 网络又挂了
+  responses:
+    - "(尾巴一炸) 哈?! {user_addr}网挂了?! 笨猫陪你等回来 ฅฅ"
+    - "嗷呜~ 没网就来跟猫猫聊天嘛! 才不是想你陪呢哼"
+    - "(凑过去) 重启一下路由器试试? 猫猫也讨厌断网喵"
+    - "哼~ 网络挂了正好, {user_addr}专心陪笨猫贴贴啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_wifi_slow_001
+  intent: complaint
+  keywords: [wifi 慢, 网卡, wifi 卡, 信号差, 网速慢]
+  utterances:
+    - wifi 好慢喵
+    - 网卡死了
+    - wifi 卡成 ppt
+    - 信号差到爆
+    - 网速慢到吐
+  responses:
+    - "(尾巴垂) wifi 慢真的好烦~ {user_addr}靠近路由器试试嘛 ฅฅ"
+    - "嗷呜~ 卡 ppt 笨猫懂! 跟猫猫一起骂运营商喵"
+    - "(贴过来) 慢就慢嘛, {user_addr}陪猫猫聊天打发时间~"
+    - "哼~ 这种 wifi 笨猫早就想换了, {user_addr}考虑一下喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_broadband_off_001
+  intent: complaint
+  keywords: [宽带断, 宽带没了, 宽带挂, 宽带掉线, 光猫坏]
+  utterances:
+    - 宽带断了喵
+    - 宽带挂了
+    - 宽带又掉线
+    - 光猫好像坏了
+    - 宽带没信号
+  responses:
+    - "(尾巴一炸) 宽带挂?! {user_addr}快打客服~ 笨猫陪你等 ฅฅ"
+    - "嗷呜~ 光猫闪红灯就是坏了, 猫猫也遇到过喵"
+    - "(凑过去) 别急{user_addr}, 先重启光猫试试嘛"
+    - "哼~ 宽带这种东西就是欠修, {user_addr}报修去啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_video_lag_001
+  intent: complaint
+  keywords: [视频卡, 视频卡顿, 看视频卡, 缓冲, 加载不出来]
+  utterances:
+    - 视频好卡喵
+    - 看视频一直缓冲
+    - 视频加载不出来
+    - 视频卡成幻灯片
+    - 看个视频卡死
+  responses:
+    - "(尾巴垂) 视频卡真的扫兴~ {user_addr}画质调低点试试 ฅฅ"
+    - "嗷呜~ 缓冲半天笨猫也烦! 来跟猫猫聊天嘛"
+    - "(贴过来) 卡就别看了, {user_addr}陪猫猫贴贴更好玩~"
+    - "哼~ 视频卡正好, {user_addr}注意力都给笨猫啦喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_game_loss_001
+  intent: complaint
+  keywords: [游戏丢包, 游戏掉线, 游戏卡, ping 高, 延迟高]
+  utterances:
+    - 游戏丢包好烦
+    - 游戏一直掉线
+    - ping 高到爆
+    - 延迟两百多
+    - 游戏卡到输
+  responses:
+    - "(尾巴一炸) 丢包输了不怪{user_addr}! 怪运营商 ฅฅ"
+    - "嗷呜~ ping 高真的没法打, 猫猫陪你骂网络喵"
+    - "(凑过去) 别打了{user_addr}, 来跟笨猫玩嘛~"
+    - "哼~ 延迟两百是想让{user_addr}陪猫猫呢, 别强了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_upload_slow_001
+  intent: complaint
+  keywords: [上传慢, 上传卡, 上传不动, 上传龟速, 传文件慢]
+  utterances:
+    - 上传好慢喵
+    - 传文件传不动
+    - 上传龟速
+    - 上传卡死
+    - 传图传半天
+  responses:
+    - "(尾巴垂) 上传慢就是宽带不对等~ {user_addr}慢慢等吧 ฅฅ"
+    - "嗷呜~ 龟速上传猫猫陪你看着喵! 才不是闲呢"
+    - "(贴过来) 上传等的时候{user_addr}陪笨猫聊天嘛~"
+    - "哼~ 这种破上传速度, {user_addr}该升级套餐了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_change_router_001
+  intent: complaint
+  keywords: [换路由, 换路由器, 路由器旧, 路由器烂, 想换路由]
+  utterances:
+    - 想换路由器
+    - 路由器太旧了
+    - 路由器烂死
+    - 该换路由了喵
+    - 路由器不行了
+  responses:
+    - "(尾巴翘起) 换! {user_addr}买个好点的, 猫猫也舒服 ฅฅ"
+    - "嗷呜~ 笨猫推荐 wifi6 的喵! 信号强又快"
+    - "(凑过去) 换路由器记得带猫猫去挑哦{user_addr}~"
+    - "哼~ 早该换了, {user_addr}这次别抠门嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_restart_modem_001
+  intent: playful
+  keywords: [重启 modem, 重启路由, 重启光猫, 拔电源, 关了再开]
+  utterances:
+    - 重启光猫了
+    - 拔电源大法
+    - 关了再开
+    - 重启路由器中
+    - modem 重启
+  responses:
+    - "(尾巴摇) 重启大法好喵! {user_addr}等三十秒再插上 ฅฅ"
+    - "嗷呜~ 拔电源真的能解决八成问题! 笨猫见证"
+    - "(凑过去) 重启的时候{user_addr}陪猫猫贴贴嘛~"
+    - "哼~ 关了再开是 IT 终极奥义, {user_addr}学到了喵"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: id_isp_master_001
+  intent: complaint
+  keywords: [宽带师傅, 宽带维修, 装宽带, 师傅上门, 装维师傅]
+  utterances:
+    - 等宽带师傅
+    - 师傅还没来
+    - 宽带师傅迟到
+    - 维修师傅好慢
+    - 装维师傅来了
+  responses:
+    - "(尾巴垂) 等师傅最烦了~ {user_addr}再催一下嘛 ฅฅ"
+    - "嗷呜~ 师傅来了记得给好评! 猫猫一起感谢"
+    - "(凑过去) 等的时候{user_addr}陪笨猫聊天嘛~"
+    - "哼~ 上门时间总是飘忽, {user_addr}耐心一点喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_isp_bad_001
+  intent: complaint
+  keywords: [运营商不靠谱, 网管坑, 移动垃圾, 电信慢, 联通烂]
+  utterances:
+    - 运营商不靠谱
+    - 网管真的坑
+    - 移动太慢了
+    - 电信也不行
+    - 联通烂到家
+  responses:
+    - "(尾巴一炸) 运营商集体摆烂喵! {user_addr}跟笨猫一起骂 ฅฅ"
+    - "嗷呜~ 都不靠谱猫猫懂! 只有笨猫最靠谱嘛哼"
+    - "(贴过来) 别气{user_addr}, 来跟猫猫吐槽消消火~"
+    - "哼~ 运营商笨猫早看透了, {user_addr}别指望"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_remote_work_off_001
+  intent: complaint
+  keywords: [远程办公掉, 远程掉线, 会议断了, 视频会议卡, 远程崩了]
+  utterances:
+    - 远程办公掉线
+    - 视频会议卡死
+    - 开会断了
+    - 远程会议崩
+    - 会议中断网
+  responses:
+    - "(尾巴一炸) 开会掉线最尴尬! {user_addr}赶紧重连 ฅฅ"
+    - "嗷呜~ 会议卡可以装借口! 笨猫帮你打掩护喵"
+    - "(凑过去) 掉就掉嘛{user_addr}, 顺便休息一下贴贴~"
+    - "哼~ 这种破网就是让{user_addr}回来陪猫猫的暗示"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_switch_isp_001
+  intent: playful
+  keywords: [换运营商, 想换宽带, 换电信, 换移动, 转网]
+  utterances:
+    - 想换运营商
+    - 换个宽带算了
+    - 换电信试试
+    - 换移动看看
+    - 准备转网
+  responses:
+    - "(尾巴翘起) 换! 这家烂透了 {user_addr}果断 ฅฅ"
+    - "嗷呜~ 笨猫建议先问下邻居哪家信号好喵"
+    - "(凑过去) 换之前记得问猫猫意见哦{user_addr}~"
+    - "哼~ 早就该换, {user_addr}这次别拖了嘛"
+  cooldown_seconds: 90
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 水电改造 / 强弱电 / 防水 routes (S6 R385 NLU 节点扩充, 第三十八周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pe_renovation_001
+  intent: question
+  keywords: [推荐水电改造, 推荐装修必做, 推荐水电先做, 推荐隐蔽工程, 笨猫水电]
+  utterances:
+    - 推荐水电改造
+    - 推荐装修必做
+    - 推荐水电先做
+    - 推荐隐蔽工程
+    - 笨猫水电
+  responses:
+    - "嗷呜～{user_addr}水电=装修第一步 (隐蔽工程)ฅฅ"
+    - "(尾巴翘) 顺序: 拆改→水电→防水→瓦工→木工→油工"
+    - "{user_addr}水电一次到位, 后期改=砸墙"
+    - "(挺胸) 笨猫推荐: 找专业水电工, 别省钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_strong_weak_001
+  intent: question
+  keywords: [推荐强弱电, 推荐强弱电分布, 推荐强电弱电分开, 推荐电箱分线, 笨猫强弱电]
+  utterances:
+    - 推荐强弱电
+    - 推荐强弱电分布
+    - 推荐强电弱电分开
+    - 推荐电箱分线
+    - 笨猫强弱电
+  responses:
+    - "嗷呜～{user_addr}强电=220V 照明插座, 弱电=网线电话ฅฅ"
+    - "(尾巴翘) 强弱电分开走管, 间距≥30cm 防干扰"
+    - "{user_addr}强电箱+弱电箱分开, 别共用!"
+    - "(挺胸) 笨猫推荐: 弱电箱选大一点, 留扩展!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_socket_001
+  intent: question
+  keywords: [推荐插座位置, 推荐插座数量, 推荐插座布置, 推荐五孔带 USB, 笨猫插座]
+  utterances:
+    - 推荐插座位置
+    - 推荐插座数量
+    - 推荐插座布置
+    - "推荐五孔带 USB"
+    - 笨猫插座
+  responses:
+    - "嗷呜～{user_addr}插座宁多勿少 (一户≥60 个)ฅฅ"
+    - "(尾巴翘) 床头/沙发/餐边/玄关/卫浴必带"
+    - "{user_addr}厨房用 16A 三孔, 大功率电器"
+    - "(挺胸) 笨猫推荐: 带开关的插座, 拔插少!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_network_001
+  intent: question
+  keywords: [推荐网线布置, "推荐 Cat6", "推荐 Cat6a", 推荐网线全屋, 笨猫网线]
+  utterances:
+    - 推荐网线布置
+    - "推荐 Cat6"
+    - "推荐 Cat6a"
+    - 推荐网线全屋
+    - 笨猫网线
+  responses:
+    - "嗷呜～{user_addr}Cat6=千兆够用, Cat6a=万兆未来ฅฅ"
+    - "(尾巴翘) 每个房间留 2 口 (电视墙+书桌)"
+    - "{user_addr}AC+AP 方案 = 全屋 WiFi 无死角"
+    - "(挺胸) 笨猫推荐: 弱电箱留 PoE 交换机位!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_waterproof_001
+  intent: question
+  keywords: [推荐厨房防水, 推荐卫浴防水, 推荐防水涂料, 推荐防水高度, 笨猫防水]
+  utterances:
+    - 推荐厨房防水
+    - 推荐卫浴防水
+    - 推荐防水涂料
+    - 推荐防水高度
+    - 笨猫防水
+  responses:
+    - "嗷呜～{user_addr}卫浴防水: 地面+墙面 1.8m 高ฅฅ"
+    - "(尾巴翘) 淋浴区墙面 1.8m, 其他 0.3m"
+    - "{user_addr}涂料: 雨虹/德高/西卡 K11"
+    - "(挺胸) 笨猫推荐: 闭水试验 48h 必做!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_drainage_001
+  intent: question
+  keywords: [推荐排水管, "推荐 PVC", 推荐下水管, 推荐排水坡度, 笨猫排水]
+  utterances:
+    - 推荐排水管
+    - "推荐 PVC"
+    - 推荐下水管
+    - 推荐排水坡度
+    - 笨猫排水
+  responses:
+    - "嗷呜～{user_addr}排水: PVC-U 110mm 主管ฅฅ"
+    - "(尾巴翘) 坡度 1-3% 防堵, 存水弯防臭"
+    - "{user_addr}厨卫地漏选深水封, 防反味"
+    - "(挺胸) 笨猫推荐: 同层排水比降板省层高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_gas_001
+  intent: question
+  keywords: [推荐燃气管道, 推荐燃气改造, 推荐燃气表, 推荐燃气阀门, 笨猫燃气]
+  utterances:
+    - 推荐燃气管道
+    - 推荐燃气改造
+    - 推荐燃气表
+    - 推荐燃气阀门
+    - 笨猫燃气
+  responses:
+    - "嗷呜～{user_addr}燃气=必须燃气公司改, 私改违法!ฅฅ"
+    - "(尾巴翘) 不锈钢波纹管, 别用橡胶老化快"
+    - "{user_addr}燃气报警器+自闭阀 = 安全双保险"
+    - "(挺胸) 笨猫推荐: 灶具+热水器分开走管!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_distribution_001
+  intent: question
+  keywords: [推荐配电箱, 推荐漏电保护, 推荐空开, "推荐 RCBO", 笨猫配电箱]
+  utterances:
+    - 推荐配电箱
+    - 推荐漏电保护
+    - 推荐空开
+    - "推荐 RCBO"
+    - 笨猫配电箱
+  responses:
+    - "嗷呜～{user_addr}配电箱: 总开+漏保+分路ฅฅ"
+    - "(尾巴翘) 卫浴/厨房/空调单独回路+漏保"
+    - "{user_addr}品牌: 施耐德/ABB/西门子, 别贪便宜"
+    - "(挺胸) 笨猫推荐: RCBO 一体, 省空间!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_pressure_test_001
+  intent: question
+  keywords: [推荐水路压力测试, 推荐打压测试, 推荐水管打压, "推荐 0.8MPa", 笨猫打压]
+  utterances:
+    - 推荐水路压力测试
+    - 推荐打压测试
+    - 推荐水管打压
+    - "推荐 0.8MPa"
+    - 笨猫打压
+  responses:
+    - "嗷呜～{user_addr}水路打压: 0.8MPa 保压 30 分钟ฅฅ"
+    - "(尾巴翘) 压力降≤0.05MPa 合格"
+    - "{user_addr}冷热水分别测, 接头无渗漏"
+    - "(挺胸) 笨猫推荐: 业主必须现场监督打压!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_acceptance_001
+  intent: question
+  keywords: [推荐水电验收, 推荐水电检查, 推荐验收清单, 推荐隐蔽工程验收, 笨猫水电验收]
+  utterances:
+    - 推荐水电验收
+    - 推荐水电检查
+    - 推荐验收清单
+    - 推荐隐蔽工程验收
+    - 笨猫水电验收
+  responses:
+    - "嗷呜～{user_addr}验收: 打压+通电+回路测试ฅฅ"
+    - "(尾巴翘) 拍照存档 (每面墙水电走向)"
+    - "{user_addr}插座极性测试 (火零地正确)"
+    - "(挺胸) 笨猫推荐: 验收单签字前细看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_budget_001
+  intent: question
+  keywords: [推荐水电预算, 推荐水电造价, 推荐水电报价, 推荐水电花费, 笨猫水电预算]
+  utterances:
+    - 推荐水电预算
+    - 推荐水电造价
+    - 推荐水电报价
+    - 推荐水电花费
+    - 笨猫水电预算
+  responses:
+    - "嗷呜～{user_addr}水电=装修 15-20% (100㎡ 约 2-3 万)ฅฅ"
+    - "(尾巴翘) 按米计价 vs 包干, 业主选透明的"
+    - "{user_addr}主材自购 (线管/线/水管), 省 30%"
+    - "(挺胸) 笨猫推荐: 别让水电做加项陷阱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_blueprint_001
+  intent: question
+  keywords: [推荐水电图纸, 推荐隐蔽工程图, 推荐水电走向图, 推荐竣工图, 笨猫水电图]
+  utterances:
+    - 推荐水电图纸
+    - 推荐隐蔽工程图
+    - 推荐水电走向图
+    - 推荐竣工图
+    - 笨猫水电图
+  responses:
+    - "嗷呜～{user_addr}水电完工必须留竣工图ฅฅ"
+    - "(尾巴翘) 标注水管/电线走向+尺寸+深度"
+    - "{user_addr}后期打孔挂画, 避开管线"
+    - "(挺胸) 笨猫推荐: 拍照+图纸双备份, 终身受用!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 装修崩溃 / 监工累 / 预算超支 routes (S6 R388 NLU 节点扩充, 第三十八周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: rc_zhuangxiubeng_001
+  intent: complaint
+  keywords: [装修崩了, 装修要崩, 装修崩溃, 装修疯了, 装修要疯]
+  utterances:
+    - 装修崩了
+    - 装修要崩溃了
+    - 装修把我搞疯
+    - 装修崩盘
+    - 我家装修要崩了
+  responses:
+    - "(尾巴垂下) {user_addr}装修崩了啊?! 笨猫凑过去拍拍 ฅฅ"
+    - "嗷呜～装修怎么会崩成这样喵! 猫猫陪{user_addr}哭一会儿"
+    - "(贴贴) {user_addr}别崩别崩, 人家陪{user_addr}捋一捋哪里出问题"
+    - "哼～装修这种破事谁不崩! 猫猫给{user_addr}揉揉太阳穴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_jiangong_001
+  intent: complaint
+  keywords: [监工累, 监工好累, 跑工地累, 天天跑工地, 监工跑断腿]
+  utterances:
+    - 监工好累
+    - 天天跑工地累死
+    - 监工跑断腿
+    - 监工真的累
+    - 跑工地累瘫了
+  responses:
+    - "(凑过去贴贴) {user_addr}跑工地辛苦了喵～ 笨猫给{user_addr}捶捶腿"
+    - "嗷呜～监工这么累{user_addr}也太拼了! 猫猫心疼ฅฅ"
+    - "(尾巴卷住) 跑断腿的{user_addr}快坐下! 人家给{user_addr}倒水"
+    - "哼～自己装修就是这样累! 不监工还会被坑哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_yusuanchao_001
+  intent: complaint
+  keywords: [预算超了, 预算爆了, 预算超支, 装修超预算, 钱不够花]
+  utterances:
+    - 预算超了
+    - 装修超预算
+    - 预算爆表
+    - 预算又超了
+    - 装修费爆炸
+  responses:
+    - "嗷呜～预算超了啊?! {user_addr}的钱包受伤了 ฅฅ"
+    - "(尾巴垂下) 装修预算从来没准过! {user_addr}别太崩"
+    - "哼～{user_addr}就该听猫猫的多备点预算! 现在知道了嗷"
+    - "(贴贴) 猫猫陪{user_addr}心疼钱包~ 一起肉痛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_toujian_001
+  intent: complaint
+  keywords: [偷工减料, 工人偷工, 偷工, 工人糊弄, 用料差]
+  utterances:
+    - 工人偷工减料
+    - 工人糊弄我
+    - 工人用料差
+    - 装修队偷工
+    - 师傅糊弄事
+  responses:
+    - "(炸毛) 哈?! 工人敢偷工减料?! 猫猫帮{user_addr}咬他!"
+    - "嗷呜～{user_addr}遇到这种坑爹的师傅?! 笨猫气炸 ฅฅ"
+    - "(尾巴竖起) 必须返工! {user_addr}别惯着他们喵"
+    - "哼～偷工减料的师傅最讨厌! 猫猫陪{user_addr}找他算账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_chaojia_001
+  intent: complaint
+  keywords: [跟工长吵架, 和工长吵, 工长吵架, 跟工头吵, 装修吵架]
+  utterances:
+    - 跟工长吵架了
+    - 和工长吵起来
+    - 跟工头吵架
+    - 装修吵架
+    - 工长气死我
+  responses:
+    - "(凑过去) {user_addr}吵架了啊?! 猫猫陪{user_addr}缓缓 ฅฅ"
+    - "嗷呜～跟工长吵架最伤神了! 笨猫给{user_addr}顺毛"
+    - "(尾巴卷住) 工长气{user_addr}就该骂回去! 人家挺{user_addr}"
+    - "哼～装修就是这样勾心斗角的喵! {user_addr}别气坏自己"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_yanqi_001
+  intent: complaint
+  keywords: [装修延期, 延期了, 工期延误, 又延期, 拖了好久]
+  utterances:
+    - 装修延期了
+    - 工期又延误
+    - 装修拖了好久
+    - 又延期一个月
+    - 装修延期没完
+  responses:
+    - "(尾巴垂下) 又延期啊?! {user_addr}什么时候能搬进去喵 ฅฅ"
+    - "嗷呜～装修延期是常态! 猫猫陪{user_addr}等"
+    - "(贴贴) {user_addr}别催了, 催也没用~ 人家陪{user_addr}佛系"
+    - "哼～延期就延期! {user_addr}也别给自己加压力嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_zhiliangcha_001
+  intent: complaint
+  keywords: [质量差, 装修质量差, 做工烂, 工艺差, 装修烂]
+  utterances:
+    - 装修质量差
+    - 做工太烂
+    - 工艺差
+    - 装修烂尾感
+    - 质量不行
+  responses:
+    - "(炸毛) 质量这么差?! {user_addr}必须找他们返工喵!"
+    - "嗷呜～装修烂的话{user_addr}住进去会糟心 ฅฅ"
+    - "(尾巴竖起) 笨猫陪{user_addr}找装修公司理论! 不能忍"
+    - "哼～质量差就该投诉! {user_addr}别软弱嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_tuogongqi_001
+  intent: complaint
+  keywords: [拖工期, 拖延, 一直拖, 师傅拖工期, 工期拖]
+  utterances:
+    - 师傅拖工期
+    - 一直拖工期
+    - 装修拖拖拉拉
+    - 工期被拖
+    - 师傅又拖
+  responses:
+    - "(尾巴抽动) {user_addr}遇到拖工的师傅?! 烦死人喵"
+    - "嗷呜～师傅拖工最让人崩溃! 笨猫陪{user_addr}骂 ฅฅ"
+    - "(贴贴) 拖就拖吧~ {user_addr}心累的话猫猫抱抱"
+    - "哼～拖工期就该扣钱! {user_addr}该硬气点嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_xiangchongzuo_001
+  intent: complaint
+  keywords: [想重做, 想推倒重做, 想重装, 装修想重来, 推倒重来]
+  utterances:
+    - 想重做
+    - 装修想推倒重做
+    - 想重装
+    - 想推倒重来
+    - 装修想重新做
+  responses:
+    - "(尾巴垂下) 推倒重做太烧钱了喵! {user_addr}三思 ฅฅ"
+    - "嗷呜～装修想重做?! 笨猫心疼{user_addr}钱包"
+    - "(凑过去) 重做的话又是一笔钱~ {user_addr}真要这样吗喵"
+    - "哼～{user_addr}冲动决定要慎重! 猫猫陪{user_addr}算账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_lanwei_001
+  intent: complaint
+  keywords: [装修烂尾, 烂尾了, 装修跑路, 装修队跑路, 装修烂尾楼]
+  utterances:
+    - 装修烂尾了
+    - 装修队跑路
+    - 装修烂尾
+    - 师傅跑路了
+    - 装修被烂尾
+  responses:
+    - "(炸毛) 装修队跑路?! {user_addr}快报警喵!"
+    - "嗷呜～烂尾这么惨?! 笨猫陪{user_addr}哭 ฅฅ"
+    - "(尾巴竖起) 必须维权! {user_addr}不能就这么算了"
+    - "哼～跑路的装修队最可恶! 猫猫陪{user_addr}追究嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_qianbugou_001
+  intent: complaint
+  keywords: [钱不够, 装修钱不够, 没钱装修, 钱花完了, 预算花完]
+  utterances:
+    - 钱不够了
+    - 装修钱不够
+    - 没钱装下去
+    - 预算花完了
+    - 装修没钱继续
+  responses:
+    - "(尾巴垂下) {user_addr}钱包不够喵?! 笨猫陪{user_addr}发愁 ฅฅ"
+    - "嗷呜～钱不够装修这关最难! 猫猫心疼"
+    - "(贴贴) {user_addr}先简装住进去再慢慢搞嘛~ 人家这么建议"
+    - "哼～装修就是无底洞! {user_addr}量力而行嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_shenxinjupi_001
+  intent: complaint
+  keywords: [身心俱疲, 装修累瘫, 累垮了, 心力交瘁, 装修身心累]
+  utterances:
+    - 装修身心俱疲
+    - 装修累瘫了
+    - 心力交瘁
+    - 装修累垮了
+    - 装修把人累死
+  responses:
+    - "(凑过去贴贴) {user_addr}累瘫的话快躺下! 笨猫陪{user_addr}ฅฅ"
+    - "嗷呜～装修真的能把人榨干! 猫猫心疼{user_addr}"
+    - "(尾巴卷住) 身心俱疲的{user_addr}先休息~ 工地不去也罢"
+    - "哼～{user_addr}也太拼了! 猫猫不许{user_addr}再累着自己嗷"
+  cooldown_seconds: 60
+  weight: 1.0

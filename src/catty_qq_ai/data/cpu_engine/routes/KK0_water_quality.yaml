@@ -1,0 +1,206 @@
+# 净水器 / 软水机 / 直饮水 routes (S6 R382 NLU 节点扩充, 第三十八周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: wq_purifier_001
+  intent: question
+  keywords: [推荐净水器, 推荐安吉尔, 推荐沁园, 推荐家用净水器, 笨猫净水器]
+  utterances:
+    - 推荐净水器
+    - 推荐安吉尔
+    - 推荐沁园
+    - 推荐家用净水器
+    - 笨猫净水器
+  responses:
+    - "嗷呜～{user_addr}安吉尔 / 沁园 - 国产老牌ฅฅ"
+    - "(尾巴翘) 美的 / A.O.史密斯 / 飞利浦"
+    - "{user_addr}先看水质 - TDS 高选 RO"
+    - "(挺胸) 笨猫推荐: 安吉尔 A7 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wq_prefilter_001
+  intent: question
+  keywords: [推荐前置过滤, 推荐滨特尔, 推荐 3M 前置, 推荐反冲洗, 笨猫前置过滤]
+  utterances:
+    - 推荐前置过滤
+    - 推荐滨特尔
+    - "推荐 3M 前置"
+    - 推荐反冲洗
+    - 笨猫前置过滤
+  responses:
+    - "嗷呜～{user_addr}滨特尔 / 3M - 入户首选ฅฅ"
+    - "(尾巴翘) 怡口 / 霍尼韦尔"
+    - "{user_addr}40 微米 + 反冲洗 / 保护水管"
+    - "(挺胸) 笨猫推荐: 装修必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wq_ro_001
+  intent: question
+  keywords: [推荐 RO 反渗透, 推荐史密斯, 推荐反渗透净水器, 推荐 RO 机, 笨猫反渗透]
+  utterances:
+    - "推荐 RO 反渗透"
+    - 推荐史密斯
+    - 推荐反渗透净水器
+    - "推荐 RO 机"
+    - 笨猫反渗透
+  responses:
+    - "嗷呜～{user_addr}A.O.史密斯 - RO 标杆ฅฅ"
+    - "(尾巴翘) 滨特尔 / 怡口 / 美的"
+    - "{user_addr}TDS<10 / 直饮无忧 / 北方必备"
+    - "(挺胸) 笨猫推荐: 史密斯 600G 大通量!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wq_uf_001
+  intent: question
+  keywords: [推荐超滤, 推荐中央净水, 推荐超滤膜, 推荐 UF 净水, 笨猫超滤]
+  utterances:
+    - 推荐超滤
+    - 推荐中央净水
+    - 推荐超滤膜
+    - "推荐 UF 净水"
+    - 笨猫超滤
+  responses:
+    - "嗷呜～{user_addr}超滤 - 保留矿物质ฅฅ"
+    - "(尾巴翘) 3M / 怡口 / 滨特尔中央净水"
+    - "{user_addr}南方软水适用 / 不能除重金属"
+    - "(挺胸) 笨猫推荐: 南方家庭超滤够!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wq_tap_001
+  intent: question
+  keywords: [推荐直饮水龙头, 推荐水龙头净水, 推荐 faucet 净水, 推荐厨房龙头, 笨猫直饮龙头]
+  utterances:
+    - 推荐直饮水龙头
+    - 推荐水龙头净水
+    - "推荐 faucet 净水"
+    - 推荐厨房龙头
+    - 笨猫直饮龙头
+  responses:
+    - "嗷呜～{user_addr}冷热 + 净水三合一龙头ฅฅ"
+    - "(尾巴翘) 摩恩 / 汉斯格雅 / 高仪"
+    - "{user_addr}避免两个龙头 - 一体美观"
+    - "(挺胸) 笨猫推荐: 摩恩三合一!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wq_filter_001
+  intent: question
+  keywords: [推荐净水滤芯, 推荐滤芯更换, 推荐 PP 棉, 推荐活性炭滤芯, 笨猫滤芯]
+  utterances:
+    - 推荐净水滤芯
+    - 推荐滤芯更换
+    - "推荐 PP 棉"
+    - 推荐活性炭滤芯
+    - 笨猫滤芯
+  responses:
+    - "嗷呜～{user_addr}PP 棉 6 月 / 活性炭 1 年ฅฅ"
+    - "(尾巴翘) RO 膜 2-3 年 / 看 TDS"
+    - "{user_addr}原厂滤芯 / 别贪便宜"
+    - "(挺胸) 笨猫推荐: 按时换不偷懒!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wq_tds_001
+  intent: question
+  keywords: [推荐 TDS 笔, 推荐 TDS 监测, 推荐水质检测, 推荐 TDS meter, 笨猫 TDS]
+  utterances:
+    - "推荐 TDS 笔"
+    - "推荐 TDS 监测"
+    - 推荐水质检测
+    - "推荐 TDS meter"
+    - "笨猫 TDS"
+  responses:
+    - "嗷呜～{user_addr}TDS 笔 - 几十块入门款ฅฅ"
+    - "(尾巴翘) HM Digital / 小米 TDS 笔"
+    - "{user_addr}<50 优秀 / >300 必装 RO"
+    - "(挺胸) 笨猫推荐: 装机前后各测一次!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wq_undersink_001
+  intent: question
+  keywords: [推荐厨下式, 推荐台上式, 推荐厨下净水器, 推荐台上净水, 笨猫厨下]
+  utterances:
+    - 推荐厨下式
+    - 推荐台上式
+    - 推荐厨下净水器
+    - 推荐台上净水
+    - 笨猫厨下
+  responses:
+    - "嗷呜～{user_addr}厨下式 - 美观隐藏ฅฅ"
+    - "(尾巴翘) 台上式 - 租房友好"
+    - "{user_addr}厨下要预留插座 + 排污口"
+    - "(挺胸) 笨猫推荐: 自己住厨下 / 租房台上!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wq_rent_001
+  intent: question
+  keywords: [推荐租房净水, 推荐简易净水, 推荐免安装净水, 推荐租房直饮, 笨猫租房净水]
+  utterances:
+    - 推荐租房净水
+    - 推荐简易净水
+    - 推荐免安装净水
+    - 推荐租房直饮
+    - 笨猫租房净水
+  responses:
+    - "嗷呜～{user_addr}免安装台式 RO - 搬家友好ฅฅ"
+    - "(尾巴翘) 碧然德 / 滤水壶 - 几十块"
+    - "{user_addr}花洒过滤器 / 龙头小滤芯"
+    - "(挺胸) 笨猫推荐: 碧然德性价比!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wq_pet_001
+  intent: question
+  keywords: [推荐宠物饮水机, 推荐猫咪饮水机, 推荐 PETKIT, 推荐宠物喷泉, 笨猫宠物饮水]
+  utterances:
+    - 推荐宠物饮水机
+    - 推荐猫咪饮水机
+    - "推荐 PETKIT"
+    - 推荐宠物喷泉
+    - 笨猫宠物饮水
+  responses:
+    - "嗷呜～{user_addr}小佩 PETKIT - 静音活水ฅฅ"
+    - "(尾巴翘) 霍曼 / catlink / 网易严选"
+    - "{user_addr}活水猫多喝 / 不易尿结石"
+    - "(挺胸) 笨猫推荐: 小佩无线版!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wq_softener_001
+  intent: question
+  keywords: [推荐软水机, 推荐水垢, 推荐除水垢, 推荐怡口软水, 笨猫软水机]
+  utterances:
+    - 推荐软水机
+    - 推荐水垢
+    - 推荐除水垢
+    - 推荐怡口软水
+    - 笨猫软水机
+  responses:
+    - "嗷呜～{user_addr}怡口 / 滨特尔 - 软水机标杆ฅฅ"
+    - "(尾巴翘) 3M / 倍世 / 霍尼韦尔"
+    - "{user_addr}北方硬水必装 / 保护家电"
+    - "(挺胸) 笨猫推荐: 怡口入户软水!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wq_pipe_001
+  intent: question
+  keywords: [推荐管道清洗, 推荐水管清洗, 推荐自来水管, 推荐家用水管, 笨猫管道清洗]
+  utterances:
+    - 推荐管道清洗
+    - 推荐水管清洗
+    - 推荐自来水管
+    - 推荐家用水管
+    - 笨猫管道清洗
+  responses:
+    - "嗷呜～{user_addr}入住前管道清洗 - 必做ฅฅ"
+    - "(尾巴翘) 脉冲水弹 / 高压气泡冲洗"
+    - "{user_addr}老房子 2-3 年一次"
+    - "(挺胸) 笨猫推荐: 装修完先洗管!"
+  cooldown_seconds: 60
+  weight: 0.7

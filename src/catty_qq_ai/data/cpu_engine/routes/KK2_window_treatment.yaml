@@ -1,0 +1,206 @@
+# 窗帘 / 百叶 / 隔热膜 routes (S6 R384 NLU 节点扩充, 第三十八周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: wt_curtain_001
+  intent: question
+  keywords: [推荐窗帘, 推荐遮光窗帘, 推荐遮光率, 推荐全遮光, 笨猫窗帘]
+  utterances:
+    - 推荐窗帘
+    - 推荐遮光窗帘
+    - 推荐遮光率
+    - 推荐全遮光
+    - 笨猫窗帘
+  responses:
+    - "嗷呜～{user_addr}全遮光 (99%) - 卧室必备ฅฅ"
+    - "(尾巴翘) 半遮光 70% / 透光 30%"
+    - "{user_addr}涂层布 / 三层复合 - 隔光强"
+    - "(挺胸) 笨猫推荐: 卧室直接上全遮光!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_velvet_001
+  intent: question
+  keywords: [推荐天鹅绒窗帘, 推荐丝绒窗帘, 推荐绒布窗帘, 推荐厚窗帘, 笨猫天鹅绒]
+  utterances:
+    - 推荐天鹅绒窗帘
+    - 推荐丝绒窗帘
+    - 推荐绒布窗帘
+    - 推荐厚窗帘
+    - 笨猫天鹅绒
+  responses:
+    - "嗷呜～{user_addr}天鹅绒 - 质感顶级ฅฅ"
+    - "(尾巴翘) 韩绒 / 雪尼尔 / 荷兰绒"
+    - "{user_addr}垂感好 / 隔音强 / 保温"
+    - "(挺胸) 笨猫推荐: 韩绒性价比第一!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_blind_001
+  intent: question
+  keywords: [推荐百叶帘, 推荐卷帘, 推荐木百叶, 推荐铝百叶, 笨猫百叶]
+  utterances:
+    - 推荐百叶帘
+    - 推荐卷帘
+    - 推荐木百叶
+    - 推荐铝百叶
+    - 笨猫百叶
+  responses:
+    - "嗷呜～{user_addr}木百叶 - 美式经典ฅฅ"
+    - "(尾巴翘) 铝百叶 - 厨卫防水 / 卷帘 - 简约"
+    - "{user_addr}斑马帘 / 风琴帘 - 透光调"
+    - "(挺胸) 笨猫推荐: 阳台用卷帘!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_smart_001
+  intent: question
+  keywords: [推荐电动窗帘, 推荐智能窗帘, 推荐窗帘电机, 推荐杜亚, 笨猫电动窗帘]
+  utterances:
+    - 推荐电动窗帘
+    - 推荐智能窗帘
+    - 推荐窗帘电机
+    - 推荐杜亚
+    - 笨猫电动窗帘
+  responses:
+    - "嗷呜～{user_addr}杜亚 Dooya - 老牌靠谱ฅฅ"
+    - "(尾巴翘) 欧瑞博 / 米家 / 绿米 Aqara"
+    - "{user_addr}支持 HomeKit / 米家联动"
+    - "(挺胸) 笨猫推荐: 米家电机 500-800!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_material_001
+  intent: question
+  keywords: [推荐窗帘材质, 推荐棉麻窗帘, 推荐丝绒窗帘材质, 推荐涤纶窗帘, 笨猫窗帘材质]
+  utterances:
+    - 推荐窗帘材质
+    - 推荐棉麻窗帘
+    - 推荐丝绒窗帘材质
+    - 推荐涤纶窗帘
+    - 笨猫窗帘材质
+  responses:
+    - "嗷呜～{user_addr}棉麻 - 自然清新ฅฅ"
+    - "(尾巴翘) 丝绒 - 厚重 / 涤纶 - 耐用易洗"
+    - "{user_addr}雪尼尔 / 提花 / 真丝"
+    - "(挺胸) 笨猫推荐: 客厅棉麻卧室丝绒!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wt_style_001
+  intent: question
+  keywords: [推荐窗帘款式, 推荐双开窗帘, 推荐对开窗帘, 推荐罗马帘, 笨猫窗帘款式]
+  utterances:
+    - 推荐窗帘款式
+    - 推荐双开窗帘
+    - 推荐对开窗帘
+    - 推荐罗马帘
+    - 笨猫窗帘款式
+  responses:
+    - "嗷呜～{user_addr}对开式 - 经典通用ฅฅ"
+    - "(尾巴翘) 罗马帘 / 风琴帘 - 小窗友好"
+    - "{user_addr}褶皱 1.8-2 倍 / 打孔 or 挂钩"
+    - "(挺胸) 笨猫推荐: 客厅对开 2 倍褶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_film_001
+  intent: question
+  keywords: [推荐窗膜, 推荐隔热膜, 推荐防晒膜, 推荐 3M 膜, 笨猫窗膜]
+  utterances:
+    - 推荐窗膜
+    - 推荐隔热膜
+    - 推荐防晒膜
+    - 推荐 3M 膜
+    - 笨猫窗膜
+  responses:
+    - "嗷呜～{user_addr}3M 晶锐 - 隔热顶级ฅฅ"
+    - "(尾巴翘) 龙膜 / 威固 / 量子膜"
+    - "{user_addr}隔热率 60-80% / UV 99%"
+    - "(挺胸) 笨猫推荐: 西晒房贴 3M!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_sticker_001
+  intent: question
+  keywords: [推荐玻璃贴纸, 推荐磨砂贴, 推荐装饰膜, 推荐窗花贴, 笨猫玻璃贴]
+  utterances:
+    - 推荐玻璃贴纸
+    - 推荐磨砂贴
+    - 推荐装饰膜
+    - 推荐窗花贴
+    - 笨猫玻璃贴
+  responses:
+    - "嗷呜～{user_addr}磨砂贴 - 卫生间防窥ฅฅ"
+    - "(尾巴翘) 单向透视 / 彩绘 / 几何花"
+    - "{user_addr}静电吸附无胶 / 易揭"
+    - "(挺胸) 笨猫推荐: 卫浴磨砂贴!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wt_kids_001
+  intent: question
+  keywords: [推荐儿童房窗帘, 推荐卡通窗帘, 推荐儿童遮光, 推荐安全窗帘, 笨猫儿童窗帘]
+  utterances:
+    - 推荐儿童房窗帘
+    - 推荐卡通窗帘
+    - 推荐儿童遮光
+    - 推荐安全窗帘
+    - 笨猫儿童窗帘
+  responses:
+    - "嗷呜～{user_addr}棉麻 + 全遮光ฅฅ"
+    - "(尾巴翘) 卡通图案 / 马卡龙色"
+    - "{user_addr}无拉绳设计 / 防勒安全"
+    - "(挺胸) 笨猫推荐: 无绳电动最安全!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_sheer_001
+  intent: question
+  keywords: [推荐挡纱, 推荐窗纱, 推荐蕾丝窗帘, 推荐薄纱, 笨猫纱帘]
+  utterances:
+    - 推荐挡纱
+    - 推荐窗纱
+    - 推荐蕾丝窗帘
+    - 推荐薄纱
+    - 笨猫纱帘
+  responses:
+    - "嗷呜～{user_addr}白纱 - 通用百搭ฅฅ"
+    - "(尾巴翘) 蕾丝 / 雪纺 / 提花纱"
+    - "{user_addr}遮光纱 - 半透不刺眼"
+    - "(挺胸) 笨猫推荐: 双层纱 + 布!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wt_track_001
+  intent: question
+  keywords: [推荐窗帘轨道, 推荐窗帘杆, 推荐罗马杆, 推荐静音轨道, 笨猫窗帘轨道]
+  utterances:
+    - 推荐窗帘轨道
+    - 推荐窗帘杆
+    - 推荐罗马杆
+    - 推荐静音轨道
+    - 笨猫窗帘轨道
+  responses:
+    - "嗷呜～{user_addr}罗马杆 - 颜值高ฅฅ"
+    - "(尾巴翘) 静音轨道 / 暗轨 - 极简"
+    - "{user_addr}弯轨 / U 型 / L 型转角"
+    - "(挺胸) 笨猫推荐: 客厅罗马杆暗轨!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wt_bedroom_001
+  intent: question
+  keywords: [推荐卧室窗帘, 推荐二级遮光, 推荐卧室遮光, 推荐睡眠窗帘, 笨猫卧室窗帘]
+  utterances:
+    - 推荐卧室窗帘
+    - 推荐二级遮光
+    - 推荐卧室遮光
+    - 推荐睡眠窗帘
+    - 笨猫卧室窗帘
+  responses:
+    - "嗷呜～{user_addr}全遮光 + 棉麻ฅฅ"
+    - "(尾巴翘) 二级遮光 95% / 一级 99%"
+    - "{user_addr}双层 - 纱 + 厚布"
+    - "(挺胸) 笨猫推荐: 卧室一级遮光!"
+  cooldown_seconds: 60
+  weight: 1.0

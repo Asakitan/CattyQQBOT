@@ -1,0 +1,206 @@
+# 灯光设计 / 主辅灯 / 智能灯 routes (S6 R383 NLU 节点扩充, 第三十八周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ld_main_001
+  intent: question
+  keywords: [推荐主灯, 推荐吸顶灯, 推荐客厅主光, 推荐客厅吊灯, 笨猫主灯]
+  utterances:
+    - 推荐主灯
+    - 推荐吸顶灯
+    - 推荐客厅主光
+    - 推荐客厅吊灯
+    - 笨猫主灯
+  responses:
+    - "嗷呜～{user_addr}吸顶灯 - 客厅基础照明ฅฅ"
+    - "(尾巴翘) 欧普 / 雷士 / 飞利浦"
+    - "{user_addr}色温 3000-4000K / 显色 Ra90+"
+    - "(挺胸) 笨猫推荐: 全屋主灯无主灯混搭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_aux_001
+  intent: question
+  keywords: [推荐辅光, 推荐落地灯, 推荐台灯, 推荐氛围灯, 笨猫辅光]
+  utterances:
+    - 推荐辅光
+    - 推荐落地灯
+    - 推荐台灯
+    - 推荐氛围灯
+    - 笨猫辅光
+  responses:
+    - "嗷呜～{user_addr}落地灯 - 沙发角落必备ฅฅ"
+    - "(尾巴翘) 宜家 NOT / Vipp / Muuto"
+    - "{user_addr}台灯 + 落地灯多点光源"
+    - "(挺胸) 笨猫推荐: 3 个光源以上!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_downlight_001
+  intent: question
+  keywords: [推荐筒灯, 推荐射灯, 推荐嵌入式灯, 推荐 COB 射灯, 笨猫筒灯]
+  utterances:
+    - 推荐筒灯
+    - 推荐射灯
+    - 推荐嵌入式灯
+    - 推荐 COB 射灯
+    - 笨猫筒灯
+  responses:
+    - "嗷呜～{user_addr}筒灯 - 均匀照明ฅฅ"
+    - "(尾巴翘) 射灯 - 重点照明 / 画作"
+    - "{user_addr}防眩 UGR<19 / 深杯设计"
+    - "(挺胸) 笨猫推荐: 西顿 / 三雄极光!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_track_001
+  intent: question
+  keywords: [推荐磁吸轨道灯, 推荐轨道灯, 推荐无主灯, 推荐 Aqara 磁吸, 笨猫轨道灯]
+  utterances:
+    - 推荐磁吸轨道灯
+    - 推荐轨道灯
+    - 推荐无主灯
+    - 推荐 Aqara 磁吸
+    - 笨猫轨道灯
+  responses:
+    - "嗷呜～{user_addr}磁吸轨道 - 无主灯方案ฅฅ"
+    - "(尾巴翘) Aqara / 欧普 / Yeelight"
+    - "{user_addr}泛光+射灯+格栅自由组合"
+    - "(挺胸) 笨猫推荐: 极简风首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_rgb_001
+  intent: question
+  keywords: [推荐 RGB 灯带, 推荐氛围灯带, 推荐 LED 灯带, 推荐电竞灯, 笨猫灯带]
+  utterances:
+    - 推荐 RGB 灯带
+    - 推荐氛围灯带
+    - 推荐 LED 灯带
+    - 推荐电竞灯
+    - 笨猫灯带
+  responses:
+    - "嗷呜～{user_addr}RGB 灯带 - 氛围拉满ฅฅ"
+    - "(尾巴翘) Govee / Yeelight / 飞利浦 Hue"
+    - "{user_addr}电视背景墙 / 床底 / 柜底"
+    - "(挺胸) 笨猫推荐: Govee 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_smart_001
+  intent: question
+  keywords: [推荐智能灯, 推荐 Yeelight, 推荐 Hue, 推荐 Aqara 灯, 笨猫智能灯]
+  utterances:
+    - 推荐智能灯
+    - 推荐 Yeelight
+    - 推荐 Hue
+    - 推荐 Aqara 灯
+    - 笨猫智能灯
+  responses:
+    - "嗷呜～{user_addr}Philips Hue - 智能灯天花板ฅฅ"
+    - "(尾巴翘) Yeelight / Aqara / 米家"
+    - "{user_addr}HomeKit / Matter 协议"
+    - "(挺胸) 笨猫推荐: Hue 全家桶氛围王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_bedside_001
+  intent: question
+  keywords: [推荐床头壁灯, 推荐壁灯, 推荐床头灯, 推荐卧室壁灯, 笨猫壁灯]
+  utterances:
+    - 推荐床头壁灯
+    - 推荐壁灯
+    - 推荐床头灯
+    - 推荐卧室壁灯
+    - 笨猫壁灯
+  responses:
+    - "嗷呜～{user_addr}床头壁灯 - 省空间ฅฅ"
+    - "(尾巴翘) 可调角度 / 触控开关"
+    - "{user_addr}暖光 2700K / 阅读不刺眼"
+    - "(挺胸) 笨猫推荐: 北欧风长杆款!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_mirror_001
+  intent: question
+  keywords: [推荐镜前灯, 推荐浴室灯, 推荐化妆灯, 推荐卫生间灯, 笨猫镜前灯]
+  utterances:
+    - 推荐镜前灯
+    - 推荐浴室灯
+    - 推荐化妆灯
+    - 推荐卫生间灯
+    - 笨猫镜前灯
+  responses:
+    - "嗷呜～{user_addr}镜前灯 - 化妆刚需ฅฅ"
+    - "(尾巴翘) 显色 Ra95+ / 5000K 自然光"
+    - "{user_addr}防水 IP44 / 雾化处理"
+    - "(挺胸) 笨猫推荐: 两侧对称布光!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_kids_001
+  intent: question
+  keywords: [推荐儿童护眼台灯, 推荐儿童台灯, 推荐 AA 级台灯, 推荐学习灯, 笨猫儿童台灯]
+  utterances:
+    - 推荐儿童护眼台灯
+    - 推荐儿童台灯
+    - 推荐 AA 级台灯
+    - 推荐学习灯
+    - 笨猫儿童台灯
+  responses:
+    - "嗷呜～{user_addr}国 AA 级 - 儿童硬指标ฅฅ"
+    - "(尾巴翘) 米家 / 明基 / 松下"
+    - "{user_addr}无频闪 / 防蓝光 / 大照度"
+    - "(挺胸) 笨猫推荐: 明基 WiT / 米家 Pro!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_desk_001
+  intent: question
+  keywords: [推荐书桌护眼灯, 推荐书桌台灯, 推荐 BenQ 台灯, 推荐屏幕挂灯, 笨猫护眼灯]
+  utterances:
+    - 推荐书桌护眼灯
+    - 推荐书桌台灯
+    - 推荐 BenQ 台灯
+    - 推荐屏幕挂灯
+    - 笨猫护眼灯
+  responses:
+    - "嗷呜～{user_addr}明基 BenQ ScreenBar - 挂灯神器ฅฅ"
+    - "(尾巴翘) BenQ / 米家 / Yeelight"
+    - "{user_addr}非对称光 / 不反光屏幕"
+    - "(挺胸) 笨猫推荐: ScreenBar Halo!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_reading_001
+  intent: question
+  keywords: [推荐阅读灯, 推荐床头阅读灯, 推荐看书灯, 推荐夜读灯, 笨猫阅读灯]
+  utterances:
+    - 推荐阅读灯
+    - 推荐床头阅读灯
+    - 推荐看书灯
+    - 推荐夜读灯
+    - 笨猫阅读灯
+  responses:
+    - "嗷呜～{user_addr}夹书灯 / 颈挂灯ฅฅ"
+    - "(尾巴翘) 不打扰伴侣 / 充电款"
+    - "{user_addr}暖光 / 可调亮度 / 软管"
+    - "(挺胸) 笨猫推荐: 倍思夹灯入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_scene_001
+  intent: question
+  keywords: [推荐灯光场景, 推荐场景预设, 推荐观影模式, 推荐睡眠模式, 笨猫灯光场景]
+  utterances:
+    - 推荐灯光场景
+    - 推荐场景预设
+    - 推荐观影模式
+    - 推荐睡眠模式
+    - 笨猫灯光场景
+  responses:
+    - "嗷呜～{user_addr}观影 / 派对 / 阅读 / 睡眠ฅฅ"
+    - "(尾巴翘) Hue / Yeelight App 预设"
+    - "{user_addr}HomeKit 自动化 / 日落渐变"
+    - "(挺胸) 笨猫推荐: 一键场景神器!"
+  cooldown_seconds: 60
+  weight: 1.0
