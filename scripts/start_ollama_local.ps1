@@ -50,7 +50,16 @@ $env:OLLAMA_MODELS = $ModelsDir
 Get-Process ollama -ErrorAction SilentlyContinue | Stop-Process -Force
 Start-Sleep -Seconds 2
 
-Start-Process -FilePath $ollamaExe -ArgumentList "serve" -WorkingDirectory $root -WindowStyle Hidden | Out-Null
+$ollamaProc = Start-Process -FilePath $ollamaExe -ArgumentList "serve" -WorkingDirectory $root -WindowStyle Hidden -PassThru
+Start-Sleep -Seconds 1
+# 主人 2026-05-29 S5.6g: 6 核虚拟 CPU, ollama 占核 0-3 (4 核), 留 4-5 给 bot, 避免 CPU 抢占.
+# 不设 affinity 时 ollama 抢满 6 核, bot Python 排队, catnify warm >60s 超时.
+try {
+  $ollamaProc.ProcessorAffinity = [System.IntPtr]::new(0xF)
+  Write-Host "ollama affinity set to 0xF (cores 0-3)"
+} catch {
+  Write-Host "ollama affinity set FAILED: $($_.Exception.Message)"
+}
 Start-Sleep -Seconds 5
 
 if (-not $SkipPull) {

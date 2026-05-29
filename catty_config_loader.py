@@ -777,6 +777,8 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     # S5 (主人 2026-05-29) 本地 CPU LLM 全量笨猫体质改写 + 自决 DeepSeek 透传
     _set_env("CATTY_CPU_ENGINE_L4_MODE", cpu_engine.get("l4_mode"))
     _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_MODEL", cpu_engine.get("l4_catnify_model"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_BASE_URL", cpu_engine.get("l4_catnify_base_url"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_API_KEY", cpu_engine.get("l4_catnify_api_key"))
     _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_TIMEOUT_MS", cpu_engine.get("l4_catnify_timeout_ms"))
     _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_MAX_INPUT_TOKENS", cpu_engine.get("l4_catnify_max_input_tokens"))
     _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_TEMPERATURE", cpu_engine.get("l4_catnify_temperature"))

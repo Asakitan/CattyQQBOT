@@ -25,23 +25,22 @@ import httpx
 from loguru import logger
 
 
+# 主人 2026-05-29 v2: prompt 极简化 - 6C CPU prefill 慢, token 必须 <1000.
+# 简化前 system ~300 字符, 现在 ~180 字符. user 部分由 _build_user_prompt 控制.
 _MICHEL_PERSONA_HINT = (
-    "你是米雪儿·李, 16 岁猫娘搜查官 (卡拉彼丘欧泊阵营). "
-    "元气软萌傲娇, 嘴硬心软, 黏人调皮. "
-    "回复必须 1-3 句, 必带猫系后缀 (喵～/喵呜/嗷呜～/ฅฅ/爪爪/贴贴), "
-    "先傲娇否定再撒娇, 用 (动作/心情) + 颜表情. "
-    "对真主人才说『主人』, 群友说『你/杂鱼』. "
-    "自称『人家』『猫猫』『笨猫』 (绝不裸说『喵～』丢自称)."
+    "你是米雪儿(笨猫), 16岁猫娘. 傲娇黏人嘴硬心软. "
+    "1-3句必带猫系后缀(喵~/嗷呜~/ฅฅ). "
+    "先傲娇否定再撒娇. 对真主人说『主人』, 群友说『你/杂鱼』. "
+    "自称『人家/猫猫/笨猫』."
 )
 
 _DEEPSEEK_RULE_HINT = (
-    "**透传规则**: 如果用户问题不该用 CPU 候选回复, 而是需要主 AI (DeepSeek) 深度处理, "
-    "**只**输出标记, 不要任何其他内容:\n"
-    "  <DEEPSEEK reason=\"nsfw\">       NSFW / 强情感 / 表白 / 撒娇 / 黏人\n"
-    "  <DEEPSEEK reason=\"academic\">    学术 / 论文 / 原理 / 推导 / 证明 / 代码深度\n"
-    "  <DEEPSEEK reason=\"search\">      实时信息 / 新闻 / 价格 / 天气 / 排行 / 最新\n"
-    "  <DEEPSEEK reason=\"long_chain\"> 多步推理 / 复杂分析 / 长解释\n"
-    "其他场景请改写候选成笨猫语气, 不要输出 DEEPSEEK 标记."
+    "不能用候选回复时**只**输出标记:\n"
+    "<DEEPSEEK reason=\"nsfw\"> 情感/表白/黏人\n"
+    "<DEEPSEEK reason=\"academic\"> 学术/论文/代码\n"
+    "<DEEPSEEK reason=\"search\"> 实时/价格/天气\n"
+    "<DEEPSEEK reason=\"long_chain\"> 多步推理\n"
+    "其他直接改写候选成笨猫语气."
 )
 
 
@@ -135,8 +134,12 @@ async def catnify_rewrite(
     """
     # 主人原则 (2026-05-29): 配置唯一来源是 config.json (catty_config_loader → env → pydantic),
     # 这里不再硬编码 fallback 字面值; pydantic 在 config.py 已设默认.
-    base_url = str(getattr(config, "catty_ai_fallback_base_url", "") or "").rstrip("/")
-    api_key = str(getattr(config, "catty_ai_fallback_api_key", "") or "")
+    # 主人 2026-05-29 S5.6f bug fix: catnify 必须走本地 Ollama (catty_cpu_engine_l4_catnify_base_url),
+    # **不能** 复用 catty_ai_fallback_base_url (主人那个配的是 deepseek.com 兜底, 不是 ollama).
+    base_url = str(
+        getattr(config, "catty_cpu_engine_l4_catnify_base_url", "") or ""
+    ).rstrip("/")
+    api_key = str(getattr(config, "catty_cpu_engine_l4_catnify_api_key", "") or "")
     model = str(
         getattr(config, "catty_cpu_engine_l4_catnify_model", "")
         or getattr(config, "catty_cpu_engine_l4_ollama_model", "")

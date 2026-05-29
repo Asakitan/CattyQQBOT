@@ -98,11 +98,11 @@
     "ollama": {
         "enabled": false,
         "auto_install": true,
-        "auto_start": true,
+        "auto_start": false,
         "auto_pull_model": true,
         "model": "qwen2.5:1.5b",
         "extra_models": [],
-        "num_thread": null,
+        "num_thread": 4,
         "below_normal_priority": true,
         "install_dir": "tools/ollama",
         "models_dir": "models/ollama",
@@ -112,7 +112,8 @@
         "startup_timeout_seconds": 60,
         "pull_timeout_seconds": 1800,
         "stop_existing": true,
-        "new_console": false
+        "new_console": false,
+        "cpu_affinity_mask": 15
     },
     "local_critic": {
         "enabled": false,
@@ -388,8 +389,8 @@
     "cpu_engine": {
         "_note_l4_catnify": "S5 (2026-05-29) 主人方案: 本地 CPU LLM 全量改写 + 自决 DEEPSEEK 透传",
         "l4_mode": "catnify",
-        "l4_catnify_model": "qwen3:4b",
-        "l4_catnify_timeout_ms": 3000,
+        "l4_catnify_model": "qwen2.5:3b",
+        "l4_catnify_timeout_ms": 8000,
         "l4_catnify_max_input_tokens": 4000,
         "l4_catnify_temperature": 0.7,
         "l4_catnify_max_tokens": 200,
@@ -408,6 +409,8 @@
         "l3_distill_min_user_len": 4,
         "l3_distill_max_user_len": 200,
         "l3_distill_min_assistant_len": 8,
-        "l3_distill_max_assistant_len": 500
+        "l3_distill_max_assistant_len": 500,
+        "l4_catnify_base_url": "http://127.0.0.1:11434/v1",
+        "l4_catnify_api_key": "ollama"
     }
 }
