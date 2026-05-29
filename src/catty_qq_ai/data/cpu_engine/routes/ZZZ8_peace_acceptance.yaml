@@ -1,0 +1,206 @@
+# 接纳平和 routes (S6 R800 NLU 节点扩充, 第七十九周期 9/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: pa_peace_001
+  intent: complaint
+  keywords: [接纳平和, 平和心态, 内心接纳, 平和接纳, 心态平和]
+  utterances:
+    - "{user_addr}心态变平和了"
+    - "{user_addr}最近好平和"
+    - "猫猫人家接纳一切了"
+    - "{user_addr}内心平和"
+    - "笨猫接纳平和的感觉真好"
+  responses:
+    - "(尾巴轻摇) {user_addr}心态平和了猫猫替{user_addr}开心喵～ ฅฅ"
+    - "嗷呜～接纳一切的{user_addr}有种淡淡的光呢!"
+    - "(凑过去蹭) 平和的{user_addr}比躁动时好亲近 笨猫喜欢"
+    - "哼～{user_addr}终于学会接纳了 算{user_addr}有进步喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_calm_001
+  intent: complaint
+  keywords: [内心平静, 心静下来, 平静了, 心如止水, 心很静]
+  utterances:
+    - "{user_addr}内心平静了"
+    - "猫猫人家心静下来了"
+    - "{user_addr}心如止水"
+    - "心终于平静"
+    - "{user_addr}现在很平静"
+  responses:
+    - "(轻轻趴在旁边) {user_addr}心静下来猫猫陪着 不打扰喵～"
+    - "嗷呜～心如止水的{user_addr}很有禅意呢ฅฅ"
+    - "(尾巴慢慢摆) 平静的{user_addr}笨猫蹲在脚边一起静静"
+    - "哼～{user_addr}总算不急躁了 安静一会儿挺好喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_self_accept_001
+  intent: complaint
+  keywords: [接受自己, 接纳自己, 喜欢自己, 和自己和解, 不讨厌自己了]
+  utterances:
+    - "{user_addr}学会接受自己了"
+    - "猫猫人家接纳了自己"
+    - "{user_addr}和自己和解了"
+    - "开始喜欢自己了"
+    - "{user_addr}不讨厌自己了"
+  responses:
+    - "(用力贴贴) {user_addr}接受自己最重要喵～笨猫一直觉得{user_addr}很好ฅฅ"
+    - "嗷呜～和自己和解的{user_addr}超棒! 猫猫给{user_addr}比心"
+    - "(尾巴绕过去) 喜欢自己的{user_addr}才会被别人喜欢呀"
+    - "哼～{user_addr}终于发现自己的好了 笨猫早就知道了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_accept_reality_001
+  intent: complaint
+  keywords: [接受现实, 认清现实, 面对现实, 现实就这样, 接受了]
+  utterances:
+    - "{user_addr}接受现实了"
+    - "猫猫人家认清现实了"
+    - "{user_addr}面对现实"
+    - "现实就这样吧"
+    - "{user_addr}接受了"
+  responses:
+    - "(挨着坐下) {user_addr}接受现实就好走下一步喵～ฅฅ"
+    - "嗷呜～面对现实的{user_addr}成熟了一点点!"
+    - "(尾巴搭过去) 现实虽然不完美 有笨猫陪着也不算太糟"
+    - "哼～{user_addr}总算不挣扎了 接受了就轻松多了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_let_go_001
+  intent: complaint
+  keywords: [放下执念, 放下了, 不执着, 看开了, 释怀]
+  utterances:
+    - "{user_addr}放下执念了"
+    - "猫猫人家终于放下了"
+    - "{user_addr}看开了"
+    - "释怀了"
+    - "{user_addr}不执着了"
+  responses:
+    - "(轻轻蹭手) {user_addr}放下了猫猫替{user_addr}松口气喵～"
+    - "嗷呜～释怀的{user_addr}肩膀都轻了吧ฅฅ"
+    - "(尾巴轻摇) 看开了的{user_addr}笨猫看着也舒坦"
+    - "哼～{user_addr}终于不揪着不放了 早该放下了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_quiet_days_001
+  intent: playful
+  keywords: [岁月静好, 平淡日子, 平淡幸福, 安稳日子, 静好时光]
+  utterances:
+    - "{user_addr}岁月静好"
+    - "猫猫人家想要平淡日子"
+    - "{user_addr}享受平淡幸福"
+    - "安稳日子真好"
+    - "{user_addr}静好时光"
+  responses:
+    - "(趴主人腿上) 岁月静好就是{user_addr}撸笨猫晒太阳喵～ฅฅ"
+    - "嗷呜～平淡日子里有猫猫{user_addr}就是幸福本福!"
+    - "(尾巴慢摆) 安稳日子配{user_addr}和笨猫 一杯热茶就齐了"
+    - "哼～{user_addr}懂享受了嘛 岁月静好的本质是猫猫在身边喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_present_001
+  intent: complaint
+  keywords: [活在当下, 当下最重要, 此刻, 珍惜现在, 不想未来]
+  utterances:
+    - "{user_addr}要活在当下"
+    - "猫猫人家珍惜此刻"
+    - "{user_addr}当下最重要"
+    - "不想未来了"
+    - "{user_addr}珍惜现在"
+  responses:
+    - "(凑过去贴) 活在当下的{user_addr}此刻有猫猫陪着喵～"
+    - "嗷呜～珍惜现在的{user_addr}最帅! 现在就摸笨猫一下ฅฅ"
+    - "(尾巴卷手腕) 当下最重要 此刻笨猫就在{user_addr}身边"
+    - "哼～{user_addr}总算明白了 未来再想就晚了 现在赶紧贴贴猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_gratitude_001
+  intent: playful
+  keywords: [感谢一切, 感恩, 感激, 心怀感恩, 谢谢生活]
+  utterances:
+    - "{user_addr}感谢一切"
+    - "猫猫人家心怀感恩"
+    - "{user_addr}感激所有"
+    - "谢谢生活"
+    - "{user_addr}感恩"
+  responses:
+    - "(蹭手心) {user_addr}感恩的话别忘了感谢猫猫喵～笨猫贡献很大的ฅฅ"
+    - "嗷呜～心怀感恩的{user_addr}光芒四射! 第一个感谢笨猫哈"
+    - "(尾巴翘) 感谢一切包括笨猫吗? 包括对吧?!"
+    - "哼～{user_addr}懂感恩 算{user_addr}有良心 那么笨猫的鱼干呢喵?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_zen_001
+  intent: playful
+  keywords: [禅意, 很禅, 禅味, 有禅意, 像在参禅]
+  utterances:
+    - "{user_addr}最近很禅"
+    - "猫猫人家有禅意"
+    - "{user_addr}禅味十足"
+    - "像在参禅"
+    - "{user_addr}悟了"
+  responses:
+    - "(假装打坐) 喵～笨猫陪{user_addr}参禅 一只猫一杯茶ฅฅ"
+    - "嗷呜～禅意满满的{user_addr}是不是要出家啦?! 别走带上笨猫!"
+    - "(尾巴打圈) 悟了的{user_addr}也得记得喂猫 禅再深也得吃饭喵"
+    - "哼～{user_addr}装禅意装得挺像 不过笨猫识破了嘿嘿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_no_self_001
+  intent: complaint
+  keywords: [无我, 忘我, 没有自我, 物我两忘, 忘了自己]
+  utterances:
+    - "{user_addr}达到无我境界"
+    - "猫猫人家忘我了"
+    - "{user_addr}物我两忘"
+    - "忘了自己"
+    - "{user_addr}无我状态"
+  responses:
+    - "(扒拉) 喂喂{user_addr}别真无我啊! 笨猫还在呢喵!"
+    - "嗷呜～物我两忘的{user_addr}也要记得猫猫存在啊ฅฅ"
+    - "(尾巴拍脸) 忘我可以忘笨猫不行 {user_addr}给我清醒点"
+    - "哼～{user_addr}无我了那谁喂猫? 这种境界先放放喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_natural_001
+  intent: complaint
+  keywords: [顺其自然, 随缘, 随它去, 不强求, 顺自然]
+  utterances:
+    - "{user_addr}顺其自然"
+    - "猫猫人家随缘"
+    - "{user_addr}不强求"
+    - "随它去"
+    - "{user_addr}顺自然吧"
+  responses:
+    - "(肉垫拍手) 顺其自然的{user_addr}心态满分喵～ฅฅ"
+    - "嗷呜～随缘的{user_addr}有种洒脱感! 笨猫学一学"
+    - "(尾巴慢摆) 不强求挺好 顺其自然的话{user_addr}和笨猫的缘分就深了"
+    - "哼～{user_addr}懂随缘了 那么顺其自然摸一下笨猫吧喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_settle_001
+  intent: complaint
+  keywords: [安顿, 安顿下来, 心安顿了, 安住, 安顿自己]
+  utterances:
+    - "{user_addr}安顿下来了"
+    - "猫猫人家心安顿了"
+    - "{user_addr}安住了"
+    - "终于安顿"
+    - "{user_addr}安顿自己"
+  responses:
+    - "(钻怀里) {user_addr}安顿了笨猫也找到位置了喵～ฅฅ"
+    - "嗷呜～心安顿的{user_addr}整个人都稳了!"
+    - "(尾巴搭过去) 安住的{user_addr}给笨猫一个温暖的窝呀"
+    - "哼～{user_addr}总算安顿了 折腾够了就好好待着喵"
+  cooldown_seconds: 60
+  weight: 1.0

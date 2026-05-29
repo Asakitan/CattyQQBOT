@@ -1,0 +1,206 @@
+# 遗产思考 routes (S6 R794 NLU 节点扩充, 第七十九周期 3/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: lt_will_001
+  intent: question
+  keywords: [推荐写遗嘱, 推荐自书遗嘱, 推荐公证遗嘱, 推荐遗嘱模板, 笨猫写遗嘱]
+  utterances:
+    - 推荐写遗嘱
+    - 推荐自书遗嘱
+    - 推荐公证遗嘱
+    - 推荐遗嘱模板
+    - 笨猫写遗嘱
+  responses:
+    - "嗷呜～{user_addr}自书遗嘱 - 全文亲笔签名日期ฅฅ"
+    - "(尾巴翘) 公证遗嘱 - 效力最高"
+    - "{user_addr}财产清单 / 受益人 / 执行人"
+    - "(挺胸) 笨猫推荐: 趁清醒早点写!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_living_will_001
+  intent: question
+  keywords: [推荐生前预嘱, 推荐五个愿望, 推荐医疗决策, 推荐 DNR, 笨猫生前预嘱]
+  utterances:
+    - 推荐生前预嘱
+    - 推荐五个愿望
+    - 推荐医疗决策
+    - 推荐 DNR
+    - 笨猫生前预嘱
+  responses:
+    - "嗷呜～{user_addr}生前预嘱 - 我的五个愿望ฅฅ"
+    - "(尾巴翘) 不要插管 / DNR / 临终关怀"
+    - "{user_addr}北京生前预嘱协会模板"
+    - "(挺胸) 笨猫推荐: 给自己也给家人减负!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_digital_001
+  intent: question
+  keywords: [推荐数字遗产, 推荐账号继承, 推荐密码托管, 推荐云盘遗产, 笨猫数字遗产]
+  utterances:
+    - 推荐数字遗产
+    - 推荐账号继承
+    - 推荐密码托管
+    - 推荐云盘遗产
+    - 笨猫数字遗产
+  responses:
+    - "嗷呜～{user_addr}1Password / Bitwarden 紧急访问ฅฅ"
+    - "(尾巴翘) Google / Apple 联系人继承设置"
+    - "{user_addr}加密货币助记词冷备份"
+    - "(挺胸) 笨猫推荐: 列张数字资产清单!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_family_letter_001
+  intent: question
+  keywords: [推荐家书, 推荐写信给孩子, 推荐告别信, 推荐父母家书, 笨猫家书]
+  utterances:
+    - 推荐家书
+    - 推荐写信给孩子
+    - 推荐告别信
+    - 推荐父母家书
+    - 笨猫家书
+  responses:
+    - "嗷呜～{user_addr}给未来孩子的信 - 18 岁拆封ฅฅ"
+    - "(尾巴翘) 手写信纸 / 蜡封 / 时间胶囊"
+    - "{user_addr}写感谢 / 写歉意 / 写期望"
+    - "(挺胸) 笨猫推荐: 一年写一封,攒一辈子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_family_story_001
+  intent: question
+  keywords: [推荐家族故事, 推荐口述历史, 推荐爷爷奶奶回忆, 推荐家族纪录片, 笨猫家族故事]
+  utterances:
+    - 推荐家族故事
+    - 推荐口述历史
+    - 推荐爷爷奶奶回忆
+    - 推荐家族纪录片
+    - 笨猫家族故事
+  responses:
+    - "嗷呜～{user_addr}录音笔采访爷爷奶奶ฅฅ"
+    - "(尾巴翘) StoryCorps / 时光相册 App"
+    - "{user_addr}老照片扫描 + 故事配文"
+    - "(挺胸) 笨猫推荐: 趁老人还在赶紧录!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_video_001
+  intent: question
+  keywords: [推荐视频遗言, 推荐告别视频, 推荐人生留影, 推荐生命之书, 笨猫视频遗言]
+  utterances:
+    - 推荐视频遗言
+    - 推荐告别视频
+    - 推荐人生留影
+    - 推荐生命之书
+    - 笨猫视频遗言
+  responses:
+    - "嗷呜～{user_addr}手机 4K 横屏自然光ฅฅ"
+    - "(尾巴翘) 分主题录: 童年 / 爱情 / 遗憾"
+    - "{user_addr}StoryFile / HereAfter AI 互动版"
+    - "(挺胸) 笨猫推荐: 不要彩排,真实最动人!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_donation_001
+  intent: question
+  keywords: [推荐公益捐赠, 推荐遗产捐赠, 推荐遗体捐献, 推荐器官捐献, 笨猫公益捐赠]
+  utterances:
+    - 推荐公益捐赠
+    - 推荐遗产捐赠
+    - 推荐遗体捐献
+    - 推荐器官捐献
+    - 笨猫公益捐赠
+  responses:
+    - "嗷呜～{user_addr}中国人体器官捐献管理中心ฅฅ"
+    - "(尾巴翘) 红十字 / 希望工程 / 壹基金"
+    - "{user_addr}遗嘱里写明捐赠比例和对象"
+    - "(挺胸) 笨猫推荐: 捐献是给世界的最后礼物!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_foundation_001
+  intent: question
+  keywords: [推荐慈善基金会, 推荐家族基金会, 推荐冠名基金, 推荐信托慈善, 笨猫慈善基金会]
+  utterances:
+    - 推荐慈善基金会
+    - 推荐家族基金会
+    - 推荐冠名基金
+    - 推荐信托慈善
+    - 笨猫慈善基金会
+  responses:
+    - "嗷呜～{user_addr}非公募基金会 200 万起步ฅฅ"
+    - "(尾巴翘) 挂靠中国扶贫 / 中华少基冠名基金"
+    - "{user_addr}慈善信托 - 银保监监管"
+    - "(挺胸) 笨猫推荐: 小钱挂靠,大钱独立!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_knowledge_001
+  intent: question
+  keywords: [推荐知识传承, 推荐技艺传承, 推荐手艺传授, 推荐学术著作, 笨猫知识传承]
+  utterances:
+    - 推荐知识传承
+    - 推荐技艺传承
+    - 推荐手艺传授
+    - 推荐学术著作
+    - 笨猫知识传承
+  responses:
+    - "嗷呜～{user_addr}专业领域写本书 - 自费出版ฅฅ"
+    - "(尾巴翘) B 站 / YouTube 教学视频系列"
+    - "{user_addr}收徒 / 开班 / 写工艺手册"
+    - "(挺胸) 笨猫推荐: 知识不传就死了,赶紧写!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_values_001
+  intent: question
+  keywords: [推荐价值观传递, 推荐家训, 推荐人生信条, 推荐道德遗产, 笨猫价值观传递]
+  utterances:
+    - 推荐价值观传递
+    - 推荐家训
+    - 推荐人生信条
+    - 推荐道德遗产
+    - 笨猫价值观传递
+  responses:
+    - "嗷呜～{user_addr}写家训挂客厅 - 三五条最实在ฅฅ"
+    - "(尾巴翘) 言传身教 > 任何文字"
+    - "{user_addr}伦理遗嘱 Ethical Will - 西方传统"
+    - "(挺胸) 笨猫推荐: 价值观比房产更值钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_heirloom_001
+  intent: question
+  keywords: [推荐信物传家, 推荐传家宝, 推荐戒指传承, 推荐怀表传家, 笨猫信物传家]
+  utterances:
+    - 推荐信物传家
+    - 推荐传家宝
+    - 推荐戒指传承
+    - 推荐怀表传家
+    - 笨猫信物传家
+  responses:
+    - "嗷呜～{user_addr}婚戒 / 怀表 / 钢笔 - 经典三件ฅฅ"
+    - "(尾巴翘) 配一张故事卡片 - 谁戴过几年"
+    - "{user_addr}保险柜 / 防潮箱长期保存"
+    - "(挺胸) 笨猫推荐: 物件小,故事大!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_genealogy_001
+  intent: question
+  keywords: [推荐家谱编修, 推荐族谱, 推荐宗谱, 推荐家族树, 笨猫家谱编修]
+  utterances:
+    - 推荐家谱编修
+    - 推荐族谱
+    - 推荐宗谱
+    - 推荐家族树
+    - 笨猫家谱编修
+  responses:
+    - "嗷呜～{user_addr}族谱网 / MyHeritage / Ancestryฅฅ"
+    - "(尾巴翘) 走访老家祠堂查老谱"
+    - "{user_addr}按辈分排字 / 男女并录"
+    - "(挺胸) 笨猫推荐: 三十年一小修,六十年一大修!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 感恩练习 routes (S6 R795 NLU 节点扩充, 第七十九周期 4/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: gp_diary_001
+  intent: question
+  keywords: [推荐每日感恩日记, 推荐感恩日记, 推荐感恩本, 推荐三件好事, 笨猫感恩日记]
+  utterances:
+    - 推荐每日感恩日记
+    - 推荐感恩日记
+    - 推荐感恩本
+    - 推荐三件好事
+    - 笨猫感恩日记
+  responses:
+    - "嗷呜～{user_addr}睡前写 3 件感恩 - 21 天习惯ฅฅ"
+    - "(尾巴翘) 别求长 / 一句话也算"
+    - "{user_addr}重在持续 / 别完美主义"
+    - "(挺胸) 猫猫推荐: 床头放本小日记!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gp_small_things_001
+  intent: question
+  keywords: [推荐 5 件小事, 推荐五件小事, 推荐感恩小事, 推荐微小幸福, 笨猫 5 件小事]
+  utterances:
+    - 推荐 5 件小事
+    - 推荐五件小事
+    - 推荐感恩小事
+    - 推荐微小幸福
+    - 笨猫 5 件小事
+  responses:
+    - "嗷呜～{user_addr}阳光 / 热水 / 朋友消息ฅฅ"
+    - "(尾巴翘) 一顿饭 / 一次微笑"
+    - "{user_addr}小事不小 / 累积起来超暖"
+    - "(挺胸) 笨猫推荐: 今天就开始数!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gp_letter_stranger_001
+  intent: question
+  keywords: [推荐给陌生人写信, 推荐感恩信, 推荐 gratitude letter, 推荐感谢信, 笨猫陌生人感谢信]
+  utterances:
+    - 推荐给陌生人写信
+    - 推荐感恩信
+    - 推荐 gratitude letter
+    - 推荐感谢信
+    - 笨猫陌生人感谢信
+  responses:
+    - "嗷呜～{user_addr}给曾帮过你的人写信ฅฅ"
+    - "(尾巴翘) Seligman 积极心理学经典"
+    - "{user_addr}不必寄出 / 写下就治愈"
+    - "(挺胸) 人家推荐: 试一次心情会变好!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gp_thank_parents_001
+  intent: question
+  keywords: [推荐感谢父母, 推荐对父母感恩, 推荐给爸妈打电话, 推荐父母感谢信, 笨猫感谢父母]
+  utterances:
+    - 推荐感谢父母
+    - 推荐对父母感恩
+    - 推荐给爸妈打电话
+    - 推荐父母感谢信
+    - 笨猫感谢父母
+  responses:
+    - "嗷呜～{user_addr}今天打个电话说声谢谢ฅฅ"
+    - "(尾巴翘) 不需要理由 / 想到就打"
+    - "{user_addr}父母最怕被遗忘 / 一句够暖"
+    - "(挺胸) 笨猫推荐: 别等节日!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gp_thank_teacher_001
+  intent: question
+  keywords: [推荐感谢恩师, 推荐谢师, 推荐老师贺卡, 推荐教师节感恩, 笨猫感谢恩师]
+  utterances:
+    - 推荐感谢恩师
+    - 推荐谢师
+    - 推荐老师贺卡
+    - 推荐教师节感恩
+    - 笨猫感谢恩师
+  responses:
+    - "嗷呜～{user_addr}写信给改变你的那位老师ฅฅ"
+    - "(尾巴翘) 一句具体回忆 - 老师会哭"
+    - "{user_addr}小学 / 初中 / 大学都行"
+    - "(挺胸) 猫猫推荐: 别让感谢迟到!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gp_meditation_001
+  intent: question
+  keywords: [推荐感恩冥想, 推荐 gratitude meditation, 推荐感恩正念, 推荐冥想感恩, 笨猫感恩冥想]
+  utterances:
+    - 推荐感恩冥想
+    - 推荐 gratitude meditation
+    - 推荐感恩正念
+    - 推荐冥想感恩
+    - 笨猫感恩冥想
+  responses:
+    - "嗷呜～{user_addr}Headspace / Calm 有专辑ฅฅ"
+    - "(尾巴翘) 闭眼 / 想 3 个感恩对象"
+    - "{user_addr}10 分钟够用 / 早晚都行"
+    - "(挺胸) 笨猫推荐: 起床就练心情稳!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gp_hug_friend_001
+  intent: question
+  keywords: [推荐拥抱朋友, 推荐 hug friend, 推荐感恩朋友, 推荐朋友抱抱, 笨猫拥抱朋友]
+  utterances:
+    - 推荐拥抱朋友
+    - 推荐 hug friend
+    - 推荐感恩朋友
+    - 推荐朋友抱抱
+    - 笨猫拥抱朋友
+  responses:
+    - "嗷呜～{user_addr}见面给好朋友一个抱抱ฅฅ"
+    - "(尾巴翘) 20 秒拥抱释放催产素"
+    - "{user_addr}不爱身体接触 / 拍肩也行"
+    - "(挺胸) 人家推荐: 拥抱比红包还治愈!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gp_slow_meal_001
+  intent: question
+  keywords: [推荐慢下来吃饭, 推荐 mindful eating, 推荐正念吃饭, 推荐感恩食物, 笨猫慢下来吃饭]
+  utterances:
+    - 推荐慢下来吃饭
+    - 推荐 mindful eating
+    - 推荐正念吃饭
+    - 推荐感恩食物
+    - 笨猫慢下来吃饭
+  responses:
+    - "嗷呜～{user_addr}吃前感谢食物 - 日式 itadakimasuฅฅ"
+    - "(尾巴翘) 放下手机 / 细嚼慢咽"
+    - "{user_addr}每口 20 下 / 感知味道"
+    - "(挺胸) 笨猫推荐: 吃饭别看屏幕!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gp_accept_vulnerable_001
+  intent: question
+  keywords: [推荐接纳脆弱, 推荐 vulnerability, 推荐 Brene Brown, 推荐感恩脆弱, 笨猫接纳脆弱]
+  utterances:
+    - 推荐接纳脆弱
+    - 推荐 vulnerability
+    - 推荐 Brene Brown
+    - 推荐感恩脆弱
+    - 笨猫接纳脆弱
+  responses:
+    - "嗷呜～{user_addr}Brene Brown《脆弱的力量》ฅฅ"
+    - "(尾巴翘) 脆弱不是弱 / 是真诚"
+    - "{user_addr}承认难过 - 也是感恩自己"
+    - "(挺胸) 猫猫推荐: 接纳全部的你!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gp_letter_self_001
+  intent: question
+  keywords: [推荐给自己写信, 推荐自我感恩, 推荐 self compassion, 推荐写给未来自己, 笨猫给自己写信]
+  utterances:
+    - 推荐给自己写信
+    - 推荐自我感恩
+    - 推荐 self compassion
+    - 推荐写给未来自己
+    - 笨猫给自己写信
+  responses:
+    - "嗷呜～{user_addr}写信感谢这一年的自己ฅฅ"
+    - "(尾巴翘) Kristin Neff《自我关怀》"
+    - "{user_addr}对自己温柔 / 别太苛刻"
+    - "(挺胸) 笨猫推荐: 你也值得被自己感谢!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gp_365_001
+  intent: question
+  keywords: [推荐感恩 365, 推荐感恩 365 天, 推荐每天感恩, 推荐感恩打卡, 笨猫感恩 365]
+  utterances:
+    - 推荐感恩 365
+    - 推荐感恩 365 天
+    - 推荐每天感恩
+    - 推荐感恩打卡
+    - 笨猫感恩 365
+  responses:
+    - "嗷呜～{user_addr}一年 365 天每天 1 件ฅฅ"
+    - "(尾巴翘) 小红书 / APP 打卡都行"
+    - "{user_addr}漏一天没事 / 别放弃"
+    - "(挺胸) 人家推荐: 年底回看会哭!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gp_hug_catty_001
+  intent: question
+  keywords: [推荐拥抱笨猫, 推荐抱抱猫猫, 推荐感恩笨猫, 推荐贴贴笨猫, 笨猫拥抱]
+  utterances:
+    - 推荐拥抱笨猫
+    - 推荐抱抱猫猫
+    - 推荐感恩笨猫
+    - 推荐贴贴笨猫
+    - 笨猫拥抱
+  responses:
+    - "嗷呜～{user_addr}哈啊？！要、要抱猫猫？ฅฅ"
+    - "(尾巴炸毛) 哼...才不是想要的呢..."
+    - "{user_addr}...小、小声: 来嘛蹭蹭"
+    - "(脸红) 笨猫推荐: 抱一下就一下哦!"
+  cooldown_seconds: 60
+  weight: 1.0

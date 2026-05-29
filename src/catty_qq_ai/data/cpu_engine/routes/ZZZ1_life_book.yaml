@@ -1,0 +1,206 @@
+# 人生书单 routes (S6 R793 NLU 节点扩充, 第七十九周期 2/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: lb_huozhe_001
+  intent: question
+  keywords: [推荐活着, 推荐余华活着, 推荐余华, 推荐活着小说, 笨猫活着]
+  utterances:
+    - 推荐活着
+    - 推荐余华活着
+    - 推荐余华
+    - 推荐活着小说
+    - 笨猫活着
+  responses:
+    - "嗷呜～{user_addr}《活着》余华 - 苦难史诗ฅฅ"
+    - "(尾巴翘) 福贵一生 / 时代洪流"
+    - "{user_addr}哭到崩溃 / 中国当代经典"
+    - "(挺胸) 猫猫推荐: 一生必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_solitude_001
+  intent: question
+  keywords: [推荐百年孤独, 推荐马尔克斯, 推荐魔幻现实, 推荐马孔多, 笨猫百年孤独]
+  utterances:
+    - 推荐百年孤独
+    - 推荐马尔克斯
+    - 推荐魔幻现实
+    - 推荐马孔多
+    - 笨猫百年孤独
+  responses:
+    - "嗷呜～{user_addr}《百年孤独》马尔克斯 - 魔幻现实ฅฅ"
+    - "(尾巴翘) 布恩迪亚家族 / 七代轮回"
+    - "{user_addr}诺贝尔文学奖 / 拉美巅峰"
+    - "(挺胸) 笨猫推荐: 开头神级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_pingfan_001
+  intent: question
+  keywords: [推荐平凡的世界, 推荐路遥, 推荐孙少平, 推荐黄土高原, 笨猫平凡的世界]
+  utterances:
+    - 推荐平凡的世界
+    - 推荐路遥
+    - 推荐孙少平
+    - 推荐黄土高原
+    - 笨猫平凡的世界
+  responses:
+    - "嗷呜～{user_addr}《平凡的世界》路遥 - 励志神作ฅฅ"
+    - "(尾巴翘) 孙少安 / 孙少平兄弟"
+    - "{user_addr}茅盾文学奖 / 八十年代中国"
+    - "(挺胸) 人家推荐: 年轻人必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_kite_001
+  intent: question
+  keywords: [推荐追风筝的人, 推荐胡赛尼, 推荐阿富汗小说, 推荐为你千千万万遍, 笨猫追风筝的人]
+  utterances:
+    - 推荐追风筝的人
+    - 推荐胡赛尼
+    - 推荐阿富汗小说
+    - 推荐为你千千万万遍
+    - 笨猫追风筝的人
+  responses:
+    - "嗷呜～{user_addr}《追风筝的人》胡赛尼 - 救赎之书ฅฅ"
+    - "(尾巴翘) 阿米尔 / 哈桑 / 为你千千万万遍"
+    - "{user_addr}阿富汗背景 / 友情背叛救赎"
+    - "(挺胸) 猫猫推荐: 哭点密集!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_alchemist_001
+  intent: question
+  keywords: [推荐牧羊少年奇幻之旅, 推荐保罗柯艾略, 推荐炼金术士, 推荐圣地亚哥, 笨猫牧羊少年]
+  utterances:
+    - 推荐牧羊少年奇幻之旅
+    - 推荐保罗柯艾略
+    - 推荐炼金术士
+    - 推荐圣地亚哥
+    - 笨猫牧羊少年
+  responses:
+    - "嗷呜～{user_addr}《牧羊少年奇幻之旅》柯艾略ฅฅ"
+    - "(尾巴翘) 圣地亚哥追梦 / 天命之书"
+    - "{user_addr}全球销量过亿 / 寓言体"
+    - "(挺胸) 笨猫推荐: 迷茫时读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_moon_001
+  intent: question
+  keywords: [推荐月亮和六便士, 推荐毛姆, 推荐高更原型, 推荐月亮六便士, 笨猫月亮和六便士]
+  utterances:
+    - 推荐月亮和六便士
+    - 推荐毛姆
+    - 推荐高更原型
+    - 推荐月亮六便士
+    - 笨猫月亮和六便士
+  responses:
+    - "嗷呜～{user_addr}《月亮与六便士》毛姆 - 理想现实ฅฅ"
+    - "(尾巴翘) 思特里克兰德 / 高更原型"
+    - "{user_addr}月亮=理想 / 六便士=现实"
+    - "(挺胸) 人家推荐: 中年危机必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_meaning_001
+  intent: question
+  keywords: [推荐活出生命的意义, 推荐弗兰克尔, 推荐意义疗法, 推荐集中营, 笨猫活出生命的意义]
+  utterances:
+    - 推荐活出生命的意义
+    - 推荐弗兰克尔
+    - 推荐意义疗法
+    - 推荐集中营
+    - 笨猫活出生命的意义
+  responses:
+    - "嗷呜～{user_addr}《活出生命的意义》弗兰克尔ฅฅ"
+    - "(尾巴翘) 奥斯维辛幸存 / 意义疗法"
+    - "{user_addr}心理学经典 / 苦难中找意义"
+    - "(挺胸) 猫猫推荐: 抑郁时读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_wheel_001
+  intent: question
+  keywords: [推荐在轮下, 推荐黑塞, 推荐少年汉斯, 推荐在轮下黑塞, 笨猫在轮下]
+  utterances:
+    - 推荐在轮下
+    - 推荐黑塞
+    - 推荐少年汉斯
+    - 推荐在轮下黑塞
+    - 笨猫在轮下
+  responses:
+    - "嗷呜～{user_addr}《在轮下》黑塞 - 少年悲歌ฅฅ"
+    - "(尾巴翘) 汉斯压垮 / 教育体制反思"
+    - "{user_addr}黑塞自传色彩 / 诺奖得主"
+    - "(挺胸) 笨猫推荐: 学生党共鸣!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_stranger_001
+  intent: question
+  keywords: [推荐局外人, 推荐加缪, 推荐默尔索, 推荐荒诞小说, 笨猫局外人]
+  utterances:
+    - 推荐局外人
+    - 推荐加缪
+    - 推荐默尔索
+    - 推荐荒诞小说
+    - 笨猫局外人
+  responses:
+    - "嗷呜～{user_addr}《局外人》加缪 - 荒诞哲学ฅฅ"
+    - "(尾巴翘) 默尔索 / 妈妈死了我不哭"
+    - "{user_addr}存在主义 / 诺贝尔文学奖"
+    - "(挺胸) 人家推荐: 薄薄一本读得通!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_sophie_001
+  intent: question
+  keywords: [推荐苏菲的世界, 推荐乔斯坦贾德, 推荐哲学入门, 推荐苏菲, 笨猫苏菲的世界]
+  utterances:
+    - 推荐苏菲的世界
+    - 推荐乔斯坦贾德
+    - 推荐哲学入门
+    - 推荐苏菲
+    - 笨猫苏菲的世界
+  responses:
+    - "嗷呜～{user_addr}《苏菲的世界》贾德 - 哲学入门ฅฅ"
+    - "(尾巴翘) 小说体哲学史 / 苏格拉底到萨特"
+    - "{user_addr}你是谁 / 世界从何而来"
+    - "(挺胸) 猫猫推荐: 哲学第一本!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_oldman_001
+  intent: question
+  keywords: [推荐老人与海, 推荐海明威, 推荐圣地亚哥老人, 推荐马林鱼, 笨猫老人与海]
+  utterances:
+    - 推荐老人与海
+    - 推荐海明威
+    - 推荐圣地亚哥老人
+    - 推荐马林鱼
+    - 笨猫老人与海
+  responses:
+    - "嗷呜～{user_addr}《老人与海》海明威 - 硬汉精神ฅฅ"
+    - "(尾巴翘) 圣地亚哥 / 马林鱼 / 鲨鱼"
+    - "{user_addr}人可以被毁灭不可被打败"
+    - "(挺胸) 笨猫推荐: 中篇巅峰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_harry_001
+  intent: question
+  keywords: [推荐哈利波特, 推荐罗琳, 推荐魔法石, 推荐霍格沃茨, 笨猫哈利波特]
+  utterances:
+    - 推荐哈利波特
+    - 推荐罗琳
+    - 推荐魔法石
+    - 推荐霍格沃茨
+    - 笨猫哈利波特
+  responses:
+    - "嗷呜～{user_addr}《哈利波特》J.K.罗琳 - 童年神作ฅฅ"
+    - "(尾巴翘) 七部曲 / 霍格沃茨 / 伏地魔"
+    - "{user_addr}全球销量5亿+ / 一代人记忆"
+    - "(挺胸) 人家推荐: 一辈子的魔法!"
+  cooldown_seconds: 60
+  weight: 1.0

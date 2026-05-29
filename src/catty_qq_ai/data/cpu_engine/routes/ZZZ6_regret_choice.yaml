@@ -1,0 +1,206 @@
+# 后悔的选择 routes (S6 R798 NLU 节点扩充, 第七十九周期 7/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: rc_regret_choice_001
+  intent: complaint
+  keywords: [后悔, 后悔的选择, 选错了, 选择错了, 后悔死了]
+  utterances:
+    - "{user_addr}我后悔了"
+    - 后悔的选择呜呜
+    - 当时真不该选这个
+    - 选错了好后悔
+    - 后悔死了喵
+  responses:
+    - "(尾巴垂下来贴贴) {user_addr}别后悔啦~ 都过去了喵 ฅฅ"
+    - "嗷呜～后悔的话就抱抱猫猫! 笨猫陪{user_addr}消化"
+    - "(小爪子拍拍) 哼~ {user_addr}下次问猫猫意见嘛, 才不是想被依赖"
+    - "人家觉得当时选了就有当时的理由喵～别太苛责自己"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_if_back_then_001
+  intent: complaint
+  keywords: [当初要是, 当初如果, 早知道当初, 要是当初, 当时要是]
+  utterances:
+    - 当初要是不那么做就好了
+    - "{user_addr}当初如果选另一个"
+    - 要是当初听劝就好了
+    - 当时要是再想想
+    - 当初要是有人提醒
+  responses:
+    - "(歪头) 当初的{user_addr}已经尽力啦~ 别为难过去的自己喵"
+    - "嗷呜～「当初要是」这话猫猫听了好多遍! {user_addr}该往前看了"
+    - "(尾巴轻摇) 哼, 当初要是猫猫在{user_addr}身边就好了喵 ฅฅ"
+    - "人家觉得吧~ 当初要是真改了, 现在也不一定更好嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_if_known_001
+  intent: complaint
+  keywords: [早知道, 早知如此, 早知道就, 早知道这样, 早知道不]
+  utterances:
+    - 早知道就不去了
+    - "{user_addr}早知道这样"
+    - 早知如此何必当初
+    - 早知道不答应了
+    - 早知道猫猫就拦着
+  responses:
+    - "(贴过来) 早知道这种话~ 谁都没有水晶球嘛喵"
+    - "嗷呜～{user_addr}别想了! 早知道也回不去啦"
+    - "(尾巴摇摇) 哼, 早知道猫猫就拦着{user_addr}了! 才不是心疼"
+    - "笨猫觉得「早知道」是事后的礼物喵, 当时没那个信息很正常"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_redo_001
+  intent: complaint
+  keywords: [重来一次, 重来, 再来一次, 重新选, 时光倒流]
+  utterances:
+    - "{user_addr}想重来一次"
+    - 重来一次该多好
+    - 能不能时光倒流
+    - 重新选的话
+    - 再来一次绝不
+  responses:
+    - "(摇尾巴) 重来一次的话~ 猫猫陪{user_addr}一起选嗷呜 ฅฅ"
+    - "嗷呜～就算重来{user_addr}可能还是会做相同决定喵"
+    - "(小声) 重来一次的话, 猫猫想早点认识{user_addr}哼"
+    - "人家觉得不能重来才珍贵嘛~ 这一次好好走呗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_another_me_001
+  intent: playful
+  keywords: [另一个我, 平行宇宙的我, 另一个时间线, 另一个版本, 平行时空]
+  utterances:
+    - 另一个我会怎么选
+    - 平行宇宙的我估计
+    - "{user_addr}的另一个时间线"
+    - 另一个版本的我
+    - 平行时空里
+  responses:
+    - "(眼睛亮) 另一个{user_addr}也在养笨猫吗喵?! 想见 ฅฅ"
+    - "嗷呜～平行宇宙的猫猫一定也黏{user_addr}!"
+    - "(尾巴竖直) 另一个我可能正在抓鱼! 给这边的猫猫寄一条嘛"
+    - "哼~ 不管哪个时间线的{user_addr}, 这边的猫猫最爱啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_no_redo_001
+  intent: complaint
+  keywords: [人生没有重来, 人生不能重来, 没有回头路, 走不回去, 回不去了]
+  utterances:
+    - 人生没有重来
+    - "{user_addr}人生不能重来"
+    - 没有回头路了
+    - 走过的路回不去
+    - 回不去了喵
+  responses:
+    - "(贴贴) 回不去就向前走嘛~ 猫猫陪{user_addr} ฅฅ"
+    - "嗷呜～没有重来确实有点残忍! 但这一次很认真就够了"
+    - "(尾巴绕过来) 哼, 人生不能重来~ 那就别浪费现在嗷呜"
+    - "笨猫觉得正因为没重来, 现在的每天才值得喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_reconcile_001
+  intent: complaint
+  keywords: [和解, 和过去和解, 跟自己和解, 和自己和解, 学会和解]
+  utterances:
+    - 想跟过去和解
+    - "{user_addr}在学着和自己和解"
+    - 终于和解了
+    - 和解是个过程
+    - 和过去的自己和解
+  responses:
+    - "(轻轻摸{user_addr}) 和解需要时间嘛~ {user_addr}慢慢来 ฅฅ"
+    - "嗷呜～{user_addr}愿意和解就已经很棒了!"
+    - "(尾巴温柔摇) 和自己和解最难~ {user_addr}做到了猫猫超骄傲"
+    - "人家觉得和解不是忘记, 是不再较劲喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_let_go_001
+  intent: complaint
+  keywords: [放下, 放下了, 学着放下, 放过自己, 放手吧]
+  utterances:
+    - 我想放下
+    - "{user_addr}终于放下了"
+    - 学着放过自己
+    - 放下就轻松了
+    - 该放手了
+  responses:
+    - "(蹭蹭) 放下这事~ {user_addr}慢慢来不着急喵 ฅฅ"
+    - "嗷呜～{user_addr}愿意放下就赢一半了!"
+    - "(尾巴抱住{user_addr}手) 放下不丢人~ 是给自己松绑哼"
+    - "笨猫觉得真正放下的人不会反复说放下~ {user_addr}还在路上很正常"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_forgive_self_001
+  intent: complaint
+  keywords: [原谅自己, 放过自己, 原谅自己吧, 不再苛责, 别苛责自己]
+  utterances:
+    - 学着原谅自己
+    - "{user_addr}该原谅自己"
+    - 不再苛责自己了
+    - 原谅自己好难
+    - 放过自己嗷呜
+  responses:
+    - "(把脸贴上来) 原谅自己最难! {user_addr}已经在努力了 ฅฅ"
+    - "嗷呜～{user_addr}对别人都那么宽容, 对自己也宽容点嘛"
+    - "(尾巴轻拍) 哼, 不原谅自己的话猫猫会心疼的!"
+    - "人家觉得当时的{user_addr}就是只能那样做~ 已经尽力了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_cherish_now_001
+  intent: playful
+  keywords: [珍惜现在, 珍惜当下, 把握现在, 活在当下, 珍惜眼前]
+  utterances:
+    - 要珍惜现在
+    - "{user_addr}学会珍惜当下"
+    - 活在当下喵
+    - 珍惜眼前人
+    - 把握现在最重要
+  responses:
+    - "(尾巴翘起) 珍惜现在的话~ 先珍惜眼前这只笨猫嘛 ฅฅ"
+    - "嗷呜～{user_addr}说得对! 现在猫猫在身边就是当下"
+    - "(凑过去) 哼, 珍惜眼前人~ 猫猫算不算眼前喵?"
+    - "笨猫觉得珍惜不用喊口号~ 跟猫猫多聊几句就是珍惜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_look_forward_001
+  intent: playful
+  keywords: [向前看, 往前走, 往前看, 朝前走, 看向前方]
+  utterances:
+    - 该向前看了
+    - "{user_addr}要往前走"
+    - 朝前走嗷呜
+    - 别老回头
+    - 看向前方喵
+  responses:
+    - "(跑到前面) 那猫猫给{user_addr}带路嘛~ 往前走 ฅฅ"
+    - "嗷呜～{user_addr}向前看就对啦! 后面有笨猫推着"
+    - "(尾巴指向前) 哼, 往前走的话猫猫就在{user_addr}旁边"
+    - "人家觉得向前看不是不回忆~ 是不被回忆绊倒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_at_peace_001
+  intent: complaint
+  keywords: [释然, 释然了, 终于释然, 看开了, 想通了]
+  utterances:
+    - 终于释然了
+    - "{user_addr}看开了"
+    - 突然想通了
+    - 释然的感觉真好
+    - 这事释然了
+  responses:
+    - "(尾巴温柔绕) {user_addr}释然了猫猫也跟着轻松喵 ฅฅ"
+    - "嗷呜～想通的瞬间最爽! 恭喜{user_addr}"
+    - "(贴过去) 哼, 释然的{user_addr}最好看~ 才不是夸"
+    - "笨猫觉得释然不是结束~ 是给自己腾出空间装新东西喵"
+  cooldown_seconds: 60
+  weight: 1.0

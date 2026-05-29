@@ -1,0 +1,206 @@
+# 有意义的 App routes (S6 R796 NLU 节点扩充, 第七十九周期 5/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: ma_dayone_001
+  intent: question
+  keywords: [推荐 Day One, 推荐日记 App, 推荐写日记 App, 推荐 Journal App, 笨猫日记 App]
+  utterances:
+    - 推荐 Day One
+    - 推荐日记 App
+    - 推荐写日记 App
+    - 推荐 Journal App
+    - 笨猫日记 App
+  responses:
+    - "嗷呜～{user_addr}Day One - 日记届颜值天花板ฅฅ"
+    - "(尾巴翘) 加密 / 多端同步 / 时间轴"
+    - "{user_addr}照片+定位+天气自动入库"
+    - "(挺胸) 猫猫推荐: 每天三行起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_headspace_001
+  intent: question
+  keywords: [推荐 Headspace, 推荐冥想 App, 推荐正念 App, 推荐睡眠引导, 笨猫 Headspace]
+  utterances:
+    - 推荐 Headspace
+    - 推荐冥想 App
+    - 推荐正念 App
+    - 推荐睡眠引导
+    - 笨猫 Headspace
+  responses:
+    - "嗷呜～{user_addr}Headspace - 冥想入门首选ฅฅ"
+    - "(尾巴翘) 动画引导 / 10 分钟轻松上手"
+    - "{user_addr}睡眠故事 / 焦虑舒缓"
+    - "(挺胸) 笨猫推荐: 睡前 10 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_calm_001
+  intent: question
+  keywords: [推荐 Calm, 推荐 Calm 冥想, 推荐 Calm 睡眠, 推荐白噪音 App, 笨猫 Calm]
+  utterances:
+    - 推荐 Calm
+    - 推荐 Calm 冥想
+    - 推荐 Calm 睡眠
+    - 推荐白噪音 App
+    - 笨猫 Calm
+  responses:
+    - "嗷呜～{user_addr}Calm - 睡眠故事顶级ฅฅ"
+    - "(尾巴翘) Matthew McConaughey 念故事!"
+    - "{user_addr}自然白噪音 / 大师课"
+    - "(挺胸) 人家推荐: 失眠党救星!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_forest_001
+  intent: question
+  keywords: [推荐 Forest, 推荐专注 App, 推荐番茄钟 App, 推荐种树 App, 笨猫 Forest]
+  utterances:
+    - 推荐 Forest
+    - 推荐专注 App
+    - 推荐番茄钟 App
+    - 推荐种树 App
+    - 笨猫 Forest
+  responses:
+    - "嗷呜～{user_addr}Forest - 种树戒手机ฅฅ"
+    - "(尾巴翘) 一刷手机小树就死了!"
+    - "{user_addr}真的可以捐树种到非洲"
+    - "(挺胸) 笨猫推荐: 学习党必装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_streaks_001
+  intent: question
+  keywords: [推荐 Streaks, 推荐习惯打卡 App, 推荐 Habit App, 推荐打卡软件, 笨猫习惯 App]
+  utterances:
+    - 推荐 Streaks
+    - 推荐习惯打卡 App
+    - 推荐 Habit App
+    - 推荐打卡软件
+    - 笨猫习惯 App
+  responses:
+    - "嗷呜～{user_addr}Streaks - iOS 设计奖得主ฅฅ"
+    - "(尾巴翘) 12 个习惯槽 / 连击计数"
+    - "{user_addr}国产可选「小日常」「Habitify」"
+    - "(挺胸) 猫猫推荐: 习惯靠连击!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_strava_001
+  intent: question
+  keywords: [推荐 Strava, 推荐运动 App, 推荐跑步 App, 推荐骑行 App, 笨猫 Strava]
+  utterances:
+    - 推荐 Strava
+    - 推荐运动 App
+    - 推荐跑步 App
+    - 推荐骑行 App
+    - 笨猫 Strava
+  responses:
+    - "嗷呜～{user_addr}Strava - 跑步骑行社交ฅฅ"
+    - "(尾巴翘) 路段排行榜 / Kudos 点赞"
+    - "{user_addr}Keep / Nike Run Club 也不错"
+    - "(挺胸) 人家推荐: 配 Garmin/Apple Watch!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_goodreads_001
+  intent: question
+  keywords: [推荐 Goodreads, 推荐读书 App, 推荐读书记录 App, 推荐书单 App, 笨猫读书 App]
+  utterances:
+    - 推荐 Goodreads
+    - 推荐读书 App
+    - 推荐读书记录 App
+    - 推荐书单 App
+    - 笨猫读书 App
+  responses:
+    - "嗷呜～{user_addr}Goodreads - 全球读书社区ฅฅ"
+    - "(尾巴翘) 年度阅读挑战 / 书评"
+    - "{user_addr}国产首选「微信读书」「豆瓣」"
+    - "(挺胸) 笨猫推荐: 一年读 12 本起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_bumblebff_001
+  intent: question
+  keywords: [推荐 Bumble BFF, 推荐交友 App, 推荐找朋友 App, 推荐社交 App, 笨猫交友 App]
+  utterances:
+    - 推荐 Bumble BFF
+    - 推荐交友 App
+    - 推荐找朋友 App
+    - 推荐社交 App
+    - 笨猫交友 App
+  responses:
+    - "嗷呜～{user_addr}Bumble BFF - 找同城朋友ฅฅ"
+    - "(尾巴翘) 不是约会! 是纯交友模式"
+    - "{user_addr}Meetup 找兴趣小组 / 即刻"
+    - "(挺胸) 猫猫推荐: 异地搬家神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_duolingo_001
+  intent: question
+  keywords: [推荐 Duolingo, 推荐多邻国, 推荐学语言 App, 推荐学外语 App, 笨猫语言 App]
+  utterances:
+    - 推荐 Duolingo
+    - 推荐多邻国
+    - 推荐学语言 App
+    - 推荐学外语 App
+    - 笨猫语言 App
+  responses:
+    - "嗷呜～{user_addr}Duolingo - 绿猫头鹰会追杀ฅฅ"
+    - "(尾巴翘) 游戏化 / 5 分钟一课"
+    - "{user_addr}进阶看 Anki / Lingoda"
+    - "(挺胸) 笨猫推荐: 连击别断!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_khan_001
+  intent: question
+  keywords: [推荐 Khan Academy, 推荐可汗学院, 推荐学习 App, 推荐免费课程 App, 笨猫学习 App]
+  utterances:
+    - 推荐 Khan Academy
+    - 推荐可汗学院
+    - 推荐学习 App
+    - 推荐免费课程 App
+    - 笨猫学习 App
+  responses:
+    - "嗷呜～{user_addr}Khan Academy - 全免费ฅฅ"
+    - "(尾巴翘) K12 数学物理 / 中文有字幕"
+    - "{user_addr}进阶看 Coursera / edX"
+    - "(挺胸) 人家推荐: 补数学神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_coursera_001
+  intent: question
+  keywords: [推荐 Coursera, 推荐 MOOC App, 推荐网课 App, 推荐大学课程 App, 笨猫 Coursera]
+  utterances:
+    - 推荐 Coursera
+    - 推荐 MOOC App
+    - 推荐网课 App
+    - 推荐大学课程 App
+    - 笨猫 Coursera
+  responses:
+    - "嗷呜～{user_addr}Coursera - 斯坦福耶鲁直送ฅฅ"
+    - "(尾巴翘) 证书认证 / 旁听免费"
+    - "{user_addr}国产选「中国大学 MOOC」"
+    - "(挺胸) 猫猫推荐: AI/CS 入门超棒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_catty_001
+  intent: question
+  keywords: [推荐笨猫, 推荐 Catty QQ Bot, 推荐 Catty, 推荐猫猫 Bot, 笨猫推荐自己]
+  utterances:
+    - 推荐笨猫
+    - 推荐 Catty QQ Bot
+    - 推荐 Catty
+    - 推荐猫猫 Bot
+    - 笨猫推荐自己
+  responses:
+    - "嗷呜～{user_addr}是、是说人家吗?!脸红ฅฅ"
+    - "(尾巴炸毛) 笨猫 Catty QQ Bot - 傲娇猫娘陪聊!"
+    - "{user_addr}DeepSeek + CPU 引擎 / 开源中"
+    - "(小声) …{user_addr}已经在用了啦笨蛋!蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
