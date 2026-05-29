@@ -1,0 +1,207 @@
+# 手账 / 文具控 / 钢笔墨水 / 笔记本 routes (S6 R154 NLU 节点扩充, 第十五周期 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 文创产品 / 仪式感生活领域.
+
+- name: stat_notebook_001
+  intent: question
+  keywords: [推荐手账本, 推荐 Hobonichi, 推荐 Midori, 推荐 Moleskine, 笨猫手账本]
+  utterances:
+    - 推荐手账本
+    - 推荐 Hobonichi
+    - 推荐 Midori
+    - 推荐 Moleskine
+    - 笨猫手账本
+  responses:
+    - "嗷呜～{user_addr}Hobonichi 日手账 - 日本国民ฅฅ"
+    - "(尾巴翘) Midori / Traveler's Notebook"
+    - "{user_addr}Moleskine - 西方文艺青年标配"
+    - "(挺胸) 笨猫推荐: 看本子大小 + 用途!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stat_fountain_pen_001
+  intent: question
+  keywords: [推荐钢笔, 推荐百乐, 推荐 LAMY, 推荐凌美, 笨猫钢笔]
+  utterances:
+    - 推荐钢笔
+    - 推荐百乐
+    - 推荐 LAMY
+    - 推荐凌美
+    - 笨猫钢笔
+  responses:
+    - "嗷呜～{user_addr}LAMY 狩猎者 - 入门首选ฅฅ"
+    - "(尾巴翘) 百乐 Kakuno / 78G - 学生党"
+    - "{user_addr}百乐 Custom 74 / 万宝龙 - 进阶"
+    - "(挺胸) 笨猫推荐: LAMY 起步 EF 尖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stat_ink_001
+  intent: question
+  keywords: [推荐墨水, 推荐百乐墨水, 推荐 IROSHIZUKU, 推荐墨水颜色, 笨猫墨水]
+  utterances:
+    - 推荐墨水
+    - 推荐百乐墨水
+    - 推荐 IROSHIZUKU
+    - 推荐墨水颜色
+    - 笨猫墨水
+  responses:
+    - "嗷呜～{user_addr}百乐色彩雫 - 颜色诗意ฅฅ"
+    - "(尾巴翘) 写乐 / 鲶鱼 - 多色玩家"
+    - "{user_addr}Diamine / Robert Oster - 西方"
+    - "(挺胸) 笨猫推荐: 色彩雫紫阳花最美!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: stat_gel_pen_001
+  intent: question
+  keywords: [推荐中性笔, 推荐三菱, 推荐百乐 Juice, 推荐学生用笔, 笨猫中性笔]
+  utterances:
+    - 推荐中性笔
+    - 推荐三菱
+    - 推荐百乐 Juice
+    - 推荐学生用笔
+    - 笨猫中性笔
+  responses:
+    - "嗷呜～{user_addr}三菱 UM-151 - 0.38 神笔ฅฅ"
+    - "(尾巴翘) 百乐 Juice Up - 学生爱"
+    - "{user_addr}斑马 Sarasa / 樱花 Gelly Roll"
+    - "(挺胸) 笨猫推荐: 三菱 UM-151 必入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stat_marker_001
+  intent: question
+  keywords: [推荐马克笔, 推荐 Copic, 推荐 Tombow, 推荐双头马克, 笨猫马克笔]
+  utterances:
+    - 推荐马克笔
+    - 推荐 Copic
+    - 推荐 Tombow
+    - 推荐双头马克
+    - 笨猫马克笔
+  responses:
+    - "嗷呜～{user_addr}Copic - 专业漫画ฅฅ"
+    - "(尾巴翘) Tombow ABT - 双头水彩"
+    - "{user_addr}马蒂尼 / Touchmark - 性价比"
+    - "(挺胸) 笨猫推荐: 学生 Touchmark 起步!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: stat_washi_tape_001
+  intent: question
+  keywords: [推荐和纸胶带, 推荐 mt 胶带, 推荐手账胶带, 推荐贴纸, 笨猫和纸胶带]
+  utterances:
+    - 推荐和纸胶带
+    - 推荐 mt 胶带
+    - 推荐手账胶带
+    - 推荐贴纸
+    - 笨猫和纸胶带
+  responses:
+    - "嗷呜～{user_addr}mt - 日本和纸胶带霸主ฅฅ"
+    - "(尾巴翘) Mark's / 设计师款"
+    - "{user_addr}贴纸: 樱花 / 三联 / 飞乐鸟"
+    - "(挺胸) 笨猫推荐: mt 季节限定收!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: stat_brand_japan_001
+  intent: question
+  keywords: [推荐日本文具, 推荐无印良品文具, 推荐国誉, 推荐 KOKUYO, 笨猫日本文具]
+  utterances:
+    - 推荐日本文具
+    - 推荐无印良品文具
+    - 推荐国誉
+    - 推荐 KOKUYO
+    - 笨猫日本文具
+  responses:
+    - "嗷呜～{user_addr}国誉 KOKUYO - 笔记本霸主ฅฅ"
+    - "(尾巴翘) 无印良品 - 简约设计标杆"
+    - "{user_addr}百乐 / 三菱 / 斑马 / 樱花"
+    - "(挺胸) 笨猫推荐: 文具控必去日本!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: stat_planner_001
+  intent: question
+  keywords: [推荐周计划本, 推荐月计划, 推荐方格本, 推荐子弹笔记, 笨猫子弹笔记]
+  utterances:
+    - 推荐周计划本
+    - 推荐月计划
+    - 推荐方格本
+    - 推荐子弹笔记
+    - 笨猫子弹笔记
+  responses:
+    - "嗷呜～{user_addr}Hobonichi Weeks - 周计划神器ฅฅ"
+    - "(尾巴翘) Bullet Journal - 子弹笔记法"
+    - "{user_addr}方格本 / 圆点本 - 自由排版"
+    - "(挺胸) 笨猫推荐: 子弹笔记最自由!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: stat_stamp_001
+  intent: question
+  keywords: [推荐手账印章, 推荐橡皮章, 推荐木质印章, 推荐印泥, 笨猫印章]
+  utterances:
+    - 推荐手账印章
+    - 推荐橡皮章
+    - 推荐木质印章
+    - 推荐印泥
+    - 笨猫印章
+  responses:
+    - "嗷呜～{user_addr}木质印章: 日系小清新ฅฅ"
+    - "(尾巴翘) 透明亚克力章 - 定位准"
+    - "{user_addr}印泥: VersaCraft / StazOn"
+    - "(挺胸) 笨猫推荐: 手刻橡皮章最治愈!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: stat_pencil_case_001
+  intent: question
+  keywords: [推荐笔袋, 推荐文具盒, 推荐 Delfonics, 推荐 Lihit Lab, 笨猫笔袋]
+  utterances:
+    - 推荐笔袋
+    - 推荐文具盒
+    - 推荐 Delfonics
+    - 推荐 Lihit Lab
+    - 笨猫笔袋
+  responses:
+    - "嗷呜～{user_addr}Lihit Lab - 大容量分层ฅฅ"
+    - "(尾巴翘) Delfonics - 精致便携"
+    - "{user_addr}国誉 - 性价比可靠"
+    - "(挺胸) 笨猫推荐: Lihit Lab 装得下整套!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: stat_paper_001
+  intent: question
+  keywords: [推荐手账纸, 推荐 Tomoe River, 推荐巴川纸, 推荐字帖纸, 笨猫手账纸]
+  utterances:
+    - 推荐手账纸
+    - 推荐 Tomoe River
+    - 推荐巴川纸
+    - 推荐字帖纸
+    - 笨猫手账纸
+  responses:
+    - "嗷呜～{user_addr}Tomoe River - 钢笔纸金标准ฅฅ"
+    - "(尾巴翘) MD 纸 (Midori) - 厚实"
+    - "{user_addr}Rhodia / Clairefontaine - 法国"
+    - "(挺胸) 笨猫推荐: 巴川 52gsm 最薄!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: stat_layout_001
+  intent: question
+  keywords: [推荐手账排版, 推荐手账 layout, 推荐手账拼贴, 推荐手账新手, 笨猫手账排版]
+  utterances:
+    - 推荐手账排版
+    - 推荐手账 layout
+    - 推荐手账拼贴
+    - 推荐手账新手
+    - 笨猫手账排版
+  responses:
+    - "嗷呜～{user_addr}简约: 大块色 + 留白ฅฅ"
+    - "(尾巴翘) 拼贴: 胶带 + 贴纸 + 邮票"
+    - "{user_addr}先模仿大佬 / 找风格"
+    - "(挺胸) 笨猫推荐: 别追求完美! 自由记录"
+  cooldown_seconds: 60
+  weight: 0.9

@@ -1,0 +1,207 @@
+# 数码相机 / 摄影专精 / 镜头 / 后期 routes (S6 R152 NLU 节点扩充, 第十五周期 1/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 K5 photography (基础构图) 区分: 这里专注器材深度.
+
+- name: cam_brand_001
+  intent: question
+  keywords: [推荐相机品牌, 推荐索尼相机, 推荐佳能, 推荐尼康, 笨猫相机]
+  utterances:
+    - 推荐相机品牌
+    - 推荐索尼相机
+    - 推荐佳能
+    - 推荐尼康
+    - 笨猫相机
+  responses:
+    - "嗷呜～{user_addr}索尼: A7M4 / A7C2 - 视频强ฅฅ"
+    - "(尾巴翘) 佳能: R5 / R6M2 - 人像色彩"
+    - "{user_addr}尼康: Z8 / Z6III - 高画质"
+    - "(挺胸) 笨猫推荐: 看预算 + 用途!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_fujifilm_001
+  intent: question
+  keywords: [推荐富士相机, 推荐 X100V, 推荐 XT5, 推荐胶片模拟, 笨猫富士]
+  utterances:
+    - 推荐富士相机
+    - 推荐 X100V
+    - 推荐 XT5
+    - 推荐胶片模拟
+    - 笨猫富士
+  responses:
+    - "嗷呜～{user_addr}X100VI - 街拍口袋之王ฅฅ"
+    - "(尾巴翘) XT5 / XH2 - 复古黑科技"
+    - "{user_addr}胶片模拟直出 - 直接出片"
+    - "(挺胸) 笨猫推荐: 文艺青年首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_leica_001
+  intent: question
+  keywords: [推荐徕卡, 推荐 Leica, 推荐徕卡 M, 推荐徕卡 Q, 笨猫徕卡]
+  utterances:
+    - 推荐徕卡
+    - 推荐 Leica
+    - 推荐徕卡 M
+    - 推荐徕卡 Q
+    - 笨猫徕卡
+  responses:
+    - "嗷呜～{user_addr}Q3 - 一镜走天下旗舰ฅฅ"
+    - "(尾巴翘) M11 - 旁轴信仰 / 手动对焦"
+    - "{user_addr}SL3 - 专业无反"
+    - "(挺胸) 笨猫的提醒: 信仰充值要谨慎!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cam_lens_prime_001
+  intent: question
+  keywords: [推荐定焦镜头, 推荐 35mm, 推荐 50mm, 推荐 85mm, 笨猫定焦]
+  utterances:
+    - 推荐定焦镜头
+    - 推荐 35mm
+    - 推荐 50mm
+    - 推荐 85mm
+    - 笨猫定焦
+  responses:
+    - "嗷呜～{user_addr}35mm: 人文 / 扫街万能焦段ฅฅ"
+    - "(尾巴翘) 50mm: 标头 / 性价比之王"
+    - "{user_addr}85mm: 人像 / 大光圈虚化"
+    - "(挺胸) 笨猫推荐: 新手 50mm 1.8 起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_lens_zoom_001
+  intent: question
+  keywords: [推荐变焦镜头, 推荐 24-70, 推荐 70-200, 推荐变焦头, 笨猫变焦]
+  utterances:
+    - 推荐变焦镜头
+    - 推荐 24-70
+    - 推荐 70-200
+    - 推荐变焦头
+    - 笨猫变焦
+  responses:
+    - "嗷呜～{user_addr}24-70 F2.8 - 大三元标头ฅฅ"
+    - "(尾巴翘) 70-200 F2.8 - 大三元长焦"
+    - "{user_addr}16-35 F2.8 - 大三元广角"
+    - "(挺胸) 笨猫推荐: 大三元一次到位!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cam_lens_macro_001
+  intent: question
+  keywords: [推荐微距镜头, 推荐微距, 推荐 100mm 微距, 推荐微距摄影, 笨猫微距]
+  utterances:
+    - 推荐微距镜头
+    - 推荐微距
+    - 推荐 100mm 微距
+    - 推荐微距摄影
+    - 笨猫微距
+  responses:
+    - "嗷呜～{user_addr}100mm 微距 - 主流选择ฅฅ"
+    - "(尾巴翘) 拍昆虫 / 花卉 / 珠宝"
+    - "{user_addr}注意: 高放大率 + 减震"
+    - "(挺胸) 笨猫推荐: 微距三脚架必备!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cam_tripod_001
+  intent: question
+  keywords: [推荐三脚架, 推荐曼富图, 推荐捷信, 推荐云台, 笨猫三脚架]
+  utterances:
+    - 推荐三脚架
+    - 推荐曼富图
+    - 推荐捷信
+    - 推荐云台
+    - 笨猫三脚架
+  responses:
+    - "嗷呜～{user_addr}曼富图 / 思锐 - 入门首选ฅฅ"
+    - "(尾巴翘) 捷信 / RRS - 专业旗舰"
+    - "{user_addr}云台: 球形最实用"
+    - "(挺胸) 笨猫推荐: 别买太轻! 风一吹"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cam_flash_001
+  intent: question
+  keywords: [推荐闪光灯, 推荐神牛, 推荐外置闪光, 推荐影室灯, 笨猫闪光灯]
+  utterances:
+    - 推荐闪光灯
+    - 推荐神牛
+    - 推荐外置闪光
+    - 推荐影室灯
+    - 笨猫闪光灯
+  responses:
+    - "嗷呜～{user_addr}神牛 V1 / V860 - 性价比ฅฅ"
+    - "(尾巴翘) 影楼灯 - SK400 / DE300"
+    - "{user_addr}保富图 / 高坚 - 专业商业"
+    - "(挺胸) 笨猫推荐: 入门神牛全家桶!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cam_postproc_001
+  intent: question
+  keywords: [推荐后期软件, 推荐 Lightroom, 推荐 Capture One, 推荐 PS, 笨猫后期]
+  utterances:
+    - 推荐后期软件
+    - 推荐 Lightroom
+    - 推荐 Capture One
+    - 推荐 PS
+    - 笨猫后期
+  responses:
+    - "嗷呜～{user_addr}Lightroom - 调色批处理ฅฅ"
+    - "(尾巴翘) Capture One - 商业摄影专业"
+    - "{user_addr}Photoshop - 精修 / 合成"
+    - "(挺胸) 笨猫推荐: LR 起步入门最简单!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_filter_001
+  intent: question
+  keywords: [推荐滤镜, 推荐 UV 镜, 推荐 ND 镜, 推荐 CPL, 笨猫滤镜]
+  utterances:
+    - 推荐滤镜
+    - 推荐 UV 镜
+    - 推荐 ND 镜
+    - 推荐 CPL
+    - 笨猫滤镜
+  responses:
+    - "嗷呜～{user_addr}UV: 保护镜头 / 别买太贵ฅฅ"
+    - "(尾巴翘) CPL: 消反光 / 蓝天浓郁"
+    - "{user_addr}ND: 长曝 / 大光圈白天"
+    - "(挺胸) 笨猫推荐: 耐司 / 海大 性价比!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cam_genre_portrait_001
+  intent: question
+  keywords: [推荐人像摄影, 推荐拍人, 推荐人像参数, 推荐人像构图, 笨猫人像]
+  utterances:
+    - 推荐人像摄影
+    - 推荐拍人
+    - 推荐人像参数
+    - 推荐人像构图
+    - 笨猫人像
+  responses:
+    - "嗷呜～{user_addr}85mm F1.4 - 人像神镜ฅฅ"
+    - "(尾巴翘) 构图: 三分法 / 引导线 / 留白"
+    - "{user_addr}光线: 顺光 / 侧光 / 黄金小时"
+    - "(挺胸) 笨猫推荐: 多沟通 + 自然表情!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_genre_landscape_001
+  intent: question
+  keywords: [推荐风光摄影, 推荐风光机, 推荐风光镜头, 推荐慢门, 笨猫风光]
+  utterances:
+    - 推荐风光摄影
+    - 推荐风光机
+    - 推荐风光镜头
+    - 推荐慢门
+    - 笨猫风光
+  responses:
+    - "嗷呜～{user_addr}广角 14-24 / 16-35 - 风光标配ฅฅ"
+    - "(尾巴翘) 三脚架 + ND + 慢门"
+    - "{user_addr}最佳时段: 日出前 + 日落后蓝调"
+    - "(挺胸) 笨猫推荐: 起早贪黑 - 风光要熬!"
+  cooldown_seconds: 60
+  weight: 0.9

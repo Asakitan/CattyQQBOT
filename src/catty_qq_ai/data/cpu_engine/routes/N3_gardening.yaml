@@ -1,0 +1,207 @@
+# 园艺 / 多肉 / 阳台种菜 / 室内植物 routes (S6 R155 NLU 节点扩充, 第十五周期 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 都市绿生活 / 治愈系话题.
+
+- name: gard_succulent_001
+  intent: question
+  keywords: [推荐多肉, 推荐多肉植物, 推荐肉肉, 推荐玉露, 笨猫多肉]
+  utterances:
+    - 推荐多肉
+    - 推荐多肉植物
+    - 推荐肉肉
+    - 推荐玉露
+    - 笨猫多肉
+  responses:
+    - "嗷呜～{user_addr}景天科: 桃蛋 / 黄丽 / 火祭ฅฅ"
+    - "(尾巴翘) 玉露 / 寿 - 透明窗"
+    - "{user_addr}石生花 / 生石花 - 萌系冰冰"
+    - "(挺胸) 笨猫推荐: 桃蛋养出粉粉超治愈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gard_indoor_plant_001
+  intent: question
+  keywords: [推荐室内植物, 推荐绿萝, 推荐龟背竹, 推荐天堂鸟, 笨猫室内植物]
+  utterances:
+    - 推荐室内植物
+    - 推荐绿萝
+    - 推荐龟背竹
+    - 推荐天堂鸟
+    - 笨猫室内植物
+  responses:
+    - "嗷呜～{user_addr}绿萝 / 吊兰 - 新手不死系ฅฅ"
+    - "(尾巴翘) 龟背竹 / 琴叶榕 - INS 风"
+    - "{user_addr}天堂鸟 / 散尾葵 - 大型棕榈"
+    - "(挺胸) 笨猫推荐: 新手绿萝起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gard_flower_001
+  intent: question
+  keywords: [推荐观花植物, 推荐月季, 推荐绣球, 推荐栀子花, 笨猫月季]
+  utterances:
+    - 推荐观花植物
+    - 推荐月季
+    - 推荐绣球
+    - 推荐栀子花
+    - 笨猫月季
+  responses:
+    - "嗷呜～{user_addr}月季: 庭瑞 / 朱丽叶 - 阳台爆花ฅฅ"
+    - "(尾巴翘) 绣球: 无尽夏 / 万华镜"
+    - "{user_addr}茉莉 / 栀子 - 香花"
+    - "(挺胸) 笨猫推荐: 月季阳台首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gard_pot_001
+  intent: question
+  keywords: [推荐花盆, 推荐陶盆, 推荐控根盆, 推荐红陶, 笨猫花盆]
+  utterances:
+    - 推荐花盆
+    - 推荐陶盆
+    - 推荐控根盆
+    - 推荐红陶
+    - 笨猫花盆
+  responses:
+    - "嗷呜～{user_addr}陶盆 - 透气好 / 多肉首选ฅฅ"
+    - "(尾巴翘) 控根盆 - 月季 / 大苗"
+    - "{user_addr}加仑盆 - 标准容量参考"
+    - "(挺胸) 笨猫推荐: 多肉用透气陶!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gard_soil_001
+  intent: question
+  keywords: [推荐多肉土, 推荐配土, 推荐颗粒土, 推荐泥炭, 笨猫配土]
+  utterances:
+    - 推荐多肉土
+    - 推荐配土
+    - 推荐颗粒土
+    - 推荐泥炭
+    - 笨猫配土
+  responses:
+    - "嗷呜～{user_addr}多肉: 颗粒 6 + 泥炭 4ฅฅ"
+    - "(尾巴翘) 月季: 泥炭 + 珍珠岩 + 椰糠"
+    - "{user_addr}通用: 草炭 / 蛭石 / 珍珠岩"
+    - "(挺胸) 笨猫推荐: 透气排水 = 不烂根!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gard_fertilizer_001
+  intent: question
+  keywords: [推荐肥料, 推荐缓释肥, 推荐花多多, 推荐氮磷钾, 笨猫肥料]
+  utterances:
+    - 推荐肥料
+    - 推荐缓释肥
+    - 推荐花多多
+    - 推荐氮磷钾
+    - 笨猫肥料
+  responses:
+    - "嗷呜～{user_addr}花多多 1 号 - 通用平衡ฅฅ"
+    - "(尾巴翘) 花多多 2 号 - 催花磷钾"
+    - "{user_addr}缓释: 奥绿 / 魔肥"
+    - "(挺胸) 笨猫推荐: 薄肥勤施别上头!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gard_pest_001
+  intent: question
+  keywords: [推荐杀虫剂, 推荐除虫, 推荐红蜘蛛, 推荐蚜虫, 笨猫除虫]
+  utterances:
+    - 推荐杀虫剂
+    - 推荐除虫
+    - 推荐红蜘蛛
+    - 推荐蚜虫
+    - 笨猫除虫
+  responses:
+    - "嗷呜～{user_addr}吡虫啉 - 蚜虫 / 介壳虫ฅฅ"
+    - "(尾巴翘) 阿维菌素 - 红蜘蛛"
+    - "{user_addr}小白药 - 预防虫害"
+    - "(挺胸) 笨猫的提醒: 戴口罩 + 通风!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gard_balcony_veg_001
+  intent: question
+  keywords: [推荐阳台种菜, 推荐生菜, 推荐番茄, 推荐辣椒, 笨猫阳台菜]
+  utterances:
+    - 推荐阳台种菜
+    - 推荐生菜
+    - 推荐番茄
+    - 推荐辣椒
+    - 笨猫阳台菜
+  responses:
+    - "嗷呜～{user_addr}生菜 / 小白菜 - 速生 1 个月ฅฅ"
+    - "(尾巴翘) 樱桃番茄 / 朝天椒 - 阳台爆"
+    - "{user_addr}香菜 / 罗勒 / 薄荷 - 香料类"
+    - "(挺胸) 笨猫推荐: 阳光足种樱桃番茄!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gard_tools_001
+  intent: question
+  keywords: [推荐园艺工具, 推荐喷壶, 推荐修枝剪, 推荐花铲, 笨猫园艺工具]
+  utterances:
+    - 推荐园艺工具
+    - 推荐喷壶
+    - 推荐修枝剪
+    - 推荐花铲
+    - 笨猫园艺工具
+  responses:
+    - "嗷呜～{user_addr}喷壶 / 浇水壶 - 长嘴细水ฅฅ"
+    - "(尾巴翘) Felco 修枝剪 - 园艺金标准"
+    - "{user_addr}基础: 花铲 / 镊子 / 手套"
+    - "(挺胸) 笨猫推荐: Felco F2 一把够用!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: gard_water_001
+  intent: question
+  keywords: [推荐浇水, 推荐多肉浇水, 推荐植物浇水, 推荐浸盆, 笨猫浇水]
+  utterances:
+    - 推荐浇水
+    - 推荐多肉浇水
+    - 推荐植物浇水
+    - 推荐浸盆
+    - 笨猫浇水
+  responses:
+    - "嗷呜～{user_addr}多肉: 干透浇透 / 别勤ฅฅ"
+    - "(尾巴翘) 月季: 见干见湿 / 早晚浇"
+    - "{user_addr}浸盆: 底部吸水 / 适合小苗"
+    - "(挺胸) 笨猫的提醒: 浇死 > 旱死!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gard_light_001
+  intent: question
+  keywords: [推荐补光灯, 推荐植物灯, 推荐 LED 植物灯, 推荐多肉补光, 笨猫植物灯]
+  utterances:
+    - 推荐补光灯
+    - 推荐植物灯
+    - 推荐 LED 植物灯
+    - 推荐多肉补光
+    - 笨猫植物灯
+  responses:
+    - "嗷呜～{user_addr}LED 全光谱 - 多肉养出色ฅฅ"
+    - "(尾巴翘) 飞利浦 / 山田 - 进口品牌"
+    - "{user_addr}国产: 千寻 / 立菲 - 性价比"
+    - "(挺胸) 笨猫推荐: 北方冬天必备!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: gard_propagation_001
+  intent: question
+  keywords: [推荐繁殖, 推荐扦插, 推荐多肉叶插, 推荐播种, 笨猫繁殖]
+  utterances:
+    - 推荐繁殖
+    - 推荐扦插
+    - 推荐多肉叶插
+    - 推荐播种
+    - 笨猫繁殖
+  responses:
+    - "嗷呜～{user_addr}叶插: 多肉肥叶平摊ฅฅ"
+    - "(尾巴翘) 扦插: 月季 / 绿萝 / 茉莉"
+    - "{user_addr}播种: 草花 / 番茄 / 辣椒"
+    - "(挺胸) 笨猫推荐: 叶插治愈感最强!"
+  cooldown_seconds: 60
+  weight: 0.8

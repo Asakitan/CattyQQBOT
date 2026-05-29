@@ -1,0 +1,207 @@
+# 中古 / vintage / 古着 / 复古时尚 routes (S6 R157 NLU 节点扩充, 第十五周期 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 L8 luxury_watch (奢侈品) 区分: 这里专注复古服饰/包/饰品.
+
+- name: vint_brand_001
+  intent: question
+  keywords: [推荐中古品牌, 推荐中古包, 推荐中古店, 推荐 Vintage, 笨猫中古]
+  utterances:
+    - 推荐中古品牌
+    - 推荐中古包
+    - 推荐中古店
+    - 推荐 Vintage
+    - 笨猫中古
+  responses:
+    - "嗷呜～{user_addr}LV / GUCCI / CHANEL - 老花经典ฅฅ"
+    - "(尾巴翘) Dior / FENDI - 复古回潮"
+    - "{user_addr}中古店: BRAND OFF / 大黑屋"
+    - "(挺胸) 笨猫推荐: 入门 LV 老花最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vint_chanel_001
+  intent: question
+  keywords: [推荐 Chanel vintage, 推荐古董香奈儿, 推荐 19 号包, 推荐 25 包, 笨猫古香]
+  utterances:
+    - 推荐 Chanel vintage
+    - 推荐古董香奈儿
+    - 推荐 19 号包
+    - 推荐 25 包
+    - 笨猫古香
+  responses:
+    - "嗷呜～{user_addr}25 包 - 中古爆款 / 时髦永流传ฅฅ"
+    - "(尾巴翘) 19 号包 / 大 V / 八格"
+    - "{user_addr}金扣 vs 银扣 - 看年份"
+    - "(挺胸) 笨猫提醒: 注意验真! 假货多"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vint_lv_001
+  intent: question
+  keywords: [推荐 LV 中古, 推荐 LV vintage, 推荐 LV 老花, 推荐 Speedy, 笨猫 LV 中古]
+  utterances:
+    - 推荐 LV 中古
+    - 推荐 LV vintage
+    - 推荐 LV 老花
+    - 推荐 Speedy
+    - 笨猫 LV 中古
+  responses:
+    - "嗷呜～{user_addr}Speedy 25/30 - 经典枕头包ฅฅ"
+    - "(尾巴翘) Alma / Neverfull - 工作包"
+    - "{user_addr}Pochette - 小包 / 性价比"
+    - "(挺胸) 笨猫推荐: 中古 Speedy 入坑首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vint_dior_001
+  intent: question
+  keywords: [推荐 Dior 古董, 推荐 Saddle, 推荐 Lady Dior, 推荐马鞍包, 笨猫古董迪奥]
+  utterances:
+    - 推荐 Dior 古董
+    - 推荐 Saddle
+    - 推荐 Lady Dior
+    - 推荐马鞍包
+    - 笨猫古董迪奥
+  responses:
+    - "嗷呜～{user_addr}Saddle 马鞍包 - 千禧年复出ฅฅ"
+    - "(尾巴翘) Lady Dior - 戴妃同款"
+    - "{user_addr}D 字提花 / 老花复刻"
+    - "(挺胸) 笨猫推荐: 老花 Saddle 太美!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vint_jewelry_001
+  intent: question
+  keywords: [推荐古董饰品, 推荐中古饰品, 推荐古董胸针, 推荐古董耳环, 笨猫古董饰品]
+  utterances:
+    - 推荐古董饰品
+    - 推荐中古饰品
+    - 推荐古董胸针
+    - 推荐古董耳环
+    - 笨猫古董饰品
+  responses:
+    - "嗷呜～{user_addr}YSL / Givenchy 古董胸针ฅฅ"
+    - "(尾巴翘) Chanel 山茶花 / 双 C"
+    - "{user_addr}Tiffany / Cartier 复古"
+    - "(挺胸) 笨猫推荐: 胸针配中古最对味!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: vint_clothing_001
+  intent: question
+  keywords: [推荐古着, 推荐古着店, 推荐古着风格, 推荐 70 年代风, 笨猫古着]
+  utterances:
+    - 推荐古着
+    - 推荐古着店
+    - 推荐古着风格
+    - 推荐 70 年代风
+    - 笨猫古着
+  responses:
+    - "嗷呜～{user_addr}日本古着: 阿美咔叽 / 牛仔ฅฅ"
+    - "(尾巴翘) 欧美古着: 70 年代喇叭 / 80 油画"
+    - "{user_addr}国内: 大学路 / 复刻店"
+    - "(挺胸) 笨猫推荐: 阿美咔叽配马丁靴!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vint_shop_japan_001
+  intent: question
+  keywords: [推荐日本中古, 推荐大黑屋, 推荐 BRAND OFF, 推荐银座中古, 笨猫日本中古]
+  utterances:
+    - 推荐日本中古
+    - 推荐大黑屋
+    - 推荐 BRAND OFF
+    - 推荐银座中古
+    - 笨猫日本中古
+  responses:
+    - "嗷呜～{user_addr}大黑屋 - 最大连锁中古ฅฅ"
+    - "(尾巴翘) BRAND OFF / KOMEHYO"
+    - "{user_addr}Yahoo 拍卖 - 在线捡漏"
+    - "(挺胸) 笨猫推荐: 银座 / 涉谷扫店!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: vint_authenticity_001
+  intent: question
+  keywords: [推荐验真中古, 推荐查验真伪, 推荐 LV 真假, 推荐中古鉴定, 笨猫验真]
+  utterances:
+    - 推荐验真中古
+    - 推荐查验真伪
+    - 推荐 LV 真假
+    - 推荐中古鉴定
+    - 笨猫验真
+  responses:
+    - "嗷呜～{user_addr}专业鉴定: 优奢易拍 / 寺库ฅฅ"
+    - "(尾巴翘) Entrupy AI 鉴定"
+    - "{user_addr}注意: 五金 / 缝线 / 字体"
+    - "(挺胸) 笨猫的提醒: 别贪便宜买仿!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vint_scarf_001
+  intent: question
+  keywords: [推荐丝巾, 推荐 Hermes 丝巾, 推荐古董丝巾, 推荐 carre, 笨猫丝巾]
+  utterances:
+    - 推荐丝巾
+    - 推荐 Hermes 丝巾
+    - 推荐古董丝巾
+    - 推荐 carre
+    - 笨猫丝巾
+  responses:
+    - "嗷呜～{user_addr}Hermes Carre 90 - 经典传世ฅฅ"
+    - "(尾巴翘) Hermes Twilly - 系包柄"
+    - "{user_addr}古董图案: 升值 / 收藏"
+    - "(挺胸) 笨猫推荐: 古董丝巾配中古包!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: vint_care_001
+  intent: question
+  keywords: [推荐中古包护理, 推荐皮包保养, 推荐古董皮护理, 推荐除霉, 笨猫保养]
+  utterances:
+    - 推荐中古包护理
+    - 推荐皮包保养
+    - 推荐古董皮护理
+    - 推荐除霉
+    - 笨猫保养
+  responses:
+    - "嗷呜～{user_addr}清洁: 软布 + 中性皮油ฅฅ"
+    - "(尾巴翘) 除霉: 酒精 + 通风 + 防潮"
+    - "{user_addr}防尘袋 / 防潮箱"
+    - "(挺胸) 笨猫推荐: 定期养护延寿!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: vint_styling_001
+  intent: question
+  keywords: [推荐中古穿搭, 推荐复古穿搭, 推荐中古配饰, 推荐古着搭配, 笨猫中古穿搭]
+  utterances:
+    - 推荐中古穿搭
+    - 推荐复古穿搭
+    - 推荐中古配饰
+    - 推荐古着搭配
+    - 笨猫中古穿搭
+  responses:
+    - "嗷呜～{user_addr}全身 1 个中古 - 主角ฅฅ"
+    - "(尾巴翘) 新旧混搭 - 现代不老气"
+    - "{user_addr}红 / 棕 / 米色调和"
+    - "(挺胸) 笨猫推荐: 中古包配现代衣最高级!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vint_trend_001
+  intent: question
+  keywords: [推荐中古趋势, 推荐复古回潮, 推荐 Y2K 风格, 推荐 90 年代风, 笨猫复古趋势]
+  utterances:
+    - 推荐中古趋势
+    - 推荐复古回潮
+    - 推荐 Y2K 风格
+    - 推荐 90 年代风
+    - 笨猫复古趋势
+  responses:
+    - "嗷呜～{user_addr}Y2K - 千禧辣妹回归ฅฅ"
+    - "(尾巴翘) 90 极简 vs 00 浮夸"
+    - "{user_addr}80 油画 / 70 嬉皮 - 当下热"
+    - "(挺胸) 笨猫推荐: 复古元素 + 现代剪裁!"
+  cooldown_seconds: 60
+  weight: 0.8

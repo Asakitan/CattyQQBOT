@@ -1,0 +1,207 @@
+# 调酒 / 鸡尾酒 / 威士忌 / 红酒进阶 routes (S6 R153 NLU 节点扩充, 第十五周期 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 K1 coffee / K2 wine 区分: 这里专注调酒师专业知识 + 烈酒.
+
+- name: bar_cocktail_classic_001
+  intent: question
+  keywords: [推荐鸡尾酒, 推荐经典鸡尾酒, 推荐马提尼, 推荐曼哈顿, 笨猫鸡尾酒]
+  utterances:
+    - 推荐鸡尾酒
+    - 推荐经典鸡尾酒
+    - 推荐马提尼
+    - 推荐曼哈顿
+    - 笨猫鸡尾酒
+  responses:
+    - "嗷呜～{user_addr}马提尼 / 曼哈顿 / 老式 - 经典三剑客ฅฅ"
+    - "(尾巴翘) 内格罗尼 / 边车 / 莫吉托"
+    - "{user_addr}白俄罗斯 / 玛格丽特 - 大众款"
+    - "(挺胸) 笨猫推荐: 内格罗尼最适合新手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bar_whisky_001
+  intent: question
+  keywords: [推荐威士忌, 推荐苏威, 推荐美威, 推荐日威, 笨猫威士忌]
+  utterances:
+    - 推荐威士忌
+    - 推荐苏威
+    - 推荐美威
+    - 推荐日威
+    - 笨猫威士忌
+  responses:
+    - "嗷呜～{user_addr}苏威: 麦卡伦 / 格兰菲迪 - 入门ฅฅ"
+    - "(尾巴翘) 美威: 美格 / 杰克丹尼 - 波本"
+    - "{user_addr}日威: 山崎 / 白州 / 响 - 已经飞天"
+    - "(挺胸) 笨猫推荐: 格兰菲迪 12 年起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bar_whisky_region_001
+  intent: question
+  keywords: [推荐艾雷岛, 推荐高地威士忌, 推荐斯佩塞, 推荐泥煤, 笨猫艾雷岛]
+  utterances:
+    - 推荐艾雷岛
+    - 推荐高地威士忌
+    - 推荐斯佩塞
+    - 推荐泥煤
+    - 笨猫艾雷岛
+  responses:
+    - "嗷呜～{user_addr}艾雷: 拉弗格 / 雅柏 - 重泥煤ฅฅ"
+    - "(尾巴翘) 斯佩塞: 麦卡伦 / 格兰利威 - 优雅"
+    - "{user_addr}高地: 大摩 / 高原骑士"
+    - "(挺胸) 笨猫的提醒: 艾雷岛非新手友好!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bar_gin_001
+  intent: question
+  keywords: [推荐金酒, 推荐 Gin, 推荐杜松子酒, 推荐 Tonic, 笨猫金酒]
+  utterances:
+    - 推荐金酒
+    - 推荐 Gin
+    - 推荐杜松子酒
+    - 推荐 Tonic
+    - 笨猫金酒
+  responses:
+    - "嗷呜～{user_addr}孟买蓝宝石 / 亨利爵士 - 经典ฅฅ"
+    - "(尾巴翘) 添加利 / 添加利十号 - 干型"
+    - "{user_addr}Gin Tonic = 金汤力 / 简单上头"
+    - "(挺胸) 笨猫推荐: 夏天就是 GT 时间!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bar_rum_001
+  intent: question
+  keywords: [推荐朗姆酒, 推荐 Rum, 推荐百加得, 推荐黑朗姆, 笨猫朗姆]
+  utterances:
+    - 推荐朗姆酒
+    - 推荐 Rum
+    - 推荐百加得
+    - 推荐黑朗姆
+    - 笨猫朗姆
+  responses:
+    - "嗷呜～{user_addr}白朗姆: 百加得 / 哈瓦那俱乐部 3 年ฅฅ"
+    - "(尾巴翘) 金朗姆: 哈瓦那 7 年 / 加勒比海调酒"
+    - "{user_addr}黑朗姆: 摩根船长 / 重口蛋糕"
+    - "(挺胸) 笨猫推荐: 莫吉托用白朗姆!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bar_tequila_001
+  intent: question
+  keywords: [推荐龙舌兰, 推荐 Tequila, 推荐 Mezcal, 推荐玛格丽特, 笨猫龙舌兰]
+  utterances:
+    - 推荐龙舌兰
+    - 推荐 Tequila
+    - 推荐 Mezcal
+    - 推荐玛格丽特
+    - 笨猫龙舌兰
+  responses:
+    - "嗷呜～{user_addr}帕特龙 / 唐胡里奥 / 1800 - 主流ฅฅ"
+    - "(尾巴翘) 100% Agave 是高端标志"
+    - "{user_addr}Mezcal: 烟熏味 / 小众"
+    - "(挺胸) 笨猫推荐: 玛格丽特用 100% Agave!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bar_red_wine_001
+  intent: question
+  keywords: [推荐红酒, 推荐波尔多, 推荐勃艮第, 推荐葡萄酒, 笨猫红酒]
+  utterances:
+    - 推荐红酒
+    - 推荐波尔多
+    - 推荐勃艮第
+    - 推荐葡萄酒
+    - 笨猫红酒
+  responses:
+    - "嗷呜～{user_addr}波尔多: 五大酒庄 - 拉菲传奇ฅฅ"
+    - "(尾巴翘) 勃艮第: 黑皮诺 - 罗曼尼康帝"
+    - "{user_addr}入门: 智利 / 澳洲 - 性价比"
+    - "(挺胸) 笨猫推荐: 喝醒酒器 + 配菜!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bar_champagne_001
+  intent: question
+  keywords: [推荐香槟, 推荐 Champagne, 推荐酩悦, 推荐起泡酒, 笨猫香槟]
+  utterances:
+    - 推荐香槟
+    - 推荐 Champagne
+    - 推荐酩悦
+    - 推荐起泡酒
+    - 笨猫香槟
+  responses:
+    - "嗷呜～{user_addr}酩悦 / 凯歌 / 巴黎之花ฅฅ"
+    - "(尾巴翘) 高端: 库克 / 唐培里侬 / 沙龙"
+    - "{user_addr}起泡: 普洛赛克 / 卡瓦 (性价比)"
+    - "(挺胸) 笨猫推荐: 庆祝用酩悦不会错!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bar_tools_001
+  intent: question
+  keywords: [推荐调酒工具, 推荐摇酒壶, 推荐 Boston, 推荐 Hawthorne, 笨猫调酒工具]
+  utterances:
+    - 推荐调酒工具
+    - 推荐摇酒壶
+    - 推荐 Boston
+    - 推荐 Hawthorne
+    - 笨猫调酒工具
+  responses:
+    - "嗷呜～{user_addr}Boston shaker - 专业首选ฅฅ"
+    - "(尾巴翘) 三段式 - 新手友好"
+    - "{user_addr}量酒器 / 吧勺 / 滤冰器 = 三件套"
+    - "(挺胸) 笨猫推荐: Boston 用着最爽!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bar_ice_001
+  intent: question
+  keywords: [推荐威士忌冰, 推荐威士忌喝法, 推荐冰球, 推荐净饮, 笨猫威士忌喝法]
+  utterances:
+    - 推荐威士忌冰
+    - 推荐威士忌喝法
+    - 推荐冰球
+    - 推荐净饮
+    - 笨猫威士忌喝法
+  responses:
+    - "嗷呜～{user_addr}净饮 - 闻香 / 感受全部细节ฅฅ"
+    - "(尾巴翘) 加冰: 大冰球 - 慢化少稀释"
+    - "{user_addr}加水: 几滴水开香 - 大师推荐"
+    - "(挺胸) 笨猫推荐: 高端净饮 + 矿泉水!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bar_glassware_001
+  intent: function_request
+  keywords: [推荐酒杯, 推荐威士忌杯, 推荐红酒杯, 推荐 Glencairn, 笨猫酒杯]
+  utterances:
+    - 推荐酒杯
+    - 推荐威士忌杯
+    - 推荐红酒杯
+    - 推荐 Glencairn
+    - 笨猫酒杯
+  responses:
+    - "嗷呜～{user_addr}Glencairn - 威士忌闻香神杯ฅฅ"
+    - "(尾巴翘) 红酒: 波尔多杯 vs 勃艮第杯"
+    - "{user_addr}马提尼: 经典三角"
+    - "(挺胸) 笨猫推荐: Riedel 专业杯有差!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bar_pairing_001
+  intent: question
+  keywords: [推荐酒配餐, 推荐威士忌配, 推荐红酒配, 推荐配酒, 笨猫酒配餐]
+  utterances:
+    - 推荐酒配餐
+    - 推荐威士忌配
+    - 推荐红酒配
+    - 推荐配酒
+    - 笨猫酒配餐
+  responses:
+    - "嗷呜～{user_addr}红酒: 牛排 / 烤羊 / 重口奶酪ฅฅ"
+    - "(尾巴翘) 白葡萄: 海鲜 / 鸡肉 / 柑橘"
+    - "{user_addr}威士忌: 黑巧 / 烟熏 / 雪茄"
+    - "(挺胸) 笨猫推荐: 没有死规矩 / 个人喜好!"
+  cooldown_seconds: 60
+  weight: 0.8

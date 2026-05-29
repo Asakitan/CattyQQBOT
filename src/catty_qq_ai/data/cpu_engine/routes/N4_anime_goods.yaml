@@ -1,0 +1,207 @@
+# 二次元周边 / 谷子 / 痛包 / 手办 routes (S6 R156 NLU 节点扩充, 第十五周期 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 M5 anime_manga (内容观看) 区分: 这里专注周边消费 / 痛包文化.
+
+- name: ag_figure_001
+  intent: question
+  keywords: [推荐手办, 推荐 GSC, 推荐 Alter, 推荐景品, 笨猫手办]
+  utterances:
+    - 推荐手办
+    - 推荐 GSC
+    - 推荐 Alter
+    - 推荐景品
+    - 笨猫手办
+  responses:
+    - "嗷呜～{user_addr}GSC / 寿屋 / Alter - 一线ฅฅ"
+    - "(尾巴翘) 景品: 1/8 / 1/7 比例"
+    - "{user_addr}国产: APEX / Myethos - 进步快"
+    - "(挺胸) 笨猫推荐: 第一只手办看预算!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ag_nendoroid_001
+  intent: question
+  keywords: [推荐黏土人, 推荐 Nendoroid, 推荐 Q 版手办, 推荐 GSC 黏土人, 笨猫黏土人]
+  utterances:
+    - 推荐黏土人
+    - 推荐 Nendoroid
+    - 推荐 Q 版手办
+    - 推荐 GSC 黏土人
+    - 笨猫黏土人
+  responses:
+    - "嗷呜～{user_addr}GSC 黏土人 - 萌 + 可换造型ฅฅ"
+    - "(尾巴翘) 1300+ 编号已经发售"
+    - "{user_addr}最常 ~400 元一只"
+    - "(挺胸) 笨猫推荐: 入坑黏土人最低成本!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_scale_figure_001
+  intent: question
+  keywords: [推荐手办比例, 推荐 1/7 手办, 推荐 1/4 手办, 推荐高端手办, 笨猫高端手办]
+  utterances:
+    - 推荐手办比例
+    - 推荐 1/7 手办
+    - 推荐 1/4 手办
+    - 推荐高端手办
+    - 笨猫高端手办
+  responses:
+    - "嗷呜～{user_addr}1/8 经典 / 1/7 主流ฅฅ"
+    - "(尾巴翘) 1/6 大型 / 1/4 巨型"
+    - "{user_addr}Alter 工艺最强 / 寿屋广覆盖"
+    - "(挺胸) 笨猫提醒: 买正版! 别盗版"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ag_acrylic_001
+  intent: question
+  keywords: [推荐亚克力立牌, 推荐立牌, 推荐亚立牌, 推荐谷子立牌, 笨猫立牌]
+  utterances:
+    - 推荐亚克力立牌
+    - 推荐立牌
+    - 推荐亚立牌
+    - 推荐谷子立牌
+    - 笨猫立牌
+  responses:
+    - "嗷呜～{user_addr}亚立 - 低价入坑首选ฅฅ"
+    - "(尾巴翘) 30-50 元 / 个 / 出官谷次"
+    - "{user_addr}痛包必备 装饰"
+    - "(挺胸) 笨猫推荐: 同人立牌也美!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_badge_001
+  intent: question
+  keywords: [推荐徽章, 推荐谷子徽章, 推荐拍立得, 推荐色纸, 笨猫徽章]
+  utterances:
+    - 推荐徽章
+    - 推荐谷子徽章
+    - 推荐拍立得
+    - 推荐色纸
+    - 笨猫徽章
+  responses:
+    - "嗷呜～{user_addr}徽章: 高频谷子 / 装饰痛包ฅฅ"
+    - "(尾巴翘) 拍立得 + 色纸 - 抽出快乐"
+    - "{user_addr}盲盒 / 全套 / 单独"
+    - "(挺胸) 笨猫推荐: 喜欢角色就收!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_painbag_001
+  intent: question
+  keywords: [推荐痛包, 推荐 ITAbag, 推荐痛包推, 推荐痛包品牌, 笨猫痛包]
+  utterances:
+    - 推荐痛包
+    - 推荐 ITAbag
+    - 推荐痛包推
+    - 推荐痛包品牌
+    - 笨猫痛包
+  responses:
+    - "嗷呜～{user_addr}痛包: 透明 PVC 窗 + 别徽章ฅฅ"
+    - "(尾巴翘) Halhalala / 迷你包痛"
+    - "{user_addr}双肩 / 单肩 / 桶包款式"
+    - "(挺胸) 笨猫推荐: 痛多少看心情!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_doujin_001
+  intent: question
+  keywords: [推荐同人本, 推荐同人志, 推荐 Comiket, 推荐同人展, 笨猫同人]
+  utterances:
+    - 推荐同人本
+    - 推荐同人志
+    - 推荐 Comiket
+    - 推荐同人展
+    - 笨猫同人
+  responses:
+    - "嗷呜～{user_addr}Comiket - 日本同人圣地ฅฅ"
+    - "(尾巴翘) CP / Comicup - 上海同人展"
+    - "{user_addr}同人本: 全年龄 / R-18"
+    - "(挺胸) 笨猫推荐: 现场体验最棒!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ag_pad_001
+  intent: question
+  keywords: [推荐抱枕, 推荐手办抱枕, 推荐二次元抱枕, 推荐人形抱枕, 笨猫抱枕]
+  utterances:
+    - 推荐抱枕
+    - 推荐手办抱枕
+    - 推荐二次元抱枕
+    - 推荐人形抱枕
+    - 笨猫抱枕
+  responses:
+    - "嗷呜～{user_addr}立体抱枕 / 人形 - 老婆陪睡ฅฅ"
+    - "(尾巴翘) 双面: 衣装 + 裸装"
+    - "{user_addr}材质: 双面胶 / 桃面"
+    - "(挺胸) 笨猫推荐: 桃面手感最好!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ag_garage_kit_001
+  intent: question
+  keywords: [推荐 GK, 推荐 garage kit, 推荐手办胚, 推荐涂装 GK, 笨猫 GK]
+  utterances:
+    - 推荐 GK
+    - 推荐 garage kit
+    - 推荐手办胚
+    - 推荐涂装 GK
+    - 笨猫 GK
+  responses:
+    - "嗷呜～{user_addr}GK: 模型 + 自己上色ฅฅ"
+    - "(尾巴翘) 树脂 / 难度高 / 个性化"
+    - "{user_addr}日本原型 / 国产翻模"
+    - "(挺胸) 笨猫推荐: 涂装 GK 是手办进阶!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ag_collection_001
+  intent: question
+  keywords: [推荐手办收纳, 推荐展示柜, 推荐手办柜, 推荐防尘罩, 笨猫展示柜]
+  utterances:
+    - 推荐手办收纳
+    - 推荐展示柜
+    - 推荐手办柜
+    - 推荐防尘罩
+    - 笨猫展示柜
+  responses:
+    - "嗷呜～{user_addr}宜家 DETOLF 玻璃柜 - 标配ฅฅ"
+    - "(尾巴翘) 加 LED 灯条 - 氛围拉满"
+    - "{user_addr}恒湿: 30-50% / 防黄变"
+    - "(挺胸) 笨猫的提醒: 别晒! 会褪色"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ag_event_001
+  intent: question
+  keywords: [推荐漫展, 推荐 CCG, 推荐 BW, 推荐 ChinaJoy, 笨猫漫展]
+  utterances:
+    - 推荐漫展
+    - 推荐 CCG
+    - 推荐 BW
+    - 推荐 ChinaJoy
+    - 笨猫漫展
+  responses:
+    - "嗷呜～{user_addr}CCG / BW (bilibili World)ฅฅ"
+    - "(尾巴翘) CP / Comicup - 同人展"
+    - "{user_addr}ChinaJoy - 游戏展"
+    - "(挺胸) 笨猫推荐: BW 阵容最强!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_cosplay_001
+  intent: question
+  keywords: [推荐 cos, 推荐 cosplay, 推荐 cos 工具, 推荐假发, 笨猫 cos]
+  utterances:
+    - 推荐 cos
+    - 推荐 cosplay
+    - 推荐 cos 工具
+    - 推荐假发
+    - 笨猫 cos
+  responses:
+    - "嗷呜～{user_addr}定制 / 现成 / 自己缝ฅฅ"
+    - "(尾巴翘) 假发: 凌乱 / 高温丝"
+    - "{user_addr}化妆: 美瞳 / 修容 / 防汗"
+    - "(挺胸) 笨猫推荐: cos 自己喜欢的角色!"
+  cooldown_seconds: 60
+  weight: 0.9
