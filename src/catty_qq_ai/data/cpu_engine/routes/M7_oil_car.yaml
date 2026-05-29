@@ -1,0 +1,207 @@
+# 油车 / 轿车 / SUV / 选购 / 车型 routes (S6 R149 NLU 节点扩充, 第十四周期 buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 J4 ev_car (新能源车) / J3 driving_license / J8 insurance.car 区分: 这里专注燃油车选购.
+
+- name: oil_buy_sedan_001
+  intent: question
+  keywords: [推荐轿车, 推荐家用轿车, 推荐紧凑型轿车, 推荐 A 级车, 笨猫轿车]
+  utterances:
+    - 推荐轿车
+    - 推荐家用轿车
+    - 推荐紧凑型轿车
+    - 推荐 A 级车
+    - 笨猫轿车
+  responses:
+    - "嗷呜～{user_addr}A 级: 卡罗拉 / 思域 / 速腾 / 朗逸ฅฅ"
+    - "(尾巴翘) B 级: 凯美瑞 / 雅阁 / 帕萨特"
+    - "{user_addr}C 级: 宝马 5 / 奔驰 E / 奥迪 A6L"
+    - "(挺胸) 笨猫推荐: 家用 A/B 级最实用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oil_buy_suv_001
+  intent: question
+  keywords: [推荐 SUV, 推荐家用 SUV, 推荐紧凑型 SUV, 推荐 7 座 SUV, 笨猫 SUV]
+  utterances:
+    - 推荐 SUV
+    - 推荐家用 SUV
+    - 推荐紧凑型 SUV
+    - 推荐 7 座 SUV
+    - 笨猫 SUV
+  responses:
+    - "嗷呜～{user_addr}紧凑: RAV4 / CR-V / 途观 / 探岳ฅฅ"
+    - "(尾巴翘) 中型: 汉兰达 / 锐界 / X5"
+    - "{user_addr}7 座家用: 汉兰达 / GL8"
+    - "(挺胸) 笨猫推荐: 家庭出行选 7 座!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oil_brand_japan_001
+  intent: question
+  keywords: [推荐日系车, 推荐丰田, 推荐本田, 推荐日产, 笨猫日系车]
+  utterances:
+    - 推荐日系车
+    - 推荐丰田
+    - 推荐本田
+    - 推荐日产
+    - 笨猫日系车
+  responses:
+    - "嗷呜～{user_addr}丰田: 耐用王 / 卡罗拉 / 凯美瑞ฅฅ"
+    - "(尾巴翘) 本田: 思域 / 雅阁 / CR-V"
+    - "{user_addr}日产: 轩逸 / 天籁"
+    - "(挺胸) 笨猫推荐: 省油 + 耐造 - 日系!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oil_brand_german_001
+  intent: question
+  keywords: [推荐德系车, 推荐大众, 推荐宝马, 推荐奔驰, 笨猫德系车]
+  utterances:
+    - 推荐德系车
+    - 推荐大众
+    - 推荐宝马
+    - 推荐奔驰
+    - 笨猫德系车
+  responses:
+    - "嗷呜～{user_addr}大众: 朗逸 / 帕萨特 / 途观 - 国民ฅฅ"
+    - "(尾巴翘) 宝马: 操控 / 驾驶乐趣"
+    - "{user_addr}奔驰: 豪华 / 舒适"
+    - "(挺胸) 笨猫推荐: 别迷信德系! 看车型"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oil_brand_us_001
+  intent: question
+  keywords: [推荐美系车, 推荐别克, 推荐福特, 推荐凯迪拉克, 笨猫美系车]
+  utterances:
+    - 推荐美系车
+    - 推荐别克
+    - 推荐福特
+    - 推荐凯迪拉克
+    - 笨猫美系车
+  responses:
+    - "嗷呜～{user_addr}别克: GL8 商务 / 君威 - 厚重ฅฅ"
+    - "(尾巴翘) 福特: 福克斯 / 蒙迪欧"
+    - "{user_addr}凯迪拉克: 大空间 / 优惠多"
+    - "(挺胸) 笨猫的提醒: 油耗高 / 维护贵"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: oil_brand_china_001
+  intent: question
+  keywords: [推荐国产油车, 推荐吉利, 推荐长城, 推荐奇瑞, 笨猫国产车]
+  utterances:
+    - 推荐国产油车
+    - 推荐吉利
+    - 推荐长城
+    - 推荐奇瑞
+    - 笨猫国产车
+  responses:
+    - "嗷呜～{user_addr}吉利: 博越 / 星瑞 - 性价比ฅฅ"
+    - "(尾巴翘) 长城: 哈弗 H6 - SUV 销冠"
+    - "{user_addr}奇瑞: 瑞虎 / 艾瑞泽"
+    - "(挺胸) 笨猫推荐: 国货质量大幅提升!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oil_engine_001
+  intent: question
+  keywords: [推荐发动机, 推荐自然吸气, 推荐涡轮增压, 推荐缸数, 笨猫发动机]
+  utterances:
+    - 推荐发动机
+    - 推荐自然吸气
+    - 推荐涡轮增压
+    - 推荐缸数
+    - 笨猫发动机
+  responses:
+    - "嗷呜～{user_addr}自吸: 平顺 / 耐用 / 但油耗略高ฅฅ"
+    - "(尾巴翘) 涡轮: 动力强 / 但费油 + 维护贵"
+    - "{user_addr}三缸 / 四缸 / V6 / V8"
+    - "(挺胸) 笨猫推荐: 家用四缸 1.5-2.0L!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: oil_transmission_001
+  intent: question
+  keywords: [推荐变速箱, 推荐 AT, 推荐 DCT, 推荐 CVT, 笨猫变速箱]
+  utterances:
+    - 推荐变速箱
+    - 推荐 AT
+    - 推荐 DCT
+    - 推荐 CVT
+    - 笨猫变速箱
+  responses:
+    - "嗷呜～{user_addr}AT 6/8/9 速 - 平顺耐用 - 主流ฅฅ"
+    - "(尾巴翘) CVT - 日系 / 省油"
+    - "{user_addr}DCT 双离合 - 顿挫 / 但快"
+    - "(挺胸) 笨猫推荐: 家用 AT 最稳!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: oil_test_drive_001
+  intent: question
+  keywords: [推荐试驾, 推荐试车, 推荐买车看什么, 推荐买车注意, 笨猫试驾]
+  utterances:
+    - 推荐试驾
+    - 推荐试车
+    - 推荐买车看什么
+    - 推荐买车注意
+    - 笨猫试驾
+  responses:
+    - "嗷呜～{user_addr}试驾要点: 加速 / 刹车 / 转向 / 噪音ฅฅ"
+    - "(尾巴翘) 看: 后排空间 / 内饰用料 / 配置"
+    - "{user_addr}查: 召回历史 / 保值率"
+    - "(挺胸) 笨猫的提醒: 至少试 2-3 款!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oil_4s_001
+  intent: question
+  keywords: [推荐 4S 店, 推荐车价砍价, 推荐贷款买车, 推荐保养, 笨猫 4S 店]
+  utterances:
+    - 推荐 4S 店
+    - 推荐车价砍价
+    - 推荐贷款买车
+    - 推荐保养
+    - 笨猫 4S 店
+  responses:
+    - "嗷呜～{user_addr}砍价: 比 3 家 / 月底冲量优惠多ฅฅ"
+    - "(尾巴翘) 贷款: 免息 / 但拉新车价"
+    - "{user_addr}保养: 5000-10000km / 看手册"
+    - "(挺胸) 笨猫的提醒: 别加装饰! 全是坑"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: oil_secondhand_001
+  intent: question
+  keywords: [推荐二手油车, 推荐二手车交易, 推荐瓜子, 推荐人人车, 笨猫二手车]
+  utterances:
+    - 推荐二手油车
+    - 推荐二手车交易
+    - 推荐瓜子
+    - 推荐人人车
+    - 笨猫二手车
+  responses:
+    - "嗷呜～{user_addr}平台: 瓜子 / 人人 / 优信 / 二手车之家ฅฅ"
+    - "(尾巴翘) 必检: 出险记录 / 维修记录"
+    - "{user_addr}日系保值率 > 德系 > 国产"
+    - "(挺胸) 笨猫推荐: 找第三方鉴定!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: oil_repair_001
+  intent: question
+  keywords: [推荐汽车维修, 推荐刹车片, 推荐机油, 推荐火花塞, 笨猫汽车维修]
+  utterances:
+    - 推荐汽车维修
+    - 推荐刹车片
+    - 推荐机油
+    - 推荐火花塞
+    - 笨猫汽车维修
+  responses:
+    - "嗷呜～{user_addr}机油: 5W-30 主流 / 美孚 / 嘉实多ฅฅ"
+    - "(尾巴翘) 刹车片: 4-6 万 km 换 / 看磨损"
+    - "{user_addr}火花塞: 4 万 km 换"
+    - "(挺胸) 笨猫推荐: 别等坏了再修!"
+  cooldown_seconds: 60
+  weight: 0.8

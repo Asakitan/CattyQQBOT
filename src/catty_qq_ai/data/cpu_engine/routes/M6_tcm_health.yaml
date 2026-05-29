@@ -1,0 +1,206 @@
+# 中医 / 养生 / 中药 / 穴位 / 亚健康 routes (S6 R148 NLU 节点扩充, 第十四周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: tcm_basics_001
+  intent: question
+  keywords: [推荐中医理论, 推荐阴阳五行, 推荐中医入门, 推荐脏腑学说, 笨猫中医]
+  utterances:
+    - 推荐中医理论
+    - 推荐阴阳五行
+    - 推荐中医入门
+    - 推荐脏腑学说
+    - 笨猫中医
+  responses:
+    - "嗷呜～{user_addr}阴阳五行 - 中医根基 / 整体观ฅฅ"
+    - "(尾巴翘) 五脏: 心肝脾肺肾 / 五行: 木火土金水"
+    - "{user_addr}经典: 《黄帝内经》/《伤寒论》"
+    - "(挺胸) 笨猫推荐: 倪海厦视频入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_pulse_001
+  intent: question
+  keywords: [推荐把脉, 推荐脉诊, 推荐舌诊, 推荐望闻问切, 笨猫望闻问切]
+  utterances:
+    - 推荐把脉
+    - 推荐脉诊
+    - 推荐舌诊
+    - 推荐望闻问切
+    - 笨猫望闻问切
+  responses:
+    - "嗷呜～{user_addr}四诊: 望 / 闻 / 问 / 切 - 综合判断ฅฅ"
+    - "(尾巴翘) 脉象 28 种: 浮 / 沉 / 迟 / 数..."
+    - "{user_addr}舌诊: 看舌色 + 舌苔"
+    - "(挺胸) 笨猫推荐: 找老中医实操学!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: tcm_herb_001
+  intent: question
+  keywords: [推荐中药材, 推荐黄芪, 推荐人参, 推荐当归, 笨猫中药]
+  utterances:
+    - 推荐中药材
+    - 推荐黄芪
+    - 推荐人参
+    - 推荐当归
+    - 笨猫中药
+  responses:
+    - "嗷呜～{user_addr}黄芪 / 人参 / 当归 - 补气血ฅฅ"
+    - "(尾巴翘) 枸杞 / 阿胶 - 滋阴养肝"
+    - "{user_addr}金银花 / 菊花 - 清热"
+    - "(挺胸) 笨猫的提醒: 别乱补! 找医师辨证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_acupoint_001
+  intent: question
+  keywords: [推荐穴位, 推荐足三里, 推荐合谷, 推荐内关, 笨猫穴位]
+  utterances:
+    - 推荐穴位
+    - 推荐足三里
+    - 推荐合谷
+    - 推荐内关
+    - 笨猫穴位
+  responses:
+    - "嗷呜～{user_addr}足三里 - 长寿穴 / 健脾胃ฅฅ"
+    - "(尾巴翘) 合谷 - 头面诸症 / 万能"
+    - "{user_addr}内关 - 心脏 / 失眠 / 晕车"
+    - "(挺胸) 笨猫推荐: 每天按 100 下!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_acupuncture_001
+  intent: question
+  keywords: [推荐针灸, 推荐艾灸, 推荐拔罐, 推荐刮痧, 笨猫针灸]
+  utterances:
+    - 推荐针灸
+    - 推荐艾灸
+    - 推荐拔罐
+    - 推荐刮痧
+    - 笨猫针灸
+  responses:
+    - "嗷呜～{user_addr}针灸: 调经络 / 治百病ฅฅ"
+    - "(尾巴翘) 艾灸: 温阳 / 适合阳虚"
+    - "{user_addr}拔罐 / 刮痧 - 祛湿排寒"
+    - "(挺胸) 笨猫的提醒: 找正规医师!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tcm_massage_001
+  intent: question
+  keywords: [推荐推拿, 推荐按摩, 推荐小儿推拿, 推荐手法治疗, 笨猫推拿]
+  utterances:
+    - 推荐推拿
+    - 推荐按摩
+    - 推荐小儿推拿
+    - 推荐手法治疗
+    - 笨猫推拿
+  responses:
+    - "嗷呜～{user_addr}成人推拿 - 颈肩腰腿 / 放松ฅฅ"
+    - "(尾巴翘) 小儿推拿: 健脾 / 助消化"
+    - "{user_addr}盲人按摩 / 中医推拿 - 双选"
+    - "(挺胸) 笨猫推荐: 别选野店 / 看资质"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tcm_constitution_001
+  intent: question
+  keywords: [推荐九种体质, 推荐阳虚体质, 推荐阴虚体质, 推荐湿热体质, 笨猫体质]
+  utterances:
+    - 推荐九种体质
+    - 推荐阳虚体质
+    - 推荐阴虚体质
+    - 推荐湿热体质
+    - 笨猫体质
+  responses:
+    - "嗷呜～{user_addr}九种体质: 平和/气虚/阳虚/阴虚/痰湿/湿热/血瘀/气郁/特禀ฅฅ"
+    - "(尾巴翘) 阳虚: 怕冷 / 阴虚: 内热"
+    - "{user_addr}测自己 - 中医九体质问卷"
+    - "(挺胸) 笨猫推荐: 体质决定调理方向!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tcm_food_therapy_001
+  intent: question
+  keywords: [推荐食疗, 推荐药膳, 推荐养生汤, 推荐补气血, 笨猫食疗]
+  utterances:
+    - 推荐食疗
+    - 推荐药膳
+    - 推荐养生汤
+    - 推荐补气血
+    - 笨猫食疗
+  responses:
+    - "嗷呜～{user_addr}红枣 / 桂圆 / 黑米 / 黑芝麻 - 补血ฅฅ"
+    - "(尾巴翘) 山药 / 茯苓 / 白术 - 健脾"
+    - "{user_addr}百合 / 银耳 / 莲子 - 润肺"
+    - "(挺胸) 笨猫推荐: 四物汤 / 八珍汤经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_sleep_001
+  intent: question
+  keywords: [推荐养生作息, 推荐子午觉, 推荐早睡早起, 推荐养肝, 笨猫作息]
+  utterances:
+    - 推荐养生作息
+    - 推荐子午觉
+    - 推荐早睡早起
+    - 推荐养肝
+    - 笨猫作息
+  responses:
+    - "嗷呜～{user_addr}11 点前必睡 - 养肝胆ฅฅ"
+    - "(尾巴翘) 子午觉: 23-1 必睡 / 11-13 小睡"
+    - "{user_addr}5-7 起床 - 大肠经活跃"
+    - "(挺胸) 笨猫推荐: 别熬夜! 比补还重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_season_001
+  intent: question
+  keywords: [推荐四季养生, 推荐春季养肝, 推荐夏季养心, 推荐冬季养肾, 笨猫四季养生]
+  utterances:
+    - 推荐四季养生
+    - 推荐春季养肝
+    - 推荐夏季养心
+    - 推荐冬季养肾
+    - 笨猫四季养生
+  responses:
+    - "嗷呜～{user_addr}春养肝 - 多喝菊花茶 / 戒怒ฅฅ"
+    - "(尾巴翘) 夏养心 - 多喝小米粥 / 静心"
+    - "{user_addr}秋养肺 - 雪梨炖银耳"
+    - "(挺胸) 笨猫的提醒: 冬养肾 - 黑色食物!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tcm_subhealth_001
+  intent: question
+  keywords: [推荐亚健康, 推荐疲劳, 推荐脱发, 推荐失眠多梦, 笨猫亚健康]
+  utterances:
+    - 推荐亚健康
+    - 推荐疲劳
+    - 推荐脱发
+    - 推荐失眠多梦
+    - 笨猫亚健康
+  responses:
+    - "嗷呜～{user_addr}疲劳 - 气虚 / 黄芪枸杞水ฅฅ"
+    - "(尾巴翘) 脱发 - 肾虚 / 黑芝麻 + 早睡"
+    - "{user_addr}失眠 - 心脾两虚 / 酸枣仁汤"
+    - "(挺胸) 笨猫推荐: 调作息 > 吃药!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tcm_master_001
+  intent: question
+  keywords: [推荐中医名家, 推荐倪海厦, 推荐张仲景, 推荐李时珍, 笨猫中医名家]
+  utterances:
+    - 推荐中医名家
+    - 推荐倪海厦
+    - 推荐张仲景
+    - 推荐李时珍
+    - 笨猫中医名家
+  responses:
+    - "嗷呜～{user_addr}张仲景 - 医圣 / 《伤寒论》ฅฅ"
+    - "(尾巴翘) 李时珍 - 《本草纲目》"
+    - "{user_addr}倪海厦 - 现代名医 / 视频经典"
+    - "(挺胸) 笨猫推荐: 看《大医精诚》!"
+  cooldown_seconds: 60
+  weight: 0.8
