@@ -1,0 +1,207 @@
+# 拳击 / boxing / 拳套手靶 / 拳台 routes (S6 R197 NLU 节点扩充, 第十九周期 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 R6 martial_arts_china / R9 mma_bjj 区分: 这里专注西式拳击.
+
+- name: bx_basics_001
+  intent: question
+  keywords: [推荐拳击, 推荐拳击入门, 推荐拳击基础, 推荐拳击教练, 笨猫拳击]
+  utterances:
+    - 推荐拳击
+    - 推荐拳击入门
+    - 推荐拳击基础
+    - 推荐拳击教练
+    - 笨猫拳击
+  responses:
+    - "嗷呜～{user_addr}拳击 = 体能 + 技术 + 心理ฅฅ"
+    - "(尾巴翘) 直 / 摆 / 勾 - 三大基础拳"
+    - "{user_addr}步伐 / 防守 / 进攻"
+    - "(挺胸) 笨猫推荐: 找教练正规学!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bx_glove_001
+  intent: question
+  keywords: [推荐拳套, 推荐 Cleto Reyes, 推荐 Winning, 推荐 Everlast, 笨猫拳套]
+  utterances:
+    - 推荐拳套
+    - 推荐 Cleto Reyes
+    - 推荐 Winning
+    - 推荐 Everlast
+    - 笨猫拳套
+  responses:
+    - "嗷呜～{user_addr}Winning - 日本顶级ฅฅ"
+    - "(尾巴翘) Cleto Reyes - 墨西哥经典"
+    - "{user_addr}Everlast / Title - 入门"
+    - "(挺胸) 笨猫推荐: 训练 12-16oz!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bx_punching_001
+  intent: question
+  keywords: [推荐沙袋, 推荐重沙袋, 推荐速度球, 推荐双头球, 笨猫沙袋]
+  utterances:
+    - 推荐沙袋
+    - 推荐重沙袋
+    - 推荐速度球
+    - 推荐双头球
+    - 笨猫沙袋
+  responses:
+    - "嗷呜～{user_addr}重沙袋 - 力量 + 持久ฅฅ"
+    - "(尾巴翘) 速度球 - 节奏 + 手眼"
+    - "{user_addr}双头球 - 反应"
+    - "(挺胸) 笨猫推荐: 都要练!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bx_jump_rope_001
+  intent: question
+  keywords: [推荐拳击跳绳, 推荐速度跳绳, 推荐 Buddy Lee, 推荐 Crossrope, 笨猫拳击跳绳]
+  utterances:
+    - 推荐拳击跳绳
+    - 推荐速度跳绳
+    - 推荐 Buddy Lee
+    - 推荐 Crossrope
+    - 笨猫拳击跳绳
+  responses:
+    - "嗷呜～{user_addr}Buddy Lee / Crossrope - 顶级ฅฅ"
+    - "(尾巴翘) 钢丝跳绳 - 拳手必备"
+    - "{user_addr}拳击跳绳 3 分钟一组"
+    - "(挺胸) 笨猫推荐: 跳绳燃脂神器!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bx_apparel_001
+  intent: question
+  keywords: [推荐拳击鞋, 推荐拳击裤, 推荐 Nike Hyperko, 推荐 Adidas Speedex, 笨猫拳击鞋]
+  utterances:
+    - 推荐拳击鞋
+    - 推荐拳击裤
+    - 推荐 Nike Hyperko
+    - 推荐 Adidas Speedex
+    - 笨猫拳击鞋
+  responses:
+    - "嗷呜～{user_addr}Nike Hyperko - 主流拳鞋ฅฅ"
+    - "(尾巴翘) Adidas Speedex"
+    - "{user_addr}Title 拳击裤"
+    - "(挺胸) 笨猫推荐: 鞋抓地很关键!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bx_legends_001
+  intent: question
+  keywords: [推荐拳王, 推荐 Muhammad Ali, 推荐 Mike Tyson, 推荐 Mayweather, 笨猫拳王]
+  utterances:
+    - 推荐拳王
+    - 推荐 Muhammad Ali
+    - 推荐 Mike Tyson
+    - 推荐 Mayweather
+    - 笨猫拳王
+  responses:
+    - "嗷呜～{user_addr}Ali - 拳坛之王ฅฅ"
+    - "(尾巴翘) Tyson 钢铁猛兽"
+    - "{user_addr}Mayweather 50-0 防守大师"
+    - "(挺胸) 笨猫推荐: Ali 是最伟大!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bx_china_pro_001
+  intent: question
+  keywords: [推荐中国拳手, 推荐邹市明, 推荐徐灿, 推荐杨连慧, 笨猫中国拳手]
+  utterances:
+    - 推荐中国拳手
+    - 推荐邹市明
+    - 推荐徐灿
+    - 推荐杨连慧
+    - 笨猫中国拳手
+  responses:
+    - "嗷呜～{user_addr}邹市明 - 中国职业拳击先驱ฅฅ"
+    - "(尾巴翘) 徐灿 - WBA 羽量级"
+    - "{user_addr}熊朝忠 / 拜山波"
+    - "(挺胸) 笨猫推荐: 中国拳击进步!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bx_class_001
+  intent: question
+  keywords: [推荐拳击级别, 推荐重量级, 推荐羽量级, 推荐 WBA WBC, 笨猫拳击级别]
+  utterances:
+    - 推荐拳击级别
+    - 推荐重量级
+    - 推荐羽量级
+    - 推荐 WBA WBC
+    - 笨猫拳击级别
+  responses:
+    - "嗷呜～{user_addr}WBA / WBC / WBO / IBF - 四大组织ฅฅ"
+    - "(尾巴翘) 重 / 次重 / 中 / 轻 / 羽量"
+    - "{user_addr}米尼 / 草量 / 铜锤"
+    - "(挺胸) 笨猫推荐: 级别有 18 个!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bx_train_plan_001
+  intent: question
+  keywords: [推荐拳击训练计划, 推荐拳击周计划, 推荐拳手训练, 推荐拳击 HIIT, 笨猫拳击训练]
+  utterances:
+    - 推荐拳击训练计划
+    - 推荐拳击周计划
+    - 推荐拳手训练
+    - 推荐拳击 HIIT
+    - 笨猫拳击训练
+  responses:
+    - "嗷呜～{user_addr}有氧 + 力量 + 技术 - 三轨ฅฅ"
+    - "(尾巴翘) 长跑 + 跳绳 + 击袋"
+    - "{user_addr}每周 4-6 次 / 90 分钟"
+    - "(挺胸) 笨猫推荐: 拳击是燃脂王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bx_movie_001
+  intent: question
+  keywords: [推荐拳击电影, 推荐洛奇, 推荐铁拳, 推荐百万美元宝贝, 笨猫拳击电影]
+  utterances:
+    - 推荐拳击电影
+    - 推荐洛奇
+    - 推荐铁拳
+    - 推荐百万美元宝贝
+    - 笨猫拳击电影
+  responses:
+    - "嗷呜～{user_addr}洛奇 - 拳击电影 No.1ฅฅ"
+    - "(尾巴翘) 铁拳 / 愤怒的公牛"
+    - "{user_addr}百万美元宝贝 / 拳坛风云"
+    - "(挺胸) 笨猫推荐: 洛奇 1-6 必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bx_thai_001
+  intent: question
+  keywords: [推荐泰拳, 推荐 Muay Thai, 推荐泰拳手, 推荐 Buakaw, 笨猫泰拳]
+  utterances:
+    - 推荐泰拳
+    - 推荐 Muay Thai
+    - 推荐泰拳手
+    - 推荐 Buakaw
+    - 笨猫泰拳
+  responses:
+    - "嗷呜～{user_addr}泰拳 - 八肢艺术ฅฅ"
+    - "(尾巴翘) Buakaw 播求 - 国民拳王"
+    - "{user_addr}Saenchai - 技术天才"
+    - "(挺胸) 笨猫推荐: 泰拳极致暴力!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bx_kickbox_001
+  intent: question
+  keywords: [推荐踢拳, 推荐 K-1, 推荐 Glory, 推荐播求, 笨猫踢拳]
+  utterances:
+    - 推荐踢拳
+    - 推荐 K-1
+    - 推荐 Glory
+    - 推荐播求
+    - 笨猫踢拳
+  responses:
+    - "嗷呜～{user_addr}K-1 / Glory - 顶级踢拳ฅฅ"
+    - "(尾巴翘) 武林风 / 昆仑决 - 国内"
+    - "{user_addr}站立格斗"
+    - "(挺胸) 笨猫推荐: 看 Glory 比赛!"
+  cooldown_seconds: 60
+  weight: 0.8

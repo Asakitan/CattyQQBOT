@@ -1,0 +1,224 @@
+# 中国武术 / 太极 / 咏春 / 内外家 routes (S6 R198 NLU 节点扩充, 第十九周期 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 R5 boxing / R9 mma_bjj 区分: 这里专注中国传统武术.
+
+- name: ma_taichi_001
+  intent: question
+  keywords: [推荐太极, 推荐太极拳, 推荐陈式, 推荐杨式, 笨猫太极]
+  utterances:
+    - 推荐太极
+    - 推荐太极拳
+    - 推荐陈式
+    - 推荐杨式
+    - 笨猫太极
+  responses:
+    - "嗷呜～{user_addr}陈式 - 刚柔并济 / 发力ฅฅ"
+    - "(尾巴翘) 杨式 - 舒展大方 / 流行"
+    - "{user_addr}吴 / 武 / 孙式"
+    - "(挺胸) 笨猫推荐: 入门杨式!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_wingchun_001
+  intent: question
+  keywords: [推荐咏春, 推荐叶问, 推荐李小龙咏春, 推荐木人桩, 笨猫咏春]
+  utterances:
+    - 推荐咏春
+    - 推荐叶问
+    - 推荐李小龙咏春
+    - 推荐木人桩
+    - 笨猫咏春
+  responses:
+    - "嗷呜～{user_addr}咏春 - 短桥贴身ฅฅ"
+    - "(尾巴翘) 叶问 - 现代咏春宗师"
+    - "{user_addr}小念头 / 寻桥 / 标指"
+    - "(挺胸) 笨猫推荐: 看叶问电影!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_shaolin_001
+  intent: question
+  keywords: [推荐少林, 推荐少林功夫, 推荐少林寺, 推荐七十二绝技, 笨猫少林]
+  utterances:
+    - 推荐少林
+    - 推荐少林功夫
+    - 推荐少林寺
+    - 推荐七十二绝技
+    - 笨猫少林
+  responses:
+    - "嗷呜～{user_addr}少林 - 天下武功出少林ฅฅ"
+    - "(尾巴翘) 罗汉拳 / 易筋经 / 洗髓经"
+    - "{user_addr}棍法 / 罗汉十八手"
+    - "(挺胸) 笨猫推荐: 河南少林寺朝圣!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_wudang_001
+  intent: question
+  keywords: [推荐武当, 推荐武当山, 推荐张三丰, 推荐内家拳, 笨猫武当]
+  utterances:
+    - 推荐武当
+    - 推荐武当山
+    - 推荐张三丰
+    - 推荐内家拳
+    - 笨猫武当
+  responses:
+    - "嗷呜～{user_addr}武当 - 道家内家拳ฅฅ"
+    - "(尾巴翘) 张三丰 - 太极拳祖师"
+    - "{user_addr}两仪剑 / 玄武棍"
+    - "(挺胸) 笨猫推荐: 武当山修道!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ma_xingyi_bagua_001
+  intent: question
+  keywords: [推荐形意拳, 推荐八卦掌, 推荐内家三拳, 推荐意拳, 笨猫形意拳]
+  utterances:
+    - 推荐形意拳
+    - 推荐八卦掌
+    - 推荐内家三拳
+    - 推荐意拳
+    - 笨猫形意拳
+  responses:
+    - "嗷呜～{user_addr}形意 - 直来直去 / 简朴ฅฅ"
+    - "(尾巴翘) 八卦 - 转圈走位 / 巧妙"
+    - "{user_addr}与太极并称内家三拳"
+    - "(挺胸) 笨猫推荐: 形意是入门内家!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ma_bruce_lee_001
+  intent: question
+  keywords: [推荐李小龙, 推荐 Bruce Lee, 推荐截拳道, 推荐李小龙电影, 笨猫李小龙]
+  utterances:
+    - 推荐李小龙
+    - 推荐 Bruce Lee
+    - 推荐截拳道
+    - 推荐李小龙电影
+    - 笨猫李小龙
+  responses:
+    - "嗷呜～{user_addr}李小龙 - 武术哲学之神ฅฅ"
+    - "(尾巴翘) 截拳道 - 自创实战体系"
+    - "{user_addr}猛龙过江 / 龙争虎斗"
+    - "(挺胸) 笨猫推荐: 永远的偶像!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_qigong_001
+  intent: question
+  keywords: [推荐气功, 推荐八段锦, 推荐五禽戏, 推荐易筋经, 笨猫气功]
+  utterances:
+    - 推荐气功
+    - 推荐八段锦
+    - 推荐五禽戏
+    - 推荐易筋经
+    - 笨猫气功
+  responses:
+    - "嗷呜～{user_addr}八段锦 - 全民健身ฅฅ"
+    - "(尾巴翘) 五禽戏 - 华佗创"
+    - "{user_addr}易筋经 - 少林神功"
+    - "(挺胸) 笨猫推荐: 八段锦每天 15 分!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_sword_001
+  intent: question
+  keywords: [推荐剑术, 推荐太极剑, 推荐唐刀, 推荐双手剑, 笨猫剑术]
+  utterances:
+    - 推荐剑术
+    - 推荐太极剑
+    - 推荐唐刀
+    - 推荐双手剑
+    - 笨猫剑术
+  responses:
+    - "嗷呜～{user_addr}太极剑 / 武当剑 - 套路ฅฅ"
+    - "(尾巴翘) 苗刀 / 唐刀 - 兵器"
+    - "{user_addr}双手剑 / 单手剑"
+    - "(挺胸) 笨猫推荐: 太极剑优雅!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ma_kung_fu_movie_001
+  intent: question
+  keywords: [推荐功夫电影, 推荐成龙, 推荐李连杰, 推荐甄子丹, 笨猫功夫电影]
+  utterances:
+    - 推荐功夫电影
+    - 推荐成龙
+    - 推荐李连杰
+    - 推荐甄子丹
+    - 笨猫功夫电影
+  responses:
+    - "嗷呜～{user_addr}成龙 / 李连杰 / 甄子丹ฅฅ"
+    - "(尾巴翘) 醉拳 / 黄飞鸿 / 叶问"
+    - "{user_addr}功夫熊猫 / 一代宗师"
+    - "(挺胸) 笨猫推荐: 一代宗师必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_competition_001
+  intent: question
+  keywords: [推荐武术比赛, 推荐套路比赛, 推荐散打, 推荐 Sanda, 笨猫武术比赛]
+  utterances:
+    - 推荐武术比赛
+    - 推荐套路比赛
+    - 推荐散打
+    - 推荐 Sanda
+    - 笨猫武术比赛
+  responses:
+    - "嗷呜～{user_addr}武术套路 - 表演竞赛ฅฅ"
+    - "(尾巴翘) 散打 - 实战格斗"
+    - "{user_addr}武林大会 / 散打王"
+    - "(挺胸) 笨猫推荐: 看散打更刺激!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ma_taichi_health_001
+  intent: question
+  keywords: [推荐太极养生, 推荐太极打通经脉, 推荐太极慢练, 推荐太极站桩, 笨猫太极养生]
+  utterances:
+    - 推荐太极养生
+    - 推荐太极打通经脉
+    - 推荐太极慢练
+    - 推荐太极站桩
+    - 笨猫太极养生
+  responses:
+    - "嗷呜～{user_addr}太极慢练 - 调息养气ฅฅ"
+    - "(尾巴翘) 站桩 - 内功基础"
+    - "{user_addr}动静结合 / 阴阳调和"
+    - "(挺胸) 笨猫推荐: 老人最爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_korea_kungfu_001
+  intent: question
+  keywords: [推荐韩国武术, 推荐合气道, 推荐跆拳道, 推荐空手道, 笨猫合气道]
+  utterances:
+    - 推荐韩国武术
+    - 推荐合气道
+    - 推荐跆拳道
+    - 推荐空手道
+    - 笨猫合气道
+  responses:
+    - "嗷呜～{user_addr}跆拳道 - 韩国国技 / 奥运ฅฅ"
+    - "(尾巴翘) 空手道 - 日本"
+    - "{user_addr}合气道 - 借力打力"
+    - "(挺胸) 笨猫推荐: 跆拳道适合儿童!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ma_kendo_001
+  intent: question
+  keywords: [推荐剑道, 推荐 Kendo, 推荐居合道, 推荐日本剑道, 笨猫剑道]
+  utterances:
+    - 推荐剑道
+    - 推荐 Kendo
+    - 推荐居合道
+    - 推荐日本剑道
+    - 笨猫剑道
+  responses:
+    - "嗷呜～{user_addr}剑道 - 日本武士道ฅฅ"
+    - "(尾巴翘) 居合道 - 拔刀术"
+    - "{user_addr}竹刀 / 护具 / 道场"
+    - "(挺胸) 笨猫推荐: 剑道礼仪庄严!"
+  cooldown_seconds: 60
+  weight: 0.7

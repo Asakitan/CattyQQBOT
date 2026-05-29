@@ -1,0 +1,224 @@
+# 瑜伽进阶 / 阿斯汤伽 / 阴瑜伽 / 流瑜伽 routes (S6 R199 NLU 节点扩充, 第十九周期 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B5 workout_routine (健身基础) 区分: 这里专注瑜伽体系.
+
+- name: yg_style_001
+  intent: question
+  keywords: [推荐瑜伽流派, 推荐 Hatha, 推荐 Vinyasa, 推荐 Ashtanga, 笨猫瑜伽流派]
+  utterances:
+    - 推荐瑜伽流派
+    - 推荐 Hatha
+    - 推荐 Vinyasa
+    - 推荐 Ashtanga
+    - 笨猫瑜伽流派
+  responses:
+    - "嗷呜～{user_addr}Hatha - 哈达基础ฅฅ"
+    - "(尾巴翘) Vinyasa - 流瑜伽"
+    - "{user_addr}Ashtanga / Iyengar / 阴瑜伽"
+    - "(挺胸) 笨猫推荐: 入门 Hatha!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yg_ashtanga_001
+  intent: question
+  keywords: [推荐阿斯汤伽, 推荐 Primary Series, 推荐 K. Pattabhi Jois, 推荐 Mysore, 笨猫阿斯汤伽]
+  utterances:
+    - 推荐阿斯汤伽
+    - 推荐 Primary Series
+    - 推荐 K. Pattabhi Jois
+    - 推荐 Mysore
+    - 笨猫阿斯汤伽
+  responses:
+    - "嗷呜～{user_addr}Ashtanga - 严格序列ฅฅ"
+    - "(尾巴翘) Primary / Intermediate Series"
+    - "{user_addr}Mysore 教学法 - 自练"
+    - "(挺胸) 笨猫推荐: Ashtanga 体能强!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yg_yin_001
+  intent: question
+  keywords: [推荐阴瑜伽, 推荐 Yin Yoga, 推荐放松瑜伽, 推荐冥想瑜伽, 笨猫阴瑜伽]
+  utterances:
+    - 推荐阴瑜伽
+    - 推荐 Yin Yoga
+    - 推荐放松瑜伽
+    - 推荐冥想瑜伽
+    - 笨猫阴瑜伽
+  responses:
+    - "嗷呜～{user_addr}Yin - 长时间静态ฅฅ"
+    - "(尾巴翘) 拉伸筋膜 / 经络"
+    - "{user_addr}3-5 分钟一个体式"
+    - "(挺胸) 笨猫推荐: 阴瑜伽超治愈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yg_iyengar_001
+  intent: question
+  keywords: [推荐 Iyengar, 推荐艾扬格, 推荐瑜伽辅具, 推荐瑜伽墙绳, 笨猫 Iyengar]
+  utterances:
+    - 推荐 Iyengar
+    - 推荐艾扬格
+    - 推荐瑜伽辅具
+    - 推荐瑜伽墙绳
+    - 笨猫 Iyengar
+  responses:
+    - "嗷呜～{user_addr}Iyengar - 精确体位法ฅฅ"
+    - "(尾巴翘) 砖 / 带 / 抱枕 / 墙绳"
+    - "{user_addr}B.K.S. Iyengar 大师"
+    - "(挺胸) 笨猫推荐: 调身体位最佳!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: yg_kundalini_001
+  intent: question
+  keywords: [推荐昆达里尼, 推荐 Kundalini, 推荐脉轮瑜伽, 推荐能量瑜伽, 笨猫昆达里尼]
+  utterances:
+    - 推荐昆达里尼
+    - 推荐 Kundalini
+    - 推荐脉轮瑜伽
+    - 推荐能量瑜伽
+    - 笨猫昆达里尼
+  responses:
+    - "嗷呜～{user_addr}Kundalini - 唤醒能量ฅฅ"
+    - "(尾巴翘) 脉轮 / 蛇之苏醒"
+    - "{user_addr}梵唱 / 呼吸 / 体式"
+    - "(挺胸) 笨猫推荐: 神秘且强大!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: yg_pranayama_001
+  intent: question
+  keywords: [推荐呼吸法, 推荐 Pranayama, 推荐 Ujjayi, 推荐 Kapalbhati, 笨猫呼吸法]
+  utterances:
+    - 推荐呼吸法
+    - 推荐 Pranayama
+    - 推荐 Ujjayi
+    - 推荐 Kapalbhati
+    - 笨猫呼吸法
+  responses:
+    - "嗷呜～{user_addr}Ujjayi - 海洋呼吸ฅฅ"
+    - "(尾巴翘) Kapalbhati - 头骨清洁"
+    - "{user_addr}Nadi Shodhana - 鼻孔交替"
+    - "(挺胸) 笨猫推荐: 呼吸是瑜伽核心!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: yg_meditation_001
+  intent: question
+  keywords: [推荐冥想, 推荐 meditation, 推荐内观, 推荐正念, 笨猫冥想]
+  utterances:
+    - 推荐冥想
+    - 推荐 meditation
+    - 推荐内观
+    - 推荐正念
+    - 笨猫冥想
+  responses:
+    - "嗷呜～{user_addr}正念 / Mindfulness - 入门ฅฅ"
+    - "(尾巴翘) 内观 / Vipassana - 深度"
+    - "{user_addr}Headspace / Calm - app"
+    - "(挺胸) 笨猫推荐: 每天 10 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yg_pose_001
+  intent: question
+  keywords: [推荐瑜伽体式, 推荐下犬式, 推荐战士式, 推荐头倒立, 笨猫瑜伽体式]
+  utterances:
+    - 推荐瑜伽体式
+    - 推荐下犬式
+    - 推荐战士式
+    - 推荐头倒立
+    - 笨猫瑜伽体式
+  responses:
+    - "嗷呜～{user_addr}下犬 / 战士 / 树式 - 基础ฅฅ"
+    - "(尾巴翘) 头倒立 / 手倒立"
+    - "{user_addr}莲花 / 鸽王 / 轮式"
+    - "(挺胸) 笨猫推荐: 头倒立练身心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yg_mat_001
+  intent: question
+  keywords: [推荐瑜伽垫, 推荐 Manduka, 推荐 Liforme, 推荐 Lululemon 瑜伽垫, 笨猫瑜伽垫]
+  utterances:
+    - 推荐瑜伽垫
+    - 推荐 Manduka
+    - 推荐 Liforme
+    - 推荐 Lululemon 瑜伽垫
+    - 笨猫瑜伽垫
+  responses:
+    - "嗷呜～{user_addr}Manduka PRO - 瑜伽垫之王ฅฅ"
+    - "(尾巴翘) Liforme - 对齐标记"
+    - "{user_addr}Lululemon Reversible"
+    - "(挺胸) 笨猫推荐: Manduka 一辈子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yg_apparel_001
+  intent: question
+  keywords: [推荐瑜伽服, 推荐 Lululemon, 推荐 Athleta, 推荐瑜伽裤, 笨猫瑜伽服]
+  utterances:
+    - 推荐瑜伽服
+    - 推荐 Lululemon
+    - 推荐 Athleta
+    - 推荐瑜伽裤
+    - 笨猫瑜伽服
+  responses:
+    - "嗷呜～{user_addr}Lululemon Align - 经典ฅฅ"
+    - "(尾巴翘) Athleta / Outdoor Voices"
+    - "{user_addr}国产: Maia Active / Particle Fever"
+    - "(挺胸) 笨猫推荐: Lulu Align 软Q!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yg_studio_001
+  intent: question
+  keywords: [推荐瑜伽馆, 推荐 Lululemon studio, 推荐瑜伽教培, 推荐瑜伽 TTC, 笨猫瑜伽馆]
+  utterances:
+    - 推荐瑜伽馆
+    - 推荐 Lululemon studio
+    - 推荐瑜伽教培
+    - 推荐瑜伽 TTC
+    - 笨猫瑜伽馆
+  responses:
+    - "嗷呜～{user_addr}TTC 200 / 500 - 教培ฅฅ"
+    - "(尾巴翘) 印度 Mysore / Rishikesh"
+    - "{user_addr}国内: 邱源 / Y plus"
+    - "(挺胸) 笨猫推荐: 印度才是源头!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yg_hot_001
+  intent: question
+  keywords: [推荐高温瑜伽, 推荐 Bikram, 推荐 hot yoga, 推荐 26 体式, 笨猫高温瑜伽]
+  utterances:
+    - 推荐高温瑜伽
+    - 推荐 Bikram
+    - 推荐 hot yoga
+    - 推荐 26 体式
+    - 笨猫高温瑜伽
+  responses:
+    - "嗷呜～{user_addr}Bikram - 26 个固定体式ฅฅ"
+    - "(尾巴翘) 40℃ + 60min"
+    - "{user_addr}Hot Vinyasa - 流动版"
+    - "(挺胸) 笨猫推荐: 排汗超爽!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: yg_acro_001
+  intent: question
+  keywords: [推荐空中瑜伽, 推荐 Aerial Yoga, 推荐 AcroYoga, 推荐双人瑜伽, 笨猫空中瑜伽]
+  utterances:
+    - 推荐空中瑜伽
+    - 推荐 Aerial Yoga
+    - 推荐 AcroYoga
+    - 推荐双人瑜伽
+    - 笨猫空中瑜伽
+  responses:
+    - "嗷呜～{user_addr}Aerial - 空中绸带瑜伽ฅฅ"
+    - "(尾巴翘) AcroYoga - 双人配合"
+    - "{user_addr}吊床 / 颈椎牵引"
+    - "(挺胸) 笨猫推荐: 空中瑜伽好玩!"
+  cooldown_seconds: 60
+  weight: 0.8

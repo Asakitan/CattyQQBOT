@@ -1,0 +1,207 @@
+# 普拉提 / Pilates / Reformer / 核心训练 routes (S6 R200 NLU 节点扩充, 第十九周期 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B5 workout_routine / R7 yoga_advanced 区分: 这里专注 Pilates.
+
+- name: pl_intro_001
+  intent: question
+  keywords: [推荐普拉提, 推荐 Pilates, 推荐核心训练, 推荐 Joseph Pilates, 笨猫普拉提]
+  utterances:
+    - 推荐普拉提
+    - 推荐 Pilates
+    - 推荐核心训练
+    - 推荐 Joseph Pilates
+    - 笨猫普拉提
+  responses:
+    - "嗷呜～{user_addr}Pilates - Joseph 创立ฅฅ"
+    - "(尾巴翘) 核心 + 控制 + 呼吸"
+    - "{user_addr}Mat / Reformer 两大类"
+    - "(挺胸) 笨猫推荐: 核心力量神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_mat_001
+  intent: question
+  keywords: [推荐垫上普拉提, 推荐 Mat Pilates, 推荐普拉提垫, 推荐入门 mat, 笨猫垫上普拉提]
+  utterances:
+    - 推荐垫上普拉提
+    - 推荐 Mat Pilates
+    - 推荐普拉提垫
+    - 推荐入门 mat
+    - 笨猫垫上普拉提
+  responses:
+    - "嗷呜～{user_addr}Mat - 入门 / 无器械ฅฅ"
+    - "(尾巴翘) 经典 34 体式"
+    - "{user_addr}百次拍打 / The Hundred"
+    - "(挺胸) 笨猫推荐: 在家可练!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_reformer_001
+  intent: question
+  keywords: [推荐 Reformer, 推荐普拉提床, 推荐 Balanced Body, 推荐 Stott, 笨猫 Reformer]
+  utterances:
+    - 推荐 Reformer
+    - 推荐普拉提床
+    - 推荐 Balanced Body
+    - 推荐 Stott
+    - 笨猫 Reformer
+  responses:
+    - "嗷呜～{user_addr}Reformer - 普拉提核心器械ฅฅ"
+    - "(尾巴翘) Balanced Body / Stott - 主流"
+    - "{user_addr}STAR / Allegro 系列"
+    - "(挺胸) 笨猫推荐: Reformer 进阶神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_cadillac_001
+  intent: question
+  keywords: [推荐 Cadillac, 推荐普拉提塔, 推荐 Wunda Chair, 推荐 Barrels, 笨猫 Cadillac]
+  utterances:
+    - 推荐 Cadillac
+    - 推荐普拉提塔
+    - 推荐 Wunda Chair
+    - 推荐 Barrels
+    - 笨猫 Cadillac
+  responses:
+    - "嗷呜～{user_addr}Cadillac - 全能塔ฅฅ"
+    - "(尾巴翘) Wunda Chair / Ladder Barrel"
+    - "{user_addr}吊床 / 弹簧组合"
+    - "(挺胸) 笨猫推荐: 大器械全套!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: pl_principle_001
+  intent: question
+  keywords: [推荐普拉提原则, 推荐 6 原则, 推荐核心控制, 推荐普拉提呼吸, 笨猫普拉提原则]
+  utterances:
+    - 推荐普拉提原则
+    - 推荐 6 原则
+    - 推荐核心控制
+    - 推荐普拉提呼吸
+    - 笨猫普拉提原则
+  responses:
+    - "嗷呜～{user_addr}集中 / 控制 / 中心 / 流畅ฅฅ"
+    - "(尾巴翘) 精确 / 呼吸 - 6 原则"
+    - "{user_addr}核心 = 腹横 + 多裂"
+    - "(挺胸) 笨猫推荐: 6 原则记牢!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pl_pose_001
+  intent: question
+  keywords: [推荐普拉提动作, 推荐 The Hundred, 推荐 Roll Up, 推荐 Single Leg Stretch, 笨猫普拉提动作]
+  utterances:
+    - 推荐普拉提动作
+    - 推荐 The Hundred
+    - 推荐 Roll Up
+    - 推荐 Single Leg Stretch
+    - 笨猫普拉提动作
+  responses:
+    - "嗷呜～{user_addr}百次拍打 - 普拉提标志ฅฅ"
+    - "(尾巴翘) Roll Up / Roll Over"
+    - "{user_addr}Single / Double Leg Stretch"
+    - "(挺胸) 笨猫推荐: Hundred 烧腹!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pl_pelvic_001
+  intent: question
+  keywords: [推荐盆底肌, 推荐产后修复, 推荐核心激活, 推荐凯格尔, 笨猫盆底肌]
+  utterances:
+    - 推荐盆底肌
+    - 推荐产后修复
+    - 推荐核心激活
+    - 推荐凯格尔
+    - 笨猫盆底肌
+  responses:
+    - "嗷呜～{user_addr}盆底肌 - 产后必练ฅฅ"
+    - "(尾巴翘) 凯格尔运动"
+    - "{user_addr}腹横 + 盆底 + 横膈"
+    - "(挺胸) 笨猫推荐: 普拉提修复一流!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_school_001
+  intent: question
+  keywords: [推荐普拉提认证, 推荐 PMA, 推荐 Polestar, 推荐 BASI, 笨猫普拉提认证]
+  utterances:
+    - 推荐普拉提认证
+    - 推荐 PMA
+    - 推荐 Polestar
+    - 推荐 BASI
+    - 笨猫普拉提认证
+  responses:
+    - "嗷呜～{user_addr}PMA / BASI / Stott - 三大ฅฅ"
+    - "(尾巴翘) Polestar / Romana's"
+    - "{user_addr}500h 全能教培"
+    - "(挺胸) 笨猫推荐: BASI 国际认可!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pl_workout_001
+  intent: question
+  keywords: [推荐普拉提瘦身, 推荐普拉提减脂, 推荐塑形, 推荐线条修长, 笨猫普拉提瘦身]
+  utterances:
+    - 推荐普拉提瘦身
+    - 推荐普拉提减脂
+    - 推荐塑形
+    - 推荐线条修长
+    - 笨猫普拉提瘦身
+  responses:
+    - "嗷呜～{user_addr}普拉提塑形 - 修长肌肉ฅฅ"
+    - "(尾巴翘) 配合饮食 + 有氧"
+    - "{user_addr}每周 3-4 次"
+    - "(挺胸) 笨猫推荐: 普拉提塑芭蕾身!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_celeb_001
+  intent: question
+  keywords: [推荐普拉提名人, 推荐 Hailey Bieber, 推荐 Kendall Jenner, 推荐明星普拉提, 笨猫普拉提名人]
+  utterances:
+    - 推荐普拉提名人
+    - 推荐 Hailey Bieber
+    - 推荐 Kendall Jenner
+    - 推荐明星普拉提
+    - 笨猫普拉提名人
+  responses:
+    - "嗷呜～{user_addr}Hailey / Kendall - 超模都练ฅฅ"
+    - "(尾巴翘) Adriana Lima / Margot Robbie"
+    - "{user_addr}国内: 刘涛 / 钟丽缇"
+    - "(挺胸) 笨猫推荐: 明星都靠它瘦!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pl_pregnant_001
+  intent: question
+  keywords: [推荐孕期普拉提, 推荐孕妇普拉提, 推荐孕期运动, 推荐高龄孕妇, 笨猫孕期普拉提]
+  utterances:
+    - 推荐孕期普拉提
+    - 推荐孕妇普拉提
+    - 推荐孕期运动
+    - 推荐高龄孕妇
+    - 笨猫孕期普拉提
+  responses:
+    - "嗷呜～{user_addr}孕期普拉提 - 安全高效ฅฅ"
+    - "(尾巴翘) 避免仰卧 / 平衡"
+    - "{user_addr}产后 42 天后开始修复"
+    - "(挺胸) 笨猫的提醒: 教练专业指导!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_class_001
+  intent: question
+  keywords: [推荐普拉提课, 推荐普拉提 app, 推荐 Glo, 推荐 Pilates Anytime, 笨猫普拉提课]
+  utterances:
+    - 推荐普拉提课
+    - 推荐普拉提 app
+    - 推荐 Glo
+    - 推荐 Pilates Anytime
+    - 笨猫普拉提课
+  responses:
+    - "嗷呜～{user_addr}Pilates Anytime - 海外顶ฅฅ"
+    - "(尾巴翘) Glo / Alo Moves"
+    - "{user_addr}Keep / Patpat - 国内"
+    - "(挺胸) 笨猫推荐: Anytime 课程多!"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,207 @@
+# MMA / 综合格斗 / BJJ 柔术 / 摔跤 routes (S6 R201 NLU 节点扩充, 第十九周期 10/10 完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 R5 boxing / R6 martial_arts_china 区分: 这里专注综合格斗.
+
+- name: mm_ufc_001
+  intent: question
+  keywords: [推荐 UFC, 推荐 MMA, 推荐综合格斗, 推荐 UFC 选手, 笨猫 UFC]
+  utterances:
+    - 推荐 UFC
+    - 推荐 MMA
+    - 推荐综合格斗
+    - 推荐 UFC 选手
+    - 笨猫 UFC
+  responses:
+    - "嗷呜～{user_addr}UFC - MMA 顶级组织ฅฅ"
+    - "(尾巴翘) Khabib / McGregor / Jon Jones"
+    - "{user_addr}张伟丽 / 李景亮 - 中国"
+    - "(挺胸) 笨猫推荐: Khabib 不败传奇!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_bjj_001
+  intent: question
+  keywords: [推荐巴西柔术, 推荐 BJJ, 推荐 Brazilian Jiu-Jitsu, 推荐 Gracie, 笨猫 BJJ]
+  utterances:
+    - 推荐巴西柔术
+    - 推荐 BJJ
+    - 推荐 Brazilian Jiu-Jitsu
+    - 推荐 Gracie
+    - 笨猫 BJJ
+  responses:
+    - "嗷呜～{user_addr}BJJ - 地面格斗艺术ฅฅ"
+    - "(尾巴翘) Gracie 家族 - 创始"
+    - "{user_addr}白蓝紫棕黑 - 段位"
+    - "(挺胸) 笨猫推荐: 柔术是地面王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_wrestle_001
+  intent: question
+  keywords: [推荐摔跤, 推荐自由式摔跤, 推荐古典摔跤, 推荐 wrestling, 笨猫摔跤]
+  utterances:
+    - 推荐摔跤
+    - 推荐自由式摔跤
+    - 推荐古典摔跤
+    - 推荐 wrestling
+    - 笨猫摔跤
+  responses:
+    - "嗷呜～{user_addr}自由 / 古典 / 中国摔跤ฅฅ"
+    - "(尾巴翘) MMA 摔跤是基础"
+    - "{user_addr}单腿 / 双腿 / 抱摔"
+    - "(挺胸) 笨猫推荐: 摔跤是 MMA 王!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mm_judo_001
+  intent: question
+  keywords: [推荐柔道, 推荐 Judo, 推荐嘉纳治五郎, 推荐柔道段位, 笨猫柔道]
+  utterances:
+    - 推荐柔道
+    - 推荐 Judo
+    - 推荐嘉纳治五郎
+    - 推荐柔道段位
+    - 笨猫柔道
+  responses:
+    - "嗷呜～{user_addr}柔道 - 日本投技ฅฅ"
+    - "(尾巴翘) 嘉纳治五郎 - 创始人"
+    - "{user_addr}背负投 / 大外刈"
+    - "(挺胸) 笨猫推荐: 奥运正式!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mm_muay_clinch_001
+  intent: question
+  keywords: [推荐内围, 推荐 clinch, 推荐肘击膝击, 推荐泰拳内围, 笨猫内围]
+  utterances:
+    - 推荐内围
+    - 推荐 clinch
+    - 推荐肘击膝击
+    - 推荐泰拳内围
+    - 笨猫内围
+  responses:
+    - "嗷呜～{user_addr}Clinch - 近身控制ฅฅ"
+    - "(尾巴翘) 肘 / 膝 - 致命武器"
+    - "{user_addr}泰拳内围战 / 缠抱"
+    - "(挺胸) 笨猫推荐: 内围是杀招!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mm_promotion_001
+  intent: question
+  keywords: [推荐 ONE Championship, 推荐 PFL, 推荐 Bellator, 推荐昆仑决, 笨猫 ONE]
+  utterances:
+    - 推荐 ONE Championship
+    - 推荐 PFL
+    - 推荐 Bellator
+    - 推荐昆仑决
+    - 笨猫 ONE
+  responses:
+    - "嗷呜～{user_addr}ONE Championship - 亚洲顶ฅฅ"
+    - "(尾巴翘) PFL / Bellator - 美国"
+    - "{user_addr}昆仑决 / 武林风 - 国内"
+    - "(挺胸) 笨猫推荐: ONE 看亚洲选手!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mm_zhang_001
+  intent: question
+  keywords: [推荐张伟丽, 推荐 Zhang Weili, 推荐李景亮, 推荐中国 MMA, 笨猫张伟丽]
+  utterances:
+    - 推荐张伟丽
+    - 推荐 Zhang Weili
+    - 推荐李景亮
+    - 推荐中国 MMA
+    - 笨猫张伟丽
+  responses:
+    - "嗷呜～{user_addr}张伟丽 - 中国首位 UFC 冠军ฅฅ"
+    - "(尾巴翘) 李景亮 / 宋亚东"
+    - "{user_addr}闫晓楠 / 吴愚"
+    - "(挺胸) 笨猫推荐: 张伟丽是骄傲!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_gear_001
+  intent: question
+  keywords: [推荐 MMA 装备, 推荐 MMA 手套, 推荐护齿, 推荐护裆, 笨猫 MMA 装备]
+  utterances:
+    - 推荐 MMA 装备
+    - 推荐 MMA 手套
+    - 推荐护齿
+    - 推荐护裆
+    - 笨猫 MMA 装备
+  responses:
+    - "嗷呜～{user_addr}Hayabusa / Venum / Hayabusaฅฅ"
+    - "(尾巴翘) 护齿 / 护裆 / 护胫 必备"
+    - "{user_addr}手套 4-6oz (MMA) / 16oz 训练"
+    - "(挺胸) 笨猫推荐: 安全装备必须!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mm_gi_001
+  intent: question
+  keywords: [推荐柔术 gi, 推荐柔术道服, 推荐 Atama, 推荐 Shoyoroll, 笨猫柔术道服]
+  utterances:
+    - 推荐柔术 gi
+    - 推荐柔术道服
+    - 推荐 Atama
+    - 推荐 Shoyoroll
+    - 笨猫柔术道服
+  responses:
+    - "嗷呜～{user_addr}Shoyoroll - 高端 gi 神ฅฅ"
+    - "(尾巴翘) Atama / Gameness"
+    - "{user_addr}A0-A5 size"
+    - "(挺胸) 笨猫推荐: Shoyoroll 信仰!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: mm_event_001
+  intent: question
+  keywords: [推荐 UFC 经典, 推荐 UFC 比赛, 推荐 UFC PPV, 推荐 ADCC, 笨猫 UFC 经典]
+  utterances:
+    - 推荐 UFC 经典
+    - 推荐 UFC 比赛
+    - 推荐 UFC PPV
+    - 推荐 ADCC
+    - 笨猫 UFC 经典
+  responses:
+    - "嗷呜～{user_addr}McGregor vs Khabib - 神战ฅฅ"
+    - "(尾巴翘) Jon Jones vs Stipe"
+    - "{user_addr}ADCC - 柔术无道服锦标"
+    - "(挺胸) 笨猫推荐: Khabib 完美告别!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mm_train_001
+  intent: question
+  keywords: [推荐 MMA 训练, 推荐综合格斗训练, 推荐拳馆, 推荐 MMA 馆, 笨猫 MMA 训练]
+  utterances:
+    - 推荐 MMA 训练
+    - 推荐综合格斗训练
+    - 推荐拳馆
+    - 推荐 MMA 馆
+    - 笨猫 MMA 训练
+  responses:
+    - "嗷呜～{user_addr}北京: 福州街 / 闪电格斗ฅฅ"
+    - "(尾巴翘) 上海 / 广州 大量馆"
+    - "{user_addr}打综合 - 拳 + 跤 + 柔术"
+    - "(挺胸) 笨猫推荐: 找正规拳馆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_movie_001
+  intent: question
+  keywords: [推荐 MMA 电影, 推荐勇士 Warrior, 推荐 BJJ 纪录片, 推荐拳坛纪录片, 笨猫 MMA 电影]
+  utterances:
+    - 推荐 MMA 电影
+    - 推荐勇士 Warrior
+    - 推荐 BJJ 纪录片
+    - 推荐拳坛纪录片
+    - 笨猫 MMA 电影
+  responses:
+    - "嗷呜～{user_addr}勇士 Warrior - MMA 神作ฅฅ"
+    - "(尾巴翘) Conor McGregor: Notorious"
+    - "{user_addr}Hijos del Pulpo - Gracie 纪录"
+    - "(挺胸) 笨猫推荐: Warrior 必看!"
+  cooldown_seconds: 60
+  weight: 0.9
