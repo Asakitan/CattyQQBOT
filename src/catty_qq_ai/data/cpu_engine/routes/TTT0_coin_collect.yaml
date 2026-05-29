@@ -1,0 +1,206 @@
+# 钱币收藏 routes (S6 R732 NLU 节点扩充, 第七十三周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cc_silver_dollar_001
+  intent: question
+  keywords: [推荐银元收藏, 推荐袁大头, 推荐孙小头, 推荐船洋, 笨猫银元]
+  utterances:
+    - 推荐银元收藏
+    - 推荐袁大头
+    - 推荐孙小头
+    - 推荐船洋
+    - 笨猫银元
+  responses:
+    - "嗷呜～{user_addr}袁大头 - 民国三年最经典ฅฅ"
+    - "(尾巴翘) 孙小头 / 船洋 / 鹰洋"
+    - "{user_addr}看品相: 原光 / 包浆 / 磨损"
+    - "(挺胸) 笨猫推荐: 入门先收一枚袁大头!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_ancient_coin_001
+  intent: question
+  keywords: [推荐古钱币, 推荐五铢, 推荐半两, 推荐开元通宝, 笨猫古钱币]
+  utterances:
+    - 推荐古钱币
+    - 推荐五铢
+    - 推荐半两
+    - 推荐开元通宝
+    - 笨猫古钱币
+  responses:
+    - "嗷呜～{user_addr}秦半两 / 汉五铢 - 老祖宗级ฅฅ"
+    - "(尾巴翘) 开元通宝 / 崇宁重宝 / 大观通宝"
+    - "{user_addr}注意辨伪: 真品有自然包浆"
+    - "(挺胸) 人家推荐: 从五铢入门便宜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_panda_coin_001
+  intent: question
+  keywords: [推荐熊猫币, 推荐大熊猫纪念币, 推荐金银熊猫, 推荐熊猫银币, 笨猫熊猫币]
+  utterances:
+    - 推荐熊猫币
+    - 推荐大熊猫纪念币
+    - 推荐金银熊猫
+    - 推荐熊猫银币
+    - 笨猫熊猫币
+  responses:
+    - "嗷呜～{user_addr}熊猫银币 30g - 年年新图案ฅฅ"
+    - "(尾巴翘) 金熊猫 / 彩色熊猫 / 加厚版"
+    - "{user_addr}央行发行 / 投资 + 收藏双属性"
+    - "(挺胸) 笨猫推荐: 每年新版收一枚!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_zodiac_snake_001
+  intent: question
+  keywords: [推荐蛇币, 推荐生肖蛇, 推荐蛇年纪念币, 推荐生肖纪念币, 笨猫蛇币]
+  utterances:
+    - 推荐蛇币
+    - 推荐生肖蛇
+    - 推荐蛇年纪念币
+    - 推荐生肖纪念币
+    - 笨猫蛇币
+  responses:
+    - "嗷呜～{user_addr}2025 蛇年贺岁币ฅฅ"
+    - "(尾巴翘) 生肖系列 / 12 年一轮 / 凑齐成套"
+    - "{user_addr}银行预约 / 面值 10 元 / 拆封要小心"
+    - "(挺胸) 人家推荐: 蛇币凑齐生肖套!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_rmb_1st_001
+  intent: question
+  keywords: [推荐第一套人民币, 推荐一版币, 推荐牧马图, 推荐蒙古包, 笨猫一版币]
+  utterances:
+    - 推荐第一套人民币
+    - 推荐一版币
+    - 推荐牧马图
+    - 推荐蒙古包
+    - 笨猫一版币
+  responses:
+    - "嗷呜～{user_addr}一版币 - 1948 起 / 收藏顶配ฅฅ"
+    - "(尾巴翘) 牧马图 / 蒙古包 / 瞻德城 - 四大珍"
+    - "{user_addr}全套天价 / 单张也要重金"
+    - "(挺胸) 笨猫推荐: 量力收单张稀缺号!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cc_rmb_2nd_001
+  intent: question
+  keywords: [推荐第二套人民币, 推荐二版币, 推荐大黑十, 推荐苏三币, 笨猫二版币]
+  utterances:
+    - 推荐第二套人民币
+    - 推荐二版币
+    - 推荐大黑十
+    - 推荐苏三币
+    - 笨猫二版币
+  responses:
+    - "嗷呜～{user_addr}二版币 - 1955 起 / 苏联代印ฅฅ"
+    - "(尾巴翘) 大黑十 / 苏三币 (3/5/10 元) / 红一元"
+    - "{user_addr}苏三币天价 / 普通版稍便宜"
+    - "(挺胸) 人家推荐: 红一元入门稳!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cc_rmb_3rd_001
+  intent: question
+  keywords: [推荐第三套人民币, 推荐三版币, 推荐背绿水印, 推荐车工两元, 笨猫三版币]
+  utterances:
+    - 推荐第三套人民币
+    - 推荐三版币
+    - 推荐背绿水印
+    - 推荐车工两元
+    - 笨猫三版币
+  responses:
+    - "嗷呜～{user_addr}三版币 - 1962 起 / 流通最久ฅฅ"
+    - "(尾巴翘) 背绿水印一角 / 车工两元 / 枣红一角"
+    - "{user_addr}五朵金花 / 大全套热门"
+    - "(挺胸) 笨猫推荐: 三版凑全套最有成就感!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_error_coin_001
+  intent: question
+  keywords: [推荐错版币, 推荐错币, 推荐错版人民币, 推荐错版硬币, 笨猫错版币]
+  utterances:
+    - 推荐错版币
+    - 推荐错币
+    - 推荐错版人民币
+    - 推荐错版硬币
+    - 笨猫错版币
+  responses:
+    - "嗷呜～{user_addr}错版币 - 印刷漂移 / 折白 / 漏印ฅฅ"
+    - "(尾巴翘) 真错版稀有 / 90% 是假炒作"
+    - "{user_addr}务必送评级 / 别信路边收购骗局"
+    - "(挺胸) 人家提醒: 谨慎入坑别被忽悠!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cc_foreign_usd_001
+  intent: question
+  keywords: [推荐外国币, 推荐美元历版, 推荐美钞收藏, 推荐外国纸币, 笨猫外国币]
+  utterances:
+    - 推荐外国币
+    - 推荐美元历版
+    - 推荐美钞收藏
+    - 推荐外国纸币
+    - 笨猫外国币
+  responses:
+    - "嗷呜～{user_addr}美元: 1928 大票幅 / 1934 银证ฅฅ"
+    - "(尾巴翘) 红印 / 蓝印 / 金证 / 趣味号"
+    - "{user_addr}英镑 / 日元 / 卢布 - 各国老钞"
+    - "(挺胸) 笨猫推荐: 美元 2 美元星号券好玩!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cc_grading_001
+  intent: question
+  keywords: [推荐评级, 推荐 PCGS, 推荐 NGC, 推荐公博, 笨猫钱币评级]
+  utterances:
+    - 推荐评级
+    - 推荐 PCGS
+    - 推荐 NGC
+    - 推荐公博
+    - 笨猫钱币评级
+  responses:
+    - "嗷呜～{user_addr}PCGS / NGC - 国际两大权威ฅฅ"
+    - "(尾巴翘) 公博 / 保粹 / 华夏 - 国内主流"
+    - "{user_addr}MS65+ 算高分 / 看 CAC 绿豆豆加分"
+    - "(挺胸) 人家推荐: 贵重币一定送评!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_tool_001
+  intent: question
+  keywords: [推荐入门工具, 推荐鉴定工具, 推荐放大镜, 推荐电子秤, 笨猫钱币工具]
+  utterances:
+    - 推荐入门工具
+    - 推荐鉴定工具
+    - 推荐放大镜
+    - 推荐电子秤
+    - 笨猫钱币工具
+  responses:
+    - "嗷呜～{user_addr}10x 放大镜 / LED 灯ฅฅ"
+    - "(尾巴翘) 0.01g 电子秤 / 卡尺 / 紫光灯"
+    - "{user_addr}卡册 / 圆盒 / 防氧化袋"
+    - "(挺胸) 笨猫推荐: 先备放大镜 + 卡册!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_community_001
+  intent: question
+  keywords: [推荐钱币交流圈, 推荐泉友会, 推荐钱币论坛, 推荐钱币 app, 笨猫泉友]
+  utterances:
+    - 推荐钱币交流圈
+    - 推荐泉友会
+    - 推荐钱币论坛
+    - 推荐钱币 app
+    - 笨猫泉友
+  responses:
+    - "嗷呜～{user_addr}园地 / 爱藏 / 华夏古泉ฅฅ"
+    - "(尾巴翘) 微拍堂 / 公博 app / 闲鱼"
+    - "{user_addr}线下: 报国寺 / 大钟寺 / 古玩市场"
+    - "(挺胸) 人家推荐: 先逛园地学知识!"
+  cooldown_seconds: 60
+  weight: 1.0

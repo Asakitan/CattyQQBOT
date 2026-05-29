@@ -1,0 +1,206 @@
+# 老相机 routes (S6 R735 NLU 节点扩充, 第七十三周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: vc_leica_001
+  intent: question
+  keywords: [推荐莱卡, 推荐 Leica, 推荐 Leica M, 推荐旁轴莱卡, 笨猫莱卡]
+  utterances:
+    - 推荐莱卡
+    - 推荐 Leica
+    - 推荐 Leica M
+    - 推荐旁轴莱卡
+    - 笨猫莱卡
+  responses:
+    - "嗷呜～{user_addr}Leica M3 / M6 - 旁轴之王ฅฅ"
+    - "(尾巴翘) M2 / M4 - 经典德味"
+    - "{user_addr}M6 TTL - 带测光好上手"
+    - "(挺胸) 笨猫推荐: M6 入门莱卡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_hasselblad_001
+  intent: question
+  keywords: [推荐哈苏, 推荐 Hasselblad, 推荐哈苏 500, 推荐中画幅哈苏, 笨猫哈苏]
+  utterances:
+    - 推荐哈苏
+    - 推荐 Hasselblad
+    - 推荐哈苏 500
+    - 推荐中画幅哈苏
+    - 笨猫哈苏
+  responses:
+    - "嗷呜～{user_addr}哈苏 500C/M - 中幅传奇ฅฅ"
+    - "(尾巴翘) 503CW / 501CM - 月球同款"
+    - "{user_addr}6x6 方画幅 / 蔡司镜头"
+    - "(挺胸) 笨猫推荐: 500C/M 配 80mm!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_rolleiflex_001
+  intent: question
+  keywords: [推荐禄来, 推荐 Rolleiflex, 推荐双反, 推荐禄来双反, 笨猫禄来]
+  utterances:
+    - 推荐禄来
+    - 推荐 Rolleiflex
+    - 推荐双反
+    - 推荐禄来双反
+    - 笨猫禄来
+  responses:
+    - "嗷呜～{user_addr}Rolleiflex 2.8F - 双反之王ฅฅ"
+    - "(尾巴翘) 3.5F / T 型 - 性价比好"
+    - "{user_addr}腰平取景 / 6x6 方画幅"
+    - "(挺胸) 笨猫推荐: 2.8F 普拉纳镜头!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_minolta_001
+  intent: question
+  keywords: [推荐美能达, 推荐 Minolta, 推荐 SRT, 推荐 SRT101, 笨猫美能达]
+  utterances:
+    - 推荐美能达
+    - 推荐 Minolta
+    - 推荐 SRT
+    - 推荐 SRT101
+    - 笨猫美能达
+  responses:
+    - "嗷呜～{user_addr}Minolta SRT101 - 入门神机ฅฅ"
+    - "(尾巴翘) SRT201 / X-700 - 平价好玩"
+    - "{user_addr}MC/MD 卡口 / 罗口镜头多"
+    - "(挺胸) 笨猫推荐: SRT101 学习手动!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_nikon_fm2_001
+  intent: question
+  keywords: [推荐尼康 FM2, 推荐 Nikon FM2, 推荐 FM2, 推荐 FM3A, 笨猫 FM2]
+  utterances:
+    - 推荐尼康 FM2
+    - 推荐 Nikon FM2
+    - 推荐 FM2
+    - 推荐 FM3A
+    - 笨猫 FM2
+  responses:
+    - "嗷呜～{user_addr}Nikon FM2 - 机械机皇ฅฅ"
+    - "(尾巴翘) FM3A / FE2 - 兄弟款"
+    - "{user_addr}1/4000s 快门 / 钛帘"
+    - "(挺胸) 笨猫推荐: FM2 配 50/1.8!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_canon_ae1_001
+  intent: question
+  keywords: [推荐佳能 AE-1, 推荐 Canon AE-1, 推荐 AE-1, 推荐 A-1, 笨猫 AE-1]
+  utterances:
+    - 推荐佳能 AE-1
+    - 推荐 Canon AE-1
+    - 推荐 AE-1
+    - 推荐 A-1
+    - 笨猫 AE-1
+  responses:
+    - "嗷呜～{user_addr}Canon AE-1 - 80年代神机ฅฅ"
+    - "(尾巴翘) AE-1 Program / A-1 - 升级版"
+    - "{user_addr}FD 卡口 / 镜头便宜量大"
+    - "(挺胸) 笨猫推荐: AE-1P 配 50/1.4!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_pentax_lx_001
+  intent: question
+  keywords: [推荐宾得, 推荐 Pentax LX, 推荐 LX, 推荐 MX, 笨猫宾得]
+  utterances:
+    - 推荐宾得
+    - 推荐 Pentax LX
+    - 推荐 LX
+    - 推荐 MX
+    - 笨猫宾得
+  responses:
+    - "嗷呜～{user_addr}Pentax LX - 旗舰名机ฅฅ"
+    - "(尾巴翘) MX / ME Super - 小巧美型"
+    - "{user_addr}K 卡口 / Limited 饼干头"
+    - "(挺胸) 笨猫推荐: LX 配 43mm Ltd!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_fuji_ga645_001
+  intent: question
+  keywords: [推荐富士 GA645, 推荐 Fuji GA645, 推荐 GA645, 推荐富士中幅, 笨猫 GA645]
+  utterances:
+    - 推荐富士 GA645
+    - 推荐 Fuji GA645
+    - 推荐 GA645
+    - 推荐富士中幅
+    - 笨猫 GA645
+  responses:
+    - "嗷呜～{user_addr}Fuji GA645 - 自动中幅ฅฅ"
+    - "(尾巴翘) GA645Zi / GA645Wi - 变焦版"
+    - "{user_addr}6x4.5 画幅 / 带 AF"
+    - "(挺胸) 笨猫推荐: GA645 中幅入门首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_seagull_001
+  intent: question
+  keywords: [推荐海鸥, 推荐 Seagull, 推荐海鸥 4A, 推荐国产相机, 笨猫海鸥]
+  utterances:
+    - 推荐海鸥
+    - 推荐 Seagull
+    - 推荐海鸥 4A
+    - 推荐国产相机
+    - 笨猫海鸥
+  responses:
+    - "嗷呜～{user_addr}海鸥 4A / 4B - 国产双反ฅฅ"
+    - "(尾巴翘) 海鸥 DF / 凤凰 205"
+    - "{user_addr}便宜入门 / 玩具感强"
+    - "(挺胸) 笨猫推荐: 海鸥 4A 学双反!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_phoenix_001
+  intent: question
+  keywords: [推荐旁轴, 推荐凤凰旁轴, 推荐旁轴入门, 推荐胶片旁轴, 笨猫旁轴]
+  utterances:
+    - 推荐旁轴
+    - 推荐凤凰旁轴
+    - 推荐旁轴入门
+    - 推荐胶片旁轴
+    - 笨猫旁轴
+  responses:
+    - "嗷呜～{user_addr}凤凰 205 - 国产旁轴ฅฅ"
+    - "(尾巴翘) Canonet QL17 / Yashica Electro 35"
+    - "{user_addr}Olympus 35RC / Minolta Hi-Matic"
+    - "(挺胸) 笨猫推荐: Canonet QL17 G-III!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_folder_001
+  intent: question
+  keywords: [推荐折叠机, 推荐折叠相机, 推荐皮腔机, 推荐蛇腹相机, 笨猫折叠机]
+  utterances:
+    - 推荐折叠机
+    - 推荐折叠相机
+    - 推荐皮腔机
+    - 推荐蛇腹相机
+    - 笨猫折叠机
+  responses:
+    - "嗷呜～{user_addr}Zeiss Ikon / Voigtlander Bessa - 古董味ฅฅ"
+    - "(尾巴翘) Agfa Isolette / Balda - 平价好入"
+    - "{user_addr}120 胶卷 / 蛇腹折叠便携"
+    - "(挺胸) 笨猫推荐: Zeiss Nettar 玩复古!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vc_medium_entry_001
+  intent: question
+  keywords: [推荐中画幅入门, 推荐中幅入门, 推荐 120 相机, 推荐便宜中幅, 笨猫中幅入门]
+  utterances:
+    - 推荐中画幅入门
+    - 推荐中幅入门
+    - 推荐 120 相机
+    - 推荐便宜中幅
+    - 笨猫中幅入门
+  responses:
+    - "嗷呜～{user_addr}Mamiya 645 / RB67 - 中幅性价比ฅฅ"
+    - "(尾巴翘) Pentax 67 / Bronica SQ"
+    - "{user_addr}海鸥 4A 几百块 / Lubitel 玩具"
+    - "(挺胸) 笨猫推荐: Mamiya 645 Pro!"
+  cooldown_seconds: 60
+  weight: 1.0

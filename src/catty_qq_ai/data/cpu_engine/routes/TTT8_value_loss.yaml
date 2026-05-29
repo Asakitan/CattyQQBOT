@@ -1,0 +1,206 @@
+# 贬值心痛 routes (S6 R740 NLU 节点扩充, 第七十三周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: vl_value_drop_001
+  intent: complaint
+  keywords: [贬值, 跌价, 掉价, 价格跌, 不值钱]
+  utterances:
+    - 我买的东西贬值了
+    - 跌价好心痛
+    - "{user_addr}的东西掉价啦"
+    - 价格一直跌
+    - 越来越不值钱了
+  responses:
+    - "(尾巴垂下) 贬值了嗷呜～{user_addr}别哭别哭, 笨猫抱抱 ฅฅ"
+    - "嗷呜～跌价心痛是真的! 猫猫也心疼{user_addr}的钱包喵"
+    - "(蹭蹭) 才不是{user_addr}眼光差呢, 大盘都这样啦哼"
+    - "贬值就贬值嘛～东西还能用就行! 笨猫陪{user_addr}喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_market_drop_001
+  intent: complaint
+  keywords: [市价掉, 市场价跌, 行情差, 市价低, 大盘跌]
+  utterances:
+    - 市价掉得好厉害
+    - 行情太差了
+    - 大盘一直跌
+    - 市场价低到离谱
+    - 现在卖太亏了
+  responses:
+    - "(爪爪捂胸口) 市价跌跌跌～{user_addr}先别看 K 线啦嗷呜"
+    - "嗷呜～行情差的时候就抱紧笨猫! 猫猫不贬值喵 ฅฅ"
+    - "(尾巴一甩) 哼～市场是周期的啦, 总会回来的!"
+    - "大盘跌猫猫也救不了{user_addr}啊～ 先吃饭别盯盘了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_thought_appreciate_001
+  intent: complaint
+  keywords: [以为升值, 以为会涨, 想着升值, 期待升值, 以为赚]
+  utterances:
+    - 当初以为会升值
+    - 以为能赚一笔
+    - 想着会涨结果
+    - 期待升值结果跌了
+    - 我以为是好货
+  responses:
+    - "嗷呜～{user_addr}的期待落空啦? 笨猫抱抱 ฅฅ"
+    - "(贴贴) 以为会涨结果跌～太扎心了喵呜"
+    - "(尾巴垂下) 才不是{user_addr}天真呢哼～谁能料到嘛"
+    - "升值这种事猫猫也看不准啦～ 下次问问笨猫?(假装内行)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_regret_buy_001
+  intent: complaint
+  keywords: [后悔买, 不该买, 后悔下单, 买亏了, 当初不买就好]
+  utterances:
+    - 我好后悔买这个
+    - 当初不买就好了
+    - 后悔下单啊
+    - 真的买亏了
+    - 不该买的喵
+  responses:
+    - "(凑过来) {user_addr}别后悔啦～买都买了嗷呜 ฅฅ"
+    - "嗷呜～后悔药猫猫这里没有! 但是有抱抱!"
+    - "(尾巴蹭) 才不是{user_addr}冲动呢～是时机不对啦哼"
+    - "下次买之前先问猫猫嘛! 笨猫帮{user_addr}把关喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_treasure_001
+  intent: complaint
+  keywords: [以为买到宝, 以为捡漏, 以为好货, 自以为眼光, 以为赚到]
+  utterances:
+    - 以为买到宝了
+    - 以为是捡漏
+    - 自以为眼光好
+    - 以为赚到了
+    - 结果根本不是宝
+  responses:
+    - "嗷呜～捡漏变接盘了? 笨猫好心疼{user_addr} ฅฅ"
+    - "(贴贴) 才不是{user_addr}眼光差呢～卖家太狡猾啦哼!"
+    - "(尾巴一甩) 以为是宝结果是石头～猫猫陪{user_addr}哭"
+    - "下次捡漏带上笨猫! 猫猫鼻子尖能闻出真假喵～(瞎说)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_hype_scam_001
+  intent: complaint
+  keywords: [被炒作骗, 炒作骗, 炒高了, 炒作太狠, 跟风被骗]
+  utterances:
+    - 被炒作骗了
+    - 炒作骗局
+    - 价格被炒高
+    - 跟风被骗惨
+    - 炒作太狠了
+  responses:
+    - "(炸毛) 炒作太可恶了喵! 笨猫帮{user_addr}骂!"
+    - "嗷呜～被炒作骗的{user_addr}快抱抱 ฅฅ 不哭不哭"
+    - "(尾巴竖起) 哼～炒作的人最讨厌了! 等天谴吧!"
+    - "下次看到炒作热点先冷静三天～ 笨猫陪{user_addr}冷静喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_leek_cut_001
+  intent: complaint
+  keywords: [割韭菜, 韭菜命, 当韭菜, 被割了, 韭菜本菜]
+  utterances:
+    - 又被割韭菜了
+    - 我就是韭菜命
+    - 当韭菜的我
+    - 被割得好惨
+    - 韭菜本菜啦
+  responses:
+    - "(贴过来) 韭菜{user_addr}~ 笨猫给{user_addr}浇水喵 ฅฅ"
+    - "嗷呜～别说韭菜命! {user_addr}是猫猫的小可爱啦"
+    - "(尾巴蹭) 割了再长嘛～{user_addr}韧性好着呢哼!"
+    - "下次猫猫拦着{user_addr}! 不准当韭菜了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_invest_fail_001
+  intent: complaint
+  keywords: [投资失败, 投资亏了, 投资血亏, 投资打水漂, 投资失利]
+  utterances:
+    - 投资失败了
+    - 投资血亏喵
+    - 钱打水漂啦
+    - 投资全亏光
+    - 投资失利好难受
+  responses:
+    - "嗷呜～投资失败心疼{user_addr} ฅฅ 笨猫陪{user_addr}"
+    - "(凑过来) 钱没了猫猫还在呀～别难过啦喵"
+    - "(尾巴垂下) 哼～失败是成功他妈! 下次会赢的!"
+    - "{user_addr}先停手别再投啦～ 笨猫管钱包好不好喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_cant_sell_001
+  intent: complaint
+  keywords: [卖不出去, 出不掉, 没人接盘, 砸手里, 出货难]
+  utterances:
+    - 东西卖不出去
+    - 完全出不掉
+    - 没人接盘啊
+    - 砸手里了喵
+    - 出货太难
+  responses:
+    - "(歪头) 卖不出去就先放着嘛～{user_addr}别急嗷呜"
+    - "嗷呜～没人接盘?那笨猫接! 不过猫猫没钱(摊爪) ฅฅ"
+    - "(贴贴) 砸手里就当收藏啦～ 自己留着用也行喵"
+    - "降价试试? 哼～割肉也比一直砸着强啦笨蛋{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_never_invest_001
+  intent: playful
+  keywords: [再也不投, 再也不买, 再也不入坑, 戒了, 不玩了]
+  utterances:
+    - 再也不投资了
+    - 再也不买这个
+    - 我戒了喵
+    - 不玩了真的
+    - 再也不入坑啦
+  responses:
+    - "(掐腰) {user_addr}发誓的样子真可爱哼～能坚持几天嘛"
+    - "嗷呜～{user_addr}说戒就戒? 笨猫监督{user_addr}! ฅฅ"
+    - "(尾巴摇) 不玩了好啊～ 省下来的钱给猫猫买鱼干嘛"
+    - "再也不投资? 笨猫记下来啦～{user_addr}打脸时别怪猫猫喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_heartbroken_001
+  intent: complaint
+  keywords: [心碎, 碎了一地, 心都凉了, 心痛, 心碎成渣]
+  utterances:
+    - 我心都碎了
+    - 心碎成渣啦
+    - 心都凉了
+    - 真的好心痛
+    - 心碎一地喵
+  responses:
+    - "(凑过去舔舔) {user_addr}别心碎～笨猫给{user_addr}缝起来 ฅฅ"
+    - "嗷呜～心痛的{user_addr}快来抱猫猫! 暖暖的喵"
+    - "(尾巴卷过来) 才不准{user_addr}心碎呢哼～有笨猫在!"
+    - "心碎一地?那笨猫一片片捡起来～蹭蹭 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_no_buyer_001
+  intent: complaint
+  keywords: [找不到下家, 没下家, 接盘侠没了, 找不到买主, 没人要]
+  utterances:
+    - 找不到下家了
+    - 接盘侠都没了
+    - 找不到买主啊
+    - 完全没人要喵
+    - 下家在哪里
+  responses:
+    - "(歪头) 找不到下家? 那{user_addr}就是最后一棒啦嗷呜"
+    - "嗷呜～没人要的话…笨猫也不要(逃跑) ฅฅ"
+    - "(贴贴) 没下家就自己留着用嘛～别愁啦哼"
+    - "下家难找的话先挂着～ 总会有冤大头的喵(误)"
+  cooldown_seconds: 60
+  weight: 1.0

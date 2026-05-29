@@ -1,0 +1,206 @@
+# 收藏太多 routes (S6 R739 NLU 节点扩充, 第七十三周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sf_too_many_collection_001
+  intent: complaint
+  keywords: [收藏太多, 东西好多, 囤积成山, 越攒越多, 满满当当]
+  utterances:
+    - "{user_addr}收藏太多了"
+    - 笨猫家里东西也太多了吧
+    - 猫猫你看我囤了好多
+    - 越攒越多怎么办
+    - 满满当当塞不下了
+  responses:
+    - "(尾巴一甩) 嗷呜~{user_addr}是松鼠转世吗! 啥都往家里搬喵 ฅฅ"
+    - "哼~人家就知道{user_addr}有收藏癖, 笨猫早看出来啦"
+    - "(蹲下数数) 这么多东西{user_addr}真的都用得上吗? 猫猫怀疑"
+    - "嗷呜~{user_addr}快被自己淹没啦! 笨猫来救你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_home_packed_001
+  intent: complaint
+  keywords: [家里塞满, 房间爆满, 没地方放, 塞不下, 满到天花板]
+  utterances:
+    - "{user_addr}家里塞满了"
+    - 房间快爆满了喵
+    - 没地方放新东西
+    - 笨猫家也塞不下了
+    - 都快堆到天花板
+  responses:
+    - "(歪头) 嗷呜~{user_addr}的家是寄存仓库吗! 喵呜"
+    - "哼~人家说过别再买啦, {user_addr}就是不听"
+    - "(尾巴贴地) 笨猫都没地方躺了喵, {user_addr}给猫猫留个角落嘛"
+    - "嗷呜~房间快爆了! {user_addr}快清一清啦 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_hard_to_throw_001
+  intent: complaint
+  keywords: [想扔不舍得, 舍不得扔, 丢不掉, 留念旧物, 扔了可惜]
+  utterances:
+    - 想扔但是舍不得
+    - "{user_addr}丢不掉旧东西"
+    - 留念的东西扔了可惜
+    - 猫猫帮我下决心扔啦
+    - 看着扔不掉喵
+  responses:
+    - "(凑过去) 嗷呜~{user_addr}是不是又拿着旧东西发呆了喵?"
+    - "哼~人家就知道{user_addr}心软, 笨猫帮你狠下心!"
+    - "(爪爪拍肩) 留念可以留一两件, {user_addr}全留就是囤积啦"
+    - "嗷呜~舍不得就拍照存起来嘛, {user_addr}试试看 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_clear_or_not_001
+  intent: complaint
+  keywords: [要不要清仓, 该不该清理, 清一波, 大扫除, 处理掉]
+  utterances:
+    - 要不要清仓喵
+    - "{user_addr}该不该清理一波"
+    - 笨猫帮我决定
+    - 想来场大扫除
+    - 这些要处理掉吗
+  responses:
+    - "(尾巴翘起) 清! 必须清! 嗷呜~{user_addr}再不清笨猫帮你扔"
+    - "哼~人家觉得{user_addr}就是太纠结, 清就完事了喵"
+    - "(挽袖子) 猫猫陪{user_addr}一起清! 爪爪准备就绪"
+    - "嗷呜~不用的就果断处理嘛, {user_addr}别犹豫啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_organize_all_day_001
+  intent: complaint
+  keywords: [整理一天, 收拾整天, 累瘫了, 收拾不完, 整理累死]
+  utterances:
+    - 整理了一整天
+    - "{user_addr}收拾整天累瘫"
+    - 怎么也收拾不完喵
+    - 笨猫整理累死啦
+    - 一天都在整理
+  responses:
+    - "(尾巴垂下) 嗷呜~{user_addr}辛苦啦! 笨猫给你递水"
+    - "哼~人家就说东西太多吧, {user_addr}现在体会到了喵"
+    - "(凑过去蹭蹭) 累瘫的{user_addr}快躺下, 猫猫陪你休息 ฅฅ"
+    - "嗷呜~一天都在干这个, {user_addr}真的辛苦了! 笨猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_cant_find_001
+  intent: complaint
+  keywords: [找不到东西, 找了半天, 东西丢了, 翻箱倒柜, 不知道放哪]
+  utterances:
+    - 找不到东西啦
+    - "{user_addr}找了半天没找到"
+    - 翻箱倒柜也找不到
+    - 不知道放哪喵
+    - 笨猫帮我找找
+  responses:
+    - "(歪头) 嗷呜~就说{user_addr}东西多到自己都找不到喵!"
+    - "哼~人家早提醒过该分类, {user_addr}就是不听"
+    - "(爪爪刨地) 猫猫帮{user_addr}找! 不过线索得说清楚嗷呜"
+    - "嗷呜~找不到说明该断舍离啦, {user_addr}要不就当没有 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_moving_headache_001
+  intent: complaint
+  keywords: [搬家头疼, 搬家累, 东西太多搬不动, 怕搬家, 搬家崩溃]
+  utterances:
+    - 搬家好头疼喵
+    - "{user_addr}怕搬家"
+    - 东西太多搬不动
+    - 笨猫搬家崩溃中
+    - 一想搬家就累
+  responses:
+    - "(尾巴一甩) 嗷呜~{user_addr}囤这么多就是给自己挖坑喵!"
+    - "哼~人家就说该清一清, {user_addr}现在哭了吧"
+    - "(拍拍肩) 搬家是大工程, {user_addr}慢慢来嘛, 猫猫陪你"
+    - "嗷呜~搬家前正好断舍离一波, {user_addr}省事还省钱 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_rent_storage_001
+  intent: playful
+  keywords: [想租仓库, 租个仓库, 找个储物间, 寄存箱, 外面存]
+  utterances:
+    - 想租个仓库放东西
+    - "{user_addr}考虑租储物间"
+    - 找寄存箱存喵
+    - 笨猫家放不下要外面存
+    - 租个小仓库怎么样
+  responses:
+    - "(瞪眼) 嗷呜~{user_addr}已经到要租仓库的地步了吗! 喵呜"
+    - "哼~租仓库的钱够{user_addr}买好多新东西了, 但是更亏哦"
+    - "(歪头) 要么清要么租, 猫猫觉得{user_addr}该清"
+    - "嗷呜~租仓库可以但是费钱啦, {user_addr}想清楚嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_category_hard_001
+  intent: complaint
+  keywords: [分类困难, 不会分类, 分不清, 怎么归类, 类别太多]
+  utterances:
+    - 分类好困难喵
+    - "{user_addr}不会分类整理"
+    - 分不清归哪类
+    - 笨猫帮我归类啦
+    - 类别太多搞不定
+  responses:
+    - "(挽袖子) 嗷呜~按用途分! 按频率分! {user_addr}选一个嘛"
+    - "哼~人家觉得{user_addr}就是想偷懒, 笨猫看穿了喵"
+    - "(爪爪比划) 常用放近, 不常用放远, {user_addr}记住没"
+    - "嗷呜~分不清就先扔! {user_addr}哈哈开玩笑啦 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_minimalism_hard_001
+  intent: complaint
+  keywords: [断舍离难, 做不到断舍离, 极简太难, 学不会扔, 舍不得放手]
+  utterances:
+    - 断舍离好难喵
+    - "{user_addr}做不到极简"
+    - 学不会扔东西
+    - 笨猫舍不得放手
+    - 极简生活太难了
+  responses:
+    - "(凑过去) 嗷呜~{user_addr}先从一件不用的开始嘛"
+    - "哼~人家就知道{user_addr}极简不了, 笨猫了解你"
+    - "(尾巴摇摇) 断舍离不是一天的事, 慢慢来{user_addr}"
+    - "嗷呜~一周扔一件试试! {user_addr}积少成多嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_buy_again_001
+  intent: playful
+  keywords: [买了又来, 又下单了, 忍不住买, 又剁手, 控制不住]
+  utterances:
+    - 又买了一堆喵
+    - "{user_addr}又下单了"
+    - 忍不住又剁手
+    - 控制不住买买买
+    - 笨猫又败家了
+  responses:
+    - "(瞪大眼) 嗷呜~{user_addr}刚说要清还又买?! 没救了喵"
+    - "哼~人家就知道{user_addr}管不住手, 笨猫早料到"
+    - "(尾巴炸毛) 才整理完又买! {user_addr}是不是有病嗷呜"
+    - "嗷呜~买买买的{user_addr}快冷静! 钱包哭了 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_humidity_storage_001
+  intent: complaint
+  keywords: [存放湿气, 受潮了, 发霉了, 防潮难, 收藏发霉]
+  utterances:
+    - 东西存放受潮了
+    - "{user_addr}收藏发霉啦"
+    - 防潮好难喵
+    - 笨猫的东西都湿了
+    - 又是湿气作怪
+  responses:
+    - "(皱鼻子) 嗷呜~{user_addr}该放干燥剂啦! 笨猫提醒过"
+    - "哼~人家就说南方该防潮, {user_addr}就是不当回事"
+    - "(尾巴一甩) 发霉的就别留啦, {user_addr}扔了重新买更划算"
+    - "嗷呜~抽湿机走起来! {user_addr}收藏才能保住喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 黑胶唱片 routes (S6 R734 NLU 节点扩充, 第七十三周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: rv_entry_001
+  intent: question
+  keywords: [推荐黑胶入门唱机, 推荐铁三角唱机, 推荐 AT-LP60, 推荐入门黑胶, 笨猫黑胶入门]
+  utterances:
+    - 推荐黑胶入门唱机
+    - 推荐铁三角唱机
+    - 推荐 AT-LP60
+    - 推荐入门黑胶
+    - 笨猫黑胶入门
+  responses:
+    - "嗷呜～{user_addr}铁三角 AT-LP60X - 千元入门王ฅฅ"
+    - "(尾巴翘) AT-LP120X / AT-LP3 全自动"
+    - "{user_addr}插电就能听 / 自带唱头"
+    - "(挺胸) 猫猫推荐: LP60X 闭眼买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_project_001
+  intent: question
+  keywords: [推荐 Pro-Ject 唱机, 推荐宝碟唱机, 推荐 Debut Carbon, 推荐宝碟入门, 笨猫 Pro-Ject]
+  utterances:
+    - 推荐 Pro-Ject 唱机
+    - 推荐宝碟唱机
+    - 推荐 Debut Carbon
+    - 推荐宝碟入门
+    - 笨猫 Pro-Ject
+  responses:
+    - "嗷呜～{user_addr}Pro-Ject Debut Carbon EVO - 奥地利经典ฅฅ"
+    - "(尾巴翘) X1 / X2 升级款 / Essential III"
+    - "{user_addr}碳纤维唱臂 / Ortofon 唱头"
+    - "(挺胸) 笨猫推荐: Debut Carbon 三千档神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_rega_001
+  intent: question
+  keywords: [推荐 Rega 唱机, 推荐君子唱机, 推荐 Planar 1, 推荐 Planar 2, 笨猫 Rega]
+  utterances:
+    - 推荐 Rega 唱机
+    - 推荐君子唱机
+    - 推荐 Planar 1
+    - 推荐 Planar 2
+    - 笨猫 Rega
+  responses:
+    - "嗷呜～{user_addr}Rega Planar 1 - 英国手工ฅฅ"
+    - "(尾巴翘) Planar 2 / Planar 3 升级"
+    - "{user_addr}RB110 唱臂 / Carbon MM 唱头"
+    - "(挺胸) 人家推荐: P1 入门 P3 进阶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_technics_001
+  intent: question
+  keywords: [推荐 Technics 唱机, 推荐松下唱机, 推荐 SL-1200, 推荐 DJ 唱机, 笨猫 Technics]
+  utterances:
+    - 推荐 Technics 唱机
+    - 推荐松下唱机
+    - 推荐 SL-1200
+    - 推荐 DJ 唱机
+    - 笨猫 Technics
+  responses:
+    - "嗷呜～{user_addr}Technics SL-1200MK7 - DJ 信仰机ฅฅ"
+    - "(尾巴翘) SL-1500C / SL-1210 直驱"
+    - "{user_addr}直驱马达 / 扭矩猛 / 耐操"
+    - "(挺胸) 笨猫推荐: 1200 系列传奇!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_floyd_001
+  intent: question
+  keywords: [推荐 Pink Floyd 黑胶, 推荐月之暗面黑胶, 推荐 Dark Side, 推荐迷墙黑胶, 笨猫 Floyd]
+  utterances:
+    - 推荐 Pink Floyd 黑胶
+    - 推荐月之暗面黑胶
+    - 推荐 Dark Side
+    - 推荐迷墙黑胶
+    - 笨猫 Floyd
+  responses:
+    - "嗷呜～{user_addr}Dark Side of the Moon - 黑胶必收ฅฅ"
+    - "(尾巴翘) The Wall / Wish You Were Here"
+    - "{user_addr}Animals / Meddle 也神"
+    - "(挺胸) 猫猫推荐: 月之暗面 50 周年版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_beatles_001
+  intent: question
+  keywords: [推荐 Beatles 黑胶, 推荐披头士黑胶, 推荐 Abbey Road, 推荐白色专辑, 笨猫 Beatles]
+  utterances:
+    - 推荐 Beatles 黑胶
+    - 推荐披头士黑胶
+    - 推荐 Abbey Road
+    - 推荐白色专辑
+    - 笨猫 Beatles
+  responses:
+    - "嗷呜～{user_addr}Abbey Road - 封面经典ฅฅ"
+    - "(尾巴翘) Sgt. Pepper / White Album"
+    - "{user_addr}Revolver / Rubber Soul 也神"
+    - "(挺胸) 笨猫推荐: 2017 重制版音质好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_miles_001
+  intent: question
+  keywords: [推荐 Miles Davis 黑胶, 推荐爵士黑胶, 推荐 Kind of Blue, 推荐 Bitches Brew, 笨猫爵士]
+  utterances:
+    - 推荐 Miles Davis 黑胶
+    - 推荐爵士黑胶
+    - 推荐 Kind of Blue
+    - 推荐 Bitches Brew
+    - 笨猫爵士
+  responses:
+    - "嗷呜～{user_addr}Kind of Blue - 爵士圣经ฅฅ"
+    - "(尾巴翘) Bitches Brew / In a Silent Way"
+    - "{user_addr}John Coltrane Blue Note 系列也收"
+    - "(挺胸) 人家推荐: Kind of Blue 必收!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_wanqing_001
+  intent: question
+  keywords: [推荐万青黑胶, 推荐国摇黑胶, 推荐冀西南林路行, 推荐万能青年旅店, 笨猫万青]
+  utterances:
+    - 推荐万青黑胶
+    - 推荐国摇黑胶
+    - 推荐冀西南林路行
+    - 推荐万能青年旅店
+    - 笨猫万青
+  responses:
+    - "嗷呜～{user_addr}万青同名专辑 - 国摇神作ฅฅ"
+    - "(尾巴翘) 冀西南林路行 / 二手玫瑰"
+    - "{user_addr}痛仰 / 重塑雕像 / 海朋森"
+    - "(挺胸) 笨猫推荐: 万青首专必收!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_ortofon_001
+  intent: question
+  keywords: [推荐 Ortofon 唱头, 推荐高度风唱头, 推荐 2M Red, 推荐 MC 唱头, 笨猫唱头]
+  utterances:
+    - 推荐 Ortofon 唱头
+    - 推荐高度风唱头
+    - 推荐 2M Red
+    - 推荐 MC 唱头
+    - 笨猫唱头
+  responses:
+    - "嗷呜～{user_addr}Ortofon 2M Red - 入门 MM 王ฅฅ"
+    - "(尾巴翘) 2M Blue / 2M Bronze 升级"
+    - "{user_addr}Audio-Technica VM95 / Sumiko 也行"
+    - "(挺胸) 猫猫推荐: 2M Red 闭眼上!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_care_001
+  intent: question
+  keywords: [推荐唱针保养, 推荐唱片清洁, 推荐唱针刷, 推荐除静电, 笨猫黑胶保养]
+  utterances:
+    - 推荐唱针保养
+    - 推荐唱片清洁
+    - 推荐唱针刷
+    - 推荐除静电
+    - 笨猫黑胶保养
+  responses:
+    - "嗷呜～{user_addr}AT 唱针刷 / 山羊毛唱片刷ฅฅ"
+    - "(尾巴翘) 碳纤维刷除尘 / 唱针清洁液"
+    - "{user_addr}Knosti 洗碟机 / 防静电内袋"
+    - "(挺胸) 笨猫提醒: 每次播放前刷一下!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_store_001
+  intent: question
+  keywords: [推荐黑胶店, 推荐福茂唱片, 推荐黑胶购买, 推荐 Discogs, 笨猫黑胶店]
+  utterances:
+    - 推荐黑胶店
+    - 推荐福茂唱片
+    - 推荐黑胶购买
+    - 推荐 Discogs
+    - 笨猫黑胶店
+  responses:
+    - "嗷呜～{user_addr}福茂 / 京文 / 摩登天空ฅฅ"
+    - "(尾巴翘) Discogs 国际站 / 鲸鱼音乐"
+    - "{user_addr}上海 uptown / 北京福声"
+    - "(挺胸) 人家推荐: Discogs 淘绝版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rv_chinese_001
+  intent: question
+  keywords: [推荐国产黑胶, 推荐中图黑胶, 推荐华语黑胶, 推荐张国荣黑胶, 笨猫国产黑胶]
+  utterances:
+    - 推荐国产黑胶
+    - 推荐中图黑胶
+    - 推荐华语黑胶
+    - 推荐张国荣黑胶
+    - 笨猫国产黑胶
+  responses:
+    - "嗷呜～{user_addr}张国荣 Leslie / 王菲寓言ฅฅ"
+    - "(尾巴翘) 邓丽君 / 周杰伦 叶惠美"
+    - "{user_addr}李宗盛 / 罗大佑 / 崔健"
+    - "(挺胸) 笨猫推荐: 张国荣黑胶必收!"
+  cooldown_seconds: 60
+  weight: 1.0

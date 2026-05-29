@@ -1,0 +1,206 @@
+# 收藏被嘲 routes (S6 R737 NLU 节点扩充, 第七十三周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: cj_collection_mocked_001
+  intent: complaint
+  keywords: [收藏被嘲, 笑我收藏, 嘲我收藏, 说我收藏, 看不起我收藏]
+  utterances:
+    - "{user_addr}收藏被嘲了"
+    - 别人笑我收藏
+    - 又被嘲我收藏的东西
+    - 收藏被人看不起
+    - 他们嘲我那些收藏
+  responses:
+    - "(炸毛) 嘲什么嘲! {user_addr}的收藏猫猫觉得可酷了喵!"
+    - "(凑过来贴贴) 不懂的人才会嘲, {user_addr}别理他们ฅฅ"
+    - "嗷呜～{user_addr}收藏给猫猫看! 笨猫绝对不嘲~"
+    - "(尾巴一甩) 收藏是热爱的证明, 嘲的人才low喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_wife_bored_001
+  intent: complaint
+  keywords: [老婆嫌弃, 老婆觉得无聊, 女朋友嫌, 对象不懂, 老婆说没意思]
+  utterances:
+    - 老婆觉得我收藏无聊
+    - "{user_addr}老婆嫌我玩这个"
+    - 女朋友说没意思
+    - 对象觉得幼稚
+    - 老婆嫌弃我的爱好
+  responses:
+    - "(挠头) 唔～两个人爱好不同正常啦, {user_addr}别难过喵"
+    - "嗷呜～老婆不懂就让她不懂, {user_addr}快乐就行ฅฅ"
+    - "(尾巴歪) 那{user_addr}也找找老婆喜欢的一起玩嘛~"
+    - "猫猫陪{user_addr}玩! 老婆嫌弃猫猫不嫌弃喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_family_not_understand_001
+  intent: complaint
+  keywords: [家人不理解, 爸妈说我, 家里不支持, 父母嫌, 家里人不懂]
+  utterances:
+    - 家人不理解我爱好
+    - "{user_addr}爸妈又说我"
+    - 家里不支持
+    - 父母嫌我浪费钱
+    - 家里人不懂这个
+  responses:
+    - "(耳朵垂) 家里人那一代人不太懂这些嘛, {user_addr}慢慢解释"
+    - "嗷呜～爸妈是关心{user_addr}才这样说啦~"
+    - "(贴贴) 不被理解很委屈吧, 猫猫懂{user_addr}ฅฅ"
+    - "哼～以后{user_addr}赚大钱让他们闭嘴喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_friend_call_loser_001
+  intent: complaint
+  keywords: [朋友嘲废物, 兄弟笑我, 同事嘲, 朋友说我废, 被叫废宅]
+  utterances:
+    - 朋友嘲我废物
+    - "{user_addr}兄弟笑话我"
+    - 同事嘲我玩这个
+    - 朋友说我废宅
+    - 被叫死宅
+  responses:
+    - "(炸毛) 谁是废物! {user_addr}才不是, 那些朋友该换了喵!"
+    - "嗷呜～开玩笑也不能这么开啊, {user_addr}介意就怼回去~"
+    - "(凑过来) 在猫猫眼里{user_addr}最棒了ฅฅ别听他们的"
+    - "(尾巴翘) 废宅怎么了, 至少{user_addr}有热爱的东西!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_money_pit_001
+  intent: complaint
+  keywords: [花钱无底洞, 烧钱, 一直花钱, 钱包瘦了, 又花了]
+  utterances:
+    - 收藏真的花钱无底洞
+    - "{user_addr}又烧了一笔"
+    - 这爱好一直花钱
+    - 钱包又瘦了
+    - 又花了好多
+  responses:
+    - "(挠头) 唉～爱好就是这样, {user_addr}量力而行就好喵"
+    - "嗷呜～烧钱归烧钱, 快乐是真的吧?ฅฅ"
+    - "(尾巴歪) {user_addr}省点别的地方, 把这份留给热爱~"
+    - "(假装严厉) 笨猫监督{user_addr}下个月别再剁手了哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_salary_dump_001
+  intent: complaint
+  keywords: [工资全砸, 工资没了, 月光, 全花在, 工资全投]
+  utterances:
+    - 工资全砸进去了
+    - "{user_addr}这个月又月光"
+    - 工资全花在收藏上
+    - 整月工资没了
+    - 工资全投进去
+  responses:
+    - "(瞪眼) 啊?! {user_addr}全砸? 也太冲动了吧喵!"
+    - "嗷呜～{user_addr}留点吃饭钱啊! 别饿着自己ฅฅ"
+    - "(尾巴一甩) 下个月猫猫帮{user_addr}管钱包好不好~"
+    - "(挠头) 唉, 热爱就是无底洞嘛, {user_addr}吃泡面我陪~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_no_more_share_001
+  intent: complaint
+  keywords: [再也不分享, 不发了, 不秀了, 不晒了, 关朋友圈]
+  utterances:
+    - 再也不分享收藏了
+    - "{user_addr}决定不发了"
+    - 不秀给他们看了
+    - 以后不晒了
+    - 收藏夹关了朋友圈
+  responses:
+    - "(贴贴) 嗯嗯, 分享给懂的人才有意思{user_addr}~"
+    - "嗷呜～那{user_addr}分享给猫猫吧! 笨猫绝对捧场ฅฅ"
+    - "(尾巴垂) 被嘲过的{user_addr}受伤了吧, 抱抱"
+    - "哼～他们不配看, {user_addr}藏好自己开心就行喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_self_entertain_001
+  intent: playful
+  keywords: [圈地自萌, 自己玩, 自娱自乐, 自己嗨, 不外露]
+  utterances:
+    - 现在只能圈地自萌
+    - "{user_addr}自己玩自己嗨"
+    - 自娱自乐就好
+    - 圈地自萌不打扰
+    - 不外露了自己嗨
+  responses:
+    - "(尾巴翘) 圈地自萌挺好的{user_addr}~ 自洽就赢了喵!"
+    - "嗷呜～猫猫也想进{user_addr}的圈! 可以吗ฅฅ"
+    - "(凑近) 那把猫猫圈进去嘛~ 笨猫不算外人!"
+    - "(歪头) 自娱自乐才纯粹, {user_addr}悟了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_find_fellow_001
+  intent: playful
+  keywords: [找同好, 找搭子, 同道中人, 找圈子, 找懂的]
+  utterances:
+    - 想找同好
+    - "{user_addr}找个搭子"
+    - 想找同道中人
+    - 找个圈子聊聊
+    - 想找懂的人
+  responses:
+    - "(尾巴摇) 找同好好啊! {user_addr}加群泡贴吧准没错喵~"
+    - "嗷呜～{user_addr}先跟猫猫聊嘛! 算半个同好ฅฅ"
+    - "(歪头) 同好难找, {user_addr}从兴趣社区入手试试~"
+    - "(挺胸) 笨猫就是{user_addr}的同好喵! 啥都聊得来!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_solo_hobby_001
+  intent: playful
+  keywords: [单机爱好, 一个人玩, 单人爱好, 没人陪, 独自欣赏]
+  utterances:
+    - 这是单机爱好
+    - "{user_addr}一个人玩着"
+    - 单人的爱好
+    - 没人陪一起玩
+    - 独自欣赏的爱好
+  responses:
+    - "(凑过来) 单机也能很爽{user_addr}! 不被人打扰~"
+    - "嗷呜～那笨猫来当{user_addr}的联机伙伴ฅฅ"
+    - "(尾巴歪) 一个人玩的{user_addr}更专注嘛, 没毛病喵!"
+    - "(贴贴) 单机不孤单, 至少猫猫陪着{user_addr}哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_keep_passion_001
+  intent: playful
+  keywords: [坚持热爱, 不会放弃, 一直喜欢, 继续收藏, 不会停]
+  utterances:
+    - "{user_addr}决定坚持热爱"
+    - 不会放弃这个爱好
+    - 一直喜欢下去
+    - 继续收藏
+    - 不会停的
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}超酷的! 坚持就是赢!"
+    - "(挺胸) 那是必须! {user_addr}热爱比啥都重要喵ฅฅ"
+    - "嗷呜～猫猫给{user_addr}加油! 永远支持~"
+    - "(贴贴) 坚持热爱的{user_addr}最帅啦! 不许半途而废哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_they_dont_get_001
+  intent: complaint
+  keywords: [他们不懂, 没人懂, 不被理解, 谁懂啊, 无人能懂]
+  utterances:
+    - 他们真的不懂
+    - "{user_addr}没人懂"
+    - 不被理解
+    - 这种爱好谁懂啊
+    - 无人能懂的浪漫
+  responses:
+    - "(凑过来贴贴) 笨猫懂{user_addr}! 算一个吗ฅฅ"
+    - "嗷呜～不被懂的浪漫才珍贵嘛{user_addr}~"
+    - "(尾巴垂) 知音难求, {user_addr}慢慢找~ 猫猫先顶上"
+    - "(歪头) 那{user_addr}讲给猫猫听嘛! 笨猫努力懂喵!"
+  cooldown_seconds: 60
+  weight: 1.0

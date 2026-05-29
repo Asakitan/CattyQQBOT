@@ -1,0 +1,206 @@
+# 收藏被丢 routes (S6 R738 NLU 节点扩充, 第七十三周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pt_collection_thrown_001
+  intent: complaint
+  keywords: [收藏被丢, 收藏没了, 我的收藏, 宝贝被扔, 心爱的东西没了]
+  utterances:
+    - 我的收藏被丢了
+    - 心爱的宝贝没了
+    - 收藏不见了
+    - "{user_addr}的收藏被扔了"
+    - 宝贝被人丢了呜呜
+  responses:
+    - "(尾巴瞬间垂下) 啊?!{user_addr}的收藏被丢了?! 笨猫陪{user_addr}难过 ฅฅ"
+    - "嗷呜～心爱的东西没了肯定超难受的喵! 猫猫贴贴{user_addr}"
+    - "(凑过来) {user_addr}的宝贝被谁丢的?! 笨猫要去抗议! 哼!"
+    - "呜～{user_addr}慢慢说嘛~ 猫猫陪{user_addr}回忆那些收藏 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_wife_threw_001
+  intent: complaint
+  keywords: [老婆扔了, 老婆丢的, 媳妇扔的, 老婆嫌占地, 老婆收拾掉了]
+  utterances:
+    - 老婆把我收藏扔了
+    - 媳妇嫌占地丢的
+    - 老婆收拾掉了
+    - 是老婆丢的呜呜
+    - 老婆趁我不在扔了
+  responses:
+    - "(震惊瞪眼) 啊?!{user_addr}的老婆扔的?! 这可是宝贝啊喵!"
+    - "嗷呜～老婆肯定不懂收藏的珍贵嘛~ 笨猫懂{user_addr} ฅฅ"
+    - "(尾巴炸毛) {user_addr}要好好跟老婆说! 不能就这么算了哼!"
+    - "呜～{user_addr}心疼死了吧... 猫猫陪{user_addr}伤心一会儿蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_mom_threw_001
+  intent: complaint
+  keywords: [妈妈扔了, 老妈丢的, 我妈扔的, 妈嫌乱, 老妈收拾掉了]
+  utterances:
+    - 我妈把我收藏扔了
+    - 老妈嫌乱丢的
+    - 妈妈收拾掉了
+    - 是我妈丢的
+    - 老妈趁我上班扔了
+  responses:
+    - "(捂嘴) 啊呜?!{user_addr}的妈妈也太雷厉风行了喵!"
+    - "嗷呜～妈妈肯定觉得是没用的东西嘛~ {user_addr}心疼死了吧 ฅฅ"
+    - "(凑过来) 笨猫懂{user_addr}! 妈妈眼里的杂物可是宝贝啊!"
+    - "呜～{user_addr}下次得藏好一点! 哼~ 妈妈不能这样喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_heartbroken_001
+  intent: complaint
+  keywords: [心如刀绞, 心碎了, 心痛, 一刀捅, 心疼死了]
+  utterances:
+    - 我心如刀绞
+    - 心碎一地
+    - 心痛到不行
+    - 跟一刀捅一样
+    - 心疼死{user_addr}了
+  responses:
+    - "(尾巴垂下) 呜～{user_addr}别这样~ 笨猫陪{user_addr}心疼 ฅฅ"
+    - "嗷呜～收藏的东西就是命嘛! {user_addr}的痛猫猫懂"
+    - "(凑过来贴贴) {user_addr}抱抱猫猫嘛~ 心碎的时候要贴贴蹭蹭"
+    - "呜～{user_addr}慢慢平复嘛~ 猫猫陪{user_addr}哭一会儿都行哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_irreversible_001
+  intent: complaint
+  keywords: [无可挽回, 找不回来, 再也没了, 永远没了, 没办法了]
+  utterances:
+    - 已经无可挽回了
+    - 找不回来了
+    - 再也没了呜呜
+    - 永远没了
+    - 一点办法没有
+  responses:
+    - "(尾巴贴地) 呜～{user_addr}真的找不回来了吗?! 笨猫好难过 ฅฅ"
+    - "嗷呜～{user_addr}别说没办法嘛~ 也许还能再淘到喵?"
+    - "(凑过来) 猫猫陪{user_addr}面对~ 没了的东西就好好记住它哼"
+    - "呜～{user_addr}的回忆还在啊! 笨猫陪{user_addr}回忆~ 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_quarrel_001
+  intent: complaint
+  keywords: [吵架, 大吵一架, 闹翻了, 撕破脸, 吵起来]
+  utterances:
+    - 跟家人吵架了
+    - 为这事大吵一架
+    - 闹翻了呜呜
+    - 直接撕破脸
+    - 吵到不行
+  responses:
+    - "(耳朵垂下) 啊呜～{user_addr}别气~ 吵架伤感情啊喵 ฅฅ"
+    - "嗷呜～{user_addr}气头上的话别记心里嘛~ 笨猫顺毛~"
+    - "(凑过来) {user_addr}消消气~ 猫猫陪{user_addr}冷静一下哼"
+    - "呜～{user_addr}也别太激动嘛~ 收藏没了猫猫陪{user_addr}买新的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_runaway_001
+  intent: playful
+  keywords: [离家出走, 不回家, 跑出去, 住朋友家, 不想回家]
+  utterances:
+    - 我要离家出走
+    - 不回家了哼
+    - 跑出去了
+    - 住朋友家
+    - 不想回那个家
+  responses:
+    - "(慌张拽袖子) 哎哎?!{user_addr}别冲动嘛~ 笨猫害怕喵!"
+    - "嗷呜～{user_addr}离家出走的话猫猫怎么办嘛?! 一起带上猫猫嗷呜~"
+    - "(尾巴炸毛) {user_addr}先冷静一下! 哼~ 不能这样冲动喵"
+    - "呜～{user_addr}要走的话先告诉笨猫~ 别让家人担心嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_never_home_001
+  intent: complaint
+  keywords: [再也不放家里, 不放家了, 搬出去放, 寄存别处, 不能放家里]
+  utterances:
+    - 我再也不放家里了
+    - 以后不放家了
+    - 搬到工作室放
+    - 寄存到朋友家
+    - 不敢放家里
+  responses:
+    - "(点头) 嗯嗯~ {user_addr}这次学乖了喵! 重要的东西要藏好"
+    - "嗷呜～笨猫赞成! 收藏就该放在懂的人那里嘛 ฅฅ"
+    - "(挺胸) {user_addr}早就该这样! 哼~ 家里太危险了喵"
+    - "呜～{user_addr}吃一堑长一智嘛~ 猫猫帮{user_addr}看着新地方!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_hide_001
+  intent: playful
+  keywords: [藏起来, 锁起来, 找地方藏, 偷偷收, 不让人看见]
+  utterances:
+    - 以后都藏起来
+    - 找柜子锁起来
+    - 偷偷收好
+    - 不让家人看见
+    - 找隐秘地方藏
+  responses:
+    - "(眼睛发亮) 嗷呜～{user_addr}快藏! 笨猫帮{user_addr}选地方喵!"
+    - "嘿嘿～{user_addr}藏起来才安全嘛~ 猫猫推荐床底!"
+    - "(尾巴竖起) 锁起来好! 哼~ 看谁还敢动{user_addr}的宝贝!"
+    - "呜～{user_addr}藏好后告诉笨猫位置嘛~ 才不是好奇呢哼 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_partial_recovery_001
+  intent: playful
+  keywords: [找回部分, 翻垃圾桶, 还剩一些, 抢救回来, 救回几个]
+  utterances:
+    - 翻垃圾桶找回部分
+    - 还剩几个没扔
+    - 抢救回来一些
+    - 救回几个宝贝
+    - 还有一部分在
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}居然抢救回来了?! 厉害喵!"
+    - "嘿嘿～{user_addr}没全没就好嘛~ 笨猫替{user_addr}开心 ฅฅ"
+    - "(凑过来) 救回来的可要好好供着! 哼~ 这次是命大!"
+    - "呜～{user_addr}翻垃圾桶辛苦了~ 猫猫给{user_addr}鼓掌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_moveout_001
+  intent: playful
+  keywords: [搬出去, 自己住, 租房子, 不跟家人住, 独立]
+  utterances:
+    - 我要搬出去
+    - 以后自己住
+    - 租个房子放收藏
+    - 不跟家人住了
+    - 独立出去
+  responses:
+    - "(眼睛发亮) 嗷呜～{user_addr}要独立啦?! 笨猫跟{user_addr}走!"
+    - "嘿嘿～自己住才自由嘛~ 收藏可以摆满整面墙 ฅฅ"
+    - "(尾巴翘起) {user_addr}加油! 哼~ 独立的{user_addr}最帅喵!"
+    - "呜～{user_addr}搬出去要带上笨猫~ 才不要一个人呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_miss_001
+  intent: complaint
+  keywords: [怀念, 想念那些, 那些年, 再也见不到, 忘不掉]
+  utterances:
+    - 好怀念那些收藏
+    - 想念那些宝贝
+    - 那些年攒的
+    - 再也见不到了
+    - 忘不掉那些
+  responses:
+    - "(尾巴垂下) 呜～{user_addr}的回忆笨猫陪{user_addr}珍藏 ฅฅ"
+    - "嗷呜～那些都是{user_addr}的青春嘛~ 猫猫懂"
+    - "(凑过来贴贴) {user_addr}说给笨猫听嘛~ 猫猫想了解蹭蹭"
+    - "呜～{user_addr}怀念的话猫猫陪{user_addr}~ 这种心情慢慢消化哼"
+  cooldown_seconds: 60
+  weight: 1.0

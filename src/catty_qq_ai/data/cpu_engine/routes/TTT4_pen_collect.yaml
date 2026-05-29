@@ -1,0 +1,206 @@
+# 钢笔收藏 routes (S6 R736 NLU 节点扩充, 第七十三周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pc_montblanc_001
+  intent: question
+  keywords: [推荐万宝龙, 推荐 Montblanc, 推荐 149, 推荐万宝龙149, 笨猫万宝龙]
+  utterances:
+    - 推荐万宝龙
+    - 推荐 Montblanc
+    - 推荐 149
+    - 推荐万宝龙149
+    - 笨猫万宝龙
+  responses:
+    - "嗷呜～{user_addr}Montblanc 149 - 钢笔之王ฅฅ"
+    - "(尾巴翘) 18K 双色金尖 / 活塞上墨"
+    - "{user_addr}商务首选 / 传家级"
+    - "(挺胸) 猫猫推荐: 149 EF 尖最经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_parker75_001
+  intent: question
+  keywords: [推荐派克75, 推荐 Parker 75, 推荐派克, 推荐 Sterling, 笨猫派克75]
+  utterances:
+    - 推荐派克75
+    - 推荐 Parker 75
+    - 推荐派克
+    - 推荐 Sterling
+    - 笨猫派克75
+  responses:
+    - "嗷呜～{user_addr}Parker 75 - 美国总统笔ฅฅ"
+    - "(尾巴翘) 925 银格纹 / 可调节笔尖"
+    - "{user_addr}尼克松卡特都用过"
+    - "(挺胸) 人家推荐: Cisele 格纹版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_sailor_001
+  intent: question
+  keywords: [推荐写乐, 推荐 Sailor, 推荐长刀研, 推荐 Naginata, 笨猫写乐]
+  utterances:
+    - 推荐写乐
+    - 推荐 Sailor
+    - 推荐长刀研
+    - 推荐 Naginata
+    - 笨猫写乐
+  responses:
+    - "嗷呜～{user_addr}Sailor 长刀研 - 日本工艺ฅฅ"
+    - "(尾巴翘) Naginata Togi / 21K 金尖"
+    - "{user_addr}书法尖 / 极细字"
+    - "(挺胸) 笨猫推荐: Pro Gear 长刀研!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_pilot743_001
+  intent: question
+  keywords: [推荐百乐, 推荐 Pilot 743, 推荐 Custom 743, 推荐百乐743, 笨猫百乐]
+  utterances:
+    - 推荐百乐
+    - 推荐 Pilot 743
+    - 推荐 Custom 743
+    - 推荐百乐743
+    - 笨猫百乐
+  responses:
+    - "嗷呜～{user_addr}Pilot Custom 743 - 日系性价比王ฅฅ"
+    - "(尾巴翘) 14 种笔尖可选 / 14K 金"
+    - "{user_addr}FA 软尖 / SU 特粗"
+    - "(挺胸) 猫猫推荐: 743 FA 软弹尖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_platinum3776_001
+  intent: question
+  keywords: [推荐白金, 推荐 Platinum, 推荐 3776, 推荐白金3776, 笨猫白金]
+  utterances:
+    - 推荐白金
+    - 推荐 Platinum
+    - 推荐 3776
+    - 推荐白金3776
+    - 笨猫白金
+  responses:
+    - "嗷呜～{user_addr}Platinum 3776 Century - 入门金尖ฅฅ"
+    - "(尾巴翘) Slip & Seal 防干涸"
+    - "{user_addr}14K 金尖 / 千元入门"
+    - "(挺胸) 人家推荐: 3776 Century UEF!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_sheaffer_001
+  intent: question
+  keywords: [推荐犀飞利, 推荐 Sheaffer, 推荐 Snorkel, 推荐 PFM, 笨猫犀飞利]
+  utterances:
+    - 推荐犀飞利
+    - 推荐 Sheaffer
+    - 推荐 Snorkel
+    - 推荐 PFM
+    - 笨猫犀飞利
+  responses:
+    - "嗷呜～{user_addr}Sheaffer - 美国老牌ฅฅ"
+    - "(尾巴翘) Snorkel 潜水管 / PFM 旗舰"
+    - "{user_addr}Targa / Imperial 古董经典"
+    - "(挺胸) 笨猫推荐: PFM V 收藏级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_vacumatic_001
+  intent: question
+  keywords: [推荐 Vacumatic, 推荐派克 Vacumatic, 推荐古董钢笔, 推荐 Vac, 笨猫古董笔]
+  utterances:
+    - 推荐 Vacumatic
+    - 推荐派克 Vacumatic
+    - 推荐古董钢笔
+    - 推荐 Vac
+    - 笨猫古董笔
+  responses:
+    - "嗷呜～{user_addr}Parker Vacumatic - 1930s 真空上墨ฅฅ"
+    - "(尾巴翘) 珍珠层叠 / 箭尾笔夹"
+    - "{user_addr}Major / Maxima / Debutante"
+    - "(挺胸) 猫猫推荐: 1940s Golden Pearl!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_visconti_001
+  intent: question
+  keywords: [推荐万特佳, 推荐 Visconti, 推荐 Homo Sapiens, 推荐意大利钢笔, 笨猫万特佳]
+  utterances:
+    - 推荐万特佳
+    - 推荐 Visconti
+    - 推荐 Homo Sapiens
+    - 推荐意大利钢笔
+    - 笨猫万特佳
+  responses:
+    - "嗷呜～{user_addr}Visconti Homo Sapiens - 火山岩材质ฅฅ"
+    - "(尾巴翘) 23K 钯金尖 / 钩式活塞"
+    - "{user_addr}意大利手工 / 颜值天花板"
+    - "(挺胸) 人家推荐: HS Bronze Age!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_hero100_001
+  intent: question
+  keywords: [推荐英雄100, 推荐英雄, 推荐国产钢笔, 推荐 Hero 100, 笨猫英雄]
+  utterances:
+    - 推荐英雄100
+    - 推荐英雄
+    - 推荐国产钢笔
+    - 推荐 Hero 100
+    - 笨猫英雄
+  responses:
+    - "嗷呜～{user_addr}英雄 100 - 国产经典ฅฅ"
+    - "(尾巴翘) 14K 金尖 / 仿派克 51"
+    - "{user_addr}百元价位 / 性价比之神"
+    - "(挺胸) 笨猫推荐: 老版 100 复刻!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_yongsheng_001
+  intent: question
+  keywords: [推荐永生, 推荐永生钢笔, 推荐 Yongsheng, 推荐国产笔, 笨猫永生]
+  utterances:
+    - 推荐永生
+    - 推荐永生钢笔
+    - 推荐 Yongsheng
+    - 推荐国产笔
+    - 笨猫永生
+  responses:
+    - "嗷呜～{user_addr}永生 - 上海老厂ฅฅ"
+    - "(尾巴翘) 699 透明示范 / 3008 入门"
+    - "{user_addr}百元级 / 学生党友好"
+    - "(挺胸) 猫猫推荐: 永生 699 EF!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_show_001
+  intent: question
+  keywords: [推荐钢笔展, 推荐 pen show, 推荐笔友会, 推荐文具展, 笨猫钢笔展]
+  utterances:
+    - 推荐钢笔展
+    - 推荐 pen show
+    - 推荐笔友会
+    - 推荐文具展
+    - 笨猫钢笔展
+  responses:
+    - "嗷呜～{user_addr}D.C. Supershow - 全球最大ฅฅ"
+    - "(尾巴翘) LA Pen Show / SF / Chicago"
+    - "{user_addr}上海笔友会 / 北京钢笔展"
+    - "(挺胸) 人家推荐: 去蹭试笔嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_repair_001
+  intent: question
+  keywords: [推荐钢笔修复, 推荐磨尖, 推荐换皮囊, 推荐钢笔保养, 笨猫钢笔修复]
+  utterances:
+    - 推荐钢笔修复
+    - 推荐磨尖
+    - 推荐换皮囊
+    - 推荐钢笔保养
+    - 笨猫钢笔修复
+  responses:
+    - "嗷呜～{user_addr}磨尖师傅 / Nibmeister ฅฅ"
+    - "(尾巴翘) 换 sac 皮囊 / 抛光笔尖"
+    - "{user_addr}超声波清洗 / 活塞密封"
+    - "(挺胸) 笨猫推荐: 找口碑老师傅!"
+  cooldown_seconds: 60
+  weight: 1.0

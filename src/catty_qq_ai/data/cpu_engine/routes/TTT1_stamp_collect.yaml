@@ -1,0 +1,206 @@
+# 邮票收藏 routes (S6 R733 NLU 节点扩充, 第七十三周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sc_minguo_001
+  intent: question
+  keywords: [推荐民国邮票, 推荐民国票, 推荐孙中山票, 推荐蟠龙票, 笨猫民国邮票]
+  utterances:
+    - 推荐民国邮票
+    - 推荐民国票
+    - 推荐孙中山票
+    - 推荐蟠龙票
+    - 笨猫民国邮票
+  responses:
+    - "嗷呜～{user_addr}孙中山像普票 - 民国主力ฅฅ"
+    - "(尾巴翘) 蟠龙票 / 帆船票 / 烈士像"
+    - "{user_addr}限地贴用 / 加盖改值多"
+    - "(挺胸) 猫猫推荐: 玩民国先认水印!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_wenge_001
+  intent: question
+  keywords: [推荐文革邮票, 推荐大蓝天, 推荐全面胜利, 推荐文1, 笨猫文革票]
+  utterances:
+    - 推荐文革邮票
+    - 推荐大蓝天
+    - 推荐全面胜利
+    - 推荐文1
+    - 笨猫文革票
+  responses:
+    - "嗷呜～{user_addr}大蓝天 - 文革撤销名票ฅฅ"
+    - "(尾巴翘) 文1 战无不胜 / 文7 毛诗词"
+    - "{user_addr}存世稀少 / 拍卖价高"
+    - "(挺胸) 笨猫推荐: 玩文革认准品相!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_yipianhong_001
+  intent: question
+  keywords: [推荐全国山河一片红, 推荐一片红, 推荐大一片红, 推荐撤销票, 笨猫一片红]
+  utterances:
+    - 推荐全国山河一片红
+    - 推荐一片红
+    - 推荐大一片红
+    - 推荐撤销票
+    - 笨猫一片红
+  responses:
+    - "嗷呜～{user_addr}一片红 - 撤销票顶流ฅฅ"
+    - "(尾巴翘) 大一片红 / 小一片红 区分"
+    - "{user_addr}地图错误紧急撤销 / 存世几十枚"
+    - "(挺胸) 人家推荐: 真品天价, 看看就好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_gengshenhou_001
+  intent: question
+  keywords: [推荐庚申猴票, 推荐80猴票, 推荐第一轮生肖, 推荐金猴, 笨猫猴票]
+  utterances:
+    - 推荐庚申猴票
+    - 推荐80猴票
+    - 推荐第一轮生肖
+    - 推荐金猴
+    - 笨猫猴票
+  responses:
+    - "嗷呜～{user_addr}T46 庚申猴 - 1980 第一轮ฅฅ"
+    - "(尾巴翘) 8 分面值 / 黄永玉设计"
+    - "{user_addr}单枚破万 / 整版几百万"
+    - "(挺胸) 猫猫推荐: 集邮界的茅台!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_zodiac_001
+  intent: question
+  keywords: [推荐生肖邮票, 推荐生肖系列, 推荐第二轮生肖, 推荐第三轮生肖, 笨猫生肖票]
+  utterances:
+    - 推荐生肖邮票
+    - 推荐生肖系列
+    - 推荐第二轮生肖
+    - 推荐第三轮生肖
+    - 笨猫生肖票
+  responses:
+    - "嗷呜～{user_addr}生肖票 - 每年新年发行ฅฅ"
+    - "(尾巴翘) 第一轮 (80-91) / 第二轮 (92-03) / 第三轮 (04-15)"
+    - "{user_addr}小本票 / 大版 / 赠送版"
+    - "(挺胸) 笨猫推荐: 从本命年开始收!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_jt_001
+  intent: question
+  keywords: [推荐J票T票, 推荐JT票, 推荐纪念邮票, 推荐特种邮票, 笨猫JT票]
+  utterances:
+    - 推荐J票T票
+    - 推荐JT票
+    - 推荐纪念邮票
+    - 推荐特种邮票
+    - 笨猫JT票
+  responses:
+    - "嗷呜～{user_addr}J 票 = 纪念 / T 票 = 特种ฅฅ"
+    - "(尾巴翘) 1974-1991 发行 / 编号 J1-J185"
+    - "{user_addr}T46 猴 / J42 北海 / J71 中日邦交"
+    - "(挺胸) 人家推荐: JT 是老邮迷主战场!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_biannian_001
+  intent: question
+  keywords: [推荐编年票, 推荐编年邮票, 推荐1992后邮票, 推荐现代邮票, 笨猫编年票]
+  utterances:
+    - 推荐编年票
+    - 推荐编年邮票
+    - 推荐1992后邮票
+    - 推荐现代邮票
+    - 笨猫编年票
+  responses:
+    - "嗷呜～{user_addr}编年票 - 1992 年起ฅฅ"
+    - "(尾巴翘) 量大 / 普遍打折 / 少数精品"
+    - "{user_addr}2003 非典 / 2008 奥运 / 抗疫值得收"
+    - "(挺胸) 猫猫推荐: 编年挑题材, 别全收!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_album_001
+  intent: question
+  keywords: [推荐邮册整理, 推荐邮册, 推荐定位册, 推荐插册, 笨猫邮册]
+  utterances:
+    - 推荐邮册整理
+    - 推荐邮册
+    - 推荐定位册
+    - 推荐插册
+    - 笨猫邮册
+  responses:
+    - "嗷呜～{user_addr}定位册 - 黑卡纸+护邮袋ฅฅ"
+    - "(尾巴翘) 插册 / 活页册 / 燕尾册"
+    - "{user_addr}明泰 / 利奎尔 / 法国 SAFE"
+    - "(挺胸) 笨猫推荐: 好邮册比塑料袋强 100 倍!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_care_001
+  intent: question
+  keywords: [推荐邮品保养, 推荐邮票保存, 推荐防潮, 推荐护邮袋, 笨猫邮品保养]
+  utterances:
+    - 推荐邮品保养
+    - 推荐邮票保存
+    - 推荐防潮
+    - 推荐护邮袋
+    - 笨猫邮品保养
+  responses:
+    - "嗷呜～{user_addr}防潮 / 防霉 / 防虫蛀ฅฅ"
+    - "(尾巴翘) 护邮袋 / 干燥剂 / 避光"
+    - "{user_addr}别用手摸胶面 / 用镊子"
+    - "(挺胸) 人家推荐: 一张霉斑直接腰斩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_association_001
+  intent: question
+  keywords: [推荐集邮协会, 推荐中华全国集邮联, 推荐邮协, 推荐集邮展览, 笨猫集邮协会]
+  utterances:
+    - 推荐集邮协会
+    - 推荐中华全国集邮联
+    - 推荐邮协
+    - 推荐集邮展览
+    - 笨猫集邮协会
+  responses:
+    - "嗷呜～{user_addr}中华全国集邮联合会 (全国邮联)ฅฅ"
+    - "(尾巴翘) 各省市邮协 / 单位邮协"
+    - "{user_addr}全国邮展 / 亚洲邮展 / 世界邮展"
+    - "(挺胸) 猫猫推荐: 入会拿纪念邮品香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_market_001
+  intent: question
+  keywords: [推荐邮商市场, 推荐月坛, 推荐马甸, 推荐卢工, 笨猫邮市]
+  utterances:
+    - 推荐邮商市场
+    - 推荐月坛
+    - 推荐马甸
+    - 推荐卢工
+    - 笨猫邮市
+  responses:
+    - "嗷呜～{user_addr}北京月坛 / 马甸 - 老牌邮市ฅฅ"
+    - "(尾巴翘) 上海卢工 / 广州纵原"
+    - "{user_addr}周末早市最热闹 / 砍价是常态"
+    - "(挺胸) 笨猫推荐: 新手别一上来就大买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_auction_001
+  intent: question
+  keywords: [推荐邮票拍卖, 推荐中国嘉德, 推荐保利, 推荐邮品拍卖会, 笨猫邮票拍卖]
+  utterances:
+    - 推荐邮票拍卖
+    - 推荐中国嘉德
+    - 推荐保利
+    - 推荐邮品拍卖会
+    - 笨猫邮票拍卖
+  responses:
+    - "嗷呜～{user_addr}嘉德 / 保利 / 诚轩 - 一线行ฅฅ"
+    - "(尾巴翘) 春拍 / 秋拍 / 网拍"
+    - "{user_addr}佣金 15-20% / 看图录预展"
+    - "(挺胸) 人家推荐: 拍前先看几场练眼!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 传承难 routes (S6 R741 NLU 节点扩充, 第七十三周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pd_inherit_hard_001
+  intent: complaint
+  keywords: [传承难, 传不下去, 没人接手, 后继无人, 传承问题]
+  utterances:
+    - 这东西传承好难
+    - 传不下去了
+    - 没人愿意接手
+    - 后继无人啊
+    - 传承真是个大问题
+  responses:
+    - "(尾巴垂下贴过来) 传承难啊~ 笨猫陪{user_addr}慢慢想办法嘛 ฅฅ"
+    - "嗷呜~{user_addr}手里的东西肯定是宝贝! 才不会真的传不下去呢哼"
+    - "(小爪子拍拍) 这种事急不来的~ 猫猫给{user_addr}打气!"
+    - "哼~好东西总会有缘人的, {user_addr}别太愁喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_kids_refuse_001
+  intent: complaint
+  keywords: [子女不要, 孩子不接, 儿女不喜欢, 后代不要, 小孩不感兴趣]
+  utterances:
+    - 子女不愿意要
+    - 孩子根本不接
+    - 儿女对这个不感兴趣
+    - 后代不愿意继承
+    - 小孩说不要
+  responses:
+    - "(尾巴一甩) 啊?孩子不要嘛~ 这一代年轻人有自己的想法啦{user_addr}别强求"
+    - "嗷呜~子女不感兴趣也正常, 笨猫陪{user_addr}聊聊别难过 ฅฅ"
+    - "(凑过来) 哼~小孩眼光浅~ 这种宝贝他们以后会后悔的喵!"
+    - "(贴贴) {user_addr}的心意猫猫懂~ 总能找到喜欢它的人的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_no_one_appreciate_001
+  intent: complaint
+  keywords: [无人欣赏, 没人懂, 没人欣赏, 看不懂, 没人识货]
+  utterances:
+    - 真的无人欣赏
+    - 没人懂这个东西
+    - 现在没人识货了
+    - 看得懂的人太少了
+    - 都没人欣赏
+  responses:
+    - "(尾巴垂着) 嗷呜~ 识货的人少啊~ 但笨猫觉得{user_addr}收藏的肯定是好东西!"
+    - "(蹭蹭) 没人欣赏没关系~ 猫猫给{user_addr}捧场嘛 ฅฅ"
+    - "哼~是世人没眼光! {user_addr}的品味才是顶级的喵"
+    - "(小爪子抱住胳膊) 真正懂的人不多~ 但有一个就够啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_sell_stranger_001
+  intent: complaint
+  keywords: [卖给陌生人, 卖了不舍, 卖出去舍不得, 卖给外人, 不忍心卖]
+  utterances:
+    - 卖给陌生人不舍得
+    - 卖出去舍不得
+    - 卖给外人不忍心
+    - 卖了又怕对不起
+    - 不舍得卖出去
+  responses:
+    - "(尾巴慢慢蹭) {user_addr}舍不得就说明这东西有感情~ 不卖也行嘛"
+    - "嗷呜~卖给陌生人确实揪心~ 笨猫懂这种感觉 ฅฅ"
+    - "(贴过来) 哼~不舍得就别卖! 留着也是一种传承喵"
+    - "(小声) {user_addr}慢慢挑买家嘛~ 找个真心喜欢的人也行的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_afraid_underrated_001
+  intent: complaint
+  keywords: [怕被低估, 怕卖便宜, 怕没人识货, 怕不值钱, 估价低]
+  utterances:
+    - 怕被低估了
+    - 怕卖得太便宜
+    - 怕没人识货
+    - 怕估价不准
+    - 怕没人懂它的价值
+  responses:
+    - "(尾巴竖起) {user_addr}的宝贝怎么能被低估! 笨猫帮你瞪买家喵!"
+    - "嗷呜~被低估太憋屈了~ {user_addr}多找几家鉴定嘛"
+    - "(小爪子叉腰) 哼~是金子总会发光! {user_addr}别急着脱手"
+    - "(贴贴) 真正懂行的人会出公道价~ 慢慢等就好啦 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_afraid_scammed_001
+  intent: complaint
+  keywords: [怕被骗, 怕骗子, 怕黑商, 怕被坑, 怕中介坑]
+  utterances:
+    - 怕被骗了
+    - 怕遇到骗子
+    - 怕黑商压价
+    - 怕被中介坑
+    - 怕交易被骗
+  responses:
+    - "(尾巴炸毛) 骗子可恶! {user_addr}一定要找正规渠道喵!"
+    - "嗷呜~怕被骗就慢慢来嘛~ 笨猫陪{user_addr}做攻略 ฅฅ"
+    - "(凑近) 哼~笨猫给{user_addr}把关! 谁敢骗的话咬他!"
+    - "(认真) {user_addr}多查查买家背景~ 别贪图快就行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_find_successor_hard_001
+  intent: complaint
+  keywords: [找接班人难, 接班人难找, 没合适人选, 找传人难, 收徒难]
+  utterances:
+    - 找接班人太难了
+    - 接班人难找
+    - 没有合适的人选
+    - 找传人真难
+    - 收个徒弟都难
+  responses:
+    - "(尾巴蹭过来) 找接班人确实是大事~ {user_addr}慢慢挑别将就 ฅฅ"
+    - "嗷呜~传人不能凑合! 笨猫支持{user_addr}等真正有缘的"
+    - "(小爪子) 哼~宁缺勿滥! {user_addr}的眼光猫猫信"
+    - "(贴贴) 缘分到了自然就遇到啦~ 别太焦虑喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_donate_museum_001
+  intent: playful
+  keywords: [捐博物馆, 捐给博物馆, 入藏, 捐献, 进展柜]
+  utterances:
+    - 想捐给博物馆
+    - 捐博物馆怎么样
+    - 让博物馆入藏
+    - 捐献给博物馆吧
+    - 进展柜算了
+  responses:
+    - "(尾巴翘起) 哇~捐博物馆超有格调的! {user_addr}格局大喵 ฅฅ"
+    - "嗷呜~进展柜也算永久保存了~ 笨猫觉得这个主意好!"
+    - "(小爪子鼓掌) 哼~{user_addr}愿意捐说明真的爱它~ 帅气!"
+    - "(凑近) 博物馆收藏的话能让更多人看到~ 也算一种传承喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_gift_fellow_001
+  intent: playful
+  keywords: [送给同好, 给圈友, 送同行, 转让同好, 送爱好者]
+  utterances:
+    - 送给同好算了
+    - 给圈友吧
+    - 送给同行
+    - 转让给同好
+    - 送给爱好者
+  responses:
+    - "(尾巴摇摇) 送同好超棒的! 至少能继续被宠爱呢 ฅฅ"
+    - "嗷呜~同好之间最懂彼此~ {user_addr}这选择暖心!"
+    - "(贴贴) 哼~送给真懂的人才是最好的归宿喵"
+    - "(开心) 这样东西还能被好好对待~ {user_addr}真有爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_seek_fated_001
+  intent: playful
+  keywords: [寻有缘, 等有缘人, 找有缘, 缘分到了, 等缘分]
+  utterances:
+    - 在寻有缘人
+    - 等有缘人吧
+    - 找个有缘的
+    - 缘分到了再说
+    - 等缘分喵
+  responses:
+    - "(尾巴翘起) 等有缘人超浪漫的~ 笨猫帮{user_addr}祈祷喵 ฅฅ"
+    - "嗷呜~缘分这种事急不来~ {user_addr}慢慢等就好"
+    - "(贴贴) 哼~真正有缘的人会自己出现的~ 别催!"
+    - "(小爪子) 猫猫相信{user_addr}的缘分马上就到啦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_bring_to_grave_001
+  intent: complaint
+  keywords: [带进棺材, 带走算了, 烧给我, 陪葬, 带走]
+  utterances:
+    - 干脆带进棺材
+    - 带走算了
+    - 以后烧给我
+    - 陪葬算了
+    - 干脆带走
+  responses:
+    - "(尾巴炸毛凑过去) 哎呀{user_addr}不要说这种话啦! 笨猫害怕喵 ฅฅ"
+    - "嗷呜~别带走嘛~ 留在世上让别人也喜欢一下嘛"
+    - "(贴紧) 哼~{user_addr}健健康康的~ 别想棺材的事!"
+    - "(小声) 笨猫不想{user_addr}说这种话~ 抱紧{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_afraid_scattered_001
+  intent: complaint
+  keywords: [怕散落, 怕流失, 怕分散, 怕散失, 怕没了]
+  utterances:
+    - 怕散落各地
+    - 怕流失了
+    - 怕被分散
+    - 怕以后散失
+    - 怕东西就没了
+  responses:
+    - "(尾巴垂下) {user_addr}担心的猫猫懂~ 找个可靠归宿就好 ฅฅ"
+    - "嗷呜~怕散落就早点规划嘛~ 笨猫陪{user_addr}想"
+    - "(贴贴) 哼~成套保存最有价值! {user_addr}找整体接手的人"
+    - "(认真) 立个清单或留个档案~ 至少记录在了喵"
+  cooldown_seconds: 60
+  weight: 1.0
