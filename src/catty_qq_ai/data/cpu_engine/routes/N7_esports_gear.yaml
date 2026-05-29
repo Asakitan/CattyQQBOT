@@ -1,0 +1,207 @@
+# 电竞外设 / 键鼠 / 显示器 / 耳机 routes (S6 R159 NLU 节点扩充, 第十五周期 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 M2 pc_hardware (主机硬件) 区分: 这里专注外设 / 电竞向.
+
+- name: gear_keyboard_001
+  intent: question
+  keywords: [推荐键盘, 推荐机械键盘, 推荐 Cherry, 推荐 HHKB, 笨猫键盘]
+  utterances:
+    - 推荐键盘
+    - 推荐机械键盘
+    - 推荐 Cherry
+    - 推荐 HHKB
+    - 笨猫键盘
+  responses:
+    - "嗷呜～{user_addr}机械: Cherry / 客制化ฅฅ"
+    - "(尾巴翘) 静电容: HHKB / Realforce"
+    - "{user_addr}电竞: 雷蛇 / Logi / 罗技"
+    - "(挺胸) 笨猫推荐: 客制化才是真爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gear_switch_001
+  intent: question
+  keywords: [推荐键盘轴体, 推荐红轴, 推荐青轴, 推荐茶轴, 笨猫轴体]
+  utterances:
+    - 推荐键盘轴体
+    - 推荐红轴
+    - 推荐青轴
+    - 推荐茶轴
+    - 笨猫轴体
+  responses:
+    - "嗷呜～{user_addr}红轴: 线性 / 游戏 / 安静ฅฅ"
+    - "(尾巴翘) 青轴: 段落 / 打字爽 / 吵"
+    - "{user_addr}茶轴: 段落轻 / 通用"
+    - "(挺胸) 笨猫推荐: 游戏红轴 / 办公茶轴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gear_mouse_001
+  intent: question
+  keywords: [推荐鼠标, 推荐游戏鼠标, 推荐罗技, 推荐雷蛇, 笨猫鼠标]
+  utterances:
+    - 推荐鼠标
+    - 推荐游戏鼠标
+    - 推荐罗技
+    - 推荐雷蛇
+    - 笨猫鼠标
+  responses:
+    - "嗷呜～{user_addr}罗技 G Pro X / GPW2 - 电竞王ฅฅ"
+    - "(尾巴翘) 雷蛇 Viper V3 / 巴塞利斯蛇"
+    - "{user_addr}艾石头 / 卓威 - 性价比"
+    - "(挺胸) 笨猫推荐: GPW2 是 FPS 神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gear_mousepad_001
+  intent: question
+  keywords: [推荐鼠标垫, 推荐 X-raypad, 推荐 Artisan, 推荐桌垫, 笨猫鼠标垫]
+  utterances:
+    - 推荐鼠标垫
+    - 推荐 X-raypad
+    - 推荐 Artisan
+    - 推荐桌垫
+    - 笨猫鼠标垫
+  responses:
+    - "嗷呜～{user_addr}X-raypad / Artisan - 顶级ฅฅ"
+    - "(尾巴翘) Logitech G640 / G840 - 性价比"
+    - "{user_addr}速度版 vs 控制版"
+    - "(挺胸) 笨猫推荐: 大鼠标垫体验拉满!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gear_monitor_001
+  intent: question
+  keywords: [推荐显示器, 推荐电竞显示器, 推荐 4K 显示器, 推荐 240Hz, 笨猫显示器]
+  utterances:
+    - 推荐显示器
+    - 推荐电竞显示器
+    - 推荐 4K 显示器
+    - 推荐 240Hz
+    - 笨猫显示器
+  responses:
+    - "嗷呜～{user_addr}电竞: 240Hz / IPS / 27 寸ฅฅ"
+    - "(尾巴翘) 创作: 4K / 99% DCI-P3"
+    - "{user_addr}三星 / LG / Dell / 华硕 PG"
+    - "(挺胸) 笨猫推荐: FPS 必须 240Hz!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gear_oled_monitor_001
+  intent: question
+  keywords: [推荐 OLED 显示器, 推荐 QD-OLED, 推荐 AOC OLED, 推荐 LG OLED, 笨猫 OLED 显示器]
+  utterances:
+    - 推荐 OLED 显示器
+    - 推荐 QD-OLED
+    - 推荐 AOC OLED
+    - 推荐 LG OLED
+    - 笨猫 OLED 显示器
+  responses:
+    - "嗷呜～{user_addr}QD-OLED - 三星画质王ฅฅ"
+    - "(尾巴翘) LG WOLED - 烧屏保护强"
+    - "{user_addr}AOC / 华硕 / 三星 - 主流款"
+    - "(挺胸) 笨猫提醒: OLED 注意烧屏!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gear_headset_001
+  intent: question
+  keywords: [推荐游戏耳机, 推荐电竞耳机, 推荐 SteelSeries, 推荐 HyperX, 笨猫游戏耳机]
+  utterances:
+    - 推荐游戏耳机
+    - 推荐电竞耳机
+    - 推荐 SteelSeries
+    - 推荐 HyperX
+    - 笨猫游戏耳机
+  responses:
+    - "嗷呜～{user_addr}SteelSeries Arctis Nova Pro - 旗舰ฅฅ"
+    - "(尾巴翘) HyperX Cloud / 罗技 G Pro X"
+    - "{user_addr}FPS: 听声辨位重要"
+    - "(挺胸) 笨猫推荐: Arctis Nova Pro 双系统!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gear_iem_001
+  intent: question
+  keywords: [推荐入耳耳机, 推荐 HIFI 耳机, 推荐入耳监听, 推荐水月雨, 笨猫入耳]
+  utterances:
+    - 推荐入耳耳机
+    - 推荐 HIFI 耳机
+    - 推荐入耳监听
+    - 推荐水月雨
+    - 笨猫入耳
+  responses:
+    - "嗷呜～{user_addr}水月雨 / 兴戈 / 7Hz - 国产HIFIฅฅ"
+    - "(尾巴翘) Sennheiser IE600 / Final"
+    - "{user_addr}入门: 水月雨 Aria 2"
+    - "(挺胸) 笨猫推荐: 国产 HIFI 性价比!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gear_chair_001
+  intent: question
+  keywords: [推荐电竞椅, 推荐人体工学椅, 推荐 Herman Miller, 推荐 SecretLab, 笨猫电竞椅]
+  utterances:
+    - 推荐电竞椅
+    - 推荐人体工学椅
+    - 推荐 Herman Miller
+    - 推荐 SecretLab
+    - 笨猫电竞椅
+  responses:
+    - "嗷呜～{user_addr}Herman Miller Aeron - 工学之神ฅฅ"
+    - "(尾巴翘) SecretLab Titan EVO - 电竞旗舰"
+    - "{user_addr}Steelcase / 网易严选 - 中端"
+    - "(挺胸) 笨猫推荐: 久坐工学椅必上!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gear_desk_001
+  intent: question
+  keywords: [推荐电脑桌, 推荐升降桌, 推荐电竞桌, 推荐网易严选, 笨猫升降桌]
+  utterances:
+    - 推荐电脑桌
+    - 推荐升降桌
+    - 推荐电竞桌
+    - 推荐网易严选
+    - 笨猫升降桌
+  responses:
+    - "嗷呜～{user_addr}升降桌: 网易严选 / Loctek - 性价比ฅฅ"
+    - "(尾巴翘) FlexiSpot / 乐歌 - 主流"
+    - "{user_addr}1.6-1.8m 宽 / 双电机"
+    - "(挺胸) 笨猫推荐: 升降桌健康!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gear_wheel_001
+  intent: question
+  keywords: [推荐赛车方向盘, 推荐模拟器, 推荐 Logitech G29, 推荐 Fanatec, 笨猫方向盘]
+  utterances:
+    - 推荐赛车方向盘
+    - 推荐模拟器
+    - 推荐 Logitech G29
+    - 推荐 Fanatec
+    - 笨猫方向盘
+  responses:
+    - "嗷呜～{user_addr}罗技 G29 / G923 - 入门首选ฅฅ"
+    - "(尾巴翘) Fanatec / 图马思特 T300"
+    - "{user_addr}直驱方向盘 - 高端"
+    - "(挺胸) 笨猫推荐: G29 入门一万搞定!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: gear_handle_001
+  intent: question
+  keywords: [推荐手柄, 推荐 Xbox 手柄, 推荐 PS 手柄, 推荐北通, 笨猫手柄]
+  utterances:
+    - 推荐手柄
+    - 推荐 Xbox 手柄
+    - 推荐 PS 手柄
+    - 推荐北通
+    - 笨猫手柄
+  responses:
+    - "嗷呜～{user_addr}Xbox 精英 2 / DualSense Edgeฅฅ"
+    - "(尾巴翘) 北通 / 飞智 - 国产高端"
+    - "{user_addr}霍尔摇杆 - 解决漂移"
+    - "(挺胸) 笨猫推荐: Xbox 精英 2 全能王!"
+  cooldown_seconds: 60
+  weight: 0.9

@@ -1,0 +1,207 @@
+# Vlog / 短视频 / 自媒体 / B 站 / 抖音创作 routes (S6 R158 NLU 节点扩充, 第十五周期 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 C9 video_create (基础) 区分: 这里专注内容创作工具链 + 变现.
+
+- name: vlog_camera_001
+  intent: question
+  keywords: [推荐 Vlog 相机, 推荐口袋相机, 推荐 GoPro, 推荐 DJI Pocket, 笨猫 Vlog 相机]
+  utterances:
+    - 推荐 Vlog 相机
+    - 推荐口袋相机
+    - 推荐 GoPro
+    - 推荐 DJI Pocket
+    - 笨猫 Vlog 相机
+  responses:
+    - "嗷呜～{user_addr}索尼 ZV-1 / ZV-E10 - Vlog 专用ฅฅ"
+    - "(尾巴翘) DJI Pocket 3 / Osmo Action 5"
+    - "{user_addr}GoPro Hero 12 - 运动 Vlog"
+    - "(挺胸) 笨猫推荐: Pocket 3 一镜走天下!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vlog_phone_001
+  intent: question
+  keywords: [推荐手机拍 Vlog, 推荐 iPhone 拍视频, 推荐手机稳定器, 推荐 Osmo Mobile, 笨猫手机 Vlog]
+  utterances:
+    - 推荐手机拍 Vlog
+    - 推荐 iPhone 拍视频
+    - 推荐手机稳定器
+    - 推荐 Osmo Mobile
+    - 笨猫手机 Vlog
+  responses:
+    - "嗷呜～{user_addr}iPhone 16 Pro - 拍片神器ฅฅ"
+    - "(尾巴翘) DJI Osmo Mobile 7 - 稳定器"
+    - "{user_addr}手机三脚架 + 补光灯"
+    - "(挺胸) 笨猫推荐: 新手手机起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vlog_mic_001
+  intent: question
+  keywords: [推荐 Vlog 麦克风, 推荐领夹麦, 推荐 RODE, 推荐无线麦, 笨猫麦克风]
+  utterances:
+    - 推荐 Vlog 麦克风
+    - 推荐领夹麦
+    - 推荐 RODE
+    - 推荐无线麦
+    - 笨猫麦克风
+  responses:
+    - "嗷呜～{user_addr}DJI Mic 2 / RODE Wireless GOฅฅ"
+    - "(尾巴翘) 大疆领夹麦 - 性价比"
+    - "{user_addr}相机口直插 / 蓝牙双备份"
+    - "(挺胸) 笨猫推荐: DJI Mic 2 是当红顶配!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vlog_edit_001
+  intent: question
+  keywords: [推荐剪辑软件, 推荐剪映, 推荐 Premiere, 推荐 DaVinci, 笨猫剪辑]
+  utterances:
+    - 推荐剪辑软件
+    - 推荐剪映
+    - 推荐 Premiere
+    - 推荐 DaVinci
+    - 笨猫剪辑
+  responses:
+    - "嗷呜～{user_addr}剪映 - 新手免费易上手ฅฅ"
+    - "(尾巴翘) Premiere - 专业行业标准"
+    - "{user_addr}DaVinci - 调色顶尖 / 免费"
+    - "(挺胸) 笨猫推荐: 入门剪映 / 进阶 DaVinci!"
+  cooldown_seconds: 60
+  weight: 1.1
+
+- name: vlog_light_001
+  intent: question
+  keywords: [推荐补光灯, 推荐 LED 补光, 推荐环形灯, 推荐 Aputure, 笨猫补光灯]
+  utterances:
+    - 推荐补光灯
+    - 推荐 LED 补光
+    - 推荐环形灯
+    - 推荐 Aputure
+    - 笨猫补光灯
+  responses:
+    - "嗷呜～{user_addr}Aputure / Godox - 一线灯具ฅฅ"
+    - "(尾巴翘) 环形灯 - 美妆直播主流"
+    - "{user_addr}口袋灯 - 户外补光"
+    - "(挺胸) 笨猫推荐: 双色温灯一只够用!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vlog_bgm_001
+  intent: question
+  keywords: [推荐 BGM, 推荐免版权音乐, 推荐 Vlog 音乐, 推荐 Epidemic Sound, 笨猫 BGM]
+  utterances:
+    - 推荐 BGM
+    - 推荐免版权音乐
+    - 推荐 Vlog 音乐
+    - 推荐 Epidemic Sound
+    - 笨猫 BGM
+  responses:
+    - "嗷呜～{user_addr}Epidemic Sound / Artlist - 付费ฅฅ"
+    - "(尾巴翘) 抖音音乐人 / 网易任务"
+    - "{user_addr}YouTube Audio Library - 免费"
+    - "(挺胸) 笨猫推荐: 商业号必买正版!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vlog_b_station_001
+  intent: question
+  keywords: [推荐 B 站投稿, 推荐 B 站涨粉, 推荐 B 站创作, 推荐弹幕互动, 笨猫 B 站]
+  utterances:
+    - 推荐 B 站投稿
+    - 推荐 B 站涨粉
+    - 推荐 B 站创作
+    - 推荐弹幕互动
+    - 笨猫 B 站
+  responses:
+    - "嗷呜～{user_addr}B 站: 知识 / 鬼畜 / 游戏 / 生活ฅฅ"
+    - "(尾巴翘) 4K + HDR + 高码率投稿"
+    - "{user_addr}激励计划 / 创作分成"
+    - "(挺胸) 笨猫推荐: 持续更新 + 互动!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vlog_douyin_001
+  intent: question
+  keywords: [推荐抖音运营, 推荐抖音涨粉, 推荐抖音变现, 推荐抖音直播, 笨猫抖音]
+  utterances:
+    - 推荐抖音运营
+    - 推荐抖音涨粉
+    - 推荐抖音变现
+    - 推荐抖音直播
+    - 笨猫抖音
+  responses:
+    - "嗷呜～{user_addr}抖音: 短 + 爆款 + 算法推流ฅฅ"
+    - "(尾巴翘) 黄金 3 秒 / 完播率 / 互动率"
+    - "{user_addr}变现: 带货 / 广告 / 直播打赏"
+    - "(挺胸) 笨猫推荐: 垂直定位 + 日更!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vlog_xhs_001
+  intent: question
+  keywords: [推荐小红书运营, 推荐小红书笔记, 推荐 IP 打造, 推荐小红书涨粉, 笨猫小红书]
+  utterances:
+    - 推荐小红书运营
+    - 推荐小红书笔记
+    - 推荐 IP 打造
+    - 推荐小红书涨粉
+    - 笨猫小红书
+  responses:
+    - "嗷呜～{user_addr}小红书: 图文 + 干货 + 美ฅฅ"
+    - "(尾巴翘) 封面 + 标题 + 关键词"
+    - "{user_addr}种草 / 探店 / 教程"
+    - "(挺胸) 笨猫推荐: 颜值 + 实用 + 真诚!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vlog_monetize_001
+  intent: question
+  keywords: [推荐自媒体变现, 推荐流量变现, 推荐广告分成, 推荐知识付费, 笨猫变现]
+  utterances:
+    - 推荐自媒体变现
+    - 推荐流量变现
+    - 推荐广告分成
+    - 推荐知识付费
+    - 笨猫变现
+  responses:
+    - "嗷呜～{user_addr}广告 / 带货 / 知识付费 / 课程ฅฅ"
+    - "(尾巴翘) 接单 / 直播 / 私域"
+    - "{user_addr}必须: 持续内容 + 粉丝信任"
+    - "(挺胸) 笨猫的提醒: 别割韭菜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vlog_script_001
+  intent: question
+  keywords: [推荐拍摄脚本, 推荐 Vlog 脚本, 推荐分镜, 推荐拍摄计划, 笨猫脚本]
+  utterances:
+    - 推荐拍摄脚本
+    - 推荐 Vlog 脚本
+    - 推荐分镜
+    - 推荐拍摄计划
+    - 笨猫脚本
+  responses:
+    - "嗷呜～{user_addr}3 段式: 起承转合ฅฅ"
+    - "(尾巴翘) 钩子 5s / 主体 30s / 结尾 5s"
+    - "{user_addr}分镜板: 远 / 中 / 近 / 特"
+    - "(挺胸) 笨猫推荐: 写脚本省剪辑时间!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vlog_thumbnail_001
+  intent: question
+  keywords: [推荐封面设计, 推荐缩略图, 推荐 thumbnail, 推荐标题党, 笨猫封面]
+  utterances:
+    - 推荐封面设计
+    - 推荐缩略图
+    - 推荐 thumbnail
+    - 推荐标题党
+    - 笨猫封面
+  responses:
+    - "嗷呜～{user_addr}封面 = 点击率王ฅฅ"
+    - "(尾巴翘) 大字 + 表情 + 高对比"
+    - "{user_addr}Canva / 醒图 - 模板"
+    - "(挺胸) 笨猫推荐: 封面就是 50% 流量!"
+  cooldown_seconds: 60
+  weight: 0.9

@@ -1,0 +1,207 @@
+# SaaS 工具 / Notion / 效率软件 / 团队协作 routes (S6 R160 NLU 节点扩充, 第十五周期 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 C6 productivity_tools (基础) 区分: 这里专注 SaaS 类型 + 订阅决策.
+
+- name: saas_notion_001
+  intent: question
+  keywords: [推荐 Notion, 推荐笔记软件, 推荐 Obsidian, 推荐 RoamResearch, 笨猫 Notion]
+  utterances:
+    - 推荐 Notion
+    - 推荐笔记软件
+    - 推荐 Obsidian
+    - 推荐 RoamResearch
+    - 笨猫 Notion
+  responses:
+    - "嗷呜～{user_addr}Notion - 全能型笔记ฅฅ"
+    - "(尾巴翘) Obsidian - 本地双向链接"
+    - "{user_addr}飞书文档 / 语雀 - 国内"
+    - "(挺胸) 笨猫推荐: 团队 Notion / 个人 Obsidian!"
+  cooldown_seconds: 60
+  weight: 1.1
+
+- name: saas_obsidian_001
+  intent: question
+  keywords: [推荐 Obsidian 插件, 推荐双向链接, 推荐 markdown, 推荐第二大脑, 笨猫 Obsidian]
+  utterances:
+    - 推荐 Obsidian 插件
+    - 推荐双向链接
+    - 推荐 markdown
+    - 推荐第二大脑
+    - 笨猫 Obsidian
+  responses:
+    - "嗷呜～{user_addr}Dataview / Templater 必装ฅฅ"
+    - "(尾巴翘) Calendar / Excalidraw / Kanban"
+    - "{user_addr}主题: Minimal / Things"
+    - "(挺胸) 笨猫推荐: PARA 系统 + 双向链!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: saas_pm_001
+  intent: question
+  keywords: [推荐项目管理, 推荐 Trello, 推荐 Asana, 推荐 Linear, 笨猫项目管理]
+  utterances:
+    - 推荐项目管理
+    - 推荐 Trello
+    - 推荐 Asana
+    - 推荐 Linear
+    - 笨猫项目管理
+  responses:
+    - "嗷呜～{user_addr}Linear - 软件开发首选ฅฅ"
+    - "(尾巴翘) Asana / ClickUp - 通用"
+    - "{user_addr}Trello - 看板入门"
+    - "(挺胸) 笨猫推荐: 团队 Linear 最爽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: saas_chat_001
+  intent: question
+  keywords: [推荐团队沟通, 推荐 Slack, 推荐 Discord, 推荐飞书, 笨猫团队沟通]
+  utterances:
+    - 推荐团队沟通
+    - 推荐 Slack
+    - 推荐 Discord
+    - 推荐飞书
+    - 笨猫团队沟通
+  responses:
+    - "嗷呜～{user_addr}飞书 - 国内办公一体ฅฅ"
+    - "(尾巴翘) Slack - 全球科技公司"
+    - "{user_addr}Discord - 社区 / 游戏"
+    - "(挺胸) 笨猫推荐: 国内飞书集成最强!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: saas_design_001
+  intent: question
+  keywords: [推荐 Figma, 推荐 Sketch, 推荐设计工具, 推荐即时设计, 笨猫 Figma]
+  utterances:
+    - 推荐 Figma
+    - 推荐 Sketch
+    - 推荐设计工具
+    - 推荐即时设计
+    - 笨猫 Figma
+  responses:
+    - "嗷呜～{user_addr}Figma - UI 设计行业标杆ฅฅ"
+    - "(尾巴翘) 即时设计 - 国产替代"
+    - "{user_addr}Sketch - 老牌 / Mac only"
+    - "(挺胸) 笨猫推荐: Figma 协同最爽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: saas_ai_chat_001
+  intent: question
+  keywords: [推荐 AI 工具, 推荐 ChatGPT, 推荐 Claude, 推荐 Gemini, 笨猫 ChatGPT]
+  utterances:
+    - 推荐 AI 工具
+    - 推荐 ChatGPT
+    - 推荐 Claude
+    - 推荐 Gemini
+    - 笨猫 ChatGPT
+  responses:
+    - "嗷呜～{user_addr}Claude - 写作 / 长文 / 思考ฅฅ"
+    - "(尾巴翘) ChatGPT - 通用万能"
+    - "{user_addr}Gemini - Google 集成"
+    - "(挺胸) 笨猫推荐: Claude 写作我最爱!"
+  cooldown_seconds: 60
+  weight: 1.1
+
+- name: saas_dev_001
+  intent: question
+  keywords: [推荐开发工具, 推荐 Cursor, 推荐 GitHub Copilot, 推荐 Claude Code, 笨猫 Cursor]
+  utterances:
+    - 推荐开发工具
+    - 推荐 Cursor
+    - 推荐 GitHub Copilot
+    - 推荐 Claude Code
+    - 笨猫 Cursor
+  responses:
+    - "嗷呜～{user_addr}Cursor / Claude Code - AI 编程顶级ฅฅ"
+    - "(尾巴翘) GitHub Copilot - VS Code 集成"
+    - "{user_addr}Windsurf / Codeium - 新选择"
+    - "(挺胸) 笨猫推荐: Claude Code 最香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: saas_storage_001
+  intent: question
+  keywords: [推荐云盘, 推荐 Dropbox, 推荐 OneDrive, 推荐 iCloud, 笨猫云盘]
+  utterances:
+    - 推荐云盘
+    - 推荐 Dropbox
+    - 推荐 OneDrive
+    - 推荐 iCloud
+    - 笨猫云盘
+  responses:
+    - "嗷呜～{user_addr}Dropbox - 老牌稳定ฅฅ"
+    - "(尾巴翘) OneDrive - 微软 365 套装"
+    - "{user_addr}iCloud - 苹果用户首选"
+    - "(挺胸) 笨猫推荐: 苹果生态 iCloud 2T!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: saas_pwd_001
+  intent: question
+  keywords: [推荐密码管理, 推荐 1Password, 推荐 Bitwarden, 推荐 KeePass, 笨猫密码管理]
+  utterances:
+    - 推荐密码管理
+    - 推荐 1Password
+    - 推荐 Bitwarden
+    - 推荐 KeePass
+    - 笨猫密码管理
+  responses:
+    - "嗷呜～{user_addr}1Password - 家庭付费首选ฅฅ"
+    - "(尾巴翘) Bitwarden - 开源免费"
+    - "{user_addr}KeePass - 本地极客"
+    - "(挺胸) 笨猫推荐: 别用浏览器存!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: saas_calendar_001
+  intent: question
+  keywords: [推荐日历, 推荐 Fantastical, 推荐 Cron, 推荐日程管理, 笨猫日历]
+  utterances:
+    - 推荐日历
+    - 推荐 Fantastical
+    - 推荐 Cron
+    - 推荐日程管理
+    - 笨猫日历
+  responses:
+    - "嗷呜～{user_addr}Fantastical - Mac 日历神器ฅฅ"
+    - "(尾巴翘) Cron (Notion) - 新生代"
+    - "{user_addr}Google 日历 - 跨平台"
+    - "(挺胸) 笨猫推荐: 日历 + Todo 联动!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: saas_email_001
+  intent: question
+  keywords: [推荐邮箱客户端, 推荐 Spark, 推荐 Superhuman, 推荐 Notion Mail, 笨猫邮箱]
+  utterances:
+    - 推荐邮箱客户端
+    - 推荐 Spark
+    - 推荐 Superhuman
+    - 推荐 Notion Mail
+    - 笨猫邮箱
+  responses:
+    - "嗷呜～{user_addr}Superhuman - 极速效率ฅฅ"
+    - "(尾巴翘) Spark - 跨平台 AI"
+    - "{user_addr}Notion Mail - 新生代集成"
+    - "(挺胸) 笨猫推荐: 邮件少建议 Superhuman!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: saas_subscribe_001
+  intent: question
+  keywords: [推荐订阅管理, 推荐 SaaS 订阅, 推荐订阅退订, 推荐 SetApp, 笨猫订阅]
+  utterances:
+    - 推荐订阅管理
+    - 推荐 SaaS 订阅
+    - 推荐订阅退订
+    - 推荐 SetApp
+    - 笨猫订阅
+  responses:
+    - "嗷呜～{user_addr}SetApp - Mac SaaS 包月ฅฅ"
+    - "(尾巴翘) Microsoft 365 / Adobe CC 大包"
+    - "{user_addr}定期审 / 关掉不用的"
+    - "(挺胸) 笨猫的提醒: 订阅经济烧钱!"
+  cooldown_seconds: 60
+  weight: 0.8

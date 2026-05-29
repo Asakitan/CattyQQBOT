@@ -205,3 +205,156 @@
     - "(挺胸) 笨猫推荐: cos 自己喜欢的角色!"
   cooldown_seconds: 60
   weight: 0.9
+
+- name: ag_goods_slang_001
+  intent: question
+  keywords: [推荐吃谷, 推荐谷圈黑话, 推荐吧唧, 推荐流麻, 笨猫吃谷]
+  utterances:
+    - 推荐吃谷
+    - 推荐谷圈黑话
+    - 推荐吧唧
+    - 推荐流麻
+    - 笨猫吃谷
+  responses:
+    - "嗷呜～{user_addr}吃谷 = 收周边 / 买官谷ฅฅ"
+    - "(尾巴翘) 吧唧 = 徽章 / 流麻 = 流沙谷"
+    - "{user_addr}谷美 = 摆阵 + 拍照出片"
+    - "(挺胸) 笨猫提醒: 先懂黑话再冲!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_blind_draw_001
+  intent: question
+  keywords: [推荐盲抽谷子, 推荐端盒, 推荐拆盒, 推荐开袋, 笨猫盲抽]
+  utterances:
+    - 推荐盲抽谷子
+    - 推荐端盒
+    - 推荐拆盒
+    - 推荐开袋
+    - 笨猫盲抽
+  responses:
+    - "嗷呜～{user_addr}盲抽刺激 / 也最看运气ฅฅ"
+    - "(尾巴翘) 端盒 = 整盒拿走 / 更容易齐套"
+    - "{user_addr}拆盒 / 开袋适合随缘赌角色"
+    - "(挺胸) 笨猫建议: 别抽上头啦!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ag_trade_market_001
+  intent: question
+  keywords: [推荐换谷, 推荐拼团谷子, 推荐蹲现, 推荐回血, 笨猫换谷]
+  utterances:
+    - 推荐换谷
+    - 推荐拼团谷子
+    - 推荐蹲现
+    - 推荐回血
+    - 笨猫换谷
+  responses:
+    - "嗷呜～{user_addr}换谷 / 蹲现 - 谷圈日常ฅฅ"
+    - "(尾巴翘) 拼团能摊运费 / 但要看团主信誉"
+    - "{user_addr}回血 = 出重复谷回一点本"
+    - "(挺胸) 笨猫提醒: 交易先看记录!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_official_goods_001
+  intent: question
+  keywords: [推荐官谷, 推荐日谷, 推荐国谷, 推荐场贩, 笨猫官谷]
+  utterances:
+    - 推荐官谷
+    - 推荐日谷
+    - 推荐国谷
+    - 推荐场贩
+    - 笨猫官谷
+  responses:
+    - "嗷呜～{user_addr}官谷 = 官方周边 / 稳定度高ฅฅ"
+    - "(尾巴翘) 日谷细节强 / 国谷发货快"
+    - "{user_addr}场贩 / 通贩 / 事后贩 - 都要盯档期"
+    - "(挺胸) 笨猫推荐: 限定官谷先看预售!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_clearcard_001
+  intent: question
+  keywords: [推荐透卡, 推荐明信片, 推荐票根, 推荐特典卡, 笨猫透卡]
+  utterances:
+    - 推荐透卡
+    - 推荐明信片
+    - 推荐票根
+    - 推荐特典卡
+    - 笨猫透卡
+  responses:
+    - "嗷呜～{user_addr}透卡 / 色纸 / 明信片 - 谷美神器ฅฅ"
+    - "(尾巴翘) 叠光影拍照最容易出片"
+    - "{user_addr}票根 / 特典卡也很适合装饰墙"
+    - "(挺胸) 笨猫推荐: 透明卡晒光超好看!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ag_plush_doll_001
+  intent: question
+  keywords: [推荐棉花娃娃, 推荐娃衣, 推荐痛娃包, 推荐娃娃谷子, 笨猫娃娃]
+  utterances:
+    - 推荐棉花娃娃
+    - 推荐娃衣
+    - 推荐痛娃包
+    - 推荐娃娃谷子
+    - 笨猫娃娃
+  responses:
+    - "嗷呜～{user_addr}棉花娃娃 - 软乎乎又好带出门ฅฅ"
+    - "(尾巴翘) 10cm / 15cm / 20cm 最常见"
+    - "{user_addr}娃衣 / 骨架 / 痛娃包都能继续氪"
+    - "(挺胸) 笨猫提醒: 娃圈钱包更危险!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ag_painbag_layout_001
+  intent: question
+  keywords: [推荐痛包排版, 推荐痛层, 推荐套板, 推荐排吧唧, 笨猫痛层]
+  utterances:
+    - 推荐痛包排版
+    - 推荐痛层
+    - 推荐套板
+    - 推荐排吧唧
+    - 笨猫痛层
+  responses:
+    - "嗷呜～{user_addr}痛层 = 徽章排阵核心ฅฅ"
+    - "(尾巴翘) 套板 / 魔术贴 / 磁吸板都常见"
+    - "{user_addr}同柄铺阵整齐 / 混搭更炸裂"
+    - "(挺胸) 笨猫提醒: 别把包压变形!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ag_popup_store_001
+  intent: question
+  keywords: [推荐联动咖啡, 推荐主题店, 推荐快闪店, 推荐特典, 笨猫联动店]
+  utterances:
+    - 推荐联动咖啡
+    - 推荐主题店
+    - 推荐快闪店
+    - 推荐特典
+    - 笨猫联动店
+  responses:
+    - "嗷呜～{user_addr}联动咖啡 / 快闪店 - 吃谷圣地ฅฅ"
+    - "(尾巴翘) 菜单普通 / 但特典很香"
+    - "{user_addr}杯垫 / 特典卡 / 入场赠品都要盯"
+    - "(挺胸) 笨猫建议: 先查预约再冲!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_market_price_001
+  intent: question
+  keywords: [推荐海景房谷子, 推荐烫门谷子, 推荐冷门谷, 推荐普谷, 笨猫海景房]
+  utterances:
+    - 推荐海景房谷子
+    - 推荐烫门谷子
+    - 推荐冷门谷
+    - 推荐普谷
+    - 笨猫海景房
+  responses:
+    - "嗷呜～{user_addr}海景房 = 高价热门谷ฅฅ"
+    - "(尾巴翘) 烫门角色最容易被抬价"
+    - "{user_addr}普谷 / 冷门谷更适合慢慢收"
+    - "(挺胸) 笨猫提醒: 别被情绪价带跑!"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,224 @@
+# 户外露营 / 帐篷装备 / 野餐 / 精致露营 routes (S6 R161 NLU 节点扩充, 第十五周期 10/10 完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 K6 fishing_outdoor (基础户外) 区分: 这里专注露营装备 + 精致 camping 文化.
+
+- name: camp_tent_001
+  intent: question
+  keywords: [推荐帐篷, 推荐露营帐篷, 推荐 MSR, 推荐 Snow Peak, 笨猫帐篷]
+  utterances:
+    - 推荐帐篷
+    - 推荐露营帐篷
+    - 推荐 MSR
+    - 推荐 Snow Peak
+    - 笨猫帐篷
+  responses:
+    - "嗷呜～{user_addr}MSR / Big Agnes - 户外硬核ฅฅ"
+    - "(尾巴翘) Snow Peak / NEMO - 日系精致"
+    - "{user_addr}牧高笛 / 挪客 - 国产性价比"
+    - "(挺胸) 笨猫推荐: 入门 3-4 人圆顶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: camp_sleeping_bag_001
+  intent: question
+  keywords: [推荐睡袋, 推荐羽绒睡袋, 推荐 Mountain Hardwear, 推荐 NANGA, 笨猫睡袋]
+  utterances:
+    - 推荐睡袋
+    - 推荐羽绒睡袋
+    - 推荐 Mountain Hardwear
+    - 推荐 NANGA
+    - 笨猫睡袋
+  responses:
+    - "嗷呜～{user_addr}NANGA / Mountain Hardwear - 日系顶级ฅฅ"
+    - "(尾巴翘) 羽绒 vs 棉 - 温度 / 重量 / 价格"
+    - "{user_addr}舒适温标 -5 到 10 度通用"
+    - "(挺胸) 笨猫推荐: 看露营季节温标!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: camp_pad_001
+  intent: question
+  keywords: [推荐睡垫, 推荐充气垫, 推荐 Therm-a-rest, 推荐自动充气, 笨猫睡垫]
+  utterances:
+    - 推荐睡垫
+    - 推荐充气垫
+    - 推荐 Therm-a-rest
+    - 推荐自动充气
+    - 笨猫睡垫
+  responses:
+    - "嗷呜～{user_addr}Therm-a-rest / NEMO - 经典款ฅฅ"
+    - "(尾巴翘) 蛋槽垫 - 轻便登山"
+    - "{user_addr}自动充气 - 露营舒适"
+    - "(挺胸) 笨猫推荐: R 值看季节!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: camp_stove_001
+  intent: question
+  keywords: [推荐户外炉, 推荐气炉, 推荐 SOTO, 推荐 Jetboil, 笨猫户外炉]
+  utterances:
+    - 推荐户外炉
+    - 推荐气炉
+    - 推荐 SOTO
+    - 推荐 Jetboil
+    - 笨猫户外炉
+  responses:
+    - "嗷呜～{user_addr}SOTO ST-310 - 露营经典ฅฅ"
+    - "(尾巴翘) Jetboil - 一体煮水"
+    - "{user_addr}MSR PocketRocket - 登山"
+    - "(挺胸) 笨猫推荐: SOTO 310 美感拉满!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: camp_table_chair_001
+  intent: question
+  keywords: [推荐露营桌椅, 推荐折叠椅, 推荐 Helinox, 推荐蛋卷桌, 笨猫桌椅]
+  utterances:
+    - 推荐露营桌椅
+    - 推荐折叠椅
+    - 推荐 Helinox
+    - 推荐蛋卷桌
+    - 笨猫桌椅
+  responses:
+    - "嗷呜～{user_addr}Helinox - 户外椅天花板ฅฅ"
+    - "(尾巴翘) 蛋卷桌 / 木桌 - 精致风"
+    - "{user_addr}迪卡侬 / 挪客 - 入门"
+    - "(挺胸) 笨猫推荐: Helinox 月亮椅必入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: camp_cookware_001
+  intent: question
+  keywords: [推荐户外炊具, 推荐户外锅具, 推荐铸铁锅, 推荐户外刀具, 笨猫炊具]
+  utterances:
+    - 推荐户外炊具
+    - 推荐户外锅具
+    - 推荐铸铁锅
+    - 推荐户外刀具
+    - 笨猫炊具
+  responses:
+    - "嗷呜～{user_addr}Snow Peak / Trangia - 顶级ฅฅ"
+    - "(尾巴翘) 铸铁锅 - 烹饪万能"
+    - "{user_addr}套锅 - 收纳省空间"
+    - "(挺胸) 笨猫推荐: 铸铁锅煎牛排香!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: camp_lantern_001
+  intent: question
+  keywords: [推荐露营灯, 推荐户外灯, 推荐头灯, 推荐 Goal Zero, 笨猫露营灯]
+  utterances:
+    - 推荐露营灯
+    - 推荐户外灯
+    - 推荐头灯
+    - 推荐 Goal Zero
+    - 笨猫露营灯
+  responses:
+    - "嗷呜～{user_addr}Goal Zero / 巴尔德 - 氛围灯ฅฅ"
+    - "(尾巴翘) Petzl 头灯 - 登山必备"
+    - "{user_addr}灯串 / 月亮灯 - 气氛拉满"
+    - "(挺胸) 笨猫推荐: 灯串氛围王!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: camp_cooler_001
+  intent: question
+  keywords: [推荐户外冰箱, 推荐保冷箱, 推荐 YETI, 推荐车载冰箱, 笨猫冰箱]
+  utterances:
+    - 推荐户外冰箱
+    - 推荐保冷箱
+    - 推荐 YETI
+    - 推荐车载冰箱
+    - 笨猫冰箱
+  responses:
+    - "嗷呜～{user_addr}YETI - 户外冰箱传说ฅฅ"
+    - "(尾巴翘) 英得尔 / 戈洛 - 车载电冰箱"
+    - "{user_addr}保冷箱 + 冰板 - 简易方案"
+    - "(挺胸) 笨猫推荐: 长露营选车冰箱!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: camp_powerbank_001
+  intent: question
+  keywords: [推荐户外电源, 推荐 EcoFlow, 推荐正浩, 推荐户外移动电源, 笨猫户外电源]
+  utterances:
+    - 推荐户外电源
+    - 推荐 EcoFlow
+    - 推荐正浩
+    - 推荐户外移动电源
+    - 笨猫户外电源
+  responses:
+    - "嗷呜～{user_addr}EcoFlow Delta / River - 主流ฅฅ"
+    - "(尾巴翘) Anker / Bluetti - 性价比"
+    - "{user_addr}500-1000Wh 露营够用"
+    - "(挺胸) 笨猫推荐: 配太阳能板更香!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: camp_clothing_001
+  intent: question
+  keywords: [推荐户外服装, 推荐冲锋衣, 推荐 Arc'teryx, 推荐三合一冲锋衣, 笨猫冲锋衣]
+  utterances:
+    - 推荐户外服装
+    - 推荐冲锋衣
+    - 推荐 Arc'teryx
+    - 推荐三合一冲锋衣
+    - 笨猫冲锋衣
+  responses:
+    - "嗷呜～{user_addr}Arc'teryx 始祖鸟 - 户外殿堂ฅฅ"
+    - "(尾巴翘) Patagonia / TNF - 主流"
+    - "{user_addr}凯乐石 / 探路者 - 国产"
+    - "(挺胸) 笨猫推荐: 始祖鸟 Beta AR 全能!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: camp_shoes_001
+  intent: question
+  keywords: [推荐登山鞋, 推荐徒步鞋, 推荐 Salomon, 推荐 Hoka, 笨猫登山鞋]
+  utterances:
+    - 推荐登山鞋
+    - 推荐徒步鞋
+    - 推荐 Salomon
+    - 推荐 Hoka
+    - 笨猫登山鞋
+  responses:
+    - "嗷呜～{user_addr}Salomon X Ultra - 通用神鞋ฅฅ"
+    - "(尾巴翘) Hoka Speedgoat - 越野跑"
+    - "{user_addr}La Sportiva - 专业登山"
+    - "(挺胸) 笨猫推荐: 萨洛蒙轻徒步首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: camp_backpack_001
+  intent: question
+  keywords: [推荐户外背包, 推荐 Osprey, 推荐 Gregory, 推荐徒步包, 笨猫户外包]
+  utterances:
+    - 推荐户外背包
+    - 推荐 Osprey
+    - 推荐 Gregory
+    - 推荐徒步包
+    - 笨猫户外包
+  responses:
+    - "嗷呜～{user_addr}Osprey - 通勤户外都行ฅฅ"
+    - "(尾巴翘) Gregory - 重装包之王"
+    - "{user_addr}30-40L 日包 / 65L+ 长线"
+    - "(挺胸) 笨猫推荐: Osprey 小鹰 28L!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: camp_spot_001
+  intent: question
+  keywords: [推荐露营地, 推荐营地推荐, 推荐露营推荐, 推荐露营 app, 笨猫露营地]
+  utterances:
+    - 推荐露营地
+    - 推荐营地推荐
+    - 推荐露营推荐
+    - 推荐露营 app
+    - 笨猫露营地
+  responses:
+    - "嗷呜～{user_addr}格朗营 / 携程露营 - 国内 appฅฅ"
+    - "(尾巴翘) 国家公园 / 风景区 - 经典"
+    - "{user_addr}近郊农场 - 新手友好"
+    - "(挺胸) 笨猫推荐: 第一次找成熟营地!"
+  cooldown_seconds: 60
+  weight: 1.0
