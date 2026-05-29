@@ -1,0 +1,206 @@
+# 微胖穿搭 routes (S6 R616 NLU 节点扩充, 第六十一周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sz_slim_001
+  intent: question
+  keywords: [推荐显瘦穿搭, 推荐显瘦技巧, 推荐微胖穿搭, 推荐显瘦, 笨猫显瘦穿搭]
+  utterances:
+    - 推荐显瘦穿搭
+    - 推荐显瘦技巧
+    - 推荐微胖穿搭
+    - 推荐显瘦
+    - 笨猫显瘦穿搭
+  responses:
+    - "嗷呜～{user_addr}深色 / 竖条纹 / 收腰ฅฅ"
+    - "(尾巴翘) 上紧下松 or 上松下紧"
+    - "{user_addr}露最瘦的部位 (手腕/脚踝/锁骨)"
+    - "(挺胸) 笨猫推荐: 别穿太紧太松!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_vneck_001
+  intent: question
+  keywords: [推荐 V 领, 推荐 V 领领口, 推荐 V 领上衣, 推荐露锁骨, 笨猫 V 领]
+  utterances:
+    - "推荐 V 领"
+    - "推荐 V 领领口"
+    - "推荐 V 领上衣"
+    - 推荐露锁骨
+    - "笨猫 V 领"
+  responses:
+    - "嗷呜～{user_addr}V 领 - 拉长脖子显瘦ฅฅ"
+    - "(尾巴翘) 深 V / 小 V / 方领也行"
+    - "{user_addr}露锁骨 - 视觉减龄"
+    - "(挺胸) 笨猫推荐: 圆领圆脸慎选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_highwaist_001
+  intent: question
+  keywords: [推荐高腰半身裙, 推荐高腰裙, 推荐 A 字裙, 推荐半身裙, 笨猫高腰裙]
+  utterances:
+    - 推荐高腰半身裙
+    - 推荐高腰裙
+    - "推荐 A 字裙"
+    - 推荐半身裙
+    - 笨猫高腰裙
+  responses:
+    - "嗷呜～{user_addr}高腰 A 字裙 - 提高腰线ฅฅ"
+    - "(尾巴翘) 半身裙 / 百褶 / 牛仔裙"
+    - "{user_addr}盖过胯部最宽点"
+    - "(挺胸) 笨猫推荐: 高腰是显瘦神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_widepants_001
+  intent: question
+  keywords: [推荐阔腿裤, 推荐直筒裤, 推荐西装裤, 推荐宽松裤, 笨猫阔腿裤]
+  utterances:
+    - 推荐阔腿裤
+    - 推荐直筒裤
+    - 推荐西装裤
+    - 推荐宽松裤
+    - 笨猫阔腿裤
+  responses:
+    - "嗷呜～{user_addr}阔腿裤 - 遮腿神器ฅฅ"
+    - "(尾巴翘) 直筒 / 微喇 / 垂感面料"
+    - "{user_addr}高腰阔腿 - 显高显瘦"
+    - "(挺胸) 笨猫推荐: 西装阔腿裤永远不踩雷!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_tuckin_001
+  intent: question
+  keywords: [推荐衬衫前塞, 推荐 French tuck, 推荐塞衣角, 推荐前塞法, 笨猫前塞]
+  utterances:
+    - 推荐衬衫前塞
+    - "推荐 French tuck"
+    - 推荐塞衣角
+    - 推荐前塞法
+    - 笨猫前塞
+  responses:
+    - "嗷呜～{user_addr}French tuck - 只塞前面ฅฅ"
+    - "(尾巴翘) 露腰线 / 不露肉"
+    - "{user_addr}比例瞬间拉长"
+    - "(挺胸) 笨猫推荐: 微胖救星塞前面!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_plusbrand_001
+  intent: question
+  keywords: [推荐大码品牌, 推荐 Universal Standard, 推荐 Eloquii, 推荐大码女装, 笨猫大码品牌]
+  utterances:
+    - 推荐大码品牌
+    - "推荐 Universal Standard"
+    - "推荐 Eloquii"
+    - 推荐大码女装
+    - 笨猫大码品牌
+  responses:
+    - "嗷呜～{user_addr}Universal Standard / Eloquiiฅฅ"
+    - "(尾巴翘) Torrid / ASOS Curve / 优衣库"
+    - "{user_addr}国内: 大羽 / 红制作"
+    - "(挺胸) 笨猫推荐: 优衣库 +XL 性价比高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_plusdress_001
+  intent: question
+  keywords: [推荐大码连衣裙, 推荐大码裙子, 推荐微胖连衣裙, 推荐宽松连衣裙, 笨猫大码连衣裙]
+  utterances:
+    - 推荐大码连衣裙
+    - 推荐大码裙子
+    - 推荐微胖连衣裙
+    - 推荐宽松连衣裙
+    - 笨猫大码连衣裙
+  responses:
+    - "嗷呜～{user_addr}A 字 / 收腰 / 鱼尾ฅฅ"
+    - "(尾巴翘) 衬衫裙 / 法式茶歇裙"
+    - "{user_addr}避开直筒包臀"
+    - "(挺胸) 笨猫推荐: 收腰 A 字最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_plusbra_001
+  intent: question
+  keywords: [推荐大码内衣, 推荐大胸内衣, 推荐大码文胸, 推荐大杯文胸, 笨猫大码内衣]
+  utterances:
+    - 推荐大码内衣
+    - 推荐大胸内衣
+    - 推荐大码文胸
+    - 推荐大杯文胸
+    - 笨猫大码内衣
+  responses:
+    - "嗷呜～{user_addr}华歌尔 / 黛安芬 / 安莉芳ฅฅ"
+    - "(尾巴翘) 海外: Curvy Kate / Elomi"
+    - "{user_addr}全罩杯 + 加宽肩带"
+    - "(挺胸) 笨猫推荐: 必须去店里量尺寸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_pluswedding_001
+  intent: question
+  keywords: [推荐大码婚纱, 推荐微胖婚纱, 推荐大码新娘, 推荐大码礼服, 笨猫大码婚纱]
+  utterances:
+    - 推荐大码婚纱
+    - 推荐微胖婚纱
+    - 推荐大码新娘
+    - 推荐大码礼服
+    - 笨猫大码婚纱
+  responses:
+    - "嗷呜～{user_addr}A 字 / 公主裙 / 鱼尾ฅฅ"
+    - "(尾巴翘) V 领 / 一字肩 / 蕾丝长袖"
+    - "{user_addr}高腰线 - 显高遮肚"
+    - "(挺胸) 笨猫推荐: 找定制比成衣靠谱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_plusmen_001
+  intent: question
+  keywords: [推荐大码男装, 推荐胖男穿搭, 推荐大码男士, 推荐微胖男装, 笨猫大码男装]
+  utterances:
+    - 推荐大码男装
+    - 推荐胖男穿搭
+    - 推荐大码男士
+    - 推荐微胖男装
+    - 笨猫大码男装
+  responses:
+    - "嗷呜～{user_addr}优衣库 / GU / Decathlonฅฅ"
+    - "(尾巴翘) 海外: Big & Tall / ASOS Plus"
+    - "{user_addr}深色 / 竖条纹 / 不要紧身"
+    - "(挺胸) 笨猫推荐: V 领针织 + 直筒裤!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_plussneaker_001
+  intent: question
+  keywords: [推荐大码运动鞋, 推荐宽脚运动鞋, 推荐大码球鞋, 推荐宽楦运动鞋, 笨猫大码运动鞋]
+  utterances:
+    - 推荐大码运动鞋
+    - 推荐宽脚运动鞋
+    - 推荐大码球鞋
+    - 推荐宽楦运动鞋
+    - 笨猫大码运动鞋
+  responses:
+    - "嗷呜～{user_addr}New Balance 宽楦 / Asicsฅฅ"
+    - "(尾巴翘) Nike +宽版 / Adidas Ultraboost"
+    - "{user_addr}避免帆布鞋 - 没支撑"
+    - "(挺胸) 笨猫推荐: NB 990 宽楦无敌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sz_tallslim_001
+  intent: question
+  keywords: [推荐显高显瘦穿搭, 推荐显高穿搭, 推荐拉高比例, 推荐显高显瘦, 笨猫显高显瘦]
+  utterances:
+    - 推荐显高显瘦穿搭
+    - 推荐显高穿搭
+    - 推荐拉高比例
+    - 推荐显高显瘦
+    - 笨猫显高显瘦
+  responses:
+    - "嗷呜～{user_addr}高腰 + 同色系一身ฅฅ"
+    - "(尾巴翘) 尖头鞋 / 露脚背 / 长项链"
+    - "{user_addr}V 领 + 竖条纹 + 阔腿裤"
+    - "(挺胸) 笨猫推荐: 三七分腰线最稳!"
+  cooldown_seconds: 60
+  weight: 1.0

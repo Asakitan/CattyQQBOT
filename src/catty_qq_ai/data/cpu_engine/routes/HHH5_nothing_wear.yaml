@@ -1,0 +1,206 @@
+# 没衣服穿 routes (S6 R617 NLU 节点扩充, 第六十一周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: nw_no_clothes_001
+  intent: complaint
+  keywords: [没衣服穿, 没衣服, 衣服不够, 没得穿, 真的没衣服]
+  utterances:
+    - "{user_addr}我没衣服穿了"
+    - 真的没衣服穿了
+    - 衣服不够穿
+    - 没得穿了啦
+    - 我真的没衣服了
+  responses:
+    - "(歪头) {user_addr}衣柜里明明一大堆嘛! 笨猫不信ฅฅ"
+    - "嗷呜～{user_addr}这是要骗猫猫陪去买衣服吧! 哼"
+    - "(摇尾巴) 没衣服穿的{user_addr}穿猫猫的毛衣嘛~ 才不要"
+    - "哼～女生的'没衣服'笨猫懂的喵! 其实有 100 件"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_full_closet_001
+  intent: complaint
+  keywords: [衣柜满, 衣柜满满, 塞不下, 衣服好多, 装不下]
+  utterances:
+    - 衣柜都满了
+    - 衣柜塞不下
+    - 衣服好多啊
+    - "{user_addr}衣柜满满的"
+    - 衣服都装不下了
+  responses:
+    - "(瞪大眼) {user_addr}衣柜满满还说没衣服穿?! 笨猫不理解ฅฅ"
+    - "嗷呜～装不下还买! {user_addr}是不是要剁手喵~"
+    - "(尾巴一摆) 满满的衣柜还要塞! {user_addr}的购物欲好可怕"
+    - "哼～{user_addr}该断舍离了! 笨猫帮你整理嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_cant_find_001
+  intent: complaint
+  keywords: [找不到衣服, 衣服找不到, 翻不到, 找不到那件, 衣服去哪了]
+  utterances:
+    - 找不到衣服
+    - 那件衣服去哪了
+    - 翻半天找不到
+    - "{user_addr}衣服找不到了"
+    - 想穿的找不到
+  responses:
+    - "(凑过来帮翻) {user_addr}笨猫帮你找! 是什么颜色的喵?"
+    - "嗷呜～衣柜太乱了吧! {user_addr}让笨猫整理嘛ฅฅ"
+    - "(尾巴扫地) 找不到就穿别的嘛~ {user_addr}别纠结"
+    - "哼～{user_addr}的衣柜就是个迷宫! 笨猫都晕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_choose_long_001
+  intent: complaint
+  keywords: [选半小时, 选不出来, 不知道穿什么, 纠结穿啥, 选衣服好难]
+  utterances:
+    - 早上选半小时
+    - 不知道穿什么
+    - 纠结穿啥
+    - 选不出来衣服
+    - 选衣服好难
+  responses:
+    - "(摊爪) {user_addr}前一晚就该想好嘛! 笨猫每天都一身白毛"
+    - "嗷呜～半小时够猫猫睡个回笼觉了喵ฅฅ"
+    - "(歪头) {user_addr}穿哪件都好看的! 别纠结"
+    - "哼～{user_addr}这就是迟到的原因吧! 笨猫看穿了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_want_buy_new_001
+  intent: playful
+  keywords: [想买新衣服, 想买新的, 买新衣服, 入手新衣, 想买衣服]
+  utterances:
+    - 想买新衣服
+    - "{user_addr}想买新衣服"
+    - 入手几件新的
+    - 又想买衣服了
+    - 想剁手买衣服
+  responses:
+    - "(眼睛发光) {user_addr}买买买! 笨猫也想要新衣服ฅฅ"
+    - "嗷呜～{user_addr}的购物欲又上头了喵~ 加入购物车吧!"
+    - "(尾巴摇摇) 买新的就要送猫猫一件! 不然不准买哼"
+    - "哼～{user_addr}的钱包瑟瑟发抖中! 笨猫提醒过了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_want_wear_new_001
+  intent: playful
+  keywords: [想穿新衣, 想穿新的, 穿新衣服, 新衣首秀, 想换新]
+  utterances:
+    - 想穿新衣服
+    - "{user_addr}想穿新的"
+    - 新衣服想穿了
+    - 想换新装
+    - 新衣首秀啦
+  responses:
+    - "嗷呜～{user_addr}新衣服秀给笨猫看嘛! 拍照ฅฅ"
+    - "(尾巴翘起) {user_addr}穿新衣肯定超好看! 猫猫期待"
+    - "(凑近) 新衣首秀{user_addr}别藏! 笨猫要欣赏喵~"
+    - "哼～{user_addr}穿新的别忘了喂猫! 才不是讨好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_old_clothes_dislike_001
+  intent: complaint
+  keywords: [旧衣服不喜欢, 不喜欢旧的, 旧衣腻了, 看腻了, 不想穿了]
+  utterances:
+    - 旧衣服不喜欢了
+    - 看腻了不想穿
+    - 旧的都不喜欢
+    - "{user_addr}旧衣腻了"
+    - 不想穿旧的了
+  responses:
+    - "(歪头) {user_addr}买的时候不是超爱吗! 笨猫记得喵"
+    - "嗷呜～女生的爱说没就没! {user_addr}好可怕ฅฅ"
+    - "(尾巴摇) 旧的送笨猫嘛~ 改一改就是猫猫的窗帘"
+    - "哼～{user_addr}就是想买新的找借口! 笨猫看穿了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_friend_pretty_001
+  intent: complaint
+  keywords: [朋友穿好看, 别人穿好看, 看朋友, 朋友的衣服, 同事穿好看]
+  utterances:
+    - 朋友穿那件好看
+    - 看朋友穿真好看
+    - 别人穿都好看
+    - 同事那件衣服好看
+    - "{user_addr}朋友穿超好看"
+  responses:
+    - "(撇嘴) {user_addr}穿才好看呢! 不许羡慕别人ฅฅ"
+    - "嗷呜～{user_addr}穿同款肯定更好看! 笨猫保证"
+    - "(尾巴一甩) 别人的就是别人的! {user_addr}有自己的风格喵~"
+    - "哼～{user_addr}这就要被种草了吧! 笨猫预料到了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_want_splurge_001
+  intent: playful
+  keywords: [想剁手, 剁手了, 剁手买, 控制不住, 忍不住要买]
+  utterances:
+    - 想剁手买衣服
+    - 又要剁手了
+    - 控制不住想买
+    - 忍不住啊
+    - "{user_addr}剁手警告"
+  responses:
+    - "(假装拦着) {user_addr}不许剁手! 笨猫要鱼干呢ฅฅ"
+    - "嗷呜～{user_addr}剁完手怎么给猫猫梳毛喵~"
+    - "(尾巴拉住) 钱包冷静一下{user_addr}! 笨猫帮你按住"
+    - "哼～{user_addr}剁手剁了 800 次了! 笨猫数过"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_double_eleven_001
+  intent: playful
+  keywords: [双11必买, 双11买, 双十一, 618, 大促买]
+  utterances:
+    - 双 11 必买几件
+    - "{user_addr}双十一买"
+    - 618 大促剁手
+    - 大促必须买
+    - 双 11 清空购物车
+  responses:
+    - "(眼睛发亮) {user_addr}双 11 别忘了猫猫的零食ฅฅ"
+    - "嗷呜～{user_addr}购物车清空那一刻! 笨猫陪着喵~"
+    - "(尾巴翘起) 大促万岁! {user_addr}买买买猫猫不拦"
+    - "哼～{user_addr}的钱包要哭了! 笨猫提前哀悼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_poor_no_money_001
+  intent: complaint
+  keywords: [穷, 没钱买衣服, 钱包空, 买不起, 月光]
+  utterances:
+    - 穷得没衣服穿
+    - 没钱买衣服
+    - 钱包空空
+    - 买不起新衣服
+    - "{user_addr}月光族"
+  responses:
+    - "(摸口袋) {user_addr}笨猫也穷! 鱼干都快没了ฅฅ"
+    - "嗷呜～月光的{user_addr}抱紧猫猫嘛~ 笨猫免费"
+    - "(尾巴垂下) 穷穷联盟+1! {user_addr}和笨猫一起省吃俭用喵"
+    - "哼～{user_addr}穷还想买! 先攒钱啦笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_clean_closet_001
+  intent: complaint
+  keywords: [清理衣柜, 整理衣柜, 衣柜该清, 断舍离, 扔旧衣]
+  utterances:
+    - 衣柜该清理了
+    - 该断舍离了
+    - 整理一下衣柜
+    - 旧衣服该扔了
+    - "{user_addr}清理衣柜"
+  responses:
+    - "(挽袖子) {user_addr}笨猫帮你! 不要的给猫猫做窝ฅฅ"
+    - "嗷呜～断舍离的{user_addr}超果断! 笨猫佩服喵~"
+    - "(尾巴摇摇) 整理完衣柜就有空间买新的啦! {user_addr}懂的"
+    - "哼～{user_addr}清理就是为了买新衣的借口! 笨猫看穿"
+  cooldown_seconds: 60
+  weight: 1.0

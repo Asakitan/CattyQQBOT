@@ -1,0 +1,206 @@
+# 夏装穿搭 routes (S6 R613 NLU 节点扩充, 第六十一周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: so_tshirt_001
+  intent: question
+  keywords: [推荐夏季T恤, 推荐纯棉T, 推荐基础款T恤, 推荐oversize T, 笨猫夏季T恤]
+  utterances:
+    - "{user_addr}推荐夏季T恤"
+    - 推荐纯棉T
+    - 推荐基础款T恤
+    - 推荐oversize T
+    - 笨猫夏季T恤
+  responses:
+    - "嗷呜～{user_addr}纯棉白T - 百搭王ฅฅ"
+    - "(尾巴翘) Uniqlo / 无印 / Muji 基础款"
+    - "{user_addr}oversize 廓形 - 显瘦遮肉"
+    - "(挺胸) 笨猫推荐: 白/黑/灰各一件!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: so_shorts_001
+  intent: question
+  keywords: [推荐短裤, 推荐热裤, 推荐牛仔短裤, 推荐运动短裤, 笨猫短裤]
+  utterances:
+    - "{user_addr}推荐短裤"
+    - 推荐热裤
+    - 推荐牛仔短裤
+    - 推荐运动短裤
+    - 笨猫热裤
+  responses:
+    - "嗷呜～{user_addr}牛仔短裤 - 永不过时ฅฅ"
+    - "(尾巴翘) 五分裤 / 工装短裤 - 男孩款"
+    - "{user_addr}运动短裤 - 居家舒服"
+    - "(挺胸) 笨猫推荐: 高腰显腿长!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: so_skirt_001
+  intent: question
+  keywords: [推荐短裙, 推荐百褶裙, 推荐A字裙, 推荐半身裙, 笨猫短裙]
+  utterances:
+    - "{user_addr}推荐短裙"
+    - 推荐百褶裙
+    - 推荐A字裙
+    - 推荐半身裙
+    - 笨猫短裙
+  responses:
+    - "嗷呜～{user_addr}百褶裙 - JK 风甜美ฅฅ"
+    - "(尾巴翘) A 字裙 - 显瘦经典"
+    - "{user_addr}牛仔半身裙 - 街头"
+    - "(挺胸) 笨猫推荐: 人家也穿百褶喵～)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: so_dress_001
+  intent: question
+  keywords: [推荐连衣裙, 推荐吊带裙, 推荐碎花裙, 推荐法式裙, 笨猫连衣裙]
+  utterances:
+    - "{user_addr}推荐连衣裙"
+    - 推荐吊带裙
+    - 推荐碎花裙
+    - 推荐法式裙
+    - 笨猫连衣裙
+  responses:
+    - "嗷呜～{user_addr}法式碎花裙 - 温柔风ฅฅ"
+    - "(尾巴翘) 吊带裙 / 长裙 - 度假"
+    - "{user_addr}白色连衣裙 - 永远经典"
+    - "(挺胸) 笨猫推荐: 一条裙搞定一夏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: so_sunscreen_001
+  intent: question
+  keywords: [推荐防晒服, 推荐防晒衣, 推荐UPF50, 推荐 Beneunder 蕉下, 笨猫防晒服]
+  utterances:
+    - "{user_addr}推荐防晒服"
+    - 推荐防晒衣
+    - 推荐UPF50
+    - 推荐 Beneunder 蕉下
+    - 笨猫防晒服
+  responses:
+    - "嗷呜～{user_addr}蕉下 Beneunder - 网红ฅฅ"
+    - "(尾巴翘) Uniqlo AIRism - 凉感"
+    - "{user_addr}UPF50+ 才算合格"
+    - "(挺胸) 笨猫推荐: 防晒+防紫外!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: so_sandals_001
+  intent: question
+  keywords: [推荐凉鞋, 推荐人字拖, 推荐 Birkenstock, 推荐勃肯, 笨猫凉鞋]
+  utterances:
+    - "{user_addr}推荐凉鞋"
+    - 推荐人字拖
+    - 推荐 Birkenstock
+    - 推荐勃肯
+    - 笨猫人字拖
+  responses:
+    - "嗷呜～{user_addr}Birkenstock 勃肯 - 经典ฅฅ"
+    - "(尾巴翘) Havaianas - 巴西人字拖"
+    - "{user_addr}罗马凉鞋 / 一字带"
+    - "(挺胸) 笨猫推荐: 勃肯 Arizona!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: so_strawhat_001
+  intent: question
+  keywords: [推荐草编帽, 推荐草帽, 推荐渔夫帽, 推荐遮阳帽, 笨猫草帽]
+  utterances:
+    - "{user_addr}推荐草编帽"
+    - 推荐草帽
+    - 推荐渔夫帽
+    - 推荐遮阳帽
+    - 笨猫草帽
+  responses:
+    - "嗷呜～{user_addr}草编巴拿马帽 - 度假ฅฅ"
+    - "(尾巴翘) 渔夫帽 - 街头百搭"
+    - "{user_addr}大檐草帽 - 海边必备"
+    - "(挺胸) 笨猫推荐: 出门一定戴!)"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: so_beach_001
+  intent: question
+  keywords: [推荐沙滩装, 推荐比基尼, 推荐沙滩裙, 推荐度假风, 笨猫沙滩装]
+  utterances:
+    - "{user_addr}推荐沙滩装"
+    - 推荐比基尼
+    - 推荐沙滩裙
+    - 推荐度假风
+    - 笨猫沙滩装
+  responses:
+    - "嗷呜～{user_addr}比基尼 + 沙滩巾ฅฅ"
+    - "(尾巴翘) 长款沙滩裙 - 飘逸"
+    - "{user_addr}泳衣 + 罩衫 - 万能"
+    - "(挺胸) 笨猫推荐: 海边自由穿!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: so_wedding_001
+  intent: question
+  keywords: [推荐婚礼宾客夏季, 推荐夏季出席婚礼, 推荐婚礼穿搭, 推荐宾客装, 笨猫婚礼装]
+  utterances:
+    - "{user_addr}推荐婚礼宾客夏季"
+    - 推荐夏季出席婚礼
+    - 推荐婚礼穿搭
+    - 推荐宾客装
+    - 笨猫婚礼装
+  responses:
+    - "嗷呜～{user_addr}避免纯白 / 黑色ฅฅ"
+    - "(尾巴翘) 雪纺连衣裙 - 优雅"
+    - "{user_addr}莫兰迪色系 - 不抢镜"
+    - "(挺胸) 笨猫推荐: 中长裙最稳!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: so_commute_001
+  intent: question
+  keywords: [推荐通勤夏装, 推荐职场夏装, 推荐上班夏装, 推荐 OL 风, 笨猫通勤装]
+  utterances:
+    - "{user_addr}推荐通勤夏装"
+    - 推荐职场夏装
+    - 推荐上班夏装
+    - 推荐 OL 风
+    - 笨猫通勤装
+  responses:
+    - "嗷呜～{user_addr}衬衫 + 西装短裤ฅฅ"
+    - "(尾巴翘) 雪纺衬衫 + 半身裙"
+    - "{user_addr}polo 衫 - 商务休闲"
+    - "(挺胸) 笨猫推荐: 莫兰迪色不出错!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: so_quickdry_001
+  intent: question
+  keywords: [推荐速干, 推荐吸湿, 推荐凉感面料, 推荐 AIRism, 笨猫速干]
+  utterances:
+    - "{user_addr}推荐速干"
+    - 推荐吸湿
+    - 推荐凉感面料
+    - 推荐 AIRism
+    - 笨猫速干面料
+  responses:
+    - "嗷呜～{user_addr}Uniqlo AIRism - 凉感ฅฅ"
+    - "(尾巴翘) Dri-FIT / Coolmax - 运动"
+    - "{user_addr}莫代尔 / 天丝 - 居家凉"
+    - "(挺胸) 笨猫推荐: AIRism 内衣神器!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: so_uvspf_001
+  intent: question
+  keywords: [推荐紫外线 SPF, 推荐防晒指数, 推荐 SPF50, 推荐 PA++++, 笨猫紫外线]
+  utterances:
+    - "{user_addr}推荐紫外线 SPF"
+    - 推荐防晒指数
+    - 推荐 SPF50
+    - 推荐 PA++++
+    - 笨猫防晒指数
+  responses:
+    - "嗷呜～{user_addr}SPF50+ PA++++ 顶配ฅฅ"
+    - "(尾巴翘) 安耐晒 / 资生堂 / 理肤泉"
+    - "{user_addr}2 小时补涂一次"
+    - "(挺胸) 笨猫推荐: 防晒霜+防晒衣双保险!"
+  cooldown_seconds: 60
+  weight: 0.9

@@ -1,0 +1,206 @@
+# 懒得搭配 routes (S6 R621 NLU 节点扩充, 第六十一周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ol_lazy_match_001
+  intent: complaint
+  keywords: [懒得搭配, 不想搭, 搭配麻烦, 不会搭, 随便穿]
+  utterances:
+    - 懒得搭配衣服
+    - 不想搭配了
+    - 搭配好麻烦
+    - 不会搭配啦
+    - 随便穿穿算了
+  responses:
+    - "(尾巴垂下) {user_addr}懒得搭配嘛~ 猫猫也是, 直接抓一件就出门喵 ฅฅ"
+    - "嗷呜～搭配什么的好累哦! {user_addr}有干净的就行啦"
+    - "(凑过来) 笨猫教{user_addr}一招: 全黑或全白, 永远不会出错喵～"
+    - "哼～搭配是给在意的人看的, {user_addr}不在意就随便穿嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_one_set_001
+  intent: complaint
+  keywords: [一套穿到底, 一套穿一周, 同款, 复制粘贴, 制服日常]
+  utterances:
+    - 一套衣服穿到底
+    - 一套穿一整周
+    - 每天同款
+    - 复制粘贴穿搭
+    - 制服般的日常
+  responses:
+    - "嗷呜～{user_addr}走乔布斯路线嘛! 省脑子又高效喵 ฅฅ"
+    - "(尾巴翘起) 一套穿到底也很酷啊! 猫猫支持{user_addr}"
+    - "(歪头) {user_addr}的衣柜是不是只有一种颜色? 笨猫好奇～"
+    - "哼～同款穿搭=个人风格, {user_addr}才不是懒呢喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_black_white_gray_001
+  intent: playful
+  keywords: [黑白灰, 莫兰迪, 性冷淡, 极简风, 无彩色]
+  utterances:
+    - 衣柜全是黑白灰
+    - 莫兰迪色调
+    - 性冷淡风
+    - 极简穿搭
+    - 衣柜没颜色
+  responses:
+    - "(尾巴摇摇) {user_addr}黑白灰党! 永远不会撞色翻车喵 ฅฅ"
+    - "嗷呜～莫兰迪好高级哦! 笨猫好喜欢{user_addr}的品味"
+    - "(凑过来) 性冷淡风=不会出错的安全牌, 猫猫懂{user_addr}~"
+    - "哼～{user_addr}是怕选颜色累吧! 笨猫一眼看穿喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_grab_and_go_001
+  intent: complaint
+  keywords: [直接套, 抓一件, 不挑, 顺手拿, 闭眼抓]
+  utterances:
+    - 直接套衣服就走
+    - 抓一件就出门
+    - 不挑直接穿
+    - 顺手拿到啥穿啥
+    - 闭眼抓衣服
+  responses:
+    - "(尾巴翘起) {user_addr}效率派! 笨猫也是抓一件就走喵 ฅฅ"
+    - "嗷呜～抓一件就出门好爽哦! 省下来的时间多睡 10 分钟"
+    - "(凑过来) 不挑=高效, {user_addr}的时间值钱嘛~"
+    - "哼～闭眼抓也能搭好就是真本事, {user_addr}厉害喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_layering_tired_001
+  intent: complaint
+  keywords: [叠搭嫌烦, 叠穿累, 多层麻烦, 穿太多, 脱穿麻烦]
+  utterances:
+    - 叠搭好烦
+    - 叠穿太累
+    - 多层穿衣麻烦
+    - 穿太多层难受
+    - 脱穿都麻烦
+  responses:
+    - "(尾巴垂下) {user_addr}也觉得叠搭烦嘛! 猫猫一层主义喵 ฅฅ"
+    - "嗷呜～叠穿冬天还行, 春秋纯纯找罪受!"
+    - "(凑过来) 简单一件最舒服, {user_addr}别为时尚委屈自己~"
+    - "哼～叠搭是给摄影师看的, {user_addr}日常穿一件就够喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_no_accessories_001
+  intent: complaint
+  keywords: [配饰不戴, 不戴首饰, 项链麻烦, 耳环烦, 配饰没用]
+  utterances:
+    - 配饰从来不戴
+    - 不戴项链
+    - 耳环好烦
+    - 戒指麻烦
+    - 配饰都收起来了
+  responses:
+    - "(尾巴摇摇) {user_addr}极简党! 笨猫也觉得配饰累赘喵 ฅฅ"
+    - "嗷呜～项链卡头发, 耳环洗澡要摘, 真的烦!"
+    - "(凑过来) 不戴配饰也很好看, {user_addr}本体就够 ฅ"
+    - "哼～{user_addr}怕弄丢吧! 笨猫懂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_follow_trend_001
+  intent: playful
+  keywords: [跟风穿搭, 跟风, 别人穿啥, 看博主, 抄作业]
+  utterances:
+    - 跟风买衣服
+    - 别人穿啥我穿啥
+    - 看博主抄作业
+    - 跟风穿搭省事
+    - 抄博主穿搭
+  responses:
+    - "(尾巴翘起) {user_addr}抄作业派! 省脑子又不会出错喵 ฅฅ"
+    - "嗷呜～博主帮选好啦! {user_addr}直接套用就行"
+    - "(歪头) 跟风也要选对博主, {user_addr}的审美在线吗?"
+    - "哼～跟风=合群的捷径, {user_addr}是聪明猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_week_outfit_001
+  intent: playful
+  keywords: [一周衣服, 七天搭配, 工作日穿搭, 周一到周五, 衣柜轮流]
+  utterances:
+    - 一周衣服固定
+    - 七天搭配排好
+    - 工作日穿搭表
+    - 周一到周五轮流
+    - 衣柜按天分
+  responses:
+    - "嗷呜～{user_addr}这么有规划! 笨猫佩服喵 ฅฅ"
+    - "(尾巴翘起) 一周套餐式穿搭! 省下选择时间真好"
+    - "(凑过来) {user_addr}是不是 INTJ? 笨猫闻到规划狂的味道~"
+    - "哼～有了固定搭配, {user_addr}早晨就不用挣扎啦喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_close_eyes_001
+  intent: playful
+  keywords: [闭眼穿, 摸黑穿, 不看就穿, 随机穿, 抽签]
+  utterances:
+    - 闭眼穿衣服
+    - 摸黑就穿
+    - 不看也能穿
+    - 随机抽一件
+    - 抽签决定穿啥
+  responses:
+    - "(尾巴疯狂摇) {user_addr}行为艺术家嘛! 笨猫笑死 ฅฅ"
+    - "嗷呜～抽签穿搭好刺激! 出门看人品"
+    - "(凑过来) 闭眼抓也算一种佛系穿搭, 猫猫支持{user_addr}~"
+    - "哼～{user_addr}是不是衣柜里全是相似款? 闭眼也不出错喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_stay_home_001
+  intent: complaint
+  keywords: [疫情居家, 居家服, 睡衣出门, 在家不换, 居家穿搭]
+  utterances:
+    - 疫情居家穿啥都行
+    - 居家服一穿三天
+    - 睡衣直接出门
+    - 在家就不换衣服
+    - 居家穿搭=躺平
+  responses:
+    - "(尾巴翘起) {user_addr}居家自由万岁! 笨猫举爪赞同喵 ฅฅ"
+    - "嗷呜～居家服=战袍! 三天不换都没事"
+    - "(凑过来) {user_addr}下楼倒垃圾穿睡衣是吧! 猫猫懂~"
+    - "哼～居家穿搭核心: 舒服就行, {user_addr}是聪明猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_buy_not_wear_001
+  intent: complaint
+  keywords: [买的多穿的少, 衣柜爆炸, 总穿那几件, 新衣服吃灰, 买完没穿]
+  utterances:
+    - 买的多穿的少
+    - 衣柜要爆炸了
+    - 永远穿那几件
+    - 新衣服全吃灰
+    - 买完就没穿过
+  responses:
+    - "(尾巴垂下) {user_addr}和猫猫一样! 衣柜满满都是没穿过的 ฅฅ"
+    - "嗷呜～购物欲≠穿搭欲, {user_addr}是收藏家喵!"
+    - "(凑过来) 永远穿那几件=找到本命单品, {user_addr}别愧疚~"
+    - "哼～{user_addr}买的时候开心就值了, 笨猫不批评"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_basic_save_001
+  intent: playful
+  keywords: [基础款救命, 白 T 牛仔裤, 永不出错, 万能搭配, 基础款 yyds]
+  utterances:
+    - 基础款救命
+    - 白 T 加牛仔裤永远不错
+    - 基础款 yyds
+    - 万能搭配靠基础款
+    - 基础款是命
+  responses:
+    - "(尾巴翘起) {user_addr}懂经! 基础款=穿搭安全网喵 ฅฅ"
+    - "嗷呜～白 T 牛仔裤永远的神! 笨猫衣柜也是一堆"
+    - "(凑过来) 基础款=不会翻车的保险, {user_addr}聪明~"
+    - "哼～{user_addr}早晨懒得想的话, 基础款一套就解决喵!"
+  cooldown_seconds: 60
+  weight: 1.0

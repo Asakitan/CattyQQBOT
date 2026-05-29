@@ -1,0 +1,206 @@
+# 通勤穿搭 routes (S6 R614 NLU 节点扩充, 第六十一周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ww_ol_001
+  intent: question
+  keywords: [推荐OL通勤, 推荐通勤穿搭, 推荐上班穿搭, 推荐职业装, 笨猫OL]
+  utterances:
+    - 推荐OL通勤
+    - 推荐通勤穿搭
+    - 推荐上班穿搭
+    - 推荐职业装
+    - 笨猫OL
+  responses:
+    - "嗷呜～{user_addr}OL = 衬衫+西裤+乐福鞋ฅฅ"
+    - "(尾巴翘) 莫兰迪色系 - 高级"
+    - "{user_addr}基础三件套 - 永不出错"
+    - "(挺胸) 笨猫推荐: 极简日系 OL!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_suit_001
+  intent: question
+  keywords: [推荐西装套装, 推荐套装, 推荐西服, 推荐套裙, 笨猫西装]
+  utterances:
+    - 推荐西装套装
+    - 推荐套装
+    - 推荐西服
+    - 推荐套裙
+    - 笨猫西装
+  responses:
+    - "嗷呜～{user_addr}藏青/灰色 - 经典百搭ฅฅ"
+    - "(尾巴翘) Theory / MaxMara / 玛丝菲尔"
+    - "{user_addr}修身剪裁 - 显气场"
+    - "(挺胸) 笨猫推荐: 一套深色套装必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_shirt_001
+  intent: question
+  keywords: [推荐衬衫职业装, 推荐衬衫, 推荐白衬衫, 推荐职业衬衫, 笨猫衬衫]
+  utterances:
+    - 推荐衬衫职业装
+    - 推荐衬衫
+    - 推荐白衬衫
+    - 推荐职业衬衫
+    - 笨猫衬衫
+  responses:
+    - "嗷呜～{user_addr}白衬衫 - 通勤万能ฅฅ"
+    - "(尾巴翘) Uniqlo / COS / Brooks Brothers"
+    - "{user_addr}免烫面料 - 上班党救星"
+    - "(挺胸) 笨猫推荐: 备 3 件白衬衫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_pants_001
+  intent: question
+  keywords: [推荐西裤, 推荐铅笔裤, 推荐烟管裤, 推荐九分裤, 笨猫西裤]
+  utterances:
+    - 推荐西裤
+    - 推荐铅笔裤
+    - 推荐烟管裤
+    - 推荐九分裤
+    - 笨猫西裤
+  responses:
+    - "嗷呜～{user_addr}烟管裤 - 显腿长ฅฅ"
+    - "(尾巴翘) 九分裤露脚踝 - 显高"
+    - "{user_addr}垂感面料 - 高级感"
+    - "(挺胸) 笨猫推荐: 黑色烟管裤+乐福!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_shoes_001
+  intent: question
+  keywords: [推荐高跟鞋, 推荐平底鞋, 推荐通勤鞋, 推荐乐福鞋, 笨猫通勤鞋]
+  utterances:
+    - 推荐高跟鞋
+    - 推荐平底鞋
+    - 推荐通勤鞋
+    - 推荐乐福鞋
+    - 笨猫通勤鞋
+  responses:
+    - "嗷呜～{user_addr}5cm 中跟 - 舒服又得体ฅฅ"
+    - "(尾巴翘) 乐福鞋 / 玛丽珍 / 尖头平底"
+    - "{user_addr}Repetto / Le Saunda / 优衣库"
+    - "(挺胸) 笨猫推荐: 黑色乐福鞋通吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_bag_001
+  intent: question
+  keywords: [推荐公文包, 推荐托特包, 推荐通勤包, 推荐职场包, 笨猫通勤包]
+  utterances:
+    - 推荐公文包
+    - 推荐托特包
+    - 推荐通勤包
+    - 推荐职场包
+    - 笨猫通勤包
+  responses:
+    - "嗷呜～{user_addr}托特包 - 装电脑利器ฅฅ"
+    - "(尾巴翘) Longchamp / Coach / Tumi"
+    - "{user_addr}A4 容量 - 通勤标配"
+    - "(挺胸) 笨猫推荐: 黑色真皮托特!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_coat_001
+  intent: question
+  keywords: [推荐通勤大衣, 推荐风衣, 推荐羊毛大衣, 推荐职场外套, 笨猫大衣]
+  utterances:
+    - 推荐通勤大衣
+    - 推荐风衣
+    - 推荐羊毛大衣
+    - 推荐职场外套
+    - 笨猫大衣
+  responses:
+    - "嗷呜～{user_addr}驼色长大衣 - 永不过时ฅฅ"
+    - "(尾巴翘) MaxMara 101801 / Burberry 风衣"
+    - "{user_addr}H 版型 - 显瘦"
+    - "(挺胸) 笨猫推荐: 驼色 + 藏青二选一!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_business_trip_001
+  intent: question
+  keywords: [推荐商务出差装, 推荐出差穿搭, 推荐差旅装, 推荐免烫装, 笨猫出差]
+  utterances:
+    - 推荐商务出差装
+    - 推荐出差穿搭
+    - 推荐差旅装
+    - 推荐免烫装
+    - 笨猫出差
+  responses:
+    - "嗷呜～{user_addr}免烫衬衫+弹力西裤ฅฅ"
+    - "(尾巴翘) 一套黑+一套灰 - 三天够穿"
+    - "{user_addr}卷成卷不压痕 - 行李党"
+    - "(挺胸) 笨猫推荐: Ministry of Supply!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_interview_001
+  intent: question
+  keywords: [推荐面试装, 推荐面试穿搭, 推荐求职装, 推荐第一印象, 笨猫面试]
+  utterances:
+    - 推荐面试装
+    - 推荐面试穿搭
+    - 推荐求职装
+    - 推荐第一印象
+    - 笨猫面试
+  responses:
+    - "嗷呜～{user_addr}藏青套装 - 稳妥拿分ฅฅ"
+    - "(尾巴翘) 互联网公司 - 衬衫+休闲裤"
+    - "{user_addr}避免大花纹 / 露肤 - 安全"
+    - "(挺胸) 笨猫推荐: 配合公司文化!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_office_001
+  intent: question
+  keywords: [推荐内勤装, 推荐办公室穿搭, 推荐写字楼穿搭, 推荐日常通勤, 笨猫内勤]
+  utterances:
+    - 推荐内勤装
+    - 推荐办公室穿搭
+    - 推荐写字楼穿搭
+    - 推荐日常通勤
+    - 笨猫内勤
+  responses:
+    - "嗷呜～{user_addr}针织衫+半身裙 - 舒服优雅ฅฅ"
+    - "(尾巴翘) 空调房备小披肩"
+    - "{user_addr}舒服优先 - 久坐党"
+    - "(挺胸) 笨猫推荐: 针织三件套!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_internet_001
+  intent: question
+  keywords: [推荐互联网穿搭, 推荐程序员穿搭, 推荐 IT 穿搭, 推荐大厂穿搭, 笨猫互联网]
+  utterances:
+    - 推荐互联网穿搭
+    - 推荐程序员穿搭
+    - 推荐 IT 穿搭
+    - 推荐大厂穿搭
+    - 笨猫互联网
+  responses:
+    - "嗷呜～{user_addr}卫衣+牛仔+小白鞋ฅฅ"
+    - "(尾巴翘) 厂牌 T 恤 / Patagonia 抓绒"
+    - "{user_addr}舒服第一 - 加班党友好"
+    - "(挺胸) 笨猫推荐: 优衣库一站搞定!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_weekly_001
+  intent: question
+  keywords: [推荐周一蓝色, 推荐周五随意, 推荐一周搭配, 推荐每日穿搭, 笨猫每日]
+  utterances:
+    - 推荐周一蓝色
+    - 推荐周五随意
+    - 推荐一周搭配
+    - 推荐每日穿搭
+    - 笨猫每日
+  responses:
+    - "嗷呜～{user_addr}周一藏青提精神ฅฅ"
+    - "(尾巴翘) 周五 Smart Casual - 牛仔+衬衫"
+    - "{user_addr}周三粉/米色 - 缓解疲惫"
+    - "(挺胸) 笨猫推荐: 一周 5 套不重样!"
+  cooldown_seconds: 60
+  weight: 1.0

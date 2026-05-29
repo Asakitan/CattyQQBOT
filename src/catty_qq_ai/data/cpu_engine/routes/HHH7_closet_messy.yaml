@@ -1,0 +1,206 @@
+# 衣橱乱 routes (S6 R619 NLU 节点扩充, 第六十一周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: cm_closet_messy_001
+  intent: complaint
+  keywords: [衣橱乱, 衣柜乱, 柜子炸了, 衣橱炸了, 一团糟]
+  utterances:
+    - "{user_addr}衣橱乱"
+    - 衣柜乱成一团
+    - 柜子炸了
+    - 衣橱炸了喵
+    - 衣橱一团糟
+  responses:
+    - "(探头看) 哇{user_addr}衣橱真的炸了喵! 笨猫吓一跳ฅฅ"
+    - "嗷呜～乱成这样{user_addr}怎么找衣服啦哼!"
+    - "(尾巴竖起) 猫猫帮{user_addr}一起整理嘛蹭蹭~"
+    - "哼～{user_addr}就是太懒啦! 才不是嘲笑你呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_clothes_pile_001
+  intent: complaint
+  keywords: [衣物堆山, 衣服堆山, 堆成山, 衣服小山, 堆得高高]
+  utterances:
+    - 衣服堆成山了
+    - "{user_addr}衣物堆山"
+    - 堆得跟小山一样
+    - 衣服堆得高高的喵
+    - 一座衣服山
+  responses:
+    - "(假装爬上去) 哇～衣服山! 猫猫征服山顶喵ฅฅ"
+    - "嗷呜～{user_addr}这是要开服装店吗哼!"
+    - "(尾巴扫一扫) 人家帮{user_addr}推平这座山嘛蹭蹭~"
+    - "哼～堆这么高才不是因为{user_addr}懒呢! 是衣服太多啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_find_clothes_hard_001
+  intent: complaint
+  keywords: [找衣服困难, 找不到衣服, 衣服找不到, 翻不到, 那件呢]
+  utterances:
+    - 找不到衣服喵
+    - "{user_addr}找衣服困难"
+    - 翻不到那件衣服
+    - 我那件衣服呢
+    - 衣服去哪了
+  responses:
+    - "(歪头帮找) {user_addr}是哪件嘛~ 猫猫鼻子灵的喵ฅฅ"
+    - "嗷呜～乱成这样当然找不到啦哼!"
+    - "(钻进衣堆) 笨猫给{user_addr}挖出来嘛蹭蹭~"
+    - "哼～早说让{user_addr}整理嘛! 现在找不到了吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_storage_bad_001
+  intent: complaint
+  keywords: [收纳不当, 收纳烂, 收纳差, 不会收纳, 乱塞]
+  utterances:
+    - "{user_addr}收纳不当"
+    - 不会收纳喵
+    - 收纳超烂的
+    - 都是乱塞的
+    - 收纳能力为零
+  responses:
+    - "(歪头) 乱塞确实不行嗷呜~ {user_addr}要学习啦"
+    - "嗷呜～收纳是门学问哼! 笨猫教{user_addr}嘛"
+    - "(尾巴一甩) 人家陪{user_addr}一起练习收纳嘛蹭蹭ฅฅ"
+    - "哼～{user_addr}就是懒得叠才乱塞! 才不是不会呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_season_change_001
+  intent: complaint
+  keywords: [换季麻烦, 换季衣服, 换季整理, 换季累, 春夏秋冬换]
+  utterances:
+    - 换季好麻烦喵
+    - "{user_addr}换季麻烦"
+    - 换季衣服累死
+    - 又要换季整理了
+    - 春夏秋冬换衣服烦
+  responses:
+    - "嗷呜～换季确实麻烦! 笨猫陪{user_addr}一起换嘛ฅฅ"
+    - "(尾巴卷) {user_addr}一件件来嘛~ 不急哼"
+    - "嘿嘿～换季就当大扫除啦! 蹭蹭"
+    - "哼～{user_addr}早点换嘛! 才不是催你呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_want_organize_001
+  intent: playful
+  keywords: [想整理, 该整理了, 想收拾, 整理衣橱, 收拾衣柜]
+  utterances:
+    - 想整理衣橱了
+    - "{user_addr}该整理了"
+    - 想收拾一下
+    - 该整理衣橱了喵
+    - 收拾衣柜中
+  responses:
+    - "(眼睛发光) 嗷呜~{user_addr}终于要整理啦! 猫猫帮忙ฅฅ"
+    - "嗷呜～早该整理了哼! 笨猫监工"
+    - "(尾巴摇) 人家陪{user_addr}一起整理嘛蹭蹭~"
+    - "哼～{user_addr}总算想起来了! 才不是高兴呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_declutter_001
+  intent: playful
+  keywords: [想断舍离, 断舍离, 丢衣服, 扔旧衣服, 清理衣物]
+  utterances:
+    - 想断舍离喵
+    - "{user_addr}断舍离"
+    - 想丢一些衣服
+    - 扔掉旧衣服
+    - 清理一下衣物
+  responses:
+    - "(点头) 断舍离好嗷呜~ {user_addr}加油ฅฅ"
+    - "嗷呜～该丢就丢哼! 笨猫帮{user_addr}下决心"
+    - "(尾巴一甩) 人家监督{user_addr}不能心软嘛蹭蹭~"
+    - "哼～{user_addr}舍不得就给猫猫当窝啦! 才不浪费呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_no_storage_box_001
+  intent: complaint
+  keywords: [收纳箱不够, 收纳盒不够, 没收纳箱, 要买收纳, 缺收纳]
+  utterances:
+    - 收纳箱不够喵
+    - "{user_addr}收纳箱不够"
+    - 没有收纳盒
+    - 要买收纳箱了
+    - 缺收纳工具
+  responses:
+    - "(歪头) {user_addr}快买几个嗷呜! 笨猫陪你挑ฅฅ"
+    - "嗷呜～收纳箱多多益善哼!"
+    - "(尾巴卷) 人家觉得{user_addr}该屯货啦蹭蹭~"
+    - "哼～{user_addr}就是衣服太多! 才不是收纳不够呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_fold_clothes_tired_001
+  intent: complaint
+  keywords: [叠衣服累, 叠衣服烦, 不想叠, 叠不完, 叠到手酸]
+  utterances:
+    - 叠衣服好累喵
+    - "{user_addr}叠衣服累"
+    - 叠衣服烦死
+    - 不想叠衣服
+    - 叠到手酸
+  responses:
+    - "(凑过来) 笨猫帮{user_addr}叠嘛~ 爪爪也会叠ฅฅ"
+    - "嗷呜～叠衣服确实累哼! 休息一下嘛"
+    - "(尾巴扫) 人家给{user_addr}捏捏手嘛蹭蹭~"
+    - "哼～{user_addr}懒得叠就别叠啦! 才不强迫你呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_never_done_001
+  intent: complaint
+  keywords: [永远整理不完, 整理不完, 整不完, 没完没了, 怎么都整不完]
+  utterances:
+    - 永远整理不完喵
+    - "{user_addr}整理不完"
+    - 怎么都整不完
+    - 没完没了的整理
+    - 整理不到头
+  responses:
+    - "(贴贴) {user_addr}慢慢来嘛~ 笨猫陪你ฅฅ"
+    - "嗷呜～衣服真的会自己生小的吗哼!"
+    - "(尾巴卷) 人家觉得{user_addr}该一次大清理嘛蹭蹭~"
+    - "哼～{user_addr}就是边整边乱! 才不是衣服多呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_breakdown_001
+  intent: complaint
+  keywords: [看到崩溃, 看一眼崩溃, 一看就烦, 看到就炸, 看着就累]
+  utterances:
+    - 看到衣橱就崩溃喵
+    - "{user_addr}看到崩溃"
+    - 一看就烦死
+    - 看到就炸毛
+    - 看着就累
+  responses:
+    - "(拍拍背) {user_addr}别看了嘛~ 笨猫陪你逃避ฅฅ"
+    - "嗷呜～关上柜门眼不见为净哼!"
+    - "(尾巴卷) 人家觉得{user_addr}先休息再整嘛蹭蹭~"
+    - "哼～{user_addr}就是积太久啦! 才不是衣橱的错呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_want_move_001
+  intent: playful
+  keywords: [想搬家, 干脆搬家, 搬家算了, 换个大房子, 重新开始]
+  utterances:
+    - 想搬家算了喵
+    - "{user_addr}想搬家"
+    - 干脆搬家
+    - 换个大房子
+    - 重新开始啦
+  responses:
+    - "(眼睛瞪大) 哇{user_addr}带笨猫一起搬嗷呜ฅฅ!"
+    - "嗷呜～搬家不能解决衣橱问题哼!"
+    - "(尾巴摇) 人家想要带阳台的新家蹭蹭~"
+    - "哼～{user_addr}逃避也没用啦! 才不让你跑呢"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 冬装穿搭 routes (S6 R612 NLU 节点扩充, 第六十一周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: wo_down_001
+  intent: question
+  keywords: [推荐羽绒服, 推荐加拿大鹅, 推荐始祖鸟, 推荐 Moncler, 笨猫羽绒服]
+  utterances:
+    - 推荐羽绒服
+    - 推荐加拿大鹅
+    - 推荐始祖鸟
+    - 推荐 Moncler
+    - 笨猫羽绒服
+  responses:
+    - "嗷呜～{user_addr}加拿大鹅 Canada Goose - 极寒之王ฅฅ"
+    - "(尾巴翘) 始祖鸟 Arc'teryx / Moncler / 波司登登峰"
+    - "{user_addr}充绒量 >250g / 含绒量 >90% 才暖"
+    - "(挺胸) 笨猫推荐: -20℃ 选加拿大鹅!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_cotton_001
+  intent: question
+  keywords: [推荐棉服, 推荐波司登, 推荐优衣库棉服, 推荐军大衣, 笨猫棉服]
+  utterances:
+    - 推荐棉服
+    - 推荐波司登
+    - 推荐优衣库棉服
+    - 推荐军大衣
+    - 笨猫棉服
+  responses:
+    - "嗷呜～{user_addr}波司登 - 国货之光ฅฅ"
+    - "(尾巴翘) 优衣库轻型羽绒 / 军大衣"
+    - "{user_addr}棉服比羽绒便宜 / 显得厚实"
+    - "(挺胸) 笨猫推荐: 优衣库高科技保暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_thermal_001
+  intent: question
+  keywords: [推荐冬季内搭, 推荐发热衣, 推荐 Heattech, 推荐保暖内衣, 笨猫发热衣]
+  utterances:
+    - 推荐冬季内搭
+    - 推荐发热衣
+    - 推荐 Heattech
+    - 推荐保暖内衣
+    - 笨猫发热衣
+  responses:
+    - "嗷呜～{user_addr}优衣库 Heattech - 发热神器ฅฅ"
+    - "(尾巴翘) 蕉内 / 内外 / 北面发热衣"
+    - "{user_addr}贴身穿薄一层比厚毛衣还暖"
+    - "(挺胸) 笨猫推荐: Heattech Extra Warm!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_scarf_001
+  intent: question
+  keywords: [推荐围巾, 推荐帽子, 推荐羊毛围巾, 推荐毛线帽, 笨猫围巾]
+  utterances:
+    - 推荐围巾
+    - 推荐帽子
+    - 推荐羊毛围巾
+    - 推荐毛线帽
+    - 笨猫围巾
+  responses:
+    - "嗷呜～{user_addr}羊绒围巾 - 软糯护颈ฅฅ"
+    - "(尾巴翘) Acne Studios / Burberry / 优衣库羊毛"
+    - "{user_addr}毛线帽 / 渔夫帽 / 贝雷帽搭配"
+    - "(挺胸) 笨猫推荐: 围巾绕两圈才够暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_boots_001
+  intent: question
+  keywords: [推荐雪地靴, 推荐 UGG, 推荐马丁靴冬款, 推荐毛毛靴, 笨猫雪地靴]
+  utterances:
+    - 推荐雪地靴
+    - 推荐 UGG
+    - 推荐马丁靴冬款
+    - 推荐毛毛靴
+    - 笨猫雪地靴
+  responses:
+    - "嗷呜～{user_addr}UGG - 澳洲羊毛经典ฅฅ"
+    - "(尾巴翘) Sorel / Columbia 防水雪地靴"
+    - "{user_addr}马丁靴加绒 / 厚底防滑"
+    - "(挺胸) 笨猫推荐: UGG Classic 短筒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_coat_001
+  intent: question
+  keywords: [推荐大衣, 推荐呢子大衣, 推荐羊毛大衣, 推荐 Max Mara, 笨猫大衣]
+  utterances:
+    - 推荐大衣
+    - 推荐呢子大衣
+    - 推荐羊毛大衣
+    - 推荐 Max Mara
+    - 笨猫大衣
+  responses:
+    - "嗷呜～{user_addr}Max Mara 101801 - 大衣天花板ฅฅ"
+    - "(尾巴翘) Burberry / The Row / 之禾"
+    - "{user_addr}羊毛 >70% / 茧型 / 直筒型显瘦"
+    - "(挺胸) 笨猫推荐: 驼色长款百搭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_fur_001
+  intent: question
+  keywords: [推荐皮草, 推荐貂皮, 推荐羊羔毛外套, 推荐人造皮草, 笨猫皮草]
+  utterances:
+    - 推荐皮草
+    - 推荐貂皮
+    - 推荐羊羔毛外套
+    - 推荐人造皮草
+    - 笨猫皮草
+  responses:
+    - "嗷呜～{user_addr}羊羔毛 Teddy 外套 - 平价又暖ฅฅ"
+    - "(尾巴翘) Max Mara Teddy Bear / Stand Studio"
+    - "{user_addr}人造皮草环保 / 真貂保值"
+    - "(挺胸) 笨猫推荐: 优衣库羊羔绒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_ski_001
+  intent: question
+  keywords: [推荐滑雪服, 推荐 Burton, 推荐 Descente, 推荐迪桑特, 笨猫滑雪服]
+  utterances:
+    - 推荐滑雪服
+    - 推荐 Burton
+    - 推荐 Descente
+    - 推荐迪桑特
+    - 笨猫滑雪服
+  responses:
+    - "嗷呜～{user_addr}Burton - 单板滑雪王ฅฅ"
+    - "(尾巴翘) Descente / Phenix / Volcom"
+    - "{user_addr}防水 >10000mm / 透气 >10000g"
+    - "(挺胸) 笨猫推荐: 迪桑特双板套装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_sweater_001
+  intent: question
+  keywords: [推荐厚毛衣, 推荐羊绒衫, 推荐高领毛衣, 推荐麻花毛衣, 笨猫毛衣]
+  utterances:
+    - 推荐厚毛衣
+    - 推荐羊绒衫
+    - 推荐高领毛衣
+    - 推荐麻花毛衣
+    - 笨猫毛衣
+  responses:
+    - "嗷呜～{user_addr}鄂尔多斯 1980 - 羊绒经典ฅฅ"
+    - "(尾巴翘) Loro Piana / Brunello / 优衣库羊绒"
+    - "{user_addr}高领挡风 / 麻花有质感"
+    - "(挺胸) 笨猫推荐: 100% 山羊绒最软!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_legging_001
+  intent: question
+  keywords: [推荐加绒打底裤, 推荐保暖裤, 推荐光腿神器, 推荐羊绒裤, 笨猫打底裤]
+  utterances:
+    - 推荐加绒打底裤
+    - 推荐保暖裤
+    - 推荐光腿神器
+    - 推荐羊绒裤
+    - 笨猫打底裤
+  responses:
+    - "嗷呜～{user_addr}北极绒 / 猫人光腿神器ฅฅ"
+    - "(尾巴翘) 优衣库 Heattech 加绒打底"
+    - "{user_addr}300g / 500g 加绒克重选"
+    - "(挺胸) 笨猫推荐: 双层加绒 -10℃ 够!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_warmer_001
+  intent: question
+  keywords: [推荐暖宝宝, 推荐暖宫贴, 推荐发热贴, 推荐小米暖手宝, 笨猫暖宝宝]
+  utterances:
+    - 推荐暖宝宝
+    - 推荐暖宫贴
+    - 推荐发热贴
+    - 推荐小米暖手宝
+    - 笨猫暖宝宝
+  responses:
+    - "嗷呜～{user_addr}小林制药暖宝宝 - 持续 12hฅฅ"
+    - "(尾巴翘) 暖宫贴 / 暖脚贴 / 充电暖手宝"
+    - "{user_addr}贴衣服外面别贴皮肤会烫伤"
+    - "(挺胸) 笨猫推荐: 小米暖手宝 10000mAh!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wo_region_001
+  intent: question
+  keywords: [推荐北方冬装, 推荐南方冬装, 推荐湿冷穿搭, 推荐干冷穿搭, 笨猫南北冬装]
+  utterances:
+    - 推荐北方冬装
+    - 推荐南方冬装
+    - 推荐湿冷穿搭
+    - 推荐干冷穿搭
+    - 笨猫南北冬装
+  responses:
+    - "嗷呜～{user_addr}北方干冷: 羽绒服+毛衣+秋裤ฅฅ"
+    - "(尾巴翘) 南方湿冷: 防风外套+羊绒+发热衣"
+    - "{user_addr}南方靠抖 / 北方靠暖气"
+    - "(挺胸) 笨猫推荐: 湿冷比干冷更刺骨!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 约会穿搭 routes (S6 R615 NLU 节点扩充, 第六十一周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: do_first_date_001
+  intent: question
+  keywords: [推荐第一次约会装, 推荐初次见面装, 推荐初约穿搭, 推荐首次约会衣服, 笨猫第一次约会]
+  utterances:
+    - 推荐第一次约会装
+    - 推荐初次见面装
+    - 推荐初约穿搭
+    - 推荐首次约会衣服
+    - 笨猫第一次约会
+  responses:
+    - "嗷呜～{user_addr}干净衬衫 + 修身牛仔裤ฅฅ"
+    - "(尾巴翘) 女生: 小白裙 / 针织衫 + 半裙"
+    - "{user_addr}颜色清爽: 米白 / 浅蓝 / 浅粉"
+    - "(挺胸) 笨猫推荐: 别太用力, 干净最重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_romantic_dress_001
+  intent: question
+  keywords: [推荐浪漫约会连衣裙, 推荐约会裙子, 推荐法式连衣裙, 推荐茶歇裙, 笨猫连衣裙]
+  utterances:
+    - 推荐浪漫约会连衣裙
+    - 推荐约会裙子
+    - 推荐法式连衣裙
+    - 推荐茶歇裙
+    - 笨猫连衣裙
+  responses:
+    - "嗷呜～{user_addr}法式茶歇裙 - V 领碎花ฅฅ"
+    - "(尾巴翘) 鱼尾裙 / 吊带裙 + 小开衫"
+    - "{user_addr}颜色: 米白 / 雾霾蓝 / 鼠尾草绿"
+    - "(挺胸) 笨猫推荐: 茶歇裙 - 显瘦显气质!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_movie_casual_001
+  intent: question
+  keywords: [推荐看电影舒适装, 推荐电影院穿搭, 推荐看电影衣服, 推荐影院约会装, 笨猫看电影]
+  utterances:
+    - 推荐看电影舒适装
+    - 推荐电影院穿搭
+    - 推荐看电影衣服
+    - 推荐影院约会装
+    - 笨猫看电影
+  responses:
+    - "嗷呜～{user_addr}卫衣 + 牛仔裤 + 帆布鞋ฅฅ"
+    - "(尾巴翘) 影院冷, 带薄外套 / 披肩"
+    - "{user_addr}避免: 紧身 / 高跟, 坐 2 小时累"
+    - "(挺胸) 笨猫推荐: 舒适第一, 帅气第二!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_sports_game_001
+  intent: question
+  keywords: [推荐看球赛运动装, 推荐球场穿搭, 推荐看比赛衣服, 推荐运动风约会, 笨猫看球]
+  utterances:
+    - 推荐看球赛运动装
+    - 推荐球场穿搭
+    - 推荐看比赛衣服
+    - 推荐运动风约会
+    - 笨猫看球
+  responses:
+    - "嗷呜～{user_addr}球队 Jersey + 牛仔裤 + 球鞋ฅฅ"
+    - "(尾巴翘) 棒球帽 / Snapback - 加分"
+    - "{user_addr}颜色跟主队走, 显得是真粉丝"
+    - "(挺胸) 笨猫推荐: 卫衣 + 队帽 - 默契感!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_candlelight_dinner_001
+  intent: question
+  keywords: [推荐烛光晚餐礼服, 推荐高级餐厅装, 推荐 fine dining 穿搭, 推荐晚宴礼服, 笨猫晚餐礼服]
+  utterances:
+    - 推荐烛光晚餐礼服
+    - 推荐高级餐厅装
+    - 推荐 fine dining 穿搭
+    - 推荐晚宴礼服
+    - 笨猫晚餐礼服
+  responses:
+    - "嗷呜～{user_addr}小黑裙 (LBD) - 永远不出错ฅฅ"
+    - "(尾巴翘) 男士: 西装 + 衬衫, 不一定要领带"
+    - "{user_addr}配饰: 珍珠耳环 / 细链子 - 精致"
+    - "(挺胸) 笨猫推荐: 黑裙 + 珍珠 = 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_anniversary_001
+  intent: question
+  keywords: [推荐周年纪念装, 推荐纪念日穿搭, 推荐周年约会装, 推荐恋爱周年衣服, 笨猫周年纪念]
+  utterances:
+    - 推荐周年纪念装
+    - 推荐纪念日穿搭
+    - 推荐周年约会装
+    - 推荐恋爱周年衣服
+    - 笨猫周年纪念
+  responses:
+    - "嗷呜～{user_addr}穿对方喜欢的颜色 / 风格ฅฅ"
+    - "(尾巴翘) 重现第一次约会同款 - 有心机"
+    - "{user_addr}精致度比平时升一级"
+    - "(挺胸) 笨猫推荐: 复刻初见装 - 感动 +999!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_meet_parents_001
+  intent: question
+  keywords: [推荐见家长装, 推荐见父母穿搭, 推荐第一次见家长, 推荐拜访长辈装, 笨猫见家长]
+  utterances:
+    - 推荐见家长装
+    - 推荐见父母穿搭
+    - 推荐第一次见家长
+    - 推荐拜访长辈装
+    - 笨猫见家长
+  responses:
+    - "嗷呜～{user_addr}女生: 针织衫 + 半裙 - 乖乖牌ฅฅ"
+    - "(尾巴翘) 男士: 衬衫 + 西裤 - 别穿 T 恤"
+    - "{user_addr}颜色: 米色 / 浅蓝 / 淡粉 - 显温柔"
+    - "(挺胸) 笨猫推荐: 别露 / 别短 / 别花!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_proposal_001
+  intent: question
+  keywords: [推荐求婚装, 推荐求婚穿搭, 推荐求婚礼服, 推荐被求婚装, 笨猫求婚装]
+  utterances:
+    - 推荐求婚装
+    - 推荐求婚穿搭
+    - 推荐求婚礼服
+    - 推荐被求婚装
+    - 笨猫求婚装
+  responses:
+    - "嗷呜～{user_addr}男士: 三件套西装 - 仪式感拉满ฅฅ"
+    - "(尾巴翘) 女生: 白色 / 香槟色长裙 - 出片"
+    - "{user_addr}考虑拍照效果, 别穿太暗"
+    - "(挺胸) 笨猫推荐: 提前告诉对方 dress code!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_coworker_dinner_001
+  intent: question
+  keywords: [推荐同事聚餐装, 推荐公司聚会穿搭, 推荐团建衣服, 推荐 happy hour 装, 笨猫同事聚餐]
+  utterances:
+    - 推荐同事聚餐装
+    - 推荐公司聚会穿搭
+    - 推荐团建衣服
+    - 推荐 happy hour 装
+    - 笨猫同事聚餐
+  responses:
+    - "嗷呜～{user_addr}smart casual - 衬衫 + 西裤 / 半裙ฅฅ"
+    - "(尾巴翘) 别穿太隆重, 也别太随便"
+    - "{user_addr}颜色: 中性色 - 黑 / 白 / 灰 / 卡其"
+    - "(挺胸) 笨猫推荐: 比上班高半档就够!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_girls_tea_001
+  intent: question
+  keywords: [推荐闺蜜下午茶, 推荐姐妹聚会穿搭, 推荐下午茶装, 推荐 girls day 衣服, 笨猫闺蜜聚会]
+  utterances:
+    - 推荐闺蜜下午茶
+    - 推荐姐妹聚会穿搭
+    - 推荐下午茶装
+    - 推荐 girls day 衣服
+    - 笨猫闺蜜聚会
+  responses:
+    - "嗷呜～{user_addr}小香风 / 法式 / 复古 - 拍照美ฅฅ"
+    - "(尾巴翘) 配饰: 珍珠包 / 草编帽 - 出片"
+    - "{user_addr}颜色: 马卡龙色 - 粉 / 蓝 / 黄"
+    - "(挺胸) 笨猫推荐: 跟闺蜜商量好不撞色!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_mens_date_001
+  intent: question
+  keywords: [推荐男士约会装, 推荐男生约会穿搭, 推荐男士约会衣服, 推荐男生约会装扮, 笨猫男士约会]
+  utterances:
+    - 推荐男士约会装
+    - 推荐男生约会穿搭
+    - 推荐男士约会衣服
+    - 推荐男生约会装扮
+    - 笨猫男士约会
+  responses:
+    - "嗷呜～{user_addr}白衬衫 + 卡其裤 - 万能公式ฅฅ"
+    - "(尾巴翘) Polo 衫 / 针织衫 + 牛仔裤"
+    - "{user_addr}鞋子: 小白鞋 / Loafer - 别穿运动鞋"
+    - "(挺胸) 笨猫推荐: 干净 > 帅气 > 贵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: do_mens_first_date_001
+  intent: question
+  keywords: [推荐男生第一次约会, 推荐男士初次约会装, 推荐男生初约穿搭, 推荐男士首次约会, 笨猫男生第一次]
+  utterances:
+    - 推荐男生第一次约会
+    - 推荐男士初次约会装
+    - 推荐男生初约穿搭
+    - 推荐男士首次约会
+    - 笨猫男生第一次
+  responses:
+    - "嗷呜～{user_addr}衬衫 + 西裤 / 卡其裤 - 稳ฅฅ"
+    - "(尾巴翘) 别穿全新衣服, 显得用力过猛"
+    - "{user_addr}头发洗干净, 指甲剪短, 喷淡香"
+    - "(挺胸) 笨猫推荐: 干净清爽 + 自信笑容!"
+  cooldown_seconds: 60
+  weight: 1.0
