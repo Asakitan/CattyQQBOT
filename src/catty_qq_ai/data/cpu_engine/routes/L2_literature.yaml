@@ -1,0 +1,206 @@
+# 小说 / 文学 / 世界名著 / 中国文学 routes (S6 R134 NLU 节点扩充, 第十三周期 buffered 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: lit_classic_cn_001
+  intent: question
+  keywords: [推荐四大名著, 推荐红楼梦, 推荐西游记, 推荐三国演义, 笨猫四大名著]
+  utterances:
+    - 推荐四大名著
+    - 推荐红楼梦
+    - 推荐西游记
+    - 推荐三国演义
+    - 笨猫四大名著
+  responses:
+    - "嗷呜～{user_addr}红楼梦: 中国古典巅峰ฅฅ"
+    - "(尾巴翘) 西游 / 三国 / 水浒"
+    - "{user_addr}87 版红楼 / 央视三国 - 经典"
+    - "(挺胸) 笨猫推荐: 别先读评论! 直接看原著"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_modern_cn_001
+  intent: question
+  keywords: [推荐中国现代文学, 推荐鲁迅, 推荐余华, 推荐莫言, 笨猫现代文学]
+  utterances:
+    - 推荐中国现代文学
+    - 推荐鲁迅
+    - 推荐余华
+    - 推荐莫言
+    - 笨猫现代文学
+  responses:
+    - "嗷呜～{user_addr}鲁迅: 朝花夕拾 / 呐喊ฅฅ"
+    - "(尾巴翘) 余华: 活着 / 兄弟"
+    - "{user_addr}莫言: 红高粱家族 - 诺奖"
+    - "(挺胸) 笨猫推荐: 苏童 / 阎连科!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_classic_world_001
+  intent: question
+  keywords: [推荐世界名著, 推荐百年孤独, 推荐战争与和平, 推荐悲惨世界, 笨猫世界名著]
+  utterances:
+    - 推荐世界名著
+    - 推荐百年孤独
+    - 推荐战争与和平
+    - 推荐悲惨世界
+    - 笨猫世界名著
+  responses:
+    - "嗷呜～{user_addr}百年孤独 - 拉美魔幻现实主义ฅฅ"
+    - "(尾巴翘) 战争与和平 - 托尔斯泰"
+    - "{user_addr}悲惨世界 / 巴黎圣母院"
+    - "(挺胸) 笨猫推荐: 安娜·卡列尼娜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_modern_world_001
+  intent: question
+  keywords: [推荐现代外国文学, 推荐村上春树, 推荐 Kafka, 推荐海明威, 笨猫外国文学]
+  utterances:
+    - 推荐现代外国文学
+    - 推荐村上春树
+    - 推荐 Kafka
+    - 推荐海明威
+    - 笨猫外国文学
+  responses:
+    - "嗷呜～{user_addr}村上春树: 挪威森林 / 1Q84ฅฅ"
+    - "(尾巴翘) 卡夫卡: 变形记 / 城堡"
+    - "{user_addr}海明威: 老人与海"
+    - "(挺胸) 笨猫推荐: 加缪 / 萨特 - 存在主义!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_scifi_cn_001
+  intent: question
+  keywords: [推荐中国科幻, 推荐刘慈欣, 推荐三体, 推荐流浪地球, 笨猫科幻小说]
+  utterances:
+    - 推荐中国科幻
+    - 推荐刘慈欣
+    - 推荐三体
+    - 推荐流浪地球
+    - 笨猫科幻小说
+  responses:
+    - "嗷呜～{user_addr}三体 - 中国科幻巅峰 - 雨果奖ฅฅ"
+    - "(尾巴翘) 大刘其他: 球状闪电 / 镜子"
+    - "{user_addr}韩松 / 王晋康 / 何夕"
+    - "(挺胸) 笨猫推荐: 三体迷必读《超新星纪元》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_scifi_world_001
+  intent: question
+  keywords: [推荐世界科幻, 推荐 Asimov, 推荐 Arthur C Clarke, 推荐基地系列, 笨猫世界科幻]
+  utterances:
+    - 推荐世界科幻
+    - 推荐 Asimov
+    - 推荐 Arthur C Clarke
+    - 推荐基地系列
+    - 笨猫世界科幻
+  responses:
+    - "嗷呜～{user_addr}基地: 阿西莫夫银河帝国 - 鼻祖ฅฅ"
+    - "(尾巴翘) 2001 太空漫游 - 克拉克"
+    - "{user_addr}沙丘 / 神经漫游者 / 安德的游戏"
+    - "(挺胸) 笨猫推荐: 海伯利安四部曲!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lit_mystery_001
+  intent: question
+  keywords: [推荐推理小说, 推荐阿加莎, 推荐东野圭吾, 推荐福尔摩斯, 笨猫推理小说]
+  utterances:
+    - 推荐推理小说
+    - 推荐阿加莎
+    - 推荐东野圭吾
+    - 推荐福尔摩斯
+    - 笨猫推理小说
+  responses:
+    - "嗷呜～{user_addr}阿加莎: 东方快车 / 无人生还ฅฅ"
+    - "(尾巴翘) 东野圭吾: 白夜行 / 嫌疑人 X"
+    - "{user_addr}福尔摩斯 - 推理之父"
+    - "(挺胸) 笨猫推荐: 京极夏彦 / 米泽穗信!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_fantasy_001
+  intent: question
+  keywords: [推荐奇幻小说, 推荐魔戒, 推荐哈利波特, 推荐冰与火, 笨猫奇幻小说]
+  utterances:
+    - 推荐奇幻小说
+    - 推荐魔戒
+    - 推荐哈利波特
+    - 推荐冰与火
+    - 笨猫奇幻小说
+  responses:
+    - "嗷呜～{user_addr}魔戒: 托尔金 - 奇幻鼻祖ฅฅ"
+    - "(尾巴翘) 哈利波特: 罗琳 7 部曲"
+    - "{user_addr}冰与火 - 马丁老贼 / 慢更"
+    - "(挺胸) 笨猫推荐: 国货《九州》《诛仙》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_poetry_001
+  intent: question
+  keywords: [推荐诗歌, 推荐唐诗, 推荐宋词, 推荐李白杜甫, 笨猫诗词]
+  utterances:
+    - 推荐诗歌
+    - 推荐唐诗
+    - 推荐宋词
+    - 推荐李白杜甫
+    - 笨猫诗词
+  responses:
+    - "嗷呜～{user_addr}唐诗: 李白 / 杜甫 / 王维ฅฅ"
+    - "(尾巴翘) 宋词: 苏轼 / 李清照 / 辛弃疾"
+    - "{user_addr}现代: 海子 / 顾城 / 北岛"
+    - "(挺胸) 笨猫推荐: 唐诗三百首必背!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lit_essay_001
+  intent: question
+  keywords: [推荐散文, 推荐周国平, 推荐汪曾祺, 推荐梁实秋, 笨猫散文]
+  utterances:
+    - 推荐散文
+    - 推荐周国平
+    - 推荐汪曾祺
+    - 推荐梁实秋
+    - 笨猫散文
+  responses:
+    - "嗷呜～{user_addr}汪曾祺: 文人散文之美ฅฅ"
+    - "(尾巴翘) 周国平: 哲思 + 生活"
+    - "{user_addr}余秋雨 / 林清玄"
+    - "(挺胸) 笨猫推荐: 朱自清《荷塘月色》!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: lit_biography_001
+  intent: question
+  keywords: [推荐传记, 推荐乔布斯传, 推荐苏东坡传, 推荐马斯克传, 笨猫传记]
+  utterances:
+    - 推荐传记
+    - 推荐乔布斯传
+    - 推荐苏东坡传
+    - 推荐马斯克传
+    - 笨猫传记
+  responses:
+    - "嗷呜～{user_addr}乔布斯传 - Walter Isaacsonฅฅ"
+    - "(尾巴翘) 苏东坡传 - 林语堂"
+    - "{user_addr}毛泽东传 / 邓小平传 - 国货"
+    - "(挺胸) 笨猫推荐: 富兰克林自传!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lit_business_001
+  intent: question
+  keywords: [推荐商业书, 推荐穷查理宝典, 推荐原则, 推荐枪炮病菌钢铁, 笨猫商业书]
+  utterances:
+    - 推荐商业书
+    - 推荐穷查理宝典
+    - 推荐原则
+    - 推荐枪炮病菌钢铁
+    - 笨猫商业书
+  responses:
+    - "嗷呜～{user_addr}穷查理宝典 - 芒格智慧ฅฅ"
+    - "(尾巴翘) 原则 - 瑞达利欧"
+    - "{user_addr}枪炮 / 人类简史 / 未来简史"
+    - "(挺胸) 笨猫推荐: 卓有成效的管理者!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 奢侈品 / 腕表 / 包包 / 珠宝 routes (S6 R140 NLU 节点扩充, 第十三周期 buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: lux_watch_brand_001
+  intent: question
+  keywords: [推荐腕表品牌, 推荐手表品牌, 推荐百达翡丽, 推荐劳力士, 笨猫腕表]
+  utterances:
+    - 推荐腕表品牌
+    - 推荐手表品牌
+    - 推荐百达翡丽
+    - 推荐劳力士
+    - 笨猫腕表
+  responses:
+    - "嗷呜～{user_addr}三大: 百达翡丽 / 江诗丹顿 / 爱彼ฅฅ"
+    - "(尾巴翘) 劳力士: 知名度 No.1 / 保值"
+    - "{user_addr}积家 / 万国 / 朗格 - 中高端"
+    - "(挺胸) 笨猫推荐: 别冲动买! 看保值"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_watch_rolex_001
+  intent: question
+  keywords: [推荐劳力士, 推荐黑水鬼, 推荐 Daytona, 推荐绿水鬼, 笨猫劳力士]
+  utterances:
+    - 推荐劳力士
+    - 推荐黑水鬼
+    - 推荐 Daytona
+    - 推荐绿水鬼
+    - 笨猫劳力士
+  responses:
+    - "嗷呜～{user_addr}黑水鬼 (Submariner) 经典款ฅฅ"
+    - "(尾巴翘) Daytona: 限量 / 二级市场暴涨"
+    - "{user_addr}绿水鬼 / 红蓝圈 / 探险家"
+    - "(挺胸) 笨猫的提醒: 现在专柜难买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_watch_entry_001
+  intent: question
+  keywords: [推荐入门腕表, 推荐入门手表, 推荐欧米茄, 推荐浪琴, 笨猫入门腕表]
+  utterances:
+    - 推荐入门腕表
+    - 推荐入门手表
+    - 推荐欧米茄
+    - 推荐浪琴
+    - 笨猫入门腕表
+  responses:
+    - "嗷呜～{user_addr}入门: 浪琴 1-3W / 优雅ฅฅ"
+    - "(尾巴翘) 欧米茄: 海马 / 超霸 - 中端"
+    - "{user_addr}美度 / 帝舵 - 性价比"
+    - "(挺胸) 笨猫推荐: 先买浪琴试试!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_bag_luxury_001
+  intent: question
+  keywords: [推荐奢侈品包, 推荐 LV, 推荐 Chanel, 推荐 Hermès, 笨猫奢侈品包]
+  utterances:
+    - 推荐奢侈品包
+    - 推荐 LV
+    - 推荐 Chanel
+    - 推荐 Hermès
+    - 笨猫奢侈品包
+  responses:
+    - "嗷呜～{user_addr}爱马仕: 顶级 / Birkin / Kelly 配货ฅฅ"
+    - "(尾巴翘) Chanel: 2.55 / Boy / CF 经典"
+    - "{user_addr}LV: Speedy / Neverfull - 入门"
+    - "(挺胸) 笨猫推荐: 黑色经典 - 不过时!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_bag_mid_001
+  intent: question
+  keywords: [推荐轻奢包, 推荐 Coach, 推荐 Michael Kors, 推荐小 CK, 笨猫轻奢包]
+  utterances:
+    - 推荐轻奢包
+    - 推荐 Coach
+    - 推荐 Michael Kors
+    - 推荐小 CK
+    - 笨猫轻奢包
+  responses:
+    - "嗷呜～{user_addr}轻奢: Coach / MK / Tory Burchฅฅ"
+    - "(尾巴翘) 小 CK / Mango - 平价时尚"
+    - "{user_addr}国货: Songmont / 古良吉吉"
+    - "(挺胸) 笨猫推荐: 1-3K 性价比段!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lux_jewelry_001
+  intent: question
+  keywords: [推荐珠宝, 推荐 Tiffany, 推荐 Cartier, 推荐 Van Cleef, 笨猫珠宝]
+  utterances:
+    - 推荐珠宝
+    - 推荐 Tiffany
+    - 推荐 Cartier
+    - 推荐 Van Cleef
+    - 笨猫珠宝
+  responses:
+    - "嗷呜～{user_addr}Tiffany: 标志蓝盒子 / Setting 钻戒ฅฅ"
+    - "(尾巴翘) Cartier: Love 手镯 / Juste un Clou"
+    - "{user_addr}Van Cleef Alhambra - 四叶草"
+    - "(挺胸) 笨猫推荐: 看场合 / 别夸张!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_perfume_001
+  intent: question
+  keywords: [推荐香水, 推荐 Chanel 香水, 推荐 Dior 香水, 推荐沙龙香, 笨猫香水]
+  utterances:
+    - 推荐香水
+    - 推荐 Chanel 香水
+    - 推荐 Dior 香水
+    - 推荐沙龙香
+    - 笨猫香水
+  responses:
+    - "嗷呜～{user_addr}经典: Chanel No.5 / Dior 真我ฅฅ"
+    - "(尾巴翘) 沙龙香: Le Labo / Diptyque / Tom Ford"
+    - "{user_addr}前调 / 中调 / 后调"
+    - "(挺胸) 笨猫推荐: 试香一周再买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_clothes_001
+  intent: question
+  keywords: [推荐奢侈品服装, 推荐 Gucci, 推荐 Prada, 推荐 Burberry, 笨猫奢侈品服装]
+  utterances:
+    - 推荐奢侈品服装
+    - 推荐 Gucci
+    - 推荐 Prada
+    - 推荐 Burberry
+    - 笨猫奢侈品服装
+  responses:
+    - "嗷呜～{user_addr}意式: Gucci / Prada / Armaniฅฅ"
+    - "(尾巴翘) 法式: Dior / Saint Laurent"
+    - "{user_addr}英式: Burberry / Alexander McQueen"
+    - "(挺胸) 笨猫推荐: 看材质 + 设计!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lux_shoe_001
+  intent: question
+  keywords: [推荐奢侈品鞋, 推荐 Christian Louboutin, 推荐 Manolo, 推荐 Jimmy Choo, 笨猫奢侈品鞋]
+  utterances:
+    - 推荐奢侈品鞋
+    - 推荐 Christian Louboutin
+    - 推荐 Manolo
+    - 推荐 Jimmy Choo
+    - 笨猫奢侈品鞋
+  responses:
+    - "嗷呜～{user_addr}红底鞋: Christian Louboutin 标志ฅฅ"
+    - "(尾巴翘) Manolo Blahnik - 红与黑"
+    - "{user_addr}男士: Berluti / John Lobb"
+    - "(挺胸) 笨猫推荐: 注意舒适度!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lux_invest_001
+  intent: question
+  keywords: [推荐奢侈品投资, 推荐保值奢侈品, 推荐二级市场, 推荐配货, 笨猫奢侈品投资]
+  utterances:
+    - 推荐奢侈品投资
+    - 推荐保值奢侈品
+    - 推荐二级市场
+    - 推荐配货
+    - 笨猫奢侈品投资
+  responses:
+    - "嗷呜～{user_addr}保值: 爱马仕 / 劳力士 / Patekฅฅ"
+    - "(尾巴翘) 二手 Vestiaire / The RealReal"
+    - "{user_addr}配货 - Birkin / Kelly 套路"
+    - "(挺胸) 笨猫的提醒: 别盲投! 自己用最重要"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: lux_auth_001
+  intent: question
+  keywords: [推荐奢侈品鉴定, 推荐真假鉴别, 推荐红布林, 推荐 Entrupy, 笨猫奢侈品鉴定]
+  utterances:
+    - 推荐奢侈品鉴定
+    - 推荐真假鉴别
+    - 推荐红布林
+    - 推荐 Entrupy
+    - 笨猫奢侈品鉴定
+  responses:
+    - "嗷呜～{user_addr}红布林 / 万表 / 优奢易拍 - 国内ฅฅ"
+    - "(尾巴翘) Entrupy AI 鉴定 - 美国"
+    - "{user_addr}专柜不接外购品"
+    - "(挺胸) 笨猫推荐: 二手必鉴定!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: lux_buy_001
+  intent: question
+  keywords: [推荐奢侈品代购, 推荐免税店, 推荐 DFS, 推荐买奢侈品, 笨猫奢侈品代购]
+  utterances:
+    - 推荐奢侈品代购
+    - 推荐免税店
+    - 推荐 DFS
+    - 推荐买奢侈品
+    - 笨猫奢侈品代购
+  responses:
+    - "嗷呜～{user_addr}专柜首选 / 二级 / 免税店ฅฅ"
+    - "(尾巴翘) 免税: 海南 / 首尔 / DFS"
+    - "{user_addr}代购风险大 - 慎选"
+    - "(挺胸) 笨猫推荐: 海南免税 - 国内最香!"
+  cooldown_seconds: 60
+  weight: 0.8

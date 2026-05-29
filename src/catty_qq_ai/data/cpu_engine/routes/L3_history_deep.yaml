@@ -1,0 +1,206 @@
+# 历史 / 中国史 / 世界史 / 朝代 routes (S6 R135 NLU 节点扩充, 第十三周期 buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: hist_china_ancient_001
+  intent: question
+  keywords: [推荐中国古代史, 推荐先秦, 推荐春秋战国, 推荐秦汉, 笨猫古代史]
+  utterances:
+    - 推荐中国古代史
+    - 推荐先秦
+    - 推荐春秋战国
+    - 推荐秦汉
+    - 笨猫古代史
+  responses:
+    - "嗷呜～{user_addr}先秦: 夏商周 - 文明源头ฅฅ"
+    - "(尾巴翘) 春秋战国: 诸子百家 / 百家争鸣"
+    - "{user_addr}秦汉: 大一统 / 丝绸之路"
+    - "(挺胸) 笨猫推荐: 《史记》司马迁!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hist_china_tang_001
+  intent: question
+  keywords: [推荐唐朝, 推荐唐朝历史, 推荐贞观之治, 推荐玄宗, 笨猫唐朝]
+  utterances:
+    - 推荐唐朝
+    - 推荐唐朝历史
+    - 推荐贞观之治
+    - 推荐玄宗
+    - 笨猫唐朝
+  responses:
+    - "嗷呜～{user_addr}唐朝: 中国最盛时代 / 289 年ฅฅ"
+    - "(尾巴翘) 贞观之治: 太宗 / 武则天"
+    - "{user_addr}开元盛世 → 安史之乱"
+    - "(挺胸) 笨猫推荐: 《唐史十二讲》!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hist_china_song_001
+  intent: question
+  keywords: [推荐宋朝, 推荐宋朝历史, 推荐北宋, 推荐南宋, 笨猫宋朝]
+  utterances:
+    - 推荐宋朝
+    - 推荐宋朝历史
+    - 推荐北宋
+    - 推荐南宋
+    - 笨猫宋朝
+  responses:
+    - "嗷呜～{user_addr}宋朝: 经济文化巅峰 / GDP 世界一半ฅฅ"
+    - "(尾巴翘) 北宋: 汴梁 / 清明上河图"
+    - "{user_addr}南宋: 临安 / 岳飞 / 文天祥"
+    - "(挺胸) 笨猫推荐: 《大宋之变》!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hist_china_ming_001
+  intent: question
+  keywords: [推荐明朝, 推荐明朝历史, 推荐朱元璋, 推荐永乐, 笨猫明朝]
+  utterances:
+    - 推荐明朝
+    - 推荐明朝历史
+    - 推荐朱元璋
+    - 推荐永乐
+    - 笨猫明朝
+  responses:
+    - "嗷呜～{user_addr}朱元璋: 草根皇帝 / 大明开创ฅฅ"
+    - "(尾巴翘) 永乐: 郑和下西洋 / 故宫"
+    - "{user_addr}张居正改革 / 万历"
+    - "(挺胸) 笨猫推荐: 《明朝那些事儿》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hist_china_qing_001
+  intent: question
+  keywords: [推荐清朝, 推荐清朝历史, 推荐康乾盛世, 推荐慈禧, 笨猫清朝]
+  utterances:
+    - 推荐清朝
+    - 推荐清朝历史
+    - 推荐康乾盛世
+    - 推荐慈禧
+    - 笨猫清朝
+  responses:
+    - "嗷呜～{user_addr}康乾盛世 - 最后辉煌ฅฅ"
+    - "(尾巴翘) 鸦片战争 → 衰落"
+    - "{user_addr}慈禧 / 戊戌变法 / 辛亥革命"
+    - "(挺胸) 笨猫推荐: 看《雍正王朝》经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hist_china_modern_001
+  intent: question
+  keywords: [推荐近代史, 推荐民国, 推荐抗战史, 推荐解放战争, 笨猫近代史]
+  utterances:
+    - 推荐近代史
+    - 推荐民国
+    - 推荐抗战史
+    - 推荐解放战争
+    - 笨猫近代史
+  responses:
+    - "嗷呜～{user_addr}1840-1949 - 屈辱与抗争ฅฅ"
+    - "(尾巴翘) 辛亥 → 民国 → 抗战"
+    - "{user_addr}抗战: 14 年 / 千万牺牲"
+    - "(挺胸) 笨猫推荐: 《我的祖国》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hist_world_egypt_001
+  intent: question
+  keywords: [推荐古埃及, 推荐古希腊, 推荐古罗马, 推荐古文明, 笨猫古文明]
+  utterances:
+    - 推荐古埃及
+    - 推荐古希腊
+    - 推荐古罗马
+    - 推荐古文明
+    - 笨猫古文明
+  responses:
+    - "嗷呜～{user_addr}四大: 埃及 / 巴比伦 / 印度 / 中华ฅฅ"
+    - "(尾巴翘) 希腊: 民主 / 哲学起源"
+    - "{user_addr}罗马: 千年帝国 / 文化"
+    - "(挺胸) 笨猫推荐: 《罗马帝国衰亡史》!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hist_world_medieval_001
+  intent: question
+  keywords: [推荐中世纪, 推荐黑暗时代, 推荐文艺复兴, 推荐宗教改革, 笨猫中世纪]
+  utterances:
+    - 推荐中世纪
+    - 推荐黑暗时代
+    - 推荐文艺复兴
+    - 推荐宗教改革
+    - 笨猫中世纪
+  responses:
+    - "嗷呜～{user_addr}476-1453 - 千年中世纪ฅฅ"
+    - "(尾巴翘) 文艺复兴: 但丁 / 达芬奇"
+    - "{user_addr}宗教改革: 路德 / 加尔文"
+    - "(挺胸) 笨猫推荐: 《中世纪的秋天》!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: hist_world_ww_001
+  intent: question
+  keywords: [推荐世界大战, 推荐一战, 推荐二战, 推荐冷战, 笨猫世界大战]
+  utterances:
+    - 推荐世界大战
+    - 推荐一战
+    - 推荐二战
+    - 推荐冷战
+    - 笨猫世界大战
+  responses:
+    - "嗷呜～{user_addr}二战: 1939-1945 / 改变世界ฅฅ"
+    - "(尾巴翘) 冷战: 美苏 1947-1991"
+    - "{user_addr}《第三帝国兴亡史》必读"
+    - "(挺胸) 笨猫推荐: 《人类群星闪耀时》!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hist_world_modern_001
+  intent: question
+  keywords: [推荐现代世界史, 推荐美国史, 推荐欧洲史, 推荐全球史, 笨猫现代世界史]
+  utterances:
+    - 推荐现代世界史
+    - 推荐美国史
+    - 推荐欧洲史
+    - 推荐全球史
+    - 笨猫现代世界史
+  responses:
+    - "嗷呜～{user_addr}美国: 1776 独立 / 250 年ฅฅ"
+    - "(尾巴翘) 欧洲: 一体化 / 欧盟"
+    - "{user_addr}全球化 / 多极化"
+    - "(挺胸) 笨猫推荐: 《全球通史》斯塔夫里阿诺斯!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: hist_history_book_001
+  intent: question
+  keywords: [推荐历史书, 推荐史书, 推荐人类简史, 推荐资治通鉴, 笨猫历史书]
+  utterances:
+    - 推荐历史书
+    - 推荐史书
+    - 推荐人类简史
+    - 推荐资治通鉴
+    - 笨猫历史书
+  responses:
+    - "嗷呜～{user_addr}国货: 史记 / 资治通鉴 / 二十四史ฅฅ"
+    - "(尾巴翘) 通俗: 明朝那些事 / 万历十五年"
+    - "{user_addr}全球: 人类简史 / 全球通史"
+    - "(挺胸) 笨猫推荐: 《枪炮病菌钢铁》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hist_archeology_001
+  intent: question
+  keywords: [推荐考古, 推荐殷墟, 推荐三星堆, 推荐兵马俑, 笨猫考古]
+  utterances:
+    - 推荐考古
+    - 推荐殷墟
+    - 推荐三星堆
+    - 推荐兵马俑
+    - 笨猫考古
+  responses:
+    - "嗷呜～{user_addr}三星堆 - 4000+ 年神秘古蜀ฅฅ"
+    - "(尾巴翘) 殷墟: 商代 - 甲骨文"
+    - "{user_addr}兵马俑 - 世界第八奇迹"
+    - "(挺胸) 笨猫推荐: 良渚 / 二里头!"
+  cooldown_seconds: 60
+  weight: 0.8

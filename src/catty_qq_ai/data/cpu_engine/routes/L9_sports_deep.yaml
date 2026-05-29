@@ -1,0 +1,206 @@
+# 运动赛事 / 足球 / 篮球 / NBA / 欧洲杯 routes (S6 R141 NLU 节点扩充, 第十三周期 buffered 10/10 完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: spt_football_001
+  intent: question
+  keywords: [推荐足球, 推荐 FIFA, 推荐世界杯, 推荐五大联赛, 笨猫足球]
+  utterances:
+    - 推荐足球
+    - 推荐 FIFA
+    - 推荐世界杯
+    - 推荐五大联赛
+    - 笨猫足球
+  responses:
+    - "嗷呜～{user_addr}五大联赛: 英超 / 西甲 / 德甲 / 意甲 / 法甲ฅฅ"
+    - "(尾巴翘) 世界杯: 4 年一次 / FIFA"
+    - "{user_addr}欧冠 - 最高俱乐部赛事"
+    - "(挺胸) 笨猫推荐: 梅西 / C 罗 - GOAT 之争!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spt_premier_001
+  intent: question
+  keywords: [推荐英超, 推荐曼联, 推荐曼城, 推荐利物浦, 笨猫英超]
+  utterances:
+    - 推荐英超
+    - 推荐曼联
+    - 推荐曼城
+    - 推荐利物浦
+    - 笨猫英超
+  responses:
+    - "嗷呜～{user_addr}英超: 6 大豪门竞争激烈ฅฅ"
+    - "(尾巴翘) 曼城 - 瓜帅时代 / 持续夺冠"
+    - "{user_addr}利物浦 / 切尔西 / 阿森纳"
+    - "(挺胸) 笨猫推荐: 看比赛 - 节奏快!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spt_laliga_001
+  intent: question
+  keywords: [推荐西甲, 推荐皇马, 推荐巴萨, 推荐马竞, 笨猫西甲]
+  utterances:
+    - 推荐西甲
+    - 推荐皇马
+    - 推荐巴萨
+    - 推荐马竞
+    - 笨猫西甲
+  responses:
+    - "嗷呜～{user_addr}皇马 vs 巴萨 - 国家德比ฅฅ"
+    - "(尾巴翘) 皇马: 15 次欧冠 / 银河战舰"
+    - "{user_addr}巴萨: tiki-taka / 拉玛西亚"
+    - "(挺胸) 笨猫推荐: 这是世界足球的中心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spt_messi_001
+  intent: question
+  keywords: [推荐梅西, 推荐 Messi, 推荐 C 罗, 推荐 Ronaldo, 笨猫梅西 C 罗]
+  utterances:
+    - 推荐梅西
+    - 推荐 Messi
+    - 推荐 C 罗
+    - 推荐 Ronaldo
+    - 笨猫梅西 C 罗
+  responses:
+    - "嗷呜～{user_addr}梅西: 8 次金球 / 阿根廷 GOATฅฅ"
+    - "(尾巴翘) C 罗: 5 次金球 / 葡萄牙传奇"
+    - "{user_addr}两人共同定义 21 世纪足球"
+    - "(挺胸) 笨猫推荐: GOAT 之争永无答案!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spt_basketball_001
+  intent: question
+  keywords: [推荐篮球, 推荐 NBA, 推荐 CBA, 推荐 NCAA, 笨猫篮球]
+  utterances:
+    - 推荐篮球
+    - 推荐 NBA
+    - 推荐 CBA
+    - 推荐 NCAA
+    - 笨猫篮球
+  responses:
+    - "嗷呜～{user_addr}NBA: 美职篮 / 30 支球队ฅฅ"
+    - "(尾巴翘) CBA: 中国职业 / 看姚明传统"
+    - "{user_addr}NCAA - 大学篮球 / 选秀池"
+    - "(挺胸) 笨猫推荐: 看湖人 / 凯尔特人!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spt_nba_team_001
+  intent: question
+  keywords: [推荐 NBA 球队, 推荐湖人, 推荐勇士, 推荐凯尔特人, 笨猫 NBA 球队]
+  utterances:
+    - 推荐 NBA 球队
+    - 推荐湖人
+    - 推荐勇士
+    - 推荐凯尔特人
+    - 笨猫 NBA 球队
+  responses:
+    - "嗷呜～{user_addr}湖人: 17 冠 / 詹姆斯 - LBJฅฅ"
+    - "(尾巴翘) 凯尔特人: 18 冠 - 联盟最多"
+    - "{user_addr}勇士: 库里时代 / 4 冠"
+    - "(挺胸) 笨猫推荐: 看 Playoffs!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spt_nba_star_001
+  intent: question
+  keywords: [推荐 NBA 球星, 推荐詹姆斯, 推荐库里, 推荐杜兰特, 笨猫 NBA 球星]
+  utterances:
+    - 推荐 NBA 球星
+    - 推荐詹姆斯
+    - 推荐库里
+    - 推荐杜兰特
+    - 笨猫 NBA 球星
+  responses:
+    - "嗷呜～{user_addr}詹姆斯 LBJ: 历史得分王ฅฅ"
+    - "(尾巴翘) 库里: 三分革命 / 4 冠"
+    - "{user_addr}杜兰特 / 字母哥 / 约基奇"
+    - "(挺胸) 笨猫推荐: 看新秀 - 文班亚马!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spt_tennis_001
+  intent: question
+  keywords: [推荐网球, 推荐费德勒, 推荐纳达尔, 推荐德约, 笨猫网球]
+  utterances:
+    - 推荐网球
+    - 推荐费德勒
+    - 推荐纳达尔
+    - 推荐德约
+    - 笨猫网球
+  responses:
+    - "嗷呜～{user_addr}三巨头: 费德勒 / 纳达尔 / 德约ฅฅ"
+    - "(尾巴翘) 大满贯: 澳网 / 法网 / 温网 / 美网"
+    - "{user_addr}阿尔卡拉斯 / 辛纳 - 新一代"
+    - "(挺胸) 笨猫推荐: 看温网草地 - 优雅!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: spt_f1_001
+  intent: question
+  keywords: [推荐 F1, 推荐方程式赛车, 推荐汉密尔顿, 推荐 Verstappen, 笨猫 F1]
+  utterances:
+    - 推荐 F1
+    - 推荐方程式赛车
+    - 推荐汉密尔顿
+    - 推荐 Verstappen
+    - 笨猫 F1
+  responses:
+    - "嗷呜～{user_addr}F1: 一级方程式 / 世界顶级ฅฅ"
+    - "(尾巴翘) 维斯塔潘: 红牛 - 4 连冠"
+    - "{user_addr}汉密尔顿 - 7 冠王"
+    - "(挺胸) 笨猫推荐: 摩纳哥站 - 最美!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: spt_esports_001
+  intent: question
+  keywords: [推荐电竞, 推荐 LPL, 推荐 LCK, 推荐 S 赛, 笨猫电竞]
+  utterances:
+    - 推荐电竞
+    - 推荐 LPL
+    - 推荐 LCK
+    - 推荐 S 赛
+    - 笨猫电竞
+  responses:
+    - "嗷呜～{user_addr}LPL: 中国 LOL / 4 个 S 冠ฅฅ"
+    - "(尾巴翘) LCK: 韩国 / Faker 神"
+    - "{user_addr}DOTA2 TI / Valorant"
+    - "(挺胸) 笨猫推荐: 看 S 赛全球总决赛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spt_olympic_001
+  intent: question
+  keywords: [推荐奥运会, 推荐冬奥会, 推荐残奥会, 推荐金牌榜, 笨猫奥运会]
+  utterances:
+    - 推荐奥运会
+    - 推荐冬奥会
+    - 推荐残奥会
+    - 推荐金牌榜
+    - 笨猫奥运会
+  responses:
+    - "嗷呜～{user_addr}夏奥 4 年 / 冬奥 4 年 - 错开ฅฅ"
+    - "(尾巴翘) 中国: 2008 北京 / 2022 冬奥"
+    - "{user_addr}金牌大国: 美中俄 - 顶级"
+    - "(挺胸) 笨猫推荐: 2024 巴黎 + 2028 洛杉矶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spt_china_sport_001
+  intent: question
+  keywords: [推荐中国体育, 推荐乒乓球, 推荐羽毛球, 推荐跳水, 笨猫中国体育]
+  utterances:
+    - 推荐中国体育
+    - 推荐乒乓球
+    - 推荐羽毛球
+    - 推荐跳水
+    - 笨猫中国体育
+  responses:
+    - "嗷呜～{user_addr}国球: 乒乓 - 国家队称霸ฅฅ"
+    - "(尾巴翘) 羽毛球: 林丹 / 谌龙 / 石宇奇"
+    - "{user_addr}跳水梦之队 / 体操"
+    - "(挺胸) 笨猫推荐: 樊振东 / 马龙!"
+  cooldown_seconds: 60
+  weight: 1.0

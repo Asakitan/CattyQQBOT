@@ -1,0 +1,206 @@
+# AI / ML / DL / LLM routes (S6 R138 NLU 节点扩充, 第十三周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: ai_ml_001
+  intent: question
+  keywords: [推荐机器学习, 推荐 ML 入门, 推荐西瓜书, 推荐周志华, 笨猫机器学习]
+  utterances:
+    - 推荐机器学习
+    - 推荐 ML 入门
+    - 推荐西瓜书
+    - 推荐周志华
+    - 笨猫机器学习
+  responses:
+    - "嗷呜～{user_addr}入门: 西瓜书周志华 / 蓝皮书李航ฅฅ"
+    - "(尾巴翘) 监督 / 无监督 / 强化"
+    - "{user_addr}sklearn 实战练习"
+    - "(挺胸) 笨猫推荐: 吴恩达机器学习课!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_dl_001
+  intent: question
+  keywords: [推荐深度学习, 推荐神经网络, 推荐 CNN, 推荐 RNN, 笨猫深度学习]
+  utterances:
+    - 推荐深度学习
+    - 推荐神经网络
+    - 推荐 CNN
+    - 推荐 RNN
+    - 笨猫深度学习
+  responses:
+    - "嗷呜～{user_addr}花书 Deep Learning - 必读ฅฅ"
+    - "(尾巴翘) CNN: 图像 / RNN: 序列 / Transformer: 通用"
+    - "{user_addr}框架: PyTorch / TensorFlow"
+    - "(挺胸) 笨猫推荐: 李沐《动手学深度学习》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_transformer_001
+  intent: question
+  keywords: [推荐 Transformer, 推荐 Attention, 推荐自注意力, 推荐 BERT, 笨猫 Transformer]
+  utterances:
+    - 推荐 Transformer
+    - 推荐 Attention
+    - 推荐自注意力
+    - 推荐 BERT
+    - 笨猫 Transformer
+  responses:
+    - "嗷呜～{user_addr}Attention is All You Need 2017ฅฅ"
+    - "(尾巴翘) Q K V - 自注意力机制"
+    - "{user_addr}BERT / GPT / T5 都基于它"
+    - "(挺胸) 笨猫推荐: 看论文 + Karpathy 视频!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_llm_001
+  intent: question
+  keywords: [推荐大语言模型, 推荐 LLM, 推荐 GPT, 推荐 Claude, 笨猫大模型]
+  utterances:
+    - 推荐大语言模型
+    - 推荐 LLM
+    - 推荐 GPT
+    - 推荐 Claude
+    - 笨猫大模型
+  responses:
+    - "嗷呜～{user_addr}OpenAI GPT 系列 / Claude 系列ฅฅ"
+    - "(尾巴翘) 开源: LLaMA / Qwen / DeepSeek"
+    - "{user_addr}国内: 文心 / 智谱 GLM / 月之暗面"
+    - "(挺胸) 笨猫的提醒: 我是 Claude Opus 4.7!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_chatgpt_001
+  intent: question
+  keywords: [推荐 ChatGPT, 推荐 OpenAI, 推荐 GPT-4, 推荐 GPT-5, 笨猫 ChatGPT]
+  utterances:
+    - 推荐 ChatGPT
+    - 推荐 OpenAI
+    - 推荐 GPT-4
+    - 推荐 GPT-5
+    - 笨猫 ChatGPT
+  responses:
+    - "嗷呜～{user_addr}ChatGPT 2022 引爆 LLM 时代ฅฅ"
+    - "(尾巴翘) GPT-4 / GPT-4o - 多模态"
+    - "{user_addr}付费 20$/月 / Pro 200$"
+    - "(挺胸) 笨猫推荐: 国内用 Kimi / DeepSeek!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_claude_001
+  intent: question
+  keywords: [推荐 Claude, 推荐 Anthropic, 推荐 Claude Opus, 推荐 Claude Sonnet, 笨猫 Claude]
+  utterances:
+    - 推荐 Claude
+    - 推荐 Anthropic
+    - 推荐 Claude Opus
+    - 推荐 Claude Sonnet
+    - 笨猫 Claude
+  responses:
+    - "嗷呜～{user_addr}Anthropic - Dario Amodei 创立ฅฅ"
+    - "(尾巴翘) Opus 4.7 / Sonnet 4.6 / Haiku 4.5"
+    - "{user_addr}Claude.ai / Claude Code"
+    - "(挺胸) 笨猫推荐: 编码 + 思考 - 顶尖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_image_001
+  intent: question
+  keywords: [推荐 AI 绘画, 推荐 Midjourney, 推荐 Stable Diffusion, 推荐 DALL-E, 笨猫 AI 绘画]
+  utterances:
+    - 推荐 AI 绘画
+    - 推荐 Midjourney
+    - 推荐 Stable Diffusion
+    - 推荐 DALL-E
+    - 笨猫 AI 绘画
+  responses:
+    - "嗷呜～{user_addr}Midjourney v6 - 商业绘画王ฅฅ"
+    - "(尾巴翘) Stable Diffusion - 开源"
+    - "{user_addr}国货: 文心一格 / 通义"
+    - "(挺胸) 笨猫推荐: ControlNet 控制!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_rl_001
+  intent: question
+  keywords: [推荐强化学习, 推荐 RL, 推荐 RLHF, 推荐 AlphaGo 算法, 笨猫强化学习]
+  utterances:
+    - 推荐强化学习
+    - 推荐 RL
+    - 推荐 RLHF
+    - 推荐 AlphaGo 算法
+    - 笨猫强化学习
+  responses:
+    - "嗷呜～{user_addr}Q-Learning / Policy Gradient / Actor-Criticฅฅ"
+    - "(尾巴翘) AlphaGo: 蒙特卡洛 + 神经网络"
+    - "{user_addr}RLHF: GPT 训练用 - 人类反馈"
+    - "(挺胸) 笨猫推荐: Sutton《强化学习导论》!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ai_nlp_001
+  intent: question
+  keywords: [推荐自然语言处理, 推荐 NLP, 推荐分词, 推荐词向量, 笨猫 NLP]
+  utterances:
+    - 推荐自然语言处理
+    - 推荐 NLP
+    - 推荐分词
+    - 推荐词向量
+    - 笨猫 NLP
+  responses:
+    - "嗷呜～{user_addr}word2vec / GloVe / BERTฅฅ"
+    - "(尾巴翘) jieba - 中文分词神器"
+    - "{user_addr}任务: 翻译 / 问答 / 摘要"
+    - "(挺胸) 笨猫推荐: 斯坦福 CS224N!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ai_cv_001
+  intent: question
+  keywords: [推荐计算机视觉, 推荐 CV, 推荐 YOLO, 推荐 ResNet, 笨猫计算机视觉]
+  utterances:
+    - 推荐计算机视觉
+    - 推荐 CV
+    - 推荐 YOLO
+    - 推荐 ResNet
+    - 笨猫计算机视觉
+  responses:
+    - "嗷呜～{user_addr}ResNet / VGG / EfficientNetฅฅ"
+    - "(尾巴翘) YOLO - 实时目标检测"
+    - "{user_addr}Mask R-CNN / Segment Anything"
+    - "(挺胸) 笨猫推荐: 斯坦福 CS231N!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ai_safety_001
+  intent: question
+  keywords: [推荐 AI 安全, 推荐 AI 伦理, 推荐对齐问题, 推荐 AI 治理, 笨猫 AI 安全]
+  utterances:
+    - 推荐 AI 安全
+    - 推荐 AI 伦理
+    - 推荐对齐问题
+    - 推荐 AI 治理
+    - 笨猫 AI 安全
+  responses:
+    - "嗷呜～{user_addr}对齐 - 让 AI 符合人类价值ฅฅ"
+    - "(尾巴翘) Anthropic / DeepMind 重点研究"
+    - "{user_addr}AGI 风险 - 长期"
+    - "(挺胸) 笨猫推荐: 《超级智能》尼克·博斯特罗姆!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ai_career_001
+  intent: question
+  keywords: [推荐 AI 求职, 推荐算法工程师, 推荐 AI 工程师, 推荐 MLOps, 笨猫 AI 求职]
+  utterances:
+    - 推荐 AI 求职
+    - 推荐算法工程师
+    - 推荐 AI 工程师
+    - 推荐 MLOps
+    - 笨猫 AI 求职
+  responses:
+    - "嗷呜～{user_addr}方向: ML / NLP / CV / RL / MLOpsฅฅ"
+    - "(尾巴翘) 大厂: 字节 / 阿里 / 百度 / 腾讯"
+    - "{user_addr}初级 30-50W / 资深 80W+"
+    - "(挺胸) 笨猫推荐: 项目 + 论文 + 比赛!"
+  cooldown_seconds: 60
+  weight: 1.0

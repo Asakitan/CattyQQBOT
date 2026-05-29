@@ -1,0 +1,206 @@
+# 创业 / 商业模式 / VC / 初创公司 routes (S6 R139 NLU 节点扩充, 第十三周期 buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: start_idea_001
+  intent: question
+  keywords: [推荐创业, 推荐创业想法, 推荐创业项目, 推荐创业方向, 笨猫创业]
+  utterances:
+    - 推荐创业
+    - 推荐创业想法
+    - 推荐创业项目
+    - 推荐创业方向
+    - 笨猫创业
+  responses:
+    - "嗷呜～{user_addr}三问: 解决谁的问题 / 怎么解决 / 怎么赚钱ฅฅ"
+    - "(尾巴翘) MVP - 最小可行性产品"
+    - "{user_addr}痒点 / 痛点 / 爽点 - 三选一"
+    - "(挺胸) 笨猫推荐: 别盲目跟风! 找自己优势"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: start_bmc_001
+  intent: question
+  keywords: [推荐商业模式, 推荐 Business Model Canvas, 推荐盈利模式, 推荐变现, 笨猫商业模式]
+  utterances:
+    - 推荐商业模式
+    - 推荐 Business Model Canvas
+    - 推荐盈利模式
+    - 推荐变现
+    - 笨猫商业模式
+  responses:
+    - "嗷呜～{user_addr}BMC 9 模块: 客群 / 价值主张 / 渠道...ฅฅ"
+    - "(尾巴翘) SAAS / 订阅 / 抽佣 / 广告"
+    - "{user_addr}免费增值 / 平台 / 双边市场"
+    - "(挺胸) 笨猫推荐: 《商业模式新生代》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: start_funding_001
+  intent: question
+  keywords: [推荐融资, 推荐种子轮, 推荐 A 轮, 推荐 VC, 笨猫融资]
+  utterances:
+    - 推荐融资
+    - 推荐种子轮
+    - 推荐 A 轮
+    - 推荐 VC
+    - 笨猫融资
+  responses:
+    - "嗷呜～{user_addr}天使 → 种子 → A → B → C → IPOฅฅ"
+    - "(尾巴翘) 种子: 100-1000W / 早期"
+    - "{user_addr}估值法: P/E / DCF / 类比"
+    - "(挺胸) 笨猫的提醒: 别过早稀释!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: start_vc_001
+  intent: question
+  keywords: [推荐风险投资, 推荐红杉, 推荐 IDG, 推荐顶级 VC, 笨猫风险投资]
+  utterances:
+    - 推荐风险投资
+    - 推荐红杉
+    - 推荐 IDG
+    - 推荐顶级 VC
+    - 笨猫风险投资
+  responses:
+    - "嗷呜～{user_addr}国际: Sequoia / a16z / Benchmarkฅฅ"
+    - "(尾巴翘) 国内: 红杉 / IDG / 高瓴 / 经纬"
+    - "{user_addr}腾讯投资 / 阿里巴巴战投"
+    - "(挺胸) 笨猫推荐: 看投资经理 + 阶段!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: start_pmf_001
+  intent: question
+  keywords: [推荐 PMF, 推荐产品市场匹配, 推荐迭代, 推荐验证, 笨猫 PMF]
+  utterances:
+    - 推荐 PMF
+    - 推荐产品市场匹配
+    - 推荐迭代
+    - 推荐验证
+    - 笨猫 PMF
+  responses:
+    - "嗷呜～{user_addr}PMF: 产品市场匹配 - 创业生死ฅฅ"
+    - "(尾巴翘) NPS / 留存 / 复购 - 指标"
+    - "{user_addr}用户访谈 + A/B 测试"
+    - "(挺胸) 笨猫推荐: 没 PMF 别烧钱!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: start_growth_001
+  intent: question
+  keywords: [推荐增长黑客, 推荐用户增长, 推荐 AARRR, 推荐留存, 笨猫增长]
+  utterances:
+    - 推荐增长黑客
+    - 推荐用户增长
+    - 推荐 AARRR
+    - 推荐留存
+    - 笨猫增长
+  responses:
+    - "嗷呜～{user_addr}AARRR: 获取 / 激活 / 留存 / 收入 / 推荐ฅฅ"
+    - "(尾巴翘) 病毒系数 K > 1 - 自传播"
+    - "{user_addr}数据驱动 - A/B / 实验"
+    - "(挺胸) 笨猫推荐: 《增长黑客》范冰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: start_team_001
+  intent: question
+  keywords: [推荐创业团队, 推荐联合创始人, 推荐合伙人, 推荐股权分配, 笨猫创业团队]
+  utterances:
+    - 推荐创业团队
+    - 推荐联合创始人
+    - 推荐合伙人
+    - 推荐股权分配
+    - 笨猫创业团队
+  responses:
+    - "嗷呜～{user_addr}互补 > 同质 - 找互补技能ฅฅ"
+    - "(尾巴翘) 股权: 4 年 vesting + cliff"
+    - "{user_addr}股权池 ESOP 10-20%"
+    - "(挺胸) 笨猫的提醒: 早签协议!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: start_unicorn_001
+  intent: question
+  keywords: [推荐独角兽, 推荐独角兽公司, 推荐字节跳动, 推荐 SpaceX, 笨猫独角兽]
+  utterances:
+    - 推荐独角兽
+    - 推荐独角兽公司
+    - 推荐字节跳动
+    - 推荐 SpaceX
+    - 笨猫独角兽
+  responses:
+    - "嗷呜～{user_addr}估值 10 亿美元 = 独角兽ฅฅ"
+    - "(尾巴翘) 国内: 字节 / 拼多多 / 滴滴"
+    - "{user_addr}美: OpenAI / SpaceX / Stripe"
+    - "(挺胸) 笨猫推荐: 看《独角兽公司怎样炼成》!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: start_ipo_001
+  intent: question
+  keywords: [推荐 IPO, 推荐上市, 推荐 SPAC, 推荐退出策略, 笨猫 IPO]
+  utterances:
+    - 推荐 IPO
+    - 推荐上市
+    - 推荐 SPAC
+    - 推荐退出策略
+    - 笨猫 IPO
+  responses:
+    - "嗷呜～{user_addr}IPO: 港交所 / 美股 / 科创板ฅฅ"
+    - "(尾巴翘) SPAC - 借壳上市"
+    - "{user_addr}并购 - 战略退出"
+    - "(挺胸) 笨猫推荐: 别只为上市 / 看价值!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: start_book_001
+  intent: question
+  keywords: [推荐创业书, 推荐精益创业, 推荐从0到1, 推荐创业维艰, 笨猫创业书]
+  utterances:
+    - 推荐创业书
+    - 推荐精益创业
+    - 推荐从0到1
+    - 推荐创业维艰
+    - 笨猫创业书
+  responses:
+    - "嗷呜～{user_addr}精益创业 - Eric Riesฅฅ"
+    - "(尾巴翘) 《从 0 到 1》Peter Thiel"
+    - "{user_addr}创业维艰 - Ben Horowitz"
+    - "(挺胸) 笨猫推荐: 《硅谷创业课》PG!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: start_pitch_001
+  intent: question
+  keywords: [推荐路演, 推荐 BP, 推荐商业计划书, 推荐 pitch deck, 笨猫商业计划书]
+  utterances:
+    - 推荐路演
+    - 推荐 BP
+    - 推荐商业计划书
+    - 推荐 pitch deck
+    - 笨猫商业计划书
+  responses:
+    - "嗷呜～{user_addr}BP 10 页: 问题 → 方案 → 市场 → 团队ฅฅ"
+    - "(尾巴翘) 1 分钟电梯演讲必备"
+    - "{user_addr}财务预测 / 5 年规划"
+    - "(挺胸) 笨猫推荐: Y Combinator 模板!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: start_china_001
+  intent: question
+  keywords: [推荐中国创业, 推荐互联网创业, 推荐 SaaS 创业, 推荐 To B 创业, 笨猫创业方向]
+  utterances:
+    - 推荐中国创业
+    - 推荐互联网创业
+    - 推荐 SaaS 创业
+    - 推荐 To B 创业
+    - 笨猫创业方向
+  responses:
+    - "嗷呜～{user_addr}风口: AI / 出海 / 银发 / 新能源ฅฅ"
+    - "(尾巴翘) To B SaaS - 现金流好"
+    - "{user_addr}消费降级 - 性价比品牌"
+    - "(挺胸) 笨猫推荐: 别追风口 / 找细分!"
+  cooldown_seconds: 60
+  weight: 0.9

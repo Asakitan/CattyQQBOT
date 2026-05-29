@@ -1,0 +1,206 @@
+# 音乐 / 乐器 / 古典 / 流行 / 嘻哈 routes (S6 R132 NLU 节点扩充, 第十三周期 buffered 1/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: music_classical_001
+  intent: question
+  keywords: [推荐古典音乐, 推荐巴赫, 推荐贝多芬, 推荐莫扎特, 笨猫古典音乐]
+  utterances:
+    - 推荐古典音乐
+    - 推荐巴赫
+    - 推荐贝多芬
+    - 推荐莫扎特
+    - 笨猫古典音乐
+  responses:
+    - "嗷呜～{user_addr}三巨头: 巴赫 / 贝多芬 / 莫扎特ฅฅ"
+    - "(尾巴翘) 巴赫: 平均律 / 哥德堡变奏"
+    - "{user_addr}贝多芬: 9 大交响 / 月光"
+    - "(挺胸) 笨猫推荐: 卡拉扬指挥版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_jazz_001
+  intent: question
+  keywords: [推荐爵士乐, 推荐 Miles Davis, 推荐 John Coltrane, 推荐 bebop, 笨猫爵士]
+  utterances:
+    - 推荐爵士乐
+    - 推荐 Miles Davis
+    - 推荐 John Coltrane
+    - 推荐 bebop
+    - 笨猫爵士
+  responses:
+    - "嗷呜～{user_addr}Kind of Blue - Miles Davis 神专ฅฅ"
+    - "(尾巴翘) Coltrane / Bill Evans / Monk"
+    - "{user_addr}流派: Bebop / Cool / Fusion"
+    - "(挺胸) 笨猫推荐: 蓝调 + 爵士 = 灵魂!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: music_rock_001
+  intent: question
+  keywords: [推荐摇滚, 推荐 Beatles, 推荐 Pink Floyd, 推荐金属, 笨猫摇滚]
+  utterances:
+    - 推荐摇滚
+    - 推荐 Beatles
+    - 推荐 Pink Floyd
+    - 推荐金属
+    - 笨猫摇滚
+  responses:
+    - "嗷呜～{user_addr}Beatles 启蒙 / Stones 反叛ฅฅ"
+    - "(尾巴翘) Pink Floyd - 迷幻天花板"
+    - "{user_addr}金属: Metallica / Iron Maiden"
+    - "(挺胸) 笨猫推荐: Hotel California 必听!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_pop_001
+  intent: question
+  keywords: [推荐流行乐, 推荐 Taylor Swift, 推荐 Lady Gaga, 推荐美式流行, 笨猫流行乐]
+  utterances:
+    - 推荐流行乐
+    - 推荐 Taylor Swift
+    - 推荐 Lady Gaga
+    - 推荐美式流行
+    - 笨猫流行乐
+  responses:
+    - "嗷呜～{user_addr}Taylor Swift / Billie Eilish / Olivia Rodrigoฅฅ"
+    - "(尾巴翘) Adele / Sam Smith - 抒情天后"
+    - "{user_addr}韩流: BTS / BLACKPINK / NewJeans"
+    - "(挺胸) 笨猫推荐: 中乐 J-Pop 也好听!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_hiphop_001
+  intent: question
+  keywords: [推荐嘻哈, 推荐 hip hop, 推荐 rap, 推荐 Drake, 笨猫嘻哈]
+  utterances:
+    - 推荐嘻哈
+    - 推荐 hip hop
+    - 推荐 rap
+    - 推荐 Drake
+    - 笨猫嘻哈
+  responses:
+    - "嗷呜～{user_addr}Drake / Kendrick / J. Cole - 三巨头ฅฅ"
+    - "(尾巴翘) 经典: Tupac / Notorious BIG"
+    - "{user_addr}国货: GAI / PG One / Tizzy T"
+    - "(挺胸) 笨猫推荐: Eminem 词最厉害!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: music_edm_001
+  intent: question
+  keywords: [推荐电音, 推荐 EDM, 推荐 Avicii, 推荐 deep house, 笨猫电音]
+  utterances:
+    - 推荐电音
+    - 推荐 EDM
+    - 推荐 Avicii
+    - 推荐 deep house
+    - 笨猫电音
+  responses:
+    - "嗷呜～{user_addr}Avicii / Marshmello / Calvin Harrisฅฅ"
+    - "(尾巴翘) 流派: House / Techno / DnB / Trance"
+    - "{user_addr}Tomorrowland / EDC - 顶级音乐节"
+    - "(挺胸) 笨猫推荐: deadmau5 / Daft Punk!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: music_china_001
+  intent: question
+  keywords: [推荐中国音乐, 推荐华语流行, 推荐周杰伦, 推荐邓丽君, 笨猫华语]
+  utterances:
+    - 推荐中国音乐
+    - 推荐华语流行
+    - 推荐周杰伦
+    - 推荐邓丽君
+    - 笨猫华语
+  responses:
+    - "嗷呜～{user_addr}周杰伦 / 林俊杰 / JJ - 华语三杰ฅฅ"
+    - "(尾巴翘) 邓丽君: 一代天后 / 月亮代表"
+    - "{user_addr}独立: 苏打绿 / 五月天 / Mayday"
+    - "(挺胸) 笨猫推荐: 重听周杰伦时代!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_piano_001
+  intent: question
+  keywords: [推荐钢琴, 推荐学钢琴, 推荐钢琴谱, 推荐 Yamaha, 笨猫钢琴]
+  utterances:
+    - 推荐钢琴
+    - 推荐学钢琴
+    - 推荐钢琴谱
+    - 推荐 Yamaha
+    - 笨猫钢琴
+  responses:
+    - "嗷呜～{user_addr}入门: 拜厄 / 哈农 / 车尔尼ฅฅ"
+    - "(尾巴翘) 立式: Yamaha U1 / U3 - 8 万起"
+    - "{user_addr}三角: Steinway / Bösendorfer - 顶级"
+    - "(挺胸) 笨猫推荐: 电钢 < 真琴! 别替代"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_guitar_001
+  intent: question
+  keywords: [推荐吉他, 推荐学吉他, 推荐民谣吉他, 推荐电吉他, 笨猫吉他]
+  utterances:
+    - 推荐吉他
+    - 推荐学吉他
+    - 推荐民谣吉他
+    - 推荐电吉他
+    - 笨猫吉他
+  responses:
+    - "嗷呜～{user_addr}民谣: Martin / Taylor / Gibson J45ฅฅ"
+    - "(尾巴翘) 电吉他: Fender / Gibson Les Paul"
+    - "{user_addr}国货: SAGA / Cort - 入门"
+    - "(挺胸) 笨猫推荐: 先 1000-3000 价位!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_violin_001
+  intent: question
+  keywords: [推荐小提琴, 推荐学小提琴, 推荐弦乐, 推荐大提琴, 笨猫小提琴]
+  utterances:
+    - 推荐小提琴
+    - 推荐学小提琴
+    - 推荐弦乐
+    - 推荐大提琴
+    - 笨猫小提琴
+  responses:
+    - "嗷呜～{user_addr}入门: 国产 1000-5000 起步ฅฅ"
+    - "(尾巴翘) 名琴: Stradivari / Guarneri"
+    - "{user_addr}注意: 7-10 岁开始最好"
+    - "(挺胸) 笨猫推荐: 一定找好老师!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: music_streaming_001
+  intent: question
+  keywords: [推荐音乐 app, 推荐 Spotify, 推荐 Apple Music, 推荐网易云, 笨猫音乐 app]
+  utterances:
+    - 推荐音乐 app
+    - 推荐 Spotify
+    - 推荐 Apple Music
+    - 推荐网易云
+    - 笨猫音乐 app
+  responses:
+    - "嗷呜～{user_addr}Spotify: 全球 No.1 / 推荐算法ฅฅ"
+    - "(尾巴翘) Apple Music: 无损 / 空间音频"
+    - "{user_addr}国货: 网易云 / QQ 音乐"
+    - "(挺胸) 笨猫推荐: 国内用网易 - 评论好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: music_theory_001
+  intent: question
+  keywords: [推荐乐理, 推荐和声, 推荐曲式, 推荐视唱练耳, 笨猫乐理]
+  utterances:
+    - 推荐乐理
+    - 推荐和声
+    - 推荐曲式
+    - 推荐视唱练耳
+    - 笨猫乐理
+  responses:
+    - "嗷呜～{user_addr}基础: 七声音阶 / 和弦 / 大小调ฅฅ"
+    - "(尾巴翘) 教材: 李重光基本乐理"
+    - "{user_addr}视唱练耳: 听音 / 节奏"
+    - "(挺胸) 笨猫推荐: B站 老师讲超棒!"
+  cooldown_seconds: 60
+  weight: 0.7

@@ -1,0 +1,206 @@
+# 物理 / 量子 / 相对论 / 天体 routes (S6 R137 NLU 节点扩充, 第十三周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: phy_classical_001
+  intent: question
+  keywords: [推荐经典力学, 推荐牛顿力学, 推荐三大定律, 推荐牛顿, 笨猫牛顿]
+  utterances:
+    - 推荐经典力学
+    - 推荐牛顿力学
+    - 推荐三大定律
+    - 推荐牛顿
+    - 笨猫牛顿
+  responses:
+    - "嗷呜～{user_addr}牛顿: 经典力学奠基ฅฅ"
+    - "(尾巴翘) 三定律 + 万有引力"
+    - "{user_addr}《自然哲学的数学原理》"
+    - "(挺胸) 笨猫推荐: 费曼物理学讲义!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phy_quantum_001
+  intent: question
+  keywords: [推荐量子力学, 推荐薛定谔, 推荐海森堡, 推荐量子纠缠, 笨猫量子力学]
+  utterances:
+    - 推荐量子力学
+    - 推荐薛定谔
+    - 推荐海森堡
+    - 推荐量子纠缠
+    - 笨猫量子力学
+  responses:
+    - "嗷呜～{user_addr}薛定谔猫 / 不确定原理 / 量子纠缠ฅฅ"
+    - "(尾巴翘) 哥本哈根 / 多世界解释"
+    - "{user_addr}《量子简史》《上帝掷骰子吗》"
+    - "(挺胸) 笨猫推荐: 别试图懂 - 计算就行!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phy_relativity_001
+  intent: question
+  keywords: [推荐相对论, 推荐爱因斯坦, 推荐狭义相对论, 推荐广义相对论, 笨猫相对论]
+  utterances:
+    - 推荐相对论
+    - 推荐爱因斯坦
+    - 推荐狭义相对论
+    - 推荐广义相对论
+    - 笨猫相对论
+  responses:
+    - "嗷呜～{user_addr}狭义 E=mc² / 时间膨胀ฅฅ"
+    - "(尾巴翘) 广义: 引力 = 时空弯曲"
+    - "{user_addr}爱因斯坦 1916 提出"
+    - "(挺胸) 笨猫推荐: 《狭义与广义相对论浅说》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phy_astro_001
+  intent: question
+  keywords: [推荐天体物理, 推荐黑洞, 推荐中子星, 推荐暗物质, 笨猫天体物理]
+  utterances:
+    - 推荐天体物理
+    - 推荐黑洞
+    - 推荐中子星
+    - 推荐暗物质
+    - 笨猫天体物理
+  responses:
+    - "嗷呜～{user_addr}黑洞: 事件视界 / 霍金辐射ฅฅ"
+    - "(尾巴翘) 中子星: 一勺重 10 亿吨"
+    - "{user_addr}暗物质 + 暗能量 = 95% 宇宙"
+    - "(挺胸) 笨猫推荐: 霍金《时间简史》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phy_cosmology_001
+  intent: question
+  keywords: [推荐宇宙学, 推荐宇宙大爆炸, 推荐宇宙膨胀, 推荐宇宙起源, 笨猫宇宙学]
+  utterances:
+    - 推荐宇宙学
+    - 推荐宇宙大爆炸
+    - 推荐宇宙膨胀
+    - 推荐宇宙起源
+    - 笨猫宇宙学
+  responses:
+    - "嗷呜～{user_addr}大爆炸: 138 亿年前 - 宇宙起点ฅฅ"
+    - "(尾巴翘) 哈勃: 宇宙在膨胀 / 加速"
+    - "{user_addr}多重宇宙 / 弦理论 - 假说"
+    - "(挺胸) 笨猫推荐: NASA / JWST 数据!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: phy_thermo_001
+  intent: question
+  keywords: [推荐热力学, 推荐熵, 推荐热力学第二定律, 推荐统计物理, 笨猫热力学]
+  utterances:
+    - 推荐热力学
+    - 推荐熵
+    - 推荐热力学第二定律
+    - 推荐统计物理
+    - 笨猫热力学
+  responses:
+    - "嗷呜～{user_addr}熵: 永远增加 - 第二定律ฅฅ"
+    - "(尾巴翘) 麦克斯韦妖 / 玻尔兹曼"
+    - "{user_addr}宇宙热寂 - 终极命运"
+    - "(挺胸) 笨猫推荐: 《热的简史》!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: phy_electric_001
+  intent: question
+  keywords: [推荐电磁学, 推荐麦克斯韦方程, 推荐电磁场, 推荐电动力学, 笨猫电磁学]
+  utterances:
+    - 推荐电磁学
+    - 推荐麦克斯韦方程
+    - 推荐电磁场
+    - 推荐电动力学
+    - 笨猫电磁学
+  responses:
+    - "嗷呜～{user_addr}麦克斯韦四个方程 - 电磁圣经ฅฅ"
+    - "(尾巴翘) 电磁波 = 光波"
+    - "{user_addr}法拉第 / 安培 / 库仑"
+    - "(挺胸) 笨猫推荐: Griffiths 电动力学!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: phy_particle_001
+  intent: question
+  keywords: [推荐粒子物理, 推荐标准模型, 推荐希格斯粒子, 推荐夸克, 笨猫粒子物理]
+  utterances:
+    - 推荐粒子物理
+    - 推荐标准模型
+    - 推荐希格斯粒子
+    - 推荐夸克
+    - 笨猫粒子物理
+  responses:
+    - "嗷呜～{user_addr}标准模型: 17 种基本粒子ฅฅ"
+    - "(尾巴翘) 希格斯: 2012 CERN 发现 - 上帝粒子"
+    - "{user_addr}夸克: 6 味 + 反粒子"
+    - "(挺胸) 笨猫推荐: LHC 大型强子对撞机!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: phy_chemistry_001
+  intent: question
+  keywords: [推荐化学, 推荐有机化学, 推荐无机化学, 推荐元素周期表, 笨猫化学]
+  utterances:
+    - 推荐化学
+    - 推荐有机化学
+    - 推荐无机化学
+    - 推荐元素周期表
+    - 笨猫化学
+  responses:
+    - "嗷呜～{user_addr}元素周期表 - 化学之本ฅฅ"
+    - "(尾巴翘) 有机: C / H / O - 碳化学"
+    - "{user_addr}诺贝尔化学奖 - 顶级"
+    - "(挺胸) 笨猫推荐: 《化学元素之美》!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: phy_biology_001
+  intent: question
+  keywords: [推荐生物学, 推荐 DNA, 推荐基因组, 推荐进化论, 笨猫生物学]
+  utterances:
+    - 推荐生物学
+    - 推荐 DNA
+    - 推荐基因组
+    - 推荐进化论
+    - 笨猫生物学
+  responses:
+    - "嗷呜～{user_addr}DNA: 4 种碱基 - A T C Gฅฅ"
+    - "(尾巴翘) 中心法则: DNA → RNA → 蛋白"
+    - "{user_addr}达尔文进化论 - 自然选择"
+    - "(挺胸) 笨猫推荐: 《自私的基因》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phy_neuro_001
+  intent: question
+  keywords: [推荐神经科学, 推荐脑科学, 推荐认知科学, 推荐意识, 笨猫脑科学]
+  utterances:
+    - 推荐神经科学
+    - 推荐脑科学
+    - 推荐认知科学
+    - 推荐意识
+    - 笨猫脑科学
+  responses:
+    - "嗷呜～{user_addr}脑: 860 亿神经元ฅฅ"
+    - "(尾巴翘) 意识难题 - 哲学物理交叉"
+    - "{user_addr}神经可塑性 - 终身学习"
+    - "(挺胸) 笨猫推荐: 《思考快与慢》卡尼曼!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: phy_science_history_001
+  intent: question
+  keywords: [推荐科学史, 推荐科学革命, 推荐文艺复兴科学, 推荐达芬奇, 笨猫科学史]
+  utterances:
+    - 推荐科学史
+    - 推荐科学革命
+    - 推荐文艺复兴科学
+    - 推荐达芬奇
+    - 笨猫科学史
+  responses:
+    - "嗷呜～{user_addr}科学革命: 哥白尼 / 伽利略 / 牛顿ฅฅ"
+    - "(尾巴翘) 达芬奇 - 文艺复兴全才"
+    - "{user_addr}《从一到无穷大》伽莫夫"
+    - "(挺胸) 笨猫推荐: 《科学革命的结构》库恩!"
+  cooldown_seconds: 60
+  weight: 0.8

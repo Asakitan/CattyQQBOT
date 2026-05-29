@@ -1,0 +1,206 @@
+# 哲学 / 西方哲学 / 东方哲学 / 伦理学 routes (S6 R136 NLU 节点扩充, 第十三周期 buffered 5/10 半程)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: phil_ancient_west_001
+  intent: question
+  keywords: [推荐古希腊哲学, 推荐苏格拉底, 推荐柏拉图, 推荐亚里士多德, 笨猫古希腊哲学]
+  utterances:
+    - 推荐古希腊哲学
+    - 推荐苏格拉底
+    - 推荐柏拉图
+    - 推荐亚里士多德
+    - 笨猫古希腊哲学
+  responses:
+    - "嗷呜～{user_addr}三圣: 苏格拉底 / 柏拉图 / 亚里士多德ฅฅ"
+    - "(尾巴翘) 苏: 我知道自己无知"
+    - "{user_addr}柏拉图: 理念论 / 洞穴比喻"
+    - "(挺胸) 笨猫推荐: 《理想国》入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phil_modern_west_001
+  intent: question
+  keywords: [推荐近代哲学, 推荐笛卡尔, 推荐康德, 推荐黑格尔, 笨猫近代哲学]
+  utterances:
+    - 推荐近代哲学
+    - 推荐笛卡尔
+    - 推荐康德
+    - 推荐黑格尔
+    - 笨猫近代哲学
+  responses:
+    - "嗷呜～{user_addr}笛卡尔: 我思故我在ฅฅ"
+    - "(尾巴翘) 康德: 三大批判 - 哲学顶峰"
+    - "{user_addr}黑格尔: 辩证法 / 绝对精神"
+    - "(挺胸) 笨猫推荐: 《纯粹理性批判》!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: phil_modern_001
+  intent: question
+  keywords: [推荐现代哲学, 推荐尼采, 推荐萨特, 推荐存在主义, 笨猫现代哲学]
+  utterances:
+    - 推荐现代哲学
+    - 推荐尼采
+    - 推荐萨特
+    - 推荐存在主义
+    - 笨猫现代哲学
+  responses:
+    - "嗷呜～{user_addr}尼采: 上帝已死 / 超人ฅฅ"
+    - "(尾巴翘) 萨特: 存在先于本质"
+    - "{user_addr}加缪: 西西弗斯 / 局外人"
+    - "(挺胸) 笨猫推荐: 《查拉图斯特拉如是说》!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: phil_china_001
+  intent: question
+  keywords: [推荐中国哲学, 推荐儒家, 推荐道家, 推荐佛家, 笨猫中国哲学]
+  utterances:
+    - 推荐中国哲学
+    - 推荐儒家
+    - 推荐道家
+    - 推荐佛家
+    - 笨猫中国哲学
+  responses:
+    - "嗷呜～{user_addr}儒: 仁义礼智信 - 孔子ฅฅ"
+    - "(尾巴翘) 道: 道法自然 - 老子 / 庄子"
+    - "{user_addr}佛: 中观 / 唯识 / 禅宗"
+    - "(挺胸) 笨猫推荐: 三教合一 - 中国智慧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phil_confucius_001
+  intent: question
+  keywords: [推荐孔子, 推荐论语, 推荐孟子, 推荐荀子, 笨猫孔子]
+  utterances:
+    - 推荐孔子
+    - 推荐论语
+    - 推荐孟子
+    - 推荐荀子
+    - 笨猫孔子
+  responses:
+    - "嗷呜～{user_addr}论语: 仁 / 礼 / 中庸ฅฅ"
+    - "(尾巴翘) 孟子: 性善 / 民为贵"
+    - "{user_addr}荀子: 性恶 / 礼法"
+    - "(挺胸) 笨猫推荐: 《论语》读 100 遍!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: phil_dao_001
+  intent: question
+  keywords: [推荐老子, 推荐庄子, 推荐道德经, 推荐道家思想, 笨猫老子]
+  utterances:
+    - 推荐老子
+    - 推荐庄子
+    - 推荐道德经
+    - 推荐道家思想
+    - 笨猫老子
+  responses:
+    - "嗷呜～{user_addr}道德经: 5000 字 - 哲学奇书ฅฅ"
+    - "(尾巴翘) 上善若水 / 无为而治"
+    - "{user_addr}庄子: 逍遥游 / 齐物论"
+    - "(挺胸) 笨猫推荐: 《庄子》最浪漫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phil_buddhism_001
+  intent: question
+  keywords: [推荐佛学, 推荐禅宗, 推荐心经, 推荐金刚经, 笨猫佛学]
+  utterances:
+    - 推荐佛学
+    - 推荐禅宗
+    - 推荐心经
+    - 推荐金刚经
+    - 笨猫佛学
+  responses:
+    - "嗷呜～{user_addr}入门: 心经 / 金刚经ฅฅ"
+    - "(尾巴翘) 禅宗: 不立文字 / 顿悟"
+    - "{user_addr}《六祖坛经》《楞严经》"
+    - "(挺胸) 笨猫推荐: 别迷信! 当哲学读"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: phil_ethics_001
+  intent: question
+  keywords: [推荐伦理学, 推荐道德哲学, 推荐功利主义, 推荐美德伦理, 笨猫伦理学]
+  utterances:
+    - 推荐伦理学
+    - 推荐道德哲学
+    - 推荐功利主义
+    - 推荐美德伦理
+    - 笨猫伦理学
+  responses:
+    - "嗷呜～{user_addr}三大: 美德 / 义务论 / 功利ฅฅ"
+    - "(尾巴翘) 康德义务论 / 边沁功利"
+    - "{user_addr}罗尔斯 - 正义论"
+    - "(挺胸) 笨猫推荐: 《公正》桑德尔!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: phil_logic_001
+  intent: question
+  keywords: [推荐逻辑学, 推荐形式逻辑, 推荐批判性思维, 推荐谬误, 笨猫逻辑学]
+  utterances:
+    - 推荐逻辑学
+    - 推荐形式逻辑
+    - 推荐批判性思维
+    - 推荐谬误
+    - 笨猫逻辑学
+  responses:
+    - "嗷呜～{user_addr}三段论 / 命题逻辑 / 谓词逻辑ฅฅ"
+    - "(尾巴翘) 常见谬误: 稻草人 / 滑坡 / 诉诸"
+    - "{user_addr}《学会提问》《思考快与慢》"
+    - "(挺胸) 笨猫推荐: 逻辑训练每天 10 题!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: phil_political_001
+  intent: question
+  keywords: [推荐政治哲学, 推荐自由主义, 推荐马克思, 推荐社会契约, 笨猫政治哲学]
+  utterances:
+    - 推荐政治哲学
+    - 推荐自由主义
+    - 推荐马克思
+    - 推荐社会契约
+    - 笨猫政治哲学
+  responses:
+    - "嗷呜～{user_addr}经典: 霍布斯 / 洛克 / 卢梭ฅฅ"
+    - "(尾巴翘) 马克思: 资本论 / 唯物史观"
+    - "{user_addr}罗尔斯 / 哈耶克 - 现代"
+    - "(挺胸) 笨猫推荐: 《政治学》亚里士多德!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: phil_epistem_001
+  intent: question
+  keywords: [推荐认识论, 推荐知识论, 推荐怀疑论, 推荐经验论, 笨猫认识论]
+  utterances:
+    - 推荐认识论
+    - 推荐知识论
+    - 推荐怀疑论
+    - 推荐经验论
+    - 笨猫认识论
+  responses:
+    - "嗷呜～{user_addr}经验论: 培根 / 洛克 / 休谟ฅฅ"
+    - "(尾巴翘) 理性论: 笛卡尔 / 斯宾诺莎"
+    - "{user_addr}康德调和 - 综合"
+    - "(挺胸) 笨猫推荐: 《人类理解论》洛克!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: phil_intro_001
+  intent: question
+  keywords: [推荐哲学入门, 推荐苏菲的世界, 推荐西方哲学史, 推荐中国哲学简史, 笨猫哲学入门]
+  utterances:
+    - 推荐哲学入门
+    - 推荐苏菲的世界
+    - 推荐西方哲学史
+    - 推荐中国哲学简史
+    - 笨猫哲学入门
+  responses:
+    - "嗷呜～{user_addr}《苏菲的世界》小说式 - 经典入门ฅฅ"
+    - "(尾巴翘) 罗素《西方哲学史》"
+    - "{user_addr}冯友兰《中国哲学简史》"
+    - "(挺胸) 笨猫推荐: B站陈嘉映讲哲学!"
+  cooldown_seconds: 60
+  weight: 1.0

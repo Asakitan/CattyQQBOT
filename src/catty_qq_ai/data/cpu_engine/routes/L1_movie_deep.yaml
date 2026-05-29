@@ -1,0 +1,206 @@
+# 电影 / 导演 / 影评 / 经典电影 routes (S6 R133 NLU 节点扩充, 第十三周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: movie_director_001
+  intent: question
+  keywords: [推荐导演, 推荐 Christopher Nolan, 推荐 Spielberg, 推荐 Tarantino, 笨猫导演]
+  utterances:
+    - 推荐导演
+    - 推荐 Christopher Nolan
+    - 推荐 Spielberg
+    - 推荐 Tarantino
+    - 笨猫导演
+  responses:
+    - "嗷呜～{user_addr}诺兰: 烧脑王 / 盗梦 / 星际穿越ฅฅ"
+    - "(尾巴翘) 斯皮尔伯格: 商业大师"
+    - "{user_addr}昆汀: 暴力美学 / 杀死比尔"
+    - "(挺胸) 笨猫推荐: 库布里克 / 张艺谋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: movie_oscar_001
+  intent: question
+  keywords: [推荐奥斯卡, 推荐金像奖, 推荐最佳影片, 推荐影帝, 笨猫奥斯卡]
+  utterances:
+    - 推荐奥斯卡
+    - 推荐金像奖
+    - 推荐最佳影片
+    - 推荐影帝
+    - 笨猫奥斯卡
+  responses:
+    - "嗷呜～{user_addr}最佳影片: 阿甘正传 / 泰坦尼克 / 寄生虫ฅฅ"
+    - "(尾巴翘) 最佳导演: 李安 / 卡梅隆"
+    - "{user_addr}影帝: 莱昂纳多 / 安东尼·霍普金斯"
+    - "(挺胸) 笨猫推荐: 历届最佳片单!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: movie_genre_action_001
+  intent: question
+  keywords: [推荐动作片, 推荐谍战片, 推荐 007, 推荐碟中谍, 笨猫动作片]
+  utterances:
+    - 推荐动作片
+    - 推荐谍战片
+    - 推荐 007
+    - 推荐碟中谍
+    - 笨猫动作片
+  responses:
+    - "嗷呜～{user_addr}007: 邦德经典 - 6 代邦德ฅฅ"
+    - "(尾巴翘) 碟中谍: 阿汤哥 / 实拍特技"
+    - "{user_addr}速度激情 / 谍影重重"
+    - "(挺胸) 笨猫推荐: 杀手疾风 - 极致!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: movie_genre_scifi_001
+  intent: question
+  keywords: [推荐科幻片, 推荐星球大战, 推荐银翼杀手, 推荐黑客帝国, 笨猫科幻片]
+  utterances:
+    - 推荐科幻片
+    - 推荐星球大战
+    - 推荐银翼杀手
+    - 推荐黑客帝国
+    - 笨猫科幻片
+  responses:
+    - "嗷呜～{user_addr}2001 太空漫游 - 科幻之王ฅฅ"
+    - "(尾巴翘) 黑客帝国 / 银翼杀手 - 赛博朋克"
+    - "{user_addr}星球大战 / 漫威 - 大众"
+    - "(挺胸) 笨猫推荐: 三体改编必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: movie_genre_horror_001
+  intent: question
+  keywords: [推荐恐怖片, 推荐惊悚片, 推荐心理惊悚, 推荐日本恐怖, 笨猫恐怖片]
+  utterances:
+    - 推荐恐怖片
+    - 推荐惊悚片
+    - 推荐心理惊悚
+    - 推荐日本恐怖
+    - 笨猫恐怖片
+  responses:
+    - "嗷呜～{user_addr}小丑回魂 / 闪灵 / 招魂ฅฅ"
+    - "(尾巴翘) 日恐: 午夜凶铃 / 咒怨"
+    - "{user_addr}心理惊悚: 沉默羔羊 / 七宗罪"
+    - "(挺胸) 笨猫的提醒: 别一个人晚上看!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: movie_genre_romance_001
+  intent: question
+  keywords: [推荐爱情片, 推荐浪漫片, 推荐 LaLaLand, 推荐爱在三部曲, 笨猫爱情片]
+  utterances:
+    - 推荐爱情片
+    - 推荐浪漫片
+    - 推荐 LaLaLand
+    - 推荐爱在三部曲
+    - 笨猫爱情片
+  responses:
+    - "嗷呜～{user_addr}泰坦尼克号 / 罗马假日 - 经典ฅฅ"
+    - "(尾巴翘) 爱乐之城 - 歌舞 + 爱情"
+    - "{user_addr}爱在三部曲 - 现实主义"
+    - "(挺胸) 笨猫推荐: 怦然心动 - 小清新!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: movie_anime_001
+  intent: question
+  keywords: [推荐动画电影, 推荐宫崎骏, 推荐新海诚, 推荐皮克斯, 笨猫动画电影]
+  utterances:
+    - 推荐动画电影
+    - 推荐宫崎骏
+    - 推荐新海诚
+    - 推荐皮克斯
+    - 笨猫动画电影
+  responses:
+    - "嗷呜～{user_addr}宫崎骏: 千与千寻 / 龙猫 / 哈尔ฅฅ"
+    - "(尾巴翘) 新海诚: 你的名字 / 天气之子"
+    - "{user_addr}皮克斯: 玩具总动员 / 寻梦"
+    - "(挺胸) 笨猫推荐: 国漫: 大圣归来 / 哪吒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: movie_china_001
+  intent: question
+  keywords: [推荐中国电影, 推荐华语电影, 推荐张艺谋, 推荐姜文, 笨猫华语电影]
+  utterances:
+    - 推荐中国电影
+    - 推荐华语电影
+    - 推荐张艺谋
+    - 推荐姜文
+    - 笨猫华语电影
+  responses:
+    - "嗷呜～{user_addr}张艺谋: 红高粱 / 英雄 / 满江红ฅฅ"
+    - "(尾巴翘) 陈凯歌: 霸王别姬 - 神作"
+    - "{user_addr}姜文: 让子弹飞 - 隐喻王"
+    - "(挺胸) 笨猫推荐: 王家卫 / 杜琪峰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: movie_hk_001
+  intent: question
+  keywords: [推荐香港电影, 推荐周星驰, 推荐刘德华, 推荐杜琪峰, 笨猫香港电影]
+  utterances:
+    - 推荐香港电影
+    - 推荐周星驰
+    - 推荐刘德华
+    - 推荐杜琪峰
+    - 笨猫香港电影
+  responses:
+    - "嗷呜～{user_addr}周星驰: 大话西游 / 喜剧之王ฅฅ"
+    - "(尾巴翘) 杜琪峰: 黑社会 / 枪火"
+    - "{user_addr}王家卫: 重庆森林 / 春光乍泄"
+    - "(挺胸) 笨猫推荐: 港片黄金年代!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: movie_doc_001
+  intent: question
+  keywords: [推荐纪录片, 推荐 BBC 纪录片, 推荐 National Geographic, 推荐美食纪录片, 笨猫纪录片]
+  utterances:
+    - 推荐纪录片
+    - 推荐 BBC 纪录片
+    - 推荐 National Geographic
+    - 推荐美食纪录片
+    - 笨猫纪录片
+  responses:
+    - "嗷呜～{user_addr}BBC: 地球脉动 / 蓝色星球ฅฅ"
+    - "(尾巴翘) 国货: 舌尖上的中国 / 风味人间"
+    - "{user_addr}人物: 二十二 / 棒!少年"
+    - "(挺胸) 笨猫推荐: NHK 纪录片!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: movie_review_001
+  intent: question
+  keywords: [推荐影评网站, 推荐 IMDB, 推荐豆瓣电影, 推荐烂番茄, 笨猫影评]
+  utterances:
+    - 推荐影评网站
+    - 推荐 IMDB
+    - 推荐豆瓣电影
+    - 推荐烂番茄
+    - 笨猫影评
+  responses:
+    - "嗷呜～{user_addr}IMDB: 国际权威 / 用户评分ฅฅ"
+    - "(尾巴翘) 豆瓣: 国内 - 评论质量高"
+    - "{user_addr}烂番茄: 影评人 + 观众分"
+    - "(挺胸) 笨猫推荐: Metacritic 综合评分!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: movie_streaming_001
+  intent: question
+  keywords: [推荐看电影, 推荐 Netflix, 推荐爱奇艺, 推荐 HBO, 笨猫电影 app]
+  utterances:
+    - 推荐看电影
+    - 推荐 Netflix
+    - 推荐爱奇艺
+    - 推荐 HBO
+    - 笨猫电影 app
+  responses:
+    - "嗷呜～{user_addr}Netflix: 国际 / 王冠 / 怪奇物语ฅฅ"
+    - "(尾巴翘) HBO: 权游 / 守望 / 顶级剧"
+    - "{user_addr}国内: 爱奇艺 / 腾讯 / B站"
+    - "(挺胸) 笨猫推荐: 海外用 Netflix!"
+  cooldown_seconds: 60
+  weight: 1.0
