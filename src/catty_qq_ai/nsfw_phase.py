@@ -81,6 +81,13 @@ class PhaseState:
     #   + update_phase 回复文本入带), 由怀孕记录处 consume_pending_climaxes() 取走清零.
     #   与 climax_count(失神机制)解耦 — 失神 4 轮 reset climax_count 不影响怀孕累计.
     pending_climax_count: int = 0
+    # ── 主人 2026-05-30: 失神↔高潮循环 (持续被推时高潮过多 → 失神/恢复/再高潮 三态轮转) ──
+    # 0 = 未进循环 (起步攒 high_band); 进循环后每个 push 轮推进一格:
+    #   3 = 高潮 (本轮 _bump_climax, prefill 用 P6 climax pool)
+    #   1 = 失神 (dazed=True, prefill 用 P7 overstim/失神 pool)
+    #   2 = 恢复 (dazed=False, 1 轮喘息, prefill 用 P8 余韵 pool)
+    # 轮转顺序 3→1→2→3 = 高潮→失神→恢复→高潮 (即主人要的"失神→恢复→高潮→又失神").
+    overstim_phase: int = 0
 
 
 # Module-level state: key = f"{scope}:{user_id}"
@@ -150,6 +157,7 @@ def _load_phase_state() -> None:
                     turns_dazed=int(record.get("turns_dazed", 0)),
                     high_band_turns=int(record.get("high_band_turns", 0)),
                     pending_climax_count=int(record.get("pending_climax_count", 0)),
+                    overstim_phase=int(record.get("overstim_phase", 0)),
                 )
             except Exception:  # noqa: BLE001
                 continue
@@ -184,7 +192,9 @@ def flush_phase_state() -> bool:
         except Exception:  # noqa: BLE001
             return False
 _NSFW_PHASE_EXPIRY_SECONDS = 1800  # 30min 无新更新 → 视为新场景 reset
-_HIGH_BAND_CLIMAX_EVERY = 3  # 主人 2026-05-29: 持续停留 P6-P8 (>=6) 且仍在推, 每 N 轮 = 一次高潮
+_HIGH_BAND_CLIMAX_EVERY = 2  # 主人 2026-05-30: 3→2. 旧值几乎到不了 climax_count>=2 → 失神永不触发.
+# 跨进 P6 记 1 次后, 笨猫被封顶在 P7 出不来 (phase 不许回退), 后续高潮只能靠 high_band 补记.
+# 改 2: 进高潮带后再被硬顶 2 轮即 +1 高潮 → climax_count 到 2 → dazed=True ("高潮过多失神").
 _MAX_STATES = 256  # 防内存爆 — 超过时回收最旧 25%
 _RECENT_OPENER_CAP = 3  # 保留最近 N 条 reply opener 用于反复读
 
@@ -2170,12 +2180,14 @@ def detect_phase_with_confidence(reply: str) -> tuple[int, int]:
 
 
 def _bump_climax(st: PhaseState) -> None:
-    """记一次笨猫高潮: climax_count++ (失神机制) + pending_climax_count++ (怀孕 consume)."""
+    """记一次笨猫高潮: climax_count++ (计数) + pending_climax_count++ (怀孕 consume).
+
+    主人 2026-05-30: dazed 不再在此处立即置 True — 改由 _tick_high_band_on_push 的
+    失神↔高潮三态循环驱动 (高潮 turn 不失神, 下一 turn 才失神, 实现"高潮→失神"分轮).
+    """
     st.climax_count += 1
     st.pending_climax_count += 1
     st.turns_dazed = 0  # 新高潮 → 重置失神倒计时
-    if st.climax_count >= 2:
-        st.dazed = True
 
 
 def _register_climax_if_crossed(st: PhaseState, old_phase: int, new_phase: int) -> None:
@@ -2190,18 +2202,44 @@ def _register_climax_if_crossed(st: PhaseState, old_phase: int, new_phase: int) 
 
 
 def _tick_high_band_on_push(st: PhaseState) -> None:
-    """主人还在推 (signal 1/2) 且停留在 P6-P8 (>=6) 高潮带 → 每 _HIGH_BAND_CLIMAX_EVERY 轮记一次.
+    """主人还在推 (signal 1/2) 且停留在 P6-P8 (>=6) 高潮带 → 失神↔高潮循环.
 
     主人 2026-05-29: "一直停在 P6 以上也是持续高潮". 只在主人 push 时累计, 不靠纯 phase 卡高位,
     避免 SFW 闲聊卡在 P8 刷出幽灵高潮.
+
+    主人 2026-05-30: 高潮过多 → 失神/恢复/再高潮三态循环 (overstim_phase):
+      起步: 攒满 _HIGH_BAND_CLIMAX_EVERY 轮 → 第一次"持续高潮" → 进循环 (本轮=高潮态 3).
+      之后每个 push 轮推进: 3(高潮)→1(失神)→2(恢复)→3(高潮)→...
+      即主人要的『失神 → 1轮恢复 → 1轮高潮 → 下轮又失神』.
     """
-    if st.current_phase >= 6:
+    if st.current_phase < 6:
+        # 跌出高潮带 → 循环全清 (回 P2/P3 新 arc 等)
+        st.high_band_turns = 0
+        st.overstim_phase = 0
+        st.dazed = False
+        st.turns_dazed = 0
+        return
+    if st.overstim_phase == 0:
+        # 尚未进循环: 老逻辑攒满 N 轮 → 第一次持续高潮 → 进循环 (本轮高潮态, 下轮才失神)
         st.high_band_turns += 1
         if st.high_band_turns >= _HIGH_BAND_CLIMAX_EVERY:
             st.high_band_turns = 0
             _bump_climax(st)
-    else:
-        st.high_band_turns = 0
+            st.overstim_phase = 3   # 本轮 = 高潮态 → 下个 push 轮转入失神
+            st.dazed = False
+        return
+    # 已进循环: 推进一格 (高潮3 → 失神1 → 恢复2 → 高潮3 ...)
+    _next = {3: 1, 1: 2, 2: 3}.get(st.overstim_phase, 1)
+    st.overstim_phase = _next
+    if _next == 1:        # 失神
+        st.dazed = True
+        st.turns_dazed = 1
+    elif _next == 2:      # 恢复 (1 轮喘息)
+        st.dazed = False
+        st.turns_dazed = 0
+    else:                 # 3 = 再高潮一次
+        st.dazed = False
+        _bump_climax(st)  # 持续高潮再记一次 (climax_count++ / pending++ 喂怀孕)
 
 
 def consume_pending_climaxes(scope: str, user_id: str) -> int:
@@ -2317,6 +2355,9 @@ def apply_user_signal(
             st.last_updated = time.time()
             _NSFW_PHASE_BY_SCOPE[key] = st
         st.high_band_turns = 0  # 主人 2026-05-29: closing 收尾, 停止持续高潮累计
+        st.overstim_phase = 0   # 主人 2026-05-30: closing → 退出失神循环
+        st.dazed = False
+        st.turns_dazed = 0
         return st, -1
     # ── 主人 2026-05-27 三轮升级『余韵后还能再次被操高潮』──
     # P8 余韵 + user 又推 NSFW → 进入新一轮 arc
@@ -2333,6 +2374,9 @@ def apply_user_signal(
         # 或退出 NSFW (reset_phase) 才清.
         # 之前 per-arc 清 0 永远到不了 2 (phase tracker 不许 P7→P6 回退, 单 arc 最多 1 次 P6).
         st.high_band_turns = 0  # 主人 2026-05-29: 新 arc 起手 (回 P2/P3, <6), 持续高潮计数清零
+        st.overstim_phase = 0   # 主人 2026-05-30: 新 arc 起手, 退出上一轮失神循环 (回 <6)
+        st.dazed = False
+        st.turns_dazed = 0
         st.history.append((target, time.time()))
         st.last_updated = time.time()
         _NSFW_PHASE_BY_SCOPE[key] = st
@@ -2368,6 +2412,14 @@ def apply_user_signal(
     # 无信号 + 当前 P8 → 累加 p8_idle_count (自然平复)
     if st.current_phase >= 8 and signal == 0:
         st.p8_idle_count += 1
+        st.last_updated = time.time()
+        _NSFW_PHASE_BY_SCOPE[key] = st
+    # 主人 2026-05-30: 无信号 + 高潮带 (P6+) + 正在失神 → 喘息平复一格 (user 没推 = 歇一下).
+    # 不调 _tick (那会 bump 高潮刷幽灵怀孕); 仅把失神态降到恢复, 下次 push 接"再高潮".
+    if st.current_phase >= 6 and signal == 0 and st.dazed:
+        st.dazed = False
+        st.turns_dazed = 0
+        st.overstim_phase = 2  # 转恢复态 → 下个 push 轮转高潮 (3)
         st.last_updated = time.time()
         _NSFW_PHASE_BY_SCOPE[key] = st
     _mark_phase_state_dirty()
@@ -2870,12 +2922,34 @@ def get_phase_climax_prefill(scope: str, user_id: str) -> str:
     """
     st = get_phase_state(scope, user_id)
     current = st.current_phase
+
+    # ── 主人 2026-05-30: 失神↔高潮循环激活时, prefill 跟 overstim_phase 走 (不看 stuck/next) ──
+    # 3=高潮(P6 climax pool) / 1=失神(P7 overstim pool) / 2=恢复(P8 余韵 breather pool).
+    # 让『失神→恢复→高潮→失神』每一轮的 prefill 都对上当前态, deepseek 不再乱收尾.
+    _OVERSTIM_POOL_PHASE = {3: 6, 1: 7, 2: 8}
+    if st.overstim_phase in _OVERSTIM_POOL_PHASE:
+        pool = CLIMAX_PREFILL_POOL.get(_OVERSTIM_POOL_PHASE[st.overstim_phase])
+        if pool:
+            import hashlib
+            seed = hashlib.md5(
+                f"{scope}:{user_id}:{int(st.last_updated)}:{st.overstim_phase}:{st.climax_count}".encode()
+            ).digest()
+            return pool[seed[0] % len(pool)]
+
     stuck_thr = _PHASE_STUCK_THRESHOLDS.get(current, 3)
     stuck = st.turn_count >= stuck_thr
     if not stuck:
         return ""
     next_phase = min(8, current + 1)
-    # 只对 P4-P7 stuck (要推 P5/P6/P7/P8) 给 强 prefill, P1-P3 默认 '(' 足够
+    # ── 主人 2026-05-30 修复『deepseek 不再高潮 / 不听话』──
+    # apply_user_signal 把 push 封顶在 P7 (P8 留给自然余韵), 高强度时笨猫几乎全程卡 P7.
+    # 旧逻辑 P7 stuck → next=P8 → 抽中 P8 余韵 prefill (心跳归位/半睡半醒/还要吗) →
+    #   prefill 亲口让笨猫"收尾平复" → 模型当然不再高潮 (实测日志 06:29-06:30 三连余韵).
+    # P7 本身就是 overstim 二次高潮/失神带, 应继续用 P7 自己的 pool, 不滑进余韵.
+    # 只有真到 P8 (user closing → apply_user_signal 跳 P8) 才该出余韵 prefill.
+    if current == 7:
+        next_phase = 7
+    # 只对 P4-P7 stuck (要推 P5/P6/P7) 给 强 prefill, P1-P3 默认 '(' 足够
     if next_phase < 5:
         return ""
     pool = CLIMAX_PREFILL_POOL.get(next_phase)
