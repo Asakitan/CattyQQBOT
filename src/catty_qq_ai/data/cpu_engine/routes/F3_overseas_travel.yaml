@@ -1,0 +1,207 @@
+# 海外旅行 / 签证 / 移民 / 留学 routes (S6 R75 NLU 节点扩充, 第七周期 buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 95 travel (浅触) 区分: 这里专注海外细节.
+
+- name: overseas_us_visa_001
+  intent: question
+  keywords: [推荐美签, 推荐美国签证, 推荐 B1 B2, 推荐美国旅游签, 笨猫美签]
+  utterances:
+    - 推荐美签
+    - 推荐美国签证
+    - 推荐 B1 B2
+    - 推荐美国旅游签
+    - 笨猫美签
+  responses:
+    - "嗷呜～{user_addr}美签 B1/B2: 商务/旅游 - 10 年多次ฅฅ"
+    - "(尾巴翘) 流程: DS-160 → 缴费 → 预约 → 面签"
+    - "{user_addr}面签 1-3 月! 提前预约"
+    - "(挺胸) 笨猫的提醒: 别套话! 真诚回答"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: overseas_japan_visa_001
+  intent: question
+  keywords: [推荐日本签证, 推荐日签, 推荐日本旅游签, 推荐日本三年签, 笨猫日签]
+  utterances:
+    - 推荐日本签证
+    - 推荐日签
+    - 推荐日本旅游签
+    - 推荐日本三年签
+    - 笨猫日签
+  responses:
+    - "嗷呜～{user_addr}日签: 单次 / 3 年多次 / 5 年多次ฅฅ"
+    - "(尾巴翘) 多次需冲绳 / 东北三县 / 高收入"
+    - "{user_addr}找指定旅行社代办! 5-7 工作日"
+    - "(挺胸) 笨猫的提醒: 在职证明 + 流水 + 行程"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: overseas_schengen_001
+  intent: question
+  keywords: [推荐申根签, 推荐欧洲签证, 推荐法签, 推荐德签, 笨猫申根签]
+  utterances:
+    - 推荐申根签
+    - 推荐欧洲签证
+    - 推荐法签
+    - 推荐德签
+    - 笨猫申根签
+  responses:
+    - "嗷呜～{user_addr}申根签 26 国通用! 选主要停留国ฅฅ"
+    - "(尾巴翘) 法 / 德 / 西 / 意 - 申请大户"
+    - "{user_addr}材料齐全 + 提前 1-3 月 - 顺利"
+    - "(挺胸) 笨猫的提醒: 保险必备! 3w 欧+"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: overseas_uk_visa_001
+  intent: question
+  keywords: [推荐英国签证, 推荐英签, 推荐英国旅游签, 推荐英国 5 年签, 笨猫英签]
+  utterances:
+    - 推荐英国签证
+    - 推荐英签
+    - 推荐英国旅游签
+    - 推荐英国 5 年签
+    - 笨猫英签
+  responses:
+    - "嗷呜～{user_addr}英签: 2 年 / 5 年 / 10 年多次ฅฅ"
+    - "(尾巴翘) 不在申根! 单独申请"
+    - "{user_addr}材料: 在职 / 资产 / 行程 / 酒店"
+    - "(挺胸) 笨猫的提醒: 签证费贵! 约 800-1000"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: overseas_australia_001
+  intent: question
+  keywords: [推荐澳洲签证, 推荐澳大利亚签证, 推荐澳签, 推荐澳洲移民, 笨猫澳签]
+  utterances:
+    - 推荐澳洲签证
+    - 推荐澳大利亚签证
+    - 推荐澳签
+    - 推荐澳洲移民
+    - 笨猫澳签
+  responses:
+    - "嗷呜～{user_addr}澳签 600 旅游 / 482 工签 / 189 技术移民ฅฅ"
+    - "(尾巴翘) 旅游签电子签! 网上自助"
+    - "{user_addr}189 技术移民: 雅思 7 + 工作经验"
+    - "(挺胸) 笨猫的提醒: 澳洲移民门槛在涨!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: overseas_canada_001
+  intent: question
+  keywords: [推荐加拿大签证, 推荐加签, 推荐加拿大移民, 推荐枫叶卡, 笨猫加签]
+  utterances:
+    - 推荐加拿大签证
+    - 推荐加签
+    - 推荐加拿大移民
+    - 推荐枫叶卡
+    - 笨猫加签
+  responses:
+    - "嗷呜～{user_addr}加签: 旅游 10 年 / 学签 / 工签ฅฅ"
+    - "(尾巴翘) 移民: EE 联邦 / PNP 省提名 / QSW 魁省"
+    - "{user_addr}枫叶卡: 5 年住满 730 天"
+    - "(挺胸) 笨猫的提醒: 移民周期长 / 费用高"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: overseas_immigration_001
+  intent: question
+  keywords: [推荐移民, 推荐技术移民, 推荐投资移民, 推荐 EB5, 笨猫移民]
+  utterances:
+    - 推荐移民
+    - 推荐技术移民
+    - 推荐投资移民
+    - 推荐 EB5
+    - 笨猫移民
+  responses:
+    - "嗷呜～{user_addr}热门: 美/加/澳/新/欧 - 看资金 + 学历ฅฅ"
+    - "(尾巴翘) 美国 EB5: 100w 美金 + 创业 + 10 个工作"
+    - "{user_addr}加澳新: 技术评分 / 雅思 + 学历"
+    - "(挺胸) 笨猫的提醒: 别盲动! 想清楚再走"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: overseas_study_us_001
+  intent: question
+  keywords: [推荐美国留学, 推荐美本, 推荐美研, 推荐美国大学, 笨猫美国留学]
+  utterances:
+    - 推荐美国留学
+    - 推荐美本
+    - 推荐美研
+    - 推荐美国大学
+    - 笨猫美国留学
+  responses:
+    - "嗷呜～{user_addr}美本: SAT / ACT + 托福 + GPA + 文书ฅฅ"
+    - "(尾巴翘) 美研: GRE / GMAT + 托福 + 推荐信 + SOP"
+    - "{user_addr}排名: 综合 / 文理 / 专业 - 看用途"
+    - "(挺胸) 笨猫的提醒: 申请季提前 1.5 年准备"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: overseas_study_uk_001
+  intent: question
+  keywords: [推荐英国留学, 推荐英国研究生, 推荐 G5, 推荐 G5 留学, 笨猫英国留学]
+  utterances:
+    - 推荐英国留学
+    - 推荐英国研究生
+    - 推荐 G5
+    - 推荐 G5 留学
+    - 笨猫英国留学
+  responses:
+    - "嗷呜～{user_addr}G5: 牛剑 / IC / LSE / UCL - 顶级ฅฅ"
+    - "(尾巴翘) 1 年硕士 / 性价比高 / 申请门槛中"
+    - "{user_addr}申请: 雅思 + 本科 + 文书 + 推荐"
+    - "(挺胸) 笨猫的提醒: 申请季提前 1 年!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: overseas_study_au_001
+  intent: question
+  keywords: [推荐澳洲留学, 推荐澳大利亚留学, 推荐澳洲大学, 推荐澳八大, 笨猫澳洲留学]
+  utterances:
+    - 推荐澳洲留学
+    - 推荐澳大利亚留学
+    - 推荐澳洲大学
+    - 推荐澳八大
+    - 笨猫澳洲留学
+  responses:
+    - "嗷呜～{user_addr}澳八大: 墨大 / 悉大 / 国立 / UNSW 等ฅฅ"
+    - "(尾巴翘) 1.5-2 年硕士 / 学签可工作"
+    - "{user_addr}学费 4-6w 澳元/年 + 生活费"
+    - "(挺胸) 笨猫的提醒: 移民友好! 毕业可申 485 工签"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: overseas_lang_school_001
+  intent: question
+  keywords: [推荐日本语言学校, 推荐韩国语言学校, 推荐留学语言, 推荐语言学校, 笨猫语言学校]
+  utterances:
+    - 推荐日本语言学校
+    - 推荐韩国语言学校
+    - 推荐留学语言
+    - 推荐语言学校
+    - 笨猫语言学校
+  responses:
+    - "嗷呜～{user_addr}日本: 千代田 / 新宿日本语 / ARC ฅฅ"
+    - "(尾巴翘) 韩国: 延世 / 高丽 / 首尔大语言学院"
+    - "{user_addr}1-2 年! 升学跳板"
+    - "(挺胸) 笨猫的提醒: 看升学率! 别只看排名"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: overseas_intern_001
+  intent: question
+  keywords: [推荐海外实习, 推荐海外工作, 推荐 working holiday, 推荐打工度假, 笨猫海外实习]
+  utterances:
+    - 推荐海外实习
+    - 推荐海外工作
+    - 推荐 working holiday
+    - 推荐打工度假
+    - 笨猫海外实习
+  responses:
+    - "嗷呜～{user_addr}WH: 澳 / 新 / 日 / 加 - 18-30 岁ฅฅ"
+    - "(尾巴翘) 限额 + 抽签 / 准备充分"
+    - "{user_addr}打工 + 旅行 - 双重体验"
+    - "(挺胸) 笨猫的提醒: 一辈子一次! 别错过"
+  cooldown_seconds: 60
+  weight: 0.9

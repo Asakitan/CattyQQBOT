@@ -1,0 +1,207 @@
+# 小众球类 / 高尔夫 / 台球 / 保龄 / 壁球 routes (S6 R80 NLU 节点扩充, 第七周期 buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A5 sports_match (浅触) 区分: 这里专注小众球类细节.
+
+- name: ball_golf_001
+  intent: question
+  keywords: [推荐高尔夫, 推荐 golf, 推荐高尔夫球场, 推荐高尔夫入门, 笨猫高尔夫]
+  utterances:
+    - 推荐高尔夫
+    - 推荐 golf
+    - 推荐高尔夫球场
+    - 推荐高尔夫入门
+    - 笨猫高尔夫
+  responses:
+    - "嗷呜～{user_addr}高尔夫: 绅士运动 / 商务社交ฅฅ"
+    - "(尾巴翘) 入门: 先学短杆 (推杆/挖起杆)"
+    - "{user_addr}球场: 18 洞标准 / 9 洞迷你"
+    - "(挺胸) 笨猫的提醒: 装备贵! 入门 3-5w"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ball_billiard_001
+  intent: question
+  keywords: [推荐台球, 推荐斯诺克, 推荐九球, 推荐美式八球, 笨猫台球]
+  utterances:
+    - 推荐台球
+    - 推荐斯诺克
+    - 推荐九球
+    - 推荐美式八球
+    - 笨猫台球
+  responses:
+    - "嗷呜～{user_addr}斯诺克: 6 色球 / 英联邦最爱ฅฅ"
+    - "(尾巴翘) 九球: 美式 / 中式 - 商业化"
+    - "{user_addr}选手: 奥沙利文 / 丁俊晖 / 罗尼"
+    - "(挺胸) 笨猫推荐: 看世锦赛 / 中国巡回赛"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ball_bowling_001
+  intent: question
+  keywords: [推荐保龄球, 推荐 bowling, 推荐保龄球馆, 推荐保龄球技巧, 笨猫保龄球]
+  utterances:
+    - 推荐保龄球
+    - 推荐 bowling
+    - 推荐保龄球馆
+    - 推荐保龄球技巧
+    - 笨猫保龄球
+  responses:
+    - "嗷呜～{user_addr}10 瓶 + 旋转球 = 保龄基础ฅฅ"
+    - "(尾巴翘) 全中 (Strike) / 补中 (Spare)"
+    - "{user_addr}选: 球重 (10-16 磅) / 钻孔合手"
+    - "(挺胸) 笨猫的提醒: 朋友聚会必备"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ball_squash_001
+  intent: question
+  keywords: [推荐壁球, 推荐 squash, 推荐壁球馆, 推荐壁球技巧, 笨猫壁球]
+  utterances:
+    - 推荐壁球
+    - 推荐 squash
+    - 推荐壁球馆
+    - 推荐壁球技巧
+    - 笨猫壁球
+  responses:
+    - "嗷呜～{user_addr}壁球: 高强度 + 全身运动 - 减肥神器ฅฅ"
+    - "(尾巴翘) 一对一 / 玻璃墙场地"
+    - "{user_addr}1 小时消耗 800-1000 卡!"
+    - "(挺胸) 笨猫的提醒: 体力消耗大! 量力而行"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ball_volleyball_001
+  intent: question
+  keywords: [推荐排球, 推荐沙滩排球, 推荐女排, 推荐排球比赛, 笨猫排球]
+  utterances:
+    - 推荐排球
+    - 推荐沙滩排球
+    - 推荐女排
+    - 推荐排球比赛
+    - 笨猫排球
+  responses:
+    - "嗷呜～{user_addr}中国女排: 国民骄傲! 多次世界冠军ฅฅ"
+    - "(尾巴翘) 室内 6v6 / 沙滩 2v2"
+    - "{user_addr}郎平 / 朱婷 / 张常宁 - 经典阵容"
+    - "(挺胸) 笨猫的提醒: 团队配合最重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ball_handball_001
+  intent: question
+  keywords: [推荐手球, 推荐 handball, 推荐手球规则, 推荐手球世锦赛, 笨猫手球]
+  utterances:
+    - 推荐手球
+    - 推荐 handball
+    - 推荐手球规则
+    - 推荐手球世锦赛
+    - 笨猫手球
+  responses:
+    - "嗷呜～{user_addr}手球: 欧洲流行 / 节奏快 / 身体对抗强ฅฅ"
+    - "(尾巴翘) 7 人制 / 60 分钟 / 大门"
+    - "{user_addr}世锦赛 + 奥运 - 顶级赛事"
+    - "(挺胸) 笨猫的提醒: 国内还不流行"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: ball_curling_001
+  intent: question
+  keywords: [推荐冰壶, 推荐 curling, 推荐冰壶规则, 推荐冰壶国家队, 笨猫冰壶]
+  utterances:
+    - 推荐冰壶
+    - 推荐 curling
+    - 推荐冰壶规则
+    - 推荐冰壶国家队
+    - 笨猫冰壶
+  responses:
+    - "嗷呜～{user_addr}冰壶: 冰上国际象棋! 智力 + 技巧ฅฅ"
+    - "(尾巴翘) 4 人队 + 10 局 + 推冰壶到中心"
+    - "{user_addr}加拿大 / 瑞典 - 传统强队"
+    - "(挺胸) 笨猫的提醒: 冬奥项目! 中国队也强"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ball_hockey_001
+  intent: question
+  keywords: [推荐冰球, 推荐曲棍球, 推荐 NHL, 推荐冰上曲棍球, 笨猫冰球]
+  utterances:
+    - 推荐冰球
+    - 推荐曲棍球
+    - 推荐 NHL
+    - 推荐冰上曲棍球
+    - 笨猫冰球
+  responses:
+    - "嗷呜～{user_addr}NHL: 北美冰球联盟 / 6 大顶级运动ฅฅ"
+    - "(尾巴翘) 加拿大国球 / 俄罗斯也强"
+    - "{user_addr}守门员护具最重 / 防止球击"
+    - "(挺胸) 笨猫的提醒: 速度 + 对抗 - 极致刺激"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ball_rugby_001
+  intent: question
+  keywords: [推荐橄榄球, 推荐 NFL, 推荐美式橄榄球, 推荐橄榄球比赛, 笨猫橄榄球]
+  utterances:
+    - 推荐橄榄球
+    - 推荐 NFL
+    - 推荐美式橄榄球
+    - 推荐橄榄球比赛
+    - 笨猫橄榄球
+  responses:
+    - "嗷呜～{user_addr}NFL: 美国第一运动! 超级碗最瞩目ฅฅ"
+    - "(尾巴翘) 队员护具全副武装 / 战术复杂"
+    - "{user_addr}英式橄榄球 / 7 人制 / 15 人制"
+    - "(挺胸) 笨猫的提醒: 危险运动! 别业余尝试"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ball_dart_001
+  intent: question
+  keywords: [推荐飞镖, 推荐 darts, 推荐飞镖比赛, 推荐飞镖技巧, 笨猫飞镖]
+  utterances:
+    - 推荐飞镖
+    - 推荐 darts
+    - 推荐飞镖比赛
+    - 推荐飞镖技巧
+    - 笨猫飞镖
+  responses:
+    - "嗷呜～{user_addr}飞镖: 英国酒吧文化! 现代竞技ฅฅ"
+    - "(尾巴翘) 501 / 301 / 圈数 - 不同规则"
+    - "{user_addr}世锦赛 PDC 选手收入百万英镑"
+    - "(挺胸) 笨猫推荐: 室内运动 / 朋友聚会"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ball_table_tennis_002
+  intent: question
+  keywords: [推荐乒乓球技巧, 推荐发球, 推荐弧圈球, 推荐削球, 笨猫乒乓球技巧]
+  utterances:
+    - 推荐乒乓球技巧
+    - 推荐发球
+    - 推荐弧圈球
+    - 推荐削球
+    - 笨猫乒乓球技巧
+  responses:
+    - "嗷呜～{user_addr}国乒打法: 横拍 / 直拍 - 两大流派ฅฅ"
+    - "(尾巴翘) 弧圈球: 进攻主流 / 削球: 防守反击"
+    - "{user_addr}发球关键! 准 + 旋转 = 主动"
+    - "(挺胸) 笨猫推荐: 看马龙樊振东精彩对决"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ball_minor_002
+  intent: question
+  keywords: [推荐板球, 推荐曲棍球印度, 推荐袋棍球, 推荐 lacrosse, 笨猫板球]
+  utterances:
+    - 推荐板球
+    - 推荐 cricket
+    - 推荐袋棍球
+    - 推荐 lacrosse
+    - 笨猫板球
+  responses:
+    - "嗷呜～{user_addr}板球 (Cricket): 英联邦超火! 印度国民运动ฅฅ"
+    - "(尾巴翘) 袋棍球 (Lacrosse): 北美起源 / 学生体育"
+    - "{user_addr}国内冷门! 国际很流行"
+    - "(挺胸) 笨猫的提醒: 国际化 + 多元化"
+  cooldown_seconds: 60
+  weight: 0.6

@@ -1,0 +1,207 @@
+# 跨境电商 / 亚马逊 / 独立站 / 出海 routes (S6 R79 NLU 节点扩充, 第七周期 buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 C2 ecommerce_deep (国内电商) 区分: 这里专注跨境/出海.
+
+- name: cross_amazon_001
+  intent: question
+  keywords: [推荐亚马逊, 推荐 Amazon, 推荐亚马逊运营, 推荐 FBA, 笨猫亚马逊]
+  utterances:
+    - 推荐亚马逊
+    - 推荐 Amazon
+    - 推荐亚马逊运营
+    - 推荐 FBA
+    - 笨猫亚马逊
+  responses:
+    - "嗷呜～{user_addr}亚马逊: 全球最大跨境电商平台ฅฅ"
+    - "(尾巴翘) FBA / FBM - 两种模式"
+    - "{user_addr}站点: 美 / 欧 / 日 / 澳 / 印 - 选市场"
+    - "(挺胸) 笨猫的提醒: 卷! 但有钱赚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cross_shopify_001
+  intent: question
+  keywords: [推荐独立站, 推荐 Shopify, 推荐建站, 推荐 DTC, 笨猫独立站]
+  utterances:
+    - 推荐独立站
+    - 推荐 Shopify
+    - 推荐建站
+    - 推荐 DTC
+    - 笨猫独立站
+  responses:
+    - "嗷呜～{user_addr}主流: Shopify / WooCommerce / Wixฅฅ"
+    - "(尾巴翘) 国货: SHEIN / TikTok Shop - 黑马"
+    - "{user_addr}DTC 品牌直营 - 利润高"
+    - "(挺胸) 笨猫的提醒: 流量需自己买! 别只想建站"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cross_ebay_001
+  intent: question
+  keywords: [推荐 eBay, 推荐 Etsy, 推荐 Wish, 推荐 Walmart 跨境, 笨猫 eBay]
+  utterances:
+    - 推荐 eBay
+    - 推荐 Etsy
+    - 推荐 Wish
+    - 推荐 Walmart 跨境
+    - 笨猫 eBay
+  responses:
+    - "嗷呜～{user_addr}eBay: 老牌平台 / 二手收藏品强ฅฅ"
+    - "(尾巴翘) Etsy: 手工 / 复古 - 利基市场"
+    - "{user_addr}Wish: 廉价 / Walmart: 美国第二大电商"
+    - "(挺胸) 笨猫的提醒: 不同平台不同打法"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cross_tiktok_001
+  intent: question
+  keywords: [推荐 TikTok Shop, 推荐抖音海外, 推荐 TikTok 带货, 推荐 TT, 笨猫 TikTok Shop]
+  utterances:
+    - 推荐 TikTok Shop
+    - 推荐抖音海外
+    - 推荐 TikTok 带货
+    - 推荐 TT
+    - 笨猫 TikTok Shop
+  responses:
+    - "嗷呜～{user_addr}TikTok Shop: 字节出海王牌!ฅฅ"
+    - "(尾巴翘) 主要市场: 东南亚 / 美国 / 英国"
+    - "{user_addr}内容 + 直播 + 电商 - 三合一"
+    - "(挺胸) 笨猫的提醒: 红利期! 抓紧布局"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cross_logistics_001
+  intent: question
+  keywords: [推荐跨境物流, 推荐头程, 推荐海外仓, 推荐 FBA 头程, 笨猫跨境物流]
+  utterances:
+    - 推荐跨境物流
+    - 推荐头程
+    - 推荐海外仓
+    - 推荐 FBA 头程
+    - 笨猫跨境物流
+  responses:
+    - "嗷呜～{user_addr}方式: 空运 / 海运 / 卡车 / 铁路ฅฅ"
+    - "(尾巴翘) 头程: 中国 → 海外仓 / FBA 仓"
+    - "{user_addr}尾程: 海外仓 → 客户 - UPS/FedEx/DHL"
+    - "(挺胸) 笨猫的提醒: 物流成本大! 算清"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cross_payment_001
+  intent: question
+  keywords: [推荐 PayPal, 推荐跨境收款, 推荐 Payoneer, 推荐 Stripe, 笨猫跨境收款]
+  utterances:
+    - 推荐 PayPal
+    - 推荐跨境收款
+    - 推荐 Payoneer
+    - 推荐 Stripe
+    - 笨猫跨境收款
+  responses:
+    - "嗷呜～{user_addr}主流: PayPal / Payoneer / Stripe / Wiseฅฅ"
+    - "(尾巴翘) 国货: 连连 / 钱海 / PingPong"
+    - "{user_addr}各有手续费! 比较选最优"
+    - "(挺胸) 笨猫的提醒: PayPal 风控严! 别违规"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cross_advertising_001
+  intent: question
+  keywords: [推荐 Google 广告, 推荐 Facebook 广告, 推荐跨境广告, 推荐 TikTok 广告, 笨猫跨境广告]
+  utterances:
+    - 推荐 Google 广告
+    - 推荐 Facebook 广告
+    - 推荐跨境广告
+    - 推荐 TikTok 广告
+    - 笨猫跨境广告
+  responses:
+    - "嗷呜～{user_addr}双巨头: Google + Meta (FB/IG)ฅฅ"
+    - "(尾巴翘) 新势力: TikTok Ads - 增长快"
+    - "{user_addr}亚马逊广告: PPC / DSP / Brand"
+    - "(挺胸) 笨猫的提醒: 数据驱动! 别拍脑袋投"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cross_market_001
+  intent: question
+  keywords: [推荐选品, 推荐市场调研, 推荐选品工具, 推荐 Helium 10, 笨猫选品]
+  utterances:
+    - 推荐选品
+    - 推荐市场调研
+    - 推荐选品工具
+    - 推荐 Helium 10
+    - 笨猫选品
+  responses:
+    - "嗷呜～{user_addr}工具: Helium 10 / Jungle Scout / Junglescoutฅฅ"
+    - "(尾巴翘) 看: 销量 / 评论 / 竞品 / 利润空间"
+    - "{user_addr}避: 品牌侵权 / 红海 / 季节性"
+    - "(挺胸) 笨猫的提醒: 数据看 + 自己懂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cross_brand_001
+  intent: question
+  keywords: [推荐品牌出海, 推荐 SHEIN, 推荐 Anker, 推荐 BBC China, 笨猫出海品牌]
+  utterances:
+    - 推荐品牌出海
+    - 推荐 SHEIN
+    - 推荐 Anker
+    - 推荐 BBC China
+    - 笨猫出海品牌
+  responses:
+    - "嗷呜～{user_addr}标杆: SHEIN (快时尚) / Anker (3C) / 大疆 (无人机)ฅฅ"
+    - "(尾巴翘) 新势力: 名创优品 / 元气森林 / 蜜雪冰城"
+    - "{user_addr}DTC + 全球供应链 - 现代出海模式"
+    - "(挺胸) 笨猫的提醒: 中国制造 → 中国品牌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cross_tax_001
+  intent: question
+  keywords: [推荐 VAT, 推荐 Sales Tax, 推荐跨境税务, 推荐 EORI, 笨猫跨境税务]
+  utterances:
+    - 推荐 VAT
+    - 推荐 Sales Tax
+    - 推荐跨境税务
+    - 推荐 EORI
+    - 笨猫跨境税务
+  responses:
+    - "嗷呜～{user_addr}欧洲 VAT: 销售前必须注册ฅฅ"
+    - "(尾巴翘) 美国 Sales Tax / Nexus 规则"
+    - "{user_addr}EORI: 欧洲海关注册号"
+    - "(挺胸) 笨猫的提醒: 别偷税! 平台严查"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cross_southeast_001
+  intent: question
+  keywords: [推荐 Lazada, 推荐 Shopee, 推荐东南亚电商, 推荐 Lazada 运营, 笨猫东南亚]
+  utterances:
+    - 推荐 Lazada
+    - 推荐 Shopee
+    - 推荐东南亚电商
+    - 推荐 Lazada 运营
+    - 笨猫东南亚
+  responses:
+    - "嗷呜～{user_addr}东南亚双巨头: Lazada (阿里) / Shopeeฅฅ"
+    - "(尾巴翘) 6 国: 印尼 / 泰 / 越 / 菲 / 马 / 新"
+    - "{user_addr}TikTok Shop 强势进入! 三国杀"
+    - "(挺胸) 笨猫的提醒: 东南亚增长快! 红利期"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cross_amazon_seller_001
+  intent: question
+  keywords: [推荐亚马逊新手, 推荐亚马逊店铺, 推荐亚马逊运营技巧, 推荐亚马逊封号, 笨猫亚马逊运营]
+  utterances:
+    - 推荐亚马逊新手
+    - 推荐亚马逊店铺
+    - 推荐亚马逊运营技巧
+    - 推荐亚马逊封号
+    - 笨猫亚马逊运营
+  responses:
+    - "嗷呜～{user_addr}新手: 申请 / 选品 / 备货 / 上架 / 投广ฅฅ"
+    - "(尾巴翘) 别刷单! 别买差评 - 亚马逊重罚"
+    - "{user_addr}封号: 申诉 / 视频 / 法律 - 看情况"
+    - "(挺胸) 笨猫的提醒: 合规! 长久之道"
+  cooldown_seconds: 60
+  weight: 1.0

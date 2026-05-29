@@ -1,0 +1,206 @@
+# 军事 / 军迷 / 武器装备 / 名战 routes (S6 R77 NLU 节点扩充, 第七周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: mil_fighter_001
+  intent: question
+  keywords: [推荐战斗机, 推荐 F35, 推荐歼20, 推荐 F22, 笨猫战斗机]
+  utterances:
+    - 推荐战斗机
+    - 推荐 F35
+    - 推荐歼20
+    - 推荐 F22
+    - 笨猫战斗机
+  responses:
+    - "嗷呜～{user_addr}五代机: F-22 / F-35 / 歼-20 / 苏-57ฅฅ"
+    - "(尾巴翘) 隐身 + 超音速 + 高机动 - 三特征"
+    - "{user_addr}六代机研发中! 中美都在路上"
+    - "(挺胸) 笨猫的提醒: 战斗机展示国力"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mil_tank_001
+  intent: question
+  keywords: [推荐坦克, 推荐主战坦克, 推荐 99 式, 推荐 M1A2, 笨猫坦克]
+  utterances:
+    - 推荐坦克
+    - 推荐主战坦克
+    - 推荐 99 式
+    - 推荐 M1A2
+    - 笨猫坦克
+  responses:
+    - "嗷呜～{user_addr}主战坦克: 99A (中) / M1A2 (美) / 豹2 (德)ฅฅ"
+    - "(尾巴翘) T-90 (俄) / 梅卡瓦 (以) / 99 式新型"
+    - "{user_addr}现代战场: 配套无人机 / 反坦克导弹"
+    - "(挺胸) 笨猫的提醒: 坦克陆战之王! 仍重要"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mil_warship_001
+  intent: question
+  keywords: [推荐军舰, 推荐航母, 推荐山东舰, 推荐福建舰, 笨猫航母]
+  utterances:
+    - 推荐军舰
+    - 推荐航母
+    - 推荐山东舰
+    - 推荐福建舰
+    - 笨猫航母
+  responses:
+    - "嗷呜～{user_addr}中国航母: 辽宁舰 / 山东舰 / 福建舰ฅฅ"
+    - "(尾巴翘) 美国: 11 艘航母 - 海军霸主"
+    - "{user_addr}福建舰: 电磁弹射 / 8 万吨级"
+    - "(挺胸) 笨猫的提醒: 海军强 = 大国象征"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mil_missile_001
+  intent: question
+  keywords: [推荐导弹, 推荐东风, 推荐巡航导弹, 推荐高超音速, 笨猫导弹]
+  utterances:
+    - 推荐导弹
+    - 推荐东风
+    - 推荐巡航导弹
+    - 推荐高超音速
+    - 笨猫导弹
+  responses:
+    - "嗷呜～{user_addr}东风系列: DF-17 / DF-21 / DF-26 / DF-41ฅฅ"
+    - "(尾巴翘) 高超音速: 中国 DF-17 / 俄国匕首 / 美国 ARRW"
+    - "{user_addr}美国: 战斧 / 标准导弹 - 主流"
+    - "(挺胸) 笨猫的提醒: 战略威慑核心"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mil_war_ww2_001
+  intent: question
+  keywords: [推荐二战, 推荐二战名战, 推荐诺曼底, 推荐斯大林格勒, 笨猫二战名战]
+  utterances:
+    - 推荐二战
+    - 推荐二战名战
+    - 推荐诺曼底登陆
+    - 推荐斯大林格勒
+    - 笨猫二战名战
+  responses:
+    - "嗷呜～{user_addr}诺曼底 1944.6.6 / 史上最大登陆ฅฅ"
+    - "(尾巴翘) 斯大林格勒: 苏军反攻转折点"
+    - "{user_addr}中途岛: 美军太平洋战场反攻起点"
+    - "(挺胸) 笨猫推荐: 看《拯救大兵瑞恩》/《父辈的旗帜》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mil_war_modern_001
+  intent: question
+  keywords: [推荐现代战争, 推荐俄乌战争, 推荐海湾战争, 推荐阿富汗战争, 笨猫现代战争]
+  utterances:
+    - 推荐现代战争
+    - 推荐俄乌战争
+    - 推荐海湾战争
+    - 推荐阿富汗战争
+    - 笨猫现代战争
+  responses:
+    - "嗷呜～{user_addr}俄乌战争 2022 起: 改变军事观念ฅฅ"
+    - "(尾巴翘) 海湾战争 1991: 信息化战争开端"
+    - "{user_addr}伊拉克战争 / 阿富汗战争 - 反恐战争"
+    - "(挺胸) 笨猫的提醒: 战争残酷! 和平来之不易"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mil_drone_001
+  intent: question
+  keywords: [推荐无人机, 推荐军用无人机, 推荐翼龙, 推荐 MQ9, 笨猫无人机军用]
+  utterances:
+    - 推荐军用无人机
+    - 推荐军用无人机
+    - 推荐翼龙
+    - 推荐 MQ9
+    - 笨猫无人机军用
+  responses:
+    - "嗷呜～{user_addr}中国: 翼龙 / 彩虹系列 - 出口主力ฅฅ"
+    - "(尾巴翘) 美国: MQ-9 收割者 / 全球鹰"
+    - "{user_addr}土耳其 TB2: 俄乌战场表现亮眼"
+    - "(挺胸) 笨猫的提醒: 无人机重塑现代战争"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mil_china_army_001
+  intent: question
+  keywords: [推荐解放军, 推荐中国军队, 推荐 PLA, 推荐特种兵, 笨猫解放军]
+  utterances:
+    - 推荐解放军
+    - 推荐中国军队
+    - 推荐 PLA
+    - 推荐特种兵
+    - 笨猫解放军
+  responses:
+    - "嗷呜～{user_addr}解放军 = 五大军种: 陆 / 海 / 空 / 火箭 / 战支ฅฅ"
+    - "(尾巴翘) 特种部队: 雪豹 / 蓝剑 / 海豹"
+    - "{user_addr}国庆阅兵 / 朱日和军演 - 大场面"
+    - "(挺胸) 笨猫: 为保家卫国致敬!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mil_us_army_001
+  intent: question
+  keywords: [推荐美军, 推荐美国军队, 推荐海豹突击队, 推荐三角洲, 笨猫美军]
+  utterances:
+    - 推荐美军
+    - 推荐美国军队
+    - 推荐海豹突击队
+    - 推荐三角洲
+    - 笨猫美军
+  responses:
+    - "嗷呜～{user_addr}美军: 全球军费第一 (8000+ 亿美金)ฅฅ"
+    - "(尾巴翘) 特种: 海豹 / 三角洲 / 绿贝雷 / 游骑兵"
+    - "{user_addr}全球 800+ 军事基地"
+    - "(挺胸) 笨猫的提醒: 强大但常有争议"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mil_history_general_001
+  intent: question
+  keywords: [推荐名将, 推荐历史军事家, 推荐孙武, 推荐拿破仑, 笨猫名将]
+  utterances:
+    - 推荐名将
+    - 推荐历史军事家
+    - 推荐孙武
+    - 推荐拿破仑
+    - 笨猫名将
+  responses:
+    - "嗷呜～{user_addr}中国: 孙武 / 韩信 / 卫青 / 霍去病 / 岳飞ฅฅ"
+    - "(尾巴翘) 西方: 亚历山大 / 凯撒 / 拿破仑 / 隆美尔"
+    - "{user_addr}近代: 朱可夫 / 巴顿 / 麦克阿瑟"
+    - "(挺胸) 笨猫推荐: 《孙子兵法》《战争论》经典"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mil_nuke_001
+  intent: question
+  keywords: [推荐核武器, 推荐核弹, 推荐核威慑, 推荐 ICBM, 笨猫核武]
+  utterances:
+    - 推荐核武器
+    - 推荐核弹
+    - 推荐核威慑
+    - 推荐 ICBM
+    - 笨猫核武
+  responses:
+    - "嗷呜～{user_addr}五常: 美 / 俄 / 中 / 英 / 法 - 合法ฅฅ"
+    - "(尾巴翘) 印 / 巴 / 朝 / 以 - 事实拥有"
+    - "{user_addr}三位一体: 陆基 / 海基 / 空基"
+    - "(挺胸) 笨猫的提醒: 核战毁灭性! 永远不希望发生"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: mil_strategy_001
+  intent: question
+  keywords: [推荐军事战略, 推荐战术, 推荐军事思想, 推荐孙子兵法, 笨猫军事战略]
+  utterances:
+    - 推荐军事战略
+    - 推荐战术
+    - 推荐军事思想
+    - 推荐孙子兵法
+    - 笨猫军事战略
+  responses:
+    - "嗷呜～{user_addr}孙子兵法 13 篇: 经典中的经典ฅฅ"
+    - "(尾巴翘) 战争论: 克劳塞维茨 - 西方军事圣经"
+    - "{user_addr}现代: 美国 AirSea Battle / 中国 A2/AD"
+    - "(挺胸) 笨猫推荐: 全球战略博弈精彩"
+  cooldown_seconds: 60
+  weight: 0.8

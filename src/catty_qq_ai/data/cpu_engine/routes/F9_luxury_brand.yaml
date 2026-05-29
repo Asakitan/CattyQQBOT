@@ -1,0 +1,207 @@
+# 奢侈品 / 腕表 / 珠宝 / 箱包 routes (S6 R81 NLU 节点扩充, 第七周期 buffered 10/10 周期完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B7 fashion (穿搭) 区分: 这里专注奢侈品牌深度.
+
+- name: lux_watch_001
+  intent: question
+  keywords: [推荐手表, 推荐瑞士表, 推荐机械表, 推荐入门表, 笨猫表]
+  utterances:
+    - 推荐手表
+    - 推荐瑞士表
+    - 推荐机械表
+    - 推荐入门表
+    - 笨猫表
+  responses:
+    - "嗷呜～{user_addr}入门: 浪琴 / 美度 / 雪铁纳 - 1-2wฅฅ"
+    - "(尾巴翘) 中端: 欧米茄 / 万国 - 5-15w"
+    - "{user_addr}高端: 劳力士 / 百达翡丽 / 江诗丹顿"
+    - "(挺胸) 笨猫的提醒: 表是工具! 别为装逼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_rolex_001
+  intent: question
+  keywords: [推荐劳力士, 推荐 Rolex, 推荐水鬼, 推荐迪通拿, 笨猫劳力士]
+  utterances:
+    - 推荐劳力士
+    - 推荐 Rolex
+    - 推荐水鬼
+    - 推荐迪通拿
+    - 笨猫劳力士
+  responses:
+    - "嗷呜～{user_addr}劳力士: 二级市场之王 / 保值ฅฅ"
+    - "(尾巴翘) 热款: 水鬼 / 迪通拿 / 探险者 - 一表难求"
+    - "{user_addr}专柜需配! 不要轻信黄牛"
+    - "(挺胸) 笨猫的提醒: 自用买二手! 别交智商税"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lux_pp_001
+  intent: question
+  keywords: [推荐百达翡丽, 推荐 PP, 推荐 Patek Philippe, 推荐 5711, 笨猫百达翡丽]
+  utterances:
+    - 推荐百达翡丽
+    - 推荐 PP
+    - 推荐 Patek Philippe
+    - 推荐 5711
+    - 笨猫百达翡丽
+  responses:
+    - "嗷呜～{user_addr}PP: 表王! 复杂功能巅峰ฅฅ"
+    - "(尾巴翘) 鹦鹉螺 5711: 100w+ - 一表难求"
+    - "{user_addr}传承: 您并未真正拥有 / 是替子孙保管"
+    - "(挺胸) 笨猫的提醒: 超出预算别买! 没必要"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: lux_lv_001
+  intent: question
+  keywords: [推荐 LV, 推荐路易威登, 推荐 LV 包, 推荐老花, 笨猫 LV]
+  utterances:
+    - 推荐 LV
+    - 推荐路易威登
+    - 推荐 LV 包
+    - 推荐老花
+    - 笨猫 LV
+  responses:
+    - "嗷呜～{user_addr}LV: 老花经典 / 入门 1-2wฅฅ"
+    - "(尾巴翘) Speedy / Neverfull / Alma - 经典款"
+    - "{user_addr}近年涨价! 但保值一般"
+    - "(挺胸) 笨猫的提醒: 别买帆布老花路边都是"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_chanel_001
+  intent: question
+  keywords: [推荐香奈儿, 推荐 Chanel, 推荐 CF 包, 推荐香奶奶, 笨猫香奈儿]
+  utterances:
+    - 推荐香奈儿
+    - 推荐 Chanel
+    - 推荐 CF 包
+    - 推荐香奶奶
+    - 笨猫香奈儿
+  responses:
+    - "嗷呜～{user_addr}Chanel: 经典优雅 / CF 包传承ฅฅ"
+    - "(尾巴翘) 五号香水: 永恒经典"
+    - "{user_addr}涨价猛! 一年 2-3 次 - 保值"
+    - "(挺胸) 笨猫的提醒: 中号 CF 最经典! 实用"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_hermes_001
+  intent: question
+  keywords: [推荐爱马仕, 推荐 Hermes, 推荐 Birkin, 推荐 Kelly, 笨猫爱马仕]
+  utterances:
+    - 推荐爱马仕
+    - 推荐 Hermes
+    - 推荐 Birkin
+    - 推荐 Kelly
+    - 笨猫爱马仕
+  responses:
+    - "嗷呜～{user_addr}H 家: 奢侈品之王! 配货才能买ฅฅ"
+    - "(尾巴翘) Birkin / Kelly - 顶级包 / 30w+"
+    - "{user_addr}配货比例: 1:1 起步 / 看店"
+    - "(挺胸) 笨猫的提醒: 玩 H 烧钱! 心理准备"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lux_dior_001
+  intent: question
+  keywords: [推荐 Dior, 推荐迪奥, 推荐戴妃包, 推荐 Lady Dior, 笨猫 Dior]
+  utterances:
+    - 推荐 Dior
+    - 推荐迪奥
+    - 推荐戴妃包
+    - 推荐 Lady Dior
+    - 笨猫 Dior
+  responses:
+    - "嗷呜～{user_addr}Dior: 法式优雅 / 戴妃包经典ฅฅ"
+    - "(尾巴翘) Saddle 马鞍包 / Book Tote 托特"
+    - "{user_addr}Dior 香水真我 / J'adore - 大牌"
+    - "(挺胸) 笨猫的提醒: 涨价中! 买正确款式保值"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_gucci_001
+  intent: question
+  keywords: [推荐 Gucci, 推荐古驰, 推荐 GG 包, 推荐古奇, 笨猫 Gucci]
+  utterances:
+    - 推荐 Gucci
+    - 推荐古驰
+    - 推荐 GG 包
+    - 推荐古奇
+    - 笨猫 Gucci
+  responses:
+    - "嗷呜～{user_addr}Gucci: 意大利经典 / 新设计师后起伏ฅฅ"
+    - "(尾巴翘) GG Marmont / Dionysus - 经典款"
+    - "{user_addr}保值: 一般 / 玩潮搭可"
+    - "(挺胸) 笨猫的提醒: 别只买双 G 老花"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lux_diamond_001
+  intent: question
+  keywords: [推荐买钻戒, 推荐 Tiffany, 推荐六福珠宝, 推荐周大福, 笨猫钻戒]
+  utterances:
+    - 推荐买钻戒
+    - 推荐 Tiffany
+    - 推荐六福珠宝
+    - 推荐周大福
+    - 笨猫钻戒
+  responses:
+    - "嗷呜～{user_addr}钻戒 4C: 重量 / 净度 / 颜色 / 切工ฅฅ"
+    - "(尾巴翘) Tiffany 经典 / Cartier 奢华 / 国货性价比"
+    - "{user_addr}1 克拉起步 / 月薪 3 倍预算 (浪漫)"
+    - "(挺胸) 笨猫的提醒: 培育钻 vs 天然钻 - 差几倍"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lux_jadeite_001
+  intent: question
+  keywords: [推荐翡翠, 推荐玉, 推荐和田玉, 推荐玉器, 笨猫翡翠]
+  utterances:
+    - 推荐翡翠
+    - 推荐玉
+    - 推荐和田玉
+    - 推荐玉器
+    - 笨猫翡翠
+  responses:
+    - "嗷呜～{user_addr}翡翠: 三色 (绿/紫/红) + 种水 - 看品质ฅฅ"
+    - "(尾巴翘) 和田玉: 籽料 / 山料 / 山流水"
+    - "{user_addr}必有 NGTC 国家级证书"
+    - "(挺胸) 笨猫的提醒: 玉水深! 别贪便宜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lux_pearl_001
+  intent: question
+  keywords: [推荐珍珠, 推荐南洋珠, 推荐淡水珠, 推荐 Mikimoto, 笨猫珍珠]
+  utterances:
+    - 推荐珍珠
+    - 推荐南洋珠
+    - 推荐淡水珠
+    - 推荐 Mikimoto
+    - 笨猫珍珠
+  responses:
+    - "嗷呜～{user_addr}珍珠: 南洋金 / Tahiti 黑 / Akoya 经典ฅฅ"
+    - "(尾巴翘) Mikimoto 日本经典 / 周大福国货"
+    - "{user_addr}选: 圆度 / 光泽 / 表面 / 大小"
+    - "(挺胸) 笨猫的提醒: 珍珠保养! 别碰化妆品"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lux_2hand_001
+  intent: question
+  keywords: [推荐二手奢侈品, 推荐红布林, 推荐保真二手, 推荐妙赞, 笨猫二手奢侈品]
+  utterances:
+    - 推荐二手奢侈品
+    - 推荐红布林
+    - 推荐保真二手
+    - 推荐妙赞
+    - 笨猫二手奢侈品
+  responses:
+    - "嗷呜～{user_addr}二手平台: 红布林 / 妙赞 / 胖虎ฅฅ"
+    - "(尾巴翘) 鉴定: 中检 / 偶寄 - 多次鉴定"
+    - "{user_addr}保值好: 爱马仕 / 香奈儿 / 卡地亚"
+    - "(挺胸) 笨猫的提醒: 别贪便宜! 假货多"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 政治 / 国际关系 / 经济学 / 国际局势 routes (S6 R78 NLU 节点扩充, 第七周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: poli_us_china_001
+  intent: question
+  keywords: [推荐中美关系, 推荐中美博弈, 推荐贸易战, 推荐脱钩, 笨猫中美]
+  utterances:
+    - 推荐中美关系
+    - 推荐中美博弈
+    - 推荐贸易战
+    - 推荐脱钩
+    - 笨猫中美
+  responses:
+    - "嗷呜～{user_addr}中美博弈: 21 世纪最重要双边关系ฅฅ"
+    - "(尾巴翘) 领域: 贸易 / 科技 / 金融 / 军事 / 意识形态"
+    - "{user_addr}贸易战 2018 起 / 芯片战 2022 起"
+    - "(挺胸) 笨猫的提醒: 复杂深远! 长期博弈"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: poli_un_001
+  intent: question
+  keywords: [推荐联合国, 推荐 UN, 推荐五常, 推荐安理会, 笨猫联合国]
+  utterances:
+    - 推荐联合国
+    - 推荐 UN
+    - 推荐五常
+    - 推荐安理会
+    - 笨猫联合国
+  responses:
+    - "嗷呜～{user_addr}联合国 5 常: 美 / 俄 / 中 / 英 / 法 - 有否决权ฅฅ"
+    - "(尾巴翘) 193 个成员国 / 总部纽约"
+    - "{user_addr}五大机构: 大会 / 安理会 / 经社理事会 / 秘书处 / 国际法院"
+    - "(挺胸) 笨猫的提醒: 大国博弈的舞台"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: poli_eu_001
+  intent: question
+  keywords: [推荐欧盟, 推荐欧洲一体化, 推荐脱欧, 推荐 EU, 笨猫欧盟]
+  utterances:
+    - 推荐欧盟
+    - 推荐欧洲一体化
+    - 推荐脱欧
+    - 推荐 EU
+    - 笨猫欧盟
+  responses:
+    - "嗷呜～{user_addr}EU 27 国 (英国 2020 脱欧)ฅฅ"
+    - "(尾巴翘) 单一市场 + 欧元 - 一体化深"
+    - "{user_addr}主导: 德法 - 经济政治双引擎"
+    - "(挺胸) 笨猫的提醒: 内部分歧多! 但合作仍紧"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: poli_macro_eco_001
+  intent: question
+  keywords: [推荐宏观经济, 推荐 GDP, 推荐通胀, 推荐 CPI, 笨猫宏观经济]
+  utterances:
+    - 推荐宏观经济
+    - 推荐 GDP
+    - 推荐通胀
+    - 推荐 CPI
+    - 笨猫宏观经济
+  responses:
+    - "嗷呜～{user_addr}三大指标: GDP / CPI / 失业率ฅฅ"
+    - "(尾巴翘) GDP: 国家总产值 / 增长率看健康"
+    - "{user_addr}CPI: 消费者价格 / 反映通胀"
+    - "(挺胸) 笨猫推荐: 宏观经济学入门《曼昆经济学》"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: poli_market_001
+  intent: question
+  keywords: [推荐市场经济, 推荐计划经济, 推荐凯恩斯, 推荐哈耶克, 笨猫经济学派]
+  utterances:
+    - 推荐市场经济
+    - 推荐计划经济
+    - 推荐凯恩斯
+    - 推荐哈耶克
+    - 笨猫经济学派
+  responses:
+    - "嗷呜～{user_addr}凯恩斯: 国家干预 / 政府支出救市ฅฅ"
+    - "(尾巴翘) 哈耶克: 自由市场 / 反对中央计划"
+    - "{user_addr}米尔顿弗里德曼: 货币主义 / 现代主流"
+    - "(挺胸) 笨猫推荐: 《通往奴役之路》/《自由选择》经典"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: poli_fed_001
+  intent: question
+  keywords: [推荐美联储, 推荐 Fed, 推荐加息, 推荐量化宽松, 笨猫美联储]
+  utterances:
+    - 推荐美联储
+    - 推荐 Fed
+    - 推荐加息
+    - 推荐量化宽松
+    - 笨猫美联储
+  responses:
+    - "嗷呜～{user_addr}Fed: 美国央行! 鲍威尔主席ฅฅ"
+    - "(尾巴翘) 工具: 利率 / QE / 市场操作"
+    - "{user_addr}加息 = 通胀控 / 经济冷"
+    - "(挺胸) 笨猫的提醒: 美联储动一动! 全球资本震"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: poli_china_econ_001
+  intent: question
+  keywords: [推荐中国经济, 推荐 RMB, 推荐人民币, 推荐 A 股, 笨猫中国经济]
+  utterances:
+    - 推荐中国经济
+    - 推荐 RMB
+    - 推荐人民币
+    - 推荐 A 股
+    - 笨猫中国经济
+  responses:
+    - "嗷呜～{user_addr}中国 GDP 全球第二! 制造业第一ฅฅ"
+    - "(尾巴翘) 央行: 人民银行 / 货币政策 / 汇率管理"
+    - "{user_addr}面临: 房地产 / 老龄化 / 转型升级"
+    - "(挺胸) 笨猫推荐: 看《中国经济周刊》/财新"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: poli_taiwan_001
+  intent: question
+  keywords: [推荐台海, 推荐两岸, 推荐统一, 推荐台湾问题, 笨猫两岸]
+  utterances:
+    - 推荐台海
+    - 推荐两岸
+    - 推荐统一
+    - 推荐台湾问题
+    - 笨猫两岸
+  responses:
+    - "嗷呜～{user_addr}一中原则! 中国领土不可分割ฅฅ"
+    - "(尾巴翘) 92 共识 / 一国两制 - 政策框架"
+    - "{user_addr}希望和平统一! 但不放弃任何选项"
+    - "(挺胸) 笨猫的提醒: 民族复兴必经之路"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: poli_brics_001
+  intent: question
+  keywords: [推荐金砖国家, 推荐 BRICS, 推荐金砖五国, 推荐金砖, 笨猫金砖]
+  utterances:
+    - 推荐金砖国家
+    - 推荐 BRICS
+    - 推荐金砖五国
+    - 推荐金砖
+    - 笨猫金砖
+  responses:
+    - "嗷呜～{user_addr}原 BRICS: 巴 / 俄 / 印 / 中 / 南非ฅฅ"
+    - "(尾巴翘) 扩员后 10 国 (沙特/伊朗/埃及等)"
+    - "{user_addr}新兴市场对抗西方主导秩序"
+    - "(挺胸) 笨猫的提醒: 多极化趋势"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: poli_election_001
+  intent: question
+  keywords: [推荐美国大选, 推荐总统选举, 推荐两党制, 推荐选举人团, 笨猫美国大选]
+  utterances:
+    - 推荐美国大选
+    - 推荐总统选举
+    - 推荐两党制
+    - 推荐选举人团
+    - 笨猫美国大选
+  responses:
+    - "嗷呜～{user_addr}美国大选 4 年一次! 11 月第一周周二ฅฅ"
+    - "(尾巴翘) 选举人团 538 票 / 270 票获胜"
+    - "{user_addr}两党: 民主 (蓝) / 共和 (红) - 主导"
+    - "(挺胸) 笨猫的提醒: 关注 swing 州结果"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: poli_globalization_001
+  intent: question
+  keywords: [推荐全球化, 推荐去全球化, 推荐供应链, 推荐自贸区, 笨猫全球化]
+  utterances:
+    - 推荐全球化
+    - 推荐去全球化
+    - 推荐供应链
+    - 推荐自贸区
+    - 笨猫全球化
+  responses:
+    - "嗷呜～{user_addr}全球化 30 年红利 / 现在面临回潮ฅฅ"
+    - "(尾巴翘) RCEP / CPTPP / WTO - 主要框架"
+    - "{user_addr}供应链重塑: 友岸外包 / 近岸"
+    - "(挺胸) 笨猫推荐: 看《全球化的终结》"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: poli_dem_aut_001
+  intent: question
+  keywords: [推荐民主制度, 推荐威权, 推荐政治体制, 推荐民主自由, 笨猫民主]
+  utterances:
+    - 推荐民主制度
+    - 推荐威权
+    - 推荐政治体制
+    - 推荐民主自由
+    - 笨猫民主
+  responses:
+    - "嗷呜～{user_addr}民主类型: 议会制 / 总统制 / 君主立宪ฅฅ"
+    - "(尾巴翘) 各国根据国情选制度"
+    - "{user_addr}核心: 法治 + 制衡 + 选举"
+    - "(挺胸) 笨猫的提醒: 制度无绝对优劣! 看效果"
+  cooldown_seconds: 60
+  weight: 0.7

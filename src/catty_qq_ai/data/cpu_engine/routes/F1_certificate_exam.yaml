@@ -1,0 +1,207 @@
+# 资格证书 / CPA / CFA / PMP / 教师证 routes (S6 R73 NLU 节点扩充, 第七周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 98 edu_career (浅触考证) 区分: 这里专注具体证书.
+
+- name: cert_cpa_001
+  intent: question
+  keywords: [推荐 CPA, 推荐注册会计师, 推荐 CPA 考试, 推荐 CPA 备考, 笨猫 CPA]
+  utterances:
+    - 推荐 CPA
+    - 推荐注册会计师
+    - 推荐 CPA 考试
+    - 推荐 CPA 备考
+    - 笨猫 CPA
+  responses:
+    - "嗷呜～{user_addr}CPA: 中国财会顶级证! 6 科 + 综合ฅฅ"
+    - "(尾巴翘) 备考 2-3 年! 每天 3-4 小时"
+    - "{user_addr}专业: 会 / 审 / 财 / 经 / 税 / 战"
+    - "(挺胸) 笨猫的提醒: 含金量高! 求职涨薪利器"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cert_cfa_001
+  intent: question
+  keywords: [推荐 CFA, 推荐特许金融分析师, 推荐 CFA 三级, 推荐金融证书, 笨猫 CFA]
+  utterances:
+    - 推荐 CFA
+    - 推荐特许金融分析师
+    - 推荐 CFA 三级
+    - 推荐金融证书
+    - 笨猫 CFA
+  responses:
+    - "嗷呜～{user_addr}CFA: 金融第一证! 3 个 level - 7-10 万ฅฅ"
+    - "(尾巴翘) Level 1 → 2 → 3 - 每级 6 月+ 备考"
+    - "{user_addr}英语好! 全英文考"
+    - "(挺胸) 笨猫的提醒: 投行 / 基金 / 资管 必备"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cert_pmp_001
+  intent: question
+  keywords: [推荐 PMP, 推荐项目管理证, 推荐 PMP 考试, 推荐 PMP 培训, 笨猫 PMP]
+  utterances:
+    - 推荐 PMP
+    - 推荐项目管理证
+    - 推荐 PMP 考试
+    - 推荐 PMP 培训
+    - 笨猫 PMP
+  responses:
+    - "嗷呜～{user_addr}PMP: 项目管理国际证! PMI 颁发ฅฅ"
+    - "(尾巴翘) 经验 + 培训 + 考试 - 三件套"
+    - "{user_addr}3 年续证! 60 PDU 学分"
+    - "(挺胸) 笨猫的提醒: PM 必备! 大厂申请加分"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cert_teacher_001
+  intent: question
+  keywords: [推荐教师资格证, 推荐教资, 推荐教师证, 推荐教师证考试, 笨猫教师证]
+  utterances:
+    - 推荐教师资格证
+    - 推荐教资
+    - 推荐教师证
+    - 推荐教师证考试
+    - 笨猫教师证
+  responses:
+    - "嗷呜～{user_addr}教资: 笔试 + 面试 + 普通话 + 体检ฅฅ"
+    - "(尾巴翘) 学段: 幼儿 / 小学 / 初中 / 高中"
+    - "{user_addr}通过率: 笔试 30% / 面试 60%"
+    - "(挺胸) 笨猫的提醒: 备 3-6 个月! 通过有戏"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cert_lawyer_001
+  intent: question
+  keywords: [推荐法考, 推荐司法考试, 推荐律师证, 推荐法律职业资格, 笨猫法考]
+  utterances:
+    - 推荐法考
+    - 推荐司法考试
+    - 推荐律师证
+    - 推荐法律职业资格
+    - 笨猫法考
+  responses:
+    - "嗷呜～{user_addr}法考: 中国最难考试之一! 过关率 10%ฅฅ"
+    - "(尾巴翘) 客观题 → 主观题 - 两阶段"
+    - "{user_addr}备考 1-2 年! 每天 5+ 小时"
+    - "(挺胸) 笨猫的提醒: 过了能当律师! 起飞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cert_civil_servant_001
+  intent: question
+  keywords: [推荐公务员, 推荐国考, 推荐省考, 推荐考公, 笨猫公务员]
+  utterances:
+    - 推荐公务员
+    - 推荐国考
+    - 推荐省考
+    - 推荐考公
+    - 笨猫公务员
+  responses:
+    - "嗷呜～{user_addr}国考 / 省考 - 千军万马过独木ฅฅ"
+    - "(尾巴翘) 申论 + 行测 + 专业 + 面试"
+    - "{user_addr}找匹配岗位! 别盲报"
+    - "(挺胸) 笨猫的提醒: 备 6 个月 - 1 年! 稳考"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cert_health_001
+  intent: question
+  keywords: [推荐医师资格, 推荐执业医师, 推荐护士资格, 推荐健康管理师, 笨猫医师]
+  utterances:
+    - 推荐医师资格
+    - 推荐执业医师
+    - 推荐护士资格
+    - 推荐健康管理师
+    - 笨猫医师
+  responses:
+    - "嗷呜～{user_addr}执业医师: 医学本科 + 1 年实习 + 考试ฅฅ"
+    - "(尾巴翘) 中医 / 西医 / 助理医师 - 不同方向"
+    - "{user_addr}护士证: 护理大专以上 + 考试"
+    - "(挺胸) 笨猫的提醒: 救死扶伤! 神圣职业"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cert_psy_001
+  intent: question
+  keywords: [推荐心理咨询师, 推荐心理学证书, 推荐 ACI, 推荐 EAP, 笨猫心理咨询师]
+  utterances:
+    - 推荐心理咨询师
+    - 推荐心理学证书
+    - 推荐 ACI
+    - 推荐 EAP
+    - 笨猫心理咨询师
+  responses:
+    - "嗷呜～{user_addr}国家心理咨询师 2017 取消! 现在多机构证ฅฅ"
+    - "(尾巴翘) 推荐: 中科院 / 北大 / 应用心理硕士"
+    - "{user_addr}国际: ACA / APA - 全球认可"
+    - "(挺胸) 笨猫的提醒: 别只考证! 实践 + 督导"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cert_arch_001
+  intent: question
+  keywords: [推荐一级建造师, 推荐二级建造师, 推荐造价工程师, 推荐建筑师证, 笨猫一建]
+  utterances:
+    - 推荐一级建造师
+    - 推荐二级建造师
+    - 推荐造价工程师
+    - 推荐建筑师证
+    - 笨猫一建
+  responses:
+    - "嗷呜～{user_addr}一建: 建筑业最值钱证! 挂靠 4-8w/年ฅฅ"
+    - "(尾巴翘) 通过率 5-10% - 难考"
+    - "{user_addr}专业: 建筑 / 市政 / 机电 / 公路"
+    - "(挺胸) 笨猫的提醒: 工程人 / 建筑生 必考"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cert_acca_001
+  intent: question
+  keywords: [推荐 ACCA, 推荐特许公认会计师, 推荐 ACCA 考试, 推荐英国财会, 笨猫 ACCA]
+  utterances:
+    - 推荐 ACCA
+    - 推荐特许公认会计师
+    - 推荐 ACCA 考试
+    - 推荐英国财会
+    - 笨猫 ACCA
+  responses:
+    - "嗷呜～{user_addr}ACCA: 国际财会证! 全英文 13 门ฅฅ"
+    - "(尾巴翘) 4 大: 普华 / 安永 / 毕马威 / 德勤 - 求职利器"
+    - "{user_addr}全球 100+ 国家认可"
+    - "(挺胸) 笨猫的提醒: 比 CPA 更国际! 但范围窄"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cert_it_001
+  intent: question
+  keywords: [推荐 AWS 证书, 推荐 Azure 认证, 推荐 PMP IT 证书, 推荐 IT 证书, 笨猫 AWS]
+  utterances:
+    - 推荐 AWS 证书
+    - 推荐 Azure 认证
+    - 推荐 IT 证书
+    - 推荐云计算证
+    - 笨猫 AWS
+  responses:
+    - "嗷呜～{user_addr}主流: AWS / Azure / GCP - 三大云ฅฅ"
+    - "(尾巴翘) AWS: SAA → SAP - 架构师方向"
+    - "{user_addr}国内: 阿里云 / 华为云 / 腾讯云 - 各自体系"
+    - "(挺胸) 笨猫的提醒: 实战 + 证书! 别只刷题"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cert_dance_001
+  intent: question
+  keywords: [推荐舞蹈考级, 推荐钢琴考级, 推荐音乐考级, 推荐艺术考级, 笨猫考级]
+  utterances:
+    - 推荐舞蹈考级
+    - 推荐钢琴考级
+    - 推荐音乐考级
+    - 推荐艺术考级
+    - 笨猫考级
+  responses:
+    - "嗷呜～{user_addr}钢琴: 中央 / 中国 / 上海 - 三大机构ฅฅ"
+    - "(尾巴翘) 舞蹈: 北舞 / 中国舞协 / 民族舞协"
+    - "{user_addr}艺考加分 / 出国留学 - 用得上"
+    - "(挺胸) 笨猫的提醒: 别为考级! 兴趣最重要"
+  cooldown_seconds: 60
+  weight: 0.8

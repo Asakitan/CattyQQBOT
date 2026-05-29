@@ -1,0 +1,207 @@
+# 中国城市深度 / 北上广深杭 / 城市生活 routes (S6 R74 NLU 节点扩充, 第七周期 buffered 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 95 travel (浅触旅游) 区分: 这里专注城市生活/工作/打工人.
+
+- name: city_beijing_001
+  intent: question
+  keywords: [推荐北京生活, 推荐北京打工, 推荐北京落户, 推荐北京适应, 笨猫北京]
+  utterances:
+    - 推荐北京生活
+    - 推荐北京打工
+    - 推荐北京落户
+    - 推荐北京适应
+    - 笨猫北京
+  responses:
+    - "嗷呜～{user_addr}北京: 政治文化中心 / 大厂 + 体制ฅฅ"
+    - "(尾巴翘) 海淀 (学区) / 朝阳 (国际) / 西城 (政商)"
+    - "{user_addr}落户难! 积分 / 留学 / 引进 - 几路"
+    - "(挺胸) 笨猫的提醒: 雾霾 + 拥堵! 但机会多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: city_shanghai_001
+  intent: question
+  keywords: [推荐上海生活, 推荐上海打工, 推荐上海落户, 推荐上海适应, 笨猫上海]
+  utterances:
+    - 推荐上海生活
+    - 推荐上海打工
+    - 推荐上海落户
+    - 推荐上海适应
+    - 笨猫上海
+  responses:
+    - "嗷呜～{user_addr}上海: 金融经济中心 / 国际化最强ฅฅ"
+    - "(尾巴翘) 黄浦 / 静安 / 徐汇 - 核心三区"
+    - "{user_addr}落户: 居转户 7 年 / 高端引进"
+    - "(挺胸) 笨猫的提醒: 房价高! 工资也对得起"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: city_guangzhou_001
+  intent: question
+  keywords: [推荐广州生活, 推荐广州打工, 推荐广州落户, 推荐广州适应, 笨猫广州]
+  utterances:
+    - 推荐广州生活
+    - 推荐广州打工
+    - 推荐广州落户
+    - 推荐广州适应
+    - 笨猫广州
+  responses:
+    - "嗷呜～{user_addr}广州: 务实 + 美食 + 性价比 - 接地气ฅฅ"
+    - "(尾巴翘) 天河 / 越秀 / 海珠 - 核心区"
+    - "{user_addr}落户最容易! 学历 + 社保 / 积分"
+    - "(挺胸) 笨猫的提醒: 早茶之都! 美食爱好者天堂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: city_shenzhen_001
+  intent: question
+  keywords: [推荐深圳生活, 推荐深圳打工, 推荐深圳落户, 推荐深圳科技, 笨猫深圳]
+  utterances:
+    - 推荐深圳生活
+    - 推荐深圳打工
+    - 推荐深圳落户
+    - 推荐深圳科技
+    - 笨猫深圳
+  responses:
+    - "嗷呜～{user_addr}深圳: 科技创新中心 / 年轻人多ฅฅ"
+    - "(尾巴翘) 南山 (科技) / 福田 (金融) / 罗湖 (老牌)"
+    - "{user_addr}落户难度提升! 但仍比北上易"
+    - "(挺胸) 笨猫的提醒: 加班文化! 节奏快"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: city_hangzhou_001
+  intent: question
+  keywords: [推荐杭州生活, 推荐杭州打工, 推荐杭州互联网, 推荐杭州适应, 笨猫杭州]
+  utterances:
+    - 推荐杭州生活
+    - 推荐杭州打工
+    - 推荐杭州互联网
+    - 推荐杭州适应
+    - 笨猫杭州
+  responses:
+    - "嗷呜～{user_addr}杭州: 互联网新贵 / 美景之都ฅฅ"
+    - "(尾巴翘) 西湖 / 余杭 (阿里) / 滨江 - 核心区"
+    - "{user_addr}互联网集中! 阿里 + 网易 + 字节"
+    - "(挺胸) 笨猫的提醒: 房价不输北上深! 重压"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: city_chengdu_002
+  intent: question
+  keywords: [推荐成都生活, 推荐成都打工, 推荐成都美食, 推荐成都适应, 笨猫成都生活]
+  utterances:
+    - 推荐成都生活
+    - 推荐成都打工
+    - 推荐成都美食
+    - 推荐成都适应
+    - 笨猫成都生活
+  responses:
+    - "嗷呜～{user_addr}成都: 慢节奏 + 美食 + 性价比 - 不能输!ฅฅ"
+    - "(尾巴翘) 锦江 / 武侯 / 高新 - 核心区"
+    - "{user_addr}美食天堂 + 工资中等 + 房价适中"
+    - "(挺胸) 笨猫的提醒: 雾天多! 阳光少"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: city_wuhan_001
+  intent: question
+  keywords: [推荐武汉生活, 推荐武汉打工, 推荐武汉适应, 推荐武汉美食, 笨猫武汉]
+  utterances:
+    - 推荐武汉生活
+    - 推荐武汉打工
+    - 推荐武汉适应
+    - 推荐武汉美食
+    - 笨猫武汉
+  responses:
+    - "嗷呜～{user_addr}武汉: 高校多 + 工业 + 中部老大ฅฅ"
+    - "(尾巴翘) 武昌 / 江汉 / 江岸 - 三镇"
+    - "{user_addr}热干面 / 鸭脖 / 豆皮 - 名小吃"
+    - "(挺胸) 笨猫的提醒: 夏热冬冷! 气候有挑战"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: city_xian_002
+  intent: question
+  keywords: [推荐西安生活, 推荐西安打工, 推荐西安适应, 推荐西安落户, 笨猫西安生活]
+  utterances:
+    - 推荐西安生活
+    - 推荐西安打工
+    - 推荐西安适应
+    - 推荐西安落户
+    - 笨猫西安生活
+  responses:
+    - "嗷呜～{user_addr}西安: 历史古都 + 半导体新城ฅฅ"
+    - "(尾巴翘) 雁塔 (高新) / 莲湖 / 新城"
+    - "{user_addr}落户超容易! 中专以上即可"
+    - "(挺胸) 笨猫的提醒: 工资偏低 + 房价友好"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: city_chongqing_001
+  intent: question
+  keywords: [推荐重庆生活, 推荐重庆打工, 推荐重庆山城, 推荐重庆适应, 笨猫重庆]
+  utterances:
+    - 推荐重庆生活
+    - 推荐重庆打工
+    - 推荐重庆山城
+    - 推荐重庆适应
+    - 笨猫重庆
+  responses:
+    - "嗷呜～{user_addr}重庆: 山城 + 火锅 + 网红ฅฅ"
+    - "(尾巴翘) 渝中 / 江北 / 渝北 - 核心区"
+    - "{user_addr}3D 魔幻城市! 但路痴慎选"
+    - "(挺胸) 笨猫的提醒: 夏天闷热! 注意"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: city_suzhou_001
+  intent: question
+  keywords: [推荐苏州生活, 推荐苏州工业园区, 推荐苏州落户, 推荐苏州工作, 笨猫苏州]
+  utterances:
+    - 推荐苏州生活
+    - 推荐苏州工业园区
+    - 推荐苏州落户
+    - 推荐苏州工作
+    - 笨猫苏州
+  responses:
+    - "嗷呜～{user_addr}苏州: 工业第一 + 园林美景ฅฅ"
+    - "(尾巴翘) 工业园区 / 高新区 - 高薪集中"
+    - "{user_addr}靠近上海! 高铁 30 分到"
+    - "(挺胸) 笨猫的提醒: 房价高! 但工业能扛"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: city_qingdao_001
+  intent: question
+  keywords: [推荐青岛生活, 推荐青岛打工, 推荐青岛海景, 推荐青岛落户, 笨猫青岛]
+  utterances:
+    - 推荐青岛生活
+    - 推荐青岛打工
+    - 推荐青岛海景
+    - 推荐青岛落户
+    - 笨猫青岛
+  responses:
+    - "嗷呜～{user_addr}青岛: 海滨城市 + 啤酒之都ฅฅ"
+    - "(尾巴翘) 海尔 / 海信 - 制造业巨头"
+    - "{user_addr}夏天凉爽! 全国旅游胜地"
+    - "(挺胸) 笨猫的提醒: 房价不低! 但宜居"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: city_choose_001
+  intent: question
+  keywords: [推荐城市选择, 推荐去哪个城市, 推荐城市定居, 推荐工作城市, 笨猫城市选择]
+  utterances:
+    - 推荐城市选择
+    - 推荐去哪个城市
+    - 推荐城市定居
+    - 推荐工作城市
+    - 笨猫城市选择
+  responses:
+    - "嗷呜～{user_addr}北上广深: 拼搏 / 二线: 宜居 - 看追求ฅฅ"
+    - "(尾巴翘) 互联网: 杭州 / 深圳 / 北京"
+    - "{user_addr}金融: 上海 / 北京 / 香港"
+    - "(挺胸) 笨猫的提醒: 选城市看产业 + 性格匹配"
+  cooldown_seconds: 60
+  weight: 1.0

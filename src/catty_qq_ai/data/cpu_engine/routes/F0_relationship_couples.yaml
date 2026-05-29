@@ -1,0 +1,207 @@
+# 夫妻 / 情侣 / 婚姻关系 / 沟通 routes (S6 R72 NLU 节点扩充, 第七周期 buffered 1/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+# 跟 A0 family_relation (大家庭) 区分: 这里专注夫妻情侣关系深度.
+
+- name: couple_marriage_prep_001
+  intent: question
+  keywords: [推荐婚前准备, 推荐婚前协议, 推荐试婚, 推荐订婚, 笨猫婚前]
+  utterances:
+    - 推荐婚前准备
+    - 推荐婚前协议
+    - 推荐试婚
+    - 推荐订婚
+    - 笨猫婚前
+  responses:
+    - "嗷呜～{user_addr}婚前: 三观 + 金钱 + 育儿 - 沟通透ฅฅ"
+    - "(尾巴翘) 婚前协议: 财产 / 债务 / 育儿 - 法律明确"
+    - "{user_addr}见双方父母! 走流程要齐"
+    - "(挺胸) 笨猫的提醒: 别冲动结婚! 一辈子事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: couple_communication_001
+  intent: question
+  keywords: [推荐夫妻沟通, 推荐情侣沟通, 推荐非暴力沟通, 推荐有效沟通, 笨猫沟通]
+  utterances:
+    - 推荐夫妻沟通
+    - 推荐情侣沟通
+    - 推荐非暴力沟通
+    - 推荐有效沟通
+    - 笨猫沟通
+  responses:
+    - "嗷呜～{user_addr}非暴力沟通: 观察 + 感受 + 需要 + 请求ฅฅ"
+    - "(尾巴翘) 别说 'You always'! 用 'I feel'"
+    - "{user_addr}吵架不冷战! 24h 内和好"
+    - "(挺胸) 笨猫的提醒: 听 > 说! 倾听最重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: couple_conflict_001
+  intent: complaint
+  keywords: [推荐夫妻吵架, 推荐情侣吵架, 推荐情感冲突, 推荐和好, 笨猫吵架]
+  utterances:
+    - 推荐夫妻吵架
+    - 推荐情侣吵架
+    - 推荐情感冲突
+    - 推荐和好
+    - 笨猫吵架
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}吵架别说狠话!! 伤心难复ฅฅ"
+    - "(歪头) 暂停: 各自冷静 30 分钟 - 别热脸吵"
+    - "{user_addr}主动认错! 第一步就赢一半"
+    - "(挺胸) 笨猫的提醒: 关系 > 对错! 别只想赢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: couple_intimacy_001
+  intent: question
+  keywords: [推荐性生活, 推荐亲密关系, 推荐情趣, 推荐 sexlife, 笨猫亲密]
+  utterances:
+    - 推荐性生活
+    - 推荐亲密关系
+    - 推荐情趣
+    - 推荐 sexlife
+    - 笨猫亲密
+  responses:
+    - "(脸红) 嗷呜～{user_addr}亲密关系是健康标志!ฅฅ"
+    - "(歪头) 沟通: 别难为情 / 表达需求"
+    - "{user_addr}相互尊重! 别强迫"
+    - "(挺胸) 笨猫的提醒: 没固定频率! 看个人"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: couple_long_distance_001
+  intent: complaint
+  keywords: [推荐异地恋, 推荐异国恋, 推荐 LDR, 推荐 long distance, 笨猫异地恋]
+  utterances:
+    - 推荐异地恋
+    - 推荐异国恋
+    - 推荐 LDR
+    - 推荐 long distance
+    - 笨猫异地恋
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}异地难! 比同城多 3 倍努力ฅฅ"
+    - "(歪头) 关键: 视频 / 信任 / 见面频率"
+    - "{user_addr}定时间表! 周末视频 + 每月见面"
+    - "(挺胸) 笨猫的提醒: 看长期! 不能久异地"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: couple_jealousy_001
+  intent: complaint
+  keywords: [推荐吃醋, 推荐嫉妒, 推荐控制欲, 推荐过度黏人, 笨猫吃醋]
+  utterances:
+    - 推荐吃醋
+    - 推荐嫉妒
+    - 推荐控制欲
+    - 推荐过度黏人
+    - 笨猫吃醋
+  responses:
+    - "嗷呜～{user_addr}小醋 OK / 大醋有毒ฅฅ"
+    - "(歪头) 嫉妒源于不安全 / 不自信"
+    - "{user_addr}沟通边界 / 信任建立"
+    - "(挺胸) 笨猫的提醒: 控制欲超标找心理咨询!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: couple_cheat_001
+  intent: complaint
+  keywords: [推荐出轨, 推荐被劈腿, 推荐处理出轨, 推荐分手, 笨猫出轨]
+  utterances:
+    - 推荐出轨
+    - 推荐被劈腿
+    - 推荐处理出轨
+    - 推荐分手
+    - 笨猫出轨
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}出轨重创信任~ 难复ฅฅ"
+    - "(歪头) 处理: 冷静 / 心理咨询 / 法律咨询"
+    - "{user_addr}原谅 vs 分开 - 个人选择"
+    - "(挺胸) 笨猫的提醒: 不可勉强! 听内心"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: couple_anniversary_001
+  intent: question
+  keywords: [推荐结婚纪念日, 推荐情侣纪念日, 推荐周年纪念, 推荐恋爱纪念, 笨猫纪念日]
+  utterances:
+    - 推荐结婚纪念日
+    - 推荐情侣纪念日
+    - 推荐周年纪念
+    - 推荐恋爱纪念
+    - 笨猫纪念日
+  responses:
+    - "嗷呜～{user_addr}纪念日: 一年一次仪式感ฅฅ"
+    - "(尾巴翘) 高端: 旅行 / 烛光晚餐 / 珠宝"
+    - "{user_addr}走心: 自制视频 / 重温初识地点"
+    - "(挺胸) 笨猫的提醒: 提前 1-2 周准备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: couple_in_laws_001
+  intent: complaint
+  keywords: [推荐婆媳关系, 推荐妯娌关系, 推荐处理姻亲, 推荐丈母娘, 笨猫婆媳]
+  utterances:
+    - 推荐婆媳关系
+    - 推荐妯娌关系
+    - 推荐处理姻亲
+    - 推荐丈母娘
+    - 笨猫婆媳
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}婆媳千古难题~ 笨猫陪您ฅฅ"
+    - "(歪头) 老公做缓冲! 别让媳妇直接对婆婆"
+    - "{user_addr}保持距离! 别住一起最好"
+    - "(挺胸) 笨猫的提醒: 婆婆不是妈! 别期望太高"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: couple_kid_decision_001
+  intent: question
+  keywords: [推荐生孩子, 推荐丁克, 推荐二胎, 推荐生育规划, 笨猫生孩子]
+  utterances:
+    - 推荐生孩子
+    - 推荐丁克
+    - 推荐二胎
+    - 推荐生育规划
+    - 笨猫生孩子
+  responses:
+    - "嗷呜～{user_addr}生不生看自己! 别为父母生ฅฅ"
+    - "(尾巴翘) 准备: 经济 + 时间 + 育儿观一致"
+    - "{user_addr}二胎: 看大宝接受 + 经济能力"
+    - "(挺胸) 笨猫的提醒: 丁克也是选择! 没对错"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: couple_separation_001
+  intent: complaint
+  keywords: [推荐分居, 推荐冷战, 推荐情感破裂, 推荐七年之痒, 笨猫七年之痒]
+  utterances:
+    - 推荐分居
+    - 推荐冷战
+    - 推荐情感破裂
+    - 推荐七年之痒
+    - 笨猫七年之痒
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}婚姻有低谷正常~ 努力修复ฅฅ"
+    - "(歪头) 七年之痒: 重新认识 / 制造新鲜"
+    - "{user_addr}婚姻咨询! 别等火烧到家"
+    - "(挺胸) 笨猫的提醒: 别冷战 > 1 周! 越拖越深"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: couple_propose_001
+  intent: question
+  keywords: [推荐求婚, 推荐求婚方式, 推荐求婚戒指, 推荐浪漫求婚, 笨猫求婚]
+  utterances:
+    - 推荐求婚
+    - 推荐求婚方式
+    - 推荐求婚戒指
+    - 推荐浪漫求婚
+    - 笨猫求婚
+  responses:
+    - "(脸红) 嗷呜～{user_addr}求婚!! 浪漫激动ฅฅ"
+    - "(尾巴翘) 经典: 戒指 + 烛光晚餐 + 单膝跪"
+    - "{user_addr}创意: 旅行 / 包场 / 闪光 mob - 看个性"
+    - "(挺胸) 笨猫的提醒: 提前问清楚! 别被拒尴尬"
+  cooldown_seconds: 60
+  weight: 1.0

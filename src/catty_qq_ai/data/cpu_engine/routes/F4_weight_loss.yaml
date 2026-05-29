@@ -1,0 +1,207 @@
+# 减肥 / 瘦身 / 燃脂 / 饮食控制 routes (S6 R76 NLU 节点扩充, 第七周期 buffered 5/10)
+# 主人 2026-05-29: intent=question/info_request/complaint, 短语级 keywords.
+# 跟 91 health / B5 workout / B2 beauty 区分: 这里专注减肥科学方法.
+
+- name: weight_method_001
+  intent: question
+  keywords: [推荐减肥, 推荐瘦身, 推荐减脂方法, 推荐减肥计划, 笨猫减肥]
+  utterances:
+    - 推荐减肥
+    - 推荐瘦身
+    - 推荐减脂方法
+    - 推荐减肥计划
+    - 笨猫减肥
+  responses:
+    - "嗷呜～{user_addr}减肥本质: 热量缺口 - 简单不简单ฅฅ"
+    - "(尾巴翘) 公式: 摄入 < 消耗 = 减重"
+    - "{user_addr}健康速度: 每周 0.5-1kg - 不反弹"
+    - "(挺胸) 笨猫的提醒: 慢减保肌肉! 快减掉的多是水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weight_calorie_001
+  intent: question
+  keywords: [推荐计算热量, 推荐 TDEE, 推荐基础代谢, 推荐热量计算器, 笨猫热量]
+  utterances:
+    - 推荐计算热量
+    - 推荐 TDEE
+    - 推荐基础代谢
+    - 推荐热量计算器
+    - 笨猫热量
+  responses:
+    - "嗷呜～{user_addr}TDEE = 基础代谢 (BMR) × 活动系数ฅฅ"
+    - "(尾巴翘) 减脂: TDEE - 300-500 卡 - 缓慢稳定"
+    - "{user_addr}APP: 薄荷健康 / 轻牛轻 / FatSecret"
+    - "(挺胸) 笨猫的提醒: 别低于基础代谢! 伤身"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weight_diet_protein_001
+  intent: question
+  keywords: [推荐高蛋白饮食, 推荐蛋白质, 推荐增肌饮食, 推荐健身餐, 笨猫高蛋白]
+  utterances:
+    - 推荐高蛋白饮食
+    - 推荐蛋白质
+    - 推荐增肌饮食
+    - 推荐健身餐
+    - 笨猫高蛋白
+  responses:
+    - "嗷呜～{user_addr}每日蛋白: 1.6-2.2g/kg 体重 - 增肌减脂ฅฅ"
+    - "(尾巴翘) 来源: 鸡胸 / 鸡蛋 / 牛肉 / 鱼 / 豆制品"
+    - "{user_addr}补充: 乳清蛋白 / 酪蛋白 - 不够时"
+    - "(挺胸) 笨猫的提醒: 别忽略蔬菜! 营养均衡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weight_carb_001
+  intent: question
+  keywords: [推荐低碳水, 推荐生酮饮食, 推荐 keto, 推荐 LCHF, 笨猫生酮]
+  utterances:
+    - 推荐低碳水
+    - 推荐生酮饮食
+    - 推荐 keto
+    - 推荐 LCHF
+    - 笨猫生酮
+  responses:
+    - "嗷呜～{user_addr}生酮: 碳水 < 50g / 高脂肪 / 适量蛋白ฅฅ"
+    - "(尾巴翘) 减肥快! 但难坚持 + 入酮反应"
+    - "{user_addr}先咨询医生! 别盲目尝试"
+    - "(挺胸) 笨猫的提醒: 长期低碳水可能伤甲状腺"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: weight_intermittent_001
+  intent: question
+  keywords: [推荐 168 断食, 推荐间歇性断食, 推荐过午不食, 推荐限时进食, 笨猫断食]
+  utterances:
+    - 推荐 168 断食
+    - 推荐间歇性断食
+    - 推荐过午不食
+    - 推荐限时进食
+    - 笨猫断食
+  responses:
+    - "嗷呜～{user_addr}16:8: 16h 禁食 + 8h 进食ฅฅ"
+    - "(尾巴翘) 18:6 / 20:4 / 5:2 - 不同方案"
+    - "{user_addr}水 / 咖啡 / 茶 不破断食"
+    - "(挺胸) 笨猫的提醒: 别一直饿! 进食窗口好好吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weight_replace_meal_001
+  intent: question
+  keywords: [推荐代餐, 推荐代餐奶昔, 推荐 Smeal, 推荐 Wonderlab, 笨猫代餐]
+  utterances:
+    - 推荐代餐
+    - 推荐代餐奶昔
+    - 推荐 Smeal
+    - 推荐 Wonderlab
+    - 笨猫代餐
+  responses:
+    - "嗷呜～{user_addr}主流: Smeal / Wonderlab / 若饭 / Soylentฅฅ"
+    - "(尾巴翘) 营养均衡 / 控热量 / 方便"
+    - "{user_addr}短期可以 / 长期不建议"
+    - "(挺胸) 笨猫的提醒: 别完全替代真食物!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: weight_meal_plan_001
+  intent: question
+  keywords: [推荐减脂餐, 推荐减脂食谱, 推荐健康餐, 推荐 meal prep, 笨猫减脂餐]
+  utterances:
+    - 推荐减脂餐
+    - 推荐减脂食谱
+    - 推荐健康餐
+    - 推荐 meal prep
+    - 笨猫减脂餐
+  responses:
+    - "嗷呜～{user_addr}三餐: 主食 + 蛋白 + 蔬菜 + 少油ฅฅ"
+    - "(尾巴翘) 早: 鸡蛋 + 燕麦 + 水果 + 牛奶"
+    - "{user_addr}午晚: 鸡胸 / 鱼 + 杂粮 + 绿菜"
+    - "(挺胸) 笨猫的提醒: 周末预备! Meal Prep 省时"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weight_belly_001
+  intent: question
+  keywords: [推荐减肚子, 推荐瘦肚子, 推荐马甲线, 推荐 ab 训练, 笨猫减肚子]
+  utterances:
+    - 推荐减肚子
+    - 推荐瘦肚子
+    - 推荐马甲线
+    - 推荐 ab 训练
+    - 笨猫减肚子
+  responses:
+    - "嗷呜～{user_addr}全身减脂 + 局部加强 - 别只练腹ฅฅ"
+    - "(尾巴翘) 动作: 卷腹 / 平板 / 俄罗斯转 / 登山"
+    - "{user_addr}体脂 < 18% 男 / < 22% 女 - 才看得见"
+    - "(挺胸) 笨猫的提醒: 腹肌是吃出来的! 吃 70% + 练 30%"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weight_leg_001
+  intent: question
+  keywords: [推荐瘦腿, 推荐瘦大腿, 推荐瘦腰, 推荐瘦手臂, 笨猫瘦腿]
+  utterances:
+    - 推荐瘦腿
+    - 推荐瘦大腿
+    - 推荐瘦腰
+    - 推荐瘦手臂
+    - 笨猫瘦腿
+  responses:
+    - "嗷呜～{user_addr}局部减脂是骗局! 整体减才能瘦各处ฅฅ"
+    - "(尾巴翘) 瘦腿: 跑步 / 单车 / 跳绳 - 有氧 + 拉伸"
+    - "{user_addr}泡沫轴! 放松筋膜 / 显瘦"
+    - "(挺胸) 笨猫的提醒: 蛋白质够! 紧实不松"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weight_plateau_001
+  intent: complaint
+  keywords: [推荐减肥平台期, 推荐瓶颈期, 推荐减肥停滞, 推荐反弹, 笨猫平台期]
+  utterances:
+    - 推荐减肥平台期
+    - 推荐瓶颈期
+    - 推荐减肥停滞
+    - 推荐反弹
+    - 笨猫平台期
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}平台期正常! 别气馁ฅฅ"
+    - "(歪头) 突破: 调整热量 / 训练 / 休息"
+    - "{user_addr}多吃 1-2 周 (refeed)! 重启代谢"
+    - "(挺胸) 笨猫的提醒: 别冲动暴食! 步步进"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: weight_drug_001
+  intent: question
+  keywords: [推荐减肥药, 推荐司美格鲁肽, 推荐瘦素, 推荐 GLP1, 笨猫减肥药]
+  utterances:
+    - 推荐减肥药
+    - 推荐司美格鲁肽
+    - 推荐瘦素
+    - 推荐 GLP1
+    - 笨猫减肥药
+  responses:
+    - "嗷呜～{user_addr}司美格鲁肽 / GLP-1: 新一代减肥神药ฅฅ"
+    - "(尾巴翘) 必须找医生开! 别自己买"
+    - "{user_addr}副作用: 恶心 / 腹泻 / 长期未知"
+    - "(挺胸) 笨猫的提醒: 别迷信! 健康饮食运动才王道"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: weight_psyc_001
+  intent: complaint
+  keywords: [推荐情绪性饮食, 推荐暴食, 推荐节食后暴食, 推荐健康关系, 笨猫情绪性进食]
+  utterances:
+    - 推荐情绪性饮食
+    - 推荐暴食
+    - 推荐节食后暴食
+    - 推荐健康关系
+    - 笨猫情绪性进食
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}情绪性进食很常见! 别自责ฅฅ"
+    - "(歪头) 找替代: 散步 / 喝水 / 聊天 - 别只吃"
+    - "{user_addr}建立健康饮食关系! 别把食物道德化"
+    - "(挺胸) 笨猫的提醒: 严重看心理师! 进食障碍是病"
+  cooldown_seconds: 60
+  weight: 1.0
