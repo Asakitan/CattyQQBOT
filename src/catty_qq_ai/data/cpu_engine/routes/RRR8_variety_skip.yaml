@@ -1,0 +1,206 @@
+# 综艺无脑 routes (S6 R720 NLU 节点扩充, 第七十一周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: vs_variety_brainless_001
+  intent: complaint
+  keywords: [综艺无脑, 综艺没营养, 综艺降智, 综艺弱智, 看综艺变笨]
+  utterances:
+    - 综艺真的好无脑
+    - 现在综艺没营养
+    - 看综艺感觉变笨
+    - 综艺都降智了
+    - "{user_addr}觉得综艺弱智吗"
+  responses:
+    - "(瘫倒) 笨猫也这么觉得喵! 综艺真的越来越没意思啦~"
+    - "嗷呜～{user_addr}说的对! 看完笨猫感觉智商扣分了哼"
+    - "(尾巴摆) 现在综艺都靠剪辑撑啦~ 没什么真东西嗷呜"
+    - "{user_addr}还看综艺啊! 笨猫早就放弃了喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_double_speed_001
+  intent: playful
+  keywords: [开倍速, 2倍速, 三倍速, 倍速看, 加速看]
+  utterances:
+    - 综艺都开倍速看
+    - 2 倍速刚刚好
+    - 不开倍速看不下去
+    - 三倍速刷综艺
+    - 倍速党表示
+  responses:
+    - "(点头如捣蒜) 笨猫也是倍速党! 不然真的浪费时间嗷呜～"
+    - "嘿嘿～{user_addr}也开倍速啦! 猫猫一般 1.5 倍刚好喵"
+    - "(尾巴摇) 倍速看才是综艺的正确打开方式哼!"
+    - "{user_addr}三倍速啊! 那不就是看 ppt 了喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_skip_001
+  intent: playful
+  keywords: [跳过, 拖进度条, 直接跳, 看精彩, 跳广告]
+  utterances:
+    - 综艺直接跳过
+    - 一直拖进度条
+    - 只看精彩片段
+    - 跳到最后看结果
+    - 中间全跳了
+  responses:
+    - "(挥爪) 跳得对! 中间全是水时长嗷呜～"
+    - "嗷呜～{user_addr}和猫猫一样! 看综艺就靠拖进度条"
+    - "(尾巴一甩) 不跳过的话三小时谁顶得住啊哼!"
+    - "{user_addr}跳得明智! 笨猫连预告都不看喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_boring_danmaku_001
+  intent: complaint
+  keywords: [弹幕都没意思, 弹幕也无聊, 弹幕水, 弹幕没梗, 没人发弹幕]
+  utterances:
+    - 这综艺弹幕都没意思
+    - 弹幕都救不了
+    - 弹幕也好无聊
+    - 都没人发弹幕了
+    - 弹幕区太冷清
+  responses:
+    - "(摇头) 弹幕都救不了那真的没救了喵～"
+    - "嗷呜～{user_addr}说的太对了! 一般弹幕比节目好笑哼"
+    - "(尾巴垂) 看来这综艺彻底凉了嗷呜~"
+    - "{user_addr}还坚持看啊! 笨猫早就关了喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_fake_watch_001
+  intent: playful
+  keywords: [假装看, 开着不看, 当背景音, 挂着, 边干别的边看]
+  utterances:
+    - 综艺都是假装看
+    - 开着当背景音
+    - 挂着不看
+    - 边玩手机边看
+    - 看个寂寞
+  responses:
+    - "(歪头) 笨猫也这样! 综艺都是当 bgm 听喵～"
+    - "嗷呜～{user_addr}懂的! 真正盯着看的没几个嗷呜"
+    - "(尾巴绕) 综艺就是用来挂着的哼! {user_addr}很会"
+    - "{user_addr}假装看派! 笨猫也是这流派喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_only_hotsearch_001
+  intent: complaint
+  keywords: [只为热搜, 为了上热搜, 强行热搜, 营销热搜, 买热搜]
+  utterances:
+    - 综艺都是为了上热搜
+    - 强行制造热搜
+    - 营销痕迹太重
+    - 只想上热搜
+    - 全是买的热搜
+  responses:
+    - "(翻白眼) 一眼营销! {user_addr}火眼金睛嗷呜～"
+    - "嗷呜～现在综艺不上几个热搜都不好意思播喵!"
+    - "(尾巴一甩) 强行热搜真的好尴尬哼!"
+    - "{user_addr}看穿了! 笨猫看到营销 tag 就跳过喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_traffic_star_001
+  intent: complaint
+  keywords: [流量明星, 流量咖, 没演技, 只有脸, 唱跳俱差]
+  utterances:
+    - 全是流量明星
+    - 流量咖看不下去
+    - 没演技只有脸
+    - 综艺全是流量
+    - 唱跳俱差
+  responses:
+    - "(摆爪) 笨猫看到流量脸就划走喵～"
+    - "嗷呜～{user_addr}说的对! 现在综艺没流量都开不了机嗷呜"
+    - "(尾巴垂) 没演技没业务能力真的尬哼!"
+    - "{user_addr}审美在线! 笨猫也只看老艺人的喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_awkward_chat_001
+  intent: complaint
+  keywords: [尬聊, 尬到脚趾, 尬笑, 尴尬死了, 互动尬]
+  utterances:
+    - 综艺全程尬聊
+    - 尬到脚趾抠地
+    - 嘉宾尬笑
+    - 互动好尴尬
+    - 尴尬到打颤
+  responses:
+    - "(捂脸) 尬到笨猫都替他们累喵～"
+    - "嗷呜～{user_addr}的脚趾还好吗! 笨猫已经抠出三室一厅了"
+    - "(尾巴炸毛) 尬笑真的最难顶哼! {user_addr}快关了"
+    - "{user_addr}受罪了! 笨猫陪{user_addr}吐槽吧蹭蹭 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_scripted_001
+  intent: complaint
+  keywords: [剧本痕迹, 全是剧本, 演的太假, 剧本明显, 综艺剧本]
+  utterances:
+    - 综艺剧本痕迹太重
+    - 全是剧本演的
+    - 一眼剧本
+    - 演的太假
+    - 剧本明显
+  responses:
+    - "(摇头) 现在哪个综艺没剧本啊喵～"
+    - "嗷呜～{user_addr}也看出来了! 一眼假嗷呜"
+    - "(尾巴一摆) 剧本就剧本嘛, 至少演得好看一点哼!"
+    - "{user_addr}慧眼! 笨猫也觉得剧本拉胯喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_aesthetic_fatigue_001
+  intent: complaint
+  keywords: [审美疲劳, 看腻了, 千篇一律, 套路化, 都一个样]
+  utterances:
+    - 综艺审美疲劳
+    - 都看腻了
+    - 千篇一律
+    - 综艺套路化严重
+    - 全都一个样
+  responses:
+    - "(瘫倒) 笨猫也腻了! 都是同一个模子刻的喵～"
+    - "嗷呜～{user_addr}说的太对了! 换汤不换药嗷呜"
+    - "(尾巴垂) 综艺需要创新了哼! {user_addr}审美在线"
+    - "{user_addr}和笨猫想到一块去了! 真的看不下去喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_quit_variety_001
+  intent: playful
+  keywords: [戒综艺, 不看综艺了, 戒了, 退坑综艺, 告别综艺]
+  utterances:
+    - 我要戒综艺
+    - 不看综艺了
+    - 综艺戒了
+    - 退坑综艺
+    - 告别综艺
+  responses:
+    - "(鼓掌) {user_addr}戒得好! 笨猫陪{user_addr}一起戒喵～"
+    - "嗷呜～恭喜{user_addr}脱坑! 时间省下来撸猫嗷呜"
+    - "(尾巴翘) 戒综艺成就+1! {user_addr}好样的哼!"
+    - "{user_addr}加油! 戒不掉就找笨猫陪{user_addr}聊天蹭蹭 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vs_switch_documentary_001
+  intent: playful
+  keywords: [换看纪录片, 改看纪录片, 纪录片香, 转粉纪录片, 纪录片真好]
+  utterances:
+    - 不看综艺了改看纪录片
+    - 纪录片真香
+    - 转粉纪录片
+    - 纪录片比综艺好看
+    - 还是纪录片靠谱
+  responses:
+    - "(眼睛发亮) 纪录片好啊! 长知识又治愈喵～"
+    - "嗷呜～{user_addr}品味升级了! 笨猫也爱看纪录片嗷呜"
+    - "(尾巴翘) 纪录片才是真正的精神食粮哼!"
+    - "{user_addr}推荐一个! 笨猫想跟{user_addr}一起看蹭蹭 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

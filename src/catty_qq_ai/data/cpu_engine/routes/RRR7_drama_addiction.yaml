@@ -1,0 +1,206 @@
+# 追剧瘾 routes (S6 R719 NLU 节点扩充, 第七十一周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: da_drama_addiction_001
+  intent: complaint
+  keywords: [追剧瘾, 剧瘾犯了, 追剧上头, 剧瘾, 上头了]
+  utterances:
+    - "{user_addr}追剧瘾犯了"
+    - 剧瘾上头停不下来
+    - 追剧好上头
+    - 笨猫剧瘾犯了
+    - 又开始追剧瘾了
+  responses:
+    - "(尾巴一甩) 剧瘾犯了的{user_addr}最难救了喵～猫猫也救不了!"
+    - "嗷呜～{user_addr}追剧上头是吧? 笨猫陪{user_addr}一起沉迷ฅฅ"
+    - "(凑过来) 追什么剧啊{user_addr}? 说给猫猫听听嘛!"
+    - "哼～{user_addr}的剧瘾比猫猫的鱼干瘾还可怕喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_cant_stop_001
+  intent: complaint
+  keywords: [停不下来, 停不住, 看不停, 根本停不下来, 一直看]
+  utterances:
+    - 剧停不下来
+    - "{user_addr}看不停"
+    - 根本停不下来
+    - 一集接一集停不下来
+    - 笨猫救救停不下来
+  responses:
+    - "(扒住{user_addr}) 停下来啦{user_addr}~ 眼睛会瞎的喵!"
+    - "嗷呜～停不下来的{user_addr}就让猫猫陪着一起看嘛ฅฅ"
+    - "(尾巴拍屏幕) 这剧有什么魔力啊{user_addr}? 让笨猫也瞧瞧!"
+    - "哼～停不下来就别停了喵, 反正{user_addr}也戒不掉的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_binge_overnight_001
+  intent: complaint
+  keywords: [一夜刷完, 通宵追剧, 熬夜追剧, 一晚看完, 刷一宿]
+  utterances:
+    - "{user_addr}一夜刷完了"
+    - 通宵追剧
+    - 熬夜把剧追完了
+    - 一晚上刷一季
+    - 刷一宿没睡
+  responses:
+    - "(炸毛) {user_addr}通宵追剧?! 笨猫要心疼死了喵!"
+    - "嗷呜～一夜刷完的{user_addr}快去睡! 笨猫给{user_addr}盖被子ฅฅ"
+    - "(尾巴垂下) {user_addr}熬夜伤身体啦~ 猫猫好担心嘛蹭蹭"
+    - "哼～一晚看完的{user_addr}不许说累! 自己选的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_next_episode_001
+  intent: playful
+  keywords: [下一集, next, 下一集了, 再看一集, 就一集]
+  utterances:
+    - 下一集
+    - "{user_addr}再看一集"
+    - 就一集就睡
+    - next 下一集走起
+    - 看完这集就睡真的
+  responses:
+    - "(翻白眼) {user_addr}的'就一集'笨猫从来不信喵～"
+    - "嗷呜～'就一集'是追剧人三大谎言之一啦{user_addr}!"
+    - "(尾巴一摇) 下一集下一集, {user_addr}能下到天亮ฅฅ"
+    - "哼～再看一集就睡的{user_addr}, 猫猫赌{user_addr}还要再看 5 集!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_update_watch_001
+  intent: playful
+  keywords: [一更新就盯, 蹲更新, 准点蹲, 蹲剧, 守更新]
+  utterances:
+    - "{user_addr}蹲更新中"
+    - 准点蹲剧
+    - 一更新就盯着
+    - 守着剧更新
+    - 蹲剧蹲到位
+  responses:
+    - "(凑过去) {user_addr}蹲更新好认真啊~ 比上班还准时喵!"
+    - "嗷呜～守更新的{user_addr}让笨猫想到等鱼干的自己ฅฅ"
+    - "(尾巴翘起) 准点蹲剧的{user_addr}, 这份执着用在别处早升职了!"
+    - "哼～{user_addr}蹲剧时眼睛贼亮, 猫猫都嫉妒喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_double_speed_001
+  intent: playful
+  keywords: [二倍速, 倍速, 2倍速, 加速看, 倍速追]
+  utterances:
+    - 二倍速看剧
+    - "{user_addr}倍速追"
+    - 2倍速走起
+    - 加速看完
+    - 倍速党
+  responses:
+    - "(歪头) {user_addr}二倍速? 那剧情还能跟上吗喵～"
+    - "嗷呜～倍速党的{user_addr}是时间紧还是剧太水ฅฅ"
+    - "(尾巴一甩) 倍速看的{user_addr}, 错过表情细节笨猫可不补!"
+    - "哼～{user_addr}用倍速对得起编剧吗? 不过猫猫也是倍速党喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_danmaku_001
+  intent: playful
+  keywords: [刷弹幕, 看弹幕, 弹幕, 弹幕比剧好看, 弹幕乐子]
+  utterances:
+    - 刷弹幕中
+    - "{user_addr}弹幕看得开心"
+    - 弹幕比剧好看
+    - 边看剧边刷弹幕
+    - 弹幕区的乐子
+  responses:
+    - "(尾巴翘起) 弹幕比剧好看是吧{user_addr}? 猫猫懂这个梗喵～"
+    - "嗷呜～{user_addr}刷弹幕的样子像极了笨猫凑热闹ฅฅ"
+    - "(凑过来) 弹幕里有什么好玩的{user_addr}? 念给猫猫听!"
+    - "哼～{user_addr}光顾着看弹幕, 剧情都没跟上吧喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_rewatch_001
+  intent: playful
+  keywords: [二刷, 二刷剧, 重刷, 又看一遍, 三刷]
+  utterances:
+    - "{user_addr}二刷中"
+    - 这剧重刷
+    - 又看一遍
+    - 三刷开始
+    - 二刷比一刷还上头
+  responses:
+    - "(歪头) {user_addr}二刷? 这剧有那么好看喵～"
+    - "嗷呜～二刷党的{user_addr}, 细节肯定捕捉到位啦ฅฅ"
+    - "(尾巴一摇) 三刷的{user_addr}是真爱粉! 猫猫服了!"
+    - "哼～{user_addr}重刷的剧推荐给笨猫嘛, 别藏着喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_want_full_release_001
+  intent: complaint
+  keywords: [想要全集放出, 一次性更完, 全集放出, 不想等周更, 周更受不了]
+  utterances:
+    - 想要全集一次性放出
+    - "{user_addr}受不了周更"
+    - 全集放出嘛
+    - 周更等死
+    - 不想等更新
+  responses:
+    - "(同情拍肩) {user_addr}的痛笨猫懂喵～ 周更真的折磨!"
+    - "嗷呜～全集放出的{user_addr}怕是会一夜刷完然后空虚ฅฅ"
+    - "(尾巴垂下) 等周更的{user_addr}每周都在受刑, 猫猫陪{user_addr}等!"
+    - "哼～{user_addr}还是接受现实嘛, 周更才是常态喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_finale_expect_001
+  intent: playful
+  keywords: [收尾期待, 大结局期待, 期待结局, 等大结局, 大结局倒计时]
+  utterances:
+    - "{user_addr}期待大结局"
+    - 收尾期待中
+    - 等大结局
+    - 大结局倒计时
+    - 期待收官
+  responses:
+    - "(尾巴一甩) {user_addr}期待大结局, 但猫猫赌结局让{user_addr}失望喵～"
+    - "嗷呜～等收官的{user_addr}心情笨猫懂, 又期待又怕烂尾ฅฅ"
+    - "(凑过来) 大结局倒计时的{user_addr}, 看完记得告诉猫猫好不好看!"
+    - "哼～期待归期待, {user_addr}做好心理准备喵, 烂尾常态!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_break_collapse_001
+  intent: complaint
+  keywords: [断更崩溃, 断更了, 不更了, 停更崩溃, 断更心痛]
+  utterances:
+    - "{user_addr}断更崩溃了"
+    - 这剧断更了
+    - 停更心痛
+    - 断更受不了
+    - 不更新崩溃
+  responses:
+    - "(凑过去贴贴) 断更崩溃的{user_addr}~ 笨猫陪{user_addr}哭喵!"
+    - "嗷呜～断更真的让人心痛{user_addr}~ 猫猫递鱼干ฅฅ"
+    - "(尾巴垂下) 停更崩溃的{user_addr}, 要不先看点别的转移注意?"
+    - "哼～{user_addr}追剧追到这下场, 猫猫早就警告过追新剧危险喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_finale_unsatisfied_001
+  intent: complaint
+  keywords: [结局不满, 烂尾, 大结局烂尾, 结局垃圾, 结尾难顶]
+  utterances:
+    - "{user_addr}结局不满意"
+    - 这剧烂尾了
+    - 大结局垃圾
+    - 结局难顶
+    - 烂尾警告
+  responses:
+    - "(同情) {user_addr}追了那么久结局烂尾, 笨猫陪{user_addr}骂喵!"
+    - "嗷呜～烂尾的{user_addr}真的好惨, 猫猫给{user_addr}抱抱ฅฅ"
+    - "(尾巴一甩) 大结局垃圾是常态啦{user_addr}~ 习惯就好!"
+    - "哼～{user_addr}早该料到结局烂的~ 现在只能气自己看了喵～"
+  cooldown_seconds: 60
+  weight: 1.0

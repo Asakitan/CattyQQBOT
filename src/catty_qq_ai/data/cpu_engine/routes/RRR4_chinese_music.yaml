@@ -1,0 +1,206 @@
+# 华语乐坛 routes (S6 R716 NLU 节点扩充, 第七十一周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cm_jay_001
+  intent: question
+  keywords: [推荐周杰伦, 推荐周董, 推荐 Jay, 推荐周杰伦专辑, 笨猫周杰伦]
+  utterances:
+    - 推荐周杰伦
+    - 推荐周董
+    - 推荐 Jay
+    - 推荐周杰伦专辑
+    - 笨猫周杰伦
+  responses:
+    - "嗷呜～{user_addr}周杰伦 - 华语流行天王ฅฅ"
+    - "(尾巴翘) 《范特西》/《叶惠美》/《七里香》经典"
+    - "{user_addr}R&B + 中国风 / 方文山词"
+    - "(挺胸) 笨猫推荐: 《七里香》入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_jj_001
+  intent: question
+  keywords: [推荐林俊杰, 推荐 JJ, 推荐林俊杰专辑, 推荐 JJ Lin, 笨猫林俊杰]
+  utterances:
+    - 推荐林俊杰
+    - 推荐 JJ
+    - 推荐林俊杰专辑
+    - 推荐 JJ Lin
+    - 笨猫林俊杰
+  responses:
+    - "嗷呜～{user_addr}林俊杰 JJ - 新加坡天王ฅฅ"
+    - "(尾巴翘) 《江南》/《曹操》/《修炼爱情》"
+    - "{user_addr}音域宽 / 创作型 / 现场顶"
+    - "(挺胸) 笨猫推荐: 《因你而在》专辑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_eason_001
+  intent: question
+  keywords: [推荐陈奕迅, 推荐 Eason, 推荐陈奕迅专辑, 推荐 Eason Chan, 笨猫陈奕迅]
+  utterances:
+    - 推荐陈奕迅
+    - 推荐 Eason
+    - 推荐陈奕迅专辑
+    - 推荐 Eason Chan
+    - 笨猫陈奕迅
+  responses:
+    - "嗷呜～{user_addr}陈奕迅 Eason - 港乐天王ฅฅ"
+    - "(尾巴翘) 《十年》/《浮夸》/《富士山下》"
+    - "{user_addr}粤语 + 国语双修 / 演绎神"
+    - "(挺胸) 笨猫推荐: 《U87》专辑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_amei_001
+  intent: question
+  keywords: [推荐张惠妹, 推荐阿妹, 推荐 A-Mei, 推荐张惠妹专辑, 笨猫张惠妹]
+  utterances:
+    - 推荐张惠妹
+    - 推荐阿妹
+    - 推荐 A-Mei
+    - 推荐张惠妹专辑
+    - 笨猫张惠妹
+  responses:
+    - "嗷呜～{user_addr}张惠妹 A-Mei - 华语天后ฅฅ"
+    - "(尾巴翘) 《听海》/《剪爱》/《我可以抱你吗》"
+    - "{user_addr}原住民血统 / 高音爆炸"
+    - "(挺胸) 笨猫推荐: 《姊妹》专辑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_faye_001
+  intent: question
+  keywords: [推荐王菲, 推荐 Faye, 推荐 Faye Wong, 推荐王菲专辑, 笨猫王菲]
+  utterances:
+    - 推荐王菲
+    - 推荐 Faye
+    - 推荐 Faye Wong
+    - 推荐王菲专辑
+    - 笨猫王菲
+  responses:
+    - "嗷呜～{user_addr}王菲 Faye - 天后中天后ฅฅ"
+    - "(尾巴翘) 《容易受伤的女人》/《红豆》/《暧昧》"
+    - "{user_addr}空灵 / 独特音色 / 跨界"
+    - "(挺胸) 笨猫推荐: 《浮躁》专辑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_gem_001
+  intent: question
+  keywords: [推荐邓紫棋, 推荐 GEM, 推荐 G.E.M., 推荐邓紫棋专辑, 笨猫邓紫棋]
+  utterances:
+    - 推荐邓紫棋
+    - 推荐 GEM
+    - 推荐 G.E.M.
+    - 推荐邓紫棋专辑
+    - 笨猫邓紫棋
+  responses:
+    - "嗷呜～{user_addr}邓紫棋 GEM - 港版铁肺ฅฅ"
+    - "(尾巴翘) 《泡沫》/《光年之外》/《句号》"
+    - "{user_addr}高音 / 创作型 / 我是歌手出圈"
+    - "(挺胸) 笨猫推荐: 《摩天动物园》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_andy_001
+  intent: question
+  keywords: [推荐刘德华, 推荐华仔, 推荐 Andy Lau, 推荐刘德华专辑, 笨猫刘德华]
+  utterances:
+    - 推荐刘德华
+    - 推荐华仔
+    - 推荐 Andy Lau
+    - 推荐刘德华专辑
+    - 笨猫刘德华
+  responses:
+    - "嗷呜～{user_addr}刘德华 Andy - 四大天王ฅฅ"
+    - "(尾巴翘) 《忘情水》/《冰雨》/《练习》"
+    - "{user_addr}努力型偶像 / 影视双修 / 40 年"
+    - "(挺胸) 笨猫推荐: 《如果有一天》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_mayday_001
+  intent: question
+  keywords: [推荐五月天, 推荐 Mayday, 推荐五月天专辑, 推荐阿信, 笨猫五月天]
+  utterances:
+    - 推荐五月天
+    - 推荐 Mayday
+    - 推荐五月天专辑
+    - 推荐阿信
+    - 笨猫五月天
+  responses:
+    - "嗷呜～{user_addr}五月天 Mayday - 台湾国民乐团ฅฅ"
+    - "(尾巴翘) 《突然好想你》/《倔强》/《知足》"
+    - "{user_addr}阿信词 / 演唱会王者 / 青春符号"
+    - "(挺胸) 笨猫推荐: 《自传》专辑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_omnipotent_001
+  intent: question
+  keywords: [推荐万能青年旅店, 推荐万青, 推荐石家庄摇滚, 推荐万能青年旅店专辑, 笨猫万青]
+  utterances:
+    - 推荐万能青年旅店
+    - 推荐万青
+    - 推荐石家庄摇滚
+    - 推荐万能青年旅店专辑
+    - 笨猫万青
+  responses:
+    - "嗷呜～{user_addr}万能青年旅店 - 国摇之神ฅฅ"
+    - "(尾巴翘) 《杀死那个石家庄人》/《十万嬉皮》"
+    - "{user_addr}后摇 + 诗意词 / 同名专辑封神"
+    - "(挺胸) 笨猫推荐: 《冀西南林路行》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_miserable_001
+  intent: question
+  keywords: [推荐痛仰, 推荐痛仰乐队, 推荐痛苦的信仰, 推荐痛仰专辑, 笨猫痛仰]
+  utterances:
+    - 推荐痛仰
+    - 推荐痛仰乐队
+    - 推荐痛苦的信仰
+    - 推荐痛仰专辑
+    - 笨猫痛仰
+  responses:
+    - "嗷呜～{user_addr}痛仰 - 国摇老炮ฅฅ"
+    - "(尾巴翘) 《公路之歌》/《再见杰克》/《西湖》"
+    - "{user_addr}从硬核到民谣摇 / 哪吒 logo"
+    - "(挺胸) 笨猫推荐: 《不要停止我的音乐》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_secondhand_001
+  intent: question
+  keywords: [推荐二手玫瑰, 推荐二手玫瑰乐队, 推荐梁龙, 推荐二手玫瑰专辑, 笨猫二手玫瑰]
+  utterances:
+    - 推荐二手玫瑰
+    - 推荐二手玫瑰乐队
+    - 推荐梁龙
+    - 推荐二手玫瑰专辑
+    - 笨猫二手玫瑰
+  responses:
+    - "嗷呜～{user_addr}二手玫瑰 - 东北二人转摇滚ฅฅ"
+    - "(尾巴翘) 《允许部分艺术家先富起来》/《采花》"
+    - "{user_addr}梁龙抹红 / 唢呐 + 摇滚 / 骚浪"
+    - "(挺胸) 笨猫推荐: 同名专辑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_cuijian_001
+  intent: question
+  keywords: [推荐崔健, 推荐老崔, 推荐中国摇滚教父, 推荐崔健专辑, 笨猫崔健]
+  utterances:
+    - 推荐崔健
+    - 推荐老崔
+    - 推荐中国摇滚教父
+    - 推荐崔健专辑
+    - 笨猫崔健
+  responses:
+    - "嗷呜～{user_addr}崔健 - 中国摇滚教父ฅฅ"
+    - "(尾巴翘) 《一无所有》/《花房姑娘》/《新长征路上的摇滚》"
+    - "{user_addr}86 工体开启国摇 / 红布"
+    - "(挺胸) 笨猫推荐: 《新长征路上的摇滚》!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 国产小说 routes (S6 R713 NLU 节点扩充, 第七十一周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cn_santi_001
+  intent: question
+  keywords: [推荐三体, 推荐刘慈欣, 推荐三体小说, 推荐黑暗森林, 笨猫三体]
+  utterances:
+    - 推荐三体
+    - 推荐刘慈欣
+    - 推荐三体小说
+    - 推荐黑暗森林
+    - 笨猫三体
+  responses:
+    - "嗷呜～{user_addr}三体 - 刘慈欣 / 中国科幻巅峰ฅฅ"
+    - "(尾巴翘) 三部曲: 地球往事 / 黑暗森林 / 死神永生"
+    - "{user_addr}雨果奖 / 硬科幻 / 宇宙社会学"
+    - "(挺胸) 猫猫推荐: 从地球往事开读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cn_wandering_earth_001
+  intent: question
+  keywords: [推荐流浪地球, 推荐刘慈欣短篇, 推荐流浪地球小说, 推荐带球跑, 笨猫流浪地球]
+  utterances:
+    - 推荐流浪地球
+    - 推荐刘慈欣短篇
+    - 推荐流浪地球小说
+    - 推荐带球跑
+    - 笨猫流浪地球
+  responses:
+    - "嗷呜～{user_addr}流浪地球 - 刘慈欣中短篇ฅฅ"
+    - "(尾巴翘) 太阳氦闪 / 行星发动机 / 带球跑"
+    - "{user_addr}电影改编大火 / 原著更震撼"
+    - "(挺胸) 笨猫推荐: 中短篇集一晚看完!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cn_pingfan_001
+  intent: question
+  keywords: [推荐平凡的世界, 推荐路遥, 推荐孙少平, 推荐黄土高原, 笨猫平凡的世界]
+  utterances:
+    - 推荐平凡的世界
+    - 推荐路遥
+    - 推荐孙少平
+    - 推荐黄土高原
+    - 笨猫平凡的世界
+  responses:
+    - "嗷呜～{user_addr}平凡的世界 - 路遥 / 茅盾文学奖ฅฅ"
+    - "(尾巴翘) 孙少安 孙少平兄弟 / 70-80年代"
+    - "{user_addr}陕北农村 / 励志现实主义"
+    - "(挺胸) 猫猫推荐: 中国版乡土史诗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cn_huozhe_001
+  intent: question
+  keywords: [推荐活着, 推荐余华活着, 推荐福贵, 推荐余华小说, 笨猫活着]
+  utterances:
+    - 推荐活着
+    - 推荐余华活着
+    - 推荐福贵
+    - 推荐余华小说
+    - 笨猫活着
+  responses:
+    - "嗷呜～{user_addr}活着 - 余华 / 看完会哭ฅฅ"
+    - "(尾巴翘) 福贵一生 / 苦难叙事"
+    - "{user_addr}张艺谋改编电影 / 葛优主演"
+    - "(挺胸) 笨猫推荐: 准备纸巾!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cn_xiongdi_001
+  intent: question
+  keywords: [推荐兄弟, 推荐余华兄弟, 推荐李光头, 推荐余华长篇, 笨猫兄弟]
+  utterances:
+    - 推荐兄弟
+    - 推荐余华兄弟
+    - 推荐李光头
+    - 推荐余华长篇
+    - 笨猫兄弟
+  responses:
+    - "嗷呜～{user_addr}兄弟 - 余华长篇ฅฅ"
+    - "(尾巴翘) 李光头 宋钢 / 文革到改开"
+    - "{user_addr}荒诞现实主义 / 时代变迁"
+    - "(挺胸) 猫猫推荐: 比活着更狂野!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cn_bailuyuan_001
+  intent: question
+  keywords: [推荐白鹿原, 推荐陈忠实, 推荐关中, 推荐家族史诗, 笨猫白鹿原]
+  utterances:
+    - 推荐白鹿原
+    - 推荐陈忠实
+    - 推荐关中
+    - 推荐家族史诗
+    - 笨猫白鹿原
+  responses:
+    - "嗷呜～{user_addr}白鹿原 - 陈忠实 / 茅盾文学奖ฅฅ"
+    - "(尾巴翘) 白嘉轩 鹿子霖两家 / 关中百年"
+    - "{user_addr}家族史诗 / 民俗厚重"
+    - "(挺胸) 笨猫推荐: 中国版百年孤独!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cn_honggaoliang_001
+  intent: question
+  keywords: [推荐红高粱, 推荐莫言, 推荐莫言小说, 推荐诺贝尔, 笨猫红高粱]
+  utterances:
+    - 推荐红高粱
+    - 推荐莫言
+    - 推荐莫言小说
+    - 推荐诺贝尔
+    - 笨猫红高粱
+  responses:
+    - "嗷呜～{user_addr}红高粱 - 莫言 / 诺贝尔文学奖ฅฅ"
+    - "(尾巴翘) 高密东北乡 / 抗日 / 魔幻现实"
+    - "{user_addr}还推荐: 蛙 / 生死疲劳 / 丰乳肥臀"
+    - "(挺胸) 猫猫推荐: 莫言全集慢慢啃!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cn_shitiesheng_001
+  intent: question
+  keywords: [推荐史铁生, 推荐我与地坛, 推荐务虚笔记, 推荐病隙碎笔, 笨猫史铁生]
+  utterances:
+    - 推荐史铁生
+    - 推荐我与地坛
+    - 推荐务虚笔记
+    - 推荐病隙碎笔
+    - 笨猫史铁生
+  responses:
+    - "嗷呜～{user_addr}我与地坛 - 史铁生 / 散文神作ฅฅ"
+    - "(尾巴翘) 务虚笔记 / 病隙碎笔 / 命若琴弦"
+    - "{user_addr}残缺中的哲思 / 治愈"
+    - "(挺胸) 笨猫推荐: 心累时读他!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cn_jinyong_001
+  intent: question
+  keywords: [推荐金庸, 推荐金庸全集, 推荐射雕, 推荐天龙八部, 笨猫金庸]
+  utterances:
+    - 推荐金庸
+    - 推荐金庸全集
+    - 推荐射雕
+    - 推荐天龙八部
+    - 笨猫金庸
+  responses:
+    - "嗷呜～{user_addr}金庸 - 武侠之王ฅฅ"
+    - "(尾巴翘) 飞雪连天射白鹿 笑书神侠倚碧鸳"
+    - "{user_addr}神雕 / 天龙 / 笑傲 / 鹿鼎记"
+    - "(挺胸) 猫猫推荐: 先读射雕三部曲!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cn_gulong_001
+  intent: question
+  keywords: [推荐古龙, 推荐古龙全集, 推荐楚留香, 推荐小李飞刀, 笨猫古龙]
+  utterances:
+    - 推荐古龙
+    - 推荐古龙全集
+    - 推荐楚留香
+    - 推荐小李飞刀
+    - 笨猫古龙
+  responses:
+    - "嗷呜～{user_addr}古龙 - 武侠另一峰ฅฅ"
+    - "(尾巴翘) 楚留香 / 陆小凤 / 小李飞刀"
+    - "{user_addr}多情剑客无情剑 / 绝代双骄"
+    - "(挺胸) 笨猫推荐: 短句江湖味浓!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cn_xiuxian_001
+  intent: question
+  keywords: [推荐凡人修仙, 推荐凡人修仙传, 推荐忘语, 推荐修仙网文, 笨猫凡人修仙]
+  utterances:
+    - 推荐凡人修仙
+    - 推荐凡人修仙传
+    - 推荐忘语
+    - 推荐修仙网文
+    - 笨猫凡人修仙
+  responses:
+    - "嗷呜～{user_addr}凡人修仙传 - 忘语 / 凡人流鼻祖ฅฅ"
+    - "(尾巴翘) 韩立 / 苟到飞升 / 长达千万字"
+    - "{user_addr}修仙网文必读 / 节奏慢但耐看"
+    - "(挺胸) 猫猫推荐: 长期书荒救星!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cn_guimi_001
+  intent: question
+  keywords: [推荐诡秘之主, 推荐爱潜水的乌贼, 推荐克苏鲁网文, 推荐序列, 笨猫诡秘之主]
+  utterances:
+    - 推荐诡秘之主
+    - 推荐爱潜水的乌贼
+    - 推荐克苏鲁网文
+    - 推荐序列
+    - 笨猫诡秘之主
+  responses:
+    - "嗷呜～{user_addr}诡秘之主 - 乌贼 / 蒸汽朋克+克苏鲁ฅฅ"
+    - "(尾巴翘) 克莱恩 / 22序列 / 愚者"
+    - "{user_addr}起点白金神作 / 节奏严密"
+    - "(挺胸) 笨猫推荐: 网文天花板之一!"
+  cooldown_seconds: 60
+  weight: 1.0

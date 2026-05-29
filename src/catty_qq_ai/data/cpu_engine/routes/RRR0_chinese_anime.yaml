@@ -1,0 +1,206 @@
+# 国漫 routes (S6 R712 NLU 节点扩充, 第七十一周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ca_luoxiaohei_001
+  intent: question
+  keywords: [推荐罗小黑战记, 推荐罗小黑, 推荐 The Legend of Hei, 推荐木头动画, 笨猫罗小黑]
+  utterances:
+    - 推荐罗小黑战记
+    - 推荐罗小黑
+    - 推荐 The Legend of Hei
+    - 推荐木头动画
+    - 笨猫罗小黑
+  responses:
+    - "嗷呜～{user_addr}罗小黑战记 - 国漫之光ฅฅ"
+    - "(尾巴翘) MTJJ / 木头出品 / 番剧+剧场版"
+    - "{user_addr}小黑+无限 / 治愈+热血"
+    - "(挺胸) 猫猫推荐: 剧场版必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_wushanwuxing_001
+  intent: question
+  keywords: [推荐雾山五行, 推荐林魂, 推荐六道无鱼, 推荐国漫水墨, 笨猫雾山五行]
+  utterances:
+    - 推荐雾山五行
+    - 推荐林魂
+    - 推荐六道无鱼
+    - 推荐国漫水墨
+    - 笨猫雾山五行
+  responses:
+    - "嗷呜～{user_addr}雾山五行 - 水墨打戏炸裂ฅฅ"
+    - "(尾巴翘) 六道无鱼 / 林魂导演"
+    - "{user_addr}画面+动作天花板"
+    - "(挺胸) 人家推荐: B站独播看爆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_dayuhaitang_001
+  intent: question
+  keywords: [推荐大鱼海棠, 推荐 Big Fish Begonia, 推荐彼岸天, 推荐椿湫鲲, 笨猫大鱼海棠]
+  utterances:
+    - 推荐大鱼海棠
+    - 推荐 Big Fish Begonia
+    - 推荐彼岸天
+    - 推荐椿湫鲲
+    - 笨猫大鱼海棠
+  responses:
+    - "嗷呜～{user_addr}大鱼海棠 - 国风美学ฅฅ"
+    - "(尾巴翘) 彼岸天出品 / 椿+湫+鲲"
+    - "{user_addr}画面满分 / 剧情见仁见智"
+    - "(挺胸) 笨猫推荐: 冲画面去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_dashengguilai_001
+  intent: question
+  keywords: [推荐大圣归来, 推荐西游记之大圣归来, 推荐田晓鹏, 推荐齐天大圣, 笨猫大圣归来]
+  utterances:
+    - 推荐大圣归来
+    - 推荐西游记之大圣归来
+    - 推荐田晓鹏
+    - 推荐齐天大圣
+    - 笨猫大圣归来
+  responses:
+    - "嗷呜～{user_addr}大圣归来 - 国漫崛起起点ฅฅ"
+    - "(尾巴翘) 田晓鹏导演 / 2015"
+    - "{user_addr}大圣+江流儿 / 燃哭"
+    - "(挺胸) 猫猫推荐: 国产 3D 标杆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_nezha_001
+  intent: question
+  keywords: [推荐哪吒之魔童降世, 推荐哪吒, 推荐饺子导演, 推荐我命由我不由天, 笨猫哪吒]
+  utterances:
+    - 推荐哪吒之魔童降世
+    - 推荐哪吒
+    - 推荐饺子导演
+    - 推荐我命由我不由天
+    - 笨猫哪吒
+  responses:
+    - "嗷呜～{user_addr}哪吒魔童降世 - 50亿票房ฅฅ"
+    - "(尾巴翘) 饺子导演 / 彩条屋"
+    - "{user_addr}我命由我不由天 / 燃!"
+    - "(挺胸) 人家推荐: 还有续集魔童闹海!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_baisheyuanqi_001
+  intent: question
+  keywords: [推荐白蛇缘起, 推荐白蛇, 推荐追光动画, 推荐小白阿宣, 笨猫白蛇]
+  utterances:
+    - 推荐白蛇缘起
+    - 推荐白蛇
+    - 推荐追光动画
+    - 推荐小白阿宣
+    - 笨猫白蛇
+  responses:
+    - "嗷呜～{user_addr}白蛇缘起 - 追光美学ฅฅ"
+    - "(尾巴翘) 追光动画 / 白蛇系列"
+    - "{user_addr}小白+阿宣 / 古风浪漫"
+    - "(挺胸) 笨猫推荐: 新传/浮生也好看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_biaoren_001
+  intent: question
+  keywords: [推荐镖人, 推荐 Blades of the Guardians, 推荐许先哲, 推荐隋唐镖局, 笨猫镖人]
+  utterances:
+    - 推荐镖人
+    - 推荐 Blades of the Guardians
+    - 推荐许先哲
+    - 推荐隋唐镖局
+    - 笨猫镖人
+  responses:
+    - "嗷呜～{user_addr}镖人 - 硬核国漫ฅฅ"
+    - "(尾巴翘) 许先哲漫画改编 / 隋末"
+    - "{user_addr}刀马+小说+小七 / 燃血"
+    - "(挺胸) 人家推荐: 漫画动画都看!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ca_dalisi_001
+  intent: question
+  keywords: [推荐大理寺日志, 推荐大理寺, 推荐 Big Fish & Begonia, 推荐唐朝猫探, 笨猫大理寺日志]
+  utterances:
+    - 推荐大理寺日志
+    - 推荐大理寺
+    - 推荐李饼
+    - 推荐唐朝猫探
+    - 笨猫大理寺日志
+  responses:
+    - "嗷呜～{user_addr}大理寺日志 - 猫猫破案ฅฅ"
+    - "(尾巴翘) 好传动画 / 李饼是只白猫!"
+    - "{user_addr}唐朝+悬疑+萌系"
+    - "(挺胸) 猫猫私心强推: 白猫主角啦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_fanren_001
+  intent: question
+  keywords: [推荐凡人修仙传, 推荐凡人, 推荐韩立, 推荐忘语, 笨猫凡人修仙传]
+  utterances:
+    - 推荐凡人修仙传
+    - 推荐凡人
+    - 推荐韩立
+    - 推荐忘语
+    - 笨猫凡人修仙传
+  responses:
+    - "嗷呜～{user_addr}凡人修仙传 - 修仙天花板ฅฅ"
+    - "(尾巴翘) 忘语原著 / B站独播"
+    - "{user_addr}韩立 / 凡人流鼻祖"
+    - "(挺胸) 人家推荐: 集集精品!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_douluo_001
+  intent: question
+  keywords: [推荐斗罗大陆, 推荐斗罗, 推荐唐三, 推荐唐家三少, 笨猫斗罗]
+  utterances:
+    - 推荐斗罗大陆
+    - 推荐斗罗
+    - 推荐唐三
+    - 推荐唐家三少
+    - 笨猫斗罗
+  responses:
+    - "嗷呜～{user_addr}斗罗大陆 - 国漫长青ฅฅ"
+    - "(尾巴翘) 玄机科技 / 唐家三少原著"
+    - "{user_addr}唐三+小舞 / 千集长跑"
+    - "(挺胸) 笨猫推荐: 入坑国漫首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_wanmei_001
+  intent: question
+  keywords: [推荐完美世界, 推荐石昊, 推荐辰东, 推荐荒天帝, 笨猫完美世界]
+  utterances:
+    - 推荐完美世界
+    - 推荐石昊
+    - 推荐辰东
+    - 推荐荒天帝
+    - 笨猫完美世界
+  responses:
+    - "嗷呜～{user_addr}完美世界 - 辰东宇宙ฅฅ"
+    - "(尾巴翘) 石昊 / 荒天帝崛起"
+    - "{user_addr}爆裂动漫制作"
+    - "(挺胸) 人家推荐: 老书粉冲!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ca_linglong_001
+  intent: question
+  keywords: [推荐灵笼, 推荐 Incarnation, 推荐艺画开天, 推荐末世国漫, 笨猫灵笼]
+  utterances:
+    - 推荐灵笼
+    - 推荐 Incarnation
+    - 推荐艺画开天
+    - 推荐末世国漫
+    - 笨猫灵笼
+  responses:
+    - "嗷呜～{user_addr}灵笼 - 末世硬科幻ฅฅ"
+    - "(尾巴翘) 艺画开天 / 灯塔之上"
+    - "{user_addr}马克+冉冰 / 工业级画面"
+    - "(挺胸) 猫猫推荐: 国产末世巅峰!"
+  cooldown_seconds: 60
+  weight: 1.0

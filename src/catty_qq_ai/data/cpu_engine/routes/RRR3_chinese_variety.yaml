@@ -1,0 +1,206 @@
+# 综艺 routes (S6 R715 NLU 节点扩充, 第七十一周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cv_qipashuo_001
+  intent: question
+  keywords: [推荐奇葩说, 推荐辩论综艺, 推荐马东, 推荐米未, 笨猫奇葩说]
+  utterances:
+    - 推荐奇葩说
+    - 推荐辩论综艺
+    - 推荐马东
+    - 推荐米未
+    - 笨猫奇葩说
+  responses:
+    - "嗷呜～{user_addr}奇葩说 - 米未/马东 辩论喵ฅฅ"
+    - "(尾巴翘) 蔡康永 / 高晓松 / 罗振宇 导师"
+    - "{user_addr}辩题刁钻 / BBking 黄执中 颜如晶"
+    - "(挺胸) 猫猫推荐: S6 第六季巅峰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_tuokouxiu_001
+  intent: question
+  keywords: [推荐脱口秀大会, 推荐脱口秀, 推荐李诞, 推荐笑果, 笨猫脱口秀]
+  utterances:
+    - 推荐脱口秀大会
+    - 推荐脱口秀
+    - 推荐李诞
+    - 推荐笑果
+    - 笨猫脱口秀
+  responses:
+    - "嗷呜～{user_addr}脱口秀大会 - 笑果文化喵ฅฅ"
+    - "(尾巴翘) 李诞 / 王建国 / 庞博 / 呼兰"
+    - "{user_addr}5 分钟段子 / 王勉吉他梗"
+    - "(挺胸) 人家推荐: 杨笠 颜怡颜悦 名场面!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_yuedui_001
+  intent: question
+  keywords: [推荐乐队的夏天, 推荐乐夏, 推荐摇滚综艺, 推荐马东乐队, 笨猫乐夏]
+  utterances:
+    - 推荐乐队的夏天
+    - 推荐乐夏
+    - 推荐摇滚综艺
+    - 推荐马东乐队
+    - 笨猫乐夏
+  responses:
+    - "嗷呜～{user_addr}乐队的夏天 - 米未喵ฅฅ"
+    - "(尾巴翘) 新裤子 / 痛仰 / 五条人 / 重塑"
+    - "{user_addr}独立摇滚出圈 / 大张伟 张亚东"
+    - "(挺胸) 笨猫推荐: 乐夏 1 最炸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_zgxsc_001
+  intent: question
+  keywords: [推荐中国新说唱, 推荐说唱综艺, 推荐 rap, 推荐吴亦凡综艺, 笨猫新说唱]
+  utterances:
+    - 推荐中国新说唱
+    - 推荐说唱综艺
+    - 推荐 rap
+    - 推荐有嘻哈
+    - 笨猫新说唱
+  responses:
+    - "嗷呜～{user_addr}中国新说唱 / 有嘻哈喵ฅฅ"
+    - "(尾巴翘) GAI / PG One / 艾热 / 那吾克热"
+    - "{user_addr}freestyle / 双押三押 battle"
+    - "(挺胸) 猫猫推荐: 第一季 有嘻哈最经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_jiewu_001
+  intent: question
+  keywords: [推荐这就是街舞, 推荐街舞综艺, 推荐易烊千玺街舞, 推荐韩庚街舞, 笨猫街舞]
+  utterances:
+    - 推荐这就是街舞
+    - 推荐街舞综艺
+    - 推荐易烊千玺街舞
+    - 推荐韩庚街舞
+    - 笨猫街舞
+  responses:
+    - "嗷呜～{user_addr}这就是街舞 - 优酷喵ฅฅ"
+    - "(尾巴翘) 易烊千玺 / 王嘉尔 / 罗志祥 队长"
+    - "{user_addr}Hiphop / Locking / Popping / Breaking"
+    - "(挺胸) 人家推荐: S2 王嘉尔 vs 易烊千玺!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_jixian_001
+  intent: question
+  keywords: [推荐极限挑战, 推荐极挑, 推荐男人帮, 推荐黄磊孙红雷, 笨猫极挑]
+  utterances:
+    - 推荐极限挑战
+    - 推荐极挑
+    - 推荐男人帮
+    - 推荐黄磊孙红雷
+    - 笨猫极挑
+  responses:
+    - "嗷呜～{user_addr}极限挑战 - 东方卫视喵ฅฅ"
+    - "(尾巴翘) 黄磊 / 孙红雷 / 黄渤 / 罗志祥"
+    - "{user_addr}男人帮 / 智斗烧脑 / 情怀向"
+    - "(挺胸) 笨猫推荐: S1-S4 老男人帮巅峰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_xiangwang_001
+  intent: question
+  keywords: [推荐向往的生活, 推荐慢综艺, 推荐何炅黄磊, 推荐蘑菇屋, 笨猫向往]
+  utterances:
+    - 推荐向往的生活
+    - 推荐慢综艺
+    - 推荐何炅黄磊
+    - 推荐蘑菇屋
+    - 笨猫向往
+  responses:
+    - "嗷呜～{user_addr}向往的生活 - 湖南卫视喵ฅฅ"
+    - "(尾巴翘) 何炅 / 黄磊 / 彭昱畅 / 张子枫"
+    - "{user_addr}蘑菇屋 / 田园慢生活 / 治愈"
+    - "(挺胸) 人家推荐: 想去蘑菇屋撸狗ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_zhongcan_001
+  intent: question
+  keywords: [推荐中餐厅, 推荐美食综艺, 推荐黄晓明明学, 推荐赵薇中餐厅, 笨猫中餐厅]
+  utterances:
+    - 推荐中餐厅
+    - 推荐美食综艺
+    - 推荐黄晓明明学
+    - 推荐赵薇中餐厅
+    - 笨猫中餐厅
+  responses:
+    - "嗷呜～{user_addr}中餐厅 - 湖南卫视喵ฅฅ"
+    - "(尾巴翘) 赵薇 / 黄晓明 / 张亮 / 林大厨"
+    - "{user_addr}海外开店 / 我不要你觉得"
+    - "(挺胸) 猫猫推荐: S3 明学名场面!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_wangpai_001
+  intent: question
+  keywords: [推荐王牌对王牌, 推荐沈腾贾玲, 推荐情怀综艺, 推荐华少王牌, 笨猫王牌]
+  utterances:
+    - 推荐王牌对王牌
+    - 推荐沈腾贾玲
+    - 推荐情怀综艺
+    - 推荐华少王牌
+    - 笨猫王牌
+  responses:
+    - "嗷呜～{user_addr}王牌对王牌 - 浙江卫视喵ฅฅ"
+    - "(尾巴翘) 沈腾 / 贾玲 / 华晨宇 / 关晓彤"
+    - "{user_addr}情怀杀 / IP 重聚 / 还珠西游"
+    - "(挺胸) 笨猫推荐: 还珠 20 年再聚那期!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_paonan_001
+  intent: question
+  keywords: [推荐跑男, 推荐奔跑吧兄弟, 推荐邓超李晨, 推荐撕名牌, 笨猫跑男]
+  utterances:
+    - 推荐跑男
+    - 推荐奔跑吧兄弟
+    - 推荐邓超李晨
+    - 推荐撕名牌
+    - 笨猫跑男
+  responses:
+    - "嗷呜～{user_addr}奔跑吧兄弟 - 浙江卫视喵ฅฅ"
+    - "(尾巴翘) 邓超 / 李晨 / 陈赫 / Angelababy"
+    - "{user_addr}撕名牌 / 韩版 Running Man 引进"
+    - "(挺胸) 人家推荐: S1-S4 老跑男最好笑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_langjie_001
+  intent: question
+  keywords: [推荐浪姐, 推荐乘风破浪, 推荐三十而骊, 推荐宁静万茜, 笨猫浪姐]
+  utterances:
+    - 推荐浪姐
+    - 推荐乘风破浪的姐姐
+    - 推荐三十而骊
+    - 推荐宁静万茜
+    - 笨猫浪姐
+  responses:
+    - "嗷呜～{user_addr}乘风破浪的姐姐 - 芒果 TV 喵ฅฅ"
+    - "(尾巴翘) 宁静 / 万茜 / 张雨绮 / 黄圣依"
+    - "{user_addr}30+ 姐姐成团 / 大女主气场"
+    - "(挺胸) 猫猫推荐: S1 宁静万茜组合炸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cv_gege_001
+  intent: question
+  keywords: [推荐哥哥们, 推荐披荆斩棘, 推荐大湾区哥哥, 推荐陈小春谢天华, 笨猫披哥]
+  utterances:
+    - 推荐哥哥们
+    - 推荐披荆斩棘的哥哥
+    - 推荐大湾区哥哥
+    - 推荐陈小春谢天华
+    - 笨猫披哥
+  responses:
+    - "嗷呜～{user_addr}披荆斩棘的哥哥 - 芒果 TV 喵ฅฅ"
+    - "(尾巴翘) 陈小春 / 谢天华 / 张智霖 / 林晓峰"
+    - "{user_addr}大湾区五人组 / 男人 50+ 燃"
+    - "(挺胸) 笨猫推荐: 大湾区哥哥 友谊好燃!"
+  cooldown_seconds: 60
+  weight: 1.0

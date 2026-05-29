@@ -1,0 +1,206 @@
+# 国产剧 routes (S6 R714 NLU 节点扩充, 第七十一周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cd_langya_001
+  intent: question
+  keywords: [推荐琅琊榜, 推荐梅长苏, 推荐胡歌琅琊榜, 推荐权谋剧, 笨猫琅琊榜]
+  utterances:
+    - "{user_addr}推荐琅琊榜"
+    - 推荐梅长苏
+    - 推荐胡歌琅琊榜
+    - 推荐权谋剧
+    - 笨猫琅琊榜
+  responses:
+    - "嗷呜～{user_addr}琅琊榜 - 江左梅郎ฅฅ"
+    - "(尾巴翘) 胡歌 / 王凯 / 刘涛 主演"
+    - "{user_addr}权谋+复仇+赤焰冤案"
+    - "(挺胸) 笨猫推荐: 国剧巅峰之一!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_qingyu_001
+  intent: question
+  keywords: [推荐庆余年, 推荐范闲, 推荐张若昀庆余年, 推荐穿越剧, 笨猫庆余年]
+  utterances:
+    - "{user_addr}推荐庆余年"
+    - 推荐范闲
+    - 推荐张若昀庆余年
+    - 推荐穿越剧
+    - 笨猫庆余年
+  responses:
+    - "嗷呜～{user_addr}庆余年 - 范闲穿越ฅฅ"
+    - "(尾巴翘) 张若昀 / 陈道明 / 吴刚"
+    - "{user_addr}猫腻原著+权谋+喜剧"
+    - "(挺胸) 笨猫推荐: 第二季也上线了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_zhenhuan_001
+  intent: question
+  keywords: [推荐甄嬛传, 推荐孙俪, 推荐后宫剧, 推荐宫斗剧, 笨猫甄嬛传]
+  utterances:
+    - "{user_addr}推荐甄嬛传"
+    - 推荐孙俪
+    - 推荐后宫剧
+    - 推荐宫斗剧
+    - 笨猫甄嬛传
+  responses:
+    - "嗷呜～{user_addr}甄嬛传 - 宫斗天花板ฅฅ"
+    - "(尾巴翘) 孙俪 / 蔡少芬 / 陈建斌"
+    - "{user_addr}郑晓龙导演+流潋紫原著"
+    - "(挺胸) 笨猫推荐: 每年都能二刷!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_fumuaiqing_001
+  intent: question
+  keywords: [推荐父母爱情, 推荐郭涛, 推荐梅婷, 推荐年代剧, 笨猫父母爱情]
+  utterances:
+    - "{user_addr}推荐父母爱情"
+    - 推荐郭涛
+    - 推荐梅婷
+    - 推荐年代剧
+    - 笨猫父母爱情
+  responses:
+    - "嗷呜～{user_addr}父母爱情 - 温情年代剧ฅฅ"
+    - "(尾巴翘) 郭涛 / 梅婷 主演"
+    - "{user_addr}江德福+安杰一生"
+    - "(挺胸) 笨猫推荐: 国剧温柔代表作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_dazhaimen_001
+  intent: question
+  keywords: [推荐大宅门, 推荐陈宝国, 推荐百年老字号, 推荐家族剧, 笨猫大宅门]
+  utterances:
+    - "{user_addr}推荐大宅门"
+    - 推荐陈宝国
+    - 推荐百年老字号
+    - 推荐家族剧
+    - 笨猫大宅门
+  responses:
+    - "嗷呜～{user_addr}大宅门 - 白家百年ฅฅ"
+    - "(尾巴翘) 陈宝国 / 斯琴高娃 / 蒋雯丽"
+    - "{user_addr}郭宝昌导演+家族史诗"
+    - "(挺胸) 笨猫推荐: 国剧厚重感巅峰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_beiping_001
+  intent: question
+  keywords: [推荐北平无战事, 推荐刘烨, 推荐民国剧, 推荐谍战剧, 笨猫北平无战事]
+  utterances:
+    - "{user_addr}推荐北平无战事"
+    - 推荐刘烨
+    - 推荐民国剧
+    - 推荐谍战剧
+    - 笨猫北平无战事
+  responses:
+    - "嗷呜～{user_addr}北平无战事 - 民国史诗ฅฅ"
+    - "(尾巴翘) 刘烨 / 陈宝国 / 倪大红"
+    - "{user_addr}1948年北平+反贪货币战"
+    - "(挺胸) 笨猫推荐: 演技教科书!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_dajiang_001
+  intent: question
+  keywords: [推荐大江大河, 推荐王凯, 推荐改革开放, 推荐正午阳光, 笨猫大江大河]
+  utterances:
+    - "{user_addr}推荐大江大河"
+    - 推荐王凯
+    - 推荐改革开放
+    - 推荐正午阳光
+    - 笨猫大江大河
+  responses:
+    - "嗷呜～{user_addr}大江大河 - 改革三部曲ฅฅ"
+    - "(尾巴翘) 王凯 / 杨烁 / 董子健"
+    - "{user_addr}宋运辉+雷东宝+杨巡"
+    - "(挺胸) 笨猫推荐: 时代洪流故事!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_shanhai_001
+  intent: question
+  keywords: [推荐山海情, 推荐黄轩, 推荐扶贫剧, 推荐西海固, 笨猫山海情]
+  utterances:
+    - "{user_addr}推荐山海情"
+    - 推荐黄轩
+    - 推荐扶贫剧
+    - 推荐西海固
+    - 笨猫山海情
+  responses:
+    - "嗷呜～{user_addr}山海情 - 真扶贫好剧ฅฅ"
+    - "(尾巴翘) 黄轩 / 张嘉益 / 闫妮"
+    - "{user_addr}西海固+闽宁镇+方言版"
+    - "(挺胸) 笨猫推荐: 笑着哭的好剧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_juexing_001
+  intent: question
+  keywords: [推荐觉醒年代, 推荐于和伟, 推荐主旋律, 推荐革命剧, 笨猫觉醒年代]
+  utterances:
+    - "{user_addr}推荐觉醒年代"
+    - 推荐于和伟
+    - 推荐主旋律
+    - 推荐革命剧
+    - 笨猫觉醒年代
+  responses:
+    - "嗷呜～{user_addr}觉醒年代 - 主旋律天花板ฅฅ"
+    - "(尾巴翘) 于和伟 / 张桐 / 马少骅"
+    - "{user_addr}陈独秀+李大钊+新文化运动"
+    - "(挺胸) 笨猫推荐: 拍得真的燃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_manchang_001
+  intent: question
+  keywords: [推荐漫长的季节, 推荐范伟, 推荐悬疑剧, 推荐东北悬疑, 笨猫漫长的季节]
+  utterances:
+    - "{user_addr}推荐漫长的季节"
+    - 推荐范伟
+    - 推荐悬疑剧
+    - 推荐东北悬疑
+    - 笨猫漫长的季节
+  responses:
+    - "嗷呜～{user_addr}漫长的季节 - 悬疑诗ฅฅ"
+    - "(尾巴翘) 范伟 / 秦昊 / 陈明昊"
+    - "{user_addr}辛爽导演+东北桦林+三段时空"
+    - "(挺胸) 笨猫推荐: 打个响指吧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_kuangbiao_001
+  intent: question
+  keywords: [推荐狂飙, 推荐张颂文, 推荐扫黑剧, 推荐高启强, 笨猫狂飙]
+  utterances:
+    - "{user_addr}推荐狂飙"
+    - 推荐张颂文
+    - 推荐扫黑剧
+    - 推荐高启强
+    - 笨猫狂飙
+  responses:
+    - "嗷呜～{user_addr}狂飙 - 2023爆款ฅฅ"
+    - "(尾巴翘) 张颂文 / 张译 主演"
+    - "{user_addr}高启强+安欣+京海二十年"
+    - "(挺胸) 笨猫推荐: 强哥读孙子兵法!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_santi_001
+  intent: question
+  keywords: [推荐三体电视剧, 推荐三体剧版, 推荐张鲁一, 推荐科幻剧, 笨猫三体]
+  utterances:
+    - "{user_addr}推荐三体电视剧"
+    - 推荐三体剧版
+    - 推荐张鲁一
+    - 推荐科幻剧
+    - 笨猫三体
+  responses:
+    - "嗷呜～{user_addr}三体 - 国产科幻剧ฅฅ"
+    - "(尾巴翘) 张鲁一 / 于和伟 / 陈瑾"
+    - "{user_addr}腾讯版+高度还原原著"
+    - "(挺胸) 笨猫推荐: 古筝行动还原满分!"
+  cooldown_seconds: 60
+  weight: 1.0

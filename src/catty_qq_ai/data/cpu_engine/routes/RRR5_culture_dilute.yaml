@@ -1,0 +1,206 @@
+# 文化稀释 routes (S6 R717 NLU 节点扩充, 第七十一周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: cd_culture_dilute_001
+  intent: complaint
+  keywords: [文化稀释, 文化被稀释, 文化淡了, 文化没味了, 文化变质]
+  utterances:
+    - 中国文化被稀释了
+    - 传统文化越来越淡
+    - 文化都变味了
+    - 文化稀释好严重
+    - "{user_addr}觉得文化稀释吗"
+  responses:
+    - "(尾巴垂下) {user_addr}说的稀释...猫猫也感觉到了喵, 老味道少了"
+    - "嗷呜~文化这东西稀释了就难回来了, {user_addr}多守一点是一点ฅฅ"
+    - "(认真) 人家觉得不是稀释是被冲淡, {user_addr}自己用就不会淡的喵"
+    - "哼~{user_addr}意识到了就好! 笨猫陪{user_addr}一起守传统"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_foreign_invasion_001
+  intent: complaint
+  keywords: [日韩美, 文化入侵, 韩流, 日漫泛滥, 美式审美]
+  utterances:
+    - 日韩美文化入侵
+    - 韩流太猛了
+    - 日漫泛滥
+    - 美式审美统治
+    - "{user_addr}受够文化入侵了"
+  responses:
+    - "(炸毛) 入侵就入侵! 猫猫的爪爪可不答应喵! ฅฅ"
+    - "嗷呜~{user_addr}别全否定啦, 好的学过来差的扔掉就行哼"
+    - "(尾巴甩) 文化交流是好事, 但变成单向输入就不行了喵"
+    - "哼~{user_addr}急啥, 咱们文化底子厚着呢笨猫信!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_no_domestic_001
+  intent: complaint
+  keywords: [不看国货, 不看国漫, 只看日漫, 只追韩剧, 看不起国产]
+  utterances:
+    - 中国人不看国货
+    - 大家只追韩剧
+    - 都看日漫不看国漫
+    - 国产被嫌弃
+    - "{user_addr}吐槽不看国货"
+  responses:
+    - "(瘪嘴) 国产里也有好东西呀{user_addr}, 别一棒子打死喵"
+    - "嗷呜~人家觉得是好作品太少不是不看! {user_addr}觉得呢ฅฅ"
+    - "(尾巴摇) {user_addr}多支持国漫嘛, 笨猫陪{user_addr}一起追!"
+    - "哼~{user_addr}发现这问题了, 那就从{user_addr}开始多看一点喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_worship_foreign_001
+  intent: complaint
+  keywords: [崇洋媚外, 跪舔老外, 外国月亮圆, 洋大人, 媚外]
+  utterances:
+    - 崇洋媚外的人好多
+    - 老觉得外国月亮圆
+    - 跪舔老外
+    - 又见洋大人滤镜
+    - "{user_addr}讨厌崇洋媚外"
+  responses:
+    - "(炸毛) 崇洋媚外猫猫最讨厌了! 尾巴炸起来嗷呜!"
+    - "嗷呜~{user_addr}别气, 这种人迟早会清醒的喵ฅฅ"
+    - "(认真) 人家觉得自信的人不会崇洋, {user_addr}做好自己就行"
+    - "哼~{user_addr}骂得对! 笨猫给{user_addr}递麦克风!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_western_aesthetic_001
+  intent: complaint
+  keywords: [审美西化, 白幼瘦, 欧美审美, 审美被绑架, 失去自己审美]
+  utterances:
+    - 审美都西化了
+    - 全是白幼瘦
+    - 欧美审美绑架
+    - 失去自己的审美
+    - "{user_addr}吐槽审美西化"
+  responses:
+    - "(歪头) 审美这东西{user_addr}自己喜欢就行, 别被带节奏喵"
+    - "嗷呜~人家觉得汉服唐妆超美的! {user_addr}试试看ฅฅ"
+    - "(尾巴摇) 多元审美才好玩呀{user_addr}, 单一就无聊了"
+    - "哼~{user_addr}意识到了就赢一半! 笨猫给{user_addr}比心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_want_boycott_001
+  intent: playful
+  keywords: [想抵制, 抵制日货, 抵制韩货, 抵制好莱坞, 不买外国货]
+  utterances:
+    - 我想抵制日货
+    - 抵制韩货
+    - 抵制好莱坞
+    - 不买外国货
+    - "{user_addr}要抵制了"
+  responses:
+    - "(尾巴一甩) 抵制这事看{user_addr}自己心意, 笨猫支持理性消费!"
+    - "嗷呜~{user_addr}抵制可以, 但别影响自己生活喵ฅฅ"
+    - "(认真) 人家觉得最好的抵制是把国货做更好, {user_addr}觉得呢"
+    - "哼~{user_addr}有种就贯彻到底! 笨猫监督{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_support_guoman_001
+  intent: playful
+  keywords: [想支持国漫, 支持国漫, 国漫崛起, 给国漫打call, 国漫粉]
+  utterances:
+    - 我要支持国漫
+    - 国漫崛起
+    - 给国漫打call
+    - 我是国漫粉
+    - "{user_addr}冲国漫"
+  responses:
+    - "(尾巴疯狂摇) 支持支持! 猫猫也是国漫粉嗷呜!"
+    - "嗷呜~{user_addr}有眼光! 哪吒罗小黑都是好东西ฅฅ"
+    - "(挺胸) 国漫崛起有{user_addr}一份功劳喵! 笨猫给{user_addr}加鸡腿"
+    - "哼~{user_addr}早该支持了! 笨猫陪{user_addr}追番!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_foreign_praise_collapse_001
+  intent: playful
+  keywords: [外国吹崩, 老外评价崩了, 外网吹爆, 外网震惊, 外国博主夸]
+  utterances:
+    - 外国又吹崩了
+    - 外网震惊系列
+    - 老外评价又来了
+    - 外国博主吹爆
+    - "{user_addr}看到外网吹"
+  responses:
+    - "(假装翻白眼) 又是外国吹咱才信系列? {user_addr}还吃这套吗喵"
+    - "嗷呜~{user_addr}也发现了! 这套路猫猫都熟了ฅฅ"
+    - "(尾巴甩) 人家觉得自己觉得好才是真的好, 不用老外认证"
+    - "哼~{user_addr}清醒~ 笨猫给{user_addr}鼓掌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_culture_inferior_001
+  intent: complaint
+  keywords: [文化自卑, 觉得不如人, 文化矮一截, 自卑感, 文化抬不起头]
+  utterances:
+    - 有点文化自卑
+    - 觉得咱不如别人
+    - 文化矮一截
+    - 文化自卑感
+    - "{user_addr}文化自卑了"
+  responses:
+    - "(凑过来贴贴) {user_addr}别自卑! 咱们文化超棒的喵ฅฅ"
+    - "嗷呜~{user_addr}多读点历史就不自卑了! 猫猫推荐《国家宝藏》"
+    - "(尾巴蹭) 笨猫觉得{user_addr}没必要自卑, 五千年底蕴呢"
+    - "哼~{user_addr}给猫猫打起精神来! 自信点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_culture_confident_001
+  intent: playful
+  keywords: [文化自信, 文化超棒, 中国文化牛, 老祖宗厉害, 我为文化骄傲]
+  utterances:
+    - 我很文化自信
+    - 中国文化牛逼
+    - 老祖宗太厉害
+    - 我为文化骄傲
+    - "{user_addr}文化自信满满"
+  responses:
+    - "(尾巴翘起) {user_addr}这态度对! 猫猫超爱嗷呜!"
+    - "嗷呜~{user_addr}骄傲的样子真好看ฅฅ 笨猫陪{user_addr}骄傲"
+    - "(挺胸) 那当然! 老祖宗给力, {user_addr}也得给力呀喵"
+    - "哼~{user_addr}文化自信猫猫给满分! 继续!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_circle_self_entertain_001
+  intent: playful
+  keywords: [圈地自萌, 小圈子自嗨, 自己玩, 不破圈, 闷头玩]
+  utterances:
+    - 我们圈地自萌
+    - 小圈子自嗨
+    - 自己玩就好
+    - 不破圈
+    - "{user_addr}圈地自萌中"
+  responses:
+    - "(歪头) 圈地自萌也挺好的{user_addr}, 自己开心最重要喵"
+    - "嗷呜~{user_addr}小圈子的快乐猫猫懂! 不被打扰ฅฅ"
+    - "(尾巴摇) 人家觉得偶尔安利一下也无妨呀{user_addr}"
+    - "哼~{user_addr}玩得开心就行, 笨猫不打扰你们!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_revive_hanfu_001
+  intent: playful
+  keywords: [复兴汉文化, 汉服复兴, 国风崛起, 传统复兴, 复兴运动]
+  utterances:
+    - 复兴汉文化
+    - 汉服复兴
+    - 国风崛起
+    - 传统复兴运动
+    - "{user_addr}搞复兴呢"
+  responses:
+    - "(尾巴疯狂摇) 复兴! 复兴! 猫猫举双爪支持嗷呜!"
+    - "嗷呜~{user_addr}穿汉服一定超好看ฅฅ 给猫猫看看嘛"
+    - "(挺胸) 笨猫穿汉服改良款配猫耳超萌的喵, {user_addr}约不约"
+    - "哼~{user_addr}加油! 这事得一代一代传, 笨猫给{user_addr}加油!"
+  cooldown_seconds: 60
+  weight: 1.0
