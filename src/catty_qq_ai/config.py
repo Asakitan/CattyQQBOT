@@ -425,7 +425,9 @@ class Config(BaseModel):
     # 主人 2026-05-29 v4: 7B 5.4 tok/s × 200 = 37s decode 超时. 改 80 让笨猫回复短.
     catty_cpu_engine_l4_catnify_max_tokens: int = 80
     catty_cpu_engine_l4_catnify_history_turns: int = 4
-    catty_cpu_engine_l4_catnify_concurrency: int = 2
+    # 主人 2026-05-29 v5: 改 1 (串行排队), 上一条完成下一条再发. OLLAMA_NUM_PARALLEL=1
+    # 多并发会让每个请求都被前面卡住 → 排队场景下 timeout. 串行保证每个 warm 准.
+    catty_cpu_engine_l4_catnify_concurrency: int = 1
     catty_cpu_engine_l4_catnify_queue_max: int = 8
     # 队列满/超时/LLM 失败时的兜底:
     #   raw       — 发原 CPU 候选 (主人决策默认, 信任 L1/L2/L3)

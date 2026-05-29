@@ -395,7 +395,7 @@
         "l4_catnify_temperature": 0.7,
         "l4_catnify_max_tokens": 80,
         "l4_catnify_history_turns": 4,
-        "l4_catnify_concurrency": 2,
+        "l4_catnify_concurrency": 1,
         "l4_catnify_queue_max": 8,
         "l4_catnify_fallback_on_fail": "raw",
         "l4_catnify_deepseek_per_hour": 12,
