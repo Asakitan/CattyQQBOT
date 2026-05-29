@@ -1,0 +1,207 @@
+# 攀岩 / 抱石 / 户外岩场 / 攀登装备 routes (S6 R179 NLU 节点扩充, 第十七周期 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 D2 outdoor_adventure 区分: 这里专注攀岩 / 抱石专业.
+
+- name: cl_style_001
+  intent: question
+  keywords: [推荐攀岩类型, 推荐抱石, 推荐运动攀岩, 推荐传统攀岩, 笨猫攀岩]
+  utterances:
+    - 推荐攀岩类型
+    - 推荐抱石
+    - 推荐运动攀岩
+    - 推荐传统攀岩
+    - 笨猫攀岩
+  responses:
+    - "嗷呜～{user_addr}抱石 - 低矮无绳 / 入门最ฅฅ"
+    - "(尾巴翘) 运动攀岩 - 挂耳 / 顶绳"
+    - "{user_addr}传统攀岩 - 自己布保护点"
+    - "(挺胸) 笨猫推荐: 抱石起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_grade_001
+  intent: question
+  keywords: [推荐攀岩难度, 推荐 V 级, 推荐法式难度, 推荐 5.10, 笨猫攀岩难度]
+  utterances:
+    - 推荐攀岩难度
+    - 推荐 V 级
+    - 推荐法式难度
+    - 推荐 5.10
+    - 笨猫攀岩难度
+  responses:
+    - "嗷呜～{user_addr}V 系统 - 抱石 / V0-V17ฅฅ"
+    - "(尾巴翘) Yosemite 5.0-5.15"
+    - "{user_addr}法式 / 6a-9c"
+    - "(挺胸) 笨猫推荐: V3-V5 是新手目标!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cl_shoes_001
+  intent: question
+  keywords: [推荐攀岩鞋, 推荐 La Sportiva, 推荐 Five Ten, 推荐 Scarpa, 笨猫攀岩鞋]
+  utterances:
+    - 推荐攀岩鞋
+    - 推荐 La Sportiva
+    - 推荐 Five Ten
+    - 推荐 Scarpa
+    - 笨猫攀岩鞋
+  responses:
+    - "嗷呜～{user_addr}La Sportiva Solution - 经典ฅฅ"
+    - "(尾巴翘) Scarpa Drago / Five Ten Hiangle"
+    - "{user_addr}入门: TC Pro / Tarantula"
+    - "(挺胸) 笨猫推荐: 入门舒适为先!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_chalk_001
+  intent: question
+  keywords: [推荐攀岩镁粉, 推荐 chalk bag, 推荐液体镁粉, 推荐 FrictionLabs, 笨猫镁粉]
+  utterances:
+    - 推荐攀岩镁粉
+    - 推荐 chalk bag
+    - 推荐液体镁粉
+    - 推荐 FrictionLabs
+    - 笨猫镁粉
+  responses:
+    - "嗷呜～{user_addr}FrictionLabs Unicorn Dust - 顶ฅฅ"
+    - "(尾巴翘) 液体镁粉 + 块状混用"
+    - "{user_addr}Black Diamond / Mammut"
+    - "(挺胸) 笨猫推荐: FrictionLabs 摩擦最强!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cl_harness_001
+  intent: question
+  keywords: [推荐攀岩安全带, 推荐 Petzl, 推荐 Black Diamond, 推荐主锁, 笨猫攀岩安全带]
+  utterances:
+    - 推荐攀岩安全带
+    - 推荐 Petzl
+    - 推荐 Black Diamond
+    - 推荐主锁
+    - 笨猫攀岩安全带
+  responses:
+    - "嗷呜～{user_addr}Petzl Sama / Adjama - 通用ฅฅ"
+    - "(尾巴翘) Black Diamond Solution - 抱石和运动"
+    - "{user_addr}Edelrid / Arc'teryx - 高端"
+    - "(挺胸) 笨猫推荐: 第一条 Sama!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cl_rope_001
+  intent: question
+  keywords: [推荐攀岩绳, 推荐动力绳, 推荐 Beal, 推荐 Edelrid 绳, 笨猫攀岩绳]
+  utterances:
+    - 推荐攀岩绳
+    - 推荐动力绳
+    - 推荐 Beal
+    - 推荐 Edelrid 绳
+    - 笨猫攀岩绳
+  responses:
+    - "嗷呜～{user_addr}Beal Joker / Edelrid Boa - 经典ฅฅ"
+    - "(尾巴翘) 单绳 9.5mm / 60-70m"
+    - "{user_addr}动力 vs 静力 不同用途"
+    - "(挺胸) 笨猫推荐: 入门 9.5mm 70m!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cl_gym_001
+  intent: question
+  keywords: [推荐攀岩馆, 推荐岩馆, 推荐攀岩场, 推荐抱石馆, 笨猫攀岩馆]
+  utterances:
+    - 推荐攀岩馆
+    - 推荐岩馆
+    - 推荐攀岩场
+    - 推荐抱石馆
+    - 笨猫攀岩馆
+  responses:
+    - "嗷呜～{user_addr}北京: 岩 SAY / 岩时 - 顶级ฅฅ"
+    - "(尾巴翘) 上海: 攀途 / Risk Up"
+    - "{user_addr}深圳 / 成都 / 杭州 全国都有"
+    - "(挺胸) 笨猫推荐: 抱石馆便宜上手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_outdoor_001
+  intent: question
+  keywords: [推荐户外岩场, 推荐阳朔攀岩, 推荐杨家溪, 推荐 Yosemite, 笨猫户外岩场]
+  utterances:
+    - 推荐户外岩场
+    - 推荐阳朔攀岩
+    - 推荐杨家溪
+    - 推荐 Yosemite
+    - 笨猫户外岩场
+  responses:
+    - "嗷呜～{user_addr}阳朔 - 中国攀岩圣地ฅฅ"
+    - "(尾巴翘) Yosemite / Fontainebleau"
+    - "{user_addr}华山 / 太行 / 莽山"
+    - "(挺胸) 笨猫推荐: 阳朔一定要去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_belay_001
+  intent: question
+  keywords: [推荐保护器, 推荐 GriGri, 推荐 ATC, 推荐保护技术, 笨猫保护器]
+  utterances:
+    - 推荐保护器
+    - 推荐 GriGri
+    - 推荐 ATC
+    - 推荐保护技术
+    - 笨猫保护器
+  responses:
+    - "嗷呜～{user_addr}Petzl GriGri+ - 自动制动神器ฅฅ"
+    - "(尾巴翘) ATC - 传统管状"
+    - "{user_addr}Edelrid Mega Jul - 半自动"
+    - "(挺胸) 笨猫推荐: 入门 GriGri 安全!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cl_quickdraw_001
+  intent: question
+  keywords: [推荐快挂, 推荐快挂 quickdraw, 推荐 Petzl 快挂, 推荐 Black Diamond 快挂, 笨猫快挂]
+  utterances:
+    - 推荐快挂
+    - 推荐快挂 quickdraw
+    - 推荐 Petzl 快挂
+    - 推荐 Black Diamond 快挂
+    - 笨猫快挂
+  responses:
+    - "嗷呜～{user_addr}Petzl Spirit Express - 顶ฅฅ"
+    - "(尾巴翘) Black Diamond Posiwire"
+    - "{user_addr}10-12 把 / 看路线"
+    - "(挺胸) 笨猫推荐: Spirit Express 手感王!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cl_competition_001
+  intent: question
+  keywords: [推荐攀岩比赛, 推荐 IFSC, 推荐世界杯攀岩, 推荐攀岩世锦赛, 笨猫攀岩比赛]
+  utterances:
+    - 推荐攀岩比赛
+    - 推荐 IFSC
+    - 推荐世界杯攀岩
+    - 推荐攀岩世锦赛
+    - 笨猫攀岩比赛
+  responses:
+    - "嗷呜～{user_addr}IFSC 世界杯 - 顶级赛事ฅฅ"
+    - "(尾巴翘) 速度 / 抱石 / 难度"
+    - "{user_addr}奥运正式项目"
+    - "(挺胸) 笨猫推荐: 看 Adam Ondra!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cl_finger_train_001
+  intent: question
+  keywords: [推荐指力训练, 推荐 hangboard, 推荐指力板, 推荐攀岩训练, 笨猫指力训练]
+  utterances:
+    - 推荐指力训练
+    - 推荐 hangboard
+    - 推荐指力板
+    - 推荐攀岩训练
+    - 笨猫指力训练
+  responses:
+    - "嗷呜～{user_addr}Beastmaker / Tension Block - 主流ฅฅ"
+    - "(尾巴翘) 训练计划: 7-3-7"
+    - "{user_addr}指力进步缓慢 / 别上头"
+    - "(挺胸) 笨猫的提醒: 别伤手!"
+  cooldown_seconds: 60
+  weight: 0.8

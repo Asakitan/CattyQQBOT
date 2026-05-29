@@ -1,0 +1,207 @@
+# 滑板 / 长板 / 街式 / 碗池 / 板鞋 routes (S6 R181 NLU 节点扩充, 第十七周期 10/10 完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 O7 street_dance (街舞) 区分: 这里专注滑板专业.
+
+- name: sk_style_001
+  intent: question
+  keywords: [推荐滑板, 推荐街式滑板, 推荐碗池, 推荐 cruiser, 笨猫滑板]
+  utterances:
+    - 推荐滑板
+    - 推荐街式滑板
+    - 推荐碗池
+    - 推荐 cruiser
+    - 笨猫滑板
+  responses:
+    - "嗷呜～{user_addr}街式 / 碗池 / 全能 / cruiserฅฅ"
+    - "(尾巴翘) 长板 - 巡航 / 下坡"
+    - "{user_addr}小鱼板 - 通勤"
+    - "(挺胸) 笨猫推荐: 新手 cruiser 上手快!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_brand_deck_001
+  intent: question
+  keywords: [推荐滑板板面, 推荐 Element, 推荐 Baker, 推荐 Polar, 笨猫板面]
+  utterances:
+    - 推荐滑板板面
+    - 推荐 Element
+    - 推荐 Baker
+    - 推荐 Polar
+    - 笨猫板面
+  responses:
+    - "嗷呜～{user_addr}Element / Baker / Polar - 主流ฅฅ"
+    - "(尾巴翘) Antihero / Plan B / Girl"
+    - "{user_addr}国产: BSD / Avenue"
+    - "(挺胸) 笨猫推荐: Element 入门首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sk_truck_001
+  intent: question
+  keywords: [推荐滑板桥, 推荐 Independent, 推荐 Thunder, 推荐 Venture, 笨猫滑板桥]
+  utterances:
+    - 推荐滑板桥
+    - 推荐 Independent
+    - 推荐 Thunder
+    - 推荐 Venture
+    - 笨猫滑板桥
+  responses:
+    - "嗷呜～{user_addr}Independent - 街式经典ฅฅ"
+    - "(尾巴翘) Thunder / Venture - 主流"
+    - "{user_addr}Royal / Tensor"
+    - "(挺胸) 笨猫推荐: Indy 永远没错!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sk_wheel_001
+  intent: question
+  keywords: [推荐滑板轮子, 推荐 Spitfire, 推荐 Bones, 推荐 OJ, 笨猫滑板轮]
+  utterances:
+    - 推荐滑板轮子
+    - 推荐 Spitfire
+    - 推荐 Bones
+    - 推荐 OJ
+    - 笨猫滑板轮
+  responses:
+    - "嗷呜～{user_addr}Spitfire Formula 4 - 街式ฅฅ"
+    - "(尾巴翘) Bones STF / X-Formula"
+    - "{user_addr}硬度 99a-103a / 街式"
+    - "(挺胸) 笨猫推荐: Spitfire 经典!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sk_bearing_001
+  intent: question
+  keywords: [推荐滑板轴承, 推荐 Bones Reds, 推荐 Bones Swiss, 推荐 ABEC 等级, 笨猫滑板轴承]
+  utterances:
+    - 推荐滑板轴承
+    - 推荐 Bones Reds
+    - 推荐 Bones Swiss
+    - 推荐 ABEC 等级
+    - 笨猫滑板轴承
+  responses:
+    - "嗷呜～{user_addr}Bones Reds - 入门性价比ฅฅ"
+    - "(尾巴翘) Bones Swiss - 旗舰"
+    - "{user_addr}ABEC 不重要 / 看品牌"
+    - "(挺胸) 笨猫推荐: Bones Reds 一辈子!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sk_shoes_001
+  intent: question
+  keywords: [推荐滑板鞋, 推荐 Vans, 推荐 Nike SB, 推荐 Etnies, 笨猫板鞋]
+  utterances:
+    - 推荐滑板鞋
+    - 推荐 Vans
+    - 推荐 Nike SB
+    - 推荐 Etnies
+    - 笨猫板鞋
+  responses:
+    - "嗷呜～{user_addr}Vans Old Skool - 滑板鞋鼻祖ฅฅ"
+    - "(尾巴翘) Nike SB Dunk - 性能强"
+    - "{user_addr}Etnies / Lakai / Emerica"
+    - "(挺胸) 笨猫推荐: Vans 永远经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_trick_001
+  intent: question
+  keywords: [推荐滑板动作, 推荐 ollie, 推荐 kickflip, 推荐豚跳, 笨猫滑板动作]
+  utterances:
+    - 推荐滑板动作
+    - 推荐 ollie
+    - 推荐 kickflip
+    - 推荐豚跳
+    - 笨猫滑板动作
+  responses:
+    - "嗷呜～{user_addr}Ollie - 滑板第一动作 / 关键ฅฅ"
+    - "(尾巴翘) Kickflip / Heelflip"
+    - "{user_addr}Pop Shove-it / 360 flip"
+    - "(挺胸) 笨猫推荐: Ollie 是一切!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_long_board_001
+  intent: question
+  keywords: [推荐长板, 推荐 long board, 推荐巡航板, 推荐下坡板, 笨猫长板]
+  utterances:
+    - 推荐长板
+    - 推荐 long board
+    - 推荐巡航板
+    - 推荐下坡板
+    - 笨猫长板
+  responses:
+    - "嗷呜～{user_addr}Loaded / Landyachtz - 高端ฅฅ"
+    - "(尾巴翘) Sector 9 / Arbor"
+    - "{user_addr}舞板 / 下坡 / 巡航"
+    - "(挺胸) 笨猫推荐: 长板下坡刺激!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_park_001
+  intent: question
+  keywords: [推荐滑板公园, 推荐 skate park, 推荐 SMP 滑板公园, 推荐 spot, 笨猫滑板公园]
+  utterances:
+    - 推荐滑板公园
+    - 推荐 skate park
+    - 推荐 SMP 滑板公园
+    - 推荐 spot
+    - 笨猫滑板公园
+  responses:
+    - "嗷呜～{user_addr}上海 SMP - 国内最大ฅฅ"
+    - "(尾巴翘) 北京 / 广州 / 深圳 公园"
+    - "{user_addr}街头 spot - DIY 风"
+    - "(挺胸) 笨猫推荐: SMP 必去!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sk_competition_001
+  intent: question
+  keywords: [推荐滑板比赛, 推荐 SLS, 推荐 X Games, 推荐 Vans Park Series, 笨猫滑板比赛]
+  utterances:
+    - 推荐滑板比赛
+    - 推荐 SLS
+    - 推荐 X Games
+    - 推荐 Vans Park Series
+    - 笨猫滑板比赛
+  responses:
+    - "嗷呜～{user_addr}SLS (Street League) - 街式ฅฅ"
+    - "(尾巴翘) X Games / Vans Park Series"
+    - "{user_addr}奥运正式项目"
+    - "(挺胸) 笨猫推荐: 看 Nyjah Huston!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sk_pro_skater_001
+  intent: question
+  keywords: [推荐滑板选手, 推荐 Tony Hawk, 推荐 Nyjah Huston, 推荐 Aori Nishimura, 笨猫滑板选手]
+  utterances:
+    - 推荐滑板选手
+    - 推荐 Tony Hawk
+    - 推荐 Nyjah Huston
+    - 推荐 Aori Nishimura
+    - 笨猫滑板选手
+  responses:
+    - "嗷呜～{user_addr}Tony Hawk - 滑板神ฅฅ"
+    - "(尾巴翘) Nyjah Huston / Yuto Horigome"
+    - "{user_addr}西村碧莉 / 开心麻花"
+    - "(挺胸) 笨猫推荐: 看 Tony Hawk Pro 经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sk_streetwear_001
+  intent: question
+  keywords: [推荐滑板穿搭, 推荐 Thrasher, 推荐街头牌, 推荐宽松裤, 笨猫滑板穿搭]
+  utterances:
+    - 推荐滑板穿搭
+    - 推荐 Thrasher
+    - 推荐街头牌
+    - 推荐宽松裤
+    - 笨猫滑板穿搭
+  responses:
+    - "嗷呜～{user_addr}Thrasher 火焰 T - 滑板灵魂ฅฅ"
+    - "(尾巴翘) Polar / Stussy / Supreme"
+    - "{user_addr}宽松裤 + 帽衫 + 板鞋"
+    - "(挺胸) 笨猫推荐: 自由穿搭最酷!"
+  cooldown_seconds: 60
+  weight: 0.9

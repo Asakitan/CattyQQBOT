@@ -1,0 +1,207 @@
+# 长跑 / 马拉松 / 越野跑 / 跑步装备 routes (S6 R178 NLU 节点扩充, 第十七周期 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 K7 fitness_deep / B5 workout_routine 区分: 这里专注跑步专业.
+
+- name: mr_distance_001
+  intent: question
+  keywords: [推荐跑步距离, 推荐 5K, 推荐 10K, 推荐马拉松, 笨猫跑步距离]
+  utterances:
+    - 推荐跑步距离
+    - 推荐 5K
+    - 推荐 10K
+    - 推荐马拉松
+    - 笨猫跑步距离
+  responses:
+    - "嗷呜～{user_addr}5K / 10K / 半马 / 全马ฅฅ"
+    - "(尾巴翘) 全马 42.195km - 终极挑战"
+    - "{user_addr}越野跑: 50K / 100K / 100mi"
+    - "(挺胸) 笨猫推荐: 5K 起步 / 慢慢加!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_shoes_001
+  intent: question
+  keywords: [推荐跑鞋, 推荐 Nike Vaporfly, 推荐 Asics, 推荐 Hoka, 笨猫跑鞋]
+  utterances:
+    - 推荐跑鞋
+    - 推荐 Nike Vaporfly
+    - 推荐 Asics
+    - 推荐 Hoka
+    - 笨猫跑鞋
+  responses:
+    - "嗷呜～{user_addr}Nike Vaporfly / Alphafly - 竞速ฅฅ"
+    - "(尾巴翘) Asics Nimbus / Hoka Clifton - 缓震"
+    - "{user_addr}Saucony / Brooks / NB"
+    - "(挺胸) 笨猫推荐: 入门 Hoka 缓震!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_carbon_plate_001
+  intent: question
+  keywords: [推荐碳板跑鞋, 推荐超级鞋, 推荐 Adidas Adios Pro, 推荐 PB 鞋, 笨猫碳板跑鞋]
+  utterances:
+    - 推荐碳板跑鞋
+    - 推荐超级鞋
+    - 推荐 Adidas Adios Pro
+    - 推荐 PB 鞋
+    - 笨猫碳板跑鞋
+  responses:
+    - "嗷呜～{user_addr}Nike Alphafly 3 - 顶级 PB 神器ฅฅ"
+    - "(尾巴翘) Adidas Adios Pro / Saucony Endorphin"
+    - "{user_addr}国产: 特步 160X / 李宁飞电"
+    - "(挺胸) 笨猫推荐: 比赛日 Alphafly!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mr_watch_001
+  intent: question
+  keywords: [推荐跑步手表, 推荐佳明, 推荐 Garmin, 推荐 Coros, 笨猫跑步手表]
+  utterances:
+    - 推荐跑步手表
+    - 推荐佳明
+    - 推荐 Garmin
+    - 推荐 Coros
+    - 笨猫跑步手表
+  responses:
+    - "嗷呜～{user_addr}Garmin 965 / 265 - 主流ฅฅ"
+    - "(尾巴翘) Coros Apex / Pace 3 - 性价比"
+    - "{user_addr}Suunto / Polar - 老品牌"
+    - "(挺胸) 笨猫推荐: Garmin 跑表霸主!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_training_plan_001
+  intent: question
+  keywords: [推荐马拉松训练计划, 推荐初马训练, 推荐 16 周计划, 推荐 Jack Daniels, 笨猫马拉松训练]
+  utterances:
+    - 推荐马拉松训练计划
+    - 推荐初马训练
+    - 推荐 16 周计划
+    - 推荐 Jack Daniels
+    - 笨猫马拉松训练
+  responses:
+    - "嗷呜～{user_addr}Jack Daniels / Hansons / Hal Higdonฅฅ"
+    - "(尾巴翘) 16-20 周 / 进阶 6-12 周"
+    - "{user_addr}周末长距离 + 间歇 + LSD"
+    - "(挺胸) 笨猫推荐: 初马 Higdon Beginner!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_race_majors_001
+  intent: question
+  keywords: [推荐六大马拉松, 推荐 Boston, 推荐柏林马, 推荐东京马, 笨猫六大马]
+  utterances:
+    - 推荐六大马拉松
+    - 推荐 Boston
+    - 推荐柏林马
+    - 推荐东京马
+    - 笨猫六大马
+  responses:
+    - "嗷呜～{user_addr}波士顿 / 纽约 / 芝加哥ฅฅ"
+    - "(尾巴翘) 伦敦 / 柏林 / 东京 - 六大"
+    - "{user_addr}柏林 - 世界纪录摇篮"
+    - "(挺胸) 笨猫推荐: 跑完六大 World Major!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_china_race_001
+  intent: question
+  keywords: [推荐国内马拉松, 推荐北马, 推荐上马, 推荐厦门马, 笨猫北马]
+  utterances:
+    - 推荐国内马拉松
+    - 推荐北马
+    - 推荐上马
+    - 推荐厦门马
+    - 笨猫北马
+  responses:
+    - "嗷呜～{user_addr}北马 / 上马 / 厦马 - 国内三大ฅฅ"
+    - "(尾巴翘) 广马 / 杭马 / 武汉"
+    - "{user_addr}金标 / 银标 / 铜标"
+    - "(挺胸) 笨猫推荐: 上马观光最美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_nutrition_001
+  intent: question
+  keywords: [推荐跑步能量胶, 推荐 SiS, 推荐 GU, 推荐运动饮料, 笨猫能量胶]
+  utterances:
+    - 推荐跑步能量胶
+    - 推荐 SiS
+    - 推荐 GU
+    - 推荐运动饮料
+    - 笨猫能量胶
+  responses:
+    - "嗷呜～{user_addr}SiS / GU / Maurten - 顶ฅฅ"
+    - "(尾巴翘) 30-45 分钟一支"
+    - "{user_addr}电解质: 盐丸 / Nuun"
+    - "(挺胸) 笨猫推荐: Maurten 顶级凝胶!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mr_trail_001
+  intent: question
+  keywords: [推荐越野跑, 推荐 UTMB, 推荐越野鞋, 推荐 Salomon 越野, 笨猫越野跑]
+  utterances:
+    - 推荐越野跑
+    - 推荐 UTMB
+    - 推荐越野鞋
+    - 推荐 Salomon 越野
+    - 笨猫越野跑
+  responses:
+    - "嗷呜～{user_addr}UTMB - 越野跑朝圣ฅฅ"
+    - "(尾巴翘) Salomon S/Lab / Hoka Speedgoat"
+    - "{user_addr}TNF / La Sportiva - 高端"
+    - "(挺胸) 笨猫推荐: 越野超治愈!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mr_injury_001
+  intent: question
+  keywords: [推荐跑步伤病, 推荐跑步膝, 推荐足底筋膜炎, 推荐胫骨痛, 笨猫跑步伤]
+  utterances:
+    - 推荐跑步伤病
+    - 推荐跑步膝
+    - 推荐足底筋膜炎
+    - 推荐胫骨痛
+    - 笨猫跑步伤
+  responses:
+    - "嗷呜～{user_addr}跑步膝 / 足底筋膜 / 胫骨痛ฅฅ"
+    - "(尾巴翘) 休息 + 冰敷 + 拉伸"
+    - "{user_addr}核心 + 力量训练预防"
+    - "(挺胸) 笨猫的提醒: 痛了就休息!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_pace_001
+  intent: question
+  keywords: [推荐跑步配速, 推荐 LSD, 推荐间歇跑, 推荐节奏跑, 笨猫配速]
+  utterances:
+    - 推荐跑步配速
+    - 推荐 LSD
+    - 推荐间歇跑
+    - 推荐节奏跑
+    - 笨猫配速
+  responses:
+    - "嗷呜～{user_addr}LSD - 长距离慢跑 / 有氧底ฅฅ"
+    - "(尾巴翘) 间歇 - 400m / 800m / 1000m"
+    - "{user_addr}节奏跑 - 乳酸阈值"
+    - "(挺胸) 笨猫推荐: 80% 慢 / 20% 快!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mr_apparel_001
+  intent: question
+  keywords: [推荐跑步服装, 推荐速干衣, 推荐压缩裤, 推荐 2XU, 笨猫跑步服装]
+  utterances:
+    - 推荐跑步服装
+    - 推荐速干衣
+    - 推荐压缩裤
+    - 推荐 2XU
+    - 笨猫跑步服装
+  responses:
+    - "嗷呜～{user_addr}On / Lululemon / Nike - 上身ฅฅ"
+    - "(尾巴翘) 2XU 压缩裤 - 经典"
+    - "{user_addr}Path Projects / 国产迪卡侬"
+    - "(挺胸) 笨猫推荐: 速干 + 反光必备!"
+  cooldown_seconds: 60
+  weight: 0.8

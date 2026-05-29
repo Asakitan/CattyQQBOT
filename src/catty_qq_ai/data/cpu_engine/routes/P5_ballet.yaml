@@ -1,0 +1,207 @@
+# 芭蕾舞 / 现代舞 / 舞剧 routes (S6 R177 NLU 节点扩充, 第十七周期 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 O7 street_dance (街舞) 区分: 这里专注芭蕾 + 古典舞.
+
+- name: bl_school_001
+  intent: question
+  keywords: [推荐芭蕾流派, 推荐俄派, 推荐法派, 推荐意派, 笨猫芭蕾流派]
+  utterances:
+    - 推荐芭蕾流派
+    - 推荐俄派
+    - 推荐法派
+    - 推荐意派
+    - 笨猫芭蕾流派
+  responses:
+    - "嗷呜～{user_addr}俄派: 瓦冈诺娃 - 大气优雅ฅฅ"
+    - "(尾巴翘) 法派: 古典 / 巴黎歌剧院"
+    - "{user_addr}意派: 切凯蒂 - 精致"
+    - "(挺胸) 笨猫推荐: 俄派最经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bl_company_001
+  intent: question
+  keywords: [推荐芭蕾舞团, 推荐大剧院芭蕾, 推荐马林斯基, 推荐皇家芭蕾, 笨猫芭蕾舞团]
+  utterances:
+    - 推荐芭蕾舞团
+    - 推荐大剧院芭蕾
+    - 推荐马林斯基
+    - 推荐皇家芭蕾
+    - 笨猫芭蕾舞团
+  responses:
+    - "嗷呜～{user_addr}马林斯基 / 大剧院 - 俄系顶ฅฅ"
+    - "(尾巴翘) 英国皇家 / 巴黎歌剧院"
+    - "{user_addr}ABT / NYCB - 美国"
+    - "(挺胸) 笨猫推荐: 马林斯基天鹅湖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bl_classic_001
+  intent: question
+  keywords: [推荐芭蕾舞剧, 推荐天鹅湖, 推荐胡桃夹子, 推荐睡美人, 笨猫芭蕾舞剧]
+  utterances:
+    - 推荐芭蕾舞剧
+    - 推荐天鹅湖
+    - 推荐胡桃夹子
+    - 推荐睡美人
+    - 笨猫芭蕾舞剧
+  responses:
+    - "嗷呜～{user_addr}天鹅湖 - 芭蕾代表作ฅฅ"
+    - "(尾巴翘) 胡桃夹子 - 圣诞节必看"
+    - "{user_addr}睡美人 / 吉赛尔 / 罗朱"
+    - "(挺胸) 笨猫推荐: 天鹅湖永远经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bl_dancer_001
+  intent: question
+  keywords: [推荐芭蕾明星, 推荐努里耶夫, 推荐谭元元, 推荐 Misty Copeland, 笨猫芭蕾明星]
+  utterances:
+    - 推荐芭蕾明星
+    - 推荐努里耶夫
+    - 推荐谭元元
+    - 推荐 Misty Copeland
+    - 笨猫芭蕾明星
+  responses:
+    - "嗷呜～{user_addr}努里耶夫 / 巴瑞辛尼科夫 - 神ฅฅ"
+    - "(尾巴翘) 谭元元 - 中国之光"
+    - "{user_addr}Misty Copeland / Sarah Lane"
+    - "(挺胸) 笨猫推荐: 看大师录像!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bl_shoes_001
+  intent: question
+  keywords: [推荐芭蕾舞鞋, 推荐足尖鞋, 推荐 Bloch, 推荐 Capezio, 笨猫足尖鞋]
+  utterances:
+    - 推荐芭蕾舞鞋
+    - 推荐足尖鞋
+    - 推荐 Bloch
+    - 推荐 Capezio
+    - 笨猫足尖鞋
+  responses:
+    - "嗷呜～{user_addr}Bloch / Capezio - 一线ฅฅ"
+    - "(尾巴翘) Freed / Russian Pointe"
+    - "{user_addr}必须试 / 看脚型"
+    - "(挺胸) 笨猫的提醒: 足尖伤脚!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bl_basic_001
+  intent: question
+  keywords: [推荐芭蕾基础, 推荐把杆, 推荐五位, 推荐 plié, 笨猫芭蕾基础]
+  utterances:
+    - 推荐芭蕾基础
+    - 推荐把杆
+    - 推荐五位
+    - 推荐 plié
+    - 笨猫芭蕾基础
+  responses:
+    - "嗷呜～{user_addr}把杆 + 中间 + 跳跃ฅฅ"
+    - "(尾巴翘) 五个基本脚位 / 七个手位"
+    - "{user_addr}Plié / Tendu / Rond de jambe"
+    - "(挺胸) 笨猫推荐: 把杆是芭蕾根基!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bl_modern_001
+  intent: question
+  keywords: [推荐现代舞, 推荐 Pina Bausch, 推荐 Martha Graham, 推荐 contemporary, 笨猫现代舞]
+  utterances:
+    - 推荐现代舞
+    - 推荐 Pina Bausch
+    - 推荐 Martha Graham
+    - 推荐 contemporary
+    - 笨猫现代舞
+  responses:
+    - "嗷呜～{user_addr}Pina Bausch - 现代舞女神ฅฅ"
+    - "(尾巴翘) Martha Graham - 美国现代"
+    - "{user_addr}Cunningham / 林怀民"
+    - "(挺胸) 笨猫推荐: Pina 春之祭震撼!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bl_china_001
+  intent: question
+  keywords: [推荐中国芭蕾, 推荐红色娘子军, 推荐白毛女, 推荐中央芭蕾舞团, 笨猫中国芭蕾]
+  utterances:
+    - 推荐中国芭蕾
+    - 推荐红色娘子军
+    - 推荐白毛女
+    - 推荐中央芭蕾舞团
+    - 笨猫中国芭蕾
+  responses:
+    - "嗷呜～{user_addr}红色娘子军 / 白毛女 - 经典ฅฅ"
+    - "(尾巴翘) 中央芭蕾舞团 / 上海"
+    - "{user_addr}牡丹亭 - 芭蕾版"
+    - "(挺胸) 笨猫推荐: 中国芭蕾有特色!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bl_costume_001
+  intent: question
+  keywords: [推荐 tutu, 推荐芭蕾舞裙, 推荐古典芭蕾服, 推荐芭蕾紧身衣, 笨猫 tutu]
+  utterances:
+    - 推荐 tutu
+    - 推荐芭蕾舞裙
+    - 推荐古典芭蕾服
+    - 推荐芭蕾紧身衣
+    - 笨猫 tutu
+  responses:
+    - "嗷呜～{user_addr}Tutu - 古典 / 浪漫两种ฅฅ"
+    - "(尾巴翘) Leotard 紧身衣 / 不同颜色看级别"
+    - "{user_addr}打底裤 / 围裙 / 头花"
+    - "(挺胸) 笨猫推荐: 古典 Tutu 最仙!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bl_competition_001
+  intent: question
+  keywords: [推荐芭蕾比赛, 推荐 Prix de Lausanne, 推荐瓦尔纳, 推荐莫斯科国际, 笨猫芭蕾比赛]
+  utterances:
+    - 推荐芭蕾比赛
+    - 推荐 Prix de Lausanne
+    - 推荐瓦尔纳
+    - 推荐莫斯科国际
+    - 笨猫芭蕾比赛
+  responses:
+    - "嗷呜～{user_addr}Prix de Lausanne - 青少年顶ฅฅ"
+    - "(尾巴翘) 瓦尔纳 / 莫斯科 / 杰克逊"
+    - "{user_addr}北京国际芭蕾比赛"
+    - "(挺胸) 笨猫推荐: 看顶级比赛涨眼力!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bl_film_001
+  intent: question
+  keywords: [推荐芭蕾电影, 推荐黑天鹅电影, 推荐红菱艳, 推荐芭蕾纪录片, 笨猫芭蕾电影]
+  utterances:
+    - 推荐芭蕾电影
+    - 推荐黑天鹅电影
+    - 推荐红菱艳
+    - 推荐芭蕾纪录片
+    - 笨猫芭蕾电影
+  responses:
+    - "嗷呜～{user_addr}黑天鹅 - 心理 + 芭蕾神作ฅฅ"
+    - "(尾巴翘) 红菱艳 - 经典老片"
+    - "{user_addr}舞动人生 / 白乌鸦"
+    - "(挺胸) 笨猫推荐: 黑天鹅必看!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bl_china_dance_001
+  intent: question
+  keywords: [推荐中国舞, 推荐古典舞, 推荐汉唐舞, 推荐敦煌舞, 笨猫中国舞]
+  utterances:
+    - 推荐中国舞
+    - 推荐古典舞
+    - 推荐汉唐舞
+    - 推荐敦煌舞
+    - 笨猫中国舞
+  responses:
+    - "嗷呜～{user_addr}古典舞: 身韵 / 神韵ฅฅ"
+    - "(尾巴翘) 汉唐 / 敦煌 / 戏曲身段"
+    - "{user_addr}民族民间: 蒙古 / 藏 / 维"
+    - "(挺胸) 笨猫推荐: 唐宫夜宴爆火!"
+  cooldown_seconds: 60
+  weight: 0.9
