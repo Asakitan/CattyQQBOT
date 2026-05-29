@@ -87,6 +87,7 @@ async def sim_chat(
     history_replace: bool = False,
     with_tools: bool = True,
     force_spark: bool = False,
+    persist: bool = False,
 ) -> dict[str, Any]:
     """模拟一条 incoming message, 走 _build_messages 拼完整 prompt, 可选调 AI 拿 reply.
 
@@ -247,6 +248,31 @@ async def sim_chat(
                 reply = str(reply_obj or "[AI returned empty]")
         except Exception as exc:  # noqa: BLE001
             reply = f"[sim_chat: chat_completion failed — {type(exc).__name__}: {exc}]"
+
+    # 主人 2026-05-29: persist 模式 — 复刻 handle_chat 的 _append_history (主链路同一函数),
+    # 让多轮 sim 的 history 真实增长 + 到阈值 trim, 测真实 cache 命中(不再用固定 history).
+    # 默认 False 不污染 history; 测真实命中率时用 isolated 测试 scope + persist=True.
+    if live and persist and reply and not str(reply).startswith("["):
+        try:
+            from . import _append_history
+            # 取 messages 里最后一条 user 的实际 content 作存档版本 (跟 handle_chat 一致)
+            _enriched = incoming.history_content
+            for _m in reversed(messages):
+                if isinstance(_m, dict) and _m.get("role") == "user":
+                    _c = _m.get("content", "")
+                    if isinstance(_c, str) and _c.strip():
+                        _enriched = _c
+                    elif isinstance(_c, list) and _c:
+                        _texts = [
+                            str(_b.get("text", "")) for _b in _c
+                            if isinstance(_b, dict) and _b.get("type") == "text"
+                        ]
+                        if _texts:
+                            _enriched = "\n".join(_texts)
+                    break
+            _append_history(key, _enriched, str(reply))
+        except Exception:  # noqa: BLE001
+            pass
 
     return {
         "messages": messages,
