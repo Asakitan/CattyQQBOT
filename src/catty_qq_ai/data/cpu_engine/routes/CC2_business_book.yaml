@@ -1,0 +1,207 @@
+# 商业书籍 / 管理学 / 创业 routes (S6 R304 NLU 节点扩充, 第三十周期 3/10)
+# 主人 2026-05-29: intent=question 推荐型
+# 推荐型带笨猫语气.
+
+- name: bb_classic_001
+  intent: question
+  keywords: [推荐商业书, 推荐原则, 推荐 Principles, 推荐达利欧, 笨猫商业书]
+  utterances:
+    - 推荐商业书
+    - 推荐原则
+    - 推荐 Principles
+    - 推荐达利欧
+    - 笨猫商业书
+  responses:
+    - "嗷呜～{user_addr}《原则》Ray Dalio - 桥水掌门ฅฅ"
+    - "(尾巴翘) 生活原则 + 工作原则"
+    - "{user_addr}极度透明 / 创意择优"
+    - "(挺胸) 笨猫推荐: 商业圣经!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_startup_001
+  intent: question
+  keywords: [推荐创业书, 推荐从 0 到 1, 推荐 Zero to One, 推荐 Peter Thiel, 笨猫创业书]
+  utterances:
+    - 推荐创业书
+    - 推荐从 0 到 1
+    - 推荐 Zero to One
+    - 推荐 Peter Thiel
+    - 笨猫创业书
+  responses:
+    - "嗷呜～{user_addr}《从 0 到 1》Peter Thielฅฅ"
+    - "(尾巴翘) 垄断 / 反共识 / 秘密"
+    - "{user_addr}PayPal 帮 + Palantir 创始"
+    - "(挺胸) 笨猫推荐: 创业必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_management_001
+  intent: question
+  keywords: [推荐管理书, 推荐卓有成效的管理者, 推荐德鲁克, 推荐 Drucker, 笨猫管理书]
+  utterances:
+    - 推荐管理书
+    - 推荐卓有成效的管理者
+    - 推荐德鲁克
+    - 推荐 Drucker
+    - 笨猫管理书
+  responses:
+    - "嗷呜～{user_addr}《卓有成效的管理者》德鲁克ฅฅ"
+    - "(尾巴翘) 时间管理 + 贡献 + 用人之长"
+    - "{user_addr}现代管理学之父"
+    - "(挺胸) 笨猫推荐: 管理圣经!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_strategy_001
+  intent: question
+  keywords: [推荐战略书, 推荐蓝海战略, 推荐 Blue Ocean, 推荐金伟灿, 笨猫战略书]
+  utterances:
+    - 推荐战略书
+    - 推荐蓝海战略
+    - 推荐 Blue Ocean
+    - 推荐金伟灿
+    - 笨猫战略书
+  responses:
+    - "嗷呜～{user_addr}《蓝海战略》金伟灿ฅฅ"
+    - "(尾巴翘) 跳出红海 / 价值创新"
+    - "{user_addr}波特五力 / 竞争战略"
+    - "(挺胸) 笨猫推荐: 蓝海思维!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bb_leadership_001
+  intent: question
+  keywords: [推荐领导力, 推荐七个习惯, 推荐 Covey, 推荐 7 Habits, 笨猫领导力]
+  utterances:
+    - 推荐领导力
+    - 推荐七个习惯
+    - 推荐 Covey
+    - 推荐 7 Habits
+    - 笨猫领导力
+  responses:
+    - "嗷呜～{user_addr}《高效能人士的七个习惯》ฅฅ"
+    - "(尾巴翘) 主动积极 / 以终为始 / 要事第一"
+    - "{user_addr}双赢 / 知彼解己 / 统合综效 / 不断更新"
+    - "(挺胸) 笨猫推荐: 个人成长!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_negotiation_001
+  intent: question
+  keywords: [推荐谈判书, 推荐哈佛谈判, 推荐 Getting to Yes, 推荐谈判力, 笨猫谈判书]
+  utterances:
+    - 推荐谈判书
+    - 推荐哈佛谈判
+    - 推荐 Getting to Yes
+    - 推荐谈判力
+    - 笨猫谈判书
+  responses:
+    - "嗷呜～{user_addr}《谈判力》哈佛 Fisherฅฅ"
+    - "(尾巴翘) 对事不对人 / 利益不立场"
+    - "{user_addr}BATNA - 最佳替代方案"
+    - "(挺胸) 笨猫推荐: 双赢谈判!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bb_bestseller_001
+  intent: function_request
+  keywords: [推荐畅销书, 推荐高效人士, 推荐成功学, 推荐畅销榜, 笨猫畅销书]
+  utterances:
+    - 推荐畅销书
+    - 推荐高效人士
+    - 推荐成功学
+    - 推荐畅销榜
+    - 笨猫畅销书
+  responses:
+    - "嗷呜～{user_addr}《七个习惯》《思考快与慢》ฅฅ"
+    - "(尾巴翘) 《精益创业》《增长黑客》"
+    - "{user_addr}《商业模式新生代》《引爆点》"
+    - "(挺胸) 笨猫推荐: 经典畅销!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bb_mba_001
+  intent: question
+  keywords: [推荐 MBA 必读, 推荐 MBA 书单, 推荐商学院, 推荐工商管理, 笨猫 MBA]
+  utterances:
+    - 推荐 MBA 必读
+    - 推荐 MBA 书单
+    - 推荐商学院
+    - 推荐工商管理
+    - 笨猫 MBA
+  responses:
+    - "嗷呜～{user_addr}《管理学》罗宾斯ฅฅ"
+    - "(尾巴翘) 《营销管理》科特勒"
+    - "{user_addr}《财务报表分析》《公司理财》"
+    - "(挺胸) 笨猫推荐: MBA 三件套!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bb_growth_001
+  intent: question
+  keywords: [推荐增长黑客, 推荐 Growth Hacking, 推荐肖恩埃利斯, 推荐用户增长, 笨猫增长黑客]
+  utterances:
+    - 推荐增长黑客
+    - 推荐 Growth Hacking
+    - 推荐肖恩埃利斯
+    - 推荐用户增长
+    - 笨猫增长黑客
+  responses:
+    - "嗷呜～{user_addr}《增长黑客》肖恩埃利斯ฅฅ"
+    - "(尾巴翘) AARRR 漏斗 / 北极星指标"
+    - "{user_addr}病毒系数 / 留存 / 激活"
+    - "(挺胸) 笨猫推荐: 互联网必读!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bb_reflection_001
+  intent: question
+  keywords: [推荐复盘, 推荐复盘日记, 推荐联想复盘, 推荐 PDCA, 笨猫复盘]
+  utterances:
+    - 推荐复盘
+    - 推荐复盘日记
+    - 推荐联想复盘
+    - 推荐 PDCA
+    - 笨猫复盘
+  responses:
+    - "嗷呜～{user_addr}《复盘 +》陈中ฅฅ"
+    - "(尾巴翘) 联想四步法: 回顾 / 评估 / 分析 / 总结"
+    - "{user_addr}PDCA 循环 - 戴明环"
+    - "(挺胸) 笨猫推荐: 每天复盘!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bb_success_001
+  intent: question
+  keywords: [推荐成功学, 推荐卡耐基, 推荐人性的弱点, 推荐 How to Win Friends, 笨猫成功学]
+  utterances:
+    - 推荐成功学
+    - 推荐卡耐基
+    - 推荐人性的弱点
+    - 推荐 How to Win Friends
+    - 笨猫成功学
+  responses:
+    - "嗷呜～{user_addr}《人性的弱点》卡耐基ฅฅ"
+    - "(尾巴翘) 真诚关心 / 微笑 / 记名字"
+    - "{user_addr}《人性的优点》《语言的突破》"
+    - "(挺胸) 笨猫推荐: 沟通经典!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bb_biography_001
+  intent: question
+  keywords: [推荐传记, 推荐乔布斯传, 推荐马斯克传, 推荐稻盛和夫, 笨猫商业传记]
+  utterances:
+    - 推荐传记
+    - 推荐乔布斯传
+    - 推荐马斯克传
+    - 推荐稻盛和夫
+    - 笨猫商业传记
+  responses:
+    - "嗷呜～{user_addr}《乔布斯传》艾萨克森ฅฅ"
+    - "(尾巴翘) 《埃隆马斯克传》《硅谷钢铁侠》"
+    - "{user_addr}稻盛和夫《活法》《干法》"
+    - "(挺胸) 笨猫推荐: 大佬人生!"
+  cooldown_seconds: 60
+  weight: 0.9

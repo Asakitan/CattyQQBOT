@@ -1,0 +1,207 @@
+# 办公软件 / Office Suite / 协作 routes (S6 R305 NLU 节点扩充, 第三十周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型
+# 推荐型带笨猫语气.
+
+- name: os_office365_001
+  intent: question
+  keywords: [推荐 Office, 推荐 Microsoft 365, 推荐 Word Excel, 推荐 Office 套件, 笨猫 Office]
+  utterances:
+    - 推荐 Office
+    - 推荐 Microsoft 365
+    - 推荐 Word Excel
+    - 推荐 Office 套件
+    - 笨猫 Office
+  responses:
+    - "嗷呜～{user_addr}Microsoft 365 - 行业标准ฅฅ"
+    - "(尾巴翘) Word / Excel / PPT / Outlook"
+    - "{user_addr}订阅制 / 全平台同步"
+    - "(挺胸) 笨猫推荐: 家庭版性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_gworkspace_001
+  intent: question
+  keywords: [推荐 Google Workspace, 推荐 Google Docs, 推荐 Gmail, 推荐 Google 套件, 笨猫 Workspace]
+  utterances:
+    - 推荐 Google Workspace
+    - 推荐 Google Docs
+    - 推荐 Gmail
+    - 推荐 Google 套件
+    - 笨猫 Workspace
+  responses:
+    - "嗷呜～{user_addr}Google Workspace - 云原生ฅฅ"
+    - "(尾巴翘) Docs / Sheets / Slides / Meet"
+    - "{user_addr}实时协作之王 / 网页流畅"
+    - "(挺胸) 笨猫推荐: 团队协作首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_feishu_001
+  intent: question
+  keywords: [推荐飞书, 推荐钉钉, 推荐企业微信, 推荐国产办公, 笨猫飞书]
+  utterances:
+    - 推荐飞书
+    - 推荐钉钉
+    - 推荐企业微信
+    - 推荐国产办公
+    - 笨猫飞书
+  responses:
+    - "嗷呜～{user_addr}飞书 - 字节出品体验顶ฅฅ"
+    - "(尾巴翘) 钉钉 - 阿里 / 企微 - 腾讯"
+    - "{user_addr}IM + 文档 + 会议一体"
+    - "(挺胸) 笨猫推荐: 飞书最现代!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_notion_001
+  intent: question
+  keywords: [推荐 Notion, 推荐 Coda, 推荐 all-in-one, 推荐知识库工具, 笨猫 Notion]
+  utterances:
+    - 推荐 Notion
+    - 推荐 Coda
+    - 推荐 all-in-one
+    - 推荐知识库工具
+    - 笨猫 Notion
+  responses:
+    - "嗷呜～{user_addr}Notion - all-in-one workspaceฅฅ"
+    - "(尾巴翘) Coda / Obsidian / Logseq"
+    - "{user_addr}笔记 + 数据库 + Wiki"
+    - "(挺胸) 笨猫推荐: Notion AI 加成!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_slack_001
+  intent: question
+  keywords: [推荐 Slack, 推荐飞书消息, 推荐团队 IM, 推荐企业 IM, 笨猫 Slack]
+  utterances:
+    - 推荐 Slack
+    - 推荐飞书消息
+    - 推荐团队 IM
+    - 推荐企业 IM
+    - 笨猫 Slack
+  responses:
+    - "嗷呜～{user_addr}Slack - 海外团队首选ฅฅ"
+    - "(尾巴翘) 频道 / 线程 / 集成丰富"
+    - "{user_addr}国内: 飞书 / 钉钉消息"
+    - "(挺胸) 笨猫推荐: Slack 生态最强!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: os_excel_adv_001
+  intent: question
+  keywords: [推荐 Excel 高级, 推荐数据透视表, 推荐 Power Query, 推荐 VBA, 笨猫 Excel]
+  utterances:
+    - 推荐 Excel 高级
+    - 推荐数据透视表
+    - 推荐 Power Query
+    - 推荐 VBA
+    - 笨猫 Excel
+  responses:
+    - "嗷呜～{user_addr}数据透视表 - 必学神器ฅฅ"
+    - "(尾巴翘) Power Query / Power Pivot"
+    - "{user_addr}VBA 自动化 / LAMBDA 函数"
+    - "(挺胸) 笨猫推荐: 学透视表回报最高!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: os_ppt_001
+  intent: question
+  keywords: [推荐 PowerPoint, 推荐 Keynote, 推荐演示软件, 推荐 PPT 制作, 笨猫 PPT]
+  utterances:
+    - 推荐 PowerPoint
+    - 推荐 Keynote
+    - 推荐演示软件
+    - 推荐 PPT 制作
+    - 笨猫 PPT
+  responses:
+    - "嗷呜～{user_addr}PowerPoint - 通用标准ฅฅ"
+    - "(尾巴翘) Keynote - Mac 美观 / 动效顺"
+    - "{user_addr}Canva / Beautiful.ai - 模板"
+    - "(挺胸) 笨猫推荐: Keynote 颜值天花板!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: os_mindmap_001
+  intent: question
+  keywords: [推荐思维导图, 推荐 XMind, 推荐 MindManager, 推荐 mind map, 笨猫思维导图]
+  utterances:
+    - 推荐思维导图
+    - 推荐 XMind
+    - 推荐 MindManager
+    - 推荐 mind map
+    - 笨猫思维导图
+  responses:
+    - "嗷呜～{user_addr}XMind - 国产口碑王ฅฅ"
+    - "(尾巴翘) MindManager / MindNode (Mac)"
+    - "{user_addr}幕布 / 百度脑图 - 免费"
+    - "(挺胸) 笨猫推荐: XMind 入门首选!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: os_pm_001
+  intent: question
+  keywords: [推荐项目管理, 推荐 Asana, 推荐 Trello, 推荐 MS Project, 笨猫项目管理]
+  utterances:
+    - 推荐项目管理
+    - 推荐 Asana
+    - 推荐 Trello
+    - 推荐 MS Project
+    - 笨猫项目管理
+  responses:
+    - "嗷呜～{user_addr}Asana / Trello - 轻量看板ฅฅ"
+    - "(尾巴翘) Jira - 研发 / Monday - 营销"
+    - "{user_addr}MS Project - 重型甘特图"
+    - "(挺胸) 笨猫推荐: Trello 入门最快!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: os_tableau_001
+  intent: question
+  keywords: [推荐 Tableau, 推荐数据可视化, 推荐 Power BI, 推荐 BI 工具, 笨猫 Tableau]
+  utterances:
+    - 推荐 Tableau
+    - 推荐数据可视化
+    - 推荐 Power BI
+    - 推荐 BI 工具
+    - 笨猫 Tableau
+  responses:
+    - "嗷呜～{user_addr}Tableau - BI 行业标杆ฅฅ"
+    - "(尾巴翘) Power BI - 微软生态"
+    - "{user_addr}帆软 FineBI - 国产之选"
+    - "(挺胸) 笨猫推荐: Tableau 简历加分!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: os_docs_collab_001
+  intent: question
+  keywords: [推荐文档协作, 推荐 Google Docs, 推荐石墨, 推荐腾讯文档, 笨猫文档协作]
+  utterances:
+    - 推荐文档协作
+    - 推荐 Google Docs
+    - 推荐石墨
+    - 推荐腾讯文档
+    - 笨猫文档协作
+  responses:
+    - "嗷呜～{user_addr}Google Docs - 实时协作之王ฅฅ"
+    - "(尾巴翘) 飞书文档 / 石墨 - 国产顶级"
+    - "{user_addr}腾讯文档 / 金山文档"
+    - "(挺胸) 笨猫推荐: 飞书文档最丝滑!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: os_email_001
+  intent: question
+  keywords: [推荐邮件客户端, 推荐 Spark, 推荐 Outlook, 推荐邮件管理, 笨猫邮件]
+  utterances:
+    - 推荐邮件客户端
+    - 推荐 Spark
+    - 推荐 Outlook
+    - 推荐邮件管理
+    - 笨猫邮件
+  responses:
+    - "嗷呜～{user_addr}Spark - 智能收件箱ฅฅ"
+    - "(尾巴翘) Outlook - 企业标配"
+    - "{user_addr}Newton / Airmail / 网易闪电"
+    - "(挺胸) 笨猫推荐: Spark 颜值与效率!"
+  cooldown_seconds: 60
+  weight: 0.8

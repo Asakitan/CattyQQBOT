@@ -1,0 +1,207 @@
+# 职业规划 / 转行 / 跳槽时机 routes (S6 R306 NLU 节点扩充, 第三十周期 5/10)
+# 主人 2026-05-29: intent=question 推荐型
+# 推荐型带笨猫语气.
+
+- name: cp_assessment_001
+  intent: question
+  keywords: [推荐职业测评, 推荐 MBTI, 推荐霍兰德, 推荐性格测试, 笨猫职业测评]
+  utterances:
+    - 推荐职业测评
+    - 推荐 MBTI
+    - 推荐霍兰德
+    - 推荐性格测试
+    - 笨猫职业测评
+  responses:
+    - "嗷呜～{user_addr}MBTI 16型 - 入门款ฅฅ"
+    - "(尾巴翘) 霍兰德 RIASEC - 职业兴趣"
+    - "{user_addr}盖洛普优势 / DISC"
+    - "(挺胸) 笨猫推荐: 霍兰德更职业向!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_planning_book_001
+  intent: question
+  keywords: [推荐职业规划书, 推荐人生设计课, 推荐高效能人士, 推荐做自己的 CEO, 笨猫职业规划书]
+  utterances:
+    - 推荐职业规划书
+    - 推荐人生设计课
+    - 推荐高效能人士
+    - 推荐做自己的 CEO
+    - 笨猫职业规划书
+  responses:
+    - "嗷呜～{user_addr}《人生设计课》斯坦福ฅฅ"
+    - "(尾巴翘) 《高效能人士的七个习惯》"
+    - "{user_addr}《远见》三阶段 / 《优秀的绵羊》"
+    - "(挺胸) 笨猫推荐: 人生设计课实操!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_long_term_001
+  intent: question
+  keywords: [推荐 5 年规划, 推荐 10 年规划, 推荐长期规划, 推荐人生目标, 笨猫长期规划]
+  utterances:
+    - 推荐 5 年规划
+    - 推荐 10 年规划
+    - 推荐长期规划
+    - 推荐人生目标
+    - 笨猫长期规划
+  responses:
+    - "嗷呜～{user_addr}OKR / SMART 目标ฅฅ"
+    - "(尾巴翘) 反推法: 终点→中点→起点"
+    - "{user_addr}年度复盘 + 季度调整"
+    - "(挺胸) 笨猫推荐: 灵活胜过完美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_career_change_001
+  intent: question
+  keywords: [推荐转行思考, 推荐转行框架, 推荐转行决策, 推荐转行准备, 笨猫转行]
+  utterances:
+    - 推荐转行思考
+    - 推荐转行框架
+    - 推荐转行决策
+    - 推荐转行准备
+    - 笨猫转行
+  responses:
+    - "嗷呜～{user_addr}3 问: 想做 / 能做 / 市场要ฅฅ"
+    - "(尾巴翘) 业余先试 / 半年储备金"
+    - "{user_addr}迁移技能 + 新领域学习"
+    - "(挺胸) 笨猫推荐: 别裸奔转行!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_job_change_timing_001
+  intent: question
+  keywords: [推荐跳槽时机, 推荐工作 2 年, 推荐工作 3 年, 推荐跳槽信号, 笨猫跳槽时机]
+  utterances:
+    - 推荐跳槽时机
+    - 推荐工作 2 年
+    - 推荐工作 3 年
+    - 推荐跳槽信号
+    - 笨猫跳槽时机
+  responses:
+    - "嗷呜～{user_addr}2-3 年是黄金窗口ฅฅ"
+    - "(尾巴翘) 信号: 无成长 / 薪资倒挂 / 价值观冲突"
+    - "{user_addr}年终奖后 / 金三银四 / 金九银十"
+    - "(挺胸) 笨猫推荐: 别冲动 / 想清楚再走!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_job_app_001
+  intent: question
+  keywords: [推荐求职 app, 推荐 BOSS 直聘, 推荐拉勾, 推荐脉脉, 笨猫求职 app]
+  utterances:
+    - 推荐求职 app
+    - 推荐 BOSS 直聘
+    - 推荐拉勾
+    - 推荐脉脉
+    - 笨猫求职 app
+  responses:
+    - "嗷呜～{user_addr}BOSS 直聘 - 互联网首选ฅฅ"
+    - "(尾巴翘) 拉勾 / 猎聘 / 智联"
+    - "{user_addr}脉脉 - 社交 + 内推"
+    - "(挺胸) 笨猫推荐: BOSS + 脉脉双开!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cp_headhunter_001
+  intent: question
+  keywords: [推荐猎头, 推荐猎头合作, 推荐高端职位, 推荐猎头沟通, 笨猫猎头]
+  utterances:
+    - 推荐猎头
+    - 推荐猎头合作
+    - 推荐高端职位
+    - 推荐猎头沟通
+    - 笨猫猎头
+  responses:
+    - "嗷呜～{user_addr}年薪 30W+ 找猎头ฅฅ"
+    - "(尾巴翘) 科锐 / 万宝 / 米高蒲志"
+    - "{user_addr}保持简历更新 / 长期沟通"
+    - "(挺胸) 笨猫推荐: 别只问钱 / 看平台!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cp_company_research_001
+  intent: question
+  keywords: [推荐企业研究, 推荐看公司, 推荐看脉脉, 推荐看 GlassDoor, 笨猫看公司]
+  utterances:
+    - 推荐企业研究
+    - 推荐看公司
+    - 推荐看脉脉
+    - 推荐看 GlassDoor
+    - 笨猫看公司
+  responses:
+    - "嗷呜～{user_addr}看准网 / 脉脉 - 内部评价ฅฅ"
+    - "(尾巴翘) 财报 / 招股书 / 公告"
+    - "{user_addr}LinkedIn 找在职员工聊"
+    - "(挺胸) 笨猫推荐: 多渠道交叉验证!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cp_salary_nego_001
+  intent: question
+  keywords: [推荐薪资谈判, 推荐谈薪技巧, 推荐 offer 谈判, 推荐涨薪谈判, 笨猫薪资谈判]
+  utterances:
+    - 推荐薪资谈判
+    - 推荐谈薪技巧
+    - 推荐 offer 谈判
+    - 推荐涨薪谈判
+    - 笨猫薪资谈判
+  responses:
+    - "嗷呜～{user_addr}不要先报数字 / 让对方先开ฅฅ"
+    - "(尾巴翘) 期望区间 + 锚定上限"
+    - "{user_addr}除了 base 还有: 股票 / 奖金 / 假"
+    - "(挺胸) 笨猫推荐: 沉默是金 / 别急着答!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_offer_compare_001
+  intent: question
+  keywords: [推荐 offer 比较, 推荐多 offer 选择, 推荐 offer 决策, 推荐选公司, 笨猫 offer 比较]
+  utterances:
+    - 推荐 offer 比较
+    - 推荐多 offer 选择
+    - 推荐 offer 决策
+    - 推荐选公司
+    - 笨猫 offer 比较
+  responses:
+    - "嗷呜～{user_addr}维度: 钱 / 平台 / 老板 / 成长ฅฅ"
+    - "(尾巴翘) 5 年后回头看 - 哪个更值"
+    - "{user_addr}加权打分 / 别只看薪资"
+    - "(挺胸) 笨猫推荐: 老板 > 平台 > 钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_consultant_001
+  intent: question
+  keywords: [推荐职业咨询师, 推荐生涯咨询, 推荐 BCC, 推荐古典老师, 笨猫职业咨询]
+  utterances:
+    - 推荐职业咨询师
+    - 推荐生涯咨询
+    - 推荐 BCC
+    - 推荐古典老师
+    - 笨猫职业咨询
+  responses:
+    - "嗷呜～{user_addr}新精英 / 古典老师ฅฅ"
+    - "(尾巴翘) BCC 生涯教练认证"
+    - "{user_addr}三节课 / 在行 一对一"
+    - "(挺胸) 笨猫推荐: 迷茫时找专业的!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cp_naked_resign_001
+  intent: question
+  keywords: [推荐裸辞, 推荐骑驴找马, 推荐裸辞 vs, 推荐离职策略, 笨猫裸辞]
+  utterances:
+    - 推荐裸辞
+    - 推荐骑驴找马
+    - 推荐裸辞 vs
+    - 推荐离职策略
+    - 笨猫裸辞
+  responses:
+    - "嗷呜～{user_addr}骑驴找马 - 90% 情况首选ฅฅ"
+    - "(尾巴翘) 裸辞前提: 6 个月储备金"
+    - "{user_addr}身心崩溃 / 转大方向 才裸辞"
+    - "(挺胸) 笨猫推荐: 别冲动 / 想好下家!"
+  cooldown_seconds: 60
+  weight: 1.0
