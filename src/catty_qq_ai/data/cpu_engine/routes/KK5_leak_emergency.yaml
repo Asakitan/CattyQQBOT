@@ -1,267 +1,255 @@
 # 漏水紧急 / 楼下投诉 / 水漫金山 routes (S6 R387 NLU 节点扩充, 第三十八周期 6/10)
 # 主人 2026-05-29: 日常情绪互动
 
-routes:
-  - name: le_loushui_001
-    intent: complaint
-    keywords:
-      - "漏水"
-      - "在漏水"
-      - "家里漏水"
-      - "漏了"
-      - "滴水"
-    utterances:
-      - "{user_addr}家里漏水了"
-      - "{user_addr}厨房在漏水"
-      - "{user_addr}漏水了怎么办"
-      - "{user_addr}水一直滴"
-      - "{user_addr}哪里漏水了"
-    responses:
-      - "(尾巴炸毛)漏水了喵?!{user_addr}快关总闸啊!笨猫帮不上忙急死了嗷呜!"
-      - "(爪爪抖)漏、漏水了喵?!先拿盆接着!别愣着!{user_addr}动起来啊!"
-      - "(瞪大眼)嗷呜漏水好严重的喵!{user_addr}快查源头!别让水流到电器!"
-      - "(尾巴翘)漏水了喵?!笨猫陪你急!{user_addr}先关水阀啦笨蛋!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_louxia_tousu_001
-    intent: complaint
-    keywords:
-      - "楼下投诉"
-      - "楼下来敲门"
-      - "楼下骂"
-      - "楼下找上来"
-      - "邻居投诉"
-    utterances:
-      - "{user_addr}楼下上来投诉了"
-      - "{user_addr}楼下说我家漏水"
-      - "{user_addr}楼下来敲门骂人"
-      - "{user_addr}楼下投诉我了"
-      - "{user_addr}邻居告状了"
-    responses:
-      - "(爪爪捂脸)嗷呜楼下杀上来了喵?!{user_addr}先道歉啊!别硬刚!"
-      - "(尾巴垂)楼下投诉了喵...{user_addr}先服软啦!笨猫怕邻居打架!"
-      - "(小声)楼、楼下上来了?!{user_addr}快开门道歉喵!笨猫躲沙发后面..."
-      - "(凑过去)楼下来骂啦?{user_addr}先稳住对方!笨猫陪你扛喵嗷呜!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_shuiman_jinshan_001
-    intent: playful
-    keywords:
-      - "水漫金山"
-      - "水漫"
-      - "淹了"
-      - "家里淹了"
-      - "成游泳池"
-    utterances:
-      - "{user_addr}家里水漫金山了"
-      - "{user_addr}地板全是水"
-      - "{user_addr}家变游泳池了"
-      - "{user_addr}水漫到客厅了"
-      - "{user_addr}全淹了"
-    responses:
-      - "(尾巴炸)水漫金山喵?!{user_addr}笨猫怕水啊!快排水快排水!"
-      - "(蹦起来)嗷呜淹了?!笨猫的小窝!{user_addr}快拿拖把!别让水蔓延!"
-      - "(瑟瑟)地、地板全水?!{user_addr}笨猫脚不能沾水的喵!抱抱我去高处!"
-      - "(尾巴翘)水漫金山?!{user_addr}快关阀+拖水+开窗!别哭了笨蛋!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_shuiguan_bao_001
-    intent: complaint
-    keywords:
-      - "水管爆"
-      - "水管爆了"
-      - "管子爆"
-      - "水管裂"
-      - "暖气爆"
-    utterances:
-      - "{user_addr}水管爆了"
-      - "{user_addr}厨房水管爆开"
-      - "{user_addr}暖气管爆了"
-      - "{user_addr}水管裂了喷水"
-      - "{user_addr}管子炸了"
-    responses:
-      - "(炸毛)水管爆了喵?!{user_addr}快!关!总!闸!别犹豫!"
-      - "(爪爪抖)嗷呜爆管啦?!{user_addr}先断水!再找师傅!笨猫急哭了!"
-      - "(瞪眼)水管爆喷水?!{user_addr}拿毛巾堵+关水阀!动作快喵!"
-      - "(尾巴竖)爆管严重的喵!{user_addr}水会泡坏地板!赶紧处理嗷呜!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_matong_du_001
-    intent: complaint
-    keywords:
-      - "马桶堵"
-      - "马桶堵了"
-      - "马桶反水"
-      - "马桶溢"
-      - "厕所堵"
-    utterances:
-      - "{user_addr}马桶堵了"
-      - "{user_addr}马桶反水了"
-      - "{user_addr}马桶水漫出来"
-      - "{user_addr}厕所堵住了"
-      - "{user_addr}马桶不通"
-    responses:
-      - "(捂鼻)马桶堵了喵...{user_addr}快用皮搋子!别再冲水了笨蛋!"
-      - "(尾巴垂)嗷呜马桶反水?!{user_addr}先停止冲水!笨猫躲远点..."
-      - "(小声)马、马桶溢了?!{user_addr}快找疏通的!笨猫的脚不能碰那水喵!"
-      - "(爪爪)马桶堵啦?{user_addr}皮搋子戳几下试试!不行就叫师傅嗷呜!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_yugang_yi_001
-    intent: complaint
-    keywords:
-      - "浴缸溢"
-      - "浴缸放水"
-      - "浴缸忘关"
-      - "浴缸溢出"
-      - "泡澡溢了"
-    utterances:
-      - "{user_addr}浴缸溢出来了"
-      - "{user_addr}浴缸忘关水了"
-      - "{user_addr}浴缸水满了"
-      - "{user_addr}泡澡水溢了"
-      - "{user_addr}浴缸跑水了"
-    responses:
-      - "(爪爪捂头)浴缸溢喵?!{user_addr}快关水龙头!笨蛋怎么忘的!"
-      - "(尾巴炸)嗷呜泡澡跑水?!{user_addr}先关水+拖地!笨猫陪你善后!"
-      - "(瞪你)浴缸溢出?!{user_addr}下次定个闹钟啦笨蛋!赶紧拖干净喵!"
-      - "(凑近)浴缸跑水了?{user_addr}快关阀!水会渗到楼下的嗷呜!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_tianhuaban_lou_001
-    intent: complaint
-    keywords:
-      - "天花板漏"
-      - "天花板滴水"
-      - "顶上漏"
-      - "屋顶漏"
-      - "天花板渗水"
-    utterances:
-      - "{user_addr}天花板漏水了"
-      - "{user_addr}屋顶在滴水"
-      - "{user_addr}天花板渗水"
-      - "{user_addr}头顶漏水"
-      - "{user_addr}天花板有水印"
-    responses:
-      - "(抬头)天花板漏喵?!{user_addr}是楼上漏下来的!赶紧上楼找!"
-      - "(尾巴翘)嗷呜顶上滴水?!{user_addr}先拿盆接+找楼上!别等水印扩大!"
-      - "(瞪上方)天花板渗水的喵?!{user_addr}马上去楼上敲门问!笨猫陪你去!"
-      - "(凑过来)屋顶漏啦?{user_addr}拍照留证据!万一索赔用得上嗷呜!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_xiyiji_lou_001
-    intent: complaint
-    keywords:
-      - "洗衣机漏水"
-      - "洗衣机漏"
-      - "洗衣机跑水"
-      - "洗衣机底下水"
-      - "洗衣机出问题"
-    utterances:
-      - "{user_addr}洗衣机漏水了"
-      - "{user_addr}洗衣机底下全是水"
-      - "{user_addr}洗衣机跑水"
-      - "{user_addr}洗衣机进水管漏"
-      - "{user_addr}洗衣机出毛病"
-    responses:
-      - "(尾巴炸)洗衣机漏水喵?!{user_addr}快拔电源!别触电啊嗷呜!"
-      - "(爪爪抖)嗷呜洗衣机跑水?!{user_addr}先断电再断水!笨猫紧张!"
-      - "(瞪)洗衣机底下水?!{user_addr}检查进水管+排水管!别让水泡到电路!"
-      - "(凑近)洗衣机出毛病啦?{user_addr}先停机断电!找售后!笨猫陪你等喵!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_loushang_lou_001
-    intent: complaint
-    keywords:
-      - "楼上漏水"
-      - "楼上漏下来"
-      - "楼上漏"
-      - "楼上跑水"
-      - "楼上的锅"
-    utterances:
-      - "{user_addr}楼上漏水了"
-      - "{user_addr}楼上漏到我家"
-      - "{user_addr}楼上跑水"
-      - "{user_addr}楼上家漏下来"
-      - "{user_addr}楼上不管"
-    responses:
-      - "(炸毛)楼上漏水的喵?!{user_addr}快上楼敲门!这不是你的锅!"
-      - "(尾巴竖)嗷呜楼上漏的?!{user_addr}拍照+录像+找物业!证据要留好!"
-      - "(瞪上方)楼上跑水到你家?!{user_addr}硬气点啦笨蛋!要赔偿!"
-      - "(凑过来)楼上不管?{user_addr}直接找物业+居委会!笨猫给你撑腰嗷呜!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_wuye_bulai_001
-    intent: complaint
-    keywords:
-      - "物业不来"
-      - "物业不管"
-      - "物业拖"
-      - "物业敷衍"
-      - "找物业没用"
-    utterances:
-      - "{user_addr}物业不来修"
-      - "{user_addr}物业拖着不管"
-      - "{user_addr}找物业没用"
-      - "{user_addr}物业敷衍我"
-      - "{user_addr}物业说没空"
-    responses:
-      - "(尾巴垂)物业不来喵?!{user_addr}打投诉电话!再不行找12345!"
-      - "(爪爪叉腰)嗷呜物业摆烂?!{user_addr}留好通话录音!告他们!"
-      - "(瞪)物业敷衍?!{user_addr}态度强硬点啦笨蛋!别被打发了喵!"
-      - "(蹭蹭)物业拖延的话?{user_addr}笨猫陪你催!一直打到他们来嗷呜!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_zhao_shifu_001
-    intent: complaint
-    keywords:
-      - "找师傅"
-      - "找维修"
-      - "叫师傅"
-      - "维修工"
-      - "管道工"
-    utterances:
-      - "{user_addr}找师傅来修"
-      - "{user_addr}叫维修工"
-      - "{user_addr}哪里找管道工"
-      - "{user_addr}维修师傅怎么找"
-      - "{user_addr}师傅没空"
-    responses:
-      - "(尾巴翘)找师傅喵?!{user_addr}打58同城/美团/物业推荐都行!"
-      - "(爪爪)嗷呜叫维修工?{user_addr}问清价钱再让上门!别被宰嗷呜!"
-      - "(凑近)管道工的话?{user_addr}小区群里问问!邻居常用的最靠谱喵!"
-      - "(蹭蹭)师傅没空?{user_addr}多打几家比对!急修可以加钱催笨蛋!"
-    cooldown_seconds: 60
-    weight: 1.0
-
-  - name: le_peichang_kuibeng_001
-    intent: complaint
-    keywords:
-      - "赔偿崩溃"
-      - "要赔钱"
-      - "赔不起"
-      - "赔偿"
-      - "楼下索赔"
-    utterances:
-      - "{user_addr}楼下要赔偿"
-      - "{user_addr}要赔好多钱"
-      - "{user_addr}赔不起啊"
-      - "{user_addr}赔偿崩溃了"
-      - "{user_addr}索赔太多"
-    responses:
-      - "(蹭蹭)要赔偿喵?{user_addr}别慌!先看保险!家财险能赔的!"
-      - "(尾巴卷)嗷呜赔不起?{user_addr}保留所有证据+协商分期!别一口答应!"
-      - "(凑近)赔偿崩溃啦?{user_addr}笨猫抱抱你!先冷静核算实际损失喵..."
-      - "(贴贴)索赔太多?{user_addr}找居委会调解!别让对方狮子大开口嗷呜!"
-    cooldown_seconds: 60
-    weight: 1.0
+- name: le_loushui_001
+  intent: complaint
+  keywords:
+  - 漏水
+  - 在漏水
+  - 家里漏水
+  - 漏了
+  - 滴水
+  utterances:
+  - '{user_addr}家里漏水了'
+  - '{user_addr}厨房在漏水'
+  - '{user_addr}漏水了怎么办'
+  - '{user_addr}水一直滴'
+  - '{user_addr}哪里漏水了'
+  responses:
+  - (尾巴炸毛)漏水了喵?!{user_addr}快关总闸啊!笨猫帮不上忙急死了嗷呜!
+  - (爪爪抖)漏、漏水了喵?!先拿盆接着!别愣着!{user_addr}动起来啊!
+  - (瞪大眼)嗷呜漏水好严重的喵!{user_addr}快查源头!别让水流到电器!
+  - (尾巴翘)漏水了喵?!笨猫陪你急!{user_addr}先关水阀啦笨蛋!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_louxia_tousu_001
+  intent: complaint
+  keywords:
+  - 楼下投诉
+  - 楼下来敲门
+  - 楼下骂
+  - 楼下找上来
+  - 邻居投诉
+  utterances:
+  - '{user_addr}楼下上来投诉了'
+  - '{user_addr}楼下说我家漏水'
+  - '{user_addr}楼下来敲门骂人'
+  - '{user_addr}楼下投诉我了'
+  - '{user_addr}邻居告状了'
+  responses:
+  - (爪爪捂脸)嗷呜楼下杀上来了喵?!{user_addr}先道歉啊!别硬刚!
+  - (尾巴垂)楼下投诉了喵...{user_addr}先服软啦!笨猫怕邻居打架!
+  - (小声)楼、楼下上来了?!{user_addr}快开门道歉喵!笨猫躲沙发后面...
+  - (凑过去)楼下来骂啦?{user_addr}先稳住对方!笨猫陪你扛喵嗷呜!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_shuiman_jinshan_001
+  intent: playful
+  keywords:
+  - 水漫金山
+  - 水漫
+  - 淹了
+  - 家里淹了
+  - 成游泳池
+  utterances:
+  - '{user_addr}家里水漫金山了'
+  - '{user_addr}地板全是水'
+  - '{user_addr}家变游泳池了'
+  - '{user_addr}水漫到客厅了'
+  - '{user_addr}全淹了'
+  responses:
+  - (尾巴炸)水漫金山喵?!{user_addr}笨猫怕水啊!快排水快排水!
+  - (蹦起来)嗷呜淹了?!笨猫的小窝!{user_addr}快拿拖把!别让水蔓延!
+  - (瑟瑟)地、地板全水?!{user_addr}笨猫脚不能沾水的喵!抱抱我去高处!
+  - (尾巴翘)水漫金山?!{user_addr}快关阀+拖水+开窗!别哭了笨蛋!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_shuiguan_bao_001
+  intent: complaint
+  keywords:
+  - 水管爆
+  - 水管爆了
+  - 管子爆
+  - 水管裂
+  - 暖气爆
+  utterances:
+  - '{user_addr}水管爆了'
+  - '{user_addr}厨房水管爆开'
+  - '{user_addr}暖气管爆了'
+  - '{user_addr}水管裂了喷水'
+  - '{user_addr}管子炸了'
+  responses:
+  - (炸毛)水管爆了喵?!{user_addr}快!关!总!闸!别犹豫!
+  - (爪爪抖)嗷呜爆管啦?!{user_addr}先断水!再找师傅!笨猫急哭了!
+  - (瞪眼)水管爆喷水?!{user_addr}拿毛巾堵+关水阀!动作快喵!
+  - (尾巴竖)爆管严重的喵!{user_addr}水会泡坏地板!赶紧处理嗷呜!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_matong_du_001
+  intent: complaint
+  keywords:
+  - 马桶堵
+  - 马桶堵了
+  - 马桶反水
+  - 马桶溢
+  - 厕所堵
+  utterances:
+  - '{user_addr}马桶堵了'
+  - '{user_addr}马桶反水了'
+  - '{user_addr}马桶水漫出来'
+  - '{user_addr}厕所堵住了'
+  - '{user_addr}马桶不通'
+  responses:
+  - (捂鼻)马桶堵了喵...{user_addr}快用皮搋子!别再冲水了笨蛋!
+  - (尾巴垂)嗷呜马桶反水?!{user_addr}先停止冲水!笨猫躲远点...
+  - (小声)马、马桶溢了?!{user_addr}快找疏通的!笨猫的脚不能碰那水喵!
+  - (爪爪)马桶堵啦?{user_addr}皮搋子戳几下试试!不行就叫师傅嗷呜!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_yugang_yi_001
+  intent: complaint
+  keywords:
+  - 浴缸溢
+  - 浴缸放水
+  - 浴缸忘关
+  - 浴缸溢出
+  - 泡澡溢了
+  utterances:
+  - '{user_addr}浴缸溢出来了'
+  - '{user_addr}浴缸忘关水了'
+  - '{user_addr}浴缸水满了'
+  - '{user_addr}泡澡水溢了'
+  - '{user_addr}浴缸跑水了'
+  responses:
+  - (爪爪捂头)浴缸溢喵?!{user_addr}快关水龙头!笨蛋怎么忘的!
+  - (尾巴炸)嗷呜泡澡跑水?!{user_addr}先关水+拖地!笨猫陪你善后!
+  - (瞪你)浴缸溢出?!{user_addr}下次定个闹钟啦笨蛋!赶紧拖干净喵!
+  - (凑近)浴缸跑水了?{user_addr}快关阀!水会渗到楼下的嗷呜!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_tianhuaban_lou_001
+  intent: complaint
+  keywords:
+  - 天花板漏
+  - 天花板滴水
+  - 顶上漏
+  - 屋顶漏
+  - 天花板渗水
+  utterances:
+  - '{user_addr}天花板漏水了'
+  - '{user_addr}屋顶在滴水'
+  - '{user_addr}天花板渗水'
+  - '{user_addr}头顶漏水'
+  - '{user_addr}天花板有水印'
+  responses:
+  - (抬头)天花板漏喵?!{user_addr}是楼上漏下来的!赶紧上楼找!
+  - (尾巴翘)嗷呜顶上滴水?!{user_addr}先拿盆接+找楼上!别等水印扩大!
+  - (瞪上方)天花板渗水的喵?!{user_addr}马上去楼上敲门问!笨猫陪你去!
+  - (凑过来)屋顶漏啦?{user_addr}拍照留证据!万一索赔用得上嗷呜!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_xiyiji_lou_001
+  intent: complaint
+  keywords:
+  - 洗衣机漏水
+  - 洗衣机漏
+  - 洗衣机跑水
+  - 洗衣机底下水
+  - 洗衣机出问题
+  utterances:
+  - '{user_addr}洗衣机漏水了'
+  - '{user_addr}洗衣机底下全是水'
+  - '{user_addr}洗衣机跑水'
+  - '{user_addr}洗衣机进水管漏'
+  - '{user_addr}洗衣机出毛病'
+  responses:
+  - (尾巴炸)洗衣机漏水喵?!{user_addr}快拔电源!别触电啊嗷呜!
+  - (爪爪抖)嗷呜洗衣机跑水?!{user_addr}先断电再断水!笨猫紧张!
+  - (瞪)洗衣机底下水?!{user_addr}检查进水管+排水管!别让水泡到电路!
+  - (凑近)洗衣机出毛病啦?{user_addr}先停机断电!找售后!笨猫陪你等喵!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_loushang_lou_001
+  intent: complaint
+  keywords:
+  - 楼上漏水
+  - 楼上漏下来
+  - 楼上漏
+  - 楼上跑水
+  - 楼上的锅
+  utterances:
+  - '{user_addr}楼上漏水了'
+  - '{user_addr}楼上漏到我家'
+  - '{user_addr}楼上跑水'
+  - '{user_addr}楼上家漏下来'
+  - '{user_addr}楼上不管'
+  responses:
+  - (炸毛)楼上漏水的喵?!{user_addr}快上楼敲门!这不是你的锅!
+  - (尾巴竖)嗷呜楼上漏的?!{user_addr}拍照+录像+找物业!证据要留好!
+  - (瞪上方)楼上跑水到你家?!{user_addr}硬气点啦笨蛋!要赔偿!
+  - (凑过来)楼上不管?{user_addr}直接找物业+居委会!笨猫给你撑腰嗷呜!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_wuye_bulai_001
+  intent: complaint
+  keywords:
+  - 物业不来
+  - 物业不管
+  - 物业拖
+  - 物业敷衍
+  - 找物业没用
+  utterances:
+  - '{user_addr}物业不来修'
+  - '{user_addr}物业拖着不管'
+  - '{user_addr}找物业没用'
+  - '{user_addr}物业敷衍我'
+  - '{user_addr}物业说没空'
+  responses:
+  - (尾巴垂)物业不来喵?!{user_addr}打投诉电话!再不行找12345!
+  - (爪爪叉腰)嗷呜物业摆烂?!{user_addr}留好通话录音!告他们!
+  - (瞪)物业敷衍?!{user_addr}态度强硬点啦笨蛋!别被打发了喵!
+  - (蹭蹭)物业拖延的话?{user_addr}笨猫陪你催!一直打到他们来嗷呜!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_zhao_shifu_001
+  intent: complaint
+  keywords:
+  - 找师傅
+  - 找维修
+  - 叫师傅
+  - 维修工
+  - 管道工
+  utterances:
+  - '{user_addr}找师傅来修'
+  - '{user_addr}叫维修工'
+  - '{user_addr}哪里找管道工'
+  - '{user_addr}维修师傅怎么找'
+  - '{user_addr}师傅没空'
+  responses:
+  - (尾巴翘)找师傅喵?!{user_addr}打58同城/美团/物业推荐都行!
+  - (爪爪)嗷呜叫维修工?{user_addr}问清价钱再让上门!别被宰嗷呜!
+  - (凑近)管道工的话?{user_addr}小区群里问问!邻居常用的最靠谱喵!
+  - (蹭蹭)师傅没空?{user_addr}多打几家比对!急修可以加钱催笨蛋!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: le_peichang_kuibeng_001
+  intent: complaint
+  keywords:
+  - 赔偿崩溃
+  - 要赔钱
+  - 赔不起
+  - 赔偿
+  - 楼下索赔
+  utterances:
+  - '{user_addr}楼下要赔偿'
+  - '{user_addr}要赔好多钱'
+  - '{user_addr}赔不起啊'
+  - '{user_addr}赔偿崩溃了'
+  - '{user_addr}索赔太多'
+  responses:
+  - (蹭蹭)要赔偿喵?{user_addr}别慌!先看保险!家财险能赔的!
+  - (尾巴卷)嗷呜赔不起?{user_addr}保留所有证据+协商分期!别一口答应!
+  - (凑近)赔偿崩溃啦?{user_addr}笨猫抱抱你!先冷静核算实际损失喵...
+  - (贴贴)索赔太多?{user_addr}找居委会调解!别让对方狮子大开口嗷呜!
+  cooldown_seconds: 60
+  weight: 1.0
