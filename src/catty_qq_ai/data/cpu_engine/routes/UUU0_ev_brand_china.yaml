@@ -1,0 +1,206 @@
+# 国产新能源 routes (S6 R742 NLU 节点扩充, 第七十四周期 1/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: ec_byd_han_001
+  intent: question
+  keywords: [推荐比亚迪汉, 推荐汉EV, 推荐汉DMi, 推荐比亚迪轿车, 笨猫比亚迪汉]
+  utterances:
+    - 推荐比亚迪汉
+    - 推荐汉EV
+    - 推荐汉DMi
+    - 推荐比亚迪轿车
+    - 笨猫比亚迪汉
+  responses:
+    - "嗷呜～{user_addr}比亚迪汉 - 国产C级旗舰ฅฅ"
+    - "(尾巴翘) 刀片电池 / DMi混动 / EV纯电"
+    - "{user_addr}20w起 / 续航 715km / 龙颜设计"
+    - "(挺胸) 猫猫推荐: 汉EV 四驱版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_byd_seal_001
+  intent: question
+  keywords: [推荐比亚迪海豹, 推荐海豹EV, 推荐海豹DMi, 推荐海洋系列, 笨猫海豹]
+  utterances:
+    - 推荐比亚迪海豹
+    - 推荐海豹EV
+    - 推荐海豹DMi
+    - 推荐海洋系列
+    - 笨猫海豹
+  responses:
+    - "嗷呜～{user_addr}比亚迪海豹 - 运动猎装ฅฅ"
+    - "(尾巴翘) CTB电池车身一体 / 后驱后驱猫猫爱"
+    - "{user_addr}18w起 / 百公里3.8s / 海洋美学"
+    - "(挺胸) 笨猫推荐: 海豹四驱性能版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_li_l9_001
+  intent: question
+  keywords: [推荐理想L9, 推荐理想旗舰, 推荐六座SUV, 推荐理想增程, 笨猫理想L9]
+  utterances:
+    - 推荐理想L9
+    - 推荐理想旗舰
+    - 推荐六座SUV
+    - 推荐理想增程
+    - 笨猫理想L9
+  responses:
+    - "嗷呜～{user_addr}理想L9 - 奶爸车王ฅฅ"
+    - "(尾巴翘) 六座大空间 / 增程 / 冰箱彩电大沙发"
+    - "{user_addr}45w档 / CLTC 1100km / 全家出游绝配"
+    - "(挺胸) 人家推荐: L9 Max 全配!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_li_mega_001
+  intent: question
+  keywords: [推荐理想MEGA, 推荐MPV电动, 推荐理想MPV, 推荐7座MPV, 笨猫MEGA]
+  utterances:
+    - 推荐理想MEGA
+    - 推荐MPV电动
+    - 推荐理想MPV
+    - 推荐7座MPV
+    - 笨猫MEGA
+  responses:
+    - "嗷呜～{user_addr}理想MEGA - 纯电MPV首旗ฅฅ"
+    - "(尾巴翘) 5C超充 / 12分钟 500km"
+    - "{user_addr}55w档 / 子弹头造型 / 七座商务"
+    - "(挺胸) 笨猫推荐: 商务接待首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ec_nio_et7_001
+  intent: question
+  keywords: [推荐蔚来ET7, 推荐蔚来轿车, 推荐换电轿车, 推荐ET7, 笨猫ET7]
+  utterances:
+    - 推荐蔚来ET7
+    - 推荐蔚来轿车
+    - 推荐换电轿车
+    - 推荐ET7
+    - 笨猫ET7
+  responses:
+    - "嗷呜～{user_addr}蔚来ET7 - 行政旗舰轿车ฅฅ"
+    - "(尾巴翘) 150kWh电池 / 续航 1000km+"
+    - "{user_addr}45w档 / 换电服务 / Nappa真皮"
+    - "(挺胸) 猫猫推荐: 长途党换电香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_nio_es8_001
+  intent: question
+  keywords: [推荐蔚来ES8, 推荐蔚来SUV, 推荐七座蔚来, 推荐ES8, 笨猫ES8]
+  utterances:
+    - 推荐蔚来ES8
+    - 推荐蔚来SUV
+    - 推荐七座蔚来
+    - 推荐ES8
+    - 笨猫ES8
+  responses:
+    - "嗷呜～{user_addr}蔚来ES8 - 大型SUV旗舰ฅฅ"
+    - "(尾巴翘) 六/七座 / 第二排零重力座椅"
+    - "{user_addr}50w档 / NIO House / 服务无双"
+    - "(挺胸) 笨猫推荐: 家用商务两用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_xpeng_p7_001
+  intent: question
+  keywords: [推荐小鹏P7, 推荐P7i, 推荐运动轿跑, 推荐小鹏轿车, 笨猫P7]
+  utterances:
+    - 推荐小鹏P7
+    - 推荐P7i
+    - 推荐运动轿跑
+    - 推荐小鹏轿车
+    - 笨猫P7
+  responses:
+    - "嗷呜～{user_addr}小鹏P7 - 智能轿跑ฅฅ"
+    - "(尾巴翘) XNGP高阶辅助驾驶 / 颜值在线"
+    - "{user_addr}24w起 / 续航 706km / 鹏翼门 P7i"
+    - "(挺胸) 猫猫推荐: 智驾党闭眼入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_xpeng_g9_001
+  intent: question
+  keywords: [推荐小鹏G9, 推荐G9, 推荐中大型SUV, 推荐小鹏SUV, 笨猫G9]
+  utterances:
+    - 推荐小鹏G9
+    - 推荐G9
+    - 推荐中大型SUV
+    - 推荐小鹏SUV
+    - 笨猫G9
+  responses:
+    - "嗷呜～{user_addr}小鹏G9 - 800V高压旗舰SUVฅฅ"
+    - "(尾巴翘) 5分钟 200km 超充"
+    - "{user_addr}26w档 / XNGP / 5座大空间"
+    - "(挺胸) 笨猫推荐: 性价比智驾SUV!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_xiaomi_su7_001
+  intent: question
+  keywords: [推荐小米SU7, 推荐SU7, 推荐小米汽车, 推荐SU7Ultra, 笨猫SU7]
+  utterances:
+    - 推荐小米SU7
+    - 推荐SU7
+    - 推荐小米汽车
+    - 推荐SU7Ultra
+    - 笨猫SU7
+  responses:
+    - "嗷呜～{user_addr}小米SU7 - 米粉狂欢ฅฅ"
+    - "(尾巴翘) 颜值天花板 / 雷总亲自盯"
+    - "{user_addr}22w起 / 续航 800km / Ultra 1548马力"
+    - "(挺胸) 人家推荐: SU7 Max 性价比之王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_zeekr_001_001
+  intent: question
+  keywords: [推荐极氪001, 推荐ZEEKR001, 推荐极氪猎装, 推荐极氪轿车, 笨猫极氪001]
+  utterances:
+    - 推荐极氪001
+    - 推荐ZEEKR001
+    - 推荐极氪猎装
+    - 推荐极氪轿车
+    - 笨猫极氪001
+  responses:
+    - "嗷呜～{user_addr}极氪001 - 猎装轿跑ฅฅ"
+    - "(尾巴翘) 吉利浩瀚架构 / 双电机四驱"
+    - "{user_addr}27w档 / 续航 1032km / FR后驱"
+    - "(挺胸) 笨猫推荐: 颜值动力双在线!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_yangwang_u8_001
+  intent: question
+  keywords: [推荐仰望U8, 推荐U8, 推荐百万国产, 推荐易四方, 笨猫仰望U8]
+  utterances:
+    - 推荐仰望U8
+    - 推荐U8
+    - 推荐百万国产
+    - 推荐易四方
+    - 笨猫仰望U8
+  responses:
+    - "嗷呜～{user_addr}仰望U8 - 国产百万硬派ฅฅ"
+    - "(尾巴翘) 易四方四电机 / 原地掉头 / 应急浮水"
+    - "{user_addr}108w / 比亚迪天花板 / 越野怪兽"
+    - "(挺胸) 猫猫推荐: 富哥越野收藏级!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ec_aito_m7_001
+  intent: question
+  keywords: [推荐问界M7, 推荐问界M7Max, 推荐华为问界, 推荐增程SUV, 笨猫问界M7]
+  utterances:
+    - 推荐问界M7
+    - 推荐问界M7Max
+    - 推荐华为问界
+    - 推荐增程SUV
+    - 笨猫问界M7
+  responses:
+    - "嗷呜～{user_addr}问界M7 - 华为加持热销王ฅฅ"
+    - "(尾巴翘) ADS 2.0 / 鸿蒙座舱 / 增程长续航"
+    - "{user_addr}25w档 / 五/六座可选 / 余总站台"
+    - "(挺胸) 笨猫推荐: 智驾鸿蒙双buff!"
+  cooldown_seconds: 60
+  weight: 1.0

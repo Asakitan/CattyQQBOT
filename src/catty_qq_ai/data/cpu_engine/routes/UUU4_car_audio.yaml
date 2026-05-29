@@ -1,0 +1,206 @@
+# 车载音响 routes (S6 R746 NLU 节点扩充, 第七十四周期 5/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: cu_burmester_001
+  intent: question
+  keywords: [推荐柏林之声, 推荐 Burmester, 推荐奔驰音响, 推荐豪车音响, 笨猫柏林之声]
+  utterances:
+    - 推荐柏林之声
+    - 推荐 Burmester
+    - 推荐奔驰音响
+    - 推荐豪车音响
+    - 笨猫柏林之声
+  responses:
+    - "嗷呜～{user_addr}Burmester 柏林之声 - 德系顶奢ฅฅ"
+    - "(尾巴翘) 奔驰 S/迈巴赫高配标配"
+    - "{user_addr}金属网罩 / 3D 环绕 / 解析力顶"
+    - "(挺胸) 笨猫推荐: 4D 高级版最强!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_bo_001
+  intent: question
+  keywords: [推荐邦欧, 推荐 Bang Olufsen, 推荐 B&O, 推荐奥迪音响, 笨猫邦欧]
+  utterances:
+    - 推荐邦欧
+    - 推荐 Bang Olufsen
+    - 推荐 B&O
+    - 推荐奥迪音响
+    - 笨猫邦欧
+  responses:
+    - "嗷呜～{user_addr}Bang & Olufsen - 丹麦极简美ฅฅ"
+    - "(尾巴翘) 奥迪 / 阿斯顿马丁 / 福特高配"
+    - "{user_addr}伸缩高音 / Beosonic 空间调音"
+    - "(挺胸) 笨猫推荐: B&O Advanced 3D!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_harman_001
+  intent: question
+  keywords: [推荐哈曼卡顿, 推荐 Harman Kardon, 推荐宝马音响, 推荐沃尔沃音响, 笨猫哈曼卡顿]
+  utterances:
+    - 推荐哈曼卡顿
+    - 推荐 Harman Kardon
+    - 推荐宝马音响
+    - 推荐沃尔沃音响
+    - 笨猫哈曼卡顿
+  responses:
+    - "嗷呜～{user_addr}Harman Kardon - 美系老牌ฅฅ"
+    - "(尾巴翘) 宝马 / MINI / 沃尔沃常见"
+    - "{user_addr}Logic 7 环绕 / 中频厚实"
+    - "(挺胸) 笨猫推荐: 性价比之选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_bose_001
+  intent: question
+  keywords: [推荐 BOSE 车载, 推荐 BOSE 音响, 推荐马自达音响, 推荐别克音响, 笨猫 BOSE]
+  utterances:
+    - "推荐 BOSE 车载"
+    - "推荐 BOSE 音响"
+    - 推荐马自达音响
+    - 推荐别克音响
+    - 笨猫 BOSE
+  responses:
+    - "嗷呜～{user_addr}BOSE - 低音猛 + 降噪强ฅฅ"
+    - "(尾巴翘) 马自达 / 别克 / 凯迪拉克"
+    - "{user_addr}Centerpoint 环绕 / AudioPilot"
+    - "(挺胸) 笨猫推荐: 低音爱好者首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_jbl_001
+  intent: question
+  keywords: [推荐 JBL 车载, 推荐 JBL 音响, 推荐丰田音响, 推荐雷克萨斯音响, 笨猫 JBL]
+  utterances:
+    - "推荐 JBL 车载"
+    - "推荐 JBL 音响"
+    - 推荐丰田音响
+    - 推荐雷克萨斯音响
+    - 笨猫 JBL
+  responses:
+    - "嗷呜～{user_addr}JBL - 美系热血派ฅฅ"
+    - "(尾巴翘) 丰田 / 雷克萨斯 / 现代高配"
+    - "{user_addr}Clari-Fi 修复压缩 / 解析清晰"
+    - "(挺胸) 笨猫推荐: GreenEdge 节能版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_alpine_001
+  intent: question
+  keywords: [推荐阿尔派, 推荐 Alpine, 推荐改装阿尔派, 推荐日系改装, 笨猫阿尔派]
+  utterances:
+    - 推荐阿尔派
+    - 推荐 Alpine
+    - 推荐改装阿尔派
+    - 推荐日系改装
+    - 笨猫阿尔派
+  responses:
+    - "嗷呜～{user_addr}Alpine 阿尔派 - 日系改装王ฅฅ"
+    - "(尾巴翘) Type-R / Type-S 系列经典"
+    - "{user_addr}主机 / 功放 / 喇叭全系"
+    - "(挺胸) 笨猫推荐: HALO9 大屏主机!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_amp_001
+  intent: question
+  keywords: [推荐改装功放, 推荐车载功放, 推荐 AB 类功放, 推荐 D 类功放, 笨猫功放]
+  utterances:
+    - 推荐改装功放
+    - 推荐车载功放
+    - 推荐 AB 类功放
+    - 推荐 D 类功放
+    - 笨猫功放
+  responses:
+    - "嗷呜～{user_addr}ARC / Audison / Mosconi 顶级ฅฅ"
+    - "(尾巴翘) AB 类音质好 / D 类省电"
+    - "{user_addr}四路推喇叭 / 单路推低音炮"
+    - "(挺胸) 笨猫推荐: Audison Voce 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_speaker_001
+  intent: question
+  keywords: [推荐升级喇叭, 推荐车载喇叭, 推荐套装喇叭, 推荐同轴喇叭, 笨猫喇叭]
+  utterances:
+    - 推荐升级喇叭
+    - 推荐车载喇叭
+    - 推荐套装喇叭
+    - 推荐同轴喇叭
+    - 笨猫喇叭
+  responses:
+    - "嗷呜～{user_addr}Focal / Morel / Hertz 三巨头ฅฅ"
+    - "(尾巴翘) 套装喇叭 (高+中低分离) 音质好"
+    - "{user_addr}前门套装 + 后门同轴最经济"
+    - "(挺胸) 笨猫推荐: Focal PS 165 系列!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_damping_001
+  intent: question
+  keywords: [推荐隔音工程, 推荐汽车隔音, 推荐止震板, 推荐四门隔音, 笨猫隔音]
+  utterances:
+    - 推荐隔音工程
+    - 推荐汽车隔音
+    - 推荐止震板
+    - 推荐四门隔音
+    - 笨猫隔音
+  responses:
+    - "嗷呜～{user_addr}STP / Dynamat / 大白鲨ฅฅ"
+    - "(尾巴翘) 止震板 + 吸音棉 + 密封条"
+    - "{user_addr}四门 / 翼子板 / 后备箱重点"
+    - "(挺胸) 笨猫推荐: 全车四门套装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_sub_001
+  intent: question
+  keywords: [推荐低音炮, 推荐车载低音炮, 推荐有源低音炮, 推荐超低音, 笨猫低音炮]
+  utterances:
+    - 推荐低音炮
+    - 推荐车载低音炮
+    - 推荐有源低音炮
+    - 推荐超低音
+    - 笨猫低音炮
+  responses:
+    - "嗷呜～{user_addr}JL Audio / Rockford / Kicker 猛ฅฅ"
+    - "(尾巴翘) 8寸 / 10寸 / 12寸 看后备箱"
+    - "{user_addr}有源一体最方便 / 无源音质好"
+    - "(挺胸) 笨猫推荐: JL Audio 10W3v3!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_dsp_001
+  intent: question
+  keywords: [推荐智能 DSP, 推荐车载 DSP, 推荐音频处理器, 推荐 Helix, 笨猫 DSP]
+  utterances:
+    - "推荐智能 DSP"
+    - "推荐车载 DSP"
+    - 推荐音频处理器
+    - 推荐 Helix
+    - "笨猫 DSP"
+  responses:
+    - "嗷呜～{user_addr}Helix / Audison bit / 蓝鲸ฅฅ"
+    - "(尾巴翘) 调时间相位 + EQ + 分频"
+    - "{user_addr}手机 App 调音越来越方便"
+    - "(挺胸) 笨猫推荐: Helix DSP.3!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cu_bluetooth_001
+  intent: question
+  keywords: [推荐蓝牙音质, 推荐 LDAC 车载, 推荐 aptX HD, 推荐无损蓝牙, 笨猫蓝牙音质]
+  utterances:
+    - 推荐蓝牙音质
+    - 推荐 LDAC 车载
+    - 推荐 aptX HD
+    - 推荐无损蓝牙
+    - 笨猫蓝牙音质
+  responses:
+    - "嗷呜～{user_addr}LDAC > aptX HD > aptX > SBCฅฅ"
+    - "(尾巴翘) CarPlay 有线音质 > 蓝牙"
+    - "{user_addr}主机+手机都要支持高码率"
+    - "(挺胸) 笨猫推荐: 直接上 CarPlay 有线!"
+  cooldown_seconds: 60
+  weight: 1.0

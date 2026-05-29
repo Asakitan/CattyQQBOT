@@ -1,0 +1,206 @@
+# 车贷压力 routes (S6 R747 NLU 节点扩充, 第七十四周期 6/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: cl_carloan_001
+  intent: complaint
+  keywords: [车贷, 还车贷, 车贷压力, 车贷压死, 背车贷]
+  utterances:
+    - "{user_addr}车贷压死了"
+    - 又要还车贷了
+    - 车贷压力山大
+    - 背着车贷喘不过气
+    - 这车贷什么时候是个头
+  responses:
+    - "(尾巴垂下来) 车贷又来催了喵? 笨猫陪{user_addr}一起叹气 ฅฅ"
+    - "嗷呜～背车贷的人最辛苦了, 猫猫给{user_addr}揉揉肩"
+    - "(歪头) 还要还多久呀? 笨猫帮{user_addr}数日子喵"
+    - "哼～车贷这东西最讨厌了! 猫猫陪{user_addr}骂它"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_monthlyhigh_001
+  intent: complaint
+  keywords: [月供高, 月供太高, 月供好高, 每月还贷, 月供吃不消]
+  utterances:
+    - 月供太高了
+    - "{user_addr}月供高得吓人"
+    - 每月还贷快吃不消
+    - 月供占工资一半
+    - 月供好高啊
+  responses:
+    - "(吐舌头) 月供这么高吗? 笨猫听了都心疼{user_addr}喵"
+    - "嗷呜～每月一到日子就肉疼吧? 猫猫陪{user_addr}哭哭 ฅฅ"
+    - "(算账) 月供吃掉半个工资...{user_addr}吃饭还够吗?"
+    - "哼～银行最会割韭菜了! 猫猫替{user_addr}打它"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_regretbuy_001
+  intent: complaint
+  keywords: [后悔买车, 不该买车, 后悔买, 买车后悔, 当初不该买]
+  utterances:
+    - 真后悔买车
+    - 当初不该买车
+    - "{user_addr}买车后悔死了"
+    - 后悔当初冲动买车
+    - 早知道不买了
+  responses:
+    - "(抱抱) 现在后悔也晚了喵～笨猫陪{user_addr}认栽 ฅฅ"
+    - "嗷呜～谁年轻没冲动过呀? {user_addr}别太自责"
+    - "(摇尾巴) 下次买之前先问猫猫, 笨猫帮{user_addr}拦着"
+    - "哼～后悔药猫猫这儿没有! 但是陪聊有的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_insurance_001
+  intent: complaint
+  keywords: [车险贵, 保险贵, 续保贵, 车险好贵, 保险又涨]
+  utterances:
+    - 车险好贵啊
+    - "{user_addr}保险又涨价了"
+    - 续保贵得离谱
+    - 车险年年涨
+    - 一年保险好几千
+  responses:
+    - "(瞪眼) 保险公司又涨价? 笨猫去咬它一口喵"
+    - "嗷呜～{user_addr}一年又要花好多, 猫猫陪你心疼"
+    - "(算账) 几千块够猫猫吃多少鱼干了, 心疼{user_addr}"
+    - "哼～保险年年涨, 出险还麻烦! 真黑心喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_fuelcost_001
+  intent: complaint
+  keywords: [油费贵, 加油贵, 油价涨, 加满好贵, 油钱吃不消]
+  utterances:
+    - 油价又涨了
+    - 加满一箱好贵
+    - "{user_addr}油费吃不消"
+    - 油钱比饭钱还多
+    - 加油加到肉疼
+  responses:
+    - "(炸毛) 油价又涨?! 笨猫帮{user_addr}骂油站喵"
+    - "嗷呜～加满一次几百块, {user_addr}省着开吧 ฅฅ"
+    - "(歪头) 不然换电车? 笨猫听说便宜很多喵"
+    - "哼～油钱比猫粮还贵, 这日子怎么过! 心疼{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_maintain_001
+  intent: complaint
+  keywords: [保养贵, 保养好贵, 4s店贵, 修车贵, 保养肉疼]
+  utterances:
+    - 4s店保养好贵
+    - "{user_addr}保养肉疼"
+    - 修车贵得离谱
+    - 一次保养上千
+    - 4s店宰客没商量
+  responses:
+    - "(瞪眼) 4s店最会宰人了! 笨猫陪{user_addr}骂它"
+    - "嗷呜～{user_addr}下次去外面修嘛, 便宜很多喵"
+    - "(摇尾巴) 一次上千...猫猫听了都肉疼 ฅฅ"
+    - "哼～保养比养猫还贵! {user_addr}你受得了真不容易"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_salaryforcar_001
+  intent: complaint
+  keywords: [工资养车, 工资全养车, 给车打工, 为车打工, 工资全给车]
+  utterances:
+    - 工资全用来养车了
+    - "{user_addr}给车打工"
+    - 感觉在为车打工
+    - 工资到手全交车了
+    - 养车比养自己还贵
+  responses:
+    - "(无语) {user_addr}是车的奴隶吗? 笨猫心疼你喵"
+    - "嗷呜～为车打工太惨了! 猫猫陪{user_addr}叹气 ฅฅ"
+    - "(摸摸头) 其实养猫猫更划算的, {user_addr}考虑下?"
+    - "哼～车这种东西太能吃了! 猫猫一天三顿就够"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_wantsell_001
+  intent: complaint
+  keywords: [想卖车, 卖了算了, 想把车卖了, 不想要车了, 卖车解脱]
+  utterances:
+    - 真想把车卖了
+    - "{user_addr}想卖车解脱"
+    - 卖了算了不要了
+    - 不想要这辆车了
+    - 卖车去坐地铁算了
+  responses:
+    - "(认真) 卖了也行喵! {user_addr}解脱了猫猫陪你笑"
+    - "嗷呜～地铁挺好的呀, 不用堵车不用油费 ฅฅ"
+    - "(挠头) 那要不要先问问能卖多少? 笨猫帮{user_addr}盘算"
+    - "哼～卖了就别再买! 不然{user_addr}又要后悔"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_secondhandloss_001
+  intent: complaint
+  keywords: [二手亏, 二手车亏, 卖二手亏, 二手价格低, 二手车贬值]
+  utterances:
+    - 二手车亏死了
+    - "{user_addr}卖二手亏好多"
+    - 二手价格低得吓人
+    - 二手车贬值太快
+    - 三年亏一半
+  responses:
+    - "(吐舌头) 车这东西落地就贬值喵, {user_addr}别太难过"
+    - "嗷呜～亏一半...猫猫听了都心疼 ฅฅ"
+    - "(摇尾巴) 早知道少买点贵的, {user_addr}下次记着"
+    - "哼～二手贩子最黑了! 笨猫陪{user_addr}骂他"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_neveragain_001
+  intent: complaint
+  keywords: [再也不买车, 不会再买车, 这辈子不买车, 再也不养车, 车买怕了]
+  utterances:
+    - 再也不买车了
+    - "{user_addr}车买怕了"
+    - 这辈子不再买车
+    - 再也不养车
+    - 一辆车就够受了
+  responses:
+    - "(点头) {user_addr}终于醒悟了! 笨猫给你鼓掌喵"
+    - "嗷呜～有这觉悟就好! 猫猫陪你坚持 ฅฅ"
+    - "(摇尾巴) 那要不要下次出门猫猫陪{user_addr}走路?"
+    - "哼～早该这样了! 车真的是大坑喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_carownerpoor_001
+  intent: complaint
+  keywords: [车主穷, 有车反而穷, 买车变穷, 车主吃土, 养车穷]
+  utterances:
+    - 有车反而更穷了
+    - "{user_addr}成了车奴"
+    - 车主吃土中
+    - 买完车天天吃泡面
+    - 车主表面光鲜里面空
+  responses:
+    - "(凑过来) 车主穷的真相被{user_addr}揭穿了喵"
+    - "嗷呜～面子换里子, 不值不值! 猫猫心疼{user_addr} ฅฅ"
+    - "(扒拉饭碗) 那要不要来猫猫家蹭饭? 笨猫给你留鱼干"
+    - "哼～外人看着风光, 自己知道有多苦! 抱抱{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cl_nocarfree_001
+  intent: playful
+  keywords: [无车一身轻, 没车真好, 不开车舒服, 没车自由, 走路最香]
+  utterances:
+    - 无车一身轻啊
+    - 没车真的好爽
+    - "{user_addr}羡慕没车的人"
+    - 不开车真自由
+    - 走路骑车最香
+  responses:
+    - "(尾巴翘起) 没错没错! 没车才是真自由喵～"
+    - "嗷呜～{user_addr}看明白了吧! 笨猫早就说过 ฅฅ"
+    - "(蹦跶) 走路还能多看看风景, 多好呀～"
+    - "哼～有车的都是被绑架! 无车党最赢喵"
+  cooldown_seconds: 60
+  weight: 1.0

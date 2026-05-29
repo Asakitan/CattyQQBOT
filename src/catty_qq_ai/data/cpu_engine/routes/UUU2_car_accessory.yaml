@@ -1,0 +1,206 @@
+# 车内饰品 routes (S6 R744 NLU 节点扩充, 第七十四周期 3/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: ca_perfume_001
+  intent: question
+  keywords: [推荐车载香薰, 推荐车内香水, 推荐汽车香氛, 推荐车载固体香膏, 笨猫车载香薰]
+  utterances:
+    - "{user_addr}推荐车载香薰"
+    - 推荐车内香水
+    - 推荐汽车香氛
+    - 推荐车载固体香膏
+    - 笨猫车载香薰
+  responses:
+    - "嗷呜～{user_addr}固体香膏 - 不漏不洒最安全ฅฅ"
+    - "(尾巴翘) 出风口夹式 / 仪表台摆件"
+    - "{user_addr}雪松/柑橘/海洋调 - 提神不腻"
+    - "(挺胸) 猫猫推荐: 香奈儿/MUJI 香膏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_air_purifier_001
+  intent: question
+  keywords: [推荐车载空气净化器, 推荐车内净化器, 推荐车载滤芯, 推荐除甲醛净化器, 笨猫车载净化器]
+  utterances:
+    - "{user_addr}推荐车载空气净化器"
+    - 推荐车内净化器
+    - 推荐车载滤芯
+    - 推荐除甲醛净化器
+    - 笨猫车载净化器
+  responses:
+    - "嗷呜～{user_addr}飞利浦 GoPure - 老牌靠谱ฅฅ"
+    - "(尾巴翘) 小米车载 / 米家 - 性价比高"
+    - "{user_addr}HEPA + 活性炭双滤 - 除味必备"
+    - "(挺胸) 人家推荐: 新车一定要装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_seat_cover_001
+  intent: question
+  keywords: [推荐真皮座椅套, 推荐汽车座套, 推荐全包围座椅套, 推荐四季通用座套, 笨猫座椅套]
+  utterances:
+    - "{user_addr}推荐真皮座椅套"
+    - 推荐汽车座套
+    - 推荐全包围座椅套
+    - 推荐四季通用座套
+    - 笨猫座椅套
+  responses:
+    - "嗷呜～{user_addr}Nappa 真皮 - 高级耐用ฅฅ"
+    - "(尾巴翘) 亚麻 / 冰丝 - 夏天凉爽"
+    - "{user_addr}全包围款 - 防脏防磨包覆好"
+    - "(挺胸) 笨猫推荐: 选车型专车专用版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_steering_wheel_001
+  intent: question
+  keywords: [推荐方向盘套, 推荐真皮方向盘套, 推荐冬季方向盘套, 推荐毛绒方向盘套, 笨猫方向盘套]
+  utterances:
+    - "{user_addr}推荐方向盘套"
+    - 推荐真皮方向盘套
+    - 推荐冬季方向盘套
+    - 推荐毛绒方向盘套
+    - 笨猫方向盘套
+  responses:
+    - "嗷呜～{user_addr}真皮款 - 防滑握感好ฅฅ"
+    - "(尾巴翘) 冬天毛绒 / 夏天冰丝 双备"
+    - "{user_addr}注意尺寸 - D/O 型对应车型"
+    - "(挺胸) 猫猫推荐: 缝线式比套入式稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_floor_mat_001
+  intent: question
+  keywords: [推荐汽车防滑垫, 推荐脚垫, 推荐 TPE 脚垫, 推荐全包围脚垫, 笨猫脚垫]
+  utterances:
+    - "{user_addr}推荐汽车防滑垫"
+    - 推荐脚垫
+    - 推荐 TPE 脚垫
+    - 推荐全包围脚垫
+    - 笨猫脚垫
+  responses:
+    - "嗷呜～{user_addr}TPE 材质 - 防水耐磨ฅฅ"
+    - "(尾巴翘) 全包围款 - 边沿翘高挡泥"
+    - "{user_addr}3D 立体 / 大包围 / 丝圈款"
+    - "(挺胸) 笨猫推荐: TPE 全包围最实用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_phone_holder_001
+  intent: question
+  keywords: [推荐车载手机支架, 推荐磁吸车载支架, 推荐无线充电支架, 推荐出风口支架, 笨猫车载支架]
+  utterances:
+    - "{user_addr}推荐车载手机支架"
+    - 推荐磁吸车载支架
+    - 推荐无线充电支架
+    - 推荐出风口支架
+    - 笨猫车载支架
+  responses:
+    - "嗷呜～{user_addr}MagSafe 磁吸款 - 一吸即贴ฅฅ"
+    - "(尾巴翘) 无线充电 + 磁吸二合一"
+    - "{user_addr}中控台 / 出风口 / 仪表台位"
+    - "(挺胸) 猫猫推荐: Belkin / 倍思 MagSafe!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_rear_table_001
+  intent: question
+  keywords: [推荐后排小桌板, 推荐车载折叠桌, 推荐后座小桌, 推荐儿童后排桌板, 笨猫后排桌板]
+  utterances:
+    - "{user_addr}推荐后排小桌板"
+    - 推荐车载折叠桌
+    - 推荐后座小桌
+    - 推荐儿童后排桌板
+    - 笨猫后排桌板
+  responses:
+    - "嗷呜～{user_addr}头枕挂式 - 折叠收纳方便ฅฅ"
+    - "(尾巴翘) 带杯架 + iPad 槽 - 长途神器"
+    - "{user_addr}儿童版有围栏 - 防滑落"
+    - "(挺胸) 笨猫推荐: 长途自驾必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_power_bank_001
+  intent: question
+  keywords: [推荐车载充电宝, 推荐车载启动电源, 推荐汽车应急电源, 推荐车载快充, 笨猫车载充电宝]
+  utterances:
+    - "{user_addr}推荐车载充电宝"
+    - 推荐车载启动电源
+    - 推荐汽车应急电源
+    - 推荐车载快充
+    - 笨猫车载充电宝
+  responses:
+    - "嗷呜～{user_addr}纽曼 / 倍思 - 应急启动款ฅฅ"
+    - "(尾巴翘) 12V 启动 + USB 双口充电"
+    - "{user_addr}注意电池容量 + 启动电流"
+    - "(挺胸) 猫猫推荐: 冬天必备防亏电!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_car_fridge_001
+  intent: question
+  keywords: [推荐车载冰箱, 推荐车载小冰箱, 推荐压缩机车载冰箱, 推荐半导体冰箱, 笨猫车载冰箱]
+  utterances:
+    - "{user_addr}推荐车载冰箱"
+    - 推荐车载小冰箱
+    - 推荐压缩机车载冰箱
+    - 推荐半导体冰箱
+    - 笨猫车载冰箱
+  responses:
+    - "嗷呜～{user_addr}压缩机款 - 真冷冻顶级ฅฅ"
+    - "(尾巴翘) 英得尔 / Alpicool 老牌靠谱"
+    - "{user_addr}半导体便宜但只能制冷不冻"
+    - "(挺胸) 笨猫推荐: 露营自驾上压缩机!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_sunshade_001
+  intent: question
+  keywords: [推荐汽车遮阳挡, 推荐前挡风遮阳板, 推荐侧窗遮阳帘, 推荐磁吸遮阳挡, 笨猫遮阳挡]
+  utterances:
+    - "{user_addr}推荐汽车遮阳挡"
+    - 推荐前挡风遮阳板
+    - 推荐侧窗遮阳帘
+    - 推荐磁吸遮阳挡
+    - 笨猫遮阳挡
+  responses:
+    - "嗷呜～{user_addr}前挡铝箔款 - 隔热反光最强ฅฅ"
+    - "(尾巴翘) 侧窗磁吸 - 装拆秒速"
+    - "{user_addr}夏天能降车内 10-15℃ 嗷呜"
+    - "(挺胸) 猫猫推荐: 暴晒党必备神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_rearview_mirror_001
+  intent: question
+  keywords: [推荐车内后视镜, 推荐流媒体后视镜, 推荐防眩目后视镜, 推荐曲面后视镜, 笨猫后视镜]
+  utterances:
+    - "{user_addr}推荐车内后视镜"
+    - 推荐流媒体后视镜
+    - 推荐防眩目后视镜
+    - 推荐曲面后视镜
+    - 笨猫后视镜
+  responses:
+    - "嗷呜～{user_addr}流媒体款 - 后视清晰无盲区ฅฅ"
+    - "(尾巴翘) 70迈 / 海康威视 / 360"
+    - "{user_addr}带行车记录仪 - 一物两用"
+    - "(挺胸) 笨猫推荐: 流媒体 + 后录二合一!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_wiper_001
+  intent: question
+  keywords: [推荐雨刮喷水器, 推荐玻璃水, 推荐无骨雨刮, 推荐雨刮片, 笨猫雨刮]
+  utterances:
+    - "{user_addr}推荐雨刮喷水器"
+    - 推荐玻璃水
+    - 推荐无骨雨刮
+    - 推荐雨刮片
+    - 笨猫雨刮
+  responses:
+    - "嗷呜～{user_addr}博世 Bosch / 法雷奥 无骨款ฅฅ"
+    - "(尾巴翘) 玻璃水冬季-25℃ 防冻必选"
+    - "{user_addr}雨刮 1 年一换 / 喷嘴定期清"
+    - "(挺胸) 猫猫推荐: 博世硅胶刮条最耐用!"
+  cooldown_seconds: 60
+  weight: 1.0

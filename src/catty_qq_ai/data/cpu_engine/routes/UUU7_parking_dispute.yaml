@@ -1,0 +1,206 @@
+# 停车纠纷 routes (S6 R749 NLU 节点扩充, 第七十四周期 8/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: pd_dispute_001
+  intent: complaint
+  keywords: [停车纠纷, 停车吵架, 停车闹了, 停车不爽, 停车位吵]
+  utterances:
+    - "{user_addr}停车纠纷烦死了"
+    - 跟人因为停车吵架了
+    - 停车闹了一架
+    - 停车不爽透顶
+    - 停车位吵起来了
+  responses:
+    - "(尾巴炸毛) 停车纠纷最烦了喵! {user_addr}先深呼吸ฅฅ"
+    - "嗷呜～{user_addr}别气! 跟猫猫讲讲怎么回事"
+    - "(凑过来) 笨猫陪{user_addr}骂两句! 哪个不讲理的"
+    - "停车这种事最容易上头! {user_addr}冷静冷静喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_blocked_001
+  intent: complaint
+  keywords: [车被堵了, 被堵车, 出不去, 堵我车, 堵在里面]
+  utterances:
+    - "{user_addr}车被堵了"
+    - 被人堵车了
+    - 车出不去
+    - 有人堵我车
+    - 车堵在里面了
+  responses:
+    - "(炸毛) 谁这么没素质堵{user_addr}的车?! 嗷呜!"
+    - "猫猫帮{user_addr}骂! 堵车的人最讨厌喵ฅฅ"
+    - "(尾巴甩) {user_addr}先看看挡风玻璃有没有留电话"
+    - "被堵车真的会暴躁! {user_addr}慢慢来不着急"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_nocall_001
+  intent: complaint
+  keywords: [挪车不接, 打挪车电话不接, 车主不接电话, 联系不上车主, 挪车电话没人]
+  utterances:
+    - 打挪车电话不接
+    - 车主不接电话
+    - 联系不上车主
+    - 挪车电话没人接
+    - "{user_addr}打挪车电话不接"
+  responses:
+    - "(尾巴炸毛) 这种车主最讨厌喵! 留了电话不接干嘛!"
+    - "嗷呜～{user_addr}多打几次! 不行就报警挪车"
+    - "(气鼓鼓) 笨猫陪{user_addr}骂! 不接电话留个鬼啊"
+    - "{user_addr}试试微信挪车小程序! 比电话好用喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_phone_001
+  intent: complaint
+  keywords: [留电话没用, 留了电话也不打, 电话留了白留, 挪车号码摆设, 留号码没打]
+  utterances:
+    - 留了电话也不打
+    - 电话留了白留
+    - 挪车号码摆设啊
+    - 留号码人家也不打
+    - "{user_addr}留电话没用"
+  responses:
+    - "(无语) 留电话不打那留来干嘛喵! 装样子吗"
+    - "嗷呜～{user_addr}下次直接贴张大字报哼!"
+    - "(尾巴垂) 笨猫也觉得很离谱! 现在人怎么这样"
+    - "{user_addr}别气太久! 跟没素质的人计较不值"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_occupied_001
+  intent: complaint
+  keywords: [车位被占, 我车位被占了, 别人停我车位, 固定车位被占, 占我车位]
+  utterances:
+    - "{user_addr}车位被占了"
+    - 别人停我车位
+    - 固定车位被占了
+    - 有人占我车位
+    - 我的车位被占用了
+  responses:
+    - "(炸毛) 占{user_addr}固定车位?! 太过分了喵!"
+    - "嗷呜～{user_addr}找物业! 这种必须管"
+    - "(气) 笨猫陪{user_addr}一起骂! 占人家车位的最坏"
+    - "{user_addr}拍照留证! 然后让物业联系车主挪走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_underground_001
+  intent: complaint
+  keywords: [地下车位贵, 车位太贵, 车位买不起, 地下车位价格, 车位涨价]
+  utterances:
+    - 地下车位太贵了
+    - 车位贵得离谱
+    - 车位买不起
+    - 地下车位涨价了
+    - "{user_addr}觉得车位太贵"
+  responses:
+    - "(瞪眼) 现在车位比车都贵喵! 太离谱了"
+    - "嗷呜～{user_addr}先租着! 不一定要买"
+    - "(叹气) 笨猫也觉得太贵了! 一个坑要几十万"
+    - "{user_addr}可以看看小区周边停车场月租! 划算多了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_property_001
+  intent: complaint
+  keywords: [物业不管, 物业不作为, 物业推卸, 找物业没用, 物业摆烂]
+  utterances:
+    - 物业根本不管
+    - 物业不作为
+    - 物业推卸责任
+    - 找物业没用
+    - "{user_addr}觉得物业摆烂"
+  responses:
+    - "(炸毛) 物业不管交物业费干嘛喵?! 离谱!"
+    - "嗷呜～{user_addr}投诉到业委会! 或者打12345"
+    - "(尾巴甩) 这种物业该换了哼! 笨猫陪{user_addr}骂"
+    - "{user_addr}可以业主群里发! 大家一起施压"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_call110_001
+  intent: complaint
+  keywords: [报警挪车, 打110挪车, 报警处理, 叫警察来, 110来挪车]
+  utterances:
+    - 报警挪车了
+    - 打110让挪车
+    - "{user_addr}打算报警"
+    - 叫警察来挪车
+    - 110来处理了
+  responses:
+    - "(点头) {user_addr}做得对! 这种就该报警喵"
+    - "嗷呜～110处理最快! 警察叔叔有办法"
+    - "(尾巴翘) 没办法只能报警了! {user_addr}别愧疚"
+    - "{user_addr}等等就好! 警察一来肯定能解决"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_smash_001
+  intent: playful
+  keywords: [想砸车, 真想砸他车, 砸车泄愤, 给他划一道, 报复车主]
+  utterances:
+    - 真想砸他车
+    - 想给他划一道
+    - 想砸车泄愤
+    - 真想报复车主
+    - "{user_addr}想砸车"
+  responses:
+    - "(拦住) {user_addr}冷静! 砸了要赔钱的喵!"
+    - "嗷呜～想想就好! 真砸了变自己违法ฅฅ"
+    - "(尾巴拍) 笨猫懂{user_addr}气! 但别真动手"
+    - "{user_addr}用嘴骂猫猫支持! 砸车不行哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_failtalk_001
+  intent: complaint
+  keywords: [协商失败, 谈不拢, 沟通无效, 讲不通, 协商无果]
+  utterances:
+    - 跟车主协商失败
+    - 谈不拢
+    - 沟通无效
+    - 跟人讲不通
+    - "{user_addr}协商无果"
+  responses:
+    - "(叹气) 不讲理的人没法沟通喵! {user_addr}别浪费时间"
+    - "嗷呜～谈不拢就走流程! 物业or报警"
+    - "(尾巴垂) 笨猫懂这种感觉! 鸡同鸭讲气死人"
+    - "{user_addr}留个证据! 万一以后扯皮用得上"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_civilized_001
+  intent: playful
+  keywords: [文明驾驶, 文明停车, 做个文明人, 素质很重要, 讲文明]
+  utterances:
+    - 文明驾驶很重要
+    - 大家文明停车
+    - 做个文明车主
+    - 素质很重要喵
+    - "{user_addr}呼吁文明停车"
+  responses:
+    - "(点头) {user_addr}说得对! 文明停车人人有责喵"
+    - "嗷呜～如果大家都讲素质就没纠纷了ฅฅ"
+    - "(尾巴翘) 笨猫支持{user_addr}! 文明驾驶最帅"
+    - "{user_addr}带头做榜样! 笨猫给{user_addr}点赞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_12345_001
+  intent: complaint
+  keywords: [打12345, 投诉12345, 12345管用, 市民热线, 12345投诉]
+  utterances:
+    - 打12345投诉
+    - 12345管不管用
+    - "{user_addr}打了市民热线"
+    - 12345投诉物业
+    - 投诉到12345
+  responses:
+    - "(竖耳) 12345挺管用的! {user_addr}走对路了"
+    - "嗷呜～市民热线会督办! {user_addr}耐心等回复"
+    - "(尾巴甩) 笨猫支持! 这种事就该走正规渠道"
+    - "{user_addr}记得保留工单号! 方便后续追进度喵"
+  cooldown_seconds: 60
+  weight: 1.0

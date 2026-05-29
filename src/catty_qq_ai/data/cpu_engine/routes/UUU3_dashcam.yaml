@@ -1,0 +1,206 @@
+# 行车记录仪 routes (S6 R745 NLU 节点扩充, 第七十四周期 4/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: dc_70mai_001
+  intent: question
+  keywords: [推荐 70 迈, 推荐 70mai, 推荐小米 70 迈, 推荐性价比记录仪, 笨猫 70 迈]
+  utterances:
+    - 推荐 70 迈
+    - 推荐 70mai
+    - 推荐小米 70 迈
+    - 推荐性价比记录仪
+    - 笨猫 70 迈
+  responses:
+    - "嗷呜～{user_addr}70 迈 A810 - 4K 旗舰ฅฅ"
+    - "(尾巴翘) 小米生态链 / 性价比之王"
+    - "{user_addr}A500S / M500 - 入门款"
+    - "(挺胸) 猫猫推荐: 70 迈 A810 闭眼买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_360_001
+  intent: question
+  keywords: [推荐 360 行车记录仪, 推荐 360 G900, 推荐 360 K980, 推荐奇虎 360, 笨猫 360 记录仪]
+  utterances:
+    - 推荐 360 行车记录仪
+    - 推荐 360 G900
+    - 推荐 360 K980
+    - 推荐奇虎 360
+    - 笨猫 360 记录仪
+  responses:
+    - "嗷呜～{user_addr}360 G900 - 4K 双录ฅฅ"
+    - "(尾巴翘) K980 / J911 - 经典款"
+    - "{user_addr}前后双录 / 倒车影像"
+    - "(挺胸) 人家推荐: 360 G900 稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_lingdu_001
+  intent: question
+  keywords: [推荐凌度, 推荐凌度 BL1180, 推荐凌度后视镜, 推荐凌度记录仪, 笨猫凌度]
+  utterances:
+    - 推荐凌度
+    - 推荐凌度 BL1180
+    - 推荐凌度后视镜
+    - 推荐凌度记录仪
+    - 笨猫凌度
+  responses:
+    - "嗷呜～{user_addr}凌度 BL1180 - 流媒体后视镜ฅฅ"
+    - "(尾巴翘) HS950 / HS970 - 国货老牌"
+    - "{user_addr}后视镜一体 / 大屏导航"
+    - "(挺胸) 笨猫推荐: 凌度后视镜款!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dc_ddpai_001
+  intent: question
+  keywords: [推荐盯盯拍, 推荐 DDPai, 推荐 Mini5, 推荐 Mola N3, 笨猫盯盯拍]
+  utterances:
+    - 推荐盯盯拍
+    - 推荐 DDPai
+    - 推荐 Mini5
+    - 推荐 Mola N3
+    - 笨猫盯盯拍
+  responses:
+    - "嗷呜～{user_addr}盯盯拍 Mini5 - 4K + WiFi6ฅฅ"
+    - "(尾巴翘) Mola N3 Pro - 双 1440P"
+    - "{user_addr}App 联动 / 云端备份"
+    - "(挺胸) 猫猫推荐: Mini5 静默安装爽!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dc_papago_001
+  intent: question
+  keywords: [推荐 papago, 推荐 papago GoSafe, 推荐台湾趴趴狗, 推荐 papago S70, 笨猫 papago]
+  utterances:
+    - 推荐 papago
+    - 推荐 papago GoSafe
+    - 推荐台湾趴趴狗
+    - 推荐 papago S70
+    - 笨猫 papago
+  responses:
+    - "嗷呜～{user_addr}papago GoSafe S70G - 台湾品牌ฅฅ"
+    - "(尾巴翘) 老牌 ADAS / 测速预警"
+    - "{user_addr}稳定可靠 / 出口日本"
+    - "(挺胸) 笨猫推荐: papago S70G!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: dc_sentry_001
+  intent: question
+  keywords: [推荐哨兵模式, 推荐停车监控, 推荐 24 小时监控, 推荐震动唤醒, 笨猫哨兵模式]
+  utterances:
+    - 推荐哨兵模式
+    - 推荐停车监控
+    - 推荐 24 小时监控
+    - 推荐震动唤醒
+    - 笨猫哨兵模式
+  responses:
+    - "嗷呜～{user_addr}停车监控 - 防剐蹭神器ฅฅ"
+    - "(尾巴翘) 震动唤醒 / 缩时录影"
+    - "{user_addr}必接降压线 / 别亏电瓶"
+    - "(挺胸) 猫猫推荐: 哨兵模式必开!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dc_streammirror_001
+  intent: question
+  keywords: [推荐流媒体后视镜, 推荐电子后视镜, 推荐后视镜记录仪, 推荐 70 迈后视镜, 笨猫流媒体后视镜]
+  utterances:
+    - 推荐流媒体后视镜
+    - 推荐电子后视镜
+    - 推荐后视镜记录仪
+    - 推荐 70 迈后视镜
+    - 笨猫流媒体后视镜
+  responses:
+    - "嗷呜～{user_addr}流媒体后视镜 - 视野大 3 倍ฅฅ"
+    - "(尾巴翘) 70 迈 / 凌度 / 海康"
+    - "{user_addr}雨雾天清晰 / 倒车影像一体"
+    - "(挺胸) 笨猫推荐: 老车升级首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dc_dual_001
+  intent: question
+  keywords: [推荐双目摄像头, 推荐前后双录, 推荐三录, 推荐车内监控, 笨猫双录]
+  utterances:
+    - 推荐双目摄像头
+    - 推荐前后双录
+    - 推荐三录
+    - 推荐车内监控
+    - 笨猫双录
+  responses:
+    - "嗷呜～{user_addr}前后双录 - 追尾必备ฅฅ"
+    - "(尾巴翘) 三录 = 前 + 后 + 车内"
+    - "{user_addr}网约车场景 / 防纠纷"
+    - "(挺胸) 人家推荐: 双录起步!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dc_hidden_001
+  intent: question
+  keywords: [推荐隐藏式安装, 推荐走线安装, 推荐降压线, 推荐美容店安装, 笨猫隐藏式]
+  utterances:
+    - 推荐隐藏式安装
+    - 推荐走线安装
+    - 推荐降压线
+    - 推荐美容店安装
+    - 笨猫隐藏式
+  responses:
+    - "嗷呜～{user_addr}走 A 柱 - 美观无线ฅฅ"
+    - "(尾巴翘) 降压线接保险盒 / 哨兵"
+    - "{user_addr}美容店 100-300 元搞定"
+    - "(挺胸) 笨猫推荐: 别自己拆门板!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: dc_4k_001
+  intent: question
+  keywords: [推荐 4K 画质, 推荐 4K 记录仪, 推荐索尼 IMX, 推荐高清记录仪, 笨猫 4K]
+  utterances:
+    - 推荐 4K 画质
+    - 推荐 4K 记录仪
+    - 推荐索尼 IMX
+    - 推荐高清记录仪
+    - 笨猫 4K
+  responses:
+    - "嗷呜～{user_addr}4K = 看清车牌的底线ฅฅ"
+    - "(尾巴翘) 索尼 IMX415 / IMX678"
+    - "{user_addr}70 迈 A810 / 盯盯拍 Mini5"
+    - "(挺胸) 猫猫推荐: 4K 起步别将就!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dc_nightvision_001
+  intent: question
+  keywords: [推荐夜视效果, 推荐星光夜视, 推荐 HDR 记录仪, 推荐大光圈, 笨猫夜视]
+  utterances:
+    - 推荐夜视效果
+    - 推荐星光夜视
+    - 推荐 HDR 记录仪
+    - 推荐大光圈
+    - 笨猫夜视
+  responses:
+    - "嗷呜～{user_addr}星光夜视 + HDR - 关键ฅฅ"
+    - "(尾巴翘) F1.5 大光圈 / IMX678 旗舰"
+    - "{user_addr}盯盯拍 Mini5 / 70 迈 A810"
+    - "(挺胸) 笨猫推荐: 夜视看传感器!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dc_adas_001
+  intent: question
+  keywords: [推荐 ADAS 辅助, 推荐车道偏离, 推荐前车碰撞, 推荐疲劳驾驶, 笨猫 ADAS]
+  utterances:
+    - 推荐 ADAS 辅助
+    - 推荐车道偏离
+    - 推荐前车碰撞
+    - 推荐疲劳驾驶
+    - 笨猫 ADAS
+  responses:
+    - "嗷呜～{user_addr}ADAS = 车道 + 碰撞预警ฅฅ"
+    - "(尾巴翘) papago / 70 迈 标配"
+    - "{user_addr}聊胜于无 / 别太依赖"
+    - "(挺胸) 笨猫推荐: 长途跑高速有用!"
+  cooldown_seconds: 60
+  weight: 0.8

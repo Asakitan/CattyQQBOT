@@ -1,0 +1,206 @@
+# 燃油豪车 routes (S6 R743 NLU 节点扩充, 第七十四周期 2/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: ol_benz_s_001
+  intent: question
+  keywords: [推荐奔驰S级, 推荐奔驰S, 推荐Benz S, 推荐S Class, 笨猫奔驰S级]
+  utterances:
+    - 推荐奔驰S级
+    - 推荐奔驰S
+    - 推荐 Benz S
+    - 推荐 S Class
+    - "{user_addr}笨猫奔驰S级"
+  responses:
+    - "嗷呜～{user_addr}奔驰 S 级 - D 级豪华标杆ฅฅ"
+    - "(尾巴翘) S450 / S500 / S680 Maybach"
+    - "{user_addr}后排老板位 / 柏林之声"
+    - "(挺胸) 笨猫推荐: S 级是商务首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_benz_g_001
+  intent: question
+  keywords: [推荐奔驰G级, 推荐大G, 推荐G63, 推荐G Wagen, 笨猫奔驰G级]
+  utterances:
+    - 推荐奔驰G级
+    - 推荐大G
+    - 推荐 G63
+    - 推荐 G Wagen
+    - "{user_addr}笨猫奔驰G级"
+  responses:
+    - "嗷呜～{user_addr}大 G - 方盒子越野之王ฅฅ"
+    - "(尾巴翘) G500 / G63 AMG / G350d"
+    - "{user_addr}硬派越野 / 城市图腾"
+    - "(挺胸) 笨猫推荐: G63 V8 双涡轮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_bmw_7_001
+  intent: question
+  keywords: [推荐宝马7系, 推荐宝马7, 推荐BMW 7, 推荐7 Series, 笨猫宝马7系]
+  utterances:
+    - 推荐宝马7系
+    - 推荐宝马7
+    - 推荐 BMW 7
+    - 推荐 7 Series
+    - "{user_addr}笨猫宝马7系"
+  responses:
+    - "嗷呜～{user_addr}宝马 7 系 - 大鼻孔行政旗舰ฅฅ"
+    - "(尾巴翘) 740Li / 760Li / M760"
+    - "{user_addr}水晶档把 / 后排剧院屏"
+    - "(挺胸) 笨猫推荐: 比 S 级更运动!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_bmw_m5_001
+  intent: question
+  keywords: [推荐宝马M5, 推荐BMW M5, 推荐M5 CS, 推荐M Power, 笨猫宝马M5]
+  utterances:
+    - 推荐宝马M5
+    - 推荐 BMW M5
+    - 推荐 M5 CS
+    - 推荐 M Power
+    - "{user_addr}笨猫宝马M5"
+  responses:
+    - "嗷呜～{user_addr}M5 - 西装暴徒ฅฅ"
+    - "(尾巴翘) M5 Competition / M5 CS"
+    - "{user_addr}V8 双涡轮 / xDrive 四驱"
+    - "(挺胸) 笨猫推荐: M5 CS 性能怪兽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_audi_a8_001
+  intent: question
+  keywords: [推荐奥迪A8, 推荐Audi A8, 推荐A8L, 推荐 D5, 笨猫奥迪A8]
+  utterances:
+    - 推荐奥迪A8
+    - 推荐 Audi A8
+    - 推荐 A8L
+    - 推荐 D5
+    - "{user_addr}笨猫奥迪A8"
+  responses:
+    - "嗷呜～{user_addr}奥迪 A8L - 低调行政ฅฅ"
+    - "(尾巴翘) A8L 55 TFSI / S8 / A8L Horch"
+    - "{user_addr}quattro 四驱 / 科技感顶级"
+    - "(挺胸) 笨猫推荐: 不张扬有内涵!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ol_audi_rs6_001
+  intent: question
+  keywords: [推荐奥迪RS6, 推荐Audi RS6, 推荐RS6 Avant, 推荐瓦罐, 笨猫奥迪RS6]
+  utterances:
+    - 推荐奥迪RS6
+    - 推荐 Audi RS6
+    - 推荐 RS6 Avant
+    - 推荐瓦罐
+    - "{user_addr}笨猫奥迪RS6"
+  responses:
+    - "嗷呜～{user_addr}RS6 Avant - 性能瓦罐之王ฅฅ"
+    - "(尾巴翘) V8 双涡轮 / 600 马力"
+    - "{user_addr}旅行车壳 / 超跑芯"
+    - "(挺胸) 笨猫推荐: 奶爸的浪漫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_porsche_911_001
+  intent: question
+  keywords: [推荐保时捷911, 推荐Porsche 911, 推荐 GT3, 推荐 Turbo S, 笨猫保时捷911]
+  utterances:
+    - 推荐保时捷911
+    - 推荐 Porsche 911
+    - 推荐 GT3
+    - 推荐 Turbo S
+    - "{user_addr}笨猫保时捷911"
+  responses:
+    - "嗷呜～{user_addr}911 - 跑车界的常青树ฅฅ"
+    - "(尾巴翘) Carrera / Turbo S / GT3 RS"
+    - "{user_addr}后置水平对置 / 经典蛙眼"
+    - "(挺胸) 笨猫推荐: GT3 手动赛道神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ol_porsche_macan_001
+  intent: question
+  keywords: [推荐保时捷Macan, 推荐Porsche Macan, 推荐 Macan GTS, 推荐入门保时捷, 笨猫Macan]
+  utterances:
+    - 推荐保时捷Macan
+    - 推荐 Porsche Macan
+    - 推荐 Macan GTS
+    - 推荐入门保时捷
+    - "{user_addr}笨猫Macan"
+  responses:
+    - "嗷呜～{user_addr}Macan - 保时捷入门 SUVฅฅ"
+    - "(尾巴翘) Macan / Macan S / Macan GTS"
+    - "{user_addr}操控紧致 / 小钢炮 SUV"
+    - "(挺胸) 笨猫推荐: GTS 最香!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ol_lexus_lx_001
+  intent: question
+  keywords: [推荐雷克萨斯LX, 推荐Lexus LX, 推荐LX570, 推荐LX600, 笨猫雷克萨斯LX]
+  utterances:
+    - 推荐雷克萨斯LX
+    - 推荐 Lexus LX
+    - 推荐 LX570
+    - 推荐 LX600
+    - "{user_addr}笨猫雷克萨斯LX"
+  responses:
+    - "嗷呜～{user_addr}LX600 - 兰德酷路泽豪华版ฅฅ"
+    - "(尾巴翘) LX570 V8 / LX600 V6T"
+    - "{user_addr}硬派越野 / 沙漠王者"
+    - "(挺胸) 笨猫推荐: 中东富豪标配!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ol_landrover_001
+  intent: question
+  keywords: [推荐路虎揽胜, 推荐Range Rover, 推荐揽胜运动, 推荐揽胜行政, 笨猫路虎揽胜]
+  utterances:
+    - 推荐路虎揽胜
+    - 推荐 Range Rover
+    - 推荐揽胜运动
+    - 推荐揽胜行政
+    - "{user_addr}笨猫路虎揽胜"
+  responses:
+    - "嗷呜～{user_addr}揽胜 - 英伦优雅 SUVฅฅ"
+    - "(尾巴翘) Vogue / Sport / SVAutobiography"
+    - "{user_addr}全地形反馈 / 后排豪华"
+    - "(挺胸) 笨猫推荐: 揽胜行政款气场足!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ol_maserati_levante_001
+  intent: question
+  keywords: [推荐玛莎拉蒂Levante, 推荐Maserati Levante, 推荐莱万特, 推荐意式SUV, 笨猫Levante]
+  utterances:
+    - 推荐玛莎拉蒂Levante
+    - 推荐 Maserati Levante
+    - 推荐莱万特
+    - 推荐意式SUV
+    - "{user_addr}笨猫Levante"
+  responses:
+    - "嗷呜～{user_addr}Levante - 意式情怀 SUVฅฅ"
+    - "(尾巴翘) Levante / Trofeo / GTS"
+    - "{user_addr}法拉利发动机 / 排气声浪"
+    - "(挺胸) 笨猫推荐: 听声浪就值!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ol_bentley_bentayga_001
+  intent: question
+  keywords: [推荐宾利添越, 推荐Bentley Bentayga, 推荐添越, 推荐宾利SUV, 笨猫宾利添越]
+  utterances:
+    - 推荐宾利添越
+    - 推荐 Bentley Bentayga
+    - 推荐添越
+    - 推荐宾利SUV
+    - "{user_addr}笨猫宾利添越"
+  responses:
+    - "嗷呜～{user_addr}添越 - 超豪华 SUV 天花板ฅฅ"
+    - "(尾巴翘) Bentayga V8 / Speed W12"
+    - "{user_addr}手工内饰 / 翼标气场"
+    - "(挺胸) 笨猫推荐: 富豪首选 SUV!"
+  cooldown_seconds: 60
+  weight: 0.9
