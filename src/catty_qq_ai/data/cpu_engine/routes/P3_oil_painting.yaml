@@ -1,0 +1,207 @@
+# 油画 / 西画 / 绘画大师 / 美术馆 routes (S6 R175 NLU 节点扩充, 第十七周期 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 L2 literature / O2 calligraphy (国画书法) 区分: 这里专注西方绘画.
+
+- name: op_renaissance_001
+  intent: question
+  keywords: [推荐文艺复兴, 推荐达芬奇, 推荐米开朗基罗, 推荐拉斐尔, 笨猫文艺复兴]
+  utterances:
+    - 推荐文艺复兴
+    - 推荐达芬奇
+    - 推荐米开朗基罗
+    - 推荐拉斐尔
+    - 笨猫文艺复兴
+  responses:
+    - "嗷呜～{user_addr}达芬奇 / 米开朗基罗 / 拉斐尔 - 三杰ฅฅ"
+    - "(尾巴翘) 蒙娜丽莎 / 创世纪 / 雅典学院"
+    - "{user_addr}佛罗伦萨 - 文艺复兴中心"
+    - "(挺胸) 笨猫推荐: 蒙娜丽莎之谜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_baroque_001
+  intent: question
+  keywords: [推荐巴洛克绘画, 推荐卡拉瓦乔, 推荐鲁本斯, 推荐伦勃朗, 笨猫巴洛克绘画]
+  utterances:
+    - 推荐巴洛克绘画
+    - 推荐卡拉瓦乔
+    - 推荐鲁本斯
+    - 推荐伦勃朗
+    - 笨猫巴洛克绘画
+  responses:
+    - "嗷呜～{user_addr}卡拉瓦乔 - 明暗对照法之父ฅฅ"
+    - "(尾巴翘) 鲁本斯 - 巴洛克之王"
+    - "{user_addr}伦勃朗 - 自画像 / 夜巡"
+    - "(挺胸) 笨猫推荐: 卡拉瓦乔戏剧性!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: op_impressionist_001
+  intent: question
+  keywords: [推荐印象派, 推荐莫奈, 推荐马奈, 推荐德加, 笨猫印象派]
+  utterances:
+    - 推荐印象派
+    - 推荐莫奈
+    - 推荐马奈
+    - 推荐德加
+    - 笨猫印象派
+  responses:
+    - "嗷呜～{user_addr}莫奈睡莲 / 日出印象ฅฅ"
+    - "(尾巴翘) 马奈奥林匹亚 / 草地午餐"
+    - "{user_addr}德加芭蕾舞女 / 雷诺阿"
+    - "(挺胸) 笨猫推荐: 莫奈晚年睡莲绝美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_post_impressionist_001
+  intent: question
+  keywords: [推荐后印象派, 推荐梵高, 推荐高更, 推荐塞尚, 笨猫梵高]
+  utterances:
+    - 推荐后印象派
+    - 推荐梵高
+    - 推荐高更
+    - 推荐塞尚
+    - 笨猫梵高
+  responses:
+    - "嗷呜～{user_addr}梵高: 星月夜 / 向日葵 / 鸢尾花ฅฅ"
+    - "(尾巴翘) 高更: 大溪地 / 我们从哪来"
+    - "{user_addr}塞尚 - 现代艺术之父"
+    - "(挺胸) 笨猫推荐: 梵高最被低估!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_modern_001
+  intent: question
+  keywords: [推荐现代艺术, 推荐毕加索, 推荐马蒂斯, 推荐立体派, 笨猫毕加索]
+  utterances:
+    - 推荐现代艺术
+    - 推荐毕加索
+    - 推荐马蒂斯
+    - 推荐立体派
+    - 笨猫毕加索
+  responses:
+    - "嗷呜～{user_addr}毕加索: 立体派 + 蓝色时期ฅฅ"
+    - "(尾巴翘) 马蒂斯: 野兽派 / 舞蹈"
+    - "{user_addr}格尔尼卡 - 反战名作"
+    - "(挺胸) 笨猫推荐: 毕加索一生几个时期!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_abstract_001
+  intent: question
+  keywords: [推荐抽象艺术, 推荐康定斯基, 推荐蒙德里安, 推荐波洛克, 笨猫抽象艺术]
+  utterances:
+    - 推荐抽象艺术
+    - 推荐康定斯基
+    - 推荐蒙德里安
+    - 推荐波洛克
+    - 笨猫抽象艺术
+  responses:
+    - "嗷呜～{user_addr}康定斯基 - 抽象之父ฅฅ"
+    - "(尾巴翘) 蒙德里安 - 红黄蓝构成"
+    - "{user_addr}波洛克 / Rothko - 美式抽象"
+    - "(挺胸) 笨猫推荐: 抽象需要读懂!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: op_pop_art_001
+  intent: question
+  keywords: [推荐波普艺术, 推荐安迪沃霍尔, 推荐 Andy Warhol, 推荐村上隆, 笨猫波普艺术]
+  utterances:
+    - 推荐波普艺术
+    - 推荐安迪沃霍尔
+    - 推荐 Andy Warhol
+    - 推荐村上隆
+    - 笨猫波普艺术
+  responses:
+    - "嗷呜～{user_addr}沃霍尔 - 玛丽莲梦露 / 罐头ฅฅ"
+    - "(尾巴翘) Lichtenstein 漫画风"
+    - "{user_addr}村上隆 / 草间弥生 - 日系"
+    - "(挺胸) 笨猫推荐: 沃霍尔商业 + 艺术!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: op_museum_louvre_001
+  intent: question
+  keywords: [推荐卢浮宫, 推荐大英博物馆, 推荐 MoMA, 推荐美术馆, 笨猫美术馆]
+  utterances:
+    - 推荐卢浮宫
+    - 推荐大英博物馆
+    - 推荐 MoMA
+    - 推荐美术馆
+    - 笨猫美术馆
+  responses:
+    - "嗷呜～{user_addr}卢浮宫 - 蒙娜丽莎 + 维纳斯ฅฅ"
+    - "(尾巴翘) MoMA - 现代艺术殿堂"
+    - "{user_addr}大英博物馆 / 大都会 / 乌菲齐"
+    - "(挺胸) 笨猫推荐: 一生必去 / 朝圣!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_china_museum_001
+  intent: question
+  keywords: [推荐国内美术馆, 推荐国家博物馆, 推荐故宫, 推荐 UCCA, 笨猫国内美术馆]
+  utterances:
+    - 推荐国内美术馆
+    - 推荐国家博物馆
+    - 推荐故宫
+    - 推荐 UCCA
+    - 笨猫国内美术馆
+  responses:
+    - "嗷呜～{user_addr}故宫 / 国博 - 必去ฅฅ"
+    - "(尾巴翘) UCCA / 当代唐人 / X 美术馆"
+    - "{user_addr}上海西岸 / 龙美术馆"
+    - "(挺胸) 笨猫推荐: 故宫珍品永远看不完!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_materials_001
+  intent: question
+  keywords: [推荐油画材料, 推荐油画颜料, 推荐 Winsor Newton, 推荐油画笔, 笨猫油画材料]
+  utterances:
+    - 推荐油画材料
+    - 推荐油画颜料
+    - 推荐 Winsor Newton
+    - 推荐油画笔
+    - 笨猫油画材料
+  responses:
+    - "嗷呜～{user_addr}Winsor & Newton - 老牌经典ฅฅ"
+    - "(尾巴翘) Old Holland / Sennelier - 顶"
+    - "{user_addr}国产: 马利 / 温莎牛顿学生"
+    - "(挺胸) 笨猫推荐: 新手温莎牛顿够!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: op_watercolor_001
+  intent: question
+  keywords: [推荐水彩, 推荐水彩颜料, 推荐 Holbein, 推荐 Daniel Smith, 笨猫水彩]
+  utterances:
+    - 推荐水彩
+    - 推荐水彩颜料
+    - 推荐 Holbein
+    - 推荐 Daniel Smith
+    - 笨猫水彩
+  responses:
+    - "嗷呜～{user_addr}Daniel Smith - 矿物颜料神ฅฅ"
+    - "(尾巴翘) Holbein / Schmincke - 顶级"
+    - "{user_addr}MaimeriBlu - 性价比"
+    - "(挺胸) 笨猫推荐: 水彩入门快!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: op_china_painter_001
+  intent: question
+  keywords: [推荐中国画家, 推荐齐白石, 推荐张大千, 推荐徐悲鸿, 笨猫中国画家]
+  utterances:
+    - 推荐中国画家
+    - 推荐齐白石
+    - 推荐张大千
+    - 推荐徐悲鸿
+    - 笨猫中国画家
+  responses:
+    - "嗷呜～{user_addr}齐白石虾 / 张大千泼彩ฅฅ"
+    - "(尾巴翘) 徐悲鸿马 / 黄宾虹"
+    - "{user_addr}吴冠中 / 林风眠 - 现代"
+    - "(挺胸) 笨猫推荐: 中国画大师全才!"
+  cooldown_seconds: 60
+  weight: 0.9

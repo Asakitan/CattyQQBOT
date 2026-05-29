@@ -1,0 +1,207 @@
+# 陶艺 / 拉坯 / 釉色 / 紫砂壶 / 宋瓷 routes (S6 R176 NLU 节点扩充, 第十七周期 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 G3 antique_collection 区分: 这里专注陶艺手作 + 制陶工艺.
+
+- name: cer_throwing_001
+  intent: question
+  keywords: [推荐拉坯, 推荐陶艺入门, 推荐拉坯机, 推荐手捏, 笨猫拉坯]
+  utterances:
+    - 推荐拉坯
+    - 推荐陶艺入门
+    - 推荐拉坯机
+    - 推荐手捏
+    - 笨猫拉坯
+  responses:
+    - "嗷呜～{user_addr}电动拉坯机 - 入门门槛低ฅฅ"
+    - "(尾巴翘) 手捏 / 泥条 / 泥板 - 手作"
+    - "{user_addr}小型家用拉坯机 1000+"
+    - "(挺胸) 笨猫推荐: 体验课先试!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cer_clay_001
+  intent: question
+  keywords: [推荐陶艺泥, 推荐陶泥, 推荐瓷泥, 推荐景德镇泥, 笨猫陶泥]
+  utterances:
+    - 推荐陶艺泥
+    - 推荐陶泥
+    - 推荐瓷泥
+    - 推荐景德镇泥
+    - 笨猫陶泥
+  responses:
+    - "嗷呜～{user_addr}景德镇 / 龙泉 - 高白瓷ฅฅ"
+    - "(尾巴翘) 紫砂 / 粗陶 / 陶土"
+    - "{user_addr}手捏 / 拉坯 / 注浆 不同"
+    - "(挺胸) 笨猫推荐: 景德镇瓷泥经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cer_glaze_001
+  intent: question
+  keywords: [推荐釉色, 推荐青瓷, 推荐青花, 推荐天目, 笨猫釉色]
+  utterances:
+    - 推荐釉色
+    - 推荐青瓷
+    - 推荐青花
+    - 推荐天目
+    - 笨猫釉色
+  responses:
+    - "嗷呜～{user_addr}青瓷 / 青花 / 粉彩 / 五彩ฅฅ"
+    - "(尾巴翘) 天目 / 油滴 / 兔毫 - 黑釉"
+    - "{user_addr}冰裂 / 开片 - 龙泉特色"
+    - "(挺胸) 笨猫推荐: 青瓷如玉!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cer_song_porcelain_001
+  intent: question
+  keywords: [推荐宋瓷, 推荐汝窑, 推荐官窑, 推荐定窑, 笨猫宋瓷]
+  utterances:
+    - 推荐宋瓷
+    - 推荐汝窑
+    - 推荐官窑
+    - 推荐定窑
+    - 笨猫宋瓷
+  responses:
+    - "嗷呜～{user_addr}五大名窑: 汝官哥定钧ฅฅ"
+    - "(尾巴翘) 汝窑天青色 / 官窑紫口铁足"
+    - "{user_addr}哥窑金丝铁线 / 定窑白瓷"
+    - "(挺胸) 笨猫推荐: 宋瓷美学顶峰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cer_ming_qing_001
+  intent: question
+  keywords: [推荐明青花, 推荐永乐青花, 推荐成化斗彩, 推荐康熙青花, 笨猫青花]
+  utterances:
+    - 推荐明青花
+    - 推荐永乐青花
+    - 推荐成化斗彩
+    - 推荐康熙青花
+    - 笨猫青花
+  responses:
+    - "嗷呜～{user_addr}永乐 / 宣德青花 - 苏麻离青ฅฅ"
+    - "(尾巴翘) 成化斗彩 - 鸡缸杯"
+    - "{user_addr}康熙青花 - 翠毛蓝"
+    - "(挺胸) 笨猫推荐: 拍卖鸡缸杯亿元!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cer_zisha_001
+  intent: question
+  keywords: [推荐紫砂壶, 推荐宜兴紫砂, 推荐紫砂泥, 推荐 zisha 大师, 笨猫紫砂壶]
+  utterances:
+    - 推荐紫砂壶
+    - 推荐宜兴紫砂
+    - 推荐紫砂泥
+    - 推荐 zisha 大师
+    - 笨猫紫砂壶
+  responses:
+    - "嗷呜～{user_addr}宜兴紫砂 - 唯一原产地ฅฅ"
+    - "(尾巴翘) 朱泥 / 紫泥 / 段泥"
+    - "{user_addr}顾景舟 / 蒋蓉 - 大师"
+    - "(挺胸) 笨猫推荐: 紫砂壶养出包浆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cer_japanese_001
+  intent: question
+  keywords: [推荐日本陶艺, 推荐乐烧, 推荐织部, 推荐九谷烧, 笨猫日本陶艺]
+  utterances:
+    - 推荐日本陶艺
+    - 推荐乐烧
+    - 推荐织部
+    - 推荐九谷烧
+    - 笨猫日本陶艺
+  responses:
+    - "嗷呜～{user_addr}乐烧 - 茶道大成ฅฅ"
+    - "(尾巴翘) 织部 / 信乐烧 - 古朴"
+    - "{user_addr}九谷烧 / 有田烧 / 备前烧"
+    - "(挺胸) 笨猫推荐: 日本陶器朴拙美!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cer_kiln_001
+  intent: question
+  keywords: [推荐陶艺窑, 推荐电窑, 推荐柴烧, 推荐烧成温度, 笨猫陶艺窑]
+  utterances:
+    - 推荐陶艺窑
+    - 推荐电窑
+    - 推荐柴烧
+    - 推荐烧成温度
+    - 笨猫陶艺窑
+  responses:
+    - "嗷呜～{user_addr}电窑 - 家用 / 控温准ฅฅ"
+    - "(尾巴翘) 柴烧 - 落灰自然变化"
+    - "{user_addr}气窑 / 还原 vs 氧化"
+    - "(挺胸) 笨猫推荐: 柴烧最有灵气!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cer_studio_001
+  intent: question
+  keywords: [推荐陶艺工作室, 推荐景德镇陶艺村, 推荐陶艺 DIY, 推荐陶艺体验, 笨猫陶艺工作室]
+  utterances:
+    - 推荐陶艺工作室
+    - 推荐景德镇陶艺村
+    - 推荐陶艺 DIY
+    - 推荐陶艺体验
+    - 笨猫陶艺工作室
+  responses:
+    - "嗷呜～{user_addr}景德镇三宝陶艺村 - 圣地ฅฅ"
+    - "(尾巴翘) 北京 798 / 上海莫干山"
+    - "{user_addr}体验课: 拉坯 + 上釉 + 烧"
+    - "(挺胸) 笨猫推荐: 周末陶艺超解压!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cer_korean_001
+  intent: question
+  keywords: [推荐韩国陶瓷, 推荐高丽青瓷, 推荐李朝白瓷, 推荐韩国茶碗, 笨猫韩国陶瓷]
+  utterances:
+    - 推荐韩国陶瓷
+    - 推荐高丽青瓷
+    - 推荐李朝白瓷
+    - 推荐韩国茶碗
+    - 笨猫韩国陶瓷
+  responses:
+    - "嗷呜～{user_addr}高丽青瓷 - 镶嵌技法ฅฅ"
+    - "(尾巴翘) 李朝白瓷 / 朝鲜白磁"
+    - "{user_addr}井户茶碗 - 日本茶道珍"
+    - "(挺胸) 笨猫推荐: 韩瓷古朴!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cer_european_001
+  intent: question
+  keywords: [推荐欧洲瓷器, 推荐 Meissen, 推荐 Royal Copenhagen, 推荐 Wedgwood, 笨猫欧洲瓷器]
+  utterances:
+    - 推荐欧洲瓷器
+    - 推荐 Meissen
+    - 推荐 Royal Copenhagen
+    - 推荐 Wedgwood
+    - 笨猫欧洲瓷器
+  responses:
+    - "嗷呜～{user_addr}Meissen - 欧洲瓷器鼻祖ฅฅ"
+    - "(尾巴翘) Royal Copenhagen - 丹麦"
+    - "{user_addr}Wedgwood / Limoges / Bernardaud"
+    - "(挺胸) 笨猫推荐: Meissen 蓝洋葱经典!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cer_modern_001
+  intent: question
+  keywords: [推荐现代陶艺, 推荐当代陶艺, 推荐陶艺艺术家, 推荐手作陶瓷品牌, 笨猫现代陶艺]
+  utterances:
+    - 推荐现代陶艺
+    - 推荐当代陶艺
+    - 推荐陶艺艺术家
+    - 推荐手作陶瓷品牌
+    - 笨猫现代陶艺
+  responses:
+    - "嗷呜～{user_addr}日系: 安藤雅信 / 鹿儿岛睦ฅฅ"
+    - "(尾巴翘) 国内: 戎彝 / 邵长宗"
+    - "{user_addr}小众手作: 知敬 / 雪未"
+    - "(挺胸) 笨猫推荐: 一只手作杯治愈!"
+  cooldown_seconds: 60
+  weight: 0.8

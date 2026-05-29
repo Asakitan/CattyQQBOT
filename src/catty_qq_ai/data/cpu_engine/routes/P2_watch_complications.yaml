@@ -1,0 +1,207 @@
+# 高端腕表收藏 / 复杂功能 / 拍卖 routes (S6 R174 NLU 节点扩充, 第十七周期 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 L8 luxury_watch (主品牌入门) 区分: 这里专注收藏向 + 复杂功能.
+
+- name: wc_complication_001
+  intent: question
+  keywords: [推荐复杂功能表, 推荐陀飞轮, 推荐万年历, 推荐三问, 笨猫陀飞轮]
+  utterances:
+    - 推荐复杂功能表
+    - 推荐陀飞轮
+    - 推荐万年历
+    - 推荐三问
+    - 笨猫陀飞轮
+  responses:
+    - "嗷呜～{user_addr}陀飞轮 / 万年历 / 三问 - 三大ฅฅ"
+    - "(尾巴翘) 计时 / 月相 / 双时区"
+    - "{user_addr}大复杂功能集成"
+    - "(挺胸) 笨猫推荐: 三问最炫!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_pp_001
+  intent: question
+  keywords: [推荐百达翡丽, 推荐 PP, 推荐 Nautilus, 推荐 Calatrava, 笨猫 PP]
+  utterances:
+    - 推荐百达翡丽
+    - 推荐 PP
+    - 推荐 Nautilus
+    - 推荐 Calatrava
+    - 笨猫 PP
+  responses:
+    - "嗷呜～{user_addr}Nautilus 5711 / Aquanaut - 神款ฅฅ"
+    - "(尾巴翘) Calatrava 5196 - 经典正装"
+    - "{user_addr}5740 / 5270 - 大复杂"
+    - "(挺胸) 笨猫推荐: PP 永远的天花板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_ap_001
+  intent: question
+  keywords: [推荐 AP, 推荐爱彼, 推荐皇家橡树, 推荐 Royal Oak, 笨猫爱彼]
+  utterances:
+    - 推荐 AP
+    - 推荐爱彼
+    - 推荐皇家橡树
+    - 推荐 Royal Oak
+    - 笨猫爱彼
+  responses:
+    - "嗷呜～{user_addr}皇家橡树 15400 / 15500 - 经典ฅฅ"
+    - "(尾巴翘) Offshore / Concept - 运动"
+    - "{user_addr}Code 11.59 - 新方向"
+    - "(挺胸) 笨猫推荐: 皇家橡树是 OG!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_vc_001
+  intent: question
+  keywords: [推荐江诗丹顿, 推荐 VC, 推荐 Overseas, 推荐 Patrimony, 笨猫 VC]
+  utterances:
+    - 推荐江诗丹顿
+    - 推荐 VC
+    - 推荐 Overseas
+    - 推荐 Patrimony
+    - 笨猫 VC
+  responses:
+    - "嗷呜～{user_addr}VC Overseas - 运动鼻祖ฅฅ"
+    - "(尾巴翘) Patrimony - 极简正装"
+    - "{user_addr}Traditionnelle / 顶级复杂"
+    - "(挺胸) 笨猫推荐: VC 三巨头之一!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_independent_001
+  intent: question
+  keywords: [推荐独立制表, 推荐 FP Journe, 推荐 Greubel Forsey, 推荐 De Bethune, 笨猫独立制表]
+  utterances:
+    - 推荐独立制表
+    - 推荐 FP Journe
+    - 推荐 Greubel Forsey
+    - 推荐 De Bethune
+    - 笨猫独立制表
+  responses:
+    - "嗷呜～{user_addr}FP Journe - 现代制表大师ฅฅ"
+    - "(尾巴翘) Greubel Forsey - 陀飞轮王"
+    - "{user_addr}De Bethune / MB&F / Voutilainen"
+    - "(挺胸) 笨猫推荐: 独立制表是巅峰!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wc_lange_001
+  intent: question
+  keywords: [推荐朗格, 推荐 A Lange, 推荐 Datograph, 推荐 Lange 1, 笨猫朗格]
+  utterances:
+    - 推荐朗格
+    - 推荐 A Lange
+    - 推荐 Datograph
+    - 推荐 Lange 1
+    - 笨猫朗格
+  responses:
+    - "嗷呜～{user_addr}Lange 1 - 朗格灵魂作ฅฅ"
+    - "(尾巴翘) Datograph - 计时之王"
+    - "{user_addr}双追针 / 万年历 / 三问"
+    - "(挺胸) 笨猫推荐: 朗格机芯艺术!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_rolex_collect_001
+  intent: question
+  keywords: [推荐劳力士收藏, 推荐 Daytona, 推荐 Submariner, 推荐 GMT 红蓝, 笨猫劳力士收藏]
+  utterances:
+    - 推荐劳力士收藏
+    - 推荐 Daytona
+    - 推荐 Submariner
+    - 推荐 GMT 红蓝
+    - 笨猫劳力士收藏
+  responses:
+    - "嗷呜～{user_addr}Daytona 116500 - 圣ฅฅ"
+    - "(尾巴翘) Submariner 116610 / 124060"
+    - "{user_addr}GMT Pepsi / Coke - 限量"
+    - "(挺胸) 笨猫推荐: Daytona 终极收藏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_movement_001
+  intent: question
+  keywords: [推荐手表机芯, 推荐 ETA 机芯, 推荐 in-house 机芯, 推荐 Cal 机芯, 笨猫机芯]
+  utterances:
+    - 推荐手表机芯
+    - 推荐 ETA 机芯
+    - 推荐 in-house 机芯
+    - 推荐 Cal 机芯
+    - 笨猫机芯
+  responses:
+    - "嗷呜～{user_addr}ETA 2824 - 行业基础ฅฅ"
+    - "(尾巴翘) 自产: PP 240 / AP 3120 / VC 5100"
+    - "{user_addr}日本: Miyota 9015 - 性价比"
+    - "(挺胸) 笨猫推荐: 看机芯定品牌!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wc_auction_001
+  intent: question
+  keywords: [推荐手表拍卖, 推荐 Phillips, 推荐 Christie's, 推荐 Sotheby's, 笨猫手表拍卖]
+  utterances:
+    - 推荐手表拍卖
+    - 推荐 Phillips
+    - 推荐 Christie's
+    - 推荐 Sotheby's
+    - 笨猫手表拍卖
+  responses:
+    - "嗷呜～{user_addr}Phillips - 顶级钟表拍卖ฅฅ"
+    - "(尾巴翘) Christie's / Sotheby's"
+    - "{user_addr}日内瓦 / 香港 / 纽约春拍秋拍"
+    - "(挺胸) 笨猫推荐: Phillips 钟表第一!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: wc_vintage_001
+  intent: question
+  keywords: [推荐古董表, 推荐 Vintage Rolex, 推荐 Paul Newman, 推荐 Pepsi 老款, 笨猫古董表]
+  utterances:
+    - 推荐古董表
+    - 推荐 Vintage Rolex
+    - 推荐 Paul Newman
+    - 推荐 Pepsi 老款
+    - 笨猫古董表
+  responses:
+    - "嗷呜～{user_addr}Paul Newman Daytona - 神话ฅฅ"
+    - "(尾巴翘) Submariner 5513 / 1680"
+    - "{user_addr}AP 5402A / PP 3700/1"
+    - "(挺胸) 笨猫的提醒: 鉴定第一!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wc_care_001
+  intent: question
+  keywords: [推荐手表保养, 推荐手表维修, 推荐机械表保养, 推荐手表洗油, 笨猫手表保养]
+  utterances:
+    - 推荐手表保养
+    - 推荐手表维修
+    - 推荐机械表保养
+    - 推荐手表洗油
+    - 笨猫手表保养
+  responses:
+    - "嗷呜～{user_addr}3-5 年完整保养一次ฅฅ"
+    - "(尾巴翘) 原厂 / 售后 - 高价但靠谱"
+    - "{user_addr}独立修表师 - 看口碑"
+    - "(挺胸) 笨猫推荐: 顶表必须原厂!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wc_strap_001
+  intent: question
+  keywords: [推荐表带, 推荐皮表带, 推荐胶带 NATO, 推荐 Camille Fournet, 笨猫表带]
+  utterances:
+    - 推荐表带
+    - 推荐皮表带
+    - 推荐胶带 NATO
+    - 推荐 Camille Fournet
+    - 笨猫表带
+  responses:
+    - "嗷呜～{user_addr}皮: Camille Fournet / ABP - 高级ฅฅ"
+    - "(尾巴翘) NATO / 帆布 - 运动风"
+    - "{user_addr}橡胶: Everest / Rubber B"
+    - "(挺胸) 笨猫推荐: 一表多带玩法!"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,207 @@
+# 古典音乐 / 交响 / 协奏 / 唱片版本 routes (S6 R172 NLU 节点扩充, 第十七周期 1/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 L0 music_deep / A3 music_instrument 区分: 这里专注古典作品 + 演奏家.
+
+- name: clm_composer_baroque_001
+  intent: question
+  keywords: [推荐巴赫, 推荐巴洛克, 推荐维瓦尔第, 推荐亨德尔, 笨猫巴赫]
+  utterances:
+    - 推荐巴赫
+    - 推荐巴洛克
+    - 推荐维瓦尔第
+    - 推荐亨德尔
+    - 笨猫巴赫
+  responses:
+    - "嗷呜～{user_addr}巴赫: 平均律 / 哥德堡变奏ฅฅ"
+    - "(尾巴翘) 维瓦尔第: 四季"
+    - "{user_addr}亨德尔: 弥赛亚 / 水上音乐"
+    - "(挺胸) 笨猫推荐: 巴赫宇宙美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: clm_composer_classical_001
+  intent: question
+  keywords: [推荐莫扎特, 推荐贝多芬, 推荐海顿, 推荐古典主义, 笨猫莫扎特]
+  utterances:
+    - 推荐莫扎特
+    - 推荐贝多芬
+    - 推荐海顿
+    - 推荐古典主义
+    - 笨猫莫扎特
+  responses:
+    - "嗷呜～{user_addr}莫扎特: 安魂曲 / 钢琴协奏ฅฅ"
+    - "(尾巴翘) 贝多芬 9 大交响曲"
+    - "{user_addr}海顿: 交响曲之父"
+    - "(挺胸) 笨猫推荐: 莫扎特弗里多神童!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: clm_composer_romantic_001
+  intent: question
+  keywords: [推荐肖邦, 推荐李斯特, 推荐勃拉姆斯, 推荐浪漫主义, 笨猫肖邦]
+  utterances:
+    - 推荐肖邦
+    - 推荐李斯特
+    - 推荐勃拉姆斯
+    - 推荐浪漫主义
+    - 笨猫肖邦
+  responses:
+    - "嗷呜～{user_addr}肖邦: 夜曲 / 叙事曲 / 玛祖卡ฅฅ"
+    - "(尾巴翘) 李斯特: 钟 / 匈牙利狂想曲"
+    - "{user_addr}勃拉姆斯 / 舒曼 / 舒伯特"
+    - "(挺胸) 笨猫推荐: 肖邦夜曲入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: clm_composer_romantic_late_001
+  intent: question
+  keywords: [推荐柴可夫斯基, 推荐拉赫玛尼诺夫, 推荐马勒, 推荐俄罗斯古典, 笨猫柴可夫斯基]
+  utterances:
+    - 推荐柴可夫斯基
+    - 推荐拉赫玛尼诺夫
+    - 推荐马勒
+    - 推荐俄罗斯古典
+    - 笨猫柴可夫斯基
+  responses:
+    - "嗷呜～{user_addr}老柴: 1812 / 天鹅湖 / 胡桃夹子ฅฅ"
+    - "(尾巴翘) 拉赫: 第二钢协 / 帕格尼尼狂想"
+    - "{user_addr}马勒 9 交 / 西贝柳斯"
+    - "(挺胸) 笨猫推荐: 1812 序曲炸裂!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: clm_composer_modern_001
+  intent: question
+  keywords: [推荐德彪西, 推荐拉威尔, 推荐斯特拉文斯基, 推荐现代音乐, 笨猫德彪西]
+  utterances:
+    - 推荐德彪西
+    - 推荐拉威尔
+    - 推荐斯特拉文斯基
+    - 推荐现代音乐
+    - 笨猫德彪西
+  responses:
+    - "嗷呜～{user_addr}德彪西: 月光 / 大海ฅฅ"
+    - "(尾巴翘) 拉威尔: 波莱罗 / 镜"
+    - "{user_addr}斯特拉文斯基: 春之祭"
+    - "(挺胸) 笨猫推荐: 月光是古典印象派!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: clm_pianist_001
+  intent: question
+  keywords: [推荐钢琴家, 推荐霍洛维兹, 推荐鲁宾斯坦, 推荐基辛, 笨猫钢琴家]
+  utterances:
+    - 推荐钢琴家
+    - 推荐霍洛维兹
+    - 推荐鲁宾斯坦
+    - 推荐基辛
+    - 笨猫钢琴家
+  responses:
+    - "嗷呜～{user_addr}霍洛维兹 / 鲁宾斯坦 - 老一代神ฅฅ"
+    - "(尾巴翘) 基辛 / 阿格里奇 - 当代"
+    - "{user_addr}郎朗 / 王羽佳 - 华人顶级"
+    - "(挺胸) 笨猫推荐: 阿格里奇女神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: clm_violinist_001
+  intent: question
+  keywords: [推荐小提琴家, 推荐海菲兹, 推荐穆特, 推荐帕尔曼, 笨猫小提琴家]
+  utterances:
+    - 推荐小提琴家
+    - 推荐海菲兹
+    - 推荐穆特
+    - 推荐帕尔曼
+    - 笨猫小提琴家
+  responses:
+    - "嗷呜～{user_addr}海菲兹 - 小提琴神之一ฅฅ"
+    - "(尾巴翘) 穆特 / 帕尔曼 / 米尔斯坦"
+    - "{user_addr}吕思清 / 宁峰 - 华人"
+    - "(挺胸) 笨猫推荐: 海菲兹炫技王!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: clm_conductor_001
+  intent: question
+  keywords: [推荐指挥家, 推荐卡拉扬, 推荐伯恩斯坦, 推荐 Solti, 笨猫指挥家]
+  utterances:
+    - 推荐指挥家
+    - 推荐卡拉扬
+    - 推荐伯恩斯坦
+    - 推荐 Solti
+    - 笨猫指挥家
+  responses:
+    - "嗷呜～{user_addr}卡拉扬 - 20 世纪指挥王ฅฅ"
+    - "(尾巴翘) 伯恩斯坦 / Solti / 切利比达克"
+    - "{user_addr}阿巴多 / 杜达梅尔 - 新生代"
+    - "(挺胸) 笨猫推荐: 卡拉扬贝多芬 9 交!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: clm_orchestra_001
+  intent: question
+  keywords: [推荐交响乐团, 推荐柏林爱乐, 推荐维也纳爱乐, 推荐皇家音乐厅, 笨猫交响乐团]
+  utterances:
+    - 推荐交响乐团
+    - 推荐柏林爱乐
+    - 推荐维也纳爱乐
+    - 推荐皇家音乐厅
+    - 笨猫交响乐团
+  responses:
+    - "嗷呜～{user_addr}柏林爱乐 / 维也纳爱乐 - 顶ฅฅ"
+    - "(尾巴翘) 阿姆斯特丹皇家 / 莱比锡布商"
+    - "{user_addr}芝加哥 / 波士顿 - 美国五大"
+    - "(挺胸) 笨猫推荐: 维也纳新年音乐会!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: clm_label_001
+  intent: question
+  keywords: [推荐古典厂牌, 推荐 DG, 推荐 Decca, 推荐 EMI, 笨猫古典厂牌]
+  utterances:
+    - 推荐古典厂牌
+    - 推荐 DG
+    - 推荐 Decca
+    - 推荐 EMI
+    - 笨猫古典厂牌
+  responses:
+    - "嗷呜～{user_addr}DG 黄标 - 古典金标准ฅฅ"
+    - "(尾巴翘) Decca / Philips / EMI"
+    - "{user_addr}Hyperion / Naxos - 小众优质"
+    - "(挺胸) 笨猫推荐: DG 永远 No.1!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: clm_concerto_001
+  intent: question
+  keywords: [推荐协奏曲, 推荐贝小协, 推荐柴小协, 推荐拉二, 笨猫协奏曲]
+  utterances:
+    - 推荐协奏曲
+    - 推荐贝小协
+    - 推荐柴小协
+    - 推荐拉二
+    - 笨猫协奏曲
+  responses:
+    - "嗷呜～{user_addr}贝多芬小协 - 协奏曲之王ฅฅ"
+    - "(尾巴翘) 柴小协 / 西贝柳斯 / 勃小协"
+    - "{user_addr}拉二钢协 - 钢协顶级"
+    - "(挺胸) 笨猫推荐: 拉二弹哭你!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: clm_record_collect_001
+  intent: question
+  keywords: [推荐古典 CD, 推荐黑胶唱片, 推荐古典收藏, 推荐头版唱片, 笨猫黑胶]
+  utterances:
+    - 推荐古典 CD
+    - 推荐黑胶唱片
+    - 推荐古典收藏
+    - 推荐头版唱片
+    - 笨猫黑胶
+  responses:
+    - "嗷呜～{user_addr}头版 / 早期 DG - 收藏ฅฅ"
+    - "(尾巴翘) 蓝标 / 红标 / 大花版"
+    - "{user_addr}日版 / 英版 / 美版"
+    - "(挺胸) 笨猫推荐: 头版有玄学!"
+  cooldown_seconds: 60
+  weight: 0.7

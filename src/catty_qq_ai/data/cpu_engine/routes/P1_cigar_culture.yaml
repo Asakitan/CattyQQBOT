@@ -1,0 +1,207 @@
+# 雪茄 / Cigar / 烟具 / 古巴茄 routes (S6 R173 NLU 节点扩充, 第十七周期 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 N1 bartending (烈酒) 区分: 这里专注雪茄文化.
+
+- name: cigar_origin_001
+  intent: question
+  keywords: [推荐雪茄, 推荐古巴雪茄, 推荐多米尼加, 推荐尼加拉瓜, 笨猫雪茄]
+  utterances:
+    - 推荐雪茄
+    - 推荐古巴雪茄
+    - 推荐多米尼加
+    - 推荐尼加拉瓜
+    - 笨猫雪茄
+  responses:
+    - "嗷呜～{user_addr}古巴: COHIBA / Bolivar - 顶级ฅฅ"
+    - "(尾巴翘) 多米尼加: Davidoff / Padron"
+    - "{user_addr}尼加拉瓜: Padron / My Father"
+    - "(挺胸) 笨猫推荐: 古巴雪茄是信仰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cigar_cohiba_001
+  intent: question
+  keywords: [推荐 COHIBA, 推荐高希霸, 推荐 Behike, 推荐 Robusto, 笨猫 COHIBA]
+  utterances:
+    - 推荐 COHIBA
+    - 推荐高希霸
+    - 推荐 Behike
+    - 推荐 Robusto
+    - 笨猫 COHIBA
+  responses:
+    - "嗷呜～{user_addr}Behike 52/54/56 - 高希霸顶尖ฅฅ"
+    - "(尾巴翘) Robusto / Siglo VI"
+    - "{user_addr}1966 / 1492 - 限量"
+    - "(挺胸) 笨猫推荐: Behike 信仰充值!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cigar_montecristo_001
+  intent: question
+  keywords: [推荐蒙特, 推荐 Montecristo, 推荐 Hoyo, 推荐 Partagas, 笨猫蒙特]
+  utterances:
+    - 推荐蒙特
+    - 推荐 Montecristo
+    - 推荐 Hoyo
+    - 推荐 Partagas
+    - 笨猫蒙特
+  responses:
+    - "嗷呜～{user_addr}Montecristo No.2 - 鱼雷之王ฅฅ"
+    - "(尾巴翘) Hoyo de Monterrey - 经典"
+    - "{user_addr}Partagas / Romeo y Julieta"
+    - "(挺胸) 笨猫推荐: 蒙特 2 号 / 经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cigar_cutter_001
+  intent: question
+  keywords: [推荐雪茄剪, 推荐雪茄打孔, 推荐 V 型剪, 推荐 Xikar, 笨猫雪茄剪]
+  utterances:
+    - 推荐雪茄剪
+    - 推荐雪茄打孔
+    - 推荐 V 型剪
+    - 推荐 Xikar
+    - 笨猫雪茄剪
+  responses:
+    - "嗷呜～{user_addr}平剪 / V 剪 / 打孔 - 三种ฅฅ"
+    - "(尾巴翘) Xikar / Colibri / Davidoff"
+    - "{user_addr}平剪最常见 / 适合大多茄"
+    - "(挺胸) 笨猫推荐: 入门 Xikar Xi3!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cigar_lighter_001
+  intent: question
+  keywords: [推荐雪茄打火机, 推荐杉木火柴, 推荐 Xikar 火, 推荐双火, 笨猫雪茄火机]
+  utterances:
+    - 推荐雪茄打火机
+    - 推荐杉木火柴
+    - 推荐 Xikar 火
+    - 推荐双火
+    - 笨猫雪茄火机
+  responses:
+    - "嗷呜～{user_addr}杉木火柴 - 最传统ฅฅ"
+    - "(尾巴翘) Xikar / Colibri - 喷火枪"
+    - "{user_addr}单火 / 双火 / 三火"
+    - "(挺胸) 笨猫推荐: 杉木火柴最有仪式感!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cigar_humidor_001
+  intent: question
+  keywords: [推荐雪茄盒, 推荐 humidor, 推荐西班牙杉木盒, 推荐恒湿盒, 笨猫雪茄盒]
+  utterances:
+    - 推荐雪茄盒
+    - 推荐 humidor
+    - 推荐西班牙杉木盒
+    - 推荐恒湿盒
+    - 笨猫雪茄盒
+  responses:
+    - "嗷呜～{user_addr}西班牙雪松内衬 - 关键ฅฅ"
+    - "(尾巴翘) Davidoff / Elie Bleu - 高端"
+    - "{user_addr}恒湿 65-72% / Boveda 包"
+    - "(挺胸) 笨猫推荐: 入门带恒湿包够!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cigar_smoking_001
+  intent: question
+  keywords: [推荐雪茄抽法, 推荐雪茄入门, 推荐第一支雪茄, 推荐雪茄品鉴, 笨猫雪茄抽法]
+  utterances:
+    - 推荐雪茄抽法
+    - 推荐雪茄入门
+    - 推荐第一支雪茄
+    - 推荐雪茄品鉴
+    - 笨猫雪茄抽法
+  responses:
+    - "嗷呜～{user_addr}口腔吸 - 别肺吸ฅฅ"
+    - "(尾巴翘) 慢吸 / 别催 / 1 支 1 小时"
+    - "{user_addr}配饮: 威士忌 / 红酒 / 咖啡"
+    - "(挺胸) 笨猫推荐: 第一支选小环径!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cigar_size_001
+  intent: question
+  keywords: [推荐雪茄尺寸, 推荐 Robusto, 推荐 Corona, 推荐 Churchill, 笨猫雪茄尺寸]
+  utterances:
+    - 推荐雪茄尺寸
+    - 推荐 Robusto
+    - 推荐 Corona
+    - 推荐 Churchill
+    - 笨猫雪茄尺寸
+  responses:
+    - "嗷呜～{user_addr}Robusto 50x125mm - 主流ฅฅ"
+    - "(尾巴翘) Corona 42x130mm - 经典"
+    - "{user_addr}Churchill 47x180mm - 长茄"
+    - "(挺胸) 笨猫推荐: Robusto 入门标配!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cigar_strength_001
+  intent: question
+  keywords: [推荐雪茄强度, 推荐淡雪茄, 推荐浓雪茄, 推荐雪茄选, 笨猫雪茄强度]
+  utterances:
+    - 推荐雪茄强度
+    - 推荐淡雪茄
+    - 推荐浓雪茄
+    - 推荐雪茄选
+    - 笨猫雪茄强度
+  responses:
+    - "嗷呜～{user_addr}Mild / Medium / Full bodyฅฅ"
+    - "(尾巴翘) 新手 Mild 起步 - Macanudo"
+    - "{user_addr}进阶 Medium - Punch / RyJ"
+    - "(挺胸) 笨猫推荐: 别一上来抽 Padron!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cigar_age_001
+  intent: question
+  keywords: [推荐雪茄陈年, 推荐老茄, 推荐古巴老茄, 推荐 aging 雪茄, 笨猫老雪茄]
+  utterances:
+    - 推荐雪茄陈年
+    - 推荐老茄
+    - 推荐古巴老茄
+    - 推荐 aging 雪茄
+    - 笨猫老雪茄
+  responses:
+    - "嗷呜～{user_addr}陈年 5-10 年 - 变化神奇ฅฅ"
+    - "(尾巴翘) 西班牙雪松 + 65% 湿度"
+    - "{user_addr}老茄 = 圆润 + 复杂"
+    - "(挺胸) 笨猫推荐: 收 LE 限量陈年!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cigar_pair_drink_001
+  intent: question
+  keywords: [推荐雪茄配酒, 推荐雪茄威士忌, 推荐雪茄朗姆, 推荐雪茄咖啡, 笨猫雪茄配酒]
+  utterances:
+    - 推荐雪茄配酒
+    - 推荐雪茄威士忌
+    - 推荐雪茄朗姆
+    - 推荐雪茄咖啡
+    - 笨猫雪茄配酒
+  responses:
+    - "嗷呜～{user_addr}威士忌 - 经典之王ฅฅ"
+    - "(尾巴翘) 古巴朗姆 + 古巴茄 / 绝配"
+    - "{user_addr}意式咖啡 / 干邑"
+    - "(挺胸) 笨猫推荐: 雪茄 + 雪山就够了!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cigar_lounge_001
+  intent: question
+  keywords: [推荐雪茄吧, 推荐雪茄会所, 推荐雪茄文化, 推荐雪茄展, 笨猫雪茄吧]
+  utterances:
+    - 推荐雪茄吧
+    - 推荐雪茄会所
+    - 推荐雪茄文化
+    - 推荐雪茄展
+    - 笨猫雪茄吧
+  responses:
+    - "嗷呜～{user_addr}北京 / 上海 - 高端雪茄吧ฅฅ"
+    - "(尾巴翘) 哈瓦那雪茄节 - 朝圣"
+    - "{user_addr}找正宗 LCDH / La Casa del Habano"
+    - "(挺胸) 笨猫推荐: 雪茄要慢慢品!"
+  cooldown_seconds: 60
+  weight: 0.7
