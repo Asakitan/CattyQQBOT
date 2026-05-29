@@ -1,0 +1,206 @@
+# 足球 / 世界杯 / 球星 routes (S6 R503 NLU 节点扩充, 第五十周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: fb_worldcup_001
+  intent: question
+  keywords: [推荐世界杯, 推荐世界杯历史, 推荐 FIFA, 推荐世界杯冠军, 笨猫世界杯]
+  utterances:
+    - 推荐世界杯
+    - 推荐世界杯历史
+    - 推荐 FIFA World Cup
+    - 推荐世界杯冠军
+    - 笨猫世界杯
+  responses:
+    - "嗷呜～{user_addr}世界杯 1930 乌拉圭首届ฅฅ"
+    - "(尾巴翘) 巴西 5 冠 / 德国意大利 4 冠"
+    - "{user_addr}2022 卡塔尔 阿根廷夺冠"
+    - "(挺胸) 猫猫推荐: 重温 86 马拉多纳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_stars_001
+  intent: question
+  keywords: [推荐球星, 推荐梅西, 推荐 C 罗, 推荐内马尔, 笨猫球星]
+  utterances:
+    - 推荐球星
+    - 推荐梅西
+    - "推荐 C 罗"
+    - 推荐内马尔
+    - 笨猫球星
+  responses:
+    - "嗷呜～{user_addr}梅西 Messi - GOAT ฅฅ"
+    - "(尾巴翘) C 罗 Ronaldo / 内马尔 Neymar"
+    - "{user_addr}姆巴佩 / 哈兰德 - 新生代"
+    - "(挺胸) 笨猫推荐: 梅西卡塔尔圆梦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_top5_001
+  intent: question
+  keywords: [推荐五大联赛, 推荐英超, 推荐西甲, 推荐意甲, 笨猫联赛]
+  utterances:
+    - 推荐五大联赛
+    - 推荐英超
+    - 推荐西甲
+    - 推荐意甲
+    - 笨猫联赛
+  responses:
+    - "嗷呜～{user_addr}英超 - 节奏最快ฅฅ"
+    - "(尾巴翘) 西甲 / 意甲 / 德甲 / 法甲"
+    - "{user_addr}英超商业化最高 西甲技术流"
+    - "(挺胸) 人家推荐: 周末看英超!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_csl_001
+  intent: question
+  keywords: [推荐中超, 推荐中乙, 推荐中甲, 推荐国安, 笨猫中超]
+  utterances:
+    - 推荐中超
+    - 推荐中乙
+    - 推荐中甲
+    - 推荐国安
+    - 笨猫中超
+  responses:
+    - "嗷呜～{user_addr}中超 CSL 16 队ฅฅ"
+    - "(尾巴翘) 上海海港 / 山东泰山 / 北京国安"
+    - "{user_addr}中甲次级 / 中乙第三级"
+    - "(挺胸) 笨猫推荐: 现场看比工体!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fb_jersey_001
+  intent: question
+  keywords: [推荐球衣品牌, 推荐 Nike 球衣, 推荐 Adidas 球衣, 推荐 Puma 球衣, 笨猫球衣]
+  utterances:
+    - 推荐球衣品牌
+    - 推荐 Nike 球衣
+    - 推荐 Adidas 球衣
+    - 推荐 Puma 球衣
+    - 笨猫球衣
+  responses:
+    - "嗷呜～{user_addr}Nike - 英超主力ฅฅ"
+    - "(尾巴翘) Adidas - 德国阿根廷"
+    - "{user_addr}Puma / Umbro / Kappa"
+    - "(挺胸) 猫猫推荐: 球员版透气更好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_boots_001
+  intent: question
+  keywords: [推荐足球鞋, 推荐草地胶钉, 推荐 AG 鞋, 推荐 FG 鞋, 笨猫足球鞋]
+  utterances:
+    - 推荐足球鞋
+    - 推荐草地胶钉
+    - 推荐 AG 鞋
+    - 推荐 FG 鞋
+    - 笨猫足球鞋
+  responses:
+    - "嗷呜～{user_addr}FG 天然草 / AG 人草ฅฅ"
+    - "(尾巴翘) Nike Mercurial / Adidas Predator"
+    - "{user_addr}TF 碎钉适合硬场地"
+    - "(挺胸) 笨猫推荐: 选鞋钉要看场地!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_training_001
+  intent: question
+  keywords: [推荐足球训练, 推荐传球训练, 推荐颠球, 推荐过人技巧, 笨猫足球训练]
+  utterances:
+    - 推荐足球训练
+    - 推荐传球训练
+    - 推荐颠球
+    - 推荐过人技巧
+    - 笨猫足球训练
+  responses:
+    - "嗷呜～{user_addr}颠球练脚感 100 次起ฅฅ"
+    - "(尾巴翘) 传接 / 带球 / 射门 / 体能"
+    - "{user_addr}盘带练 1V1 / 短传配合"
+    - "(挺胸) 人家推荐: 每天颠球 15 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_goalkeeper_001
+  intent: question
+  keywords: [推荐守门员, 推荐门将, 推荐门将训练, 推荐扑救, 笨猫守门员]
+  utterances:
+    - 推荐守门员
+    - 推荐门将
+    - 推荐门将训练
+    - 推荐扑救
+    - 笨猫守门员
+  responses:
+    - "嗷呜～{user_addr}诺伊尔 Neuer - 门卫鼻祖ฅฅ"
+    - "(尾巴翘) 库尔图瓦 / 阿利松 / 多纳鲁马"
+    - "{user_addr}门将练反应 / 站位 / 出击"
+    - "(挺胸) 笨猫推荐: 看诺伊尔学站位!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fb_tactics_001
+  intent: question
+  keywords: [推荐足球战术, 推荐三后卫, 推荐四后卫, 推荐 4-3-3, 笨猫战术]
+  utterances:
+    - 推荐足球战术
+    - 推荐三后卫
+    - 推荐四后卫
+    - "推荐 4-3-3"
+    - 笨猫战术
+  responses:
+    - "嗷呜～{user_addr}4-3-3 攻守平衡ฅฅ"
+    - "(尾巴翘) 3-5-2 / 4-4-2 / 4-2-3-1"
+    - "{user_addr}三中卫翼卫前插 / 四后卫稳"
+    - "(挺胸) 人家推荐: 瓜帅 tiki-taka!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fb_transfer_001
+  intent: question
+  keywords: [推荐转会窗口, 推荐冬窗, 推荐夏窗, 推荐自由转会, 笨猫转会]
+  utterances:
+    - 推荐转会窗口
+    - 推荐冬窗
+    - 推荐夏窗
+    - 推荐自由转会
+    - 笨猫转会
+  responses:
+    - "嗷呜～{user_addr}夏窗 6-9 月主战场ฅฅ"
+    - "(尾巴翘) 冬窗 1 月补强"
+    - "{user_addr}Bosman 自由身 / 租借 / 买断"
+    - "(挺胸) 笨猫推荐: 关注 Romano Here We Go!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fb_ucl_001
+  intent: question
+  keywords: [推荐欧冠, 推荐 UCL, 推荐欧联, 推荐欧会杯, 笨猫欧冠]
+  utterances:
+    - 推荐欧冠
+    - 推荐 UCL
+    - 推荐欧联
+    - 推荐欧会杯
+    - 笨猫欧冠
+  responses:
+    - "嗷呜～{user_addr}欧冠 UCL - 俱乐部最高ฅฅ"
+    - "(尾巴翘) 皇马 15 冠 / 米兰 7 冠"
+    - "{user_addr}欧联 UEL / 欧会杯 UECL"
+    - "(挺胸) 人家推荐: 决赛之夜必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_doc_001
+  intent: question
+  keywords: [推荐足球纪录片, 推荐 Sunderland, 推荐 All or Nothing, 推荐球队纪录片, 笨猫足球纪录片]
+  utterances:
+    - 推荐足球纪录片
+    - 推荐 Sunderland Til I Die
+    - 推荐 All or Nothing
+    - 推荐球队纪录片
+    - 笨猫足球纪录片
+  responses:
+    - "嗷呜～{user_addr}Sunderland Til I Die - 痛并爱着ฅฅ"
+    - "(尾巴翘) All or Nothing 曼城 / 热刺"
+    - "{user_addr}Take Us Home Leeds / Class of 92"
+    - "(挺胸) 笨猫推荐: 桑德兰看哭过!"
+  cooldown_seconds: 60
+  weight: 0.8

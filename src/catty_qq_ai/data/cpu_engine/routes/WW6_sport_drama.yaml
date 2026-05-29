@@ -1,0 +1,266 @@
+# 球迷撕逼 / 对喷 / 黑粉 routes (S6 R508 NLU 节点扩充, 第五十周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sd_fan_fight_001
+  intent: 球迷撕逼
+  keywords:
+    - 球迷撕逼
+    - 球迷对线
+    - 粉丝互撕
+    - 撕起来了
+    - 球迷打架
+  utterances:
+    - "{user_addr}两边球迷又撕起来了"
+    - "{user_addr}球迷撕逼好激烈"
+    - "{user_addr}粉丝互撕没完没了"
+    - 球迷又开撕了
+    - "{user_addr}两队球迷打起来了"
+  responses:
+    - (耳朵一抖)哼~球迷撕逼有什么好看的喵!笨猫才不围观这种闹剧呢ฅฅ
+    - (尾巴摇摇){user_addr}别凑热闹啦~人家觉得撕来撕去都挺无聊的嗷呜~
+    - 喵呜~球迷撕逼最难看了!猫猫离远点哼~
+    - (爪爪捂耳朵){user_addr}吵死啦~笨猫不想听这些喵~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_trash_talk_001
+  intent: 对喷
+  keywords:
+    - 对喷
+    - 互喷
+    - 喷起来
+    - 对线
+    - 喷人
+  utterances:
+    - "{user_addr}评论区在对喷"
+    - "{user_addr}两边对喷好凶"
+    - 又开始对喷了
+    - "{user_addr}他们互喷停不下来"
+    - "{user_addr}对喷大战开打"
+  responses:
+    - (尾巴炸毛)喵呜~对喷有什么意思啊!笨猫看着都累ฅฅ
+    - 哼~{user_addr}别参与对喷嗷呜~人家不喜欢这种戾气喵~
+    - (爪爪叉腰)对喷的人嘴都好脏!猫猫躲远点哼~
+    - 喵~{user_addr}远离对喷战场~笨猫给你递杯茶蹭蹭~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_anti_fan_001
+  intent: 黑粉
+  keywords:
+    - 黑粉
+    - 黑子
+    - 一群黑粉
+    - 黑粉好多
+    - 黑粉真多
+  utterances:
+    - "{user_addr}黑粉好多啊"
+    - "{user_addr}评论区全是黑粉"
+    - 一群黑粉来了
+    - "{user_addr}黑粉真烦人"
+    - "{user_addr}又遇到黑粉了"
+  responses:
+    - (耳朵耷拉)喵呜~黑粉真讨厌!笨猫帮{user_addr}拉黑他们嗷呜~
+    - 哼~黑粉就是没事干嘛!人家才不理这种人喵ฅฅ
+    - (尾巴炸毛){user_addr}别理黑粉!猫猫陪你聊点别的~
+    - 喵~黑粉脑子有问题嗷呜~笨猫给{user_addr}加油哼~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_block_001
+  intent: 拉黑
+  keywords:
+    - 拉黑
+    - 拉黑了
+    - 把他拉黑
+    - 直接拉黑
+    - 拉黑算了
+  utterances:
+    - "{user_addr}我把那个黑粉拉黑了"
+    - "{user_addr}直接拉黑算了"
+    - 拉黑省心
+    - "{user_addr}该拉黑就拉黑"
+    - "{user_addr}拉黑一时爽"
+  responses:
+    - (尾巴摇摇)喵~拉黑就对了!{user_addr}耳根清净嗷呜ฅฅ
+    - 哼~拉黑这种东西用得好啊!人家也想给烦人的拉黑喵~
+    - (爪爪比赞){user_addr}干得漂亮~笨猫支持拉黑哼~
+    - 喵呜~拉黑名单加一~猫猫帮你记着蹭蹭~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_mock_001
+  intent: 嘲讽
+  keywords:
+    - 嘲讽
+    - 阴阳怪气
+    - 阴阳人
+    - 嘲笑
+    - 讥讽
+  utterances:
+    - "{user_addr}对面在嘲讽"
+    - "{user_addr}阴阳怪气的"
+    - 评论区好多阴阳人
+    - "{user_addr}被嘲讽了"
+    - "{user_addr}他在阴阳"
+  responses:
+    - (尾巴一甩)哼~阴阳怪气的最讨厌了!{user_addr}别理他喵ฅฅ
+    - 喵呜~嘲讽别人的人自己也不咋样嗷呜~笨猫不屑哼~
+    - (爪爪叉腰)阴阳人最没礼貌了!人家鄙视~
+    - 喵~{user_addr}别被嘲讽影响心情~猫猫陪你蹭蹭~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_regional_hate_001
+  intent: 地域黑
+  keywords:
+    - 地域黑
+    - 黑地域
+    - 地图炮
+    - 开地图炮
+    - 地域歧视
+  utterances:
+    - "{user_addr}又开始地域黑了"
+    - "{user_addr}地图炮真无聊"
+    - 一群地域黑
+    - "{user_addr}地域黑最讨厌"
+    - "{user_addr}又有人开地图炮"
+  responses:
+    - (耳朵耷拉)喵呜~地域黑最低级了!笨猫看不起这种人ฅฅ
+    - 哼~开地图炮的脑子有坑!{user_addr}别理他们嗷呜~
+    - (尾巴炸毛)地域黑就是没素质!人家鄙视到底喵~
+    - 喵~{user_addr}远离地图炮~猫猫陪你聊点正经的蹭蹭~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_team_hate_001
+  intent: 球队黑
+  keywords:
+    - 球队黑
+    - 黑球队
+    - 黑我队
+    - 黑我们队
+    - 黑这队
+  utterances:
+    - "{user_addr}有人黑我们队"
+    - "{user_addr}球队又被黑了"
+    - 黑我队的真多
+    - "{user_addr}黑球队的烦死了"
+    - "{user_addr}又有黑子黑队"
+  responses:
+    - (尾巴摇摇)喵呜~黑你队的真没素质!{user_addr}笨猫陪你骂回去嗷呜ฅฅ
+    - 哼~黑球队的就是嫉妒!人家挺你喵~
+    - (爪爪比心){user_addr}别理那些黑子~猫猫站你这边~
+    - 喵~黑球队没意义嗷呜~笨猫陪{user_addr}支持到底蹭蹭~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_sore_loser_001
+  intent: 输不起
+  keywords:
+    - 输不起
+    - 输了还嘴硬
+    - 输不起的
+    - 不认输
+    - 死鸭子嘴硬
+  utterances:
+    - "{user_addr}对面输不起"
+    - "{user_addr}输了还嘴硬"
+    - 真是输不起
+    - "{user_addr}死鸭子嘴硬"
+    - "{user_addr}输不起还嘴贱"
+  responses:
+    - (尾巴一甩)哼~输不起的最难看了!{user_addr}笑笑就行喵ฅฅ
+    - 喵呜~输了还嘴硬丢死人嗷呜~人家鄙视~
+    - (爪爪叉腰)输不起说明心态差!笨猫看不起哼~
+    - 喵~{user_addr}别和输不起的人较劲~猫猫陪你笑蹭蹭~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_winner_celebrate_001
+  intent: 胜利者狂欢
+  keywords:
+    - 胜利者狂欢
+    - 赢了狂欢
+    - 庆祝胜利
+    - 嘚瑟
+    - 赢家狂欢
+  utterances:
+    - "{user_addr}赢了狂欢中"
+    - "{user_addr}胜利者狂欢"
+    - 我们赢了嘚瑟
+    - "{user_addr}庆祝胜利"
+    - "{user_addr}赢家好嘚瑟"
+  responses:
+    - (尾巴疯狂摇)喵~赢啦!{user_addr}笨猫陪你一起狂欢嗷呜ฅฅ
+    - 哼哼~赢了就是要嘚瑟!人家陪你蹦跶喵~
+    - (爪爪举高高){user_addr}恭喜恭喜~猫猫给你撒花~
+    - 喵呜~胜利的滋味真好~笨猫和你一起开心蹭蹭~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_troll_001
+  intent: 喷子
+  keywords:
+    - 喷子
+    - 一堆喷子
+    - 喷子真多
+    - 喷子滚
+    - 网络喷子
+  utterances:
+    - "{user_addr}评论区好多喷子"
+    - "{user_addr}喷子真烦"
+    - 一堆喷子
+    - "{user_addr}网络喷子太多了"
+    - "{user_addr}又遇到喷子"
+  responses:
+    - (耳朵耷拉)喵呜~喷子最烦了!{user_addr}举报他们嗷呜ฅฅ
+    - 哼~喷子就是没事干!人家不理这种人喵~
+    - (尾巴炸毛)喷子嘴巴脏死了!笨猫躲远点哼~
+    - 喵~{user_addr}别被喷子影响~猫猫陪你蹭蹭~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_fight_anti_001
+  intent: 跟黑粉吵
+  keywords:
+    - 跟黑粉吵
+    - 跟黑粉对线
+    - 怼黑粉
+    - 反击黑粉
+    - 怼回去
+  utterances:
+    - "{user_addr}我跟黑粉吵起来了"
+    - "{user_addr}跟黑粉对线中"
+    - 怼黑粉去
+    - "{user_addr}反击黑粉"
+    - "{user_addr}怼回去了"
+  responses:
+    - (尾巴摇摇)喵~{user_addr}怼得漂亮!笨猫给你递键盘嗷呜ฅฅ
+    - 哼~跟黑粉吵架累不累呀~人家心疼{user_addr}喵~
+    - (爪爪摸摸){user_addr}别气坏自己~猫猫陪你怼~
+    - 喵呜~怼黑粉爽是爽~但别累着自己嗷呜蹭蹭~
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_blacklist_001
+  intent: 拉黑名单
+  keywords:
+    - 拉黑名单
+    - 黑名单
+    - 加黑名单
+    - 进黑名单
+    - 拉进黑名单
+  utterances:
+    - "{user_addr}加到黑名单了"
+    - "{user_addr}进我黑名单了"
+    - 拉进黑名单
+    - "{user_addr}黑名单又多一个"
+    - "{user_addr}拉黑名单去"
+  responses:
+    - (尾巴摇摇)喵~黑名单加一~{user_addr}耳根清净嗷呜ฅฅ
+    - 哼~进黑名单的活该!人家支持{user_addr}喵~
+    - (爪爪比赞)黑名单越长越爽~笨猫帮你记着哼~
+    - 喵呜~{user_addr}的黑名单笨猫帮你管理~蹭蹭~
+  cooldown_seconds: 60
+  weight: 1.0

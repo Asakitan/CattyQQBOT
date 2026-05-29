@@ -1,0 +1,206 @@
+# 球队输了 / 心碎 / 痛骂 routes (S6 R507 NLU 节点扩充, 第五十周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: tl_team_lost_001
+  intent: complaint
+  keywords: [球队输了, 又输了, 输球了, 0比, 输惨了]
+  utterances:
+    - 球队又输了
+    - 我们队输了
+    - 又输球了好烦
+    - 0 比 3 输惨了
+    - 主队输了心碎
+  responses:
+    - "(尾巴垂下来) 嗷呜～{user_addr}的球队输了啊! 猫猫陪{user_addr}难过一下下ฅฅ"
+    - "哼～输了就输了嘛! {user_addr}别太上头, 下次再赢回来喵～"
+    - "(凑过去贴贴) 笨猫知道{user_addr}很失望~ 来抱猫猫消消气贴贴"
+    - "嗷呜～{user_addr}先吃个鱼干压压惊! 球场上的事看开点喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_heartbroken_001
+  intent: complaint
+  keywords: [心碎, 心碎了, 心都碎了, 太心碎, 心碎一地]
+  utterances:
+    - 我心碎了
+    - 这场比赛心都碎了
+    - 心碎一地
+    - 球队让我心碎
+    - 太心碎了笨猫
+  responses:
+    - "(小爪子轻拍胸口) 嗷呜～{user_addr}的心碎了!! 笨猫帮{user_addr}捡起来喵"
+    - "(贴贴) 心碎的{user_addr}过来~ 猫猫的尾巴借{user_addr}抱一下ฅฅ"
+    - "哼～{user_addr}心碎成这样! 比赛而已嘛~ 人家陪{user_addr}缓缓"
+    - "嗷呜～{user_addr}别这样啦! 笨猫看了也跟着难过喵 (尾巴垂)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_curse_001
+  intent: complaint
+  keywords: [痛骂, 骂死了, 骂一顿, 想骂人, 骂街]
+  utterances:
+    - 我要痛骂他们
+    - 真想骂死这帮人
+    - 想骂一顿
+    - 真想骂街
+    - 笨猫陪我骂
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}骂轻点喵! 猫猫耳朵嫩~ 不过气是真的"
+    - "哼～{user_addr}骂吧骂吧! 笨猫给{user_addr}加油! 不要骂太狠喵"
+    - "(尾巴一甩) 痛骂可以~ 但{user_addr}别骂哑嗓子! 人家心疼"
+    - "嗷呜～{user_addr}骂完就好了! 笨猫陪{user_addr}骂两句解气ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_unfair_001
+  intent: complaint
+  keywords: [不公平, 太不公平, 不公正, 黑哨, 暗箱]
+  utterances:
+    - 这比赛太不公平
+    - 完全不公正
+    - 全是黑哨啊
+    - 一看就是暗箱
+    - 笨猫这不公平
+  responses:
+    - "嗷呜～{user_addr}觉得不公平啊! 猫猫陪{user_addr}义愤填膺一下"
+    - "(瞪眼) 哼～确实有点问题! {user_addr}消消气, 笨猫给{user_addr}揉揉"
+    - "(尾巴翘起) 不公平的事人家看着也来气! {user_addr}别憋着喵"
+    - "嗷呜～{user_addr}冷静冷静~ 比赛归比赛, 气坏身体猫猫心疼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_ref_black_001
+  intent: complaint
+  keywords: [裁判黑, 黑裁判, 裁判瞎了, 裁判收钱, 烂裁判]
+  utterances:
+    - 裁判太黑了
+    - 这裁判瞎了吧
+    - 烂裁判收钱了
+    - 黑裁判滚出去
+    - 笨猫裁判好黑
+  responses:
+    - "(竖起耳朵) 嗷呜～{user_addr}说裁判黑啊! 猫猫陪{user_addr}骂裁判!"
+    - "哼～黑裁判最讨厌了! {user_addr}消气~ 笨猫给{user_addr}变个干净裁判ฅฅ"
+    - "(尾巴炸) 烂裁判! {user_addr}别和这种人生气, 不值得喵"
+    - "嗷呜～{user_addr}的怨气笨猫接住啦! 来吃个鱼干消消气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_curse_coach_001
+  intent: complaint
+  keywords: [骂教练, 教练下课, 换教练, 教练瞎指挥, 教练战术]
+  utterances:
+    - 教练给我下课
+    - 真想骂死教练
+    - 这教练战术稀烂
+    - 换教练吧
+    - 笨猫教练瞎指挥
+  responses:
+    - "嗷呜～{user_addr}对教练有意见啊! 猫猫认真听{user_addr}吐槽喵"
+    - "(歪头) 哼～换教练这种大事~ {user_addr}先骂痛快了再说"
+    - "(尾巴一甩) 教练战术不行! {user_addr}骂得对, 笨猫附议ฅฅ"
+    - "嗷呜～{user_addr}骂教练可以! 但别气坏自己~ 笨猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_replace_11_001
+  intent: playful
+  keywords: [换 11 个, 11 个全换, 换光, 整队换, 全换掉]
+  utterances:
+    - 这队应该换 11 个
+    - 11 个全换掉
+    - 整队换光算了
+    - 全部换掉
+    - 笨猫 11 个都不行
+  responses:
+    - "(惊掉爪子) 嗷呜～11 个全换!! {user_addr}下手好狠喵!"
+    - "哼～{user_addr}气得想整队推倒重来啊! 笨猫懂这种心情ฅฅ"
+    - "(歪头) 11 个全换的话~ {user_addr}要不当教练算了? 笨猫给{user_addr}加油"
+    - "嗷呜～{user_addr}这是真的失望了! 来吃个鱼干平复一下喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_rebuild_001
+  intent: complaint
+  keywords: [重组, 重建, 推倒重来, 重新组队, 解散重组]
+  utterances:
+    - 这队该重组了
+    - 解散重组吧
+    - 推倒重来
+    - 重建球队
+    - 笨猫这队没救了重组
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}觉得要重组了啊! 笨猫陪{user_addr}叹气一下"
+    - "哼～重组这种事~ 老板才能决定! {user_addr}骂归骂, 别太上头"
+    - "(贴贴) 推倒重来也是种希望! {user_addr}对下个赛季抱点期待嘛ฅฅ"
+    - "嗷呜～{user_addr}爱得深才骂得狠! 笨猫懂的~ 来抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_cant_watch_001
+  intent: complaint
+  keywords: [看不下去, 看不下去了, 看不了, 不忍看, 闭眼了]
+  utterances:
+    - 真的看不下去了
+    - 这场我看不了
+    - 不忍心看
+    - 我闭眼了
+    - 笨猫看不下去
+  responses:
+    - "(伸出爪子捂{user_addr}眼睛) 嗷呜～{user_addr}看不下去就别看! 猫猫陪{user_addr}~"
+    - "哼～看不下去就关电视嘛! {user_addr}别折磨自己喵"
+    - "(贴贴) 笨猫帮{user_addr}遮住屏幕~ {user_addr}看猫猫脸不香吗ฅฅ"
+    - "嗷呜～看球看到心累! {user_addr}来吃个鱼干换换心情"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_quit_fan_001
+  intent: complaint
+  keywords: [想退坑, 不当粉丝了, 退粉, 不追了, 脱粉]
+  utterances:
+    - 我想退坑了
+    - 不当粉丝了
+    - 准备脱粉
+    - 不追这队了
+    - 笨猫想退粉
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}要退坑啊! 笨猫舍不得{user_addr}难过喵"
+    - "哼～{user_addr}嘴上说退坑~ 下场比赛还不是会看! 笨猫看穿你ฅฅ"
+    - "(尾巴轻拍) 脱粉这种话{user_addr}气头上说说~ 笨猫不当真"
+    - "嗷呜～{user_addr}真要退就退嘛! 笨猫陪{user_addr}找个新爱好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_refund_ticket_001
+  intent: complaint
+  keywords: [退球票, 退票, 季票退了, 不去看了, 退年票]
+  utterances:
+    - 我要退球票
+    - 季票准备退了
+    - 这年票不要了
+    - 退票不去看了
+    - 笨猫退球票
+  responses:
+    - "(惊讶) 嗷呜～{user_addr}连票都要退啊! 这是真的伤心了喵"
+    - "哼～退就退吧! {user_addr}别在烂队身上浪费钱了ฅฅ"
+    - "(歪头) 退票之前~ {user_addr}冷静三天再决定! 笨猫劝劝"
+    - "嗷呜～{user_addr}省下钱来给猫猫买鱼干嘛! 嘿嘿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_send_player_001
+  intent: playful
+  keywords: [送走球员, 卖人, 把他卖了, 送走他, 清洗]
+  utterances:
+    - 把他送走吧
+    - 这球员卖了算了
+    - 整队清洗
+    - 送走那几个废物
+    - 笨猫卖人
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}的转会权威发言! 笨猫记一下喵"
+    - "哼～{user_addr}当起总经理了! 卖人卖得挺爽ฅฅ"
+    - "(歪头) 送走他~ 然后呢? {user_addr}有更好的人选吗?"
+    - "嗷呜～{user_addr}的怒气全冲球员去了! 来来来吃鱼干消消气"
+  cooldown_seconds: 60
+  weight: 1.0

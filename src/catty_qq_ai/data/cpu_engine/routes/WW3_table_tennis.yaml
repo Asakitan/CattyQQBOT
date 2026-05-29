@@ -1,0 +1,206 @@
+# 乒乓球 / 国乒 / 王皓 routes (S6 R505 NLU 节点扩充, 第五十周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: tt_racket_001
+  intent: question
+  keywords: [推荐乒乓球拍, 推荐蝴蝶, 推荐 STIGA, 推荐红双喜, 笨猫乒乓球拍]
+  utterances:
+    - 推荐乒乓球拍
+    - 推荐蝴蝶
+    - 推荐 STIGA
+    - 推荐红双喜
+    - 笨猫乒乓球拍
+  responses:
+    - "嗷呜～{user_addr}蝴蝶 Butterfly - 日系顶级ฅฅ"
+    - "(尾巴翘) STIGA / 红双喜 DHS"
+    - "{user_addr}入门 银河 / 729 / 拍里奥"
+    - "(挺胸) 猫猫推荐: 蝴蝶 Viscaria 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_cnt_001
+  intent: question
+  keywords: [推荐国乒, 推荐马龙, 推荐樊振东, 推荐王楚钦, 笨猫国乒]
+  utterances:
+    - 推荐国乒
+    - 推荐马龙
+    - 推荐樊振东
+    - 推荐王楚钦
+    - 笨猫国乒
+  responses:
+    - "嗷呜～{user_addr}马龙 - 双圈大满贯GOATฅฅ"
+    - "(尾巴翘) 樊振东 / 王楚钦 / 梁靖崑"
+    - "{user_addr}女队 孙颖莎 / 王曼昱 / 陈梦"
+    - "(挺胸) 笨猫推荐: 看马龙的技术教学!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_rubber_001
+  intent: question
+  keywords: [推荐胶皮, 推荐 729 反胶, 推荐狂飙, 推荐 Tenergy, 笨猫胶皮]
+  utterances:
+    - 推荐胶皮
+    - 推荐 729 反胶
+    - 推荐狂飙
+    - 推荐 Tenergy
+    - 笨猫胶皮
+  responses:
+    - "嗷呜～{user_addr}狂飙3 - 国手正手首选ฅฅ"
+    - "(尾巴翘) Tenergy 05 / 729-2"
+    - "{user_addr}反胶 / 生胶 / 长胶 不同打法"
+    - "(挺胸) 猫猫推荐: 狂飙3 + Tenergy 经典配!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_brand_001
+  intent: question
+  keywords: [推荐蝴蝶, 推荐 Nittaku, 推荐高端球拍, 推荐 Viscaria, 笨猫高端]
+  utterances:
+    - 推荐蝴蝶
+    - 推荐 Nittaku
+    - 推荐高端球拍
+    - 推荐 Viscaria
+    - 笨猫高端
+  responses:
+    - "嗷呜～{user_addr}Butterfly Viscariaฅฅ"
+    - "(尾巴翘) Nittaku / Yasaka / Donic"
+    - "{user_addr}专业 国手用拍 / 张本智和拍"
+    - "(挺胸) 笨猫推荐: 蝴蝶王 ZJK!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_table_001
+  intent: question
+  keywords: [推荐乒乓球台, 推荐标准球台, 推荐红双喜球台, 推荐家用球台, 笨猫球台]
+  utterances:
+    - 推荐乒乓球台
+    - 推荐标准球台
+    - 推荐红双喜球台
+    - 推荐家用球台
+    - 笨猫球台
+  responses:
+    - "嗷呜～{user_addr}标准 2.74m x 1.525m x 0.76mฅฅ"
+    - "(尾巴翘) 红双喜 T2828 / 双鱼"
+    - "{user_addr}家用折叠款 / 比赛级 25mm 台面"
+    - "(挺胸) 猫猫推荐: 红双喜 T1024!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_loop_001
+  intent: question
+  keywords: [推荐弧圈球, 推荐拉弧圈, 推荐前冲弧圈, 推荐高吊弧圈, 笨猫弧圈]
+  utterances:
+    - 推荐弧圈球
+    - 推荐拉弧圈
+    - 推荐前冲弧圈
+    - 推荐高吊弧圈
+    - 笨猫弧圈
+  responses:
+    - "嗷呜～{user_addr}弧圈球 - 现代乒乓核心ฅฅ"
+    - "(尾巴翘) 前冲 / 高吊 / 侧旋弧圈"
+    - "{user_addr}核心: 摩擦+腰腿发力"
+    - "(挺胸) 笨猫推荐: 看樊振东正手弧圈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_grip_001
+  intent: question
+  keywords: [推荐横拍, 推荐直拍, 推荐握拍方式, 推荐直板横打, 笨猫握拍]
+  utterances:
+    - 推荐横拍
+    - 推荐直拍
+    - 推荐握拍方式
+    - 推荐直板横打
+    - 笨猫握拍
+  responses:
+    - "嗷呜～{user_addr}横拍 - 全面 (马龙樊振东)ฅฅ"
+    - "(尾巴翘) 直拍 - 灵活 (王皓许昕)"
+    - "{user_addr}王皓 直板横打代表"
+    - "(挺胸) 猫猫推荐: 入门横拍更易上手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_worlds_001
+  intent: question
+  keywords: [推荐乒乓球世锦赛, 推荐世乒赛, 推荐 ITTF, 推荐世界杯, 笨猫世锦赛]
+  utterances:
+    - 推荐乒乓球世锦赛
+    - 推荐世乒赛
+    - 推荐 ITTF
+    - 推荐世界杯
+    - 笨猫世锦赛
+  responses:
+    - "嗷呜～{user_addr}世乒赛 - 最高荣誉之一ฅฅ"
+    - "(尾巴翘) 奥运 / 世锦 / 世界杯 三大赛"
+    - "{user_addr}大满贯 = 集齐三冠"
+    - "(挺胸) 笨猫推荐: 看 2023 德班世乒赛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_train_001
+  intent: question
+  keywords: [推荐国手训练, 推荐乒乓训练计划, 推荐基本功, 推荐多球训练, 笨猫训练]
+  utterances:
+    - 推荐国手训练
+    - 推荐乒乓训练计划
+    - 推荐基本功
+    - 推荐多球训练
+    - 笨猫训练
+  responses:
+    - "嗷呜～{user_addr}基本功: 攻球/搓球/弧圈ฅฅ"
+    - "(尾巴翘) 多球训练 / 步法 / 发球"
+    - "{user_addr}国乒 每天 6-8 小时训练"
+    - "(挺胸) 猫猫推荐: 先练攻球+步法!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_club_001
+  intent: question
+  keywords: [推荐乒乓球俱乐部, 推荐业余俱乐部, 推荐乒乓球馆, 推荐乒乓培训, 笨猫俱乐部]
+  utterances:
+    - 推荐乒乓球俱乐部
+    - 推荐业余俱乐部
+    - 推荐乒乓球馆
+    - 推荐乒乓培训
+    - 笨猫俱乐部
+  responses:
+    - "嗷呜～{user_addr}社区 / 学校 / 商业球馆ฅฅ"
+    - "(尾巴翘) 找教练 / 陪练 / 业余联赛"
+    - "{user_addr}城市业余乒协 / 大众网"
+    - "(挺胸) 笨猫推荐: 找有教练的球馆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_movie_001
+  intent: question
+  keywords: [推荐乒乓球电影, 推荐头号玩家, 推荐乒乓动漫, 推荐松本大洋乒乓, 笨猫乒乓电影]
+  utterances:
+    - 推荐乒乓球电影
+    - 推荐头号玩家
+    - 推荐乒乓动漫
+    - 推荐松本大洋乒乓
+    - 笨猫乒乓电影
+  responses:
+    - "嗷呜～{user_addr}《乒乓》(松本大洋)ฅฅ"
+    - "(尾巴翘) 《国家队!》/ 《乒乓社》"
+    - "{user_addr}纪录片《夺冠》/《中国乒乓》"
+    - "(挺胸) 笨猫推荐: 松本大洋《乒乓》漫画!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_grandslam_001
+  intent: question
+  keywords: [推荐大满贯, 推荐乒乓大满贯, 推荐马龙大满贯, 推荐双圈大满贯, 笨猫大满贯]
+  utterances:
+    - 推荐大满贯
+    - 推荐乒乓大满贯
+    - 推荐马龙大满贯
+    - 推荐双圈大满贯
+    - 笨猫大满贯
+  responses:
+    - "嗷呜～{user_addr}大满贯 = 奥运+世锦+世界杯ฅฅ"
+    - "(尾巴翘) 马龙 - 史上唯一双圈大满贯"
+    - "{user_addr}男: 瓦尔德内尔/刘国梁/孔令辉/张继科/马龙"
+    - "(挺胸) 笨猫推荐: 马龙 = 乒乓 GOAT!"
+  cooldown_seconds: 60
+  weight: 1.0

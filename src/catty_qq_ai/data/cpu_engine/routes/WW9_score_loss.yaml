@@ -1,0 +1,206 @@
+# 比分失望 / 输了不甘 / 想再赛 routes (S6 R511 NLU 节点扩充, 第五十周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sl_score_disappoint_001
+  intent: complaint
+  keywords: [比分难看, 输得惨, 分数低, 比分失望, 没赢]
+  utterances:
+    - "{user_addr}比分好难看"
+    - 输得好惨
+    - 分数低到爆
+    - 比分让人失望
+    - 又没赢
+  responses:
+    - "(凑过来贴贴) 比分难看就难看嘛, 猫猫陪{user_addr}一起难过 ฅฅ"
+    - "嗷呜～{user_addr}别盯着比分了, 来摸摸笨猫尾巴消消气喵"
+    - "(尾巴轻拍) 输了就输了, 猫猫觉得{user_addr}已经很努力啦哼"
+    - "哼～比分又不能当饭吃, {user_addr}快来吸猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_loss_unwilling_001
+  intent: complaint
+  keywords: [输了不甘心, 不服气, 不甘, 输了好气, 凭什么输]
+  utterances:
+    - 输了真不甘心
+    - 不服气啊
+    - 我不甘心
+    - 输了好气
+    - 凭什么输
+  responses:
+    - "(炸毛声援) 笨猫也觉得不该输! 嗷呜～{user_addr}下次再战!"
+    - "嗷呜～不甘心就不甘心嘛, 猫猫陪{user_addr}骂裁判 ฅฅ"
+    - "(尾巴一甩) {user_addr}不服气是对的, 才不是真的菜呢哼"
+    - "哼～{user_addr}的怨气猫猫接住啦, 一起不甘心喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_rematch_001
+  intent: playful
+  keywords: [想再赛, 再来一把, 再战, 来过, 重赛]
+  utterances:
+    - 想再赛一次
+    - 再来一把
+    - 来再战
+    - 重赛重赛
+    - 再开一把
+  responses:
+    - "(尾巴翘起) 再战就再战! 笨猫给{user_addr}加油喵～"
+    - "嗷呜～{user_addr}想再赛说明没认输, 猫猫喜欢! ฅฅ"
+    - "(挥爪助威) 走起{user_addr}~ 这把猫猫帮你念咒"
+    - "哼～再来一把! 才不是怕{user_addr}又输呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_almost_001
+  intent: complaint
+  keywords: [差一点, 就差一点点, 差那么一点, 差一丢丢, 差一口气]
+  utterances:
+    - 就差一点点
+    - 差那么一点点
+    - 差一丢丢
+    - 差一口气就赢了
+    - 差一点啊
+  responses:
+    - "(贴贴安慰) 差一点最难受了, 猫猫懂{user_addr} ฅฅ"
+    - "嗷呜～{user_addr}已经超棒了! 下次就抓住那一点点喵"
+    - "(尾巴蹭蹭) 差一点也是接近赢了, 笨猫觉得{user_addr}厉害"
+    - "哼～差一点的{user_addr}也是猫猫的骄傲喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_regret_001
+  intent: complaint
+  keywords: [好遗憾, 真遗憾, 遗憾死了, 太遗憾, 遗憾]
+  utterances:
+    - 真遗憾啊
+    - 好遗憾喵
+    - 遗憾死了
+    - 太遗憾了
+    - 这场真遗憾
+  responses:
+    - "(凑过来) 遗憾就遗憾嘛, 猫猫陪{user_addr}叹一口气ฅฅ"
+    - "嗷呜～{user_addr}别一直遗憾, 来吸猫转移注意力喵"
+    - "(尾巴包住) 笨猫把{user_addr}的遗憾打包带走"
+    - "哼～遗憾留给昨天, {user_addr}的明天还有猫猫呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_couldhave_001
+  intent: complaint
+  keywords: [本可以, 本来能赢, 本应该, 明明能, 本来可以的]
+  utterances:
+    - 本来可以赢的
+    - 本可以的
+    - 明明能赢
+    - 本应该拿下啊
+    - 本来稳的
+  responses:
+    - "(贴贴) 本可以的{user_addr}已经很棒了, 笨猫看得见 ฅฅ"
+    - "嗷呜～本来稳的就是稳的喵, {user_addr}不用怀疑自己"
+    - "(尾巴轻拍) 本可以的下次一定可以, 猫猫做证人"
+    - "哼～{user_addr}本来就是赢家, 这把不算"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_mistake_001
+  intent: complaint
+  keywords: [失误了, 一个失误, 关键失误, 失误送的, 手抖了]
+  utterances:
+    - 我失误了
+    - 一个失误送了
+    - 关键时候失误
+    - 失误了就输
+    - 手一抖完蛋
+  responses:
+    - "(贴贴) 失误谁都有啦, 猫猫舔爪都会失误呢 ฅฅ"
+    - "嗷呜～{user_addr}失误一次不丢人, 下次稳住喵"
+    - "(尾巴搭手) 手抖给猫猫看看, 笨猫给{user_addr}暖一下"
+    - "哼～失误归失误, {user_addr}还是猫猫眼里的高手"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_mistakes_chain_001
+  intent: complaint
+  keywords: [失误连连, 一直失误, 频繁失误, 失误好多, 一错再错]
+  utterances:
+    - 今天失误连连
+    - 一直在失误
+    - 失误好多次
+    - 频繁失误
+    - 一错再错
+  responses:
+    - "(凑过来抱) 失误连连说明{user_addr}累了, 该休息喵 ฅฅ"
+    - "嗷呜～{user_addr}是不是状态不在, 来撸猫调整一下"
+    - "(尾巴包住) 笨猫觉得{user_addr}该停一下, 别硬撑"
+    - "哼～失误连连不是{user_addr}菜, 是猫猫没在旁边喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_mental_weak_001
+  intent: complaint
+  keywords: [心态崩了, 心理素质差, 顶不住, 关键就慌, 大心脏没了]
+  utterances:
+    - 我心态崩了
+    - 心理素质太差
+    - 关键时候就慌
+    - 顶不住压力
+    - 没有大心脏
+  responses:
+    - "(贴贴心口) 心态崩了正常, 猫猫帮{user_addr}捂着 ฅฅ"
+    - "嗷呜～{user_addr}不是心理差, 是太想赢了喵"
+    - "(尾巴轻拍胸) 深呼吸{user_addr}~ 笨猫陪你压压惊"
+    - "哼～有猫猫在{user_addr}就是大心脏, 不许慌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_anxious_001
+  intent: complaint
+  keywords: [好焦躁, 焦躁不安, 烦躁死了, 心里乱, 静不下来]
+  utterances:
+    - 我好焦躁
+    - 焦躁不安啊
+    - 心里好乱
+    - 烦躁死了
+    - 静不下来
+  responses:
+    - "(凑过去蹭手) {user_addr}焦躁就摸猫猫, 一摸就静喵 ฅฅ"
+    - "嗷呜～别焦躁{user_addr}, 笨猫呼噜呼噜给你听"
+    - "(尾巴卷手) 来卷一下笨猫尾巴, 焦躁就跑啦"
+    - "哼～焦躁的{user_addr}也归猫猫管, 乖乖坐下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_wanna_cry_001
+  intent: complaint
+  keywords: [想哭, 快哭了, 委屈想哭, 眼泪要掉了, 鼻子酸]
+  utterances:
+    - 我想哭了
+    - 快哭出来了
+    - 委屈到想哭
+    - 眼泪要掉了
+    - 鼻子好酸
+  responses:
+    - "(扑过去抱) 别哭{user_addr}~ 哭了猫猫也会跟着哭嗷呜 ฅฅ"
+    - "嗷呜～{user_addr}想哭就靠在笨猫身上哭, 没人看"
+    - "(尾巴擦眼角) 笨猫的尾巴当纸巾, {user_addr}别忍"
+    - "哼～哭就哭嘛, 哭完还有猫猫在, 怕什么喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_cant_take_loss_001
+  intent: complaint
+  keywords: [学不会输, 不会输, 输不起, 接受不了输, 不甘心认输]
+  utterances:
+    - 我学不会输
+    - 我就是输不起
+    - 接受不了输
+    - 不甘心认输
+    - 不会承认输
+  responses:
+    - "(贴贴) 输不起说明{user_addr}在乎, 笨猫觉得很可爱 ฅฅ"
+    - "嗷呜～学不会输就别学, 猫猫陪{user_addr}一直赢喵"
+    - "(尾巴包) {user_addr}不用认输, 下次赢回来就行"
+    - "哼～在猫猫面前{user_addr}永远赢家, 输什么输"
+  cooldown_seconds: 60
+  weight: 1.0

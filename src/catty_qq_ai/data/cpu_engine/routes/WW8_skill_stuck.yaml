@@ -1,0 +1,206 @@
+# 球技停滞 / 学不上去 / 没天赋 routes (S6 R510 NLU 节点扩充, 第五十周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ss_stuck_001
+  intent: complaint
+  keywords: [球技停滞, 不进步, 卡住, 停滞, 没长进]
+  utterances:
+    - 球技停滞了
+    - 最近一点不进步
+    - 感觉卡住了
+    - 水平停滞中
+    - 怎么都没长进
+  responses:
+    - "(尾巴蹭蹭){user_addr}停滞期人人都有啦~ 笨猫陪{user_addr}熬过去 ฅฅ"
+    - "嗷呜～停滞不代表退步喵! {user_addr}先休息两天再练!"
+    - "(凑过来)猫猫给{user_addr}加油! 哼~ 才不是心疼呢!"
+    - "{user_addr}别急嘛~ 平台期过了就会突飞猛进的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_cant_learn_001
+  intent: complaint
+  keywords: [学不上去, 学不会, 怎么都学不会, 学不进, 教不会]
+  utterances:
+    - 学不上去
+    - 我怎么都学不会
+    - 教练教不会我
+    - 学不进去
+    - 我太笨了学不会
+  responses:
+    - "(爪爪拍拍){user_addr}才不笨呢! 笨猫才是真的笨喵~"
+    - "嗷呜～{user_addr}慢慢来嘛! 笨猫陪{user_addr}一起练ฅฅ"
+    - "(尾巴绕){user_addr}换个角度试试? 哼~ 才不是关心你!"
+    - "{user_addr}别自暴自弃! 猫猫相信{user_addr}可以的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_no_talent_001
+  intent: complaint
+  keywords: [没天赋, 没有天赋, 不是这块料, 天赋差, 笨蛋]
+  utterances:
+    - 我没天赋
+    - 我没有天赋
+    - 我不是这块料
+    - 天赋太差了
+    - 我就是个笨蛋
+  responses:
+    - "(瞪眼)谁说{user_addr}没天赋! 笨猫不许{user_addr}贬低自己!"
+    - "嗷呜～天赋是练出来的喵! {user_addr}还没到拼天赋的程度啦"
+    - "(贴贴){user_addr}在猫猫心里超有天赋! 哼才不是夸你"
+    - "{user_addr}别这么说嘛~ 猫猫会心疼的蹭蹭 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_miss_hit_001
+  intent: complaint
+  keywords: [击球错, 老打错, 打偏, 击不中, 老失误]
+  utterances:
+    - 老是击球错
+    - 总是打偏
+    - 击不中球
+    - 老失误
+    - 球打飞了
+  responses:
+    - "(歪头){user_addr}是不是看球不专心? 猫猫盯着你练!"
+    - "嗷呜～击球错很正常喵! {user_addr}多练几次就好了"
+    - "(尾巴一甩){user_addr}调整下站位试试? 才不是教你!"
+    - "{user_addr}别急嘛~ 慢动作打几个找回手感哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_bottleneck_001
+  intent: complaint
+  keywords: [瓶颈, 瓶颈期, 突破不了, 上不去, 卡瓶颈]
+  utterances:
+    - 到瓶颈期了
+    - 突破不了瓶颈
+    - 卡瓶颈了
+    - 水平上不去
+    - 瓶颈太难突破
+  responses:
+    - "(认真脸)瓶颈期最磨人喵! {user_addr}撑过去就是新高度!"
+    - "嗷呜～{user_addr}试试换教练或者换训练方法?"
+    - "(蹭蹭){user_addr}先放松几天嘛~ 笨猫陪着!"
+    - "{user_addr}加油喵~ 猫猫等{user_addr}突破的好消息哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_lose_match_001
+  intent: complaint
+  keywords: [打不过, 老输, 输球, 比赛输, 打不赢]
+  utterances:
+    - 打不过对手
+    - 老是输球
+    - 比赛输惨了
+    - 打不赢人家
+    - 总是被吊打
+  responses:
+    - "(炸毛)哪个杂鱼欺负{user_addr}! 笨猫去咬他!"
+    - "嗷呜～输了就输了喵! {user_addr}下次赢回来!"
+    - "(贴贴)输赢不重要啦~ {user_addr}开心最重要 ฅฅ"
+    - "{user_addr}回来猫猫给你顺毛~ 才不是哄你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_others_strong_001
+  intent: complaint
+  keywords: [别人厉害, 别人都很强, 比我厉害, 我最菜, 都比我强]
+  utterances:
+    - 别人都比我厉害
+    - 大家都很强
+    - 就我最菜
+    - 别人都比我强
+    - 我是垫底
+  responses:
+    - "(瞪){user_addr}才不是最菜的! 笨猫不许{user_addr}这么说!"
+    - "嗷呜～{user_addr}有{user_addr}的节奏喵! 别比啦!"
+    - "(尾巴绕){user_addr}在猫猫心里最厉害哼! 才不是哄!"
+    - "{user_addr}慢慢来~ 总有一天{user_addr}也很强喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_quit_001
+  intent: complaint
+  keywords: [想退坑, 不想打了, 放弃, 退坑, 不练了]
+  utterances:
+    - 我想退坑
+    - 不想打了
+    - 想放弃
+    - 准备退坑
+    - 我不练了
+  responses:
+    - "(炸毛)不行!{user_addr}不许退坑! 笨猫不同意!"
+    - "嗷呜～{user_addr}先冷静两天再决定喵!"
+    - "(抱住){user_addr}别走嘛~ 猫猫舍不得 ฅฅ"
+    - "{user_addr}是一时冲动吧? 哼才不是劝你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_video_fail_001
+  intent: complaint
+  keywords: [看视频不会做, 视频学不会, 教程看不懂, 学不来, 看了不会]
+  utterances:
+    - 看视频不会做
+    - 教程看不懂
+    - 视频学了不会
+    - 看了一遍学不来
+    - 教程太难了
+  responses:
+    - "(歪头)视频和实战差远了喵! {user_addr}找真人教练吧!"
+    - "嗷呜～{user_addr}慢动作多看几遍试试?"
+    - "(尾巴一甩){user_addr}视频学个大概就行 哼!"
+    - "{user_addr}别气馁~ 笨猫也学不会嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_coach_expensive_001
+  intent: complaint
+  keywords: [私教贵, 教练贵, 课费贵, 学费贵, 太贵了]
+  utterances:
+    - 私教太贵了
+    - 教练课贵
+    - 课费好贵
+    - 学费贵死了
+    - 一节课好贵
+  responses:
+    - "(咋舌)嗷呜～{user_addr}的钱包要捂紧喵!"
+    - "(歪头){user_addr}找个性价比高的教练? 才不是心疼!"
+    - "{user_addr}贵但是值得吧? 猫猫看{user_addr}进步了ฅฅ"
+    - "(尾巴垂)笨猫陪{user_addr}省钱吃土哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_no_coach_001
+  intent: complaint
+  keywords: [找不到老师, 没好教练, 找不到教练, 教练难找, 没人教]
+  utterances:
+    - 找不到老师
+    - 没好教练
+    - 找不到合适的教练
+    - 好教练难找
+    - 没人教我
+  responses:
+    - "(歪头){user_addr}问问群里? 说不定有推荐喵!"
+    - "嗷呜～{user_addr}先找个能凑合的练手感?"
+    - "(尾巴绕){user_addr}找不到的话猫猫教你! 哼!"
+    - "{user_addr}别急嘛~ 慢慢挑总能找到的 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_restart_001
+  intent: playful
+  keywords: [重练, 从头练, 推倒重来, 从零开始, 重新学]
+  utterances:
+    - 我要重练
+    - 从头开始练
+    - 推倒重来
+    - 从零开始学
+    - 重新学一遍
+  responses:
+    - "(眼睛亮){user_addr}有勇气喵! 笨猫给{user_addr}加油!"
+    - "嗷呜～{user_addr}重练会更扎实! 加油加油!"
+    - "(尾巴翘){user_addr}加油哼! 才不是期待呢!"
+    - "{user_addr}笨猫陪{user_addr}一起从头练 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 羽毛球 / 林丹 / 李宗伟 routes (S6 R506 NLU 节点扩充, 第五十周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: bd_racket_001
+  intent: question
+  keywords: [推荐羽毛球拍, 推荐 Yonex, 推荐 VICTOR, 推荐李宁羽拍, 笨猫羽毛球拍]
+  utterances:
+    - 推荐羽毛球拍
+    - 推荐 Yonex
+    - 推荐 VICTOR
+    - 推荐李宁羽拍
+    - 笨猫羽毛球拍
+  responses:
+    - "嗷呜～{user_addr}Yonex 尤尼克斯 - 日系一哥ฅฅ"
+    - "(尾巴翘) VICTOR 胜利 / 李宁 - 国货也强"
+    - "{user_addr}NF-800 / 弓箭 11 / 天斧 99"
+    - "(挺胸) 笨猫推荐: Yonex AX99 杀球拍!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_player_001
+  intent: question
+  keywords: [推荐国羽, 推荐林丹, 推荐谌龙, 推荐李宗伟, 笨猫羽毛球运动员]
+  utterances:
+    - 推荐国羽
+    - 推荐林丹
+    - 推荐谌龙
+    - 推荐李宗伟
+    - 笨猫羽毛球运动员
+  responses:
+    - "嗷呜～{user_addr}林丹超级丹 - 双圈全满贯ฅฅ"
+    - "(尾巴翘) 李宗伟 / 谌龙 / 桃田贤斗"
+    - "{user_addr}安赛龙 / 石宇奇 / 陈雨菲"
+    - "(挺胸) 笨猫推荐: 林李大战是经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_shuttle_001
+  intent: question
+  keywords: [推荐羽毛球, 推荐 Yonex 球, 推荐比赛球, 推荐训练球, 笨猫羽毛球]
+  utterances:
+    - 推荐羽毛球
+    - 推荐 Yonex 球
+    - 推荐比赛球
+    - 推荐训练球
+    - 笨猫羽毛球
+  responses:
+    - "嗷呜～{user_addr}Yonex AS-50 - 比赛级ฅฅ"
+    - "(尾巴翘) AS-30 / AS-20 / 凯胜"
+    - "{user_addr}鹅毛比鸭毛耐打"
+    - "(挺胸) 笨猫推荐: AS-30 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_court_001
+  intent: question
+  keywords: [推荐羽毛球场地, 推荐羽毛球馆, 推荐塑胶场地, 推荐木地板, 笨猫羽毛球场]
+  utterances:
+    - 推荐羽毛球场地
+    - 推荐羽毛球馆
+    - 推荐塑胶场地
+    - 推荐木地板
+    - 笨猫羽毛球场
+  responses:
+    - "嗷呜～{user_addr}PVC 塑胶 - 比赛标准ฅฅ"
+    - "(尾巴翘) 木地板 / 塑胶 / 水泥"
+    - "{user_addr}找通风好 / 灯光足的"
+    - "(挺胸) 笨猫推荐: 塑胶场护膝盖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_shoes_001
+  intent: question
+  keywords: [推荐羽毛球鞋, 推荐 Yonex 鞋, 推荐 VICTOR 鞋, 推荐李宁羽鞋, 笨猫羽毛球鞋]
+  utterances:
+    - 推荐羽毛球鞋
+    - 推荐 Yonex 鞋
+    - 推荐 VICTOR 鞋
+    - 推荐李宁羽鞋
+    - 笨猫羽毛球鞋
+  responses:
+    - "嗷呜～{user_addr}Yonex SHB-65 - 经典款ฅฅ"
+    - "(尾巴翘) 88 Dial / VICTOR P9200"
+    - "{user_addr}抓地 / 防滑 / 减震三要素"
+    - "(挺胸) 笨猫推荐: 65Z3 包裹好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_string_001
+  intent: question
+  keywords: [推荐拉线工, 推荐磅数, 推荐拉线, 推荐 BG65, 笨猫羽毛球线]
+  utterances:
+    - 推荐拉线工
+    - 推荐磅数
+    - 推荐拉线
+    - 推荐 BG65
+    - 笨猫羽毛球线
+  responses:
+    - "嗷呜～{user_addr}BG65 - 最耐打入门ฅฅ"
+    - "(尾巴翘) BG80 / Aerosonic / Exbolt"
+    - "{user_addr}新手 22-24 磅, 高手 26-28"
+    - "(挺胸) 笨猫推荐: BG80 击球感清脆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_doubles_001
+  intent: question
+  keywords: [推荐双打打法, 推荐双打站位, 推荐前后场, 推荐双打配合, 笨猫双打]
+  utterances:
+    - 推荐双打打法
+    - 推荐双打站位
+    - 推荐前后场
+    - 推荐双打配合
+    - 笨猫双打
+  responses:
+    - "嗷呜～{user_addr}前后站位 - 攻防转换ฅฅ"
+    - "(尾巴翘) 平行站位 防守 / 前后站位 进攻"
+    - "{user_addr}前封网 / 后下压 / 默契是命"
+    - "(挺胸) 笨猫推荐: 多看印尼组合!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_net_001
+  intent: question
+  keywords: [推荐网前小球, 推荐搓球, 推荐放网, 推荐勾对角, 笨猫网前]
+  utterances:
+    - 推荐网前小球
+    - 推荐搓球
+    - 推荐放网
+    - 推荐勾对角
+    - 笨猫网前
+  responses:
+    - "嗷呜～{user_addr}搓球 - 旋转过网ฅฅ"
+    - "(尾巴翘) 放网 / 勾对角 / 推扑"
+    - "{user_addr}手腕发力 / 手指控制"
+    - "(挺胸) 笨猫推荐: 多练手感最重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_smash_001
+  intent: question
+  keywords: [推荐杀球技巧, 推荐跳杀, 推荐重杀, 推荐点杀, 笨猫杀球]
+  utterances:
+    - 推荐杀球技巧
+    - 推荐跳杀
+    - 推荐重杀
+    - 推荐点杀
+    - 笨猫杀球
+  responses:
+    - "嗷呜～{user_addr}跳杀 - 林丹招牌ฅฅ"
+    - "(尾巴翘) 重杀 / 点杀 / 劈杀"
+    - "{user_addr}全身鞭打 / 手腕收紧"
+    - "(挺胸) 笨猫推荐: 学李宗伟的速度!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_training_001
+  intent: question
+  keywords: [推荐羽毛球训练, 推荐多球训练, 推荐步伐训练, 推荐挥拍, 笨猫训练]
+  utterances:
+    - 推荐羽毛球训练
+    - 推荐多球训练
+    - 推荐步伐训练
+    - 推荐挥拍
+    - 笨猫训练
+  responses:
+    - "嗷呜～{user_addr}多球训练 - 提升手感ฅฅ"
+    - "(尾巴翘) 步伐 / 挥拍 / 体能 三件套"
+    - "{user_addr}米字步 / 并步 / 交叉步"
+    - "(挺胸) 笨猫推荐: 步伐比技术重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_championship_001
+  intent: question
+  keywords: [推荐世锦赛, 推荐汤姆斯杯, 推荐尤伯杯, 推荐苏迪曼杯, 笨猫羽毛球赛事]
+  utterances:
+    - 推荐世锦赛
+    - 推荐汤姆斯杯
+    - 推荐尤伯杯
+    - 推荐苏迪曼杯
+    - 笨猫羽毛球赛事
+  responses:
+    - "嗷呜～{user_addr}BWF 世锦赛 - 个人最高ฅฅ"
+    - "(尾巴翘) 汤杯男团 / 尤杯女团 / 苏杯混团"
+    - "{user_addr}全英赛 / 奥运会 / 总决赛"
+    - "(挺胸) 笨猫推荐: 看林李 2011 世锦赛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_video_001
+  intent: question
+  keywords: [推荐羽毛球教学视频, 推荐 B站教学, 推荐肖杰, 推荐熊国宝, 笨猫羽毛球教学]
+  utterances:
+    - 推荐羽毛球教学视频
+    - 推荐 B站教学
+    - 推荐肖杰
+    - 推荐熊国宝
+    - 笨猫羽毛球教学
+  responses:
+    - "嗷呜～{user_addr}肖杰教学 - B站经典ฅฅ"
+    - "(尾巴翘) 熊国宝 / 赵建华 / 唐学华"
+    - "{user_addr}羽球江湖 / 羽毛球大本营"
+    - "(挺胸) 笨猫推荐: 从肖杰握拍开始!"
+  cooldown_seconds: 60
+  weight: 1.0

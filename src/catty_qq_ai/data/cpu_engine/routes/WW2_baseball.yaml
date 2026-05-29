@@ -1,0 +1,206 @@
+# 棒球 / MLB / 日本职棒 routes (S6 R504 NLU 节点扩充, 第五十周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: bs_mlb_001
+  intent: question
+  keywords: [推荐 MLB, 推荐美国职棒, 推荐大谷翔平, 推荐道奇队, 笨猫 MLB]
+  utterances:
+    - 推荐 MLB
+    - 推荐美国职棒
+    - 推荐大谷翔平
+    - 推荐道奇队
+    - "{user_addr}推荐 MLB"
+  responses:
+    - "嗷呜～{user_addr}MLB 美国职棒大联盟 - 顶级ฅฅ"
+    - "(尾巴翘) 大谷翔平 / 二刀流神兽"
+    - "{user_addr}道奇 Dodgers / 洋基 Yankees"
+    - "(挺胸) 笨猫推荐: 看大谷打 Dodgers!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_npb_001
+  intent: question
+  keywords: [推荐日本职棒, 推荐 NPB, 推荐巨人队, 推荐阪神, 笨猫日本职棒]
+  utterances:
+    - 推荐日本职棒
+    - 推荐 NPB
+    - 推荐巨人队
+    - 推荐阪神
+    - "{user_addr}推荐日本职棒"
+  responses:
+    - "嗷呜～{user_addr}NPB 日本职棒 - 细腻派ฅฅ"
+    - "(尾巴翘) 读卖巨人 / 阪神虎 / 软银鹰"
+    - "{user_addr}应援文化超热闹"
+    - "(挺胸) 笨猫推荐: 甲子园看巨人 vs 阪神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_kbo_001
+  intent: question
+  keywords: [推荐 KBO, 推荐韩国职棒, 推荐起亚虎, 推荐三星狮, 笨猫 KBO]
+  utterances:
+    - 推荐 KBO
+    - 推荐韩国职棒
+    - 推荐起亚虎
+    - 推荐三星狮
+    - "{user_addr}推荐 KBO"
+  responses:
+    - "嗷呜～{user_addr}KBO 韩国职棒 - 应援超嗨ฅฅ"
+    - "(尾巴翘) 起亚虎 / 三星狮 / LG Twins"
+    - "{user_addr}啦啦队文化全球闻名"
+    - "(挺胸) 笨猫推荐: 体验韩式应援!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_glove_001
+  intent: question
+  keywords: [推荐棒球手套, 推荐 Mizuno, 推荐 Wilson, 推荐 Rawlings, 笨猫手套]
+  utterances:
+    - 推荐棒球手套
+    - 推荐 Mizuno
+    - 推荐 Wilson
+    - 推荐 Rawlings
+    - "{user_addr}推荐棒球手套"
+  responses:
+    - "嗷呜～{user_addr}Mizuno 美津浓 - 日系顶级ฅฅ"
+    - "(尾巴翘) Wilson A2000 / Rawlings Heart of the Hide"
+    - "{user_addr}内野手 / 外野手 / 投手分款"
+    - "(挺胸) 笨猫推荐: Mizuno Pro 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_bat_001
+  intent: question
+  keywords: [推荐棒球棒, 推荐木棒, 推荐金属棒, 推荐 Louisville, 笨猫球棒]
+  utterances:
+    - 推荐棒球棒
+    - 推荐木棒
+    - 推荐金属棒
+    - 推荐 Louisville
+    - "{user_addr}推荐棒球棒"
+  responses:
+    - "嗷呜～{user_addr}木棒: 北美白蜡 / 枫木ฅฅ"
+    - "(尾巴翘) 金属棒: Easton / Louisville Slugger"
+    - "{user_addr}职业用木棒, 业余用金属棒"
+    - "(挺胸) 笨猫推荐: Louisville Slugger 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_rules_001
+  intent: question
+  keywords: [推荐棒球规则, 推荐三振, 推荐本垒打, 推荐九局, 笨猫棒球规则]
+  utterances:
+    - 推荐棒球规则
+    - 推荐三振
+    - 推荐本垒打
+    - 推荐九局
+    - "{user_addr}推荐棒球规则"
+  responses:
+    - "嗷呜～{user_addr}九局 / 三振 / 四坏球ฅฅ"
+    - "(尾巴翘) 全垒打 / 安打 / 盗垒"
+    - "{user_addr}投捕对决最精彩"
+    - "(挺胸) 笨猫推荐: 先看一场感受!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_movie_001
+  intent: question
+  keywords: [推荐棒球电影, 推荐点球成金, 推荐 Moneyball, 推荐百万金臂, 笨猫棒球电影]
+  utterances:
+    - 推荐棒球电影
+    - 推荐点球成金
+    - 推荐 Moneyball
+    - 推荐百万金臂
+    - "{user_addr}推荐棒球电影"
+  responses:
+    - "嗷呜～{user_addr}点球成金 Moneyball - 数据流ฅฅ"
+    - "(尾巴翘) 百万金臂 / 梦幻成真"
+    - "{user_addr}日影: ROOKIES / MAJOR"
+    - "(挺胸) 笨猫推荐: 点球成金必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_training_001
+  intent: question
+  keywords: [推荐棒球训练, 推荐入门, 推荐挥棒练习, 推荐传接球, 笨猫棒球训练]
+  utterances:
+    - 推荐棒球训练
+    - 推荐入门
+    - 推荐挥棒练习
+    - 推荐传接球
+    - "{user_addr}推荐棒球训练"
+  responses:
+    - "嗷呜～{user_addr}入门: 传接球 + 挥棒ฅฅ"
+    - "(尾巴翘) 跑垒 / 滑垒 / 守备步法"
+    - "{user_addr}先练基本功再上场"
+    - "(挺胸) 笨猫推荐: 找个打击笼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_field_001
+  intent: question
+  keywords: [推荐棒球场, 推荐球场布局, 推荐内野, 推荐外野, 笨猫棒球场]
+  utterances:
+    - 推荐棒球场
+    - 推荐球场布局
+    - 推荐内野
+    - 推荐外野
+    - "{user_addr}推荐棒球场"
+  responses:
+    - "嗷呜～{user_addr}菱形内野 + 扇形外野ฅฅ"
+    - "(尾巴翘) 本垒 / 一垒 / 二垒 / 三垒"
+    - "{user_addr}甲子园 / Fenway / Wrigley 名场"
+    - "(挺胸) 笨猫推荐: 朝圣甲子园!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_classic_001
+  intent: question
+  keywords: [推荐经典比赛, 推荐棒球历史, 推荐世界大赛, 推荐 WBC, 笨猫经典比赛]
+  utterances:
+    - 推荐经典比赛
+    - 推荐棒球历史
+    - 推荐世界大赛
+    - 推荐 WBC
+    - "{user_addr}推荐经典比赛"
+  responses:
+    - "嗷呜～{user_addr}World Series 世界大赛ฅฅ"
+    - "(尾巴翘) WBC 经典赛 / 日本三连霸"
+    - "{user_addr}2023 WBC 大谷 vs 鳟鱼神场面"
+    - "(挺胸) 笨猫推荐: 回看 2023 WBC 决赛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_teams_001
+  intent: question
+  keywords: [推荐棒球球队, 推荐 Yankees, 推荐 Dodgers, 推荐红袜, 笨猫球队]
+  utterances:
+    - 推荐棒球球队
+    - 推荐 Yankees
+    - 推荐 Dodgers
+    - 推荐红袜
+    - "{user_addr}推荐棒球球队"
+  responses:
+    - "嗷呜～{user_addr}Yankees 洋基 - 27 冠王ฅฅ"
+    - "(尾巴翘) Dodgers 道奇 / Red Sox 红袜"
+    - "{user_addr}巨人 / 阪神 / 软银 (日本)"
+    - "(挺胸) 笨猫推荐: 选个城市认领主队!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_store_001
+  intent: question
+  keywords: [推荐棒球器材店, 推荐购买, 推荐淘宝, 推荐专卖店, 笨猫器材店]
+  utterances:
+    - 推荐棒球器材店
+    - 推荐购买
+    - 推荐淘宝
+    - 推荐专卖店
+    - "{user_addr}推荐棒球器材店"
+  responses:
+    - "嗷呜～{user_addr}Mizuno 官方 / 美津浓专卖ฅฅ"
+    - "(尾巴翘) 淘宝: SSK / ZETT / Asics"
+    - "{user_addr}日亚直邮性价比高"
+    - "(挺胸) 笨猫推荐: 手套去实体店试戴!"
+  cooldown_seconds: 60
+  weight: 1.0
