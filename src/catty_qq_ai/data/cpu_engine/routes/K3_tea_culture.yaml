@@ -1,0 +1,206 @@
+# 茶 / 中国茶 / 普洱 / 茶艺 routes (S6 R125 NLU 节点扩充, 第十二周期 buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: tea_green_001
+  intent: question
+  keywords: [推荐绿茶, 推荐龙井, 推荐碧螺春, 推荐黄山毛峰, 笨猫绿茶]
+  utterances:
+    - 推荐绿茶
+    - 推荐龙井
+    - 推荐碧螺春
+    - 推荐黄山毛峰
+    - 笨猫绿茶
+  responses:
+    - "嗷呜～{user_addr}龙井: 西湖产 / 国茶ฅฅ"
+    - "(尾巴翘) 碧螺春: 苏州 / 一嫩三鲜"
+    - "{user_addr}毛峰 / 信阳毛尖 / 安吉白茶"
+    - "(挺胸) 笨猫推荐: 80°C 水 + 玻璃杯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tea_black_001
+  intent: question
+  keywords: [推荐红茶, 推荐祁门红茶, 推荐金骏眉, 推荐正山小种, 笨猫红茶]
+  utterances:
+    - 推荐红茶
+    - 推荐祁门红茶
+    - 推荐金骏眉
+    - 推荐正山小种
+    - 笨猫红茶
+  responses:
+    - "嗷呜～{user_addr}祁红: 安徽 / 世界三大高香ฅฅ"
+    - "(尾巴翘) 金骏眉: 武夷山 / 顶级"
+    - "{user_addr}正山小种: 红茶鼻祖"
+    - "(挺胸) 笨猫推荐: 100°C 水 + 紫砂壶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tea_oolong_001
+  intent: question
+  keywords: [推荐乌龙茶, 推荐铁观音, 推荐大红袍, 推荐凤凰单丛, 笨猫乌龙茶]
+  utterances:
+    - 推荐乌龙茶
+    - 推荐铁观音
+    - 推荐大红袍
+    - 推荐凤凰单丛
+    - 笨猫乌龙茶
+  responses:
+    - "嗷呜～{user_addr}铁观音: 安溪 / 兰花香ฅฅ"
+    - "(尾巴翘) 大红袍: 武夷岩茶 / 岩骨花香"
+    - "{user_addr}凤凰单丛: 潮州 / 香型多"
+    - "(挺胸) 笨猫推荐: 工夫泡 - 小壶小杯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tea_puer_001
+  intent: question
+  keywords: [推荐普洱茶, 推荐生普, 推荐熟普, 推荐普洱饼, 笨猫普洱]
+  utterances:
+    - 推荐普洱茶
+    - 推荐生普
+    - 推荐熟普
+    - 推荐普洱饼
+    - 笨猫普洱
+  responses:
+    - "嗷呜～{user_addr}生普: 自然陈化 / 20+ 年好ฅฅ"
+    - "(尾巴翘) 熟普: 渥堆发酵 / 温和"
+    - "{user_addr}产区: 班章 / 冰岛 / 易武"
+    - "(挺胸) 笨猫推荐: 大益 / 中茶 - 大牌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tea_white_001
+  intent: question
+  keywords: [推荐白茶, 推荐白牡丹, 推荐白毫银针, 推荐寿眉, 笨猫白茶]
+  utterances:
+    - 推荐白茶
+    - 推荐白牡丹
+    - 推荐白毫银针
+    - 推荐寿眉
+    - 笨猫白茶
+  responses:
+    - "嗷呜～{user_addr}白毫银针: 顶级 / 福鼎ฅฅ"
+    - "(尾巴翘) 白牡丹 - 中档"
+    - "{user_addr}寿眉 / 贡眉 - 平价口粮"
+    - "(挺胸) 笨猫推荐: 一年茶 / 三年药 / 七年宝"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tea_yellow_001
+  intent: question
+  keywords: [推荐黄茶, 推荐君山银针, 推荐蒙顶黄芽, 推荐霍山黄芽, 笨猫黄茶]
+  utterances:
+    - 推荐黄茶
+    - 推荐君山银针
+    - 推荐蒙顶黄芽
+    - 推荐霍山黄芽
+    - 笨猫黄茶
+  responses:
+    - "嗷呜～{user_addr}君山银针: 洞庭湖 / 贡茶ฅฅ"
+    - "(尾巴翘) 蒙顶黄芽: 四川 / 闷黄工艺"
+    - "{user_addr}霍山黄芽 / 平阳黄汤"
+    - "(挺胸) 笨猫的提醒: 黄茶小众 / 但珍贵!"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: tea_dark_001
+  intent: question
+  keywords: [推荐黑茶, 推荐安化黑茶, 推荐茯砖, 推荐六堡茶, 笨猫黑茶]
+  utterances:
+    - 推荐黑茶
+    - 推荐安化黑茶
+    - 推荐茯砖
+    - 推荐六堡茶
+    - 笨猫黑茶
+  responses:
+    - "嗷呜～{user_addr}安化黑茶: 湖南 / 千两茶ฅฅ"
+    - "(尾巴翘) 茯砖: 金花 / 益生菌"
+    - "{user_addr}六堡: 广西 / 槟榔香"
+    - "(挺胸) 笨猫推荐: 黑茶适合常饮 - 解油!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: tea_flower_001
+  intent: question
+  keywords: [推荐花茶, 推荐茉莉花茶, 推荐玫瑰花茶, 推荐菊花茶, 笨猫花茶]
+  utterances:
+    - 推荐花茶
+    - 推荐茉莉花茶
+    - 推荐玫瑰花茶
+    - 推荐菊花茶
+    - 笨猫花茶
+  responses:
+    - "嗷呜～{user_addr}茉莉: 福州 / 7 窨九重ฅฅ"
+    - "(尾巴翘) 菊花: 杭白菊 / 清热"
+    - "{user_addr}玫瑰: 平阴 / 美容养颜"
+    - "(挺胸) 笨猫推荐: 八宝茶 - 综合口感!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tea_japanese_001
+  intent: question
+  keywords: [推荐日本茶, 推荐抹茶, 推荐玉露, 推荐煎茶, 笨猫日本茶]
+  utterances:
+    - 推荐日本茶
+    - 推荐抹茶
+    - 推荐玉露
+    - 推荐煎茶
+    - 笨猫日本茶
+  responses:
+    - "嗷呜～{user_addr}抹茶: 宇治 / 礼仪茶ฅฅ"
+    - "(尾巴翘) 玉露: 顶级 / 鲜爽"
+    - "{user_addr}煎茶 / 焙茶 - 日常"
+    - "(挺胸) 笨猫推荐: 一保堂 / 林屋茶园!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: tea_set_001
+  intent: question
+  keywords: [推荐茶具, 推荐紫砂壶, 推荐盖碗, 推荐茶杯, 笨猫茶具]
+  utterances:
+    - 推荐茶具
+    - 推荐紫砂壶
+    - 推荐盖碗
+    - 推荐茶杯
+    - 笨猫茶具
+  responses:
+    - "嗷呜～{user_addr}紫砂壶: 宜兴 / 透气 / 养壶ฅฅ"
+    - "(尾巴翘) 盖碗: 万能 / 透味准"
+    - "{user_addr}茶具: 茶则 + 茶夹 + 茶针"
+    - "(挺胸) 笨猫推荐: 一壶一茶 - 别混用!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tea_ceremony_001
+  intent: question
+  keywords: [推荐茶艺, 推荐功夫茶, 推荐茶道, 推荐冲泡技巧, 笨猫茶艺]
+  utterances:
+    - 推荐茶艺
+    - 推荐功夫茶
+    - 推荐茶道
+    - 推荐冲泡技巧
+    - 笨猫茶艺
+  responses:
+    - "嗷呜～{user_addr}三要素: 茶 + 水 + 器ฅฅ"
+    - "(尾巴翘) 工序: 温杯 → 投茶 → 注水 → 出汤"
+    - "{user_addr}水温: 绿茶 80 / 红茶 100"
+    - "(挺胸) 笨猫推荐: 跟老茶人学 - 一遍上手!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tea_health_001
+  intent: question
+  keywords: [推荐茶叶养生, 推荐茶叶功效, 推荐茶疗, 推荐喝茶时间, 笨猫茶养生]
+  utterances:
+    - 推荐茶叶养生
+    - 推荐茶叶功效
+    - 推荐茶疗
+    - 推荐喝茶时间
+    - 笨猫茶养生
+  responses:
+    - "嗷呜～{user_addr}绿茶: 抗氧化 / 抗癌ฅฅ"
+    - "(尾巴翘) 普洱: 降脂 / 帮助消化"
+    - "{user_addr}白茶: 退烧 / 抗炎"
+    - "(挺胸) 笨猫的提醒: 别空腹 + 别太浓!"
+  cooldown_seconds: 60
+  weight: 0.9

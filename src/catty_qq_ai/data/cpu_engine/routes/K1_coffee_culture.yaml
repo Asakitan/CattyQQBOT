@@ -1,0 +1,206 @@
+# 咖啡 / 咖啡机 / 手冲 / 精品咖啡 routes (S6 R123 NLU 节点扩充, 第十二周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: coffee_bean_001
+  intent: question
+  keywords: [推荐咖啡豆, 推荐精品咖啡豆, 推荐 Arabica, 推荐埃塞咖啡, 笨猫咖啡豆]
+  utterances:
+    - 推荐咖啡豆
+    - 推荐精品咖啡豆
+    - 推荐 Arabica
+    - 推荐埃塞咖啡
+    - 笨猫咖啡豆
+  responses:
+    - "嗷呜～{user_addr}埃塞耶加雪菲: 花果香 / 入门首选ฅฅ"
+    - "(尾巴翘) 哥伦比亚 / 巴西 - 平衡"
+    - "{user_addr}巴拿马 Geisha - 顶级 / 上千"
+    - "(挺胸) 笨猫推荐: 浅烘 + 单品 - 试出层次!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: coffee_pourover_001
+  intent: question
+  keywords: [推荐手冲咖啡, 推荐 V60, 推荐 Kalita, 推荐手冲器具, 笨猫手冲]
+  utterances:
+    - 推荐手冲咖啡
+    - 推荐 V60
+    - 推荐 Kalita
+    - 推荐手冲器具
+    - 笨猫手冲
+  responses:
+    - "嗷呜～{user_addr}V60: 圆锥 / 突出层次ฅฅ"
+    - "(尾巴翘) Kalita 三孔: 稳定 / 新手友好"
+    - "{user_addr}比例: 15g 粉 + 250g 水"
+    - "(挺胸) 笨猫推荐: 注水画圆 - 别冲到中心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: coffee_espresso_001
+  intent: question
+  keywords: [推荐意式浓缩, 推荐 espresso, 推荐 9 bar, 推荐拉花, 笨猫意式咖啡]
+  utterances:
+    - 推荐意式浓缩
+    - 推荐 espresso
+    - 推荐 9 bar
+    - 推荐拉花
+    - 笨猫意式咖啡
+  responses:
+    - "嗷呜～{user_addr}标准: 18g 粉 / 30s / 36g 液ฅฅ"
+    - "(尾巴翘) 9 bar 压 - 法式压 9 公斤"
+    - "{user_addr}基础: Americano / Latte / Cappuccino"
+    - "(挺胸) 笨猫推荐: 拉花从郁金香开始!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: coffee_machine_001
+  intent: question
+  keywords: [推荐咖啡机, 推荐家用咖啡机, 推荐 Breville, 推荐 De'Longhi, 笨猫咖啡机]
+  utterances:
+    - 推荐咖啡机
+    - 推荐家用咖啡机
+    - 推荐 Breville
+    - 推荐 De'Longhi
+    - 笨猫咖啡机
+  responses:
+    - "嗷呜～{user_addr}入门: De'Longhi EC685 / 1500 内ฅฅ"
+    - "(尾巴翘) 进阶: Breville 870 / 4000"
+    - "{user_addr}全自动: 德龙 ECAM 系列"
+    - "(挺胸) 笨猫推荐: 半自动好玩! 但学习曲线"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: coffee_chain_001
+  intent: question
+  keywords: [推荐星巴克, 推荐瑞幸, 推荐 Manner, 推荐精品咖啡店, 笨猫咖啡店]
+  utterances:
+    - 推荐星巴克
+    - 推荐瑞幸
+    - 推荐 Manner
+    - 推荐精品咖啡店
+    - 笨猫咖啡店
+  responses:
+    - "嗷呜～{user_addr}星巴克: 国际化 / 第三空间ฅฅ"
+    - "(尾巴翘) 瑞幸: 国货 / 性价比 / 9.9 卷"
+    - "{user_addr}Manner / Seesaw - 精品本土"
+    - "(挺胸) 笨猫推荐: 试小众咖啡馆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: coffee_grinder_001
+  intent: question
+  keywords: [推荐磨豆机, 推荐手摇磨豆, 推荐电动磨豆, 推荐 1Zpresso, 笨猫磨豆机]
+  utterances:
+    - 推荐磨豆机
+    - 推荐手摇磨豆
+    - 推荐电动磨豆
+    - 推荐 1Zpresso
+    - 笨猫磨豆机
+  responses:
+    - "嗷呜～{user_addr}手摇: 1Zpresso JX / 千元神器ฅฅ"
+    - "(尾巴翘) 电动入门: Baratza / Eureka"
+    - "{user_addr}意式专用: La Marzocco"
+    - "(挺胸) 笨猫的提醒: 磨豆机 > 咖啡机!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: coffee_origin_001
+  intent: question
+  keywords: [推荐咖啡产地, 推荐埃塞俄比亚, 推荐巴西咖啡, 推荐云南咖啡, 笨猫产地]
+  utterances:
+    - 推荐咖啡产地
+    - 推荐埃塞俄比亚
+    - 推荐巴西咖啡
+    - 推荐云南咖啡
+    - 笨猫产地
+  responses:
+    - "嗷呜～{user_addr}非洲: 埃塞 / 肯尼亚 - 果酸ฅฅ"
+    - "(尾巴翘) 美洲: 巴西 / 哥伦比亚 - 平衡"
+    - "{user_addr}亚洲: 印尼曼特宁 / 云南"
+    - "(挺胸) 笨猫推荐: 云南咖啡崛起!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: coffee_roast_001
+  intent: question
+  keywords: [推荐烘焙度, 推荐浅烘, 推荐中烘, 推荐深烘, 笨猫烘焙]
+  utterances:
+    - 推荐烘焙度
+    - 推荐浅烘
+    - 推荐中烘
+    - 推荐深烘
+    - 笨猫烘焙
+  responses:
+    - "嗷呜～{user_addr}浅烘: 酸 + 果香 / 突出产地ฅฅ"
+    - "(尾巴翘) 中烘: 平衡 / 焦糖味"
+    - "{user_addr}深烘: 苦 + 巧克力 / 意式必备"
+    - "(挺胸) 笨猫推荐: 单品浅烘 / 意式中深"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: coffee_brewing_001
+  intent: question
+  keywords: [推荐咖啡冲煮, 推荐法压壶, 推荐摩卡壶, 推荐爱乐压, 笨猫咖啡冲煮]
+  utterances:
+    - 推荐咖啡冲煮
+    - 推荐法压壶
+    - 推荐摩卡壶
+    - 推荐爱乐压
+    - 笨猫咖啡冲煮
+  responses:
+    - "嗷呜～{user_addr}法压: 入门 / 醇厚 / 4 分钟ฅฅ"
+    - "(尾巴翘) 摩卡: 意式入门 / Bialetti 经典"
+    - "{user_addr}爱乐压: 灵活 / 旅行神器"
+    - "(挺胸) 笨猫推荐: 多种器具体验!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: coffee_milk_001
+  intent: question
+  keywords: [推荐拿铁, 推荐卡布奇诺, 推荐玛奇朵, 推荐燕麦奶咖啡, 笨猫奶咖]
+  utterances:
+    - 推荐拿铁
+    - 推荐卡布奇诺
+    - 推荐玛奇朵
+    - 推荐燕麦奶咖啡
+    - 笨猫奶咖
+  responses:
+    - "嗷呜～{user_addr}拿铁: 1 espresso + 多奶 / 微泡ฅฅ"
+    - "(尾巴翘) 卡布: 1:1:1 - 浓 / 奶 / 奶泡"
+    - "{user_addr}燕麦奶: 健康 / 植物基"
+    - "(挺胸) 笨猫推荐: 全脂奶拉花最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: coffee_caffeine_001
+  intent: question
+  keywords: [推荐咖啡因, 推荐咖啡因含量, 推荐脱因咖啡, 推荐喝咖啡时间, 笨猫咖啡因]
+  utterances:
+    - 推荐咖啡因
+    - 推荐咖啡因含量
+    - 推荐脱因咖啡
+    - 推荐喝咖啡时间
+    - 笨猫咖啡因
+  responses:
+    - "嗷呜～{user_addr}1 杯 80-120mg / 一天 400mg 上限ฅฅ"
+    - "(尾巴翘) 脱因: 残留 5% / 孕妇也能喝"
+    - "{user_addr}最佳: 10am-12am / 2pm-4pm"
+    - "(挺胸) 笨猫的提醒: 别空腹喝! 伤胃"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: coffee_dessert_001
+  intent: question
+  keywords: [推荐咖啡甜点, 推荐提拉米苏, 推荐咖啡蛋糕, 推荐意式甜品, 笨猫咖啡甜点]
+  utterances:
+    - 推荐咖啡甜点
+    - 推荐提拉米苏
+    - 推荐咖啡蛋糕
+    - 推荐意式甜品
+    - 笨猫咖啡甜点
+  responses:
+    - "嗷呜～{user_addr}提拉米苏: 意式经典 - 含咖啡ฅฅ"
+    - "(尾巴翘) 巴斯克芝士 - 配 espresso 绝配"
+    - "{user_addr}咖啡奶冻 / 摩卡蛋糕"
+    - "(挺胸) 笨猫推荐: 苦咖啡 + 甜点 - 平衡!"
+  cooldown_seconds: 60
+  weight: 0.8

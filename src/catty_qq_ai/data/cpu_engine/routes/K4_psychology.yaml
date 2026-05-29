@@ -1,0 +1,206 @@
+# 心理学 / 抑郁 / 焦虑 / 心理咨询 routes (S6 R126 NLU 节点扩充, 第十二周期 buffered 5/10 半程)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: psy_depression_001
+  intent: question
+  keywords: [推荐治抑郁, 推荐抑郁症, 推荐抑郁应对, 推荐抑郁自我调节, 笨猫抑郁]
+  utterances:
+    - 推荐治抑郁
+    - 推荐抑郁症
+    - 推荐抑郁应对
+    - 推荐抑郁自我调节
+    - 笨猫抑郁
+  responses:
+    - "嗷呜～{user_addr}抑郁不是矫情 / 病了要治ฅฅ"
+    - "(尾巴翘) 专业治疗: 药物 + 心理咨询"
+    - "{user_addr}求助: 北京 12320 / 北医六院"
+    - "(挺胸) 笨猫的提醒: 不丢人 / 别独自扛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psy_anxiety_001
+  intent: question
+  keywords: [推荐治焦虑, 推荐焦虑症, 推荐焦虑应对, 推荐缓解焦虑, 笨猫焦虑]
+  utterances:
+    - 推荐治焦虑
+    - 推荐焦虑症
+    - 推荐焦虑应对
+    - 推荐缓解焦虑
+    - 笨猫焦虑
+  responses:
+    - "嗷呜～{user_addr}方法: 深呼吸 / 4-7-8 呼吸法ฅฅ"
+    - "(尾巴翘) CBT: 认知行为疗法 - 黄金标准"
+    - "{user_addr}运动: 跑步 30 分钟 / 大幅缓解"
+    - "(挺胸) 笨猫推荐: 严重就看心理医生!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psy_counseling_001
+  intent: question
+  keywords: [推荐心理咨询, 推荐心理咨询师, 推荐简单心理, 推荐 KnowYourself, 笨猫心理咨询]
+  utterances:
+    - 推荐心理咨询
+    - 推荐心理咨询师
+    - 推荐简单心理
+    - 推荐 KnowYourself
+    - 笨猫心理咨询
+  responses:
+    - "嗷呜～{user_addr}简单心理 / KY / 壹心理 - 大平台ฅฅ"
+    - "(尾巴翘) 单次 400-800 / 看资质"
+    - "{user_addr}流派: CBT / 精神分析 / 人本"
+    - "(挺胸) 笨猫推荐: 频次 1 周 1 次 / 持续 3-6 月"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psy_emotion_001
+  intent: question
+  keywords: [推荐情绪管理, 推荐情绪调节, 推荐情商, 推荐情绪日记, 笨猫情绪管理]
+  utterances:
+    - 推荐情绪管理
+    - 推荐情绪调节
+    - 推荐情商
+    - 推荐情绪日记
+    - 笨猫情绪管理
+  responses:
+    - "嗷呜～{user_addr}5 步: 觉察 → 命名 → 接纳 → 转移 → 表达ฅฅ"
+    - "(尾巴翘) ABC 理论: 事件 - 信念 - 结果"
+    - "{user_addr}写情绪日记 - 觉察很有效"
+    - "(挺胸) 笨猫推荐: 别压抑 / 健康宣泄!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psy_relationship_001
+  intent: question
+  keywords: [推荐人际关系, 推荐社交焦虑, 推荐亲密关系, 推荐边界感, 笨猫人际关系]
+  utterances:
+    - 推荐人际关系
+    - 推荐社交焦虑
+    - 推荐亲密关系
+    - 推荐边界感
+    - 笨猫人际关系
+  responses:
+    - "嗷呜～{user_addr}书: 《非暴力沟通》马歇尔ฅฅ"
+    - "(尾巴翘) 边界感: 学会说不 / 保护自己"
+    - "{user_addr}社交焦虑: 暴露疗法 / 渐进"
+    - "(挺胸) 笨猫的提醒: 别讨好型!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psy_meditation_001
+  intent: question
+  keywords: [推荐冥想, 推荐正念, 推荐 Headspace, 推荐潮汐 app, 笨猫冥想]
+  utterances:
+    - 推荐冥想
+    - 推荐正念
+    - 推荐 Headspace
+    - 推荐潮汐 app
+    - 笨猫冥想
+  responses:
+    - "嗷呜～{user_addr}入门: Headspace / Calm / 潮汐ฅฅ"
+    - "(尾巴翘) 正念: 卡巴金 MBSR 8 周"
+    - "{user_addr}每天 10 分钟 - 改变大脑"
+    - "(挺胸) 笨猫推荐: 别强求 / 接纳走神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psy_personality_001
+  intent: question
+  keywords: [推荐人格测试, 推荐 MBTI, 推荐九型人格, 推荐大五人格, 笨猫人格]
+  utterances:
+    - 推荐人格测试
+    - 推荐 MBTI
+    - 推荐九型人格
+    - 推荐大五人格
+    - 笨猫人格
+  responses:
+    - "嗷呜～{user_addr}MBTI: 16 型 / 流行 但准确度争议ฅฅ"
+    - "(尾巴翘) 大五: 学术认可 / 五维"
+    - "{user_addr}九型: 自我成长好工具"
+    - "(挺胸) 笨猫推荐: 别贴标签! 灵活成长"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: psy_sleep_disorder_001
+  intent: question
+  keywords: [推荐睡眠障碍, 推荐失眠, 推荐入睡, 推荐睡眠 app, 笨猫失眠]
+  utterances:
+    - 推荐睡眠障碍
+    - 推荐失眠
+    - 推荐入睡
+    - 推荐睡眠 app
+    - 笨猫失眠
+  responses:
+    - "嗷呜～{user_addr}入睡: 4-7-8 呼吸 / ASMRฅฅ"
+    - "(尾巴翘) CBT-I: 失眠认知行为疗法"
+    - "{user_addr}卫生: 黑暗 / 凉爽 / 别看手机"
+    - "(挺胸) 笨猫推荐: 别滥用安眠药!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psy_self_growth_001
+  intent: question
+  keywords: [推荐自我成长, 推荐心理学书, 推荐被讨厌的勇气, 推荐自卑, 笨猫自我成长]
+  utterances:
+    - 推荐自我成长
+    - 推荐心理学书
+    - 推荐被讨厌的勇气
+    - 推荐自卑
+    - 笨猫自我成长
+  responses:
+    - "嗷呜～{user_addr}《被讨厌的勇气》岸见一郎ฅฅ"
+    - "(尾巴翘) 阿德勒: 课题分离 / 全部责任"
+    - "{user_addr}《亲密关系》克里斯多福·孟"
+    - "(挺胸) 笨猫推荐: 心理学不只治病 / 而成长!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: psy_trauma_001
+  intent: question
+  keywords: [推荐创伤治疗, 推荐 PTSD, 推荐 EMDR, 推荐童年创伤, 笨猫创伤]
+  utterances:
+    - 推荐创伤治疗
+    - 推荐 PTSD
+    - 推荐 EMDR
+    - 推荐童年创伤
+    - 笨猫创伤
+  responses:
+    - "嗷呜～{user_addr}EMDR: 眼动脱敏 - 创伤神器ฅฅ"
+    - "(尾巴翘) 童年创伤: 一辈子影响"
+    - "{user_addr}《身体从未忘记》范德考克"
+    - "(挺胸) 笨猫的提醒: 找专业 / 别自我治!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: psy_addict_001
+  intent: question
+  keywords: [推荐戒瘾, 推荐手机成瘾, 推荐游戏成瘾, 推荐网络成瘾, 笨猫戒瘾]
+  utterances:
+    - 推荐戒瘾
+    - 推荐手机成瘾
+    - 推荐游戏成瘾
+    - 推荐网络成瘾
+    - 笨猫戒瘾
+  responses:
+    - "嗷呜～{user_addr}多巴胺戒断: 7 天起效ฅฅ"
+    - "(尾巴翘) 方法: 卸 app / 屏幕时间限制"
+    - "{user_addr}用运动 / 阅读 替代"
+    - "(挺胸) 笨猫推荐: 找朋友监督 / 别单干"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: psy_parenting_001
+  intent: question
+  keywords: [推荐儿童心理, 推荐青春期心理, 推荐亲子沟通, 推荐儿童心理学, 笨猫儿童心理]
+  utterances:
+    - 推荐儿童心理
+    - 推荐青春期心理
+    - 推荐亲子沟通
+    - 推荐儿童心理学
+    - 笨猫儿童心理
+  responses:
+    - "嗷呜～{user_addr}皮亚杰 / 维果茨基 - 经典理论ฅฅ"
+    - "(尾巴翘) 《如何说孩子才会听》"
+    - "{user_addr}青春期: 接纳 / 别强压"
+    - "(挺胸) 笨猫推荐: 父母是孩子最好榜样!"
+  cooldown_seconds: 60
+  weight: 0.8

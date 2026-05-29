@@ -1,0 +1,206 @@
+# 健身 / 增肌 / 减脂 / 跑步 routes (S6 R129 NLU 节点扩充, 第十二周期 buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: fit_bulk_001
+  intent: question
+  keywords: [推荐增肌, 推荐增肌计划, 推荐 PHUL, 推荐 PPL, 笨猫增肌]
+  utterances:
+    - 推荐增肌
+    - 推荐增肌计划
+    - 推荐 PHUL
+    - 推荐 PPL
+    - 笨猫增肌
+  responses:
+    - "嗷呜～{user_addr}核心: 渐进负荷 + 蛋白质 1.6-2g/kgฅฅ"
+    - "(尾巴翘) PPL: 推 / 拉 / 腿 - 6 天分化"
+    - "{user_addr}PHUL: 力量 + 增肌 4 天混合"
+    - "(挺胸) 笨猫推荐: 主项: 卧推 / 深蹲 / 硬拉!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fit_cut_001
+  intent: question
+  keywords: [推荐减脂, 推荐减脂计划, 推荐有氧, 推荐 HIIT, 笨猫减脂]
+  utterances:
+    - 推荐减脂
+    - 推荐减脂计划
+    - 推荐有氧
+    - 推荐 HIIT
+    - 笨猫减脂
+  responses:
+    - "嗷呜～{user_addr}热量缺口: 每天 300-500 大卡ฅฅ"
+    - "(尾巴翘) HIIT: 高效燃脂 / 20 分钟 = 1 小时慢跑"
+    - "{user_addr}有氧 + 力量 - 别只跑步"
+    - "(挺胸) 笨猫的提醒: 减脂别快! 0.5-1kg/周"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fit_chest_001
+  intent: question
+  keywords: [推荐练胸, 推荐卧推, 推荐胸肌训练, 推荐俯卧撑, 笨猫练胸]
+  utterances:
+    - 推荐练胸
+    - 推荐卧推
+    - 推荐胸肌训练
+    - 推荐俯卧撑
+    - 笨猫练胸
+  responses:
+    - "嗷呜～{user_addr}卧推: 杠铃 / 哑铃 - 王道ฅฅ"
+    - "(尾巴翘) 上斜 / 平板 / 下斜 - 三角度"
+    - "{user_addr}飞鸟 / 夹胸 - 隔离"
+    - "(挺胸) 笨猫推荐: 大重量 + 标准动作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fit_back_001
+  intent: question
+  keywords: [推荐练背, 推荐引体向上, 推荐硬拉, 推荐划船, 笨猫练背]
+  utterances:
+    - 推荐练背
+    - 推荐引体向上
+    - 推荐硬拉
+    - 推荐划船
+    - 笨猫练背
+  responses:
+    - "嗷呜～{user_addr}背王道: 引体 + 硬拉 + 划船ฅฅ"
+    - "(尾巴翘) 高位下拉 - 引体不行的过渡"
+    - "{user_addr}T-Bar / 杠铃划船 - 增厚"
+    - "(挺胸) 笨猫推荐: 背是最难感觉到的肌群!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fit_legs_001
+  intent: question
+  keywords: [推荐练腿, 推荐深蹲, 推荐腿推, 推荐臀冲, 笨猫练腿]
+  utterances:
+    - 推荐练腿
+    - 推荐深蹲
+    - 推荐腿推
+    - 推荐臀冲
+    - 笨猫练腿
+  responses:
+    - "嗷呜～{user_addr}深蹲: 力量之王 - 必练ฅฅ"
+    - "(尾巴翘) 罗马尼亚硬拉 / 腿弯举 - 腘绳"
+    - "{user_addr}臀桥 / 臀冲 - 翘臀"
+    - "(挺胸) 笨猫推荐: 别跳过腿日!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fit_arms_001
+  intent: question
+  keywords: [推荐练手臂, 推荐二头, 推荐三头, 推荐肱二头, 笨猫练手臂]
+  utterances:
+    - 推荐练手臂
+    - 推荐二头
+    - 推荐三头
+    - 推荐肱二头
+    - 笨猫练手臂
+  responses:
+    - "嗷呜～{user_addr}二头: 弯举 + 牧师 / 锤式ฅฅ"
+    - "(尾巴翘) 三头: 双杠臂屈伸 + 绳索"
+    - "{user_addr}手臂: 多动作 / 高次数"
+    - "(挺胸) 笨猫推荐: 三头 > 二头 - 增粗!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fit_running_001
+  intent: question
+  keywords: [推荐跑步, 推荐跑姿, 推荐跑步计划, 推荐 5km 10km, 笨猫跑步]
+  utterances:
+    - 推荐跑步
+    - 推荐跑姿
+    - 推荐跑步计划
+    - 推荐 5km 10km
+    - 笨猫跑步
+  responses:
+    - "嗷呜～{user_addr}入门: Couch to 5K - 9 周方案ฅฅ"
+    - "(尾巴翘) 跑姿: 前掌 vs 中掌着地"
+    - "{user_addr}心率: 180-年龄 - 燃脂区间"
+    - "(挺胸) 笨猫推荐: 慢跑 > 拼速度!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fit_diet_001
+  intent: question
+  keywords: [推荐健身饮食, 推荐高蛋白, 推荐增肌饮食, 推荐减脂饮食, 笨猫健身饮食]
+  utterances:
+    - 推荐健身饮食
+    - 推荐高蛋白
+    - 推荐增肌饮食
+    - 推荐减脂饮食
+    - 笨猫健身饮食
+  responses:
+    - "嗷呜～{user_addr}增肌: 蛋白 1.6-2g/kg + 热量盈余ฅฅ"
+    - "(尾巴翘) 减脂: 蛋白不变 + 热量缺口"
+    - "{user_addr}碳水: 训练前后吃"
+    - "(挺胸) 笨猫推荐: 鸡胸 / 鸡蛋 / 牛肉!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fit_supplement_001
+  intent: question
+  keywords: [推荐健身补剂, 推荐蛋白粉, 推荐肌酸, 推荐 BCAA, 笨猫健身补剂]
+  utterances:
+    - 推荐健身补剂
+    - 推荐蛋白粉
+    - 推荐肌酸
+    - 推荐 BCAA
+    - 笨猫健身补剂
+  responses:
+    - "嗷呜～{user_addr}蛋白粉: 乳清浓缩 / 性价比ฅฅ"
+    - "(尾巴翘) 肌酸: 一水肌酸 / 增力神器"
+    - "{user_addr}国货: Myprotein / 西王"
+    - "(挺胸) 笨猫的提醒: 别迷信补剂! 训练 + 饮食!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fit_gym_001
+  intent: question
+  keywords: [推荐健身房, 推荐健身房选择, 推荐健身私教, 推荐 LesMills, 笨猫健身房]
+  utterances:
+    - 推荐健身房
+    - 推荐健身房选择
+    - 推荐健身私教
+    - 推荐 LesMills
+    - 笨猫健身房
+  responses:
+    - "嗷呜～{user_addr}连锁: 一兆韦德 / 威尔士 / SuperMonkeyฅฅ"
+    - "(尾巴翘) 团课: BodyPump / BodyAttack / Yoga"
+    - "{user_addr}私教: 看资质 / 别只看长相"
+    - "(挺胸) 笨猫推荐: 试体验课再办卡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fit_yoga_001
+  intent: question
+  keywords: [推荐瑜伽, 推荐流瑜伽, 推荐阴瑜伽, 推荐普拉提, 笨猫瑜伽]
+  utterances:
+    - 推荐瑜伽
+    - 推荐流瑜伽
+    - 推荐阴瑜伽
+    - 推荐普拉提
+    - 笨猫瑜伽
+  responses:
+    - "嗷呜～{user_addr}流派: 哈他 / 阿斯汤加 / 阴瑜伽ฅฅ"
+    - "(尾巴翘) 普拉提: 核心 - 形体派"
+    - "{user_addr}热瑜伽 - 排汗减重"
+    - "(挺胸) 笨猫推荐: 别只追拉伸 / 力量也重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fit_home_001
+  intent: question
+  keywords: [推荐家庭健身, 推荐家庭器械, 推荐哑铃, 推荐弹力带, 笨猫家庭健身]
+  utterances:
+    - 推荐家庭健身
+    - 推荐家庭器械
+    - 推荐哑铃
+    - 推荐弹力带
+    - 笨猫家庭健身
+  responses:
+    - "嗷呜～{user_addr}入门: 可调哑铃 / 弹力带 / 单杠ฅฅ"
+    - "(尾巴翘) 进阶: 史密斯 / 卧推架"
+    - "{user_addr}APP: Keep / Nike Training Club"
+    - "(挺胸) 笨猫推荐: 视频跟练 - 标准动作!"
+  cooldown_seconds: 60
+  weight: 1.0

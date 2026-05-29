@@ -1,0 +1,206 @@
+# 钓鱼 / 户外 / 露营 / 徒步 / 登山 routes (S6 R128 NLU 节点扩充, 第十二周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: out_fishing_001
+  intent: question
+  keywords: [推荐钓鱼, 推荐钓鱼入门, 推荐钓鱼装备, 推荐路亚, 笨猫钓鱼]
+  utterances:
+    - 推荐钓鱼
+    - 推荐钓鱼入门
+    - 推荐钓鱼装备
+    - 推荐路亚
+    - 笨猫钓鱼
+  responses:
+    - "嗷呜～{user_addr}台钓: 鲫鱼 / 鲤鱼 - 入门ฅฅ"
+    - "(尾巴翘) 路亚: 假饵 / 黑鱼 / 鲈鱼"
+    - "{user_addr}海钓: 矶钓 / 船钓"
+    - "(挺胸) 笨猫推荐: 先一根 5.4 米手竿!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: out_camping_001
+  intent: question
+  keywords: [推荐露营, 推荐帐篷, 推荐露营地, 推荐精致露营, 笨猫露营]
+  utterances:
+    - 推荐露营
+    - 推荐帐篷
+    - 推荐露营地
+    - 推荐精致露营
+    - 笨猫露营
+  responses:
+    - "嗷呜～{user_addr}牧高笛 / Naturehike 国货ฅฅ"
+    - "(尾巴翘) 美式: Snow Peak / Coleman"
+    - "{user_addr}必备: 帐篷 + 睡袋 + 防潮垫"
+    - "(挺胸) 笨猫推荐: 看营地评价 + 天气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: out_hiking_001
+  intent: question
+  keywords: [推荐徒步, 推荐徒步装备, 推荐徒步路线, 推荐户外徒步, 笨猫徒步]
+  utterances:
+    - 推荐徒步
+    - 推荐徒步装备
+    - 推荐徒步路线
+    - 推荐户外徒步
+    - 笨猫徒步
+  responses:
+    - "嗷呜～{user_addr}入门: 香山 / 灵山 - 简单ฅฅ"
+    - "(尾巴翘) 进阶: 武功山 / 武功草甸"
+    - "{user_addr}线路: 川藏 / 鳌太 - 难度大"
+    - "(挺胸) 笨猫的提醒: 别自单飞! 结伴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: out_climbing_001
+  intent: question
+  keywords: [推荐登山, 推荐登山装备, 推荐攀岩, 推荐高海拔, 笨猫登山]
+  utterances:
+    - 推荐登山
+    - 推荐登山装备
+    - 推荐攀岩
+    - 推荐高海拔
+    - 笨猫登山
+  responses:
+    - "嗷呜～{user_addr}5000+ 雪山: 哈巴 / 四姑娘ฅฅ"
+    - "(尾巴翘) 高海拔: 高反药 / 训练 3 个月"
+    - "{user_addr}攀岩馆 - 室内入门"
+    - "(挺胸) 笨猫推荐: 别盲目挑战!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: out_gear_001
+  intent: question
+  keywords: [推荐户外装备, 推荐冲锋衣, 推荐登山鞋, 推荐 Patagonia, 笨猫户外装备]
+  utterances:
+    - 推荐户外装备
+    - 推荐冲锋衣
+    - 推荐登山鞋
+    - 推荐 Patagonia
+    - 笨猫户外装备
+  responses:
+    - "嗷呜～{user_addr}冲锋衣: 始祖鸟 / 巴塔 / 北面ฅฅ"
+    - "(尾巴翘) 登山鞋: Salomon / Lowa"
+    - "{user_addr}背包: 格里高利 / Osprey"
+    - "(挺胸) 笨猫推荐: 三层穿衣法!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: out_running_001
+  intent: question
+  keywords: [推荐越野跑, 推荐 TNF100, 推荐马拉松, 推荐越野赛, 笨猫越野跑]
+  utterances:
+    - 推荐越野跑
+    - 推荐 TNF100
+    - 推荐马拉松
+    - 推荐越野赛
+    - 笨猫越野跑
+  responses:
+    - "嗷呜～{user_addr}经典: TNF / 港百 / 莫干山ฅฅ"
+    - "(尾巴翘) UTMB: 越野跑界顶级 - 法国"
+    - "{user_addr}装备: 越野鞋 / 水袋包"
+    - "(挺胸) 笨猫推荐: 别一开始上 100km!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: out_skiing_001
+  intent: question
+  keywords: [推荐滑雪, 推荐双板, 推荐单板, 推荐滑雪场, 笨猫滑雪]
+  utterances:
+    - 推荐滑雪
+    - 推荐双板
+    - 推荐单板
+    - 推荐滑雪场
+    - 笨猫滑雪
+  responses:
+    - "嗷呜～{user_addr}双板: 上手快 / 速度感ฅฅ"
+    - "(尾巴翘) 单板: 帅 / 学习曲线"
+    - "{user_addr}国内: 长白山 / 万龙 / 神农架"
+    - "(挺胸) 笨猫推荐: 一定请教练!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: out_diving_001
+  intent: question
+  keywords: [推荐潜水, 推荐 OW, 推荐 PADI, 推荐自由潜, 笨猫潜水]
+  utterances:
+    - 推荐潜水
+    - 推荐 OW
+    - 推荐 PADI
+    - 推荐自由潜
+    - 笨猫潜水
+  responses:
+    - "嗷呜～{user_addr}OW 开放水域 / 入门 / 几天ฅฅ"
+    - "(尾巴翘) PADI 国际 / SSI 也行"
+    - "{user_addr}热门: 沙巴 / 仙本那 / 帕劳"
+    - "(挺胸) 笨猫推荐: 安全第一! 别独潜"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: out_cycling_001
+  intent: question
+  keywords: [推荐自行车, 推荐山地车, 推荐公路车, 推荐骑行, 笨猫骑行]
+  utterances:
+    - 推荐自行车
+    - 推荐山地车
+    - 推荐公路车
+    - 推荐骑行
+    - 笨猫骑行
+  responses:
+    - "嗷呜～{user_addr}入门: 捷安特 / 美利达 - 国货ฅฅ"
+    - "(尾巴翘) 高端: Specialized / Trek / Pinarello"
+    - "{user_addr}骑行线: 318 川藏 / 环青海湖"
+    - "(挺胸) 笨猫推荐: 头盔必戴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: out_water_001
+  intent: question
+  keywords: [推荐桨板, 推荐皮划艇, 推荐冲浪, 推荐 SUP, 笨猫水上运动]
+  utterances:
+    - 推荐桨板
+    - 推荐皮划艇
+    - 推荐冲浪
+    - 推荐 SUP
+    - 笨猫水上运动
+  responses:
+    - "嗷呜～{user_addr}SUP 桨板: 网红 / 平静水域ฅฅ"
+    - "(尾巴翘) 皮划艇: 双人 / 操控性好"
+    - "{user_addr}冲浪: 海南万宁 - 国内 mecca"
+    - "(挺胸) 笨猫推荐: 救生衣必穿!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: out_navigation_001
+  intent: question
+  keywords: [推荐户外 GPS, 推荐户外手表, 推荐 Garmin, 推荐两步路, 笨猫户外手表]
+  utterances:
+    - 推荐户外 GPS
+    - 推荐户外手表
+    - 推荐 Garmin
+    - 推荐两步路
+    - 笨猫户外手表
+  responses:
+    - "嗷呜～{user_addr}Garmin Fenix - 越野神器ฅฅ"
+    - "(尾巴翘) 国货: 高驰 COROS"
+    - "{user_addr}手机 app: 两步路 / 六只脚"
+    - "(挺胸) 笨猫推荐: 离线地图必下!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: out_safety_001
+  intent: question
+  keywords: [推荐户外安全, 推荐失温, 推荐急救包, 推荐迷路自救, 笨猫户外安全]
+  utterances:
+    - 推荐户外安全
+    - 推荐失温
+    - 推荐急救包
+    - 推荐迷路自救
+    - 笨猫户外安全
+  responses:
+    - "嗷呜～{user_addr}失温: 三层穿衣 + 热饮ฅฅ"
+    - "(尾巴翘) 急救: 三角巾 / 绷带 / 止血带"
+    - "{user_addr}迷路: STOP - 停 / 思 / 观 / 计划"
+    - "(挺胸) 笨猫的提醒: 告知行程 / 留备份!"
+  cooldown_seconds: 60
+  weight: 0.9
