@@ -1,0 +1,207 @@
+# 护肤品牌 / 大牌国货性价比 routes (S6 R245 NLU 节点扩充, 第二十四周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰列名词.
+
+- name: sb_high_end_001
+  intent: question
+  keywords: [推荐高端护肤, 推荐 SK-II, 推荐海蓝之谜, 推荐赫莲娜, 笨猫高端护肤]
+  utterances:
+    - 推荐高端护肤
+    - 推荐 SK-II
+    - 推荐海蓝之谜
+    - 推荐赫莲娜
+    - 笨猫高端护肤
+  responses:
+    - "嗷呜～{user_addr}SK-II 神仙水 / 海蓝之谜面霜ฅฅ"
+    - "(尾巴翘) 赫莲娜黑绷带 / 莱珀妮"
+    - "{user_addr}贵妇线 - 抗老顶配"
+    - "(挺胸) 笨猫推荐: SK-II 神仙水入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_mid_range_001
+  intent: question
+  keywords: [推荐中端护肤, 推荐 Olay, 推荐兰蔻, 推荐欧莱雅, 笨猫中端护肤]
+  utterances:
+    - 推荐中端护肤
+    - 推荐 Olay
+    - 推荐兰蔻
+    - 推荐欧莱雅
+    - 笨猫中端护肤
+  responses:
+    - "嗷呜～{user_addr}Olay 小白瓶 / 兰蔻小黑瓶ฅฅ"
+    - "(尾巴翘) 欧莱雅紫熨斗 / 雅诗兰黛小棕瓶"
+    - "{user_addr}大牌平替 - 性价比之选"
+    - "(挺胸) 笨猫推荐: Olay 烟酰胺白菜价!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_budget_001
+  intent: question
+  keywords: [推荐平价护肤, 推荐珂润, 推荐 CeraVe, 推荐理肤泉, 笨猫平价护肤]
+  utterances:
+    - 推荐平价护肤
+    - 推荐珂润
+    - 推荐 CeraVe
+    - 推荐理肤泉
+    - 笨猫平价护肤
+  responses:
+    - "嗷呜～{user_addr}珂润润浸 / CeraVe C 乳ฅฅ"
+    - "(尾巴翘) 理肤泉 B5 / 优色林"
+    - "{user_addr}屏障修复 - 学生党友好"
+    - "(挺胸) 笨猫推荐: CeraVe C 乳无敌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_domestic_001
+  intent: question
+  keywords: [推荐国货护肤, 推荐玉泽, 推荐薇诺娜, 推荐润百颜, 笨猫国货护肤]
+  utterances:
+    - 推荐国货护肤
+    - 推荐玉泽
+    - 推荐薇诺娜
+    - 推荐润百颜
+    - 笨猫国货护肤
+  responses:
+    - "嗷呜～{user_addr}玉泽 / 薇诺娜 - 敏感肌救星ฅฅ"
+    - "(尾巴翘) 润百颜 / 可复美 / 米蓓尔"
+    - "{user_addr}国货崛起 - 成分党最爱"
+    - "(挺胸) 笨猫推荐: 薇诺娜舒敏面霜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_anti_aging_001
+  intent: question
+  keywords: [推荐抗老护肤, 推荐 A 醇, 推荐视黄醇, 推荐维 C, 笨猫抗老]
+  utterances:
+    - 推荐抗老护肤
+    - 推荐 A 醇
+    - 推荐视黄醇
+    - 推荐维 C
+    - 笨猫抗老
+  responses:
+    - "嗷呜～{user_addr}A 醇 (视黄醇) - 抗老金标准ฅฅ"
+    - "(尾巴翘) 修丽可维 C / 露得清 A 醇"
+    - "{user_addr}玻色因 / 胜肽 / 玻尿酸"
+    - "(挺胸) 笨猫推荐: 30+ 必上 A 醇!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_whitening_001
+  intent: question
+  keywords: [推荐美白护肤, 推荐烟酰胺, 推荐熊果苷, 推荐传明酸, 笨猫美白]
+  utterances:
+    - 推荐美白护肤
+    - 推荐烟酰胺
+    - 推荐熊果苷
+    - 推荐传明酸
+    - 笨猫美白
+  responses:
+    - "嗷呜～{user_addr}烟酰胺 5% - 美白主力ฅฅ"
+    - "(尾巴翘) 377 / 熊果苷 / 传明酸"
+    - "{user_addr}Olay 小白瓶 / HFP 烟酰胺"
+    - "(挺胸) 笨猫推荐: 防晒 + 烟酰胺组合!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_hydrating_001
+  intent: question
+  keywords: [推荐保湿护肤, 推荐玻尿酸, 推荐神经酰胺, 推荐润百颜, 笨猫保湿]
+  utterances:
+    - 推荐保湿护肤
+    - 推荐玻尿酸
+    - 推荐神经酰胺
+    - 推荐润百颜
+    - 笨猫保湿
+  responses:
+    - "嗷呜～{user_addr}玻尿酸 / 神经酰胺 - 保湿双子星ฅฅ"
+    - "(尾巴翘) 润百颜次抛 / 珂润润浸"
+    - "{user_addr}HABA 鲨烷油 / 雅漾喷雾"
+    - "(挺胸) 笨猫推荐: 干皮屯润百颜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_acne_001
+  intent: question
+  keywords: [推荐祛痘护肤, 推荐水杨酸, 推荐 The Ordinary, 推荐宝拉珍选, 笨猫祛痘]
+  utterances:
+    - 推荐祛痘护肤
+    - 推荐水杨酸
+    - 推荐 The Ordinary
+    - 推荐宝拉珍选
+    - 笨猫祛痘
+  responses:
+    - "嗷呜～{user_addr}水杨酸 2% - 痘肌救星ฅฅ"
+    - "(尾巴翘) 宝拉 2% BHA / The Ordinary 水杨酸"
+    - "{user_addr}班赛 / 阿达帕林 - 局部点涂"
+    - "(挺胸) 笨猫推荐: 宝拉小绿瓶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sensitive_001
+  intent: question
+  keywords: [推荐敏感肌护肤, 推荐修红血丝, 推荐屏障修复, 推荐雅漾, 笨猫敏感肌]
+  utterances:
+    - 推荐敏感肌护肤
+    - 推荐修红血丝
+    - 推荐屏障修复
+    - 推荐雅漾
+    - 笨猫敏感肌
+  responses:
+    - "嗷呜～{user_addr}雅漾 / 理肤泉 / 薇诺娜ฅฅ"
+    - "(尾巴翘) 玉泽皮脂膜 / 可复美面膜"
+    - "{user_addr}成分越简单越好 - 别叠 A 酸"
+    - "(挺胸) 笨猫推荐: 薇诺娜舒敏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_men_001
+  intent: question
+  keywords: [推荐男士护肤, 推荐男士洗面奶, 推荐男士保湿, 推荐碧欧泉, 笨猫男士护肤]
+  utterances:
+    - 推荐男士护肤
+    - 推荐男士洗面奶
+    - 推荐男士保湿
+    - 推荐碧欧泉
+    - 笨猫男士护肤
+  responses:
+    - "嗷呜～{user_addr}碧欧泉男士 / 倩碧男士ฅฅ"
+    - "(尾巴翘) 朗仕 / 妮维雅 - 性价比"
+    - "{user_addr}洗面奶 + 保湿乳 + 防晒三件套"
+    - "(挺胸) 笨猫推荐: 别用沐浴露洗脸!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sb_eye_cream_001
+  intent: question
+  keywords: [推荐眼霜, 推荐黑眼圈, 推荐眼纹, 推荐妊娠纹, 笨猫眼霜]
+  utterances:
+    - 推荐眼霜
+    - 推荐黑眼圈
+    - 推荐眼纹
+    - 推荐妊娠纹
+    - 笨猫眼霜
+  responses:
+    - "嗷呜～{user_addr}兰蔻菁纯 / 雅诗兰黛眼霜ฅฅ"
+    - "(尾巴翘) 海蓝之谜眼霜 / 修丽可眼霜"
+    - "{user_addr}妊娠纹: 帕玛氏 / 娇韵诗"
+    - "(挺胸) 笨猫推荐: 25+ 早用眼霜!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sb_sunscreen_001
+  intent: question
+  keywords: [推荐防晒, 推荐 SPF50, 推荐安耐晒, 推荐资生堂, 笨猫防晒]
+  utterances:
+    - 推荐防晒
+    - 推荐 SPF50
+    - 推荐安耐晒
+    - 推荐资生堂
+    - 笨猫防晒
+  responses:
+    - "嗷呜～{user_addr}安耐晒小金瓶 / 资生堂蓝胖子ฅฅ"
+    - "(尾巴翘) 怡丽丝尔 / 碧柔水感"
+    - "{user_addr}SPF50 PA++++ - 户外必备"
+    - "(挺胸) 笨猫推荐: 防晒 > 一切护肤!"
+  cooldown_seconds: 60
+  weight: 1.0

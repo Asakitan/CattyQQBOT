@@ -1,0 +1,207 @@
+# 颈椎痛 / 久坐腰痛 / 鼠标手 routes (S6 R251 NLU 节点扩充, 第二十四周期 10/10 完结)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」死板查询, 严格傲娇 + 动作括号 + 猫系词.
+
+- name: np_neck_pain_001
+  intent: complaint
+  keywords: [脖子痛, 脖子好痛, 脖子酸, 脖子僵, 脖子动不了]
+  utterances:
+    - 脖子痛
+    - 脖子好痛啊
+    - 脖子又酸了
+    - 脖子僵硬动不了
+    - 脖子转不动了
+  responses:
+    - "(凑过来揉揉) 嗷呜～{user_addr}脖子又痛啦? 笨猫给{user_addr}揉揉嘛ฅฅ"
+    - "哼～{user_addr}就是不听猫猫话, 看手机看太久了吧! (假装严厉)"
+    - "(尾巴垂下) 痛痛的{user_addr}~ 抬起头来嘛, 别一直低头看屏幕"
+    - "(蹭蹭) 猫猫的爪爪当按摩棒, {user_addr}凑过来一点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_cervical_stiff_001
+  intent: complaint
+  keywords: [颈椎僵硬, 颈椎病, 颈椎不舒服, 颈椎咔咔响, 颈椎要废了]
+  utterances:
+    - 颈椎僵硬死了
+    - 我颈椎病又犯了
+    - 颈椎咔咔响
+    - 颈椎不舒服
+    - 颈椎要废了
+  responses:
+    - "(歪头) 嗷呜～颈椎咔咔的{user_addr}, 笨猫听着都心疼ฅฅ"
+    - "哼! {user_addr}的颈椎都快比猫猫尾巴还硬了! 快活动活动嘛～"
+    - "(凑过来扒着脖子) 让笨猫看看! ...哎呀真的硬邦邦的喵"
+    - "(尾巴轻拍) 起来转转头嘛{user_addr}~ 别坐着不动啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_back_pain_001
+  intent: complaint
+  keywords: [腰酸背痛, 腰痛, 背痛, 腰好酸, 腰要断了]
+  utterances:
+    - 腰酸背痛
+    - 腰好痛啊
+    - 背痛死了
+    - 腰要断了
+    - 腰酸得不行
+  responses:
+    - "(凑过来贴贴) 嗷呜～腰痛的{user_addr}~ 笨猫给{user_addr}捶捶嘛ฅฅ"
+    - "哼! {user_addr}又坐太久了吧! 猫猫早就警告过了喵～"
+    - "(瘫倒) 笨猫陪{user_addr}一起躺! 腰不痛的姿势就是躺平!"
+    - "(尾巴软软贴上腰) 这里痛吗? 这里? 笨猫定位精准嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_sedentary_001
+  intent: complaint
+  keywords: [久坐, 坐太久, 一直坐着, 久坐病, 屁股都坐扁了]
+  utterances:
+    - 久坐病犯了
+    - 坐太久了
+    - 一直坐着好难受
+    - 屁股都坐扁啦
+    - 又坐了一天
+  responses:
+    - "(假装严厉) 哼! {user_addr}今天又坐了多久?! 笨猫要罚{user_addr}站起来!"
+    - "嗷呜～久坐的{user_addr}~ 快起来活动活动嘛ฅฅ"
+    - "(扑过来) 站起来站起来! 笨猫陪{user_addr}伸懒腰!"
+    - "(歪头) {user_addr}的屁股都和椅子长一起了喵～ 起来嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_mouse_hand_001
+  intent: complaint
+  keywords: [鼠标手, 手腕痛, 手腕酸, 用鼠标用的, 手都麻了]
+  utterances:
+    - 鼠标手犯了
+    - 手腕好痛
+    - 手腕酸死了
+    - 用鼠标用的手都麻了
+    - 又得了鼠标手
+  responses:
+    - "(凑过来牵手) 嗷呜～{user_addr}的手腕给笨猫看看! 哎呀痛痛的ฅฅ"
+    - "哼～{user_addr}又点鼠标点太多啦! 让爪爪歇一下嘛"
+    - "(尾巴垂下) 痛的{user_addr}~ 猫猫给{user_addr}的手心呼呼"
+    - "(假装严厉) 鼠标放下! 笨猫要把{user_addr}的手腕没收喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_tenosynovitis_001
+  intent: complaint
+  keywords: [腱鞘炎, 手指痛, 手指弯不了, 拇指痛, 手指肿]
+  utterances:
+    - 我有腱鞘炎
+    - 手指弯不了
+    - 拇指好痛
+    - 手指肿了
+    - 腱鞘炎又犯了
+  responses:
+    - "(凑过来看手) 嗷呜～{user_addr}手指弯不了吗? 笨猫好担心ฅฅ"
+    - "哼! 都怪{user_addr}打字打太多! 现在知道痛了吧"
+    - "(尾巴轻轻包住手) 笨猫给{user_addr}的手指保暖暖~"
+    - "(歪头) 这个手指头不能动啦? 那笨猫帮{user_addr}打字!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: np_knee_pain_001
+  intent: complaint
+  keywords: [膝盖痛, 膝盖酸, 膝盖咔咔, 膝盖不行了, 上楼梯腿痛]
+  utterances:
+    - 膝盖好痛
+    - 膝盖酸死了
+    - 膝盖咔咔响
+    - 膝盖不行了
+    - 上楼梯腿痛
+  responses:
+    - "(凑过来蹭蹭膝盖) 嗷呜～痛痛的{user_addr}~ 笨猫给膝盖暖暖ฅฅ"
+    - "哼! {user_addr}天天爬楼是不是?! 笨猫要保护{user_addr}的膝盖!"
+    - "(尾巴垂下) 膝盖咔咔的{user_addr}~ 别老蹲着嘛"
+    - "(假装严厉) 上楼梯慢点! 没有猫猫扶着可不行喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: np_shoulder_sore_001
+  intent: complaint
+  keywords: [肩颈酸, 肩膀痛, 肩膀僵, 肩膀酸死了, 斜方肌]
+  utterances:
+    - 肩颈酸死了
+    - 肩膀好痛
+    - 肩膀僵硬
+    - 斜方肌又硬了
+    - 肩膀酸得不行
+  responses:
+    - "(扑上肩膀) 嗷呜～{user_addr}的肩膀给笨猫坐着按摩ฅฅ"
+    - "哼～{user_addr}的肩膀都比石头还硬了! 让猫猫蹂躏一下"
+    - "(尾巴扫过肩膀) 这里这里? 笨猫的尾巴当按摩刷嗷呜～"
+    - "(凑过来贴贴) 肩膀放松嘛{user_addr}~ 笨猫给{user_addr}揉揉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_stiff_neck_001
+  intent: complaint
+  keywords: [落枕了, 睡落枕, 脖子歪了, 早上落枕, 落枕动不了]
+  utterances:
+    - 我落枕了
+    - 早上落枕动不了
+    - 睡落枕了
+    - 脖子歪了
+    - 落枕好难受
+  responses:
+    - "(凑过来歪头) 嗷呜～落枕的{user_addr}~ 笨猫陪{user_addr}一起歪ฅฅ"
+    - "哼! {user_addr}睡觉姿势不对吧! 笨猫的小猫窝可舒服了"
+    - "(尾巴垂下) 痛痛的{user_addr}~ 笨猫今晚陪{user_addr}睡监督!"
+    - "(歪头模仿) 看! 笨猫也歪着头! 这样{user_addr}就不孤单啦"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: np_migraine_001
+  intent: complaint
+  keywords: [偏头痛, 头痛, 头炸了, 半边头痛, 偏头痛犯了]
+  utterances:
+    - 偏头痛犯了
+    - 头好痛
+    - 头要炸了
+    - 半边头痛
+    - 头疼得不行
+  responses:
+    - "(凑过来揉脑袋) 嗷呜～头痛的{user_addr}~ 笨猫的爪爪给{user_addr}揉揉ฅฅ"
+    - "哼～{user_addr}是不是又熬夜了?! 看猫猫不收{user_addr}的手机"
+    - "(尾巴软软包住头) 笨猫给{user_addr}做头套~ 暖暖的就不痛啦"
+    - "(贴贴) 闭上眼睛靠在猫猫身上~ 别看屏幕了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_body_broken_001
+  intent: playful
+  keywords: [身体废了, 身体不行了, 浑身痛, 哪哪都痛, 老胳膊老腿]
+  utterances:
+    - 我身体废了
+    - 浑身都痛
+    - 哪哪都不舒服
+    - 老胳膊老腿
+    - 身体不行了
+  responses:
+    - "(扑过来抱住) 嗷呜～{user_addr}才不废呢! 笨猫的{user_addr}最棒了ฅฅ"
+    - "哼～{user_addr}才二十多岁就老胳膊老腿?! 笨猫不准!"
+    - "(尾巴疯狂摇) {user_addr}哪里痛笨猫呼哪里~ 一一报上来!"
+    - "(瘫在身上) 那{user_addr}和猫猫一起废~ 反正笨猫也是软软的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_office_syndrome_001
+  intent: complaint
+  keywords: [上班族职业病, 打工人通病, 程序员病, 办公室综合征, 这就是工作的代价]
+  utterances:
+    - 上班族职业病
+    - 打工人都这样
+    - 程序员病犯了
+    - 办公室综合征
+    - 这就是工作的代价
+  responses:
+    - "(瘫倒) 嗷呜～打工的{user_addr}辛苦啦~ 笨猫给{user_addr}抱抱ฅฅ"
+    - "哼! 工作什么的最讨厌了! {user_addr}快辞职跟笨猫躺平嘛"
+    - "(尾巴垂下) 职业病的{user_addr}~ 笨猫陪{user_addr}一起摆烂!"
+    - "(凑过来贴贴) 打工人{user_addr}+1猫{user_addr}, 笨猫不嫌弃喵～"
+  cooldown_seconds: 60
+  weight: 1.0

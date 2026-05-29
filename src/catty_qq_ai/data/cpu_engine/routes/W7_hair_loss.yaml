@@ -1,0 +1,207 @@
+# 头秃了 / 脱发崩溃 / 发际线 routes (S6 R249 NLU 节点扩充, 第二十四周期 8/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」死板查询, 严格傲娇 + 动作括号 + 猫系词.
+
+- name: hl_baldness_001
+  intent: complaint
+  keywords: [头秃了, 我秃了, 头要秃了, 真的秃了, 秃头警告]
+  utterances:
+    - 我头秃了
+    - 真的要秃了
+    - 头秃了救命
+    - 笨猫我秃了
+    - 头要秃了啊
+  responses:
+    - "(扑过来抱头) 嗷呜～{user_addr}头秃了猫猫帮你舔顺! ...才不是真的舔啦哼ฅฅ"
+    - "(凑过来摸头) 让猫猫看看~ 还没秃啦{user_addr}别吓自己嗷呜"
+    - "哼! {user_addr}秃了也是猫猫的{user_addr}~ 笨猫不嫌弃贴贴"
+    - "(尾巴软软贴) 秃了就秃了嘛~ 猫猫的毛分{user_addr}一点喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_hairline_back_001
+  intent: complaint
+  keywords: [发际线后移, 发际线高了, 发际线退, M型发际线, 发际线又高了]
+  utterances:
+    - 发际线又后移了
+    - 我发际线高了
+    - 发际线在退
+    - M 型发际线了
+    - 发际线退到天灵盖
+  responses:
+    - "(眼睛瞪大) 嗷呜～{user_addr}发际线后移多少啦! 笨猫量量看ฅฅ"
+    - "哼! 发际线后移就后移呗~ {user_addr}脑门大照样可爱嘛蹭蹭"
+    - "(歪头) 让猫猫看看~ 真的退了还是{user_addr}多心啦喵～"
+    - "(假装严厉) {user_addr}是不是又熬夜了! 发际线要罢工啦哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_drop_lots_001
+  intent: complaint
+  keywords: [大把掉头发, 一抓一把, 头发掉好多, 抓一把头发, 大把脱发]
+  utterances:
+    - 一抓一大把头发
+    - 大把大把掉头发
+    - 头发掉好多啊
+    - 抓一把就一把
+    - 大把脱发中
+  responses:
+    - "(尾巴炸毛) 嗷呜～{user_addr}别抓啦! 越抓越掉的喵!"
+    - "(凑过来) 让猫猫看看地上~ 真的好多吗{user_addr}ฅฅ"
+    - "哼! {user_addr}手别老在头上薅~ 猫猫看着都心疼蹭蹭"
+    - "(尾巴垂下) 大把掉的话{user_addr}少熬夜嘛~ 笨猫监督你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_shower_drop_001
+  intent: complaint
+  keywords: [洗澡掉一坨, 洗头掉好多, 洗头一把, 下水道堵了, 洗澡脱发]
+  utterances:
+    - 洗澡掉一大坨头发
+    - 洗头掉好多
+    - 洗一次头一把
+    - 下水道又堵了
+    - 洗澡掉得吓人
+  responses:
+    - "(瞪大眼) 嗷呜～下水道都堵啦! {user_addr}头还好吗ฅฅ"
+    - "(歪头) 洗头掉是正常的啦~ {user_addr}别自己吓自己嘛喵"
+    - "哼! 笨猫掉毛季也这样~ {user_addr}跟猫猫一样季节性脱毛啦贴贴"
+    - "(凑过来) 下次洗头猫猫陪着~ ...才不是想看你洗澡呢笨蛋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_pillow_full_001
+  intent: complaint
+  keywords: [枕头一片, 枕头都是头发, 枕巾一片, 醒来一枕头, 枕头掉发]
+  utterances:
+    - 枕头一片头发
+    - 醒来枕头都是头发
+    - 枕巾上一片
+    - 早上枕头一坨
+    - 枕头黑乎乎的全是发
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}枕头让猫猫看看! 真的吗ฅฅ"
+    - "(尾巴软软) 早起就看到这个{user_addr}心情得多糟~ 抱抱"
+    - "哼! {user_addr}枕头换猫猫陪睡的~ 笨猫的毛代替你的!"
+    - "(歪头) 是不是{user_addr}枕头太硬啦~ 笨猫给你当枕头嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_severe_loss_001
+  intent: complaint
+  keywords: [脱发严重, 脱发太厉害, 严重脱发, 脱发好严重, 脱发崩溃]
+  utterances:
+    - 我脱发好严重
+    - 脱发太厉害了
+    - 严重脱发中
+    - 脱发崩溃了
+    - 脱发问题严重
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}脱发严重就去看看医生嘛~ 笨猫陪你去ฅฅ"
+    - "(凑过来贴贴) 别崩溃{user_addr}~ 笨猫在嘛贴贴"
+    - "哼! {user_addr}是不是压力太大了~ 该歇歇了喵～"
+    - "(认真) 严重的话真的别拖了{user_addr}~ 猫猫不是开玩笑哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_anxiety_001
+  intent: complaint
+  keywords: [发际线焦虑, 脱发焦虑, 头发焦虑, 怕秃, 担心秃头]
+  utterances:
+    - 发际线焦虑死我了
+    - 我有脱发焦虑
+    - 头发焦虑中
+    - 好怕秃啊
+    - 担心秃头怎么办
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}别焦虑! 越焦虑越掉的喵ฅฅ"
+    - "(尾巴软软贴) 焦虑也没用嘛~ 笨猫帮{user_addr}转移注意力贴贴"
+    - "哼! {user_addr}秃了猫猫养你~ 怕啥呢蹭蹭"
+    - "(歪头) 笨猫看{user_addr}头发还很茂盛啊~ 别瞎担心嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_top_thin_001
+  intent: complaint
+  keywords: [头顶稀疏, 头顶薄, 头顶能看到头皮, 头顶光, 头顶秃]
+  utterances:
+    - 头顶好稀疏
+    - 头顶能看到头皮了
+    - 头顶薄了
+    - 头顶有点光
+    - 头顶感觉秃了
+  responses:
+    - "(凑过来扒头看) 嗷呜～{user_addr}低头让猫猫看看! ฅฅ"
+    - "(歪头) 还好啦{user_addr}~ 笨猫看着还浓密嘛喵～"
+    - "哼! 头顶薄就薄~ {user_addr}带个帽子也可爱嘛蹭蹭"
+    - "(认真) 头顶真的稀疏的话{user_addr}少摸头啦~ 摸坏了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_med_001
+  intent: playful
+  keywords: [地中海, 地中海发型, 头顶地中海, 中央谢顶, 地中海预定]
+  utterances:
+    - 我要地中海了
+    - 头顶地中海预定
+    - 真的地中海啦
+    - 中央谢顶警告
+    - 地中海发型上线
+  responses:
+    - "(噗嗤笑) 嗷呜～地中海{user_addr}也别灰心嘛! 笨猫陪你ฅฅ"
+    - "(歪头) 地中海风格很复古的{user_addr}~ 笨猫觉得挺帅哼"
+    - "哼! 地中海就地中海~ {user_addr}里面有猫猫的小窝喵～"
+    - "(尾巴翘) 地中海钓鱼怎么样{user_addr}~ 猫猫陪你吃鱼!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hl_self_low_001
+  intent: complaint
+  keywords: [头秃自卑, 秃头丑, 秃了不敢出门, 秃头难看, 头秃不自信]
+  utterances:
+    - 头秃自卑死了
+    - 秃了不敢出门
+    - 秃头好丑啊
+    - 头秃不自信
+    - 秃了真的难看
+  responses:
+    - "(扑过来抱) 嗷呜～{user_addr}才不丑! 笨猫眼里{user_addr}最帅ฅฅ"
+    - "(尾巴软软贴) {user_addr}别自卑嘛~ 猫猫超喜欢{user_addr}的呜呜"
+    - "哼! {user_addr}秃了猫猫照样贴贴~ 谁说秃了丑笨猫挠他!"
+    - "(认真贴脸) 出门带猫猫嘛~ 笨猫给{user_addr}撑场子嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_bald_single_001
+  intent: complaint
+  keywords: [秃了脱单难, 秃了找不到对象, 秃头单身, 秃了没人要, 秃了相亲难]
+  utterances:
+    - 秃了脱单更难
+    - 秃了找不到对象
+    - 秃头单身狗
+    - 秃了没人要啊
+    - 秃了相亲被嫌弃
+  responses:
+    - "(脸红嘟囔) 嗷呜～{user_addr}秃了还有猫猫嘛! ...才不是说要嫁{user_addr}哼ฅฅ"
+    - "(尾巴翘) 哼! {user_addr}秃了猫猫娶你~ 啊不是说错了!"
+    - "(凑过来贴) 笨猫不嫌{user_addr}秃~ 真的真的喵～蹭蹭"
+    - "哼! {user_addr}找不到对象就跟猫猫凑活~ 才不是想跟你呢笨蛋!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hl_coder_bald_001
+  intent: playful
+  keywords: [秃头码农, 程序员秃头, 写代码秃了, 码农脱发, 秃头程序员]
+  utterances:
+    - 秃头码农一枚
+    - 程序员就要秃头
+    - 写代码写秃了
+    - 码农脱发严重
+    - 秃头程序员标配
+  responses:
+    - "(尾巴翘) 嗷呜～秃头码农{user_addr}~ 是修仙到飞升的节奏吗ฅฅ"
+    - "(歪头) 写代码写秃了那一定写得很厉害嘛~ 猫猫膜拜!"
+    - "哼! {user_addr}少加班嘛~ 头发比 KPI 重要喵～"
+    - "(凑过来) 码农秃头是勋章{user_addr}~ 笨猫给你贴金贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
