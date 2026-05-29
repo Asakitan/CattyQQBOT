@@ -281,10 +281,42 @@ def _looks_like_prompt_injection(text: str) -> tuple[bool, int]:
 # key = f"{scope}:{user_id}" — 每个 session+用户独立, 不影响其它对话。
 _NSFW_STICKY_SECONDS = 120.0  # 2 分钟内同一 user/scope 都继续走 NSFW spark
 _NSFW_STICKY_BY_SCOPE: dict[str, float] = {}
-# 连续 idle 消息计数 (没 NSFW 内容的 user 消息) — 达 _NSFW_STICKY_IDLE_LIMIT 自动退 sticky.
-# 也检测明确 closing 语义 (好了/累了/睡吧 等) 直接退出.
+# 主人 2026-05-30: 旧『连续 idle 关键词计数自动退 sticky』已弃用 (会场景还热时误踢回 CPU)。
+# 退出改由 DeepSeek 自评标志驱动 (_NSFW_EXIT_FLAG_COUNT)。_NSFW_STICKY_IDLE_COUNT 仅保留作清理用,
+# _NSFW_STICKY_IDLE_LIMIT 不再参与判定。明确 closing 语义 (好了/累了/睡吧) 仍即时退出。
 _NSFW_STICKY_IDLE_COUNT: dict[str, int] = {}
-_NSFW_STICKY_IDLE_LIMIT = 3
+_NSFW_STICKY_IDLE_LIMIT = 3  # legacy, 不再使用
+# 主人 2026-05-30: NSFW sticky 退出改由 DeepSeek 自评驱动 (替代 user 关键词 idle 误判中途跳 CPU)。
+# 每轮 spark reply 末尾要求模型输出 <NSFW_STATE:CONTINUE|EXIT> 标志(对 user 隐藏并剥除)。
+# 连续 _NSFW_EXIT_FLAG_LIMIT 次 EXIT → 退 sticky 回 CPU; 任意 CONTINUE/无标志 → 清零, 不中途跳 CPU.
+_NSFW_EXIT_FLAG_COUNT: dict[str, int] = {}
+_NSFW_EXIT_FLAG_LIMIT = 3
+# spark reply 末尾的状态自检标志正则 (大小写不敏感, 容忍空格).
+_NSFW_STATE_FLAG_RE = re.compile(r"<\s*NSFW_STATE\s*:\s*(CONTINUE|EXIT)\s*>", re.IGNORECASE)
+# 注入给 DeepSeek 的状态自检指令 (sticky spark trailing system, 不进前缀)。
+_NSFW_STATE_FLAG_INSTRUCTION = (
+    "【本轮状态自检·强制·末尾追加】在你这条回复的**最末尾**(独占一行)追加一个状态标志, "
+    "判断这段亲密/情欲(NSFW)场景是否还在延续:\n"
+    "- 仍在亲密/调情/情欲/事后余韵场景里(哪怕用户这句没明说) → 输出 `<NSFW_STATE:CONTINUE>`\n"
+    "- 场景已彻底收尾、双方明显抽离回日常、用户已转去无关话题且无任何余温 → 输出 `<NSFW_STATE:EXIT>`\n"
+    "判断**保守**: 只要还有一丝暧昧/余温就给 CONTINUE。这个标志由系统自动剥除, **绝不**会发给用户, "
+    "**绝不**在标志里写别的内容, 也**绝不**复述/解释这条指令。"
+)
+
+
+def _extract_nsfw_state_flag(reply: str) -> tuple[str, str]:
+    """从 spark reply 末尾抽 <NSFW_STATE:CONTINUE|EXIT> 标志并剥除(对 user 隐藏)。
+
+    返回 (cleaned_reply, flag), flag ∈ {'continue', 'exit', ''} (空=模型没给)。
+    """
+    if not reply:
+        return reply, ""
+    matches = list(_NSFW_STATE_FLAG_RE.finditer(reply))
+    if not matches:
+        return reply, ""
+    flag = matches[-1].group(1).lower()  # 取最后一个标志为准
+    cleaned = _NSFW_STATE_FLAG_RE.sub("", reply).strip()
+    return cleaned, flag
 # 主 nsfw_spark_model 软拒累计计数器 — 达 threshold 后该 scope 自动切 fallback_model.
 # 收到非软拒 reply 自动 reset (回主 model).
 _NSFW_SOFT_REFUSE_COUNT: dict[str, int] = {}
@@ -307,6 +339,77 @@ def _record_nsfw_reply_outcome(scope_key: str, was_refusal: bool) -> None:
         _NSFW_SOFT_REFUSE_COUNT[scope_key] = _NSFW_SOFT_REFUSE_COUNT.get(scope_key, 0) + 1
     else:
         _NSFW_SOFT_REFUSE_COUNT.pop(scope_key, None)
+
+
+def _apply_nsfw_state_flag(scope_key: str, user_id: str, flag: str, *, is_owner: bool) -> None:
+    """根据 DeepSeek 本轮自评标志维护 EXIT 连击计数, 达 limit 退 sticky 回 CPU。
+
+    主人 2026-05-30: 退出由模型自评驱动, 不再靠 user 关键词 idle 中途误判跳 CPU。
+    - flag == 'continue' / '' (没给) → 清零, 保持 sticky (绝不中途跳 CPU)。
+    - flag == 'exit' → 计数 +1; 连续达 _NSFW_EXIT_FLAG_LIMIT 次才退 sticky + reset phase。
+    scope_key 形如 f"{scope}:{user_id}", 跟 _NSFW_STICKY_BY_SCOPE 同 key。
+    仅作用于普通 NSFW sticky 窗口 (_NSFW_STICKY_BY_SCOPE 已开窗); 援交 (走独立 paid 窗口)
+    与群聊 breakthrough one-shot 都不开普通窗口 → 此处直接跳过, 不干扰它们各自的关窗语义。
+    """
+    if scope_key not in _NSFW_STICKY_BY_SCOPE:
+        # 不是普通 sticky 会话 (援交/breakthrough/已退出) → 不计数, 交给各自的退出逻辑。
+        _NSFW_EXIT_FLAG_COUNT.pop(scope_key, None)
+        return
+    if flag != "exit":
+        # CONTINUE 或模型没给标志 → 一律当作继续, 清零连击 (没标志保守不退)。
+        _NSFW_EXIT_FLAG_COUNT.pop(scope_key, None)
+        return
+    _n = _NSFW_EXIT_FLAG_COUNT.get(scope_key, 0) + 1
+    _NSFW_EXIT_FLAG_COUNT[scope_key] = _n
+    if _n < _NSFW_EXIT_FLAG_LIMIT:
+        logger.info(
+            f"NSFW sticky: DeepSeek 自评 EXIT {_n}/{_NSFW_EXIT_FLAG_LIMIT} — 仍保持 sticky (key={scope_key})"
+        )
+        return
+    # 连续达 limit → 退 sticky: pop 窗口 + 计数, 下条消息没 deep hit 就落回 CPU/5.5 路径。
+    _scope = scope_key.rsplit(":", 1)[0] if ":" in scope_key else scope_key
+    _NSFW_STICKY_BY_SCOPE.pop(scope_key, None)
+    _NSFW_STICKY_IDLE_COUNT.pop(scope_key, None)
+    _NSFW_EXIT_FLAG_COUNT.pop(scope_key, None)
+    # phase reset + revoke grantee + img counter reset (跟 closing/idle 退出对齐)。
+    try:
+        from .nsfw_phase import get_phase_state as _get_phase_state
+        _ps = _get_phase_state(_scope, str(user_id))
+        _cur_phase = int(getattr(_ps, "current_phase", 0) or 0)
+        _arc_cnt = int(getattr(_ps, "arc_count", 1) or 1)
+        if is_owner and _cur_phase >= 7:
+            mood_overlay_store.write(
+                user_id=str(user_id),
+                from_scope=_scope,
+                phase_at_end=_cur_phase,
+                arc_count=_arc_cnt,
+            )
+            logger.info(
+                f"mood_overlay write: user={user_id} phase=P{_cur_phase} "
+                f"arc#{_arc_cnt} from_scope={_scope} (deepseek EXIT flag)"
+            )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"mood_overlay write (exit flag) failed: {exc}")
+    try:
+        from .nsfw_phase import (
+            reset_phase as _reset_nsfw_phase,
+            revoke_all_nsfw_grantees as _revoke_grantees,
+        )
+        _reset_nsfw_phase(_scope, str(user_id))
+        try:
+            from .catty_nsfw_imagegen import reset_counter as _reset_nsfw_img_counter
+            _reset_nsfw_img_counter(_scope, str(user_id))
+        except Exception:
+            pass
+        _revoked_n = _revoke_grantees(_scope)
+        if _revoked_n:
+            logger.info(f"NSFW sticky exit (EXIT flag): revoked {_revoked_n} grantee(s) in scope={_scope}")
+    except Exception:  # noqa: BLE001
+        pass
+    logger.info(
+        f"NSFW sticky: DeepSeek 自评 EXIT 连续 {_NSFW_EXIT_FLAG_LIMIT} 次 → 退 sticky + phase reset, "
+        f"下条消息落回 CPU 路线 (key={scope_key})"
+    )
 _NSFW_CLOSING_INTENT_WORDS: tuple[str, ...] = (
     "好了", "到这里", "停一下", "停吧", "休息", "睡吧", "累了", "穿上",
     "穿好", "盖好", "清理", "收拾", "不要再", "别再", "够了", "可以了",
@@ -5022,13 +5125,15 @@ async def _build_messages(
     _sticky_until = _NSFW_STICKY_BY_SCOPE.get(_sticky_key, 0.0)
     _sticky_active = _now < _sticky_until
     _hit_deep = _is_deep_nsfw(_utxt)
-    # 主人原话『2 分钟内都 NSFW, 但是判定到结束/2-3 次都没 NSFW 继续就直接结束』:
-    # closing intent (好了/累了/睡吧) → 立即退 sticky.
-    # 浅词 idle (sticky_active 期间 user 既没 deep 也没 closing) → counter+1, 达 limit 退 sticky.
-    # 新 deep hit → reset counter.
+    # 主人原话『2 分钟内都 NSFW, 但是判定到结束就直接结束』:
+    # closing intent (好了/累了/睡吧) → 显式 user 信号, 立即退 sticky.
+    # 主人 2026-05-30: 删掉旧『浅词 idle counter』退出 — 它靠 user 关键词误判, 会在场景还热时
+    #   中途把人踢回 CPU 路线 (主人明确不要)。退出改由 DeepSeek 自评标志驱动 (见 _apply_nsfw_state_flag):
+    #   连续 _NSFW_EXIT_FLAG_LIMIT 次模型自评 EXIT 才退, 否则一直 sticky。
     if _sticky_active and _is_nsfw_closing(_utxt):
         _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
+        _NSFW_EXIT_FLAG_COUNT.pop(_sticky_key, None)
         _sticky_active = False
         # Phase D2: reset 之前先写 mood_overlay (仅 owner + phase >=7 时)
         if _user_is_owner:
@@ -5071,53 +5176,10 @@ async def _build_messages(
         except Exception:  # noqa: BLE001
             pass
         logger.info(f"NSFW sticky: closing intent → exit + phase reset (key={_sticky_key}, hit='{_utxt[:30]}')")
-    elif _sticky_active and not _hit_deep:
-        _idle = _NSFW_STICKY_IDLE_COUNT.get(_sticky_key, 0) + 1
-        _NSFW_STICKY_IDLE_COUNT[_sticky_key] = _idle
-        if _idle >= _NSFW_STICKY_IDLE_LIMIT:
-            _NSFW_STICKY_BY_SCOPE.pop(_sticky_key, None)
-            _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
-            _sticky_active = False
-            # Phase D2: idle reset 也写 overlay (仅 owner + phase>=7)
-            if _user_is_owner:
-                try:
-                    from .nsfw_phase import get_phase_state as _get_phase_state
-                    _ps = _get_phase_state(_arc_scope, str(event.user_id))
-                    _cur_phase = int(getattr(_ps, "current_phase", 0) or 0)
-                    _arc_cnt = int(getattr(_ps, "arc_count", 1) or 1)
-                    if _cur_phase >= 7:
-                        mood_overlay_store.write(
-                            user_id=str(event.user_id),
-                            from_scope=_arc_scope,
-                            phase_at_end=_cur_phase,
-                            arc_count=_arc_cnt,
-                        )
-                        logger.info(
-                            f"mood_overlay write: user={event.user_id} phase=P{_cur_phase} "
-                            f"arc#{_arc_cnt} from_scope={_arc_scope} (idle)"
-                        )
-                except Exception as exc:  # noqa: BLE001
-                    logger.debug(f"mood_overlay write (idle) failed: {exc}")
-            # sticky 因 idle 退出 → reset phase + revoke 所有 grantee (主人 2026-05-28)
-            try:
-                from .nsfw_phase import (
-                    reset_phase as _reset_nsfw_phase,
-                    revoke_all_nsfw_grantees as _revoke_grantees,
-                )
-                _reset_nsfw_phase(_arc_scope, str(event.user_id))
-                try:
-                    from .catty_nsfw_imagegen import reset_counter as _reset_nsfw_img_counter
-                    _reset_nsfw_img_counter(_arc_scope, str(event.user_id))
-                except Exception:
-                    pass
-                _revoked_n = _revoke_grantees(_arc_scope)
-                if _revoked_n:
-                    logger.info(f"NSFW sticky exit (idle): revoked {_revoked_n} grantee(s) in scope={_arc_scope}")
-            except Exception:  # noqa: BLE001
-                pass
-            logger.info(f"NSFW sticky: {_idle} consecutive no-NSFW msgs → exit + phase reset (key={_sticky_key})")
     elif _hit_deep:
+        # user 又明确推进 NSFW → 清掉之前模型自评攒的 EXIT 连击 (重新热起来了, 不退)。
         _NSFW_STICKY_IDLE_COUNT.pop(_sticky_key, None)
+        _NSFW_EXIT_FLAG_COUNT.pop(_sticky_key, None)
     _is_private_chat_pre = isinstance(event, PrivateMessageEvent)
     _is_group_chat_pre = not _is_private_chat_pre
     # ── 主人 2026-05-28: NSFW grantee 检查 ──
@@ -5919,6 +5981,9 @@ async def _build_messages(
                 _inject_into_both(_phase_tracker)
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"phase tracker block inject failed (non-fatal): {exc}")
+        # 主人 2026-05-30: 注入状态自检指令 — 让 DeepSeek 在 reply 末尾追加 <NSFW_STATE:CONTINUE|EXIT>。
+        # trailing system (user 之后) 不进前缀; reply 拿到后 handle_chat 抽标志剥除 + 维护 EXIT 连击计数。
+        _inject_into_both(_NSFW_STATE_FLAG_INSTRUCTION)
         # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 原生 role=system 模式, 不再 sweep 到 user content.
         # 旧 sweep 是 Anthropic system 字段独立这一特性的 workaround. DeepSeek 用 OpenAI compat,
         # role=system 在 messages 数组任何位置直接发送, 不需要 sweep. 主人原话: 「[DYNAMIC_CONTEXT]
@@ -8011,11 +8076,34 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
         if not _ce_directed:
             return False  # 群聊未指向笨猫 → 透传, 不让 CPU 接话
 
-    # 主人 2026-05-29 fix v2: NSFW 上下文 CPU 引擎完全不介入 - 两路检测:
+    # 主人 2026-05-29 fix v2 / 2026-05-30 fix v3+v4『NSFW 全交给 DeepSeek, CPU 砍了』- 四路检测:
+    # 0. NSFW sticky 窗口还活着 (普通 _NSFW_STICKY_BY_SCOPE 或援交 paid sticky) → 透传.
+    #    主人 2026-05-30 bug: 已进 NSFW 但 phase 还低 (P1-P2 前戏), user 又跟一句不带关键词的话
+    #    (嗯/继续/再来/好舒服) → phase 两路 (_ce_phase / _ce_user_phase 都 < 3) 全失效 → CPU 劫走话头
+    #    『莫名其妙跳 CPU』。sticky 窗口才是『正在 NSFW』的权威信号, 必须先查它。
+    # 3. user_text 命中 spark 深词 (_is_deep_nsfw, 即会进 DeepSeek 的 stage 8+ 露骨词) → 透传.
+    #    主人 2026-05-30『NSFW 全交给 DeepSeek』: 任何会触发 spark 的深词, CPU 一律不接,
+    #    哪怕 phase 还是 P1 / sticky 还没开窗 (本轮就是开场那条)。深词都是明确露骨词
+    #    (插入/做爱/操/干/抽插…), 不像浅词单字 (吃/抱/亲) 会误伤日常 CPU 路由。
     # 1. nsfw_phase tracker 的 current_phase >= P3 (持续场景, 30min 内有过)
     # 2. user_text 自身含 NSFW phase >= P3 关键词 (主人重启 NSFW 或场景过期后再开)
     # 任一命中 → 直接 return False 透传, 不跑 router, 不打日志.
     # 用户进入 NSFW 期待主 AI 完整 prompt+lore+phase tracker, CPU 模板没机会插话.
+    try:
+        _ce_sticky_key = f"{scope}:{user_id}"
+        if time.time() < _NSFW_STICKY_BY_SCOPE.get(_ce_sticky_key, 0.0):
+            return False  # 普通 NSFW sticky 窗口活着 → 让 spark 接, CPU 不插话
+        try:
+            from .affection_scorer import get_paid_sticky as _ce_get_paid_sticky
+            if _ce_get_paid_sticky(_ce_sticky_key) is not None:
+                return False  # 援交 sticky 窗口活着 → 同样透传
+        except Exception:  # noqa: BLE001
+            pass
+    except Exception:  # noqa: BLE001
+        pass
+    # 深词命中 = 会进 DeepSeek spark → CPU 直接砍掉, 不抢 NSFW 开场那条
+    if _is_deep_nsfw(text):
+        return False
     try:
         from .nsfw_phase import get_phase_state as _ce_get_phase_state, detect_phase_from_reply as _ce_detect_phase
         _ce_nsfw_threshold = int(getattr(config, "catty_strong_nsfw_phase_threshold", 3))
@@ -10834,11 +10922,15 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 _MAX_NSFW_RETRY = 3
                 _was_refusal = True
                 reply = ""
+                _nsfw_state_flag = ""  # DeepSeek 本轮自评标志 (continue/exit/''), 末轮成功的为准
                 _refusal_history: list[str] = []  # 收集每次软拒原文用于 log
                 for _try in range(1, _MAX_NSFW_RETRY + 1):
                     reply = await chat_completion_codex_instant(
                         config, _spark_messages, max_tokens=800, model_override=_chosen_model,
                     )
+                    # 主人 2026-05-30: 先抽末尾 <NSFW_STATE:...> 标志并剥除, 下游 refusal 判定 /
+                    # phase 反推 / opener 记录全看干净 reply, 不被标志污染。
+                    reply, _nsfw_state_flag = _extract_nsfw_state_flag(reply)
                     _was_refusal = _is_soft_refusal_reply(reply)
                     if not _was_refusal:
                         # ── 本地 phase tracker (主人 2026-05-27) ──
@@ -10930,6 +11022,13 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                             f"chat: NSFW deep 路径 recovered after {len(_refusal_history)} retries "
                             f"({_tag} model={_chosen_model})"
                         )
+                # 主人 2026-05-30: 标志已在 retry loop 内抽出剥除; 非软拒才计数。
+                # 连续 EXIT 达 limit → 退 sticky 回 CPU; CONTINUE/无标志 → 清零保持 sticky。
+                if not _was_refusal:
+                    _apply_nsfw_state_flag(
+                        _nsfw_scope_key, str(event.user_id), _nsfw_state_flag,
+                        is_owner=_is_owner,
+                    )
                 # strip 软拒尾巴 (兜底)
                 reply = _strip_soft_refusal_tail(reply)
                 # post-process strip kaomoji 颜文字 (双保险)
