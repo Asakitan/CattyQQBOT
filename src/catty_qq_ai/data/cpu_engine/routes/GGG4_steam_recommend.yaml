@@ -1,0 +1,206 @@
+# Steam 库推荐 routes (S6 R606 NLU 节点扩充, 第六十周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sr_topsellers_001
+  intent: question
+  keywords: [推荐 Steam 热销榜, 推荐 Steam 销量榜, 推荐 Steam 全球热销, 推荐 Steam 周榜, 笨猫 Steam 热销]
+  utterances:
+    - 推荐 Steam 热销榜
+    - 推荐 Steam 销量榜
+    - 推荐 Steam 全球热销
+    - 推荐 Steam 周榜
+    - 笨猫 Steam 热销
+  responses:
+    - "嗷呜～{user_addr}Steam 热销榜 - 周榜/月榜ฅฅ"
+    - "(尾巴翘) 全球 Top10 / 国区 Top10"
+    - "{user_addr}热门=安全牌 / 看口碑"
+    - "(挺胸) 猫猫推荐: 周榜前三准没错!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_nextfest_001
+  intent: question
+  keywords: [推荐 Steam 新品节, 推荐 Next Fest, 推荐 Steam Demo, 推荐 Steam 试玩节, 笨猫新品节]
+  utterances:
+    - 推荐 Steam 新品节
+    - 推荐 Next Fest
+    - 推荐 Steam Demo
+    - 推荐 Steam 试玩节
+    - 笨猫新品节
+  responses:
+    - "嗷呜～{user_addr}Steam Next Fest - 一年三次ฅฅ"
+    - "(尾巴翘) 免费 Demo / 直播 / 开发者问答"
+    - "{user_addr}挖独立宝藏的最佳时机"
+    - "(挺胸) 人家推荐: 关注愿望单提前留意!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_steamdeck_001
+  intent: question
+  keywords: [推荐 Steam Deck, 推荐 Deck 游戏, 推荐掌机 Steam, 推荐 Deck 验证, 笨猫 Steam Deck]
+  utterances:
+    - 推荐 Steam Deck
+    - 推荐 Deck 游戏
+    - 推荐掌机 Steam
+    - 推荐 Deck 验证
+    - 笨猫 Steam Deck
+  responses:
+    - "嗷呜～{user_addr}Steam Deck - Valve 掌机ฅฅ"
+    - "(尾巴翘) Verified 标=完美适配"
+    - "{user_addr}艾尔登/巫师3/赛博朋克都能跑"
+    - "(挺胸) 笨猫推荐: OLED 版屏幕香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_education_001
+  intent: question
+  keywords: [推荐 Steam 教育包, 推荐 Steam 学习, 推荐 Steam 编程游戏, 推荐 Steam 教育向, 笨猫教育包]
+  utterances:
+    - 推荐 Steam 教育包
+    - 推荐 Steam 学习
+    - 推荐 Steam 编程游戏
+    - 推荐 Steam 教育向
+    - 笨猫教育包
+  responses:
+    - "嗷呜～{user_addr}Human Resource Machine / 7 Billion Humansฅฅ"
+    - "(尾巴翘) Shenzhen I/O / Opus Magnum (Zachtronics)"
+    - "{user_addr}Factorio / 异星工厂也算工程教学"
+    - "(挺胸) 猫猫推荐: Zachtronics 全家桶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_seasonsale_001
+  intent: question
+  keywords: [推荐 Steam 季节促销, 推荐 Steam 夏促, 推荐 Steam 冬促, 推荐 Steam 春节特卖, 笨猫 Steam 打折]
+  utterances:
+    - 推荐 Steam 季节促销
+    - 推荐 Steam 夏促
+    - 推荐 Steam 冬促
+    - 推荐 Steam 春节特卖
+    - 笨猫 Steam 打折
+  responses:
+    - "嗷呜～{user_addr}夏促 6月 / 秋促 11月 / 冬促 12月ฅฅ"
+    - "(尾巴翘) 春节特卖 1-2月 / 万圣 10月"
+    - "{user_addr}加愿望单等折扣最稳"
+    - "(挺胸) 笨猫推荐: 大促开始日入手最低!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_whale_001
+  intent: question
+  keywords: [推荐 Steam 鲸鱼大冒险, 推荐 Dave the Diver, 推荐 Subnautica, 推荐 ABZU, 笨猫鲸鱼游戏]
+  utterances:
+    - 推荐 Steam 鲸鱼大冒险
+    - 推荐 Dave the Diver
+    - 推荐 Subnautica
+    - 推荐 ABZU
+    - 笨猫鲸鱼游戏
+  responses:
+    - "嗷呜～{user_addr}Subnautica - 深海生存神作ฅฅ"
+    - "(尾巴翘) Dave the Diver / 潜水员戴夫"
+    - "{user_addr}ABZU / Endless Ocean"
+    - "(挺胸) 猫猫推荐: 戴夫白天潜水晚上开店!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_indiefest_001
+  intent: question
+  keywords: [推荐 Steam 独立游戏节, 推荐 Steam 独立, 推荐 Indie Fest, 推荐 Steam 小厂, 笨猫独立节]
+  utterances:
+    - 推荐 Steam 独立游戏节
+    - 推荐 Steam 独立
+    - 推荐 Indie Fest
+    - 推荐 Steam 小厂
+    - 笨猫独立节
+  responses:
+    - "嗷呜～{user_addr}空洞骑士 / Hades / Stardew Valleyฅฅ"
+    - "(尾巴翘) 蔚蓝 Celeste / Undertale / 杀戮尖塔"
+    - "{user_addr}独立=玩法创新, 大厂罕见"
+    - "(挺胸) 人家推荐: 空洞骑士入门必玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_curator_001
+  intent: question
+  keywords: [推荐 Steam 鉴赏家, 推荐 Steam Curator, 推荐 Steam 评测组, 推荐 Steam 推荐人, 笨猫鉴赏家]
+  utterances:
+    - 推荐 Steam 鉴赏家
+    - 推荐 Steam Curator
+    - 推荐 Steam 评测组
+    - 推荐 Steam 推荐人
+    - 笨猫鉴赏家
+  responses:
+    - "嗷呜～{user_addr}鉴赏家=Curator, 个人/团体策展ฅฅ"
+    - "(尾巴翘) PC Gamer / IGN / 杉果游戏"
+    - "{user_addr}关注合心意的避雷捡漏"
+    - "(挺胸) 笨猫推荐: 关注三五个长期看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_card_001
+  intent: question
+  keywords: [推荐 Steam 卡牌, 推荐 Slay the Spire, 推荐杀戮尖塔, 推荐 Inscryption, 笨猫卡牌游戏]
+  utterances:
+    - 推荐 Steam 卡牌
+    - 推荐 Slay the Spire
+    - 推荐杀戮尖塔
+    - 推荐 Inscryption
+    - 笨猫卡牌游戏
+  responses:
+    - "嗷呜～{user_addr}杀戮尖塔 Slay the Spire - DBG 鼻祖ฅฅ"
+    - "(尾巴翘) Inscryption / 邪恶冥刻 (年度神作)"
+    - "{user_addr}怪物火车 / Wildfrost / 巴别号漫游指南"
+    - "(挺胸) 猫猫推荐: 尖塔入坑+冥刻封神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_vr_001
+  intent: question
+  keywords: [推荐 Steam VR 游戏, 推荐 Half-Life Alyx, 推荐 Beat Saber, 推荐 SteamVR, 笨猫 VR 游戏]
+  utterances:
+    - 推荐 Steam VR 游戏
+    - 推荐 Half-Life Alyx
+    - 推荐 Beat Saber
+    - 推荐 SteamVR
+    - 笨猫 VR 游戏
+  responses:
+    - "嗷呜～{user_addr}Half-Life: Alyx - VR 神作天花板ฅฅ"
+    - "(尾巴翘) Beat Saber / Boneworks / VRChat"
+    - "{user_addr}Quest 串流 + SteamVR 最香"
+    - "(挺胸) 笨猫推荐: Alyx 是入坑 VR 的理由!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_free_001
+  intent: question
+  keywords: [推荐 Steam 免费游戏, 推荐 Steam F2P, 推荐 Steam 白嫖, 推荐 Steam 免费玩, 笨猫 Steam 免费]
+  utterances:
+    - 推荐 Steam 免费游戏
+    - 推荐 Steam F2P
+    - 推荐 Steam 白嫖
+    - 推荐 Steam 免费玩
+    - 笨猫 Steam 免费
+  responses:
+    - "嗷呜～{user_addr}Dota2 / CS2 / TF2 - V 社三宝ฅฅ"
+    - "(尾巴翘) Warframe / Path of Exile / 命运2"
+    - "{user_addr}免费周末 Free Weekend 也要蹲"
+    - "(挺胸) 猫猫推荐: CS2 永远的电竞!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_gaben_001
+  intent: question
+  keywords: [推荐 G 胖捞金, 推荐 Gabe Newell, 推荐 V 社, 推荐 Valve, 笨猫 G 胖]
+  utterances:
+    - 推荐 G 胖捞金
+    - 推荐 Gabe Newell
+    - 推荐 V 社
+    - 推荐 Valve
+    - 笨猫 G 胖
+  responses:
+    - "嗷呜～{user_addr}G 胖=Gabe Newell, Valve 创始人ฅฅ"
+    - "(尾巴翘) Steam 平台抽 30% / 钱包鼓鼓"
+    - "{user_addr}半条命3 还在等, G 胖不会数 3"
+    - "(挺胸) 笨猫推荐: 钱包给 G 胖, 快乐给自己!"
+  cooldown_seconds: 60
+  weight: 1.0

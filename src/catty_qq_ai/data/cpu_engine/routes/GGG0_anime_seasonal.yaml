@@ -1,0 +1,206 @@
+# 新番推荐 routes (S6 R602 NLU 节点扩充, 第六十周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: as_current_001
+  intent: question
+  keywords: [推荐当季新番, 推荐 B 站新番, 推荐这季度新番, 推荐本季新番, 笨猫当季新番]
+  utterances:
+    - 推荐当季新番
+    - 推荐 B 站新番
+    - 推荐这季度新番
+    - 推荐本季新番
+    - 笨猫当季新番
+  responses:
+    - "嗷呜～{user_addr}B 站当季番剧榜单ฅฅ"
+    - "(尾巴翘) 看 Bangumi / Anikore 评分"
+    - "{user_addr}人家追番先看 PV + 监督"
+    - "(挺胸) 笨猫推荐: 周榜前 5 不会错!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_january_001
+  intent: question
+  keywords: [推荐一月番, 推荐冬季番, 推荐冬番, 推荐 1 月新番, 笨猫一月番]
+  utterances:
+    - 推荐一月番
+    - 推荐冬季番
+    - 推荐冬番
+    - 推荐 1 月新番
+    - 笨猫一月番
+  responses:
+    - "嗷呜～{user_addr}一月番 (冬季) 通常压轴神作多ฅฅ"
+    - "(尾巴翘) 葬送芙莉莲 / 药屋少女 都是一月"
+    - "{user_addr}冬番制作周期长, 质量稳"
+    - "(挺胸) 猫猫推荐: 一月看京阿尼 + MAPPA!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_april_001
+  intent: question
+  keywords: [推荐四月番, 推荐春季番, 推荐春番, 推荐 4 月新番, 笨猫四月番]
+  utterances:
+    - 推荐四月番
+    - 推荐春季番
+    - 推荐春番
+    - 推荐 4 月新番
+    - 笨猫四月番
+  responses:
+    - "嗷呜～{user_addr}四月番 (春季) 数量最多ฅฅ"
+    - "(尾巴翘) 春番偏轻松日常 + 校园"
+    - "{user_addr}咒术 / 鬼灭续作经常春番"
+    - "(挺胸) 笨猫推荐: 四月挑 3-5 部追!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_july_001
+  intent: question
+  keywords: [推荐七月番, 推荐夏季番, 推荐夏番, 推荐 7 月新番, 笨猫七月番]
+  utterances:
+    - 推荐七月番
+    - 推荐夏季番
+    - 推荐夏番
+    - 推荐 7 月新番
+    - 笨猫七月番
+  responses:
+    - "嗷呜～{user_addr}七月番 (夏季) 暑期档热血多ฅฅ"
+    - "(尾巴翘) 夏番偏战斗 / 异世界"
+    - "{user_addr}剧场版也多在夏季首映"
+    - "(挺胸) 人家推荐: 七月看 MAPPA + WIT!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_october_001
+  intent: question
+  keywords: [推荐十月番, 推荐秋季番, 推荐秋番, 推荐 10 月新番, 笨猫十月番]
+  utterances:
+    - 推荐十月番
+    - 推荐秋季番
+    - 推荐秋番
+    - 推荐 10 月新番
+    - 笨猫十月番
+  responses:
+    - "嗷呜～{user_addr}十月番 (秋季) 商业大作云集ฅฅ"
+    - "(尾巴翘) 秋番常有进巨 / 鬼灭最终季"
+    - "{user_addr}秋番制作组卷, 质量高"
+    - "(挺胸) 猫猫推荐: 十月追大制作组!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_healing_001
+  intent: question
+  keywords: [推荐治愈系新番, 推荐治愈番, 推荐日常番, 推荐温馨新番, 笨猫治愈新番]
+  utterances:
+    - 推荐治愈系新番
+    - 推荐治愈番
+    - 推荐日常番
+    - 推荐温馨新番
+    - 笨猫治愈新番
+  responses:
+    - "嗷呜～{user_addr}摇曳露营 / 轻音少女风格ฅฅ"
+    - "(尾巴翘) 紫罗兰永恒花园 / 夏目友人帐"
+    - "{user_addr}治愈番适合睡前看"
+    - "(挺胸) 笨猫推荐: 治愈番 + 热可可!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_battle_001
+  intent: question
+  keywords: [推荐战斗系新番, 推荐热血番, 推荐战斗番, 推荐打斗新番, 笨猫战斗新番]
+  utterances:
+    - 推荐战斗系新番
+    - 推荐热血番
+    - 推荐战斗番
+    - 推荐打斗新番
+    - 笨猫战斗新番
+  responses:
+    - "嗷呜～{user_addr}鬼灭 / 咒术 / 进巨ฅฅ"
+    - "(尾巴翘) 看作画战斗去 MAPPA / ufotable"
+    - "{user_addr}少年 JUMP 改编战斗番多"
+    - "(挺胸) 猫猫推荐: 鬼灭无限城篇!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_romance_001
+  intent: question
+  keywords: [推荐恋爱新番, 推荐恋爱番, 推荐校园恋爱, 推荐甜恋番, 笨猫恋爱新番]
+  utterances:
+    - 推荐恋爱新番
+    - 推荐恋爱番
+    - 推荐校园恋爱
+    - 推荐甜恋番
+    - 笨猫恋爱新番
+  responses:
+    - "嗷呜～{user_addr}辉夜大小姐 / 五等分花嫁ฅฅ"
+    - "(尾巴翘) 恋语轻唱 / 间谍过家家"
+    - "{user_addr}恋爱番看糖分浓度"
+    - "(挺胸) 笨猫推荐: 辉夜 = 智斗 + 甜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_isekai_001
+  intent: question
+  keywords: [推荐异世界新番, 推荐异世界番, 推荐穿越番, 推荐转生番, 笨猫异世界新番]
+  utterances:
+    - 推荐异世界新番
+    - 推荐异世界番
+    - 推荐穿越番
+    - 推荐转生番
+    - 笨猫异世界新番
+  responses:
+    - "嗷呜～{user_addr}Re0 / 无职转生 / 关于转生史莱姆ฅฅ"
+    - "(尾巴翘) 葬送芙莉莲 偏奇幻冒险"
+    - "{user_addr}异世界番数量多, 挑画风"
+    - "(挺胸) 猫猫推荐: 无职转生 制作精良!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_masterpiece_001
+  intent: question
+  keywords: [推荐神作新番, 推荐鬼灭, 推荐进击的巨人, 推荐神番, 笨猫神作新番]
+  utterances:
+    - 推荐神作新番
+    - 推荐鬼灭
+    - 推荐进击的巨人
+    - 推荐神番
+    - 笨猫神作新番
+  responses:
+    - "嗷呜～{user_addr}鬼灭 ufotable / 进巨 MAPPAฅฅ"
+    - "(尾巴翘) 咒术回战 / 间谍过家家"
+    - "{user_addr}神作 = 故事 + 作画 + 音乐"
+    - "(挺胸) 笨猫推荐: 进巨完结篇必追!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_kyoani_001
+  intent: question
+  keywords: [推荐京阿尼作品, 推荐京都动画, 推荐 KyoAni, 推荐紫罗兰, 笨猫京阿尼]
+  utterances:
+    - 推荐京阿尼作品
+    - 推荐京都动画
+    - 推荐 KyoAni
+    - 推荐紫罗兰
+    - 笨猫京阿尼
+  responses:
+    - "嗷呜～{user_addr}紫罗兰永恒花园 (神作)ฅฅ"
+    - "(尾巴翘) 凉宫春日 / 轻音 / 冰菓"
+    - "{user_addr}京阿尼 = 作画天花板"
+    - "(挺胸) 人家推荐: 紫罗兰剧场版必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_shaft_001
+  intent: question
+  keywords: [推荐 SHAFT 新房风格, 推荐新房昭之, 推荐物语系列, 推荐 SHAFT 番, 笨猫 SHAFT]
+  utterances:
+    - "{user_addr}推荐 SHAFT 新房风格"
+    - 推荐新房昭之
+    - 推荐物语系列
+    - 推荐 SHAFT 番
+    - 笨猫 SHAFT
+  responses:
+    - "嗷呜～{user_addr}物语系列 (化物语起)ฅฅ"
+    - "(尾巴翘) 魔法少女小圆 / 向阳素描"
+    - "{user_addr}SHAFT = 抽象镜头 + 黑白红"
+    - "(挺胸) 笨猫推荐: 化物语入坑新房!"
+  cooldown_seconds: 60
+  weight: 1.0

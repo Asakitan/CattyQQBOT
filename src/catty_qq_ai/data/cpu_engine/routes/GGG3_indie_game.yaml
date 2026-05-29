@@ -1,0 +1,206 @@
+# 独立游戏 routes (S6 R605 NLU 节点扩充, 第六十周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ig_hollow_knight_001
+  intent: question
+  keywords: [推荐空洞骑士, 推荐 Hollow Knight, 推荐银网, 推荐银甲虫, 笨猫空洞骑士]
+  utterances:
+    - 推荐空洞骑士
+    - 推荐 Hollow Knight
+    - 推荐银网
+    - 推荐银甲虫
+    - 笨猫空洞骑士
+  responses:
+    - "嗷呜～{user_addr}空洞骑士 - 银网神作ฅฅ"
+    - "(尾巴翘) Team Cherry / 类银河战士恶魔城"
+    - "{user_addr}地图大 / boss 难 / 美术顶"
+    - "(挺胸) 笨猫推荐: 必玩独立游戏 Top1!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_celeste_001
+  intent: question
+  keywords: [推荐蔚蓝, 推荐 Celeste, 推荐攀山, 推荐高难平台, 笨猫蔚蓝]
+  utterances:
+    - 推荐蔚蓝
+    - 推荐 Celeste
+    - 推荐攀山
+    - 推荐高难平台
+    - 笨猫蔚蓝
+  responses:
+    - "嗷呜～{user_addr}Celeste - 攀山神作ฅฅ"
+    - "(尾巴翘) Maddy Makes / 平台跳跃"
+    - "{user_addr}操作硬核 / 剧情治愈"
+    - "(挺胸) 笨猫推荐: 治愈+硬核平衡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_slay_spire_001
+  intent: question
+  keywords: [推荐杀戮尖塔, 推荐 Slay Spire, 推荐卡牌肉鸽, 推荐 DBG, 笨猫杀戮尖塔]
+  utterances:
+    - 推荐杀戮尖塔
+    - 推荐 Slay Spire
+    - 推荐卡牌肉鸽
+    - 推荐 DBG
+    - 笨猫杀戮尖塔
+  responses:
+    - "嗷呜～{user_addr}Slay the Spire - 卡牌肉鸽鼻祖ฅฅ"
+    - "(尾巴翘) Mega Crit / DBG 标杆"
+    - "{user_addr}4 个职业 / 无限重玩"
+    - "(挺胸) 笨猫推荐: 卡牌肉鸽必玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_hades_001
+  intent: question
+  keywords: [推荐哈迪斯, 推荐 Hades, 推荐冥府, 推荐肉鸽动作, 笨猫哈迪斯]
+  utterances:
+    - 推荐哈迪斯
+    - 推荐 Hades
+    - 推荐冥府
+    - 推荐肉鸽动作
+    - 笨猫哈迪斯
+  responses:
+    - "嗷呜～{user_addr}Hades - 冥府肉鸽神作ฅฅ"
+    - "(尾巴翘) Supergiant / 动作肉鸽"
+    - "{user_addr}剧情 / 美术 / 配音全顶"
+    - "(挺胸) 笨猫推荐: 肉鸽剧情典范!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_stardew_valley_001
+  intent: question
+  keywords: [推荐星露谷物语, 推荐 Stardew, 推荐种田, 推荐农场模拟, 笨猫星露谷]
+  utterances:
+    - 推荐星露谷物语
+    - 推荐 Stardew
+    - 推荐种田
+    - 推荐农场模拟
+    - 笨猫星露谷
+  responses:
+    - "嗷呜～{user_addr}Stardew Valley - 种田神作ฅฅ"
+    - "(尾巴翘) ConcernedApe 一人开发"
+    - "{user_addr}种田 / 钓鱼 / 恋爱 / 矿洞"
+    - "(挺胸) 笨猫推荐: 治愈系 Top1!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_undertale_001
+  intent: question
+  keywords: [推荐 Undertale, 推荐传说之下, 推荐和平结局, 推荐 Toby Fox, 笨猫 Undertale]
+  utterances:
+    - 推荐 Undertale
+    - 推荐传说之下
+    - 推荐和平结局
+    - 推荐 Toby Fox
+    - 笨猫 Undertale
+  responses:
+    - "嗷呜～{user_addr}Undertale - 传说之下ฅฅ"
+    - "(尾巴翘) Toby Fox / 颠覆 RPG"
+    - "{user_addr}和平/中立/屠杀三路线"
+    - "(挺胸) 笨猫推荐: 剧情震撼必玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_stardew_extra_001
+  intent: question
+  keywords: [推荐 Stardew Valley, 推荐种田 mod, 推荐农场 mod, 推荐 SMAPI, 笨猫 Stardew]
+  utterances:
+    - 推荐 Stardew Valley
+    - 推荐种田 mod
+    - 推荐农场 mod
+    - 推荐 SMAPI
+    - 笨猫 Stardew
+  responses:
+    - "嗷呜～{user_addr}Stardew + SMAPI 装 modฅฅ"
+    - "(尾巴翘) Expanded / Ridgeside / SVE"
+    - "{user_addr}多人联机 / Nexus Mods"
+    - "(挺胸) 笨猫推荐: SVE 内容翻倍!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_inscryption_001
+  intent: question
+  keywords: [推荐邪恶冥刻, 推荐 Inscryption, 推荐卡牌恐怖, 推荐 Daniel Mullins, 笨猫邪恶冥刻]
+  utterances:
+    - 推荐邪恶冥刻
+    - 推荐 Inscryption
+    - 推荐卡牌恐怖
+    - 推荐 Daniel Mullins
+    - 笨猫邪恶冥刻
+  responses:
+    - "嗷呜～{user_addr}Inscryption - 邪恶冥刻ฅฅ"
+    - "(尾巴翘) Daniel Mullins / 元叙事"
+    - "{user_addr}卡牌 + 恐怖 + 解谜"
+    - "(挺胸) 笨猫推荐: 颠覆体验必玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_it_takes_two_001
+  intent: question
+  keywords: [推荐双人成行, 推荐 It Takes Two, 推荐双人合作, 推荐 Hazelight, 笨猫双人成行]
+  utterances:
+    - 推荐双人成行
+    - 推荐 It Takes Two
+    - 推荐双人合作
+    - 推荐 Hazelight
+    - 笨猫双人成行
+  responses:
+    - "嗷呜～{user_addr}It Takes Two - 双人成行ฅฅ"
+    - "(尾巴翘) Hazelight / TGA 年度"
+    - "{user_addr}必须双人 / 玩法万花筒"
+    - "(挺胸) 笨猫推荐: 情侣/朋友首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_cuphead_001
+  intent: question
+  keywords: [推荐茶杯头, 推荐 Cuphead, 推荐 boss rush, 推荐手绘动画, 笨猫茶杯头]
+  utterances:
+    - 推荐茶杯头
+    - 推荐 Cuphead
+    - 推荐 boss rush
+    - 推荐手绘动画
+    - 笨猫茶杯头
+  responses:
+    - "嗷呜～{user_addr}Cuphead - 茶杯头ฅฅ"
+    - "(尾巴翘) Studio MDHR / 30 年代手绘"
+    - "{user_addr}boss rush / 极度硬核"
+    - "(挺胸) 笨猫推荐: 美术天花板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_journey_001
+  intent: question
+  keywords: [推荐风之旅人, 推荐 Journey, 推荐 thatgamecompany, 推荐治愈艺术, 笨猫风之旅人]
+  utterances:
+    - 推荐风之旅人
+    - 推荐 Journey
+    - 推荐 thatgamecompany
+    - 推荐治愈艺术
+    - 笨猫风之旅人
+  responses:
+    - "嗷呜～{user_addr}Journey - 风之旅人ฅฅ"
+    - "(尾巴翘) thatgamecompany / 陈星汉"
+    - "{user_addr}沙漠 / 陌生人同行 / 无台词"
+    - "(挺胸) 笨猫推荐: 艺术游戏典范!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ig_indie_festival_001
+  intent: question
+  keywords: [推荐独立游戏节, 推荐 IGF, 推荐 itch.io, 推荐 Steam Next, 笨猫独立游戏节]
+  utterances:
+    - 推荐独立游戏节
+    - 推荐 IGF
+    - 推荐 itch.io
+    - 推荐 Steam Next
+    - 笨猫独立游戏节
+  responses:
+    - "嗷呜～{user_addr}IGF 独立游戏节ฅฅ"
+    - "(尾巴翘) itch.io / Steam Next Fest"
+    - "{user_addr}免费 demo / 发现新作"
+    - "(挺胸) 笨猫推荐: 关注 Next Fest!"
+  cooldown_seconds: 60
+  weight: 1.0

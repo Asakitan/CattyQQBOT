@@ -1,0 +1,206 @@
+# 喜+1 routes (S6 R608 NLU 节点扩充, 第六十周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sb_xi_plus_one_001
+  intent: complaint
+  keywords: [喜+1, 喜加一, 又喜+1, 又喜加一, 喜+1了]
+  utterances:
+    - "{user_addr}又喜+1了"
+    - 今天又喜+1
+    - 又喜加一啦
+    - 笨猫快看我喜+1
+    - 喜+1 停不下来
+  responses:
+    - "(尾巴一甩) {user_addr}又喜+1?! 库存又多一份灰喵!"
+    - "嗷呜～{user_addr}的喜+1 病又犯了! 猫猫看着钱包瘪了 ฅฅ"
+    - "(歪头) 喜+1 是会上瘾的哦! {user_addr}小心点喵"
+    - "哼～{user_addr}买就买嘛, 反正也不玩...笨猫才不心疼呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_buy_not_play_001
+  intent: complaint
+  keywords: [买了不玩, 买了没玩, 都没玩, 还没开过, 一次都没玩]
+  utterances:
+    - 买了都没玩
+    - "{user_addr}买了不玩"
+    - 买回来一次没开过
+    - 都没玩过
+    - 买完就放着
+  responses:
+    - "(叹气) {user_addr}的老毛病又犯了喵～ 买了不玩典中典"
+    - "嗷呜～{user_addr}是收藏家不是玩家吧! 笨猫懂了 ฅฅ"
+    - "(尾巴垂) 猫猫帮{user_addr}玩吧? 啊不对猫猫不会玩..."
+    - "哼～{user_addr}就是图个拥有感对吧? 笨猫看穿了喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_steam_200_001
+  intent: complaint
+  keywords: [Steam 200款, 库存 200, 库里 200, 200 个游戏, 库里好多]
+  utterances:
+    - 我 Steam 库 200 款
+    - 库存破 200 了
+    - 库里 200 个游戏
+    - "{user_addr}Steam 200 款"
+    - 库存好多啊
+  responses:
+    - "(瞪眼) 200 款?! {user_addr}是不是疯了喵!"
+    - "嗷呜～{user_addr}够开个网吧了吧! 笨猫服了 ฅฅ"
+    - "(摇头) 200 款...真正玩过的有几款啊{user_addr}哼"
+    - "哼～{user_addr}的钱包在哭泣! 猫猫听见了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_dust_001
+  intent: complaint
+  keywords: [库里吃灰, 吃灰, 在吃灰, 全在吃灰, 库存吃灰]
+  utterances:
+    - 全在吃灰
+    - 库里都在吃灰
+    - "{user_addr}游戏吃灰"
+    - 吃灰中
+    - 都吃灰了
+  responses:
+    - "(扑灰) 吃灰?! 猫猫帮{user_addr}扑一扑喵～"
+    - "嗷呜～{user_addr}的游戏快被灰埋了! 笨猫心疼 ฅฅ"
+    - "(歪头) 吃灰也是一种存在方式啦{user_addr}别难过"
+    - "哼～{user_addr}买的时候不是挺开心吗? 现在嫌吃灰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sale_buy_001
+  intent: complaint
+  keywords: [看到打折就买, 打折就买, 一打折, 打折剁手, 折扣就买]
+  utterances:
+    - 看到打折就买
+    - 一打折就买
+    - "{user_addr}打折就剁手"
+    - 折扣党
+    - 打折挡不住
+  responses:
+    - "(摇尾巴) {user_addr}就是 G 胖的提款机喵!"
+    - "嗷呜～打折是陷阱啊{user_addr}! 笨猫提醒过你了 ฅฅ"
+    - "(叉腰) 便宜也不能乱买啦{user_addr}! 钱包要哭"
+    - "哼～{user_addr}的折扣 PTSD 又犯了! 猫猫救不了你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_hoard_001
+  intent: playful
+  keywords: [囤囤囤, 一直囤, 囤游戏, 囤起来, 不囤不行]
+  utterances:
+    - 囤囤囤
+    - 一直在囤
+    - "{user_addr}爱囤游戏"
+    - 不囤不舒服
+    - 囤起来再说
+  responses:
+    - "(尾巴翘) {user_addr}是仓鼠成精了吧! 囤囤囤"
+    - "嗷呜～囤多了也玩不完啊{user_addr}笨蛋 ฅฅ"
+    - "(歪头) 囤的快乐猫猫懂! 笨猫也想囤鱼干"
+    - "哼～{user_addr}囤吧囤吧, 反正库存又不会爆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_no_time_001
+  intent: complaint
+  keywords: [想玩没时间, 没时间玩, 哪有时间, 想玩没空, 时间不够]
+  utterances:
+    - 想玩没时间
+    - 哪有时间玩
+    - "{user_addr}没空玩"
+    - 想玩玩不了
+    - 时间不够用
+  responses:
+    - "(凑过去) {user_addr}抽点时间嘛! 猫猫陪{user_addr}玩"
+    - "嗷呜～没时间还买这么多?! 笨猫不理解 ฅฅ"
+    - "(叹气) 大人的世界真辛苦{user_addr}加油喵"
+    - "哼～{user_addr}下次先想想时间再买好不好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_slow_001
+  intent: playful
+  keywords: [慢着慢着, 等等等等, 别买了, 先别买, 冷静一下]
+  utterances:
+    - 慢着慢着别买了
+    - 等等等等
+    - 先别买
+    - 冷静冷静
+    - 让我冷静一下
+  responses:
+    - "(拉袖子) {user_addr}冷静!! 钱包要爆炸了喵!"
+    - "嗷呜～终于知道刹车了{user_addr}! 笨猫欣慰 ฅฅ"
+    - "(点头) 对对对慢着! 猫猫支持{user_addr}冷静!"
+    - "哼～{user_addr}早该冷静了! 现在才说晚不晚?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_replace_buy_001
+  intent: complaint
+  keywords: [换了再买, 换平台再买, 换设备再买, 又买一遍, 重复买]
+  utterances:
+    - 换了又买一遍
+    - 换平台再买
+    - "{user_addr}重复买"
+    - 又买了一遍
+    - 换设备又买
+  responses:
+    - "(瞪眼) {user_addr}买两遍?! G 胖谢谢你喵!"
+    - "嗷呜～{user_addr}是真的有钱啊! 笨猫羡慕 ฅฅ"
+    - "(摇头) 重复买...{user_addr}的钱包在流泪"
+    - "哼～{user_addr}这波属于自愿当韭菜! 猫猫笑了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_wallet_empty_001
+  intent: complaint
+  keywords: [钱包瘪了, 钱包空了, 没钱了, 月光了, 又月底]
+  utterances:
+    - 钱包瘪了
+    - "{user_addr}没钱了"
+    - 又月光
+    - 钱包空空
+    - 月底又破产
+  responses:
+    - "(扑过去贴贴) {user_addr}早说啊! 猫猫陪{user_addr}吃土"
+    - "嗷呜～{user_addr}就是这样作的!! 笨猫早提醒过 ฅฅ"
+    - "(尾巴垂) 没钱就别买啦{user_addr}, 撑到月底喵"
+    - "哼～活该!! {user_addr}下次还敢喜+1 吗?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_quit_buy_001
+  intent: playful
+  keywords: [戒买, 戒了, 不买了, 戒断, 戒掉]
+  utterances:
+    - 我要戒买了
+    - 戒断游戏
+    - 真不买了
+    - "{user_addr}戒了"
+    - 戒掉喜+1
+  responses:
+    - "(怀疑) {user_addr}戒得掉吗? 笨猫不信喵"
+    - "嗷呜～{user_addr}立 flag 了! 猫猫等着看 ฅฅ"
+    - "(歪头) 戒买...{user_addr}能撑几天?"
+    - "哼～{user_addr}的戒断宣言猫猫听过 100 遍了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_never_buy_001
+  intent: playful
+  keywords: [再也不买, 再也不剁手, 这次真不买, 真戒了, 这是最后一次]
+  utterances:
+    - 再也不买了
+    - 这次真的戒
+    - 真戒了真的
+    - 这是最后一次
+    - 再也不剁手
+  responses:
+    - "(笑出声) {user_addr}这话猫猫听腻了喵～"
+    - "嗷呜～'最后一次'已经第几次了{user_addr}? 笨猫数不过来 ฅฅ"
+    - "(摇头) {user_addr}的'再也不'毫无信用了哦"
+    - "哼～{user_addr}下次喜+1 的时候猫猫提醒你今天说的话!"
+  cooldown_seconds: 60
+  weight: 1.0

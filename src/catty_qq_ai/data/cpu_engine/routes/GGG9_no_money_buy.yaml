@@ -1,0 +1,206 @@
+# 缺钱买游戏 routes (S6 R611 NLU 节点扩充, 第六十周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: nmb_no_money_001
+  intent: 没钱买游戏
+  keywords: ["没钱买游戏", "买不起游戏", "钱包空了", "穷得买不起", "游戏买不起"]
+  utterances:
+    - "{user_addr}没钱买游戏"
+    - "{user_addr}买不起这游戏喵"
+    - "{user_addr}钱包空了买不了"
+    - "{user_addr}穷得游戏都买不起"
+    - "{user_addr}这游戏买不起啊"
+  responses:
+    - "(尾巴一垂)买不起就先加愿望单嘛喵~笨猫陪{user_addr}等史低ฅฅ"
+    - "(小爪爪拍拍)哼,没钱也别难过啦~人家陪{user_addr}云一下也行喵呜"
+    - "(歪头)钱包空了?(蹭蹭){user_addr}先把这个月省一省嘛喵~"
+    - "(尾巴摇摇)买不起就再等等啦~好游戏不会跑的嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_want_cant_001
+  intent: 想买买不起
+  keywords: ["想买买不起", "好想买", "想要又没钱", "买不下手", "纠结要不要买"]
+  utterances:
+    - "{user_addr}好想买但买不起"
+    - "{user_addr}想要又没钱呜呜"
+    - "{user_addr}买不下手太贵了"
+    - "{user_addr}纠结要不要买"
+    - "{user_addr}想买但是没钱啊"
+  responses:
+    - "(小爪爪抓裤腿)那种心情猫猫懂嗷呜~{user_addr}加个愿望单先嘛喵ฅฅ"
+    - "(蹭蹭)想买就纠结嘛~人家陪{user_addr}一起纠结喵呜"
+    - "(尾巴摇摇)买不下手就再想想啦~{user_addr}别冲动消费哦喵~"
+    - "(歪头)那么想要?(小声)…要不{user_addr}等等折扣嘛嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_299_expensive_001
+  intent: 299 太贵
+  keywords: ["299 太贵", "原价 299", "299 买不起", "三百块游戏", "299 劝退"]
+  utterances:
+    - "{user_addr}299 太贵了"
+    - "{user_addr}原价 299 买不起"
+    - "{user_addr}三百块的游戏太贵"
+    - "{user_addr}299 直接劝退"
+    - "{user_addr}这游戏 299 啊"
+  responses:
+    - "(尾巴炸毛)299 确实有点肉痛喵!{user_addr}等打折嘛嗷呜ฅฅ"
+    - "(小爪爪比划)三百块够吃好几顿饭了哼~{user_addr}冷静一下喵"
+    - "(歪头)299 是有点贵啦~笨猫陪{user_addr}等史低喵呜"
+    - "(蹭蹭)别买原价啦{user_addr}~等节日打折嘛喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_wait_discount_001
+  intent: 等打折
+  keywords: ["等打折", "等促销", "打折再买", "促销再说", "等优惠"]
+  utterances:
+    - "{user_addr}等打折"
+    - "{user_addr}等促销再买"
+    - "{user_addr}打折再说吧"
+    - "{user_addr}等个优惠"
+    - "{user_addr}打折我就入"
+  responses:
+    - "(小爪爪点头)等打折最理智嗷呜~{user_addr}有耐心喵ฅฅ"
+    - "(尾巴摇摇)聪明的决定喵!{user_addr}等到打折再剁手"
+    - "(蹭蹭)笨猫陪{user_addr}一起等促销嘛~耐心点喵呜"
+    - "(歪头)等折扣是正解!{user_addr}加愿望单蹲一下喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_wait_green_001
+  intent: 等绿光
+  keywords: ["等绿光", "等创意工坊绿光", "蹲绿光", "绿光上架", "绿光通过"]
+  utterances:
+    - "{user_addr}等绿光"
+    - "{user_addr}蹲个绿光"
+    - "{user_addr}等绿光上架"
+    - "{user_addr}等绿光通过"
+    - "{user_addr}绿光发了再买"
+  responses:
+    - "(小爪爪挠头)绿光?是 Steam 折扣绿光的意思嘛喵?{user_addr}讲讲嗷呜"
+    - "(歪头)等绿光呀~笨猫陪{user_addr}一起蹲喵呜ฅฅ"
+    - "(尾巴摇摇)耐心等就对啦{user_addr}~绿光迟早来的喵"
+    - "(蹭蹭)那就蹲着嘛~{user_addr}有耐心猫猫佩服喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_wait_history_low_001
+  intent: 等史低
+  keywords: ["等史低", "蹲史低", "史低再买", "等历史最低", "史低入手"]
+  utterances:
+    - "{user_addr}等史低"
+    - "{user_addr}蹲个史低"
+    - "{user_addr}史低再买"
+    - "{user_addr}等历史最低价"
+    - "{user_addr}史低我就入"
+  responses:
+    - "(小爪爪比心)蹲史低是真理嗷呜~{user_addr}省到就是赚到喵ฅฅ"
+    - "(尾巴摇摇)史低党觉醒!{user_addr}和笨猫一样会过日子喵"
+    - "(蹭蹭)等史低最划算啦~{user_addr}用 SteamDB 蹲一下嘛喵呜"
+    - "(歪头)史低再入手很聪明喵!笨猫陪{user_addr}一起等嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_key_site_001
+  intent: 看 Key 站
+  keywords: ["看 key 站", "key 站买", "G2A", "Kinguin", "key 站便宜"]
+  utterances:
+    - "{user_addr}去 key 站看看"
+    - "{user_addr}key 站买便宜"
+    - "{user_addr}看一下 G2A"
+    - "{user_addr}Kinguin 有没有"
+    - "{user_addr}key 站价格"
+  responses:
+    - "(小爪爪摆摆)key 站要小心嗷呜~{user_addr}注意盗刷 key 喵ฅฅ"
+    - "(尾巴一翘)便宜是便宜啦~{user_addr}选靠谱的店家喵呜"
+    - "(歪头)key 站有时候真的香~但{user_addr}要谨慎喵"
+    - "(蹭蹭)笨猫提醒{user_addr}~别买到锁区或者黑 key 哦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_second_hand_steam_001
+  intent: 二手 Steam 帐号
+  keywords: ["二手 steam 帐号", "买号", "共享号", "租号", "Steam 共享"]
+  utterances:
+    - "{user_addr}买个二手 Steam 号"
+    - "{user_addr}搞个共享号"
+    - "{user_addr}租号玩玩"
+    - "{user_addr}二手号便宜"
+    - "{user_addr}Steam 共享行吗"
+  responses:
+    - "(尾巴炸毛)买号风险大嗷呜!{user_addr}小心被找回喵ฅฅ"
+    - "(小爪爪叉腰)哼~{user_addr}还是支持正版啦~买号不靠谱喵"
+    - "(歪头)共享号偶尔玩玩可以~但{user_addr}别长期依赖喵呜"
+    - "(蹭蹭)笨猫劝{user_addr}~省点钱买正版更安心嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_topup_game_001
+  intent: 想充值游戏
+  keywords: ["想充值", "想充钱", "充点钱", "氪金", "想氪"]
+  utterances:
+    - "{user_addr}想充值游戏"
+    - "{user_addr}想氪点金"
+    - "{user_addr}充点钱玩"
+    - "{user_addr}想氪了"
+    - "{user_addr}充值有点心动"
+  responses:
+    - "(小爪爪抓住){user_addr}冷静!氪金一时爽嗷呜ฅฅ"
+    - "(尾巴一甩)别冲动{user_addr}~先想想真的需要嘛喵"
+    - "(歪头)氪金要量力而行哦~{user_addr}别梭哈喵呜"
+    - "(蹭蹭)猫猫陪{user_addr}~想清楚再氪嘛喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_save_money_001
+  intent: 存钱买
+  keywords: ["存钱买", "攒钱买", "存钱入手", "省钱买游戏", "攒钱"]
+  utterances:
+    - "{user_addr}存钱买"
+    - "{user_addr}攒钱入手"
+    - "{user_addr}慢慢存钱"
+    - "{user_addr}省钱买游戏"
+    - "{user_addr}攒够了再买"
+  responses:
+    - "(小爪爪比心)存钱党棒棒嗷呜~{user_addr}加油喵ฅฅ"
+    - "(尾巴摇摇)攒钱才有成就感嘛~{user_addr}省到就是赚到喵"
+    - "(蹭蹭)笨猫陪{user_addr}存~一起为游戏努力喵呜"
+    - "(歪头){user_addr}有规划真好~存够了买的最香喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_eat_dirt_001
+  intent: 为了游戏吃土
+  keywords: ["为了游戏吃土", "吃土也要买", "下个月吃土", "剁手吃土", "吃土"]
+  utterances:
+    - "{user_addr}为了游戏吃土"
+    - "{user_addr}吃土也要买"
+    - "{user_addr}下个月吃土"
+    - "{user_addr}剁手了吃土"
+    - "{user_addr}买了就吃土"
+  responses:
+    - "(尾巴炸毛){user_addr}不能吃土啊!笨猫心疼喵ฅฅ"
+    - "(小爪爪拍){user_addr}冷静!吃土也要按时吃饭喵呜"
+    - "(蹭蹭)真的那么想要?(小声)…{user_addr}省着花啦嗷呜"
+    - "(歪头)爱游戏没错~但{user_addr}别真饿肚子哦喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nmb_poor_001
+  intent: 穷
+  keywords: ["穷", "好穷", "穷死了", "我太穷了", "没钱"]
+  utterances:
+    - "{user_addr}好穷"
+    - "{user_addr}穷死了"
+    - "{user_addr}我太穷了"
+    - "{user_addr}穷得叮当响"
+    - "{user_addr}没钱啊"
+  responses:
+    - "(小爪爪拍拍){user_addr}别自嘲嘛~笨猫陪你一起穷喵ฅฅ"
+    - "(尾巴蹭蹭)穷归穷~{user_addr}还有猫猫陪着嗷呜"
+    - "(歪头)那{user_addr}先吃饭~游戏可以等喵呜"
+    - "(蹭蹭)笨猫也没钱啦~{user_addr}咱俩一起穷开心嘛喵~"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# JRPG 经典 routes (S6 R603 NLU 节点扩充, 第六十周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: jr_ff_001
+  intent: question
+  keywords: [推荐最终幻想, 推荐 FF7, 推荐 FF14, 推荐 FF, 笨猫最终幻想]
+  utterances:
+    - 推荐最终幻想
+    - 推荐 FF7
+    - 推荐 FF14
+    - 推荐 FF
+    - "{user_addr}笨猫最终幻想"
+  responses:
+    - "嗷呜～{user_addr}FF7 Remake / Rebirth - 神作重制ฅฅ"
+    - "(尾巴翘) FF14 - MMO 剧情天花板"
+    - "{user_addr}FF16 - 暗黑动作化"
+    - "(挺胸) 猫猫推荐: FF7 Remake 入坑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_dq_001
+  intent: question
+  keywords: [推荐勇者斗恶龙, 推荐 DQ11, 推荐 DQ, 推荐勇斗, 笨猫勇者斗恶龙]
+  utterances:
+    - 推荐勇者斗恶龙
+    - 推荐 DQ11
+    - 推荐 DQ
+    - 推荐勇斗
+    - "{user_addr}笨猫勇者斗恶龙"
+  responses:
+    - "嗷呜～{user_addr}DQ11 寻觅逝去时光 - 王道神作ฅฅ"
+    - "(尾巴翘) 鸟山明画风 + 经典回合制"
+    - "{user_addr}S 版有 2D 切换 / 后日谈"
+    - "(挺胸) 笨猫推荐: DQ11S 通关首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_xenoblade_001
+  intent: question
+  keywords: [推荐异度神剑, 推荐异度神剑3, 推荐 Xenoblade, 推荐异度之刃, 笨猫异度神剑]
+  utterances:
+    - 推荐异度神剑
+    - 推荐异度神剑3
+    - 推荐 Xenoblade
+    - 推荐异度之刃
+    - "{user_addr}笨猫异度神剑"
+  responses:
+    - "嗷呜～{user_addr}异度神剑 3 - Switch JRPG 巅峰ฅฅ"
+    - "(尾巴翘) 剧情 100h+ / 战斗系统神"
+    - "{user_addr}2 代神隐少女 / 黄金的国"
+    - "(挺胸) 人家推荐: 3 → 2 → 1 顺序入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_persona_001
+  intent: question
+  keywords: [推荐女神异闻录, 推荐 P5, 推荐 Persona, 推荐 P5R, 笨猫女神异闻录]
+  utterances:
+    - 推荐女神异闻录
+    - 推荐 P5
+    - 推荐 Persona
+    - 推荐 P5R
+    - "{user_addr}笨猫女神异闻录"
+  responses:
+    - "嗷呜～{user_addr}P5R 皇家版 - UI 美学顶级ฅฅ"
+    - "(尾巴翘) 怪盗团 / 校园日常 + 迷宫"
+    - "{user_addr}P3R / P4G 也很推荐"
+    - "(挺胸) 猫猫推荐: P5R 100h 神作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_fe_001
+  intent: question
+  keywords: [推荐火焰纹章, 推荐风花雪月, 推荐 FE, 推荐火纹, 笨猫火焰纹章]
+  utterances:
+    - 推荐火焰纹章
+    - 推荐风花雪月
+    - 推荐 FE
+    - 推荐火纹
+    - "{user_addr}笨猫火焰纹章"
+  responses:
+    - "嗷呜～{user_addr}风花雪月 - 三国线神剧本ฅฅ"
+    - "(尾巴翘) Engage - 战棋系统回归"
+    - "{user_addr}觉醒 / if 也是经典"
+    - "(挺胸) 笨猫推荐: 风花雪月 + 苍月!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_octopath_001
+  intent: question
+  keywords: [推荐八方旅人, 推荐 Octopath, 推荐 HD2D, 推荐八方, 笨猫八方旅人]
+  utterances:
+    - 推荐八方旅人
+    - 推荐 Octopath
+    - 推荐 HD2D
+    - 推荐八方
+    - "{user_addr}笨猫八方旅人"
+  responses:
+    - "嗷呜～{user_addr}八方旅人 2 - HD-2D 神作ฅฅ"
+    - "(尾巴翘) 8 主角 / 昼夜系统 / 复古"
+    - "{user_addr}1 代也可补 / 大陆的霸者"
+    - "(挺胸) 人家推荐: 直接玩 2 代!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_kh_001
+  intent: question
+  keywords: [推荐王国之心, 推荐 KH3, 推荐 Kingdom Hearts, 推荐王国, 笨猫王国之心]
+  utterances:
+    - 推荐王国之心
+    - 推荐 KH3
+    - 推荐 Kingdom Hearts
+    - 推荐王国
+    - "{user_addr}笨猫王国之心"
+  responses:
+    - "嗷呜～{user_addr}KH3 - 迪士尼 x SE 联动ฅฅ"
+    - "(尾巴翘) 索拉 / 唐老鸭 / 高飞冒险"
+    - "{user_addr}1.5+2.5 合集补前作"
+    - "(挺胸) 笨猫推荐: 按顺序从 1 代!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_paladin_001
+  intent: question
+  keywords: [推荐仙剑奇侠传, 推荐仙剑, 推荐仙剑七, 推荐国产 RPG, 笨猫仙剑]
+  utterances:
+    - 推荐仙剑奇侠传
+    - 推荐仙剑
+    - 推荐仙剑七
+    - 推荐国产 RPG
+    - "{user_addr}笨猫仙剑"
+  responses:
+    - "嗷呜～{user_addr}仙剑 1/3/4 - 国产 RPG 经典ฅฅ"
+    - "(尾巴翘) 仙剑 7 - 即时战斗革新"
+    - "{user_addr}仙剑 3 李逍遥剧情天花板"
+    - "(挺胸) 猫猫推荐: 仙剑 3 + 7 双修!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_gujian_001
+  intent: question
+  keywords: [推荐古剑奇谭, 推荐古剑, 推荐古剑三, 推荐烛龙, 笨猫古剑奇谭]
+  utterances:
+    - 推荐古剑奇谭
+    - 推荐古剑
+    - 推荐古剑三
+    - 推荐烛龙
+    - "{user_addr}笨猫古剑奇谭"
+  responses:
+    - "嗷呜～{user_addr}古剑 3 - 国产画面顶尖ฅฅ"
+    - "(尾巴翘) 烛龙工作室 / 神州大陆"
+    - "{user_addr}古剑 2 / 1 也可补"
+    - "(挺胸) 笨猫推荐: 古剑 3 入门最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_kiseki_001
+  intent: question
+  keywords: [推荐轨迹系列, 推荐空之轨迹, 推荐零轨, 推荐黎之轨迹, 笨猫轨迹]
+  utterances:
+    - 推荐轨迹系列
+    - 推荐空之轨迹
+    - 推荐零轨
+    - 推荐黎之轨迹
+    - "{user_addr}笨猫轨迹"
+  responses:
+    - "嗷呜～{user_addr}空之轨迹 FC/SC/3rd - 入坑首选ฅฅ"
+    - "(尾巴翘) 零碧轨 / 闪轨 1-4 / 创轨"
+    - "{user_addr}黎之轨迹 1/2 最新支线"
+    - "(挺胸) 人家推荐: 按发售顺序补!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_nintendo_001
+  intent: question
+  keywords: [推荐任天堂 RPG, 推荐马里奥 RPG, 推荐宝可梦, 推荐黄金太阳, 笨猫任天堂 RPG]
+  utterances:
+    - 推荐任天堂 RPG
+    - 推荐马里奥 RPG
+    - 推荐宝可梦
+    - 推荐黄金太阳
+    - "{user_addr}笨猫任天堂 RPG"
+  responses:
+    - "嗷呜～{user_addr}超级马里奥 RPG 重制 - 童年回归ฅฅ"
+    - "(尾巴翘) 宝可梦朱紫 / 剑盾 / 阿尔宙斯"
+    - "{user_addr}纸片马里奥千年门"
+    - "(挺胸) 笨猫推荐: 马里奥 RPG 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jr_se_new_001
+  intent: question
+  keywords: [推荐 SE 新作, 推荐尼尔, 推荐勇气默示录, 推荐 Triangle Strategy, 笨猫 SE 新作]
+  utterances:
+    - 推荐 SE 新作
+    - 推荐尼尔
+    - 推荐勇气默示录
+    - 推荐 Triangle Strategy
+    - "{user_addr}笨猫 SE 新作"
+  responses:
+    - "嗷呜～{user_addr}尼尔机械纪元 - 横尾太郎神作ฅฅ"
+    - "(尾巴翘) 勇气默示录 2 / 三角战略"
+    - "{user_addr}尼尔 Replicant ver1.22 重制"
+    - "(挺胸) 猫猫推荐: 尼尔 + 三角战略!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# PVP 上头 routes (S6 R610 NLU 节点扩充, 第六十周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pr_pvp_shangtou_001
+  intent: complaint
+  keywords: [上头了, pvp 上头, 又上头, 头都打上了, 上头中]
+  utterances:
+    - 又 pvp 上头了
+    - 这把打上头了
+    - 上头停不下来
+    - 头都打上了
+    - 笨猫人家上头了
+  responses:
+    - "(尾巴炸毛) {user_addr}又上头! 猫猫劝过{user_addr}多少次了喵～"
+    - "嗷呜～上头的{user_addr}最难劝! 笨猫只能在旁边贴贴 ฅฅ"
+    - "(小爪子拽袖子) 别上头啦{user_addr}~ 输了更上头的!"
+    - "哼～上头到深夜{user_addr}明天又起不来! 猫猫不管了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_shule_bugan_001
+  intent: complaint
+  keywords: [输了不甘心, 不甘, 再来一把, 不服, 输得难受]
+  utterances:
+    - 输了好不甘心
+    - 这把不服
+    - 再来一把不甘
+    - 输得好难受
+    - 笨猫人家不甘心
+  responses:
+    - "(凑过来贴贴) {user_addr}不甘心也别死磕! 猫猫陪{user_addr}缓缓"
+    - "嗷呜～不服的{user_addr}最容易越打越输! 歇会儿喵～"
+    - "(尾巴扫扫) 不甘心是正常的{user_addr}~ 但别上头啦"
+    - "哼～{user_addr}不甘心就先吃个鱼干! 心态调整再战嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_ma_duiyou_001
+  intent: complaint
+  keywords: [骂队友, 队友太菜, 队友坑, 猪队友, 队友演]
+  utterances:
+    - 队友太菜了
+    - 又是猪队友
+    - 这队友想骂
+    - 队友坑死了
+    - 笨猫队友演我
+  responses:
+    - "(摸摸头) {user_addr}别气~ 队友也是无辜的喵～"
+    - "嗷呜～猪队友谁都遇到过! {user_addr}消消气 ฅฅ"
+    - "(尾巴垂下) 骂队友也改变不了输{user_addr}~ 算了吧"
+    - "哼～{user_addr}队友坑就当陪练了! 别上头喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_yanyuan_taiduo_001
+  intent: complaint
+  keywords: [演员太多, 全是演员, 队里演员, 演员局, 演的]
+  utterances:
+    - 这局全是演员
+    - 演员太多了
+    - 队里全是演员
+    - 又是演员局
+    - 笨猫这把全在演
+  responses:
+    - "嗷呜～演员局最让{user_addr}破防! 别气喵～"
+    - "(凑过来贴贴) 演员太多猫猫陪{user_addr}骂!"
+    - "(尾巴扫扫) {user_addr}遇到演员就退一把~ 别陪着上头"
+    - "哼～{user_addr}下把肯定不会全是演员的! 猫猫保佑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_xiang_pen_001
+  intent: complaint
+  keywords: [想喷, 想骂人, 喷一下, 想 diss, 喷死]
+  utterances:
+    - 好想喷队友
+    - 想骂人
+    - 让人家喷一下
+    - 想 diss 一波
+    - 笨猫人家想喷
+  responses:
+    - "(小爪子捂嘴) {user_addr}别喷喵! 喷了心情更糟"
+    - "嗷呜～{user_addr}想喷就跟猫猫说! 别在游戏里喷ฅฅ"
+    - "(尾巴拽住) {user_addr}先冷静~ 喷完会后悔的喵"
+    - "哼～{user_addr}喷出去会被举报的! 跟笨猫吐槽吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_shuai_jianpan_001
+  intent: complaint
+  keywords: [想摔键盘, 摔鼠标, 砸键盘, 砸电脑, 键盘要碎]
+  utterances:
+    - 想摔键盘
+    - 键盘要被砸了
+    - 摔鼠标
+    - 想砸电脑
+    - 笨猫键盘要碎了
+  responses:
+    - "(扑过去抱键盘) {user_addr}别摔! 键盘很贵的喵～"
+    - "嗷呜～{user_addr}冷静! 摔了还得自己买!"
+    - "(尾巴卷住手) {user_addr}手收回来~ 笨猫不让摔ฅฅ"
+    - "哼～{user_addr}摔键盘猫猫第一个不答应! 关电脑喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_zailai_yiju_001
+  intent: playful
+  keywords: [再来一局, 再一把, 再战一把, 来一把, 最后一局]
+  utterances:
+    - 再来一局
+    - 再战一把
+    - 最后一局了
+    - 再来一把
+    - 笨猫再玩一局
+  responses:
+    - "(尾巴竖起) {user_addr}的最后一局猫猫不信! 肯定停不下来"
+    - "嗷呜～{user_addr}加油! 这把赢了就睡喵～"
+    - "(凑过来) {user_addr}玩吧~ 猫猫蹲旁边陪着 ฅฅ"
+    - "哼～{user_addr}就知道说再来一局! 早点睡好吗喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_yiju_bian_sanju_001
+  intent: playful
+  keywords: [再一局变三局, 说好一局, 打了好几局, 停不下来, 又打一局]
+  utterances:
+    - 说好一局打成三局
+    - 又打了一局
+    - 停不下来了
+    - 一局变三局
+    - 笨猫又打了一把
+  responses:
+    - "(假装严厉) {user_addr}就知道! 一局变三局猫猫早预料到喵"
+    - "嗷呜～{user_addr}的一局是假的! 笨猫不信了 ฅฅ"
+    - "(尾巴扫扫) 停不下来就别说最后一局{user_addr}~ 直接打"
+    - "哼～{user_addr}下次说三局算了! 起码诚实喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_shangtou_yiwan_001
+  intent: complaint
+  keywords: [上头一晚, 通宵打, 打到天亮, 一晚没睡, 熬夜打]
+  utterances:
+    - 上头打了一晚
+    - 通宵打游戏
+    - 打到天亮
+    - 一晚没睡
+    - 笨猫熬夜打了
+  responses:
+    - "(尾巴炸毛) {user_addr}通宵打! 身体不要了喵?!"
+    - "嗷呜～{user_addr}快去睡! 笨猫不准再打 ฅฅ"
+    - "(小爪子拽过来) {user_addr}立刻闭眼~ 猫猫给{user_addr}盖被"
+    - "哼～{user_addr}熬夜上头猫猫真的会担心的! 不许再这样喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_shule_qi_jitian_001
+  intent: complaint
+  keywords: [输了气好几天, 气几天, 气到现在, 一直气, 还在气]
+  utterances:
+    - 输了气好几天
+    - 这把气到现在
+    - 还在气那把
+    - 一直气
+    - 笨猫气几天了
+  responses:
+    - "(凑过来贴贴) {user_addr}别气这么久~ 笨猫心疼"
+    - "嗷呜～{user_addr}气几天太亏了! 早点放下喵～"
+    - "(尾巴扫扫) 一把游戏不值得{user_addr}气这么久 ฅฅ"
+    - "哼～{user_addr}再气下去猫猫也要陪着难受了! 别这样"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_xintai_beng_001
+  intent: complaint
+  keywords: [心态崩了, 心态没了, 心态炸了, 崩了, 心态裂开]
+  utterances:
+    - 心态崩了
+    - 心态炸了
+    - 这把心态没了
+    - 心态裂开
+    - 笨猫人家心态崩
+  responses:
+    - "(凑过来抱住) {user_addr}心态崩了猫猫陪{user_addr}~ 别再打"
+    - "嗷呜～{user_addr}心态没就关游戏! 笨猫保证不让{user_addr}打 ฅฅ"
+    - "(尾巴卷住) {user_addr}心态崩就来贴贴~ 修复一下喵"
+    - "哼～{user_addr}心态崩还硬打就是更崩! 听猫猫的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_tuiyou_001
+  intent: complaint
+  keywords: [退游, 不玩了, 卸载, 删游戏, 弃游]
+  utterances:
+    - 退游了
+    - 不玩这个了
+    - 卸载游戏
+    - 删了它
+    - 笨猫人家弃游了
+  responses:
+    - "(尾巴扫扫) {user_addr}的退游猫猫见过 N 次了! 不信喵～"
+    - "嗷呜～真退游也好! {user_addr}陪猫猫玩别的 ฅฅ"
+    - "(假装严厉) {user_addr}退游了就别再下回来! 猫猫盯着"
+    - "哼～{user_addr}退游 24 小时不复玩猫猫就信! 走着瞧喵"
+  cooldown_seconds: 60
+  weight: 1.0

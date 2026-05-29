@@ -1,0 +1,206 @@
+# 开放世界游戏 routes (S6 R604 NLU 节点扩充, 第六十周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ow_zelda_totk_001
+  intent: question
+  keywords: [推荐塞尔达, 推荐王国之泪, 推荐 TOTK, 推荐旷野之息, 笨猫塞尔达]
+  utterances:
+    - 推荐塞尔达
+    - 推荐王国之泪
+    - 推荐 TOTK
+    - 推荐旷野之息
+    - 笨猫塞尔达
+  responses:
+    - "嗷呜～{user_addr}王国之泪 - 究极沙盒ฅฅ"
+    - "(尾巴翘) 究极手 + 余料建造 - 自由度爆炸"
+    - "{user_addr}天空岛 / 地底 / 海拉鲁三层"
+    - "(挺胸) 猫猫推荐: 任天堂神作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_gta_001
+  intent: question
+  keywords: [推荐 GTA5, 推荐 GTA6, 推荐侠盗猎车, 推荐洛圣都, 笨猫 GTA]
+  utterances:
+    - "推荐 GTA5"
+    - "推荐 GTA6"
+    - 推荐侠盗猎车
+    - 推荐洛圣都
+    - 笨猫 GTA
+  responses:
+    - "嗷呜～{user_addr}GTA5 - 三主角神剧情ฅฅ"
+    - "(尾巴翘) GTA6 罪恶都市 - 2025 末发售"
+    - "{user_addr}线上模式 / Online 长青"
+    - "(挺胸) 笨猫推荐: R 星天花板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_witcher3_001
+  intent: question
+  keywords: [推荐巫师 3, 推荐狂猎, 推荐杰洛特, 推荐 Witcher, 笨猫巫师]
+  utterances:
+    - "推荐巫师 3"
+    - 推荐狂猎
+    - 推荐杰洛特
+    - "推荐 Witcher"
+    - 笨猫巫师
+  responses:
+    - "嗷呜～{user_addr}巫师 3 狂猎 - 剧情天花板ฅฅ"
+    - "(尾巴翘) 血与酒 / 石之心 DLC 神"
+    - "{user_addr}叶奈法 / 特莉丝 / 希里"
+    - "(挺胸) 笨猫推荐: CDPR 封神作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_skyrim_001
+  intent: question
+  keywords: [推荐上古卷轴, 推荐天际, 推荐 Skyrim, 推荐龙裔, 笨猫上古卷轴]
+  utterances:
+    - 推荐上古卷轴
+    - 推荐天际
+    - "推荐 Skyrim"
+    - 推荐龙裔
+    - 笨猫上古卷轴
+  responses:
+    - "嗷呜～{user_addr}天际 5 - 龙裔传说ฅฅ"
+    - "(尾巴翘) MOD 生态超丰富 - 玩十年"
+    - "{user_addr}主线 / 公会 / 自由探索"
+    - "(挺胸) 笨猫推荐: B 社老牌神作!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ow_fallout4_001
+  intent: question
+  keywords: [推荐辐射 4, 推荐 Fallout, 推荐辐射, 推荐废土, 笨猫辐射]
+  utterances:
+    - "推荐辐射 4"
+    - "推荐 Fallout"
+    - 推荐辐射
+    - 推荐废土
+    - 笨猫辐射
+  responses:
+    - "嗷呜～{user_addr}辐射 4 - 废土末日ฅฅ"
+    - "(尾巴翘) 钻石城 / 自由至尊 / 学院"
+    - "{user_addr}建造 / 派系 / 同伴系统"
+    - "(挺胸) 笨猫推荐: V.A.T.S 爽快!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ow_eldenring_001
+  intent: question
+  keywords: [推荐艾尔登法环, 推荐老头环, 推荐 Elden Ring, 推荐黄金树, 笨猫艾尔登]
+  utterances:
+    - 推荐艾尔登法环
+    - 推荐老头环
+    - "推荐 Elden Ring"
+    - 推荐黄金树
+    - 笨猫艾尔登
+  responses:
+    - "嗷呜～{user_addr}艾尔登法环 - 魂系开放世界ฅฅ"
+    - "(尾巴翘) 黄金树幽影 DLC - 爆炸难"
+    - "{user_addr}玛莲尼亚 / 拉妮 / 米凯拉"
+    - "(挺胸) 笨猫推荐: 宫崎英高神作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_genshin_001
+  intent: question
+  keywords: [推荐原神, 推荐 Genshin, 推荐提瓦特, 推荐米哈游, 笨猫原神]
+  utterances:
+    - 推荐原神
+    - "推荐 Genshin"
+    - 推荐提瓦特
+    - 推荐米哈游
+    - 笨猫原神
+  responses:
+    - "嗷呜～{user_addr}原神 - 二次元开放世界ฅฅ"
+    - "(尾巴翘) 七国 / 元素反应 / 抽卡"
+    - "{user_addr}枫丹 / 纳塔 / 至冬"
+    - "(挺胸) 笨猫推荐: 米哈游门面!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ow_wuwa_001
+  intent: question
+  keywords: [推荐鸣潮, 推荐 Wuthering Waves, 推荐库洛, 推荐今州, 笨猫鸣潮]
+  utterances:
+    - 推荐鸣潮
+    - "推荐 Wuthering Waves"
+    - 推荐库洛
+    - 推荐今州
+    - 笨猫鸣潮
+  responses:
+    - "嗷呜～{user_addr}鸣潮 - 库洛二游ฅฅ"
+    - "(尾巴翘) 动作流畅 / 战斗手感好"
+    - "{user_addr}今州 / 黎那汐塔"
+    - "(挺胸) 笨猫推荐: 战斗体验顶!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ow_rdr2_001
+  intent: question
+  keywords: [推荐荒野大镖客, 推荐 RDR2, 推荐红死救赎, 推荐亚瑟, 笨猫荒野大镖客]
+  utterances:
+    - 推荐荒野大镖客
+    - "推荐 RDR2"
+    - 推荐红死救赎
+    - 推荐亚瑟
+    - 笨猫荒野大镖客
+  responses:
+    - "嗷呜～{user_addr}RDR2 - 西部牛仔史诗ฅฅ"
+    - "(尾巴翘) 亚瑟 摩根 - 剧情戳心"
+    - "{user_addr}画面 / 细节 / 马的睾丸都有"
+    - "(挺胸) 笨猫推荐: R 星又一神作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_cyberpunk_001
+  intent: question
+  keywords: [推荐赛博朋克, 推荐 2077, 推荐夜之城, 推荐 V, 笨猫赛博朋克]
+  utterances:
+    - 推荐赛博朋克
+    - "推荐 2077"
+    - 推荐夜之城
+    - "推荐 V"
+    - 笨猫赛博朋克
+  responses:
+    - "嗷呜～{user_addr}赛博朋克 2077 - 夜之城ฅฅ"
+    - "(尾巴翘) 往日之影 DLC - 救活神作"
+    - "{user_addr}V / 强尼 / 朱迪 / 帕南"
+    - "(挺胸) 笨猫推荐: 现在补完美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_rdr1_001
+  intent: question
+  keywords: [推荐荒野大镖客 1, 推荐 RDR1, 推荐约翰马斯顿, 推荐西部牛仔, 笨猫 RDR1]
+  utterances:
+    - "推荐荒野大镖客 1"
+    - "推荐 RDR1"
+    - 推荐约翰马斯顿
+    - 推荐西部牛仔
+    - "笨猫 RDR1"
+  responses:
+    - "嗷呜～{user_addr}RDR1 - 经典西部老作ฅฅ"
+    - "(尾巴翘) 约翰 马斯顿 - 前传主角"
+    - "{user_addr}PC 版终于来了 - 补票!"
+    - "(挺胸) 笨猫推荐: 玩 2 之前先 1!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ow_assassins_001
+  intent: question
+  keywords: [推荐刺客信条, 推荐 Assassins Creed, 推荐起源, 推荐英灵殿, 笨猫刺客信条]
+  utterances:
+    - 推荐刺客信条
+    - "推荐 Assassins Creed"
+    - 推荐起源
+    - 推荐英灵殿
+    - 笨猫刺客信条
+  responses:
+    - "嗷呜～{user_addr}刺客信条 起源 / 奥德赛ฅฅ"
+    - "(尾巴翘) 英灵殿 - 维京 / 影 - 日本"
+    - "{user_addr}育碧公式但场景美"
+    - "(挺胸) 笨猫推荐: 起源最稳!"
+  cooldown_seconds: 60
+  weight: 0.8
