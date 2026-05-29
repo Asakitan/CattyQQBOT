@@ -68,7 +68,9 @@ class CattyRAGStore:
         p = Path(memory_path).expanduser()
         if not p.is_absolute():
             p = p.resolve()
-        self._persist_dir = p.parent / "chroma"
+        # 主人 2026-05-30: 切换 embedding (deepseek 1536d → bge 512d) 维度不一致,
+        # 必须用新 persist_dir 避免老 collection 加载报错. 老 chroma 数据保留 (可手动备份/迁移).
+        self._persist_dir = p.parent / "chroma_bge"
         self._lock = threading.RLock()
         self._config = config
         self._client = None
@@ -84,8 +86,10 @@ class CattyRAGStore:
     def _try_init(self) -> None:
         """Try-import chromadb + 初始化 PersistentClient + 选 embedding backend.
 
-        embedding 优先 OpenAI compatible (无 ONNX 依赖, Python 3.14 兼容),
-        fallback ONNX (Python 3.14 已知 DLL fail → disable)。
+        主人 2026-05-30: embedding 优先级改为 本地 bge > OpenAI > chromadb 默认 ONNX:
+        - 本地 bge-small ONNX (text2vec_engine 已加载, 复用免烧 token, 0 网络成本)
+        - OpenAI compatible (走 deepseek API 烧 token, 仅 fallback)
+        - chromadb 默认 ONNX (Python 3.14 DLL fail → disable)
         """
         try:
             import chromadb  # type: ignore
@@ -93,8 +97,10 @@ class CattyRAGStore:
             self._init_error = f"chromadb not installed: {exc}"
             logger.warning("catty_rag: chromadb not installed, RAG disabled — pip install chromadb to enable")
             return
-        # 选 embedding backend
-        ef = self._try_openai_embedding()
+        # 选 embedding backend (本地优先, 免烧 deepseek token)
+        ef = self._try_local_bge_embedding()
+        if ef is None:
+            ef = self._try_openai_embedding()
         if ef is None:
             ef = self._try_onnx_embedding()
         if ef is None:
@@ -116,6 +122,48 @@ class CattyRAGStore:
         except Exception as exc:  # noqa: BLE001
             self._init_error = f"chromadb init failed: {exc}"
             logger.warning(f"catty_rag: init failed, RAG disabled — {exc}")
+
+    def _try_local_bge_embedding(self):  # noqa: ANN202
+        """主人 2026-05-30: 复用本地 bge-small ONNX (text2vec_engine), 不烧 deepseek token.
+
+        text2vec_engine 已经在 NLU warmup 时加载好 ONNX 模型, 这里直接 wrap 成
+        chromadb 接受的 EmbeddingFunction 接口 (callable + name attr).
+        """
+        try:
+            from .nlu.text2vec_engine import embed_sync_batch as _embed_batch
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"catty_rag: local bge text2vec_engine import failed: {exc}")
+            return None
+
+        class _LocalBGEEmbeddingFunction:
+            def __call__(self, input):  # type: ignore[no-untyped-def]
+                if not input:
+                    return []
+                texts = [str(t) for t in input]
+                vecs = _embed_batch(texts)
+                if vecs is None:
+                    # 失败时返回零向量占位, 让 chromadb 不崩 (后续 query 也会返回低分)
+                    return [[0.0] * 512 for _ in texts]
+                # bge-small dim=512, 已 L2-normalized
+                return [v.tolist() for v in vecs]
+
+            @staticmethod
+            def name():  # chromadb 0.5+ 需要 EmbeddingFunction 有 name
+                return "local-bge-small-zh"
+
+        # 探测一下确实能用
+        try:
+            test_vec = _embed_batch(["test"])
+            if test_vec is None or len(test_vec) == 0:
+                logger.debug("catty_rag: local bge probe returned None/empty, skip")
+                return None
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"catty_rag: local bge probe failed: {exc}")
+            return None
+
+        self._embedding_source = "local:bge-small-zh"
+        logger.info("catty_rag: using LOCAL bge-small ONNX embedding (0 token cost, free)")
+        return _LocalBGEEmbeddingFunction()
 
     def _try_openai_embedding(self):  # noqa: ANN202
         """优先尝试 OpenAI compatible /v1/embeddings (无 ONNX 依赖, Python 3.14 兼容)。
