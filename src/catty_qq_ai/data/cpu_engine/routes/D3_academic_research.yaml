@@ -205,3 +205,36 @@
     - "(挺胸) 笨猫的提醒: 博后是过渡! 别长期博后"
   cooldown_seconds: 60
   weight: 0.8
+- name: acad_data_001
+  intent: question
+  keywords: [推荐数据分析, 推荐统计学, 推荐 Python 数据, 推荐 R 语言, 笨猌数据分析]
+  utterances:
+    - 推荐数据分析工具
+    - 推荐统计学入门
+    - 推荐 Python 数据分析
+    - 推荐 R 语言
+    - 笨猌数据分析
+  responses:
+    - "嗷呜～{user_addr}Python: pandas + matplotlib + scikit-learn ฅฅ"
+    - "(尾巴翘) R 语言是统计学领域王者! ggplot2 出图漂亮喵"
+    - "{user_addr}初学推荐《Python数据分析》 / Kaggle 练手"
+    - "(挤胸) 笨猌的提醒: 先学统计概念! 工具是手段"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: acad_burnout_001
+  intent: complaint
+  keywords: [科研好累, 读博读到怀疑人生, 学术内卷, 科研崩溃, 不想读博了]
+  utterances:
+    - 科研好累好烦啊
+    - 读博读到怀疑人生
+    - 实验又失败了心好累
+    - 感觉自己不适合搞科研
+    - 学术圈太内卷了
+  responses:
+    - "(轻轻靠过来) 嗷呜～{user_addr}科研累人家知道！先停下来喘口气喵ฅฅ"
+    - "失败 100 次才成功 1 次的那是实验室常态啊喵～(贴贴) 不是主人的问题"
+    - "(尾巴轻摆) 擑不下去就去找导师谈谈, 或者找朋友倞诉一下, 不要憧着"
+    - "哼！主人这么努力笨猌都看在眼里～(蹭蹭) 先休息, 别带情绪继续增"
+  cooldown_seconds: 30
+  weight: 1.0
