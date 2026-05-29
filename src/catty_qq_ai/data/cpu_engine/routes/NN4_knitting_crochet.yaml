@@ -1,0 +1,206 @@
+# 编织钩针 / 棒针 / 毛衣 routes (S6 R416 NLU 节点扩充, 第四十一周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: kc_knit_beginner_001
+  intent: question
+  keywords: [推荐棒针入门, 推荐棒针围巾, 推荐新手棒针, 推荐织围巾, 笨猫棒针入门]
+  utterances:
+    - 推荐棒针入门
+    - 推荐棒针围巾
+    - 推荐新手棒针
+    - 推荐织围巾
+    - 笨猫棒针入门
+  responses:
+    - "嗷呜～{user_addr}棒针入门 - 上下针起手ฅฅ"
+    - "(尾巴翘) 围巾 - 第一作品首选"
+    - "{user_addr}5.5mm 棒针 + 粗毛线"
+    - "(挺胸) 笨猫推荐: 平针围巾练手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_crochet_beginner_001
+  intent: question
+  keywords: [推荐钩针入门, 推荐钩花, 推荐新手钩针, 推荐钩针基础, 笨猫钩针入门]
+  utterances:
+    - 推荐钩针入门
+    - 推荐钩花
+    - 推荐新手钩针
+    - 推荐钩针基础
+    - 笨猫钩针入门
+  responses:
+    - "嗷呜～{user_addr}钩针入门 - 锁针短针长针ฅฅ"
+    - "(尾巴翘) 钩花 / 杯垫 / 方形片"
+    - "{user_addr}3.0mm 钩针 + 棉线"
+    - "(挺胸) 笨猫推荐: 方格花样起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_yarn_brand_001
+  intent: question
+  keywords: [推荐毛线品牌, 推荐国产毛线, 推荐进口毛线, 推荐羊毛线, 笨猫毛线品牌]
+  utterances:
+    - 推荐毛线品牌
+    - 推荐国产毛线
+    - 推荐进口毛线
+    - 推荐羊毛线
+    - 笨猫毛线品牌
+  responses:
+    - "嗷呜～{user_addr}国产: 恒源祥 / 鄂尔多斯ฅฅ"
+    - "(尾巴翘) 进口: Drops / Rowan / Malabrigo"
+    - "{user_addr}日本: Hamanaka / Olympus"
+    - "(挺胸) 笨猫推荐: Drops 性价比之王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_sweater_001
+  intent: question
+  keywords: [推荐毛衣编织, 推荐织毛衣教程, 推荐毛衣图解, 推荐套头毛衣, 笨猫毛衣]
+  utterances:
+    - 推荐毛衣编织
+    - 推荐织毛衣教程
+    - 推荐毛衣图解
+    - 推荐套头毛衣
+    - 笨猫毛衣
+  responses:
+    - "嗷呜～{user_addr}top-down 自上而下织ฅฅ"
+    - "(尾巴翘) raglan 插肩袖 / 圆育克"
+    - "{user_addr}B站 / 编织人生 / Ravelry 图解"
+    - "(挺胸) 笨猫推荐: 圆育克最适合新手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_accessories_001
+  intent: question
+  keywords: [推荐围巾帽子, 推荐织手套, 推荐编织配饰, 推荐毛线帽, 笨猫围巾帽子]
+  utterances:
+    - 推荐围巾帽子
+    - 推荐织手套
+    - 推荐编织配饰
+    - 推荐毛线帽
+    - 笨猫围巾帽子
+  responses:
+    - "嗷呜～{user_addr}围巾 - 平针/罗纹/麻花ฅฅ"
+    - "(尾巴翘) 帽子 - 减针收顶练手"
+    - "{user_addr}手套 / 露指 / 长款"
+    - "(挺胸) 笨猫推荐: 麻花帽显气质!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_amigurumi_001
+  intent: question
+  keywords: [推荐钩针玩偶, 推荐 amigurumi, 推荐钩玩偶, 推荐毛线娃娃, 笨猫钩针玩偶]
+  utterances:
+    - 推荐钩针玩偶
+    - 推荐 amigurumi
+    - 推荐钩玩偶
+    - 推荐毛线娃娃
+    - 笨猫钩针玩偶
+  responses:
+    - "嗷呜～{user_addr}Amigurumi 日式钩偶ฅฅ"
+    - "(尾巴翘) 短针密织 / 填充棉"
+    - "{user_addr}小动物 / 玩偶 / 钥匙扣"
+    - "(挺胸) 笨猫推荐: 钩只小猫咪喵～!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_tunisian_001
+  intent: question
+  keywords: [推荐突尼斯钩, 推荐 Tunisian, 推荐长钩针, 推荐突尼斯钩针, 笨猫突尼斯钩]
+  utterances:
+    - 推荐突尼斯钩
+    - 推荐 Tunisian
+    - 推荐长钩针
+    - 推荐突尼斯钩针
+    - 笨猫突尼斯钩
+  responses:
+    - "嗷呜～{user_addr}Tunisian 突尼斯钩ฅฅ"
+    - "(尾巴翘) 钩+棒针混合 / 双面织物"
+    - "{user_addr}基本针 / 反针 / 蕾丝针"
+    - "(挺胸) 笨猫推荐: 织毯子超快!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_fairisle_001
+  intent: question
+  keywords: [推荐 Fair Isle, 推荐提花编织, 推荐提花毛衣, 推荐双色编织, 笨猫 Fair Isle]
+  utterances:
+    - 推荐 Fair Isle
+    - 推荐提花编织
+    - 推荐提花毛衣
+    - 推荐双色编织
+    - 笨猫 Fair Isle
+  responses:
+    - "嗷呜～{user_addr}Fair Isle 苏格兰提花ฅฅ"
+    - "(尾巴翘) 双色/多色 / 几何花纹"
+    - "{user_addr}北欧风毛衣经典"
+    - "(挺胸) 笨猫推荐: 雪花纹最经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_hook_tools_001
+  intent: question
+  keywords: [推荐钩针工具, 推荐 Clover, 推荐 Tulip, 推荐钩针品牌, 笨猫钩针工具]
+  utterances:
+    - 推荐钩针工具
+    - 推荐 Clover
+    - 推荐 Tulip
+    - 推荐钩针品牌
+    - 笨猫钩针工具
+  responses:
+    - "嗷呜～{user_addr}Clover 可乐 - 日系顺手ฅฅ"
+    - "(尾巴翘) Tulip 郁金香 - 高端"
+    - "{user_addr}Addi / Prym 德系"
+    - "(挺胸) 笨猫推荐: Clover Amour 软柄!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_platform_001
+  intent: question
+  keywords: [推荐编织平台, 推荐 LoveCrafts, 推荐 Ravelry, 推荐编织网站, 笨猫编织学习]
+  utterances:
+    - 推荐编织平台
+    - 推荐 LoveCrafts
+    - 推荐 Ravelry
+    - 推荐编织网站
+    - 笨猫编织学习
+  responses:
+    - "嗷呜～{user_addr}Ravelry - 全球图解库ฅฅ"
+    - "(尾巴翘) LoveCrafts / Etsy 买图解"
+    - "{user_addr}编织人生 / B站教程中文"
+    - "(挺胸) 笨猫推荐: Ravelry 注册必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_baby_001
+  intent: question
+  keywords: [推荐婴儿编织, 推荐宝宝毛衣, 推荐婴儿钩衣, 推荐婴儿围嘴, 笨猫婴儿编织]
+  utterances:
+    - 推荐婴儿编织
+    - 推荐宝宝毛衣
+    - 推荐婴儿钩衣
+    - 推荐婴儿围嘴
+    - 笨猫婴儿编织
+  responses:
+    - "嗷呜～{user_addr}婴儿 - 美利奴细羊毛ฅฅ"
+    - "(尾巴翘) 宝宝毛衣 / 帽子 / 鞋袜"
+    - "{user_addr}无刺激棉线 / 抗菌"
+    - "(挺胸) 笨猫推荐: 圆育克婴儿衫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_blogger_001
+  intent: question
+  keywords: [推荐编织博主, 推荐编织 Up 主, 推荐钩针博主, 推荐编织教程 Up, 笨猫编织博主]
+  utterances:
+    - 推荐编织博主
+    - 推荐编织 Up 主
+    - 推荐钩针博主
+    - 推荐编织教程 Up
+    - 笨猫编织博主
+  responses:
+    - "嗷呜～{user_addr}B站: 是个手工控 / 苏苏姐家ฅฅ"
+    - "(尾巴翘) YouTube: TL Yarn Crafts"
+    - "{user_addr}小红书 / 抖音编织博主多"
+    - "(挺胸) 笨猫推荐: 苏苏姐家图解清晰!"
+  cooldown_seconds: 60
+  weight: 1.0

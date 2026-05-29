@@ -1,0 +1,206 @@
+# 国画入门 / 水墨 / 工笔 routes (S6 R413 NLU 节点扩充, 第四十一周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cp_intro_001
+  intent: question
+  keywords: [推荐国画入门, 推荐笔墨纸砚, 推荐文房四宝, 推荐国画教程, 笨猫国画入门]
+  utterances:
+    - 推荐国画入门
+    - 推荐笔墨纸砚
+    - 推荐文房四宝
+    - 推荐国画教程
+    - 笨猫国画入门
+  responses:
+    - "嗷呜～{user_addr}笔墨纸砚 - 文房四宝ฅฅ"
+    - "(尾巴翘) 兼毫笔 + 一得阁墨汁起步"
+    - "{user_addr}先临摹 / 再写生 / 后创作"
+    - "(挺胸) 猫猫推荐: 从梅兰竹菊练笔!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_inkwash_tools_001
+  intent: question
+  keywords: [推荐水墨工具, 推荐宣纸, 推荐毛笔, 推荐墨汁, 笨猫水墨工具]
+  utterances:
+    - 推荐水墨工具
+    - 推荐宣纸
+    - 推荐毛笔
+    - 推荐墨汁
+    - 笨猫水墨工具
+  responses:
+    - "嗷呜～{user_addr}生宣 - 写意吸墨ฅฅ"
+    - "(尾巴翘) 熟宣 - 工笔不洇"
+    - "{user_addr}羊毫 / 狼毫 / 兼毫"
+    - "(挺胸) 笨猫推荐: 红星宣纸 + 一得阁!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_gongbi_001
+  intent: question
+  keywords: [推荐工笔教程, 推荐花鸟工笔, 推荐仕女工笔, 推荐工笔画法, 笨猫工笔]
+  utterances:
+    - 推荐工笔教程
+    - 推荐花鸟工笔
+    - 推荐仕女工笔
+    - 推荐工笔画法
+    - 笨猫工笔
+  responses:
+    - "嗷呜～{user_addr}工笔 - 细腻工整ฅฅ"
+    - "(尾巴翘) 花鸟 / 仕女 / 草虫"
+    - "{user_addr}白描 → 渲染 → 罩色"
+    - "(挺胸) 人家推荐: 从工笔牡丹开始!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_xieyi_001
+  intent: question
+  keywords: [推荐写意, 推荐山水画, 推荐梅兰竹菊, 推荐大写意, 笨猫写意]
+  utterances:
+    - 推荐写意
+    - 推荐山水画
+    - 推荐梅兰竹菊
+    - 推荐大写意
+    - 笨猫写意
+  responses:
+    - "嗷呜～{user_addr}写意 - 笔意纵横ฅฅ"
+    - "(尾巴翘) 山水 / 梅兰竹菊 / 大写意"
+    - "{user_addr}意在笔先 / 一气呵成"
+    - "(挺胸) 猫猫推荐: 先画兰竹练气韵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_xubeihong_001
+  intent: question
+  keywords: [推荐徐悲鸿, 推荐徐悲鸿马, 推荐徐悲鸿画马, 推荐奔马图, 笨猫徐悲鸿]
+  utterances:
+    - 推荐徐悲鸿
+    - 推荐徐悲鸿马
+    - 推荐徐悲鸿画马
+    - 推荐奔马图
+    - 笨猫徐悲鸿
+  responses:
+    - "嗷呜～{user_addr}徐悲鸿 - 中西合璧ฅฅ"
+    - "(尾巴翘) 奔马图 / 八骏图 - 神品"
+    - "{user_addr}骨法用笔 / 解剖精准"
+    - "(挺胸) 笨猫推荐: 从马腿结构开始临!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_qibaishi_001
+  intent: question
+  keywords: [推荐齐白石, 推荐齐白石虾, 推荐齐白石画虾, 推荐大师虾, 笨猫齐白石]
+  utterances:
+    - 推荐齐白石
+    - 推荐齐白石虾
+    - 推荐齐白石画虾
+    - 推荐大师虾
+    - 笨猫齐白石
+  responses:
+    - "嗷呜～{user_addr}齐白石 - 国画宗师ฅฅ"
+    - "(尾巴翘) 虾 / 螃蟹 / 草虫 - 灵动"
+    - "{user_addr}似与不似之间"
+    - "(挺胸) 猫猫推荐: 临齐白石虾必修!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_fanmian_001
+  intent: question
+  keywords: [推荐扇面, 推荐扇面尺寸, 推荐扇面礼物, 推荐折扇画, 笨猫扇面]
+  utterances:
+    - 推荐扇面
+    - 推荐扇面尺寸
+    - 推荐扇面礼物
+    - 推荐折扇画
+    - 笨猫扇面
+  responses:
+    - "嗷呜～{user_addr}扇面 - 文人雅趣ฅฅ"
+    - "(尾巴翘) 折扇 / 团扇 - 形制小巧"
+    - "{user_addr}尺寸 1 尺 / 8 寸 / 6 寸"
+    - "(挺胸) 人家推荐: 扇面送礼最风雅!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cp_xiangao_001
+  intent: question
+  keywords: [推荐国画线稿, 推荐白描, 推荐草虫线稿, 推荐鱼线稿, 笨猫线稿]
+  utterances:
+    - 推荐国画线稿
+    - 推荐白描
+    - 推荐草虫线稿
+    - 推荐鱼线稿
+    - 笨猫线稿
+  responses:
+    - "嗷呜～{user_addr}白描 - 国画根基ฅฅ"
+    - "(尾巴翘) 草虫 / 鱼 / 花鸟 线稿"
+    - "{user_addr}十八描 - 高古游丝 / 铁线描"
+    - "(挺胸) 笨猫推荐: 白描芥子园起步!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cp_pigment_001
+  intent: question
+  keywords: [推荐国画颜料, 推荐中国颜彩, 推荐马利国画颜料, 推荐姜思序堂, 笨猫国画颜料]
+  utterances:
+    - 推荐国画颜料
+    - 推荐中国颜彩
+    - 推荐马利国画颜料
+    - 推荐姜思序堂
+    - 笨猫国画颜料
+  responses:
+    - "嗷呜～{user_addr}马利 - 国民国画颜料ฅฅ"
+    - "(尾巴翘) 姜思序堂 - 苏州老字号"
+    - "{user_addr}石青 / 石绿 / 朱砂 - 矿物色"
+    - "(挺胸) 猫猫推荐: 马利 12 色入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_copy_001
+  intent: question
+  keywords: [推荐国画临摹, 推荐临摹起步, 推荐芥子园画谱, 推荐临摹范本, 笨猫临摹]
+  utterances:
+    - 推荐国画临摹
+    - 推荐临摹起步
+    - 推荐芥子园画谱
+    - 推荐临摹范本
+    - 笨猫临摹
+  responses:
+    - "嗷呜～{user_addr}芥子园画谱 - 国画圣经ฅฅ"
+    - "(尾巴翘) 临 → 摹 → 写 → 创"
+    - "{user_addr}从局部到整体 / 反复练"
+    - "(挺胸) 笨猫推荐: 芥子园 + 名家册页!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_modern_001
+  intent: question
+  keywords: [推荐当代水墨, 推荐当代国画, 推荐新水墨, 推荐实验水墨, 笨猫当代水墨]
+  utterances:
+    - 推荐当代水墨
+    - 推荐当代国画
+    - 推荐新水墨
+    - 推荐实验水墨
+    - 笨猫当代水墨
+  responses:
+    - "嗷呜～{user_addr}当代水墨 - 新表达ฅฅ"
+    - "(尾巴翘) 刘国松 / 徐冰 / 谷文达"
+    - "{user_addr}实验水墨 / 抽象水墨"
+    - "(挺胸) 人家推荐: 看刘国松破墨法!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cp_exhibition_001
+  intent: question
+  keywords: [推荐国画展览, 推荐国画展, 推荐美术馆国画, 推荐故宫书画, 笨猫国画展览]
+  utterances:
+    - 推荐国画展览
+    - 推荐国画展
+    - 推荐美术馆国画
+    - 推荐故宫书画
+    - 笨猫国画展览
+  responses:
+    - "嗷呜～{user_addr}故宫书画馆 - 必看ฅฅ"
+    - "(尾巴翘) 国博 / 中国美术馆 / 上博"
+    - "{user_addr}清明上河图 / 千里江山图"
+    - "(挺胸) 猫猫推荐: 故宫每年特展冲!"
+  cooldown_seconds: 60
+  weight: 1.0

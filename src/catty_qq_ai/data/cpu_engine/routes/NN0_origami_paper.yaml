@@ -1,0 +1,206 @@
+# 折纸 / Origami / 千纸鹤 routes (S6 R412 NLU 节点扩充, 第四十一周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: op_intro_001
+  intent: question
+  keywords: [推荐折纸入门, 推荐 Origami 入门, 推荐折纸书, 推荐折纸教程, 笨猫折纸入门]
+  utterances:
+    - 推荐折纸入门
+    - 推荐 Origami 入门
+    - 推荐折纸书
+    - 推荐折纸教程
+    - 笨猫折纸入门
+  responses:
+    - "嗷呜～{user_addr}《折纸大全》/ 《Origami Omnibus》ฅฅ"
+    - "(尾巴翘) 吉泽章 / Akira Yoshizawa - 现代折纸之父"
+    - "{user_addr}基础 26 折法 / 山折 谷折"
+    - "(挺胸) 笨猫推荐: 从纸鹤开始!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_crane_001
+  intent: question
+  keywords: [推荐千纸鹤, 推荐纸鹤折法, 推荐千羽鹤, 推荐折鹤, 笨猫千纸鹤]
+  utterances:
+    - 推荐千纸鹤
+    - 推荐纸鹤折法
+    - 推荐千羽鹤
+    - 推荐折鹤
+    - 笨猫千纸鹤
+  responses:
+    - "嗷呜～{user_addr}千纸鹤 - 折纸之王ฅฅ"
+    - "(尾巴翘) 基础鹤 / 连鹤 / 千羽鹤"
+    - "{user_addr}传说: 千羽鹤许愿成真"
+    - "(挺胸) 笨猫推荐: 15cm 方纸入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_lang_001
+  intent: question
+  keywords: [推荐 Robert Lang, 推荐折纸大师, 推荐 Lang 折纸, 推荐 TreeMaker, 笨猫 Lang]
+  utterances:
+    - 推荐 Robert Lang
+    - 推荐折纸大师
+    - 推荐 Lang 折纸
+    - 推荐 TreeMaker
+    - 笨猫 Lang
+  responses:
+    - "嗷呜～{user_addr}Robert Lang - 折纸数学大师ฅฅ"
+    - "(尾巴翘) TreeMaker 软件 / 折纸算法"
+    - "{user_addr}NASA 工程师 / 太阳能板折叠"
+    - "(挺胸) 笨猫推荐: 看 TED 演讲入坑!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: op_ousa_001
+  intent: question
+  keywords: [推荐 OUSA, 推荐折纸协会, 推荐日本折纸协会, 推荐 OrigamiUSA, 笨猫折纸协会]
+  utterances:
+    - 推荐 OUSA
+    - 推荐折纸协会
+    - 推荐日本折纸协会
+    - 推荐 OrigamiUSA
+    - 笨猫折纸协会
+  responses:
+    - "嗷呜～{user_addr}OrigamiUSA - 美国折纸协会ฅฅ"
+    - "(尾巴翘) 日本折纸协会 NOA / 关西折纸"
+    - "{user_addr}年会 Convention / 图集 Diagrams"
+    - "(挺胸) 笨猫推荐: 加入有教程下载!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: op_paper_001
+  intent: question
+  keywords: [推荐折纸纸, 推荐 Kami, 推荐川崎纸, 推荐双面折纸纸, 笨猫折纸纸]
+  utterances:
+    - 推荐折纸纸
+    - 推荐 Kami
+    - 推荐川崎纸
+    - 推荐双面折纸纸
+    - 笨猫折纸纸
+  responses:
+    - "嗷呜～{user_addr}Kami - 基础单色纸ฅฅ"
+    - "(尾巴翘) 川崎纸 / 双面纸 / 和纸"
+    - "{user_addr}Tant / Elephant Hide - 高级"
+    - "(挺胸) 笨猫推荐: 15cm Kami 起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_complex_001
+  intent: question
+  keywords: [推荐复杂折纸, 推荐模块化折纸, 推荐 Modular, 推荐神谷哲史, 笨猫复杂折纸]
+  utterances:
+    - 推荐复杂折纸
+    - 推荐模块化折纸
+    - 推荐 Modular
+    - 推荐神谷哲史
+    - 笨猫复杂折纸
+  responses:
+    - "嗷呜～{user_addr}神谷哲史 - 龙 / 凤凰ฅฅ"
+    - "(尾巴翘) 模块化 Modular / 30 面体"
+    - "{user_addr}Eric Joisel / Brian Chan 大神"
+    - "(挺胸) 笨猫推荐: 神谷古典龙挑战!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: op_kids_001
+  intent: question
+  keywords: [推荐儿童折纸, 推荐亲子折纸, 推荐幼儿折纸, 推荐简单折纸, 笨猫儿童折纸]
+  utterances:
+    - 推荐儿童折纸
+    - 推荐亲子折纸
+    - 推荐幼儿折纸
+    - 推荐简单折纸
+    - 笨猫儿童折纸
+  responses:
+    - "嗷呜～{user_addr}小猫 / 小狗 / 青蛙 - 入门款ฅฅ"
+    - "(尾巴翘) 纸飞机 / 纸船 / 东南西北"
+    - "{user_addr}训练手部精细动作"
+    - "(挺胸) 笨猫推荐: 跳跳青蛙最好玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_rose_001
+  intent: question
+  keywords: [推荐折纸玫瑰, 推荐川崎玫瑰, 推荐折纸花, 推荐 Kawasaki Rose, 笨猫折纸玫瑰]
+  utterances:
+    - 推荐折纸玫瑰
+    - 推荐川崎玫瑰
+    - 推荐折纸花
+    - 推荐 Kawasaki Rose
+    - 笨猫折纸玫瑰
+  responses:
+    - "嗷呜～{user_addr}川崎玫瑰 - 经典款ฅฅ"
+    - "(尾巴翘) 福山玫瑰 / PT 玫瑰"
+    - "{user_addr}百合 / 郁金香 / 樱花"
+    - "(挺胸) 笨猫推荐: 川崎入门告白神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_box_001
+  intent: question
+  keywords: [推荐折纸盒子, 推荐收纳盒折法, 推荐 Masu, 推荐折纸盒, 笨猫折纸盒子]
+  utterances:
+    - 推荐折纸盒子
+    - 推荐收纳盒折法
+    - 推荐 Masu
+    - 推荐折纸盒
+    - 笨猫折纸盒子
+  responses:
+    - "嗷呜～{user_addr}Masu 升箱 - 日式经典ฅฅ"
+    - "(尾巴翘) 心形盒 / 星星盒 / 八角盒"
+    - "{user_addr}收纳 / 礼品包装实用"
+    - "(挺胸) 笨猫推荐: Masu 5 分钟搞定!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: op_3d_001
+  intent: question
+  keywords: [推荐立体折纸, 推荐 3D 折纸, 推荐折纸模型, 推荐折纸动物, 笨猫立体折纸]
+  utterances:
+    - 推荐立体折纸
+    - 推荐 3D 折纸
+    - 推荐折纸模型
+    - 推荐折纸动物
+    - 笨猫立体折纸
+  responses:
+    - "嗷呜～{user_addr}立体折纸 - 龙 / 独角兽ฅฅ"
+    - "(尾巴翘) 湿折法 / 吉泽章风格"
+    - "{user_addr}动物系列 / 昆虫系列"
+    - "(挺胸) 笨猫推荐: 湿折大象很治愈!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: op_app_001
+  intent: question
+  keywords: [推荐折纸 APP, 推荐 Origami Tube, 推荐折纸教学视频, 推荐 YouTube 折纸, 笨猫折纸 APP]
+  utterances:
+    - 推荐折纸 APP
+    - 推荐 Origami Tube
+    - 推荐折纸教学视频
+    - 推荐 YouTube 折纸
+    - 笨猫折纸 APP
+  responses:
+    - "嗷呜～{user_addr}Origami Instructions APPฅฅ"
+    - "(尾巴翘) YouTube: Jo Nakashima / Tadashi"
+    - "{user_addr}Origami Tube / 折り紙"
+    - "(挺胸) 笨猫推荐: Jo Nakashima 频道!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: op_aesthetic_001
+  intent: question
+  keywords: [推荐折纸美学, 推荐折纸艺术, 推荐折纸装饰, 推荐折纸展览, 笨猫折纸美学]
+  utterances:
+    - 推荐折纸美学
+    - 推荐折纸艺术
+    - 推荐折纸装饰
+    - 推荐折纸展览
+    - 笨猫折纸美学
+  responses:
+    - "嗷呜～{user_addr}折纸 = 数学 + 艺术ฅฅ"
+    - "(尾巴翘) 留白 / 折痕之美"
+    - "{user_addr}MoMA 展览 / 东京折纸博物馆"
+    - "(挺胸) 笨猫推荐: 一张纸的无限可能!"
+  cooldown_seconds: 60
+  weight: 0.8

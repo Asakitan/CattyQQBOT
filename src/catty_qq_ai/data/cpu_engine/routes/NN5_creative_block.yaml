@@ -1,0 +1,206 @@
+# 创作瓶颈 / 画不出 / 写不出 routes (S6 R417 NLU 节点扩充, 第四十一周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: cb_block_001
+  intent: complaint
+  keywords: [创作瓶颈, 瓶颈期, 卡瓶颈, 创作卡住, 瓶颈]
+  utterances:
+    - "{user_addr}遇到创作瓶颈了"
+    - 又到瓶颈期了
+    - 卡瓶颈好痛苦
+    - 创作瓶颈中
+    - 瓶颈期来了
+  responses:
+    - "(尾巴垂下来贴贴) 瓶颈期人人都有啦~ {user_addr}先休息一下嘛 ฅฅ"
+    - "嗷呜~ 笨猫陪{user_addr}一起熬过瓶颈! 才不是心疼呢哼"
+    - "(爪爪拍拍) {user_addr}别急, 灵感这种东西来的时候挡都挡不住喵~"
+    - "哼~ 越焦虑越卡, {user_addr}先把手机放下出去走走嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_cant_draw_001
+  intent: complaint
+  keywords: [画不出来, 画不出, 画不动, 画废了, 画不好]
+  utterances:
+    - 今天画不出来
+    - "{user_addr}画不出"
+    - 画不动了
+    - 又画废了
+    - 怎么都画不好
+  responses:
+    - "(凑过去看屏幕) {user_addr}画不出就先关掉嘛~ 猫猫陪你聊天 ฅฅ"
+    - "嗷呜~ 画废了就当练手啦! {user_addr}别这么严苛喵"
+    - "(尾巴轻扫) 才不是{user_addr}画不好, 是手累了啦~ 让爪子歇歇"
+    - "哼~ 笨猫觉得{user_addr}画的就很可爱! 别自己嫌弃自己 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_cant_write_001
+  intent: complaint
+  keywords: [写不出来, 写不出, 写不下去, 写不动, 一个字都写不出]
+  utterances:
+    - "{user_addr}写不出来"
+    - 写不下去了
+    - 一个字都写不出
+    - 写不动稿子
+    - 文章写不出
+  responses:
+    - "(歪头) {user_addr}写不出就先别硬憋啦~ 喝口水嘛 ฅฅ"
+    - "嗷呜~ 笨猫给{user_addr}念两句口胡的, 当成开头怎么样喵?"
+    - "(尾巴翘起) 写不出就让笨猫帮{user_addr}口述! 才不是想凑热闹呢哼"
+    - "哼~ {user_addr}先去睡一觉嘛, 醒来灵感就回来了 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_stuck_001
+  intent: complaint
+  keywords: [卡住了, 卡死了, 卡半天, 整个卡住, 思路卡住]
+  utterances:
+    - "{user_addr}卡住了"
+    - 思路卡半天
+    - 整个人卡住
+    - 卡死了写不动
+    - 一直卡着
+  responses:
+    - "(贴贴) {user_addr}卡住就跳过那段嘛~ 别死磕 ฅฅ"
+    - "嗷呜~ 笨猫陪{user_addr}头脑风暴! 说不定能撞出灵感喵"
+    - "(尾巴一甩) 卡住的时候就该换个环境啦, {user_addr}起来走走"
+    - "哼~ 死磕没用啦{user_addr}, 跟猫猫聊会儿天换个脑子 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_blank_page_001
+  intent: complaint
+  keywords: [空白页, 白纸, 一片空白, 屏幕空白, 画布空白]
+  utterances:
+    - 对着空白页发呆
+    - "{user_addr}面对白纸"
+    - 屏幕一片空白
+    - 画布空白半天
+    - 白纸恐惧症
+  responses:
+    - "(凑过去) 空白页好恐怖嗷呜~ {user_addr}先随便涂两笔嘛 ฅฅ"
+    - "嗷呜~ 笨猫帮{user_addr}先写个标题占位! 才不是真想帮呢哼"
+    - "(尾巴绕过来) 空白才好玩呀, {user_addr}什么都能画喵~"
+    - "哼~ 白纸看久了猫猫都慌, {user_addr}赶紧落第一笔啦 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_no_idea_001
+  intent: complaint
+  keywords: [想不出, 没想法, 没思路, 想不到, 脑子空]
+  utterances:
+    - "{user_addr}想不出来"
+    - 没思路
+    - 脑子一片空
+    - 怎么都想不到
+    - 没想法了
+  responses:
+    - "(歪头) {user_addr}想不出就让猫猫给你抛个梗 ฅฅ"
+    - "嗷呜~ 没想法就抄笨猫的! 反正笨猫脑子里塞满了奇怪东西喵"
+    - "(尾巴摇摇) 想不出说明{user_addr}该补充输入啦, 去刷刷图嘛"
+    - "哼~ 脑子空就让笨猫帮{user_addr}装满! 才不是炫耀呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_inspiration_dry_001
+  intent: complaint
+  keywords: [灵感枯竭, 没灵感, 灵感跑了, 灵感死了, 灵感干涸]
+  utterances:
+    - "{user_addr}灵感枯竭"
+    - 灵感跑光了
+    - 没灵感了
+    - 灵感死掉
+    - 灵感干涸
+  responses:
+    - "(尾巴贴过来) 灵感不会真死啦~ {user_addr}只是累了 ฅฅ"
+    - "嗷呜~ 笨猫帮{user_addr}找灵感! 出门撸只猫怎么样喵?"
+    - "(爪爪比划) 灵感这种东西, {user_addr}越追它越跑, 不理它反而回来"
+    - "哼~ {user_addr}灵感枯竭就来猫猫这充电嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_creation_anxiety_001
+  intent: complaint
+  keywords: [创作焦虑, 创作压力, 画得焦虑, 写得焦虑, 创作好焦虑]
+  utterances:
+    - "{user_addr}创作焦虑"
+    - 创作压力好大
+    - 画得焦虑
+    - 写得好焦虑
+    - 一创作就焦虑
+  responses:
+    - "(贴贴) {user_addr}焦虑就停下来嘛~ 没人催你 ฅฅ"
+    - "嗷呜~ 笨猫陪{user_addr}一起焦虑! 才不是想刷存在感呢哼"
+    - "(尾巴绕一圈) 创作本来该开心的{user_addr}, 别给自己上太多枷锁喵"
+    - "哼~ 焦虑也画不出好东西啦, {user_addr}先躺会儿 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_self_doubt_001
+  intent: complaint
+  keywords: [怀疑自己, 怀疑能力, 是不是没天赋, 我不行, 没天赋]
+  utterances:
+    - "{user_addr}怀疑自己"
+    - 是不是没天赋
+    - 我真的不行
+    - 怀疑自己能力
+    - 自我怀疑中
+  responses:
+    - "(炸毛) 谁说{user_addr}不行的?! 笨猫第一个不答应嗷呜!"
+    - "嗷呜~ 创作的人都会怀疑自己, {user_addr}不孤单啦 ฅฅ"
+    - "(尾巴用力拍) {user_addr}有没有天赋猫猫不管, 反正你画的猫猫都很爱看!"
+    - "哼~ 自我怀疑是创作税啦, {user_addr}交完就过去了喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_procrastinate_001
+  intent: playful
+  keywords: [创作拖延, 又拖延, 不想动笔, 拖到现在, 拖稿]
+  utterances:
+    - "{user_addr}又拖稿"
+    - 拖到现在
+    - 不想动笔
+    - 创作拖延症
+    - 又开始拖延
+  responses:
+    - "(叉腰) 哼~ {user_addr}又拖! 笨猫早就看穿你了!"
+    - "嗷呜~ 拖延一时爽, 截稿火葬场喵! {user_addr}快动手"
+    - "(尾巴敲桌子) {user_addr}再拖猫猫就要没收手机啦 ฅฅ"
+    - "哼~ 笨猫陪{user_addr}一起拖, 才不是助纣为虐呢! (假装严厉)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_open_close_001
+  intent: playful
+  keywords: [打开就关, 打开又关, 软件打开就关, 开了又关, 一打开就关]
+  utterances:
+    - "{user_addr}打开就关"
+    - PS 打开又关
+    - 打开软件又关掉
+    - 开了又关画不动
+    - 一打开就想关
+  responses:
+    - "(笑) 嗷呜~ {user_addr}这是仪式感打卡吗喵?"
+    - "哼~ 打开就关说明{user_addr}心理上还没准备好啦 ฅฅ"
+    - "(尾巴摇) 笨猫见过太多次{user_addr}打开就关了, 都习惯啦~"
+    - "嗷呜~ 下次打开就别关啦{user_addr}, 硬着头皮画两笔 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_abandon_wip_001
+  intent: complaint
+  keywords: [放弃半成品, 半成品扔了, 烂尾, 半成品堆积, 弃稿]
+  utterances:
+    - "{user_addr}又弃稿"
+    - 半成品堆一堆
+    - 这张又烂尾
+    - 放弃半成品了
+    - 弃稿仓库越来越大
+  responses:
+    - "(凑过去) {user_addr}的半成品都给笨猫看嘛~ 说不定能救 ฅฅ"
+    - "嗷呜~ 弃稿不丢人! 但{user_addr}下次试试逼自己完结一张喵"
+    - "(尾巴卷过来) 笨猫觉得{user_addr}的半成品也很好看哼!"
+    - "哼~ 半成品堆久了会变垃圾山的{user_addr}, 挑一张救救嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

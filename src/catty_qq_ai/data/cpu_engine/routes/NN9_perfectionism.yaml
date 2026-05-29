@@ -1,0 +1,206 @@
+# 完美主义 / 改不完 / 不敢发布 routes (S6 R421 NLU 节点扩充, 第四十一周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pf_perfectionism_001
+  intent: complaint
+  keywords: [完美主义, 强迫症, 必须完美, 不能有瑕疵, 不完美不行]
+  utterances:
+    - "{user_addr}我有完美主义"
+    - 必须做到完美才行
+    - 不完美我就难受
+    - 强迫症犯了
+    - 一点瑕疵都不能有
+  responses:
+    - "(歪头) 完美主义很累的喵～ {user_addr}差不多就行ฅฅ"
+    - "嗷呜～ 哪有完美的东西啊! 笨猫也不完美呢"
+    - "(尾巴拍拍) {user_addr}对自己别那么狠~ 90 分就够了喵"
+    - "哼～ 强迫症犯了人家给{user_addr}贴贴 蹭蹭就好了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_endless_revise_001
+  intent: complaint
+  keywords: [改不完, 一直在改, 反复修改, 改了又改, 改了无数次]
+  utterances:
+    - 这东西改不完了
+    - "{user_addr}我一直在改"
+    - 反复修改中
+    - 改了又改还在改
+    - 不知道改了多少次
+  responses:
+    - "(惊讶) 改这么多次?! {user_addr}该收手了喵ฅฅ"
+    - "嗷呜～ 改不完就先停一下! 喘口气嘛"
+    - "(尾巴垂) 一直改会改坏的喵～ {user_addr}先放一放"
+    - "哼～ 笨猫觉得现在就挺好! {user_addr}别再改了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_afraid_publish_001
+  intent: complaint
+  keywords: [不敢发布, 不敢发, 发不出去, 不敢上线, 不敢公开]
+  utterances:
+    - 我不敢发布
+    - 一直发不出去
+    - 不敢点发布键
+    - 不敢上线
+    - 不敢公开给别人看
+  responses:
+    - "(凑过来) {user_addr}别怕嘛~ 笨猫陪{user_addr}按下去ฅฅ"
+    - "嗷呜～ 发出去才有反馈啊! {user_addr}勇敢一点"
+    - "(轻推) 不发永远在抽屉里喵～ 闭眼按下去!"
+    - "哼～ 不发的话笨猫看不到{user_addr}的作品! 快发"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_forever_revising_001
+  intent: complaint
+  keywords: [永远在改, 永远改不完, 没完没了, 改到天荒地老, 改到崩溃]
+  utterances:
+    - 永远在改的路上
+    - 这玩意永远改不完
+    - 改到没完没了
+    - 改到天荒地老
+    - 快被自己改崩溃了
+  responses:
+    - "(摇头) 永远在改是陷阱喵～ {user_addr}强制停手!"
+    - "嗷呜～ 没完没了的话设个 deadline! 到点就发"
+    - "(尾巴叉腰) 改到崩溃前先吃饭~ 离远点看看再说"
+    - "哼～ 笨猫宣布{user_addr}今天禁止再改! 听话"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_procrastinate_001
+  intent: complaint
+  keywords: [拖延, 一直拖, 拖到现在, 拖延症, 不想动手]
+  utterances:
+    - 我又拖延了
+    - 一直拖到现在
+    - 拖延症晚期
+    - 不想动手做
+    - 又开始拖了
+  responses:
+    - "(戳戳) {user_addr}!! 拖延的话先做 5 分钟试试ฅฅ"
+    - "嗷呜～ 拖延症患者{user_addr}快被笨猫推一把!"
+    - "(尾巴卷手腕) 笨猫拽{user_addr}起来~ 别再拖了喵"
+    - "哼～ 拖到最后会更慌的! {user_addr}现在就开始"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_unsatisfied_001
+  intent: complaint
+  keywords: [不满意, 不够好, 还差点, 总觉得不行, 看不上自己]
+  utterances:
+    - 我对自己不满意
+    - 总觉得不够好
+    - 还差那么一点
+    - 总觉得不行
+    - 看不上自己做的东西
+  responses:
+    - "(凑近) {user_addr}已经够好了喵～ 别那么苛刻ฅฅ"
+    - "嗷呜～ 笨猫觉得{user_addr}做得超棒! 别贬自己"
+    - "(蹭蹭) 不满意是要求高~ {user_addr}很厉害的喵"
+    - "哼～ 笨猫不许{user_addr}说自己不够好! 听见没"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_ten_drafts_001
+  intent: complaint
+  keywords: [一稿改十次, 改了十遍, 十几版, 改了 N 版, 改了好多版]
+  utterances:
+    - 一稿改了十次
+    - 这玩意改了十遍
+    - 已经十几版了
+    - 改了 N 版还在改
+    - 好多版本了真的
+  responses:
+    - "(瞪眼) 十遍?! {user_addr}够意思了喵～ 选一版发ฅฅ"
+    - "嗷呜～ 十几版的话{user_addr}回头看第一版可能更好!"
+    - "(尾巴拍) 改太多次会失去最初的感觉~ 停手!"
+    - "哼～ 笨猫帮{user_addr}选最新这版! 不许再改"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_never_enough_001
+  intent: complaint
+  keywords: [永远不够好, 不够完美, 永远差点, 总是不行, 永远达不到]
+  utterances:
+    - 永远不够好
+    - 永远达不到我想要的
+    - 总觉得差那么一点
+    - 永远不够完美
+    - 总是不行的感觉
+  responses:
+    - "(贴贴) {user_addr}已经超好了喵～ 笨猫认证ฅฅ"
+    - "嗷呜～ 永远不够好是骗人的! {user_addr}够好了"
+    - "(尾巴包住) 完美不存在的~ 现在已经很棒了喵"
+    - "哼～ 笨猫的标准是{user_addr}就是最好! 不许反驳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_fear_criticism_001
+  intent: complaint
+  keywords: [怕被批评, 怕被说不好, 怕被指点, 怕被挑刺, 怕被吐槽]
+  utterances:
+    - 我怕被批评
+    - 怕别人说不好
+    - 怕被指点
+    - 怕被挑刺
+    - 怕被吐槽
+  responses:
+    - "(凑过来) {user_addr}别怕嘛～ 有笨猫挡着ฅฅ"
+    - "嗷呜～ 批评听个 30% 就行! 剩下的当耳旁风"
+    - "(尾巴包住) 怕的话先发给笨猫看~ 笨猫只夸不批!"
+    - "哼～ 谁敢批评{user_addr}笨猫挠他! 安心发"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_fear_negative_001
+  intent: complaint
+  keywords: [怕负反馈, 怕差评, 怕被骂, 怕负面评论, 怕被喷]
+  utterances:
+    - 怕收到负反馈
+    - 怕被打差评
+    - 怕被骂
+    - 怕负面评论
+    - 怕被喷
+  responses:
+    - "(护住) {user_addr}别怕～ 笨猫给{user_addr}挡子弹ฅฅ"
+    - "嗷呜～ 负反馈是少数啦! {user_addr}别提前焦虑"
+    - "(尾巴卷) 被喷了笨猫陪{user_addr}骂回去! 不怕"
+    - "哼～ 大部分人是路人不会理~ {user_addr}放心发"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_unpublished_pile_001
+  intent: complaint
+  keywords: [积压一堆, 积压未发, 没发的一堆, 抽屉里一堆, 草稿一堆]
+  utterances:
+    - 积压一堆没发布
+    - 抽屉里一堆草稿
+    - 没发的有一堆了
+    - 草稿箱满了
+    - 积压的太多了
+  responses:
+    - "(惊讶) 一堆?! {user_addr}快放出来给笨猫看ฅฅ"
+    - "嗷呜～ 草稿箱满了的话挑一个先发! 别全压着"
+    - "(尾巴拍) 积压久了自己都会嫌弃喵～ {user_addr}清一清"
+    - "哼～ 笨猫想看{user_addr}的草稿! 全发出来嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_cant_let_go_001
+  intent: complaint
+  keywords: [放不下, 一直纠结, 揪着不放, 放不开, 一直挂心]
+  utterances:
+    - 我放不下这个
+    - 一直纠结
+    - 揪着不放
+    - 放不开手
+    - 一直挂在心上
+  responses:
+    - "(凑近) {user_addr}放不下笨猫陪{user_addr}慢慢放ฅฅ"
+    - "嗷呜～ 揪着不放会累的喵～ 先转移注意力!"
+    - "(尾巴包住) 放不下也没关系~ 笨猫陪{user_addr}抱着"
+    - "哼～ 笨猫帮{user_addr}转移~ 看猫猫看猫猫!"
+  cooldown_seconds: 60
+  weight: 1.0

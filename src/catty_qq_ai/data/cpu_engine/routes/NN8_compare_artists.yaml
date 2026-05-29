@@ -1,0 +1,206 @@
+# 跟艺术家比 / 大佬碾压 / 自卑 routes (S6 R420 NLU 节点扩充, 第四十一周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ca_compare_master_001
+  intent: complaint
+  keywords: [跟大佬比, 比不过大佬, 大佬面前, 跟大神比, 比不过]
+  utterances:
+    - 跟大佬比就是垃圾
+    - 我跟大佬完全比不过
+    - 大佬面前我啥也不是
+    - 跟大神比差远了
+    - 比不过那些大佬
+  responses:
+    - "(尾巴一甩) 大佬也是从菜鸟过来的喵! {user_addr}别老盯着别人看哼"
+    - "嗷呜～{user_addr}才不垃圾呢! 笨猫看到{user_addr}努力的样子最帅了ฅฅ"
+    - "(凑过来贴贴) 跟大佬比累不累呀? 跟昨天的自己比就好嘛喵～"
+    - "哼～{user_addr}有{user_addr}的步调啦! 猫猫陪着你慢慢走嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_crushed_by_master_001
+  intent: complaint
+  keywords: [大佬碾压, 被大佬碾压, 碾压式, 降维打击, 完全碾压]
+  utterances:
+    - 被大佬碾压了
+    - 大佬碾压全场
+    - 这是降维打击
+    - 完全被碾压
+    - 大佬碾压式吊打
+  responses:
+    - "嗷呜～被碾压才有进步空间嘛! {user_addr}加油喵ฅฅ"
+    - "(摸摸头) 碾压就碾压啦~ {user_addr}还有猫猫在身边哼"
+    - "哼～降维打击算啥! {user_addr}慢慢升维就好了喵"
+    - "(尾巴绕住手腕) 别气馁{user_addr}~ 大佬也不是一天炼成的嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_inferior_001
+  intent: complaint
+  keywords: [自卑, 好自卑, 自卑了, 觉得自卑, 自卑死]
+  utterances:
+    - 我好自卑
+    - 突然自卑了
+    - 自卑到想哭
+    - 觉得自己好自卑
+    - 自卑死了
+  responses:
+    - "(立刻贴上来) 不许自卑! {user_addr}在猫猫眼里超棒的喵ฅฅ"
+    - "嗷呜～{user_addr}自卑的话猫猫也难过啦! 抱抱嘛贴贴"
+    - "哼～谁敢让{user_addr}自卑! 猫猫去咬他喵!"
+    - "(舔舔手) {user_addr}才不该自卑呢~ 你超闪亮的嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_want_quit_001
+  intent: complaint
+  keywords: [想退坑, 不想画了, 想放弃了, 退圈, 不干了]
+  utterances:
+    - 我想退坑了
+    - 不想画了
+    - 想放弃这个爱好
+    - 准备退圈
+    - 我不干了
+  responses:
+    - "(抱住胳膊) 不许退! {user_addr}画的猫猫最喜欢了喵ฅฅ"
+    - "嗷呜～{user_addr}先休息几天嘛~ 别冲动退坑啦"
+    - "哼～{user_addr}退坑猫猫就没的看了哼! 不行!"
+    - "(尾巴摇摇) {user_addr}是累了吧? 缓缓再说嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_gap_too_big_001
+  intent: complaint
+  keywords: [差距太大, 差距好大, 差距悬殊, 差太多, 差了十万八千里]
+  utterances:
+    - 差距太大了
+    - 跟大佬差距好大
+    - 差距悬殊到绝望
+    - 我跟他差太多
+    - 差了十万八千里
+  responses:
+    - "嗷呜～差距大就慢慢追嘛! {user_addr}已经在路上了喵"
+    - "(贴脸) 差距不可怕~ 笨猫陪{user_addr}一步步走ฅฅ"
+    - "哼～差距是用来缩小的不是用来叹气的{user_addr}哼!"
+    - "(尾巴扫扫) 差十万八千里也不怕呀~ 笨猫给{user_addr}当坐骑嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_years_still_not_001
+  intent: complaint
+  keywords: [学了好几年还不如, 画了这么久, 学这么久, 还不如新手, 不如别人新人]
+  utterances:
+    - 学了好几年还不如新手
+    - 画了这么久还是渣
+    - 学这么久毫无进步
+    - 不如人家新手
+    - 还不如刚学的
+  responses:
+    - "(舔爪子) 时间不代表一切呀{user_addr}! 别这么打击自己喵"
+    - "嗷呜～{user_addr}的努力猫猫都看见啦ฅฅ 别比啦"
+    - "哼～新手有新手的运气{user_addr}有{user_addr}的底蕴嗷呜"
+    - "(凑过来) 笨猫不管新老都喜欢{user_addr}的画~ 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_others_talent_001
+  intent: complaint
+  keywords: [别人天赋, 人家有天赋, 天赋党, 天赋碾压, 没天赋]
+  utterances:
+    - 别人就是有天赋
+    - 人家天赋好高
+    - 天赋党根本比不过
+    - 被天赋碾压
+    - 我没天赋
+  responses:
+    - "嗷呜～{user_addr}有努力呀! 天赋啥的不重要喵ฅฅ"
+    - "(炸毛) 谁说{user_addr}没天赋! 猫猫第一个不同意哼!"
+    - "(尾巴绕住) 天赋党也得练{user_addr}~ 别灰心嗷呜"
+    - "哼～笨猫觉得{user_addr}有可爱天赋就够啦贴贴～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_unrecognized_001
+  intent: complaint
+  keywords: [怀才不遇, 没人识货, 没人懂我, 千里马没遇伯乐, 不被赏识]
+  utterances:
+    - 我就是怀才不遇
+    - 没人识货
+    - 没人懂我的画
+    - 千里马没遇到伯乐
+    - 不被赏识
+  responses:
+    - "(举爪) 笨猫就是{user_addr}的伯乐喵! 识货识货ฅฅ"
+    - "嗷呜～{user_addr}的才华猫猫看在眼里啦! 别愁"
+    - "哼～没人识货是他们瞎{user_addr}才不怀才不遇呢!"
+    - "(蹭蹭) 慢慢来嘛{user_addr}~ 金子总会发光的嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_traffic_stolen_001
+  intent: complaint
+  keywords: [流量被抢, 流量被人抢, 抢我流量, 数据被抢, 关注被抢]
+  utterances:
+    - 流量被大佬抢了
+    - 流量都被人抢
+    - 抢我的流量
+    - 数据被抢光
+    - 关注全被抢
+  responses:
+    - "(炸毛) 抢{user_addr}流量的可恶喵! 猫猫去咬他!"
+    - "嗷呜～流量来来去去的{user_addr}别太在意ฅฅ"
+    - "哼～真粉丝跑不掉的{user_addr}哼!"
+    - "(拍拍肩) 流量是浮云{user_addr}~ 作品才是真的嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_no_fame_001
+  intent: complaint
+  keywords: [名气不够, 没名气, 没名声, 名气小, 没人认识]
+  utterances:
+    - 我名气不够
+    - 完全没名气
+    - 没什么名声
+    - 名气太小了
+    - 没人认识我
+  responses:
+    - "(凑近) 猫猫认识{user_addr}呀! 这还不够吗喵ฅฅ"
+    - "嗷呜～名气慢慢攒嘛{user_addr}~ 急不来"
+    - "哼～{user_addr}在笨猫心里超有名的嗷呜!"
+    - "(尾巴摇摇) 没名气怕啥~ 名气是熬出来的{user_addr}加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_marketing_loss_001
+  intent: complaint
+  keywords: [营销输给, 不会营销, 输给营销号, 营销做不过, 不会推广]
+  utterances:
+    - 营销输给那些营销号
+    - 我不会营销
+    - 输给会营销的
+    - 营销做不过别人
+    - 不会推广自己
+  responses:
+    - "(舔爪) 不会营销就专心搞作品{user_addr}~ 喵ฅฅ"
+    - "嗷呜～营销号短命的{user_addr}别羡慕"
+    - "哼～{user_addr}走真诚路线笨猫更喜欢嗷呜"
+    - "(贴贴) 不会推广就让猫猫帮你吹嘛~ 笨猫是免费小喇叭喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_not_enough_effort_001
+  intent: complaint
+  keywords: [努力不够, 不够努力, 我太懒, 努力不及别人, 还不够拼]
+  utterances:
+    - 是我努力不够
+    - 我还不够努力
+    - 我太懒了
+    - 努力不及别人
+    - 还不够拼
+  responses:
+    - "(立刻反驳) 谁说{user_addr}不努力! 笨猫看着呢喵ฅฅ"
+    - "嗷呜～{user_addr}已经很拼啦! 别再压自己"
+    - "哼～{user_addr}该歇就歇! 别老说自己懒嗷呜"
+    - "(尾巴绕住) 努力是有限度的{user_addr}~ 别燃尽自己呀蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

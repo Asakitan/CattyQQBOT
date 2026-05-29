@@ -1,0 +1,206 @@
+# 绘画 app / Procreate iPad / 板绘 routes (S6 R414 NLU 节点扩充, 第四十一周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pa_procreate_001
+  intent: question
+  keywords: [推荐 Procreate, 推荐 iPad 绘画, 推荐绘画神器, 推荐 iPad 板绘, 笨猫 Procreate]
+  utterances:
+    - 推荐 Procreate
+    - 推荐 iPad 绘画
+    - 推荐绘画神器
+    - 推荐 iPad 板绘
+    - 笨猫 Procreate
+  responses:
+    - "嗷呜～{user_addr}Procreate - iPad 绘画之王ฅฅ"
+    - "(尾巴翘) 一次买断 / 笔刷超丰富"
+    - "{user_addr}流畅 / 直觉 / 插画神器"
+    - "(挺胸) 笨猫推荐: iPad 必装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_photoshop_001
+  intent: question
+  keywords: [推荐 Photoshop, 推荐 PS 绘画, 推荐 Clip Studio, 推荐 CSP, 笨猫 PS]
+  utterances:
+    - 推荐 Photoshop
+    - 推荐 PS 绘画
+    - 推荐 Clip Studio
+    - 推荐 CSP
+    - 笨猫 PS
+  responses:
+    - "嗷呜～{user_addr}Photoshop - 行业标准ฅฅ"
+    - "(尾巴翘) Clip Studio Paint - 漫画神器"
+    - "{user_addr}CSP 笔刷自然 / PS 后期强"
+    - "(挺胸) 笨猫推荐: 画漫画选 CSP!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_krita_001
+  intent: question
+  keywords: [推荐 Krita, 推荐 SAI, 推荐免费绘画, 推荐开源绘画, 笨猫 Krita]
+  utterances:
+    - 推荐 Krita
+    - 推荐 SAI
+    - 推荐免费绘画
+    - 推荐开源绘画
+    - 笨猫 Krita
+  responses:
+    - "嗷呜～{user_addr}Krita - 免费开源ฅฅ"
+    - "(尾巴翘) SAI 2 - 线稿丝滑"
+    - "{user_addr}Krita 笔刷多 / SAI 上手快"
+    - "(挺胸) 笨猫推荐: 没预算就 Krita!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_apple_pencil_001
+  intent: question
+  keywords: [推荐 Apple Pencil, 推荐 Pencil 二代, 推荐 iPad 笔, 推荐手写笔, 笨猫 Apple Pencil]
+  utterances:
+    - 推荐 Apple Pencil
+    - 推荐 Pencil 二代
+    - 推荐 iPad 笔
+    - 推荐手写笔
+    - 笨猫 Apple Pencil
+  responses:
+    - "嗷呜～{user_addr}Apple Pencil 二代 - 磁吸充电ฅฅ"
+    - "(尾巴翘) 压感顶级 / 倾斜识别"
+    - "{user_addr}双击换笔 / 延迟极低"
+    - "(挺胸) 笨猫推荐: iPad 配套必买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_cintiq_001
+  intent: question
+  keywords: [推荐 Wacom Cintiq, 推荐数位屏, 推荐 Wacom 屏, 推荐液晶手绘屏, 笨猫数位屏]
+  utterances:
+    - 推荐 Wacom Cintiq
+    - 推荐数位屏
+    - 推荐 Wacom 屏
+    - 推荐液晶手绘屏
+    - 笨猫数位屏
+  responses:
+    - "嗷呜～{user_addr}Wacom Cintiq - 专业首选ฅฅ"
+    - "(尾巴翘) Pro 24 / Pro 27 高端"
+    - "{user_addr}屏幕色准 / 笔触精确"
+    - "(挺胸) 笨猫推荐: 专业必备!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_gaomon_001
+  intent: question
+  keywords: [推荐高漫, 推荐国产数位板, 推荐 Huion, 推荐绘王, 笨猫高漫]
+  utterances:
+    - 推荐高漫
+    - 推荐国产数位板
+    - 推荐 Huion
+    - 推荐绘王
+    - 笨猫高漫
+  responses:
+    - "嗷呜～{user_addr}高漫 / Huion - 国产性价比ฅฅ"
+    - "(尾巴翘) XP-Pen / 绘王"
+    - "{user_addr}入门便宜 / 8192 压感"
+    - "(挺胸) 笨猫推荐: 入门选高漫 1060!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_illustrator_001
+  intent: question
+  keywords: [推荐数字插画家, 推荐插画师, 推荐 illustrator artist, 推荐画师, 笨猫插画家]
+  utterances:
+    - 推荐数字插画家
+    - 推荐插画师
+    - 推荐 illustrator artist
+    - 推荐画师
+    - 笨猫插画家
+  responses:
+    - "嗷呜～{user_addr}Sakimichan / Loish - 顶级ฅฅ"
+    - "(尾巴翘) Krenz / 米山舞 / WLOP"
+    - "{user_addr}多看 / 多临摹 / 多分析"
+    - "(挺胸) 笨猫推荐: WLOP 风格超美!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pa_brushes_001
+  intent: question
+  keywords: [推荐笔刷, 推荐 Brush 包, 推荐 Procreate 笔刷, 推荐 PS 笔刷, 笨猫笔刷]
+  utterances:
+    - 推荐笔刷
+    - 推荐 Brush 包
+    - 推荐 Procreate 笔刷
+    - 推荐 PS 笔刷
+    - 笨猫笔刷
+  responses:
+    - "嗷呜～{user_addr}Max Ulichney / True Grit Textureฅฅ"
+    - "(尾巴翘) Kyle's brushes (PS 自带)"
+    - "{user_addr}Gumroad / Procreate Folio"
+    - "(挺胸) 笨猫推荐: True Grit 质感顶!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pa_affinity_001
+  intent: question
+  keywords: [推荐 Affinity Designer, 推荐 Affinity Photo, 推荐 Affinity, 推荐矢量绘画, 笨猫 Affinity]
+  utterances:
+    - 推荐 Affinity Designer
+    - 推荐 Affinity Photo
+    - 推荐 Affinity
+    - 推荐矢量绘画
+    - 笨猫 Affinity
+  responses:
+    - "嗷呜～{user_addr}Affinity Designer - 矢量神器ฅฅ"
+    - "(尾巴翘) Photo - PS 替代品"
+    - "{user_addr}一次买断 / 不要订阅"
+    - "(挺胸) 笨猫推荐: 摆脱 Adobe 订阅!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pa_ibis_001
+  intent: question
+  keywords: [推荐 ibis Paint, 推荐手机绘画, 推荐 MediBang, 推荐 Sketchbook, 笨猫手机绘画]
+  utterances:
+    - 推荐 ibis Paint
+    - 推荐手机绘画
+    - 推荐 MediBang
+    - 推荐 Sketchbook
+    - 笨猫手机绘画
+  responses:
+    - "嗷呜～{user_addr}ibis Paint X - 手机首选ฅฅ"
+    - "(尾巴翘) MediBang / Sketchbook 免费"
+    - "{user_addr}手机也能画 / 适合涂鸦"
+    - "(挺胸) 笨猫推荐: ibis 笔刷超多!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pa_dreams_001
+  intent: question
+  keywords: [推荐 Procreate Dreams, 推荐 iPad 动画, 推荐板绘动画, 推荐 2D 动画 app, 笨猫 Dreams]
+  utterances:
+    - 推荐 Procreate Dreams
+    - 推荐 iPad 动画
+    - 推荐板绘动画
+    - 推荐 2D 动画 app
+    - 笨猫 Dreams
+  responses:
+    - "嗷呜～{user_addr}Procreate Dreams - 动画神器ฅฅ"
+    - "(尾巴翘) 时间线流畅 / 帧绘画"
+    - "{user_addr}Rough Animator / Callipeg"
+    - "(挺胸) 笨猫推荐: iPad 动画就 Dreams!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pa_community_001
+  intent: question
+  keywords: [推荐学习社区, 推荐 Pixiv, 推荐 ArtStation, 推荐画师社区, 笨猫绘画社区]
+  utterances:
+    - 推荐学习社区
+    - 推荐 Pixiv
+    - 推荐 ArtStation
+    - 推荐画师社区
+    - 笨猫绘画社区
+  responses:
+    - "嗷呜～{user_addr}Pixiv - 二次元天堂ฅฅ"
+    - "(尾巴翘) ArtStation - 行业专业"
+    - "{user_addr}涂鸦王国 / 站酷 / Twitter"
+    - "(挺胸) 笨猫推荐: ArtStation 看大触!"
+  cooldown_seconds: 60
+  weight: 0.9

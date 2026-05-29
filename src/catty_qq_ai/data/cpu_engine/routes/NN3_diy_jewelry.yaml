@@ -1,0 +1,206 @@
+# DIY 首饰 / 串珠 / 银饰 routes (S6 R415 NLU 节点扩充, 第四十一周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: dj_intro_001
+  intent: question
+  keywords: [推荐DIY首饰入门, 推荐手作首饰, 推荐新手DIY, 推荐做首饰, 笨猫DIY首饰]
+  utterances:
+    - 推荐DIY首饰入门
+    - 推荐手作首饰
+    - 推荐新手DIY
+    - 推荐做首饰
+    - 笨猫DIY首饰
+  responses:
+    - "嗷呜～{user_addr}从串珠手链开始 - 最简单ฅฅ"
+    - "(尾巴翘) B站搜 DIY 首饰教程 / 小红书"
+    - "{user_addr}先买入门套装 - 材料工具齐全"
+    - "(挺胸) 笨猫推荐: 串珠手链 → 耳饰 → 戒指!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_beads_001
+  intent: question
+  keywords: [推荐串珠材料, 推荐玻璃珠, 推荐水晶珠, 推荐天然石, 笨猫串珠]
+  utterances:
+    - 推荐串珠材料
+    - 推荐玻璃珠
+    - 推荐水晶珠
+    - 推荐天然石
+    - 笨猫串珠
+  responses:
+    - "嗷呜～{user_addr}捷克珠 / Miyuki 米珠 - 日本顶级ฅฅ"
+    - "(尾巴翘) 天然石: 月光石 / 紫水晶 / 草莓晶"
+    - "{user_addr}施华洛世奇水晶 - 闪闪发光"
+    - "(挺胸) 笨猫推荐: Miyuki Delica 米珠最精致!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_silver_001
+  intent: question
+  keywords: [推荐银饰制作, 推荐银粘土, 推荐PMC, 推荐做银戒指, 笨猫银饰]
+  utterances:
+    - 推荐银饰制作
+    - 推荐银粘土
+    - 推荐PMC
+    - 推荐做银戒指
+    - 笨猫银饰
+  responses:
+    - "嗷呜～{user_addr}银粘土 PMC / Art Clay - 烧制成纯银ฅฅ"
+    - "(尾巴翘) 999 纯银 / 925 银线 - 锻造"
+    - "{user_addr}入门: 银粘土戒指 → 银线缠绕"
+    - "(挺胸) 笨猫推荐: Art Clay Silver 650 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_resin_001
+  intent: question
+  keywords: [推荐树脂滴胶, 推荐Resin, 推荐UV胶, 推荐滴胶首饰, 笨猫滴胶]
+  utterances:
+    - 推荐树脂滴胶
+    - 推荐Resin
+    - 推荐UV胶
+    - 推荐滴胶首饰
+    - 笨猫滴胶
+  responses:
+    - "嗷呜～{user_addr}UV 胶 - 紫外线灯固化快ฅฅ"
+    - "(尾巴翘) AB 胶 - 大件用 / 干花/亮片填充"
+    - "{user_addr}注意通风! 胶水有刺激性"
+    - "(挺胸) 笨猫推荐: 清原 UV 胶 + 36W 灯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_crochet_001
+  intent: question
+  keywords: [推荐钩针耳饰, 推荐钩针首饰, 推荐链条耳环, 推荐耳坠, 笨猫钩针耳饰]
+  utterances:
+    - 推荐钩针耳饰
+    - 推荐钩针首饰
+    - 推荐链条耳环
+    - 推荐耳坠
+    - 笨猫钩针耳饰
+  responses:
+    - "嗷呜～{user_addr}蕾丝线钩耳环 - 复古少女风ฅฅ"
+    - "(尾巴翘) 链条 + 配件 = 长耳坠"
+    - "{user_addr}925 银耳钩 - 不过敏"
+    - "(挺胸) 笨猫推荐: 钩针小花朵耳环最甜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_wire_001
+  intent: question
+  keywords: [推荐金属丝, 推荐wire wrap, 推荐绕线, 推荐缠丝, 笨猫绕线]
+  utterances:
+    - 推荐金属丝
+    - 推荐wire wrap
+    - 推荐绕线
+    - 推荐缠丝
+    - 笨猫绕线
+  responses:
+    - "嗷呜～{user_addr}wire wrap - 绕线包石头ฅฅ"
+    - "(尾巴翘) 铜线 / 银包铜 / 925 银线"
+    - "{user_addr}YouTube 搜 wire wrapping tutorial"
+    - "(挺胸) 笨猫推荐: 0.6mm 铜线练手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_design_001
+  intent: question
+  keywords: [推荐设计图绘制, 推荐首饰设计, 推荐画设计稿, 推荐草图, 笨猫首饰设计]
+  utterances:
+    - 推荐设计图绘制
+    - 推荐首饰设计
+    - 推荐画设计稿
+    - 推荐草图
+    - 笨猫首饰设计
+  responses:
+    - "嗷呜～{user_addr}Procreate / iPad 画草图ฅฅ"
+    - "(尾巴翘) Rhino / Matrix - 专业珠宝 3D"
+    - "{user_addr}手绘本 + 彩铅 - 灵感本"
+    - "(挺胸) 笨猫推荐: 先画 10 张草图选 1!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_tools_001
+  intent: question
+  keywords: [推荐工具箱, 推荐钳子, 推荐首饰工具, 推荐DIY工具, 笨猫首饰工具]
+  utterances:
+    - 推荐工具箱
+    - 推荐钳子
+    - 推荐首饰工具
+    - 推荐DIY工具
+    - 笨猫首饰工具
+  responses:
+    - "嗷呜～{user_addr}三件套: 圆嘴钳 / 平嘴钳 / 剪钳ฅฅ"
+    - "(尾巴翘) 镊子 / 量尺 / 戒指棒"
+    - "{user_addr}Beadalon / 国产维库 性价比"
+    - "(挺胸) 笨猫推荐: 三件套 50 块就够入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_polish_001
+  intent: question
+  keywords: [推荐银饰打磨, 推荐抛光, 推荐银饰处理, 推荐砂纸, 笨猫银饰抛光]
+  utterances:
+    - 推荐银饰打磨
+    - 推荐抛光
+    - 推荐银饰处理
+    - 推荐砂纸
+    - 笨猫银饰抛光
+  responses:
+    - "嗷呜～{user_addr}砂纸 400→800→1500→2000 目ฅฅ"
+    - "(尾巴翘) 抛光布 + 抛光膏 - 镜面光"
+    - "{user_addr}电动抛光机 / 玛瑙刀压光"
+    - "(挺胸) 笨猫推荐: 砂纸打磨 + 抛光布收尾!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_patina_001
+  intent: question
+  keywords: [推荐包浆, 推荐古银做旧, 推荐硫化, 推荐银饰氧化, 笨猫古银]
+  utterances:
+    - 推荐包浆
+    - 推荐古银做旧
+    - 推荐硫化
+    - 推荐银饰氧化
+    - 笨猫古银
+  responses:
+    - "嗷呜～{user_addr}硫化钾溶液 - 快速做旧ฅฅ"
+    - "(尾巴翘) 鸡蛋黄熏 - 天然法子"
+    - "{user_addr}做旧后再抛光高点 - 凹凸感"
+    - "(挺胸) 笨猫推荐: 硫化钾 + 抛光 = 古银!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_sell_001
+  intent: question
+  keywords: [推荐销售平台, 推荐Etsy, 推荐闲鱼卖首饰, 推荐手作销售, 笨猫卖首饰]
+  utterances:
+    - 推荐销售平台
+    - 推荐Etsy
+    - 推荐闲鱼卖首饰
+    - 推荐手作销售
+    - 笨猫卖首饰
+  responses:
+    - "嗷呜～{user_addr}Etsy - 海外手作平台ฅฅ"
+    - "(尾巴翘) 国内: 小红书 / 闲鱼 / 微店"
+    - "{user_addr}定价 = 材料 × 3 + 工时"
+    - "(挺胸) 笨猫推荐: 小红书引流 + 微信成交!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dj_photo_001
+  intent: question
+  keywords: [推荐首饰摄影, 推荐上链, 推荐拍首饰, 推荐产品图, 笨猫首饰摄影]
+  utterances:
+    - 推荐首饰摄影
+    - 推荐上链
+    - 推荐拍首饰
+    - 推荐产品图
+    - 笨猫首饰摄影
+  responses:
+    - "嗷呜～{user_addr}小型摄影棚 + LED 灯ฅฅ"
+    - "(尾巴翘) 微距镜头 / 手机微距夹"
+    - "{user_addr}背景: 亚麻布 / 大理石 / 干花"
+    - "(挺胸) 笨猫推荐: 自然光 + 白背景最干净!"
+  cooldown_seconds: 60
+  weight: 1.0
