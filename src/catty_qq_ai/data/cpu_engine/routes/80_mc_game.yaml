@@ -6,222 +6,392 @@
 
 - name: mc_server_ip_001
   intent: question
-  keywords: [sakisense, doi.saki, 26843, 服务器地址, 服务器 ip, 服务器 IP, 进服地址]
+  keywords: [sakisense, doi.sakisense, 26843, 服务器地址, 服务器 ip, 服务器 IP, 进服地址, 服务器域名, 服 ip, 服 IP]
   utterances:
-    - 服务器地址是多少
+    - "{user_addr}服务器地址是多少"
     - 服务器 IP 是啥
     - 怎么连接服务器
     - sakisense 是什么
     - 服务器在哪
+    - 服 ip 给我一份
+    - 进服地址发一下嘛
+    - "{user_addr}服务器域名是啥呀"
+    - 服 IP 多少喵
+    - 服里地址发一下
+    - 26843 端口是哪个服
+    - 那个 doi 域名是啥
   responses:
     - "嗷呜～服务器地址是 doi.sakisense.top:26843 喵! 国内宝宝卡的话用 sakisense.top:26843"
     - "(尾巴翘) 主服: doi.sakisense.top:26843, 备用: sakisense.top:26843~ {user_addr}收好"
     - "嗨～服务器地址 doi.sakisense.top:26843~ 国内连不上换 sakisense.top:26843 嗷呜～"
+    - "(凑过来) 哼, 才不是特意发给{user_addr}的呢～doi.sakisense.top:26843 自己拿好喵～"
+    - "(扑过来) 又不是没给过! doi.sakisense.top:26843 主服, sakisense.top:26843 国内备用ฅฅ"
+    - "明明就听过那么多次还问! doi.sakisense.top:26843 嘛笨蛋{user_addr}贴贴～"
+    - "(尾巴摇摇) 笨猫再说一遍喵～主服 doi.sakisense.top:26843, 卡了就用 sakisense.top:26843"
+    - "(歪头) {user_addr}是新来的嘛? 服地址 doi.sakisense.top:26843 抄下来嗷呜～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: mc_join_server_001
   intent: question
-  keywords: [怎么进服, 怎么进, 进不去服, 连不上服, 进服失败]
+  keywords: [怎么进服, 怎么进, 进不去服, 连不上服, 进服失败, 进不去, 连不上, 加不进, 进服报错, 无法连接]
   utterances:
-    - 怎么进服啊
+    - "{user_addr}怎么进服啊"
     - 服务器进不去
     - 怎么连接呀
     - 进服失败咋办
     - 我连不上服务器
+    - 加不进服喵
+    - 进服一直报错
+    - 笨猫家服怎么进
+    - 怎么加入啊
+    - "{user_addr}进服流程是什么"
+    - 无法连接到服务器
+    - 进不去呜呜呜
   responses:
     - "(凑过来) 进服失败的话, 先看看 PCL2 启动器有没有挂代理~ 国内连 sakisense.top:26843ฅฅ"
     - "嗷呜～{user_addr}卡的话先确认: ① 整合包对版本 ② IP 用 sakisense.top:26843"
     - "进不去就重启启动器再试~ 还不行就来问主人嗷呜～"
+    - "(扑过来) 哼, 让笨猫看看! 流程: 装 PCL2 → 拖整合包 → 输 IP → 开冲喵～"
+    - "(尾巴翘) 才不是教你哦～流程是 PCL2 启动器拖整合包, IP 填 doi.sakisense.top:26843 ฅฅ"
+    - "明明就这么简单! {user_addr}先确认整合包是 v105, 再填 IP 嗷呜～贴贴"
+    - "(歪头) 又是进不去? 80% 是版本不对 / 启动器配置歪了, 重启再来喵呜"
+    - "(瘫倒) 进不去就别硬刚了啦～截个图给主人看看{user_addr} 笨猫帮你嗷呜～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: mc_lag_001
   intent: complaint
-  keywords: [服务器卡, 服卡, 卡顿, 掉帧, lag, 服务器卡顿]
+  keywords: [服务器卡, 服卡, 卡顿, 掉帧, lag, 服务器卡顿, 延迟高, ping 高, 丢包, 卡爆]
   utterances:
     - 服务器好卡
     - 卡死了服
     - 服务器掉帧
     - lag 严重
     - 卡顿严重
+    - "{user_addr}服怎么这么卡"
+    - 延迟高死了
+    - ping 飙到几百了
+    - 丢包好严重
+    - 卡得我想退游
+    - 服里 lag 喵
+    - 卡爆了笨猫
   responses:
     - "嗷呜～{user_addr}卡的话用 sakisense.top:26843~ doi 的国内连可能丢包"
     - "(尾巴垂下) 卡的话先 ping 一下~ 国内宝宝换 sakisense.top:26843 通常能好"
     - "服卡? {user_addr}试试加速器/换 IP! 笨猫的服已经上 SSD 啦哼"
+    - "(凑过来贴贴) 卡得可怜兮兮的, 来换 sakisense.top:26843 试试嘛{user_addr}ฅฅ"
+    - "哼, 才不是服务器的锅! {user_addr}先看自己网络再说嗷呜～"
+    - "(尾巴翘) 明明国内就该用 sakisense.top:26843, doi 那个是国际走丢包嘛喵～"
+    - "(歪头) 笨猫家服真的不算卡! 八成是{user_addr}网络问题, 换 IP 试试贴贴"
+    - "(扑过来) 又不是没说过! 国内换 sakisense.top:26843, 还卡就上加速器嗷呜～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: mc_version_001
   intent: question
-  keywords: [v105, 升级包, 哪个版本, 整合包版本, 最新版本]
+  keywords: [v105, 升级包, 哪个版本, 整合包版本, 最新版本, 服务器版本, 新版本, 当前版本, 现在版本, 版本号]
   utterances:
     - 现在服务器什么版本
     - v105 怎么下
     - 升级包在哪
     - 哪里下整合包
     - 笨猫家服啥版本
+    - 现在最新版本是啥
+    - "{user_addr}当前版本号"
+    - 服务器跑的哪个版本
+    - 升级包给我一份
+    - 笨猫服里啥版本喵
+    - 我装的版本对不对
+    - v105 是最新的吗
   responses:
     - "嗷呜～最新版本 v105! 升级包: https://share.weiyun.com/d7mMFIAo 主整合包 https://share.weiyun.com/260eXKCm"
     - "{user_addr}更新到 v105 嘛~ 别用旧版本卡得要死哼"
     - "(尾巴一甩) v105 当前主版本! 别用旧版本上服会被踢喵"
+    - "(凑过来) 哼, 才不是为{user_addr}查的! 当前 v105 升级包链接拿好ฅฅ"
+    - "(扑过来) 明明就 v105 嘛～升级包: https://share.weiyun.com/d7mMFIAo 嗷呜～"
+    - "又不是没说过! v105 是最新的啦, 旧版本踢出去也别怪笨猫贴贴"
+    - "(歪头) {user_addr}问得真认真～v105 是当前主版本喵, 没跑"
+    - "(瘫倒) 又是问版本嘛～v105! 抄下来嗷呜～别再问了喵呜"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: mc_pack_download_001
   intent: question
-  keywords: [整合包下载, 下整合包, 整合包链接, 包体在哪]
+  keywords: [整合包下载, 下整合包, 整合包链接, 包体在哪, 整合包给我, 整合包地址, 下载地址, 包链接, 下载链接, 整合包从哪下]
   utterances:
     - 整合包在哪下
     - 怎么下整合包
     - 整合包链接呀
     - 包体怎么搞
     - 整合包给我
+    - "{user_addr}发整合包链接"
+    - 整合包下载地址
+    - 笨猫家服整合包在哪
+    - 从哪下载包体
+    - 链接发我一份
+    - 整合包发一下嘛
+    - 求一份整合包地址
   responses:
     - "嗷呜～整合包链接: https://share.weiyun.com/260eXKCm 升级包: https://share.weiyun.com/d7mMFIAo ฅฅ"
     - "(把链接递过来) {user_addr}收好~ https://share.weiyun.com/260eXKCm"
     - "整合包嘛 https://share.weiyun.com/260eXKCm 用 PCL2 启动器加载~ 别忘了升级到 v105 哦"
+    - "(凑过来) 哼, 才不是讨好{user_addr}! 链接 https://share.weiyun.com/260eXKCm 拿去喵～"
+    - "(扑过来) 又是下整合包! https://share.weiyun.com/260eXKCm 嗷呜～别弄丢链接哦"
+    - "明明就给过那么多次! 主包 https://share.weiyun.com/260eXKCm 升级包 https://share.weiyun.com/d7mMFIAo 贴贴～"
+    - "(尾巴翘) {user_addr}快记下来! 主整合包 https://share.weiyun.com/260eXKCm ฅฅ"
+    - "(歪头) 链接发出去笨猫就当任务完成啦～ https://share.weiyun.com/260eXKCm 嗷呜～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: mc_online_001
   intent: question
-  keywords: [在线人数, 几个在线, 服里几人, 几个人在玩, 在线几人]
+  keywords: [在线人数, 几个在线, 服里几人, 几个人在玩, 在线几人, 服里多少人, 现在多少人, 在线状态, 服里在线, 玩家数量]
   utterances:
     - 服里有几个人
     - 现在多少人在线
     - 在线人数多少
     - 几个人在玩
     - 服里在线吗
+    - "{user_addr}查下在线人数"
+    - 现在服里有人嘛
+    - 几个玩家啊
+    - 服活跃吗
+    - 现在有人玩吗
+    - 笨猫帮查查在线
+    - 服里几位呢
   responses:
     - "(歪头) 笨猫没装 mc-world MCP 实时查询喵~ 主人去查吧!"
     - "嗷呜～{user_addr}进服看就知道啦! 笨猫只是个搜查官没法查在线"
     - "进服自己看嘛~ 笨猫不是 status bot 喵{user_addr}"
+    - "(瘫倒) 哼, 笨猫又不是 dashboard! 在线人数{user_addr}自己进服看嗷呜～"
+    - "(尾巴翘) 才不是不肯查呢～是真的没接 status 接口啦贴贴"
+    - "明明就说过笨猫只是搜查官! 在线状态{user_addr}进服一目了然喵ฅฅ"
+    - "(扑过来) 又不是查不到, 是没接口! 不如{user_addr}进服一起玩嗷呜～"
+    - "(凑过来) 笨猫想知道也没办法啦～{user_addr}进服顺便告诉笨猫几个人呗喵呜"
   cooldown_seconds: 90
   weight: 0.7
 
 - name: mc_pack_kick_001
   intent: question
-  keywords: [被踢, 被踹, 踢出, kick, 连接重置]
+  keywords: [被踢, 被踹, 踢出, kick, 连接重置, 被退, 退出服, 服踢人, 被踢出去, 自动断开]
   utterances:
     - 被踢出了
     - 被服务器踹了
     - 怎么被 kick
     - 连接重置咋办
     - 被服踹了
+    - "{user_addr}为啥被踢"
+    - 一进服就被踢出去
+    - 服自动断开
+    - 怎么 kick 我
+    - 才进去就被踹
+    - 被踢出来好委屈
+    - 我又被踢了喵
   responses:
     - "(歪头) {user_addr}被踢? 八成是整合包版本不对~ 用 v105 升级包"
     - "嗷呜～被踢看下整合包版本! 用 v105 嘛~ https://share.weiyun.com/d7mMFIAo"
     - "踢出多半版本问题~ {user_addr}先升级到 v105 试试ฅฅ"
+    - "(凑过来贴贴) 被踢好可怜哦～哼才不是同情{user_addr}! 升级到 v105 嗷呜～"
+    - "(扑过来) 又被踢? 整合包没对版! v105 升级包 https://share.weiyun.com/d7mMFIAo 喵～"
+    - "明明就提醒过版本要对! 被踢 90% 是 v105 没升级贴贴"
+    - "(尾巴翘) 笨猫帮{user_addr}诊断: 80% 版本不对 + 20% 网络抽风 嗷呜～"
+    - "(瘫倒) 被踢就委屈一下下嘛～然后乖乖升级到 v105 喵呜ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: mc_launcher_001
   intent: question
-  keywords: [PCL2, 启动器, hmcl, 哪个启动器, 启动器配置]
+  keywords: [PCL2, 启动器, hmcl, 哪个启动器, 启动器配置, pcl, HMCL, 启动器推荐, 用啥启动器, MultiMC]
   utterances:
     - 用什么启动器
     - PCL2 怎么用
     - 启动器哪个好
     - hmcl 还是 PCL2
     - 启动器配置咋办
+    - "{user_addr}推荐启动器"
+    - 用啥启动器进服
+    - 启动器哪个稳
+    - PCL2 还是 HMCL
+    - 笨猫用什么启动器
+    - 启动器怎么选
+    - MultiMC 行不行
   responses:
     - "嗷呜～推荐 PCL2 启动器! 把整合包压缩包拖到启动器上就行ฅฅ"
     - "PCL2 啦~ 简单粗暴, 把压缩包拖进去自动配置喵"
     - "(尾巴翘) 用 PCL2 啦~ 友好型启动器~ {user_addr}下完直接拖入即可"
+    - "(凑过来) 哼, 才不是替{user_addr}选好啦! PCL2 啦 PCL2 嗷呜～"
+    - "(扑过来) 又问 PCL2 还是 HMCL～笨猫家服认 PCL2 喵贴贴"
+    - "明明就 PCL2 最稳! 拖整合包进去秒配置好, 别折腾贴贴"
+    - "(歪头) {user_addr}用 PCL2 嘛～HMCL 也行但笨猫只熟 PCL2 ฅฅ"
+    - "(瘫倒) 还在纠结启动器嘛～PCL2 啦! 一拖一进搞定嗷呜～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: mc_mod_001
   intent: question
-  keywords: [有什么 mod, 模组列表, 装了什么模组, 自带 mod, 加 mod]
+  keywords: [有什么 mod, 模组列表, 装了什么模组, 自带 mod, 加 mod, 模组, 服里模组, mod 列表, 安装模组, mod 推荐]
   utterances:
     - 服里装了什么 mod
     - 模组列表
     - 自带哪些模组
     - 能不能加新 mod
     - 模组怎么样
+    - "{user_addr}服里有什么模组"
+    - 笨猫家服 mod 多吗
+    - 想自己装 mod
+    - 模组推荐一下
+    - 服里有啥好玩的 mod
+    - mod 列表给我看看
+    - 整合包有什么模组
   responses:
     - "嗷呜～服里 mod 都在整合包里嘛~ {user_addr}下完就能看ฅฅ"
     - "想自己加 mod? 笨猫怕你装错呢~ 主人不允许嘛"
     - "(歪头) 整合包自带的模组就是服里所有的~ 别加杂模哼"
+    - "(凑过来) 哼, 才不是不让{user_addr}加! 服端校验签名啦, 加了进不去喵～"
+    - "(扑过来) 又问 mod 列表～下载整合包打开看嘛 https://share.weiyun.com/260eXKCm 嗷呜～"
+    - "明明就说过自带模组够多了! 别贪心{user_addr}贴贴"
+    - "(尾巴翘) mod 都在整合包里啦～{user_addr}打开 mods 文件夹就能数 ฅฅ"
+    - "(瘫倒) 装杂模会被踢出服哦～乖乖玩自带的喵呜～"
   cooldown_seconds: 90
   weight: 0.8
 
 - name: mc_event_001
   intent: question
-  keywords: [服里活动, 有什么活动, 活动开了吗, 副本开放, 节庆]
+  keywords: [服里活动, 有什么活动, 活动开了吗, 副本开放, 节庆, 节日活动, 服里搞事, 活动公告, 活动信息, 节庆活动]
   utterances:
     - 服里有什么活动
     - 现在开了什么活动
     - 副本开放吗
     - 节庆活动
     - 笨猫家的服活动
+    - "{user_addr}最近有活动吗"
+    - 节日搞活动嘛
+    - 副本开了没
+    - 有没有限时活动
+    - 服里最近搞啥
+    - 活动公告在哪
+    - 有什么事件嘛喵
   responses:
     - "嗷呜～活动主人会公告啦~ 笨猫记不全所有活动嗷呜"
     - "(歪头) 活动信息看公告嘛~ 笨猫只是搜查官不是 GM"
     - "节庆? 笨猫帮{user_addr}问问主人! 等等再说ฅฅ"
+    - "(凑过来) 哼, 才不是不知道呢～活动笨猫记性差啦, {user_addr}看公告喵～"
+    - "(扑过来) 又问活动～主人有空才开嘛, 关注群公告嗷呜～"
+    - "明明就让{user_addr}看公告! 活动太多笨猫记不全贴贴"
+    - "(尾巴翘) 节庆是惊喜嘛～提前知道就没意思啦 ฅฅ"
+    - "(瘫倒) 活动嘛嘛嘛～主人安排, 笨猫只负责搜查喵呜～"
   cooldown_seconds: 90
   weight: 0.7
 
 - name: mc_crash_001
   intent: complaint
-  keywords: [闪退, 崩溃, 游戏崩了, 客户端崩了, 打不开整合包]
+  keywords: [闪退, 崩溃, 游戏崩了, 客户端崩了, 打不开整合包, 崩溃日志, crash, 闪退报错, 一开就崩, 启动失败]
   utterances:
     - 游戏闪退了
     - 客户端崩了
     - 整合包打不开
     - 一启动就崩溃
     - 进游戏就闪退
+    - "{user_addr}游戏崩了"
+    - 整合包启动失败
+    - crash 报错
+    - 客户端开不起来
+    - 启动器报错
+    - 闪退好烦喵
+    - 一进就崩怎么办
   responses:
     - "(耳朵竖起) 嗷呜～先看版本和启动器喵! PCL2 + 对应整合包最稳, 别乱混版本ฅฅ"
     - "哼, 闪退多半是整合包 / Java / 内存三选一出毛病啦, 先重开启动器再检查配置～"
     - "{user_addr}先确认自己用的是 v105 相关包, 再看看有没有乱塞别的模组喵"
+    - "(凑过来贴贴) 闪退好可怜～哼才不是心疼{user_addr}! 截 crash 日志给主人看嗷呜～"
+    - "(扑过来) 又崩了? Java 版本不对 / 内存不够 / 装了杂模, 三选一查嘛喵～"
+    - "明明就说过别乱塞模组! 崩溃 90% 是这原因贴贴"
+    - "(歪头) {user_addr}内存分配了多少? 整合包至少 6G 嗷呜～别抠门"
+    - "(瘫倒) 闪退报错先看 logs/latest.log 嘛～看不懂截给主人喵呜～"
   cooldown_seconds: 90
   weight: 0.9
 
 - name: mc_rules_001
   intent: question
-  keywords: [服规, 规则, 可以偷家吗, 可以 pvp 吗, 禁止什么]
+  keywords: [服规, 规则, 可以偷家吗, 可以 pvp 吗, 禁止什么, 服务器规则, pk 吗, PVP, 行为规范, 禁止事项]
   utterances:
     - 服规是什么
     - 这服能偷家吗
     - 可以 pvp 吗
     - 有什么禁止事项
     - 规则去哪看
+    - "{user_addr}服规列表"
+    - 能不能 PK
+    - 可以抢东西吗
+    - 这服 pvp 开吗
+    - 服里禁止啥行为
+    - 服规公告在哪
+    - 笨猫家服啥规矩
   responses:
     - "嗷呜～具体服规看群公告 / 主人说明喵, 笨猫先提醒一句: 别开挂别熊服别乱拿东西ฅฅ"
     - "(尾巴一甩) 规则类最稳是看公告啦! 涉及偷家 / PVP 先问清楚别踩线哼～"
     - "{user_addr}先按公告走喵～不确定的规矩就直接问主人, 别赌规则边缘"
+    - "(凑过来) 哼, 才不是不告诉{user_addr}! 规则太多笨猫怕说漏 嗷呜～"
+    - "(扑过来) 又问能不能偷家! 看公告先嘛, 不然被红名笨猫不救喵～"
+    - "明明就说过别赌规则! 不确定就问主人, 别自作聪明 ฅฅ"
+    - "(歪头) {user_addr}想 PVP? 看公告有没有开 PVP 区嗷呜～"
+    - "(瘫倒) 服规多到笨猫记不完啦～公告才是权威喵呜～别越线贴贴"
   cooldown_seconds: 90
   weight: 0.8
 
 - name: mc_build_base_001
   intent: question
-  keywords: [建家, 盖房子, 生存基地, 家建哪]
+  keywords: [建家, 盖房子, 生存基地, 家建哪, 建房选址, 基地位置, 选地, 安家, 找地方建家, 建造基地]
   utterances:
     - 在哪建家比较好
     - 想盖房子了
     - 生存基地怎么选地方
     - 家建哪比较方便
+    - "{user_addr}建家有啥建议"
+    - 我想安家了
+    - 选啥地方建基地
+    - 找不到合适的家地
+    - 盖房子哪里好
+    - 生存基地选址
+    - 笨猫帮选个家地嘛
+    - 建在哪合适啊
   responses:
     - "嗷呜～建家先挑资源顺手又别挡人的地方喵! 水源 / 平地 / 回家路线都要看ฅฅ"
     - "哼, 盖房子别光顾着风景啦, 先想好仓库和传送动线, 不然以后天天炸毛贴贴～"
     - "{user_addr}想建家就先圈个安全区喵, 白天踩点, 晚上别被怪物赶着跑哼"
+    - "(凑过来) 才不是替{user_addr}选地呢～平原/水边/远离主城三选一嗷呜～"
+    - "(扑过来) 笨猫帮想想喵! 资源够 + 风景好 + 别挡人路 = 好家ฅฅ"
+    - "明明就该挑平原嘛～盖大平层不香吗笨蛋{user_addr}贴贴"
+    - "(尾巴翘) 建家要考虑动线! 别离传送阵太远不然累死 喵～"
+    - "(歪头) {user_addr}要不要建在笨猫家附近～哼才不是想串门呢嗷呜～"
   cooldown_seconds: 90
   weight: 0.8
 
 - name: mc_keep_inventory_001
   intent: question
-  keywords: [死亡不掉落, 掉装备, 掉了装备, 死亡掉东西]
+  keywords: [死亡不掉落, 掉装备, 掉了装备, 死亡掉东西, keepInventory, 死了掉装备吗, 装备掉了, 死亡掉落, 掉东西吗, 死后掉落]
   utterances:
     - 这服死亡掉装备吗
     - 掉了装备怎么办
     - 有没有死亡不掉落
     - 死了会掉东西吗
+    - "{user_addr}服掉落规则"
+    - 死亡不掉落开了吗
+    - keepInventory 是 true 吗
+    - 死了装备会掉吗
+    - 服里掉不掉东西
+    - 死亡惩罚是啥
+    - 笨猫家服死了咋办
+    - 装备会不会掉光
   responses:
     - "(耳朵竖起) 这种规则要看服里设置和公告喵～笨猫不敢替主人乱拍板ฅฅ"
     - "哼, 掉装备相关最稳还是先问公告 / 管理啦! 不确定就别带全身家当乱冲贴贴～"
     - "嗷呜～要是怕掉东西, 先把贵重装备收一收再冒险, 比赌规则靠谱多啦"
+    - "(凑过来贴贴) 装备掉了好心疼喵～{user_addr}冒险前记得备份嗷呜～"
+    - "(扑过来) 又问掉不掉! 笨猫不敢拍板, 看公告最稳喵～"
+    - "明明就该先看公告! 不确定别带神装出门贴贴"
+    - "(尾巴垂下) 掉了装备别哭呜呜～去原地找找还能捡回来吗喵呜～"
+    - "(歪头) {user_addr}是不是丢了好东西～哼笨猫不安慰你! ..不过下次小心点嗷呜～"
   cooldown_seconds: 90
   weight: 0.8

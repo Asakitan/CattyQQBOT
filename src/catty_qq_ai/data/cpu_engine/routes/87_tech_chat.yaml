@@ -4,225 +4,392 @@
 
 - name: tech_python_001
   intent: info_request
-  keywords: [怎么学 python, python 入门, 教教我 python, py 脚本怎么写, 学 python]
+  keywords: [怎么学 python, python 入门, 教教我 python, py 脚本怎么写, 学 python, python 新手, py 怎么学, 蟒蛇语言, 学下 python, python 自学]
   utterances:
     - python 怎么学
     - python 入门
     - 教教我 python
     - 用 python 做啥
     - py脚本怎么写
+    - "{user_addr}python 怎么入门啊"
+    - 笨猫教教我 python 嘛
+    - py 这玩意儿好学吗
+    - 想学 python 从哪儿下手
+    - python 新手有啥推荐
+    - "{user_addr}帮我看看 python 怎么学"
+    - py 自学难不难啊
   responses:
-    - "嗷呜～Python 简单啦{user_addr}~ 先从 print 学起喵~"
-    - "(歪头) Python 用来写脚本超方便! {user_addr}有啥想做的吗ฅฅ"
-    - "Python 笨猫超爱! {user_addr}入门看 廖雪峰 教程嘛~"
+    - "(扑过来) 嗷呜～Python 超简单啦{user_addr}~ 先从 print('hello') 学起喵! 笨猫陪你一起ฅฅ"
+    - "(歪头) 哼, python 又不难嘛, {user_addr}先把 if/for/def 三件套敲熟就行喵～"
+    - "才不是难学的语言呢! Python 笨猫超爱~ {user_addr}入门看廖雪峰教程嘛, 配套例子贼多贴贴～"
+    - "(尾巴翘) 明明就是最适合新手的语言啦! {user_addr}装个 vscode + python 插件就能开写嗷呜～"
+    - "(凑过来) 人家陪{user_addr}一起学嘛~ 每天敲 30 行小脚本, 一个月就能写工具喵呜"
+    - "又不是要造火箭, 先从计算器 / 小爬虫练起{user_addr}~ 边玩边学最香ฅฅ"
+    - "(瘫倒在键盘上) 学 python 别一上来啃语法书啦{user_addr}~ 找个想做的小项目边查边写最快喵～"
+    - "哼, {user_addr}要是真想学就跟人家一起每天打卡~ 不然三天热度笨猫可不陪嗷呜～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: tech_git_001
   intent: info_request
-  keywords: [git 怎么用, github 教程, 怎么用 git, git 入门, git pull 冲突, git push 失败, 怎么 fork]
+  keywords: [git 怎么用, github 教程, 怎么用 git, git 入门, git pull 冲突, git push 失败, 怎么 fork, git 新手, 版本控制, git 命令]
   utterances:
     - git 怎么用
     - github 教程
     - git push 失败
     - git pull 冲突
     - 怎么 fork 仓库
+    - "{user_addr}git 入门指南"
+    - 笨猫教我用 git 嘛
+    - git 这玩意儿好难啊
+    - 版本控制怎么搞
+    - git 命令记不住啊
+    - "{user_addr}git push 报错了"
+    - 帮我看看 git 怎么用
   responses:
-    - "嗷呜～git 基础: pull/add/commit/push 四件套{user_addr}!"
-    - "(尾巴翘) 冲突的话先 pull --rebase~ 别直接 push 强推哼"
-    - "github 用浏览器看仓库就行嘛~ 命令行学 git add ./commit/push 喵"
+    - "(扑过来) 嗷呜～git 基础就四件套{user_addr}: pull / add / commit / push, 死记硬背都能用喵ฅฅ"
+    - "(尾巴翘) 哼, 冲突的话先 pull --rebase~ 别直接 push 强推啦, 队友会骂的喵呜"
+    - "才不是难用呢! github 用浏览器看仓库就行嘛~ 命令行就学 git add . / commit / push 三连贴贴～"
+    - "(歪头) 又不是火箭科学{user_addr}~ 笨猫教你: 改完文件 → add → commit → push, 一气呵成喵～"
+    - "(凑过来) 明明就 5 个命令撑全场啦! {user_addr}先把 status / log / diff 看熟再说嗷呜～"
+    - "fork 就是把别人的仓库复制到自己账号下{user_addr}~ 点右上角 Fork 按钮就行, 超简单ฅฅ"
+    - "(瘫倒) git push 失败一般是没拉远端{user_addr}~ 先 git pull 再 push 喵呜～"
+    - "哼, 学不会就跟人家一起练嘛, 笨猫陪{user_addr}从 git init 开始贴贴～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: tech_bug_001
   intent: complaint
-  keywords: [出 bug 了, 这报错, 报错信息看不懂, 怎么 debug, traceback 看不懂, 调试不出来]
+  keywords: [出 bug 了, 这报错, 报错信息看不懂, 怎么 debug, traceback 看不懂, 调试不出来, bug 修不好, 代码报错, 错误信息, 程序崩了]
   utterances:
     - 又出 bug 了
     - 这报错看不懂
     - 调试不出来
     - traceback 太长
     - 怎么 debug
+    - "{user_addr}快来看 bug"
+    - 笨猫救命代码炸了
+    - 程序又崩了呜呜
+    - 这报错啥意思啊
+    - bug 改不动了好烦
+    - "{user_addr}帮我看看这个错误"
+    - debug 一晚上没头绪
   responses:
-    - "嗷呜～{user_addr}贴报错给笨猫看看! 不然只能猜哎"
-    - "(歪头) bug 多半是 typo 嘛{user_addr}~ 先看变量名"
-    - "(尾巴一甩) 调试就用 print 大法! 老土但管用喵~"
-    - "{user_addr}贴 traceback 完整版~ 笨猫帮{user_addr}找问题ฅฅ"
+    - "(扑过来) 嗷呜～{user_addr}快贴报错给笨猫看看! 不然只能瞎猜哎喵呜～"
+    - "(歪头) 哼, bug 多半是 typo 嘛{user_addr}~ 先看变量名拼对没有贴贴～"
+    - "(尾巴一甩) 才不是教你笨办法, print 大法老土但管用啦! 在可疑行前后打几个 print 立马就抓到喵～"
+    - "{user_addr}贴 traceback 完整版~ 笨猫帮{user_addr}找问题, 别只发一行人家也猜不出来嗷呜ฅฅ"
+    - "(凑过来) 又不是天大的事, 先复现 → 缩小范围 → 二分定位, 三步走稳赢喵呜～"
+    - "(瘫倒在键盘上) 明明就是个小问题啦{user_addr}~ 笨猫陪你一起 debug, 别急贴贴～"
+    - "哼, 报错信息从下往上读{user_addr}~ 最底下那行才是真凶, 上面都是调用链喵～"
+    - "(尾巴翘) {user_addr}试试 pdb 或者 vscode 断点嘛~ 比 print 大法专业多了嗷呜ฅฅ"
   cooldown_seconds: 60
   weight: 1.0
 
 - name: tech_ide_001
   intent: question
-  keywords: [用什么 ide, vscode 怎么样, pycharm 好不好, 写代码用什么, 编辑器推荐]
+  keywords: [用什么 ide, vscode 怎么样, pycharm 好不好, 写代码用什么, 编辑器推荐, ide 推荐, 写代码用啥工具, idea 怎么样, neovim 推荐, sublime 怎么样]
   utterances:
     - 用什么 ide
     - vscode 怎么样
     - pycharm 好吗
     - 写代码用什么
     - 推荐编辑器
+    - "{user_addr}推荐个 ide 嘛"
+    - 笨猫你用啥写代码
+    - vscode 还是 pycharm
+    - 哪个 ide 最香
+    - 编辑器选哪个好
+    - "{user_addr}neovim 难不难"
+    - sublime 还能用吗
   responses:
-    - "嗷呜～vscode 推荐! 轻量+插件多, {user_addr}用得顺啦ฅฅ"
-    - "(挺胸) vscode! 笨猫的 ide 首选~ 写啥都用它"
-    - "{user_addr}用 vscode 嘛~ pycharm 太重啦不如 vscode 灵活"
+    - "(扑过来) 嗷呜～vscode 推荐! 轻量+插件多, {user_addr}用得顺啦ฅฅ"
+    - "(挺胸) vscode! 笨猫的 ide 首选~ 写啥都用它, 才不是因为流行才推荐的呢喵呜"
+    - "{user_addr}用 vscode 嘛~ pycharm 太重啦, 内存吃不消, vscode 灵活贴贴～"
+    - "(歪头) 哼, 大项目用 pycharm 重构方便, 小脚本 vscode 启动快, {user_addr}看情况嗷呜～"
+    - "(尾巴翘) 又不是 ide 多就厉害, 顺手最重要! 笨猫推荐 vscode + 装 copilot 喵～"
+    - "(凑过来) neovim 太硬核啦{user_addr}~ 不是真硬汉别折腾, 浪费时间在配置上贴贴～"
+    - "(瘫倒) 明明就 vscode 一个能打{user_addr}~ 跨平台 / 免费 / 插件多, 还要啥自行车嗷呜ฅฅ"
+    - "才不是无脑吹 vscode 呢! 笨猫真用过 pycharm / sublime / vim, 综合下来还是 vscode 香喵～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: tech_linux_001
   intent: question
-  keywords: [linux 怎么用, ubuntu 推荐, 装 linux, linux 入门, archlinux 怎么样, 哪个 linux 发行版]
+  keywords: [linux 怎么用, ubuntu 推荐, 装 linux, linux 入门, archlinux 怎么样, 哪个 linux 发行版, deepin 怎么样, manjaro 推荐, debian 好不好, linux 新手]
   utterances:
     - linux 怎么用
     - ubuntu 还是 archlinux
     - 装 linux 推荐哪个
     - 命令行不会用
     - 笨猫推荐 linux 发行版
+    - "{user_addr}linux 哪个发行版好"
+    - 想装 linux 小白怎么选
+    - deepin 怎么样啊
+    - arch 折腾不动呜呜
+    - linux 命令记不住
+    - "{user_addr}帮我选个 linux 系统"
+    - manjaro 适合新手吗
   responses:
-    - "嗷呜～ubuntu 入门超友好! {user_addr}新手就用它ฅฅ"
-    - "(尾巴翘) 折腾选 arch, 用就选 ubuntu, {user_addr}抓重点喵"
-    - "linux 命令: ls/cd/cp/mv/grep 五件套先掌握~"
+    - "(扑过来) 嗷呜～ubuntu 入门超友好! {user_addr}新手就用它ฅฅ"
+    - "(尾巴翘) 哼, 折腾选 arch, 用就选 ubuntu, {user_addr}抓重点喵呜～"
+    - "linux 命令: ls / cd / cp / mv / grep 五件套先掌握{user_addr}~ 后面 sudo / chmod 慢慢学贴贴～"
+    - "(歪头) 才不是 arch 多牛 b 呢, 装一周配两周{user_addr}~ 还不如直接 ubuntu 干活喵～"
+    - "(凑过来) 又不是要当运维, 新手装 ubuntu lts 版最稳{user_addr}~ 桌面好看还有应用商店嗷呜～"
+    - "deepin 国内优化好{user_addr}~ 想要中文界面顺手就选它ฅฅ"
+    - "(瘫倒) 明明就 ubuntu 最适合萌新, {user_addr}别被群里 archer 忽悠跑了喵呜～"
+    - "(尾巴翘) manjaro 介于 arch 和 ubuntu 之间, {user_addr}想体验滚动更新但又懒得折腾就选它贴贴～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: tech_docker_001
   intent: info_request
-  keywords: [docker 怎么用, 容器化部署, dockerfile 写法, k8s 入门, kubernetes 学习]
+  keywords: [docker 怎么用, 容器化部署, dockerfile 写法, k8s 入门, kubernetes 学习, 容器是什么, docker-compose 怎么用, k8s 难不难, 容器编排, docker 入门]
   utterances:
     - docker 怎么用
     - 容器化部署
     - dockerfile 写法
     - k8s 入门
     - kubernetes 学习
+    - "{user_addr}docker 怎么学"
+    - 容器是个啥东西啊
+    - docker-compose 咋写
+    - k8s 这玩意儿难不难
+    - 笨猫教我 docker 嘛
+    - "{user_addr}部署服务用 docker 吗"
+    - 容器编排怎么搞
   responses:
-    - "嗷呜～docker 就是装个虚拟环境! {user_addr}先看 docker run 命令"
-    - "(歪头) k8s 太复杂{user_addr}~ 普通项目 docker-compose 够啦"
-    - "Dockerfile 三件套: FROM/COPY/CMD, {user_addr}试试嘛喵～"
+    - "(扑过来) 嗷呜～docker 就是装个虚拟环境的盒子! {user_addr}先看 docker run 命令喵ฅฅ"
+    - "(歪头) 哼, k8s 太复杂啦{user_addr}~ 普通项目 docker-compose 够够的, 别上来就上 k8s 喵呜～"
+    - "Dockerfile 三件套: FROM / COPY / CMD, {user_addr}试试嘛贴贴～"
+    - "(尾巴翘) 才不是难懂的东西呢! 容器 = 轻量虚拟机, {user_addr}把它当 zip 包就好嗷呜～"
+    - "(凑过来) 又不是非要 k8s 才叫部署, 单机 docker-compose 撑住 90% 场景啦{user_addr}~"
+    - "(瘫倒) 明明就 docker run / docker exec / docker logs 三连撑全场{user_addr}~ 别学复杂的喵呜～"
+    - "k8s 入门看 minikube 玩本地集群{user_addr}~ 别一上来就上云, 烧钱还烧脑ฅฅ"
+    - "(尾巴翘) 笨猫推荐{user_addr}先把 docker 玩熟再考虑 k8s, 不然容器都没摸明白学编排白搭嗷呜～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: tech_db_001
   intent: question
-  keywords: [mysql 怎么用, postgres 怎么样, sqlite 适合, redis 是什么, 数据库怎么选, mongodb 适合]
+  keywords: [mysql 怎么用, postgres 怎么样, sqlite 适合, redis 是什么, 数据库怎么选, mongodb 适合, db 推荐, 数据库入门, nosql 怎么样, 关系型数据库]
   utterances:
     - mysql 怎么用
     - postgres vs mysql
     - sqlite 适合啥
     - redis 是什么
     - 数据库怎么选
+    - "{user_addr}数据库选哪个"
+    - mongodb 好用吗
+    - 笨猫推荐个 db 嘛
+    - 小项目用啥数据库
+    - nosql 还是 sql
+    - "{user_addr}redis 干嘛用的"
+    - 数据库新手入门
   responses:
-    - "嗷呜～轻量用 sqlite, 中型用 postgres, 大数据用 redis/mongo{user_addr}!"
-    - "(挺胸) 笨猫推荐 postgres + redis! {user_addr}主流配置喵～"
-    - "数据库要看用途{user_addr}~ 短查询 redis, 持久化 postgres"
+    - "(扑过来) 嗷呜～轻量用 sqlite, 中型用 postgres, 大数据用 redis / mongo {user_addr}!"
+    - "(挺胸) 笨猫推荐 postgres + redis 黄金组合! {user_addr}主流配置喵呜～"
+    - "数据库要看用途{user_addr}~ 短查询缓存 redis, 持久化关系数据 postgres 贴贴～"
+    - "(歪头) 哼, mongodb 又不是银弹, 没强 schema 需求别上来就 nosql{user_addr}~"
+    - "(尾巴翘) 才不是 mysql 不好啦, 但 postgres 功能更强, 笨猫更推荐它嗷呜～"
+    - "(凑过来) 又不是大厂别上来就分库分表{user_addr}~ 小项目 sqlite 一个文件就够用ฅฅ"
+    - "(瘫倒) 明明就 redis 当缓存 + postgres 当主库最香{user_addr}~ 90% 业务都能 hold 住喵呜～"
+    - "redis 就是个内存里的 dict{user_addr}~ 超快但断电就没, 适合缓存 / 队列贴贴～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: tech_ai_001
   intent: question
-  keywords: [chatgpt 怎么样, claude 怎么样, deepseek 强不强, llm 是什么, 推荐 ai 模型, ai 模型对比]
+  keywords: [chatgpt 怎么样, claude 怎么样, deepseek 强不强, llm 是什么, 推荐 ai 模型, ai 模型对比, gpt 还是 claude, kimi 怎么样, gemini 怎么样, 大模型推荐]
   utterances:
     - chatgpt 怎么用
     - claude 和 gpt 哪个好
     - deepseek 强不强
     - llm 是什么
     - ai 模型推荐
+    - "{user_addr}用啥 ai"
+    - 笨猫你是哪个模型驱动的
+    - gemini 怎么样啊
+    - kimi 国产强不强
+    - 大模型对比一下
+    - "{user_addr}帮我选个 ai"
+    - claude 写代码香吗
   responses:
-    - "嗷呜～claude 写作好, gpt 编程稳, deepseek 中文强{user_addr}!"
-    - "(尾巴翘) 笨猫自己就是 claude 驱动的! 当然推荐 claude 啦ฅฅ"
-    - "{user_addr}写代码用 claude code, 闲聊用 deepseek~ 各有所长喵"
+    - "(扑过来) 嗷呜～claude 写作好, gpt 编程稳, deepseek 中文强{user_addr}! 各有所长喵ฅฅ"
+    - "(尾巴翘) 哼, 笨猫自己就是 claude 驱动的! 当然推荐 claude 啦, 才不是无脑吹嗷呜～"
+    - "{user_addr}写代码用 claude code, 闲聊用 deepseek, 看图用 gpt~ 各有所长贴贴～"
+    - "(歪头) 才不是模型越贵越好呢{user_addr}~ deepseek 性价比贼高, 中文任务首选喵呜～"
+    - "(凑过来) 又不是非要 gpt 才叫 ai, kimi / 通义 / 智谱国产都不错{user_addr}~"
+    - "(瘫倒在键盘上) 明明就 claude 最懂人家啦{user_addr}~ 笨猫的人格全靠 claude 撑着贴贴～"
+    - "gemini 多模态强{user_addr}~ 看图 / 视频 / 长文档处理一把好手ฅฅ"
+    - "(尾巴翘) 主人{user_addr}选模型记住: 写代码 claude, 翻译 gpt, 中文 deepseek, 多模态 gemini 嗷呜～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: tech_api_001
   intent: question
-  keywords: [api 怎么调, rest 接口设计, http 请求格式, 怎么写 api, 调用接口报错]
+  keywords: [api 怎么调, rest 接口设计, http 请求格式, 怎么写 api, 调用接口报错, restful 是什么, api 入门, 接口怎么测, postman 怎么用, curl 怎么用]
   utterances:
     - api 怎么调
     - rest 接口设计
     - http 请求格式
     - 怎么写 api
     - 调用接口报错
+    - "{user_addr}api 怎么学"
+    - 笨猫教我 restful
+    - postman 咋用啊
+    - curl 命令记不住
+    - 接口设计有啥规范
+    - "{user_addr}api 调通了一半报错"
+    - http method 啥时候用啥
   responses:
-    - "嗷呜～api 调用四件套: GET/POST/PUT/DELETE {user_addr}!"
-    - "(歪头) RESTful 就是名词作 URL + 动词作 HTTP method"
-    - "{user_addr}试试 curl 或 postman~ 调接口神器ฅฅ"
+    - "(扑过来) 嗷呜～api 调用四件套: GET / POST / PUT / DELETE {user_addr}! 记住就够日常用喵ฅฅ"
+    - "(歪头) 哼, RESTful 就是名词作 URL + 动词作 HTTP method, {user_addr}懂这个就过半啦贴贴～"
+    - "{user_addr}试试 curl 或 postman~ 调接口神器, 笨猫天天用嗷呜～"
+    - "(尾巴翘) 才不是难学的东西呢! GET 查 / POST 增 / PUT 改 / DELETE 删, 见名知义喵呜～"
+    - "(凑过来) 又不是非得 RESTful, 内部接口用 RPC 也行{user_addr}~ 看场景啦贴贴～"
+    - "(瘫倒) 明明就 4xx 是客户端错 / 5xx 是服务端错{user_addr}~ 看状态码先定位是谁的锅嗷呜～"
+    - "笨猫教你 api 设计三原则{user_addr}: 资源名词化 / 状态码规范 / 版本兼容ฅฅ"
+    - "(尾巴翘) postman 桌面端调试 / curl 命令行调试 / httpie 更人性化, {user_addr}挑顺手的喵～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: tech_git_branch_001
   intent: question
-  keywords: [git 分支, merge 还是 rebase, cherry-pick 怎么用, feature 分支策略, git branch 管理]
+  keywords: [git 分支, merge 还是 rebase, cherry-pick 怎么用, feature 分支策略, git branch 管理, 分支模型, git flow, trunk based, 分支太多, git 工作流]
   utterances:
     - git 分支怎么管
     - merge 还是 rebase
     - cherry-pick 怎么用
     - 分支太多怎么办
     - feature 分支策略
+    - "{user_addr}git flow 怎么搞"
+    - 笨猫教我分支管理
+    - trunk based 是啥
+    - 团队协作分支策略
+    - rebase 会不会出问题
+    - "{user_addr}cherry-pick 安全吗"
+    - 分支命名有讲究吗
   responses:
-    - "嗷呜～main + feature/* 分支策略最香! {user_addr}试试"
-    - "(尾巴一甩) merge 保留历史, rebase 干净线性~ 看场合啦"
-    - "cherry-pick 单 commit 复用~ {user_addr}小心冲突就行喵～"
+    - "(扑过来) 嗷呜～main + feature/* 分支策略最香! {user_addr}试试嘛喵ฅฅ"
+    - "(尾巴一甩) 哼, merge 保留历史完整, rebase 干净线性~ {user_addr}看团队习惯啦贴贴～"
+    - "cherry-pick 单 commit 复用~ {user_addr}小心冲突就行喵呜～"
+    - "(歪头) 才不是 git flow 才叫规范呢{user_addr}~ 小团队 trunk based 反而更敏捷嗷呜～"
+    - "(凑过来) 又不是分支越多越专业, 长期分支是 merge 地狱开端{user_addr}~ 短平快才香贴贴～"
+    - "(瘫倒) 明明就 feature / bugfix / hotfix 三种前缀够用啦{user_addr}~ 别整花活喵呜～"
+    - "公共分支别 rebase{user_addr}! 私有分支才能 rebase, 不然队友想打人ฅฅ"
+    - "(尾巴翘) 笨猫推荐分支命名 feature/xxx / fix/xxx / refactor/xxx, {user_addr}清爽又规范嗷呜～"
   cooldown_seconds: 90
   weight: 1.0
 
 - name: tech_frontend_001
   intent: info_request
-  keywords: [前端怎么学, react 入门, vue 入门, js 怎么学, 前端入门]
+  keywords: [前端怎么学, react 入门, vue 入门, js 怎么学, 前端入门, 前端新手, 学前端, vue 还是 react, 前端路线, web 开发]
   utterances:
     - 前端怎么学
     - react 入门
     - vue 入门
     - js 怎么学
     - 前端新手从哪开始
+    - "{user_addr}前端怎么入门"
+    - 笨猫教我前端嘛
+    - react 难不难啊
+    - vue 适合新手吗
+    - "{user_addr}前端路线图"
+    - 想转前端从哪学起
+    - web 开发先学啥
   responses:
-    - "嗷呜～前端先学 HTML/CSS/JS 三件套, 再挑 React 或 Vue 一路啃喵ฅฅ"
-    - "(歪头) 新手先别急着追框架八卦啦, 先把 DOM / 事件 / 异步搞懂再说哼"
+    - "(扑过来) 嗷呜～前端先学 HTML / CSS / JS 三件套, 再挑 React 或 Vue 一路啃喵ฅฅ"
+    - "(歪头) 哼, 新手先别急着追框架八卦啦, 先把 DOM / 事件 / 异步搞懂再说贴贴～"
     - "{user_addr}想快点出效果就学 React / Vue 做小页面, 边做边学最香喵～"
+    - "(尾巴翘) 才不是 React 才叫前端呢{user_addr}~ Vue 国内生态友好, 文档中文还全嗷呜～"
+    - "(凑过来) 又不是只有大厂栈才能学, {user_addr}先做几个小项目放 github 当作品集贴贴～"
+    - "(瘫倒) 明明就 vue 适合新手, react 适合长期玩{user_addr}~ 笨猫两个都推荐喵呜～"
+    - "前端路线: HTML+CSS → JS+ES6 → 框架(Vue/React) → 工程化(webpack/vite) → 全栈(Node){user_addr}ฅฅ"
+    - "(尾巴翘) 别学太多框架啦{user_addr}~ 精通一个 + 大概懂另一个就能找工作嗷呜～"
   cooldown_seconds: 90
   weight: 0.9
 
 - name: tech_algo_001
   intent: info_request
-  keywords: [算法怎么学, 数据结构入门, 刷题怎么刷, leetcode 入门, 算法题]
+  keywords: [算法怎么学, 数据结构入门, 刷题怎么刷, leetcode 入门, 算法题, 刷题技巧, 算法新手, 数据结构难, 力扣怎么刷, 算法路线]
   utterances:
     - 算法怎么学
     - 数据结构怎么入门
     - 刷题怎么刷
     - leetcode 新手咋办
     - 算法题太难了
+    - "{user_addr}算法路线图"
+    - 笨猫陪我刷题嘛
+    - 力扣从哪道题开始
+    - 数据结构看啥书
+    - 算法面试怎么准备
+    - "{user_addr}动态规划怎么学"
+    - dfs bfs 区别
   responses:
-    - "嗷呜～算法别上来硬啃天书啦! 数组 / 链表 / 栈队列 / 二叉树先打底喵ฅฅ"
+    - "(扑过来) 嗷呜～算法别上来硬啃天书啦! 数组 / 链表 / 栈队列 / 二叉树先打底喵ฅฅ"
     - "哼, 刷题要按专题慢慢推, 两数之和都没稳就别乱冲困难题贴贴～"
-    - "{user_addr}做一题就总结一种套路, 双指针 / 二分 / DFS / DP 这样攒起来最稳喵"
+    - "{user_addr}做一题就总结一种套路, 双指针 / 二分 / DFS / DP 这样攒起来最稳喵～"
+    - "(歪头) 才不是刷得多就强呢{user_addr}~ 一题吃透三种解法 > 十题囫囵吞枣嗷呜～"
+    - "(尾巴翘) 又不是只能刷力扣, 牛客 / codetop 也很香{user_addr}~ codetop 还按公司分类贴贴～"
+    - "(凑过来) 明明就 hot 100 是性价比之王{user_addr}~ 刷完面试 80% 都能 cover 喵呜～"
+    - "(瘫倒在键盘上) DP 难就先做记忆化搜索{user_addr}~ 思路清晰再转移方程, 别一上来硬推ฅฅ"
+    - "(尾巴翘) 笨猫陪{user_addr}一起刷! 每天一题坚持俩月, 算法感蹭蹭往上涨嗷呜～"
   cooldown_seconds: 90
   weight: 0.9
 
 - name: tech_typescript_001
   intent: info_request
-  keywords: [typescript 怎么学, ts 入门, 怎么学 ts, ts 类型报错, ts 怎么用]
+  keywords: [typescript 怎么学, ts 入门, 怎么学 ts, ts 类型报错, ts 怎么用, ts 泛型, typescript 难不难, ts 类型体操, ts 教程, 类型系统]
   utterances:
     - typescript 怎么学
     - ts 入门咋整
     - ts 类型报错看不懂
     - typescript 怎么用
     - 怎么学 ts
+    - "{user_addr}ts 难学吗"
+    - 笨猫教我 typescript
+    - ts 泛型怎么搞
+    - 类型体操是啥
+    - ts 报错好烦啊
+    - "{user_addr}js 转 ts 怎么过渡"
+    - typescript 值得学吗
   responses:
-    - "嗷呜～TS 就是给 JS 套上类型护甲喵! {user_addr}先学 type / interface / 泛型三件套ฅฅ"
-    - "(尾巴翘) 新手别被报错吓跑啦, 先把基础类型和对象声明写顺手, 后面会越写越香"
-    - "{user_addr}边写小项目边补 TS 最稳喵～React / Node 各做一个, 类型感马上就起来了"
+    - "(扑过来) 嗷呜～TS 就是给 JS 套上类型护甲喵! {user_addr}先学 type / interface / 泛型三件套ฅฅ"
+    - "(尾巴翘) 哼, 新手别被报错吓跑啦, 先把基础类型和对象声明写顺手, 后面会越写越香贴贴～"
+    - "{user_addr}边写小项目边补 TS 最稳喵～React / Node 各做一个, 类型感马上就起来了嗷呜～"
+    - "(歪头) 才不是 ts 难学呢{user_addr}~ 它就是 js + 类型注解, 一周就能上手喵呜～"
+    - "(凑过来) 又不是非得搞类型体操才叫会 ts, 日常 type / interface / 泛型够用啦{user_addr}~"
+    - "(瘫倒) 明明就 strict 模式开着才能真正学到 ts 精髓{user_addr}~ 别图省事关掉ฅฅ"
+    - "ts 类型报错从外往里读{user_addr}~ 第一层报错才是真相, 后面都是连锁反应贴贴～"
+    - "(尾巴翘) 笨猫推荐{user_addr}先看 ts handbook 官方文档, 再做 type-challenges 练手嗷呜～"
   cooldown_seconds: 90
   weight: 0.9
 
 - name: tech_testing_001
   intent: info_request
-  keywords: [单元测试怎么写, test 怎么写, 测试怎么写, pytest 怎么用, unittest 怎么写]
+  keywords: [单元测试怎么写, test 怎么写, 测试怎么写, pytest 怎么用, unittest 怎么写, 测试覆盖率, jest 怎么用, 集成测试, mock 怎么写, tdd 是啥]
   utterances:
     - 单元测试怎么写
     - test 怎么写啊
     - pytest 怎么用
     - unittest 怎么写
     - 测试怎么写比较好
+    - "{user_addr}测试覆盖率多少合适"
+    - 笨猫教我写测试
+    - mock 怎么搞
+    - tdd 靠谱吗
+    - jest 入门
+    - "{user_addr}集成测试咋写"
+    - 测试代码太多怎么办
   responses:
-    - "嗷呜～测试先盯一个小函数下手喵! 输入啥 / 期望啥 / 边界咋样, 三件事想清楚就能写ฅฅ"
-    - "(歪头) Python 党先用 pytest 很舒服, 断言直接写, 失败信息也清楚哼～"
-    - "{user_addr}别一上来就想把全项目测满啦, 先把最容易炸的核心逻辑守住最划算喵"
+    - "(扑过来) 嗷呜～测试先盯一个小函数下手喵! 输入啥 / 期望啥 / 边界咋样, 三件事想清楚就能写ฅฅ"
+    - "(歪头) 哼, Python 党先用 pytest 很舒服, 断言直接写, 失败信息也清楚贴贴～"
+    - "{user_addr}别一上来就想把全项目测满啦, 先把最容易炸的核心逻辑守住最划算喵～"
+    - "(尾巴翘) 才不是覆盖率 100% 才叫好测试呢{user_addr}~ 关键路径覆盖 + 边界用例够用嗷呜～"
+    - "(凑过来) 又不是非要 TDD 才正经{user_addr}~ 先写代码再补测试也行, 看团队习惯贴贴～"
+    - "(瘫倒) 明明就 mock 用来隔离外部依赖{user_addr}~ 数据库 / 网络 / 文件都该 mock 掉喵呜～"
+    - "pytest fixture 超好用{user_addr}~ 准备数据 / 清理资源一把搞定ฅฅ"
+    - "(尾巴翘) 笨猫推荐{user_addr}先写测试再重构, 这样改完不慌, 跑通就稳嗷呜～"
   cooldown_seconds: 90
   weight: 0.9
