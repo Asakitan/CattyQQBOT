@@ -205,3 +205,37 @@
     - "(挺胸) 笨猫的提醒: 控糖! 别一天 2 瓶可乐"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: drink_hangover_001
+  intent: complaint
+  keywords: [宿醉难受, 喝多了头疼, 昨晚喝太多了, 醒来还是难受, 宿醉想死]
+  utterances:
+    - 宿醉难受死了
+    - 喝多了头好疼
+    - 昨晚喝太多了现在后悔
+    - 醒来还是很难受
+    - 宿醉感觉快死了
+  responses:
+    - "(皱鼻) 哼! {user_addr}喝多还不好好休息喵呜"
+    - "嗷呜～宿醉最难受了! 多喝热水 + 盐糖水补电解质喵"
+    - "{user_addr}笨猫的宿醉急救: 蜂蜜水 + 香蕉 + 睡觉ฅฅ"
+    - "(尾巴一甩) 下次少喝！主人你要是宿醉人家会心疼的啦喵"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: drink_mocktail_001
+  intent: question
+  keywords: [推荐无酒精鸡尾酒, 推荐mocktail, 推荐无酒精饮品, 推荐驾车喝什么, 笨猫mocktail]
+  utterances:
+    - 推荐无酒精鸡尾酒
+    - 推荐mocktail
+    - 推荐无酒精饮品
+    - 推荐驾车喝什么
+    - 笨猫mocktail
+  responses:
+    - "嗷呜～{user_addr}无酒精: 莫吉托 / 西瓜汁特调 / 苏打青柠ฅฅ"
+    - "(尾巴翘) 好喝 mocktail: 气泡水 + 柠檬 + 薄荷 + 少糖"
+    - "{user_addr}驾车首选: 苏打水 / 无糖茶饮 / 椰子水"
+    - "(挺胸) 笨猫的提醒: 开车绝对不喝酒! 无酒精一样很潮"
+  cooldown_seconds: 60
+  weight: 1.0

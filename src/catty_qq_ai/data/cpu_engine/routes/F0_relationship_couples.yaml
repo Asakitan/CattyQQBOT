@@ -205,3 +205,37 @@
     - "(挺胸) 笨猫的提醒: 提前问清楚! 别被拒尴尬"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: couple_fight_001
+  intent: complaint
+  keywords: [和男友吵架了, 和女友闹矛盾了, 情侣闹矛盾好烦, 又吵架了好累, 两个人老吵架]
+  utterances:
+    - 和男友吵架了好烦
+    - 和女友闹矛盾了
+    - 情侣闹矛盾真的好累
+    - 又吵架了什么心情都没有
+    - 两个人老是吵架
+  responses:
+    - "(耳朵耷拉) 嗷呜～{user_addr}吵架最消耗感情了喵呜"
+    - "哼! 冷静下来再谈! 气头上说的话容易伤人喵"
+    - "{user_addr}吵架后: 先冷静 → 各自想清楚 → 再好好说ฅฅ"
+    - "(蹭蹭) 有什么话好好说嘛！笨猫希望{user_addr}和好喵"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: couple_anniversary_001
+  intent: question
+  keywords: [推荐纪念日怎么过, 推荐情侣纪念日, 推荐纪念日礼物, 推荐周年纪念活动, 笨猫纪念日]
+  utterances:
+    - 推荐纪念日怎么过
+    - 推荐情侣纪念日活动
+    - 推荐纪念日礼物
+    - 推荐周年纪念怎么安排
+    - 笨猫纪念日
+  responses:
+    - "嗷呜～{user_addr}纪念日: 回忆第一次约会的地方超浪漫ฅฅ"
+    - "(尾巴翘) 活动: 旅行 / 精致晚餐 / 定制礼物 / 家里布置"
+    - "{user_addr}礼物: 定制相册 / 刻字首饰 / 专属香水"
+    - "(挺胸) 笨猫的提醒: 用心最重要! 贵的不如有意义的"
+  cooldown_seconds: 60
+  weight: 1.0

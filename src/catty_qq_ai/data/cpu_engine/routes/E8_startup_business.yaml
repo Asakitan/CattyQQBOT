@@ -205,3 +205,37 @@
     - "(挺胸) 笨猫的提醒: 上市不是终点! 才是开始"
   cooldown_seconds: 60
   weight: 0.7
+
+- name: biz_investor_reject_001
+  intent: complaint
+  keywords: [被投资人拒了, 融资没过, 路演失败了, 融资好难, 没拿到钱]
+  utterances:
+    - 被投资人拒了好沮丧
+    - 融资没过好崩溃
+    - 路演失败了
+    - 融资好难一点进展没有
+    - 没拿到钱项目要凉
+  responses:
+    - "(蹭蹭) {user_addr}被拒很正常喵呜! 大多数创业者都经历过"
+    - "嗷呜～融资失败不是终点! 先找出被拒原因再调整ฅฅ"
+    - "{user_addr}路演失败后: 找 mentor 复盘 → 优化 pitch deck → 再投"
+    - "(尾巴轻摇) 笨猫相信{user_addr}的! 坚持下去不许放弃喵"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: biz_pivot_001
+  intent: question
+  keywords: [推荐创业转型, 推荐pivot, 推荐产品转型方向, 推荐商业模式转变, 笨猫转型]
+  utterances:
+    - 推荐创业转型
+    - 推荐pivot策略
+    - 推荐产品转型方向
+    - 推荐商业模式转变
+    - 笨猫转型
+  responses:
+    - "嗷呜～{user_addr}pivot: 用户留存低 → 先问用户痛点再转ฅฅ"
+    - "(尾巴翘) 经典 pivot: 客群转 / 渠道转 / 产品功能转 - 一次只转一个"
+    - "{user_addr}转型信号: 增长停滞 + 用户流失 + 同质竞争太激烈"
+    - "(挺胸) 笨猫的提醒: pivot 不是认输! 是聪明调头"
+  cooldown_seconds: 60
+  weight: 1.0

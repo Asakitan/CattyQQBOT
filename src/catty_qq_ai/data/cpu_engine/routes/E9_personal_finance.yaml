@@ -205,3 +205,37 @@
     - "(挺胸) 笨猫的提醒: 投资跟上通胀! 才能保值"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: finance_loss_001
+  intent: complaint
+  keywords: [理财亏了, 基金跌了, 股票大跌套牢, 割肉割亏了, 被套牢了]
+  utterances:
+    - 理财亏了好多
+    - 基金又跌了心疼
+    - 股票被套牢了
+    - 割肉割亏了
+    - 被套牢出不来
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}亏钱最难受了喵呜"
+    - "哼! 套牢的时候别慌! 先看基本面有没有变喵"
+    - "{user_addr}亏损应对: 止损线 + 不加仓 + 控制情绪ฅฅ"
+    - "(蹭蹭) 笨猫心疼{user_addr}! 下次分批建仓不要梭哈啦喵"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: finance_emergency_001
+  intent: question
+  keywords: [推荐应急备用金, 推荐紧急备用金多少, 推荐备用金比例, 推荐存多少应急, 笨猫备用金]
+  utterances:
+    - 推荐应急备用金多少合适
+    - 推荐紧急备用金比例
+    - 推荐存多少应急资金
+    - 推荐备用金怎么存
+    - 笨猫备用金
+  responses:
+    - "嗷呜～{user_addr}应急金: 3-6 个月生活费！必须留ฅฅ"
+    - "(尾巴翘) 存哪里: 货币基金 / 银行活期 - 要求随取随用"
+    - "{user_addr}标准: 月支出 × 6 = 最低安全线"
+    - "(挺胸) 笨猫的提醒: 应急金不算投资! 专款专用"
+  cooldown_seconds: 60
+  weight: 1.0

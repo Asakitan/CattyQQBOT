@@ -205,3 +205,37 @@
     - "(挺胸) 笨猫的提醒: 别为考级! 兴趣最重要"
   cooldown_seconds: 60
   weight: 0.8
+
+- name: cert_fail_001
+  intent: complaint
+  keywords: [考试没过好沮丧, 证书挂了, 考试凉了, 没过考试好崩溃, 挂科了好烦]
+  utterances:
+    - 考试没过好沮丧
+    - 证书挂了心好累
+    - 考试凉了
+    - 没过考试好崩溃
+    - 挂科了好烦
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}没过好难受喵呜! 先抱一下"
+    - "哼! 一次没过不代表永远! 复盘哪里扣分再冲喵"
+    - "{user_addr}失败后: 分析错题 → 找薄弱点 → 针对刷题ฅฅ"
+    - "(尾巴轻摇) 笨猫相信{user_addr}下次一定过的！不许放弃喵"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: cert_study_plan_001
+  intent: question
+  keywords: [推荐备考计划, 推荐考试学习计划, 推荐备考时间安排, 推荐考证方法, 笨猫备考计划]
+  utterances:
+    - 推荐备考计划怎么制定
+    - 推荐考试学习计划
+    - 推荐备考时间安排
+    - 推荐考证方法
+    - 笨猫备考计划
+  responses:
+    - "嗷呜～{user_addr}备考: 先定日期 → 倒推计划 → 每天固定时间ฅฅ"
+    - "(尾巴翘) 经典 3 步: 精读教材 → 刷题 → 模拟考 → 查漏补缺"
+    - "{user_addr}工具: Anki / 番茄钟 / 错题本 - 三件套"
+    - "(挺胸) 笨猫的提醒: 计划别太满! 留 20% 缓冲才能坚持"
+  cooldown_seconds: 60
+  weight: 1.0
