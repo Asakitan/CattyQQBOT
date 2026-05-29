@@ -1,0 +1,206 @@
+# 中餐 / 八大菜系 / 川粤鲁淮 / 地方菜 routes (S6 R146 NLU 节点扩充, 第十四周期 buffered 5/10 半程)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: cuis_sichuan_001
+  intent: question
+  keywords: [推荐川菜, 推荐麻婆豆腐, 推荐回锅肉, 推荐宫保鸡丁, 笨猫川菜]
+  utterances:
+    - 推荐川菜
+    - 推荐麻婆豆腐
+    - 推荐回锅肉
+    - 推荐宫保鸡丁
+    - 笨猫川菜
+  responses:
+    - "嗷呜～{user_addr}川菜: 麻辣鲜香 - 24 味型ฅฅ"
+    - "(尾巴翘) 经典: 麻婆豆腐 / 回锅肉 / 鱼香肉丝"
+    - "{user_addr}成都名厨: 黄敬临 / 张中尤"
+    - "(挺胸) 笨猫推荐: 郫县豆瓣 - 灵魂!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cuis_canton_001
+  intent: question
+  keywords: [推荐粤菜, 推荐烧鹅, 推荐叉烧, 推荐早茶, 笨猫粤菜]
+  utterances:
+    - 推荐粤菜
+    - 推荐烧鹅
+    - 推荐叉烧
+    - 推荐早茶
+    - 笨猫粤菜
+  responses:
+    - "嗷呜～{user_addr}粤菜: 鲜美清淡 - 食在广州ฅฅ"
+    - "(尾巴翘) 早茶: 虾饺 / 烧麦 / 凤爪"
+    - "{user_addr}烧腊: 叉烧 / 烧鹅 / 油鸡"
+    - "(挺胸) 笨猫推荐: 顺德美食 - 鱼皮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cuis_lu_001
+  intent: question
+  keywords: [推荐鲁菜, 推荐山东菜, 推荐糖醋鲤鱼, 推荐九转大肠, 笨猫鲁菜]
+  utterances:
+    - 推荐鲁菜
+    - 推荐山东菜
+    - 推荐糖醋鲤鱼
+    - 推荐九转大肠
+    - 笨猫鲁菜
+  responses:
+    - "嗷呜～{user_addr}鲁菜: 八大菜系之首ฅฅ"
+    - "(尾巴翘) 糖醋鲤鱼 / 九转大肠 / 葱烧海参"
+    - "{user_addr}济南菜 / 胶东菜 - 两大分支"
+    - "(挺胸) 笨猫推荐: 国宴常用!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cuis_huaiyang_001
+  intent: question
+  keywords: [推荐淮扬菜, 推荐扬州菜, 推荐松鼠桂鱼, 推荐扬州炒饭, 笨猫淮扬菜]
+  utterances:
+    - 推荐淮扬菜
+    - 推荐扬州菜
+    - 推荐松鼠桂鱼
+    - 推荐扬州炒饭
+    - 笨猫淮扬菜
+  responses:
+    - "嗷呜～{user_addr}淮扬: 文人菜 / 国宴ฅฅ"
+    - "(尾巴翘) 松鼠桂鱼 / 大煮干丝"
+    - "{user_addr}蟹粉狮子头 / 扬州炒饭"
+    - "(挺胸) 笨猫推荐: 富春茶社 - 经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cuis_zhe_001
+  intent: question
+  keywords: [推荐浙菜, 推荐杭帮菜, 推荐西湖醋鱼, 推荐东坡肉, 笨猫浙菜]
+  utterances:
+    - 推荐浙菜
+    - 推荐杭帮菜
+    - 推荐西湖醋鱼
+    - 推荐东坡肉
+    - 笨猫浙菜
+  responses:
+    - "嗷呜～{user_addr}浙菜: 清鲜爽嫩 / 江南风味ฅฅ"
+    - "(尾巴翘) 西湖醋鱼 / 东坡肉 / 龙井虾仁"
+    - "{user_addr}绍兴 / 宁波 / 杭州 - 三派"
+    - "(挺胸) 笨猫推荐: 楼外楼 - 百年老店!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cuis_min_001
+  intent: question
+  keywords: [推荐闽菜, 推荐福建菜, 推荐佛跳墙, 推荐沙茶面, 笨猫闽菜]
+  utterances:
+    - 推荐闽菜
+    - 推荐福建菜
+    - 推荐佛跳墙
+    - 推荐沙茶面
+    - 笨猫闽菜
+  responses:
+    - "嗷呜～{user_addr}佛跳墙: 闽菜之王ฅฅ"
+    - "(尾巴翘) 海鲜 - 闽菜灵魂"
+    - "{user_addr}沙茶面 / 鱼丸 / 海蛎煎"
+    - "(挺胸) 笨猫推荐: 厦门小吃!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cuis_xiang_001
+  intent: question
+  keywords: [推荐湘菜, 推荐湖南菜, 推荐剁椒鱼头, 推荐辣椒炒肉, 笨猫湘菜]
+  utterances:
+    - 推荐湘菜
+    - 推荐湖南菜
+    - 推荐剁椒鱼头
+    - 推荐辣椒炒肉
+    - 笨猫湘菜
+  responses:
+    - "嗷呜～{user_addr}湘菜: 香辣酸辣 - 比川猛烈ฅฅ"
+    - "(尾巴翘) 剁椒鱼头 / 辣椒炒肉 / 毛血旺"
+    - "{user_addr}口味虾 / 臭豆腐 - 长沙特色"
+    - "(挺胸) 笨猫推荐: 文和友体验!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cuis_hui_001
+  intent: question
+  keywords: [推荐徽菜, 推荐安徽菜, 推荐臭鳜鱼, 推荐毛豆腐, 笨猫徽菜]
+  utterances:
+    - 推荐徽菜
+    - 推荐安徽菜
+    - 推荐臭鳜鱼
+    - 推荐毛豆腐
+    - 笨猫徽菜
+  responses:
+    - "嗷呜～{user_addr}徽菜: 八大菜系小众 / 山珍野味ฅฅ"
+    - "(尾巴翘) 臭鳜鱼 - 闻臭吃香"
+    - "{user_addr}毛豆腐 / 火腿炖鞭笋"
+    - "(挺胸) 笨猫推荐: 安徽老乡推荐!"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: cuis_north_001
+  intent: question
+  keywords: [推荐东北菜, 推荐铁锅炖, 推荐酱骨架, 推荐锅包肉, 笨猫东北菜]
+  utterances:
+    - 推荐东北菜
+    - 推荐铁锅炖
+    - 推荐酱骨架
+    - 推荐锅包肉
+    - 笨猫东北菜
+  responses:
+    - "嗷呜～{user_addr}东北: 量大实在 / 大锅炖ฅฅ"
+    - "(尾巴翘) 锅包肉 / 杀猪菜 / 地三鲜"
+    - "{user_addr}哈尔滨红肠 / 沈阳烤肉"
+    - "(挺胸) 笨猫推荐: 食堂感 - 满足!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cuis_xinjiang_001
+  intent: question
+  keywords: [推荐新疆菜, 推荐大盘鸡, 推荐羊肉串, 推荐手抓饭, 笨猫新疆菜]
+  utterances:
+    - 推荐新疆菜
+    - 推荐大盘鸡
+    - 推荐羊肉串
+    - 推荐手抓饭
+    - 笨猫新疆菜
+  responses:
+    - "嗷呜～{user_addr}新疆: 烤羊 / 大盘鸡 / 手抓饭ฅฅ"
+    - "(尾巴翘) 馕 / 烤包子 / 拉条子"
+    - "{user_addr}伊犁马奶酒 / 葡萄"
+    - "(挺胸) 笨猫推荐: 阿拉旦烤肉!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cuis_yunan_001
+  intent: question
+  keywords: [推荐云南菜, 推荐过桥米线, 推荐汽锅鸡, 推荐昆明菜, 笨猫云南菜]
+  utterances:
+    - 推荐云南菜
+    - 推荐过桥米线
+    - 推荐汽锅鸡
+    - 推荐昆明菜
+    - 笨猫云南菜
+  responses:
+    - "嗷呜～{user_addr}过桥米线 - 云南名片ฅฅ"
+    - "(尾巴翘) 汽锅鸡 / 牛肝菌 / 鲜花饼"
+    - "{user_addr}傣味烧烤 / 酸汤鱼"
+    - "(挺胸) 笨猫推荐: 见手青慎吃!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cuis_dimsum_001
+  intent: question
+  keywords: [推荐小吃, 推荐街头小吃, 推荐煎饼果子, 推荐肉夹馍, 笨猫小吃]
+  utterances:
+    - 推荐小吃
+    - 推荐街头小吃
+    - 推荐煎饼果子
+    - 推荐肉夹馍
+    - 笨猫小吃
+  responses:
+    - "嗷呜～{user_addr}北方: 煎饼果子 / 肉夹馍 / 灌汤包ฅฅ"
+    - "(尾巴翘) 南方: 生煎 / 小笼 / 葱油饼"
+    - "{user_addr}夜市必吃: 烤串 / 麻辣烫"
+    - "(挺胸) 笨猫推荐: 苍蝇馆子 - 地道!"
+  cooldown_seconds: 60
+  weight: 1.0

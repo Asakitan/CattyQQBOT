@@ -1,0 +1,206 @@
+# PC 硬件 / 笔记本 / CPU / 显卡 / 装机 / 外设 routes (S6 R144 NLU 节点扩充, 第十四周期 buffered 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: pc_laptop_001
+  intent: question
+  keywords: [推荐笔记本电脑, 推荐 ThinkPad, 推荐联想笔记本, 推荐 MacBook, 笨猫笔记本]
+  utterances:
+    - 推荐笔记本电脑
+    - 推荐 ThinkPad
+    - 推荐联想笔记本
+    - 推荐 MacBook
+    - 笨猫笔记本
+  responses:
+    - "嗷呜～{user_addr}商务: ThinkPad X1 / 戴尔 XPSฅฅ"
+    - "(尾巴翘) 苹果: MacBook Air M4 / Pro M4"
+    - "{user_addr}游戏本: ROG / 外星人 / 拯救者"
+    - "(挺胸) 笨猫推荐: 程序员 MacBook Pro!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_cpu_001
+  intent: question
+  keywords: [推荐 CPU, 推荐 Intel, 推荐 AMD Ryzen, 推荐处理器, 笨猫 CPU]
+  utterances:
+    - 推荐 CPU
+    - 推荐 Intel
+    - 推荐 AMD Ryzen
+    - 推荐处理器
+    - 笨猫 CPU
+  responses:
+    - "嗷呜～{user_addr}AMD Ryzen 9 9950X - 旗舰ฅฅ"
+    - "(尾巴翘) Intel Core Ultra 9 285K"
+    - "{user_addr}性价比: Ryzen 7 7700X"
+    - "(挺胸) 笨猫推荐: 看核心数 + 频率!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_gpu_001
+  intent: question
+  keywords: [推荐显卡, 推荐 RTX 5090, 推荐 NVIDIA, 推荐 AMD 显卡, 笨猫显卡]
+  utterances:
+    - 推荐显卡
+    - 推荐 RTX 5090
+    - 推荐 NVIDIA
+    - 推荐 AMD 显卡
+    - 笨猫显卡
+  responses:
+    - "嗷呜～{user_addr}旗舰: RTX 5090 - 怪兽ฅฅ"
+    - "(尾巴翘) 主流: RTX 5070Ti / 5080"
+    - "{user_addr}AMD: RX 9070 XT - 性价比"
+    - "(挺胸) 笨猫推荐: 1440p 选 5070Ti!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_motherboard_001
+  intent: question
+  keywords: [推荐主板, 推荐华硕主板, 推荐微星主板, 推荐技嘉, 笨猫主板]
+  utterances:
+    - 推荐主板
+    - 推荐华硕主板
+    - 推荐微星主板
+    - 推荐技嘉
+    - 笨猫主板
+  responses:
+    - "嗷呜～{user_addr}芯片组: B650 / X870 / Z890ฅฅ"
+    - "(尾巴翘) 华硕 ROG / 微星 MEG"
+    - "{user_addr}技嘉 / 华擎 - 国货"
+    - "(挺胸) 笨猫推荐: 别贪便宜! 供电重要"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pc_memory_001
+  intent: question
+  keywords: [推荐内存条, 推荐 DDR5, 推荐 32G 内存, 推荐金士顿, 笨猫内存]
+  utterances:
+    - 推荐内存条
+    - 推荐 DDR5
+    - 推荐 32G 内存
+    - 推荐金士顿
+    - 笨猫内存
+  responses:
+    - "嗷呜～{user_addr}DDR5 6000MHz CL30 - 主流ฅฅ"
+    - "(尾巴翘) 32G x 2 = 64G - 充足"
+    - "{user_addr}品牌: 海盗船 / 芝奇 / 金士顿"
+    - "(挺胸) 笨猫推荐: 双通道必装!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pc_ssd_001
+  intent: question
+  keywords: [推荐固态硬盘, 推荐 SSD, 推荐三星 990 Pro, 推荐 NVMe, 笨猫 SSD]
+  utterances:
+    - 推荐固态硬盘
+    - 推荐 SSD
+    - 推荐三星 990 Pro
+    - 推荐 NVMe
+    - 笨猫 SSD
+  responses:
+    - "嗷呜～{user_addr}三星 990 Pro - 顶级ฅฅ"
+    - "(尾巴翘) 西数 SN850X / 海康存储"
+    - "{user_addr}国货: 致态 / 长江 / 光威"
+    - "(挺胸) 笨猫推荐: PCIe 4.0 NVMe!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_psu_001
+  intent: question
+  keywords: [推荐电源, 推荐 ATX 电源, 推荐 850W, 推荐金牌电源, 笨猫电源]
+  utterances:
+    - 推荐电源
+    - 推荐 ATX 电源
+    - 推荐 850W
+    - 推荐金牌电源
+    - 笨猫电源
+  responses:
+    - "嗷呜～{user_addr}金牌全模组 850W - 主流ฅฅ"
+    - "(尾巴翘) 海韵 / 振华 / 海盗船 - 大牌"
+    - "{user_addr}5090 配 1000W+"
+    - "(挺胸) 笨猫的提醒: 别买杂牌! 安全"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pc_case_001
+  intent: question
+  keywords: [推荐机箱, 推荐分形, 推荐联力, 推荐先马, 笨猫机箱]
+  utterances:
+    - 推荐机箱
+    - 推荐分形
+    - 推荐联力
+    - 推荐先马
+    - 笨猫机箱
+  responses:
+    - "嗷呜～{user_addr}联力 / 分形 / 海盗船 - 大牌ฅฅ"
+    - "(尾巴翘) 海景房 / 全侧透"
+    - "{user_addr}风道 + 装机便利"
+    - "(挺胸) 笨猫推荐: 联力 O11 经典!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pc_cooling_001
+  intent: question
+  keywords: [推荐 CPU 散热, 推荐水冷, 推荐风冷, 推荐利民, 笨猫散热]
+  utterances:
+    - 推荐 CPU 散热
+    - 推荐水冷
+    - 推荐风冷
+    - 推荐利民
+    - 笨猫散热
+  responses:
+    - "嗷呜～{user_addr}风冷: 利民 PA120 / 猫头鹰ฅฅ"
+    - "(尾巴翘) 240/360 一体水冷"
+    - "{user_addr}国货: 鑫谷 / 玩嘉 - 性价比"
+    - "(挺胸) 笨猫推荐: 旗舰 CPU 用 360 水冷!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pc_keyboard_001
+  intent: question
+  keywords: [推荐机械键盘, 推荐 HHKB, 推荐 Cherry MX, 推荐客制化, 笨猫机械键盘]
+  utterances:
+    - 推荐机械键盘
+    - 推荐 HHKB
+    - 推荐 Cherry MX
+    - 推荐客制化
+    - 笨猫机械键盘
+  responses:
+    - "嗷呜～{user_addr}HHKB Studio / Topreฅฅ"
+    - "(尾巴翘) Cherry MX 红 / 茶 / 青"
+    - "{user_addr}客制化: GMK / 烬"
+    - "(挺胸) 笨猫推荐: 程序员爱 HHKB!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pc_mouse_001
+  intent: question
+  keywords: [推荐鼠标, 推荐 Logitech G Pro, 推荐罗技, 推荐 Razer, 笨猫鼠标]
+  utterances:
+    - 推荐鼠标
+    - 推荐 Logitech G Pro
+    - 推荐罗技
+    - 推荐 Razer
+    - 笨猫鼠标
+  responses:
+    - "嗷呜～{user_addr}电竞: 罗技 G Pro X Superlightฅฅ"
+    - "(尾巴翘) Razer 毒蝰 / Vrz 蝰蛇"
+    - "{user_addr}办公: MX Master 3S"
+    - "(挺胸) 笨猫推荐: 别只看 DPI!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pc_monitor_001
+  intent: question
+  keywords: [推荐显示器, 推荐 4K 显示器, 推荐 OLED, 推荐 LG, 笨猫显示器]
+  utterances:
+    - 推荐显示器
+    - 推荐 4K 显示器
+    - 推荐 OLED
+    - 推荐 LG
+    - 笨猫显示器
+  responses:
+    - "嗷呜～{user_addr}专业: LG 27GR95QE-B OLEDฅฅ"
+    - "(尾巴翘) 4K 144Hz: 戴尔 / 三星"
+    - "{user_addr}国货: HKC / 飞利浦"
+    - "(挺胸) 笨猫推荐: 27 寸 1440p 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0

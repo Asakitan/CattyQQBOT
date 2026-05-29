@@ -1,0 +1,206 @@
+# 英语 / 日语 / 韩语 / 法语 / 小语种学习 routes (S6 R143 NLU 节点扩充, 第十四周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: lang_english_001
+  intent: question
+  keywords: [推荐英语学习, 推荐学英语, 推荐英语口语, 推荐 TOEFL, 笨猫英语]
+  utterances:
+    - 推荐英语学习
+    - 推荐学英语
+    - 推荐英语口语
+    - 推荐 TOEFL
+    - 笨猫英语
+  responses:
+    - "嗷呜～{user_addr}单词: 不背单词 / 墨墨ฅฅ"
+    - "(尾巴翘) 口语: 多邻国 / Cambly / 极光"
+    - "{user_addr}考试: 雅思 / 托福 / GRE"
+    - "(挺胸) 笨猫推荐: 每天 30 分钟坚持!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lang_japanese_001
+  intent: question
+  keywords: [推荐日语, 推荐学日语, 推荐 N1 N2, 推荐五十音, 笨猫日语]
+  utterances:
+    - 推荐日语
+    - 推荐学日语
+    - 推荐 N1 N2
+    - 推荐五十音
+    - 笨猫日语
+  responses:
+    - "嗷呜～{user_addr}入门: 五十音图 / 标日上中下ฅฅ"
+    - "(尾巴翘) JLPT: N5 → N1 - 5 级"
+    - "{user_addr}APP: 沪江 / 多邻国"
+    - "(挺胸) 笨猫推荐: 看动漫学日语!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lang_korean_001
+  intent: question
+  keywords: [推荐韩语, 推荐学韩语, 推荐 TOPIK, 推荐 K-pop 韩语, 笨猫韩语]
+  utterances:
+    - 推荐韩语
+    - 推荐学韩语
+    - 推荐 TOPIK
+    - 推荐 K-pop 韩语
+    - 笨猫韩语
+  responses:
+    - "嗷呜～{user_addr}韩语 24 字母 - 比中日简单ฅฅ"
+    - "(尾巴翘) TOPIK 1-6 级 / TOPIK II 高级"
+    - "{user_addr}追星学最快!"
+    - "(挺胸) 笨猫推荐: 大学韩国语 + 沪江!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lang_french_001
+  intent: question
+  keywords: [推荐法语, 推荐学法语, 推荐 DELF, 推荐法语动词变位, 笨猫法语]
+  utterances:
+    - 推荐法语
+    - 推荐学法语
+    - 推荐 DELF
+    - 推荐法语动词变位
+    - 笨猫法语
+  responses:
+    - "嗷呜～{user_addr}入门: 简明法语 / 走遍法国ฅฅ"
+    - "(尾巴翘) DELF / DALF - 国际证书"
+    - "{user_addr}难: 阴阳性 + 动词变位"
+    - "(挺胸) 笨猫推荐: 留学法国 - 提升快!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: lang_german_001
+  intent: question
+  keywords: [推荐德语, 推荐学德语, 推荐 GoetheZertifikat, 推荐德福, 笨猫德语]
+  utterances:
+    - 推荐德语
+    - 推荐学德语
+    - 推荐 GoetheZertifikat
+    - 推荐德福
+    - 笨猫德语
+  responses:
+    - "嗷呜～{user_addr}入门: 新求精 / 走遍德国ฅฅ"
+    - "(尾巴翘) 歌德证书 / TestDaF - 留学"
+    - "{user_addr}难: 四个格 + 复合词"
+    - "(挺胸) 笨猫推荐: 工科留学 - 优势!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: lang_spanish_001
+  intent: question
+  keywords: [推荐西语, 推荐学西班牙语, 推荐 DELE, 推荐西语国家, 笨猫西语]
+  utterances:
+    - 推荐西语
+    - 推荐学西班牙语
+    - 推荐 DELE
+    - 推荐西语国家
+    - 笨猫西语
+  responses:
+    - "嗷呜～{user_addr}5 亿人讲西语 - 第二大语ฅฅ"
+    - "(尾巴翘) DELE A1 → C2"
+    - "{user_addr}西国 + 拉美 - 21 国"
+    - "(挺胸) 笨猫推荐: 现代西班牙语!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: lang_russian_001
+  intent: question
+  keywords: [推荐俄语, 推荐学俄语, 推荐俄语字母, 推荐俄语等级, 笨猫俄语]
+  utterances:
+    - 推荐俄语
+    - 推荐学俄语
+    - 推荐俄语字母
+    - 推荐俄语等级
+    - 笨猫俄语
+  responses:
+    - "嗷呜～{user_addr}西里尔字母 33 个ฅฅ"
+    - "(尾巴翘) ТРКИ 1-4 级 - 俄语水平"
+    - "{user_addr}六个格 - 难点"
+    - "(挺胸) 笨猫推荐: 大学俄语东方!"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: lang_polyglot_001
+  intent: question
+  keywords: [推荐多语言学习, 推荐 polyglot, 推荐学多门外语, 推荐语言迁移, 笨猫多语言]
+  utterances:
+    - 推荐多语言学习
+    - 推荐 polyglot
+    - 推荐学多门外语
+    - 推荐语言迁移
+    - 笨猫多语言
+  responses:
+    - "嗷呜～{user_addr}先精一门 / 再学第二ฅฅ"
+    - "(尾巴翘) 同语系互利: 法语 + 西语"
+    - "{user_addr}沉浸式 - 看剧 + 看书"
+    - "(挺胸) 笨猫推荐: 每天每语 30 分钟!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: lang_translation_001
+  intent: question
+  keywords: [推荐翻译, 推荐 CATTI, 推荐 MTI, 推荐同声传译, 笨猫翻译]
+  utterances:
+    - 推荐翻译
+    - 推荐 CATTI
+    - 推荐 MTI
+    - 推荐同声传译
+    - 笨猫翻译
+  responses:
+    - "嗷呜～{user_addr}CATTI 3 级 → 1 级ฅฅ"
+    - "(尾巴翘) MTI - 翻译硕士专硕"
+    - "{user_addr}同传 - 顶级技能 / 高薪"
+    - "(挺胸) 笨猫的提醒: AI 影响 / 看高端!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: lang_app_001
+  intent: question
+  keywords: [推荐语言学习 app, 推荐多邻国, 推荐 HelloTalk, 推荐 Tandem, 笨猫语言 app]
+  utterances:
+    - 推荐语言学习 app
+    - 推荐多邻国
+    - 推荐 HelloTalk
+    - 推荐 Tandem
+    - 笨猫语言 app
+  responses:
+    - "嗷呜～{user_addr}入门: 多邻国 - 游戏化ฅฅ"
+    - "(尾巴翘) HelloTalk / Tandem - 找语伴"
+    - "{user_addr}Anki - 间隔记忆"
+    - "(挺胸) 笨猫推荐: ChatGPT / Claude 练口语!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lang_immerse_001
+  intent: question
+  keywords: [推荐沉浸式学语言, 推荐看剧学英语, 推荐听力训练, 推荐影子跟读, 笨猫沉浸式]
+  utterances:
+    - 推荐沉浸式学语言
+    - 推荐看剧学英语
+    - 推荐听力训练
+    - 推荐影子跟读
+    - 笨猫沉浸式
+  responses:
+    - "嗷呜～{user_addr}看剧: 老友记 / 摩登家庭ฅฅ"
+    - "(尾巴翘) 听力: BBC / NPR / TED"
+    - "{user_addr}影子跟读 - 模仿原音"
+    - "(挺胸) 笨猫推荐: 写日记 + 录音!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lang_dictionary_001
+  intent: question
+  keywords: [推荐词典, 推荐 Cambridge, 推荐 Longman, 推荐有道词典, 笨猫词典]
+  utterances:
+    - 推荐词典
+    - 推荐 Cambridge
+    - 推荐 Longman
+    - 推荐有道词典
+    - 笨猫词典
+  responses:
+    - "嗷呜～{user_addr}专业: Cambridge / Longman / Oxfordฅฅ"
+    - "(尾巴翘) 国货: 有道 / 欧路 / 金山"
+    - "{user_addr}日语: Mazii / 沪江小 D"
+    - "(挺胸) 笨猫推荐: 用例句记忆!"
+  cooldown_seconds: 60
+  weight: 0.9

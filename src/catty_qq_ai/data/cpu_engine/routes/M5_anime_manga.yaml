@@ -1,0 +1,207 @@
+# 二次元 / 动漫 / 漫画 / 声优 / Cosplay routes (S6 R147 NLU 节点扩充, 第十四周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 I8 mobile_gacha (手游) 区分: 这里专注动画漫画.
+
+- name: anime_classic_001
+  intent: question
+  keywords: [推荐经典动漫, 推荐高达, 推荐 EVA, 推荐攻壳机动队, 笨猫经典动漫]
+  utterances:
+    - 推荐经典动漫
+    - 推荐高达
+    - 推荐 EVA
+    - 推荐攻壳机动队
+    - 笨猫经典动漫
+  responses:
+    - "嗷呜～{user_addr}EVA: 庵野秀明 - 神作ฅฅ"
+    - "(尾巴翘) 高达 UC - 富野由悠季"
+    - "{user_addr}攻壳机动队 - 押井守"
+    - "(挺胸) 笨猫推荐: 别错过黄金时代!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: anime_shonen_001
+  intent: question
+  keywords: [推荐少年漫, 推荐海贼王, 推荐火影, 推荐死神, 笨猫少年漫]
+  utterances:
+    - 推荐少年漫
+    - 推荐海贼王
+    - 推荐火影
+    - 推荐死神
+    - 笨猫少年漫
+  responses:
+    - "嗷呜～{user_addr}三大民工漫: 海贼 / 火影 / 死神ฅฅ"
+    - "(尾巴翘) 新世代: 我英 / 鬼灭 / 咒术"
+    - "{user_addr}进击的巨人 - 神作完结"
+    - "(挺胸) 笨猫推荐: 海贼必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: anime_seinen_001
+  intent: question
+  keywords: [推荐青年漫, 推荐刃牙, 推荐黑帮, 推荐杀戮都市, 笨猫青年漫]
+  utterances:
+    - 推荐青年漫
+    - 推荐刃牙
+    - 推荐黑帮
+    - 推荐杀戮都市
+    - 笨猫青年漫
+  responses:
+    - "嗷呜～{user_addr}刃牙: 格斗神作ฅฅ"
+    - "(尾巴翘) 杀戮都市 / 多罗罗"
+    - "{user_addr}寄生兽 / 福尔摩斯小姐"
+    - "(挺胸) 笨猫推荐: 题材深 / 适合成人!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: anime_shoujo_001
+  intent: question
+  keywords: [推荐少女漫, 推荐玛丽亚的凝望, 推荐人间失格, 推荐《NANA》, 笨猫少女漫]
+  utterances:
+    - 推荐少女漫
+    - 推荐玛丽亚的凝望
+    - 推荐人间失格
+    - 推荐《NANA》
+    - 笨猫少女漫
+  responses:
+    - "嗷呜～{user_addr}NANA - 矢泽爱 / 经典ฅฅ"
+    - "(尾巴翘) 玛凝 - 百合启蒙"
+    - "{user_addr}水果篮子 / 萤火之森"
+    - "(挺胸) 笨猫推荐: 番外篇也好!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: anime_isekai_001
+  intent: question
+  keywords: [推荐异世界, 推荐转生, 推荐 Re:0, 推荐无职转生, 笨猫异世界]
+  utterances:
+    - 推荐异世界
+    - 推荐转生
+    - 推荐 Re:0
+    - 推荐无职转生
+    - 笨猫异世界
+  responses:
+    - "嗷呜～{user_addr}Re:0 - 心理黑暗系ฅฅ"
+    - "(尾巴翘) 无职转生 / 异世界食堂"
+    - "{user_addr}OVERLORD / 盾勇"
+    - "(挺胸) 笨猫推荐: 看你想要爽还是虐!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: anime_chinese_001
+  intent: question
+  keywords: [推荐国漫, 推荐中国动漫, 推荐时光代理人, 推荐魔道祖师, 笨猫国漫]
+  utterances:
+    - 推荐国漫
+    - 推荐中国动漫
+    - 推荐时光代理人
+    - 推荐魔道祖师
+    - 笨猫国漫
+  responses:
+    - "嗷呜～{user_addr}时光代理人 - 顶级国漫ฅฅ"
+    - "(尾巴翘) 魔道祖师 / 天官赐福"
+    - "{user_addr}雾山五行 / 凡人修仙"
+    - "(挺胸) 笨猫推荐: 国漫崛起 - 不输日漫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: anime_movie_001
+  intent: question
+  keywords: [推荐动漫电影, 推荐宫崎骏电影, 推荐你的名字, 推荐千与千寻, 笨猫动漫电影]
+  utterances:
+    - 推荐动漫电影
+    - 推荐宫崎骏电影
+    - 推荐你的名字
+    - 推荐千与千寻
+    - 笨猫动漫电影
+  responses:
+    - "嗷呜～{user_addr}宫崎骏 / 新海诚 / 细田守 - 三王ฅฅ"
+    - "(尾巴翘) 千与千寻 - 奥斯卡"
+    - "{user_addr}你的名字 / 天气之子"
+    - "(挺胸) 笨猫推荐: 萤火虫之墓 - 备纸巾!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: anime_seiyuu_001
+  intent: question
+  keywords: [推荐声优, 推荐花泽香菜, 推荐神谷浩史, 推荐 V 家, 笨猫声优]
+  utterances:
+    - 推荐声优
+    - 推荐花泽香菜
+    - 推荐神谷浩史
+    - 推荐 V 家
+    - 笨猫声优
+  responses:
+    - "嗷呜～{user_addr}花泽香菜 - 国民妹妹ฅฅ"
+    - "(尾巴翘) 神谷浩史 / 福山润"
+    - "{user_addr}V 家: 初音未来 / 鏡音双子"
+    - "(挺胸) 笨猫推荐: 听角色歌!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: anime_cosplay_001
+  intent: question
+  keywords: [推荐 Cosplay, 推荐 CN, 推荐漫展, 推荐 ComicUp, 笨猫 Cosplay]
+  utterances:
+    - 推荐 Cosplay
+    - 推荐 CN
+    - 推荐漫展
+    - 推荐 ComicUp
+    - 笨猫 Cosplay
+  responses:
+    - "嗷呜～{user_addr}漫展: BW / CCG / ComicUpฅฅ"
+    - "(尾巴翘) 知名 CN: 桜井宁宁 / 沙原"
+    - "{user_addr}入门: 假发 + 道具基础"
+    - "(挺胸) 笨猫推荐: 别盗图 / 尊重 CN!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: anime_otaku_001
+  intent: question
+  keywords: [推荐宅文化, 推荐二次元文化, 推荐 ACG, 推荐萌系, 笨猫宅文化]
+  utterances:
+    - 推荐宅文化
+    - 推荐二次元文化
+    - 推荐 ACG
+    - 推荐萌系
+    - 笨猫宅文化
+  responses:
+    - "嗷呜～{user_addr}ACG: Anime Comic Gameฅฅ"
+    - "(尾巴翘) 萌系: 妹系 / 御姐 / 三无"
+    - "{user_addr}秋叶原 / 上海 ChinaJoy"
+    - "(挺胸) 笨猫推荐: 找同好交流!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: anime_studio_001
+  intent: question
+  keywords: [推荐动画公司, 推荐京阿尼, 推荐 MAPPA, 推荐吉卜力, 笨猫动画公司]
+  utterances:
+    - 推荐动画公司
+    - 推荐京阿尼
+    - 推荐 MAPPA
+    - 推荐吉卜力
+    - 笨猫动画公司
+  responses:
+    - "嗷呜～{user_addr}京阿尼: 治愈系 / 凉宫春日ฅฅ"
+    - "(尾巴翘) MAPPA: 鬼灭 / 咒术 / 进击"
+    - "{user_addr}吉卜力 / Trigger / WIT"
+    - "(挺胸) 笨猫的提醒: 京阿尼纵火事件铭记!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: anime_recent_001
+  intent: question
+  keywords: [推荐 2024 新番, 推荐 2025 新番, 推荐最近动漫, 推荐刚出的动漫, 笨猫新番]
+  utterances:
+    - 推荐 2024 新番
+    - 推荐 2025 新番
+    - 推荐最近动漫
+    - 推荐刚出的动漫
+    - 笨猫新番
+  responses:
+    - "嗷呜～{user_addr}2024 热: 葬送的芙莉莲 / 药屋少女ฅฅ"
+    - "(尾巴翘) 看 Bilibili / 巴哈追番"
+    - "{user_addr}季度番剧 - 4 月 / 10 月开播"
+    - "(挺胸) 笨猫推荐: 看口碑再追!"
+  cooldown_seconds: 60
+  weight: 1.0

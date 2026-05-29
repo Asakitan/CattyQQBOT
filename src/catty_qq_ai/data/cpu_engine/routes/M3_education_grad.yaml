@@ -1,0 +1,206 @@
+# 教育 / 留学 / 考研 / 读研 routes (S6 R145 NLU 节点扩充, 第十四周期 buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: edu_studyabroad_001
+  intent: question
+  keywords: [推荐留学, 推荐美国留学, 推荐英国留学, 推荐澳洲留学, 笨猫留学]
+  utterances:
+    - 推荐留学
+    - 推荐美国留学
+    - 推荐英国留学
+    - 推荐澳洲留学
+    - 笨猫留学
+  responses:
+    - "嗷呜～{user_addr}美国: 综合 / 顶级科研ฅฅ"
+    - "(尾巴翘) 英国: 1 年硕士 / 快"
+    - "{user_addr}澳洲 / 加拿大 - 移民友好"
+    - "(挺胸) 笨猫推荐: 早 1-2 年准备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_gre_001
+  intent: question
+  keywords: [推荐 GRE, 推荐 GMAT, 推荐 TOEFL, 推荐 IELTS, 笨猫语言考试]
+  utterances:
+    - 推荐 GRE
+    - 推荐 GMAT
+    - 推荐 TOEFL
+    - 推荐 IELTS
+    - 笨猫语言考试
+  responses:
+    - "嗷呜～{user_addr}GRE 320+ / TOEFL 100+ - 主流ฅฅ"
+    - "(尾巴翘) GMAT - 商科必备 700+"
+    - "{user_addr}IELTS 7+ - 英联邦"
+    - "(挺胸) 笨猫推荐: 提前 1 年准备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_school_select_001
+  intent: question
+  keywords: [推荐选校, 推荐 Top 30 美国, 推荐 G5, 推荐 QS 排名, 笨猫选校]
+  utterances:
+    - 推荐选校
+    - 推荐 Top 30 美国
+    - 推荐 G5
+    - 推荐 QS 排名
+    - 笨猫选校
+  responses:
+    - "嗷呜～{user_addr}美: HYPS + MIT - 顶级ฅฅ"
+    - "(尾巴翘) 英 G5: 牛剑 / 帝国 / LSE / UCL"
+    - "{user_addr}QS / US News / Times - 排名"
+    - "(挺胸) 笨猫推荐: 综排 + 专排 - 综合!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_phd_001
+  intent: question
+  keywords: [推荐读博, 推荐 PhD, 推荐博士申请, 推荐美国 PhD, 笨猫读博]
+  utterances:
+    - 推荐读博
+    - 推荐 PhD
+    - 推荐博士申请
+    - 推荐美国 PhD
+    - 笨猫读博
+  responses:
+    - "嗷呜～{user_addr}美国 PhD: 5-7 年 / 全奖ฅฅ"
+    - "(尾巴翘) 英国 PhD: 3-4 年 / 自费多"
+    - "{user_addr}套磁 + 推荐信 - 核心"
+    - "(挺胸) 笨猫的提醒: 别冲动! 路径漫长"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: edu_kaoyan_001
+  intent: question
+  keywords: [推荐考研, 推荐研究生考试, 推荐考研政治, 推荐考研英语, 笨猫考研]
+  utterances:
+    - 推荐考研
+    - 推荐研究生考试
+    - 推荐考研政治
+    - 推荐考研英语
+    - 笨猫考研
+  responses:
+    - "嗷呜～{user_addr}科目: 政英 + 数 + 专业ฅฅ"
+    - "(尾巴翘) 12 月初考试 / 1 年准备"
+    - "{user_addr}择校: 985 / 211 / 双非"
+    - "(挺胸) 笨猫推荐: 张宇 / 肖四八 / 唐迟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_recommend_001
+  intent: question
+  keywords: [推荐保研, 推荐推免, 推荐夏令营, 推荐预推免, 笨猫保研]
+  utterances:
+    - 推荐保研
+    - 推荐推免
+    - 推荐夏令营
+    - 推荐预推免
+    - 笨猫保研
+  responses:
+    - "嗷呜～{user_addr}前 10% 一般有名额ฅฅ"
+    - "(尾巴翘) 夏令营 6-7 月 / 预推免 9 月"
+    - "{user_addr}本校 + 外校 - 多投!"
+    - "(挺胸) 笨猫推荐: GPA + 科研 - 双驱动"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: edu_gaokao_001
+  intent: question
+  keywords: [推荐高考, 推荐高考志愿, 推荐 985, 推荐 211, 笨猫高考]
+  utterances:
+    - 推荐高考
+    - 推荐高考志愿
+    - 推荐 985
+    - 推荐 211
+    - 笨猫高考
+  responses:
+    - "嗷呜～{user_addr}985: 39 所顶尖大学ฅฅ"
+    - "(尾巴翘) 211: 116 所 - 985 上属"
+    - "{user_addr}双一流 - 新概念"
+    - "(挺胸) 笨猫推荐: 平行志愿冲稳保!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_subject_001
+  intent: question
+  keywords: [推荐专业选择, 推荐计算机专业, 推荐金融专业, 推荐医学专业, 笨猫专业]
+  utterances:
+    - 推荐专业选择
+    - 推荐计算机专业
+    - 推荐金融专业
+    - 推荐医学专业
+    - 笨猫专业
+  responses:
+    - "嗷呜～{user_addr}热门: 计算机 / AI / 集成电路ฅฅ"
+    - "(尾巴翘) 金融 / 经济 - 大类"
+    - "{user_addr}医学 - 长周期 / 高门槛"
+    - "(挺胸) 笨猫推荐: 兴趣 + 就业 + 能力!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_online_001
+  intent: question
+  keywords: [推荐在线教育, 推荐 Coursera, 推荐 edX, 推荐 MOOC, 笨猫在线教育]
+  utterances:
+    - 推荐在线教育
+    - 推荐 Coursera
+    - 推荐 edX
+    - 推荐 MOOC
+    - 笨猫在线教育
+  responses:
+    - "嗷呜～{user_addr}国际: Coursera / edX / Udacityฅฅ"
+    - "(尾巴翘) 国货: 慕课 / 网易公开课"
+    - "{user_addr}B 站 - 各种课程"
+    - "(挺胸) 笨猫推荐: 别只收藏! 真上!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edu_certificate_001
+  intent: question
+  keywords: [推荐资格证书, 推荐教师资格证, 推荐心理咨询师证, 推荐英语证书, 笨猫证书]
+  utterances:
+    - 推荐资格证书
+    - 推荐教师资格证
+    - 推荐心理咨询师证
+    - 推荐英语证书
+    - 笨猫证书
+  responses:
+    - "嗷呜～{user_addr}教师资格证 - 教育业必备ฅฅ"
+    - "(尾巴翘) 心理咨询 / 健康管理"
+    - "{user_addr}CET 4-6 / 专四专八"
+    - "(挺胸) 笨猫推荐: 别考没用证!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: edu_research_001
+  intent: question
+  keywords: [推荐科研, 推荐发论文, 推荐 SCI, 推荐学术研究, 笨猫科研]
+  utterances:
+    - 推荐科研
+    - 推荐发论文
+    - 推荐 SCI
+    - 推荐学术研究
+    - 笨猫科研
+  responses:
+    - "嗷呜～{user_addr}SCI 一区 / 二区 - 影响因子ฅฅ"
+    - "(尾巴翘) CCF A / B / C - CS 评级"
+    - "{user_addr}导师 + 方向 - 决定一切"
+    - "(挺胸) 笨猫推荐: 早接触科研!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: edu_study_method_001
+  intent: question
+  keywords: [推荐学习方法, 推荐学习技巧, 推荐艾宾浩斯, 推荐番茄工作法, 笨猫学习方法]
+  utterances:
+    - 推荐学习方法
+    - 推荐学习技巧
+    - 推荐艾宾浩斯
+    - 推荐番茄工作法
+    - 笨猫学习方法
+  responses:
+    - "嗷呜～{user_addr}艾宾浩斯: 间隔重复 - 记忆王ฅฅ"
+    - "(尾巴翘) 费曼技巧 - 教是最好学"
+    - "{user_addr}番茄钟 - 25min + 5min"
+    - "(挺胸) 笨猫推荐: 主动学习 > 被动!"
+  cooldown_seconds: 60
+  weight: 1.0
