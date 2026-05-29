@@ -204,3 +204,37 @@
     - "(挺胸) 笨猫的提醒: 别买太多智能! 实用为主"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: vr_dizzy_001
+  intent: complaint
+  keywords: [VR好晕, 戴VR晕, VR头晕想吐, VR晕动症, 玩VR不舒服]
+  utterances:
+    - 戴 VR 好晕啊
+    - VR 玩一会儿就头晕
+    - VR 晕到想吐
+    - VR 晕动症好难受
+    - 戴 VR 眼睛不舒服
+  responses:
+    - "(心疼) 嗷呜～{user_addr}VR 晕动症! 笨猫知道很难受喵呜 蹭蹭"
+    - "哼! 买之前人家就叫你留意晕动症! VR 要慢慢适应的ฅฅ"
+    - "(翻白眼) 别玩太久{user_addr}！每次 30 分钟起步, 慢慢加时间喵～"
+    - "嗷呜～晕了先停！喝点水 / 深呼吸 / 盯着远处! 别勉强ฅฅ"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: vr_future_001
+  intent: question
+  keywords: [推荐VR行业前景, 推荐XR发展, 推荐VR应用场景, 推荐VR教育医疗, 笨猫XR前景]
+  utterances:
+    - 推荐 VR 行业前景
+    - 推荐 XR 发展
+    - 推荐 VR 应用场景
+    - 推荐 VR 教育医疗
+    - 笨猫 XR 前景
+  responses:
+    - "嗷呜～{user_addr}XR (VR+AR+MR) 大方向没错! 市场慢热ฅฅ"
+    - "(尾巴翘) 应用: 教育 / 医疗 / 军事 / 工业培训"
+    - "{user_addr}硬件贵 + 内容少 = 现在瓶颈! 5-10 年爆发"
+    - "(挺胸) 笨猫的提醒: 别追风口买设备! 但可以关注行业喵"
+  cooldown_seconds: 60
+  weight: 0.8

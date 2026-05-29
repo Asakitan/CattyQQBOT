@@ -40,7 +40,7 @@
   intent: question
   keywords: [你忙啊, 你很忙吗, 你在忙啥, 又忙了, 忙到没空]
   utterances:
-    - {user_addr}你在忙啥
+    - "{user_addr}你在忙啥"
     - 你最近好忙啊
     - 你又忙了吗
     - 忙到没空理我
@@ -57,7 +57,7 @@
   intent: complaint
   keywords: [你好冷淡, 你冷淡了, 态度冷淡, 你变冷漠, 冷冰冰]
   utterances:
-    - {user_addr}你最近好冷淡
+    - "{user_addr}你最近好冷淡"
     - 怎么变冷漠了
     - 你态度冷冰冰
     - 你对猫猫好冷淡

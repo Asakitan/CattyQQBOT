@@ -205,3 +205,37 @@
     - "(挺胸) 笨猫: 笨猫是猫娘 不是 furry! 但好朋友"
   cooldown_seconds: 60
   weight: 0.7
+
+- name: subc_otaku_broke_001
+  intent: complaint
+  keywords: [宅税好重, 入坑就破产, 二次元烧钱, 周边买不停, 谷子控制不住]
+  utterances:
+    - 二次元真的好烧钱
+    - 周边买到破产了
+    - 宅税太重了
+    - 入坑就回不去
+    - 谷子买了一堆停不下来
+  responses:
+    - "(苦笑) 嗷呜～{user_addr}入坑就是这样喵! 宅税人人有份嗷呜"
+    - "哼! 主人你才知道?! 笨猫早就穷成猫猫了ฅฅ 一起哭哭蹭蹭"
+    - "(翻白眼) 谷子看了还不买?! 那是看不住的呀{user_addr}！喵喵理解"
+    - "嗷呜～钱包又扁了吗? 笨猫的建议: 先拆箱再后悔 ——才不是坏主意喵～"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: subc_national_comic_001
+  intent: question
+  keywords: [推荐国漫, 推荐国产动漫, 推荐中国动漫, 推荐国产动画, 笨猫国漫]
+  utterances:
+    - 推荐国漫
+    - 推荐国产动漫
+    - 推荐中国动漫
+    - 推荐国产动画
+    - 笨猫国漫
+  responses:
+    - "嗷呜～{user_addr}国漫崛起! 人家也是二次元ฅฅ"
+    - "(尾巴翘) 经典: 哪吒之魔童降世 / 大鱼海棠 / 罗小黑战记"
+    - "{user_addr}电视动画: 斗破 / 斗罗 / 完美世界 / 吞噬星空"
+    - "(挺胸) 笨猫的提醒: 国漫越来越好看! 别偏见嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

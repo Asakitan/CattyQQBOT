@@ -205,3 +205,37 @@
     - "(挺胸) 笨猫的提醒: 别穿太薄! 寒从脚起"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: tcm_cold_hands_001
+  intent: complaint
+  keywords: [手脚冰凉, 总是怕冷, 手脚冷冰冰, 脚老是凉的, 一到冬天手冰]
+  utterances:
+    - 手脚总是冰凉凉的
+    - 我一直怕冷啊
+    - 手脚冷冰冰的
+    - 脚老是凉的
+    - 一到冬天手就冰
+  responses:
+    - "(心疼) 嗷呜～{user_addr}手脚冰凉多半是阳虚喵! 快去泡脚蹭蹭"
+    - "哼! 知道怕冷还不早保暖! 秋裤穿了吗{user_addr}?! 笨猫严肃问喵～"
+    - "(贴贴) 中医说阳气不足才会冷～艾灸 / 姜枣茶 / 多运动! 笨猫有妙招"
+    - "嗷呜～泡脚加生姜 + 红枣！{user_addr}坚持两周看看！暖和了告诉猫猫喵ฅฅ"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: tcm_moxa_001
+  intent: question
+  keywords: [推荐艾灸, 推荐拔罐, 推荐刮痧, 推荐针灸调理, 笨猫艾灸]
+  utterances:
+    - 推荐艾灸
+    - 推荐拔罐
+    - 推荐刮痧
+    - 推荐针灸调理
+    - 笨猫艾灸
+  responses:
+    - "嗷呜～{user_addr}艾灸: 温经散寒! 阳虚体寒最爱ฅฅ"
+    - "(尾巴翘) 拔罐: 祛湿气 / 刮痧: 疏通经络 / 针灸: 调穴位"
+    - "{user_addr}艾灸常用穴: 关元 / 气海 / 命门 / 足三里"
+    - "(挺胸) 笨猫的提醒: 别自己乱灸! 找正规中医馆"
+  cooldown_seconds: 60
+  weight: 0.9

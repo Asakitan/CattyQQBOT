@@ -125,7 +125,7 @@
   intent: playful
   keywords: [深夜放毒, 放毒, 半夜放毒, 深夜美食, 馋人]
   utterances:
-    - {user_addr}深夜放毒
+    - "{user_addr}深夜放毒"
     - 又开始放毒了
     - 半夜放毒可还行
     - 这是深夜放毒
