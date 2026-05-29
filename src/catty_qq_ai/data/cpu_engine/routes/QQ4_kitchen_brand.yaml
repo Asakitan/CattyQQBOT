@@ -1,0 +1,206 @@
+# 厨具品牌 / 锅具 / 餐具 routes (S6 R446 NLU 节点扩充, 第四十四周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: kb_pot_brand_001
+  intent: question
+  keywords: [推荐锅具品牌, 推荐 Le Creuset, 推荐 Staub, 推荐铸铁锅, 笨猫锅具]
+  utterances:
+    - 推荐锅具品牌
+    - 推荐 Le Creuset
+    - 推荐 Staub
+    - 推荐铸铁锅
+    - 笨猫锅具
+  responses:
+    - "嗷呜～{user_addr}Le Creuset - 法国珐琅铸铁ฅฅ"
+    - "(尾巴翘) Staub - 黑珐琅 / 锁水强"
+    - "{user_addr}颜值 + 实用 / 一辈子"
+    - "(挺胸) 笨猫推荐: Staub 圆形 24cm!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_stainless_001
+  intent: question
+  keywords: [推荐不锈钢锅, 推荐双立人锅, 推荐 Fissler, 推荐 WMF, 笨猫不锈钢锅]
+  utterances:
+    - 推荐不锈钢锅
+    - 推荐双立人锅
+    - 推荐 Fissler
+    - 推荐 WMF
+    - 笨猫不锈钢锅
+  responses:
+    - "嗷呜～{user_addr}Fissler - 德国不锈钢之王ฅฅ"
+    - "(尾巴翘) 双立人 Zwilling / WMF"
+    - "{user_addr}三层复合底 / 导热均匀"
+    - "(挺胸) 笨猫推荐: Fissler 原味锅!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_nonstick_001
+  intent: question
+  keywords: [推荐不粘锅, 推荐 Tefal, 推荐特福, 推荐 Scanpan, 笨猫不粘锅]
+  utterances:
+    - 推荐不粘锅
+    - 推荐 Tefal
+    - 推荐特福
+    - 推荐 Scanpan
+    - 笨猫不粘锅
+  responses:
+    - "嗷呜～{user_addr}Tefal 特福 - 不粘锅鼻祖ฅฅ"
+    - "(尾巴翘) Scanpan / 苏泊尔"
+    - "{user_addr}煎蛋零失败 / 少油健康"
+    - "(挺胸) 笨猫推荐: Tefal 钛金系列!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_iron_001
+  intent: question
+  keywords: [推荐铁锅, 推荐 Lodge, 推荐章丘铁锅, 推荐铸铁煎锅, 笨猫铁锅]
+  utterances:
+    - 推荐铁锅
+    - 推荐 Lodge
+    - 推荐章丘铁锅
+    - 推荐铸铁煎锅
+    - 笨猫铁锅
+  responses:
+    - "嗷呜～{user_addr}Lodge - 美国铸铁锅经典ฅฅ"
+    - "(尾巴翘) 章丘铁锅 / 三万六千锤"
+    - "{user_addr}养锅 / 越用越好用"
+    - "(挺胸) 笨猫推荐: Lodge 10 寸煎锅!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_clay_pot_001
+  intent: question
+  keywords: [推荐砂锅, 推荐紫砂锅, 推荐陶土锅, 推荐土锅, 笨猫砂锅]
+  utterances:
+    - 推荐砂锅
+    - 推荐紫砂锅
+    - 推荐陶土锅
+    - 推荐土锅
+    - 笨猫砂锅
+  responses:
+    - "嗷呜～{user_addr}宜兴紫砂 - 中国经典ฅฅ"
+    - "(尾巴翘) 日本伊贺烧 / 土锅"
+    - "{user_addr}炖煮 / 米饭 / 保温好"
+    - "(挺胸) 笨猫推荐: 紫砂煲汤神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_tableware_001
+  intent: question
+  keywords: [推荐餐具, 推荐 Royal Copenhagen, 推荐皇家哥本哈根, 推荐西餐餐具, 笨猫餐具]
+  utterances:
+    - 推荐餐具
+    - 推荐 Royal Copenhagen
+    - 推荐皇家哥本哈根
+    - 推荐西餐餐具
+    - 笨猫餐具
+  responses:
+    - "嗷呜～{user_addr}Royal Copenhagen - 丹麦皇室ฅฅ"
+    - "(尾巴翘) Wedgwood / Meissen / Hermès"
+    - "{user_addr}手绘瓷 / 仪式感拉满"
+    - "(挺胸) 笨猫推荐: 蓝唐草入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_silver_001
+  intent: question
+  keywords: [推荐银餐具, 推荐 Christofle, 推荐昆庭, 推荐银器, 笨猫银餐具]
+  utterances:
+    - 推荐银餐具
+    - 推荐 Christofle
+    - 推荐昆庭
+    - 推荐银器
+    - 笨猫银餐具
+  responses:
+    - "嗷呜～{user_addr}Christofle 昆庭 - 法国银器ฅฅ"
+    - "(尾巴翘) Georg Jensen / Tiffany"
+    - "{user_addr}镀银 / 925 / 传家宝"
+    - "(挺胸) 笨猫推荐: Christofle Albi 系列!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_glassware_001
+  intent: question
+  keywords: [推荐玻璃器皿, 推荐 Riedel, 推荐酒杯, 推荐 Baccarat, 笨猫玻璃]
+  utterances:
+    - 推荐玻璃器皿
+    - 推荐 Riedel
+    - 推荐酒杯
+    - 推荐 Baccarat
+    - 笨猫玻璃
+  responses:
+    - "嗷呜～{user_addr}Riedel - 奥地利酒杯专家ฅฅ"
+    - "(尾巴翘) Baccarat 巴卡拉 / Lalique"
+    - "{user_addr}按葡萄品种分杯型 / 专业"
+    - "(挺胸) 笨猫推荐: Riedel Vinum 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_wood_001
+  intent: question
+  keywords: [推荐木餐具, 推荐柳宗理, 推荐木碗, 推荐木筷, 笨猫木餐具]
+  utterances:
+    - 推荐木餐具
+    - 推荐柳宗理
+    - 推荐木碗
+    - 推荐木筷
+    - 笨猫木餐具
+  responses:
+    - "嗷呜～{user_addr}柳宗理 - 日本设计大师ฅฅ"
+    - "(尾巴翘) 我的器 / 木屋森林"
+    - "{user_addr}温润手感 / 天然环保"
+    - "(挺胸) 笨猫推荐: 柳宗理沙拉碗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_tea_set_001
+  intent: question
+  keywords: [推荐茶具, 推荐紫砂壶, 推荐盖碗, 推荐茶杯, 笨猫茶具]
+  utterances:
+    - 推荐茶具
+    - 推荐紫砂壶
+    - 推荐盖碗
+    - 推荐茶杯
+    - 笨猫茶具
+  responses:
+    - "嗷呜～{user_addr}宜兴紫砂壶 - 茶人最爱ฅฅ"
+    - "(尾巴翘) 景德镇盖碗 / 汝窑茶杯"
+    - "{user_addr}一壶一茶 / 养壶有趣"
+    - "(挺胸) 笨猫推荐: 西施壶入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_coffee_gear_001
+  intent: question
+  keywords: [推荐咖啡器具, 推荐 Hario, 推荐手冲壶, 推荐 V60, 笨猫咖啡器具]
+  utterances:
+    - 推荐咖啡器具
+    - 推荐 Hario
+    - 推荐手冲壶
+    - 推荐 V60
+    - 笨猫咖啡器具
+  responses:
+    - "嗷呜～{user_addr}Hario V60 - 手冲圣物ฅฅ"
+    - "(尾巴翘) Kalita / Chemex / 月兔印"
+    - "{user_addr}滤杯 + 分享壶 + 手冲壶"
+    - "(挺胸) 笨猫推荐: Hario V60 02 套装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_storage_001
+  intent: question
+  keywords: [推荐厨房收纳, 推荐厨房整理, 推荐橱柜收纳, 推荐调料架, 笨猫厨房收纳]
+  utterances:
+    - 推荐厨房收纳
+    - 推荐厨房整理
+    - 推荐橱柜收纳
+    - 推荐调料架
+    - 笨猫厨房收纳
+  responses:
+    - "嗷呜～{user_addr}宜家 / 无印良品收纳盒ฅฅ"
+    - "(尾巴翘) 调料架 / 刀架 / 沥水架"
+    - "{user_addr}垂直空间 / 分区收纳"
+    - "(挺胸) 笨猫推荐: 抽屉分隔片必备!"
+  cooldown_seconds: 60
+  weight: 1.0

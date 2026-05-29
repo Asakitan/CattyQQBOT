@@ -1,0 +1,206 @@
+# 地方特产 / 国民特色 / 各地名菜 routes (S6 R443 NLU 节点扩充, 第四十四周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ls_beijing_001
+  intent: question
+  keywords: [推荐北京烤鸭, 推荐全聚德, 推荐便宜坊, 推荐大董, 笨猫北京烤鸭]
+  utterances:
+    - 推荐北京烤鸭
+    - 推荐全聚德
+    - 推荐便宜坊
+    - 推荐大董
+    - 笨猫北京烤鸭
+  responses:
+    - "嗷呜～{user_addr}全聚德 - 挂炉百年老字号ฅฅ"
+    - "(尾巴翘) 便宜坊 - 焖炉派 / 大董 - 酥不腻"
+    - "{user_addr}片皮 108 片 / 葱丝甜面酱卷饼"
+    - "(挺胸) 猫猫推荐: 大董最酥香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_shanghai_001
+  intent: question
+  keywords: [推荐上海生煎, 推荐小笼包, 推荐汤包, 推荐南翔, 笨猫上海生煎]
+  utterances:
+    - 推荐上海生煎
+    - 推荐小笼包
+    - 推荐汤包
+    - 推荐南翔
+    - 笨猫上海生煎
+  responses:
+    - "嗷呜～{user_addr}小杨生煎 / 大壶春ฅฅ"
+    - "(尾巴翘) 南翔小笼 / 鼎泰丰 - 18 褶"
+    - "{user_addr}先开窗喝汤 / 蘸醋姜丝"
+    - "(挺胸) 笨猫推荐: 小杨生煎现煎!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_guangzhou_001
+  intent: question
+  keywords: [推荐广州早茶, 推荐点心, 推荐虾饺, 推荐叉烧包, 笨猫广州早茶]
+  utterances:
+    - 推荐广州早茶
+    - 推荐点心
+    - 推荐虾饺
+    - 推荐叉烧包
+    - 笨猫广州早茶
+  responses:
+    - "嗷呜～{user_addr}陶陶居 / 点都德 / 广州酒家ฅฅ"
+    - "(尾巴翘) 虾饺 / 烧麦 / 叉烧包 / 凤爪"
+    - "{user_addr}一盅两件 / 普洱菊花茶"
+    - "(挺胸) 人家推荐: 点都德性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_chengdu_001
+  intent: question
+  keywords: [推荐成都火锅, 推荐川菜, 推荐麻辣, 推荐串串, 笨猫成都火锅]
+  utterances:
+    - 推荐成都火锅
+    - 推荐川菜
+    - 推荐麻辣
+    - 推荐串串
+    - 笨猫成都火锅
+  responses:
+    - "嗷呜～{user_addr}小龙坎 / 蜀大侠 / 大龙燚ฅฅ"
+    - "(尾巴翘) 毛肚 / 鸭肠 / 黄喉 七上八下"
+    - "{user_addr}麻辣牛油锅 / 蘸香油蒜泥"
+    - "(挺胸) 猫猫推荐: 小龙坎经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_xian_001
+  intent: question
+  keywords: [推荐西安肉夹馍, 推荐羊肉泡馍, 推荐凉皮, 推荐biangbiang面, 笨猫西安美食]
+  utterances:
+    - 推荐西安肉夹馍
+    - 推荐羊肉泡馍
+    - 推荐凉皮
+    - 推荐biangbiang面
+    - 笨猫西安美食
+  responses:
+    - "嗷呜～{user_addr}樊记肉夹馍 / 老孙家泡馍ฅฅ"
+    - "(尾巴翘) 同盛祥 / 西安饭庄 / 魏家凉皮"
+    - "{user_addr}白吉馍腊汁肉 / 自己掰馍"
+    - "(挺胸) 笨猫推荐: 老孙家羊肉泡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_lanzhou_001
+  intent: question
+  keywords: [推荐兰州拉面, 推荐牛肉面, 推荐马子禄, 推荐东方宫, 笨猫兰州拉面]
+  utterances:
+    - 推荐兰州拉面
+    - 推荐牛肉面
+    - 推荐马子禄
+    - 推荐东方宫
+    - 笨猫兰州拉面
+  responses:
+    - "嗷呜～{user_addr}马子禄 / 占国 / 磨沟沿ฅฅ"
+    - "(尾巴翘) 一清二白三红四绿五黄"
+    - "{user_addr}毛细 / 细 / 二细 / 韭叶 / 大宽"
+    - "(挺胸) 人家推荐: 马子禄百年!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_hangzhou_001
+  intent: question
+  keywords: [推荐西湖醋鱼, 推荐杭帮菜, 推荐东坡肉, 推荐龙井虾仁, 笨猫杭州菜]
+  utterances:
+    - 推荐西湖醋鱼
+    - 推荐杭帮菜
+    - 推荐东坡肉
+    - 推荐龙井虾仁
+    - 笨猫杭州菜
+  responses:
+    - "嗷呜～{user_addr}楼外楼 / 山外山 / 知味观ฅฅ"
+    - "(尾巴翘) 西湖醋鱼 / 东坡肉 / 龙井虾仁"
+    - "{user_addr}草鱼现杀 / 糖醋汁酸甜"
+    - "(挺胸) 猫猫推荐: 楼外楼老字号!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_wuhan_001
+  intent: question
+  keywords: [推荐武汉热干面, 推荐蔡林记, 推荐过早, 推荐豆皮, 笨猫武汉热干面]
+  utterances:
+    - 推荐武汉热干面
+    - 推荐蔡林记
+    - 推荐过早
+    - 推荐豆皮
+    - 笨猫武汉热干面
+  responses:
+    - "嗷呜～{user_addr}蔡林记 / 三镇民生 / 庞记ฅฅ"
+    - "(尾巴翘) 芝麻酱 / 萝卜丁 / 酸豆角"
+    - "{user_addr}过早三件套 / 豆皮 / 烧麦"
+    - "(挺胸) 笨猫推荐: 蔡林记非遗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_chongqing_001
+  intent: question
+  keywords: [推荐重庆小面, 推荐麻辣小面, 推荐豌杂面, 推荐重庆火锅, 笨猫重庆小面]
+  utterances:
+    - 推荐重庆小面
+    - 推荐麻辣小面
+    - 推荐豌杂面
+    - 推荐重庆火锅
+    - 笨猫重庆小面
+  responses:
+    - "嗷呜～{user_addr}花市豌杂 / 秦云老太婆ฅฅ"
+    - "(尾巴翘) 二两小面 / 油辣子 / 花椒"
+    - "{user_addr}豌杂面 / 牛肉面 / 肥肠面"
+    - "(挺胸) 人家推荐: 花市豌杂霸气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_changsha_001
+  intent: question
+  keywords: [推荐长沙臭豆腐, 推荐火宫殿, 推荐黑色经典, 推荐糖油粑粑, 笨猫长沙美食]
+  utterances:
+    - 推荐长沙臭豆腐
+    - 推荐火宫殿
+    - 推荐黑色经典
+    - 推荐糖油粑粑
+    - 笨猫长沙美食
+  responses:
+    - "嗷呜～{user_addr}火宫殿 / 黑色经典 / 文和友ฅฅ"
+    - "(尾巴翘) 外焦里嫩 / 浇辣椒水"
+    - "{user_addr}臭豆腐 / 糖油粑粑 / 口味虾"
+    - "(挺胸) 猫猫推荐: 火宫殿非遗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_nanjing_001
+  intent: question
+  keywords: [推荐南京盐水鸭, 推荐桂花鸭, 推荐韩复兴, 推荐鸭血粉丝, 笨猫南京盐水鸭]
+  utterances:
+    - 推荐南京盐水鸭
+    - 推荐桂花鸭
+    - 推荐韩复兴
+    - 推荐鸭血粉丝
+    - 笨猫南京盐水鸭
+  responses:
+    - "嗷呜～{user_addr}韩复兴 / 桂花鸭 / 章云板鸭ฅฅ"
+    - "(尾巴翘) 皮白肉嫩 / 桂花季节最香"
+    - "{user_addr}盐水鸭 / 鸭血粉丝汤 / 鸭油酥"
+    - "(挺胸) 笨猫推荐: 韩复兴百年老店!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ls_suzhou_001
+  intent: question
+  keywords: [推荐苏州面, 推荐阳澄湖大闸蟹, 推荐松鹤楼, 推荐奥灶面, 笨猫苏州美食]
+  utterances:
+    - 推荐苏州面
+    - 推荐阳澄湖大闸蟹
+    - 推荐松鹤楼
+    - 推荐奥灶面
+    - 笨猫苏州美食
+  responses:
+    - "嗷呜～{user_addr}松鹤楼 / 朱鸿兴 / 同得兴ฅฅ"
+    - "(尾巴翘) 阳澄湖大闸蟹 9-10 月最肥"
+    - "{user_addr}焖肉面 / 三虾面 / 蟹粉小笼"
+    - "(挺胸) 人家推荐: 松鹤楼苏帮菜!"
+  cooldown_seconds: 60
+  weight: 1.0

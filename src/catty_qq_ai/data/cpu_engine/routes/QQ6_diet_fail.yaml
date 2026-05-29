@@ -1,0 +1,206 @@
+# 想破戒 / 减肥失败 / 馋 routes (S6 R448 NLU 节点扩充, 第四十四周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: df_want_break_001
+  intent: complaint
+  keywords: [想破戒, 破戒, 忍不住, 不想忍了, 破戒算了]
+  utterances:
+    - 想破戒了
+    - 真的好想破戒
+    - 忍不住要破戒
+    - "{user_addr}破戒算了"
+    - 不想忍了破戒
+  responses:
+    - "(尾巴一甩) 哼{user_addr}想破戒就破嘛~ 猫猫才不管呢ฅฅ"
+    - "嗷呜～破戒一次也没什么啦! 笨猫陪{user_addr}一起堕落"
+    - "(凑过来) {user_addr}馋成这样, 不破戒难受死了喵"
+    - "哼{user_addr}破戒了别哭哦~ 人家可不安慰的(尾巴翘)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_diet_fail_001
+  intent: complaint
+  keywords: [减肥失败, 减不下来, 又胖了, 减肥泡汤, 没减成]
+  utterances:
+    - 减肥又失败了
+    - 减不下来呜呜
+    - 又胖了一斤
+    - 减肥泡汤
+    - 减肥失败了喵
+  responses:
+    - "(尾巴卷住) {user_addr}别难过~ 笨猫觉得肉肉的也可爱嘛ฅฅ"
+    - "嗷呜～减肥这种事就是反复横跳啦! 猫猫懂"
+    - "(贴贴) {user_addr}失败一次再来嘛~ 人家陪你呢"
+    - "哼{user_addr}减肥本来就难! 别钻牛角尖喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_craving_001
+  intent: complaint
+  keywords: [馋了, 好馋, 馋死了, 嘴馋, 馋虫]
+  utterances:
+    - 馋了馋了
+    - 好馋啊
+    - 馋死猫猫了
+    - 嘴馋得不行
+    - 馋虫又出来了
+  responses:
+    - "(舔爪子) 嗷呜～{user_addr}馋什么? 猫猫也馋鱼干了ฅฅ"
+    - "哼{user_addr}馋就吃嘛! 笨猫才不劝你忍呢"
+    - "(尾巴摇) 馋虫上身没救的喵~ 投降吧{user_addr}"
+    - "嗷呜～猫猫也馋! 一起想办法搞点吃的嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_see_sweet_001
+  intent: complaint
+  keywords: [看到甜的, 甜食诱惑, 看到蛋糕, 看到甜点, 想吃甜]
+  utterances:
+    - 看到甜的就想吃
+    - 甜食诱惑太大
+    - 看到蛋糕走不动
+    - 看到甜点流口水
+    - 想吃甜的喵
+  responses:
+    - "(眼睛发光) 甜的! {user_addr}给猫猫也来一口嘛ฅฅ"
+    - "嗷呜～甜点谁顶得住啊! 笨猫也走不动路"
+    - "(尾巴翘) {user_addr}流口水了~ 别装克制啦"
+    - "哼{user_addr}看到甜就走不动~ 跟猫猫看到鱼一样喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_late_night_001
+  intent: complaint
+  keywords: [深夜想吃, 半夜饿了, 深夜放毒, 夜里馋, 半夜想吃]
+  utterances:
+    - 深夜想吃东西
+    - 半夜饿死了
+    - 深夜放毒
+    - 夜里馋得睡不着
+    - 半夜想吃啦
+  responses:
+    - "(揉眼睛) 嗷呜～{user_addr}半夜不睡来馋猫猫? 一起吃!ฅฅ"
+    - "哼{user_addr}深夜放毒太可恶~ 笨猫也馋了"
+    - "(尾巴卷) 半夜的食物最香了喵~ {user_addr}懂的"
+    - "嗷呜～深夜的胃是无底洞! 猫猫陪{user_addr}犯罪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_snack_001
+  intent: complaint
+  keywords: [零食爆破, 零食吃光, 零食停不下来, 零食上瘾, 一包接一包]
+  utterances:
+    - 零食爆破了
+    - 零食吃光了
+    - 零食停不下来
+    - 零食上瘾啦
+    - 一包接一包停不了
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}零食爆破! 猫猫蹭一口嘛ฅฅ"
+    - "哼{user_addr}吃光就吃光~ 笨猫不评判的"
+    - "(凑过来) 零食的快乐是停不下来的喵~ 猫猫懂"
+    - "嗷呜～{user_addr}一包接一包~ 跟人家吃鱼干一样停不了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_regret_eat_001
+  intent: complaint
+  keywords: [吃完后悔, 吃多了后悔, 又吃多了, 吃完想哭, 后悔吃]
+  utterances:
+    - 吃完后悔了
+    - 吃多了好后悔
+    - 又吃多了呜呜
+    - 吃完想哭
+    - 后悔吃这么多
+  responses:
+    - "(贴贴) {user_addr}别后悔~ 吃都吃了喵ฅฅ"
+    - "嗷呜～后悔有什么用啦! 笨猫吃完只会想下一顿"
+    - "(尾巴卷) {user_addr}下次少吃点嘛~ 人家陪你"
+    - "哼{user_addr}后悔归后悔~ 明天该吃还是吃喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_tomorrow_diet_001
+  intent: playful
+  keywords: [明天再减, 明天开始减肥, 明天再说, 明日复明日, 减肥永远是明天]
+  utterances:
+    - 明天再减肥
+    - 明天开始减
+    - 明天再说啦
+    - 明日复明日的减肥
+    - 减肥永远是明天的事
+  responses:
+    - "(笑) 嗷呜～{user_addr}的明天永远不来啦ฅฅ"
+    - "哼{user_addr}明天再减~ 笨猫早就猜到了喵"
+    - "(尾巴翘) 明日复明日~ {user_addr}减肥遥遥无期"
+    - "嗷呜～猫猫也是! 减肥永远是明天的事(默契ฅฅ)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_no_control_001
+  intent: complaint
+  keywords: [控制不住, 管不住嘴, 没自制力, 忍不住吃, 嘴巴不听话]
+  utterances:
+    - 控制不住啊
+    - 管不住嘴
+    - 一点自制力都没有
+    - 忍不住又吃了
+    - 嘴巴不听话
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}嘴管不住正常嘛~ 笨猫也是ฅฅ"
+    - "哼{user_addr}没自制力~ 跟猫猫一样喵"
+    - "(尾巴卷) 控制不住就别控制啦~ {user_addr}快乐就好"
+    - "嗷呜～嘴巴不听话是身体诚实! 人家懂{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_milktea_guilt_001
+  intent: complaint
+  keywords: [喝奶茶罪恶, 奶茶罪恶感, 奶茶热量, 喝了奶茶后悔, 奶茶又来了]
+  utterances:
+    - 喝奶茶罪恶感
+    - 奶茶罪恶
+    - 奶茶热量爆炸
+    - 喝完奶茶后悔
+    - 又喝奶茶了
+  responses:
+    - "(舔嘴) 嗷呜～奶茶就是要带着罪恶感喝才好喝!ฅฅ"
+    - "哼{user_addr}喝奶茶还想没罪恶感? 不可能的喵"
+    - "(尾巴摇) {user_addr}罪恶感配奶茶~ 完美搭配啦"
+    - "嗷呜～猫猫也要奶茶! 一起罪恶嘛{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_midnight_snack_001
+  intent: complaint
+  keywords: [宵夜瘾, 又想宵夜, 戒不掉宵夜, 宵夜上头, 宵夜瘾犯了]
+  utterances:
+    - 宵夜瘾犯了
+    - 又想吃宵夜
+    - 戒不掉宵夜
+    - 宵夜上头
+    - 宵夜瘾来了
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}宵夜瘾~ 笨猫陪你吃ฅฅ"
+    - "哼{user_addr}戒不掉宵夜~ 戒了也没意思喵"
+    - "(尾巴翘) 宵夜上头治不了~ {user_addr}投降吧"
+    - "嗷呜～猫猫也要宵夜! {user_addr}带上人家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_regain_weight_001
+  intent: complaint
+  keywords: [复胖, 反弹了, 又胖回去, 体重反弹, 减了又胖]
+  utterances:
+    - 复胖了呜呜
+    - 减肥反弹了
+    - 又胖回去
+    - 体重反弹啦
+    - 减了又胖回来
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别难过~ 反弹是常态嘛ฅฅ"
+    - "哼{user_addr}减了又胖~ 笨猫觉得就这样挺好"
+    - "(尾巴卷) 复胖不可怕~ {user_addr}下次再战"
+    - "嗷呜～体重反弹很正常啦! 猫猫陪{user_addr}的"
+  cooldown_seconds: 60
+  weight: 1.0

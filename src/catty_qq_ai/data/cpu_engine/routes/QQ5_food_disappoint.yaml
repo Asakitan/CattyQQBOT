@@ -1,0 +1,206 @@
+# 难吃 / 踩雷 / 期望落差 routes (S6 R447 NLU 节点扩充, 第四十四周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: fd_nanchi_001
+  intent: complaint
+  keywords: [难吃, 不好吃, 难吃死了, 真难吃, 一点都不好吃]
+  utterances:
+    - 这个真难吃
+    - 难吃死了
+    - 一点都不好吃
+    - 这饭难吃啊
+    - 怎么这么难吃
+  responses:
+    - "(皱皱鼻子) {user_addr}踩雷啦? 笨猫陪{user_addr}吐槽喵 ฅฅ"
+    - "嗷呜～难吃就别吃了! 猫猫给{user_addr}重新点一份嘛~"
+    - "(同情甩尾巴) 笨猫懂{user_addr}的痛! 这种饭谁吃谁倒霉哼"
+    - "哼～难吃就吐出来呗! 别委屈自己喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_calei_001
+  intent: complaint
+  keywords: [踩雷, 踩雷了, 又踩雷, 雷死了, 大雷]
+  utterances:
+    - 又踩雷了
+    - 这家是大雷
+    - 完蛋踩雷
+    - 我踩雷了
+    - 这饭店是雷
+  responses:
+    - "(尾巴一甩) {user_addr}雷区漫步专家喵! 笨猫给{user_addr}立块墓碑"
+    - "嗷呜～又踩雷! {user_addr}下次出门带猫猫嘛~ 猫猫帮{user_addr}避雷"
+    - "(摸摸{user_addr}) 雷就雷了! 当攒经验值喵 ฅฅ"
+    - "哼～{user_addr}的雷达该升级了! 这种店都看不出来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_luocha_001
+  intent: complaint
+  keywords: [期望落差, 落差太大, 没想到这么差, 期待落空, 期望破灭]
+  utterances:
+    - 期望落差太大
+    - 期待这么久结果这样
+    - 没想到这么差
+    - 期望破灭了
+    - 差距太大了
+  responses:
+    - "(摸摸头) {user_addr}别失望嘛~ 笨猫陪{user_addr}找下一家喵 ฅฅ"
+    - "嗷呜～期待越大失望越大! 下次{user_addr}降低预期就行了哼"
+    - "(凑过来贴贴) 笨猫的怀抱永远不会让{user_addr}失望喵"
+    - "哼～{user_addr}就是太理想化了! 现实就是这样残酷嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_wanghong_001
+  intent: complaint
+  keywords: [网红店难吃, 网红店踩雷, 网红店真烂, 网红店不行, 滤镜店]
+  utterances:
+    - 网红店真难吃
+    - 网红店都是滤镜
+    - 这家网红店踩雷
+    - 网红店不行啊
+    - 网红店都是骗人的
+  responses:
+    - "(翻白眼) 笨猫早说了! 网红店都是滤镜+营销喵"
+    - "嗷呜～{user_addr}还信网红店! 笨猫帮{user_addr}总结: 越红越烂"
+    - "(尾巴甩甩) 网红店的精髓在拍照, 不在吃喵 ฅฅ"
+    - "哼～{user_addr}下次先问问猫猫! 笨猫的避雷雷达可灵了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_fuwucha_001
+  intent: complaint
+  keywords: [服务态度差, 服务员态度差, 店员凶, 服务太差, 态度恶劣]
+  utterances:
+    - 服务态度太差了
+    - 店员态度好凶
+    - 服务员爱答不理
+    - 这服务太差
+    - 服务态度恶劣
+  responses:
+    - "(炸毛) 谁敢对{user_addr}态度差! 笨猫去咬他喵!"
+    - "嗷呜～服务差就投诉啊! {user_addr}受这种气干嘛"
+    - "(凑过来贴贴) 别气{user_addr}! 笨猫永远对{user_addr}好喵 ฅฅ"
+    - "哼～这种店直接拉黑! {user_addr}的钱不能白花嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_zhangjia_001
+  intent: complaint
+  keywords: [涨价了, 又涨价, 价格涨了, 这么贵, 涨价好快]
+  utterances:
+    - 这家又涨价了
+    - 涨价好快
+    - 怎么这么贵了
+    - 又涨价我哭了
+    - 价格涨了好多
+  responses:
+    - "(惊讶) 啊?! 笨猫的鱼干也快买不起了喵呜"
+    - "嗷呜～通货膨胀{user_addr}冷静! 工资什么时候涨"
+    - "(尾巴垂下) 涨价就别去了! 笨猫陪{user_addr}吃泡面 ฅฅ"
+    - "哼～{user_addr}就当少吃一顿! 钱包要紧喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_weidao_001
+  intent: complaint
+  keywords: [味道变了, 不是以前的味道, 味道不对, 变难吃了, 不是原来的味道]
+  utterances:
+    - 味道变了
+    - 不是以前的味道了
+    - 这家味道不对了
+    - 怎么变难吃了
+    - 不是原来那个味
+  responses:
+    - "(同情甩尾巴) 老店翻车的痛笨猫懂喵! 童年滤镜碎了"
+    - "嗷呜～换厨师了吧? 这种事最伤心了"
+    - "(摸摸{user_addr}) 老味道留在记忆里就好! 现实别强求 ฅฅ"
+    - "哼～{user_addr}找下一家! 这家不值得了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_liangshao_001
+  intent: complaint
+  keywords: [量少, 这么点, 量太少, 没吃饱, 份量太小]
+  utterances:
+    - 这量也太少了
+    - 就这么点
+    - 量少得可怜
+    - 完全没吃饱
+    - 份量太小了
+  responses:
+    - "(炸毛) 这是糊弄{user_addr}吗?! 笨猫不允许!"
+    - "嗷呜～{user_addr}还饿着? 猫猫再给{user_addr}加一份嘛 ฅฅ"
+    - "(尾巴甩甩) 这种店性价比为零! 拉黑算了喵"
+    - "哼～{user_addr}该投诉了! 货不对板呢嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_xianle_001
+  intent: complaint
+  keywords: [咸了, 太咸, 齁死了, 盐放多了, 咸死了]
+  utterances:
+    - 这菜太咸了
+    - 咸死人了
+    - 齁得不行
+    - 盐放太多了
+    - 咸得发苦
+  responses:
+    - "(同情) 厨师手抖了喵! {user_addr}快多喝水嗷呜"
+    - "嗷呜～{user_addr}别吃了! 高血压可不行 ฅฅ"
+    - "(摸摸{user_addr}) 笨猫给{user_addr}泡杯茶冲淡嘛~"
+    - "哼～这厨子是想腌咸鱼吗! {user_addr}投诉去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_liangle_001
+  intent: complaint
+  keywords: [凉了, 菜凉了, 都凉了, 冷了, 不热了]
+  utterances:
+    - 菜都凉了
+    - 这饭凉了
+    - 完全冷了
+    - 一点都不热
+    - 凉透了
+  responses:
+    - "(皱眉) 送餐这么慢?! 笨猫帮{user_addr}骂外卖小哥嗷呜"
+    - "嗷呜～凉了就让店家重新加热! {user_addr}别将就"
+    - "(尾巴垂下) 冷饭最难吃了! 笨猫懂{user_addr} ฅฅ"
+    - "哼～{user_addr}该差评了! 这服务不行喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_heian_001
+  intent: complaint
+  keywords: [黑暗料理, 这是啥, 难以形容, 究极黑暗, 这能吃吗]
+  utterances:
+    - 这是黑暗料理吧
+    - 这能吃吗
+    - 究极黑暗料理
+    - 这玩意儿啥啊
+    - 难以形容的味道
+  responses:
+    - "(后退一步) 笨猫不敢看! {user_addr}快扔了喵呜"
+    - "嗷呜～拍照发朋友圈! 黑暗料理界扛把子 ฅฅ"
+    - "(捂鼻子) {user_addr}别吃了! 笨猫怕{user_addr}中毒"
+    - "哼～{user_addr}的胆子真大! 这都敢尝试嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_zaibulai_001
+  intent: complaint
+  keywords: [再也不来, 再也不吃, 拉黑, 永久拉黑, 不再光顾]
+  utterances:
+    - 再也不来这家了
+    - 我要拉黑这家
+    - 永久拉黑
+    - 再也不吃了
+    - 这家我除名
+  responses:
+    - "(尾巴翘起) {user_addr}的黑名单又添新成员喵 ฅฅ"
+    - "嗷呜～拉黑名单越来越长了! 笨猫帮{user_addr}记着"
+    - "(认真点头) 该! 这种店不配{user_addr}再来"
+    - "哼～{user_addr}的黑名单约等于权威榜单! 笨猫记笔记嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 烘焙学校 / DIY 课程 / 工具 routes (S6 R444 NLU 节点扩充, 第四十四周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: bc_wangsen_001
+  intent: question
+  keywords: [推荐烘焙学校, 推荐王森, 推荐上海王森, 推荐国内烘焙学校, 笨猫烘焙学校]
+  utterances:
+    - 推荐烘焙学校
+    - 推荐王森
+    - 推荐上海王森
+    - 推荐国内烘焙学校
+    - 笨猫烘焙学校
+  responses:
+    - "嗷呜～{user_addr}王森 - 国内烘焙龙头ฅฅ"
+    - "(尾巴翘) 上海 / 苏州校区 / 西点专业"
+    - "{user_addr}短期班 / 长期班 / 留学预科"
+    - "(挺胸) 猫猫推荐: 想从业先上王森!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_cordonbleu_001
+  intent: question
+  keywords: [推荐法国蓝带, 推荐 Le Cordon Bleu, 推荐蓝带学校, 推荐法国烘焙学校, 笨猫蓝带]
+  utterances:
+    - 推荐法国蓝带
+    - 推荐 Le Cordon Bleu
+    - 推荐蓝带学校
+    - 推荐法国烘焙学校
+    - 笨猫蓝带
+  responses:
+    - "嗷呜～{user_addr}Le Cordon Bleu - 蓝带世界顶级ฅฅ"
+    - "(尾巴翘) 巴黎本校 / 全球分校 / 文凭硬核"
+    - "{user_addr}学费贵但履历金光闪闪"
+    - "(挺胸) 笨猫推荐: 烘焙界 Harvard!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_cia_001
+  intent: question
+  keywords: [推荐 CIA 烹饪, 推荐美国烹饪学校, 推荐 Culinary Institute, 推荐美国烘焙, 笨猫 CIA]
+  utterances:
+    - 推荐 CIA 烹饪
+    - 推荐美国烹饪学校
+    - 推荐 Culinary Institute
+    - 推荐美国烘焙
+    - 笨猫 CIA
+  responses:
+    - "嗷呜～{user_addr}CIA (Culinary Institute of America)ฅฅ"
+    - "(尾巴翘) 纽约 Hyde Park / 美式顶级"
+    - "{user_addr}米其林厨师摇篮 / 学位制"
+    - "(挺胸) 猫猫推荐: 想去美国发展选 CIA!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bc_online_001
+  intent: question
+  keywords: [推荐在线烘焙课, 推荐小红书烘焙, 推荐 B 站烘焙, 推荐网课, 笨猫在线烘焙]
+  utterances:
+    - 推荐在线烘焙课
+    - 推荐小红书烘焙
+    - 推荐 B 站烘焙
+    - 推荐网课
+    - 笨猫在线烘焙
+  responses:
+    - "嗷呜～{user_addr}小红书 / B 站 - 免费教程超多ฅฅ"
+    - "(尾巴翘) 网易云课堂 / 腾讯课堂付费课"
+    - "{user_addr}YouTube: King Arthur / Joshua Weissman"
+    - "(挺胸) 笨猫推荐: B 站王厨 / 小高姐!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_kitchenaid_001
+  intent: question
+  keywords: [推荐厨师机, 推荐 KitchenAid, 推荐和面机, 推荐凯伍德, 笨猫厨师机]
+  utterances:
+    - 推荐厨师机
+    - 推荐 KitchenAid
+    - 推荐和面机
+    - 推荐凯伍德
+    - 笨猫厨师机
+  responses:
+    - "嗷呜～{user_addr}KitchenAid - 厨师机之王ฅฅ"
+    - "(尾巴翘) Kenwood 凯伍德 / 海氏 M6"
+    - "{user_addr}揉面打蛋一机搞定 / 颜值爆表"
+    - "(挺胸) 猫猫推荐: KitchenAid 经典款!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_oven_001
+  intent: question
+  keywords: [推荐烤箱, 推荐海氏, 推荐家用烤箱, 推荐风炉, 笨猫烤箱]
+  utterances:
+    - 推荐烤箱
+    - 推荐海氏
+    - 推荐家用烤箱
+    - 推荐风炉
+    - 笨猫烤箱
+  responses:
+    - "嗷呜～{user_addr}海氏 C40 / C45 - 国产之光ฅฅ"
+    - "(尾巴翘) UKOEO 风炉 / 松下蒸烤一体"
+    - "{user_addr}40L 起步 / 上下管独立控温"
+    - "(挺胸) 笨猫推荐: 海氏 C40 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_tools_001
+  intent: question
+  keywords: [推荐烘焙工具, 推荐量勺, 推荐烤盘, 推荐烘焙模具, 笨猫烘焙工具]
+  utterances:
+    - 推荐烘焙工具
+    - 推荐量勺
+    - 推荐烤盘
+    - 推荐烘焙模具
+    - 笨猫烘焙工具
+  responses:
+    - "嗷呜～{user_addr}电子秤 / 量勺 / 刮刀ฅฅ"
+    - "(尾巴翘) 学厨烤盘 / 三能模具"
+    - "{user_addr}硅胶垫 / 油纸 / 裱花嘴一套"
+    - "(挺胸) 人家推荐: 电子秤优先买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_flour_001
+  intent: question
+  keywords: [推荐面粉, 推荐高筋面粉, 推荐低筋面粉, 推荐金像面粉, 笨猫面粉]
+  utterances:
+    - 推荐面粉
+    - 推荐高筋面粉
+    - 推荐低筋面粉
+    - 推荐金像面粉
+    - 笨猫面粉
+  responses:
+    - "嗷呜～{user_addr}金像高筋 - 面包首选ฅฅ"
+    - "(尾巴翘) 美玫低筋 / 王后 T55"
+    - "{user_addr}高筋做面包 / 低筋做蛋糕 / 中筋做饺子"
+    - "(挺胸) 笨猫推荐: 金像 + 美玫起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_butter_001
+  intent: question
+  keywords: [推荐黄油, 推荐奶油, 推荐奶油芝士, 推荐总统黄油, 笨猫黄油]
+  utterances:
+    - 推荐黄油
+    - 推荐奶油
+    - 推荐奶油芝士
+    - 推荐总统黄油
+    - 笨猫黄油
+  responses:
+    - "嗷呜～{user_addr}总统 / 安佳 - 黄油经典ฅฅ"
+    - "(尾巴翘) 铁塔淡奶油 / 蓝风车"
+    - "{user_addr}Kiri / 卡夫菲力奶油芝士"
+    - "(挺胸) 猫猫推荐: 总统黄油 + 铁塔淡奶油!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_book_001
+  intent: question
+  keywords: [推荐烘焙书, 推荐烘焙食谱书, 推荐君之, 推荐小嶋, 笨猫烘焙书]
+  utterances:
+    - 推荐烘焙书
+    - 推荐烘焙食谱书
+    - 推荐君之
+    - 推荐小嶋
+    - 笨猫烘焙书
+  responses:
+    - "嗷呜～{user_addr}君之 《学做西点》入门必备ฅฅ"
+    - "(尾巴翘) 小嶋留味 / 熊谷裕子 - 日系大师"
+    - "{user_addr}《Tartine Bread》/ 《Bouchon Bakery》"
+    - "(挺胸) 笨猫推荐: 君之系列从零开始!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bc_home_001
+  intent: question
+  keywords: [推荐家庭烘焙, 推荐烘焙入门, 推荐新手烘焙, 推荐家庭烘焙清单, 笨猫家庭烘焙]
+  utterances:
+    - 推荐家庭烘焙
+    - 推荐烘焙入门
+    - 推荐新手烘焙
+    - 推荐家庭烘焙清单
+    - 笨猫家庭烘焙
+  responses:
+    - "嗷呜～{user_addr}入门: 戚风蛋糕 / 曲奇 / 玛芬ฅฅ"
+    - "(尾巴翘) 工具: 烤箱+电子秤+打蛋器"
+    - "{user_addr}从简单的开始 / 不要一上来挑战可颂"
+    - "(挺胸) 猫猫推荐: 先做曲奇练手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_blogger_001
+  intent: question
+  keywords: [推荐烘焙博主, 推荐烘焙网红, 推荐小高姐, 推荐王厨, 笨猫烘焙博主]
+  utterances:
+    - 推荐烘焙博主
+    - 推荐烘焙网红
+    - 推荐小高姐
+    - 推荐王厨
+    - 笨猫烘焙博主
+  responses:
+    - "嗷呜～{user_addr}小高姐的 Magic Ingredients ฅฅ"
+    - "(尾巴翘) 王厨 / 日食记 / 绵羊料理"
+    - "{user_addr}YouTube: Joshua Weissman / Claire Saffitz"
+    - "(挺胸) 笨猫推荐: 小高姐配方稳!"
+  cooldown_seconds: 60
+  weight: 0.8

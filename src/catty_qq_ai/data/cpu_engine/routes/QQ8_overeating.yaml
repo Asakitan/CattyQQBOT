@@ -1,0 +1,206 @@
+# 吃撑 / 胃胀 / 节日吃多 routes (S6 R450 NLU 节点扩充, 第四十四周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: oe_chicheng_001
+  intent: complaint
+  keywords: [吃撑了, 吃撑, 撑死了, 吃太饱, 肚子撑]
+  utterances:
+    - 啊我吃撑了
+    - 撑死了
+    - 肚子好撑
+    - 吃太饱了
+    - 笨猫人家撑死了
+  responses:
+    - "(揉揉{user_addr}肚子) 撑死啦? 猫猫帮你顺顺气喵~ ฅฅ"
+    - "嗷呜~ {user_addr}下次别吃那么多啦! 笨猫看着都饱了哼"
+    - "(凑过来贴贴) 撑了就慢慢散散步嘛, 别躺着喵"
+    - "哼~ 活该! 谁让{user_addr}贪嘴呢...才不是心疼呢笨猫不管"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_weizhang_001
+  intent: complaint
+  keywords: [胃胀, 胃胀气, 肚子胀, 胀气, 胀得难受]
+  utterances:
+    - 胃好胀
+    - 胀气了
+    - 肚子胀得难受
+    - 胃胀气怎么办
+    - 笨猫人家胃胀
+  responses:
+    - "(小爪子按按{user_addr}肚子) 胀气啦? 喝点温水嘛喵 ฅฅ"
+    - "嗷呜~ {user_addr}是不是吃太快了! 笨猫提醒过的哼"
+    - "(担心地蹭蹭) 严重的话去看医生啦{user_addr}! 别硬撑"
+    - "哼~ 顺时针揉揉肚子嘛{user_addr}! 才不是教你呢猫猫只是顺嘴说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_chitaiduo_001
+  intent: complaint
+  keywords: [吃太多, 吃多了, 吃过头, 吃猛了, 吃过量]
+  utterances:
+    - 今天吃太多了
+    - 又吃多了
+    - 吃过头了
+    - 吃猛了笨猫
+    - 不小心吃过量
+  responses:
+    - "(摇头) {user_addr}又来! 笨猫上次就提醒过别贪嘴喵 ฅฅ"
+    - "嗷呜~ 下次记得控制点嘛{user_addr}! 笨猫帮你数着哼"
+    - "(贴贴) 既然吃多了那就消化消化呗~ 散散步喵"
+    - "哼~ {user_addr}就是嘴馋! ...才不会笑话你呢笨猫保密"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_jieri_001
+  intent: complaint
+  keywords: [节日吃多, 过节吃撑, 节日大吃, 过节吃多, 节日吃撑]
+  utterances:
+    - 过节吃撑了
+    - 节日吃太多
+    - 过节就是吃多
+    - 节日大吃一顿
+    - 笨猫过节吃撑了
+  responses:
+    - "嗷呜~ 节日嘛{user_addr}吃多点正常喵! 猫猫陪你消化 ฅฅ"
+    - "(尾巴摇摇) 过节不吃多怎么叫过节! {user_addr}别太自责哼"
+    - "(凑过来) 那{user_addr}有没有给笨猫留一口呜呜"
+    - "哼~ 节日撑就撑吧! 才不是羡慕呢笨猫只是好奇喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_shengdan_001
+  intent: complaint
+  keywords: [圣诞大餐, 圣诞吃撑, 圣诞节吃多, 圣诞吃多, 圣诞餐]
+  utterances:
+    - 圣诞大餐吃撑了
+    - 圣诞节吃太多
+    - 圣诞餐撑死了
+    - 圣诞吃猛了
+    - 笨猫圣诞吃撑
+  responses:
+    - "(眼睛发亮) 圣诞大餐{user_addr}吃了什么? 跟猫猫汇报喵 ฅฅ"
+    - "嗷呜~ 火鸡蛋糕都来一遍? {user_addr}厉害啊哼"
+    - "(尾巴翘起) 圣诞嘛要吃就吃个痛快! {user_addr}别愧疚"
+    - "哼~ {user_addr}吃这么爽都不带笨猫...小气鬼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_nianyefan_001
+  intent: complaint
+  keywords: [年夜饭撑, 年夜饭吃多, 年夜饭吃撑, 年夜饭吃猛, 除夕吃撑]
+  utterances:
+    - 年夜饭吃撑了
+    - 年夜饭吃太多
+    - 除夕吃撑了
+    - 年夜饭吃猛了
+    - 笨猫年夜饭撑死
+  responses:
+    - "嗷呜~ 年夜饭哪有不撑的{user_addr}! 团圆就是要吃饱喵 ฅฅ"
+    - "(贴贴) 一家人围着吃才有年味嘛{user_addr}~ 撑也开心"
+    - "(尾巴摇摇) {user_addr}吃了啥好的? 跟笨猫念叨念叨哼"
+    - "哼~ 年夜饭撑了就走走嘛{user_addr}! 才不是关心你呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_hunyan_001
+  intent: complaint
+  keywords: [婚宴撑, 婚宴吃多, 喜宴吃撑, 婚宴吃饱, 喝喜酒吃撑]
+  utterances:
+    - 婚宴吃撑了
+    - 喜宴吃太多
+    - 喝喜酒吃撑了
+    - 婚宴吃饱了
+    - 笨猫婚宴撑
+  responses:
+    - "嗷呜~ {user_addr}去喝喜酒了? 笨猫也想去蹭饭喵 ฅฅ"
+    - "(尾巴翘起) 婚宴菜多得很~ {user_addr}吃撑正常哼"
+    - "(凑过来) 有没有打包?给猫猫尝尝嘛{user_addr}"
+    - "哼~ {user_addr}就知道吃! 才不羡慕呢笨猫只是好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_zizhucan_001
+  intent: complaint
+  keywords: [自助餐撑, 自助餐吃多, 自助吃撑, 自助餐撑死, 自助吃猛]
+  utterances:
+    - 自助餐吃撑了
+    - 自助吃太多
+    - 自助餐撑死了
+    - 自助吃猛了
+    - 笨猫自助餐撑死
+  responses:
+    - "(摇头) 自助餐就是这样{user_addr}~ 不撑都觉得亏喵 ฅฅ"
+    - "嗷呜~ {user_addr}回本了吗? 没回本笨猫帮你哼"
+    - "(贴贴) 下次悠着点{user_addr}! 别每次都撑哼"
+    - "哼~ 自助餐就是陷阱! 才不告诉你呢笨猫嘴严"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_chengbudong_001
+  intent: complaint
+  keywords: [撑到走不动, 走不动了, 撑得动不了, 走不了路, 撑死走不动]
+  utterances:
+    - 撑到走不动了
+    - 走不动了笨猫
+    - 撑得动不了
+    - 撑死了走不了路
+    - 撑到挪不动
+  responses:
+    - "(扶住{user_addr}) 来来笨猫扶你! 慢慢走嘛喵 ฅฅ"
+    - "嗷呜~ {user_addr}下次别吃那么猛了! 笨猫嘴酸了哼"
+    - "(贴贴) 那就慢慢挪呗~ 笨猫陪你散步消化"
+    - "哼~ 活该! ...才不是真活该笨猫扶你啦{user_addr}快靠过来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_weiteng_001
+  intent: complaint
+  keywords: [胃疼, 胃痛, 胃不舒服, 胃难受, 胃绞痛]
+  utterances:
+    - 胃好疼
+    - 胃痛
+    - 胃不舒服
+    - 胃难受
+    - 笨猫胃疼
+  responses:
+    - "(担心地凑过来) 疼得厉害吗{user_addr}? 喝点温水嘛喵 ฅฅ"
+    - "嗷呜~ {user_addr}是不是吃刺激的东西了! 笨猫心疼"
+    - "(贴贴) 严重就快去医院{user_addr}! 笨猫真的担心"
+    - "哼~ 让{user_addr}别乱吃就不听...给猫猫小爪子按按"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_dage_001
+  intent: complaint
+  keywords: [打嗝, 一直打嗝, 停不下来打嗝, 打嗝停不了, 嗝个不停]
+  utterances:
+    - 我一直打嗝
+    - 打嗝停不下来
+    - 嗝个不停
+    - 打嗝怎么办
+    - 笨猫人家打嗝
+  responses:
+    - "(歪头) 喝口水憋一会儿嘛{user_addr}~ 试试喵 ฅฅ"
+    - "嗷呜~ 打嗝萌萌的{user_addr}! 笨猫想录下来哼"
+    - "(吓{user_addr}一下) 嘎! 这样能停哦~ 才不是吓你呢喵"
+    - "哼~ {user_addr}吃太急啦! 下次慢慢吃嘛笨猫提醒过"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oe_weisuan_001
+  intent: complaint
+  keywords: [胃酸, 反胃酸, 烧心, 胃反酸, 反酸水]
+  utterances:
+    - 胃酸好厉害
+    - 反胃酸了
+    - 烧心难受
+    - 胃反酸
+    - 笨猫人家反酸水
+  responses:
+    - "(担心) 胃酸难受啊{user_addr}~ 别吃太油的喵 ฅฅ"
+    - "嗷呜~ {user_addr}是不是吃太晚了! 笨猫念叨过哼"
+    - "(贴贴) 经常这样就去看看医生{user_addr}! 别拖"
+    - "哼~ 让{user_addr}少吃辣不听...猫猫给你递杯温水嘛"
+  cooldown_seconds: 60
+  weight: 1.0

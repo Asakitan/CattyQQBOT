@@ -1,0 +1,206 @@
+# 米其林餐厅 / 三星 / Fine Dining routes (S6 R442 NLU 节点扩充, 第四十四周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: mg_three_star_001
+  intent: question
+  keywords: [推荐米其林三星, 推荐上海三星, 推荐北京三星, 推荐三星餐厅, 笨猫米其林三星]
+  utterances:
+    - 推荐米其林三星
+    - 推荐上海三星
+    - 推荐北京三星
+    - 推荐三星餐厅
+    - 笨猫米其林三星
+  responses:
+    - "嗷呜～{user_addr}上海: 新荣记 / Ultraviolet / 唐阁ฅฅ"
+    - "(尾巴翘) 北京: 新荣记 / 京兆尹"
+    - "{user_addr}三星 = 值得专程拜访"
+    - "(挺胸) 笨猫推荐: 新荣记台州菜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_two_star_001
+  intent: question
+  keywords: [推荐米其林二星, 推荐二星餐厅, 推荐 two star, 推荐米其林2星, 笨猫米其林二星]
+  utterances:
+    - 推荐米其林二星
+    - 推荐二星餐厅
+    - 推荐 two star
+    - 推荐米其林2星
+    - 笨猫米其林二星
+  responses:
+    - "嗷呜～{user_addr}二星 = 值得绕道拜访ฅฅ"
+    - "(尾巴翘) 上海: 喜粤8号 / 雍福会 / 8 1/2 Otto"
+    - "{user_addr}广州: 江 by Chiang / 御宝轩"
+    - "(挺胸) 笨猫推荐: 喜粤8号粤菜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_one_star_001
+  intent: question
+  keywords: [推荐米其林一星, 推荐一星餐厅, 推荐 one star, 推荐米其林1星, 笨猫米其林一星]
+  utterances:
+    - 推荐米其林一星
+    - 推荐一星餐厅
+    - 推荐 one star
+    - 推荐米其林1星
+    - 笨猫米其林一星
+  responses:
+    - "嗷呜～{user_addr}一星 = 优质烹饪值得停留ฅฅ"
+    - "(尾巴翘) 上海一星: 福和慧 / 苏浙汇 / Da Vittorio"
+    - "{user_addr}入门 fine dining 首选"
+    - "(挺胸) 笨猫推荐: 福和慧素食!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_blackpearl_001
+  intent: question
+  keywords: [推荐黑珍珠餐厅, 推荐大众点评黑珍珠, 推荐黑珍珠三钻, 推荐黑珍珠指南, 笨猫黑珍珠]
+  utterances:
+    - 推荐黑珍珠餐厅
+    - 推荐大众点评黑珍珠
+    - 推荐黑珍珠三钻
+    - 推荐黑珍珠指南
+    - 笨猫黑珍珠
+  responses:
+    - "嗷呜～{user_addr}黑珍珠 = 中国版米其林ฅฅ"
+    - "(尾巴翘) 大众点评出品 / 一二三钻"
+    - "{user_addr}更懂中国胃 / 中餐评分准"
+    - "(挺胸) 笨猫推荐: 三钻 = 一生必吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_bibgourmand_001
+  intent: question
+  keywords: [推荐米其林必比登, 推荐 Bib Gourmand, 推荐必比登推介, 推荐平价米其林, 笨猫必比登]
+  utterances:
+    - 推荐米其林必比登
+    - 推荐 Bib Gourmand
+    - 推荐必比登推介
+    - 推荐平价米其林
+    - 笨猫必比登
+  responses:
+    - "嗷呜～{user_addr}必比登 = 高性价比好餐厅ฅฅ"
+    - "(尾巴翘) 200元内吃到米其林品质"
+    - "{user_addr}上海: 阿娘面 / 兰心餐厅 / 老吉士"
+    - "(挺胸) 笨猫推荐: 必比登最适合日常!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_french_001
+  intent: question
+  keywords: [推荐法餐 fine dining, 推荐法式米其林, 推荐法国大餐, 推荐 French fine dining, 笨猫法餐]
+  utterances:
+    - 推荐法餐 fine dining
+    - 推荐法式米其林
+    - 推荐法国大餐
+    - 推荐 French fine dining
+    - 笨猫法餐
+  responses:
+    - "嗷呜～{user_addr}上海: Jean Georges / L'Atelier 18ฅฅ"
+    - "(尾巴翘) 北京: TIAGO / Maison Lameloise"
+    - "{user_addr}经典法餐 = 鹅肝/牛排/红酒"
+    - "(挺胸) 笨猫推荐: Jean Georges 浦东!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_japanese_001
+  intent: question
+  keywords: [推荐日料三星, 推荐日料米其林, 推荐高端日料, 推荐 omakase 三星, 笨猫日料三星]
+  utterances:
+    - 推荐日料三星
+    - 推荐日料米其林
+    - 推荐高端日料
+    - 推荐 omakase 三星
+    - 笨猫日料三星
+  responses:
+    - "嗷呜～{user_addr}东京: 数寄屋桥次郎 / 龙吟ฅฅ"
+    - "(尾巴翘) 京都: 菊乃井 / 吉兆"
+    - "{user_addr}上海: 鮨大山 / 鮨一"
+    - "(挺胸) 笨猫推荐: 次郎寿司一生一次!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_chinese_001
+  intent: question
+  keywords: [推荐中餐米其林, 推荐中餐三星, 推荐粤菜米其林, 推荐淮扬菜米其林, 笨猫中餐米其林]
+  utterances:
+    - 推荐中餐米其林
+    - 推荐中餐三星
+    - 推荐粤菜米其林
+    - 推荐淮扬菜米其林
+    - 笨猫中餐米其林
+  responses:
+    - "嗷呜～{user_addr}粤菜三星: 唐阁 / 8 1/2ฅฅ"
+    - "(尾巴翘) 淮扬菜: 福和慧 / 苏浙汇"
+    - "{user_addr}台州菜: 新荣记 (上海/北京)"
+    - "(挺胸) 笨猫推荐: 新荣记!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_reservation_001
+  intent: question
+  keywords: [推荐米其林预约, 推荐 Tock 预约, 推荐 OpenTable, 推荐米其林订位, 笨猫米其林预约]
+  utterances:
+    - 推荐米其林预约
+    - 推荐 Tock 预约
+    - 推荐 OpenTable
+    - 推荐米其林订位
+    - 笨猫米其林预约
+  responses:
+    - "嗷呜～{user_addr}国内: 大众点评 / 餐厅小程序ฅฅ"
+    - "(尾巴翘) 国际: OpenTable / Tock / Resy"
+    - "{user_addr}热门店提前 1-3 个月预约!"
+    - "(挺胸) 笨猫推荐: Tock 预付款锁位!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_dresscode_001
+  intent: question
+  keywords: [推荐高端用餐 dress code, 推荐米其林着装, 推荐 fine dining 穿什么, 推荐西装领带, 笨猫 dress code]
+  utterances:
+    - 推荐高端用餐 dress code
+    - 推荐米其林着装
+    - 推荐 fine dining 穿什么
+    - 推荐西装领带
+    - 笨猫 dress code
+  responses:
+    - "嗷呜～{user_addr}Smart Casual = 衬衫+西裤ฅฅ"
+    - "(尾巴翘) Business Formal = 西装领带"
+    - "{user_addr}避免: 拖鞋/背心/运动短裤"
+    - "(挺胸) 笨猫推荐: 衬衫+休闲西裤稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_guide_001
+  intent: question
+  keywords: [推荐米其林指南, 推荐米其林出版, 推荐 Michelin Guide, 推荐米其林红宝书, 笨猫米其林指南]
+  utterances:
+    - 推荐米其林指南
+    - 推荐米其林出版
+    - 推荐 Michelin Guide
+    - 推荐米其林红宝书
+    - 笨猫米其林指南
+  responses:
+    - "嗷呜～{user_addr}1900 年米其林轮胎公司创办ฅฅ"
+    - "(尾巴翘) 红色封面 = 餐厅指南"
+    - "{user_addr}中国: 上海/北京/广州/成都"
+    - "(挺胸) 笨猫推荐: 官网 guide.michelin.com!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_molecular_001
+  intent: question
+  keywords: [推荐创意料理, 推荐分子料理, 推荐 molecular gastronomy, 推荐先锋料理, 笨猫分子料理]
+  utterances:
+    - 推荐创意料理
+    - 推荐分子料理
+    - 推荐 molecular gastronomy
+    - 推荐先锋料理
+    - 笨猫分子料理
+  responses:
+    - "嗷呜～{user_addr}Ultraviolet by Paul Pairet (上海)ฅฅ"
+    - "(尾巴翘) 10 人小店 / 多感官沉浸"
+    - "{user_addr}西班牙 elBulli / 丹麦 Noma 鼻祖"
+    - "(挺胸) 笨猫推荐: UV 一生体验一次!"
+  cooldown_seconds: 60
+  weight: 1.0

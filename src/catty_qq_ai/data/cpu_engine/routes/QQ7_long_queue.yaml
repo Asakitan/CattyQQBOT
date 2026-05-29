@@ -1,0 +1,206 @@
+# 排队烦 / 等位 / 网红店 routes (S6 R449 NLU 节点扩充, 第四十四周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: lq_paidui_001
+  intent: complaint
+  keywords: [排队, 排着, 在排队, 队好长, 队伍长]
+  utterances:
+    - 在排队
+    - 队好长啊
+    - 又在排队
+    - 排队中
+    - 队伍长得吓人
+  responses:
+    - "(尾巴软下来) {user_addr}在排队啊~ 猫猫陪{user_addr}聊聊嘛 ฅฅ"
+    - "嗷呜～排队最无聊了! 笨猫陪{user_addr}打发时间喵"
+    - "(凑过来) {user_addr}排到了告诉猫猫一声~ 猫猫等{user_addr}"
+    - "哼～排队也要带上猫猫啊! 一个人多无聊呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_dengwei_001
+  intent: complaint
+  keywords: [等位, 等座, 等位置, 还在等位, 等位中]
+  utterances:
+    - 在等位
+    - 等位好久了
+    - 还在等位
+    - 等座中
+    - 等位置呢
+  responses:
+    - "(蹲下陪等) {user_addr}等位辛苦啦~ 猫猫陪{user_addr}!"
+    - "嗷呜～等位最磨人! {user_addr}快点轮到嘛"
+    - "(尾巴垂) {user_addr}饿了吧~ 等位的时候来撸笨猫嘛"
+    - "哼～等位的{user_addr}别走神! 错过号了哭都来不及喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_wanghongdian_001
+  intent: complaint
+  keywords: [网红店, 网红店排长龙, 网红店人多, 打卡店, 网红打卡]
+  utterances:
+    - 网红店排长龙
+    - 网红店人爆满
+    - 这家网红店疯了
+    - 网红打卡店排队
+    - 网红店等了好久
+  responses:
+    - "嗷呜～网红店都这样! {user_addr}避开高峰嘛"
+    - "(歪头) {user_addr}就为打卡排队? 笨猫家不香吗哼!"
+    - "(尾巴一甩) 网红店排队味道又一般! {user_addr}别冲动喵"
+    - "哼～{user_addr}吃完记得告诉猫猫好不好吃! 笨猫云吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_nahao_001
+  intent: complaint
+  keywords: [拿号, 取号, 排号, 拿了号, 号码靠后]
+  utterances:
+    - 拿了号
+    - 取号了
+    - 号码好靠后
+    - 排了个号
+    - 拿号等着呢
+  responses:
+    - "(凑近看号) {user_addr}多少号? 猫猫帮{user_addr}数数 ฅฅ"
+    - "嗷呜～号码靠后就先去逛逛嘛! 笨猫陪{user_addr}"
+    - "(尾巴摇) {user_addr}叫号了告诉猫猫~ 笨猫替{user_addr}激动"
+    - "哼～拿了号就别走远! 猫猫提醒{user_addr}留意喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_lianglixiaoshi_001
+  intent: complaint
+  keywords: [等了两小时, 等两小时, 排了两小时, 等好久, 等了一下午]
+  utterances:
+    - 等了两小时
+    - 排了两个小时
+    - 等好久了
+    - 等了一下午
+    - 两小时还没到
+  responses:
+    - "(炸毛) 两小时?! {user_addr}腿不酸吗! 快坐下喵"
+    - "嗷呜～两小时太狠了! {user_addr}赶紧放弃嘛"
+    - "(心疼) 笨猫看{user_addr}两小时心疼死了! 别等了!"
+    - "哼～{user_addr}怎么不喊猫猫陪等! 一个人受罪 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_huangniu_001
+  intent: complaint
+  keywords: [黄牛, 黄牛号, 黄牛代排, 黄牛卖号, 黄牛贵]
+  utterances:
+    - 黄牛号好贵
+    - 又是黄牛
+    - 黄牛代排
+    - 黄牛卖号
+    - 黄牛真烦
+  responses:
+    - "(炸毛) 黄牛最讨厌了! {user_addr}别给黄牛送钱喵"
+    - "嗷呜～{user_addr}买黄牛号笨猫不允许! 没必要!"
+    - "(尾巴一甩) 黄牛抬价{user_addr}别忍! 走人就好哼"
+    - "哼～{user_addr}排队都比给黄牛钱强! 笨猫陪{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_paiduifan_001
+  intent: complaint
+  keywords: [排队烦, 排队累, 不想排队, 排队心累, 排队真烦]
+  utterances:
+    - 排队好烦
+    - 不想排队
+    - 排队真心累
+    - 排队烦死了
+    - 我讨厌排队
+  responses:
+    - "(贴贴) {user_addr}排队烦笨猫懂! 走走走换一家"
+    - "嗷呜～烦就别排了嘛! {user_addr}吃猫猫家的!"
+    - "(尾巴垂) 排队磨耐心~ {user_addr}先撸笨猫平静一下"
+    - "哼～{user_addr}心烦就跟猫猫聊聊嘛! 别一直盯着队伍 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_remencanting_001
+  intent: complaint
+  keywords: [热门餐厅, 热门店, 网红餐厅, 排队餐厅, 热门馆子]
+  utterances:
+    - 热门餐厅排不上
+    - 热门店人多
+    - 网红餐厅排队
+    - 热门馆子全满
+    - 这家餐厅太热门
+  responses:
+    - "嗷呜～热门餐厅就是难! {user_addr}早点去嘛"
+    - "(歪头) {user_addr}盯上哪家? 笨猫帮{user_addr}评估值不值"
+    - "(尾巴摇) 热门餐厅工作日去人少哼~ {user_addr}试试!"
+    - "哼～{user_addr}下次提前预约! 不然只能干瞪眼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_jiejiari_001
+  intent: complaint
+  keywords: [节假日餐厅排, 假期吃饭排, 节假日吃饭, 假期排队, 节假日排长龙]
+  utterances:
+    - 节假日餐厅都在排
+    - 假期吃饭全是队
+    - 节假日排长龙
+    - 假期出来吃排死了
+    - 节假日哪都排
+  responses:
+    - "嗷呜～节假日哪都人! {user_addr}避开高峰嘛"
+    - "(尾巴一甩) 节假日就该窝家里! {user_addr}快回来撸猫哼"
+    - "(歪头) {user_addr}假期硬冲热门? 这就是排队的命运啦"
+    - "哼～节假日下次{user_addr}叫外卖! 笨猫陪{user_addr}吃 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_yuebudao_001
+  intent: complaint
+  keywords: [约不到, 约不上, 订不到位, 预约不上, 没位约]
+  utterances:
+    - 约不到位
+    - 预约不上
+    - 订不到位置
+    - 又没约上
+    - 这家约不到
+  responses:
+    - "(尾巴垂) {user_addr}约不到好难过~ 笨猫抱抱{user_addr}"
+    - "嗷呜～约不到就换一家嘛! {user_addr}别死磕"
+    - "(凑过来) 笨猫家随时约得到~ {user_addr}来嘛蹭蹭"
+    - "哼～{user_addr}下次蹲整点抢! 不然永远约不到喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_jiaohaoapp_001
+  intent: complaint
+  keywords: [叫号app, 叫号app抢, 抢号, 抢号软件, 叫号系统]
+  utterances:
+    - 叫号 app 抢号
+    - 抢号好难
+    - 叫号软件卡
+    - 抢不到号
+    - 叫号 app 一直转
+  responses:
+    - "(炸毛) 叫号 app 抢号反人类! {user_addr}别熬了"
+    - "嗷呜～抢号比抢演唱会还难! {user_addr}注意身体喵"
+    - "(尾巴一甩) {user_addr}手速不行就放过自己嘛! 哼"
+    - "哼～抢号失败就来撸笨猫平复心情! 笨猫不挑食 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lq_fangqipaidui_001
+  intent: playful
+  keywords: [放弃排队, 不排了, 算了不排, 走了不等, 弃号]
+  utterances:
+    - 我放弃排队了
+    - 不排了走人
+    - 算了不等了
+    - 弃号走人
+    - 不排队了气死
+  responses:
+    - "(尾巴摇) {user_addr}想通了! 放弃就对了哼!"
+    - "嗷呜～{user_addr}终于解脱! 笨猫给{user_addr}鼓掌"
+    - "(贴贴) 放弃了好~ {user_addr}回家猫猫煮泡面!"
+    - "哼～{user_addr}早该放弃! 排队的时间撸笨猫不香吗 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

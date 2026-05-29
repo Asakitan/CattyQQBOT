@@ -1,0 +1,206 @@
+# 美食博主 / 网红探店 / B 站 抖音 routes (S6 R445 NLU 节点扩充, 第四十四周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: fb_wanggang_001
+  intent: question
+  keywords: [推荐美食博主, 推荐王刚, 推荐中餐博主, 推荐家常菜博主, 笨猫美食博主]
+  utterances:
+    - 推荐美食博主
+    - 推荐王刚
+    - 推荐中餐博主
+    - 推荐家常菜博主
+    - "{user_addr}笨猫美食博主"
+  responses:
+    - "嗷呜～{user_addr}王刚 R-Thomas - 硬核中餐ฅฅ"
+    - "(尾巴翘) 川菜大厨 / 家常硬菜"
+    - "{user_addr}招牌台词: 开宝, 改刀!"
+    - "(挺胸) 猫猫推荐: 王刚入门看红烧肉!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_douyin_tanpu_001
+  intent: question
+  keywords: [推荐美食探店, 推荐抖音探店, 推荐探店博主, 推荐网红餐厅, 笨猫抖音探店]
+  utterances:
+    - 推荐美食探店
+    - 推荐抖音探店
+    - 推荐探店博主
+    - 推荐网红餐厅
+    - "{user_addr}笨猫抖音探店"
+  responses:
+    - "嗷呜～{user_addr}特别乌啦啦 / 多余和毛毛姐ฅฅ"
+    - "(尾巴翘) 大胃王密子君 / 浪胃仙"
+    - "{user_addr}抖音搜本地探店 tag"
+    - "(挺胸) 笨猫提醒: 探店要看真实评论!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_bilibili_up_001
+  intent: question
+  keywords: [推荐 B 站美食, 推荐 B 站 Up 主, 推荐美食 Up, 推荐 bilibili 美食, 笨猫 B 站美食]
+  utterances:
+    - 推荐 B 站美食
+    - 推荐 B 站 Up 主
+    - 推荐美食 Up
+    - 推荐 bilibili 美食
+    - "{user_addr}笨猫 B 站美食"
+  responses:
+    - "嗷呜～{user_addr}徐大 sao / 绵羊料理ฅฅ"
+    - "(尾巴翘) 食贫道 / 盗月社食遇记"
+    - "{user_addr}阿星探店 / 麻辣德子"
+    - "(挺胸) 猫猫推荐: 绵羊料理治愈系!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_joshua_weissman_001
+  intent: question
+  keywords: [推荐海外美食, 推荐 Joshua Weissman, 推荐 YouTube 美食, 推荐外国美食博主, 笨猫海外美食]
+  utterances:
+    - 推荐海外美食
+    - 推荐 Joshua Weissman
+    - 推荐 YouTube 美食
+    - 推荐外国美食博主
+    - "{user_addr}笨猫海外美食"
+  responses:
+    - "嗷呜～{user_addr}Joshua Weissman - But Better 系列ฅฅ"
+    - "(尾巴翘) Babish / Binging with Babish"
+    - "{user_addr}Bon Appetit / Adam Ragusea"
+    - "(挺胸) 笨猫推荐: Joshua 的 sourdough 教程!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_homemade_chinese_001
+  intent: question
+  keywords: [推荐中餐家常, 推荐家常做法, 推荐家常菜教程, 推荐家庭中餐, 笨猫家常菜]
+  utterances:
+    - 推荐中餐家常
+    - 推荐家常做法
+    - 推荐家常菜教程
+    - 推荐家庭中餐
+    - "{user_addr}笨猫家常菜"
+  responses:
+    - "嗷呜～{user_addr}日食记 / 食贫道ฅฅ"
+    - "(尾巴翘) 厨娘物语 / 美食作家王刚"
+    - "{user_addr}下厨房 App 也很好用"
+    - "(挺胸) 猫猫推荐: 日食记治愈又简单!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_eater_001
+  intent: question
+  keywords: [推荐食评, 推荐 Eater, 推荐美食评论, 推荐美食媒体, 笨猫食评]
+  utterances:
+    - 推荐食评
+    - 推荐 Eater
+    - 推荐美食评论
+    - 推荐美食媒体
+    - "{user_addr}笨猫食评"
+  responses:
+    - "嗷呜～{user_addr}Eater - 全球餐厅评测ฅฅ"
+    - "(尾巴翘) The Infatuation / Serious Eats"
+    - "{user_addr}国内: 企鹅吃喝指南 / 一大口"
+    - "(挺胸) 笨猫推荐: Eater 38 必吃榜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_kodoku_gourmet_001
+  intent: question
+  keywords: [推荐日剧美食, 推荐孤独的美食家, 推荐美食日剧, 推荐深夜食堂, 笨猫日剧美食]
+  utterances:
+    - 推荐日剧美食
+    - 推荐孤独的美食家
+    - 推荐美食日剧
+    - 推荐深夜食堂
+    - "{user_addr}笨猫日剧美食"
+  responses:
+    - "嗷呜～{user_addr}孤独的美食家 - 五郎叔ฅฅ"
+    - "(尾巴翘) 深夜食堂 / 多谢款待"
+    - "{user_addr}面包和汤和猫咪好天气"
+    - "(挺胸) 猫猫推荐: 五郎吃饭最治愈了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_michelin_critic_001
+  intent: question
+  keywords: [推荐米其林评论, 推荐米其林评论员, 推荐米其林榜单, 推荐米其林指南, 笨猫米其林评论]
+  utterances:
+    - 推荐米其林评论
+    - 推荐米其林评论员
+    - 推荐米其林榜单
+    - 推荐米其林指南
+    - "{user_addr}笨猫米其林评论"
+  responses:
+    - "嗷呜～{user_addr}米其林指南官方 appฅฅ"
+    - "(尾巴翘) 神秘评论员 - 匿名探访"
+    - "{user_addr}Pete Wells (NYT) / Jay Rayner"
+    - "(挺胸) 笨猫提醒: 必比登榜性价比高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_bourdain_001
+  intent: question
+  keywords: [推荐 Anthony Bourdain, 推荐波登, 推荐美食纪录片, 推荐 Parts Unknown, 笨猫波登]
+  utterances:
+    - 推荐 Anthony Bourdain
+    - 推荐波登
+    - 推荐美食纪录片
+    - 推荐 Parts Unknown
+    - "{user_addr}笨猫波登"
+  responses:
+    - "嗷呜～{user_addr}Parts Unknown - CNN 神作ฅฅ"
+    - "(尾巴翘) No Reservations / Kitchen Confidential"
+    - "{user_addr}波登的越南篇 - 经典必看"
+    - "(挺胸) 猫猫推荐: 波登是美食哲学家!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_bon_appetit_001
+  intent: question
+  keywords: [推荐美食杂志, 推荐 Bon Appetit, 推荐 BA, 推荐美食月刊, 笨猫美食杂志]
+  utterances:
+    - 推荐美食杂志
+    - 推荐 Bon Appetit
+    - 推荐 BA
+    - 推荐美食月刊
+    - "{user_addr}笨猫美食杂志"
+  responses:
+    - "嗷呜～{user_addr}Bon Appetit - 顶级美食月刊ฅฅ"
+    - "(尾巴翘) Saveur / Food & Wine"
+    - "{user_addr}国内: 贝太厨房 / 美食与美酒"
+    - "(挺胸) 笨猫推荐: BA YouTube test kitchen!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_xiaohongshu_001
+  intent: question
+  keywords: [推荐小红书探店, 推荐小红书笔记, 推荐小红书美食, 推荐探店笔记, 笨猫小红书探店]
+  utterances:
+    - 推荐小红书探店
+    - 推荐小红书笔记
+    - 推荐小红书美食
+    - 推荐探店笔记
+    - "{user_addr}笨猫小红书探店"
+  responses:
+    - "嗷呜～{user_addr}小红书搜 城市+探店ฅฅ"
+    - "(尾巴翘) 看 1k+ 赞的笔记更靠谱"
+    - "{user_addr}避开滤镜重的店, 看真实图"
+    - "(挺胸) 猫猫提醒: 探店笔记可能是软广!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_podcast_001
+  intent: question
+  keywords: [推荐美食播客, 推荐 food podcast, 推荐美食音频, 推荐 podcast 美食, 笨猫美食播客]
+  utterances:
+    - 推荐美食播客
+    - 推荐 food podcast
+    - 推荐美食音频
+    - 推荐 podcast 美食
+    - "{user_addr}笨猫美食播客"
+  responses:
+    - "嗷呜～{user_addr}The Sporkful / Gastropodฅฅ"
+    - "(尾巴翘) Bon Appetit Foodcast"
+    - "{user_addr}国内: 比比东 / 来都来了 美食期"
+    - "(挺胸) 笨猫推荐: Gastropod 食物科学!"
+  cooldown_seconds: 60
+  weight: 1.0
