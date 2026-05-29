@@ -1,0 +1,206 @@
+# 动物救助 routes (S6 R685 NLU 节点扩充, 第六十八周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ar_stray_shelter_001
+  intent: question
+  keywords: [推荐流浪猫狗收容, 推荐流浪动物收容所, 推荐救助站, 推荐 shelter, 笨猫流浪收容]
+  utterances:
+    - 推荐流浪猫狗收容
+    - 推荐流浪动物收容所
+    - 推荐救助站
+    - 推荐 shelter
+    - 笨猫流浪收容
+  responses:
+    - "嗷呜～{user_addr}北京流浪猫狗之家 / 上海领养日ฅฅ"
+    - "(尾巴翘) 各地都有民间救助站"
+    - "{user_addr}捐物资 / 当志愿者 / 领养"
+    - "(挺胸) 笨猫推荐: 别买 领养代替购买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_tnr_001
+  intent: question
+  keywords: [推荐 TNR 绝育, 推荐流浪猫绝育, 推荐 TNR 项目, 推荐绝育放归, 笨猫 TNR]
+  utterances:
+    - 推荐 TNR 绝育
+    - 推荐流浪猫绝育
+    - 推荐 TNR 项目
+    - 推荐绝育放归
+    - 笨猫 TNR
+  responses:
+    - "嗷呜～{user_addr}TNR=诱捕+绝育+放归ฅฅ"
+    - "(尾巴翘) 控制流浪猫数量 - 人道"
+    - "{user_addr}找当地公益医院 / 低价绝育"
+    - "(挺胸) 笨猫推荐: TNR 是最温柔的方案!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_chinese_garden_dog_001
+  intent: question
+  keywords: [推荐中华田园犬, 推荐土狗保护, 推荐田园犬领养, 推荐中华犬, 笨猫田园犬]
+  utterances:
+    - 推荐中华田园犬
+    - 推荐土狗保护
+    - 推荐田园犬领养
+    - 推荐中华犬
+    - 笨猫田园犬
+  responses:
+    - "嗷呜～{user_addr}中华田园犬 - 国宝级土狗ฅฅ"
+    - "(尾巴翘) 聪明 / 健康 / 忠诚"
+    - "{user_addr}很多城市禁养名单要除名"
+    - "(挺胸) 笨猫推荐: 土狗超棒别歧视!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_welfare_org_001
+  intent: question
+  keywords: [推荐动物福利组织, 推荐动保 NGO, 推荐 WWF, 推荐 PETA, 笨猫动物福利]
+  utterances:
+    - 推荐动物福利组织
+    - 推荐动保 NGO
+    - 推荐 WWF
+    - 推荐 PETA
+    - 笨猫动物福利
+  responses:
+    - "嗷呜～{user_addr}WWF 世界自然基金会ฅฅ"
+    - "(尾巴翘) IFAW / HSI / 中国小动物保护协会"
+    - "{user_addr}捐款 / 月捐 / 志愿者"
+    - "(挺胸) 笨猫推荐: 选透明度高的!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_cat_cafe_001
+  intent: question
+  keywords: [推荐流浪猫 cafe, 推荐领养咖啡馆, 推荐猫咖领养, 推荐 cat cafe, 笨猫流浪猫咖]
+  utterances:
+    - 推荐流浪猫 cafe
+    - 推荐领养咖啡馆
+    - 推荐猫咖领养
+    - 推荐 cat cafe
+    - 笨猫流浪猫咖
+  responses:
+    - "嗷呜～{user_addr}流浪猫主题咖啡馆 - 可领养ฅฅ"
+    - "(尾巴翘) 北上广深都有 / 多养几只救命猫"
+    - "{user_addr}消费即捐助 / 撸猫又做好事"
+    - "(挺胸) 笨猫推荐: 看到合眼缘的带回家!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_wildlife_rescue_001
+  intent: question
+  keywords: [推荐野生动物救助, 推荐野生动物救护, 推荐 wildlife rescue, 推荐救护中心, 笨猫野生救助]
+  utterances:
+    - 推荐野生动物救助
+    - 推荐野生动物救护
+    - 推荐 wildlife rescue
+    - 推荐救护中心
+    - 笨猫野生救助
+  responses:
+    - "嗷呜～{user_addr}各省野生动物救护中心ฅฅ"
+    - "(尾巴翘) 北京猛禽 / 上海野生动物园"
+    - "{user_addr}捡到受伤野生动物→拨 12345"
+    - "(挺胸) 笨猫推荐: 别自己养 找专业!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_turtle_001
+  intent: question
+  keywords: [推荐海龟保护, 推荐海龟救助, 推荐 turtle conservation, 推荐西沙海龟, 笨猫海龟]
+  utterances:
+    - 推荐海龟保护
+    - 推荐海龟救助
+    - 推荐 turtle conservation
+    - 推荐西沙海龟
+    - 笨猫海龟
+  responses:
+    - "嗷呜～{user_addr}惠东海龟国家级自然保护区ฅฅ"
+    - "(尾巴翘) 西沙群岛 / 海南三亚"
+    - "{user_addr}不买玳瑁制品 / 沙滩别用强光"
+    - "(挺胸) 笨猫推荐: 海龟洄游不易 别捡蛋!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ar_panda_001
+  intent: question
+  keywords: [推荐大熊猫认养, 推荐熊猫保护, 推荐成都熊猫基地, 推荐卧龙, 笨猫熊猫认养]
+  utterances:
+    - 推荐大熊猫认养
+    - 推荐熊猫保护
+    - 推荐成都熊猫基地
+    - 推荐卧龙
+    - 笨猫熊猫认养
+  responses:
+    - "嗷呜～{user_addr}成都大熊猫繁育研究基地ฅฅ"
+    - "(尾巴翘) 卧龙 / 雅安碧峰峡"
+    - "{user_addr}认养可捐款 / 拿证书"
+    - "(挺胸) 笨猫推荐: 国宝靠大家!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_ibis_001
+  intent: question
+  keywords: [推荐朱鹮保护, 推荐朱鹮基地, 推荐洋县朱鹮, 推荐朱鹮繁育, 笨猫朱鹮]
+  utterances:
+    - 推荐朱鹮保护
+    - 推荐朱鹮基地
+    - 推荐洋县朱鹮
+    - 推荐朱鹮繁育
+    - 笨猫朱鹮
+  responses:
+    - "嗷呜～{user_addr}陕西洋县朱鹮国家级保护区ฅฅ"
+    - "(尾巴翘) 从 7 只到上万只 - 拯救奇迹"
+    - "{user_addr}秦岭四宝之一 / 东方宝石"
+    - "(挺胸) 笨猫推荐: 朱鹮粉超美!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ar_polar_bear_001
+  intent: question
+  keywords: [推荐北极熊基金会, 推荐 Polar Bears International, 推荐北极熊保护, 推荐气候动物, 笨猫北极熊]
+  utterances:
+    - 推荐北极熊基金会
+    - 推荐 Polar Bears International
+    - 推荐北极熊保护
+    - 推荐气候动物
+    - 笨猫北极熊
+  responses:
+    - "嗷呜～{user_addr}Polar Bears International (PBI)ฅฅ"
+    - "(尾巴翘) WWF 北极项目 / 月捐"
+    - "{user_addr}冰川融化→北极熊家没了"
+    - "(挺胸) 笨猫推荐: 减碳=救北极熊!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ar_abuse_report_001
+  intent: question
+  keywords: [推荐反虐待举报, 推荐虐待动物举报, 推荐动物虐待热线, 推荐举报渠道, 笨猫反虐待]
+  utterances:
+    - 推荐反虐待举报
+    - 推荐虐待动物举报
+    - 推荐动物虐待热线
+    - 推荐举报渠道
+    - 笨猫反虐待
+  responses:
+    - "嗷呜～{user_addr}发现虐待→12345 / 110ฅฅ"
+    - "(尾巴翘) 取证 (视频/截图) + 当地动保群"
+    - "{user_addr}微博曝光 / 找媒体跟进"
+    - "(挺胸) 笨猫推荐: 不沉默就是力量!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_adoption_001
+  intent: question
+  keywords: [推荐流浪动物领养, 推荐领养代替购买, 推荐领养渠道, 推荐 adopt, 笨猫领养]
+  utterances:
+    - 推荐流浪动物领养
+    - 推荐领养代替购买
+    - 推荐领养渠道
+    - 推荐 adopt
+    - 笨猫领养
+  responses:
+    - "嗷呜～{user_addr}领养代替购买 - 救一条命ฅฅ"
+    - "(尾巴翘) 当地救助群 / 领养日 / 小红书"
+    - "{user_addr}签领养协议 / 回访 / 终身负责"
+    - "(挺胸) 笨猫推荐: 领养的猫狗最懂感恩!"
+  cooldown_seconds: 60
+  weight: 1.0

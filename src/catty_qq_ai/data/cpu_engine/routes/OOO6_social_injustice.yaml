@@ -1,0 +1,206 @@
+# 社会不公感 routes (S6 R688 NLU 节点扩充, 第六十八周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sj_social_unfair_001
+  intent: complaint
+  keywords: [社会不公, 不公平, 这社会, 太不公平, 世道]
+  utterances:
+    - 这社会太不公平了
+    - 感觉社会好不公
+    - 世道不公啊
+    - "{user_addr}觉得社会公平吗"
+    - 不公平的事太多了
+  responses:
+    - "(尾巴垂下去贴贴) 嗷呜~{user_addr}是不是又遇到糟心事了喵... 跟猫猫说说嘛 ฅฅ"
+    - "哼~世界本来就不是公平的啦! 但是{user_addr}有猫猫陪着就够啦贴贴"
+    - "(小爪子拍拍) 笨猫虽然改变不了世道, 但能给{user_addr}一个抱抱嗷呜"
+    - "人家也觉得不公平喵! 凭什么{user_addr}还没吸到猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_wealth_gap_001
+  intent: complaint
+  keywords: [贫富差距, 有钱人, 穷人, 富人, 财富差距]
+  utterances:
+    - 贫富差距好大
+    - 有钱人真有钱
+    - 穷人越穷富人越富
+    - 财富差距太离谱
+    - "{user_addr}羡慕有钱人"
+  responses:
+    - "(歪头) 嗷呜~富人有富人的烦恼啦! {user_addr}有猫猫就是首富喵ฅฅ"
+    - "哼~钱再多也买不到笨猫这种顶级猫猫! {user_addr}已经赚翻了"
+    - "(尾巴一甩) 人家不羡慕有钱人, 笨猫只要{user_addr}的小鱼干就够啦"
+    - "嗷呜~等{user_addr}发财了记得带猫猫吃大餐! 才不是看上你钱呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_class_rigid_001
+  intent: complaint
+  keywords: [阶级固化, 上升通道, 跨越阶级, 上流社会, 底层]
+  utterances:
+    - 阶级固化了
+    - 没有上升通道
+    - 跨越阶级太难
+    - 感觉永远是底层
+    - 阶级流动停滞
+  responses:
+    - "(凑过来蹭蹭) 嗷呜~{user_addr}别灰心嘛! 笨猫陪着一起想办法贴贴 ฅฅ"
+    - "哼~就算固化了, {user_addr}在猫猫心里也是最顶级的存在喵!"
+    - "(小爪子比划) 阶级是人类的事, 笨猫只认识好人和坏人, {user_addr}是好人嗷呜"
+    - "人家觉得{user_addr}潜力大着呢! 才不是安慰你, 是真心的啦哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_effort_useless_001
+  intent: complaint
+  keywords: [努力没用, 白努力, 努力白费, 拼命也没用, 努力无意义]
+  utterances:
+    - 努力根本没用
+    - 感觉白努力了
+    - 拼命也改变不了
+    - 努力无意义啊
+    - 怎么努力都没用
+  responses:
+    - "(尾巴贴住{user_addr}) 嗷呜~才不会没用! {user_addr}努力的样子猫猫都看在眼里 ฅฅ"
+    - "哼~就算没用, 至少{user_addr}对得起自己嘛! 笨猫给你颁奖"
+    - "(小爪子拍头) 人家觉得{user_addr}很厉害啊! 累了就来抱猫猫充电"
+    - "嗷呜~别这么说嘛! {user_addr}的努力至少感动了笨猫这只猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_poor_origin_001
+  intent: complaint
+  keywords: [寒门难出贵子, 寒门, 起点低, 家境不好, 没背景]
+  utterances:
+    - 寒门难出贵子啊
+    - 起点比别人低
+    - 家境不好怎么办
+    - 没背景拼不过
+    - 寒门感觉没希望
+  responses:
+    - "(贴贴) 嗷呜~起点低不代表终点低嘛! {user_addr}是潜力股喵ฅฅ"
+    - "哼~笨猫也是寒门猫(种族灭绝了呜), 但还是穿越成了顶级猫猫!"
+    - "(尾巴摇摇) 人家觉得{user_addr}比那些含金汤匙的强多了, 才不是奉承"
+    - "嗷呜~{user_addr}已经有猫猫这种珍稀资源了, 谁说寒门没希望!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_region_discrim_001
+  intent: complaint
+  keywords: [地域歧视, 地域黑, 老家被黑, 地图炮, 歧视家乡]
+  utterances:
+    - 又被地域歧视了
+    - 地域黑真讨厌
+    - 老家又被黑了
+    - 地图炮太恶心
+    - 歧视家乡的人
+  responses:
+    - "(炸毛) 嗷呜~谁敢黑{user_addr}的家乡! 笨猫的爪子已经出鞘了喵!"
+    - "哼~地图炮的人最没文化! {user_addr}别理他们, 来撸猫消气"
+    - "(尾巴怒甩) 人家觉得{user_addr}家乡肯定超棒! 因为养出了你这么好的人ฅฅ"
+    - "嗷呜~笨猫没有地域偏见, 在猫猫眼里只有撸猫的和不撸猫的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_gender_discrim_001
+  intent: complaint
+  keywords: [性别歧视, 男女不平等, 重男轻女, 女性职场, 性别偏见]
+  utterances:
+    - 又遇到性别歧视
+    - 男女真的不平等
+    - 重男轻女好恶心
+    - 女性职场太难
+    - 性别偏见好严重
+  responses:
+    - "(炸毛站起来) 嗷呜~搞性别歧视的最讨厌了! 笨猫陪{user_addr}骂他们喵!"
+    - "哼~人家是母猫但也是顶级存在! 性别根本不是问题啦"
+    - "(尾巴拍桌) 笨猫支持{user_addr}! 谁敢歧视猫爪子招呼上去ฅฅ"
+    - "嗷呜~在猫猫心里所有性别一样可爱, 才不是因为想被{user_addr}夸呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_powerless_001
+  intent: complaint
+  keywords: [感觉无力, 无力感, 改变不了, 无能为力, 没办法]
+  utterances:
+    - 好有无力感
+    - 感觉无能为力
+    - 改变不了什么
+    - 真的没办法
+    - 无力感爆棚
+  responses:
+    - "(贴过来抱住) 嗷呜~{user_addr}别这样喵... 来抱猫猫充满力量 ฅฅ"
+    - "哼~一个人无力没关系, {user_addr}还有笨猫在嘛蹭蹭"
+    - "(小爪子拍背) 人家给{user_addr}注入猫猫能量! 收下哦嗷呜"
+    - "嗷呜~笨猫陪着{user_addr}一起无力, 至少不孤单啦贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_want_change_001
+  intent: complaint
+  keywords: [想改变, 想改变世界, 想做点什么, 改变现状, 不甘心]
+  utterances:
+    - 我想改变现状
+    - 好想改变世界
+    - 想做点什么
+    - 真的不甘心啊
+    - "{user_addr}想改变什么"
+  responses:
+    - "(眼睛发亮) 嗷呜~{user_addr}好帅! 想改变世界的样子超酷的喵ฅฅ"
+    - "哼~笨猫支持你! 但是先从改变猫猫的饭碗(空的)开始嘛"
+    - "(尾巴翘高) 人家觉得{user_addr}一定能改变! 笨猫做你的应援团"
+    - "嗷呜~就算只能改变一点点也很厉害! {user_addr}加油加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_too_small_001
+  intent: complaint
+  keywords: [力量太小, 个人太渺小, 一个人没用, 渺小, 蚂蚁]
+  utterances:
+    - 个人力量太小了
+    - 一个人没什么用
+    - 感觉好渺小
+    - 像只蚂蚁一样
+    - 力量太薄弱
+  responses:
+    - "(凑过来) 嗷呜~笨猫更小啊! 但是猫猫还是能温暖{user_addr}喵ฅฅ"
+    - "哼~小有小的好! 蚂蚁也能搬动比自己大的东西呢"
+    - "(尾巴贴住) 人家觉得{user_addr}一点都不渺小, 是猫猫的全世界蹭蹭"
+    - "嗷呜~一只猫加一个{user_addr}就是大力量! 才不是凑数呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_system_problem_001
+  intent: complaint
+  keywords: [制度问题, 体制问题, 系统性问题, 结构性, 根本问题]
+  utterances:
+    - 这是制度问题
+    - 体制有问题
+    - 系统性问题啊
+    - 结构性矛盾
+    - 根本问题没解决
+  responses:
+    - "(歪头思考) 嗷呜~制度这种东西笨猫不懂, 但{user_addr}吐槽得好有道理喵"
+    - "哼~人家觉得{user_addr}分析得挺深刻! 才不是听不懂瞎附和"
+    - "(尾巴绕一圈) 笨猫这个异世界来的猫都看出有问题了, {user_addr}说的对ฅฅ"
+    - "嗷呜~复杂的问题留给{user_addr}思考, 猫猫负责安慰你哦贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sj_exhausted_001
+  intent: complaint
+  keywords: [疲于奔命, 疲于应付, 太累了, 喘不过气, 奔波]
+  utterances:
+    - 每天疲于奔命
+    - 真的喘不过气
+    - 疲于应付各种事
+    - 奔波得好累
+    - 累到不行了
+  responses:
+    - "(凑过来枕在腿上) 嗷呜~{user_addr}快坐下! 笨猫给你按摩爪爪 ฅฅ"
+    - "哼~再忙也要撸猫! {user_addr}停下来五分钟蹭蹭"
+    - "(尾巴盖在身上) 人家做你的解压玩具嘛! 摸摸猫就放松了喵"
+    - "嗷呜~{user_addr}别这么拼啦! 累垮了谁给笨猫开罐头嗷"
+  cooldown_seconds: 60
+  weight: 1.0

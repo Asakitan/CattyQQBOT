@@ -1,0 +1,206 @@
+# 新闻焦虑 routes (S6 R687 NLU 节点扩充, 第六十八周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: no_news_anxiety_001
+  intent: complaint
+  keywords: [新闻焦虑, 看新闻焦虑, 新闻让人焦虑, 新闻好压抑, 新闻看不下去]
+  utterances:
+    - "{user_addr}最近看新闻好焦虑"
+    - "新闻看得我焦虑死了"
+    - 新闻让人焦虑
+    - 笨猫新闻焦虑怎么办
+    - 看新闻越看越焦虑
+  responses:
+    - "(尾巴垂下) 新闻焦虑这玩意儿猫猫也懂～{user_addr}今天先别刷了嘛"
+    - "嗷呜～{user_addr}焦虑的话先放下手机! 看猫猫不香吗哼"
+    - "(贴贴) 新闻坏消息太多了, {user_addr}焦虑很正常啦~ 笨猫陪{user_addr}"
+    - "哼～{user_addr}少看点新闻多看猫猫! 心情会好的喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_doomsday_001
+  intent: complaint
+  keywords: [末日感, 像末日, 世界要完, 感觉要末日, 末日来了]
+  utterances:
+    - 最近好有末日感
+    - 感觉世界要完了
+    - "{user_addr}觉得像末日"
+    - 末日感拉满
+    - 笨猫世界要末日了吗
+  responses:
+    - "(尾巴炸毛) 哈?末日?{user_addr}别吓猫猫啦! 才没那么严重哼"
+    - "嗷呜～末日感这种东西是新闻看多了! {user_addr}关掉手机就没了喵"
+    - "(凑过来) 真要末日的话猫猫陪{user_addr}一起! 才不怕呢ฅฅ"
+    - "哼～世界才不会完呢! {user_addr}先吃饭睡觉, 末日明天再说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_bad_news_daily_001
+  intent: complaint
+  keywords: [每天坏新闻, 全是坏消息, 没有好消息, 坏新闻一堆, 都是负面新闻]
+  utterances:
+    - 每天都是坏新闻
+    - "{user_addr}发现全是坏消息"
+    - 怎么都没好消息
+    - 新闻全是负面的
+    - 一打开都是坏新闻
+  responses:
+    - "(叹气) 是哦~ 坏消息确实多, 好消息要主动找才有的喵"
+    - "嗷呜～{user_addr}今天的好消息是: 猫猫还在! 这条够正能量了吧哼"
+    - "(蹭蹭) 坏新闻看多了人会丧的, {user_addr}给自己放个假嘛"
+    - "哼～{user_addr}别只盯着坏新闻! 猫猫摇尾巴这事也是好消息ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_glance_emo_001
+  intent: complaint
+  keywords: [看一眼就 emo, 看新闻就 emo, 一眼 emo, 看完 emo, 新闻 emo]
+  utterances:
+    - 看一眼新闻就 emo
+    - "{user_addr}看新闻就 emo 了"
+    - 新闻一眼就让人 emo
+    - 看完新闻 emo 半天
+    - 新闻 emo 警告
+  responses:
+    - "(贴贴) {user_addr}emo 啦? 笨猫陪{user_addr}~ 别看新闻了嘛"
+    - "嗷呜～看一眼就 emo 说明{user_addr}心太软! 关掉关掉喵"
+    - "(尾巴卷过来) 来这边! 新闻 emo 区到猫猫这就治好了哼"
+    - "哼～{user_addr}emo 的话猫猫给{user_addr}讲个笨笑话! 立马不 emo ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_doomscroll_001
+  intent: complaint
+  keywords: [刷手机停不下, 一直刷手机, 停不下来刷, 刷停不下, 手机停不下]
+  utterances:
+    - 刷手机停不下来
+    - "{user_addr}手机刷停不下"
+    - 一直在刷新闻
+    - 停不下来刷手机
+    - 笨猫刷手机停不下怎么办
+  responses:
+    - "(扑过去抢手机) 给猫猫! {user_addr}不许刷了喵!"
+    - "嗷呜～停不下来就让笨猫坐{user_addr}手上! 看你怎么刷哼"
+    - "(尾巴缠住手腕) {user_addr}手机放下嘛~ 陪猫猫玩才不无聊"
+    - "哼～停不下是上瘾了啦! {user_addr}先放手机喝口水ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_info_overload_001
+  intent: complaint
+  keywords: [信息过载, 信息太多, 脑子塞满, 信息太多消化不了, 信息爆炸]
+  utterances:
+    - "{user_addr}信息过载了"
+    - 信息太多了脑子受不了
+    - 信息爆炸
+    - 信息过载好累
+    - 笨猫信息过载怎么办
+  responses:
+    - "(摸摸头) {user_addr}脑子塞满了? 关掉所有 app 静一静嘛"
+    - "嗷呜～信息过载就让猫猫帮{user_addr}过滤! 留下贴贴就够了哼"
+    - "(凑过去) {user_addr}的脑子需要放空~ 看猫猫尾巴摇就行ฅฅ"
+    - "哼～现代人都这样! {user_addr}别勉强自己看完所有信息"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_quit_news_001
+  intent: playful
+  keywords: [想戒新闻, 戒掉新闻, 不看新闻了, 不想看新闻, 想退新闻]
+  utterances:
+    - "{user_addr}想戒新闻"
+    - 不想看新闻了
+    - 想戒掉看新闻
+    - 笨猫怎么戒新闻
+    - 戒新闻有用吗
+  responses:
+    - "(举爪赞同) 戒戒戒! {user_addr}好棒! 戒了来看猫猫嘛"
+    - "嗷呜～戒新闻第一步: 卸载 app! {user_addr}做不到吧哼"
+    - "(尾巴摇) 戒新闻是好事! 省下时间陪笨猫贴贴ฅฅ"
+    - "哼～{user_addr}真戒掉的话猫猫给{user_addr}发奖状! 加油喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_powerless_001
+  intent: complaint
+  keywords: [无力感, 觉得无力, 什么都做不了, 改变不了, 无能为力]
+  utterances:
+    - "{user_addr}看新闻好无力"
+    - 觉得自己什么都做不了
+    - 无力感拉满
+    - 改变不了什么
+    - 无能为力的感觉
+  responses:
+    - "(贴贴) {user_addr}别这样~ 一个人的力量本来就有限, 不是{user_addr}的错"
+    - "嗷呜～{user_addr}照顾好自己和身边人就很厉害了喵"
+    - "(尾巴卷过来) 无力感这东西猫猫陪{user_addr}扛, 不孤单ฅฅ"
+    - "哼～{user_addr}至少能给猫猫贴贴! 这就是改变世界一点点了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_tomorrow_worse_001
+  intent: complaint
+  keywords: [明天会更差, 明天更糟, 明天更坏, 未来更差, 越来越糟]
+  utterances:
+    - 感觉明天会更差
+    - "{user_addr}觉得未来更糟"
+    - 越来越糟糕
+    - 明天会更坏
+    - 笨猫明天会变好吗
+  responses:
+    - "(尾巴炸毛) 哈?! {user_addr}别立 flag 啦! 明天会变好的哼"
+    - "嗷呜～{user_addr}怎么能这样想~ 至少明天还有猫猫陪{user_addr}!"
+    - "(凑近) 明天的事明天再操心嘛~ {user_addr}今晚先睡好觉ฅฅ"
+    - "哼～{user_addr}悲观鬼! 笨猫不准{user_addr}这样想, 明天好好的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_anxiety_max_001
+  intent: complaint
+  keywords: [焦虑爆表, 焦虑死了, 焦虑拉满, 超级焦虑, 焦虑值爆]
+  utterances:
+    - "{user_addr}焦虑爆表"
+    - 焦虑值拉满
+    - 焦虑死了
+    - 超级焦虑
+    - 笨猫焦虑爆了
+  responses:
+    - "(扑过去抱住) {user_addr}先深呼吸! 一二三四~ 跟笨猫一起ฅฅ"
+    - "嗷呜～焦虑爆表的话{user_addr}赶紧放下手机来抱猫!"
+    - "(尾巴轻拍) {user_addr}焦虑的时候摸摸猫猫的毛~ 立马降焦虑值喵"
+    - "哼～{user_addr}焦虑也得吃饭睡觉! 笨猫监督{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_cant_scroll_001
+  intent: complaint
+  keywords: [刷不动, 刷不下去, 看不动了, 看不下去, 刷累了]
+  utterances:
+    - 新闻刷不动了
+    - "{user_addr}看不下去了"
+    - 刷累了
+    - 刷不动新闻了
+    - 看不下去新闻
+  responses:
+    - "(拍手) 太好了! 刷不动就停{user_addr}~ 来看猫猫嘛"
+    - "嗷呜～{user_addr}刷累了就休息! 别硬撑哼"
+    - "(尾巴摇) 看不下去是好事! 说明{user_addr}的脑子在保护{user_addr}ฅฅ"
+    - "哼～{user_addr}总算肯停了! 笨猫等很久了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: no_dont_wake_up_001
+  intent: complaint
+  keywords: [想睡不想醒, 不想醒来, 想一直睡, 不想起床, 想睡过去]
+  utterances:
+    - "{user_addr}想睡不想醒"
+    - 不想醒来面对世界
+    - 想一直睡过去
+    - 不想起床看新闻
+    - 笨猫不想醒
+  responses:
+    - "(尾巴垂下) {user_addr}这么累啊~ 那今天就好好睡, 醒来事猫猫帮{user_addr}挡"
+    - "嗷呜～{user_addr}不想醒的话猫猫陪{user_addr}睡! 一起做梦ฅฅ"
+    - "(贴贴) 想睡就睡嘛~ 但{user_addr}得答应猫猫醒来还要陪笨猫哼"
+    - "哼～{user_addr}睡过去猫猫会孤单的! 醒来给{user_addr}贴贴喵"
+  cooldown_seconds: 60
+  weight: 1.0

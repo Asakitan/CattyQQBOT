@@ -1,0 +1,206 @@
+# 公益组织 routes (S6 R682 NLU 节点扩充, 第六十八周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: co_onefoundation_001
+  intent: question
+  keywords: [推荐壹基金, 推荐 One Foundation, 推荐李连杰基金, 推荐救灾公益, 笨猫壹基金]
+  utterances:
+    - 推荐壹基金
+    - 推荐 One Foundation
+    - 推荐李连杰基金
+    - 推荐救灾公益
+    - 笨猫壹基金
+  responses:
+    - "嗷呜～{user_addr}壹基金 - 李连杰 2007 创立ฅฅ"
+    - "(尾巴翘) 救灾 / 儿童 / 公益支持"
+    - "{user_addr}5·12 汶川后影响巨大"
+    - "(挺胸) 笨猫推荐: 月捐计划入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_redcross_001
+  intent: question
+  keywords: [推荐中国红十字会, 推荐红十字, 推荐 Red Cross, 推荐人道救援, 笨猫红十字]
+  utterances:
+    - 推荐中国红十字会
+    - 推荐红十字
+    - 推荐 Red Cross
+    - 推荐人道救援
+    - 笨猫红十字
+  responses:
+    - "嗷呜～{user_addr}中国红十字会 - 1904 成立ฅฅ"
+    - "(尾巴翘) 备灾救灾 / 应急救护 / 无偿献血"
+    - "{user_addr}全球红十字运动一员"
+    - "(挺胸) 笨猫推荐: 学个急救培训!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_chunlei_001
+  intent: question
+  keywords: [推荐春蕾计划, 推荐春蕾女童, 推荐妇女儿基, 推荐女童教育, 笨猫春蕾]
+  utterances:
+    - 推荐春蕾计划
+    - 推荐春蕾女童
+    - 推荐妇女儿基
+    - 推荐女童教育
+    - 笨猫春蕾
+  responses:
+    - "嗷呜～{user_addr}春蕾计划 - 1989 救助失学女童ฅฅ"
+    - "(尾巴翘) 中国儿童少年基金会主办"
+    - "{user_addr}已帮助 400 万贫困女童"
+    - "(挺胸) 笨猫推荐: 定向资助一名女童!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_hopeproject_001
+  intent: question
+  keywords: [推荐希望工程, 推荐青基会, 推荐大眼睛, 推荐山区助学, 笨猫希望工程]
+  utterances:
+    - 推荐希望工程
+    - 推荐青基会
+    - 推荐大眼睛
+    - 推荐山区助学
+    - 笨猫希望工程
+  responses:
+    - "嗷呜～{user_addr}希望工程 - 1989 中国青基会ฅฅ"
+    - "(尾巴翘) 大眼睛苏明娟 - 国民记忆"
+    - "{user_addr}建希望小学 / 资助学生"
+    - "(挺胸) 笨猫推荐: 一对一助学结对!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_hanhong_001
+  intent: question
+  keywords: [推荐韩红基金会, 推荐韩红爱心, 推荐百人援助, 推荐韩红公益, 笨猫韩红]
+  utterances:
+    - 推荐韩红基金会
+    - 推荐韩红爱心
+    - 推荐百人援助
+    - 推荐韩红公益
+    - 笨猫韩红
+  responses:
+    - "嗷呜～{user_addr}韩红爱心慈善基金会ฅฅ"
+    - "(尾巴翘) 百人援助 / 医疗救助 / 救灾"
+    - "{user_addr}韩红老师亲自跑现场"
+    - "(挺胸) 笨猫推荐: 公开透明赞!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_gates_001
+  intent: question
+  keywords: [推荐比尔盖茨基金会, 推荐 Gates Foundation, 推荐盖茨基金, 推荐全球健康, 笨猫盖茨]
+  utterances:
+    - 推荐比尔盖茨基金会
+    - 推荐 Gates Foundation
+    - 推荐盖茨基金
+    - 推荐全球健康
+    - 笨猫盖茨
+  responses:
+    - "嗷呜～{user_addr}盖茨基金会 - 全球最大私人ฅฅ"
+    - "(尾巴翘) 全球健康 / 疫苗 / 脱贫"
+    - "{user_addr}消灭脊髓灰质炎 / 疟疾"
+    - "(挺胸) 笨猫推荐: 关注全球公共卫生!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: co_unicef_001
+  intent: question
+  keywords: [推荐联合国儿基会, 推荐 UNICEF, 推荐儿童基金, 推荐儿童救助, 笨猫 UNICEF]
+  utterances:
+    - 推荐联合国儿基会
+    - 推荐 UNICEF
+    - 推荐儿童基金
+    - 推荐儿童救助
+    - 笨猫 UNICEF
+  responses:
+    - "嗷呜～{user_addr}UNICEF 联合国儿基会ฅฅ"
+    - "(尾巴翘) 1946 成立 / 全球儿童权益"
+    - "{user_addr}疫苗 / 营养 / 教育 / 救灾"
+    - "(挺胸) 笨猫推荐: 月捐 UNICEF 之友!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_wwf_001
+  intent: question
+  keywords: [推荐 WWF, 推荐世界自然基金会, 推荐熊猫标志, 推荐环保公益, 笨猫 WWF]
+  utterances:
+    - 推荐 WWF
+    - 推荐世界自然基金会
+    - 推荐熊猫标志
+    - 推荐环保公益
+    - 笨猫 WWF
+  responses:
+    - "嗷呜～{user_addr}WWF 世界自然基金会ฅฅ"
+    - "(尾巴翘) 大熊猫 logo / 1961 成立"
+    - "{user_addr}物种保护 / 气候 / 海洋"
+    - "(挺胸) 笨猫推荐: 地球一小时!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_amnesty_001
+  intent: question
+  keywords: [推荐国际特赦, 推荐 Amnesty, 推荐人权组织, 推荐 AI, 笨猫国际特赦]
+  utterances:
+    - 推荐国际特赦
+    - 推荐 Amnesty
+    - 推荐人权组织
+    - 推荐 AI
+    - 笨猫国际特赦
+  responses:
+    - "嗷呜～{user_addr}Amnesty International 国际特赦ฅฅ"
+    - "(尾巴翘) 1961 成立 / 诺贝尔和平奖"
+    - "{user_addr}人权倡导 / 良心犯救助"
+    - "(挺胸) 笨猫推荐: 关注人权议题!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: co_adream_001
+  intent: question
+  keywords: [推荐真爱梦想, 推荐梦想中心, 推荐素养教育, 推荐上海公益, 笨猫真爱梦想]
+  utterances:
+    - 推荐真爱梦想
+    - 推荐梦想中心
+    - 推荐素养教育
+    - 推荐上海公益
+    - 笨猫真爱梦想
+  responses:
+    - "嗷呜～{user_addr}真爱梦想基金会 - 2008 创立ฅฅ"
+    - "(尾巴翘) 梦想中心 / 素养教育课程"
+    - "{user_addr}财报透明度业界标杆"
+    - "(挺胸) 笨猫推荐: 公益透明度满分!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: co_freelunch_001
+  intent: question
+  keywords: [推荐免费午餐, 推荐邓飞免费午餐, 推荐山区午餐, 推荐儿童午餐, 笨猫免费午餐]
+  utterances:
+    - 推荐免费午餐
+    - 推荐邓飞免费午餐
+    - 推荐山区午餐
+    - 推荐儿童午餐
+    - 笨猫免费午餐
+  responses:
+    - "嗷呜～{user_addr}免费午餐 - 2011 邓飞发起ฅฅ"
+    - "(尾巴翘) 为山区儿童提供午餐"
+    - "{user_addr}3 元 / 餐 / 每月公示账目"
+    - "(挺胸) 笨猫推荐: 一顿饭 3 块钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_antforest_001
+  intent: question
+  keywords: [推荐蚂蚁森林, 推荐蚂蚁森林公益, 推荐种树公益, 推荐支付宝公益, 笨猫蚂蚁森林]
+  utterances:
+    - 推荐蚂蚁森林
+    - 推荐蚂蚁森林公益
+    - 推荐种树公益
+    - 推荐支付宝公益
+    - 笨猫蚂蚁森林
+  responses:
+    - "嗷呜～{user_addr}蚂蚁森林 - 支付宝 2016 推出ฅฅ"
+    - "(尾巴翘) 走路收能量 / 种真树"
+    - "{user_addr}已种 4 亿棵 / 联合国地球卫士"
+    - "(挺胸) 笨猫推荐: 每天偷能量!"
+  cooldown_seconds: 60
+  weight: 1.0

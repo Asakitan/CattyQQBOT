@@ -1,0 +1,206 @@
+# 环保行动 routes (S6 R684 NLU 节点扩充, 第六十八周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ea_recycle_001
+  intent: question
+  keywords: [推荐垃圾分类, 推荐可回收, 推荐厨余, 推荐有害垃圾, 笨猫垃圾分类]
+  utterances:
+    - 推荐垃圾分类
+    - 推荐可回收
+    - 推荐厨余
+    - 推荐有害垃圾
+    - 笨猫垃圾分类
+  responses:
+    - "嗷呜～{user_addr}可回收 / 厨余 / 有害 / 其他ฅฅ"
+    - "(尾巴翘) 上海最严 / 北京也跟上"
+    - "{user_addr}电池单独 / 玻璃单独"
+    - "(挺胸) 笨猫推荐: 从厨余分起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_plastic_001
+  intent: question
+  keywords: [推荐减塑生活, 推荐少用塑料, 推荐玻璃瓶, 推荐不锈钢吸管, 笨猫减塑]
+  utterances:
+    - 推荐减塑生活
+    - 推荐少用塑料
+    - 推荐玻璃瓶
+    - 推荐不锈钢吸管
+    - 笨猫减塑
+  responses:
+    - "嗷呜～{user_addr}玻璃 / 不锈钢 / 硅胶替代ฅฅ"
+    - "(尾巴翘) 拒一次性 / 自带杯"
+    - "{user_addr}竹牙刷 / 蜂蜡布"
+    - "(挺胸) 人家推荐: 从吸管开始减!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_secondhand_001
+  intent: question
+  keywords: [推荐二手循环, 推荐闲鱼, 推荐转转, 推荐多抓鱼, 笨猫二手]
+  utterances:
+    - 推荐二手循环
+    - 推荐闲鱼
+    - 推荐转转
+    - 推荐多抓鱼
+    - 笨猫二手
+  responses:
+    - "嗷呜～{user_addr}闲鱼 - 国民二手ฅฅ"
+    - "(尾巴翘) 转转 / 多抓鱼 (书) / 红布林 (奢侈品)"
+    - "{user_addr}孔夫子旧书网"
+    - "(挺胸) 笨猫推荐: 闲鱼能省一半钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_upcycle_001
+  intent: question
+  keywords: [推荐旧物改造, 推荐 DIY 改造, 推荐废物利用, 推荐旧衣改造, 笨猫旧物改造]
+  utterances:
+    - 推荐旧物改造
+    - 推荐 DIY 改造
+    - 推荐废物利用
+    - 推荐旧衣改造
+    - 笨猫旧物改造
+  responses:
+    - "嗷呜～{user_addr}旧 T 恤 → 抹布 / 购物袋ฅฅ"
+    - "(尾巴翘) 玻璃瓶 → 花瓶 / 收纳"
+    - "{user_addr}牛仔裤 → 包包"
+    - "(挺胸) 猫猫推荐: 旧 T 恤剪购物袋!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ea_zerowaste_001
+  intent: question
+  keywords: [推荐 0 废弃, 推荐 zero waste, 推荐无废生活, 推荐裸装店, 笨猫 0 waste]
+  utterances:
+    - 推荐 0 废弃
+    - 推荐 zero waste
+    - 推荐无废生活
+    - 推荐裸装店
+    - 笨猫 0 waste
+  responses:
+    - "嗷呜～{user_addr}Zero Waste - 极致环保ฅฅ"
+    - "(尾巴翘) 裸装店 / Bulk Barn / The Bulk House"
+    - "{user_addr}Bea Johnson - 0 废家庭"
+    - "(挺胸) 笨猫推荐: 从拒绝开始!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ea_treeplant_001
+  intent: question
+  keywords: [推荐植树活动, 推荐植树节, 推荐种树公益, 推荐 OneTreePlanted, 笨猫植树]
+  utterances:
+    - 推荐植树活动
+    - 推荐植树节
+    - 推荐种树公益
+    - 推荐 OneTreePlanted
+    - 笨猫植树
+  responses:
+    - "嗷呜～{user_addr}3 月 12 日植树节ฅฅ"
+    - "(尾巴翘) One Tree Planted / Ecosia 搜索引擎"
+    - "{user_addr}阿拉善 SEE / 蚂蚁森林"
+    - "(挺胸) 人家推荐: Ecosia 搜索种树!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ea_ocean_001
+  intent: question
+  keywords: [推荐海洋清理, 推荐 4Ocean, 推荐 Ocean Cleanup, 推荐海洋公益, 笨猫海洋清理]
+  utterances:
+    - 推荐海洋清理
+    - 推荐 4Ocean
+    - 推荐 Ocean Cleanup
+    - 推荐海洋公益
+    - 笨猫海洋清理
+  responses:
+    - "嗷呜～{user_addr}4Ocean - 买手环捞 1 磅ฅฅ"
+    - "(尾巴翘) The Ocean Cleanup - 太平洋垃圾带"
+    - "{user_addr}Sea Shepherd / Surfrider"
+    - "(挺胸) 笨猫推荐: 4Ocean 手环!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ea_bag_001
+  intent: question
+  keywords: [推荐自带购物袋, 推荐帆布袋, 推荐折叠袋, 推荐环保袋, 笨猫购物袋]
+  utterances:
+    - 推荐自带购物袋
+    - 推荐帆布袋
+    - 推荐折叠袋
+    - 推荐环保袋
+    - 笨猫购物袋
+  responses:
+    - "嗷呜～{user_addr}帆布袋 - 耐用百搭ฅฅ"
+    - "(尾巴翘) Baggu / Stojo 折叠袋"
+    - "{user_addr}MUJI / 宜家蓝袋"
+    - "(挺胸) 猫猫推荐: 包里常备 1 个!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_foodwaste_001
+  intent: question
+  keywords: [推荐食物 0 浪费, 推荐光盘行动, 推荐剩菜利用, 推荐临期食品, 笨猫 0 浪费]
+  utterances:
+    - 推荐食物 0 浪费
+    - 推荐光盘行动
+    - 推荐剩菜利用
+    - 推荐临期食品
+    - 笨猫 0 浪费
+  responses:
+    - "嗷呜～{user_addr}光盘行动 - 吃多少点多少ฅฅ"
+    - "(尾巴翘) 好特卖 / 嗨特购 临期超市"
+    - "{user_addr}剩菜冷冻 / 隔夜炒饭"
+    - "(挺胸) 笨猫推荐: 临期超市真香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_savewater_001
+  intent: question
+  keywords: [推荐节水节电, 推荐省水龙头, 推荐 LED 灯, 推荐节能家电, 笨猫节能]
+  utterances:
+    - 推荐节水节电
+    - 推荐省水龙头
+    - 推荐 LED 灯
+    - 推荐节能家电
+    - 笨猫节能
+  responses:
+    - "嗷呜～{user_addr}LED 灯 - 省 80% 电ฅฅ"
+    - "(尾巴翘) 节水龙头 / 双档马桶"
+    - "{user_addr}一级能效家电"
+    - "(挺胸) 人家推荐: 全屋换 LED!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_greentravel_001
+  intent: question
+  keywords: [推荐绿色出行, 推荐公交地铁, 推荐骑行, 推荐拼车, 笨猫绿色出行]
+  utterances:
+    - 推荐绿色出行
+    - 推荐公交地铁
+    - 推荐骑行
+    - 推荐拼车
+    - 笨猫绿色出行
+  responses:
+    - "嗷呜～{user_addr}地铁 / 公交 / 骑行ฅฅ"
+    - "(尾巴翘) 哈啰 / 美团单车"
+    - "{user_addr}拼车 / 顺风车 / 电车"
+    - "(挺胸) 笨猫推荐: 3 公里内骑车!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_antforest_001
+  intent: question
+  keywords: [推荐蚂蚁森林, 推荐收能量, 推荐种树 App, 推荐支付宝公益, 笨猫蚂蚁森林]
+  utterances:
+    - 推荐蚂蚁森林
+    - 推荐收能量
+    - 推荐种树 App
+    - 推荐支付宝公益
+    - 笨猫蚂蚁森林
+  responses:
+    - "嗷呜～{user_addr}蚂蚁森林 - 收能量种真树ฅฅ"
+    - "(尾巴翘) 阿拉善 / 内蒙古 真树林"
+    - "{user_addr}早起偷能量 / 步行积分"
+    - "(挺胸) 猫猫推荐: 每天打卡收能量!"
+  cooldown_seconds: 60
+  weight: 1.0

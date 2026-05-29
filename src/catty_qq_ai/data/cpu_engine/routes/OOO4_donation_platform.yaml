@@ -1,0 +1,206 @@
+# 捐款平台 routes (S6 R686 NLU 节点扩充, 第六十八周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: dp_tencent_001
+  intent: question
+  keywords: [推荐腾讯公益, 推荐腾讯捐款, 推荐 99公益日, 推荐 Tencent公益, 笨猫腾讯公益]
+  utterances:
+    - 推荐腾讯公益
+    - 推荐腾讯捐款
+    - 推荐 99公益日
+    - 推荐 Tencent公益
+    - 笨猫腾讯公益
+  responses:
+    - "嗷呜～{user_addr}腾讯公益 - 99公益日大IPฅฅ"
+    - "(尾巴翘) 微信入口 / 一块做好事"
+    - "{user_addr}项目透明 / 配捐多"
+    - "(挺胸) 猫猫推荐: 99公益日跟一波!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_alibaba_001
+  intent: question
+  keywords: [推荐阿里公益, 推荐淘宝公益宝贝, 推荐支付宝公益, 推荐 Alipay公益, 笨猫阿里公益]
+  utterances:
+    - 推荐阿里公益
+    - 推荐淘宝公益宝贝
+    - 推荐支付宝公益
+    - 推荐 Alipay公益
+    - 笨猫阿里公益
+  responses:
+    - "嗷呜～{user_addr}阿里公益 - 公益宝贝ฅฅ"
+    - "(尾巴翘) 支付宝爱心捐赠 / 0.02 元起"
+    - "{user_addr}日积月累 / 无感公益"
+    - "(挺胸) 笨猫推荐: 公益宝贝顺手买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_bytedance_001
+  intent: question
+  keywords: [推荐字节公益, 推荐抖音公益, 推荐 DOU爱公益, 推荐今日头条公益, 笨猫字节公益]
+  utterances:
+    - 推荐字节公益
+    - 推荐抖音公益
+    - 推荐 DOU爱公益
+    - 推荐今日头条公益
+    - 笨猫字节公益
+  responses:
+    - "嗷呜～{user_addr}字节公益 - DOU爱公益ฅฅ"
+    - "(尾巴翘) 抖音直播带捐 / 头条寻人"
+    - "{user_addr}短视频流量 + 公益"
+    - "(挺胸) 人家推荐: 看直播顺手捐!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_gofundme_001
+  intent: question
+  keywords: [推荐 GoFundMe, 推荐海外众筹, 推荐 GFM, 推荐国际捐款, 笨猫 GoFundMe]
+  utterances:
+    - "推荐 GoFundMe"
+    - 推荐海外众筹
+    - "推荐 GFM"
+    - 推荐国际捐款
+    - "笨猫 GoFundMe"
+  responses:
+    - "嗷呜～{user_addr}GoFundMe - 海外个人众筹龙头ฅฅ"
+    - "(尾巴翘) 医疗 / 救援 / 留学都有"
+    - "{user_addr}全英文 / 信用卡支付"
+    - "(挺胸) 笨猫推荐: 海外朋友募捐用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_waterdrop_001
+  intent: question
+  keywords: [推荐水滴筹, 推荐大病众筹, 推荐 Waterdrop, 推荐水滴公益, 笨猫水滴筹]
+  utterances:
+    - 推荐水滴筹
+    - 推荐大病众筹
+    - "推荐 Waterdrop"
+    - 推荐水滴公益
+    - 笨猫水滴筹
+  responses:
+    - "嗷呜～{user_addr}水滴筹 - 大病个人求助ฅฅ"
+    - "(尾巴翘) 0 手续费 / 微信扩散"
+    - "{user_addr}注意: 选有验证标的"
+    - "(歪头) 猫猫提醒: 别忘审项目真伪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_qingsongchou_001
+  intent: question
+  keywords: [推荐轻松筹, 推荐轻松公益, 推荐 Qsongchou, 推荐重病众筹, 笨猫轻松筹]
+  utterances:
+    - 推荐轻松筹
+    - 推荐轻松公益
+    - "推荐 Qsongchou"
+    - 推荐重病众筹
+    - 笨猫轻松筹
+  responses:
+    - "嗷呜～{user_addr}轻松筹 - 老牌大病众筹ฅฅ"
+    - "(尾巴翘) 轻松公益 / 月捐计划"
+    - "{user_addr}和水滴筹双雄"
+    - "(挺胸) 笨猫推荐: 比对后再选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_weiai_001
+  intent: question
+  keywords: [推荐微爱中国, 推荐微爱公益, 推荐 WeAi, 推荐儿童公益, 笨猫微爱中国]
+  utterances:
+    - 推荐微爱中国
+    - 推荐微爱公益
+    - "推荐 WeAi"
+    - 推荐儿童公益
+    - 笨猫微爱中国
+  responses:
+    - "嗷呜～{user_addr}微爱中国 - 儿童助学公益ฅฅ"
+    - "(尾巴翘) 山区儿童 / 一对一资助"
+    - "{user_addr}小而美 / 反馈细"
+    - "(摇尾) 人家推荐: 想帮孩子选这个!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_transparent_001
+  intent: question
+  keywords: [推荐透明公益, 推荐公益区块链, 推荐善款追踪, 推荐 GongyiLianMeng, 笨猫透明公益]
+  utterances:
+    - 推荐透明公益
+    - 推荐公益区块链
+    - 推荐善款追踪
+    - "推荐 GongyiLianMeng"
+    - 笨猫透明公益
+  responses:
+    - "嗷呜～{user_addr}蚂蚁链公益 - 区块链追踪ฅฅ"
+    - "(尾巴翘) 善款每一笔都上链"
+    - "{user_addr}腾讯公益也有区块链"
+    - "(挺胸) 笨猫推荐: 怕黑箱选透明的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_monthly_001
+  intent: question
+  keywords: [推荐月捐计划, 推荐每月小额捐, 推荐 MonthlyGiving, 推荐定额捐, 笨猫月捐]
+  utterances:
+    - 推荐月捐计划
+    - 推荐每月小额捐
+    - "推荐 MonthlyGiving"
+    - 推荐定额捐
+    - 笨猫月捐
+  responses:
+    - "嗷呜～{user_addr}月捐 - 每月 10/30/50ฅฅ"
+    - "(尾巴翘) 腾讯/支付宝/壹基金都有"
+    - "{user_addr}积少成多 / 持续陪伴"
+    - "(挺胸) 笨猫推荐: 一杯奶茶钱救命!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_antforest_001
+  intent: question
+  keywords: [推荐蚂蚁森林, 推荐蚂蚁森林兑换, 推荐种树公益, 推荐 AntForest, 笨猫蚂蚁森林]
+  utterances:
+    - 推荐蚂蚁森林
+    - 推荐蚂蚁森林兑换
+    - 推荐种树公益
+    - "推荐 AntForest"
+    - 笨猫蚂蚁森林
+  responses:
+    - "嗷呜～{user_addr}蚂蚁森林 - 攒能量种真树ฅฅ"
+    - "(尾巴翘) 梭梭 / 沙柳 / 樟子松"
+    - "{user_addr}免费公益 / 顺手做"
+    - "(摇尾) 笨猫每天偷能量喵~主人不!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_charityrun_001
+  intent: question
+  keywords: [推荐公益跑步, 推荐健康公益, 推荐 Keep捐步, 推荐微信运动捐, 笨猫公益跑步]
+  utterances:
+    - 推荐公益跑步
+    - 推荐健康公益
+    - "推荐 Keep捐步"
+    - 推荐微信运动捐
+    - 笨猫公益跑步
+  responses:
+    - "嗷呜～{user_addr}捐步公益 - 步数换善款ฅฅ"
+    - "(尾巴翘) 微信运动 / Keep / 悦跑圈"
+    - "{user_addr}健身顺便做公益"
+    - "(挺胸) 笨猫推荐: 一举两得!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_onecode_001
+  intent: question
+  keywords: [推荐一物一码捐, 推荐扫码公益, 推荐购物捐, 推荐 OneCodeDonation, 笨猫一物一码]
+  utterances:
+    - 推荐一物一码捐
+    - 推荐扫码公益
+    - 推荐购物捐
+    - "推荐 OneCodeDonation"
+    - 笨猫一物一码
+  responses:
+    - "嗷呜～{user_addr}一物一码 - 买商品扫码捐ฅฅ"
+    - "(尾巴翘) 农夫山泉 / 怡宝 / 多品牌"
+    - "{user_addr}厂家配捐 / 不花你钱"
+    - "(挺胸) 笨猫推荐: 喝水也能做公益!"
+  cooldown_seconds: 60
+  weight: 1.0

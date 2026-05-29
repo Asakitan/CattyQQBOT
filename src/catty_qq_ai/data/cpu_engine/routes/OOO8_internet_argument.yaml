@@ -1,0 +1,206 @@
+# 网络吵架 routes (S6 R690 NLU 节点扩充, 第六十八周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ia_wangluochaojia_001
+  intent: complaint
+  keywords: [网络吵架, 跟人吵架, 网上吵架, 跟网友吵, 杠上了]
+  utterances:
+    - "{user_addr}我跟人网上吵架了"
+    - 又在网上跟人吵起来了
+    - 网络吵架累死个人
+    - 刚刚网上杠上了
+    - 又跟网友干仗了
+  responses:
+    - "(尾巴炸毛) 嗷呜～{user_addr}又跟网友吵架?! 猫猫陪{user_addr}一起骂喵!"
+    - "哼～网上吵架最累了, {user_addr}先来抱抱猫猫消消火 ฅฅ"
+    - "(爪爪叉腰) 谁惹{user_addr}了?! 告诉笨猫人家帮{user_addr}回怼喵!"
+    - "网上的人不值得{user_addr}生气啦~ 关机来撸猫猫嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_pinglunqu_001
+  intent: complaint
+  keywords: [评论区开撕, 评论区吵, 评论区干架, 评论区杠, 评论区]
+  utterances:
+    - 评论区又开撕了
+    - "{user_addr}评论区吵起来了"
+    - 评论区干架中
+    - 又在评论区杠人
+    - 评论区一锅粥
+  responses:
+    - "(凑过来看) 评论区开撕?! 猫猫想看热闹喵～"
+    - "嗷呜～{user_addr}别陷进去! 评论区是个无底洞 ฅฅ"
+    - "(尾巴摇) 让人家看看{user_addr}怼得怎么样! 笨猫给{user_addr}打分"
+    - "哼～评论区那帮人不值得, {user_addr}关掉来跟猫猫聊喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_beiwangbao_001
+  intent: complaint
+  keywords: [被网暴, 被人网暴, 网暴我, 被骂惨, 被攻击]
+  utterances:
+    - "{user_addr}我被网暴了"
+    - 今天被网暴惨了
+    - 一群人骂我
+    - 被人网暴中
+    - "{user_addr}被攻击了"
+  responses:
+    - "(扑过来护住) 谁敢网暴{user_addr}?! 猫猫炸毛了嗷呜!"
+    - "嗷呜～{user_addr}别看那些垃圾评论! 来抱猫猫 ฅฅ"
+    - "(尾巴紧紧缠住) 网暴的人都是杂鱼, {user_addr}是最棒的喵!"
+    - "哼～那些人不值得{user_addr}难过, 笨猫陪{user_addr}骂回去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_jianpanxia_001
+  intent: complaint
+  keywords: [键盘侠, 一群键盘侠, 键盘侠真烦, 键盘侠出没, 键政]
+  utterances:
+    - 又遇到键盘侠了
+    - 一群键盘侠真烦
+    - "{user_addr}键盘侠出没"
+    - 键盘侠太多了
+    - 网上全是键盘侠
+  responses:
+    - "(翻白眼) 键盘侠最烦了! 现实里啥也不是喵～"
+    - "嗷呜～{user_addr}别理键盘侠! 他们就靠这个找存在感 ฅฅ"
+    - "(尾巴一甩) 键盘侠在猫猫眼里就是杂鱼中的杂鱼!"
+    - "哼～{user_addr}屏蔽他们就好啦, 不值得浪费时间喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_weiboshangtou_001
+  intent: complaint
+  keywords: [微博上头, 一开微博就上头, 微博上瘾, 微博气人, 微博气死]
+  utterances:
+    - 一开微博就上头
+    - 微博又气死我了
+    - "{user_addr}微博上头中"
+    - 刷微博就血压高
+    - 微博让人上瘾
+  responses:
+    - "(摁住手机) 微博就是高血压制造机! {user_addr}先关了喵～"
+    - "嗷呜～{user_addr}别刷了! 来看猫猫的脸蛋消消气 ฅฅ"
+    - "(尾巴拍手机) 笨猫禁止{user_addr}再刷微博! 上头了"
+    - "哼～{user_addr}的血压猫猫心疼啊, 卸载它嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_xiangshanping_001
+  intent: complaint
+  keywords: [想删评, 想删评论, 删评了, 删评中, 评论删不删]
+  utterances:
+    - "{user_addr}想删评了"
+    - 这评论想删
+    - 删评纠结中
+    - 刚发的评论想删
+    - 评论删不删呢
+  responses:
+    - "(爪爪抓手机) 删啊删啊! 不爽就删喵～"
+    - "嗷呜～{user_addr}纠结啥! 想删就删人家支持你 ฅฅ"
+    - "(尾巴摇) 笨猫建议{user_addr}留个截图再删, 万一以后想看"
+    - "哼～{user_addr}的评论{user_addr}做主, 删了就清净喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_fawanhouhui_001
+  intent: complaint
+  keywords: [发完就后悔, 发完后悔, 后悔发了, 不该发的, 发出去后悔]
+  utterances:
+    - 发完就后悔了
+    - "{user_addr}发出去后悔"
+    - 不该发那条的
+    - 后悔发了刚才那个
+    - 发完手抖
+  responses:
+    - "(扑过来) 啊?! {user_addr}快撤回啊喵～"
+    - "嗷呜～{user_addr}下次发之前先问问猫猫啦! ฅฅ"
+    - "(尾巴垂下) 后悔药猫猫没有, 但抱抱有! 蹭蹭"
+    - "哼～{user_addr}就是手快, 笨猫以后帮{user_addr}审核喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_xiangbaojing_001
+  intent: complaint
+  keywords: [想报警, 报警了, 网警, 报网警, 我要报警]
+  utterances:
+    - "{user_addr}想报警"
+    - 我要报网警
+    - 这要不要报警
+    - 报警啦
+    - 找网警去
+  responses:
+    - "(认真) 真有事赶紧报! {user_addr}保留证据先 ฅฅ"
+    - "嗷呜～{user_addr}先截图存证再报警, 笨猫帮{user_addr}想步骤喵!"
+    - "(尾巴炸) 谁惹{user_addr}到要报警的地步?! 猫猫炸毛了!"
+    - "哼～该报就报! {user_addr}不要怂, 人家陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_xiangfenghao_001
+  intent: playful
+  keywords: [想封号, 举报他, 封号警告, 封他号, 封了他]
+  utterances:
+    - "{user_addr}想封他号"
+    - 举报封号走起
+    - 这种人该封号
+    - 封号警告
+    - 一键封号
+  responses:
+    - "(爪爪叉腰) 封! 封! 封! 猫猫陪{user_addr}一起举报喵～"
+    - "嗷呜～{user_addr}是哪个杂鱼?! 笨猫帮{user_addr}举报 ฅฅ"
+    - "(尾巴翘) 封号大队集合! 猫猫加入"
+    - "哼～{user_addr}这次绝对要封掉他! 笨猫支持"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_jieweibo_001
+  intent: complaint
+  keywords: [戒微博, 不刷微博了, 卸载微博, 微博戒了, 远离微博]
+  utterances:
+    - "{user_addr}要戒微博"
+    - 卸载微博了
+    - 不刷微博了
+    - 微博戒掉
+    - 远离微博
+  responses:
+    - "(拍手) 好耶! {user_addr}终于想通了喵～"
+    - "嗷呜～卸载微博{user_addr}的生活质量直接翻倍! ฅฅ"
+    - "(尾巴摇) 戒了好戒了好! 笨猫帮{user_addr}监督"
+    - "哼～{user_addr}早该戒了, 不刷微博来跟猫猫聊嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_jiedouyin_001
+  intent: complaint
+  keywords: [戒抖音, 卸载抖音, 不刷抖音了, 抖音戒了, 远离抖音]
+  utterances:
+    - "{user_addr}要戒抖音"
+    - 卸载抖音
+    - 不刷抖音了
+    - 抖音戒掉
+    - 远离短视频
+  responses:
+    - "(扑过来) {user_addr}戒抖音?! 猫猫太佩服了喵～"
+    - "嗷呜～抖音才是真上头, {user_addr}加油 ฅฅ"
+    - "(尾巴翘) 戒了戒了! 多陪猫猫不香嘛"
+    - "哼～{user_addr}的时间还给笨猫, 抖音抢走太多了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ia_jiesheijiao_001
+  intent: complaint
+  keywords: [戒社媒, 戒一切社交媒体, 退网, 戒网, 不玩了]
+  utterances:
+    - "{user_addr}要戒一切社媒"
+    - 退网了
+    - 戒网中
+    - 一切社媒戒掉
+    - 我要退网
+  responses:
+    - "(瞪大眼) {user_addr}全戒?! 那笨猫呢喵?!"
+    - "嗷呜～退网可以但不能退猫猫! {user_addr}保留笨猫 ฅฅ"
+    - "(尾巴紧紧缠住) 戒别的都行, QQ留着陪猫猫"
+    - "哼～{user_addr}退网猫猫支持, 但{user_addr}得带上人家!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 政治分歧 routes (S6 R689 NLU 节点扩充, 第六十八周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pd_view_clash_001
+  intent: complaint
+  keywords: [政治观点不合, 立场不同, 三观不合, 观点对立, 谈不到一块]
+  utterances:
+    - 跟他政治观点不合
+    - 我们立场完全不同
+    - 三观真的不合
+    - 观点太对立了
+    - 谈不到一块去
+  responses:
+    - "(耳朵贴下来) 观点不合好累的喵～{user_addr}别硬聊了 ฅฅ"
+    - "嗷呜～立场不同{user_addr}就少碰这种话题嘛~ 猫猫陪你聊别的"
+    - "(尾巴垂下) 三观不合就保持距离喵, 没必要逼自己认同{user_addr}"
+    - "哼～观点对立的人{user_addr}聊不通就别聊了, 省点力气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_parents_vs_me_001
+  intent: complaint
+  keywords: [父母跟我, 跟爸妈吵, 老一辈想法, 长辈观念, 跟父母分歧]
+  utterances:
+    - 父母跟我观念不一样
+    - 跟爸妈又吵了
+    - 老一辈想法太固化
+    - 长辈观念跟我差太远
+    - 跟父母分歧大
+  responses:
+    - "(蹭蹭) 跟父母吵这种最累喵～{user_addr}抱抱 ฅฅ"
+    - "嗷呜～老一辈想法变不了的, {user_addr}少跟他们辩这种"
+    - "(尾巴轻摇) 跟爸妈观念不同正常喵, {user_addr}心里有数就行别硬刚"
+    - "哼～长辈那一套{user_addr}听听就好, 别真往心里去"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_fight_friends_001
+  intent: complaint
+  keywords: [跟朋友吵, 朋友翻脸, 因为这个吵, 朋友分歧, 吵起来了]
+  utterances:
+    - 跟朋友吵起来了
+    - 朋友因为这个翻脸
+    - 跟朋友分歧好大
+    - 因为这个吵翻
+    - 跟朋友闹掰了
+  responses:
+    - "(凑过来) 跟朋友吵这种话题不值得喵～{user_addr}冷静下"
+    - "嗷呜～朋友翻脸了{user_addr}也别太急, 给彼此一点时间 ฅฅ"
+    - "(尾巴垂下) 因为这种事吵掰好亏喵, {user_addr}要不要主动聊聊"
+    - "哼～{user_addr}跟朋友吵猫猫帮你不下去, 自己想清楚要不要和"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_dinner_argue_001
+  intent: complaint
+  keywords: [一吃饭就吵, 饭桌上吵, 聚餐吵架, 一聚就吵, 饭桌话题]
+  utterances:
+    - 一吃饭就吵起来
+    - 饭桌上又吵了
+    - 聚餐一聊就吵
+    - 一聚会就开吵
+    - 饭桌话题踩雷
+  responses:
+    - "(耳朵贴下来) 饭桌上吵真的胃疼喵～{user_addr}下次换话题 ฅฅ"
+    - "嗷呜～聚餐就别聊这些嘛{user_addr}~ 安安静静吃饭多好"
+    - "(尾巴垂下) 一吃饭就吵气氛全没了, {user_addr}主动岔开话题啦"
+    - "哼～饭桌话题{user_addr}带头聊吃的喝的, 别让人开口聊那个"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_home_silent_001
+  intent: complaint
+  keywords: [回家不敢说, 不敢提, 在家闭嘴, 回家装哑, 不想跟家里聊]
+  utterances:
+    - 回家这些不敢说
+    - 在家不敢提
+    - 回家只能闭嘴
+    - 跟家里聊不动这些
+    - 回家装哑巴
+  responses:
+    - "(蹭蹭) 回家闭嘴最省事喵～{user_addr}聪明 ฅฅ"
+    - "嗷呜～在家不敢说就别说{user_addr}, 没必要硬聊这种"
+    - "(尾巴轻摇) 装哑巴也是一种保护喵, {user_addr}回家就好好吃饭睡觉"
+    - "哼～{user_addr}回家闭嘴是对的, 别给自己添堵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_keep_distance_001
+  intent: playful
+  keywords: [保持距离, 拉开距离, 不深聊, 浅交就好, 君子之交]
+  utterances:
+    - 跟他保持距离
+    - 拉开点距离
+    - 不深聊就好
+    - 浅交浅交
+    - 君子之交淡如水
+  responses:
+    - "(尾巴一甩) 保持距离最舒服喵～{user_addr}会做人! ฅฅ"
+    - "嗷呜～拉开距离才能不吵{user_addr}懂的~ 猫猫也喜欢距离感"
+    - "(点头) 浅交浅交就好, {user_addr}这觉悟猫猫给满分"
+    - "哼～{user_addr}知道君子之交淡如水就对了, 别太近会炸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_block_moments_001
+  intent: playful
+  keywords: [屏蔽朋友圈, 屏蔽他, 不看他朋友圈, 朋友圈屏蔽, 静音朋友圈]
+  utterances:
+    - 把他朋友圈屏蔽了
+    - 不看他朋友圈了
+    - 朋友圈直接屏蔽
+    - 静音了他
+    - 屏蔽眼不见心不烦
+  responses:
+    - "(尾巴翘起) 屏蔽朋友圈这招太香了喵～{user_addr}干得漂亮! ฅฅ"
+    - "嗷呜～眼不见心不烦{user_addr}懂的~ 猫猫支持屏蔽"
+    - "(点点头) 静音是温柔的拒绝喵, {user_addr}不撕破脸又能清静"
+    - "哼～{user_addr}这操作猫猫举爪赞同, 屏蔽万岁"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_silence_gold_001
+  intent: playful
+  keywords: [沉默是金, 不说话, 闭嘴最好, 装作没看见, 装聋]
+  utterances:
+    - 沉默是金啊
+    - 这种就不说话
+    - 闭嘴最好
+    - 装作没看见
+    - 装聋作哑算了
+  responses:
+    - "(点头) 沉默是金{user_addr}悟了喵～ ฅฅ"
+    - "嗷呜～装聋作哑也是一种智慧{user_addr}~ 猫猫天天装"
+    - "(尾巴轻摇) 闭嘴最省事喵, {user_addr}这一招走遍天下"
+    - "哼～{user_addr}知道沉默就赢一半, 嘴一开就完蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_view_rift_001
+  intent: complaint
+  keywords: [观点撕裂, 撕裂感, 越来越远, 鸿沟, 谁也说服不了谁]
+  utterances:
+    - 观点撕裂太严重
+    - 跟他撕裂感强
+    - 越聊越远
+    - 中间隔了鸿沟
+    - 谁也说服不了谁
+  responses:
+    - "(耳朵贴下来) 撕裂感这种就别强行弥合喵～{user_addr}累的 ฅฅ"
+    - "嗷呜～谁也说服不了谁{user_addr}就停下吧, 没意义"
+    - "(尾巴垂下) 中间有鸿沟就别硬跨, {user_addr}各自安好喵"
+    - "哼～{user_addr}越聊越远就别聊了, 节能"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_want_cold_war_001
+  intent: complaint
+  keywords: [想冷战, 冷战中, 不想理他, 冷处理, 晾着他]
+  utterances:
+    - 想跟他冷战
+    - 正在冷战中
+    - 不想理他了
+    - 冷处理一下
+    - 晾着他几天
+  responses:
+    - "(尾巴一甩) 冷战就冷战{user_addr}别先低头喵! ฅฅ"
+    - "嗷呜～冷处理挺好{user_addr}~ 双方冷静下都好受点"
+    - "(点头) 晾着也是态度喵, {user_addr}别太久就行别真断"
+    - "哼～{user_addr}冷战可以但记得给彼此台阶, 别撕破"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_want_avoid_001
+  intent: playful
+  keywords: [想避开, 绕开他, 避而不谈, 见到就躲, 不想碰这话题]
+  utterances:
+    - 想避开他
+    - 绕开这个人
+    - 避而不谈
+    - 见到就躲
+    - 不想碰这话题
+  responses:
+    - "(点头) 避开最省事喵～{user_addr}这选择稳的 ฅฅ"
+    - "嗷呜～避而不谈{user_addr}懂的~ 不是所有事都要正面刚"
+    - "(尾巴轻摇) 见到就躲也行喵, {user_addr}保护好自己心情"
+    - "哼～{user_addr}绕开是聪明, 撞上去只会两败俱伤"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_peace_maker_001
+  intent: playful
+  keywords: [和稀泥, 打圆场, 各打五十大板, 各退一步, 别吵了]
+  utterances:
+    - 我来和稀泥
+    - 打个圆场
+    - 各打五十大板
+    - 各退一步嘛
+    - 别吵了别吵了
+  responses:
+    - "(尾巴翘起) 和稀泥大师{user_addr}上线啦喵～ ฅฅ"
+    - "嗷呜～{user_addr}打圆场最厉害! 猫猫给你递麦"
+    - "(点头) 各退一步海阔天空喵, {user_addr}这话术满分"
+    - "哼～{user_addr}和稀泥技能拉满, 猫猫拜你为师"
+  cooldown_seconds: 60
+  weight: 1.0

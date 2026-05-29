@@ -1,0 +1,206 @@
+# 志愿服务 routes (S6 R683 NLU 节点扩充, 第六十八周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: vl_west_teaching_001
+  intent: question
+  keywords: [推荐西部支教, 推荐西部志愿, 推荐青海支教, 推荐甘肃支教, 笨猫西部支教]
+  utterances:
+    - 推荐西部支教
+    - 推荐西部志愿
+    - 推荐青海支教
+    - 推荐甘肃支教
+    - 笨猫西部支教
+  responses:
+    - "嗷呜～{user_addr}西部计划 - 团中央官方ฅฅ"
+    - "(尾巴翘) 1-3 年 / 青海甘肃宁夏新疆"
+    - "{user_addr}研究生加分 / 公务员定向"
+    - "(挺胸) 笨猫推荐: 西部计划官网报名!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_mountain_teaching_001
+  intent: question
+  keywords: [推荐大山支教, 推荐山区支教, 推荐美丽中国, 推荐为中国而教, 笨猫大山支教]
+  utterances:
+    - 推荐大山支教
+    - 推荐山区支教
+    - 推荐美丽中国
+    - 推荐为中国而教
+    - 笨猫大山支教
+  responses:
+    - "嗷呜～{user_addr}美丽中国 TFC - 2 年项目ฅฅ"
+    - "(尾巴翘) 为中国而教 / 烛光支教"
+    - "{user_addr}云南贵州偏远小学"
+    - "(挺胸) 笨猫推荐: 美丽中国应届优先!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_overseas_teaching_001
+  intent: question
+  keywords: [推荐海外支教, 推荐汉语教师, 推荐汉办志愿者, 推荐 CLEC, 笨猫海外支教]
+  utterances:
+    - 推荐海外支教
+    - 推荐汉语教师
+    - 推荐汉办志愿者
+    - 推荐 CLEC
+    - 笨猫海外支教
+  responses:
+    - "嗷呜～{user_addr}国际中文教师志愿者ฅฅ"
+    - "(尾巴翘) 中外语言交流合作中心 CLEC"
+    - "{user_addr}东南亚 / 非洲 / 欧美孔院"
+    - "(挺胸) 笨猫推荐: 普通话二甲+大三起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_nursing_home_001
+  intent: question
+  keywords: [推荐敬老院志愿, 推荐养老院志愿, 推荐陪伴老人, 推荐助老, 笨猫敬老院]
+  utterances:
+    - 推荐敬老院志愿
+    - 推荐养老院志愿
+    - 推荐陪伴老人
+    - 推荐助老
+    - 笨猫敬老院
+  responses:
+    - "嗷呜～{user_addr}周末敬老院陪聊ฅฅ"
+    - "(尾巴翘) 红十字会 / 街道办登记"
+    - "{user_addr}剪指甲 / 读报 / 包饺子"
+    - "(挺胸) 笨猫推荐: 别只在重阳节去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_community_001
+  intent: question
+  keywords: [推荐社区志愿, 推荐社区服务, 推荐居委会志愿, 推荐街道志愿, 笨猫社区志愿]
+  utterances:
+    - 推荐社区志愿
+    - 推荐社区服务
+    - 推荐居委会志愿
+    - 推荐街道志愿
+    - 笨猫社区志愿
+  responses:
+    - "嗷呜～{user_addr}志愿汇 APP 时长认证ฅฅ"
+    - "(尾巴翘) 垃圾分类 / 防疫 / 普查"
+    - "{user_addr}就近 / 灵活 / 易凑时长"
+    - "(挺胸) 笨猫推荐: 志愿汇登记!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_vso_001
+  intent: question
+  keywords: [推荐国际志愿者, 推荐 VSO, 推荐联合国志愿, 推荐 UNV, 笨猫国际志愿]
+  utterances:
+    - 推荐国际志愿者
+    - 推荐 VSO
+    - 推荐联合国志愿
+    - 推荐 UNV
+    - 笨猫国际志愿
+  responses:
+    - "嗷呜～{user_addr}UNV 联合国志愿者ฅฅ"
+    - "(尾巴翘) VSO / Peace Corps (限美籍)"
+    - "{user_addr}英语硬性 / 专业匹配"
+    - "(挺胸) 笨猫推荐: UNV 官网 onlinevolunteering!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: vl_university_001
+  intent: question
+  keywords: [推荐大学志愿, 推荐校园志愿, 推荐青协, 推荐学生会志愿, 笨猫大学志愿]
+  utterances:
+    - 推荐大学志愿
+    - 推荐校园志愿
+    - 推荐青协
+    - 推荐学生会志愿
+    - 笨猫大学志愿
+  responses:
+    - "嗷呜～{user_addr}青年志愿者协会青协ฅฅ"
+    - "(尾巴翘) 三下乡暑期 / 迎新志愿"
+    - "{user_addr}评优加分 / 入党素材"
+    - "(挺胸) 笨猫推荐: 大一进青协混脸熟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_disaster_relief_001
+  intent: question
+  keywords: [推荐灾区救援, 推荐救灾志愿, 推荐蓝天救援, 推荐应急志愿, 笨猫救援志愿]
+  utterances:
+    - 推荐灾区救援
+    - 推荐救灾志愿
+    - 推荐蓝天救援
+    - 推荐应急志愿
+    - 笨猫救援志愿
+  responses:
+    - "嗷呜～{user_addr}蓝天救援队 BSR 民间ฅฅ"
+    - "(尾巴翘) 壹基金 / 中国扶贫基金会"
+    - "{user_addr}地震洪水台风 / 需专业培训"
+    - "(挺胸) 笨猫推荐: 先考红十字救护证!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: vl_disability_001
+  intent: question
+  keywords: [推荐残障辅助, 推荐残疾人志愿, 推荐助残, 推荐特殊学校志愿, 笨猫助残]
+  utterances:
+    - 推荐残障辅助
+    - 推荐残疾人志愿
+    - 推荐助残
+    - 推荐特殊学校志愿
+    - 笨猫助残
+  responses:
+    - "嗷呜～{user_addr}中国残联助残志愿ฅฅ"
+    - "(尾巴翘) 特殊教育学校 / 自闭症机构"
+    - "{user_addr}手语班 / 盲文 / 引导"
+    - "(挺胸) 笨猫推荐: 学点手语再去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_marathon_001
+  intent: question
+  keywords: [推荐马拉松志愿, 推荐城市马拉松志愿, 推荐赛事志愿, 推荐补给站, 笨猫马拉松志愿]
+  utterances:
+    - 推荐马拉松志愿
+    - 推荐城市马拉松志愿
+    - 推荐赛事志愿
+    - 推荐补给站
+    - 笨猫马拉松志愿
+  responses:
+    - "嗷呜～{user_addr}马拉松补给站 / 终点ฅฅ"
+    - "(尾巴翘) 北马上马厦马招志愿者"
+    - "{user_addr}赛事 T 恤 / 完赛包 / 经验"
+    - "(挺胸) 笨猫推荐: 关注城市马拉松官微!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_translation_001
+  intent: question
+  keywords: [推荐翻译志愿, 推荐字幕组志愿, 推荐 TED 翻译, 推荐译言, 笨猫翻译志愿]
+  utterances:
+    - 推荐翻译志愿
+    - 推荐字幕组志愿
+    - 推荐 TED 翻译
+    - 推荐译言
+    - 笨猫翻译志愿
+  responses:
+    - "嗷呜～{user_addr}TED Translators 官方ฅฅ"
+    - "(尾巴翘) Translators without Borders TWB"
+    - "{user_addr}远程线上 / 计简历 / 涨水平"
+    - "(挺胸) 笨猫推荐: TED 入门门槛低!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vl_ocean_cleanup_001
+  intent: question
+  keywords: [推荐海洋清洁, 推荐净滩志愿, 推荐环保志愿, 推荐 Ocean Cleanup, 笨猫海洋清洁]
+  utterances:
+    - 推荐海洋清洁
+    - 推荐净滩志愿
+    - 推荐环保志愿
+    - 推荐 Ocean Cleanup
+    - 笨猫海洋清洁
+  responses:
+    - "嗷呜～{user_addr}仁渡海洋净滩志愿ฅฅ"
+    - "(尾巴翘) Ocean Cleanup / WWF"
+    - "{user_addr}青岛厦门三亚周末净滩"
+    - "(挺胸) 笨猫推荐: 仁渡海洋公众号报名!"
+  cooldown_seconds: 60
+  weight: 1.0
