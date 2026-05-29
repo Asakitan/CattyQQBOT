@@ -4168,6 +4168,10 @@ def _generic_emoji_context(incoming: ExtractedMessage) -> str:
     if not config.catty_emoji_enabled:
         return ""
     candidates = emoji_store.candidates_text(incoming.text)
+    # 主人 2026-05-29 A: 没匹配到可用表情候选就不注入 emoji 参数段 (~142c/轮 post_boundary).
+    # 本来就没表情可发, 注入空候选的参数纯属浪费 miss token. 零功能损失 (有候选才注入).
+    if not (candidates and str(candidates).strip()):
+        return ""
     return _emoji_reply_context(
         {
             "interest": 100,
@@ -7730,10 +7734,25 @@ def _build_distill_sanitize_terms(event: MessageEvent, is_owner: bool) -> list[s
     return [t for t in terms if t]
 
 
-def _trigger_l3_distill(event: MessageEvent, user_text: str, assistant_text: str) -> None:
-    """S6: handle_chat finish 前调用, fire-and-forget 异步蒸馏到 L3 corpus.
+def _distill_reply_hook(
+    user_text: str,
+    assistant_text: str,
+    scope: str,
+    terms: list[str],
+    source: str,
+) -> None:
+    """S6 (主人 2026-05-29): openai_client 回复入口的统一蒸馏回调.
 
-    用 asyncio.create_task 不阻塞 matcher.finish; 失败永不抛 (内部 try/catch).
+    由 ``openai_client._maybe_distill_reply`` 在拿到 DeepSeek 生成的【面向用户回复】时
+    同步调用 (已过安全阀: 当前轮经过 handle_chat 入口 + scope 是 private:/group:).
+    这里 fire-and-forget 异步写入 L3 corpus, 永不阻塞 / 永不抛.
+
+    覆盖范围 (一处接住所有走主 AI 的链路):
+      - chat_completion / chat_completion_with_tools  → 主 AI / fallback DeepSeek / catnify 透传回 L5
+      - chat_completion_instant / chat_completion_codex_instant → NSFW spark / 占位话 / 签到 caption
+    不覆盖 (故意): filter/分类/情绪/怒气判断 (输出 bool/JSON), 后台 summary, local_critic.
+
+    router / distiller 在此 lazy 解析 (router 是 lazy 单例, hook 注册时可能尚未 ready).
     """
     if not _CPU_ENGINE_IMPORT_OK or _cpu_engine_get_router is None:
         return
@@ -7743,32 +7762,43 @@ def _trigger_l3_distill(event: MessageEvent, user_text: str, assistant_text: str
         router = _cpu_engine_get_router(config)
     except Exception:  # noqa: BLE001
         return
-    if not router.enabled or not router.ready:
+    if not getattr(router, "enabled", False) or not getattr(router, "ready", False):
         return
     try:
         from .cpu_engine.corpus_distill import get_distiller
         distiller = get_distiller(config, router_reload_async=router.reload_l3_corpus)
-        scope = _conversation_queue_key(event)
-        is_owner = _event_is_owner(event)
-        intent = ""
+        intent = "default"
         try:
             from .intent_classifier import classify_intent
-            intent = classify_intent(user_text, has_image=False) or "default"
+            _intent = classify_intent(user_text, has_image=False)
+            # classify_intent 可能返回 list/tuple — 取首个, 防止 ['command_to_cat']
+            # 被 str() 成畸形 intent 写进语料 (老 bug).
+            if isinstance(_intent, (list, tuple)):
+                _intent = _intent[0] if _intent else "default"
+            intent = str(_intent or "default")
         except Exception:  # noqa: BLE001
             intent = "default"
-        terms = _build_distill_sanitize_terms(event, is_owner)
         asyncio.create_task(
             distiller.maybe_distill(
                 scope=scope,
                 user_text=user_text,
                 assistant_text=assistant_text,
                 intent=intent,
-                source="deepseek",
+                source=source or "deepseek",
                 sanitize_terms=terms,
             )
         )
     except Exception as exc:  # noqa: BLE001
-        logger.debug(f"[cpu_engine.distill] trigger failed: {exc}")
+        logger.debug(f"[cpu_engine.distill] reply hook failed: {exc}")
+
+
+# S6: 把蒸馏回调注册到 openai_client — 任何回复入口拿到 DeepSeek 回复都会回调这里.
+# (放模块加载期注册; hook 内部 lazy 拿 router/distiller, 不要求此刻 router 已 ready.)
+try:
+    from .openai_client import set_reply_distill_hook as _set_reply_distill_hook
+    _set_reply_distill_hook(_distill_reply_hook)
+except Exception as _distill_hook_exc:  # noqa: BLE001
+    logger.warning(f"[cpu_engine.distill] failed to register reply hook: {_distill_hook_exc}")
 
 
 async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
@@ -10054,8 +10084,15 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
     # 主人 2026-05-28: 设置 scope contextvar 让 LLM 调用层自动取出当前 scope 作为
     # Anthropic metadata.user_id (cache routing 关键). async task 内 contextvar 自动隔离.
     try:
-        from .openai_client import set_current_scope_key
+        from .openai_client import set_current_scope_key, set_current_distill_context
         set_current_scope_key(history_key)
+        # S6 (主人 2026-05-29): 记下本轮干净 user 原文 + 脱敏 terms, 让 openai_client 的
+        # 回复入口 (chat_completion / _with_tools / _instant / _codex_instant) 在拿到
+        # DeepSeek 回复时统一蒸馏到 L3 — 不管 handle_chat 内部怎么分段/分支都只采一次完整回复.
+        set_current_distill_context(
+            incoming.text,
+            _build_distill_sanitize_terms(event, _event_is_owner(event)),
+        )
     except Exception:  # noqa: BLE001
         pass
     queue_key = _conversation_queue_key(event)
@@ -11264,11 +11301,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         _mark_consumed_reply_source_if_sent(event, state)
         final_message = chunks[-1] if chunks else "喵喵！猫猫现在很忙哦，等一下再来找人家～"
         _remember_bot_reply_for_event(event, _chunk_to_history(final_message) if chunks else final_message, open_continuation=not bool(state.get("catty_session_closing")))
-        # S6 (主人 2026-05-29): 异步蒸馏 user → final_message 到 L3 corpus, 不阻塞 finish
-        try:
-            _trigger_l3_distill(event, incoming.text or "", _chunk_to_history(final_message) if chunks else final_message)
-        except Exception:  # noqa: BLE001
-            pass
+        # S6 (主人 2026-05-29): 蒸馏已上移到 openai_client 回复入口统一处理
+        # (set_current_distill_context 在 handle_chat 入口设好上下文, chat_completion /
+        # _with_tools / _instant / _codex_instant 拿到 DeepSeek 回复时自动蒸馏到 L3).
+        # 这里不再单点触发 — 封装层一处覆盖主链路所有 emit 分支 + NSFW spark + catnify 透传,
+        # 且只采 DeepSeek 真正生成的回复 (CPU 自产的 L1/L2/L3 直答不会被蒸回去, 杜绝自循环).
         await matcher.finish(
             _compose_reply_message(
                 event,
