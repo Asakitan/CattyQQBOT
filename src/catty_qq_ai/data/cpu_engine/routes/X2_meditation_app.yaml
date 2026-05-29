@@ -1,0 +1,207 @@
+# 冥想 app / 正念训练 / 助眠 routes (S6 R254 NLU 节点扩充, 第二十五周期 3/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰列名词.
+
+- name: ma_app_001
+  intent: question
+  keywords: [推荐冥想 app, 推荐 Calm, 推荐 Headspace, 推荐冥想软件, 笨猫冥想 app]
+  utterances:
+    - 推荐冥想 app
+    - 推荐 Calm
+    - 推荐 Headspace
+    - 推荐冥想软件
+    - 笨猫冥想 app
+  responses:
+    - "嗷呜～{user_addr}Calm / Headspace - 海外双巨头ฅฅ"
+    - "(尾巴翘) Calm 偏睡眠 / Headspace 偏教学"
+    - "{user_addr}订阅制 - 内容超丰富"
+    - "(挺胸) 笨猫推荐: 先试 Headspace 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_insight_001
+  intent: question
+  keywords: [推荐 Insight Timer, 推荐免费冥想, 推荐冥想计时, 推荐社区冥想, 笨猫 Insight Timer]
+  utterances:
+    - 推荐 Insight Timer
+    - 推荐免费冥想
+    - 推荐冥想计时
+    - 推荐社区冥想
+    - 笨猫 Insight Timer
+  responses:
+    - "嗷呜～{user_addr}Insight Timer - 免费宝藏ฅฅ"
+    - "(尾巴翘) 7w+ 冥想 / 全球老师"
+    - "{user_addr}计时器 + 社区 + 课程三合一"
+    - "(挺胸) 笨猫推荐: 不想付费就用它!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_waking_up_001
+  intent: question
+  keywords: [推荐 Waking Up, 推荐 Sam Harris, 推荐哲学冥想, 推荐进阶冥想, 笨猫 Waking Up]
+  utterances:
+    - 推荐 Waking Up
+    - 推荐 Sam Harris
+    - 推荐哲学冥想
+    - 推荐进阶冥想
+    - 笨猫 Waking Up
+  responses:
+    - "嗷呜～{user_addr}Waking Up - Sam Harris 主理ฅฅ"
+    - "(尾巴翘) 哲学 + 神经科学 + 冥想"
+    - "{user_addr}深度向 - 不只是放松"
+    - "(挺胸) 笨猫推荐: 想思考自我就选它!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ma_chaoxi_001
+  intent: question
+  keywords: [推荐潮汐, 推荐国产冥想, 推荐 Now 冥想, 推荐小睡眠, 笨猫潮汐]
+  utterances:
+    - 推荐潮汐
+    - 推荐国产冥想
+    - 推荐 Now 冥想
+    - 推荐小睡眠
+    - 笨猫潮汐
+  responses:
+    - "嗷呜～{user_addr}潮汐 - 国产冥想颜值高ฅฅ"
+    - "(尾巴翘) Now 冥想 / 小睡眠"
+    - "{user_addr}中文引导 - 没语言门槛"
+    - "(挺胸) 笨猫推荐: 潮汐白噪音超治愈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_sleep_001
+  intent: question
+  keywords: [推荐睡眠白噪音, 推荐 Yoga Nidra, 推荐助眠冥想, 推荐睡前放松, 笨猫助眠]
+  utterances:
+    - 推荐睡眠白噪音
+    - 推荐 Yoga Nidra
+    - 推荐助眠冥想
+    - 推荐睡前放松
+    - 笨猫助眠
+  responses:
+    - "嗷呜～{user_addr}Yoga Nidra - 瑜伽睡眠术ฅฅ"
+    - "(尾巴翘) 白噪音 + 引导词催眠"
+    - "{user_addr}20 分钟 ≈ 1 小时浅睡"
+    - "(挺胸) 笨猫推荐: 失眠夜的救命稻草!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_asmr_001
+  intent: question
+  keywords: [推荐 ASMR 助眠, 推荐雨声, 推荐风声, 推荐自然声, 笨猫 ASMR]
+  utterances:
+    - 推荐 ASMR 助眠
+    - 推荐雨声
+    - 推荐风声
+    - 推荐自然声
+    - 笨猫 ASMR
+  responses:
+    - "嗷呜～{user_addr}雨声 / 篝火 / 海浪 - 经典三件套ฅฅ"
+    - "(尾巴翘) ASMR 耳语 / 翻书声 / 敲击"
+    - "{user_addr}小睡眠 / Noisli / myNoise"
+    - "(挺胸) 笨猫推荐: 雨打窗户最催眠!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_mindfulness_intro_001
+  intent: question
+  keywords: [推荐正念冥想, 推荐 mindfulness 入门, 推荐冥想入门, 推荐冥想新手, 笨猫正念入门]
+  utterances:
+    - 推荐正念冥想
+    - 推荐 mindfulness 入门
+    - 推荐冥想入门
+    - 推荐冥想新手
+    - 笨猫正念入门
+  responses:
+    - "嗷呜～{user_addr}从 5 分钟开始 - 别贪多ฅฅ"
+    - "(尾巴翘) 关注呼吸 / 不评判想法"
+    - "{user_addr}每天固定时间 - 形成习惯"
+    - "(挺胸) 笨猫推荐: Headspace 基础 10 天!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_breath_001
+  intent: question
+  keywords: [推荐呼吸训练, 推荐 4-7-8 呼吸, 推荐 box breathing, 推荐腹式呼吸, 笨猫呼吸训练]
+  utterances:
+    - 推荐呼吸训练
+    - 推荐 4-7-8 呼吸
+    - 推荐 box breathing
+    - 推荐腹式呼吸
+    - 笨猫呼吸训练
+  responses:
+    - "嗷呜～{user_addr}4-7-8: 吸 4 / 屏 7 / 呼 8ฅฅ"
+    - "(尾巴翘) Box: 4-4-4-4 方块呼吸"
+    - "{user_addr}腹式呼吸 - 横膈膜下沉"
+    - "(挺胸) 笨猫推荐: 焦虑时来一组立刻平静!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ma_body_scan_001
+  intent: question
+  keywords: [推荐 body scan, 推荐身体扫描, 推荐渐进式放松, 推荐 Jon Kabat-Zinn, 笨猫 body scan]
+  utterances:
+    - 推荐 body scan
+    - 推荐身体扫描
+    - 推荐渐进式放松
+    - 推荐 Jon Kabat-Zinn
+    - 笨猫 body scan
+  responses:
+    - "嗷呜～{user_addr}从脚趾扫到头顶 - 逐部位觉察ฅฅ"
+    - "(尾巴翘) Jon Kabat-Zinn MBSR 经典"
+    - "{user_addr}20-40 分钟 - 深度放松"
+    - "(挺胸) 笨猫推荐: 睡前躺着做!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ma_work_001
+  intent: question
+  keywords: [推荐工作场冥想, 推荐办公室正念, 推荐摸鱼冥想, 推荐 mindfulness 工作, 笨猫工作冥想]
+  utterances:
+    - 推荐工作场冥想
+    - 推荐办公室正念
+    - 推荐摸鱼冥想
+    - 推荐 mindfulness 工作
+    - 笨猫工作冥想
+  responses:
+    - "嗷呜～{user_addr}3 分钟微冥想 - 工位上就能做ฅฅ"
+    - "(尾巴翘) 关注呼吸 / 觉察姿势"
+    - "{user_addr}番茄钟间隙 - 重置大脑"
+    - "(挺胸) 笨猫推荐: 别在工位躺平喔!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ma_cushion_001
+  intent: question
+  keywords: [推荐冥想垫子, 推荐跪坐凳, 推荐 zafu, 推荐瑜伽垫, 笨猫冥想垫]
+  utterances:
+    - 推荐冥想垫子
+    - 推荐跪坐凳
+    - 推荐 zafu
+    - 推荐瑜伽垫
+    - 笨猫冥想垫
+  responses:
+    - "嗷呜～{user_addr}Zafu 圆形蒲团 - 日式经典ฅฅ"
+    - "(尾巴翘) 跪坐凳 - 膝盖不好选它"
+    - "{user_addr}荞麦壳填充 - 透气支撑好"
+    - "(挺胸) 笨猫推荐: 别坐沙发会驼背!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ma_book_001
+  intent: question
+  keywords: [推荐冥想书, 推荐当下力量, 推荐正念书, 推荐 Eckhart Tolle, 笨猫冥想书]
+  utterances:
+    - 推荐冥想书
+    - 推荐当下力量
+    - 推荐正念书
+    - 推荐 Eckhart Tolle
+    - 笨猫冥想书
+  responses:
+    - "嗷呜～{user_addr}《当下的力量》Eckhart Tolleฅฅ"
+    - "(尾巴翘) 《十分钟冥想》《正念的奇迹》"
+    - "{user_addr}《禅者的初心》铃木俊隆"
+    - "(挺胸) 笨猫推荐: 当下的力量打底!"
+  cooldown_seconds: 60
+  weight: 0.9

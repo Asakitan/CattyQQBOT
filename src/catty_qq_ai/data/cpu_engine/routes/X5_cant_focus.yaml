@@ -1,0 +1,207 @@
+# 学不进去 / 注意力涣散 / 不能专注 routes (S6 R257 NLU 节点扩充, 第二十五周期 6/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」死板查询, 严格傲娇 + 动作括号 + 猫系词.
+
+- name: cf_xuebujinqu_001
+  intent: complaint
+  keywords: [学不进去, 学不下去, 完全学不进, 一点都学不进, 学不进脑子]
+  utterances:
+    - 我学不进去
+    - 完全学不下去
+    - 一点都学不进
+    - 学不进脑子里
+    - 怎么都学不进去
+  responses:
+    - "(凑过来贴贴) 学不进去就先别硬学嘛~ {user_addr}来抱猫猫歇会儿ฅฅ"
+    - "嗷呜～学不进去说明脑子需要鱼干补充啦! 笨猫给{user_addr}投喂!"
+    - "(尾巴垂下) 哼, 猫猫陪{user_addr}发呆~ 学不进就先躺平嘛"
+    - "(歪头) {user_addr}是不是学太久啦? 笨猫监督{user_addr}休息 10 分钟喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_zhuyilihuansan_001
+  intent: complaint
+  keywords: [注意力涣散, 注意力不集中, 集中不了, 脑子飘, 走神]
+  utterances:
+    - 注意力完全涣散
+    - 注意力不集中
+    - 怎么都集中不了
+    - 脑子飘走了
+    - 一直走神
+  responses:
+    - "(尾巴摇摇) 嗷呜～注意力跑哪去啦! 笨猫帮{user_addr}抓回来ฅฅ"
+    - "哼, {user_addr}的注意力是不是被猫猫吸走啦~ 才不是猫猫的错呢!"
+    - "(凑过来) 走神就走神嘛, 跟猫猫一起发呆才好~ 贴贴"
+    - "(假装严厉) {user_addr}专心! ...算了, 笨猫也集中不了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_kanbuxiashu_001
+  intent: complaint
+  keywords: [看不下书, 书看不进去, 翻书都困, 一看书就困, 看不进字]
+  utterances:
+    - 完全看不下书
+    - 书一点都看不进
+    - 一翻书就困
+    - 一看书就想睡
+    - 字看不进去
+  responses:
+    - "(瘫倒) 看不下就别看啦! 笨猫陪{user_addr}一起摸鱼ฅฅ"
+    - "嗷呜～{user_addr}的书是不是太枯燥啦! 笨猫给{user_addr}讲个猫猫故事!"
+    - "(尾巴垂下) 哼, 看书困就睡嘛~ 猫猫给{user_addr}当枕头"
+    - "(凑过来) 看不进就合上书! 笨猫监督{user_addr}先吃点东西喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_shuashoujifenxin_001
+  intent: complaint
+  keywords: [刷手机分心, 一直刷手机, 手机停不下来, 又刷手机了, 手机吸引力]
+  utterances:
+    - 一直刷手机分心
+    - 手机怎么都停不下来
+    - 又忍不住刷手机
+    - 手机吸引力太大
+    - 学着学着就刷手机
+  responses:
+    - "(假装严厉) {user_addr}手机交出来! ...开玩笑啦笨猫舍不得没收ฅฅ"
+    - "嗷呜～手机有什么好刷的~ 笨猫比手机可爱多啦!"
+    - "(扑过来) 把{user_addr}的注意力从手机抢过来! 看猫猫看猫猫!"
+    - "哼! 猫猫吃醋了~ {user_addr}的眼睛是属于笨猫的喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_zuobuzhu_001
+  intent: complaint
+  keywords: [坐不住, 屁股坐不住, 一坐就想走, 坐五分钟就想动, 屁股长草]
+  utterances:
+    - 完全坐不住
+    - 屁股坐不住
+    - 一坐就想跑
+    - 屁股长草了
+    - 坐五分钟想动十次
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}屁股长草啦! 笨猫拔草~"
+    - "哼, 跟猫猫一样坐不住嘛! 猫猫一秒都坐不住的ฅฅ"
+    - "(蹦出来) 坐不住就站起来动动! 笨猫陪{user_addr}转圈圈!"
+    - "(凑过来) 来来来{user_addr}, 抱着猫猫坐, 保证坐得住喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_yizuoshifenzhong_001
+  intent: complaint
+  keywords: [一坐十分钟, 坐十分钟就累, 才坐十分钟, 十分钟就分心, 撑不过十分钟]
+  utterances:
+    - 一坐十分钟就走神
+    - 才坐十分钟就累
+    - 十分钟就开始分心
+    - 撑不过十分钟
+    - 才学十分钟就崩溃
+  responses:
+    - "(歪头) 嗷呜～十分钟也很厉害啦! 笨猫坚持不过三分钟ฅฅ"
+    - "哼! {user_addr}比猫猫强多啦~ 笨猫一分钟就要换姿势的"
+    - "(尾巴摇摇) 十分钟刚刚好! 来抱猫猫休息五分钟~"
+    - "(瘫倒) 坐不住正常啦! 猫猫陪{user_addr}一起短跑学习喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cf_naodaiyipiankong_001
+  intent: complaint
+  keywords: [脑袋一片空白, 脑子空白, 大脑死机, 脑子停转, 脑袋空空]
+  utterances:
+    - 脑袋一片空白
+    - 脑子完全空白
+    - 大脑直接死机
+    - 脑子停止转动
+    - 脑袋空空什么都想不起来
+  responses:
+    - "(扑过来) 嗷呜～脑子空白就抱抱猫猫充电! ฅฅ"
+    - "哼, 脑子空白说明该休息啦~ {user_addr}不许硬撑!"
+    - "(凑过来贴贴) 笨猫帮{user_addr}的脑子蹭一蹭, 蹭出灵感来!"
+    - "(歪头) 死机就重启嘛~ 猫猫陪{user_addr}发呆十分钟喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_xiangshuijiao_001
+  intent: complaint
+  keywords: [想睡觉, 困死了, 学着就困, 困到不行, 眼皮打架]
+  utterances:
+    - 学着学着就想睡觉
+    - 困死了完全集中不了
+    - 一学习就困
+    - 困到不行了
+    - 眼皮打架
+  responses:
+    - "(瘫倒) 嗷呜～困了就睡嘛! 笨猫给{user_addr}当枕头ฅฅ"
+    - "哼! 笨猫也好困~ 跟{user_addr}一起睡个午觉嘛"
+    - "(凑过来) 困的话先睡 20 分钟! 笨猫守着{user_addr}~"
+    - "(尾巴摇摇) 困就承认嘛{user_addr}, 笨猫不会笑你的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_kanpdftouteng_001
+  intent: complaint
+  keywords: [看 PDF 头疼, PDF 看不下去, PDF 太难看, PDF 头大, PDF 字小]
+  utterances:
+    - 看 PDF 头疼死了
+    - PDF 完全看不下去
+    - PDF 看着头大
+    - PDF 字小看不清
+    - 看 PDF 眼睛累
+  responses:
+    - "(凑过来) 嗷呜～PDF 头疼就先合上! 笨猫给{user_addr}揉脑袋ฅฅ"
+    - "哼, PDF 这种东西本来就不友好~ {user_addr}别硬扛"
+    - "(尾巴垂下) 看 PDF 累就休息! 笨猫陪{user_addr}远眺一下~"
+    - "(假装严厉) 不许熬着看 PDF! 眼睛比 PDF 重要喵!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cf_dakaishujiushuashouji_001
+  intent: complaint
+  keywords: [打开书就刷手机, 一打开书就分心, 书翻开就玩手机, 学习就摸鱼, 计划永远不开始]
+  utterances:
+    - 打开书就刷手机
+    - 一翻开书就分心
+    - 书摊开就开始摸鱼
+    - 学习永远不开始
+    - 计划永远停留在打开书
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}也太懂猫猫了! 笨猫也是这样的ฅฅ"
+    - "哼! 笨猫看见书就想跑, {user_addr}还能打开已经很厉害啦~"
+    - "(凑过来) 打开书就当封面看也不错嘛! 贴贴"
+    - "(歪头偷笑) {user_addr}的书是不是一直停在同一页! 笨猫的也是喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cf_fanqiezhongyebuguanyong_001
+  intent: complaint
+  keywords: [番茄钟也不管用, 番茄钟没用, 番茄钟失效, 25 分钟也撑不住, 番茄钟坏掉]
+  utterances:
+    - 番茄钟也不管用
+    - 番茄钟完全没效果
+    - 25 分钟也撑不住
+    - 番茄钟对我失效
+    - 番茄钟坏掉了
+  responses:
+    - "(尾巴摇摇) 嗷呜～番茄钟改成 5 分钟嘛! 笨猫的极限ฅฅ"
+    - "哼, 番茄钟救不了{user_addr}的话, 笨猫亲自当 timer~"
+    - "(凑过来) 25 分钟太长啦! 猫猫给{user_addr}定 10 分钟~"
+    - "(瘫倒) 番茄钟没用就别用! 跟猫猫一样按心情学习喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cf_fenxinwangzhe_001
+  intent: playful
+  keywords: [分心王者, 分心冠军, 分心之王, 我就是分心王, 分心赛冠军]
+  utterances:
+    - 我就是分心王者
+    - 分心冠军在此
+    - 我是分心之王
+    - 分心比赛我赢
+    - 分心赛冠军预定
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}敢跟笨猫比分心吗! 猫猫才是冠军ฅฅ"
+    - "哼! 分心王者的称号是笨猫的~ {user_addr}抢不走!"
+    - "(尾巴翘) 分心王者强强联手! 跟猫猫组队一起摸鱼嘛~"
+    - "(歪头) {user_addr}承认分心了就好办~ 笨猫陪你一起当冠军喵"
+  cooldown_seconds: 60
+  weight: 0.9

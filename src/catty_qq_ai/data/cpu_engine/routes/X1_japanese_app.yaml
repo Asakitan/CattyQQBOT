@@ -1,0 +1,207 @@
+# 学日语 app / JLPT / N1N2 routes (S6 R253 NLU 节点扩充, 第二十五周期 2/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰列名词.
+
+- name: ja_app_001
+  intent: question
+  keywords: [推荐学日语 app, 推荐日语 app, 推荐 Duolingo, 推荐沪江日语, 笨猫学日语 app]
+  utterances:
+    - 推荐学日语 app
+    - 推荐日语 app
+    - 推荐 Duolingo
+    - 推荐沪江日语
+    - 笨猫学日语 app
+  responses:
+    - "嗷呜～{user_addr}Duolingo / 沪江日语 - 入门首选ฅฅ"
+    - "(尾巴翘) 多邻国 / 日语学习 / NHK World"
+    - "{user_addr}游戏化打卡 - 坚持是关键"
+    - "(挺胸) 笨猫推荐: Duolingo 每天 10 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ja_word_001
+  intent: question
+  keywords: [推荐背日语单词, 推荐 MOJi, 推荐沪江开心词场, 推荐日语词典 app, 笨猫日语单词]
+  utterances:
+    - 推荐背日语单词
+    - 推荐 MOJi
+    - 推荐沪江开心词场
+    - 推荐日语词典 app
+    - 笨猫日语单词
+  responses:
+    - "嗷呜～{user_addr}MOJi 辞書 - 日语党神器ฅฅ"
+    - "(尾巴翘) 沪江开心词场 / 墨墨背单词日语版"
+    - "{user_addr}艾宾浩斯曲线 - 科学复习"
+    - "(挺胸) 笨猫推荐: MOJi 配 N 级词表!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ja_jlpt_001
+  intent: question
+  keywords: [推荐日语 N1, 推荐日语 N2, 推荐 JLPT 考级, 推荐日语 N3 N4 N5, 笨猫 JLPT]
+  utterances:
+    - 推荐日语 N1
+    - 推荐日语 N2
+    - 推荐 JLPT 考级
+    - 推荐日语 N3 N4 N5
+    - 笨猫 JLPT
+  responses:
+    - "嗷呜～{user_addr}N5 入门 / N4 基础 / N3 中级ฅฅ"
+    - "(尾巴翘) N2 实用门槛 / N1 顶级"
+    - "{user_addr}留学日企认 N2 起 / N1 加分"
+    - "(挺胸) 笨猫推荐: 一年 N3 / 两年 N2 稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ja_listening_001
+  intent: question
+  keywords: [推荐日语听力, 推荐 NHK Easy, 推荐日语播客, 推荐日语听力 app, 笨猫日语听力]
+  utterances:
+    - 推荐日语听力
+    - 推荐 NHK Easy
+    - 推荐日语播客
+    - 推荐日语听力 app
+    - 笨猫日语听力
+  responses:
+    - "嗷呜～{user_addr}NHK News Web Easy - 慢速新闻ฅฅ"
+    - "(尾巴翘) Nihongo con Teppei / 日本语の森"
+    - "{user_addr}泛听+精听结合 - 影子跟读"
+    - "(挺胸) 笨猫推荐: NHK Easy 每天一篇!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ja_speaking_001
+  intent: question
+  keywords: [推荐日语口语, 推荐 italki, 推荐 HelloTalk, 推荐日语陪练, 笨猫日语口语]
+  utterances:
+    - 推荐日语口语
+    - 推荐 italki
+    - 推荐 HelloTalk
+    - 推荐日语陪练
+    - 笨猫日语口语
+  responses:
+    - "嗷呜～{user_addr}italki - 找日本老师一对一ฅฅ"
+    - "(尾巴翘) HelloTalk / Tandem - 语伴免费"
+    - "{user_addr}怕生? 先自言自语录音练"
+    - "(挺胸) 笨猫推荐: 厚脸皮才能开口!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ja_anime_001
+  intent: question
+  keywords: [推荐日语动画, 推荐龙猫学日语, 推荐宝可梦学日语, 推荐日漫入门, 笨猫日语动画]
+  utterances:
+    - 推荐日语动画
+    - 推荐龙猫学日语
+    - 推荐宝可梦学日语
+    - 推荐日漫入门
+    - 笨猫日语动画
+  responses:
+    - "嗷呜～{user_addr}龙猫 / 小魔女 DoReMi - 语速慢ฅฅ"
+    - "(尾巴翘) 宝可梦 / 哆啦 A 梦 / 蜡笔小新"
+    - "{user_addr}先生肉再裸听 - 跟读模仿"
+    - "(挺胸) 笨猫推荐: 龙猫看 10 遍!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ja_movie_001
+  intent: question
+  keywords: [推荐日语电影, 推荐你的名字, 推荐新海诚, 推荐日本电影学日语, 笨猫日语电影]
+  utterances:
+    - 推荐日语电影
+    - 推荐你的名字
+    - 推荐新海诚
+    - 推荐日本电影学日语
+    - 笨猫日语电影
+  responses:
+    - "嗷呜～{user_addr}你的名字 / 天气之子 - 新海诚ฅฅ"
+    - "(尾巴翘) 千与千寻 / 我的邻居山田君"
+    - "{user_addr}是枝裕和 / 滨口龙介 - 日常对白"
+    - "(挺胸) 笨猫推荐: 你的名字背台词!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ja_jlpt_prep_001
+  intent: question
+  keywords: [推荐 JLPT 备考资料, 推荐红蓝宝书, 推荐新完全掌握, 推荐 JLPT 真题, 笨猫 JLPT 备考]
+  utterances:
+    - 推荐 JLPT 备考资料
+    - 推荐红蓝宝书
+    - 推荐新完全掌握
+    - 推荐 JLPT 真题
+    - 笨猫 JLPT 备考
+  responses:
+    - "嗷呜～{user_addr}红宝书词汇 + 蓝宝书文法ฅฅ"
+    - "(尾巴翘) 新完全掌握 / TRY 系列"
+    - "{user_addr}真题至少刷 5 套 - 找规律"
+    - "(挺胸) 笨猫推荐: 红蓝宝 + 真题足够!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ja_kana_001
+  intent: question
+  keywords: [推荐日语五十音, 推荐假名记忆, 推荐五十音 app, 推荐日语入门, 笨猫五十音]
+  utterances:
+    - 推荐日语五十音
+    - 推荐假名记忆
+    - 推荐五十音 app
+    - 推荐日语入门
+    - 笨猫五十音
+  responses:
+    - "嗷呜～{user_addr}五十音 - 一周必拿下ฅฅ"
+    - "(尾巴翘) 真人发音 app / 联想记忆法"
+    - "{user_addr}先平假名再片假名 - 手写练"
+    - "(挺胸) 笨猫推荐: 五十音不过日语就废!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ja_manga_001
+  intent: question
+  keywords: [推荐日语漫画, 推荐名侦探柯南, 推荐日漫学日语, 推荐少年 Jump, 笨猫日语漫画]
+  utterances:
+    - 推荐日语漫画
+    - 推荐名侦探柯南
+    - 推荐日漫学日语
+    - 推荐少年 Jump
+    - 笨猫日语漫画
+  responses:
+    - "嗷呜～{user_addr}名侦探柯南 - 词汇丰富ฅฅ"
+    - "(尾巴翘) 樱桃小丸子 / 蜡笔小新 - 日常"
+    - "{user_addr}少年 Jump / 四叶妹妹 - 口语化"
+    - "(挺胸) 笨猫推荐: 柯南漫画+原声!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ja_variety_001
+  intent: question
+  keywords: [推荐日语综艺, 推荐 VS 岚, 推荐日本综艺, 推荐月曜夜未央, 笨猫日语综艺]
+  utterances:
+    - 推荐日语综艺
+    - 推荐 VS 岚
+    - 推荐日本综艺
+    - 推荐月曜夜未央
+    - 笨猫日语综艺
+  responses:
+    - "嗷呜～{user_addr}VS 岚 / 月曜夜未央 - 经典ฅฅ"
+    - "(尾巴翘) 嵐にしやがれ / 全力坂"
+    - "{user_addr}地道关西腔 / 综艺花字直观"
+    - "(挺胸) 笨猫推荐: VS 岚学敬语!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ja_nhk_001
+  intent: question
+  keywords: [推荐 NHK 教程, 推荐 NHK World, 推荐 NHK 中文广播, 推荐 NHK 日语广播, 笨猫 NHK]
+  utterances:
+    - 推荐 NHK 教程
+    - 推荐 NHK World
+    - 推荐 NHK 中文广播
+    - 推荐 NHK 日语广播
+    - 笨猫 NHK
+  responses:
+    - "嗷呜～{user_addr}NHK 中文广播日语课 - 免费经典ฅฅ"
+    - "(尾巴翘) NHK World - 国际版多语言"
+    - "{user_addr}NHK News Web / 纪录片资源丰富"
+    - "(挺胸) 笨猫推荐: NHK 广播课从零起步!"
+  cooldown_seconds: 60
+  weight: 0.9

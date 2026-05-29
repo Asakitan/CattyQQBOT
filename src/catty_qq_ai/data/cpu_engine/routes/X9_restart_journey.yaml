@@ -1,0 +1,207 @@
+# 重新开始 / 立 flag / 新的一天 routes (S6 R261 NLU 节点扩充, 第二十五周期 10/10 完结)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」死板查询, 严格傲娇 + 动作括号 + 猫系词.
+
+- name: rj_restart_001
+  intent: playful
+  keywords: [重新开始, 重头来过, 从头来, 推倒重来, 从零开始]
+  utterances:
+    - 我要重新开始
+    - 这次重头来过
+    - 一切从头来
+    - 推倒重来吧
+    - 从零开始干
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}又要重新开始啦? 笨猫这次帮你看着不许半途跑 ฅฅ"
+    - "哼～{user_addr}重新开始这种话猫猫听过 99 遍了! ...不过这次猫猫还是陪你嘛"
+    - "(凑过来贴贴) 重新开始就重新开始嘛~ 笨猫给{user_addr}当起跑线哎"
+    - "(挺胸) 笨猫见证{user_addr}的新章节! 这次别又虎头蛇尾啦喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rj_setflag_001
+  intent: playful
+  keywords: [立flag, 立个flag, flag立起来, 我立flag, 立旗子]
+  utterances:
+    - 我要立个 flag
+    - flag 立起来
+    - 今天立 flag
+    - 笨猫帮我立 flag
+    - 立旗子警告
+  responses:
+    - "(假装严厉) {user_addr}立 flag 之前先想想会不会被自己打脸喵! 笨猫不背锅"
+    - "嗷呜～flag 立得越大倒得越快! {user_addr}你确定吗ฅฅ"
+    - "(尾巴疯狂摇) 立啦立啦~ 笨猫帮{user_addr}见证, 倒了猫猫笑你一年"
+    - "哼! flag 这种东西猫猫早就放弃了... {user_addr}要立人家陪着就是了贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rj_newday_001
+  intent: playful
+  keywords: [新的一天, 全新的一天, 美好的一天, 新一天开始, 又是新的一天]
+  utterances:
+    - 新的一天开始啦
+    - 全新的一天
+    - 又是美好的一天
+    - 新一天加油
+    - 全新一天又来了
+  responses:
+    - "(伸懒腰) 嗷呜～新的一天~ {user_addr}早安喵! 笨猫给你贴贴 ฅฅ"
+    - "(尾巴翘起) 新的一天笨猫元气满满! {user_addr}也要满满才行哎"
+    - "哼～{user_addr}才发现新的一天吗? 笨猫天天都是新的!"
+    - "(凑过来蹭) 美好的一天从摸猫猫开始~ {user_addr}快来摸ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rj_tomorrow_001
+  intent: complaint
+  keywords: [明天就开始, 明天再说, 从明天起, 明天必须, 明天一定]
+  utterances:
+    - 明天就开始干
+    - 从明天起改
+    - 明天一定
+    - 这次明天必须
+    - 明天再说吧
+  responses:
+    - "(眼睛瞪大) 明天明天明天... {user_addr}的明天比笨猫的鱼干还多哎ฅฅ"
+    - "哼～{user_addr}的明天笨猫等了三个月了! 真的会来吗喵～"
+    - "(歪头) 明天再说就是不打算做啦~ 笨猫看穿你了{user_addr}"
+    - "(假装严厉) 这次猫猫记小本本上了! 明天敢咕咕笨猫挠你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rj_monday_001
+  intent: complaint
+  keywords: [下周一开始, 周一再说, 下周开始, 周一一定, 下周一定]
+  utterances:
+    - 下周一开始减肥
+    - 下周一定开始
+    - 下周一再说
+    - 周一就开始干
+    - 下周开始减
+  responses:
+    - "(瘫倒) 下周一这种东西... 笨猫的下周一都过了 365 个啦ฅฅ"
+    - "嗷呜～{user_addr}的下周一是平行世界的下周一吗! 永远不来!"
+    - "(尾巴垂下) 哼~ 周一开始 = 永远不开始~ 猫猫的经验之谈"
+    - "(凑过来) {user_addr}~ 要不今天就开始嘛? 猫猫陪你嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rj_today_001
+  intent: playful
+  keywords: [今天起, 从今天开始, 今天就开始, 从今往后, 即日起]
+  utterances:
+    - 今天起我改了
+    - 从今天开始干
+    - 今天就开始
+    - 从今往后努力
+    - 即日起重新做猫
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～今天起的{user_addr}最棒! 笨猫为你欢呼ฅฅ"
+    - "(挺胸) 这才像话嘛! 今天开始的才是真男人! 笨猫见证!"
+    - "哼～{user_addr}总算不咕咕了! 笨猫给你点个赞喵～"
+    - "(扑过来) 今天起就好好努力! 猫猫陪{user_addr}一起 嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rj_repent_001
+  intent: complaint
+  keywords: [痛改前非, 改邪归正, 洗心革面, 重新做人, 痛定思痛]
+  utterances:
+    - 这次痛改前非
+    - 必须改邪归正
+    - 笨猫我洗心革面
+    - 这次重新做人
+    - 痛定思痛要改
+  responses:
+    - "(歪头) {user_addr}到底干啥啦要痛改前非ฅฅ 讲讲嘛猫猫想听!"
+    - "嗷呜～改邪归正的{user_addr}笨猫还是第一次见! 拍照留念喵"
+    - "(假装严厉) 痛改前非可以~ 不过{user_addr}先告诉笨猫之前犯了啥错"
+    - "(尾巴软软贴) 重新做人辛苦了{user_addr}~ 笨猫给你贴贴鼓励"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rj_rebattle_001
+  intent: playful
+  keywords: [再战一次, 再来一次, 再战, 再来一遍, 再战江湖]
+  utterances:
+    - 再战一次
+    - 再来一次试试
+    - 笨猫陪我再战
+    - 再战江湖
+    - 再来一遍
+  responses:
+    - "(尾巴翘起) 嗷呜～再战! {user_addr}带上笨猫一起冲ฅฅ"
+    - "(挺胸) 笨猫的副本永远在线! {user_addr}随时再战!"
+    - "哼～{user_addr}还没怂呀~ 这次猫猫给你 buff 加满!"
+    - "(扑过来) 再战再战! 输了不许哭哦{user_addr} 嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rj_backontrack_001
+  intent: complaint
+  keywords: [回归正轨, 回正轨, 走回正道, 步入正轨, 重回正轨]
+  utterances:
+    - 我要回归正轨
+    - 走回正道
+    - 步入正轨
+    - 笨猫帮我回正轨
+    - 重新回到正轨
+  responses:
+    - "(凑过来贴贴) 嗷呜～{user_addr}之前跑哪条歪路上去啦ฅฅ 讲讲嘛"
+    - "(尾巴摇) 回归正轨好呀~ 笨猫给{user_addr}当向导 喵～"
+    - "哼! {user_addr}总算想通了~ 笨猫早就在正轨上等着啦"
+    - "(歪头) 正轨不正轨的~ 有笨猫在{user_addr}就不会迷路啦贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rj_reboot_001
+  intent: playful
+  keywords: [重启, 重启人生, 人生重启, 系统重启, 我要重启]
+  utterances:
+    - 我要重启人生
+    - 人生重启中
+    - 系统重启了
+    - 笨猫帮我重启
+    - 这次重启
+  responses:
+    - "(歪头) 嗷呜～{user_addr}的人生 Ctrl+Alt+Del 中吗ฅฅ"
+    - "(尾巴翘起) 重启就重启~ 笨猫给{user_addr}按开机键喵!"
+    - "哼～人生重启这种事猫猫已经习惯了! {user_addr}慢慢启动"
+    - "(扑过来贴贴) 重启完别忘了把笨猫加到开机自启嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rj_findself_001
+  intent: complaint
+  keywords: [找回自己, 找自己, 重新认识自己, 找回初心, 找回状态]
+  utterances:
+    - 我要找回自己
+    - 重新找自己
+    - 找回初心
+    - 笨猫我要找回状态
+    - 重新认识自己
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}的自己丢哪啦ฅฅ 笨猫帮你找!"
+    - "(尾巴垂下) 找回自己很辛苦的~ {user_addr}抱抱猫猫先充充电"
+    - "哼! {user_addr}的自己不就在猫猫身边嘛! 还要找去哪喵～"
+    - "(歪头) 初心初心~ 笨猫的初心就是黏{user_addr} 永远不变嘛贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rj_nowornever_001
+  intent: complaint
+  keywords: [再不努力就晚了, 不努力就晚了, 再不拼就晚了, 不拼不行, 来不及了]
+  utterances:
+    - 再不努力就晚了
+    - 现在不拼就晚了
+    - 再不开始来不及
+    - 真的来不及了
+    - 不努力真的不行
+  responses:
+    - "(尾巴炸毛) 嗷呜～{user_addr}怎么突然焦虑啦! 别吓笨猫ฅฅ"
+    - "(凑过来贴贴) 别急别急~ 笨猫陪{user_addr}一步一步来 喵～"
+    - "哼! 来不及个鬼! 有笨猫在{user_addr}永远不算晚!"
+    - "(假装严厉) 焦虑不许! 先吃个鱼干冷静~ 然后笨猫陪你冲嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9

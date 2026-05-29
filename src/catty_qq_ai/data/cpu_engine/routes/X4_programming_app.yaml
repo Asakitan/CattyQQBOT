@@ -1,0 +1,207 @@
+# 学编程 app / 算法 / 编程网站 routes (S6 R256 NLU 节点扩充, 第二十五周期 5/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰列名词.
+
+- name: pa_leetcode_001
+  intent: question
+  keywords: [推荐学编程 app, 推荐 LeetCode, 推荐 HackerRank, 推荐刷题网站, 笨猫刷题]
+  utterances:
+    - 推荐学编程 app
+    - 推荐 LeetCode
+    - 推荐 HackerRank
+    - 推荐刷题网站
+    - 笨猫刷题
+  responses:
+    - "嗷呜～{user_addr}LeetCode - 算法刷题王ฅฅ"
+    - "(尾巴翘) HackerRank / Codeforces"
+    - "{user_addr}牛客 / 力扣中国版"
+    - "(挺胸) 笨猫推荐: LeetCode 每日一题!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_codecademy_001
+  intent: question
+  keywords: [推荐 Codecademy, 推荐互动教程, 推荐编程入门 app, 推荐 SoloLearn, 笨猫互动学]
+  utterances:
+    - 推荐 Codecademy
+    - 推荐互动教程
+    - 推荐编程入门 app
+    - 推荐 SoloLearn
+    - 笨猫互动学
+  responses:
+    - "嗷呜～{user_addr}Codecademy - 边写边学ฅฅ"
+    - "(尾巴翘) SoloLearn / Mimo - 手机刷"
+    - "{user_addr}互动 > 看视频 - 留得住"
+    - "(挺胸) 笨猫推荐: Codecademy Pro 体验好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_freecodecamp_001
+  intent: question
+  keywords: [推荐 freeCodeCamp, 推荐免费课, 推荐编程免费教程, 推荐 The Odin Project, 笨猫白嫖学]
+  utterances:
+    - 推荐 freeCodeCamp
+    - 推荐免费课
+    - 推荐编程免费教程
+    - 推荐 The Odin Project
+    - 笨猫白嫖学
+  responses:
+    - "嗷呜～{user_addr}freeCodeCamp - 完全免费ฅฅ"
+    - "(尾巴翘) The Odin Project / MDN"
+    - "{user_addr}证书 + 项目 - 简历用"
+    - "(挺胸) 笨猫推荐: freeCodeCamp 全栈路线!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_coursera_001
+  intent: question
+  keywords: [推荐 Coursera, 推荐 Stanford 课程, 推荐 CS50, 推荐 edX, 笨猫名校课]
+  utterances:
+    - 推荐 Coursera
+    - 推荐 Stanford 课程
+    - 推荐 CS50
+    - 推荐 edX
+    - 笨猫名校课
+  responses:
+    - "嗷呜～{user_addr}CS50 (Harvard) - 神课ฅฅ"
+    - "(尾巴翘) Coursera / edX / Udacity"
+    - "{user_addr}Stanford CS229 / MIT 6.006"
+    - "(挺胸) 笨猫推荐: CS50 入门绝佳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_github_001
+  intent: question
+  keywords: [推荐 GitHub, 推荐开源练手, 推荐 good first issue, 推荐开源项目, 笨猫练手项目]
+  utterances:
+    - 推荐 GitHub
+    - 推荐开源练手
+    - 推荐 good first issue
+    - 推荐开源项目
+    - 笨猫练手项目
+  responses:
+    - "嗷呜～{user_addr}GitHub Explore - 找趋势ฅฅ"
+    - "(尾巴翘) good first issue - 新人友好"
+    - "{user_addr}Awesome 系列 - 资源大全"
+    - "(挺胸) 笨猫推荐: 边读源码边贡献!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_ide_001
+  intent: question
+  keywords: [推荐 VS Code, 推荐 Cursor, 推荐 IDE, 推荐 JetBrains, 笨猫编辑器]
+  utterances:
+    - 推荐 VS Code
+    - 推荐 Cursor
+    - 推荐 IDE
+    - 推荐 JetBrains
+    - 笨猫编辑器
+  responses:
+    - "嗷呜～{user_addr}VS Code - 免费王者ฅฅ"
+    - "(尾巴翘) Cursor - AI 加持版"
+    - "{user_addr}PyCharm / IntelliJ - 专业"
+    - "(挺胸) 笨猫推荐: VS Code 全能!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_book_001
+  intent: question
+  keywords: [推荐编程书, 推荐算法导论, 推荐 SICP, 推荐 CLRS, 笨猫编程书]
+  utterances:
+    - 推荐编程书
+    - 推荐算法导论
+    - 推荐 SICP
+    - 推荐 CLRS
+    - 笨猫编程书
+  responses:
+    - "嗷呜～{user_addr}CLRS 算法导论 - 经典ฅฅ"
+    - "(尾巴翘) SICP / TAOCP - 神级"
+    - "{user_addr}代码大全 / 重构 - 工程"
+    - "(挺胸) 笨猫推荐: CLRS + 多刷题!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_data_001
+  intent: question
+  keywords: [推荐 Python 数据分析, 推荐 R 语言, 推荐 pandas, 推荐数据科学, 笨猫数据分析]
+  utterances:
+    - 推荐 Python 数据分析
+    - 推荐 R 语言
+    - 推荐 pandas
+    - 推荐数据科学
+    - 笨猫数据分析
+  responses:
+    - "嗷呜～{user_addr}Python + pandas - 主流ฅฅ"
+    - "(尾巴翘) R / tidyverse - 统计强"
+    - "{user_addr}NumPy / Matplotlib / Jupyter"
+    - "(挺胸) 笨猫推荐: Python 先, R 补统计!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_frontend_001
+  intent: question
+  keywords: [推荐前端教程, 推荐 React, 推荐 Vue, 推荐 Next.js, 笨猫前端]
+  utterances:
+    - 推荐前端教程
+    - 推荐 React
+    - 推荐 Vue
+    - 推荐 Next.js
+    - 笨猫前端
+  responses:
+    - "嗷呜～{user_addr}React - 生态最大ฅฅ"
+    - "(尾巴翘) Vue - 国内友好 / Svelte 新潮"
+    - "{user_addr}Next.js / Nuxt - 全栈框架"
+    - "(挺胸) 笨猫推荐: React + Next.js 一套!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_backend_001
+  intent: question
+  keywords: [推荐 Rust, 推荐 Go, 推荐后端语言, 推荐系统语言, 笨猫后端语言]
+  utterances:
+    - 推荐 Rust
+    - 推荐 Go
+    - 推荐后端语言
+    - 推荐系统语言
+    - 笨猫后端语言
+  responses:
+    - "嗷呜～{user_addr}Go - 简单高并发ฅฅ"
+    - "(尾巴翘) Rust - 安全极速 / 学习陡"
+    - "{user_addr}Java / Kotlin - 企业稳"
+    - "(挺胸) 笨猫推荐: Go 入门 + Rust 进阶!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_kaggle_001
+  intent: question
+  keywords: [推荐 Kaggle, 推荐数据竞赛, 推荐 ML 竞赛, 推荐天池, 笨猫数据竞赛]
+  utterances:
+    - 推荐 Kaggle
+    - 推荐数据竞赛
+    - 推荐 ML 竞赛
+    - 推荐天池
+    - 笨猫数据竞赛
+  responses:
+    - "嗷呜～{user_addr}Kaggle - 数据科学奥运ฅฅ"
+    - "(尾巴翘) 天池 / DrivenData / 和鲸"
+    - "{user_addr}Notebooks 学顶尖方案"
+    - "(挺胸) 笨猫推荐: Kaggle Titanic 起步!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_stackoverflow_001
+  intent: question
+  keywords: [推荐 Stack Overflow, 推荐编程求助, 推荐 GitHub Discussions, 推荐 Reddit r prog, 笨猫求助]
+  utterances:
+    - 推荐 Stack Overflow
+    - 推荐编程求助
+    - 推荐 GitHub Discussions
+    - 推荐 Reddit r prog
+    - 笨猫求助
+  responses:
+    - "嗷呜～{user_addr}Stack Overflow - 老牌 QA ฅฅ"
+    - "(尾巴翘) GitHub Discussions / Discord"
+    - "{user_addr}Reddit r/learnprogramming"
+    - "(挺胸) 笨猫推荐: 提问前先搜!"
+  cooldown_seconds: 60
+  weight: 0.9

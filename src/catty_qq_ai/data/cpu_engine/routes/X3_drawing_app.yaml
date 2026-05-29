@@ -1,0 +1,207 @@
+# 学绘画 app / 板绘 / 美术教程 routes (S6 R255 NLU 节点扩充, 第二十五周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰列名词.
+
+- name: da_drawing_app_001
+  intent: question
+  keywords: [推荐绘画 app, 推荐 Procreate, 推荐 Sketchbook, 推荐手机绘画 app, 笨猫绘画 app]
+  utterances:
+    - 推荐绘画 app
+    - 推荐 Procreate
+    - 推荐 Sketchbook
+    - 推荐手机绘画 app
+    - 笨猫绘画 app
+  responses:
+    - "嗷呜～{user_addr}Procreate - iPad 神器ฅฅ"
+    - "(尾巴翘) Sketchbook / MediBang / ibisPaint"
+    - "{user_addr}手机党 / 平板党通吃"
+    - "(挺胸) 笨猫推荐: Procreate 一次买断!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_tablet_software_001
+  intent: question
+  keywords: [推荐板绘软件, 推荐 Photoshop, 推荐 Clip Studio, 推荐 CSP, 笨猫板绘软件]
+  utterances:
+    - 推荐板绘软件
+    - 推荐 Photoshop
+    - 推荐 Clip Studio
+    - 推荐 CSP
+    - 笨猫板绘软件
+  responses:
+    - "嗷呜～{user_addr}Clip Studio Paint - 漫画神器ฅฅ"
+    - "(尾巴翘) Photoshop / SAI / Krita"
+    - "{user_addr}CSP 笔刷生态最丰富"
+    - "(挺胸) 笨猫推荐: 画漫画选 CSP!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_ipad_001
+  intent: question
+  keywords: [推荐 iPad 绘画, 推荐 Apple Pencil, 推荐 iPad Pro, 推荐 iPad 型号, 笨猫 iPad 绘画]
+  utterances:
+    - 推荐 iPad 绘画
+    - 推荐 Apple Pencil
+    - 推荐 iPad Pro
+    - 推荐 iPad 型号
+    - 笨猫 iPad 绘画
+  responses:
+    - "嗷呜～{user_addr}iPad Pro 11 / 12.9 - 顶配ฅฅ"
+    - "(尾巴翘) iPad Air + Pencil 2 性价比"
+    - "{user_addr}Apple Pencil 二代必备"
+    - "(挺胸) 笨猫推荐: Air + Pencil2 够用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_tutorial_site_001
+  intent: question
+  keywords: [推荐绘画教程, 推荐 B 站绘画, 推荐站酷, 推荐绘画 up 主, 笨猫绘画教程]
+  utterances:
+    - 推荐绘画教程
+    - 推荐 B 站绘画
+    - 推荐站酷
+    - 推荐绘画 up 主
+    - 笨猫绘画教程
+  responses:
+    - "嗷呜～{user_addr}B 站绘画区 - 免费宝藏ฅฅ"
+    - "(尾巴翘) 站酷 / 涂鸦王国 / 半次元"
+    - "{user_addr}YouTube 大佬一堆"
+    - "(挺胸) 笨猫推荐: B 站搜「板绘入门」!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_course_001
+  intent: question
+  keywords: [推荐绘画课程, 推荐三月画室, 推荐半身像, 推荐网课画室, 笨猫绘画课程]
+  utterances:
+    - 推荐绘画课程
+    - 推荐三月画室
+    - 推荐半身像
+    - 推荐网课画室
+    - 笨猫绘画课程
+  responses:
+    - "嗷呜～{user_addr}三月画室 / 名动漫 - 大厂ฅฅ"
+    - "(尾巴翘) 半身像 / 萤火虫 / 轻微课"
+    - "{user_addr}系统班贵但真能学到"
+    - "(挺胸) 笨猫推荐: 先试听再报班!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: da_tablet_hardware_001
+  intent: question
+  keywords: [推荐数位板, 推荐 Wacom, 推荐高漫, 推荐数位屏, 笨猫数位板]
+  utterances:
+    - 推荐数位板
+    - 推荐 Wacom
+    - 推荐高漫
+    - 推荐数位屏
+    - 笨猫数位板
+  responses:
+    - "嗷呜～{user_addr}Wacom 影拓 - 业界标杆ฅฅ"
+    - "(尾巴翘) 高漫 / 友基 - 国产性价比"
+    - "{user_addr}数位屏: Wacom Cintiq / XP-Pen"
+    - "(挺胸) 笨猫推荐: 新手高漫 1060Pro!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_color_001
+  intent: question
+  keywords: [推荐颜色板, 推荐色彩搭配, 推荐配色网站, 推荐色卡, 笨猫颜色板]
+  utterances:
+    - 推荐颜色板
+    - 推荐色彩搭配
+    - 推荐配色网站
+    - 推荐色卡
+    - 笨猫颜色板
+  responses:
+    - "嗷呜～{user_addr}Adobe Color - 配色神器ฅฅ"
+    - "(尾巴翘) Coolors / 中国色 / 日本色"
+    - "{user_addr}邻近色 + 互补色基础"
+    - "(挺胸) 笨猫推荐: 多观察生活配色!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: da_reference_001
+  intent: function_request
+  keywords: [推荐照片临摹, 推荐静物速写, 推荐参考图, 推荐 PureRef, 笨猫临摹]
+  utterances:
+    - 推荐照片临摹
+    - 推荐静物速写
+    - 推荐参考图
+    - 推荐 PureRef
+    - 笨猫临摹
+  responses:
+    - "嗷呜～{user_addr}PureRef - 参考图必备ฅฅ"
+    - "(尾巴翘) Pinterest / Unsplash 找图"
+    - "{user_addr}静物 / 速写 / 30 秒人体"
+    - "(挺胸) 笨猫推荐: 每天 10 张速写!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: da_anatomy_001
+  intent: question
+  keywords: [推荐人体结构教程, 推荐人体素描, 推荐伯里曼, 推荐 Loomis, 笨猫人体结构]
+  utterances:
+    - 推荐人体结构教程
+    - 推荐人体素描
+    - 推荐伯里曼
+    - 推荐 Loomis
+    - 笨猫人体结构
+  responses:
+    - "嗷呜～{user_addr}伯里曼《人体结构》圣经ฅฅ"
+    - "(尾巴翘) Loomis / 加藤公太"
+    - "{user_addr}先骨骼 → 肌肉 → 体块"
+    - "(挺胸) 笨猫推荐: 啃伯里曼半年起步!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: da_landscape_001
+  intent: question
+  keywords: [推荐风景画教程, 推荐场景画, 推荐 background, 推荐风景速写, 笨猫风景画]
+  utterances:
+    - 推荐风景画教程
+    - 推荐场景画
+    - 推荐 background
+    - 推荐风景速写
+    - 笨猫风景画
+  responses:
+    - "嗷呜～{user_addr}吉卜力背景画教程ฅฅ"
+    - "(尾巴翘) 大气透视 / 三点透视基础"
+    - "{user_addr}冷暖对比 / 远近层次"
+    - "(挺胸) 笨猫推荐: 临摹宫崎骏背景!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: da_artist_001
+  intent: question
+  keywords: [推荐插画师, 推荐 Loish, 推荐 Sakimichan, 推荐板绘大佬, 笨猫插画师]
+  utterances:
+    - 推荐插画师
+    - 推荐 Loish
+    - 推荐 Sakimichan
+    - 推荐板绘大佬
+    - 笨猫插画师
+  responses:
+    - "嗷呜～{user_addr}Loish - 灵动笔触ฅฅ"
+    - "(尾巴翘) Sakimichan / WLOP / Krenz"
+    - "{user_addr}日系: 米山舞 / 中村佑介"
+    - "(挺胸) 笨猫推荐: 关注 ArtStation Top!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: da_community_001
+  intent: question
+  keywords: [推荐绘画社区, 推荐 Pixiv, 推荐 ArtStation, 推荐 DeviantArt, 笨猫绘画社区]
+  utterances:
+    - 推荐绘画社区
+    - 推荐 Pixiv
+    - 推荐 ArtStation
+    - 推荐 DeviantArt
+    - 笨猫绘画社区
+  responses:
+    - "嗷呜～{user_addr}Pixiv - 日系二刺猿圣地ฅฅ"
+    - "(尾巴翘) ArtStation - 欧美大佬扎堆"
+    - "{user_addr}站酷 / lofter / 微博超话"
+    - "(挺胸) 笨猫推荐: Pixiv + ArtStation 双修!"
+  cooldown_seconds: 60
+  weight: 1.0

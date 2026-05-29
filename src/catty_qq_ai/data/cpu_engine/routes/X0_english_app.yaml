@@ -1,0 +1,207 @@
+# 学英语 app / 雅思托福 / 单词 routes (S6 R252 NLU 节点扩充, 第二十五周期 1/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰列名词.
+
+- name: ea_app_001
+  intent: question
+  keywords: [推荐学英语 app, 推荐 Duolingo, 推荐多邻国, 推荐英语启蒙 app, 笨猫学英语 app]
+  utterances:
+    - 推荐学英语 app
+    - 推荐 Duolingo
+    - 推荐多邻国
+    - 推荐英语启蒙 app
+    - 笨猫学英语 app
+  responses:
+    - "嗷呜～{user_addr}Duolingo 多邻国 - 游戏化学习ฅฅ"
+    - "(尾巴翘) Memrise / Busuu - 情景对话"
+    - "{user_addr}每天 15 分钟养成习惯"
+    - "(挺胸) 笨猫推荐: 多邻国入门最无痛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_vocab_001
+  intent: question
+  keywords: [推荐背单词 app, 推荐扇贝, 推荐百词斩, 推荐墨墨背单词, 笨猫背单词]
+  utterances:
+    - 推荐背单词 app
+    - 推荐扇贝
+    - 推荐百词斩
+    - 推荐墨墨背单词
+    - 笨猫背单词
+  responses:
+    - "嗷呜～{user_addr}扇贝单词 / 百词斩 - 中文区双雄ฅฅ"
+    - "(尾巴翘) 墨墨背单词 - 艾宾浩斯精算"
+    - "{user_addr}不背单词 - 例句丰富"
+    - "(挺胸) 笨猫推荐: 墨墨真的记得牢!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_anki_001
+  intent: question
+  keywords: [推荐 Anki, 推荐闪卡, 推荐间隔重复, 推荐 SRS, 笨猫 Anki]
+  utterances:
+    - 推荐 Anki
+    - 推荐闪卡
+    - 推荐间隔重复
+    - 推荐 SRS
+    - 笨猫 Anki
+  responses:
+    - "嗷呜～{user_addr}Anki - 间隔重复神器ฅฅ"
+    - "(尾巴翘) 自制卡 + 共享牌组都行"
+    - "{user_addr}Quizlet / RemNote 备选"
+    - "(挺胸) 笨猫推荐: Anki 学一次记一辈子!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ea_reading_001
+  intent: question
+  keywords: [推荐英文阅读 app, 推荐流利说, 推荐扇贝阅读, 推荐英语阅读, 笨猫英文阅读]
+  utterances:
+    - 推荐英文阅读 app
+    - 推荐流利说
+    - 推荐扇贝阅读
+    - 推荐英语阅读
+    - 笨猫英文阅读
+  responses:
+    - "嗷呜～{user_addr}流利说 / 扇贝阅读 - 分级文章ฅฅ"
+    - "(尾巴翘) 多邻国故事 - 趣味绘本"
+    - "{user_addr}ReadTheory / News in Levels"
+    - "(挺胸) 笨猫推荐: 每天读一篇够了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_listening_001
+  intent: question
+  keywords: [推荐听力 app, 推荐 Speak, 推荐 BBC Learning, 推荐英语听力, 笨猫英语听力]
+  utterances:
+    - 推荐听力 app
+    - 推荐 Speak
+    - 推荐 BBC Learning
+    - 推荐英语听力
+    - 笨猫英语听力
+  responses:
+    - "嗷呜～{user_addr}BBC Learning English - 经典权威ฅฅ"
+    - "(尾巴翘) Speak / VOA Learning"
+    - "{user_addr}每日英语听力 - 资源全"
+    - "(挺胸) 笨猫推荐: BBC 6 Minute English!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_speaking_001
+  intent: question
+  keywords: [推荐口语 app, 推荐 Cambly, 推荐 italki, 推荐外教一对一, 笨猫英语口语]
+  utterances:
+    - 推荐口语 app
+    - 推荐 Cambly
+    - 推荐 italki
+    - 推荐外教一对一
+    - 笨猫英语口语
+  responses:
+    - "嗷呜～{user_addr}Cambly / italki - 真人外教ฅฅ"
+    - "(尾巴翘) HelloTalk - 语伴交换免费"
+    - "{user_addr}英语流利说 AI 陪练"
+    - "(挺胸) 笨猫推荐: italki 选老师自由!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_ielts_001
+  intent: question
+  keywords: [推荐雅思备考, 推荐托福备考, 推荐七天学堂, 推荐 IELTS, 笨猫雅思托福]
+  utterances:
+    - 推荐雅思备考
+    - 推荐托福备考
+    - 推荐七天学堂
+    - 推荐 IELTS
+    - 笨猫雅思托福
+  responses:
+    - "嗷呜～{user_addr}剑桥真题 + 小站雅思ฅฅ"
+    - "(尾巴翘) 托福: TPO 模考必刷"
+    - "{user_addr}新东方 / 七天学堂"
+    - "(挺胸) 笨猫推荐: 真题 > 一切技巧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_news_001
+  intent: question
+  keywords: [推荐英文新闻, 推荐 The Economist, 推荐 NYT, 推荐英文报刊, 笨猫英文新闻]
+  utterances:
+    - 推荐英文新闻
+    - 推荐 The Economist
+    - 推荐 NYT
+    - 推荐英文报刊
+    - 笨猫英文新闻
+  responses:
+    - "嗷呜～{user_addr}The Economist - 严肃文笔ฅฅ"
+    - "(尾巴翘) NYT / Guardian / BBC"
+    - "{user_addr}Reuters / AP - 新闻硬核"
+    - "(挺胸) 笨猫推荐: Economist 写作必看!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ea_podcast_001
+  intent: question
+  keywords: [推荐英文播客, 推荐 TED, 推荐 ESL Pod, 推荐英语播客, 笨猫英文播客]
+  utterances:
+    - 推荐英文播客
+    - 推荐 TED
+    - 推荐 ESL Pod
+    - 推荐英语播客
+    - 笨猫英文播客
+  responses:
+    - "嗷呜～{user_addr}TED Talks - 思想盛宴ฅฅ"
+    - "(尾巴翘) ESL Pod - 教学型经典"
+    - "{user_addr}The Daily / Planet Money"
+    - "(挺胸) 笨猫推荐: TED 听 1.25 倍速!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ea_youtube_001
+  intent: question
+  keywords: [推荐 YouTube 英文频道, 推荐 Ali Abdaal, 推荐英文 YouTuber, 推荐英文视频, 笨猫英文 YouTube]
+  utterances:
+    - 推荐 YouTube 英文频道
+    - 推荐 Ali Abdaal
+    - 推荐英文 YouTuber
+    - 推荐英文视频
+    - 笨猫英文 YouTube
+  responses:
+    - "嗷呜～{user_addr}Ali Abdaal - 学习生产力ฅฅ"
+    - "(尾巴翘) Veritasium / Kurzgesagt"
+    - "{user_addr}MKBHD / Linus Tech Tips"
+    - "(挺胸) 笨猫推荐: 看兴趣方向最持久!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ea_movie_001
+  intent: question
+  keywords: [推荐英文电影学习, 推荐 Friends, 推荐看美剧学英语, 推荐英语影视, 笨猫英文电影]
+  utterances:
+    - 推荐英文电影学习
+    - 推荐 Friends
+    - 推荐看美剧学英语
+    - 推荐英语影视
+    - 笨猫英文电影
+  responses:
+    - "嗷呜～{user_addr}Friends 老友记 - 英语圣经ฅฅ"
+    - "(尾巴翘) Modern Family / The Office"
+    - "{user_addr}双语字幕 → 英文字幕 → 裸听"
+    - "(挺胸) 笨猫推荐: 一集刷三遍才记得!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_writing_001
+  intent: question
+  keywords: [推荐英文写作, 推荐 Grammarly, 推荐英文写作工具, 推荐英文校对, 笨猫英文写作]
+  utterances:
+    - 推荐英文写作
+    - 推荐 Grammarly
+    - 推荐英文写作工具
+    - 推荐英文校对
+    - 笨猫英文写作
+  responses:
+    - "嗷呜～{user_addr}Grammarly - 拼写语法神器ฅฅ"
+    - "(尾巴翘) DeepL Write / QuillBot"
+    - "{user_addr}Hemingway - 句式精简"
+    - "(挺胸) 笨猫推荐: Grammarly + 多读范文!"
+  cooldown_seconds: 60
+  weight: 1.0
