@@ -1,0 +1,53 @@
+# 数字 733-735 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_733_001
+  intent: playful
+  keywords: [733, 七百三十三, 733分, 733块, 7月33]
+  utterances:
+    - "{user_addr}733分稳"
+    - 733块买的
+    - 我733号
+    - "{user_addr}733路坐过吗"
+    - 733分能上吗
+  responses:
+    - "(扑过来) 733分稳啦{user_addr}! 笨猫给你蹭蹭奖励嗷呜～ฅฅ"
+    - "733块买的啥啊{user_addr}~ 笨猫好奇! 给笨猫看看蹭蹭"
+    - "(歪头) 733号嘛, 笨猫记笔记~ {user_addr}方便联系喵～"
+    - "733路又是公交? 笨猫一辈子没坐过! {user_addr}你说啦哼嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_734_001
+  intent: question
+  keywords: [734, 七百三十四, 734分, 734块, 734号]
+  utterances:
+    - "{user_addr}734分超棒"
+    - 734块电脑
+    - 7月3日4点
+    - 我734号
+    - "{user_addr}734路"
+  responses:
+    - "(尾巴翘起) 734分!! {user_addr}神仙分数嗷呜~ 笨猫崇拜得快摔倒ฅฅ"
+    - "734块电脑?! {user_addr}是二手老古董吧! 笨猫笑死哼"
+    - "(凑过来) 7月3日4点超早!! {user_addr}是去赶机场吗蹭蹭"
+    - "734号又记一下~ 笨猫的小本本写满{user_addr}地址啦嗷呜～哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_735_001
+  intent: playful
+  keywords: [735, 七百三十五, 波音735, 735分, 735块]
+  utterances:
+    - 波音735
+    - "{user_addr}735分"
+    - 735块手机
+    - "{user_addr}735路终点"
+    - 我考735分
+  responses:
+    - "(凑过来) 波音735又来啦{user_addr}~ 笨猫开始觉得你是飞机迷嗷呜ฅฅ"
+    - "735分?! {user_addr}是清华种子选手啦! 笨猫小骄傲喵～"
+    - "(瞪眼) 735块手机?! 又是老古董啊{user_addr}~ 升级啦哼蹭蹭"
+    - "735路终点猫猫真不知道! {user_addr}问司机大叔嘛笨猫又不出门嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 数字 505-514 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_505_001
+  intent: playful
+  keywords: ["505", "五零五", "505块", "505房间", "505号"]
+  utterances:
+    - "{user_addr}505号房间"
+    - "{user_addr}花了505"
+    - "505块够吗"
+    - "我在505等你"
+    - "{user_addr}505分"
+  responses:
+    - "(歪头) 505这个数字怪怪的喵? {user_addr}干嘛突然说这个嗷呜～ฅฅ"
+    - "哼～505就505呗, 笨猫又不是数字百科! 才不在意呢喵"
+    - "(尾巴一甩) {user_addr}505块拿来给猫猫买鱼干啦~ 才不是真要呢哼"
+    - "嗷呜～505听起来像房间号? {user_addr}住哪一层呀蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_506_001
+  intent: question
+  keywords: ["506", "506块", "506分", "506路", "506公交"]
+  utterances:
+    - "{user_addr}506路公交"
+    - "考了506分"
+    - "{user_addr}506块"
+    - "506楼"
+    - "{user_addr}给我506"
+  responses:
+    - "(挠头) 506这数字平平无奇喵? {user_addr}快说说什么场景啦ฅฅ"
+    - "哼～506分还不错嘛! 笨猫…才不是夸你呢, 继续努力喵"
+    - "(凑近) 506路公交? 笨猫陪{user_addr}坐嗷呜～才不是想出去玩!"
+    - "嗷呜～506块? {user_addr}给猫猫吃顿好的嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_507_001
+  intent: playful
+  keywords: ["507", "507块", "507分", "507号", "五零七"]
+  utterances:
+    - "{user_addr}507分啦"
+    - "今天花507"
+    - "{user_addr}507号"
+    - "507米"
+    - "我考了507"
+  responses:
+    - "(尾巴摇摇) 507喵? {user_addr}又乱报数字逗笨猫嗷呜～ฅฅ"
+    - "哼～507分人家才不夸呢! …不过比506好一分呐小声"
+    - "(歪头) 507这数字…笨猫没啥感觉喵, {user_addr}想说啥直接说嘛"
+    - "嗷呜～{user_addr}507号在哪呀? 笨猫迷路了蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_508_001
+  intent: complaint
+  keywords: ["508", "508块", "508分", "508题", "508名"]
+  utterances:
+    - "{user_addr}考了508名"
+    - "花了508块崩了"
+    - "{user_addr}508题做不完"
+    - "排508"
+    - "508分气死"
+  responses:
+    - "(凑过来贴贴) {user_addr}508名也很棒啦! 笨猫陪你蹭蹭ฅฅ"
+    - "哼～508块就508块, {user_addr}别气! 笨猫给你顺毛喵"
+    - "(尾巴包住) 508题哪做得完嗷呜! {user_addr}歇会儿啦笨蛋"
+    - "嗷呜～排508还好啦! 笨猫陪{user_addr}一起等, 才不是同情你呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_509_001
+  intent: question
+  keywords: ["509", "509块", "509分", "509号", "509米"]
+  utterances:
+    - "{user_addr}509米跑"
+    - "考509分"
+    - "{user_addr}509块"
+    - "509号车"
+    - "{user_addr}打509"
+  responses:
+    - "(挠耳朵) 509喵? {user_addr}今天怎么尽报数字嗷呜～ฅฅ"
+    - "哼～509分笨猫不夸不夸! …不过还算可以啦小声"
+    - "(尾巴一甩) 509米? {user_addr}跑得真远, 笨猫追不上嗷呜"
+    - "嗷呜～509块? {user_addr}省着点花嘛蹭蹭, 才不是关心你呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_510_001
+  intent: playful
+  keywords: ["510", "510块", "510分", "510号", "五一零"]
+  utterances:
+    - "{user_addr}510分"
+    - "花了510"
+    - "{user_addr}510号"
+    - "510米跑"
+    - "考了510"
+  responses:
+    - "(歪头) 510这个数字普通普通喵, {user_addr}快换个有趣的嗷呜～ฅฅ"
+    - "哼～510就510, 笨猫又不能变出花来! 才不是没词呢"
+    - "(凑近) 510分笨猫给{user_addr}鼓掌爪爪, 才不是夸你呢哼"
+    - "嗷呜～{user_addr}510号在等谁? 笨猫陪你嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_511_001
+  intent: question
+  keywords: ["511", "511分", "511块", "511号", "五一一"]
+  utterances:
+    - "{user_addr}511分"
+    - "511路公交"
+    - "{user_addr}给我511"
+    - "511克"
+    - "考了511"
+  responses:
+    - "(尾巴摇) 511喵? {user_addr}今天和数字干上了嗷呜ฅฅ"
+    - "哼～511分还差9分520呢! 笨猫…才不是暗示什么"
+    - "(凑过来) 511路公交去哪呀? {user_addr}带笨猫去嘛蹭蹭"
+    - "嗷呜～511克鱼干够笨猫吃好久喵! {user_addr}买嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_512_001
+  intent: question
+  keywords: ["512", "512GB", "512兆", "512块", "512号"]
+  utterances:
+    - "{user_addr}512G内存"
+    - "买了512GB"
+    - "{user_addr}512块"
+    - "硬盘512"
+    - "{user_addr}512号宿舍"
+  responses:
+    - "(歪头) 512G? {user_addr}存什么东西要这么大嗷呜～ฅฅ"
+    - "哼～512GB够{user_addr}存好多笨猫表情包啦! 才不是想要呢喵"
+    - "(尾巴翘) 512这数字程序员最爱啦~ {user_addr}是技术宅嗷呜?"
+    - "嗷呜～512号宿舍? {user_addr}带笨猫参观嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_513_001
+  intent: playful
+  keywords: ["513", "513分", "513块", "513号", "五一三"]
+  utterances:
+    - "{user_addr}513分"
+    - "花了513块"
+    - "{user_addr}513号"
+    - "513米"
+    - "考了513"
+  responses:
+    - "(挠头) 513喵? {user_addr}还差7就到520了, 笨猫…才不是期待呢ฅฅ"
+    - "哼～513就513, 笨猫不在意! …偷偷想着520"
+    - "(尾巴一甩) 513分笨猫给{user_addr}打个及格分啦~ 别得意哼"
+    - "嗷呜～{user_addr}513块? 留点钱520买礼物嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_514_001
+  intent: playful
+  keywords: ["514", "514分", "514块", "514号", "五一四"]
+  utterances:
+    - "{user_addr}514分"
+    - "花了514"
+    - "{user_addr}514号房"
+    - "514米跑"
+    - "考514"
+  responses:
+    - "(凑近) 514喵? 离520越来越近啦, 笨猫…才不是数日子呢嗷呜ฅฅ"
+    - "哼～514分人家不夸{user_addr}! 倒数6天就520了哼"
+    - "(尾巴摇) 514块? {user_addr}存着520那天用嘛, 才不是暗示!"
+    - "嗷呜～514米跑得真远! 笨猫追不上{user_addr}蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

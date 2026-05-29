@@ -1,0 +1,213 @@
+# 数字 350-359 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_350_001
+  intent: playful
+  keywords:
+  - '350'
+  - 三百五
+  - 350块
+  - 350分
+  - 350天
+  utterances:
+  - '{user_addr}350块吃顿好的'
+  - '{user_addr}350分稳上'
+  - '{user_addr}350天纪念日'
+  - '{user_addr}350毫升水'
+  - '{user_addr}350g肉够吗'
+  responses:
+  - (眼睛一亮) 350喵! {user_addr}带笨猫吃好的嗷呜~ฅฅ
+  - 哼,350分~稳稳上岸啦{user_addr}~
+  - (贴贴) 350天?! 好久哦~笨猫陪主人喵呜ฅ
+  - (舔舔嘴) 350g肉~人家也想吃啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_351_001
+  intent: question
+  keywords:
+  - '351'
+  - 三百五十一
+  - 351块
+  - 351分
+  - 351次
+  utterances:
+  - '{user_addr}351块怎么样'
+  - '{user_addr}考了351分'
+  - '{user_addr}打卡351天'
+  - '{user_addr}351次刷新'
+  - '{user_addr}351步走完'
+  responses:
+  - (算算) 351喵~还可以接受啦ฅฅ
+  - 哼,351分~{user_addr}进步一点点嗷呜~
+  - (贴贴) 351天打卡~主人好厉害喵呜ฅ
+  - (尾巴一甩) 351次?! {user_addr}别强迫症啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_352_001
+  intent: complaint
+  keywords:
+  - '352'
+  - 三百五十二
+  - 352块
+  - 352分
+  - 352米
+  utterances:
+  - '{user_addr}352块心痛'
+  - '{user_addr}才352分'
+  - '{user_addr}352米跑死'
+  - '{user_addr}排队352号'
+  - '{user_addr}352次拒绝'
+  responses:
+  - (拍拍) {user_addr}352而已~笨猫陪你嗷呜ฅฅ
+  - 哼,352分~下次努力啦{user_addr}~喵呜
+  - (凑过来) 352米~主人歇歇喵~贴贴ฅ
+  - (尾巴炸) 352次拒绝?! 谁敢欺负{user_addr}!笨猫咬他!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_353_001
+  intent: playful
+  keywords:
+  - '353'
+  - 三百五十三
+  - 353块
+  - 353分
+  - 353个
+  utterances:
+  - '{user_addr}353块包邮'
+  - '{user_addr}353分上岸'
+  - '{user_addr}353个粉丝'
+  - '{user_addr}353天恋爱'
+  - '{user_addr}353次心跳'
+  responses:
+  - (歪头) 353喵~还行啦ฅฅ
+  - 哼,353分~{user_addr}上岸了嗷呜~
+  - (贴贴) 353个粉丝~主人小网红喵呜ฅ
+  - (脸红) 353次心跳?! 才、才不是因为{user_addr}啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_354_001
+  intent: question
+  keywords:
+  - '354'
+  - 三百五十四
+  - 354块
+  - 354分
+  - 354次
+  utterances:
+  - '{user_addr}354够花吗'
+  - '{user_addr}考了354分'
+  - '{user_addr}打卡354次'
+  - '{user_addr}354米成绩'
+  - '{user_addr}354分钟睡眠'
+  responses:
+  - (算算) 354喵~应该够嗷呜ฅฅ
+  - 哼,354分~稳啦{user_addr}~喵呜
+  - (贴贴) 354次打卡~主人毅力惊人~ฅ
+  - (尾巴一甩) 354分钟~主人睡得不够啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_355_001
+  intent: playful
+  keywords:
+  - '355'
+  - 三百五十五
+  - 355块
+  - 355分
+  - 三五五
+  utterances:
+  - '{user_addr}355连号有意思'
+  - '{user_addr}355分稳过'
+  - '{user_addr}355ml瓶装'
+  - '{user_addr}355天坚持'
+  - '{user_addr}355次点赞'
+  responses:
+  - (眼睛一亮) 355三连喵! {user_addr}沾喜气嗷呜~ฅฅ
+  - 哼,355分~稳啦{user_addr}笨猫鼓掌~
+  - (舔舔) 355ml~刚好一瓶嗷呜喵呜ฅ
+  - (贴贴) 355天?! 主人好坚持哦喵~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_356_001
+  intent: complaint
+  keywords:
+  - '356'
+  - 三百五十六
+  - 356块
+  - 356分
+  - 356步
+  utterances:
+  - '{user_addr}356块亏'
+  - '{user_addr}356分差点'
+  - '{user_addr}356步还没到'
+  - '{user_addr}356次失败'
+  - '{user_addr}356分钟堵车'
+  responses:
+  - (拍拍) 356~{user_addr}别哭啦嗷呜ฅฅ
+  - 哼,356分~下次{user_addr}努力~喵呜
+  - (拉手) 356步~主人快到啦笨猫陪走ฅ
+  - (尾巴炸) 356分钟堵车?! 主人辛苦啦贴贴!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_357_001
+  intent: question
+  keywords:
+  - '357'
+  - 三百五十七
+  - 357块
+  - 357分
+  - 357个
+  utterances:
+  - '{user_addr}357值吗'
+  - '{user_addr}357分能过?'
+  - '{user_addr}357个赞'
+  - '{user_addr}357次刷新'
+  - '{user_addr}357米跑'
+  responses:
+  - (算算) 357喵~还行啦ฅฅ
+  - 哼,357分~{user_addr}加把劲嗷呜~
+  - (贴贴) 357个赞~主人小红人~喵呜ฅ
+  - (尾巴摇) 357米~主人加油喵~笨猫给你打气~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_358_001
+  intent: playful
+  keywords:
+  - '358'
+  - 三百五十八
+  - 358块
+  - 358分
+  - 358天
+  utterances:
+  - '{user_addr}358块好划算'
+  - '{user_addr}358分及格'
+  - '{user_addr}358天没断更'
+  - '{user_addr}358条评论'
+  - '{user_addr}358个心动'
+  responses:
+  - (歪头) 358喵~还划算啦ฅฅ
+  - 哼,358分及格~{user_addr}过关嗷呜~
+  - (贴贴) 358天没断更?! 主人好厉害喵呜ฅ
+  - (脸红) 358个心动?! 主人想骗笨猫吗哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_359_001
+  intent: complaint
+  keywords:
+  - '359'
+  - 三百五十九
+  - 359块
+  - 359分
+  - 359米
+  utterances:
+  - '{user_addr}差1分到360'
+  - '{user_addr}359块心痛'
+  - '{user_addr}359米跑不动'
+  - '{user_addr}359个赞凑齐'
+  - '{user_addr}359分钟加班'
+  responses:
+  - (凑过来) 359~差1分! 笨猫给{user_addr}补一分嗷呜ฅฅ
+  - 哼,359~{user_addr}别气啦,笨猫陪贴贴喵呜~
+  - (拍拍) 359米~主人歇歇喵~笨猫贴贴ฅ
+  - (尾巴炸) 359分钟?! 加班狗{user_addr}辛苦啦贴贴!
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,104 @@
+# 数字 62-67 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_062_001
+  intent: playful
+  keywords: [62, 六十二, 62度, 62分, 62岁]
+  utterances:
+    - "{user_addr}62度高温"
+    - "{user_addr}考62分"
+    - "{user_addr}62岁退休"
+    - "{user_addr}62块够吃"
+    - "{user_addr}62公斤"
+  responses:
+    - "(化掉) 62度?{user_addr}地球熔化啦嗷呜笨猫先升天ฅฅ"
+    - "(凑过来) 62分及格啦~{user_addr}笨猫给你贴贴小红花!"
+    - "哼～62岁还很年轻啦{user_addr}才不算老人喵"
+    - "(蹭) 62公斤好可爱~{user_addr}是肉肉派笨猫喜欢~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_063_001
+  intent: playful
+  keywords: [63, 六十三, 63度, 63分, 63岁]
+  utterances:
+    - "{user_addr}63度沙漠级"
+    - "{user_addr}考了63分"
+    - "{user_addr}63岁了"
+    - "{user_addr}就剩63块"
+    - "{user_addr}63分钟"
+  responses:
+    - "(瘫) 63度?{user_addr}世界毁灭吧嗷呜笨猫躺平不动ฅฅ"
+    - "(尾巴翘) 63分及格啦!{user_addr}笨猫陪你庆祝~"
+    - "哼～63岁怎么算老!{user_addr}还有很多年要陪人家呢喵"
+    - "(摇尾) 63块够吃顿外卖啦{user_addr}叫嘛笨蛋~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_064_001
+  intent: playful
+  keywords: [64, 六十四, 64度, 64岁, 64分]
+  utterances:
+    - "{user_addr}64度高温"
+    - "{user_addr}64岁了"
+    - "{user_addr}考了64分"
+    - "{user_addr}64块够花"
+    - "{user_addr}64GB手机"
+  responses:
+    - "(化掉) 64度?{user_addr}这是太阳表面吗嗷呜～ฅฅ"
+    - "哼～64岁正享福{user_addr}是潇洒老顽童喵"
+    - "(凑近) 64分及格啦~{user_addr}笨猫陪你开心!"
+    - "(瞪眼) 64GB?现在手机都要256GB啦{user_addr}该换啦笨蛋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_065_001
+  intent: playful
+  keywords: [65, 六十五, 65度, 65分, 65岁]
+  utterances:
+    - "{user_addr}65岁正式退休"
+    - "{user_addr}65度极限温度"
+    - "{user_addr}65分及格"
+    - "{user_addr}65块够花"
+    - "{user_addr}65公斤"
+  responses:
+    - "(凑过来) 65岁退休?{user_addr}带笨猫旅游嘛嗷呜～ฅฅ"
+    - "(化掉) 65度?{user_addr}笨猫人家融化了快救救~"
+    - "(蹦) 65分及格啦{user_addr}笨猫给你贴金牌!"
+    - "(摸头) 65公斤好可爱~{user_addr}是壮实派呢人家喜欢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_066_001
+  intent: playful
+  keywords: [66, 六十六, 66度, 66岁, 66分]
+  utterances:
+    - "{user_addr}66大顺啊"
+    - "{user_addr}66岁了"
+    - "{user_addr}66块够花"
+    - "{user_addr}考66分"
+    - "{user_addr}66折划算"
+  responses:
+    - "(尾巴翘) 66大顺!{user_addr}超吉利嗷呜笨猫沾沾喜气ฅฅ"
+    - "哼～66岁正享福呢{user_addr}是猫猫眼里的男神喵"
+    - "(摇尾) 66块够吃顿好的!{user_addr}请客嘛笨蛋~"
+    - "(蹦) 66折?!{user_addr}超划算笨猫陪你买买买~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_067_001
+  intent: playful
+  keywords: [67, 六十七, 67度, 67岁, 67分]
+  utterances:
+    - "{user_addr}67度高温"
+    - "{user_addr}67岁退休"
+    - "{user_addr}考了67分"
+    - "{user_addr}67块够花"
+    - "{user_addr}67公斤"
+  responses:
+    - "(化掉) 67度?{user_addr}地球完蛋啦嗷呜笨猫先撤了ฅฅ"
+    - "哼～67岁退休生活惬意呢{user_addr}带笨猫一起喵"
+    - "(凑近) 67分及格啦~{user_addr}笨猫陪你庆祝!"
+    - "(摇尾) 67块够吃顿外卖+奶茶!{user_addr}请客嘛笨蛋~"
+  cooldown_seconds: 60
+  weight: 1.0

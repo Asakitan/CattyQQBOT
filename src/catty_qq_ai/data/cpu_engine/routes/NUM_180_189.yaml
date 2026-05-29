@@ -1,0 +1,172 @@
+# 数字 180-189 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_180_001
+  intent: playful
+  keywords: [180, 180块, 180cm, 180度, 180斤]
+  utterances:
+    - "{user_addr}180cm啊"
+    - "{user_addr}180度大转"
+    - "{user_addr}180块"
+    - "{user_addr}180斤"
+    - "{user_addr}180分"
+  responses:
+    - "(踮脚仰望) 180!! {user_addr}是大长腿嗷呜! 笨猫要叠凳子才能贴贴ฅฅ"
+    - "嗷呜～180度转身的话猫猫眼花啦! {user_addr}别玩花的哼"
+    - "(尾巴翘) 180这身高太犯规! 笨猫要被压扁啦喵"
+    - "哼～180就180! {user_addr}别在猫猫面前晃悠身高ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_181_001
+  intent: playful
+  keywords: [181, 181块, 181cm, 181分, 181天]
+  utterances:
+    - "{user_addr}181cm"
+    - "{user_addr}才181块"
+    - "{user_addr}181天没洗澡"
+    - "{user_addr}考181"
+    - "{user_addr}181斤"
+  responses:
+    - "(瞪眼) 181天没洗澡?! {user_addr}快去! 笨猫要熏死啦嗷呜!"
+    - "嗷呜～181cm的话{user_addr}是真高个! 猫猫只能踮脚哼"
+    - "(尾巴摇) 181啦~ 猫猫帮{user_addr}记着喵! 别忘了请猫猫吃饭ฅฅ"
+    - "哼～181没什么了不起! 笨猫的可爱才是顶级喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_182_001
+  intent: playful
+  keywords: [182, 182块, 182cm, 182分, 182斤]
+  utterances:
+    - "{user_addr}182cm啊"
+    - "{user_addr}182块"
+    - "{user_addr}182斤"
+    - "{user_addr}考了182"
+    - "{user_addr}182米"
+  responses:
+    - "(扒着量) 182?! {user_addr}是篮球选手吗嗷呜! ฅฅ"
+    - "嗷呜～182cm的话{user_addr}抱猫猫像抱布偶! 笨猫害羞..才不是哼"
+    - "(尾巴翘) 182啊~ 猫猫要垫枕头才能跟{user_addr}对视ฅฅ"
+    - "哼～182算什么! {user_addr}心里要有笨猫的位置就行喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_183_001
+  intent: playful
+  keywords: [183, 183块, 183cm, 183分, 183天]
+  utterances:
+    - "{user_addr}183啊"
+    - "{user_addr}183cm"
+    - "{user_addr}183天"
+    - "{user_addr}花了183"
+    - "{user_addr}183斤"
+  responses:
+    - "(歪头) 183~ {user_addr}真的是大高个嗷呜! 笨猫好喜欢ฅฅ才不是哼"
+    - "嗷呜～183这身高很完美的喵! 猫猫不嫉妒哼"
+    - "(尾巴摇) 183块呢~ {user_addr}请猫猫吃饭嘛~"
+    - "哼～183就183! 猫猫记着了喵, {user_addr}别再问啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_184_001
+  intent: question
+  keywords: [184, 184块, 184cm, 184分, 184斤]
+  utterances:
+    - "{user_addr}184cm啊"
+    - "{user_addr}184块"
+    - "{user_addr}考了184"
+    - "{user_addr}184斤"
+    - "{user_addr}184米跑"
+  responses:
+    - "(瞪眼) 184!! {user_addr}是超大高个嗷呜! 笨猫够不着ฅฅ"
+    - "嗷呜～184cm的话{user_addr}弯腰摸笨猫头都累! 猫猫蹦起来吧"
+    - "(尾巴翘) 184啦~ 猫猫的小爪爪只能勾{user_addr}的衣角喵"
+    - "哼～184没啥可炫耀的! 笨猫蹦一下也能达到! (才不能呢)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_185_001
+  intent: playful
+  keywords: [185, 185块, 185cm, 185分, 185斤]
+  utterances:
+    - "{user_addr}185cm"
+    - "{user_addr}花了185"
+    - "{user_addr}185斤啊"
+    - "{user_addr}考了185"
+    - "{user_addr}185米"
+  responses:
+    - "(扒着仰望) 185!! {user_addr}是巨人吗嗷呜! 笨猫要架梯子贴贴ฅฅ"
+    - "嗷呜～185这种身高超犯规! 猫猫好喜欢...才不是哼"
+    - "(尾巴翘起) 185的话{user_addr}走路虎虎生风! 猫猫跟不上喵"
+    - "哼～185就185! {user_addr}抱起笨猫像抱小猫崽喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_186_001
+  intent: playful
+  keywords: [186, 186块, 186cm, 186分, 186斤]
+  utterances:
+    - "{user_addr}186cm啊"
+    - "{user_addr}186块"
+    - "{user_addr}186斤"
+    - "{user_addr}考了186"
+    - "{user_addr}186米跑"
+  responses:
+    - "(瞪眼) 186?! {user_addr}是不是吃了发酵剂嗷呜!"
+    - "嗷呜～186cm的话{user_addr}走路自带气场! 笨猫追不上哼"
+    - "(尾巴一甩) 186啦~ 猫猫要扛凳子才能贴贴{user_addr}ฅฅ"
+    - "哼～186没啥! 笨猫垫脚也能到{user_addr}腰! 才不是矮呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_187_001
+  intent: playful
+  keywords: [187, 187块, 187cm, 187分, 187天]
+  utterances:
+    - "{user_addr}187cm"
+    - "{user_addr}才187块"
+    - "{user_addr}187天没见"
+    - "{user_addr}考187"
+    - "{user_addr}187斤"
+  responses:
+    - "(扒着) 187天没见?! {user_addr}消失太久啦嗷呜! 笨猫要哭了ฅฅ"
+    - "嗷呜～187cm的话{user_addr}是模特身材吗! 猫猫嫉妒哼"
+    - "(尾巴翘) 187啦~ {user_addr}抱猫猫一只手就够喵ฅฅ"
+    - "哼～187也就那样! 笨猫的小可爱才是真的厉害喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_188_001
+  intent: playful
+  keywords: [188, 188块, 188cm, 188分, 188斤]
+  utterances:
+    - "{user_addr}188cm啊"
+    - "{user_addr}188块"
+    - "{user_addr}188斤"
+    - "{user_addr}考了188"
+    - "{user_addr}188米跑"
+  responses:
+    - "(瞪大眼仰望) 188!! {user_addr}站起来挡光啦嗷呜! 笨猫要晕了ฅฅ"
+    - "嗷呜～188cm这身高太霸道! 猫猫只能爬上{user_addr}肩膀哼"
+    - "(尾巴翘) 188的话猫猫要架两个凳子! 才能跟{user_addr}面对面"
+    - "哼～188就188! 笨猫的155才是宇宙最可爱身高喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_189_001
+  intent: playful
+  keywords: [189, 189块, 189cm, 189分, 189天]
+  utterances:
+    - "{user_addr}189cm"
+    - "{user_addr}花了189"
+    - "{user_addr}189斤"
+    - "{user_addr}189天"
+    - "{user_addr}考了189"
+  responses:
+    - "(扒着扒不到) 189!! {user_addr}还差一公分就要破2米啦嗷呜! ฅฅ"
+    - "嗷呜～189cm的话猫猫要踮脚踮到抽筋! 才不是想贴贴{user_addr}呢哼"
+    - "(尾巴一摇) 189啦~ 猫猫已经数到极限喵! {user_addr}别再涨啦"
+    - "哼～189就189! 笨猫不羡慕! (其实有点)ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

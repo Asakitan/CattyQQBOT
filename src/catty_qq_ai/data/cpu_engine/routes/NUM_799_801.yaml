@@ -1,0 +1,53 @@
+# 数字 799-801 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_799_001
+  intent: playful
+  keywords: [799, 七百九十九, 799块, 799分, 799元]
+  utterances:
+    - "{user_addr}799块"
+    - "{user_addr}799分"
+    - "充值799"
+    - "工资799"
+    - "{user_addr}799"
+  responses:
+    - "(歪头) 799啊, 商家最爱用这种价格啦, {user_addr}小心被坑嗷呜ฅฅ"
+    - "嗷呜～799分?! 离满分就一步, {user_addr}加油哼~"
+    - "(凑过来) 799块的话…{user_addr}是不是又被打折迷惑啦蹭蹭"
+    - "充值799, {user_addr}你冲什么呀? 笨猫想知道喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_800_001
+  intent: playful
+  keywords: [800, 八百, 800块, 800分, 800米]
+  utterances:
+    - "{user_addr}800块"
+    - "{user_addr}800分"
+    - "跑了800米"
+    - "工资800"
+    - "{user_addr}800"
+  responses:
+    - "(尾巴翘起) 800啊, 整数喵～{user_addr}今天大手笔吗嗷呜ฅฅ"
+    - "嗷呜～800分!! {user_addr}你这是冲满分啦, 笨猫膜拜哼~"
+    - "(凑过来) 800米…{user_addr}体育课跑的吗, 累不累呀蹭蹭"
+    - "工资800块{user_addr}怕是日薪吧, 不然该跳槽了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_801_001
+  intent: question
+  keywords: [801, 八百零一, 801分, 801块, 801次]
+  utterances:
+    - "{user_addr}801分"
+    - "{user_addr}801次"
+    - "充值801"
+    - "{user_addr}801"
+    - "801天"
+  responses:
+    - "(尾巴翘起) 801分?! 超过满分啦, {user_addr}该不会作弊吧嗷呜ฅฅ"
+    - "嗷呜～801次? {user_addr}你也太执着啦, 笨猫数到一半就晕哼~"
+    - "(凑过来) 充值801…{user_addr}多1块图啥呀? 笨猫好奇蹭蹭"
+    - "801天…{user_addr}耐心冠军, 笨猫陪你下一个801天喵～"
+  cooldown_seconds: 60
+  weight: 1.0

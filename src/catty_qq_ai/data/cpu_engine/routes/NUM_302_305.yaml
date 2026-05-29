@@ -1,0 +1,70 @@
+# 数字 302-305 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_302_001
+  intent: playful
+  keywords: [302, "302块", "302分", "302天", "302跳转"]
+  utterances:
+    - "{user_addr}302块"
+    - "考302分"
+    - "{user_addr}302跳转"
+    - "等了302天"
+    - "302米跑步"
+  responses:
+    - "(竖耳朵) 302 跳转?! {user_addr}是程序员嘛~ 笨猫听不懂嗷呜～ฅฅ"
+    - "嗷呜～302 块超过 300 啦! {user_addr}土豪呢蹭蹭!"
+    - "(尾巴翘) 302 分突破 300 啦{user_addr}~ 笨猫给你掌声喵!"
+    - "哼～302 天太久{user_addr}也太能等! 笨猫敬佩~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_303_001
+  intent: question
+  keywords: [303, "303块", "303分", "303次", "303号"]
+  utterances:
+    - "{user_addr}303块买啥"
+    - "考303分"
+    - "{user_addr}303次了"
+    - "翻到303页"
+    - "303人在线"
+  responses:
+    - "(凑过去) 303 块?! {user_addr}给猫猫看看清单嗷呜～ฅฅ"
+    - "嗷呜～303 分!! {user_addr}超过 300 笨猫给你抱抱蹭蹭!"
+    - "(累瘫) 303 次?! {user_addr}饶了猫猫吧～喵呜!"
+    - "哼～303 人在线热闹~ {user_addr}笨猫第 304 个喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_304_001
+  intent: playful
+  keywords: [304, "304块", "304分", "304天", "304号"]
+  utterances:
+    - "{user_addr}304块"
+    - "304不锈钢"
+    - "考304分"
+    - "{user_addr}304天纪念"
+    - "等了304次"
+  responses:
+    - "(尾巴翘) 304 不锈钢嘛{user_addr}! 笨猫听过的嗷呜～ฅฅ"
+    - "嗷呜～304 分!! {user_addr}稳稳超过 300 喵~ 笨猫骄傲!"
+    - "(歪头) 304 天?! {user_addr}是不是有什么特殊日子哼!"
+    - "哼～304 次也太多啦{user_addr}~ 猫猫记不清了蹭蹭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_305_001
+  intent: question
+  keywords: [305, "305块", "305分", "305天", "305米"]
+  utterances:
+    - "{user_addr}305块够吗"
+    - "考了305分"
+    - "等了305天"
+    - "{user_addr}305号"
+    - "跑了305米"
+  responses:
+    - "(扒钱包) 305 块买啥啦{user_addr}~ 笨猫帮你看划不划算嗷呜～ฅฅ"
+    - "嗷呜～305 分超 300 啦! {user_addr}笨猫给你抱抱喵蹭蹭!"
+    - "(竖耳朵) 305 天好长喵! {user_addr}是不是有特别纪念哼!"
+    - "哼～305 米跑完{user_addr}就能歇了, 笨猫给你递水ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

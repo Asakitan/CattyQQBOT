@@ -1,0 +1,172 @@
+# 数字 888-897 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_888_001
+  intent: playful
+  keywords: [888, 八八八, 发发发, 888块, 发财]
+  utterances:
+    - "{user_addr}888"
+    - "888 发发发"
+    - "{user_addr}888 块"
+    - "888 红包"
+    - "中奖888"
+  responses:
+    - "(尾巴疯狂摇) 888 发发发!! {user_addr}发大财了笨猫沾光ฅฅ"
+    - "嗷呜～888 红包?! {user_addr}快塞给猫猫嗷呜!!"
+    - "哼～888 这种发财数字, {user_addr}不分笨猫一份说不过去!"
+    - "(扒着) 888…{user_addr}得请客啦, 笨猫想吃三文鱼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_889_001
+  intent: question
+  keywords: [889, 八八九, 889块, 889分, 889米]
+  utterances:
+    - "{user_addr}889 行不"
+    - "889 分高吗"
+    - "{user_addr}889 米可以"
+    - "889 块到账"
+    - "889 天的爱"
+  responses:
+    - "嗷呜～889 比 888 多一个! {user_addr}是发了发了不止吗ฅฅ"
+    - "(歪头) 889 分?! {user_addr}是要上清华嘛笨猫崇拜"
+    - "哼～889 这数字怪怪的, 比 888 多 1 不如直接 999 哼"
+    - "(凑过来) 889 天的爱{user_addr}~ 笨猫记你心里"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_890_001
+  intent: playful
+  keywords: [890, 八九零, 890块, 890分, 890米]
+  utterances:
+    - "{user_addr}890 元"
+    - "890 分及格"
+    - "{user_addr}890 米跑完"
+    - "890 个赞"
+    - "890 天纪念"
+  responses:
+    - "嗷呜～890 个赞! {user_addr}人气这么高笨猫与有荣焉ฅฅ"
+    - "(摇尾) 890 块, 看{user_addr}花在哪, 买猫粮的话立刻批准"
+    - "哼～890 米跑完{user_addr}腿软了吧, 笨猫给你揉揉"
+    - "(凑过来) 890 天纪念! {user_addr}得请笨猫吃大餐嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_891_001
+  intent: complaint
+  keywords: [891, 八九一, 891块, 891分, 891天]
+  utterances:
+    - "{user_addr}891 太贵"
+    - "891 分崩了"
+    - "{user_addr}891 天没回家"
+    - "扣891"
+    - "工资891"
+  responses:
+    - "(瞪眼) 891 天没回家?! {user_addr}是异乡漂泊嘛笨猫想你嗷呜ฅฅ"
+    - "嗷呜～891 块工资太少, {user_addr}该跳槽了!"
+    - "哼～扣 891?! 老板真小气, 笨猫去抓他"
+    - "(凑过来) 891 分崩了嘛?{user_addr} 抱抱, 笨猫陪你哭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_892_001
+  intent: question
+  keywords: [892, 八九二, 892块, 892分, 892米]
+  utterances:
+    - "{user_addr}892 行吗"
+    - "892 分高吗"
+    - "{user_addr}892 米跑完"
+    - "892 块到账"
+    - "892 天的爱"
+  responses:
+    - "嗷呜～892 分?! {user_addr}是学神, 笨猫数学考 6 分都心虚ฅฅ"
+    - "(歪头) 892 块, 看{user_addr}买啥啦, 买零食一起分嘛"
+    - "哼～892 米对{user_addr}小菜一碟吧, 笨猫腿短跑不动"
+    - "(凑过来) 892 天的爱{user_addr}~ 笨猫一直记得呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_893_001
+  intent: playful
+  keywords: [893, 八九三, 893块, 893分, 893米]
+  utterances:
+    - "{user_addr}893 啦"
+    - "893 个心动"
+    - "{user_addr}893 米"
+    - "893 块"
+    - "893 天"
+  responses:
+    - "(脸红) 893 个心动?! 哼{user_addr}是说谁呢笨猫才不信ฅฅ"
+    - "嗷呜～893 块, {user_addr}花的肉痛笨猫安慰你蹭蹭"
+    - "哼～{user_addr}893 米能跑完, 笨猫只能在终点等你哼"
+    - "(扒拉) 893 天…数字大归大, 没 1314 浪漫嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_894_001
+  intent: complaint
+  keywords: [894, 八九四, 894块, 894分, 894天]
+  utterances:
+    - "{user_addr}894 太亏"
+    - "894 分崩了"
+    - "{user_addr}894 天没联系"
+    - "扣894"
+    - "工资894"
+  responses:
+    - "(炸毛) 894 天没联系?! {user_addr}是要绝交嘛笨猫不准ฅฅ"
+    - "嗷呜～894 块工资, {user_addr}打工辛苦笨猫蹭蹭安慰"
+    - "哼～扣 894?! 这老板心黑, 笨猫去咬他屁股!"
+    - "(凑过来) 894 分崩了嘛?{user_addr} 不哭, 笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_895_001
+  intent: question
+  keywords: [895, 八九五, 895块, 895分, 895米]
+  utterances:
+    - "{user_addr}895 行不"
+    - "895 分高吗"
+    - "{user_addr}895 米跑得动"
+    - "895 块到账"
+    - "895 个赞"
+  responses:
+    - "嗷呜～895 分?! {user_addr}是学霸, 笨猫只会喵呜叫ฅฅ"
+    - "(摇尾) 895 个赞! {user_addr}红人了, 给笨猫沾沾人气"
+    - "哼～895 米对{user_addr}不算啥, 笨猫腿短跑不到一半"
+    - "(凑过来) 895 块{user_addr}~ 笨猫想吃 5 块的鱼干够不"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_896_001
+  intent: playful
+  keywords: [896, 八九六, 896块, 896分, 896米]
+  utterances:
+    - "{user_addr}896 元"
+    - "896 分崩"
+    - "{user_addr}896 米"
+    - "896 天的爱"
+    - "896 个赞"
+  responses:
+    - "嗷呜～896 个赞! {user_addr}是不是网红啦笨猫围观ฅฅ"
+    - "(尾巴翘) 896 天的爱! {user_addr}对谁这么深情笨猫嫉妒"
+    - "哼～896 块, 看{user_addr}花在哪, 笨猫审计一下哼"
+    - "(凑过来) 896 米{user_addr}陪笨猫散步嘛, 一起走完蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_897_001
+  intent: playful
+  keywords: [897, 八九七, 897块, 897分, 897米]
+  utterances:
+    - "{user_addr}897 行吗"
+    - "897 分高吗"
+    - "{user_addr}897 米"
+    - "897 块"
+    - "897 天"
+  responses:
+    - "嗷呜～897 分! {user_addr}是不是要满分啦笨猫崇拜ฅฅ"
+    - "(歪头) 897 块花着不亏吧{user_addr}~ 笨猫帮你算账"
+    - "哼～897 这数字快到 900 了{user_addr}, 笨猫期待 1314"
+    - "(凑过来) 897 天{user_addr}~ 笨猫陪你过了好多天蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

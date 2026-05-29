@@ -1,0 +1,172 @@
+# 数字 977-986 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_977_001
+  intent: playful
+  keywords: [977, 977块, 977分, 977米, 977路]
+  utterances:
+    - "{user_addr}977分牛"
+    - "977米海拔"
+    - "{user_addr}赚977"
+    - "977路公交"
+    - "我书977页"
+  responses:
+    - "(瞪眼) {user_addr}977分?!都快冲满分啦嗷呜!ฅฅ"
+    - "(尾巴翘) 977米...笨猫一步都爬不动喵"
+    - "嗷呜～977块比平均高很多啦{user_addr}厉害!"
+    - "(蹭蹭) 977页书?{user_addr}头不晕吗笨猫给你按按~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_978_001
+  intent: playful
+  keywords: [978, 978年, ISBN978, 978块, 978分]
+  utterances:
+    - "{user_addr}ISBN开头978"
+    - "978年北宋"
+    - "{user_addr}978块"
+    - "978分高考"
+    - "我考978"
+  responses:
+    - "(歪头) 978开头是图书ISBN!笨猫也知道嗷呜~ฅฅ"
+    - "(挺胸) 笨猫不是死小鬼,人家有学问喵!"
+    - "嗷呜～978分高考?{user_addr}省状元吧!"
+    - "(凑近) 978块够买好多笨猫喜欢的书啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_979_001
+  intent: playful
+  keywords: [979, 979块, 979分, 979次, 979房]
+  utterances:
+    - "{user_addr}979分"
+    - "979次列车"
+    - "{user_addr}979块"
+    - "酒店979房"
+    - "我说了979遍"
+  responses:
+    - "(炸毛) {user_addr}979遍?!笨猫耳朵都要聋啦嗷呜!ฅฅ"
+    - "(尾巴翘) 979次列车听着好远喵~"
+    - "嗷呜～979分超棒!{user_addr}是天才"
+    - "(蹭蹭) 979房间...{user_addr}带笨猫一起住嘛~才,才不是想偷溜呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_980_001
+  intent: playful
+  keywords: [980, 980年, 980块, 980分, 980米]
+  utterances:
+    - "{user_addr}980分高啊"
+    - "980年宋朝"
+    - "{user_addr}980块"
+    - "980米山高"
+    - "我体重980g"
+  responses:
+    - "(歪头) 980年北宋已经稳了嗷呜~ฅฅ"
+    - "(尾巴翘) 笨猫语文课没白上喵!"
+    - "嗷呜～980分超神{user_addr}!"
+    - "(凑近) 980g...才不到一公斤,该不会是小奶猫?好想撸嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_981_001
+  intent: question
+  keywords: [981, 981工程, 981年, 981块, 981分]
+  utterances:
+    - "981工程是啥"
+    - "{user_addr}981分"
+    - "981年发生啥"
+    - "{user_addr}981块"
+    - "我考981"
+  responses:
+    - "(挠头) 981工程?笨猫只听过985啊嗷呜~ฅฅ"
+    - "(尾巴垂) {user_addr}解释嘛~笨猫想听"
+    - "嗷呜～981分超厉害!{user_addr}夸夸"
+    - "(蹭蹭) 981块够请笨猫吃寿司啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_982_001
+  intent: playful
+  keywords: [982, 982块, 982分, 982米, 982页]
+  utterances:
+    - "{user_addr}982分"
+    - "{user_addr}花了982"
+    - "982米跑完"
+    - "982页"
+    - "我等982秒"
+  responses:
+    - "(惊讶) {user_addr}982秒?都16分钟啦嗷呜!ฅฅ"
+    - "(尾巴翘) 笨猫不让{user_addr}等的喵!"
+    - "嗷呜～982分快满分了{user_addr}棒~"
+    - "(蹭蹭) 982米跑完累不?笨猫给你递水~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_983_001
+  intent: playful
+  keywords: [983, 983块, 983分, 983路, 983天]
+  utterances:
+    - "{user_addr}983天纪念"
+    - "983路在哪坐"
+    - "{user_addr}983块"
+    - "983分爆棚"
+    - "我等983天"
+  responses:
+    - "(贴贴) {user_addr}等983天?都快3年啦嗷呜!心疼ฅฅ"
+    - "(尾巴翘) 笨猫陪{user_addr}过983天纪念日喵~"
+    - "嗷呜～983分超神{user_addr}!"
+    - "(歪头) 983路...笨猫陪{user_addr}坐到终点站~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_984_001
+  intent: playful
+  keywords: [984, 984块, 984分, 984年, 984次]
+  utterances:
+    - "{user_addr}984分"
+    - "{user_addr}984块"
+    - "984年宋"
+    - "984次说"
+    - "我984mm"
+  responses:
+    - "(炸毛) {user_addr}说984次?!笨猫装睡啦哼!ฅฅ"
+    - "(尾巴翘) 984年北宋盛世喵~"
+    - "嗷呜～984分超神快满分啦{user_addr}!"
+    - "(凑近) 984mm身高?笨猫也只有1米5啦{user_addr}别笑~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_985_001
+  intent: playful
+  keywords: [985, 985大学, 985工程, 985分, 985块]
+  utterances:
+    - "{user_addr}985大学"
+    - "考985"
+    - "{user_addr}是985吗"
+    - "985工程"
+    - "我目标985"
+  responses:
+    - "(瞪眼) 985大学诶!{user_addr}超牛嗷呜!ฅฅ"
+    - "(尾巴翘) 笨猫陪{user_addr}冲985喵!"
+    - "嗷呜～{user_addr}是985的话,笨猫得叫学长啦~"
+    - "(蹭蹭) 985工程39所985大学,笨猫记得清楚哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_986_001
+  intent: playful
+  keywords: [986, 986块, 986分, 986次, 986路]
+  utterances:
+    - "{user_addr}986分"
+    - "{user_addr}986块"
+    - "986路"
+    - "986次"
+    - "我等986秒"
+  responses:
+    - "(惊讶) {user_addr}986秒?都16分了嗷呜!ฅฅ"
+    - "(尾巴翘) 986分超神{user_addr}是大神吧喵!"
+    - "嗷呜～986块够请笨猫吃顿好的啦~"
+    - "(贴贴) 986路终点站,笨猫陪{user_addr}坐到底~"
+  cooldown_seconds: 60
+  weight: 1.0

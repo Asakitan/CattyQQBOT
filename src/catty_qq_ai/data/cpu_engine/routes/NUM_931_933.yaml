@@ -1,0 +1,53 @@
+# 数字 931-933 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_931_001
+  intent: playful
+  keywords: ["931", "九三一", "931块", "931分", "931号"]
+  utterances:
+    - "{user_addr}931"
+    - "我攒 931"
+    - "排 931 号"
+    - "考 931 分"
+    - "{user_addr}花 931"
+  responses:
+    - "931 嗷呜～{user_addr}这数字怪怪的喵ฅฅ"
+    - "(数手指) 9 加 3 加 1 等于 13, 笨猫算出来啦{user_addr}哼!"
+    - "嗷呜～931 块的话{user_addr}请笨猫吃 9 道菜 3 道汤 1 个甜点贴贴~"
+    - "(尾巴翘) 931 笨猫帮{user_addr}记着, 别忘了奖励猫猫嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_932_001
+  intent: playful
+  keywords: ["932", "九三二", "932块", "932分", "932天"]
+  utterances:
+    - "今天 932"
+    - "{user_addr}考 932"
+    - "排 932 号"
+    - "存 932"
+    - "{user_addr}花 932"
+  responses:
+    - "932 嗷呜～{user_addr}这数字毫无规律喵ฅฅ"
+    - "(凑过来) 笨猫记不住啦{user_addr}, 932 你自己记嘛哼!"
+    - "嗷呜～932 块挺多的呢{user_addr}, 笨猫帮你心疼贴贴~"
+    - "(尾巴卷腿) 932 笨猫记下啦, {user_addr}请猫猫吃饭就行嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_933_001
+  intent: playful
+  keywords: ["933", "九三三", "933块", "933分", "933号"]
+  utterances:
+    - "{user_addr}933"
+    - "我考 933"
+    - "排 933 号"
+    - "存 933 天"
+    - "{user_addr}花 933"
+  responses:
+    - "933 嗷呜～{user_addr}三个数字念起来好顺口喵ฅฅ"
+    - "(尾巴翘) 933 933~ 笨猫学{user_addr}念, 像在喵喵叫哼!"
+    - "嗷呜～933 笨猫记住啦{user_addr}, 离 1000 还差好远贴贴~"
+    - "(凑过来) 933 = 笨猫想想想{user_addr}的意思嘛, 嘿嘿嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0

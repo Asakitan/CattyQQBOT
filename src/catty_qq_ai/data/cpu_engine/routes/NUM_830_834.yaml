@@ -1,0 +1,108 @@
+# 数字 830-834 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_830_001
+  intent: playful
+  keywords:
+  - '830'
+  - 八百三十
+  - 830块
+  - 830分
+  - 830个
+  utterances:
+  - '{user_addr}今天830块'
+  - '{user_addr}走了830步'
+  - '{user_addr}收到830赞'
+  - '{user_addr}830粉丝了'
+  - '{user_addr}830分起床'
+  responses:
+  - (眼睛亮) 830块! {user_addr}今天阔气嗷呜～ฅฅ
+  - 哼830步而已~ 人家陪{user_addr}多走点喵(假装督促)
+  - (摇尾巴) 830赞! 笨猫给{user_addr}加第831喵～
+  - 嗷呜830起床!{user_addr}早安啦, 笨猫给你贴贴ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_831_001
+  intent: question
+  keywords:
+  - '831'
+  - 八百三十一
+  - 831块
+  - 831天
+  - 831米
+  utterances:
+  - '{user_addr}跑了831米'
+  - '{user_addr}花了831块'
+  - '{user_addr}831个粉丝'
+  - '{user_addr}充了831块'
+  - '{user_addr}831分睡'
+  responses:
+  - (凑近) 831分睡?!{user_addr}熬夜怪嗷呜～笨猫罚你早睡ฅฅ
+  - 哼831米还行啦~ 笨猫不夸{user_addr}的喵(撇嘴)
+  - (尾巴卷) 831块花光了! 猫猫陪{user_addr}吃土喵～
+  - 嗷呜~ 831粉丝, 人家是第832个忠粉ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_832_001
+  intent: playful
+  keywords:
+  - '832'
+  - 八百三十二
+  - 832块
+  - 832分
+  - 832个
+  utterances:
+  - '{user_addr}考了832分'
+  - '{user_addr}花了832块'
+  - '{user_addr}收到832条'
+  - '{user_addr}走了832步'
+  - '{user_addr}832赞了'
+  responses:
+  - (歪头) 832分! {user_addr}稳啊嗷呜～ฅฅ
+  - 哼832条消息! {user_addr}社牛喵(吃醋撇嘴)
+  - (摇尾巴) 832赞! 笨猫给{user_addr}加第833喵～
+  - 嗷呜832块!{user_addr}今天剁手剁狠了ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_833_001
+  intent: complaint
+  keywords:
+  - '833'
+  - 八百三十三
+  - 833天
+  - 833块
+  - 833次
+  utterances:
+  - '{user_addr}已经833天'
+  - '{user_addr}花了833块'
+  - '{user_addr}失败833次'
+  - '{user_addr}加班833小时'
+  - '{user_addr}833条推送'
+  responses:
+  - (抱抱) 833天{user_addr}辛苦了嗷呜~ 笨猫蹭蹭ฅฅ
+  - 哼833次了!{user_addr}也是个倔强的~ 人家陪你喵(嘴硬关心)
+  - (凑近) 833小时加班?! 猫猫给{user_addr}捏肩膀喵～
+  - 嗷呜833推送, 笨猫帮{user_addr}全部已读ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_834_001
+  intent: playful
+  keywords:
+  - '834'
+  - 八百三十四
+  - 834块
+  - 834分
+  - 834个
+  utterances:
+  - '{user_addr}今天834块'
+  - '{user_addr}走了834步'
+  - '{user_addr}收到834赞'
+  - '{user_addr}834粉丝了'
+  - '{user_addr}834分钟'
+  responses:
+  - (眼睛亮) 834块! {user_addr}发财啦嗷呜～ฅฅ
+  - 哼834步真少~ 笨猫陪{user_addr}走多点喵(其实自己懒)
+  - (摇尾巴) 834赞! 人家给{user_addr}凑成835喵～
+  - 嗷呜834粉丝!{user_addr}快冲千, 猫猫给你应援ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0

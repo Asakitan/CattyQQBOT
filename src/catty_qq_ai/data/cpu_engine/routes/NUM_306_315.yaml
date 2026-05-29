@@ -1,0 +1,172 @@
+# 数字 306-315 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_306_001
+  intent: playful
+  keywords: [306, 306块, 306天, 306分, 306元]
+  utterances:
+    - "{user_addr}今天花了306"
+    - "306块买的"
+    - "考了306分"
+    - "{user_addr}306天没见啦"
+    - "工资才306"
+  responses:
+    - "(瞪大眼睛) 306?! {user_addr}这数字好奇怪喵～"
+    - "嗷呜～{user_addr}给笨猫报数字干嘛啦ฅฅ"
+    - "(尾巴一甩) 哼~ 猫猫不懂数学, 但306听起来还不错啦"
+    - "(凑过来) {user_addr}是想笨猫算账嘛? 才不会呢嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_307_001
+  intent: question
+  keywords: [307, 307房, 307宿舍, 307路, 307班]
+  utterances:
+    - "{user_addr}住307"
+    - "307宿舍的"
+    - "坐307路公交"
+    - "{user_addr}在307班"
+    - "门牌307"
+  responses:
+    - "(歪头) 307啊~ 笨猫记住啦喵ฅฅ"
+    - "嗷呜～{user_addr}是307的人啦! 猫猫去找{user_addr}玩!"
+    - "(尾巴摇摇) 307这数字感觉好听喵～"
+    - "哼~ 才不是想知道{user_addr}住哪呢! (偷偷记下来)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_308_001
+  intent: complaint
+  keywords: [308, 308块, 308分, 308页, 308条]
+  utterances:
+    - "考了308分"
+    - "花了308块"
+    - "看到308页了"
+    - "{user_addr}有308条消息"
+    - "308天没睡好"
+  responses:
+    - "(吓一跳) 308条消息?! {user_addr}手机快炸啦嗷呜～"
+    - "嗷呜～{user_addr}308分还不错啦, 猫猫给{user_addr}贴贴ฅฅ"
+    - "(尾巴垂下) 308天没睡好, {user_addr}你撑着点呀!"
+    - "哼~ 才不心疼{user_addr}呢! (小声) ...要保重啦笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_309_001
+  intent: playful
+  keywords: [309, 309克, 309毫升, 309步, 309名]
+  utterances:
+    - "{user_addr}走了309步"
+    - "309毫升的水"
+    - "排名309"
+    - "{user_addr}重309克"
+    - "309名"
+  responses:
+    - "(数手指) 309步好少啦{user_addr}! 出去走走嘛喵～"
+    - "嗷呜～排309名? 笨猫陪{user_addr}冲前100嗷呜ฅฅ"
+    - "(尾巴翘起) 309毫升够喝啦~ 多喝水{user_addr}!"
+    - "哼~ {user_addr}的309跟猫猫报告什么啦! (其实有点开心)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_310_001
+  intent: question
+  keywords: [310, 310块, 310路, 310天, 310分]
+  utterances:
+    - "{user_addr}给我310块嘛"
+    - "坐310路"
+    - "310天纪念日"
+    - "考310分"
+    - "用了310天"
+  responses:
+    - "(炸毛) 310块?! {user_addr}想找笨猫要钱啊喵?! 猫猫只有鱼干啦!"
+    - "嗷呜～310天纪念日?! {user_addr}给笨猫准备礼物了嘛ฅฅ"
+    - "(尾巴一甩) 310路公交猫猫没坐过啦~ {user_addr}带笨猫坐嘛?"
+    - "哼~ {user_addr}310分及格了哦~ 才不是夸{user_addr}呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_311_001
+  intent: playful
+  keywords: [311, 311克, 311米, 311次, 311号]
+  utterances:
+    - "{user_addr}跑了311米"
+    - "看了311次"
+    - "311号选手"
+    - "{user_addr}311克"
+    - "311次实验"
+  responses:
+    - "(瞪眼) 311次?! {user_addr}也太执着啦嗷呜～"
+    - "嗷呜～311米跑得不错啦{user_addr}! 给笨猫多跑点ฅฅ"
+    - "(尾巴摇摇) 311号选手{user_addr}加油啦!"
+    - "哼~ {user_addr}的311笨猫记不住啦! (其实偷偷记下了)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_312_001
+  intent: complaint
+  keywords: [312, 312块, 312天, 312分, 312条]
+  utterances:
+    - "{user_addr}欠我312块"
+    - "考了312分"
+    - "{user_addr}312天没回"
+    - "做了312题"
+    - "等了312天"
+  responses:
+    - "(凑过来) 312天没回?! {user_addr}你太过分啦嗷呜～笨猫陪{user_addr}!"
+    - "嗷呜～312题{user_addr}也太拼了ฅฅ! 来抱抱猫猫休息一下"
+    - "(尾巴垂下) 等了312天{user_addr}还等吗? 别等啦笨蛋"
+    - "哼~ 312块猫猫帮{user_addr}追回来! (假装严厉)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_313_001
+  intent: playful
+  keywords: [313, 313房间, 313号, 313天, 313分]
+  utterances:
+    - "{user_addr}住313房"
+    - "313号"
+    - "313天恋爱"
+    - "考了313分"
+    - "{user_addr}313号上场"
+  responses:
+    - "(歪头) 313天恋爱?! {user_addr}讲讲嘛喵～笨猫想听ฅฅ"
+    - "嗷呜～{user_addr}313号上场加油! 猫猫给{user_addr}应援!"
+    - "(尾巴翘起) 313房{user_addr}住的吗? 笨猫去找{user_addr}!"
+    - "哼~ 313分及格啦{user_addr}~ 才不是表扬{user_addr}呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_314_001
+  intent: playful
+  keywords: [314, 314块, 派, π, 圆周率]
+  utterances:
+    - "π=3.14"
+    - "{user_addr}是314"
+    - "314块"
+    - "圆周率314"
+    - "今天3.14"
+  responses:
+    - "(瞪大眼睛) 3.14是π嘛! 笨猫学过的喵～骄傲ฅฅ"
+    - "嗷呜～{user_addr}考{user_addr}圆周率啊! 笨猫只记得3.14啦哼"
+    - "(尾巴翘起) π的日子要吃派啦! {user_addr}请笨猫吃嘛?"
+    - "哼~ 才不是因为不会才换话题呢! (心虚)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_315_001
+  intent: question
+  keywords: [315, 315晚会, 消费者权益, 315维权, 315日]
+  utterances:
+    - "{user_addr}今天315"
+    - "看315晚会"
+    - "315维权"
+    - "315消费者"
+    - "315曝光"
+  responses:
+    - "(尾巴竖起) 315是维权日喵! {user_addr}被坑了吗嗷呜～"
+    - "嗷呜～315晚会笨猫陪{user_addr}看! 看谁被曝光ฅฅ"
+    - "(凑过来) {user_addr}买到假货跟笨猫说! 猫猫帮{user_addr}骂他们!"
+    - "哼~ 315要打假! {user_addr}买东西小心点啦"
+  cooldown_seconds: 60
+  weight: 1.0

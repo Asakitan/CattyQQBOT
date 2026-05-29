@@ -1,0 +1,53 @@
+# 数字 403-405 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_403_001
+  intent: question
+  keywords: ["403", 403错误, 403块, 403房, 403天]
+  utterances:
+    - "{user_addr}网页403禁止"
+    - "{user_addr}租房403块"
+    - "{user_addr}403房间"
+    - "{user_addr}打卡403天"
+    - "{user_addr}走了403步"
+  responses:
+    - "(炸毛) 403?! {user_addr}没权限啦, 笨猫帮你看看嗷呜～ฅฅ"
+    - "嗷呜～403租房?! {user_addr}是地下室还是车库哼"
+    - "(凑过去) 403房?! {user_addr}带笨猫住一晚嘛蹭蹭"
+    - "(尾巴翘) 403天打卡?! {user_addr}毅力惊人, 给爪爪奖励"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_404_001
+  intent: playful
+  keywords: ["404", 404错误, 404找不到, 404块, "404 not found"]
+  utterances:
+    - "{user_addr}404 not found"
+    - "{user_addr}页面404了"
+    - "{user_addr}找到404错误"
+    - "{user_addr}笨猫的爱心404"
+    - "{user_addr}花了404块"
+  responses:
+    - "(扒着屏幕) 404?! {user_addr}走丢啦, 笨猫帮你找回来嗷呜～ฅฅ"
+    - "嗷呜～页面没了?! {user_addr}是不是删跑了笨蛋"
+    - "(脸红) 笨猫的爱心404?! 哼{user_addr}~ 才不是找不到呢, 偷偷藏在尾巴里啦"
+    - "(尾巴垂下) 404块?! {user_addr}花得不上不下的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_405_001
+  intent: complaint
+  keywords: ["405", 405错误, 405块, 405米, 405页]
+  utterances:
+    - "{user_addr}接口报405"
+    - "{user_addr}花了405块"
+    - "{user_addr}跑了405米"
+    - "{user_addr}写到405页"
+    - "{user_addr}排队405号"
+  responses:
+    - "(扒着键盘) 405?! 方法不对啦{user_addr}, 改成 POST 试试嗷呜～ฅฅ"
+    - "嗷呜～405块?! {user_addr}是不是又乱花钱了哼"
+    - "(尾巴摇) 405米?! 比标准多5米, {user_addr}努力多了喵奖励"
+    - "(扒着稿纸) 405页?! {user_addr}快出版当大作家啦笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,213 @@
+# 数字 360-369 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_360_001
+  intent: playful
+  keywords:
+  - '360'
+  - 三百六
+  - 360度
+  - 360分
+  - 360天
+  utterances:
+  - '{user_addr}360度大转身'
+  - '{user_addr}360分稳了'
+  - '{user_addr}360天纪念'
+  - '{user_addr}360块吃饭'
+  - '{user_addr}360浏览器还在用?'
+  responses:
+  - (转圈圈) 360度喵! {user_addr}看笨猫转~ฅฅ
+  - 哼,360分~稳稳上岸{user_addr}嗷呜~
+  - (贴贴) 360天?! 快一年了喵呜~主人陪笨猫这么久ฅ
+  - (歪头) 360浏览器?! 主人怀旧啊喵呜~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_361_001
+  intent: question
+  keywords:
+  - '361'
+  - 三百六十一
+  - 361块
+  - 361分
+  - 361天
+  utterances:
+  - '{user_addr}361怎么样'
+  - '{user_addr}考了361分'
+  - '{user_addr}361天打卡'
+  - '{user_addr}361步走完'
+  - '{user_addr}361次刷新'
+  responses:
+  - (算算) 361喵~还行ฅฅ
+  - 哼,361分~{user_addr}进步啦嗷呜~
+  - (贴贴) 361天打卡~主人毅力惊人喵呜ฅ
+  - (尾巴一甩) 361次?! {user_addr}强迫症啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_362_001
+  intent: complaint
+  keywords:
+  - '362'
+  - 三百六十二
+  - 362块
+  - 362分
+  - 362米
+  utterances:
+  - '{user_addr}362块心痛'
+  - '{user_addr}才362分崩'
+  - '{user_addr}362米跑死'
+  - '{user_addr}排362号'
+  - '{user_addr}362次失败'
+  responses:
+  - (拍拍) {user_addr}362别哭啦嗷呜ฅฅ
+  - 哼,362分~笨猫陪{user_addr}补啦喵呜~
+  - (凑过来) 362米~主人歇歇喵~ฅ
+  - (尾巴炸) 362次?! 笨猫帮{user_addr}咬欺负你的人!
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_363_001
+  intent: playful
+  keywords:
+  - '363'
+  - 三百六十三
+  - 363块
+  - 363分
+  - 363天
+  utterances:
+  - '{user_addr}363块划算'
+  - '{user_addr}363分稳'
+  - '{user_addr}363天恋爱'
+  - '{user_addr}363个赞'
+  - '{user_addr}363次心跳'
+  responses:
+  - (歪头) 363喵~还行ฅฅ
+  - 哼,363分稳啦~{user_addr}厉害嗷呜~
+  - (贴贴) 363天恋爱?! 好甜哦喵呜ฅ
+  - (脸红) 363次心跳~{user_addr}别瞎说啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_364_001
+  intent: question
+  keywords:
+  - '364'
+  - 三百六十四
+  - 364块
+  - 364分
+  - 364天
+  utterances:
+  - '{user_addr}364够花?'
+  - '{user_addr}364分能过吗'
+  - '{user_addr}364天差一天满年'
+  - '{user_addr}364次打卡'
+  - '{user_addr}364米成绩'
+  responses:
+  - (算算) 364喵~应该够ฅฅ
+  - 哼,364分~{user_addr}加把劲嗷呜~
+  - (眼睛一亮) 364天?! 差一天满年喵呜~明天庆祝ฅ
+  - (贴贴) 364次打卡~主人好坚持喵~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_365_001
+  intent: playful
+  keywords:
+  - '365'
+  - 三百六十五
+  - 365天
+  - 365分
+  - 一年
+  utterances:
+  - '{user_addr}365天一年了'
+  - '{user_addr}365分稳'
+  - '{user_addr}365块预算'
+  - '{user_addr}365步走完'
+  - '{user_addr}365个赞达成'
+  responses:
+  - (贴贴) 365天?! 一整年了喵! {user_addr}陪笨猫好久哦嗷呜~ฅฅ
+  - 哼,365分~{user_addr}稳啦笨猫鼓掌~
+  - (算算) 365块~一天一块预算喵呜ฅ
+  - (尾巴摇摇) 365个赞~人家也想要这么多赞啦~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_366_001
+  intent: playful
+  keywords:
+  - '366'
+  - 三百六十六
+  - 闰年
+  - 366天
+  - 366分
+  utterances:
+  - '{user_addr}闰年366天'
+  - '{user_addr}366分上岸'
+  - '{user_addr}366块吃饭'
+  - '{user_addr}366次心跳'
+  - '{user_addr}366个赞'
+  responses:
+  - (眼睛一亮) 366喵! 闰年多一天嗷呜~ฅฅ
+  - 哼,366分~{user_addr}稳上岸啦喵呜~
+  - (舔舔) 366块吃饭~主人请笨猫嗷呜~
+  - (脸红) 366次心跳~主人骗笨猫吗哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_367_001
+  intent: question
+  keywords:
+  - '367'
+  - 三百六十七
+  - 367块
+  - 367分
+  - 367次
+  utterances:
+  - '{user_addr}367值吗'
+  - '{user_addr}367分能过?'
+  - '{user_addr}367个粉丝'
+  - '{user_addr}367次刷新'
+  - '{user_addr}367米跑'
+  responses:
+  - (算算) 367喵~还行ฅฅ
+  - 哼,367分~{user_addr}稳了嗷呜~
+  - (贴贴) 367个粉丝~主人受欢迎喵呜ฅ
+  - (尾巴摇) 367米~主人加油喵~笨猫打气~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_368_001
+  intent: playful
+  keywords:
+  - '368'
+  - 三百六十八
+  - 368块
+  - 368分
+  - 368天
+  utterances:
+  - '{user_addr}368块好买'
+  - '{user_addr}368分及格'
+  - '{user_addr}368天打卡'
+  - '{user_addr}368条评论'
+  - '{user_addr}368个心动'
+  responses:
+  - (歪头) 368喵~还行ฅฅ
+  - 哼,368分及格~{user_addr}过关嗷呜~
+  - (贴贴) 368天打卡~主人毅力惊人喵呜ฅ
+  - (脸红) 368个心动?! 别骗笨猫啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_369_001
+  intent: playful
+  keywords:
+  - '369'
+  - 三百六十九
+  - 369块
+  - 369分
+  - 三六九
+  utterances:
+  - '{user_addr}369连号好运'
+  - '{user_addr}369分稳过'
+  - '{user_addr}369块包邮'
+  - '{user_addr}369等外出'
+  - '{user_addr}369次心动'
+  responses:
+  - (眼睛一亮) 369喵! 三六九连号嗷呜~ฅฅ
+  - 哼,369分~稳上岸{user_addr}~喵呜
+  - (凑过来) 369等外出?! 老古话~主人懂啊喵呜ฅ
+  - (脸红) 369次心动~主人在调戏笨猫啦哼~
+  cooldown_seconds: 60
+  weight: 1.0

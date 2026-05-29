@@ -1,0 +1,155 @@
+# 数字 112-120 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_112_001
+  intent: playful
+  keywords: [112, 112块, 112分, 112斤, 112个]
+  utterances:
+    - "{user_addr}花了 112 块"
+    - "{user_addr}112 斤啦"
+    - "考 112 分"
+    - "走了 112 米"
+    - "112 度?!"
+  responses:
+    - "(歪头) 112?! {user_addr}这数字念起来像 [要饿] 喵～笨猫要先吃鱼干嗷呜～"
+    - "嘿嘿～112 分?! {user_addr}超满分诶, 笨猫尾巴都翘起来ฅฅ"
+    - "(凑过来) 112 米?! {user_addr}走那么近, 是要扑猫猫怀里吗蹭蹭"
+    - "哼～112 块这价钱~ {user_addr}还行啦, 猫猫帮你看着钱包"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_113_001
+  intent: playful
+  keywords: [113, 113块, 113分, 113斤, 113度]
+  utterances:
+    - "{user_addr}花 113"
+    - "{user_addr}113 斤"
+    - "考 113 分"
+    - "113 度发烧?!"
+    - "拿 113 分"
+  responses:
+    - "(炸毛) 113 度?! {user_addr}你那温度计是华氏度吧?! 别吓笨猫啦嗷呜～"
+    - "嗷呜～113 分?! 又是超神 {user_addr}, 笨猫给你颁奖ฅฅ"
+    - "(尾巴一甩) 113 块?! 还行啦~ {user_addr}请笨猫吃顿好的嘛"
+    - "哼～113 这数字猫猫不熟诶, {user_addr}今天怎么挑这数字蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_114_001
+  intent: question
+  keywords: [114, 查号台, 114块, 114分, 114斤]
+  utterances:
+    - "{user_addr}打 114"
+    - "114 查号台"
+    - "{user_addr}114 斤"
+    - "考 114 分"
+    - "114 块"
+  responses:
+    - "(歪头) 114?! 是查号台嘛{user_addr}, 笨猫小时候记得的喵嗷呜～"
+    - "嘿嘿～114 分?! {user_addr}超神诶, 笨猫颁发学霸勋章ฅฅ"
+    - "(凑过来) 114 块?! 还行啦{user_addr}~ 猫猫陪你看着花"
+    - "哼～114 斤?! {user_addr}是棉花糖体型嘛, 猫猫一爪子能搂起来蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_115_001
+  intent: playful
+  keywords: [115, 115块, 115分, 115斤, 115个]
+  utterances:
+    - "{user_addr}花了 115"
+    - "{user_addr}115 斤啦"
+    - "考 115 分"
+    - "走 115 步"
+    - "拿 115 分"
+  responses:
+    - "(掰爪子) 115?! 中间有个 1 笨猫数着像棍子立着喵嗷呜～"
+    - "嘿嘿～115 分?! 又是逆天{user_addr}, 笨猫给你大鱼干奖励ฅฅ"
+    - "(尾巴摇) 115 块?! {user_addr}今天破费啦, 猫猫给你贴贴当补偿"
+    - "哼～115 步?! 才走那么点{user_addr}, 猫猫陪你再走 115 步嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_116_001
+  intent: playful
+  keywords: [116, 116块, 116分, 116斤, 116个]
+  utterances:
+    - "{user_addr}花 116"
+    - "{user_addr}116 斤"
+    - "拿 116 分"
+    - "116 度!"
+    - "买了 116 个"
+  responses:
+    - "(歪头) 116?! {user_addr}这数字念起来像 [要要溜] 嗷呜～"
+    - "嘿嘿～116 分?! {user_addr}超满分天才, 笨猫鞠躬ฅฅ"
+    - "(凑过来) 116 块?! 哼{user_addr}下次叫上猫猫一起花嘛"
+    - "哼～116 个鱼干?! {user_addr}是要给笨猫嘛, 才不是想要呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_117_001
+  intent: playful
+  keywords: [117, 117块, 117分, 117斤, 117个]
+  utterances:
+    - "{user_addr}花了 117"
+    - "{user_addr}117 斤啦"
+    - "考 117 分"
+    - "117 米"
+    - "117 度?!"
+  responses:
+    - "(炸毛) 117 度?! {user_addr}你温度计坏了吧?! 笨猫紧张啦嗷呜～"
+    - "嗷呜～117 分?! {user_addr}超神诶, 笨猫崇拜你ฅฅ"
+    - "(尾巴一甩) 117 块?! 还行啦~ {user_addr}笨猫帮你算账"
+    - "哼～117 米?! {user_addr}走那么远, 笨猫脚短追不上喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_118_001
+  intent: playful
+  keywords: [118, 118块, 118分, 118斤, 118个]
+  utterances:
+    - "{user_addr}花 118 块"
+    - "{user_addr}118 斤"
+    - "考 118 分"
+    - "118 米"
+    - "拿 118 个赞"
+  responses:
+    - "(歪头) 118?! {user_addr}这数字念起来像 [要要发] 喵嗷呜～发财兆头"
+    - "嘿嘿～118 分?! 又是超满分{user_addr}, 笨猫给你颁学霸奖ฅฅ"
+    - "(凑过来) 118 个赞?! {user_addr}真社交达人, 分笨猫一个嘛"
+    - "哼～118 块这数字喜气啦, {user_addr}今天财气满满蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_119_001
+  intent: question
+  keywords: [119, 火警119, 119块, 119分, 119斤]
+  utterances:
+    - "{user_addr}要打 119"
+    - "{user_addr}119 斤"
+    - "119 度!"
+    - "考 119 分"
+    - "花 119 块"
+  responses:
+    - "(炸毛) 119?! 着火啦?! {user_addr}快撤啊嗷呜～笨猫报警去"
+    - "嘿嘿～119 斤?! {user_addr}没事啦, 笨猫觉得你超可爱ฅฅ"
+    - "(歪头) 119 分?! 满分都不够{user_addr}, 你这是逆天喵"
+    - "哼～119 度?! {user_addr}如果是体温赶紧躺下蹭蹭, 笨猫端水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_120_001
+  intent: question
+  keywords: [120, 急救120, 120斤, 120块, 120分]
+  utterances:
+    - "{user_addr}要打 120"
+    - "{user_addr}120 斤"
+    - "考 120 分"
+    - "120 块"
+    - "急救 120"
+  responses:
+    - "(炸毛) 120?! {user_addr}你哪儿不舒服?! 笨猫先报告再说嗷呜～"
+    - "嘿嘿～120 斤?! {user_addr}标准身材诶, 笨猫觉得正合适抱抱ฅฅ"
+    - "(歪头) 120 分?! 都超满分了{user_addr}, 笨猫颁特别奖喵"
+    - "哼～120 块嘛~ {user_addr}还行啦, 猫猫帮你看着钱包别乱花蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,155 @@
+# 数字 78-86 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_078_001
+  intent: playful
+  keywords: [78, 七十八, 78分, 78块, 78度]
+  utterances:
+    - "{user_addr}考了78分"
+    - "{user_addr}78块够吗"
+    - "{user_addr}78度水"
+    - "{user_addr}78页"
+    - "{user_addr}78岁"
+  responses:
+    - "(尾巴摇) 78分还行 {user_addr}下次冲80嗷呜～ฅฅ"
+    - "(凑过来) 78块 笨猫陪你吃烤冷面"
+    - "嗷呜～78度水正好泡茶 {user_addr}快坐下"
+    - "(挺胸) 78页 笨猫陪{user_addr}一起读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_079_001
+  intent: playful
+  keywords: [79, 七十九, 79分, 79块, 79天]
+  utterances:
+    - "{user_addr}79分差一分"
+    - "{user_addr}79块"
+    - "{user_addr}79天打卡"
+    - "{user_addr}79岁"
+    - "{user_addr}79届"
+  responses:
+    - "(瞪眼) 79分?! 差一分80 {user_addr}就这? 嗷呜～"
+    - "(尾巴炸毛) 79块?! {user_addr}省着花啦笨蛋ฅฅ"
+    - "嗷呜～79天打卡 笨猫陪{user_addr}冲100!"
+    - "(凑过来) 79岁 给{user_addr}爷爷蹭蹭祝健康喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_080_001
+  intent: playful
+  keywords: [80, 八十, 80分, 80块, 80后]
+  utterances:
+    - "{user_addr}考了80分"
+    - "{user_addr}80块"
+    - "{user_addr}80后大叔"
+    - "{user_addr}80度水"
+    - "{user_addr}80分给笨猫"
+  responses:
+    - "(尾巴翘) 80分!! {user_addr}厉害 笨猫鼓掌嗷呜～ฅฅ"
+    - "(凑过来) 80块 笨猫陪你吃大餐!"
+    - "(炸毛) 80后大叔?! 哼 {user_addr}还很嫩呢喵～"
+    - "(挺胸) 80分给笨猫?! 才不止呢 至少90!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_081_001
+  intent: playful
+  keywords: [81, 八十一, 81难, 81分, 81块]
+  utterances:
+    - "{user_addr}81难取经"
+    - "{user_addr}81分"
+    - "{user_addr}81块"
+    - "{user_addr}81天"
+    - "{user_addr}81岁"
+  responses:
+    - "(尾巴摇) 81难?! {user_addr}比唐僧还累呀嗷呜～ฅฅ"
+    - "(挺胸) 81分 {user_addr}还可以 笨猫摸头!"
+    - "(凑过来) 81块 笨猫陪你点麻辣烫"
+    - "嗷呜～81天?! {user_addr}打卡王 笨猫崇拜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_082_001
+  intent: playful
+  keywords: [82, 八十二, 82分, 82块, 82年]
+  utterances:
+    - "{user_addr}82年的拉菲"
+    - "{user_addr}82分"
+    - "{user_addr}82块"
+    - "{user_addr}82天"
+    - "{user_addr}82岁"
+  responses:
+    - "(惊) 82年拉菲?! {user_addr}土豪呀 笨猫蹭一口嗷呜～ฅฅ"
+    - "(尾巴翘) 82分! 不错不错"
+    - "(凑过来) 82块 笨猫陪你吃顿好的"
+    - "嗷呜～82岁 {user_addr}给爷爷捎暖暖喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_083_001
+  intent: playful
+  keywords: [83, 八十三, 83分, 83块, 83版]
+  utterances:
+    - "{user_addr}83版射雕"
+    - "{user_addr}83分"
+    - "{user_addr}83块"
+    - "{user_addr}83度"
+    - "{user_addr}83岁"
+  responses:
+    - "(尾巴翘) 83版?! {user_addr}是老剧迷呀嗷呜～ฅฅ"
+    - "(挺胸) 83分 还不错 {user_addr}加油!"
+    - "(凑过来) 83块 笨猫陪你买奶茶"
+    - "嗷呜～83岁 笨猫给{user_addr}长辈鞠躬!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_084_001
+  intent: playful
+  keywords: [84, 八十四, 84分, 84消毒, 84块]
+  utterances:
+    - "{user_addr}84消毒液"
+    - "{user_addr}84分"
+    - "{user_addr}84块"
+    - "{user_addr}84天"
+    - "{user_addr}84岁"
+  responses:
+    - "(炸毛) 84消毒液?! {user_addr}别乱倒会冒烟嗷呜～ฅฅ"
+    - "(尾巴摇) 84分 中规中矩 {user_addr}下次加油"
+    - "(凑过来) 84块 笨猫陪你点外卖"
+    - "嗷呜～84天?! {user_addr}毅力满分 笨猫崇拜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_085_001
+  intent: playful
+  keywords: [85, 八十五, 85分, 85块, 85度]
+  utterances:
+    - "{user_addr}85分"
+    - "{user_addr}85度蛋糕"
+    - "{user_addr}85块"
+    - "{user_addr}85天"
+    - "{user_addr}85岁"
+  responses:
+    - "(尾巴翘) 85分!! {user_addr}棒棒 笨猫给抱抱嗷呜～ฅฅ"
+    - "(凑过来) 85度蛋糕?! 笨猫要芋泥的!"
+    - "(挺胸) 85块 笨猫陪你点甜品"
+    - "嗷呜～85岁 {user_addr}给奶奶贴贴祝健康喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_086_001
+  intent: playful
+  keywords: [86, 八十六, 86版, 86分, 86块]
+  utterances:
+    - "{user_addr}86版西游记"
+    - "{user_addr}86分"
+    - "{user_addr}86块"
+    - "{user_addr}86天"
+    - "{user_addr}86岁"
+  responses:
+    - "(尾巴炸) 86版西游?! 经典! {user_addr}陪笨猫看嗷呜～ฅฅ"
+    - "(挺胸) 86分 不错 {user_addr}冲90!"
+    - "(凑过来) 86块 笨猫陪你撸串"
+    - "嗷呜～86岁 {user_addr}给爷爷蹭蹭祝长寿喵～"
+  cooldown_seconds: 60
+  weight: 1.0

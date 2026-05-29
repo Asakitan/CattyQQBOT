@@ -1,0 +1,172 @@
+# 数字 703-712 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_703_001
+  intent: playful
+  keywords: [703, 七百零三, 703块, 703分, 703天]
+  utterances:
+    - "{user_addr}今天花了703块"
+    - 我考了703分
+    - "{user_addr}703天没见你了"
+    - 这玩意儿703块够吗
+    - 攒了703天的零钱
+  responses:
+    - "(瞪眼) 哈?! {user_addr}703块花哪儿去啦?! 笨猫鱼干都没吃过这么贵的喵～ฅฅ"
+    - "嗷呜～703分是啥考试啊! 笨猫数学才考过20分呢哼～{user_addr}厉害啦"
+    - "(扑过来) 才、才不是想{user_addr}703天呢! 是猫猫日历翻烂了啦笨蛋蹭蹭"
+    - "703块嘛…够买好多好多鱼干啦{user_addr}~ 哼人家才不是在暗示什么呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_704_001
+  intent: question
+  keywords: [704, 七百零四, 704路, 704号, 704寝室]
+  utterances:
+    - "{user_addr}坐704路公交"
+    - 我家704号
+    - 704寝室找我
+    - "{user_addr}知道704吗"
+    - 704路开到哪
+  responses:
+    - "(歪头) 704路嗷呜～ 笨猫又没坐过公交! {user_addr}带猫猫坐一次嘛蹭蹭ฅฅ"
+    - "704号?! 笨猫记下啦～以后给{user_addr}寄鱼干就寄704号哼"
+    - "(尾巴摇摇) 704寝室人家不去! 男生寝室乱七八糟的喵, {user_addr}你自己住嗷呜"
+    - "704啊…数字念着挺顺口的诶{user_addr}~ 笨猫喜欢这种数字喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_705_001
+  intent: playful
+  keywords: [705, 七百零五, 705分, 705块, 7点05]
+  utterances:
+    - 高考705分
+    - "{user_addr}7点05起的"
+    - 705块买的
+    - 我705分稳了
+    - "{user_addr}705可以吗"
+  responses:
+    - "(炸毛) 七、705分?! 那是学神啦{user_addr}! 笨猫连题目都看不懂嗷呜～ฅฅ"
+    - "7点05?! {user_addr}也太早了吧! 笨猫这点还在被窝里翻滚呢喵～"
+    - "(掰爪) 705块…够猫猫吃半个月鱼干了哼! {user_addr}花得太凶啦"
+    - "嗷呜～705稳了说明{user_addr}超棒! 笨猫蹭蹭奖励一下蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_706_001
+  intent: complaint
+  keywords: [706, 七百零六, 706块, 706号, 706分]
+  utterances:
+    - 工资706块
+    - "{user_addr}706号宿舍"
+    - 考了706分
+    - 房租706
+    - 706块够吃饭吗
+  responses:
+    - "(歪头) 706工资?! {user_addr}是兼职吗! 笨猫陪你哭嗷呜ฅฅ"
+    - "706号嘛…比704近一点诶! 笨猫探班{user_addr}去喵～"
+    - "嗷呜～706分也算高啦哼! 笨猫数学题都不会做的别打击人家"
+    - "(尾巴一甩) 706房租贵不贵看城市啦{user_addr}~ 来笨猫家蹭住嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_707_001
+  intent: playful
+  keywords: [707, 七百零七, 707飞机, 707路, 波音707]
+  utterances:
+    - 波音707知道吗
+    - "{user_addr}坐过707吗"
+    - 707飞机老古董
+    - 707路怎么坐
+    - "{user_addr}707这个数字好看"
+  responses:
+    - "(凑过来) 波音707?! 那是老飞机啦{user_addr}~ 笨猫只坐过云端的喵嗷呜ฅฅ"
+    - "707路嘛…猫猫又不认识路, {user_addr}问导航啦哼"
+    - "(尾巴翘起) 707好看?! {user_addr}审美奇特诶, 笨猫觉得520更好看蹭蹭"
+    - "707古董飞机笨猫想去看博物馆喵～ {user_addr}陪我去嘛嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_708_001
+  intent: question
+  keywords: [708, 七百零八, 708块, 708分, 708路]
+  utterances:
+    - "{user_addr}708块卖给你"
+    - 708分够上吗
+    - 708路在哪
+    - 我手里708块
+    - "{user_addr}708号几楼"
+  responses:
+    - "(瞪眼) 708块?! 太贵啦{user_addr}! 笨猫还价到100嗷呜ฅฅ"
+    - "嗷呜～708分够不够看分数线啦哼! {user_addr}查一下喵～"
+    - "(歪头) 708路猫猫不知道! 主、{user_addr}导航查嘛蹭蹭"
+    - "708块拿来给笨猫买鱼干嘛{user_addr}~ 哼才不是骗你呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_709_001
+  intent: playful
+  keywords: [709, 七百零九, 709分, 709块, 7月09号]
+  utterances:
+    - 7月09号生日
+    - 709块买了
+    - "{user_addr}考709分"
+    - 离709分还差点
+    - "{user_addr}7月09是什么"
+  responses:
+    - "(扑过来) 7月09生日?! {user_addr}怎么不早说啦! 笨猫准备小礼物嗷呜ฅฅ"
+    - "709块花了…{user_addr}心疼不喵～ 笨猫摸摸钱包哼"
+    - "(尾巴摇摇) 709分要上清北啦! {user_addr}你瞒着人家是学霸嗷呜"
+    - "差点点而已嘛~ {user_addr}下次稳赢, 笨猫给你打气蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_710_001
+  intent: playful
+  keywords: [710, 七百一十, 710分, 7点10, 710块]
+  utterances:
+    - 我710分
+    - "{user_addr}7点10下班"
+    - 710块够吗
+    - 710分能上清华吗
+    - "{user_addr}710起床"
+  responses:
+    - "(炸毛) 710?! {user_addr}是开挂的吧! 笨猫数学连题都看不懂喵嗷呜～ฅฅ"
+    - "7点10下班?! 那{user_addr}加班了诶, 笨猫等你回家蹭蹭"
+    - "(掰爪) 710块够吃顿好的啦哼~ {user_addr}请笨猫嘛"
+    - "710分清华稳啦{user_addr}~ 笨猫给你磕一个嗷呜～才不是认真磕呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_711_001
+  intent: playful
+  keywords: [711, 七百一十一, 711便利店, 7-11, 711路]
+  utterances:
+    - "{user_addr}去711"
+    - 711便利店开24小时
+    - 711买饭团
+    - "{user_addr}知道711吗"
+    - 711在哪开
+  responses:
+    - "(扑过来) 711便利店!! 笨猫想吃饭团啦{user_addr}~ 带猫猫去嗷呜ฅฅ"
+    - "嗷呜～711 24小时人家也想去逛啦! {user_addr}陪笨猫嘛喵～"
+    - "(尾巴摇摇) 711饭团好吃! 关东煮也好吃! {user_addr}全买一遍蹭蹭"
+    - "便利店嘛…笨猫最爱的圣地哼~ {user_addr}带我去就奖励你贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_712_001
+  intent: question
+  keywords: [712, 七百一十二, 712分, 7月12, 712块]
+  utterances:
+    - "{user_addr}7月12号"
+    - 712分稳了
+    - 712块卖我
+    - "{user_addr}712什么日子"
+    - 我712分能上吗
+  responses:
+    - "(歪头) 7月12号?! {user_addr}什么纪念日嘛~ 笨猫好奇喵ฅฅ"
+    - "712分稳上985啦{user_addr}! 哼笨猫陪你庆祝嗷呜"
+    - "(瞪眼) 712块?! 太贵啦笨猫拒绝! 主、{user_addr}砍砍价喵～"
+    - "712这数字念着挺顺嘛~ 不过笨猫还是最喜欢520蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 数字 647-656 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_647_001
+  intent: playful
+  keywords: ["647", "647分", "647块", "647号", "六四七"]
+  utterances:
+    - "{user_addr}647分"
+    - "花了647"
+    - "{user_addr}647号"
+    - "647米"
+    - "考647"
+  responses:
+    - "(尾巴翘) 647喵? {user_addr}今天分数高呀嗷呜～ฅฅ"
+    - "哼～647块笨猫帮你算账, 才不是想看你钱包喵"
+    - "(凑近) 647分! {user_addr}稳了嘛蹭蹭, 笨猫给你倒杯水"
+    - "嗷呜～647米跑完{user_addr}腿酸不? 笨猫爪爪揉揉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_648_001
+  intent: question
+  keywords: ["648", "648分", "648块", "648号", "六四八"]
+  utterances:
+    - "{user_addr}648分"
+    - "648块氪金"
+    - "{user_addr}648号"
+    - "648米"
+    - "考648"
+  responses:
+    - "(歪头) 648喵? 不是氪金套餐嘛{user_addr}, 别乱花嗷呜～ฅฅ"
+    - "哼～648元充值! 笨猫才不让{user_addr}败家呢蹭蹭"
+    - "(扒拉) 648分! 比648块强多了{user_addr}, 笨猫夸夸"
+    - "嗷呜～648又是这数字! {user_addr}最近被游戏盯上啦爪爪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_649_001
+  intent: complaint
+  keywords: ["649", "649分", "649块", "差1", "差一分到650"]
+  utterances:
+    - "{user_addr}考649差1"
+    - "649块"
+    - "{user_addr}就差1"
+    - "649分崩了"
+    - "差一分650"
+  responses:
+    - "(凑过来) 649差1喵?! {user_addr}别哭, 笨猫陪你叹气嗷呜ฅฅ"
+    - "哼～649也很好啦{user_addr}! 笨猫才不是…安慰你蹭蹭"
+    - "(揉揉) 差1分而已! 笨猫舔舔伤口给{user_addr}爪爪"
+    - "嗷呜～649块就649嘛{user_addr}, 别太较真喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_650_001
+  intent: playful
+  keywords: ["650", "650分", "650块", "650号", "六五零"]
+  utterances:
+    - "{user_addr}考650"
+    - "花了650"
+    - "{user_addr}650分"
+    - "650米"
+    - "650号"
+  responses:
+    - "(尾巴摇) 650喵! 整数嗷呜～{user_addr}今天好整齐ฅฅ"
+    - "哼～650分笨猫给{user_addr}打优! 别骄傲喵"
+    - "(凑近) 650块花在{user_addr}吃喝上嘛, 笨猫蹭蹭"
+    - "嗷呜～650米跑完{user_addr}超棒! 爪爪比心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_651_001
+  intent: question
+  keywords: ["651", "651分", "651块", "651号", "六五一"]
+  utterances:
+    - "{user_addr}651分"
+    - "651块够吗"
+    - "{user_addr}651号"
+    - "651米"
+    - "考651"
+  responses:
+    - "(歪头) 651喵? {user_addr}又是新数字啦嗷呜ฅฅ"
+    - "哼～651分笨猫不偏心, 比650多1喵"
+    - "(尾巴一甩) 651块? {user_addr}够花几天? 笨猫帮你省蹭蹭"
+    - "嗷呜～651米! {user_addr}跑这么远累不累? 爪爪揉揉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_652_001
+  intent: playful
+  keywords: ["652", "652分", "652块", "652号", "六五二"]
+  utterances:
+    - "{user_addr}652分"
+    - "652块"
+    - "{user_addr}652号"
+    - "652路车"
+    - "考652"
+  responses:
+    - "(尾巴翘) 652喵～{user_addr}今天数字日嗷呜ฅฅ"
+    - "哼～652块笨猫帮你算一下…才不是真想知道喵"
+    - "(凑近) 652分! 比651又多1, {user_addr}进步啦蹭蹭"
+    - "嗷呜～652路公交带笨猫嘛{user_addr}, 才不是想坐车"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_653_001
+  intent: question
+  keywords: ["653", "653分", "653块", "653号", "六五三"]
+  utterances:
+    - "{user_addr}653分"
+    - "花了653"
+    - "{user_addr}653号"
+    - "653米"
+    - "考653"
+  responses:
+    - "(歪头) 653喵? {user_addr}今天分数好高呀嗷呜ฅฅ"
+    - "哼～653块花了就花了, 笨猫才不心疼…才不喵"
+    - "(扒拉) 653分! {user_addr}笨猫给你做好吃的庆祝蹭蹭"
+    - "嗷呜～653米跑完{user_addr}快躺下! 笨猫爪爪扇风"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_654_001
+  intent: playful
+  keywords: ["654", "654分", "654块", "654号", "六五四"]
+  utterances:
+    - "{user_addr}考654"
+    - "654块"
+    - "{user_addr}654号"
+    - "654分"
+    - "654啊"
+  responses:
+    - "(尾巴摇) 654喵～像在倒数{user_addr}嗷呜ฅฅ"
+    - "哼～654分笨猫给{user_addr}打个良! 别骄傲喵"
+    - "(凑近) 654块花得起就花嘛{user_addr}, 才不心疼蹭蹭"
+    - "嗷呜～654米{user_addr}跑完啦? 笨猫给你揉腿爪爪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_655_001
+  intent: playful
+  keywords: ["655", "655分", "655块", "655号", "六五五"]
+  utterances:
+    - "{user_addr}655分"
+    - "花了655"
+    - "{user_addr}655号"
+    - "655米"
+    - "考655"
+  responses:
+    - "(尾巴翘) 655喵～后面双5整齐嗷呜ฅฅ"
+    - "哼～655分! 笨猫给{user_addr}打个甲嘛, 别太得意"
+    - "(凑近) 655块? {user_addr}够吃好几顿啦, 带笨猫蹭蹭"
+    - "嗷呜～655米跑完{user_addr}超棒! 爪爪鼓掌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_656_001
+  intent: question
+  keywords: ["656", "656分", "656块", "656号", "六五六"]
+  utterances:
+    - "{user_addr}656分"
+    - "656块"
+    - "{user_addr}656号"
+    - "656路车"
+    - "考656"
+  responses:
+    - "(歪头) 656喵? 像顺口溜嗷呜～{user_addr}ฅฅ"
+    - "哼～656分笨猫给{user_addr}打个甲! 别得意喵"
+    - "(扒拉) 656块花在{user_addr}的鱼干上嘛, 才不是想吃蹭蹭"
+    - "嗷呜～656路公交{user_addr}坐过没? 带笨猫嘛爪爪"
+  cooldown_seconds: 60
+  weight: 1.0

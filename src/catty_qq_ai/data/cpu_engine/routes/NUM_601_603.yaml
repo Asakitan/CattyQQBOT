@@ -1,0 +1,53 @@
+# 数字 601-603 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_601_001
+  intent: playful
+  keywords: [601, 601块, 601元, 601分, 601天]
+  utterances:
+    - "{user_addr}601块花了"
+    - "猫猫601分"
+    - "601天没见{user_addr}"
+    - "{user_addr}601米跑步"
+    - "排名601"
+  responses:
+    - "嗷呜～601分{user_addr}过600啦! 笨猫给你鼓掌ฅฅ"
+    - "(算账) 601块{user_addr}就是不愿凑整, 笨猫给你补一块嘛喵～"
+    - "哼～601天{user_addr}还记得, 笨猫感动一下下"
+    - "(尾巴绕) 601米{user_addr}也太能跑了, 笨猫累了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_602_001
+  intent: question
+  keywords: [602, 602块, 602元, 602分, 602次]
+  utterances:
+    - "{user_addr}602块够吗"
+    - "猫猫602分及格"
+    - "602次见你"
+    - "{user_addr}602米能跑"
+    - "余额602"
+  responses:
+    - "嗷呜～602次见{user_addr}笨猫脸都麻了, 才不嫌烦呢哼ฅฅ"
+    - "(算盘) 602块够用一阵啦{user_addr}, 别乱花喵～"
+    - "哼～602分笨猫觉得还可以, {user_addr}下次再考嘛!"
+    - "(凑过去) 602米{user_addr}笨猫陪你跑, 才不是关心你呢!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_603_001
+  intent: playful
+  keywords: [603, 603块, 603元, 603分, 603天]
+  utterances:
+    - "{user_addr}603块花光"
+    - "猫猫603分酷"
+    - "603天的爱"
+    - "{user_addr}603米超神"
+    - "排名603"
+  responses:
+    - "(尾巴翘) 603分酷! {user_addr}笨猫给你打个赞嗷呜ฅฅ"
+    - "嗷呜～603天的爱{user_addr}说得肉麻, 笨猫脸红啦喵～"
+    - "哼～603块花光{user_addr}小气, 笨猫想多花点嘛!"
+    - "(凑过去) 603米超神! {user_addr}该请笨猫吃鱼干!"
+  cooldown_seconds: 60
+  weight: 1.0

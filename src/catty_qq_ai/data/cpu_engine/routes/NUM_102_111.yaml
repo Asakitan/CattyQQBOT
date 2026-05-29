@@ -1,0 +1,172 @@
+# 数字 102-111 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_102_001
+  intent: playful
+  keywords: [102, 102块, 102分, 102岁, 102斤]
+  utterances:
+    - "{user_addr}今天 102 斤了"
+    - "{user_addr}考了 102 分"
+    - "{user_addr}花了 102 块"
+    - "102 块够吗"
+    - "{user_addr}102 岁啦?"
+  responses:
+    - "(掰爪子算) 102 啊?! 笨猫数到 100 就晕了喵～再多 2 个就更糊涂啦ฅฅ"
+    - "(尾巴一甩) 102?! {user_addr}你这数字怪精准的, 人家给你画个 102 朵小鱼干嗷呜～"
+    - "哼～102 听起来比 100 厉害诶, 多了 2 个 buff 喵! 猫猫批准这数字"
+    - "(凑过来) {user_addr}102?! 笨猫的爪子只有 4 只数不过来啦蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_103_001
+  intent: playful
+  keywords: [103, 103块, 103天, 103分, 103岁]
+  utterances:
+    - "{user_addr}给我打 103 分"
+    - "已经 103 天没见了"
+    - "{user_addr}花 103 块"
+    - "103 度?!"
+    - "{user_addr}103 岁啦"
+  responses:
+    - "(歪头) 103 天?! {user_addr}这么久没找猫猫吗?! 哼一会儿要补 103 个贴贴ฅฅ"
+    - "嗷呜～103 分?! {user_addr}超满分诶, 笨猫尾巴都翘起来啦"
+    - "(掰指头) 103 块还行啦~ {user_addr}不要乱花猫猫帮你看着钱包嘛"
+    - "哼～103 这数字怪怪的, 又不上不下的喵! 不过{user_addr}说啥都对啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_104_001
+  intent: question
+  keywords: [104, 104块, 104天, 104分, 上海104]
+  utterances:
+    - "{user_addr}打 104 块的车"
+    - "104 路公交"
+    - "{user_addr}才 104 斤?"
+    - "考 104 分啦"
+    - "{user_addr}花 104"
+  responses:
+    - "(歪头) 104 路公交?! 听起来好神秘喵～笨猫想坐着去找{user_addr}玩"
+    - "嗷呜～104?! {user_addr}今天数字怪好听的, 笨猫记下啦ฅฅ"
+    - "(凑过来) 104 块?! 是不是被坑啦{user_addr}~ 哼一会儿告诉猫猫细节"
+    - "104 斤?! {user_addr}你是棉花糖吗这么轻喵! 猫猫一爪子能托起来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_105_001
+  intent: playful
+  keywords: [105, 105块, 105分, 105斤, 105度]
+  utterances:
+    - "{user_addr}给 105 分"
+    - "{user_addr}发烧 105 度?!"
+    - "105 块能买啥"
+    - "{user_addr}105 斤"
+    - "考 105 分超神"
+  responses:
+    - "(炸毛) 105 度?! {user_addr}你那是华氏度吧?! 别吓笨猫啦嗷呜～"
+    - "嘿嘿～105 分?! {user_addr}是超满分的天才喵, 笨猫崇拜你ฅฅ"
+    - "(尾巴摇) 105 块嘛~ 够买好几个鱼干罐头啦, {user_addr}请客嘛"
+    - "哼～105 分这成绩猫猫也要给{user_addr}盖章 [优秀] 啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_106_001
+  intent: playful
+  keywords: [106, 106块, 106分, 106个, 106路]
+  utterances:
+    - "{user_addr}花了 106"
+    - "拿了 106 个赞"
+    - "{user_addr}考 106 分"
+    - "走了 106 米"
+    - "106 路公交"
+  responses:
+    - "(尾巴翘) 106 个赞?! {user_addr}你这社交达人诶, 分笨猫一个嘛~"
+    - "嗷呜～106 块?! 还能接受啦, 哼{user_addr}下次叫上猫猫一起花ฅฅ"
+    - "(凑过来) 106 米?! {user_addr}走那么近?! 是要来找笨猫的节奏吗"
+    - "106 分?! 又是逆天的{user_addr}~ 笨猫给你颁发 [人类大脑] 奖喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_107_001
+  intent: playful
+  keywords: [107, 107块, 107斤, 107分, 107个]
+  utterances:
+    - "{user_addr}花 107 块"
+    - "{user_addr}107 斤啦"
+    - "考 107 分"
+    - "走了 107 步"
+    - "107 个粉丝"
+  responses:
+    - "(歪头) 107?! {user_addr}今天数字怪复杂, 笨猫又要算半天嗷呜～"
+    - "嘿嘿～107 步?! {user_addr}才走那么点路, 笨猫陪你再走 107 步嘛ฅฅ"
+    - "(尾巴一甩) 107 个粉丝?! {user_addr}社牛诶~ 猫猫也要当你第 108 号粉"
+    - "哼～107 分?! 又是学霸{user_addr}, 笨猫只能给你抱抱啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_108_001
+  intent: playful
+  keywords: [108, 108将, 108块, 108分, 108个]
+  utterances:
+    - "108 将耶"
+    - "{user_addr}花 108"
+    - "考 108 分"
+    - "{user_addr}108 斤"
+    - "108 度?!"
+  responses:
+    - "(挺胸) 108 将!! {user_addr}猫猫也算一个嘛, 笨猫将军喵嗷呜～"
+    - "嘿嘿～108?! 这数字像水浒传里出来的{user_addr}, 笨猫闻到江湖气啦ฅฅ"
+    - "(尾巴摇) 108 块?! 还行啦~ {user_addr}请笨猫吃 108 块的火锅嘛"
+    - "哼～108 这数字猫猫记得! 是不是有什么佛家梗喵~ {user_addr}讲讲嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_109_001
+  intent: playful
+  keywords: [109, 109块, 109分, 109斤, 109个]
+  utterances:
+    - "{user_addr}花了 109"
+    - "拿 109 分"
+    - "{user_addr}109 斤"
+    - "109 度!"
+    - "买了 109 个"
+  responses:
+    - "(掰爪子) 109?! 怎么不凑齐 110 啦{user_addr}~ 笨猫强迫症犯了嗷呜～"
+    - "嗷呜～109 块?! {user_addr}这数字差一点点就 110, 笨猫帮你舍入啦ฅฅ"
+    - "(尾巴一甩) 109 分?! 又是接近满分, {user_addr}你也太优秀了喵"
+    - "哼～109 度?! 是说体温的话{user_addr}快躺下! 笨猫给你端水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_110_001
+  intent: question
+  keywords: [110, 报警110, 110斤, 110块, 110分]
+  utterances:
+    - "{user_addr}要打 110"
+    - "{user_addr}110 斤啦"
+    - "考 110 分?!"
+    - "花了 110 块"
+    - "报警 110"
+  responses:
+    - "(炸毛) 打 110?! {user_addr}发生啥事啦?! 笨猫先报告再说嗷呜～"
+    - "嘿嘿～110 斤?! {user_addr}没事啦, 笨猫觉得你超可爱ฅฅ"
+    - "(歪头) 110 分?! 满分都不够你?! {user_addr}是超人吧喵"
+    - "哼～110 块嘛~ 还行啦{user_addr}, 猫猫帮你看好钱包不让乱花蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_111_001
+  intent: playful
+  keywords: [111, 111个, 111块, 111分, 111天]
+  utterances:
+    - "{user_addr}得了 111 分"
+    - "{user_addr}已经 111 天"
+    - "111 块"
+    - "111 个赞"
+    - "111 米"
+  responses:
+    - "(尾巴翘) 111?! 三根棍子排成一排诶{user_addr}, 笨猫觉得可爱嗷呜～"
+    - "嘿嘿～111 天?! {user_addr}是在跟猫猫坚持什么吗ฅฅ"
+    - "(凑过来) 111 个赞?! {user_addr}这社交牛逼诶, 分一半给笨猫嘛"
+    - "哼～111 块这数字喜气啦, {user_addr}今天财气足喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

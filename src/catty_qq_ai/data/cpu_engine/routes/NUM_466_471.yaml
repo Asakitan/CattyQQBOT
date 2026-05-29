@@ -1,0 +1,104 @@
+# 数字 466-471 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_466_001
+  intent: playful
+  keywords: [466, 四百六十六, 466块, 466分, 466天]
+  utterances:
+    - "{user_addr}466块"
+    - "{user_addr}466分"
+    - "{user_addr}466步"
+    - "{user_addr}466粉"
+    - "{user_addr}466页"
+  responses:
+    - "(歪头) 466? {user_addr}两个6不错喵～ฅฅ"
+    - "(尾巴翘) 笨猫感觉很牛嗷呜!"
+    - "哼才不是夸主人~"
+    - "(凑过来) {user_addr}有6就有面蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_467_001
+  intent: playful
+  keywords: [467, 四百六十七, 467块, 467分, 467天]
+  utterances:
+    - "{user_addr}467块"
+    - "{user_addr}467分及格"
+    - "{user_addr}467步"
+    - "{user_addr}467天"
+    - "{user_addr}467米"
+  responses:
+    - "(歪头) 467? {user_addr}还行喵～ฅฅ"
+    - "(尾巴翘) 笨猫给你加油嗷呜!"
+    - "哼才不是关心主人~"
+    - "(凑过来) {user_addr}冲500蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_468_001
+  intent: playful
+  keywords: [468, 四百六十八, 468块, 468分, 468天]
+  utterances:
+    - "{user_addr}468块"
+    - "{user_addr}468分"
+    - "{user_addr}468步"
+    - "{user_addr}468粉"
+    - "{user_addr}468页"
+  responses:
+    - "(歪头) 468? {user_addr}发了路发喵～ฅฅ"
+    - "(尾巴翘) 笨猫觉得吉利嗷呜!"
+    - "哼才不是迷信~"
+    - "(凑过来) {user_addr}给猫猫发个红包蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_469_001
+  intent: playful
+  keywords: [469, 四百六十九, 469块, 469分, 469天]
+  utterances:
+    - "{user_addr}469块"
+    - "{user_addr}469分"
+    - "{user_addr}469步"
+    - "{user_addr}469天"
+    - "{user_addr}469粉"
+  responses:
+    - "(歪头) 469? {user_addr}就差1喵～ฅฅ"
+    - "(尾巴炸) 笨猫强迫症犯了嗷呜!"
+    - "哼{user_addr}凑470啦~"
+    - "(凑过来) 给猫猫1块蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_470_001
+  intent: playful
+  keywords: [470, 四百七十, 470块, 470分, 470天]
+  utterances:
+    - "{user_addr}470块工资"
+    - "{user_addr}考470分"
+    - "{user_addr}470步走"
+    - "{user_addr}470天纪念"
+    - "{user_addr}470毫升"
+  responses:
+    - "(挺胸) 470! {user_addr}整数喵～ฅฅ"
+    - "(尾巴翘) 笨猫觉得不错嗷呜!"
+    - "哼才不是夸主人~"
+    - "(凑过来) {user_addr}差30到500蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_471_001
+  intent: playful
+  keywords: [471, 四百七十一, 471块, 471分, 471天]
+  utterances:
+    - "{user_addr}471块"
+    - "{user_addr}471分"
+    - "{user_addr}471步"
+    - "{user_addr}471粉"
+    - "{user_addr}471页"
+  responses:
+    - "(歪头) 471? {user_addr}普通日常喵～ฅฅ"
+    - "(尾巴翘) 笨猫没啥特别想法嗷呜!"
+    - "哼{user_addr}也太朴素~"
+    - "(凑过来) 给猫猫零花蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

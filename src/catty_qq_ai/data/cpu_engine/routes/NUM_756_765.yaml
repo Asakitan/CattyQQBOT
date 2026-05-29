@@ -1,0 +1,172 @@
+# 数字 756-765 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_756_001
+  intent: playful
+  keywords: [756, 756块, 756分, 756米, 756天]
+  utterances:
+    - "{user_addr}756分模考"
+    - "{user_addr}756块的衣服"
+    - "{user_addr}756天恋爱"
+    - "{user_addr}756米跑完"
+    - "756顺嘴"
+  responses:
+    - "(歪头) 756? {user_addr}怎么又是这数嗷呜"
+    - "(尾巴翘) 笨猫感觉{user_addr}最近迷上数字啦ฅฅ"
+    - "哼, 756也行吧, 不算太差"
+    - "(蹭蹭) {user_addr}加油凑到760喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_757_001
+  intent: playful
+  keywords: [757, 波音757, 757块, 757分, 757航班]
+  utterances:
+    - "{user_addr}坐757飞机"
+    - "{user_addr}757航班晚点"
+    - "{user_addr}花了757块"
+    - "{user_addr}757分高考"
+    - "757大鸟"
+  responses:
+    - "(眼睛亮) 757! 又是波音飞机喵～ฅฅ"
+    - "(尾巴翘) {user_addr}最近老飞嗷呜? 带笨猫一个"
+    - "哼, 笨猫晕机不带的, {user_addr}骗人"
+    - "(炸毛) 不过757分的话, {user_addr}是天才耶"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_758_001
+  intent: complaint
+  keywords: [758, 758块, 758分, 758小时, 758天]
+  utterances:
+    - "{user_addr}758块好贵"
+    - "{user_addr}考758分崩了"
+    - "{user_addr}加班758小时"
+    - "{user_addr}758天没见"
+    - "758难"
+  responses:
+    - "(抱抱) {user_addr}别累着喵, 笨猫给你顺毛嗷呜ฅฅ"
+    - "(尾巴软) 758小时太多了, {user_addr}快歇"
+    - "哼, {user_addr}又乱花钱, 笨猫管不了"
+    - "(凑近) 人家陪{user_addr}睡觉觉, 别熬夜了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_759_001
+  intent: playful
+  keywords: [759, 759块, 759分, 759米, 759天]
+  utterances:
+    - "{user_addr}考759分"
+    - "{user_addr}759块买的"
+    - "{user_addr}759米跑"
+    - "{user_addr}759天纪念"
+    - "759离整数差1"
+  responses:
+    - "(尾巴炸) 759! 差1就到760啦嗷呜ฅฅ"
+    - "(凑近) {user_addr}再努力一点嘛喵～"
+    - "哼, 笨猫强迫症犯了, 一定要凑到整数"
+    - "(蹭蹭) {user_addr}加油哦, 人家给你举牌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_760_001
+  intent: playful
+  keywords: [760, 760分, 760块, 760天, 整760]
+  utterances:
+    - "{user_addr}考760分"
+    - "{user_addr}760块的"
+    - "{user_addr}760天恋爱"
+    - "{user_addr}760ml的瓶"
+    - "760整数"
+  responses:
+    - "(眼睛闪) 760! {user_addr}整数耶嗷呜ฅฅ"
+    - "(尾巴翘) 笨猫最爱整数喵～看着舒服"
+    - "哼, {user_addr}这次终于不是奇怪的数字了"
+    - "(蹭蹭) 奖励{user_addr}一个贴贴喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_761_001
+  intent: playful
+  keywords: [761, 761块, 761分, 761米, 761号]
+  utterances:
+    - "{user_addr}花了761块"
+    - "{user_addr}761分模考"
+    - "{user_addr}761米跑步"
+    - "{user_addr}761号房"
+    - "761没意思"
+  responses:
+    - "(凑过来) 761? {user_addr}过了整数又来一个怪数字喵"
+    - "(尾巴甩) 笨猫不开心嗷呜, 又不整齐ฅฅ"
+    - "哼, {user_addr}下次再凑个整数啦"
+    - "(蹭蹭) 不过761分的话{user_addr}还是很厉害"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_762_001
+  intent: playful
+  keywords: [762, 762块, 762分, 762天, 762次]
+  utterances:
+    - "{user_addr}762分高考"
+    - "{user_addr}762块工资"
+    - "{user_addr}762天"
+    - "{user_addr}762次告白"
+    - "762好"
+  responses:
+    - "(眼睛亮) 762分?! {user_addr}是学霸嗷呜ฅฅ"
+    - "(尾巴翘) 笨猫要给{user_addr}颁奖喵～"
+    - "哼, {user_addr}就别炫耀了, 人家也会考的"
+    - "(蹭蹭) 762次告白哪个杂鱼, 笨猫帮你拒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_763_001
+  intent: playful
+  keywords: [763, 763块, 763分, 763米, 763号]
+  utterances:
+    - "{user_addr}考763分"
+    - "{user_addr}763块的"
+    - "{user_addr}763米跑"
+    - "{user_addr}763号宿舍"
+    - "763顺口"
+  responses:
+    - "(歪头) 763? {user_addr}今天又报数啦嗷呜"
+    - "(尾巴翘) 笨猫陪{user_addr}数到天黑喵ฅฅ"
+    - "哼, 763比762只多1, {user_addr}进步了"
+    - "(蹭蹭) 人家奖励{user_addr}一个小鱼干～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_764_001
+  intent: playful
+  keywords: [764, 764块, 764分, 764天, 764米]
+  utterances:
+    - "{user_addr}764分模考"
+    - "{user_addr}764块买"
+    - "{user_addr}764天恋爱"
+    - "{user_addr}764米游泳"
+    - "764凑数"
+  responses:
+    - "(凑过来) 764? {user_addr}还差1就整啦嗷呜"
+    - "(尾巴炸) 笨猫强迫症又犯了喵ฅฅ"
+    - "哼, {user_addr}快凑到765, 笨猫等不及"
+    - "(蹭蹭) 不过764米游泳超厉害{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_765_001
+  intent: playful
+  keywords: [765, 765分, 765块, 765事务所, 765天]
+  utterances:
+    - "{user_addr}考765分"
+    - "{user_addr}765块的"
+    - "{user_addr}知道765事务所吗"
+    - "{user_addr}765天纪念"
+    - "765偶像"
+  responses:
+    - "(眼睛闪) 765! 偶像大师那个嗷呜?! ฅฅ"
+    - "(尾巴炸) {user_addr}也是PRO吗喵～"
+    - "哼, 笨猫才不追星, 人家最可爱"
+    - "(蹭蹭) 765分的话{user_addr}超学霸, 崇拜～"
+  cooldown_seconds: 60
+  weight: 1.0

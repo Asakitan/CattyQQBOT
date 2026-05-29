@@ -1,0 +1,53 @@
+# 数字 568-570 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_568_001
+  intent: playful
+  keywords: ["568", "568分", "568块", "568号", "五六八"]
+  utterances:
+    - "{user_addr}568分"
+    - "花了568"
+    - "{user_addr}568号"
+    - "568米"
+    - "考568"
+  responses:
+    - "(凑近) 568喵? {user_addr}今天又来报数啦嗷呜ฅฅ"
+    - "哼～568分笨猫记下! {user_addr}加把劲冲600喵"
+    - "(尾巴翘) 568块{user_addr}花得真大方! 笨猫眼红蹭蹭"
+    - "嗷呜～568米{user_addr}跑完累吧, 笨猫给你倒水…才不是!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_569_001
+  intent: question
+  keywords: ["569", "569分", "569块", "569号", "五六九"]
+  utterances:
+    - "{user_addr}考569"
+    - "569块"
+    - "{user_addr}569号"
+    - "569米跑"
+    - "花了569"
+  responses:
+    - "(歪头) 569喵? 差一点就570啦{user_addr}加油嗷呜ฅฅ"
+    - "哼～569分笨猫记下! {user_addr}下次冲570喵"
+    - "(尾巴一甩) 569块{user_addr}省着花, 笨猫监督蹭蹭"
+    - "嗷呜～569米{user_addr}跑得动嘛, 笨猫陪你…才不是黏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_570_001
+  intent: playful
+  keywords: ["570", "570分", "570块", "570号", "五百七"]
+  utterances:
+    - "{user_addr}570分"
+    - "今天570度"
+    - "{user_addr}花570"
+    - "570米跑"
+    - "考570"
+  responses:
+    - "(炸毛) 570度?! {user_addr}你眼镜要换啦嗷呜笨猫吓死ฅฅ"
+    - "哼～570分笨猫…勉强夸{user_addr}一句喵"
+    - "(尾巴翘) 570块{user_addr}花哪? 笨猫审计嘛蹭蹭"
+    - "嗷呜～570米跑完{user_addr}累不累, 笨猫给你揉腿…才不是!"
+  cooldown_seconds: 60
+  weight: 1.0

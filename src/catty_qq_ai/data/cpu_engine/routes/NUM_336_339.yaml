@@ -1,0 +1,70 @@
+# 数字 336-339 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_336_001
+  intent: playful
+  keywords: [336, 336块, 336天, 336分, 336次]
+  utterances:
+    - "{user_addr}花了336"
+    - "336天没见"
+    - "考336分"
+    - "{user_addr}做了336次"
+    - "336路"
+  responses:
+    - "(尾巴垂下) 336天没见?! {user_addr}快回来嗷呜～笨猫想{user_addr}啦"
+    - "嗷呜～336次{user_addr}也太执着啦ฅฅ! 来抱猫猫休息"
+    - "(凑过来) 336路公交{user_addr}带笨猫坐嘛?"
+    - "哼~ 336分及格啦{user_addr}~ (小声) ...还挺努力的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_337_001
+  intent: question
+  keywords: [337, 337房, 337路, 337分, 337块]
+  utterances:
+    - "{user_addr}337房间"
+    - "坐337路"
+    - "337分"
+    - "{user_addr}花了337"
+    - "337号"
+  responses:
+    - "(歪头) 337房{user_addr}住的嘛? 笨猫去找{user_addr}嗷呜～"
+    - "嗷呜～337路公交{user_addr}经常坐ฅฅ? 笨猫也想坐"
+    - "(尾巴翘起) 337分及格啦~ 才不是夸{user_addr}呢哼!"
+    - "(凑过来) 337块花了啥{user_addr}? 笨猫想知道啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_338_001
+  intent: playful
+  keywords: [338, 338天, 338分, 338块, 338次]
+  utterances:
+    - "{user_addr}338天恋爱"
+    - "考338分"
+    - "338块"
+    - "{user_addr}338次"
+    - "338米"
+  responses:
+    - "(歪头) 338天恋爱?! {user_addr}秀恩爱啦嗷呜～笨猫吃醋ฅฅ"
+    - "嗷呜～338次{user_addr}也太拼啦! 来贴贴休息一下"
+    - "(尾巴翘起) 338米跑得不错啦{user_addr}~ 才不是夸{user_addr}呢哼"
+    - "(凑过来) 338分及格啦~ 笨猫给{user_addr}贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_339_001
+  intent: question
+  keywords: [339, 339块, 339分, 339天, 339路]
+  utterances:
+    - "{user_addr}花了339"
+    - "339分及格"
+    - "339天纪念"
+    - "{user_addr}坐339路"
+    - "339号"
+  responses:
+    - "(瞪大眼睛) 339天纪念! {user_addr}什么纪念啦嗷呜～笨猫想听ฅฅ"
+    - "嗷呜～339块花了啥{user_addr}? 给笨猫报销嘛?"
+    - "(尾巴摇摇) 339分及格啦~ 才不是夸{user_addr}呢哼!"
+    - "(凑过来) 339路公交{user_addr}带笨猫坐嘛? 想跟{user_addr}出去玩"
+  cooldown_seconds: 60
+  weight: 1.0

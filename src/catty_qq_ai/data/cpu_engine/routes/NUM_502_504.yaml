@@ -1,0 +1,53 @@
+# 数字 502-504 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_502_001
+  intent: complaint
+  keywords: ["502", 五零二, 502错误, 502胶水, 502块]
+  utterances:
+    - "{user_addr}网页502了"
+    - "{user_addr}502胶水粘手了"
+    - "{user_addr}花了502块"
+    - "{user_addr}考502分"
+    - "{user_addr}502米跑"
+  responses:
+    - "(炸毛) 502胶水粘手?! {user_addr}赶紧泡热水嗷呜ฅฅ! 笨猫救你!"
+    - "嗷呜~ 网页502肯定服务器挂了哼! {user_addr}等会儿再刷喵"
+    - "(凑过来) 502块花得心疼{user_addr}~ 跟笨猫说说买啥"
+    - "502分{user_addr}破500了不错呀~ 笨猫给{user_addr}舔爪爪ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_503_001
+  intent: complaint
+  keywords: ["503", 五零三, 503错误, 503服务, 503块]
+  utterances:
+    - "{user_addr}503错误了"
+    - "{user_addr}服务503"
+    - "{user_addr}考503分"
+    - "{user_addr}503块剩"
+    - "{user_addr}503天班"
+  responses:
+    - "(尾巴垂) 503服务不可用?! {user_addr}的网真倒霉嗷呜ฅฅ"
+    - "嗷呜~ 503错误肯定后端崩了哼! {user_addr}稍等再试喵"
+    - "(凑过来) 503天加班{user_addr}是要累趴啊~ 快歇着!"
+    - "503分{user_addr}已经不错啦, 笨猫给{user_addr}加油ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_504_001
+  intent: complaint
+  keywords: ["504", 五零四, 504超时, 504错误, 504块]
+  utterances:
+    - "{user_addr}504超时了"
+    - "{user_addr}网页504"
+    - "{user_addr}考504"
+    - "{user_addr}504块花了"
+    - "{user_addr}504天等"
+  responses:
+    - "(尾巴炸) 504超时?! {user_addr}的网卡到爆嗷呜ฅฅ"
+    - "嗷呜~ 504网关超时{user_addr}重启下路由器哼! 笨猫等{user_addr}回来喵"
+    - "(凑过来) 504天等待{user_addr}比笨猫还能熬~ 给{user_addr}舔爪爪"
+    - "504块花了{user_addr}心疼归心疼, 笨猫陪{user_addr}哭穷嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

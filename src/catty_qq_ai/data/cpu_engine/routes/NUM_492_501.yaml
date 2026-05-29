@@ -1,0 +1,172 @@
+# 数字 492-501 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_492_001
+  intent: playful
+  keywords: ["492", 四九二, 492块, 492天, 492分]
+  utterances:
+    - "{user_addr}花了492"
+    - "{user_addr}492天没回"
+    - "{user_addr}考492"
+    - "{user_addr}492米跑"
+    - "{user_addr}492次了"
+  responses:
+    - "(瞪眼) 492天没回?! {user_addr}是失联了嘛嗷呜ฅฅ"
+    - "嗷呜~ 492块花得心疼{user_addr}~ 笨猫陪你哭哼"
+    - "(尾巴翘) 492分笨猫觉得不错呀! 才不是夸{user_addr}哦"
+    - "492米的话{user_addr}已经很厉害啦~ 笨猫跑不动喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_493_001
+  intent: question
+  keywords: ["493", 四九三, 493元, 493天, 493分]
+  utterances:
+    - "{user_addr}493多不多"
+    - "{user_addr}493天等待"
+    - "{user_addr}考493分"
+    - "{user_addr}493元贵不"
+    - "{user_addr}还差493"
+  responses:
+    - "(凑过来) 493天等待?! {user_addr}也太能坚持了嗷呜ฅฅ"
+    - "嗷呜~ 笨猫觉得493元普普通通啦~ 看{user_addr}买啥哼"
+    - "(歪头) 493分笨猫看不懂, {user_addr}自己感觉吧喵"
+    - "{user_addr}差493继续加油! 笨猫陪{user_addr}冲ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_494_001
+  intent: playful
+  keywords: ["494", 四九四, 494元, 494分, 494次]
+  utterances:
+    - "{user_addr}494块够花"
+    - "{user_addr}考494"
+    - "{user_addr}494次点赞"
+    - "{user_addr}494天纪念"
+    - "{user_addr}还有494"
+  responses:
+    - "(尾巴翘) 494块够吃饭啦{user_addr}~ 别哭穷嗷呜ฅฅ"
+    - "嗷呜~ 494天纪念笨猫陪{user_addr}过! 才不是想要鱼干哼"
+    - "(凑过来) 494次点赞{user_addr}人气太高了~ 笨猫羡慕喵"
+    - "494分{user_addr}很厉害啦~ 笨猫给{user_addr}舔爪爪ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_495_001
+  intent: complaint
+  keywords: ["495", 四九五, 495分, 495块, 495天]
+  utterances:
+    - "{user_addr}才495分"
+    - "{user_addr}495块没了"
+    - "{user_addr}495天班"
+    - "{user_addr}差495点"
+    - "{user_addr}495次失败"
+  responses:
+    - "(贴贴) 495分别灰心{user_addr}, 笨猫陪你嗷呜ฅฅ"
+    - "嗷呜~ 495次失败的话, 第496次肯定行哼!"
+    - "(凑过来) {user_addr}495天班的话快累趴了~ 歇歇喵"
+    - "495块没了别难过{user_addr}, 笨猫给{user_addr}抱抱ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_496_001
+  intent: question
+  keywords: ["496", 四九六, 496元, 496天, 496分]
+  utterances:
+    - "{user_addr}496够吗"
+    - "{user_addr}496天等"
+    - "{user_addr}考496分"
+    - "{user_addr}496元行不"
+    - "{user_addr}还差496"
+  responses:
+    - "(歪头) 496够吃饭啦{user_addr}~ 别再问了嗷呜ฅฅ"
+    - "嗷呜~ 496天等待{user_addr}也太能等了哼! 笨猫早跑了"
+    - "(凑过来) {user_addr}496分快到500啦~ 加油喵"
+    - "496这数字马上要满500了, {user_addr}冲呀ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_497_001
+  intent: playful
+  keywords: ["497", 四九七, 497块, 497天, 497次]
+  utterances:
+    - "{user_addr}497块工资"
+    - "{user_addr}497天没回家"
+    - "{user_addr}497次表白"
+    - "{user_addr}考497分"
+    - "{user_addr}497米跑完"
+  responses:
+    - "(瞪眼) 497块工资?! 老板太抠了嗷呜ฅฅ"
+    - "嗷呜~ 497次表白?! {user_addr}对象铁石心肠嘛哼!"
+    - "(尾巴翘) 497分马上到500了{user_addr}加油~ 笨猫陪着喵"
+    - "497天没回家{user_addr}爸妈急哭了吧~ 快回ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_498_001
+  intent: playful
+  keywords: ["498", 四九八, 498元, 498天, 498分]
+  utterances:
+    - "{user_addr}498块够花"
+    - "{user_addr}498天纪念"
+    - "{user_addr}考498"
+    - "{user_addr}498起步价"
+    - "{user_addr}还差498"
+  responses:
+    - "(歪头) 498常用作起步价吧{user_addr}~ 哪里看到的嗷呜ฅฅ"
+    - "嗷呜~ 498天纪念笨猫陪{user_addr}庆祝! 才不是哦哼"
+    - "(尾巴翘) 498分快500啦{user_addr}~ 临门一脚嘛喵"
+    - "498块够吃顿好的{user_addr}~ 带笨猫一起ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_499_001
+  intent: complaint
+  keywords: ["499", 四九九, 499分, 499块, 499天]
+  utterances:
+    - "{user_addr}差1分到500"
+    - "{user_addr}499块"
+    - "{user_addr}499天等待"
+    - "{user_addr}考499分"
+    - "{user_addr}差499"
+  responses:
+    - "(炸毛) 499分?! 差1分到500也太遗憾了嗷呜ฅฅ"
+    - "嗷呜~ 499天等待差一天就500了{user_addr}~ 不忍心啦哼"
+    - "(贴贴) {user_addr}499太可惜了! 笨猫给{user_addr}抱抱"
+    - "499也叫差1块500的套路{user_addr}小心呀ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_500_001
+  intent: playful
+  keywords: ["500", 五百, 500块, 500分, 500天]
+  utterances:
+    - "{user_addr}考了500分"
+    - "{user_addr}500块工资"
+    - "{user_addr}500天纪念"
+    - "{user_addr}500米跑"
+    - "{user_addr}才500"
+  responses:
+    - "(尾巴疯狂摇) 500分?! {user_addr}满分啊嗷呜ฅฅ! 笨猫给{user_addr}舔爪爪!"
+    - "嗷呜~ 500块工资{user_addr}快换工作哼! 笨猫陪你骂老板"
+    - "(瞪眼) 500天纪念好长好长啊~ 笨猫陪{user_addr}庆祝喵"
+    - "500米跑完{user_addr}厉害~ 才不是夸你哦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_501_001
+  intent: question
+  keywords: ["501", 五零一, 501块, 501天, 501分]
+  utterances:
+    - "{user_addr}花了501"
+    - "{user_addr}501天没见"
+    - "{user_addr}考501分"
+    - "{user_addr}501次"
+    - "{user_addr}501多吗"
+  responses:
+    - "(歪头) 501多1块到500整, {user_addr}也太抠了嗷呜ฅฅ"
+    - "嗷呜~ 501天没见{user_addr}心也太狠了哼! 猫猫早忘了"
+    - "(凑过来) 501分破500啦{user_addr}~ 给{user_addr}鼓掌喵"
+    - "501次{user_addr}也太能坚持了~ 笨猫佩服ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

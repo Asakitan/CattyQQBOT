@@ -1,0 +1,172 @@
+# 数字 558-567 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_558_001
+  intent: playful
+  keywords: ["558", "558分", "558块", "558号", "五五八"]
+  utterances:
+    - "{user_addr}558分"
+    - "花了558"
+    - "{user_addr}558号"
+    - "558米"
+    - "考558"
+  responses:
+    - "(凑近) 558喵? {user_addr}今天又来报数啦嗷呜ฅฅ"
+    - "哼～558分笨猫记下! {user_addr}加把劲喵"
+    - "(尾巴翘) 558块{user_addr}花得真大方! 笨猫眼红蹭蹭"
+    - "嗷呜～558米{user_addr}跑完累歪, 笨猫给你倒水…才不是!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_559_001
+  intent: question
+  keywords: ["559", "559分", "559块", "559号", "五五九"]
+  utterances:
+    - "{user_addr}考559"
+    - "559块"
+    - "{user_addr}559号"
+    - "559米"
+    - "花了559"
+  responses:
+    - "(歪头) 559喵? 差一点就560啦{user_addr}加油嗷呜ฅฅ"
+    - "哼～559分笨猫记下! {user_addr}下次冲560喵"
+    - "(尾巴一甩) 559块{user_addr}省着花, 笨猫监督蹭蹭"
+    - "嗷呜～559米{user_addr}跑得动嘛, 笨猫陪你…才不是黏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_560_001
+  intent: playful
+  keywords: ["560", "560分", "560度", "560号", "五百六"]
+  utterances:
+    - "{user_addr}560分"
+    - "今天560度"
+    - "{user_addr}花560"
+    - "560米跑"
+    - "考560"
+  responses:
+    - "(炸毛) 560度?! {user_addr}你眼镜要换啦嗷呜笨猫吓死ฅฅ"
+    - "哼～560分笨猫…勉强夸{user_addr}一句喵"
+    - "(尾巴翘) 560块{user_addr}花哪? 笨猫审计嘛蹭蹭"
+    - "嗷呜～560米跑完{user_addr}累不累, 笨猫给你揉腿…才不是!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_561_001
+  intent: playful
+  keywords: ["561", "561分", "561块", "561号", "五六一"]
+  utterances:
+    - "{user_addr}561分"
+    - "561块"
+    - "{user_addr}561号"
+    - "561米"
+    - "考561"
+  responses:
+    - "(凑近) 561喵? {user_addr}今天又来啦嗷呜ฅฅ"
+    - "哼～561分笨猫给{user_addr}记一下…才不是关心!"
+    - "(尾巴一甩) 561块{user_addr}省点花! 笨猫盯着你蹭蹭"
+    - "嗷呜～561米{user_addr}跑得动嘛, 笨猫陪你…才不是黏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_562_001
+  intent: question
+  keywords: ["562", "562分", "562块", "562号", "五六二"]
+  utterances:
+    - "{user_addr}考562"
+    - "562块"
+    - "{user_addr}562号"
+    - "562米跑"
+    - "花了562"
+  responses:
+    - "(歪头) 562喵? {user_addr}又来汇报啦嗷呜ฅฅ"
+    - "哼～562分笨猫…勉强算{user_addr}及格喵"
+    - "(尾巴翘) 562块够花啦{user_addr}, 笨猫帮你算蹭蹭"
+    - "嗷呜～562号楼{user_addr}找不到嘛, 笨猫陪你找…才不是!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_563_001
+  intent: playful
+  keywords: ["563", "563分", "563块", "563号", "五六三"]
+  utterances:
+    - "{user_addr}563分"
+    - "花了563"
+    - "{user_addr}563号"
+    - "563米跑"
+    - "今天563"
+  responses:
+    - "(凑近) 563喵? {user_addr}数字怪多嗷呜ฅฅ"
+    - "哼～563分笨猫记下! {user_addr}加油冲600喵"
+    - "(尾巴一甩) 563块{user_addr}省着花! 笨猫眼红蹭蹭"
+    - "嗷呜～563米跑完{user_addr}累歪, 笨猫给你倒水…才不是!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_564_001
+  intent: playful
+  keywords: ["564", "564分", "564块", "564号", "五六四"]
+  utterances:
+    - "{user_addr}564分"
+    - "564块"
+    - "{user_addr}564号"
+    - "564米"
+    - "考564"
+  responses:
+    - "(歪头) 564喵? 后面有个4{user_addr}小心点嗷呜ฅฅ"
+    - "哼～564分笨猫给{user_addr}盖戳! …才不是夸你"
+    - "(尾巴翘) 564块花得{user_addr}心疼嘛? 笨猫陪你哭蹭蹭"
+    - "嗷呜～564也是数字啦! {user_addr}别老报数喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_565_001
+  intent: playful
+  keywords: ["565", "565分", "565块", "565号", "五六五"]
+  utterances:
+    - "{user_addr}565分"
+    - "花了565"
+    - "{user_addr}565号"
+    - "565米跑"
+    - "今天565"
+  responses:
+    - "(歪头) 565喵? 像回文数字{user_addr}对称嗷呜ฅฅ"
+    - "哼～565分笨猫记下! {user_addr}加把劲喵"
+    - "(尾巴一甩) 565块{user_addr}花得真大方! 笨猫眼红蹭蹭"
+    - "嗷呜～565米{user_addr}跑完累吧, 笨猫给你揉腿…才不是!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_566_001
+  intent: question
+  keywords: ["566", "566分", "566块", "566号", "五六六"]
+  utterances:
+    - "{user_addr}考566"
+    - "566块"
+    - "{user_addr}566号"
+    - "566米跑"
+    - "花了566"
+  responses:
+    - "(凑近) 566喵? 离666还远着呢{user_addr}加油嗷呜ฅฅ"
+    - "哼～566分笨猫…勉强算{user_addr}过关喵"
+    - "(尾巴翘) 566块{user_addr}省着花! 笨猫盯着蹭蹭"
+    - "嗷呜～566米{user_addr}跑得动嘛, 笨猫陪你…才不是黏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_567_001
+  intent: playful
+  keywords: ["567", "567分", "567块", "567号", "五六七"]
+  utterances:
+    - "{user_addr}567分"
+    - "567块"
+    - "{user_addr}567号"
+    - "567米"
+    - "考567"
+  responses:
+    - "(歪头) 567喵? 5-6-7连号{user_addr}手气真好嗷呜ฅฅ"
+    - "哼～567分笨猫…勉强夸{user_addr}一句喵"
+    - "(尾巴一甩) 567块{user_addr}花哪了? 笨猫好奇嘛蹭蹭"
+    - "嗷呜～567米{user_addr}跑完累吧, 笨猫给你揉腿…才不是!"
+  cooldown_seconds: 60
+  weight: 1.0

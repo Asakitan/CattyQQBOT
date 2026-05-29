@@ -1,0 +1,172 @@
+# 数字 292-301 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_292_001
+  intent: playful
+  keywords: [292, "292块", "292分", "292天", "292次"]
+  utterances:
+    - "{user_addr}292块"
+    - "考292分"
+    - "{user_addr}等了292天"
+    - "292次心动"
+    - "292米跑"
+  responses:
+    - "(扒拉钱包) 292 块差点 300 啦{user_addr}~ 凑凑嗷呜～ฅฅ"
+    - "嗷呜～292 分越来越接近 300 啦! {user_addr}加油喵!"
+    - "(脸红) 292 次心动?! {user_addr}…才不是说猫猫吧! 哼!"
+    - "哼～292 天等下来{user_addr}毅力很可以, 笨猫蹭蹭你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_293_001
+  intent: question
+  keywords: [293, "293块", "293分", "293次", "293页"]
+  utterances:
+    - "{user_addr}293块够吗"
+    - "考了293分"
+    - "{user_addr}293次了"
+    - "翻到293页"
+    - "等了293分钟"
+  responses:
+    - "(算盘) 293 块?! {user_addr}买啥呀~ 笨猫帮你看看嗷呜～ฅฅ"
+    - "嗷呜～293 分接近 300 啦! {user_addr}冲冲冲喵!"
+    - "(累瘫) 293 次?! 猫猫数不过来啦{user_addr}~ 喵呜!"
+    - "哼～293 页快读完啦{user_addr}, 笨猫陪你冲刺!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_294_001
+  intent: playful
+  keywords: [294, "294块", "294分", "294天", "294号"]
+  utterances:
+    - "{user_addr}294块"
+    - "考了294分"
+    - "等了294天"
+    - "{user_addr}294号文件"
+    - "294人在线"
+  responses:
+    - "(尾巴摇) 294 块?! {user_addr}是要囤啥啦~ 笨猫好奇嗷呜～ฅฅ"
+    - "嗷呜～294 分加油到 300 喵! {user_addr}就差 6 分啦蹭蹭!"
+    - "(竖耳) 294 号?! {user_addr}是排到第 294 个吗哼!"
+    - "哼～294 人在线挺热闹! {user_addr}笨猫第 295 个~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_295_001
+  intent: complaint
+  keywords: [295, "295块", "295分", "295次", "295斤"]
+  utterances:
+    - "{user_addr}花了295块"
+    - "考295分崩了"
+    - "等了295次"
+    - "{user_addr}295斤"
+    - "295天没回家"
+  responses:
+    - "(掏小本本) 295 块花啥啦{user_addr}!! 笨猫给你记账嗷呜～ฅฅ"
+    - "嗷呜～295 分!! 离 300 就 5 分啦{user_addr}, 别哭别哭蹭蹭!"
+    - "(瞪眼) 295 斤?! {user_addr}别吓笨猫~ 是 29.5 吧哼!"
+    - "哼～295 天没回家{user_addr}快回去! 家人会担心的喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_296_001
+  intent: question
+  keywords: [296, "296块", "296分", "296天", "296米"]
+  utterances:
+    - "{user_addr}296块"
+    - "考296分"
+    - "{user_addr}296天纪念"
+    - "跑了296米"
+    - "{user_addr}296号"
+  responses:
+    - "(凑近) 296 块?! {user_addr}凑个 300 嘛~ 笨猫帮你嗷呜～ฅฅ"
+    - "嗷呜～296 分!! 差 4 分到 300 啦, {user_addr}加油喵!"
+    - "(尾巴翘) 296 米快跑完啦{user_addr}! 笨猫给你递水蹭蹭!"
+    - "哼～296 天?! {user_addr}是不是有特别的纪念哼! 笨猫好奇~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_297_001
+  intent: playful
+  keywords: [297, "297块", "297分", "297次", "297页"]
+  utterances:
+    - "{user_addr}297块"
+    - "考297分"
+    - "{user_addr}297次了"
+    - "翻到297页"
+    - "等了297分钟"
+  responses:
+    - "(歪头) 297 块?! {user_addr}凑 3 块到 300 嘛, 笨猫给你 3 个嗷呜～ฅฅ"
+    - "嗷呜～297 分!! {user_addr}超棒, 笨猫给你抱抱蹭蹭!"
+    - "(累趴) 297 次?! {user_addr}饶了猫猫~ 喵呜呜!"
+    - "哼～297 页都看了{user_addr}真有毅力! 笨猫崇拜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_298_001
+  intent: playful
+  keywords: [298, "298块", "298分", "298天", "298号"]
+  utterances:
+    - "{user_addr}298块发"
+    - "考298分"
+    - "等了298天"
+    - "{user_addr}298号"
+    - "充了298块"
+  responses:
+    - "(拍爪) 298 块谐音爱要发! {user_addr}吉利嗷呜～ฅฅ"
+    - "嗷呜～298 分!! 离满 300 一步之遥! {user_addr}冲喵!"
+    - "(尾巴翘) 298 天等下来{user_addr}也太能熬, 笨猫蹭蹭安慰!"
+    - "哼～298 块充啥啦?! {user_addr}是不是又氪游戏~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_299_001
+  intent: question
+  keywords: [299, "299块", "299分", "299元", "299天"]
+  utterances:
+    - "{user_addr}299块好划算"
+    - "考299分差1分"
+    - "299元活动"
+    - "等了299天"
+    - "{user_addr}299号"
+  responses:
+    - "(尾巴翘) 299 这价格商家套路啦{user_addr}~ 笨猫看穿嗷呜～ฅฅ"
+    - "嗷呜～299 分差 1 分上 300! {user_addr}心痛吧, 笨猫抱抱蹭蹭!"
+    - "(扒钱包) 299 元活动看下值不值{user_addr}~ 笨猫帮你参谋!"
+    - "哼～299 天差 1 天满 300, {user_addr}再坚持一天嘛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_300_001
+  intent: playful
+  keywords: [300, "300块", "300斯巴达", "300分", "300天"]
+  utterances:
+    - "{user_addr}300块整"
+    - "考了300满分"
+    - "300斯巴达"
+    - "等了300天"
+    - "{user_addr}300号"
+  responses:
+    - "(撒花) 300 整数啦嗷呜～{user_addr}吉利ฅฅ"
+    - "嗷呜～300 分!! 满分大佬!! {user_addr}笨猫顶礼膜拜喵!"
+    - "(尾巴翘) 300 斯巴达?! {user_addr}是要开战嘛~ 笨猫给你应援哼!"
+    - "哼～等了 300 天!! {user_addr}耐心 max, 笨猫服蹭蹭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_301_001
+  intent: question
+  keywords: [301, "301医院", "301块", "301分", "301天"]
+  utterances:
+    - "{user_addr}301医院"
+    - "301块"
+    - "考301分"
+    - "{user_addr}301号文件"
+    - "等了301天"
+  responses:
+    - "(竖耳朵) 301 医院好厉害啊{user_addr}! 笨猫听过哼~"
+    - "嗷呜～301 块多了 1 块!! {user_addr}给猫猫这 1 块嘛蹭蹭ฅฅ"
+    - "(歪头) 301 分突破 300 啦{user_addr}! 笨猫给你抱抱嗷呜～"
+    - "哼～301 天!! {user_addr}是钉子户, 笨猫见证了喵!"
+  cooldown_seconds: 60
+  weight: 1.0

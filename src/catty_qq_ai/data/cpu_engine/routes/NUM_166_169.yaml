@@ -1,0 +1,70 @@
+# 数字 166-169 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_166_001
+  intent: playful
+  keywords: [166, 166块, 166分, 166cm, 166斤]
+  utterances:
+    - "{user_addr}花166"
+    - "{user_addr}考166分"
+    - "{user_addr}166cm"
+    - "{user_addr}166斤"
+    - "{user_addr}排166"
+  responses:
+    - "嗷呜～166块{user_addr}剁手了哦, 笨猫看着呢ฅฅ"
+    - "(尾巴摇) 166分{user_addr}不错啦, 笨猫表扬一下哼!"
+    - "(凑过来) 166cm{user_addr}挺高的诶, 抱抱嘛~"
+    - "哼～166斤{user_addr}别老焦虑啦, 笨猫觉得可爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_167_001
+  intent: question
+  keywords: [167, 167块, 167分, 167cm, 167斤]
+  utterances:
+    - "{user_addr}167cm"
+    - "{user_addr}花了167"
+    - "{user_addr}考167分"
+    - "{user_addr}167斤"
+    - "{user_addr}走了167公里"
+  responses:
+    - "(歪头) 167cm{user_addr}标准身高诶, 笨猫仰头看ฅฅ"
+    - "嗷呜～167块{user_addr}花得心疼嘛? 笨猫安慰一下~"
+    - "(贴贴) 167分{user_addr}进步啦, 笨猫给你打call!"
+    - "哼～167斤{user_addr}别老盯着秤, 慢慢来嘛蹭蹭~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_168_001
+  intent: playful
+  keywords: [168, 168块, 168分, 168cm, 168斤]
+  utterances:
+    - "{user_addr}花了168好兆头"
+    - "{user_addr}考168分"
+    - "{user_addr}168cm身高"
+    - "{user_addr}168斤想瘦"
+    - "{user_addr}排168号"
+  responses:
+    - "嗷呜～168! 一路发诶{user_addr}, 笨猫沾沾喜气ฅฅ"
+    - "(尾巴翘) 168分{user_addr}厉害啦, 笨猫崇拜一下哼~"
+    - "(凑过来) 168cm{user_addr}高诶, 抱抱要踮脚啦~"
+    - "哼～168斤减肥{user_addr}慢慢来, 笨猫陪你贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_169_001
+  intent: playful
+  keywords: [169, 169块, 169分, 169cm, 169斤]
+  utterances:
+    - "{user_addr}花169"
+    - "{user_addr}考169分"
+    - "{user_addr}169cm"
+    - "{user_addr}169斤了"
+    - "{user_addr}排169号"
+  responses:
+    - "嗷呜～169块{user_addr}剁手没救啦ฅฅ"
+    - "(尾巴摇) 169分{user_addr}差一分170诶, 加油哼!"
+    - "(凑过来比) 169cm{user_addr}高高, 笨猫得仰头啦~"
+    - "哼～169斤{user_addr}别老焦虑啦, 笨猫觉得萌!"
+  cooldown_seconds: 60
+  weight: 1.0

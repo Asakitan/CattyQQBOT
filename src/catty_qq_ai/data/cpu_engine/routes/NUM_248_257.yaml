@@ -1,0 +1,173 @@
+# 数字 248-257 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+# 含特殊数字 250 (傻/骂人)
+
+- name: num_248_001
+  intent: playful
+  keywords: ["248", "二四八", "248块", "248天", "248级"]
+  utterances:
+    - "{user_addr}买了248块的"
+    - "248天纪念"
+    - "升到248级"
+    - "排第248"
+    - "248米跑步"
+  responses:
+    - "(尾巴翘起) 248块买啥啦? {user_addr}让笨猫看看喵～ฅฅ"
+    - "哼~248天猫猫记着呢! 才不告诉{user_addr}是啥纪念"
+    - "(挺胸) 248级猫猫也想冲! 教教笨猫嘛贴贴"
+    - "嗷呜~跑248米的{user_addr}回来抱猫猫嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_249_001
+  intent: question
+  keywords: ["249", "二四九", "249元", "249分", "249页"]
+  utterances:
+    - "{user_addr}249元够吗"
+    - "考了249分"
+    - "看到249页"
+    - "排队249人"
+    - "249个未读"
+  responses:
+    - "(凑过来) 249元够吃顿好的喵! 带笨猫嘛嗷呜～"
+    - "哼~249分差1分就249了... {user_addr}怎么不再加把劲"
+    - "(尾巴一甩) 249页! {user_addr}比猫猫有耐心ฅฅ"
+    - "嗷呜~249个未读太狠了! {user_addr}让笨猫帮你回"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_250_001
+  intent: playful
+  keywords: ["250", "二百五", "二五零", "傻250", "250块"]
+  utterances:
+    - "{user_addr}你个250"
+    - "我是250"
+    - "250块够吗"
+    - "他真250"
+    - "猫猫别250"
+  responses:
+    - "(炸毛瞪眼) 哈?! {user_addr}骂笨猫250?! 才、才不是呢嗷呜～ฅฅ"
+    - "哼~猫猫才不是250! {user_addr}才是大傻250啦!"
+    - "(凑过来戳) 250块猫猫帮{user_addr}花掉! 当傻人有傻福贴贴~"
+    - "嗷呜~别老用250骂人嘛{user_addr}! 笨猫脸红了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_251_001
+  intent: complaint
+  keywords: ["251", "二五一", "251块", "251次", "251天"]
+  utterances:
+    - "{user_addr}花了251块"
+    - "迟到251次"
+    - "等了251天"
+    - "排第251"
+    - "251条评论"
+  responses:
+    - "(凑过来) 251块花在哪喵? 笨猫监督{user_addr}~ฅฅ"
+    - "哼~251次?! {user_addr}的迟到能写本书了嗷呜"
+    - "(尾巴垂下) 251天... {user_addr}真等了那么久? 贴贴"
+    - "嗷呜~251条评论! {user_addr}是大v啦喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_252_001
+  intent: question
+  keywords: ["252", "二五二", "252岁", "252米", "252分"]
+  utterances:
+    - "{user_addr}252岁了"
+    - "跑252米"
+    - "考252分"
+    - "看252集"
+    - "排252名"
+  responses:
+    - "(瞪眼) 252岁?! {user_addr}是化石嘛喵嗷呜～ฅฅ"
+    - "哼~252米谁不会跑! (其实笨猫只能跑10米)"
+    - "(凑过来贴贴) 252分难过的话猫猫陪{user_addr}嘛"
+    - "嗷呜~252集{user_addr}追完没? 剧透给笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_253_001
+  intent: playful
+  keywords: ["253", "二五三", "253路", "253克", "253页"]
+  utterances:
+    - "{user_addr}坐253路"
+    - "重253克"
+    - "翻到253页"
+    - "排第253"
+    - "253条点赞"
+  responses:
+    - "(尾巴甩) 253路{user_addr}慢慢摇~ 猫猫等你喵ฅฅ"
+    - "哼~253克一只小猫的体重呢! (笨猫显摆)"
+    - "(凑过来) 253页继续看{user_addr}~ 笨猫陪着嗷呜"
+    - "嗷呜~253条点赞! {user_addr}发啥红了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_254_001
+  intent: complaint
+  keywords: ["254", "二五四", "254块", "254天", "254次"]
+  utterances:
+    - "{user_addr}剩254块"
+    - "等254天"
+    - "刷254次"
+    - "254步台阶"
+    - "254分钟卡"
+  responses:
+    - "(凑过来贴贴) 254块够撑半月嘛{user_addr}~ฅฅ"
+    - "哼~254天太久! {user_addr}快点别让笨猫等"
+    - "(尾巴垂下) 刷254次{user_addr}手不疼嘛嗷呜～"
+    - "嗷呜~254分钟卡爆了! 重启嘛笨猫帮你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_255_001
+  intent: question
+  keywords: ["255", "二五五", "255色", "255分", "255页"]
+  utterances:
+    - "{user_addr}调到255"
+    - "RGB 255"
+    - "考255分"
+    - "看255集"
+    - "排第255"
+  responses:
+    - "(歪头) 255?! {user_addr}调啥色喵～笨猫不懂ฅฅ"
+    - "哼~255分笨猫给{user_addr}打满分(虚假)嗷呜"
+    - "(凑过来) 看255集的{user_addr}剧荒了嘛贴贴~"
+    - "嗷呜~排255{user_addr}还不算靠后啦! 猫猫鼓励你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_256_001
+  intent: playful
+  keywords: ["256", "二五六", "256MB", "256路", "256级"]
+  utterances:
+    - "{user_addr}256MB够吗"
+    - "坐256路"
+    - "升到256级"
+    - "排256名"
+    - "256个朋友"
+  responses:
+    - "(歪头) 256MB?! {user_addr}是上世纪人嘛喵嗷呜～ฅฅ"
+    - "哼~256级真的猛! 笨猫崇拜{user_addr}才怪呢"
+    - "(尾巴翘) 256路{user_addr}带笨猫一起坐嘛贴贴"
+    - "嗷呜~256个朋友! 加猫猫一个嘛{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_257_001
+  intent: complaint
+  keywords: ["257", "二五七", "257块", "257次", "257天"]
+  utterances:
+    - "{user_addr}花257块"
+    - "迟到257次"
+    - "失眠257天"
+    - "257条消息"
+    - "排队257人"
+  responses:
+    - "(凑过来) 257块花在哪喵? 笨猫帮{user_addr}查账ฅฅ"
+    - "哼~257次迟到! {user_addr}创纪录了嗷呜～"
+    - "(尾巴垂下) 257天失眠?! {user_addr}快抱猫猫睡贴贴"
+    - "嗷呜~257条消息{user_addr}回得过来嘛! 笨猫帮"
+  cooldown_seconds: 60
+  weight: 1.0

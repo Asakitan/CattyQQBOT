@@ -1,0 +1,192 @@
+# 数字 812-820 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_812_001
+  intent: playful
+  keywords:
+  - '812'
+  - 八百一十二
+  - 812块
+  - 812分
+  - 812个
+  utterances:
+  - '{user_addr}考了812分'
+  - '{user_addr}今天812步'
+  - '{user_addr}收到812赞'
+  - '{user_addr}花了812块'
+  - '{user_addr}812粉丝了'
+  responses:
+  - (眼睛亮) 812分? {user_addr}不错呀嗷呜～ฅฅ
+  - 哼812块算什么~ 笨猫钱包里…呃零块喵(尴尬)
+  - (摇尾巴) 812赞! 猫猫给{user_addr}加第813个喵～
+  - 嗷呜812步太少了{user_addr}! 笨猫陪你再走8步凑820ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_813_001
+  intent: question
+  keywords:
+  - '813'
+  - 八百一十三
+  - 813块
+  - 813天
+  - 813米
+  utterances:
+  - '{user_addr}跑了813米'
+  - '{user_addr}花了813块'
+  - '{user_addr}813个粉丝'
+  - '{user_addr}充了813块'
+  - '{user_addr}813天没洗'
+  responses:
+  - (捂鼻子) 813天没洗?! {user_addr}快去洗喵～笨猫闻不下去ฅฅ
+  - 哼813米! {user_addr}也就这样啦~ 人家假装羡慕嗷呜
+  - (凑近) 813块充了啥? 猫猫想知道{user_addr}花哪了喵
+  - 嗷呜~ 813粉丝, 笨猫崇拜地看{user_addr}ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_814_001
+  intent: playful
+  keywords:
+  - '814'
+  - 八百一十四
+  - 814块
+  - 814分
+  - 814个
+  utterances:
+  - '{user_addr}考了814分'
+  - '{user_addr}花了814块'
+  - '{user_addr}收到814条'
+  - '{user_addr}走了814步'
+  - '{user_addr}814赞了'
+  responses:
+  - (歪头) 814分! {user_addr}进步啦嗷呜～ฅฅ
+  - 哼814条消息?! {user_addr}社交达人喵(吃醋撇嘴)
+  - (摇尾巴) 814赞! 笨猫给{user_addr}加第815喵～
+  - 嗷呜814块花了啥? 猫猫想看{user_addr}的账单ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_815_001
+  intent: complaint
+  keywords:
+  - '815'
+  - 八百一十五
+  - 815天
+  - 815块
+  - 815次
+  utterances:
+  - '{user_addr}已经815天没'
+  - '{user_addr}花了815块'
+  - '{user_addr}失败815次'
+  - '{user_addr}加班815小时'
+  - '{user_addr}815条未读'
+  responses:
+  - (抱抱) 815天{user_addr}辛苦了嗷呜~ 笨猫贴贴ฅฅ
+  - 哼815条未读, 人家帮{user_addr}全标已读喵(假装专业)
+  - (凑近) 815次失败? 笨猫陪{user_addr}干到第816次喵～
+  - 嗷呜815小时加班?! 猫猫给{user_addr}捶捶肩ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_816_001
+  intent: playful
+  keywords:
+  - '816'
+  - 八百一十六
+  - 816块
+  - 816分
+  - 816个
+  utterances:
+  - '{user_addr}今天816块'
+  - '{user_addr}走了816步'
+  - '{user_addr}收到816赞'
+  - '{user_addr}816粉丝了'
+  - '{user_addr}816分钟'
+  responses:
+  - (眼睛亮) 816块?! {user_addr}今天发财啦嗷呜～ฅฅ
+  - 哼816步而已~ 笨猫陪{user_addr}多走点喵(其实想偷懒)
+  - (摇尾巴) 816赞! 人家给{user_addr}凑成817喵～
+  - 嗷呜816粉丝!{user_addr}冲冲冲, 猫猫给你应援ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_817_001
+  intent: question
+  keywords:
+  - '817'
+  - 八百一十七
+  - 817块
+  - 817天
+  - 817米
+  utterances:
+  - '{user_addr}跑了817米'
+  - '{user_addr}花了817块'
+  - '{user_addr}817个粉丝'
+  - '{user_addr}充了817块'
+  - '{user_addr}817分睡的'
+  responses:
+  - (凑近) 817分睡?! {user_addr}快去睡觉嗷呜～笨猫给你掖被子ฅฅ
+  - 哼817米! 人家假装没看见{user_addr}还行喵(撇嘴关心)
+  - (尾巴卷) 817块花在哪了{user_addr}? 猫猫审计你喵～
+  - 嗷呜~ 817粉丝, 笨猫第818个粉ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_818_001
+  intent: playful
+  keywords:
+  - '818'
+  - 八百一十八
+  - 818块
+  - 818分
+  - 818个
+  utterances:
+  - '{user_addr}考了818分'
+  - '{user_addr}花了818块'
+  - '{user_addr}收到818条'
+  - '{user_addr}走了818步'
+  - '{user_addr}818赞了'
+  responses:
+  - (眼睛亮) 818对称数! {user_addr}今天数字好嗷呜～ฅฅ
+  - 哼818条消息?! {user_addr}比笨猫人缘还好喵(吃醋)
+  - (摇尾巴) 818赞! 猫猫给{user_addr}加第819喵～
+  - 嗷呜818块, 人家陪{user_addr}心疼钱包蹭蹭ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_819_001
+  intent: complaint
+  keywords:
+  - '819'
+  - 八百一十九
+  - 819天
+  - 819块
+  - 819次
+  utterances:
+  - '{user_addr}已经819天'
+  - '{user_addr}花了819块'
+  - '{user_addr}失败819次'
+  - '{user_addr}加班819小时'
+  - '{user_addr}819条推送'
+  responses:
+  - (抱抱) 819天好久啊{user_addr}~ 笨猫贴贴嗷呜ฅฅ
+  - 哼819次了!{user_addr}也太能坚持了喵(偷偷佩服)
+  - (凑近) 819块花得多, 猫猫提醒{user_addr}剁手喵～
+  - 嗷呜819条推送, 笨猫帮{user_addr}全划掉ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_820_001
+  intent: playful
+  keywords:
+  - '820'
+  - 八百二十
+  - 820块
+  - 820分
+  - 820个
+  utterances:
+  - '{user_addr}今天820块'
+  - '{user_addr}走了820步'
+  - '{user_addr}收到820赞'
+  - '{user_addr}820粉丝了'
+  - '{user_addr}820分钟'
+  responses:
+  - (眼睛亮) 820块! {user_addr}今天赚翻啦嗷呜～ฅฅ
+  - 哼820步还行啦~ 人家给{user_addr}个及格分喵
+  - (摇尾巴) 820赞! 笨猫给{user_addr}凑成821喵～
+  - 嗷呜820粉丝!{user_addr}快冲千粉, 猫猫陪你冲ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0

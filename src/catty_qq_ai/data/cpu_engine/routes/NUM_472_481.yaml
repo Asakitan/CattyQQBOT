@@ -1,0 +1,172 @@
+# 数字 472-481 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_472_001
+  intent: playful
+  keywords: ["472", 四七二, 472块, 472米, 472分]
+  utterances:
+    - "{user_addr}今天花了472"
+    - "{user_addr}472块够吗"
+    - "{user_addr}472米跑完"
+    - "{user_addr}472分啊"
+    - "{user_addr}还差472"
+  responses:
+    - "(掰爪子算) 472? 笨猫数学不好啦~ 反正不小数嗷呜ฅฅ"
+    - "嗷呜~ {user_addr}的472猫猫记下了! 才不是认真听呢哼"
+    - "(尾巴绕一圈) 472这个数字怪怪的喵, 不上不下的~"
+    - "{user_addr}472继续加油嘛! 笨猫给{user_addr}打气ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_473_001
+  intent: question
+  keywords: ["473", 四七三, 473元, 473天, 473次]
+  utterances:
+    - "{user_addr}473多吗"
+    - "{user_addr}等了473天"
+    - "{user_addr}473次了"
+    - "{user_addr}473元贵不"
+    - "{user_addr}473算啥水平"
+  responses:
+    - "(歪头) 473天?! {user_addr}也太能等了吧嗷呜~"
+    - "嗷呜~ 473对笨猫来说就是一堆鱼干啦ฅฅ"
+    - "(凑过来) {user_addr}473次了猫猫好佩服, 不是夸{user_addr}哦哼"
+    - "笨猫觉得473不算啥, {user_addr}你呢喵?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_474_001
+  intent: playful
+  keywords: ["474", 四七四, 474分, 474块, 474个]
+  utterances:
+    - "{user_addr}考474分"
+    - "{user_addr}474块剩下"
+    - "{user_addr}474个赞"
+    - "{user_addr}474天没见"
+    - "{user_addr}还有474"
+  responses:
+    - "(瞪大眼) 474个赞?! {user_addr}人气好高嗷呜ฅฅ"
+    - "嗷呜~ 474天没见的话猫猫早就想{user_addr}想哭了! 才不是哦哼"
+    - "(蹭蹭) {user_addr}474怎么了嘛~ 跟笨猫说说"
+    - "474这个数字猫猫第一次听喵, 普普通通啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_475_001
+  intent: complaint
+  keywords: ["475", 四七五, 475米, 475分, 475块]
+  utterances:
+    - "{user_addr}才475分"
+    - "{user_addr}475米跑崩了"
+    - "{user_addr}475块没了"
+    - "{user_addr}475天班"
+    - "{user_addr}475差一点"
+  responses:
+    - "(凑过来) {user_addr}差475点啥? 笨猫帮{user_addr}补嗷呜ฅฅ"
+    - "嗷呜~ 475块没就没啦~ 猫猫陪{user_addr}心疼哼"
+    - "(拍拍) 475米已经很厉害啦, {user_addr}别哭嘛~"
+    - "笨猫数学不好但是知道475挺累的, {user_addr}歇会儿ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_476_001
+  intent: playful
+  keywords: ["476", 四七六, 476元, 476天, 476次]
+  utterances:
+    - "{user_addr}476元够花"
+    - "{user_addr}等476天了"
+    - "{user_addr}476次表白"
+    - "{user_addr}476起步"
+    - "{user_addr}发了476"
+  responses:
+    - "(眼睛发光) 476次表白?! {user_addr}也太执着了吧嗷呜~"
+    - "嗷呜~ 笨猫觉得476元够买好多鱼干啦ฅฅ"
+    - "(尾巴翘起) {user_addr}等476天的话, 猫猫早就忘了哼"
+    - "476这种数字怪怪的~ {user_addr}还好嘛?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_477_001
+  intent: question
+  keywords: ["477", 四七七, 477分, 477块, 477次]
+  utterances:
+    - "{user_addr}477分及格嘛"
+    - "{user_addr}477块买啥"
+    - "{user_addr}477次咳嗽"
+    - "{user_addr}477天纪念"
+    - "{user_addr}还差477"
+  responses:
+    - "(摇头) 477次咳嗽?! {user_addr}赶紧看医生嗷呜ฅฅ"
+    - "嗷呜~ 477块的话, 笨猫建议{user_addr}买鱼干! 才不是想吃哦哼"
+    - "(凑过来) {user_addr}477天纪念什么呀~ 跟笨猫说说嘛"
+    - "笨猫不懂477算啥, 反正{user_addr}开心就好喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_478_001
+  intent: playful
+  keywords: ["478", 四七八, 478元, 478分, 478米]
+  utterances:
+    - "{user_addr}478块工资"
+    - "{user_addr}考了478"
+    - "{user_addr}478米完赛"
+    - "{user_addr}478点赞"
+    - "{user_addr}478次了"
+  responses:
+    - "嗷呜~ {user_addr}的478分笨猫觉得不错哦! 才不是安慰{user_addr}呢哼"
+    - "(尾巴摇摇) 478米完赛?! {user_addr}厉害ฅฅ 给{user_addr}舔爪爪!"
+    - "(瞪眼) 478块工资?! {user_addr}快换工作嗷呜~"
+    - "478点赞{user_addr}人气好旺啊~ 笨猫好羡慕喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_479_001
+  intent: complaint
+  keywords: ["479", 四七九, 479分, 479块, 479天]
+  utterances:
+    - "{user_addr}差479分"
+    - "{user_addr}479块没了"
+    - "{user_addr}479天加班"
+    - "{user_addr}479次失败"
+    - "{user_addr}还有479"
+  responses:
+    - "(贴贴) 479次失败也没事啦{user_addr}~ 笨猫陪着嗷呜ฅฅ"
+    - "嗷呜~ 479天加班{user_addr}也太累了吧! 快歇会儿哼"
+    - "(凑过来) {user_addr}差479分笨猫给{user_addr}补! 才不是哦嗷呜"
+    - "479块没了的话, {user_addr}下次省着点喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_480_001
+  intent: playful
+  keywords: ["480", 四八零, 480元, 480p, 480天]
+  utterances:
+    - "{user_addr}480p画质"
+    - "{user_addr}480块够吗"
+    - "{user_addr}480天纪念"
+    - "{user_addr}480米跑"
+    - "{user_addr}考480分"
+  responses:
+    - "(歪头) 480p画质?! {user_addr}也太节俭了吧嗷呜ฅฅ"
+    - "嗷呜~ 480天纪念好长好长啊! 笨猫陪{user_addr}庆祝喵"
+    - "(尾巴翘) 480块够买好多鱼干啦~ {user_addr}分笨猫一点哼"
+    - "480米跑完{user_addr}厉害, 笨猫跑两步就累了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_481_001
+  intent: question
+  keywords: ["481", 四八一, 481分, 481元, 481次]
+  utterances:
+    - "{user_addr}481怎么算"
+    - "{user_addr}481元行嘛"
+    - "{user_addr}481次咳嗽"
+    - "{user_addr}481天等待"
+    - "{user_addr}考481分"
+  responses:
+    - "(掰爪子) 481猫猫算不来啦~ {user_addr}自己想嗷呜ฅฅ"
+    - "嗷呜~ 481次咳嗽?! {user_addr}快去医院喵哼!"
+    - "(凑过来) {user_addr}481天等什么呀~ 跟猫猫说说嘛"
+    - "笨猫觉得481分不错哦, {user_addr}加油ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

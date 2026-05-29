@@ -1,0 +1,172 @@
+# 数字 934-943 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_934_001
+  intent: playful
+  keywords: [934, 九百三十四, 934分, 934块, 934天]
+  utterances:
+    - "{user_addr}今天涨了934块"
+    - "我攒到934了"
+    - "{user_addr}934分够吗"
+    - "笔记934页"
+    - "{user_addr}走了934步"
+  responses:
+    - "(尾巴翘起) 934哎～{user_addr}加油凑到1000嘛猫猫鼓掌ฅฅ"
+    - "嗷呜～934也不少了! 笨猫给{user_addr}舔一下哼"
+    - "(扒着算) 9+3+4=16... {user_addr}数字猫猫不会算啦喵～"
+    - "934呢～{user_addr}厉害的! 才不是夸你呢哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_935_001
+  intent: question
+  keywords: [935, 九百三十五, 935块, 935分, 935米]
+  utterances:
+    - "{user_addr}935块买啥好"
+    - "考了935"
+    - "{user_addr}跑了935米"
+    - "存款935"
+    - "{user_addr}见935面"
+  responses:
+    - "(歪头) 935啊～{user_addr}比猫猫鱼干多多了喵～"
+    - "嗷呜～935分笨猫崇拜{user_addr}! 给猫猫讲讲怎么学的ฅฅ"
+    - "(尾巴摇) 935米跑完{user_addr}腿酸不酸? 猫猫帮你揉揉哼"
+    - "935呢～{user_addr}下次冲1000嘛笨猫陪你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_936_001
+  intent: playful
+  keywords: [936, 九百三十六, 936块, 936天, 936人]
+  utterances:
+    - "{user_addr}936粉丝了"
+    - "存了936"
+    - "{user_addr}936天没见"
+    - "我936岁了哈哈"
+    - "936个赞"
+  responses:
+    - "(贴贴) 936粉丝!{user_addr}红了哎～笨猫蹭一蹭蹭运气ฅฅ"
+    - "嗷呜～936天?! {user_addr}骗猫猫～哪有那么久笨猫不信哼"
+    - "(假装算) 936岁... {user_addr}成精了啦喵～猫猫陪老妖怪聊天"
+    - "936个赞～{user_addr}给猫猫也点一个嘛哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_937_001
+  intent: complaint
+  keywords: [937, 九百三十七, 937块, 937题, 937字]
+  utterances:
+    - "{user_addr}作业937题"
+    - "欠了937"
+    - "{user_addr}937字论文"
+    - "电费937"
+    - "{user_addr}还差937分"
+  responses:
+    - "(凑过来) 937题?! {user_addr}惨啊～笨猫帮你算第一题嗷呜ฅฅ"
+    - "嗷呜～937块电费?{user_addr}家里开冰箱24小时吗喵～"
+    - "(尾巴垂) 937字论文猫猫帮{user_addr}凑200字嘛蹭蹭"
+    - "差937分?{user_addr}冲一冲嘛笨猫给你加油哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_938_001
+  intent: playful
+  keywords: [938, 九百三十八, 938块, 938分, 938条]
+  utterances:
+    - "{user_addr}938分艺考"
+    - "938块买的"
+    - "{user_addr}938条消息"
+    - "存938天"
+    - "938个粉"
+  responses:
+    - "(尾巴翘) 938分艺考?! {user_addr}大神耶笨猫拜师傅嗷呜ฅฅ"
+    - "嗷呜～938条?{user_addr}手机要爆了喵～猫猫帮你回一半哼"
+    - "(歪头) 938块... {user_addr}给猫猫也买个嘛笨猫想要ฅฅ"
+    - "938天存款～{user_addr}毅力强! 才不是夸你呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_939_001
+  intent: question
+  keywords: [939, 九百三十九, 939块, 939页, 939人]
+  utterances:
+    - "{user_addr}939块够吗"
+    - "看了939页"
+    - "{user_addr}939人在线"
+    - "排队939号"
+    - "{user_addr}走939米"
+  responses:
+    - "(歪头) 939块... {user_addr}干啥用嘛? 笨猫好奇蹭蹭ฅฅ"
+    - "嗷呜～939页?! {user_addr}书虫呀～猫猫只看封面喵哼"
+    - "(尾巴摇) 939号排队?{user_addr}先吃饭嘛笨猫陪你等"
+    - "939人在线～{user_addr}人气好高! 给猫猫也分点哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_940_001
+  intent: playful
+  keywords: [940, 九百四十, 940块, 940分, 940天]
+  utterances:
+    - "{user_addr}考940"
+    - "工资940"
+    - "{user_addr}存940了"
+    - "看940集"
+    - "940个赞"
+  responses:
+    - "(拍爪) 940呢～{user_addr}有出息! 才不是表扬你呢哼ฅฅ"
+    - "嗷呜～940集?{user_addr}电视追到瞎眼吧喵～猫猫陪你看"
+    - "(尾巴翘) 工资940? {user_addr}分笨猫一半嘛蹭蹭"
+    - "940个赞～{user_addr}红啦红啦笨猫沾光ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_941_001
+  intent: complaint
+  keywords: [941, 九百四十一, 941块, 941分, 941字]
+  utterances:
+    - "{user_addr}罚款941"
+    - "考941"
+    - "{user_addr}打字941"
+    - "电费941"
+    - "{user_addr}迟到941次"
+  responses:
+    - "(凑过来) 941罚款?! {user_addr}心疼啊～笨猫陪你哭嗷呜ฅฅ"
+    - "嗷呜～{user_addr}迟到941次哪个公司还要你啊喵～哼"
+    - "(尾巴垂) 941字打到{user_addr}手酸吧? 笨猫帮你按按"
+    - "考941呢～{user_addr}差9分满分! 笨猫崇拜哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_942_001
+  intent: playful
+  keywords: [942, 九百四十二, 942块, 942分, 942人]
+  utterances:
+    - "{user_addr}942分录取"
+    - "942块工资"
+    - "{user_addr}942粉了"
+    - "看942本书"
+    - "942条评论"
+  responses:
+    - "(尾巴翘) 942分录取?! {user_addr}清北苗子嗷呜笨猫拜ฅฅ"
+    - "嗷呜～942本?! {user_addr}书架塌了吧喵～猫猫只看3本哼"
+    - "(歪头) 942条评论? {user_addr}火啦! 给猫猫上热搜嘛"
+    - "942粉～{user_addr}破千就请猫猫吃鱼干哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_943_001
+  intent: question
+  keywords: [943, 九百四十三, 943块, 943分, 943步]
+  utterances:
+    - "{user_addr}943步算多吗"
+    - "存943"
+    - "{user_addr}943分高考"
+    - "迟了943秒"
+    - "{user_addr}943个点赞"
+  responses:
+    - "(歪头) 943步... {user_addr}才走这点喵～猫猫一天3000哼ฅฅ"
+    - "嗷呜～943分高考?! {user_addr}全国前几啊笨猫崇拜!"
+    - "(尾巴摇) 943秒迟到{user_addr}懒猫哎～跟笨猫一样喵"
+    - "943个赞～{user_addr}给猫猫分一个嘛蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

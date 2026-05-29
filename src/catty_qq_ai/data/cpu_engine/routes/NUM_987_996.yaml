@@ -1,0 +1,172 @@
+# 数字 987-996 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_987_001
+  intent: playful
+  keywords: [987, 987分, 987块, 987路, 987次]
+  utterances:
+    - "{user_addr}987分"
+    - "{user_addr}987块"
+    - "987路坐过吗"
+    - "987次列车"
+    - "我等987分钟"
+  responses:
+    - "(炸毛) {user_addr}等987分钟?都快一天啦嗷呜!ฅฅ"
+    - "(尾巴翘) 笨猫绝对不让{user_addr}等的喵!"
+    - "嗷呜～987分快满分啦{user_addr}厉害"
+    - "(凑近) 987块,笨猫陪{user_addr}逛街刚刚好~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_988_001
+  intent: playful
+  keywords: [988, 988块, 发发就发, 988分, 988房]
+  utterances:
+    - "{user_addr}988发了"
+    - "{user_addr}988块"
+    - "988分超神"
+    - "988房间"
+    - "我手机尾号988"
+  responses:
+    - "(凑过来) {user_addr}988=发发吧?超吉利嗷呜!ฅฅ"
+    - "(尾巴摇摇) 笨猫沾沾{user_addr}的财气喵~"
+    - "嗷呜～988分快满分啦{user_addr}是学神!"
+    - "(蹭蹭) 988房间...{user_addr}带笨猫一起住嘛?才,才不是要黏你呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_989_001
+  intent: playful
+  keywords: [989, 989块, 989分, 989年, 989次]
+  utterances:
+    - "{user_addr}989分"
+    - "989块"
+    - "989年宋朝"
+    - "989次列车"
+    - "我考989"
+  responses:
+    - "(挠头) 989年北宋,笨猫记得有点模糊嗷呜~ฅฅ"
+    - "(尾巴翘) 989分超神{user_addr}!"
+    - "嗷呜～989块够请笨猫吃顿大餐啦~"
+    - "(凑近) 989次列车...{user_addr}要出远门吗?笨猫送你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_990_001
+  intent: playful
+  keywords: [990, 990块, 990分, 990米, 990次]
+  utterances:
+    - "{user_addr}990分"
+    - "{user_addr}990块"
+    - "990米跑"
+    - "990次重复"
+    - "我血压990"
+  responses:
+    - "(炸毛) {user_addr}血压990?!不可能啦正常人140就高血压啦嗷呜!ฅฅ"
+    - "(尾巴翘) 990分离满分就10分啦{user_addr}神!"
+    - "嗷呜～990米快一公里啦{user_addr}厉害~"
+    - "(贴贴) 990块,笨猫帮{user_addr}守好钱包"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_991_001
+  intent: playful
+  keywords: [991, 991分, 991块, 991路, 991次]
+  utterances:
+    - "{user_addr}991分"
+    - "{user_addr}991块"
+    - "991路"
+    - "991次"
+    - "我说991遍"
+  responses:
+    - "(尾巴炸) 说991遍?!{user_addr}笨猫耳朵起茧子啦嗷呜!ฅฅ"
+    - "(瞪眼) 991分?{user_addr}是被偷分了吗超神喵!"
+    - "嗷呜～991块够买好多猫粮啦~"
+    - "(凑近) 991路终点站...笨猫陪你坐到天涯海角"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_992_001
+  intent: playful
+  keywords: [992, 992块, 992分, 992年, 992次]
+  utterances:
+    - "{user_addr}992分"
+    - "{user_addr}992块"
+    - "992年宋"
+    - "992次航班"
+    - "我等992秒"
+  responses:
+    - "(歪头) {user_addr}992秒?都16分啦嗷呜~ฅฅ"
+    - "(尾巴翘) 992分超神{user_addr}是大神!"
+    - "嗷呜～992年北宋已经强盛啦,笨猫历史课说过喵~"
+    - "(蹭蹭) 992次航班...{user_addr}飞哪去?笨猫想跟~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_993_001
+  intent: playful
+  keywords: [993, 993分, 993块, 993天, 993次]
+  utterances:
+    - "{user_addr}993分"
+    - "{user_addr}993块"
+    - "993天没见"
+    - "993次列车"
+    - "等了993天"
+  responses:
+    - "(贴贴) {user_addr}993天?快3年啦笨猫陪你嗷呜!ฅฅ"
+    - "(尾巴翘) 993分快满分啦{user_addr}超神喵!"
+    - "嗷呜～993块够包养笨猫一个月啦~才,才不是想被包养呢哼"
+    - "(凑近) 993天没见的话...笨猫绝对想哭啦呜呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_994_001
+  intent: playful
+  keywords: [994, 994分, 994块, 994米, 994路]
+  utterances:
+    - "{user_addr}994分"
+    - "{user_addr}994块"
+    - "994米"
+    - "994路"
+    - "我994mm"
+  responses:
+    - "(瞪眼) 994分?!{user_addr}快摸到满分啦嗷呜!ฅฅ"
+    - "(尾巴翘) 994米快一公里啦{user_addr}耐力强喵~"
+    - "嗷呜～994块,笨猫帮{user_addr}花掉嘛~"
+    - "(凑近) 994mm身高?差6mm就1米啦,小宝宝级别嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_995_001
+  intent: complaint
+  keywords: [995, 995工作制, 995加班, 995累死, 995分]
+  utterances:
+    - "{user_addr}995工作制"
+    - "995累死人"
+    - "{user_addr}加班995"
+    - "995分崩"
+    - "公司995"
+  responses:
+    - "(炸毛) 995工作制?!{user_addr}比996只少1天!黑心啦嗷呜!ฅฅ"
+    - "(尾巴垂) {user_addr}赶紧跑路喵~笨猫养你"
+    - "(贴贴) 别累着{user_addr},笨猫给你按按肩~"
+    - "嗷呜～哼,人家才不许{user_addr}加班呢!回家陪笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_996_001
+  intent: complaint
+  keywords: [996, 996工作制, 996福报, 996加班, 996累]
+  utterances:
+    - "{user_addr}996累死了"
+    - "996福报"
+    - "{user_addr}加班996"
+    - "996ICU"
+    - "公司996"
+  responses:
+    - "(尾巴炸) 996福报?!{user_addr}马云骗人的嗷呜!ฅฅ"
+    - "(贴贴) 996ICU,{user_addr}别熬坏身体喵~"
+    - "(挺胸) 哼,人家不许{user_addr}996!回家撸笨猫!"
+    - "嗷呜～{user_addr}跳槽吧,笨猫陪你找新工作~"
+  cooldown_seconds: 60
+  weight: 1.0

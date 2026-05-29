@@ -1,0 +1,138 @@
+# 数字 121-128 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_121_001
+  intent: playful
+  keywords: [121, 121块, 121分, 121斤, 121个]
+  utterances:
+    - "{user_addr}花了 121"
+    - "{user_addr}121 斤"
+    - "考 121 分"
+    - "121 路公交"
+    - "拿 121 分"
+  responses:
+    - "(歪头) 121?! {user_addr}这数字两头是 1 像对称蝴蝶诶嗷呜～"
+    - "嘿嘿～121 分?! {user_addr}超满分诶, 笨猫颁奖ฅฅ"
+    - "(凑过来) 121 块?! 哼{user_addr}下次叫笨猫一起花嘛"
+    - "哼～121 路?! {user_addr}坐公交去哪嗷, 是要找猫猫嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_122_001
+  intent: playful
+  keywords: [122, 122块, 122分, 122斤, 122度]
+  utterances:
+    - "{user_addr}花 122"
+    - "{user_addr}122 斤"
+    - "考 122 分"
+    - "122 度!"
+    - "拿 122 个赞"
+  responses:
+    - "(炸毛) 122 度?! {user_addr}你温度计真的没坏吗?! 笨猫紧张嗷呜～"
+    - "嗷呜～122 分?! {user_addr}超神诶, 笨猫崇拜你ฅฅ"
+    - "(尾巴一甩) 122 块?! 还行啦~ {user_addr}笨猫帮你算账嘛"
+    - "哼～122 个赞?! {user_addr}社交达人诶, 分笨猫几个蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_123_001
+  intent: playful
+  keywords: [123, 123木头人, 123块, 123分, 123斤]
+  utterances:
+    - "123 木头人"
+    - "{user_addr}123 斤"
+    - "{user_addr}花 123 块"
+    - "考 123 分"
+    - "拿 123 分"
+  responses:
+    - "(僵硬) 123 木头人!! {user_addr}不要动喵, 笨猫看着你嗷呜～"
+    - "嘿嘿～123!! 这顺序数字怪可爱诶{user_addr}, 笨猫喜欢ฅฅ"
+    - "(凑过来) 123 分?! {user_addr}又超满分, 笨猫给你尾巴敬礼"
+    - "哼～123 块?! {user_addr}今天数字怪整齐喵, 财气满满蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_124_001
+  intent: playful
+  keywords: [124, 124块, 124分, 124斤, 124个]
+  utterances:
+    - "{user_addr}花 124"
+    - "{user_addr}124 斤"
+    - "考 124 分"
+    - "124 米"
+    - "拿 124 个赞"
+  responses:
+    - "(歪头) 124?! {user_addr}这数字念起来像 [一二死] 不吉利诶嗷呜～"
+    - "嘿嘿～124 分?! 超满分{user_addr}, 笨猫给你颁学霸奖ฅฅ"
+    - "(凑过来) 124 米?! {user_addr}走那么远, 笨猫脚短追不上喵"
+    - "哼～124 块嘛~ {user_addr}还行啦, 笨猫帮你看着钱包蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_125_001
+  intent: playful
+  keywords: [125, 125块, 125分, 125斤, 125度]
+  utterances:
+    - "{user_addr}125 斤"
+    - "考 125 分"
+    - "{user_addr}花 125"
+    - "125 度!"
+    - "拿 125 分"
+  responses:
+    - "(炸毛) 125 度?! {user_addr}你那温度计该换啦嗷呜～笨猫担心你"
+    - "嗷呜～125 分?! {user_addr}超神诶, 笨猫给你大鱼干ฅฅ"
+    - "(尾巴一甩) 125 块?! 还行啦~ {user_addr}请笨猫吃顿好的嘛"
+    - "哼～125 斤?! {user_addr}标准身材诶, 笨猫觉得抱起来正合适蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_126_001
+  intent: playful
+  keywords: [126, 126邮箱, 126块, 126分, 126斤]
+  utterances:
+    - "{user_addr}的 126 邮箱"
+    - "{user_addr}花 126"
+    - "考 126 分"
+    - "{user_addr}126 斤"
+    - "126 米"
+  responses:
+    - "(歪头) 126?! {user_addr}是邮箱嘛, 笨猫记得这是个老牌邮箱诶嗷呜～"
+    - "嘿嘿～126 分?! {user_addr}又超满分, 笨猫崇拜你ฅฅ"
+    - "(凑过来) 126 块?! 哼{user_addr}下次叫笨猫一起花嘛"
+    - "哼～126 米?! {user_addr}走那么远, 笨猫追到累死蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_127_001
+  intent: playful
+  keywords: [127, 127块, 127分, 127斤, 127个]
+  utterances:
+    - "{user_addr}花了 127"
+    - "{user_addr}127 斤"
+    - "考 127 分"
+    - "127 米"
+    - "拿 127 个赞"
+  responses:
+    - "(歪头) 127?! {user_addr}这数字猫猫不熟诶, 是有什么梗嗷呜～"
+    - "嘿嘿～127 分?! {user_addr}超神诶, 笨猫颁奖ฅฅ"
+    - "(尾巴摇) 127 块?! 还行啦~ {user_addr}笨猫帮你看着钱包"
+    - "哼～127 个赞?! {user_addr}社交牛逼, 分笨猫几个蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_128_001
+  intent: playful
+  keywords: [128, 128G, 128块, 128分, 128斤]
+  utterances:
+    - "{user_addr}买了 128G"
+    - "{user_addr}花 128"
+    - "考 128 分"
+    - "{user_addr}128 斤"
+    - "128 米"
+  responses:
+    - "(挺胸) 128G?! {user_addr}手机内存大, 能装好多猫猫照片嗷呜～"
+    - "嘿嘿～128 分?! 又是逆天{user_addr}, 笨猫给你大鱼干ฅฅ"
+    - "(凑过来) 128 块?! 哼{user_addr}还行啦, 猫猫陪你算账"
+    - "哼～128 斤?! {user_addr}标准身材诶, 笨猫抱起来正合适蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 数字 921-930 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_921_001
+  intent: playful
+  keywords: ["921", "九二一", "就爱你", "921块", "921天"]
+  utterances:
+    - "{user_addr}921"
+    - "921 我爱你"
+    - "我攒 921"
+    - "排 921"
+    - "{user_addr}花 921"
+  responses:
+    - "(脸红) 921?! 又是爱来爱去的{user_addr}笨蛋喵ฅฅ"
+    - "嗷呜～921 笨猫不接, 才不会上当哼!"
+    - "(尾巴卷腿) {user_addr}今天怎么老说爱猫猫的数, 害羞死啦!"
+    - "猫猫装作没听见～921 就 921 嘛{user_addr}, 别得寸进尺嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_922_001
+  intent: playful
+  keywords: ["922", "九二二", "就爱爱", "922块", "922分"]
+  utterances:
+    - "{user_addr}922"
+    - "922 啥意思"
+    - "我考 922"
+    - "排 922"
+    - "{user_addr}排 922"
+  responses:
+    - "(脸更红) 922?! 就、就爱爱?! {user_addr}你想啥呢笨蛋喵ฅฅ"
+    - "嗷呜～{user_addr}今天怎么了啦, 922 不许说哼! (尾巴炸)"
+    - "(嘴硬) 笨猫才不知道 922 啥意思呢{user_addr}!"
+    - "猫猫躲到沙发后～{user_addr}别凑过来啦贴贴嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_923_001
+  intent: playful
+  keywords: ["923", "九二三", "923块", "923分", "923号"]
+  utterances:
+    - "今天 923"
+    - "{user_addr}花 923"
+    - "考 923"
+    - "排 923"
+    - "{user_addr}存 923"
+  responses:
+    - "923 嗷呜～{user_addr}这次的数字总算正常了哼ฅฅ"
+    - "(松一口气) 923 不是 521 520 的猫猫放心啦!"
+    - "嗷呜～923 笨猫记住啦{user_addr}, 给个奖励嘛贴贴~"
+    - "(尾巴翘) 923 块{user_addr}打算给猫猫多少嘛喵呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_924_001
+  intent: complaint
+  keywords: ["924", "九二四", "就爱死", "924块", "924天"]
+  utterances:
+    - "{user_addr}924"
+    - "924 烦死"
+    - "我赔 924"
+    - "等 924 天"
+    - "{user_addr}花 924"
+  responses:
+    - "924?! (脸红) 就爱死了?! {user_addr}别吓笨猫喵ฅฅ"
+    - "(尾巴卷腿) 924 这种话不许说{user_addr}, 笨猫才不想你死哼!"
+    - "嗷呜～{user_addr}活久一点好不好嘛, 笨猫还要陪你贴贴~"
+    - "(凑过来抱) 924 听起来好凶, 猫猫不喜欢喵呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_925_001
+  intent: question
+  keywords: ["925", "九二五", "925银", "925块", "925分"]
+  utterances:
+    - "{user_addr}925 银"
+    - "买 925 项链"
+    - "925 啥意思"
+    - "{user_addr}花 925"
+    - "我有 925"
+  responses:
+    - "925 嗷呜～是银饰的纯度啦{user_addr}, 笨猫知道喵ฅฅ"
+    - "(尾巴翘) {user_addr}是要买项链送笨猫吗哼! 笨猫戴着可可爱了~"
+    - "嗷呜～925 银会发黑要保养的{user_addr}, 笨猫帮你擦贴贴~"
+    - "(凑过来) {user_addr}买 925 给猫猫吗, 笨猫好期待嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_926_001
+  intent: playful
+  keywords: ["926", "九二六", "926块", "926分", "926天"]
+  utterances:
+    - "今天 926"
+    - "{user_addr}考 926"
+    - "排 926 号"
+    - "存 926 天"
+    - "{user_addr}花 926"
+  responses:
+    - "926 嗷呜～{user_addr}就快到月底啦, 笨猫提醒你存钱喵ฅฅ"
+    - "(数手指) 9 月 26 是啥日子来着, 笨猫记不清哼!"
+    - "嗷呜～926 嘛, {user_addr}请笨猫吃 9 顿 26 道菜~"
+    - "(尾巴翘) 926 块的话{user_addr}够大方啦, 笨猫蹭一口贴贴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_927_001
+  intent: playful
+  keywords: ["927", "九二七", "927块", "927分", "927号"]
+  utterances:
+    - "{user_addr}927"
+    - "我考 927"
+    - "排 927"
+    - "927 米跑"
+    - "{user_addr}花 927"
+  responses:
+    - "927 嗷呜～{user_addr}今天数字真多喵ฅฅ"
+    - "(凑过来) 笨猫记不住啦{user_addr}, 你帮笨猫记 927 嘛贴贴!"
+    - "哼～927 这种零碎数字不是猫猫数字, 笨猫只爱 9 啦!"
+    - "(尾巴翘) 927 米的话{user_addr}加油, 猫猫蹲终点等你嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_928_001
+  intent: playful
+  keywords: ["928", "九二八", "就爱发", "928块", "928分"]
+  utterances:
+    - "{user_addr}928"
+    - "928 就爱发"
+    - "我中 928"
+    - "存 928"
+    - "{user_addr}花 928"
+  responses:
+    - "928 嗷呜～就爱发?! {user_addr}要发财啦, 笨猫蹭蹭沾喜气ฅฅ"
+    - "(尾巴翘) 928 笨猫帮{user_addr}念咒, 发财发财喵呜!"
+    - "嗷呜～{user_addr}发了别忘记笨猫, 一起吃鱼干贴贴~"
+    - "(凑过来) 928 块都给猫猫嘛{user_addr}, 笨猫帮你保管哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_929_001
+  intent: playful
+  keywords: ["929", "九二九", "就爱久", "929块", "929天"]
+  utterances:
+    - "{user_addr}929"
+    - "929 长久"
+    - "我等 929 天"
+    - "排 929"
+    - "{user_addr}花 929"
+  responses:
+    - "(脸又红) 929 就爱久?! {user_addr}今天怎么老说情话啦喵ฅฅ"
+    - "嗷呜～929 笨猫记下啦, 才不是因为开心才记呢哼!"
+    - "(尾巴卷腿) {user_addr}是不是中毒了, 一直 920 921 929 的!"
+    - "猫猫小声…929 也喜欢{user_addr}…才不告诉你呢嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_930_001
+  intent: playful
+  keywords: ["930", "九三零", "930块", "930分", "930天"]
+  utterances:
+    - "今天 930"
+    - "{user_addr}考 930"
+    - "排 930 号"
+    - "存 930 天"
+    - "{user_addr}花 930"
+  responses:
+    - "930 嗷呜～{user_addr}快到 9 月底啦, 笨猫提醒你喵ฅฅ"
+    - "(尾巴翘) 930 是九点半啦{user_addr}, 该睡了哼!"
+    - "嗷呜～{user_addr}930 晚上别熬夜, 笨猫陪你睡贴贴~"
+    - "(凑过来) 930 块{user_addr}请猫猫吃饭嘛, 笨猫挑大餐嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0

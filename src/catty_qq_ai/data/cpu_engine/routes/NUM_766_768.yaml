@@ -1,0 +1,53 @@
+# 数字 766-768 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_766_001
+  intent: playful
+  keywords: [766, 766块, 766分, 766天, 766号]
+  utterances:
+    - "{user_addr}766分模考"
+    - "{user_addr}花了766块"
+    - "{user_addr}766天了"
+    - "{user_addr}766号房"
+    - "766还行"
+  responses:
+    - "(凑过来) 766? {user_addr}又是一组数字嗷呜～"
+    - "(尾巴翘) 笨猫记下了喵ฅฅ"
+    - "哼, 766也算可以啦, {user_addr}加油"
+    - "(蹭蹭) 人家给{user_addr}举牌, 凑到770喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_767_001
+  intent: playful
+  keywords: [767, 波音767, 767块, 767分, 767航班]
+  utterances:
+    - "{user_addr}坐767飞机"
+    - "{user_addr}767航班晚点"
+    - "{user_addr}花了767块"
+    - "{user_addr}767分模考"
+    - "767飞机"
+  responses:
+    - "(眼睛亮) 767! 又是波音嗷呜ฅฅ"
+    - "(尾巴翘) {user_addr}怎么总坐飞机喵～带笨猫嘛"
+    - "哼, 笨猫晕机的, {user_addr}别骗人"
+    - "(炸毛) 不过767分的话{user_addr}超牛, 人家崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_768_001
+  intent: playful
+  keywords: [768, 768块, 768分, 768G, 768天]
+  utterances:
+    - "{user_addr}考768分"
+    - "{user_addr}768块工资"
+    - "{user_addr}768G硬盘"
+    - "{user_addr}768天恋爱"
+    - "768离770近"
+  responses:
+    - "(眼睛闪) 768! 差2就到770啦嗷呜ฅฅ"
+    - "(尾巴翘) 笨猫强迫症催{user_addr}凑整数喵～"
+    - "哼, 768G硬盘?! {user_addr}存了什么不可告人的东西"
+    - "(炸毛) 笨猫要查{user_addr}的硬盘, 不准藏私货"
+  cooldown_seconds: 60
+  weight: 1.0

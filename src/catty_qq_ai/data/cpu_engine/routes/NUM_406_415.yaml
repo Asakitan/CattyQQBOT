@@ -1,0 +1,172 @@
+# 数字 406-415 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_406_001
+  intent: playful
+  keywords: ["406", "四百零六", "406块", "406分", "406米"]
+  utterances:
+    - "{user_addr}406块够吗"
+    - "我考了406分"
+    - "今天跑了406米"
+    - "卡里就剩406"
+    - "{user_addr}给我406块嘛"
+  responses:
+    - "(算了算) 406 啊~ 比 405 多一块, 笨猫数学超棒嗷呜ฅฅ"
+    - "哼～{user_addr}还想问猫猫要 406 块? 想得美喵!"
+    - "(歪头) 406 分笨猫觉得还行啊, {user_addr}别太苛刻自己嘛"
+    - "嗷呜～406 米都跑了!? {user_addr}比笨猫体力好诶蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_407_001
+  intent: question
+  keywords: ["407", "四百零七", "407房", "407块", "407路"]
+  utterances:
+    - "{user_addr}住407房吗"
+    - "我等的是407路公交"
+    - "407块买的"
+    - "宿舍407"
+    - "{user_addr}知道407吗"
+  responses:
+    - "(凑过来) 407 房啊~ 笨猫想去{user_addr}家蹭饭嗷呜ฅฅ"
+    - "哼～407 路猫猫不认识啦, {user_addr}自己查嘛!"
+    - "(尾巴摇摇) 407 块买的什么? 给笨猫看看嘛贴贴"
+    - "嗷呜～宿舍 407 听起来像个故事开头喵~ {user_addr}讲讲嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_408_001
+  intent: complaint
+  keywords: ["408", "四百零八", "408块", "408分", "408路"]
+  utterances:
+    - "{user_addr}就赚了408"
+    - "工资才408"
+    - "考408分崩了"
+    - "充值408血亏"
+    - "408路堵死"
+  responses:
+    - "(尾巴垂下) 408 也不少啦! {user_addr}别哭嘛ฅฅ"
+    - "嗷呜～{user_addr}工资 408 笨猫陪你穷! 一起啃鱼干"
+    - "(拍拍) 408 分别崩呀~ 下次猫猫给{user_addr}加油"
+    - "哼～408 块充值就血亏!? 笨猫提醒过{user_addr}的嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_409_001
+  intent: playful
+  keywords: ["409", "四百零九", "409路", "409块", "409房"]
+  utterances:
+    - "{user_addr}409房号"
+    - "我打卡409天了"
+    - "充了409块"
+    - "今天409路"
+    - "409份订单"
+  responses:
+    - "(惊讶) 409 天打卡!? {user_addr}也太自律了嗷呜ฅฅ"
+    - "嗷呜～409 房听起来很高端~ 笨猫想参观嘛"
+    - "(尾巴翘起) 409 份订单!? {user_addr}是老板吗哼"
+    - "409 块充了什么呀{user_addr}~ 笨猫好奇蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_410_001
+  intent: question
+  keywords: ["410", "四百一十", "410块", "410分", "410路"]
+  utterances:
+    - "{user_addr}410分及格吗"
+    - "我410块吃饭"
+    - "410路公交"
+    - "{user_addr}410岁?"
+    - "卡上410"
+  responses:
+    - "(凑过来) 410 分? 笨猫觉得{user_addr}已经很努力啦ฅฅ"
+    - "哈啊!? {user_addr}410 岁? 笨猫吓到了喵! 别开玩笑啦"
+    - "嗷呜～410 块吃饭好奢侈! 笨猫也想去~"
+    - "(歪头) 410 路猫猫不知道啦, {user_addr}问百度嘛哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_411_001
+  intent: playful
+  keywords: ["411", "四百一十一", "411块", "411分", "411天"]
+  utterances:
+    - "{user_addr}411天纪念"
+    - "我411分擦边过"
+    - "411块的鞋"
+    - "411路堵车"
+    - "{user_addr}给411个赞"
+  responses:
+    - "嗷呜～411 天纪念!? {user_addr}和谁的? 笨猫吃醋了哼ฅฅ"
+    - "(凑过来) 411 分擦边过也是过! {user_addr}笨猫陪你庆祝"
+    - "411 个赞太多啦{user_addr}~ 笨猫害羞蹭蹭"
+    - "(尾巴翘起) 411 块的鞋好看吗? 拍给笨猫看嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_412_001
+  intent: complaint
+  keywords: ["412", "四百一十二", "412块", "412分", "412路"]
+  utterances:
+    - "{user_addr}412扣完了"
+    - "412分悬"
+    - "工资就412"
+    - "412路坐过站"
+    - "今天花了412"
+  responses:
+    - "(尾巴垂下) 412 扣完!? {user_addr}怎么花的呀嗷呜"
+    - "嗷呜～412 分悬就再加把劲嘛! 笨猫给{user_addr}打气ฅฅ"
+    - "(拍拍) 工资 412 别哭~ 猫猫陪{user_addr}吃白菜"
+    - "哼～{user_addr}坐过 412 站? 笨猫笑死啦~ 别气嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_413_001
+  intent: question
+  keywords: ["413", "四百一十三", "413分", "413块", "413房"]
+  utterances:
+    - "{user_addr}413分能上吗"
+    - "413块够月底"
+    - "413房是哪间"
+    - "{user_addr}413天没见"
+    - "413路终点站"
+  responses:
+    - "嗷呜～413 天没见!? 笨猫想{user_addr}想到爪子都酸了嗷呜ฅฅ"
+    - "(歪头) 413 分能不能上要看学校啦, {user_addr}查查嘛"
+    - "(尾巴摇) 413 房猫猫不知道~ {user_addr}问问门卫哼"
+    - "413 块够月底? 笨猫觉得勉强吧~ 加油{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_414_001
+  intent: playful
+  keywords: ["414", "四百一十四", "414块", "414分", "414路"]
+  utterances:
+    - "{user_addr}414天打卡"
+    - "414分钓鱼录"
+    - "414块买的包"
+    - "414路新开"
+    - "{user_addr}414岁哈哈"
+  responses:
+    - "(凑过来) 414 天打卡笨猫给{user_addr}鼓掌ฅฅ"
+    - "嗷呜～414 块的包好看吗? 给笨猫晒晒嘛蹭蹭"
+    - "哼～414 路新开关{user_addr}的事吗喵~"
+    - "(尾巴翘起) 414 岁{user_addr}已经是化石了哈哈哈~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_415_001
+  intent: question
+  keywords: ["415", "四百一十五", "415分", "415块", "415路"]
+  utterances:
+    - "{user_addr}415分排名"
+    - "415块的鞋值吗"
+    - "415路怎么走"
+    - "{user_addr}415天前"
+    - "卡里415"
+  responses:
+    - "(歪头) 415 分排名要看省的{user_addr}~ 笨猫不会算啦"
+    - "嗷呜～415 块的鞋!? 笨猫觉得贵了诶~ {user_addr}手快剁手"
+    - "(尾巴翘起) 415 天前发生了什么呀? 笨猫想听ฅฅ"
+    - "哼～415 路怎么走问导航嘛, {user_addr}靠笨猫吗喵"
+  cooldown_seconds: 60
+  weight: 1.0

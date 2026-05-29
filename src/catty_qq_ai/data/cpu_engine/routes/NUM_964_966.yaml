@@ -1,0 +1,53 @@
+# 数字 964-966 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_964_001
+  intent: playful
+  keywords: [964, 九百六十四, 964块, 964分, 964天]
+  utterances:
+    - "{user_addr}考964分"
+    - "工资964"
+    - "{user_addr}存964块"
+    - "看964集"
+    - "964个粉"
+  responses:
+    - "(尾巴翘) 964分啊～{user_addr}差36满分笨猫拜师傅ฅฅ"
+    - "嗷呜～964集追完{user_addr}眼睛冒星星了吧喵哼"
+    - "(歪头) 工资964? {user_addr}请笨猫吃鱼干嘛蹭蹭"
+    - "964粉～{user_addr}破千请客猫猫等着哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_965_001
+  intent: question
+  keywords: [965, 九百六十五, 965工作, 965制, 965上班]
+  utterances:
+    - "{user_addr}965工作好吗"
+    - "我965制"
+    - "{user_addr}找到965了"
+    - "想要965的"
+    - "{user_addr}965公司"
+  responses:
+    - "(尾巴翘) 965?! {user_addr}梦中情司啊～笨猫好羡慕嗷呜ฅฅ"
+    - "嗷呜～{user_addr}965工作? 跟猫猫一样有点闲喵哼"
+    - "(歪头) 找965太难了～{user_addr}加油啊! 笨猫祈祷蹭蹭"
+    - "965制好棒! {user_addr}带笨猫上班嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_966_001
+  intent: playful
+  keywords: [966, 九百六十六, 966块, 966分, 966人]
+  utterances:
+    - "{user_addr}966粉了"
+    - "存966块"
+    - "{user_addr}966条消息"
+    - "看966页"
+    - "966个赞"
+  responses:
+    - "(贴贴) 966粉～{user_addr}快破千啦笨猫沾运气ฅฅ"
+    - "嗷呜～966条?! {user_addr}手机要爆笨猫帮回一半喵～"
+    - "(歪头) 966页{user_addr}书虫呀哼蹭蹭"
+    - "966个赞{user_addr}红啦~ 才不是夸你呢哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

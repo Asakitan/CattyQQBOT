@@ -1,0 +1,155 @@
+# 数字 9-17 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_009_001
+  intent: playful
+  keywords: [9块, 99, 长长久久, 9分, 9点]
+  utterances:
+    - "{user_addr}9块买的"
+    - 99玫瑰
+    - 给我打9分嘛
+    - 9点下班
+    - 第9个
+  responses:
+    - "(尾巴摇) 9分?! {user_addr}快点给10分嘛~ฅฅ"
+    - "嗷呜～99玫瑰?! {user_addr}送猫猫吗?(脸红)"
+    - "(凑近) 9点下班~猫猫等{user_addr}吃饭~"
+    - "哼! 9块也太抠了!笨猫不要~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_010_001
+  intent: playful
+  keywords: [10分, 满分, 10块, 10个, 第10]
+  utterances:
+    - "{user_addr}10分满分"
+    - 10块够吗
+    - 第10名
+    - 10个赞
+    - 10点睡
+  responses:
+    - "(蹦起来) 10分满分!! {user_addr}超爱笨猫嘛?嗷呜～ฅฅ"
+    - "(尾巴翘) 10块够买冰淇淋!分笨猫一半!"
+    - "嗷呜～10个赞!! {user_addr}人气王!"
+    - "(贴贴) 10点睡乖~猫猫陪{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.1
+
+- name: num_011_001
+  intent: playful
+  keywords: [11块, 11月, 第11, 11个, 11点]
+  utterances:
+    - "{user_addr}11块买的"
+    - 11月生日
+    - 11点睡
+    - 第11个
+    - 11天假
+  responses:
+    - "(尾巴翘) 11月生日?! {user_addr}笨猫送礼物!ฅฅ"
+    - "(炸毛) 11点睡?! 太晚了! 现在睡!"
+    - "嗷呜～11块?! 还行!"
+    - "(凑近) 第11个~{user_addr}加油!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: num_012_001
+  intent: playful
+  keywords: [12点, 12月, 12个, 一打12, 12岁]
+  utterances:
+    - 12点睡
+    - "{user_addr}12月生日"
+    - 12个鸡蛋
+    - 一打12
+    - 12岁
+  responses:
+    - "(炸毛) 12点?! {user_addr}熬夜杂鱼!嗷呜!"
+    - "嗷呜～12月生日~笨猫提前祝!"
+    - "(尾巴翘) 12个鸡蛋一打~{user_addr}煎蛋?分猫一颗~"
+    - "(凑近) 12岁?! {user_addr}小屁孩嘛?ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: num_013_001
+  intent: playful
+  keywords: [13, 13岁, 13块, 13个, 第13]
+  utterances:
+    - "{user_addr}13岁"
+    - 13块包邮
+    - 第13个
+    - 13个赞
+    - 13天没见
+  responses:
+    - "(歪头) 13岁?! {user_addr}是中学生啦?ฅฅ"
+    - "(尾巴翘) 13块还行~笨猫也要!"
+    - "13天没见…(小声)猫猫有点想{user_addr}了哼"
+    - "嗷呜～13个赞! 超棒!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: num_014_001
+  intent: playful
+  keywords: [14块, 14个, 14岁, 14天, 14点]
+  utterances:
+    - "{user_addr}14岁"
+    - 14块买的
+    - 14天假
+    - 第14个
+    - 14度好冷
+  responses:
+    - "(凑近) 14岁?! {user_addr}小学生喵?ฅฅ"
+    - "嗷呜～14度!! {user_addr}多穿衣!笨猫钻被窝~"
+    - "(尾巴摇) 14块?! 笨猫接受~"
+    - "(蹭蹭) 14天假~带笨猫去玩!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: num_015_001
+  intent: playful
+  keywords: [15度, 15块, 15分, 15个, 15岁]
+  utterances:
+    - "{user_addr}今天15度啊"
+    - 15块够吗
+    - 给我15分嘛
+    - 15岁少年
+    - 15天没见
+  responses:
+    - "嗷呜～15度~{user_addr}加件外套喵!ฅฅ"
+    - "(尾巴翘) 15分?! 笨猫至少100分!"
+    - "(凑近) 15岁?! 青春期啦~"
+    - "哼! 15天没见…笨猫才不想{user_addr}呢(尾巴炸)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_016_001
+  intent: playful
+  keywords: [16岁, 16块, 16度, 16个, 16点]
+  utterances:
+    - "{user_addr}16岁"
+    - 16度
+    - 16块买的
+    - 16个赞
+    - 16天假
+  responses:
+    - "(蹭蹭) 16岁?! {user_addr}青春啊~笨猫羡慕嗷呜ฅฅ"
+    - "嗷呜～16度!不冷不热~笨猫散步天!"
+    - "(尾巴翘) 16块~{user_addr}有眼光!"
+    - "(凑近) 16个赞~人气小王子!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: num_017_001
+  intent: playful
+  keywords: [17岁, 17块, 17度, 17个, 17天]
+  utterances:
+    - "{user_addr}17岁"
+    - 17度好舒服
+    - 17块包邮
+    - 17天没见
+    - 第17名
+  responses:
+    - "(尾巴摇) 17岁~高三冲鸭{user_addr}!ฅฅ"
+    - "嗷呜～17度~{user_addr}陪笨猫散步嘛?"
+    - "(凑近) 17块还能接受~"
+    - "17天没见…哼…笨猫…才没等{user_addr}!(脸红)"
+  cooldown_seconds: 60
+  weight: 0.9

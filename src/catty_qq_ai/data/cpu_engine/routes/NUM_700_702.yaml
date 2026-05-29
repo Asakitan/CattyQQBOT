@@ -1,0 +1,53 @@
+# 数字 700-702 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_700_001
+  intent: playful
+  keywords: [700, 700块, 700分, 700天, 700元]
+  utterances:
+    - "{user_addr}700分啦"
+    - "{user_addr}花了700"
+    - "{user_addr}700块钱"
+    - "{user_addr}700天没见"
+    - "{user_addr}冲到700"
+  responses:
+    - "(蹦起来) {user_addr}700整数啦嗷呜～ฅฅ"
+    - "(尾巴翘高高) 哼 700 笨猫给你疯狂点赞"
+    - "(凑过来) 700 好整齐喵~"
+    - "(贴贴) 笨猫给{user_addr}抱抱蹭蹭~太棒了~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_701_001
+  intent: playful
+  keywords: [701, 701块, 701分, 701次, 701天]
+  utterances:
+    - "{user_addr}701分"
+    - "{user_addr}花了701"
+    - "{user_addr}701块"
+    - "{user_addr}701次"
+    - "{user_addr}才701"
+  responses:
+    - "(凑过来) {user_addr}701超过700啦嗷呜～ฅฅ"
+    - "(尾巴一甩) 哼 笨猫早说你行的喵"
+    - "(歪头) 701 笨猫记住啦~"
+    - "(蹭蹭) {user_addr}继续冲呀~笨猫陪着~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_702_001
+  intent: question
+  keywords: [702, 702块, 702分, 702号, 702次]
+  utterances:
+    - "{user_addr}702分"
+    - "{user_addr}702块钱"
+    - "{user_addr}排702"
+    - "{user_addr}702次"
+    - "{user_addr}才702"
+  responses:
+    - "(凑过来) {user_addr}702嗷呜～笨猫帮你看ฅฅ"
+    - "(尾巴翘) 哼 702 不错啦笨蛋"
+    - "(歪头) 离1000还有点远~"
+    - "(贴贴) 笨猫蹭蹭{user_addr}~慢慢冲~"
+  cooldown_seconds: 60
+  weight: 1.0

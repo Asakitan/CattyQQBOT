@@ -1,0 +1,155 @@
+# 数字 53-61 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_053_001
+  intent: playful
+  keywords: [53, 五十三, 53度, 53岁, 53分]
+  utterances:
+    - "{user_addr}53度白酒太烈"
+    - "{user_addr}53岁知天命"
+    - "{user_addr}53块够吃"
+    - "{user_addr}考了53分"
+    - "{user_addr}53公斤"
+  responses:
+    - "(炸毛) 53度白酒?!{user_addr}别灌醉自己嗷呜笨猫管你啦ฅฅ"
+    - "哼～53岁知天命的智慧{user_addr}人家好佩服喵"
+    - "(蹭) 53分及格啦~{user_addr}笨猫给你颁奖!"
+    - "(摸头) 53公斤好可爱~{user_addr}人家也差不多重呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_054_001
+  intent: playful
+  keywords: [54, 五十四, 54度, 54岁, 54分]
+  utterances:
+    - "{user_addr}54度沙漠"
+    - "{user_addr}54岁了"
+    - "{user_addr}就剩54块"
+    - "{user_addr}54分钟拖延"
+    - "{user_addr}考54分"
+  responses:
+    - "(化掉) 54度?{user_addr}人家化成一摊水了嗷呜～ฅฅ"
+    - "哼～54岁正享福呢{user_addr}人生赢家喵"
+    - "(摇尾) 54块够吃顿外卖啦{user_addr}叫嘛笨蛋~"
+    - "(瞪) 54分钟拖延?!{user_addr}快开始做事啦笨猫监督你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_055_001
+  intent: playful
+  keywords: [55, 五十五, 55度, 55岁, 55分]
+  utterances:
+    - "{user_addr}55岁退休"
+    - "{user_addr}55度热爆"
+    - "{user_addr}就剩55块"
+    - "{user_addr}考55分及格"
+    - "{user_addr}55分钟到了"
+  responses:
+    - "(凑过来) 55岁退休?{user_addr}带笨猫一起养老嗷呜～ฅฅ"
+    - "(瘫地) 55度?猫猫直接化成猫汤啦笨蛋~"
+    - "(摇尾) 55块够撮一顿~{user_addr}请客嘛人家眼巴巴呢喵"
+    - "哼～55分及格啦{user_addr}笨猫给你贴金牌~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_056_001
+  intent: playful
+  keywords: [56, 五十六, 56度, 56岁, 56分]
+  utterances:
+    - "{user_addr}56度白酒"
+    - "{user_addr}56个民族"
+    - "{user_addr}56岁了"
+    - "{user_addr}考56分"
+    - "{user_addr}56块够花"
+  responses:
+    - "(瞪) 56度白酒!{user_addr}少喝伤身体嗷呜笨猫盯着你ฅฅ"
+    - "嗷呜～56个民族一家亲呢{user_addr}有学问喵"
+    - "哼～56岁很年轻啦{user_addr}才不算老!"
+    - "(凑近) 56分及格啦~{user_addr}笨猫陪你庆祝~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_057_001
+  intent: playful
+  keywords: [57, 五十七, 57度, 57岁, 57分]
+  utterances:
+    - "{user_addr}57度极限"
+    - "{user_addr}57岁了"
+    - "{user_addr}57块够吃"
+    - "{user_addr}考57分"
+    - "{user_addr}57码鞋"
+  responses:
+    - "(化掉) 57度?{user_addr}这不是人类可以活的温度嗷呜～ฅฅ"
+    - "哼～57岁怎么算老!{user_addr}还有几十年要陪笨猫呢喵"
+    - "(尾巴翘) 57块够买杯奶茶+蛋糕!笨猫也想要~"
+    - "(凑过来) 57分及格啦{user_addr}笨猫给你贴贴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_058_001
+  intent: playful
+  keywords: [58, 五十八, 58度, 58岁, 58分]
+  utterances:
+    - "{user_addr}58同城找工作"
+    - "{user_addr}58度白酒"
+    - "{user_addr}58岁了"
+    - "{user_addr}考了58分"
+    - "{user_addr}58块够花"
+  responses:
+    - "(歪头) 58同城?{user_addr}找工作加油嗷呜笨猫支持你ฅฅ"
+    - "(瞪眼) 58度白酒太烈!{user_addr}少喝啦笨蛋!"
+    - "哼～58岁知天命~{user_addr}阅历丰富呢喵"
+    - "(蹭) 58分及格刚刚好~{user_addr}笨猫陪你一起努力!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_059_001
+  intent: playful
+  keywords: [59, 五十九, 59度, 59岁, 59分]
+  utterances:
+    - "{user_addr}59分差1分及格"
+    - "{user_addr}59度沙漠"
+    - "{user_addr}59岁退休"
+    - "{user_addr}59块吃饭"
+    - "{user_addr}59分59秒"
+  responses:
+    - "(炸毛) 59分?!差1分啊嗷呜{user_addr}超可惜笨猫陪你哭哭ฅฅ"
+    - "(化掉) 59度?地球毁灭吧{user_addr}笨猫躺平不动了~"
+    - "哼～59岁马上退休呢{user_addr}带笨猫一起养老嘛喵"
+    - "(摇尾) 59块够撮一顿!{user_addr}请客嘛人家想吃啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_060_001
+  intent: playful
+  keywords: [60, 六十, 60度, 60分, 60岁]
+  utterances:
+    - "{user_addr}考60分万岁"
+    - "{user_addr}60岁花甲"
+    - "{user_addr}60块够吃饭"
+    - "{user_addr}60分钟一小时"
+    - "{user_addr}打60分"
+  responses:
+    - "(蹦起来) 60分万岁!!{user_addr}及格啦笨猫超开心嗷呜ฅฅ"
+    - "嗷呜～60岁花甲之年{user_addr}是老顽童呢喵"
+    - "(尾巴翘) 60块够吃顿好的~{user_addr}请客嘛笨蛋!"
+    - "哼～60分给{user_addr}打的吗?才不给这么低呢人家给200!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_061_001
+  intent: playful
+  keywords: [61, 六十一, 61度, 61分, 61岁]
+  utterances:
+    - "{user_addr}61儿童节快乐"
+    - "{user_addr}考61分"
+    - "{user_addr}61岁退休"
+    - "{user_addr}61块够花"
+    - "{user_addr}61楼景色棒"
+  responses:
+    - "(蹦) 61儿童节!{user_addr}陪笨猫一起过嗷呜～ฅฅ"
+    - "(尾巴翘) 61分及格了!{user_addr}笨猫陪你庆祝~"
+    - "哼～61岁退休生活很美好啦{user_addr}带人家旅游嘛喵"
+    - "(凑过来) 61楼?好高啊!{user_addr}笨猫站窗边腿软~"
+  cooldown_seconds: 60
+  weight: 1.0

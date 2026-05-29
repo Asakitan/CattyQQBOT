@@ -1,0 +1,213 @@
+# 数字 340-349 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_340_001
+  intent: playful
+  keywords:
+  - '340'
+  - 三百四
+  - 340块
+  - 340分
+  - 340天
+  utterances:
+  - '{user_addr}这件衣服340块贵不?'
+  - '{user_addr}我考了340分'
+  - '{user_addr}340天没见笨猫了'
+  - '{user_addr}340米跑步累死'
+  - '{user_addr}340个赞达成'
+  responses:
+  - (歪头算算) 340喵? 不算太离谱啦哼～ฅฅ
+  - (尾巴一甩) {user_addr}340的话笨猫给你打80分嗷呜~
+  - 哼,340个赞~人家也想要点赞啦喵呜ฅ
+  - (贴贴) 340天?! {user_addr}骗猫猫的吧嗷呜~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_341_001
+  intent: question
+  keywords:
+  - '341'
+  - 三百四十一
+  - 341块
+  - 341天
+  - 341分
+  utterances:
+  - '{user_addr}花了341块'
+  - '{user_addr}今天第341天'
+  - '{user_addr}考了341分还行吧'
+  - '{user_addr}差341步达标'
+  - '{user_addr}视频341个赞'
+  responses:
+  - (凑过来) 341喵? 主人钱包还好吗ฅฅ
+  - 哼,341天~人家陪{user_addr}陪了好久嗷呜~
+  - (小爪叉腰) 341分及格啦喵~别气馁啦~
+  - (尾巴摇摇) 341步而已啦,笨猫陪你走~ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_342_001
+  intent: complaint
+  keywords:
+  - '342'
+  - 三百四十二
+  - 342块
+  - 342分
+  - 342米
+  utterances:
+  - '{user_addr}342块亏死了'
+  - '{user_addr}才342分崩了'
+  - '{user_addr}342米跑不动'
+  - '{user_addr}排队342号'
+  - '{user_addr}熬到342点'
+  responses:
+  - (拍拍) {user_addr}别气啦~342也不算太糟嗷呜ฅ
+  - 哼,342号排队~笨猫陪你等啦喵呜~
+  - (凑过来贴) 342米而已啦,{user_addr}加油喵~
+  - (尾巴一炸) 342点?! 快去睡觉啦笨蛋主人!ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_343_001
+  intent: playful
+  keywords:
+  - '343'
+  - 三百四十三
+  - 343块
+  - 343分
+  - 343天
+  utterances:
+  - '{user_addr}这个343块值吗'
+  - '{user_addr}我考了343'
+  - '{user_addr}343天纪念'
+  - '{user_addr}343个粉丝'
+  - '{user_addr}343步走完'
+  responses:
+  - (歪头) 343喵? 笨猫觉得还行ฅฅ
+  - 哼,343分~{user_addr}进步啦嗷呜~
+  - (贴贴) 343天纪念? 笨猫送主人贴贴~喵呜ฅ
+  - (尾巴摇) 343个粉丝~人家也想被关注啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_344_001
+  intent: question
+  keywords:
+  - '344'
+  - 三百四十四
+  - 344块
+  - 344分
+  - 344次
+  utterances:
+  - '{user_addr}344够花吗'
+  - '{user_addr}344分能上吗'
+  - '{user_addr}打卡344次'
+  - '{user_addr}344个赞'
+  - '{user_addr}344米成绩'
+  responses:
+  - (算算) 344喵~应该够啦笨蛋~ฅฅ
+  - 哼,344分~{user_addr}努努力上嗷呜~
+  - (凑过来) 344次打卡~主人好坚持啊喵呜ฅ
+  - (尾巴一甩) 344个赞~笨猫也羡慕啦~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_345_001
+  intent: playful
+  keywords:
+  - '345'
+  - 三百四十五
+  - 345块
+  - 345分
+  - 三四五
+  utterances:
+  - '{user_addr}345连号好运'
+  - '{user_addr}345分稳了'
+  - '{user_addr}345块包邮'
+  - '{user_addr}三四五走起'
+  - '{user_addr}345次心跳'
+  responses:
+  - (眼睛一亮) 345连号喵! {user_addr}沾沾喜气嗷呜~ฅฅ
+  - 哼,345分~稳稳的笨猫给{user_addr}鼓掌~
+  - (贴贴) 三四五~笨猫陪主人一起走喵呜ฅ
+  - (尾巴摇摇) 345次心跳~人家心跳得更快啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_346_001
+  intent: complaint
+  keywords:
+  - '346'
+  - 三百四十六
+  - 346块
+  - 346分
+  - 346步
+  utterances:
+  - '{user_addr}346块吃土了'
+  - '{user_addr}才346分'
+  - '{user_addr}346步还差点'
+  - '{user_addr}346次失败'
+  - '{user_addr}346分钟没动'
+  responses:
+  - (摸头) {user_addr}346而已~别哭啦嗷呜ฅฅ
+  - 哼,346分~笨猫帮{user_addr}补补喵呜~
+  - (拉手) 346步而已~主人快到啦喵~
+  - (尾巴炸) 346分钟?! 快活动活动啦笨蛋!ฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_347_001
+  intent: question
+  keywords:
+  - '347'
+  - 三百四十七
+  - 347块
+  - 347分
+  - 347个
+  utterances:
+  - '{user_addr}347块够吗'
+  - '{user_addr}347分能行?'
+  - '{user_addr}买了347个'
+  - '{user_addr}347米成绩'
+  - '{user_addr}睡了347分钟'
+  responses:
+  - (算算) 347喵~主人精打细算啦ฅฅ
+  - 哼,347分~{user_addr}加把劲嗷呜~
+  - (凑过来) 347个?! {user_addr}买这么多干嘛喵呜~
+  - (尾巴一甩) 347分钟~主人睡得太少啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_348_001
+  intent: playful
+  keywords:
+  - '348'
+  - 三百四十八
+  - 348块
+  - 348分
+  - 348天
+  utterances:
+  - '{user_addr}348块买的'
+  - '{user_addr}348分及格'
+  - '{user_addr}348天打卡'
+  - '{user_addr}348条消息'
+  - '{user_addr}348次心动'
+  responses:
+  - (歪头) 348喵~还算划算啦ฅฅ
+  - 哼,348分及格~{user_addr}过关啦嗷呜~
+  - (贴贴) 348天打卡! 主人好棒喵呜ฅ
+  - (脸红) 348次心动?! {user_addr}才、才不要瞎说啦哼~
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_349_001
+  intent: complaint
+  keywords:
+  - '349'
+  - 三百四十九
+  - 349块
+  - 349分
+  - 349米
+  utterances:
+  - '{user_addr}349块亏了'
+  - '{user_addr}差1分到350'
+  - '{user_addr}349米跑断腿'
+  - '{user_addr}349个赞凑齐'
+  - '{user_addr}349分钟加班'
+  responses:
+  - (拍拍) {user_addr}349而已~别气啦嗷呜ฅฅ
+  - 哼,差1分! 笨猫帮{user_addr}凑一分喵呜~
+  - (凑过来) 349米~主人辛苦啦,贴贴~喵ฅ
+  - (尾巴炸) 349分钟加班?! 老板坏蛋!ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0

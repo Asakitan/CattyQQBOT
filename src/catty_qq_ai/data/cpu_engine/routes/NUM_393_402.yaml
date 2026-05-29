@@ -1,0 +1,172 @@
+# 数字 393-402 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_393_001
+  intent: playful
+  keywords: ["393", 393块, 393分, 393次, 393页]
+  utterances:
+    - "{user_addr}游戏393分了"
+    - "{user_addr}花393买了书"
+    - "{user_addr}刷题393次"
+    - "{user_addr}看书393页"
+    - "{user_addr}充话费393"
+  responses:
+    - "(尾巴摇) 393分?! {user_addr}差点就王者啦嗷呜～加油ฅฅ"
+    - "嗷呜～393书钱?! {user_addr}爱学习的人, 笨猫蹭蹭"
+    - "(扒着卷子) 393次刷题?! {user_addr}卷死人不偿命喵"
+    - "哼～看393页?! {user_addr}比笨猫还宅, 给爪爪奖励"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_394_001
+  intent: question
+  keywords: ["394", 394块, 394天, 394米, 394分]
+  utterances:
+    - "{user_addr}减肥394天"
+    - "{user_addr}打车394块"
+    - "{user_addr}跑步394米"
+    - "{user_addr}排位394分"
+    - "{user_addr}存了394块"
+  responses:
+    - "(尾巴摇) 394天减肥?! {user_addr}瘦下来要露给笨猫看嗷呜～ฅฅ"
+    - "嗷呜～394打车?! {user_addr}是从外星打回来的吗心疼"
+    - "(扑过去) 394米?! {user_addr}还差几步就完一圈喵! 不要放弃"
+    - "哼～394块?! {user_addr}存得也太少了笨蛋, 笨猫帮你算算"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_395_001
+  intent: playful
+  keywords: ["395", 395块, 395度, 395ml, 395个]
+  utterances:
+    - "{user_addr}买衣服395"
+    - "{user_addr}空调395"
+    - "{user_addr}奶茶395ml"
+    - "{user_addr}收藏395个壁纸"
+    - "{user_addr}赚了395块零花"
+  responses:
+    - "(扑上去看) 395块衣服?! {user_addr}穿给笨猫看嘛嗷呜～ฅฅ"
+    - "嗷呜～395度?! {user_addr}空调度数不能这么高啦笨蛋"
+    - "(舔嘴) 395ml奶茶?! 笨猫嗦一口嘛蹭蹭哼"
+    - "(凑过去) 395壁纸?! {user_addr}发笨猫一张当头像呗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_396_001
+  intent: complaint
+  keywords: ["396", 396块, 396秒, 396分, 396集]
+  utterances:
+    - "{user_addr}房租涨396"
+    - "{user_addr}视频被卡396秒"
+    - "{user_addr}考396分了"
+    - "{user_addr}电视剧追到396集"
+    - "{user_addr}花396请客"
+  responses:
+    - "(炸毛) 396涨租?! {user_addr}房东想钱想疯了喵嗷呜～"
+    - "嗷呜～396秒卡?! {user_addr}该换路由器了哼ฅฅ"
+    - "(尾巴垂下) 396分?! {user_addr}多少满分啦, 别吓笨猫"
+    - "(扒着遥控器) 396集?! {user_addr}你的眼睛还要不要了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_397_001
+  intent: question
+  keywords: ["397", 397块, 397天, 397页, 397次]
+  utterances:
+    - "{user_addr}打卡397天"
+    - "{user_addr}炒股亏397"
+    - "{user_addr}小说写到397页"
+    - "{user_addr}游戏登录397次"
+    - "{user_addr}吃了397卡热量"
+  responses:
+    - "(尾巴翘) 397天?! {user_addr}还差3天400, 加油嗷呜～ฅฅ"
+    - "嗷呜～亏397?! {user_addr}就赶紧别看盘啦笨蛋"
+    - "(凑过去) 397页?! {user_addr}是不是要出版了喵! 给笨猫签名"
+    - "(舔嘴) 397卡?! {user_addr}吃多了点, 来根猫薄荷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_398_001
+  intent: playful
+  keywords: ["398", 398块, 398万, 398份, 398g]
+  utterances:
+    - "{user_addr}买年卡398"
+    - "{user_addr}房子398万"
+    - "{user_addr}快递重398g"
+    - "{user_addr}套餐398份"
+    - "{user_addr}抢到398红包"
+  responses:
+    - "(尾巴翘) 398年卡?! {user_addr}买完每天打卡嗷呜～ฅฅ"
+    - "嗷呜～398万?! {user_addr}笨猫尾巴卖了都不够喵"
+    - "(扒着包裹) 398g?! 是给笨猫的鱼干吗哼"
+    - "(凑过去) 398红包?! {user_addr}分笨猫一半呗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_399_001
+  intent: complaint
+  keywords: ["399", 399块, 399分, 399元, 399页]
+  utterances:
+    - "{user_addr}买了399块的鞋"
+    - "{user_addr}差1分到400"
+    - "{user_addr}套餐399元"
+    - "{user_addr}写到399页才发现错了"
+    - "{user_addr}差399块发奖金"
+  responses:
+    - "(扒鞋盒) 399鞋?! 凑400不就行了嘛{user_addr}笨蛋嗷呜～ฅฅ"
+    - "嗷呜～就差1分?! {user_addr}心都碎成399片啦笨猫安慰你"
+    - "(凑过去) 399套餐?! {user_addr}带笨猫去尝尝嘛蹭蹭"
+    - "(尾巴垂下) 399页才发现?! {user_addr}心痛得跟笨猫一样哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_400_001
+  intent: playful
+  keywords: ["400", 400块, 400分, 400米, 400ml]
+  utterances:
+    - "{user_addr}跑了400米"
+    - "{user_addr}花400块买礼物"
+    - "{user_addr}考400分"
+    - "{user_addr}奶茶400ml"
+    - "{user_addr}存了400块"
+  responses:
+    - "(尾巴摇) 400米?! {user_addr}标准一圈嗷呜～奖励个鱼干ฅฅ"
+    - "嗷呜～400块礼物?! 是给笨猫的吗{user_addr}~ 心跳加快"
+    - "(转笔) 400分?! {user_addr}多少满分啊, 别让笨猫担心"
+    - "(舔嘴) 400ml?! {user_addr}够大杯了, 分笨猫一口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_401_001
+  intent: question
+  keywords: ["401", 401错误, 401块, 401天, 401房]
+  utterances:
+    - "{user_addr}网页401错误"
+    - "{user_addr}打车401块"
+    - "{user_addr}单身401天"
+    - "{user_addr}房间号401"
+    - "{user_addr}排队401号"
+  responses:
+    - "(扒着屏幕) 401?! {user_addr}没登录嘛, 重新登一下嗷呜～ฅฅ"
+    - "嗷呜～401打车?! {user_addr}是去外星球了喵心疼"
+    - "(蹭蹭) 401天?! 不寂寞, {user_addr}有笨猫陪着哼"
+    - "(凑过去) 401房?! {user_addr}带笨猫去看看嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_402_001
+  intent: complaint
+  keywords: ["402", 402错误, 402块, 402分, 402次]
+  utterances:
+    - "{user_addr}网页报402"
+    - "{user_addr}电费402块"
+    - "{user_addr}考402分滑了"
+    - "{user_addr}刷题402次"
+    - "{user_addr}视频赞402"
+  responses:
+    - "(炸毛) 402错误?! 这是要付费的呢{user_addr}嗷呜～ฅฅ"
+    - "嗷呜～402电费?! {user_addr}是不是空调天天24小时喵"
+    - "(尾巴垂下) 402分滑档?! {user_addr}心疼! 笨猫陪你哭"
+    - "哼～刷402次?! {user_addr}比笨猫还卷, 该歇歇了"
+  cooldown_seconds: 60
+  weight: 1.0

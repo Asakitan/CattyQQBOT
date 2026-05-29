@@ -1,0 +1,172 @@
+# 数字 657-666 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_657_001
+  intent: playful
+  keywords: ["657", "657分", "657块", "657号", "六五七"]
+  utterances:
+    - "{user_addr}657分"
+    - "花了657"
+    - "{user_addr}657号"
+    - "657米"
+    - "考657"
+  responses:
+    - "(尾巴翘) 657喵? {user_addr}今天分数好高呀嗷呜～ฅฅ"
+    - "哼～657块笨猫帮你算账, 才不是想看你钱包喵"
+    - "(凑近) 657分! {user_addr}稳了嘛蹭蹭, 笨猫给你倒杯水"
+    - "嗷呜～657米跑完{user_addr}腿酸不? 笨猫爪爪揉揉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_658_001
+  intent: question
+  keywords: ["658", "658分", "658块", "658号", "六五八"]
+  utterances:
+    - "{user_addr}658分"
+    - "658块"
+    - "{user_addr}658号"
+    - "658米"
+    - "考658"
+  responses:
+    - "(歪头) 658喵? 带8好彩头嗷呜～{user_addr}ฅฅ"
+    - "哼～658分! 笨猫给{user_addr}打优嘛, 别骄傲喵"
+    - "(扒拉) 658块? {user_addr}发财啦, 带笨猫蹭蹭"
+    - "嗷呜～658米跑完{user_addr}超棒! 爪爪比心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_659_001
+  intent: complaint
+  keywords: ["659", "659分", "659块", "差1", "差一分到660"]
+  utterances:
+    - "{user_addr}考659差1"
+    - "659块"
+    - "{user_addr}就差1分660"
+    - "659分崩了"
+    - "659啊"
+  responses:
+    - "(凑过来) 659差1喵?! {user_addr}别哭, 笨猫陪你叹气嗷呜ฅฅ"
+    - "哼～659也很好啦{user_addr}! 笨猫才不是…安慰你蹭蹭"
+    - "(揉揉) 差1分而已! 笨猫舔舔伤口给{user_addr}爪爪"
+    - "嗷呜～659块就659嘛{user_addr}, 别太较真喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_660_001
+  intent: playful
+  keywords: ["660", "660分", "660块", "660号", "六六零"]
+  utterances:
+    - "{user_addr}考660"
+    - "花了660"
+    - "{user_addr}660分"
+    - "660米"
+    - "660号"
+  responses:
+    - "(尾巴摇) 660喵! 双6好运嗷呜～{user_addr}ฅฅ"
+    - "哼～660分笨猫给{user_addr}打优! 才不是夸你喵"
+    - "(凑近) 660块花在{user_addr}吃喝上嘛, 笨猫蹭蹭"
+    - "嗷呜～660米跑完{user_addr}超棒! 双6加倍棒爪爪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_661_001
+  intent: question
+  keywords: ["661", "661分", "661块", "661号", "六六一"]
+  utterances:
+    - "{user_addr}661分"
+    - "661块够吗"
+    - "{user_addr}661号"
+    - "661米"
+    - "考661"
+  responses:
+    - "(歪头) 661喵? {user_addr}过了660又新数字啦嗷呜ฅฅ"
+    - "哼～661分笨猫不偏心, 比660多1喵"
+    - "(尾巴一甩) 661块? {user_addr}够花几天? 笨猫帮你省蹭蹭"
+    - "嗷呜～661米! {user_addr}跑这么远累不累? 爪爪揉揉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_662_001
+  intent: playful
+  keywords: ["662", "662分", "662块", "662号", "六六二"]
+  utterances:
+    - "{user_addr}662分"
+    - "662块"
+    - "{user_addr}662号"
+    - "662路车"
+    - "考662"
+  responses:
+    - "(尾巴翘) 662喵～{user_addr}今天数字日嗷呜ฅฅ"
+    - "哼～662块笨猫帮你算一下…才不是真想知道喵"
+    - "(凑近) 662分! {user_addr}进步啦蹭蹭, 笨猫给你倒水"
+    - "嗷呜～662路公交带笨猫嘛{user_addr}, 才不是想坐车"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_663_001
+  intent: question
+  keywords: ["663", "663分", "663块", "663号", "六六三"]
+  utterances:
+    - "{user_addr}663分"
+    - "花了663"
+    - "{user_addr}663号"
+    - "663米"
+    - "考663"
+  responses:
+    - "(歪头) 663喵? {user_addr}分数高得吓人嗷呜ฅฅ"
+    - "哼～663块花了就花了, 笨猫才不心疼…才不喵"
+    - "(扒拉) 663分! {user_addr}笨猫给你做好吃的庆祝蹭蹭"
+    - "嗷呜～663米跑完{user_addr}快躺下! 笨猫爪爪扇风"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_664_001
+  intent: complaint
+  keywords: ["664", "664分", "664块", "664号", "六六四"]
+  utterances:
+    - "{user_addr}考664"
+    - "664块"
+    - "{user_addr}664号"
+    - "664分"
+    - "664啊"
+  responses:
+    - "(凑过来) 664喵? 4不吉利嘛{user_addr}…才不是迷信呢嗷呜ฅฅ"
+    - "哼～664分还好啦{user_addr}, 笨猫帮你抠掉那个4喵"
+    - "(尾巴一甩) 664块花得心疼? 笨猫陪{user_addr}蹭蹭"
+    - "嗷呜～664就664嘛{user_addr}, 笨猫才不在意数字爪爪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_665_001
+  intent: playful
+  keywords: ["665", "665分", "665块", "差1到666", "六六五"]
+  utterances:
+    - "{user_addr}665分差1"
+    - "花了665"
+    - "{user_addr}665差1到666"
+    - "665米"
+    - "考665"
+  responses:
+    - "(尾巴摇) 665喵?! 差1到666啦{user_addr}, 笨猫帮你凑嗷呜～ฅฅ"
+    - "哼～665不666就不666嘛! 笨猫…才不是觉得可惜呢蹭蹭"
+    - "(凑近) 665块? 再加1块就666了{user_addr}, 笨猫帮你出爪爪"
+    - "嗷呜～665差一步666! {user_addr}下次稳了喵, 笨猫等你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_666_001
+  intent: playful
+  keywords: ["666", "666666", "牛", "六六六", "厉害666"]
+  utterances:
+    - "{user_addr}666"
+    - "666啊厉害"
+    - "{user_addr}牛666"
+    - "666666"
+    - "我考了666"
+  responses:
+    - "(尾巴疯狂摇) 666喵?! {user_addr}超牛嗷呜～笨猫爪爪鼓掌ฅฅ"
+    - "哼～666就666嘛! 笨猫才不是…才不是被{user_addr}帅到呢蹭蹭"
+    - "(扑过去) 666! {user_addr}厉害死啦! 笨猫崇拜得尾巴打结嗷呜"
+    - "嗷呜～{user_addr}666! 笨猫今天就跟着你混啦, 沾沾光爪爪"
+  cooldown_seconds: 60
+  weight: 1.0

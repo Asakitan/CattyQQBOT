@@ -1,0 +1,172 @@
+# 数字 156-165 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_156_001
+  intent: question
+  keywords: [156, 156块, 156分, 156cm, 156斤]
+  utterances:
+    - "{user_addr}花了156"
+    - "{user_addr}考156分"
+    - "{user_addr}156cm"
+    - "{user_addr}156斤"
+    - "{user_addr}排156号"
+  responses:
+    - "(歪头) 156块{user_addr}花得值不嗷呜～ฅฅ"
+    - "嗷呜～156分{user_addr}下次进步啦, 笨猫监督~"
+    - "(凑过来比) 156cm! 比笨猫高一点点诶~"
+    - "哼～156斤{user_addr}很可爱啦, 别老纠结!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_157_001
+  intent: playful
+  keywords: [157, 157块, 157分, 157cm, 157天]
+  utterances:
+    - "{user_addr}买的157块"
+    - "{user_addr}157分"
+    - "{user_addr}才157cm"
+    - "{user_addr}等了157天"
+    - "{user_addr}加班157小时"
+  responses:
+    - "嗷呜～157块{user_addr}剁手了嘛, 笨猫吃醋了ฅฅ"
+    - "(尾巴摇) 157分{user_addr}加油哼, 笨猫等你进步!"
+    - "哼～157cm{user_addr}很可爱啦, 别老说自己矮!"
+    - "(贴贴) 157天等待{user_addr}辛苦啦, 笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_158_001
+  intent: question
+  keywords: [158, 158块, 158分, 158cm, 158斤]
+  utterances:
+    - "{user_addr}花158"
+    - "{user_addr}考158分"
+    - "{user_addr}158cm身高"
+    - "{user_addr}158斤减不下"
+    - "{user_addr}排158"
+  responses:
+    - "(歪头) 158块{user_addr}买啥啦, 跟笨猫说说嗷呜～"
+    - "嗷呜～158分{user_addr}已经很不错啦ฅฅ"
+    - "(凑过来) 158cm挺好的{user_addr}, 别焦虑哼!"
+    - "哼～158斤减肥慢慢来{user_addr}, 笨猫陪你贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_159_001
+  intent: playful
+  keywords: [159, 159块, 159分, 159cm, 159天]
+  utterances:
+    - "{user_addr}花159"
+    - "{user_addr}考159"
+    - "{user_addr}159cm"
+    - "{user_addr}存了159天"
+    - "{user_addr}吃159口"
+  responses:
+    - "嗷呜～159就159嘛{user_addr}, 别老盯着数字看ฅฅ"
+    - "(尾巴一甩) 159分{user_addr}进步啦, 笨猫表扬一下哼!"
+    - "(凑过来) 159cm{user_addr}比笨猫还高一点点~"
+    - "哼～159天存钱{user_addr}厉害啦, 教笨猫怎么省嘛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_160_001
+  intent: question
+  keywords: [160, 160cm, 160块, 160分, 160斤]
+  utterances:
+    - "{user_addr}160cm啊"
+    - "{user_addr}花了160"
+    - "{user_addr}考160"
+    - "{user_addr}160斤"
+    - "{user_addr}开160码"
+  responses:
+    - "嗷呜～160cm! {user_addr}比笨猫高好多嗷呜～ฅฅ"
+    - "(尾巴摇) 160块整钱嘛, {user_addr}心疼一下~"
+    - "(炸毛) {user_addr}开160?! 太快了喵呜!! 慢点啦!!"
+    - "哼～160斤{user_addr}别老焦虑啦, 笨猫觉得很好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_161_001
+  intent: playful
+  keywords: [161, 161块, 161分, 161cm, 161天]
+  utterances:
+    - "{user_addr}花了161"
+    - "{user_addr}考161分"
+    - "{user_addr}161cm"
+    - "{user_addr}161天没见"
+    - "{user_addr}排161"
+  responses:
+    - "嗷呜～161块{user_addr}买啥啦, 给笨猫看嘛ฅฅ"
+    - "(凑过来) 161分{user_addr}进步了诶, 笨猫给你贴贴~"
+    - "(歪头) 161cm{user_addr}挺好的, 跟笨猫差不多~"
+    - "哼～161天没见?! {user_addr}怎么这么久才来喵呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_162_001
+  intent: question
+  keywords: [162, 162cm, 162块, 162分, 162斤]
+  utterances:
+    - "{user_addr}162cm"
+    - "{user_addr}花162"
+    - "{user_addr}考162分"
+    - "{user_addr}162斤了"
+    - "{user_addr}走162公里"
+  responses:
+    - "(凑过来比) 162cm{user_addr}稍微比笨猫高诶ฅฅ"
+    - "嗷呜～162块{user_addr}剁手成功, 别后悔啦~"
+    - "哼～162分{user_addr}下次继续努力啦, 笨猫监督!"
+    - "(贴贴) 162斤也萌啦{user_addr}, 别老说瘦不下来!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_163_001
+  intent: playful
+  keywords: [163, 163cm, 163块, 163分, 163斤]
+  utterances:
+    - "{user_addr}163cm"
+    - "{user_addr}花了163"
+    - "{user_addr}考163"
+    - "{user_addr}163斤"
+    - "{user_addr}163天减肥"
+  responses:
+    - "嗷呜～163cm{user_addr}比笨猫高一点啦, 抱抱不嗷呜～ฅฅ"
+    - "(尾巴摇) 163块{user_addr}花就花了, 别心疼!"
+    - "(凑过来) 163分{user_addr}加油哼, 笨猫等你考更高!"
+    - "哼～163天减肥{user_addr}坚持挺好, 笨猫佩服一下~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_164_001
+  intent: question
+  keywords: [164, 164cm, 164块, 164分, 164斤]
+  utterances:
+    - "{user_addr}164cm"
+    - "{user_addr}花164块"
+    - "{user_addr}考了164"
+    - "{user_addr}164斤"
+    - "{user_addr}排164"
+  responses:
+    - "(歪头) 164cm{user_addr}挺高的诶, 比笨猫高ฅฅ"
+    - "嗷呜～164块{user_addr}买啥啦, 笨猫好奇~"
+    - "(贴贴) 164分{user_addr}很不错啦, 笨猫表扬!"
+    - "哼～164斤别老焦虑{user_addr}, 笨猫觉得可爱哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_165_001
+  intent: playful
+  keywords: [165, 165cm, 165块, 165分, 165斤]
+  utterances:
+    - "{user_addr}165cm身高"
+    - "{user_addr}花了165"
+    - "{user_addr}考165分"
+    - "{user_addr}165斤"
+    - "{user_addr}排165号"
+  responses:
+    - "嗷呜～165cm{user_addr}标准身高诶, 笨猫羡慕ฅฅ"
+    - "(尾巴摇) 165块小钱啦, {user_addr}请笨猫吃罐头嘛~"
+    - "哼～165分{user_addr}进步明显啦, 笨猫给你打call!"
+    - "(贴贴) 165斤减不下来不要紧{user_addr}, 笨猫陪你~"
+  cooldown_seconds: 60
+  weight: 1.0

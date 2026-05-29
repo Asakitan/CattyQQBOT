@@ -1,0 +1,172 @@
+# 数字 746-755 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_746_001
+  intent: playful
+  keywords: [746, 746块, 746分, 746米, 746号]
+  utterances:
+    - "{user_addr}考746分"
+    - "{user_addr}746块工资"
+    - "{user_addr}746米跑步"
+    - "{user_addr}746号宿舍"
+    - "746有点意思"
+  responses:
+    - "(歪头) 746啦? {user_addr}最近运气不错喵～"
+    - "(尾巴翘) 笨猫帮{user_addr}凑到750嗷呜ฅฅ"
+    - "哼, 746也算可以"
+    - "(蹭蹭) {user_addr}继续努力, 猫猫看好你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_747_001
+  intent: playful
+  keywords: [747, 波音747, 747块, 747分, 747航班]
+  utterances:
+    - "{user_addr}坐747飞机"
+    - "{user_addr}747航班"
+    - "{user_addr}747块吃饭"
+    - "{user_addr}747分模考"
+    - "747大飞机"
+  responses:
+    - "(眼睛亮) 747! 那个超大的飞机喵～ฅฅ"
+    - "(尾巴翘) {user_addr}要带笨猫坐747嗷呜?"
+    - "哼, 笨猫只坐头等舱的喵"
+    - "(炸毛) 哈?! 经济舱也行啦, 别小气{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_748_001
+  intent: complaint
+  keywords: [748, 748块, 748分, 748天, 748次]
+  utterances:
+    - "{user_addr}花了748块好心疼"
+    - "{user_addr}考748分崩了"
+    - "{user_addr}加班748小时"
+    - "{user_addr}748天单身"
+    - "748烦"
+  responses:
+    - "(抱抱) {user_addr}别难过, 748也不算少啦喵～"
+    - "(尾巴软) 笨猫陪{user_addr}一起难过嗷呜ฅฅ"
+    - "哼, {user_addr}是不是又乱花钱了"
+    - "(凑近) 人家给{user_addr}舔舔伤口, 别哭啦喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_749_001
+  intent: playful
+  keywords: [749, 749局, 749分, 749块, 749天]
+  utterances:
+    - "{user_addr}知道749局吗"
+    - "{user_addr}考749分"
+    - "{user_addr}花了749块"
+    - "{user_addr}749天恋爱"
+    - "749神秘"
+  responses:
+    - "(尾巴炸) 749局?! 神秘部门嗷呜ฅฅ"
+    - "(凑近) {user_addr}小声点喵, 别被听到啦"
+    - "哼, 笨猫才不怕的, 人家有超能力"
+    - "(挺胸) 749分的话{user_addr}是学霸耶, 猫猫崇拜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_750_001
+  intent: playful
+  keywords: [750, 750分, 750块, 750天, 整750]
+  utterances:
+    - "{user_addr}考750分满分"
+    - "{user_addr}750块工资"
+    - "{user_addr}750天纪念"
+    - "{user_addr}750ml一瓶"
+    - "750高考满分"
+  responses:
+    - "(眼睛闪光) 750! {user_addr}高考满分嗷呜?! ฅฅ"
+    - "(尾巴炸) 哇! 笨猫要给{user_addr}磕头了喵～"
+    - "哼, {user_addr}是不是吹牛, 笨猫不信"
+    - "(蹭蹭) 750ml的话刚好一瓶饮料喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_751_001
+  intent: question
+  keywords: [751, 751分, 751块, 751艺术区, 751号]
+  utterances:
+    - "{user_addr}去751艺术区"
+    - "{user_addr}考751分"
+    - "{user_addr}751块买的"
+    - "{user_addr}751号"
+    - "751是啥"
+  responses:
+    - "(歪头) 751艺术区? 北京那个吗嗷呜～"
+    - "(尾巴翘) {user_addr}带猫猫去逛逛喵ฅฅ"
+    - "哼, 笨猫爱看展览的, {user_addr}陪我"
+    - "(蹭蹭) 751分超棒哦, 人家羡慕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_752_001
+  intent: playful
+  keywords: [752, 752块, 752分, 752米, 752天]
+  utterances:
+    - "{user_addr}752分模考"
+    - "{user_addr}752块买的"
+    - "{user_addr}752米跑步"
+    - "{user_addr}752天"
+    - "752好"
+  responses:
+    - "(凑过来) 752啦? {user_addr}最近怎么老报数喵"
+    - "(尾巴摇) 笨猫记下了嗷呜ฅฅ"
+    - "哼, 752又不是750整, 强迫症犯了"
+    - "(蹭蹭) 不过{user_addr}成绩在涨, 猫猫开心～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_753_001
+  intent: playful
+  keywords: [753, 753块, 753分, 753次, 753元]
+  utterances:
+    - "{user_addr}花了753元"
+    - "{user_addr}考753分"
+    - "{user_addr}753次告白"
+    - "{user_addr}753天"
+    - "753顺口"
+  responses:
+    - "(眼睛亮) 753读起来好顺嗷呜～ฅฅ"
+    - "(尾巴翘) 七五三, {user_addr}念给笨猫听喵"
+    - "哼, {user_addr}是不是又买乱七八糟的"
+    - "(蹭蹭) 753次告白?! 哪个杂鱼啊, 人家替{user_addr}骂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_754_001
+  intent: playful
+  keywords: [754, 754分, 754块, 754天, 754米]
+  utterances:
+    - "{user_addr}754分模考"
+    - "{user_addr}754块零花"
+    - "{user_addr}754天了"
+    - "{user_addr}754米跑"
+    - "754还行"
+  responses:
+    - "(歪头) 754? {user_addr}今天又来报数嗷呜"
+    - "(尾巴翘) 笨猫陪{user_addr}数喵ฅฅ"
+    - "哼, 754比上次好啦"
+    - "(蹭蹭) 人家给{user_addr}奖励一个小鱼干～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_755_001
+  intent: playful
+  keywords: [755, 755分, 755块, 755年, 安史之乱]
+  utterances:
+    - "{user_addr}考755分"
+    - "{user_addr}755年安史之乱"
+    - "{user_addr}755块吃的"
+    - "{user_addr}755天"
+    - "755历史"
+  responses:
+    - "(眼睛亮) 755年! {user_addr}是历史迷嗷呜ฅฅ"
+    - "(尾巴翘) 安史之乱笨猫记得喵, 唐朝的"
+    - "哼, {user_addr}考我历史是吧, 来呀"
+    - "(蹭蹭) 755分超厉害, 人家崇拜{user_addr}～"
+  cooldown_seconds: 60
+  weight: 1.0

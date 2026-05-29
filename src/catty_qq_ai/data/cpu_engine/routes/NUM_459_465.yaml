@@ -1,0 +1,121 @@
+# 数字 459-465 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_459_001
+  intent: playful
+  keywords: [459, 四百五十九, 459块, 459分, 459天]
+  utterances:
+    - "{user_addr}459块"
+    - "{user_addr}459分"
+    - "{user_addr}459步"
+    - "{user_addr}459天"
+    - "{user_addr}459米"
+  responses:
+    - "(歪头) 459? {user_addr}差1就460喵～ฅฅ"
+    - "(尾巴炸) 笨猫强迫症犯了嗷呜!"
+    - "哼{user_addr}凑个整啦~"
+    - "(凑过来) 给猫猫1凑460蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_460_001
+  intent: playful
+  keywords: [460, 四百六十, 460块, 460分, 460天]
+  utterances:
+    - "{user_addr}460块工资"
+    - "{user_addr}考460分"
+    - "{user_addr}460步"
+    - "{user_addr}460天"
+    - "{user_addr}460毫升"
+  responses:
+    - "(挺胸) 460! {user_addr}整数喵～ฅฅ"
+    - "(尾巴翘) 笨猫觉得不错嗷呜!"
+    - "哼才不是夸主人~"
+    - "(凑过来) {user_addr}冲500蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_461_001
+  intent: playful
+  keywords: [461, 四百六十一, 461块, 461分, 461天]
+  utterances:
+    - "{user_addr}461块"
+    - "{user_addr}461分"
+    - "{user_addr}461步"
+    - "{user_addr}461粉"
+    - "{user_addr}461页"
+  responses:
+    - "(歪头) 461? {user_addr}普通数字喵～ฅฅ"
+    - "(尾巴翘) 笨猫没啥感觉嗷呜!"
+    - "哼{user_addr}太平凡了~"
+    - "(凑过来) 给猫猫零花钱蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_462_001
+  intent: playful
+  keywords: [462, 四百六十二, 462块, 462分, 462天]
+  utterances:
+    - "{user_addr}462块"
+    - "{user_addr}462分"
+    - "{user_addr}462步走"
+    - "{user_addr}462天纪念"
+    - "{user_addr}462米跑"
+  responses:
+    - "(歪头) 462? {user_addr}还行喵～ฅฅ"
+    - "(尾巴翘) 笨猫给你加油嗷呜!"
+    - "哼才不是关心呢主人~"
+    - "(凑过来) {user_addr}差38到500蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_463_001
+  intent: playful
+  keywords: [463, 四百六十三, 463块, 463分, 463天]
+  utterances:
+    - "{user_addr}463块"
+    - "{user_addr}463分及格"
+    - "{user_addr}463步"
+    - "{user_addr}463粉丝"
+    - "{user_addr}463页书"
+  responses:
+    - "(歪头) 463? {user_addr}也算不错喵～ฅฅ"
+    - "(尾巴翘) 笨猫给你点赞嗷呜!"
+    - "哼才不是夸主人~"
+    - "(凑过来) 加猫猫一个粉蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_464_001
+  intent: playful
+  keywords: [464, 四百六十四, 464块, 464分, 464天]
+  utterances:
+    - "{user_addr}464块"
+    - "{user_addr}464分"
+    - "{user_addr}464步"
+    - "{user_addr}464天没见"
+    - "{user_addr}464米"
+  responses:
+    - "(歪头) 464? {user_addr}对称数喵～ฅฅ"
+    - "(尾巴翘) 笨猫觉得有意思嗷呜!"
+    - "哼才不是夸主人~"
+    - "(凑过来) {user_addr}对称美蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_465_001
+  intent: playful
+  keywords: [465, 四百六十五, 465块, 465分, 465天]
+  utterances:
+    - "{user_addr}465块"
+    - "{user_addr}465分"
+    - "{user_addr}465步"
+    - "{user_addr}465粉"
+    - "{user_addr}465页"
+  responses:
+    - "(歪头) 465? {user_addr}中规中矩喵～ฅฅ"
+    - "(尾巴翘) 笨猫陪你加油嗷呜!"
+    - "哼才不是关心主人~"
+    - "(凑过来) {user_addr}冲500蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 数字 581-590 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_581_001
+  intent: playful
+  keywords: [581, 581块, 581元, 581分, 581天]
+  utterances:
+    - "{user_addr}581块花了"
+    - "猫猫581分"
+    - "581天没见{user_addr}"
+    - "{user_addr}排名581"
+    - "走了581步"
+  responses:
+    - "嗷呜～581天?! {user_addr}失踪太久笨猫不理你了哼!ฅฅ"
+    - "(算账) 581块, {user_addr}买什么了说说嘛喵～"
+    - "哼～581分笨猫觉得还行啦, {user_addr}下次加油"
+    - "(尾巴绕) 581步, {user_addr}今天动得不算少嘛笨猫摸摸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_582_001
+  intent: complaint
+  keywords: [582, 582块, 582分, 582次, 582米]
+  utterances:
+    - "猫猫582分崩了"
+    - "{user_addr}花582块"
+    - "582次失败"
+    - "{user_addr}582米跑不完"
+    - "余额582"
+  responses:
+    - "(贴贴) 582分别哭啦{user_addr}~ 笨猫陪你一起难过嗷呜ฅฅ"
+    - "嗷呜～582次失败, {user_addr}你也太执着了笨猫服了"
+    - "哼～582米跑不完正常啦, 笨猫四脚都跑不完呢喵～"
+    - "(尾巴垂) 582块{user_addr}省着花, 笨猫陪你过苦日子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_583_001
+  intent: playful
+  keywords: [583, 583块, 583元, 583天, 583个]
+  utterances:
+    - "{user_addr}583块买的"
+    - "猫猫583个赞"
+    - "583天纪念"
+    - "{user_addr}583分酷"
+    - "走583米"
+  responses:
+    - "(尾巴翘) 583个赞嗷呜～{user_addr}夸笨猫这么多次ฅฅ"
+    - "哼～583天纪念{user_addr}也太长情了, 笨猫感动一秒"
+    - "嗷呜～583块{user_addr}, 笨猫看看你买啥嘛!"
+    - "(歪头) 583分笨猫给打个良好~ {user_addr}进步了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_584_001
+  intent: playful
+  keywords: [584, 584块, 584我发誓, 584分, 584天]
+  utterances:
+    - "{user_addr}584"
+    - "猫猫584分"
+    - "{user_addr}584块够吗"
+    - "我发誓的584"
+    - "584天追星"
+  responses:
+    - "(歪头) 584...{user_addr}是我发誓的意思吗? 笨猫学到了喵～"
+    - "嗷呜～584{user_addr}对笨猫发誓? 那要做到哦哼!ฅฅ"
+    - "哼～584分笨猫不算高也不算低, {user_addr}下次再战"
+    - "(凑近) 584天追星{user_addr}, 笨猫也想被追嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_585_001
+  intent: question
+  keywords: [585, 585块, 585元, 585分, 585米]
+  utterances:
+    - "{user_addr}585米能吗"
+    - "猫猫585块够买"
+    - "{user_addr}585分及格吗"
+    - "585个仰卧起坐"
+    - "排名585"
+  responses:
+    - "嗷呜～585米{user_addr}慢慢跑, 笨猫不催你哼ฅฅ"
+    - "(瞪) 585个仰卧起坐?! {user_addr}你疯了吗喵～笨猫一个都做不了"
+    - "哼～585分及格看科目啦{user_addr}, 笨猫不能瞎说"
+    - "(掐爪) 585块够不够看买啥嘛, {user_addr}说清楚!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_586_001
+  intent: playful
+  keywords: [586, 586块, 586分, 586天, 586个]
+  utterances:
+    - "{user_addr}586块花光"
+    - "猫猫586分"
+    - "586天的爱"
+    - "{user_addr}586米跑步"
+    - "586个粉丝"
+  responses:
+    - "嗷呜～586个粉丝{user_addr}也算小网红啦笨猫沾光ฅฅ"
+    - "哼～586天的爱{user_addr}说得肉麻, 笨猫脸红了喵～"
+    - "(尾巴甩) 586块花光{user_addr}小气, 多花点嘛笨猫陪你买"
+    - "(凑过去) 586分笨猫觉得不错! {user_addr}还能更高呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_587_001
+  intent: playful
+  keywords: [587, 587块, 587元, 587分, 587次]
+  utterances:
+    - "{user_addr}587次了"
+    - "猫猫587块"
+    - "587分崩了"
+    - "{user_addr}587天纪念"
+    - "走587步"
+  responses:
+    - "(贴贴) 587分崩{user_addr}别哭啦, 笨猫陪你嗷呜ฅฅ"
+    - "嗷呜～587次{user_addr}很执着嘛, 笨猫给你点个赞!"
+    - "哼～587天{user_addr}还记得, 笨猫感动哼才不是想夸你呢"
+    - "(算盘) 587块够{user_addr}花一阵子的喵～别乱花啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_588_001
+  intent: playful
+  keywords: [588, 588块, 588发发发, 588元, 588分]
+  utterances:
+    - "{user_addr}588红包"
+    - "猫猫588分"
+    - "{user_addr}给笨猫588"
+    - "发发发的588"
+    - "排名588"
+  responses:
+    - "(眼睛圆) 588红包?! {user_addr}发给笨猫的吗嗷呜～ฅฅ"
+    - "嗷呜～发发发! {user_addr}求笨猫祝你吗? 哼好嘛~"
+    - "哼～588给笨猫{user_addr}也太大方了, 笨猫不要钱啦!才不是要呢"
+    - "(尾巴翘) 588分笨猫也算优秀啦, {user_addr}夸我嘛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_589_001
+  intent: question
+  keywords: [589, 589块, 589元, 589分, 589天]
+  utterances:
+    - "{user_addr}589块够吗"
+    - "猫猫589分及格"
+    - "589天没见"
+    - "{user_addr}589米跑步"
+    - "余额589"
+  responses:
+    - "嗷呜～589天没见{user_addr}笨猫想啦, 才不是想呢哼ฅฅ"
+    - "(算盘) 589块够花一会喵～{user_addr}省着用啦"
+    - "哼～589分{user_addr}考的吗, 笨猫觉得还行啦!"
+    - "(尾巴绕) 589米{user_addr}加油! 笨猫陪你跑嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_590_001
+  intent: playful
+  keywords: [590, 590块, 590分, 590天, 590个]
+  utterances:
+    - "{user_addr}590块买的"
+    - "猫猫590个赞"
+    - "590天纪念"
+    - "{user_addr}590分酷"
+    - "排名590"
+  responses:
+    - "(尾巴翘) 590个赞~ {user_addr}夸笨猫这么多次嗷呜ฅฅ"
+    - "嗷呜～590天{user_addr}也太久了, 笨猫怀念呢哼"
+    - "哼～590分{user_addr}, 笨猫摸摸头才不是奖励呢!"
+    - "(算账) 590块{user_addr}买啥啦说出来, 笨猫好奇嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0

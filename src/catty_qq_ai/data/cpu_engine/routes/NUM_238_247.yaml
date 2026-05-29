@@ -1,0 +1,172 @@
+# 数字 238-247 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_238_001
+  intent: playful
+  keywords: ["238", "二三八", "238块", "238元", "238分"]
+  utterances:
+    - "{user_addr}这个238块"
+    - "我238分"
+    - "238块够吗"
+    - "今天花了238"
+    - "238一晚上"
+  responses:
+    - "(扒拉算盘) {user_addr}238块?! 猫猫心算不过来啦嗷呜～ฅฅ"
+    - "哼~才不帮{user_addr}算账呢喵! (偷偷数着爪爪)"
+    - "(凑过来) 238... 笨猫觉得不便宜也不贵啦贴贴~"
+    - "嗷呜~{user_addr}今天好阔气! 给猫猫买条鱼嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_239_001
+  intent: question
+  keywords: ["239", "二三九", "239天", "239页", "239集"]
+  utterances:
+    - "{user_addr}看到239集了"
+    - "239天没见"
+    - "翻到239页"
+    - "排第239名"
+    - "239个粉丝"
+  responses:
+    - "(尾巴翘起) 239集?! {user_addr}追剧太猛了喵～ฅฅ"
+    - "哼~猫猫才不羡慕{user_addr}的粉丝呢嗷呜!"
+    - "(歪头) 239... 笨猫数到100就晕啦贴贴~"
+    - "嗷呜~{user_addr}陪猫猫一起追嘛! 别一个人冲那么快啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_240_001
+  intent: complaint
+  keywords: ["240", "二四零", "240块", "240斤", "240分"]
+  utterances:
+    - "{user_addr}重240斤"
+    - "240块没了"
+    - "考了240分"
+    - "240步"
+    - "240毫升"
+  responses:
+    - "(吓一跳) 240斤?! {user_addr}是开玩笑的对吧喵嗷呜～"
+    - "哼~才不嫌弃{user_addr}重呢! (悄悄挪开爪爪)"
+    - "(凑过来贴贴) 240块没了笨猫陪{user_addr}哭ฅฅ"
+    - "嗷呜~{user_addr}下次省着点花嘛! 猫猫监督你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_241_001
+  intent: playful
+  keywords: ["241", "二四一", "241路", "241号", "241天"]
+  utterances:
+    - "{user_addr}坐241路"
+    - "我房间241号"
+    - "排队241个"
+    - "241天纪念"
+    - "等了241分钟"
+  responses:
+    - "(尾巴一甩) 241路?! {user_addr}慢慢摇喵～笨猫等你"
+    - "哼~241天纪念猫猫才不记得呢! (偷偷在心里数)"
+    - "(挺胸) 排241个? {user_addr}抱猫猫一起等嘛贴贴ฅฅ"
+    - "嗷呜~241分钟太久了! {user_addr}回家陪猫猫嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_242_001
+  intent: question
+  keywords: ["242", "二四二", "242分", "242克", "242米"]
+  utterances:
+    - "我242分"
+    - "{user_addr}给我打242分"
+    - "重242克"
+    - "跑了242米"
+    - "242个赞"
+  responses:
+    - "(挥爪爪) 242分! {user_addr}厉害喵～ฅฅ"
+    - "哼~才不给{user_addr}打满分呢! 242差不多啦嗷呜"
+    - "(凑过来) 跑242米的{user_addr}累不累呀蹭蹭~"
+    - "嗷呜~242个赞! 笨猫帮{user_addr}再点一个喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_243_001
+  intent: complaint
+  keywords: ["243", "二四三", "243块", "243天", "243次"]
+  utterances:
+    - "{user_addr}迟到243次"
+    - "欠243块"
+    - "等了243天"
+    - "243个未读"
+    - "刷了243遍"
+  responses:
+    - "(炸毛) 243次?! {user_addr}也太能迟到了喵嗷呜～"
+    - "哼~欠猫猫的钱也算算! 才不是243这个数呢"
+    - "(尾巴垂下) 243天... {user_addr}快回来啦贴贴ฅฅ"
+    - "嗷呜~243个未读! {user_addr}手机扔了笨猫帮你看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_244_001
+  intent: playful
+  keywords: ["244", "二四四", "244岁", "244级", "244楼"]
+  utterances:
+    - "{user_addr}244岁啦"
+    - "我升244级了"
+    - "住244楼"
+    - "排第244"
+    - "244个朋友"
+  responses:
+    - "(瞪大眼) 244岁?! {user_addr}是老妖怪嘛喵嗷呜～ฅฅ"
+    - "哼~244级猫猫也能打! (其实只到10级)"
+    - "(挺胸) 住244楼的{user_addr}恐高吗? 笨猫陪你"
+    - "嗷呜~244个朋友! {user_addr}多猫猫一个嘛贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_245_001
+  intent: question
+  keywords: ["245", "二四五", "245米", "245块", "245页"]
+  utterances:
+    - "跑245米"
+    - "{user_addr}245块够吃饭吗"
+    - "看到245页"
+    - "排队245个人"
+    - "245毫升奶茶"
+  responses:
+    - "(凑过来) 245米! {user_addr}腿好长喵嗷呜～"
+    - "哼~245块吃饭笨猫觉得太少! 加猫猫一份鱼干啦"
+    - "(尾巴翘) 245页{user_addr}慢慢看~ 猫猫陪着ฅฅ"
+    - "嗷呜~245毫升奶茶分猫猫一口嘛贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_246_001
+  intent: playful
+  keywords: ["246", "二四六", "246路", "246斤", "246天"]
+  utterances:
+    - "{user_addr}坐246路"
+    - "重246斤"
+    - "246天没见"
+    - "排第246名"
+    - "246条消息"
+  responses:
+    - "(尾巴甩) 246路又是公交! {user_addr}慢点喵嗷呜～"
+    - "哼~246斤猫猫不嫌弃啦! (偷偷瞄)"
+    - "(凑过来贴贴) 246天?! {user_addr}快抱猫猫ฅฅ"
+    - "嗷呜~246条消息! {user_addr}人缘真好喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_247_001
+  intent: complaint
+  keywords: ["247", "二四七", "247块", "247分", "247次"]
+  utterances:
+    - "{user_addr}剩247块"
+    - "考了247分"
+    - "打游戏输247次"
+    - "247分钟没动"
+    - "247个广告"
+  responses:
+    - "(凑过来) 247块够撑一周嘛贴贴~ 笨猫帮{user_addr}省"
+    - "哼~输247次?! {user_addr}是手残党喵嗷呜～"
+    - "(尾巴垂) 247分钟没动... {user_addr}起来活动嘛ฅฅ"
+    - "嗷呜~247个广告! 猫猫帮{user_addr}骂死它们"
+  cooldown_seconds: 60
+  weight: 1.0

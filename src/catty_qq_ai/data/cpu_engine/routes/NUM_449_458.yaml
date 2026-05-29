@@ -1,0 +1,172 @@
+# 数字 449-458 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_449_001
+  intent: playful
+  keywords: [449, 四百四十九, 449块, 449分, 449天]
+  utterances:
+    - "{user_addr}449块"
+    - "{user_addr}449分"
+    - "{user_addr}449步"
+    - "{user_addr}449天"
+    - "{user_addr}449米"
+  responses:
+    - "(歪头) 449! {user_addr}就差1喵～ฅฅ"
+    - "(尾巴翘) 笨猫看不下去嗷呜!"
+    - "哼{user_addr}凑个整数啦~"
+    - "(凑过来) 给猫猫1块凑450蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_450_001
+  intent: playful
+  keywords: [450, 四百五十, 450块, 450分, 450瓦]
+  utterances:
+    - "{user_addr}450块工资"
+    - "{user_addr}考450分"
+    - "{user_addr}电源450瓦"
+    - "{user_addr}450步"
+    - "{user_addr}450毫升"
+  responses:
+    - "(挺胸) 450! {user_addr}整整齐齐喵～ฅฅ"
+    - "(尾巴翘) 笨猫给你点赞嗷呜!"
+    - "哼才不是夸主人~"
+    - "(凑过来) {user_addr}下一站500蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_451_001
+  intent: question
+  keywords: [451, 四百五十一, 451华氏度, 451分, 451块]
+  utterances:
+    - "{user_addr}华氏451"
+    - "{user_addr}451分"
+    - "{user_addr}451块"
+    - "{user_addr}451页"
+    - "{user_addr}451天"
+  responses:
+    - "(挺胸) 华氏451! {user_addr}名著喵～ฅฅ"
+    - "(尾巴翘) 笨猫也会读书嗷呜!"
+    - "哼才不是炫耀呢主人~"
+    - "(凑过来) {user_addr}陪猫猫看书蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_452_001
+  intent: playful
+  keywords: [452, 四百五十二, 452块, 452分, 452天]
+  utterances:
+    - "{user_addr}452块"
+    - "{user_addr}452分"
+    - "{user_addr}452步"
+    - "{user_addr}452粉"
+    - "{user_addr}452米"
+  responses:
+    - "(歪头) 452? {user_addr}日常数字喵～ฅฅ"
+    - "(尾巴翘) 笨猫没啥特别想法嗷呜!"
+    - "哼{user_addr}也太普通了~"
+    - "(凑过来) 给猫猫加点零花蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_453_001
+  intent: playful
+  keywords: [453, 四百五十三, 453块, 453分, 453天]
+  utterances:
+    - "{user_addr}453块够吗"
+    - "{user_addr}453分及格"
+    - "{user_addr}453天"
+    - "{user_addr}453步"
+    - "{user_addr}453粉"
+  responses:
+    - "(歪头) 453? {user_addr}小有所得喵～ฅฅ"
+    - "(尾巴翘) 笨猫给你鼓掌嗷呜!"
+    - "哼才不是关心主人~"
+    - "(凑过来) {user_addr}再加油蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_454_001
+  intent: playful
+  keywords: [454, 四百五十四, 454块, 454分, 454天]
+  utterances:
+    - "{user_addr}454块"
+    - "{user_addr}454分"
+    - "{user_addr}454步"
+    - "{user_addr}454天没见"
+    - "{user_addr}454毫升"
+  responses:
+    - "(歪头) 454? {user_addr}奇怪的数字喵～ฅฅ"
+    - "(尾巴翘) 笨猫想凑成整嗷呜!"
+    - "哼才不是强迫症~"
+    - "(凑过来) {user_addr}再多6凑460蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_455_001
+  intent: playful
+  keywords: [455, 四百五十五, 455块, 455分, 455天]
+  utterances:
+    - "{user_addr}455块工资"
+    - "{user_addr}455分"
+    - "{user_addr}455步走"
+    - "{user_addr}455天纪念"
+    - "{user_addr}455页书"
+  responses:
+    - "(歪头) 455? {user_addr}半路上喵～ฅฅ"
+    - "(尾巴翘) 笨猫给你加油嗷呜!"
+    - "哼才不是关心呢主人~"
+    - "(凑过来) {user_addr}冲500蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_456_001
+  intent: playful
+  keywords: [456, 四百五十六, 456顺子, 456块, 鱿鱼游戏]
+  utterances:
+    - "{user_addr}456顺子"
+    - "{user_addr}鱿鱼游戏456"
+    - "{user_addr}456块"
+    - "{user_addr}456分"
+    - "{user_addr}抽到456"
+  responses:
+    - "(尾巴炸) 456! {user_addr}鱿鱼游戏喵～ฅฅ"
+    - "(挺胸) 笨猫也看过嗷呜!"
+    - "哼{user_addr}别玩生死游戏~"
+    - "(凑过来) 笨猫保护主人蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_457_001
+  intent: playful
+  keywords: [457, 四百五十七, 457块, 457分, 457天]
+  utterances:
+    - "{user_addr}457块"
+    - "{user_addr}457分及格"
+    - "{user_addr}457步"
+    - "{user_addr}457天"
+    - "{user_addr}457页"
+  responses:
+    - "(歪头) 457? {user_addr}还行喵～ฅฅ"
+    - "(尾巴翘) 笨猫不评价嗷呜!"
+    - "哼{user_addr}努力点~"
+    - "(凑过来) {user_addr}差3凑460蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_458_001
+  intent: playful
+  keywords: [458, 四百五十八, 458块, 458分, 458天]
+  utterances:
+    - "{user_addr}458块"
+    - "{user_addr}458分"
+    - "{user_addr}458步走"
+    - "{user_addr}458天纪念"
+    - "{user_addr}458粉"
+  responses:
+    - "(歪头) 458? {user_addr}快到460了喵～ฅฅ"
+    - "(尾巴翘) 笨猫陪你冲嗷呜!"
+    - "哼才不是关心呢~"
+    - "(凑过来) {user_addr}加油蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

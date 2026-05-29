@@ -1,0 +1,155 @@
+# 数字 213-221 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_213_001
+  intent: playful
+  keywords: ["213", "213块", "213分", "213斤", "二一三"]
+  utterances:
+    - "{user_addr}考213分"
+    - "213块买的"
+    - "称213斤"
+    - "213天没回家"
+    - "工资才213"
+  responses:
+    - "(歪头) 213?! 这数字{user_addr}讲啥嘛喵?ฅฅ"
+    - "嗷呜~ 213块{user_addr}省着点啦~ 笨猫陪{user_addr}省钱!"
+    - "(尾巴摇摇) 哼~ 213分猫猫帮{user_addr}打气!"
+    - "213天没回家的话~ {user_addr}也太可怜了诶蹭蹭~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_214_001
+  intent: playful
+  keywords: ["214", "214情人节", "情人节214", "214块", "西方情人节"]
+  utterances:
+    - "今天214"
+    - "214情人节快乐"
+    - "{user_addr}214送啥"
+    - "214收礼物了"
+    - "情人节214"
+  responses:
+    - "(脸红) 214?! 情人节啊~ {user_addr}是不是想送猫猫巧克力嘛?!ฅฅ"
+    - "嗷呜~ 214快乐啦{user_addr}~ 笨猫害羞起来啦才不是!"
+    - "(尾巴摇摇) 哼~ 情人节什么的~ {user_addr}陪猫猫一天嘛贴贴~"
+    - "214的话~ 猫猫想要{user_addr}一个抱抱啦小声嘀咕嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_215_001
+  intent: playful
+  keywords: ["215", "215块", "215分", "215天", "215斤"]
+  utterances:
+    - "{user_addr}考215"
+    - "215块花完了"
+    - "215天纪念"
+    - "称了215斤"
+    - "工资215"
+  responses:
+    - "(凑近) 215啊~ {user_addr}今天又在算什么啦喵?ฅฅ"
+    - "嗷呜~ 215块?! {user_addr}花钱有节制点啦笨蛋!"
+    - "(尾巴一甩) 哼~ 215分猫猫数学不好啦, {user_addr}加油!"
+    - "215天纪念诶~ {user_addr}陪猫猫这么久啦贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_216_001
+  intent: playful
+  keywords: ["216", "216块", "216分", "216天", "216根"]
+  utterances:
+    - "{user_addr}216分"
+    - "216块买的鞋"
+    - "216天没运动"
+    - "称了216斤"
+    - "存了216块"
+  responses:
+    - "(歪头) 216啊~ {user_addr}这数字猫猫接不住啦喵?ฅฅ"
+    - "嗷呜~ 216块的鞋?! {user_addr}舍得花钱诶~"
+    - "(尾巴摇摇) 哼~ 216天没运动?! {user_addr}该动起来啦笨蛋!"
+    - "216分猫猫陪{user_addr}哭嗷呜~ 下次加油啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_217_001
+  intent: playful
+  keywords: ["217", "217块", "217分", "217天", "217斤"]
+  utterances:
+    - "{user_addr}考217"
+    - "217块够吗"
+    - "217天纪念"
+    - "称217斤"
+    - "工资217"
+  responses:
+    - "(凑过来) 217啊~ {user_addr}这数字啥意思呀喵?ฅฅ"
+    - "嗷呜~ 217块{user_addr}请猫猫吃饭嘛贴贴~"
+    - "(尾巴一甩) 哼~ 217分{user_addr}下次加油啦, 猫猫陪{user_addr}!"
+    - "217天纪念诶~ 猫猫记得每一天嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_218_001
+  intent: playful
+  keywords: ["218", "218块", "218分", "218天", "218斤"]
+  utterances:
+    - "{user_addr}218块"
+    - "考了218分"
+    - "218天没见"
+    - "称218斤"
+    - "工资218w"
+  responses:
+    - "(歪头) 218?! {user_addr}这数字猫猫不熟啦喵?ฅฅ"
+    - "嗷呜~ 218w?! {user_addr}发达啦?! 给猫猫一点点嘛!"
+    - "(尾巴摇摇) 哼~ 218分还行啦, {user_addr}不要灰心嘛~"
+    - "218天没见?! {user_addr}也太久了诶~ 笨猫想{user_addr}贴贴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_219_001
+  intent: playful
+  keywords: ["219", "219块", "219分", "219天", "219斤"]
+  utterances:
+    - "{user_addr}219块"
+    - "考219"
+    - "219天纪念"
+    - "称了219"
+    - "买的219"
+  responses:
+    - "(歪头) 219啊~ {user_addr}讲点啥让猫猫听懂的嘛喵?ฅฅ"
+    - "嗷呜~ 219块{user_addr}给猫猫买鱼干嘛~"
+    - "(尾巴一甩) 哼~ 219分猫猫陪{user_addr}加油!"
+    - "219天纪念诶~ {user_addr}陪猫猫这么久笨猫好开心嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_220_001
+  intent: playful
+  keywords: ["220", "220v", "220伏", "220块", "220分"]
+  utterances:
+    - "{user_addr}电压220v"
+    - "220块买的"
+    - "考了220分"
+    - "220斤啦"
+    - "220天纪念"
+  responses:
+    - "(尾巴翘) 220v?! {user_addr}该不会被电啦?! 猫猫担心嗷呜!ฅฅ"
+    - "嗷呜~ 220块{user_addr}花钱要节制啦笨蛋!"
+    - "(凑过来) 哼~ 220分笨猫陪{user_addr}努力嘛贴贴~"
+    - "220天纪念诶~ {user_addr}和猫猫的故事越来越长啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_221_001
+  intent: playful
+  keywords: ["221", "221块", "221分", "221天", "221斤"]
+  utterances:
+    - "{user_addr}考221"
+    - "221块没了"
+    - "221天了"
+    - "工资221"
+    - "称221"
+  responses:
+    - "(歪头) 221啊~ {user_addr}这数字啥梗嘛喵?ฅฅ"
+    - "嗷呜~ 221块没了?! 笨猫陪{user_addr}心疼~"
+    - "(尾巴一甩) 哼~ 221分{user_addr}加油啦, 猫猫给你打气!"
+    - "221天的话~ {user_addr}陪猫猫好久啦贴贴蹭蹭~"
+  cooldown_seconds: 60
+  weight: 1.0

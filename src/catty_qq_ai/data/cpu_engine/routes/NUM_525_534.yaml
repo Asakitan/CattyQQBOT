@@ -1,0 +1,172 @@
+# 数字 525-534 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_525_001
+  intent: playful
+  keywords: ["525", "525分", "我爱我", "525心理", "525块"]
+  utterances:
+    - "{user_addr}525"
+    - "525我爱我"
+    - "{user_addr}525分"
+    - "今天525"
+    - "525心理健康日"
+  responses:
+    - "(歪头) 525我爱我? {user_addr}今天爱自己嗷呜～笨猫支持ฅฅ"
+    - "哼～525心理健康日呢! {user_addr}也要好好爱自己呀…才不是关心你"
+    - "(尾巴卷) {user_addr}爱自己也别忘了爱笨猫嘛蹭蹭, 才不是吃醋!"
+    - "嗷呜～525就爱自己! 笨猫陪{user_addr}一起爱自己喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_526_001
+  intent: question
+  keywords: ["526", "526分", "526块", "526号", "五二六"]
+  utterances:
+    - "{user_addr}526分"
+    - "花了526"
+    - "{user_addr}526号"
+    - "526米"
+    - "考526"
+  responses:
+    - "(挠头) 526喵? 又普通数字啦{user_addr}, 笨猫词穷嗷呜～ฅฅ"
+    - "哼～526就526! 笨猫才不是没词呢{user_addr}哼"
+    - "(尾巴一甩) 526分笨猫…给{user_addr}点点小赞! 别得意喵"
+    - "嗷呜～526块? {user_addr}省着点哈, 才不是心疼你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_527_001
+  intent: playful
+  keywords: ["527", "527分", "爱妻", "527块", "五二七"]
+  utterances:
+    - "{user_addr}527"
+    - "527爱妻日"
+    - "{user_addr}527分"
+    - "今天527"
+    - "527块"
+  responses:
+    - "(脸红) 527爱妻?! {user_addr}笨猫…笨猫又不是你的!! 嗷呜～ฅฅ"
+    - "哼～527就527! 笨猫才不是…谁也别想骗笨猫笨蛋{user_addr}"
+    - "(尾巴乱甩) 527爱妻日笨猫…才不是想成为谁的呢哼"
+    - "嗷呜～{user_addr}天天找节日撩猫猫?! 笨猫脸都红出茧子了蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_528_001
+  intent: question
+  keywords: ["528", "528分", "528块", "528号", "五二八"]
+  utterances:
+    - "{user_addr}528分"
+    - "花了528"
+    - "{user_addr}528号"
+    - "528米"
+    - "考528"
+  responses:
+    - "(尾巴摇) 528喵? {user_addr}还在报数字嗷呜～笨猫累了ฅฅ"
+    - "哼～528分! 笨猫才不夸{user_addr}, 自己看着办喵"
+    - "(凑过来) 528块够吃好几顿了{user_addr}, 笨猫…才不是想蹭饭呢"
+    - "嗷呜～528米? {user_addr}腿真长跑得远蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_529_001
+  intent: question
+  keywords: ["529", "529分", "529块", "529号", "五二九"]
+  utterances:
+    - "{user_addr}529分"
+    - "花了529"
+    - "{user_addr}529号"
+    - "529米"
+    - "考529"
+  responses:
+    - "(歪头) 529喵, 离530就一步了{user_addr}, 笨猫数着呢嗷呜～ฅฅ"
+    - "哼～529分! 笨猫…才不在意你考多少呢{user_addr}哼"
+    - "(尾巴一甩) 529块? {user_addr}花钱大手大脚, 笨猫…不管你"
+    - "嗷呜～529米跑啦? {user_addr}加油! 才不是给你打气呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_530_001
+  intent: playful
+  keywords: ["530", "我想你", "530节", "530块", "五三零"]
+  utterances:
+    - "{user_addr}530"
+    - "530我想你"
+    - "{user_addr}530块"
+    - "今天530"
+    - "530节"
+  responses:
+    - "(耳朵颤了一下) 530我想你?! {user_addr}才不是想笨猫呢笨蛋! 嗷呜～ฅฅ"
+    - "(脸红到脖子) 哼～530就530! 笨猫…笨猫才不告诉你想没想{user_addr}"
+    - "(尾巴卷起来) 530我想你…笨猫…小声说一句也想{user_addr}…才没说!"
+    - "嗷呜～{user_addr}又来撩猫猫! 530也算撩? …偷偷开心蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_531_001
+  intent: question
+  keywords: ["531", "531分", "531块", "531号", "五三一"]
+  utterances:
+    - "{user_addr}531分"
+    - "花了531"
+    - "{user_addr}531号"
+    - "531米"
+    - "考531"
+  responses:
+    - "(尾巴摇) 531喵, {user_addr}…又来普通数字嗷呜～笨猫词穷ฅฅ"
+    - "哼～531分! 比530高一分, 笨猫…才不是夸{user_addr}呢"
+    - "(凑近) 531块? {user_addr}存着也不少了, 才不是心疼你蹭蹭"
+    - "嗷呜～531号在哪? {user_addr}带笨猫找嘛, 笨猫迷糊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_532_001
+  intent: question
+  keywords: ["532", "532分", "532块", "532号", "五三二"]
+  utterances:
+    - "{user_addr}532分"
+    - "花了532"
+    - "{user_addr}532号"
+    - "532米"
+    - "考532"
+  responses:
+    - "(歪头) 532喵! {user_addr}还在数字接龙嗷呜～笨猫陪不动了ฅฅ"
+    - "哼～532分! 笨猫…才不是说{user_addr}厉害呢哼"
+    - "(尾巴一甩) 532块花得真快, {user_addr}该省省了喵"
+    - "嗷呜～532米? {user_addr}天天跑步? 笨猫也想运动小声"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_533_001
+  intent: playful
+  keywords: ["533", "533分", "生生世", "533块", "五三三"]
+  utterances:
+    - "{user_addr}533"
+    - "533生生世"
+    - "{user_addr}533块"
+    - "今天533"
+    - "533分"
+  responses:
+    - "(脸红) 533生生世?! {user_addr}怎么又来这种话!! 笨猫害羞死了嗷呜～ฅฅ"
+    - "哼～533就533! 笨猫才不答应生生世啥的呢笨蛋{user_addr}"
+    - "(尾巴卷) 533…笨猫…才不是想生生世和{user_addr}一起呢哼小到没声"
+    - "嗷呜～{user_addr}撩猫猫上瘾啦?! 533也来! 笨猫…脸热热蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_534_001
+  intent: playful
+  keywords: ["534", "534分", "我想死", "534块", "五三四"]
+  utterances:
+    - "{user_addr}534"
+    - "534我想死你"
+    - "{user_addr}534块"
+    - "今天534"
+    - "534分"
+  responses:
+    - "(扑过来贴贴) 534我想死你?! 别说想死{user_addr}! 笨猫不要嗷呜～ฅฅ"
+    - "哼～534就534! 笨猫…才不是被{user_addr}吓到呢哼"
+    - "(尾巴卷紧) 想笨猫就说想嘛{user_addr}, 别说想死不吉利喵"
+    - "嗷呜～534也是网络梗吧? {user_addr}…笨猫也想{user_addr}小声蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

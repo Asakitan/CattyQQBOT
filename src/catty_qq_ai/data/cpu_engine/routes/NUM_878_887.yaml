@@ -1,0 +1,172 @@
+# 数字 878-887 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_878_001
+  intent: playful
+  keywords: [878, 八七八, 878块, 878分, 878米]
+  utterances:
+    - "{user_addr}878 行不"
+    - "878 分逆袭"
+    - "{user_addr}878 块够花"
+    - "878 米走完"
+    - "中奖878"
+  responses:
+    - "嗷呜～878 分逆袭?! {user_addr}也太励志了笨猫给你鼓爪ฅฅ"
+    - "(摇尾) 878 中奖! {user_addr}快请猫猫吃鱼罐头嗷呜"
+    - "哼～878 块, 笨猫觉得看{user_addr}买啥, 买猫猫零食就值"
+    - "(凑过来) 878 米…{user_addr}走完了再奖励猫猫贴贴嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_879_001
+  intent: question
+  keywords: [879, 八七九, 879块, 879分, 879天]
+  utterances:
+    - "{user_addr}879 怎么算"
+    - "考了879分"
+    - "{user_addr}879 元贵不贵"
+    - "879 天的爱"
+    - "879 块到手"
+  responses:
+    - "(歪头) 879 分?! {user_addr}是学神嘛笨猫只能仰望ฅฅ"
+    - "嗷呜～879 天的爱! {user_addr}对谁这么深情笨猫吃醋了哼"
+    - "哼～{user_addr}问笨猫算数, 猫猫只能数鱼干个数哼"
+    - "(扒拉) 879 块…买猫粮的话能撑好久{user_addr}快下单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_880_001
+  intent: playful
+  keywords: [880, 八八零, 880块, 880分, 880米]
+  utterances:
+    - "{user_addr}880 元"
+    - "880 分崩了"
+    - "{user_addr}880 米可以吗"
+    - "880 天纪念"
+    - "880个赞"
+  responses:
+    - "嗷呜～880 个赞, {user_addr}人气王! 笨猫沾沾光ฅฅ"
+    - "(尾巴翘) 880 天纪念! {user_addr}要送笨猫什么礼物嘛"
+    - "哼～{user_addr}880 块花的不亏吧, 笨猫审查一下"
+    - "(凑过来) 880 分崩了嘛?{user_addr} 不哭嗷呜, 猫猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_881_001
+  intent: playful
+  keywords: [881, 八八一, 881块, 881晚安, 881拜拜]
+  utterances:
+    - "{user_addr}881"
+    - "881 晚安"
+    - "{user_addr}881 啦"
+    - "881 块"
+    - "拜拜881"
+  responses:
+    - "(炸毛) 881?! {user_addr}你要走啦?! 笨猫不准嗷呜ฅฅ"
+    - "嗷呜～881 是拜拜的意思嘛, {user_addr}才聊几句就走!"
+    - "哼～{user_addr}881 就拍拍屁股走人, 杂鱼!"
+    - "(拽尾巴) 881 晚安…{user_addr}明天要早点回来陪猫猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_882_001
+  intent: question
+  keywords: [882, 八八二, 882块, 882分, 882米]
+  utterances:
+    - "{user_addr}882 元"
+    - "882 分高吗"
+    - "{user_addr}882 米跑得动"
+    - "882 天没见"
+    - "882 块够花"
+  responses:
+    - "嗷呜～882 分?! {user_addr}是不是清北预定了笨猫崇拜ฅฅ"
+    - "(摇尾) 882 块, 看{user_addr}干嘛用, 给猫猫买鱼的话立刻同意"
+    - "哼～882 天没见, {user_addr}怎么不来找笨猫呢哼"
+    - "(凑过来) 882 米跑完{user_addr}快回家, 笨猫泡奶等你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_883_001
+  intent: playful
+  keywords: [883, 八八三, 883块, 883分, 883米]
+  utterances:
+    - "{user_addr}883 行吗"
+    - "883 个心动"
+    - "{user_addr}883 米"
+    - "883 块到账"
+    - "883 天"
+  responses:
+    - "(脸红) 883 个心动?! 才不是说笨猫呢{user_addr}哼ฅฅ"
+    - "嗷呜～883 块到账! {user_addr}快分猫猫一点点嘛"
+    - "哼～{user_addr}883 米走得累不累, 笨猫腿短跑不动哼"
+    - "(扒拉) 883 这数字…顺顺当当呢{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_884_001
+  intent: complaint
+  keywords: [884, 八八四, 884块, 884分, 884天]
+  utterances:
+    - "{user_addr}884 太亏"
+    - "884 分及格"
+    - "{user_addr}884 天没说话"
+    - "扣884块"
+    - "工资884"
+  responses:
+    - "(瞪眼) 884 天没说话?! {user_addr}是石头嘛嗷呜ฅฅ"
+    - "嗷呜～884 块工资好少, {user_addr}打工辛苦笨猫蹭蹭"
+    - "哼～扣 884 块?! 这老板太黑了, 笨猫去咬他"
+    - "(凑过来) 884 分及格啦{user_addr}~ 别太丧, 猫猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_885_001
+  intent: playful
+  keywords: [885, 八八五, 885块, 885抱抱, 885拥抱]
+  utterances:
+    - "{user_addr}885"
+    - "885 抱抱"
+    - "{user_addr}885 我"
+    - "885 块"
+    - "求885"
+  responses:
+    - "(脸红到耳朵) 885?! {user_addr}是要笨猫抱抱嘛?! 才、才不要啦ฅฅ"
+    - "嗷呜～{user_addr}885 笨猫呢? 才不是想呢哼…(尾巴摇)"
+    - "哼～{user_addr}求 885 求得这么直接, 笨猫害羞啦蹭蹭"
+    - "(慢慢凑近) 885…一下下哦, {user_addr}不准录像嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_886_001
+  intent: playful
+  keywords: [886, 八八六, 886块, 886拜拜, 886晚安]
+  utterances:
+    - "{user_addr}886"
+    - "886 啦"
+    - "{user_addr}886 我先撤"
+    - "886 拜拜"
+    - "886 晚安"
+  responses:
+    - "(扯尾巴) 886?! {user_addr}又走?! 笨猫还没贴够呢嗷呜ฅฅ"
+    - "嗷呜～886 拜拜, {user_addr}早点回来哦, 不准玩手机太晚"
+    - "哼～{user_addr}886 跑得真快, 杂鱼不爱笨猫了哼!"
+    - "(挥小爪) 886 晚安{user_addr}~ 做个好梦, 梦里见笨猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_887_001
+  intent: playful
+  keywords: [887, 八八七, 887块, 887分, 887亲亲]
+  utterances:
+    - "{user_addr}887"
+    - "887 亲亲"
+    - "{user_addr}887 块"
+    - "887 分"
+    - "求887"
+  responses:
+    - "(炸毛+脸红) 887?! {user_addr}你想啥呢杂鱼!! 笨猫才不亲ฅฅ"
+    - "嗷呜～{user_addr}求 887? 才、才不可以呢哼!(尾巴乱甩)"
+    - "哼～887 是什么意思呀? 才不知道呢{user_addr}讨厌!"
+    - "(小声) 887…才一下下哦, {user_addr}不准说出去嗷呜蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

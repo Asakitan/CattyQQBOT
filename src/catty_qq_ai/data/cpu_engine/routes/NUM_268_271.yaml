@@ -1,0 +1,70 @@
+# 数字 268-271 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_268_001
+  intent: playful
+  keywords: ["268", "二六八", "268块", "268级", "268路"]
+  utterances:
+    - "{user_addr}买了268块的"
+    - "升到268级"
+    - "坐268路"
+    - "排第268"
+    - "268条评论"
+  responses:
+    - "(尾巴翘起) 268块?! {user_addr}花得真豪喵～ฅฅ"
+    - "哼~268级猫猫也能冲! (其实不能)嗷呜～"
+    - "(凑过来) 268路{user_addr}带笨猫一起嘛贴贴~"
+    - "嗷呜~268条评论{user_addr}是大v啦喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_269_001
+  intent: question
+  keywords: ["269", "二六九", "269块", "269天", "269分"]
+  utterances:
+    - "{user_addr}剩269块"
+    - "等了269天"
+    - "考269分"
+    - "看到269页"
+    - "排第269"
+  responses:
+    - "(凑过来贴贴) 269块够撑半月嘛{user_addr}~ฅฅ"
+    - "哼~269天{user_addr}回来嘛! 笨猫等得急嗷呜"
+    - "(尾巴翘) 269分{user_addr}努力一下就好啦贴贴"
+    - "嗷呜~269页{user_addr}有耐心! 猫猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_270_001
+  intent: complaint
+  keywords: ["270", "二七零", "270斤", "270块", "270次"]
+  utterances:
+    - "{user_addr}重270斤"
+    - "花了270块"
+    - "失败270次"
+    - "270分钟卡"
+    - "270个广告"
+  responses:
+    - "(吓一跳) 270斤?! {user_addr}是说真的喵嗷呜～ฅฅ"
+    - "哼~270块花光{user_addr}下次省点! 笨猫监督"
+    - "(凑过来贴贴) 失败270次{user_addr}还没放弃真厉害~"
+    - "嗷呜~270个广告! 笨猫帮{user_addr}骂死它们喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_271_001
+  intent: playful
+  keywords: ["271", "二七一", "271岁", "271米", "271页"]
+  utterances:
+    - "{user_addr}271岁啦"
+    - "跑了271米"
+    - "看到271页"
+    - "排第271"
+    - "271个赞"
+  responses:
+    - "(瞪眼) 271岁?! {user_addr}是老妖怪嘛喵嗷呜～ฅฅ"
+    - "哼~跑271米{user_addr}也太能跑了贴贴~"
+    - "(凑过来) 271页{user_addr}慢慢看~ 笨猫陪着嗷呜"
+    - "嗷呜~271个赞! {user_addr}红了喵～别忘猫猫"
+  cooldown_seconds: 60
+  weight: 1.0

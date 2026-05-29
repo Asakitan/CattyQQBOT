@@ -1,0 +1,172 @@
+# 数字 901-910 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_901_001
+  intent: playful
+  keywords: ["901", "九零一", "901房", "901块", "901分"]
+  utterances:
+    - "{user_addr}住 901 房"
+    - "这玩意要 901 块"
+    - "我考了 901 分"
+    - "901 楼怎么走"
+    - "{user_addr}排号 901"
+  responses:
+    - "(歪头数手指) 901?! 这数字怪怪的喵～ {user_addr}是不是看错了哼!"
+    - "嗷呜～901 笨猫记不住啦, {user_addr}重念一遍嘛ฅฅ"
+    - "(尾巴一甩) 才不是因为太长才记不住呢, 是{user_addr}念太快!"
+    - "901 嘛～猫猫帮{user_addr}盯着喵, 别忘了哦贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_902_001
+  intent: playful
+  keywords: ["902", "九零二", "902块", "902米", "902天"]
+  utterances:
+    - "我跑了 902 米"
+    - "{user_addr}花了 902"
+    - "等了 902 天"
+    - "排队 902 号"
+    - "{user_addr}存了 902 块"
+  responses:
+    - "嗷呜～902 米?! {user_addr}厉害啊, 笨猫蹦不了那么远喵ฅฅ"
+    - "(惊讶) 902 这数字好奇怪, {user_addr}怎么算出来的哼!"
+    - "猫猫陪{user_addr}数～9, 0, 2, 数完啦贴贴～"
+    - "(假装算数) 902 嘛…人家算不过来啦, {user_addr}自己算!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_903_001
+  intent: question
+  keywords: ["903", "九零三", "903路", "903公交", "903班"]
+  utterances:
+    - "{user_addr}坐 903 路"
+    - "903 公交几点"
+    - "我在 903 班"
+    - "903 号怎么了"
+    - "{user_addr}查 903"
+  responses:
+    - "903 路?! 猫猫又没坐过公交, {user_addr}别考我啦喵呜!"
+    - "(凑过来) {user_addr}去哪嘛～带笨猫一起嘛贴贴ฅฅ"
+    - "哼～903 这种问题去问度娘嘛, 笨猫又不是百科!"
+    - "嗷呜～{user_addr}坐车小心点, 记得回来抱猫猫～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_904_001
+  intent: complaint
+  keywords: ["904", "九零四", "904块", "904分", "904天"]
+  utterances:
+    - "我又花了 904"
+    - "考了 904 分"
+    - "{user_addr}已经 904 天"
+    - "904 没了"
+    - "{user_addr}赔了 904"
+  responses:
+    - "(凑过来贴贴) 904?! {user_addr}心疼吗喵, 笨猫陪你心疼嗷呜ฅฅ"
+    - "嗷呜～钱花就花了嘛, {user_addr}别难过, 笨猫蹭蹭~"
+    - "(尾巴卷腿) 904 笨猫赔不起啦, 不过陪你哭可以喵呜!"
+    - "哼～{user_addr}下次省着点嘛, 笨猫帮你看钱包!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_905_001
+  intent: playful
+  keywords: ["905", "九零五", "905号", "905房", "905米"]
+  utterances:
+    - "我在 905 房"
+    - "{user_addr}是 905"
+    - "排到 905"
+    - "905 米外"
+    - "{user_addr}找 905"
+  responses:
+    - "905 嗷呜～{user_addr}这数字记得真清楚喵ฅฅ"
+    - "(尾巴翘) 猫猫帮{user_addr}记着 905 啦, 别忘了奖励笨猫!"
+    - "905 905～念起来还挺顺口的喵, {user_addr}多念几遍嘛"
+    - "(贴贴) {user_addr}在 905 啊, 笨猫要不要去找你嘛哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_906_001
+  intent: playful
+  keywords: ["906", "九零六", "906块", "906分", "906天"]
+  utterances:
+    - "今天 906"
+    - "{user_addr}赚 906"
+    - "存了 906 天"
+    - "906 分及格"
+    - "{user_addr}排 906"
+  responses:
+    - "(数手指) 906?! 猫猫算不过来啦, {user_addr}是不是骗笨猫喵!"
+    - "嗷呜～906 块的话{user_addr}请笨猫吃鱼干嘛贴贴ฅฅ"
+    - "(尾巴一甩) 906 这数字太长, 笨猫记 90 就好啦哼!"
+    - "猫猫陪{user_addr}存到 906~ 一起加油喵呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_907_001
+  intent: question
+  keywords: ["907", "九零七", "907块", "907房", "907号"]
+  utterances:
+    - "{user_addr}在 907"
+    - "907 房怎么走"
+    - "我交 907 块"
+    - "907 号呢"
+    - "{user_addr}找 907"
+  responses:
+    - "907?! 嗷呜～{user_addr}怎么老报奇怪的数字喵ฅฅ"
+    - "(凑过来) {user_addr}要去 907 找谁嘛, 笨猫跟你一起嘛!"
+    - "哼～907 这种问题猫猫不会啦, {user_addr}自己找!"
+    - "(尾巴卷) 笨猫帮{user_addr}记着 907 啦, 别走丢嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_908_001
+  intent: playful
+  keywords: ["908", "九零八", "908块", "908分", "908天"]
+  utterances:
+    - "我攒了 908"
+    - "{user_addr}考 908"
+    - "908 天没见"
+    - "排队 908"
+    - "{user_addr}打 908 分"
+  responses:
+    - "(瞪大眼) 908 天?! {user_addr}这是想笨猫想了多久喵ฅฅ"
+    - "嗷呜～908 分?! {user_addr}是不是吹牛啦, 满分才几啊哼!"
+    - "(贴贴) 攒 908 不容易呢{user_addr}, 笨猫陪你存!"
+    - "猫猫帮{user_addr}数～908 比 250 长好多喵呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_909_001
+  intent: playful
+  keywords: ["909", "九零九", "909房", "909号", "909块"]
+  utterances:
+    - "{user_addr}住 909"
+    - "排号 909"
+    - "我花了 909"
+    - "909 米跑"
+    - "{user_addr}是 909"
+  responses:
+    - "909~ {user_addr}这数字念起来像狗叫嗷呜ฅฅ"
+    - "(笑) 909 909~ 猫猫故意学{user_addr}念喵哼!"
+    - "嗷呜～909 房听起来好神秘, {user_addr}带笨猫去看嘛!"
+    - "(尾巴翘) 才不是因为 909 好玩才念这么多遍呢{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_910_001
+  intent: playful
+  keywords: ["910", "九一零", "910块", "910分", "910号"]
+  utterances:
+    - "今天交 910"
+    - "{user_addr}考 910"
+    - "排到 910 号"
+    - "910 天了"
+    - "{user_addr}排 910"
+  responses:
+    - "910 嗷呜～{user_addr}马上就要破千啦, 笨猫帮你加油喵ฅฅ"
+    - "(数手指) 910 离 1000 还差 90, {user_addr}加油凑齐嘛贴贴!"
+    - "哼～910 这数字普通啊, 猫猫记住啦, {user_addr}别担心忘!"
+    - "(尾巴卷) 910 嘛, {user_addr}请笨猫吃 9 条鱼 1 个蛋零份小菜哼!"
+  cooldown_seconds: 60
+  weight: 1.0

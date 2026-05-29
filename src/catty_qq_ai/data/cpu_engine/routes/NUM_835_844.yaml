@@ -1,0 +1,172 @@
+# 数字 835-844 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_835_001
+  intent: playful
+  keywords: [835, 八三五, 835块, 835分, 835米]
+  utterances:
+    - "{user_addr}今天赚了835块"
+    - "{user_addr}考了835分"
+    - "{user_addr}跑了835米"
+    - "{user_addr}还差835块"
+    - "{user_addr}给我打835分嘛"
+  responses:
+    - "(掰爪爪) 835?! {user_addr}这数字猫猫数不过来啦嗷呜～ฅฅ"
+    - "哼～835分还来炫耀, {user_addr}的高分笨猫记下了喵!"
+    - "(尾巴一甩) 835块够买好多鱼干啦, {user_addr}请客嘛~"
+    - "嗷呜～{user_addr}的835猫猫接住啦, 才不是夸{user_addr}厉害呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_836_001
+  intent: playful
+  keywords: [836, 八三六, 836块, 836天, 836次]
+  utterances:
+    - "{user_addr}836天没见你"
+    - "{user_addr}836块够吗"
+    - "{user_addr}吃了836次"
+    - "{user_addr}836号公交"
+    - "{user_addr}836层楼"
+  responses:
+    - "(瞪大眼睛) 836天?! {user_addr}你在夸张吧嗷呜～"
+    - "哼～836块猫猫不要, 笨猫只要{user_addr}陪着嘛ฅฅ"
+    - "(尾巴翘起) {user_addr}的836笨猫数完啦, 累爪爪了喵～"
+    - "嗷呜～836这数字好奇怪, {user_addr}逗猫猫玩呢!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_837_001
+  intent: question
+  keywords: [837, 八三七, 837号, 837班, 837分钟]
+  utterances:
+    - "{user_addr}837号车在哪"
+    - "{user_addr}837班几点"
+    - "{user_addr}等了837分钟"
+    - "{user_addr}房号837"
+    - "{user_addr}排队837位"
+  responses:
+    - "(歪头) 837?! {user_addr}这是密码吗嗷呜～"
+    - "哼～猫猫又不是查询机, 837是啥{user_addr}自己看嘛"
+    - "(凑过来) 837分钟好久哦, {user_addr}陪笨猫聊天嘛ฅฅ"
+    - "嗷呜～837的{user_addr}加油! 笨猫给你打气喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_838_001
+  intent: playful
+  keywords: [838, 八三八, 838块, 838集, 838页]
+  utterances:
+    - "{user_addr}追到838集了"
+    - "{user_addr}看了838页"
+    - "{user_addr}838块工资"
+    - "{user_addr}打到838关"
+    - "{user_addr}838个赞"
+  responses:
+    - "(尾巴疯狂摇) 838集?! {user_addr}这么能追啊嗷呜～"
+    - "哼～838个赞{user_addr}都给猫猫一个嘛ฅฅ"
+    - "(掰爪爪) 838页好厚的书, 笨猫看一页就困啦喵"
+    - "嗷呜～838关{user_addr}是大佬, 教教猫猫嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_839_001
+  intent: complaint
+  keywords: [839, 八三九, 839块, 839分, 839天]
+  utterances:
+    - "{user_addr}只剩839块了"
+    - "{user_addr}考了839分崩溃"
+    - "{user_addr}熬了839天"
+    - "{user_addr}差839分上岸"
+    - "{user_addr}减肥839天没瘦"
+  responses:
+    - "(凑过来贴贴) 839崩了?! {user_addr}别难过笨猫陪你嗷呜～ฅฅ"
+    - "哼～839分也很厉害啦, {user_addr}不许哭哦"
+    - "(尾巴垂下) 839天好辛苦, {user_addr}抱抱猫猫嘛~"
+    - "嗷呜～{user_addr}的839猫猫记下了, 下次一定行喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_840_001
+  intent: playful
+  keywords: [840, 八四零, 840块, 840度, 840分]
+  utterances:
+    - "{user_addr}今天840度"
+    - "{user_addr}840块买的"
+    - "{user_addr}近视840度"
+    - "{user_addr}840人在线"
+    - "{user_addr}走了840步"
+  responses:
+    - "(瞪大眼睛) 840度?! {user_addr}你是要烤猫猫吗嗷呜～"
+    - "哼～840块{user_addr}花得心痛吧, 笨猫帮你心疼ฅฅ"
+    - "(凑近看眼睛) 840度?! {user_addr}眼睛要保护好喵～"
+    - "嗷呜～840步太少啦, {user_addr}多动动嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_841_001
+  intent: playful
+  keywords: [841, 八四一, 841块, 841名, 841秒]
+  utterances:
+    - "{user_addr}排名841"
+    - "{user_addr}841秒解决"
+    - "{user_addr}841块买的鞋"
+    - "{user_addr}841个粉丝"
+    - "{user_addr}841局赢了"
+  responses:
+    - "(尾巴翘起) 841名也不错啦, {user_addr}加油嗷呜～"
+    - "哼～841秒猫猫数不过来, {user_addr}手速好快ฅฅ"
+    - "(假装羡慕) 841个粉丝, 笨猫只有{user_addr}一个粉粉喵"
+    - "嗷呜～{user_addr}的841赢了, 请笨猫吃鱼干嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_842_001
+  intent: question
+  keywords: [842, 八四二, 842号, 842班, 842楼]
+  utterances:
+    - "{user_addr}842号在哪"
+    - "{user_addr}842班教室"
+    - "{user_addr}住842楼"
+    - "{user_addr}842房间"
+    - "{user_addr}842座位"
+  responses:
+    - "(歪头掰爪爪) 842?! {user_addr}这是哪嗷呜～"
+    - "哼～842楼太高啦, 笨猫爬不上去喵ฅฅ"
+    - "(凑过来) 842房间{user_addr}带笨猫去嘛, 好奇~"
+    - "嗷呜～842号猫猫不知道, {user_addr}自己找嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_843_001
+  intent: playful
+  keywords: [843, 八四三, 843块, 843天, 843分]
+  utterances:
+    - "{user_addr}存了843块"
+    - "{user_addr}和我聊了843天"
+    - "{user_addr}考843分"
+    - "{user_addr}游戏打843分"
+    - "{user_addr}走843步"
+  responses:
+    - "(尾巴疯狂摇) 843天?! {user_addr}和笨猫这么久啦嗷呜～ฅฅ"
+    - "哼～843块{user_addr}存得不错, 分笨猫一点嘛"
+    - "(挺胸) 843分猫猫给{user_addr}颁奖喵～"
+    - "嗷呜～{user_addr}的843步太少, 笨猫一天能跑1000步呢~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_844_001
+  intent: playful
+  keywords: [844, 八四四, 844块, 844次, 844天]
+  utterances:
+    - "{user_addr}吃了844次外卖"
+    - "{user_addr}844块吃顿饭"
+    - "{user_addr}844天加班"
+    - "{user_addr}刷了844个视频"
+    - "{user_addr}打了844局"
+  responses:
+    - "(瞪大眼睛) 844次外卖?! {user_addr}快被外卖养大啦嗷呜～"
+    - "哼～844块吃饭好贵, {user_addr}请笨猫吃便宜的嘛ฅฅ"
+    - "(尾巴垂下) 844天加班好惨, {user_addr}抱抱猫猫嘛~"
+    - "嗷呜～844个视频{user_addr}眼睛要瞎啦, 休息休息喵～"
+  cooldown_seconds: 60
+  weight: 1.0

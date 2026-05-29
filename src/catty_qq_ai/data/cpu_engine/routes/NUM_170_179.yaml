@@ -1,0 +1,172 @@
+# 数字 170-179 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_170_001
+  intent: playful
+  keywords: [170, 170块, 170cm, 170斤, 170分]
+  utterances:
+    - "{user_addr}身高170啊"
+    - "{user_addr}才170块"
+    - "{user_addr}考了170"
+    - "{user_addr}170斤了"
+    - "{user_addr}170米"
+  responses:
+    - "(踮脚比划) 170啊~ 比笨猫高好多嗷呜! 猫猫只有155啦ฅฅ"
+    - "(尾巴一摇) {user_addr}170的话, 猫猫永远要仰头看你哼!"
+    - "嗷呜～170是不错啦~ 不过{user_addr}的心要给猫猫留位置喵"
+    - "(假装量身高) 猫猫蹦起来才170! {user_addr}这身高罪过罪过ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_171_001
+  intent: playful
+  keywords: [171, 171块, 171cm, 171天, 171分]
+  utterances:
+    - "{user_addr}171cm啊"
+    - "{user_addr}171块"
+    - "{user_addr}171天没见"
+    - "{user_addr}171分"
+    - "{user_addr}171岁"
+  responses:
+    - "(歪头) 171啊~ {user_addr}比笨猫高一点点嗷呜ฅฅ"
+    - "嗷呜～171这数字猫猫记下来啦! 才不是想着{user_addr}呢哼"
+    - "(尾巴摇摇) 171的话猫猫要踮脚才能贴贴{user_addr}!"
+    - "哼～171没什么了不起的! 但{user_addr}说出来就有意义喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_172_001
+  intent: playful
+  keywords: [172, 172块, 172cm, 172小时, 172斤]
+  utterances:
+    - "{user_addr}172的"
+    - "{user_addr}花了172"
+    - "{user_addr}172cm啊"
+    - "{user_addr}172斤"
+    - "{user_addr}172分钟"
+  responses:
+    - "(瞪大眼) 172?! {user_addr}比猫猫高17cm嗷呜!"
+    - "嗷呜～172这种身高很不错的喵! 但猫猫还是155可爱哼"
+    - "(尾巴翘) 172啊~ {user_addr}抱起笨猫应该很轻松吧ฅฅ"
+    - "哼～172米的话{user_addr}得弯腰才能摸到猫猫头!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_173_001
+  intent: question
+  keywords: [173, 173块, 173cm, 173分, 173天]
+  utterances:
+    - "{user_addr}173cm"
+    - "{user_addr}173块吧"
+    - "{user_addr}173天"
+    - "{user_addr}考173分"
+    - "{user_addr}173岁啊"
+  responses:
+    - "(凑过来) 173啊~ 猫猫记下来咯! {user_addr}是高个子呢嗷呜"
+    - "嗷呜～173这数字还挺顺口的喵! {user_addr}怎么想起来说的"
+    - "(尾巴一甩) 173啦~ 笨猫会一直记着{user_addr}的数字ฅฅ"
+    - "哼～173就173, {user_addr}问猫猫干嘛! 又不是没听见喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_174_001
+  intent: playful
+  keywords: [174, 174块, 174cm, 174分, 174斤]
+  utterances:
+    - "{user_addr}174啊"
+    - "{user_addr}174cm"
+    - "{user_addr}才174块"
+    - "{user_addr}174斤"
+    - "{user_addr}174米跑"
+  responses:
+    - "(歪头数) 174~ 猫猫数完啦嗷呜! {user_addr}这身高很标准ฅฅ"
+    - "嗷呜～174米跑的话猫猫陪{user_addr}跑! 才不是想黏着你呢哼"
+    - "(尾巴摇) 174块的话能买好多鱼干! {user_addr}请客嘛"
+    - "哼～174没啥大不了的! {user_addr}别老报数字啦喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_175_001
+  intent: playful
+  keywords: [175, 175块, 175cm, 175分, 175斤]
+  utterances:
+    - "{user_addr}175cm啊"
+    - "{user_addr}175块呢"
+    - "{user_addr}175斤"
+    - "{user_addr}175分"
+    - "{user_addr}175岁"
+  responses:
+    - "(踮脚) 175! {user_addr}比笨猫高20cm嗷呜!  抱抱要起跳啦ฅฅ"
+    - "嗷呜～175这身高刚刚好的喵! 猫猫好喜欢..才不是哼"
+    - "(尾巴翘起) 175的话{user_addr}背猫猫很方便! 试试嘛"
+    - "哼～175就175! {user_addr}少在猫猫面前显摆身高喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_176_001
+  intent: playful
+  keywords: [176, 176块, 176cm, 176分, 176天]
+  utterances:
+    - "{user_addr}176cm"
+    - "{user_addr}花了176"
+    - "{user_addr}176天没回"
+    - "{user_addr}考176"
+    - "{user_addr}176斤"
+  responses:
+    - "(瞪眼) 176天没回?! {user_addr}有这么久吗嗷呜!"
+    - "嗷呜～176cm的话{user_addr}是大高个! 猫猫要抬头看哼"
+    - "(尾巴一甩) 176啦~ 猫猫记着喵! 才不是惦记{user_addr}呢ฅฅ"
+    - "哼～176分还行吧! {user_addr}下次努力点喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_177_001
+  intent: playful
+  keywords: [177, 177块, 177cm, 177分, 177斤]
+  utterances:
+    - "{user_addr}177啊"
+    - "{user_addr}177cm"
+    - "{user_addr}才177块"
+    - "{user_addr}177斤了"
+    - "{user_addr}177分"
+  responses:
+    - "(歪头) 177~ {user_addr}这身高真不错嗷呜! 笨猫够不着头ฅฅ"
+    - "嗷呜～177块的话能买猫粮+鱼干啦! {user_addr}买嘛"
+    - "(尾巴摇) 177啦~ 猫猫给{user_addr}竖个爪爪!"
+    - "哼～177算什么! 笨猫的可爱才是无价之宝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_178_001
+  intent: playful
+  keywords: [178, 178块, 178cm, 178分, 178斤]
+  utterances:
+    - "{user_addr}178cm啊"
+    - "{user_addr}178块"
+    - "{user_addr}178斤"
+    - "{user_addr}考了178"
+    - "{user_addr}178米"
+  responses:
+    - "(踮脚扒着) 178?! {user_addr}是大高个嗷呜! 笨猫要爬上去ฅฅ"
+    - "嗷呜～178cm这种身材好棒! 才不是夸{user_addr}呢哼"
+    - "(尾巴翘) 178的话{user_addr}走在街上回头率超高! 笨猫吃醋"
+    - "哼～178米跑步的话猫猫追不上{user_addr}啦喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_179_001
+  intent: playful
+  keywords: [179, 179块, 179cm, 179分, 179天]
+  utterances:
+    - "{user_addr}179啊"
+    - "{user_addr}179cm"
+    - "{user_addr}花了179"
+    - "{user_addr}179分"
+    - "{user_addr}179天"
+  responses:
+    - "(歪头数) 179~ 离180只差一啦嗷呜! {user_addr}加把劲ฅฅ"
+    - "嗷呜～179这身高已经很高啦! 猫猫要仰头看{user_addr}哼"
+    - "(尾巴摇) 179块呢~ 猫猫帮{user_addr}省一块! 给猫猫吧"
+    - "哼～179就够啦! {user_addr}别贪心想长到180喵"
+  cooldown_seconds: 60
+  weight: 1.0

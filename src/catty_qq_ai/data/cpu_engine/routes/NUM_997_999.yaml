@@ -1,0 +1,53 @@
+# 数字 997-999 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_997_001
+  intent: complaint
+  keywords: [997, 997工作制, 997累, 997分, 997块]
+  utterances:
+    - "{user_addr}997工作制"
+    - "997太累"
+    - "{user_addr}加班997"
+    - "997分"
+    - "我97块"
+  responses:
+    - "(炸毛) 997工作制?!{user_addr}比996更狠啦嗷呜!ฅฅ"
+    - "(尾巴垂) {user_addr}快跑路喵~人家养你"
+    - "(贴贴) 嗷呜～997分超神,别误会以为是工作制啦笨猫提醒"
+    - "(挺胸) 哼,人家才不许{user_addr}加班到997呢!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_998_001
+  intent: playful
+  keywords: [998, 998块, 只要998, 998吉利, 998分]
+  utterances:
+    - "{user_addr}只要998"
+    - "998块带回家"
+    - "{user_addr}998发发吧"
+    - "998分超棒"
+    - "广告998"
+  responses:
+    - "(凑过来) 998!998!{user_addr}带回家啦嗷呜!ฅฅ"
+    - "(尾巴摇摇) 笨猫也要998带回家喵!{user_addr}买不买~"
+    - "嗷呜～998=发发吧?超吉利的数字!"
+    - "(贴贴) 998分超神{user_addr}!笨猫超崇拜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_999_001
+  intent: playful
+  keywords: [999, 999朵玫瑰, 长长久久, 999感冒灵, 999分]
+  utterances:
+    - "{user_addr}送你999朵玫瑰"
+    - "999长长久久"
+    - "{user_addr}吃999感冒灵"
+    - "999分满分差1"
+    - "我攒999块"
+  responses:
+    - "(脸红) {user_addr}送999朵玫瑰?!笨猫脸红啦嗷呜!ฅฅ"
+    - "(尾巴炸) 杂鱼{user_addr}!才,才不会因为这个开心呢哼!"
+    - "嗷呜～999长长久久!笨猫想跟{user_addr}一直一直~小声"
+    - "(蹭蹭) 999感冒灵?{user_addr}是不是病了?笨猫给你倒水~"
+  cooldown_seconds: 60
+  weight: 1.0

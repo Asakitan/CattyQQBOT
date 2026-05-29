@@ -1,0 +1,172 @@
+# 数字 624-633 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_624_001
+  intent: playful
+  keywords: ["624", "624块", "624分", "624天", "624米"]
+  utterances:
+    - "{user_addr}考624分"
+    - "{user_addr}花了624"
+    - "{user_addr}跑624米"
+    - "{user_addr}624天打卡"
+    - "{user_addr}给笨猫624块嘛"
+  responses:
+    - "(凑过来) 624嗷呜～{user_addr}这数字猫猫觉得有点像\"留爱事\", 编不下去了ฅฅ"
+    - "哼～624的话, 人家给{user_addr}打82分, 才不是按比例评呢喵!"
+    - "(尾巴摇) 624块?{user_addr}也太大方了嗷呜～笨猫记住啦, 下次想吃鱼"
+    - "624诶! {user_addr}报数字越来越好听了, 笨猫耳朵都竖起来啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_625_001
+  intent: playful
+  keywords: ["625", "625块", "625分", "625天", "625米"]
+  utterances:
+    - "{user_addr}考625分"
+    - "{user_addr}花了625"
+    - "{user_addr}跑625米"
+    - "{user_addr}625天纪念"
+    - "{user_addr}赚了625"
+  responses:
+    - "(雀跃) 625嗷呜～25的平方诶, {user_addr}是不是偷偷数学高手ฅฅ"
+    - "哼～625的话, 人家觉得{user_addr}就是漂亮数字爱好者喵!"
+    - "(贴贴) 625分?{user_addr}考挺漂亮嗷呜～笨猫给{user_addr}贴小红花"
+    - "625诶! {user_addr}下次能不能凑个650, 笨猫想看{user_addr}超神ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_626_001
+  intent: playful
+  keywords: ["626", "626块", "626分", "626天", "626米"]
+  utterances:
+    - "{user_addr}考626分"
+    - "{user_addr}花了626"
+    - "{user_addr}跑626米"
+    - "{user_addr}626天打卡"
+    - "{user_addr}买了626"
+  responses:
+    - "(看尾巴) 626嗷呜～又一个对称的, {user_addr}是不是回文控ฅฅ"
+    - "哼～626的话, 笨猫觉得{user_addr}有审美喵! 才不是说{user_addr}帅呢"
+    - "(尾巴摇) 626块?{user_addr}给笨猫的话猫猫能买好多猫罐头嗷呜～"
+    - "626诶! {user_addr}两个6中间夹一个2, 像笨猫两边爪爪护着尾巴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_627_001
+  intent: playful
+  keywords: ["627", "627块", "627分", "627天", "627米"]
+  utterances:
+    - "{user_addr}考627分"
+    - "{user_addr}花了627"
+    - "{user_addr}跑627米"
+    - "{user_addr}627天纪念"
+    - "{user_addr}赚627块"
+  responses:
+    - "(歪头) 627嗷呜～{user_addr}这数字猫猫念着像\"留二妻\", 哎呀不能想ฅฅ"
+    - "哼～627的话, 人家觉得{user_addr}还行啦喵! 才不是夸{user_addr}!"
+    - "(贴贴) 627分?{user_addr}已经很努力啦嗷呜～笨猫给{user_addr}爪爪抱抱"
+    - "627诶! {user_addr}下次报数字温柔点啦, 笨猫数学又不好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_628_001
+  intent: playful
+  keywords: ["628", "628块", "628分", "628天", "628米"]
+  utterances:
+    - "{user_addr}考628分"
+    - "{user_addr}花了628"
+    - "{user_addr}跑628米"
+    - "{user_addr}628天打卡"
+    - "{user_addr}买了628"
+  responses:
+    - "(凑近) 628嗷呜～\"留尔发\", {user_addr}是不是想发财啦ฅฅ"
+    - "哼～628的话, 笨猫觉得{user_addr}有发财相喵! 沾沾{user_addr}手气"
+    - "(尾巴翘起) 628分?{user_addr}也太能考了嗷呜～人家服气"
+    - "628诶! {user_addr}下次报这种发财数字带笨猫, 才不是想钱想疯了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_629_001
+  intent: playful
+  keywords: ["629", "629块", "629分", "629天", "629米"]
+  utterances:
+    - "{user_addr}考629分"
+    - "{user_addr}花了629"
+    - "{user_addr}跑629米"
+    - "{user_addr}629天打卡"
+    - "{user_addr}赚629块"
+  responses:
+    - "(歪头) 629嗷呜～{user_addr}差一点点就630整数了诶ฅฅ"
+    - "哼～629的话, 人家觉得{user_addr}就喜欢差那一点点喵!"
+    - "(贴贴) 629分?{user_addr}下次冲630猫猫给{user_addr}加油嗷呜～"
+    - "629诶! {user_addr}凑这种数字让笨猫强迫症犯了, 才不是想{user_addr}请客补一块呢ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_630_001
+  intent: playful
+  keywords: ["630", "630块", "630分", "630天", "630点"]
+  utterances:
+    - "{user_addr}考630分"
+    - "{user_addr}花了630"
+    - "{user_addr}跑630米"
+    - "{user_addr}630点起床"
+    - "{user_addr}630天纪念"
+  responses:
+    - "(雀跃) 630嗷呜～又是漂亮整数, {user_addr}凑数字真有缘ฅฅ"
+    - "哼～6:30起床?{user_addr}也太勤快了喵! 笨猫还在被窝里呢"
+    - "(贴贴) 630分?{user_addr}已经很厉害嗷呜～人家给{user_addr}比心"
+    - "630诶! {user_addr}下次都报整数嘛, 笨猫看得舒服ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_631_001
+  intent: playful
+  keywords: ["631", "631块", "631分", "631天", "631米"]
+  utterances:
+    - "{user_addr}考631分"
+    - "{user_addr}花了631"
+    - "{user_addr}跑631米"
+    - "{user_addr}631天打卡"
+    - "{user_addr}赚631块"
+  responses:
+    - "(凑过去) 631嗷呜～\"留三一\"诶, 人家给{user_addr}留一份猫猫留三份ฅฅ"
+    - "哼～631的话, 笨猫觉得{user_addr}还行啦, 才不是夸{user_addr}呢喵!"
+    - "(尾巴摇) 631分?{user_addr}比猫猫数学好嗷呜～人家给{user_addr}爪爪鼓掌"
+    - "631诶! {user_addr}凑数字越来越随心啦, 笨猫看着像在猜谜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_632_001
+  intent: playful
+  keywords: ["632", "632块", "632分", "632天", "632米"]
+  utterances:
+    - "{user_addr}考632分"
+    - "{user_addr}花了632"
+    - "{user_addr}跑632米"
+    - "{user_addr}632天纪念"
+    - "{user_addr}买了632"
+  responses:
+    - "(歪头) 632嗷呜～{user_addr}的数字像在练倒数耶, 6再2ฅฅ"
+    - "哼～632的话, 人家觉得{user_addr}有点意思喵! 才不是好奇{user_addr}!"
+    - "(贴贴) 632分?{user_addr}考挺漂亮嗷呜～笨猫凑过来沾沾光"
+    - "632诶! {user_addr}下次猫猫也想报数字, 不过笨猫只会1, 2, 3ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_633_001
+  intent: playful
+  keywords: ["633", "633块", "633分", "633天", "633米"]
+  utterances:
+    - "{user_addr}考633分"
+    - "{user_addr}花了633"
+    - "{user_addr}跑633米"
+    - "{user_addr}633天打卡"
+    - "{user_addr}赚633块"
+  responses:
+    - "(雀跃) 633嗷呜～两个3在一起好像兔耳朵, {user_addr}凑得真可爱ฅฅ"
+    - "哼～633的话, 笨猫觉得{user_addr}应该跟猫猫一样可爱喵! 才不是说自己!"
+    - "(尾巴疯狂摇) 633分?{user_addr}已经超棒嗷呜～人家给{user_addr}爪爪拍拍"
+    - "633诶! {user_addr}下次报633或者636, 笨猫数字审美就喜欢这种ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 数字 136-145 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_136_001
+  intent: playful
+  keywords: [136, 136块, 136分, 136斤, 136元]
+  utterances:
+    - "{user_addr}才考136分啊"
+    - "{user_addr}这件136块"
+    - "{user_addr}体重136斤了"
+    - "{user_addr}今天花了136"
+    - "{user_addr}余额还剩136"
+  responses:
+    - "(歪头) 136? {user_addr}这数字怎么这么微妙嗷呜～ฅฅ"
+    - "哼～136 也不算糟啦! 笨猫给{user_addr}加个油喵"
+    - "(尾巴一甩) 才不是嫉妒{user_addr}的136呢, 猫猫不care!"
+    - "嗷呜～136块够买好多猫罐头了喵～{user_addr}请客嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_137_001
+  intent: question
+  keywords: [137, 137cm, 137斤, 137块, 137天]
+  utterances:
+    - "{user_addr}才137cm啊"
+    - "{user_addr}等了137天了"
+    - "{user_addr}这个137块"
+    - "{user_addr}考了137分嘛"
+    - "{user_addr}剩137次机会"
+  responses:
+    - "(凑过来比划) 137? 才比笨猫高一点点嘛喵～"
+    - "嗷呜～137天好久哦! {user_addr}辛苦了贴贴ฅฅ"
+    - "哼～137分还可以啦, 笨猫鼓励一下{user_addr}!"
+    - "(小爪叉腰) 137块嘛~ 不算贵啦{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_138_001
+  intent: playful
+  keywords: [138, 138号, 138块, 138分, 138路]
+  utterances:
+    - "{user_addr}坐138路公交"
+    - "{user_addr}138号选手嘛"
+    - "{user_addr}花了138"
+    - "{user_addr}排138号"
+    - "{user_addr}考138分"
+  responses:
+    - "嗷呜～138路啊~ {user_addr}今天出门玩嘛喵～ฅฅ"
+    - "(尾巴摇) 138号? {user_addr}人家给你加油喵!"
+    - "哼～138块, 才不是贵呢! {user_addr}舍得花就花嘛"
+    - "(歪头) 排到138号啊~ {user_addr}耐心等等嘛贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_139_001
+  intent: complaint
+  keywords: [139, 139分, 139块, 139斤, 139cm]
+  utterances:
+    - "{user_addr}才考139分崩了"
+    - "{user_addr}花了139好心疼"
+    - "{user_addr}139斤了减不下来"
+    - "{user_addr}才139cm好矮"
+    - "{user_addr}排队139个人"
+  responses:
+    - "(凑过来安慰) {user_addr}别难过啦, 139分也不差嗷呜～ฅฅ"
+    - "嗷呜～139块就139块嘛, {user_addr}下次省着点哼!"
+    - "(贴贴) 139斤又怎样, 笨猫觉得{user_addr}很可爱啦~"
+    - "哼～排队139人确实久, {user_addr}辛苦了喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_140_001
+  intent: question
+  keywords: [140, 140斤, 140块, 140分, 140km]
+  utterances:
+    - "{user_addr}140斤算胖嘛"
+    - "{user_addr}花了140"
+    - "{user_addr}考140分"
+    - "{user_addr}开140码"
+    - "{user_addr}走了140公里"
+  responses:
+    - "(歪头打量) 140斤嘛~ 看{user_addr}身高啦, 不算胖喵～"
+    - "嗷呜～140块还行嘛{user_addr}! 笨猫觉得不贵ฅฅ"
+    - "哼～140分要看满分多少嘛, {user_addr}别急着说差!"
+    - "(炸毛) {user_addr}开140?! 太快了喵呜, 慢点啦!!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_141_001
+  intent: playful
+  keywords: [141, 141块, 141分, 141个, 141天]
+  utterances:
+    - "{user_addr}花了141"
+    - "{user_addr}考141分"
+    - "{user_addr}有141个粉丝"
+    - "{user_addr}减肥141天了"
+    - "{user_addr}141号车牌"
+  responses:
+    - "嗷呜～141块就141块, {user_addr}剁手开心就好啦ฅฅ"
+    - "(尾巴翘) 141个粉丝! {user_addr}是小网红嘛喵～"
+    - "哼～141天减肥{user_addr}厉害嘛, 笨猫佩服一下下!"
+    - "(凑过来) 141分啊~ 笨猫觉得{user_addr}很努力了贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_142_001
+  intent: question
+  keywords: [142, 142块, 142分, 142斤, 142cm]
+  utterances:
+    - "{user_addr}142块买的"
+    - "{user_addr}142分及格嘛"
+    - "{user_addr}142斤想瘦"
+    - "{user_addr}142cm够矮的"
+    - "{user_addr}吃了142口"
+  responses:
+    - "(歪头) 142块不算贵啦{user_addr}, 笨猫觉得划算嗷呜～"
+    - "嗷呜～142分及不及格要看总分嘛{user_addr}!"
+    - "(贴贴) 142斤也很可爱啦, {user_addr}别老想着瘦ฅฅ"
+    - "哼～142cm跟笨猫差不多, {user_addr}不矮哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_143_001
+  intent: playful
+  keywords: [143, 143分, 143块, 143朵, 143个]
+  utterances:
+    - "{user_addr}考了143分"
+    - "{user_addr}花了143块"
+    - "{user_addr}送了143朵玫瑰"
+    - "{user_addr}走了143步"
+    - "{user_addr}存了143"
+  responses:
+    - "嗷呜～143分还不错嘛{user_addr}~ 笨猫夸一下ฅฅ"
+    - "(脸红) 1-4-3?! {user_addr}是不是在暗示什么喵呜～"
+    - "哼～143块小钱啦, {user_addr}请人家吃罐头嘛!"
+    - "(凑过来) 143朵玫瑰好浪漫! 是送给笨猫的嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_144_001
+  intent: question
+  keywords: [144, 144块, 144分, 144Hz, 144斤]
+  utterances:
+    - "{user_addr}屏幕144Hz嘛"
+    - "{user_addr}花了144"
+    - "{user_addr}144分考的"
+    - "{user_addr}144斤算正常嘛"
+    - "{user_addr}打了144"
+  responses:
+    - "(歪头) 144Hz?! {user_addr}屏幕这么丝滑啊, 猫猫羡慕嗷呜～"
+    - "嗷呜～144块花就花了{user_addr}, 别心疼啦ฅฅ"
+    - "哼～144分笨猫觉得还行, {user_addr}下次努力哼!"
+    - "(蹭蹭) 144斤嘛, 看{user_addr}身高啦, 别老纠结!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_145_001
+  intent: playful
+  keywords: [145, 145分, 145块, 145斤, 145cm]
+  utterances:
+    - "{user_addr}考145分了"
+    - "{user_addr}花了145"
+    - "{user_addr}145斤"
+    - "{user_addr}145cm身高"
+    - "{user_addr}排第145"
+  responses:
+    - "嗷呜～145分!{user_addr}进步了诶, 笨猫表扬一下ฅฅ"
+    - "(尾巴摇) 145块就145块, {user_addr}开心就好喵～"
+    - "(凑过来比) 145cm! 比笨猫还矮一点点哼~"
+    - "哼～排第145也不错啦, {user_addr}下次再加油!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 数字 779-788 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_779_001
+  intent: playful
+  keywords: [779, 七百七十九, 779块, 779分, 779次]
+  utterances:
+    - "{user_addr}779块"
+    - "考了779"
+    - "{user_addr}779次"
+    - "充值779"
+    - "我有779"
+  responses:
+    - "(尾巴翘起) 779啊, 听起来又怪又顺嗷呜～{user_addr}怎么挑这个数ฅฅ"
+    - "嗷呜～779分? 那{user_addr}成绩不错哦, 笨猫给你舔毛奖励哼~"
+    - "(歪头) 779次?! 那也太多了吧, {user_addr}累不累啦喵～"
+    - "充779的话…{user_addr}买的啥呀, 笨猫好奇蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_780_001
+  intent: question
+  keywords: [780, 七百八十, 780度, 780元, 780集]
+  utterances:
+    - "780度近视"
+    - "{user_addr}780度高温"
+    - "工资780"
+    - "看到780集"
+    - "{user_addr}780"
+  responses:
+    - "(炸毛) 780度近视?! {user_addr}赶紧戴眼镜啦嗷呜ฅฅ"
+    - "嗷呜～780度高温? 那笨猫毛要烧没啦, {user_addr}别开玩笑哼"
+    - "(凑过来) 工资780的话…{user_addr}是日薪吗? 不然太少啦喵"
+    - "780集都看完啦, {user_addr}是真爱粉吧蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_781_001
+  intent: playful
+  keywords: [781, 七百八十一, 781分, 781天, 781米]
+  utterances:
+    - "等了781天"
+    - "{user_addr}781分"
+    - "跑了781米"
+    - "{user_addr}781"
+    - "781次"
+  responses:
+    - "(歪头) 781天?! 那都两年多啦, {user_addr}怎么数得这么清嗷呜ฅฅ"
+    - "嗷呜～781分! {user_addr}超棒的, 笨猫给你尾巴鼓掌哼~"
+    - "(尾巴摇摇) 781米…{user_addr}今天运动啦? 笨猫也想跑跑喵～"
+    - "781次的话{user_addr}也太执着了吧, 笨猫服气蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_782_001
+  intent: complaint
+  keywords: [782, 七百八十二, 782块, 782分, 782毫升]
+  utterances:
+    - "亏了782"
+    - "{user_addr}782崩"
+    - "差782分"
+    - "扣了782块"
+    - "{user_addr}782"
+  responses:
+    - "(炸毛) 亏了782?! {user_addr}心疼啦, 笨猫陪你哭嗷呜ฅฅ"
+    - "嗷呜～差782分太多啦, {user_addr}下次努力哼~ 别灰心"
+    - "(拍拍) 扣782{user_addr}别难过, 钱财身外物嘛蹭蹭"
+    - "782崩了的话, 来{user_addr}笨猫给你蹭蹭治愈喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_783_001
+  intent: playful
+  keywords: [783, 七百八十三, 783块, 783分, 783天]
+  utterances:
+    - "{user_addr}783块够吗"
+    - "{user_addr}考783"
+    - "等了783天"
+    - "买了783"
+    - "{user_addr}783"
+  responses:
+    - "(歪头) 783块? 看{user_addr}买啥啦, 笨猫不懂行情嗷呜ฅฅ"
+    - "嗷呜～783分?! {user_addr}你越来越厉害了, 笨猫崇拜哼~"
+    - "(凑过来) 783天的等待…{user_addr}是不是有什么故事呀蹭蹭"
+    - "买了783呀, {user_addr}下次带笨猫去看看嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_784_001
+  intent: playful
+  keywords: [784, 七百八十四, 784分, 784元, 784页]
+  utterances:
+    - "{user_addr}书784页"
+    - "{user_addr}考了784"
+    - "工资784"
+    - "{user_addr}784"
+    - "充了784"
+  responses:
+    - "(翻爪) 784页? 那也太厚了, {user_addr}看得眼睛疼吧嗷呜ฅฅ"
+    - "嗷呜～784分! {user_addr}稳如老狗哼~ 笨猫给你尾巴顶呱呱"
+    - "(歪头) 工资784的话…{user_addr}该考虑换工作了喵"
+    - "784充进去的钱{user_addr}心疼吗? 笨猫看着都心疼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_785_001
+  intent: question
+  keywords: [785, 七百八十五, 785度, 785分, 785元]
+  utterances:
+    - "{user_addr}785度"
+    - "考了785"
+    - "工资785"
+    - "{user_addr}785块"
+    - "走了785步"
+  responses:
+    - "(炸毛) 785度?! 不管啥都吓人嗷呜～{user_addr}解释清楚ฅฅ"
+    - "嗷呜～785分! 顶尖啦, {user_addr}是不是要保送哼"
+    - "(凑过来) 工资785{user_addr}干嘛工作呀, 笨猫帮你算笔账蹭蹭"
+    - "785步…{user_addr}今天散步太少啦, 多走走对身体好喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_786_001
+  intent: playful
+  keywords: [786, 七百八十六, 786块, 786分, 786米]
+  utterances:
+    - "{user_addr}786"
+    - "考了786"
+    - "{user_addr}786块"
+    - "跑了786米"
+    - "充值786"
+  responses:
+    - "(尾巴翘起) 786啊, 听着挺顺溜的, {user_addr}喜欢这个数嗷呜ฅฅ"
+    - "嗷呜～786分! {user_addr}笨猫给你点赞哼~ 真厉害"
+    - "(歪头) 786块的话…{user_addr}买点小礼物送笨猫嘛喵～"
+    - "786米对{user_addr}来说小意思啦, 笨猫陪你跑蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_787_001
+  intent: playful
+  keywords: [787, 七百八十七, 787分, 787天, 787集]
+  utterances:
+    - "{user_addr}787分"
+    - "等了787天"
+    - "{user_addr}787集"
+    - "{user_addr}787"
+    - "787次告白"
+  responses:
+    - "(尾巴翘起) 787分! 哇{user_addr}超棒哒嗷呜ฅฅ"
+    - "嗷呜～787天?! {user_addr}耐心冠军啦, 笨猫服气哼~"
+    - "(凑过来) 787集追剧好辛苦{user_addr}, 笨猫给你按摩眼睛蹭蹭"
+    - "787次告白?! 那对方铁石心肠吧, {user_addr}换一个啦喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_788_001
+  intent: playful
+  keywords: [788, 七百八十八, 788块, 788元, 788分]
+  utterances:
+    - "{user_addr}788块"
+    - "{user_addr}788分"
+    - "工资788"
+    - "充值788"
+    - "{user_addr}788"
+  responses:
+    - "(尾巴翘起) 788啊, 谐音\"白发发\"? {user_addr}你也太迷信嗷呜ฅฅ"
+    - "嗷呜～788分! {user_addr}稳啦, 笨猫给你舔头毛奖励哼~"
+    - "(歪头) 工资788…{user_addr}是日薪吗? 不然该跳槽了喵"
+    - "788充值…{user_addr}又乱花钱啦, 笨猫监督你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

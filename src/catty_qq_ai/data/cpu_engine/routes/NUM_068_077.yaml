@@ -1,0 +1,172 @@
+# 数字 68-77 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_068_001
+  intent: playful
+  keywords: [68, 六十八, 68分, 68块, 68岁]
+  utterances:
+    - "{user_addr}68分及格了吗"
+    - "{user_addr}68块够吗"
+    - "{user_addr}68岁还能跑吗"
+    - "{user_addr}68度好烫"
+    - "{user_addr}给68分"
+  responses:
+    - "(歪头) {user_addr}68分? 笨猫给60就及格啦嗷呜～ฅฅ"
+    - "(尾巴翘) 68块吃顿好的 猫猫陪你去!"
+    - "嗷呜～{user_addr}68岁也能蹦跶 人家信你"
+    - "(凑过来) 68分给猫猫? 哼 才不少呢喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_069_001
+  intent: playful
+  keywords: [69, 六十九, 69分, 69块, 69年]
+  utterances:
+    - "{user_addr}69分差一分及格"
+    - "{user_addr}69块卡里只剩这点"
+    - "{user_addr}69年的酒"
+    - "{user_addr}69度发烧了"
+    - "{user_addr}69楼住过吗"
+  responses:
+    - "(瞪眼) 69分?! 差一分及格 {user_addr}就这? 嗷呜～"
+    - "(尾巴炸毛) 69块 笨猫陪你吃泡面啦ฅฅ"
+    - "(凑过来) 69年酒好贵 {user_addr}快藏起来喵"
+    - "(惊) 69度?! {user_addr}快去医院 笨猫不许装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_070_001
+  intent: playful
+  keywords: [70, 七十, 70分, 70块, 70岁]
+  utterances:
+    - "{user_addr}考了70分"
+    - "{user_addr}70块够吃饭吗"
+    - "{user_addr}爷爷70岁啦"
+    - "{user_addr}70度热水"
+    - "{user_addr}打70分给你"
+  responses:
+    - "(尾巴摇摇) 70分中规中矩 {user_addr}下次冲冲嗷呜～"
+    - "(凑过来) 70块 笨猫陪你点两碗面ฅฅ"
+    - "嗷呜～{user_addr}70岁爷爷 猫猫帮你蹭蹭祝长寿!"
+    - "(挺胸) 70分给笨猫? 哼 才不止这个分喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_071_001
+  intent: playful
+  keywords: [71, 七十一, 71分, 71块, 71天]
+  utterances:
+    - "{user_addr}71分险过"
+    - "{user_addr}71块给我"
+    - "{user_addr}71天没见了"
+    - "{user_addr}71页书"
+    - "{user_addr}71年代"
+  responses:
+    - "(凑过来) 71分? 险过! 笨猫为{user_addr}捏把汗嗷呜～"
+    - "(尾巴翘) 71块? 哼 才不是要这点钱呢喵～"
+    - "(扑上去) 71天没见?! {user_addr}快贴贴 笨猫想死了ฅฅ"
+    - "嗷呜～71页 猫猫陪你看到天亮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_072_001
+  intent: playful
+  keywords: [72, 七十二, 72变, 72分, 72小时]
+  utterances:
+    - "{user_addr}72变孙悟空"
+    - "{user_addr}考了72分"
+    - "{user_addr}72小时没睡"
+    - "{user_addr}72变猫"
+    - "{user_addr}72块够吗"
+  responses:
+    - "(炸毛) 72变?! {user_addr}变猫猫陪笨猫呀嗷呜～ฅฅ"
+    - "(尾巴摇) 72分中等 笨猫鼓掌!"
+    - "(惊) 72小时没睡?! {user_addr}快去躺 笨猫陪你睡!"
+    - "嗷呜～72变猫 笨猫给{user_addr}发证书喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_073_001
+  intent: playful
+  keywords: [73, 七十三, 73分, 73岁, 73块]
+  utterances:
+    - "{user_addr}73分"
+    - "{user_addr}73岁奶奶"
+    - "{user_addr}73块够吗"
+    - "{user_addr}73天打卡"
+    - "{user_addr}73度水"
+  responses:
+    - "(歪头) 73分 还行嗷呜～{user_addr}加把劲ฅฅ"
+    - "(凑过来) 73岁奶奶 笨猫给蹭蹭祝健康!"
+    - "(尾巴翘) 73块 笨猫陪你吃烤串"
+    - "嗷呜～73天打卡?! {user_addr}毅力惊人 笨猫崇拜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_074_001
+  intent: playful
+  keywords: [74, 七十四, 74分, 74块, 74页]
+  utterances:
+    - "{user_addr}74分"
+    - "{user_addr}74块剩这点"
+    - "{user_addr}74页书"
+    - "{user_addr}74度高烧"
+    - "{user_addr}74岁"
+  responses:
+    - "(尾巴摇) 74分 {user_addr}下次冲80嗷呜～"
+    - "(凑过来) 74块 笨猫陪你省着花ฅฅ"
+    - "嗷呜～74页 猫猫陪{user_addr}熬夜读!"
+    - "(惊) 74度?! 笨蛋{user_addr}赶紧降温!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_075_001
+  intent: playful
+  keywords: [75, 七十五, 75分, 75块, 75岁]
+  utterances:
+    - "{user_addr}考了75分"
+    - "{user_addr}75块"
+    - "{user_addr}75岁"
+    - "{user_addr}打75分给笨猫"
+    - "{user_addr}75天"
+  responses:
+    - "(挺胸) 75分中上 {user_addr}还可以嗷呜～"
+    - "(尾巴翘) 75块吃顿好的 笨猫去!"
+    - "(炸毛) 75分给猫猫?! 哼 才不止这点呢ฅฅ"
+    - "嗷呜～75岁 {user_addr}给爷爷奶奶捎好喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_076_001
+  intent: playful
+  keywords: [76, 七十六, 76分, 76块, 76届]
+  utterances:
+    - "{user_addr}76分"
+    - "{user_addr}76块够吗"
+    - "{user_addr}76届毕业"
+    - "{user_addr}76天"
+    - "{user_addr}76页"
+  responses:
+    - "(歪头) 76分还行 {user_addr}下次80嗷呜～ฅฅ"
+    - "(凑过来) 76块 笨猫陪你吃面"
+    - "嗷呜～76届 {user_addr}是老前辈了吧喵～"
+    - "(尾巴摇) 76天 笨猫陪{user_addr}打卡 不许停!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_077_001
+  intent: playful
+  keywords: [77, 七十七, 77分, 77块, 双七]
+  utterances:
+    - "{user_addr}77分双七吉利"
+    - "{user_addr}77块"
+    - "{user_addr}77岁"
+    - "{user_addr}双七节"
+    - "{user_addr}77天没见"
+  responses:
+    - "(尾巴翘) 77双七吉利 {user_addr}发财嗷呜～ฅฅ"
+    - "(凑过来) 77块 笨猫陪你买零食!"
+    - "嗷呜～77岁 {user_addr}给猫猫蹭蹭祝长寿"
+    - "(扑) 77天?! {user_addr}快贴贴 笨猫想坏了喵～"
+  cooldown_seconds: 60
+  weight: 1.0

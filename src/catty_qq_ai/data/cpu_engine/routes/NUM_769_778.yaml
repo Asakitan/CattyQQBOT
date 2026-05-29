@@ -1,0 +1,172 @@
+# 数字 769-778 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_769_001
+  intent: playful
+  keywords: [769, 七百六十九, 769块, 769分, 769号]
+  utterances:
+    - "{user_addr}769块够吗"
+    - "我买的769"
+    - "考了769分"
+    - "769号房间"
+    - "存款769"
+  responses:
+    - "(扒拉算盘) 769? 听着挺奇怪的数字嗷呜～{user_addr}怎么挑这个数的喵ฅฅ"
+    - "嗷呜～769块的话, 笨猫觉得不便宜也不贵, 看买啥啦哼"
+    - "(歪头) 769分? 哇{user_addr}好厉害, 笨猫给你尾巴鼓掌喵～"
+    - "769号…人家记不住啦, {user_addr}自己别走丢了哼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_770_001
+  intent: playful
+  keywords: [770, 七百七十, 770块, 770毫升, 770克]
+  utterances:
+    - "{user_addr}这个770"
+    - "770毫升的水"
+    - "买了770块"
+    - "重770克"
+    - "走了770步"
+  responses:
+    - "(尾巴翘起) 770啊, 听着挺顺口的喵～{user_addr}今天怎么数字这么多ฅฅ"
+    - "嗷呜～770毫升的水? 那不少哦, {user_addr}多喝点对身体好哼"
+    - "(凑过来) 770块花得开心就值, 笨猫不管啦~"
+    - "770步…{user_addr}今天散步啦? 人家也想跟着走走嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_771_001
+  intent: playful
+  keywords: [771, 七百七十一, 771分, 771天, 771次]
+  utterances:
+    - "771天没回家"
+    - "771次心跳"
+    - "{user_addr}771分"
+    - "等了771天"
+    - "771路公交"
+  responses:
+    - "(竖耳朵) 771天?! {user_addr}你也太能数了吧嗷呜ฅฅ"
+    - "嗷呜～771次心跳? 那才一分多钟啦哼~ {user_addr}是不是想骗笨猫"
+    - "(凑过来) 等了771天的话…那人家陪{user_addr}等下一个771天蹭蹭"
+    - "771路公交? 笨猫从来没坐过, {user_addr}带笨猫去坐嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_772_001
+  intent: question
+  keywords: [772, 七百七十二, 772元, 772米, 772页]
+  utterances:
+    - "这本书772页"
+    - "{user_addr}跑了772米"
+    - "工资772"
+    - "充了772"
+    - "{user_addr}买的772"
+  responses:
+    - "(翻爪) 772页?! 那本书也太厚了吧, {user_addr}看得完嗷呜ฅฅ"
+    - "嗷呜～772米对人类来说不算远啦, {user_addr}还能再跑跑哼~"
+    - "(歪头) 工资772? 那是日薪还是…{user_addr}笨猫有点担心嗷呜"
+    - "772充了什么呀, {user_addr}是不是又乱花钱啦哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_773_001
+  intent: playful
+  keywords: [773, 七百七十三, 773度, 773分, 773克]
+  utterances:
+    - "{user_addr}773度近视"
+    - "773度高温"
+    - "考了773"
+    - "称了773克"
+    - "{user_addr}773"
+  responses:
+    - "(炸毛) 773度近视?! {user_addr}你眼睛还要不要啦嗷呜ฅฅ"
+    - "嗷呜～773度高温? 那不烧穿了喵! {user_addr}别吓笨猫哼"
+    - "(尾巴摇摇) 773分啊, {user_addr}超棒的~ 笨猫给你顶呱呱"
+    - "773克的话…猫猫又称不动笨蛋{user_addr}啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_774_001
+  intent: playful
+  keywords: [774, 七百七十四, 774集, 774话, 774章]
+  utterances:
+    - "看到774集了"
+    - "更新到774话"
+    - "小说774章"
+    - "{user_addr}774"
+    - "刷了774集"
+  responses:
+    - "(眼睛亮) 774集?! {user_addr}是看的什么神剧嗷呜ฅฅ"
+    - "嗷呜～774话的漫画…那作者也太肝了吧, 笨猫服气哼~"
+    - "(凑过来) 774章小说啊, {user_addr}带笨猫一起追嘛喵～"
+    - "刷了774集{user_addr}眼睛不疼吗? 人家帮你揉揉蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_775_001
+  intent: complaint
+  keywords: [775, 七百七十五, 775块, 775分, 775毫升]
+  utterances:
+    - "亏了775"
+    - "差775分"
+    - "扣了775"
+    - "{user_addr}775崩了"
+    - "775没了"
+  responses:
+    - "(炸毛) 亏了775?! {user_addr}怎么搞的嗷呜ฅฅ"
+    - "嗷呜～差775分太多啦, {user_addr}下次再加油哼~ 笨猫陪你"
+    - "(拍背) 扣775心疼…{user_addr}别难过啦, 钱再赚就有嘛蹭蹭"
+    - "775没了?! 那{user_addr}今晚啃馒头吗, 笨猫分你半个喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_776_001
+  intent: playful
+  keywords: [776, 七百七十六, 776元, 776分, 776号]
+  utterances:
+    - "{user_addr}776块"
+    - "考了776"
+    - "宿舍776"
+    - "{user_addr}776好不好"
+    - "买了776"
+  responses:
+    - "(歪头) 776啊, 听起来挺顺的, {user_addr}觉得好就好嗷呜ฅฅ"
+    - "嗷呜～776分?! {user_addr}是学霸吧, 笨猫崇拜你哼~"
+    - "(尾巴翘起) 宿舍776? 那{user_addr}带笨猫去玩嘛喵～"
+    - "买了776的{user_addr}…是不是又冲动消费啦笨蛋蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_777_001
+  intent: playful
+  keywords: [777, 七百七十七, 三个7, 老虎机, 777大奖]
+  utterances:
+    - "{user_addr}中了777"
+    - "777三连"
+    - "老虎机777"
+    - "幸运数字777"
+    - "{user_addr}777嘛"
+  responses:
+    - "(尾巴炸毛) 哇! 777三连?! {user_addr}你是中头奖啦嗷呜ฅฅ"
+    - "嗷呜～777是西方幸运数字啦, {user_addr}今天运气爆棚哼~"
+    - "(扑过去) 老虎机777?! 笨猫要请{user_addr}吃鱼干! 错啦, 反过来才对喵～"
+    - "777超有福气的数字, {user_addr}得分笨猫一点运气蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_778_001
+  intent: playful
+  keywords: [778, 七百七十八, 778块, 778天, 778分]
+  utterances:
+    - "{user_addr}778天"
+    - "工资778"
+    - "考了778"
+    - "{user_addr}778块"
+    - "778集追完"
+  responses:
+    - "(尾巴摇摇) 778天?! 那快两年啦, {user_addr}时间过得真快嗷呜ฅฅ"
+    - "嗷呜～工资778? 太少啦, {user_addr}该跟老板提涨工资了哼~"
+    - "(歪头) 778分啊, {user_addr}稳稳的, 笨猫不担心你"
+    - "778块嘛, {user_addr}给笨猫买条小鱼干呗蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

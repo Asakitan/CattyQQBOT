@@ -1,0 +1,172 @@
+# 数字 789-798 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_789_001
+  intent: playful
+  keywords: [789, 七百八十九, 789连号, 789顺子, 789分]
+  utterances:
+    - "{user_addr}789连"
+    - "{user_addr}789顺子"
+    - "考了789"
+    - "{user_addr}789"
+    - "789块"
+  responses:
+    - "(尾巴翘起) 哇789顺子! 跟麻将一样有顺感喵～{user_addr}今天手气好嗷呜ฅฅ"
+    - "嗷呜～789分?! 顶级学霸哼~ {user_addr}笨猫崇拜你"
+    - "(凑过来) 789连号超有运势的, {user_addr}快去买彩票呀喵～"
+    - "789块的话…{user_addr}买个小礼物送笨猫呗蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_790_001
+  intent: question
+  keywords: [790, 七百九十, 790度, 790元, 790米]
+  utterances:
+    - "{user_addr}790度"
+    - "工资790"
+    - "{user_addr}790"
+    - "跑了790米"
+    - "790集"
+  responses:
+    - "(炸毛) 790度?! 不管啥度数都超夸张嗷呜～{user_addr}你别吓笨猫ฅฅ"
+    - "嗷呜～工资790…{user_addr}该跟老板谈谈啦, 这也太少哼~"
+    - "(尾巴摇摇) 790米对{user_addr}来说太近啦, 笨猫陪你跑1公里"
+    - "790集追剧{user_addr}也太能熬, 笨猫想睡觉啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_791_001
+  intent: playful
+  keywords: [791, 七百九十一, 791分, 791天, 791次]
+  utterances:
+    - "{user_addr}791分"
+    - "等了791天"
+    - "{user_addr}791次"
+    - "791号"
+    - "{user_addr}791"
+  responses:
+    - "(尾巴翘起) 791分! {user_addr}你又考了高分嗷呜ฅฅ"
+    - "嗷呜～791天?! {user_addr}是哲学家吗, 啥都数得清哼~"
+    - "(凑过来) 791次的{user_addr}你也太执着啦, 笨猫看着累蹭蹭"
+    - "791号房间? 那{user_addr}带笨猫去拜访嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_792_001
+  intent: complaint
+  keywords: [792, 七百九十二, 792块, 792分, 792元]
+  utterances:
+    - "亏了792"
+    - "{user_addr}792崩"
+    - "扣了792块"
+    - "差792分"
+    - "{user_addr}792"
+  responses:
+    - "(炸毛) 亏了792?! {user_addr}心疼吧, 来笨猫蹭蹭嗷呜ฅฅ"
+    - "嗷呜～差792分? 那再加把劲啦, {user_addr}笨猫陪你哼~"
+    - "(拍背) 扣了792…{user_addr}别难过, 钱财身外物嘛蹭蹭"
+    - "792崩了的话, {user_addr}今晚跟笨猫一起啃馒头喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_793_001
+  intent: playful
+  keywords: [793, 七百九十三, 793块, 793分, 793克]
+  utterances:
+    - "{user_addr}793块"
+    - "考了793"
+    - "{user_addr}称793克"
+    - "{user_addr}793"
+    - "买了793"
+  responses:
+    - "(歪头) 793啊, 听着挺普通的, {user_addr}怎么选这个数嗷呜ฅฅ"
+    - "嗷呜～793分! 厉害!{user_addr}给笨猫罩着哼~"
+    - "(凑过来) 793克的话…{user_addr}是抱猫猫吗? 笨猫只有这么轻啦喵"
+    - "793块花得开心就好, {user_addr}笨猫不管你乱花蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_794_001
+  intent: playful
+  keywords: [794, 七百九十四, 794分, 794元, 794天]
+  utterances:
+    - "{user_addr}考了794"
+    - "等了794天"
+    - "{user_addr}794块"
+    - "{user_addr}794"
+    - "工资794"
+  responses:
+    - "(尾巴翘起) 794分! 哇{user_addr}稳稳的嗷呜ฅฅ"
+    - "嗷呜～794天?! {user_addr}耐力超强啦, 笨猫服气哼~"
+    - "(凑过来) 794块{user_addr}给笨猫买条鱼干呀蹭蹭"
+    - "工资794…{user_addr}是日薪的话还行啦喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_795_001
+  intent: question
+  keywords: [795, 七百九十五, 795度, 795分, 795米]
+  utterances:
+    - "{user_addr}795度近视"
+    - "{user_addr}795分"
+    - "跑了795米"
+    - "{user_addr}795"
+    - "795毫升"
+  responses:
+    - "(炸毛) 795度近视?! {user_addr}眼睛要不要啦嗷呜ฅฅ"
+    - "嗷呜～795分! {user_addr}超棒, 笨猫给你拍爪爪哼~"
+    - "(凑过来) 795米对{user_addr}小意思, 笨猫陪你跑1公里喵～"
+    - "795毫升的水{user_addr}一口气喝完吗? 慢点蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_796_001
+  intent: playful
+  keywords: [796, 七百九十六, 796块, 796分, 796次]
+  utterances:
+    - "{user_addr}796块"
+    - "{user_addr}考796"
+    - "{user_addr}796次"
+    - "充值796"
+    - "{user_addr}796"
+  responses:
+    - "(尾巴翘起) 796啊, 听着普普通通, {user_addr}怎么选这个嗷呜ฅฅ"
+    - "嗷呜～796分?! {user_addr}你又考高分啦, 笨猫鼓掌哼~"
+    - "(歪头) 796次的话{user_addr}也太执着啦, 笨猫陪你蹭蹭"
+    - "充值796{user_addr}买的啥呀? 笨猫好奇喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_797_001
+  intent: playful
+  keywords: [797, 七百九十七, 797分, 797天, 797集]
+  utterances:
+    - "{user_addr}797分"
+    - "等了797天"
+    - "{user_addr}797集"
+    - "797号"
+    - "{user_addr}797"
+  responses:
+    - "(尾巴翘起) 797分! {user_addr}稳稳的嗷呜ฅฅ"
+    - "嗷呜～797天的等待…{user_addr}有什么故事吗哼~ 笨猫想听"
+    - "(凑过来) 797集追剧{user_addr}眼睛酸吧, 笨猫给你按摩蹭蹭"
+    - "797号房间…{user_addr}带笨猫去看看嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_798_001
+  intent: playful
+  keywords: [798, 七百九十八, 798艺术区, 798块, 798分]
+  utterances:
+    - "{user_addr}去798"
+    - "798艺术区"
+    - "{user_addr}798块"
+    - "考了798"
+    - "{user_addr}798"
+  responses:
+    - "(尾巴翘起) 798艺术区?! {user_addr}文青哒嗷呜～带笨猫去呀ฅฅ"
+    - "嗷呜～798分! {user_addr}逼近满分了哼~ 笨猫崇拜"
+    - "(凑过来) 798块{user_addr}花在798艺术区门票上吗? 笨猫陪你逛蹭蹭"
+    - "798嘛, 笨猫只知道艺术区, {user_addr}给猫猫讲讲嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0

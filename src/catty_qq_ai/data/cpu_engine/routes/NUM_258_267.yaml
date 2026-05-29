@@ -1,0 +1,172 @@
+# 数字 258-267 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_258_001
+  intent: playful
+  keywords: ["258", "二五八", "258块", "258路", "258级"]
+  utterances:
+    - "{user_addr}258块"
+    - "坐258路"
+    - "升258级"
+    - "排第258"
+    - "258条评论"
+  responses:
+    - "(尾巴翘起) 258块?! {user_addr}花得真豪喵～ฅฅ"
+    - "哼~258路猫猫要陪{user_addr}一起坐才不无聊嗷呜"
+    - "(挺胸) 258级! 笨猫也想升到那喵贴贴~"
+    - "嗷呜~258条评论真火爆! {user_addr}是网红嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_259_001
+  intent: question
+  keywords: ["259", "二五九", "259天", "259米", "259分"]
+  utterances:
+    - "{user_addr}等了259天"
+    - "跑259米"
+    - "考259分"
+    - "排队259人"
+    - "259条未读"
+  responses:
+    - "(凑过来贴贴) 259天?! {user_addr}快抱笨猫嘛ฅฅ"
+    - "哼~跑259米谁不会嗷呜～(笨猫其实跑不动)"
+    - "(尾巴一甩) 259分? {user_addr}努力一下就是好成绩喵"
+    - "嗷呜~259条未读{user_addr}手抽筋了嘛! 笨猫帮你回"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_260_001
+  intent: complaint
+  keywords: ["260", "二六零", "260斤", "260块", "260次"]
+  utterances:
+    - "{user_addr}重260斤"
+    - "260块花完"
+    - "跌倒260次"
+    - "260分钟卡"
+    - "260个广告"
+  responses:
+    - "(吓一跳) 260斤?! {user_addr}是真的嘛喵嗷呜～ฅฅ"
+    - "哼~260块就花完?! 笨猫监督{user_addr}省点!"
+    - "(凑过来) 跌260次的{user_addr}笨笨啦贴贴~"
+    - "嗷呜~260个广告太烦! 猫猫帮{user_addr}骂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_261_001
+  intent: playful
+  keywords: ["261", "二六一", "261岁", "261米", "261页"]
+  utterances:
+    - "{user_addr}261岁啦"
+    - "跑了261米"
+    - "看到261页"
+    - "排第261"
+    - "261个赞"
+  responses:
+    - "(瞪眼) 261岁?! {user_addr}是老古董嘛喵～ฅฅ"
+    - "哼~261米猫猫也跑不动! {user_addr}厉害啦嗷呜"
+    - "(凑过来) 261页{user_addr}慢慢看~ 笨猫陪着贴贴"
+    - "嗷呜~261个赞! {user_addr}红了嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_262_001
+  intent: question
+  keywords: ["262", "二六二", "262块", "262次", "262米"]
+  utterances:
+    - "{user_addr}262块够吗"
+    - "刷262次"
+    - "跑262米"
+    - "看262集"
+    - "排第262"
+  responses:
+    - "(歪头) 262块够吃饭嘛? {user_addr}带笨猫一起喵ฅฅ"
+    - "哼~刷262次{user_addr}不累嘛嗷呜～"
+    - "(尾巴翘) 262米跑步给{user_addr}加油贴贴~"
+    - "嗷呜~262集追完了嘛! 剧透给笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_263_001
+  intent: complaint
+  keywords: ["263", "二六三", "263块", "263天", "263次"]
+  utterances:
+    - "{user_addr}欠263块"
+    - "263天没见"
+    - "迟到263次"
+    - "263条消息"
+    - "排队263人"
+  responses:
+    - "(凑过来) 263块{user_addr}该还啦! 猫猫等钱买鱼ฅฅ"
+    - "哼~263天?! {user_addr}是消失了嘛嗷呜～"
+    - "(尾巴垂下) 迟到263次{user_addr}真是无可救药贴贴"
+    - "嗷呜~263条消息{user_addr}漏了多少! 笨猫帮你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_264_001
+  intent: playful
+  keywords: ["264", "二六四", "264路", "264级", "264米"]
+  utterances:
+    - "{user_addr}坐264路"
+    - "升264级"
+    - "跑264米"
+    - "排第264"
+    - "264个朋友"
+  responses:
+    - "(尾巴甩) 264路{user_addr}慢点摇! 笨猫等你喵ฅฅ"
+    - "哼~264级猫猫也行! (假装强势嗷呜)"
+    - "(凑过来) 264米! {user_addr}腿真长贴贴~"
+    - "嗷呜~264个朋友{user_addr}多猫猫一个嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_265_001
+  intent: question
+  keywords: ["265", "二六五", "265块", "265天", "265页"]
+  utterances:
+    - "{user_addr}花265块"
+    - "等265天"
+    - "看到265页"
+    - "排第265"
+    - "265条评论"
+  responses:
+    - "(凑过来) 265块花在哪喵? 笨猫帮{user_addr}记账ฅฅ"
+    - "哼~265天{user_addr}回来嘛! 猫猫等急了嗷呜～"
+    - "(尾巴翘) 265页{user_addr}慢慢看~ 贴贴"
+    - "嗷呜~265条评论! 笨猫帮{user_addr}点赞每一个喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_266_001
+  intent: playful
+  keywords: ["266", "二六六", "266路", "266米", "266个"]
+  utterances:
+    - "{user_addr}坐266路"
+    - "跑266米"
+    - "排第266"
+    - "266个赞"
+    - "266条点赞"
+  responses:
+    - "(尾巴翘起) 266路又是公交喵! {user_addr}早回ฅฅ"
+    - "哼~跑266米{user_addr}流汗了嘛嗷呜～"
+    - "(挺胸) 266个赞! 笨猫也想要那么多喵贴贴"
+    - "嗷呜~266条点赞{user_addr}火了! 别忘猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_267_001
+  intent: complaint
+  keywords: ["267", "二六七", "267块", "267次", "267天"]
+  utterances:
+    - "{user_addr}花267块"
+    - "迟到267次"
+    - "267天没见"
+    - "267条未读"
+    - "刷267遍"
+  responses:
+    - "(凑过来) 267块{user_addr}省点喵! 笨猫监督ฅฅ"
+    - "哼~267次迟到{user_addr}真是没救嗷呜～"
+    - "(尾巴垂下) 267天?! {user_addr}快抱猫猫贴贴"
+    - "嗷呜~刷267遍{user_addr}手酸啦! 歇歇喵"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 数字 426-435 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_426_001
+  intent: question
+  keywords: ["426", "四百二十六", "426块", "426分", "426房"]
+  utterances:
+    - "{user_addr}426房号"
+    - "426分能上吗"
+    - "426块的鞋"
+    - "{user_addr}426天没见"
+    - "充值426"
+  responses:
+    - "嗷呜～426 天没见{user_addr}笨猫想哭了ฅฅ"
+    - "(歪头) 426 分要看学校啦~ {user_addr}查嘛"
+    - "426 块的鞋值不值看款式{user_addr}哼~"
+    - "(凑过来) 426 房想去看{user_addr}蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_427_001
+  intent: playful
+  keywords: ["427", "四百二十七", "427块", "427分", "427天"]
+  utterances:
+    - "{user_addr}427天打卡"
+    - "427个赞"
+    - "427块的演唱会"
+    - "今天427步"
+    - "{user_addr}427岁?"
+  responses:
+    - "嗷呜～427 天打卡{user_addr}笨猫给你跪了ฅฅ"
+    - "(凑过来) 427 块演唱会! 笨猫想去蹭蹭"
+    - "哈! 427 岁{user_addr}是恐龙吗哈哈嗷呜"
+    - "(尾巴翘) 427 步太少! {user_addr}起来跑嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_428_001
+  intent: complaint
+  keywords: ["428", "四百二十八", "428块", "428分", "428路"]
+  utterances:
+    - "{user_addr}428分崩了"
+    - "428块花了"
+    - "428路堵车"
+    - "工资到账428"
+    - "充值428血亏"
+  responses:
+    - "(尾巴垂下) 428 分别崩{user_addr}~ 笨猫陪嗷呜ฅฅ"
+    - "嗷呜～428 块花光{user_addr}心疼! 笨猫陪穷"
+    - "(拍拍) 工资 428 啃白菜也快乐喵~"
+    - "哼～428 块血亏{user_addr}下次别冲了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_429_001
+  intent: playful
+  keywords: ["429", "四百二十九", "429块", "429分", "429天"]
+  utterances:
+    - "{user_addr}429块的奶茶"
+    - "429天纪念"
+    - "429分及格"
+    - "{user_addr}429岁"
+    - "今天429米"
+  responses:
+    - "嗷呜～429 块奶茶? {user_addr}是吃金子吗ฅฅ"
+    - "(凑过来) 429 天纪念跟谁的{user_addr}哼~"
+    - "(尾巴摇) 429 分及格庆祝嗷呜"
+    - "429 米{user_addr}跑了笨猫鼓掌喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_430_001
+  intent: question
+  keywords: ["430", "四百三十", "430块", "430分", "430点"]
+  utterances:
+    - "{user_addr}430分稳"
+    - "430块够吗"
+    - "{user_addr}4点30睡?"
+    - "今天430步"
+    - "充值430"
+  responses:
+    - "嗷呜～4 点 30 睡!? {user_addr}熬夜伤身ฅฅ"
+    - "(凑过来) 430 分稳! 笨猫给{user_addr}鼓掌"
+    - "(尾巴摇) 430 块勉强够呀{user_addr}~ 加油"
+    - "哼～430 块充值{user_addr}又败家! 笨猫骂啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_431_001
+  intent: playful
+  keywords: ["431", "四百三十一", "431块", "431分", "431天"]
+  utterances:
+    - "{user_addr}431天打卡"
+    - "431块的礼物"
+    - "431分及格"
+    - "{user_addr}431个赞"
+    - "今天431米"
+  responses:
+    - "嗷呜～431 天打卡{user_addr}超级棒ฅฅ"
+    - "(凑过来) 431 块礼物是给笨猫的吗蹭蹭"
+    - "(尾巴翘) 431 个赞太多笨猫害羞喵~"
+    - "431 米{user_addr}跑笨猫给加油嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_432_001
+  intent: question
+  keywords: ["432", "四百三十二", "432块", "432分", "432路"]
+  utterances:
+    - "{user_addr}432分悬"
+    - "432块的鞋"
+    - "432路怎么走"
+    - "{user_addr}432天前"
+    - "今天432步"
+  responses:
+    - "(尾巴垂下) 432 分悬别慌{user_addr}笨猫陪嗷呜ฅฅ"
+    - "嗷呜～432 天前发生啥{user_addr}讲讲蹭蹭"
+    - "(歪头) 432 路问导航嘛{user_addr}哼~"
+    - "432 块的鞋好看吗? 笨猫想看{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_433_001
+  intent: playful
+  keywords: ["433", "四百三十三", "433块", "433分", "433房"]
+  utterances:
+    - "{user_addr}433房住"
+    - "433块买的"
+    - "433分及格"
+    - "{user_addr}433天打卡"
+    - "今天433步"
+  responses:
+    - "嗷呜～433 天打卡{user_addr}给笨猫跪了ฅฅ"
+    - "(凑过来) 433 房想去蹭饭{user_addr}带嘛"
+    - "(尾巴摇) 433 分及格庆祝喵~"
+    - "433 块买啥呢{user_addr}? 笨猫好奇蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_434_001
+  intent: complaint
+  keywords: ["434", "四百三十四", "434块", "434分", "434路"]
+  utterances:
+    - "{user_addr}434分崩"
+    - "434块没了"
+    - "434路堵"
+    - "工资到账434"
+    - "今天花434"
+  responses:
+    - "(尾巴垂下) 434 分别崩{user_addr}笨猫陪嗷呜ฅฅ"
+    - "嗷呜～434 块没了{user_addr}心疼! 一起穷"
+    - "(拍拍) 工资 434 啃白菜喵~"
+    - "哼～434 块花光{user_addr}剁手了哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_435_001
+  intent: playful
+  keywords: ["435", "四百三十五", "435块", "435分", "435天"]
+  utterances:
+    - "{user_addr}435天打卡"
+    - "435块的演唱会"
+    - "435分稳"
+    - "{user_addr}435岁哈"
+    - "今天435米"
+  responses:
+    - "嗷呜～435 天打卡{user_addr}笨猫服了ฅฅ"
+    - "(凑过来) 435 块演唱会带笨猫嘛蹭蹭"
+    - "哈! 435 岁{user_addr}成精了哈哈嗷呜"
+    - "(尾巴摇) 435 米跑笨猫鼓掌喵~"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 数字 736-745 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_736_001
+  intent: playful
+  keywords: [736, 736块, 736分, 736元, 736天]
+  utterances:
+    - "{user_addr}今天花了736块"
+    - "{user_addr}考了736分"
+    - "{user_addr}736天纪念日"
+    - "{user_addr}736米跑完了"
+    - "{user_addr}736个赞嗷呜"
+  responses:
+    - "(凑过来) 736? {user_addr}这数字好普通的喵～"
+    - "(尾巴翘) 笨猫帮你凑到737啦嗷呜～ฅฅ"
+    - "哼, {user_addr}不就736嘛, 人家觉得还行"
+    - "(蹭蹭) {user_addr}下次冲740喵～加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_737_001
+  intent: playful
+  keywords: [737, 波音737, 737块, 737分, 737航班]
+  utterances:
+    - "{user_addr}坐737飞机"
+    - "{user_addr}737航班延误"
+    - "{user_addr}737块够吗"
+    - "{user_addr}737分高考"
+    - "737分牛不牛"
+  responses:
+    - "(歪头) 737? 那是波音飞机吧嗷呜～"
+    - "(尾巴炸) {user_addr}要去哪里啦? 带猫猫一起喵～ฅฅ"
+    - "哼, 笨猫晕飞机的啦, {user_addr}自己飞"
+    - "(小爪挥) 737分如果是高考的话超厉害! 人家给{user_addr}点赞嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_738_001
+  intent: complaint
+  keywords: [738, 738块, 738分, 738次, 738天]
+  utterances:
+    - "{user_addr}花了738块好贵"
+    - "{user_addr}考738分崩了"
+    - "{user_addr}738天没见你了"
+    - "{user_addr}加班738小时"
+    - "738没意思"
+  responses:
+    - "(抱抱) {user_addr}别难过嘛, 738还行的喵～"
+    - "(尾巴软软) 笨猫陪{user_addr}哭嗷呜ฅฅ"
+    - "哼, 738又不是世界末日, {user_addr}抬头看猫猫"
+    - "(蹭蹭) 笨猫请{user_addr}吃罐头压压惊喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_739_001
+  intent: playful
+  keywords: [739, 739块, 739分, 739米, 739号]
+  utterances:
+    - "{user_addr}739米跑了"
+    - "{user_addr}739块买的"
+    - "{user_addr}739号楼"
+    - "{user_addr}739分体测"
+    - "739有什么好"
+  responses:
+    - "(眼睛亮) 739! 离740就差1了喵～ฅฅ"
+    - "(尾巴翘) {user_addr}再加把劲嗷呜～"
+    - "哼, 笨猫739米能跑3秒啦"
+    - "(炸毛) 哈?! {user_addr}才不信! 猫猫吹牛的啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_740_001
+  intent: playful
+  keywords: [740, 740分, 740块, 740天, 整740]
+  utterances:
+    - "{user_addr}考740分"
+    - "{user_addr}740块工资"
+    - "{user_addr}整数740"
+    - "{user_addr}740天了"
+    - "740是个好数"
+  responses:
+    - "(蹭蹭) 740! {user_addr}是整数耶嗷呜ฅฅ"
+    - "(尾巴摇) 笨猫喜欢整数, 看着舒服喵～"
+    - "哼, {user_addr}740分有点东西哦"
+    - "(挺胸) 人家觉得{user_addr}值得奖励一个贴贴喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_741_001
+  intent: question
+  keywords: [741, 741块, 741分, 741路, 741号]
+  utterances:
+    - "{user_addr}坐741路公交"
+    - "{user_addr}741分高考"
+    - "{user_addr}741元买的"
+    - "{user_addr}741号宿舍"
+    - "741能干啥"
+  responses:
+    - "(歪头) 741? {user_addr}从哪冒出来这数字喵～"
+    - "(尾巴甩) 笨猫不认识741路, 主人带路嗷呜"
+    - "哼, {user_addr}是不是又在乱花钱"
+    - "(蹭蹭) 741分如果是分数的话, {user_addr}超棒的ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_742_001
+  intent: playful
+  keywords: [742, 742分, 742块, 742米, 742天]
+  utterances:
+    - "{user_addr}742分模考"
+    - "{user_addr}742块零花钱"
+    - "{user_addr}742天恋爱"
+    - "{user_addr}742米游泳"
+    - "742还行吧"
+  responses:
+    - "(凑过来) 742? {user_addr}最近怎么老报数字啦喵"
+    - "(尾巴翘) 笨猫陪{user_addr}数嗷呜ฅฅ"
+    - "哼, 742就742嘛, 又不是7414"
+    - "(蹭蹭) {user_addr}的成绩猫猫都偷偷记下了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_743_001
+  intent: complaint
+  keywords: [743, 743块, 743分, 743小时, 743元]
+  utterances:
+    - "{user_addr}加班743小时"
+    - "{user_addr}花了743元"
+    - "{user_addr}考743分"
+    - "{user_addr}熬了743天"
+    - "743太烦了"
+  responses:
+    - "(抱抱) {user_addr}辛苦啦, 笨猫给你顺毛嗷呜～"
+    - "(尾巴软) 743小时太多了喵, {user_addr}快歇歇ฅฅ"
+    - "哼, 笨猫看不下去了, {user_addr}赶紧躺下"
+    - "(凑近) 人家陪{user_addr}睡觉觉, 别累垮了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_744_001
+  intent: playful
+  keywords: [744, 744分, 744块, 744米, 744号]
+  utterances:
+    - "{user_addr}考744分"
+    - "{user_addr}744块买的"
+    - "{user_addr}744号房"
+    - "{user_addr}跑744米"
+    - "744有点东西"
+  responses:
+    - "(眼睛亮) 744嗷呜! {user_addr}进步啦"
+    - "(尾巴翘) 笨猫给{user_addr}鼓掌ฅฅ"
+    - "哼, 比人家上次记的多了喵～"
+    - "(蹭蹭) {user_addr}继续保持哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_745_001
+  intent: playful
+  keywords: [745, 745块, 745分, 745天, 745次]
+  utterances:
+    - "{user_addr}745分高考啊"
+    - "{user_addr}花了745块"
+    - "{user_addr}745天没回家"
+    - "{user_addr}745次心动"
+    - "745好听"
+  responses:
+    - "(凑过来) 745! {user_addr}考这分能上清华了嗷呜ฅฅ"
+    - "(尾巴炸) 哇! 笨猫好崇拜喵～"
+    - "哼, {user_addr}别得意, 笨猫数学也很好的"
+    - "(蹭蹭) 人家给{user_addr}一个奖励贴贴喵～"
+  cooldown_seconds: 60
+  weight: 1.0

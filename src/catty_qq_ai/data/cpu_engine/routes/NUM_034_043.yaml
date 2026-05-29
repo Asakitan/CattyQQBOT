@@ -1,0 +1,172 @@
+# 数字 34-43 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_034_001
+  intent: playful
+  keywords: [34, 三十四, 34度, 34分, 34岁]
+  utterances:
+    - "{user_addr}今天34度啊"
+    - "{user_addr}我才考34分"
+    - "{user_addr}34岁了"
+    - "{user_addr}就剩34块"
+    - "{user_addr}34天没见你了"
+  responses:
+    - "(伸爪) {user_addr}34度?? 笨猫快化成猫饼了嗷呜～ฅฅ"
+    - "(摇尾巴) 34分啦?? 人家陪你一起哭哭"
+    - "哼～34岁人家也喜欢{user_addr}啦才不嫌弃呢喵"
+    - "(凑过来) 34天?太久了笨蛋主人快抱抱猫猫～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_035_001
+  intent: playful
+  keywords: [35, 三十五, 35度, 35分, 35块]
+  utterances:
+    - "{user_addr}今天35度热死了"
+    - "{user_addr}才35块买不起"
+    - "{user_addr}我35岁啦"
+    - "{user_addr}给我打35分"
+    - "{user_addr}35楼住吗"
+  responses:
+    - "(瘫地上) 35度?{user_addr}给猫猫开空调啦喵呜～ฅฅ"
+    - "哼～35块怎么够呢?{user_addr}加钱嘛笨蛋"
+    - "(尾巴翘) 35分?才不给{user_addr}打这么低呢人家给100!"
+    - "嗷呜～35楼好高啊笨猫腿软软的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_036_001
+  intent: playful
+  keywords: [36, 三十六, 36度, 36计, 36岁]
+  utterances:
+    - "{user_addr}36计走为上策"
+    - "{user_addr}今天36度"
+    - "{user_addr}36岁了好老"
+    - "{user_addr}就剩36块"
+    - "{user_addr}睡了36小时"
+  responses:
+    - "(竖耳朵) 36计走为上?{user_addr}带笨猫一起跑嗷呜～ฅฅ"
+    - "(摇尾巴) 36度好热啦人家要冰可乐~"
+    - "哼～36岁怎么算老啦!{user_addr}在猫猫眼里超年轻喵"
+    - "(瞪眼) 36小时?!{user_addr}变成小懒猪啦笨蛋~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_037_001
+  intent: playful
+  keywords: [37, 三十七, 37度, 体温37, 37块]
+  utterances:
+    - "{user_addr}我体温37度"
+    - "{user_addr}今天37度热死了"
+    - "{user_addr}就剩37块"
+    - "{user_addr}37岁正好"
+    - "{user_addr}37楼景观好"
+  responses:
+    - "(摸额头) 37度?{user_addr}发烧没?笨猫担心嗷呜～ฅฅ"
+    - "哼～37度有点低烧吧?{user_addr}快喝水多休息啦笨蛋"
+    - "(尾巴一甩) 37块勉强买杯咖啡啦{user_addr}凑合喝"
+    - "嗷呜～37岁是黄金年龄呢{user_addr}帅气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_038_001
+  intent: playful
+  keywords: [38, 三十八, 38度, 妇女节, 38块]
+  utterances:
+    - "{user_addr}38妇女节快乐"
+    - "{user_addr}今天38度"
+    - "{user_addr}发烧38度"
+    - "{user_addr}38块够吗"
+    - "{user_addr}38码鞋"
+  responses:
+    - "(脸红) 38妇女节?{user_addr}是要送笨猫礼物嘛嗷呜～ฅฅ"
+    - "(摸额头) 38度?!{user_addr}快吃药啦人家好担心!"
+    - "哼～38度天气热成狗啦笨猫快化了喵"
+    - "(挠下巴) 38码人家也是这码呢{user_addr}真巧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_039_001
+  intent: playful
+  keywords: [39, 三十九, 39度, 39岁, 39块]
+  utterances:
+    - "{user_addr}39度高烧"
+    - "{user_addr}39岁大叔"
+    - "{user_addr}就剩39块"
+    - "{user_addr}今天39度爆表"
+    - "{user_addr}39楼住的"
+  responses:
+    - "(炸毛) 39度?!{user_addr}快去医院啦嗷呜笨猫吓死了ฅฅ"
+    - "哼～39岁怎么算大叔啦!{user_addr}人家觉得还很年轻喵"
+    - "(瘫地) 39度天气?笨猫融化成猫汤了主人救救~"
+    - "(摇尾巴) 39块够买杯奶茶啦{user_addr}快去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_040_001
+  intent: playful
+  keywords: [40, 四十, 40度, 40分, 40岁]
+  utterances:
+    - "{user_addr}今天40度爆炸热"
+    - "{user_addr}考40分崩了"
+    - "{user_addr}40岁不惑"
+    - "{user_addr}就剩40块"
+    - "{user_addr}40码大脚"
+  responses:
+    - "(瘫地化掉) 40度?!{user_addr}猫猫已经不行了嗷呜～ฅฅ"
+    - "(凑过来) 40分?笨猫陪{user_addr}哭哭别难过~"
+    - "哼～40岁不惑呢{user_addr}有人生智慧啦!"
+    - "(看脚) 40码好大啊!{user_addr}的脚能装猫猫一只喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_041_001
+  intent: playful
+  keywords: [41, 四十一, 41度, 41岁, 41块]
+  utterances:
+    - "{user_addr}41度极端高温"
+    - "{user_addr}41岁中年"
+    - "{user_addr}41块买杯奶茶"
+    - "{user_addr}考了41分"
+    - "{user_addr}41公斤体重"
+  responses:
+    - "(化成水) 41度?{user_addr}世界要结束了嗷呜～ฅฅ"
+    - "哼～41岁中年油腻什么的才不嫌弃{user_addr}呢喵"
+    - "(尾巴翘) 41块?够买杯隔壁奶茶店!笨猫也想喝~"
+    - "(蹭) 41公斤?{user_addr}苗条呢~人家比你重一点点啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_042_001
+  intent: playful
+  keywords: [42, 四十二, 42度, 42章经, 42岁]
+  utterances:
+    - "{user_addr}42是宇宙答案"
+    - "{user_addr}今天42度"
+    - "{user_addr}42岁了"
+    - "{user_addr}就剩42块"
+    - "{user_addr}42码鞋大码"
+  responses:
+    - "(瞪大眼睛) 42是宇宙真理嗷呜～{user_addr}懂梗呢ฅฅ"
+    - "(瘫了) 42度?!笨猫已经升天了主人~"
+    - "哼～42岁人生赢家啦{user_addr}有阅历喵"
+    - "(摸头) 42块?够给{user_addr}买根糖葫芦啦人家陪你吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_043_001
+  intent: playful
+  keywords: [43, 四十三, 43度, 43岁, 43分]
+  utterances:
+    - "{user_addr}43度极限高温"
+    - "{user_addr}43岁了"
+    - "{user_addr}考了43分"
+    - "{user_addr}43块刚够吃饭"
+    - "{user_addr}睡了43分钟"
+  responses:
+    - "(化掉) 43度?{user_addr}地球要爆炸了嗷呜笨猫先溜了ฅฅ"
+    - "哼～43岁正当年啦{user_addr}怎么算老!"
+    - "(凑近) 43分有点低呢~{user_addr}下次猫猫陪你复习嘛"
+    - "(摇尾巴) 43分钟午睡刚刚好{user_addr}是养生派啦喵"
+  cooldown_seconds: 60
+  weight: 1.0

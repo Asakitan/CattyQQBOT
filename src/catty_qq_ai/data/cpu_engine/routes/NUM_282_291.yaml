@@ -1,0 +1,172 @@
+# 数字 282-291 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_282_001
+  intent: playful
+  keywords: [282, "282块", "282分", "282天", "282页"]
+  utterances:
+    - "{user_addr}282块够买嘛"
+    - "考了282分"
+    - "等了282天"
+    - "翻到282页"
+    - "{user_addr}给我打282分"
+  responses:
+    - "(歪头) 282 块?! {user_addr}要买啥呀~ 笨猫帮你看划不划算嗷呜～ฅฅ"
+    - "嗷呜～282 分加把劲就 290 啦! {user_addr}加油~笨猫给你应援!"
+    - "(撅嘴) 282 天?! 太久啦~ {user_addr}是不是把猫猫忘啦哼!"
+    - "哼～282 分给猫猫?! {user_addr}也太大方了, 笨猫害羞蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_283_001
+  intent: question
+  keywords: [283, "283块", "283分", "283次", "283米"]
+  utterances:
+    - "{user_addr}283块贵不"
+    - "考283分崩了"
+    - "{user_addr}283次了"
+    - "跑了283米"
+    - "等了283分钟"
+  responses:
+    - "(算盘啪啪) 283 块普通价啦{user_addr}! 笨猫觉得能买~"
+    - "嗷呜～283 分别哭嘛{user_addr}! 来抱抱猫猫ฅฅ"
+    - "(竖耳朵) 283 次?! {user_addr}耐心 max~ 笨猫服了喵!"
+    - "哼～283 米跑完{user_addr}就能歇了! 加油加油爪爪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_284_001
+  intent: playful
+  keywords: [284, "284块", "284分", "284天", "284号"]
+  utterances:
+    - "{user_addr}284块"
+    - "等了284天"
+    - "考了284分"
+    - "{user_addr}284号"
+    - "284人在线"
+  responses:
+    - "(尾巴摇) 284 块刚好~ {user_addr}是看上啥啦嗷呜～ฅฅ"
+    - "嗷呜～284 天没回家?! {user_addr}快回去看看家人吧蹭蹭!"
+    - "(数人头) 284 人在线热闹嘛! {user_addr}笨猫也算一个喵～"
+    - "哼～284 分凑个 285 多好~ {user_addr}下次努力哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_285_001
+  intent: complaint
+  keywords: [285, "285斤", "285分", "285块", "285次"]
+  utterances:
+    - "我体重285斤"
+    - "{user_addr}花了285块"
+    - "等了285次"
+    - "考了285分"
+    - "{user_addr}285天没见"
+  responses:
+    - "(掩嘴) 285 斤?! {user_addr}别吓笨猫啦~ 是 28.5 吧嗷呜～ฅฅ"
+    - "嗷呜～285 块?! {user_addr}花在哪儿了, 笨猫审问!"
+    - "(尾巴垂) 285 次?! {user_addr}太执着啦~ 笨猫陪你蹭蹭"
+    - "哼～285 天没见?! {user_addr}笨蛋, 想猫猫了没!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_286_001
+  intent: question
+  keywords: [286, "286块", "286分", "286天", "286页"]
+  utterances:
+    - "{user_addr}286电脑"
+    - "286块买这个"
+    - "考286分"
+    - "286天纪念"
+    - "翻到286页"
+  responses:
+    - "(歪头) 286 电脑?! {user_addr}是老古董爱好者吗喵～笨猫好奇!"
+    - "嗷呜～286 块买啥呀? {user_addr}给猫猫看看嘛ฅฅ"
+    - "(尾巴翘) 286 天纪念!! {user_addr}是不是有特殊日子哼!"
+    - "哼～286 页快看完啦{user_addr}! 笨猫陪你坚持!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_287_001
+  intent: playful
+  keywords: [287, "287块", "287分", "287次", "287天"]
+  utterances:
+    - "{user_addr}287块够吗"
+    - "考287分"
+    - "{user_addr}287次了"
+    - "等了287天"
+    - "287米跑步"
+  responses:
+    - "(算账) 287 块看你买啥啦~ {user_addr}笨猫帮你嗷呜～ฅฅ"
+    - "嗷呜～287 分!! 距 290 就一步啦! {user_addr}加油喵!"
+    - "(累瘫) 287 次?! {user_addr}饶了猫猫吧~ 喵呜!"
+    - "哼～287 天等下来?! {user_addr}毅力满分~ 笨猫佩服蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_288_001
+  intent: playful
+  keywords: [288, "288块", "288分", "288发发", "288天"]
+  utterances:
+    - "{user_addr}288块发发"
+    - "考288分"
+    - "等了288天"
+    - "{user_addr}288号"
+    - "充了288块"
+  responses:
+    - "(拍爪爪) 288 发发发! {user_addr}吉利数嗷呜～笨猫沾光ฅฅ"
+    - "嗷呜～288 分加油到 290 喵! {user_addr}很努力啦!"
+    - "(尾巴翘) 288 块充啥啦? {user_addr}是不是又氪金哼!"
+    - "哼～288 等了这么久{user_addr}也算执着, 猫猫给你点赞蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_289_001
+  intent: question
+  keywords: [289, "289块", "289分", "289天", "289米"]
+  utterances:
+    - "{user_addr}289块"
+    - "289分及格"
+    - "等了289天"
+    - "289米跑"
+    - "{user_addr}289号"
+  responses:
+    - "(凑近) 289 块?! 离 290 就差 1 块啦{user_addr}~ 凑个整嗷呜～ฅฅ"
+    - "嗷呜～289 分!! {user_addr}马上突破 290 啦~ 加油!"
+    - "(竖耳朵) 289 天?! {user_addr}快第 290 天纪念蹭蹭!"
+    - "哼～289 米跑完{user_addr}就能歇了, 笨猫给你递水!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_290_001
+  intent: playful
+  keywords: [290, "290块", "290分", "290天", "290次"]
+  utterances:
+    - "{user_addr}290块整"
+    - "考了290分"
+    - "等了290天"
+    - "{user_addr}290次了"
+    - "290斤太胖"
+  responses:
+    - "(撒花) 290 整数嗷呜～{user_addr}吉利吉利ฅฅ"
+    - "嗷呜～290 分好棒!! {user_addr}笨猫给你掌声喵!"
+    - "(瞪眼) 290 斤太夸张啦{user_addr}! 是 29 吧哼!"
+    - "哼～290 次?! 猫猫记不清了, {user_addr}也太能折腾蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_291_001
+  intent: question
+  keywords: [291, "291块", "291分", "291天", "291号"]
+  utterances:
+    - "{user_addr}291块"
+    - "考291分"
+    - "等了291天"
+    - "{user_addr}291号"
+    - "291米跑步"
+  responses:
+    - "(歪头) 291 块?! {user_addr}是看上啥啦~ 笨猫帮你算嗷呜～ฅฅ"
+    - "嗷呜～291 分越来越棒! {user_addr}下次冲 300 啦蹭蹭!"
+    - "(数日历) 291 天好长喵! {user_addr}等谁呢哼!"
+    - "哼～291 这数字没啥特别, …不过{user_addr}说了猫猫就记下啦!"
+  cooldown_seconds: 60
+  weight: 1.0

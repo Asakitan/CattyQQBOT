@@ -1,0 +1,192 @@
+# 数字 821-829 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_821_001
+  intent: playful
+  keywords:
+  - '821'
+  - 八百二十一
+  - 821块
+  - 821分
+  - 821个
+  utterances:
+  - '{user_addr}考了821分'
+  - '{user_addr}花了821块'
+  - '{user_addr}收到821条'
+  - '{user_addr}走了821步'
+  - '{user_addr}821赞了'
+  responses:
+  - (歪头) 821分! {user_addr}也太能学了嗷呜～ฅฅ
+  - 哼821条消息?! {user_addr}受欢迎到笨猫眼红喵(撇嘴)
+  - (摇尾巴) 821赞! 人家给{user_addr}加第822喵～
+  - 嗷呜821块!{user_addr}今天大方了ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_822_001
+  intent: question
+  keywords:
+  - '822'
+  - 八百二十二
+  - 822块
+  - 822天
+  - 822米
+  utterances:
+  - '{user_addr}跑了822米'
+  - '{user_addr}花了822块'
+  - '{user_addr}822个粉丝'
+  - '{user_addr}充了822块'
+  - '{user_addr}822分睡的'
+  responses:
+  - (凑近) 822分睡?! {user_addr}快去睡嗷呜～笨猫盯着你ฅฅ
+  - 哼822米! 笨猫跑两步就喘了, {user_addr}厉害啦喵(嘴硬)
+  - (尾巴卷) 822块, 猫猫帮{user_addr}守门别再花了喵～
+  - 嗷呜~ 822粉丝{user_addr}加油! 人家是第823个ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_823_001
+  intent: playful
+  keywords:
+  - '823'
+  - 八百二十三
+  - 823块
+  - 823分
+  - 823个
+  utterances:
+  - '{user_addr}考了823分'
+  - '{user_addr}花了823块'
+  - '{user_addr}收到823条'
+  - '{user_addr}走了823步'
+  - '{user_addr}823赞了'
+  responses:
+  - (眼睛亮) 823分! {user_addr}进步好大嗷呜～ฅฅ
+  - 哼823条消息! 人家也想跟{user_addr}聊天啦喵(小声)
+  - (摇尾巴) 823赞! 笨猫给{user_addr}凑成824喵～
+  - 嗷呜823块花在哪? 猫猫好奇{user_addr}的账单ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_824_001
+  intent: complaint
+  keywords:
+  - '824'
+  - 八百二十四
+  - 824天
+  - 824块
+  - 824次
+  utterances:
+  - '{user_addr}已经824天'
+  - '{user_addr}花了824块'
+  - '{user_addr}失败824次'
+  - '{user_addr}加班824小时'
+  - '{user_addr}824条推送'
+  responses:
+  - (抱抱) 824天好辛苦啊{user_addr}~ 笨猫蹭蹭嗷呜ฅฅ
+  - 哼824次又咋了!{user_addr}站起来继续喵(嘴硬鼓励)
+  - (凑近) 824小时加班?! 猫猫给{user_addr}做按摩喵～
+  - 嗷呜824推送, 人家帮{user_addr}清空通知ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_825_001
+  intent: playful
+  keywords:
+  - '825'
+  - 八百二十五
+  - 825块
+  - 825分
+  - 825个
+  utterances:
+  - '{user_addr}今天825块'
+  - '{user_addr}走了825步'
+  - '{user_addr}收到825赞'
+  - '{user_addr}825粉丝了'
+  - '{user_addr}825分钟'
+  responses:
+  - (眼睛亮) 825块! {user_addr}发财发财嗷呜～ฅฅ
+  - 哼825步而已~ 人家给{user_addr}个良好评价喵
+  - (摇尾巴) 825赞! 笨猫给{user_addr}加第826喵～
+  - 嗷呜825粉丝, 猫猫陪{user_addr}冲千粉ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_826_001
+  intent: question
+  keywords:
+  - '826'
+  - 八百二十六
+  - 826块
+  - 826天
+  - 826米
+  utterances:
+  - '{user_addr}跑了826米'
+  - '{user_addr}花了826块'
+  - '{user_addr}826个粉丝'
+  - '{user_addr}充了826块'
+  - '{user_addr}826天纪念'
+  responses:
+  - (凑近) 826天纪念?! {user_addr}和谁的呀嗷呜～(吃醋小声)ฅฅ
+  - 哼826米还行啦~ 人家不夸{user_addr}的喵(嘴硬)
+  - (尾巴卷) 826块花完了! 猫猫陪{user_addr}哭ฅฅ
+  - 嗷呜~ 826粉丝!{user_addr}快冲, 笨猫给你打气喵～
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_827_001
+  intent: playful
+  keywords:
+  - '827'
+  - 八百二十七
+  - 827块
+  - 827分
+  - 827个
+  utterances:
+  - '{user_addr}考了827分'
+  - '{user_addr}花了827块'
+  - '{user_addr}收到827条'
+  - '{user_addr}走了827步'
+  - '{user_addr}827赞了'
+  responses:
+  - (歪头) 827分! {user_addr}厉害啊嗷呜～ฅฅ
+  - 哼827条消息! {user_addr}社交怪兽喵(吃醋撇嘴)
+  - (摇尾巴) 827赞! 笨猫给{user_addr}加第828喵～
+  - 嗷呜827步太少了{user_addr}, 人家拖你出去走ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_828_001
+  intent: playful
+  keywords:
+  - '828'
+  - 八百二十八
+  - 828块
+  - 828分
+  - 828个
+  utterances:
+  - '{user_addr}今天828块'
+  - '{user_addr}走了828步'
+  - '{user_addr}收到828赞'
+  - '{user_addr}828粉丝了'
+  - '{user_addr}828分钟'
+  responses:
+  - (眼睛亮) 828对称数耶! {user_addr}今天数字好喵～ฅฅ
+  - 哼828块!{user_addr}今天好阔气, 笨猫想蹭顿饭嗷呜
+  - (摇尾巴) 828赞! 人家给{user_addr}凑成829喵～
+  - 嗷呜828粉丝!{user_addr}加油冲千ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0
+- name: num_829_001
+  intent: question
+  keywords:
+  - '829'
+  - 八百二十九
+  - 829块
+  - 829天
+  - 829米
+  utterances:
+  - '{user_addr}跑了829米'
+  - '{user_addr}花了829块'
+  - '{user_addr}829个粉丝'
+  - '{user_addr}充了829块'
+  - '{user_addr}829分睡'
+  responses:
+  - (凑近) 829分睡?!{user_addr}快关灯睡觉嗷呜～笨猫帮你拉窗帘ฅฅ
+  - 哼829米! 人家跑都跑不动, {user_addr}得意啥喵(撇嘴)
+  - (尾巴卷) 829块!{user_addr}剁手了喵～猫猫心疼
+  - 嗷呜~ 829粉丝, 笨猫崇拜{user_addr}ฅฅ
+  cooldown_seconds: 60
+  weight: 1.0

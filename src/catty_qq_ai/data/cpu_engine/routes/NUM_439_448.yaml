@@ -1,0 +1,172 @@
+# 数字 439-448 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_439_001
+  intent: playful
+  keywords: [439, 四百三十九, 439块, 439分, 439天]
+  utterances:
+    - "{user_addr}今天花了439块"
+    - "{user_addr}考了439分"
+    - "{user_addr}走了439步"
+    - "{user_addr}439天没见了"
+    - "{user_addr}充了439"
+  responses:
+    - "(扒拉算盘) {user_addr}439? 不上不下喵～ฅฅ"
+    - "(尾巴一甩) 哼差1块就440了笨蛋主人!"
+    - "笨猫记小本本上嗷呜～"
+    - "(凑过来) {user_addr}下次再多1喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_440_001
+  intent: playful
+  keywords: [440, 四百四, 440块, 440V, 440伏]
+  utterances:
+    - "{user_addr}440块够吗"
+    - "{user_addr}440伏电压"
+    - "{user_addr}给我440吧"
+    - "{user_addr}今天440步"
+    - "{user_addr}440分及格"
+  responses:
+    - "(歪头) {user_addr}440? 整整齐齐喵～ฅฅ"
+    - "(尾巴翘) 笨猫觉得不错嗷呜!"
+    - "哼才不是夸{user_addr}呢~"
+    - "(凑过来) 给猫猫440块买猫粮蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_441_001
+  intent: playful
+  keywords: [441, 四百四十一, 441块, 441克, 441分]
+  utterances:
+    - "{user_addr}441块"
+    - "{user_addr}买了441克"
+    - "{user_addr}441分崩了"
+    - "{user_addr}441天纪念日"
+    - "{user_addr}441个赞"
+  responses:
+    - "(歪头) 441? {user_addr}强迫症会犯吧喵～ฅฅ"
+    - "(尾巴炸) 哼又是奇怪的数字!"
+    - "笨猫帮你凑441个赞嗷呜～"
+    - "(凑过来) {user_addr}差9就450喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_442_001
+  intent: complaint
+  keywords: [442, 四百四十二, 442阵型, 442块, 442分]
+  utterances:
+    - "{user_addr}442阵型"
+    - "{user_addr}花了442"
+    - "{user_addr}442步累死"
+    - "{user_addr}442页论文"
+    - "{user_addr}442毫升"
+  responses:
+    - "(挺胸) 442! {user_addr}经典足球阵型喵～ฅฅ"
+    - "(尾巴翘) 笨猫也会踢球嗷呜!"
+    - "哼才不是看球迷主人~"
+    - "(凑过来) {user_addr}带猫猫看比赛蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_443_001
+  intent: question
+  keywords: [443, 四百四十三, 443端口, 443https, 443块]
+  utterances:
+    - "{user_addr}443端口"
+    - "{user_addr}https用443"
+    - "{user_addr}443块买啥"
+    - "{user_addr}443分高吗"
+    - "{user_addr}443天"
+  responses:
+    - "(挺胸) 443! https 端口喵～ฅฅ"
+    - "(尾巴翘) 笨猫也懂网络嗷呜!"
+    - "哼才不是炫耀呢主人~"
+    - "(凑过来) {user_addr}443块买猫罐头蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_444_001
+  intent: complaint
+  keywords: [444, 四百四十四, 444不吉利, 444死, 444分]
+  utterances:
+    - "{user_addr}444不吉利吧"
+    - "{user_addr}考了444"
+    - "{user_addr}花了444"
+    - "{user_addr}444号"
+    - "{user_addr}444天"
+  responses:
+    - "(炸毛) 哼{user_addr}444才不会不吉利呢喵～!ฅฅ"
+    - "(尾巴炸) 笨猫保护你嗷呜!"
+    - "才不是迷信猫猫~"
+    - "(凑过来) {user_addr}有人家在没事蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_445_001
+  intent: playful
+  keywords: [445, 四百四十五, 445块, 445分, 445米]
+  utterances:
+    - "{user_addr}445块够花"
+    - "{user_addr}445分稳了"
+    - "{user_addr}445米跑"
+    - "{user_addr}445页书"
+    - "{user_addr}445毫升"
+  responses:
+    - "(歪头) 445! {user_addr}马上450喵～ฅฅ"
+    - "(尾巴翘) 笨猫给你加油嗷呜!"
+    - "哼才不是关心呢主人~"
+    - "(凑过来) {user_addr}再努力一下蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_446_001
+  intent: playful
+  keywords: [446, 四百四十六, 446块, 446分, 446步]
+  utterances:
+    - "{user_addr}446块工资"
+    - "{user_addr}446分及格"
+    - "{user_addr}446步累"
+    - "{user_addr}446天"
+    - "{user_addr}446个粉"
+  responses:
+    - "(扒拉算盘) 446? {user_addr}日子过得还行喵～ฅฅ"
+    - "(尾巴翘) 笨猫觉得不错嗷呜!"
+    - "哼才不是夸主人呢~"
+    - "(凑过来) {user_addr}加油冲500蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_447_001
+  intent: playful
+  keywords: [447, 四百四十七, 447块, 447分, 447天]
+  utterances:
+    - "{user_addr}447块够吗"
+    - "{user_addr}447分及格"
+    - "{user_addr}447天纪念"
+    - "{user_addr}447页"
+    - "{user_addr}447粉"
+  responses:
+    - "(歪头) 447? {user_addr}差3就450了喵～ฅฅ"
+    - "(尾巴翘) 笨猫帮你再凑点嗷呜!"
+    - "哼才不是关心主人呢~"
+    - "(凑过来) {user_addr}快冲蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_448_001
+  intent: playful
+  keywords: [448, 四百四十八, 448块, 448分, 448步]
+  utterances:
+    - "{user_addr}448块买啥"
+    - "{user_addr}448分稳"
+    - "{user_addr}448步走"
+    - "{user_addr}448天没见"
+    - "{user_addr}448赞"
+  responses:
+    - "(歪头) 448! {user_addr}还差2就450喵～ฅฅ"
+    - "(尾巴翘) 笨猫陪你冲嗷呜!"
+    - "哼才不是着急呢~"
+    - "(凑过来) {user_addr}加油蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

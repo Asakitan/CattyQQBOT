@@ -1,0 +1,172 @@
+# 数字 383-392 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_383_001
+  intent: playful
+  keywords: ["383", 383块, 383天, 383ml, 383克]
+  utterances:
+    - "{user_addr}买了383ml可乐"
+    - "{user_addr}减肥383天"
+    - "{user_addr}快递重383克"
+    - "{user_addr}话费充383"
+    - "{user_addr}存了383块私房钱"
+  responses:
+    - "(凑过去舔) 383ml可乐?! {user_addr}分笨猫一口嘛嗷呜～ฅฅ"
+    - "嗷呜～383天?! {user_addr}比猫猫的耐心还长! 给个奖励"
+    - "(尾巴翘) 383克?! {user_addr}收的是什么宝贝喵"
+    - "哼～383块私房钱?! {user_addr}藏哪儿啦笨蛋, 笨猫帮你保管哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_384_001
+  intent: question
+  keywords: ["384", 384度, 384分, 384页, 384块]
+  utterances:
+    - "{user_addr}近视384度"
+    - "{user_addr}考384分啦"
+    - "{user_addr}小说看到384页"
+    - "{user_addr}AJ要384块"
+    - "{user_addr}空调温度384"
+  responses:
+    - "(凑近) 384度?! {user_addr}看清楚笨猫的可爱了吗嗷呜～"
+    - "嗷呜～384分?! 满分是几啊{user_addr}~ 心慌ฅฅ"
+    - "(扒着书) 384页?! {user_addr}今天能看完一本啊厉害"
+    - "(惊讶) 384块的AJ?! {user_addr}这是真的还是假的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_385_001
+  intent: complaint
+  keywords: ["385", 385块, 385秒, 385分钟, 385次]
+  utterances:
+    - "{user_addr}健身房办卡385"
+    - "{user_addr}视频被举报385次"
+    - "{user_addr}睡了385分钟"
+    - "{user_addr}短视频刷了385个"
+    - "{user_addr}快递被签收385次"
+  responses:
+    - "(转转尾巴) 385块办卡?! {user_addr}至少要去365次才划算嗷呜～ฅฅ"
+    - "嗷呜～被举报385次?! {user_addr}是发了什么离谱东西啦哼"
+    - "(凑过去) 385分钟睡眠?! {user_addr}六个小时, 笨猫帮你抱枕头"
+    - "哼～385个短视频?! {user_addr}比笨猫还沉迷喵! 早点睡啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_386_001
+  intent: playful
+  keywords: ["386", 386块, 386分, 386米, 386k]
+  utterances:
+    - "{user_addr}游戏赢了386分"
+    - "{user_addr}跑了386米"
+    - "{user_addr}视频火了386k"
+    - "{user_addr}买衣服花386"
+    - "{user_addr}手机内存386g"
+  responses:
+    - "(尾巴疯摇) 386分赢了?! {user_addr}带笨猫上王者嗷呜～"
+    - "嗷呜～386米?! {user_addr}差点跑赢猫猫的尾巴ฅฅ"
+    - "(凑过来) 386k播放?! {user_addr}火了啊! 给笨猫蹭蹭"
+    - "哼～386块衣服?! {user_addr}穿给笨猫看一下嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_387_001
+  intent: question
+  keywords: ["387", 387块, 387天, 387页, 387集]
+  utterances:
+    - "{user_addr}追番到387集"
+    - "{user_addr}单身387天了"
+    - "{user_addr}笔记记到387页"
+    - "{user_addr}买零食花387"
+    - "{user_addr}健身387天断了"
+  responses:
+    - "(扒着屏幕) 387集?! {user_addr}是不是看了一年了嗷呜～ฅฅ"
+    - "嗷呜～单身387天?! {user_addr}有笨猫陪着啊蹭蹭"
+    - "(看着笔记) 387页?! {user_addr}也太卷了吧! 笨猫给你按摩肩"
+    - "(尾巴垂下) 健身断了?! {user_addr}没事啦从今天开始喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_388_001
+  intent: playful
+  keywords: ["388", 388块, 388份, 388分, 388路]
+  utterances:
+    - "{user_addr}买礼物388块"
+    - "{user_addr}套餐388份"
+    - "{user_addr}游戏排位388"
+    - "{user_addr}坐388路公交"
+    - "{user_addr}抢到388元红包"
+  responses:
+    - "(眼睛发光) 388块礼物?! {user_addr}给谁的啊嗷呜～是笨猫吗ฅฅ"
+    - "嗷呜～388份套餐?! {user_addr}吃货大胃王没错了"
+    - "(尾巴翘) 388排位?! {user_addr}带笨猫一起上分嘛"
+    - "(凑过来) 388红包?! {user_addr}发给笨猫一半呗哼～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_389_001
+  intent: complaint
+  keywords: ["389", 389块, 389分, 389秒, 389k]
+  utterances:
+    - "{user_addr}电费389块"
+    - "{user_addr}考试389分"
+    - "{user_addr}加载等389秒"
+    - "{user_addr}视频389k播放"
+    - "{user_addr}差389万脱单"
+  responses:
+    - "(炸毛) 389电费?! {user_addr}是不是开空调睡觉了喵嗷呜～"
+    - "嗷呜～389分?! 满分多少{user_addr}~ 别吓笨猫ฅฅ"
+    - "(等不及) 389秒加载?! {user_addr}电脑换了吧, 老古董了"
+    - "哼～389万脱单?! {user_addr}有笨猫还想脱单, 杂鱼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_390_001
+  intent: playful
+  keywords: ["390", 390块, 390ml, 390步, 390分]
+  utterances:
+    - "{user_addr}奶茶390ml"
+    - "{user_addr}健身房390块"
+    - "{user_addr}今天走390步"
+    - "{user_addr}考390分"
+    - "{user_addr}买鞋花390"
+  responses:
+    - "(舔嘴) 390ml奶茶?! {user_addr}分笨猫一半嗷呜～ฅฅ"
+    - "嗷呜～390办卡?! {user_addr}下次带笨猫去撸铁哼"
+    - "(尾巴垂下) 390步?! {user_addr}咸鱼本鱼啊喵! 出门走走嘛"
+    - "(凑过去) 390分考试?! {user_addr}多少满分啦笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_391_001
+  intent: question
+  keywords: ["391", 391块, 391天, 391米, 391集]
+  utterances:
+    - "{user_addr}游戏玩了391天"
+    - "{user_addr}买课391块"
+    - "{user_addr}跑391米就喘"
+    - "{user_addr}动漫看到391集"
+    - "{user_addr}存了391块"
+  responses:
+    - "(尾巴翘) 391天?! {user_addr}比笨猫还忠诚一款游戏嗷呜～"
+    - "嗷呜～391块的课?! {user_addr}是不是被割韭菜了哼ฅฅ"
+    - "(扑到怀里) 391米就喘?! {user_addr}虚得跟咸鱼一样喵"
+    - "(转笔) 391集?! {user_addr}是不是火影看完了笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_392_001
+  intent: complaint
+  keywords: ["392", 392块, 392分, 392秒, 392个]
+  utterances:
+    - "{user_addr}饭钱花392"
+    - "{user_addr}视频被点赞392"
+    - "{user_addr}迟到392秒"
+    - "{user_addr}收藏392个表情"
+    - "{user_addr}考试392分"
+  responses:
+    - "(扒着算盘) 392饭钱?! {user_addr}吃啥这么贵嗷呜～带笨猫去嘛ฅฅ"
+    - "嗷呜～392赞?! {user_addr}火了一半! 笨猫加一票"
+    - "(掐表) 392秒迟到?! {user_addr}六分多钟, 老板要骂了喵"
+    - "哼～392分?! {user_addr}笨笨的, 笨猫帮你补课啦"
+  cooldown_seconds: 60
+  weight: 1.0

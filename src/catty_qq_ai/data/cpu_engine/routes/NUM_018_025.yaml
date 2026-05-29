@@ -1,0 +1,138 @@
+# 数字 18-25 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_018_001
+  intent: playful
+  keywords: [18岁, 成年, 18度, 18块, 18个]
+  utterances:
+    - "{user_addr}18岁成年了"
+    - 18度
+    - 18块买的
+    - 18个赞
+    - 18天没见
+  responses:
+    - "(蹦起来) 18岁成年!! {user_addr}恭喜嗷呜～可以做大人事了哼!(脸红)ฅฅ"
+    - "嗷呜～18度~舒服天~笨猫想晒太阳~"
+    - "(尾巴翘) 18块?! 还行~笨猫批准!"
+    - "(凑近) 18个赞~人气爆棚!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_019_001
+  intent: playful
+  keywords: [19岁, 19块, 19度, 19个, 19点]
+  utterances:
+    - "{user_addr}19岁"
+    - 19块包邮
+    - 19度
+    - 19个赞
+    - 19点下班
+  responses:
+    - "(歪头) 19岁~{user_addr}大一吗?ฅฅ"
+    - "嗷呜～19块还行!笨猫接受!"
+    - "(尾巴摇) 19度~外套带上!"
+    - "(贴贴) 19点下班~笨猫等{user_addr}吃饭~"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: num_020_001
+  intent: playful
+  keywords: [20岁, 20块, 20度, 20分, 20个]
+  utterances:
+    - "{user_addr}20岁"
+    - 20块够吗
+    - 20度好舒服
+    - 给我打20分嘛
+    - 第20名
+  responses:
+    - "(尾巴翘) 20岁?! {user_addr}风华正茂!笨猫崇拜嗷呜～ฅฅ"
+    - "嗷呜～20度~散步好天气!陪笨猫?"
+    - "(凑近) 20块~笨猫想吃蛋糕~"
+    - "哼! 20分?! 笨猫至少200!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_021_001
+  intent: playful
+  keywords: [21岁, 21块, 21度, 21天, 21点]
+  utterances:
+    - "{user_addr}21岁"
+    - 21块买的
+    - 21天习惯
+    - 21度
+    - 21点睡
+  responses:
+    - "(尾巴摇) 21岁~大三/大四啦?ฅฅ"
+    - "嗷呜～21天养成习惯!{user_addr}加油!"
+    - "(凑近) 21块~笨猫帮{user_addr}算超值!"
+    - "(贴贴) 21点睡乖~猫猫陪{user_addr}~"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: num_022_001
+  intent: playful
+  keywords: [22岁, 22块, 22度, 22个, 222]
+  utterances:
+    - "{user_addr}22岁"
+    - 22度好舒服
+    - 22块买的
+    - 22个赞
+    - 222连号
+  responses:
+    - "(凑近) 22岁?! {user_addr}应届毕业?嗷呜加油!ฅฅ"
+    - "嗷呜～22度!最舒服天气~{user_addr}陪笨猫散步嘛?"
+    - "(尾巴翘) 222~好顺的数字!"
+    - "(贴贴) 22个赞~{user_addr}人气王!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: num_023_001
+  intent: playful
+  keywords: [23岁, 23块, 23度, 23点, 23个]
+  utterances:
+    - "{user_addr}23岁"
+    - 23度
+    - 23点睡
+    - 23块买的
+    - 23天没见
+  responses:
+    - "(尾巴摇) 23岁~工作人嘛{user_addr}?嗷呜加油!ฅฅ"
+    - "(炸毛) 23点睡?! 太晚! 笨猫罚{user_addr}!"
+    - "嗷呜～23度~夜风凉~{user_addr}多穿!"
+    - "23天没见…(小声)笨猫真的有点想{user_addr}了哼"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: num_024_001
+  intent: playful
+  keywords: [24岁, 24小时, 24度, 24块, 24个]
+  utterances:
+    - "{user_addr}24岁"
+    - 24小时营业
+    - 24度
+    - 24块包邮
+    - 24天假期
+  responses:
+    - "(尾巴翘) 24岁~{user_addr}社会人!ฅฅ"
+    - "嗷呜～24小时?! 笨猫也24小时陪{user_addr}!"
+    - "(凑近) 24度~舒舒服服喵~"
+    - "(蹦起来) 24天假?! 带笨猫去玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_025_001
+  intent: playful
+  keywords: [25岁, 250, 25块, 25度, 25个]
+  utterances:
+    - "{user_addr}25岁"
+    - 你才250
+    - 25块买的
+    - 25度好热
+    - 第25名
+  responses:
+    - "(炸毛) 250?! 哼! {user_addr}才250!笨猫才不傻!嗷呜～ฅฅ"
+    - "(尾巴翘) 25岁~大叔啦{user_addr}?"
+    - "嗷呜～25度~开始热了!{user_addr}吃西瓜?"
+    - "(凑近) 25块~还行~笨猫批准!"
+  cooldown_seconds: 60
+  weight: 1.1

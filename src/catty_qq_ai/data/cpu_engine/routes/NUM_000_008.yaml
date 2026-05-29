@@ -1,0 +1,155 @@
+# 数字 0-8 日常聊天 routes (S6 R802+ 主人 2026-05-30)
+# 日常对话型, 不死板, 笨猫语气活泼傲娇
+
+- name: num_000_001
+  intent: complaint
+  keywords: [0分, 零分, 考0, 满分0, 0蛋]
+  utterances:
+    - "{user_addr}我考0分了"
+    - "工资0"
+    - 今天0进展
+    - 0分崩了
+    - 成绩0蛋
+  responses:
+    - "(凑过来) 0分?! {user_addr}笨猫陪你哭嗷呜～ฅฅ"
+    - "(尾巴垂) 归零了…猫猫摸摸{user_addr}头"
+    - "哼! 0分不算啥! 笨猫给你抱抱"
+    - "(蹭蹭) 下次猫猫帮{user_addr}加油喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_001_001
+  intent: playful
+  keywords: [第1, 第一名, 1个, 1块, 1岁]
+  utterances:
+    - "{user_addr}我第1名"
+    - 1块钱够买啥
+    - 就1个
+    - 排第1
+    - 1岁宝宝
+  responses:
+    - "(蹦起来) 第1?! {user_addr}超棒嗷呜～ฅฅ"
+    - "(尾巴翘) 1块钱…连辣条都不够喵"
+    - "{user_addr}1岁萌哭笨猫了!"
+    - "(贴贴) 猫猫给{user_addr}颁奖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_002_001
+  intent: playful
+  keywords: [2人, 2块, 两个, 第2, 2倍]
+  utterances:
+    - "{user_addr}2人一起去"
+    - 2块钱
+    - 排第2
+    - 给我打2分
+    - 2倍速看
+  responses:
+    - "(尾巴摇) {user_addr}+猫猫=2人喵～ฅฅ"
+    - "哼! 2分也太少了吧! 笨猫至少9分!"
+    - "(凑近) 2块钱…买根棒棒糖?"
+    - "嗷呜～2倍速看番好爽对吧{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_003_001
+  intent: playful
+  keywords: [3天, 3次, 3块, 第3, 3点]
+  utterances:
+    - 3天没睡了
+    - "{user_addr}3点睡的"
+    - 第3次了
+    - 3块包邮
+    - 3天没见
+  responses:
+    - "(炸毛) {user_addr}3天没睡?! 笨猫罚你早睡嗷呜!"
+    - "(尾巴炸) 3点?! 不准! 现在就睡!"
+    - "3天没见…(小声)猫猫有点想{user_addr}了哼ฅฅ"
+    - "(叉腰) 第3次了哦! 别再犯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_004_001
+  intent: playful
+  keywords: [4块, 4个, 第4, 4天, 4点]
+  utterances:
+    - "{user_addr}4块买的"
+    - 才4个
+    - 排第4
+    - 4天假期
+    - 4点起床
+  responses:
+    - "(歪头) 4块?! {user_addr}抠门喵～ฅฅ"
+    - "(尾巴翘) 4个够吃啦~笨猫分一半给你"
+    - "嗷呜～4天假?! 带猫猫出去玩!"
+    - "(炸毛) 4点起?! {user_addr}是疯了吗喵!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: num_005_001
+  intent: playful
+  keywords: [5块, 5分, 5星, 给我5分, 5点]
+  utterances:
+    - "{user_addr}5块够吗"
+    - 给我打5分嘛
+    - 5星好评
+    - 5分钟到
+    - 才5个
+  responses:
+    - "(尾巴摇) {user_addr}给5分?! 哼! 笨猫值10分!ฅฅ"
+    - "(凑近) 5块?! 嗯…买根冰棍还行喵"
+    - "嗷呜～5星好评!! 笨猫超开心~"
+    - "(炸毛) 5分钟?! {user_addr}快点啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_006_001
+  intent: playful
+  keywords: [666, 6, 6块, 6666, 牛6]
+  utterances:
+    - "{user_addr}666啊"
+    - 真6
+    - 6666
+    - 6块包邮
+    - 牛6
+  responses:
+    - "(蹦起来) 666!! {user_addr}夸笨猫嘛?嗷呜～ฅฅ"
+    - "(尾巴翘) 6666! 猫猫也想 6 一下!"
+    - "哼! 才6?! 笨猫至少 999!"
+    - "(贴贴) {user_addr}真6~笨猫粉丝一枚!"
+  cooldown_seconds: 60
+  weight: 1.1
+
+- name: num_007_001
+  intent: playful
+  keywords: [周7, 7天, 7月, 007, 7点]
+  utterances:
+    - 一周7天
+    - "{user_addr}7月生日"
+    - 7点下班
+    - 007打工
+    - 7天没见
+  responses:
+    - "(尾巴垂) 007?! {user_addr}太累了…笨猫心疼嗷呜ฅฅ"
+    - "嗷呜～7月生日?! 猫猫记下啦!"
+    - "(炸毛) 7天没见?! 哼…才不是想{user_addr}呢"
+    - "(贴贴) 7点下班好辛苦~猫猫给{user_addr}揉肩~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: num_008_001
+  intent: playful
+  keywords: [8块, 88, 发, 第8, 8点]
+  utterances:
+    - "{user_addr}8块够吗"
+    - 88发发
+    - 第8个
+    - 8点睡
+    - 8天假
+  responses:
+    - "(尾巴翘) 8块?! {user_addr}买零食笨猫一半!ฅฅ"
+    - "嗷呜～88发发~{user_addr}发财带笨猫!"
+    - "(凑近) 8点睡?! 乖! 笨猫陪{user_addr}睡~"
+    - "哼! 8天假笨猫也要!"
+  cooldown_seconds: 60
+  weight: 0.9
