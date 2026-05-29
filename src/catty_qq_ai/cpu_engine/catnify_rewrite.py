@@ -25,23 +25,17 @@ import httpx
 from loguru import logger
 
 
-# 主人 2026-05-29 v2: prompt 极简化 - 6C CPU prefill 慢, token 必须 <1000.
-# 简化前 system ~300 字符, 现在 ~180 字符. user 部分由 _build_user_prompt 控制.
+# 主人 2026-05-29 v3 (最终): 极简 prompt - 主人原则"只传 CPU 候选 + 改写 + 理解当前用户问题".
+# 之前 v2 还塞了 [场景]/[群名]/DEEPSEEK 透传规则等 prefix 注入, 主人指出 6C CPU 跑不动.
+# 新设计: system ~50 字 + user 2 块 (用户问 / 待改写), 总 < 100 token.
+# DEEPSEEK 透传降级到 strong_interaction 前置规则 (NSFW phase / academic / emotion / conf),
+# LLM 只做"理解上下文 → 改写句子", 不再自决路径选择.
 _MICHEL_PERSONA_HINT = (
-    "你是米雪儿(笨猫), 16岁猫娘. 傲娇黏人嘴硬心软. "
-    "1-3句必带猫系后缀(喵~/嗷呜~/ฅฅ). "
-    "先傲娇否定再撒娇. 对真主人说『主人』, 群友说『你/杂鱼』. "
-    "自称『人家/猫猫/笨猫』."
+    "把下面的回复改写成笨猫语气. 必带『喵~/嗷呜~/ฅฅ』, 1-3 句, 自称『人家/笨猫』."
 )
 
-_DEEPSEEK_RULE_HINT = (
-    "不能用候选回复时**只**输出标记:\n"
-    "<DEEPSEEK reason=\"nsfw\"> 情感/表白/黏人\n"
-    "<DEEPSEEK reason=\"academic\"> 学术/论文/代码\n"
-    "<DEEPSEEK reason=\"search\"> 实时/价格/天气\n"
-    "<DEEPSEEK reason=\"long_chain\"> 多步推理\n"
-    "其他直接改写候选成笨猫语气."
-)
+# 兼容老代码: 解析器保留, 但 prompt 不再告诉 LLM 这个机制, _parse_deepseek_marker 不会触发.
+_DEEPSEEK_RULE_HINT = ""
 
 
 # 匹配 <DEEPSEEK reason="..."> 或 <deepseek reason="..."> (大小写、引号容错)
@@ -87,33 +81,17 @@ def _build_user_prompt(
     *,
     user_text: str,
     candidate: str,
-    user_addr: str,
-    scope_type: str,
+    user_addr: str = "",
+    scope_type: str = "",
     group_name: str = "",
     history: list[tuple[str, str]] | None = None,
 ) -> str:
-    """构造 user prompt. 主人决策: 输入总长 ≤ 4000 token, 留 1500 给 history."""
-    parts: list[str] = []
-    parts.append(f"[场景]: scope_type={scope_type}, user_addr={user_addr}")
-    if group_name:
-        parts.append(f"[群名]: {group_name}")
-    if history:
-        # 主人决策 history_turns=4, 超长裁旧的. 简单按字符 1500 上限裁.
-        budget = 1500
-        kept: list[str] = []
-        for who, txt in reversed(history):
-            line = f"  {who}: {txt}"
-            if budget - len(line) < 0:
-                break
-            kept.append(line)
-            budget -= len(line)
-        if kept:
-            parts.append("[近期对话]:")
-            parts.extend(reversed(kept))
-    parts.append(f"[用户消息]: {user_text}")
-    parts.append(f"[CPU 候选]: {candidate}")
-    parts.append("请按规则输出改写后的笨猫体质回复, 或仅输出 <DEEPSEEK reason=\"...\"> 标记.")
-    return "\n".join(parts)
+    """主人 2026-05-29 v3 (最终极简): 只 2 块 — 用户问 + 待改写.
+
+    去掉 [场景]/[群名]/[近期对话]/输出指令 等 prefix 注入. user_addr/scope_type/group_name/history
+    参数保留接口兼容, 但 ignored. LLM 只需"理解用户当前问题 → 修改 CPU 候选成笨猫语气".
+    """
+    return f"用户问: {user_text}\n待改写: {candidate}"
 
 
 async def catnify_rewrite(
@@ -158,32 +136,39 @@ async def catnify_rewrite(
     max_tokens = int(getattr(config, "catty_cpu_engine_l4_catnify_max_tokens", 0) or 200)
     timeout_s = max(timeout_ms / 1000.0, 0.5)
 
-    system_prompt = (persona_hint or _MICHEL_PERSONA_HINT) + "\n\n" + _DEEPSEEK_RULE_HINT
+    # 主人 2026-05-29 v3: 极简, system = 一句改写指令, _DEEPSEEK_RULE_HINT 已置空
+    system_prompt = persona_hint or _MICHEL_PERSONA_HINT
     user_prompt = _build_user_prompt(
         user_text=user_text,
         candidate=candidate,
-        user_addr=user_addr,
-        scope_type=scope_type,
-        group_name=group_name,
-        history=history,
     )
 
+    # 主人 2026-05-29 v3: 切到 Ollama 原生 /api/chat (跳过 /v1 OpenAI 包装层).
+    # base_url 配的可能是 .../v1 — 砍掉这段, 拼回根 + /api/chat. 这样 IPC overhead 少 50%+.
+    root_url = base_url
+    if root_url.endswith("/v1"):
+        root_url = root_url[:-3]
     payload = {
         "model": model,
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
-        "temperature": temperature,
-        "max_tokens": max_tokens,
+        "stream": False,
+        "keep_alive": "30m",
+        "options": {
+            "num_thread": 4,  # 跟 ollama affinity 0xF=4 核一致
+            "num_predict": max_tokens,
+            "temperature": temperature,
+        },
     }
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    headers = {"Content-Type": "application/json"}
 
     t0 = time.monotonic()
     try:
         async with httpx.AsyncClient(timeout=timeout_s) as client:
             resp = await client.post(
-                f"{base_url}/chat/completions",
+                f"{root_url}/api/chat",
                 json=payload,
                 headers=headers,
             )
@@ -202,7 +187,8 @@ async def catnify_rewrite(
 
     latency = (time.monotonic() - t0) * 1000.0
     try:
-        raw = str(data["choices"][0]["message"]["content"])
+        # Ollama /api/chat 响应结构: {"message": {"content": "..."}}
+        raw = str(data["message"]["content"])
     except (KeyError, IndexError, TypeError) as exc:
         logger.warning(f"[cpu_engine.L4_catnify] bad response shape: {exc}, data={data}")
         return None

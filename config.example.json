@@ -98,7 +98,7 @@
     "ollama": {
         "enabled": false,
         "auto_install": true,
-        "auto_start": false,
+        "auto_start": true,
         "auto_pull_model": true,
         "model": "qwen2.5:1.5b",
         "extra_models": [],
