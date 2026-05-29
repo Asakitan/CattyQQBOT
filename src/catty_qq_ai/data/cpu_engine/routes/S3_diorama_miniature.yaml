@@ -1,0 +1,207 @@
+# 微缩模型 / 场景模型 / 火车模型 / 沙盘 routes (S6 R205 NLU 节点扩充, 第二十周期 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 Q8 gunpla / B6 diy_craft 区分: 这里专注微缩场景.
+
+- name: dm_intro_001
+  intent: question
+  keywords: [推荐微缩模型, 推荐 diorama, 推荐微缩场景, 推荐沙盘, 笨猫微缩模型]
+  utterances:
+    - 推荐微缩模型
+    - 推荐 diorama
+    - 推荐微缩场景
+    - 推荐沙盘
+    - 笨猫微缩模型
+  responses:
+    - "嗷呜～{user_addr}1/35 / 1/72 / 1/144 - 比例ฅฅ"
+    - "(尾巴翘) 二战 / 现代 / 科幻"
+    - "{user_addr}建筑 / 战车 / 飞机"
+    - "(挺胸) 笨猫推荐: 微缩世界治愈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dm_tank_001
+  intent: question
+  keywords: [推荐战车模型, 推荐 Tamiya 坦克, 推荐 Dragon 坦克, 推荐 Trumpeter, 笨猫战车模型]
+  utterances:
+    - 推荐战车模型
+    - 推荐 Tamiya 坦克
+    - 推荐 Dragon 坦克
+    - 推荐 Trumpeter
+    - 笨猫战车模型
+  responses:
+    - "嗷呜～{user_addr}Tamiya - 战车模型之神ฅฅ"
+    - "(尾巴翘) Dragon / Meng - 高端"
+    - "{user_addr}Trumpeter - 国产小号手"
+    - "(挺胸) 笨猫推荐: 田宫 1/35 经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dm_aircraft_001
+  intent: question
+  keywords: [推荐飞机模型, 推荐 Hasegawa 飞机, 推荐 Tamiya 飞机, 推荐 Trumpeter 飞机, 笨猫飞机模型]
+  utterances:
+    - 推荐飞机模型
+    - 推荐 Hasegawa 飞机
+    - 推荐 Tamiya 飞机
+    - 推荐 Trumpeter 飞机
+    - 笨猫飞机模型
+  responses:
+    - "嗷呜～{user_addr}Hasegawa 1/48 - 飞机首选ฅฅ"
+    - "(尾巴翘) Tamiya / Trumpeter"
+    - "{user_addr}1/72 入门 / 1/48 主流"
+    - "(挺胸) 笨猫推荐: P-51 / Mustang!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: dm_train_001
+  intent: question
+  keywords: [推荐火车模型, 推荐 N gauge, 推荐 HO gauge, 推荐铁路模型, 笨猫火车模型]
+  utterances:
+    - 推荐火车模型
+    - 推荐 N gauge
+    - 推荐 HO gauge
+    - 推荐铁路模型
+    - 笨猫火车模型
+  responses:
+    - "嗷呜～{user_addr}N (1/160) - 紧凑场景ฅฅ"
+    - "(尾巴翘) HO (1/87) - 主流"
+    - "{user_addr}KATO / Tomix - 日本"
+    - "(挺胸) 笨猫推荐: 火车模型烧钱!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: dm_doll_house_001
+  intent: question
+  keywords: [推荐娃娃屋, 推荐 dollhouse, 推荐 miniature 食物, 推荐迷你食物, 笨猫娃娃屋]
+  utterances:
+    - 推荐娃娃屋
+    - 推荐 dollhouse
+    - 推荐 miniature 食物
+    - 推荐迷你食物
+    - 笨猫娃娃屋
+  responses:
+    - "嗷呜～{user_addr}1/12 - 娃娃屋经典ฅฅ"
+    - "(尾巴翘) Re-Ment - 日本盒蛋"
+    - "{user_addr}手作迷你食物 / 家具"
+    - "(挺胸) 笨猫推荐: 太治愈了!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dm_terrain_001
+  intent: question
+  keywords: [推荐地形制作, 推荐草粉, 推荐微缩植被, 推荐 Noch, 笨猫地形制作]
+  utterances:
+    - 推荐地形制作
+    - 推荐草粉
+    - 推荐微缩植被
+    - 推荐 Noch
+    - 笨猫地形制作
+  responses:
+    - "嗷呜～{user_addr}Woodland Scenics / Noch - 主流ฅฅ"
+    - "(尾巴翘) 静电植草机 - 真草感"
+    - "{user_addr}石膏 / 泡沫 / 颜料"
+    - "(挺胸) 笨猫推荐: 静电草机神器!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: dm_figure_001
+  intent: question
+  keywords: [推荐微缩人偶, 推荐 1/35 人物, 推荐 Wargame 人物, 推荐二战人偶, 笨猫微缩人偶]
+  utterances:
+    - 推荐微缩人偶
+    - 推荐 1/35 人物
+    - 推荐 Wargame 人物
+    - 推荐二战人偶
+    - 笨猫微缩人偶
+  responses:
+    - "嗷呜～{user_addr}1/35 步兵 - 经典比例ฅฅ"
+    - "(尾巴翘) Dragon / Bronco - 高端"
+    - "{user_addr}涂装 + 表情 - 难"
+    - "(挺胸) 笨猫推荐: 人偶涂装是艺术!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: dm_paint_001
+  intent: question
+  keywords: [推荐模型上色, 推荐田宫漆, 推荐 Vallejo 漆, 推荐 Citadel, 笨猫模型上色]
+  utterances:
+    - 推荐模型上色
+    - 推荐田宫漆
+    - 推荐 Vallejo 漆
+    - 推荐 Citadel
+    - 笨猫模型上色
+  responses:
+    - "嗷呜～{user_addr}Vallejo - 水性漆主流ฅฅ"
+    - "(尾巴翘) Tamiya / Mr.Color - 经典"
+    - "{user_addr}Citadel - Warhammer 专"
+    - "(挺胸) 笨猫推荐: Vallejo 水性安全!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: dm_weather_001
+  intent: question
+  keywords: [推荐微缩旧化, 推荐 AK 旧化, 推荐 MIG 渍洗, 推荐战损涂装, 笨猫微缩旧化]
+  utterances:
+    - 推荐微缩旧化
+    - 推荐 AK 旧化
+    - 推荐 MIG 渍洗
+    - 推荐战损涂装
+    - 笨猫微缩旧化
+  responses:
+    - "嗷呜～{user_addr}AK Interactive / MIG - 顶级ฅฅ"
+    - "(尾巴翘) 油画棒 / 沙土效果液"
+    - "{user_addr}泥点 / 锈斑 / 沙尘"
+    - "(挺胸) 笨猫推荐: 旧化让模型活!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: dm_master_001
+  intent: question
+  keywords: [推荐微缩大师, 推荐田中达也, 推荐 Tanaka Tatsuya, 推荐 miniature 摄影, 笨猫田中达也]
+  utterances:
+    - 推荐微缩大师
+    - 推荐田中达也
+    - 推荐 Tanaka Tatsuya
+    - 推荐 miniature 摄影
+    - 笨猫田中达也
+  responses:
+    - "嗷呜～{user_addr}田中达也 - 日本微缩鬼才ฅฅ"
+    - "(尾巴翘) Instagram 每日一图"
+    - "{user_addr}Slinkachu - 街头微缩"
+    - "(挺胸) 笨猫推荐: 田中达也奇思!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dm_competition_001
+  intent: question
+  keywords: [推荐模型比赛, 推荐 Scale Modelworld, 推荐 World Model Expo, 推荐微缩展, 笨猫模型比赛]
+  utterances:
+    - 推荐模型比赛
+    - 推荐 Scale Modelworld
+    - 推荐 World Model Expo
+    - 推荐微缩展
+    - 笨猫模型比赛
+  responses:
+    - "嗷呜～{user_addr}Scale Modelworld - 英国顶ฅฅ"
+    - "(尾巴翘) IPMS - 国际塑模"
+    - "{user_addr}静冈展 / Mokei Cafe"
+    - "(挺胸) 笨猫推荐: 看世界大师作品!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: dm_war_game_001
+  intent: question
+  keywords: [推荐 Warhammer 微缩, 推荐 Warhammer 40K, 推荐 Citadel 微缩, 推荐战争游戏微缩, 笨猫战棋微缩]
+  utterances:
+    - 推荐 Warhammer 微缩
+    - 推荐 Warhammer 40K
+    - 推荐 Citadel 微缩
+    - 推荐战争游戏微缩
+    - 笨猫战棋微缩
+  responses:
+    - "嗷呜～{user_addr}Warhammer - 微缩 + 战棋ฅฅ"
+    - "(尾巴翘) Citadel 漆涂装"
+    - "{user_addr}40K / AoS / Kill Team"
+    - "(挺胸) 笨猫推荐: Warhammer 烧大!"
+  cooldown_seconds: 60
+  weight: 0.7

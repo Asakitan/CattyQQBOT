@@ -1,0 +1,224 @@
+# 普洱 / 生普 / 熟普 / 山头 routes (S6 R203 NLU 节点扩充, 第二十周期 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 K3 tea_culture (基础) 区分: 这里专注普洱深度.
+
+- name: pe_basic_001
+  intent: question
+  keywords: [推荐普洱茶, 推荐生普, 推荐熟普, 推荐普洱新手, 笨猫普洱]
+  utterances:
+    - 推荐普洱茶
+    - 推荐生普
+    - 推荐熟普
+    - 推荐普洱新手
+    - 笨猫普洱
+  responses:
+    - "嗷呜～{user_addr}生普: 自然陈化 / 新茶刚烈ฅฅ"
+    - "(尾巴翘) 熟普: 渥堆发酵 / 温和"
+    - "{user_addr}饼 / 砖 / 沱 / 散"
+    - "(挺胸) 笨猫推荐: 新手熟普起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_mountain_001
+  intent: question
+  keywords: [推荐普洱山头, 推荐布朗, 推荐易武, 推荐冰岛, 笨猫山头茶]
+  utterances:
+    - 推荐普洱山头
+    - 推荐布朗
+    - 推荐易武
+    - 推荐冰岛
+    - 笨猫山头茶
+  responses:
+    - "嗷呜～{user_addr}冰岛 - 普洱顶级山头ฅฅ"
+    - "(尾巴翘) 易武 / 老班章 / 昔归"
+    - "{user_addr}景迈 / 南糯 / 布朗"
+    - "(挺胸) 笨猫推荐: 老班章是茶王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_oldban_001
+  intent: question
+  keywords: [推荐老班章, 推荐冰岛老寨, 推荐昔归, 推荐景迈, 笨猫老班章]
+  utterances:
+    - 推荐老班章
+    - 推荐冰岛老寨
+    - 推荐昔归
+    - 推荐景迈
+    - 笨猫老班章
+  responses:
+    - "嗷呜～{user_addr}老班章 - 茶中之王ฅฅ"
+    - "(尾巴翘) 冰岛老寨 - 冰糖甜"
+    - "{user_addr}昔归 - 临沧名片"
+    - "(挺胸) 笨猫推荐: 老班章霸气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_yiwu_001
+  intent: question
+  keywords: [推荐易武, 推荐易武正山, 推荐麻黑, 推荐刮风寨, 笨猫易武]
+  utterances:
+    - 推荐易武
+    - 推荐易武正山
+    - 推荐麻黑
+    - 推荐刮风寨
+    - 笨猫易武
+  responses:
+    - "嗷呜～{user_addr}易武 - 柔甜韵长ฅฅ"
+    - "(尾巴翘) 麻黑 / 刮风寨 / 弯弓"
+    - "{user_addr}三大易武名村"
+    - "(挺胸) 笨猫推荐: 易武是茶后!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_brand_001
+  intent: question
+  keywords: [推荐普洱品牌, 推荐大益, 推荐下关, 推荐中茶, 笨猫普洱品牌]
+  utterances:
+    - 推荐普洱品牌
+    - 推荐大益
+    - 推荐下关
+    - 推荐中茶
+    - 笨猫普洱品牌
+  responses:
+    - "嗷呜～{user_addr}大益 - 普洱龙头ฅฅ"
+    - "(尾巴翘) 下关 / 中茶 / 老同志"
+    - "{user_addr}陈升号 / 福今 - 山头精品"
+    - "(挺胸) 笨猫推荐: 大益 7542!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_aged_001
+  intent: question
+  keywords: [推荐老茶, 推荐陈年普洱, 推荐 88 青饼, 推荐红印, 笨猫老茶]
+  utterances:
+    - 推荐老茶
+    - 推荐陈年普洱
+    - 推荐 88 青饼
+    - 推荐红印
+    - 笨猫老茶
+  responses:
+    - "嗷呜～{user_addr}红印 / 蓝印 - 老茶传说ฅฅ"
+    - "(尾巴翘) 88 青饼 / 73 厚砖"
+    - "{user_addr}10 年起步 / 20 年陈"
+    - "(挺胸) 笨猫推荐: 老茶收藏热!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_storage_001
+  intent: question
+  keywords: [推荐普洱存放, 推荐普洱仓储, 推荐干仓湿仓, 推荐云南仓, 笨猫普洱存放]
+  utterances:
+    - 推荐普洱存放
+    - 推荐普洱仓储
+    - 推荐干仓湿仓
+    - 推荐云南仓
+    - 笨猫普洱存放
+  responses:
+    - "嗷呜～{user_addr}干仓 - 干燥 / 缓慢陈化ฅฅ"
+    - "(尾巴翘) 湿仓 - 快速但有霉味"
+    - "{user_addr}昆明仓 / 东莞仓 / 港仓"
+    - "(挺胸) 笨猫推荐: 自然干仓!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_brew_001
+  intent: question
+  keywords: [推荐普洱冲泡, 推荐盖碗冲泡, 推荐紫砂壶普洱, 推荐普洱投茶量, 笨猫普洱冲泡]
+  utterances:
+    - 推荐普洱冲泡
+    - 推荐盖碗冲泡
+    - 推荐紫砂壶普洱
+    - 推荐普洱投茶量
+    - 笨猫普洱冲泡
+  responses:
+    - "嗷呜～{user_addr}盖碗 8g / 100ml / 95℃ฅฅ"
+    - "(尾巴翘) 老茶用紫砂壶"
+    - "{user_addr}快出汤 - 5-10s"
+    - "(挺胸) 笨猫推荐: 多试不同手法!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_recipe_001
+  intent: question
+  keywords: [推荐 7542, 推荐 7572, 推荐普洱编号, 推荐唛号, 笨猫 7542]
+  utterances:
+    - 推荐 7542
+    - 推荐 7572
+    - 推荐普洱编号
+    - 推荐唛号
+    - 笨猫 7542
+  responses:
+    - "嗷呜～{user_addr}7542 - 75 年配方 / 4 级茶ฅฅ"
+    - "(尾巴翘) 7572 - 熟普标杆"
+    - "{user_addr}唛号: 年份+级别+厂号"
+    - "(挺胸) 笨猫推荐: 7542 大益经典!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pe_tasting_001
+  intent: question
+  keywords: [推荐普洱品鉴, 推荐普洱香气, 推荐普洱回甘, 推荐普洱苦涩, 笨猫普洱品鉴]
+  utterances:
+    - 推荐普洱品鉴
+    - 推荐普洱香气
+    - 推荐普洱回甘
+    - 推荐普洱苦涩
+    - 笨猫普洱品鉴
+  responses:
+    - "嗷呜～{user_addr}苦尽甘来 / 回甘生津ฅฅ"
+    - "(尾巴翘) 兰香 / 蜜香 / 樟香"
+    - "{user_addr}叶底 / 汤色 / 喉韵"
+    - "(挺胸) 笨猫推荐: 品鉴是境界!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_white_tea_001
+  intent: question
+  keywords: [推荐白茶, 推荐福鼎白茶, 推荐白毫银针, 推荐寿眉, 笨猫白茶]
+  utterances:
+    - 推荐白茶
+    - 推荐福鼎白茶
+    - 推荐白毫银针
+    - 推荐寿眉
+    - 笨猫白茶
+  responses:
+    - "嗷呜～{user_addr}白毫银针 - 白茶之王ฅฅ"
+    - "(尾巴翘) 白牡丹 / 贡眉 / 寿眉"
+    - "{user_addr}福鼎 / 政和 - 产区"
+    - "(挺胸) 笨猫推荐: 老白茶煮饮!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_rock_tea_001
+  intent: question
+  keywords: [推荐岩茶, 推荐武夷岩茶, 推荐大红袍, 推荐肉桂水仙, 笨猫岩茶]
+  utterances:
+    - 推荐岩茶
+    - 推荐武夷岩茶
+    - 推荐大红袍
+    - 推荐肉桂水仙
+    - 笨猫岩茶
+  responses:
+    - "嗷呜～{user_addr}大红袍 - 岩茶之王ฅฅ"
+    - "(尾巴翘) 肉桂 / 水仙 / 铁罗汉"
+    - "{user_addr}正岩 > 半岩 > 洲茶"
+    - "(挺胸) 笨猫推荐: 牛肉马肉极品!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_phoenix_001
+  intent: question
+  keywords: [推荐凤凰单丛, 推荐潮州单丛, 推荐宋种, 推荐鸭屎香, 笨猫凤凰单丛]
+  utterances:
+    - 推荐凤凰单丛
+    - 推荐潮州单丛
+    - 推荐宋种
+    - 推荐鸭屎香
+    - 笨猫凤凰单丛
+  responses:
+    - "嗷呜～{user_addr}鸭屎香 - 单丛网红ฅฅ"
+    - "(尾巴翘) 蜜兰香 / 芝兰香 / 通天香"
+    - "{user_addr}宋种 - 凤凰珍稀"
+    - "(挺胸) 笨猫推荐: 单丛香气炸!"
+  cooldown_seconds: 60
+  weight: 0.9

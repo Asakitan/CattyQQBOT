@@ -1,0 +1,224 @@
+# 高定西装 / 萨维尔街 / 那不勒斯 / 中式高定 routes (S6 R206 NLU 节点扩充, 第二十周期 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 I0 men_fashion 区分: 这里专注高级定制.
+
+- name: bs_savile_row_001
+  intent: question
+  keywords: [推荐萨维尔街, 推荐 Savile Row, 推荐 Anderson Sheppard, 推荐 Henry Poole, 笨猫萨维尔街]
+  utterances:
+    - 推荐萨维尔街
+    - 推荐 Savile Row
+    - 推荐 Anderson Sheppard
+    - 推荐 Henry Poole
+    - 笨猫萨维尔街
+  responses:
+    - "嗷呜～{user_addr}Savile Row - 英伦定制圣地ฅฅ"
+    - "(尾巴翘) Anderson & Sheppard"
+    - "{user_addr}Henry Poole / Huntsman"
+    - "(挺胸) 笨猫推荐: 一生定一套!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_naples_001
+  intent: question
+  keywords: [推荐那不勒斯西装, 推荐 Kiton, 推荐 Cesare Attolini, 推荐 Rubinacci, 笨猫那不勒斯]
+  utterances:
+    - 推荐那不勒斯西装
+    - 推荐 Kiton
+    - 推荐 Cesare Attolini
+    - 推荐 Rubinacci
+    - 笨猫那不勒斯
+  responses:
+    - "嗷呜～{user_addr}Kiton / Cesare Attolini - 顶级ฅฅ"
+    - "(尾巴翘) Rubinacci - 老牌"
+    - "{user_addr}船型驳头 / 软结构"
+    - "(挺胸) 笨猫推荐: 那不勒斯柔软!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_fabric_001
+  intent: question
+  keywords: [推荐西装面料, 推荐 Loro Piana, 推荐 Scabal, 推荐 Holland Sherry, 笨猫西装面料]
+  utterances:
+    - 推荐西装面料
+    - 推荐 Loro Piana
+    - 推荐 Scabal
+    - 推荐 Holland Sherry
+    - 笨猫西装面料
+  responses:
+    - "嗷呜～{user_addr}Loro Piana - 面料之王ฅฅ"
+    - "(尾巴翘) Scabal / Dormeuil"
+    - "{user_addr}Holland Sherry / Vitale Barberis"
+    - "(挺胸) 笨猫推荐: Loro Piana 信仰!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bs_yarn_count_001
+  intent: question
+  keywords: [推荐 Super 120s, 推荐 Super 150s, 推荐西装支数, 推荐羊毛支数, 笨猫西装支数]
+  utterances:
+    - 推荐 Super 120s
+    - 推荐 Super 150s
+    - 推荐西装支数
+    - 推荐羊毛支数
+    - 笨猫西装支数
+  responses:
+    - "嗷呜～{user_addr}Super 120s - 日常通勤ฅฅ"
+    - "(尾巴翘) Super 150s - 高级"
+    - "{user_addr}Super 180s+ - 奢华 / 易皱"
+    - "(挺胸) 笨猫推荐: 120-150s 平衡!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bs_type_001
+  intent: question
+  keywords: [推荐高定西装, 推荐 bespoke, 推荐 made to measure, 推荐 MTM, 笨猫 bespoke]
+  utterances:
+    - 推荐高定西装
+    - 推荐 bespoke
+    - 推荐 made to measure
+    - 推荐 MTM
+    - 笨猫 bespoke
+  responses:
+    - "嗷呜～{user_addr}Bespoke - 全手工高定ฅฅ"
+    - "(尾巴翘) MTM - 半定制 / 改板"
+    - "{user_addr}成衣 RTW - 量大成本低"
+    - "(挺胸) 笨猫推荐: 看预算选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_chinese_001
+  intent: question
+  keywords: [推荐中式高定, 推荐威可多, 推荐红帮裁缝, 推荐隆庆祥, 笨猫中式高定]
+  utterances:
+    - 推荐中式高定
+    - 推荐威可多
+    - 推荐红帮裁缝
+    - 推荐隆庆祥
+    - 笨猫中式高定
+  responses:
+    - "嗷呜～{user_addr}隆庆祥 / 威可多 - 老字号ฅฅ"
+    - "(尾巴翘) 红帮裁缝 - 宁波"
+    - "{user_addr}华人裁缝 - W.W. Chan 香港"
+    - "(挺胸) 笨猫推荐: 红帮历史悠久!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bs_shirt_001
+  intent: question
+  keywords: [推荐高定衬衫, 推荐 Charvet, 推荐 Turnbull Asser, 推荐 Borrelli, 笨猫高定衬衫]
+  utterances:
+    - 推荐高定衬衫
+    - 推荐 Charvet
+    - 推荐 Turnbull Asser
+    - 推荐 Borrelli
+    - 笨猫高定衬衫
+  responses:
+    - "嗷呜～{user_addr}Charvet - 巴黎衬衫王ฅฅ"
+    - "(尾巴翘) Turnbull & Asser - 伦敦"
+    - "{user_addr}Borrelli / Finamore - 那不勒斯"
+    - "(挺胸) 笨猫推荐: Charvet 极致奢!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bs_shoe_001
+  intent: question
+  keywords: [推荐定制皮鞋, 推荐 John Lobb, 推荐 Edward Green, 推荐 Berluti, 笨猫定制皮鞋]
+  utterances:
+    - 推荐定制皮鞋
+    - 推荐 John Lobb
+    - 推荐 Edward Green
+    - 推荐 Berluti
+    - 笨猫定制皮鞋
+  responses:
+    - "嗷呜～{user_addr}John Lobb - 英式之王ฅฅ"
+    - "(尾巴翘) Edward Green / Crockett"
+    - "{user_addr}Berluti - 法式涂蜡"
+    - "(挺胸) 笨猫推荐: John Lobb 定制!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bs_tie_001
+  intent: question
+  keywords: [推荐领带, 推荐 Hermes 领带, 推荐 E.G. Cappelli, 推荐七折领带, 笨猫领带]
+  utterances:
+    - 推荐领带
+    - 推荐 Hermes 领带
+    - 推荐 E.G. Cappelli
+    - 推荐七折领带
+    - 笨猫领带
+  responses:
+    - "嗷呜～{user_addr}Hermes - 法式优雅ฅฅ"
+    - "(尾巴翘) E.G. Cappelli / Sevenfold"
+    - "{user_addr}Drake's - 英伦风"
+    - "(挺胸) 笨猫推荐: Hermes 领带最稳!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bs_accessory_001
+  intent: question
+  keywords: [推荐袖扣, 推荐口袋方巾, 推荐手表表带, 推荐绅士配饰, 笨猫绅士配饰]
+  utterances:
+    - 推荐袖扣
+    - 推荐口袋方巾
+    - 推荐手表表带
+    - 推荐绅士配饰
+    - 笨猫绅士配饰
+  responses:
+    - "嗷呜～{user_addr}袖扣 - 蓝宝石 / 珍珠母ฅฅ"
+    - "(尾巴翘) 方巾: 丝质 - 三角折"
+    - "{user_addr}皮带 + 鞋同色"
+    - "(挺胸) 笨猫推荐: 配饰是灵魂!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bs_lapel_001
+  intent: question
+  keywords: [推荐西装翻领, 推荐戗驳头, 推荐平驳头, 推荐青果领, 笨猫驳领]
+  utterances:
+    - 推荐西装翻领
+    - 推荐戗驳头
+    - 推荐平驳头
+    - 推荐青果领
+    - 笨猫驳领
+  responses:
+    - "嗷呜～{user_addr}平驳头 - 单排扣商务ฅฅ"
+    - "(尾巴翘) 戗驳头 - 双排扣 / 礼服"
+    - "{user_addr}青果领 - 礼服 / 燕尾"
+    - "(挺胸) 笨猫推荐: 看场合选驳头!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bs_movie_001
+  intent: question
+  keywords: [推荐西装电影, 推荐金牌特工, 推荐 Mad Men, 推荐 GQ 男士时尚, 笨猫西装电影]
+  utterances:
+    - 推荐西装电影
+    - 推荐金牌特工
+    - 推荐 Mad Men
+    - 推荐 GQ 男士时尚
+    - 笨猫西装电影
+  responses:
+    - "嗷呜～{user_addr}金牌特工 - 萨维尔街电影ฅฅ"
+    - "(尾巴翘) Mad Men - 60 年代经典"
+    - "{user_addr}GQ / Esquire - 时尚杂志"
+    - "(挺胸) 笨猫推荐: Kingsman 必看!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bs_pitti_001
+  intent: question
+  keywords: [推荐 Pitti Uomo, 推荐意大利男装展, 推荐 menswear week, 推荐绅士搭配, 笨猫 Pitti]
+  utterances:
+    - 推荐 Pitti Uomo
+    - 推荐意大利男装展
+    - 推荐 menswear week
+    - 推荐绅士搭配
+    - 笨猫 Pitti
+  responses:
+    - "嗷呜～{user_addr}Pitti Uomo - 男装搭配奥林匹克ฅฅ"
+    - "(尾巴翘) Florence 每年 1 / 6 月"
+    - "{user_addr}街拍 sprezzatura"
+    - "(挺胸) 笨猫推荐: Pitti 看 menswear!"
+  cooldown_seconds: 60
+  weight: 0.8

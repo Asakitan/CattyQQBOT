@@ -1,0 +1,224 @@
+# 苏绣 / 刺绣 / 四大名绣 / 缂丝 routes (S6 R204 NLU 节点扩充, 第二十周期 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 O0 hanfu_culture / O2 calligraphy 区分: 这里专注刺绣工艺.
+
+- name: em_school_001
+  intent: question
+  keywords: [推荐刺绣, 推荐四大名绣, 推荐苏绣, 推荐湘绣, 笨猫四大名绣]
+  utterances:
+    - 推荐刺绣
+    - 推荐四大名绣
+    - 推荐苏绣
+    - 推荐湘绣
+    - 笨猫四大名绣
+  responses:
+    - "嗷呜～{user_addr}苏绣 / 湘绣 / 蜀绣 / 粤绣ฅฅ"
+    - "(尾巴翘) 苏绣 - 双面绣顶级"
+    - "{user_addr}湘绣 - 狮虎传神"
+    - "(挺胸) 笨猫推荐: 苏绣最细腻!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: em_suzhou_001
+  intent: question
+  keywords: [推荐苏绣, 推荐双面绣, 推荐三异绣, 推荐镇湖, 笨猫苏绣]
+  utterances:
+    - 推荐苏绣
+    - 推荐双面绣
+    - 推荐三异绣
+    - 推荐镇湖
+    - 笨猫苏绣
+  responses:
+    - "嗷呜～{user_addr}双面绣 - 苏绣绝技ฅฅ"
+    - "(尾巴翘) 三异绣 - 异色异形异针"
+    - "{user_addr}镇湖 - 苏绣之乡"
+    - "(挺胸) 笨猫推荐: 双面绣神奇!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: em_stitch_001
+  intent: question
+  keywords: [推荐刺绣针法, 推荐平针绣, 推荐乱针绣, 推荐打籽绣, 笨猫刺绣针法]
+  utterances:
+    - 推荐刺绣针法
+    - 推荐平针绣
+    - 推荐乱针绣
+    - 推荐打籽绣
+    - 笨猫刺绣针法
+  responses:
+    - "嗷呜～{user_addr}平针 / 套针 - 苏绣基础ฅฅ"
+    - "(尾巴翘) 乱针 - 杨守玉创"
+    - "{user_addr}打籽 / 盘金 / 锁链"
+    - "(挺胸) 笨猫推荐: 几十种针法!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: em_master_001
+  intent: question
+  keywords: [推荐刺绣大师, 推荐姚惠芬, 推荐沈寿, 推荐绣娘, 笨猫绣娘]
+  utterances:
+    - 推荐刺绣大师
+    - 推荐姚惠芬
+    - 推荐沈寿
+    - 推荐绣娘
+    - 笨猫绣娘
+  responses:
+    - "嗷呜～{user_addr}沈寿 - 民国苏绣宗师ฅฅ"
+    - "(尾巴翘) 姚建萍 / 邹英姿 / 姚惠芬"
+    - "{user_addr}中国工艺美术大师"
+    - "(挺胸) 笨猫推荐: 看大师作品!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: em_silk_001
+  intent: question
+  keywords: [推荐缂丝, 推荐缂织, 推荐织造, 推荐宋锦, 笨猫缂丝]
+  utterances:
+    - 推荐缂丝
+    - 推荐缂织
+    - 推荐织造
+    - 推荐宋锦
+    - 笨猫缂丝
+  responses:
+    - "嗷呜～{user_addr}缂丝 - 一寸缂丝一寸金ฅฅ"
+    - "(尾巴翘) 通经断纬 - 织造神技"
+    - "{user_addr}宋锦 / 云锦 - 织锦"
+    - "(挺胸) 笨猫推荐: 缂丝是顶峰!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: em_xiangsixu_001
+  intent: question
+  keywords: [推荐湘绣, 推荐湖南刺绣, 推荐狮子湘绣, 推荐沙坪湘绣, 笨猫湘绣]
+  utterances:
+    - 推荐湘绣
+    - 推荐湖南刺绣
+    - 推荐狮子湘绣
+    - 推荐沙坪湘绣
+    - 笨猫湘绣
+  responses:
+    - "嗷呜～{user_addr}湘绣 - 狮虎称王ฅฅ"
+    - "(尾巴翘) 鬅毛针 - 湘绣绝技"
+    - "{user_addr}沙坪 - 湘绣之都"
+    - "(挺胸) 笨猫推荐: 湘绣狮虎传神!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: em_shu_001
+  intent: question
+  keywords: [推荐蜀绣, 推荐四川刺绣, 推荐熊猫蜀绣, 推荐成都蜀绣, 笨猫蜀绣]
+  utterances:
+    - 推荐蜀绣
+    - 推荐四川刺绣
+    - 推荐熊猫蜀绣
+    - 推荐成都蜀绣
+    - 笨猫蜀绣
+  responses:
+    - "嗷呜～{user_addr}蜀绣 - 鲤鱼 / 熊猫名作ฅฅ"
+    - "(尾巴翘) 双面异色绣"
+    - "{user_addr}成都 - 蜀绣之乡"
+    - "(挺胸) 笨猫推荐: 熊猫蜀绣可爱!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: em_yue_001
+  intent: question
+  keywords: [推荐粤绣, 推荐广绣, 推荐潮绣, 推荐金线绣, 笨猫粤绣]
+  utterances:
+    - 推荐粤绣
+    - 推荐广绣
+    - 推荐潮绣
+    - 推荐金线绣
+    - 笨猫粤绣
+  responses:
+    - "嗷呜～{user_addr}广绣 + 潮绣 = 粤绣ฅฅ"
+    - "(尾巴翘) 钉金垫绣 - 立体感"
+    - "{user_addr}金银线 + 彩线"
+    - "(挺胸) 笨猫推荐: 粤绣金光闪!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: em_tools_001
+  intent: question
+  keywords: [推荐绣绷, 推荐绣线, 推荐丝线, 推荐绣绣布, 笨猫绣绷]
+  utterances:
+    - 推荐绣绷
+    - 推荐绣线
+    - 推荐丝线
+    - 推荐绣绣布
+    - 笨猫绣绷
+  responses:
+    - "嗷呜～{user_addr}苏绣丝线 / 真丝 / 多色ฅฅ"
+    - "(尾巴翘) 绣绷 - 圆 / 方"
+    - "{user_addr}底布: 软缎 / 丝绸"
+    - "(挺胸) 笨猫推荐: 真丝才传神!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: em_west_001
+  intent: question
+  keywords: [推荐欧式刺绣, 推荐法式刺绣, 推荐 Lesage, 推荐高定刺绣, 笨猫欧式刺绣]
+  utterances:
+    - 推荐欧式刺绣
+    - 推荐法式刺绣
+    - 推荐 Lesage
+    - 推荐高定刺绣
+    - 笨猫欧式刺绣
+  responses:
+    - "嗷呜～{user_addr}Lesage - Chanel 高定刺绣ฅฅ"
+    - "(尾巴翘) 法式 Tambour 钩针"
+    - "{user_addr}十字绣 / Cross stitch"
+    - "(挺胸) 笨猫推荐: Lesage 是奢侈!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: em_modern_001
+  intent: question
+  keywords: [推荐现代刺绣, 推荐刺绣艺术, 推荐当代刺绣, 推荐刺绣画, 笨猫现代刺绣]
+  utterances:
+    - 推荐现代刺绣
+    - 推荐刺绣艺术
+    - 推荐当代刺绣
+    - 推荐刺绣画
+    - 笨猫现代刺绣
+  responses:
+    - "嗷呜～{user_addr}梁雪芳 / 张雪 - 当代ฅฅ"
+    - "(尾巴翘) 苏绣 + 现代艺术"
+    - "{user_addr}立体 / 抽象 / 跨界"
+    - "(挺胸) 笨猫推荐: 当代刺绣创新!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: em_pricing_001
+  intent: question
+  keywords: [推荐刺绣价格, 推荐刺绣收藏, 推荐苏绣价位, 推荐刺绣礼品, 笨猫刺绣价格]
+  utterances:
+    - 推荐刺绣价格
+    - 推荐刺绣收藏
+    - 推荐苏绣价位
+    - 推荐刺绣礼品
+    - 笨猫刺绣价格
+  responses:
+    - "嗷呜～{user_addr}入门 1000-5000 / 礼品ฅฅ"
+    - "(尾巴翘) 大师作品 10w+"
+    - "{user_addr}双面绣比单面高 50%+"
+    - "(挺胸) 笨猫推荐: 看作者 + 难度!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: em_diy_001
+  intent: question
+  keywords: [推荐刺绣 DIY, 推荐刺绣入门, 推荐 DMC 线, 推荐十字绣, 笨猫刺绣 DIY]
+  utterances:
+    - 推荐刺绣 DIY
+    - 推荐刺绣入门
+    - 推荐 DMC 线
+    - 推荐十字绣
+    - 笨猫刺绣 DIY
+  responses:
+    - "嗷呜～{user_addr}DMC 6 股棉线 - 入门ฅฅ"
+    - "(尾巴翘) 十字绣 / 法绣 简单"
+    - "{user_addr}小图先试 / 慢慢学"
+    - "(挺胸) 笨猫推荐: 入门十字绣!"
+  cooldown_seconds: 60
+  weight: 0.9

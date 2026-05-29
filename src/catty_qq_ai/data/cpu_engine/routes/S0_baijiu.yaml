@@ -1,0 +1,207 @@
+# 白酒 / 茅台 / 五粮液 / 酱香浓香 routes (S6 R202 NLU 节点扩充, 第二十周期 1/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 N1 bartending (洋酒) 区分: 这里专注中国白酒.
+
+- name: bj_maotai_001
+  intent: question
+  keywords: [推荐茅台, 推荐飞天茅台, 推荐茅台镇, 推荐酱香茅台, 笨猫茅台]
+  utterances:
+    - 推荐茅台
+    - 推荐飞天茅台
+    - 推荐茅台镇
+    - 推荐酱香茅台
+    - 笨猫茅台
+  responses:
+    - "嗷呜～{user_addr}飞天茅台 - 白酒之王ฅฅ"
+    - "(尾巴翘) 53° / 茅台镇 / 大曲酱香"
+    - "{user_addr}年份酒 / 生肖酒 - 收藏"
+    - "(挺胸) 笨猫推荐: 飞天送礼最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bj_wuliangye_001
+  intent: question
+  keywords: [推荐五粮液, 推荐普五, 推荐尖庄, 推荐五粮液经典, 笨猫五粮液]
+  utterances:
+    - 推荐五粮液
+    - 推荐普五
+    - 推荐尖庄
+    - 推荐五粮液经典
+    - 笨猫五粮液
+  responses:
+    - "嗷呜～{user_addr}普五 - 浓香之王ฅฅ"
+    - "(尾巴翘) 第八代五粮液"
+    - "{user_addr}五粮春 / 尖庄 - 大众"
+    - "(挺胸) 笨猫推荐: 普五经典口感!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bj_aroma_001
+  intent: question
+  keywords: [推荐白酒香型, 推荐酱香型, 推荐浓香型, 推荐清香型, 笨猫白酒香型]
+  utterances:
+    - 推荐白酒香型
+    - 推荐酱香型
+    - 推荐浓香型
+    - 推荐清香型
+    - 笨猫白酒香型
+  responses:
+    - "嗷呜～{user_addr}酱香 - 茅台 / 郎酒ฅฅ"
+    - "(尾巴翘) 浓香 - 五粮液 / 泸州老窖"
+    - "{user_addr}清香 - 汾酒 / 牛栏山"
+    - "(挺胸) 笨猫推荐: 12 大香型!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bj_qing_001
+  intent: question
+  keywords: [推荐汾酒, 推荐杏花村, 推荐青花瓷汾酒, 推荐二锅头, 笨猫汾酒]
+  utterances:
+    - 推荐汾酒
+    - 推荐杏花村
+    - 推荐青花瓷汾酒
+    - 推荐二锅头
+    - 笨猫汾酒
+  responses:
+    - "嗷呜～{user_addr}青花 30 / 20 - 顶级清香ฅฅ"
+    - "(尾巴翘) 牛栏山 / 红星 - 二锅头"
+    - "{user_addr}波汾 - 性价比"
+    - "(挺胸) 笨猫推荐: 青花 30 香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bj_luzhou_001
+  intent: question
+  keywords: [推荐泸州老窖, 推荐国窖 1573, 推荐特曲, 推荐头曲, 笨猫泸州老窖]
+  utterances:
+    - 推荐泸州老窖
+    - 推荐国窖 1573
+    - 推荐特曲
+    - 推荐头曲
+    - 笨猫泸州老窖
+  responses:
+    - "嗷呜～{user_addr}国窖 1573 - 高端浓香ฅฅ"
+    - "(尾巴翘) 特曲 / 头曲 - 中端"
+    - "{user_addr}泸州老窖窖龄"
+    - "(挺胸) 笨猫推荐: 1573 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bj_lang_001
+  intent: question
+  keywords: [推荐郎酒, 推荐青花郎, 推荐红花郎, 推荐古蔺郎酒, 笨猫郎酒]
+  utterances:
+    - 推荐郎酒
+    - 推荐青花郎
+    - 推荐红花郎
+    - 推荐古蔺郎酒
+    - 笨猫郎酒
+  responses:
+    - "嗷呜～{user_addr}青花郎 - 两大酱香之一ฅฅ"
+    - "(尾巴翘) 红花郎 / 老郎酒"
+    - "{user_addr}郎酒庄园 - 古蔺"
+    - "(挺胸) 笨猫推荐: 青花郎酱香!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bj_xifeng_001
+  intent: question
+  keywords: [推荐西凤酒, 推荐董酒, 推荐凤香型, 推荐董香型, 笨猫西凤酒]
+  utterances:
+    - 推荐西凤酒
+    - 推荐董酒
+    - 推荐凤香型
+    - 推荐董香型
+    - 笨猫西凤酒
+  responses:
+    - "嗷呜～{user_addr}西凤 - 凤香型代表ฅฅ"
+    - "(尾巴翘) 董酒 - 董香型"
+    - "{user_addr}国八大名酒"
+    - "(挺胸) 笨猫推荐: 凤香口感独特!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bj_collection_001
+  intent: question
+  keywords: [推荐白酒收藏, 推荐茅台收藏, 推荐生肖酒, 推荐年份酒, 笨猫白酒收藏]
+  utterances:
+    - 推荐白酒收藏
+    - 推荐茅台收藏
+    - 推荐生肖酒
+    - 推荐年份酒
+    - 笨猫白酒收藏
+  responses:
+    - "嗷呜～{user_addr}飞天 / 5 / 10 / 15 / 30 / 50 年ฅฅ"
+    - "(尾巴翘) 生肖酒 - 限量收藏"
+    - "{user_addr}茅台五粮液 - 升值快"
+    - "(挺胸) 笨猫提醒: 真假难辨!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bj_serve_001
+  intent: question
+  keywords: [推荐白酒喝法, 推荐白酒醒酒, 推荐白酒配菜, 推荐白酒杯, 笨猫白酒喝法]
+  utterances:
+    - 推荐白酒喝法
+    - 推荐白酒醒酒
+    - 推荐白酒配菜
+    - 推荐白酒杯
+    - 笨猫白酒喝法
+  responses:
+    - "嗷呜～{user_addr}白酒杯 - 小盅 / 闻香ฅฅ"
+    - "(尾巴翘) 醒酒 - 倒入闻香杯"
+    - "{user_addr}配中餐 / 热菜油腻"
+    - "(挺胸) 笨猫提醒: 别喝太多!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bj_baijiu_cocktail_001
+  intent: question
+  keywords: [推荐白酒鸡尾酒, 推荐茅台调饮, 推荐白酒西餐, 推荐 baijiu mixology, 笨猫白酒鸡尾酒]
+  utterances:
+    - 推荐白酒鸡尾酒
+    - 推荐茅台调饮
+    - 推荐白酒西餐
+    - 推荐 baijiu mixology
+    - 笨猫白酒鸡尾酒
+  responses:
+    - "嗷呜～{user_addr}茅台 + 冰 + 柠檬ฅฅ"
+    - "(尾巴翘) 海外 baijiu cocktail 流行"
+    - "{user_addr}文君 / 五粮液 - 调饮款"
+    - "(挺胸) 笨猫推荐: 创新喝法!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bj_identify_001
+  intent: question
+  keywords: [推荐白酒鉴别, 推荐茅台真假, 推荐五粮液真假, 推荐白酒查验, 笨猫白酒鉴别]
+  utterances:
+    - 推荐白酒鉴别
+    - 推荐茅台真假
+    - 推荐五粮液真假
+    - 推荐白酒查验
+    - 笨猫白酒鉴别
+  responses:
+    - "嗷呜～{user_addr}茅台扫码验真ฅฅ"
+    - "(尾巴翘) 防伪标 / 序列号"
+    - "{user_addr}飞天瓶子 / 红字"
+    - "(挺胸) 笨猫的提醒: 别贪便宜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bj_other_brand_001
+  intent: question
+  keywords: [推荐剑南春, 推荐水井坊, 推荐古井贡, 推荐洋河, 笨猫剑南春]
+  utterances:
+    - 推荐剑南春
+    - 推荐水井坊
+    - 推荐古井贡
+    - 推荐洋河
+    - 笨猫剑南春
+  responses:
+    - "嗷呜～{user_addr}剑南春 / 水井坊 - 浓香ฅฅ"
+    - "(尾巴翘) 洋河 / 双沟 - 苏酒"
+    - "{user_addr}古井贡 - 安徽 / 老八大"
+    - "(挺胸) 笨猫推荐: 剑南春性价比!"
+  cooldown_seconds: 60
+  weight: 0.8
