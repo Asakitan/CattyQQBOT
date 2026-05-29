@@ -1,0 +1,207 @@
+# 宠物 / 养猫 / 养狗 / 宠物用品 routes (S6 R151 NLU 节点扩充, 第十四周期 buffered 10/10 完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟笨猫人格高度契合 (笨猫本身猫亚人, 对宠物话题天然亲切).
+
+- name: pet_cat_breed_001
+  intent: question
+  keywords: [推荐猫品种, 推荐养猫, 推荐英短, 推荐布偶, 笨猫品种]
+  utterances:
+    - 推荐猫品种
+    - 推荐养猫
+    - 推荐英短
+    - 推荐布偶
+    - 笨猫品种
+  responses:
+    - "嗷呜～{user_addr}英短 / 美短 - 新手友好ฅฅ"
+    - "(尾巴翘) 布偶 / 缅因 - 大型温顺"
+    - "{user_addr}橘猫 / 狸花 - 国民田园猫"
+    - "(挺胸) 人家虽然不是猫, 但同源! 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.2
+
+- name: pet_dog_breed_001
+  intent: question
+  keywords: [推荐狗品种, 推荐养狗, 推荐金毛, 推荐柯基, 笨猫养狗]
+  utterances:
+    - 推荐狗品种
+    - 推荐养狗
+    - 推荐金毛
+    - 推荐柯基
+    - 笨猫养狗
+  responses:
+    - "嗷呜～{user_addr}金毛 / 拉布拉多 - 暖男ฅฅ"
+    - "(尾巴翘) 柯基 / 比熊 - 小型可爱"
+    - "{user_addr}哈士奇 / 萨摩耶 - 拆家警告"
+    - "(挺胸) 笨猫的提醒: 二哈别养! 太能拆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_cat_food_001
+  intent: question
+  keywords: [推荐猫粮, 推荐主食猫粮, 推荐冠能, 推荐皇家, 笨猫猫粮]
+  utterances:
+    - 推荐猫粮
+    - 推荐主食猫粮
+    - 推荐冠能
+    - 推荐皇家
+    - 笨猫猫粮
+  responses:
+    - "嗷呜～{user_addr}进口: 渴望 / 巅峰 / Orijenฅฅ"
+    - "(尾巴翘) 性价比: 爱肯拿 / 福摩 / GO"
+    - "{user_addr}国产: 网易严选 / 凡赛斯"
+    - "(挺胸) 笨猫推荐: 看营养标签 + 粗蛋白 ≥ 30!"
+  cooldown_seconds: 60
+  weight: 1.1
+
+- name: pet_dog_food_001
+  intent: question
+  keywords: [推荐狗粮, 推荐皇家狗粮, 推荐麦富迪, 推荐狗罐头, 笨猫狗粮]
+  utterances:
+    - 推荐狗粮
+    - 推荐皇家狗粮
+    - 推荐麦富迪
+    - 推荐狗罐头
+    - 笨猫狗粮
+  responses:
+    - "嗷呜～{user_addr}进口: 渴望 / 巅峰 / 福摩ฅฅ"
+    - "(尾巴翘) 性价比: 麦富迪 / 比瑞吉"
+    - "{user_addr}处方粮 - 看医生指导"
+    - "(挺胸) 笨猫的提醒: 别喂人食! 盐分高"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_litter_001
+  intent: question
+  keywords: [推荐猫砂, 推荐豆腐猫砂, 推荐膨润土, 推荐混合砂, 笨猫猫砂]
+  utterances:
+    - 推荐猫砂
+    - 推荐豆腐猫砂
+    - 推荐膨润土
+    - 推荐混合砂
+    - 笨猫猫砂
+  responses:
+    - "嗷呜～{user_addr}豆腐: 环保 / 可冲马桶 / 但贵ฅฅ"
+    - "(尾巴翘) 膨润土: 结团好 / 但粉尘多"
+    - "{user_addr}混合砂: 兼顾两者 - 主流推荐"
+    - "(挺胸) 笨猫推荐: 混合砂最实用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_litter_box_001
+  intent: question
+  keywords: [推荐猫砂盆, 推荐自动猫砂盆, 推荐 catlink, 推荐 PetKit, 笨猫砂盆]
+  utterances:
+    - 推荐猫砂盆
+    - 推荐自动猫砂盆
+    - 推荐 catlink
+    - 推荐 PetKit
+    - 笨猫砂盆
+  responses:
+    - "嗷呜～{user_addr}手动: 全封闭 + 双层结构ฅฅ"
+    - "(尾巴翘) 自动: CatLink / PetKit / Litter-Robot"
+    - "{user_addr}注意: 大空间 / 多猫家庭至少 2-3 个"
+    - "(挺胸) 笨猫推荐: 自动盆解放双手!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pet_water_001
+  intent: question
+  keywords: [推荐宠物饮水机, 推荐喂食器, 推荐自动喂食, 推荐宠物水机, 笨猫饮水机]
+  utterances:
+    - 推荐宠物饮水机
+    - 推荐喂食器
+    - 推荐自动喂食
+    - 推荐宠物水机
+    - 笨猫饮水机
+  responses:
+    - "嗷呜～{user_addr}饮水机: 小佩 / 米家 / 霍曼ฅฅ"
+    - "(尾巴翘) 自动喂食: 定时 + 定量"
+    - "{user_addr}重点: 滤芯定期换 / 别懒"
+    - "(挺胸) 笨猫的提醒: 流水机猫更爱喝!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pet_health_001
+  intent: question
+  keywords: [推荐宠物疫苗, 推荐驱虫, 推荐宠物体检, 推荐绝育, 笨猫体检]
+  utterances:
+    - 推荐宠物疫苗
+    - 推荐驱虫
+    - 推荐宠物体检
+    - 推荐绝育
+    - 笨猫体检
+  responses:
+    - "嗷呜～{user_addr}疫苗: 猫三联 / 狂犬 - 每年ฅฅ"
+    - "(尾巴翘) 体内外驱虫 - 每月 / 每季"
+    - "{user_addr}绝育 6-8 月龄 - 减少疾病"
+    - "(挺胸) 笨猫的提醒: 体检每年一次!"
+  cooldown_seconds: 60
+  weight: 1.1
+
+- name: pet_toy_001
+  intent: question
+  keywords: [推荐猫玩具, 推荐逗猫棒, 推荐狗玩具, 推荐磨牙棒, 笨猫玩具]
+  utterances:
+    - 推荐猫玩具
+    - 推荐逗猫棒
+    - 推荐狗玩具
+    - 推荐磨牙棒
+    - 笨猫玩具
+  responses:
+    - "嗷呜～{user_addr}猫: 逗猫棒 / 激光笔 / 隧道ฅฅ"
+    - "(尾巴翘) 狗: 磨牙棒 / 漏食球 / 拉扯绳"
+    - "{user_addr}注意: 别买太小的 - 误吞危险"
+    - "(挺胸) 笨猫推荐: 多换玩具! 别玩腻"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pet_groom_001
+  intent: question
+  keywords: [推荐宠物美容, 推荐剪指甲, 推荐刷牙, 推荐洗澡, 笨猫美容]
+  utterances:
+    - 推荐宠物美容
+    - 推荐剪指甲
+    - 推荐刷牙
+    - 推荐洗澡
+    - 笨猫美容
+  responses:
+    - "嗷呜～{user_addr}猫: 短毛勤梳 / 长毛每天理ฅฅ"
+    - "(尾巴翘) 狗: 1-2 周洗澡 / 看脏度"
+    - "{user_addr}剪指甲: 月 1-2 次 / 别剪到血线"
+    - "(挺胸) 笨猫推荐: 刷牙防牙结石!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pet_train_001
+  intent: question
+  keywords: [推荐训狗, 推荐训猫, 推荐宠物训练, 推荐响片, 笨猫训练]
+  utterances:
+    - 推荐训狗
+    - 推荐训猫
+    - 推荐宠物训练
+    - 推荐响片
+    - 笨猫训练
+  responses:
+    - "嗷呜～{user_addr}响片训练: 正向激励主流ฅฅ"
+    - "(尾巴翘) 狗: 坐 / 卧 / 握手 / 定点便溺"
+    - "{user_addr}猫训不动... 顺其自然 (摇头)"
+    - "(挺胸) 笨猫提醒: 别打骂! 会信任崩"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pet_pension_001
+  intent: question
+  keywords: [推荐宠物保险, 推荐宠物医院, 推荐宠物医生, 推荐宠物急救, 笨猫宠物医院]
+  utterances:
+    - 推荐宠物保险
+    - 推荐宠物医院
+    - 推荐宠物医生
+    - 推荐宠物急救
+    - 笨猫宠物医院
+  responses:
+    - "嗷呜～{user_addr}保险: 平安宠安行 / 蚂蚁宠物险ฅฅ"
+    - "(尾巴翘) 医院选连锁 / 看资质 / 别去黑诊所"
+    - "{user_addr}急救热线: 24h / 提前存号"
+    - "(挺胸) 笨猫的提醒: 保险买年纪小的!"
+  cooldown_seconds: 60
+  weight: 0.9
