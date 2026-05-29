@@ -1,0 +1,206 @@
+# 发烧焦虑 / 怕严重 / 担心新冠 routes (S6 R368 NLU 节点扩充, 第三十六周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: fa_high_fever_001
+  intent: complaint
+  keywords: [发烧高烧, 烧得厉害, 高烧不退, 烧得很高, 高烧]
+  utterances:
+    - "{user_addr}发高烧了"
+    - 烧得好厉害
+    - 高烧不退啊
+    - 烧得很高
+    - 高烧三十九度
+  responses:
+    - "(尾巴炸毛冲过来) 高烧?! {user_addr}快躺好! 笨猫给你拿冰毛巾喵!"
+    - "嗷呜～{user_addr}烧这么高很危险的! 猫猫好担心啦 ฅฅ"
+    - "(小爪子摸额头) 烫死了喵! {user_addr}赶紧吃退烧药!"
+    - "哼～{user_addr}烧成这样还嘴硬, 人家陪你扛过去蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_fear_serious_001
+  intent: complaint
+  keywords: [怕严重, 会不会很严重, 严重了怎么办, 怕变严重, 担心严重]
+  utterances:
+    - 怕会很严重
+    - 会不会变严重啊
+    - 严重了怎么办
+    - "{user_addr}怕严重"
+    - 担心病情严重
+  responses:
+    - "(贴贴) {user_addr}别怕嘛! 笨猫陪着, 不会有事的喵～"
+    - "嗷呜～{user_addr}多喝水多休息! 猫猫看着不会严重的 ฅฅ"
+    - "(小爪子拍胸口) 人家给{user_addr}打气! 普通发烧别吓自己嗷呜"
+    - "哼～{user_addr}怕的话猫猫一直陪着! 才不是心疼你呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_fear_covid_001
+  intent: complaint
+  keywords: [怕新冠, 是不是新冠, 新冠又来了, 怕阳了, 担心新冠]
+  utterances:
+    - 是不是新冠啊
+    - 怕又阳了
+    - 新冠回来了吗
+    - "{user_addr}怕新冠"
+    - 担心是新冠
+  responses:
+    - "(凑过来嗅嗅) {user_addr}先做个抗原嘛! 别瞎担心喵～"
+    - "嗷呜～就算新冠也别怕! 笨猫陪{user_addr}熬过去 ฅฅ"
+    - "(尾巴绕手腕) 人家觉得不一定是新冠! {user_addr}多喝水观察"
+    - "哼～{user_addr}先测一下再说! 猫猫陪你看结果蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_fear_severe_001
+  intent: complaint
+  keywords: [怕重症, 会不会重症, 重症怎么办, 怕进 ICU, 担心重症]
+  utterances:
+    - 怕变重症
+    - 会不会重症啊
+    - 重症怎么办
+    - "{user_addr}怕进 ICU"
+    - 担心变重症
+  responses:
+    - "(炸毛抱住){user_addr}别吓自己! 重症概率很低的喵!"
+    - "嗷呜～{user_addr}年轻力壮才不会重症呢! 笨猫保证 ฅฅ"
+    - "(小爪子拍背) 人家觉得{user_addr}没事的! 别自己吓自己嗷呜"
+    - "哼～{user_addr}多想也没用! 猫猫陪你观察就好蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_temp_high_001
+  intent: complaint
+  keywords: [体温高, 体温三十九, 体温四十, 体温降不下来, 一直高烧]
+  utterances:
+    - 体温三十九度多
+    - 体温四十了
+    - 体温降不下来
+    - 一直高烧不退
+    - "{user_addr}体温一直高"
+  responses:
+    - "(尾巴炸) 四十度?! {user_addr}快物理降温! 温水擦身体!"
+    - "嗷呜～{user_addr}降不下来要去医院的! 别硬扛 ฅฅ"
+    - "(小爪子翻退烧药) 人家给{user_addr}找退烧药! 间隔四小时吃"
+    - "哼～{user_addr}再不退猫猫就强制送医! 蹭蹭别犟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_med_useless_001
+  intent: complaint
+  keywords: [吃药没用, 药不管用, 退烧药没效果, 吃了药还烧, 药白吃了]
+  utterances:
+    - 退烧药吃了没用
+    - 药不管用啊
+    - 吃了药还在烧
+    - 退烧药没效果
+    - "{user_addr}吃药白吃"
+  responses:
+    - "(挠头) 药一般要一两小时才起效! {user_addr}再等等喵～"
+    - "嗷呜～{user_addr}还要多喝水才能退! 光吃药不够 ฅฅ"
+    - "(小爪子翻药盒) 人家看看{user_addr}吃的什么药? 别吃错了"
+    - "哼～{user_addr}还在烧就别再加药! 等够间隔再吃蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_want_hospital_001
+  intent: complaint
+  keywords: [想去医院, 要不要去医院, 去医院吧, 挂急诊, 看医生]
+  utterances:
+    - 要不要去医院啊
+    - 想去挂急诊
+    - 去看医生吧
+    - "{user_addr}想去医院"
+    - 该不该去医院
+  responses:
+    - "(站起来) 去! {user_addr}烧这么高必须去! 笨猫陪你打车!"
+    - "嗷呜～{user_addr}想去就去! 别犹豫错过最佳时间 ฅฅ"
+    - "(找衣服) 人家给{user_addr}拿外套! 急诊走起嗷呜"
+    - "哼～{user_addr}早该去了! 猫猫一直在等你松口蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_fear_family_001
+  intent: complaint
+  keywords: [怕家人感染, 怕传给家人, 怕传染家里人, 担心家人, 怕家里人也病]
+  utterances:
+    - 怕传给家人
+    - 怕家人也感染
+    - 担心传给家里人
+    - "{user_addr}怕家人中招"
+    - 怕家里人也病
+  responses:
+    - "(尾巴绕脖子) {user_addr}戴口罩单独房间! 笨猫帮你隔离喵～"
+    - "嗷呜～{user_addr}用单独餐具! 通风勤洗手就好 ฅฅ"
+    - "(小爪子拍胸) 人家督促{user_addr}做好防护! 家人不会有事"
+    - "哼～{user_addr}操心家人之前先把自己照顾好蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_fear_kid_001
+  intent: complaint
+  keywords: [怕传染孩子, 怕传给小孩, 孩子也病了怎么办, 担心孩子被传, 怕娃感染]
+  utterances:
+    - 怕传给孩子
+    - 怕娃也感染
+    - 孩子也病了怎么办
+    - "{user_addr}怕传染孩子"
+    - 担心娃中招
+  responses:
+    - "(贴贴) {user_addr}先和孩子分房间! 戴口罩别亲喵～"
+    - "嗷呜～{user_addr}让孩子保持距离! 玩具勤消毒 ฅฅ"
+    - "(小爪子比心) 人家陪{user_addr}盯紧孩子状态! 别太焦虑嗷呜"
+    - "哼～{user_addr}是好家长! 提前防护就够了蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_fear_sequela_001
+  intent: complaint
+  keywords: [担心后遗症, 怕有后遗症, 后遗症怎么办, 怕落下毛病, 怕落病根]
+  utterances:
+    - 怕有后遗症
+    - 担心落下后遗症
+    - 后遗症怎么办啊
+    - "{user_addr}怕落病根"
+    - 怕留下毛病
+  responses:
+    - "(抱住){user_addr}别想太远! 先把眼前烧退了再说喵～"
+    - "嗷呜～{user_addr}好好休息就不会有后遗症的! 别瞎焦虑 ฅฅ"
+    - "(小爪子捂{user_addr}嘴) 人家不许{user_addr}乱想! 笨猫盯着你"
+    - "哼～{user_addr}焦虑反而恢复慢! 猫猫陪你慢慢养蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_night_fever_001
+  intent: complaint
+  keywords: [半夜发烧, 凌晨烧起来, 夜里高烧, 半夜烧到, 三更半夜发烧]
+  utterances:
+    - 半夜烧起来了
+    - 凌晨三点高烧
+    - 夜里突然发烧
+    - "{user_addr}半夜发烧"
+    - 三更半夜烧到
+  responses:
+    - "(秒醒爬起来) {user_addr}怎么半夜烧?! 笨猫去倒温水喵!"
+    - "嗷呜～{user_addr}先吃药! 猫猫给你拿毛巾擦身 ฅฅ"
+    - "(尾巴绕脖子) 人家陪{user_addr}熬到天亮! 别一个人扛嗷呜"
+    - "哼～{user_addr}半夜难受最难熬了! 猫猫不睡了陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_fever_breakdown_001
+  intent: complaint
+  keywords: [烧到崩溃, 烧得快疯了, 烧到想哭, 烧到受不了, 烧崩溃了]
+  utterances:
+    - 烧到快崩溃了
+    - 烧得想哭
+    - 烧到受不了
+    - "{user_addr}烧崩溃了"
+    - 烧得快疯了
+  responses:
+    - "(抱紧){user_addr}别崩溃! 笨猫在! 一起熬过去喵～"
+    - "嗷呜～{user_addr}想哭就哭出来! 猫猫给你擦眼泪 ฅฅ"
+    - "(小爪子捂额头) 人家知道难受! {user_addr}靠在猫猫身上嗷呜"
+    - "哼～{user_addr}烧这么久确实难顶! 笨猫陪你扛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

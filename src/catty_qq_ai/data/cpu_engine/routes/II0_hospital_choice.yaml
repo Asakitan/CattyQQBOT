@@ -1,0 +1,206 @@
+# 医院选择 / 三甲 / 专科 routes (S6 R362 NLU 节点扩充, 第三十六周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: hc_top_beijing_001
+  intent: question
+  keywords: [推荐三甲医院, 推荐北京协和, 推荐协和医院, 推荐北京三甲, 笨猫北京三甲]
+  utterances:
+    - 推荐三甲医院
+    - 推荐北京协和
+    - 推荐协和医院
+    - 推荐北京三甲
+    - 笨猫北京三甲
+  responses:
+    - "嗷呜～{user_addr}北京协和 - 综合 No.1ฅฅ"
+    - "(尾巴翘) 301 解放军总院 / 北大人民"
+    - "{user_addr}华西 / 中山 - 全国 Top5"
+    - "(挺胸) 笨猫推荐: 协和疑难杂症!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_top_shanghai_001
+  intent: question
+  keywords: [推荐上海三甲, 推荐瑞金医院, 推荐华山医院, 推荐中山医院, 笨猫上海三甲]
+  utterances:
+    - 推荐上海三甲
+    - 推荐瑞金医院
+    - 推荐华山医院
+    - 推荐中山医院
+    - 笨猫上海三甲
+  responses:
+    - "嗷呜～{user_addr}瑞金 / 华山 / 中山ฅฅ"
+    - "(尾巴翘) 仁济 / 第六人民 / 长海"
+    - "{user_addr}华山神经 / 瑞金内分泌强"
+    - "(挺胸) 笨猫推荐: 上海医疗顶级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_specialty_001
+  intent: question
+  keywords: [推荐专科医院, 推荐北医三院, 推荐积水潭, 推荐同仁医院, 笨猫专科医院]
+  utterances:
+    - 推荐专科医院
+    - 推荐北医三院
+    - 推荐积水潭
+    - 推荐同仁医院
+    - 笨猫专科医院
+  responses:
+    - "嗷呜～{user_addr}北医三院 - 运动医学骨科ฅฅ"
+    - "(尾巴翘) 积水潭 - 骨科 / 同仁 - 眼科"
+    - "{user_addr}阜外 - 心血管 / 安贞 - 心脏"
+    - "(挺胸) 笨猫推荐: 专科>综合!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_app_001
+  intent: question
+  keywords: [推荐挂号 app, 推荐京医通, 推荐好大夫, 推荐微医, 笨猫挂号 app]
+  utterances:
+    - "推荐挂号 app"
+    - 推荐京医通
+    - 推荐好大夫
+    - 推荐微医
+    - "笨猫挂号 app"
+  responses:
+    - "嗷呜～{user_addr}京医通 - 北京官方ฅฅ"
+    - "(尾巴翘) 好大夫在线 - 全国问诊"
+    - "{user_addr}微医 / 平安好医生"
+    - "(挺胸) 笨猫推荐: 京医通早 7 点放号!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hc_branch_001
+  intent: question
+  keywords: [推荐三甲分院, 推荐协和西院, 推荐 301 海南分院, 推荐华西分院, 笨猫三甲分院]
+  utterances:
+    - 推荐三甲分院
+    - 推荐协和西院
+    - "推荐 301 海南分院"
+    - 推荐华西分院
+    - 笨猫三甲分院
+  responses:
+    - "嗷呜～{user_addr}协和西院 / 东院ฅฅ"
+    - "(尾巴翘) 301 海南分院 - 体检疗养"
+    - "{user_addr}分院更好挂 / 同等水准"
+    - "(挺胸) 笨猫推荐: 主院挂不到挂分院!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: hc_pediatric_001
+  intent: question
+  keywords: [推荐儿科医院, 推荐北京儿研所, 推荐复旦儿科, 推荐上海儿童医院, 笨猫儿科医院]
+  utterances:
+    - 推荐儿科医院
+    - 推荐北京儿研所
+    - 推荐复旦儿科
+    - 推荐上海儿童医院
+    - 笨猫儿科医院
+  responses:
+    - "嗷呜～{user_addr}北京儿研所 / 儿童医院ฅฅ"
+    - "(尾巴翘) 复旦附属儿科 - 上海 No.1"
+    - "{user_addr}广州妇儿 / 重庆儿童"
+    - "(挺胸) 笨猫推荐: 儿科找专科!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_obgyn_001
+  intent: question
+  keywords: [推荐妇产医院, 推荐协和妇产, 推荐北京妇产, 推荐红房子, 笨猫妇产医院]
+  utterances:
+    - 推荐妇产医院
+    - 推荐协和妇产
+    - 推荐北京妇产
+    - 推荐红房子
+    - 笨猫妇产医院
+  responses:
+    - "嗷呜～{user_addr}协和妇产 - 全国 No.1ฅฅ"
+    - "(尾巴翘) 北京妇产 / 上海红房子"
+    - "{user_addr}广州妇儿 / 中山一院"
+    - "(挺胸) 笨猫推荐: 协和妇产疑难!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_oncology_001
+  intent: question
+  keywords: [推荐肿瘤医院, 推荐中科院肿瘤, 推荐复旦肿瘤, 推荐天津肿瘤, 笨猫肿瘤医院]
+  utterances:
+    - 推荐肿瘤医院
+    - 推荐中科院肿瘤
+    - 推荐复旦肿瘤
+    - 推荐天津肿瘤
+    - 笨猫肿瘤医院
+  responses:
+    - "嗷呜～{user_addr}中科院肿瘤 - 北京 No.1ฅฅ"
+    - "(尾巴翘) 复旦肿瘤 / 天津肿瘤"
+    - "{user_addr}中山大学肿瘤 - 华南"
+    - "(挺胸) 笨猫推荐: 肿瘤一定专科!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_foreign_001
+  intent: question
+  keywords: [推荐外资医院, 推荐和睦家, 推荐美中宜和, 推荐莱佛士, 笨猫外资医院]
+  utterances:
+    - 推荐外资医院
+    - 推荐和睦家
+    - 推荐美中宜和
+    - 推荐莱佛士
+    - 笨猫外资医院
+  responses:
+    - "嗷呜～{user_addr}和睦家 - 高端外资ฅฅ"
+    - "(尾巴翘) 美中宜和 / 莱佛士 / 嘉会"
+    - "{user_addr}贵但服务好 / 有英文医生"
+    - "(挺胸) 笨猫推荐: 高端医保覆盖!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: hc_scalper_001
+  intent: question
+  keywords: [推荐挂号黄牛防骗, 推荐黄牛识别, 推荐挂号防骗, 推荐官方挂号, 笨猫挂号防骗]
+  utterances:
+    - 推荐挂号黄牛防骗
+    - 推荐黄牛识别
+    - 推荐挂号防骗
+    - 推荐官方挂号
+    - 笨猫挂号防骗
+  responses:
+    - "嗷呜～{user_addr}黄牛违法 / 不要找ฅฅ"
+    - "(尾巴翘) 官方 app / 公众号"
+    - "{user_addr}早 7 点蹲 / 加号 / 特需"
+    - "(挺胸) 笨猫推荐: 多刷不要私聊!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hc_medicare_001
+  intent: question
+  keywords: [推荐异地医保, 推荐跨省医保, 推荐医保备案, 推荐异地就医, 笨猫异地医保]
+  utterances:
+    - 推荐异地医保
+    - 推荐跨省医保
+    - 推荐医保备案
+    - 推荐异地就医
+    - 笨猫异地医保
+  responses:
+    - "嗷呜～{user_addr}国家医保 app 备案ฅฅ"
+    - "(尾巴翘) 备案后直接结算"
+    - "{user_addr}急诊不用备案 / 普通要"
+    - "(挺胸) 笨猫推荐: 提前 app 办备案!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hc_rating_001
+  intent: question
+  keywords: [推荐医院评级, 推荐三甲评级, 推荐复旦排行榜, 推荐医院榜单, 笨猫医院评级]
+  utterances:
+    - 推荐医院评级
+    - 推荐三甲评级
+    - 推荐复旦排行榜
+    - 推荐医院榜单
+    - 笨猫医院评级
+  responses:
+    - "嗷呜～{user_addr}复旦版 - 最权威ฅฅ"
+    - "(尾巴翘) 三甲 / 三乙 / 二甲 等级"
+    - "{user_addr}看专科榜不看综合榜"
+    - "(挺胸) 笨猫推荐: 复旦专科排行准!"
+  cooldown_seconds: 60
+  weight: 0.8

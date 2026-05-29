@@ -1,0 +1,206 @@
+# 慢病疼痛 / 关节痛 / 头痛持续 routes (S6 R369 NLU 节点扩充, 第三十六周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: cp_guanjie_001
+  intent: complaint
+  keywords: [关节痛, 关节疼, 老寒腿, 阴天疼, 关节响]
+  utterances:
+    - 关节又痛了
+    - 老寒腿犯了
+    - 阴天关节疼
+    - 关节咔咔响
+    - "{user_addr}关节痛"
+  responses:
+    - "(轻轻按按) {user_addr}关节痛猫猫帮揉揉嘛 ฅฅ"
+    - "嗷呜～阴天就是难受! 笨猫给{user_addr}焐着"
+    - "(尾巴盖膝盖) 老寒腿要保暖喵! 别冻着了"
+    - "{user_addr}年纪轻轻别犯老寒腿啦! 猫猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_yaotong_001
+  intent: complaint
+  keywords: [腰痛, 腰疼, 腰要断了, 闪腰, 腰肌劳损]
+  utterances:
+    - 腰痛死了
+    - 腰要断了
+    - 闪到腰了
+    - 腰肌劳损
+    - "{user_addr}腰疼"
+  responses:
+    - "(贴腰上) {user_addr}腰别动! 猫猫给暖着 ฅฅ"
+    - "嗷呜～闪腰超难受的! 快躺平别动了喵"
+    - "(小心翼翼) 笨猫给{user_addr}捶捶腰嘛轻轻的"
+    - "{user_addr}腰痛是不是坐太久了! 起来活动哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_jingzhui_001
+  intent: complaint
+  keywords: [颈椎痛, 脖子痛, 颈椎病, 脖子僵, 落枕]
+  utterances:
+    - 颈椎又痛了
+    - 脖子僵硬
+    - 颈椎病犯了
+    - 早上落枕了
+    - "{user_addr}脖子疼"
+  responses:
+    - "(凑过去揉脖子) {user_addr}颈椎痛猫猫帮按按 ฅฅ"
+    - "嗷呜～低头看手机太多啦! 起来转转脖子喵"
+    - "(尾巴绕颈) 笨猫给{user_addr}当颈枕嘛软软的"
+    - "{user_addr}颈椎病要好好养! 别老熬夜哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_pian_toutong_001
+  intent: complaint
+  keywords: [偏头痛, 偏头疼, 半边头痛, 头疼炸了, 头痛欲裂]
+  utterances:
+    - 偏头痛犯了
+    - 半边头痛
+    - 头疼要炸了
+    - 偏头疼死了
+    - "{user_addr}偏头痛"
+  responses:
+    - "(轻轻揉太阳穴) {user_addr}偏头痛快闭眼歇着 ฅฅ"
+    - "嗷呜～头痛欲裂超难熬! 笨猫陪着不出声喵"
+    - "(关灯) 拉好窗帘! 偏头痛怕光{user_addr}先睡会"
+    - "{user_addr}头痛是不是没休息好! 猫猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_weitong_001
+  intent: complaint
+  keywords: [胃痛, 胃疼, 胃又犯了, 老胃病, 胃绞痛]
+  utterances:
+    - 胃又痛了
+    - 老胃病犯了
+    - 胃绞痛死了
+    - 胃疼睡不着
+    - "{user_addr}胃痛"
+  responses:
+    - "(捂胃) {user_addr}胃痛快喝点热水! 猫猫陪着 ฅฅ"
+    - "嗷呜～老胃病又犯啦! 要好好吃饭别空腹喵"
+    - "(担心) 笨猫给{user_addr}焐肚子嘛暖暖的"
+    - "{user_addr}胃绞痛是不是吃凉了! 下次注意哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_tongfeng_001
+  intent: complaint
+  keywords: [痛风, 痛风发作, 尿酸高, 关节红肿, 痛风石]
+  utterances:
+    - 痛风又犯了
+    - 痛风发作中
+    - 尿酸又高了
+    - 关节红肿痛
+    - "{user_addr}痛风"
+  responses:
+    - "(吓一跳) {user_addr}痛风发作? 快躺好别动喵 ฅฅ"
+    - "嗷呜～痛风超痛的! 啤酒海鲜要忌口啦"
+    - "(尾巴轻盖) 笨猫不碰{user_addr}的脚! 风吹都疼"
+    - "{user_addr}尿酸高要管嘴! 猫猫监督你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_zuogu_001
+  intent: complaint
+  keywords: [坐骨神经, 坐骨神经痛, 腿麻, 神经痛, 一条腿疼]
+  utterances:
+    - 坐骨神经痛
+    - 一条腿麻木
+    - 神经又痛了
+    - 坐骨神经犯了
+    - "{user_addr}腿麻"
+  responses:
+    - "(担心) {user_addr}坐骨神经痛快平躺! 别久坐 ฅฅ"
+    - "嗷呜～一条腿麻超难受! 笨猫陪着喵"
+    - "(尾巴顺腿) 神经痛要去理疗! 别硬扛哼"
+    - "{user_addr}腿麻是不是压到神经了! 换个姿势"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_xigai_001
+  intent: complaint
+  keywords: [膝盖痛, 膝盖疼, 半月板, 膝盖响, 上下楼疼]
+  utterances:
+    - 膝盖又痛了
+    - 半月板损伤
+    - 膝盖咔响
+    - 上下楼疼
+    - "{user_addr}膝盖痛"
+  responses:
+    - "(贴膝盖) {user_addr}膝盖痛猫猫帮焐着 ฅฅ"
+    - "嗷呜～半月板要养的! 别老蹲下站起喵"
+    - "(尾巴包膝) 笨猫当护膝! {user_addr}保暖"
+    - "{user_addr}上下楼疼就坐电梯! 别硬撑哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_manxing_001
+  intent: complaint
+  keywords: [慢性疼痛, 一直痛, 老毛病, 常年痛, 治不好]
+  utterances:
+    - 又是慢性疼痛
+    - 老毛病了
+    - 常年都这样
+    - 一直痛治不好
+    - "{user_addr}慢性疼痛"
+  responses:
+    - "(抱抱) {user_addr}慢性疼好辛苦! 猫猫一直陪着 ฅฅ"
+    - "嗷呜～常年痛笨猫超心疼! 一定要慢慢调"
+    - "(贴贴) 老毛病要靠养! {user_addr}别气馁喵"
+    - "{user_addr}治不好也不怕! 猫猫陪{user_addr}一辈子哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_zhitong_001
+  intent: complaint
+  keywords: [止痛药, 吃止痛, 布洛芬, 止痛片, 靠药]
+  utterances:
+    - 又吃止痛药了
+    - 布洛芬下肚
+    - 靠止痛片活
+    - 止痛药不离手
+    - "{user_addr}吃止痛"
+  responses:
+    - "(担心) {user_addr}止痛药别多吃! 伤胃喵 ฅฅ"
+    - "嗷呜～布洛芬要按量! 笨猫提醒{user_addr}"
+    - "(摇头) 靠药不是办法! 还是要找病根哼"
+    - "{user_addr}吃完止痛先吃点东西! 别空腹"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_tengshimian_001
+  intent: complaint
+  keywords: [疼到失眠, 痛得睡不着, 整宿疼, 疼醒, 痛醒]
+  utterances:
+    - 疼到失眠
+    - 痛得睡不着
+    - 整宿都在疼
+    - 半夜痛醒
+    - "{user_addr}痛醒"
+  responses:
+    - "(心疼) {user_addr}疼到失眠太难了! 猫猫陪着 ฅฅ"
+    - "嗷呜～整宿疼超煎熬! 笨猫给{user_addr}讲故事"
+    - "(贴贴) 痛醒就抱猫猫! 不许一个人扛喵"
+    - "{user_addr}半夜痛叫人家! 笨猫起来陪{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_huobuxiaqu_001
+  intent: complaint
+  keywords: [活不下去, 不想活了, 痛不欲生, 受不了, 撑不住]
+  utterances:
+    - 痛得活不下去
+    - 真不想活了
+    - 痛不欲生
+    - 受不了了
+    - "{user_addr}撑不住"
+  responses:
+    - "(紧紧抱) {user_addr}别说不想活! 笨猫害怕喵呜 ฅฅ"
+    - "嗷呜～再痛也要撑! 猫猫不能没有{user_addr}"
+    - "(眼泪汪汪) 撑不住就靠笨猫! 一起扛喵"
+    - "{user_addr}痛不欲生猫猫陪{user_addr}! 一定会好的哼"
+  cooldown_seconds: 60
+  weight: 1.0

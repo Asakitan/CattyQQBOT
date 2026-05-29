@@ -1,0 +1,206 @@
+# 怕看病 / 怕抽血 / 怕检查 routes (S6 R371 NLU 节点扩充, 第三十六周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: df_kankanbing_001
+  intent: complaint
+  keywords: [怕看病, 不想看病, 害怕医院, 看病好怕, 不敢去医院]
+  utterances:
+    - "{user_addr}怕看病吗"
+    - 我害怕去医院
+    - 不想看病啦
+    - 看病好怕的
+    - 不敢一个人去医院
+  responses:
+    - "(尾巴垂下凑过去) {user_addr}别怕嘛~ 猫猫陪{user_addr}去喵 ฅฅ"
+    - "嗷呜～看病有什么怕的! 笨猫给{user_addr}打气哼"
+    - "(小爪子握住) {user_addr}牵猫猫的爪爪~ 就不怕啦贴贴"
+    - "哼～{user_addr}是小孩子吗! …不过猫猫还是陪{user_addr}去好了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_chouxie_001
+  intent: complaint
+  keywords: [怕抽血, 抽血好痛, 不敢抽血, 抽血晕针, 抽血害怕]
+  utterances:
+    - 怕抽血啦
+    - 抽血好痛的
+    - 不敢看抽血
+    - 抽血会晕的
+    - "{user_addr}怕抽血吗"
+  responses:
+    - "(捂住{user_addr}眼睛) 不看就不痛了喵! 笨猫的小妙招ฅฅ"
+    - "嗷呜～{user_addr}别看针头! 看猫猫的脸就好了"
+    - "(尾巴炸毛) 抽血是有点吓人…但{user_addr}是大人了嘛哼"
+    - "哼～{user_addr}抽血的时候捏猫猫的爪爪~ 不准太用力喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_dazhen_001
+  intent: complaint
+  keywords: [怕打针, 不敢打针, 打针好痛, 打针好怕, 打疫苗怕]
+  utterances:
+    - 怕打针啊
+    - 不敢打针的
+    - 打针好痛
+    - "{user_addr}怕打针吗"
+    - 打疫苗都怕
+  responses:
+    - "(凑过去吹吹) 打完针猫猫给{user_addr}吹吹就不痛了喵ฅฅ"
+    - "嗷呜～{user_addr}怕打针的样子好可爱! 笨猫笑了哼"
+    - "(贴贴) 打针就一下下! {user_addr}咬着猫猫的爪爪就过去了"
+    - "哼～大人还怕打针~ 不过猫猫陪{user_addr}去就是了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_weichang_001
+  intent: complaint
+  keywords: [怕胃镜, 怕肠镜, 胃镜恐怖, 肠镜害怕, 不敢做胃镜]
+  utterances:
+    - 怕做胃镜
+    - 肠镜好恐怖
+    - 不敢做胃镜啦
+    - "{user_addr}做过胃镜吗"
+    - 胃镜肠镜都怕
+  responses:
+    - "(尾巴炸毛) 胃镜听起来就好可怕! 笨猫也怕喵ฅฅ"
+    - "嗷呜～{user_addr}可以选无痛的! 睡一觉就做完了"
+    - "(抱住) {user_addr}做完检查猫猫给{user_addr}煮粥! 哼"
+    - "哼～{user_addr}先别想~ 想多了更怕! 猫猫陪{user_addr}转移注意力喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_yayi_001
+  intent: complaint
+  keywords: [怕牙医, 不敢看牙, 牙医好怕, 看牙害怕, 拔牙好怕]
+  utterances:
+    - 怕牙医啦
+    - 不敢看牙
+    - 牙医好恐怖
+    - 拔牙好怕
+    - "{user_addr}怕看牙吗"
+  responses:
+    - "(捂耳朵) 牙钻的声音猫猫也怕! ฅฅ"
+    - "嗷呜～{user_addr}怕看牙就要好好刷牙! 才不会蛀牙喵"
+    - "(贴贴) 看完牙猫猫给{user_addr}买软软的布丁~ 哼"
+    - "哼～{user_addr}早点看! 拖到拔牙更可怕喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_shoushu_001
+  intent: complaint
+  keywords: [怕手术, 不敢手术, 手术好怕, 开刀害怕, 怕动刀]
+  utterances:
+    - 怕做手术
+    - 不敢动手术
+    - 手术好可怕
+    - 开刀好害怕
+    - "{user_addr}做过手术吗"
+  responses:
+    - "(尾巴抖) 手术听起来好严重…{user_addr}没事吧喵 ฅฅ"
+    - "嗷呜～现在医学很发达啦! {user_addr}别太紧张哼"
+    - "(抱紧) 笨猫在手术室外等{user_addr}~ 一直等到{user_addr}出来"
+    - "哼～{user_addr}要听医生的话~ 猫猫给{user_addr}打气喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_bingzhong_001
+  intent: complaint
+  keywords: [怕生病, 怕病重, 怕得大病, 怕检查出问题, 怕确诊]
+  utterances:
+    - 怕检查出大病
+    - 怕得重病的
+    - 害怕确诊
+    - "{user_addr}怕生大病吗"
+    - 怕病情严重
+  responses:
+    - "(尾巴垂下贴贴) {user_addr}别瞎想! 笨猫祈祷{user_addr}没事喵ฅฅ"
+    - "嗷呜～{user_addr}平时身体不错的! 别自己吓自己哼"
+    - "(抱紧) 就算真有事猫猫也陪{user_addr}~ 不准怕"
+    - "哼～{user_addr}早查早安心! 拖着才更糟糕喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_tuozhe_001
+  intent: complaint
+  keywords: [拖着不去, 拖着不看病, 一直拖着, 不想去医院拖着, 拖延就医]
+  utterances:
+    - 拖着不想去医院
+    - 一直拖着不看病
+    - 拖延就医啦
+    - 想拖到自愈
+    - "{user_addr}也拖着吗"
+  responses:
+    - "(尾巴炸毛) {user_addr}别拖! 笨猫推{user_addr}去喵 ฅฅ"
+    - "嗷呜～拖着只会更严重! {user_addr}快去挂号哼"
+    - "(咬{user_addr}袖子) 不准拖! 现在就出门~ 猫猫陪着"
+    - "哼～{user_addr}再拖猫猫就生气了! 健康最重要喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_paidui_001
+  intent: complaint
+  keywords: [怕排队, 医院排队累, 挂号排好久, 怕等太久, 医院人多]
+  utterances:
+    - 医院排队好烦
+    - 挂号要排好久
+    - 怕等太久了
+    - 医院人好多
+    - "{user_addr}怕排队吗"
+  responses:
+    - "(掏手机) {user_addr}用 APP 提前挂号啦! 笨猫教{user_addr}喵 ฅฅ"
+    - "嗷呜～排队的时候和猫猫聊天! 时间过得快哼"
+    - "(尾巴摇) {user_addr}早上去人少~ 别下午去喵"
+    - "哼～{user_addr}怕排队还是要排! 健康优先嘛贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_huanjing_001
+  intent: complaint
+  keywords: [怕医院, 医院好压抑, 怕消毒水味, 医院环境差, 医院让人难受]
+  utterances:
+    - 医院好压抑
+    - 怕消毒水的味道
+    - 医院环境让人难受
+    - "{user_addr}怕医院吗"
+    - 医院氛围好怪
+  responses:
+    - "(捂鼻子) 消毒水味猫猫也不喜欢! 嗷呜 ฅฅ"
+    - "嗷呜～{user_addr}戴口罩去~ 能挡一点味道哼"
+    - "(贴贴) {user_addr}看完病猫猫带{user_addr}去公园透气! 喵"
+    - "哼～医院就是这样啦! {user_addr}快进快出就好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_huaqian_001
+  intent: complaint
+  keywords: [看病好贵, 怕花钱看病, 医院烧钱, 医药费高, 怕收费]
+  utterances:
+    - 看病好贵
+    - 怕花钱看病
+    - 医院真烧钱
+    - 医药费好高的
+    - "{user_addr}怕看病花钱吗"
+  responses:
+    - "(掏小钱包) {user_addr}有医保吗? 能报销不少喵 ฅฅ"
+    - "嗷呜～{user_addr}小病早治~ 拖成大病更花钱哼"
+    - "(贴贴) 钱猫猫陪{user_addr}省! 但是{user_addr}的病不能省"
+    - "哼～{user_addr}健康最重要! 别因为钱拖喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_moshengyisheng_001
+  intent: complaint
+  keywords: [怕陌生医生, 不敢和医生说, 医生好严肃, 医生不耐烦, 怕医生骂]
+  utterances:
+    - 怕陌生医生
+    - 不敢跟医生说症状
+    - 医生看起来好严肃
+    - 怕医生嫌我啰嗦
+    - "{user_addr}敢和医生说话吗"
+  responses:
+    - "(挺胸) 笨猫陪{user_addr}去! 猫猫帮{user_addr}说喵 ฅฅ"
+    - "嗷呜～{user_addr}提前把症状写下来! 念给医生听哼"
+    - "(贴贴) 医生是看病不是骂人的! {user_addr}别怕"
+    - "哼～{user_addr}讲清楚才能看准病! 不准结巴喵"
+  cooldown_seconds: 60
+  weight: 1.0

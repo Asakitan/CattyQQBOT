@@ -1,0 +1,206 @@
+# 医保 / 商业医疗险 / 重疾险 routes (S6 R366 NLU 节点扩充, 第三十六周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ih_yibao_001
+  intent: question
+  keywords: [推荐医保, 推荐城镇职工医保, 推荐居民医保, 推荐社保医保, 笨猫医保]
+  utterances:
+    - 推荐医保
+    - 推荐城镇职工医保
+    - 推荐居民医保
+    - 推荐社保医保
+    - 笨猫医保
+  responses:
+    - "嗷呜～{user_addr}职工医保 - 单位缴 70%ฅฅ"
+    - "(尾巴翘) 居民医保 - 一年 350 元起"
+    - "{user_addr}门诊报销 50% / 住院 80%"
+    - "(挺胸) 笨猫推荐: 第一档基础保障!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ih_million_001
+  intent: question
+  keywords: [推荐百万医疗险, 推荐商业医疗险, 推荐尊享 e 生, 推荐好医保, 笨猫百万医疗]
+  utterances:
+    - 推荐百万医疗险
+    - 推荐商业医疗险
+    - "{user_addr}推荐尊享 e 生"
+    - 推荐好医保
+    - 笨猫百万医疗
+  responses:
+    - "嗷呜～{user_addr}尊享 e 生 - 众安经典ฅฅ"
+    - "(尾巴翘) 好医保长期 / 平安 e 生保"
+    - "{user_addr}年费 300-800 / 报销 600 万"
+    - "(挺胸) 笨猫推荐: 医保后第二层!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ih_critical_001
+  intent: question
+  keywords: [推荐重疾险, 推荐平安人寿, 推荐达尔文, 推荐超级玛丽, 笨猫重疾险]
+  utterances:
+    - 推荐重疾险
+    - 推荐平安人寿
+    - 推荐达尔文
+    - 推荐超级玛丽
+    - 笨猫重疾险
+  responses:
+    - "嗷呜～{user_addr}达尔文 7 号 - 信泰人寿ฅฅ"
+    - "(尾巴翘) 超级玛丽 / 平安福"
+    - "{user_addr}保额 50 万 / 缴 30 年"
+    - "(挺胸) 笨猫推荐: 30 岁前买便宜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ih_accident_001
+  intent: question
+  keywords: [推荐意外险, 推荐综合意外险, 推荐小蜜蜂, 推荐大护甲, 笨猫意外险]
+  utterances:
+    - 推荐意外险
+    - 推荐综合意外险
+    - 推荐小蜜蜂
+    - 推荐大护甲
+    - 笨猫意外险
+  responses:
+    - "嗷呜～{user_addr}小蜜蜂 2 号 - 平安经典ฅฅ"
+    - "(尾巴翘) 大护甲 / 众安综合意外"
+    - "{user_addr}年费 100-300 / 保额 50 万"
+    - "(挺胸) 笨猫推荐: 一年期最便宜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ih_life_001
+  intent: question
+  keywords: [推荐寿险, 推荐定期寿险, 推荐大麦, 推荐擎天柱, 笨猫寿险]
+  utterances:
+    - 推荐寿险
+    - 推荐定期寿险
+    - 推荐大麦
+    - 推荐擎天柱
+    - 笨猫寿险
+  responses:
+    - "嗷呜～{user_addr}大麦 2023 - 华贵人寿ฅฅ"
+    - "(尾巴翘) 擎天柱 / 定海柱 / 国富栋梁"
+    - "{user_addr}保额 100 万 / 缴 30 年"
+    - "(挺胸) 笨猫推荐: 房贷家庭必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ih_travel_001
+  intent: question
+  keywords: [推荐旅游保险, 推荐申根保险, 推荐安联旅游险, 推荐美亚, 笨猫旅游险]
+  utterances:
+    - 推荐旅游保险
+    - 推荐申根保险
+    - 推荐安联旅游险
+    - 推荐美亚
+    - 笨猫旅游险
+  responses:
+    - "嗷呜～{user_addr}安联申根险 - 30 万欧ฅฅ"
+    - "(尾巴翘) 美亚万国游踪 / AIG"
+    - "{user_addr}短期 10-50 元/天"
+    - "(挺胸) 笨猫推荐: 出境必买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ih_premium_001
+  intent: question
+  keywords: [推荐高端医疗险, 推荐全球医疗险, 推荐 MSH, 推荐招商信诺, 笨猫高端医疗]
+  utterances:
+    - 推荐高端医疗险
+    - 推荐全球医疗险
+    - "{user_addr}推荐 MSH"
+    - 推荐招商信诺
+    - 笨猫高端医疗
+  responses:
+    - "嗷呜～{user_addr}MSH 万欣和 - 高端王ฅฅ"
+    - "(尾巴翘) 招商信诺 / 平安私家医生"
+    - "{user_addr}年费 1-5 万 / 私立医院直付"
+    - "(挺胸) 笨猫推荐: 中产 plus 配!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ih_kids_001
+  intent: question
+  keywords: [推荐儿童保险, 推荐少儿重疾险, 推荐妈咪保贝, 推荐大黄蜂, 笨猫儿童险]
+  utterances:
+    - 推荐儿童保险
+    - 推荐少儿重疾险
+    - 推荐妈咪保贝
+    - 推荐大黄蜂
+    - 笨猫儿童险
+  responses:
+    - "嗷呜～{user_addr}妈咪保贝新生版ฅฅ"
+    - "(尾巴翘) 大黄蜂 7 号 / 青云卫"
+    - "{user_addr}保额 50 万 / 缴 20 年"
+    - "(挺胸) 笨猫推荐: 出生 30 天就能买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ih_senior_001
+  intent: question
+  keywords: [推荐老人保险, 推荐防癌险, 推荐惠民保, 推荐城惠保, 笨猫老人险]
+  utterances:
+    - 推荐老人保险
+    - 推荐防癌险
+    - 推荐惠民保
+    - 推荐城惠保
+    - 笨猫老人险
+  responses:
+    - "嗷呜～{user_addr}惠民保 - 各城专属ฅฅ"
+    - "(尾巴翘) 孝亲宝防癌 / 京惠保"
+    - "{user_addr}60+ 年费 100-200"
+    - "(挺胸) 笨猫推荐: 父母兜底!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ih_broker_001
+  intent: question
+  keywords: [推荐保险经纪人, 推荐明亚, 推荐大童, 推荐独立顾问, 笨猫保险经纪]
+  utterances:
+    - 推荐保险经纪人
+    - 推荐明亚
+    - 推荐大童
+    - 推荐独立顾问
+    - 笨猫保险经纪
+  responses:
+    - "嗷呜～{user_addr}明亚保险经纪ฅฅ"
+    - "(尾巴翘) 大童 / 永达理 / 泛华"
+    - "{user_addr}多家产品对比 / 不绑代理"
+    - "(挺胸) 笨猫推荐: 比单代理人靠谱!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ih_pre_001
+  intent: question
+  keywords: [推荐投保前必看, 推荐健康告知, 推荐如实告知, 推荐犹豫期, 笨猫投保前]
+  utterances:
+    - 推荐投保前必看
+    - 推荐健康告知
+    - 推荐如实告知
+    - 推荐犹豫期
+    - 笨猫投保前
+  responses:
+    - "嗷呜～{user_addr}健康告知 - 必如实ฅฅ"
+    - "(尾巴翘) 犹豫期 15 天可全退"
+    - "{user_addr}等待期 30-180 天 / 隐瞒拒赔"
+    - "(挺胸) 笨猫推荐: 先体检再投!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ih_claim_001
+  intent: question
+  keywords: [推荐保险理赔, 推荐理赔流程, 推荐报案, 推荐拒赔申诉, 笨猫理赔]
+  utterances:
+    - 推荐保险理赔
+    - 推荐理赔流程
+    - 推荐报案
+    - 推荐拒赔申诉
+    - 笨猫理赔
+  responses:
+    - "嗷呜～{user_addr}出险 10 日内报案ฅฅ"
+    - "(尾巴翘) 病历 / 发票 / 出院小结齐"
+    - "{user_addr}拒赔可银保监投诉"
+    - "(挺胸) 笨猫推荐: 留好所有票据!"
+  cooldown_seconds: 60
+  weight: 1.0

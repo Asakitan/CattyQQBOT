@@ -1,0 +1,206 @@
+# 急救 / CPR / 哈姆立克 routes (S6 R365 NLU 节点扩充, 第三十六周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ea_cpr_001
+  intent: question
+  keywords: [推荐CPR, 推荐心肺复苏, 推荐心肺复苏培训, 推荐CPR培训, 笨猫CPR]
+  utterances:
+    - 推荐CPR
+    - 推荐心肺复苏
+    - 推荐心肺复苏培训
+    - 推荐CPR培训
+    - 笨猫CPR
+  responses:
+    - "嗷呜～{user_addr}CPR - 30 次按压 + 2 次人工呼吸ฅฅ"
+    - "(尾巴翘) 按压深度 5-6cm / 频率 100-120/分"
+    - "{user_addr}AHA / 红十字 - 培训证书"
+    - "(挺胸) 猫猫推荐: 每个人都该学!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_heimlich_001
+  intent: question
+  keywords: [推荐哈姆立克, 推荐海姆立克, 推荐异物窒息, 推荐噎住急救, 笨猫哈姆立克]
+  utterances:
+    - 推荐哈姆立克
+    - 推荐海姆立克
+    - 推荐异物窒息
+    - 推荐噎住急救
+    - 笨猫哈姆立克
+  responses:
+    - "嗷呜～{user_addr}哈姆立克 - 站后冲击上腹ฅฅ"
+    - "(尾巴翘) 拳头肚脐上方 / 快速向内上"
+    - "{user_addr}婴儿: 拍背 5 + 胸压 5"
+    - "(挺胸) 笨猫推荐: 噎住别拍背 (成人)!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_aed_001
+  intent: question
+  keywords: [推荐AED, 推荐自动除颤器, 推荐AED位置, 推荐除颤仪, 笨猫AED]
+  utterances:
+    - 推荐AED
+    - 推荐自动除颤器
+    - 推荐AED位置
+    - 推荐除颤仪
+    - 笨猫AED
+  responses:
+    - "嗷呜～{user_addr}AED - 地铁/机场/商场常备ฅฅ"
+    - "(尾巴翘) 开机 → 贴电极 → 听语音"
+    - "{user_addr}AED 导航 APP / 微信小程序"
+    - "(挺胸) 猫猫推荐: 黄金 4 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_burn_001
+  intent: question
+  keywords: [推荐烫伤处理, 推荐烧伤处理, 推荐冷水冲, 推荐烫伤急救, 笨猫烫伤]
+  utterances:
+    - 推荐烫伤处理
+    - 推荐烧伤处理
+    - 推荐冷水冲
+    - 推荐烫伤急救
+    - 笨猫烫伤
+  responses:
+    - "嗷呜～{user_addr}冲 / 脱 / 泡 / 盖 / 送ฅฅ"
+    - "(尾巴翘) 流动冷水 15-20 分钟"
+    - "{user_addr}别涂牙膏酱油 / 水泡别戳"
+    - "(挺胸) 笨猫推荐: 二度以上立刻就医!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ea_electric_001
+  intent: question
+  keywords: [推荐触电急救, 推荐电击急救, 推荐触电处理, 推荐断电, 笨猫触电]
+  utterances:
+    - 推荐触电急救
+    - 推荐电击急救
+    - 推荐触电处理
+    - 推荐断电
+    - 笨猫触电
+  responses:
+    - "嗷呜～{user_addr}先断电源 - 别直接拉人ฅฅ"
+    - "(尾巴翘) 干木棍 / 绝缘物挑开"
+    - "{user_addr}无呼吸: 立刻 CPR + AED"
+    - "(挺胸) 猫猫推荐: 救人先保命!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ea_heatstroke_001
+  intent: question
+  keywords: [推荐中暑, 推荐热射病, 推荐中暑急救, 推荐降温, 笨猫中暑]
+  utterances:
+    - 推荐中暑
+    - 推荐热射病
+    - 推荐中暑急救
+    - 推荐降温
+    - 笨猫中暑
+  responses:
+    - "嗷呜～{user_addr}阴凉处 + 脱衣 + 物理降温ฅฅ"
+    - "(尾巴翘) 冰袋: 颈/腋/腹股沟大血管"
+    - "{user_addr}热射病 (>40℃): 立刻 120"
+    - "(挺胸) 笨猫推荐: 别灌藿香正气!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ea_drowning_001
+  intent: question
+  keywords: [推荐溺水急救, 推荐溺水处理, 推荐救生, 推荐溺水CPR, 笨猫溺水]
+  utterances:
+    - 推荐溺水急救
+    - 推荐溺水处理
+    - 推荐救生
+    - 推荐溺水CPR
+    - 笨猫溺水
+  responses:
+    - "嗷呜～{user_addr}岸上施救 - 别下水ฅฅ"
+    - "(尾巴翘) 救生圈 / 长杆 / 衣物"
+    - "{user_addr}上岸: 别控水 - 直接 CPR"
+    - "(挺胸) 猫猫推荐: 倒挂控水是错的!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ea_stroke_001
+  intent: question
+  keywords: [推荐中风急救, 推荐FAST, 推荐脑卒中, 推荐中风识别, 笨猫中风]
+  utterances:
+    - 推荐中风急救
+    - 推荐FAST
+    - 推荐脑卒中
+    - 推荐中风识别
+    - 笨猫中风
+  responses:
+    - "嗷呜～{user_addr}FAST: 脸/臂/语/时间ฅฅ"
+    - "(尾巴翘) Face 歪 / Arm 抬 / Speech 含糊"
+    - "{user_addr}Time: 4.5 小时溶栓窗口"
+    - "(挺胸) 笨猫推荐: 立刻 120 - 别等!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ea_heart_001
+  intent: question
+  keywords: [推荐心脏病急救, 推荐心梗急救, 推荐胸痛, 推荐心绞痛, 笨猫心脏病]
+  utterances:
+    - 推荐心脏病急救
+    - 推荐心梗急救
+    - 推荐胸痛
+    - 推荐心绞痛
+    - 笨猫心脏病
+  responses:
+    - "嗷呜～{user_addr}静卧 + 嚼阿司匹林 300mgฅฅ"
+    - "(尾巴翘) 硝酸甘油舌下 (已确诊)"
+    - "{user_addr}立刻 120 - 别自己开车"
+    - "(挺胸) 猫猫推荐: 心梗黄金 120 分钟!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ea_infant_001
+  intent: question
+  keywords: [推荐婴幼儿急救, 推荐婴儿CPR, 推荐儿童急救, 推荐宝宝急救, 笨猫婴儿急救]
+  utterances:
+    - 推荐婴幼儿急救
+    - 推荐婴儿CPR
+    - 推荐儿童急救
+    - 推荐宝宝急救
+    - 笨猫婴儿急救
+  responses:
+    - "嗷呜～{user_addr}婴儿 CPR: 两指按压胸骨ฅฅ"
+    - "(尾巴翘) 深度 4cm / 频率 100-120"
+    - "{user_addr}噎住: 拍背 5 + 翻面胸压 5"
+    - "(挺胸) 笨猫推荐: 红会母婴急救课!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ea_kit_001
+  intent: question
+  keywords: [推荐急救包, 推荐家用急救包, 推荐急救箱, 推荐急救用品, 笨猫急救包]
+  utterances:
+    - 推荐急救包
+    - 推荐家用急救包
+    - 推荐急救箱
+    - 推荐急救用品
+    - 笨猫急救包
+  responses:
+    - "嗷呜～{user_addr}创可贴 / 纱布 / 绷带 / 胶布ฅฅ"
+    - "(尾巴翘) 碘伏 / 酒精 / 生理盐水"
+    - "{user_addr}剪刀 / 镊子 / 体温计 / 手套"
+    - "(挺胸) 人家推荐: 红会标配急救包!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ea_course_001
+  intent: question
+  keywords: [推荐急救课程, 推荐红十字课程, 推荐AHA课程, 推荐急救培训, 笨猫急救课程]
+  utterances:
+    - 推荐急救课程
+    - 推荐红十字课程
+    - 推荐AHA课程
+    - 推荐急救培训
+    - 笨猫急救课程
+  responses:
+    - "嗷呜～{user_addr}红十字会 - 救护员证ฅฅ"
+    - "(尾巴翘) AHA Heartsaver / BLS"
+    - "{user_addr}线下 1-2 天 / 含 AED 实操"
+    - "(挺胸) 猫猫推荐: 红会基础最实用!"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,206 @@
+# 体检套餐 / 美年大健康 / 入职体检 routes (S6 R363 NLU 节点扩充, 第三十六周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cp_meinian_001
+  intent: question
+  keywords: [推荐美年大健康, 推荐美年体检, 推荐美年套餐, 推荐美年健康, 笨猫美年大健康]
+  utterances:
+    - 推荐美年大健康
+    - 推荐美年体检
+    - 推荐美年套餐
+    - 推荐美年健康
+    - 笨猫美年大健康
+  responses:
+    - "嗷呜～{user_addr}美年大健康 - 全国连锁龙头ฅฅ"
+    - "(尾巴翘) 关爱套餐 ¥500-800 / 尊享 ¥2000+"
+    - "{user_addr}覆盖广 / 团体单位首选"
+    - "(挺胸) 笨猫推荐: 关爱白金套餐性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_ikang_001
+  intent: question
+  keywords: [推荐爱康国宾, 推荐爱康体检, 推荐爱康套餐, 推荐 iKang, 笨猫爱康国宾]
+  utterances:
+    - 推荐爱康国宾
+    - 推荐爱康体检
+    - 推荐爱康套餐
+    - "推荐 iKang"
+    - 笨猫爱康国宾
+  responses:
+    - "嗷呜～{user_addr}爱康国宾 - 高端老牌ฅฅ"
+    - "(尾巴翘) 环境好 / 服务细 / 报告快"
+    - "{user_addr}标准套餐 ¥800-1500 / VIP ¥3000+"
+    - "(挺胸) 笨猫推荐: 选爱康环境 + 美年价格!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_ciming_001
+  intent: question
+  keywords: [推荐慈铭体检, 推荐瑞慈体检, 推荐慈铭奥亚, 推荐瑞慈套餐, 笨猫慈铭]
+  utterances:
+    - 推荐慈铭体检
+    - 推荐瑞慈体检
+    - 推荐慈铭奥亚
+    - 推荐瑞慈套餐
+    - 笨猫慈铭
+  responses:
+    - "嗷呜～{user_addr}慈铭 / 瑞慈 - 二线性价比ฅฅ"
+    - "(尾巴翘) 瑞慈长三角强 / 慈铭被美年并"
+    - "{user_addr}基础 ¥400-700"
+    - "(挺胸) 笨猫推荐: 江浙沪选瑞慈!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cp_basic_001
+  intent: question
+  keywords: [推荐基础体检, 推荐常规体检, 推荐入门体检, 推荐年度体检, 笨猫基础体检]
+  utterances:
+    - 推荐基础体检
+    - 推荐常规体检
+    - 推荐入门体检
+    - 推荐年度体检
+    - 笨猫基础体检
+  responses:
+    - "嗷呜～{user_addr}血常规 + 尿常规 + 肝肾功ฅฅ"
+    - "(尾巴翘) 心电图 + 胸片 + B超腹部"
+    - "{user_addr}血压血糖血脂 - 三高筛"
+    - "(挺胸) 笨猫推荐: 30岁 + 加肿瘤标志物!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_premium_001
+  intent: question
+  keywords: [推荐高端体检, 推荐 PET-CT, 推荐核磁共振, 推荐 VIP 体检, 笨猫高端体检]
+  utterances:
+    - 推荐高端体检
+    - "推荐 PET-CT"
+    - 推荐核磁共振
+    - "推荐 VIP 体检"
+    - 笨猫高端体检
+  responses:
+    - "嗷呜～{user_addr}PET-CT ¥7000-12000 全身扫ฅฅ"
+    - "(尾巴翘) 协和 / 301 / 华西高端套"
+    - "{user_addr}和睦家 / 国际部 ¥1万+"
+    - "(挺胸) 笨猫推荐: 50+ / 有家族史选高端!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cp_gynecology_001
+  intent: question
+  keywords: [推荐妇科体检, 推荐 TCT, 推荐 HPV, 推荐乳腺检查, 笨猫妇科体检]
+  utterances:
+    - 推荐妇科体检
+    - "推荐 TCT"
+    - "推荐 HPV"
+    - 推荐乳腺检查
+    - 笨猫妇科体检
+  responses:
+    - "嗷呜～{user_addr}TCT + HPV - 宫颈癌筛ฅฅ"
+    - "(尾巴翘) 乳腺B超 / 钼靶 40+"
+    - "{user_addr}妇科B超 + 性激素六项"
+    - "(挺胸) 笨猫推荐: 25+ 每年 TCT, 三年 HPV!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_endoscopy_001
+  intent: question
+  keywords: [推荐胃肠镜, 推荐胃镜, 推荐肠镜, 推荐无痛胃肠镜, 笨猫胃肠镜]
+  utterances:
+    - 推荐胃肠镜
+    - 推荐胃镜
+    - 推荐肠镜
+    - 推荐无痛胃肠镜
+    - 笨猫胃肠镜
+  responses:
+    - "嗷呜～{user_addr}无痛胃肠镜 ¥2000-4000ฅฅ"
+    - "(尾巴翘) 40+ 必做 / 早癌金标准"
+    - "{user_addr}三甲医院消化内科最稳"
+    - "(挺胸) 笨猫推荐: 别怕, 一次管 3-5 年!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_onboarding_001
+  intent: question
+  keywords: [推荐入职体检, 推荐入职体检套餐, 推荐三甲入职体检, 推荐入职体检医院, 笨猫入职体检]
+  utterances:
+    - 推荐入职体检
+    - 推荐入职体检套餐
+    - 推荐三甲入职体检
+    - 推荐入职体检医院
+    - 笨猫入职体检
+  responses:
+    - "嗷呜～{user_addr}入职体检 ¥150-300ฅฅ"
+    - "(尾巴翘) 二甲以上医院体检科 / 美年也行"
+    - "{user_addr}血常规 + 胸片 + 肝功 + 心电"
+    - "(挺胸) 笨猫推荐: 公司有报销选三甲!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_premarital_001
+  intent: question
+  keywords: [推荐婚前体检, 推荐婚检, 推荐免费婚检, 推荐孕前检查, 笨猫婚前体检]
+  utterances:
+    - 推荐婚前体检
+    - 推荐婚检
+    - 推荐免费婚检
+    - 推荐孕前检查
+    - 笨猫婚前体检
+  responses:
+    - "嗷呜～{user_addr}婚检 - 各地妇幼保健院免费ฅฅ"
+    - "(尾巴翘) 传染病 / 遗传病 / 生殖系统"
+    - "{user_addr}孕前检查 ¥500-1000 自费更全"
+    - "(挺胸) 笨猫推荐: 都做! 对下一代负责!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cp_5year_001
+  intent: question
+  keywords: [推荐五年体检, 推荐全面体检, 推荐深度体检, 推荐基因检测, 笨猫全面体检]
+  utterances:
+    - 推荐五年体检
+    - 推荐全面体检
+    - 推荐深度体检
+    - 推荐基因检测
+    - 笨猫全面体检
+  responses:
+    - "嗷呜～{user_addr}5 年一次 PET-CT + 肠镜ฅฅ"
+    - "(尾巴翘) + 心脏彩超 + 颈动脉"
+    - "{user_addr}基因检测 / 微生物组锦上添花"
+    - "(挺胸) 笨猫推荐: 40+ 每 3-5 年加码!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cp_compare_001
+  intent: question
+  keywords: [推荐医院体检, 推荐体检中心, 推荐三甲体检科, 推荐体检对比, 笨猫医院体检]
+  utterances:
+    - 推荐医院体检
+    - 推荐体检中心
+    - 推荐三甲体检科
+    - 推荐体检对比
+    - 笨猫医院体检
+  responses:
+    - "嗷呜～{user_addr}三甲: 准 / 异常衔接快ฅฅ"
+    - "(尾巴翘) 体检中心: 环境好 / 效率高"
+    - "{user_addr}有基础病选医院 / 健康选中心"
+    - "(挺胸) 笨猫推荐: 一年医院一年中心!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cp_interpret_001
+  intent: question
+  keywords: [推荐体检报告解读, 推荐异常解读, 推荐复查建议, 推荐体检异常, 笨猫体检解读]
+  utterances:
+    - 推荐体检报告解读
+    - 推荐异常解读
+    - 推荐复查建议
+    - 推荐体检异常
+    - 笨猫体检解读
+  responses:
+    - "嗷呜～{user_addr}结节 / 息肉 - 看大小性质ฅฅ"
+    - "(尾巴翘) 甲状腺 TI-RADS / 乳腺 BI-RADS"
+    - "{user_addr}异常去三甲对应科室复查"
+    - "(挺胸) 笨猫推荐: 别自己吓自己, 找专科!"
+  cooldown_seconds: 60
+  weight: 1.0

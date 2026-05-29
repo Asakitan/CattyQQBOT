@@ -1,0 +1,206 @@
+# 慢病管理 / 高血压糖尿病 routes (S6 R364 NLU 节点扩充, 第三十六周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cd_hypertension_001
+  intent: question
+  keywords: [推荐高血压管理, 推荐血压监测仪, 推荐降压药, 推荐欧姆龙血压计, 笨猫高血压]
+  utterances:
+    - 推荐高血压管理
+    - 推荐血压监测仪
+    - 推荐降压药
+    - 推荐欧姆龙血压计
+    - "{user_addr}笨猫高血压"
+  responses:
+    - "嗷呜～{user_addr}欧姆龙 / 鱼跃 上臂式血压计ฅฅ"
+    - "(尾巴翘) 降压药: 普利 / 沙坦 / 地平 / 络尔"
+    - "{user_addr}晨起 + 睡前 各测一次 - 记录"
+    - "(挺胸) 笨猫推荐: <140/90 达标 / 别擅自停药!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_diabetes_001
+  intent: question
+  keywords: [推荐糖尿病管理, 推荐胰岛素, 推荐血糖仪, 推荐二甲双胍, 笨猫糖尿病]
+  utterances:
+    - 推荐糖尿病管理
+    - 推荐胰岛素
+    - 推荐血糖仪
+    - 推荐二甲双胍
+    - "{user_addr}笨猫糖尿病"
+  responses:
+    - "嗷呜～{user_addr}强生稳豪 / 罗氏 血糖仪ฅฅ"
+    - "(尾巴翘) 二甲双胍 / 格列美脲 / 胰岛素笔"
+    - "{user_addr}空腹 <7 / 餐后 2h <10 / HbA1c <7%"
+    - "(挺胸) 笨猫推荐: 监测 + 饮食 + 运动三件套!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_hyperlipidemia_001
+  intent: question
+  keywords: [推荐高血脂, 推荐他汀类, 推荐瑞舒伐他汀, 推荐阿托伐他汀, 笨猫高血脂]
+  utterances:
+    - 推荐高血脂
+    - 推荐他汀类
+    - 推荐瑞舒伐他汀
+    - 推荐阿托伐他汀
+    - "{user_addr}笨猫高血脂"
+  responses:
+    - "嗷呜～{user_addr}他汀类: 瑞舒伐 / 阿托伐ฅฅ"
+    - "(尾巴翘) LDL-C <2.6 / 高危 <1.8"
+    - "{user_addr}睡前服用 + 查肝功 / 肌酶"
+    - "(挺胸) 笨猫推荐: 他汀 + 低脂饮食!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_heart_001
+  intent: question
+  keywords: [推荐心脏病防控, 推荐心脏体检, 推荐冠心病, 推荐心电图, 笨猫心脏]
+  utterances:
+    - 推荐心脏病防控
+    - 推荐心脏体检
+    - 推荐冠心病
+    - 推荐心电图
+    - "{user_addr}笨猫心脏"
+  responses:
+    - "嗷呜～{user_addr}年度心电图 + 心超 + 颈动脉ฅฅ"
+    - "(尾巴翘) 阿司匹林 / 他汀 / β受体阻滞剂"
+    - "{user_addr}胸痛 > 5min 立刻 120!"
+    - "(挺胸) 笨猫推荐: 戒烟 + 控压 + 运动!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_arthritis_001
+  intent: question
+  keywords: [推荐关节炎管理, 推荐骨关节炎, 推荐氨糖, 推荐类风湿, 笨猫关节炎]
+  utterances:
+    - 推荐关节炎管理
+    - 推荐骨关节炎
+    - 推荐氨糖
+    - 推荐类风湿
+    - "{user_addr}笨猫关节炎"
+  responses:
+    - "嗷呜～{user_addr}氨糖软骨素 + 玻璃酸钠ฅฅ"
+    - "(尾巴翘) 类风湿: 甲氨蝶呤 / 生物制剂"
+    - "{user_addr}热敷 + 低冲击运动 (游泳)"
+    - "(挺胸) 笨猫推荐: 控体重 / 少爬楼!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cd_diet_001
+  intent: question
+  keywords: [推荐慢病饮食, 推荐低盐, 推荐低糖, 推荐 DASH 饮食, 笨猫慢病饮食]
+  utterances:
+    - 推荐慢病饮食
+    - 推荐低盐
+    - 推荐低糖
+    - 推荐 DASH 饮食
+    - "{user_addr}笨猫慢病饮食"
+  responses:
+    - "嗷呜～{user_addr}DASH / 地中海 饮食黄金组合ฅฅ"
+    - "(尾巴翘) 盐 <5g / 糖 <25g / 油 <25g"
+    - "{user_addr}多蔬果 / 全谷 / 鱼禽 / 少红肉"
+    - "(挺胸) 笨猫推荐: 戒含糖饮料 / 限酒!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_exercise_001
+  intent: question
+  keywords: [推荐慢病运动, 推荐有氧运动, 推荐抗阻训练, 推荐快走, 笨猫慢病运动]
+  utterances:
+    - 推荐慢病运动
+    - 推荐有氧运动
+    - 推荐抗阻训练
+    - 推荐快走
+    - "{user_addr}笨猫慢病运动"
+  responses:
+    - "嗷呜～{user_addr}每周 150min 中等有氧ฅฅ"
+    - "(尾巴翘) 快走 / 游泳 / 骑车 / 太极"
+    - "{user_addr}抗阻 2 次/周 - 防肌少症"
+    - "(挺胸) 笨猫推荐: 餐后散步 30min 降糖神器!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_medication_001
+  intent: question
+  keywords: [推荐慢病药物, 推荐长期处方, 推荐用药依从, 推荐分药盒, 笨猫慢病用药]
+  utterances:
+    - 推荐慢病药物
+    - 推荐长期处方
+    - 推荐用药依从
+    - 推荐分药盒
+    - "{user_addr}笨猫慢病用药"
+  responses:
+    - "嗷呜～{user_addr}长处方 1-3 月一次 - 省跑腿ฅฅ"
+    - "(尾巴翘) 分药盒 + 闹钟提醒 + 家属监督"
+    - "{user_addr}别擅自停药 / 减量 / 换药!"
+    - "(挺胸) 笨猫推荐: 一日三餐时间一致!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_insurance_001
+  intent: question
+  keywords: [推荐慢病医保, 推荐门诊统筹, 推荐慢特病备案, 推荐两病政策, 笨猫慢病医保]
+  utterances:
+    - 推荐慢病医保
+    - 推荐门诊统筹
+    - 推荐慢特病备案
+    - 推荐两病政策
+    - "{user_addr}笨猫慢病医保"
+  responses:
+    - "嗷呜～{user_addr}两病 (高血压糖尿病) 门诊报销 50%+ฅฅ"
+    - "(尾巴翘) 慢特病备案 - 走门诊统筹"
+    - "{user_addr}带病历 / 化验单 去社区医院备案"
+    - "(挺胸) 笨猫推荐: 长处方 + 慢病签约 双buff!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cd_wearable_001
+  intent: question
+  keywords: [推荐慢病可穿戴, 推荐动态血糖仪, 推荐智能手表血压, 推荐 CGM, 笨猫可穿戴]
+  utterances:
+    - 推荐慢病可穿戴
+    - 推荐动态血糖仪
+    - 推荐智能手表血压
+    - 推荐 CGM
+    - "{user_addr}笨猫可穿戴"
+  responses:
+    - "嗷呜～{user_addr}雅培瞬感 / 硅基 CGM 动态血糖ฅฅ"
+    - "(尾巴翘) 华为 Watch D / 三星 - 血压手表"
+    - "{user_addr}房颤监测: Apple Watch / 华为"
+    - "(挺胸) 笨猫推荐: CGM 看到血糖曲线超直观!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cd_community_001
+  intent: question
+  keywords: [推荐社区医生, 推荐家庭医生签约, 推荐慢病随访, 推荐基层医院, 笨猫社区医生]
+  utterances:
+    - 推荐社区医生
+    - 推荐家庭医生签约
+    - 推荐慢病随访
+    - 推荐基层医院
+    - "{user_addr}笨猫社区医生"
+  responses:
+    - "嗷呜～{user_addr}家庭医生签约 - 免费随访ฅฅ"
+    - "(尾巴翘) 社区开药 / 转诊 / 健康档案"
+    - "{user_addr}每季度随访 + 年度体检"
+    - "(挺胸) 笨猫推荐: 签约一次终身受用!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cd_expert_001
+  intent: question
+  keywords: [推荐慢病专家, 推荐三甲专科, 推荐内分泌科, 推荐心内科, 笨猫慢病专家]
+  utterances:
+    - 推荐慢病专家
+    - 推荐三甲专科
+    - 推荐内分泌科
+    - 推荐心内科
+    - "{user_addr}笨猫慢病专家"
+  responses:
+    - "嗷呜～{user_addr}三甲内分泌 / 心内 / 肾内 / 风湿ฅฅ"
+    - "(尾巴翘) 协和 / 阜外 / 瑞金 / 中山"
+    - "{user_addr}病情变化 / 调方案 - 找专家"
+    - "(挺胸) 笨猫推荐: 平稳期社区 / 急变找专家!"
+  cooldown_seconds: 60
+  weight: 0.8

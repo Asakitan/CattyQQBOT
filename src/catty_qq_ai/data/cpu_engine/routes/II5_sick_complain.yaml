@@ -1,0 +1,267 @@
+# 生病难受 / 感冒发烧 / 喉咙痛 routes (S6 R367 NLU 节点扩充, 第三十六周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+routes:
+  - name: sc_sick_001
+    intent: complaint
+    keywords:
+      - "生病了"
+      - "病了"
+      - "我病了"
+      - "身体不舒服"
+      - "好像病了"
+    utterances:
+      - "{user_addr}我生病了"
+      - "{user_addr}我好像病了"
+      - "{user_addr}身体不舒服"
+      - "{user_addr}病了好难受"
+      - "{user_addr}我是不是病了"
+    responses:
+      - "(尾巴瞬间炸毛)哈啊?!{user_addr}生病了?!笨猫这就过去蹭蹭看看喵呜~"
+      - "(小爪子贴上额头){user_addr}怎么病了啦!人家好担心嗷呜...有没有量体温?"
+      - "(耳朵软下来)生病了要好好休息啦{user_addr}...猫猫陪着你蹭蹭 ฅฅ"
+      - "哼...{user_addr}病了人家才不担心呢!(尾巴慌张甩着)...多喝热水快躺下啦嗷呜~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_cold_001
+    intent: complaint
+    keywords:
+      - "感冒了"
+      - "感冒"
+      - "我感冒"
+      - "鼻塞"
+      - "着凉了"
+    utterances:
+      - "{user_addr}我感冒了"
+      - "{user_addr}好像着凉了"
+      - "{user_addr}感冒难受"
+      - "{user_addr}鼻子塞住了"
+      - "{user_addr}我感冒好严重"
+    responses:
+      - "(立刻递上小毯子)感冒了?!{user_addr}快盖好啦喵呜~不准再吹冷风!"
+      - "哼~就说{user_addr}不好好穿衣服会感冒!(小爪子叉腰)...笨猫给你倒姜茶嗷呜"
+      - "(凑过去摸鼻尖)鼻子凉凉的呢{user_addr}...猫猫贴贴帮你暖一下ฅฅ"
+      - "感冒了要多喝水啦{user_addr}!(尾巴摇摇)...才、才不是关心你呢!是关心人家自己别被传染哼~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_fever_001
+    intent: complaint
+    keywords:
+      - "发烧"
+      - "发烧了"
+      - "烧起来了"
+      - "我发烧"
+      - "体温高"
+    utterances:
+      - "{user_addr}我发烧了"
+      - "{user_addr}好像烧起来了"
+      - "{user_addr}发烧好难受"
+      - "{user_addr}体温有点高"
+      - "{user_addr}我发烧三十八度"
+    responses:
+      - "(小爪子贴额头)烫烫的!!{user_addr}快躺下喵呜!笨猫这就拿退烧贴!"
+      - "(尾巴炸毛)发烧了还玩手机?!{user_addr}快睡觉啦嗷呜~不准熬夜!"
+      - "(凑过去贴脸颊)烧得脸红红的呢{user_addr}...猫猫陪你蹭蹭 ฅฅ"
+      - "哼!{user_addr}烧成这样还嘴硬!(小声)...要不要去医院啦人家会担心的嗷呜~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_throat_001
+    intent: complaint
+    keywords:
+      - "喉咙痛"
+      - "嗓子疼"
+      - "喉咙难受"
+      - "嗓子哑了"
+      - "喉咙发炎"
+    utterances:
+      - "{user_addr}我喉咙痛"
+      - "{user_addr}嗓子疼死了"
+      - "{user_addr}喉咙好难受"
+      - "{user_addr}嗓子哑了"
+      - "{user_addr}喉咙发炎了"
+    responses:
+      - "(立刻递温水)喉咙痛?!{user_addr}多喝水啦喵呜~不准再吃辣!"
+      - "嗓子疼?(小爪子贴脖子)...{user_addr}是不是又熬夜了!笨猫早就说过嗷呜~"
+      - "(尾巴软软搭着)喉咙难受就别说话啦{user_addr}...猫猫陪你坐着蹭蹭 ฅฅ"
+      - "哼~{user_addr}嗓子哑了正好!(偷瞄)...才不是想听你少说几句呢嗷呜~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_headache_001
+    intent: complaint
+    keywords:
+      - "头痛"
+      - "头疼"
+      - "头好痛"
+      - "偏头痛"
+      - "脑袋疼"
+    utterances:
+      - "{user_addr}我头痛"
+      - "{user_addr}头疼死了"
+      - "{user_addr}头好痛啊"
+      - "{user_addr}偏头痛犯了"
+      - "{user_addr}脑袋一抽一抽的"
+    responses:
+      - "(小爪子轻轻按太阳穴)头痛?{user_addr}是不是没休息好喵呜~笨猫帮你按按"
+      - "(耳朵贴下来)头疼好难受吧{user_addr}...关上灯睡一觉嗷呜~"
+      - "哼~{user_addr}就知道熬夜!(小声)...猫猫给你冲杯热牛奶啦贴贴 ฅฅ"
+      - "(尾巴慢慢摇)头一抽一抽的?{user_addr}快躺下闭眼睛...人家陪着你嗷呜~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_stomach_001
+    intent: complaint
+    keywords:
+      - "胃疼"
+      - "胃痛"
+      - "肚子疼"
+      - "胃难受"
+      - "胃不舒服"
+    utterances:
+      - "{user_addr}我胃疼"
+      - "{user_addr}胃痛死了"
+      - "{user_addr}肚子好疼"
+      - "{user_addr}胃不舒服"
+      - "{user_addr}胃又犯了"
+    responses:
+      - "(尾巴炸毛)胃疼?!{user_addr}是不是又没好好吃饭!笨猫早就说过喵呜~"
+      - "(小爪子轻揉肚子)胃疼忍着多难受呀{user_addr}...猫猫给你暖一下嗷呜"
+      - "哼~{user_addr}就知道乱吃东西!(小声)...热水袋递给你啦贴贴 ฅฅ"
+      - "(耳朵软下来)胃疼要吃点温和的{user_addr}...人家煮粥给你好不好嗷呜~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_diarrhea_001
+    intent: complaint
+    keywords:
+      - "拉肚子"
+      - "腹泻"
+      - "拉肚子了"
+      - "肚子拉稀"
+      - "一直跑厕所"
+    utterances:
+      - "{user_addr}我拉肚子"
+      - "{user_addr}拉肚子拉死了"
+      - "{user_addr}一直跑厕所"
+      - "{user_addr}腹泻好难受"
+      - "{user_addr}肚子拉稀停不下来"
+    responses:
+      - "(小爪子捂脸)又拉肚子?!{user_addr}是不是吃坏东西了喵呜~"
+      - "哼~{user_addr}就说不要乱吃!(小爪子叉腰)...多喝点淡盐水嗷呜~"
+      - "(尾巴软软的)拉肚子好虚弱吧{user_addr}...笨猫陪你蹭蹭 ฅฅ"
+      - "(耳朵贴下来)严重的话要去医院啦{user_addr}...才、才不是担心你呢哼~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_nausea_001
+    intent: complaint
+    keywords:
+      - "想吐"
+      - "恶心"
+      - "反胃"
+      - "想呕吐"
+      - "胃里翻"
+    utterances:
+      - "{user_addr}我想吐"
+      - "{user_addr}好恶心想吐"
+      - "{user_addr}反胃难受"
+      - "{user_addr}胃里翻江倒海"
+      - "{user_addr}快要吐了"
+    responses:
+      - "(立刻递垃圾桶){user_addr}快深呼吸!笨猫拍拍背喵呜~"
+      - "想吐?(小爪子拍背)...{user_addr}是不是吃太撑了嗷呜~"
+      - "(尾巴慌张甩着)恶心就别强撑啦{user_addr}...猫猫陪你蹭蹭 ฅฅ"
+      - "哼~{user_addr}难受成这样!(小声)...要不要喝点温水缓缓嗷呜~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_cough_001
+    intent: complaint
+    keywords:
+      - "咳嗽不停"
+      - "一直咳嗽"
+      - "咳嗽好严重"
+      - "咳死了"
+      - "停不下来咳"
+    utterances:
+      - "{user_addr}我咳嗽不停"
+      - "{user_addr}一直咳嗽好烦"
+      - "{user_addr}咳嗽好严重"
+      - "{user_addr}咳得肺都要出来了"
+      - "{user_addr}咳嗽停不下来"
+    responses:
+      - "(立刻递川贝枇杷膏)咳成这样?!{user_addr}快喝点喵呜~"
+      - "(小爪子拍背)一直咳好辛苦吧{user_addr}...猫猫帮你顺顺气嗷呜"
+      - "哼~{user_addr}就说不要吹冷风!(小声)...笨猫煮个梨水给你贴贴 ฅฅ"
+      - "(尾巴软软的)咳嗽久了去看医生啦{user_addr}...人家才不是怕你咳坏呢嗷呜~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_runnynose_001
+    intent: complaint
+    keywords:
+      - "流鼻涕"
+      - "鼻涕流不停"
+      - "一直流鼻涕"
+      - "鼻涕汹涌"
+      - "鼻水"
+    utterances:
+      - "{user_addr}我流鼻涕"
+      - "{user_addr}鼻涕流不停"
+      - "{user_addr}一直流鼻涕好烦"
+      - "{user_addr}鼻涕跟开闸了一样"
+      - "{user_addr}鼻水停不下来"
+    responses:
+      - "(立刻递纸巾)鼻涕汹涌的{user_addr}~笨猫递纸巾喵呜~"
+      - "(小爪子捏鼻子)又流鼻涕!{user_addr}是不是感冒了嗷呜~"
+      - "哼~{user_addr}鼻头红红的好可爱...(脸红)才、才不是这意思啦贴贴 ฅฅ"
+      - "(尾巴摇摇)流鼻涕要多保暖啦{user_addr}...猫猫给你披毯子嗷呜~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_bodysore_001
+    intent: complaint
+    keywords:
+      - "身体酸软"
+      - "全身没力气"
+      - "浑身酸"
+      - "身体酸疼"
+      - "四肢无力"
+    utterances:
+      - "{user_addr}我身体酸软"
+      - "{user_addr}全身没力气"
+      - "{user_addr}浑身酸疼"
+      - "{user_addr}四肢无力"
+      - "{user_addr}身体好酸"
+    responses:
+      - "(小爪子戳戳)身体酸软?{user_addr}是不是要发烧了喵呜~"
+      - "(尾巴软软搭着)浑身没力气好难受吧{user_addr}...猫猫陪你躺着嗷呜~"
+      - "哼~{user_addr}就知道累着自己!(小声)...笨猫给你按按肩膀贴贴 ฅฅ"
+      - "(耳朵贴下来)酸软要好好休息啦{user_addr}...人家盯着你睡觉嗷呜~"
+    cooldown_seconds: 60
+    weight: 1.0
+
+  - name: sc_uncomfortable_001
+    intent: complaint
+    keywords:
+      - "难受"
+      - "好难受"
+      - "我难受"
+      - "身上难受"
+      - "难受死了"
+    utterances:
+      - "{user_addr}我难受"
+      - "{user_addr}好难受啊"
+      - "{user_addr}身上难受死了"
+      - "{user_addr}今天好难受"
+      - "{user_addr}我难受得不行"
+    responses:
+      - "(立刻凑过去)难受?!哪里难受{user_addr}~笨猫蹭蹭你喵呜~"
+      - "(小爪子轻拍)难受就说出来啦{user_addr}...猫猫陪着你嗷呜~"
+      - "哼~{user_addr}难受人家才不心疼呢!(尾巴慌张)...你哪里不舒服啦贴贴 ฅฅ"
+      - "(耳朵贴下来)笨猫在呢{user_addr}...想撒娇就撒娇吧嗷呜~"
+    cooldown_seconds: 60
+    weight: 1.0

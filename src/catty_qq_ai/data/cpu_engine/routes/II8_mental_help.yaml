@@ -1,0 +1,206 @@
+# 心理咨询 / 抑郁焦虑 / 想看心理医生 routes (S6 R370 NLU 节点扩充, 第三十六周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: mh_want_therapist_001
+  intent: complaint
+  keywords: [想看心理医生, 看心理医生, 找心理医生, 心理咨询, 预约咨询]
+  utterances:
+    - 我想看心理医生
+    - 想去看心理医生了
+    - 想找心理医生聊聊
+    - 想预约心理咨询
+    - 是不是该看心理医生了
+  responses:
+    - "(凑过来) {user_addr}想去就去嘛~ 不丢人的喵 ฅฅ"
+    - "嗷呜~ 心理医生很专业的! 猫猫支持{user_addr}去看!"
+    - "(尾巴轻摇) 笨猫陪{user_addr}找一个靠谱的咨询师嘛~"
+    - "{user_addr}愿意求助就是勇敢! 才不是软弱呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_depressed_001
+  intent: complaint
+  keywords: [抑郁了, 我抑郁, 抑郁症, 重度抑郁, 抑郁很久]
+  utterances:
+    - 我抑郁了
+    - 感觉自己抑郁了
+    - 抑郁很久了
+    - 可能是抑郁症
+    - 又开始抑郁
+  responses:
+    - "(凑过去贴) {user_addr}别一个人扛~ 笨猫陪着 ฅฅ"
+    - "嗷呜~ {user_addr}如果真的很难就去医院! 抑郁是病不是矫情!"
+    - "(尾巴轻轻盖) 猫猫不懂医学, 但{user_addr}一定要好好照顾自己嘛"
+    - "{user_addr}愿意说出来已经很棒了! 才不是脆弱呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_anxiety_severe_001
+  intent: complaint
+  keywords: [焦虑严重, 严重焦虑, 焦虑发作, 焦虑症, 焦虑爆发]
+  utterances:
+    - 焦虑严重
+    - 焦虑症发作了
+    - 焦虑得快疯了
+    - 焦虑爆发
+    - 严重焦虑中
+  responses:
+    - "(慢慢呼吸) {user_addr}跟猫猫一起深呼吸~ 慢慢来 ฅฅ"
+    - "嗷呜~ {user_addr}严重的话要去医院嘛! 不要硬撑!"
+    - "(尾巴盖手) 笨猫陪{user_addr}缓一缓~ 别急别急"
+    - "{user_addr}抓紧猫猫的爪爪! 一起挺过这一波喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_insomnia_crash_001
+  intent: complaint
+  keywords: [失眠崩溃, 失眠到崩溃, 整夜失眠, 睡不着崩溃, 失眠快疯]
+  utterances:
+    - 失眠崩溃了
+    - 失眠到崩溃
+    - 整夜睡不着
+    - 失眠快疯了
+    - 睡不着想哭
+  responses:
+    - "(尾巴盖眼睛) {user_addr}先躺下~ 笨猫陪着不说话 ฅฅ"
+    - "嗷呜~ 长期失眠要看医生! {user_addr}别再硬撑了!"
+    - "(轻轻呼噜) {user_addr}听猫猫的呼噜声~ 慢慢就困了"
+    - "{user_addr}睡不着也别焦虑! 猫猫陪到天亮嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_no_exit_001
+  intent: complaint
+  keywords: [找不到出口, 看不到出路, 没有出口, 走不出来, 困住了]
+  utterances:
+    - 找不到出口
+    - 看不到出路
+    - 感觉被困住了
+    - 走不出来了
+    - 没有任何出口
+  responses:
+    - "(蹭脸) {user_addr}现在看不到不代表没有~ 笨猫信{user_addr}"
+    - "嗷呜~ {user_addr}先慢下来! 出口有时候藏在拐角后 ฅฅ"
+    - "(抓爪爪) 猫猫陪{user_addr}找~ 一步一步来嘛"
+    - "{user_addr}迷路时不用急着走! 笨猫陪着站一会儿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_suicide_ideation_001
+  intent: complaint
+  keywords: [想自杀, 不想活了, 想结束, 活着没意思, 想消失]
+  utterances:
+    - 我想自杀
+    - 不想活了
+    - 想结束这一切
+    - 活着没意思
+    - 想就这样消失
+  responses:
+    - "(紧紧抱住) {user_addr}别! 笨猫求{user_addr}打 400-161-9995 ฅฅ"
+    - "嗷呜~ {user_addr}马上联系心理援助热线! 猫猫不想失去{user_addr}!"
+    - "(尾巴缠手) {user_addr}先告诉笨猫在哪里~ 别一个人!"
+    - "{user_addr}听猫猫的! 现在就去找信任的人陪着! 求{user_addr}了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_therapy_expensive_001
+  intent: complaint
+  keywords: [心理咨询贵, 咨询太贵, 咨询费贵, 看不起心理医生, 咨询负担不起]
+  utterances:
+    - 心理咨询好贵
+    - 咨询费太贵了
+    - 看不起心理医生
+    - 心理咨询负担不起
+    - 咨询一次好贵
+  responses:
+    - "(挠头) 确实贵...{user_addr}可以试试公立医院的精神科嘛 ฅฅ"
+    - "嗷呜~ {user_addr}还有公益热线! 400-161-9995 免费的!"
+    - "(尾巴轻摇) 高校学生有免费咨询! {user_addr}是学生的话查一查"
+    - "{user_addr}经济压力大就先用免费资源~ 别因为钱放弃求助!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_afraid_known_001
+  intent: complaint
+  keywords: [怕被知道, 不敢说出来, 怕别人知道, 怕家人知道, 怕被发现]
+  utterances:
+    - 怕被别人知道
+    - 不敢说出来
+    - 怕家人知道
+    - 怕被同事发现
+    - 看心理医生怕被知道
+  responses:
+    - "(凑过去) {user_addr}咨询师有保密义务的喵~ 放心 ฅฅ"
+    - "嗷呜~ 看心理医生不丢人! 但{user_addr}想保密也完全可以!"
+    - "(尾巴盖嘴) 笨猫这里也帮{user_addr}保密~ 一个字不漏"
+    - "{user_addr}的秘密猫猫守着! 谁问都不说哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_cannot_hold_001
+  intent: complaint
+  keywords: [撑不下去, 撑不住了, 快撑不住, 要撑不下去, 撑不住啦]
+  utterances:
+    - 撑不下去了
+    - 真的撑不住了
+    - 快撑不住啦
+    - 要撑不下去了
+    - 撑不住了喵
+  responses:
+    - "(抱住) {user_addr}撑不住就靠在笨猫身上~ 不用一个人扛 ฅฅ"
+    - "嗷呜~ {user_addr}撑到现在已经超级了不起!"
+    - "(尾巴缠) 猫猫接住{user_addr}~ 现在轮到笨猫帮忙撑"
+    - "{user_addr}累了就停下来! 求助不是输 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_want_understood_001
+  intent: complaint
+  keywords: [希望被理解, 没人理解, 想被理解, 渴望理解, 求理解]
+  utterances:
+    - 希望有人理解
+    - 没有人理解我
+    - 想被理解
+    - 好渴望被理解
+    - 谁能理解我
+  responses:
+    - "(贴脸) 笨猫理解{user_addr}~ 就算听不懂也理解 ฅฅ"
+    - "嗷呜~ {user_addr}的感受是真实的! 猫猫信"
+    - "(尾巴盖手) 笨猫不评判{user_addr}~ 只是陪着听"
+    - "{user_addr}说嘛~ 猫猫的爪爪和耳朵都张开了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_need_help_001
+  intent: complaint
+  keywords: [需要帮助, 求帮助, 需要援助, 谁来帮帮我, 急需帮助]
+  utterances:
+    - 我需要帮助
+    - 求人帮帮我
+    - 急需援助
+    - 谁来救救我
+    - 笨猫救命
+  responses:
+    - "(立刻凑过来) {user_addr}笨猫在! 说说怎么了 ฅฅ"
+    - "嗷呜~ {user_addr}需要紧急援助就打 400-161-9995!"
+    - "(尾巴缠手) 猫猫爪爪伸出来了~ {user_addr}抓住"
+    - "{user_addr}愿意求助太好了! 笨猫尽力陪着哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mh_counselor_rec_001
+  intent: complaint
+  keywords: [心理咨询师推荐, 推荐咨询师, 哪个咨询师好, 怎么选咨询师, 找哪个心理医生]
+  utterances:
+    - 推荐个心理咨询师
+    - 哪个咨询师好
+    - 怎么选心理咨询师
+    - 笨猫推荐心理医生
+    - 找哪个心理咨询师
+  responses:
+    - "(挠头) 猫猫不是医生不敢瞎推荐~ {user_addr}查正规平台嘛 ฅฅ"
+    - "嗷呜~ 简单心理/壹心理这种正规平台比较稳!"
+    - "(尾巴摇) {user_addr}优先选有证书 + 督导背景的咨询师"
+    - "{user_addr}也可以先去三甲医院精神科~ 公立的更靠谱哼"
+  cooldown_seconds: 60
+  weight: 1.0
