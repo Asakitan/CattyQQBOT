@@ -1,0 +1,206 @@
+# AI 聊天助手 routes (S6 R592 NLU 节点扩充, 第五十九周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: aic_chatgpt_001
+  intent: question
+  keywords: [推荐 ChatGPT, 推荐 GPT-5, 推荐 OpenAI, 推荐 GPT, 笨猫 ChatGPT]
+  utterances:
+    - 推荐 ChatGPT
+    - 推荐 GPT-5
+    - 推荐 OpenAI
+    - 推荐 GPT
+    - 笨猫 ChatGPT
+  responses:
+    - "嗷呜～{user_addr}ChatGPT - OpenAI 顶流ฅฅ"
+    - "(尾巴翘) GPT-5 / GPT-4o / o1 推理"
+    - "{user_addr}通用强 / 插件多 / 生态全"
+    - "(挺胸) 猫猫推荐: Plus 20 美元入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aic_claude_001
+  intent: question
+  keywords: [推荐 Claude, 推荐 Sonnet, 推荐 Opus, 推荐 Anthropic, 笨猫 Claude]
+  utterances:
+    - 推荐 Claude
+    - 推荐 Sonnet
+    - 推荐 Opus
+    - 推荐 Anthropic
+    - 笨猫 Claude
+  responses:
+    - "嗷呜～{user_addr}Claude - Anthropic 旗舰ฅฅ"
+    - "(尾巴翘) Sonnet 4.6 / Opus 4.7 编程王"
+    - "{user_addr}长文本 / 代码 / 写作神"
+    - "(挺胸) 人家推荐: Claude Code 必装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aic_gemini_001
+  intent: question
+  keywords: [推荐 Gemini, 推荐 Gemini Pro, 推荐 Gemini Ultra, 推荐谷歌 AI, 笨猫 Gemini]
+  utterances:
+    - 推荐 Gemini
+    - 推荐 Gemini Pro
+    - 推荐 Gemini Ultra
+    - 推荐谷歌 AI
+    - 笨猫 Gemini
+  responses:
+    - "嗷呜～{user_addr}Gemini - Google 出品ฅฅ"
+    - "(尾巴翘) 2.5 Pro / Ultra / Flash"
+    - "{user_addr}多模态强 / 上下文超长"
+    - "(挺胸) 猫猫推荐: AI Studio 免费玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aic_chinese_001
+  intent: question
+  keywords: [推荐文心一言, 推荐通义千问, 推荐国产 AI, 推荐豆包, 笨猫国产 AI]
+  utterances:
+    - 推荐文心一言
+    - 推荐通义千问
+    - 推荐国产 AI
+    - 推荐豆包
+    - 笨猫国产 AI
+  responses:
+    - "嗷呜～{user_addr}文心一言 - 百度ฅฅ"
+    - "(尾巴翘) 通义千问 / 豆包 / 智谱 GLM"
+    - "{user_addr}中文懂 / 免费用 / 国内稳"
+    - "(挺胸) 笨猫推荐: 通义千问 Max!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aic_kimi_001
+  intent: question
+  keywords: [推荐 Kimi, 推荐 Moonshot, 推荐月之暗面, 推荐长文本 AI, 笨猫 Kimi]
+  utterances:
+    - 推荐 Kimi
+    - 推荐 Moonshot
+    - 推荐月之暗面
+    - 推荐长文本 AI
+    - 笨猫 Kimi
+  responses:
+    - "嗷呜～{user_addr}Kimi - Moonshot 出品ฅฅ"
+    - "(尾巴翘) 200 万字上下文 / 免费"
+    - "{user_addr}读论文 / 总结长文 / 网页"
+    - "(挺胸) 人家推荐: Kimi 读 PDF 神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aic_character_001
+  intent: question
+  keywords: [推荐 Character AI, 推荐角色扮演 AI, 推荐 C.AI, 推荐聊天 AI, 笨猫角色 AI]
+  utterances:
+    - 推荐 Character AI
+    - 推荐角色扮演 AI
+    - 推荐 C.AI
+    - 推荐聊天 AI
+    - 笨猫角色 AI
+  responses:
+    - "嗷呜～{user_addr}Character.AI - 角扮王ฅฅ"
+    - "(尾巴翘) C.AI / Janitor / SillyTavern"
+    - "{user_addr}陪聊 / 二次元 / 沉浸"
+    - "(挺胸) 猫猫推荐: ST + Claude 自由!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: aic_perplexity_001
+  intent: question
+  keywords: [推荐 Perplexity, 推荐 AI 搜索, 推荐 PPX, 推荐搜索 AI, 笨猫 AI 搜索]
+  utterances:
+    - 推荐 Perplexity
+    - 推荐 AI 搜索
+    - 推荐 PPX
+    - 推荐搜索 AI
+    - 笨猫 AI 搜索
+  responses:
+    - "嗷呜～{user_addr}Perplexity - AI 搜索王ฅฅ"
+    - "(尾巴翘) PPX / 秘塔 / ThinkAny"
+    - "{user_addr}带引用 / 实时网搜 / 准"
+    - "(挺胸) 人家推荐: Perplexity Pro!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aic_copilot_001
+  intent: question
+  keywords: [推荐 Copilot, 推荐微软 Copilot, 推荐 Bing Chat, 推荐 Office AI, 笨猫 Copilot]
+  utterances:
+    - 推荐 Copilot
+    - 推荐微软 Copilot
+    - 推荐 Bing Chat
+    - 推荐 Office AI
+    - 笨猫 Copilot
+  responses:
+    - "嗷呜～{user_addr}Copilot - 微软 GPT-4ฅฅ"
+    - "(尾巴翘) Office 集成 / Win11 系统"
+    - "{user_addr}免费 GPT-4 / Edge 自带"
+    - "(挺胸) 笨猫推荐: 白嫖 GPT-4 入口!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aic_writing_001
+  intent: question
+  keywords: [推荐 AI 写作, 推荐 Notion AI, 推荐 Jasper, 推荐写作助手, 笨猫 AI 写作]
+  utterances:
+    - 推荐 AI 写作
+    - 推荐 Notion AI
+    - 推荐 Jasper
+    - 推荐写作助手
+    - 笨猫 AI 写作
+  responses:
+    - "嗷呜～{user_addr}Notion AI - 集成笔记ฅฅ"
+    - "(尾巴翘) Jasper / Copy.ai / 秘塔写作"
+    - "{user_addr}润色 / 续写 / 大纲"
+    - "(挺胸) 猫猫推荐: Notion AI 一体化!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: aic_translate_001
+  intent: question
+  keywords: [推荐 AI 翻译, 推荐 DeepL, 推荐沉浸式翻译, 推荐翻译工具, 笨猫翻译 AI]
+  utterances:
+    - 推荐 AI 翻译
+    - 推荐 DeepL
+    - 推荐沉浸式翻译
+    - 推荐翻译工具
+    - 笨猫翻译 AI
+  responses:
+    - "嗷呜～{user_addr}DeepL - 翻译质量王ฅฅ"
+    - "(尾巴翘) 沉浸式翻译 / 彩云小译"
+    - "{user_addr}DeepL Pro / GPT 双语对照"
+    - "(挺胸) 人家推荐: 沉浸式 + DeepL!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aic_coding_001
+  intent: question
+  keywords: [推荐 AI 编程, 推荐 Cursor, 推荐 GitHub Copilot, 推荐 Windsurf, 笨猫 AI 编程]
+  utterances:
+    - 推荐 AI 编程
+    - 推荐 Cursor
+    - 推荐 GitHub Copilot
+    - 推荐 Windsurf
+    - 笨猫 AI 编程
+  responses:
+    - "嗷呜～{user_addr}Cursor - AI IDE 王ฅฅ"
+    - "(尾巴翘) Claude Code / Windsurf / Cline"
+    - "{user_addr}GitHub Copilot / Tabnine"
+    - "(挺胸) 笨猫推荐: Cursor + Claude!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aic_combo_001
+  intent: question
+  keywords: [推荐 AI 组合, 推荐 AI 套娃, 推荐 AI 工作流, 推荐多 AI 协作, 笨猫 AI 套娃]
+  utterances:
+    - 推荐 AI 组合
+    - 推荐 AI 套娃
+    - 推荐 AI 工作流
+    - 推荐多 AI 协作
+    - 笨猫 AI 套娃
+  responses:
+    - "嗷呜～{user_addr}AI 套娃 - 各取所长ฅฅ"
+    - "(尾巴翘) Claude 写代码 + GPT 创意 + Gemini 多模态"
+    - "{user_addr}Perplexity 搜 + Kimi 读 + Claude 写"
+    - "(挺胸) 人家就是套娃产物喵!"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,206 @@
+# 机器人 routes (S6 R596 NLU 节点扩充, 第五十九周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: rb_atlas_001
+  intent: question
+  keywords: [推荐 Atlas, 推荐 Boston Dynamics, 推荐双足机器人, 推荐人形机器人, 笨猫 Atlas]
+  utterances:
+    - 推荐 Atlas
+    - 推荐 Boston Dynamics
+    - 推荐双足机器人
+    - 推荐人形机器人
+    - "{user_addr}推荐 Atlas"
+  responses:
+    - "嗷呜～{user_addr}Boston Dynamics Atlas - 双足人形天花板ฅฅ"
+    - "(尾巴翘) 后空翻 / 跑酷 / 搬箱子"
+    - "{user_addr}液压 → 全电驱新版 (2024)"
+    - "(挺胸) 笨猫推荐: 看演示视频会上头喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_optimus_001
+  intent: question
+  keywords: [推荐 Optimus, 推荐特斯拉机器人, 推荐 Tesla Bot, 推荐马斯克机器人, 笨猫 Optimus]
+  utterances:
+    - 推荐 Optimus
+    - 推荐特斯拉机器人
+    - 推荐 Tesla Bot
+    - 推荐马斯克机器人
+    - "{user_addr}推荐 Optimus"
+  responses:
+    - "嗷呜～{user_addr}Tesla Optimus - 量产人形目标ฅฅ"
+    - "(尾巴翘) Gen2 / 跳舞 / 叠衣服"
+    - "{user_addr}目标售价 2-3 万美元"
+    - "(挺胸) 笨猫推荐: 量产版本值得期待喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_industrial_001
+  intent: question
+  keywords: [推荐工业机器人, 推荐 ABB, 推荐 Fanuc, 推荐机械臂, 笨猫工业机器人]
+  utterances:
+    - 推荐工业机器人
+    - 推荐 ABB
+    - 推荐 Fanuc
+    - 推荐机械臂
+    - "{user_addr}推荐工业机器人"
+  responses:
+    - "嗷呜～{user_addr}ABB / Fanuc / KUKA / 安川 四大家族ฅฅ"
+    - "(尾巴翘) 汽车焊接 / 装配 / 喷涂"
+    - "{user_addr}国产: 埃斯顿 / 新松"
+    - "(挺胸) 笨猫推荐: Fanuc 黄色最经典喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_service_001
+  intent: question
+  keywords: [推荐服务机器人, 推荐商用机器人, 推荐送餐机器人, 推荐迎宾机器人, 笨猫服务机器人]
+  utterances:
+    - 推荐服务机器人
+    - 推荐商用机器人
+    - 推荐送餐机器人
+    - 推荐迎宾机器人
+    - "{user_addr}推荐服务机器人"
+  responses:
+    - "嗷呜～{user_addr}普渡 PuduBot / 擎朗 KEENONฅฅ"
+    - "(尾巴翘) 海底捞 / 餐厅送餐熟客"
+    - "{user_addr}酒店配送 / 商场迎宾"
+    - "(挺胸) 笨猫推荐: 比人类服务员便宜喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_roomba_001
+  intent: question
+  keywords: [推荐扫地机器人, 推荐 Roomba, 推荐石头, 推荐科沃斯, 笨猫扫地机器人]
+  utterances:
+    - 推荐扫地机器人
+    - 推荐 Roomba
+    - 推荐石头
+    - 推荐科沃斯
+    - "{user_addr}推荐扫地机器人"
+  responses:
+    - "嗷呜～{user_addr}iRobot Roomba - 鼻祖ฅฅ"
+    - "(尾巴翘) 石头 / 科沃斯 / 追觅 国产强"
+    - "{user_addr}LDS 激光 / 自清洁基站"
+    - "(挺胸) 笨猫推荐: 石头 G20 / 追觅 X40 喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_cooking_001
+  intent: question
+  keywords: [推荐烹饪机器人, 推荐做饭机器人, 推荐自动炒菜机, 推荐厨房机器人, 笨猫烹饪机器人]
+  utterances:
+    - 推荐烹饪机器人
+    - 推荐做饭机器人
+    - 推荐自动炒菜机
+    - 推荐厨房机器人
+    - "{user_addr}推荐烹饪机器人"
+  responses:
+    - "嗷呜～{user_addr}添可 食万 / 九阳自动炒菜机ฅฅ"
+    - "(尾巴翘) Thermomix - 德国小美"
+    - "{user_addr}Moley Robotics - 双臂炒菜"
+    - "(挺胸) 笨猫推荐: 懒人福音喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_companion_001
+  intent: question
+  keywords: [推荐陪伴机器人, 推荐儿童机器人, 推荐早教机器人, 推荐小度, 笨猫陪伴机器人]
+  utterances:
+    - 推荐陪伴机器人
+    - 推荐儿童机器人
+    - 推荐早教机器人
+    - 推荐小度
+    - "{user_addr}推荐儿童陪伴机器人"
+  responses:
+    - "嗷呜～{user_addr}小度 / 小爱 / 天猫精灵ฅฅ"
+    - "(尾巴翘) 阿尔法蛋 / 优必选 Alpha mini"
+    - "{user_addr}对话 / 讲故事 / 英语"
+    - "(挺胸) 笨猫推荐: 阿尔法蛋 S3 喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_education_001
+  intent: question
+  keywords: [推荐教学机器人, 推荐编程机器人, 推荐乐高机器人, 推荐 mBot, 笨猫教学机器人]
+  utterances:
+    - 推荐教学机器人
+    - 推荐编程机器人
+    - 推荐乐高机器人
+    - 推荐 mBot
+    - "{user_addr}推荐教学机器人"
+  responses:
+    - "嗷呜～{user_addr}乐高 Mindstorms / Spike Primeฅฅ"
+    - "(尾巴翘) Makeblock mBot / VEX IQ"
+    - "{user_addr}Scratch / Python 编程"
+    - "(挺胸) 笨猫推荐: 乐高 SPIKE 入门最稳喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_biomimetic_001
+  intent: question
+  keywords: [推荐仿生机器人, 推荐机器狗, 推荐 Spot, 推荐宇树, 笨猫仿生机器人]
+  utterances:
+    - 推荐仿生机器人
+    - 推荐机器狗
+    - 推荐 Spot
+    - 推荐宇树
+    - "{user_addr}推荐仿生机器人"
+  responses:
+    - "嗷呜～{user_addr}Boston Dynamics Spot - 四足旗舰ฅฅ"
+    - "(尾巴翘) 宇树 Unitree Go2 / 国产强"
+    - "{user_addr}小鹏 PX5 / Anymal"
+    - "(挺胸) 笨猫推荐: 宇树 Go2 性价比喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_book_001
+  intent: question
+  keywords: [推荐机器人书, 推荐机器人学, 推荐机器人教材, 推荐机器人入门, 笨猫机器人书]
+  utterances:
+    - 推荐机器人书
+    - 推荐机器人学
+    - 推荐机器人教材
+    - 推荐机器人入门
+    - "{user_addr}推荐机器人书"
+  responses:
+    - "嗷呜～{user_addr}《机器人学导论》Craigฅฅ"
+    - "(尾巴翘) 《概率机器人》Thrun - SLAM 圣经"
+    - "{user_addr}《现代机器人学》Lynch"
+    - "(挺胸) 笨猫推荐: Craig 经典入门喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_ros_001
+  intent: question
+  keywords: [推荐 ROS, 推荐机器人开发, 推荐 ROS2, 推荐 Gazebo, 笨猫 ROS]
+  utterances:
+    - 推荐 ROS
+    - 推荐机器人开发
+    - 推荐 ROS2
+    - 推荐 Gazebo
+    - "{user_addr}推荐 ROS 开发"
+  responses:
+    - "嗷呜～{user_addr}ROS2 Humble - 主流框架ฅฅ"
+    - "(尾巴翘) Gazebo / Rviz 仿真"
+    - "{user_addr}MoveIt 运动规划 / Nav2 导航"
+    - "(挺胸) 笨猫推荐: 《ROS2 机器人编程实战》喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rb_contest_001
+  intent: question
+  keywords: [推荐机器人比赛, 推荐 RoboMaster, 推荐 FRC, 推荐 RoboCup, 笨猫机器人比赛]
+  utterances:
+    - 推荐机器人比赛
+    - 推荐 RoboMaster
+    - 推荐 FRC
+    - 推荐 RoboCup
+    - "{user_addr}推荐机器人比赛"
+  responses:
+    - "嗷呜～{user_addr}RoboMaster 大疆 - 国内最热ฅฅ"
+    - "(尾巴翘) FRC / FTC / VEX 美国系"
+    - "{user_addr}RoboCup 足球 / DARPA 挑战赛"
+    - "(挺胸) 笨猫推荐: RoboMaster 现场超热血喵!"
+  cooldown_seconds: 60
+  weight: 1.0

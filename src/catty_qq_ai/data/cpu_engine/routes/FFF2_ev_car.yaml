@@ -1,0 +1,206 @@
+# 电动车 EV routes (S6 R594 NLU 节点扩充, 第五十九周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ev_tesla_001
+  intent: question
+  keywords: [推荐 Tesla, 推荐 Model 3, 推荐特斯拉, 推荐 Tesla Model 3, 笨猫 Tesla]
+  utterances:
+    - 推荐 Tesla
+    - 推荐 Model 3
+    - 推荐特斯拉
+    - 推荐 Tesla Model 3
+    - 笨猫 Tesla
+  responses:
+    - "嗷呜～{user_addr}Tesla Model 3 - 智能标杆ฅฅ"
+    - "(尾巴翘) Autopilot / FSD / 超充网络"
+    - "{user_addr}续航 556km / 加速 6.1s"
+    - "(挺胸) 猫猫推荐: Model 3 后驱版入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_byd_001
+  intent: question
+  keywords: [推荐比亚迪, 推荐秦, 推荐汉, 推荐比亚迪秦汉, 笨猫比亚迪]
+  utterances:
+    - 推荐比亚迪
+    - 推荐秦
+    - 推荐汉
+    - 推荐比亚迪秦汉
+    - 笨猫比亚迪
+  responses:
+    - "嗷呜～{user_addr}比亚迪汉 EV - 中国之光ฅฅ"
+    - "(尾巴翘) 刀片电池 / DM-i 混动 / 性价比"
+    - "{user_addr}秦 PLUS 10w / 汉 EV 20w"
+    - "(挺胸) 人家推荐: 汉 EV 创世版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_nio_001
+  intent: question
+  keywords: [推荐蔚来, 推荐 NIO, 推荐 ET5, 推荐蔚来 ET5, 笨猫蔚来]
+  utterances:
+    - 推荐蔚来
+    - 推荐 NIO
+    - 推荐 ET5
+    - 推荐蔚来 ET5
+    - 笨猫蔚来
+  responses:
+    - "嗷呜～{user_addr}蔚来 ET5 - 服务天花板ฅฅ"
+    - "(尾巴翘) 换电 / NIO House / 服务无忧"
+    - "{user_addr}ET5 30w / ET7 旗舰"
+    - "(挺胸) 猫猫推荐: ET5 BaaS 方案!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_lixiang_001
+  intent: question
+  keywords: [推荐理想, 推荐 L8, 推荐理想 L8, 推荐增程, 笨猫理想]
+  utterances:
+    - 推荐理想
+    - 推荐 L8
+    - 推荐理想 L8
+    - 推荐增程
+    - 笨猫理想
+  responses:
+    - "嗷呜～{user_addr}理想 L8 - 奶爸神器ฅฅ"
+    - "(尾巴翘) 增程式 / 六座大空间 / 冰箱彩电"
+    - "{user_addr}L8 35w / L9 旗舰 / 无续航焦虑"
+    - "(挺胸) 笨猫推荐: L8 Pro 家用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_xpeng_001
+  intent: question
+  keywords: [推荐小鹏, 推荐 P7, 推荐 XPeng, 推荐小鹏 P7, 笨猫小鹏]
+  utterances:
+    - 推荐小鹏
+    - 推荐 P7
+    - 推荐 XPeng
+    - 推荐小鹏 P7
+    - 笨猫小鹏
+  responses:
+    - "嗷呜～{user_addr}小鹏 P7 - 智驾先锋ฅฅ"
+    - "(尾巴翘) XNGP / 城市 NOA / 性价比"
+    - "{user_addr}P7i 25w / G9 SUV"
+    - "(挺胸) 人家推荐: P7i 鹏翼版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_bmw_001
+  intent: question
+  keywords: [推荐 BMW iX, 推荐宝马 iX, 推荐 BMW 电动, 推荐宝马电动, 笨猫宝马电动]
+  utterances:
+    - 推荐 BMW iX
+    - 推荐宝马 iX
+    - 推荐 BMW 电动
+    - 推荐宝马电动
+    - 笨猫宝马电动
+  responses:
+    - "嗷呜～{user_addr}BMW iX - 豪华电动 SUVฅฅ"
+    - "(尾巴翘) iX3 / i4 / iX 旗舰"
+    - "{user_addr}续航 630km / 80w 起"
+    - "(挺胸) 猫猫推荐: iX xDrive40!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_benz_001
+  intent: question
+  keywords: [推荐奔驰 EQE, 推荐 EQE, 推荐奔驰电动, 推荐 EQS, 笨猫奔驰电动]
+  utterances:
+    - 推荐奔驰 EQE
+    - 推荐 EQE
+    - 推荐奔驰电动
+    - 推荐 EQS
+    - 笨猫奔驰电动
+  responses:
+    - "嗷呜～{user_addr}奔驰 EQE - 行政级电动ฅฅ"
+    - "(尾巴翘) EQE 350+ / EQS 旗舰 / Hyperscreen"
+    - "{user_addr}续航 717km / 50w 起"
+    - "(挺胸) 笨猫推荐: EQE 350 豪华版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_charger_001
+  intent: question
+  keywords: [推荐充电桩, 推荐家用充电桩, 推荐 7kW, 推荐壁挂充电, 笨猫充电桩]
+  utterances:
+    - "推荐充电桩"
+    - "推荐家用充电桩"
+    - "推荐 7kW"
+    - "推荐壁挂充电"
+    - "笨猫充电桩"
+  responses:
+    - "嗷呜～{user_addr}家用 7kW 壁挂桩ฅฅ"
+    - "(尾巴翘) 特斯拉 / 比亚迪 / 公牛"
+    - "{user_addr}需 220V 专线 / 物业报备"
+    - "(挺胸) 猫猫推荐: 随车赠送桩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_range_001
+  intent: question
+  keywords: [推荐续航, 推荐长续航, 推荐 700km, 推荐续航里程, 笨猫续航]
+  utterances:
+    - 推荐续航
+    - 推荐长续航
+    - 推荐 700km
+    - 推荐续航里程
+    - 笨猫续航
+  responses:
+    - "嗷呜～{user_addr}极氪 001 / 蔚来 ET7 - 700km+ฅฅ"
+    - "(尾巴翘) CLTC 续航 / 冬季打 7 折"
+    - "{user_addr}500km 够日常 / 700km 跑长途"
+    - "(挺胸) 笨猫推荐: 别太焦虑里程!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_battery_001
+  intent: question
+  keywords: [推荐电池, 推荐刀片电池, 推荐三元锂, 推荐磷酸铁锂, 笨猫电池]
+  utterances:
+    - 推荐电池
+    - 推荐刀片电池
+    - 推荐三元锂
+    - 推荐磷酸铁锂
+    - 笨猫电池
+  responses:
+    - "嗷呜～{user_addr}磷酸铁锂 (LFP) - 安全耐久ฅฅ"
+    - "(尾巴翘) 三元锂 - 高能量密度"
+    - "{user_addr}比亚迪刀片 / 宁德麒麟"
+    - "(挺胸) 人家推荐: 家用选 LFP!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_autopilot_001
+  intent: question
+  keywords: [推荐自动驾驶, 推荐 FSD, 推荐 NOA, 推荐辅助驾驶, 笨猫自动驾驶]
+  utterances:
+    - 推荐自动驾驶
+    - 推荐 FSD
+    - 推荐 NOA
+    - 推荐辅助驾驶
+    - 笨猫自动驾驶
+  responses:
+    - "嗷呜～{user_addr}Tesla FSD / 华为 ADS 2.0ฅฅ"
+    - "(尾巴翘) 小鹏 XNGP / 蔚来 NOP+"
+    - "{user_addr}L2+ 辅助 / 别完全脱手"
+    - "(挺胸) 猫猫推荐: 城市 NOA 看小鹏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_used_001
+  intent: question
+  keywords: [推荐二手电动车, 推荐二手 EV, 推荐二手特斯拉, 推荐二手电动, 笨猫二手电动]
+  utterances:
+    - 推荐二手电动车
+    - 推荐二手 EV
+    - 推荐二手特斯拉
+    - 推荐二手电动
+    - 笨猫二手电动
+  responses:
+    - "嗷呜～{user_addr}二手 Model 3 / 比亚迪汉ฅฅ"
+    - "(尾巴翘) 看电池健康 SOH / 电芯检测"
+    - "{user_addr}3 年内车况好 / 别贪老款"
+    - "(挺胸) 笨猫推荐: 必查电池报告!"
+  cooldown_seconds: 60
+  weight: 1.0

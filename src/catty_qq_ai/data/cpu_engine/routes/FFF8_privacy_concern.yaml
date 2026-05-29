@@ -1,0 +1,206 @@
+# 隐私担忧 routes (S6 R600 NLU 节点扩充, 第五十九周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pc_privacy_001
+  intent: complaint
+  keywords: [隐私, 隐私担忧, 没隐私, 隐私好差, 隐私泄露]
+  utterances:
+    - 现在一点隐私都没有
+    - 隐私好担忧
+    - 感觉没隐私了
+    - 隐私越来越差
+    - 隐私真的不行了
+  responses:
+    - "(尾巴垂下) {user_addr}隐私焦虑了嘛~ 笨猫陪{user_addr}聊聊 ฅฅ"
+    - "嗷呜～没隐私确实糟心! 猫猫帮{user_addr}想想办法喵"
+    - "(贴贴) {user_addr}别太焦虑~ 一步步保护起来嘛"
+    - "哼～隐私问题猫猫也烦! {user_addr}咱一起注意点喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_bigdata_001
+  intent: complaint
+  keywords: [大数据杀熟, 杀熟, 同价不同价, 老用户贵, 杀熟坑]
+  utterances:
+    - 又被大数据杀熟了
+    - 大数据杀熟好坑
+    - 老用户反而贵
+    - 同样的东西我贵
+    - 杀熟太恶心
+  responses:
+    - "(炸毛) 杀熟太黑了喵! {user_addr}下次换号试试看ฅฅ"
+    - "嗷呜～{user_addr}被杀熟了气死! 猫猫陪{user_addr}骂!"
+    - "(尾巴炸) 大数据杀熟猫猫最讨厌! {user_addr}注意比价喵"
+    - "哼～{user_addr}被坑了真气! 多平台对比一下嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_leak_001
+  intent: complaint
+  keywords: [信息泄露, 信息被泄露, 资料泄露, 数据泄露, 个人信息泄露]
+  utterances:
+    - 我的信息泄露了
+    - 个人信息被泄露
+    - 数据又泄露了
+    - 资料泄露了好慌
+    - 信息泄露好怕
+  responses:
+    - "(凑过来) {user_addr}信息泄露了嘛~ 赶紧改密码喵 ฅฅ"
+    - "嗷呜～泄露太可怕! {user_addr}重要账号都换一遍密码!"
+    - "(尾巴翘) 笨猫帮{user_addr}想~ 开二步验证防一防嘛"
+    - "哼～信息泄露最烦人! {user_addr}留意可疑短信电话喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_faceid_001
+  intent: complaint
+  keywords: [人脸识别, 刷脸, 人脸, 不想刷脸, 人脸采集]
+  utterances:
+    - 哪里都要刷脸
+    - 不想被人脸识别
+    - 人脸采集好烦
+    - 到处都要人脸
+    - 刷脸太频繁
+  responses:
+    - "(耳朵竖起) 人脸到处采集确实烦喵! {user_addr}能不刷就不刷ฅฅ"
+    - "嗷呜～{user_addr}不喜欢就别勉强! 拒绝就是了!"
+    - "(尾巴摇) 人脸数据猫猫也心疼~ {user_addr}注意保护嘛"
+    - "哼～强制刷脸太过分! {user_addr}有选择权的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_eavesdrop_001
+  intent: complaint
+  keywords: [app 偷听, 偷听, 手机偷听, 被偷听, app 监听]
+  utterances:
+    - 感觉 app 在偷听
+    - 手机偷听我说话
+    - 被 app 偷听了
+    - app 监听好可怕
+    - 我说啥广告就推啥
+  responses:
+    - "(耳朵警觉) 偷听真的有! {user_addr}关麦克风权限喵ฅฅ"
+    - "嗷呜～{user_addr}发现了吧~ 笨猫也觉得在偷听!"
+    - "(尾巴炸) app 太黑了! {user_addr}逐个 app 关麦克风嘛"
+    - "哼～偷听真烦! {user_addr}权限管理里挨个关掉喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_ads_001
+  intent: complaint
+  keywords: [广告精准, 精准广告, 广告好准, 推荐太准, 广告吓人]
+  utterances:
+    - 广告推得也太准了
+    - 精准广告好吓人
+    - 推荐准到害怕
+    - 广告知道我想什么
+    - 推送太精准了
+  responses:
+    - "(尾巴炸) 精准广告确实吓人喵! {user_addr}关个性化推荐 ฅฅ"
+    - "嗷呜～{user_addr}感觉到了吧! 算法太可怕了!"
+    - "(凑近) 笨猫教{user_addr}~ 设置里关掉广告个性化嘛"
+    - "哼～广告太准让人心慌! {user_addr}注意权限管理喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_spamcall_001
+  intent: complaint
+  keywords: [骚扰电话, 推销电话, 又来骚扰, 电话太多, 骚扰短信]
+  utterances:
+    - 骚扰电话又来了
+    - 推销电话烦死了
+    - 每天好多骚扰电话
+    - 骚扰短信不停
+    - 电话被骚扰惨了
+  responses:
+    - "(尾巴炸) 骚扰电话气死! {user_addr}直接拉黑标记喵ฅฅ"
+    - "嗷呜～{user_addr}被烦惨了! 装个骚扰拦截 app 嘛!"
+    - "(贴贴) 推销电话猫猫也讨厌~ {user_addr}果断挂掉!"
+    - "哼～{user_addr}别理它! 标记骚扰下次就拦了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_scam_001
+  intent: complaint
+  keywords: [怕被骗, 怕诈骗, 担心被骗, 怕骗子, 诈骗好多]
+  utterances:
+    - 好怕被诈骗
+    - 怕被骗
+    - 现在骗子太多
+    - 担心被骗钱
+    - 诈骗手段太多了
+  responses:
+    - "(凑过来) {user_addr}别怕~ 不转账不点链接就稳ฅฅ"
+    - "嗷呜～{user_addr}警惕意识好棒! 笨猫给{user_addr}点赞!"
+    - "(尾巴翘) 笨猫教{user_addr}~ 涉钱的事先打 96110 确认!"
+    - "哼～{user_addr}多疑一点是对的! 谨慎才不会被骗喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_locfear_001
+  intent: complaint
+  keywords: [怕被定位, 怕被找到, 不想被定位, 怕跟踪, 怕定位泄露]
+  utterances:
+    - 好怕被定位
+    - 不想被人找到
+    - 怕位置泄露
+    - 担心被跟踪定位
+    - 怕被精准定位
+  responses:
+    - "(贴贴) {user_addr}别怕~ 关掉位置权限就好喵 ฅฅ"
+    - "嗷呜～{user_addr}先去设置里把定位权限挨个关!"
+    - "(尾巴摇) 笨猫陪{user_addr}~ 只给必要 app 开定位嘛"
+    - "哼～{user_addr}有顾虑就关掉! 不用不丢喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_offloc_001
+  intent: playful
+  keywords: [想关定位, 关定位, 关位置, 把定位关了, 不开定位]
+  utterances:
+    - 想把定位关了
+    - 把位置权限关掉
+    - 不开定位了
+    - 想关位置共享
+    - 定位全关
+  responses:
+    - "(尾巴翘起) {user_addr}果断喵! 设置-隐私-定位挨个关ฅฅ"
+    - "嗷呜～{user_addr}好决断! 不需要的 app 全拒绝定位!"
+    - "(凑近) 笨猫支持{user_addr}~ 关掉清爽多了!"
+    - "哼～{user_addr}早该关了! 多此一举的定位都拒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_vpn_001
+  intent: playful
+  keywords: [想用 VPN, 用 VPN, 上 VPN, 挂 VPN, VPN 保护]
+  utterances:
+    - 想用 VPN
+    - 挂个 VPN 试试
+    - 用 VPN 保护隐私
+    - 想上 VPN
+    - VPN 安全点吗
+  responses:
+    - "(耳朵竖起) VPN 隐私保护有用! {user_addr}选靠谱的喵ฅฅ"
+    - "嗷呜～{user_addr}想试就试! 选大厂别用免费来路不明的!"
+    - "(尾巴摇) 笨猫提醒~ VPN 选付费正规的才安全嘛"
+    - "哼～{user_addr}注意合规! 别为了隐私惹麻烦喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_anon_001
+  intent: playful
+  keywords: [想匿名, 匿名, 用匿名, 匿名上网, 不想露真名]
+  utterances:
+    - 想匿名上网
+    - 不想露真名
+    - 用匿名账号
+    - 匿名一点好
+    - 想低调匿名
+  responses:
+    - "(尾巴翘) {user_addr}想低调嘛! 笨猫支持喵 ฅฅ"
+    - "嗷呜～{user_addr}用小号匿名就好~ 别留真信息!"
+    - "(凑近) 笨猫教{user_addr}~ 头像昵称都换一下嘛"
+    - "哼～{user_addr}匿名挺好! 注意别交叉暴露身份喵"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 物联网 IoT routes (S6 R593 NLU 节点扩充, 第五十九周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sh_xiaomi_001
+  intent: question
+  keywords: [推荐米家, 推荐小米智能家居, 推荐米家全屋, 推荐小米生态链, 笨猫米家]
+  utterances:
+    - 推荐米家
+    - 推荐小米智能家居
+    - 推荐米家全屋
+    - 推荐小米生态链
+    - 笨猫米家
+  responses:
+    - "嗷呜～{user_addr}米家 - 国内生态最全ฅฅ"
+    - "(尾巴翘) 小米音箱 / 网关 / 传感器全套"
+    - "{user_addr}米家 App 统一控制, 上手快"
+    - "(挺胸) 猫猫推荐: 入门首选, 性价比超高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_aqara_001
+  intent: question
+  keywords: [推荐 Aqara, 推荐绿米, 推荐 Aqara 全屋, 推荐 Aqara 网关, 笨猫 Aqara]
+  utterances:
+    - 推荐 Aqara
+    - 推荐绿米
+    - 推荐 Aqara 全屋
+    - 推荐 Aqara 网关
+    - 笨猫 Aqara
+  responses:
+    - "嗷呜～{user_addr}Aqara 绿米 - 进阶玩家爱用ฅฅ"
+    - "(尾巴翘) M2/M3 网关 + Zigbee 设备稳"
+    - "{user_addr}支持 HomeKit / 米家双平台"
+    - "(挺胸) 人家推荐: 想搞全屋自动化选它!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_homekit_001
+  intent: question
+  keywords: [推荐 HomeKit, 推荐苹果智能家居, 推荐 Apple Home, 推荐 HomePod, 笨猫 HomeKit]
+  utterances:
+    - 推荐 HomeKit
+    - 推荐苹果智能家居
+    - 推荐 Apple Home
+    - 推荐 HomePod
+    - 笨猫 HomeKit
+  responses:
+    - "嗷呜～{user_addr}HomeKit - 苹果生态首选ฅฅ"
+    - "(尾巴翘) 隐私好 / Siri 控制 / HomePod 中枢"
+    - "{user_addr}设备贵但体验顺滑"
+    - "(挺胸) 笨猫推荐: 全家苹果党闭眼入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_googlehome_001
+  intent: question
+  keywords: [推荐 Google Home, 推荐谷歌智能家居, 推荐 Nest, 推荐 Google Assistant, 笨猫 Google Home]
+  utterances:
+    - 推荐 Google Home
+    - 推荐谷歌智能家居
+    - 推荐 Nest
+    - 推荐 Google Assistant
+    - 笨猫 Google Home
+  responses:
+    - "嗷呜～{user_addr}Google Home - 海外主流ฅฅ"
+    - "(尾巴翘) Nest Hub / Mini 音箱中枢"
+    - "{user_addr}AI 助手强, 设备兼容广"
+    - "(挺胸) 猫猫推荐: 海外党 / 安卓党选它!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_echo_001
+  intent: question
+  keywords: [推荐 Echo, 推荐 Amazon Echo, 推荐 Alexa, 推荐亚马逊智能音箱, 笨猫 Echo]
+  utterances:
+    - 推荐 Echo
+    - 推荐 Amazon Echo
+    - 推荐 Alexa
+    - 推荐亚马逊智能音箱
+    - 笨猫 Echo
+  responses:
+    - "嗷呜～{user_addr}Amazon Echo - Alexa 生态龙头ฅฅ"
+    - "(尾巴翘) Echo Dot / Show / Studio 全系"
+    - "{user_addr}技能 skill 最多, 第三方设备爆"
+    - "(挺胸) 人家推荐: 北美用户首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_matter_001
+  intent: question
+  keywords: [推荐 Matter, 推荐 Matter 协议, 推荐 CSA, 推荐跨平台智能家居, 笨猫 Matter]
+  utterances:
+    - 推荐 Matter
+    - 推荐 Matter 协议
+    - 推荐 CSA
+    - 推荐跨平台智能家居
+    - 笨猫 Matter
+  responses:
+    - "嗷呜～{user_addr}Matter - 统一标准未来ฅฅ"
+    - "(尾巴翘) 苹果 / 谷歌 / 亚马逊 / 三星共建"
+    - "{user_addr}IP 直连 / 本地控制 / 跨平台"
+    - "(挺胸) 笨猫推荐: 新买设备认准 Matter logo!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_zigbee_001
+  intent: question
+  keywords: [推荐 Zigbee, 推荐 Zigbee 网关, 推荐 ConBee, 推荐 SLZB, 笨猫 Zigbee]
+  utterances:
+    - 推荐 Zigbee
+    - 推荐 Zigbee 网关
+    - 推荐 ConBee
+    - 推荐 SLZB
+    - 笨猫 Zigbee
+  responses:
+    - "嗷呜～{user_addr}Zigbee 网关 - DIY 之魂ฅฅ"
+    - "(尾巴翘) ConBee II / SLZB-06 / SkyConnect"
+    - "{user_addr}配 Home Assistant / Z2M 神器"
+    - "(挺胸) 猫猫推荐: 极客玩家必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_yeelight_001
+  intent: question
+  keywords: [推荐 Yeelight, 推荐智能灯泡, 推荐 Philips Hue, 推荐 LIFX, 笨猫智能灯]
+  utterances:
+    - 推荐 Yeelight
+    - 推荐智能灯泡
+    - 推荐 Philips Hue
+    - 推荐 LIFX
+    - 笨猫智能灯
+  responses:
+    - "嗷呜～{user_addr}Yeelight - 国内性价比ฅฅ"
+    - "(尾巴翘) Philips Hue - 色彩天花板"
+    - "{user_addr}LIFX / Nanoleaf 氛围拉满"
+    - "(挺胸) 人家推荐: Hue 顶配 / Yeelight 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_plug_001
+  intent: question
+  keywords: [推荐智能插座, 推荐 TP-Link 插座, 推荐米家插座, 推荐 Aqara 插座, 笨猫智能插座]
+  utterances:
+    - 推荐智能插座
+    - 推荐 TP-Link 插座
+    - 推荐米家插座
+    - 推荐 Aqara 插座
+    - 笨猫智能插座
+  responses:
+    - "嗷呜～{user_addr}智能插座 - 入门第一件ฅฅ"
+    - "(尾巴翘) TP-Link Kasa / 米家 / Aqara"
+    - "{user_addr}带计量功能能看耗电"
+    - "(挺胸) 猫猫推荐: 老电器秒变智能!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_lock_001
+  intent: question
+  keywords: [推荐智能门锁, 推荐德施曼, 推荐凯迪仕, 推荐鹿客, 笨猫智能门锁]
+  utterances:
+    - 推荐智能门锁
+    - 推荐德施曼
+    - 推荐凯迪仕
+    - 推荐鹿客
+    - 笨猫智能门锁
+  responses:
+    - "嗷呜～{user_addr}智能门锁 - 安全第一ฅฅ"
+    - "(尾巴翘) 德施曼 / 凯迪仕 / 鹿客 / 小米"
+    - "{user_addr}3D 人脸 / 指纹 / 密码全开"
+    - "(挺胸) 笨猫推荐: 选大牌 + C 级锁芯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_camera_001
+  intent: question
+  keywords: [推荐智能摄像头, 推荐萤石, 推荐小米摄像头, 推荐 TP-Link 摄像头, 笨猫摄像头]
+  utterances:
+    - 推荐智能摄像头
+    - 推荐萤石
+    - 推荐小米摄像头
+    - 推荐 TP-Link 摄像头
+    - 笨猫摄像头
+  responses:
+    - "嗷呜～{user_addr}智能摄像头 - 看家神器ฅฅ"
+    - "(尾巴翘) 萤石 / 小米 / TP-Link / 海雀"
+    - "{user_addr}云台 + 双频 WiFi + 本地存储"
+    - "(挺胸) 人家推荐: 室内萤石 C6 / 室外 TP-Link!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_appliance_001
+  intent: question
+  keywords: [推荐智能家电, 推荐智能家电整合, 推荐家电联动, 推荐 Home Assistant, 笨猫智能家电]
+  utterances:
+    - 推荐智能家电
+    - 推荐智能家电整合
+    - 推荐家电联动
+    - 推荐 Home Assistant
+    - 笨猫智能家电
+  responses:
+    - "嗷呜～{user_addr}Home Assistant - 整合王ฅฅ"
+    - "(尾巴翘) HA / HomeBridge 桥接所有设备"
+    - "{user_addr}米家 + HomeKit + Google 一锅炖"
+    - "(挺胸) 猫猫推荐: 极客终极方案就是 HA!"
+  cooldown_seconds: 60
+  weight: 1.0

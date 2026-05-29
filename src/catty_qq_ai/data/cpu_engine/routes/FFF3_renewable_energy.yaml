@@ -1,0 +1,206 @@
+# 可再生能源 routes (S6 R595 NLU 节点扩充, 第五十九周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: rne_solar_001
+  intent: question
+  keywords: [推荐太阳能板, 推荐家用光伏, 推荐隆基, 推荐 SunPower, 笨猫太阳能板]
+  utterances:
+    - 推荐太阳能板
+    - 推荐家用光伏
+    - 推荐隆基
+    - 推荐 SunPower
+    - 笨猫太阳能板
+  responses:
+    - "嗷呜～{user_addr}隆基 / 晶科 - 国产大厂ฅฅ"
+    - "(尾巴翘) SunPower / REC - 高端进口"
+    - "{user_addr}单晶硅效率 22%+ / 屋顶 5-10kW"
+    - "(挺胸) 笨猫推荐: 隆基 Hi-MO 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rne_storage_001
+  intent: question
+  keywords: [推荐家庭储能, 推荐 Powerwall, 推荐特斯拉储能, 推荐比亚迪储能, 笨猫家庭储能]
+  utterances:
+    - 推荐家庭储能
+    - 推荐 Powerwall
+    - 推荐特斯拉储能
+    - 推荐比亚迪储能
+    - 笨猫家庭储能
+  responses:
+    - "嗷呜～{user_addr}Tesla Powerwall 3 - 13.5kWhฅฅ"
+    - "(尾巴翘) 比亚迪 / 华为 / 阳光电源"
+    - "{user_addr}磷酸铁锂安全 / 配光伏"
+    - "(挺胸) 笨猫推荐: Powerwall 一体化好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rne_wind_001
+  intent: question
+  keywords: [推荐风力发电, 推荐风电, 推荐金风科技, 推荐 Vestas, 笨猫风力发电]
+  utterances:
+    - 推荐风力发电
+    - 推荐风电
+    - 推荐金风科技
+    - 推荐 Vestas
+    - 笨猫风力发电
+  responses:
+    - "嗷呜～{user_addr}金风 / 远景 - 国产龙头ฅฅ"
+    - "(尾巴翘) Vestas / Siemens Gamesa"
+    - "{user_addr}海上风电 / 陆上风电"
+    - "(挺胸) 笨猫推荐: 海上风电潜力大!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rne_hydro_001
+  intent: question
+  keywords: [推荐水力发电, 推荐水电, 推荐抽水蓄能, 推荐三峡, 笨猫水力发电]
+  utterances:
+    - 推荐水力发电
+    - 推荐水电
+    - 推荐抽水蓄能
+    - 推荐三峡
+    - 笨猫水力发电
+  responses:
+    - "嗷呜～{user_addr}三峡 / 白鹤滩 - 大坝顶级ฅฅ"
+    - "(尾巴翘) 抽水蓄能 - 电网调峰"
+    - "{user_addr}清洁稳定 / 受地形限"
+    - "(挺胸) 笨猫推荐: 抽水蓄能配新能源!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rne_geothermal_001
+  intent: question
+  keywords: [推荐地热能, 推荐地源热泵, 推荐冰岛地热, 推荐干热岩, 笨猫地热能]
+  utterances:
+    - 推荐地热能
+    - 推荐地源热泵
+    - 推荐冰岛地热
+    - 推荐干热岩
+    - 笨猫地热能
+  responses:
+    - "嗷呜～{user_addr}冰岛 / 肯尼亚 - 地热大国ฅฅ"
+    - "(尾巴翘) 地源热泵 - 家用供暖制冷"
+    - "{user_addr}干热岩 EGS - 未来潜力"
+    - "(挺胸) 笨猫推荐: 地源热泵省电!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: rne_biomass_001
+  intent: question
+  keywords: [推荐生物质能, 推荐沼气, 推荐生物柴油, 推荐秸秆发电, 笨猫生物质能]
+  utterances:
+    - 推荐生物质能
+    - 推荐沼气
+    - 推荐生物柴油
+    - 推荐秸秆发电
+    - 笨猫生物质能
+  responses:
+    - "嗷呜～{user_addr}沼气 / 秸秆 - 农村适用ฅฅ"
+    - "(尾巴翘) 生物柴油 / 生物乙醇"
+    - "{user_addr}碳循环友好 / 与粮争地慎"
+    - "(挺胸) 笨猫推荐: 沼气利用农废!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: rne_nuclear_001
+  intent: question
+  keywords: [推荐核能, 推荐核电, 推荐华龙一号, 推荐小堆 SMR, 笨猫核能]
+  utterances:
+    - 推荐核能
+    - 推荐核电
+    - 推荐华龙一号
+    - 推荐小堆 SMR
+    - 笨猫核能
+  responses:
+    - "嗷呜～{user_addr}华龙一号 - 国产三代ฅฅ"
+    - "(尾巴翘) AP1000 / EPR - 国际三代"
+    - "{user_addr}SMR 小堆 / 钍堆 - 未来"
+    - "(挺胸) 笨猫推荐: 核能基荷不可缺!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rne_hydrogen_001
+  intent: question
+  keywords: [推荐氢能源, 推荐绿氢, 推荐氢燃料电池, 推荐丰田 Mirai, 笨猫氢能源]
+  utterances:
+    - 推荐氢能源
+    - 推荐绿氢
+    - 推荐氢燃料电池
+    - 推荐丰田 Mirai
+    - 笨猫氢能源
+  responses:
+    - "嗷呜～{user_addr}绿氢电解水 - 终极清洁ฅฅ"
+    - "(尾巴翘) 丰田 Mirai / 现代 Nexo"
+    - "{user_addr}重卡 / 船舶 / 工业脱碳"
+    - "(挺胸) 笨猫推荐: 绿氢未来之星!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rne_carbon_neutral_001
+  intent: question
+  keywords: [推荐碳中和, 推荐 2060 双碳, 推荐 carbon offset, 推荐碳交易, 笨猫碳中和]
+  utterances:
+    - 推荐碳中和
+    - 推荐 2060 双碳
+    - 推荐 carbon offset
+    - 推荐碳交易
+    - 笨猫碳中和
+  responses:
+    - "嗷呜～{user_addr}2030 碳达峰 / 2060 中和ฅฅ"
+    - "(尾巴翘) 碳交易 ETS / CCER 抵消"
+    - "{user_addr}电气化 + 新能源 + CCUS"
+    - "(挺胸) 笨猫推荐: 减排优先抵消辅!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rne_green_building_001
+  intent: question
+  keywords: [推荐绿色建筑, 推荐 LEED, 推荐被动房, 推荐近零能耗, 笨猫绿色建筑]
+  utterances:
+    - 推荐绿色建筑
+    - 推荐 LEED
+    - 推荐被动房
+    - 推荐近零能耗
+    - 笨猫绿色建筑
+  responses:
+    - "嗷呜～{user_addr}LEED / WELL - 国际认证ฅฅ"
+    - "(尾巴翘) 被动房 Passivhaus - 德标"
+    - "{user_addr}保温 + 新风 + 光伏一体"
+    - "(挺胸) 笨猫推荐: 被动房舒适省能!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rne_appliance_001
+  intent: question
+  keywords: [推荐节能电器, 推荐一级能效, 推荐变频空调, 推荐热泵, 笨猫节能电器]
+  utterances:
+    - 推荐节能电器
+    - 推荐一级能效
+    - 推荐变频空调
+    - 推荐热泵
+    - 笨猫节能电器
+  responses:
+    - "嗷呜～{user_addr}一级能效 / APF 5.0+ฅฅ"
+    - "(尾巴翘) 变频空调 / 热泵热水器"
+    - "{user_addr}LED 灯 / IH 电饭煲"
+    - "(挺胸) 笨猫推荐: 热泵替代燃气!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rne_esg_invest_001
+  intent: question
+  keywords: [推荐 ESG 投资, 推荐绿色基金, 推荐新能源 ETF, 推荐 MSCI ESG, 笨猫 ESG]
+  utterances:
+    - 推荐 ESG 投资
+    - 推荐绿色基金
+    - 推荐新能源 ETF
+    - 推荐 MSCI ESG
+    - 笨猫 ESG
+  responses:
+    - "嗷呜～{user_addr}新能源 ETF / 光伏 ETFฅฅ"
+    - "(尾巴翘) MSCI ESG 评级筛选"
+    - "{user_addr}绿色债券 / 碳中和基金"
+    - "(挺胸) 笨猫推荐: 长期持有别追高!"
+  cooldown_seconds: 60
+  weight: 0.8
