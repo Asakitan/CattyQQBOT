@@ -290,6 +290,7 @@ def register_catty_persona(
         user_display      : str  对方称呼字面(macros render 用)
         affection_level   : int
         is_owner          : bool
+        is_group          : bool (决定是否注册 catty_group_silence 群聊沉默段; 默认 False=私聊)
         has_image         : bool (决定要不要挂 image_literacy)
         story_arc_store   : StoryArcStore | None
         no_reply_marker   : str
@@ -343,6 +344,16 @@ def register_catty_persona(
         content_fn=lambda: _ccp.CATTY_CORE_PERSONA,
         order=100,
     )
+    # 主人 2026-05-29 (P2): 群聊默认沉默块**仅群聊注入** (私聊 1v1 无意义且带偏 NSFW)。
+    # order=105 紧跟 core_persona, 仍 < boundary 455 → 群聊 cache prefix; 私聊根本不注册此段
+    # → 私聊前缀更短且仍 byte-stable。content 是常量 CATTY_GROUP_SILENCE。
+    # ctx.get('is_group', False) 默认 False → 漏传时退化为不注入 (偏私聊, 安全)。
+    if bool(ctx.get("is_group", False)):
+        mgr.register_static(
+            "catty_group_silence",
+            _ccp.CATTY_GROUP_SILENCE,
+            order=105,
+        )
     # ST V2 character_book: 嵌入式 lorebook — character_card 自带的笨猫私货 entry
     # (尾巴/猫粮/弦化/欧泊阵营/睡眠/呼噜...),命中 user_text 关键词时拼一段注入。
     # 不走 world_info.py 的 cooldown(这些是"角色私货",触发即注入),用 order=145 让它紧跟 scenario。

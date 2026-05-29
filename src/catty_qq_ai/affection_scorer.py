@@ -776,6 +776,45 @@ def pick_paid_nsfw_scene() -> tuple[str, str]:
 PAID_NSFW_STICKY_SECONDS = 120.0
 _PAID_NSFW_STICKY: dict[str, dict] = {}  # sticky_key -> {trope, scene, outcome, cost, until}
 _PAID_NSFW_STICKY_MAX = 2048  # 防内存爆
+# 主人 2026-05-29 连贯性修复: recent-paid 宽限 — paid 窗口过期后再记一段 last meta,
+# 让刚出窗的 deep 句能续上 (避免 forced-stage10 → Lv-gate 拒绝 横跳)。宽限 = 1×TTL。
+PAID_NSFW_GRACE_SECONDS = PAID_NSFW_STICKY_SECONDS
+_PAID_NSFW_RECENT: dict[str, dict] = {}  # sticky_key -> {trope, scene, outcome, cost, expired_at}
+
+
+def _record_recent_paid(sticky_key: str, meta: dict) -> None:
+    """paid 窗口过期时把 meta 落进 recent, 记 expired_at 供宽限期判定。"""
+    if not sticky_key or not meta:
+        return
+    _PAID_NSFW_RECENT[sticky_key] = {
+        "trope": meta.get("trope", ""),
+        "scene": meta.get("scene", ""),
+        "outcome": meta.get("outcome", "pleasant"),
+        "cost": int(meta.get("cost") or PAID_NSFW_COST),
+        "expired_at": time.time(),
+    }
+    if len(_PAID_NSFW_RECENT) > _PAID_NSFW_STICKY_MAX:
+        cutoff = time.time() - PAID_NSFW_GRACE_SECONDS
+        for k in [k for k, v in _PAID_NSFW_RECENT.items() if v.get("expired_at", 0) < cutoff]:
+            _PAID_NSFW_RECENT.pop(k, None)
+
+
+def was_recent_paid(sticky_key: str) -> dict | None:
+    """窗口刚过期且在宽限期内 → 返回 last meta (供续 paid sticky); 否则 None。"""
+    if not sticky_key:
+        return None
+    rec = _PAID_NSFW_RECENT.get(sticky_key)
+    if rec is None:
+        return None
+    if time.time() >= float(rec.get("expired_at", 0)) + PAID_NSFW_GRACE_SECONDS:
+        _PAID_NSFW_RECENT.pop(sticky_key, None)
+        return None
+    return rec
+
+
+def clear_recent_paid(sticky_key: str) -> None:
+    """closing 退出时一并清掉 recent 宽限 (不让 closing 后又被宽限拉回)。"""
+    _PAID_NSFW_RECENT.pop(sticky_key, None)
 
 
 def open_paid_sticky(
@@ -805,9 +844,30 @@ def get_paid_sticky(sticky_key: str) -> dict | None:
     if meta is None:
         return None
     if time.time() >= float(meta.get("until", 0)):
+        # 过期: 先落进 recent (供 was_recent_paid 宽限续上), 再 pop 活跃窗口
+        _record_recent_paid(sticky_key, meta)
         _PAID_NSFW_STICKY.pop(sticky_key, None)
         return None
     return meta
+
+
+def refresh_paid_sticky(sticky_key: str) -> bool:
+    """续杯命中时把 paid sticky 窗口滑动到 now+TTL (跟普通 _NSFW_STICKY 同滑窗语义)。
+
+    主人 2026-05-29 连贯性修复: 援交场景进行中, 每命中一次 paid 续杯就刷新窗口,
+    让一个进行中的付费场景不要在首充 +120s 整点硬掉档。只刷新**未过期**窗口
+    (不复活已过期窗口 — 那走 was_recent_paid 宽限路径)。"""
+    if not sticky_key:
+        return False
+    meta = _PAID_NSFW_STICKY.get(sticky_key)
+    if meta is None:
+        return False
+    if time.time() >= float(meta.get("until", 0)):
+        _record_recent_paid(sticky_key, meta)
+        _PAID_NSFW_STICKY.pop(sticky_key, None)
+        return False
+    meta["until"] = time.time() + PAID_NSFW_STICKY_SECONDS
+    return True
 
 
 def close_paid_sticky(sticky_key: str) -> None:
@@ -1002,6 +1062,9 @@ __all__ = [
     "PAID_NSFW_STICKY_SECONDS",
     "open_paid_sticky",
     "get_paid_sticky",
+    "refresh_paid_sticky",
+    "was_recent_paid",
+    "clear_recent_paid",
     "close_paid_sticky",
     "build_breakthrough_override",
     "build_group_paid_induce_prompt",
