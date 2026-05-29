@@ -73,6 +73,14 @@ class PhaseState:
     # 恢复: 失神状态下 4 轮无新 climax 推进 → False (turns_dazed 计数); 或 reset_phase 清
     dazed: bool = False
     turns_dazed: int = 0          # 失神持续轮数 (达 4 自动 reset dazed)
+    # ── 主人 2026-05-29: 怀孕高潮计数修复 ──
+    # high_band_turns: 主人持续推 (signal 1/2) 且停在 P6-P8 (>=6) 高潮带 的累计轮数,
+    #   达 _HIGH_BAND_CLIMAX_EVERY 记一次"持续高潮"(停太久也算高潮); 跌出 P6 / 新 arc / closing 清 0.
+    high_band_turns: int = 0
+    # pending_climax_count: 本轮累计待结算的高潮数 (跨 driver 汇总: apply_user_signal 回复前推进
+    #   + update_phase 回复文本入带), 由怀孕记录处 consume_pending_climaxes() 取走清零.
+    #   与 climax_count(失神机制)解耦 — 失神 4 轮 reset climax_count 不影响怀孕累计.
+    pending_climax_count: int = 0
 
 
 # Module-level state: key = f"{scope}:{user_id}"
@@ -140,6 +148,8 @@ def _load_phase_state() -> None:
                     climax_count=int(record.get("climax_count", 0)),
                     dazed=bool(record.get("dazed", False)),
                     turns_dazed=int(record.get("turns_dazed", 0)),
+                    high_band_turns=int(record.get("high_band_turns", 0)),
+                    pending_climax_count=int(record.get("pending_climax_count", 0)),
                 )
             except Exception:  # noqa: BLE001
                 continue
@@ -174,6 +184,7 @@ def flush_phase_state() -> bool:
         except Exception:  # noqa: BLE001
             return False
 _NSFW_PHASE_EXPIRY_SECONDS = 1800  # 30min 无新更新 → 视为新场景 reset
+_HIGH_BAND_CLIMAX_EVERY = 3  # 主人 2026-05-29: 持续停留 P6-P8 (>=6) 且仍在推, 每 N 轮 = 一次高潮
 _MAX_STATES = 256  # 防内存爆 — 超过时回收最旧 25%
 _RECENT_OPENER_CAP = 3  # 保留最近 N 条 reply opener 用于反复读
 
@@ -2158,6 +2169,58 @@ def detect_phase_with_confidence(reply: str) -> tuple[int, int]:
     return best_phase, best_hits
 
 
+def _bump_climax(st: PhaseState) -> None:
+    """记一次笨猫高潮: climax_count++ (失神机制) + pending_climax_count++ (怀孕 consume)."""
+    st.climax_count += 1
+    st.pending_climax_count += 1
+    st.turns_dazed = 0  # 新高潮 → 重置失神倒计时
+    if st.climax_count >= 2:
+        st.dazed = True
+
+
+def _register_climax_if_crossed(st: PhaseState, old_phase: int, new_phase: int) -> None:
+    """phase 从 <6 抬进 >=6 (含 climax 请求 +2 跳阶 P5->P7) = 一次高潮峰值.
+
+    主人 2026-05-29 修复根因: 旧版只在 update_phase 严格 new_phase==6 时 +1, 但 apply_user_signal
+    (回复前按主人消息推进)会抢先把 phase 顶进 P6/P7, 等 update_phase 跑时 6 > current 不成立,
+    导致绝大多数高潮漏计 (pregnancy.json 卡死 6). 改成"跨进高潮带"判定, 两个 driver 都调.
+    """
+    if old_phase < 6 <= new_phase:
+        _bump_climax(st)
+
+
+def _tick_high_band_on_push(st: PhaseState) -> None:
+    """主人还在推 (signal 1/2) 且停留在 P6-P8 (>=6) 高潮带 → 每 _HIGH_BAND_CLIMAX_EVERY 轮记一次.
+
+    主人 2026-05-29: "一直停在 P6 以上也是持续高潮". 只在主人 push 时累计, 不靠纯 phase 卡高位,
+    避免 SFW 闲聊卡在 P8 刷出幽灵高潮.
+    """
+    if st.current_phase >= 6:
+        st.high_band_turns += 1
+        if st.high_band_turns >= _HIGH_BAND_CLIMAX_EVERY:
+            st.high_band_turns = 0
+            _bump_climax(st)
+    else:
+        st.high_band_turns = 0
+
+
+def consume_pending_climaxes(scope: str, user_id: str) -> int:
+    """取走并清零本轮累计的待结算高潮数 (怀孕计数用).
+
+    汇总 apply_user_signal(回复前 push 驱动) + update_phase(回复文本入带) 两个 driver 的高潮.
+    旧版用 update_phase 前后的 climax_count delta 抓不到 apply_user_signal 抢先推进的那部分.
+    """
+    key = _state_key(scope, user_id)
+    with _PHASE_STATE_LOCK:
+        st = _NSFW_PHASE_BY_SCOPE.get(key)
+        if st is None or st.pending_climax_count <= 0:
+            return 0
+        n = int(st.pending_climax_count)
+        st.pending_climax_count = 0
+        _mark_phase_state_dirty()
+        return n
+
+
 def update_phase(
     scope: str,
     user_id: str,
@@ -2181,6 +2244,9 @@ def update_phase(
             last_reply_excerpt=reply_excerpt[:80],
             history=[(max(1, new_phase) if new_phase > 0 else 1, now)],
         )
+        # 主人 2026-05-29: 全新场景若首检测就直接起步在高潮带 (>=6, 罕见) = 一次入带峰值
+        if st.current_phase >= 6:
+            _bump_climax(st)
         _NSFW_PHASE_BY_SCOPE[key] = st
         return st
 
@@ -2194,19 +2260,18 @@ def update_phase(
         st.turn_count += 1
     else:
         # 推进!
+        _old_phase = st.current_phase
         st.current_phase = new_phase
         st.turn_count = 1
         st.history.append((new_phase, now))
         # 限 history 长度
         if len(st.history) > 20:
             st.history = st.history[-20:]
-        # ── 主人 2026-05-28: 高潮过多失神机制 (跨 arc 累计) ──
-        # 推进到 P6 = 一次高潮峰值. 累计 ≥ 2 次 → 失神
-        if new_phase == 6:
-            st.climax_count += 1
-            st.turns_dazed = 0  # 新高潮 → 重置失神倒计时
-            if st.climax_count >= 2:
-                st.dazed = True
+        # ── 主人 2026-05-29: 高潮计数改"跨进高潮带"判定 (旧版 new_phase==6 漏计) ──
+        # reply 文本把 phase 从 <6 推进进 >=6 (AI 主动高潮, 主人没用 push 关键词的场景) = 1 次峰值;
+        # 主人 push 驱动的入带在 apply_user_signal 已计, 此处 old_phase 已 >=6 时不会重复.
+        # 失神机制 (climax_count >= 2 → dazed) 由 _bump_climax 内统一处理.
+        _register_climax_if_crossed(st, _old_phase, new_phase)
     # 失神后无新 climax (turn_count 累加) → 4 轮自然恢复
     # 仅在没新 phase 推进 (new_phase ≤ 0 or ≤ current) 时 +1, 防止 phase 升级也算"无 climax"
     if st.dazed and (new_phase <= 0 or new_phase < 6):
@@ -2251,6 +2316,7 @@ def apply_user_signal(
             st.history.append((8, time.time()))
             st.last_updated = time.time()
             _NSFW_PHASE_BY_SCOPE[key] = st
+        st.high_band_turns = 0  # 主人 2026-05-29: closing 收尾, 停止持续高潮累计
         return st, -1
     # ── 主人 2026-05-27 三轮升级『余韵后还能再次被操高潮』──
     # P8 余韵 + user 又推 NSFW → 进入新一轮 arc
@@ -2266,6 +2332,7 @@ def apply_user_signal(
         # 改成跨 arc 累计. 主人多次 push 高潮 → 累计 climax → dazed 持续到 4 轮无新 push
         # 或退出 NSFW (reset_phase) 才清.
         # 之前 per-arc 清 0 永远到不了 2 (phase tracker 不许 P7→P6 回退, 单 arc 最多 1 次 P6).
+        st.high_band_turns = 0  # 主人 2026-05-29: 新 arc 起手 (回 P2/P3, <6), 持续高潮计数清零
         st.history.append((target, time.time()))
         st.last_updated = time.time()
         _NSFW_PHASE_BY_SCOPE[key] = st
@@ -2274,21 +2341,29 @@ def apply_user_signal(
         # climax request → 强制跳 +2 phase (上限 P7, P8 留给自然余韵)
         target = min(7, st.current_phase + 2)
         if target > st.current_phase:
+            _old = st.current_phase
             st.current_phase = target
             st.turn_count = 1
             st.history.append((target, time.time()))
             st.last_updated = time.time()
-            _NSFW_PHASE_BY_SCOPE[key] = st
+            _register_climax_if_crossed(st, _old, target)  # 主人 2026-05-29: 跨进高潮带计 1 次
+        _tick_high_band_on_push(st)  # 主人 2026-05-29: 停在 P6+ 持续高潮 (每 N 轮)
+        _NSFW_PHASE_BY_SCOPE[key] = st
+        _mark_phase_state_dirty()
         return st, 2
     if signal == 1:
         # 一般 push → +1 phase (上限 P7)
         target = min(7, st.current_phase + 1)
         if target > st.current_phase:
+            _old = st.current_phase
             st.current_phase = target
             st.turn_count = 1
             st.history.append((target, time.time()))
             st.last_updated = time.time()
-            _NSFW_PHASE_BY_SCOPE[key] = st
+            _register_climax_if_crossed(st, _old, target)  # 主人 2026-05-29: 跨进高潮带计 1 次
+        _tick_high_band_on_push(st)  # 主人 2026-05-29: 停在 P6+ 持续高潮 (每 N 轮)
+        _NSFW_PHASE_BY_SCOPE[key] = st
+        _mark_phase_state_dirty()
         return st, 1
     # 无信号 + 当前 P8 → 累加 p8_idle_count (自然平复)
     if st.current_phase >= 8 and signal == 0:
@@ -3162,6 +3237,7 @@ __all__ = [
     "build_prebreak_hint",
     "build_sensory_block",
     "build_starter_examples_block",
+    "consume_pending_climaxes",
     "detect_body_focus_from_text",
     "flush_phase_state",
     "get_phase_climax_prefill",

@@ -4437,7 +4437,13 @@ async def _build_messages(
     # 留下 catty_system_prompt 原文(persona_memory 拿它当 base)和 reply_gate_approved 这两段散装,
     # 其它人格/流水线/教学例句 都被 register_catty_persona() 接管。
     system_prompt = config.catty_system_prompt.strip()
-    messages.append({"role": "system", "content": _reply_gate_approved_prompt()})
+    # 主人 2026-05-29 (P2): 群聊「接话判断/NO_REPLY」块**仅群聊注入**。私聊 1v1 每句都指向笨猫,
+    # 这块全是群聊语义 (顺手@/A对B/第三人称/主人跟群友聊也 NO_REPLY), 私聊吃了会被往 NO_REPLY/
+    # SFW 躲档带偏 (尤其 NSFW 场景)。私聊从此 system[0] 不再以 reply_gate 文本开头 —— 一次性
+    # cold start, 之后私聊新前缀仍 100% byte-stable (后续段 tools_hint/core_persona 全是常量)。
+    # 此处 _is_private_event 尚未定义 (在 4526 行), 就地用 isinstance(event, GroupMessageEvent)。
+    if isinstance(event, GroupMessageEvent):
+        messages.append({"role": "system", "content": _reply_gate_approved_prompt()})
 
     # ─── Layer B: function calling tools 提示常驻挂载 ───
     # web_search/nsfw_search/meme 全部走 tools 字段(OpenAI function calling),
@@ -4603,6 +4609,8 @@ async def _build_messages(
     _register_catty_persona(_st_manager, {
         "config": config,
         "scope": _arc_scope,
+        # 主人 2026-05-29 (P2): 群聊默认沉默段按 scope 注入用 (私聊不注册群聊沉默块)。
+        "is_group": isinstance(event, GroupMessageEvent),
         "user_text": incoming.text or "",
         "recent_user_texts": _recent_user_texts_for_ctx,
         # 主人 2026-05-28: cache 修复 — character_card 渲染用 scope-stable user_display.
@@ -5266,6 +5274,12 @@ async def _build_messages(
         # closing intent (好了/累了/睡吧) → 提前关窗, 落回普通处理 (跟 NSFW sticky 同语义)
         if _paid_sticky_meta is not None and _is_nsfw_closing(_utxt):
             _close_paid_sticky(_sticky_key)
+            # 主人 2026-05-29 (P1a): closing 一并清 recent 宽限, 避免说『好了』后下一句 deep 又被宽限拉回
+            try:
+                from .affection_scorer import clear_recent_paid as _clear_recent_paid
+                _clear_recent_paid(_sticky_key)
+            except Exception:  # noqa: BLE001
+                pass
             _paid_sticky_meta = None
             logger.info(f"chat: PAID NSFW sticky closing intent → exit (user={event.user_id}, hit='{_utxt[:30]}')")
         _paid_kw_hit = _is_paid_trigger(_utxt)
@@ -5325,6 +5339,43 @@ async def _build_messages(
                     )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"paid_nsfw check failed (non-fatal): {exc}")
+    # 主人 2026-05-29 连贯性修复 (P1a): recent-paid 宽限 — paid 窗刚过期但还在宽限期, 且本句
+    # 是 deep NSFW (用户以为还在场景里续) → 用 last meta 复活 paid sticky 继续 spark, 不掉回
+    # Lv-gate 援交广告 (避免 forced-stage10 → 拒绝 横跳)。closing 意图不复活。本 block 自包含
+    # import (不依赖外层 try 的局部别名, 防那条 try 异常未执行到 import 时 NameError)。
+    if (
+        not _paid_nsfw_active
+        and not _user_is_owner
+        and _hit_deep
+        and not _is_nsfw_closing(_utxt)
+    ):
+        try:
+            from .affection_scorer import (
+                was_recent_paid as _was_recent_paid,
+                open_paid_sticky as _grace_open_paid_sticky,
+                pick_paid_nsfw_scene as _grace_pick_paid_scene,
+                PAID_NSFW_COST as _GRACE_PAID_COST,
+            )
+            _recent = _was_recent_paid(_sticky_key)
+            if _recent is not None:
+                _paid_nsfw_active = True
+                _paid_is_continuation = True  # 不重复扣分、不重算 delta
+                _paid_cost_applied = int(_recent.get("cost") or _GRACE_PAID_COST)
+                _paid_nsfw_trope = str(_recent.get("trope") or "")
+                _paid_nsfw_scene_setup = str(_recent.get("scene") or "")
+                _paid_nsfw_outcome = str(_recent.get("outcome") or "pleasant")
+                if not _paid_nsfw_trope or not _paid_nsfw_scene_setup:
+                    _paid_nsfw_trope, _paid_nsfw_scene_setup = _grace_pick_paid_scene()
+                _grace_open_paid_sticky(
+                    _sticky_key, trope=_paid_nsfw_trope, scene=_paid_nsfw_scene_setup,
+                    outcome=_paid_nsfw_outcome, cost=_paid_cost_applied,
+                )
+                logger.info(
+                    f"chat: ★ PAID NSFW recent-paid grace 复活 (user={event.user_id}, "
+                    f"trope={_paid_nsfw_trope!r}, outcome={_paid_nsfw_outcome}, no recharge)"
+                )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"recent-paid grace check failed (non-fatal): {exc}")
     # NSFW 命中但等级不够 + 没付钱 + 不是主人 → 让笨猫主动卖援交广告
     if (
         _hit_deep
@@ -5839,7 +5890,29 @@ async def _build_messages(
         if not _is_private_chat and _breakthrough_outcome:
             logger.info(f"NSFW group breakthrough: one-shot, no sticky (key={_sticky_key})")
         elif _paid_nsfw_active:
-            logger.info(f"NSFW paid: 走 paid sticky 窗口 (key={_sticky_key}, outcome={_paid_nsfw_outcome}, continuation={_paid_is_continuation})")
+            # 主人 2026-05-29 连贯性修复 (P1a): paid sticky 改滑动窗口 — 每条 spark 成功都把
+            # 窗口滑到 now+TTL, 否则首充后正好 +120s 的 deep 句会掉回 Lv-gate 援交广告 (横跳元凶)。
+            # 首充那轮 open_paid_sticky 已开窗 → refresh 命中; 万一窗口缺失 (grace 复活后只置 active
+            # 未开窗 / 边界态) 则重开, 保持场景不中断。与普通 _NSFW_STICKY (5844) 滑窗语义对齐。
+            try:
+                from .affection_scorer import (
+                    refresh_paid_sticky as _refresh_paid_sticky,
+                    open_paid_sticky as _reopen_paid_sticky,
+                )
+                _refreshed = _refresh_paid_sticky(_sticky_key)
+                if not _refreshed:
+                    _reopen_paid_sticky(
+                        _sticky_key, trope=_paid_nsfw_trope, scene=_paid_nsfw_scene_setup,
+                        outcome=_paid_nsfw_outcome, cost=_paid_cost_applied,
+                    )
+                    _refreshed = True
+            except Exception as exc:  # noqa: BLE001
+                logger.debug(f"paid sticky refresh failed (non-fatal): {exc}")
+                _refreshed = False
+            logger.info(
+                f"NSFW paid: paid sticky 滑窗刷新 (key={_sticky_key}, outcome={_paid_nsfw_outcome}, "
+                f"continuation={_paid_is_continuation}, refreshed={_refreshed})"
+            )
         else:
             _NSFW_STICKY_BY_SCOPE[_sticky_key] = _now + _NSFW_STICKY_SECONDS
         _src = "deep_kw" if _hit_deep else "sticky"
@@ -10707,23 +10780,22 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # 时 build_phase_advance_hint 会根据这个 state 注入『推进到 P{N+1}』hint.
                         # 同时检测 reply 里的 location 关键词回填场景锚点 (user 没说但 AI 自己描的场景也算).
                         # 主人 2026-05-27 升级 #2: 记录 reply opener 到 recent_openers, 下轮注入反复读 hint.
-                        _preg_climaxed_this_turn = False
+                        _preg_climax_n = 0
                         try:
                             from .nsfw_phase import (
                                 detect_phase_with_confidence as _detect_phase_conf,
                                 update_phase as _update_phase,
                                 update_location as _update_loc_post,
                                 record_reply_opener as _record_opener,
-                                get_phase_state as _get_phase_state_pre,
+                                consume_pending_climaxes as _consume_climaxes,
                             )
                             _detected, _conf = _detect_phase_conf(reply)
                             _scope_for_phase = _conversation_queue_key(event)
-                            # 主人 2026-05-29: 怀孕按笨猫高潮(P6)计数 — 抓本轮推进进 P6 的瞬间
-                            _climax_before = _get_phase_state_pre(
-                                _scope_for_phase, str(event.user_id),
-                            ).climax_count
                             _phase_st = _update_phase(_scope_for_phase, str(event.user_id), _detected, reply_excerpt=reply[:80])
-                            _preg_climaxed_this_turn = _phase_st.climax_count > _climax_before
+                            # 主人 2026-05-29 修复: 高潮计数改 consume pending — 汇总本轮
+                            # apply_user_signal(回复前按主人 push 推进/持续高潮) + update_phase
+                            # (回复文本入带) 两个 driver, 旧版 climax_count delta 抓不到前者 → 卡死 6.
+                            _preg_climax_n = _consume_climaxes(_scope_for_phase, str(event.user_id))
                             # reply 里也检测 location (回填: user 没说但 AI 写了的场景物件)
                             _post_loc = _update_loc_post(_scope_for_phase, str(event.user_id), "", reply)
                             # 记录 opener 用于下轮反复读 hint
@@ -10743,7 +10815,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # ── 主人 2026-05-29 升级『怀孕按笨猫高潮(P6)计数』──
                         # 本轮 phase 推进进 P6 (高潮峰值) = 笨猫高潮一次 → record + 同步预选 kitten
                         try:
-                            if _preg_climaxed_this_turn:
+                            for _preg_i in range(_preg_climax_n):
                                 _predict_meta = _PREGNANCY_PREDICT_BY_USER.pop(
                                     str(event.user_id), None,
                                 ) or {}
@@ -10755,7 +10827,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                                 _preg_st_after = _preg_result["state"]
                                 logger.info(
                                     f"chat: ★ pregnancy event={_preg_result['event']} "
-                                    f"(climax, user={event.user_id}, "
+                                    f"(climax {_preg_i + 1}/{_preg_climax_n}, user={event.user_id}, "
                                     f"intercourse={_preg_st_after.intercourse_count}, "
                                     f"is_pregnant={_preg_st_after.is_pregnant}, "
                                     f"preg_count={_preg_st_after.pregnancy_count}, "
@@ -10916,27 +10988,24 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 # 主人 2026-05-28: 主路径也跑 phase tracker + record_intercourse, 跟 spark 对齐.
                 # 之前 only_spark 路径有这两段 → 主路径 (sonnet) reply 后 NSFW 状态完全不更新,
                 # phase/location/opener/preg_count 全 stale → 笨猫连续 30+ 次内射 pregnancy.json 0 .
-                _preg_climaxed_this_turn_main = False
+                _preg_climax_n_main = 0
                 try:
                     from .nsfw_phase import (
                         detect_phase_with_confidence as _detect_phase_conf_main,
                         update_phase as _update_phase_main,
                         update_location as _update_loc_main,
                         record_reply_opener as _record_opener_main,
-                        get_phase_state as _get_phase_state_pre_main,
+                        consume_pending_climaxes as _consume_climaxes_main,
                     )
                     _detected_main, _conf_main = _detect_phase_conf_main(reply)
                     _scope_for_phase_main = _conversation_queue_key(event)
-                    # 主人 2026-05-29: 怀孕按笨猫高潮(P6)计数 — 抓本轮推进进 P6 的瞬间
-                    _climax_before_main = _get_phase_state_pre_main(
-                        _scope_for_phase_main, str(event.user_id),
-                    ).climax_count
                     _phase_st_main = _update_phase_main(
                         _scope_for_phase_main, str(event.user_id),
                         _detected_main, reply_excerpt=reply[:80],
                     )
-                    _preg_climaxed_this_turn_main = (
-                        _phase_st_main.climax_count > _climax_before_main
+                    # 主人 2026-05-29 修复: consume pending 汇总两个 driver 的高潮 (见 spark 路径注释)
+                    _preg_climax_n_main = _consume_climaxes_main(
+                        _scope_for_phase_main, str(event.user_id),
                     )
                     _post_loc_main = _update_loc_main(
                         _scope_for_phase_main, str(event.user_id), "", reply,
@@ -10952,7 +11021,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     logger.debug(f"main path phase tracker update failed: {exc}")
                 # 怀孕计数 (主路径) — 跟 spark 路径同款逻辑, 按笨猫高潮(P6)计数
                 try:
-                    if _preg_climaxed_this_turn_main:
+                    for _preg_i_main in range(_preg_climax_n_main):
                         _predict_meta_main = _PREGNANCY_PREDICT_BY_USER.pop(
                             str(event.user_id), None,
                         ) or {}
@@ -10964,7 +11033,8 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         _preg_st_after_main = _preg_result_main["state"]
                         logger.info(
                             f"chat: ★ pregnancy event={_preg_result_main['event']} "
-                            f"(main path climax, user={event.user_id}, "
+                            f"(main path climax {_preg_i_main + 1}/{_preg_climax_n_main}, "
+                            f"user={event.user_id}, "
                             f"intercourse={_preg_st_after_main.intercourse_count}, "
                             f"is_pregnant={_preg_st_after_main.is_pregnant}, "
                             f"preg_count={_preg_st_after_main.pregnancy_count}, "
@@ -11017,18 +11087,33 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         reply = await _apply_local_critic(event, incoming, messages, reply)
 
         if _is_no_reply(reply):
-            if state.get("catty_session_closing"):
-                # closing intent 但主 AI 没回道别 → 也关窗退出会话跟踪
-                _close_bot_reply_continuation(event)
-            elif state.get("catty_recent_bot_continuation"):
-                _decrement_bot_reply_continuation(event)
-            logger.info(
-                f"Main AI chose NO_REPLY after wake context: user={event.user_id} "
-                f"group={getattr(event, 'group_id', '')} "
-                f"continuation_remaining={_bot_reply_continuation_remaining(event)} "
-                f"text={incoming.text[:80]!r}"
-            )
-            await matcher.finish()
+            # 主人 2026-05-29 P1b: 私聊**绝不**因 NO_REPLY 冻结历史。
+            # 旧问题: 私聊主模型返回 NO_REPLY → matcher.finish() 在 _append_history 前退出
+            # → 那轮 user/assistant 都不写 history → 跨天"早上好"后历史仍冻在昨晚 NSFW。
+            # _apply_local_critic 的 force_direct 路径(7137-7139)只在 catty_local_critic_force_direct_reply
+            # 为真时才兜底; 这里再加一道与该 flag 解耦的私聊硬保险, 强制兜底回复后**落到
+            # 下方 _append_history**(11111) 把这轮记进 history, 解冻历史。
+            # 群聊维持原 NO_REPLY 抑制(不强回, 直接 finish 不写 history), 防刷屏不变。
+            if isinstance(event, PrivateMessageEvent):
+                logger.info(
+                    "Main AI chose NO_REPLY in private chat → forcing reply (P1b: "
+                    f"never freeze private history): user={event.user_id} "
+                    f"text={incoming.text[:80]!r}"
+                )
+                reply = await _resolve_no_reply(event, incoming, messages, reply)
+            if _is_no_reply(reply):
+                if state.get("catty_session_closing"):
+                    # closing intent 但主 AI 没回道别 → 也关窗退出会话跟踪
+                    _close_bot_reply_continuation(event)
+                elif state.get("catty_recent_bot_continuation"):
+                    _decrement_bot_reply_continuation(event)
+                logger.info(
+                    f"Main AI chose NO_REPLY after wake context: user={event.user_id} "
+                    f"group={getattr(event, 'group_id', '')} "
+                    f"continuation_remaining={_bot_reply_continuation_remaining(event)} "
+                    f"text={incoming.text[:80]!r}"
+                )
+                await matcher.finish()
 
         reply, emoji_query = _extract_emoji_query(reply)
         # 注:梗图现在走 catty_meme_query toolcall,AI 自己把 base64:// URI 嵌入 INLINE_IMAGE 标记。
