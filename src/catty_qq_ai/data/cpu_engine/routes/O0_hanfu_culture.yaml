@@ -1,0 +1,207 @@
+# 汉服 / 国风 / 形制 / 妆造 routes (S6 R162 NLU 节点扩充, 第十六周期 1/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 M0 traditional_culture 区分: 这里专注汉服服饰 / 形制党 + 妆造.
+
+- name: hf_dynasty_001
+  intent: question
+  keywords: [推荐汉服朝代, 推荐唐制, 推荐宋制, 推荐明制, 笨猫汉服朝代]
+  utterances:
+    - 推荐汉服朝代
+    - 推荐唐制
+    - 推荐宋制
+    - 推荐明制
+    - 笨猫汉服朝代
+  responses:
+    - "嗷呜～{user_addr}唐制: 齐胸襦裙 / 圆领袍ฅฅ"
+    - "(尾巴翘) 宋制: 褙子 / 抹胸 - 清新"
+    - "{user_addr}明制: 立领 / 马面裙"
+    - "(挺胸) 笨猫推荐: 新手宋制百搭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_mamian_001
+  intent: question
+  keywords: [推荐马面裙, 推荐马面, 推荐织金马面, 推荐汉尚华莲, 笨猫马面裙]
+  utterances:
+    - 推荐马面裙
+    - 推荐马面
+    - 推荐织金马面
+    - 推荐汉尚华莲
+    - 笨猫马面裙
+  responses:
+    - "嗷呜～{user_addr}马面: 当下顶流 / 明制经典ฅฅ"
+    - "(尾巴翘) 汉尚 / 织羽 / 钟灵记 - 一线"
+    - "{user_addr}织金 vs 印花 - 看预算"
+    - "(挺胸) 笨猫推荐: 马面配上衣超百搭!"
+  cooldown_seconds: 60
+  weight: 1.1
+
+- name: hf_brand_001
+  intent: question
+  keywords: [推荐汉服品牌, 推荐汉尚华莲, 推荐织羽集, 推荐重回汉唐, 笨猫汉服品牌]
+  utterances:
+    - 推荐汉服品牌
+    - 推荐汉尚华莲
+    - 推荐织羽集
+    - 推荐重回汉唐
+    - 笨猫汉服品牌
+  responses:
+    - "嗷呜～{user_addr}汉尚 / 十三余 / 织羽 - 一线ฅฅ"
+    - "(尾巴翘) 重回汉唐 / 兰若庭 - 经典"
+    - "{user_addr}花朝记 / 池夏 - 设计师"
+    - "(挺胸) 笨猫推荐: 一线性价比高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_qixiong_001
+  intent: question
+  keywords: [推荐齐胸襦裙, 推荐齐胸, 推荐唐风, 推荐唐制汉服, 笨猫齐胸]
+  utterances:
+    - 推荐齐胸襦裙
+    - 推荐齐胸
+    - 推荐唐风
+    - 推荐唐制汉服
+    - 笨猫齐胸
+  responses:
+    - "嗷呜～{user_addr}齐胸: 富贵华丽 / 显腿长ฅฅ"
+    - "(尾巴翘) 一片式 vs 两片式裙"
+    - "{user_addr}配披帛 / 蔽膝"
+    - "(挺胸) 笨猫推荐: 拍照效果绝美!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hf_makeup_001
+  intent: question
+  keywords: [推荐古风妆, 推荐汉服妆容, 推荐花钿, 推荐眉形古风, 笨猫古风妆]
+  utterances:
+    - 推荐古风妆
+    - 推荐汉服妆容
+    - 推荐花钿
+    - 推荐眉形古风
+    - 笨猫古风妆
+  responses:
+    - "嗷呜～{user_addr}花钿 / 斜红 / 面靥 - 唐风ฅฅ"
+    - "(尾巴翘) 远山眉 / 柳叶眉 - 宋制"
+    - "{user_addr}口脂内扣 - 樱桃小口"
+    - "(挺胸) 笨猫推荐: 妆造看朝代!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hf_hairdo_001
+  intent: question
+  keywords: [推荐汉服发型, 推荐古风发型, 推荐双环髻, 推荐高髻, 笨猫古风发型]
+  utterances:
+    - 推荐汉服发型
+    - 推荐古风发型
+    - 推荐双环髻
+    - 推荐高髻
+    - 笨猫古风发型
+  responses:
+    - "嗷呜～{user_addr}双环髻 / 朝天髻 - 唐ฅฅ"
+    - "(尾巴翘) 同心髻 / 朝云近香 - 宋"
+    - "{user_addr}假发包 / 鲨鱼夹快速版"
+    - "(挺胸) 笨猫推荐: 新手假发包简单!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hf_accessory_001
+  intent: question
+  keywords: [推荐汉服配饰, 推荐簪子, 推荐步摇, 推荐发钗, 笨猫簪子]
+  utterances:
+    - 推荐汉服配饰
+    - 推荐簪子
+    - 推荐步摇
+    - 推荐发钗
+    - 笨猫簪子
+  responses:
+    - "嗷呜～{user_addr}簪 / 钗 / 步摇 - 头饰三件套ฅฅ"
+    - "(尾巴翘) 流苏 / 珠玉 - 越走越美"
+    - "{user_addr}颈饰 / 璎珞 / 长命锁"
+    - "(挺胸) 笨猫推荐: 简饰一两件足够!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hf_event_001
+  intent: question
+  keywords: [推荐汉服活动, 推荐汉服节, 推荐西塘汉服, 推荐花朝节, 笨猫汉服活动]
+  utterances:
+    - 推荐汉服活动
+    - 推荐汉服节
+    - 推荐西塘汉服
+    - 推荐花朝节
+    - 笨猫汉服活动
+  responses:
+    - "嗷呜～{user_addr}西塘汉服文化周 - 国内顶级ฅฅ"
+    - "(尾巴翘) 花朝节 / 中秋 / 七夕"
+    - "{user_addr}华裳秀典 / 中华礼乐"
+    - "(挺胸) 笨猫推荐: 西塘必去打卡!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hf_form_school_001
+  intent: question
+  keywords: [推荐形制党, 推荐形制汉服, 推荐改良汉服, 推荐影楼装, 笨猫形制党]
+  utterances:
+    - 推荐形制党
+    - 推荐形制汉服
+    - 推荐改良汉服
+    - 推荐影楼装
+    - 笨猫形制党
+  responses:
+    - "嗷呜～{user_addr}形制党: 严格考据 / 还原ฅฅ"
+    - "(尾巴翘) 改良: 日常通勤友好"
+    - "{user_addr}影楼: 拍照好看但非汉服"
+    - "(挺胸) 笨猫的提醒: 都是个人选择不必争!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: hf_male_001
+  intent: question
+  keywords: [推荐男士汉服, 推荐汉服男装, 推荐直裰, 推荐道袍, 笨猫男士汉服]
+  utterances:
+    - 推荐男士汉服
+    - 推荐汉服男装
+    - 推荐直裰
+    - 推荐道袍
+    - 笨猫男士汉服
+  responses:
+    - "嗷呜～{user_addr}直裰 / 道袍 - 明制经典ฅฅ"
+    - "(尾巴翘) 圆领袍 - 唐风潇洒"
+    - "{user_addr}曳撒 / 贴里 - 武将风"
+    - "(挺胸) 笨猫推荐: 男生道袍最帅!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hf_pao_001
+  intent: question
+  keywords: [推荐唐圆领袍, 推荐圆领袍, 推荐汉服外套, 推荐褙子, 笨猫圆领袍]
+  utterances:
+    - 推荐唐圆领袍
+    - 推荐圆领袍
+    - 推荐汉服外套
+    - 推荐褙子
+    - 笨猫圆领袍
+  responses:
+    - "嗷呜～{user_addr}圆领袍: 唐 + 明 都有ฅฅ"
+    - "(尾巴翘) 褙子: 宋代日常外搭"
+    - "{user_addr}比甲 / 大袖衫 - 看朝代"
+    - "(挺胸) 笨猫推荐: 圆领袍精神帅气!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: hf_jewelry_001
+  intent: question
+  keywords: [推荐古风首饰, 推荐玉饰, 推荐银饰苗银, 推荐绒花, 笨猫古风首饰]
+  utterances:
+    - 推荐古风首饰
+    - 推荐玉饰
+    - 推荐银饰苗银
+    - 推荐绒花
+    - 笨猫古风首饰
+  responses:
+    - "嗷呜～{user_addr}玉镯 / 玉佩 / 玉簪 - 古典ฅฅ"
+    - "(尾巴翘) 绒花: 南京非遗 - 仙气"
+    - "{user_addr}苗银 / 老物收藏价值"
+    - "(挺胸) 笨猫推荐: 绒花搭汉服绝!"
+  cooldown_seconds: 60
+  weight: 0.9

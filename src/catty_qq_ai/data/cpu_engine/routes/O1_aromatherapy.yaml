@@ -1,0 +1,207 @@
+# 精油 / 芳疗 / 香薰 / 香水进阶 routes (S6 R163 NLU 节点扩充, 第十六周期 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 H4 skincare_ingredient 区分: 这里专注精油 + 香氛 + 芳疗.
+
+- name: aroma_essential_oil_001
+  intent: question
+  keywords: [推荐精油, 推荐单方精油, 推荐 doTERRA, 推荐 Young Living, 笨猫精油]
+  utterances:
+    - 推荐精油
+    - 推荐单方精油
+    - 推荐 doTERRA
+    - 推荐 Young Living
+    - 笨猫精油
+  responses:
+    - "嗷呜～{user_addr}doTERRA / Young Living - 美系顶级ฅฅ"
+    - "(尾巴翘) NEOM / Aesop - 高端"
+    - "{user_addr}国产: 阿芙 / 优思敏 - 性价比"
+    - "(挺胸) 笨猫推荐: 入门买小瓶套装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aroma_lavender_001
+  intent: question
+  keywords: [推荐薰衣草精油, 推荐睡眠精油, 推荐助眠精油, 推荐放松精油, 笨猫薰衣草]
+  utterances:
+    - 推荐薰衣草精油
+    - 推荐睡眠精油
+    - 推荐助眠精油
+    - 推荐放松精油
+    - 笨猫薰衣草
+  responses:
+    - "嗷呜～{user_addr}薰衣草 - 助眠 + 放松万能ฅฅ"
+    - "(尾巴翘) 法国产地 > 保加利亚"
+    - "{user_addr}枕喷 / 扩香 / 滚珠"
+    - "(挺胸) 笨猫推荐: 失眠救星!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aroma_diffuser_001
+  intent: question
+  keywords: [推荐扩香器, 推荐香薰机, 推荐超声波扩香, 推荐 MUJI 香薰机, 笨猫扩香器]
+  utterances:
+    - 推荐扩香器
+    - 推荐香薰机
+    - 推荐超声波扩香
+    - 推荐 MUJI 香薰机
+    - 笨猫扩香器
+  responses:
+    - "嗷呜～{user_addr}MUJI 香薰机 - 简约百搭ฅฅ"
+    - "(尾巴翘) Vitruvi / NEOM - 设计款"
+    - "{user_addr}超声波 / 雾化 / 加湿一体"
+    - "(挺胸) 笨猫推荐: MUJI 性价比首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: aroma_candle_001
+  intent: question
+  keywords: [推荐香薰蜡烛, 推荐 Jo Malone 蜡烛, 推荐 Diptyque, 推荐 Yankee Candle, 笨猫蜡烛]
+  utterances:
+    - 推荐香薰蜡烛
+    - 推荐 Jo Malone 蜡烛
+    - 推荐 Diptyque
+    - 推荐 Yankee Candle
+    - 笨猫蜡烛
+  responses:
+    - "嗷呜～{user_addr}Diptyque / Jo Malone - 奢侈ฅฅ"
+    - "(尾巴翘) NEOM / Boy Smells - 中端"
+    - "{user_addr}Yankee / Voluspa - 性价比"
+    - "(挺胸) 笨猫推荐: 第一支 Diptyque 玫瑰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aroma_perfume_niche_001
+  intent: question
+  keywords: [推荐小众香水, 推荐沙龙香, 推荐 Le Labo, 推荐 Maison Margiela, 笨猫沙龙香]
+  utterances:
+    - 推荐小众香水
+    - 推荐沙龙香
+    - 推荐 Le Labo
+    - 推荐 Maison Margiela
+    - 笨猫沙龙香
+  responses:
+    - "嗷呜～{user_addr}Le Labo / Byredo - 北欧极简ฅฅ"
+    - "(尾巴翘) MFK / Tom Ford - 浓郁奢"
+    - "{user_addr}MMM / Diptyque - 文艺青年"
+    - "(挺胸) 笨猫推荐: Le Labo 33 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aroma_carrier_oil_001
+  intent: question
+  keywords: [推荐基础油, 推荐荷荷巴油, 推荐甜杏仁油, 推荐玫瑰果油, 笨猫基础油]
+  utterances:
+    - 推荐基础油
+    - 推荐荷荷巴油
+    - 推荐甜杏仁油
+    - 推荐玫瑰果油
+    - 笨猫基础油
+  responses:
+    - "嗷呜～{user_addr}荷荷巴: 最接近皮脂 / 万能ฅฅ"
+    - "(尾巴翘) 甜杏仁: 温和 / 适合按摩"
+    - "{user_addr}玫瑰果 / 摩洛哥坚果 - 护肤"
+    - "(挺胸) 笨猫推荐: 荷荷巴入门首选!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: aroma_tea_tree_001
+  intent: question
+  keywords: [推荐茶树精油, 推荐祛痘精油, 推荐尤加利, 推荐感冒精油, 笨猫茶树油]
+  utterances:
+    - 推荐茶树精油
+    - 推荐祛痘精油
+    - 推荐尤加利
+    - 推荐感冒精油
+    - 笨猫茶树油
+  responses:
+    - "嗷呜～{user_addr}茶树: 祛痘 / 抗菌 / 万能ฅฅ"
+    - "(尾巴翘) 尤加利: 呼吸道 / 感冒"
+    - "{user_addr}必须稀释 - 别直接涂"
+    - "(挺胸) 笨猫推荐: 茶树小红痘救星!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: aroma_rose_001
+  intent: question
+  keywords: [推荐玫瑰精油, 推荐茉莉精油, 推荐花香精油, 推荐橙花, 笨猫玫瑰精油]
+  utterances:
+    - 推荐玫瑰精油
+    - 推荐茉莉精油
+    - 推荐花香精油
+    - 推荐橙花
+    - 笨猫玫瑰精油
+  responses:
+    - "嗷呜～{user_addr}保加利亚玫瑰 - 顶级ฅฅ"
+    - "(尾巴翘) 茉莉 / 橙花 - 解压"
+    - "{user_addr}非常贵 - 5ml 入门"
+    - "(挺胸) 笨猫推荐: 心情低落试玫瑰!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: aroma_blend_001
+  intent: question
+  keywords: [推荐复方精油, 推荐 doTERRA 调和, 推荐定制精油, 推荐精油配方, 笨猫复方精油]
+  utterances:
+    - 推荐复方精油
+    - 推荐 doTERRA 调和
+    - 推荐定制精油
+    - 推荐精油配方
+    - 笨猫复方精油
+  responses:
+    - "嗷呜～{user_addr}睡眠: 薰衣草 + 雪松 + 甜橙ฅฅ"
+    - "(尾巴翘) 提神: 薄荷 + 柠檬 + 迷迭香"
+    - "{user_addr}祛痘: 茶树 + 薰衣草"
+    - "(挺胸) 笨猫推荐: 自己调试是乐趣!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: aroma_roller_001
+  intent: question
+  keywords: [推荐精油滚珠, 推荐随身精油, 推荐 doTERRA 滚珠, 推荐枕头喷雾, 笨猫精油滚珠]
+  utterances:
+    - 推荐精油滚珠
+    - 推荐随身精油
+    - 推荐 doTERRA 滚珠
+    - 推荐枕头喷雾
+    - 笨猫精油滚珠
+  responses:
+    - "嗷呜～{user_addr}10ml 滚珠瓶 + 基础油ฅฅ"
+    - "(尾巴翘) 太阳穴 / 颈部 / 手腕"
+    - "{user_addr}比扩香方便 / 随身带"
+    - "(挺胸) 笨猫推荐: 枕喷助眠超治愈!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: aroma_aromatherapy_course_001
+  intent: question
+  keywords: [推荐芳疗师, 推荐 IFA, 推荐 NAHA, 推荐芳疗课程, 笨猫芳疗师]
+  utterances:
+    - 推荐芳疗师
+    - 推荐 IFA
+    - 推荐 NAHA
+    - 推荐芳疗课程
+    - 笨猫芳疗师
+  responses:
+    - "嗷呜～{user_addr}IFA / IFPA / NAHA - 国际认证ฅฅ"
+    - "(尾巴翘) 国内: 芳疗师 / 高级芳疗"
+    - "{user_addr}入门书: 卓芳明 / 温佑君"
+    - "(挺胸) 笨猫推荐: 系统学 IFA 最权威!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: aroma_safety_001
+  intent: question
+  keywords: [推荐精油安全, 推荐精油禁忌, 推荐孕妇精油, 推荐儿童精油, 笨猫精油安全]
+  utterances:
+    - 推荐精油安全
+    - 推荐精油禁忌
+    - 推荐孕妇精油
+    - 推荐儿童精油
+    - 笨猫精油安全
+  responses:
+    - "嗷呜～{user_addr}必稀释 / 别口服 / 别眼接触ฅฅ"
+    - "(尾巴翘) 孕妇: 大量精油禁忌"
+    - "{user_addr}儿童: 浓度更低 / 慎用辛辣类"
+    - "(挺胸) 笨猫的提醒: 安全第一别盲信!"
+  cooldown_seconds: 60
+  weight: 1.0

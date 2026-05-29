@@ -1,0 +1,207 @@
+# 盆景 / 山水盆景 / 文人树 / 树桩 routes (S6 R165 NLU 节点扩充, 第十六周期 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 N3 gardening (花草) 区分: 这里专注盆景艺术 / 造型.
+
+- name: bons_style_001
+  intent: question
+  keywords: [推荐盆景流派, 推荐扬派, 推荐苏派, 推荐岭南派, 笨猫盆景]
+  utterances:
+    - 推荐盆景流派
+    - 推荐扬派
+    - 推荐苏派
+    - 推荐岭南派
+    - 笨猫盆景
+  responses:
+    - "嗷呜～{user_addr}扬派: 一寸三弯 / 蓄枝截干ฅฅ"
+    - "(尾巴翘) 苏派: 清秀 / 文人树"
+    - "{user_addr}岭南: 写意 / 截干蓄枝"
+    - "(挺胸) 笨猫推荐: 看地域风格!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bons_tree_pine_001
+  intent: question
+  keywords: [推荐松树盆景, 推荐黑松, 推荐五针松, 推荐黄山松, 笨猫松树盆景]
+  utterances:
+    - 推荐松树盆景
+    - 推荐黑松
+    - 推荐五针松
+    - 推荐黄山松
+    - 笨猫松树盆景
+  responses:
+    - "嗷呜～{user_addr}黑松 / 赤松 - 雄健ฅฅ"
+    - "(尾巴翘) 五针松 - 文气"
+    - "{user_addr}黄山松 / 罗汉松"
+    - "(挺胸) 笨猫推荐: 松树盆景是男神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bons_tree_juniper_001
+  intent: question
+  keywords: [推荐真柏, 推荐杜松, 推荐圆柏, 推荐真柏盆景, 笨猫真柏]
+  utterances:
+    - 推荐真柏
+    - 推荐杜松
+    - 推荐圆柏
+    - 推荐真柏盆景
+    - 笨猫真柏
+  responses:
+    - "嗷呜～{user_addr}真柏 - 国际盆景王者ฅฅ"
+    - "(尾巴翘) 长寿 / 神枝舍利 - 苍劲"
+    - "{user_addr}杜松 / 偃柏 - 类似"
+    - "(挺胸) 笨猫推荐: 高端首选真柏!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bons_tree_maple_001
+  intent: question
+  keywords: [推荐枫树盆景, 推荐三角枫, 推荐红枫, 推荐鸡爪槭, 笨猫枫树盆景]
+  utterances:
+    - 推荐枫树盆景
+    - 推荐三角枫
+    - 推荐红枫
+    - 推荐鸡爪槭
+    - 笨猫枫树盆景
+  responses:
+    - "嗷呜～{user_addr}三角枫 - 易上手 / 四季美ฅฅ"
+    - "(尾巴翘) 鸡爪槭 / 红枫 - 秋色绝"
+    - "{user_addr}日本红枫 - 高端"
+    - "(挺胸) 笨猫推荐: 三角枫新手友好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bons_pot_001
+  intent: question
+  keywords: [推荐盆景盆, 推荐宜兴紫砂, 推荐盆景紫砂盆, 推荐釉盆, 笨猫盆景盆]
+  utterances:
+    - 推荐盆景盆
+    - 推荐宜兴紫砂
+    - 推荐盆景紫砂盆
+    - 推荐釉盆
+    - 笨猫盆景盆
+  responses:
+    - "嗷呜～{user_addr}宜兴紫砂 - 透气最佳ฅฅ"
+    - "(尾巴翘) 釉盆: 装饰强 / 落叶树"
+    - "{user_addr}陶盆 / 石盆 / 木盆"
+    - "(挺胸) 笨猫推荐: 紫砂盆首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bons_wire_001
+  intent: question
+  keywords: [推荐盆景蟠扎, 推荐盆景铜丝, 推荐盆景铝线, 推荐盆景造型, 笨猫蟠扎]
+  utterances:
+    - 推荐盆景蟠扎
+    - 推荐盆景铜丝
+    - 推荐盆景铝线
+    - 推荐盆景造型
+    - 笨猫蟠扎
+  responses:
+    - "嗷呜～{user_addr}铝线: 软 / 易上手 / 推荐ฅฅ"
+    - "(尾巴翘) 铜线: 硬 / 专业派"
+    - "{user_addr}棕丝: 传统派"
+    - "(挺胸) 笨猫推荐: 入门铝线 2.5mm!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bons_pruning_001
+  intent: question
+  keywords: [推荐盆景修剪, 推荐盆景剪枝, 推荐摘叶, 推荐摘心, 笨猫盆景修剪]
+  utterances:
+    - 推荐盆景修剪
+    - 推荐盆景剪枝
+    - 推荐摘叶
+    - 推荐摘心
+    - 笨猫盆景修剪
+  responses:
+    - "嗷呜～{user_addr}春季: 修枝整形ฅฅ"
+    - "(尾巴翘) 摘心 - 控制顶端优势"
+    - "{user_addr}摘叶 - 缩小叶片 + 二次发芽"
+    - "(挺胸) 笨猫推荐: 修剪重过浇水!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bons_repot_001
+  intent: question
+  keywords: [推荐盆景换盆, 推荐盆景换土, 推荐盆景翻盆, 推荐盆景配土, 笨猫盆景换盆]
+  utterances:
+    - 推荐盆景换盆
+    - 推荐盆景换土
+    - 推荐盆景翻盆
+    - 推荐盆景配土
+    - 笨猫盆景换盆
+  responses:
+    - "嗷呜～{user_addr}早春换盆 - 萌动期前ฅฅ"
+    - "(尾巴翘) 配土: 赤玉 / 鹿沼 / 桐生"
+    - "{user_addr}修根 - 30% 内"
+    - "(挺胸) 笨猫推荐: 日本三大土完美!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bons_landscape_001
+  intent: question
+  keywords: [推荐山水盆景, 推荐山石, 推荐英德石, 推荐砂积石, 笨猫山水盆景]
+  utterances:
+    - 推荐山水盆景
+    - 推荐山石
+    - 推荐英德石
+    - 推荐砂积石
+    - 笨猫山水盆景
+  responses:
+    - "嗷呜～{user_addr}英德石 - 苏派山水神材ฅฅ"
+    - "(尾巴翘) 砂积石 / 海母石 - 易雕"
+    - "{user_addr}斧劈石 / 龟纹石"
+    - "(挺胸) 笨猫推荐: 山水盆景诗意!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bons_japanese_001
+  intent: question
+  keywords: [推荐日本盆景, 推荐 Bonsai, 推荐日本赤玉土, 推荐神枝舍利, 笨猫日本盆景]
+  utterances:
+    - 推荐日本盆景
+    - 推荐 Bonsai
+    - 推荐日本赤玉土
+    - 推荐神枝舍利
+    - 笨猫日本盆景
+  responses:
+    - "嗷呜～{user_addr}日本盆景: 国际化高度ฅฅ"
+    - "(尾巴翘) 神枝舍利 - 真柏特色"
+    - "{user_addr}埼玉大宫 - 盆景圣地"
+    - "(挺胸) 笨猫推荐: 看 World Bonsai 展!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bons_indoor_001
+  intent: question
+  keywords: [推荐室内盆景, 推荐榆树盆景, 推荐黄杨, 推荐茶花盆景, 笨猫室内盆景]
+  utterances:
+    - 推荐室内盆景
+    - 推荐榆树盆景
+    - 推荐黄杨
+    - 推荐茶花盆景
+    - 笨猫室内盆景
+  responses:
+    - "嗷呜～{user_addr}小叶榆 / 雀梅 - 室内常见ฅฅ"
+    - "(尾巴翘) 黄杨: 耐阴 / 寿命长"
+    - "{user_addr}六月雪 / 朴树"
+    - "(挺胸) 笨猫推荐: 黄杨新手友好!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bons_exhibition_001
+  intent: question
+  keywords: [推荐盆景展, 推荐沃野盆景, 推荐花卉博览会, 推荐盆景大赛, 笨猫盆景展]
+  utterances:
+    - 推荐盆景展
+    - 推荐沃野盆景
+    - 推荐花卉博览会
+    - 推荐盆景大赛
+    - 笨猫盆景展
+  responses:
+    - "嗷呜～{user_addr}中国盆景展 - 每 2 年一届ฅฅ"
+    - "(尾巴翘) 国风展 / 国家级精品展"
+    - "{user_addr}沃野盆景 - 民间精品"
+    - "(挺胸) 笨猫推荐: 看展长眼力!"
+  cooldown_seconds: 60
+  weight: 0.7

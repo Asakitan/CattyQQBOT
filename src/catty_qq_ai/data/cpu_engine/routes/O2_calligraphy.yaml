@@ -1,0 +1,207 @@
+# 书法 / 国画 / 文房四宝 / 篆刻 routes (S6 R164 NLU 节点扩充, 第十六周期 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 M0 traditional_culture 区分: 这里专注笔墨纸砚 + 书法专业.
+
+- name: calli_brush_001
+  intent: question
+  keywords: [推荐毛笔, 推荐书法笔, 推荐羊毫, 推荐狼毫, 笨猫毛笔]
+  utterances:
+    - 推荐毛笔
+    - 推荐书法笔
+    - 推荐羊毫
+    - 推荐狼毫
+    - 笨猫毛笔
+  responses:
+    - "嗷呜～{user_addr}羊毫: 柔软 / 楷书 / 隶书ฅฅ"
+    - "(尾巴翘) 狼毫: 弹性 / 行书 / 草书"
+    - "{user_addr}兼毫: 折中 / 入门首选"
+    - "(挺胸) 笨猫推荐: 善琏 / 周虎臣!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: calli_ink_001
+  intent: question
+  keywords: [推荐墨, 推荐墨水, 推荐徽墨, 推荐一得阁, 笨猫墨]
+  utterances:
+    - 推荐墨
+    - 推荐墨水
+    - 推荐徽墨
+    - 推荐一得阁
+    - 笨猫墨
+  responses:
+    - "嗷呜～{user_addr}一得阁 - 性价比之王ฅฅ"
+    - "(尾巴翘) 徽墨 / 胡开文 - 高端"
+    - "{user_addr}红星 / 古梅 - 中端"
+    - "(挺胸) 笨猫推荐: 入门一得阁就行!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: calli_paper_001
+  intent: question
+  keywords: [推荐宣纸, 推荐毛边纸, 推荐生宣, 推荐熟宣, 笨猫宣纸]
+  utterances:
+    - 推荐宣纸
+    - 推荐毛边纸
+    - 推荐生宣
+    - 推荐熟宣
+    - 笨猫宣纸
+  responses:
+    - "嗷呜～{user_addr}生宣: 渗水 / 草书 / 写意ฅฅ"
+    - "(尾巴翘) 熟宣: 不渗 / 工笔 / 楷书"
+    - "{user_addr}毛边纸 - 练习便宜"
+    - "(挺胸) 笨猫推荐: 红星宣纸金标准!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: calli_inkstone_001
+  intent: question
+  keywords: [推荐砚台, 推荐端砚, 推荐歙砚, 推荐文房, 笨猫砚台]
+  utterances:
+    - 推荐砚台
+    - 推荐端砚
+    - 推荐歙砚
+    - 推荐文房
+    - 笨猫砚台
+  responses:
+    - "嗷呜～{user_addr}端砚: 广东 - 砚中之王ฅฅ"
+    - "(尾巴翘) 歙砚: 安徽 - 古朴"
+    - "{user_addr}红丝砚 / 澄泥砚"
+    - "(挺胸) 笨猫推荐: 入门洮砚便宜!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: calli_kaishu_001
+  intent: question
+  keywords: [推荐楷书, 推荐颜真卿, 推荐欧阳询, 推荐柳公权, 笨猫楷书]
+  utterances:
+    - 推荐楷书
+    - 推荐颜真卿
+    - 推荐欧阳询
+    - 推荐柳公权
+    - 笨猫楷书
+  responses:
+    - "嗷呜～{user_addr}颜真卿: 多宝塔 / 麻姑仙坛ฅฅ"
+    - "(尾巴翘) 欧阳询: 九成宫 - 险峻"
+    - "{user_addr}柳公权: 玄秘塔 - 骨力"
+    - "(挺胸) 笨猫推荐: 入门欧体!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: calli_xingshu_001
+  intent: question
+  keywords: [推荐行书, 推荐王羲之, 推荐兰亭序, 推荐米芾, 笨猫行书]
+  utterances:
+    - 推荐行书
+    - 推荐王羲之
+    - 推荐兰亭序
+    - 推荐米芾
+    - 笨猫行书
+  responses:
+    - "嗷呜～{user_addr}王羲之兰亭序 - 天下第一行ฅฅ"
+    - "(尾巴翘) 米芾蜀素帖 - 八面出锋"
+    - "{user_addr}颜真卿祭侄文稿 - 第二行"
+    - "(挺胸) 笨猫推荐: 兰亭序临起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: calli_caoshu_001
+  intent: question
+  keywords: [推荐草书, 推荐怀素, 推荐张旭, 推荐自叙帖, 笨猫草书]
+  utterances:
+    - 推荐草书
+    - 推荐怀素
+    - 推荐张旭
+    - 推荐自叙帖
+    - 笨猫草书
+  responses:
+    - "嗷呜～{user_addr}怀素自叙帖 - 狂草之神ฅฅ"
+    - "(尾巴翘) 张旭古诗四帖"
+    - "{user_addr}章草 vs 今草 vs 狂草"
+    - "(挺胸) 笨猫的提醒: 草书要先稳楷!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: calli_lishu_001
+  intent: question
+  keywords: [推荐隶书, 推荐曹全碑, 推荐乙瑛碑, 推荐张迁碑, 笨猫隶书]
+  utterances:
+    - 推荐隶书
+    - 推荐曹全碑
+    - 推荐乙瑛碑
+    - 推荐张迁碑
+    - 笨猫隶书
+  responses:
+    - "嗷呜～{user_addr}曹全碑 - 秀美 / 入门首选ฅฅ"
+    - "(尾巴翘) 张迁碑 - 古朴雄强"
+    - "{user_addr}乙瑛碑 / 礼器碑 - 端庄"
+    - "(挺胸) 笨猫推荐: 隶书起步学曹全!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: calli_zhuan_001
+  intent: question
+  keywords: [推荐篆书, 推荐石鼓文, 推荐小篆, 推荐李斯, 笨猫篆书]
+  utterances:
+    - 推荐篆书
+    - 推荐石鼓文
+    - 推荐小篆
+    - 推荐李斯
+    - 笨猫篆书
+  responses:
+    - "嗷呜～{user_addr}小篆: 李斯 / 峄山碑ฅฅ"
+    - "(尾巴翘) 大篆: 石鼓文 / 金文"
+    - "{user_addr}清代邓石如 - 篆书大家"
+    - "(挺胸) 笨猫推荐: 学篆刻必懂篆!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: calli_seal_001
+  intent: question
+  keywords: [推荐篆刻, 推荐印章石头, 推荐青田石, 推荐寿山石, 笨猫篆刻]
+  utterances:
+    - 推荐篆刻
+    - 推荐印章石头
+    - 推荐青田石
+    - 推荐寿山石
+    - 笨猫篆刻
+  responses:
+    - "嗷呜～{user_addr}青田石 - 入门首选ฅฅ"
+    - "(尾巴翘) 寿山石 / 昌化石 - 高端"
+    - "{user_addr}巴林石 / 鸡血石"
+    - "(挺胸) 笨猫推荐: 篆刻刀齐白石用!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: calli_chinese_paint_001
+  intent: question
+  keywords: [推荐国画, 推荐工笔, 推荐写意, 推荐山水画, 笨猫国画]
+  utterances:
+    - 推荐国画
+    - 推荐工笔
+    - 推荐写意
+    - 推荐山水画
+    - 笨猫国画
+  responses:
+    - "嗷呜～{user_addr}工笔: 精细 / 重彩 / 仕女ฅฅ"
+    - "(尾巴翘) 写意: 大气 / 山水 / 花鸟"
+    - "{user_addr}水墨 / 青绿山水"
+    - "(挺胸) 笨猫推荐: 工笔从花鸟起!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: calli_master_001
+  intent: question
+  keywords: [推荐书法大家, 推荐颜真卿米芾, 推荐颜筋柳骨, 推荐书圣, 笨猫书法家]
+  utterances:
+    - 推荐书法大家
+    - 推荐颜真卿米芾
+    - 推荐颜筋柳骨
+    - 推荐书圣
+    - 笨猫书法家
+  responses:
+    - "嗷呜～{user_addr}王羲之书圣 / 颜真卿一代宗师ฅฅ"
+    - "(尾巴翘) 米芾 / 苏轼 / 黄庭坚 - 宋四家"
+    - "{user_addr}赵孟頫 / 董其昌 - 元明"
+    - "(挺胸) 笨猫推荐: 看完一遍中国书法史!"
+  cooldown_seconds: 60
+  weight: 0.8

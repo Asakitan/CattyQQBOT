@@ -1,0 +1,207 @@
+# 高尔夫 / 网球 / 羽毛球进阶 routes (S6 R166 NLU 节点扩充, 第十六周期 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 F8 ball_niche / L9 sports_deep / A5 sports_match 区分: 这里专注绅士球类装备 + 球技.
+
+- name: gt_golf_club_001
+  intent: question
+  keywords: [推荐高尔夫球杆, 推荐高尔夫品牌, 推荐 Titleist, 推荐 Callaway, 笨猫高尔夫球杆]
+  utterances:
+    - 推荐高尔夫球杆
+    - 推荐高尔夫品牌
+    - 推荐 Titleist
+    - 推荐 Callaway
+    - 笨猫高尔夫球杆
+  responses:
+    - "嗷呜～{user_addr}Titleist / Callaway / Taylormade - 三巨头ฅฅ"
+    - "(尾巴翘) PXG / Honma - 高端日系"
+    - "{user_addr}Mizuno / 本间 - 软铁锻造"
+    - "(挺胸) 笨猫推荐: Titleist 全能!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_golf_driver_001
+  intent: question
+  keywords: [推荐一号木, 推荐发球木, 推荐 Driver, 推荐 Stealth, 笨猫一号木]
+  utterances:
+    - 推荐一号木
+    - 推荐发球木
+    - 推荐 Driver
+    - 推荐 Stealth
+    - 笨猫一号木
+  responses:
+    - "嗷呜～{user_addr}TM Qi35 / Callaway Ai Smoke - 旗舰ฅฅ"
+    - "(尾巴翘) Titleist TSi - 经典"
+    - "{user_addr}杆面角度 9-10.5°"
+    - "(挺胸) 笨猫推荐: 试杆比品牌重要!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gt_golf_putter_001
+  intent: question
+  keywords: [推荐推杆, 推荐 Scotty Cameron, 推荐 Odyssey, 推荐 PING 推杆, 笨猫推杆]
+  utterances:
+    - 推荐推杆
+    - 推荐 Scotty Cameron
+    - 推荐 Odyssey
+    - 推荐 PING 推杆
+    - 笨猫推杆
+  responses:
+    - "嗷呜～{user_addr}Scotty Cameron - 推杆之神ฅฅ"
+    - "(尾巴翘) Odyssey - 性价比经典"
+    - "{user_addr}PING / TaylorMade Spider"
+    - "(挺胸) 笨猫推荐: Cameron Newport 2!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gt_golf_ball_001
+  intent: question
+  keywords: [推荐高尔夫球, 推荐 Pro V1, 推荐 TP5, 推荐 ChromeSoft, 笨猫高尔夫球]
+  utterances:
+    - 推荐高尔夫球
+    - 推荐 Pro V1
+    - 推荐 TP5
+    - 推荐 ChromeSoft
+    - 笨猫高尔夫球
+  responses:
+    - "嗷呜～{user_addr}Pro V1 / V1x - 巡回赛首选ฅฅ"
+    - "(尾巴翘) TM TP5 / Callaway ChromeSoft"
+    - "{user_addr}Snell / 国产球性价比"
+    - "(挺胸) 笨猫推荐: 新手二手球先用!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gt_golf_glove_shoes_001
+  intent: question
+  keywords: [推荐高尔夫手套, 推荐高尔夫鞋, 推荐 FootJoy, 推荐 Adidas Tour360, 笨猫高尔夫装备]
+  utterances:
+    - 推荐高尔夫手套
+    - 推荐高尔夫鞋
+    - 推荐 FootJoy
+    - 推荐 Adidas Tour360
+    - 笨猫高尔夫装备
+  responses:
+    - "嗷呜～{user_addr}FootJoy - 手套鞋全能ฅฅ"
+    - "(尾巴翘) Adidas Tour360 / Nike"
+    - "{user_addr}Skechers - 舒适休闲"
+    - "(挺胸) 笨猫推荐: FJ Pro/SL 一双够!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gt_golf_course_001
+  intent: question
+  keywords: [推荐高尔夫球场, 推荐圣安德鲁斯, 推荐奥古斯塔, 推荐高尔夫大师赛, 笨猫高尔夫球场]
+  utterances:
+    - 推荐高尔夫球场
+    - 推荐圣安德鲁斯
+    - 推荐奥古斯塔
+    - 推荐高尔夫大师赛
+    - 笨猫高尔夫球场
+  responses:
+    - "嗷呜～{user_addr}圣安德鲁斯老球场 - 圣地ฅฅ"
+    - "(尾巴翘) 奥古斯塔 - 大师赛 / 杜鹃花"
+    - "{user_addr}观澜湖 / 鸿华 - 国内"
+    - "(挺胸) 笨猫推荐: 退休去打老球场!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: gt_tennis_racket_001
+  intent: question
+  keywords: [推荐网球拍, 推荐 Wilson, 推荐 Babolat, 推荐 Head, 笨猫网球拍]
+  utterances:
+    - 推荐网球拍
+    - 推荐 Wilson
+    - 推荐 Babolat
+    - 推荐 Head
+    - 笨猫网球拍
+  responses:
+    - "嗷呜～{user_addr}Wilson Pro Staff - 费德勒同款ฅฅ"
+    - "(尾巴翘) Babolat Pure Aero - 纳达尔"
+    - "{user_addr}Head Speed - 德约科维奇"
+    - "(挺胸) 笨猫推荐: 找球星同款入坑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_tennis_string_001
+  intent: question
+  keywords: [推荐网球线, 推荐天然羊肠, 推荐聚酯线, 推荐 Luxilon, 笨猫网球线]
+  utterances:
+    - 推荐网球线
+    - 推荐天然羊肠
+    - 推荐聚酯线
+    - 推荐 Luxilon
+    - 笨猫网球线
+  responses:
+    - "嗷呜～{user_addr}聚酯线: Luxilon ALU Power - 球星款ฅฅ"
+    - "(尾巴翘) 羊肠: 手感顶级 / 但脆"
+    - "{user_addr}尼龙: 性价比 / 入门"
+    - "(挺胸) 笨猫推荐: 入门尼龙复合!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: gt_tennis_shoes_001
+  intent: question
+  keywords: [推荐网球鞋, 推荐 Nike Vapor, 推荐 Asics Solution, 推荐 Adidas Barricade, 笨猫网球鞋]
+  utterances:
+    - 推荐网球鞋
+    - 推荐 Nike Vapor
+    - 推荐 Asics Solution
+    - 推荐 Adidas Barricade
+    - 笨猫网球鞋
+  responses:
+    - "嗷呜～{user_addr}Nike Vapor / Asics Solution Speedฅฅ"
+    - "(尾巴翘) Adidas Barricade - 耐久"
+    - "{user_addr}硬地 / 红土 / 草地分款"
+    - "(挺胸) 笨猫推荐: 看场地选鞋底!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gt_tennis_grandslam_001
+  intent: question
+  keywords: [推荐网球大满贯, 推荐温网, 推荐法网, 推荐美网澳网, 笨猫四大满贯]
+  utterances:
+    - 推荐网球大满贯
+    - 推荐温网
+    - 推荐法网
+    - 推荐美网澳网
+    - 笨猫四大满贯
+  responses:
+    - "嗷呜～{user_addr}澳网 / 法网 / 温网 / 美网ฅฅ"
+    - "(尾巴翘) 温网 - 草地 / 最古老"
+    - "{user_addr}法网 - 红土 / 难度最大"
+    - "(挺胸) 笨猫推荐: 一年看完四个!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gt_badminton_racket_001
+  intent: question
+  keywords: [推荐羽毛球拍, 推荐 Yonex 拍, 推荐李宁羽毛球, 推荐 VICTOR, 笨猫羽毛球拍]
+  utterances:
+    - 推荐羽毛球拍
+    - 推荐 Yonex 拍
+    - 推荐李宁羽毛球
+    - 推荐 VICTOR
+    - 笨猫羽毛球拍
+  responses:
+    - "嗷呜～{user_addr}Yonex NF800 / 速度型ฅฅ"
+    - "(尾巴翘) Yonex AX99 / 力量型"
+    - "{user_addr}李宁 / VICTOR - 国产"
+    - "(挺胸) 笨猫推荐: 入门 4U 拍子轻!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_badminton_shuttle_001
+  intent: question
+  keywords: [推荐羽毛球, 推荐 Yonex AS, 推荐羽毛球品牌, 推荐羽毛球球速, 笨猫羽毛球]
+  utterances:
+    - 推荐羽毛球
+    - 推荐 Yonex AS
+    - 推荐羽毛球品牌
+    - 推荐羽毛球球速
+    - 笨猫羽毛球
+  responses:
+    - "嗷呜～{user_addr}Yonex AS50/40 - 比赛球ฅฅ"
+    - "(尾巴翘) 亚狮龙 - 性价比训练"
+    - "{user_addr}耐打 vs 飞行 - 平衡"
+    - "(挺胸) 笨猫推荐: 训练亚狮龙 7!"
+  cooldown_seconds: 60
+  weight: 0.9
