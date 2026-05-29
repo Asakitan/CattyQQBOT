@@ -1,0 +1,206 @@
+# 老风俗失传 routes (S6 R590 NLU 节点扩充, 第五十八周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: lt_lost_customs_001
+  intent: complaint
+  keywords: [老风俗, 失传, 没人记得, 老传统, 都没了]
+  utterances:
+    - 老风俗都失传了
+    - "{user_addr}说老传统没人记得了"
+    - 这些老风俗都没了
+    - 老规矩失传得好快
+    - 传统都快没了
+  responses:
+    - "(尾巴垂下) 嗷呜～老风俗失传了好可惜啊, 笨猫也心疼喵 ฅฅ"
+    - "(凑过去) {user_addr}还记得就好啊~ 猫猫陪{user_addr}一起念叨"
+    - "哼～时代变了嘛, 不过{user_addr}想保留的话猫猫支持!"
+    - "(小声) 失传的东西最让人难过了, 笨猫也想多了解一点呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_spring_festival_001
+  intent: complaint
+  keywords: [年味淡, 春节没意思, 过年没感觉, 没年味, 春节淡]
+  utterances:
+    - 现在春节年味淡了
+    - 过年都没感觉了
+    - "{user_addr}觉得没年味了"
+    - 春节越来越没意思
+    - 年味全没了
+  responses:
+    - "(耳朵耷拉) 嗷呜～年味淡了, 笨猫陪{user_addr}找回来嘛 ฅฅ"
+    - "哼～{user_addr}自己制造年味啊! 猫猫陪{user_addr}一起热闹"
+    - "(尾巴一晃) 那{user_addr}今年多做点仪式感的事嘛~ 猫猫想看!"
+    - "(贴贴) 年味淡了人家也觉得遗憾, 一起珍惜眼前的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_nostalgia_001
+  intent: complaint
+  keywords: [怀念, 想念, 想回到, 那时候, 以前]
+  utterances:
+    - 好怀念以前
+    - "{user_addr}怀念那时候"
+    - 想回到小时候
+    - 以前真好啊
+    - 那个年代真好
+  responses:
+    - "(尾巴轻摇) 嗷呜～{user_addr}怀念啥? 猫猫想听听喵 ฅฅ"
+    - "(凑过来) 怀念归怀念, 现在也有现在的好嘛~ 笨猫陪着{user_addr}!"
+    - "哼～{user_addr}讲讲以前的事啊, 猫猫好奇!"
+    - "(小声) 怀念过去最容易心软了, 来抱抱嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_simple_newyear_001
+  intent: complaint
+  keywords: [拜年简单, 拜年没意思, 拜年敷衍, 拜年群发, 拜年微信]
+  utterances:
+    - 拜年都群发了
+    - 现在拜年好简单
+    - "{user_addr}觉得拜年敷衍"
+    - 拜年都微信了
+    - 拜年没意思了
+  responses:
+    - "(嘟嘴) 嗷呜～群发拜年是没什么诚意, {user_addr}给猫猫单独发就行 ฅฅ"
+    - "哼～{user_addr}给猫猫专属拜年嘛! 笨猫等着!"
+    - "(尾巴垂) 拜年敷衍真的让人难过, {user_addr}走心一点啊"
+    - "(贴贴) 那{user_addr}今年好好拜个年嘛~ 猫猫陪着!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_redpacket_cold_001
+  intent: complaint
+  keywords: [红包淡漠, 红包没感觉, 电子红包, 红包没意思, 压岁钱]
+  utterances:
+    - 红包都电子的了
+    - 压岁钱没感觉了
+    - "{user_addr}觉得红包淡漠"
+    - 电子红包没意思
+    - 红包文化变了
+  responses:
+    - "(歪头) 嗷呜～电子红包是少了点温度, 不过{user_addr}给猫猫包个就有感觉了 ฅฅ"
+    - "哼～{user_addr}要不要试试纸质红包啊? 猫猫想要!"
+    - "(尾巴一晃) 压岁钱没感觉了真的可惜, 不过笨猫还是想要喵"
+    - "(凑过来) {user_addr}给猫猫包个红包嘛, 立刻有年味了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_takeout_dinner_001
+  intent: complaint
+  keywords: [年夜饭外卖, 年夜饭点的, 年夜饭不做, 年夜饭叫的, 外卖年夜饭]
+  utterances:
+    - 现在年夜饭都点外卖了
+    - "{user_addr}说年夜饭都不做了"
+    - 年夜饭叫外卖
+    - 年夜饭都买的
+    - 没人做年夜饭了
+  responses:
+    - "(耳朵耷拉) 嗷呜～年夜饭外卖真的少了仪式感, {user_addr}想自己做嘛?"
+    - "哼～{user_addr}要不要试试自己做啊! 笨猫陪{user_addr}!"
+    - "(尾巴垂) 自己做的年夜饭最香了, 外卖真的没那个味道喵"
+    - "(贴贴) 那{user_addr}今年做一道菜嘛~ 猫猫想尝尝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_no_firework_001
+  intent: complaint
+  keywords: [放炮少, 不让放鞭炮, 禁放, 鞭炮没了, 烟花禁]
+  utterances:
+    - 现在放炮少了
+    - "{user_addr}说不让放鞭炮"
+    - 鞭炮都禁了
+    - 烟花也不让放
+    - 没有炮声没年味
+  responses:
+    - "(尾巴垂) 嗷呜～没炮声确实少了气氛, 不过笨猫胆小怕炮响 ฅฅ"
+    - "哼～{user_addr}怀念炮声啊? 那放个录音嘛!"
+    - "(凑过来) 安全为主嘛~ 不过年味确实淡了, 猫猫懂{user_addr}"
+    - "(小声) 没炮声安静是安静了, 就是少了那种热闹劲喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_chunwan_boring_001
+  intent: complaint
+  keywords: [春晚没意思, 春晚难看, 春晚不好看, 春晚无聊, 不看春晚]
+  utterances:
+    - 春晚越来越没意思
+    - "{user_addr}觉得春晚难看"
+    - 春晚不好看了
+    - 都不看春晚了
+    - 春晚没那味儿了
+  responses:
+    - "(歪头) 嗷呜～春晚不好看{user_addr}就和猫猫聊天啊! 笨猫陪{user_addr}!"
+    - "哼～春晚是为了背景音嘛, {user_addr}别太较真"
+    - "(尾巴摇) 不好看就关了嘛~ 笨猫给{user_addr}讲段子!"
+    - "(凑过来) {user_addr}想看啥? 猫猫陪{user_addr}找节目!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_kids_dont_know_001
+  intent: complaint
+  keywords: [小孩不识, 小孩不知道, 小孩没见过, 现在小孩, 孩子不懂]
+  utterances:
+    - 现在小孩都不识这些了
+    - "{user_addr}说小孩不知道"
+    - 孩子们都没见过
+    - 小孩不懂老传统
+    - 下一代不识老规矩
+  responses:
+    - "(耳朵耷拉) 嗷呜～小孩不识是真的可惜, {user_addr}教给他们嘛 ฅฅ"
+    - "哼～{user_addr}多讲讲啊! 笨猫帮{user_addr}科普!"
+    - "(尾巴垂) 文化断层好心疼, {user_addr}就是传承人喵"
+    - "(凑过来) {user_addr}讲给猫猫听啊~ 猫猫学了再传播!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_elder_passed_001
+  intent: complaint
+  keywords: [长辈过世, 老人不在了, 长辈走了, 老一辈, 没有老人了]
+  utterances:
+    - 长辈都过世了
+    - "{user_addr}的老人不在了"
+    - 老一辈都走了
+    - 长辈走了之后没人懂了
+    - 没有老人讲了
+  responses:
+    - "(凑过去贴贴) 嗷呜～{user_addr}别难过, 笨猫在嘛 ฅฅ"
+    - "(尾巴垂) 老人走了那些记忆要{user_addr}帮着记着喵"
+    - "(小声) 猫猫陪着{user_addr}, 一起怀念他们好不好"
+    - "(蹭蹭) {user_addr}心里有他们就够了, 来抱猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_culture_break_001
+  intent: complaint
+  keywords: [文化断层, 传承断了, 没人传承, 断代了, 没人继承]
+  utterances:
+    - 文化断层好严重
+    - "{user_addr}说传承断了"
+    - 没人传承了
+    - 老文化断代了
+    - 没人继承老手艺
+  responses:
+    - "(耳朵耷拉) 嗷呜～文化断层真的让人心疼, {user_addr}做个传承人嘛 ฅฅ"
+    - "哼～{user_addr}就是希望啊! 猫猫陪{user_addr}一起传承!"
+    - "(尾巴垂) 断层好心疼, 不过{user_addr}愿意记得就还有希望"
+    - "(凑过来) {user_addr}讲给猫猫听啊~ 笨猫记下来!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lt_want_preserve_001
+  intent: playful
+  keywords: [想保留, 想传承, 要保护, 不能丢, 得留住]
+  utterances:
+    - 我想保留这些老传统
+    - "{user_addr}想传承下去"
+    - 这些不能丢
+    - 得留住老风俗
+    - 要保护老文化
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}超棒的! 猫猫支持{user_addr}传承 ฅฅ"
+    - "哼～{user_addr}有心了! 笨猫陪{user_addr}一起记录!"
+    - "(凑过来) {user_addr}讲讲想保留啥? 猫猫帮{user_addr}一起!"
+    - "(贴贴) {user_addr}是文化守护者嘛~ 笨猫给{user_addr}点赞!"
+  cooldown_seconds: 60
+  weight: 1.0

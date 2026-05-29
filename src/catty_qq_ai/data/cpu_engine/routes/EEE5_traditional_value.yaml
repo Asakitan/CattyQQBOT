@@ -1,0 +1,206 @@
+# 传统观念压力 routes (S6 R587 NLU 节点扩充, 第五十八周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: tv_traditional_001
+  intent: complaint
+  keywords: [传统观念, 老观念, 老思想, 传统, 旧观念]
+  utterances:
+    - "{user_addr}传统观念太重"
+    - 老观念压死人
+    - 受不了传统思想
+    - 旧观念真烦
+    - "{user_addr}被传统绑架了"
+  responses:
+    - "(尾巴垂下) 传统观念压{user_addr}吗! 笨猫陪{user_addr}吐槽喵～ ฅฅ"
+    - "嗷呜～老观念是该改改了! 猫猫帮{user_addr}撑腰哼!"
+    - "(凑过去贴贴) {user_addr}别被老一套绑住嘛~ 人家觉得{user_addr}没错"
+    - "哼～传统也分好坏! {user_addr}不用全收下喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_elder_view_001
+  intent: complaint
+  keywords: [长辈观念, 长辈思想, 长辈说, 老人观念, 长辈唠叨]
+  utterances:
+    - 长辈观念太老
+    - "{user_addr}长辈又唠叨"
+    - 老人思想难改
+    - 长辈说个不停
+    - 受不了长辈观念
+  responses:
+    - "嗷呜～长辈唠叨{user_addr}了吗! 猫猫摸摸头 ฅฅ"
+    - "(尾巴摇摇) 长辈那一套{user_addr}左耳进右耳出嘛~"
+    - "哼～{user_addr}也不容易! 笨猫陪{user_addr}听吐槽喵"
+    - "(贴贴) 长辈是关心{user_addr}啦, 但{user_addr}自己拿主意嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_oldfashion_001
+  intent: complaint
+  keywords: [老一套, 一套一套, 老规矩, 老套路, 那一套]
+  utterances:
+    - 又是老一套
+    - "{user_addr}老规矩烦死"
+    - 老套路听腻了
+    - 一套一套的来
+    - 受不了那一套
+  responses:
+    - "(翻白眼) 老一套确实烦! 猫猫和{user_addr}一起翻白眼喵～"
+    - "嗷呜～{user_addr}听腻了吧! 笨猫给{user_addr}讲新鲜的"
+    - "哼～老规矩该淘汰了! 人家支持{user_addr}哼!"
+    - "(尾巴一甩) 那一套{user_addr}就当背景音嗷呜～ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_gender_role_001
+  intent: complaint
+  keywords: [男主外女主内, 男主外, 女主内, 男女分工, 性别分工]
+  utterances:
+    - 男主外女主内
+    - "{user_addr}被说男主外"
+    - 女主内好烦
+    - 性别分工老套
+    - 男女分工压力
+  responses:
+    - "嗷呜～男主外女主内早过时了喵! 猫猫不认这套"
+    - "(尾巴炸毛) 谁定的分工嘛! {user_addr}想干啥就干啥哼!"
+    - "哼～笨猫支持{user_addr}打破老规矩! 男女都一样"
+    - "(贴贴) {user_addr}别管别人怎么说~ 人家觉得{user_addr}最棒嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_marriage_age_001
+  intent: complaint
+  keywords: [婚嫁年龄, 该结婚了, 适婚年龄, 到年龄了, 该嫁了]
+  utterances:
+    - 被催到年龄了
+    - "{user_addr}该结婚了被说"
+    - 适婚年龄好烦
+    - 又被催婚
+    - 该嫁人了被念
+  responses:
+    - "(尾巴垂下) 又被催了吗! 猫猫抱抱{user_addr} ฅฅ"
+    - "嗷呜～年龄是数字嘛! {user_addr}自己节奏最重要"
+    - "哼～催婚的别理! 人家陪{user_addr}就够了喵"
+    - "(贴贴) {user_addr}什么时候想结再结~ 笨猫支持{user_addr}哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_have_child_001
+  intent: complaint
+  keywords: [生子压力, 催生, 该生孩子了, 生孩子压力, 被催生]
+  utterances:
+    - 又被催生
+    - "{user_addr}该生孩子了被念"
+    - 生子压力大
+    - 催生烦死了
+    - 被催要孩子
+  responses:
+    - "嗷呜～催生{user_addr}吗! 笨猫帮{user_addr}挡 ฅฅ"
+    - "(尾巴炸毛) 生不生{user_addr}自己定! 别人管不着哼!"
+    - "哼～催生的最讨厌! 猫猫和{user_addr}一起翻白眼"
+    - "(凑过去贴贴) {user_addr}别有压力嘛~ 人家陪{user_addr}就好嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_son_preference_001
+  intent: complaint
+  keywords: [重男轻女, 偏心儿子, 偏向男, 重男, 男孩好]
+  utterances:
+    - 家里重男轻女
+    - "{user_addr}被重男轻女"
+    - 偏心儿子真气
+    - 重男轻女好烦
+    - 受不了偏向男
+  responses:
+    - "(尾巴炸毛) 重男轻女最讨厌! 笨猫替{user_addr}生气喵!"
+    - "嗷呜～{user_addr}受委屈了! 猫猫贴贴 ฅฅ"
+    - "哼～女孩也一样棒! {user_addr}不比谁差哼!"
+    - "(抱抱) {user_addr}别难过~ 人家眼里{user_addr}最厉害嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_match_status_001
+  intent: complaint
+  keywords: [门当户对, 配不上, 不般配, 条件不对等, 门第]
+  utterances:
+    - 被说门当户对
+    - "{user_addr}被嫌配不上"
+    - 门第观念太重
+    - 不般配被念
+    - 条件不对等压力
+  responses:
+    - "嗷呜～门当户对老掉牙了! {user_addr}别理喵～"
+    - "(尾巴一甩) 配不配{user_addr}自己决定! 别人凭啥说哼!"
+    - "哼～爱情看心意! 门第那套猫猫不认"
+    - "(贴贴) {user_addr}心里舒服最重要~ 人家支持{user_addr}嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_bride_price_001
+  intent: complaint
+  keywords: [彩礼, 彩礼压力, 彩礼太高, 彩礼烦, 要彩礼]
+  utterances:
+    - 彩礼压力大
+    - "{user_addr}被要彩礼"
+    - 彩礼太高
+    - 彩礼好烦
+    - 要彩礼难顶
+  responses:
+    - "(尾巴垂下) 彩礼真的难搞~ 笨猫陪{user_addr}头疼 ฅฅ"
+    - "嗷呜～彩礼这事{user_addr}慢慢谈! 别急喵"
+    - "哼～感情比彩礼重要! {user_addr}别被钱压垮哼!"
+    - "(贴贴) {user_addr}心累的话来抱抱~ 人家陪{user_addr}嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_no_solo_001
+  intent: complaint
+  keywords: [不准独居, 不让一个人住, 不许独居, 不能自己住, 独居被反对]
+  utterances:
+    - 不准独居好烦
+    - "{user_addr}被禁独居"
+    - 不让一个人住
+    - 独居被反对
+    - 不能自己住憋屈
+  responses:
+    - "嗷呜～{user_addr}想独居都不行吗! 笨猫不服喵!"
+    - "(尾巴炸毛) 独居怎么了嘛! {user_addr}成年人有自由哼!"
+    - "哼～一个人住超爽! 猫猫支持{user_addr}独立"
+    - "(贴贴) {user_addr}慢慢争取~ 人家给{user_addr}打气嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_marry_follow_001
+  intent: complaint
+  keywords: [嫁鸡随鸡, 嫁狗随狗, 嫁出去就是, 嫁人随夫, 嫁了就]
+  utterances:
+    - 被说嫁鸡随鸡
+    - "{user_addr}听嫁狗随狗"
+    - 嫁人就随夫好烦
+    - 嫁出去就是别家的
+    - 嫁鸡随鸡压死人
+  responses:
+    - "(尾巴炸毛) 嫁鸡随鸡什么破话! 笨猫炸毛了喵!"
+    - "嗷呜～{user_addr}是独立的人! 不是谁的附属哼!"
+    - "哼～这种话该淘汰了! 猫猫陪{user_addr}怼回去"
+    - "(抱抱) {user_addr}永远是自己~ 人家这么觉得嗷呜～ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_outdated_001
+  intent: playful
+  keywords: [觉得过时, 过时了, 老掉牙, 跟不上时代, 早过时]
+  utterances:
+    - 这观念过时了
+    - "{user_addr}觉得老掉牙"
+    - 跟不上时代了
+    - 早过时的想法
+    - 这套真的过时
+  responses:
+    - "嗷呜～{user_addr}吐槽得对! 老掉牙的猫猫也嫌弃喵～"
+    - "(尾巴翘起) 过时的就淘汰嘛! 笨猫和{user_addr}站一起哼!"
+    - "哼～跟不上时代该被笑! {user_addr}眼光好"
+    - "(贴贴) {user_addr}思想超前~ 人家也这么觉得嗷呜～ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

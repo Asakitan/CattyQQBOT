@@ -1,0 +1,206 @@
+# 中药本草 routes (S6 R585 NLU 节点扩充, 第五十八周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cmh_huangdi_001
+  intent: question
+  keywords: [推荐黄帝内经, 推荐内经, 推荐素问, 推荐灵枢, 笨猫黄帝内经]
+  utterances:
+    - "{user_addr}推荐黄帝内经"
+    - 推荐内经
+    - 推荐素问
+    - 推荐灵枢
+    - 笨猫黄帝内经
+  responses:
+    - "嗷呜～{user_addr}黄帝内经 - 中医圣经ฅฅ"
+    - "(尾巴翘) 素问 + 灵枢两部"
+    - "{user_addr}阴阳五行 / 经络脏腑"
+    - "(挺胸) 猫猫推荐: 中医必读祖典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmh_bencao_001
+  intent: question
+  keywords: [推荐本草纲目, 推荐李时珍, 推荐本草, 推荐草药典, 笨猫本草纲目]
+  utterances:
+    - "{user_addr}推荐本草纲目"
+    - 推荐李时珍
+    - 推荐本草
+    - 推荐草药典
+    - 笨猫本草纲目
+  responses:
+    - "嗷呜～{user_addr}本草纲目 - 李时珍巨著ฅฅ"
+    - "(尾巴翘) 1892 种药 / 11096 方"
+    - "{user_addr}明代药学百科全书"
+    - "(挺胸) 人家推荐: 药材必查!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmh_shanghan_001
+  intent: question
+  keywords: [推荐伤寒论, 推荐张仲景, 推荐金匮要略, 推荐经方, 笨猫伤寒论]
+  utterances:
+    - "{user_addr}推荐伤寒论"
+    - 推荐张仲景
+    - 推荐金匮要略
+    - 推荐经方
+    - 笨猫伤寒论
+  responses:
+    - "嗷呜～{user_addr}伤寒论 - 张仲景医圣ฅฅ"
+    - "(尾巴翘) 六经辨证 / 经方之祖"
+    - "{user_addr}金匮要略配套读"
+    - "(挺胸) 笨猫推荐: 中医临床圣典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmh_shennong_001
+  intent: question
+  keywords: [推荐神农本草经, 推荐神农, 推荐本草经, 推荐上中下三品, 笨猫神农本草经]
+  utterances:
+    - "{user_addr}推荐神农本草经"
+    - 推荐神农
+    - 推荐本草经
+    - 推荐上中下三品
+    - 笨猫神农本草经
+  responses:
+    - "嗷呜～{user_addr}神农本草经 - 最早药典ฅฅ"
+    - "(尾巴翘) 365 味药 / 上中下三品"
+    - "{user_addr}汉代成书 / 本草之祖"
+    - "(挺胸) 猫猫推荐: 中药学源头!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmh_bianzheng_001
+  intent: question
+  keywords: [推荐中医辩证, 推荐八纲辨证, 推荐脏腑辨证, 推荐气血津液, 笨猫辩证]
+  utterances:
+    - "{user_addr}推荐中医辩证"
+    - 推荐八纲辨证
+    - 推荐脏腑辨证
+    - 推荐气血津液
+    - 笨猫辩证
+  responses:
+    - "嗷呜～{user_addr}八纲: 阴阳表里寒热虚实ฅฅ"
+    - "(尾巴翘) 脏腑 / 六经 / 卫气营血"
+    - "{user_addr}辨证论治 - 中医核心"
+    - "(挺胸) 人家推荐: 学医先学辨证!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cmh_tuina_001
+  intent: question
+  keywords: [推荐推拿按摩, 推荐穴位按摩, 推荐经络按摩, 推荐小儿推拿, 笨猫推拿]
+  utterances:
+    - "{user_addr}推荐推拿按摩"
+    - 推荐穴位按摩
+    - 推荐经络按摩
+    - 推荐小儿推拿
+    - 笨猫推拿
+  responses:
+    - "嗷呜～{user_addr}推拿 - 中医外治法ฅฅ"
+    - "(尾巴翘) 足三里 / 涌泉 / 合谷"
+    - "{user_addr}小儿推拿 / 正骨"
+    - "(挺胸) 笨猫推荐: 自学先认穴位!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cmh_zhenmai_001
+  intent: question
+  keywords: [推荐中医诊脉, 推荐脉诊, 推荐切脉, 推荐二十八脉, 笨猫诊脉]
+  utterances:
+    - "{user_addr}推荐中医诊脉"
+    - 推荐脉诊
+    - 推荐切脉
+    - 推荐二十八脉
+    - 笨猫诊脉
+  responses:
+    - "嗷呜～{user_addr}寸关尺 - 三部九候ฅฅ"
+    - "(尾巴翘) 浮沉迟数 / 二十八脉"
+    - "{user_addr}濒湖脉学 - 入门书"
+    - "(挺胸) 猫猫推荐: 望闻问切之切!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cmh_shiliao_001
+  intent: question
+  keywords: [推荐中医食疗, 推荐药膳, 推荐食疗本草, 推荐养生汤, 笨猫食疗]
+  utterances:
+    - "{user_addr}推荐中医食疗"
+    - 推荐药膳
+    - 推荐食疗本草
+    - 推荐养生汤
+    - 笨猫食疗
+  responses:
+    - "嗷呜～{user_addr}药食同源 - 寓医于食ฅฅ"
+    - "(尾巴翘) 四气五味 / 归经配伍"
+    - "{user_addr}广东老火汤 / 节气养生"
+    - "(挺胸) 人家推荐: 红枣枸杞日常!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cmh_yaodian_001
+  intent: question
+  keywords: [推荐中医药店, 推荐同仁堂, 推荐胡庆余堂, 推荐雷允上, 笨猫药店]
+  utterances:
+    - "{user_addr}推荐中医药店"
+    - 推荐同仁堂
+    - 推荐胡庆余堂
+    - 推荐雷允上
+    - 笨猫药店
+  responses:
+    - "嗷呜～{user_addr}同仁堂 - 北京老字号ฅฅ"
+    - "(尾巴翘) 胡庆余堂 / 雷允上 / 陈李济"
+    - "{user_addr}片仔癀 / 漳州老牌"
+    - "(挺胸) 笨猫推荐: 同仁堂最稳!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cmh_mingyi_001
+  intent: question
+  keywords: [推荐中医名医, 推荐扁鹊, 推荐华佗, 推荐孙思邈, 笨猫名医]
+  utterances:
+    - "{user_addr}推荐中医名医"
+    - 推荐扁鹊
+    - 推荐华佗
+    - 推荐孙思邈
+    - 笨猫名医
+  responses:
+    - "嗷呜～{user_addr}扁鹊 / 华佗 / 张仲景ฅฅ"
+    - "(尾巴翘) 孙思邈 - 药王千金方"
+    - "{user_addr}李时珍 / 叶天士 / 吴鞠通"
+    - "(挺胸) 猫猫推荐: 四大名医必知!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cmh_yuanxiao_001
+  intent: question
+  keywords: [推荐中医院校, 推荐北中医, 推荐上中医, 推荐广中医, 笨猫中医院校]
+  utterances:
+    - "{user_addr}推荐中医院校"
+    - 推荐北中医
+    - 推荐上中医
+    - 推荐广中医
+    - 笨猫中医院校
+  responses:
+    - "嗷呜～{user_addr}北中医 - 中医最高学府ฅฅ"
+    - "(尾巴翘) 上海 / 广州 / 南京中医药"
+    - "{user_addr}成都 / 浙江中医药"
+    - "(挺胸) 人家推荐: 北中医临床好!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cmh_yangsheng_001
+  intent: question
+  keywords: [推荐中医养生书, 推荐养生堂, 推荐徐文兵, 推荐倪海厦, 笨猫养生书]
+  utterances:
+    - "{user_addr}推荐中医养生书"
+    - 推荐养生堂
+    - 推荐徐文兵
+    - 推荐倪海厦
+    - 笨猫养生书
+  responses:
+    - "嗷呜～{user_addr}徐文兵 - 字里藏医ฅฅ"
+    - "(尾巴翘) 倪海厦人纪 / 罗大伦"
+    - "{user_addr}遵生八笺 / 老老恒言"
+    - "(挺胸) 笨猫推荐: 徐文兵入门好!"
+  cooldown_seconds: 60
+  weight: 0.9

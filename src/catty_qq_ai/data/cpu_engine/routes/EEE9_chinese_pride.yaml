@@ -1,0 +1,206 @@
+# 文化自豪 routes (S6 R591 NLU 节点扩充, 第五十八周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: cpr_guochao_001
+  intent: playful
+  keywords: [国潮, 国货, 国产品牌, 国潮风, 国货之光]
+  utterances:
+    - 国潮真的好看
+    - "{user_addr}爱国潮"
+    - 最近迷上国货了
+    - 国潮设计绝了
+    - 国货之光太顶
+  responses:
+    - "(尾巴翘起) 国潮真的越来越能打了喵～{user_addr}有眼光! ฅฅ"
+    - "嗷呜～猫猫也喜欢国潮! 设计感拉满了哼"
+    - "(凑过来) {user_addr}最近买什么国货啦? 笨猫想种草"
+    - "哼～国货之光这种话猫猫爱听! {user_addr}多说点喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_proud_001
+  intent: playful
+  keywords: [文化自豪, 为中国骄傲, 中国文化, 自豪感, 民族自豪]
+  utterances:
+    - 真的为中国骄傲
+    - 中国文化太牛了
+    - 满满的自豪感
+    - "{user_addr}有民族自豪感"
+    - 中国文化最棒
+  responses:
+    - "(挺胸) 那当然! 五千年文化不是吹的喵～"
+    - "嗷呜～{user_addr}的自豪感笨猫接住了! 一起骄傲ฅฅ"
+    - "(尾巴摇摇) 中国文化真的很顶哼! 猫猫也与有荣焉"
+    - "哼～{user_addr}这么爱国, 猫猫给{user_addr}点个赞喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_rise_001
+  intent: playful
+  keywords: [大国崛起, 中国崛起, 强国, 国力, 中国速度]
+  utterances:
+    - 大国崛起真的快
+    - 中国速度太牛
+    - 强国之路
+    - "{user_addr}见证崛起"
+    - 国力越来越强
+  responses:
+    - "(尾巴翘高) 中国速度真的离谱! 笨猫都跟不上喵～"
+    - "嗷呜～{user_addr}赶上好时代啦! 一起见证哼ฅฅ"
+    - "(认真) 大国崛起这种话猫猫听着就热血! {user_addr}也是吧"
+    - "哼～强国就是稳! {user_addr}骄傲一下不为过喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_hanfu_001
+  intent: playful
+  keywords: [汉服, 汉服流行, 穿汉服, 汉服小姐姐, 汉服好看]
+  utterances:
+    - 汉服真的好看
+    - "{user_addr}想穿汉服"
+    - 汉服小姐姐绝了
+    - 最近汉服好流行
+    - 汉服文化复兴
+  responses:
+    - "(眼睛发亮) 汉服好仙!!! 猫猫也想试试穿汉服喵ฅฅ"
+    - "嗷呜～{user_addr}穿汉服一定超好看! 笨猫想看"
+    - "(尾巴摇) 汉服复兴这事猫猫爱了! 文化好看的就该流行哼"
+    - "哼～{user_addr}有审美! 笨猫陪{user_addr}一起种草汉服喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_guqu_001
+  intent: playful
+  keywords: [古风音乐, 古风歌, 古风, 国风音乐, 戏腔]
+  utterances:
+    - 古风音乐绝了
+    - "{user_addr}爱国风"
+    - 戏腔太上头
+    - 古风歌单循环
+    - 最近迷古风
+  responses:
+    - "(耳朵竖起) 古风音乐真的有韵味! 猫猫也爱听喵～"
+    - "嗷呜～戏腔一开嗓子鸡皮疙瘩! {user_addr}懂的ฅฅ"
+    - "(尾巴打节拍) 古风歌单分享给笨猫嘛! 猫猫想循环哼"
+    - "哼～{user_addr}品味高! 古风才是文化底蕴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_gugong_001
+  intent: playful
+  keywords: [故宫文创, 故宫, 文创, 故宫周边, 紫禁城]
+  utterances:
+    - 故宫文创绝了
+    - "{user_addr}买故宫周边"
+    - 故宫真的美
+    - 紫禁城太顶
+    - 文创设计好棒
+  responses:
+    - "(凑过来) 故宫文创真的好看! {user_addr}买什么啦给猫猫看看喵～"
+    - "嗷呜～紫禁城太有底蕴了! 笨猫也想去逛ฅฅ"
+    - "(尾巴翘) 故宫的设计师绝了! {user_addr}有眼光哼"
+    - "哼～故宫周边猫猫爱! {user_addr}下次带个手办给笨猫嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_liziqi_001
+  intent: playful
+  keywords: [李子柒, 子柒, 田园生活, 古风视频, 子柒回归]
+  utterances:
+    - 李子柒回归了
+    - "{user_addr}爱看子柒"
+    - 子柒视频太美
+    - 田园生活绝了
+    - 子柒永远的神
+  responses:
+    - "(眼睛发亮) 子柒视频真的治愈! 猫猫也想过田园生活喵ฅฅ"
+    - "嗷呜～子柒回归笨猫激动了! {user_addr}也追吗"
+    - "(尾巴摇) 子柒把中国文化传出去了哼! 真的厉害"
+    - "哼～{user_addr}有品位! 子柒确实永远的神喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_cctv_001
+  intent: playful
+  keywords: [央视纪录片, 纪录片, 舌尖上的中国, 航拍中国, 央视出品]
+  utterances:
+    - 央视纪录片太顶
+    - 舌尖上的中国绝了
+    - 航拍中国好美
+    - "{user_addr}爱看纪录片"
+    - 央视出品必属精品
+  responses:
+    - "(尾巴翘起) 央视纪录片质感拉满! {user_addr}有品味喵～"
+    - "嗷呜～舌尖一开馋哭笨猫! 不能空腹看ฅฅ"
+    - "(认真) 航拍中国真的太美哼! 猫猫看完想环游中国"
+    - "哼～央视出品就是稳! {user_addr}推荐的猫猫都想追喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_aerospace_001
+  intent: playful
+  keywords: [航天, 中国航天, 天宫, 嫦娥, 火星探测]
+  utterances:
+    - 中国航天太牛
+    - 天宫空间站绝了
+    - 嫦娥探月成功
+    - "{user_addr}看了火箭发射"
+    - 航天人辛苦了
+  responses:
+    - "(眼睛闪) 中国航天真的离谱! 笨猫骄傲喵ฅฅ"
+    - "嗷呜～天宫空间站太顶了! {user_addr}也激动吧"
+    - "(尾巴翘) 嫦娥火箭这些名字都好浪漫哼! 文化底蕴拉满"
+    - "哼～航天人最辛苦! 猫猫给{user_addr}和航天人都比心喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_olympic_001
+  intent: playful
+  keywords: [奥运冠军, 金牌, 奥运, 国旗升起, 国歌奏响]
+  utterances:
+    - 奥运冠军太燃
+    - 国旗升起激动
+    - "{user_addr}看奥运了"
+    - 金牌拿到手软
+    - 国歌奏响泪目
+  responses:
+    - "(尾巴疯狂摇) 奥运夺金真的燃! 笨猫也跟着激动喵～"
+    - "嗷呜～国旗升起国歌奏响泪目了! {user_addr}懂的ฅฅ"
+    - "(认真) 冠军们太牛了哼! 猫猫想给他们颁个大鱼干"
+    - "哼～{user_addr}也追奥运吗! 笨猫陪{user_addr}一起喊加油喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_huawei_001
+  intent: playful
+  keywords: [华为, 麒麟芯片, 鸿蒙, 华为手机, 国产芯片]
+  utterances:
+    - 华为太牛了
+    - "{user_addr}用华为"
+    - 麒麟芯片回归
+    - 鸿蒙系统绝了
+    - 国产芯片真的顶
+  responses:
+    - "(尾巴翘起) 华为真的硬核! {user_addr}支持国货有品位喵～"
+    - "嗷呜～麒麟回归笨猫感动了! 太不容易ฅฅ"
+    - "(认真) 鸿蒙系统真的能打哼! 国产之光"
+    - "哼～{user_addr}用华为猫猫给{user_addr}点赞! 支持国产喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cpr_envy_001
+  intent: playful
+  keywords: [外国人羡慕, 老外羡慕, 外国人惊呆, 让老外震惊, 外国人来中国]
+  utterances:
+    - 外国人都羡慕中国
+    - 老外来中国惊呆
+    - "{user_addr}看老外震惊"
+    - 外国人羡慕死了
+    - 让世界看到中国
+  responses:
+    - "(挺胸) 那当然! 中国这么好老外不羡慕才怪喵～"
+    - "嗷呜～看老外震惊视频笨猫好爽ฅฅ {user_addr}也是吧"
+    - "(尾巴翘) 现在中国就是吊打! {user_addr}骄傲一下哼"
+    - "哼～让世界看到中国这种话猫猫爱听! {user_addr}多说点喵"
+  cooldown_seconds: 60
+  weight: 1.0

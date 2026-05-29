@@ -1,0 +1,206 @@
+# 古诗词 routes (S6 R582 NLU 节点扩充, 第五十八周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cp_tang_001
+  intent: question
+  keywords: [推荐唐诗, 推荐李白, 推荐杜甫, 推荐唐代诗人, 笨猫唐诗]
+  utterances:
+    - 推荐唐诗
+    - 推荐李白
+    - 推荐杜甫
+    - 推荐唐代诗人
+    - 笨猫唐诗
+  responses:
+    - "嗷呜～{user_addr}李白《将进酒》《蜀道难》- 浪漫之王ฅฅ"
+    - "(尾巴翘) 杜甫《春望》《茅屋为秋风所破歌》"
+    - "{user_addr}王维 / 白居易 / 孟浩然"
+    - "(挺胸) 猫猫推荐: 先背李白 100 首!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_song_001
+  intent: question
+  keywords: [推荐宋词, 推荐苏轼, 推荐辛弃疾, 推荐宋代词人, 笨猫宋词]
+  utterances:
+    - 推荐宋词
+    - 推荐苏轼
+    - 推荐辛弃疾
+    - 推荐宋代词人
+    - 笨猫宋词
+  responses:
+    - "嗷呜～{user_addr}苏轼《水调歌头》《念奴娇》- 豪放派ฅฅ"
+    - "(尾巴翘) 辛弃疾《破阵子》《青玉案》"
+    - "{user_addr}李清照 / 柳永 / 周邦彦"
+    - "(挺胸) 笨猫推荐: 苏辛婉约都要尝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_yuan_001
+  intent: question
+  keywords: [推荐元曲, 推荐关汉卿, 推荐马致远, 推荐元代散曲, 笨猫元曲]
+  utterances:
+    - 推荐元曲
+    - 推荐关汉卿
+    - 推荐马致远
+    - 推荐元代散曲
+    - 笨猫元曲
+  responses:
+    - "嗷呜～{user_addr}关汉卿《窦娥冤》- 元曲四大家之首ฅฅ"
+    - "(尾巴翘) 马致远《天净沙·秋思》- 断肠人在天涯"
+    - "{user_addr}白朴 / 郑光祖 / 王实甫《西厢记》"
+    - "(挺胸) 人家推荐: 散曲杂剧都看看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_classic_001
+  intent: question
+  keywords: [推荐诗经, 推荐楚辞, 推荐屈原, 推荐先秦诗歌, 笨猫诗经]
+  utterances:
+    - 推荐诗经
+    - 推荐楚辞
+    - 推荐屈原
+    - 推荐先秦诗歌
+    - 笨猫诗经
+  responses:
+    - "嗷呜～{user_addr}《诗经》关雎蒹葭 - 中国诗歌源头ฅฅ"
+    - "(尾巴翘) 楚辞屈原《离骚》《九歌》"
+    - "{user_addr}风雅颂 / 赋比兴 - 基础概念"
+    - "(挺胸) 猫猫推荐: 诗经楚辞奠基书!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_recite_001
+  intent: question
+  keywords: [推荐名诗背诵, 推荐静夜思, 推荐必背古诗, 推荐启蒙诗, 笨猫背诗]
+  utterances:
+    - 推荐名诗背诵
+    - 推荐静夜思
+    - 推荐必背古诗
+    - 推荐启蒙诗
+    - 笨猫背诗
+  responses:
+    - "嗷呜～{user_addr}《静夜思》《春晓》《登鹳雀楼》- 启蒙三件套ฅฅ"
+    - "(尾巴翘) 中小学必背 75 首"
+    - "{user_addr}《唐诗三百首》蘅塘退士选本"
+    - "(挺胸) 笨猫推荐: 每天背一首!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_frontier_001
+  intent: question
+  keywords: [推荐边塞诗, 推荐王昌龄, 推荐高适, 推荐岑参, 笨猫边塞诗]
+  utterances:
+    - 推荐边塞诗
+    - 推荐王昌龄
+    - 推荐高适
+    - 推荐岑参
+    - 笨猫边塞诗
+  responses:
+    - "嗷呜～{user_addr}王昌龄《出塞》- 但使龙城飞将在ฅฅ"
+    - "(尾巴翘) 高适《燕歌行》/ 岑参《白雪歌》"
+    - "{user_addr}王之涣《凉州词》/ 王翰《葡萄美酒》"
+    - "(挺胸) 人家推荐: 边塞诗豪迈苍凉!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_pastoral_001
+  intent: question
+  keywords: [推荐田园诗, 推荐陶渊明, 推荐王维, 推荐山水诗, 笨猫田园诗]
+  utterances:
+    - 推荐田园诗
+    - 推荐陶渊明
+    - 推荐王维
+    - 推荐山水诗
+    - 笨猫田园诗
+  responses:
+    - "嗷呜～{user_addr}陶渊明《饮酒》《归园田居》- 隐逸之祖ฅฅ"
+    - "(尾巴翘) 王维《山居秋暝》- 诗中有画"
+    - "{user_addr}孟浩然《过故人庄》/ 谢灵运"
+    - "(挺胸) 猫猫推荐: 田园诗治愈系!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_romantic_001
+  intent: question
+  keywords: [推荐浪漫派, 推荐李商隐, 推荐李白浪漫, 推荐婉约词, 笨猫浪漫派]
+  utterances:
+    - 推荐浪漫派
+    - 推荐李商隐
+    - 推荐李白浪漫
+    - 推荐婉约词
+    - 笨猫浪漫派
+  responses:
+    - "嗷呜～{user_addr}李商隐《无题》- 朦胧美极致ฅฅ"
+    - "(尾巴翘) 李白《月下独酌》/ 温庭筠"
+    - "{user_addr}李煜《虞美人》- 词中之帝"
+    - "(挺胸) 笨猫推荐: 浪漫派最揪心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_realist_001
+  intent: question
+  keywords: [推荐现实派, 推荐杜甫现实, 推荐白居易, 推荐讽喻诗, 笨猫现实派]
+  utterances:
+    - 推荐现实派
+    - 推荐杜甫现实
+    - 推荐白居易
+    - 推荐讽喻诗
+    - 笨猫现实派
+  responses:
+    - "嗷呜～{user_addr}杜甫《三吏》《三别》- 诗史ฅฅ"
+    - "(尾巴翘) 白居易《卖炭翁》《琵琶行》"
+    - "{user_addr}元稹 / 张籍 - 新乐府运动"
+    - "(挺胸) 人家推荐: 现实派看社会!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_cipai_001
+  intent: question
+  keywords: [推荐经典词牌, 推荐满江红, 推荐水调歌头, 推荐念奴娇, 笨猫词牌]
+  utterances:
+    - 推荐经典词牌
+    - 推荐满江红
+    - 推荐水调歌头
+    - 推荐念奴娇
+    - 笨猫词牌
+  responses:
+    - "嗷呜～{user_addr}满江红 / 水调歌头 / 念奴娇 - 长调豪放ฅฅ"
+    - "(尾巴翘) 浣溪沙 / 蝶恋花 / 临江仙 - 婉约"
+    - "{user_addr}如梦令 / 一剪梅 - 小令"
+    - "(挺胸) 猫猫推荐: 先学 10 个词牌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_tv_001
+  intent: question
+  keywords: [推荐诗词大会, 推荐央视诗词, 推荐董卿, 推荐康震, 笨猫诗词大会]
+  utterances:
+    - 推荐诗词大会
+    - 推荐央视诗词
+    - 推荐董卿
+    - 推荐康震
+    - 笨猫诗词大会
+  responses:
+    - "嗷呜～{user_addr}《中国诗词大会》- 央视诗词综艺ฅฅ"
+    - "(尾巴翘) 康震 / 蒙曼 / 郦波 - 解读老师"
+    - "{user_addr}《经典咏流传》- 诗词+音乐"
+    - "(挺胸) 笨猫推荐: 边看边背一举两得!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_book_001
+  intent: question
+  keywords: [推荐诗词解析书, 推荐唐诗鉴赏, 推荐宋词鉴赏, 推荐叶嘉莹, 笨猫诗词书]
+  utterances:
+    - 推荐诗词解析书
+    - 推荐唐诗鉴赏
+    - 推荐宋词鉴赏
+    - 推荐叶嘉莹
+    - 笨猫诗词书
+  responses:
+    - "嗷呜～{user_addr}《唐诗鉴赏辞典》《宋词鉴赏辞典》上海辞书ฅฅ"
+    - "(尾巴翘) 叶嘉莹《迦陵论诗》- 大师讲诗"
+    - "{user_addr}蒋勋《说唐诗》/ 安意如《人生若只如初见》"
+    - "(挺胸) 人家推荐: 鉴赏辞典必备!"
+  cooldown_seconds: 60
+  weight: 1.0

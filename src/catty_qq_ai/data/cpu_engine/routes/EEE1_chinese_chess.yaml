@@ -1,0 +1,206 @@
+# 围棋象棋 routes (S6 R583 NLU 节点扩充, 第五十八周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cc_go_beginner_001
+  intent: question
+  keywords: [推荐围棋入门, 推荐 9 道围棋, 推荐围棋小棋盘, 推荐围棋初学, 笨猫围棋入门]
+  utterances:
+    - 推荐围棋入门
+    - 推荐 9 道围棋
+    - 推荐围棋小棋盘
+    - 推荐围棋初学
+    - 笨猫围棋入门
+  responses:
+    - "嗷呜～{user_addr}9 路盘 - 入门首选ฅฅ"
+    - "(尾巴翘) 围地+吃子 / 规则简单"
+    - "{user_addr}先 9 道 → 13 道 → 19 道"
+    - "(挺胸) 笨猫推荐: 9 路盘 30 分钟一局!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_go_full_001
+  intent: question
+  keywords: [推荐 19 道围棋, 推荐围棋大棋盘, 推荐标准围棋, 推荐围棋正赛, 笨猫 19 道]
+  utterances:
+    - "推荐 19 道围棋"
+    - 推荐围棋大棋盘
+    - 推荐标准围棋
+    - 推荐围棋正赛
+    - 笨猫 19 道
+  responses:
+    - "嗷呜～{user_addr}19 路盘 - 正式比赛规格ฅฅ"
+    - "(尾巴翘) 361 交叉点 / 黑先白后"
+    - "{user_addr}贴目 6.5 / 数子或数目"
+    - "(挺胸) 笨猫推荐: 一局 2-4 小时!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_go_master_001
+  intent: question
+  keywords: [推荐围棋名家, 推荐聂卫平, 推荐柯洁, 推荐李昌镐, 笨猫围棋大师]
+  utterances:
+    - 推荐围棋名家
+    - 推荐聂卫平
+    - 推荐柯洁
+    - 推荐李昌镐
+    - 笨猫围棋大师
+  responses:
+    - "嗷呜～{user_addr}聂卫平 - 中日擂台赛传奇ฅฅ"
+    - "(尾巴翘) 柯洁 / 古力 / 李昌镐"
+    - "{user_addr}吴清源 / 木谷实 - 现代围棋奠基"
+    - "(挺胸) 笨猫推荐: 柯洁 vs AlphaGo 三局!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_xiangqi_001
+  intent: question
+  keywords: [推荐中国象棋, 推荐楚河汉界, 推荐象棋, 推荐红黑棋, 笨猫中国象棋]
+  utterances:
+    - 推荐中国象棋
+    - 推荐楚河汉界
+    - 推荐象棋
+    - 推荐红黑棋
+    - 笨猫中国象棋
+  responses:
+    - "嗷呜～{user_addr}中国象棋 - 楚河汉界ฅฅ"
+    - "(尾巴翘) 将士象车马炮兵 / 红先黑后"
+    - "{user_addr}马走日 / 象飞田 / 炮翻山"
+    - "(挺胸) 笨猫推荐: 当头炮开局最经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_xiangqi_master_001
+  intent: question
+  keywords: [推荐象棋名家, 推荐胡荣华, 推荐许银川, 推荐王天一, 笨猫象棋大师]
+  utterances:
+    - 推荐象棋名家
+    - 推荐胡荣华
+    - 推荐许银川
+    - 推荐王天一
+    - 笨猫象棋大师
+  responses:
+    - "嗷呜～{user_addr}胡荣华 - 十连霸传奇ฅฅ"
+    - "(尾巴翘) 许银川 / 吕钦 / 王天一"
+    - "{user_addr}杨官璘 / 柳大华 - 老一辈宗师"
+    - "(挺胸) 笨猫推荐: 胡荣华飞相局棋谱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_chess_001
+  intent: question
+  keywords: [推荐国际象棋, 推荐卡尔森, 推荐 Magnus, 推荐 chess, 笨猫国际象棋]
+  utterances:
+    - 推荐国际象棋
+    - 推荐卡尔森
+    - "推荐 Magnus"
+    - "推荐 chess"
+    - 笨猫国际象棋
+  responses:
+    - "嗷呜～{user_addr}Magnus Carlsen - 现役世界第一ฅฅ"
+    - "(尾巴翘) 卡尔森 / 卡斯帕罗夫 / 菲舍尔"
+    - "{user_addr}王后 / 国王 / 象车马兵"
+    - "(挺胸) 笨猫推荐: chess.com 在线对弈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_book_001
+  intent: question
+  keywords: [推荐棋谱书, 推荐围棋书, 推荐象棋书, 推荐棋类书籍, 笨猫棋谱]
+  utterances:
+    - 推荐棋谱书
+    - 推荐围棋书
+    - 推荐象棋书
+    - 推荐棋类书籍
+    - 笨猫棋谱
+  responses:
+    - "嗷呜～{user_addr}《围棋天地》 - 杂志经典ฅฅ"
+    - "(尾巴翘) 《死活大全》 / 《官子谱》"
+    - "{user_addr}象棋《适情雅趣》 / 《橘中秘》"
+    - "(挺胸) 笨猫推荐: 吴清源《21 世纪围棋》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_go_app_001
+  intent: question
+  keywords: [推荐围棋 app, 推荐弈城, 推荐野狐, 推荐围棋软件, 笨猫围棋 app]
+  utterances:
+    - "推荐围棋 app"
+    - 推荐弈城
+    - 推荐野狐
+    - 推荐围棋软件
+    - "笨猫围棋 app"
+  responses:
+    - "嗷呜～{user_addr}弈城围棋 - 老牌平台ฅฅ"
+    - "(尾巴翘) 野狐围棋 / 腾讯围棋"
+    - "{user_addr}KGS / OGS - 国际服"
+    - "(挺胸) 笨猫推荐: 野狐 AI 复盘超准!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_xiangqi_app_001
+  intent: question
+  keywords: [推荐象棋 app, 推荐天天象棋, 推荐 JJ 象棋, 推荐象棋软件, 笨猫象棋 app]
+  utterances:
+    - "推荐象棋 app"
+    - 推荐天天象棋
+    - "推荐 JJ 象棋"
+    - 推荐象棋软件
+    - "笨猫象棋 app"
+  responses:
+    - "嗷呜～{user_addr}天天象棋 - 微信用户最多ฅฅ"
+    - "(尾巴翘) JJ 象棋 / QQ 象棋"
+    - "{user_addr}中国象棋大师 / 象棋名手"
+    - "(挺胸) 笨猫推荐: 天天象棋人机训练!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_go_event_001
+  intent: question
+  keywords: [推荐围棋赛事, 推荐应氏杯, 推荐三星杯, 推荐 LG 杯, 笨猫围棋比赛]
+  utterances:
+    - 推荐围棋赛事
+    - 推荐应氏杯
+    - 推荐三星杯
+    - "推荐 LG 杯"
+    - 笨猫围棋比赛
+  responses:
+    - "嗷呜～{user_addr}应氏杯 - 围棋奥运ฅฅ"
+    - "(尾巴翘) 三星杯 / LG 杯 / 春兰杯"
+    - "{user_addr}名人战 / 本因坊 / 棋圣战"
+    - "(挺胸) 笨猫推荐: 应氏杯冠军 40 万美元!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_xiangqi_event_001
+  intent: question
+  keywords: [推荐象棋赛事, 推荐棋后, 推荐全国象棋赛, 推荐象棋甲级联赛, 笨猫象棋比赛]
+  utterances:
+    - 推荐象棋赛事
+    - 推荐棋后
+    - 推荐全国象棋赛
+    - 推荐象棋甲级联赛
+    - 笨猫象棋比赛
+  responses:
+    - "嗷呜～{user_addr}全国象棋个人赛 - 国内顶级ฅฅ"
+    - "(尾巴翘) 象甲联赛 / 五羊杯 / 杨官璘杯"
+    - "{user_addr}棋后赛 - 女子最高荣誉"
+    - "(挺胸) 笨猫推荐: 象甲联赛追主队!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_ai_go_001
+  intent: question
+  keywords: [推荐 AI 围棋, 推荐 AlphaGo, 推荐 KataGo, 推荐绝艺, 笨猫围棋 AI]
+  utterances:
+    - "推荐 AI 围棋"
+    - "推荐 AlphaGo"
+    - "推荐 KataGo"
+    - 推荐绝艺
+    - "笨猫围棋 AI"
+  responses:
+    - "嗷呜～{user_addr}AlphaGo - 革命性 AIฅฅ"
+    - "(尾巴翘) KataGo 开源 / 绝艺腾讯"
+    - "{user_addr}LeelaZero / 星阵围棋"
+    - "(挺胸) 笨猫推荐: KataGo 本地可跑!"
+  cooldown_seconds: 60
+  weight: 1.0

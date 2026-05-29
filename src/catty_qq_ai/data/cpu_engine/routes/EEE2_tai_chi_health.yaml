@@ -1,0 +1,206 @@
+# 太极养生 routes (S6 R584 NLU 节点扩充, 第五十八周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: tch_taiji_001
+  intent: question
+  keywords: [推荐太极拳, 推荐太极养生, 推荐太极入门, 推荐太极锻炼, 笨猫太极拳]
+  utterances:
+    - 推荐太极拳
+    - 推荐太极养生
+    - 推荐太极入门
+    - 推荐太极锻炼
+    - 笨猫太极拳
+  responses:
+    - "嗷呜～{user_addr}太极拳 - 慢柔养生ฅฅ"
+    - "(尾巴翘) 调气血 / 通经络 / 强筋骨"
+    - "{user_addr}陈/杨/吴/武/孙 五大流派"
+    - "(挺胸) 笨猫推荐: 杨式 24 式入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_chen_001
+  intent: question
+  keywords: [推荐陈式太极, 推荐陈氏太极, 推荐陈式发力, 推荐缠丝劲, 笨猫陈式太极]
+  utterances:
+    - 推荐陈式太极
+    - 推荐陈氏太极
+    - 推荐陈式发力
+    - 推荐缠丝劲
+    - 笨猫陈式太极
+  responses:
+    - "嗷呜～{user_addr}陈式 - 刚柔相济ฅฅ"
+    - "(尾巴翘) 缠丝劲 / 发力 / 震脚"
+    - "{user_addr}陈家沟正宗 / 老架一路 74 式"
+    - "(挺胸) 笨猫推荐: 想练发力选陈式!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_yang_001
+  intent: question
+  keywords: [推荐杨式太极, 推荐杨氏太极, 推荐杨式慢练, 推荐 85 式, 笨猫杨式太极]
+  utterances:
+    - 推荐杨式太极
+    - 推荐杨氏太极
+    - 推荐杨式慢练
+    - "推荐 85 式"
+    - 笨猫杨式太极
+  responses:
+    - "嗷呜～{user_addr}杨式 - 舒展大方ฅฅ"
+    - "(尾巴翘) 慢匀柔 / 老少咸宜"
+    - "{user_addr}85 式传统 / 杨澄甫定型"
+    - "(挺胸) 笨猫推荐: 养生首选杨式!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_24_001
+  intent: question
+  keywords: ["推荐 24 式太极", 推荐简化太极, 推荐国家套路, 推荐初学太极, "笨猫 24 式"]
+  utterances:
+    - "推荐 24 式太极"
+    - 推荐简化太极
+    - 推荐国家套路
+    - 推荐初学太极
+    - "笨猫 24 式"
+  responses:
+    - "嗷呜～{user_addr}24 式 - 1956 国家编订ฅฅ"
+    - "(尾巴翘) 6 分钟一套 / 易学易记"
+    - "{user_addr}起势 / 野马分鬃 / 白鹤亮翅"
+    - "(挺胸) 笨猫推荐: 零基础先学 24 式!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_sword_001
+  intent: question
+  keywords: [推荐太极剑, "推荐 32 式剑", 推荐太极器械, 推荐剑法养生, 笨猫太极剑]
+  utterances:
+    - 推荐太极剑
+    - "推荐 32 式剑"
+    - 推荐太极器械
+    - 推荐剑法养生
+    - 笨猫太极剑
+  responses:
+    - "嗷呜～{user_addr}太极剑 - 拳后练剑ฅฅ"
+    - "(尾巴翘) 32 式 / 42 式 / 杨式 54 式"
+    - "{user_addr}剑走轻灵 / 身剑合一"
+    - "(挺胸) 笨猫推荐: 32 式剑入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_wudang_001
+  intent: question
+  keywords: [推荐武当山学拳, 推荐武当太极, 推荐道家养生, 推荐张三丰, 笨猫武当]
+  utterances:
+    - 推荐武当山学拳
+    - 推荐武当太极
+    - 推荐道家养生
+    - 推荐张三丰
+    - 笨猫武当
+  responses:
+    - "嗷呜～{user_addr}武当山 - 太极祖庭ฅฅ"
+    - "(尾巴翘) 张三丰 / 道家内丹 / 三丰派"
+    - "{user_addr}武当三丰派 / 玄武派"
+    - "(挺胸) 笨猫推荐: 短期游学 1 周体验!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_coach_001
+  intent: question
+  keywords: [推荐太极教练, 推荐太极老师, 推荐拜师学拳, 推荐太极班, 笨猫太极教练]
+  utterances:
+    - 推荐太极教练
+    - 推荐太极老师
+    - 推荐拜师学拳
+    - 推荐太极班
+    - 笨猫太极教练
+  responses:
+    - "嗷呜～{user_addr}找正宗传承的老师ฅฅ"
+    - "(尾巴翘) 公园晨练 / 武馆 / 协会"
+    - "{user_addr}国家段位 / 名家弟子"
+    - "(挺胸) 笨猫推荐: 先公园免费跟练!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_baduanjin_001
+  intent: question
+  keywords: [推荐八段锦, 推荐八段锦养生, 推荐健身气功, 推荐八段锦练习, 笨猫八段锦]
+  utterances:
+    - 推荐八段锦
+    - 推荐八段锦养生
+    - 推荐健身气功
+    - 推荐八段锦练习
+    - 笨猫八段锦
+  responses:
+    - "嗷呜～{user_addr}八段锦 - 千年导引术ฅฅ"
+    - "(尾巴翘) 8 个动作 / 12 分钟一套"
+    - "{user_addr}双手托天 / 左右开弓 / 摇头摆尾"
+    - "(挺胸) 笨猫推荐: 比太极更简单!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_wuqinxi_001
+  intent: question
+  keywords: [推荐五禽戏, 推荐华佗五禽戏, 推荐仿生养生, 推荐五禽戏练习, 笨猫五禽戏]
+  utterances:
+    - 推荐五禽戏
+    - 推荐华佗五禽戏
+    - 推荐仿生养生
+    - 推荐五禽戏练习
+    - 笨猫五禽戏
+  responses:
+    - "嗷呜～{user_addr}五禽戏 - 华佗创编ฅฅ"
+    - "(尾巴翘) 虎 / 鹿 / 熊 / 猿 / 鸟"
+    - "{user_addr}仿生导引 / 强身健体"
+    - "(挺胸) 笨猫推荐: 配合八段锦练!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_yijinjing_001
+  intent: question
+  keywords: [推荐易筋经, 推荐少林易筋经, 推荐筋骨锻炼, 推荐易筋经练习, 笨猫易筋经]
+  utterances:
+    - 推荐易筋经
+    - 推荐少林易筋经
+    - 推荐筋骨锻炼
+    - 推荐易筋经练习
+    - 笨猫易筋经
+  responses:
+    - "嗷呜～{user_addr}易筋经 - 少林传承ฅฅ"
+    - "(尾巴翘) 12 式 / 强筋健骨"
+    - "{user_addr}韦驮献杵 / 摘星换斗 / 三盘落地"
+    - "(挺胸) 笨猫推荐: 想强筋骨选这个!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_qigong_001
+  intent: question
+  keywords: [推荐气功, 推荐气功养生, 推荐站桩, 推荐内丹功, 笨猫气功]
+  utterances:
+    - 推荐气功
+    - 推荐气功养生
+    - 推荐站桩
+    - 推荐内丹功
+    - 笨猫气功
+  responses:
+    - "嗷呜～{user_addr}气功 - 调息养气ฅฅ"
+    - "(尾巴翘) 站桩 / 静坐 / 行气"
+    - "{user_addr}健身气功认正规 / 远邪功"
+    - "(挺胸) 笨猫推荐: 站桩 15 分钟起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tch_elder_001
+  intent: question
+  keywords: [推荐老年养生, 推荐老人锻炼, 推荐老年太极, 推荐养生选择, 笨猫老年养生]
+  utterances:
+    - 推荐老年养生
+    - 推荐老人锻炼
+    - 推荐老年太极
+    - 推荐养生选择
+    - 笨猫老年养生
+  responses:
+    - "嗷呜～{user_addr}老年首选低强度ฅฅ"
+    - "(尾巴翘) 八段锦 / 杨式太极 / 散步"
+    - "{user_addr}避免跳跃 / 量力而行"
+    - "(挺胸) 笨猫推荐: 八段锦 + 24 式!"
+  cooldown_seconds: 60
+  weight: 1.0

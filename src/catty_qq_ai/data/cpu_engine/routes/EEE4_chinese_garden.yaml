@@ -1,0 +1,206 @@
+# 中式园林 routes (S6 R586 NLU 节点扩充, 第五十八周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cg_suzhou_001
+  intent: question
+  keywords: [推荐苏州园林, 推荐拙政园, 推荐留园, 推荐网师园, 笨猫苏州园林]
+  utterances:
+    - "{user_addr}推荐苏州园林"
+    - 推荐拙政园
+    - 推荐留园
+    - 推荐网师园
+    - 笨猫苏州园林
+  responses:
+    - "嗷呜～{user_addr}拙政园 - 江南园林之冠ฅฅ"
+    - "(尾巴翘) 留园 / 网师园 / 狮子林"
+    - "{user_addr}沧浪亭 / 艺圃 - 文人雅趣"
+    - "(挺胸) 猫猫推荐: 春秋去拙政园最美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_northern_001
+  intent: question
+  keywords: [推荐北方园林, 推荐颐和园, 推荐圆明园, 推荐承德避暑山庄, 笨猫北方园林]
+  utterances:
+    - "{user_addr}推荐北方园林"
+    - 推荐颐和园
+    - 推荐圆明园
+    - 推荐承德避暑山庄
+    - 笨猫北方园林
+  responses:
+    - "嗷呜～{user_addr}颐和园 - 皇家园林巅峰ฅฅ"
+    - "(尾巴翘) 圆明园遗址 / 承德避暑山庄"
+    - "{user_addr}北海公园 / 恭王府花园"
+    - "(挺胸) 笨猫推荐: 颐和园昆明湖一日游!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_lingnan_001
+  intent: question
+  keywords: [推荐岭南园林, 推荐余荫山房, 推荐清晖园, 推荐可园, 笨猫岭南园林]
+  utterances:
+    - "{user_addr}推荐岭南园林"
+    - 推荐余荫山房
+    - 推荐清晖园
+    - 推荐可园
+    - 笨猫岭南园林
+  responses:
+    - "嗷呜～{user_addr}余荫山房 - 岭南四大名园ฅฅ"
+    - "(尾巴翘) 清晖园 / 可园 / 梁园"
+    - "{user_addr}岭南园林小而精, 适合夏天"
+    - "(挺胸) 人家推荐: 顺德清晖园!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_private_001
+  intent: question
+  keywords: [推荐私家园林, 推荐文人园, 推荐何园, 推荐个园, 笨猫私家园林]
+  utterances:
+    - "{user_addr}推荐私家园林"
+    - 推荐文人园
+    - 推荐何园
+    - 推荐个园
+    - 笨猫私家园林
+  responses:
+    - "嗷呜～{user_addr}扬州个园 - 四季假山ฅฅ"
+    - "(尾巴翘) 何园 / 寄畅园 / 退思园"
+    - "{user_addr}文人园重意境, 一步一景"
+    - "(挺胸) 猫猫推荐: 个园看四季石!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_design_001
+  intent: question
+  keywords: [推荐园林造景, 推荐借景, 推荐框景, 推荐对景, 笨猫造景手法]
+  utterances:
+    - "{user_addr}推荐园林造景"
+    - 推荐借景
+    - 推荐框景
+    - 推荐对景
+    - 笨猫造景手法
+  responses:
+    - "嗷呜～{user_addr}借景 - 把远山纳入园中ฅฅ"
+    - "(尾巴翘) 框景 / 对景 / 漏景 / 障景"
+    - "{user_addr}移步换景 - 园林精髓"
+    - "(挺胸) 笨猫推荐: 看拙政园借北寺塔!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_stone_001
+  intent: question
+  keywords: [推荐山石, 推荐太湖石, 推荐英石, 推荐黄石, 笨猫园林石]
+  utterances:
+    - "{user_addr}推荐山石"
+    - 推荐太湖石
+    - 推荐英石
+    - 推荐黄石
+    - 笨猫园林石
+  responses:
+    - "嗷呜～{user_addr}太湖石 - 瘦皱漏透ฅฅ"
+    - "(尾巴翘) 英石 / 黄石 / 灵璧石"
+    - "{user_addr}留园冠云峰是太湖石之王"
+    - "(挺胸) 人家推荐: 看苏州留园冠云峰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_plants_001
+  intent: question
+  keywords: [推荐园林植物, 推荐松柏, 推荐梅竹, 推荐荷花, 笨猫园林植物]
+  utterances:
+    - "{user_addr}推荐园林植物"
+    - 推荐松柏
+    - 推荐梅竹
+    - 推荐荷花
+    - 笨猫园林植物
+  responses:
+    - "嗷呜～{user_addr}松竹梅 - 岁寒三友ฅฅ"
+    - "(尾巴翘) 荷花 / 紫薇 / 桂花 / 玉兰"
+    - "{user_addr}园林植物讲意境不讲华丽"
+    - "(挺胸) 猫猫推荐: 拙政园荷风四面亭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_pavilion_001
+  intent: question
+  keywords: [推荐亭台楼阁, 推荐园林建筑, 推荐廊桥, 推荐轩榭, 笨猫园林建筑]
+  utterances:
+    - "{user_addr}推荐亭台楼阁"
+    - 推荐园林建筑
+    - 推荐廊桥
+    - 推荐轩榭
+    - 笨猫园林建筑
+  responses:
+    - "嗷呜～{user_addr}亭/台/楼/阁/轩/榭/廊ฅฅ"
+    - "(尾巴翘) 拙政园见山楼 / 留园远翠阁"
+    - "{user_addr}廊用来连通和借景"
+    - "(挺胸) 笨猫推荐: 网师园月到风来亭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_books_001
+  intent: question
+  keywords: [推荐园林书籍, 推荐园冶, 推荐长物志, 推荐说园, 笨猫园林书]
+  utterances:
+    - "{user_addr}推荐园林书籍"
+    - 推荐园冶
+    - 推荐长物志
+    - 推荐说园
+    - 笨猫园林书
+  responses:
+    - "嗷呜～{user_addr}《园冶》计成 - 园林宝典ฅฅ"
+    - "(尾巴翘) 《长物志》文震亨 / 《说园》陈从周"
+    - "{user_addr}《中国古典园林史》周维权"
+    - "(挺胸) 人家推荐: 先读陈从周《说园》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_modern_001
+  intent: question
+  keywords: [推荐现代中式庭院, 推荐新中式园林, 推荐住宅庭院, 推荐小院设计, 笨猫现代庭院]
+  utterances:
+    - "{user_addr}推荐现代中式庭院"
+    - 推荐新中式园林
+    - 推荐住宅庭院
+    - 推荐小院设计
+    - 笨猫现代庭院
+  responses:
+    - "嗷呜～{user_addr}新中式 - 简洁+意境ฅฅ"
+    - "(尾巴翘) 苏州博物馆庭院 (贝聿铭)"
+    - "{user_addr}小院: 一石一木一水一亭"
+    - "(挺胸) 笨猫推荐: 看贝聿铭苏博院子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_tour_001
+  intent: question
+  keywords: [推荐园林导览, 推荐园林路线, 推荐游园攻略, 推荐讲解员, 笨猫游园]
+  utterances:
+    - "{user_addr}推荐园林导览"
+    - 推荐园林路线
+    - 推荐游园攻略
+    - 推荐讲解员
+    - 笨猫游园
+  responses:
+    - "嗷呜～{user_addr}苏州两日: 拙政+留+网师ฅฅ"
+    - "(尾巴翘) 早 8 点开门进, 避开人潮"
+    - "{user_addr}租讲解器, 别走马观花"
+    - "(挺胸) 猫猫推荐: 春秋淡季去最舒服!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_photo_001
+  intent: question
+  keywords: [推荐园林摄影, 推荐拍园林, 推荐古风摄影, 推荐取景, 笨猫园林摄影]
+  utterances:
+    - "{user_addr}推荐园林摄影"
+    - 推荐拍园林
+    - 推荐古风摄影
+    - 推荐取景
+    - 笨猫园林摄影
+  responses:
+    - "嗷呜～{user_addr}清晨/雨后 - 光最美ฅฅ"
+    - "(尾巴翘) 框景拍门洞 / 借景拍远山"
+    - "{user_addr}35mm 定焦 / 长焦压缩"
+    - "(挺胸) 笨猫推荐: 雨天拙政园出大片!"
+  cooldown_seconds: 60
+  weight: 1.0
