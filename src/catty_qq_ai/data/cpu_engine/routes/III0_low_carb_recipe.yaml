@@ -1,0 +1,206 @@
+# 低碳水菜谱 routes (S6 R622 NLU 节点扩充, 第六十二周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: lcr_breakfast_001
+  intent: question
+  keywords: [推荐低碳水早餐, 推荐鸡蛋牛油果, 推荐生酮早餐, 推荐无糖早餐, 笨猫低碳早餐]
+  utterances:
+    - 推荐低碳水早餐
+    - 推荐鸡蛋牛油果
+    - 推荐生酮早餐
+    - 推荐无糖早餐
+    - "{user_addr}低碳早餐吃啥"
+  responses:
+    - "嗷呜～{user_addr}煎蛋 + 牛油果 - 经典组合ฅฅ"
+    - "(尾巴翘) 培根 + 奶酪 + 菠菜炒蛋"
+    - "{user_addr}希腊酸奶 + 坚果 / 无糖咖啡"
+    - "(挺胸) 猫猫推荐: 三个鸡蛋开局!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_lunch_001
+  intent: question
+  keywords: [推荐低碳水午餐, 推荐鸡胸沙拉, 推荐生酮午餐, 推荐减脂午餐, 笨猫低碳午餐]
+  utterances:
+    - 推荐低碳水午餐
+    - 推荐鸡胸沙拉
+    - 推荐生酮午餐
+    - 推荐减脂午餐
+    - "{user_addr}低碳午餐"
+  responses:
+    - "嗷呜～{user_addr}水煮鸡胸 + 生菜沙拉ฅฅ"
+    - "(尾巴翘) 牛排 + 西兰花 + 橄榄油"
+    - "{user_addr}金枪鱼罐头 + 蛋黄酱卷菜叶"
+    - "(挺胸) 笨猫推荐: 蛋白质拉满!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_dinner_001
+  intent: question
+  keywords: [推荐低碳水晚餐, 推荐三文鱼, 推荐生酮晚餐, 推荐烤鱼晚餐, 笨猫低碳晚餐]
+  utterances:
+    - 推荐低碳水晚餐
+    - 推荐三文鱼
+    - 推荐生酮晚餐
+    - 推荐烤鱼晚餐
+    - "{user_addr}低碳晚餐"
+  responses:
+    - "嗷呜～{user_addr}烤三文鱼 + 芦笋 - 顶级ฅฅ"
+    - "(尾巴翘) 黄油煎鳕鱼 / 香煎鸡腿"
+    - "{user_addr}虾仁 + 西葫芦面"
+    - "(挺胸) 笨猫推荐: 鱼油 omega-3 双开心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_snack_001
+  intent: question
+  keywords: [推荐低碳水零食, 推荐坚果零食, 推荐生酮零食, 推荐无糖零食, 笨猫低碳零食]
+  utterances:
+    - 推荐低碳水零食
+    - 推荐坚果零食
+    - 推荐生酮零食
+    - 推荐无糖零食
+    - "{user_addr}低碳零食"
+  responses:
+    - "嗷呜～{user_addr}巴旦木 / 夏威夷果 / 核桃ฅฅ"
+    - "(尾巴翘) 奶酪条 / 牛肉干 / 鸡蛋"
+    - "{user_addr}黑巧 85%+ / 椰子片"
+    - "(挺胸) 笨猫提醒: 坚果一天一小把!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_dessert_001
+  intent: question
+  keywords: [推荐低碳水甜点, 推荐杏仁粉甜点, 推荐生酮甜点, 推荐无糖蛋糕, 笨猫低碳甜点]
+  utterances:
+    - 推荐低碳水甜点
+    - 推荐杏仁粉甜点
+    - 推荐生酮甜点
+    - 推荐无糖蛋糕
+    - "{user_addr}低碳甜点"
+  responses:
+    - "嗷呜～{user_addr}杏仁粉马芬 + 代糖ฅฅ"
+    - "(尾巴翘) 奶油芝士慕斯 / 椰子球"
+    - "{user_addr}牛油果布朗尼 - 神奇好吃"
+    - "(挺胸) 笨猫推荐: 赤藓糖醇代糖最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_cauliflower_rice_001
+  intent: question
+  keywords: [推荐花椰菜米饭, 推荐花菜替代米饭, 推荐花菜碎, 推荐 cauliflower rice, 笨猫花菜饭]
+  utterances:
+    - 推荐花椰菜米饭
+    - 推荐花菜替代米饭
+    - 推荐花菜碎
+    - "推荐 cauliflower rice"
+    - "{user_addr}花菜饭"
+  responses:
+    - "嗷呜～{user_addr}花菜剁碎当米饭 - 神替代ฅฅ"
+    - "(尾巴翘) 黄油炒香 + 蒜末 = 蒜香花菜饭"
+    - "{user_addr}做炒饭 / 盖浇饭都行"
+    - "(挺胸) 笨猫推荐: 100g 只有 5g 碳水!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_zoodles_001
+  intent: question
+  keywords: [推荐西葫芦面, 推荐西葫芦替代面条, 推荐 zoodles, 推荐蔬菜面, 笨猫西葫芦面]
+  utterances:
+    - 推荐西葫芦面
+    - 推荐西葫芦替代面条
+    - "推荐 zoodles"
+    - 推荐蔬菜面
+    - "{user_addr}西葫芦面"
+  responses:
+    - "嗷呜～{user_addr}螺旋刨成面条 = zoodlesฅฅ"
+    - "(尾巴翘) 配青酱 / 番茄肉酱 都香"
+    - "{user_addr}略煎 30s 不要久煮"
+    - "(挺胸) 笨猫推荐: 配肉酱最像意面!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_coconut_flour_001
+  intent: question
+  keywords: [推荐椰子粉, 推荐椰子粉替代面粉, 推荐杏仁粉, 推荐低碳面粉, 笨猫椰子粉]
+  utterances:
+    - 推荐椰子粉
+    - 推荐椰子粉替代面粉
+    - 推荐杏仁粉
+    - 推荐低碳面粉
+    - "{user_addr}椰子粉"
+  responses:
+    - "嗷呜～{user_addr}椰子粉 / 杏仁粉 - 双选ฅฅ"
+    - "(尾巴翘) 椰子粉吸水强, 用量 1/4 即可"
+    - "{user_addr}杏仁粉口感更接近面粉"
+    - "(挺胸) 笨猫推荐: 烘焙混合用最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_sweetener_001
+  intent: question
+  keywords: [推荐代糖, 推荐阿斯巴甜, 推荐赤藓糖醇, 推荐甜菊糖, 笨猫代糖]
+  utterances:
+    - 推荐代糖
+    - 推荐阿斯巴甜
+    - 推荐赤藓糖醇
+    - 推荐甜菊糖
+    - "{user_addr}代糖"
+  responses:
+    - "嗷呜～{user_addr}赤藓糖醇 - 0 升糖最稳ฅฅ"
+    - "(尾巴翘) 甜菊糖 / 罗汉果糖 - 天然系"
+    - "{user_addr}阿斯巴甜便宜但有争议"
+    - "(挺胸) 笨猫推荐: 赤藓糖醇烘焙不苦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_eating_out_001
+  intent: question
+  keywords: [推荐低碳水外食, 推荐外卖低碳, 推荐餐厅低碳, 推荐生酮外食, 笨猫外食低碳]
+  utterances:
+    - 推荐低碳水外食
+    - 推荐外卖低碳
+    - 推荐餐厅低碳
+    - 推荐生酮外食
+    - "{user_addr}外食低碳"
+  responses:
+    - "嗷呜～{user_addr}牛排店 / 烤肉店 - 直接锁定ฅฅ"
+    - "(尾巴翘) 日料: 刺身 / 烤鱼 不要寿司饭"
+    - "{user_addr}沙拉碗去掉面包丁"
+    - "(挺胸) 笨猫提醒: 酱料是隐形糖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_extra_meal_001
+  intent: question
+  keywords: [推荐低碳水加餐, 推荐生酮加餐, 推荐运动后加餐, 推荐下午茶低碳, 笨猫加餐低碳]
+  utterances:
+    - 推荐低碳水加餐
+    - 推荐生酮加餐
+    - 推荐运动后加餐
+    - 推荐下午茶低碳
+    - "{user_addr}低碳加餐"
+  responses:
+    - "嗷呜～{user_addr}水煮蛋 + 一片火腿ฅฅ"
+    - "(尾巴翘) 防弹咖啡 (黄油 + MCT)"
+    - "{user_addr}蛋白棒 (注意配料表 < 5g 碳水)"
+    - "(挺胸) 笨猫推荐: 加餐别超 200kcal!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lcr_target_audience_001
+  intent: question
+  keywords: [推荐低碳水适合人群, 推荐生酮人群, 推荐减脂人群低碳, 推荐糖尿病低碳, 笨猫低碳人群]
+  utterances:
+    - 推荐低碳水适合人群
+    - 推荐生酮人群
+    - 推荐减脂人群低碳
+    - 推荐糖尿病低碳
+    - "{user_addr}低碳适合谁"
+  responses:
+    - "嗷呜～{user_addr}减脂 / 控糖 / 多囊 - 适配ฅฅ"
+    - "(尾巴翘) 2 型糖尿病辅助 (遵医嘱)"
+    - "{user_addr}孕妇 / 肝肾病 - 不建议"
+    - "(挺胸) 笨猫提醒: 先咨询医生再开搞!"
+  cooldown_seconds: 60
+  weight: 1.0

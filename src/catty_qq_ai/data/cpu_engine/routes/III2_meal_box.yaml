@@ -1,0 +1,206 @@
+# 健康轻食盒 routes (S6 R624 NLU 节点扩充, 第六十二周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: mb_wagas_001
+  intent: question
+  keywords: [推荐 Wagas, 推荐轻食外卖, 推荐沃歌斯, 推荐都市轻食, 笨猫 Wagas]
+  utterances:
+    - "{user_addr}推荐 Wagas"
+    - 推荐轻食外卖
+    - 推荐沃歌斯
+    - 推荐都市轻食
+    - 笨猫 Wagas
+  responses:
+    - "嗷呜～{user_addr}Wagas 沃歌斯 - 一线城市轻食标杆ฅฅ"
+    - "(尾巴翘) 沙拉 / 帕尼尼 / 谷物碗"
+    - "{user_addr}人均 60-80 - 写字楼必点"
+    - "(挺胸) 笨猫推荐: 牛油果鸡胸碗经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_saladstop_001
+  intent: question
+  keywords: [推荐 Saladstop, 推荐沙拉外卖, 推荐新加坡沙拉, 推荐自选沙拉, 笨猫 Saladstop]
+  utterances:
+    - "{user_addr}推荐 Saladstop"
+    - 推荐沙拉外卖
+    - 推荐新加坡沙拉
+    - 推荐自选沙拉
+    - 笨猫 Saladstop
+  responses:
+    - "嗷呜～{user_addr}Saladstop - 新加坡来的自选沙拉ฅฅ"
+    - "(尾巴翘) Create Your Own - 自由配料"
+    - "{user_addr}基底+蛋白+蔬菜+酱"
+    - "(挺胸) 笨猫推荐: 减脂期低卡神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_sweetgreen_001
+  intent: question
+  keywords: [推荐 Sweetgreen, 推荐美式沙拉, 推荐有机沙拉, 推荐高端沙拉, 笨猫 Sweetgreen]
+  utterances:
+    - "{user_addr}推荐 Sweetgreen"
+    - 推荐美式沙拉
+    - 推荐有机沙拉
+    - 推荐高端沙拉
+    - 笨猫 Sweetgreen
+  responses:
+    - "嗷呜～{user_addr}Sweetgreen - 美国轻食独角兽ฅฅ"
+    - "(尾巴翘) 本地有机 / 季节限定"
+    - "{user_addr}Harvest Bowl / Kale Caesar"
+    - "(挺胸) 笨猫推荐: 国内没开 - 出国必打卡!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_greencommon_001
+  intent: question
+  keywords: [推荐 GreenCommon, 推荐绿客盟, 推荐植物肉餐厅, 推荐素食轻食, 笨猫 GreenCommon]
+  utterances:
+    - "{user_addr}推荐 GreenCommon"
+    - 推荐绿客盟
+    - 推荐植物肉餐厅
+    - 推荐素食轻食
+    - 笨猫 GreenCommon
+  responses:
+    - "嗷呜～{user_addr}Green Common 绿客盟 - 香港来的植物基ฅฅ"
+    - "(尾巴翘) OmniPork 新猪肉 / Beyond Meat"
+    - "{user_addr}上海 / 深圳有店"
+    - "(挺胸) 笨猫推荐: 素食党天堂!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mb_costa_001
+  intent: question
+  keywords: [推荐 Costa 沙拉, 推荐咖啡店沙拉, 推荐便利沙拉, 推荐写字楼轻食, 笨猫 Costa]
+  utterances:
+    - "{user_addr}推荐 Costa 沙拉"
+    - 推荐咖啡店沙拉
+    - 推荐便利沙拉
+    - 推荐写字楼轻食
+    - 笨猫 Costa
+  responses:
+    - "嗷呜～{user_addr}Costa / Starbucks - 顺手买的轻食ฅฅ"
+    - "(尾巴翘) 三明治 / 沙拉杯 / 谷物碗"
+    - "{user_addr}应急方便 - 不算特别精致"
+    - "(挺胸) 笨猫推荐: 配咖啡刚好!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mb_gymmeal_001
+  intent: question
+  keywords: [推荐健身餐盒, 推荐喵搬运, 推荐增肌餐, 推荐高蛋白餐, 笨猫健身餐]
+  utterances:
+    - "{user_addr}推荐健身餐盒"
+    - 推荐喵搬运
+    - 推荐增肌餐
+    - 推荐高蛋白餐
+    - 笨猫健身餐
+  responses:
+    - "嗷呜～{user_addr}喵搬运 / 超级零 - 健身餐订阅ฅฅ"
+    - "(尾巴翘) 鸡胸 / 西兰花 / 糙米标配"
+    - "{user_addr}周套餐 - 营养师配比"
+    - "(挺胸) 笨猫推荐: 增肌减脂都好用!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_ffit8_001
+  intent: question
+  keywords: [推荐 ffit8, 推荐减脂代餐, 推荐蛋白棒代餐, 推荐运动代餐, 笨猫 ffit8]
+  utterances:
+    - "{user_addr}推荐 ffit8"
+    - 推荐减脂代餐
+    - 推荐蛋白棒代餐
+    - 推荐运动代餐
+    - 笨猫 ffit8
+  responses:
+    - "嗷呜～{user_addr}ffit8 - 张继科代言的代餐ฅฅ"
+    - "(尾巴翘) 蛋白棒 / 代餐奶昔"
+    - "{user_addr}饱腹感 OK / 口味多"
+    - "(挺胸) 笨猫推荐: 健身后补蛋白!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_rxbar_001
+  intent: question
+  keywords: [推荐 RXBAR, 推荐进口蛋白棒, 推荐天然蛋白棒, 推荐 ONE bar, 笨猫蛋白棒]
+  utterances:
+    - "{user_addr}推荐 RXBAR"
+    - 推荐进口蛋白棒
+    - 推荐天然蛋白棒
+    - 推荐 ONE bar
+    - 笨猫蛋白棒
+  responses:
+    - "嗷呜～{user_addr}RXBAR - 美国天然蛋白棒ฅฅ"
+    - "(尾巴翘) 蛋清 / 椰枣 / 坚果 - 配料干净"
+    - "{user_addr}ONE Bar / Quest - 同档"
+    - "(挺胸) 笨猫推荐: 配料表越短越好!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mb_wuhei_001
+  intent: question
+  keywords: [推荐五黑代餐, 推荐国产代餐, 推荐黑芝麻代餐, 推荐谷物代餐, 笨猫五黑]
+  utterances:
+    - "{user_addr}推荐五黑代餐"
+    - 推荐国产代餐
+    - 推荐黑芝麻代餐
+    - 推荐谷物代餐
+    - 笨猫五黑
+  responses:
+    - "嗷呜～{user_addr}五黑代餐 - 黑芝麻黑米黑豆黑枸杞核桃ฅฅ"
+    - "(尾巴翘) 五谷磨房 / 南方黑芝麻糊"
+    - "{user_addr}热水冲泡 - 早餐神器"
+    - "(挺胸) 笨猫推荐: 国货养生!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mb_wangbaobao_001
+  intent: question
+  keywords: [推荐王饱饱, 推荐麦片代餐, 推荐燕麦片, 推荐酸奶麦片, 笨猫王饱饱]
+  utterances:
+    - "{user_addr}推荐王饱饱"
+    - 推荐麦片代餐
+    - 推荐燕麦片
+    - 推荐酸奶麦片
+    - 笨猫王饱饱
+  responses:
+    - "嗷呜～{user_addr}王饱饱 - 国产麦片新势力ฅฅ"
+    - "(尾巴翘) 烘焙麦片 / 水果坚果"
+    - "{user_addr}泡牛奶 / 拌酸奶"
+    - "(挺胸) 笨猫推荐: 早餐 5 分钟搞定!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_youxing_001
+  intent: question
+  keywords: [推荐优形, 推荐即食鸡胸肉, 推荐 ishape, 推荐健身食品, 笨猫优形]
+  utterances:
+    - "{user_addr}推荐优形"
+    - 推荐即食鸡胸肉
+    - 推荐 ishape
+    - 推荐健身食品
+    - 笨猫优形
+  responses:
+    - "嗷呜～{user_addr}优形 ishape - 即食鸡胸肉一哥ฅฅ"
+    - "(尾巴翘) 烟熏 / 奥尔良 / 黑椒口味"
+    - "{user_addr}撕开就吃 - 高蛋白低脂"
+    - "(挺胸) 笨猫推荐: 健身党常备!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_dressing_001
+  intent: question
+  keywords: [推荐沙拉酱, 推荐优质沙拉酱, 推荐低卡酱料, 推荐油醋汁, 笨猫沙拉酱]
+  utterances:
+    - "{user_addr}推荐沙拉酱"
+    - 推荐优质沙拉酱
+    - 推荐低卡酱料
+    - 推荐油醋汁
+    - 笨猫沙拉酱
+  responses:
+    - "嗷呜～{user_addr}油醋汁 - 最健康ฅฅ"
+    - "(尾巴翘) 丘比 / Heinz / Kewpie"
+    - "{user_addr}避开千岛 / 蛋黄酱高卡"
+    - "(挺胸) 笨猫推荐: 自制柠檬橄榄油!"
+  cooldown_seconds: 60
+  weight: 0.8

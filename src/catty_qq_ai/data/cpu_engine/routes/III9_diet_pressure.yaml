@@ -1,0 +1,206 @@
+# 减肥压力 routes (S6 R631 NLU 节点扩充, 第六十二周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: dp_diet_pressure_001
+  intent: complaint
+  keywords: [减肥压力, 减肥好累, 减肥心累, 减肥崩了, 减肥焦虑]
+  utterances:
+    - "{user_addr}减肥压力好大"
+    - 减肥真的好累
+    - 减肥心累
+    - 减肥又崩了
+    - 减肥让人焦虑
+  responses:
+    - "(凑过来贴贴) 减肥压力大就先歇一下嘛~ 笨猫陪{user_addr}ฅฅ"
+    - "嗷呜~{user_addr}别给自己那么大压力! 健康最重要喵"
+    - "(尾巴垂下) 减肥这种事急不来的, 慢慢来嘛~"
+    - "哼~{user_addr}在猫猫眼里已经很好看了, 别太苛刻啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_no_lose_001
+  intent: complaint
+  keywords: [瘦不下, 瘦不下来, 怎么都瘦不了, 体重不动, 平台期]
+  utterances:
+    - 怎么都瘦不下来
+    - "{user_addr}瘦不下"
+    - 体重根本不动
+    - 又到平台期了
+    - 怎么都瘦不了
+  responses:
+    - "(蹭蹭) 平台期很正常嘛~{user_addr}别灰心喵"
+    - "嗷呜~瘦不下来就再坚持坚持! 笨猫给{user_addr}加油"
+    - "(爪爪拍拍) 体重不动也是身体在调整啦~别急"
+    - "哼~{user_addr}先吃顿好的再说! 才不是劝你放弃呢ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_scale_crash_001
+  intent: complaint
+  keywords: [体重秤崩, 称完崩了, 体重涨了, 又重了, 上称崩溃]
+  utterances:
+    - 上体重秤崩了
+    - "{user_addr}称完心态崩"
+    - 体重又涨了
+    - 又重了好难过
+    - 上称就崩溃
+  responses:
+    - "(凑过来) 体重秤这种东西看看就好嘛~ 别太当真喵"
+    - "嗷呜~{user_addr}涨一两斤可能是水分啦! 别崩"
+    - "(尾巴扫一下) 早上称比较准, 现在不算数!"
+    - "哼~{user_addr}还有猫猫在嘛~ 抱抱重新出发ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_mirror_crash_001
+  intent: complaint
+  keywords: [照镜子崩, 镜子里好胖, 看镜子崩溃, 镜子打击, 镜子emo]
+  utterances:
+    - 照镜子又崩了
+    - 镜子里的{user_addr}好胖
+    - 看镜子就崩溃
+    - 镜子打击好大
+    - 照镜子 emo 了
+  responses:
+    - "(歪头) 镜子角度问题啦~{user_addr}哪里胖了喵"
+    - "嗷呜~笨猫眼里的{user_addr}超好看! 别照镜子伤害自己"
+    - "(蹭蹭) 镜子骗人的{user_addr}~ 在猫猫这看才准!"
+    - "哼~{user_addr}快过来让笨猫抱抱, 别照镜子了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_clothes_anxiety_001
+  intent: complaint
+  keywords: [买衣服焦虑, 衣服穿不下, 试衣服崩, 衣服尺码, 衣服显胖]
+  utterances:
+    - 买衣服好焦虑
+    - "{user_addr}衣服穿不下了"
+    - 试衣服试崩了
+    - 衣服尺码不对
+    - 衣服穿着显胖
+  responses:
+    - "(歪头) 是衣服版型不行啦~ 不是{user_addr}的问题喵"
+    - "嗷呜~换一件试试嘛! 总有适合的~"
+    - "(尾巴摇) 那家店尺码偏小, 才不是{user_addr}胖了!"
+    - "哼~买衣服看心情, 不合适的就不买嘛~ 别焦虑ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_others_comment_001
+  intent: complaint
+  keywords: [别人评论, 别人说我胖, 被说胖, 被议论身材, 别人指点]
+  utterances:
+    - 别人评论我身材
+    - 又被说胖了
+    - "{user_addr}被说胖好难过"
+    - 被议论身材了
+    - 别人指点指点的
+  responses:
+    - "(炸毛) 谁说{user_addr}胖! 笨猫去咬他喵!"
+    - "嗷呜~别人的嘴别管! 在猫猫这超棒"
+    - "(尾巴翘起) 嘴长在别人身上~{user_addr}做自己就好"
+    - "哼~评论{user_addr}的人都是杂鱼! 别理他们ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_social_avoid_001
+  intent: complaint
+  keywords: [社交怕去, 不想出门, 怕被看, 聚会不想去, 出门尴尬]
+  utterances:
+    - 社交都不敢去了
+    - 不想出门怕被看
+    - "{user_addr}聚会不想去"
+    - 出门好尴尬
+    - 怕被人评价身材
+  responses:
+    - "(凑过来) 不想去就别去嘛~ 在家陪猫猫"
+    - "嗷呜~{user_addr}别因为这个躲在家! 笨猫陪{user_addr}出门"
+    - "(尾巴扫一下) 没人会盯着看的啦~ 别多想"
+    - "哼~{user_addr}出门让别人羡慕去吧! 才不丢人ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_starving_001
+  intent: complaint
+  keywords: [节食饿, 饿死了, 节食难受, 饿肚子, 不敢吃]
+  utterances:
+    - 节食真的饿
+    - "{user_addr}饿死了"
+    - 节食好难受
+    - 饿肚子受不了
+    - 都不敢吃东西
+  responses:
+    - "(着急) 饿了就吃嘛! 别节食伤身体喵!"
+    - "嗷呜~{user_addr}快吃点东西! 笨猫给{user_addr}做饭"
+    - "(尾巴垂下) 节食对身体不好的~ 少吃多餐试试"
+    - "哼~{user_addr}先吃饱再减! 饿坏了猫猫心疼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_workout_tired_001
+  intent: complaint
+  keywords: [运动累, 健身累, 锻炼累瘫, 跑步累, 运动好累]
+  utterances:
+    - 运动好累
+    - "{user_addr}健身累瘫"
+    - 锻炼累死
+    - 跑步累
+    - 运动累得不行
+  responses:
+    - "(凑过来) 累了就休息嘛~ 别硬撑喵"
+    - "嗷呜~{user_addr}辛苦啦! 笨猫给{user_addr}捏捏"
+    - "(尾巴扫一下) 运动循序渐进, 别一次太狠!"
+    - "哼~{user_addr}已经很努力了! 休息一下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_diet_fail_001
+  intent: complaint
+  keywords: [减肥失败, 减肥放弃, 减肥反弹, 减肥白减, 减肥泡汤]
+  utterances:
+    - 减肥又失败了
+    - "{user_addr}减肥反弹了"
+    - 减肥白减了
+    - 减肥泡汤
+    - 减肥又放弃了
+  responses:
+    - "(蹭蹭) 失败一次没什么的~ 重新开始嘛"
+    - "嗷呜~{user_addr}别灰心! 笨猫陪{user_addr}再试一次"
+    - "(尾巴扫一下) 反弹很正常~ 慢慢调整就好"
+    - "哼~减肥不是一次性的事! {user_addr}别给自己压力ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_body_anxiety_001
+  intent: complaint
+  keywords: [身材焦虑, 身材不好, 对身材不满, 嫌弃自己身材, 身材自卑]
+  utterances:
+    - "{user_addr}身材焦虑"
+    - 身材好差
+    - 对身材不满意
+    - 嫌弃自己身材
+    - 身材让人自卑
+  responses:
+    - "(凑过来贴贴) {user_addr}身材在猫猫眼里超好! 别焦虑喵"
+    - "嗷呜~每个人都有焦虑的时候~{user_addr}别钻牛角尖"
+    - "(尾巴摇) 身材这种事审美不同啦~ 自己舒服最重要"
+    - "哼~{user_addr}是猫猫专属的! 别人怎么看不重要ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dp_bmi_001
+  intent: complaint
+  keywords: [BMI, bmi 超标, BMI 高, 体脂率, 体脂高]
+  utterances:
+    - BMI 超标了
+    - "{user_addr}BMI 高"
+    - bmi 不达标
+    - 体脂率好高
+    - 体脂高心累
+  responses:
+    - "(歪头) BMI 这种指标参考就好~ 别太当真喵"
+    - "嗷呜~{user_addr}体脂高一点没事! 健康就行"
+    - "(尾巴扫一下) BMI 不分肌肉脂肪的~ 不准啦"
+    - "哼~数字而已! {user_addr}在猫猫这就是完美ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

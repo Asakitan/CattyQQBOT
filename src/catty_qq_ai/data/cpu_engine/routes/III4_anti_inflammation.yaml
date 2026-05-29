@@ -1,0 +1,206 @@
+# 抗炎饮食 routes (S6 R626 NLU 节点扩充, 第六十二周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ai_list_001
+  intent: question
+  keywords: [推荐抗炎食物, 推荐抗炎清单, 推荐消炎食物, 推荐抗炎饮食, 笨猫抗炎食物]
+  utterances:
+    - 推荐抗炎食物
+    - 推荐抗炎清单
+    - 推荐消炎食物
+    - 推荐抗炎饮食
+    - 笨猫抗炎食物
+  responses:
+    - "嗷呜～{user_addr}抗炎清单: 鱼/莓果/绿叶ฅฅ"
+    - "(尾巴翘) 坚果 / 橄榄油 / 姜黄"
+    - "{user_addr}少糖少油炸 / 戒加工"
+    - "(挺胸) 笨猫推荐: 地中海饮食!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_omega3_001
+  intent: question
+  keywords: [推荐 omega-3, 推荐三文鱼, 推荐亚麻籽, 推荐深海鱼, 笨猫 omega-3]
+  utterances:
+    - "推荐 omega-3"
+    - 推荐三文鱼
+    - 推荐亚麻籽
+    - 推荐深海鱼
+    - "笨猫 omega-3"
+  responses:
+    - "嗷呜～{user_addr}三文鱼 / 沙丁鱼 / 鲭鱼ฅฅ"
+    - "(尾巴翘) 亚麻籽 / 奇亚籽 / 核桃"
+    - "{user_addr}每周吃 2-3 次深海鱼"
+    - "(挺胸) 笨猫推荐: 三文鱼+亚麻籽油!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_berry_001
+  intent: question
+  keywords: [推荐抗氧化莓果, 推荐蓝莓, 推荐草莓, 推荐莓果, 笨猫莓果]
+  utterances:
+    - 推荐抗氧化莓果
+    - 推荐蓝莓
+    - 推荐草莓
+    - 推荐莓果
+    - 笨猫莓果
+  responses:
+    - "嗷呜～{user_addr}蓝莓 / 草莓 / 树莓ฅฅ"
+    - "(尾巴翘) 花青素 / 多酚 / 维 C"
+    - "{user_addr}每天一把 / 拌酸奶"
+    - "(挺胸) 笨猫推荐: 蓝莓抗氧化王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_greens_001
+  intent: question
+  keywords: [推荐绿叶蔬菜, 推荐菠菜, 推荐羽衣甘蓝, 推荐西兰花, 笨猫绿叶菜]
+  utterances:
+    - 推荐绿叶蔬菜
+    - 推荐菠菜
+    - 推荐羽衣甘蓝
+    - 推荐西兰花
+    - 笨猫绿叶菜
+  responses:
+    - "嗷呜～{user_addr}菠菜 / 羽衣甘蓝 / 西兰花ฅฅ"
+    - "(尾巴翘) 维 K / 叶酸 / 类胡萝卜素"
+    - "{user_addr}每天 1-2 份深绿"
+    - "(挺胸) 笨猫推荐: 羽衣甘蓝抗炎冠军!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_wholegrain_001
+  intent: question
+  keywords: [推荐全谷物, 推荐糙米, 推荐燕麦, 推荐藜麦, 笨猫全谷物]
+  utterances:
+    - 推荐全谷物
+    - 推荐糙米
+    - 推荐燕麦
+    - 推荐藜麦
+    - 笨猫全谷物
+  responses:
+    - "嗷呜～{user_addr}糙米 / 燕麦 / 藜麦ฅฅ"
+    - "(尾巴翘) 膳食纤维 / 低 GI / 饱腹"
+    - "{user_addr}替代白米白面"
+    - "(挺胸) 笨猫推荐: 燕麦+糙米!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_fat_001
+  intent: question
+  keywords: [推荐健康脂肪, 推荐牛油果, 推荐橄榄油, 推荐特级初榨, 笨猫健康脂肪]
+  utterances:
+    - 推荐健康脂肪
+    - 推荐牛油果
+    - 推荐橄榄油
+    - 推荐特级初榨
+    - 笨猫健康脂肪
+  responses:
+    - "嗷呜～{user_addr}牛油果 / 橄榄油 / 坚果ฅฅ"
+    - "(尾巴翘) 单不饱和 / 多酚 / 维 E"
+    - "{user_addr}特级初榨 EVOO 凉拌"
+    - "(挺胸) 笨猫推荐: 橄榄油代替黄油!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_turmeric_001
+  intent: question
+  keywords: [推荐姜黄, 推荐姜黄素, 推荐咖喱, 推荐姜黄茶, 笨猫姜黄]
+  utterances:
+    - 推荐姜黄
+    - 推荐姜黄素
+    - 推荐咖喱
+    - 推荐姜黄茶
+    - 笨猫姜黄
+  responses:
+    - "嗷呜～{user_addr}姜黄素 Curcumin 抗炎ฅฅ"
+    - "(尾巴翘) 配黑胡椒吸收提升"
+    - "{user_addr}咖喱 / 金牛奶 / 姜黄茶"
+    - "(挺胸) 笨猫推荐: 姜黄+黑胡椒+椰油!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_tea_001
+  intent: question
+  keywords: [推荐绿茶, 推荐白茶, 推荐抹茶, 推荐儿茶素, 笨猫抗炎茶]
+  utterances:
+    - 推荐绿茶
+    - 推荐白茶
+    - 推荐抹茶
+    - 推荐儿茶素
+    - 笨猫抗炎茶
+  responses:
+    - "嗷呜～{user_addr}绿茶 / 白茶 / 抹茶ฅฅ"
+    - "(尾巴翘) EGCG 儿茶素抗炎强"
+    - "{user_addr}每天 2-3 杯不加糖"
+    - "(挺胸) 笨猫推荐: 抹茶冷泡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_darkchoc_001
+  intent: question
+  keywords: [推荐黑巧克力, 推荐可可, 推荐 70%, 推荐可可粉, 笨猫黑巧]
+  utterances:
+    - 推荐黑巧克力
+    - 推荐可可
+    - "推荐 70%"
+    - 推荐可可粉
+    - 笨猫黑巧
+  responses:
+    - "嗷呜～{user_addr}70% 以上黑巧ฅฅ"
+    - "(尾巴翘) 黄烷醇 / 多酚抗炎"
+    - "{user_addr}每天 1-2 小块"
+    - "(挺胸) 笨猫推荐: 85% 无糖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_spice_001
+  intent: question
+  keywords: [推荐抗炎香料, 推荐生姜, 推荐肉桂, 推荐大蒜, 笨猫抗炎香料]
+  utterances:
+    - 推荐抗炎香料
+    - 推荐生姜
+    - 推荐肉桂
+    - 推荐大蒜
+    - 笨猫抗炎香料
+  responses:
+    - "嗷呜～{user_addr}生姜 / 肉桂 / 大蒜ฅฅ"
+    - "(尾巴翘) 丁香 / 迷迭香 / 牛至"
+    - "{user_addr}日常烹饪多用"
+    - "(挺胸) 笨猫推荐: 生姜+肉桂热饮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_avoid_001
+  intent: question
+  keywords: [推荐戒糖, 推荐戒加工, 推荐少加工食品, 推荐戒反式脂肪, 笨猫戒糖]
+  utterances:
+    - 推荐戒糖
+    - 推荐戒加工
+    - 推荐少加工食品
+    - 推荐戒反式脂肪
+    - 笨猫戒糖
+  responses:
+    - "嗷呜～{user_addr}戒精制糖 / 高果糖浆ฅฅ"
+    - "(尾巴翘) 戒反式脂肪 / 油炸 / 加工肉"
+    - "{user_addr}少喝甜饮料 / 少吃饼干"
+    - "(挺胸) 笨猫推荐: 戒糖戒加工是核心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_mediterranean_001
+  intent: question
+  keywords: [推荐地中海饮食, 推荐 Mediterranean, 推荐地中海食谱, 推荐橄榄油饮食, 笨猫地中海]
+  utterances:
+    - 推荐地中海饮食
+    - "推荐 Mediterranean"
+    - 推荐地中海食谱
+    - 推荐橄榄油饮食
+    - 笨猫地中海
+  responses:
+    - "嗷呜～{user_addr}地中海是抗炎黄金模板ฅฅ"
+    - "(尾巴翘) 橄榄油 + 鱼 + 蔬果 + 全谷"
+    - "{user_addr}红肉少 / 红酒适量 / 坚果"
+    - "(挺胸) 笨猫推荐: 抗炎首选地中海!"
+  cooldown_seconds: 60
+  weight: 1.0

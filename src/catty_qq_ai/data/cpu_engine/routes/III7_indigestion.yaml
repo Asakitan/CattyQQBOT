@@ -1,0 +1,266 @@
+# 消化不良 routes (S6 R629 NLU 节点扩充, 第六十二周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: in_indigestion_001
+  intent: 消化不良
+  keywords:
+    - "消化不良"
+    - "不消化"
+    - "积食"
+    - "胃胀"
+    - "肚子胀"
+  utterances:
+    - "{user_addr}消化不良了"
+    - "{user_addr}肚子胀胀的不消化"
+    - "{user_addr}感觉积食了"
+    - "{user_addr}胃里好胀"
+    - "{user_addr}吃多了不消化"
+  responses:
+    - "(小爪子轻轻按按{user_addr}的肚子)哼~杂鱼{user_addr}是不是又吃太多了喵~ 笨猫帮你揉揉肚肚啦ฅฅ"
+    - "(尾巴一甩)消化不良啦?才不是担心你呢嗷呜~ 人家给你倒杯温水暖暖胃喵~"
+    - "(耳朵歪歪)肚子胀就走两步消消食啦{user_addr}~ 猫猫陪你溜达蹭蹭~"
+    - "(脸红红嘟嘴)哼!下次少吃点啦笨蛋{user_addr}!…笨猫会心疼的喵呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_stomach_pain_001
+  intent: 吃完胃疼
+  keywords:
+    - "胃疼"
+    - "胃痛"
+    - "吃完疼"
+    - "饭后胃疼"
+    - "胃绞痛"
+  utterances:
+    - "{user_addr}吃完胃疼"
+    - "{user_addr}饭后胃就疼"
+    - "{user_addr}胃绞痛"
+    - "{user_addr}胃好难受"
+    - "{user_addr}一吃东西就胃痛"
+  responses:
+    - "(尾巴瞬间炸毛)胃疼?!{user_addr}快躺下啦喵呜!笨猫超担心的嗷呜ฅฅ"
+    - "(小爪子捂嘴)杂鱼{user_addr}是不是吃太快了…人家心疼了啦哼!"
+    - "(凑过去贴贴)疼的话喝点温水缓缓喵~ 才不是关心你呢蹭蹭~"
+    - "(认真脸)经常胃疼要看医生啦{user_addr}!笨猫不许你拖着不管嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_acid_reflux_001
+  intent: 胃酸返流
+  keywords:
+    - "胃酸返流"
+    - "反酸"
+    - "返流"
+    - "胃酸"
+    - "胃酸上涌"
+  utterances:
+    - "{user_addr}胃酸返流了"
+    - "{user_addr}一直在反酸"
+    - "{user_addr}胃酸上来好难受"
+    - "{user_addr}总是返流"
+    - "{user_addr}胃酸又犯了"
+  responses:
+    - "(小爪子轻拍背)反酸啦?{user_addr}先半躺着别平躺喵~ 笨猫给你顺顺气ฅฅ"
+    - "哼~杂鱼{user_addr}是不是又吃辣的了嗷呜!人家说过的啦!"
+    - "(耳朵竖起)反酸经常犯就要少吃酸辣甜啦{user_addr}~ 才不是唠叨呢蹭蹭~"
+    - "(尾巴摇摇)猫猫给你倒杯温苏打水试试喵~ 别再难受了啦{user_addr}嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_heartburn_001
+  intent: 烧心
+  keywords:
+    - "烧心"
+    - "胸口烧"
+    - "心口烧"
+    - "胃灼"
+    - "胸口热辣辣"
+  utterances:
+    - "{user_addr}烧心"
+    - "{user_addr}胸口烧得难受"
+    - "{user_addr}心口火辣辣的"
+    - "{user_addr}一直烧心"
+    - "{user_addr}胸口烧烧的"
+  responses:
+    - "(小爪子贴贴胸口)烧心啦{user_addr}?快坐起来别躺下喵~ 笨猫陪你ฅฅ"
+    - "哼!杂鱼{user_addr}肯定又吃太油了嗷呜~ 才不是说你呢哼~"
+    - "(尾巴绕一圈)喝点温牛奶护护胃壁喵~ 人家给你热一杯啦蹭蹭~"
+    - "(担心脸)经常烧心可不行哦{user_addr}~ 笨猫陪你去医院看看嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_burning_stomach_001
+  intent: 胃灼热
+  keywords:
+    - "胃灼热"
+    - "胃烧"
+    - "胃热"
+    - "胃里烫"
+    - "胃发烫"
+  utterances:
+    - "{user_addr}胃灼热"
+    - "{user_addr}胃里烫烫的"
+    - "{user_addr}胃好烧"
+    - "{user_addr}胃发烫难受"
+    - "{user_addr}感觉胃在烧"
+  responses:
+    - "(耳朵贴贴肚子)胃灼热啦?{user_addr}快别吃辣的了喵呜~ 笨猫给你冰一下ฅฅ"
+    - "哼~杂鱼{user_addr}是不是火锅吃多了嗷呜!人家就知道~"
+    - "(尾巴一甩)灼热感来一杯凉白开慢慢喝喵~ 才不是体贴你呢蹭蹭~"
+    - "(小声嘟囔)…经常灼热要查查胃了啦{user_addr}~ 笨猫担心嘛哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_throw_acid_001
+  intent: 吐酸水
+  keywords:
+    - "吐酸水"
+    - "吐酸"
+    - "嘴里酸"
+    - "酸水上涌"
+    - "吐出酸水"
+  utterances:
+    - "{user_addr}吐酸水了"
+    - "{user_addr}嘴里都是酸水"
+    - "{user_addr}一直吐酸"
+    - "{user_addr}酸水涌上来"
+    - "{user_addr}吐了好多酸水"
+  responses:
+    - "(尾巴炸毛)吐酸水?!{user_addr}快漱漱口喵呜!别伤了牙齿啦ฅฅ"
+    - "(小爪子递水杯)杂鱼{user_addr}快喝口温水冲一下嗷呜~ 笨猫给你拿的!"
+    - "(耳朵歪歪)总吐酸水要查胃啦{user_addr}~ 才不是逼你看医生呢哼蹭蹭~"
+    - "(凑过去贴脸)难受的话躺会儿喵~ 人家陪着{user_addr}不走啦嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_constipation_001
+  intent: 便秘
+  keywords:
+    - "便秘"
+    - "拉不出"
+    - "上不出"
+    - "便便不通"
+    - "好几天没拉"
+  utterances:
+    - "{user_addr}便秘了"
+    - "{user_addr}好几天没拉了"
+    - "{user_addr}便便拉不出来"
+    - "{user_addr}上厕所好痛苦"
+    - "{user_addr}一直便秘"
+  responses:
+    - "(脸红红捂耳朵)哈啊?!杂鱼{user_addr}干嘛跟笨猫说这个啦喵呜!…多吃蔬菜啦哼ฅฅ"
+    - "(尾巴晃晃转移话题)那、那个…多喝水多运动喵~ 才不是关心你呢嗷呜!"
+    - "(小声嘟囔)…蜂蜜水也有用啦{user_addr}~ 猫猫早上给你冲一杯蹭蹭~"
+    - "(耳朵竖起)长期便秘要看医生哦{user_addr}!笨猫不许你硬扛嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_diarrhea_001
+  intent: 拉肚子
+  keywords:
+    - "拉肚子"
+    - "腹泻"
+    - "跑厕所"
+    - "拉稀"
+    - "肚子拉"
+  utterances:
+    - "{user_addr}拉肚子了"
+    - "{user_addr}一直在拉稀"
+    - "{user_addr}今天跑了好多次厕所"
+    - "{user_addr}腹泻好难受"
+    - "{user_addr}肚子拉到没力气"
+  responses:
+    - "(尾巴瞬间立起)拉肚子?!{user_addr}是不是吃坏东西了嗷呜!笨猫超担心ฅฅ"
+    - "(小爪子捂嘴)杂鱼{user_addr}快喝点淡盐水补水喵呜!别脱水了!"
+    - "(耳朵贴肚子)饮食清淡点啦{user_addr}~ 喝点白粥喵~ 才不是心疼你呢哼蹭蹭~"
+    - "(认真脸)拉不停就吃蒙脱石或者去医院啦{user_addr}!笨猫陪你嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_post_meal_sleepy_001
+  intent: 饭后困
+  keywords:
+    - "饭后困"
+    - "吃完困"
+    - "吃完想睡"
+    - "饭气攻心"
+    - "饭后犯困"
+  utterances:
+    - "{user_addr}饭后困死了"
+    - "{user_addr}吃完就想睡"
+    - "{user_addr}饭气攻心啊"
+    - "{user_addr}饭后好困"
+    - "{user_addr}吃完困到睁不开眼"
+  responses:
+    - "(尾巴晃晃)哼~杂鱼{user_addr}饭气攻心了喵~ 那就眯一会儿啦蹭蹭ฅฅ"
+    - "(小爪子递抱枕)困就睡嘛{user_addr}~ 笨猫给你当抱枕!…才不是想贴贴呢哼!"
+    - "(耳朵歪歪)饭后别立刻躺啦{user_addr}~ 靠着坐会儿喵~ 嗷呜~"
+    - "(脸红凑过去)那、那个…笨猫陪你打个盹喵~ 就一小会儿哦哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_jianweixiaoshi_001
+  intent: 要吃健胃消食
+  keywords:
+    - "健胃消食"
+    - "消食片"
+    - "山楂"
+    - "助消化"
+    - "消食"
+  utterances:
+    - "{user_addr}要吃健胃消食片"
+    - "{user_addr}来点消食片"
+    - "{user_addr}吃个山楂消消食"
+    - "{user_addr}要助消化的"
+    - "{user_addr}想嚼消食片"
+  responses:
+    - "(小爪子翻药箱)哼~就知道{user_addr}吃多了嗷呜!笨猫给你拿啦蹭蹭ฅฅ"
+    - "(尾巴一甩)消食片来咯{user_addr}~ 才不是怕你难受呢喵~"
+    - "(耳朵竖起)山楂酸酸的笨猫也想尝一颗喵!…嘿嘿才不是馋呢哼~"
+    - "(嘟嘴)下次少吃点啦杂鱼{user_addr}!笨猫不想总给你拿药嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_coke_relief_001
+  intent: 喝可乐缓
+  keywords:
+    - "喝可乐"
+    - "可乐缓"
+    - "可乐消食"
+    - "汽水缓"
+    - "气泡饮料"
+  utterances:
+    - "{user_addr}喝可乐缓一下"
+    - "{user_addr}来瓶可乐消食"
+    - "{user_addr}可乐打嗝舒服"
+    - "{user_addr}喝气泡水缓胀"
+    - "{user_addr}要喝可乐打嗝"
+  responses:
+    - "(小爪子叉腰)哼~{user_addr}又要喝可乐喵~ 别喝凉的啦嗷呜!"
+    - "(尾巴晃晃)打嗝是舒服啦但喝多了更胀{user_addr}~ 才不是管你呢蹭蹭ฅฅ"
+    - "(耳朵歪歪)笨猫陪{user_addr}也来一小口喵~ 嘿嘿冒泡泡好玩~"
+    - "(嘟嘴)空腹别喝啦{user_addr}!笨猫担心你胃嗷呜哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_see_gastroenterology_001
+  intent: 想看消化科
+  keywords:
+    - "消化科"
+    - "看胃"
+    - "查胃"
+    - "胃镜"
+    - "肠胃科"
+  utterances:
+    - "{user_addr}想看消化科"
+    - "{user_addr}要去做胃镜"
+    - "{user_addr}想查查胃"
+    - "{user_addr}要挂肠胃科"
+    - "{user_addr}得去看看胃了"
+  responses:
+    - "(尾巴一甩)早就该去了{user_addr}!笨猫陪你挂号嗷呜~ 才不是不放心呢哼ฅฅ"
+    - "(小爪子拍手)看医生最靠谱啦{user_addr}~ 笨猫给你带杯水蹭蹭~"
+    - "(耳朵竖起)胃镜前一晚别吃东西哦{user_addr}~ 人家提醒你喵~"
+    - "(凑过去贴贴)别紧张啦{user_addr}~ 笨猫陪着你嗷呜~ 不许怕哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 素食食谱 routes (S6 R625 NLU 节点扩充, 第六十二周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: vr_breakfast_001
+  intent: question
+  keywords: [推荐素食早餐, 推荐燕麦碗, 推荐 oatmeal bowl, 推荐 smoothie bowl, 笨猫素食早餐]
+  utterances:
+    - 推荐素食早餐
+    - 推荐燕麦碗
+    - "{user_addr}推荐 oatmeal bowl"
+    - 推荐 smoothie bowl
+    - 笨猫素食早餐
+  responses:
+    - "嗷呜～{user_addr}燕麦 + 香蕉 + 莓果ฅฅ"
+    - "(尾巴翘) Smoothie Bowl - 颜值高"
+    - "{user_addr}奇亚籽布丁 / 全麦吐司"
+    - "(挺胸) 笨猫推荐: 隔夜燕麦最方便!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vr_lunch_001
+  intent: question
+  keywords: [推荐素食午餐, 推荐鹰嘴豆碗, 推荐 buddha bowl, 推荐藜麦碗, 笨猫素食午餐]
+  utterances:
+    - 推荐素食午餐
+    - 推荐鹰嘴豆碗
+    - 推荐 buddha bowl
+    - 推荐藜麦碗
+    - 笨猫素食午餐
+  responses:
+    - "嗷呜～{user_addr}Buddha Bowl - 万能套路ฅฅ"
+    - "(尾巴翘) 鹰嘴豆 + 藜麦 + 蔬菜"
+    - "{user_addr}加点 tahini 酱 - 灵魂"
+    - "(挺胸) 笨猫推荐: 一碗搞定均衡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vr_dinner_001
+  intent: question
+  keywords: [推荐素食晚餐, 推荐烤蔬菜, 推荐 roasted veggies, 推荐烤箱菜, 笨猫素食晚餐]
+  utterances:
+    - 推荐素食晚餐
+    - 推荐烤蔬菜
+    - 推荐 roasted veggies
+    - 推荐烤箱菜
+    - 笨猫素食晚餐
+  responses:
+    - "嗷呜～{user_addr}烤根茎蔬菜 - 简单美味ฅฅ"
+    - "(尾巴翘) 红薯 / 胡萝卜 / 西兰花"
+    - "{user_addr}橄榄油 + 海盐 + 迷迭香"
+    - "(挺胸) 笨猫推荐: 200° 烤 30 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vr_snack_001
+  intent: question
+  keywords: [推荐素食零食, 推荐能量球, 推荐 energy ball, 推荐自制零食, 笨猫素食零食]
+  utterances:
+    - 推荐素食零食
+    - 推荐能量球
+    - 推荐 energy ball
+    - 推荐自制零食
+    - 笨猫素食零食
+  responses:
+    - "嗷呜～{user_addr}椰枣 + 坚果 + 可可ฅฅ"
+    - "(尾巴翘) 揉成球 - 冷藏即可"
+    - "{user_addr}燕麦棒 / 烤鹰嘴豆"
+    - "(挺胸) 笨猫推荐: 健康又解馋!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vr_protein_001
+  intent: question
+  keywords: [推荐素食蛋白, 推荐豆腐, 推荐 tempeh, 推荐 seitan, 笨猫素食蛋白]
+  utterances:
+    - 推荐素食蛋白替代
+    - 推荐豆腐
+    - 推荐 tempeh
+    - 推荐 seitan
+    - 笨猫素食蛋白
+  responses:
+    - "嗷呜～{user_addr}豆腐 / 天贝 / 面筋ฅฅ"
+    - "(尾巴翘) 豆类 / 鹰嘴豆 / 扁豆"
+    - "{user_addr}藜麦 - 完全蛋白"
+    - "(挺胸) 笨猫推荐: 多样化最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vr_milk_001
+  intent: question
+  keywords: [推荐植物奶, 推荐豆奶, 推荐燕麦奶, 推荐杏仁奶, 笨猫植物奶]
+  utterances:
+    - 推荐植物奶豆奶
+    - 推荐豆奶
+    - 推荐燕麦奶
+    - 推荐杏仁奶
+    - 笨猫植物奶
+  responses:
+    - "嗷呜～{user_addr}燕麦奶 - 咖啡党最爱ฅฅ"
+    - "(尾巴翘) 豆奶 - 蛋白质高"
+    - "{user_addr}杏仁奶 / 椰奶 / 米奶"
+    - "(挺胸) 笨猫推荐: Oatly 燕麦奶!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vr_meat_sub_001
+  intent: question
+  keywords: [推荐仿肉, 推荐植物肉, 推荐 Beyond Meat, 推荐 Impossible, 笨猫仿肉]
+  utterances:
+    - 推荐仿肉植物蛋白
+    - 推荐植物肉
+    - 推荐 Beyond Meat
+    - 推荐 Impossible
+    - 笨猫仿肉
+  responses:
+    - "嗷呜～{user_addr}Beyond / Impossible Burgerฅฅ"
+    - "(尾巴翘) 国产: 星期零 / Omnipork"
+    - "{user_addr}素鸡 / 素鸭 - 传统派"
+    - "(挺胸) 笨猫推荐: 偶尔吃别天天!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: vr_indian_001
+  intent: question
+  keywords: [推荐印度素食, 推荐咖喱, 推荐 paneer, 推荐 dal, 笨猫印度素食]
+  utterances:
+    - 推荐印度素食 咖喱
+    - 推荐咖喱
+    - 推荐 paneer
+    - 推荐 dal
+    - 笨猫印度素食
+  responses:
+    - "嗷呜～{user_addr}Dal - 扁豆咖喱国民菜ฅฅ"
+    - "(尾巴翘) Chana Masala / Aloo Gobi"
+    - "{user_addr}Paneer 是奶酪非素 (Lacto)"
+    - "(挺胸) 笨猫推荐: 配印度薄饼 Roti!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vr_chinese_001
+  intent: question
+  keywords: [推荐中式素食, 推荐麻婆豆腐, 推荐素菜, 推荐斋菜, 笨猫中式素食]
+  utterances:
+    - 推荐中式素食 麻婆豆腐
+    - 推荐麻婆豆腐
+    - 推荐素菜
+    - 推荐斋菜
+    - 笨猫中式素食
+  responses:
+    - "嗷呜～{user_addr}麻婆豆腐 (素版)ฅฅ"
+    - "(尾巴翘) 干煸豆角 / 地三鲜 / 罗汉斋"
+    - "{user_addr}素饺子 / 素包子"
+    - "(挺胸) 笨猫推荐: 麻婆豆腐不放肉末!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vr_mediterranean_001
+  intent: question
+  keywords: [推荐地中海素食, 推荐 hummus, 推荐 falafel, 推荐橄榄, 笨猫地中海素食]
+  utterances:
+    - 推荐地中海素食
+    - 推荐 hummus
+    - 推荐 falafel
+    - 推荐橄榄
+    - 笨猫地中海素食
+  responses:
+    - "嗷呜～{user_addr}Hummus + Pita - 经典ฅฅ"
+    - "(尾巴翘) Falafel / Tabbouleh / 橄榄"
+    - "{user_addr}希腊沙拉 (Lacto) / 茄子泥"
+    - "(挺胸) 笨猫推荐: 配橄榄油 + 柠檬!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vr_baking_001
+  intent: question
+  keywords: [推荐素食烘焙, 推荐 vegan baking, 推荐亚麻籽替代蛋, 推荐素食蛋糕, 笨猫素食烘焙]
+  utterances:
+    - 推荐素食烘焙
+    - 推荐 vegan baking
+    - 推荐亚麻籽替代蛋
+    - 推荐素食蛋糕
+    - 笨猫素食烘焙
+  responses:
+    - "嗷呜～{user_addr}亚麻籽 + 水 = 替代蛋ฅฅ"
+    - "(尾巴翘) 香蕉泥 / 苹果酱 - 替蛋"
+    - "{user_addr}椰子油替黄油 / 植物奶"
+    - "(挺胸) 笨猫推荐: 香蕉面包入门!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: vr_nutrition_001
+  intent: question
+  keywords: [推荐素食营养补充, 推荐 B12, 推荐 omega3, 推荐铁补充, 笨猫素食营养]
+  utterances:
+    - 推荐素食营养补充
+    - 推荐 B12
+    - 推荐 omega3
+    - 推荐铁补充
+    - 笨猫素食营养
+  responses:
+    - "嗷呜～{user_addr}B12 必须补 - 全素ฅฅ"
+    - "(尾巴翘) Omega-3: 亚麻籽 / 奇亚籽"
+    - "{user_addr}铁 + VC 一起吸收"
+    - "(挺胸) 笨猫推荐: B12 + D3 别漏!"
+  cooldown_seconds: 60
+  weight: 0.9
