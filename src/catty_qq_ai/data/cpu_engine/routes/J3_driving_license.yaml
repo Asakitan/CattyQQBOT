@@ -1,0 +1,206 @@
+# 驾考 / 驾照 / 学车 / 科目 routes (S6 R115 NLU 节点扩充, 第十一周期 buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: drive_license_001
+  intent: question
+  keywords: [推荐驾照, 推荐 C1, 推荐 C2, 推荐学车, 笨猫驾照]
+  utterances:
+    - 推荐驾照
+    - 推荐 C1
+    - 推荐 C2
+    - 推荐学车
+    - 笨猫驾照
+  responses:
+    - "嗷呜～{user_addr}C1: 手动挡 / 自动手动皆可ฅฅ"
+    - "(尾巴翘) C2: 自动挡 / 简单很多"
+    - "{user_addr}A1/B1/B2 - 大型车 / 不常用"
+    - "(挺胸) 笨猫推荐: 新手 C2 入门最快!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drive_subject1_001
+  intent: question
+  keywords: [推荐科目一, 推荐科一题库, 推荐驾考宝典, 推荐驾考通, 笨猫科目一]
+  utterances:
+    - 推荐科目一
+    - 推荐科一题库
+    - 推荐驾考宝典
+    - 推荐驾考通
+    - 笨猫科目一
+  responses:
+    - "嗷呜～{user_addr}题库: 驾考宝典 / 驾考通 - app 刷题ฅฅ"
+    - "(尾巴翘) 1325 题 - 90% 及格"
+    - "{user_addr}重点: 交规 / 标志 / 急救"
+    - "(挺胸) 笨猫推荐: 1000+ 题刷 3 遍!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drive_subject2_001
+  intent: question
+  keywords: [推荐科目二, 推荐倒车入库, 推荐侧方停车, 推荐坡道起步, 笨猫科目二]
+  utterances:
+    - 推荐科目二
+    - 推荐倒车入库
+    - 推荐侧方停车
+    - 推荐坡道起步
+    - 笨猫科目二
+  responses:
+    - "嗷呜～{user_addr}五项: 倒库 / 侧方 / 坡起 / 直角 / S 弯ฅฅ"
+    - "(尾巴翘) 难度: 倒库 > 侧方 = 坡起 > 直角"
+    - "{user_addr}诀窍: 控制车速 + 看点位"
+    - "(挺胸) 笨猫的提醒: 别紧张! 多练就好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drive_subject3_001
+  intent: question
+  keywords: [推荐科目三, 推荐路考, 推荐直线行驶, 推荐变更车道, 笨猫科目三]
+  utterances:
+    - 推荐科目三
+    - 推荐路考
+    - 推荐直线行驶
+    - 推荐变更车道
+    - 笨猫科目三
+  responses:
+    - "嗷呜～{user_addr}16 项: 起步 / 直线 / 加减档 / 路口ฅฅ"
+    - "(尾巴翘) 重点: 变道前打灯 / 看后视镜"
+    - "{user_addr}考前 1 周熟悉车况"
+    - "(挺胸) 笨猫的提醒: 平稳! 别快不稳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drive_subject4_001
+  intent: question
+  keywords: [推荐科目四, 推荐安全文明, 推荐科四题库, 推荐毕业, 笨猫科目四]
+  utterances:
+    - 推荐科目四
+    - 推荐安全文明
+    - 推荐科四题库
+    - 推荐毕业
+    - 笨猫科目四
+  responses:
+    - "嗷呜～{user_addr}1325 题 / 选 50 答 / 90% 及格ฅฅ"
+    - "(尾巴翘) 重点: 安全文明 + 应急处理"
+    - "{user_addr}过了就能领证!"
+    - "(挺胸) 笨猫推荐: 跟科一一样刷题!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drive_school_001
+  intent: question
+  keywords: [推荐驾校, 推荐选驾校, 推荐自学直考, 推荐陪练, 笨猫驾校]
+  utterances:
+    - 推荐驾校
+    - 推荐选驾校
+    - 推荐自学直考
+    - 推荐陪练
+    - 笨猫驾校
+  responses:
+    - "嗷呜～{user_addr}看口碑 + 通过率 + 教练ฅฅ"
+    - "(尾巴翘) 自学直考: 已开放 / 但难度大"
+    - "{user_addr}陪练: 取证后 5-10 课时上路"
+    - "(挺胸) 笨猫的提醒: 别选大坑驾校!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: drive_renew_001
+  intent: question
+  keywords: [推荐换证, 推荐驾照换证, 推荐审证, 推荐违章扣分, 笨猫换证]
+  utterances:
+    - 推荐换证
+    - 推荐驾照换证
+    - 推荐审证
+    - 推荐违章扣分
+    - 笨猫换证
+  responses:
+    - "嗷呜～{user_addr}C 证 6 年期 / 提前 90 天换ฅฅ"
+    - "(尾巴翘) 流程: 体检 + 1 寸照 + 现证"
+    - "{user_addr}扣 12 分: 重学科一 / 别冒险"
+    - "(挺胸) 笨猫推荐: 12123 app 在线办!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: drive_motorcycle_001
+  intent: question
+  keywords: [推荐摩托车驾照, 推荐 D 证, 推荐 E 证, 推荐 F 证, 笨猫摩托车驾照]
+  utterances:
+    - 推荐摩托车驾照
+    - 推荐 D 证
+    - 推荐 E 证
+    - 推荐 F 证
+    - 笨猫摩托车驾照
+  responses:
+    - "嗷呜～{user_addr}D: 三轮摩托 / E: 普通二轮 / F: 轻便ฅฅ"
+    - "(尾巴翘) 学费: 1000-2000 - 比汽车便宜"
+    - "{user_addr}考试: 5 个项目 - 比汽车简单"
+    - "(挺胸) 笨猫推荐: 玩车前先考证!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: drive_safety_001
+  intent: question
+  keywords: [推荐安全驾驶, 推荐新手驾驶, 推荐防御性驾驶, 推荐高速驾驶, 笨猫安全驾驶]
+  utterances:
+    - 推荐安全驾驶
+    - 推荐新手驾驶
+    - 推荐防御性驾驶
+    - 推荐高速驾驶
+    - 笨猫安全驾驶
+  responses:
+    - "嗷呜～{user_addr}三原则: 看远 / 防误判 / 留余地ฅฅ"
+    - "(尾巴翘) 高速: 车距 100m+ / 看大车风向"
+    - "{user_addr}新手: 别上高速! 先市区"
+    - "(挺胸) 笨猫的提醒: 系安全带! 别带电话"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drive_insurance_001
+  intent: question
+  keywords: [推荐汽车保险, 推荐交强险, 推荐商业险, 推荐车险, 笨猫汽车保险]
+  utterances:
+    - 推荐汽车保险
+    - 推荐交强险
+    - 推荐商业险
+    - 推荐车险
+    - 笨猫汽车保险
+  responses:
+    - "嗷呜～{user_addr}交强险: 国家强制ฅฅ"
+    - "(尾巴翘) 商业三大: 三责 / 车损 / 不计免赔"
+    - "{user_addr}保司: 平安 / 人保 / 太平洋"
+    - "(挺胸) 笨猫的提醒: 三责至少 100 万!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: drive_traffic_001
+  intent: question
+  keywords: [推荐交通违章, 推荐违章查询, 推荐 12123, 推荐处理违章, 笨猫违章]
+  utterances:
+    - 推荐交通违章
+    - 推荐违章查询
+    - 推荐 12123
+    - 推荐处理违章
+    - 笨猫违章
+  responses:
+    - "嗷呜～{user_addr}12123 app: 官方 / 免费ฅฅ"
+    - "(尾巴翘) 罚款 < 1000 + 扣 < 12 - 网上处理"
+    - "{user_addr}注意: 处理期限 15 天 / 滞纳金"
+    - "(挺胸) 笨猫的提醒: 别违章! 教训贵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: drive_evac_001
+  intent: question
+  keywords: [推荐紧急情况, 推荐爆胎处理, 推荐刹车失灵, 推荐熄火, 笨猫应急驾驶]
+  utterances:
+    - 推荐紧急情况
+    - 推荐爆胎处理
+    - 推荐刹车失灵
+    - 推荐熄火
+    - 笨猫应急驾驶
+  responses:
+    - "嗷呜～{user_addr}爆胎: 紧握方向 / 别急刹车ฅฅ"
+    - "(尾巴翘) 刹车失灵: 降挡 / 拉手刹 / 撞缓冲带"
+    - "{user_addr}熄火: 高速避险 / 三角警示"
+    - "(挺胸) 笨猫的提醒: 冷静 > 一切!"
+  cooldown_seconds: 60
+  weight: 0.7

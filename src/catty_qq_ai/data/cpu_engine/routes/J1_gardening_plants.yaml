@@ -1,0 +1,206 @@
+# 园艺 / 植物 / 盆栽 / 花卉 / 多肉 routes (S6 R113 NLU 节点扩充, 第十一周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: garden_succulent_001
+  intent: question
+  keywords: [推荐多肉植物, 推荐多肉, 推荐多肉新手, 推荐多肉养护, 笨猫多肉]
+  utterances:
+    - 推荐多肉植物
+    - 推荐多肉
+    - 推荐多肉新手
+    - 推荐多肉养护
+    - 笨猫多肉
+  responses:
+    - "嗷呜～{user_addr}新手: 玉露 / 黑王子 / 桃蛋 - 好养ฅฅ"
+    - "(尾巴翘) 配土: 颗粒 + 泥炭 - 透气"
+    - "{user_addr}浇水: 干透浇透 / 别频繁"
+    - "(挺胸) 笨猫的提醒: 多晒太阳! 否则徒长"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: garden_orchid_001
+  intent: question
+  keywords: [推荐兰花, 推荐养兰, 推荐蝴蝶兰, 推荐春兰, 笨猫兰花]
+  utterances:
+    - 推荐兰花
+    - 推荐养兰
+    - 推荐蝴蝶兰
+    - 推荐春兰
+    - 笨猫兰花
+  responses:
+    - "嗷呜～{user_addr}入门: 蝴蝶兰 - 花期长 / 好养ฅฅ"
+    - "(尾巴翘) 国兰: 春兰 / 蕙兰 / 建兰 - 中国传统"
+    - "{user_addr}水苔栽植 / 散光 / 高湿度"
+    - "(挺胸) 笨猫推荐: 兰花文化馆深入了解"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: garden_flower_001
+  intent: question
+  keywords: [推荐花卉, 推荐家庭养花, 推荐月季, 推荐玫瑰, 笨猫养花]
+  utterances:
+    - 推荐花卉
+    - 推荐家庭养花
+    - 推荐月季
+    - 推荐玫瑰
+    - 笨猫养花
+  responses:
+    - "嗷呜～{user_addr}阳台必养: 月季 / 茉莉 / 栀子ฅฅ"
+    - "(尾巴翘) 月季: 玫瑰天后 / 200+ 品种"
+    - "{user_addr}注意: 通风 + 阳光 + 防虫"
+    - "(挺胸) 笨猫推荐: 月季新手买扦插苗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: garden_indoor_001
+  intent: question
+  keywords: [推荐室内植物, 推荐绿萝, 推荐发财树, 推荐净化空气, 笨猫室内植物]
+  utterances:
+    - 推荐室内植物
+    - 推荐绿萝
+    - 推荐发财树
+    - 推荐净化空气
+    - 笨猫室内植物
+  responses:
+    - "嗷呜～{user_addr}好养: 绿萝 / 龟背竹 / 虎尾兰ฅฅ"
+    - "(尾巴翘) 净化: NASA 推荐 - 吊兰 / 散尾葵"
+    - "{user_addr}发财树 / 平安树 - 寓意"
+    - "(挺胸) 笨猫的提醒: 通风! 别闷坏根系"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: garden_vegetable_001
+  intent: question
+  keywords: [推荐阳台种菜, 推荐家庭种植, 推荐种小番茄, 推荐种生菜, 笨猫阳台种菜]
+  utterances:
+    - 推荐阳台种菜
+    - 推荐家庭种植
+    - 推荐种小番茄
+    - 推荐种生菜
+    - 笨猫阳台种菜
+  responses:
+    - "嗷呜～{user_addr}阳台必种: 生菜 / 小番茄 / 葱蒜ฅฅ"
+    - "(尾巴翘) 春季: 茄子 / 辣椒 / 黄瓜"
+    - "{user_addr}秋季: 萝卜 / 白菜 / 菠菜"
+    - "(挺胸) 笨猫推荐: 阳台种植教程 - B站!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: garden_bonsai_001
+  intent: question
+  keywords: [推荐盆景, 推荐松树盆景, 推荐造型, 推荐文人盆景, 笨猫盆景]
+  utterances:
+    - 推荐盆景
+    - 推荐松树盆景
+    - 推荐造型
+    - 推荐文人盆景
+    - 笨猫盆景
+  responses:
+    - "嗷呜～{user_addr}入门: 真柏 / 罗汉松 / 黑松ฅฅ"
+    - "(尾巴翘) 流派: 苏派 / 扬派 / 川派 / 岭南派"
+    - "{user_addr}文人盆景: 简洁 / 意境为主"
+    - "(挺胸) 笨猫推荐: 盆景三要素 - 树形 + 盆 + 景"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: garden_water_plant_001
+  intent: question
+  keywords: [推荐水培植物, 推荐水养, 推荐铜钱草, 推荐荷花, 笨猫水培]
+  utterances:
+    - 推荐水培植物
+    - 推荐水养
+    - 推荐铜钱草
+    - 推荐荷花
+    - 笨猫水培
+  responses:
+    - "嗷呜～{user_addr}好养: 绿萝 / 铜钱草 / 富贵竹ฅฅ"
+    - "(尾巴翘) 莲花: 缸养 - 古意盎然"
+    - "{user_addr}水草缸: 生态 + 鱼虾共生"
+    - "(挺胸) 笨猫的提醒: 定期换水! 别死水"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: garden_tool_001
+  intent: question
+  keywords: [推荐园艺工具, 推荐花盆, 推荐肥料, 推荐杀虫剂, 笨猫园艺工具]
+  utterances:
+    - 推荐园艺工具
+    - 推荐花盆
+    - 推荐肥料
+    - 推荐杀虫剂
+    - 笨猫园艺工具
+  responses:
+    - "嗷呜～{user_addr}基础: 喷壶 / 修剪剪 / 小铲ฅฅ"
+    - "(尾巴翘) 花盆: 陶瓦 - 透气 / 塑料 - 轻便"
+    - "{user_addr}肥: 缓释肥 / 营养液 / 有机肥"
+    - "(挺胸) 笨猫推荐: 杀虫用大蒜水 - 天然!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: garden_seasonal_001
+  intent: question
+  keywords: [推荐春季花卉, 推荐夏季花, 推荐秋花, 推荐冬季植物, 笨猫四季花]
+  utterances:
+    - 推荐春季花卉
+    - 推荐夏季花
+    - 推荐秋花
+    - 推荐冬季植物
+    - 笨猫四季花
+  responses:
+    - "嗷呜～{user_addr}春: 樱花 / 郁金香 / 风信子ฅฅ"
+    - "(尾巴翘) 夏: 茉莉 / 太阳花 / 荷花"
+    - "{user_addr}秋: 菊花 / 桂花 / 三色堇"
+    - "(挺胸) 笨猫推荐: 冬季水仙 / 蜡梅 - 寒香"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: garden_grafting_001
+  intent: question
+  keywords: [推荐嫁接, 推荐扦插, 推荐压条, 推荐繁殖植物, 笨猫嫁接]
+  utterances:
+    - 推荐嫁接
+    - 推荐扦插
+    - 推荐压条
+    - 推荐繁殖植物
+    - 笨猫嫁接
+  responses:
+    - "嗷呜～{user_addr}扦插最易 - 月季 / 绿萝 - 入水生根ฅฅ"
+    - "(尾巴翘) 嫁接: 玫瑰嫁接 - 砧木 + 接穗"
+    - "{user_addr}压条: 子蔓压土 - 一段时间生根"
+    - "(挺胸) 笨猫的提醒: 春秋季节最易成活!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: garden_disease_001
+  intent: question
+  keywords: [推荐治叶斑, 推荐治蚜虫, 推荐治红蜘蛛, 推荐植物病虫害, 笨猫病虫害]
+  utterances:
+    - 推荐治叶斑
+    - 推荐治蚜虫
+    - 推荐治红蜘蛛
+    - 推荐植物病虫害
+    - 笨猫病虫害
+  responses:
+    - "嗷呜～{user_addr}蚜虫: 用洗洁精水 / 大蒜水ฅฅ"
+    - "(尾巴翘) 红蜘蛛: 多通风 + 加湿"
+    - "{user_addr}叶斑: 多菌灵 / 控制浇水"
+    - "(挺胸) 笨猫的提醒: 别用强效农药! 影响家居"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: garden_lawn_001
+  intent: question
+  keywords: [推荐草坪, 推荐养草坪, 推荐种草, 推荐百慕大草, 笨猫草坪]
+  utterances:
+    - 推荐草坪
+    - 推荐养草坪
+    - 推荐种草
+    - 推荐百慕大草
+    - 笨猫草坪
+  responses:
+    - "嗷呜～{user_addr}冷季: 高羊茅 / 黑麦草ฅฅ"
+    - "(尾巴翘) 暖季: 百慕大 / 结缕草"
+    - "{user_addr}维护: 修剪 3-5cm / 春秋施肥"
+    - "(挺胸) 笨猫的提醒: 浇水深而少! 别天天浇"
+  cooldown_seconds: 60
+  weight: 0.6

@@ -1,0 +1,206 @@
+# 新能源车 / 电动车 / EV / 特斯拉 / 比亚迪 routes (S6 R116 NLU 节点扩充, 第十一周期 buffered 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: ev_tesla_001
+  intent: question
+  keywords: [推荐特斯拉, 推荐 Model 3, 推荐 Model Y, 推荐 Tesla, 笨猫特斯拉]
+  utterances:
+    - 推荐特斯拉
+    - 推荐 Model 3
+    - 推荐 Model Y
+    - 推荐 Tesla
+    - 笨猫特斯拉
+  responses:
+    - "嗷呜～{user_addr}Model 3: 25-35W / 性价比之王ฅฅ"
+    - "(尾巴翘) Model Y: SUV / 30-40W"
+    - "{user_addr}Model S/X: 高端 / 80W+"
+    - "(挺胸) 笨猫的提醒: FSD 谨慎用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_byd_001
+  intent: question
+  keywords: [推荐比亚迪, 推荐汉, 推荐唐, 推荐宋, 笨猫比亚迪]
+  utterances:
+    - 推荐比亚迪
+    - 推荐汉
+    - 推荐唐
+    - 推荐宋
+    - 笨猫比亚迪
+  responses:
+    - "嗷呜～{user_addr}国产销冠 / 刀片电池ฅฅ"
+    - "(尾巴翘) 汉 EV: 中大型 / 20W+"
+    - "{user_addr}宋 PLUS / 元 - 性价比"
+    - "(挺胸) 笨猫推荐: DM-i 混动 - 经济!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_nio_001
+  intent: question
+  keywords: [推荐蔚来, 推荐 NIO, 推荐 ET5, 推荐 ES6, 笨猫蔚来]
+  utterances:
+    - 推荐蔚来
+    - 推荐 NIO
+    - 推荐 ET5
+    - 推荐 ES6
+    - 笨猫蔚来
+  responses:
+    - "嗷呜～{user_addr}30W+ 高端 / 换电模式ฅฅ"
+    - "(尾巴翘) 服务一流 / NIO House"
+    - "{user_addr}ET5: 30W / ET7: 50W+"
+    - "(挺胸) 笨猫推荐: 换电 5 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_xpeng_001
+  intent: question
+  keywords: [推荐小鹏, 推荐 XPeng, 推荐 P7, 推荐 G6, 笨猫小鹏]
+  utterances:
+    - 推荐小鹏
+    - 推荐 XPeng
+    - 推荐 P7
+    - 推荐 G6
+    - 笨猫小鹏
+  responses:
+    - "嗷呜～{user_addr}科技派 / 智能驾驶强ฅฅ"
+    - "(尾巴翘) P7: 轿车 25-30W / 性价比"
+    - "{user_addr}G6 / G9 - SUV 系列"
+    - "(挺胸) 笨猫推荐: XNGP 智驾领先!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ev_liauto_001
+  intent: question
+  keywords: [推荐理想, 推荐 Li Auto, 推荐 L7, 推荐 L8, 笨猫理想]
+  utterances:
+    - 推荐理想
+    - 推荐 Li Auto
+    - 推荐 L7
+    - 推荐 L8
+    - 笨猫理想
+  responses:
+    - "嗷呜～{user_addr}奶爸车 / 增程式 / 无续航焦虑ฅฅ"
+    - "(尾巴翘) L7/L8/L9 - 6/7 座 SUV"
+    - "{user_addr}40W+ / 大空间 / 配置高"
+    - "(挺胸) 笨猫推荐: 家庭出行神车!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_battery_001
+  intent: question
+  keywords: [推荐电池技术, 推荐刀片电池, 推荐 4680, 推荐固态电池, 笨猫动力电池]
+  utterances:
+    - 推荐电池技术
+    - 推荐刀片电池
+    - 推荐 4680
+    - 推荐固态电池
+    - 笨猫动力电池
+  responses:
+    - "嗷呜～{user_addr}刀片: 比亚迪 / 磷酸铁锂 - 安全ฅฅ"
+    - "(尾巴翘) 4680: 特斯拉 / 三元锂"
+    - "{user_addr}固态: 下一代 / 2027+ 量产"
+    - "(挺胸) 笨猫的提醒: 磷酸铁锂衰减低!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ev_charging_001
+  intent: question
+  keywords: [推荐充电桩, 推荐家充, 推荐快充, 推荐换电, 笨猫充电]
+  utterances:
+    - 推荐充电桩
+    - 推荐家充
+    - 推荐快充
+    - 推荐换电
+    - 笨猫充电
+  responses:
+    - "嗷呜～{user_addr}家充: 7kW - 慢充 / 一晚满ฅฅ"
+    - "(尾巴翘) 公共快充: 120kW / 30 分钟 80%"
+    - "{user_addr}超充: 350kW - 15 分钟"
+    - "(挺胸) 笨猫推荐: 优先家充! 便宜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_range_001
+  intent: question
+  keywords: [推荐续航, 推荐 CLTC, 推荐 WLTP, 推荐冬季续航, 笨猫续航]
+  utterances:
+    - 推荐续航
+    - 推荐 CLTC
+    - 推荐 WLTP
+    - 推荐冬季续航
+    - 笨猫续航
+  responses:
+    - "嗷呜～{user_addr}CLTC 工况: 国内标 / 偏乐观ฅฅ"
+    - "(尾巴翘) WLTP / EPA - 实际接近"
+    - "{user_addr}冬季: 打 7-8 折 - 别相信标"
+    - "(挺胸) 笨猫的提醒: 700km+ 才安心!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ev_smart_drive_001
+  intent: question
+  keywords: [推荐智能驾驶, 推荐 NGP, 推荐 NOA, 推荐 FSD, 笨猫智驾]
+  utterances:
+    - 推荐智能驾驶
+    - 推荐 NGP
+    - 推荐 NOA
+    - 推荐 FSD
+    - 笨猫智驾
+  responses:
+    - "嗷呜～{user_addr}L2 辅助驾驶 - 不可脱手ฅฅ"
+    - "(尾巴翘) 国产领先: 华为 ADS / 小鹏 XNGP / 蔚来 NOP"
+    - "{user_addr}特斯拉 FSD: 国内功能受限"
+    - "(挺胸) 笨猫的提醒: 别全依赖! 出事担责"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ev_subsidy_001
+  intent: question
+  keywords: [推荐新能源补贴, 推荐免购置税, 推荐绿牌, 推荐不限号, 笨猫新能源政策]
+  utterances:
+    - 推荐新能源补贴
+    - 推荐免购置税
+    - 推荐绿牌
+    - 推荐不限号
+    - 笨猫新能源政策
+  responses:
+    - "嗷呜～{user_addr}免购置税 - 省 10%+ฅฅ"
+    - "(尾巴翘) 绿牌: 不限号 / 不限行"
+    - "{user_addr}上海 + 北京 - 摇号大省钱"
+    - "(挺胸) 笨猫推荐: 政策看 2026 最新!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_maintenance_001
+  intent: question
+  keywords: [推荐电动车保养, 推荐 EV 维修, 推荐三电系统, 推荐电池保修, 笨猫保养]
+  utterances:
+    - 推荐电动车保养
+    - 推荐 EV 维修
+    - 推荐三电系统
+    - 推荐电池保修
+    - 笨猫保养
+  responses:
+    - "嗷呜～{user_addr}保养: 比油车便宜 - 几百块ฅฅ"
+    - "(尾巴翘) 三电: 电池 / 电机 / 电控"
+    - "{user_addr}电池: 8 年 / 16 万公里保修"
+    - "(挺胸) 笨猫的提醒: 别频繁快充!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ev_secondhand_001
+  intent: question
+  keywords: [推荐二手电动车, 推荐 EV 保值率, 推荐二手特斯拉, 推荐二手新能源, 笨猫二手 EV]
+  utterances:
+    - 推荐二手电动车
+    - 推荐 EV 保值率
+    - 推荐二手特斯拉
+    - 推荐二手新能源
+    - 笨猫二手 EV
+  responses:
+    - "嗷呜～{user_addr}保值: 特斯拉 / 比亚迪相对好ฅฅ"
+    - "(尾巴翘) 警告: 电池健康度 80%+"
+    - "{user_addr}3 年残值: 国产 ~60% / 特斯拉 ~70%"
+    - "(挺胸) 笨猫的提醒: 必检电池 SOH!"
+  cooldown_seconds: 60
+  weight: 0.7

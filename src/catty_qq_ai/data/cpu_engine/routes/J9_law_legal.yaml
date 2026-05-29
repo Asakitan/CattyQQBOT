@@ -1,0 +1,206 @@
+# 法律 / 合同 / 民法典 / 劳动法 routes (S6 R121 NLU 节点扩充, 第十一周期 buffered 10/10 完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: law_civil_code_001
+  intent: question
+  keywords: [推荐民法典, 推荐民法典学习, 推荐人格权, 推荐物权法, 笨猫民法典]
+  utterances:
+    - 推荐民法典
+    - 推荐民法典学习
+    - 推荐人格权
+    - 推荐物权法
+    - 笨猫民法典
+  responses:
+    - "嗷呜～{user_addr}民法典: 2021 实施 / 1260 条款ฅฅ"
+    - "(尾巴翘) 七编: 总则 / 物权 / 合同 / 人格 / 婚姻 / 继承 / 侵权"
+    - "{user_addr}重要: 离婚冷静期 / 高空抛物"
+    - "(挺胸) 笨猫推荐: 法律咨询 - 找律师!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: law_labor_001
+  intent: question
+  keywords: [推荐劳动法, 推荐劳动合同, 推荐加班费, 推荐 996, 笨猫劳动法]
+  utterances:
+    - 推荐劳动法
+    - 推荐劳动合同
+    - 推荐加班费
+    - 推荐 996
+    - 笨猫劳动法
+  responses:
+    - "嗷呜～{user_addr}劳动合同: 必签 / 不签双薪ฅฅ"
+    - "(尾巴翘) 加班: 1.5/2/3 倍 - 工作日/休/节"
+    - "{user_addr}996: 违法! 可仲裁"
+    - "(挺胸) 笨猫推荐: 留证据 - 微信记录!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: law_contract_001
+  intent: question
+  keywords: [推荐合同审查, 推荐合同陷阱, 推荐合同条款, 推荐违约责任, 笨猫合同]
+  utterances:
+    - 推荐合同审查
+    - 推荐合同陷阱
+    - 推荐合同条款
+    - 推荐违约责任
+    - 笨猫合同
+  responses:
+    - "嗷呜～{user_addr}重点: 标的 / 履行 / 违约 / 争议ฅฅ"
+    - "(尾巴翘) 陷阱: 模糊条款 / 单方 / 霸王"
+    - "{user_addr}违约金 < 30% / 超法院降"
+    - "(挺胸) 笨猫的提醒: 别盲签! 找律师审"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: law_dispute_001
+  intent: question
+  keywords: [推荐劳动仲裁, 推荐欠薪, 推荐解除合同, 推荐违法解除, 笨猫劳动仲裁]
+  utterances:
+    - 推荐劳动仲裁
+    - 推荐欠薪
+    - 推荐解除合同
+    - 推荐违法解除
+    - 笨猫劳动仲裁
+  responses:
+    - "嗷呜～{user_addr}仲裁: 当地劳动局 / 免费ฅฅ"
+    - "(尾巴翘) 时效: 1 年 - 别拖"
+    - "{user_addr}违法解除: 双倍赔偿"
+    - "(挺胸) 笨猫推荐: 12333 工资热线!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: law_property_001
+  intent: question
+  keywords: [推荐房屋纠纷, 推荐物权法, 推荐相邻权, 推荐共有, 笨猫房屋纠纷]
+  utterances:
+    - 推荐房屋纠纷
+    - 推荐物权法
+    - 推荐相邻权
+    - 推荐共有
+    - 笨猫房屋纠纷
+  responses:
+    - "嗷呜～{user_addr}相邻权: 楼上漏水 - 物权法保护ฅฅ"
+    - "(尾巴翘) 共有: 共同 vs 按份 - 性质不同"
+    - "{user_addr}婚后房产: 默认共同"
+    - "(挺胸) 笨猫推荐: 房产证 + 协议 - 双保险"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: law_marriage_001
+  intent: question
+  keywords: [推荐离婚, 推荐离婚律师, 推荐离婚冷静期, 推荐财产分割, 笨猫离婚]
+  utterances:
+    - 推荐离婚
+    - 推荐离婚律师
+    - 推荐离婚冷静期
+    - 推荐财产分割
+    - 笨猫离婚
+  responses:
+    - "嗷呜～{user_addr}冷静期: 协议离婚 30 天ฅฅ"
+    - "(尾巴翘) 诉讼: 调解 → 判决 / 半年起"
+    - "{user_addr}财产: 一般 50/50 / 子女利益优先"
+    - "(挺胸) 笨猫的提醒: 婚前协议有用!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: law_inheritance_001
+  intent: question
+  keywords: [推荐继承, 推荐遗嘱, 推荐遗产, 推荐继承顺序, 笨猫继承]
+  utterances:
+    - 推荐继承
+    - 推荐遗嘱
+    - 推荐遗产
+    - 推荐继承顺序
+    - 笨猫继承
+  responses:
+    - "嗷呜～{user_addr}第一顺位: 配偶 / 子女 / 父母ฅฅ"
+    - "(尾巴翘) 遗嘱: 自书 / 公证 / 录音录像"
+    - "{user_addr}遗赠: 给非法定人 / 须公证"
+    - "(挺胸) 笨猫推荐: 立遗嘱 - 避免纠纷!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: law_consumer_001
+  intent: question
+  keywords: [推荐消费者权益, 推荐维权, 推荐 12315, 推荐消法, 笨猫消费维权]
+  utterances:
+    - 推荐消费者权益
+    - 推荐维权
+    - 推荐 12315
+    - 推荐消法
+    - 笨猫消费维权
+  responses:
+    - "嗷呜～{user_addr}消法: 7 天无理由 / 假货退一赔三ฅฅ"
+    - "(尾巴翘) 12315 投诉 / 黑猫投诉"
+    - "{user_addr}假一赔十 - 食品安全"
+    - "(挺胸) 笨猫推荐: 留小票!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: law_criminal_001
+  intent: question
+  keywords: [推荐刑法, 推荐犯罪, 推荐量刑, 推荐自首立功, 笨猫刑法]
+  utterances:
+    - 推荐刑法
+    - 推荐犯罪
+    - 推荐量刑
+    - 推荐自首立功
+    - 笨猫刑法
+  responses:
+    - "嗷呜～{user_addr}基本: 故意 vs 过失 / 主观要件ฅฅ"
+    - "(尾巴翘) 自首: 减轻 / 立功: 减刑"
+    - "{user_addr}盗窃 / 诈骗 - 数额定罪"
+    - "(挺胸) 笨猫的提醒: 别犯法! 万事三思"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: law_traffic_001
+  intent: question
+  keywords: [推荐交通事故, 推荐交通赔偿, 推荐酒驾, 推荐肇事逃逸, 笨猫交通事故]
+  utterances:
+    - 推荐交通事故
+    - 推荐交通赔偿
+    - 推荐酒驾
+    - 推荐肇事逃逸
+    - 笨猫交通事故
+  responses:
+    - "嗷呜～{user_addr}流程: 报警 / 拍照 / 走保险ฅฅ"
+    - "(尾巴翘) 酒驾: 20+ - 拘留 / 80+ - 醉驾"
+    - "{user_addr}逃逸: 直接吊销 + 刑事"
+    - "(挺胸) 笨猫的提醒: 喝酒别开车!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: law_lawyer_001
+  intent: question
+  keywords: [推荐律师, 推荐找律师, 推荐法律援助, 推荐律师收费, 笨猫律师]
+  utterances:
+    - 推荐律师
+    - 推荐找律师
+    - 推荐法律援助
+    - 推荐律师收费
+    - 笨猫律师
+  responses:
+    - "嗷呜～{user_addr}收费: 标的 1-5% / 几千到几万ฅฅ"
+    - "(尾巴翘) 援助: 经济困难 / 免费"
+    - "{user_addr}咨询: 在线 50-300 / 面 200-500"
+    - "(挺胸) 笨猫推荐: 12348 法律援助热线!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: law_intellectual_001
+  intent: question
+  keywords: [推荐知识产权, 推荐版权, 推荐商标, 推荐专利, 笨猫知识产权]
+  utterances:
+    - 推荐知识产权
+    - 推荐版权
+    - 推荐商标
+    - 推荐专利
+    - 笨猫知识产权
+  responses:
+    - "嗷呜～{user_addr}版权: 自动产生 / 一辈子 + 50 年ฅฅ"
+    - "(尾巴翘) 商标: 注册 - 10 年 / 续展"
+    - "{user_addr}专利: 发明 20 年 / 实用 10 年"
+    - "(挺胸) 笨猫推荐: 注册保护 - 别裸奔!"
+  cooldown_seconds: 60
+  weight: 0.8

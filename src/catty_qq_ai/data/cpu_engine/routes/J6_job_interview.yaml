@@ -1,0 +1,206 @@
+# 职场 / 求职 / 面试 / 简历 / 跳槽 routes (S6 R118 NLU 节点扩充, 第十一周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: job_resume_001
+  intent: question
+  keywords: [推荐简历, 推荐写简历, 推荐简历模板, 推荐 STAR 法则, 笨猫简历]
+  utterances:
+    - 推荐简历
+    - 推荐写简历
+    - 推荐简历模板
+    - 推荐 STAR 法则
+    - 笨猫简历
+  responses:
+    - "嗷呜～{user_addr}STAR: Situation / Task / Action / Resultฅฅ"
+    - "(尾巴翘) 1 页搞定 / 量化成果 - 提了 30%"
+    - "{user_addr}模板: 超级简历 / 五百丁 / Canva"
+    - "(挺胸) 笨猫的提醒: 别复制粘贴! 改针对岗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: job_interview_001
+  intent: question
+  keywords: [推荐面试, 推荐面试技巧, 推荐面试问题, 推荐应对面试, 笨猫面试]
+  utterances:
+    - 推荐面试
+    - 推荐面试技巧
+    - 推荐面试问题
+    - 推荐应对面试
+    - 笨猫面试
+  responses:
+    - "嗷呜～{user_addr}必备: 自我介绍 / 项目经历 / 离职原因ฅฅ"
+    - "(尾巴翘) 反问环节: 别说没问题! 至少 2-3 个"
+    - "{user_addr}弱点: 改进版 / 别提核心能力"
+    - "(挺胸) 笨猫推荐: Mock 面试 - 找朋友模拟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: job_search_001
+  intent: question
+  keywords: [推荐求职, 推荐找工作, 推荐 BOSS 直聘, 推荐拉勾, 笨猫找工作]
+  utterances:
+    - 推荐求职
+    - 推荐找工作
+    - 推荐 BOSS 直聘
+    - 推荐拉勾
+    - 笨猫找工作
+  responses:
+    - "嗷呜～{user_addr}BOSS 直聘 - 互联网首选ฅฅ"
+    - "(尾巴翘) 拉勾 / 智联 / 前程无忧"
+    - "{user_addr}领英: 外企 / 高端职位"
+    - "(挺胸) 笨猫的提醒: 内推 > 海投! 找熟人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: job_offer_001
+  intent: question
+  keywords: [推荐 offer, 推荐谈薪, 推荐入职, 推荐选择 offer, 笨猫 offer]
+  utterances:
+    - 推荐 offer
+    - 推荐谈薪
+    - 推荐入职
+    - 推荐选择 offer
+    - 笨猫 offer
+  responses:
+    - "嗷呜～{user_addr}谈薪: 心理预期 +20% / 别报死价ฅฅ"
+    - "(尾巴翘) 看 base + 奖金 + 期权 / 别只看月薪"
+    - "{user_addr}多 offer: 公司 / 岗位 / 团队 - 综合"
+    - "(挺胸) 笨猫推荐: 别只看钱! 成长更重要"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: job_quit_001
+  intent: question
+  keywords: [推荐离职, 推荐辞职, 推荐裸辞, 推荐离职话术, 笨猫离职]
+  utterances:
+    - 推荐离职
+    - 推荐辞职
+    - 推荐裸辞
+    - 推荐离职话术
+    - 笨猫离职
+  responses:
+    - "嗷呜～{user_addr}流程: 找好下家 → 提辞 → 30 天交接ฅฅ"
+    - "(尾巴翘) 离职原因: 个人发展 - 通用"
+    - "{user_addr}裸辞慎重! 经济压力大"
+    - "(挺胸) 笨猫的提醒: 别撕破脸! 圈子小"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: job_promotion_001
+  intent: question
+  keywords: [推荐升职, 推荐晋升, 推荐绩效, 推荐 KPI, 笨猫升职]
+  utterances:
+    - 推荐升职
+    - 推荐晋升
+    - 推荐绩效
+    - 推荐 KPI
+    - 笨猫升职
+  responses:
+    - "嗷呜～{user_addr}晋升: 做对事 + 让对人知道ฅฅ"
+    - "(尾巴翘) KPI: 量化业绩 - 数字说话"
+    - "{user_addr}OKR: 目标 + 关键结果"
+    - "(挺胸) 笨猫推荐: 1on1 主动汇报!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: job_skill_001
+  intent: question
+  keywords: [推荐职场技能, 推荐沟通技巧, 推荐汇报技能, 推荐项目管理, 笨猫职场技能]
+  utterances:
+    - 推荐职场技能
+    - 推荐沟通技巧
+    - 推荐汇报技能
+    - 推荐项目管理
+    - 笨猫职场技能
+  responses:
+    - "嗷呜～{user_addr}必备: 表达 + 沟通 + 协作ฅฅ"
+    - "(尾巴翘) 金字塔原理 - 麦肯锡"
+    - "{user_addr}时间管理: GTD / 番茄钟"
+    - "(挺胸) 笨猫推荐: 多看商业书!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: job_certificate_001
+  intent: question
+  keywords: [推荐职业资格证, 推荐 PMP, 推荐 CFA, 推荐司法考试, 笨猫职业证书]
+  utterances:
+    - 推荐职业资格证
+    - 推荐 PMP
+    - 推荐 CFA
+    - 推荐司法考试
+    - 笨猫职业证书
+  responses:
+    - "嗷呜～{user_addr}PMP: 项目管理金字招牌 / 6000 学费ฅฅ"
+    - "(尾巴翘) CFA: 金融神证 / 3 级 / 5+ 年"
+    - "{user_addr}司考: 法律必考 / 难度顶级"
+    - "(挺胸) 笨猫推荐: CPA / 一建 / 教师资格"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: job_career_001
+  intent: question
+  keywords: [推荐职业规划, 推荐转行, 推荐职业方向, 推荐发展路径, 笨猫职业规划]
+  utterances:
+    - 推荐职业规划
+    - 推荐转行
+    - 推荐职业方向
+    - 推荐发展路径
+    - 笨猫职业规划
+  responses:
+    - "嗷呜～{user_addr}3-5 年定位 / 兴趣 + 能力 + 趋势ฅฅ"
+    - "(尾巴翘) T 型人才: 一专多能"
+    - "{user_addr}转行黄金期: 28-32"
+    - "(挺胸) 笨猫推荐: 跟 5 年后的自己对话!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: job_internship_001
+  intent: question
+  keywords: [推荐实习, 推荐校招, 推荐应届生, 推荐管培生, 笨猫实习]
+  utterances:
+    - 推荐实习
+    - 推荐校招
+    - 推荐应届生
+    - 推荐管培生
+    - 笨猫实习
+  responses:
+    - "嗷呜～{user_addr}实习: 大三起 / 不嫌晚ฅฅ"
+    - "(尾巴翘) 校招: 9-11 月秋招 + 春招 3-5 月"
+    - "{user_addr}管培生: 大厂顶级 / 待遇好"
+    - "(挺胸) 笨猫推荐: 实习 > 学历! 经验"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: job_freelance_001
+  intent: question
+  keywords: [推荐自由职业, 推荐 SOHO, 推荐独立顾问, 推荐数字游民, 笨猫自由职业]
+  utterances:
+    - 推荐自由职业
+    - 推荐 SOHO
+    - 推荐独立顾问
+    - 推荐数字游民
+    - 笨猫自由职业
+  responses:
+    - "嗷呜～{user_addr}热门: 写作 / 设计 / 程序 / 咨询ฅฅ"
+    - "(尾巴翘) 平台: Upwork / Fiverr / 猪八戒"
+    - "{user_addr}数字游民: 大理 / 清迈"
+    - "(挺胸) 笨猫的提醒: 没社保! 自己交"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: job_management_001
+  intent: question
+  keywords: [推荐管理者, 推荐 leader, 推荐带团队, 推荐管理课程, 笨猫管理者]
+  utterances:
+    - 推荐管理者
+    - 推荐 leader
+    - 推荐带团队
+    - 推荐管理课程
+    - 笨猫管理者
+  responses:
+    - "嗷呜～{user_addr}经典: 《卓有成效的管理者》德鲁克ฅฅ"
+    - "(尾巴翘) 高效能: 史蒂芬·柯维 / 7 习惯"
+    - "{user_addr}带人: 1on1 + OKR + Feedback"
+    - "(挺胸) 笨猫的提醒: 别管事! 管人 / 管目标"
+  cooldown_seconds: 60
+  weight: 0.8

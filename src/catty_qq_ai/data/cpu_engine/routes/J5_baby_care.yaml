@@ -1,0 +1,207 @@
+# 新生儿 / 婴幼儿 / 奶粉 / 育儿 routes (S6 R117 NLU 节点扩充, 第十一周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 I3 pregnancy_medical (孕期/产后) 区分: 这里专注 0-3 岁宝宝护理.
+
+- name: baby_formula_001
+  intent: question
+  keywords: [推荐婴儿奶粉, 推荐配方奶, 推荐 1 段奶粉, 推荐进口奶粉, 笨猫奶粉]
+  utterances:
+    - 推荐婴儿奶粉
+    - 推荐配方奶
+    - 推荐 1 段奶粉
+    - 推荐进口奶粉
+    - 笨猫奶粉
+  responses:
+    - "嗷呜～{user_addr}进口: 爱他美 / 美素佳儿 / Aptamilฅฅ"
+    - "(尾巴翘) 国货: 飞鹤 / 君乐宝 - 通过新国标"
+    - "{user_addr}1 段 0-6 月 / 2 段 6-12 月 / 3 段 1+"
+    - "(挺胸) 笨猫的提醒: 母乳 > 奶粉! 别盲目换"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: baby_diaper_001
+  intent: question
+  keywords: [推荐纸尿裤, 推荐尤妮佳, 推荐花王, 推荐帮宝适, 笨猫纸尿裤]
+  utterances:
+    - 推荐纸尿裤
+    - 推荐尤妮佳
+    - 推荐花王
+    - 推荐帮宝适
+    - 笨猫纸尿裤
+  responses:
+    - "嗷呜～{user_addr}尤妮佳: 日系 / 透气王ฅฅ"
+    - "(尾巴翘) 花王 / 大王 / 妙而舒"
+    - "{user_addr}帮宝适 / 好奇 - 美系"
+    - "(挺胸) 笨猫推荐: 别冲动屯! 长大尺寸换快"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: baby_food_001
+  intent: question
+  keywords: [推荐辅食, 推荐婴儿米粉, 推荐宝宝零食, 推荐 6 月辅食, 笨猫辅食]
+  utterances:
+    - 推荐辅食
+    - 推荐婴儿米粉
+    - 推荐宝宝零食
+    - 推荐 6 月辅食
+    - 笨猫辅食
+  responses:
+    - "嗷呜～{user_addr}6 月起步: 米粉 → 蔬菜泥 → 肉泥ฅฅ"
+    - "(尾巴翘) 嘉宝 / 亨氏 / 小皮 - 大牌"
+    - "{user_addr}自制: 蒸南瓜 / 苹果泥 - 新鲜"
+    - "(挺胸) 笨猫的提醒: 一岁前别加盐!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: baby_sleep_001
+  intent: question
+  keywords: [推荐宝宝睡眠, 推荐哄睡, 推荐婴儿安抚, 推荐睡眠训练, 笨猫宝宝睡眠]
+  utterances:
+    - 推荐宝宝睡眠
+    - 推荐哄睡
+    - 推荐婴儿安抚
+    - 推荐睡眠训练
+    - 笨猫宝宝睡眠
+  responses:
+    - "嗷呜～{user_addr}0-3 月: 嗨抱 / 包裹 / 白噪音ฅฅ"
+    - "(尾巴翘) 抱睡 - 别养成 / 适当放下"
+    - "{user_addr}6 月起睡眠训练 - 抱起放下法"
+    - "(挺胸) 笨猫的提醒: 别强求一夜! 慢慢来"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: baby_walker_001
+  intent: question
+  keywords: [推荐学步车, 推荐围栏, 推荐爬行垫, 推荐婴儿床, 笨猫学步车]
+  utterances:
+    - 推荐学步车
+    - 推荐围栏
+    - 推荐爬行垫
+    - 推荐婴儿床
+    - 笨猫学步车
+  responses:
+    - "嗷呜～{user_addr}爬行垫: XPE - 安全无毒 / 必备ฅฅ"
+    - "(尾巴翘) 围栏: 让宝宝自由玩 / 6-12 月"
+    - "{user_addr}婴儿床: 蒙特梭利 - 落地式"
+    - "(挺胸) 笨猫的提醒: 别用学步车! WHO 不推荐"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: baby_toy_001
+  intent: question
+  keywords: [推荐婴儿玩具, 推荐益智玩具, 推荐 0-1 岁玩具, 推荐感官玩具, 笨猫婴儿玩具]
+  utterances:
+    - 推荐婴儿玩具
+    - 推荐益智玩具
+    - 推荐 0-1 岁玩具
+    - 推荐感官玩具
+    - 笨猫婴儿玩具
+  responses:
+    - "嗷呜～{user_addr}0-3 月: 黑白卡 / 床铃ฅฅ"
+    - "(尾巴翘) 3-6 月: 牙胶 / 摇铃 / 健身架"
+    - "{user_addr}6-12 月: 积木 / 形状盒"
+    - "(挺胸) 笨猫推荐: 别多! 经典就好"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: baby_health_001
+  intent: question
+  keywords: [推荐宝宝感冒, 推荐宝宝发烧, 推荐婴儿湿疹, 推荐红屁屁, 笨猫宝宝健康]
+  utterances:
+    - 推荐宝宝感冒
+    - 推荐宝宝发烧
+    - 推荐婴儿湿疹
+    - 推荐红屁屁
+    - 笨猫宝宝健康
+  responses:
+    - "嗷呜～{user_addr}发烧 38.5+ 就诊!ฅฅ"
+    - "(尾巴翘) 湿疹: 保湿 + 戒口 / 雅漾"
+    - "{user_addr}红屁屁: 勤换尿布 + 屁屁霜"
+    - "(挺胸) 笨猫的提醒: 别滥用抗生素!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: baby_clothes_001
+  intent: question
+  keywords: [推荐婴儿服装, 推荐 A 类宝宝衣服, 推荐宝宝内衣, 推荐和尚服, 笨猫宝宝衣服]
+  utterances:
+    - 推荐婴儿服装
+    - 推荐 A 类宝宝衣服
+    - 推荐宝宝内衣
+    - 推荐和尚服
+    - 笨猫宝宝衣服
+  responses:
+    - "嗷呜～{user_addr}必看: A 类 - 婴幼儿安全标ฅฅ"
+    - "(尾巴翘) 棉 100% / 别买涤纶"
+    - "{user_addr}款式: 和尚服 / 哈衣 / 连体衣"
+    - "(挺胸) 笨猫推荐: 别屯太多! 长得快"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: baby_vaccine_001
+  intent: question
+  keywords: [推荐疫苗, 推荐儿童疫苗, 推荐自费疫苗, 推荐五联疫苗, 笨猫疫苗]
+  utterances:
+    - 推荐疫苗
+    - 推荐儿童疫苗
+    - 推荐自费疫苗
+    - 推荐五联疫苗
+    - 笨猫疫苗
+  responses:
+    - "嗷呜～{user_addr}一类: 必打 / 免费 / 国家计划ฅฅ"
+    - "(尾巴翘) 二类自费: 13 价肺炎 / 五联 / 流脑"
+    - "{user_addr}13 价: 关键 / 1500+ / 别犹豫"
+    - "(挺胸) 笨猫推荐: 按时打! 别错过窗口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: baby_stroller_001
+  intent: question
+  keywords: [推荐婴儿车, 推荐推车, 推荐 Bugaboo, 推荐 Stokke, 笨猫婴儿车]
+  utterances:
+    - 推荐婴儿车
+    - 推荐推车
+    - 推荐 Bugaboo
+    - 推荐 Stokke
+    - 笨猫婴儿车
+  responses:
+    - "嗷呜～{user_addr}高端: Bugaboo / Stokke - 3000+ฅฅ"
+    - "(尾巴翘) 中端: Joie / 巧儿宜 / 葛莱"
+    - "{user_addr}国货: 好孩子 / Maxicosi"
+    - "(挺胸) 笨猫推荐: 看避震 + 折叠便利"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: baby_carseat_001
+  intent: question
+  keywords: [推荐儿童安全座椅, 推荐安全座椅品牌, 推荐 Britax, 推荐 Cybex, 笨猫安全座椅]
+  utterances:
+    - 推荐儿童安全座椅
+    - 推荐安全座椅品牌
+    - 推荐 Britax
+    - 推荐 Cybex
+    - 笨猫安全座椅
+  responses:
+    - "嗷呜～{user_addr}高端: Cybex / Britax / Maxi-Cosiฅฅ"
+    - "(尾巴翘) ECE R44 / R129 (i-Size) - 认证"
+    - "{user_addr}国货: 宝得适 / 好孩子"
+    - "(挺胸) 笨猫的提醒: ISOFIX 接口! 必装"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: baby_dev_001
+  intent: question
+  keywords: [推荐宝宝发育, 推荐生长发育, 推荐运动发展, 推荐语言发展, 笨猫宝宝发育]
+  utterances:
+    - 推荐宝宝发育
+    - 推荐生长发育
+    - 推荐运动发展
+    - 推荐语言发展
+    - 笨猫宝宝发育
+  responses:
+    - "嗷呜～{user_addr}三抬六坐七滚八爬 - 一般规律ฅฅ"
+    - "(尾巴翘) 1 岁喊妈妈 / 2 岁说短句"
+    - "{user_addr}早教: 多互动 > 报班"
+    - "(挺胸) 笨猫推荐: 跟小儿保健科! 体检"
+  cooldown_seconds: 60
+  weight: 0.9

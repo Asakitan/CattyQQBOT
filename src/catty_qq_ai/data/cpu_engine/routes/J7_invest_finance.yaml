@@ -1,0 +1,206 @@
+# 投资 / 股票 / 基金 / 期货 / 港美股 routes (S6 R119 NLU 节点扩充, 第十一周期 buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: inv_a_stock_001
+  intent: question
+  keywords: [推荐 A 股, 推荐 A 股入门, 推荐沪深 300, 推荐大盘股, 笨猫 A 股]
+  utterances:
+    - 推荐 A 股
+    - 推荐 A 股入门
+    - 推荐沪深 300
+    - 推荐大盘股
+    - 笨猫 A 股
+  responses:
+    - "嗷呜～{user_addr}A 股: 上证 + 深证 + 创业 + 科创ฅฅ"
+    - "(尾巴翘) 沪深 300: 蓝筹龙头 / 大盘代表"
+    - "{user_addr}T+1 / 涨跌停 10% / 创业 20%"
+    - "(挺胸) 笨猫的提醒: 别加杠杆! 别融资融券"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: inv_hk_stock_001
+  intent: question
+  keywords: [推荐港股, 推荐港股通, 推荐恒生指数, 推荐腾讯阿里, 笨猫港股]
+  utterances:
+    - 推荐港股
+    - 推荐港股通
+    - 推荐恒生指数
+    - 推荐腾讯阿里
+    - 笨猫港股
+  responses:
+    - "嗷呜～{user_addr}恒生科技: 腾讯 / 阿里 / 美团 / 京东ฅฅ"
+    - "(尾巴翘) 港股通: 50W 门槛 / 老虎/富途"
+    - "{user_addr}T+0 / 无涨跌停 / 自由波动"
+    - "(挺胸) 笨猫推荐: AH 溢价 - 套利机会"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: inv_us_stock_001
+  intent: question
+  keywords: [推荐美股, 推荐纳斯达克, 推荐道指, 推荐 SP500, 笨猫美股]
+  utterances:
+    - 推荐美股
+    - 推荐纳斯达克
+    - 推荐道指
+    - 推荐 SP500
+    - 笨猫美股
+  responses:
+    - "嗷呜～{user_addr}科技七大: 苹果 / 微软 / 谷歌 / 亚马逊 / Meta / 特斯拉 / 英伟达ฅฅ"
+    - "(尾巴翘) ETF: SPY / QQQ / VOO"
+    - "{user_addr}T+0 / 无涨跌停 / 24h 期权"
+    - "(挺胸) 笨猫的提醒: 汇率风险!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: inv_fund_001
+  intent: question
+  keywords: [推荐基金, 推荐买基金, 推荐天天基金, 推荐蚂蚁基金, 笨猫基金]
+  utterances:
+    - 推荐基金
+    - 推荐买基金
+    - 推荐天天基金
+    - 推荐蚂蚁基金
+    - 笨猫基金
+  responses:
+    - "嗷呜～{user_addr}指数基金: 沪深 300 / 中证 500 - 稳健ฅฅ"
+    - "(尾巴翘) 主动基金: 看基金经理 / 历史业绩"
+    - "{user_addr}平台: 天天基金 / 支付宝 / 微信"
+    - "(挺胸) 笨猫推荐: 定投 - 平滑波动!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: inv_etf_001
+  intent: question
+  keywords: [推荐 ETF, 推荐 ETF 基金, 推荐宽基 ETF, 推荐行业 ETF, 笨猫 ETF]
+  utterances:
+    - 推荐 ETF
+    - 推荐 ETF 基金
+    - 推荐宽基 ETF
+    - 推荐行业 ETF
+    - 笨猫 ETF
+  responses:
+    - "嗷呜～{user_addr}宽基: 沪深 300ETF / 中证 500ETF / 创业板 ETFฅฅ"
+    - "(尾巴翘) 行业: 新能源 / 半导体 / 医药"
+    - "{user_addr}场内交易 - 像股票一样"
+    - "(挺胸) 笨猫推荐: 费率低 + 透明 + 流动!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: inv_bond_001
+  intent: question
+  keywords: [推荐债券, 推荐国债, 推荐企业债, 推荐可转债, 笨猫债券]
+  utterances:
+    - 推荐债券
+    - 推荐国债
+    - 推荐企业债
+    - 推荐可转债
+    - 笨猫债券
+  responses:
+    - "嗷呜～{user_addr}国债: 国家信用 / 最安全 / 收益 3%ฅฅ"
+    - "(尾巴翘) 企业债: 收益高 / 风险大"
+    - "{user_addr}可转债: 进可攻 / 退可守"
+    - "(挺胸) 笨猫推荐: 国债逆回购 - 节假日!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: inv_futures_001
+  intent: question
+  keywords: [推荐期货, 推荐商品期货, 推荐股指期货, 推荐黄金期货, 笨猫期货]
+  utterances:
+    - 推荐期货
+    - 推荐商品期货
+    - 推荐股指期货
+    - 推荐黄金期货
+    - 笨猫期货
+  responses:
+    - "嗷呜～{user_addr}商品: 螺纹钢 / 铁矿 / 豆粕ฅฅ"
+    - "(尾巴翘) 股指: 沪深 300IF / 中证 500IC"
+    - "{user_addr}T+0 / 双向 / 杠杆 10倍 - 高风险"
+    - "(挺胸) 笨猫的提醒: 新手别碰! 容易爆仓"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: inv_options_001
+  intent: question
+  keywords: [推荐期权, 推荐 50ETF 期权, 推荐认购认沽, 推荐期权策略, 笨猫期权]
+  utterances:
+    - 推荐期权
+    - 推荐 50ETF 期权
+    - 推荐认购认沽
+    - 推荐期权策略
+    - 笨猫期权
+  responses:
+    - "嗷呜～{user_addr}50ETF / 300ETF / 500ETF 期权 - 国内主流ฅฅ"
+    - "(尾巴翘) 美股: 个股期权 / 灵活策略"
+    - "{user_addr}策略: 备兑 / 跨式 / 蝶式"
+    - "(挺胸) 笨猫的提醒: 别裸卖! 风险无限"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: inv_metal_001
+  intent: question
+  keywords: [推荐黄金投资, 推荐白银, 推荐金条, 推荐 ETF 黄金, 笨猫黄金]
+  utterances:
+    - 推荐黄金投资
+    - 推荐白银
+    - 推荐金条
+    - 推荐 ETF 黄金
+    - 笨猫黄金
+  responses:
+    - "嗷呜～{user_addr}避险神器 / 抗通胀 / 长持有ฅฅ"
+    - "(尾巴翘) 形式: 金条 / 金币 / ETF / 期货"
+    - "{user_addr}黄金 ETF: 518880 / 易交易"
+    - "(挺胸) 笨猫推荐: 别买饰品当投资!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: inv_crypto_001
+  intent: question
+  keywords: [推荐数字货币, 推荐比特币, 推荐以太坊, 推荐 BTC, 笨猫比特币]
+  utterances:
+    - 推荐数字货币
+    - 推荐比特币
+    - 推荐以太坊
+    - 推荐 BTC
+    - 笨猫比特币
+  responses:
+    - "嗷呜～{user_addr}BTC: 主流 / 数字黄金ฅฅ"
+    - "(尾巴翘) ETH: 智能合约 / 生态最强"
+    - "{user_addr}国内禁止交易! 注意法律"
+    - "(挺胸) 笨猫的提醒: 高风险! 别梭哈"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: inv_strategy_001
+  intent: question
+  keywords: [推荐投资策略, 推荐价值投资, 推荐技术分析, 推荐定投, 笨猫投资策略]
+  utterances:
+    - 推荐投资策略
+    - 推荐价值投资
+    - 推荐技术分析
+    - 推荐定投
+    - 笨猫投资策略
+  responses:
+    - "嗷呜～{user_addr}价值投资: 巴菲特 / 长持 / 看估值ฅฅ"
+    - "(尾巴翘) 技术分析: K 线 / MACD / 趋势"
+    - "{user_addr}定投: 平均成本 - 适合新手"
+    - "(挺胸) 笨猫推荐: 资产配置! 60/40 经典"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: inv_book_001
+  intent: question
+  keywords: [推荐投资书籍, 推荐聪明的投资者, 推荐巴菲特书, 推荐财务自由书, 笨猫投资书]
+  utterances:
+    - 推荐投资书籍
+    - 推荐聪明的投资者
+    - 推荐巴菲特书
+    - 推荐财务自由书
+    - 笨猫投资书
+  responses:
+    - "嗷呜～{user_addr}《聪明的投资者》格雷厄姆 - 圣经ฅฅ"
+    - "(尾巴翘) 《股票大作手回忆录》利弗摩尔"
+    - "{user_addr}《漫步华尔街》墨基尔 - 指数派"
+    - "(挺胸) 笨猫推荐: 巴菲特致股东信!"
+  cooldown_seconds: 60
+  weight: 0.8

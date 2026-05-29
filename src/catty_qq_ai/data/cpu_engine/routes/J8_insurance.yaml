@@ -1,0 +1,206 @@
+# 保险 / 医疗险 / 重疾险 / 养老险 routes (S6 R120 NLU 节点扩充, 第十一周期 buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: ins_medical_001
+  intent: question
+  keywords: [推荐百万医疗, 推荐医疗险, 推荐百万医疗险, 推荐尊享 e 生, 笨猫医疗险]
+  utterances:
+    - 推荐百万医疗
+    - 推荐医疗险
+    - 推荐百万医疗险
+    - 推荐尊享 e 生
+    - 笨猫医疗险
+  responses:
+    - "嗷呜～{user_addr}百万医疗: 几百块 / 报销 400Wฅฅ"
+    - "(尾巴翘) 平安 e 生保 / 众安尊享 e 生"
+    - "{user_addr}免赔 1W / 100% 赔"
+    - "(挺胸) 笨猫推荐: 每年必续! 别断保"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ins_critical_001
+  intent: question
+  keywords: [推荐重疾险, 推荐重大疾病险, 推荐康惠保, 推荐定期重疾, 笨猫重疾险]
+  utterances:
+    - 推荐重疾险
+    - 推荐重大疾病险
+    - 推荐康惠保
+    - 推荐定期重疾
+    - 笨猫重疾险
+  responses:
+    - "嗷呜～{user_addr}保额 30-50W / 30 岁前买便宜ฅฅ"
+    - "(尾巴翘) 定期: 保 30 年 / 性价比高"
+    - "{user_addr}终身: 保至 80+ / 保费高"
+    - "(挺胸) 笨猫推荐: 多次赔付 - 癌症 2 次!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ins_life_001
+  intent: question
+  keywords: [推荐寿险, 推荐定期寿险, 推荐意外险, 推荐人身保险, 笨猫寿险]
+  utterances:
+    - 推荐寿险
+    - 推荐定期寿险
+    - 推荐意外险
+    - 推荐人身保险
+    - 笨猫寿险
+  responses:
+    - "嗷呜～{user_addr}定期寿险: 家庭顶梁柱必备ฅฅ"
+    - "(尾巴翘) 保到 60-65 / 保额 100W+"
+    - "{user_addr}意外险: 一年百元 / 保 50W"
+    - "(挺胸) 笨猫推荐: 别买分红型 - 不划算!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ins_pension_001
+  intent: question
+  keywords: [推荐养老险, 推荐年金险, 推荐养老金, 推荐增额终身寿, 笨猫养老险]
+  utterances:
+    - 推荐养老险
+    - 推荐年金险
+    - 推荐养老金
+    - 推荐增额终身寿
+    - 笨猫养老险
+  responses:
+    - "嗷呜～{user_addr}增额终身寿: 现金价值 + 复利 3.5%ฅฅ"
+    - "(尾巴翘) 年金险: 60 岁后每月领"
+    - "{user_addr}个人养老金: 每年 12000 - 抵税"
+    - "(挺胸) 笨猫的提醒: 资金锁 20+ 年!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ins_kids_001
+  intent: question
+  keywords: [推荐儿童保险, 推荐少儿重疾, 推荐学平险, 推荐儿童医疗, 笨猫儿童保险]
+  utterances:
+    - 推荐儿童保险
+    - 推荐少儿重疾
+    - 推荐学平险
+    - 推荐儿童医疗
+    - 笨猫儿童保险
+  responses:
+    - "嗷呜～{user_addr}顺序: 医保 → 百万医 → 重疾 → 意外ฅฅ"
+    - "(尾巴翘) 少儿重疾: 30 年定期 / 1000+/年"
+    - "{user_addr}学平险: 学校发 / 一年 50-100"
+    - "(挺胸) 笨猫推荐: 别买教育金! 不如基金"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ins_health_insurance_001
+  intent: question
+  keywords: [推荐社保, 推荐医保, 推荐养老保险, 推荐失业保险, 笨猫社保]
+  utterances:
+    - 推荐社保
+    - 推荐医保
+    - 推荐养老保险
+    - 推荐失业保险
+    - 笨猫社保
+  responses:
+    - "嗷呜～{user_addr}五险一金: 社保 5 险 + 公积金ฅฅ"
+    - "(尾巴翘) 医保 - 报销门诊住院 / 必交"
+    - "{user_addr}养老: 15 年 + 退休"
+    - "(挺胸) 笨猫的提醒: 别断社保! 影响很大"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ins_car_001
+  intent: question
+  keywords: [推荐车险买法, 推荐三责险, 推荐车损险, 推荐玻璃险, 笨猫车险]
+  utterances:
+    - 推荐车险买法
+    - 推荐三责险
+    - 推荐车损险
+    - 推荐玻璃险
+    - 笨猫车险
+  responses:
+    - "嗷呜～{user_addr}三大件: 交强 + 三责 + 车损ฅฅ"
+    - "(尾巴翘) 三责至少 100W / 别买 50W"
+    - "{user_addr}车损: 老车可不买 / 新车必买"
+    - "(挺胸) 笨猫推荐: 别买座位险 - 鸡肋"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ins_home_001
+  intent: question
+  keywords: [推荐家财险, 推荐家庭财产保险, 推荐火灾保险, 推荐房屋保险, 笨猫家财险]
+  utterances:
+    - 推荐家财险
+    - 推荐家庭财产保险
+    - 推荐火灾保险
+    - 推荐房屋保险
+    - 笨猫家财险
+  responses:
+    - "嗷呜～{user_addr}家财险: 100-300/年 - 便宜ฅฅ"
+    - "(尾巴翘) 保: 火灾 / 漏水 / 盗抢"
+    - "{user_addr}三责: 漏水赔楼下"
+    - "(挺胸) 笨猫推荐: 装修后买 - 别忘!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ins_travel_001
+  intent: question
+  keywords: [推荐旅游险, 推荐境外医疗, 推荐申根保险, 推荐航班延误险, 笨猫旅游险]
+  utterances:
+    - 推荐旅游险
+    - 推荐境外医疗
+    - 推荐申根保险
+    - 推荐航班延误险
+    - 笨猫旅游险
+  responses:
+    - "嗷呜～{user_addr}国内: 几十块 / 保 50Wฅฅ"
+    - "(尾巴翘) 申根: 30W 医疗 + 30 天承保"
+    - "{user_addr}延误险: 2 小时起赔 / 100-500"
+    - "(挺胸) 笨猫推荐: 出门必买! 不贵"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ins_company_001
+  intent: question
+  keywords: [推荐保险公司, 推荐平安, 推荐太平洋, 推荐人保, 笨猫保险公司]
+  utterances:
+    - 推荐保险公司
+    - 推荐平安
+    - 推荐太平洋
+    - 推荐人保
+    - 笨猫保险公司
+  responses:
+    - "嗷呜～{user_addr}国寿 / 平安 / 太保 - 三大ฅฅ"
+    - "(尾巴翘) 友邦 / 中宏 - 高端外资"
+    - "{user_addr}众安 / 微保 - 互联网"
+    - "(挺胸) 笨猫的提醒: 看条款 > 看公司!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ins_claim_001
+  intent: question
+  keywords: [推荐理赔, 推荐保险理赔流程, 推荐理赔技巧, 推荐拒赔申诉, 笨猫理赔]
+  utterances:
+    - 推荐理赔
+    - 推荐保险理赔流程
+    - 推荐理赔技巧
+    - 推荐拒赔申诉
+    - 笨猫理赔
+  responses:
+    - "嗷呜～{user_addr}流程: 报案 → 资料 → 核保 → 赔ฅฅ"
+    - "(尾巴翘) 拒赔: 申诉 / 投诉银保监会"
+    - "{user_addr}重要: 保留所有发票!"
+    - "(挺胸) 笨猫的提醒: 如实告知 > 一切!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ins_planning_001
+  intent: question
+  keywords: [推荐保险规划, 推荐保险方案, 推荐家庭配置, 推荐保额计算, 笨猫保险规划]
+  utterances:
+    - 推荐保险规划
+    - 推荐保险方案
+    - 推荐家庭配置
+    - 推荐保额计算
+    - 笨猫保险规划
+  responses:
+    - "嗷呜～{user_addr}标普家庭: 4 大块 - 短保 + 杠杆 + 投资 + 安全ฅฅ"
+    - "(尾巴翘) 保费 < 年收入 10%"
+    - "{user_addr}保额: 重疾 = 收入 × 3-5 年"
+    - "(挺胸) 笨猫推荐: 先保大人! 再保小孩"
+  cooldown_seconds: 60
+  weight: 0.9
