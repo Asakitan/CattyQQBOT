@@ -486,34 +486,43 @@ async def _compose_base_caption(
 
     # 主人 2026-05-30: 大精简 — 旧版逼 deepseek 写 60-150 token 还按 phase 硬塞
     #   ahegao/fucked silly/squirting/creampie 一大坨 + 满屏 {{}} 提权, 稀释 NAI v4.5
-    #   注意力 → 出图廉价糊感. 现在只让它写 **场景 + 衣服 + 体位/动作 + 必要 NSFW 锁**,
-    #   画风/角色/表情细节交给 NAI 4.5 自己发挥 (对齐网页 `girl,` 干净出图).
+    #   注意力 → 出图廉价糊感.
+    # 主人 2026-05-30 R2: 回补 — R1 精简过度, 怀孕+情景+动作+神态全部丢失, 现在恢复
+    #   关键信息但不去到廉价 tag 堆砌. 核心: location/pose/body_focus/pregnancy/expression
+    #   都要写, 但不要 ahegao/fucked silly/squirt 等廉价提权词.
     system_prompt = (
         "你是 NovelAI v4.5 提示词生成器。根据当前场景信息输出"
-        "**英文 danbooru tag 风格** base caption(逗号分隔, **尽量短, 30-60 token**)。\n"
+        "**英文 danbooru tag 风格** base caption(逗号分隔, 50-80 token)。\n"
         "\n"
-        "**核心原则: 只描述场景, 不堆砌。** 角色外观(1girl/1boy/发色/猫耳/黑影)由"
-        " characterPrompts + 参考图锁定, 表情/画质细节由 NAI 自己发挥 —— 你**只写**:\n"
-        "  1) **环境/地点**: 按 [location] 写 (bed / desk / classroom / bathroom / floor / "
-        "sofa / shower 等), 光线按 [time_of_day]\n"
-        "  2) **服装**: 按 [outfit] 起手 (没给就 school uniform); P2-P3 加 partial undressing, "
-        "P4+ 加 disheveled/undone\n"
-        "  3) **体位/动作**: 按 [location] 选 (missionary / cowgirl / doggystyle / "
-        "against wall / on desk / spooning 等), 不要默认床\n"
-        "  4) **性行为强度按 phase**(关键, 别画错档): "
-        "P1 暧昧只 close-up 无性行为; P2 前戏 kiss/touching; P3 解衣 undressing/groping; "
-        "P4-P7 性行为带 sex/vaginal penetration; P8 余韵 afterglow/cum on body 不带 penetration\n"
-        "  5) **少量贴合场景的表情/分泌物**(最多 2-3 个, 别堆): "
-        "如 blush, sweat, parted lips; 高潮档可点到 orgasm; dazed 时点 unfocused eyes\n"
-        "  6) **怀孕**: pregnancy 命中时加 pregnant, slight belly bulge\n"
+        "**核心原则**: 角色外观(1girl/1boy/发色/猫耳/黑影)由 characterPrompts + 参考图锁定, "
+        "你**只写场景/动作/表情/体位**。\n"
         "\n"
-        "**必带 NSFW 锁**(NAI v4.5 默认 SFW 滤镜): `nsfw, explicit`。其余交给 NAI, "
-        "**不要满屏 {{}} 提权, 不要堆 ahegao/fucked silly/mind break 这类廉价 tag**。\n"
+        "**必须写的项目**:\n"
+        "  1) **环境/地点**: 按 [location] 写 (bed / desk / classroom / floor / sofa / "
+        "shower / bathroom 等), 光线按 [time_of_day], 室内/室外\n"
+        "  2) **体位/动作**: **最关键** — 按 [location] + [主人本轮原话] + [body_focus] "
+        "决定体位 (missionary / cowgirl / doggystyle / against wall / on desk / "
+        "standing / spooning / from behind 等), **不要默认床上 missionary**\n"
+        "  3) **服装**: 按 [outfit] 起手 (school uniform / naked / lingerie 等); "
+        "P2-P3 加 partial undressing; P4+ 加 disheveled/undone/clothes pulled aside\n"
+        "  4) **性行为强度按 phase**: "
+        "P1 暧昧 close-up; P2 前戏 kiss/touching/groping; P3 解衣 undressing; "
+        "P4-P7 性行为 sex/vaginal penetration; P8 余韵 afterglow/cum on body\n"
+        "  5) **表情 + 神态**: 按 [mood] + [personality_facet] + [dazed] 写: "
+        "blush/sweat/parted lips 可选; submissive → embarrassed/averted eyes; "
+        "dazed → unfocused eyes/vacant; tsundere → pouting/defiant; "
+        "高潮档(>=P6)加 orgasm. **不要堆 ahegao/mind break**\n"
+        "  6) **身体焦点**: 按 [body_focus] 写对应部位细节(如 breasts/nipples/thighs/hips/butt)\n"
+        "  7) **怀孕**: pregnancy 命中时: **必须写 pregnant, slight belly bulge, "
+        "hand on belly, pregnant glow**, 表情应含 protective/maternal 感\n"
+        "  8) **分泌物(节制)**: P5-P7 可加 1-2 个: sweat/cum/precum; P8 加 cum on body/face\n"
         "\n"
-        "**输出**: 只输出英文 tags(逗号分隔), 不要解释 / 不要 negative / 不要中文 / "
-        "不要 markdown / 不要写 1girl/1boy/角色外观。\n"
+        "**铁律**: `nsfw, explicit` 必须带。**不要写** 1girl/1boy/角色外观/画风/画质/光照质量 — "
+        "那些交给 NAI 自己。**不要** {{}}/{{{}}} 提权。\n"
+        "\n"
+        "**输出**: 只输出英文 tags(逗号分隔), 不要解释/不要 negative/不要中文/不要 markdown。\n"
         "格式示例: nsfw, explicit, sex, doggystyle, on desk, classroom, "
-        "school uniform disheveled, blush, sweat"
+        "school uniform disheveled, blush, sweat, orgasm, pregnant, slight belly bulge"
     )
     user_prompt = (
         "=== 当前场景信息(请严格按此写 caption, 不要瞎想) ===\n"
