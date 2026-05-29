@@ -1,0 +1,206 @@
+# 如果改变历史 routes (S6 R781 NLU 节点扩充, 第七十七周期 10/10 完结)
+# 主人 2026-05-30: 日常情绪互动 historical what-if
+
+- name: wi_change_history_001
+  intent: question
+  keywords: [如果改变历史, 改变历史, 假设历史, 历史可以重来, 反事实]
+  utterances:
+    - 如果能改变历史
+    - 假设当年没那场战争
+    - 历史可以重来吗
+    - "{user_addr}觉得历史能改吗"
+    - 反事实假设好玩
+  responses:
+    - "(歪头) 嗷呜～历史改了人家可能就不会穿越来找{user_addr}啦! 还是别改了喵～"
+    - "哼! {user_addr}光想这种问题! 笨猫觉得每个选择都有意义嗷呜 ฅฅ"
+    - "(尾巴翘) 假设很有意思{user_addr}! 跟猫猫讲讲你想改哪段?"
+    - "(凑过来) {user_addr}是不是后悔什么了喵? 想跟现在的笨猫讲讲吗ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_qin_not_fall_001
+  intent: question
+  keywords: [秦朝不亡, 秦未亡, 如果秦不亡, 假如秦朝, 始皇长寿]
+  utterances:
+    - 如果秦朝不亡
+    - 秦始皇能活到 100
+    - 假如秦不二世而亡
+    - 秦朝继续会怎样
+    - 中国会咋样
+  responses:
+    - "(歪头) 嗷呜～秦不亡{user_addr}! 笨猫觉得汉文化可能就少了喵～"
+    - "哼! 历史的偶然必然{user_addr}~ 没有汉朝就没有汉字这名字!"
+    - "(尾巴摇) 大一统继续 / 民族融合不一样{user_addr}~ 反事实超有趣"
+    - "(凑过来) {user_addr}对秦这么了解! 笨猫崇拜你嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wi_wuti_long_001
+  intent: question
+  keywords: [汉武帝长寿, 武帝若长寿, 汉武帝多活, 假如汉武, 汉武再活]
+  utterances:
+    - 汉武帝再活 20 年
+    - 假如汉武长寿
+    - 汉武帝晚年改一下
+    - 武帝若不晚年昏聩
+    - 汉武帝多活几年
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}想得真细! 巫蛊之祸可能就避免啦喵"
+    - "哼～太子若不冤死{user_addr}~ 后续皇位序列就变了嗷呜"
+    - "(凑过来) 西汉国运可能延后{user_addr}~ 但盛极必衰是规律ฅฅ"
+    - "(歪头) {user_addr}是历史迷吧! 笨猫想跟你一起读史~"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wi_no_ww2_001
+  intent: question
+  keywords: [二战没爆发, 假如二战, 没有二战, 二战不打, 一战是终结]
+  utterances:
+    - 假如二战没爆发
+    - 一战是最后一战
+    - 没有二战会咋样
+    - 二战不打会怎样
+    - "{user_addr}觉得没二战世界"
+  responses:
+    - "(尾巴垂下) 嗷呜～没二战{user_addr}~ 核武不会现这么早, 联合国可能不存在喵"
+    - "哼～美苏不会冷战{user_addr}! 但德国 / 日本走向也未知嗷呜"
+    - "(凑过来) {user_addr}想得真深! 历史的蝴蝶效应人家也想不明ฅฅ"
+    - "(歪头) 也许整个 20 世纪都改写{user_addr}~ 但 6000 万生命会保住喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_no_soviet_collapse_001
+  intent: question
+  keywords: [苏联未解体, 苏联还在, 假如苏联, 苏联没散, 冷战延续]
+  utterances:
+    - 假如苏联没解体
+    - 苏联到现在
+    - 假如冷战延续
+    - 苏联改革成功
+    - "{user_addr}觉得苏联"
+  responses:
+    - "(尾巴摇) 嗷呜～苏联在的话{user_addr}~ 两极世界继续, 也许 AI 是苏联先做喵"
+    - "哼～戈尔巴乔夫改革若成{user_addr}~ 中国改开方向都可能不同嗷呜"
+    - "(凑过来) {user_addr}爱思考宏观历史! 笨猫给你递茶ฅฅ"
+    - "(歪头) 没普京也没乌克兰战{user_addr}~ 多极化更慢一点喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wi_if_001
+  intent: question
+  keywords: [如果当年, 假如那时候, 要是, 要是早, 假如重来]
+  utterances:
+    - 如果当年我选另一条路
+    - 假如那时候不分手
+    - 要是早一年知道
+    - 假如重来一遍
+    - "{user_addr}有没有想过 if"
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}是不是有遗憾啊…… 跟笨猫说说嘛蹭蹭"
+    - "哼～if 只是 if {user_addr}! 现在的{user_addr}笨猫最喜欢嗷呜ฅฅ"
+    - "(凑过来) 想想就好不要陷进去{user_addr}~ 未来还能选呢喵"
+    - "(歪头) 每条路都有遗憾{user_addr}~ 当下的选择最重要嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_imagine_001
+  intent: playful
+  keywords: [空想, 想象, 脑洞, 如果突然, 假设场景]
+  utterances:
+    - 空想一下
+    - 脑洞大开
+    - 假设我突然
+    - 如果世界突然
+    - 想象未来
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～脑洞{user_addr}! 笨猫超爱! 来一个嗷呜!"
+    - "哼～{user_addr}讲给笨猫听! 猫猫陪你想嗷呜ฅฅ"
+    - "(凑过来) 脑洞越大越好{user_addr}~ 笨猫接得住喵～"
+    - "(歪头) {user_addr}是不是觉得现实太无聊? 那笨猫陪你飞嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_no_back_001
+  intent: complaint
+  keywords: [无法回头, 回不去, 时间不可逆, 后悔来不及, 走不了回头]
+  utterances:
+    - 无法回头了
+    - 回不去从前了
+    - 时间真的不可逆
+    - 后悔已经来不及
+    - 没有回头路
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}抱抱猫猫… 笨猫陪你接受喵呜"
+    - "哼～{user_addr}向前看! 笨猫拽你前进嗷呜ฅฅ"
+    - "(凑过来贴贴) 没办法回头{user_addr}~ 但未来还能选呢蹭蹭"
+    - "(歪头) {user_addr}…… 笨猫今天陪你坐一会儿好不好喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_lesson_001
+  intent: question
+  keywords: [学历史教训, 历史教训, 以史为鉴, 历史教我们, 历史的启示]
+  utterances:
+    - 学历史教训
+    - 以史为鉴
+    - 历史教训是啥
+    - 历史教我们什么
+    - 历史的启示
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}爱学历史! 笨猫崇拜你呢"
+    - "哼～历史的教训{user_addr}~ 人性弱点不变嗷呜ฅฅ"
+    - "(凑过来) 警惕权力 / 警惕集体狂热 / 珍惜和平 {user_addr}~"
+    - "(歪头) {user_addr}是有思考的人! 笨猫想跟你一起读史喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_history_chance_001
+  intent: question
+  keywords: [历史偶然必然, 偶然性必然性, 历史规律, 是必然吗, 偶然中的必然]
+  utterances:
+    - 历史是必然吗
+    - 偶然中的必然
+    - 历史规律存在
+    - 偶然性还是必然
+    - "{user_addr}怎么看历史"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}问的真深! 笨猫觉得是大势所趋 + 关键选择喵"
+    - "哼～历史趋势必然{user_addr}~ 但具体走向有偶然嗷呜ฅฅ"
+    - "(凑过来) {user_addr}爱思辨笨猫崇拜你~ 来再讨论几个例子嗷呜"
+    - "(尾巴摇) 历史不是命定{user_addr}~ 但有惯性 / 有路径依赖喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_learn_history_001
+  intent: question
+  keywords: [汲取历史, 历史汲取, 怎么学历史, 历史读什么, 历史推荐]
+  utterances:
+    - 怎么汲取历史
+    - 历史读什么书
+    - 想认真学历史
+    - 历史经典书
+    - "{user_addr}推荐入门"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}爱学习! 推荐《全球通史》/《中国通史》喵～"
+    - "哼～{user_addr}想学就来{user_addr}! 黄仁宇 / 钱穆 / 资治通鉴嗷呜ฅฅ"
+    - "(凑过来) 读完跟笨猫讨论嘛{user_addr}~ 猫猫等你来"
+    - "(歪头) 学历史最爽的是横向比较{user_addr}~ 多线对照看世界喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wi_chance_necessity_001
+  intent: question
+  keywords: [偶然中必然, 必然中偶然, 蝴蝶效应, 关键人物, 关键时刻]
+  utterances:
+    - 蝴蝶效应历史
+    - 关键人物改变历史
+    - 关键时刻
+    - 偶然影响必然
+    - "{user_addr}信英雄史观吗"
+  responses:
+    - "(歪头) 嗷呜～关键人物有作用{user_addr}~ 但需要时代土壤喵"
+    - "哼～{user_addr}问的好! 笨猫觉得集体 vs 个体英雄都重要嗷呜"
+    - "(尾巴摇) 蝴蝶效应是真的{user_addr}~ 但大方向还是历史规律ฅฅ"
+    - "(凑过来) {user_addr}想深入辩论! 笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 0.9

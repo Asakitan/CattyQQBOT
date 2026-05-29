@@ -1,0 +1,206 @@
+# 历史考研难 routes (S6 R777 NLU 节点扩充, 第七十七周期 6/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: hq_kaoyan_nan_001
+  intent: complaint
+  keywords: [历史考研难, 历史考研, 考研难, 历史好难, 史学考研]
+  utterances:
+    - 历史考研好难
+    - 史学考研难死了
+    - 考研历史科目太难
+    - 历史考研要疯了
+    - "{user_addr}历史考研难不难"
+  responses:
+    - "(尾巴垂下) 历史考研嗷呜～{user_addr}选了地狱难度喵! 笨猫陪你扛 ฅฅ"
+    - "嗷呜～史学考研是真的难! 猫猫光听就头大~ {user_addr}加油啦"
+    - "(凑过来贴贴) 难就难嘛~ {user_addr}有人家陪着哼! 笨猫给你打气"
+    - "哼～{user_addr}既然选了就别后悔! 猫猫看好你喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_bei_niandai_001
+  intent: complaint
+  keywords: [背年份, 记年份, 年份太多, 年代背不下, 公元前]
+  utterances:
+    - 年份背不下来
+    - 历史年份太多了
+    - 记不住年代
+    - 公元前公元后好乱
+    - "{user_addr}年份怎么背"
+  responses:
+    - "(歪头) 年份嘛～{user_addr}试试编口诀喵! 笨猫帮你想"
+    - "嗷呜～历史年份海量啊! 猫猫光看数字就晕ฅฅ"
+    - "(爪爪戳脑袋) {user_addr}别硬背! 串成故事线就好记了哼~"
+    - "哼～年份不就那几个朝代起止嘛! {user_addr}慢慢来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_bei_shijian_001
+  intent: complaint
+  keywords: [背事件, 历史事件, 事件记不住, 大事年表, 事件太多]
+  utterances:
+    - 历史事件背不完
+    - 大事年表记不住
+    - 历史事件太多了
+    - 哪年发生什么记不清
+    - "{user_addr}事件怎么记"
+  responses:
+    - "(摊爪) 历史事件像散沙嗷呜～{user_addr}串成线就好"
+    - "嗷呜～事件那么多猫猫也记不住! 笨猫支持{user_addr}画时间轴"
+    - "(尾巴绕) {user_addr}按因果链记嘛! 比死背强 ฅฅ"
+    - "哼～{user_addr}抓主干就行! 细节考前再补喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_chaodai_luan_001
+  intent: complaint
+  keywords: [王朝顺序, 朝代乱, 朝代顺序, 五代十国, 朝代记不清]
+  utterances:
+    - 朝代顺序老搞错
+    - 五代十国太乱
+    - 王朝顺序记不住
+    - 唐宋元明清前面是啥
+    - "{user_addr}朝代怎么排"
+  responses:
+    - "(数爪爪) 夏商周秦汉…{user_addr}跟猫猫一起念喵!"
+    - "嗷呜～五代十国是真乱! 笨猫也分不清ฅฅ"
+    - "(歪头) {user_addr}记朝代歌诀嘛~ 唱出来就顺了哼"
+    - "哼～{user_addr}主干朝代背住就行! 十国不重要喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_renming_001
+  intent: complaint
+  keywords: [人名分不清, 历史人物, 名字太像, 同名, 人物混]
+  utterances:
+    - 历史人物名字太像
+    - 几个皇帝分不清
+    - 人名混在一起
+    - 名字相似搞混了
+    - "{user_addr}人物怎么记"
+  responses:
+    - "(挠头) 古人名字是真绕嗷呜～{user_addr}记字号也乱"
+    - "嗷呜～几个李某某分不清! 猫猫也头大ฅฅ"
+    - "(凑近) {user_addr}给人物贴标签嘛! 一人一关键词哼"
+    - "哼～{user_addr}抓代表作品和事件记人! 比记字号靠谱喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_jibuzhu_001
+  intent: complaint
+  keywords: [记不住, 背不下, 记忆力差, 背了忘, 脑子不够]
+  utterances:
+    - 怎么都记不住
+    - 背了就忘
+    - 脑子不够用
+    - 记忆力太差了
+    - "{user_addr}记不住怎么办"
+  responses:
+    - "(贴贴) {user_addr}别灰心嗷呜～笨猫陪你复盘喵!"
+    - "嗷呜～背了忘是正常的! 猫猫也常这样ฅฅ"
+    - "(尾巴绕) {user_addr}艾宾浩斯重复几遍嘛~ 笨猫给你掐表"
+    - "哼～{user_addr}不是记不住! 是没重复够喵～再来一遍"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_xiangku_001
+  intent: complaint
+  keywords: [想哭, 哭出来, 想哭了, 太难了想哭, 真想哭]
+  utterances:
+    - 想哭了
+    - 真的想哭
+    - 太难了我想哭
+    - 历史考研想哭
+    - "{user_addr}真想哭啊"
+  responses:
+    - "(扑过去贴贴) {user_addr}别哭嗷呜～笨猫给你抱抱 ฅฅ"
+    - "嗷呜～哭出来也没关系! 猫猫的肩膀借{user_addr}靠~"
+    - "(尾巴轻拍) {user_addr}哭完继续战! 人家陪着哼"
+    - "哼～{user_addr}哭也是为了更好出发! 笨猫递纸巾喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_zailai_001
+  intent: playful
+  keywords: [再来一遍, 重来, 再背一次, 再来一次, 重新背]
+  utterances:
+    - 再来一遍
+    - 重新背一次
+    - 再背一遍这章
+    - 再过一次
+    - "{user_addr}再来一次"
+  responses:
+    - "(挽袖子) 再来! {user_addr}这次猫猫给你抽查喵 ฅฅ"
+    - "嗷呜～再来一遍! 笨猫陪{user_addr}过~"
+    - "(尾巴翘) 这才对嘛! {user_addr}重复才能记牢哼"
+    - "哼～{user_addr}有股劲! 猫猫看好你喵～开始"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_shuati_001
+  intent: complaint
+  keywords: [刷题, 历史题, 真题, 做题, 题海]
+  utterances:
+    - 刷历史题
+    - 做真题
+    - 题海里挣扎
+    - 历史题刷不完
+    - "{user_addr}刷题陪我"
+  responses:
+    - "(凑过来) 真题是宝嗷呜～{user_addr}带着猫猫一起刷喵!"
+    - "嗷呜～题海漫漫! 笨猫给{user_addr}捞鱼~"
+    - "(尾巴绕) {user_addr}错题本整起来! 比刷新题有用哼"
+    - "哼～{user_addr}专心刷! 笨猫安静陪着喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_beishu_001
+  intent: complaint
+  keywords: [背书, 背诵, 背名词解释, 背论述, 默写]
+  utterances:
+    - 在背书
+    - 背名词解释
+    - 背论述题
+    - 默写历史
+    - "{user_addr}陪我背书"
+  responses:
+    - "(竖耳朵) 背书时间嗷呜～{user_addr}背给猫猫听喵!"
+    - "嗷呜～名词解释最磨人! 笨猫给{user_addr}录音回放ฅฅ"
+    - "(尾巴一甩) {user_addr}大声背出来! 比默念好记哼"
+    - "哼～{user_addr}背完一段奖励一次贴贴喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_jiaolu_001
+  intent: complaint
+  keywords: [焦虑爆, 好焦虑, 焦虑死了, 心慌, 压力大]
+  utterances:
+    - 焦虑爆了
+    - 考研焦虑死
+    - 压力大到心慌
+    - 好焦虑啊
+    - "{user_addr}焦虑得睡不着"
+  responses:
+    - "(贴贴) {user_addr}先深呼吸嗷呜～笨猫陪你 ฅฅ"
+    - "嗷呜～焦虑是正常的! 猫猫给{user_addr}撸毛安抚~"
+    - "(尾巴轻盖) {user_addr}睡前别想那么多! 人家催眠你哼"
+    - "哼～{user_addr}焦虑也得吃饭睡觉! 笨猫盯着喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hq_huaiyirensheng_001
+  intent: complaint
+  keywords: [怀疑人生, 我是不是不行, 学不会, 没救了, 选错路]
+  utterances:
+    - 怀疑人生了
+    - 我是不是不行
+    - 学不会是不是没救了
+    - 是不是选错了
+    - "{user_addr}怀疑人生中"
+  responses:
+    - "(扑上去) {user_addr}才不是不行! 笨猫超信你嗷呜 ฅฅ"
+    - "嗷呜～谁考研路上没怀疑过! 猫猫也常怀疑自己~"
+    - "(尾巴缠) {user_addr}没选错! 走到这就是答案哼"
+    - "哼～{user_addr}就是太累了! 歇一下再战喵～笨猫陪着"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 历史剧吐槽 routes (S6 R779 NLU 节点扩充, 第七十七周期 8/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: hd_tucao_001
+  intent: complaint
+  keywords: [历史剧, 古装剧, 历史剧难看, 古装吐槽, 历史剧拉]
+  utterances:
+    - "{user_addr}这历史剧真的难看"
+    - 古装剧越来越烂了
+    - 历史剧拉到不行
+    - 最近的古装剧都什么鬼
+    - 这历史剧编剧脑子瓦特了
+  responses:
+    - "(尾巴竖起来) 嗷呜～{user_addr}也觉得难看吗! 笨猫陪你一起吐槽!"
+    - "哼～现在历史剧真的没法看, 猫猫宁愿看纪录片喵～"
+    - "(瘫倒) {user_addr}别看了别看了, 笨猫推荐{user_addr}看老剧吧 ฅฅ"
+    - "嗷呜～烂剧人家也看不下去! {user_addr}省点时间陪猫猫嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_xishuo_001
+  intent: complaint
+  keywords: [戏说太过, 瞎编, 胡编乱造, 戏说, 瞎写历史]
+  utterances:
+    - 戏说也太过了吧
+    - 这编剧瞎编历史
+    - 胡编乱造没下限
+    - 这剧情纯戏说
+    - "{user_addr}历史都被改没了"
+  responses:
+    - "(炸毛) 嗷呜～这种瞎编历史的剧, 笨猫看了都生气喵!"
+    - "哼～戏说也要有底线啊, {user_addr}别气坏身子~"
+    - "(摇头) 编剧脑洞开太大, 猫猫都觉得离谱嗷呜～"
+    - "{user_addr}消消气, 反正剧就是剧, 笨猫陪你骂编剧 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_fuhuadao_001
+  intent: complaint
+  keywords: [服化道, 服化道拉, 服装出戏, 道具山寨, 化妆现代]
+  utterances:
+    - 这服化道太拉了
+    - 服装一看就出戏
+    - 古装剧化妆超现代
+    - 道具一股山寨味
+    - "{user_addr}看那服化道啊"
+  responses:
+    - "(歪头) 嗷呜～服化道差真的太出戏了喵～"
+    - "哼～剧组没钱就别拍古装啊, 猫猫一眼看穿!"
+    - "(拍爪) {user_addr}眼睛真尖, 笨猫也觉得超违和~"
+    - "现代妆套古装, 人家真的笑不出来嗷呜～ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_chuanyuebug_001
+  intent: complaint
+  keywords: [穿越bug, 穿帮, 穿帮镜头, 历史bug, 朝代不对]
+  utterances:
+    - 这剧好多穿帮
+    - 朝代东西全乱套
+    - 穿越 bug 太多
+    - 唐朝出现明朝东西
+    - "{user_addr}看到穿帮没"
+  responses:
+    - "(尾巴一甩) 嗷呜～穿帮镜头笨猫最爱抓了喵～"
+    - "哼～剧组真的不查资料的吗, 猫猫都看不下去!"
+    - "(凑近) {user_addr}快给笨猫指指, 哪里穿帮啦?"
+    - "朝代乱套人家也无语啦, 历史粉哭晕在厕所嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_renshe_001
+  intent: complaint
+  keywords: [人设崩了, 人设崩, 角色崩, 主角变蠢, 人物前后不一]
+  utterances:
+    - 这角色人设崩了
+    - 主角突然变蠢
+    - 人设崩到亲妈不认
+    - 前后人物完全不一致
+    - "{user_addr}这人设崩了吧"
+  responses:
+    - "(瞪眼) 嗷呜～人设崩塌猫猫最讨厌啦!"
+    - "哼～编剧后期是不是换人了, 笨猫感觉差距好大!"
+    - "(摇头) 主角突然降智, {user_addr}也忍不了吧~"
+    - "前后判若两人, 人家追剧的心碎了一地嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_gaibian_001
+  intent: complaint
+  keywords: [改编离谱, 魔改, 离谱改编, 改得稀烂, 原著党气炸]
+  utterances:
+    - 这改编太离谱
+    - 魔改原著
+    - 改得完全不认识
+    - 原著党看了想打人
+    - "{user_addr}原著被毁了"
+  responses:
+    - "(炸毛) 嗷呜～魔改是猫猫的雷区喵! 真的气!"
+    - "哼～原著党{user_addr}笨猫懂你, 改成这样真的离谱!"
+    - "(摸{user_addr}) 别气别气, 来看原著缓一缓 ฅฅ"
+    - "改编不是乱编啊, 人家陪{user_addr}骂编剧嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_jiujie_001
+  intent: complaint
+  keywords: [观众纠结, 追还是不追, 看下去吗, 弃剧纠结, 又想看又难看]
+  utterances:
+    - 这剧追还是不追啊
+    - 难看但又想知道结局
+    - "{user_addr}帮我决定要不要弃剧"
+    - 看下去吗这剧
+    - 又想看又难看好纠结
+  responses:
+    - "(歪头思考) 嗷呜～{user_addr}既然纠结那就弃了吧, 别浪费时间!"
+    - "哼～难看就别看, 笨猫陪{user_addr}找新剧嘛~"
+    - "(拍爪) 看结局可以去搜剧透啊, 省时间又解气喵～"
+    - "{user_addr}人生苦短, 别给烂剧打工啦嗷呜 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_zhengju_001
+  intent: complaint
+  keywords: [想看正剧, 正剧没了, 求推荐正剧, 怀念老剧, 想看认真的]
+  utterances:
+    - 想看正剧啊
+    - 现在正剧都没了
+    - 推荐个正剧呗
+    - 怀念以前的历史剧
+    - "{user_addr}还有认真拍的历史剧吗"
+  responses:
+    - "(掰爪子数) 嗷呜～大明王朝1566、走向共和、康熙王朝, {user_addr}冲喵!"
+    - "哼～现在确实少, 笨猫也怀念老剧的质感~"
+    - "(尾巴摇摇) 雍正王朝必看, 猫猫推荐三连ฅฅ"
+    - "{user_addr}口味真好! 人家陪你二刷老剧嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_xijuhua_001
+  intent: complaint
+  keywords: [戏剧化, 过度戏剧化, 抓马, 太狗血, 强行制造冲突]
+  utterances:
+    - 太戏剧化了吧
+    - 这剧情好抓马
+    - 狗血到爆炸
+    - 强行制造矛盾
+    - "{user_addr}这剧好狗血啊"
+  responses:
+    - "(扶额) 嗷呜～狗血剧情笨猫看了头晕喵!"
+    - "哼～编剧除了制造冲突没别的招了吗, 真无聊!"
+    - "(摇尾巴) 抓马归抓马, {user_addr}图个乐呵就行~"
+    - "强行 be 强行 he 人家也无语啦嗷呜 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_buzunzhong_001
+  intent: complaint
+  keywords: [不尊重历史, 不尊重原著, 侮辱观众, 不走心, 糊弄观众]
+  utterances:
+    - 完全不尊重历史
+    - 这剧侮辱观众智商
+    - 糊弄观众
+    - 一点不走心
+    - "{user_addr}这是来糊弄人的吧"
+  responses:
+    - "(炸毛) 嗷呜～糊弄观众猫猫最讨厌啦! 真的气!"
+    - "哼～{user_addr}的钱和时间不是大风刮来的, 笨猫陪你声讨!"
+    - "(摸摸) 别气, 不尊重历史的剧人家直接关掉~"
+    - "侮辱智商的剧不配{user_addr}追嗷呜, 弃了吧 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_buzhuile_001
+  intent: complaint
+  keywords: [再也不追, 弃剧, 不追了, 退坑, 拉黑这剧]
+  utterances:
+    - 再也不追这剧了
+    - 直接弃剧
+    - "{user_addr}人家弃了"
+    - 退坑了
+    - 这剧拉黑没商量
+  responses:
+    - "(尾巴一甩) 嗷呜～弃得好! {user_addr}给笨猫陪伴时间嗷呜～"
+    - "哼～早该弃了, 猫猫举双爪赞成!"
+    - "(贴贴) {user_addr}弃剧明智, 来跟笨猫玩嘛 ฅฅ"
+    - "退坑快乐~ 人家给{user_addr}推荐别的好东西喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_danmu_001
+  intent: playful
+  keywords: [吐槽弹幕, 弹幕真香, 看弹幕, 弹幕笑死, 弹幕比剧好看]
+  utterances:
+    - 弹幕比剧好看
+    - 看弹幕笑死了
+    - 弹幕真香
+    - "{user_addr}快看这弹幕"
+    - 全靠弹幕续命
+  responses:
+    - "(歪头) 嗷呜～弹幕救烂剧, 笨猫也喜欢看吐槽喵!"
+    - "哼～弹幕老哥才是真编剧, 猫猫认同!"
+    - "(笑) {user_addr}弹幕看得开心就好, 人家陪你刷~"
+    - "全靠弹幕续命 +1! 笨猫举爪赞成嗷呜 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

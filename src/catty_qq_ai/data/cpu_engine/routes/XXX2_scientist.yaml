@@ -1,0 +1,206 @@
+# 科学家 routes (S6 R774 NLU 节点扩充, 第七十七周期 3/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: sc_einstein_001
+  intent: question
+  keywords: [推荐爱因斯坦, 推荐相对论, 推荐 Einstein, 推荐物理学家, 笨猫爱因斯坦]
+  utterances:
+    - 推荐爱因斯坦
+    - 推荐相对论
+    - "{user_addr}爱因斯坦是谁"
+    - 推荐物理学家
+    - 笨猫爱因斯坦
+  responses:
+    - "嗷呜～{user_addr}爱因斯坦 - 相对论之父ฅฅ"
+    - "(尾巴翘) E=mc² / 光电效应"
+    - "{user_addr}1921 诺贝尔物理奖"
+    - "(挺胸) 笨猫推荐: 20 世纪最伟大物理学家!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_newton_001
+  intent: question
+  keywords: [推荐牛顿, 推荐 Newton, 推荐经典力学, 推荐万有引力, 笨猫牛顿]
+  utterances:
+    - 推荐牛顿
+    - 推荐 Newton
+    - 推荐经典力学
+    - 推荐万有引力
+    - 笨猫牛顿
+  responses:
+    - "嗷呜～{user_addr}牛顿 - 经典力学奠基ฅฅ"
+    - "(尾巴翘) 三大定律 / 微积分 / 光学"
+    - "{user_addr}苹果掉下来的故事"
+    - "(挺胸) 笨猫推荐: 站在巨人肩膀上!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_darwin_001
+  intent: question
+  keywords: [推荐达尔文, 推荐 Darwin, 推荐进化论, 推荐物种起源, 笨猫达尔文]
+  utterances:
+    - 推荐达尔文
+    - 推荐 Darwin
+    - 推荐进化论
+    - 推荐物种起源
+    - 笨猫达尔文
+  responses:
+    - "嗷呜～{user_addr}达尔文 - 进化论之父ฅฅ"
+    - "(尾巴翘) 物种起源 / 自然选择"
+    - "{user_addr}小猎犬号 5 年环球"
+    - "(挺胸) 笨猫推荐: 改变生物学世界观!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_curie_001
+  intent: question
+  keywords: [推荐居里夫人, 推荐 Marie Curie, 推荐镭, 推荐放射性, 笨猫居里夫人]
+  utterances:
+    - 推荐居里夫人
+    - 推荐 Marie Curie
+    - 推荐镭
+    - 推荐放射性
+    - 笨猫居里夫人
+  responses:
+    - "嗷呜～{user_addr}居里夫人 - 双诺奖女王ฅฅ"
+    - "(尾巴翘) 发现镭 / 钋 / 放射性"
+    - "{user_addr}物理 + 化学双诺奖"
+    - "(挺胸) 笨猫推荐: 女性科学家典范!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_tesla_001
+  intent: question
+  keywords: [推荐特斯拉, 推荐 Tesla, 推荐交流电, 推荐无线电, 笨猫特斯拉]
+  utterances:
+    - 推荐特斯拉
+    - 推荐 Tesla
+    - 推荐交流电
+    - 推荐无线电
+    - 笨猫特斯拉
+  responses:
+    - "嗷呜～{user_addr}特斯拉 - 交流电之父ฅฅ"
+    - "(尾巴翘) AC 电力 / 无线电 / 感应电机"
+    - "{user_addr}和爱迪生电流之战"
+    - "(挺胸) 笨猫推荐: 现代电力奠基!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_edison_001
+  intent: question
+  keywords: [推荐爱迪生, 推荐 Edison, 推荐发明大王, 推荐电灯, 笨猫爱迪生]
+  utterances:
+    - 推荐爱迪生
+    - 推荐 Edison
+    - 推荐发明大王
+    - 推荐电灯
+    - 笨猫爱迪生
+  responses:
+    - "嗷呜～{user_addr}爱迪生 - 发明大王ฅฅ"
+    - "(尾巴翘) 电灯 / 留声机 / 电影"
+    - "{user_addr}1093 项专利"
+    - "(挺胸) 笨猫推荐: 99% 汗水 + 1% 灵感!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sc_turing_001
+  intent: question
+  keywords: [推荐图灵, 推荐 Turing, 推荐计算机之父, 推荐图灵机, 笨猫图灵]
+  utterances:
+    - 推荐图灵
+    - 推荐 Turing
+    - 推荐计算机之父
+    - 推荐图灵机
+    - 笨猫图灵
+  responses:
+    - "嗷呜～{user_addr}图灵 - 计算机之父ฅฅ"
+    - "(尾巴翘) 图灵机 / 图灵测试"
+    - "{user_addr}二战破译 Enigma"
+    - "(挺胸) 笨猫推荐: AI 鼻祖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_neumann_001
+  intent: question
+  keywords: [推荐冯诺依曼, 推荐 von Neumann, 推荐计算机架构, 推荐博弈论, 笨猫冯诺依曼]
+  utterances:
+    - 推荐冯诺依曼
+    - 推荐 von Neumann
+    - 推荐计算机架构
+    - 推荐博弈论
+    - 笨猫冯诺依曼
+  responses:
+    - "嗷呜～{user_addr}冯诺依曼 - 现代计算机架构ฅฅ"
+    - "(尾巴翘) 博弈论 / 数理逻辑"
+    - "{user_addr}曼哈顿计划核心"
+    - "(挺胸) 笨猫推荐: 全才科学家!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sc_qianxuesen_001
+  intent: question
+  keywords: [推荐钱学森, 推荐两弹一星, 推荐空气动力学, 推荐火箭之父, 笨猫钱学森]
+  utterances:
+    - 推荐钱学森
+    - 推荐两弹一星
+    - 推荐空气动力学
+    - 推荐火箭之父
+    - 笨猫钱学森
+  responses:
+    - "嗷呜～{user_addr}钱学森 - 中国航天之父ฅฅ"
+    - "(尾巴翘) 两弹一星 / 空气动力学"
+    - "{user_addr}MIT / Caltech 教授归国"
+    - "(挺胸) 笨猫推荐: 一人抵五个师!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_tuyouyou_001
+  intent: question
+  keywords: [推荐屠呦呦, 推荐青蒿素, 推荐诺奖, 推荐中医药, 笨猫屠呦呦]
+  utterances:
+    - 推荐屠呦呦
+    - 推荐青蒿素
+    - 推荐诺奖
+    - 推荐中医药
+    - 笨猫屠呦呦
+  responses:
+    - "嗷呜～{user_addr}屠呦呦 - 青蒿素发现者ฅฅ"
+    - "(尾巴翘) 2015 诺贝尔医学奖"
+    - "{user_addr}拯救数百万疟疾患者"
+    - "(挺胸) 笨猫推荐: 中国本土首位科学诺奖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_yangzhenning_001
+  intent: question
+  keywords: [推荐杨振宁, 推荐宇称不守恒, 推荐杨米尔斯, 推荐华人诺奖, 笨猫杨振宁]
+  utterances:
+    - 推荐杨振宁
+    - 推荐宇称不守恒
+    - 推荐杨米尔斯
+    - 推荐华人诺奖
+    - 笨猫杨振宁
+  responses:
+    - "嗷呜～{user_addr}杨振宁 - 首位华人诺奖ฅฅ"
+    - "(尾巴翘) 宇称不守恒 / 杨米尔斯方程"
+    - "{user_addr}1957 诺贝尔物理奖"
+    - "(挺胸) 笨猫推荐: 当代物理学泰斗!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sc_hawking_001
+  intent: question
+  keywords: [推荐霍金, 推荐 Hawking, 推荐黑洞, 推荐时间简史, 笨猫霍金]
+  utterances:
+    - 推荐霍金
+    - 推荐 Hawking
+    - 推荐黑洞
+    - 推荐时间简史
+    - 笨猫霍金
+  responses:
+    - "嗷呜～{user_addr}霍金 - 黑洞理论大师ฅฅ"
+    - "(尾巴翘) 霍金辐射 / 奇点定理"
+    - "{user_addr}时间简史 / 渐冻症轮椅传奇"
+    - "(挺胸) 笨猫推荐: 当代爱因斯坦!"
+  cooldown_seconds: 60
+  weight: 1.0

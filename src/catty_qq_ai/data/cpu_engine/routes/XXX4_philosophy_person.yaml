@@ -1,0 +1,206 @@
+# 哲学家 routes (S6 R776 NLU 节点扩充, 第七十七周期 5/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: pp_socrates_001
+  intent: question
+  keywords: [推荐苏格拉底, 推荐 Socrates, 推荐古希腊哲学, 推荐产婆术, 笨猫苏格拉底]
+  utterances:
+    - 推荐苏格拉底
+    - 推荐 Socrates
+    - 推荐古希腊哲学
+    - 推荐产婆术
+    - 笨猫苏格拉底
+  responses:
+    - "嗷呜～{user_addr}苏格拉底 - 古希腊哲学之父ฅฅ"
+    - "(尾巴翘) 产婆术 / 我只知道我一无所知"
+    - "{user_addr}没留著作 - 柏拉图记录"
+    - "(挺胸) 猫猫推荐: 《申辩篇》入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_plato_001
+  intent: question
+  keywords: [推荐柏拉图, 推荐 Plato, 推荐理想国, 推荐洞穴寓言, 笨猫柏拉图]
+  utterances:
+    - 推荐柏拉图
+    - 推荐 Plato
+    - 推荐理想国
+    - 推荐洞穴寓言
+    - 笨猫柏拉图
+  responses:
+    - "嗷呜～{user_addr}柏拉图 - 理念论开创者ฅฅ"
+    - "(尾巴翘) 《理想国》 / 洞穴寓言"
+    - "{user_addr}学院派 - 哲人王理想"
+    - "(挺胸) 笨猫推荐: 《会饮篇》小清新!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_aristotle_001
+  intent: question
+  keywords: [推荐亚里士多德, 推荐 Aristotle, 推荐形而上学, 推荐尼各马可伦理学, 笨猫亚里士多德]
+  utterances:
+    - 推荐亚里士多德
+    - 推荐 Aristotle
+    - 推荐形而上学
+    - 推荐尼各马可伦理学
+    - 笨猫亚里士多德
+  responses:
+    - "嗷呜～{user_addr}亚里士多德 - 百科全书式哲人ฅฅ"
+    - "(尾巴翘) 《形而上学》 / 《政治学》"
+    - "{user_addr}吾爱吾师 / 吾更爱真理"
+    - "(挺胸) 人家推荐: 《尼各马可伦理学》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_descartes_001
+  intent: question
+  keywords: [推荐笛卡尔, 推荐 Descartes, 推荐我思故我在, 推荐第一哲学沉思集, 笨猫笛卡尔]
+  utterances:
+    - 推荐笛卡尔
+    - 推荐 Descartes
+    - 推荐我思故我在
+    - 推荐第一哲学沉思集
+    - 笨猫笛卡尔
+  responses:
+    - "嗷呜～{user_addr}笛卡尔 - 近代哲学之父ฅฅ"
+    - "(尾巴翘) 我思故我在 / 普遍怀疑"
+    - "{user_addr}心物二元论 - 数学家"
+    - "(挺胸) 猫猫推荐: 《沉思集》必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_kant_001
+  intent: question
+  keywords: [推荐康德, 推荐 Kant, 推荐纯粹理性批判, 推荐三大批判, 笨猫康德]
+  utterances:
+    - 推荐康德
+    - 推荐 Kant
+    - 推荐纯粹理性批判
+    - 推荐三大批判
+    - 笨猫康德
+  responses:
+    - "嗷呜～{user_addr}康德 - 德国古典哲学顶峰ฅฅ"
+    - "(尾巴翘) 三大批判 / 绝对命令"
+    - "{user_addr}头上星空 / 心中道德律"
+    - "(挺胸) 笨猫推荐: 难啃但值! 先看《导论》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_nietzsche_001
+  intent: question
+  keywords: [推荐尼采, 推荐 Nietzsche, 推荐查拉图斯特拉, 推荐权力意志, 笨猫尼采]
+  utterances:
+    - 推荐尼采
+    - 推荐 Nietzsche
+    - 推荐查拉图斯特拉
+    - 推荐权力意志
+    - 笨猫尼采
+  responses:
+    - "嗷呜～{user_addr}尼采 - 重估一切价值ฅฅ"
+    - "(尾巴翘) 上帝已死 / 超人 / 永恒轮回"
+    - "{user_addr}《查拉图斯特拉如是说》"
+    - "(挺胸) 人家推荐: 文笔超燃! 先看《悲剧的诞生》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_heidegger_001
+  intent: question
+  keywords: [推荐海德格尔, 推荐 Heidegger, 推荐存在与时间, 推荐此在, 笨猫海德格尔]
+  utterances:
+    - 推荐海德格尔
+    - 推荐 Heidegger
+    - 推荐存在与时间
+    - 推荐此在
+    - 笨猫海德格尔
+  responses:
+    - "嗷呜～{user_addr}海德格尔 - 存在主义大佬ฅฅ"
+    - "(尾巴翘) 《存在与时间》 / 此在 Dasein"
+    - "{user_addr}向死而生 / 诗意栖居"
+    - "(挺胸) 猫猫推荐: 难度核爆 / 备好导读!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pp_sartre_001
+  intent: question
+  keywords: [推荐萨特, 推荐 Sartre, 推荐存在与虚无, 推荐存在主义, 笨猫萨特]
+  utterances:
+    - 推荐萨特
+    - 推荐 Sartre
+    - 推荐存在与虚无
+    - 推荐存在主义
+    - 笨猫萨特
+  responses:
+    - "嗷呜～{user_addr}萨特 - 法式存在主义ฅฅ"
+    - "(尾巴翘) 存在先于本质 / 他人即地狱"
+    - "{user_addr}和波伏娃 CP - 拒诺贝尔奖"
+    - "(挺胸) 笨猫推荐: 《存在主义是一种人道主义》入门!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pp_foucault_001
+  intent: question
+  keywords: [推荐福柯, 推荐 Foucault, 推荐规训与惩罚, 推荐知识考古学, 笨猫福柯]
+  utterances:
+    - 推荐福柯
+    - 推荐 Foucault
+    - 推荐规训与惩罚
+    - 推荐知识考古学
+    - 笨猫福柯
+  responses:
+    - "嗷呜～{user_addr}福柯 - 后结构主义ฅฅ"
+    - "(尾巴翘) 《规训与惩罚》 / 权力-知识"
+    - "{user_addr}全景敞视 / 疯癫与文明"
+    - "(挺胸) 人家推荐: 现代社会照妖镜!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pp_wangyangming_001
+  intent: question
+  keywords: [推荐王阳明, 推荐心学, 推荐知行合一, 推荐传习录, 笨猫王阳明]
+  utterances:
+    - 推荐王阳明
+    - 推荐心学
+    - 推荐知行合一
+    - 推荐传习录
+    - 笨猫王阳明
+  responses:
+    - "嗷呜～{user_addr}王阳明 - 明代心学集大成ฅฅ"
+    - "(尾巴翘) 知行合一 / 致良知"
+    - "{user_addr}龙场悟道 / 心外无物"
+    - "(挺胸) 猫猫推荐: 《传习录》必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_zhuxi_001
+  intent: question
+  keywords: [推荐朱熹, 推荐理学, 推荐四书章句集注, 推荐格物致知, 笨猫朱熹]
+  utterances:
+    - 推荐朱熹
+    - 推荐理学
+    - 推荐四书章句集注
+    - 推荐格物致知
+    - 笨猫朱熹
+  responses:
+    - "嗷呜～{user_addr}朱熹 - 宋代理学集大成ฅฅ"
+    - "(尾巴翘) 存天理 / 灭人欲 / 格物致知"
+    - "{user_addr}《四书章句集注》八百年科举圣经"
+    - "(挺胸) 笨猫推荐: 中国哲学绕不过!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pp_zhuangzi_001
+  intent: question
+  keywords: [推荐庄子, 推荐道家, 推荐逍遥游, 推荐齐物论, 笨猫庄子]
+  utterances:
+    - 推荐庄子
+    - 推荐道家
+    - 推荐逍遥游
+    - 推荐齐物论
+    - 笨猫庄子
+  responses:
+    - "嗷呜～{user_addr}庄子 - 道家逍遥派ฅฅ"
+    - "(尾巴翘) 《逍遥游》 / 《齐物论》"
+    - "{user_addr}庄周梦蝶 / 鲲鹏展翅"
+    - "(挺胸) 人家推荐: 文学哲学双绝!"
+  cooldown_seconds: 60
+  weight: 1.0

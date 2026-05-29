@@ -1,0 +1,206 @@
+# 世界历史人物 routes (S6 R773 NLU 节点扩充, 第七十七周期 2/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: hw_caesar_001
+  intent: question
+  keywords: [推荐凯撒, 推荐 Caesar, 推荐尤利乌斯, 推荐罗马凯撒, 笨猫凯撒]
+  utterances:
+    - 推荐凯撒
+    - 推荐 Caesar
+    - 推荐尤利乌斯
+    - 推荐罗马凯撒
+    - 笨猫凯撒
+  responses:
+    - "嗷呜～{user_addr}凯撒 - 罗马共和末期独裁官ฅฅ"
+    - "(尾巴翘) 高卢战记 / 渡过卢比孔河"
+    - "{user_addr}「我来,我见,我征服」"
+    - "(挺胸) 猫猫推荐: 政治+军事双绝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_napoleon_001
+  intent: question
+  keywords: [推荐拿破仑, 推荐 Napoleon, 推荐波拿巴, 推荐法国皇帝, 笨猫拿破仑]
+  utterances:
+    - 推荐拿破仑
+    - 推荐 Napoleon
+    - 推荐波拿巴
+    - 推荐法国皇帝
+    - 笨猫拿破仑
+  responses:
+    - "嗷呜～{user_addr}拿破仑 - 法兰西第一帝国皇帝ฅฅ"
+    - "(尾巴翘) 奥斯特里茨 / 滑铁卢"
+    - "{user_addr}拿破仑法典 - 影响深远"
+    - "(挺胸) 人家推荐: 军事天才教科书!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_alexander_001
+  intent: question
+  keywords: [推荐亚历山大大帝, 推荐 Alexander, 推荐马其顿王, 推荐亚历山大, 笨猫亚历山大]
+  utterances:
+    - 推荐亚历山大大帝
+    - 推荐 Alexander
+    - 推荐马其顿王
+    - 推荐亚历山大
+    - 笨猫亚历山大
+  responses:
+    - "嗷呜～{user_addr}亚历山大 - 马其顿王 / 横扫欧亚ฅฅ"
+    - "(尾巴翘) 亚里士多德弟子 / 33岁早逝"
+    - "{user_addr}希腊化时代开创者"
+    - "(挺胸) 笨猫推荐: 古典世界征服者!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_genghis_001
+  intent: question
+  keywords: [推荐成吉思汗, 推荐铁木真, 推荐蒙古大汗, 推荐 Genghis, 笨猫成吉思汗]
+  utterances:
+    - 推荐成吉思汗
+    - 推荐铁木真
+    - 推荐蒙古大汗
+    - 推荐 Genghis
+    - 笨猫成吉思汗
+  responses:
+    - "嗷呜～{user_addr}成吉思汗 - 蒙古帝国奠基ฅฅ"
+    - "(尾巴翘) 史上最大陆地帝国"
+    - "{user_addr}骑兵战术 / 草原雄主"
+    - "(挺胸) 猫猫推荐: 一代天骄!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_lincoln_001
+  intent: question
+  keywords: [推荐林肯, 推荐 Lincoln, 推荐美国总统林肯, 推荐解放黑奴, 笨猫林肯]
+  utterances:
+    - 推荐林肯
+    - 推荐 Lincoln
+    - 推荐美国总统林肯
+    - 推荐解放黑奴
+    - 笨猫林肯
+  responses:
+    - "嗷呜～{user_addr}林肯 - 美国第16任总统ฅฅ"
+    - "(尾巴翘) 南北战争 / 解放奴隶宣言"
+    - "{user_addr}葛底斯堡演讲 - 民有民治民享"
+    - "(挺胸) 人家推荐: 美国分裂的缝合者!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_roosevelt_001
+  intent: question
+  keywords: [推荐罗斯福, 推荐 Roosevelt, 推荐富兰克林罗斯福, 推荐新政, 笨猫罗斯福]
+  utterances:
+    - 推荐罗斯福
+    - 推荐 Roosevelt
+    - 推荐富兰克林罗斯福
+    - 推荐新政
+    - 笨猫罗斯福
+  responses:
+    - "嗷呜～{user_addr}富兰克林·罗斯福 - 美国第32任总统ฅฅ"
+    - "(尾巴翘) 新政 / 二战领导者"
+    - "{user_addr}炉边谈话 / 四连任唯一"
+    - "(挺胸) 猫猫推荐: 大萧条救世主!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_churchill_001
+  intent: question
+  keywords: [推荐丘吉尔, 推荐 Churchill, 推荐温斯顿丘吉尔, 推荐英国首相, 笨猫丘吉尔]
+  utterances:
+    - 推荐丘吉尔
+    - 推荐 Churchill
+    - 推荐温斯顿丘吉尔
+    - 推荐英国首相
+    - 笨猫丘吉尔
+  responses:
+    - "嗷呜～{user_addr}丘吉尔 - 二战英国首相ฅฅ"
+    - "(尾巴翘) 「我们将在海滩上战斗」"
+    - "{user_addr}诺贝尔文学奖 / 雪茄+V字"
+    - "(挺胸) 笨猫推荐: 演讲家+政治家!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_gandhi_001
+  intent: question
+  keywords: [推荐甘地, 推荐 Gandhi, 推荐圣雄甘地, 推荐非暴力, 笨猫甘地]
+  utterances:
+    - 推荐甘地
+    - 推荐 Gandhi
+    - 推荐圣雄甘地
+    - 推荐非暴力
+    - 笨猫甘地
+  responses:
+    - "嗷呜～{user_addr}甘地 - 印度国父 / 圣雄ฅฅ"
+    - "(尾巴翘) 非暴力不合作 / 食盐进军"
+    - "{user_addr}「以眼还眼,世界皆盲」"
+    - "(挺胸) 人家推荐: 精神力量典范!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_mandela_001
+  intent: question
+  keywords: [推荐曼德拉, 推荐 Mandela, 推荐纳尔逊曼德拉, 推荐南非, 笨猫曼德拉]
+  utterances:
+    - 推荐曼德拉
+    - 推荐 Mandela
+    - 推荐纳尔逊曼德拉
+    - 推荐南非
+    - 笨猫曼德拉
+  responses:
+    - "嗷呜～{user_addr}曼德拉 - 南非首任黑人总统ฅฅ"
+    - "(尾巴翘) 27年牢狱 / 反种族隔离"
+    - "{user_addr}诺贝尔和平奖 / 和解之父"
+    - "(挺胸) 猫猫推荐: 宽恕的力量!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_marx_001
+  intent: question
+  keywords: [推荐马克思, 推荐 Marx, 推荐卡尔马克思, 推荐共产党宣言, 笨猫马克思]
+  utterances:
+    - 推荐马克思
+    - 推荐 Marx
+    - 推荐卡尔马克思
+    - 推荐共产党宣言
+    - 笨猫马克思
+  responses:
+    - "嗷呜～{user_addr}马克思 - 科学社会主义创始人ฅฅ"
+    - "(尾巴翘) 共产党宣言 / 资本论"
+    - "{user_addr}哲学+政治经济学+科社"
+    - "(挺胸) 笨猫推荐: 改变世界的思想!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_lenin_001
+  intent: question
+  keywords: [推荐列宁, 推荐 Lenin, 推荐弗拉基米尔列宁, 推荐十月革命, 笨猫列宁]
+  utterances:
+    - 推荐列宁
+    - 推荐 Lenin
+    - 推荐弗拉基米尔列宁
+    - 推荐十月革命
+    - 笨猫列宁
+  responses:
+    - "嗷呜～{user_addr}列宁 - 苏维埃缔造者ฅฅ"
+    - "(尾巴翘) 十月革命 / 布尔什维克"
+    - "{user_addr}帝国主义论 / 国家与革命"
+    - "(挺胸) 人家推荐: 20世纪转折点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_shakespeare_001
+  intent: question
+  keywords: [推荐莎士比亚, 推荐 Shakespeare, 推荐莎翁, 推荐英国文豪, 笨猫莎士比亚]
+  utterances:
+    - 推荐莎士比亚
+    - 推荐 Shakespeare
+    - 推荐莎翁
+    - 推荐英国文豪
+    - 笨猫莎士比亚
+  responses:
+    - "嗷呜～{user_addr}莎士比亚 - 英国文学之神ฅฅ"
+    - "(尾巴翘) 哈姆雷特 / 罗密欧朱丽叶"
+    - "{user_addr}四大悲剧 / 喜剧 / 十四行诗"
+    - "(挺胸) 猫猫推荐: 「To be or not to be」!"
+  cooldown_seconds: 60
+  weight: 1.0

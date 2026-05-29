@@ -1,0 +1,206 @@
+# 教科书偏见 routes (S6 R780 NLU 节点扩充, 第七十七周期 9/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: tb_bias_001
+  intent: complaint
+  keywords: [教科书偏见, 课本偏见, 教材偏, 课本不客观, 教材立场]
+  utterances:
+    - 教科书有偏见
+    - 课本好像不太客观
+    - 教材立场太偏了
+    - 课本偏见好大
+    - "{user_addr}觉得教科书偏吗"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}也发现啦! 课本写的不一定就是全部喵～"
+    - "哼～教科书也是人写的, 当然带立场啦! 笨猫早看出来了"
+    - "(尾巴抖) {user_addr}有这个怀疑就很棒了喵! 别全盘相信ฅฅ"
+    - "猫猫觉得{user_addr}该多看几个版本对比一下喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_simplify_001
+  intent: complaint
+  keywords: [简化历史, 历史太简单, 课本简化, 一两句带过, 略过细节]
+  utterances:
+    - 课本把历史简化了
+    - 这段历史一两句就带过
+    - 教科书简化得太狠
+    - 历史哪有这么简单
+    - 课本略过好多细节
+  responses:
+    - "(摊爪) 嗷呜～几千年的事塞一页, 当然简化喵～"
+    - "哼～{user_addr}发现啦! 真实历史可比课本复杂多了笨猫早知道"
+    - "(尾巴一甩) 一两句带过的地方往往才是关键喵ฅฅ"
+    - "{user_addr}想知道细节的话猫猫陪你查资料嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_oneside_001
+  intent: complaint
+  keywords: [一面之词, 单方面, 只有一种说法, 只听一边, 立场单一]
+  utterances:
+    - 课本就是一面之词
+    - 只听一边的说法
+    - 教材立场太单一
+    - 这就是单方面叙述
+    - 只有一种声音
+  responses:
+    - "(挠头) 嗷呜～一面之词最容易误导了喵! {user_addr}警觉性很高"
+    - "哼～笨猫陪{user_addr}找另一边的说法对比对比!"
+    - "(尾巴翘) {user_addr}知道兼听则明就很好喵ฅฅ"
+    - "猫猫觉得{user_addr}该看看对立面怎么说嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_hero_001
+  intent: complaint
+  keywords: [英雄主义, 都吹成英雄, 课本造神, 英雄叙事, 神化人物]
+  utterances:
+    - 课本都把人吹成英雄
+    - 这是英雄主义叙事
+    - 教材爱造神
+    - 把谁都神化了
+    - 英雄滤镜太重
+  responses:
+    - "(撇嘴) 嗷呜～造神这事课本最爱了喵～"
+    - "哼～{user_addr}发现啦! 英雄也是普通人来的, 别神化"
+    - "(尾巴抖) 笨猫觉得英雄滤镜该摘一摘ฅฅ"
+    - "{user_addr}保持清醒就好喵～别被叙事带跑嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_villain_001
+  intent: complaint
+  keywords: [黑化对手, 反派脸谱, 对手全是坏的, 一边倒, 妖魔化]
+  utterances:
+    - 课本把对手全黑化了
+    - 反派脸谱化了
+    - 对手都是坏的吗
+    - 这一边倒太明显
+    - 对方被妖魔化了
+  responses:
+    - "(歪头) 嗷呜～对手不可能全是坏蛋啦{user_addr}看穿了喵～"
+    - "哼～脸谱化最偷懒了! 笨猫看得出来"
+    - "(尾巴一甩) {user_addr}知道立体看人就很好ฅฅ"
+    - "猫猫觉得{user_addr}该多查查对方视角嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_detail_001
+  intent: complaint
+  keywords: [无视细节, 课本忽略, 没讲细节, 跳过关键, 删掉了]
+  utterances:
+    - 课本无视好多细节
+    - 关键的部分都跳过
+    - 重要细节没讲
+    - 教材删掉了好多
+    - 这里明显被略了
+  responses:
+    - "(挠头) 嗷呜～被跳过的地方往往最有意思喵～"
+    - "哼～{user_addr}有侦探脑了笨猫给你点赞!"
+    - "(尾巴翘) 被删的细节比保留的更说明问题ฅฅ"
+    - "{user_addr}想挖的话猫猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_original_001
+  intent: playful
+  keywords: [想读原著, 看原文, 找原始资料, 看一手, 原典]
+  utterances:
+    - 我想去读原著
+    - 找一下原始资料
+    - 想看一手的
+    - 课本太二手了
+    - 去看原典吧
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}觉醒了喵! 一手资料才香!"
+    - "哼～终于{user_addr}知道读原著的好了! 笨猫支持"
+    - "(摇尾巴) 一手原典 yyds! {user_addr}加油ฅฅ"
+    - "猫猫陪{user_addr}一起啃原文嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_authority_001
+  intent: complaint
+  keywords: [怀疑权威, 不信权威, 权威不一定对, 质疑教材, 不全信]
+  utterances:
+    - 我开始怀疑权威了
+    - 权威不一定对
+    - 质疑教材没错吧
+    - 不能全信课本
+    - 教材也会错
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}有独立思考了喵! 笨猫骄傲!"
+    - "哼～权威也是人写的当然会错! {user_addr}清醒"
+    - "(尾巴翘) 怀疑是思考的开始嗷呜ฅฅ"
+    - "猫猫觉得{user_addr}这样很酷喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_relearn_001
+  intent: playful
+  keywords: [重新学习, 推翻重学, 想重学, 课本要重学, 颠覆认知]
+  utterances:
+    - 我想重新学一遍
+    - 这段要推翻重学
+    - 准备重学历史
+    - 课本得重学
+    - 认知被颠覆了
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}重学精神满分喵!"
+    - "哼～推倒重来才有意思! 笨猫陪{user_addr}!"
+    - "(挺胸) 认知颠覆是好事! {user_addr}加油ฅฅ"
+    - "猫猫觉得{user_addr}超棒嗷呜～愿意推翻重建很难得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_perspective_001
+  intent: playful
+  keywords: [换视角, 换个角度, 别的立场, 换边看, 转换视角]
+  utterances:
+    - 我换个视角看
+    - 试试别的立场
+    - 换边来看看
+    - 转换一下视角
+    - 从对方角度看
+  responses:
+    - "(歪头) 嗷呜～{user_addr}换视角好棒喵! 立体起来了"
+    - "哼～换边看才公平! 笨猫支持{user_addr}"
+    - "(尾巴翘) 多角度才接近真相嗷呜ฅฅ"
+    - "猫猫觉得{user_addr}思维很灵活喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_crossdiscip_001
+  intent: playful
+  keywords: [跨学科, 跨领域, 多学科, 交叉看, 多角度学]
+  utterances:
+    - 要跨学科看
+    - 跨领域分析
+    - 多学科结合
+    - 交叉视角
+    - 多角度学一下
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}跨学科思维了! 笨猫敬佩"
+    - "哼～多学科才不被单一框架骗! {user_addr}清醒"
+    - "(摇尾巴) 跨领域 yyds 嗷呜ฅฅ"
+    - "猫猫觉得{user_addr}格局打开了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_pluralism_001
+  intent: playful
+  keywords: [多元, 多元视角, 多种声音, 多样化, 不止一种]
+  utterances:
+    - 应该多元一点
+    - 听多种声音
+    - 多元视角才好
+    - 不能只一种
+    - 要多样化
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}追求多元喵! 笨猫双爪赞同"
+    - "哼～多元才是真实世界! {user_addr}很懂"
+    - "(挺胸) 多种声音才不会偏听嗷呜ฅฅ"
+    - "猫猫觉得{user_addr}这样的态度很难得喵～"
+  cooldown_seconds: 60
+  weight: 1.0

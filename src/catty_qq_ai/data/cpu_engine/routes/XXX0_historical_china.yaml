@@ -1,0 +1,206 @@
+# 中国历史人物 routes (S6 R772 NLU 节点扩充, 第七十七周期 1/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: hc_qinshihuang_001
+  intent: question
+  keywords: [推荐秦始皇, 推荐嬴政, 推荐千古一帝, 推荐统一六国, 笨猫秦始皇]
+  utterances:
+    - 推荐秦始皇
+    - 推荐嬴政
+    - 推荐千古一帝
+    - 推荐统一六国
+    - 笨猫秦始皇
+  responses:
+    - "嗷呜～{user_addr}秦始皇嬴政 - 千古一帝ฅฅ"
+    - "(尾巴翘) 统一六国 / 书同文车同轨"
+    - "{user_addr}长城 / 兵马俑 / 郡县制"
+    - "(挺胸) 猫猫推荐: 中国第一个皇帝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_hanwudi_001
+  intent: question
+  keywords: [推荐汉武帝, 推荐刘彻, 推荐汉朝皇帝, 推荐罢黜百家, 笨猫汉武帝]
+  utterances:
+    - 推荐汉武帝
+    - 推荐刘彻
+    - 推荐汉朝皇帝
+    - 推荐罢黜百家
+    - 笨猫汉武帝
+  responses:
+    - "嗷呜～{user_addr}汉武帝刘彻 - 雄才大略ฅฅ"
+    - "(尾巴翘) 卫青霍去病 / 击破匈奴"
+    - "{user_addr}罢黜百家 / 独尊儒术"
+    - "(挺胸) 人家推荐: 开拓丝绸之路!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_tangtaizong_001
+  intent: question
+  keywords: [推荐唐太宗, 推荐李世民, 推荐贞观之治, 推荐玄武门, 笨猫李世民]
+  utterances:
+    - 推荐唐太宗
+    - 推荐李世民
+    - 推荐贞观之治
+    - 推荐玄武门
+    - 笨猫李世民
+  responses:
+    - "嗷呜～{user_addr}唐太宗李世民 - 贞观之治ฅฅ"
+    - "(尾巴翘) 玄武门之变 / 房谋杜断"
+    - "{user_addr}水能载舟 / 以铜为镜"
+    - "(挺胸) 猫猫推荐: 千古明君标杆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_wuzetian_001
+  intent: question
+  keywords: [推荐武则天, 推荐女皇帝, 推荐则天大帝, 推荐无字碑, 笨猫武则天]
+  utterances:
+    - 推荐武则天
+    - 推荐女皇帝
+    - 推荐则天大帝
+    - 推荐无字碑
+    - 笨猫武则天
+  responses:
+    - "嗷呜～{user_addr}武则天 - 中国唯一女皇ฅฅ"
+    - "(尾巴翘) 开创武周 / 上承贞观"
+    - "{user_addr}无字碑 / 任尔评说"
+    - "(挺胸) 笨猫推荐: 猫猫超崇拜她!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_zhuyuanzhang_001
+  intent: question
+  keywords: [推荐朱元璋, 推荐明太祖, 推荐洪武, 推荐放牛娃皇帝, 笨猫朱元璋]
+  utterances:
+    - 推荐朱元璋
+    - 推荐明太祖
+    - 推荐洪武
+    - 推荐放牛娃皇帝
+    - 笨猫朱元璋
+  responses:
+    - "嗷呜～{user_addr}朱元璋 - 放牛娃逆袭ฅฅ"
+    - "(尾巴翘) 驱逐蒙元 / 建立大明"
+    - "{user_addr}洪武之治 / 重典治吏"
+    - "(挺胸) 人家推荐: 最励志开国皇帝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_kangxi_001
+  intent: question
+  keywords: [推荐康熙, 推荐康熙大帝, 推荐玄烨, 推荐康乾盛世, 笨猫康熙]
+  utterances:
+    - 推荐康熙
+    - 推荐康熙大帝
+    - 推荐玄烨
+    - 推荐康乾盛世
+    - 笨猫康熙
+  responses:
+    - "嗷呜～{user_addr}康熙 - 在位61年ฅฅ"
+    - "(尾巴翘) 平三藩 / 收台湾 / 拒沙俄"
+    - "{user_addr}千古一帝 / 康乾盛世"
+    - "(挺胸) 猫猫推荐: 在位最久!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hc_yongzheng_001
+  intent: question
+  keywords: [推荐雍正, 推荐胤禛, 推荐雍正皇帝, 推荐九子夺嫡, 笨猫雍正]
+  utterances:
+    - 推荐雍正
+    - 推荐胤禛
+    - 推荐雍正皇帝
+    - 推荐九子夺嫡
+    - 笨猫雍正
+  responses:
+    - "嗷呜～{user_addr}雍正胤禛 - 勤政之王ฅฅ"
+    - "(尾巴翘) 九子夺嫡 / 摊丁入亩"
+    - "{user_addr}军机处 / 密折制度"
+    - "(挺胸) 笨猫推荐: 工作狂皇帝!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hc_kongzi_001
+  intent: question
+  keywords: [推荐孔子, 推荐孔丘, 推荐儒家, 推荐至圣先师, 笨猫孔子]
+  utterances:
+    - 推荐孔子
+    - 推荐孔丘
+    - 推荐儒家
+    - 推荐至圣先师
+    - 笨猫孔子
+  responses:
+    - "嗷呜～{user_addr}孔子 - 至圣先师ฅฅ"
+    - "(尾巴翘) 论语 / 仁义礼智信"
+    - "{user_addr}儒家创始 / 弟子三千"
+    - "(挺胸) 人家推荐: 中华文化之根!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_laozi_001
+  intent: question
+  keywords: [推荐老子, 推荐李耳, 推荐道德经, 推荐道家, 笨猫老子]
+  utterances:
+    - 推荐老子
+    - 推荐李耳
+    - 推荐道德经
+    - 推荐道家
+    - 笨猫老子
+  responses:
+    - "嗷呜～{user_addr}老子李耳 - 道家始祖ฅฅ"
+    - "(尾巴翘) 道德经五千言"
+    - "{user_addr}道法自然 / 无为而治"
+    - "(挺胸) 猫猫推荐: 智慧无极限!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hc_quyuan_001
+  intent: question
+  keywords: [推荐屈原, 推荐离骚, 推荐楚辞, 推荐端午, 笨猫屈原]
+  utterances:
+    - 推荐屈原
+    - 推荐离骚
+    - 推荐楚辞
+    - 推荐端午
+    - 笨猫屈原
+  responses:
+    - "嗷呜～{user_addr}屈原 - 爱国诗人ฅฅ"
+    - "(尾巴翘) 离骚 / 九歌 / 天问"
+    - "{user_addr}投汨罗江 / 端午由来"
+    - "(挺胸) 笨猫推荐: 浪漫主义鼻祖!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hc_libaidufu_001
+  intent: question
+  keywords: [推荐李白, 推荐杜甫, 推荐诗仙诗圣, 推荐唐诗, 笨猫李白杜甫]
+  utterances:
+    - 推荐李白
+    - 推荐杜甫
+    - 推荐诗仙诗圣
+    - 推荐唐诗
+    - 笨猫李白杜甫
+  responses:
+    - "嗷呜～{user_addr}李白诗仙 / 杜甫诗圣ฅฅ"
+    - "(尾巴翘) 将进酒 / 春望 / 茅屋"
+    - "{user_addr}浪漫 vs 现实"
+    - "(挺胸) 人家推荐: 唐诗双子星!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_sushi_001
+  intent: question
+  keywords: [推荐苏轼, 推荐苏东坡, 推荐宋词, 推荐念奴娇, 笨猫苏东坡]
+  utterances:
+    - 推荐苏轼
+    - 推荐苏东坡
+    - 推荐宋词
+    - 推荐念奴娇
+    - 笨猫苏东坡
+  responses:
+    - "嗷呜～{user_addr}苏轼苏东坡 - 全才大文豪ฅฅ"
+    - "(尾巴翘) 念奴娇 / 水调歌头 / 赤壁赋"
+    - "{user_addr}诗词书画美食 / 东坡肉"
+    - "(挺胸) 猫猫推荐: 最可爱的文人!"
+  cooldown_seconds: 60
+  weight: 1.0

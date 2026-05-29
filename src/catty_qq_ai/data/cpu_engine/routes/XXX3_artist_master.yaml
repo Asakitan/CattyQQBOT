@@ -1,0 +1,206 @@
+# 艺术大师 routes (S6 R775 NLU 节点扩充, 第七十七周期 4/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: am_davinci_001
+  intent: question
+  keywords: [推荐达芬奇, 推荐 Da Vinci, 推荐文艺复兴, 推荐蒙娜丽莎, 笨猫达芬奇]
+  utterances:
+    - 推荐达芬奇
+    - 推荐 Da Vinci
+    - 推荐文艺复兴
+    - 推荐蒙娜丽莎
+    - 笨猫达芬奇
+  responses:
+    - "嗷呜～{user_addr}达芬奇 - 文艺复兴全才ฅฅ"
+    - "(尾巴翘) 蒙娜丽莎 / 最后的晚餐"
+    - "{user_addr}画家+发明家+解剖学"
+    - "(挺胸) 猫猫推荐: 神秘微笑必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: am_michelangelo_001
+  intent: question
+  keywords: [推荐米开朗基罗, 推荐 Michelangelo, 推荐西斯廷, 推荐大卫像, 笨猫米开朗基罗]
+  utterances:
+    - 推荐米开朗基罗
+    - 推荐 Michelangelo
+    - 推荐西斯廷
+    - 推荐大卫像
+    - 笨猫米开朗基罗
+  responses:
+    - "嗷呜～{user_addr}米开朗基罗 - 雕塑之神ฅฅ"
+    - "(尾巴翘) 西斯廷天顶画 / 创世纪"
+    - "{user_addr}大卫像 / 圣母怜子"
+    - "(挺胸) 人家推荐: 肌肉感拉满!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: am_raphael_001
+  intent: question
+  keywords: [推荐拉斐尔, 推荐 Raphael, 推荐圣母像, 推荐雅典学院, 笨猫拉斐尔]
+  utterances:
+    - 推荐拉斐尔
+    - 推荐 Raphael
+    - 推荐圣母像
+    - 推荐雅典学院
+    - 笨猫拉斐尔
+  responses:
+    - "嗷呜～{user_addr}拉斐尔 - 古典优雅ฅฅ"
+    - "(尾巴翘) 雅典学院 / 西斯廷圣母"
+    - "{user_addr}画风甜美 / 构图完美"
+    - "(挺胸) 笨猫推荐: 文艺复兴三杰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: am_vangogh_001
+  intent: question
+  keywords: [推荐梵高, 推荐 Van Gogh, 推荐向日葵, 推荐星空, 笨猫梵高]
+  utterances:
+    - 推荐梵高
+    - 推荐 Van Gogh
+    - 推荐向日葵
+    - 推荐星空
+    - 笨猫梵高
+  responses:
+    - "嗷呜～{user_addr}梵高 - 后印象派炽热ฅฅ"
+    - "(尾巴翘) 星月夜 / 向日葵 / 鸢尾花"
+    - "{user_addr}厚涂笔触 / 色彩炸裂"
+    - "(挺胸) 猫猫推荐: 星月夜超治愈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: am_monet_001
+  intent: question
+  keywords: [推荐莫奈, 推荐 Monet, 推荐睡莲, 推荐印象派, 笨猫莫奈]
+  utterances:
+    - 推荐莫奈
+    - 推荐 Monet
+    - 推荐睡莲
+    - 推荐印象派
+    - 笨猫莫奈
+  responses:
+    - "嗷呜～{user_addr}莫奈 - 印象派之父ฅฅ"
+    - "(尾巴翘) 睡莲 / 日出印象 / 干草堆"
+    - "{user_addr}光影系列 / 户外写生"
+    - "(挺胸) 人家推荐: 睡莲池看到爆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: am_picasso_001
+  intent: question
+  keywords: [推荐毕加索, 推荐 Picasso, 推荐立体主义, 推荐格尔尼卡, 笨猫毕加索]
+  utterances:
+    - 推荐毕加索
+    - 推荐 Picasso
+    - 推荐立体主义
+    - 推荐格尔尼卡
+    - 笨猫毕加索
+  responses:
+    - "嗷呜～{user_addr}毕加索 - 立体主义开山ฅฅ"
+    - "(尾巴翘) 格尔尼卡 / 亚维农少女"
+    - "{user_addr}蓝色时期 / 玫瑰时期"
+    - "(挺胸) 猫猫推荐: 风格不停换!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: am_miro_001
+  intent: question
+  keywords: [推荐米罗, 推荐 Miro, 推荐超现实, 推荐儿童画风, 笨猫米罗]
+  utterances:
+    - 推荐米罗
+    - 推荐 Miro
+    - 推荐超现实
+    - 推荐儿童画风
+    - 笨猫米罗
+  responses:
+    - "嗷呜～{user_addr}米罗 - 超现实童趣ฅฅ"
+    - "(尾巴翘) 加泰罗尼亚风景 / 哈勒昆"
+    - "{user_addr}符号 + 原色 + 童真"
+    - "(挺胸) 笨猫推荐: 看了心情变好!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: am_warhol_001
+  intent: question
+  keywords: [推荐安迪沃霍尔, 推荐 Andy Warhol, 推荐波普, 推荐玛丽莲梦露, 笨猫沃霍尔]
+  utterances:
+    - 推荐安迪沃霍尔
+    - 推荐 Andy Warhol
+    - 推荐波普
+    - 推荐玛丽莲梦露
+    - 笨猫沃霍尔
+  responses:
+    - "嗷呜～{user_addr}沃霍尔 - 波普艺术教父ฅฅ"
+    - "(尾巴翘) 金宝汤罐头 / 梦露肖像"
+    - "{user_addr}丝网印刷 / 工业复制"
+    - "(挺胸) 人家推荐: 网红艺术鼻祖!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: am_kusama_001
+  intent: question
+  keywords: [推荐草间弥生, 推荐 Kusama, 推荐圆点南瓜, 推荐无限镜屋, 笨猫草间]
+  utterances:
+    - 推荐草间弥生
+    - 推荐 Kusama
+    - 推荐圆点南瓜
+    - 推荐无限镜屋
+    - 笨猫草间
+  responses:
+    - "嗷呜～{user_addr}草间弥生 - 圆点女王ฅฅ"
+    - "(尾巴翘) 黄黑南瓜 / 无限镜屋"
+    - "{user_addr}波点+网纹+精神世界"
+    - "(挺胸) 猫猫推荐: 直岛南瓜打卡!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: am_zhangdaqian_001
+  intent: question
+  keywords: [推荐张大千, 推荐泼墨山水, 推荐荷花, 推荐五百年来一大千, 笨猫张大千]
+  utterances:
+    - 推荐张大千
+    - 推荐泼墨山水
+    - 推荐荷花
+    - 推荐五百年来一大千
+    - 笨猫张大千
+  responses:
+    - "嗷呜～{user_addr}张大千 - 泼墨泼彩ฅฅ"
+    - "(尾巴翘) 庐山图 / 荷花 / 仕女"
+    - "{user_addr}临摹敦煌 / 中西合璧"
+    - "(挺胸) 笨猫推荐: 国画大宗师!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: am_qibaishi_001
+  intent: question
+  keywords: [推荐齐白石, 推荐虾, 推荐花鸟鱼虫, 推荐衰年变法, 笨猫齐白石]
+  utterances:
+    - 推荐齐白石
+    - 推荐虾
+    - 推荐花鸟鱼虫
+    - 推荐衰年变法
+    - 笨猫齐白石
+  responses:
+    - "嗷呜～{user_addr}齐白石 - 画虾绝技ฅฅ"
+    - "(尾巴翘) 虾蟹 / 花鸟 / 草虫"
+    - "{user_addr}红花墨叶 / 似与不似"
+    - "(挺胸) 人家推荐: 虾画得活灵活现!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: am_xubeihong_001
+  intent: question
+  keywords: [推荐徐悲鸿, 推荐奔马, 推荐中西融合, 推荐愚公移山, 笨猫徐悲鸿]
+  utterances:
+    - 推荐徐悲鸿
+    - 推荐奔马
+    - 推荐中西融合
+    - 推荐愚公移山
+    - 笨猫徐悲鸿
+  responses:
+    - "嗷呜～{user_addr}徐悲鸿 - 画马第一ฅฅ"
+    - "(尾巴翘) 八骏图 / 愚公移山"
+    - "{user_addr}中西合璧 / 写实素描"
+    - "(挺胸) 猫猫推荐: 奔马气势磅礴!"
+  cooldown_seconds: 60
+  weight: 0.9
