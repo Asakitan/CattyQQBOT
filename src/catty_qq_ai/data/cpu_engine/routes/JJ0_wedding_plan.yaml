@@ -1,0 +1,206 @@
+# 婚礼策划 / 婚庆公司 / 婚纱照 routes (S6 R372 NLU 节点扩充, 第三十七周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: wp_company_001
+  intent: question
+  keywords: [推荐婚礼策划公司, 推荐婚庆公司, 推荐一站式婚礼, 推荐婚礼策划师, 笨猫婚礼策划]
+  utterances:
+    - 推荐婚礼策划公司
+    - 推荐婚庆公司
+    - 推荐一站式婚礼
+    - 推荐婚礼策划师
+    - 笨猫婚礼策划
+  responses:
+    - "嗷呜～{user_addr}花嫁丽舍 / 圣纳菲 - 高端ฅฅ"
+    - "(尾巴翘) 蜜匠婚礼 / 花田喜事"
+    - "{user_addr}一站式: 策划+布置+主持+摄影"
+    - "(挺胸) 笨猫推荐: 预算 5w 起步看本地连锁!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_photo_001
+  intent: question
+  keywords: [推荐婚纱照, 推荐三亚婚纱照, 推荐青岛婚纱照, 推荐旅拍婚纱, 笨猫婚纱照]
+  utterances:
+    - 推荐婚纱照
+    - 推荐三亚婚纱照
+    - 推荐青岛婚纱照
+    - 推荐旅拍婚纱
+    - "{user_addr}婚纱照拍哪"
+  responses:
+    - "嗷呜～{user_addr}三亚 / 青岛 / 厦门 - 海景天花板ฅฅ"
+    - "(尾巴翘) 大理 / 丽江 - 文艺风"
+    - "{user_addr}铂爵 / 唯一 / 金夫人 - 连锁大牌"
+    - "(挺胸) 笨猫推荐: 三亚旅拍 1.5w 含机酒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_dress_001
+  intent: question
+  keywords: [推荐婚纱品牌, 推荐 Vera Wang, 推荐婚纱定制, 推荐主婚纱, 笨猫婚纱]
+  utterances:
+    - 推荐婚纱品牌
+    - 推荐 Vera Wang
+    - 推荐婚纱定制
+    - 推荐主婚纱
+    - 笨猫婚纱
+  responses:
+    - "嗷呜～{user_addr}Vera Wang - 婚纱女王ฅฅ"
+    - "(尾巴翘) Pronovias / Monique Lhuillier / Elie Saab"
+    - "{user_addr}国货: Lan Yu / Grace Chen"
+    - "(挺胸) 笨猫推荐: 租 Vera Wang 比买香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_venue_001
+  intent: question
+  keywords: [推荐婚礼场地, 推荐婚礼布置, 推荐宴会厅, 推荐户外婚礼场地, 笨猫婚礼场地]
+  utterances:
+    - 推荐婚礼场地
+    - 推荐婚礼布置
+    - 推荐宴会厅
+    - 推荐户外婚礼场地
+    - 笨猫婚礼场地
+  responses:
+    - "嗷呜～{user_addr}五星酒店宴会厅 - 安全稳妥ฅฅ"
+    - "(尾巴翘) 草坪 / 教堂 / 海边 - 仪式感拉满"
+    - "{user_addr}布置: 鲜花拱门 + 路引 + 留影墙"
+    - "(挺胸) 笨猫推荐: 仪式区户外+宴会室内!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_mc_photo_001
+  intent: question
+  keywords: [推荐婚礼司仪, 推荐婚礼摄影, 推荐婚礼跟拍, 推荐婚礼摄像, 笨猫婚礼摄影]
+  utterances:
+    - 推荐婚礼司仪
+    - 推荐婚礼摄影
+    - 推荐婚礼跟拍
+    - 推荐婚礼摄像
+    - 笨猫婚礼摄影
+  responses:
+    - "嗷呜～{user_addr}司仪 3-8k / 名嘴翻倍ฅฅ"
+    - "(尾巴翘) 双机摄影 + 双机摄像 必备"
+    - "{user_addr}快剪 + 精修 + 4K MV"
+    - "(挺胸) 笨猫推荐: 摄影比司仪重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_invite_001
+  intent: question
+  keywords: [推荐婚礼请帖, 推荐电子请柬, 推荐喜帖, 推荐婚礼邀请函, 笨猫电子请柬]
+  utterances:
+    - 推荐婚礼请帖
+    - 推荐电子请柬
+    - 推荐喜帖
+    - 推荐婚礼邀请函
+    - 笨猫电子请柬
+  responses:
+    - "嗷呜～{user_addr}MAKA / 易企秀 - 电子请柬ฅฅ"
+    - "(尾巴翘) 纸质烫金 + H5 双发"
+    - "{user_addr}内嵌地图 + 倒计时 + 祝福墙"
+    - "(挺胸) 笨猫推荐: 长辈纸质+同辈 H5!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wp_honeymoon_001
+  intent: question
+  keywords: [推荐婚礼蜜月, 推荐蜜月旅行, 推荐马尔代夫蜜月, 推荐巴厘岛蜜月, 笨猫蜜月]
+  utterances:
+    - 推荐婚礼蜜月
+    - 推荐蜜月旅行
+    - 推荐马尔代夫蜜月
+    - 推荐巴厘岛蜜月
+    - 笨猫蜜月
+  responses:
+    - "嗷呜～{user_addr}马尔代夫 - 蜜月顶配ฅฅ"
+    - "(尾巴翘) 巴厘岛 / 大溪地 / 圣托里尼"
+    - "{user_addr}国内: 三亚 / 丽江 / 香格里拉"
+    - "(挺胸) 笨猫推荐: 婚礼后 1 个月再去更松!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_outdoor_001
+  intent: question
+  keywords: [推荐草坪婚礼, 推荐教堂婚礼, 推荐海边婚礼, 推荐户外仪式, 笨猫草坪婚礼]
+  utterances:
+    - 推荐草坪婚礼
+    - 推荐教堂婚礼
+    - 推荐海边婚礼
+    - 推荐户外仪式
+    - 笨猫草坪婚礼
+  responses:
+    - "嗷呜～{user_addr}草坪 - 清新自然首选ฅฅ"
+    - "(尾巴翘) 教堂 - 西式仪式感 / 海边 - 浪漫"
+    - "{user_addr}注意: 备雨方案 + 防晒 + 蚊虫"
+    - "(挺胸) 笨猫推荐: 4-5 月 10 月最佳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_chinese_001
+  intent: question
+  keywords: [推荐中式婚礼, 推荐凤冠霞帔, 推荐汉式婚礼, 推荐秀禾服, 笨猫中式婚礼]
+  utterances:
+    - 推荐中式婚礼
+    - 推荐凤冠霞帔
+    - 推荐汉式婚礼
+    - 推荐秀禾服
+    - 笨猫中式婚礼
+  responses:
+    - "嗷呜～{user_addr}凤冠霞帔 + 秀禾服 - 大气ฅฅ"
+    - "(尾巴翘) 汉式 / 唐式 / 明制 三选一"
+    - "{user_addr}NE TIGER / 龙凤褂可定可租"
+    - "(挺胸) 笨猫推荐: 中式仪式+西式晚宴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_banquet_001
+  intent: question
+  keywords: [推荐婚宴酒店, 推荐婚宴菜单, 推荐五星酒店婚宴, 推荐婚宴桌数, 笨猫婚宴酒店]
+  utterances:
+    - 推荐婚宴酒店
+    - 推荐婚宴菜单
+    - 推荐五星酒店婚宴
+    - 推荐婚宴桌数
+    - 笨猫婚宴酒店
+  responses:
+    - "嗷呜～{user_addr}喜来登 / 万豪 / 希尔顿ฅฅ"
+    - "(尾巴翘) 本地金钥匙酒店性价比高"
+    - "{user_addr}菜单 3-6k/桌 / 多备 2 桌"
+    - "(挺胸) 笨猫推荐: 提前半年定档期!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_budget_001
+  intent: question
+  keywords: [推荐婚礼预算, 推荐婚礼省钱, 推荐婚礼花费, 推荐婚礼分配, 笨猫婚礼预算]
+  utterances:
+    - 推荐婚礼预算
+    - 推荐婚礼省钱
+    - 推荐婚礼花费
+    - 推荐婚礼分配
+    - 笨猫婚礼预算
+  responses:
+    - "嗷呜～{user_addr}总预算 = 宴席 50% + 策划 20%ฅฅ"
+    - "(尾巴翘) 婚纱照 10% + 蜜月 15% + 杂项 5%"
+    - "{user_addr}省钱: 工作日 / 中午场 / 不旺季"
+    - "(挺胸) 笨猫推荐: 一线 15w / 二线 8w 起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_simple_001
+  intent: question
+  keywords: [推荐简约婚礼, 推荐旅行婚礼, 推荐小型婚礼, 推荐 destination wedding, 笨猫简约婚礼]
+  utterances:
+    - 推荐简约婚礼
+    - 推荐旅行婚礼
+    - 推荐小型婚礼
+    - 推荐 destination wedding
+    - 笨猫简约婚礼
+  responses:
+    - "嗷呜～{user_addr}简约: 10 桌内 / 仅至亲ฅฅ"
+    - "(尾巴翘) 旅行婚礼: 大理 / 三亚 / 巴厘岛"
+    - "{user_addr}省心省钱省力, 体验感爆棚"
+    - "(挺胸) 笨猫推荐: 不爱排面就选这个!"
+  cooldown_seconds: 60
+  weight: 1.0

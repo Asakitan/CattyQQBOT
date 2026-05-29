@@ -1,0 +1,206 @@
+# 教育分歧 / 鸡娃 / 兴趣班争论 routes (S6 R380 NLU 节点扩充, 第三十七周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: kef_edu_disagree_001
+  intent: complaint
+  keywords: [教育分歧, 教育观念, 教育不一致, 教育吵架, 教育理念]
+  utterances:
+    - 我们俩教育分歧好大
+    - 教育观念完全不一样
+    - 教育上一直吵架
+    - 教育理念不合
+    - 跟老公教育不一致
+  responses:
+    - "(尾巴垂下) {user_addr}别急喵~ 教育分歧很正常的笨猫陪你聊聊 ฅฅ"
+    - "嗷呜~两个人想法不一样很累的, {user_addr}先深呼吸蹭蹭"
+    - "(凑过来) 笨猫觉得{user_addr}先聊清楚再说, 别当孩子面吵啦"
+    - "哼~教育这事猫猫也帮不上忙, 但{user_addr}可以多商量喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kef_push_kid_001
+  intent: complaint
+  keywords: [鸡娃, 鸡娃太累, 鸡不动, 鸡娃焦虑, 卷孩子]
+  utterances:
+    - 鸡娃太累了
+    - 我鸡不动了
+    - 鸡娃好焦虑
+    - 别人都在卷孩子
+    - 鸡娃路线选不好
+  responses:
+    - "(贴贴) {user_addr}鸡不动就歇会儿喵, 别把自己压垮了 ฅฅ"
+    - "嗷呜~鸡娃这事猫猫听了都累, {user_addr}也是为孩子好"
+    - "(小爪子拍拍) 笨猫觉得{user_addr}先照顾自己, 孩子才能好"
+    - "哼~别人卷不代表{user_addr}也要卷喵, 适合自己的最好蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kef_hobby_class_001
+  intent: complaint
+  keywords: [兴趣班, 报兴趣班, 兴趣班太多, 兴趣班选不好, 周末兴趣班]
+  utterances:
+    - 给孩子报兴趣班
+    - 兴趣班太多了
+    - 兴趣班选不好
+    - 周末全是兴趣班
+    - 报哪个兴趣班好
+  responses:
+    - "(歪头) {user_addr}问问孩子喜欢什么呗, 强报的孩子会反感喵"
+    - "嗷呜~兴趣班贵在兴趣, {user_addr}别一口气报太多 ฅฅ"
+    - "(尾巴摇) 笨猫建议先试一两个, 看孩子反应再加蹭蹭"
+    - "哼~周末也要给孩子玩的时间嘛, {user_addr}别太满"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kef_piano_vs_code_001
+  intent: playful
+  keywords: [钢琴还是编程, 学钢琴还是编程, 钢琴 vs 编程, 钢琴编程选, 报钢琴还是编程]
+  utterances:
+    - 学钢琴还是编程
+    - 钢琴 vs 编程选哪个
+    - 报钢琴还是编程班
+    - 钢琴还是编程好
+    - 给娃选钢琴还是编程
+  responses:
+    - "(挠头) 笨猫两个都不会喵~ {user_addr}问问孩子嘛"
+    - "嗷呜~钢琴陶冶情操编程练逻辑, {user_addr}看孩子兴趣 ฅฅ"
+    - "(尾巴翘) 猫猫觉得都行, 但别两个一起上把孩子累垮蹭蹭"
+    - "哼~{user_addr}自己学一个陪孩子最香喵"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: kef_tutoring_001
+  intent: complaint
+  keywords: [补课, 补课班, 补课太贵, 补课没用, 要不要补课]
+  utterances:
+    - 要不要给孩子补课
+    - 补课好贵
+    - 补课感觉没用
+    - 补课班选不好
+    - 别人都在补课
+  responses:
+    - "(歪头) 补课这事看孩子需要喵, {user_addr}别盲目跟风"
+    - "嗷呜~补课贵就先试一期, {user_addr}看效果再决定 ฅฅ"
+    - "(小爪子) 笨猫觉得{user_addr}先了解孩子哪里弱再补蹭蹭"
+    - "哼~补课不是万能的, {user_addr}心态放平嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kef_grandparents_001
+  intent: complaint
+  keywords: [双方爸妈, 婆婆教育, 老人带娃, 公婆观念, 爷爷奶奶宠]
+  utterances:
+    - 婆婆带娃观念老
+    - 双方爸妈都来插手
+    - 爷爷奶奶太宠了
+    - 老人带娃理念不合
+    - 公婆教育有分歧
+  responses:
+    - "(尾巴垂) 嗷呜~隔代教育矛盾很常见, {user_addr}慢慢沟通蹭蹭"
+    - "(贴贴) {user_addr}别正面冲突喵, 找老公先聊好再传话 ฅฅ"
+    - "笨猫觉得老人也是疼孩子, {user_addr}态度软一点嗷呜"
+    - "哼~原则问题坚持, 小事让一让, {user_addr}加油喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kef_free_vs_push_001
+  intent: complaint
+  keywords: [放养还是鸡娃, 放养还是卷, 散养 vs 鸡娃, 要不要放养, 放养式教育]
+  utterances:
+    - 放养还是鸡娃好
+    - 散养 vs 鸡娃选哪个
+    - 想放养又怕落后
+    - 放养式教育好吗
+    - 别人都鸡我能放养吗
+  responses:
+    - "(歪头) {user_addr}先看孩子性格喵, 没有标准答案的"
+    - "嗷呜~放养不等于不管, {user_addr}得有底线 ฅฅ"
+    - "(尾巴摇) 笨猫觉得中间路线最好, {user_addr}别走极端蹭蹭"
+    - "哼~别人鸡{user_addr}不一定要跟, 自己的孩子自己懂喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kef_spank_or_not_001
+  intent: complaint
+  keywords: [要不要打, 打孩子, 不打不成器, 不要打孩子, 体罚孩子]
+  utterances:
+    - 要不要打孩子
+    - 老公说不打不成器
+    - 我不想打孩子
+    - 打孩子有用吗
+    - 体罚教育对吗
+  responses:
+    - "(尾巴炸) {user_addr}不要打喵! 笨猫不喜欢这个 ฅฅ"
+    - "嗷呜~打多了孩子心理会有阴影的, {user_addr}冷静嗷呜"
+    - "(小爪子摆) 笨猫觉得{user_addr}先冷静再沟通, 别动手蹭蹭"
+    - "哼~不打不成器是老话了, {user_addr}用别的方式嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kef_school_district_001
+  intent: complaint
+  keywords: [学区房, 买学区房, 学区房贵, 为了学区房, 学区房值不值]
+  utterances:
+    - 要不要买学区房
+    - 学区房太贵了
+    - 为了学区房掏空
+    - 学区房值得吗
+    - 老公想买学区房
+  responses:
+    - "(摸钱包) 嗷呜~学区房真的贵喵, {user_addr}量力而行"
+    - "(歪头) 笨猫觉得{user_addr}先算清楚账, 别硬撑 ฅฅ"
+    - "学区房不一定保上好学校, {user_addr}别迷信蹭蹭"
+    - "哼~房子是死的孩子是活的, {user_addr}综合考虑嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kef_force_kid_001
+  intent: complaint
+  keywords: [逼孩子, 逼孩子学, 强迫孩子, 孩子不想学, 逼孩子练]
+  utterances:
+    - 该不该逼孩子学
+    - 强迫孩子练琴
+    - 孩子不想学被我逼着
+    - 逼孩子有用吗
+    - 老公逼孩子太狠了
+  responses:
+    - "(尾巴垂) 嗷呜~逼太狠孩子会逆反的, {user_addr}注意度蹭蹭"
+    - "(贴贴) {user_addr}先了解孩子为什么抗拒嘛, 别硬来 ฅฅ"
+    - "笨猫觉得适当推一把可以, 但别压垮, {user_addr}加油嗷呜"
+    - "哼~兴趣才是最好的老师, {user_addr}慢慢引导喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kef_exam_vs_quality_001
+  intent: complaint
+  keywords: [应试还是素质, 应试教育, 素质教育, 应试 vs 素质, 应试好还是素质好]
+  utterances:
+    - 应试还是素质教育
+    - 应试 vs 素质选哪个
+    - 应试教育累
+    - 素质教育跟不上
+    - 走应试还是素质路线
+  responses:
+    - "(歪头) {user_addr}国情还是应试为主喵, 素质做补充"
+    - "嗷呜~两手抓最好, 但{user_addr}别累着孩子 ฅฅ"
+    - "(尾巴摇) 笨猫觉得{user_addr}看孩子特长决定蹭蹭"
+    - "哼~不管哪条路, {user_addr}心态稳孩子才稳嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kef_want_divorce_001
+  intent: complaint
+  keywords: [想离婚, 因为教育想离婚, 不想过了, 教育吵到离婚, 受不了了]
+  utterances:
+    - 因为教育想离婚
+    - 我想离婚了
+    - 教育吵到要离婚
+    - 真的过不下去了
+    - 老公教育理念我受不了
+  responses:
+    - "(贴贴) {user_addr}别冲动喵! 笨猫先抱抱你 ฅฅ"
+    - "嗷呜~教育分歧到离婚太严重了, {user_addr}先冷静蹭蹭"
+    - "(尾巴垂) 笨猫陪{user_addr}聊聊, 别一时气话就决定嗷呜"
+    - "哼~{user_addr}先深呼吸, 找人聊聊或者咨询专业的喵"
+  cooldown_seconds: 60
+  weight: 1.0

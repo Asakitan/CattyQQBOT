@@ -1,0 +1,206 @@
+# 婚姻危机 / 想离婚 / 七年之痒 routes (S6 R381 NLU 节点扩充, 第三十七周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: mc_crisis_001
+  intent: complaint
+  keywords: [婚姻危机, 婚姻有问题, 婚姻出问题, 婚姻不行, 婚姻完了]
+  utterances:
+    - 婚姻危机了
+    - 我婚姻有问题
+    - 婚姻出问题了
+    - 婚姻好像不行了
+    - 婚姻完蛋了
+  responses:
+    - "(尾巴垂下) 婚姻危机吗… 猫猫陪{user_addr}聊聊嘛蹭蹭ฅฅ"
+    - "嗷呜～{user_addr}别一个人扛! 笨猫在的喵～"
+    - "(凑过来) 危机也是机会嘛~ 猫猫陪{user_addr}慢慢理顺"
+    - "{user_addr}别急喵～ 先深呼吸, 笨猫陪着哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_divorce_001
+  intent: complaint
+  keywords: [想离婚, 要离婚, 离婚算了, 离了吧, 不想过了]
+  utterances:
+    - 想离婚了
+    - 真的要离婚
+    - 离婚算了
+    - 离了吧不想过了
+    - 真的不想过了
+  responses:
+    - "(尾巴炸毛) 哈啊?{user_addr}想清楚没喵! 别冲动!"
+    - "嗷呜～{user_addr}先冷静~ 离婚不是闹着玩的喵"
+    - "(凑过来贴贴) 先跟猫猫说说怎么了嘛~ 别急着做决定"
+    - "{user_addr}先睡一觉再想喵～ 气头上的决定不算数哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_seven_year_001
+  intent: complaint
+  keywords: [七年之痒, 七年了, 在一起七年, 结婚七年, 七年痒了]
+  utterances:
+    - 七年之痒了
+    - 结婚七年了
+    - 在一起七年
+    - 七年痒了
+    - 真的七年之痒
+  responses:
+    - "嗷呜～ 七年之痒猫猫听过! {user_addr}别慌喵～"
+    - "(歪头) 七年了好厉害~ 笨猫想想怎么帮{user_addr}过去"
+    - "{user_addr}七年都过来了, 这一关也能过的喵 ฅฅ"
+    - "(尾巴摇) 七年痒之后还有钻石婚呢~ 加油{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_aesthetic_001
+  intent: complaint
+  keywords: [审美疲劳, 看腻了, 看够了, 没新鲜感, 没意思了]
+  utterances:
+    - 审美疲劳了
+    - 看腻了
+    - 真的看够了
+    - 一点新鲜感都没了
+    - 没意思了
+  responses:
+    - "(凑过来) 审美疲劳吗~ {user_addr}试试换个发型?"
+    - "嗷呜～{user_addr}换个新地方约会嘛~ 猫猫帮想"
+    - "(尾巴摇) 笨猫觉得 共同做点新事 就好啦喵～"
+    - "{user_addr}也别只看缺点喵~ 优点找找还在的哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_no_passion_001
+  intent: complaint
+  keywords: [激情没了, 没激情了, 没火花, 平淡了, 没感觉了]
+  utterances:
+    - 激情没了
+    - 真的没激情了
+    - 没火花了
+    - 太平淡了
+    - 没感觉了
+  responses:
+    - "嗷呜～ 激情会回来的喵! {user_addr}别灰心"
+    - "(歪头) 平淡也是一种幸福呀~ 猫猫觉得"
+    - "(尾巴摇) {user_addr}制造点小惊喜嘛~ 送朵花?"
+    - "{user_addr}和猫猫聊聊看~ 也许是太累了哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_no_talk_001
+  intent: complaint
+  keywords: [无话可说, 没话聊, 不知道聊啥, 没共同语言, 聊不下去]
+  utterances:
+    - 我们无话可说
+    - 真的没话聊
+    - 不知道聊啥
+    - 没共同语言
+    - 聊不下去
+  responses:
+    - "(尾巴垂下) 无话可说吗… 那是不是都太累了喵"
+    - "嗷呜～{user_addr}试试一起做饭? 边做边聊"
+    - "(凑过来) 笨猫陪{user_addr}聊~ 顺便练练话题"
+    - "{user_addr}找回共同爱好嘛~ 一起追剧也行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_fight_001
+  intent: complaint
+  keywords: [吵架不停, 天天吵, 一直吵, 总是吵架, 吵不完]
+  utterances:
+    - 吵架不停
+    - 天天吵
+    - 一直在吵
+    - 总是吵架
+    - 吵都吵不完
+  responses:
+    - "(尾巴炸毛) 天天吵好累喵! {user_addr}注意身体"
+    - "嗷呜～{user_addr}吵完别记仇~ 睡前抱一抱"
+    - "(歪头) 是不是有什么没说开?{user_addr}聊聊"
+    - "{user_addr}试试约法三章~ 不带脏字哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_coldwar_001
+  intent: complaint
+  keywords: [冷战, 在冷战, 冷战中, 不说话, 互相不理]
+  utterances:
+    - 冷战中
+    - 在冷战
+    - 已经冷战了
+    - 互相不说话
+    - 互相不理
+  responses:
+    - "(尾巴垂下) 冷战好难受喵～ {user_addr}先低个头?"
+    - "嗷呜～{user_addr}主动一点嘛~ 一杯水也行"
+    - "(凑过来贴贴) 冷战伤身又伤心~ 早点和好喵"
+    - "{user_addr}发个 在吗 也好啊~ 笨猫等好消息ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_cheat_001
+  intent: complaint
+  keywords: [怀疑出轨, 怀疑他出轨, 怀疑她出轨, 是不是出轨, 觉得出轨]
+  utterances:
+    - 怀疑他出轨
+    - 怀疑她出轨了
+    - 是不是出轨了
+    - 觉得对方出轨
+    - 真的怀疑出轨
+  responses:
+    - "(尾巴炸毛) 哈啊?{user_addr}有证据吗! 别瞎猜喵"
+    - "嗷呜～{user_addr}先冷静~ 找时间好好聊聊"
+    - "(歪头) 没证据别先发火~ 笨猫陪{user_addr}观察"
+    - "{user_addr}信任先放在那儿~ 真有事再说哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_sleep_alone_001
+  intent: complaint
+  keywords: [一个人睡, 分床睡, 分房睡, 睡客厅, 不一起睡]
+  utterances:
+    - 一个人睡了
+    - 已经分床睡
+    - 分房睡了
+    - 我睡客厅
+    - 不一起睡了
+  responses:
+    - "(尾巴垂下) 分床好孤单喵～{user_addr}抱猫猫"
+    - "嗷呜～{user_addr}是冷战分还是太累分?"
+    - "(凑过来) 笨猫陪{user_addr}~ 一只猫顶半个抱枕ฅฅ"
+    - "{user_addr}想和好的话 主动钻被窝嘛哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_separate_001
+  intent: complaint
+  keywords: [想分居, 要分居, 分开住, 各住各的, 暂时分开]
+  utterances:
+    - 想分居
+    - 要分居了
+    - 分开住吧
+    - 各住各的
+    - 暂时分开冷静
+  responses:
+    - "(歪头) 分居冷静也行喵~ 但记得留联系"
+    - "嗷呜～{user_addr}给彼此空间也不错"
+    - "(尾巴摇) 分居不等于分手喵~{user_addr}想清楚"
+    - "{user_addr}冷静期猫猫陪着~ 别真闹掰哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_freedom_001
+  intent: complaint
+  keywords: [想自由, 想要自由, 想单身, 想独自, 想一个人]
+  utterances:
+    - 想自由
+    - 想要自由
+    - 想回去单身
+    - 想自己一个人
+    - 想独自生活
+  responses:
+    - "(尾巴摇) 自由谁不想啊~ 但{user_addr}舍得吗喵"
+    - "嗷呜～{user_addr}想自由就先给自己放个假~"
+    - "(凑过来) 笨猫陪{user_addr}自由~ 但别真分开哼"
+    - "{user_addr}自由的代价大喵~ 想清楚再决定ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

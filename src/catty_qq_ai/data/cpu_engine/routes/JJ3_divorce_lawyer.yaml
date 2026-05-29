@@ -1,0 +1,206 @@
+# 离婚律师 / 协议离婚 / 诉讼离婚 routes (S6 R375 NLU 节点扩充, 第三十七周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: dl_lawyer_001
+  intent: question
+  keywords: [推荐离婚律师, 推荐离婚律所, 推荐家事律师, 推荐婚姻律师, 笨猫离婚律师]
+  utterances:
+    - 推荐离婚律师
+    - 推荐离婚律所
+    - 推荐家事律师
+    - 推荐婚姻律师
+    - 笨猫离婚律师
+  responses:
+    - "嗷呜～{user_addr}家事所 / 盈科 / 大成婚姻部ฅฅ"
+    - "(尾巴翘) 看胜诉率 / 看年限 / 看专精"
+    - "{user_addr}收费: 风险代理 or 固定费"
+    - "(挺胸) 笨猫推荐: 优先专做家事的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_agreement_001
+  intent: question
+  keywords: [推荐协议离婚, 推荐协议离婚流程, 推荐民政局离婚, 推荐离婚登记, 笨猫协议离婚]
+  utterances:
+    - 推荐协议离婚
+    - 推荐协议离婚流程
+    - 推荐民政局离婚
+    - 推荐离婚登记
+    - 笨猫协议离婚
+  responses:
+    - "嗷呜～{user_addr}双方自愿 + 协议书ฅฅ"
+    - "(尾巴翘) 民政局申请 → 30 天冷静期 → 领证"
+    - "{user_addr}协议要含: 财产 / 抚养 / 债务"
+    - "(挺胸) 笨猫推荐: 协议写细省后患!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_litigation_001
+  intent: question
+  keywords: [推荐诉讼离婚, 推荐起诉离婚, 推荐离婚官司, 推荐法院离婚, 笨猫诉讼离婚]
+  utterances:
+    - 推荐诉讼离婚
+    - 推荐起诉离婚
+    - 推荐离婚官司
+    - 推荐法院离婚
+    - 笨猫诉讼离婚
+  responses:
+    - "嗷呜～{user_addr}一方不同意走诉讼ฅฅ"
+    - "(尾巴翘) 一审 6 个月 / 二审 3 个月"
+    - "{user_addr}第一次判离率低 / 第二次高"
+    - "(挺胸) 笨猫推荐: 准备分居证据!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_property_001
+  intent: question
+  keywords: [推荐财产分割, 推荐夫妻共同财产, 推荐离婚分财产, 推荐房产分割, 笨猫财产分割]
+  utterances:
+    - 推荐财产分割
+    - 推荐夫妻共同财产
+    - 推荐离婚分财产
+    - 推荐房产分割
+    - 笨猫财产分割
+  responses:
+    - "嗷呜～{user_addr}原则: 共同财产平分ฅฅ"
+    - "(尾巴翘) 婚前财产 / 继承赠予归个人"
+    - "{user_addr}房产看登记 + 出资 + 还贷"
+    - "(挺胸) 笨猫推荐: 流水截图全留!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_custody_001
+  intent: question
+  keywords: [推荐抚养权, 推荐抚养权争夺, 推荐孩子归谁, 推荐子女抚养, 笨猫抚养权]
+  utterances:
+    - 推荐抚养权
+    - 推荐抚养权争夺
+    - 推荐孩子归谁
+    - 推荐子女抚养
+    - 笨猫抚养权
+  responses:
+    - "嗷呜～{user_addr}2 岁内一般归母ฅฅ"
+    - "(尾巴翘) 8 岁以上看孩子意愿"
+    - "{user_addr}看经济 / 看陪伴时间 / 看品行"
+    - "(挺胸) 笨猫推荐: 留陪伴证据!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_alimony_001
+  intent: question
+  keywords: [推荐抚养费, 推荐抚养费标准, 推荐子女抚养费, 推荐月抚养费, 笨猫抚养费]
+  utterances:
+    - 推荐抚养费
+    - 推荐抚养费标准
+    - 推荐子女抚养费
+    - 推荐月抚养费
+    - 笨猫抚养费
+  responses:
+    - "嗷呜～{user_addr}月收入 20%~30%ฅฅ"
+    - "(尾巴翘) 两孩可至 50%"
+    - "{user_addr}无固定收入按当地平均"
+    - "(挺胸) 笨猫推荐: 一次性 or 按月看对方信用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_preserve_001
+  intent: question
+  keywords: [推荐财产保全, 推荐婚内财产保全, 推荐财产冻结, 推荐转移财产, 笨猫财产保全]
+  utterances:
+    - 推荐财产保全
+    - 推荐婚内财产保全
+    - 推荐财产冻结
+    - 推荐转移财产
+    - 笨猫财产保全
+  responses:
+    - "嗷呜～{user_addr}诉前 / 诉中保全ฅฅ"
+    - "(尾巴翘) 冻结银行 / 房产 / 股权"
+    - "{user_addr}对方转移可主张少分"
+    - "(挺胸) 笨猫推荐: 早查流水早申请!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_coolperiod_001
+  intent: question
+  keywords: [推荐离婚冷静期, 推荐冷静期, 推荐30天冷静期, 推荐冷静期制度, 笨猫冷静期]
+  utterances:
+    - 推荐离婚冷静期
+    - 推荐冷静期
+    - 推荐30天冷静期
+    - 推荐冷静期制度
+    - 笨猫冷静期
+  responses:
+    - "嗷呜～{user_addr}协议离婚专属 30 天ฅฅ"
+    - "(尾巴翘) 任一方可撤回申请"
+    - "{user_addr}期满 30 天内不取证即作废"
+    - "(挺胸) 笨猫推荐: 想清楚再申请!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_prenup_001
+  intent: question
+  keywords: [推荐婚内协议, 推荐婚前协议, 推荐财产协议, 推荐婚内财产约定, 笨猫婚内协议]
+  utterances:
+    - 推荐婚内协议
+    - 推荐婚前协议
+    - 推荐财产协议
+    - 推荐婚内财产约定
+    - 笨猫婚内协议
+  responses:
+    - "嗷呜～{user_addr}书面 + 签字即生效ฅฅ"
+    - "(尾巴翘) 不必公证但建议公证"
+    - "{user_addr}可约定 AA / 分别所有"
+    - "(挺胸) 笨猫推荐: 重大资产前写清!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_evidence_001
+  intent: question
+  keywords: [推荐出轨证据, 推荐出轨证据收集, 推荐婚外情取证, 推荐过错方证据, 笨猫出轨证据]
+  utterances:
+    - 推荐出轨证据
+    - 推荐出轨证据收集
+    - 推荐婚外情取证
+    - 推荐过错方证据
+    - 笨猫出轨证据
+  responses:
+    - "嗷呜～{user_addr}聊天 / 转账 / 同居照片ฅฅ"
+    - "(尾巴翘) 保证书 / 录音也有效"
+    - "{user_addr}合法取证 - 别闯私宅"
+    - "(挺胸) 笨猫推荐: 公证截图防销毁!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_visit_001
+  intent: question
+  keywords: [推荐探视权, 推荐离婚后探视, 推荐看孩子权利, 推荐探望权, 笨猫探视权]
+  utterances:
+    - 推荐探视权
+    - 推荐离婚后探视
+    - 推荐看孩子权利
+    - 推荐探望权
+    - 笨猫探视权
+  responses:
+    - "嗷呜～{user_addr}不带娃方法定权利ฅฅ"
+    - "(尾巴翘) 频率 / 方式可协议 or 判决"
+    - "{user_addr}拒不配合可申请强制执行"
+    - "(挺胸) 笨猫推荐: 写进协议防扯皮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_debt_001
+  intent: question
+  keywords: [推荐婚内债务, 推荐夫妻共同债务, 推荐婚内债务承担, 推荐离婚分债务, 笨猫婚内债务]
+  utterances:
+    - 推荐婚内债务
+    - 推荐夫妻共同债务
+    - 推荐婚内债务承担
+    - 推荐离婚分债务
+    - 笨猫婚内债务
+  responses:
+    - "嗷呜～{user_addr}共签 / 共用 = 共同债务ฅฅ"
+    - "(尾巴翘) 一方个人挥霍可主张个债"
+    - "{user_addr}赌博 / 吸毒债不担"
+    - "(挺胸) 笨猫推荐: 流水举证用途!"
+  cooldown_seconds: 60
+  weight: 1.0

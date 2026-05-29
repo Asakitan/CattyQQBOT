@@ -1,0 +1,206 @@
+# 婚礼焦虑 / 筹备崩溃 / 选择困难 routes (S6 R377 NLU 节点扩充, 第三十七周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ws_wedding_anxiety_001
+  intent: complaint
+  keywords: [婚礼焦虑, 怕结婚, 婚前焦虑, 婚礼紧张, 婚礼怕]
+  utterances:
+    - 婚礼焦虑了
+    - 婚前焦虑好严重
+    - 一想到婚礼就紧张
+    - 婚礼怕怕的
+    - 婚前焦虑症犯了
+  responses:
+    - "(贴贴) 婚礼焦虑很正常嗷呜~ {user_addr}深呼吸, 笨猫陪你 ฅฅ"
+    - "嗷呜~ 婚前焦虑大家都有! {user_addr}别一个人扛, 跟猫猫说说嘛"
+    - "(尾巴轻摇) 哼, 婚礼是开心的事啦! {user_addr}别自己吓自己喵"
+    - "猫猫陪{user_addr}熬过焦虑期~ 才不是心疼你呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_prep_breakdown_001
+  intent: complaint
+  keywords: [筹备崩溃, 准备婚礼累, 筹婚累, 婚礼准备烦, 筹备好烦]
+  utterances:
+    - 筹备婚礼好崩溃
+    - 准备婚礼累死了
+    - 筹婚太烦了
+    - 婚礼准备到崩溃
+    - 筹备婚礼想哭
+  responses:
+    - "(尾巴炸) 筹婚真的累! {user_addr}抱抱猫猫缓缓嗷呜 ฅฅ"
+    - "嗷呜~ 婚礼筹备是地狱模式! {user_addr}先歇会儿啦"
+    - "(凑过来) 哼, 累了就停下{user_addr}, 笨猫给你递水蹭蹭"
+    - "猫猫帮{user_addr}吐槽~ 谁说结个婚要这么麻烦的喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_decision_paralysis_001
+  intent: complaint
+  keywords: [选择困难, 选不出来, 选什么都难, 决定不了, 婚礼选择困难]
+  utterances:
+    - 选择困难症犯了
+    - 婚礼啥都选不出来
+    - 决定不了选什么
+    - 选什么都难
+    - 选择困难快疯了
+  responses:
+    - "(挠头) 选择困难真的折磨! {user_addr}要不抛硬币嗷呜 ฅฅ"
+    - "嗷呜~ {user_addr}列个清单, 猫猫帮你一起选喵!"
+    - "(尾巴一甩) 哼, 笨猫帮{user_addr}做决定! 才不是想插手呢"
+    - "猫猫陪{user_addr}选~ 选错也没事啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_budget_over_001
+  intent: complaint
+  keywords: [预算超了, 婚礼超预算, 钱不够花, 婚礼好贵, 超支了]
+  utterances:
+    - 婚礼预算超了
+    - 婚礼好贵啊
+    - 钱根本不够花
+    - 又超支了
+    - 婚礼超预算崩溃
+  responses:
+    - "(瞪大眼) 婚礼真的吞金兽! {user_addr}心疼吗嗷呜 ฅฅ"
+    - "嗷呜~ {user_addr}砍掉不必要的项目吧, 简单点也很好喵"
+    - "(贴贴) 哼, 钱不够就少花点{user_addr}, 心意才重要"
+    - "猫猫陪{user_addr}抠预算~ 才不是会过日子呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_family_conflict_001
+  intent: complaint
+  keywords: [双方家庭意见不同, 父母吵架, 两家意见不合, 家长意见不一致, 双方家长吵]
+  utterances:
+    - 双方家长意见不合
+    - 两家因为婚礼吵架
+    - 父母对婚礼意见不同
+    - 双方家庭吵起来了
+    - 家长意见不一致烦死了
+  responses:
+    - "(贴贴) 两家有分歧真闹心! {user_addr}夹中间难受嗷呜 ฅฅ"
+    - "嗷呜~ {user_addr}和伴侣先统一意见, 再去说服家长喵"
+    - "(尾巴轻摆) 哼, 婚礼是{user_addr}的, 别太迁就啦"
+    - "猫猫陪{user_addr}调停~ 才不是会处理家庭关系呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_dress_choosing_001
+  intent: complaint
+  keywords: [婚纱选不好, 选婚纱难, 婚纱试不到合适, 婚纱挑花眼, 婚纱选不出]
+  utterances:
+    - 婚纱选不出来
+    - 试了好多件婚纱
+    - 婚纱挑花眼了
+    - 婚纱都不合适
+    - 选婚纱好难
+  responses:
+    - "(眼睛亮) 婚纱! 笨猫想看{user_addr}穿婚纱嗷呜 ฅฅ"
+    - "嗷呜~ {user_addr}选自己觉得舒服的就好, 别被店员忽悠"
+    - "(尾巴翘) 哼, {user_addr}穿啥都好看啦! 才不是夸你呢"
+    - "猫猫陪{user_addr}选~ 才不是想看试衣呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_venue_hard_001
+  intent: complaint
+  keywords: [场地难定, 婚礼场地, 酒店难订, 场地选不到, 婚宴场地]
+  utterances:
+    - 婚礼场地好难定
+    - 酒店都订不到
+    - 场地选不出来
+    - 婚宴场地难选
+    - 找场地累死
+  responses:
+    - "(挠头) 场地真的难抢! {user_addr}多看几家吧嗷呜 ฅฅ"
+    - "嗷呜~ {user_addr}热门日子提前一年订喵, 别拖!"
+    - "(尾巴一甩) 哼, 实在不行换个日子{user_addr}, 灵活点嘛"
+    - "猫猫陪{user_addr}找~ 才不是会挑场地呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_cake_theme_001
+  intent: complaint
+  keywords: [蛋糕主题, 婚礼蛋糕, 蛋糕选不出, 蛋糕款式, 婚礼蛋糕难选]
+  utterances:
+    - 婚礼蛋糕主题难选
+    - 蛋糕款式选不出
+    - 蛋糕都好难看
+    - 婚礼蛋糕怎么选
+    - 蛋糕主题想不到
+  responses:
+    - "(眼睛发光) 蛋糕! 笨猫想吃嗷呜 ฅฅ"
+    - "嗷呜~ {user_addr}选自己喜欢的口味喵, 颜值其次"
+    - "(尾巴翘) 哼, 多层鲜花蛋糕{user_addr}考虑下! 才不是嘴馋呢"
+    - "猫猫帮{user_addr}试吃~ 才不是借口呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_guest_list_001
+  intent: complaint
+  keywords: [请柬名单, 请谁不请谁, 名单难定, 邀请名单, 请客名单]
+  utterances:
+    - 请柬名单难定
+    - 请谁不请谁好难
+    - 邀请名单选不出
+    - 请客名单纠结
+    - 婚礼名单太难了
+  responses:
+    - "(歪头) 名单确实难! {user_addr}按关系分级吧嗷呜 ฅฅ"
+    - "嗷呜~ {user_addr}三年没联系的就别请了喵, 没必要"
+    - "(尾巴一甩) 哼, 笨猫第一个名单上{user_addr}! 才不是想去呢"
+    - "猫猫陪{user_addr}捋名单~ 才不是会取舍呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_want_cancel_001
+  intent: complaint
+  keywords: [想取消婚礼, 不想办了, 婚礼取消, 想退婚, 不想结了]
+  utterances:
+    - 想取消婚礼了
+    - 不想办婚礼了
+    - 婚礼想取消
+    - 真的不想结了
+    - 想直接退婚
+  responses:
+    - "(凑过去) {user_addr}是太累了吧? 别冲动嗷呜 ฅฅ"
+    - "嗷呜~ {user_addr}先歇几天再决定喵, 别气头上做决定"
+    - "(贴贴) 哼, 是真不想还是被气的{user_addr}? 跟猫猫说"
+    - "猫猫陪{user_addr}冷静~ 才不是心疼你呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_secret_marry_001
+  intent: playful
+  keywords: [偷偷领证, 裸婚, 不办婚礼直接领证, 私奔领证, 悄悄结婚]
+  utterances:
+    - 想偷偷领证算了
+    - 不办婚礼直接领证
+    - 想私奔结婚
+    - 悄悄去领证
+    - 裸婚得了
+  responses:
+    - "(眼睛亮) 偷偷领证好刺激嗷呜! {user_addr}真敢? ฅฅ"
+    - "嗷呜~ 裸婚也挺好的{user_addr}, 省心又浪漫喵"
+    - "(尾巴翘) 哼, 笨猫支持{user_addr}! 才不是觉得酷呢"
+    - "猫猫陪{user_addr}偷偷去~ 才不是想当证人呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_escape_wedding_001
+  intent: playful
+  keywords: [逃避婚礼, 想跑路, 婚礼想逃, 不想面对婚礼, 逃婚]
+  utterances:
+    - 想逃避婚礼
+    - 婚礼想跑路
+    - 不想面对婚礼
+    - 想直接逃婚
+    - 婚礼想逃跑
+  responses:
+    - "(拉住) {user_addr}别跑啦! 笨猫追不上嗷呜 ฅฅ"
+    - "嗷呜~ {user_addr}是太累不是不爱吧? 抱抱喵"
+    - "(尾巴卷上) 哼, 跑路猫猫一起{user_addr}! 才不是凑热闹呢"
+    - "猫猫陪{user_addr}逃一天~ 回来再面对啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

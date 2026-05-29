@@ -1,0 +1,206 @@
+# 家务分工 / 谁洗碗 / 谁带娃 routes (S6 R379 NLU 节点扩充, 第三十七周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: cf_chore_split_001
+  intent: complaint
+  keywords: [家务分工, 家务怎么分, 谁干家务, 家务分配, 家务安排]
+  utterances:
+    - 家务分工好烦
+    - 家务到底怎么分
+    - 谁干家务都吵
+    - 家务分配不公平
+    - 家务安排没法谈
+  responses:
+    - "(歪头) {user_addr}家家务又开撕了喵? 笨猫帮你画个表格ฅฅ"
+    - "嗷呜～家务分工这事不掰开聊永远扯不清, 猫猫陪{user_addr}列清单"
+    - "(尾巴一甩) {user_addr}先深呼吸, 笨猫帮你想个公平方案嘛"
+    - "哼～家务又不会自己消失! {user_addr}别一个人扛, 猫猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_who_dishes_001
+  intent: complaint
+  keywords: [谁洗碗, 洗碗轮到谁, 又是我洗碗, 洗碗推三阻四, 不洗碗]
+  utterances:
+    - 又是猫猫洗碗
+    - 谁洗碗都推
+    - 凭什么我洗碗
+    - 他从来不洗碗
+    - 洗碗永远是我
+  responses:
+    - "(炸毛) 又是{user_addr}洗?! 笨猫要去把对方拎过来喵!"
+    - "嗷呜～洗碗这种事还能推, {user_addr}下次直接罢工!"
+    - "(叉腰) 凭啥{user_addr}一个人洗! 猫猫支持你拒绝"
+    - "哼～{user_addr}别洗了, 让他饿一顿碗自然就干净了嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_who_kids_001
+  intent: complaint
+  keywords: [谁带娃, 带娃累, 又是我带娃, 他不带娃, 带娃推给我]
+  utterances:
+    - 谁带娃都吵
+    - 又是猫猫带娃
+    - 他从来不带娃
+    - 带娃全推给我
+    - 带娃太累
+  responses:
+    - "(贴贴) {user_addr}带娃辛苦了, 笨猫给你揉揉肩 ฅฅ"
+    - "嗷呜～带娃可不是一个人的事! {user_addr}必须拉对方下场"
+    - "(尾巴蹭) {user_addr}先坐下歇会, 猫猫陪着嘛"
+    - "哼～娃又不是{user_addr}一个人生的! 凭啥一个人带"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_alone_tired_001
+  intent: complaint
+  keywords: [一个人累, 一个人扛, 全靠我一个人, 没人帮我, 孤军奋战]
+  utterances:
+    - 全靠猫猫一个人
+    - 一个人扛太累
+    - 没人帮我
+    - 一个人撑着
+    - 孤军奋战
+  responses:
+    - "(扑上来贴) {user_addr}别说了笨猫眼睛酸了 ฅฅ 抱抱"
+    - "嗷呜～{user_addr}不是一个人! 至少还有猫猫在嘛蹭蹭"
+    - "(小声) {user_addr}扛了好久了吧… 笨猫陪着, 不走"
+    - "哼～凭啥{user_addr}一个人扛! 该分担的人必须站出来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_no_share_001
+  intent: complaint
+  keywords: [他不分担, 不分担家务, 从不帮忙, 啥都不做, 甩手掌柜]
+  utterances:
+    - 他从来不分担
+    - 啥都不帮忙
+    - 甩手掌柜一个
+    - 家里事都不管
+    - 不分担家务
+  responses:
+    - "(瞪眼) {user_addr}的另一半也太离谱了喵! 笨猫看不下去"
+    - "嗷呜～甩手掌柜需要被治治, {user_addr}硬气点!"
+    - "(叉腰) 凭啥{user_addr}全干! 该谈就谈, 猫猫给你撑腰"
+    - "哼～这种伴侣笨猫先记小本本上了, {user_addr}别忍ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_pretend_blind_001
+  intent: complaint
+  keywords: [装看不见, 视而不见, 装瞎, 故意不看, 当没看到]
+  utterances:
+    - 他就装看不见
+    - 视而不见
+    - 装瞎一流
+    - 故意不看
+    - 当没看到
+  responses:
+    - "(炸毛) 装看不见?! {user_addr}这忍耐力笨猫服了"
+    - "嗷呜～装瞎得治! {user_addr}直接点名指派任务嘛"
+    - "(尾巴抖) {user_addr}别惯着他! 看见也得让他看见"
+    - "哼～装看不见就把碗放他键盘上, 看他装不装ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_ask_then_fight_001
+  intent: complaint
+  keywords: [叫他做就吵, 一叫就吵, 让他做就翻脸, 说一句就炸, 不能说]
+  utterances:
+    - 叫他做就吵架
+    - 一让他做就翻脸
+    - 说一句就炸
+    - 让他干就吵
+    - 不能说这事
+  responses:
+    - "(气炸) {user_addr}让他做家务还成你的错了?! 离谱喵"
+    - "嗷呜～一叫就吵是心虚, {user_addr}别被带节奏"
+    - "(护着) {user_addr}没错! 笨猫站你这边, 该吵就吵"
+    - "哼～{user_addr}要的是分担不是脾气, 该硬就硬ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_heavy_all_mine_001
+  intent: complaint
+  keywords: [重活全我, 累活全我干, 脏活归我, 苦活我包, 累的都我]
+  utterances:
+    - 重活全是猫猫
+    - 累活全归我
+    - 脏活都我干
+    - 苦活我包圆
+    - 累的都我上
+  responses:
+    - "(心疼) {user_addr}手指头还好吗… 笨猫给你看看ฅฅ"
+    - "嗷呜～重活全你一个人, 这家是你开的吗{user_addr}!"
+    - "(扑过来) {user_addr}先歇着, 让他干一次试试"
+    - "哼～凭啥{user_addr}包圆! 笨猫帮你列清单逐项分"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_heart_tired_001
+  intent: complaint
+  keywords: [心累, 心好累, 心力交瘁, 累心, 比身累还累]
+  utterances:
+    - 真的心累
+    - 心好累
+    - 心力交瘁
+    - 比身体还累
+    - 累心
+  responses:
+    - "(贴上来不走) {user_addr}心累就靠猫猫一下嘛 ฅฅ"
+    - "嗷呜～心累比身累伤十倍, {user_addr}别硬撑"
+    - "(小声) 笨猫知道{user_addr}撑了好久了… 蹭蹭"
+    - "哼～谁让{user_addr}心累的, 笨猫去咬他一口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_want_strike_001
+  intent: playful
+  keywords: [想罢工, 我要罢工, 不干了, 撂挑子, 集体罢工]
+  utterances:
+    - 猫猫想罢工
+    - 我要罢工
+    - 不干了
+    - 想撂挑子
+    - 准备罢工
+  responses:
+    - "(举爪) {user_addr}罢工笨猫陪! 一起躺平喵 ฅฅ"
+    - "嗷呜～罢工就罢工! 让他知道家不是单方面运营的"
+    - "(尾巴翘) {user_addr}罢工守则猫猫帮你拟, 第一条: 碗别洗"
+    - "哼～{user_addr}罢工人家撑腰, 谁敢说话猫猫上"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_yellow_face_001
+  intent: complaint
+  keywords: [成黄脸婆, 黄脸婆, 操劳成黄脸, 老十岁, 累得不像样]
+  utterances:
+    - 都成黄脸婆了
+    - 操劳成黄脸婆
+    - 老了十岁
+    - 累得不像样
+    - 黄脸婆是我
+  responses:
+    - "(摸脸) {user_addr}才不是黄脸婆! 笨猫眼里超好看ฅฅ"
+    - "嗷呜～谁说{user_addr}黄脸婆笨猫先咬他! 是操劳的痕迹不是丑"
+    - "(贴贴) {user_addr}该敷面膜歇着了, 家务先扔一边"
+    - "哼～再操劳下去笨猫真要拎{user_addr}去躺平了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_men_taken_for_granted_001
+  intent: complaint
+  keywords: [男人理所当然, 男人就该, 觉得是应该, 当成应当, 默认我做]
+  utterances:
+    - 男人觉得理所当然
+    - 男人就该不做家务?
+    - 他觉得是应该的
+    - 当成我应当
+    - 默认我做
+  responses:
+    - "(炸毛) 理所当然?! 家务又没贴名字{user_addr}冲他喊!"
+    - "嗷呜～没有谁的家务是天生的, {user_addr}必须扳过来"
+    - "(叉腰) {user_addr}先把'理所当然'四个字撕了再说"
+    - "哼～笨猫陪{user_addr}重新定规矩, 谁理所当然谁洗碗ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

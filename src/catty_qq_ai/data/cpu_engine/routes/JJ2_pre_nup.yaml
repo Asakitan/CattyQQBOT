@@ -1,0 +1,206 @@
+# 婚前财产 / 公证 / 协议书 routes (S6 R374 NLU 节点扩充, 第三十七周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pn_notarize_001
+  intent: question
+  keywords: [推荐婚前财产公证, 推荐婚前公证, 推荐公证流程, 推荐公证费用, 笨猫婚前公证]
+  utterances:
+    - 推荐婚前财产公证
+    - 推荐婚前公证
+    - 推荐公证流程
+    - 推荐公证费用
+    - "{user_addr}笨猫婚前公证"
+  responses:
+    - "嗷呜～{user_addr}带身份证 / 房产证 / 双方到场ฅฅ"
+    - "(尾巴翘) 公证处出书面证明 - 法律效力强"
+    - "{user_addr}费用 ¥800-3000 看财产规模"
+    - "(挺胸) 笨猫推荐: 婚前公证省日后扯皮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_agreement_001
+  intent: question
+  keywords: [推荐婚前协议起草, 推荐婚前协议, 推荐婚前合同, 推荐婚前财产书, 笨猫婚前协议]
+  utterances:
+    - 推荐婚前协议起草
+    - 推荐婚前协议
+    - 推荐婚前合同
+    - 推荐婚前财产书
+    - "{user_addr}笨猫婚前协议"
+  responses:
+    - "嗷呜～{user_addr}双方自愿 + 财产清单 + 签字ฅฅ"
+    - "(尾巴翘) 民法典 1065 条 - 书面有效"
+    - "{user_addr}建议公证 - 证据力更强"
+    - "(挺胸) 笨猫推荐: 协议要写清归属!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_post_marriage_001
+  intent: question
+  keywords: [推荐婚后约定财产协议, 推荐婚后财产, 推荐婚内协议, 推荐婚后约定, 笨猫婚后协议]
+  utterances:
+    - 推荐婚后约定财产协议
+    - 推荐婚后财产
+    - 推荐婚内协议
+    - 推荐婚后约定
+    - "{user_addr}笨猫婚后协议"
+  responses:
+    - "嗷呜～{user_addr}婚后也能签 - 法律同样认ฅฅ"
+    - "(尾巴翘) 民法典 1065 - 约定优先于法定"
+    - "{user_addr}AA / 共同 / 部分共同 都行"
+    - "(挺胸) 笨猫推荐: 婚后变化大就重签!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_house_001
+  intent: question
+  keywords: [推荐房产婚前后, 推荐房产归属, 推荐婚前房产, 推荐房产加名, 笨猫房产]
+  utterances:
+    - 推荐房产婚前后
+    - 推荐房产归属
+    - 推荐婚前房产
+    - 推荐房产加名
+    - "{user_addr}笨猫房产"
+  responses:
+    - "嗷呜～{user_addr}婚前全款 - 婚前财产ฅฅ"
+    - "(尾巴翘) 婚前贷款婚后还 - 增值部分共同"
+    - "{user_addr}加名要公证 / 影响归属"
+    - "(挺胸) 笨猫推荐: 大头资产写协议明确!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_debt_001
+  intent: question
+  keywords: [推荐婚前债务约定, 推荐婚前债务, 推荐债务隔离, 推荐共同债务, 笨猫婚前债务]
+  utterances:
+    - 推荐婚前债务约定
+    - 推荐婚前债务
+    - 推荐债务隔离
+    - 推荐共同债务
+    - "{user_addr}笨猫婚前债务"
+  responses:
+    - "嗷呜～{user_addr}婚前债务原则归个人ฅฅ"
+    - "(尾巴翘) 协议写明 - 避免共同承担"
+    - "{user_addr}民法典 1064 - 共债共签"
+    - "(挺胸) 笨猫推荐: 债务条款必须细!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pn_gift_001
+  intent: question
+  keywords: [推荐婚前赠与, 推荐父母赠与, 推荐彩礼, 推荐嫁妆, 笨猫婚前赠与]
+  utterances:
+    - 推荐婚前赠与
+    - 推荐父母赠与
+    - 推荐彩礼
+    - 推荐嫁妆
+    - "{user_addr}笨猫婚前赠与"
+  responses:
+    - "嗷呜～{user_addr}父母明确赠与一方 - 个人财产ฅฅ"
+    - "(尾巴翘) 没写明 - 视为对夫妻双方"
+    - "{user_addr}赠与协议 / 转账备注要清楚"
+    - "(挺胸) 笨猫推荐: 父母出钱留好证据!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pn_common_001
+  intent: question
+  keywords: [推荐共同财产分割, 推荐财产分割, 推荐离婚分割, 推荐夫妻共同财产, 笨猫财产分割]
+  utterances:
+    - 推荐共同财产分割
+    - 推荐财产分割
+    - 推荐离婚分割
+    - 推荐夫妻共同财产
+    - "{user_addr}笨猫财产分割"
+  responses:
+    - "嗷呜～{user_addr}有协议按协议 / 没协议法定均分ฅฅ"
+    - "(尾巴翘) 民法典 1062 - 工资奖金算共同"
+    - "{user_addr}照顾子女女方无过错方原则"
+    - "(挺胸) 笨猫推荐: 协议 > 法定 - 主动权!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pn_office_001
+  intent: question
+  keywords: [推荐公证处选择, 推荐公证处, 推荐公证机构, 推荐当地公证处, 笨猫公证处]
+  utterances:
+    - 推荐公证处选择
+    - 推荐公证处
+    - 推荐公证机构
+    - 推荐当地公证处
+    - "{user_addr}笨猫公证处"
+  responses:
+    - "嗷呜～{user_addr}选户籍地 / 房产所在地公证处ฅฅ"
+    - "(尾巴翘) 司法局官网查名单 - 防假"
+    - "{user_addr}国办公证处 / 合作制都合法"
+    - "(挺胸) 笨猫推荐: 大城市公证处经验足!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pn_lawyer_001
+  intent: question
+  keywords: [推荐律师起草协议, 推荐婚姻律师, 推荐律师咨询, 推荐协议律师, 笨猫律师]
+  utterances:
+    - 推荐律师起草协议
+    - 推荐婚姻律师
+    - 推荐律师咨询
+    - 推荐协议律师
+    - "{user_addr}笨猫律师"
+  responses:
+    - "嗷呜～{user_addr}找婚姻家事专业律师ฅฅ"
+    - "(尾巴翘) 起草费 ¥2000-1w 看复杂度"
+    - "{user_addr}律师协会查执业证"
+    - "(挺胸) 笨猫推荐: 高净值别省律师费!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pn_high_net_001
+  intent: question
+  keywords: [推荐高净值婚前规划, 推荐高净值, 推荐资产隔离, 推荐家族信托, 笨猫高净值]
+  utterances:
+    - 推荐高净值婚前规划
+    - 推荐高净值
+    - 推荐资产隔离
+    - 推荐家族信托
+    - "{user_addr}笨猫高净值"
+  responses:
+    - "嗷呜～{user_addr}家族信托 + 婚前协议 + 公证三件套ฅฅ"
+    - "(尾巴翘) 股权 / 公司架构隔离"
+    - "{user_addr}境外信托 - 跨境资产"
+    - "(挺胸) 笨猫推荐: 专业 PB 团队规划!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pn_protect_001
+  intent: question
+  keywords: [推荐婚前财产保护, 推荐财产保护, 推荐婚前防范, 推荐资产保全, 笨猫财产保护]
+  utterances:
+    - 推荐婚前财产保护
+    - 推荐财产保护
+    - 推荐婚前防范
+    - 推荐资产保全
+    - "{user_addr}笨猫财产保护"
+  responses:
+    - "嗷呜～{user_addr}财产清单 + 流水留存 + 协议公证ฅฅ"
+    - "(尾巴翘) 婚前账户别混用 - 隔离清楚"
+    - "{user_addr}大额转账留凭证 / 备注用途"
+    - "(挺胸) 笨猫推荐: 防的是风险不是人!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pn_template_001
+  intent: question
+  keywords: [推荐婚前财产协议范本, 推荐协议范本, 推荐协议模板, 推荐协议样本, 笨猫协议范本]
+  utterances:
+    - 推荐婚前财产协议范本
+    - 推荐协议范本
+    - 推荐协议模板
+    - 推荐协议样本
+    - "{user_addr}笨猫协议范本"
+  responses:
+    - "嗷呜～{user_addr}范本只参考 - 必须个性化改ฅฅ"
+    - "(尾巴翘) 双方信息 + 财产清单 + 归属 + 签字"
+    - "{user_addr}司法部官网 / 律师协会有模板"
+    - "(挺胸) 笨猫推荐: 别照搬 - 找律师审!"
+  cooldown_seconds: 60
+  weight: 0.8

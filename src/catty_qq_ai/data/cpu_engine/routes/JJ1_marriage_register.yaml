@@ -1,0 +1,206 @@
+# 结婚登记 / 婚检 / 户口本 routes (S6 R373 NLU 节点扩充, 第三十七周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: mr_register_001
+  intent: question
+  keywords: [推荐民政局结婚登记, 推荐结婚登记流程, 推荐领证, 推荐结婚证, 笨猫结婚登记]
+  utterances:
+    - 推荐民政局结婚登记
+    - 推荐结婚登记流程
+    - 推荐领证
+    - 推荐结婚证
+    - 笨猫结婚登记
+  responses:
+    - "嗷呜～{user_addr}民政局婚登处 - 任一方户籍地ฅฅ"
+    - "(尾巴翘) 双方到场 + 身份证 + 户口本"
+    - "{user_addr}9 元工本费 / 立等可取"
+    - "(挺胸) 笨猫推荐: 先预约 / 周一到周五!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_premarital_check_001
+  intent: question
+  keywords: [推荐婚检, 推荐免费婚检, 推荐婚前检查, 推荐婚检项目, 笨猫婚检]
+  utterances:
+    - 推荐婚检
+    - 推荐免费婚检
+    - 推荐婚前检查
+    - 推荐婚检项目
+    - 笨猫婚检
+  responses:
+    - "嗷呜～{user_addr}妇幼保健院 - 免费婚检ฅฅ"
+    - "(尾巴翘) 血常规 / 肝功 / 胸透 / 传染病"
+    - "{user_addr}空腹 + 身份证 + 半小时出结果"
+    - "(挺胸) 笨猫推荐: 自愿但建议做!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_hukou_001
+  intent: question
+  keywords: [推荐户口本准备, 推荐户口本结婚, 推荐户口本复印, 推荐户口本页, 笨猫户口本]
+  utterances:
+    - 推荐户口本准备
+    - 推荐户口本结婚
+    - 推荐户口本复印
+    - 推荐户口本页
+    - 笨猫户口本
+  responses:
+    - "嗷呜～{user_addr}首页 + 本人页 - 必带ฅฅ"
+    - "(尾巴翘) 集体户口要户籍卡"
+    - "{user_addr}婚姻状况要写「未婚」"
+    - "(挺胸) 笨猫推荐: 提前核对信息!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_cross_province_001
+  intent: question
+  keywords: [推荐异地登记, 推荐跨省结婚登记, 推荐异地领证, 推荐居住证结婚, 笨猫异地登记]
+  utterances:
+    - 推荐异地登记
+    - 推荐跨省结婚登记
+    - 推荐异地领证
+    - 推荐居住证结婚
+    - 笨猫异地登记
+  responses:
+    - "嗷呜～{user_addr}2023 全国通办 - 不用回老家ฅฅ"
+    - "(尾巴翘) 居住地民政局即可"
+    - "{user_addr}需居住证 / 部分省试点"
+    - "(挺胸) 笨猫推荐: 提前查当地政策!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_foreign_001
+  intent: question
+  keywords: [推荐涉外婚姻, 推荐和外国人结婚, 推荐涉外登记, 推荐涉外婚姻材料, 笨猫涉外婚姻]
+  utterances:
+    - 推荐涉外婚姻
+    - 推荐和外国人结婚
+    - 推荐涉外登记
+    - 推荐涉外婚姻材料
+    - 笨猫涉外婚姻
+  responses:
+    - "嗷呜～{user_addr}省级民政厅涉外婚登处ฅฅ"
+    - "(尾巴翘) 护照 + 单身证明 + 公证认证"
+    - "{user_addr}单身证明要海牙认证 / 翻译"
+    - "(挺胸) 笨猫推荐: 流程久 / 留 1-2 月!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mr_change_name_001
+  intent: question
+  keywords: [推荐婚后改姓, 推荐冠夫姓, 推荐改名字, 推荐户籍改姓, 笨猫改姓]
+  utterances:
+    - 推荐婚后改姓
+    - 推荐冠夫姓
+    - 推荐改名字
+    - 推荐户籍改姓
+    - 笨猫改姓
+  responses:
+    - "嗷呜～{user_addr}中国大陆很少改 / 自由ฅฅ"
+    - "(尾巴翘) 派出所户籍科 / 申请书"
+    - "{user_addr}身份证 / 银行卡 / 社保都要改"
+    - "(挺胸) 笨猫推荐: 想清楚再改 / 麻烦!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: mr_reissue_001
+  intent: question
+  keywords: [推荐结婚证补办, 推荐结婚证丢了, 推荐补领结婚证, 推荐婚姻登记记录证明, 笨猫结婚证补办]
+  utterances:
+    - 推荐结婚证补办
+    - 推荐结婚证丢了
+    - 推荐补领结婚证
+    - 推荐婚姻登记记录证明
+    - 笨猫结婚证补办
+  responses:
+    - "嗷呜～{user_addr}原登记机关补办 - 9 元ฅฅ"
+    - "(尾巴翘) 双方到场 + 身份证"
+    - "{user_addr}也可办《登记记录证明》"
+    - "(挺胸) 笨猫推荐: 立等可取 / 别慌!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mr_appointment_001
+  intent: question
+  keywords: [推荐民政局预约, 推荐婚登预约, 推荐网上预约, 推荐预约系统, 笨猫民政局预约]
+  utterances:
+    - 推荐民政局预约
+    - 推荐婚登预约
+    - 推荐网上预约
+    - 推荐预约系统
+    - 笨猫民政局预约
+  responses:
+    - "嗷呜～{user_addr}省民政厅官网 / 政务 APPฅฅ"
+    - "(尾巴翘) 选日期 + 时段 + 双方信息"
+    - "{user_addr}520 / 521 / 1314 抢爆"
+    - "(挺胸) 笨猫推荐: 提前 1 周抢号!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_photo_001
+  intent: question
+  keywords: [推荐结婚证照片, 推荐结婚照要求, 推荐结婚登记照, 推荐红底照片, 笨猫结婚证照片]
+  utterances:
+    - 推荐结婚证照片
+    - 推荐结婚照要求
+    - 推荐结婚登记照
+    - 推荐红底照片
+    - 笨猫结婚证照片
+  responses:
+    - "嗷呜～{user_addr}红底 / 双人合影 / 2 寸ฅฅ"
+    - "(尾巴翘) 民政局可现场拍 / 30-50 元"
+    - "{user_addr}也可自带 - 影楼提前拍"
+    - "(挺胸) 笨猫推荐: 现场拍省事!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mr_appointment_platform_001
+  intent: question
+  keywords: [推荐婚姻登记预约, 推荐粤省事预约, 推荐随申办预约, 推荐婚登 APP, 笨猫婚姻登记预约]
+  utterances:
+    - 推荐婚姻登记预约
+    - 推荐粤省事预约
+    - 推荐随申办预约
+    - 推荐婚登 APP
+    - 笨猫婚姻登记预约
+  responses:
+    - "嗷呜～{user_addr}粤省事 / 随申办 / 浙里办ฅฅ"
+    - "(尾巴翘) 政务大厅 APP / 小程序"
+    - "{user_addr}选街道民政所 + 时段"
+    - "(挺胸) 笨猫推荐: 早上 8 点抢!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_archive_001
+  intent: question
+  keywords: [推荐婚姻档案查询, 推荐婚姻登记记录, 推荐档案馆查询, 推荐婚史查询, 笨猫婚姻档案]
+  utterances:
+    - 推荐婚姻档案查询
+    - 推荐婚姻登记记录
+    - 推荐档案馆查询
+    - 推荐婚史查询
+    - 笨猫婚姻档案
+  responses:
+    - "嗷呜～{user_addr}原登记机关 / 民政档案室ฅฅ"
+    - "(尾巴翘) 身份证 + 个人申请"
+    - "{user_addr}也可省级婚姻档案馆"
+    - "(挺胸) 笨猫推荐: 工作日去 / 当天出!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: mr_gift_001
+  intent: question
+  keywords: [推荐结婚登记纪念礼物, 推荐领证礼物, 推荐结婚登记纪念, 推荐对戒, 笨猫领证礼物]
+  utterances:
+    - 推荐结婚登记纪念礼物
+    - 推荐领证礼物
+    - 推荐结婚登记纪念
+    - 推荐对戒
+    - 笨猫领证礼物
+  responses:
+    - "嗷呜～{user_addr}对戒 / 卡地亚 LOVE / 周大福ฅฅ"
+    - "(尾巴翘) 鲜花 + 蛋糕 + 仪式感"
+    - "{user_addr}定制证件夹 / 结婚证保护套"
+    - "(挺胸) 笨猫推荐: 拍 vlog 留纪念!"
+  cooldown_seconds: 60
+  weight: 0.8

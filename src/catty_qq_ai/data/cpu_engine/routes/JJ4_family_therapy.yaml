@@ -1,0 +1,206 @@
+# 家庭咨询 / 夫妻心理 / 亲子关系 routes (S6 R376 NLU 节点扩充, 第三十七周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ft_counselor_001
+  intent: question
+  keywords: [推荐家庭咨询师, 推荐家庭治疗师, 推荐家庭心理师, 推荐家庭辅导, 笨猫家庭咨询师]
+  utterances:
+    - 推荐家庭咨询师
+    - 推荐家庭治疗师
+    - 推荐家庭心理师
+    - 推荐家庭辅导
+    - 笨猫家庭咨询师
+  responses:
+    - "嗷呜～{user_addr}家庭咨询师 - 系统派ฅฅ"
+    - "(尾巴翘) Bowen / Satir / 结构派 Minuchin"
+    - "{user_addr}国内: 简单心理 / 壹心理 / 武志红"
+    - "(挺胸) 笨猫推荐: 简单心理筛选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ft_couple_001
+  intent: question
+  keywords: [推荐夫妻咨询, 推荐婚姻咨询, 推荐情侣咨询, 推荐夫妻关系, 笨猫夫妻咨询]
+  utterances:
+    - 推荐夫妻咨询
+    - 推荐婚姻咨询
+    - 推荐情侣咨询
+    - 推荐夫妻关系
+    - 笨猫夫妻咨询
+  responses:
+    - "嗷呜～{user_addr}夫妻咨询 - Gottman 流派ฅฅ"
+    - "(尾巴翘) EFT 情绪取向 / IMAGO"
+    - "{user_addr}国内: 简单心理 / 壹心理 / KnowYourself"
+    - "(挺胸) 笨猫推荐: Gottman 七法则!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ft_parent_001
+  intent: question
+  keywords: [推荐亲子咨询, 推荐亲子关系, 推荐家庭教育, 推荐父母课堂, 笨猫亲子]
+  utterances:
+    - 推荐亲子咨询
+    - 推荐亲子关系
+    - 推荐家庭教育
+    - 推荐父母课堂
+    - 笨猫亲子
+  responses:
+    - "嗷呜～{user_addr}亲子关系 - 正面管教ฅฅ"
+    - "(尾巴翘) PET 父母效能 / 阿德勒"
+    - "{user_addr}书: 《P.E.T.父母效能训练》"
+    - "(挺胸) 笨猫推荐: 正面管教入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ft_assessment_001
+  intent: question
+  keywords: [推荐婚姻评估, 推荐关系评估, 推荐夫妻测评, 推荐婚姻测试, 笨猫婚姻评估]
+  utterances:
+    - 推荐婚姻评估
+    - 推荐关系评估
+    - 推荐夫妻测评
+    - 推荐婚姻测试
+    - 笨猫婚姻评估
+  responses:
+    - "嗷呜～{user_addr}婚姻评估 - PREPARE/ENRICHฅฅ"
+    - "(尾巴翘) Gottman SPAFF / 依恋类型测"
+    - "{user_addr}国内: 简单心理 / 壹心理量表"
+    - "(挺胸) 笨猫推荐: 先做依恋测!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ft_communication_001
+  intent: question
+  keywords: [推荐沟通训练, 推荐非暴力沟通, 推荐 NVC, 推荐沟通技巧, 笨猫沟通训练]
+  utterances:
+    - 推荐沟通训练
+    - 推荐非暴力沟通
+    - 推荐 NVC
+    - 推荐沟通技巧
+    - 笨猫沟通训练
+  responses:
+    - "嗷呜～{user_addr}非暴力沟通 NVCฅฅ"
+    - "(尾巴翘) 观察+感受+需要+请求 四步"
+    - "{user_addr}书: 《非暴力沟通》马歇尔"
+    - "(挺胸) 笨猫推荐: NVC 卡片练习!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ft_coach_001
+  intent: question
+  keywords: [推荐情感教练, 推荐情感导师, 推荐恋爱教练, 推荐 Ayawawa, 笨猫情感教练]
+  utterances:
+    - 推荐情感教练
+    - 推荐情感导师
+    - 推荐恋爱教练
+    - 推荐情感咨询
+    - 笨猫情感教练
+  responses:
+    - "嗷呜～{user_addr}情感教练 - 选靠谱的ฅฅ"
+    - "(炸毛) 远离 PUA / 厌女 / 雌竞话术!"
+    - "{user_addr}推荐: 武志红 / 李松蔚 / KY"
+    - "(挺胸) 笨猫推荐: 走心理咨询路线!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ft_platform_001
+  intent: question
+  keywords: [推荐心理咨询平台, 推荐简单心理, 推荐壹心理, 推荐 KnowYourself, 笨猫咨询平台]
+  utterances:
+    - 推荐心理咨询平台
+    - 推荐简单心理
+    - 推荐壹心理
+    - 推荐 KnowYourself
+    - 笨猫咨询平台
+  responses:
+    - "嗷呜～{user_addr}简单心理 - 严选靠谱ฅฅ"
+    - "(尾巴翘) 壹心理 / KY / 昭阳医生"
+    - "{user_addr}首咨 300-800, 资深 1000+"
+    - "(挺胸) 笨猫推荐: 简单心理首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ft_certification_001
+  intent: question
+  keywords: [推荐家庭治疗师认证, 推荐心理咨询师证, 推荐 AAMFT, 推荐家庭治疗培训, 笨猫家庭治疗认证]
+  utterances:
+    - 推荐家庭治疗师认证
+    - 推荐心理咨询师证
+    - 推荐 AAMFT
+    - 推荐家庭治疗培训
+    - 笨猫家庭治疗认证
+  responses:
+    - "嗷呜～{user_addr}AAMFT 美国家庭治疗ฅฅ"
+    - "(尾巴翘) 国内: 中德班 / 中美班 / 系统派"
+    - "{user_addr}入门: 中科院心理所"
+    - "(挺胸) 笨猫推荐: 看老师师承!"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: ft_books_001
+  intent: question
+  keywords: [推荐婚姻心理书, 推荐家庭治疗书, 推荐 Gottman 书, 推荐 Satir 书, 笨猫婚姻书]
+  utterances:
+    - 推荐婚姻心理书
+    - 推荐家庭治疗书
+    - 推荐 Gottman 书
+    - 推荐 Satir 书
+    - 笨猫婚姻书
+  responses:
+    - "嗷呜～{user_addr}《幸福的婚姻》Gottmanฅฅ"
+    - "(尾巴翘) 《新家庭如何塑造人》Satir"
+    - "{user_addr}《亲密关系》Rowland Miller"
+    - "(挺胸) 笨猫推荐: Gottman 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ft_male_support_001
+  intent: question
+  keywords: [推荐男士情感支持, 推荐男性心理, 推荐男士咨询, 推荐爸爸课堂, 笨猫男士情感]
+  utterances:
+    - 推荐男士情感支持
+    - 推荐男性心理
+    - 推荐男士咨询
+    - 推荐爸爸课堂
+    - 笨猫男士情感
+  responses:
+    - "嗷呜～{user_addr}男士也需要情感支持ฅฅ"
+    - "(尾巴翘) 简单心理男性咨询师可筛"
+    - "{user_addr}书: 《男人来自火星》参考"
+    - "(挺胸) 笨猫推荐: 别憋着, 找咨询!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ft_course_001
+  intent: question
+  keywords: [推荐沟通课程, 推荐婚姻课程, 推荐亲密关系课, 推荐家庭课, 笨猫沟通课程]
+  utterances:
+    - 推荐沟通课程
+    - 推荐婚姻课程
+    - 推荐亲密关系课
+    - 推荐家庭课
+    - 笨猫沟通课程
+  responses:
+    - "嗷呜～{user_addr}得到 / 知乎盐选婚姻课ฅฅ"
+    - "(尾巴翘) 武志红 / 李松蔚 / 陈海贤"
+    - "{user_addr}线下: Gottman 工作坊"
+    - "(挺胸) 笨猫推荐: 陈海贤自我发展!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ft_emotion_001
+  intent: question
+  keywords: [推荐情绪管理, 推荐情绪训练, 推荐情绪调节, 推荐 DBT, 笨猫情绪管理]
+  utterances:
+    - 推荐情绪管理
+    - 推荐情绪训练
+    - 推荐情绪调节
+    - 推荐 DBT
+    - 笨猫情绪管理
+  responses:
+    - "嗷呜～{user_addr}DBT 辩证行为疗法ฅฅ"
+    - "(尾巴翘) 正念 / CBT / 情绪粒度"
+    - "{user_addr}书: 《情绪急救》《我的情绪小怪兽》"
+    - "(挺胸) 笨猫推荐: 先学情绪命名!"
+  cooldown_seconds: 60
+  weight: 1.0
