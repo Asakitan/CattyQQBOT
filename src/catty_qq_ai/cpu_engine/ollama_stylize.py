@@ -58,6 +58,8 @@ async def stylize_candidate(
         f"请用米雪儿语气改写初稿 (保持 1-3 句, 不要改变核心含义, 只调语气和人格细节)."
     )
 
+    # 主人 2026-05-30: 必须传 num_thread=4 限 ollama 推理 CPU 核心数,
+    # 否则 ollama 默认拉满全部核心 (6 核 100%)
     payload = {
         "model": model,
         "messages": [
@@ -66,6 +68,7 @@ async def stylize_candidate(
         ],
         "temperature": 0.65,
         "max_tokens": 180,
+        "options": {"num_thread": 4},
     }
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 

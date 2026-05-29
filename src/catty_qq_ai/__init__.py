@@ -6519,11 +6519,13 @@ async def _cpu_engine_warmup_loop() -> None:
         if not base_url or not model:
             logger.info("[cpu_engine.catnify_warmup] config missing, skip warmup")
             return
+        # 主人 2026-05-30: warmup 也要传 num_thread=4 限核, 否则 cold load 时 ollama 拉满全核
         payload = {
             "model": model,
             "messages": [{"role": "user", "content": "hi"}],
             "temperature": 0,
             "max_tokens": 1,
+            "options": {"num_thread": 4},
         }
         headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
         t0 = time.monotonic()
