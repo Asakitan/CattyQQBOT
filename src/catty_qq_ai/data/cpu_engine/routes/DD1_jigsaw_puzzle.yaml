@@ -1,0 +1,207 @@
+# 拼图 / 1000 片 / 透明立体 routes (S6 R313 NLU 节点扩充, 第三十一周期 2/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型带笨猫语气.
+
+- name: jp_brand_001
+  intent: question
+  keywords: [推荐拼图品牌, 推荐 Ravensburger, 推荐 Falcon, 推荐拼图大厂, 笨猫拼图品牌]
+  utterances:
+    - 推荐拼图品牌
+    - 推荐 Ravensburger
+    - 推荐 Falcon
+    - 推荐拼图大厂
+    - 笨猫拼图品牌
+  responses:
+    - "嗷呜～{user_addr}Ravensburger - 德国之王ฅฅ"
+    - "(尾巴翘) Falcon / Clementoni / Schmidt"
+    - "{user_addr}切工精准 / 防眩光"
+    - "(挺胸) 笨猫推荐: Ravensburger 闭眼买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_1000_001
+  intent: question
+  keywords: [推荐 1000 片拼图, 推荐入门拼图, 推荐 1000 片, 推荐新手拼图, 笨猫 1000 片]
+  utterances:
+    - 推荐 1000 片拼图
+    - 推荐入门拼图
+    - 推荐 1000 片
+    - 推荐新手拼图
+    - 笨猫 1000 片
+  responses:
+    - "嗷呜～{user_addr}1000 片 - 黄金尺寸ฅฅ"
+    - "(尾巴翘) 50x70cm / 周末刚好"
+    - "{user_addr}Ravensburger 1000 经典款"
+    - "(挺胸) 笨猫推荐: 入门就 1000 片!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_3000_001
+  intent: question
+  keywords: [推荐 3000 片拼图, 推荐进阶拼图, 推荐 5000 片, 推荐大片拼图, 笨猫 3000 片]
+  utterances:
+    - 推荐 3000 片拼图
+    - 推荐进阶拼图
+    - 推荐 5000 片
+    - 推荐大片拼图
+    - 笨猫 3000 片
+  responses:
+    - "嗷呜～{user_addr}3000 片 - 老手挑战ฅฅ"
+    - "(尾巴翘) 5000 / 9000 / 32000 片!"
+    - "{user_addr}需要大桌子 / 收纳盒"
+    - "(挺胸) 笨猫推荐: 3000 片够虐了!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jp_clear_001
+  intent: question
+  keywords: [推荐透明拼图, 推荐 Krypt, 推荐纯色拼图, 推荐 impossible, 笨猫透明拼图]
+  utterances:
+    - 推荐透明拼图
+    - 推荐 Krypt
+    - 推荐纯色拼图
+    - 推荐 impossible
+    - 笨猫透明拼图
+  responses:
+    - "嗷呜～{user_addr}Ravensburger Krypt - 纯色地狱ฅฅ"
+    - "(尾巴翘) 银 / 黑 / 渐变 - 无参考"
+    - "{user_addr}只能靠形状 / 折磨人"
+    - "(挺胸) 笨猫推荐: Krypt 银款最经典!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jp_3d_001
+  intent: question
+  keywords: [推荐 3D 拼图, 推荐立体拼图, 推荐建筑拼图, 推荐 Wrebbit, 笨猫 3D 拼图]
+  utterances:
+    - 推荐 3D 拼图
+    - 推荐立体拼图
+    - 推荐建筑拼图
+    - 推荐 Wrebbit
+    - 笨猫 3D 拼图
+  responses:
+    - "嗷呜～{user_addr}Wrebbit 3D - 立体王ฅฅ"
+    - "(尾巴翘) Ravensburger 3D 球 / 建筑"
+    - "{user_addr}埃菲尔铁塔 / 城堡 / 地球仪"
+    - "(挺胸) 笨猫推荐: Wrebbit 哈利波特!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: jp_wood_001
+  intent: question
+  keywords: [推荐木质拼图, 推荐 Wentworth, 推荐异形拼图, 推荐 whimsy, 笨猫木质拼图]
+  utterances:
+    - 推荐木质拼图
+    - 推荐 Wentworth
+    - 推荐异形拼图
+    - 推荐 whimsy
+    - 笨猫木质拼图
+  responses:
+    - "嗷呜～{user_addr}Wentworth - 英国手工木ฅฅ"
+    - "(尾巴翘) Liberty / Artifact - 高端"
+    - "{user_addr}异形片 (whimsy) - 惊喜"
+    - "(挺胸) 笨猫推荐: Wentworth 收藏级!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jp_kids_001
+  intent: question
+  keywords: [推荐儿童拼图, 推荐大块拼图, 推荐宝宝拼图, 推荐启蒙拼图, 笨猫儿童拼图]
+  utterances:
+    - 推荐儿童拼图
+    - 推荐大块拼图
+    - 推荐宝宝拼图
+    - 推荐启蒙拼图
+    - 笨猫儿童拼图
+  responses:
+    - "嗷呜～{user_addr}24 / 60 / 100 片大块ฅฅ"
+    - "(尾巴翘) Djeco / Ravensburger 儿童线"
+    - "{user_addr}动物 / 交通 / 字母"
+    - "(挺胸) 笨猫推荐: Djeco 法式美图!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: jp_theme_001
+  intent: question
+  keywords: [推荐拼图主题, 推荐名画拼图, 推荐风景拼图, 推荐动漫拼图, 笨猫拼图主题]
+  utterances:
+    - 推荐拼图主题
+    - 推荐名画拼图
+    - 推荐风景拼图
+    - 推荐动漫拼图
+    - 笨猫拼图主题
+  responses:
+    - "嗷呜～{user_addr}梵高星空 / 莫奈睡莲ฅฅ"
+    - "(尾巴翘) 风景 / 城市 / 地图"
+    - "{user_addr}吉卜力 / 迪士尼 / 哈利波特"
+    - "(挺胸) 笨猫推荐: 梵高永远的神!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: jp_mat_001
+  intent: question
+  keywords: [推荐拼图垫, 推荐拼图卷垫, 推荐 Roll mat, 推荐拼图毡, 笨猫拼图垫]
+  utterances:
+    - 推荐拼图垫
+    - 推荐拼图卷垫
+    - 推荐 Roll mat
+    - 推荐拼图毡
+    - 笨猫拼图垫
+  responses:
+    - "嗷呜～{user_addr}毛毡 + 充气管 - 卷起来ฅฅ"
+    - "(尾巴翘) Ravensburger Roll Your Puzzle"
+    - "{user_addr}支持 1000-3000 片"
+    - "(挺胸) 笨猫推荐: 没桌子神器!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jp_storage_001
+  intent: question
+  keywords: [推荐拼图收纳, 推荐分类盘, 推荐 sort and save, 推荐拼图盒, 笨猫拼图收纳]
+  utterances:
+    - 推荐拼图收纳
+    - 推荐分类盘
+    - 推荐 sort and save
+    - 推荐拼图盒
+    - 笨猫拼图收纳
+  responses:
+    - "嗷呜～{user_addr}Ravensburger Sort & Save 盘ฅฅ"
+    - "(尾巴翘) 6-8 格分类 / 按颜色"
+    - "{user_addr}带盖防尘 / 可叠放"
+    - "(挺胸) 笨猫推荐: 分类盘效率翻倍!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: jp_krypt_001
+  intent: question
+  keywords: [推荐 Krypt 系列, 推荐 Krypt 银, 推荐 Krypt 黑, 推荐 Krypt 渐变, 笨猫 Krypt]
+  utterances:
+    - 推荐 Krypt 系列
+    - 推荐 Krypt 银
+    - 推荐 Krypt 黑
+    - 推荐 Krypt 渐变
+    - 笨猫 Krypt
+  responses:
+    - "嗷呜～{user_addr}Krypt Silver - 经典银ฅฅ"
+    - "(尾巴翘) Black / Gold / Gradient"
+    - "{user_addr}654 片 / 纯色无图"
+    - "(挺胸) 笨猫推荐: 银款入门 Krypt!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: jp_healing_001
+  intent: question
+  keywords: [推荐拼图治愈, 推荐拼图减压, 推荐拼图冥想, 推荐拼图疗愈, 笨猫拼图治愈]
+  utterances:
+    - 推荐拼图治愈
+    - 推荐拼图减压
+    - 推荐拼图冥想
+    - 推荐拼图疗愈
+    - 笨猫拼图治愈
+  responses:
+    - "嗷呜～{user_addr}拼图 - 现代冥想ฅฅ"
+    - "(尾巴翘) 专注 / 心流 / 解压"
+    - "{user_addr}放空 / 不想工作的下午"
+    - "(挺胸) 笨猫推荐: 治愈系咪~一起拼!"
+  cooldown_seconds: 60
+  weight: 0.9

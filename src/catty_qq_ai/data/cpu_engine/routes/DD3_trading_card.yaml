@@ -1,0 +1,207 @@
+# 收藏卡牌 / NBA 球星卡 / 宝可梦卡 routes (S6 R315 NLU 节点扩充, 第三十一周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型带笨猫语气.
+
+- name: tc_nba_001
+  intent: question
+  keywords: [推荐NBA球星卡, 推荐Panini, 推荐Topps, 推荐篮球卡, 笨猫NBA球星卡]
+  utterances:
+    - 推荐NBA球星卡
+    - 推荐Panini
+    - 推荐Topps
+    - 推荐篮球卡
+    - 笨猫NBA球星卡
+  responses:
+    - "嗷呜～{user_addr}Panini Prizm - NBA 主流ฅฅ"
+    - "(尾巴翘) Topps Chrome / Select / Mosaic"
+    - "{user_addr}新秀卡 RC - 最具升值潜力"
+    - "(挺胸) 笨猫推荐: Prizm 银折最经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_pokemon_001
+  intent: question
+  keywords: [推荐宝可梦卡, 推荐Pokemon TCG, 推荐皮卡丘卡, 推荐宝可梦集换, 笨猫宝可梦卡]
+  utterances:
+    - 推荐宝可梦卡
+    - 推荐Pokemon TCG
+    - 推荐皮卡丘卡
+    - 推荐宝可梦集换
+    - 笨猫宝可梦卡
+  responses:
+    - "嗷呜～{user_addr}Pokemon TCG - 全球最大 TCGฅฅ"
+    - "(尾巴翘) 初代基础卡 / 喷火龙最贵"
+    - "{user_addr}151 / 古代咆哮 / 紫罗兰扩展"
+    - "(挺胸) 笨猫推荐: 喷火龙 EX 收一张!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_mtg_001
+  intent: question
+  keywords: [推荐MTG, 推荐万智牌, 推荐MTG入门, 推荐黑莲花, 笨猫万智牌]
+  utterances:
+    - 推荐MTG
+    - 推荐万智牌
+    - 推荐MTG入门
+    - 推荐黑莲花
+    - 笨猫万智牌
+  responses:
+    - "嗷呜～{user_addr}Magic the Gathering - TCG 鼻祖ฅฅ"
+    - "(尾巴翘) Alpha 黑莲花 - 神级稀有"
+    - "{user_addr}标准 / 现代 / 指挥官赛制"
+    - "(挺胸) 笨猫推荐: 入门买预组!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tc_yugioh_001
+  intent: question
+  keywords: [推荐游戏王, 推荐Yu-Gi-Oh, 推荐青眼白龙, 推荐游戏王卡, 笨猫游戏王]
+  utterances:
+    - 推荐游戏王
+    - 推荐Yu-Gi-Oh
+    - 推荐青眼白龙
+    - 推荐游戏王卡
+    - 笨猫游戏王
+  responses:
+    - "嗷呜～{user_addr}游戏王 - 青眼白龙永远的神ฅฅ"
+    - "(尾巴翘) LOB 初版 / 黑魔导女孩"
+    - "{user_addr}OCG (日版) / TCG (英版)"
+    - "(挺胸) 笨猫推荐: 童年情怀回血!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tc_psa_001
+  intent: question
+  keywords: [推荐PSA, 推荐卡牌评级, 推荐BGS, 推荐CGC, 笨猫PSA评级]
+  utterances:
+    - 推荐PSA
+    - 推荐卡牌评级
+    - 推荐BGS
+    - 推荐CGC
+    - 笨猫PSA评级
+  responses:
+    - "嗷呜～{user_addr}PSA - 评级界一哥ฅฅ"
+    - "(尾巴翘) BGS 黑标 / CGC 性价比"
+    - "{user_addr}评级费 $20-300 / 周期数月"
+    - "(挺胸) 笨猫推荐: 好卡才送 PSA!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tc_grade_001
+  intent: question
+  keywords: [推荐GEM 10, 推荐卡牌等级, 推荐满分卡, 推荐PSA 10, 笨猫GEM 10]
+  utterances:
+    - 推荐GEM 10
+    - 推荐卡牌等级
+    - 推荐满分卡
+    - 推荐PSA 10
+    - 笨猫GEM 10
+  responses:
+    - "嗷呜～{user_addr}PSA 10 GEM MINT - 满分ฅฅ"
+    - "(尾巴翘) 9 / 8.5 / 8 也能收藏"
+    - "{user_addr}居中 / 边角 / 表面 / 印刷"
+    - "(挺胸) 笨猫推荐: PSA 10 溢价最高!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: tc_rare_001
+  intent: function_call
+  keywords: [推荐稀有卡, 推荐卡王, 推荐镇店之宝, 推荐神卡, 笨猫稀有卡]
+  utterances:
+    - 推荐稀有卡
+    - 推荐卡王
+    - 推荐镇店之宝
+    - 推荐神卡
+    - 笨猫稀有卡
+  responses:
+    - "嗷呜～{user_addr}T206 Honus Wagner - 棒球卡王ฅฅ"
+    - "(尾巴翘) Mickey Mantle 1952 Topps"
+    - "{user_addr}Logoman 1/1 / NT 黑标"
+    - "(挺胸) 笨猫推荐: 神卡可遇不可求!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: tc_storage_001
+  intent: question
+  keywords: [推荐卡砖, 推荐卡牌保护, 推荐Ultra Pro, 推荐卡套, 笨猫卡砖]
+  utterances:
+    - 推荐卡砖
+    - 推荐卡牌保护
+    - 推荐Ultra Pro
+    - 推荐卡套
+    - 笨猫卡砖
+  responses:
+    - "嗷呜～{user_addr}Ultra Pro 卡砖 - 经典款ฅฅ"
+    - "(尾巴翘) 内层 perfect fit + 外层硬卡套"
+    - "{user_addr}One Touch 磁吸卡砖 - 高端"
+    - "(挺胸) 笨猫推荐: 三层保护最稳!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: tc_trade_001
+  intent: question
+  keywords: [推荐卡牌交易, 推荐eBay, 推荐集卡狮, 推荐卡牌平台, 笨猫卡牌交易]
+  utterances:
+    - 推荐卡牌交易
+    - 推荐eBay
+    - 推荐集卡狮
+    - 推荐卡牌平台
+    - 笨猫卡牌交易
+  responses:
+    - "嗷呜～{user_addr}eBay - 全球最大ฅฅ"
+    - "(尾巴翘) 集卡狮 / 千岛 - 国内"
+    - "{user_addr}COMC / PWCC - 拍卖行"
+    - "(挺胸) 笨猫推荐: 查价 130point!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tc_break_001
+  intent: question
+  keywords: [推荐拆盒, 推荐Box Break, 推荐开包, 推荐卡盒, 笨猫拆盒]
+  utterances:
+    - 推荐拆盒
+    - 推荐Box Break
+    - 推荐开包
+    - 推荐卡盒
+    - 笨猫拆盒
+  responses:
+    - "嗷呜～{user_addr}Box Break 直播拆盒 - 仪式感ฅฅ"
+    - "(尾巴翘) Hobby Box / Blaster / Retail"
+    - "{user_addr}Random Team / Pick Your Player"
+    - "(挺胸) 笨猫推荐: 拆盒娱乐为主!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: tc_budget_001
+  intent: question
+  keywords: [推荐收藏入门, 推荐卡牌预算, 推荐新手收藏, 推荐少花钱, 笨猫卡牌入门]
+  utterances:
+    - 推荐收藏入门
+    - 推荐卡牌预算
+    - 推荐新手收藏
+    - 推荐少花钱
+    - 笨猫卡牌入门
+  responses:
+    - "嗷呜～{user_addr}先定主题 - 球星 / IP / 项目ฅฅ"
+    - "(尾巴翘) 预算 $50/月 起步"
+    - "{user_addr}先收喜欢的 / 别冲投资"
+    - "(挺胸) 笨猫推荐: 量力而行!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tc_invest_001
+  intent: question
+  keywords: [推荐卡牌投资, 推荐卡牌风险, 推荐升值卡, 推荐卡牌金融, 笨猫卡牌投资]
+  utterances:
+    - 推荐卡牌投资
+    - 推荐卡牌风险
+    - 推荐升值卡
+    - 推荐卡牌金融
+    - 笨猫卡牌投资
+  responses:
+    - "嗷呜～{user_addr}卡牌投资风险高 - 流动性差ฅฅ"
+    - "(尾巴翘) 长线 / RC 新秀 / 顶级球星"
+    - "{user_addr}别 All in / 别贷款收藏"
+    - "(挺胸) 笨猫推荐: 兴趣第一 / 投资第二!"
+  cooldown_seconds: 60
+  weight: 0.8

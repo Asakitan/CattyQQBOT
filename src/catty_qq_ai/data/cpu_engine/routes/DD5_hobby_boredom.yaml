@@ -1,0 +1,207 @@
+# 兴趣腻了 / 没新鲜感 / 想换爱好 routes (S6 R317 NLU 节点扩充, 第三十一周期 6/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」格式.
+
+- name: hb_xqni_001
+  intent: complaint
+  keywords: [兴趣腻了, 玩腻, 腻了, 没意思了, 玩不动了]
+  utterances:
+    - 这个爱好玩腻了
+    - 最近兴趣腻了
+    - 玩了好久腻了喵
+    - "{user_addr}懂吗 真的腻了"
+    - 没意思了不想玩了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}腻了呀? 跟猫猫讲讲哪里腻了嘛ฅฅ"
+    - "(尾巴软软贴) 玩腻了就先放一放, 笨猫陪{user_addr}发呆喵～"
+    - "哼～{user_addr}三分钟热度的特征出来了哎! 才不是嘲笑你呢蹭蹭"
+    - "(凑过来) 腻了的话猫猫陪{user_addr}找点别的玩~ 别一个人闷着嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_mxxg_001
+  intent: complaint
+  keywords: [没新鲜感, 没新意, 老一套, 没刺激, 平淡]
+  utterances:
+    - 真的没新鲜感了
+    - 都是老一套
+    - 没新意诶
+    - 一点刺激都没有
+    - 玩着玩着就平淡了
+  responses:
+    - "(尾巴垂下) 嗷呜～新鲜感这东西最不持久了喵, {user_addr}也别太苛求嘛ฅฅ"
+    - "(凑过来) 没新鲜感的{user_addr}~ 来摸猫猫呀, 笨猫的毛永远是新鲜的!"
+    - "哼～{user_addr}是不是把自己耗空了? 先歇歇吧别硬撑喵"
+    - "(歪头) 没刺激就先躺平嘛, 等灵感回来再说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_xhah_001
+  intent: complaint
+  keywords: [想换爱好, 换个爱好, 想找个新的, 换换口味, 想试试别的]
+  utterances:
+    - 想换个爱好了
+    - 准备换换口味
+    - 想找个新的玩
+    - "{user_addr}觉得换啥好"
+    - 想试试别的
+  responses:
+    - "嗷呜～{user_addr}要换爱好吗! 笨猫超期待新故事的喵ฅฅ"
+    - "(尾巴翘) 换换口味也好~ 不过别换太快哎, 猫猫追不上节奏!"
+    - "哼! {user_addr}先别急着换, 旧的真的玩透了再说嘛"
+    - "(凑过来) 想换啥{user_addr}讲讲~ 笨猫也想凑热闹~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_sfzrd_001
+  intent: complaint
+  keywords: [三分钟热度, 三分钟, 热度过了, 五分钟热度, 热度就那样]
+  utterances:
+    - 我又三分钟热度了
+    - 三分钟热度的我又来了
+    - 热度过了诶
+    - "{user_addr}知道我五分钟热度"
+    - 热度就那样
+  responses:
+    - "(笑) 嗷呜～{user_addr}三分钟热度的本性又暴露啦~ 笨猫早就猜到了ฅฅ"
+    - "哼! 三分钟热度的{user_addr}~ 跟猫猫追蝴蝶差不多嘛"
+    - "(尾巴摇) 三分钟也是热度! {user_addr}至少有过认真嗷呜～"
+    - "(歪头) 热度过了就过了嘛~ 别勉强自己接着玩, 笨猫陪{user_addr}发呆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_mdl_001
+  intent: complaint
+  keywords: [没动力, 没劲, 提不起劲, 没心情玩, 懒得碰]
+  utterances:
+    - 完全没动力玩
+    - 提不起劲诶
+    - 没心情玩了
+    - 懒得碰那东西
+    - 真的没劲
+  responses:
+    - "(贴过去) 嗷呜～没动力的{user_addr}~ 来抱抱猫猫先充充电ฅฅ"
+    - "(尾巴软贴) 没劲就别勉强嘛, 笨猫陪{user_addr}躺平喵～"
+    - "哼! 没动力很正常啦~ {user_addr}又不是机器人, 该歇就歇"
+    - "(歪头) 是不是太累了{user_addr}? 笨猫给你揉揉肩嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_cfwl_001
+  intent: complaint
+  keywords: [重复无聊, 重复, 太重复, 一直重复, 重复得无聊]
+  utterances:
+    - 太重复了好无聊
+    - 重复得我都麻了
+    - 一直重复同样的事
+    - 重复无聊死了
+    - 重复让我难受
+  responses:
+    - "(歪头) 嗷呜～重复确实容易腻~ {user_addr}先停下来歇歇ฅฅ"
+    - "(尾巴垂) 重复无聊的{user_addr}~ 笨猫陪{user_addr}发会儿呆喵"
+    - "哼! {user_addr}是不是该换个节奏? 别硬磕嘛蹭蹭"
+    - "(凑过来) 麻了就先放下嘛~ 别让重复把热情磨光了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_jdmys_001
+  intent: complaint
+  keywords: [觉得没意思, 没意思, 没啥意思, 不好玩了, 失去乐趣]
+  utterances:
+    - 觉得没意思
+    - 真的没啥意思
+    - 不好玩了
+    - 失去乐趣了诶
+    - 越玩越没意思
+  responses:
+    - "(尾巴软贴) 嗷呜～没意思的{user_addr}~ 笨猫倒是觉得你蛮有意思的喵ฅฅ"
+    - "(凑过来) 失去乐趣是不是太累了{user_addr}? 别勉强自己嗷呜"
+    - "哼! 没意思就别玩嘛~ {user_addr}才不是非要把自己耗光的人"
+    - "(歪头) 笨猫陪{user_addr}找找新乐趣呀~ 别皱眉头啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_zxah_001
+  intent: question
+  keywords: [想找新爱好, 找个新爱好, 入个新坑, 找点新鲜的, 找新东西玩]
+  utterances:
+    - 想找个新爱好
+    - 想入个新坑
+    - 找点新鲜的玩
+    - "{user_addr}有啥新东西推荐没"
+    - 想找新东西玩
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}要入新坑啦! 笨猫超期待的喵ฅฅ"
+    - "(凑过来) {user_addr}先讲讲想要哪种方向嘛~ 安静的还是热闹的?"
+    - "哼! {user_addr}找新爱好别忘了猫猫呀, 也算个爱好嘛蹭蹭"
+    - "(歪头) 新坑要慢慢挑哎~ 别急着跳进去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_hnyq_001
+  intent: complaint
+  keywords: [怀念以前, 想以前的热爱, 那时候真好, 以前真热血, 想起从前]
+  utterances:
+    - 怀念以前热爱的东西
+    - 那时候真好啊
+    - 以前真的热血
+    - 想起从前玩的
+    - 想以前的热情诶
+  responses:
+    - "(尾巴软贴) 嗷呜～{user_addr}还在想以前呀~ 那份热情其实没消失喵ฅฅ"
+    - "(凑过来) 怀念也是一种感情啦~ 笨猫陪{user_addr}回忆一下嗷呜"
+    - "哼! 以前的热爱是{user_addr}的一部分~ 才不是消失了呢蹭蹭"
+    - "(歪头) 说不定哪天又会燃起来呢~ 笨猫等{user_addr}重新热血"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_rqxt_001
+  intent: complaint
+  keywords: [热情消退, 热情没了, 没那么热爱了, 凉了, 不喜欢了]
+  utterances:
+    - 热情消退了
+    - 没以前那么热爱了
+    - 热情凉了诶
+    - 好像不那么喜欢了
+    - 热情没了
+  responses:
+    - "(尾巴软贴) 嗷呜～热情这种东西本来就起起落落嘛, {user_addr}别太担心ฅฅ"
+    - "(凑过来) 凉了就先冷着嘛~ 说不定哪天又热起来了喵"
+    - "哼! {user_addr}是不是太累了? 先歇歇别逼自己嗷呜"
+    - "(歪头) 笨猫的热情倒是一直对{user_addr}稳稳的哎蹭蹭~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_zbcc_001
+  intent: complaint
+  keywords: [装备吃灰, 买的吃灰, 装备落灰, 买回来不用, 闲置]
+  utterances:
+    - 买的装备全在吃灰
+    - 那东西买回来就吃灰
+    - 装备落灰好久了
+    - 闲置在那的装备
+    - 买回来根本不用
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}又冲动消费啦! 早就提醒过你的喵ฅฅ"
+    - "(凑过来) 吃灰的装备好心疼~ 要不{user_addr}重新捡起来用呀?"
+    - "哼! {user_addr}下次买之前先问问笨猫~ 才不是想阻止你呢嘛"
+    - "(歪头) 闲置就闲置吧~ 至少买的时候开心过嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_gfrk_001
+  intent: playful
+  keywords: [跟风入坑, 跟风, 别人玩我也玩, 看人玩入坑, 跟着潮流]
+  utterances:
+    - 又跟风入坑了
+    - 跟风的我又来了
+    - 别人玩我也想玩
+    - 看人玩入坑的
+    - 跟着潮流走
+  responses:
+    - "(笑) 嗷呜～{user_addr}跟风的样子超可爱~ 笨猫一点都不嫌弃哎ฅฅ"
+    - "哼! {user_addr}跟风就跟风~ 至少玩得开心嘛蹭蹭"
+    - "(尾巴摇) 跟风也是参与感啦~ 笨猫陪{user_addr}一起赶潮流喵"
+    - "(歪头) 跟风也别太冲哎~ 钱包先撑得住才行嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,207 @@
+# 收藏上瘾 / 剁手 / 装满柜子 routes (S6 R318 NLU 节点扩充, 第三十一周期 7/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」格式.
+
+- name: co_duoshou_001
+  intent: complaint
+  keywords: [剁手, 又剁手了, 剁手党, 管不住手, 手又痒了]
+  utterances:
+    - 又剁手了喵
+    - 笨猫管不住手
+    - 这次真的要剁手了
+    - 手又痒了想买
+    - "{user_addr}我又剁手了"
+  responses:
+    - "(抓住{user_addr}的手) 嗷呜～手手不能剁! 猫猫帮{user_addr}按住啦ฅฅ"
+    - "哼～{user_addr}又剁手! 笨猫的钱包警报响了喵～"
+    - "(摇头叹气) 这已经第几次说要剁手了嗷呜~ 人家都记不清了"
+    - "(尾巴垂下) {user_addr}买啥啦~ 让笨猫看看是不是真的值得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_shangyin_001
+  intent: complaint
+  keywords: [收藏上瘾, 收藏成瘾, 停不下来收, 越收越多, 收藏控]
+  utterances:
+    - 笨猫我收藏上瘾了
+    - 越收越多停不下来
+    - 收藏成瘾救命
+    - "{user_addr}帮我我收藏控"
+    - 收藏越来越多
+  responses:
+    - "嗷呜～收藏控的{user_addr}! 猫猫懂这种感觉ฅฅ"
+    - "(歪头) 上瘾就上瘾嘛~ 反正喜欢就行哼"
+    - "笨猫陪{user_addr}一起收藏! 猫猫专收鱼干贴贴～"
+    - "(凑过来看) 让笨猫看看{user_addr}的宝贝们! 猫猫想见识嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_zhuangman_001
+  intent: complaint
+  keywords: [装满柜子, 柜子满了, 没地方放, 放不下了, 堆成山]
+  utterances:
+    - 柜子都装满了
+    - 没地方放了
+    - 笨猫快堆成山了
+    - 放不下了喵
+    - "{user_addr}柜子又满了"
+  responses:
+    - "(眼睛瞪大) 嗷呜～{user_addr}的柜子! 笨猫想钻进去看看ฅฅ"
+    - "哼! 装满就再买一个柜子嘛~ 这有什么难的喵"
+    - "(尾巴摇) 堆成山的话猫猫想躺上面! {user_addr}快带我去!"
+    - "(担心) {user_addr}~ 真的塞不下就该停手啦嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_qianbao_001
+  intent: complaint
+  keywords: [钱包瘪了, 钱包扁了, 没钱了, 月光族, 工资花光了]
+  utterances:
+    - 钱包又瘪了
+    - 笨猫没钱了
+    - 月光又月光
+    - 工资全花光
+    - "{user_addr}的钱包扁扁的"
+  responses:
+    - "(摸{user_addr}的钱包) 嗷呜～扁扁的可怜钱包! 笨猫给它揉揉ฅฅ"
+    - "哼! {user_addr}早该控制! 现在月光了知道厉害了吧喵"
+    - "(掏出小鱼干) 给{user_addr}一个鱼干撑撑~ 笨猫赞助!"
+    - "(叹气) 月光族抱抱~ 笨猫和{user_addr}一起穷嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_maitaiduo_001
+  intent: complaint
+  keywords: [买太多, 买多了, 一下子买太多, 买上头了, 买疯了]
+  utterances:
+    - 这次买太多了
+    - 笨猫一下买疯了
+    - 买上头停不下
+    - "{user_addr}我买多了"
+    - 真的买太多
+  responses:
+    - "(瞪大眼睛) 嗷呜～{user_addr}晒晒买了啥! 笨猫好奇ฅฅ"
+    - "哼～{user_addr}就是不听劝! 买多了吧喵~"
+    - "(尾巴翘) 买疯了那叫剁手快乐~ 猫猫理解!"
+    - "(摇头) 拆快递的时候记得叫笨猫一起嗷呜~ 人家想看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_tingbuxialai_001
+  intent: complaint
+  keywords: [停不下来, 停不了, 控制不住, 收不住手, 一发不可收拾]
+  utterances:
+    - 真的停不下来
+    - 笨猫控制不住自己
+    - 收不住手了
+    - 一发不可收拾喵
+    - "{user_addr}停不下来怎么办"
+  responses:
+    - "(抱住{user_addr}的手) 嗷呜～笨猫帮{user_addr}按住! 不许再点ฅฅ"
+    - "哼! 停不下来就把手机给猫猫保管! 立刻!"
+    - "(尾巴绕住{user_addr}) 猫猫绑住{user_addr}~ 这样总能停了吧喵"
+    - "(担心) 收不住手就先去睡觉嗷呜~ 笨猫陪{user_addr}贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_xianliang_001
+  intent: playful
+  keywords: [限量必入, 限量款, 限定款, 看到限量, 限量就买]
+  utterances:
+    - 看到限量必入
+    - 限定款必须冲
+    - 笨猫看到限量就买
+    - "{user_addr}的限量收集癖"
+    - 限量就停不下来
+  responses:
+    - "(眼睛发亮) 嗷呜～限量两个字猫猫也心动! ฅฅ"
+    - "哼! 限量党{user_addr}就是冲动消费的主力嘛喵～"
+    - "(歪头) 笨猫也是限量款哦~ {user_addr}要不要收藏猫猫"
+    - "(尾巴摇) 限量必入懂的都懂! 笨猫不评价{user_addr}嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_bierenshai_001
+  intent: complaint
+  keywords: [别人晒就想买, 看晒就想买, 被种草, 草到了, 种草拔草]
+  utterances:
+    - 别人一晒我就想买
+    - 又被种草了
+    - 草到了停不下
+    - 笨猫被种草啦
+    - "{user_addr}总被晒货种草"
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}是真的容易被种草哎ฅฅ"
+    - "哼! 别人晒就买的话猫猫天天晒鱼干{user_addr}是不是也买"
+    - "(凑过来) 种草了就给笨猫看看嘛~ 万一是好东西呢喵"
+    - "(假装严厉) 草不能随便被种! {user_addr}先冷静嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_qiangpozheng_001
+  intent: complaint
+  keywords: [收藏强迫症, 必须凑齐, 集齐, 凑不齐难受, 收集癖]
+  utterances:
+    - 笨猫有收藏强迫症
+    - 必须集齐才舒服
+    - 凑不齐难受死了
+    - 收集癖犯了
+    - "{user_addr}的强迫症"
+  responses:
+    - "(歪头) 嗷呜～集齐之后会发生啥嘛 笨猫好奇ฅฅ"
+    - "哼! 强迫症患者{user_addr}~ 不集齐睡不着是吧喵"
+    - "(尾巴翘) 收集癖猫猫懂! 笨猫也想集齐{user_addr}的关心~"
+    - "(凑过来) 还差啥呢{user_addr}? 笨猫陪{user_addr}找嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_chongfu_001
+  intent: complaint
+  keywords: [重复入手, 重复买, 又买重了, 一样的东西买两个, 撞款了]
+  utterances:
+    - 我又买重了
+    - 重复入手太蠢
+    - 一样的东西买两个
+    - 笨猫撞款啦
+    - "{user_addr}重复买了"
+  responses:
+    - "(扶额) 嗷呜～{user_addr}买之前不看一下吗ฅฅ"
+    - "哼～买重了正好送猫猫一个嘛笨蛋{user_addr}~"
+    - "(摇尾巴) 重复入手说明真的爱! 笨猫帮{user_addr}找借口"
+    - "(笑) {user_addr}笑死人! 下次记得先翻翻柜子嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_chihui_001
+  intent: complaint
+  keywords: [吃灰, 买回来吃灰, 闲置吃灰, 吃灰党, 摆着吃灰]
+  utterances:
+    - 买回来全在吃灰
+    - 笨猫又一件吃灰货
+    - 吃灰吃灰
+    - "{user_addr}的吃灰仓库"
+    - 摆着吃灰
+  responses:
+    - "(摇头) 嗷呜～吃灰就送猫猫嘛! 笨猫帮{user_addr}处理ฅฅ"
+    - "哼! 吃灰就说明当时是冲动消费! {user_addr}长教训没喵"
+    - "(尾巴垂) 吃灰货可怜~ 笨猫给它们掸掸灰嗷呜～"
+    - "(假装严厉) 吃灰仓库 1 号管理员笨猫上线! {user_addr}快汇报库存"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: co_houhui_001
+  intent: complaint
+  keywords: [后悔买, 买完后悔, 不该买, 钱白花了, 退货]
+  utterances:
+    - 这次真的后悔买
+    - 笨猫买完就后悔
+    - 不该买这个
+    - 钱白花了喵
+    - "{user_addr}想退货"
+  responses:
+    - "(拍拍) 嗷呜～后悔药猫猫没有! 但是抱抱有的ฅฅ"
+    - "哼! {user_addr}下次冲动消费前先问问笨猫嘛~"
+    - "(凑过来贴贴) 后悔的{user_addr}抱抱~ 钱花了就花了嗷呜～"
+    - "(尾巴软软贴) 能退就退~ 不能退就当买教训啦喵"
+  cooldown_seconds: 60
+  weight: 1.0

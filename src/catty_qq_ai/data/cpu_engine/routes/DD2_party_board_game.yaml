@@ -1,0 +1,207 @@
+# 派对桌游 / 你画我猜 / 狼人杀 routes (S6 R314 NLU 节点扩充, 第三十一周期 3/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型带笨猫语气.
+
+- name: pbg_undercover_001
+  intent: question
+  keywords: [推荐派对桌游, 推荐谁是卧底, 推荐 Undercover, 推荐多人派对游戏, 笨猫谁是卧底]
+  utterances:
+    - 推荐派对桌游
+    - 推荐谁是卧底
+    - 推荐 Undercover
+    - 推荐多人派对游戏
+    - 笨猫谁是卧底
+  responses:
+    - "嗷呜～{user_addr}谁是卧底 - 派对开胃菜ฅฅ"
+    - "(尾巴翘) 4-12 人 / 词语描述找内鬼"
+    - "{user_addr}规则秒懂 / 全场爆笑"
+    - "(挺胸) 笨猫推荐: 破冰神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pbg_werewolf_001
+  intent: question
+  keywords: [推荐狼人杀, 推荐 Werewolf, 推荐阵营游戏, 推荐天黑请闭眼, 笨猫狼人杀]
+  utterances:
+    - 推荐狼人杀
+    - 推荐 Werewolf
+    - 推荐阵营游戏
+    - 推荐天黑请闭眼
+    - 笨猫狼人杀
+  responses:
+    - "嗷呜～{user_addr}狼人杀 - 阵营之王ฅฅ"
+    - "(尾巴翘) 预言家/女巫/猎人/守卫"
+    - "{user_addr}9-12 人最香 / 重逻辑发言"
+    - "(挺胸) 笨猫推荐: 板子要选 12 人局!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pbg_codenames_001
+  intent: question
+  keywords: [推荐 Codenames, 推荐行动代号, 推荐词语联想, 推荐双队对战, 笨猫 Codenames]
+  utterances:
+    - 推荐 Codenames
+    - 推荐行动代号
+    - 推荐词语联想
+    - 推荐双队对战
+    - 笨猫 Codenames
+  responses:
+    - "嗷呜～{user_addr}Codenames - 词语联想神作ฅฅ"
+    - "(尾巴翘) Spymaster 一词关联多卡"
+    - "{user_addr}2017 SDJ 大奖 / 4-8 人"
+    - "(挺胸) 笨猫推荐: 经典版+图片版都收!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pbg_pictionary_001
+  intent: question
+  keywords: [推荐你画我猜, 推荐 Pictionary, 推荐画图猜词, 推荐 Telestrations, 笨猫你画我猜]
+  utterances:
+    - 推荐你画我猜
+    - 推荐 Pictionary
+    - 推荐画图猜词
+    - 推荐 Telestrations
+    - 笨猫你画我猜
+  responses:
+    - "嗷呜～{user_addr}Telestrations - 画图传话ฅฅ"
+    - "(尾巴翘) Pictionary - 经典原版"
+    - "{user_addr}画得越烂越好笑"
+    - "(挺胸) 笨猫推荐: Telestrations 翻车王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pbg_justone_001
+  intent: question
+  keywords: [推荐 Just One, 推荐一桩美事, 推荐合作猜词, 推荐 SDJ 2019, 笨猫 Just One]
+  utterances:
+    - 推荐 Just One
+    - 推荐一桩美事
+    - 推荐合作猜词
+    - 推荐 SDJ 2019
+    - 笨猫 Just One
+  responses:
+    - "嗷呜～{user_addr}Just One - 2019 SDJ 年度桌游ฅฅ"
+    - "(尾巴翘) 合作单词提示 / 重复消除"
+    - "{user_addr}3-7 人 / 15 分钟一局"
+    - "(挺胸) 笨猫推荐: 全年龄神作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pbg_avalon_001
+  intent: question
+  keywords: [推荐 Avalon, 推荐阿瓦隆, 推荐梅林刺客, 推荐圆桌骑士, 笨猫 Avalon]
+  utterances:
+    - 推荐 Avalon
+    - 推荐阿瓦隆
+    - 推荐梅林刺客
+    - 推荐圆桌骑士
+    - 笨猫 Avalon
+  responses:
+    - "嗷呜～{user_addr}Avalon - 比抵抗更精致ฅฅ"
+    - "(尾巴翘) 梅林/派西维尔/莫甘娜/刺客"
+    - "{user_addr}5-10 人 / 任务+刺杀"
+    - "(挺胸) 笨猫推荐: 入坑社团推理!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pbg_resistance_001
+  intent: question
+  keywords: [推荐抵抗组织, 推荐 The Resistance, 推荐隐藏身份, 推荐间谍游戏, 笨猫抵抗组织]
+  utterances:
+    - 推荐抵抗组织
+    - 推荐 The Resistance
+    - 推荐隐藏身份
+    - 推荐间谍游戏
+    - 笨猫抵抗组织
+  responses:
+    - "嗷呜～{user_addr}抵抗组织 - 隐藏身份鼻祖ฅฅ"
+    - "(尾巴翘) 无淘汰 / 全程参与"
+    - "{user_addr}5-10 人 / 30 分钟"
+    - "(挺胸) 笨猫推荐: Avalon 前置课!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pbg_catan_001
+  intent: question
+  keywords: [推荐卡坦岛, 推荐 Catan, 推荐经典策略, 推荐资源交换, 笨猫卡坦岛]
+  utterances:
+    - 推荐卡坦岛
+    - 推荐 Catan
+    - 推荐经典策略
+    - 推荐资源交换
+    - 笨猫卡坦岛
+  responses:
+    - "嗷呜～{user_addr}Catan - 桌游界 MC ฅฅ"
+    - "(尾巴翘) 1995 SDJ / 现代桌游开山"
+    - "{user_addr}3-4 人 / 60-90 分钟"
+    - "(挺胸) 笨猫推荐: 必收入门石碑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pbg_carcassonne_001
+  intent: question
+  keywords: [推荐家庭桌游, 推荐 Carcassonne, 推荐卡卡颂, 推荐铺板桌游, 笨猫卡卡颂]
+  utterances:
+    - 推荐家庭桌游
+    - 推荐 Carcassonne
+    - 推荐卡卡颂
+    - 推荐铺板桌游
+    - 笨猫卡卡颂
+  responses:
+    - "嗷呜～{user_addr}Carcassonne - 全家欢ฅฅ"
+    - "(尾巴翘) 2001 SDJ / 拼版铺路"
+    - "{user_addr}2-5 人 / 30-45 分钟"
+    - "(挺胸) 笨猫推荐: 老少咸宜!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pbg_patchwork_001
+  intent: question
+  keywords: [推荐两人桌游, 推荐 Patchwork, 推荐拼布对决, 推荐情侣桌游, 笨猫 Patchwork]
+  utterances:
+    - 推荐两人桌游
+    - 推荐 Patchwork
+    - 推荐拼布对决
+    - 推荐情侣桌游
+    - 笨猫 Patchwork
+  responses:
+    - "嗷呜～{user_addr}Patchwork 拼布对决ฅฅ"
+    - "(尾巴翘) Uwe 双人神作 / 俄罗斯方块感"
+    - "{user_addr}2 人 / 30 分钟"
+    - "(挺胸) 笨猫推荐: 情侣桌游首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pbg_quick_001
+  intent: question
+  keywords: [推荐速通桌游, 推荐 30 分钟桌游, 推荐 Azul, 推荐 Splendor, 笨猫速通桌游]
+  utterances:
+    - 推荐速通桌游
+    - 推荐 30 分钟桌游
+    - 推荐 Azul
+    - 推荐 Splendor
+    - 笨猫速通桌游
+  responses:
+    - "嗷呜～{user_addr}Azul 花砖物语 / Splendor 璀璨宝石ฅฅ"
+    - "(尾巴翘) 规则 5 分钟 / 一局 30 分钟"
+    - "{user_addr}2018 SDJ Azul / 现代轻策"
+    - "(挺胸) 笨猫推荐: Azul 颜值党!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pbg_cafe_001
+  intent: question
+  keywords: [推荐桌游吧, 推荐桌游店, 推荐桌游约局, 推荐桌游俱乐部, 笨猫桌游吧]
+  utterances:
+    - 推荐桌游吧
+    - 推荐桌游店
+    - 推荐桌游约局
+    - 推荐桌游俱乐部
+    - 笨猫桌游吧
+  responses:
+    - "嗷呜～{user_addr}桌游吧 - 一晚 30-80 不限玩ฅฅ"
+    - "(尾巴翘) 上百款桌游 / 店员开局"
+    - "{user_addr}周末 4 人去 / 性价比高"
+    - "(挺胸) 笨猫推荐: 找当地评分前三!"
+  cooldown_seconds: 60
+  weight: 0.8

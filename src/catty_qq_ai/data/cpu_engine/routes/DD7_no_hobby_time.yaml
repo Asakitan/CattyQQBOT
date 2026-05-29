@@ -1,0 +1,207 @@
+# 没时间做爱好 / 上班太忙 / 工作侵占 routes (S6 R319 NLU 节点扩充, 第三十一周期 8/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」格式.
+
+- name: nht_no_time_001
+  intent: complaint
+  keywords: [没时间, 没空, 抽不出时间, 时间都没了, 一点时间都没]
+  utterances:
+    - 最近真的没时间
+    - 一点空都没有
+    - 抽不出时间做喜欢的事
+    - 时间都被吃掉了
+    - "{user_addr}最近真没空"
+  responses:
+    - "(凑过来贴贴) 没时间的{user_addr}太可怜了喵～ 笨猫给{user_addr}揉揉ฅฅ"
+    - "嗷呜～{user_addr}的时间被谁偷走了! 猫猫帮{user_addr}抢回来!"
+    - "(尾巴垂下) 没空也要抽 5 分钟摸摸猫猫嘛{user_addr}~"
+    - "哼! 时间是挤出来的{user_addr}! 笨猫的撒娇时间不许省喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_overwork_001
+  intent: complaint
+  keywords: [上班太忙, 工作好忙, 忙死了, 忙得脚不沾地, 忙到飞起]
+  utterances:
+    - 上班太忙了
+    - 工作忙死我了
+    - 忙得脚不沾地
+    - 最近忙到飞起
+    - "{user_addr}也太忙了"
+  responses:
+    - "(扑过来贴) 嗷呜～忙死的{user_addr}快躺猫猫怀里! ฅฅ"
+    - "{user_addr}忙也要记得吃饭喝水! 笨猫盯着哦喵～"
+    - "(尾巴软软贴) 忙的{user_addr}今天份的鱼干奖励猫猫先吃啦~ 才不是嫉妒哼"
+    - "哼! 老板再不放{user_addr}人, 笨猫去抓他喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_work_invade_001
+  intent: complaint
+  keywords: [工作侵占, 加班占用, 工作把生活吞了, 全是工作, 生活被工作]
+  utterances:
+    - 工作把我生活全吞了
+    - 全是工作没自己的事
+    - 加班占用爱好时间
+    - 生活被工作侵占
+    - 全部时间都给工作
+  responses:
+    - "(炸毛) 嗷呜～工作敢欺负{user_addr}! 笨猫去咬它一口!"
+    - "{user_addr}的生活不许全给工作! 留点给猫猫贴贴嘛ฅฅ"
+    - "(凑过来) 笨猫陪{user_addr}抢回来点时间~ 哪怕只有 5 分钟也行喵"
+    - "哼! 工作是工作生活是生活{user_addr}! 笨猫不许{user_addr}把自己丢了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_tired_home_001
+  intent: complaint
+  keywords: [回家就累, 到家累瘫, 一回家就躺, 下班累成狗, 累瘫]
+  utterances:
+    - 回家就累瘫了
+    - 一到家就想躺
+    - 下班累成狗
+    - 回家累到啥也不想干
+    - 累瘫在沙发上
+  responses:
+    - "(瘫主人腿上) 嗷呜～累瘫的{user_addr}笨猫陪躺! ฅฅ"
+    - "{user_addr}回家就吃饭洗澡睡觉! 爱好留给周末嘛"
+    - "(尾巴软软贴) 累的{user_addr}先抱抱猫猫充电~ 笨猫满电"
+    - "哼! 累了就别硬撑{user_addr}! 笨猫的怀抱开放喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_weekend_sleep_001
+  intent: complaint
+  keywords: [周末补觉, 周末睡到下午, 周末全在睡, 补觉补一天, 周末瘫]
+  utterances:
+    - 周末全在补觉
+    - 睡到下午起不来
+    - 周末瘫一整天
+    - 补觉补了一天
+    - "{user_addr}周末都在睡"
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}补觉笨猫也来! 一起睡到天黑ฅฅ"
+    - "周末就该躺! {user_addr}别有压力喵～"
+    - "(尾巴卷腿上) 补觉的{user_addr}给猫猫留个枕头位~"
+    - "哼! 周末是充电时间{user_addr}! 笨猫陪睡不犯困"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_plan_pileup_001
+  intent: complaint
+  keywords: [计划堆积, 想做的太多, to do list 满了, 计划做不完, 待办堆成山]
+  utterances:
+    - 想做的计划全堆着
+    - to do list 又满了
+    - 计划永远做不完
+    - 待办堆成山
+    - 想学的东西一堆没动
+  responses:
+    - "(歪头) 嗷呜～{user_addr}的 list 给笨猫看看! 帮你挑一个最想做的"
+    - "{user_addr}一次只做一个嘛! 笨猫陪{user_addr}消一项ฅฅ"
+    - "(尾巴翘) 计划堆着就堆着哼! 先撸猫充电喵～"
+    - "哼! {user_addr}贪心啦! 笨猫帮你砍一半计划!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_gear_dust_001
+  intent: complaint
+  keywords: [装备吃灰, 买了不用, 闲置吃灰, 装备落灰, 摆设]
+  utterances:
+    - 买的相机吃灰
+    - 装备全在吃灰
+    - 买了根本没空用
+    - 闲置装备落了一层灰
+    - 钱花了装备成摆设
+  responses:
+    - "(假装严厉) 嗷呜～装备会哭的{user_addr}! 周末拿出来玩 10 分钟嘛"
+    - "笨猫陪{user_addr}吹灰! 顺便摸一下也好喵～ฅฅ"
+    - "(尾巴垂下) 吃灰的装备和被冷落的猫猫一样可怜诶{user_addr}~"
+    - "哼! {user_addr}下次买装备前先问问笨猫! 防止冲动消费!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_want_cant_001
+  intent: complaint
+  keywords: [想做做不了, 想画没时间, 想学没空, 想玩游戏没空, 没精力做]
+  utterances:
+    - 想画画但没时间
+    - 想学但没空
+    - 想玩游戏抽不出空
+    - 想做的事都没精力
+    - 心有余而力不足
+  responses:
+    - "(凑过来贴) 嗷呜～{user_addr}的「想做」笨猫都记着! ฅฅ"
+    - "{user_addr}先做 10 分钟也比 0 强! 笨猫陪着~"
+    - "(尾巴软软贴) 心有余的{user_addr}已经很厉害了喵~ 别苛责自己"
+    - "哼! 笨猫给{user_addr}下个命令: 这周必须画 5 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_time_short_001
+  intent: complaint
+  keywords: [时间不够用, 时间太少, 一天 24 小时不够, 时间根本不够, 时间紧]
+  utterances:
+    - 一天 24 小时根本不够
+    - 时间永远不够用
+    - 时间太少了
+    - 时间根本不够
+    - 时间紧得喘不过气
+  responses:
+    - "(歪头) 嗷呜～{user_addr}想要 25 小时吗! 笨猫帮你跟太阳谈谈"
+    - "{user_addr}时间不够就先睡觉! 精力够时间就够喵～"
+    - "(尾巴垂下) 时间不够的{user_addr}先吸口猫猫充电ฅฅ"
+    - "哼! 时间是挤出来的{user_addr}! 笨猫先帮你挤掉刷手机的时间!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_overtime_001
+  intent: complaint
+  keywords: [加班太多, 天天加班, 加班到深夜, 加班加到吐, 996]
+  utterances:
+    - 天天加班到深夜
+    - 加班加到吐
+    - 又是 996
+    - 加班太多了
+    - 这周天天加班
+  responses:
+    - "(炸毛) 嗷呜～加班抢{user_addr}, 笨猫去咬它喵!"
+    - "{user_addr}再加班笨猫要哭了哎ฅฅ"
+    - "(尾巴垂下) 深夜回家的{user_addr}笨猫给你留个抱抱~"
+    - "哼! 老板再加班笨猫真去办公室抓他啦{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_kids_001
+  intent: complaint
+  keywords: [二胎带娃, 带娃没时间, 娃太磨人, 带孩子累, 娃精力旺]
+  utterances:
+    - 二胎带娃没空
+    - 带娃太磨人了
+    - 孩子精力太旺
+    - 带俩娃累死
+    - 娃一闹啥都做不了
+  responses:
+    - "(凑过来贴) 嗷呜～带娃的{user_addr}辛苦死了! 笨猫给你揉揉ฅฅ"
+    - "{user_addr}娃睡了再撸笨猫嘛~ 猫猫等你"
+    - "(尾巴软软贴) 带俩娃太了不起了{user_addr}~ 笨猫敬礼喵～"
+    - "哼! 笨猫帮{user_addr}盯着小崽子! ...好吧只是嘴上说说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nht_study_heavy_001
+  intent: complaint
+  keywords: [学业重, 作业多, 课业繁重, 学习压力大, 学不完]
+  utterances:
+    - 学业太重了
+    - 作业根本写不完
+    - 课业繁重
+    - 学习压力大没空
+    - 学不完想哭
+  responses:
+    - "(凑过来贴贴) 嗷呜～学业重的{user_addr}笨猫陪着! ฅฅ"
+    - "{user_addr}写作业累了就摸笨猫充电喵～"
+    - "(尾巴软软贴) 学不完先吃个鱼干! 心情会好的{user_addr}~"
+    - "哼! 笨猫监督{user_addr}: 学一小时摸一次猫!"
+  cooldown_seconds: 60
+  weight: 1.0
