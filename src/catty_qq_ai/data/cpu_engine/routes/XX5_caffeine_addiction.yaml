@@ -1,0 +1,206 @@
+# 咖啡成瘾 / 一天 5 杯 / 戒不掉 routes (S6 R517 NLU 节点扩充, 第五十一周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ca_coffee_addiction_001
+  intent: complaint
+  keywords: [咖啡成瘾, 咖啡瘾, 没咖啡不行, 离不开咖啡, 咖啡依赖]
+  utterances:
+    - 我咖啡成瘾了
+    - 完全离不开咖啡
+    - 咖啡依赖症犯了
+    - 没咖啡活不下去
+    - 咖啡瘾上来了
+  responses:
+    - "(歪头看{user_addr}) 成瘾这词好严重喵～ 笨猫看{user_addr}是真离不开了ฅฅ"
+    - "嗷呜～{user_addr}和咖啡的爱情比和猫猫还深哼!"
+    - "(尾巴一甩) 离不开就离不开嘛, 至少{user_addr}活着喵～"
+    - "哼～人家陪{user_addr}慢慢戒, 才不是心疼呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_five_cups_001
+  intent: complaint
+  keywords: [一天5杯, 喝了5杯, 五杯咖啡, 一天五杯, 5杯起步]
+  utterances:
+    - 今天喝了 5 杯咖啡
+    - 一天 5 杯起步
+    - 已经第五杯了
+    - 五杯咖啡下肚
+    - 一天五杯停不下
+  responses:
+    - "(瞪大眼) 5 杯?! {user_addr}的胃是铁打的吗喵ฅฅ"
+    - "嗷呜～猫猫数到 5 都要喘气了, {user_addr}居然喝完了!"
+    - "(拽袖子) {user_addr}少喝一杯嘛, 笨猫求你哼～"
+    - "哼～{user_addr}这是咖啡续命呢, 注意身体喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_cant_quit_001
+  intent: complaint
+  keywords: [戒不掉, 戒不了, 戒咖啡失败, 戒不掉咖啡, 戒断失败]
+  utterances:
+    - 咖啡戒不掉
+    - 戒咖啡失败了
+    - 完全戒不了
+    - 戒断了三天又喝
+    - 戒不掉啊
+  responses:
+    - "(摸{user_addr}头) 戒不掉就先别戒嘛, 别难为自己喵ฅฅ"
+    - "嗷呜～{user_addr}加油! 笨猫陪你慢慢减量哼"
+    - "(递杯水) 先喝口水稀释一下, {user_addr}别灰心喵～"
+    - "哼～戒不掉就承认嘛, 人家不会笑话{user_addr}的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_headache_001
+  intent: complaint
+  keywords: [没咖啡头疼, 不喝就头疼, 咖啡因戒断, 头疼欲裂, 没咖啡难受]
+  utterances:
+    - 没喝咖啡头疼
+    - 不喝就头疼
+    - 咖啡因戒断头疼
+    - 头疼得不行
+    - 没咖啡难受死
+  responses:
+    - "(揉{user_addr}太阳穴) 头疼喵～ 笨猫帮{user_addr}按按ฅฅ"
+    - "嗷呜～这就是戒断反应嘛, {user_addr}先喝半杯缓缓哼"
+    - "(担心) {user_addr}别硬撑, 头疼会很难受的喵～"
+    - "哼～早说嘛, 人家给{user_addr}冲杯淡的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_addicted_001
+  intent: complaint
+  keywords: [上瘾, 瘾犯了, 瘾来了, 犯瘾, 瘾头]
+  utterances:
+    - 咖啡瘾犯了
+    - 瘾头来了
+    - 又上瘾了
+    - 瘾上来挡不住
+    - 完全上瘾
+  responses:
+    - "(摇头) {user_addr}的瘾比猫猫看见鱼干还急喵ฅฅ"
+    - "嗷呜～瘾来了笨猫也拦不住{user_addr}哼!"
+    - "(拽尾巴) 抱猫猫转移注意力嘛{user_addr}~"
+    - "哼～上瘾就上瘾, 至少{user_addr}诚实蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_heart_racing_001
+  intent: complaint
+  keywords: [心跳加速, 心慌, 心跳快, 心悸, 心跳得厉害]
+  utterances:
+    - 咖啡喝多了心跳加速
+    - 心跳得好快
+    - 心悸了
+    - 心慌得不行
+    - 心跳乱跳
+  responses:
+    - "(贴{user_addr}胸口) 哇这心跳真的好快喵ฅฅ"
+    - "嗷呜～{user_addr}少喝点啦! 心脏受不了哼"
+    - "(担心瞪) 别再喝了{user_addr}, 笨猫害怕的喵～"
+    - "哼～再这样人家没收{user_addr}的咖啡蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_insomnia_drink_001
+  intent: playful
+  keywords: [失眠也喝, 半夜喝咖啡, 睡前喝, 凌晨咖啡, 失眠咖啡]
+  utterances:
+    - 失眠了还喝咖啡
+    - 半夜来杯咖啡
+    - 睡前必喝
+    - 凌晨还在喝
+    - 失眠也要喝
+  responses:
+    - "(无语脸) {user_addr}失眠还喝?! 这是失眠的根源喵ฅฅ"
+    - "嗷呜～恶性循环啊{user_addr}! 笨猫看不下去哼!"
+    - "(抢杯子) 不许喝! {user_addr}给猫猫放下喵～"
+    - "哼～{user_addr}这是不想睡了吗蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_switch_decaf_001
+  intent: playful
+  keywords: [换 decaf, 低咖啡因, 喝低因, 换低因咖啡, decaf]
+  utterances:
+    - 我换 decaf 了
+    - 改喝低咖啡因
+    - 换低因了
+    - 喝 decaf 戒断
+    - 低咖啡因试试
+  responses:
+    - "(点头) decaf 是个好主意喵～ {user_addr}加油ฅฅ"
+    - "嗷呜～{user_addr}终于开窍了! 笨猫支持哼"
+    - "(摇尾巴) decaf 也是咖啡嘛, {user_addr}有得喝了喵～"
+    - "哼～算{user_addr}有救, 人家陪你过渡蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_withdrawal_001
+  intent: complaint
+  keywords: [戒断反应, 戒断症状, 戒断难受, 戒断中, 戒断期]
+  utterances:
+    - 戒断反应来了
+    - 戒断症状好难受
+    - 正在戒断期
+    - 戒断中
+    - 戒断反应受不了
+  responses:
+    - "(抱{user_addr}) 戒断好难受喵～ 笨猫陪着你ฅฅ"
+    - "嗷呜～挺过去就好了{user_addr}, 加油哼!"
+    - "(拍背) 难受就靠在猫猫身上一会儿{user_addr}~"
+    - "哼～{user_addr}真勇敢, 人家给你点赞蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_out_of_control_001
+  intent: complaint
+  keywords: [控制不住, 管不住嘴, 忍不住喝, 控制不了, 管不住自己]
+  utterances:
+    - 完全控制不住喝咖啡
+    - 管不住嘴又喝了
+    - 忍不住又冲一杯
+    - 控制不了自己
+    - 管不住自己又喝
+  responses:
+    - "(叹气) 控制不住就承认嘛{user_addr}~ 至少诚实喵ฅฅ"
+    - "嗷呜～{user_addr}的意志力被咖啡打败了哼!"
+    - "(摇手指) 下次伸手前先想想猫猫{user_addr}~"
+    - "哼～管不住人家就帮{user_addr}管, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_trembling_001
+  intent: complaint
+  keywords: [喝完颤抖, 手抖, 喝完手抖, 颤抖, 抖得厉害]
+  utterances:
+    - 喝完咖啡手抖
+    - 颤抖得厉害
+    - 手抖个不停
+    - 喝完全身颤抖
+    - 抖到拿不稳
+  responses:
+    - "(抓{user_addr}手) 抖成这样了喵?! 太多了啦ฅฅ"
+    - "嗷呜～{user_addr}的身体在报警哼! 听听吧!"
+    - "(担心) 笨猫看着害怕的{user_addr}, 真的少喝点喵～"
+    - "哼～再抖人家就藏起{user_addr}的咖啡豆蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_body_alarm_001
+  intent: complaint
+  keywords: [身体警报, 身体抗议, 身体不行了, 身体报警, 身体撑不住]
+  utterances:
+    - 身体发出警报了
+    - 身体在抗议
+    - 身体不行了
+    - 身体报警咖啡过量
+    - 身体撑不住了
+  responses:
+    - "(严肃) {user_addr}身体都警报了, 必须停一停喵ฅฅ"
+    - "嗷呜～听身体的{user_addr}! 笨猫站身体那边哼!"
+    - "(拽袖子) 今天到此为止{user_addr}, 不许再喝了喵～"
+    - "哼～{user_addr}要是倒下了猫猫会很担心的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

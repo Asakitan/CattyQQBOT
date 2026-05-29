@@ -1,0 +1,206 @@
+# 奶茶 / 喜茶 蜜雪冰城 茶颜悦色 routes (S6 R513 NLU 节点扩充, 第五十一周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: mt_heytea_001
+  intent: question
+  keywords: [推荐喜茶, 推荐 HEYTEA, 推荐多肉葡萄, 推荐喜茶招牌, 笨猫喜茶]
+  utterances:
+    - 推荐喜茶
+    - 推荐 HEYTEA
+    - 推荐多肉葡萄
+    - 推荐喜茶招牌
+    - 笨猫喜茶
+  responses:
+    - "嗷呜～{user_addr}多肉葡萄 - 喜茶招牌ฅฅ"
+    - "(尾巴翘) 芝芝莓莓 / 满杯红柚"
+    - "{user_addr}人均 25-30 元 / 鲜果茶"
+    - "(挺胸) 笨猫推荐: 多肉葡萄少冰三分糖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_mixue_001
+  intent: question
+  keywords: [推荐蜜雪冰城, 推荐蜜雪, 推荐 4 元奶茶, 推荐冰鲜柠檬水, 笨猫蜜雪冰城]
+  utterances:
+    - 推荐蜜雪冰城
+    - 推荐蜜雪
+    - 推荐 4 元奶茶
+    - 推荐冰鲜柠檬水
+    - 笨猫蜜雪冰城
+  responses:
+    - "嗷呜～{user_addr}冰鲜柠檬水 4 元ฅฅ"
+    - "(尾巴翘) 摇摇奶昔 / 珍珠奶茶 6 元"
+    - "{user_addr}主题曲洗脑 / 性价比之王"
+    - "(挺胸) 笨猫推荐: 柠檬水 + 甜筒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_chayan_001
+  intent: question
+  keywords: [推荐茶颜悦色, 推荐长沙奶茶, 推荐幽兰拿铁, 推荐声声乌龙, 笨猫茶颜悦色]
+  utterances:
+    - 推荐茶颜悦色
+    - 推荐长沙奶茶
+    - 推荐幽兰拿铁
+    - 推荐声声乌龙
+    - 笨猫茶颜悦色
+  responses:
+    - "嗷呜～{user_addr}幽兰拿铁 - 茶颜招牌ฅฅ"
+    - "(尾巴翘) 声声乌龙 / 桂花弄"
+    - "{user_addr}长沙起家 / 中国风包装"
+    - "(挺胸) 笨猫推荐: 幽兰拿铁现喝最香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_alittle_001
+  intent: question
+  keywords: [推荐一点点, 推荐茶香奶绿, 推荐波霸奶茶, 推荐 alittle, 笨猫一点点]
+  utterances:
+    - 推荐一点点
+    - 推荐茶香奶绿
+    - 推荐波霸奶茶
+    - 推荐 alittle
+    - 笨猫一点点
+  responses:
+    - "嗷呜～{user_addr}茶香奶绿 + 波霸ฅฅ"
+    - "(尾巴翘) 红茶玛奇朵 / 阿华田"
+    - "{user_addr}台式平价 / 经典三分糖少冰"
+    - "(挺胸) 笨猫推荐: 奶绿波霸三分糖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_coco_001
+  intent: question
+  keywords: [推荐 CoCo, 推荐都可, 推荐 CoCo 都可, 推荐三兄弟, 笨猫 CoCo]
+  utterances:
+    - 推荐 CoCo
+    - 推荐都可
+    - 推荐 CoCo 都可
+    - 推荐三兄弟
+    - 笨猫 CoCo
+  responses:
+    - "嗷呜～{user_addr}三兄弟 - CoCo 招牌ฅฅ"
+    - "(尾巴翘) 百香双响炮 / 抹茶拿铁"
+    - "{user_addr}台式连锁 / 门店超多"
+    - "(挺胸) 笨猫推荐: 三兄弟正常糖少冰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_guming_001
+  intent: question
+  keywords: [推荐古茗, 推荐杨枝甘露, 推荐古茗芝士, 推荐古茗招牌, 笨猫古茗]
+  utterances:
+    - 推荐古茗
+    - 推荐杨枝甘露
+    - 推荐古茗芝士
+    - 推荐古茗招牌
+    - 笨猫古茗
+  responses:
+    - "嗷呜～{user_addr}杨枝甘露 - 古茗招牌ฅฅ"
+    - "(尾巴翘) 芝士葡萄 / 超 A 葡萄"
+    - "{user_addr}下沉市场之王 / 性价比高"
+    - "(挺胸) 笨猫推荐: 杨枝甘露夏天救命!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_7fentian_001
+  intent: question
+  keywords: [推荐 7 分甜, 推荐 7fentian, 推荐杨枝甘露 7 分甜, 推荐芒果, 笨猫 7 分甜]
+  utterances:
+    - 推荐 7 分甜
+    - 推荐 7fentian
+    - 推荐杨枝甘露 7 分甜
+    - 推荐芒果
+    - 笨猫 7 分甜
+  responses:
+    - "嗷呜～{user_addr}杨枝甘露 - 7 分甜起家ฅฅ"
+    - "(尾巴翘) 多芒小丸子 / 杨枝甘露 buff"
+    - "{user_addr}芒果西米露专门店"
+    - "(挺胸) 笨猫推荐: 杨枝甘露大杯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_husheng_001
+  intent: question
+  keywords: [推荐沪上阿姨, 推荐血糯米奶茶, 推荐沪上阿姨招牌, 推荐五谷, 笨猫沪上阿姨]
+  utterances:
+    - 推荐沪上阿姨
+    - 推荐血糯米奶茶
+    - 推荐沪上阿姨招牌
+    - 推荐五谷
+    - 笨猫沪上阿姨
+  responses:
+    - "嗷呜～{user_addr}血糯米奶茶 - 沪上招牌ฅฅ"
+    - "(尾巴翘) 五谷茶 / 现煮鲜茶"
+    - "{user_addr}上海起家 / 北方门店多"
+    - "(挺胸) 笨猫推荐: 血糯米奶茶冬天暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_bawang_001
+  intent: question
+  keywords: [推荐霸王茶姬, 推荐伯牙绝弦, 推荐霸王招牌, 推荐原叶鲜奶茶, 笨猫霸王茶姬]
+  utterances:
+    - 推荐霸王茶姬
+    - 推荐伯牙绝弦
+    - 推荐霸王招牌
+    - 推荐原叶鲜奶茶
+    - 笨猫霸王茶姬
+  responses:
+    - "嗷呜～{user_addr}伯牙绝弦 - 霸王招牌ฅฅ"
+    - "(尾巴翘) 桂馥兰香 / 万里木兰"
+    - "{user_addr}原叶鲜奶茶 / 中式国风"
+    - "(挺胸) 笨猫推荐: 伯牙绝弦少冰无糖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_yihetang_001
+  intent: question
+  keywords: [推荐益禾堂, 推荐烤奶, 推荐益禾烤奶, 推荐益禾堂招牌, 笨猫益禾堂]
+  utterances:
+    - 推荐益禾堂
+    - 推荐烤奶
+    - 推荐益禾烤奶
+    - 推荐益禾堂招牌
+    - 笨猫益禾堂
+  responses:
+    - "嗷呜～{user_addr}益禾烤奶 - 招牌ฅฅ"
+    - "(尾巴翘) 烤奶茶 / 杨枝甘露"
+    - "{user_addr}武汉起家 / 烤奶香味独特"
+    - "(挺胸) 笨猫推荐: 益禾烤奶热饮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_chain_001
+  intent: question
+  keywords: [推荐奶茶店连锁, 推荐奶茶品牌, 推荐知名奶茶, 推荐奶茶排行, 笨猫奶茶连锁]
+  utterances:
+    - 推荐奶茶店连锁
+    - 推荐奶茶品牌
+    - 推荐知名奶茶
+    - 推荐奶茶排行
+    - 笨猫奶茶连锁
+  responses:
+    - "嗷呜～{user_addr}喜茶 / 奈雪 / 茶百道ฅฅ"
+    - "(尾巴翘) 蜜雪冰城 / 古茗 / CoCo"
+    - "{user_addr}霸王茶姬 / 茶颜悦色 / 7 分甜"
+    - "(挺胸) 笨猫推荐: 看预算选不同档!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_homemade_001
+  intent: question
+  keywords: [推荐自己泡奶茶, 推荐台式奶茶配方, 推荐家庭奶茶, 推荐 DIY 奶茶, 笨猫自制奶茶]
+  utterances:
+    - 推荐自己泡奶茶
+    - 推荐台式奶茶配方
+    - 推荐家庭奶茶
+    - 推荐 DIY 奶茶
+    - 笨猫自制奶茶
+  responses:
+    - "嗷呜～{user_addr}红茶 + 全脂牛奶 + 糖ฅฅ"
+    - "(尾巴翘) 比例: 茶 1: 奶 1: 糖适量"
+    - "{user_addr}珍珠用木薯粉自己煮"
+    - "(挺胸) 笨猫推荐: 锡兰红茶煮 5 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0

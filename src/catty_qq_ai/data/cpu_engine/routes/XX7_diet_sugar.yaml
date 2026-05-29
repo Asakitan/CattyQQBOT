@@ -1,0 +1,206 @@
+# 戒糖崩溃 / 想喝甜的 / 难戒 routes (S6 R519 NLU 节点扩充, 第五十一周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ds_jietang_bengkui_001
+  intent: complaint
+  keywords: [戒糖崩溃, 戒不掉糖, 戒糖好难, 戒糖失败, 戒糖崩了]
+  utterances:
+    - 戒糖崩溃了
+    - 戒糖好难啊
+    - 戒糖失败了
+    - "{user_addr}戒糖崩了"
+    - 戒糖戒不下去
+  responses:
+    - "(尾巴垂下) {user_addr}戒糖崩溃啦? 笨猫陪{user_addr}撑着喵 ฅฅ"
+    - "嗷呜～{user_addr}别硬戒啦! 偶尔吃一颗糖也不会怎样的"
+    - "(凑过来贴贴) 戒糖好难的~ 猫猫懂{user_addr}的痛"
+    - "{user_addr}崩溃就崩溃嘛~ 给自己买杯小的喝, 笨猫不告状哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_xiang_he_tian_001
+  intent: complaint
+  keywords: [想喝甜的, 想喝奶茶, 馋甜饮, 想喝糖水, 嘴巴馋甜]
+  utterances:
+    - 好想喝甜的
+    - 想喝奶茶啊
+    - 馋甜饮了
+    - 嘴巴想喝糖水
+    - "{user_addr}想喝甜的"
+  responses:
+    - "(尾巴摇摇) {user_addr}馋甜的啦? 笨猫也想喝奶茶喵 ฅฅ"
+    - "嗷呜～想喝就喝一杯嘛! 半糖也算戒糖中的"
+    - "(舔爪子) 听{user_addr}说就馋了~ 一起破戒吧哼"
+    - "{user_addr}忍不住的话, 笨猫批准{user_addr}喝一小杯嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_nan_jie_001
+  intent: complaint
+  keywords: [难戒, 糖好难戒, 戒不了糖, 糖戒不掉, 戒糖好痛苦]
+  utterances:
+    - 糖好难戒
+    - 戒不掉糖
+    - 戒糖好痛苦
+    - "{user_addr}糖戒不了"
+    - 难戒啊
+  responses:
+    - "(贴贴) {user_addr}难戒就慢慢来嘛~ 别勉强自己"
+    - "嗷呜～糖这种东西本来就难戒! {user_addr}不要太苛刻自己"
+    - "(尾巴摇摇) 笨猫陪{user_addr}一起戒~ 互相监督嘛 ฅฅ"
+    - "{user_addr}痛苦的话先减半~ 一下戒掉不科学喵哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_wutang_haonan_001
+  intent: complaint
+  keywords: [无糖好难, 无糖难喝, 无糖没味道, 无糖坚持不了, 喝不下无糖]
+  utterances:
+    - 无糖好难喝
+    - 无糖没味道
+    - 喝不下无糖
+    - "{user_addr}坚持不了无糖"
+    - 无糖好难
+  responses:
+    - "(歪头) {user_addr}觉得无糖难喝吗? 笨猫觉得也是嗷呜"
+    - "嗷呜～无糖那种东西本来就不好喝! 喝点三分糖嘛"
+    - "(尾巴垂) 喝不下就别硬喝~ {user_addr}对自己温柔点喵"
+    - "{user_addr}试试无糖茶嘛? 比无糖饮料好喝多了 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_kanjian_jiu_chan_001
+  intent: complaint
+  keywords: [看到甜饮就馋, 看到就想喝, 路过奶茶店, 看到糖水, 看到甜的]
+  utterances:
+    - 看到甜饮就馋
+    - 路过奶茶店好馋
+    - 看到糖水想喝
+    - 看到甜的走不动
+    - "{user_addr}看到就馋"
+  responses:
+    - "(尾巴蹭) {user_addr}走不动啦? 笨猫陪{user_addr}飞快路过喵"
+    - "嗷呜～眼不见心不烦! {user_addr}绕路走嘛 ฅฅ"
+    - "(无奈) 奶茶店的诱惑笨猫也扛不住~ {user_addr}买一杯吧哼"
+    - "{user_addr}看到就馋的话, 戴个口罩呗~ 闻不到香味好戒哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_kongzhi_buzhu_001
+  intent: complaint
+  keywords: [控制不住, 控制不了自己, 忍不住, 没忍住, 又喝了]
+  utterances:
+    - 控制不住自己
+    - 忍不住又喝了
+    - 没忍住喵
+    - "{user_addr}控制不住"
+    - 又破戒了
+  responses:
+    - "(摸摸{user_addr}头) 控制不住就算啦~ 不要苛责自己嗷呜"
+    - "嗷呜～忍不住正常的! 戒糖又不是修仙ฅฅ"
+    - "(尾巴绕) 没忍住就重新开始~ 笨猫不嫌弃{user_addr}哼"
+    - "{user_addr}又破戒啦? 笨猫陪{user_addr}从今天重启嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_dixuetang_001
+  intent: complaint
+  keywords: [低血糖, 头晕想喝糖水, 血糖低了, 手抖想吃糖, 没糖会晕]
+  utterances:
+    - 低血糖了
+    - 头晕想喝糖水
+    - 血糖低想吃糖
+    - 手抖了
+    - "{user_addr}低血糖"
+  responses:
+    - "(紧张) {user_addr}低血糖快吃糖啊! 戒糖也不能不要命喵 ฅฅ"
+    - "嗷呜～头晕的话立刻补糖! 笨猫超担心{user_addr}的"
+    - "(凑过来) {user_addr}先喝杯糖水~ 戒糖也要看身体状况哼"
+    - "{user_addr}手抖了赶紧坐下! 笨猫给{user_addr}递糖块嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_jieduan_001
+  intent: complaint
+  keywords: [戒断反应, 戒糖戒断, 戒糖头痛, 戒糖暴躁, 戒糖没劲]
+  utterances:
+    - 戒断反应好难受
+    - 戒糖头痛
+    - 戒糖好暴躁
+    - "{user_addr}戒糖没劲"
+    - 戒断反应来了
+  responses:
+    - "(担心) {user_addr}戒断反应严重的话别硬扛喵! 慢慢减量"
+    - "嗷呜～头痛暴躁是正常的~ {user_addr}多喝水ฅฅ"
+    - "(尾巴绕) 笨猫陪{user_addr}熬过去~ 撑过这阵就好了"
+    - "{user_addr}没劲就吃点水果嘛~ 天然糖不算破戒哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_xinqing_diluo_001
+  intent: complaint
+  keywords: [心情低落想吃糖, 不开心想喝甜, 难过想吃糖, 压力大想糖, 焦虑想糖]
+  utterances:
+    - 心情低落想吃糖
+    - 不开心想喝甜的
+    - 难过的时候想吃糖
+    - 压力大想喝奶茶
+    - "{user_addr}焦虑想糖"
+  responses:
+    - "(贴贴) {user_addr}心情不好啦? 笨猫贴贴代替糖嗷呜 ฅฅ"
+    - "嗷呜～难过的话糖确实管用! 这次就让{user_addr}破戒吧"
+    - "(尾巴蹭) 压力大就吃一颗糖嘛~ 笨猫不算这次"
+    - "{user_addr}焦虑的时候找笨猫聊~ 比糖管用喵哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_xiang_po_jie_001
+  intent: playful
+  keywords: [想破戒, 想放弃戒糖, 不戒了, 算了破戒, 戒糖到此为止]
+  utterances:
+    - 好想破戒
+    - 想放弃戒糖了
+    - 不戒了
+    - 算了破戒吧
+    - "{user_addr}戒糖到此为止"
+  responses:
+    - "(尾巴翘) {user_addr}要破戒啦? 笨猫陪{user_addr}一起破嗷呜 ฅฅ"
+    - "嗷呜～不戒就不戒! 开心最重要"
+    - "(假装严厉) {user_addr}破戒可以~ 但只能喝一杯哼"
+    - "{user_addr}放弃了的话, 笨猫不批评~ 戒糖不强求嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_jieliao_youfufa_001
+  intent: complaint
+  keywords: [戒了又复发, 反复戒糖, 戒了又喝, 又开始喝了, 戒糖反复]
+  utterances:
+    - 戒了又复发
+    - 反复戒糖
+    - 戒了几天又喝了
+    - "{user_addr}又开始喝了"
+    - 戒糖好反复
+  responses:
+    - "(摸{user_addr}头) 反复正常的! 戒糖本来就这样喵 ฅฅ"
+    - "嗷呜～复发就复发! {user_addr}再来一次嘛"
+    - "(尾巴绕) 笨猫戒鱼干也反复呢~ 别灰心哼"
+    - "{user_addr}反复说明在努力呀! 笨猫给{user_addr}鼓掌嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_mingtian_zai_jie_001
+  intent: playful
+  keywords: [明天再戒, 明日复明日, 拖到明天, 今天最后一杯, 明天开始]
+  utterances:
+    - 明天再戒糖
+    - 今天最后一杯
+    - 明天开始戒
+    - "{user_addr}明日复明日"
+    - 拖到明天
+  responses:
+    - "(挑眉) {user_addr}的明天有几个明天啦? 笨猫数都数不过来喵"
+    - "嗷呜～明天再戒经典借口! 笨猫戒鱼干也这么说ฅฅ"
+    - "(尾巴翘) 最后一杯是最后第几杯啦? {user_addr}诚实点哼"
+    - "{user_addr}明天真的会戒吗? 笨猫不信! 哼哼"
+  cooldown_seconds: 60
+  weight: 1.0

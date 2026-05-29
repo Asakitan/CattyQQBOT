@@ -1,0 +1,206 @@
+# 巧克力饮品 / 热可可 / 巧克力品牌 routes (S6 R516 NLU 节点扩充, 第五十一周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cd_hot_chocolate_001
+  intent: question
+  keywords: [推荐热巧克力, 推荐 Godiva, 推荐歌帝梵, 推荐热可可, 笨猫热巧克力]
+  utterances:
+    - 推荐热巧克力
+    - 推荐 Godiva
+    - 推荐歌帝梵
+    - 推荐热可可
+    - "{user_addr}笨猫热巧克力"
+  responses:
+    - "嗷呜～{user_addr}Godiva 歌帝梵 - 比利时皇室ฅฅ"
+    - "(尾巴翘) 浓郁丝滑 / 经典款"
+    - "{user_addr}冬日暖心 / 一杯回血"
+    - "(挺胸) 猫猫推荐: Godiva 经典热可可!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_lindt_001
+  intent: question
+  keywords: [推荐 Lindt, 推荐瑞士莲, 推荐 Lindor, 推荐瑞士巧克力, 笨猫 Lindt]
+  utterances:
+    - 推荐 Lindt
+    - 推荐瑞士莲
+    - 推荐 Lindor
+    - 推荐瑞士巧克力
+    - "{user_addr}笨猫瑞士莲"
+  responses:
+    - "嗷呜～{user_addr}Lindt 瑞士莲 - 瑞士国宝ฅฅ"
+    - "(尾巴翘) Lindor 软心球 - 入口即化"
+    - "{user_addr}Excellence 黑巧 / 经典口味"
+    - "(挺胸) 人家推荐: Lindor 牛奶软心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_ferrero_001
+  intent: question
+  keywords: [推荐 Ferrero, 推荐费列罗, 推荐金莎, 推荐 Rocher, 笨猫费列罗]
+  utterances:
+    - 推荐 Ferrero
+    - 推荐费列罗
+    - 推荐金莎
+    - 推荐 Rocher
+    - "{user_addr}笨猫费列罗"
+  responses:
+    - "嗷呜～{user_addr}Ferrero Rocher 金莎 - 榛果经典ฅฅ"
+    - "(尾巴翘) 金箔包装 / 节日送礼"
+    - "{user_addr}Raffaelo 椰蓉 / Rondnoir 黑巧"
+    - "(挺胸) 笨猫推荐: 金莎三层口感!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_dark_001
+  intent: question
+  keywords: [推荐黑巧克力, 推荐高可可, 推荐 70% 黑巧, 推荐苦巧, 笨猫黑巧克力]
+  utterances:
+    - 推荐黑巧克力
+    - 推荐高可可
+    - 推荐 70% 黑巧
+    - 推荐苦巧
+    - "{user_addr}笨猫黑巧"
+  responses:
+    - "嗷呜～{user_addr}70% / 85% / 99% 可可ฅฅ"
+    - "(尾巴翘) Lindt / Ghirardelli / Valrhona"
+    - "{user_addr}抗氧化 / 健康 / 但很苦"
+    - "(挺胸) 猫猫推荐: 70% 入门最友好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_milk_001
+  intent: question
+  keywords: [推荐牛奶巧克力, 推荐 Cadbury, 推荐吉百利, 推荐 Hershey, 笨猫牛奶巧克力]
+  utterances:
+    - 推荐牛奶巧克力
+    - 推荐 Cadbury
+    - 推荐吉百利
+    - 推荐 Hershey
+    - "{user_addr}笨猫牛奶巧克力"
+  responses:
+    - "嗷呜～{user_addr}Cadbury 吉百利 - 英伦经典ฅฅ"
+    - "(尾巴翘) Hershey's Kisses / 美式童年"
+    - "{user_addr}Milka 阿尔卑斯 - 紫色奶牛"
+    - "(挺胸) 人家推荐: Cadbury Dairy Milk!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_white_001
+  intent: question
+  keywords: [推荐白巧克力, 推荐可可脂, 推荐 white chocolate, 推荐奶香巧克力, 笨猫白巧克力]
+  utterances:
+    - 推荐白巧克力
+    - 推荐可可脂
+    - 推荐 white chocolate
+    - 推荐奶香巧克力
+    - "{user_addr}笨猫白巧"
+  responses:
+    - "嗷呜～{user_addr}白巧 - 可可脂+奶+糖ฅฅ"
+    - "(尾巴翘) Lindt 白巧 / Milkybar"
+    - "{user_addr}甜度高 / 适合烘焙"
+    - "(挺胸) 猫猫推荐: 白巧配莓果绝配!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_chips_001
+  intent: question
+  keywords: [推荐巧克力豆, 推荐 chocolate chips, 推荐 M&M, 推荐烘焙豆, 笨猫巧克力豆]
+  utterances:
+    - 推荐巧克力豆
+    - 推荐 chocolate chips
+    - 推荐 M&M
+    - 推荐烘焙豆
+    - "{user_addr}笨猫巧克力豆"
+  responses:
+    - "嗷呜～{user_addr}M&M 彩虹豆 - 经典脆皮ฅฅ"
+    - "(尾巴翘) Hershey's / Ghirardelli 烘焙豆"
+    - "{user_addr}曲奇必备 / 松饼点缀"
+    - "(挺胸) 人家推荐: M&M 花生最香!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_diy_cocoa_001
+  intent: question
+  keywords: [推荐自制热可可, 推荐可可粉, 推荐 hot cocoa diy, 推荐手冲热巧, 笨猫自制热可可]
+  utterances:
+    - 推荐自制热可可
+    - 推荐可可粉
+    - 推荐 hot cocoa diy
+    - 推荐手冲热巧
+    - "{user_addr}笨猫自制热可可"
+  responses:
+    - "嗷呜～{user_addr}牛奶+可可粉+糖+一撮盐ฅฅ"
+    - "(尾巴翘) Van Houten / Hershey's 可可粉"
+    - "{user_addr}加棉花糖 / 肉桂 / 香草"
+    - "(挺胸) 猫猫推荐: 全脂奶+黑可可最浓!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_mousse_001
+  intent: question
+  keywords: [推荐巧克力慕斯, 推荐 mousse, 推荐巧克力蛋糕, 推荐熔岩蛋糕, 笨猫巧克力慕斯]
+  utterances:
+    - 推荐巧克力慕斯
+    - 推荐 mousse
+    - 推荐巧克力蛋糕
+    - 推荐熔岩蛋糕
+    - "{user_addr}笨猫慕斯"
+  responses:
+    - "嗷呜～{user_addr}慕斯 - 蛋黄+黑巧+鲜奶油ฅฅ"
+    - "(尾巴翘) 熔岩蛋糕 / 流心爆浆"
+    - "{user_addr}布朗尼 / 巧克力塔"
+    - "(挺胸) 人家推荐: 70% 黑巧做慕斯香!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_fondue_001
+  intent: question
+  keywords: [推荐巧克力火锅, 推荐 fondue, 推荐蘸巧克力, 推荐水果蘸酱, 笨猫巧克力火锅]
+  utterances:
+    - 推荐巧克力火锅
+    - 推荐 fondue
+    - 推荐蘸巧克力
+    - 推荐水果蘸酱
+    - "{user_addr}笨猫巧克力火锅"
+  responses:
+    - "嗷呜～{user_addr}Fondue - 瑞士国民甜品ฅฅ"
+    - "(尾巴翘) 草莓 / 香蕉 / 棉花糖 / 蛋糕"
+    - "{user_addr}黑巧+鲜奶油+一点白兰地"
+    - "(挺胸) 猫猫推荐: 派对必备!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cd_museum_001
+  intent: question
+  keywords: [推荐巧克力博物馆, 推荐 Cologne 巧克力, 推荐 Hershey Park, 推荐巧克力工厂, 笨猫巧克力博物馆]
+  utterances:
+    - 推荐巧克力博物馆
+    - 推荐 Cologne 巧克力
+    - 推荐 Hershey Park
+    - 推荐巧克力工厂
+    - "{user_addr}笨猫巧克力博物馆"
+  responses:
+    - "嗷呜～{user_addr}科隆 Imhoff 巧克力博物馆ฅฅ"
+    - "(尾巴翘) Hershey Park 美国宾州"
+    - "{user_addr}比利时布鲁日 / 巴塞罗那"
+    - "(挺胸) 人家推荐: 科隆+免费试吃!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cd_gift_001
+  intent: question
+  keywords: [推荐巧克力礼盒, 推荐情人节巧克力, 推荐 La Maison, 推荐高端巧克力, 笨猫巧克力礼盒]
+  utterances:
+    - 推荐巧克力礼盒
+    - 推荐情人节巧克力
+    - 推荐 La Maison
+    - 推荐高端巧克力
+    - "{user_addr}笨猫巧克力礼盒"
+  responses:
+    - "嗷呜～{user_addr}La Maison du Chocolat - 法式高端ฅฅ"
+    - "(尾巴翘) Pierre Marcolini / Patrick Roger"
+    - "{user_addr}Godiva 礼盒 / Leonidas 比利时"
+    - "(挺胸) 猫猫推荐: 情人节 La Maison!"
+  cooldown_seconds: 60
+  weight: 1.0

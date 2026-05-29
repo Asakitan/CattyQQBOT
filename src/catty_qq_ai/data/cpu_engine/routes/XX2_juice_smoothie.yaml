@@ -1,0 +1,206 @@
+# 果汁 / 奶昔 / 鲜榨 routes (S6 R514 NLU 节点扩充, 第五十一周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: js_chain_001
+  intent: question
+  keywords: [推荐鲜榨果汁连锁, 推荐 Jamba Juice, 推荐果汁连锁店, 推荐鲜榨连锁, 笨猫果汁连锁]
+  utterances:
+    - 推荐鲜榨果汁连锁
+    - 推荐 Jamba Juice
+    - 推荐果汁连锁店
+    - 推荐鲜榨连锁
+    - 笨猫果汁连锁
+  responses:
+    - "嗷呜～{user_addr}Jamba Juice - 美国鲜榨王ฅฅ"
+    - "(尾巴翘) Smoothie King / Booster Juice"
+    - "{user_addr}果汁+冰沙 / 健康人设"
+    - "(挺胸) 笨猫推荐: Jamba 草莓香蕉!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_xianzha_001
+  intent: question
+  keywords: [推荐国内现榨, 推荐喜茶现剥, 推荐奈雪鲜果, 推荐现榨果汁国内, 笨猫现榨]
+  utterances:
+    - 推荐国内现榨
+    - 推荐喜茶现剥
+    - 推荐奈雪鲜果
+    - 推荐现榨果汁国内
+    - 笨猫现榨
+  responses:
+    - "嗷呜～{user_addr}喜茶 现剥水牛乳ฅฅ"
+    - "(尾巴翘) 奈雪 鲜果茶 / 霸王茶姬"
+    - "{user_addr}现剥现榨 / 看得见水果"
+    - "(挺胸) 笨猫推荐: 喜茶多肉葡萄!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_nfc_001
+  intent: question
+  keywords: [推荐 NFC 果汁, 推荐农夫果园, 推荐汇源 NFC, 推荐冷藏果汁, 笨猫 NFC]
+  utterances:
+    - 推荐 NFC 果汁
+    - 推荐农夫果园
+    - 推荐汇源 NFC
+    - 推荐冷藏果汁
+    - 笨猫 NFC
+  responses:
+    - "嗷呜～{user_addr}农夫山泉 NFC - 国民款ฅฅ"
+    - "(尾巴翘) 味全 每日 C / 汇源 NFC"
+    - "{user_addr}非浓缩还原 / 短保鲜"
+    - "(挺胸) 笨猫推荐: 味全橙汁!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_coldpress_001
+  intent: question
+  keywords: [推荐冷压果汁, 推荐排毒果汁, 推荐 HPP 果汁, 推荐果蔬轻断食, 笨猫冷压]
+  utterances:
+    - 推荐冷压果汁
+    - 推荐排毒果汁
+    - 推荐 HPP 果汁
+    - 推荐果蔬轻断食
+    - 笨猫冷压
+  responses:
+    - "嗷呜～{user_addr}HeyJuice - 国内冷压头牌ฅฅ"
+    - "(尾巴翘) Suja / Pressed Juicery 美国"
+    - "{user_addr}HPP 超高压 / 保留营养"
+    - "(挺胸) 笨猫推荐: HeyJuice 3 日轻断!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_milkshake_001
+  intent: question
+  keywords: [推荐奶昔, 推荐 milkshake, 推荐 DQ 暴风雪, 推荐麦当劳奶昔, 笨猫奶昔]
+  utterances:
+    - 推荐奶昔
+    - 推荐 milkshake
+    - 推荐 DQ 暴风雪
+    - 推荐麦当劳奶昔
+    - 笨猫奶昔
+  responses:
+    - "嗷呜～{user_addr}DQ 暴风雪 - 倒杯不洒ฅฅ"
+    - "(尾巴翘) 麦当劳奶昔 / Shake Shack"
+    - "{user_addr}浓厚冰激凌+牛奶 / 罪恶感"
+    - "(挺胸) 笨猫推荐: DQ 奥利奥暴风雪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_acai_001
+  intent: question
+  keywords: [推荐巴西莓碗, 推荐 acai bowl, 推荐网红果碗, 推荐莓果碗, 笨猫巴西莓]
+  utterances:
+    - 推荐巴西莓碗
+    - 推荐 acai bowl
+    - 推荐网红果碗
+    - 推荐莓果碗
+    - 笨猫巴西莓
+  responses:
+    - "嗷呜～{user_addr}巴西莓碗 - INS 网红ฅฅ"
+    - "(尾巴翘) Sambazon / Açaí Brasil"
+    - "{user_addr}打底+水果+granola+蜂蜜"
+    - "(挺胸) 笨猫推荐: 早餐拍照神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_juicer_001
+  intent: question
+  keywords: [推荐榨汁机, 推荐 SKG 榨汁, 推荐飞利浦榨汁, 推荐原汁机, 笨猫榨汁机]
+  utterances:
+    - 推荐榨汁机
+    - 推荐 SKG 榨汁
+    - 推荐飞利浦榨汁
+    - 推荐原汁机
+    - 笨猫榨汁机
+  responses:
+    - "嗷呜～{user_addr}SKG 便携榨汁杯 - 网红款ฅฅ"
+    - "(尾巴翘) 飞利浦原汁机 / 九阳"
+    - "{user_addr}慢速冷榨 / 出汁多"
+    - "(挺胸) 笨猫推荐: Hurom 惠人原汁机!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_orange_001
+  intent: question
+  keywords: [推荐鲜榨橙汁机, 推荐自动橙汁机, 推荐天使橙汁, 推荐橙汁现榨, 笨猫橙汁机]
+  utterances:
+    - 推荐鲜榨橙汁机
+    - 推荐自动橙汁机
+    - 推荐天使橙汁
+    - 推荐橙汁现榨
+    - 笨猫橙汁机
+  responses:
+    - "嗷呜～{user_addr}天使鲜榨橙汁机 - 商场款ฅฅ"
+    - "(尾巴翘) Zumex / Zumo / Citrocasa"
+    - "{user_addr}投橙子直出汁 / 透明可视"
+    - "(挺胸) 笨猫推荐: 一杯当场榨 19 元!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_coconut_001
+  intent: question
+  keywords: [推荐椰子水, 推荐椰汁, 推荐 Vita Coco, 推荐唯他可可, 笨猫椰子水]
+  utterances:
+    - 推荐椰子水
+    - 推荐椰汁
+    - 推荐 Vita Coco
+    - 推荐唯他可可
+    - 笨猫椰子水
+  responses:
+    - "嗷呜～{user_addr}Vita Coco 唯他可可ฅฅ"
+    - "(尾巴翘) 椰树 / IF / Cocoxim 越南"
+    - "{user_addr}天然电解质 / 运动后补水"
+    - "(挺胸) 笨猫推荐: 鲜椰青现开!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_combo_001
+  intent: question
+  keywords: [推荐果蔬汁套餐, 推荐每日轻断, 推荐果汁套装, 推荐订购果汁, 笨猫果汁套餐]
+  utterances:
+    - 推荐果蔬汁套餐
+    - 推荐每日轻断
+    - 推荐果汁套装
+    - 推荐订购果汁
+    - 笨猫果汁套餐
+  responses:
+    - "嗷呜～{user_addr}HeyJuice 3 日/5 日套餐ฅฅ"
+    - "(尾巴翘) 蓝瓶子 / Greenday / 顺丰冷链"
+    - "{user_addr}6 瓶+1 杯组合 / 轻断食"
+    - "(挺胸) 笨猫推荐: 第一次买 1 日体验!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_baby_001
+  intent: question
+  keywords: [推荐婴幼儿果汁, 推荐宝宝果泥, 推荐嘉宝果泥, 推荐辅食果汁, 笨猫宝宝果汁]
+  utterances:
+    - 推荐婴幼儿果汁
+    - 推荐宝宝果泥
+    - 推荐嘉宝果泥
+    - 推荐辅食果汁
+    - 笨猫宝宝果汁
+  responses:
+    - "嗷呜～{user_addr}嘉宝 Gerber - 老牌ฅฅ"
+    - "(尾巴翘) Ella's Kitchen / Hipp 喜宝"
+    - "{user_addr}1 岁以下不建议直接果汁"
+    - "(挺胸) 笨猫推荐: 6 月+果泥更安全!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: js_recipe_001
+  intent: question
+  keywords: [推荐健康果汁配方, 推荐果汁搭配, 推荐 DIY 果汁, 推荐减肥果汁, 笨猫果汁配方]
+  utterances:
+    - 推荐健康果汁配方
+    - 推荐果汁搭配
+    - 推荐 DIY 果汁
+    - 推荐减肥果汁
+    - 笨猫果汁配方
+  responses:
+    - "嗷呜～{user_addr}ABC: 苹果+甜菜+胡萝卜ฅฅ"
+    - "(尾巴翘) 绿果汁: 黄瓜+菠菜+苹果+柠檬"
+    - "{user_addr}早安果汁: 橙+胡萝卜+姜"
+    - "(挺胸) 笨猫推荐: 西芹苹果汁清肠!"
+  cooldown_seconds: 60
+  weight: 1.0

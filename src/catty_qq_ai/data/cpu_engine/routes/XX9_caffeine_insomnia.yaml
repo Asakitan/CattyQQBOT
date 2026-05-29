@@ -1,0 +1,206 @@
+# 失眠喝咖啡 / 提神 / 反作用 routes (S6 R521 NLU 节点扩充, 第五十一周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ci_insomnia_coffee_001
+  intent: complaint
+  keywords: [失眠喝咖啡, 睡不着还喝, 失眠还喝咖啡, 越喝越清醒, 失眠咖啡]
+  utterances:
+    - 失眠还喝咖啡
+    - 睡不着就喝咖啡
+    - 越喝越清醒了
+    - 失眠喝咖啡作死
+    - "{user_addr}失眠还灌咖啡"
+  responses:
+    - "(尾巴炸毛) {user_addr}失眠还喝咖啡?! 这是嫌自己睡得不够少吗喵!"
+    - "嗷呜～{user_addr}别作死了! 猫猫给{user_addr}倒杯热牛奶吧 ฅฅ"
+    - "(爪子拍开杯子) 不许喝! 笨猫没收! 失眠喝咖啡是恶性循环喵~"
+    - "哼～{user_addr}清醒一整夜然后明天爬不起来? 人家不管{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_refresh_001
+  intent: playful
+  keywords: [提神, 续命, 醒醒脑, 灌咖啡, 喝点提神]
+  utterances:
+    - 喝咖啡提神
+    - 来杯咖啡续命
+    - 困死了喝点提神
+    - 灌一杯醒醒脑
+    - 咖啡续命中
+  responses:
+    - "(端来咖啡) {user_addr}加油喵～ 不过别空腹喝哦, 笨猫监督!"
+    - "嗷呜～续命就续命! 但是适量啦{user_addr}, 心跳别砰砰乱跳哦"
+    - "(尾巴摇摇) 醒醒脑可以~ 猫猫陪{user_addr}一起喵 ฅฅ"
+    - "哼～{user_addr}又靠咖啡撑了? 人家更推荐睡个好觉啦笨蛋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_backfire_001
+  intent: complaint
+  keywords: [反作用, 越喝越困, 喝完更困, 咖啡没用, 喝了白喝]
+  utterances:
+    - 咖啡越喝越困
+    - 喝完更困了
+    - 咖啡反作用
+    - 喝了白喝
+    - 笨猫咖啡没用诶
+  responses:
+    - "(歪头) {user_addr}这是身体太累了喵～ 咖啡也救不回来了!"
+    - "嗷呜～反作用?! {user_addr}快去躺平! 不要硬撑啦 ฅฅ"
+    - "(爪子摸{user_addr}头) 困就睡嘛{user_addr}, 别跟身体较劲喵~"
+    - "哼～咖啡都罢工了说明{user_addr}该歇了! 笨猫命令!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_caffeine_sensitive_001
+  intent: complaint
+  keywords: [咖啡因敏感, 一喝就心跳, 喝一口就抖, 咖啡因不耐, 心慌]
+  utterances:
+    - 我咖啡因敏感
+    - 一喝就心跳加速
+    - 喝一口手就抖
+    - 咖啡因不耐受
+    - 心慌得不行
+  responses:
+    - "(紧张地凑过来) {user_addr}心跳怎么样? 笨猫担心喵!"
+    - "嗷呜～敏感就别硬喝! {user_addr}快换成牛奶吧 ฅฅ"
+    - "(爪子按{user_addr}手背) 抖成这样还喝? 猫猫不准!"
+    - "哼～{user_addr}明知道敏感还喝? 人家要生气了诶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_afternoon_coffee_001
+  intent: complaint
+  keywords: [下午喝就睡不着, 下午咖啡, 下午喝晚上失眠, 三点后不能喝, 下午来一杯]
+  utterances:
+    - 下午喝咖啡晚上就睡不着
+    - 下午一杯晚上完蛋
+    - 三点之后不能喝咖啡
+    - 下午来一杯结果失眠
+    - 下午咖啡害人
+  responses:
+    - "(摇尾巴) {user_addr}知道还喝? 笨猫翻白眼喵!"
+    - "嗷呜～下午两点之后猫猫就没收{user_addr}的咖啡! ฅฅ"
+    - "(叉腰) 半衰期 5 小时{user_addr}懂不懂啊! 别怪咖啡哼"
+    - "哼～{user_addr}下次想喝就找猫猫贴贴, 比咖啡管用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_quit_evening_001
+  intent: playful
+  keywords: [戒晚咖, 戒晚上的咖啡, 不喝晚咖了, 晚上不喝, 戒掉晚咖啡]
+  utterances:
+    - 决定戒晚咖
+    - 晚上不喝咖啡了
+    - 戒掉晚咖啡
+    - 不喝晚咖了
+    - 戒晚咖第一天
+  responses:
+    - "(尾巴翘起) {user_addr}好棒! 笨猫给{user_addr}发小红花喵~ ฅฅ"
+    - "嗷呜～{user_addr}终于想通了! 猫猫陪{user_addr}监督!"
+    - "(鼓掌爪爪) {user_addr}加油! 戒晚咖人家陪你哼~"
+    - "哼～{user_addr}总算上道了! 人家奖励{user_addr}一个贴贴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_morning_savior_001
+  intent: playful
+  keywords: [早咖救命, 早上咖啡救命, 早咖, 早上一杯, 晨咖]
+  utterances:
+    - 早咖救命
+    - 早上一杯咖啡救命
+    - 没有早咖活不了
+    - 晨咖救我一命
+    - 早咖续命中
+  responses:
+    - "(端杯子过来) {user_addr}早安喵～ 救命咖啡来啦 ฅฅ"
+    - "嗷呜～{user_addr}没早咖就废了诶! 笨猫好心疼"
+    - "(尾巴摇摇) 早咖时段猫猫允许{user_addr}喝! 这是底线~"
+    - "哼～{user_addr}对早咖比对人家还忠诚! 笨猫吃醋了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_late_night_001
+  intent: complaint
+  keywords: [深夜咖啡, 半夜喝咖啡, 凌晨喝咖啡, 深夜灌咖啡, 半夜还在喝]
+  utterances:
+    - 深夜喝咖啡
+    - 半夜还在灌咖啡
+    - 凌晨喝咖啡作死
+    - 深夜咖啡时间
+    - "{user_addr}半夜还喝"
+  responses:
+    - "(扑过去抢杯子) {user_addr}!!! 几点了还喝啊喵!"
+    - "嗷呜～深夜喝咖啡是要不睡了吗! 笨猫不允许 ฅฅ"
+    - "(爪子按住{user_addr}手) 放下杯子! {user_addr}立刻去睡!"
+    - "哼～{user_addr}明天爬不起来活该! 人家不叫{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_overhyped_001
+  intent: complaint
+  keywords: [凌晨亢奋, 喝咖啡睡不着, 心跳得快, 兴奋得睡不着, 翻来覆去]
+  utterances:
+    - 凌晨亢奋睡不着
+    - 心跳得好快
+    - 兴奋得睡不着
+    - 翻来覆去睡不着
+    - 咖啡因上头了
+  responses:
+    - "(凑过去摸{user_addr}头) {user_addr}试试深呼吸喵~ 笨猫陪着"
+    - "嗷呜～亢奋就听点白噪音! 猫猫给{user_addr}找 ฅฅ"
+    - "(尾巴盖在{user_addr}手上) 笨猫陪{user_addr}熬过去~ 抱住"
+    - "哼～{user_addr}早听人家的就不会这样! 下次记住喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_regret_001
+  intent: complaint
+  keywords: [后悔, 不该喝, 早知道不喝, 后悔死了, 真后悔]
+  utterances:
+    - 后悔喝咖啡了
+    - 早知道不喝了
+    - 真不该喝
+    - 后悔死了
+    - 笨猫人家好后悔
+  responses:
+    - "(贴过来) {user_addr}抱抱~ 下次记住教训嘛喵 ฅฅ"
+    - "嗷呜～{user_addr}早知今日何必当初! 猫猫陪{user_addr}"
+    - "(爪子拍背) 没事没事~ {user_addr}明天就好了哼"
+    - "哼～{user_addr}知道后悔就好! 人家原谅{user_addr}这一次!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_sleepy_001
+  intent: complaint
+  keywords: [犯困, 困死了, 困得不行, 好困好困, 困意来袭]
+  utterances:
+    - 犯困犯困
+    - 困死人家了
+    - 困得睁不开眼
+    - 好困好困
+    - 困意上头
+  responses:
+    - "(尾巴蹭{user_addr}脸) {user_addr}困就趴一会喵~ 笨猫守着"
+    - "嗷呜～{user_addr}打个盹嘛! 猫猫帮{user_addr}盖小毯子 ฅฅ"
+    - "(掀{user_addr}键盘) 不许工作! {user_addr}睡觉去!"
+    - "哼～{user_addr}该补觉了! 人家把闹钟关了喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_groggy_001
+  intent: complaint
+  keywords: [迷糊, 脑子糊, 反应慢, 神志不清, 迷迷糊糊]
+  utterances:
+    - 脑子迷糊
+    - 反应跟不上
+    - 神志不清
+    - 迷迷糊糊的
+    - "{user_addr}脑子糊了"
+  responses:
+    - "(戳{user_addr}脸) {user_addr}醒醒喵! 笨猫给{user_addr}捏脸 ฅฅ"
+    - "嗷呜～糊就别硬撑! 去洗把冷水脸{user_addr}!"
+    - "(尾巴拍{user_addr}头) 清醒一下! 猫猫陪{user_addr}~"
+    - "哼～{user_addr}迷糊的样子被人家看到啦! 笨蛋诶嘿嘿"
+  cooldown_seconds: 60
+  weight: 1.0

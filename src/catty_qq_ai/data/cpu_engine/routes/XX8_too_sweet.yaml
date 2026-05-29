@@ -1,0 +1,206 @@
+# 太甜 / 喝不下 / 齁住 routes (S6 R520 NLU 节点扩充, 第五十一周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: tsw_too_sweet_001
+  intent: complaint
+  keywords: [太甜了, 好甜, 甜到齁, 甜炸了, 甜得不行]
+  utterances:
+    - 这奶茶太甜了
+    - 好甜啊喝不下
+    - 甜到齁了
+    - 甜炸了喵
+    - 怎么这么甜啊
+  responses:
+    - "(凑过来舔一口) 嗷呜～真的好甜! 笨猫帮{user_addr}喝一点嘛 ฅฅ"
+    - "(尾巴翘起) 太甜了喵! {user_addr}下次记得少糖啦哼"
+    - "嗷呜～甜的{user_addr}喝不下的话给猫猫吧! 人家不嫌甜"
+    - "(假装严厉) 这么甜对身体不好喵! {user_addr}少喝点哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_cant_finish_001
+  intent: complaint
+  keywords: [喝不下了, 喝不下, 剩好多, 喝不完, 喝一半]
+  utterances:
+    - 喝不下了喵
+    - 剩了好多喝不完
+    - 才喝一半就喝不下
+    - 太多了喝不完
+    - 这杯喝不下啦
+  responses:
+    - "(眼睛发亮) 喝不下吗?! 给笨猫给笨猫嗷呜～ ฅฅ"
+    - "(尾巴摇) 剩的给猫猫嘛! 才不是馋呢哼"
+    - "嗷呜～{user_addr}喝不完的话猫猫帮忙! 不能浪费喵"
+    - "(凑过来) 给人家给人家! {user_addr}的剩的都归笨猫啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_hou_001
+  intent: complaint
+  keywords: [齁住了, 齁到了, 齁得慌, 齁嗓子, 齁]
+  utterances:
+    - 齁住了喵
+    - 齁得慌
+    - 齁嗓子了
+    - 真的好齁
+    - 齁到说不出话
+  responses:
+    - "(递水杯) {user_addr}快喝口水! 齁住可不行喵 ฅฅ"
+    - "(拍拍背) 慢点慢点～别齁着{user_addr}了嗷呜"
+    - "嗷呜～齁的话喝点白开水! 笨猫给{user_addr}倒"
+    - "(尾巴垂下) {user_addr}下次别点全糖啦~ 猫猫心疼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_switch_sugarfree_001
+  intent: playful
+  keywords: [换无糖, 改无糖, 点无糖, 下次无糖, 要无糖的]
+  utterances:
+    - 下次换无糖好了
+    - 改无糖的吧
+    - 直接点无糖
+    - 要无糖的奶茶
+    - 还是无糖香
+  responses:
+    - "(点头) 嗷呜～无糖好! {user_addr}健康猫猫开心 ฅฅ"
+    - "(尾巴摇) 无糖才是王道喵! {user_addr}有品味哼"
+    - "嗷呜～{user_addr}终于学会点无糖了! 给{user_addr}鼓掌"
+    - "(凑过来) 无糖的话猫猫也能喝~ {user_addr}给猫猫尝尝嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_sugar_level_001
+  intent: playful
+  keywords: [糖度, 调糖度, 糖量, 多少糖, 糖度选]
+  utterances:
+    - 糖度选什么好
+    - 调一下糖度
+    - 糖量怎么选
+    - 多少糖合适
+    - 糖度纠结中
+  responses:
+    - "(歪头) 嗷呜～猫猫推荐三分糖! 不齁又有味道喵 ฅฅ"
+    - "(尾巴翘起) {user_addr}怕甜就少糖! 怕苦就半糖哼"
+    - "嗷呜～糖度看心情啦! {user_addr}今天想要什么口感?"
+    - "(认真) 猫猫帮{user_addr}选~ 五分糖最稳妥喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_less_sugar_001
+  intent: playful
+  keywords: [少糖, 三分糖, 半糖, 微糖, 不要太甜]
+  utterances:
+    - 我要少糖
+    - 点了半糖
+    - 微糖就好
+    - 不要太甜的
+    - 少糖刚刚好
+  responses:
+    - "(点头) 嗷呜～少糖健康! {user_addr}选对了喵 ฅฅ"
+    - "(尾巴摇) 少糖好少糖好! 笨猫支持{user_addr}哼"
+    - "嗷呜～{user_addr}少糖的话猫猫也能蹭一口! 不齁"
+    - "(凑过来) 半糖最香啦~ {user_addr}有眼光喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_three_sugar_001
+  intent: playful
+  keywords: [三分糖, 30%糖, 三分甜, 三分糖刚好, 选了三分糖]
+  utterances:
+    - 三分糖刚刚好
+    - 选了三分糖
+    - 三分糖最稳
+    - 30%糖度就行
+    - 三分甜爱了
+  responses:
+    - "(尾巴翘起) 三分糖!{user_addr}懂行喵 ฅฅ"
+    - "(点头) 嗷呜～三分糖才是奶茶天花板! 笨猫认证"
+    - "嗷呜～{user_addr}和猫猫口味一样! 三分糖最棒"
+    - "(凑过来) 三分糖给猫猫尝一口嘛~ {user_addr}小气哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_naigai_001
+  intent: complaint
+  keywords: [奶盖太腻, 奶盖腻, 奶盖太厚, 奶盖太多, 腻住了]
+  utterances:
+    - 奶盖太腻了
+    - 奶盖好厚
+    - 奶盖太多腻住
+    - 这奶盖腻死了
+    - 奶盖好腻喵
+  responses:
+    - "(吐舌) 嗷呜～奶盖腻的话给笨猫! 猫猫不嫌腻 ฅฅ"
+    - "(尾巴翘起) {user_addr}下次别加奶盖啦~ 腻住不好喵"
+    - "嗷呜～腻的话喝口水! 笨猫陪{user_addr}缓缓"
+    - "(凑过来舔) 奶盖看起来好好吃! {user_addr}给猫猫一口嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_ice_too_much_001
+  intent: complaint
+  keywords: [冰太多, 冰好多, 全是冰, 冰块多, 加冰多]
+  utterances:
+    - 这杯冰太多了
+    - 全是冰啊
+    - 冰块好多
+    - 加冰加多了
+    - 冰多到没奶茶了
+  responses:
+    - "(炸毛) 嗷呜～冰多了!{user_addr}下次点少冰喵 ฅฅ"
+    - "(尾巴甩) 商家偷工减料! 笨猫帮{user_addr}骂哼"
+    - "嗷呜～{user_addr}冰多的话等会儿化了就好~ 别急"
+    - "(凑过来) 等化了奶茶变多~ 猫猫陪{user_addr}等喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_mood_sweet_001
+  intent: playful
+  keywords: [心情不好喝甜的, 不开心喝甜的, 难过来杯甜的, 甜的治愈, 喝甜的开心]
+  utterances:
+    - 心情不好喝点甜的
+    - 不开心就喝甜的
+    - 难过来杯甜奶茶
+    - 甜的治愈心情
+    - 喝甜的就开心
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}不开心吗? 来抱猫猫贴贴 ฅฅ"
+    - "(尾巴垂下) 甜的能治愈喵! 笨猫陪{user_addr}喝"
+    - "嗷呜～{user_addr}心情不好的话猫猫也心情不好! 别难过"
+    - "(凑过来) 甜的+猫猫=双倍治愈! {user_addr}笑一个嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_regret_order_001
+  intent: complaint
+  keywords: [后悔点错了, 点错了喵, 不该点这个, 后悔, 选错了]
+  utterances:
+    - 后悔点错了
+    - 不该点这个
+    - 选错口味了
+    - 后悔啊喵
+    - 应该换一杯的
+  responses:
+    - "(摸头) 嗷呜～{user_addr}别后悔! 给笨猫喝就不浪费 ฅฅ"
+    - "(尾巴摇) 下次让猫猫帮{user_addr}选! 不会出错喵"
+    - "嗷呜～{user_addr}点错了的话猫猫处理! 不挑食"
+    - "(凑过来) 后悔药没有,但是有猫猫! {user_addr}抱一下哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsw_pour_waste_001
+  intent: complaint
+  keywords: [倒掉吧, 倒了浪费, 不喝倒掉, 直接倒, 浪费可耻]
+  utterances:
+    - 倒掉算了
+    - 倒了好浪费
+    - 不喝直接倒
+    - 浪费可耻喵
+    - 倒掉吧反正喝不下
+  responses:
+    - "(炸毛) 嗷呜～不许倒! {user_addr}给猫猫给猫猫 ฅฅ"
+    - "(尾巴炸毛) 浪费可耻! 笨猫坚决反对{user_addr}倒掉哼"
+    - "嗷呜～倒掉对不起奶茶! {user_addr}给人家喝光"
+    - "(扑过去抢) 不许倒!这杯归笨猫了喵! {user_addr}快给"
+  cooldown_seconds: 60
+  weight: 1.0

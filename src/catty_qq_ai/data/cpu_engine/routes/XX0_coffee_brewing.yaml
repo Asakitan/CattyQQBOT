@@ -1,0 +1,206 @@
+# 手冲咖啡 / V60 / 滴漏 routes (S6 R512 NLU 节点扩充, 第五十一周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cb_v60_001
+  intent: question
+  keywords: [推荐手冲咖啡, 推荐 V60, 推荐 Hario V60, 推荐滴漏, 笨猫手冲]
+  utterances:
+    - 推荐手冲咖啡
+    - 推荐 V60
+    - 推荐 Hario V60
+    - 推荐滴漏
+    - 笨猫手冲
+  responses:
+    - "嗷呜～{user_addr}Hario V60 - 手冲经典ฅฅ"
+    - "(尾巴翘) 锥形滤杯 / 螺旋肋骨 / 萃取均匀"
+    - "{user_addr}陶瓷 / 玻璃 / 塑料 / 铜款"
+    - "(挺胸) 笨猫推荐: V60 02 陶瓷入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_chemex_001
+  intent: question
+  keywords: [推荐 Chemex, 推荐滤纸冲泡, 推荐化学家壶, 推荐 Chemex 6 杯, 笨猫 Chemex]
+  utterances:
+    - 推荐 Chemex
+    - 推荐滤纸冲泡
+    - 推荐化学家壶
+    - 推荐 Chemex 6 杯
+    - 笨猫 Chemex
+  responses:
+    - "嗷呜～{user_addr}Chemex - 化学家烧瓶ฅฅ"
+    - "(尾巴翘) 厚滤纸 / 干净明亮 / 无油脂"
+    - "{user_addr}经典 6 杯款 / 木颈麻绳"
+    - "(挺胸) 笨猫推荐: 喜欢清爽果酸选 Chemex!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_kalita_001
+  intent: question
+  keywords: [推荐 Kalita Wave, 推荐蛋糕滤杯, 推荐 Kalita 155, 推荐 Kalita 185, 笨猫 Kalita]
+  utterances:
+    - 推荐 Kalita Wave
+    - 推荐蛋糕滤杯
+    - 推荐 Kalita 155
+    - 推荐 Kalita 185
+    - 笨猫 Kalita
+  responses:
+    - "嗷呜～{user_addr}Kalita Wave - 平底三孔ฅฅ"
+    - "(尾巴翘) 蛋糕滤纸 / 容错高 / 稳定"
+    - "{user_addr}155 单人 / 185 双人"
+    - "(挺胸) 笨猫推荐: 新手稳萃首选 Kalita!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_moka_001
+  intent: question
+  keywords: [推荐摩卡壶, 推荐 Bialetti, 推荐 Moka Express, 推荐意式摩卡, 笨猫摩卡壶]
+  utterances:
+    - 推荐摩卡壶
+    - 推荐 Bialetti
+    - 推荐 Moka Express
+    - 推荐意式摩卡
+    - 笨猫摩卡壶
+  responses:
+    - "嗷呜～{user_addr}Bialetti Moka Express - 八角经典ฅฅ"
+    - "(尾巴翘) 铝制 / 1933 年百年品牌"
+    - "{user_addr}3 杯 / 6 杯 / 9 杯款"
+    - "(挺胸) 笨猫推荐: 家用 3 杯版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_french_001
+  intent: question
+  keywords: [推荐法压壶, 推荐 Bodum, 推荐 Chambord, 推荐法式压滤, 笨猫法压]
+  utterances:
+    - 推荐法压壶
+    - 推荐 Bodum
+    - 推荐 Chambord
+    - 推荐法式压滤
+    - 笨猫法压
+  responses:
+    - "嗷呜～{user_addr}Bodum Chambord - 法压经典ฅฅ"
+    - "(尾巴翘) 金属滤网 / 油脂保留 / 醇厚"
+    - "{user_addr}0.35L / 1.0L / 1.5L"
+    - "(挺胸) 笨猫推荐: 懒人冲煮首选法压!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_espresso_001
+  intent: question
+  keywords: [推荐浓缩咖啡机, 推荐 Breville, 推荐 Rocket, 推荐意式机, 笨猫浓缩机]
+  utterances:
+    - 推荐浓缩咖啡机
+    - 推荐 Breville
+    - 推荐 Rocket
+    - 推荐意式机
+    - 笨猫浓缩机
+  responses:
+    - "嗷呜～{user_addr}Breville Barista Pro - 入门神器ฅฅ"
+    - "(尾巴翘) Rocket Appartamento - 进阶热交换"
+    - "{user_addr}La Marzocco Linea Mini - 旗舰"
+    - "(挺胸) 笨猫推荐: 预算够上 Rocket!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cb_grinder_001
+  intent: question
+  keywords: [推荐磨豆机, 推荐 Comandante, 推荐 1Zpresso, 推荐手摇磨豆机, 笨猫磨豆机]
+  utterances:
+    - 推荐磨豆机
+    - 推荐 Comandante
+    - 推荐 1Zpresso
+    - 推荐手摇磨豆机
+    - 笨猫磨豆机
+  responses:
+    - "嗷呜～{user_addr}Comandante C40 - 手摇之王ฅฅ"
+    - "(尾巴翘) 1Zpresso JX-Pro / K-Plus 性价比"
+    - "{user_addr}电动: Niche Zero / EK43"
+    - "(挺胸) 笨猫推荐: 比咖啡机更重要的是磨豆机!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_beans_001
+  intent: question
+  keywords: [推荐咖啡豆, 推荐单品豆, 推荐埃塞俄比亚, 推荐瑰夏, 笨猫咖啡豆]
+  utterances:
+    - 推荐咖啡豆
+    - 推荐单品豆
+    - 推荐埃塞俄比亚
+    - 推荐瑰夏
+    - 笨猫咖啡豆
+  responses:
+    - "嗷呜～{user_addr}埃塞俄比亚耶加雪菲 - 花果香ฅฅ"
+    - "(尾巴翘) 哥伦比亚 / 肯尼亚 / 巴拿马瑰夏"
+    - "{user_addr}蓝山 / 瑰夏属精品高端"
+    - "(挺胸) 笨猫推荐: 入门耶加雪菲水洗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_water_001
+  intent: question
+  keywords: [推荐咖啡水, 推荐冲咖啡矿泉水, 推荐 TDS 水, 推荐 Volvic, 笨猫咖啡水]
+  utterances:
+    - 推荐咖啡水
+    - 推荐冲咖啡矿泉水
+    - 推荐 TDS 水
+    - 推荐 Volvic
+    - 笨猫咖啡水
+  responses:
+    - "嗷呜～{user_addr}Volvic 火山水 - 软水手冲首选ฅฅ"
+    - "(尾巴翘) TDS 50-150 / 钙镁离子适中"
+    - "{user_addr}农夫山泉 / 怡宝 / 屈臣氏蒸馏不推荐"
+    - "(挺胸) 笨猫推荐: 水占 98% 别省!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cb_roast_001
+  intent: question
+  keywords: [推荐烘焙度, 推荐浅焙, 推荐中焙, 推荐深焙, 笨猫烘焙度]
+  utterances:
+    - 推荐烘焙度
+    - 推荐浅焙
+    - 推荐中焙
+    - 推荐深焙
+    - 笨猫烘焙度
+  responses:
+    - "嗷呜～{user_addr}浅焙 - 花果酸甜手冲ฅฅ"
+    - "(尾巴翘) 中焙 - 平衡甜感日常"
+    - "{user_addr}深焙 - 焦苦醇厚意式"
+    - "(挺胸) 笨猫推荐: 手冲选浅中焙!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_cup_001
+  intent: question
+  keywords: [推荐咖啡杯, 推荐 Hario 杯, 推荐分享壶, 推荐 Origami, 笨猫咖啡杯]
+  utterances:
+    - 推荐咖啡杯
+    - 推荐 Hario 杯
+    - 推荐分享壶
+    - 推荐 Origami
+    - 笨猫咖啡杯
+  responses:
+    - "嗷呜～{user_addr}Hario 玻璃分享壶 - 经典ฅฅ"
+    - "(尾巴翘) Origami 折纸杯 / 多功能"
+    - "{user_addr}陶瓷杯保温好 / 玻璃杯看色"
+    - "(挺胸) 笨猫推荐: Hario 600ml 分享壶!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cb_intro_001
+  intent: question
+  keywords: [推荐咖啡入门, 推荐咖啡知识, 推荐咖啡书, 推荐手冲教程, 笨猫咖啡入门]
+  utterances:
+    - 推荐咖啡入门
+    - 推荐咖啡知识
+    - 推荐咖啡书
+    - 推荐手冲教程
+    - 笨猫咖啡入门
+  responses:
+    - "嗷呜～{user_addr}《手冲咖啡的科学》田口护ฅฅ"
+    - "(尾巴翘) James Hoffmann YouTube / 世界冠军"
+    - "{user_addr}入门套装: V60+磨豆机+电子秤"
+    - "(挺胸) 笨猫推荐: 从 1:15 粉水比开始!"
+  cooldown_seconds: 60
+  weight: 1.0

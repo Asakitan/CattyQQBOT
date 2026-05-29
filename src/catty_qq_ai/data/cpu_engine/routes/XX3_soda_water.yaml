@@ -1,0 +1,206 @@
+# 气泡水 / Perrier 元气森林 routes (S6 R515 NLU 节点扩充, 第五十一周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sw_genki_001
+  intent: question
+  keywords: [推荐元气森林, 推荐元气气泡水, 推荐国产气泡水, 推荐 0 糖气泡水, 笨猫元气森林]
+  utterances:
+    - 推荐元气森林
+    - 推荐元气气泡水
+    - 推荐国产气泡水
+    - "{user_addr}推荐 0 糖气泡水"
+    - 笨猫元气森林
+  responses:
+    - "嗷呜～{user_addr}元气森林 - 0 糖 0 卡 0 脂ฅฅ"
+    - "(尾巴翘) 白桃 / 青瓜 / 卡曼橘"
+    - "{user_addr}赤藓糖醇代糖 / 国货之光"
+    - "(挺胸) 猫猫推荐: 白桃口味!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_perrier_001
+  intent: question
+  keywords: [推荐 Perrier, 推荐巴黎水, 推荐法国气泡水, 推荐绿瓶气泡, 笨猫 Perrier]
+  utterances:
+    - 推荐 Perrier
+    - 推荐巴黎水
+    - 推荐法国气泡水
+    - 推荐绿瓶气泡
+    - 笨猫 Perrier
+  responses:
+    - "嗷呜～{user_addr}Perrier 巴黎水 - 法国天然气泡ฅฅ"
+    - "(尾巴翘) 绿瓶经典 / 气泡细腻"
+    - "{user_addr}原味 / 柠檬 / 青柠 / 西柚"
+    - "(挺胸) 人家推荐: 经典绿瓶原味!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_pellegrino_001
+  intent: question
+  keywords: [推荐 San Pellegrino, 推荐圣培露, 推荐意大利气泡水, 推荐红星气泡, 笨猫 Pellegrino]
+  utterances:
+    - 推荐 San Pellegrino
+    - 推荐圣培露
+    - 推荐意大利气泡水
+    - 推荐红星气泡
+    - 笨猫 Pellegrino
+  responses:
+    - "嗷呜～{user_addr}San Pellegrino 圣培露 - 意大利经典ฅฅ"
+    - "(尾巴翘) 红星 logo / 米其林餐厅御用"
+    - "{user_addr}气泡柔和 / 矿物感强"
+    - "(挺胸) 猫猫推荐: 配西餐绝配!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_soda_001
+  intent: question
+  keywords: [推荐苏打水, 推荐 Schweppes, 推荐怡泉, 推荐无糖苏打, 笨猫苏打水]
+  utterances:
+    - 推荐苏打水
+    - 推荐 Schweppes
+    - 推荐怡泉
+    - 推荐无糖苏打
+    - 笨猫苏打水
+  responses:
+    - "嗷呜～{user_addr}Schweppes 怡泉 - 苏打水鼻祖ฅฅ"
+    - "(尾巴翘) 屈臣氏苏打 / 名仁苏打水"
+    - "{user_addr}弱碱性 / 解腻"
+    - "(挺胸) 笨猫推荐: 怡泉原味!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_sodastream_001
+  intent: question
+  keywords: [推荐 SodaStream, 推荐气泡水机, 推荐自制气泡水, 推荐家用气泡机, 笨猫 SodaStream]
+  utterances:
+    - 推荐 SodaStream
+    - 推荐气泡水机
+    - 推荐自制气泡水
+    - 推荐家用气泡机
+    - 笨猫 SodaStream
+  responses:
+    - "嗷呜～{user_addr}SodaStream - 自制气泡水ฅฅ"
+    - "(尾巴翘) CO2 气瓶 / 一按一打"
+    - "{user_addr}省钱环保 / 气泡浓度自调"
+    - "(挺胸) 人家推荐: Terra 款入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_tonic_001
+  intent: question
+  keywords: [推荐 Tonic, 推荐汤力水, 推荐 Fever Tree, 推荐苦味气泡, 笨猫 Tonic]
+  utterances:
+    - 推荐 Tonic
+    - 推荐汤力水
+    - 推荐 Fever Tree
+    - 推荐苦味气泡
+    - 笨猫 Tonic
+  responses:
+    - "嗷呜～{user_addr}Fever Tree - Tonic 顶级ฅฅ"
+    - "(尾巴翘) 含奎宁 / 微苦 / 配金酒"
+    - "{user_addr}Schweppes Tonic / 1724 Tonic"
+    - "(挺胸) 猫猫推荐: Fever Tree Indian!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sw_cocktail_001
+  intent: question
+  keywords: [推荐气泡水调饮, 推荐气泡鸡尾酒, 推荐 Highball, 推荐 Mojito, 笨猫气泡调饮]
+  utterances:
+    - 推荐气泡水调饮
+    - 推荐气泡鸡尾酒
+    - 推荐 Highball
+    - 推荐 Mojito
+    - 笨猫气泡调饮
+  responses:
+    - "嗷呜～{user_addr}Highball - 威士忌+苏打ฅฅ"
+    - "(尾巴翘) Mojito 莫吉托 / Gin Tonic"
+    - "{user_addr}Aperol Spritz / 阿佩罗气泡"
+    - "(挺胸) 笨猫推荐: 三得利 Highball!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sw_healthy_001
+  intent: question
+  keywords: [推荐健康气泡水, 推荐 0 卡气泡, 推荐功能气泡水, 推荐益生菌气泡, 笨猫健康气泡]
+  utterances:
+    - 推荐健康气泡水
+    - "{user_addr}推荐 0 卡气泡"
+    - 推荐功能气泡水
+    - 推荐益生菌气泡
+    - 笨猫健康气泡
+  responses:
+    - "嗷呜～{user_addr}0 糖 0 卡是底线ฅฅ"
+    - "(尾巴翘) 天然气泡 > 人工充气"
+    - "{user_addr}注意钠含量 / 别替代白水"
+    - "(挺胸) 人家推荐: 天然气泡矿泉!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sw_mineral_001
+  intent: question
+  keywords: [推荐矿泉水, 推荐依云, 推荐 Evian, 推荐 Voss, 笨猫矿泉水]
+  utterances:
+    - 推荐矿泉水
+    - 推荐依云
+    - 推荐 Evian
+    - 推荐 Voss
+    - 笨猫矿泉水
+  responses:
+    - "嗷呜～{user_addr}Evian 依云 - 法国阿尔卑斯ฅฅ"
+    - "(尾巴翘) Voss 挪威 / Fiji 斐济"
+    - "{user_addr}Perrier 巴黎水气泡款"
+    - "(挺胸) 猫猫推荐: 依云日常+巴黎水气泡!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sw_brand_001
+  intent: question
+  keywords: [推荐气泡水品牌, 推荐高端气泡水, 推荐进口气泡水, 推荐网红气泡水, 笨猫气泡品牌]
+  utterances:
+    - 推荐气泡水品牌
+    - 推荐高端气泡水
+    - 推荐进口气泡水
+    - 推荐网红气泡水
+    - 笨猫气泡品牌
+  responses:
+    - "嗷呜～{user_addr}Perrier / Pellegrino - 高端ฅฅ"
+    - "(尾巴翘) 元气森林 / 喜茶 - 国产"
+    - "{user_addr}Voss / Badoit - 小众"
+    - "(挺胸) 笨猫推荐: 进口选 Perrier!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_chilled_001
+  intent: question
+  keywords: [推荐冰镇气泡, 推荐冰气泡水, 推荐夏日气泡水, 推荐冰柜气泡, 笨猫冰镇气泡]
+  utterances:
+    - 推荐冰镇气泡
+    - 推荐冰气泡水
+    - 推荐夏日气泡水
+    - 推荐冰柜气泡
+    - 笨猫冰镇气泡
+  responses:
+    - "嗷呜～{user_addr}冰镇 4°C 最爽ฅฅ"
+    - "(尾巴翘) 冰块 + 柠檬片 / 薄荷叶"
+    - "{user_addr}玻璃杯比塑料杯香"
+    - "(挺胸) 人家推荐: 巴黎水加冰加柠檬!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sw_tasting_001
+  intent: question
+  keywords: [推荐气泡水品鉴, 推荐气泡感, 推荐气泡口感, 推荐气泡矿物, 笨猫气泡品鉴]
+  utterances:
+    - 推荐气泡水品鉴
+    - 推荐气泡感
+    - 推荐气泡口感
+    - 推荐气泡矿物
+    - 笨猫气泡品鉴
+  responses:
+    - "嗷呜～{user_addr}气泡细密 / 持久度ฅฅ"
+    - "(尾巴翘) 矿物感 / 余味干净"
+    - "{user_addr}天然气泡更柔 / 人工更刺"
+    - "(挺胸) 猫猫推荐: Pellegrino 气泡最优雅!"
+  cooldown_seconds: 60
+  weight: 0.8
