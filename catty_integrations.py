@@ -209,6 +209,28 @@ def _wait_ollama_ready(api_url: str, timeout_seconds: float) -> None:
     raise TimeoutError(f"Ollama did not become ready at {version_url}: {last_error}")
 
 
+def _ollama_is_healthy(api_url: str, *, attempts: int = 3) -> bool:
+    """快速探活: ollama 已经在 serve 且 API 响应就返回 True。
+
+    用于 bot 重启时判断要不要复用已有 ollama —— 不像 _wait_ollama_ready 会长轮询
+    等待启动, 这里只做几次轻量重试就拍板。重试是为了抗瞬时抖动(首连冷 socket /
+    CPU 尖峰偶尔 >1s): 误判成"没起来"会害已 load 的模型被冤杀冷重载(~35s), 代价远
+    高于多探两下, 所以宁可多试。真没起来时几次很快失败, 落到正常 kill+start 流程。
+    """
+    import urllib.error
+    import urllib.request
+
+    version_url = api_url.rstrip("/") + "/api/version"
+    for attempt in range(max(attempts, 1)):
+        try:
+            with urllib.request.urlopen(version_url, timeout=3) as response:
+                return response.status < 500
+        except (OSError, urllib.error.URLError):
+            if attempt + 1 < attempts:
+                time.sleep(0.5)
+    return False
+
+
 def _model_available(executable: Path, model: str, *, cwd: Path, env: dict[str, str]) -> bool:
     result = subprocess.run(
         [str(executable), "list"],
@@ -318,6 +340,26 @@ def _start_ollama(ollama: dict[str, Any], config: dict[str, Any], config_dir: Pa
     except (TypeError, ValueError):
         num_thread = None
     env = _ollama_env(config_dir, models_relative, num_thread=num_thread)
+    api_url = str(ollama.get("api_url") or "http://127.0.0.1:11434").strip()
+
+    # 主人 2026-05-29: bot 热重启不应连累 ollama。若 ollama 已经在 serve 且 API 健康,
+    # 直接复用现有进程 —— 不 kill、不重启, 让 OLLAMA_KEEP_ALIVE=-1 常驻内存的模型
+    # 不必冷重载(~35s)。只有 ollama 真没起来时才往下走原来的 kill+start 流程。
+    if _as_bool(ollama.get("reuse_if_running"), default=True) and _ollama_is_healthy(api_url):
+        print(f"Ollama already serving at {api_url}; reusing existing process (skip stop/restart).")
+        # ollama list 只读注册表, 不会卸载已 load 的模型, 安全确认模型在册。
+        if _as_bool(ollama.get("auto_pull_model"), default=True):
+            for model in _ollama_models_to_check(config, ollama):
+                _pull_ollama_model(
+                    executable,
+                    model,
+                    cwd=config_dir,
+                    env=env,
+                    timeout_seconds=float(ollama.get("pull_timeout_seconds") or 1800),
+                )
+        _ensure_catty_derived_model(config, executable, config_dir, env)
+        return
+
     if _as_bool(ollama.get("stop_existing"), default=True):
         _stop_existing_ollama()
         time.sleep(1)
@@ -363,7 +405,6 @@ def _start_ollama(ollama: dict[str, Any], config: dict[str, Any], config_dir: Pa
         print(f"Ollama OLLAMA_NUM_THREAD={num_thread}, BelowNormal priority{affinity_label}")
     else:
         print(f"Ollama starting with default thread count, BelowNormal priority{affinity_label}")
-    api_url = str(ollama.get("api_url") or "http://127.0.0.1:11434").strip()
     _wait_ollama_ready(api_url, float(ollama.get("startup_timeout_seconds") or 60))
 
     print(f"Started project-local Ollama: {Path(install_relative) / executable.name}")
