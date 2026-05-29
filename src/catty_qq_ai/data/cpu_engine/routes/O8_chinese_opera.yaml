@@ -1,0 +1,207 @@
+# 戏曲 / 京剧 / 昆曲 / 越剧 / 地方戏 routes (S6 R170 NLU 节点扩充, 第十六周期 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 M0 traditional_culture 区分: 这里专注戏曲艺术 + 名家.
+
+- name: opera_genre_001
+  intent: question
+  keywords: [推荐戏曲, 推荐京剧, 推荐昆曲, 推荐越剧, 笨猫戏曲]
+  utterances:
+    - 推荐戏曲
+    - 推荐京剧
+    - 推荐昆曲
+    - 推荐越剧
+    - 笨猫戏曲
+  responses:
+    - "嗷呜～{user_addr}京剧 / 昆曲 / 越剧 / 黄梅戏ฅฅ"
+    - "(尾巴翘) 豫剧 / 川剧 / 评剧 / 粤剧"
+    - "{user_addr}300+ 地方戏 / 各有韵味"
+    - "(挺胸) 笨猫推荐: 入门京剧国粹!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: opera_jingju_role_001
+  intent: question
+  keywords: [推荐京剧行当, 推荐生旦净丑, 推荐青衣, 推荐花脸, 笨猫京剧行当]
+  utterances:
+    - 推荐京剧行当
+    - 推荐生旦净丑
+    - 推荐青衣
+    - 推荐花脸
+    - 笨猫京剧行当
+  responses:
+    - "嗷呜～{user_addr}生 / 旦 / 净 / 丑 - 四大行当ฅฅ"
+    - "(尾巴翘) 老生 / 小生 / 武生"
+    - "{user_addr}青衣 / 花旦 / 武旦 / 老旦"
+    - "(挺胸) 笨猫推荐: 看不同行当各有美!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: opera_master_001
+  intent: question
+  keywords: [推荐京剧名家, 推荐梅兰芳, 推荐程砚秋, 推荐周信芳, 笨猫梅兰芳]
+  utterances:
+    - 推荐京剧名家
+    - 推荐梅兰芳
+    - 推荐程砚秋
+    - 推荐周信芳
+    - 笨猫梅兰芳
+  responses:
+    - "嗷呜～{user_addr}梅兰芳 - 京剧四大名旦之首ฅฅ"
+    - "(尾巴翘) 程砚秋 / 尚小云 / 荀慧生"
+    - "{user_addr}周信芳 / 马连良 - 老生"
+    - "(挺胸) 笨猫推荐: 入门看梅兰芳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: opera_school_001
+  intent: question
+  keywords: [推荐京剧流派, 推荐梅派, 推荐程派, 推荐马派, 笨猫梅派]
+  utterances:
+    - 推荐京剧流派
+    - 推荐梅派
+    - 推荐程派
+    - 推荐马派
+    - 笨猫梅派
+  responses:
+    - "嗷呜～{user_addr}梅派 - 端庄华美 / 青衣ฅฅ"
+    - "(尾巴翘) 程派 - 凄美 / 程砚秋"
+    - "{user_addr}马派 / 谭派 - 老生流派"
+    - "(挺胸) 笨猫推荐: 各流派比一比!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: opera_jingju_classic_001
+  intent: question
+  keywords: [推荐京剧剧目, 推荐贵妃醉酒, 推荐霸王别姬, 推荐三岔口, 笨猫京剧剧目]
+  utterances:
+    - 推荐京剧剧目
+    - 推荐贵妃醉酒
+    - 推荐霸王别姬
+    - 推荐三岔口
+    - 笨猫京剧剧目
+  responses:
+    - "嗷呜～{user_addr}贵妃醉酒 / 霸王别姬 - 梅派ฅฅ"
+    - "(尾巴翘) 锁麟囊 / 春闺梦 - 程派"
+    - "{user_addr}三岔口 / 闹天宫 - 武戏"
+    - "(挺胸) 笨猫推荐: 霸王别姬入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: opera_kunqu_001
+  intent: question
+  keywords: [推荐昆曲, 推荐牡丹亭, 推荐长生殿, 推荐白先勇青春版, 笨猫昆曲]
+  utterances:
+    - 推荐昆曲
+    - 推荐牡丹亭
+    - 推荐长生殿
+    - 推荐白先勇青春版
+    - 笨猫昆曲
+  responses:
+    - "嗷呜～{user_addr}牡丹亭 - 昆曲第一名作ฅฅ"
+    - "(尾巴翘) 白先勇青春版牡丹亭"
+    - "{user_addr}长生殿 / 桃花扇 - 经典"
+    - "(挺胸) 笨猫推荐: 牡丹亭至美!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: opera_yueju_001
+  intent: question
+  keywords: [推荐越剧, 推荐梁山伯与祝英台, 推荐红楼梦越剧, 推荐茅威涛, 笨猫越剧]
+  utterances:
+    - 推荐越剧
+    - 推荐梁山伯与祝英台
+    - 推荐红楼梦越剧
+    - 推荐茅威涛
+    - 笨猫越剧
+  responses:
+    - "嗷呜～{user_addr}梁祝 / 红楼梦 / 西厢记ฅฅ"
+    - "(尾巴翘) 茅威涛 / 徐玉兰 - 名家"
+    - "{user_addr}女小生 - 越剧特色"
+    - "(挺胸) 笨猫推荐: 越剧女小生帅气!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: opera_huangmei_001
+  intent: question
+  keywords: [推荐黄梅戏, 推荐天仙配, 推荐严凤英, 推荐黄梅戏经典, 笨猫黄梅戏]
+  utterances:
+    - 推荐黄梅戏
+    - 推荐天仙配
+    - 推荐严凤英
+    - 推荐黄梅戏经典
+    - 笨猫黄梅戏
+  responses:
+    - "嗷呜～{user_addr}天仙配 / 女驸马 - 黄梅经典ฅฅ"
+    - "(尾巴翘) 严凤英 / 韩再芬 - 名家"
+    - "{user_addr}安徽地方戏 / 接近民歌"
+    - "(挺胸) 笨猫推荐: 黄梅入门简单!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: opera_chuanju_001
+  intent: question
+  keywords: [推荐川剧, 推荐变脸, 推荐喷火川剧, 推荐沈铁梅, 笨猫川剧]
+  utterances:
+    - 推荐川剧
+    - 推荐变脸
+    - 推荐喷火川剧
+    - 推荐沈铁梅
+    - 笨猫川剧
+  responses:
+    - "嗷呜～{user_addr}变脸 - 川剧绝技 / 国宝ฅฅ"
+    - "(尾巴翘) 喷火 / 顶灯 / 滚灯"
+    - "{user_addr}沈铁梅 - 川剧名家"
+    - "(挺胸) 笨猫推荐: 看变脸震撼!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: opera_makeup_001
+  intent: question
+  keywords: [推荐戏曲脸谱, 推荐花脸脸谱, 推荐红脸黑脸, 推荐脸谱含义, 笨猫脸谱]
+  utterances:
+    - 推荐戏曲脸谱
+    - 推荐花脸脸谱
+    - 推荐红脸黑脸
+    - 推荐脸谱含义
+    - 笨猫脸谱
+  responses:
+    - "嗷呜～{user_addr}红脸 - 忠义 / 关羽ฅฅ"
+    - "(尾巴翘) 黑脸 - 刚正 / 包公"
+    - "{user_addr}白脸 - 奸诈 / 曹操"
+    - "(挺胸) 笨猫推荐: 看脸辨忠奸!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: opera_costume_001
+  intent: question
+  keywords: [推荐戏服, 推荐戏曲服装, 推荐蟒袍, 推荐凤冠霞帔, 笨猫戏服]
+  utterances:
+    - 推荐戏服
+    - 推荐戏曲服装
+    - 推荐蟒袍
+    - 推荐凤冠霞帔
+    - 笨猫戏服
+  responses:
+    - "嗷呜～{user_addr}蟒袍 / 帔 / 褶子 / 靠ฅฅ"
+    - "(尾巴翘) 凤冠霞帔 - 旦角"
+    - "{user_addr}水袖 / 雉鸡尾"
+    - "(挺胸) 笨猫推荐: 戏服美翻!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: opera_modern_001
+  intent: question
+  keywords: [推荐戏曲现代化, 推荐新编戏曲, 推荐戏曲跨界, 推荐 Q 版京剧, 笨猫现代戏曲]
+  utterances:
+    - 推荐戏曲现代化
+    - 推荐新编戏曲
+    - 推荐戏曲跨界
+    - 推荐 Q 版京剧
+    - 笨猫现代戏曲
+  responses:
+    - "嗷呜～{user_addr}王珮瑜 - 京剧老生 + 跨界ฅฅ"
+    - "(尾巴翘) 张军 - 昆曲跨界"
+    - "{user_addr}抖音 / B 站 戏曲博主"
+    - "(挺胸) 笨猫推荐: 戏曲不老!"
+  cooldown_seconds: 60
+  weight: 0.9

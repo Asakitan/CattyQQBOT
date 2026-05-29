@@ -1,0 +1,224 @@
+# 桌游 / D&D / TRPG / 跑团 / 卡牌 routes (S6 R171 NLU 节点扩充, 第十六周期 10/10 完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 I9 chess_board (棋类) 区分: 这里专注现代桌游 + TRPG.
+
+- name: bg_classic_001
+  intent: question
+  keywords: [推荐桌游, 推荐入门桌游, 推荐卡坦岛, 推荐三国杀, 笨猫桌游]
+  utterances:
+    - 推荐桌游
+    - 推荐入门桌游
+    - 推荐卡坦岛
+    - 推荐三国杀
+    - 笨猫桌游
+  responses:
+    - "嗷呜～{user_addr}卡坦岛 / 璀璨宝石 / 翼展ฅฅ"
+    - "(尾巴翘) 三国杀 / 狼人杀 - 国民"
+    - "{user_addr}阿瓦隆 / 抵抗组织"
+    - "(挺胸) 笨猫推荐: 卡坦岛入门首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bg_strategy_001
+  intent: question
+  keywords: [推荐策略桌游, 推荐 Terraforming Mars, 推荐 Scythe, 推荐 Gaia Project, 笨猫策略桌游]
+  utterances:
+    - 推荐策略桌游
+    - 推荐 Terraforming Mars
+    - 推荐 Scythe
+    - 推荐 Gaia Project
+    - 笨猫策略桌游
+  responses:
+    - "嗷呜～{user_addr}火星救援 / 镰刀战争 - 顶ฅฅ"
+    - "(尾巴翘) Gaia Project / Twilight Imperium"
+    - "{user_addr}Brass Birmingham - BGG 第一"
+    - "(挺胸) 笨猫推荐: 火星救援易学难精!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bg_party_001
+  intent: question
+  keywords: [推荐派对桌游, 推荐谁是卧底, 推荐你画我猜, 推荐 Codenames, 笨猫派对桌游]
+  utterances:
+    - 推荐派对桌游
+    - 推荐谁是卧底
+    - 推荐你画我猜
+    - 推荐 Codenames
+    - 笨猫派对桌游
+  responses:
+    - "嗷呜～{user_addr}谁是卧底 / 你画我猜 - 派对ฅฅ"
+    - "(尾巴翘) Codenames 行动代号"
+    - "{user_addr}Just One / 一桩美事"
+    - "(挺胸) 笨猫推荐: 派对必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bg_dnd_001
+  intent: question
+  keywords: [推荐 D&D, 推荐龙与地下城, 推荐 DnD 5e, 推荐跑团, 笨猫 DnD]
+  utterances:
+    - 推荐 D&D
+    - 推荐龙与地下城
+    - 推荐 DnD 5e
+    - 推荐跑团
+    - 笨猫 DnD
+  responses:
+    - "嗷呜～{user_addr}D&D 5e - 当下主流ฅฅ"
+    - "(尾巴翘) 玩家手册 / DM 指南 / 怪物手册"
+    - "{user_addr}起手新手包"
+    - "(挺胸) 笨猫推荐: 找团友最关键!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bg_dnd_class_001
+  intent: question
+  keywords: [推荐 D&D 职业, 推荐 D&D 法师, 推荐 D&D 战士, 推荐 D&D 盗贼, 笨猫 D&D 职业]
+  utterances:
+    - 推荐 D&D 职业
+    - 推荐 D&D 法师
+    - 推荐 D&D 战士
+    - 推荐 D&D 盗贼
+    - 笨猫 D&D 职业
+  responses:
+    - "嗷呜～{user_addr}战 / 法 / 牧 / 盗 - 经典 4 职ฅฅ"
+    - "(尾巴翘) 12 主流职业 + 子职"
+    - "{user_addr}新手推荐: 战士 / 牧师"
+    - "(挺胸) 笨猫推荐: 看故事玩职业!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bg_dnd_module_001
+  intent: question
+  keywords: [推荐 D&D 模组, 推荐失窃神格, 推荐怪物岛, 推荐冰风谷, 笨猫 D&D 模组]
+  utterances:
+    - 推荐 D&D 模组
+    - 推荐失窃神格
+    - 推荐怪物岛
+    - 推荐冰风谷
+    - 笨猫 D&D 模组
+  responses:
+    - "嗷呜～{user_addr}失窃神格 - 新手最佳ฅฅ"
+    - "(尾巴翘) 冰风谷 - 极地冒险"
+    - "{user_addr}怪物岛 / 龙金"
+    - "(挺胸) 笨猫推荐: 入门失窃神格!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bg_coc_001
+  intent: question
+  keywords: [推荐 CoC, 推荐克苏鲁, 推荐 Call of Cthulhu, 推荐疯狂模组, 笨猫克苏鲁]
+  utterances:
+    - 推荐 CoC
+    - 推荐克苏鲁
+    - 推荐 Call of Cthulhu
+    - 推荐疯狂模组
+    - 笨猫克苏鲁
+  responses:
+    - "嗷呜～{user_addr}CoC 7e - 克苏鲁 TRPGฅฅ"
+    - "(尾巴翘) 调查员 - 1 命脆弱"
+    - "{user_addr}模组: 印斯茅斯 / 黑沼"
+    - "(挺胸) 笨猫推荐: CoC 沉浸感无敌!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bg_pathfinder_001
+  intent: question
+  keywords: [推荐 Pathfinder, 推荐探路者, 推荐 PF2e, 推荐 TRPG 系统, 笨猫 Pathfinder]
+  utterances:
+    - 推荐 Pathfinder
+    - 推荐探路者
+    - 推荐 PF2e
+    - 推荐 TRPG 系统
+    - 笨猫 Pathfinder
+  responses:
+    - "嗷呜～{user_addr}Pathfinder 2e - 复杂 + 平衡ฅฅ"
+    - "(尾巴翘) D&D 进阶选择"
+    - "{user_addr}规则丰富 / 学习曲线高"
+    - "(挺胸) 笨猫推荐: D&D 熟了再 PF!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bg_card_001
+  intent: question
+  keywords: [推荐卡牌游戏, 推荐 MTG, 推荐 Magic, 推荐 PTCG, 笨猫卡牌]
+  utterances:
+    - 推荐卡牌游戏
+    - 推荐 MTG
+    - 推荐 Magic
+    - 推荐 PTCG
+    - 笨猫卡牌
+  responses:
+    - "嗷呜～{user_addr}MTG (万智牌) - TCG 鼻祖ฅฅ"
+    - "(尾巴翘) PTCG (宝可梦)"
+    - "{user_addr}游戏王 / 炉石 / Hearthstone"
+    - "(挺胸) 笨猫推荐: MTG 深度无敌!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bg_war_001
+  intent: question
+  keywords: [推荐战棋, 推荐 Warhammer, 推荐战锤, 推荐微缩模型, 笨猫战棋]
+  utterances:
+    - 推荐战棋
+    - 推荐 Warhammer
+    - 推荐战锤
+    - 推荐微缩模型
+    - 笨猫战棋
+  responses:
+    - "嗷呜～{user_addr}Warhammer 40K / AoS - 顶级ฅฅ"
+    - "(尾巴翘) 微缩模型 + 上色 + 战斗"
+    - "{user_addr}Kill Team - 小规模入门"
+    - "(挺胸) 笨猫推荐: 烧钱但极致!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bg_solo_001
+  intent: question
+  keywords: [推荐单人桌游, 推荐 solo, 推荐 Mage Knight, 推荐荒野探险, 笨猫单人桌游]
+  utterances:
+    - 推荐单人桌游
+    - 推荐 solo
+    - 推荐 Mage Knight
+    - 推荐荒野探险
+    - 笨猫单人桌游
+  responses:
+    - "嗷呜～{user_addr}Mage Knight - 单人神作ฅฅ"
+    - "(尾巴翘) 失落的红宝石 / Spirit Island"
+    - "{user_addr}This War of Mine 板版"
+    - "(挺胸) 笨猫推荐: 没朋友也能玩!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bg_store_001
+  intent: question
+  keywords: [推荐桌游店, 推荐桌游吧, 推荐线下跑团, 推荐桌游展, 笨猫桌游店]
+  utterances:
+    - 推荐桌游店
+    - 推荐桌游吧
+    - 推荐线下跑团
+    - 推荐桌游展
+    - 笨猫桌游店
+  responses:
+    - "嗷呜～{user_addr}北京: 嘉游 / Card haus / Dicepalฅฅ"
+    - "(尾巴翘) 上海 / 广州 / 深圳"
+    - "{user_addr}Essen Spiel - 德国桌游展"
+    - "(挺胸) 笨猫推荐: 桌游店认识朋友!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bg_dice_001
+  intent: question
+  keywords: [推荐骰子, 推荐 D&D 骰子, 推荐金属骰子, 推荐 dice tower, 笨猫骰子]
+  utterances:
+    - 推荐骰子
+    - 推荐 D&D 骰子
+    - 推荐金属骰子
+    - 推荐 dice tower
+    - 笨猫骰子
+  responses:
+    - "嗷呜～{user_addr}D&D 多面骰: d4-d20 套装ฅฅ"
+    - "(尾巴翘) 金属 / 透明 / 夜光"
+    - "{user_addr}骰塔 / 骰盘 - 仪式感"
+    - "(挺胸) 笨猫推荐: 跑团骰子必备!"
+  cooldown_seconds: 60
+  weight: 0.8

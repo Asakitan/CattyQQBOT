@@ -1,0 +1,207 @@
+# 街舞 / Hip-hop / breaking / 跳舞文化 routes (S6 R169 NLU 节点扩充, 第十六周期 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A3 music_instrument (乐器) 区分: 这里专注街舞文化.
+
+- name: sd_style_001
+  intent: question
+  keywords: [推荐街舞类型, 推荐 hiphop, 推荐 popping, 推荐 locking, 笨猫街舞]
+  utterances:
+    - 推荐街舞类型
+    - 推荐 hiphop
+    - 推荐 popping
+    - 推荐 locking
+    - 笨猫街舞
+  responses:
+    - "嗷呜～{user_addr}Hiphop / Popping / Locking / Breakingฅฅ"
+    - "(尾巴翘) House / Krump / Voguing"
+    - "{user_addr}入门看身体感觉 / 兴趣"
+    - "(挺胸) 笨猫推荐: 选喜欢的开练!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_breaking_001
+  intent: question
+  keywords: [推荐 breaking, 推荐 bboy, 推荐 power move, 推荐霹雳舞, 笨猫 breaking]
+  utterances:
+    - 推荐 breaking
+    - 推荐 bboy
+    - 推荐 power move
+    - 推荐霹雳舞
+    - 笨猫 breaking
+  responses:
+    - "嗷呜～{user_addr}Breaking - 巴黎奥运正式项目ฅฅ"
+    - "(尾巴翘) Toprock / Footwork / Power / Freeze"
+    - "{user_addr}头转 / 风车 / Toprock"
+    - "(挺胸) 笨猫推荐: 体能基础是关键!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sd_popping_001
+  intent: question
+  keywords: [推荐 popping, 推荐机械舞, 推荐 robot, 推荐 wave, 笨猫机械舞]
+  utterances:
+    - 推荐 popping
+    - 推荐机械舞
+    - 推荐 robot
+    - 推荐 wave
+    - 笨猫机械舞
+  responses:
+    - "嗷呜～{user_addr}Popping - 肌肉控制 + 震动ฅฅ"
+    - "(尾巴翘) Robot / Wave / Glide"
+    - "{user_addr}Boogaloo Sam - 创始人"
+    - "(挺胸) 笨猫推荐: 从基础震动练!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sd_locking_001
+  intent: question
+  keywords: [推荐 locking, 推荐锁舞, 推荐 Don Campbell, 推荐 Funk 舞, 笨猫锁舞]
+  utterances:
+    - 推荐 locking
+    - 推荐锁舞
+    - 推荐 Don Campbell
+    - 推荐 Funk 舞
+    - 笨猫锁舞
+  responses:
+    - "嗷呜～{user_addr}Locking - 70 年代 Funk 风ฅฅ"
+    - "(尾巴翘) 锁定 / Point / Skeeter Rabbit"
+    - "{user_addr}Don Campbell - 创始人"
+    - "(挺胸) 笨猫推荐: Locking 最开心!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sd_competition_001
+  intent: question
+  keywords: [推荐街舞比赛, 推荐这就是街舞, 推荐 BOTY, 推荐 WOD, 笨猫街舞比赛]
+  utterances:
+    - 推荐街舞比赛
+    - 推荐这就是街舞
+    - 推荐 BOTY
+    - 推荐 WOD
+    - 笨猫街舞比赛
+  responses:
+    - "嗷呜～{user_addr}国内: 这就是街舞 / 街舞大赛ฅฅ"
+    - "(尾巴翘) BOTY (Battle of Year)"
+    - "{user_addr}WOD (World of Dance)"
+    - "(挺胸) 笨猫推荐: 看顶级 battle 涨眼界!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_studio_001
+  intent: question
+  keywords: [推荐街舞舞室, 推荐街舞工作室, 推荐街舞培训, 推荐 D-Square, 笨猫舞室]
+  utterances:
+    - 推荐街舞舞室
+    - 推荐街舞工作室
+    - 推荐街舞培训
+    - 推荐 D-Square
+    - 笨猫舞室
+  responses:
+    - "嗷呜～{user_addr}北京: D-Square / Caster / Speedฅฅ"
+    - "(尾巴翘) 上海: 嘻哈帮 / 舞蹈兵团"
+    - "{user_addr}广州 / 深圳 / 成都"
+    - "(挺胸) 笨猫推荐: 找口碑老师入坑!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sd_clothing_001
+  intent: question
+  keywords: [推荐街舞穿搭, 推荐 hiphop 穿搭, 推荐街头风, 推荐 supreme stussy, 笨猫街舞穿搭]
+  utterances:
+    - 推荐街舞穿搭
+    - 推荐 hiphop 穿搭
+    - 推荐街头风
+    - 推荐 supreme stussy
+    - 笨猫街舞穿搭
+  responses:
+    - "嗷呜～{user_addr}宽松 T + 运动裤 + 高帮鞋ฅฅ"
+    - "(尾巴翘) Supreme / Stussy / Off-White"
+    - "{user_addr}国潮: CLOT / Roaringwild"
+    - "(挺胸) 笨猫推荐: 自由舒适最重要!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sd_shoes_001
+  intent: question
+  keywords: [推荐街舞鞋, 推荐 AJ, 推荐 Adidas Superstar, 推荐 Yeezy, 笨猫街舞鞋]
+  utterances:
+    - 推荐街舞鞋
+    - 推荐 AJ
+    - 推荐 Adidas Superstar
+    - 推荐 Yeezy
+    - 笨猫街舞鞋
+  responses:
+    - "嗷呜～{user_addr}Nike Air Force / Dunkฅฅ"
+    - "(尾巴翘) Adidas Superstar / Yeezy"
+    - "{user_addr}New Balance / 安踏 KT"
+    - "(挺胸) 笨猫推荐: AF1 街舞神鞋!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sd_hiphop_culture_001
+  intent: question
+  keywords: [推荐 hiphop 文化, 推荐 4 elements, 推荐 hiphop 历史, 推荐 Run DMC, 笨猫 hiphop 文化]
+  utterances:
+    - 推荐 hiphop 文化
+    - 推荐 4 elements
+    - 推荐 hiphop 历史
+    - 推荐 Run DMC
+    - 笨猫 hiphop 文化
+  responses:
+    - "嗷呜～{user_addr}4 elements: MC / DJ / Bboy / Graffitiฅฅ"
+    - "(尾巴翘) 70 年代 Bronx 起源"
+    - "{user_addr}Run DMC / Public Enemy / NWA"
+    - "(挺胸) 笨猫推荐: 看 Hip-Hop Evolution!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sd_rap_china_001
+  intent: question
+  keywords: [推荐中国说唱, 推荐 GAI, 推荐中国有嘻哈, 推荐说唱新世代, 笨猫中国说唱]
+  utterances:
+    - 推荐中国说唱
+    - 推荐 GAI
+    - 推荐中国有嘻哈
+    - 推荐说唱新世代
+    - 笨猫中国说唱
+  responses:
+    - "嗷呜～{user_addr}GAI / 万妮达 / 王以太ฅฅ"
+    - "(尾巴翘) PG One / Bridge / Capper"
+    - "{user_addr}地下: 谢帝 / 西奥"
+    - "(挺胸) 笨猫推荐: 中国说唱进步快!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sd_dj_001
+  intent: question
+  keywords: [推荐 DJ, 推荐打碟, 推荐 Pioneer DDJ, 推荐 controller, 笨猫 DJ]
+  utterances:
+    - 推荐 DJ
+    - 推荐打碟
+    - 推荐 Pioneer DDJ
+    - 推荐 controller
+    - 笨猫 DJ
+  responses:
+    - "嗷呜～{user_addr}Pioneer DDJ-FLX4 - 入门ฅฅ"
+    - "(尾巴翘) Numark / Reloop - 性价比"
+    - "{user_addr}Rekordbox / Serato 软件"
+    - "(挺胸) 笨猫推荐: DDJ-400 经典!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sd_battle_001
+  intent: question
+  keywords: [推荐 battle 技巧, 推荐 cypher, 推荐街舞 free style, 推荐 routine, 笨猫 battle]
+  utterances:
+    - 推荐 battle 技巧
+    - 推荐 cypher
+    - 推荐街舞 free style
+    - 推荐 routine
+    - 笨猫 battle
+  responses:
+    - "嗷呜～{user_addr}Battle - 1on1 / 2v2 / crewฅฅ"
+    - "(尾巴翘) Cypher - 圆圈轮跳"
+    - "{user_addr}Routine - 编排好的"
+    - "(挺胸) 笨猫推荐: Battle 培养气场!"
+  cooldown_seconds: 60
+  weight: 0.8

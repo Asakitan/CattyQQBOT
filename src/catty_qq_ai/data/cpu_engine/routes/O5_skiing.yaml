@@ -1,0 +1,207 @@
+# 滑雪 / 单板 / 双板 / 冬季运动装备 routes (S6 R167 NLU 节点扩充, 第十六周期 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 N9 camping_outdoor (露营) 区分: 这里专注雪季运动.
+
+- name: ski_double_board_001
+  intent: question
+  keywords: [推荐双板滑雪, 推荐高山滑雪, 推荐 alpine, 推荐双板装备, 笨猫双板]
+  utterances:
+    - 推荐双板滑雪
+    - 推荐高山滑雪
+    - 推荐 alpine
+    - 推荐双板装备
+    - 笨猫双板
+  responses:
+    - "嗷呜～{user_addr}双板: 速度感强 / 上手快ฅฅ"
+    - "(尾巴翘) 入门: 165-170cm 板长"
+    - "{user_addr}雪鞋 + 雪板 + 固定器"
+    - "(挺胸) 笨猫推荐: 双板入门最快!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ski_snowboard_001
+  intent: question
+  keywords: [推荐单板滑雪, 推荐 snowboard, 推荐单板装备, 推荐单板品牌, 笨猫单板]
+  utterances:
+    - 推荐单板滑雪
+    - 推荐 snowboard
+    - 推荐单板装备
+    - 推荐单板品牌
+    - 笨猫单板
+  responses:
+    - "嗷呜～{user_addr}Burton / Lib Tech / Gnu - 主流ฅฅ"
+    - "(尾巴翘) 全地形 / 公园 / 自由式"
+    - "{user_addr}硬板 vs 软板"
+    - "(挺胸) 笨猫推荐: Burton Custom 全能!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ski_resort_001
+  intent: question
+  keywords: [推荐滑雪场, 推荐崇礼万龙, 推荐长白山滑雪, 推荐尼森林, 笨猫滑雪场]
+  utterances:
+    - 推荐滑雪场
+    - 推荐崇礼万龙
+    - 推荐长白山滑雪
+    - 推荐尼森林
+    - 笨猫滑雪场
+  responses:
+    - "嗷呜～{user_addr}国内: 崇礼万龙 / 太舞 / 云顶ฅฅ"
+    - "(尾巴翘) 长白山 / 北大壶 - 东北顶级"
+    - "{user_addr}日本: 二世古 / 白马"
+    - "(挺胸) 笨猫推荐: 雪友梦想二世古!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ski_clothing_001
+  intent: question
+  keywords: [推荐雪服, 推荐滑雪服, 推荐 Burton 雪服, 推荐 Patagonia, 笨猫雪服]
+  utterances:
+    - 推荐雪服
+    - 推荐滑雪服
+    - 推荐 Burton 雪服
+    - 推荐 Patagonia
+    - 笨猫雪服
+  responses:
+    - "嗷呜～{user_addr}Burton / Patagonia - 主流ฅฅ"
+    - "(尾巴翘) Arc'teryx Sabre - 高端硬壳"
+    - "{user_addr}迪卡侬 / Decathlon - 入门"
+    - "(挺胸) 笨猫推荐: 入门迪卡侬 GORE 雪服!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ski_boots_001
+  intent: question
+  keywords: [推荐雪鞋, 推荐 Burton 雪鞋, 推荐 Salomon 雪鞋, 推荐脚型, 笨猫雪鞋]
+  utterances:
+    - 推荐雪鞋
+    - 推荐 Burton 雪鞋
+    - 推荐 Salomon 雪鞋
+    - 推荐脚型
+    - 笨猫雪鞋
+  responses:
+    - "嗷呜～{user_addr}Burton Photon - 单板舒适ฅฅ"
+    - "(尾巴翘) Salomon X Pro - 双板"
+    - "{user_addr}必须试鞋 / 看脚型"
+    - "(挺胸) 笨猫推荐: 鞋比板重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ski_goggles_001
+  intent: question
+  keywords: [推荐雪镜, 推荐 Oakley 雪镜, 推荐 Smith 雪镜, 推荐镜片色, 笨猫雪镜]
+  utterances:
+    - 推荐雪镜
+    - 推荐 Oakley 雪镜
+    - 推荐 Smith 雪镜
+    - 推荐镜片色
+    - 笨猫雪镜
+  responses:
+    - "嗷呜～{user_addr}Oakley Flight Deck - 视野神器ฅฅ"
+    - "(尾巴翘) Smith / Anon - 主流"
+    - "{user_addr}晴天 / 阴天换片"
+    - "(挺胸) 笨猫推荐: Oakley 视野最广!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ski_helmet_001
+  intent: question
+  keywords: [推荐滑雪头盔, 推荐 Smith 头盔, 推荐 Giro, 推荐 POC 头盔, 笨猫滑雪头盔]
+  utterances:
+    - 推荐滑雪头盔
+    - 推荐 Smith 头盔
+    - 推荐 Giro
+    - 推荐 POC 头盔
+    - 笨猫滑雪头盔
+  responses:
+    - "嗷呜～{user_addr}Smith / POC - 安全旗舰ฅฅ"
+    - "(尾巴翘) Giro / Burton"
+    - "{user_addr}MIPS 防旋转撞击"
+    - "(挺胸) 笨猫的提醒: 头盔必备 / 别图省钱!"
+  cooldown_seconds: 60
+  weight: 1.1
+
+- name: ski_powder_001
+  intent: question
+  keywords: [推荐粉雪, 推荐 powder, 推荐野雪, 推荐二世古, 笨猫粉雪]
+  utterances:
+    - 推荐粉雪
+    - 推荐 powder
+    - 推荐野雪
+    - 推荐二世古
+    - 笨猫粉雪
+  responses:
+    - "嗷呜～{user_addr}二世古 - 粉雪天堂ฅฅ"
+    - "(尾巴翘) 长白山 / 哈尔滨 - 国内"
+    - "{user_addr}加拿大 Whistler / 美国 Jackson"
+    - "(挺胸) 笨猫推荐: 一次粉雪上瘾!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ski_park_001
+  intent: question
+  keywords: [推荐滑雪公园, 推荐 freestyle, 推荐 park 跳台, 推荐 rail 杆, 笨猫滑雪公园]
+  utterances:
+    - 推荐滑雪公园
+    - 推荐 freestyle
+    - 推荐 park 跳台
+    - 推荐 rail 杆
+    - 笨猫滑雪公园
+  responses:
+    - "嗷呜～{user_addr}Freestyle: 跳台 / 杆子 / U 池ฅฅ"
+    - "(尾巴翘) 入门 small park 起步"
+    - "{user_addr}头盔 + 护甲 必备"
+    - "(挺胸) 笨猫推荐: 公园动作刺激!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ski_card_001
+  intent: question
+  keywords: [推荐雪票, 推荐雪场年卡, 推荐 Epic Pass, 推荐 Ikon Pass, 笨猫雪票]
+  utterances:
+    - 推荐雪票
+    - 推荐雪场年卡
+    - 推荐 Epic Pass
+    - 推荐 Ikon Pass
+    - 笨猫雪票
+  responses:
+    - "嗷呜～{user_addr}国内: 万龙年卡 / 太舞年卡ฅฅ"
+    - "(尾巴翘) Epic Pass - 北美连锁"
+    - "{user_addr}Ikon Pass - 北美顶级"
+    - "(挺胸) 笨猫推荐: 玩多了买年卡!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ski_lesson_001
+  intent: question
+  keywords: [推荐滑雪教练, 推荐滑雪课, 推荐双板课程, 推荐单板课程, 笨猫滑雪课]
+  utterances:
+    - 推荐滑雪教练
+    - 推荐滑雪课
+    - 推荐双板课程
+    - 推荐单板课程
+    - 笨猫滑雪课
+  responses:
+    - "嗷呜～{user_addr}新手必报课 / 别自学ฅฅ"
+    - "(尾巴翘) 双板: 15-20 小时入门"
+    - "{user_addr}单板: 摔得更多 / 但通常学得快"
+    - "(挺胸) 笨猫推荐: 教练事半功倍!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ski_other_winter_001
+  intent: question
+  keywords: [推荐冰雪运动, 推荐滑冰, 推荐冰球, 推荐冰壶, 笨猫冬季运动]
+  utterances:
+    - 推荐冰雪运动
+    - 推荐滑冰
+    - 推荐冰球
+    - 推荐冰壶
+    - 笨猫冬季运动
+  responses:
+    - "嗷呜～{user_addr}滑冰: 花样 / 速滑 / 冰球ฅฅ"
+    - "(尾巴翘) 冰球 - 团体最热"
+    - "{user_addr}冰壶 - 战术绅士项目"
+    - "(挺胸) 笨猫推荐: 冬奥项目都试!"
+  cooldown_seconds: 60
+  weight: 0.7

@@ -1,0 +1,207 @@
+# K-pop / 韩流 / 韩剧 / 韩饭 routes (S6 R168 NLU 节点扩充, 第十六周期 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 L0 music_deep / A4 movie_drama 区分: 这里专注韩国娱乐圈生态.
+
+- name: kp_boy_group_001
+  intent: question
+  keywords: [推荐男团, 推荐 BTS, 推荐防弹少年团, 推荐 SEVENTEEN, 笨猫男团]
+  utterances:
+    - 推荐男团
+    - 推荐 BTS
+    - 推荐防弹少年团
+    - 推荐 SEVENTEEN
+    - 笨猫男团
+  responses:
+    - "嗷呜～{user_addr}BTS / SEVENTEEN / Stray Kids - 顶ฅฅ"
+    - "(尾巴翘) ENHYPEN / TXT - 新生代"
+    - "{user_addr}EXO / 防弹 - 三代经典"
+    - "(挺胸) 笨猫推荐: 看代际选 fandom!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kp_girl_group_001
+  intent: question
+  keywords: [推荐女团, 推荐 BLACKPINK, 推荐 NewJeans, 推荐 IVE, 笨猫女团]
+  utterances:
+    - 推荐女团
+    - 推荐 BLACKPINK
+    - 推荐 NewJeans
+    - 推荐 IVE
+    - 笨猫女团
+  responses:
+    - "嗷呜～{user_addr}NewJeans / IVE / aespa - 新ฅฅ"
+    - "(尾巴翘) BLACKPINK - 全球顶流"
+    - "{user_addr}TWICE / Red Velvet - 二代经典"
+    - "(挺胸) 笨猫推荐: NewJeans 现在最火!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kp_company_001
+  intent: question
+  keywords: [推荐韩国娱乐公司, 推荐 HYBE, 推荐 SM, 推荐 JYP, 笨猫 HYBE]
+  utterances:
+    - 推荐韩国娱乐公司
+    - 推荐 HYBE
+    - 推荐 SM
+    - 推荐 JYP
+    - 笨猫 HYBE
+  responses:
+    - "嗷呜～{user_addr}HYBE - BTS / NewJeans / ENHYPENฅฅ"
+    - "(尾巴翘) SM - aespa / EXO / NCT"
+    - "{user_addr}JYP - TWICE / Stray Kids"
+    - "(挺胸) 笨猫推荐: 四大社各有特色!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kp_drama_001
+  intent: question
+  keywords: [推荐韩剧, 推荐韩国电视剧, 推荐 Netflix 韩剧, 推荐韩剧爱情, 笨猫韩剧]
+  utterances:
+    - 推荐韩剧
+    - 推荐韩国电视剧
+    - 推荐 Netflix 韩剧
+    - 推荐韩剧爱情
+    - 笨猫韩剧
+  responses:
+    - "嗷呜～{user_addr}爱情: 我的解放日志 / 浪漫医生ฅฅ"
+    - "(尾巴翘) 悬疑: 黑暗荣耀 / 信号 / 隧道"
+    - "{user_addr}社会: 我们的蓝调时光"
+    - "(挺胸) 笨猫推荐: 黑暗荣耀必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kp_movie_001
+  intent: question
+  keywords: [推荐韩国电影, 推荐寄生虫, 推荐燃烧, 推荐分手的决心, 笨猫韩国电影]
+  utterances:
+    - 推荐韩国电影
+    - 推荐寄生虫
+    - 推荐燃烧
+    - 推荐分手的决心
+    - 笨猫韩国电影
+  responses:
+    - "嗷呜～{user_addr}寄生虫 / 燃烧 - 奉俊昊 + 李沧东ฅฅ"
+    - "(尾巴翘) 分手的决心 / 老女孩"
+    - "{user_addr}釜山行 / 杀人回忆 - 经典"
+    - "(挺胸) 笨猫推荐: 韩影深度 + 美学顶级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kp_variety_001
+  intent: question
+  keywords: [推荐韩国综艺, 推荐 RM, 推荐无限挑战, 推荐 1 泊 2 日, 笨猫韩综]
+  utterances:
+    - 推荐韩国综艺
+    - 推荐 RM
+    - 推荐无限挑战
+    - 推荐 1 泊 2 日
+    - 笨猫韩综
+  responses:
+    - "嗷呜～{user_addr}Running Man / 无限挑战 - 国民ฅฅ"
+    - "(尾巴翘) 1 泊 2 日 / 新西游记"
+    - "{user_addr}花花游记 / 三时三餐"
+    - "(挺胸) 笨猫推荐: RM 入门韩综!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kp_chart_001
+  intent: question
+  keywords: [推荐 Melon, 推荐韩国音乐榜, 推荐 Billboard K, 推荐 K-pop 榜单, 笨猫 Melon]
+  utterances:
+    - 推荐 Melon
+    - 推荐韩国音乐榜
+    - 推荐 Billboard K
+    - 推荐 K-pop 榜单
+    - 笨猫 Melon
+  responses:
+    - "嗷呜～{user_addr}Melon - 韩国国民榜单ฅฅ"
+    - "(尾巴翘) Genie / Bugs / Vibe"
+    - "{user_addr}Circle Chart - 实体专辑销量"
+    - "(挺胸) 笨猫推荐: Melon 看实时热!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kp_concert_001
+  intent: question
+  keywords: [推荐 K-pop 演唱会, 推荐 K-con, 推荐 BTS 演唱会, 推荐 BLACKPINK 巡演, 笨猫演唱会]
+  utterances:
+    - 推荐 K-pop 演唱会
+    - 推荐 K-con
+    - 推荐 BTS 演唱会
+    - 推荐 BLACKPINK 巡演
+    - 笨猫演唱会
+  responses:
+    - "嗷呜～{user_addr}首尔上岩奥运会 / KSPO 体育馆ฅฅ"
+    - "(尾巴翘) Fanmeeting / Fancon"
+    - "{user_addr}巡演票 - 抢得到的话"
+    - "(挺胸) 笨猫推荐: 看一次现场上瘾!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kp_dance_001
+  intent: question
+  keywords: [推荐 K-pop 舞蹈, 推荐 cover dance, 推荐舞蹈教程, 推荐 LISA 编舞, 笨猫舞蹈]
+  utterances:
+    - 推荐 K-pop 舞蹈
+    - 推荐 cover dance
+    - 推荐舞蹈教程
+    - 推荐 LISA 编舞
+    - 笨猫舞蹈
+  responses:
+    - "嗷呜～{user_addr}MAMA 编舞 / Lia Kim / KasperฅฅY"
+    - "(尾巴翘) 1MILLION Dance Studio"
+    - "{user_addr}Cover dance - YouTube 学"
+    - "(挺胸) 笨猫推荐: 跟着 1MILLION 学!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kp_album_001
+  intent: question
+  keywords: [推荐 K-pop 专辑, 推荐韩饭周边, 推荐小卡, 推荐应援棒, 笨猫小卡]
+  utterances:
+    - 推荐 K-pop 专辑
+    - 推荐韩饭周边
+    - 推荐小卡
+    - 推荐应援棒
+    - 笨猫小卡
+  responses:
+    - "嗷呜～{user_addr}专辑 + 小卡 / 海报 / 写真ฅฅ"
+    - "(尾巴翘) 应援棒 - 演唱会必备"
+    - "{user_addr}Weverse / 团体应援站"
+    - "(挺胸) 笨猫推荐: 入坑先抽 1 个团专!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kp_fashion_001
+  intent: question
+  keywords: [推荐韩系穿搭, 推荐韩流时尚, 推荐 KIRSH, 推荐 ADERERROR, 笨猫韩系穿搭]
+  utterances:
+    - 推荐韩系穿搭
+    - 推荐韩流时尚
+    - 推荐 KIRSH
+    - 推荐 ADERERROR
+    - 笨猫韩系穿搭
+  responses:
+    - "嗷呜～{user_addr}ADERERROR / Mardi - 设计师ฅฅ"
+    - "(尾巴翘) Stylenanda / KIRSH - 大众"
+    - "{user_addr}MUSINSA - 韩国大集成"
+    - "(挺胸) 笨猫推荐: 韩系叠穿超时髦!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kp_idol_skincare_001
+  intent: question
+  keywords: [推荐韩国护肤, 推荐爱茉莉, 推荐雪花秀, 推荐 innisfree, 笨猫韩妆]
+  utterances:
+    - 推荐韩国护肤
+    - 推荐爱茉莉
+    - 推荐雪花秀
+    - 推荐 innisfree
+    - 笨猫韩妆
+  responses:
+    - "嗷呜～{user_addr}雪花秀 / 后 - 高端ฅฅ"
+    - "(尾巴翘) innisfree / Etude - 中低端"
+    - "{user_addr}菲诗小铺 / Klairs - 性价比"
+    - "(挺胸) 笨猫推荐: 韩妆性价比强!"
+  cooldown_seconds: 60
+  weight: 0.9
