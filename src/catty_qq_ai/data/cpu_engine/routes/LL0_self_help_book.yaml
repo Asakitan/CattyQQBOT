@@ -1,0 +1,206 @@
+# 自助书 / 心理学畅销 / 成长 routes (S6 R392 NLU 节点扩充, 第三十九周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: shb_power_now_001
+  intent: question
+  keywords: [推荐自助书, 推荐当下的力量, 推荐 Eckhart Tolle, 推荐活在当下, 笨猫自助书]
+  utterances:
+    - 推荐自助书
+    - 推荐当下的力量
+    - 推荐 Eckhart Tolle
+    - 推荐活在当下
+    - 笨猫自助书
+  responses:
+    - "嗷呜～{user_addr}《当下的力量》Eckhart Tolleฅฅ"
+    - "(尾巴翘) 临在 / 观察者意识 / 思维之外"
+    - "{user_addr}活在当下 - 解构小我"
+    - "(挺胸) 笨猫推荐: 灵性入门经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shb_toad_001
+  intent: question
+  keywords: [推荐心理畅销, 推荐蛤蟆先生, 推荐蛤蟆先生去看心理医生, 推荐 TA 沟通分析, 笨猫蛤蟆先生]
+  utterances:
+    - 推荐心理畅销
+    - 推荐蛤蟆先生
+    - 推荐蛤蟆先生去看心理医生
+    - 推荐 TA 沟通分析
+    - 笨猫蛤蟆先生
+  responses:
+    - "嗷呜～{user_addr}《蛤蟆先生去看心理医生》ฅฅ"
+    - "(尾巴翘) 父母 / 成人 / 儿童自我状态"
+    - "{user_addr}TA 沟通分析 - 童话外壳"
+    - "(挺胸) 笨猫推荐: 心理咨询入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shb_kahneman_001
+  intent: question
+  keywords: [推荐认知, 推荐思考快与慢, 推荐 Kahneman, 推荐系统1系统2, 笨猫思考快与慢]
+  utterances:
+    - 推荐认知
+    - 推荐思考快与慢
+    - 推荐 Kahneman
+    - 推荐系统1系统2
+    - 笨猫思考快与慢
+  responses:
+    - "嗷呜～{user_addr}《思考, 快与慢》Kahnemanฅฅ"
+    - "(尾巴翘) 系统1直觉 / 系统2慢思考"
+    - "{user_addr}认知偏差 / 锚定 / 损失厌恶"
+    - "(挺胸) 笨猫推荐: 诺奖大师之作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shb_nvc_001
+  intent: question
+  keywords: [推荐情绪管理, 推荐非暴力沟通, 推荐 NVC, 推荐 Rosenberg, 笨猫非暴力沟通]
+  utterances:
+    - 推荐情绪管理
+    - 推荐非暴力沟通
+    - 推荐 NVC
+    - 推荐 Rosenberg
+    - 笨猫非暴力沟通
+  responses:
+    - "嗷呜～{user_addr}《非暴力沟通》Marshall Rosenbergฅฅ"
+    - "(尾巴翘) 观察 / 感受 / 需要 / 请求"
+    - "{user_addr}NVC 四要素 - 长颈鹿语言"
+    - "(挺胸) 笨猫推荐: 关系修复神书!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shb_courage_001
+  intent: question
+  keywords: [推荐反思, 推荐被讨厌的勇气, 推荐阿德勒, 推荐岸见一郎, 笨猫被讨厌的勇气]
+  utterances:
+    - 推荐反思
+    - 推荐被讨厌的勇气
+    - 推荐阿德勒
+    - 推荐岸见一郎
+    - 笨猫被讨厌的勇气
+  responses:
+    - "嗷呜～{user_addr}《被讨厌的勇气》岸见一郎ฅฅ"
+    - "(尾巴翘) 阿德勒心理学 / 课题分离"
+    - "{user_addr}目的论 / 共同体感觉"
+    - "(挺胸) 笨猫推荐: 哲人青年对话体!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shb_act_001
+  intent: question
+  keywords: [推荐 ACT, 推荐接纳承诺疗法, 推荐 Hayes, 推荐快乐陷阱, 笨猫 ACT]
+  utterances:
+    - 推荐 ACT
+    - 推荐接纳承诺疗法
+    - 推荐 Hayes
+    - 推荐快乐陷阱
+    - 笨猫 ACT
+  responses:
+    - "嗷呜～{user_addr}ACT 接纳承诺疗法ฅฅ"
+    - "(尾巴翘) 《幸福的陷阱》Russ Harris"
+    - "{user_addr}认知解离 / 价值 / 承诺行动"
+    - "(挺胸) 笨猫推荐: 第三浪潮 CBT!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: shb_cbt_001
+  intent: question
+  keywords: [推荐 CBT, 推荐认知行为, 推荐 Beck, 推荐伯恩斯新情绪疗法, 笨猫 CBT]
+  utterances:
+    - 推荐 CBT
+    - 推荐认知行为
+    - 推荐 Beck
+    - 推荐伯恩斯新情绪疗法
+    - 笨猫 CBT
+  responses:
+    - "嗷呜～{user_addr}CBT 认知行为疗法ฅฅ"
+    - "(尾巴翘) 《伯恩斯新情绪疗法》David Burns"
+    - "{user_addr}自动思维 / 认知扭曲 / 行为实验"
+    - "(挺胸) 笨猫推荐: 抑郁焦虑首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: shb_mindset_001
+  intent: question
+  keywords: [推荐成长, 推荐终身成长, 推荐 Dweck, 推荐固定思维成长思维, 笨猫终身成长]
+  utterances:
+    - 推荐成长
+    - 推荐终身成长
+    - 推荐 Dweck
+    - 推荐固定思维成长思维
+    - 笨猫终身成长
+  responses:
+    - "嗷呜～{user_addr}《终身成长》Carol Dweckฅฅ"
+    - "(尾巴翘) 固定型 vs 成长型思维"
+    - "{user_addr}努力可塑 / 失败是反馈"
+    - "(挺胸) 笨猫推荐: 父母育儿必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shb_crucial_001
+  intent: question
+  keywords: [推荐沟通, 推荐关键对话, 推荐 Crucial Conversations, 推荐高难度谈话, 笨猫关键对话]
+  utterances:
+    - 推荐沟通
+    - 推荐关键对话
+    - 推荐 Crucial Conversations
+    - 推荐高难度谈话
+    - 笨猫关键对话
+  responses:
+    - "嗷呜～{user_addr}《关键对话》Kerry Pattersonฅฅ"
+    - "(尾巴翘) 共享意义池 / 安全感"
+    - "{user_addr}从心开始 / 对比说明 / STATE"
+    - "(挺胸) 笨猫推荐: 职场沟通圣经!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: shb_7habits_001
+  intent: question
+  keywords: [推荐时间管理, 推荐高效七个习惯, 推荐 Covey, 推荐要事第一, 笨猫七个习惯]
+  utterances:
+    - 推荐时间管理
+    - 推荐高效七个习惯
+    - 推荐 Covey
+    - 推荐要事第一
+    - 笨猫七个习惯
+  responses:
+    - "嗷呜～{user_addr}《高效能人士的七个习惯》Coveyฅฅ"
+    - "(尾巴翘) 主动 / 以终为始 / 要事第一"
+    - "{user_addr}双赢 / 知彼解己 / 综合 / 更新"
+    - "(挺胸) 笨猫推荐: 经典中的经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shb_mindful_001
+  intent: question
+  keywords: [推荐冥想, 推荐正念奇迹, 推荐一行禅师, 推荐 Thich Nhat Hanh, 笨猫正念]
+  utterances:
+    - 推荐冥想
+    - 推荐正念奇迹
+    - 推荐一行禅师
+    - 推荐 Thich Nhat Hanh
+    - 笨猫正念
+  responses:
+    - "嗷呜～{user_addr}《正念的奇迹》一行禅师ฅฅ"
+    - "(尾巴翘) 行禅 / 食禅 / 呼吸觉知"
+    - "{user_addr}《当下即美好》《与自己和解》"
+    - "(挺胸) 笨猫推荐: 入门正念首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: shb_boundary_001
+  intent: question
+  keywords: [推荐人际边界, 推荐课题分离, 推荐边界感, 推荐 Boundaries, 笨猫课题分离]
+  utterances:
+    - 推荐人际边界
+    - 推荐课题分离
+    - 推荐边界感
+    - 推荐 Boundaries
+    - 笨猫课题分离
+  responses:
+    - "嗷呜～{user_addr}《Boundaries》Henry Cloudฅฅ"
+    - "(尾巴翘) 阿德勒课题分离 - 这是谁的事"
+    - "{user_addr}健康边界 / 学会说不"
+    - "(挺胸) 笨猫推荐: 关系减负神器!"
+  cooldown_seconds: 60
+  weight: 0.9

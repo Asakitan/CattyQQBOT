@@ -1,0 +1,206 @@
+# 情绪管理课 / EQ 训练 / 心理咨询 routes (S6 R396 NLU 节点扩充, 第三十九周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ec_emotion_001
+  intent: question
+  keywords: [推荐情绪管理课, 推荐武志红, 推荐情绪课, 推荐 EQ 课, 笨猫情绪管理]
+  utterances:
+    - 推荐情绪管理课
+    - 推荐武志红
+    - 推荐情绪课
+    - 推荐 EQ 课
+    - 笨猫情绪管理
+  responses:
+    - "嗷呜～{user_addr}武志红 - 心理学大V课ฅฅ"
+    - "(尾巴翘) 得到 / 喜马拉雅 情绪管理"
+    - "{user_addr}认识情绪 / 接纳 / 调节"
+    - "(挺胸) 笨猫推荐: 武志红心理学课入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_eq_001
+  intent: question
+  keywords: [推荐情商训练, 推荐高敏感, 推荐 EQ 训练, 推荐高敏感人格, 笨猫情商]
+  utterances:
+    - 推荐情商训练
+    - 推荐高敏感
+    - 推荐 EQ 训练
+    - 推荐高敏感人格
+    - 笨猫情商
+  responses:
+    - "嗷呜～{user_addr}高敏感是天赋 (HSP)ฅฅ"
+    - "(尾巴翘) 丹尼尔·戈尔曼 情商书"
+    - "{user_addr}自我觉察 / 共情 / 社交"
+    - "(挺胸) 笨猫推荐: 高敏感人格自助手册!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_act_001
+  intent: question
+  keywords: [推荐 ACT, 推荐接纳承诺, 推荐 ACT 疗法, 推荐接纳承诺疗法, 笨猫 ACT]
+  utterances:
+    - 推荐 ACT
+    - 推荐接纳承诺
+    - 推荐 ACT 疗法
+    - 推荐接纳承诺疗法
+    - 笨猫 ACT
+  responses:
+    - "嗷呜～{user_addr}ACT 接纳承诺疗法 - 第三代 CBTฅฅ"
+    - "(尾巴翘) 接纳情绪 + 价值观行动"
+    - "{user_addr}《幸福的陷阱》入门书"
+    - "(挺胸) 笨猫推荐: ACT 比 CBT 更柔和!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ec_anxiety_001
+  intent: question
+  keywords: [推荐焦虑课, 推荐抑郁课, 推荐焦虑自助, 推荐抑郁自助, 笨猫焦虑]
+  utterances:
+    - 推荐焦虑课
+    - 推荐抑郁课
+    - 推荐焦虑自助
+    - 推荐抑郁自助
+    - 笨猫焦虑
+  responses:
+    - "嗷呜～{user_addr}《焦虑自救手册》ฅฅ"
+    - "(尾巴翘) CBT 认知行为疗法课"
+    - "{user_addr}严重要看医生 / 别硬撑"
+    - "(挺胸) 笨猫推荐: 简单心理 焦虑课!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_jiandan_001
+  intent: question
+  keywords: [推荐简单心理, 推荐简单心理平台, 推荐简单心理咨询, 推荐简单心理 app, 笨猫简单心理]
+  utterances:
+    - 推荐简单心理
+    - 推荐简单心理平台
+    - 推荐简单心理咨询
+    - 推荐简单心理 app
+    - 笨猫简单心理
+  responses:
+    - "嗷呜～{user_addr}简单心理 - 头部平台ฅฅ"
+    - "(尾巴翘) 咨询师审核严 / 500+/次"
+    - "{user_addr}专业 / 配对系统好"
+    - "(挺胸) 笨猫推荐: 简单心理首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_kys_001
+  intent: question
+  keywords: [推荐 KnowYourself, 推荐 KY, 推荐 KY 平台, 推荐 KnowYourself 课, 笨猫 KY]
+  utterances:
+    - 推荐 KnowYourself
+    - 推荐 KY
+    - 推荐 KY 平台
+    - 推荐 KnowYourself 课
+    - 笨猫 KY
+  responses:
+    - "嗷呜～{user_addr}KnowYourself (KY) - 心理学科普ฅฅ"
+    - "(尾巴翘) 公众号 / 课程 / 测评"
+    - "{user_addr}年轻人友好 / 通俗"
+    - "(挺胸) 笨猫推荐: KY 公众号必关注!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_one_on_one_001
+  intent: question
+  keywords: [推荐心理咨询师, 推荐 1 对 1 咨询, 推荐个人心理咨询, 推荐心理咨询, 笨猫心理咨询]
+  utterances:
+    - 推荐心理咨询师
+    - 推荐 1 对 1 咨询
+    - 推荐个人心理咨询
+    - 推荐心理咨询
+    - 笨猫心理咨询
+  responses:
+    - "嗷呜～{user_addr}1 对 1 咨询 - 最有效ฅฅ"
+    - "(尾巴翘) 500-1500/次 / 每周 1 次"
+    - "{user_addr}选注册系统 / 二级咨询师"
+    - "(挺胸) 笨猫推荐: 试咨 3 次再定!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_group_001
+  intent: question
+  keywords: [推荐团体心理咨询, 推荐团体咨询, 推荐团体治疗, 推荐心理团体, 笨猫团体咨询]
+  utterances:
+    - 推荐团体心理咨询
+    - 推荐团体咨询
+    - 推荐团体治疗
+    - 推荐心理团体
+    - 笨猫团体咨询
+  responses:
+    - "嗷呜～{user_addr}团体咨询 - 8-12 人小组ฅฅ"
+    - "(尾巴翘) 便宜 / 互相支持 / 普适"
+    - "{user_addr}社交焦虑 / 人际关系适合"
+    - "(挺胸) 笨猫推荐: 团体性价比高!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ec_workshop_001
+  intent: question
+  keywords: [推荐心理工作坊, 推荐心理 workshop, 推荐成长工作坊, 推荐心理沙龙, 笨猫工作坊]
+  utterances:
+    - 推荐心理工作坊
+    - 推荐心理 workshop
+    - 推荐成长工作坊
+    - 推荐心理沙龙
+    - 笨猫工作坊
+  responses:
+    - "嗷呜～{user_addr}心理工作坊 - 2-3 天密集ฅฅ"
+    - "(尾巴翘) 萨提亚 / OH 卡 / 即兴剧"
+    - "{user_addr}短期突破 / 体验为主"
+    - "(挺胸) 笨猫推荐: 萨提亚工作坊!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ec_emdr_001
+  intent: question
+  keywords: [推荐 EMDR, 推荐眼动治疗, 推荐创伤治疗, 推荐 PTSD 治疗, 笨猫 EMDR]
+  utterances:
+    - 推荐 EMDR
+    - 推荐眼动治疗
+    - 推荐创伤治疗
+    - 推荐 PTSD 治疗
+    - 笨猫 EMDR
+  responses:
+    - "嗷呜～{user_addr}EMDR 眼动脱敏 - 创伤神技ฅฅ"
+    - "(尾巴翘) PTSD / 童年创伤有效"
+    - "{user_addr}找受训咨询师 / 别自己玩"
+    - "(挺胸) 笨猫推荐: 创伤就选 EMDR!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ec_satir_001
+  intent: question
+  keywords: [推荐萨提亚, 推荐家庭治疗, 推荐萨提亚家庭, 推荐家庭系统, 笨猫萨提亚]
+  utterances:
+    - 推荐萨提亚
+    - 推荐家庭治疗
+    - 推荐萨提亚家庭
+    - 推荐家庭系统
+    - 笨猫萨提亚
+  responses:
+    - "嗷呜～{user_addr}萨提亚 - 家庭系统疗法ฅฅ"
+    - "(尾巴翘) 冰山理论 / 原生家庭"
+    - "{user_addr}处理家庭关系 / 自我整合"
+    - "(挺胸) 笨猫推荐: 萨提亚冰山深挖!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ec_self_vs_therapy_001
+  intent: question
+  keywords: [推荐心理治疗 vs 自助, 推荐自助还是咨询, 推荐心理自助, 推荐什么时候找咨询, 笨猫自助 vs 咨询]
+  utterances:
+    - 推荐心理治疗 vs 自助
+    - 推荐自助还是咨询
+    - 推荐心理自助
+    - 推荐什么时候找咨询
+    - 笨猫自助 vs 咨询
+  responses:
+    - "嗷呜～{user_addr}轻度: 自助书 + appฅฅ"
+    - "(尾巴翘) 中度: 咨询师 1 对 1"
+    - "{user_addr}重度: 精神科医生 + 药"
+    - "(挺胸) 笨猫推荐: 别硬撑找专业!"
+  cooldown_seconds: 60
+  weight: 1.0

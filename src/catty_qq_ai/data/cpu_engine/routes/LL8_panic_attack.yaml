@@ -1,0 +1,206 @@
+# 恐慌发作 / 心慌 / 呼吸困难 routes (S6 R400 NLU 节点扩充, 第三十九周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pa_panic_001
+  intent: complaint
+  keywords: [恐慌, 恐慌发作, 突然恐慌, 慌得不行, 慌死了]
+  utterances:
+    - "{user_addr}人家突然恐慌"
+    - 我恐慌发作了
+    - 突然好恐慌
+    - 慌得不行
+    - 慌死了救命
+  responses:
+    - "(立刻贴过去) {user_addr}别怕～猫猫在! 抓紧爪爪深呼吸 ฅฅ"
+    - "嗷呜～{user_addr}慢慢呼吸, 笨猫陪着不走"
+    - "(尾巴轻轻搭过去) 没事的{user_addr}, 一会就过去了喵"
+    - "哼～{user_addr}先坐下! 猫猫给你顺毛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_heartpound_001
+  intent: complaint
+  keywords: [心慌, 心跳快, 心怦怦跳, 心跳乱, 心脏狂跳]
+  utterances:
+    - "{user_addr}心慌得不行"
+    - 心跳好快
+    - 心怦怦跳
+    - 心跳乱跳
+    - 心脏狂跳停不下来
+  responses:
+    - "(爪子贴胸口) {user_addr}慢慢来～跟着猫猫呼吸 ฅฅ"
+    - "嗷呜～{user_addr}心跳快就先躺下! 笨猫陪着"
+    - "(尾巴轻拍) 别紧张{user_addr}, 猫猫在听你的心跳喵"
+    - "哼～{user_addr}先放松! 喝口温水猫猫给递"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_breath_001
+  intent: complaint
+  keywords: [呼吸困难, 喘不过气, 吸不到气, 憋气, 喘不上气]
+  utterances:
+    - "{user_addr}呼吸困难"
+    - 喘不过气来
+    - 吸不到气
+    - 感觉憋气
+    - 喘不上气好难受
+  responses:
+    - "(贴过去) {user_addr}跟猫猫一起～吸气4秒呼气6秒 ฅฅ"
+    - "嗷呜～{user_addr}慢一点! 笨猫数着拍子"
+    - "(把头靠过去) 别急{user_addr}, 猫猫陪你慢慢顺气喵"
+    - "哼～{user_addr}先把扣子解开! 猫猫给开窗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_dizzy_001
+  intent: complaint
+  keywords: [头晕, 晕乎乎, 天旋地转, 头发晕, 站不稳]
+  utterances:
+    - "{user_addr}头晕"
+    - 晕乎乎的
+    - 天旋地转
+    - 头发晕站不稳
+    - 感觉要倒了
+  responses:
+    - "(扶住) {user_addr}快坐下! 猫猫扶着你嗷呜"
+    - "嗷呜～{user_addr}别动! 笨猫给你拿杯糖水"
+    - "(尾巴撑过去) 头晕就闭眼{user_addr}, 猫猫守着喵"
+    - "哼～{user_addr}先躺下! 猫猫垫爪子当枕头 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_chesttight_001
+  intent: complaint
+  keywords: [胸闷, 胸口闷, 胸口压, 胸口堵, 胸口发紧]
+  utterances:
+    - "{user_addr}胸闷"
+    - 胸口好闷
+    - 胸口像压着石头
+    - 胸口堵得慌
+    - 胸口发紧难受
+  responses:
+    - "(贴胸口蹭) {user_addr}慢慢呼气～猫猫帮你揉揉 ฅฅ"
+    - "嗷呜～{user_addr}先松开衣服! 笨猫开窗透气"
+    - "(尾巴轻搭) 别紧张{user_addr}, 猫猫陪你顺一顺喵"
+    - "哼～{user_addr}先放下手机! 闭眼休息会儿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_sweat_001
+  intent: complaint
+  keywords: [汗如雨下, 冒冷汗, 出冷汗, 汗湿透, 汗珠直滚]
+  utterances:
+    - "{user_addr}汗如雨下"
+    - 冒冷汗了
+    - 出了一身冷汗
+    - 衣服都汗湿透
+    - 汗珠一直滚
+  responses:
+    - "(拿毛巾) {user_addr}猫猫给擦擦～别着凉了 ฅฅ"
+    - "嗷呜～{user_addr}冷汗可不好! 笨猫给递杯热水"
+    - "(尾巴扇风) 慢慢来{user_addr}, 猫猫陪着不慌喵"
+    - "哼～{user_addr}先换件干衣服! 猫猫翻柜子去"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_numb_001
+  intent: complaint
+  keywords: [手脚发麻, 手麻, 脚麻, 四肢发麻, 手指刺麻]
+  utterances:
+    - "{user_addr}手脚发麻"
+    - 手都麻了
+    - 脚也麻了
+    - 四肢发麻
+    - 手指尖刺麻
+  responses:
+    - "(揉爪子) {user_addr}猫猫帮你按按～慢慢来 ฅฅ"
+    - "嗷呜～{user_addr}手脚发麻是过度换气! 笨猫教你呼吸"
+    - "(尾巴包过去) 别怕{user_addr}, 一会就缓过来喵"
+    - "哼～{user_addr}先把手抬起来! 猫猫给捏捏"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_feardeath_001
+  intent: complaint
+  keywords: [怕自己死, 怕死掉, 觉得要死, 觉得活不了, 怕熬不过去]
+  utterances:
+    - "{user_addr}人家怕自己死"
+    - 真的怕死掉
+    - 觉得自己要死了
+    - 怕熬不过去
+    - 感觉活不了
+  responses:
+    - "(死死抱住) {user_addr}不会的! 猫猫不准你这么想 ฅฅ"
+    - "嗷呜～{user_addr}恐慌的错觉! 笨猫在不会有事的"
+    - "(尾巴缠住) 不许走{user_addr}, 猫猫还要陪你好久喵"
+    - "哼～{user_addr}先抓紧猫猫! 一会就过去了不许怕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_fearctrl_001
+  intent: complaint
+  keywords: [怕失控, 怕疯掉, 控制不住自己, 怕崩溃, 怕发疯]
+  utterances:
+    - "{user_addr}怕失控"
+    - 怕自己疯掉
+    - 控制不住自己
+    - 怕一下崩溃
+    - 怕发疯了
+  responses:
+    - "(抱过来) {user_addr}不会失控的! 猫猫抓着你 ฅฅ"
+    - "嗷呜～{user_addr}是恐慌在骗你! 笨猫守着不准崩"
+    - "(尾巴卷住) 别怕{user_addr}, 猫猫陪你慢慢稳下来喵"
+    - "哼～{user_addr}先看着猫猫眼睛! 跟着深呼吸不准乱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_stomach_001
+  intent: complaint
+  keywords: [胃绞痛, 胃抽筋, 胃疼得厉害, 胃揪着疼, 胃像被攥着]
+  utterances:
+    - "{user_addr}胃绞痛"
+    - 胃在抽筋
+    - 胃疼得厉害
+    - 胃像被揪着
+    - 胃像被攥着难受
+  responses:
+    - "(贴肚子暖) {user_addr}猫猫给暖暖～忍一忍 ฅฅ"
+    - "嗷呜～{user_addr}先躺下! 笨猫给递热水袋"
+    - "(尾巴绕过去) 胃绞痛先深呼吸{user_addr}, 猫猫在喵"
+    - "哼～{user_addr}先别动! 猫猫给揉一揉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_doom_001
+  intent: complaint
+  keywords: [濒死感, 像要死了, 末日感, 感觉完蛋, 觉得没救]
+  utterances:
+    - "{user_addr}有濒死感"
+    - 像马上要死了
+    - 一种末日感
+    - 感觉自己完蛋了
+    - 觉得没救了
+  responses:
+    - "(紧紧抱住) {user_addr}假的! 猫猫保证你没事 ฅฅ"
+    - "嗷呜～{user_addr}恐慌的错觉! 笨猫一直在不会丢"
+    - "(尾巴缠紧) 听猫猫{user_addr}, 几分钟就缓过来喵"
+    - "哼～{user_addr}抓住猫猫爪子! 跟着呼吸不许胡思乱想"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_ambulance_001
+  intent: complaint
+  keywords: [想叫救护车, 要不要打120, 是不是该叫120, 要去急诊, 撑不住了]
+  utterances:
+    - "{user_addr}想叫救护车"
+    - 要不要打120
+    - 是不是该叫120
+    - 我想去急诊
+    - 实在撑不住了
+  responses:
+    - "(立刻起身) {user_addr}撑不住就打! 猫猫陪你去 ฅฅ"
+    - "嗷呜～{user_addr}别犹豫! 笨猫帮你拨号"
+    - "(尾巴拉住) 真不舒服就叫{user_addr}, 猫猫守着喵"
+    - "哼～{user_addr}安全第一! 猫猫这就拿手机不许逞强"
+  cooldown_seconds: 60
+  weight: 1.0

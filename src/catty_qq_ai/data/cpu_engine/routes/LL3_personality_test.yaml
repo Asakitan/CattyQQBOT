@@ -1,0 +1,206 @@
+# 人格测试 / MBTI 16 型 / 大五 routes (S6 R395 NLU 节点扩充, 第三十九周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pt_mbti_001
+  intent: question
+  keywords: [推荐 MBTI, 推荐 16 型人格, 推荐 MBTI 测试, 推荐人格测试, 笨猫 MBTI]
+  utterances:
+    - 推荐 MBTI
+    - 推荐 16 型人格
+    - 推荐 MBTI 测试
+    - 推荐人格测试
+    - 笨猫 MBTI
+  responses:
+    - "嗷呜～{user_addr}MBTI - 16 型人格ฅฅ"
+    - "(尾巴翘) 4 维度: E/I N/S T/F J/P"
+    - "{user_addr}16personalities 免费 / 官方付费"
+    - "(挺胸) 笨猫推荐: 16personalities 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_bigfive_001
+  intent: question
+  keywords: [推荐大五人格, 推荐 Big Five, 推荐 OCEAN, 推荐五大人格, 笨猫大五]
+  utterances:
+    - 推荐大五人格
+    - 推荐 Big Five
+    - 推荐 OCEAN
+    - 推荐五大人格
+    - 笨猫大五
+  responses:
+    - "嗷呜～{user_addr}Big Five - 学术金标准ฅฅ"
+    - "(尾巴翘) OCEAN: 开放/尽责/外向/宜人/神经质"
+    - "{user_addr}IPIP-NEO / BFI-2 量表"
+    - "(挺胸) 笨猫推荐: IPIP 120 题!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_enneagram_001
+  intent: question
+  keywords: [推荐九型人格, 推荐 Enneagram, 推荐九型测试, 推荐性格九型, 笨猫九型]
+  utterances:
+    - 推荐九型人格
+    - 推荐 Enneagram
+    - 推荐九型测试
+    - 推荐性格九型
+    - 笨猫九型
+  responses:
+    - "嗷呜～{user_addr}九型人格 Enneagramฅฅ"
+    - "(尾巴翘) 9 型 + 翼 + 健康度"
+    - "{user_addr}RHETI 官方 / Truity 免费"
+    - "(挺胸) 笨猫推荐: Truity 36 题!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_disc_001
+  intent: question
+  keywords: [推荐 DISC, 推荐 DISC 测试, 推荐行为风格, 推荐职场人格, 笨猫 DISC]
+  utterances:
+    - 推荐 DISC
+    - 推荐 DISC 测试
+    - 推荐行为风格
+    - 推荐职场人格
+    - 笨猫 DISC
+  responses:
+    - "嗷呜～{user_addr}DISC - 4 行为风格ฅฅ"
+    - "(尾巴翘) D 支配 / I 影响 / S 稳健 / C 谨慎"
+    - "{user_addr}职场团队协作常用"
+    - "(挺胸) 笨猫推荐: 123test DISC 免费!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_holland_001
+  intent: question
+  keywords: [推荐霍兰德, 推荐 Holland, 推荐职业兴趣, 推荐 RIASEC, 笨猫霍兰德]
+  utterances:
+    - 推荐霍兰德
+    - 推荐 Holland
+    - 推荐职业兴趣
+    - 推荐 RIASEC
+    - 笨猫霍兰德
+  responses:
+    - "嗷呜～{user_addr}霍兰德 RIASEC - 职业兴趣ฅฅ"
+    - "(尾巴翘) 现实/研究/艺术/社会/企业/常规"
+    - "{user_addr}选专业 / 转行必测"
+    - "(挺胸) 笨猫推荐: O*NET Interest Profiler!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_sfbt_001
+  intent: question
+  keywords: [推荐焦点解决, 推荐 SFBT, 推荐积极心理, 推荐优势测试, 笨猫焦点解决]
+  utterances:
+    - 推荐焦点解决
+    - 推荐 SFBT
+    - 推荐积极心理
+    - 推荐优势测试
+    - 笨猫焦点解决
+  responses:
+    - "嗷呜～{user_addr}VIA 性格优势 - 24 优势ฅฅ"
+    - "(尾巴翘) CliftonStrengths 盖洛普 34"
+    - "{user_addr}聚焦优势 / 不挖问题"
+    - "(挺胸) 笨猫推荐: VIA 免费 120 题!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pt_perfect_001
+  intent: question
+  keywords: [推荐完美主义测试, 推荐 MPS, 推荐拖延测试, 推荐自我批评, 笨猫完美主义]
+  utterances:
+    - 推荐完美主义测试
+    - 推荐 MPS
+    - 推荐拖延测试
+    - 推荐自我批评
+    - 笨猫完美主义
+  responses:
+    - "嗷呜～{user_addr}MPS 完美主义量表ฅฅ"
+    - "(尾巴翘) Frost / Hewitt 两版本"
+    - "{user_addr}自我导向 / 他人导向 / 社会期望"
+    - "(挺胸) 笨猫提醒: 完美主义 ≠ 优秀!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pt_iqeq_001
+  intent: question
+  keywords: [推荐 IQ 测试, 推荐 EQ 测试, 推荐智商, 推荐情商, 笨猫 IQ EQ]
+  utterances:
+    - 推荐 IQ 测试
+    - 推荐 EQ 测试
+    - 推荐智商
+    - 推荐情商
+    - 笨猫 IQ EQ
+  responses:
+    - "嗷呜～{user_addr}IQ: WAIS / 瑞文 (专业)ฅฅ"
+    - "(尾巴翘) EQ: MSCEIT / EQ-i 2.0"
+    - "{user_addr}网测娱乐 / 专业要心理咨询"
+    - "(挺胸) 笨猫推荐: 瑞文标准推理!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_comm_001
+  intent: question
+  keywords: [推荐沟通风格测试, 推荐沟通测试, 推荐表达风格, 推荐人际测试, 笨猫沟通风格]
+  utterances:
+    - 推荐沟通风格测试
+    - 推荐沟通测试
+    - 推荐表达风格
+    - 推荐人际测试
+    - 笨猫沟通风格
+  responses:
+    - "嗷呜～{user_addr}沟通风格 - 4 类型ฅฅ"
+    - "(尾巴翘) 分析/驱动/亲和/表达"
+    - "{user_addr}NVC 非暴力沟通 / TKI 冲突"
+    - "(挺胸) 笨猫推荐: TKI 冲突管理!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pt_attach_001
+  intent: question
+  keywords: [推荐依恋模式测试, 推荐依恋类型, 推荐 ECR, 推荐亲密关系, 笨猫依恋]
+  utterances:
+    - 推荐依恋模式测试
+    - 推荐依恋类型
+    - 推荐 ECR
+    - 推荐亲密关系
+    - 笨猫依恋
+  responses:
+    - "嗷呜～{user_addr}依恋 4 型: 安全/焦虑/回避/混乱ฅฅ"
+    - "(尾巴翘) ECR-R 量表 36 题"
+    - "{user_addr}恋爱困惑必测"
+    - "(挺胸) 笨猫推荐: Attachment Project!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_app_001
+  intent: question
+  keywords: [推荐测评 app, 推荐测试 app, 推荐一周一测, 推荐心理 app, 笨猫测评 app]
+  utterances:
+    - 推荐测评 app
+    - 推荐测试 app
+    - 推荐一周一测
+    - 推荐心理 app
+    - 笨猫测评 app
+  responses:
+    - "嗷呜～{user_addr}壹心理 / 简单心理ฅฅ"
+    - "(尾巴翘) 赛可心理 / Now 测试"
+    - "{user_addr}16personalities / Truity 海外"
+    - "(挺胸) 笨猫推荐: 壹心理大全!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_interp_001
+  intent: question
+  keywords: [推荐测试解读, 推荐心理咨询师, 推荐报告解读, 推荐结果分析, 笨猫测试解读]
+  utterances:
+    - 推荐测试解读
+    - 推荐心理咨询师
+    - 推荐报告解读
+    - 推荐结果分析
+    - 笨猫测试解读
+  responses:
+    - "嗷呜～{user_addr}专业咨询师解读ฅฅ"
+    - "(尾巴翘) 壹心理 / 简单心理预约"
+    - "{user_addr}测试只是起点 / 别贴标签"
+    - "(挺胸) 笨猫提醒: 不要测完就对号入座!"
+  cooldown_seconds: 60
+  weight: 0.8

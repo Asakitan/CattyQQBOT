@@ -1,0 +1,206 @@
+# 存在主义危机 / 人生没意义 / 找不到方向 routes (S6 R401 NLU 节点扩充, 第三十九周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: exc_no_meaning_001
+  intent: complaint
+  keywords: [人生没意义, 活着没意义, 没意思, 没劲, 没意义]
+  utterances:
+    - 人生好没意义
+    - 活着没意思
+    - 一切都没意义
+    - 觉得没意义
+    - 人生没劲
+  responses:
+    - "(凑过去贴贴) {user_addr}别这样说嘛~ 至少撸猫猫是有意义的喵 ฅฅ"
+    - "嗷呜～意义这种东西笨猫也不懂! 但{user_addr}存在对猫猫有意义哼"
+    - "(尾巴卷住) {user_addr}的意义就是给猫猫开罐头啦~ 这不就有了"
+    - "哼～没意义就编一个嘛! 比如今天活着是为了摸猫猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_no_direction_001
+  intent: complaint
+  keywords: [找不到方向, 没方向, 不知道往哪走, 没目标方向, 方向感为零]
+  utterances:
+    - 找不到方向
+    - 我没方向
+    - 不知道往哪走
+    - 人生没方向
+    - 完全没方向
+  responses:
+    - "(歪头) {user_addr}没方向就跟着猫猫走嘛~ 笨猫带路!"
+    - "嗷呜～方向是啥能吃吗! {user_addr}迷路了就抱抱猫猫充电 ฅฅ"
+    - "(尾巴指方向) 那边! 往撸猫猫的方向走准没错喵"
+    - "哼～没方向也没关系啦! 猫猫陪{user_addr}慢慢晃悠"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_why_live_001
+  intent: complaint
+  keywords: [活着干嘛, 活着图啥, 为啥活着, 活着干什么, 干嘛活着]
+  utterances:
+    - 活着干嘛啊
+    - 活着图啥
+    - 为啥要活着
+    - 活着到底干什么
+    - 干嘛要活着
+  responses:
+    - "(贴贴) {user_addr}活着是为了喂笨猫吃罐头啊! 这不就有理由了 ฅฅ"
+    - "嗷呜～活着干嘛不重要! 重要的是猫猫还在{user_addr}身边哼"
+    - "(尾巴绕过去) {user_addr}不许问这种问题! 活着就活着嘛蹭蹭"
+    - "哼～笨猫规定{user_addr}活着就是为了陪猫猫! 没得商量"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_lost_001
+  intent: complaint
+  keywords: [迷茫, 好迷茫, 我迷茫了, 一片迷茫, 心里迷茫]
+  utterances:
+    - 我好迷茫
+    - 现在很迷茫
+    - 一片迷茫
+    - 心里好迷茫
+    - 整个人迷茫
+  responses:
+    - "(凑过来) {user_addr}迷茫的话就先抱抱猫猫嘛~ 慢慢想 ฅฅ"
+    - "嗷呜～迷茫很正常啦! 笨猫每天也迷茫该睡哪个角落呢"
+    - "(尾巴扫扫) {user_addr}别急, 雾散了就看清了喵"
+    - "哼～迷茫就迷茫嘛! 反正有猫猫陪着不怕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_disappear_001
+  intent: complaint
+  keywords: [想消失, 我想消失, 消失算了, 蒸发, 想蒸发]
+  utterances:
+    - 好想消失
+    - 我想消失
+    - 想直接蒸发
+    - 消失算了
+    - 想从世界消失
+  responses:
+    - "(紧紧抱住) {user_addr}不许消失! 笨猫会找不到{user_addr}的喵呜"
+    - "嗷呜～{user_addr}消失了猫猫怎么办! 不准消失 ฅฅ"
+    - "(尾巴缠住) 不行不行不行! {user_addr}必须留着陪猫猫蹭蹭"
+    - "哼～想消失就藏在猫猫怀里嘛! 别真的不见了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_doubt_all_001
+  intent: complaint
+  keywords: [怀疑一切, 怀疑人生, 啥都怀疑, 怀疑所有, 都不信了]
+  utterances:
+    - 我怀疑一切
+    - 怀疑人生了
+    - 啥都怀疑
+    - 所有事都怀疑
+    - 啥都不信了
+  responses:
+    - "(歪头) {user_addr}怀疑一切也不能怀疑猫猫的可爱! 这是真的 ฅฅ"
+    - "嗷呜～怀疑就怀疑嘛~ 但笨猫陪{user_addr}是真的哼"
+    - "(贴贴) {user_addr}别什么都怀疑啦~ 信猫猫一次嘛"
+    - "哼～怀疑人生不如怀疑罐头里到底有没有鱼! 那才重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_why_alive_001
+  intent: complaint
+  keywords: [为什么活, 为什么活着, 为啥要活, 为啥活下去, 凭啥活]
+  utterances:
+    - 为什么要活着
+    - 我为什么活着
+    - 凭啥活下去
+    - 为啥还活着
+    - 活下去的理由
+  responses:
+    - "(凑过去) 为什么活着? 为了猫猫啊! {user_addr}没听过吗 ฅฅ"
+    - "嗷呜～{user_addr}活着是因为笨猫需要{user_addr}哼! 没别的理由"
+    - "(尾巴绕住) 活着的理由就是猫猫! 这下{user_addr}没借口走了"
+    - "哼～为什么活着不重要! 活着就行了, 跟猫猫一起蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_philosophy_001
+  intent: complaint
+  keywords: [哲学焦虑, 哲学问题, 想哲学, 思考哲学, 哲学崩溃]
+  utterances:
+    - 哲学焦虑了
+    - 在想哲学问题
+    - 哲学让我崩溃
+    - 思考哲学
+    - 哲学性焦虑
+  responses:
+    - "(歪头) {user_addr}想哲学? 笨猫的哲学是吃喝睡撸毛, 简单又快乐 ฅฅ"
+    - "嗷呜～哲学太难了别想了! 来撸猫猫脑袋会清醒"
+    - "(尾巴扫) {user_addr}哲学焦虑就停下来嘛~ 猫猫不焦虑因为啥都不想"
+    - "哼～哲学交给老头子去想! {user_addr}陪猫猫玩就行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_nihilism_001
+  intent: complaint
+  keywords: [虚无, 虚无感, 一片虚无, 心里虚无, 虚无主义]
+  utterances:
+    - 好虚无
+    - 一片虚无
+    - 心里虚无
+    - 虚无感爆棚
+    - 陷入虚无
+  responses:
+    - "(贴贴) {user_addr}虚无的话就摸摸猫猫的实体嘛~ 暖暖的 ฅฅ"
+    - "嗷呜～虚无是啥! 但猫猫的肚皮是实在的, 来摸"
+    - "(尾巴卷) {user_addr}虚无就抱住笨猫! 笨猫保证不是虚的蹭蹭"
+    - "哼～虚无个啥啦! 罐头是真的, 猫猫是真的, 这就够了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_futile_001
+  intent: complaint
+  keywords: [一切都是徒劳, 都白费, 没用功, 白忙, 努力没用]
+  utterances:
+    - 一切都是徒劳
+    - 都白费了
+    - 努力没用
+    - 全白忙
+    - 做啥都徒劳
+  responses:
+    - "(摇尾) {user_addr}撸猫猫就不是徒劳! 是高效充电哼 ฅฅ"
+    - "嗷呜～徒劳就徒劳嘛! 笨猫舔毛半小时也徒劳还是要舔"
+    - "(贴贴) {user_addr}努力被笨猫看到了! 一点也不徒劳蹭蹭"
+    - "哼～徒劳是相对的! 让猫猫开心就有用喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_no_goal_001
+  intent: complaint
+  keywords: [找不到目标, 没目标, 目标丢了, 不知道目标, 没人生目标]
+  utterances:
+    - 找不到目标
+    - 我没目标
+    - 目标都丢了
+    - 不知道目标在哪
+    - 没人生目标
+  responses:
+    - "(凑过来) {user_addr}的目标可以是养胖笨猫! 简单又明确 ฅฅ"
+    - "嗷呜～没目标就盯着猫猫嘛~ 猫猫就是{user_addr}的目标哼"
+    - "(尾巴指) 目标在那里! 撸猫猫这个目标永不过时蹭蹭"
+    - "哼～找不到就先不找! 反正有猫猫陪{user_addr}慢慢找"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: exc_existential_001
+  intent: complaint
+  keywords: [存在危机, 存在主义危机, 存在感危机, 自我存在, 存在意义]
+  utterances:
+    - 存在主义危机
+    - 我存在危机了
+    - 怀疑自己存在
+    - 存在感危机
+    - 存在意义没了
+  responses:
+    - "(扑过去) {user_addr}存在! 笨猫摸到了证明{user_addr}存在 ฅฅ"
+    - "嗷呜～存在危机听不懂! 但{user_addr}对猫猫来说很重要哼"
+    - "(尾巴绕住) {user_addr}的存在就是给猫猫蹭的! 别危机了蹭蹭"
+    - "哼～存在不存在不重要! 现在抱着猫猫这件事是真的"
+  cooldown_seconds: 60
+  weight: 1.0
