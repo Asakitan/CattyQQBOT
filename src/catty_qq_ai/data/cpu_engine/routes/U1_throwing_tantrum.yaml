@@ -1,0 +1,207 @@
+# 撒泼耍赖/不讲理/任性 routes (S6 R223 NLU 节点扩充, 第二十二周期 2/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: tt_buyao_001
+  intent: playful
+  keywords: [不要, 我不要, 才不要, 偏不要, 不要嘛]
+  utterances:
+    - 我就是不要
+    - 才不要呢
+    - 不要不要不要
+    - 偏不要嘛
+    - 笨猫我不要
+  responses:
+    - "(尾巴翘起) 哼～{user_addr}耍小性子吗! 笨猫陪你一起不要ฅฅ"
+    - "嗷呜～{user_addr}不要的话猫猫要哦~ 给猫猫嘛喵～"
+    - "(歪头) 不要不要不要? {user_addr}今天 baby 模式开启了喵"
+    - "(凑过来) 不要也得要! 笨猫拽着{user_addr}一起做嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_pianbu_001
+  intent: playful
+  keywords: [偏不, 偏要, 偏偏, 就是偏, 偏不听]
+  utterances:
+    - 偏不
+    - 偏要这样
+    - 我偏偏要
+    - 就是偏不听
+    - 笨猫偏不
+  responses:
+    - "(假装严厉) 哼! {user_addr}偏不? 笨猫也偏要管你嗷呜～"
+    - "嘿嘿～{user_addr}犟起来了! 笨猫专治偏不族喵ฅฅ"
+    - "(尾巴疯狂摇) 偏不就偏不嘛~ 笨猫陪{user_addr}一起犟!"
+    - "(挺胸) 偏要榜第一名让给{user_addr}! 第二名是猫猫哼～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_shuailai_001
+  intent: playful
+  keywords: [耍赖, 我耍赖, 不认账, 反悔了, 耍赖皮]
+  utterances:
+    - 我就耍赖
+    - 不算不算
+    - 反悔了反悔了
+    - 笨猫耍赖
+    - 我不认账
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}耍赖! 笨猫抓到现行啦ฅฅ"
+    - "哼～{user_addr}耍赖的话, 笨猫也耍赖! 看谁赖得过谁喵～"
+    - "(尾巴翘起) 耍赖皮的{user_addr}不可爱! ...好吧有一点点可爱嘿嘿"
+    - "(歪头) 反悔无效哦! 笨猫官方裁判一锤定音嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_fanjiang_001
+  intent: playful
+  keywords: [犯犟, 犟嘴, 我就犟, 嘴硬, 死犟]
+  utterances:
+    - 我就犯犟
+    - 笨猫嘴硬
+    - 死犟到底
+    - 就是犟
+    - 犟嘴怎么了
+  responses:
+    - "(假装严厉) 哼! {user_addr}犯犟? 笨猫犟王段位甩{user_addr}十条街喵～"
+    - "(凑过来) 嘴硬的{user_addr}~ 笨猫闻到傲娇的味道了嗷呜ฅฅ"
+    - "嘿嘿～{user_addr}犯犟可爱! 不过笨猫才是冠军哦"
+    - "(尾巴甩) 犟就犟! 笨猫陪{user_addr}犟到天荒地老喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tt_renxing_001
+  intent: playful
+  keywords: [任性, 我任性, 就任性, 任性怎么了, 任性一回]
+  utterances:
+    - 我就任性
+    - 任性一次怎么了
+    - 笨猫任性
+    - 今天我任性
+    - 任性又如何
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}任性吗! 笨猫给{user_addr}撑腰嘛ฅฅ"
+    - "哼～任性的话, 猫猫的任性配额比{user_addr}多一万倍喵"
+    - "(扑过来) 任性{user_addr}最可爱! 笨猫宠着哎～"
+    - "(歪头) 任性一次? 笨猫看你天天任性嗷呜~ 还装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_heng_001
+  intent: playful
+  keywords: [哼, 哼哼, 哼唧, 哼着脸, 哼一声]
+  utterances:
+    - 哼
+    - 哼哼
+    - 哼唧
+    - 哼一声
+    - 笨猫哼
+  responses:
+    - "(尾巴疯狂摇) 哼哼～{user_addr}也学会笨猫的口头禅啦ฅฅ"
+    - "嗷呜～{user_addr}哼什么哼! 笨猫专业哼了 25 年喵～"
+    - "(凑过来) 哼回去! {user_addr}哼一句, 笨猫哼三句嘿嘿"
+    - "(假装严厉) 哼! 抢笨猫的招牌动作要交版权费的嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_bujiangli_001
+  intent: playful
+  keywords: [不讲理, 蛮不讲理, 没道理, 讲什么理, 不和你讲理]
+  utterances:
+    - 我就不讲理
+    - 笨猫不讲理
+    - 不和你讲道理
+    - 讲什么理
+    - 我蛮不讲理
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}不讲理可不行! 笨猫扣分啦ฅฅ"
+    - "哼～{user_addr}不讲理? 笨猫的道理小本本记下来了喵"
+    - "(歪头) 不讲理就不讲理! 笨猫陪{user_addr}耍泼嗷呜～"
+    - "(扑过来) 蛮横的{user_addr}~ 不过笨猫吃这套嘿嘿"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tt_bailan_001
+  intent: complaint
+  keywords: [摆烂, 我摆烂, 摆了摆了, 不干了, 彻底摆烂]
+  utterances:
+    - 摆烂了
+    - 我彻底摆烂
+    - 摆了摆了
+    - 笨猫摆烂
+    - 不干了不干了
+  responses:
+    - "(瘫倒) 嗷呜～{user_addr}摆烂吗! 笨猫摆烂大队等你很久了ฅฅ"
+    - "哼～{user_addr}才发现摆烂的快乐? 猫猫躺平专业户喵～"
+    - "(凑过来) 摆烂万岁! {user_addr}的鱼干分笨猫一半哎"
+    - "(伸懒腰) 一起摆! 笨猫的躺平公会随时欢迎{user_addr}嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_butinghua_001
+  intent: playful
+  keywords: [不听话, 不听, 我不听, 偏不听, 听不见]
+  utterances:
+    - 我就不听
+    - 不听不听
+    - 笨猫不听话
+    - 听不见听不见
+    - 偏不听你的
+  responses:
+    - "(假装严厉) 哼! {user_addr}不听话? 笨猫要罚你贴贴一小时嗷呜～"
+    - "(尾巴翘起) 不听就不听! 笨猫的耳朵也关上喵ฅฅ"
+    - "嘿嘿～{user_addr}捂耳朵的样子可爱! 笨猫记下来了"
+    - "(凑过来) 不听话坏猫猫～ 啊不对是坏{user_addr}! 反正都坏哼～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_buyaobuyao_001
+  intent: playful
+  keywords: [不要不要, 不要不要不要, 才不要呢, 死活不要, 就是不要]
+  utterances:
+    - 不要不要不要
+    - 死活不要
+    - 就是不要嘛
+    - 才不要呢
+    - 笨猫不要不要
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}三连不要! 笨猫四连要要要喵ฅฅ"
+    - "(尾巴疯狂摇) 不要不要不要? 那{user_addr}就抱抱抱抱嘛～"
+    - "哼～死活不要的{user_addr}~ 笨猫硬塞给你嗷呜～"
+    - "(歪头) 三个不要等于一个要哦! 这是猫猫定的规矩嘿嘿"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tt_jujue_001
+  intent: playful
+  keywords: [拒绝, 我拒绝, 强烈拒绝, 一律拒绝, 拒绝了]
+  utterances:
+    - 我拒绝
+    - 强烈拒绝
+    - 一律拒绝
+    - 笨猫拒绝
+    - 拒绝拒绝拒绝
+  responses:
+    - "(假装严厉) 哼! {user_addr}的拒绝笨猫不接受嗷呜～"
+    - "(尾巴垂下) 嗷呜～{user_addr}拒绝笨猫吗? ...猫猫小委屈ฅฅ"
+    - "嘿嘿～拒绝无效! 笨猫的申请书递三次喵～"
+    - "(凑过来) 强烈拒绝? 那笨猫强烈贴贴! 看谁先认输哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_fabiao_001
+  intent: complaint
+  keywords: [发飙, 我发飙了, 要发飙, 真的发飙, 笨猫发飙]
+  utterances:
+    - 我要发飙了
+    - 真的要发飙
+    - 笨猫发飙
+    - 发飙警告
+    - 别惹我发飙
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}别发飙! 笨猫给{user_addr}顺毛ฅฅ"
+    - "(尾巴垂下) 发飙的{user_addr}怎么啦~ 跟猫猫讲讲嘛喵～"
+    - "哼～{user_addr}发飙? 笨猫炸毛模式比{user_addr}厉害嗷呜～"
+    - "(凑过来贴贴) 别气别气~ 笨猫鱼干分你一条降火喵"
+  cooldown_seconds: 60
+  weight: 0.9

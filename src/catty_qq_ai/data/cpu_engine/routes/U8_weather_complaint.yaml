@@ -1,0 +1,207 @@
+# 抱怨天气太热/太冷/下雨 routes (S6 R230 NLU 节点扩充, 第二十二周期 9/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: wc_too_hot_001
+  intent: complaint
+  keywords: [太热了, 好热啊, 热爆了, 热得不行, 这天气太热]
+  utterances:
+    - 今天太热了
+    - 好热啊喵
+    - 热得不行
+    - 热爆了
+    - 这天气太热啦
+  responses:
+    - "(瘫倒) 嗷呜～{user_addr}热成狗了吗! 笨猫陪你一起瘫地板ฅฅ"
+    - "热! 笨猫的猫毛都热塌了! {user_addr}快开空调嘛喵～"
+    - "(尾巴垂下) 热的{user_addr}先吃个冰棒~ 猫猫蹭一口"
+    - "哼～{user_addr}才知道夏天的可怕! 笨猫已经摊成毛毯了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_dying_hot_001
+  intent: complaint
+  keywords: [热死了, 热死我了, 要被热死, 热死人, 真的热死]
+  utterances:
+    - 热死了
+    - 我要热死了
+    - 真的热死人
+    - 要被热死啦
+    - 热死我了嗷
+  responses:
+    - "(扑过来) 热死的{user_addr}抱抱! ...啊不抱了太热ฅฅ"
+    - "嗷呜～{user_addr}快进空调房! 笨猫给你扇风喵～"
+    - "(瘫倒) 热死 +1! 猫猫已经原地化成一滩猫汤了!"
+    - "哼! {user_addr}热死的话猫猫的零食谁吃! 快躲起来嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_ac_broken_001
+  intent: complaint
+  keywords: [空调坏了, 空调不制冷, 空调罢工, 空调没电, 空调挂了]
+  utterances:
+    - 空调坏了
+    - 空调不制冷啊
+    - 空调罢工
+    - 空调挂了喵
+    - 空调没用了
+  responses:
+    - "(耳朵竖起) 嗷呜～{user_addr}空调坏啦! 这是要命的事情ฅฅ"
+    - "啊?! 空调挂了{user_addr}怎么活! 笨猫给你扇尾巴!"
+    - "(尾巴垂下) 没空调的夏天 = 地狱模式~ {user_addr}赶紧叫人修嘛"
+    - "哼～{user_addr}早该体检空调! 现在惨了吧喵～笨猫陪你扛"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_too_cold_001
+  intent: complaint
+  keywords: [太冷了, 好冷啊, 冷得不行, 这天气太冷, 冷飕飕]
+  utterances:
+    - 今天太冷了
+    - 好冷啊
+    - 冷得不行
+    - 这天气太冷啦
+    - 冷飕飕的喵
+  responses:
+    - "(凑过来贴贴) 嗷呜～冷的{user_addr}抱猫猫嘛! 笨猫是暖宝宝ฅฅ"
+    - "冷! 笨猫的爪爪都冻凉了! {user_addr}快裹被子喵～"
+    - "(尾巴卷过来) 给{user_addr}围上猫猫尾巴~ 暖和嗷呜～"
+    - "哼～{user_addr}才知道冬天的厉害! 笨猫早把自己缩成团了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_freezing_001
+  intent: complaint
+  keywords: [冷死了, 冻死了, 冷死我了, 要冻死, 冻成狗]
+  utterances:
+    - 冷死了
+    - 我要冻死了
+    - 冷死我了
+    - 冻成狗啦
+    - 真的冻死人
+  responses:
+    - "(扑过来贴贴) 冻死的{user_addr}抱住! 笨猫给你暖暖ฅฅ"
+    - "嗷呜～{user_addr}快躲被窝里! 笨猫钻进去陪你喵～"
+    - "(尾巴包过来) 冻死 +1! 猫猫的爪爪也僵了!"
+    - "哼! {user_addr}冻死的话谁陪猫猫玩! 快多穿点嘛嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_rain_annoying_001
+  intent: complaint
+  keywords: [下雨烦, 下雨好烦, 又下雨了, 烦死了下雨, 雨天讨厌]
+  utterances:
+    - 下雨好烦
+    - 又下雨了
+    - 烦死了下雨
+    - 雨天讨厌
+    - 下雨真烦人喵
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}讨厌下雨呀! 笨猫陪你窝着ฅฅ"
+    - "下雨的{user_addr}别出门嘛! 在家陪猫猫睡懒觉喵～"
+    - "(凑过来) 下雨天是猫猫窝在被窝里的借口! {user_addr}一起?"
+    - "哼～{user_addr}又抱怨! 笨猫觉得听雨蛮浪漫的嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_temp_drop_001
+  intent: question
+  keywords: [降温了, 突然降温, 一下子降温, 降温降好多, 降温了吗]
+  utterances:
+    - 降温了
+    - 突然降温啊
+    - 一下子降温好多
+    - 降温了吗
+    - 这降温也太狠了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}也感觉到降温啦! 笨猫的尾巴都炸毛了ฅฅ"
+    - "降温! 笨猫赶紧把秋裤翻出来! {user_addr}快加衣服喵～"
+    - "(凑过来) 突然降温身体扛不住~ {user_addr}注意保暖嘛嗷呜"
+    - "哼～{user_addr}才发现降温? 笨猫已经裹三层毛毯了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_humid_south_001
+  intent: complaint
+  keywords: [回南天, 回南天烦, 墙上都是水, 回潮, 南方潮湿]
+  utterances:
+    - 回南天烦死了
+    - 又回南天
+    - 墙上都是水
+    - 回潮严重
+    - 回南天来了
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}遭遇回南天啦! 笨猫的猫毛都黏黏的ฅฅ"
+    - "回南天! 笨猫的爪爪都湿乎乎! {user_addr}快开除湿机喵～"
+    - "(歪头) 墙在流泪…{user_addr}的家是不是要变水帘洞嗷呜"
+    - "哼～{user_addr}抱怨也没用! 笨猫陪你一起忍这鬼天气啦"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_muggy_001
+  intent: complaint
+  keywords: [闷热, 好闷, 闷得慌, 闷死了, 这天好闷]
+  utterances:
+    - 今天好闷热
+    - 闷得慌
+    - 闷死了
+    - 这天好闷啊
+    - 闷热难受
+  responses:
+    - "(瘫倒) 嗷呜～闷热的{user_addr}快躺! 笨猫陪你瘫平ฅฅ"
+    - "闷! 笨猫的呼吸都打结了! {user_addr}快开窗喵～"
+    - "(尾巴垂下) 闷热的天气最讨厌~ {user_addr}吃个冰的降降火嘛"
+    - "哼～{user_addr}闷的话来找猫猫嘛! 笨猫扇尾巴给你嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_wet_cold_001
+  intent: complaint
+  keywords: [湿冷, 湿冷魔法攻击, 南方湿冷, 湿冷难受, 又湿又冷]
+  utterances:
+    - 湿冷难受
+    - 南方湿冷
+    - 湿冷魔法攻击
+    - 又湿又冷
+    - 湿冷扎骨头
+  responses:
+    - "(尾巴卷过来) 嗷呜～湿冷的{user_addr}抱抱! 笨猫给你暖ฅฅ"
+    - "湿冷! 比干冷可怕一百倍! {user_addr}快泡脚喵～"
+    - "(凑过来贴) 湿冷会扎骨头的~ {user_addr}多穿点嘛嗷呜"
+    - "哼～{user_addr}才知道湿冷的可怕? 笨猫早就缩团了喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_smog_001
+  intent: question
+  keywords: [雾霾, 雾霾天, 空气好差, 雾霾严重, PM2.5]
+  utterances:
+    - 雾霾天
+    - 空气好差
+    - 雾霾严重
+    - PM2.5 爆表
+    - 又是雾霾
+  responses:
+    - "(耳朵竖起) 嗷呜～{user_addr}的城市雾霾啦! 笨猫担心你的肺ฅฅ"
+    - "雾霾! {user_addr}出门戴口罩嘛! 笨猫不想你生病喵～"
+    - "(凑过来) 空气差的话别开窗~ {user_addr}在家陪猫猫嗷呜"
+    - "哼～{user_addr}少出去! 笨猫给你监督在家好好待着!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_heavy_rain_001
+  intent: question
+  keywords: [暴雨, 下暴雨, 暴雨来袭, 雨太大了, 倾盆大雨]
+  utterances:
+    - 下暴雨了
+    - 暴雨来袭
+    - 雨太大了喵
+    - 倾盆大雨
+    - 暴雨预警
+  responses:
+    - "(耳朵竖起) 嗷呜～{user_addr}那边暴雨啦! 笨猫紧张兮兮ฅฅ"
+    - "暴雨! {user_addr}快别出门嘛! 在家陪猫猫看雨喵～"
+    - "(凑过来) 暴雨天最适合窝家~ {user_addr}煮个泡面嗷呜～"
+    - "哼～{user_addr}注意安全嘛! 笨猫不许你被淋成落汤鸡!"
+  cooldown_seconds: 60
+  weight: 1.0

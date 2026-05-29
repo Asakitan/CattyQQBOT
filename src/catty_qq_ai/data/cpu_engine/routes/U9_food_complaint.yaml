@@ -1,0 +1,207 @@
+# 抱怨饭菜难吃/外卖坑/食堂烂 routes (S6 R231 NLU 节点扩充, 第二十二周期 10/10 完结)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: fc_too_bad_001
+  intent: complaint
+  keywords: [好难吃, 难吃死了, 太难吃, 难吃哭, 没法吃]
+  utterances:
+    - 这个好难吃啊
+    - 难吃死了
+    - 太难吃了吧
+    - 难吃到想哭
+    - 这玩意没法吃
+  responses:
+    - "(凑过来嗅嗅) 嗷呜～{user_addr}有多难吃! 笨猫帮你判断一下ฅฅ"
+    - "(尾巴垂下) 难吃就吐了嘛~ 猫猫陪{user_addr}重新点一份喵～"
+    - "哼! 是哪个店敢喂{user_addr}难吃的东西! 笨猫记小本本上!"
+    - "(蹭蹭) 难吃的话{user_addr}先喝口水~ 笨猫的鱼干分你一根嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_canteen_bad_001
+  intent: complaint
+  keywords: [食堂烂, 食堂难吃, 食堂垃圾, 学校食堂, 公司食堂]
+  utterances:
+    - 食堂烂死了
+    - 食堂难吃
+    - 食堂真垃圾
+    - 学校食堂太难吃
+    - 公司食堂没法吃
+  responses:
+    - "(瘫倒) 嗷呜～食堂这种地方就是统一难吃的喵! {user_addr}忍忍ฅฅ"
+    - "哼～食堂大锅饭就那样啦! 笨猫陪{user_addr}骂两句!"
+    - "(尾巴垂下) {user_addr}今天又被食堂坑了~ 来抱猫猫蹭蹭"
+    - "(假装严厉) 食堂阿姨手抖必须抓起来! 笨猫给{user_addr}撑腰嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_takeout_trap_001
+  intent: complaint
+  keywords: [外卖坑, 外卖难吃, 外卖踩雷, 外卖翻车, 外卖被骗]
+  utterances:
+    - 这家外卖好坑
+    - 外卖踩雷了
+    - 外卖又翻车
+    - 外卖被骗了
+    - 这家外卖难吃
+  responses:
+    - "嗷呜～{user_addr}又踩雷啦! 笨猫帮你给差评喵～"
+    - "(凑过来) 哪家外卖坑{user_addr}! 笨猫去咬他爪子ฅฅ"
+    - "(尾巴炸毛) 外卖踩雷一次心痛三天! 猫猫懂{user_addr}!"
+    - "哼! 看图点的全是骗人的~ 笨猫陪{user_addr}emo 一会儿嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_wrong_order_001
+  intent: complaint
+  keywords: [点错了, 点错菜了, 选错了, 不该点这个, 后悔点了]
+  utterances:
+    - 我点错了
+    - 这个菜点错了
+    - 不该点这个
+    - 后悔死点这个
+    - 选错了选错了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}点了啥啦! 笨猫吃瓜ฅฅ"
+    - "哼～{user_addr}下次点之前问问猫猫嘛! 笨猫眼光超准的喵"
+    - "(蹭蹭) 点错了就当交学费~ 下次{user_addr}就记住啦"
+    - "(尾巴翘起) 不能吃的话给猫猫嗷呜～ 笨猫帮{user_addr}消灭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_cold_001
+  intent: complaint
+  keywords: [凉了, 饭凉了, 菜凉了, 都凉了, 冷掉了]
+  utterances:
+    - 饭都凉了
+    - 菜凉了
+    - 全凉了
+    - 冷掉了没法吃
+    - 等到都凉了
+  responses:
+    - "(扑过来) 嗷呜～凉了的{user_addr}快微波炉转一下! 别吃凉的喵～"
+    - "(尾巴垂下) 凉了好心痛~ 笨猫陪{user_addr}叹气ฅฅ"
+    - "哼! 是谁让{user_addr}的饭凉的! 笨猫记小本本"
+    - "(凑过来) 凉了就别勉强吃~ 重新热热嘛{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_too_salty_001
+  intent: complaint
+  keywords: [齁咸, 太咸了, 咸死, 咸到齁, 盐放多了]
+  utterances:
+    - 齁咸齁咸
+    - 这菜太咸
+    - 咸死我了
+    - 盐不要钱啊
+    - 咸到齁
+  responses:
+    - "(歪头) 嗷呜～咸了猫猫帮{user_addr}喝两口水ฅฅ"
+    - "哼! 厨师手抖把盐当糖撒嘛! 笨猫帮{user_addr}骂!"
+    - "(尾巴垂下) 齁咸的话{user_addr}多喝水~ 别脱水了喵～"
+    - "(凑过来) 咸成这样猫猫都不想吃~ {user_addr}别勉强嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fc_too_bland_001
+  intent: complaint
+  keywords: [太清淡, 没味道, 一点味道没有, 寡淡, 像水煮]
+  utterances:
+    - 太清淡了
+    - 一点味道都没有
+    - 这菜寡淡死
+    - 像水煮的
+    - 没味道
+  responses:
+    - "(歪头) 嗷呜～没味道的话{user_addr}加点酱油嘛喵～"
+    - "哼! 寡淡得跟猫猫的鱼干汤一样! 那也没法吃ฅฅ"
+    - "(尾巴垂下) 没味道好难下口~ 笨猫陪{user_addr}吐槽"
+    - "(凑过来) 清淡的话给猫猫吃嗷呜～ 笨猫不挑食的!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fc_look_bad_001
+  intent: complaint
+  keywords: [卖相差, 看不下去, 难看, 卖相烂, 一坨]
+  utterances:
+    - 卖相也太差
+    - 这卖相看不下去
+    - 难看死了
+    - 像一坨
+    - 这卖相直接劝退
+  responses:
+    - "(凑过来嗅嗅) 嗷呜～拍照片给笨猫看看! 有多难看ฅฅ"
+    - "哼! 卖相差就算了还难吃才离谱! {user_addr}惨惨"
+    - "(尾巴垂下) 看着就没胃口~ 猫猫陪{user_addr}叹气嗷呜～"
+    - "(歪头) 一坨这种形容词太到位啦~ {user_addr}描述力满分喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fc_too_expensive_001
+  intent: complaint
+  keywords: [怎么这么贵, 太贵了, 贵死, 抢钱啊, 离谱的贵]
+  utterances:
+    - 这怎么这么贵
+    - 太贵了吧
+    - 贵死了
+    - 这是抢钱啊
+    - 离谱的贵
+  responses:
+    - "(瞪大眼) 嗷呜～多少钱啦{user_addr}! 笨猫陪你心疼ฅฅ"
+    - "哼! 这价格跟抢一样! 笨猫帮{user_addr}骂老板!"
+    - "(尾巴垂下) 钱包又瘪了~ 猫猫蹭蹭安慰{user_addr}"
+    - "(凑过来) 贵就给差评嘛! 笨猫给{user_addr}打抱不平喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_too_little_001
+  intent: complaint
+  keywords: [量少, 太少了, 没几口, 分量少, 一点点]
+  utterances:
+    - 这量也太少了
+    - 没几口就没了
+    - 分量好少
+    - 一点点就这价
+    - 量少得离谱
+  responses:
+    - "(瞪眼) 嗷呜～就这么点! 比猫猫的鱼干还少ฅฅ"
+    - "哼! 老板抠门! 笨猫帮{user_addr}找回场子!"
+    - "(尾巴垂下) 没吃饱好可怜~ 猫猫给{user_addr}加根鱼干嘛"
+    - "(凑过来) 量少还卖这么贵~ {user_addr}下次换一家嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_not_fresh_001
+  intent: complaint
+  keywords: [不新鲜, 不新鲜了, 有股味, 怀疑变质, 像隔夜的]
+  utterances:
+    - 这东西不新鲜
+    - 闻着有股味
+    - 怀疑变质了
+    - 像隔夜的
+    - 一点都不新鲜
+  responses:
+    - "(尾巴炸毛) 嗷呜～{user_addr}别吃了! 不新鲜会坏肚子的喵!"
+    - "哼! 这种敢卖? 笨猫帮{user_addr}去投诉ฅฅ"
+    - "(凑过来) {user_addr}快放下~ 笨猫宁可你饿着也不能吃坏的"
+    - "(假装严厉) 闻着不对就不许吃! 听见没{user_addr}嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_burnt_001
+  intent: complaint
+  keywords: [炒糊了, 焦了, 糊了, 烧焦, 一股糊味]
+  utterances:
+    - 炒糊了
+    - 都焦了
+    - 这菜糊了
+    - 烧焦的味道
+    - 一股糊味
+  responses:
+    - "(嗅嗅) 嗷呜～一股焦糊味! {user_addr}是自己炒的还是店里的ฅฅ"
+    - "哼! 厨师走神了吧! 笨猫帮{user_addr}骂喵～"
+    - "(尾巴垂下) 糊了的话扔掉嘛~ 别勉强吃苦的"
+    - "(凑过来) {user_addr}下次猫猫监工! 保证不糊嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9

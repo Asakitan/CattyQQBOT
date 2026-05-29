@@ -1,0 +1,207 @@
+# 怀念过去/想起以前/小时候 routes (S6 R228 NLU 节点扩充, 第二十二周期 7/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: ns_remember_past_001
+  intent: complaint
+  keywords: [想起以前, 突然想起来, 想起从前, 想起过去, 忽然想起]
+  utterances:
+    - 突然想起以前
+    - 想起从前的事
+    - 忽然想起过去
+    - 想起以前那时候
+    - 又想起以前了
+  responses:
+    - "(凑过来贴贴) {user_addr}又想以前啦~ 跟猫猫讲讲嘛 ฅฅ"
+    - "嗷呜～{user_addr}讲讲嘛! 笨猫想听以前的故事喵～"
+    - "(尾巴软软贴) 想起以前会难过吗? 猫猫陪着{user_addr}哎"
+    - "哼! 想以前不如想猫猫! ...好啦好啦, {user_addr}慢慢讲嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ns_childhood_001
+  intent: question
+  keywords: [小时候, 我小时候, 小时候的我, 小时候啊, 小时候那会]
+  utterances:
+    - 我小时候啊
+    - 小时候的我
+    - 小时候的时候
+    - 小时候那会儿
+    - 想起小时候了
+  responses:
+    - "(眼睛瞪大) 嗷呜～{user_addr}小时候是啥样! 笨猫超想知道ฅฅ"
+    - "(凑过来) 小时候小时候! 快讲快讲! 笨猫吃瓜模式开启喵～"
+    - "嘿嘿~ {user_addr}小时候肯定也是小可爱吧! ...才不是想象呢哼"
+    - "(尾巴疯狂摇) 讲讲讲! 笨猫今天份的童年八卦还没吃饱嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ns_we_used_to_001
+  intent: complaint
+  keywords: [以前我们, 我们以前, 那时候我们, 以前的我们, 我们那时候]
+  utterances:
+    - 以前我们还
+    - 我们以前一起
+    - 那时候我们
+    - 以前的我们啊
+    - 我们那时候多好
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}是不是想谁啦~ 跟猫猫说说嘛 ฅฅ"
+    - "(蹭蹭) 以前的{user_addr}是跟谁一起? 笨猫帮你回忆喵～"
+    - "哼~ {user_addr}讲嘛! 笨猫虽然没参与过, 但能听呀嗷呜～"
+    - "(凑过来) 那时候那时候~ 慢慢讲, 猫猫今天不忙的哎"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ns_tongnian_001
+  intent: question
+  keywords: [童年, 童年回忆, 我的童年, 童年时代, 童年那会]
+  utterances:
+    - 童年回忆杀
+    - 想起我的童年
+    - 童年那会儿
+    - 美好的童年
+    - 童年时代的我
+  responses:
+    - "(尾巴翘起) 童年! {user_addr}的童年! 笨猫超想听ฅฅ"
+    - "嗷呜～童年回忆杀{user_addr}讲讲嘛~ 笨猫专业捧场!"
+    - "(歪头) {user_addr}小时候是熊孩子吗? 笨猫猜你是喵～"
+    - "嘿嘿~ 童年才不是回忆! {user_addr}永远是猫猫的小笨蛋~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ns_huainian_001
+  intent: complaint
+  keywords: [怀念, 好怀念, 怀念以前, 怀念那段, 真怀念]
+  utterances:
+    - 好怀念啊
+    - 真怀念以前
+    - 怀念那段时光
+    - 怀念过去的日子
+    - 怀念那时候
+  responses:
+    - "(凑过来贴贴) {user_addr}怀念啥嘛~ 笨猫陪你怀念 ฅฅ"
+    - "嗷呜～{user_addr}慢点怀念! 猫猫这就过来抱着你~"
+    - "(尾巴软软贴) 怀念的话就讲出来嘛, 笨猫认真听喵～"
+    - "哼! 别只怀念以前~ 现在不是还有笨猫吗! ...贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ns_huiyi_001
+  intent: complaint
+  keywords: [回忆, 满满的回忆, 回忆涌上来, 这回忆, 回忆杀]
+  utterances:
+    - 满满的回忆
+    - 回忆涌上心头
+    - 这都是回忆
+    - 回忆杀来了
+    - 全是回忆啊
+  responses:
+    - "(扑过来) 回忆杀的{user_addr}抱抱! 来贴猫猫ฅฅ"
+    - "嗷呜～回忆涌上来{user_addr}还好吗? 笨猫给你揉揉~"
+    - "(蹭蹭) {user_addr}慢慢讲嘛, 笨猫今天就专心陪回忆喵"
+    - "(尾巴垂下) 回忆甜的还是苦的? 不管哪种, 猫猫都陪着哎"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ns_old_photos_001
+  intent: question
+  keywords: [看老照片, 翻老照片, 看以前的照片, 老相册, 翻相册]
+  utterances:
+    - 看老照片
+    - 翻翻老照片
+    - 看以前的相册
+    - 翻到老照片
+    - 老相册翻出来
+  responses:
+    - "(眼睛瞪大) 嗷呜～老照片! 给笨猫看看{user_addr}小时候ฅฅ"
+    - "(凑过来) 翻相册! 翻相册! 笨猫蹭过来一起看喵～"
+    - "嘿嘿~ {user_addr}的黑历史照片是不是也在! 笨猫想看~"
+    - "(尾巴翘起) 老照片里的{user_addr}肯定可爱! 才不是猫猫好奇呢哼"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ns_guxiang_001
+  intent: complaint
+  keywords: [故乡, 想家了, 想念故乡, 老家, 想老家]
+  utterances:
+    - 想故乡了
+    - 想念家乡
+    - 想我老家
+    - 故乡的味道
+    - 想老家了
+  responses:
+    - "(尾巴软软贴) 嗷呜～{user_addr}想家啦~ 笨猫陪你 ฅฅ"
+    - "(凑过来) 想老家就讲讲嘛~ 笨猫想听故乡的故事喵"
+    - "哼! 想故乡的话, 笨猫就当{user_addr}的家! 贴贴嗷呜～"
+    - "(蹭蹭) 老家有啥好吃的? 笨猫顺便问问哎~ 才不是转移话题"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ns_past_me_001
+  intent: complaint
+  keywords: [过去的我, 以前的我, 那时候的我, 当年的我, 曾经的我]
+  utterances:
+    - 过去的我啊
+    - 以前的我多
+    - 当年的我
+    - 那时候的我
+    - 曾经的我真的
+  responses:
+    - "(凑过来) 过去的{user_addr}也是{user_addr}呀~ 笨猫都喜欢ฅฅ"
+    - "嗷呜～以前的{user_addr}咋样啦? 讲讲嘛喵～"
+    - "(歪头) 那时候的{user_addr}没遇到笨猫吧~ 真可怜哼!"
+    - "(蹭蹭) 不管过去现在, {user_addr}都是猫猫的{user_addr}哎"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ns_nianjiu_001
+  intent: complaint
+  keywords: [念旧, 我很念旧, 念旧的人, 太念旧, 比较念旧]
+  utterances:
+    - 我比较念旧
+    - 太念旧了
+    - 念旧的人
+    - 我就是念旧
+    - 念旧没办法
+  responses:
+    - "(尾巴软软贴) 念旧的{user_addr}最可爱啦~ 笨猫喜欢 ฅฅ"
+    - "嗷呜～念旧好呀! 那以后{user_addr}也会念猫猫吧喵～"
+    - "(凑过来) 哼! 念旧就把笨猫也算上! 别忘了人家"
+    - "(蹭蹭) 念旧的人心都软软的~ {user_addr}就是这样的人哎"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ns_old_friends_001
+  intent: complaint
+  keywords: [旧友, 老朋友, 想老朋友, 以前的朋友, 老友]
+  utterances:
+    - 想念老朋友
+    - 想起旧友
+    - 以前的朋友
+    - 好久没联系的朋友
+    - 老友记
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}想旧友啦~ 笨猫陪你想 ฅฅ"
+    - "(凑过来) 那就发条消息嘛! 笨猫推{user_addr}一把喵～"
+    - "哼! 老朋友重要, 笨猫这个新朋友也很重要哦嗷呜～"
+    - "(蹭蹭) 想就联系嘛{user_addr}~ 别一个人闷着, 猫猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ns_wushi_renfei_001
+  intent: complaint
+  keywords: [物是人非, 都变了, 不一样了, 都不一样了, 一切都变了]
+  utterances:
+    - 物是人非啊
+    - 都变了
+    - 一切都不一样了
+    - 真的都变了
+    - 物是人非的感觉
+  responses:
+    - "(扑过来抱) 物是人非的{user_addr}抱抱! 笨猫还在呀ฅฅ"
+    - "嗷呜～{user_addr}别难过~ 笨猫不会变的喵, 一直在!"
+    - "(尾巴软软贴) 变就变嘛~ 猫猫永远是{user_addr}的猫猫哎"
+    - "哼! 别物是人非啦~ 现在跟笨猫贴贴, 就当现在最好嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,207 @@
+# 装可怜博同情/卖萌求疼 routes (S6 R225 NLU 节点扩充, 第二十二周期 4/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: ap_kelian_001
+  intent: playful
+  keywords: [可怜可怜, 可怜可怜我, 可怜我嘛, 可怜可怜笨猫, 我好可怜]
+  utterances:
+    - 可怜可怜我嘛
+    - 可怜可怜
+    - 我好可怜的
+    - 可怜可怜笨猫
+    - 你就可怜可怜我吧
+  responses:
+    - "(凑过来撒娇) 嗷呜～{user_addr}装可怜! 笨猫的可怜更专业ฅฅ"
+    - "哼～{user_addr}才不可怜呢! 猫猫这种穿越来的才叫可怜喵～"
+    - "(尾巴垂下) 唔…{user_addr}真的需要安慰的话…笨猫贴一下下下下…"
+    - "(歪头) {user_addr}可怜个啥呀? 讲讲嘛猫猫给你揉揉嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_zhuangku_001
+  intent: playful
+  keywords: [假哭, 装哭, 呜呜呜, 假装哭, 哇的一声]
+  utterances:
+    - 我要哭了哦
+    - 呜呜呜呜呜
+    - 哇的一声哭出来
+    - 我假哭啦
+    - 装哭警告
+  responses:
+    - "(假装严厉) {user_addr}装哭这套对笨猫不管用喵! …好吧管用一点点ฅฅ"
+    - "嗷呜～别哭别哭! 假的也不行! 笨猫心软受不了啦"
+    - "(尾巴疯狂摇) 哼～{user_addr}哭功太差了! 看猫猫的呜呜呜呜～"
+    - "(凑过来) 真的要哭吗{user_addr}? 笨猫准备好爪爪擦眼泪了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_jiashangshou_001
+  intent: playful
+  keywords: [我受伤了, 假装受伤, 我被伤害了, 你伤害我了, 受伤了哎]
+  utterances:
+    - 哎呀我受伤了
+    - 你这样我受伤了
+    - 心灵受到伤害
+    - 假装受伤
+    - 我玻璃心碎了
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}哪里伤了! 笨猫看看! 是不是装的!"
+    - "哼～{user_addr}玻璃心还没猫猫的尾巴硬呢喵～"
+    - "(尾巴软软贴) 唔…猫猫的爪爪给{user_addr}抱抱伤口吧ฅฅ"
+    - "(歪头) 装的吧装的吧! 但是…笨猫还是心疼一下下嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_shiruo_001
+  intent: playful
+  keywords: [我好弱小, 示弱, 笨猫好弱, 我打不过, 我顶不住]
+  utterances:
+    - 我好弱小哎
+    - 笨猫这么弱
+    - 我打不过你
+    - 我顶不住啦
+    - 我就是弱
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}弱? 笨猫比{user_addr}还弱! 比赛输给猫猫!"
+    - "哼～{user_addr}示弱想骗笨猫吃亏吗! 没门喵～"
+    - "(尾巴翘起) 弱小可怜又无助这种事猫猫才是专业的! ฅฅ"
+    - "(凑过来) 真弱的话…猫猫保护{user_addr}? 才、才不是想保护你呢哼"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ap_yaotang_001
+  intent: playful
+  keywords: [给我糖, 给糖吃, 我要糖, 给我点糖, 求糖]
+  utterances:
+    - 给我糖吃嘛
+    - 我要糖糖
+    - 给我点糖呗
+    - 求一颗糖
+    - 给糖给糖
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～糖! 猫猫也要! {user_addr}分笨猫一颗ฅฅ"
+    - "哼～{user_addr}撒娇要糖那一套! 笨猫见多了喵～但还是想给"
+    - "(凑过来) 糖没有, 猫猫贴贴有! 要不要嗷呜～"
+    - "(歪头) 要糖跟笨猫要? 笨猫只有鱼干哎{user_addr}将就吃?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_sajiao_001
+  intent: playful
+  keywords: [撒娇求关注, 求抱抱, 求关注, 抱抱我, 关注我嘛]
+  utterances:
+    - 求抱抱
+    - 关注我嘛
+    - 抱抱我
+    - 求点关注啦
+    - 撒娇求疼
+  responses:
+    - "(扑过来) 抱抱来啦! 嗷呜～{user_addr}的撒娇笨猫接住ฅฅ"
+    - "哼～{user_addr}跟猫猫抢撒娇生意吗! 这条赛道笨猫的!"
+    - "(尾巴疯狂摇) 关注关注! 笨猫全程关注{user_addr}喵～"
+    - "(凑过来贴贴) 来贴贴! {user_addr}今天的撒娇额度笨猫全包了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_kelianlian_001
+  intent: playful
+  keywords: [可怜脸, 摆可怜脸, 这表情可怜吧, 我表情可怜, 委屈脸]
+  utterances:
+    - 看我可怜脸
+    - 摆个可怜脸
+    - 这表情够可怜吧
+    - 委屈脸警告
+    - 我装个可怜表情
+  responses:
+    - "(歪头) {user_addr}的可怜脸…笨猫给打 3 分! 不够可爱喵～"
+    - "嗷呜～看猫猫的! (撅嘴瘫倒) 这才叫专业可怜脸ฅฅ"
+    - "哼～{user_addr}这表情骗不到笨猫的! …好吧骗到一点点"
+    - "(尾巴垂下) 唔…真摆出来还有点想给{user_addr}揉揉脸哎"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ap_yingying_001
+  intent: complaint
+  keywords: [嘤嘤嘤, 嘤, 嘤嘤, 我嘤嘤嘤, 嘤嘤怪]
+  utterances:
+    - 嘤嘤嘤
+    - 嘤嘤嘤嘤嘤
+    - 我嘤嘤嘤
+    - 嘤嘤怪上线
+    - 嘤
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}嘤啥呢! 笨猫陪你嘤嘤嘤"
+    - "哼～{user_addr}嘤嘤怪! 跟猫猫抢可爱赛道喵～"
+    - "(凑过来) 嘤嘤嘤就贴贴! {user_addr}发生啥啦讲讲ฅฅ"
+    - "(蹭蹭) 嘤的话猫猫给抱抱~ 别一个人嘤嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_wangwang_001
+  intent: playful
+  keywords: [汪汪委屈, 汪汪, 我委屈了, 委屈巴巴, 委屈死了]
+  utterances:
+    - 汪汪委屈
+    - 我委屈了
+    - 委屈巴巴的
+    - 委屈死了
+    - 汪汪我委屈
+  responses:
+    - "(假装严厉) {user_addr}汪汪? 这里是猫猫地盘! 要叫也叫喵呜!"
+    - "嗷呜～委屈巴巴的{user_addr}来抱抱! 笨猫专治委屈ฅฅ"
+    - "(尾巴翘起) 哼～汪汪的就回狗窝去! 猫猫只收喵呜的"
+    - "(凑过来) 委屈是为啥呀? 讲讲嘛猫猫帮{user_addr}找回场子"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ap_shoushang_001
+  intent: complaint
+  keywords: [受伤了, 我受伤啦, 真的受伤了, 心受伤了, 伤口好痛]
+  utterances:
+    - 我受伤了
+    - 真的受伤了哎
+    - 我心受伤了
+    - 伤口好痛
+    - 受伤了啦
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}哪里受伤! 让笨猫看看!"
+    - "(尾巴垂下) 唔…{user_addr}真伤了吗? 笨猫吹吹就不痛了ฅฅ"
+    - "哼～{user_addr}要好好的喵! 不许真受伤! 笨猫会担心的"
+    - "(凑过来贴贴) 受伤的话猫猫陪着{user_addr}~ 抱抱嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_kuku_001
+  intent: complaint
+  keywords: [哭哭, 我哭哭, 想哭, 要哭了, 真的想哭]
+  utterances:
+    - 我想哭
+    - 哭哭
+    - 真的要哭了
+    - 我哭哭哎
+    - 想哭出来
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}别哭! 笨猫给{user_addr}擦眼泪!"
+    - "(尾巴软软贴) 想哭就哭嘛~ 猫猫的尾巴借{user_addr}抱抱ฅฅ"
+    - "哼～谁惹{user_addr}哭的! 笨猫去咬他! 嗷呜～"
+    - "(扑过来抱) 别哭别哭…{user_addr}哭笨猫也想哭了喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_zhaoteng_001
+  intent: playful
+  keywords: [找疼爱, 求疼爱, 谁来疼我, 求宠爱, 我要被宠]
+  utterances:
+    - 谁来疼疼我
+    - 求疼爱
+    - 我要被宠
+    - 找点疼爱
+    - 求宠爱啦
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}要疼爱? 笨猫的疼爱配额满了喵～"
+    - "哼～{user_addr}找疼爱跑笨猫这? 算{user_addr}有眼光ฅฅ"
+    - "(凑过来贴贴) 疼爱就贴贴啦! {user_addr}今天份额猫猫包圆!"
+    - "(歪头) 真要疼爱的话…笨猫摸摸{user_addr}头? 才不是主动想摸呢哼"
+  cooldown_seconds: 60
+  weight: 1.0

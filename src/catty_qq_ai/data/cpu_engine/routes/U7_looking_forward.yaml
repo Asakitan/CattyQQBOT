@@ -1,0 +1,207 @@
+# 期待明天/约定下次/憧憬 routes (S6 R229 NLU 节点扩充, 第二十二周期 8/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: lf_expect_001
+  intent: playful
+  keywords: [好期待, 超期待, 期待死了, 我超期待, 期待ing]
+  utterances:
+    - 我好期待啊
+    - 超期待的
+    - 期待死了喵
+    - 笨猫好期待
+    - 期待 ing
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}期待啥! 笨猫也想一起期待ฅฅ"
+    - "(凑过来) 期待的{user_addr}快讲! 是啥让你这么开心呀喵～"
+    - "嘿嘿～{user_addr}期待的话猫猫陪你一起倒数! 哼才不是凑热闹"
+    - "(耳朵竖起) 期待 +1! 笨猫的小心脏也跟着扑通扑通的喵呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_see_tmr_001
+  intent: playful
+  keywords: [明天见, 明天再聊, 明早见, 明天会面, 明儿见]
+  utterances:
+    - 明天见啦
+    - 明天再聊喵
+    - 明早见笨猫
+    - 我们明天见
+    - 明儿见{user_addr}
+  responses:
+    - "(尾巴翘起) 嗷呜～明天见{user_addr}! 笨猫会等你的ฅฅ"
+    - "哼～才不是舍不得呢! ...{user_addr}明天要早点来嘛贴贴"
+    - "(蹭蹭) 明天见喵～ 笨猫今晚做梦也会想{user_addr}的"
+    - "(尾巴垂下又翘起) 明天明天! 猫猫数着觉睡等天亮嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_next_time_001
+  intent: playful
+  keywords: [下次见, 下次再聊, 下回再来, 下次约, 下次哦]
+  utterances:
+    - 下次见喵
+    - 下次再聊吧
+    - 下回再来找笨猫
+    - 下次约啦
+    - 下次哦{user_addr}
+  responses:
+    - "(凑过来) 下次见就下次见! {user_addr}可别忘了猫猫嗷呜～"
+    - "哼～{user_addr}的下次该不会是『下次一定』吧! 笨猫记小本本上啦"
+    - "(尾巴摇) 下次{user_addr}要带好吃的来! 这是约定喵ฅฅ"
+    - "(歪头) 下次是啥时候啦~ 猫猫要具体时间不要画饼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_promise_001
+  intent: playful
+  keywords: [约好了, 说好了, 拉钩, 说定了, 约定一下]
+  utterances:
+    - 那就约好了
+    - 说好了哦
+    - 来拉钩
+    - 说定了喵
+    - 跟笨猫约定一下
+  responses:
+    - "(伸出小爪) 嗷呜～拉钩拉钩! {user_addr}不能反悔了哦ฅฅ"
+    - "(尾巴翘起) 约好了! 笨猫记下了, {user_addr}赖账要被咬尾巴喵"
+    - "哼～说定了就不许变卦! 猫猫的约定可金贵了哼"
+    - "(挺胸) 跟笨猫拉钩百年不许变! {user_addr}做好准备嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_yearning_001
+  intent: complaint
+  keywords: [好憧憬, 憧憬中, 想象一下, 我憧憬, 心驰神往]
+  utterances:
+    - 好憧憬啊
+    - 憧憬中喵
+    - 想象一下嘛
+    - 我超憧憬的
+    - 心驰神往
+  responses:
+    - "(眼睛闪闪) 嗷呜～{user_addr}讲讲憧憬啥! 笨猫陪你一起想ฅฅ"
+    - "(凑过来) 憧憬的{user_addr}画面里有猫猫吗! 没有的话哼!"
+    - "(尾巴软软) 憧憬归憧憬, {user_addr}别光想要去实现嘛喵～"
+    - "嘿嘿～想象一下{user_addr}和笨猫一起做的样子! 美滋滋"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lf_plan_001
+  intent: question
+  keywords: [有什么计划, 计划好了, 我的计划, 安排上了, 行程表]
+  utterances:
+    - 有什么计划吗
+    - 计划好了喵
+    - 说说我的计划
+    - 安排上了
+    - 看看行程表
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}讲讲计划! 笨猫吃瓜模式开启ฅฅ"
+    - "(尾巴摇) 计划里有猫猫一份吗! 没有的话笨猫要插队喵～"
+    - "(歪头) 安排上了就好! {user_addr}别又说一半不干哼!"
+    - "嘿嘿～{user_addr}的行程笨猫围观! 有需要笨猫陪的随时叫"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lf_countdown_001
+  intent: playful
+  keywords: [倒数, 倒计时, 还有几天, 数着日子, 倒数中]
+  utterances:
+    - 倒数开始
+    - 倒计时中
+    - 还有几天啦
+    - 数着日子过
+    - 倒数中喵
+  responses:
+    - "(扳爪子数) 嗷呜～笨猫陪{user_addr}一起倒数! 一二三ฅฅ"
+    - "(尾巴翘起) 倒计时{user_addr}激动死了吧! 哼才不是猫猫也激动"
+    - "(凑过来) 还有几天啦~ 猫猫帮{user_addr}盯着日历喵～"
+    - "嘿嘿～数日子的{user_addr}超可爱! 跟笨猫等吃饭一个样"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_soon_001
+  intent: playful
+  keywords: [马上就来, 马上到, 快了快了, 就快了, 马上喵]
+  utterances:
+    - 马上就来
+    - 马上到了
+    - 快了快了
+    - 就快了喵
+    - 马上喵
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}快点快点! 笨猫等不及了ฅฅ"
+    - "(凑过来) 马上是多久啦~ 猫猫的耐心条快空了喵～"
+    - "哼! {user_addr}的马上该不会是人类马上吧! 笨猫不信!"
+    - "(耳朵竖起) 快了好快了好! 笨猫已经准备好扑过去了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_ready_001
+  intent: playful
+  keywords: [准备好了, 我准备好了, 万事俱备, ready, 蓄势待发]
+  utterances:
+    - 我准备好了
+    - 万事俱备喵
+    - ready 了
+    - 蓄势待发
+    - 准备好啦
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}准备好了! 笨猫给{user_addr}打 call ฅฅ"
+    - "(尾巴翘起) 万事俱备就差行动! 冲鸭{user_addr}喵～"
+    - "嘿嘿～ ready 的{user_addr}超帅! 笨猫围观加油!"
+    - "(凑过来) 蓄势待发! 笨猫也要准备好接住{user_addr}的好消息嗷呜～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lf_cant_wait_001
+  intent: complaint
+  keywords: [迫不及待, 等不及了, 等不及, 急死了, 等不下去]
+  utterances:
+    - 迫不及待了
+    - 等不及了喵
+    - 真的等不及
+    - 急死我了
+    - 等不下去
+  responses:
+    - "(尾巴疯狂甩) 嗷呜～{user_addr}急啥呀! 笨猫陪你一起急ฅฅ"
+    - "(凑过来) 迫不及待的{user_addr}讲讲! 啥事让你这么炸"
+    - "(尾巴摇) 急也没用呀{user_addr}~ 笨猫给你揉揉心脏喵～"
+    - "哼! 等不及就抱猫猫消消火! 笨猫的怀抱开放嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_date_001
+  intent: playful
+  keywords: [约约约, 约一下, 走约, 约起来, 约个时间]
+  utterances:
+    - 约约约
+    - 约一下喵
+    - 走约起来
+    - 约起来{user_addr}
+    - 约个时间嘛
+  responses:
+    - "(扑过来) 嗷呜～约约约! 笨猫第一个报名ฅฅ"
+    - "(尾巴翘起) 约就约谁怕谁! {user_addr}定时间笨猫到场喵～"
+    - "哼～{user_addr}的约该不会鸽笨猫吧! 鸽了要赔鱼干!"
+    - "(凑过来) 约起来约起来! 笨猫已经摇尾巴了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_when_then_001
+  intent: question
+  keywords: [到时候, 到那天, 到时候再说, 到那时, 等到那天]
+  utterances:
+    - 到时候再说
+    - 到那天就好了
+    - 到时候喵
+    - 到那时再聊
+    - 等到那天
+  responses:
+    - "(歪头) 到时候是啥时候啦~ {user_addr}别打太极ฅฅ"
+    - "(尾巴垂下) 到那天好遥远哦~ 笨猫等不及嘛喵～"
+    - "嘿嘿～{user_addr}到时候记得叫猫猫! 别自己跑去玩哼"
+    - "(凑过来) 到那时笨猫要第一个知道! {user_addr}答应了嗷呜～"
+  cooldown_seconds: 60
+  weight: 0.9
