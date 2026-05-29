@@ -1,0 +1,206 @@
+# 越野跑 routes (S6 R703 NLU 节点扩充, 第七十周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: tr_intro_001
+  intent: question
+  keywords: [推荐越野跑, 推荐 trail running, 推荐山地跑, 推荐越野入门, 笨猫越野跑]
+  utterances:
+    - 推荐越野跑
+    - 推荐 trail running
+    - 推荐山地跑
+    - 推荐越野入门
+    - 笨猫越野跑
+  responses:
+    - "嗷呜～{user_addr}越野跑 = 山野自由ฅฅ"
+    - "(尾巴翘) 路跑无聊? 来山里"
+    - "{user_addr}5km 缓坡起步 / 别一上来 50km"
+    - "(挺胸) 笨猫推荐: 找个郊野公园!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tr_shoes_salomon_001
+  intent: question
+  keywords: [推荐 Salomon, 推荐萨洛蒙, 推荐 Speedcross, 推荐 S-Lab, 笨猫 Salomon]
+  utterances:
+    - 推荐 Salomon
+    - 推荐萨洛蒙
+    - 推荐 Speedcross
+    - 推荐 S-Lab
+    - 笨猫 Salomon
+  responses:
+    - "嗷呜～{user_addr}Salomon - 越野鞋之王ฅฅ"
+    - "(尾巴翘) Speedcross - 深抓地泥地"
+    - "{user_addr}S/Lab Ultra / Pulsar"
+    - "(挺胸) 笨猫推荐: Speedcross 6 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tr_shoes_hoka_001
+  intent: question
+  keywords: [推荐 Hoka, 推荐 Speedgoat, 推荐 Mafate, 推荐厚底越野, 笨猫 Hoka]
+  utterances:
+    - 推荐 Hoka
+    - 推荐 Speedgoat
+    - 推荐 Mafate
+    - 推荐厚底越野
+    - 笨猫 Hoka
+  responses:
+    - "嗷呜～{user_addr}Hoka Speedgoat - 厚底舒服ฅฅ"
+    - "(尾巴翘) Mafate Speed / Tecton X"
+    - "{user_addr}超长距离首选"
+    - "(挺胸) 笨猫推荐: Speedgoat 5 全能!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tr_shoes_lasportiva_001
+  intent: question
+  keywords: [推荐 La Sportiva, 推荐拉斯, 推荐 Bushido, 推荐 Mutant, 笨猫 La Sportiva]
+  utterances:
+    - 推荐 La Sportiva
+    - 推荐拉斯
+    - 推荐 Bushido
+    - 推荐 Mutant
+    - 笨猫 La Sportiva
+  responses:
+    - "嗷呜～{user_addr}La Sportiva - 意大利硬核ฅฅ"
+    - "(尾巴翘) Bushido - 技术性山地"
+    - "{user_addr}Mutant / Akasha 全能"
+    - "(挺胸) 笨猫推荐: Bushido 3 包脚!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tr_race_utmb_001
+  intent: question
+  keywords: [推荐 UTMB, 推荐勃朗峰, 推荐 CCC, 推荐 OCC, 笨猫 UTMB]
+  utterances:
+    - 推荐 UTMB
+    - 推荐勃朗峰
+    - 推荐 CCC
+    - 推荐 OCC
+    - 笨猫 UTMB
+  responses:
+    - "嗷呜～{user_addr}UTMB - 越野跑奥运ฅฅ"
+    - "(尾巴翘) 171km / 10000m+ 爬升"
+    - "{user_addr}CCC 100km / OCC 55km"
+    - "(挺胸) 笨猫推荐: 先攒 running stones!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tr_race_hk100_001
+  intent: question
+  keywords: [推荐港百, 推荐 HK100, 推荐 TNF100, 推荐国内越野赛, 笨猫港百]
+  utterances:
+    - 推荐港百
+    - 推荐 HK100
+    - 推荐 TNF100
+    - 推荐国内越野赛
+    - 笨猫港百
+  responses:
+    - "嗷呜～{user_addr}港百 HK100 - 亚洲经典ฅฅ"
+    - "(尾巴翘) 麦理浩径 100km"
+    - "{user_addr}TNF100 莫干山 / 宁海越野"
+    - "(挺胸) 笨猫推荐: 港百是入坑神赛!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tr_hydration_001
+  intent: question
+  keywords: [推荐越野水袋, 推荐水袋背包, 推荐 Salomon 背包, 推荐越野背心, 笨猫水袋]
+  utterances:
+    - 推荐越野水袋
+    - 推荐水袋背包
+    - 推荐 Salomon 背包
+    - 推荐越野背心
+    - 笨猫水袋
+  responses:
+    - "嗷呜～{user_addr}Salomon Adv Skin 12ฅฅ"
+    - "(尾巴翘) Ultimate Direction / Nathan"
+    - "{user_addr}2L 水袋 + 软水壶 500ml x2"
+    - "(挺胸) 笨猫推荐: ADV Skin 5 短距!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tr_flashlight_001
+  intent: question
+  keywords: [推荐越野手电, 推荐手持手电, 推荐 Fenix, 推荐 Nitecore, 笨猫越野手电]
+  utterances:
+    - 推荐越野手电
+    - 推荐手持手电
+    - 推荐 Fenix
+    - 推荐 Nitecore
+    - 笨猫越野手电
+  responses:
+    - "嗷呜～{user_addr}Fenix PD36R - 1600 流明ฅฅ"
+    - "(尾巴翘) Nitecore MH12 / EDC25"
+    - "{user_addr}强制装备 / UTMB 备用"
+    - "(挺胸) 笨猫推荐: 手电+头灯双保险!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: tr_headlamp_001
+  intent: question
+  keywords: [推荐越野头灯, 推荐 Petzl, 推荐 Nao, 推荐 Black Diamond, 笨猫头灯]
+  utterances:
+    - 推荐越野头灯
+    - 推荐 Petzl
+    - 推荐 Nao
+    - 推荐 Black Diamond
+    - 笨猫头灯
+  responses:
+    - "嗷呜～{user_addr}Petzl Nao+ - 智能调光ฅฅ"
+    - "(尾巴翘) Petzl Swift RL 900 流明"
+    - "{user_addr}BD Spot 400 / 性价比"
+    - "(挺胸) 笨猫推荐: Swift RL 越野首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tr_gel_001
+  intent: question
+  keywords: [推荐越野能量胶, 推荐 SiS, 推荐 Maurten, 推荐 GU, 笨猫能量胶]
+  utterances:
+    - 推荐越野能量胶
+    - 推荐 SiS
+    - 推荐 Maurten
+    - 推荐 GU
+    - 笨猫能量胶
+  responses:
+    - "嗷呜～{user_addr}Maurten Gel 100 - 黑科技ฅฅ"
+    - "(尾巴翘) SiS Beta Fuel / GU Roctane"
+    - "{user_addr}30-45min 一支 / 防低血糖"
+    - "(挺胸) 笨猫推荐: Maurten 不胀肚!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tr_route_001
+  intent: question
+  keywords: [推荐越野线路, 推荐越野路线, 推荐徒步线路越野, 推荐 GPX, 笨猫越野线路]
+  utterances:
+    - 推荐越野线路
+    - 推荐越野路线
+    - 推荐徒步线路越野
+    - 推荐 GPX
+    - 笨猫越野线路
+  responses:
+    - "嗷呜～{user_addr}两步路 / FATMAP / Strava 热力图ฅฅ"
+    - "(尾巴翘) 港百麦理浩 / 莫干山"
+    - "{user_addr}带 GPX 表 / 别迷路"
+    - "(挺胸) 笨猫推荐: 先跟跑团再单飞!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tr_training_001
+  intent: question
+  keywords: [推荐越野训练, 推荐爬升训练, 推荐 hill repeats, 推荐核心训练越野, 笨猫越野训练]
+  utterances:
+    - 推荐越野训练
+    - 推荐爬升训练
+    - 推荐 hill repeats
+    - 推荐核心训练越野
+    - 笨猫越野训练
+  responses:
+    - "嗷呜～{user_addr}Z2 长距离 + 爬升间歇ฅฅ"
+    - "(尾巴翘) Hill repeats / 楼梯跑"
+    - "{user_addr}核心 + 下肢 + 踝关节"
+    - "(挺胸) 笨猫推荐: 周末长距离打底!"
+  cooldown_seconds: 60
+  weight: 0.9

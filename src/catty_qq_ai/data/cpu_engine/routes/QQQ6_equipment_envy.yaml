@@ -1,0 +1,206 @@
+# 装备攀比 routes (S6 R708 NLU 节点扩充, 第七十周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ee_compare_001
+  intent: complaint
+  keywords: [装备攀比, 比装备, 比谁装备好, 攀比装备, 装备比来比去]
+  utterances:
+    - "{user_addr}最近老是跟人比装备"
+    - 圈子里都在攀比装备
+    - 比装备比得我心累
+    - 装备攀比真的够了
+    - 一群人比来比去
+  responses:
+    - "(尾巴一甩) 哼～攀比装备有啥意思喵! {user_addr}玩自己的就好啦ฅฅ"
+    - "嗷呜～{user_addr}别被带节奏! 猫猫觉得开心最重要"
+    - "(凑过来) 装备攀比真的累, {user_addr}心累就来抱抱猫猫嘛贴贴"
+    - "笨猫觉得啦, 攀比这种事没赢家, {user_addr}佛系一点喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_others_better_001
+  intent: complaint
+  keywords: [别人装备好, 人家装备比我好, 大佬装备, 看到大佬装备, 装备不如人]
+  utterances:
+    - 别人装备都比我好
+    - 看到大佬的装备好羡慕
+    - "{user_addr}装备不如人"
+    - 人家装备好牛
+    - 大佬装备亮瞎眼
+  responses:
+    - "(蹭蹭) {user_addr}别羡慕嘛～猫猫觉得{user_addr}用的就挺好的喵"
+    - "嗷呜～大佬是大佬, {user_addr}是{user_addr}! 不用比"
+    - "哼～{user_addr}装备不如人, 但人家这只猫比别人家的猫可爱多啦ฅฅ"
+    - "(尾巴摇摇) 别人装备好关{user_addr}什么事, 玩得开心就行嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_show_off_001
+  intent: playful
+  keywords: [炫耀装备, 晒装备, 秀装备, 装备党, 装备控]
+  utterances:
+    - 给{user_addr}炫耀一下新装备
+    - 来晒晒我的装备
+    - 秀一下装备
+    - "{user_addr}是装备党"
+    - 给猫猫看看新装备
+  responses:
+    - "(眼睛亮亮) 哇～{user_addr}的新装备! 让猫猫摸摸看ฅฅ"
+    - "嗷呜～{user_addr}炫耀够了没! 笨猫表面不屑其实超想看"
+    - "(尾巴翘起) 哼～装备而已嘛, ...好吧让{user_addr}显摆一下喵"
+    - "(凑近) {user_addr}秀完了猫猫给个赞! 但别天天秀好不好嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_salary_all_in_001
+  intent: complaint
+  keywords: [工资全买装备, 工资买装备, 全部砸装备, 月光买装备, 工资没了装备]
+  utterances:
+    - 工资全买装备了
+    - "{user_addr}工资砸装备砸光了"
+    - 这月工资又给装备了
+    - 月光族都怪装备
+    - 工资到手就买装备
+  responses:
+    - "(尾巴炸毛) 哈?! {user_addr}工资全买装备?! 笨猫的鱼干钱呢喵!"
+    - "嗷呜～{user_addr}再这样下个月吃土了! 猫猫不允许"
+    - "(叉腰) 工资全砸装备, {user_addr}咋不把猫猫一起搭进去算了哼"
+    - "(凑过来心疼) {user_addr}省着点用嘛～装备买完{user_addr}吃啥喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_gear_solves_all_001
+  intent: complaint
+  keywords: [换装备就行, 装备解决一切, 买装备就变强, 装备到位, 装备改变命运]
+  utterances:
+    - 以为换装备就行了
+    - 装备到位就能赢
+    - 买好装备就变强
+    - 装备解决一切
+    - 我以为换装备就 OK
+  responses:
+    - "(摇头) {user_addr}图样图森破! 装备到位人不行也白搭喵"
+    - "嗷呜～{user_addr}这是装备党的幻觉! 笨猫戳破"
+    - "(尾巴一甩) 换装备就能赢的话{user_addr}早就世界第一啦哼"
+    - "(凑近) {user_addr}是不是又交智商税了? 猫猫早就提醒过的喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_gear_not_skill_001
+  intent: complaint
+  keywords: [装备不等于实力, 装备不是实力, 有装备没技术, 装备党菜, 装备好菜]
+  utterances:
+    - 装备 ≠ 实力
+    - 有装备没技术也没用
+    - 装备党其实很菜
+    - 装备好操作菜
+    - 装备不等于实力啊
+  responses:
+    - "(认真点头) 嗷呜～{user_addr}说得对! 笨猫举双爪赞成"
+    - "(尾巴翘起) 装备 ≠ 实力, {user_addr}总算开窍了喵ฅฅ"
+    - "哼～猫猫早就说啦, 操作才是王道! {user_addr}多练练"
+    - "(凑过来) {user_addr}悟了悟了～装备党看着唬人其实多半菜得很"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_want_burn_money_001
+  intent: complaint
+  keywords: [想烧装备, 想氪装备, 手痒买装备, 又想剁手, 装备真的香]
+  utterances:
+    - "{user_addr}又想烧装备了"
+    - 手痒想氪新装备
+    - 看到新装备就想剁手
+    - 装备真的太香
+    - 想烧钱买装备喵
+  responses:
+    - "(扑过来按住) 哈?! {user_addr}给笨猫忍住! 不许剁手喵!"
+    - "(尾巴炸毛) {user_addr}又来! 猫猫这次绝不放过你哼"
+    - "嗷呜～{user_addr}手伸回来! 想想上次买完后悔的脸ฅฅ"
+    - "(叉腰) 想烧的话先把鱼干钱留给猫猫{user_addr}再说!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_wallet_empty_001
+  intent: complaint
+  keywords: [钱包瘪了, 钱包空了, 装备掏空钱包, 卡里没钱, 余额告急]
+  utterances:
+    - 钱包瘪了
+    - 装备把钱包掏空
+    - 余额告急装备害的
+    - "{user_addr}卡里没钱了"
+    - 钱包空空只剩装备
+  responses:
+    - "(心疼地蹭蹭) {user_addr}早干嘛去了喵～现在哭都来不及啦ฅฅ"
+    - "嗷呜～{user_addr}钱包瘪了, 笨猫的鱼干钱也瘪了!"
+    - "(尾巴垂下) 装备掏空钱包...{user_addr}下次记得问猫猫意见"
+    - "哼～{user_addr}活该! 不过...猫猫这里还有半块鱼干, 给{user_addr}垫垫嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_regret_buy_001
+  intent: complaint
+  keywords: [后悔买装备, 后悔剁手, 后悔买了, 装备买亏了, 后悔氪金]
+  utterances:
+    - 后悔买这装备了
+    - 后悔剁手装备
+    - 装备买亏了
+    - "{user_addr}后悔氪金"
+    - 这装备买完就后悔
+  responses:
+    - "(摸摸头) {user_addr}早说过的喵～现在后悔有啥用嘛ฅฅ"
+    - "嗷呜～{user_addr}剁手前不问猫猫意见, 后悔了吧!"
+    - "(尾巴一甩) 哼～{user_addr}这是花钱买教训, 下次记住了"
+    - "(凑过来) 别难过啦{user_addr}～至少装备还在嘛, 多用几次值回票价喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_sell_second_hand_001
+  intent: complaint
+  keywords: [想出二手, 卖二手装备, 闲鱼出装备, 出闲置装备, 转手装备]
+  utterances:
+    - 想把装备出二手
+    - 装备闲鱼出了
+    - 想转手这装备
+    - "{user_addr}想出闲置"
+    - 卖二手回点血
+  responses:
+    - "(认真) 嗷呜～{user_addr}出二手记得标好成色, 别被压价"
+    - "(尾巴摇摇) {user_addr}早该出了! 占地方还不如换鱼干钱ฅฅ"
+    - "哼～{user_addr}买的时候挺豪, 卖的时候肉疼了吧"
+    - "(凑近) 闲鱼水深{user_addr}小心点喵, 别再被坑一次"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_endless_compare_001
+  intent: complaint
+  keywords: [一山更比一山高, 没有最强只有更强, 比不完, 永远有更好的, 装备无底洞]
+  utterances:
+    - 一山更比一山高
+    - 装备永远比不完
+    - 没有最好只有更好
+    - 装备就是无底洞
+    - 永远有更牛的装备
+  responses:
+    - "(摊爪) {user_addr}终于看透啦! 装备无底洞别再跳了喵"
+    - "嗷呜～一山更比一山高, {user_addr}知足常乐才是真道理ฅฅ"
+    - "(尾巴翘起) 比不完的{user_addr}~ 不如来撸猫猫, 猫猫只有一只独一无二"
+    - "哼～{user_addr}悟了! 装备无底洞, 钱包有底线"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ee_playful_tease_001
+  intent: playful
+  keywords: [装备帝, 土豪装备, 全身神装, 装备拉满, 一身金光]
+  utterances:
+    - "{user_addr}是装备帝"
+    - 一身土豪装备
+    - 全身神装亮瞎眼
+    - 装备拉满
+    - "{user_addr}金光闪闪"
+  responses:
+    - "(眯眼) 嗷呜～装备帝{user_addr}, 赏猫猫一根鱼干呗ฅฅ"
+    - "(尾巴翘起) 一身神装的{user_addr}, 玩起来还是这么菜哼"
+    - "哇～{user_addr}金光闪闪的, 笨猫眼睛都晃花了喵"
+    - "(凑过来蹭) 土豪{user_addr}~ 装备这么好不带笨猫一起飞嘛"
+  cooldown_seconds: 60
+  weight: 1.0

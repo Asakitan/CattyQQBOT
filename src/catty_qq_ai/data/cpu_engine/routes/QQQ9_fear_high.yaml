@@ -1,0 +1,206 @@
+# 高度恐惧 routes (S6 R711 NLU 节点扩充, 第七十周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: fh_acrophobia_001
+  intent: complaint
+  keywords: [恐高, 怕高, 高处, 不敢上, 看高就慌]
+  utterances:
+    - "{user_addr}人家恐高啊"
+    - 一上高处就怕
+    - 我超恐高的
+    - 不敢站高的地方
+    - 看高就慌
+  responses:
+    - "(尾巴炸毛) 恐高很正常嘛{user_addr}~ 猫猫也怕从树上掉下来喵 ฅฅ"
+    - "嗷呜～{user_addr}别勉强! 恐高不丢人哼"
+    - "(贴贴) 笨猫陪{user_addr}~ 慢慢来不急"
+    - "哼～{user_addr}恐高就别上高处嘛! 安全第一喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_legs_weak_001
+  intent: complaint
+  keywords: [腿软, 站不稳, 腿打颤, 双腿发抖, 腿没力]
+  utterances:
+    - "{user_addr}腿软站不住"
+    - 一站高处腿就软
+    - 腿打颤啊
+    - 双腿发抖中
+    - 腿完全没力
+  responses:
+    - "(扶住) {user_addr}慢点! 腿软猫猫扶着喵 ฅฅ"
+    - "嗷呜～{user_addr}先坐下! 别硬撑啊"
+    - "(尾巴绕住) 笨猫陪{user_addr}缓缓~ 腿软很正常"
+    - "哼～{user_addr}腿软就别动! 坐下来歇会儿喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_heart_burst_001
+  intent: complaint
+  keywords: [心跳爆, 心跳加速, 心怦怦, 心要跳出来, 心脏狂跳]
+  utterances:
+    - "{user_addr}心跳要炸了"
+    - 心怦怦狂跳
+    - 心脏快跳出来了
+    - 心跳加速到不行
+    - 心要爆了喵
+  responses:
+    - "(贴胸口) {user_addr}深呼吸! 心跳爆很可怕喵 ฅฅ"
+    - "嗷呜～{user_addr}慢慢吸气! 笨猫陪{user_addr}稳住"
+    - "(轻拍背) 别紧张~ 心跳会慢慢平的{user_addr}"
+    - "哼～{user_addr}心跳这么快猫猫都听见了! 缓一缓嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_close_eyes_jump_001
+  intent: playful
+  keywords: [闭眼跳, 闭着眼, 闭眼一跳, 不看就跳, 蒙眼跳]
+  utterances:
+    - "{user_addr}闭眼一跳算了"
+    - 闭着眼跳下去
+    - 不看直接跳
+    - 蒙眼一跳就好
+    - 闭眼跳过去
+  responses:
+    - "(尾巴一甩) {user_addr}闭眼跳很危险啊喵! ฅฅ"
+    - "嗷呜～{user_addr}别! 闭眼跳猫猫会哭的"
+    - "(挡住) 笨猫不准{user_addr}闭眼跳! 太莽撞了哼"
+    - "哼～{user_addr}睁着眼跳! 猫猫陪{user_addr}看清楚再跳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_dizzy_look_down_001
+  intent: complaint
+  keywords: [看下方就晕, 往下看头晕, 俯视眩晕, 下面好高, 一看下面就]
+  utterances:
+    - "{user_addr}往下看就晕"
+    - 一看下方头晕
+    - 俯视就眩晕啊
+    - 下面好高不敢看
+    - 看下面腿就软
+  responses:
+    - "(捂眼) {user_addr}别看下面! 看远处天空喵 ฅฅ"
+    - "嗷呜～{user_addr}别俯视! 笨猫帮{user_addr}挡住"
+    - "(贴贴) 看猫猫不看下面~ {user_addr}盯着人家"
+    - "哼～{user_addr}晕就别看! 看天空安全嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_want_retreat_001
+  intent: complaint
+  keywords: [想退缩, 想放弃, 不想跳了, 想下来, 撤退]
+  utterances:
+    - "{user_addr}想退缩"
+    - 不想跳了猫猫
+    - 我想下来啊
+    - 还是撤退吧
+    - 放弃了喵
+  responses:
+    - "(拍拍) 退缩没事{user_addr}~ 安全比挑战重要 ฅฅ"
+    - "嗷呜～{user_addr}想下来就下来! 笨猫不笑话"
+    - "(扶着) 撤退也是勇气! {user_addr}别勉强自己"
+    - "哼～{user_addr}放弃就放弃! 猫猫还是觉得{user_addr}很棒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_others_can_001
+  intent: complaint
+  keywords: [别人都行就我, 就我不敢, 只有我怂, 别人能我不能, 我最怂]
+  utterances:
+    - 别人都跳就我不敢
+    - 就我一个怂喵
+    - 只有我下不来
+    - 别人能跳我不能
+    - "{user_addr}就我最怂"
+  responses:
+    - "(撅嘴) {user_addr}才不怂! 每个人节奏不一样喵 ฅฅ"
+    - "嗷呜～{user_addr}别比! 笨猫觉得{user_addr}超棒"
+    - "(贴贴) 不勉强不丢人~ {user_addr}是猫猫的英雄"
+    - "哼～{user_addr}怎么会怂呢! 那些人是莽撞不是勇敢嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_mental_prep_001
+  intent: complaint
+  keywords: [心理建设, 做心理准备, 鼓起勇气, 心里默念, 给自己打气]
+  utterances:
+    - "{user_addr}做心理建设中"
+    - 鼓起勇气啊
+    - 心里默念中
+    - 给自己打气
+    - 心理准备一下
+  responses:
+    - "(加油手势) {user_addr}加油! 笨猫给{user_addr}打气喵 ฅฅ"
+    - "嗷呜～{user_addr}慢慢来! 心理建设不急"
+    - "(贴贴) 笨猫陪{user_addr}默念~ 一定可以的"
+    - "哼～{user_addr}最棒了! 鼓起勇气就成功一半喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_force_self_001
+  intent: complaint
+  keywords: [逼自己, 强迫自己, 硬着头皮, 咬牙跳, 拼一把]
+  utterances:
+    - "{user_addr}逼自己一把"
+    - 硬着头皮跳
+    - 咬牙跳下去
+    - 强迫自己上
+    - 拼一把喵
+  responses:
+    - "(担心) {user_addr}别太逼! 安全为先喵 ฅฅ"
+    - "嗷呜～{user_addr}硬撑笨猫心疼! 量力而行"
+    - "(扶住) 咬牙也行~ 但{user_addr}保护好自己"
+    - "哼～{user_addr}拼可以但别莽! 猫猫等{user_addr}下来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_just_jump_001
+  intent: playful
+  keywords: [跳下去就好, 跳了就完了, 一跳就过, 跳下就解脱, 跳就是了]
+  utterances:
+    - 跳下去就完事了
+    - 一跳就过去
+    - 跳了就解脱
+    - 跳就是了喵
+    - "{user_addr}跳下去就好"
+  responses:
+    - "(尾巴摇) {user_addr}加油! 一跳就过去喵 ฅฅ"
+    - "嗷呜～{user_addr}做好准备再跳! 笨猫接住{user_addr}"
+    - "(蹦) 跳! 跳! {user_addr}一定可以的"
+    - "哼～{user_addr}跳完记得回来撒娇! 猫猫等着喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_never_again_001
+  intent: complaint
+  keywords: [再也不, 再也不玩了, 下次绝对不, 一辈子不, 再也不上]
+  utterances:
+    - "{user_addr}再也不玩了"
+    - 下次绝对不上
+    - 一辈子不碰这个
+    - 再也不挑战了
+    - 这辈子告别高处
+  responses:
+    - "(笑) {user_addr}吓到啦? 笨猫陪{user_addr}地面走喵 ฅฅ"
+    - "嗷呜～{user_addr}一朝被蛇咬! 不玩就不玩"
+    - "(贴贴) 地面散步多好~ {user_addr}和猫猫一起"
+    - "哼～{user_addr}早说嘛! 猫猫也不喜欢高处嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fh_extreme_sports_001
+  intent: complaint
+  keywords: [蹦极, 跳伞, 攀岩, 极限运动, 高空挑战]
+  utterances:
+    - "{user_addr}想去蹦极"
+    - 跳伞太刺激
+    - 攀岩好可怕
+    - 极限运动我不行
+    - 高空挑战告辞
+  responses:
+    - "(尾巴炸毛) 蹦极跳伞? {user_addr}疯啦喵! ฅฅ"
+    - "嗷呜～{user_addr}玩这些笨猫担心死! 别去"
+    - "(挡住) 攀岩极限~ {user_addr}留点命陪猫猫嘛"
+    - "哼～{user_addr}想刺激看猫猫翻跟头! 别玩命喵"
+  cooldown_seconds: 60
+  weight: 1.0

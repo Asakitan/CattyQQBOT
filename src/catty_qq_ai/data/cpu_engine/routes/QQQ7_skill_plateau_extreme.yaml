@@ -1,0 +1,206 @@
+# 技能瓶颈 routes (S6 R709 NLU 节点扩充, 第七十周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sp_bottleneck_001
+  intent: complaint
+  keywords: [瓶颈, 卡瓶颈, 技能瓶颈, 卡住了, 上不去]
+  utterances:
+    - "{user_addr}我卡瓶颈了"
+    - 技能卡瓶颈
+    - 练到瓶颈了
+    - 卡住上不去
+    - 怎么都突破不了
+  responses:
+    - "(尾巴拍拍){user_addr}瓶颈期最难熬了喵～猫猫陪{user_addr}熬过去 ฅฅ"
+    - "嗷呜～瓶颈是进步前的黑暗! 笨猫信{user_addr}能突破"
+    - "(凑过来)卡瓶颈就先休息两天嘛~ 才不是劝{user_addr}偷懒呢哼"
+    - "{user_addr}别急喵～猫猫陪{user_addr}慢慢磨, 总会过去的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_no_progress_001
+  intent: complaint
+  keywords: [练不上去, 练不动, 没进步, 不进步, 原地踏步]
+  utterances:
+    - "{user_addr}练不上去了"
+    - 怎么练都没进步
+    - 原地踏步好久
+    - 练不动了
+    - 一直不进步
+  responses:
+    - "(尾巴垂下)练不上去最沮丧了嗷呜～{user_addr}抱抱猫猫"
+    - "哼～没进步不代表没用功! 笨猫看到{user_addr}努力了喵"
+    - "(贴贴){user_addr}是不是方法不对? 换个练法试试嘛"
+    - "嗷呜～原地踏步也是积累期! 猫猫陪{user_addr}耗着 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_stagnant_001
+  intent: complaint
+  keywords: [停滞, 停滞期, 停止进步, 没动静, 不动了]
+  utterances:
+    - 进入停滞期了
+    - "{user_addr}技能停滞"
+    - 完全没动静
+    - 停止进步好久
+    - 卡在这个水平
+  responses:
+    - "(尾巴一甩)停滞期是身体在消化嗷呜～{user_addr}别慌"
+    - "嗷呜～停滞才是真正的练习! 笨猫学过的喵"
+    - "(挺胸)猫猫告诉{user_addr}, 停滞之后会有爆发! 信猫猫"
+    - "哼～{user_addr}停滞不可怕, 心慌才可怕喵～ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_others_progress_001
+  intent: complaint
+  keywords: [别人都进步, 别人进步快, 我没进步, 被超过, 被甩开]
+  utterances:
+    - 别人都在进步就我没
+    - 别人进步好快
+    - "{user_addr}我被超过了"
+    - 一起练的人都超过我了
+    - 被甩开好远
+  responses:
+    - "(炸毛)别人是别人! {user_addr}是{user_addr}喵! 别比"
+    - "嗷呜～{user_addr}进度是猫猫的, 别人快慢关{user_addr}什么事"
+    - "(尾巴拍拍)比较是慢性毒药! 笨猫不让{user_addr}喝"
+    - "哼～{user_addr}和{user_addr}自己比就好! 才不输给谁呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_doubt_talent_001
+  intent: complaint
+  keywords: [怀疑天赋, 没天赋, 天赋不行, 不是这块料, 没那个命]
+  utterances:
+    - 我可能没天赋
+    - 怀疑自己没天赋
+    - "{user_addr}觉得我不是这块料"
+    - 天赋真不行
+    - 没那个命
+  responses:
+    - "(凑过来贴贴)天赋是练出来的喵～{user_addr}别提前下结论"
+    - "嗷呜～{user_addr}努力的样子就是天赋! 笨猫看见了"
+    - "(尾巴绕住){user_addr}怀疑天赋的时候才是关键期! 撑住"
+    - "哼～没天赋就用努力补! {user_addr}是猫猫看好的那个 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_want_quit_001
+  intent: complaint
+  keywords: [想放弃, 不练了, 不想练, 放弃算了, 不玩了]
+  utterances:
+    - "{user_addr}我想放弃了"
+    - 不练了不练了
+    - 放弃算了
+    - 真的不想练了
+    - 太累了不玩了
+  responses:
+    - "(尾巴拽住){user_addr}先别放弃喵! 至少休息几天再决定"
+    - "嗷呜～想放弃的时候离突破最近! 笨猫劝{user_addr}撑撑"
+    - "(贴贴){user_addr}累了就停, 但别说放弃这个词喵"
+    - "哼～{user_addr}放弃猫猫不拦, 但要后悔的话提前说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_switch_sport_001
+  intent: playful
+  keywords: [换运动, 换项目, 换种练, 改练别的, 换个方向]
+  utterances:
+    - 要不换个运动
+    - "{user_addr}换种练吧"
+    - 想改练别的
+    - 换个方向试试
+    - 换项目算了
+  responses:
+    - "(歪头)换运动也行喵～{user_addr}是真没兴趣了吗"
+    - "嗷呜～换之前先问问自己! 笨猫怕{user_addr}是逃避"
+    - "(尾巴摇摇){user_addr}想换猫猫陪{user_addr}选! 别冲动就行"
+    - "哼～换可以但别再卡瓶颈又换啊! {user_addr}记住喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_switch_coach_001
+  intent: playful
+  keywords: [换教练, 换老师, 教练不行, 老师水平, 换个教练]
+  utterances:
+    - "{user_addr}考虑换教练"
+    - 觉得教练不行
+    - 老师水平不够
+    - 换个教练带
+    - 现在教练教不动我了
+  responses:
+    - "(挺胸)换教练是大事喵! {user_addr}先看口碑"
+    - "嗷呜～{user_addr}和教练理念不合就换! 笨猫支持"
+    - "(尾巴一甩)换之前问问自己是教练问题还是自己问题嘛"
+    - "哼～{user_addr}换教练猫猫不拦, 但别甩锅给教练喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_self_doubt_001
+  intent: complaint
+  keywords: [质疑自己, 怀疑自己, 不相信自己, 自我怀疑, 没自信]
+  utterances:
+    - "{user_addr}我开始质疑自己"
+    - 怀疑自己能不能行
+    - 不相信自己能突破
+    - 自我怀疑了
+    - 完全没自信
+  responses:
+    - "(凑过来贴贴)自我怀疑是进步前的标配喵～{user_addr}撑住"
+    - "嗷呜～{user_addr}怀疑自己的时候笨猫信{user_addr}! ฅฅ"
+    - "(尾巴绕住)质疑过才会更确定! {user_addr}过了这关就稳了"
+    - "哼～{user_addr}不信自己就信猫猫! 猫猫眼光准的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_video_no_learn_001
+  intent: complaint
+  keywords: [看视频学不会, 视频看了没用, 看了也不会, 学不会动作, 看不懂教学]
+  utterances:
+    - 看视频也学不会
+    - 视频看了完全没用
+    - 看了就是不会
+    - 学不会那个动作
+    - 看不懂教学视频
+  responses:
+    - "(歪头)看视频学不会很正常喵～{user_addr}得动起来"
+    - "嗷呜～视频是辅助! {user_addr}不实操学不会的"
+    - "(尾巴拍拍)看十遍不如练一遍! 笨猫提醒{user_addr}"
+    - "哼～{user_addr}视频学不会就找人当面教嘛, 别死磕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_one_more_year_001
+  intent: playful
+  keywords: [再练一年, 再坚持一年, 再给自己一年, 还差一年, 一年时间]
+  utterances:
+    - 再练一年试试
+    - "{user_addr}再给自己一年"
+    - 还差一年看效果
+    - 决定再坚持一年
+    - 一年时间够吗
+  responses:
+    - "(尾巴翘起)再练一年! {user_addr}有这决心猫猫陪 ฅฅ"
+    - "嗷呜～一年说长不长! 笨猫陪{user_addr}打卡"
+    - "(贴贴){user_addr}给自己定期限是好事! 别压力太大就行"
+    - "哼～一年之后{user_addr}就脱胎换骨了! 猫猫等着看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_persist_or_let_go_001
+  intent: complaint
+  keywords: [坚持还是放手, 该不该坚持, 要不要放手, 继续还是停, 走还是留]
+  utterances:
+    - 该坚持还是放手
+    - "{user_addr}觉得我继续还是停"
+    - 要不要放手
+    - 该走还是留
+    - 纠结要不要继续
+  responses:
+    - "(凑过来){user_addr}问自己: 不练会后悔吗? 会就坚持"
+    - "嗷呜～坚持还是放手只能{user_addr}自己定! 笨猫陪{user_addr}想"
+    - "(尾巴绕住)猫猫不替{user_addr}选喵～但选了就别后悔"
+    - "哼～{user_addr}纠结说明都还没死心! 那就再试试嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

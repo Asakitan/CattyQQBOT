@@ -1,0 +1,206 @@
+# 风筝冲浪 routes (S6 R704 NLU 节点扩充, 第七十周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ks_intro_001
+  intent: question
+  keywords: [推荐风筝冲浪, 推荐 kitesurf, 推荐 kiteboarding, 推荐入门风筝冲浪, 笨猫风筝冲浪]
+  utterances:
+    - 推荐风筝冲浪
+    - 推荐 kitesurf
+    - 推荐 kiteboarding
+    - 推荐入门风筝冲浪
+    - 笨猫风筝冲浪
+  responses:
+    - "嗷呜～{user_addr}风筝冲浪 - 风+板+海ฅฅ"
+    - "(尾巴翘) 自由飞翔的感觉超棒"
+    - "{user_addr}入门 10-15h 培训"
+    - "(挺胸) 笨猫推荐: 找正规学校!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ks_hainan_001
+  intent: question
+  keywords: [推荐海南风筝冲浪, 推荐琼海, 推荐三亚 kitesurf, 推荐国内入门点, 笨猫海南]
+  utterances:
+    - 推荐海南风筝冲浪
+    - 推荐琼海
+    - 推荐三亚 kitesurf
+    - 推荐国内入门点
+    - 笨猫海南
+  responses:
+    - "嗷呜～{user_addr}海南琼海 - 国内圣地ฅฅ"
+    - "(尾巴翘) 11-3 月东北季风"
+    - "{user_addr}日月湾 / 海陵岛"
+    - "(挺胸) 笨猫推荐: 琼海博鳌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ks_thailand_001
+  intent: question
+  keywords: [推荐泰国风筝冲浪, 推荐华欣, 推荐普吉, 推荐 Thailand kitesurf, 笨猫泰国]
+  utterances:
+    - 推荐泰国风筝冲浪
+    - 推荐华欣
+    - 推荐普吉
+    - 推荐 Thailand kitesurf
+    - 笨猫泰国
+  responses:
+    - "嗷呜～{user_addr}华欣 Hua Hin - 入门天堂ฅฅ"
+    - "(尾巴翘) 浅水 / 稳定风 / 学校多"
+    - "{user_addr}苏梅 / 普吉次选"
+    - "(挺胸) 笨猫推荐: 华欣 1-4 月!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ks_vietnam_001
+  intent: question
+  keywords: [推荐越南风筝冲浪, 推荐美奈, 推荐 Mui Ne, 推荐 Vietnam kitesurf, 笨猫越南]
+  utterances:
+    - 推荐越南风筝冲浪
+    - 推荐美奈
+    - 推荐 Mui Ne
+    - 推荐 Vietnam kitesurf
+    - 笨猫越南
+  responses:
+    - "嗷呜～{user_addr}美奈 Mui Ne - 亚洲风筝之都ฅฅ"
+    - "(尾巴翘) 11-3 月稳定 18-25 节"
+    - "{user_addr}沙滩长 / 学校便宜"
+    - "(挺胸) 笨猫推荐: 美奈进阶圣地!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ks_kite_brand_001
+  intent: question
+  keywords: [推荐风筝品牌, 推荐 North, 推荐 Cabrinha, 推荐 Duotone, 笨猫风筝品牌]
+  utterances:
+    - 推荐风筝品牌
+    - 推荐 North
+    - 推荐 Cabrinha
+    - 推荐 Duotone
+    - 笨猫风筝品牌
+  responses:
+    - "嗷呜～{user_addr}North / Duotone - 老牌强ฅฅ"
+    - "(尾巴翘) Cabrinha / Core / F-One"
+    - "{user_addr}9m + 12m 双风筝组合"
+    - "(挺胸) 笨猫推荐: Duotone Evo!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ks_board_brand_001
+  intent: question
+  keywords: [推荐风筝板, 推荐 Naish, 推荐 twintip, 推荐 surfboard, 笨猫板子]
+  utterances:
+    - 推荐风筝板
+    - 推荐 Naish
+    - 推荐 twintip
+    - 推荐 surfboard
+    - 笨猫板子
+  responses:
+    - "嗷呜～{user_addr}Naish / North - 双向板ฅฅ"
+    - "(尾巴翘) twintip 入门 / surfboard 进阶"
+    - "{user_addr}138-142cm 入门尺寸"
+    - "(挺胸) 笨猫推荐: Naish Stomp 入门!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ks_school_001
+  intent: question
+  keywords: [推荐风筝学校, 推荐 IKO 认证, 推荐 kitesurf school, 推荐培训, 笨猫学校]
+  utterances:
+    - 推荐风筝学校
+    - 推荐 IKO 认证
+    - 推荐 kitesurf school
+    - 推荐培训
+    - 笨猫学校
+  responses:
+    - "嗷呜～{user_addr}认 IKO / VDWS 认证ฅฅ"
+    - "(尾巴翘) 1:1 私教 / 小班"
+    - "{user_addr}琼海 / 华欣 / 美奈都有"
+    - "(挺胸) 笨猫推荐: 别自学!安全第一!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ks_gear_001
+  intent: question
+  keywords: [推荐风筝装备, 推荐 harness, 推荐救生衣, 推荐头盔, 笨猫装备清单]
+  utterances:
+    - 推荐风筝装备
+    - 推荐 harness
+    - 推荐救生衣
+    - 推荐头盔
+    - 笨猫装备清单
+  responses:
+    - "嗷呜～{user_addr}风筝+板+harness 三件套ฅฅ"
+    - "(尾巴翘) 救生衣 / 头盔 / 防晒衣"
+    - "{user_addr}快速脱钩器必备"
+    - "(挺胸) 笨猫推荐: 安全装备别省!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ks_coach_001
+  intent: question
+  keywords: [推荐风筝教练, 推荐中文教练, 推荐 kitesurf coach, 推荐私教, 笨猫教练]
+  utterances:
+    - 推荐风筝教练
+    - 推荐中文教练
+    - 推荐 kitesurf coach
+    - 推荐私教
+    - 笨猫教练
+  responses:
+    - "嗷呜～{user_addr}华欣有中文教练ฅฅ"
+    - "(尾巴翘) 琼海 / 日月湾国内教练"
+    - "{user_addr}IKO Lv3 以上认证"
+    - "(挺胸) 笨猫推荐: 沟通顺第一!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ks_app_001
+  intent: question
+  keywords: [推荐海况风向 App, 推荐 Windy, 推荐 Windguru, 推荐风向预报, 笨猫风向 App]
+  utterances:
+    - 推荐海况风向 App
+    - 推荐 Windy
+    - 推荐 Windguru
+    - 推荐风向预报
+    - 笨猫风向 App
+  responses:
+    - "嗷呜～{user_addr}Windy - 颜值+精度王ฅฅ"
+    - "(尾巴翘) Windguru - 老牌专业"
+    - "{user_addr}iKitesurf / WindAlert"
+    - "(挺胸) 笨猫推荐: Windy 全场景!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ks_competition_001
+  intent: question
+  keywords: [推荐风筝比赛, 推荐 GKA World Tour, 推荐 Red Bull King of the Air, 推荐 KiteFoil, 笨猫比赛]
+  utterances:
+    - 推荐风筝比赛
+    - 推荐 GKA World Tour
+    - 推荐 Red Bull King of the Air
+    - 推荐 KiteFoil
+    - 笨猫比赛
+  responses:
+    - "嗷呜～{user_addr}GKA World Tour - 顶级巡回ฅฅ"
+    - "(尾巴翘) Red Bull KOTA - 开普敦大跳"
+    - "{user_addr}KiteFoil 奥运项目"
+    - "(挺胸) 笨猫推荐: KOTA 视觉震撼!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ks_partner_001
+  intent: question
+  keywords: [推荐冲浪伴侣, 推荐风筝搭子, 推荐 buddy system, 推荐结伴, 笨猫伴侣]
+  utterances:
+    - 推荐冲浪伴侣
+    - 推荐风筝搭子
+    - 推荐 buddy system
+    - 推荐结伴
+    - 笨猫伴侣
+  responses:
+    - "嗷呜～{user_addr}风筝必须有伴ฅฅ"
+    - "(尾巴翘) 互相看护 / 救援"
+    - "{user_addr}学校群 / 社群找搭子"
+    - "(挺胸) 笨猫推荐: 别一个人下海!"
+  cooldown_seconds: 60
+  weight: 0.8

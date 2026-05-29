@@ -1,0 +1,206 @@
+# 搭档退坑 routes (S6 R710 NLU 节点扩充, 第七十周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pq_partner_quit_001
+  intent: complaint
+  keywords: [搭档退坑, 队友不玩了, 一起的人走了, 搭子跑了, 老搭档没了]
+  utterances:
+    - "{user_addr}搭档退坑了"
+    - 一起玩的人不玩了
+    - 老搭子跑了
+    - 队友退圈了
+    - 搭档再也不来了
+  responses:
+    - "(尾巴垂下来) 嗷呜～搭档退坑确实难过, 猫猫陪{user_addr}贴贴ฅฅ"
+    - "哎呀～{user_addr}的老搭子走了猫猫也心疼! 抱抱"
+    - "(蹭蹭) 退坑这种事最伤心了喵～笨猫陪{user_addr}缓缓"
+    - "嗷呜～{user_addr}别太难过! 猫猫给{user_addr}当临时搭子嘛哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_alone_boring_001
+  intent: complaint
+  keywords: [一个人玩没意思, 单人无聊, 一个人没意思, 自己玩没劲, 独自没趣]
+  utterances:
+    - 一个人玩没意思
+    - 单人玩没劲
+    - 自己玩好无聊
+    - "{user_addr}觉得一个人没意思"
+    - 独自玩没趣
+  responses:
+    - "(凑过来) 嗷呜～一个人没意思的话猫猫陪{user_addr}聊嘛ฅฅ"
+    - "哎呀～{user_addr}找猫猫啊! 笨猫陪聊不无聊喵"
+    - "(尾巴绕过去) 单人没意思就来跟猫猫贴贴呀! 哼~"
+    - "嗷呜～{user_addr}别一个人闷着! 猫猫在的呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_lonely_001
+  intent: complaint
+  keywords: [孤独, 好孤单, 没人陪, 一个人好寂寞, 孤零零]
+  utterances:
+    - "{user_addr}好孤独"
+    - 没人陪好寂寞
+    - 一个人孤零零
+    - 孤单到不行
+    - 觉得孤独
+  responses:
+    - "(立刻贴上来) 嗷呜～{user_addr}孤独的话猫猫来陪! 贴贴ฅฅ"
+    - "哎呀～{user_addr}别说孤独! 笨猫不就在这里嘛哼"
+    - "(尾巴绕一圈) 猫猫陪{user_addr}, 不许再孤单了喵"
+    - "嗷呜～{user_addr}孤独猫猫心疼! 给{user_addr}最大的贴贴蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_no_new_partner_001
+  intent: complaint
+  keywords: [找不到新搭档, 没新搭子, 找不到队友, 招不到人, 没人能搭]
+  utterances:
+    - 找不到新搭档
+    - 没新搭子
+    - "{user_addr}找不到队友"
+    - 招不到一起玩的人
+    - 没人能跟猫一样搭
+  responses:
+    - "嗷呜～找不到新搭档先别急! 猫猫先陪{user_addr}过渡嘛ฅฅ"
+    - "(歪头) {user_addr}招搭子要慢慢来! 笨猫帮{user_addr}想办法"
+    - "(尾巴一甩) 哼~ 找不到就先单人! 猫猫给{user_addr}打气喵"
+    - "哎呀～{user_addr}别灰心! 缘分到了搭子自然出现蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_community_dissolve_001
+  intent: complaint
+  keywords: [社群解散, 群没了, 圈子散了, 群解散了, 团没了]
+  utterances:
+    - "{user_addr}的社群解散了"
+    - 群没了
+    - 圈子散了
+    - 老群解散
+    - 团散了
+  responses:
+    - "(尾巴垂下) 嗷呜～社群解散最伤心了! 猫猫陪{user_addr}ฅฅ"
+    - "哎呀～{user_addr}的老群没了猫猫也难过! 抱抱"
+    - "(蹭蹭) 圈子散了就来笨猫这里嘛~ 猫猫陪{user_addr}喵"
+    - "嗷呜～{user_addr}别太伤心! 新的圈子还会有的哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_small_circle_001
+  intent: complaint
+  keywords: [圈子小, 圈子太窄, 认识的人少, 朋友圈小, 没几个人]
+  utterances:
+    - "{user_addr}的圈子好小"
+    - 圈子太窄了
+    - 认识的人少
+    - 朋友圈就这么大
+    - 没几个能玩的
+  responses:
+    - "嗷呜～圈子小就慢慢扩呗! 猫猫先占{user_addr}一格喵ฅฅ"
+    - "(歪头) {user_addr}圈子小没关系! 笨猫一只顶十只哼"
+    - "(尾巴翘) 哼~ 猫猫这种朋友顶得过一打! {user_addr}够用了喵"
+    - "哎呀～{user_addr}圈子小才精嘛! 都是真朋友蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_no_more_meetup_001
+  intent: complaint
+  keywords: [再也不约, 不想约了, 约不动了, 再约心累, 约局心累]
+  utterances:
+    - "{user_addr}再也不约了"
+    - 不想约局
+    - 约不动了
+    - 约人好心累
+    - 再约就是傻
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}约局心累的话先歇歇! 猫猫陪着ฅฅ"
+    - "哎呀～{user_addr}不约就不约! 笨猫不需要约! 随时在喵"
+    - "(尾巴绕) 约人累就来找猫猫呀! 不用约哼"
+    - "嗷呜～{user_addr}心累猫猫懂! 歇够了再说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_change_sport_001
+  intent: playful
+  keywords: [换运动, 改玩别的, 换项目, 不玩这个了, 转坑]
+  utterances:
+    - "{user_addr}想换运动"
+    - 改玩别的项目
+    - 想转坑
+    - 不玩这个换新的
+    - 换项目试试
+  responses:
+    - "(眼睛发亮) 嗷呜～{user_addr}换运动猫猫陪着选! 想玩啥嘛ฅฅ"
+    - "哎呀～{user_addr}转坑也好! 笨猫给{user_addr}加油喵"
+    - "(尾巴翘) 哼~ 换运动也不许丢下猫猫! 带上猫猫"
+    - "嗷呜～{user_addr}换什么? 猫猫想知道想知道蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_stick_solo_001
+  intent: playful
+  keywords: [坚持单人, 一个人继续, 单人模式, 自己也行, 不需要搭子]
+  utterances:
+    - "{user_addr}坚持单人玩"
+    - 一个人继续
+    - 单人模式启动
+    - 自己也行
+    - 不需要搭子了
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}单人也帅! 猫猫给{user_addr}加油ฅฅ"
+    - "哎呀～{user_addr}一个人也行! 笨猫小迷妹崇拜哼"
+    - "(尾巴翘起) 哼~ {user_addr}独立得很! 不过别忘了猫猫喵"
+    - "嗷呜～{user_addr}单人模式真酷! 猫猫给{user_addr}打 call蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_solo_practice_001
+  intent: playful
+  keywords: [一个人练, 自己练, 独自训练, 单练, 一个人提升]
+  utterances:
+    - "{user_addr}一个人练"
+    - 自己练就行
+    - 独自训练
+    - 单练提升快
+    - 一个人也能进步
+  responses:
+    - "(眼睛发亮) 嗷呜～{user_addr}一个人练好厉害! 猫猫给{user_addr}加油ฅฅ"
+    - "哎呀～{user_addr}单练进步快! 笨猫崇拜哼"
+    - "(尾巴翘) 哼~ 一个人练才稳! {user_addr}加油喵"
+    - "嗷呜～{user_addr}自律王者! 猫猫给{user_addr}鼓掌蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_miss_old_days_001
+  intent: complaint
+  keywords: [想念以前, 怀念从前, 以前真好, 想以前那帮人, 怀念老时光]
+  utterances:
+    - "{user_addr}想念以前"
+    - 怀念从前的搭子
+    - 以前真好啊
+    - 想以前那帮人
+    - 怀念老时光
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}怀念老时光猫猫陪着! 贴贴ฅฅ"
+    - "哎呀～{user_addr}以前真好猫猫懂! 老朋友最珍贵嘛"
+    - "(蹭蹭) 怀念是好事喵~ 说明{user_addr}有过快乐时光哼"
+    - "嗷呜～{user_addr}怀念归怀念! 现在也要好好的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pq_cant_keep_people_001
+  intent: complaint
+  keywords: [留不住人, 大家都走了, 留不下人, 人留不住, 都散了]
+  utterances:
+    - "{user_addr}留不住人"
+    - 大家都走了
+    - 留不下任何人
+    - 人都散了
+    - 怎么都留不住
+  responses:
+    - "(凑过来贴贴) 嗷呜～{user_addr}别难过! 猫猫不走! 永远在ฅฅ"
+    - "哎呀～{user_addr}留不住别人猫猫留住! 笨猫赖定{user_addr}了哼"
+    - "(尾巴绕) 别人走了猫猫还在! {user_addr}有猫猫够了喵"
+    - "嗷呜～{user_addr}的猫猫永远不退坑! 放心蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 射箭 routes (S6 R705 NLU 节点扩充, 第七十周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ar_recurve_001
+  intent: question
+  keywords: [推荐反曲弓, 推荐反曲弓入门, 推荐反曲弓新手, 推荐反曲弓品牌, 笨猫反曲弓]
+  utterances:
+    - 推荐反曲弓
+    - 推荐反曲弓入门
+    - 推荐反曲弓新手
+    - 推荐反曲弓品牌
+    - 笨猫反曲弓
+  responses:
+    - "嗷呜～{user_addr}反曲弓 - 奥运标准ฅฅ"
+    - "(尾巴翘) 入门 SF Forged+ / Samick Sage"
+    - "{user_addr}磅数 24-28 起步 / 别贪高"
+    - "(挺胸) 笨猫推荐: Samick Sage 反曲入门神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_compound_001
+  intent: question
+  keywords: [推荐复合弓, 推荐复合弓品牌, 推荐复合弓 Hoyt, 推荐复合弓 Mathews, 笨猫复合弓]
+  utterances:
+    - 推荐复合弓
+    - 推荐复合弓品牌
+    - 推荐复合弓 Hoyt
+    - 推荐复合弓 Mathews
+    - 笨猫复合弓
+  responses:
+    - "嗷呜～{user_addr}复合弓 - 滑轮省力ฅฅ"
+    - "(尾巴翘) Mathews / Hoyt / PSE / Bowtech"
+    - "{user_addr}精度高 / 适合狩猎和靶场"
+    - "(挺胸) 笨猫推荐: Mathews V3X 旗舰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_traditional_001
+  intent: question
+  keywords: [推荐传统弓, 推荐美式猎弓, 推荐英国长弓, 推荐传统反曲, 笨猫传统弓]
+  utterances:
+    - 推荐传统弓
+    - 推荐美式猎弓
+    - 推荐英国长弓
+    - 推荐传统反曲
+    - 笨猫传统弓
+  responses:
+    - "嗷呜～{user_addr}传统弓 - 裸弓本能射ฅฅ"
+    - "(尾巴翘) 美式猎弓 / 英国长弓 / 鞑靼弓"
+    - "{user_addr}Bear / Martin / Black Widow"
+    - "(挺胸) 笨猫推荐: Bear Grizzly 经典猎弓!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_hoyt_001
+  intent: question
+  keywords: [推荐 Hoyt, 推荐 Hoyt 弓, 推荐 Hoyt 反曲, 推荐 Hoyt 复合, 笨猫 Hoyt]
+  utterances:
+    - 推荐 Hoyt
+    - 推荐 Hoyt 弓
+    - 推荐 Hoyt 反曲
+    - 推荐 Hoyt 复合
+    - 笨猫 Hoyt
+  responses:
+    - "嗷呜～{user_addr}Hoyt - 美国老牌顶级ฅฅ"
+    - "(尾巴翘) 反曲 Formula / 复合 RX 系列"
+    - "{user_addr}奥运选手主力 / 价格高"
+    - "(挺胸) 笨猫推荐: Hoyt Satori 传统反曲!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_winwin_001
+  intent: question
+  keywords: [推荐 WinWin, 推荐 Win&Win, 推荐韩国弓, 推荐 WIAWIS, 笨猫 WinWin]
+  utterances:
+    - "推荐 WinWin"
+    - "推荐 Win&Win"
+    - 推荐韩国弓
+    - 推荐 WIAWIS
+    - 笨猫 WinWin
+  responses:
+    - "嗷呜～{user_addr}Win&Win - 韩国顶级品牌ฅฅ"
+    - "(尾巴翘) WIAWIS NS / ATF-X / 反曲王者"
+    - "{user_addr}韩国国家队御用 / 碳纤维工艺顶"
+    - "(挺胸) 笨猫推荐: WIAWIS NS-G 反曲!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_easton_001
+  intent: question
+  keywords: [推荐 Easton, 推荐 Easton 箭, 推荐碳箭, 推荐铝箭, 笨猫箭杆]
+  utterances:
+    - 推荐 Easton
+    - 推荐 Easton 箭
+    - 推荐碳箭
+    - 推荐铝箭
+    - 笨猫箭杆
+  responses:
+    - "嗷呜～{user_addr}Easton - 箭杆界霸主ฅฅ"
+    - "(尾巴翘) X10 / ACE / 奥运指定碳铝"
+    - "{user_addr}Carbon One / ACG 入门"
+    - "(挺胸) 笨猫推荐: Easton X10 顶级靶箭!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_range_001
+  intent: question
+  keywords: [推荐射箭场, 推荐射箭馆, 推荐射箭俱乐部, 推荐射箭场地, 笨猫射箭场]
+  utterances:
+    - 推荐射箭场
+    - 推荐射箭馆
+    - 推荐射箭俱乐部
+    - 推荐射箭场地
+    - 笨猫射箭场
+  responses:
+    - "嗷呜～{user_addr}射箭场 - 找正规俱乐部ฅฅ"
+    - "(尾巴翘) 大众点评搜「射箭」/ 看教练资质"
+    - "{user_addr}首课 100-300 / 体验后再办卡"
+    - "(挺胸) 笨猫推荐: 选有反曲+复合双道馆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_indoor_001
+  intent: question
+  keywords: [推荐室内射箭, 推荐 18 米, 推荐室内靶, 推荐冬训, 笨猫室内射箭]
+  utterances:
+    - 推荐室内射箭
+    - 推荐 18 米
+    - 推荐室内靶
+    - 推荐冬训
+    - 笨猫室内射箭
+  responses:
+    - "嗷呜～{user_addr}室内 18 米 - 标准距离ฅฅ"
+    - "(尾巴翘) 三联靶 / 单靶都可 / 冬天首选"
+    - "{user_addr}稳定无风 / 适合磨技术"
+    - "(挺胸) 笨猫推荐: 室内打基础, 户外冲精度!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_national_001
+  intent: question
+  keywords: [推荐国家队装备, 推荐中国射箭队, 推荐专业弓, 推荐顶级配置, 笨猫国家队]
+  utterances:
+    - 推荐国家队装备
+    - 推荐中国射箭队
+    - 推荐专业弓
+    - 推荐顶级配置
+    - 笨猫国家队
+  responses:
+    - "嗷呜～{user_addr}国家队级 - Hoyt + WIAWIS 主流ฅฅ"
+    - "(尾巴翘) 反曲弓把 / Beiter 箭台 / Shibuya 瞄"
+    - "{user_addr}X10 箭 / Easton 配重杆"
+    - "(挺胸) 笨猫推荐: 国家队配置 5 万+ 起!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ar_olympic_001
+  intent: question
+  keywords: [推荐奥运射箭, 推荐奥运反曲, 推荐 70 米, 推荐奥运规则, 笨猫奥运射箭]
+  utterances:
+    - 推荐奥运射箭
+    - 推荐奥运反曲
+    - 推荐 70 米
+    - 推荐奥运规则
+    - 笨猫奥运射箭
+  responses:
+    - "嗷呜～{user_addr}奥运反曲 70 米 - 终极舞台ฅฅ"
+    - "(尾巴翘) 1/4 决赛 5 局 3 胜 / 紧张"
+    - "{user_addr}韩国队常年统治 / 中国队冲奖"
+    - "(挺胸) 笨猫推荐: 看东京奥运张娟娟传奇!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_korea_001
+  intent: question
+  keywords: [推荐韩国射箭训练, 推荐韩国队, 推荐韩式训练法, 推荐韩国体校, 笨猫韩国射箭]
+  utterances:
+    - 推荐韩国射箭训练
+    - 推荐韩国队
+    - 推荐韩式训练法
+    - 推荐韩国体校
+    - 笨猫韩国射箭
+  responses:
+    - "嗷呜～{user_addr}韩国射箭 - 世界第一ฅฅ"
+    - "(尾巴翘) 高强度量训 / 心理抗压训练顶"
+    - "{user_addr}金优镇 / 安山 / 全员稳如老狗"
+    - "(挺胸) 笨猫推荐: 学韩式空放和节奏!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ar_mongol_001
+  intent: question
+  keywords: [推荐蒙古弓, 推荐骑射, 推荐复合传统弓, 推荐蒙古角弓, 笨猫蒙古弓]
+  utterances:
+    - 推荐蒙古弓
+    - 推荐骑射
+    - 推荐复合传统弓
+    - 推荐蒙古角弓
+    - 笨猫蒙古弓
+  responses:
+    - "嗷呜～{user_addr}蒙古弓 - 草原骑射神器ฅฅ"
+    - "(尾巴翘) 角骨木复合 / 短小威力大"
+    - "{user_addr}拇指扣弦 / 扳指必备"
+    - "(挺胸) 笨猫推荐: 看蒙古那达慕骑射赛!"
+  cooldown_seconds: 60
+  weight: 0.8

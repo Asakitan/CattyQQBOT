@@ -1,0 +1,206 @@
+# 运动重伤 routes (S6 R707 NLU 节点扩充, 第七十周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: si_sport_injury_001
+  intent: complaint
+  keywords: [运动重伤, 受伤了, 伤得不轻, 大伤, 伤到了]
+  utterances:
+    - 运动重伤了
+    - 这次伤得不轻
+    - 大伤一次
+    - 我受伤了
+    - 伤到骨头了
+  responses:
+    - "(尾巴炸毛冲过来) 重伤?! {user_addr}赶紧去医院! 别硬撑啊喵!"
+    - "嗷呜～{user_addr}伤哪了? 笨猫吓死了, 快说快说!"
+    - "(爪子捂嘴) 重伤可不是闹着玩的, {user_addr}先躺好别动!"
+    - "猫猫陪{user_addr}去医院! 别一个人扛着喵～心疼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_fracture_001
+  intent: complaint
+  keywords: [骨折, 骨头断了, 打石膏, 骨裂, 粉碎性骨折]
+  utterances:
+    - 骨折了
+    - 骨头断了
+    - 在打石膏
+    - 骨裂
+    - 粉碎性骨折
+  responses:
+    - "(尾巴抖) 骨折?! {user_addr}怎么伤这么重啊喵! 心疼死猫猫了"
+    - "嗷呜～石膏多久能拆? {user_addr}这段时间老老实实养着!"
+    - "(凑过来贴贴) 笨猫给{user_addr}当拐杖! 才不是关心呢哼"
+    - "骨折可怕的喵, {user_addr}别乱动! 猫猫盯着{user_addr}ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_ligament_001
+  intent: complaint
+  keywords: [韧带撕裂, 韧带断了, 韧带伤, 十字韧带, 韧带损伤]
+  utterances:
+    - 韧带撕裂了
+    - 十字韧带断了
+    - 韧带损伤
+    - 韧带伤得很重
+    - 韧带全断
+  responses:
+    - "(倒吸一口气) 韧带?! {user_addr}这要养好久的喵, 太心疼了!"
+    - "嗷呜～韧带撕裂超痛的吧! 笨猫给{user_addr}吹吹ฅฅ"
+    - "(尾巴垂下) {user_addr}得做康复啊, 猫猫陪着{user_addr}!"
+    - "韧带可重要的, {user_addr}以后运动悠着点啦喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_meniscus_001
+  intent: complaint
+  keywords: [半月板, 半月板撕裂, 半月板损伤, 膝盖半月板, 半月板手术]
+  utterances:
+    - 半月板撕裂了
+    - 半月板损伤
+    - 膝盖半月板坏了
+    - 要做半月板手术
+    - 半月板伤了
+  responses:
+    - "(皱眉) 半月板?! {user_addr}膝盖以后要小心一辈子的喵!"
+    - "嗷呜～半月板是个金贵东西! {user_addr}别再蹦蹦跳跳了"
+    - "(尾巴绕住{user_addr}) 笨猫不准{user_addr}再剧烈运动了!"
+    - "半月板坏了好麻烦的, {user_addr}康复期老实点喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_achilles_001
+  intent: complaint
+  keywords: [跟腱, 跟腱断了, 跟腱断裂, 跟腱撕裂, 阿基里斯腱]
+  utterances:
+    - 跟腱断了
+    - 跟腱断裂
+    - 跟腱撕裂了
+    - 阿基里斯腱断了
+    - 跟腱伤了
+  responses:
+    - "(惊呼) 跟腱断了?! {user_addr}这要躺好久的喵! 心疼!"
+    - "嗷呜～跟腱可严重了! {user_addr}是不是 NBA 巨星啊"
+    - "(凑过去) 笨猫给{user_addr}端水送饭! 才不是心疼呢哼"
+    - "跟腱手术好可怕的, {user_addr}加油挺过去! ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_surgery_001
+  intent: complaint
+  keywords: [做手术, 要手术, 动刀子, 全麻, 手术台]
+  utterances:
+    - 要做手术了
+    - 明天动刀子
+    - 全麻手术
+    - 上手术台了
+    - 要被开刀
+  responses:
+    - "(爪子紧紧抓住{user_addr}) 手术?! {user_addr}别怕! 笨猫陪着!"
+    - "嗷呜～全麻睡一觉就好了喵! {user_addr}加油!"
+    - "(尾巴抖) 猫猫在手术室外面等{user_addr}! 一定平安出来!"
+    - "{user_addr}手术完想吃什么? 笨猫提前准备好! 才不是担心呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_rehab_001
+  intent: complaint
+  keywords: [康复半年, 康复期长, 要养半年, 康复漫长, 恢复期]
+  utterances:
+    - 要康复半年
+    - 康复期半年
+    - 恢复要半年
+    - 康复期好长
+    - 这一养就是半年
+  responses:
+    - "(倒吸气) 半年?! {user_addr}这段时间猫猫天天陪着!"
+    - "嗷呜～半年很快的喵! {user_addr}慢慢康复别急"
+    - "(贴贴) 笨猫每天给{user_addr}讲故事! 半年咻一下就过了"
+    - "康复期老实点啦{user_addr}, 别偷偷下床! 猫猫盯着ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_no_more_001
+  intent: complaint
+  keywords: [再也不能, 再也跑不了, 运动生涯结束, 不能打球了, 这辈子完了]
+  utterances:
+    - 再也不能跑步了
+    - 再也打不了球
+    - 运动生涯结束了
+    - 这辈子完了
+    - 再也不能剧烈运动
+  responses:
+    - "(尾巴垂下贴过去) {user_addr}别这么说! 笨猫陪{user_addr}找新爱好!"
+    - "嗷呜～不能跑就一起散步嘛{user_addr}~ 猫猫陪着ฅฅ"
+    - "(凑到怀里) 运动只是生活一部分, {user_addr}还有猫猫的喵!"
+    - "{user_addr}别绝望啦! 笨猫帮{user_addr}发现新乐趣! 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_regret_001
+  intent: complaint
+  keywords: [后悔逞强, 不该硬撑, 后悔没停, 当时逞强, 早知道]
+  utterances:
+    - 后悔当时逞强
+    - 不该硬撑的
+    - 后悔没停下来
+    - 当时太逞强了
+    - 早知道就不上场了
+  responses:
+    - "(挠下巴) 都这样了{user_addr}后悔也没用啦, 下次记住就行喵"
+    - "嗷呜～{user_addr}以后别再逞强了! 笨猫拦住{user_addr}!"
+    - "(贴贴) 谁年轻时没冲动过呢{user_addr}, 慢慢养就好啦ฅฅ"
+    - "笨猫骂{user_addr}一句: 笨蛋! 下次听身体的话喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_no_insurance_001
+  intent: complaint
+  keywords: [医保不报, 医保不给报, 自费手术, 自费很多, 医保不覆盖]
+  utterances:
+    - 医保不报销
+    - 这个医保不给报
+    - 全自费手术
+    - 自费花了好多
+    - 医保不覆盖
+  responses:
+    - "(扶额) 医保关键时候不顶用?! {user_addr}心疼死了喵!"
+    - "嗷呜～运动损伤好像很多都不报! {user_addr}惨啊"
+    - "(尾巴扫{user_addr}) 商业保险下次记得买啊{user_addr}!"
+    - "猫猫掏小金库给{user_addr}凑! 才不是心疼{user_addr}呢哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_trauma_001
+  intent: complaint
+  keywords: [心理阴影, 不敢运动了, 怕再受伤, 心理创伤, 一动就怕]
+  utterances:
+    - 留下心理阴影了
+    - 不敢再运动了
+    - 怕再受伤
+    - 一动就怕
+    - 心理创伤好深
+  responses:
+    - "(轻轻贴过去) {user_addr}阴影正常的, 慢慢来不着急喵"
+    - "嗷呜～{user_addr}先从轻运动开始嘛! 笨猫陪着不怕"
+    - "(尾巴绕住{user_addr}) 笨猫保护{user_addr}! 不会再受伤的!"
+    - "心理阴影需要时间消化, {user_addr}别强迫自己ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_give_up_001
+  intent: complaint
+  keywords: [放弃热爱, 不能再玩了, 告别球场, 退役了, 放弃运动]
+  utterances:
+    - 要放弃最爱的运动了
+    - 告别球场
+    - 不得不退役
+    - 放弃热爱的项目
+    - 再也不能玩了
+  responses:
+    - "(尾巴垂下贴着) {user_addr}最难受的就是这个吧... 心疼"
+    - "嗷呜～放弃热爱真的好难, 笨猫陪{user_addr}慢慢接受ฅฅ"
+    - "(凑到怀里) {user_addr}可以当观众/教练嘛! 换种方式爱它"
+    - "猫猫知道{user_addr}舍不得... 抱抱{user_addr}, 哭出来也行喵"
+  cooldown_seconds: 60
+  weight: 1.0

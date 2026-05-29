@@ -1,0 +1,206 @@
+# 跑酷 routes (S6 R702 NLU 节点扩充, 第七十周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pa_intro_001
+  intent: question
+  keywords: [推荐跑酷入门, 推荐 Parkour, 推荐跑酷新手, 推荐跑酷基础, 笨猫跑酷入门]
+  utterances:
+    - 推荐跑酷入门
+    - 推荐 Parkour
+    - 推荐跑酷新手
+    - 推荐跑酷基础
+    - 笨猫跑酷入门
+  responses:
+    - "嗷呜～{user_addr}Parkour - 城市移动艺术ฅฅ"
+    - "(尾巴翘) 基础: 落地 / 翻滚 / 攀爬"
+    - "{user_addr}先练体能 + 平衡感"
+    - "(挺胸) 笨猫推荐: 从低处慢慢练!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_freerunning_001
+  intent: question
+  keywords: [推荐 free running, 推荐自由奔跑, 推荐花式跑酷, 推荐 FR, 笨猫 free running]
+  utterances:
+    - "推荐 free running"
+    - 推荐自由奔跑
+    - 推荐花式跑酷
+    - "推荐 FR"
+    - "笨猫 free running"
+  responses:
+    - "嗷呜～{user_addr}Free Running - 跑酷+花式ฅฅ"
+    - "(尾巴翘) 加入翻腾 / 旋转 / 美感"
+    - "{user_addr}David Belle vs Sébastien Foucan"
+    - "(挺胸) 笨猫推荐: FR 更艺术!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_spot_001
+  intent: question
+  keywords: [推荐跑酷场地, 推荐跑酷公园, 推荐 parkour park, 推荐城市跑酷点, 笨猫跑酷场地]
+  utterances:
+    - 推荐跑酷场地
+    - 推荐跑酷公园
+    - "推荐 parkour park"
+    - 推荐城市跑酷点
+    - 笨猫跑酷场地
+  responses:
+    - "嗷呜～{user_addr}专业 Parkour Park 最安全ฅฅ"
+    - "(尾巴翘) 城市天台 / 废弃楼 - 危险"
+    - "{user_addr}健身房软垫练习先"
+    - "(挺胸) 笨猫推荐: 找专业场地!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_shoes_001
+  intent: question
+  keywords: [推荐跑酷鞋, 推荐 Kalenji, 推荐 Take Flight, 推荐 Ollo, 笨猫跑酷鞋]
+  utterances:
+    - 推荐跑酷鞋
+    - "推荐 Kalenji"
+    - "推荐 Take Flight"
+    - "推荐 Ollo"
+    - 笨猫跑酷鞋
+  responses:
+    - "嗷呜～{user_addr}Take Flight / Ollo - 专业款ฅฅ"
+    - "(尾巴翘) Kalenji Parkour / 5.10"
+    - "{user_addr}薄底 + 抓地 + 轻量"
+    - "(挺胸) 笨猫推荐: Take Flight 入门!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_youtube_001
+  intent: question
+  keywords: [推荐跑酷 YouTube, 推荐 Storror, 推荐 Jason Paul, 推荐跑酷频道, 笨猫跑酷频道]
+  utterances:
+    - "推荐跑酷 YouTube"
+    - "推荐 Storror"
+    - "推荐 Jason Paul"
+    - 推荐跑酷频道
+    - 笨猫跑酷频道
+  responses:
+    - "嗷呜～{user_addr}Storror - 英国跑酷天团ฅฅ"
+    - "(尾巴翘) Jason Paul / Pasha"
+    - "{user_addr}Damien Walters / Ronnie Shalvis"
+    - "(挺胸) 笨猫推荐: Storror Roof Culture!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_movie_001
+  intent: question
+  keywords: [推荐跑酷电影, 推荐 Yamakasi, 推荐 District 13, 推荐暴力街区, 笨猫跑酷电影]
+  utterances:
+    - 推荐跑酷电影
+    - "推荐 Yamakasi"
+    - "推荐 District 13"
+    - 推荐暴力街区
+    - 笨猫跑酷电影
+  responses:
+    - "嗷呜～{user_addr}Yamakasi 2001 - 跑酷起源ฅฅ"
+    - "(尾巴翘) District 13 暴力街区"
+    - "{user_addr}Casino Royale 开场跑酷"
+    - "(挺胸) 笨猫推荐: Yamakasi 必看!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pa_gear_001
+  intent: question
+  keywords: [推荐跑酷护具, 推荐护膝, 推荐护肘, 推荐护腕, 笨猫跑酷护具]
+  utterances:
+    - 推荐跑酷护具
+    - 推荐护膝
+    - 推荐护肘
+    - 推荐护腕
+    - 笨猫跑酷护具
+  responses:
+    - "嗷呜～{user_addr}护膝 + 护肘 + 护腕ฅฅ"
+    - "(尾巴翘) 手套防磨 / 头盔可选"
+    - "{user_addr}弹性贴扎 - 保护关节"
+    - "(挺胸) 笨猫推荐: 新手必戴护具!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_camp_001
+  intent: question
+  keywords: [推荐跑酷训练营, 推荐 parkour camp, 推荐 ADAPT, 推荐跑酷集训, 笨猫跑酷训练营]
+  utterances:
+    - 推荐跑酷训练营
+    - "推荐 parkour camp"
+    - "推荐 ADAPT"
+    - 推荐跑酷集训
+    - 笨猫跑酷训练营
+  responses:
+    - "嗷呜～{user_addr}ADAPT 认证教练系统ฅฅ"
+    - "(尾巴翘) Storror Camp 英国"
+    - "{user_addr}国内: 北京 / 上海 跑酷社团"
+    - "(挺胸) 笨猫推荐: 找认证教练!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pa_club_001
+  intent: question
+  keywords: [推荐跑酷俱乐部, 推荐跑酷社团, 推荐 parkour gym, 推荐跑酷馆, 笨猫跑酷俱乐部]
+  utterances:
+    - 推荐跑酷俱乐部
+    - 推荐跑酷社团
+    - "推荐 parkour gym"
+    - 推荐跑酷馆
+    - 笨猫跑酷俱乐部
+  responses:
+    - "嗷呜～{user_addr}北京 Pkfr / 上海跑酷ฅฅ"
+    - "(尾巴翘) 广州 / 深圳跑酷馆"
+    - "{user_addr}线下社团 - 交流 + 安全"
+    - "(挺胸) 笨猫推荐: 找当地社团!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pa_competition_001
+  intent: question
+  keywords: [推荐跑酷比赛, 推荐 Red Bull Art of Motion, 推荐 NAPC, 推荐 FIG 跑酷, 笨猫跑酷比赛]
+  utterances:
+    - 推荐跑酷比赛
+    - "推荐 Red Bull Art of Motion"
+    - "推荐 NAPC"
+    - "推荐 FIG 跑酷"
+    - 笨猫跑酷比赛
+  responses:
+    - "嗷呜～{user_addr}Red Bull Art of Motion - 顶级ฅฅ"
+    - "(尾巴翘) NAPC / FIG 世界杯"
+    - "{user_addr}WFPF 世界跑酷联盟"
+    - "(挺胸) 笨猫推荐: Red Bull AoM 看炫技!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pa_moves_001
+  intent: question
+  keywords: [推荐跑酷动作, 推荐 vault, 推荐 wall run, 推荐 precision, 笨猫跑酷动作]
+  utterances:
+    - 推荐跑酷动作
+    - "推荐 vault"
+    - "推荐 wall run"
+    - "推荐 precision"
+    - 笨猫跑酷动作
+  responses:
+    - "嗷呜～{user_addr}Vault 翻越 / Kong Vault 猿跳ฅฅ"
+    - "(尾巴翘) Wall Run / Tic Tac / Cat Leap"
+    - "{user_addr}Precision Jump - 精准跳"
+    - "(挺胸) 笨猫推荐: 先学 Safety Roll!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_urban_001
+  intent: question
+  keywords: [推荐城市探索, 推荐 urbex, 推荐 rooftopping, 推荐城市跑酷, 笨猫城市探索]
+  utterances:
+    - 推荐城市探索
+    - "推荐 urbex"
+    - "推荐 rooftopping"
+    - 推荐城市跑酷
+    - 笨猫城市探索
+  responses:
+    - "嗷呜～{user_addr}Urbex - 城市废墟探索ฅฅ"
+    - "(尾巴翘) Rooftopping 天台党 - 危险!"
+    - "{user_addr}注意法律 / 安全 / 报备"
+    - "(挺胸) 笨猫推荐: 别违法 + 别独行!"
+  cooldown_seconds: 60
+  weight: 0.8

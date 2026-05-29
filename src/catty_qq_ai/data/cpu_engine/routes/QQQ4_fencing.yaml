@@ -1,0 +1,206 @@
+# 击剑 routes (S6 R706 NLU 节点扩充, 第七十周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: fc_beginner_001
+  intent: question
+  keywords: [推荐击剑入门, 推荐学击剑, 推荐击剑新手, 推荐击剑教程, 笨猫击剑入门]
+  utterances:
+    - 推荐击剑入门
+    - 推荐学击剑
+    - 推荐击剑新手
+    - 推荐击剑教程
+    - 笨猫击剑入门
+  responses:
+    - "嗷呜～{user_addr}先选剑种 - 花/重/佩ฅฅ"
+    - "(尾巴翘) 体验课 → 基础步伐 → 实战"
+    - "{user_addr}装备齐 / 头盔金属衣"
+    - "(挺胸) 笨猫推荐: 从花剑入门最常见!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_foil_001
+  intent: question
+  keywords: [推荐花剑, 推荐 foil, 推荐花剑技巧, 推荐花剑规则, 笨猫花剑]
+  utterances:
+    - 推荐花剑
+    - 推荐 foil
+    - 推荐花剑技巧
+    - 推荐花剑规则
+    - 笨猫花剑
+  responses:
+    - "嗷呜～{user_addr}花剑 Foil - 刺击有效区躯干ฅฅ"
+    - "(尾巴翘) 优先权规则 / 轻巧灵活"
+    - "{user_addr}电衣金属背心 / 入门首选"
+    - "(挺胸) 笨猫推荐: 花剑练步伐基础!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_epee_001
+  intent: question
+  keywords: [推荐重剑, 推荐 epee, 推荐重剑技巧, 推荐重剑规则, 笨猫重剑]
+  utterances:
+    - 推荐重剑
+    - 推荐 epee
+    - 推荐重剑技巧
+    - 推荐重剑规则
+    - 笨猫重剑
+  responses:
+    - "嗷呜～{user_addr}重剑 Epee - 全身有效区ฅฅ"
+    - "(尾巴翘) 无优先权 / 谁先击中谁得分"
+    - "{user_addr}剑身最重 / 适合战术型"
+    - "(挺胸) 笨猫推荐: 中国队强项就是重剑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_sabre_001
+  intent: question
+  keywords: [推荐佩剑, 推荐 sabre, 推荐佩剑技巧, 推荐佩剑规则, 笨猫佩剑]
+  utterances:
+    - 推荐佩剑
+    - 推荐 sabre
+    - 推荐佩剑技巧
+    - 推荐佩剑规则
+    - 笨猫佩剑
+  responses:
+    - "嗷呜～{user_addr}佩剑 Sabre - 劈刺并用腰以上ฅฅ"
+    - "(尾巴翘) 节奏最快 / 优先权规则"
+    - "{user_addr}进攻凶猛 / 一秒定胜负"
+    - "(挺胸) 笨猫推荐: 佩剑超刺激的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_brand_allstar_001
+  intent: question
+  keywords: [推荐 Allstar, 推荐 Uhlmann, 推荐德国击剑装备, 推荐 Allstar 剑, 笨猫 Allstar]
+  utterances:
+    - 推荐 Allstar
+    - 推荐 Uhlmann
+    - 推荐德国击剑装备
+    - 推荐 Allstar 剑
+    - 笨猫 Allstar
+  responses:
+    - "嗷呜～{user_addr}Allstar - 德国老牌专业ฅฅ"
+    - "(尾巴翘) Uhlmann 同集团 / 顶级品质"
+    - "{user_addr}国际赛标配 / 价格偏高"
+    - "(挺胸) 笨猫推荐: Allstar 剑条耐用!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fc_brand_leonpaul_001
+  intent: question
+  keywords: [推荐 Leon Paul, 推荐英国击剑装备, 推荐 LP 击剑, 推荐 Leon Paul 头盔, 笨猫 Leon Paul]
+  utterances:
+    - 推荐 Leon Paul
+    - 推荐英国击剑装备
+    - 推荐 LP 击剑
+    - 推荐 Leon Paul 头盔
+    - 笨猫 Leon Paul
+  responses:
+    - "嗷呜～{user_addr}Leon Paul - 英国百年品牌ฅฅ"
+    - "(尾巴翘) X-Change 可换柄 / 设计感强"
+    - "{user_addr}头盔颜值高 / 价格更贵"
+    - "(挺胸) 笨猫推荐: LP 头盔超帅!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fc_club_001
+  intent: question
+  keywords: [推荐击剑馆, 推荐击剑俱乐部, 推荐 IWA, 推荐万国击剑, 笨猫击剑馆]
+  utterances:
+    - 推荐击剑馆
+    - 推荐击剑俱乐部
+    - 推荐 IWA
+    - 推荐万国击剑
+    - 笨猫击剑馆
+  responses:
+    - "嗷呜～{user_addr}国内: 万国 IWA / 西洋剑馆ฅฅ"
+    - "(尾巴翘) 看教练资质 / 看剑道数量"
+    - "{user_addr}体验课 → 月卡 → 年卡"
+    - "(挺胸) 笨猫推荐: 选离家近最重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_kids_001
+  intent: question
+  keywords: [推荐儿童击剑, 推荐少儿击剑, 推荐击剑培训班, 推荐小孩学击剑, 笨猫儿童击剑]
+  utterances:
+    - 推荐儿童击剑
+    - 推荐少儿击剑
+    - 推荐击剑培训班
+    - 推荐小孩学击剑
+    - 笨猫儿童击剑
+  responses:
+    - "嗷呜～{user_addr}6-8 岁起步合适ฅฅ"
+    - "(尾巴翘) 锻炼专注力 / 礼仪 / 反应"
+    - "{user_addr}先体验课 / 别一上来就报年卡"
+    - "(挺胸) 笨猫推荐: 花剑入门最适合小孩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_school_stpetersburg_001
+  intent: question
+  keywords: [推荐圣彼得堡击剑, 推荐俄罗斯击剑, 推荐击剑名校, 推荐 St Petersburg fencing, 笨猫击剑名校]
+  utterances:
+    - 推荐圣彼得堡击剑
+    - 推荐俄罗斯击剑
+    - 推荐击剑名校
+    - 推荐 St Petersburg fencing
+    - 笨猫击剑名校
+  responses:
+    - "嗷呜～{user_addr}圣彼得堡 - 击剑学派圣地ฅฅ"
+    - "(尾巴翘) 俄罗斯佩剑 / 重剑超强"
+    - "{user_addr}匈牙利 / 意大利 / 法国传统派"
+    - "(挺胸) 笨猫推荐: 圣彼得堡训练体系经典!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fc_grandprix_001
+  intent: question
+  keywords: [推荐击剑大奖赛, 推荐 Grand Prix, 推荐 FIE 比赛, 推荐世界击剑赛, 笨猫击剑比赛]
+  utterances:
+    - 推荐击剑大奖赛
+    - 推荐 Grand Prix
+    - 推荐 FIE 比赛
+    - 推荐世界击剑赛
+    - 笨猫击剑比赛
+  responses:
+    - "嗷呜～{user_addr}FIE 大奖赛 Grand Prix 最高级别ฅฅ"
+    - "(尾巴翘) 世锦赛 / 世界杯分站"
+    - "{user_addr}积分排名 → 奥运资格"
+    - "(挺胸) 笨猫推荐: 看莫斯科 / 布达佩斯站!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_olympic_001
+  intent: question
+  keywords: [推荐奥运击剑, 推荐奥运会击剑, 推荐巴黎奥运击剑, 推荐击剑金牌, 笨猫奥运击剑]
+  utterances:
+    - 推荐奥运击剑
+    - 推荐奥运会击剑
+    - 推荐巴黎奥运击剑
+    - 推荐击剑金牌
+    - 笨猫奥运击剑
+  responses:
+    - "嗷呜～{user_addr}奥运三剑种 12 金ฅฅ"
+    - "(尾巴翘) 中国队: 雷声花剑 / 仲满佩剑"
+    - "{user_addr}女重团体奥运冠军 / 经典!"
+    - "(挺胸) 笨猫推荐: 看孙一文 / 许安琪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_college_001
+  intent: question
+  keywords: [推荐高校击剑队, 推荐大学击剑社, 推荐 NCAA fencing, 推荐清华击剑, 笨猫高校击剑]
+  utterances:
+    - 推荐高校击剑队
+    - 推荐大学击剑社
+    - 推荐 NCAA fencing
+    - 推荐清华击剑
+    - 笨猫高校击剑
+  responses:
+    - "嗷呜～{user_addr}美国: NCAA Notre Dame / Penn Stateฅฅ"
+    - "(尾巴翘) 国内: 南京大学 / 清华击剑队"
+    - "{user_addr}击剑特长生 / 高校招生"
+    - "(挺胸) 笨猫推荐: 圣母大学击剑超强!"
+  cooldown_seconds: 60
+  weight: 0.8
