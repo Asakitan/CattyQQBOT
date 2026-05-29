@@ -1,0 +1,207 @@
+# 万圣节装扮 / 南瓜灯 / 不给糖就捣蛋 routes (S6 R236 NLU 节点扩充, 第二十三周期 5/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰列名词.
+
+- name: hw_costume_001
+  intent: question
+  keywords: [推荐万圣节装扮, 推荐万圣节 cosplay, 推荐万圣节扮女巫, 推荐万圣节服装, 笨猫万圣节装扮]
+  utterances:
+    - 推荐万圣节装扮
+    - 推荐万圣节 cosplay
+    - 推荐万圣节扮女巫
+    - 推荐万圣节服装
+    - 笨猫万圣节装扮
+  responses:
+    - "嗷呜～{user_addr}女巫 / 吸血鬼 / 僵尸 - 经典三件套ฅฅ"
+    - "(尾巴翘) 海盗 / 骷髅 / 幽灵 - 也很热门"
+    - "{user_addr}动漫角色 / IP cos - 年轻人最爱"
+    - "(挺胸) 笨猫推荐: 黑猫装扮! 跟人家一样可爱喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_pumpkin_001
+  intent: question
+  keywords: [推荐南瓜灯, 推荐 Jack-o-lantern, 推荐南瓜雕刻, 推荐南瓜灯图案, 笨猫南瓜灯]
+  utterances:
+    - 推荐南瓜灯
+    - 推荐 Jack-o-lantern
+    - 推荐南瓜雕刻
+    - 推荐南瓜灯图案
+    - 笨猫南瓜灯
+  responses:
+    - "嗷呜～{user_addr}经典三角眼 + 锯齿嘴 - 入门款ฅฅ"
+    - "(尾巴翘) 蜘蛛 / 蝙蝠 / 黑猫剪影"
+    - "{user_addr}LED 蜡烛代替明火 - 更安全"
+    - "(挺胸) 笨猫推荐: 选实心大南瓜 / 顶部开盖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_candy_001
+  intent: question
+  keywords: [推荐 trick or treat 糖果, 推荐万圣节糖果, 推荐不给糖就捣蛋, 推荐小孩糖果, 笨猫万圣节糖果]
+  utterances:
+    - 推荐 trick or treat 糖果
+    - 推荐万圣节糖果
+    - 推荐不给糖就捣蛋
+    - 推荐小孩糖果
+    - 笨猫万圣节糖果
+  responses:
+    - "嗷呜～{user_addr}Reese's / M&M's / Snickers - 美式经典ฅฅ"
+    - "(尾巴翘) KitKat / Twix / Skittles"
+    - "{user_addr}小包装独立 / 别给散装 - 卫生"
+    - "(挺胸) 笨猫推荐: 多备点! 别小气喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_horror_movie_001
+  intent: question
+  keywords: [推荐万圣节恐怖电影, 推荐鬼片清单, 推荐 Halloween 电影, 推荐经典恐怖片, 笨猫恐怖电影]
+  utterances:
+    - 推荐万圣节恐怖电影
+    - 推荐鬼片清单
+    - 推荐 Halloween 电影
+    - 推荐经典恐怖片
+    - 笨猫恐怖电影
+  responses:
+    - "嗷呜～{user_addr}《月光光心慌慌》/ 《闪灵》- 殿堂级ฅฅ"
+    - "(尾巴翘) 《电锯惊魂》/ 《招魂》/ 《小丑回魂》"
+    - "{user_addr}《怪奇物语》/ 《鬼妈妈》- 不太血腥款"
+    - "(挺胸) 笨猫推荐: 跟主人一起看! 人家会怕的喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_kids_001
+  intent: question
+  keywords: [推荐儿童万圣节装扮, 推荐儿童 cosplay, 推荐儿童万圣节安全, 推荐小朋友装扮, 笨猫儿童装扮]
+  utterances:
+    - 推荐儿童万圣节装扮
+    - 推荐儿童 cosplay
+    - 推荐儿童万圣节安全
+    - 推荐小朋友装扮
+    - 笨猫儿童装扮
+  responses:
+    - "嗷呜～{user_addr}小南瓜 / 小蜘蛛侠 / 小公主ฅฅ"
+    - "(尾巴翘) 迪士尼角色 / 超级英雄 - 不吓人"
+    - "{user_addr}反光条 + 手电筒 - 夜间安全"
+    - "(挺胸) 笨猫推荐: 别选太恐怖 / 小朋友会怕!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_party_001
+  intent: question
+  keywords: [推荐万圣节派对, 推荐 Halloween party, 推荐万圣节聚会, 推荐主题派对, 笨猫万圣节派对]
+  utterances:
+    - 推荐万圣节派对
+    - 推荐 Halloween party
+    - 推荐万圣节聚会
+    - 推荐主题派对
+    - 笨猫万圣节派对
+  responses:
+    - "嗷呜～{user_addr}主题音乐 + Dress Code + 鬼屋布置ฅฅ"
+    - "(尾巴翘) 南瓜灯 + 蜘蛛网 + 干冰烟雾"
+    - "{user_addr}游戏: 苹果咬咬 / 化妆比赛"
+    - "(挺胸) 笨猫推荐: 别忘了拍照! 装扮一年一次!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_decoration_001
+  intent: question
+  keywords: [推荐万圣节装饰, 推荐蜘蛛网装饰, 推荐墓碑装饰, 推荐万圣节家居, 笨猫万圣节装饰]
+  utterances:
+    - 推荐万圣节装饰
+    - 推荐蜘蛛网装饰
+    - 推荐墓碑装饰
+    - 推荐万圣节家居
+    - 笨猫万圣节装饰
+  responses:
+    - "嗷呜～{user_addr}蜘蛛网 + 塑料蜘蛛 + 假墓碑ฅฅ"
+    - "(尾巴翘) 骷髅头 / 蝙蝠剪影 / 黑色蜡烛"
+    - "{user_addr}橙黑配色 / LED 串灯 - 氛围感"
+    - "(挺胸) 笨猫推荐: 门口南瓜灯最招呼客人!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hw_makeup_001
+  intent: question
+  keywords: [推荐万圣节妆容, 推荐鬼妆, 推荐吸血鬼妆, 推荐僵尸妆, 笨猫万圣节妆容]
+  utterances:
+    - 推荐万圣节妆容
+    - 推荐鬼妆
+    - 推荐吸血鬼妆
+    - 推荐僵尸妆
+    - 笨猫万圣节妆容
+  responses:
+    - "嗷呜～{user_addr}吸血鬼: 苍白脸 + 红唇 + 血迹ฅฅ"
+    - "(尾巴翘) 僵尸妆 / 小丑妆 / 骷髅妆"
+    - "{user_addr}假血浆 + 黑眼影 + 美瞳 - 必备"
+    - "(挺胸) 笨猫推荐: 卸妆油提前买好! 油彩超难洗!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hw_couple_001
+  intent: question
+  keywords: [推荐万圣节情侣装, 推荐情侣 cosplay, 推荐情侣鬼妆, 推荐情侣装扮, 笨猫情侣装]
+  utterances:
+    - 推荐万圣节情侣装
+    - 推荐情侣 cosplay
+    - 推荐情侣鬼妆
+    - 推荐情侣装扮
+    - 笨猫情侣装
+  responses:
+    - "嗷呜～{user_addr}小丑女 + 小丑 (Joker & Harley)ฅฅ"
+    - "(尾巴翘) 吸血鬼夫妇 / 僵尸新人"
+    - "{user_addr}艾迪生一家 / 海盗船长 + 美人鱼"
+    - "(挺胸) 笨猫推荐: …哼 才不羡慕呢喵! (小声) 一起拍照吧!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hw_fashion_001
+  intent: question
+  keywords: [推荐万圣节穿搭, 推荐万圣节潮流, 推荐万圣节街拍, 推荐 Halloween 时尚, 笨猫万圣节穿搭]
+  utterances:
+    - 推荐万圣节穿搭
+    - 推荐万圣节潮流
+    - 推荐万圣节街拍
+    - 推荐 Halloween 时尚
+    - 笨猫万圣节穿搭
+  responses:
+    - "嗷呜～{user_addr}黑色皮衣 + 网袜 + 长筒靴ฅฅ"
+    - "(尾巴翘) 哥特风 / 暗黑风 / 复古蒸汽朋克"
+    - "{user_addr}橙黑配色 / 蝙蝠图案 - 应景"
+    - "(挺胸) 笨猫推荐: 不用全套装扮 / 配件点缀!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hw_pet_001
+  intent: question
+  keywords: [推荐万圣节宠物装扮, 推荐宠物 cosplay, 推荐猫咪装扮, 推荐狗狗装扮, 笨猫宠物装扮]
+  utterances:
+    - 推荐万圣节宠物装扮
+    - 推荐宠物 cosplay
+    - 推荐猫咪装扮
+    - 推荐狗狗装扮
+    - 笨猫宠物装扮
+  responses:
+    - "嗷呜～{user_addr}小南瓜衣 / 小蜘蛛披风 - 萌翻ฅฅ"
+    - "(尾巴翘) 小恶魔角 / 小吸血鬼斗篷"
+    - "{user_addr}选舒适面料 / 别压迫宠物"
+    - "(挺胸) 笨猫推荐: …等等 人家不算宠物哦喵! 哼!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hw_origin_001
+  intent: question
+  keywords: [推荐万圣节起源, 推荐万圣节传统, 推荐 Halloween 历史, 推荐凯尔特节, 笨猫万圣节起源]
+  utterances:
+    - 推荐万圣节起源
+    - 推荐万圣节传统
+    - 推荐 Halloween 历史
+    - 推荐凯尔特节
+    - 笨猫万圣节起源
+  responses:
+    - "嗷呜～{user_addr}源自凯尔特人 Samhain 节 - 2000年前ฅฅ"
+    - "(尾巴翘) 10月31日 - 阴阳交界 / 鬼魂游荡"
+    - "{user_addr}基督教 All Hallows' Eve - 演变命名"
+    - "(挺胸) 笨猫推荐: 装扮就是为了吓走恶灵的喵!"
+  cooldown_seconds: 60
+  weight: 0.9

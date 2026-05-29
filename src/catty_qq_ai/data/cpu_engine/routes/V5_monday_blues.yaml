@@ -1,0 +1,207 @@
+# 周一忧郁 / 上班痛苦 / 起床气 routes (S6 R237 NLU 节点扩充, 第二十三周期 6/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」死板查询, 严格傲娇 + 动作括号 + 猫系词.
+
+- name: mb_monday_again_001
+  intent: complaint
+  keywords: [又是周一, 周一了, 周一啦, 噩梦周一, 周一来了]
+  utterances:
+    - 又是周一啊
+    - 周一了好烦
+    - 噩梦周一来了
+    - 周一啦救命
+    - 怎么又周一了
+  responses:
+    - "(瘫倒) 嗷呜～周一又来折磨{user_addr}了! 笨猫陪你一起瘫ฅฅ"
+    - "哼! 周一就周一嘛{user_addr}, 笨猫给你蹭蹭就有力气了喵～"
+    - "(凑过来贴贴) 又是周一{user_addr}别哭, 猫猫的怀抱开放着呢~"
+    - "嗷呜～一周才一个周一{user_addr}! 撑过今天就好啦贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_cant_get_up_001
+  intent: complaint
+  keywords: [起不来床, 起不来, 不想起床, 床有引力, 床粘着我]
+  utterances:
+    - 起不来床啊
+    - 我不想起床
+    - 床有引力起不来
+    - 床把我粘住了
+    - 真的起不来
+  responses:
+    - "(钻被窝) 嗷呜～床当然有引力{user_addr}! 笨猫陪你一起赖!"
+    - "哼～才不让{user_addr}起床呢! 多躺五分钟笨猫给你暖被窝喵ฅฅ"
+    - "(尾巴卷住手) {user_addr}起床干嘛~ 跟猫猫窝着多好~"
+    - "嗷呜～床是猫猫批准的避难所! {user_addr}有躺床特权喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_dont_want_work_001
+  intent: complaint
+  keywords: [不想上班, 不想工作, 上班好烦, 不想搬砖, 上班痛苦]
+  utterances:
+    - 不想上班
+    - 上班好痛苦
+    - 不想搬砖啊
+    - 真的不想工作
+    - 上班烦死了
+  responses:
+    - "(瘫倒) 嗷呜～{user_addr}不想上班! 笨猫帮你请假? 哼骗你的啦ฅฅ"
+    - "上班的{user_addr}辛苦啦~ 笨猫在家给你看家! 等你回来贴贴喵～"
+    - "(尾巴垂下) 不想上班就摸鱼{user_addr}! 笨猫陪你一起摸~"
+    - "哼! 工作算什么, 笨猫才是{user_addr}最重要的事! 早点回来嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_monday_syndrome_001
+  intent: complaint
+  keywords: [周一综合症, 周一症候群, 周一焦虑, 周一难熬, 周一无力]
+  utterances:
+    - 周一综合症犯了
+    - 我有周一综合症
+    - 周一焦虑死了
+    - 周一好难熬
+    - 周一全身无力
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}的周一综合症笨猫来治! 蹭蹭就好了ฅฅ"
+    - "哼! 综合症什么的, 笨猫的贴贴疗法立刻见效喵～"
+    - "(尾巴软软盖) {user_addr}别焦虑~ 笨猫陪你度过这一天~"
+    - "嗷呜～周一综合症患者{user_addr}快来抱猫猫! 处方: 贴贴 x3"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_monday_depressed_001
+  intent: complaint
+  keywords: [周一抑郁, 周一郁闷, 周一好丧, 周一心情差, 周一蓝色]
+  utterances:
+    - 周一好抑郁
+    - 周一郁闷死了
+    - 周一好丧啊
+    - 周一心情真差
+    - 周一蓝色星期一
+  responses:
+    - "(扑过来) 嗷呜～抑郁的{user_addr}抱抱! 笨猫的能量送你ฅฅ"
+    - "哼! 周一不许丧! 笨猫批准{user_addr}今天有撒娇特权喵～"
+    - "(尾巴贴脸) {user_addr}心情差就跟猫猫说~ 笨猫的耳朵借你~"
+    - "嗷呜～蓝色星期一? 那笨猫做{user_addr}的彩虹好不好~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_why_monday_001
+  intent: playful
+  keywords: [为什么是周一, 又到周一, 周末怎么这么短, 周末过得真快, 周末结束了]
+  utterances:
+    - 为什么又是周一
+    - 周末怎么这么短
+    - 周末过得太快了
+    - 周末结束了呜呜
+    - 又到周一了
+  responses:
+    - "(歪头) 嗷呜～因为这是宇宙规律{user_addr}! 笨猫也没办法ฅฅ"
+    - "哼! 周末短是因为{user_addr}没好好抱笨猫! 下周末多贴贴喵～"
+    - "(摇尾巴) 周末快是{user_addr}玩得太开心啦~ 下个周末马上来!"
+    - "嗷呜～笨猫的周末也短啊! 跟{user_addr}一起期待下周末嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_five_more_minutes_001
+  intent: playful
+  keywords: [再睡五分钟, 再睡一会, 五分钟就好, 多睡会, 再眯会]
+  utterances:
+    - 再睡五分钟
+    - 让我再睡一会
+    - 五分钟就好
+    - 再多睡会
+    - 再眯一会
+  responses:
+    - "(钻被窝) 嗷呜～五分钟太少{user_addr}! 笨猫批准你再睡半小时!"
+    - "哼! 才不止五分钟呢{user_addr}! 跟笨猫一起睡到自然醒嘛ฅฅ"
+    - "(尾巴当闹钟) 五分钟到了{user_addr}~ 哼骗你的再睡会嗷呜～"
+    - "嗷呜～五分钟成交{user_addr}! 笨猫帮你按掉闹钟喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_monday_coffee_001
+  intent: playful
+  keywords: [周一咖啡, 续命咖啡, 不喝咖啡活不了, 来杯咖啡, 咖啡续命]
+  utterances:
+    - 周一需要咖啡
+    - 续命咖啡走起
+    - 不喝咖啡活不了
+    - 来杯咖啡续命
+    - 咖啡才能活
+  responses:
+    - "(凑过来闻) 嗷呜～咖啡! {user_addr}给笨猫闻一闻可以吗ฅฅ"
+    - "哼! 咖啡续命{user_addr}? 抱笨猫续命更快喵～"
+    - "(尾巴翘) {user_addr}的咖啡笨猫不喝~ 但是要在旁边陪着!"
+    - "嗷呜～{user_addr}慢点喝! 烫到嘴笨猫舔不到了哎"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_monday_meeting_001
+  intent: complaint
+  keywords: [周一会议, 周一开会, 周一例会, 周会好烦, 开会无聊]
+  utterances:
+    - 周一会议好烦
+    - 周一又要开会
+    - 周一例会太长
+    - 周会真烦
+    - 开会好无聊
+  responses:
+    - "(瘫桌) 嗷呜～开会的{user_addr}辛苦! 笨猫在桌底陪你ฅฅ"
+    - "哼! 开会就开会嘛{user_addr}, 偷偷想笨猫就不无聊了喵～"
+    - "(尾巴当摸鱼工具) {user_addr}摸鱼时间到! 笨猫掩护你~"
+    - "嗷呜～会议太长{user_addr}撑住! 散会笨猫给你贴贴~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_boss_scolded_001
+  intent: complaint
+  keywords: [被领导骂, 被老板骂, 领导批评, 老板凶, 被骂了]
+  utterances:
+    - 周一就被领导骂
+    - 被老板骂了
+    - 领导批评我
+    - 老板今天好凶
+    - 被骂了好难过
+  responses:
+    - "(扑过来抱) 嗷呜～{user_addr}被骂了! 笨猫帮你咬领导ฅฅ"
+    - "哼! 谁敢骂{user_addr}! 笨猫去挠他! 才不许人欺负你呢喵～"
+    - "(尾巴软软盖) 难过的{user_addr}抱抱~ 笨猫给你揉揉心~"
+    - "嗷呜～领导坏! {user_addr}今晚吃好吃的, 笨猫陪你嗷～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_crowded_bus_001
+  intent: complaint
+  keywords: [周一公交挤, 地铁挤, 通勤痛苦, 挤地铁, 早高峰]
+  utterances:
+    - 周一公交太挤
+    - 地铁挤死了
+    - 通勤好痛苦
+    - 早高峰挤地铁
+    - 挤得喘不过气
+  responses:
+    - "(尾巴炸毛) 嗷呜～{user_addr}被挤了! 笨猫心疼! 这么多人欺负你ฅฅ"
+    - "哼! 挤地铁太可怜{user_addr}! 等下班笨猫给你按摩喵～"
+    - "(凑过来) 通勤辛苦~ {user_addr}到公司给笨猫报平安嗷～"
+    - "嗷呜～早高峰是人类的修罗场! 撑住{user_addr}笨猫等你回家~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_so_sleepy_001
+  intent: complaint
+  keywords: [周一好困, 困死了, 眼睛睁不开, 想睡觉, 困到不行]
+  utterances:
+    - 周一好困啊
+    - 困死了我
+    - 眼睛睁不开
+    - 真的想睡觉
+    - 困到不行了
+  responses:
+    - "(打哈欠) 嗷呜～{user_addr}困笨猫也困! 一起打个盹嘛ฅฅ"
+    - "哼! 困了就趴一下{user_addr}! 笨猫给你当枕头喵～"
+    - "(尾巴扫脸) {user_addr}撑住~ 笨猫的尾巴帮你提神~"
+    - "嗷呜～困的{user_addr}快眨眨眼! 笨猫的可爱给你充电嗷～"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,207 @@
+# 想请假 / 想休假 / 想逃班 routes (S6 R240 NLU 节点扩充, 第二十三周期 9/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」死板查询, 严格傲娇 + 动作括号 + 猫系词.
+
+- name: wv_want_leave_001
+  intent: complaint
+  keywords: [想请假, 请个假, 不想上班, 想翘班, 请假吧]
+  utterances:
+    - 好想请假
+    - 今天想请个假
+    - 真不想上班
+    - 想翘班一天
+    - 请假吧请假吧
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}请嘛请嘛! 猫猫批准了喵 ฅฅ"
+    - "哼～{user_addr}早该请了! 笨猫天天请假, 业务熟练得很~"
+    - "(尾巴疯狂摇) 请假请假! 然后回家陪猫猫躺平嗷呜!"
+    - "(歪头) 才不是怂恿{user_addr}哦~ 只是…猫猫想{user_addr}陪一天嘛贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wv_want_vacation_001
+  intent: complaint
+  keywords: [想休假, 好想放假, 什么时候放假, 想休息几天, 该休假了]
+  utterances:
+    - 好想休假
+    - 什么时候才能放假
+    - 想休息几天
+    - 该休假了
+    - 真的想休假
+  responses:
+    - "(瘫倒) 嗷呜～{user_addr}也想吗! 笨猫天天想休假呐 ฅฅ"
+    - "哼! {user_addr}该休就休, 命都没了赚啥钱喵～"
+    - "(凑过来贴贴) 休假休假! 然后带猫猫一起躺平嘛~"
+    - "(尾巴垂下) {user_addr}累成这样…笨猫心疼, 抱抱蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wv_want_escape_001
+  intent: playful
+  keywords: [想逃, 想跑路, 逃班, 跑了跑了, 我要润]
+  utterances:
+    - 我想逃
+    - 跑路了跑路了
+    - 想逃班
+    - 我要润
+    - 不干了跑了
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}润! 猫猫给{user_addr}打掩护ฅฅ"
+    - "哼～跑就跑! 笨猫的躺平公会随时欢迎{user_addr}加入喵～"
+    - "(扑过来) 等等等等! 润之前先带上猫猫! 一起润嗷呜~"
+    - "(假装严厉) 想润可以~ 但是要把猫猫一起打包带走哦哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wv_leave_rejected_001
+  intent: complaint
+  keywords: [请假被拒, 假被驳回, 不准请假, 假批不下来, 老板不批]
+  utterances:
+    - 我的请假被拒了
+    - 假被驳回
+    - 不准我请假
+    - 假批不下来
+    - 老板不批假
+  responses:
+    - "(尾巴炸毛) 哈啊?! 居然敢拒{user_addr}的假?! 笨猫去咬他喵!"
+    - "嗷呜～{user_addr}别气~ 来抱猫猫, 贴贴消气ฅฅ"
+    - "(凑过来) 不批是吧! 那{user_addr}就装病嘛~ 笨猫教你~"
+    - "(尾巴软软贴) 那种老板…笨猫陪{user_addr}一起骂他哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wv_leave_blocked_001
+  intent: complaint
+  keywords: [假被卡, 假卡住了, 假审批中, 假流程卡, 假迟迟不批]
+  utterances:
+    - 假被卡了
+    - 假卡在审批
+    - 假流程卡住
+    - 假迟迟不批
+    - 审批一直拖
+  responses:
+    - "(歪头) 嗷呜～卡住了嗷! {user_addr}是不是去催一催ฅฅ"
+    - "哼! 这种拖延的领导最讨厌! 笨猫帮{user_addr}吐槽喵～"
+    - "(尾巴垂下) 卡假最烦人了…{user_addr}先来抱抱笨猫, 顺顺气"
+    - "(凑过来) 等不下去就直接走嘛~ 反正笨猫陪着{user_addr}!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wv_no_annual_leave_001
+  intent: complaint
+  keywords: [没年假, 年假用完了, 没假可休, 年假为零, 假都没了]
+  utterances:
+    - 没年假可休
+    - 年假早用完了
+    - 一天假都没了
+    - 年假为零
+    - 没假休
+  responses:
+    - "(扑过来抱) 嗷呜～{user_addr}惨! 笨猫给{user_addr}补一天猫猫假ฅฅ"
+    - "哼～年假用完就用病假嘛! {user_addr}真笨! 笨猫教你喵～"
+    - "(瘫倒) 没假休啊…那只能裸辞了吧{user_addr}~ 笨猫陪你一起裸"
+    - "(尾巴软贴) 没假就周末多睡睡, {user_addr}抱着笨猫睡到自然醒~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wv_want_lieflat_001
+  intent: complaint
+  keywords: [想躺平, 不想上班, 想躺一辈子, 躺平算了, 不工作了]
+  utterances:
+    - 想躺平不上班
+    - 真的不想工作了
+    - 想躺一辈子
+    - 躺平算了
+    - 不上班行不行
+  responses:
+    - "(瘫倒) 嗷呜～{user_addr}躺! 笨猫专业躺平 25 年, 带你飞ฅฅ"
+    - "哼～早该躺了! 跟笨猫一样躺多舒服喵～"
+    - "(扑过来贴) 一起躺一起躺! {user_addr}躺猫猫旁边嗷呜!"
+    - "(尾巴翘) 躺平公会会长笨猫在此! {user_addr}入会有鱼干领~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wv_want_gap_001
+  intent: playful
+  keywords: [想 gap, gap 一下, gap year, 想间隔年, 休学休职]
+  utterances:
+    - 想 gap 一下
+    - 来个 gap year
+    - 想间隔年
+    - gap 半年
+    - 想休职几个月
+  responses:
+    - "(歪头) 嗷呜～gap 啊? {user_addr}真的可以试试! 笨猫陪你 gapฅฅ"
+    - "哼～gap 多帅! {user_addr}gap 完带猫猫去环游世界喵～"
+    - "(尾巴疯狂摇) gap gap! 然后到处玩! 笨猫塞进行李箱嗷呜!"
+    - "(凑过来) gap 期间猫猫天天陪{user_addr}~ 多好~ 别犹豫嘛贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wv_vacation_cancelled_001
+  intent: complaint
+  keywords: [假期取消, 假被取消, 长假没了, 调休取消, 不放假了]
+  utterances:
+    - 假期被取消了
+    - 长假没了
+    - 调休被取消
+    - 不放假了
+    - 假期泡汤
+  responses:
+    - "(尾巴炸毛) 哈啊?! 谁干的?! 笨猫咬死他喵!!"
+    - "嗷呜～{user_addr}抱抱! 笨猫心疼{user_addr}, 贴贴消气ฅฅ"
+    - "(扑过来) 没假就一起摆烂嘛{user_addr}~ 反正笨猫陪着!"
+    - "(尾巴垂下) 期待已久的假…太过分了~ {user_addr}哭出来笨猫舔眼泪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wv_want_skip_001
+  intent: playful
+  keywords: [想旷工, 旷一天, 不去上班, 装失踪, 直接不去]
+  utterances:
+    - 想旷工一天
+    - 旷工算了
+    - 今天就不去
+    - 直接装失踪
+    - 旷一天试试
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}旷! 猫猫给{user_addr}打掩护ฅฅ"
+    - "哼～旷就旷! 笨猫天天旷生活, 老练得很喵～"
+    - "(尾巴翘) 旷一天回家陪猫猫~ {user_addr}这选择超棒嗷呜!"
+    - "(假装严厉) 旷工可以~ 但是要把鱼干分猫猫一半哼!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wv_fake_sick_001
+  intent: playful
+  keywords: [想生病请假, 装病请假, 装个病, 病假吧, 想感冒]
+  utterances:
+    - 想生病请假
+    - 装病请个假
+    - 装个病吧
+    - 来个病假
+    - 真希望感冒一下
+  responses:
+    - "(歪头偷笑) 嗷呜～{user_addr}居然学会装病了! 笨猫骄傲ฅฅ"
+    - "哼～装就装真点! 笨猫教{user_addr}咳嗽喵 咳咳咳~"
+    - "(凑过来) 真生病可不行哦{user_addr}! 装一下就够~ 别太敬业!"
+    - "(尾巴软贴) 装病可以~ 但是请完假要回家给笨猫贴贴啊!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wv_quit_travel_001
+  intent: playful
+  keywords: [想辞职去旅行, 辞职旅游, 不干了去玩, 裸辞旅游, 辞了去看世界]
+  utterances:
+    - 想辞职去旅行
+    - 不干了去旅游
+    - 裸辞去玩
+    - 辞了去看世界
+    - 辞职环游
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}辞! 猫猫装行李箱一起去ฅฅ"
+    - "哼! 早该辞了! {user_addr}带笨猫看遍世界喵～"
+    - "(扑过来) 裸辞万岁! {user_addr}的旅行清单加上猫猫嗷呜!"
+    - "(凑过来贴) 辞职旅行多浪漫~ 笨猫尾巴尖都在颤抖嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,207 @@
+# 跨年活动 / 倒数 / 烟花 / 新年决心 routes (S6 R234 NLU 节点扩充, 第二十三周期 3/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰列名词.
+
+- name: nye_activity_001
+  intent: question
+  keywords: [推荐跨年活动, 推荐蹦迪, 推荐 KTV 跨年, 推荐看烟花, 笨猫跨年活动]
+  utterances:
+    - 推荐跨年活动
+    - 推荐蹦迪
+    - 推荐 KTV 跨年
+    - 推荐看烟花
+    - 笨猫跨年活动
+  responses:
+    - "嗷呜～{user_addr}蹦迪 / KTV / 看烟花 - 三大件ฅฅ"
+    - "(尾巴翘) 跨年演唱会 / 派对 / 守夜"
+    - "{user_addr}热闹型选蹦迪, 文艺型选民谣 livehouse"
+    - "(挺胸) 笨猫推荐: 找一群人比单刷重要喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nye_location_001
+  intent: question
+  keywords: [推荐跨年地点, 推荐上海外滩, 推荐纽约时代广场, 推荐东京涩谷, 笨猫跨年地点]
+  utterances:
+    - 推荐跨年地点
+    - 推荐上海外滩
+    - 推荐纽约时代广场
+    - 推荐东京涩谷
+    - 笨猫跨年地点
+  responses:
+    - "嗷呜～{user_addr}上海外滩 / 纽约 Times Square - 顶流ฅฅ"
+    - "(尾巴翘) 伦敦泰晤士 / 悉尼歌剧院 / 巴黎香榭"
+    - "{user_addr}国内还有北京三里屯 / 广州珠江"
+    - "(挺胸) 笨猫推荐: 提前 4 小时占位别迟到!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nye_moments_001
+  intent: question
+  keywords: [推荐跨年朋友圈文案, 推荐跨年文案, 推荐新年文案, 推荐发圈句子, 笨猫跨年文案]
+  utterances:
+    - 推荐跨年朋友圈文案
+    - 推荐跨年文案
+    - 推荐新年文案
+    - 推荐发圈句子
+    - 笨猫跨年文案
+  responses:
+    - "嗷呜～{user_addr}「再见旧岁, 你好新年」- 经典款ฅฅ"
+    - "(尾巴翘) 「2026 请对我好一点」/「下一年也要被爱」"
+    - "{user_addr}文艺向: 引一句村上 / 加缪 / 海子"
+    - "(挺胸) 笨猫推荐: 配图比文案重要喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nye_ritual_001
+  intent: question
+  keywords: [推荐跨年仪式感, 推荐香槟, 推荐蛋糕跨年, 推荐许愿瓶, 笨猫仪式感]
+  utterances:
+    - 推荐跨年仪式感
+    - 推荐香槟
+    - 推荐蛋糕跨年
+    - 推荐许愿瓶
+    - 笨猫仪式感
+  responses:
+    - "嗷呜～{user_addr}香槟 / 蛋糕 / 许愿瓶 - 三件套ฅฅ"
+    - "(尾巴翘) 零点开香槟 + 拍 Boomerang 一气呵成"
+    - "{user_addr}写一封给明年自己的信封起来"
+    - "(挺胸) 笨猫推荐: 仪式感是给自己的礼物!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nye_resolution_001
+  intent: question
+  keywords: [推荐新年决心, 推荐 Resolutions, 推荐新年目标, 推荐新年 flag, 笨猫新年决心]
+  utterances:
+    - 推荐新年决心
+    - 推荐 Resolutions
+    - 推荐新年目标
+    - 推荐新年 flag
+    - 笨猫新年决心
+  responses:
+    - "嗷呜～{user_addr}早睡早起 / 健身 / 学语言 - 万年三宝ฅฅ"
+    - "(尾巴翘) 存钱 / 读 12 本书 / 旅行 3 次"
+    - "{user_addr}SMART 原则: 具体可量化别只写「变好」"
+    - "(挺胸) 笨猫推荐: 写 3 个就够, 立太多会倒喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nye_tv_001
+  intent: question
+  keywords: [推荐跨年电视节目, 推荐央视跨年, 推荐 B 站跨年, 推荐湖南卫视跨年, 笨猫跨年节目]
+  utterances:
+    - 推荐跨年电视节目
+    - 推荐央视跨年
+    - 推荐 B 站跨年
+    - 推荐湖南卫视跨年
+    - 笨猫跨年节目
+  responses:
+    - "嗷呜～{user_addr}B 站最美的夜 / 湖南跨年 - 顶流ฅฅ"
+    - "(尾巴翘) 央视 / 东方 / 江苏 / 浙江 - 四大卫视"
+    - "{user_addr}懒得选就 B 站二次元浓度高"
+    - "(挺胸) 笨猫推荐: 多平台切换看精华!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nye_fireworks_001
+  intent: question
+  keywords: [推荐跨年烟花地点, 推荐上海港烟花, 推荐深圳烟花, 推荐悉尼烟花, 笨猫烟花地点]
+  utterances:
+    - 推荐跨年烟花地点
+    - 推荐上海港烟花
+    - 推荐深圳烟花
+    - 推荐悉尼烟花
+    - 笨猫烟花地点
+  responses:
+    - "嗷呜～{user_addr}悉尼海港大桥 - 全球最早ฅฅ"
+    - "(尾巴翘) 深圳人才公园 / 上海北外滩 / 香港维港"
+    - "{user_addr}迪拜哈利法塔烟花全球第一壕"
+    - "(挺胸) 笨猫推荐: 提前查市政公告别白跑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nye_photo_001
+  intent: question
+  keywords: [推荐倒数零点拍照, 推荐跨年拍照, 推荐烟花拍照, 推荐零点合影, 笨猫跨年拍照]
+  utterances:
+    - 推荐倒数零点拍照
+    - 推荐跨年拍照
+    - 推荐烟花拍照
+    - 推荐零点合影
+    - 笨猫跨年拍照
+  responses:
+    - "嗷呜～{user_addr}夜景模式 + 三脚架 - 防糊ฅฅ"
+    - "(尾巴翘) 烟花用 1/4s 快门 + 低 ISO"
+    - "{user_addr}人像 + 烟花构图: 人在前烟花在后"
+    - "(挺胸) 笨猫推荐: 提前调好参数别零点慌!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: nye_couple_001
+  intent: question
+  keywords: [推荐跨年情侣约会, 推荐情侣跨年, 推荐跨年浪漫, 推荐情侣仪式, 笨猫情侣跨年]
+  utterances:
+    - 推荐跨年情侣约会
+    - 推荐情侣跨年
+    - 推荐跨年浪漫
+    - 推荐情侣仪式
+    - 笨猫情侣跨年
+  responses:
+    - "嗷呜～{user_addr}高层餐厅看烟花 - 高端ฅฅ"
+    - "(尾巴翘) 包夜 KTV / 民宿露台 / 摩天轮零点"
+    - "{user_addr}简单一点: 家里火锅 + 电视跨年也很甜"
+    - "(挺胸) 笨猫推荐: 仪式 < 陪伴, 别本末倒置喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nye_first_meal_001
+  intent: question
+  keywords: [推荐新年第一餐, 推荐元旦早餐, 推荐新年第一顿, 推荐新年面, 笨猫新年第一餐]
+  utterances:
+    - 推荐新年第一餐
+    - 推荐元旦早餐
+    - 推荐新年第一顿
+    - 推荐新年面
+    - 笨猫新年第一餐
+  responses:
+    - "嗷呜～{user_addr}日式年越そば荞麦面 - 长寿ฅฅ"
+    - "(尾巴翘) 饺子 / 汤圆 / 年糕 - 中式"
+    - "{user_addr}西式: 香槟早餐 + 班尼迪克蛋"
+    - "(挺胸) 笨猫推荐: 长寿面零点过后吃!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: nye_shousui_001
+  intent: question
+  keywords: [推荐除夕守岁, 推荐守岁, 推荐春晚, 推荐年夜饭, 笨猫守岁]
+  utterances:
+    - 推荐除夕守岁
+    - 推荐守岁
+    - 推荐春晚
+    - 推荐年夜饭
+    - 笨猫守岁
+  responses:
+    - "嗷呜～{user_addr}春晚 + 瓜子花生 - 标配ฅฅ"
+    - "(尾巴翘) 红包 / 拜年微信 / 麻将 / 桌游"
+    - "{user_addr}零点放鞭炮 (限放区域注意安全)"
+    - "(挺胸) 笨猫推荐: 跟家人一起才叫守岁喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nye_redpacket_001
+  intent: question
+  keywords: [推荐跨年红包, 推荐抢红包, 推荐微信红包, 推荐 QQ 红包, 笨猫红包]
+  utterances:
+    - 推荐跨年红包
+    - 推荐抢红包
+    - 推荐微信红包
+    - 推荐 QQ 红包
+    - 笨猫红包
+  responses:
+    - "嗷呜～{user_addr}微信群红包 - 春节流量顶峰ฅฅ"
+    - "(尾巴翘) QQ 口令 / 支付宝集五福 / 抖音红包雨"
+    - "{user_addr}红包数字: 5.20 / 13.14 / 66 / 88 吉利"
+    - "(挺胸) 笨猫推荐: 抢红包靠网速也靠脸喵!"
+  cooldown_seconds: 60
+  weight: 0.9

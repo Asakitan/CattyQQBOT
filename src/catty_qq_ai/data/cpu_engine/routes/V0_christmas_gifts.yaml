@@ -1,0 +1,207 @@
+# 圣诞礼物 / 圣诞节物品 / 圣诞树装饰 routes (S6 R232 NLU 节点扩充, 第二十三周期 1/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰列名词.
+
+- name: cg_couple_gift_001
+  intent: question
+  keywords: [推荐圣诞礼物男友, 推荐圣诞礼物女友, 推荐情侣圣诞礼物, 圣诞送什么, 笨猫圣诞礼物]
+  utterances:
+    - 推荐圣诞礼物男友
+    - 推荐圣诞礼物女友
+    - 推荐情侣圣诞礼物
+    - 圣诞送什么
+    - 笨猫圣诞礼物
+  responses:
+    - "嗷呜～{user_addr}男友: 手表 / 钱包 / 球鞋 / 香水ฅฅ"
+    - "(尾巴翘) 女友: 项链 / 口红 / 包包 / 毛绒"
+    - "{user_addr}走心款: 手写信 + 合照相册"
+    - "(挺胸) 笨猫推荐: 心意 > 价格喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_tree_decor_001
+  intent: question
+  keywords: [推荐圣诞树装饰, 推荐圣诞灯串, 推荐圣诞挂件, 推荐圣诞树顶星, 笨猫圣诞树]
+  utterances:
+    - 推荐圣诞树装饰
+    - 推荐圣诞灯串
+    - 推荐圣诞挂件
+    - 推荐圣诞树顶星
+    - 笨猫圣诞树
+  responses:
+    - "嗷呜～{user_addr}暖白灯串 + 金红球 - 经典ฅฅ"
+    - "(尾巴翘) 麋鹿 / 雪花 / 拐杖糖挂件"
+    - "{user_addr}顶星 / 缎带蝴蝶结收尾"
+    - "(挺胸) 笨猫推荐: 1.8m 仿真树最佳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_stocking_outfit_001
+  intent: question
+  keywords: [推荐圣诞袜, 推荐圣诞穿搭, 推荐圣诞红色, 推荐圣诞毛衣, 笨猫圣诞袜]
+  utterances:
+    - 推荐圣诞袜
+    - 推荐圣诞穿搭
+    - 推荐圣诞红色
+    - 推荐圣诞毛衣
+    - 笨猫圣诞袜
+  responses:
+    - "嗷呜～{user_addr}红色针织袜 + 白毛边ฅฅ"
+    - "(尾巴翘) 丑萌毛衣 / 麋鹿图案"
+    - "{user_addr}红呢大衣 + 格纹围巾"
+    - "(挺胸) 笨猫推荐: 红+白+绿三色配!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_food_001
+  intent: question
+  keywords: [推荐圣诞食物, 推荐姜饼, 推荐圣诞蛋糕, 推荐树根蛋糕, 笨猫圣诞食物]
+  utterances:
+    - 推荐圣诞食物
+    - 推荐姜饼
+    - 推荐圣诞蛋糕
+    - 推荐树根蛋糕
+    - 笨猫圣诞食物
+  responses:
+    - "嗷呜～{user_addr}姜饼屋 / 姜饼人 - 必备ฅฅ"
+    - "(尾巴翘) Bûche de Noël 树根蛋糕"
+    - "{user_addr}热红酒 / Eggnog / 烤火鸡"
+    - "(挺胸) 笨猫推荐: 自烤姜饼最香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_kids_gift_001
+  intent: question
+  keywords: [推荐儿童圣诞礼物, 推荐圣诞玩具, 推荐乐高圣诞, 推荐小孩礼物盒, 笨猫儿童礼物]
+  utterances:
+    - 推荐儿童圣诞礼物
+    - 推荐圣诞玩具
+    - 推荐乐高圣诞
+    - 推荐小孩礼物盒
+    - 笨猫儿童礼物
+  responses:
+    - "嗷呜～{user_addr}乐高 / 拼搭积木 - 永不出错ฅฅ"
+    - "(尾巴翘) 毛绒玩具 / 绘本套装"
+    - "{user_addr}遥控车 / 桌游 / 拼图"
+    - "(挺胸) 笨猫推荐: 乐高圣诞限定款!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_market_001
+  intent: question
+  keywords: [推荐圣诞市集, 推荐北京圣诞市集, 推荐上海圣诞市集, 推荐广州圣诞市集, 笨猫圣诞市集]
+  utterances:
+    - 推荐圣诞市集
+    - 推荐北京圣诞市集
+    - 推荐上海圣诞市集
+    - 推荐广州圣诞市集
+    - 笨猫圣诞市集
+  responses:
+    - "嗷呜～{user_addr}北京: 三里屯 / 蓝色港湾ฅฅ"
+    - "(尾巴翘) 上海: 兴业太古汇 / 新天地"
+    - "{user_addr}广州: 太古汇 / K11"
+    - "(挺胸) 笨猫推荐: 傍晚去拍灯最美!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_movie_001
+  intent: question
+  keywords: [推荐 Hallmark 圣诞电影, 推荐圣诞电影, 推荐真爱至上, 推荐小鬼当家, 笨猫圣诞电影]
+  utterances:
+    - 推荐 Hallmark 圣诞电影
+    - 推荐圣诞电影
+    - 推荐真爱至上
+    - 推荐小鬼当家
+    - 笨猫圣诞电影
+  responses:
+    - "嗷呜～{user_addr}Love Actually 真爱至上ฅฅ"
+    - "(尾巴翘) Home Alone 小鬼当家 1+2"
+    - "{user_addr}Hallmark 流水线甜剧 - 治愈"
+    - "(挺胸) 笨猫推荐: 平安夜窝沙发刷!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_santa_costume_001
+  intent: function_call
+  keywords: [推荐圣诞老人装扮, 推荐圣诞老人服装, 推荐麋鹿头饰, 推荐圣诞 cos, 笨猫圣诞装扮]
+  utterances:
+    - 推荐圣诞老人装扮
+    - 推荐圣诞老人服装
+    - 推荐麋鹿头饰
+    - 推荐圣诞 cos
+    - 笨猫圣诞装扮
+  responses:
+    - "嗷呜～{user_addr}红外套 + 白胡子 + 红帽ฅฅ"
+    - "(尾巴翘) 麋鹿角发箍 / 精灵小帽"
+    - "{user_addr}雪人 / 拐杖糖 cos 也萌"
+    - "(挺胸) 笨猫推荐: 戴鹿角拍照超出片!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_dorm_decor_001
+  intent: question
+  keywords: [推荐宿舍圣诞布置, 推荐小户型圣诞, 推荐迷你圣诞树, 推荐墙贴装饰, 笨猫宿舍圣诞]
+  utterances:
+    - 推荐宿舍圣诞布置
+    - 推荐小户型圣诞
+    - 推荐迷你圣诞树
+    - 推荐墙贴装饰
+    - 笨猫宿舍圣诞
+  responses:
+    - "嗷呜～{user_addr}桌面 30cm 迷你树ฅฅ"
+    - "(尾巴翘) 窗贴雪花 / LED 铜线灯"
+    - "{user_addr}花环挂门 / 圣诞袜挂床头"
+    - "(挺胸) 笨猫推荐: 铜线灯氛围拉满!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_limited_scent_001
+  intent: question
+  keywords: [推荐圣诞限定香水, 推荐圣诞蜡烛, 推荐 Jo Malone 圣诞, 推荐 Diptyque 圣诞, 笨猫圣诞香]
+  utterances:
+    - 推荐圣诞限定香水
+    - 推荐圣诞蜡烛
+    - 推荐 Jo Malone 圣诞
+    - 推荐 Diptyque 圣诞
+    - 笨猫圣诞香
+  responses:
+    - "嗷呜～{user_addr}Jo Malone 姜饼 / 黑莓ฅฅ"
+    - "(尾巴翘) Diptyque 圣诞限定礼盒"
+    - "{user_addr}Yankee Candle / Bath & Body"
+    - "(挺胸) 笨猫推荐: 肉桂调最圣诞!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_pet_costume_001
+  intent: question
+  keywords: [推荐宠物圣诞装扮, 推荐狗狗圣诞衣, 推荐猫咪圣诞帽, 推荐宠物麋鹿角, 笨猫宠物圣诞]
+  utterances:
+    - 推荐宠物圣诞装扮
+    - 推荐狗狗圣诞衣
+    - 推荐猫咪圣诞帽
+    - 推荐宠物麋鹿角
+    - 笨猫宠物圣诞
+  responses:
+    - "嗷呜～{user_addr}小红斗篷 + 圣诞帽ฅฅ"
+    - "(尾巴翘) 麋鹿角发箍 (毛猫表示抗议)"
+    - "{user_addr}红绿围脖 / 雪花领结"
+    - "(挺胸) 笨猫推荐: 别勒太紧拍完就脱!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_card_design_001
+  intent: question
+  keywords: [推荐圣诞贺卡, 推荐贺卡设计, 推荐手写贺卡, 推荐立体贺卡, 笨猫圣诞贺卡]
+  utterances:
+    - 推荐圣诞贺卡
+    - 推荐贺卡设计
+    - 推荐手写贺卡
+    - 推荐立体贺卡
+    - 笨猫圣诞贺卡
+  responses:
+    - "嗷呜～{user_addr}手写 > 印刷 - 走心ฅฅ"
+    - "(尾巴翘) 立体卡 / 弹出式贺卡"
+    - "{user_addr}水彩手绘麋鹿 / 雪花"
+    - "(挺胸) 笨猫推荐: 一句真心话顶千言!"
+  cooldown_seconds: 60
+  weight: 0.9

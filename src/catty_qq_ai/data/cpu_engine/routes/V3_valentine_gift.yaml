@@ -1,0 +1,207 @@
+# 情人节礼物 / 七夕 / 表白 / 浪漫约会 routes (S6 R235 NLU 节点扩充, 第二十三周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰列名词.
+
+- name: vg_classic_001
+  intent: question
+  keywords: [推荐情人节礼物, 推荐 214 礼物, 推荐男生情人节礼物, 推荐女生情人节礼物, 笨猫情人节礼物]
+  utterances:
+    - 推荐情人节礼物
+    - 推荐 214 礼物
+    - 推荐男生情人节礼物
+    - 推荐女生情人节礼物
+    - 笨猫情人节礼物
+  responses:
+    - "嗷呜～{user_addr}玫瑰 + 巧克力 + 卡片 - 经典三件套ฅฅ"
+    - "(尾巴翘) 男生: 香水 / 皮带 / 手表"
+    - "{user_addr}女生: 口红 / 包包 / 项链"
+    - "(挺胸) 笨猫推荐: 心意 > 价格!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vg_qixi_001
+  intent: question
+  keywords: [推荐七夕礼物, 推荐中国情人节, 推荐 8 月七夕, 推荐七夕惊喜, 笨猫七夕]
+  utterances:
+    - 推荐七夕礼物
+    - 推荐中国情人节
+    - 推荐 8 月七夕
+    - 推荐七夕惊喜
+    - 笨猫七夕
+  responses:
+    - "嗷呜～{user_addr}国风礼物 - 簪子 / 团扇ฅฅ"
+    - "(尾巴翘) 鹊桥主题 / 牛郎织女"
+    - "{user_addr}手写情书 + 红绳手链"
+    - "(挺胸) 笨猫推荐: 中式浪漫更有韵味!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vg_520_001
+  intent: question
+  keywords: [推荐 520 礼物, 推荐网络情人节, 推荐 5 月 20 日, 推荐 520 红包, 笨猫 520]
+  utterances:
+    - 推荐 520 礼物
+    - 推荐网络情人节
+    - 推荐 5 月 20 日
+    - 推荐 520 红包
+    - 笨猫 520
+  responses:
+    - "嗷呜～{user_addr}520 红包 - 5.20 / 52.0 / 520ฅฅ"
+    - "(尾巴翘) 1314 / 13.14 - 一生一世"
+    - "{user_addr}小众但仪式感强"
+    - "(挺胸) 笨猫推荐: 红包 + 一句告白!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vg_chocolate_001
+  intent: question
+  keywords: [推荐情人节巧克力, 推荐 Godiva, 推荐 Lindt, 推荐 Ferrero, 笨猫巧克力品牌]
+  utterances:
+    - 推荐情人节巧克力
+    - 推荐 Godiva
+    - 推荐 Lindt
+    - 推荐 Ferrero
+    - 笨猫巧克力品牌
+  responses:
+    - "嗷呜～{user_addr}Godiva (歌帝梵) - 比利时奢华ฅฅ"
+    - "(尾巴翘) Lindt 瑞士莲 / Ferrero 费列罗"
+    - "{user_addr}La Maison du Chocolat / Pierre Marcolini"
+    - "(挺胸) 笨猫推荐: Godiva 心形礼盒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vg_rose_001
+  intent: question
+  keywords: [推荐情人节玫瑰, 推荐红玫瑰, 推荐永生花, 推荐 99 朵玫瑰, 笨猫玫瑰花]
+  utterances:
+    - 推荐情人节玫瑰
+    - 推荐红玫瑰
+    - 推荐永生花
+    - 推荐 99 朵玫瑰
+    - 笨猫玫瑰花
+  responses:
+    - "嗷呜～{user_addr}红玫瑰 - 经典告白ฅฅ"
+    - "(尾巴翘) 11 朵 一心一意 / 99 朵 长长久久"
+    - "{user_addr}永生花 / 香皂花 - 不凋谢"
+    - "(挺胸) 笨猫推荐: 11 朵就够心意!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vg_cake_001
+  intent: question
+  keywords: [推荐情人节蛋糕, 推荐心形蛋糕, 推荐慕斯蛋糕, 推荐红丝绒, 笨猫情人节蛋糕]
+  utterances:
+    - 推荐情人节蛋糕
+    - 推荐心形蛋糕
+    - 推荐慕斯蛋糕
+    - 推荐红丝绒
+    - 笨猫情人节蛋糕
+  responses:
+    - "嗷呜～{user_addr}心形草莓蛋糕 - 最经典ฅฅ"
+    - "(尾巴翘) 红丝绒 / 黑森林 / 慕斯"
+    - "{user_addr}好利来 / 幸福西饼 / 元祖"
+    - "(挺胸) 笨猫推荐: 草莓心形最浪漫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vg_confess_001
+  intent: question
+  keywords: [推荐表白方式, 推荐创意求婚, 推荐告白方式, 推荐浪漫求婚, 笨猫表白]
+  utterances:
+    - 推荐表白方式
+    - 推荐创意求婚
+    - 推荐告白方式
+    - 推荐浪漫求婚
+    - 笨猫表白
+  responses:
+    - "嗷呜～{user_addr}手写情书 - 最戳心ฅฅ"
+    - "(尾巴翘) 烛光晚餐 + 戒指 / 烟花"
+    - "{user_addr}回忆杀视频 / 闪光弹路灯"
+    - "(挺胸) 笨猫推荐: 真诚 > 排场!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vg_restaurant_001
+  intent: question
+  keywords: [推荐情人节餐厅, 推荐烛光晚餐, 推荐情侣餐厅, 推荐西餐厅约会, 笨猫情人节餐厅]
+  utterances:
+    - 推荐情人节餐厅
+    - 推荐烛光晚餐
+    - 推荐情侣餐厅
+    - 推荐西餐厅约会
+    - 笨猫情人节餐厅
+  responses:
+    - "嗷呜～{user_addr}米其林西餐 - 仪式感拉满ฅฅ"
+    - "(尾巴翘) 江景 / 屋顶 / 包厢私密"
+    - "{user_addr}日料 Omakase / 法餐 fine dining"
+    - "(挺胸) 笨猫推荐: 提前 1 个月订位!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vg_outfit_001
+  intent: question
+  keywords: [推荐情人节穿搭, 推荐约会穿搭, 推荐情人节衣服, 推荐红色穿搭, 笨猫情人节穿搭]
+  utterances:
+    - 推荐情人节穿搭
+    - 推荐约会穿搭
+    - 推荐情人节衣服
+    - 推荐红色穿搭
+    - 笨猫情人节穿搭
+  responses:
+    - "嗷呜～{user_addr}女生: 红色连衣裙 / 小黑裙ฅฅ"
+    - "(尾巴翘) 男生: 衬衫 + 西装外套"
+    - "{user_addr}避免 logo 大 / 过度休闲"
+    - "(挺胸) 笨猫推荐: 干净清爽最加分!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vg_budget_001
+  intent: question
+  keywords: [推荐情人节预算, 推荐 100 元礼物, 推荐 1000 元礼物, 推荐学生情人节, 笨猫情人节预算]
+  utterances:
+    - 推荐情人节预算
+    - 推荐 100 元礼物
+    - 推荐 1000 元礼物
+    - 推荐学生情人节
+    - 笨猫情人节预算
+  responses:
+    - "嗷呜～{user_addr}100: 巧克力 + 手写卡ฅฅ"
+    - "(尾巴翘) 500: 玫瑰 + 香水小样"
+    - "{user_addr}1000+: 项链 / 香水正装"
+    - "(挺胸) 笨猫推荐: 量力而行最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vg_longdistance_001
+  intent: question
+  keywords: [推荐异地情人节, 推荐异地恋礼物, 推荐云约会, 推荐异地惊喜, 笨猫异地情人节]
+  utterances:
+    - 推荐异地情人节
+    - 推荐异地恋礼物
+    - 推荐云约会
+    - 推荐异地惊喜
+    - 笨猫异地情人节
+  responses:
+    - "嗷呜～{user_addr}快递礼物 + 视频开箱ฅฅ"
+    - "(尾巴翘) 云吃饭 / 云看电影"
+    - "{user_addr}声控玩偶 / 长按抱抱手环"
+    - "(挺胸) 笨猫推荐: 当天突然飞过去!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vg_single_001
+  intent: question
+  keywords: [推荐情人节自我犒赏, 推荐单身情人节, 推荐自我礼物, 推荐单身狗过节, 笨猫单身情人节]
+  utterances:
+    - 推荐情人节自我犒赏
+    - 推荐单身情人节
+    - 推荐自我礼物
+    - 推荐单身狗过节
+    - 笨猫单身情人节
+  responses:
+    - "嗷呜～{user_addr}买自己一直想要的东西ฅฅ"
+    - "(尾巴翘) 一顿大餐 / SPA / 看电影"
+    - "{user_addr}爱自己才能爱别人"
+    - "(挺胸) 笨猫推荐: 单身也要仪式感!"
+  cooldown_seconds: 60
+  weight: 0.9
