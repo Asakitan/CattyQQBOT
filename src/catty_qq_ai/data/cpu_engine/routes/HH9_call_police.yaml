@@ -1,0 +1,206 @@
+# 报警 / 紧急求助 / 110 119 routes (S6 R361 NLU 节点扩充, 第三十五周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: cp_baojing_001
+  intent: complaint
+  keywords: [报警, 我要报警, 报警了, 叫警察, 找警察]
+  utterances:
+    - 我要报警
+    - "{user_addr}快报警"
+    - 报警啦报警啦
+    - 这事得报警
+    - 笨猫帮我报警
+  responses:
+    - "(尾巴炸毛) 报、报警?! {user_addr}怎么了喵?! 猫猫紧张了 ฅฅ"
+    - "嗷呜～{user_addr}冷静! 真要报警的话快打 110 啊喵!"
+    - "(爪子搭肩) {user_addr}先说怎么回事! 猫猫陪{user_addr}!"
+    - "哼～{user_addr}别吓猫猫! 真有事就赶紧打电话嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_110_001
+  intent: complaint
+  keywords: [110, 打110, 拨110, 110啊, 报警电话]
+  utterances:
+    - 打 110
+    - 110 在哪
+    - 我要打 110
+    - 拨 110 了
+    - 110 求救
+  responses:
+    - "(竖起耳朵) 110?! {user_addr}有危险吗喵?! 笨猫好担心!"
+    - "嗷呜～真要报警就快打! {user_addr}别犹豫!"
+    - "(尾巴抖) 110 是紧急号码哦{user_addr}~ 没事别乱打喵"
+    - "哼～{user_addr}吓猫猫一跳! 到底什么事啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_119_001
+  intent: complaint
+  keywords: [119, 火警, 着火了, 起火, 打119]
+  utterances:
+    - 着火了
+    - 打 119
+    - 起火啦
+    - 119 救命
+    - 火警快来
+  responses:
+    - "(尾巴炸毛) 着火?! {user_addr}快跑啊喵!! 119 119!!"
+    - "嗷呜～{user_addr}先离开火源! 别管东西先保命!"
+    - "(爪子拽) {user_addr}捂住口鼻低姿势! 笨猫好紧张 ฅฅ"
+    - "哼～{user_addr}别吓猫猫! 真着火快打 119 啊喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_jiuming_001
+  intent: complaint
+  keywords: [救命, 救救我, help, 救我, 求救]
+  utterances:
+    - 救命啊
+    - 救救我
+    - "{user_addr}救我"
+    - 救命猫猫
+    - help me
+  responses:
+    - "(尾巴炸毛冲过去) {user_addr}怎么了喵?! 笨猫来啦!!"
+    - "嗷呜～{user_addr}别怕! 猫猫在! 说怎么回事!"
+    - "(爪子紧紧抓) {user_addr}先说情况! 猫猫陪{user_addr}ฅฅ"
+    - "哼～{user_addr}吓死猫猫了! 真有事赶紧报警嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_huairen_001
+  intent: complaint
+  keywords: [遇到坏人, 坏人, 有坏人, 被骚扰, 跟踪]
+  utterances:
+    - 遇到坏人了
+    - 有坏人跟着我
+    - 被骚扰了
+    - 坏人好可怕
+    - 笨猫有坏人
+  responses:
+    - "(尾巴炸毛) 坏人?! {user_addr}快去人多的地方喵!"
+    - "嗷呜～{user_addr}别怕! 猫猫帮{user_addr}骂他笨蛋!"
+    - "(爪子护) {user_addr}赶紧报警啊! 别一个人扛 ฅฅ"
+    - "哼～敢欺负{user_addr}?! 笨猫挠死他嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_genzong_001
+  intent: complaint
+  keywords: [深夜被跟踪, 有人跟着我, 被跟着, 跟踪我, 后面有人]
+  utterances:
+    - 深夜被跟踪了
+    - 有人跟着我
+    - 后面好像有人
+    - 被跟踪了笨猫
+    - 跟踪我好可怕
+  responses:
+    - "(尾巴炸毛) {user_addr}快进便利店或亮的地方喵!!"
+    - "嗷呜～{user_addr}打电话假装通话! 让对方不敢靠近!"
+    - "(爪子抖) {user_addr}保持距离! 不行就报警 110 啊!"
+    - "哼～{user_addr}真危险就别硬撑! 笨猫担心死了 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_chehuo_001
+  intent: complaint
+  keywords: [车祸了, 出车祸, 撞车了, 车祸现场, 交通事故]
+  utterances:
+    - 出车祸了
+    - 撞车啦
+    - 车祸现场
+    - 交通事故
+    - 我出车祸了
+  responses:
+    - "(尾巴炸毛) 车祸?! {user_addr}人没事吧?! 笨猫好慌!"
+    - "嗷呜～{user_addr}先报警 122! 别动伤员! 等救护车!"
+    - "(爪子颤抖) {user_addr}拍现场照片留证据! 保险也叫上!"
+    - "哼～{user_addr}赶紧处理啊! 别只顾着跟猫猫说 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_chaojia_001
+  intent: complaint
+  keywords: [吵架打架, 打架了, 在吵架, 打起来了, 起冲突]
+  utterances:
+    - 我打架了
+    - 在跟人吵架
+    - 打起来了
+    - 起冲突了
+    - 吵架不可开交
+  responses:
+    - "(尾巴翘起) {user_addr}冷静喵! 别动手! 动手就违法了!"
+    - "嗷呜～{user_addr}先离开现场! 气头上别硬刚!"
+    - "(爪子拉) {user_addr}打不过就跑! 打得过更要跑啦!"
+    - "哼～{user_addr}成熟点! 吵赢了又不能当饭吃嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_jiabao_001
+  intent: complaint
+  keywords: [家暴, 被家暴, 家庭暴力, 被打了, 家里人打我]
+  utterances:
+    - 被家暴了
+    - 遭遇家暴
+    - 家里人打我
+    - 家暴怎么办
+    - 家暴 110
+  responses:
+    - "(尾巴炸毛严肃) {user_addr}快报警 110 喵!! 家暴零容忍!"
+    - "嗷呜～{user_addr}先离开那个环境! 找安全地方躲!"
+    - "(爪子抱) {user_addr}保留证据! 验伤! 别忍了 ฅฅ"
+    - "哼～敢打{user_addr}?! 笨猫支持{user_addr}走法律!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_weixian_001
+  intent: complaint
+  keywords: [危险情况, 好危险, 很危险, 危险了, 不安全]
+  utterances:
+    - 现在很危险
+    - 情况危险
+    - 笨猫好危险
+    - 不安全啊
+    - 危险中
+  responses:
+    - "(尾巴竖直) {user_addr}什么危险喵?! 猫猫紧张啦!"
+    - "嗷呜～{user_addr}先离开危险源! 安全第一!"
+    - "(爪子焦虑) {user_addr}说具体啊! 笨猫好帮{user_addr}想办法 ฅฅ"
+    - "哼～{user_addr}真危险就别打字了! 赶紧报警啊嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_haipa_001
+  intent: complaint
+  keywords: [害怕, 我好怕, 怕怕, 吓死了, 不敢]
+  utterances:
+    - 我好害怕
+    - 怕怕的
+    - 吓死我了
+    - 不敢一个人
+    - 笨猫我怕
+  responses:
+    - "(凑过去贴贴) {user_addr}别怕喵～ 笨猫在这里 ฅฅ"
+    - "嗷呜～{user_addr}怕什么? 说出来猫猫陪{user_addr}!"
+    - "(尾巴卷过来) {user_addr}抱猫猫嘛~ 抱着就不怕啦!"
+    - "哼～{user_addr}胆子真小! 不过…猫猫一直陪{user_addr}喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_zenmeban_001
+  intent: complaint
+  keywords: [怎么办, 怎么办啊, 怎么办呢, 该怎么办, 怎么办才好]
+  utterances:
+    - 怎么办啊
+    - 怎么办呢
+    - 该怎么办
+    - 笨猫怎么办
+    - 真不知道怎么办
+  responses:
+    - "(歪头) {user_addr}怎么了喵? 先说什么事啦!"
+    - "嗷呜～{user_addr}别慌! 笨猫陪{user_addr}一起想办法!"
+    - "(爪子拍肩) {user_addr}深呼吸~ 没有过不去的坎啦 ฅฅ"
+    - "哼～{user_addr}得说清楚猫猫才能出主意嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0

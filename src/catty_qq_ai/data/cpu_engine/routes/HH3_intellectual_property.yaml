@@ -1,0 +1,206 @@
+# 知识产权 / 商标版权专利 routes (S6 R355 NLU 节点扩充, 第三十五周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ip_trademark_001
+  intent: question
+  keywords: [推荐商标注册, 推荐商标局, 推荐 TM 注册, 推荐 R 标, 笨猫商标注册]
+  utterances:
+    - 推荐商标注册
+    - 推荐商标局
+    - 推荐 TM 注册
+    - 推荐 R 标
+    - 笨猫商标注册
+  responses:
+    - "嗷呜～{user_addr}中国商标网 sbj.cnipa.gov.cn - 官方ฅฅ"
+    - "(尾巴翘) 45 类尼斯分类 / 3000 元起 / 9-12 个月"
+    - "{user_addr}TM=申请中 / R=已注册"
+    - "(挺胸) 猫猫推荐: 自行申报 + 找代理双保险!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_copyright_001
+  intent: question
+  keywords: [推荐版权登记, 推荐著作权, 推荐版权局, 推荐作品登记, 笨猫版权]
+  utterances:
+    - 推荐版权登记
+    - 推荐著作权
+    - 推荐版权局
+    - 推荐作品登记
+    - 笨猫版权
+  responses:
+    - "嗷呜～{user_addr}中国版权保护中心 ccopyright.com.cnฅฅ"
+    - "(尾巴翘) 自动产生 / 登记是证据 / 300 元起"
+    - "{user_addr}文字 / 美术 / 软著 / 音乐"
+    - "(挺胸) 笨猫推荐: 软著最常见 30 天下证!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_patent_001
+  intent: question
+  keywords: [推荐专利申请, 推荐实用新型, 推荐发明专利, 推荐外观专利, 笨猫专利]
+  utterances:
+    - 推荐专利申请
+    - 推荐实用新型
+    - 推荐发明专利
+    - 推荐外观专利
+    - 笨猫专利
+  responses:
+    - "嗷呜～{user_addr}国家知识产权局 cnipa.gov.cnฅฅ"
+    - "(尾巴翘) 发明 (2-3 年) / 实用新型 (6-12 月) / 外观 (4-6 月)"
+    - "{user_addr}发明含金量高 / 实用新型快"
+    - "(挺胸) 人家推荐: 先实用新型抢时间 + 后补发明!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_lawyer_001
+  intent: question
+  keywords: [推荐知识产权律师, 推荐 IP 律师, 推荐专利律师, 推荐商标律师, 笨猫知产律师]
+  utterances:
+    - 推荐知识产权律师
+    - 推荐 IP 律师
+    - 推荐专利律师
+    - 推荐商标律师
+    - 笨猫知产律师
+  responses:
+    - "嗷呜～{user_addr}金杜 / 君合 / 中伦 - 红圈所ฅฅ"
+    - "(尾巴翘) 集佳 / 隆天 / 柳沈 - 专业知产所"
+    - "{user_addr}诉讼 1-5w / 维权按比例分成"
+    - "(挺胸) 猫猫推荐: 维权找专业知产所更懂行!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_watermark_001
+  intent: question
+  keywords: [推荐视频水印, 推荐版权水印, 推荐数字水印, 推荐防盗版水印, 笨猫水印]
+  utterances:
+    - 推荐视频水印
+    - 推荐版权水印
+    - 推荐数字水印
+    - 推荐防盗版水印
+    - 笨猫水印
+  responses:
+    - "嗷呜～{user_addr}剪映 / Pr / FFmpeg 加水印ฅฅ"
+    - "(尾巴翘) 显性 LOGO + 隐性数字水印双保险"
+    - "{user_addr}隐性水印能溯源到搬运者"
+    - "(挺胸) 笨猫推荐: 半透明角标 + 隐性 ID!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_zsxq_001
+  intent: question
+  keywords: [推荐知识星球版权, 推荐付费社群版权, 推荐知识付费版权, 推荐内容防搬运, 笨猫知识星球]
+  utterances:
+    - 推荐知识星球版权
+    - 推荐付费社群版权
+    - 推荐知识付费版权
+    - 推荐内容防搬运
+    - 笨猫知识星球
+  responses:
+    - "嗷呜～{user_addr}知识星球自带水印 + 截屏溯源ฅฅ"
+    - "(尾巴翘) 小报童 / 小鹅通 / 千聊 同类"
+    - "{user_addr}发现搬运 → 平台举报 + 律师函"
+    - "(挺胸) 猫猫推荐: 关键内容做软著登记!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_font_001
+  intent: question
+  keywords: [推荐字体版权, 推荐免费商用字体, 推荐方正字体, 推荐汉仪字体, 笨猫字体版权]
+  utterances:
+    - 推荐字体版权
+    - 推荐免费商用字体
+    - 推荐方正字体
+    - 推荐汉仪字体
+    - 笨猫字体版权
+  responses:
+    - "嗷呜～{user_addr}思源黑体 / 思源宋体 - 免费商用ฅฅ"
+    - "(尾巴翘) 阿里巴巴普惠体 / 站酷字体 / 庞门正道"
+    - "{user_addr}方正 / 汉仪 / 文鼎 商用要授权"
+    - "(挺胸) 笨猫推荐: 商用首选思源 + 阿里普惠!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_image_001
+  intent: question
+  keywords: [推荐图片版权, 推荐 Getty Images, 推荐视觉中国, 推荐图虫, 笨猫图片版权]
+  utterances:
+    - 推荐图片版权
+    - 推荐 Getty Images
+    - 推荐视觉中国
+    - 推荐图虫
+    - 笨猫图片版权
+  responses:
+    - "嗷呜～{user_addr}付费正版: Getty / 视觉中国 / 图虫ฅฅ"
+    - "(尾巴翘) 免费商用: Unsplash / Pexels / Pixabay"
+    - "{user_addr}视觉中国维权凶 别乱用"
+    - "(挺胸) 人家推荐: 商用首选 Unsplash + CC0!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_trade_001
+  intent: question
+  keywords: [推荐知识产权交易, 推荐商标转让, 推荐专利转让, 推荐 IP 交易平台, 笨猫知产交易]
+  utterances:
+    - 推荐知识产权交易
+    - 推荐商标转让
+    - 推荐专利转让
+    - 推荐 IP 交易平台
+    - 笨猫知产交易
+  responses:
+    - "嗷呜～{user_addr}权大师 / 猪八戒商标 / 标天下ฅฅ"
+    - "(尾巴翘) 商标转让 5000-5w / 公证 + 商标局核准"
+    - "{user_addr}买现成商标 6 个月可用 比注册快"
+    - "(挺胸) 猫猫推荐: 急用商标买转让 + 核准书!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_antipiracy_001
+  intent: question
+  keywords: [推荐反盗版举报, 推荐侵权投诉, 推荐 DMCA, 推荐版权举报, 笨猫反盗版]
+  utterances:
+    - 推荐反盗版举报
+    - 推荐侵权投诉
+    - 推荐 DMCA
+    - 推荐版权举报
+    - 笨猫反盗版
+  responses:
+    - "嗷呜～{user_addr}12390 全国扫黄打非热线ฅฅ"
+    - "(尾巴翘) 海外站 DMCA Takedown / Google 表单"
+    - "{user_addr}国内平台投诉 + 律师函 + 起诉"
+    - "(挺胸) 笨猫推荐: 先存证 (区块链/公证) 后维权!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_international_001
+  intent: question
+  keywords: [推荐国际商标, 推荐马德里商标, 推荐海牙体系, 推荐 PCT 专利, 笨猫国际商标]
+  utterances:
+    - 推荐国际商标
+    - 推荐马德里商标
+    - 推荐海牙体系
+    - 推荐 PCT 专利
+    - 笨猫国际商标
+  responses:
+    - "嗷呜～{user_addr}马德里体系 - 一次申请多国商标ฅฅ"
+    - "(尾巴翘) 海牙体系 - 国际外观专利 / PCT - 国际发明"
+    - "{user_addr}WIPO 世界知识产权组织官网"
+    - "(挺胸) 人家推荐: 出海先做马德里 + 美/欧单独!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_search_001
+  intent: question
+  keywords: [推荐商标查询, 推荐商标局官网, 推荐专利检索, 推荐版权查询, 笨猫商标查询]
+  utterances:
+    - 推荐商标查询
+    - 推荐商标局官网
+    - 推荐专利检索
+    - 推荐版权查询
+    - 笨猫商标查询
+  responses:
+    - "嗷呜～{user_addr}sbj.cnipa.gov.cn - 商标综合查询ฅฅ"
+    - "(尾巴翘) pss-system.cponline.cnipa.gov.cn - 专利检索"
+    - "{user_addr}权大师 / 标局 APP - 免费查重"
+    - "(挺胸) 猫猫推荐: 注册前先官网查重 防驳回!"
+  cooldown_seconds: 60
+  weight: 1.0

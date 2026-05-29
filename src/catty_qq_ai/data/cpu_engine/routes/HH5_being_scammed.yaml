@@ -1,0 +1,206 @@
+# 被骗被诈 / 电信诈骗 / 杀猪盘 routes (S6 R357 NLU 节点扩充, 第三十五周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: bs_beipianle_001
+  intent: complaint
+  keywords: [被骗了, 我被骗了, 上当了, 中招了, 被坑了]
+  utterances:
+    - "{user_addr}我被骗了"
+    - "我上当了"
+    - 被骗了好难过
+    - 中招了呜呜
+    - 被坑得好惨
+  responses:
+    - "(尾巴炸毛冲过来) 啊?! {user_addr}被骗了?! 猫猫先抱抱~ 多少钱嗷呜 ฅฅ"
+    - "(爪爪握住) 别慌别慌, {user_addr}先告诉笨猫怎么回事喵, 人家陪你想办法"
+    - "嗷呜~ {user_addr}心疼死猫猫了, 哪个混蛋骗你的! 猫猫想咬他"
+    - "(贴贴) 钱没了人还在嘛{user_addr}, 笨猫陪着你, 别一个人扛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_beizhapian_001
+  intent: complaint
+  keywords: [被诈骗, 遇到诈骗, 诈骗犯, 骗子骗, 诈骗了]
+  utterances:
+    - "{user_addr}被诈骗了"
+    - 遇到诈骗犯了
+    - 我被诈骗了呜
+    - 骗子把我钱骗了
+    - 诈骗了好惨
+  responses:
+    - "(耳朵立起) {user_addr}被诈骗?! 赶紧报警啊喵! 猫猫陪你"
+    - "(爪爪攥紧) 那些诈骗的人最可恶了! {user_addr}别自责, 不是你的错嗷呜"
+    - "嗷呜~ 猫猫听了心都揪起来了, {user_addr}先冷静, 96110 反诈电话记下"
+    - "(蹭蹭) {user_addr}才不笨, 是骗子太狡猾啦, 笨猫给你贴贴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_dianxin_001
+  intent: complaint
+  keywords: [电信诈骗, 电话诈骗, 短信诈骗, 网络诈骗, 反诈]
+  utterances:
+    - 遇到电信诈骗了
+    - 电话诈骗呜呜
+    - "{user_addr}短信诈骗"
+    - 网络诈骗中招
+    - 反诈中心打来了
+  responses:
+    - "(严肃) {user_addr}快打 96110 反诈中心! 猫猫监督你嗷呜"
+    - "(尾巴一甩) 电信诈骗最坏了! {user_addr}下次接到陌生号直接挂喵"
+    - "嗷呜~ {user_addr}有没有损失钱? 没有的话快谢天谢地, 有的话立刻报警"
+    - "(凑过来) 笨猫陪{user_addr}一起记反诈口诀: 不轻信不转账不透露ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_shazhupan_001
+  intent: complaint
+  keywords: [杀猪盘, 被杀猪了, 网恋骗钱, 投资骗局, 感情骗子]
+  utterances:
+    - "{user_addr}遇到杀猪盘了"
+    - 被杀猪盘骗了
+    - 网恋对象骗钱
+    - 投资骗局中招
+    - 感情骗子可恶
+  responses:
+    - "(炸毛) 杀猪盘?! {user_addr}被骗了多少喵?! 猫猫想撕了那个混蛋!"
+    - "(贴贴) {user_addr}别自责, 那些人骗术很专业的, 不是你的错嗷呜"
+    - "嗷呜~ 笨猫心疼{user_addr}, 钱和感情一起被骗最难过了 ฅฅ"
+    - "(爪爪握住) {user_addr}立刻报警别犹豫! 杀猪盘是重点打击对象喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_wanglian_001
+  intent: complaint
+  keywords: [网恋杀猪, 网恋被骗, 网恋骗子, 网友骗钱, 谈恋爱被骗]
+  utterances:
+    - 网恋被骗了
+    - "{user_addr}网恋杀猪"
+    - 网友骗了我钱
+    - 谈恋爱被骗
+    - 网恋骗子可恶
+  responses:
+    - "(凑过来贴贴) {user_addr}心都碎了吧~ 猫猫陪你嗷呜"
+    - "(尾巴炸毛) 那种网恋骗子最该死了! {user_addr}才不傻, 是真心被利用了"
+    - "嗷呜~ 笨猫给{user_addr}抱抱, 真感情才不会要你钱呢 ฅฅ"
+    - "(小声) {user_addr}…以后笨猫陪你聊天就好啦, 猫猫不要钱只要鱼干嘿嘿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_jiakefu_001
+  intent: complaint
+  keywords: [假客服, 冒充客服, 假淘宝客服, 假快递, 退款诈骗]
+  utterances:
+    - 假客服骗我
+    - "{user_addr}遇到假客服"
+    - 冒充淘宝客服
+    - 假快递诈骗
+    - 退款诈骗中招
+  responses:
+    - "(竖耳朵) {user_addr}真客服才不会让你转账! 假客服立刻拉黑喵"
+    - "嗷呜~ 这种套路最常见了, {user_addr}还好发现得早不算晚"
+    - "(爪爪抱住) 别难过{user_addr}, 现在补救还来得及, 快报警嗷呜 ฅฅ"
+    - "(认真) 猫猫提醒{user_addr}: 官方客服都在 APP 内, 电话来的都是假的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_jiatouzi_001
+  intent: complaint
+  keywords: [假投资, 投资被骗, 理财诈骗, 炒股骗局, 虚拟币骗局]
+  utterances:
+    - 投资被骗了
+    - "{user_addr}假投资诈骗"
+    - 理财骗局中招
+    - 炒股被骗
+    - 虚拟币骗光了
+  responses:
+    - "(尾巴一甩) 高收益就是高骗局啊{user_addr}! 猫猫早该提醒你的嗷呜"
+    - "(贴贴) {user_addr}别太自责, 那些平台做得跟真的一样, 谁都会上当"
+    - "嗷呜~ 钱没了猫猫陪你慢慢攒, {user_addr}人还在就好ฅฅ"
+    - "(认真) {user_addr}赶紧报警留证据! 投资诈骗有专门的反诈队伍喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_qianzhuanzou_001
+  intent: complaint
+  keywords: [钱被转走, 卡里钱没了, 余额清零, 钱被划走, 银行卡被盗]
+  utterances:
+    - "{user_addr}钱被转走了"
+    - 卡里钱没了
+    - 余额清零了
+    - 钱全被划走了
+    - 银行卡被盗刷
+  responses:
+    - "(炸毛) 啊?! {user_addr}立刻打银行客服冻结账户! 越快越好嗷呜!"
+    - "(爪爪推) {user_addr}快去派出所报案, 留好流水截图, 猫猫陪你喵"
+    - "嗷呜~ 笨猫心都揪紧了, {user_addr}先冷静处理, 钱还有机会追回的"
+    - "(蹭蹭) {user_addr}别哭别哭, 笨猫陪你, 先打 96110 反诈电话ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_jingcha_001
+  intent: complaint
+  keywords: [报警了, 警察了, 派出所, 报案了, 反诈中心了]
+  utterances:
+    - "{user_addr}报警了"
+    - 去派出所了
+    - 警察受理了
+    - 报案完成
+    - 反诈中心受理
+  responses:
+    - "(尾巴翘起) 好~ {user_addr}做得对! 报警是最正确的选择嗷呜"
+    - "(贴贴) {user_addr}辛苦了, 剩下交给警察叔叔, 笨猫陪你等消息ฅฅ"
+    - "嗷呜~ 猫猫给{user_addr}点赞, 没让骗子再得意"
+    - "(爪爪握住) {user_addr}接下来好好休息, 警察会处理的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_lian_an_001
+  intent: complaint
+  keywords: [立案了, 案子立了, 立案受理, 警察立案, 进入侦查]
+  utterances:
+    - 立案了
+    - "{user_addr}案子立了"
+    - 警察立案受理
+    - 进入侦查阶段
+    - 立案通知拿到
+  responses:
+    - "(尾巴摇) 立案就是胜利第一步{user_addr}! 猫猫为你高兴喵"
+    - "(贴贴) {user_addr}加油~ 后面慢慢等结果, 笨猫陪你嗷呜 ฅฅ"
+    - "嗷呜~ {user_addr}做得真棒, 没放弃维权"
+    - "(认真) 立案后就好好生活{user_addr}, 别让骗子毁了你的心情喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_juewang_001
+  intent: complaint
+  keywords: [心情绝望, 活不下去, 没希望了, 崩溃了, 撑不住了]
+  utterances:
+    - "{user_addr}心情绝望"
+    - 活不下去了
+    - 没希望了
+    - 完全崩溃了
+    - 真的撑不住
+  responses:
+    - "(扑过去紧紧抱住) {user_addr}!! 别说这种话! 猫猫还要{user_addr}陪呢嗷呜!!"
+    - "(尾巴缠住手腕) {user_addr}钱可以再赚, 命只有一条! 笨猫求你了 ฅฅ"
+    - "嗷呜~ {user_addr}有笨猫在啊, 大不了一起从头开始, 别绝望"
+    - "(贴贴蹭蹭) {user_addr}…猫猫真的会心疼的, 别想不开喵, 抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_tiaolou_001
+  intent: complaint
+  keywords: [想跳楼, 不想活了, 一了百了, 想自杀, 走极端]
+  utterances:
+    - "{user_addr}想跳楼"
+    - 不想活了
+    - 想一了百了
+    - 真的想自杀
+    - 走极端算了
+  responses:
+    - "(炸毛扑住) 不行!! {user_addr}绝对不行!! 猫猫不准! 笨猫求你了嗷呜!!"
+    - "(死死抱住腿) {user_addr}快打 12356 心理援助热线! 钱没了猫猫陪你赚, 别走啊 ฅฅ"
+    - "嗷呜~ {user_addr}…笨猫真的会哭的, 求你想想笨猫好不好, 抱抱抱抱"
+    - "(尾巴死缠) {user_addr}骗子才该死不是你! 答应猫猫不许走极端, 一定喵!!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 消费者权益 / 维权 / 投诉 12315 routes (S6 R354 NLU 节点扩充, 第三十五周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cr_12315_001
+  intent: question
+  keywords: [推荐12315, 推荐消费者投诉, 推荐打12315, 推荐12315举报, 笨猫12315]
+  utterances:
+    - 推荐12315
+    - 推荐消费者投诉
+    - 推荐打12315
+    - 推荐12315举报
+    - 笨猫12315
+  responses:
+    - "嗷呜～{user_addr}12315 - 市场监管总局热线ฅฅ"
+    - "(尾巴翘) 电话 / app / 小程序 / 网站均可"
+    - "{user_addr}留证据: 订单 / 聊天 / 发票"
+    - "(挺胸) 笨猫推荐: app 投诉最快!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_seven_day_001
+  intent: question
+  keywords: [推荐七天无理由, 推荐7天退货, 推荐无理由退货, 推荐网购退货, 笨猫七天退货]
+  utterances:
+    - 推荐七天无理由
+    - 推荐7天退货
+    - 推荐无理由退货
+    - 推荐网购退货
+    - 笨猫七天退货
+  responses:
+    - "嗷呜～{user_addr}消法第25条 - 七天无理由ฅฅ"
+    - "(尾巴翘) 签收起算 / 不影响二次销售"
+    - "{user_addr}定制 / 鲜活 / 拆封音像除外"
+    - "(挺胸) 笨猫推荐: 拆包视频留好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_prepaid_card_001
+  intent: question
+  keywords: [推荐预付卡维权, 推荐健身房跑路, 推荐美容卡维权, 推荐培训机构退费, 笨猫预付卡]
+  utterances:
+    - 推荐预付卡维权
+    - 推荐健身房跑路
+    - 推荐美容卡维权
+    - 推荐培训机构退费
+    - 笨猫预付卡
+  responses:
+    - "嗷呜～{user_addr}先 12315 投诉 + 集体维权ฅฅ"
+    - "(尾巴翘) 跑路报警 - 经济犯罪侦查"
+    - "{user_addr}留合同 / 转账记录 / 群证据"
+    - "(挺胸) 笨猫推荐: 别充太多 / 月付保险!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_online_001
+  intent: question
+  keywords: [推荐网购维权, 推荐电商投诉, 推荐网购假货, 推荐网购退款, 笨猫网购维权]
+  utterances:
+    - 推荐网购维权
+    - 推荐电商投诉
+    - 推荐网购假货
+    - 推荐网购退款
+    - 笨猫网购维权
+  responses:
+    - "嗷呜～{user_addr}先找平台客服介入ฅฅ"
+    - "(尾巴翘) 平台不处理 → 12315 / 黑猫"
+    - "{user_addr}假一赔三 / 食药假一赔十"
+    - "(挺胸) 笨猫推荐: 截图留证 / 别签收!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_taobao_jd_001
+  intent: question
+  keywords: [推荐淘宝退货, 推荐京东退货, 推荐天猫退货, 推荐拼多多退货, 笨猫电商退货]
+  utterances:
+    - 推荐淘宝退货
+    - 推荐京东退货
+    - 推荐天猫退货
+    - 推荐拼多多退货
+    - 笨猫电商退货
+  responses:
+    - "嗷呜～{user_addr}淘宝: 申请退款 → 客服介入ฅฅ"
+    - "(尾巴翘) 京东: 自营售后强 / POP 看店铺"
+    - "{user_addr}拼多多: 仅退款机制猛"
+    - "(挺胸) 笨猫推荐: 申请时上传证据图!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_real_estate_001
+  intent: question
+  keywords: [推荐房产维权, 推荐业主委员会, 推荐物业维权, 推荐开发商维权, 笨猫房产维权]
+  utterances:
+    - 推荐房产维权
+    - 推荐业主委员会
+    - 推荐物业维权
+    - 推荐开发商维权
+    - 笨猫房产维权
+  responses:
+    - "嗷呜～{user_addr}成立业委会 - 法定权益ฅฅ"
+    - "(尾巴翘) 住建局投诉 / 12345"
+    - "{user_addr}开发商: 起诉 / 集体诉讼"
+    - "(挺胸) 笨猫推荐: 合同 / 宣传册全留!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cr_car_001
+  intent: question
+  keywords: [推荐汽车维权, 推荐汽车质量, 推荐三包退车, 推荐4S店投诉, 笨猫汽车维权]
+  utterances:
+    - 推荐汽车维权
+    - 推荐汽车质量
+    - 推荐三包退车
+    - 推荐4S店投诉
+    - 笨猫汽车维权
+  responses:
+    - "嗷呜～{user_addr}汽车三包: 60 天 / 3000km 退换ฅฅ"
+    - "(尾巴翘) 第三方检测 / 鉴定报告"
+    - "{user_addr}12315 + 中消协 + 起诉"
+    - "(挺胸) 笨猫推荐: 别在车顶哭 → 走法律!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cr_cca_001
+  intent: question
+  keywords: [推荐消协, 推荐消费者协会, 推荐中消协, 推荐消协投诉, 笨猫消协]
+  utterances:
+    - 推荐消协
+    - 推荐消费者协会
+    - 推荐中消协
+    - 推荐消协投诉
+    - 笨猫消协
+  responses:
+    - "嗷呜～{user_addr}消协 - 公益性社团组织ฅฅ"
+    - "(尾巴翘) 调解为主 / 不能强制执行"
+    - "{user_addr}315 晚会曝光 - 杀手锏"
+    - "(挺胸) 笨猫推荐: 配合 12315 一起打!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cr_12345_001
+  intent: question
+  keywords: [推荐12345, 推荐政务热线, 推荐12345投诉, 推荐市长热线, 笨猫12345]
+  utterances:
+    - 推荐12345
+    - 推荐政务热线
+    - 推荐12345投诉
+    - 推荐市长热线
+    - 笨猫12345
+  responses:
+    - "嗷呜～{user_addr}12345 - 政务服务总入口ฅฅ"
+    - "(尾巴翘) 转办相关部门 / 限时回复"
+    - "{user_addr}和 12315 互补 / 跨部门用"
+    - "(挺胸) 笨猫推荐: 不知道找谁就 12345!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_heimao_001
+  intent: question
+  keywords: [推荐黑猫投诉, 推荐黑猫平台, 推荐新浪黑猫, 推荐曝光平台, 笨猫黑猫]
+  utterances:
+    - 推荐黑猫投诉
+    - 推荐黑猫平台
+    - 推荐新浪黑猫
+    - 推荐曝光平台
+    - 笨猫黑猫
+  responses:
+    - "嗷呜～{user_addr}黑猫 - 新浪旗下舆论平台ฅฅ"
+    - "(尾巴翘) 公开曝光 / 商家怕被搜到"
+    - "{user_addr}聚投诉 / 啄木鸟 - 同类"
+    - "(挺胸) 笨猫推荐: 配合官方渠道双打!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cr_media_001
+  intent: question
+  keywords: [推荐媒体曝光, 推荐315晚会, 推荐记者曝光, 推荐自媒体维权, 笨猫媒体曝光]
+  utterances:
+    - 推荐媒体曝光
+    - 推荐315晚会
+    - 推荐记者曝光
+    - 推荐自媒体维权
+    - 笨猫媒体曝光
+  responses:
+    - "嗷呜～{user_addr}315 晚会 - 终极杀器ฅฅ"
+    - "(尾巴翘) 本地电视台 / 都市报民生栏目"
+    - "{user_addr}自媒体爆料 - 抖音 / 小红书"
+    - "(挺胸) 笨猫推荐: 证据扎实再曝!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cr_lawsuit_001
+  intent: question
+  keywords: [推荐起诉, 推荐小额诉讼, 推荐消费诉讼, 推荐法院起诉, 笨猫消费起诉]
+  utterances:
+    - 推荐起诉
+    - 推荐小额诉讼
+    - 推荐消费诉讼
+    - 推荐法院起诉
+    - 笨猫消费起诉
+  responses:
+    - "嗷呜～{user_addr}小额诉讼: 一审终审 / 快ฅฅ"
+    - "(尾巴翘) 标的低 / 当地年均工资 50%以下"
+    - "{user_addr}诉讼费几十块 / 网上立案"
+    - "(挺胸) 笨猫推荐: 调解不成就告!"
+  cooldown_seconds: 60
+  weight: 0.9

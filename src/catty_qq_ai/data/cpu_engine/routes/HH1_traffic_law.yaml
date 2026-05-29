@@ -1,0 +1,206 @@
+# 交规 / 违章 / 驾照扣分 routes (S6 R353 NLU 节点扩充, 第三十五周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: tl_points_001
+  intent: question
+  keywords: [推荐12分制, 推荐驾照扣分, 推荐扣分规则, 推荐记分周期, 笨猫12分]
+  utterances:
+    - 推荐12分制
+    - 推荐驾照扣分
+    - 推荐扣分规则
+    - 推荐记分周期
+    - 笨猫12分
+  responses:
+    - "嗷呜～{user_addr}1 个记分周期 = 12 分ฅฅ"
+    - "(尾巴翘) 满 12 分 = 重学科一 + 考试"
+    - "{user_addr}周期从初领证日算 / 12 个月一轮"
+    - "(挺胸) 笨猫推荐: 别超速别闯红灯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_app_001
+  intent: question
+  keywords: [推荐违章查询, 推荐交管12123, 推荐违章 app, 推荐处理违章, 笨猫12123]
+  utterances:
+    - 推荐违章查询
+    - 推荐交管12123
+    - 推荐违章 app
+    - 推荐处理违章
+    - 笨猫12123
+  responses:
+    - "嗷呜～{user_addr}交管 12123 - 官方 appฅฅ"
+    - "(尾巴翘) 实名注册 / 绑定车辆 / 查违章"
+    - "{user_addr}线上处理 200 元以下 + 6 分以下"
+    - "(挺胸) 笨猫推荐: 12123 一站式!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_inspect_001
+  intent: question
+  keywords: [推荐车辆年检, 推荐年审流程, 推荐免检车, 推荐车检, 笨猫年检]
+  utterances:
+    - 推荐车辆年检
+    - 推荐年审流程
+    - 推荐免检车
+    - 推荐车检
+    - 笨猫年检
+  responses:
+    - "嗷呜～{user_addr}6 年内免上线 / 每 2 年领标ฅฅ"
+    - "(尾巴翘) 6-10 年 1 年 1 检 / 10 年以上半年"
+    - "{user_addr}12123 申领检验标志 / 不用跑大厅"
+    - "(挺胸) 笨猫推荐: 别脱审!脱审扣3分!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_drunk_001
+  intent: question
+  keywords: [推荐酒驾后果, 推荐醉驾, 推荐酒精浓度, 推荐酒驾处罚, 笨猫酒驾]
+  utterances:
+    - 推荐酒驾后果
+    - 推荐醉驾
+    - 推荐酒精浓度
+    - 推荐酒驾处罚
+    - 笨猫酒驾
+  responses:
+    - "嗷呜～{user_addr}20-80mg = 酒驾 / 80+ = 醉驾ฅฅ"
+    - "(尾巴翘) 酒驾: 暂扣 6 个月 + 罚 1k-2k + 扣 12 分"
+    - "{user_addr}醉驾: 吊销 5 年 + 拘役 + 入刑!"
+    - "(炸毛) 笨猫严禁: 喝酒不开车!!!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_license_001
+  intent: question
+  keywords: [推荐学驾照, 推荐科目一, 推荐科目二, 推荐科目三, 笨猫驾照]
+  utterances:
+    - 推荐学驾照
+    - 推荐科目一
+    - 推荐科目二
+    - 推荐科目三
+    - 笨猫驾照
+  responses:
+    - "嗷呜～{user_addr}科一理论 / 科二场地 / 科三路考 / 科四理论ฅฅ"
+    - "(尾巴翘) C1 手动 / C2 自动 / 推荐 C1 通用"
+    - "{user_addr}3 年内考完 / 驾考宝典 app 刷题"
+    - "(挺胸) 笨猫推荐: 科二最难!多练倒库!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_renew_001
+  intent: question
+  keywords: [推荐外地换证, 推荐驾照转籍, 推荐异地换证, 推荐驾照过期, 笨猫换证]
+  utterances:
+    - 推荐外地换证
+    - 推荐驾照转籍
+    - 推荐异地换证
+    - 推荐驾照过期
+    - 笨猫换证
+  responses:
+    - "嗷呜～{user_addr}12123 异地换证 / 不用回户籍地ฅฅ"
+    - "(尾巴翘) 6 年 / 10 年 / 长期 三档"
+    - "{user_addr}过期前 90 天可换 / 体检证明"
+    - "(挺胸) 笨猫推荐: 别让驾照过期!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tl_etc_001
+  intent: question
+  keywords: [推荐ETC, 推荐ETC安装, 推荐ETC办理, 推荐高速通行, 笨猫ETC]
+  utterances:
+    - 推荐ETC
+    - 推荐ETC安装
+    - 推荐ETC办理
+    - 推荐高速通行
+    - 笨猫ETC
+  responses:
+    - "嗷呜～{user_addr}银行 app 办理 / 免费送 OBUฅฅ"
+    - "(尾巴翘) 高速 95 折 / 不用排队等收费"
+    - "{user_addr}建行 / 工行 / 微信 / 支付宝 都可办"
+    - "(挺胸) 笨猫推荐: ETC 必装!省时省钱!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tl_accident_001
+  intent: question
+  keywords: [推荐交通事故处理, 推荐事故流程, 推荐快处快赔, 推荐报警, 笨猫事故]
+  utterances:
+    - 推荐交通事故处理
+    - 推荐事故流程
+    - 推荐快处快赔
+    - 推荐报警
+    - 笨猫事故
+  responses:
+    - "嗷呜～{user_addr}拍照 + 挪车 + 报保险ฅฅ"
+    - "(尾巴翘) 小事故 12123 在线快处 / 5 分钟搞定"
+    - "{user_addr}有伤亡 = 报 122 + 不要挪车!"
+    - "(挺胸) 笨猫推荐: 先保命再赔钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tl_insurance_001
+  intent: question
+  keywords: [推荐车险定损, 推荐车险理赔, 推荐交强险, 推荐商业险, 笨猫车险]
+  utterances:
+    - 推荐车险定损
+    - 推荐车险理赔
+    - 推荐交强险
+    - 推荐商业险
+    - 笨猫车险
+  responses:
+    - "嗷呜～{user_addr}交强险必买 / 第三者 100w 起ฅฅ"
+    - "(尾巴翘) 车损 / 不计免赔 / 玻璃 / 涉水"
+    - "{user_addr}平安 / 人保 / 太平洋 - 三大头部"
+    - "(挺胸) 笨猫推荐: 三者险买高一点!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tl_park_001
+  intent: question
+  keywords: [推荐违停罚款, 推荐违章停车, 推荐贴条, 推荐停车规则, 笨猫违停]
+  utterances:
+    - 推荐违停罚款
+    - 推荐违章停车
+    - 推荐贴条
+    - 推荐停车规则
+    - 笨猫违停
+  responses:
+    - "嗷呜～{user_addr}一般违停 200 元 + 不扣分ฅฅ"
+    - "(尾巴翘) 黄实线 / 斑马线 / 消防通道 重罚"
+    - "{user_addr}先挪车 + 别贴单 = 警告"
+    - "(挺胸) 笨猫推荐: 找停车场!别贪!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: tl_clear_001
+  intent: question
+  keywords: [推荐扣分清零, 推荐学法减分, 推荐12分恢复, 推荐记分清零, 笨猫减分]
+  utterances:
+    - 推荐扣分清零
+    - 推荐学法减分
+    - 推荐12分恢复
+    - 推荐记分清零
+    - 笨猫减分
+  responses:
+    - "嗷呜～{user_addr}12123 学法减分 / 每周期最多 6 分ฅฅ"
+    - "(尾巴翘) 学习 30 分钟 + 考试 = 减 1 分"
+    - "{user_addr}周期结束未满 12 = 自动清零"
+    - "(挺胸) 笨猫推荐: 减分别违章更稳!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tl_road_test_001
+  intent: question
+  keywords: [推荐路考, 推荐科目三技巧, 推荐路考流程, 推荐路考考点, 笨猫路考]
+  utterances:
+    - 推荐路考
+    - 推荐科目三技巧
+    - 推荐路考流程
+    - 推荐路考考点
+    - 笨猫路考
+  responses:
+    - "嗷呜～{user_addr}灯光 + 起步 + 直线 + 变道 + 路口ฅฅ"
+    - "(尾巴翘) 16 项 / 漏一项 = 挂"
+    - "{user_addr}观察 + 打灯 + 回头 = 三连"
+    - "(挺胸) 笨猫推荐: 别紧张!深呼吸!"
+  cooldown_seconds: 60
+  weight: 0.9

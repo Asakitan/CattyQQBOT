@@ -1,0 +1,206 @@
+# 法院流程 / 立案 / 起诉 routes (S6 R356 NLU 节点扩充, 第三十五周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cp_file_case_001
+  intent: question
+  keywords: [推荐立案流程, 推荐法院起诉, 推荐民事立案, 推荐网上立案, 笨猫立案]
+  utterances:
+    - 推荐立案流程
+    - 推荐法院起诉
+    - 推荐民事立案
+    - 推荐网上立案
+    - 笨猫立案
+  responses:
+    - "嗷呜～{user_addr}起诉状 + 身份证 + 证据交立案庭ฅฅ"
+    - "(尾巴翘) 网上立案: 移动微法院 / 人民法院在线"
+    - "{user_addr}7 日内审查 / 缴诉讼费 / 收案号"
+    - "(挺胸) 笨猫推荐: 先调解 / 立案最后!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_complaint_001
+  intent: question
+  keywords: [推荐民事起诉状, 推荐起诉状格式, 推荐诉讼请求, 推荐起诉状模板, 笨猫起诉状]
+  utterances:
+    - 推荐民事起诉状
+    - 推荐起诉状格式
+    - 推荐诉讼请求
+    - 推荐起诉状模板
+    - 笨猫起诉状
+  responses:
+    - "嗷呜～{user_addr}原告/被告信息 + 诉讼请求 + 事实理由ฅฅ"
+    - "(尾巴翘) 诉讼请求要具体: 金额 / 利息 / 期限"
+    - "{user_addr}事实理由按时间顺序 / 附证据清单"
+    - "(挺胸) 笨猫推荐: 一案一诉 / 别贪多!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_trial_prep_001
+  intent: question
+  keywords: [推荐庭审准备, 推荐证据收集, 推荐质证, 推荐举证期限, 笨猫庭审准备]
+  utterances:
+    - 推荐庭审准备
+    - 推荐证据收集
+    - 推荐质证
+    - 推荐举证期限
+    - 笨猫庭审准备
+  responses:
+    - "嗷呜～{user_addr}证据三性: 真实/合法/关联ฅฅ"
+    - "(尾巴翘) 举证期限内交 / 逾期视为放弃"
+    - "{user_addr}质证三方面: 真实性/合法性/关联性"
+    - "(挺胸) 笨猫推荐: 录音录像证据要原始载体!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_appeal_001
+  intent: question
+  keywords: [推荐二审上诉, 推荐上诉期限, 推荐上诉状, 推荐再审, 笨猫上诉]
+  utterances:
+    - 推荐二审上诉
+    - 推荐上诉期限
+    - 推荐上诉状
+    - 推荐再审
+    - 笨猫上诉
+  responses:
+    - "嗷呜～{user_addr}民事 15 天 / 刑事 10 天ฅฅ"
+    - "(尾巴翘) 向原审法院递交上诉状 + 副本"
+    - "{user_addr}上诉费按一审收 / 不交按撤诉"
+    - "(挺胸) 笨猫推荐: 二审是事实+法律审 / 别错过!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_enforcement_001
+  intent: question
+  keywords: [推荐执行立案, 推荐老赖, 推荐失信被执行人, 推荐强制执行, 笨猫执行]
+  utterances:
+    - 推荐执行立案
+    - 推荐老赖
+    - 推荐失信被执行人
+    - 推荐强制执行
+    - 笨猫执行
+  responses:
+    - "嗷呜～{user_addr}判决生效 2 年内申请执行ฅฅ"
+    - "(尾巴翘) 财产线索: 银行/房产/车辆/微信支付宝"
+    - "{user_addr}失信名单 / 限高令 / 拘留"
+    - "(挺胸) 笨猫推荐: 提供财产线索越详细越快!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_small_claim_001
+  intent: question
+  keywords: [推荐小额诉讼, 推荐简易程序, 推荐一审终审, 推荐速裁, 笨猫小额诉讼]
+  utterances:
+    - 推荐小额诉讼
+    - 推荐简易程序
+    - 推荐一审终审
+    - 推荐速裁
+    - 笨猫小额诉讼
+  responses:
+    - "嗷呜～{user_addr}标的 5 万以下 / 一审终审ฅฅ"
+    - "(尾巴翘) 不能上诉 / 只能再审"
+    - "{user_addr}审限 2 个月 / 速裁庭"
+    - "(挺胸) 笨猫推荐: 简单清楚的案子用!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cp_mediation_001
+  intent: question
+  keywords: [推荐调解书, 推荐司法调解, 推荐人民调解, 推荐和解, 笨猫调解]
+  utterances:
+    - 推荐调解书
+    - 推荐司法调解
+    - 推荐人民调解
+    - 推荐和解
+    - 笨猫调解
+  responses:
+    - "嗷呜～{user_addr}调解书签收即生效 / 等同判决ฅฅ"
+    - "(尾巴翘) 签字前看清条款 / 不能反悔"
+    - "{user_addr}人民调解委员会免费 / 司法确认"
+    - "(挺胸) 笨猫推荐: 调解省时省钱 / 优先!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cp_lawyer_letter_001
+  intent: question
+  keywords: [推荐律师函, 推荐发函, 推荐催收函, 推荐律所函件, 笨猫律师函]
+  utterances:
+    - 推荐律师函
+    - 推荐发函
+    - 推荐催收函
+    - 推荐律所函件
+    - 笨猫律师函
+  responses:
+    - "嗷呜～{user_addr}律师函非强制 / 心理威慑ฅฅ"
+    - "(尾巴翘) 费用 500-3000 / 律所出具"
+    - "{user_addr}EMS 邮寄 + 拍照留证"
+    - "(挺胸) 笨猫推荐: 起诉前最后一次提醒!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cp_notary_001
+  intent: question
+  keywords: [推荐公证处, 推荐遗嘱公证, 推荐保全证据公证, 推荐公证书, 笨猫公证]
+  utterances:
+    - 推荐公证处
+    - 推荐遗嘱公证
+    - 推荐保全证据公证
+    - 推荐公证书
+    - 笨猫公证
+  responses:
+    - "嗷呜～{user_addr}公证书有法定证明力ฅฅ"
+    - "(尾巴翘) 遗嘱 / 委托 / 学历 / 出生"
+    - "{user_addr}网页证据保全 - 起诉前必做"
+    - "(挺胸) 笨猫推荐: 公证 vs 律师见证 - 公证强!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cp_court_record_001
+  intent: question
+  keywords: [推荐庭审录像, 推荐查阅卷宗, 推荐裁判文书网, 推荐庭审笔录, 笨猫庭审录像]
+  utterances:
+    - 推荐庭审录像
+    - 推荐查阅卷宗
+    - 推荐裁判文书网
+    - 推荐庭审笔录
+    - 笨猫庭审录像
+  responses:
+    - "嗷呜～{user_addr}中国裁判文书网 - 免费查ฅฅ"
+    - "(尾巴翘) 当事人/律师可申请阅卷"
+    - "{user_addr}庭审笔录核对签字 / 错可改"
+    - "(挺胸) 笨猫推荐: 类案检索看裁判文书!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cp_administrative_001
+  intent: question
+  keywords: [推荐行政诉讼, 推荐民告官, 推荐行政复议, 推荐国家赔偿, 笨猫行政诉讼]
+  utterances:
+    - 推荐行政诉讼
+    - 推荐民告官
+    - 推荐行政复议
+    - 推荐国家赔偿
+    - 笨猫行政诉讼
+  responses:
+    - "嗷呜～{user_addr}6 个月内告 / 复议前置看情况ฅฅ"
+    - "(尾巴翘) 告政府/部门具体行政行为"
+    - "{user_addr}举证倒置 - 被告证明合法"
+    - "(挺胸) 笨猫推荐: 先复议后诉讼 / 省事!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cp_arbitration_001
+  intent: question
+  keywords: [推荐仲裁 诉讼, 推荐劳动仲裁, 推荐商事仲裁, 推荐仲裁裁决, 笨猫仲裁]
+  utterances:
+    - "推荐仲裁 诉讼"
+    - 推荐劳动仲裁
+    - 推荐商事仲裁
+    - 推荐仲裁裁决
+    - 笨猫仲裁
+  responses:
+    - "嗷呜～{user_addr}仲裁一裁终局 / 不能上诉ฅฅ"
+    - "(尾巴翘) 劳动仲裁前置 / 商事看合同"
+    - "{user_addr}仲裁保密 / 法院公开"
+    - "(挺胸) 笨猫推荐: 商业纠纷选仲裁 / 快!"
+  cooldown_seconds: 60
+  weight: 0.8

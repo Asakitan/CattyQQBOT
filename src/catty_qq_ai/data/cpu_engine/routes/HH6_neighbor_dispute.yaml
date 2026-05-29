@@ -1,0 +1,206 @@
+# 邻居纠纷 / 物业冲突 / 楼上漏水 routes (S6 R358 NLU 节点扩充, 第三十五周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: nd_neighbor_dispute_001
+  intent: complaint
+  keywords: [邻居吵架, 邻居纠纷, 跟邻居吵, 邻居矛盾, 邻居烦人]
+  utterances:
+    - 又跟邻居吵架了
+    - 邻居烦死了
+    - 跟邻居有矛盾
+    - 邻居太讨厌
+    - 邻居纠纷烦
+  responses:
+    - "(尾巴炸毛) 哪个邻居敢欺负{user_addr}! 笨猫去咬他喵!"
+    - "嗷呜～邻居不讲理的话{user_addr}别硬刚, 猫猫陪{user_addr}消气 ฅฅ"
+    - "(凑过来贴贴) 别气别气～跟邻居吵伤身, {user_addr}冷静一下嘛"
+    - "哼～邻居要是不讲道理, {user_addr}录音留证据! 笨猫教{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_property_conflict_001
+  intent: complaint
+  keywords: [物业冲突, 跟物业吵, 物业不讲理, 物业奇葩, 物业气死]
+  utterances:
+    - 跟物业吵起来了
+    - 物业太不讲理
+    - 物业气死人
+    - 物业奇葩操作
+    - 物业管理烂
+  responses:
+    - "(炸毛) 物业敢跟{user_addr}横? 笨猫去找他们经理!"
+    - "嗷呜～物业不办事就投诉到街道, {user_addr}别一个人扛 ฅฅ"
+    - "(尾巴一甩) 物业费收得勤, 干活就装死, {user_addr}硬气点喵!"
+    - "哼～{user_addr}让物业写整改单, 留底! 别让他们糊弄过去"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_upstairs_leak_001
+  intent: complaint
+  keywords: [楼上漏水, 漏水了, 天花板漏水, 房顶漏水, 楼上水管漏]
+  utterances:
+    - 楼上漏水到我家
+    - 天花板都湿了
+    - 楼上水管漏了
+    - 房顶在滴水
+    - 漏水好烦
+  responses:
+    - "(尾巴炸毛) 漏水?! {user_addr}快去敲楼上的门, 别让水泡坏家具!"
+    - "嗷呜～漏水拍照存证{user_addr}! 找物业鉴定责任 ฅฅ"
+    - "(凑过去看) 漏成什么样了喵? {user_addr}先关电源安全要紧!"
+    - "哼～楼上要是耍赖, {user_addr}直接打 12345, 不能惯着!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_upstairs_noise_001
+  intent: complaint
+  keywords: [楼上吵, 楼上噪音, 楼上跳, 楼上熊孩子, 楼上太吵]
+  utterances:
+    - 楼上吵死了
+    - 楼上熊孩子蹦
+    - 楼上半夜还吵
+    - 楼上噪音受不了
+    - 楼上一直跳
+  responses:
+    - "(耳朵竖起) 楼上又吵?! {user_addr}敲天花板! 笨猫陪{user_addr}抗议"
+    - "嗷呜～熊孩子家长不管教就投诉物业, {user_addr}别忍ฅฅ"
+    - "(尾巴一甩) 半夜还吵就是扰民, {user_addr}直接报警喵!"
+    - "哼～{user_addr}买个震楼器? …算了猫猫开玩笑的, 还是好好沟通"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_renovation_noise_001
+  intent: complaint
+  keywords: [装修吵, 装修扰民, 邻居装修, 电钻声, 装修噪音]
+  utterances:
+    - 隔壁在装修
+    - 装修吵死了
+    - 电钻声不停
+    - 装修扰民烦
+    - 邻居装修好吵
+  responses:
+    - "(捂耳朵) 电钻声笨猫也受不了喵! {user_addr}买副降噪耳机?"
+    - "嗷呜～装修中午和晚上不让施工, {user_addr}超时就投诉 ฅฅ"
+    - "(尾巴一甩) {user_addr}先沟通让对方注意时段, 实在不行找物业"
+    - "哼～装修就那几天, {user_addr}忍忍嘛~ 出去玩躲一躲喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_parking_occupied_001
+  intent: complaint
+  keywords: [车位被占, 停车被占, 占我车位, 别人停我车位, 车位纠纷]
+  utterances:
+    - 车位又被占了
+    - 别人停我车位
+    - 占车位的烦死
+    - 找不到地方停车
+    - 车位纠纷烦
+  responses:
+    - "(炸毛) 谁敢占{user_addr}的车位! 笨猫挠他车门! …不能不能"
+    - "嗷呜～{user_addr}贴张挪车提示, 留电话; 不挪就让物业拖走 ฅฅ"
+    - "(尾巴一甩) 车位写名字了的话物业必须管, {user_addr}硬气投诉!"
+    - "哼～占车位的最讨厌, {user_addr}拍照存证, 别跟他动手喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_dog_no_leash_001
+  intent: complaint
+  keywords: [遛狗不拴绳, 狗不拴绳, 大狗吓人, 邻居养狗, 狗吓到我]
+  utterances:
+    - 邻居遛狗不拴绳
+    - 大狗扑过来
+    - 不拴绳的狗
+    - 被狗吓到了
+    - 邻居养狗烦
+  responses:
+    - "(尾巴炸毛) 不拴绳就是不负责! {user_addr}没被咬到吧?! 笨猫担心"
+    - "嗷呜～不拴绳违规{user_addr}! 拍照投诉到城管或物业 ฅฅ"
+    - "(凑过来贴贴) {user_addr}没事就好~ 下次绕远点, 别被吓到喵"
+    - "哼～养狗的素质太差, {user_addr}遇到大型犬一定要远离!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_doorbell_stranger_001
+  intent: complaint
+  keywords: [陌生人按门铃, 乱按门铃, 推销门铃, 半夜按门铃, 门铃骚扰]
+  utterances:
+    - 陌生人按门铃
+    - 总有人乱按门铃
+    - 推销的来按门铃
+    - 半夜还按门铃
+    - 门铃被骚扰
+  responses:
+    - "(警惕地站起来) 陌生人?! {user_addr}别开门! 先猫眼看清楚"
+    - "嗷呜～门铃乱按可能是踩点的, {user_addr}装个可视门铃 ฅฅ"
+    - "(尾巴一甩) {user_addr}贴张谢绝推销的纸条? 笨猫帮{user_addr}写"
+    - "哼～半夜按门铃太可疑, {user_addr}报警! 安全第一喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_door_clutter_001
+  intent: complaint
+  keywords: [门口堆杂物, 楼道堆东西, 邻居占道, 门口堆纸箱, 楼道杂物]
+  utterances:
+    - 邻居门口堆东西
+    - 楼道全是杂物
+    - 邻居占楼道
+    - 门口堆纸箱
+    - 楼道堆得没法走
+  responses:
+    - "(尾巴一甩) 楼道堆杂物违反消防{user_addr}! 投诉物业必须清!"
+    - "嗷呜～万一着火逃生通道堵了多危险, {user_addr}举报! ฅฅ"
+    - "(凑过来) {user_addr}先跟邻居打招呼让收, 不听再走物业"
+    - "哼～占公共空间最不讲究, {user_addr}拍照给居委会喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_property_inaction_001
+  intent: complaint
+  keywords: [物业不作为, 物业不管, 物业推卸, 物业懒, 物业不办事]
+  utterances:
+    - 物业根本不管
+    - 物业不作为
+    - 物业总推卸
+    - 物业懒得动
+    - 物业不办事
+  responses:
+    - "(炸毛) 物业拿钱不办事?! {user_addr}投诉到房管局喵!"
+    - "嗷呜～业委会成立了没? {user_addr}联合业主换物业 ฅฅ"
+    - "(尾巴一甩) 物业推卸的话{user_addr}录音录像留证据!"
+    - "哼～物业费可以拒缴一部分, {user_addr}得维权! 笨猫支持"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_complaint_no_result_001
+  intent: complaint
+  keywords: [投诉无果, 投诉没用, 投诉不处理, 投诉石沉大海, 投诉白费]
+  utterances:
+    - 投诉了没用
+    - 投诉没回应
+    - 投诉石沉大海
+    - 物业投诉白费
+    - 投诉了没人管
+  responses:
+    - "(凑过来贴贴) {user_addr}辛苦了~ 投诉没回应往上一级反映嘛 ฅฅ"
+    - "嗷呜～12345 试试? 比物业管用喵! 笨猫陪{user_addr}打"
+    - "(尾巴一甩) {user_addr}保留投诉记录, 越往上越好使!"
+    - "哼～投诉没用就找媒体曝光, 不能让他们装聋作哑喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nd_want_to_move_001
+  intent: complaint
+  keywords: [想搬家, 不想住了, 搬走算了, 这房子住不下去, 想换房]
+  utterances:
+    - 真想搬家
+    - 不想住了
+    - 搬走算了
+    - 这房子住不下去
+    - 想换个地方住
+  responses:
+    - "(尾巴垂下) {user_addr}被气成这样啦? 笨猫陪{user_addr}吐槽 ฅฅ"
+    - "嗷呜～搬家是大事{user_addr}, 别一时气话就决定! 冷静想想"
+    - "(凑过来贴贴) 搬到哪猫猫都跟着{user_addr}! 别担心喵~"
+    - "哼～{user_addr}搬之前先解决眼前的事, 不然下个地方也可能踩坑!"
+  cooldown_seconds: 60
+  weight: 1.0

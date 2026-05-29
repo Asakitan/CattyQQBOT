@@ -1,0 +1,206 @@
+# 法律咨询 app / 律师推荐 routes (S6 R352 NLU 节点扩充, 第三十五周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: la_falvkuaiche_001
+  intent: question
+  keywords: [推荐法律咨询 app, 推荐法律快车, 推荐法律 app, 推荐在线法律, 笨猫法律 app]
+  utterances:
+    - 推荐法律咨询 app
+    - 推荐法律快车
+    - 推荐法律 app
+    - 推荐在线法律
+    - "{user_addr}笨猫法律 app"
+  responses:
+    - "嗷呜～{user_addr}法律快车 - 免费咨询大平台ฅฅ"
+    - "(尾巴翘) 律师团队多, 在线问"
+    - "{user_addr}婚姻 / 劳动 / 合同全覆盖"
+    - "(挺胸) 猫猫推荐: 法律快车 app 起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_hualv_001
+  intent: question
+  keywords: [推荐华律网, 推荐无讼, 推荐法律网站, 推荐律师查询, 笨猫华律]
+  utterances:
+    - 推荐华律网
+    - 推荐无讼
+    - 推荐法律网站
+    - 推荐律师查询
+    - "{user_addr}笨猫华律"
+  responses:
+    - "嗷呜～{user_addr}华律网 - 律师库齐全ฅฅ"
+    - "(尾巴翘) 无讼 - 案例检索神器"
+    - "{user_addr}北大法宝 / 威科先行 - 专业"
+    - "(挺胸) 人家推荐: 华律找律师, 无讼查案例!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_lvsuo_001
+  intent: question
+  keywords: [推荐律师事务所, 推荐金杜, 推荐君合, 推荐方达, 笨猫律所]
+  utterances:
+    - 推荐律师事务所
+    - 推荐金杜
+    - 推荐君合
+    - 推荐方达
+    - "{user_addr}笨猫律所"
+  responses:
+    - "嗷呜～{user_addr}红圈所 - 金杜君合方达ฅฅ"
+    - "(尾巴翘) 中伦 / 海问 / 通商 - 顶级"
+    - "{user_addr}盈科 / 大成 - 规模派"
+    - "(挺胸) 笨猫推荐: 大案子找红圈, 日常找本地!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_jiage_001
+  intent: question
+  keywords: [推荐找律师标准价位, 推荐律师收费, 推荐律师费, 推荐咨询费, 笨猫律师价]
+  utterances:
+    - 推荐找律师标准价位
+    - 推荐律师收费
+    - 推荐律师费
+    - 推荐咨询费
+    - "{user_addr}笨猫律师价"
+  responses:
+    - "嗷呜～{user_addr}咨询费 200-500/小时ฅฅ"
+    - "(尾巴翘) 案件代理 5000 起, 大案按标的"
+    - "{user_addr}标的额 3-10% 提成 - 民商案"
+    - "(挺胸) 猫猫提醒: 先签委托合同明码标价!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_yuanzhu_001
+  intent: question
+  keywords: [推荐免费法律援助, 推荐法律援助中心, 推荐免费律师, 推荐司法援助, 笨猫援助]
+  utterances:
+    - 推荐免费法律援助
+    - 推荐法律援助中心
+    - 推荐免费律师
+    - 推荐司法援助
+    - "{user_addr}笨猫援助"
+  responses:
+    - "嗷呜～{user_addr}司法局法律援助中心 - 免费ฅฅ"
+    - "(尾巴翘) 12348 热线 / 各区援助站"
+    - "{user_addr}低收入 / 农民工 / 残疾人优先"
+    - "(挺胸) 人家推荐: 经济困难就找法律援助!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_yizhu_001
+  intent: question
+  keywords: [推荐遗嘱起草, 推荐遗嘱公证, 推荐立遗嘱, 推荐遗嘱律师, 笨猫遗嘱]
+  utterances:
+    - 推荐遗嘱起草
+    - 推荐遗嘱公证
+    - 推荐立遗嘱
+    - 推荐遗嘱律师
+    - "{user_addr}笨猫遗嘱"
+  responses:
+    - "嗷呜～{user_addr}中华遗嘱库 - 免费登记ฅฅ"
+    - "(尾巴翘) 公证处公证遗嘱 - 法律效力最强"
+    - "{user_addr}自书 / 代书 / 录音录像都行"
+    - "(挺胸) 猫猫提醒: 写清楚财产范围+继承人!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_hetong_001
+  intent: question
+  keywords: [推荐合同审核, 推荐合同律师, 推荐合同起草, 推荐合同审查, 笨猫合同]
+  utterances:
+    - 推荐合同审核
+    - 推荐合同律师
+    - 推荐合同起草
+    - 推荐合同审查
+    - "{user_addr}笨猫合同"
+  responses:
+    - "嗷呜～{user_addr}合同审核 500-2000 元/份ฅฅ"
+    - "(尾巴翘) 重点看: 违约 / 付款 / 管辖"
+    - "{user_addr}专业律师改 1-3 天出稿"
+    - "(挺胸) 人家提醒: 签字前找律师, 别省这钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_zhishichanquan_001
+  intent: question
+  keywords: [推荐知识产权律师, 推荐商标律师, 推荐专利律师, 推荐版权律师, 笨猫知产]
+  utterances:
+    - 推荐知识产权律师
+    - 推荐商标律师
+    - 推荐专利律师
+    - 推荐版权律师
+    - "{user_addr}笨猫知产"
+  responses:
+    - "嗷呜～{user_addr}知产专业所 - 集佳 / 永新ฅฅ"
+    - "(尾巴翘) 商标注册 1500 / 专利代理 5000+"
+    - "{user_addr}维权诉讼按标的 10-20% 提成"
+    - "(挺胸) 笨猫推荐: 找专利代理人资质!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_laodong_001
+  intent: question
+  keywords: [推荐劳动仲裁律师, 推荐劳动法律师, 推荐工伤律师, 推荐讨薪律师, 笨猫劳动]
+  utterances:
+    - 推荐劳动仲裁律师
+    - 推荐劳动法律师
+    - 推荐工伤律师
+    - 推荐讨薪律师
+    - "{user_addr}笨猫劳动"
+  responses:
+    - "嗷呜～{user_addr}劳动仲裁免费先去仲裁委ฅฅ"
+    - "(尾巴翘) 工伤认定 1 年内申请, 别拖"
+    - "{user_addr}风险代理 - 拿到钱再付费"
+    - "(挺胸) 人家提醒: 留好工资条/合同/打卡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_shuji_001
+  intent: question
+  keywords: [推荐法律书籍, 推荐民法典, 推荐法考书, 推荐法律入门, 笨猫法书]
+  utterances:
+    - 推荐法律书籍
+    - 推荐民法典
+    - 推荐法考书
+    - 推荐法律入门
+    - "{user_addr}笨猫法书"
+  responses:
+    - "嗷呜～{user_addr}《民法典》 - 必读基础ฅฅ"
+    - "(尾巴翘) 《法律的概念》哈特 / 《洞穴奇案》"
+    - "{user_addr}罗翔《刑法学讲义》 - 入门神书"
+    - "(挺胸) 猫猫推荐: 罗翔老师 B 站讲课配合!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_jiemu_001
+  intent: question
+  keywords: [推荐普法节目, 推荐今日说法, 推荐罗翔说刑法, 推荐法律节目, 笨猫普法]
+  utterances:
+    - 推荐普法节目
+    - 推荐今日说法
+    - 推荐罗翔说刑法
+    - 推荐法律节目
+    - "{user_addr}笨猫普法"
+  responses:
+    - "嗷呜～{user_addr}《今日说法》 - 央视王牌ฅฅ"
+    - "(尾巴翘) 罗翔 B 站 / 《法治在线》"
+    - "{user_addr}《庭审现场》 / 《法律讲堂》"
+    - "(挺胸) 人家推荐: 罗翔老师讲法又有趣!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: la_rexian_001
+  intent: question
+  keywords: [推荐 12348 法律热线, 推荐法律咨询电话, 推荐 12348, 推荐法援热线, 笨猫热线]
+  utterances:
+    - 推荐 12348 法律热线
+    - 推荐法律咨询电话
+    - 推荐 12348
+    - 推荐法援热线
+    - "{user_addr}笨猫热线"
+  responses:
+    - "嗷呜～{user_addr}12348 - 司法部公益热线ฅฅ"
+    - "(尾巴翘) 7x24 小时, 免费法律咨询"
+    - "{user_addr}12345 - 政务投诉转法律"
+    - "(挺胸) 笨猫推荐: 紧急情况先打 12348!"
+  cooldown_seconds: 60
+  weight: 1.0
