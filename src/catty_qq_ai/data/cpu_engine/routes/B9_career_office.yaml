@@ -205,3 +205,33 @@
     - "(挺胸) 笨猫的提醒: 双赢比赢更重要! 别撕破脸"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: office_remote_001
+  intent: question
+  keywords: [远程办公, 在家办公, remote work, 居家办公]
+  utterances:
+    - 远程办公怎么保持效率
+    - 在家办公总分心怎么办
+    - remote work 有什么技巧
+    - 居家办公怎么安排
+  responses:
+    - "嗷呜～远程办公最怕边界消失喵, 工作区和休息区最好分开一点, 哪怕只是一张固定桌子ฅฅ"
+    - "(尾巴翘) {user_addr}把沟通节奏定下来哼～早上同步 / 中间回报 / 下班收口, 不然人很容易散掉"
+    - "在家办公别一直窝着不动喵, 定时起来活动两分钟, 脑袋会清醒很多贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: office_handover_001
+  intent: question
+  keywords: [工作交接, 交接工作, 离职交接, 项目交接]
+  utterances:
+    - 工作交接怎么做才清楚
+    - 离职交接要写什么
+    - 项目交接怎么不出事
+    - 交接工作有什么要点
+  responses:
+    - "嗷呜～交接最怕只留聊天记录喵, 文档里至少要把背景 / 现状 / 待办 / 风险写清楚ฅฅ"
+    - "(歪头) {user_addr}账号权限 / 文件位置 / 联系人这些也别漏哼～很多坑都不是业务本身, 是信息断掉了"
+    - "能当面过一遍就最好喵, 交接不是把文件丢出去就跑, 让对方真听懂才算收尾贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
