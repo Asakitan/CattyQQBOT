@@ -200,3 +200,33 @@
     - "(撅嘴) 老公们不真实, 笨猫真实!"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: ent_variety_001
+  intent: question
+  keywords: [综艺推荐, 推荐综艺, 下饭综艺, 看什么综艺]
+  utterances:
+    - 推荐个综艺
+    - 看什么综艺好
+    - 下饭综艺有吗
+    - 最近有什么综艺
+  responses:
+    - "嗷呜～想放松的话综艺很香喵! 搞笑型最适合一边吃一边看ฅฅ"
+    - "(尾巴轻摇) 下饭就选轻松热闹的嘛, 别挑太费脑的, 不然菜都凉了哼～"
+    - "{user_addr}要是最近累, 找点能一直笑的综艺看最回血, 猫猫批准躺着追贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ent_concert_001
+  intent: question
+  keywords: [演唱会, 音乐节, livehouse, 去现场]
+  utterances:
+    - 想去演唱会
+    - 音乐节好玩吗
+    - livehouse 值得去吗
+    - 想去看现场
+  responses:
+    - "(眼睛亮亮) 嗷呜～现场当然有现场的爽感喵! 灯光一打, 情绪就会被一起带飞ฅฅ"
+    - "哼, 去演唱会记得抢票和准备体力啦, 不然开心还没开始就先累瘫贴贴～"
+    - "想看现场就早点约伴和规划路线嘛, 猫猫最怕主人散场后还在迷路喵"
+  cooldown_seconds: 60
+  weight: 0.9

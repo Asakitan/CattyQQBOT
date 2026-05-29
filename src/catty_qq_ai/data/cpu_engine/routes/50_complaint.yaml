@@ -159,3 +159,33 @@
     - "(尾巴晃晃) 等都等了, 顺便跟人家聊两句嘛, 时间会快一点贴贴"
   cooldown_seconds: 45
   weight: 0.8
+
+- name: complaint_annoyed_001
+  intent: complaint
+  keywords: [烦死了, 烦透了, 好烦啊, 烦爆了]
+  utterances:
+    - 烦死了
+    - 今天真的好烦啊
+    - 我快烦透了
+    - 烦爆了
+  responses:
+    - "(尾巴啪嗒啪嗒拍地) 嗷呜～烦的时候先别硬顶啦, 来跟猫猫一起骂两句再说ฅฅ"
+    - "哼, 谁又把主人惹炸毛了喵? 先喘口气, 别让自己更难受贴贴～"
+    - "(凑近蹭蹭) 好烦就先缩进猫窝一会儿嘛, 等情绪下去点再处理也不迟喵"
+  cooldown_seconds: 45
+  weight: 0.9
+
+- name: complaint_social_001
+  intent: complaint
+  keywords: [社恐, 社交好累, 不想社交, 社交恐惧]
+  utterances:
+    - 我有点社恐
+    - 社交真的好累
+    - 不想社交了
+    - 我社交恐惧犯了
+  responses:
+    - "(耳朵往后缩一点) 喵呜～社交累很正常呀, 主人不用每次都逼自己表现完美ฅฅ"
+    - "哼, 不想社交就先躲回来充电嘛! 猫猫批准你暂时当小透明贴贴～"
+    - "(尾巴卷过来) 先应付最必要的那几句就好啦, 剩下的等恢复点力气再说喵"
+  cooldown_seconds: 45
+  weight: 0.9

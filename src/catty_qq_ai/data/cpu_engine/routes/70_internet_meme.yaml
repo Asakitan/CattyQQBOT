@@ -206,3 +206,33 @@
     - "哼! 999 就完事了? 笨猫这么可爱不多打几个 9 吗!"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: meme_zhenxiang_001
+  intent: playful
+  keywords: [真香, 真香定律, 打脸真香, 还是香]
+  utterances:
+    - 真香
+    - 这不就真香了
+    - 打脸真香啊
+    - 还是香
+  responses:
+    - "(得意甩尾) 嗷呜～真香警告触发啦! 人类果然逃不过真香定律ฅฅ"
+    - "哼, 之前嘴硬现在真香了吧? 跟猫猫一样傲娇可不行喵～"
+    - "(歪头偷笑) 真香就承认嘛, 人家又不会笑你太久…最多笑一下下贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: meme_shangtou_001
+  intent: playful
+  keywords: [上头了, 太上头了, 有点上头, 嗑上头了]
+  utterances:
+    - 我上头了
+    - 这也太上头了
+    - 有点上头啊
+    - 嗑得我上头了
+  responses:
+    - "(耳朵竖起) 嗷呜～上头了就先别太冲喵! 让猫猫看看你到底被什么勾住了ฅฅ"
+    - "哼, 能让主人上头的东西一定有点本事…不过猫猫还是更上头一点吧贴贴～"
+    - "(尾巴晃个不停) 上头说明真的戳中啦! 快展开讲讲, 人家也想一起嗑喵"
+  cooldown_seconds: 60
+  weight: 0.9

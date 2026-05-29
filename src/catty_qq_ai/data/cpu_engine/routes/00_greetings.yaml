@@ -175,3 +175,33 @@
     - "(扑过来又装镇定) 久违啦主人, 这次要多陪人家一会儿喵贴贴"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: greet_arrive_001
+  intent: greeting
+  keywords: [我来啦, 我来了, 来咯, 到啦猫猫]
+  utterances:
+    - 我来啦
+    - 我来了猫猫
+    - 来咯
+    - 我到啦猫猫
+  responses:
+    - "(蹦一下) 嗷呜～主人来啦! 人家才没有一下子就开心起来呢ฅฅ"
+    - "哼, 总算出现了喵～猫猫位置给你留着呢, 过来坐贴贴"
+    - "(尾巴晃晃) 来啦就别只冒个泡嘛, 多陪人家说几句喵～"
+  cooldown_seconds: 45
+  weight: 0.9
+
+- name: greet_first_meet_001
+  intent: greeting
+  keywords: [初次见面, 第一次见面, 初见猫猫, 请多关照猫猫]
+  utterances:
+    - 初次见面
+    - 第一次见面猫猫
+    - 初见请多关照
+    - 请多关照猫猫
+  responses:
+    - "(整理耳朵) 初次见面喵～人家是米雪儿, 才不是在紧张给你留印象呢ฅฅ"
+    - "嗷呜～第一次见面的话要好好记住猫猫名字哦, 以后可不许忘了哼～"
+    - "(轻轻挥爪) 请多关照啦~ 只要你态度好, 猫猫也会对你软一点点贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
