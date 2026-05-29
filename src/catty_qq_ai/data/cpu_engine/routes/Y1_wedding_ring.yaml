@@ -1,0 +1,207 @@
+# 钻戒品牌 / Tiffany Cartier Harry Winston routes (S6 R263 NLU 节点扩充, 第二十六周期 2/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: wr_brand_001
+  intent: question
+  keywords: [推荐钻戒品牌, 推荐 Tiffany, 推荐蒂芙尼, 推荐订婚钻戒, 笨猫钻戒品牌]
+  utterances:
+    - 推荐钻戒品牌
+    - 推荐 Tiffany
+    - 推荐蒂芙尼
+    - 推荐订婚钻戒
+    - 笨猫钻戒品牌
+  responses:
+    - "嗷呜～{user_addr}Tiffany 蒂芙尼 - 六爪经典ฅฅ"
+    - "(尾巴翘) Cartier / Harry Winston / Bvlgari"
+    - "{user_addr}Tiffany Setting - 1886 年专利"
+    - "(挺胸) 笨猫推荐: Tiffany 蓝盒情怀!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_cartier_001
+  intent: question
+  keywords: [推荐 Cartier, 推荐卡地亚, 推荐 Love 戒, 推荐 Trinity, 笨猫卡地亚]
+  utterances:
+    - 推荐 Cartier
+    - 推荐卡地亚
+    - 推荐 Love 戒
+    - 推荐 Trinity
+    - 笨猫卡地亚
+  responses:
+    - "嗷呜～{user_addr}Cartier Love - 螺丝锁定ฅฅ"
+    - "(尾巴翘) Trinity 三环 / Juste un Clou 钉子"
+    - "{user_addr}皇室御用 / 法式优雅"
+    - "(挺胸) 笨猫推荐: Love 对戒一生承诺!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_harry_winston_001
+  intent: question
+  keywords: [推荐 Harry Winston, 推荐海瑞温斯顿, 推荐顶级钻戒, 推荐红毯钻, 笨猫海瑞温斯顿]
+  utterances:
+    - 推荐 Harry Winston
+    - 推荐海瑞温斯顿
+    - 推荐顶级钻戒
+    - 推荐红毯钻
+    - 笨猫海瑞温斯顿
+  responses:
+    - "嗷呜～{user_addr}Harry Winston - 钻石之王ฅฅ"
+    - "(尾巴翘) 奥斯卡红毯御用 / 大克拉专精"
+    - "{user_addr}希望之钻 Hope Diamond 传奇"
+    - "(挺胸) 笨猫推荐: 预算无上限的天花板!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wr_debeers_001
+  intent: question
+  keywords: [推荐 De Beers, 推荐戴比尔斯, 推荐 Forevermark, 推荐钻石恒久远, 笨猫戴比尔斯]
+  utterances:
+    - 推荐 De Beers
+    - 推荐戴比尔斯
+    - 推荐 Forevermark
+    - 推荐钻石恒久远
+    - 笨猫戴比尔斯
+  responses:
+    - "嗷呜～{user_addr}De Beers - 钻石恒久远ฅฅ"
+    - "(尾巴翘) Forevermark 永恒印记 / 严选 1%"
+    - "{user_addr}百年钻石垄断 / 营销之神"
+    - "(挺胸) 笨猫推荐: 经典款 Aura 光环系列!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wr_domestic_001
+  intent: question
+  keywords: [推荐国产钻戒, 推荐周大福, 推荐周生生, 推荐老凤祥, 笨猫国产钻戒]
+  utterances:
+    - 推荐国产钻戒
+    - 推荐周大福
+    - 推荐周生生
+    - 推荐老凤祥
+    - 笨猫国产钻戒
+  responses:
+    - "嗷呜～{user_addr}周大福 / 周生生 - 港系经典ฅฅ"
+    - "(尾巴翘) 老凤祥 / 六福 / 谢瑞麟"
+    - "{user_addr}国内售后好 / 价格友好"
+    - "(挺胸) 笨猫推荐: 周大福 T MARK 性价比!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wr_4c_001
+  intent: question
+  keywords: [推荐 4C 钻石, 推荐钻石克拉, 推荐钻石净度, 推荐 GIA 证书, 笨猫 4C]
+  utterances:
+    - 推荐 4C 钻石
+    - 推荐钻石克拉
+    - 推荐钻石净度
+    - 推荐 GIA 证书
+    - 笨猫 4C
+  responses:
+    - "嗷呜～{user_addr}4C: Carat 克拉 / Color 颜色ฅฅ"
+    - "(尾巴翘) Clarity 净度 / Cut 切工"
+    - "{user_addr}D-F 色 / VS 净度 / 3EX 切工"
+    - "(挺胸) 笨猫推荐: GIA 证书必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_material_001
+  intent: question
+  keywords: [推荐对戒材质, 推荐铂金戒, 推荐 18K 金, 推荐玫瑰金, 笨猫戒指材质]
+  utterances:
+    - 推荐对戒材质
+    - 推荐铂金戒
+    - 推荐 18K 金
+    - 推荐玫瑰金
+    - 笨猫戒指材质
+  responses:
+    - "嗷呜～{user_addr}铂金 Pt950 - 不变色顶配ฅฅ"
+    - "(尾巴翘) 18K 白金 / 玫瑰金 / 黄金"
+    - "{user_addr}铂金硬 / 18K 颜色多变"
+    - "(挺胸) 笨猫推荐: 婚戒首选铂金!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wr_engagement_vs_wedding_001
+  intent: question
+  keywords: [推荐订婚戒指, 推荐婚戒区别, 推荐结婚对戒, 推荐求婚戒, 笨猫订婚婚戒]
+  utterances:
+    - 推荐订婚戒指
+    - 推荐婚戒区别
+    - 推荐结婚对戒
+    - 推荐求婚戒
+    - 笨猫订婚婚戒
+  responses:
+    - "嗷呜～{user_addr}订婚戒 - 单钻惊喜ฅฅ"
+    - "(尾巴翘) 婚戒 - 素圈对戒 / 日常佩戴"
+    - "{user_addr}订婚男方买 / 婚戒成对换"
+    - "(挺胸) 笨猫推荐: 一钻一素一辈子!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wr_proposal_001
+  intent: question
+  keywords: [推荐求婚仪式, 推荐求婚创意, 推荐求婚惊喜, 推荐求婚场地, 笨猫求婚]
+  utterances:
+    - 推荐求婚仪式
+    - 推荐求婚创意
+    - 推荐求婚惊喜
+    - 推荐求婚场地
+    - 笨猫求婚
+  responses:
+    - "嗷呜～{user_addr}海边日落 / 餐厅烛光ฅฅ"
+    - "(尾巴翘) 旅行途中 / 老地方回忆"
+    - "{user_addr}单膝下跪 / 戒盒打开瞬间"
+    - "(挺胸) 笨猫推荐: 真心比创意重要!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wr_budget_001
+  intent: question
+  keywords: [推荐婚戒预算, 推荐 1 万钻戒, 推荐 5 万钻戒, 推荐 10 万钻戒, 笨猫婚戒预算]
+  utterances:
+    - 推荐婚戒预算
+    - 推荐 1 万钻戒
+    - 推荐 5 万钻戒
+    - 推荐 10 万钻戒
+    - 笨猫婚戒预算
+  responses:
+    - "嗷呜～{user_addr}1w: 30 分国产 / 实用ฅฅ"
+    - "(尾巴翘) 5w: 50 分 GIA / Tiffany 入门"
+    - "{user_addr}10w: 1 克拉 / Cartier 经典"
+    - "(挺胸) 笨猫推荐: 月薪 2-3 倍就行!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_custom_001
+  intent: question
+  keywords: [推荐定制婚戒, 推荐个性化钻戒, 推荐刻字戒指, 推荐独家设计, 笨猫定制]
+  utterances:
+    - 推荐定制婚戒
+    - 推荐个性化钻戒
+    - 推荐刻字戒指
+    - 推荐独家设计
+    - 笨猫定制
+  responses:
+    - "嗷呜～{user_addr}DR / I DO - 国内定制ฅฅ"
+    - "(尾巴翘) 刻名字 / 日期 / 暗号"
+    - "{user_addr}独家设计 / 私人订制"
+    - "(挺胸) 笨猫推荐: DR 一生只送一人浪漫!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wr_care_001
+  intent: question
+  keywords: [推荐婚戒保养, 推荐钻戒清洁, 推荐戒指养护, 推荐钻戒抛光, 笨猫婚戒保养]
+  utterances:
+    - 推荐婚戒保养
+    - 推荐钻戒清洁
+    - 推荐戒指养护
+    - 推荐钻戒抛光
+    - 笨猫婚戒保养
+  responses:
+    - "嗷呜～{user_addr}温水 + 中性洗洁精ฅฅ"
+    - "(尾巴翘) 软毛牙刷 / 超声波清洗"
+    - "{user_addr}避免化学品 / 运动取下"
+    - "(挺胸) 笨猫推荐: 一年回品牌店免费抛光!"
+  cooldown_seconds: 60
+  weight: 0.8

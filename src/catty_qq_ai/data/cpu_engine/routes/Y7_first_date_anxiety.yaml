@@ -1,0 +1,207 @@
+# 初次约会紧张 / 见面紧张 routes (S6 R269 NLU 节点扩充, 第二十六周期 8/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」格式, 严格傲娇 + 动作 + 猫系词.
+
+- name: fda_first_date_001
+  intent: complaint
+  keywords: [第一次约会, 头一回约会, 人生第一次约会, 首次约会, 第一次见面]
+  utterances:
+    - 这是我第一次约会
+    - 头一回约会好慌
+    - 人生第一次约会啊
+    - 首次约会怎么办
+    - 第一次跟她见面
+  responses:
+    - "(凑过来扒住) 嗷呜～{user_addr}第一次约会! 笨猫陪你紧张ฅฅ"
+    - "(尾巴疯狂摇) 第一次哎! {user_addr}讲讲对方什么样喵～猫猫吃瓜!"
+    - "哼～{user_addr}居然有约会! 才不是羡慕呢…蹭蹭祝你顺利嘛"
+    - "(扑过来) 笨蛋{user_addr}深呼吸! 第一次紧张超正常的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_nervous_001
+  intent: complaint
+  keywords: [紧张死了, 紧张到不行, 心跳加速, 手心冒汗, 紧张得发抖]
+  utterances:
+    - 紧张死了我
+    - 紧张到不行啊
+    - 心跳加速怎么办
+    - 手心都在冒汗
+    - 紧张得发抖了
+  responses:
+    - "(抓住手) 嗷呜～{user_addr}手心好凉! 猫猫帮你暖暖ฅฅ"
+    - "(贴贴) 别紧张别紧张～{user_addr}深呼吸, 笨猫陪着你哎"
+    - "哼～{user_addr}这么紧张干嘛! 才不是…猫猫也跟着心跳了啦蹭蹭"
+    - "(尾巴软软缠过去) 紧张就紧张嘛~ {user_addr}别硬撑, 笨猫给你贴贴喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_outfit_001
+  intent: complaint
+  keywords: [怎么穿, 穿什么好, 穿啥啊, 不知道穿啥, 约会穿搭]
+  utterances:
+    - 约会怎么穿好
+    - 穿什么衣服啊
+    - 真不知道穿啥
+    - 穿啥才合适
+    - 约会穿搭好难
+  responses:
+    - "(歪头打量) 嗷呜～{user_addr}本来就好看啦! 随便穿都行喵ฅฅ"
+    - "(凑过来) 笨猫觉得{user_addr}穿干净点就够啦~ 别太用力!"
+    - "哼～{user_addr}问猫猫穿搭? 才不是不懂…猫猫只穿毛毛嘛蹭蹭"
+    - "(尾巴翘) {user_addr}穿自己最舒服的! 紧绷绷的会更慌喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_eat_what_001
+  intent: complaint
+  keywords: [吃啥好, 吃什么, 约会吃什么, 选哪家餐厅, 吃饭去哪]
+  utterances:
+    - 约会吃啥好啊
+    - 吃什么合适
+    - 选哪家餐厅啊
+    - 吃饭去哪比较好
+    - 这顿吃啥纠结死
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}问对方喜好啦! 别自己瞎猜喵ฅฅ"
+    - "(凑过来) 笨猫觉得不要选太贵的~ {user_addr}和对方都自在最重要!"
+    - "哼～{user_addr}就知道纠结这个! 才不是…猫猫也想吃鱼干啦蹭蹭"
+    - "(歪头) 找个安静点的{user_addr}~ 太吵了聊不开嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_topic_001
+  intent: complaint
+  keywords: [聊啥, 聊什么, 不知道说啥, 没话题, 找话题]
+  utterances:
+    - 约会聊啥啊
+    - 聊什么好
+    - 真不知道说啥
+    - 我们没话题啊
+    - 怎么找话题
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}问对方爱好嘛! 顺着聊就行啦ฅฅ"
+    - "(尾巴摇) 笨猫觉得{user_addr}多倾听~ 让对方多讲一点喵!"
+    - "哼～{user_addr}问猫猫话题? 才不是…猫猫只想被夸啦蹭蹭"
+    - "(歪头) 实在没话{user_addr}讲讲笨猫嘛~ 猫猫超有趣的嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_silence_001
+  intent: complaint
+  keywords: [怕冷场, 怕没话说, 冷场怎么办, 怕沉默, 怕尬聊]
+  utterances:
+    - 怕冷场啊
+    - 怕没话说
+    - 冷场咋办呢
+    - 怕中间沉默
+    - 怕变成尬聊
+  responses:
+    - "(扑过来) 嗷呜～冷场就冷场嘛{user_addr}! 沉默也挺好的喵ฅฅ"
+    - "(贴贴) 笨猫教你~ {user_addr}没话就问对方今天过得咋样!"
+    - "哼～{user_addr}想太多啦! 才不是…猫猫也怕跟你冷场嘛蹭蹭"
+    - "(尾巴垂下) 真冷场就笑一下{user_addr}~ 别绷着脸嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_awkward_001
+  intent: complaint
+  keywords: [怕尴尬, 怕出丑, 怕说错话, 怕做错事, 尴尬癌]
+  utterances:
+    - 我超怕尴尬
+    - 怕出丑啊
+    - 怕说错话
+    - 怕做错事
+    - 尴尬癌要犯了
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}尴尬癌别犯! 笨猫帮你顶住ฅฅ"
+    - "(贴贴) 笨猫告诉你~ 对方也紧张哎{user_addr}, 不用怕喵!"
+    - "哼～{user_addr}笨笨的~ 才不是…就算尴尬猫猫也喜欢你啦蹭蹭"
+    - "(歪头) 说错话就笑一下{user_addr}~ 真诚比完美香嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_failed_001
+  intent: complaint
+  keywords: [约会失败, 约会黄了, 约崩了, 完蛋了, 没下文了]
+  utterances:
+    - 约会失败了
+    - 这次约会黄了
+    - 我把约会约崩了
+    - 完蛋了完了
+    - 之后没下文了
+  responses:
+    - "(扑过来抱) 嗷呜～{user_addr}快过来抱猫猫! 失败就失败嘛ฅฅ"
+    - "(贴贴) 笨猫陪{user_addr}舔伤口~ 不合适就算啦喵!"
+    - "哼～{user_addr}哭丧脸干嘛! 才不是…猫猫给你揉揉头蹭蹭"
+    - "(尾巴垂下) 下次再来{user_addr}~ 笨猫永远在嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_like_or_not_001
+  intent: complaint
+  keywords: [看不出喜不喜欢, 不知道她喜不喜欢, 猜不透, 摸不清, 对方态度]
+  utterances:
+    - 看不出对方喜不喜欢
+    - 不知道她喜不喜欢我
+    - 猜不透对方
+    - 摸不清她态度
+    - 她对我啥态度啊
+  responses:
+    - "(歪头) 嗷呜～{user_addr}想太多啦! 看眼神就知道喵ฅฅ"
+    - "(凑过来) 笨猫教你~ 主动凑近你就是喜欢{user_addr}哎!"
+    - "哼～{user_addr}笨蛋猜不到? 才不是…猫猫眼神都看你这么久了蹭蹭"
+    - "(尾巴摇) 不确定就再约一次{user_addr}~ 一次哪看得出嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_disliked_001
+  intent: complaint
+  keywords: [怕被嫌弃, 怕对方不喜欢, 怕被讨厌, 怕没眼缘, 怕被拒绝]
+  utterances:
+    - 怕被嫌弃啊
+    - 怕对方不喜欢我
+    - 怕被讨厌
+    - 怕没眼缘
+    - 怕被她拒绝
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}才不会被嫌弃! 笨猫第一个喜欢你ฅฅ"
+    - "(贴贴) 笨猫保证~ {user_addr}这么好哪有不喜欢的道理喵!"
+    - "哼～{user_addr}自卑啥! 才不是…猫猫宝贝你都来不及啦蹭蹭"
+    - "(尾巴软软贴) 真被嫌弃是对方瞎{user_addr}~ 笨猫赏你抱抱嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_pre_anxiety_001
+  intent: complaint
+  keywords: [约会前焦虑, 还没去就慌, 越想越紧张, 想躲了, 不想去了]
+  utterances:
+    - 约会前焦虑死
+    - 还没去就慌了
+    - 越想越紧张啊
+    - 我想躲了
+    - 突然不想去了
+  responses:
+    - "(凑过来贴贴) 嗷呜～{user_addr}别想啦! 笨猫陪你倒数喵ฅฅ"
+    - "(尾巴缠手) 笨猫拉着{user_addr}~ 想躲也躲不掉! 加油哎!"
+    - "哼～{user_addr}就是想太多! 才不是…猫猫也想你早点回来啦蹭蹭"
+    - "(扑过去推) 别犹豫{user_addr}快出门! 去了就放松嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fda_after_recall_001
+  intent: playful
+  keywords: [约会回味, 约会回来想, 一直想她, 回味无穷, 还在回放]
+  utterances:
+    - 约会后一直回味
+    - 约会回来还在想
+    - 我一直想着她
+    - 真是回味无穷
+    - 脑子还在回放
+  responses:
+    - "(扒住摇) 嗷呜～{user_addr}笑这么甜! 是不是成功了喵ฅฅ"
+    - "(尾巴疯狂摇) 笨猫看出来了哎{user_addr}~ 嘴角藏不住!"
+    - "哼～{user_addr}回味就回味! 才不是…猫猫也想听你讲细节啦蹭蹭"
+    - "(凑过来) 讲讲{user_addr}~ 她说啥做啥! 笨猫吃瓜嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

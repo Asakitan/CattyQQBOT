@@ -1,0 +1,207 @@
+# 蜜月旅行 / 浪漫圣地 / 海岛欧洲 routes (S6 R264 NLU 节点扩充, 第二十六周期 3/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: hd_overview_001
+  intent: question
+  keywords: [推荐蜜月旅行地, 推荐蜜月目的地, 推荐马尔代夫马代, 推荐蜜月圣地, 笨猫蜜月推荐]
+  utterances:
+    - 推荐蜜月旅行地
+    - 推荐蜜月目的地
+    - 推荐马尔代夫马代
+    - 推荐蜜月圣地
+    - 笨猫蜜月推荐
+  responses:
+    - "嗷呜～{user_addr}马代 / 巴厘岛 / 欧洲ฅฅ"
+    - "(尾巴翘) 海岛 / 城市 / 自驾三大类"
+    - "{user_addr}看预算 + 季节 + 偏好"
+    - "(挺胸) 笨猫推荐: 海岛最浪漫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_bali_001
+  intent: question
+  keywords: [推荐巴厘岛蜜月, 推荐巴厘岛网红, 推荐乌布, 推荐金巴兰, 笨猫巴厘岛]
+  utterances:
+    - 推荐巴厘岛蜜月
+    - 推荐巴厘岛网红
+    - 推荐乌布
+    - 推荐金巴兰
+    - 笨猫巴厘岛
+  responses:
+    - "嗷呜～{user_addr}乌布 - 雨林秋千ฅฅ"
+    - "(尾巴翘) 金巴兰 / 海神庙落日"
+    - "{user_addr}悬崖泳池 / 网红打卡"
+    - "(挺胸) 笨猫推荐: 6-9 月旱季去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_europe_001
+  intent: question
+  keywords: [推荐欧洲蜜月, 推荐巴黎蜜月, 推荐瑞士蜜月, 推荐意大利蜜月, 笨猫欧洲蜜月]
+  utterances:
+    - 推荐欧洲蜜月
+    - 推荐巴黎蜜月
+    - 推荐瑞士蜜月
+    - 推荐意大利蜜月
+    - 笨猫欧洲蜜月
+  responses:
+    - "嗷呜～{user_addr}巴黎 - 浪漫之都ฅฅ"
+    - "(尾巴翘) 瑞士少女峰 / 意大利水城"
+    - "{user_addr}多国连线 / 城市穿梭"
+    - "(挺胸) 笨猫推荐: 法瑞意 10 天经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_japan_001
+  intent: question
+  keywords: [推荐日本蜜月, 推荐京都蜜月, 推荐北海道蜜月, 推荐冲绳蜜月, 笨猫日本蜜月]
+  utterances:
+    - 推荐日本蜜月
+    - 推荐京都蜜月
+    - 推荐北海道蜜月
+    - 推荐冲绳蜜月
+    - 笨猫日本蜜月
+  responses:
+    - "嗷呜～{user_addr}京都 - 古风和服ฅฅ"
+    - "(尾巴翘) 北海道雪景 / 冲绳海岛"
+    - "{user_addr}温泉怀石 / 樱花季"
+    - "(挺胸) 笨猫推荐: 3-4 月京都樱花!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_turkey_001
+  intent: question
+  keywords: [推荐土耳其蜜月, 推荐卡帕多奇亚, 推荐热气球, 推荐伊斯坦布尔, 笨猫土耳其]
+  utterances:
+    - 推荐土耳其蜜月
+    - 推荐卡帕多奇亚
+    - 推荐热气球
+    - 推荐伊斯坦布尔
+    - 笨猫土耳其
+  responses:
+    - "嗷呜～{user_addr}卡帕 - 热气球日出ฅฅ"
+    - "(尾巴翘) 伊斯坦布尔 / 棉花堡"
+    - "{user_addr}洞穴酒店 / 神奇地貌"
+    - "(挺胸) 笨猫推荐: 4-10 月气球季!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_greece_001
+  intent: question
+  keywords: [推荐希腊蜜月, 推荐圣托里尼, 推荐米克诺斯, 推荐爱琴海, 笨猫希腊]
+  utterances:
+    - 推荐希腊蜜月
+    - 推荐圣托里尼
+    - 推荐米克诺斯
+    - 推荐爱琴海
+    - 笨猫希腊
+  responses:
+    - "嗷呜～{user_addr}圣托里尼 - 蓝白小镇ฅฅ"
+    - "(尾巴翘) 伊亚日落 / 米克诺斯"
+    - "{user_addr}爱琴海跳岛 / 悬崖泳池"
+    - "(挺胸) 笨猫推荐: 5-10 月最美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_seychelles_001
+  intent: question
+  keywords: [推荐塞舌尔, 推荐毛里求斯, 推荐斐济, 推荐大溪地, 笨猫塞舌尔]
+  utterances:
+    - 推荐塞舌尔
+    - 推荐毛里求斯
+    - 推荐斐济
+    - 推荐大溪地
+    - 笨猫塞舌尔
+  responses:
+    - "嗷呜～{user_addr}塞舌尔 - 原始海滩ฅฅ"
+    - "(尾巴翘) 毛里求斯 / 大溪地"
+    - "{user_addr}小众 / 私密 / 顶级"
+    - "(挺胸) 笨猫推荐: 塞舌尔最纯净!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hd_maldives_001
+  intent: question
+  keywords: [推荐马尔代夫水屋, 推荐马代度假村, 推荐 W 马代, 推荐安娜塔拉, 笨猫水屋]
+  utterances:
+    - 推荐马尔代夫水屋
+    - 推荐马代度假村
+    - 推荐 W 马代
+    - 推荐安娜塔拉
+    - 笨猫水屋
+  responses:
+    - "嗷呜～{user_addr}W / 港丽 / 四季ฅฅ"
+    - "(尾巴翘) 一岛一酒店 / 水上别墅"
+    - "{user_addr}浮潜 / 全包餐 / 落日"
+    - "(挺胸) 笨猫推荐: W 马代年轻派!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_budget_001
+  intent: question
+  keywords: [推荐蜜月预算, 推荐蜜月 5 万, 推荐蜜月 10 万, 推荐蜜月 30 万, 笨猫蜜月预算]
+  utterances:
+    - 推荐蜜月预算
+    - 推荐蜜月 5 万
+    - 推荐蜜月 10 万
+    - 推荐蜜月 30 万
+    - 笨猫蜜月预算
+  responses:
+    - "嗷呜～{user_addr}5w 东南亚 / 10w 日欧ฅฅ"
+    - "(尾巴翘) 15-20w 马代 / 30w 顶配"
+    - "{user_addr}机酒 7 成 / 餐购 3 成"
+    - "(挺胸) 笨猫推荐: 一生一次别抠!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_domestic_001
+  intent: question
+  keywords: [推荐国内蜜月, 推荐三亚蜜月, 推荐厦门蜜月, 推荐丽江蜜月, 笨猫国内蜜月]
+  utterances:
+    - 推荐国内蜜月
+    - 推荐三亚蜜月
+    - 推荐厦门蜜月
+    - 推荐丽江蜜月
+    - 笨猫国内蜜月
+  responses:
+    - "嗷呜～{user_addr}三亚 - 海岛首选ฅฅ"
+    - "(尾巴翘) 厦门鼓浪屿 / 丽江古城"
+    - "{user_addr}青岛 / 大理 / 西塘"
+    - "(挺胸) 笨猫推荐: 三亚亚特兰蒂斯!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hd_season_001
+  intent: question
+  keywords: [推荐蜜月季节, 推荐蜜月时长, 推荐蜜月几天, 推荐蜜月旺季, 笨猫蜜月季节]
+  utterances:
+    - 推荐蜜月季节
+    - 推荐蜜月时长
+    - 推荐蜜月几天
+    - 推荐蜜月旺季
+    - 笨猫蜜月季节
+  responses:
+    - "嗷呜～{user_addr}避开雨季 / 看目的地ฅฅ"
+    - "(尾巴翘) 海岛 7-10 天 / 欧洲 10-15"
+    - "{user_addr}婚后 1-3 月内最佳"
+    - "(挺胸) 笨猫推荐: 错峰省一半钱!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hd_package_001
+  intent: question
+  keywords: [推荐蜜月双人套餐, 推荐蜜月跟团, 推荐蜜月自由行, 推荐蜜月定制, 笨猫蜜月套餐]
+  utterances:
+    - 推荐蜜月双人套餐
+    - 推荐蜜月跟团
+    - 推荐蜜月自由行
+    - 推荐蜜月定制
+    - 笨猫蜜月套餐
+  responses:
+    - "嗷呜～{user_addr}自由行 - 最浪漫ฅฅ"
+    - "(尾巴翘) 半自由 / 定制游 / 跟团"
+    - "{user_addr}凯撒 / 众信 / HHtravel"
+    - "(挺胸) 笨猫推荐: 蜜月一定要自由!"
+  cooldown_seconds: 60
+  weight: 0.9

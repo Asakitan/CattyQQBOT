@@ -1,0 +1,207 @@
+# 周年礼物 / 纸婚 / 银婚 / 金婚 routes (S6 R265 NLU 节点扩充, 第二十六周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: ag_overview_001
+  intent: question
+  keywords: [推荐周年礼物, 推荐结婚周年, 推荐周年传统, 推荐周年纪念, 笨猫周年礼物]
+  utterances:
+    - 推荐周年礼物
+    - 推荐结婚周年
+    - 推荐周年传统
+    - 推荐周年纪念
+    - 笨猫周年礼物
+  responses:
+    - "嗷呜～{user_addr}1 纸 / 5 木 / 10 锡 / 25 银 / 50 金ฅฅ"
+    - "(尾巴翘) 西方传统对应材质"
+    - "{user_addr}走心 > 贵重 / 写信永远不过时"
+    - "(挺胸) 笨猫推荐: 按周年材质送!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ag_paper_001
+  intent: question
+  keywords: [推荐 1 周年礼物, 推荐纸婚, 推荐纪念册, 推荐情书, 笨猫纸婚]
+  utterances:
+    - 推荐 1 周年礼物
+    - 推荐纸婚
+    - 推荐纪念册
+    - 推荐情书
+    - 笨猫纸婚
+  responses:
+    - "嗷呜～{user_addr}手工纪念册 / 365 张照片ฅฅ"
+    - "(尾巴翘) 手写情书 / 旅行书"
+    - "{user_addr}定制日记 / 婚后第一年回忆"
+    - "(挺胸) 笨猫推荐: 一人写一本互换!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ag_wood_001
+  intent: question
+  keywords: [推荐 5 周年礼物, 推荐木婚, 推荐木质礼物, 推荐木雕, 笨猫木婚]
+  utterances:
+    - 推荐 5 周年礼物
+    - 推荐木婚
+    - 推荐木质礼物
+    - 推荐木雕
+    - 笨猫木婚
+  responses:
+    - "嗷呜～{user_addr}手工木雕摆件 / 黑胡桃ฅฅ"
+    - "(尾巴翘) 木质相框 / 婚戒盒"
+    - "{user_addr}种一棵树 / 共同成长"
+    - "(挺胸) 笨猫推荐: 刻名字的木盒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ag_tin_001
+  intent: question
+  keywords: [推荐 10 周年礼物, 推荐锡婚, 推荐锡器, 推荐铝制, 笨猫锡婚]
+  utterances:
+    - 推荐 10 周年礼物
+    - 推荐锡婚
+    - 推荐锡器
+    - 推荐铝制
+    - 笨猫锡婚
+  responses:
+    - "嗷呜～{user_addr}锡器酒杯 / 锡制相框ฅฅ"
+    - "(尾巴翘) 锡: 柔韧 - 婚姻的弹性"
+    - "{user_addr}锡制玫瑰 / 永不凋零"
+    - "(挺胸) 笨猫推荐: 一对锡杯共饮!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_silver_001
+  intent: question
+  keywords: [推荐 25 周年礼物, 推荐银婚, 推荐银饰, 推荐银器, 笨猫银婚]
+  utterances:
+    - 推荐 25 周年礼物
+    - 推荐银婚
+    - 推荐银饰
+    - 推荐银器
+    - 笨猫银婚
+  responses:
+    - "嗷呜～{user_addr}银戒重做 / 复刻婚戒ฅฅ"
+    - "(尾巴翘) 银制餐具 / 银相框"
+    - "{user_addr}银项链对链 / 永不褪色"
+    - "(挺胸) 笨猫推荐: 银婚做一次旅拍!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ag_gold_001
+  intent: question
+  keywords: [推荐 50 周年礼物, 推荐金婚, 推荐金器, 推荐金饰, 笨猫金婚]
+  utterances:
+    - 推荐 50 周年礼物
+    - 推荐金婚
+    - 推荐金器
+    - 推荐金饰
+    - 笨猫金婚
+  responses:
+    - "嗷呜～{user_addr}金婚 = 半世纪 / 金戒对戒ฅฅ"
+    - "(尾巴翘) 全家福金牌 / 子女定制"
+    - "{user_addr}重办婚礼 / 金婚仪式"
+    - "(挺胸) 笨猫推荐: 金婚要孩子操办!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ag_travel_001
+  intent: question
+  keywords: [推荐周年纪念旅行, 推荐二次蜜月, 推荐周年度假, 推荐复刻蜜月, 笨猫周年旅行]
+  utterances:
+    - 推荐周年纪念旅行
+    - 推荐二次蜜月
+    - 推荐周年度假
+    - 推荐复刻蜜月
+    - 笨猫周年旅行
+  responses:
+    - "嗷呜～{user_addr}复刻初次约会地ฅฅ"
+    - "(尾巴翘) 马尔代夫 / 京都 / 巴黎"
+    - "{user_addr}邮轮 / 海岛 / 极光"
+    - "(挺胸) 笨猫推荐: 回蜜月地最浪漫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ag_husband_001
+  intent: question
+  keywords: [推荐周年礼物男友, 推荐周年礼物老公, 推荐送男生周年, 推荐他周年, 笨猫送男生]
+  utterances:
+    - 推荐周年礼物男友
+    - 推荐周年礼物老公
+    - 推荐送男生周年
+    - 推荐他周年
+    - 笨猫送男生
+  responses:
+    - "嗷呜～{user_addr}腕表 / 钢笔 / 皮带ฅฅ"
+    - "(尾巴翘) 威士忌 / 雪茄 / 香水"
+    - "{user_addr}游戏机 / 球鞋 / 兴趣相关"
+    - "(挺胸) 笨猫推荐: 刻字皮夹走心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ag_wife_001
+  intent: question
+  keywords: [推荐周年礼物女友, 推荐周年礼物老婆, 推荐送女生周年, 推荐她周年, 笨猫送女生]
+  utterances:
+    - 推荐周年礼物女友
+    - 推荐周年礼物老婆
+    - 推荐送女生周年
+    - 推荐她周年
+    - 笨猫送女生
+  responses:
+    - "嗷呜～{user_addr}珠宝 / 项链 / 耳环ฅฅ"
+    - "(尾巴翘) 香水 / 包 / SPA 套餐"
+    - "{user_addr}定制画像 / 婚纱重拍"
+    - "(挺胸) 笨猫推荐: 鲜花 + 走心信!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ag_surprise_001
+  intent: question
+  keywords: [推荐周年惊喜, 推荐惊喜布置, 推荐鲜花气球, 推荐房间布置, 笨猫周年惊喜]
+  utterances:
+    - 推荐周年惊喜
+    - 推荐惊喜布置
+    - 推荐鲜花气球
+    - 推荐房间布置
+    - 笨猫周年惊喜
+  responses:
+    - "嗷呜～{user_addr}玫瑰花瓣 + 蜡烛 + 气球ฅฅ"
+    - "(尾巴翘) 卧室布置 / 照片墙时间线"
+    - "{user_addr}下班开门 / 烛光晚餐"
+    - "(挺胸) 笨猫推荐: 99 朵玫瑰 + 心形蜡烛!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ag_engraved_001
+  intent: question
+  keywords: [推荐刻字礼物, 推荐个性化礼物, 推荐定制礼物, 推荐刻名字, 笨猫刻字]
+  utterances:
+    - 推荐刻字礼物
+    - 推荐个性化礼物
+    - 推荐定制礼物
+    - 推荐刻名字
+    - 笨猫刻字
+  responses:
+    - "嗷呜～{user_addr}刻字戒指 / 项链ฅฅ"
+    - "(尾巴翘) 刻字手表 / 钢笔 / 打火机"
+    - "{user_addr}定制星空图 / 婚礼那晚"
+    - "(挺胸) 笨猫推荐: 刻两人坐标 + 日期!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ag_budget_001
+  intent: question
+  keywords: [推荐周年礼物预算, 推荐 100 元周年, 推荐 1000 元周年, 推荐 10000 元周年, 笨猫周年预算]
+  utterances:
+    - 推荐周年礼物预算
+    - 推荐 100 元周年
+    - 推荐 1000 元周年
+    - 推荐 10000 元周年
+    - 笨猫周年预算
+  responses:
+    - "嗷呜～{user_addr}100: 手写信 + 鲜花ฅฅ"
+    - "(尾巴翘) 1000: 香水 / 钢笔 / 餐厅"
+    - "{user_addr}10000: 珠宝 / 旅行 / 腕表"
+    - "(挺胸) 笨猫推荐: 心意 > 价格!"
+  cooldown_seconds: 60
+  weight: 0.9

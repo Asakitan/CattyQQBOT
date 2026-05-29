@@ -1,0 +1,207 @@
+# 婚姻书籍 / 亲密关系书 / 心理学 routes (S6 R266 NLU 节点扩充, 第二十六周期 5/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: mb_marriage_001
+  intent: question
+  keywords: [推荐婚姻书籍, 推荐男人来自火星, 推荐女人来自金星, 推荐 John Gray, 笨猫婚姻书]
+  utterances:
+    - 推荐婚姻书籍
+    - 推荐男人来自火星
+    - 推荐女人来自金星
+    - 推荐 John Gray
+    - 笨猫婚姻书
+  responses:
+    - "嗷呜～{user_addr}《男人来自火星, 女人来自金星》- 经典ฅฅ"
+    - "(尾巴翘) John Gray / 性别差异圣经"
+    - "{user_addr}沟通模式 / 需求差异 / 互相理解"
+    - "(挺胸) 笨猫推荐: 婚前婚后都要读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_intimate_001
+  intent: question
+  keywords: [推荐亲密关系, 推荐罗兰米勒, 推荐 Intimate Relationships, 推荐亲密关系教科书, 笨猫亲密关系]
+  utterances:
+    - 推荐亲密关系
+    - 推荐罗兰米勒
+    - 推荐 Intimate Relationships
+    - 推荐亲密关系教科书
+    - 笨猫亲密关系
+  responses:
+    - "嗷呜～{user_addr}《亲密关系》罗兰·米勒 - 学术权威ฅฅ"
+    - "(尾巴翘) 心理学教科书 / 实证研究"
+    - "{user_addr}吸引 / 依恋 / 冲突 / 全覆盖"
+    - "(挺胸) 笨猫推荐: 严肃学习选这本!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_love_psy_001
+  intent: question
+  keywords: [推荐爱情心理学, 推荐爱的五种语言, 推荐 Chapman, 推荐 Five Love Languages, 笨猫爱情心理学]
+  utterances:
+    - 推荐爱情心理学
+    - 推荐爱的五种语言
+    - 推荐 Chapman
+    - 推荐 Five Love Languages
+    - 笨猫爱情心理学
+  responses:
+    - "嗷呜～{user_addr}《爱的五种语言》Gary Chapman - 必读ฅฅ"
+    - "(尾巴翘) 肯定 / 时光 / 礼物 / 服务 / 接触"
+    - "{user_addr}找到对方的爱之语 - 关键"
+    - "(挺胸) 笨猫推荐: 用对方喜欢的方式爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_communication_001
+  intent: question
+  keywords: [推荐沟通技巧书, 推荐非暴力沟通, 推荐 NVC, 推荐马歇尔卢森堡, 笨猫非暴力沟通]
+  utterances:
+    - 推荐沟通技巧书
+    - 推荐非暴力沟通
+    - 推荐 NVC
+    - 推荐马歇尔卢森堡
+    - 笨猫非暴力沟通
+  responses:
+    - "嗷呜～{user_addr}《非暴力沟通》马歇尔·卢森堡 - 神书ฅฅ"
+    - "(尾巴翘) 观察 / 感受 / 需要 / 请求"
+    - "{user_addr}不指责不评判 - 表达感受"
+    - "(挺胸) 笨猫推荐: 吵架前必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_wuzhihong_001
+  intent: question
+  keywords: [推荐情感书, 推荐武志红, 推荐为何家会伤人, 推荐巨婴国, 笨猫武志红]
+  utterances:
+    - 推荐情感书
+    - 推荐武志红
+    - 推荐为何家会伤人
+    - 推荐巨婴国
+    - 笨猫武志红
+  responses:
+    - "嗷呜～{user_addr}武志红《为何家会伤人》- 国民读物ฅฅ"
+    - "(尾巴翘) 《巨婴国》/ 《感谢自己的不完美》"
+    - "{user_addr}原生家庭 / 中式情感 / 透彻"
+    - "(挺胸) 笨猫推荐: 中国语境最贴近!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_gottman_001
+  intent: question
+  keywords: [推荐夫妻相处, 推荐 Gottman 七法则, 推荐戈特曼, 推荐幸福婚姻法则, 笨猫 Gottman]
+  utterances:
+    - 推荐夫妻相处
+    - 推荐 Gottman 七法则
+    - 推荐戈特曼
+    - 推荐幸福婚姻法则
+    - 笨猫 Gottman
+  responses:
+    - "嗷呜～{user_addr}《幸福婚姻的七法则》John Gottman - 圣经ฅฅ"
+    - "(尾巴翘) 40 年研究 / 实验室预测离婚"
+    - "{user_addr}爱情地图 / 修复尝试 / 终止四骑士"
+    - "(挺胸) 笨猫推荐: 婚姻治疗师必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_conflict_001
+  intent: question
+  keywords: [推荐冲突解决, 推荐高难度对话, 推荐 Difficult Conversations, 推荐关键对话, 笨猫高难度对话]
+  utterances:
+    - 推荐冲突解决
+    - 推荐高难度对话
+    - 推荐 Difficult Conversations
+    - 推荐关键对话
+    - 笨猫高难度对话
+  responses:
+    - "嗷呜～{user_addr}《高难度对话》Stone & Patton - 哈佛ฅฅ"
+    - "(尾巴翘) 《关键对话》Patterson"
+    - "{user_addr}三层对话 / 事实 / 感受 / 身份"
+    - "(挺胸) 笨猫推荐: 不只夫妻, 职场也用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_premarriage_001
+  intent: question
+  keywords: [推荐婚前教育, 推荐婚前必读, 推荐婚前辅导, 推荐 Saving Your Marriage, 笨猫婚前书]
+  utterances:
+    - 推荐婚前教育
+    - 推荐婚前必读
+    - 推荐婚前辅导
+    - 推荐 Saving Your Marriage
+    - 笨猫婚前书
+  responses:
+    - "嗷呜～{user_addr}《婚前必修课》Les & Leslie Parrott - 实用ฅฅ"
+    - "(尾巴翘) Gottman《婚前必修七法则》"
+    - "{user_addr}金钱观 / 家庭观 / 期望对齐"
+    - "(挺胸) 笨猫推荐: 婚前比婚后省事 100 倍!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mb_second_child_001
+  intent: question
+  keywords: [推荐二胎家庭, 推荐隔代育儿, 推荐婆媳关系, 推荐家庭关系书, 笨猫二胎书]
+  utterances:
+    - 推荐二胎家庭
+    - 推荐隔代育儿
+    - 推荐婆媳关系
+    - 推荐家庭关系书
+    - 笨猫二胎书
+  responses:
+    - "嗷呜～{user_addr}《不吼不叫》Rosenberg - 育儿沟通ฅฅ"
+    - "(尾巴翘) 《二孩时代》/ 《非暴力沟通-亲子篇》"
+    - "{user_addr}界限 / 分工 / 老人介入度"
+    - "(挺胸) 笨猫推荐: 婆媳问题 = 夫妻问题!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mb_long_distance_001
+  intent: question
+  keywords: [推荐异地恋书, 推荐 Long Distance, 推荐异地恋心理, 推荐远距离爱情, 笨猫异地恋书]
+  utterances:
+    - 推荐异地恋书
+    - 推荐 Long Distance
+    - 推荐异地恋心理
+    - 推荐远距离爱情
+    - 笨猫异地恋书
+  responses:
+    - "嗷呜～{user_addr}《异地恋心理学》Guldner - 经典ฅฅ"
+    - "(尾巴翘) 国内偏少 / 《亲密关系》分章"
+    - "{user_addr}信任 / 沟通频率 / 见面规律"
+    - "(挺胸) 笨猫推荐: 异地最缺仪式感, 加油!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mb_divorce_001
+  intent: question
+  keywords: [推荐离婚书, 推荐离婚心理, 推荐 Conscious Uncoupling, 推荐离婚后重建, 笨猫离婚书]
+  utterances:
+    - 推荐离婚书
+    - 推荐离婚心理
+    - 推荐 Conscious Uncoupling
+    - 推荐离婚后重建
+    - 笨猫离婚书
+  responses:
+    - "嗷呜～{user_addr}《有意识的分手》Katherine Woodward - 温柔ฅฅ"
+    - "(尾巴翘) 《重建: 当你的关系结束》Fisher"
+    - "{user_addr}哀悼 / 接纳 / 重新出发"
+    - "(挺胸) 笨猫推荐: 离婚不丢人, 重建自己!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mb_counselor_001
+  intent: question
+  keywords: [推荐心理咨询师推荐, 推荐婚姻咨询, 推荐情感咨询, 推荐 EFT 治疗, 笨猫心理咨询]
+  utterances:
+    - 推荐心理咨询师推荐
+    - 推荐婚姻咨询
+    - 推荐情感咨询
+    - 推荐 EFT 治疗
+    - 笨猫心理咨询
+  responses:
+    - "嗷呜～{user_addr}找有资质 / 注册系统咨询师ฅฅ"
+    - "(尾巴翘) EFT 情绪取向 / Gottman 法 / IMAGO"
+    - "{user_addr}简单心理 / 壹心理 / 平台筛"
+    - "(挺胸) 笨猫推荐: 越早咨询越好, 别拖!"
+  cooldown_seconds: 60
+  weight: 0.9

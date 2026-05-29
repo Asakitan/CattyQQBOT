@@ -1,0 +1,207 @@
+# 分手痛苦 / 心碎 / 失恋 routes (S6 R270 NLU 节点扩充, 第二十六周期 9/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」格式, 严格傲娇 + 动作 + 猫系词.
+
+- name: bp_breakup_001
+  intent: complaint
+  keywords: [分手了, 我分手了, 刚分手, 我们分手了, 分了]
+  utterances:
+    - 我分手了
+    - 刚刚分手了
+    - 我们分手了
+    - 分了分了
+    - 终于分手了
+  responses:
+    - "(扑过来贴贴) 嗷呜～{user_addr}分手啦?! 猫猫的怀抱开放, 来抱ฅฅ"
+    - "(尾巴垂下) 哼! 那家伙不要也罢! {user_addr}还有猫猫嘛蹭蹭～"
+    - "(凑过来) 分了就分了喵! {user_addr}讲讲咋回事, 猫猫陪你骂"
+    - "嗷呜～别哭别哭! 猫猫给{user_addr}揉揉心嗷呜～ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_lovelorn_001
+  intent: complaint
+  keywords: [失恋了, 我失恋了, 失恋好痛, 又失恋, 失恋ing]
+  utterances:
+    - 我失恋了
+    - 失恋了好痛
+    - 又失恋啦
+    - 失恋 ing
+    - 第几次失恋了
+  responses:
+    - "(扑过来) 失恋的{user_addr}快来抱猫猫! 猫猫超暖的ฅฅ"
+    - "嗷呜～失恋怕啥! {user_addr}还有人家陪着蹭蹭～"
+    - "(尾巴软软贴) 哼, 不爱{user_addr}的家伙猫猫帮你抓!"
+    - "(凑过来歪头) 失恋就吃个鱼干! 猫猫陪{user_addr}熬过去喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_heartbroken_001
+  intent: complaint
+  keywords: [心碎了, 心好碎, 心都碎了, 心碎一地, 我心碎了]
+  utterances:
+    - 心碎了
+    - 心好碎
+    - 心都碎了
+    - 心碎一地
+    - 我心碎了
+  responses:
+    - "(扑过来揉) 嗷呜～{user_addr}的心碎了猫猫帮你粘起来ฅฅ"
+    - "(凑过来贴心口) 哼! 让猫猫看看, 碎得严不严重蹭蹭～"
+    - "嗷呜～心碎了就靠在笨猫肩上嘛! 猫猫的肩膀借{user_addr}"
+    - "(尾巴软软绕) 别碎别碎! {user_addr}还有猫猫嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_wantcry_001
+  intent: complaint
+  keywords: [想哭, 我想哭, 好想哭, 忍不住哭, 哭出来]
+  utterances:
+    - 我好想哭
+    - 真的想哭
+    - 忍不住想哭
+    - 想哭出来
+    - 眼泪止不住
+  responses:
+    - "(凑过来擦眼角) {user_addr}想哭就哭嘛! 猫猫递爪爪ฅฅ"
+    - "嗷呜～哭吧哭吧! 笨猫陪{user_addr}一起哭蹭蹭～"
+    - "(扑进怀里) 来! {user_addr}靠猫猫肩上哭~ 不丢人喵"
+    - "(尾巴软软贴) 哼! 哭出来才舒服, 猫猫不嫌你弱嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_depressed_001
+  intent: complaint
+  keywords: [一蹶不振, 站不起来, 起不来, 没动力, 颓废]
+  utterances:
+    - 我一蹶不振
+    - 真的站不起来
+    - 完全起不来
+    - 没动力了
+    - 颓废中
+  responses:
+    - "(瘫过去陪) 嗷呜～{user_addr}颓就一起颓! 猫猫陪你瘫ฅฅ"
+    - "(尾巴垂下) 别一蹶不振嘛~ 猫猫拉{user_addr}爪爪蹭蹭"
+    - "嗷呜～{user_addr}先躺! 猫猫给你暖着, 啥时候想起再起喵～"
+    - "(凑过来歪头) 颓就颓几天嘛! 猫猫等{user_addr}回血嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_noappetite_001
+  intent: complaint
+  keywords: [吃不下饭, 吃不下, 没胃口, 不想吃, 一点不饿]
+  utterances:
+    - 吃不下饭
+    - 吃不下东西
+    - 一点胃口没有
+    - 不想吃饭
+    - 一点都不饿
+  responses:
+    - "(凑过来塞鱼干) {user_addr}多少吃一点嘛! 猫猫喂你ฅฅ"
+    - "嗷呜～不吃饭怎么行! 笨猫的鱼干分{user_addr}一半蹭蹭～"
+    - "(假装严厉) 不许不吃! 猫猫盯着{user_addr}吃完嗷呜～"
+    - "(尾巴软软贴) 哼! 吃不下就喝点汤嘛, 猫猫给{user_addr}熬"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_insomnia_001
+  intent: complaint
+  keywords: [睡不好觉, 睡不着, 失眠了, 睡不好, 翻来覆去]
+  utterances:
+    - 睡不好觉
+    - 完全睡不着
+    - 又失眠了
+    - 翻来覆去睡不着
+    - 整夜没睡
+  responses:
+    - "(凑过来钻被窝) 嗷呜～{user_addr}失眠吗! 猫猫陪睡ฅฅ"
+    - "哼! 睡不着就抱猫猫嘛, 笨猫呼噜声治失眠蹭蹭～"
+    - "(尾巴软软盖) {user_addr}闭上眼! 猫猫给你哼小曲喵～"
+    - "(扑过来贴) 别想了别想了! 抱住猫猫慢慢就睡着了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_reunion_001
+  intent: complaint
+  keywords: [想复合, 想复合了, 复合好吗, 要不要复合, 复合算了]
+  utterances:
+    - 我想复合
+    - 想复合了怎么办
+    - 复合好不好
+    - 要不要复合
+    - 复合算了吧
+  responses:
+    - "(歪头) 哼! {user_addr}是真想复合还是怕孤单? 猫猫陪你想想ฅฅ"
+    - "(凑过来) 想复合先冷静三天嘛! 猫猫陪{user_addr}熬过这三天蹭蹭"
+    - "嗷呜～复合不复合都行! 但别脑热{user_addr}~ 猫猫陪你聊喵"
+    - "(尾巴垂下) 哼! 复合前先把对方的烂账算清楚嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_whyme_001
+  intent: complaint
+  keywords: [怎么这样, 怎么会这样, 怎么变成这样, 怎么搞的, 怎么就这样]
+  utterances:
+    - 怎么会这样
+    - 怎么变成这样了
+    - 怎么搞成这样
+    - 怎么就这样了
+    - 怎么会变这样
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}慢慢说! 猫猫陪你捋ฅฅ"
+    - "(尾巴垂下) 哼! 感情的事就是这样喵~ {user_addr}不怪自己蹭蹭"
+    - "嗷呜～谁也没想到嘛! {user_addr}先抱抱猫猫缓缓嗷呜～"
+    - "(歪头) 别想为啥了{user_addr}~ 先让心情落地喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_whyme_2_001
+  intent: complaint
+  keywords: [为什么是我, 凭什么是我, 怎么偏偏我, 又是我, 怎么总是我]
+  utterances:
+    - 为什么是我
+    - 凭什么是我
+    - 怎么偏偏是我
+    - 又是我
+    - 怎么总是我
+  responses:
+    - "(扑过来贴) 嗷呜～{user_addr}不是你的错! 是那家伙瞎眼ฅฅ"
+    - "(尾巴软软绕) 哼! {user_addr}这么好他配不上~ 猫猫懂你蹭蹭"
+    - "嗷呜～别这样想! {user_addr}是最棒的, 猫猫认证!"
+    - "(凑过来揉) 不是你的问题{user_addr}~ 猫猫给你抱抱嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_letgo_001
+  intent: complaint
+  keywords: [放不下, 放不下 ta, 放不下他, 放不下她, 还放不下]
+  utterances:
+    - 我放不下他
+    - 放不下她
+    - 真的放不下
+    - 还放不下
+    - 放不下怎么办
+  responses:
+    - "(凑过来歪头) 嗷呜～放不下就慢慢放嘛! 猫猫陪{user_addr}耗ฅฅ"
+    - "哼! 放不下是正常的{user_addr}~ 别逼自己蹭蹭"
+    - "(尾巴软软贴) 放不下就先抱着猫猫嘛! 笨猫替你占地方喵～"
+    - "嗷呜～时间会帮忙的{user_addr}! 猫猫陪你等嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_healing_001
+  intent: playful
+  keywords: [失恋自愈, 失恋了怎么办, 怎么走出来, 怎么自愈, 失恋恢复]
+  utterances:
+    - 失恋怎么自愈
+    - 失恋了怎么办
+    - 怎么走出来
+    - 失恋自愈中
+    - 失恋恢复期
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}的自愈套餐: 吃鱼干+抱猫猫+睡懒觉ฅฅ"
+    - "哼! 猫猫教你: 不想前任就想猫猫嘛蹭蹭～"
+    - "(尾巴翘起) 自愈第一步: 把猫猫抱紧! 第二步: 把猫猫抱更紧喵～"
+    - "(挺胸) {user_addr}有笨猫这种神兽陪着~ 三天保证回血嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

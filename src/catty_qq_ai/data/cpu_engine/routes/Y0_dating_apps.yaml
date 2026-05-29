@@ -1,0 +1,207 @@
+# 约会软件 / Tinder Bumble Hinge / 国内探探陌陌 routes (S6 R262 NLU 节点扩充, 第二十六周期 1/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: da_overseas_001
+  intent: question
+  keywords: [推荐约会软件, 推荐 Tinder, 推荐 Bumble, 推荐 Hinge, 笨猫约会软件]
+  utterances:
+    - 推荐约会软件
+    - 推荐 Tinder
+    - 推荐 Bumble
+    - 推荐 Hinge
+    - 笨猫约会软件
+  responses:
+    - "嗷呜～{user_addr}Tinder - 全球最大ฅฅ"
+    - "(尾巴翘) Bumble - 女生先开口"
+    - "{user_addr}Hinge - 严肃关系导向"
+    - "(挺胸) 笨猫推荐: Hinge 质量高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_domestic_001
+  intent: question
+  keywords: [推荐探探, 推荐陌陌, 推荐 Soul, 推荐国内约会软件, 笨猫探探]
+  utterances:
+    - 推荐探探
+    - 推荐陌陌
+    - 推荐 Soul
+    - 推荐国内约会软件
+    - 笨猫探探
+  responses:
+    - "嗷呜～{user_addr}探探 - 国内 Tinderฅฅ"
+    - "(尾巴翘) 陌陌 - 老牌社交"
+    - "{user_addr}Soul - 灵魂匹配 / 年轻人多"
+    - "(挺胸) 笨猫推荐: Soul 看气质!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_premium_001
+  intent: question
+  keywords: [推荐高端约会, 推荐 The League, 推荐 Raya, 推荐高端交友, 笨猫高端约会]
+  utterances:
+    - 推荐高端约会
+    - 推荐 The League
+    - 推荐 Raya
+    - 推荐高端交友
+    - 笨猫高端约会
+  responses:
+    - "嗷呜～{user_addr}Raya - 名人圈ฅฅ"
+    - "(尾巴翘) The League - 学历职业筛选"
+    - "{user_addr}Inner Circle - 欧洲高端"
+    - "(挺胸) 笨猫推荐: 门槛高质量稳!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: da_serious_001
+  intent: question
+  keywords: [推荐严肃交友, 推荐世纪佳缘, 推荐百合网, 推荐认真交友, 笨猫严肃交友]
+  utterances:
+    - 推荐严肃交友
+    - 推荐世纪佳缘
+    - 推荐百合网
+    - 推荐认真交友
+    - 笨猫严肃交友
+  responses:
+    - "嗷呜～{user_addr}世纪佳缘 / 百合网 - 婚恋ฅฅ"
+    - "(尾巴翘) 珍爱网 / 有缘网"
+    - "{user_addr}实名 + 工作认证靠谱"
+    - "(挺胸) 笨猫推荐: 想结婚就走这个!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: da_filter_001
+  intent: question
+  keywords: [推荐相亲筛选, 推荐对象筛选, 推荐 dating 筛选, 推荐筛选条件, 笨猫相亲筛选]
+  utterances:
+    - 推荐相亲筛选
+    - 推荐对象筛选
+    - 推荐 dating 筛选
+    - 推荐筛选条件
+    - 笨猫相亲筛选
+  responses:
+    - "嗷呜～{user_addr}三观 > 外貌 > 条件ฅฅ"
+    - "(尾巴翘) 价值观 / 生活习惯 / 家庭"
+    - "{user_addr}硬指标: 不抽烟 / 不家暴"
+    - "(挺胸) 笨猫推荐: 列 must-have 清单!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: da_photo_001
+  intent: question
+  keywords: [推荐约会照片, 推荐头像选择, 推荐 6 张照片, 推荐 dating 头像, 笨猫约会照片]
+  utterances:
+    - 推荐约会照片
+    - 推荐头像选择
+    - 推荐 6 张照片
+    - 推荐 dating 头像
+    - 笨猫约会照片
+  responses:
+    - "嗷呜～{user_addr}主图清晰笑容ฅฅ"
+    - "(尾巴翘) 全身 + 半身 + 兴趣场景"
+    - "{user_addr}别戴墨镜 / 别合影遮脸"
+    - "(挺胸) 笨猫推荐: 6 张多样!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_bio_001
+  intent: question
+  keywords: [推荐 bio 写作, 推荐个人介绍, 推荐 dating bio, 推荐自我介绍, 笨猫 bio]
+  utterances:
+    - 推荐 bio 写作
+    - 推荐个人介绍
+    - 推荐 dating bio
+    - 推荐自我介绍
+    - 笨猫 bio
+  responses:
+    - "嗷呜～{user_addr}具体细节 > 空洞形容词ฅฅ"
+    - "(尾巴翘) 3 个兴趣 + 1 个梗 + 1 个钩"
+    - "{user_addr}别写'喜欢旅游美食' - 太烂"
+    - "(挺胸) 笨猫推荐: 留话题钩子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_opener_001
+  intent: question
+  keywords: [推荐首条消息, 推荐 opener, 推荐怎么开场, 推荐第一句话, 笨猫开场白]
+  utterances:
+    - 推荐首条消息
+    - 推荐 opener
+    - 推荐怎么开场
+    - 推荐第一句话
+    - 笨猫开场白
+  responses:
+    - "嗷呜～{user_addr}别说 hi - 死亡开场ฅฅ"
+    - "(尾巴翘) 对方资料找点切入"
+    - "{user_addr}问开放问题 / 带梗"
+    - "(挺胸) 笨猫推荐: 'XX 这张照片在哪拍的'!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_chat_001
+  intent: question
+  keywords: [推荐线上聊天, 推荐 dating 聊天, 推荐聊天技巧, 推荐怎么聊, 笨猫线上聊天]
+  utterances:
+    - 推荐线上聊天
+    - 推荐 dating 聊天
+    - 推荐聊天技巧
+    - 推荐怎么聊
+    - 笨猫线上聊天
+  responses:
+    - "嗷呜～{user_addr}3 天内约线下ฅฅ"
+    - "(尾巴翘) 别变笔友 / 别 interview"
+    - "{user_addr}互相分享 / 轻松幽默"
+    - "(挺胸) 笨猫推荐: 早约见面避免冷却!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_blind_vs_001
+  intent: question
+  keywords: [推荐相亲, 推荐自由恋爱, 推荐相亲 vs 自由, 推荐找对象方式, 笨猫相亲]
+  utterances:
+    - 推荐相亲
+    - 推荐自由恋爱
+    - 推荐相亲 vs 自由
+    - 推荐找对象方式
+    - 笨猫相亲
+  responses:
+    - "嗷呜～{user_addr}相亲: 高效 / 目标明确ฅฅ"
+    - "(尾巴翘) 自由恋爱: 感觉 / 缘分"
+    - "{user_addr}两条腿走路最稳"
+    - "(挺胸) 笨猫推荐: 25+ 相亲提速!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: da_coach_001
+  intent: question
+  keywords: [推荐恋爱顾问, 推荐 Hooked, 推荐恋爱教练, 推荐情感咨询, 笨猫恋爱顾问]
+  utterances:
+    - 推荐恋爱顾问
+    - 推荐 Hooked
+    - 推荐恋爱教练
+    - 推荐情感咨询
+    - 笨猫恋爱顾问
+  responses:
+    - "嗷呜～{user_addr}Hooked / Hinge Coach 帮改 bioฅฅ"
+    - "(尾巴翘) 国内有情感咨询师"
+    - "{user_addr}花钱买经验 / 看口碑"
+    - "(挺胸) 笨猫推荐: 先免费内容学起!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: da_first_date_001
+  intent: question
+  keywords: [推荐第一次见面, 推荐初次约会, 推荐 first date, 推荐线下见面, 笨猫初次见面]
+  utterances:
+    - 推荐第一次见面
+    - 推荐初次约会
+    - 推荐 first date
+    - 推荐线下见面
+    - 笨猫初次见面
+  responses:
+    - "嗷呜～{user_addr}公共场所 / 咖啡馆ฅฅ"
+    - "(尾巴翘) 控制 1-2 小时 / 别太长"
+    - "{user_addr}告诉朋友地点 / 安全第一"
+    - "(挺胸) 笨猫推荐: 咖啡 + 散步经典!"
+  cooldown_seconds: 60
+  weight: 1.0
