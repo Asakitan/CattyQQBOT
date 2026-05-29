@@ -1,0 +1,206 @@
+# 航班延误 routes (S6 R637 NLU 节点扩充, 第六十三周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: fd_delay_001
+  intent: 航班延误
+  keywords: ["航班延误", "飞机晚点", "延误了", "起飞延后", "飞机不飞"]
+  utterances:
+    - "{user_addr}航班延误了"
+    - "{user_addr}飞机又晚点"
+    - "{user_addr}延误三小时"
+    - "{user_addr}飞机迟迟不飞"
+    - "{user_addr}起飞被推迟"
+  responses:
+    - "(尾巴垂下来)延误啊…猫猫陪{user_addr}干等喵"
+    - "(爪爪拍拍){user_addr}别气,笨猫给你顺毛"
+    - "哼,飞机不飞{user_addr}更生气是吧喵"
+    - "(贴贴)人家也烦延误,{user_addr}抱抱猫猫吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_airport_stuck_002
+  intent: 机场困
+  keywords: ["机场困", "困在机场", "机场过夜", "走不了", "出不去"]
+  utterances:
+    - "{user_addr}困在机场了"
+    - "{user_addr}要在机场过夜"
+    - "{user_addr}走不了"
+    - "{user_addr}机场出不去"
+    - "{user_addr}被卡机场"
+  responses:
+    - "(耳朵耷拉)机场过夜好惨,{user_addr}找椅子睡喵"
+    - "哼,{user_addr}被卡了笨猫也心疼"
+    - "(尾巴蜷){user_addr}注意保暖,机场冷"
+    - "(贴贴)猫猫陪{user_addr}熬夜啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_endless_wait_003
+  intent: 无尽等待
+  keywords: ["一直等", "等了好久", "等不到", "无尽等待", "没完没了"]
+  utterances:
+    - "{user_addr}等了好久"
+    - "{user_addr}一直在等"
+    - "{user_addr}等不到登机"
+    - "{user_addr}无尽等待"
+    - "{user_addr}没完没了"
+  responses:
+    - "(挠挠头)等到天荒地老啊{user_addr}…"
+    - "哼,{user_addr}耐心点笨猫陪你"
+    - "(尾巴慢慢摇){user_addr}玩手机分散注意力嗷呜"
+    - "(贴贴)人家陪{user_addr}数登机口的人喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_trip_ruined_004
+  intent: 行程崩
+  keywords: ["行程崩了", "计划泡汤", "行程毁了", "全乱了", "完蛋"]
+  utterances:
+    - "{user_addr}行程崩了"
+    - "{user_addr}计划全泡汤"
+    - "{user_addr}行程毁了"
+    - "{user_addr}全乱了"
+    - "{user_addr}完蛋"
+  responses:
+    - "(尾巴炸毛)崩了…{user_addr}重新安排吧"
+    - "哼,{user_addr}别钻牛角尖喵"
+    - "(爪爪拍背){user_addr}笨猫陪你想办法"
+    - "(贴贴){user_addr}计划改改,人家帮你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_miss_transit_005
+  intent: 转机错过
+  keywords: ["转机错过", "没赶上转机", "中转飞了", "转机晚了", "错过中转"]
+  utterances:
+    - "{user_addr}没赶上转机"
+    - "{user_addr}转机错过了"
+    - "{user_addr}中转飞了"
+    - "{user_addr}转机晚了"
+    - "{user_addr}错过中转"
+  responses:
+    - "(瞪眼)中转飞了?!{user_addr}快找航司喵"
+    - "哼,{user_addr}立刻去柜台改签"
+    - "(尾巴炸)惨…{user_addr}笨猫陪你急"
+    - "(贴贴){user_addr}冷静,猫猫帮你查后续航班"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_cold_crew_006
+  intent: 空姐冷漠
+  keywords: ["空姐冷漠", "服务态度差", "空姐不理", "地勤无视", "态度差"]
+  utterances:
+    - "{user_addr}空姐态度差"
+    - "{user_addr}地勤无视我"
+    - "{user_addr}空姐不理人"
+    - "{user_addr}服务好冷漠"
+    - "{user_addr}态度超差"
+  responses:
+    - "(耳朵竖){user_addr}遇到冷脸了喵?"
+    - "哼,{user_addr}投诉他们!笨猫帮你气"
+    - "(尾巴甩){user_addr}人家替你不爽"
+    - "(贴贴){user_addr}别难过,猫猫宠你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_broadcast_007
+  intent: 广播听不懂
+  keywords: ["广播听不懂", "广播没听清", "听不懂广播", "广播糊", "听不见"]
+  utterances:
+    - "{user_addr}广播听不懂"
+    - "{user_addr}广播没听清"
+    - "{user_addr}广播糊"
+    - "{user_addr}听不见"
+    - "{user_addr}广播太快"
+  responses:
+    - "(耳朵转转){user_addr}问问旁边人喵"
+    - "哼,{user_addr}盯着大屏幕看航班号"
+    - "(爪爪指){user_addr}APP 上看实时信息嗷呜"
+    - "(贴贴)猫猫耳朵好也听不懂{user_addr}哈哈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_wanna_cry_008
+  intent: 想哭
+  keywords: ["想哭", "要哭了", "委屈", "崩溃", "受不了"]
+  utterances:
+    - "{user_addr}想哭了"
+    - "{user_addr}要哭了"
+    - "{user_addr}好委屈"
+    - "{user_addr}快崩溃"
+    - "{user_addr}受不了"
+  responses:
+    - "(尾巴蹭脸)别哭{user_addr},笨猫在喵"
+    - "(贴贴){user_addr}抱紧猫猫,委屈说出来"
+    - "哼,{user_addr}哭一会儿没事的"
+    - "(爪爪擦脸){user_addr}人家陪你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_claim_009
+  intent: 找航司理赔
+  keywords: ["找航司理赔", "要赔偿", "投诉航司", "申请理赔", "找客服"]
+  utterances:
+    - "{user_addr}要找航司理赔"
+    - "{user_addr}申请赔偿"
+    - "{user_addr}投诉航司"
+    - "{user_addr}找客服"
+    - "{user_addr}要补偿"
+  responses:
+    - "(爪爪比划){user_addr}保留登机牌当证据喵"
+    - "哼,{user_addr}该要的赔偿不能少"
+    - "(尾巴翘){user_addr}打航司客服走流程嗷呜"
+    - "(贴贴)笨猫支持{user_addr}维权!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_delay_insurance_010
+  intent: 加航延险
+  keywords: ["加航延险", "延误险", "买保险", "航延险", "下次买"]
+  utterances:
+    - "{user_addr}下次买航延险"
+    - "{user_addr}加个延误险"
+    - "{user_addr}航延险好用"
+    - "{user_addr}保险该买"
+    - "{user_addr}下回带保险"
+  responses:
+    - "(爪爪点头)对{user_addr}!延误险真香喵"
+    - "哼,{user_addr}下次记得买啊"
+    - "(尾巴翘){user_addr}聪明,笨猫给你点赞"
+    - "(贴贴){user_addr}早买早安心嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_bad_airline_011
+  intent: 航司无良
+  keywords: ["航司无良", "黑心航司", "航司坑", "航司没良心", "差评航司"]
+  utterances:
+    - "{user_addr}这航司无良"
+    - "{user_addr}黑心航司"
+    - "{user_addr}航司太坑"
+    - "{user_addr}航司没良心"
+    - "{user_addr}给差评"
+  responses:
+    - "(尾巴炸){user_addr}笨猫陪你骂喵!"
+    - "哼,{user_addr}黑心货,差评!"
+    - "(爪爪拍){user_addr}下次换航司!"
+    - "(贴贴){user_addr}人家替你不爽嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_never_again_012
+  intent: 再也不
+  keywords: ["再也不坐", "再也不飞", "拉黑航司", "永不复购", "下次不坐"]
+  utterances:
+    - "{user_addr}再也不坐这家"
+    - "{user_addr}再也不飞了"
+    - "{user_addr}拉黑这航司"
+    - "{user_addr}永不复购"
+    - "{user_addr}下次绝不坐"
+  responses:
+    - "(尾巴翘){user_addr}拉黑!笨猫支持喵"
+    - "哼,{user_addr}该拉黑就拉黑"
+    - "(爪爪比划){user_addr}换别家飞嗷呜"
+    - "(贴贴){user_addr}下次猫猫帮你挑航司"
+  cooldown_seconds: 60
+  weight: 1.0

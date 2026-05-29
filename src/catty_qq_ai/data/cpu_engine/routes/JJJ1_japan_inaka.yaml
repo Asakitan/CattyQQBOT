@@ -1,0 +1,206 @@
+# 日本乡村 routes (S6 R633 NLU 节点扩充, 第六十三周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ji_shikoku_001
+  intent: question
+  keywords: [推荐四国, 推荐四国乡村, 推荐德岛, 推荐高知, 笨猫四国]
+  utterances:
+    - "{user_addr}推荐四国"
+    - 推荐四国乡村
+    - 推荐德岛
+    - 推荐高知
+    - 笨猫四国
+  responses:
+    - "嗷呜～{user_addr}四国 - 日本最野的岛ฅฅ"
+    - "(尾巴翘) 德岛祖谷溪 / 高知四万十川"
+    - "{user_addr}遍路八十八所 / 桂浜"
+    - "(挺胸) 猫猫推荐: 祖谷蔓桥+落人村!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ji_hokkaido_001
+  intent: question
+  keywords: [推荐北海道牧场, 推荐美瑛, 推荐富良野, 推荐十胜, 笨猫北海道]
+  utterances:
+    - "{user_addr}推荐北海道牧场"
+    - 推荐美瑛
+    - 推荐富良野
+    - 推荐十胜
+    - 笨猫北海道
+  responses:
+    - "嗷呜～{user_addr}美瑛 - 拼布之路超治愈ฅฅ"
+    - "(尾巴翘) 富良野薰衣草 / 十胜牧场"
+    - "{user_addr}青池 / 白金温泉 / 牛奶冰淇淋"
+    - "(挺胸) 人家推荐: 夏天美瑛骑行!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ji_kyoto_001
+  intent: question
+  keywords: [推荐京都古民居, 推荐美山町, 推荐伊根舟屋, 推荐京都乡下, 笨猫京都乡村]
+  utterances:
+    - "{user_addr}推荐京都古民居"
+    - 推荐美山町
+    - 推荐伊根舟屋
+    - 推荐京都乡下
+    - 笨猫京都乡村
+  responses:
+    - "嗷呜～{user_addr}美山町茅葺之里ฅฅ"
+    - "(尾巴翘) 伊根舟屋 - 海上民居"
+    - "{user_addr}大原三千院 / 鞍马贵船"
+    - "(挺胸) 猫猫推荐: 美山雪夜点灯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ji_takayama_001
+  intent: question
+  keywords: [推荐高山, 推荐白川乡, 推荐岐阜, 推荐合掌村, 笨猫高山]
+  utterances:
+    - "{user_addr}推荐高山岐阜"
+    - 推荐白川乡
+    - 推荐岐阜
+    - 推荐合掌村
+    - 笨猫高山
+  responses:
+    - "嗷呜～{user_addr}白川乡合掌村 - 世界遗产ฅฅ"
+    - "(尾巴翘) 高山古町 / 飞驒牛"
+    - "{user_addr}下吕温泉 / 五箇山"
+    - "(挺胸) 笨猫推荐: 冬天合掌村点灯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ji_naoshima_001
+  intent: question
+  keywords: [推荐直岛, 推荐直岛艺术, 推荐濑户内, 推荐丰岛, 笨猫直岛]
+  utterances:
+    - "{user_addr}推荐直岛艺术岛"
+    - 推荐直岛
+    - 推荐濑户内
+    - 推荐丰岛
+    - 笨猫直岛
+  responses:
+    - "嗷呜～{user_addr}直岛 - 草间弥生南瓜ฅฅ"
+    - "(尾巴翘) 地中美术馆 / 安藤忠雄"
+    - "{user_addr}丰岛美术馆 / 犬岛精炼所"
+    - "(挺胸) 人家推荐: 濑户内艺术祭三年展!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ji_izumo_001
+  intent: question
+  keywords: [推荐出云大社, 推荐岛根, 推荐松江, 推荐石见银山, 笨猫出云]
+  utterances:
+    - "{user_addr}推荐出云大社"
+    - 推荐岛根
+    - 推荐松江
+    - 推荐石见银山
+    - 笨猫出云
+  responses:
+    - "嗷呜～{user_addr}出云大社 - 结缘神社ฅฅ"
+    - "(尾巴翘) 松江城 / 宍道湖夕阳"
+    - "{user_addr}石见银山 / 足立美术馆"
+    - "(挺胸) 猫猫推荐: 神在月 11 月!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ji_kamikochi_001
+  intent: question
+  keywords: [推荐上高地, 推荐长野, 推荐轻井泽, 推荐安昙野, 笨猫长野]
+  utterances:
+    - "{user_addr}推荐长野上高地"
+    - 推荐上高地
+    - 推荐轻井泽
+    - 推荐安昙野
+    - 笨猫长野
+  responses:
+    - "嗷呜～{user_addr}上高地河童桥 - 神之净土ฅฅ"
+    - "(尾巴翘) 轻井泽 / 安昙野"
+    - "{user_addr}地狱谷雪猴 / 善光寺"
+    - "(挺胸) 笨猫推荐: 上高地新绿 5 月!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ji_kamakura_001
+  intent: question
+  keywords: [推荐镰仓, 推荐江之岛, 推荐湘南, 推荐镰仓大佛, 笨猫镰仓]
+  utterances:
+    - "{user_addr}推荐镰仓"
+    - 推荐江之岛
+    - 推荐湘南
+    - 推荐镰仓大佛
+    - 笨猫镰仓
+  responses:
+    - "嗷呜～{user_addr}镰仓高校前 - 灌篮高手平交道ฅฅ"
+    - "(尾巴翘) 大佛 / 长谷寺紫阳花"
+    - "{user_addr}江之电 / 江之岛"
+    - "(挺胸) 猫猫推荐: 6 月明月院绣球!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ji_sanin_001
+  intent: question
+  keywords: [推荐山阴, 推荐山阳, 推荐鸟取沙丘, 推荐冈山, 笨猫山阴]
+  utterances:
+    - "{user_addr}推荐山阴山阳"
+    - 推荐鸟取沙丘
+    - 推荐冈山
+    - 推荐山阳
+    - 笨猫山阴
+  responses:
+    - "嗷呜～{user_addr}鸟取沙丘 - 日本撒哈拉ฅฅ"
+    - "(尾巴翘) 仓敷美观地区 / 冈山后乐园"
+    - "{user_addr}境港鬼太郎 / 萩城下町"
+    - "(挺胸) 人家推荐: 山阴小众更原汁!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ji_onsen_001
+  intent: question
+  keywords: [推荐民宿温泉, 推荐日本温泉, 推荐乡村民宿, 推荐里山, 笨猫温泉]
+  utterances:
+    - "{user_addr}推荐民宿温泉"
+    - 推荐日本温泉
+    - 推荐乡村民宿
+    - 推荐里山
+    - 笨猫温泉
+  responses:
+    - "嗷呜～{user_addr}黑川温泉 - 露天汤巡ฅฅ"
+    - "(尾巴翘) 城崎温泉 / 银山温泉"
+    - "{user_addr}由布院 / 草津 / 别府"
+    - "(挺胸) 笨猫推荐: 一泊二食会席料理!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ji_inaka_food_001
+  intent: question
+  keywords: [推荐日本乡村美食, 推荐乡土料理, 推荐山菜, 推荐荞麦面, 笨猫乡村美食]
+  utterances:
+    - "{user_addr}推荐日本乡村美食"
+    - 推荐乡土料理
+    - 推荐山菜
+    - 推荐荞麦面
+    - 笨猫乡村美食
+  responses:
+    - "嗷呜～{user_addr}山菜天妇罗 / 岩鱼盐烧ฅฅ"
+    - "(尾巴翘) 信州荞麦 / 飞驒牛朴叶味噌"
+    - "{user_addr}囲炉里烤鱼 / 田舍味噌汤"
+    - "(挺胸) 猫猫推荐: 民宿手作晚餐!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ji_sakura_momiji_001
+  intent: question
+  keywords: [推荐春樱秋枫, 推荐日本赏樱, 推荐日本红叶, 推荐花见, 笨猫春樱]
+  utterances:
+    - "{user_addr}推荐春樱秋枫"
+    - 推荐日本赏樱
+    - 推荐日本红叶
+    - 推荐花见
+    - 笨猫春樱
+  responses:
+    - "嗷呜～{user_addr}吉野山千本樱ฅฅ"
+    - "(尾巴翘) 京都岚山 / 高山祭"
+    - "{user_addr}秋枫: 京都东福寺 / 日光"
+    - "(挺胸) 人家推荐: 4 月吉野 + 11 月京都!"
+  cooldown_seconds: 60
+  weight: 1.0

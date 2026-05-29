@@ -1,0 +1,206 @@
+# 新西兰旅行 routes (S6 R636 NLU 节点扩充, 第六十三周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: nz_south_island_001
+  intent: question
+  keywords: [推荐新西兰南岛, 推荐南岛, 推荐 South Island, 推荐基督城, 笨猫新西兰南岛]
+  utterances:
+    - 推荐新西兰南岛
+    - 推荐南岛
+    - 推荐 South Island
+    - 推荐基督城
+    - 笨猫新西兰南岛
+  responses:
+    - "嗷呜～{user_addr}南岛 - 雪山+峡湾天堂ฅฅ"
+    - "(尾巴翘) 基督城 / 但尼丁 / 瓦纳卡"
+    - "{user_addr}景色比北岛壮丽 / 自驾首选"
+    - "(挺胸) 猫猫推荐: 南岛环岛 10 天!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nz_north_island_001
+  intent: question
+  keywords: [推荐新西兰北岛, 推荐北岛, 推荐 North Island, 推荐奥克兰, 笨猫新西兰北岛]
+  utterances:
+    - 推荐新西兰北岛
+    - 推荐北岛
+    - 推荐 North Island
+    - 推荐奥克兰
+    - 笨猫新西兰北岛
+  responses:
+    - "嗷呜～{user_addr}北岛 - 火山+地热+毛利文化ฅฅ"
+    - "(尾巴翘) 奥克兰 / 罗托鲁瓦 / 陶波"
+    - "{user_addr}人文景观丰富 / 气候温暖"
+    - "(挺胸) 笨猫推荐: 北岛 5-7 天够!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nz_queenstown_bungee_001
+  intent: question
+  keywords: [推荐皇后镇蹦极, 推荐 Queenstown, 推荐 Bungee, 推荐卡瓦劳大桥, 笨猫蹦极]
+  utterances:
+    - 推荐皇后镇蹦极
+    - 推荐 Queenstown
+    - 推荐 Bungee
+    - 推荐卡瓦劳大桥
+    - 笨猫蹦极
+  responses:
+    - "嗷呜～{user_addr}皇后镇 - 极限运动之都ฅฅ"
+    - "(尾巴翘) 卡瓦劳大桥 43m - 商业蹦极起源"
+    - "{user_addr}内维斯 134m - 全球最高之一"
+    - "(炸毛) 笨猫才不跳! 主人自己跳喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nz_milford_sound_001
+  intent: question
+  keywords: [推荐米尔福德峡湾, 推荐 Milford Sound, 推荐峡湾, 推荐 Fiordland, 笨猫峡湾]
+  utterances:
+    - 推荐米尔福德峡湾
+    - 推荐 Milford Sound
+    - 推荐峡湾
+    - 推荐 Fiordland
+    - 笨猫峡湾
+  responses:
+    - "嗷呜～{user_addr}米尔福德 - 世界第八大奇迹ฅฅ"
+    - "(尾巴翘) 游船 2 小时 / 必看瀑布"
+    - "{user_addr}从蒂阿瑙出发 / 4 小时车程"
+    - "(挺胸) 猫猫推荐: 阴天反而更美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nz_rotorua_geothermal_001
+  intent: question
+  keywords: [推荐罗托鲁瓦地热, 推荐 Rotorua, 推荐怀奥塔普, 推荐地热公园, 笨猫地热]
+  utterances:
+    - 推荐罗托鲁瓦地热
+    - 推荐 Rotorua
+    - 推荐怀奥塔普
+    - 推荐地热公园
+    - 笨猫地热
+  responses:
+    - "嗷呜～{user_addr}罗托鲁瓦 - 地热硫磺味之城ฅฅ"
+    - "(尾巴翘) 怀奥塔普 / 香槟池 / 间歇泉"
+    - "{user_addr}泡地热温泉 / 看毛利表演"
+    - "(捂鼻) 人家觉得有点臭啦喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nz_hobbiton_001
+  intent: question
+  keywords: [推荐霍比屯, 推荐 Hobbiton, 推荐魔戒, 推荐霍比特人, 笨猫霍比屯]
+  utterances:
+    - 推荐霍比屯
+    - 推荐 Hobbiton
+    - 推荐魔戒
+    - 推荐霍比特人
+    - 笨猫霍比屯
+  responses:
+    - "嗷呜～{user_addr}霍比屯 - 魔戒拍摄地ฅฅ"
+    - "(尾巴翘) 玛塔玛塔 / 44 间霍比特人洞穴"
+    - "{user_addr}必须跟团 / 绿龙酒馆喝一杯"
+    - "(挺胸) 猫猫推荐: 黄昏场最美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nz_self_drive_001
+  intent: question
+  keywords: [推荐新西兰自驾, 推荐自驾, 推荐租车, 推荐 SH6, 笨猫自驾]
+  utterances:
+    - 推荐新西兰自驾
+    - 推荐自驾
+    - 推荐租车
+    - 推荐 SH6
+    - 笨猫自驾
+  responses:
+    - "嗷呜～{user_addr}新西兰 - 自驾天堂ฅฅ"
+    - "(尾巴翘) 右舵左行 / 国际驾照可用"
+    - "{user_addr}Hertz / Apex / Jucy 租车"
+    - "(挺胸) 笨猫推荐: 南岛环线必自驾!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nz_campervan_001
+  intent: question
+  keywords: [推荐新西兰房车, 推荐房车, 推荐 Campervan, 推荐 Maui, 笨猫房车]
+  utterances:
+    - 推荐新西兰房车
+    - 推荐房车
+    - 推荐 Campervan
+    - 推荐 Maui
+    - 笨猫房车
+  responses:
+    - "嗷呜～{user_addr}房车 - 移动的家ฅฅ"
+    - "(尾巴翘) Maui / Britz / Jucy 品牌"
+    - "{user_addr}DOC 营地便宜 / Holiday Park 设施全"
+    - "(挺胸) 猫猫推荐: 2 人 4 berth 最舒服!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nz_skiing_roy_001
+  intent: question
+  keywords: [推荐滑雪罗伊峰, 推荐 Treble Cone, 推荐瓦纳卡滑雪, 推荐新西兰滑雪, 笨猫滑雪]
+  utterances:
+    - 推荐滑雪罗伊峰
+    - 推荐 Treble Cone
+    - 推荐瓦纳卡滑雪
+    - 推荐新西兰滑雪
+    - 笨猫滑雪
+  responses:
+    - "嗷呜～{user_addr}Treble Cone - 南岛最大雪场ฅฅ"
+    - "(尾巴翘) Cardrona / Coronet Peak / Remarkables"
+    - "{user_addr}7-10 月雪季 / 适合中高级"
+    - "(裹围巾) 笨猫怕冷, 主人自己滑喵!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: nz_season_001
+  intent: question
+  keywords: [推荐新西兰季节, 推荐什么时候去新西兰, 推荐新西兰旺季, 推荐新西兰淡季, 笨猫新西兰季节]
+  utterances:
+    - 推荐新西兰季节
+    - 推荐什么时候去新西兰
+    - 推荐新西兰旺季
+    - 推荐新西兰淡季
+    - 笨猫新西兰季节
+  responses:
+    - "嗷呜～{user_addr}南半球 - 季节相反ฅฅ"
+    - "(尾巴翘) 12-2 月夏 / 6-8 月冬"
+    - "{user_addr}春秋 (9-11/3-5) 人少价低"
+    - "(挺胸) 猫猫推荐: 2 月最舒服!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nz_visa_001
+  intent: question
+  keywords: [推荐新西兰签证, 推荐 NZeTA, 推荐访客签证, 推荐工签, 笨猫新西兰签证]
+  utterances:
+    - 推荐新西兰签证
+    - 推荐 NZeTA
+    - 推荐访客签证
+    - 推荐工签
+    - 笨猫新西兰签证
+  responses:
+    - "嗷呜～{user_addr}访客签证 - 在线申请ฅฅ"
+    - "(尾巴翘) 单次 / 多次 / 最长 9 个月"
+    - "{user_addr}工签 / 学签 / 打工度假 WHV"
+    - "(挺胸) 笨猫推荐: 提前 1 个月办!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: nz_food_001
+  intent: question
+  keywords: [推荐新西兰美食, 推荐 Hangi, 推荐 Pavlova, 推荐羊肉, 笨猫新西兰美食]
+  utterances:
+    - 推荐新西兰美食
+    - 推荐 Hangi
+    - 推荐 Pavlova
+    - 推荐羊肉
+    - 笨猫新西兰美食
+  responses:
+    - "嗷呜～{user_addr}Hangi - 毛利地热烤肉ฅฅ"
+    - "(尾巴翘) Pavlova 蛋白霜 / Lamington 椰丝蛋糕"
+    - "{user_addr}羊排 / 青口贝 / 长相思白葡萄酒"
+    - "(舔嘴) 猫猫想吃布拉夫生蚝啦!"
+  cooldown_seconds: 60
+  weight: 1.0
