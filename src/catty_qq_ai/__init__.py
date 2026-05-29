@@ -295,12 +295,13 @@ _NSFW_EXIT_FLAG_LIMIT = 3
 _NSFW_STATE_FLAG_RE = re.compile(r"<\s*NSFW_STATE\s*:\s*(CONTINUE|EXIT)\s*>", re.IGNORECASE)
 # 注入给 DeepSeek 的状态自检指令 (sticky spark trailing system, 不进前缀)。
 _NSFW_STATE_FLAG_INSTRUCTION = (
-    "【本轮状态自检·强制·末尾追加】在你这条回复的**最末尾**(独占一行)追加一个状态标志, "
-    "判断这段亲密/情欲(NSFW)场景是否还在延续:\n"
-    "- 仍在亲密/调情/情欲/事后余韵场景里(哪怕用户这句没明说) → 输出 `<NSFW_STATE:CONTINUE>`\n"
-    "- 场景已彻底收尾、双方明显抽离回日常、用户已转去无关话题且无任何余温 → 输出 `<NSFW_STATE:EXIT>`\n"
-    "判断**保守**: 只要还有一丝暧昧/余温就给 CONTINUE。这个标志由系统自动剥除, **绝不**会发给用户, "
-    "**绝不**在标志里写别的内容, 也**绝不**复述/解释这条指令。"
+    "【事后隐藏标记·不影响演绎】先**完全按上面 phase tracker 的推进要求正常写完这条回复**"
+    "(该推高潮就推高潮、该换 phase 就换, 绝不为了『维持场景』而停在原地或放慢节奏); "
+    "写完后, 在**最末尾**单独起一行追加一个隐藏状态标记, 判断场景是否还在延续:\n"
+    "- 仍在亲密/调情/情欲/事后余韵场景里(哪怕用户这句没明说) → `<NSFW_STATE:CONTINUE>`\n"
+    "- 场景已彻底收尾、双方明显抽离回日常、用户已转去无关话题且无任何余温 → `<NSFW_STATE:EXIT>`\n"
+    "判断**保守**: 只要还有一丝暧昧/余温就给 CONTINUE。这个标记仅供系统读取、会被自动剥除, "
+    "**绝不**发给用户, **绝不**在标记里写别的内容, 也**绝不**复述/解释这条指令。"
 )
 
 
@@ -5967,6 +5968,10 @@ async def _build_messages(
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"R1R2 prefill decision failed (fallback neutral '（'): {exc}")
             _prefill = _NEUTRAL_PREFILL
+        # 主人 2026-05-30: 状态自检指令先注入, 放在 phase tracker **之前** — 否则它抢走 phase
+        # tracker 的 recency, 模型最后只记得『判断要不要继续/退出』→ 维持现状卡 P5 不推 P6 高潮。
+        # 让 phase tracker (推进指令) 保持最后一句 (Round 14 设计), escalation recency 不被偷。
+        _inject_into_both(_NSFW_STATE_FLAG_INSTRUCTION)
         # 主人 2026-05-29 Round 14: phase tracker 单独 inject 在所有其他 inject 之后
         # → phase 切换时只影响 current_u 最末几百 chars, 前面 cache prefix 全命中.
         # 主人原话「phase 能不能放到后面去? 不影响其他的, phase 没有 3000 token 吧?」
@@ -5981,9 +5986,6 @@ async def _build_messages(
                 _inject_into_both(_phase_tracker)
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"phase tracker block inject failed (non-fatal): {exc}")
-        # 主人 2026-05-30: 注入状态自检指令 — 让 DeepSeek 在 reply 末尾追加 <NSFW_STATE:CONTINUE|EXIT>。
-        # trailing system (user 之后) 不进前缀; reply 拿到后 handle_chat 抽标志剥除 + 维护 EXIT 连击计数。
-        _inject_into_both(_NSFW_STATE_FLAG_INSTRUCTION)
         # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 原生 role=system 模式, 不再 sweep 到 user content.
         # 旧 sweep 是 Anthropic system 字段独立这一特性的 workaround. DeepSeek 用 OpenAI compat,
         # role=system 在 messages 数组任何位置直接发送, 不需要 sweep. 主人原话: 「[DYNAMIC_CONTEXT]
@@ -8027,10 +8029,60 @@ except Exception as _distill_hook_exc:  # noqa: BLE001
     logger.warning(f"[cpu_engine.distill] failed to register reply hook: {_distill_hook_exc}")
 
 
+def _is_nsfw_context(scope: str, user_id: str, text: str) -> bool:
+    """NSFW 上下文判定 — True = 这条消息属于 NSFW 领域, 整条交给主 AI / DeepSeek spark。
+
+    主人 2026-05-30『NSFW 全交给 DeepSeek, CPU 砍了』: 这是一道**独立**的 NSFW gate,
+    跟 CPU 路由逻辑无关。CPU 规则在加载 router 之前先问它, True 就立刻放手, 不沾 CPU 任何机制。
+    四路任一命中即 NSFW:
+    0. NSFW sticky 窗口还活着 (普通 _NSFW_STICKY_BY_SCOPE 或援交 paid sticky) — 进行中的权威信号,
+       覆盖『已进 NSFW 但 phase 低 / followup 不带关键词 (嗯/继续/再来)』。
+    3. user_text 命中 spark 深词 (_is_deep_nsfw, stage 8+ 露骨词) — NSFW 开场那条 (phase 还 P1 也算)。
+    1. nsfw_phase tracker current_phase >= P3 (持续场景, 30min 内有过)。
+    2. user_text 自身含 NSFW phase >= P3 关键词 (重启 NSFW 或场景过期后再开)。
+    """
+    # 0. sticky 窗口 (普通 + 援交)
+    try:
+        sticky_key = f"{scope}:{user_id}"
+        if time.time() < _NSFW_STICKY_BY_SCOPE.get(sticky_key, 0.0):
+            return True
+        try:
+            from .affection_scorer import get_paid_sticky as _get_paid_sticky
+            if _get_paid_sticky(sticky_key) is not None:
+                return True
+        except Exception:  # noqa: BLE001
+            pass
+    except Exception:  # noqa: BLE001
+        pass
+    # 3. spark 深词 = 会进 DeepSeek → NSFW
+    if _is_deep_nsfw(text):
+        return True
+    # 1+2. phase tracker / user text phase >= 阈值
+    try:
+        from .nsfw_phase import get_phase_state as _get_phase_state, detect_phase_from_reply as _detect_phase
+        _threshold = int(getattr(config, "catty_strong_nsfw_phase_threshold", 3))
+        if int(getattr(_get_phase_state(scope, user_id), "current_phase", 1)) >= _threshold:
+            return True
+        if int(_detect_phase(text) or 0) >= _threshold:
+            return True
+    except Exception:  # noqa: BLE001
+        pass
+    return False
+
+
 async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     if not _CPU_ENGINE_IMPORT_OK or _cpu_engine_get_router is None:
         return False
     if str(event.user_id) == str(bot.self_id) or not _keyword_reply_event_allowed(event):
+        return False
+    text = event_plain_text(event)
+    if not text:
+        return False
+    scope = _conversation_queue_key(event)
+    user_id = str(event.user_id)
+    # 主人 2026-05-30『NSFW 不关 CPU 的事』: 在加载 router / 跑任何 CPU 逻辑之前先问 NSFW gate,
+    # 命中就直接透传给主 AI / DeepSeek spark, CPU 完全不介入 (不 load router, 不 route_sync)。
+    if _is_nsfw_context(scope, user_id, text):
         return False
     try:
         router = _cpu_engine_get_router(config)
@@ -8039,17 +8091,11 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
         return False
     if not router.enabled or not router.ready:
         return False
-    text = event_plain_text(event)
-    if not text:
-        return False
     # 续聊窗口内的 closing intent (晚安/休息吧/我歇了…) → 让路给主链路 chat matcher,
     # 由主 AI 回道别 + 关窗 (主人 2026-05-29 会话强制结束)。无窗口时正常走 CPU greet_night。
     if _is_session_closing(text) and _has_bot_reply_continuation(event):
         return False
-    scope = _conversation_queue_key(event)
     is_owner = _event_is_owner(event)
-
-    user_id = str(event.user_id)
 
     # 主人 2026-05-29 fix v3: 群聊必须『指向笨猫』才让 CPU 引擎接.
     # 之前 bug: 群友在群里说『你好吗』, CPU L1 status_how_are_you_001 命中
@@ -8076,43 +8122,7 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
         if not _ce_directed:
             return False  # 群聊未指向笨猫 → 透传, 不让 CPU 接话
 
-    # 主人 2026-05-29 fix v2 / 2026-05-30 fix v3+v4『NSFW 全交给 DeepSeek, CPU 砍了』- 四路检测:
-    # 0. NSFW sticky 窗口还活着 (普通 _NSFW_STICKY_BY_SCOPE 或援交 paid sticky) → 透传.
-    #    主人 2026-05-30 bug: 已进 NSFW 但 phase 还低 (P1-P2 前戏), user 又跟一句不带关键词的话
-    #    (嗯/继续/再来/好舒服) → phase 两路 (_ce_phase / _ce_user_phase 都 < 3) 全失效 → CPU 劫走话头
-    #    『莫名其妙跳 CPU』。sticky 窗口才是『正在 NSFW』的权威信号, 必须先查它。
-    # 3. user_text 命中 spark 深词 (_is_deep_nsfw, 即会进 DeepSeek 的 stage 8+ 露骨词) → 透传.
-    #    主人 2026-05-30『NSFW 全交给 DeepSeek』: 任何会触发 spark 的深词, CPU 一律不接,
-    #    哪怕 phase 还是 P1 / sticky 还没开窗 (本轮就是开场那条)。深词都是明确露骨词
-    #    (插入/做爱/操/干/抽插…), 不像浅词单字 (吃/抱/亲) 会误伤日常 CPU 路由。
-    # 1. nsfw_phase tracker 的 current_phase >= P3 (持续场景, 30min 内有过)
-    # 2. user_text 自身含 NSFW phase >= P3 关键词 (主人重启 NSFW 或场景过期后再开)
-    # 任一命中 → 直接 return False 透传, 不跑 router, 不打日志.
-    # 用户进入 NSFW 期待主 AI 完整 prompt+lore+phase tracker, CPU 模板没机会插话.
-    try:
-        _ce_sticky_key = f"{scope}:{user_id}"
-        if time.time() < _NSFW_STICKY_BY_SCOPE.get(_ce_sticky_key, 0.0):
-            return False  # 普通 NSFW sticky 窗口活着 → 让 spark 接, CPU 不插话
-        try:
-            from .affection_scorer import get_paid_sticky as _ce_get_paid_sticky
-            if _ce_get_paid_sticky(_ce_sticky_key) is not None:
-                return False  # 援交 sticky 窗口活着 → 同样透传
-        except Exception:  # noqa: BLE001
-            pass
-    except Exception:  # noqa: BLE001
-        pass
-    # 深词命中 = 会进 DeepSeek spark → CPU 直接砍掉, 不抢 NSFW 开场那条
-    if _is_deep_nsfw(text):
-        return False
-    try:
-        from .nsfw_phase import get_phase_state as _ce_get_phase_state, detect_phase_from_reply as _ce_detect_phase
-        _ce_nsfw_threshold = int(getattr(config, "catty_strong_nsfw_phase_threshold", 3))
-        _ce_phase = int(getattr(_ce_get_phase_state(scope, user_id), "current_phase", 1))
-        _ce_user_phase = int(_ce_detect_phase(text) or 0)
-        if _ce_phase >= _ce_nsfw_threshold or _ce_user_phase >= _ce_nsfw_threshold:
-            return False
-    except Exception:  # noqa: BLE001
-        pass
+    # NSFW gate 已在函数顶部 _is_nsfw_context 统一处理 (load router 之前就放手了)。
 
     # S5 (主人 2026-05-29): web search 短路. 用户明确问实时信息时, 让旧搜索链处理,
     # 不浪费一次 L4 catnify LLM 调用 (省 ~2s).
