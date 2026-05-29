@@ -1,0 +1,206 @@
+# 车险 / 交强 / 第三者 routes (S6 R475 NLU 节点扩充, 第四十七周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ci_jiaoqiang_001
+  intent: question
+  keywords: [推荐交强险, 推荐必交, 推荐强制险, 推荐交强, 笨猫交强险]
+  utterances:
+    - 推荐交强险
+    - 推荐必交
+    - 推荐强制险
+    - 推荐交强
+    - 笨猫交强险
+  responses:
+    - "嗷呜～{user_addr}交强险 - 国家强制必交ฅฅ"
+    - "(尾巴翘) 不交不能上路 / 年检过不了"
+    - "{user_addr}保额: 死亡 18 万 / 医疗 1.8 万 / 财产 2 千"
+    - "(挺胸) 笨猫推荐: 必交 + 商业险补充!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_third_party_001
+  intent: question
+  keywords: [推荐第三者责任险, 推荐三者险, 推荐100万, 推荐三责, 笨猫第三者]
+  utterances:
+    - 推荐第三者责任险
+    - 推荐三者险
+    - 推荐100万
+    - 推荐三责
+    - 笨猫第三者
+  responses:
+    - "嗷呜～{user_addr}三者险 - 商业险核心ฅฅ"
+    - "(尾巴翘) 建议保额 100 万 / 200 万起"
+    - "{user_addr}撞豪车 / 撞人天价赔偿就靠它"
+    - "(挺胸) 笨猫推荐: 至少 100 万 保命!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_che_sun_001
+  intent: question
+  keywords: [推荐车损险, 推荐车辆损失险, 推荐车损, 推荐自车修, 笨猫车损险]
+  utterances:
+    - 推荐车损险
+    - 推荐车辆损失险
+    - 推荐车损
+    - 推荐自车修
+    - 笨猫车损险
+  responses:
+    - "嗷呜～{user_addr}车损险 - 自车受损赔修ฅฅ"
+    - "(尾巴翘) 新车 / 贵车必备"
+    - "{user_addr}2020 改革后已含玻璃/涉水/自燃"
+    - "(挺胸) 笨猫推荐: 新车前 5 年都要保!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_glass_001
+  intent: question
+  keywords: [推荐玻璃险, 推荐划痕险, 推荐玻璃单独破碎, 推荐车漆, 笨猫玻璃险]
+  utterances:
+    - 推荐玻璃险
+    - 推荐划痕险
+    - 推荐玻璃单独破碎
+    - 推荐车漆
+    - 笨猫玻璃险
+  responses:
+    - "嗷呜～{user_addr}玻璃险已并入新车损险ฅฅ"
+    - "(尾巴翘) 划痕险 - 老车可单独购买"
+    - "{user_addr}进口玻璃要选进口附加条款"
+    - "(挺胸) 笨猫推荐: 新车直接车损险够!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ci_water_001
+  intent: question
+  keywords: [推荐涉水险, 推荐暴雨车险, 推荐发动机, 推荐水淹, 笨猫涉水险]
+  utterances:
+    - 推荐涉水险
+    - 推荐暴雨车险
+    - 推荐发动机
+    - 推荐水淹
+    - 笨猫涉水险
+  responses:
+    - "嗷呜～{user_addr}涉水险已并入新车损险ฅฅ"
+    - "(尾巴翘) 南方暴雨城市必备"
+    - "{user_addr}注意: 二次启动不赔!"
+    - "(挺胸) 笨猫推荐: 沿海/低洼地区必保!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ci_no_deduct_001
+  intent: question
+  keywords: [推荐不计免赔, 推荐免赔特约, 推荐100%赔, 推荐绝对免赔, 笨猫不计免赔]
+  utterances:
+    - 推荐不计免赔
+    - 推荐免赔特约
+    - 推荐100%赔
+    - 推荐绝对免赔
+    - 笨猫不计免赔
+  responses:
+    - "嗷呜～{user_addr}不计免赔已并入新车损/三者ฅฅ"
+    - "(尾巴翘) 老条款时代要单独加"
+    - "{user_addr}让保险公司 100% 赔 / 自己 0 自付"
+    - "(挺胸) 笨猫推荐: 新条款已自带 安心!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ci_company_001
+  intent: question
+  keywords: [推荐平安人保, 推荐太平洋车险, 推荐车险公司, 推荐保险比较, 笨猫车险公司]
+  utterances:
+    - 推荐平安人保
+    - 推荐太平洋车险
+    - 推荐车险公司
+    - 推荐保险比较
+    - 笨猫车险公司
+  responses:
+    - "嗷呜～{user_addr}人保 / 平安 / 太平洋 老三家ฅฅ"
+    - "(尾巴翘) 人保理赔稳 / 平安服务快 / 太平洋性价比"
+    - "{user_addr}中华联合 / 大地 / 阳光 性价比第二梯队"
+    - "(挺胸) 笨猫推荐: 新手老三家 / 老司机比价!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_online_001
+  intent: question
+  keywords: [推荐网上购买车险, 推荐线上车险, 推荐 App 投保, 推荐微信车险, 笨猫网上车险]
+  utterances:
+    - 推荐网上购买车险
+    - 推荐线上车险
+    - 推荐 App 投保
+    - 推荐微信车险
+    - 笨猫网上车险
+  responses:
+    - "嗷呜～{user_addr}各家官方 App / 公众号都行ฅฅ"
+    - "(尾巴翘) 全国统一价 (报行合一) / 不能砍价"
+    - "{user_addr}电子保单合法 / 不用纸质"
+    - "(挺胸) 笨猫推荐: 官方直营 避免代理坑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_claim_001
+  intent: question
+  keywords: [推荐车险报销流程, 推荐理赔流程, 推荐出险, 推荐报案, 笨猫车险报销]
+  utterances:
+    - 推荐车险报销流程
+    - 推荐理赔流程
+    - 推荐出险
+    - 推荐报案
+    - 笨猫车险报销
+  responses:
+    - "嗷呜～{user_addr}出险 → 报案 (48h内) → 现场拍照ฅฅ"
+    - "(尾巴翘) 定损 → 修车 → 提交资料 → 打款"
+    - "{user_addr}带身份证 / 行驶证 / 驾驶证 / 保单"
+    - "(挺胸) 笨猫推荐: 一定先报警再报保险!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ci_loss_assess_001
+  intent: question
+  keywords: [推荐车险定损, 推荐定损员, 推荐4S定损, 推荐修理厂定损, 笨猫定损]
+  utterances:
+    - 推荐车险定损
+    - 推荐定损员
+    - 推荐4S定损
+    - 推荐修理厂定损
+    - 笨猫定损
+  responses:
+    - "嗷呜～{user_addr}定损 = 保险公司核算赔多少ฅฅ"
+    - "(尾巴翘) 4S 定损贵 / 修理厂便宜"
+    - "{user_addr}对定损不满可申请复核 / 第三方鉴定"
+    - "(挺胸) 笨猫推荐: 新车去 4S 老车去靠谱修理厂!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ci_renew_discount_001
+  intent: question
+  keywords: [推荐续保优惠, 推荐车险折扣, 推荐 NCD, 推荐无赔款优待, 笨猫续保优惠]
+  utterances:
+    - 推荐续保优惠
+    - 推荐车险折扣
+    - 推荐 NCD
+    - 推荐无赔款优待
+    - 笨猫续保优惠
+  responses:
+    - "嗷呜～{user_addr}连续 3 年无出险 折扣最大ฅฅ"
+    - "(尾巴翘) 一次小擦剐 不如自己掏"
+    - "{user_addr}出险次数越多 第二年保费越贵"
+    - "(挺胸) 笨猫推荐: 小剐蹭别报 保 NCD!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ci_renew_vs_new_001
+  intent: question
+  keywords: [推荐续保, 推荐新办车险, 推荐换保险公司, 推荐跳槽保险, 笨猫续保新办]
+  utterances:
+    - 推荐续保
+    - 推荐新办车险
+    - 推荐换保险公司
+    - 推荐跳槽保险
+    - 笨猫续保新办
+  responses:
+    - "嗷呜～{user_addr}续保 - 老客户折扣稳ฅฅ"
+    - "(尾巴翘) 换公司 - 同样保费可能更优惠"
+    - "{user_addr}注意保单衔接 / 不能脱保"
+    - "(挺胸) 笨猫推荐: 比价 3 家 选服务好的!"
+  cooldown_seconds: 60
+  weight: 1.0

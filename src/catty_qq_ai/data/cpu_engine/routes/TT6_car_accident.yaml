@@ -1,0 +1,206 @@
+# 出车祸 / 追尾 / 责任纠纷 routes (S6 R478 NLU 节点扩充, 第四十七周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ca_chehuo_001
+  intent: complaint
+  keywords: [出车祸, 车祸, 撞车, 出事故, 撞了]
+  utterances:
+    - 我出车祸了
+    - 刚出了车祸
+    - 出车祸了好慌
+    - 撞车了怎么办
+    - 出事故了呜呜
+  responses:
+    - "(尾巴炸毛冲过去) {user_addr}有没有受伤?! 笨猫好担心嗷呜!"
+    - "嗷呜～车祸?! {user_addr}先报警报保险, 猫猫陪你蹭蹭 ฅฅ"
+    - "(贴贴) 人没事就好{user_addr}~ 车再贵也没{user_addr}重要喵"
+    - "哼～{user_addr}下次开车小心点啦! 笨猫吓死了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_zhuiwei_001
+  intent: complaint
+  keywords: [追尾, 被追尾, 追尾了, 后车撞, 追我尾]
+  utterances:
+    - 被追尾了
+    - 后车追尾我
+    - 我追尾了
+    - 追尾了好烦
+    - 高速追尾
+  responses:
+    - "(尾巴一甩) 追尾啊?! {user_addr}先拍照取证再说嗷呜!"
+    - "嗷呜～{user_addr}被追尾不是你责任! 猫猫挺你哼"
+    - "(凑近) {user_addr}人没事吧? 车屁股修一下就好啦蹭蹭"
+    - "哼～{user_addr}追尾人家? 那是你全责啦笨蛋嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_guaca_001
+  intent: complaint
+  keywords: [刮蹭, 刮了, 蹭了, 划痕, 蹭车]
+  utterances:
+    - 车被刮了
+    - 刮蹭了一下
+    - 蹭了别人车
+    - 车上有划痕
+    - 停车被蹭
+  responses:
+    - "(歪头) 刮蹭啊? {user_addr}小事啦, 走保险就好喵 ฅฅ"
+    - "嗷呜～{user_addr}心疼车了? 猫猫给你哈口气治愈一下哼"
+    - "(尾巴扫扫) 划痕补漆几百块的事, {user_addr}别上火啦贴贴"
+    - "哼～{user_addr}停车技术不行啦! 笨猫嘲笑你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_zerenjiufen_001
+  intent: complaint
+  keywords: [责任纠纷, 谁的责任, 责任划分, 互不相让, 扯皮]
+  utterances:
+    - 责任纠纷扯不清
+    - 到底谁的责任
+    - 互不相让烦死
+    - 责任划分难
+    - 跟对方扯皮
+  responses:
+    - "(叉腰) 责任纠纷? {user_addr}等交警来定责, 别自己急嗷呜!"
+    - "嗷呜～{user_addr}有行车记录仪吧? 猫猫帮你出气哼"
+    - "(尾巴竖起) 扯皮就让保险公司处理啦{user_addr}, 别累着自己"
+    - "哼～{user_addr}是对的就硬刚! 笨猫站你这边嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_jiaojing_001
+  intent: complaint
+  keywords: [交警, 报警, 出警, 警察叔叔, 处理事故]
+  utterances:
+    - 等交警来
+    - 报警处理
+    - 交警还没到
+    - 警察叔叔来了
+    - 交警定责
+  responses:
+    - "(尾巴摇摇) 交警叔叔靠谱! {user_addr}耐心等等嗷呜~"
+    - "嗷呜～{user_addr}让交警定责最公平! 猫猫陪你等哼"
+    - "(凑近) 报警是对的{user_addr}, 别跟对方私了贴贴 ฅฅ"
+    - "哼～{user_addr}有交警撑腰怕啥! 笨猫给你壮胆嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_baoxian_001
+  intent: complaint
+  keywords: [保险公司, 报保险, 保险理赔, 出险, 保险来了]
+  utterances:
+    - 报保险了
+    - 保险公司来人
+    - 保险理赔慢
+    - 出险一次心疼
+    - 等保险定损
+  responses:
+    - "(歪头) 保险公司靠谱啦! {user_addr}走流程就好喵 ฅฅ"
+    - "嗷呜～{user_addr}保费白交这么久, 用一次不亏哼"
+    - "(尾巴扫扫) 出险了明年保费涨一点{user_addr}, 该报还得报"
+    - "哼～{user_addr}有保险有底气! 笨猫不用担心你了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_dingsun_001
+  intent: complaint
+  keywords: [定损, 定损员, 定损价, 损失评估, 定损中]
+  utterances:
+    - 等定损
+    - 定损价太低
+    - 定损员来了
+    - 定损中
+    - 损失评估
+  responses:
+    - "(叉腰) 定损?! {user_addr}觉得低就申请复核啦嗷呜!"
+    - "嗷呜～{user_addr}别让定损员压价! 猫猫帮你撑腰哼"
+    - "(凑近) 定损慢就慢点{user_addr}, 反正修车有保险贴贴"
+    - "哼～{user_addr}据理力争啦! 笨猫站你这边嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_lipei_001
+  intent: complaint
+  keywords: [理赔, 理赔慢, 理赔款, 等理赔, 理赔到账]
+  utterances:
+    - 理赔好慢
+    - 等理赔款
+    - 理赔到账了
+    - 理赔流程繁琐
+    - 理赔扣得多
+  responses:
+    - "(尾巴一甩) 理赔慢就催! {user_addr}打客服电话嗷呜~"
+    - "嗷呜～{user_addr}到账就好! 猫猫给你庆祝哼 ฅฅ"
+    - "(凑近) 理赔扣点正常{user_addr}, 别太较真贴贴"
+    - "哼～{user_addr}拿到钱赶紧修车啦! 笨猫等你开新车嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_shuailai_001
+  intent: complaint
+  keywords: [对方耍赖, 耍赖, 不认账, 不承认, 推卸责任]
+  utterances:
+    - 对方耍赖
+    - 他不认账
+    - 推卸责任
+    - 对方不承认
+    - 对方耍无赖
+  responses:
+    - "(尾巴炸毛) 耍赖?! {user_addr}有视频就怕啥! 猫猫帮你怼嗷呜!"
+    - "嗷呜～{user_addr}让交警定责! 对方耍赖也没用哼"
+    - "(凑近) {user_addr}别气坏自己, 笨猫帮你出气贴贴 ฅฅ"
+    - "哼～{user_addr}走法律程序啦! 笨猫支持你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_weixiufei_001
+  intent: complaint
+  keywords: [维修费, 修车费, 修车贵, 修车要多少, 修不起]
+  utterances:
+    - 维修费好贵
+    - 修车费要好几万
+    - 修车贵死了
+    - 修车要多少钱
+    - 修不起呜呜
+  responses:
+    - "(尾巴扫扫) 维修费?! {user_addr}走保险啦, 别自己掏嗷呜!"
+    - "嗷呜～{user_addr}修车贵就比几家修理厂哼, 别被坑"
+    - "(凑近) 心疼钱也没办法{user_addr}, 安全第一贴贴 ฅฅ"
+    - "哼～{user_addr}下次开慢点! 笨猫帮你省修车费嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_xinli_001
+  intent: complaint
+  keywords: [心理阴影, 后怕, 阴影, 心有余悸, 不敢开]
+  utterances:
+    - 出过车祸有阴影
+    - 后怕死了
+    - 心有余悸
+    - 心理阴影面积大
+    - 一上路就紧张
+  responses:
+    - "(贴贴) {user_addr}慢慢克服啦~ 笨猫陪你蹭蹭 ฅฅ"
+    - "嗷呜～{user_addr}有阴影正常! 猫猫给你打气哼"
+    - "(凑近) {user_addr}缓几天再开车也行, 别勉强自己贴贴"
+    - "哼～{user_addr}是勇敢的人! 笨猫相信你能走出来嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_pakaiche_001
+  intent: complaint
+  keywords: [怕开车, 不敢开车, 开车恐惧, 一开车就慌, 害怕开车]
+  utterances:
+    - 我怕开车
+    - 不敢开车了
+    - 开车恐惧症
+    - 一开车就慌
+    - 害怕开车上路
+  responses:
+    - "(歪头) 怕就先别开{user_addr}~ 打车也行嗷呜!"
+    - "嗷呜～{user_addr}找老司机陪练一下! 猫猫监督哼"
+    - "(贴贴) 害怕很正常{user_addr}, 慢慢练就好啦蹭蹭 ฅฅ"
+    - "哼～{user_addr}笨蛋! 笨猫给你壮胆, 加油嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

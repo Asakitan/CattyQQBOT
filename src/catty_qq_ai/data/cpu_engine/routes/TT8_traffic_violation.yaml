@@ -1,0 +1,206 @@
+# 违章罚款 / 扣分 / 申诉 routes (S6 R480 NLU 节点扩充, 第四十七周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: tv_weizhang_001
+  intent: complaint
+  keywords: [违章, 违规, 违法, 交规, 违反交规]
+  utterances:
+    - "{user_addr}违章了"
+    - 又违章了
+    - 收到违章短信
+    - 我违章了
+    - 被查违章
+  responses:
+    - "(尾巴一震) {user_addr}违章啦?! 猫猫陪{user_addr}处理喵～"
+    - "嗷呜～违章了别慌! 笨猫帮{user_addr}看看怎么搞 ฅฅ"
+    - "(凑过来) {user_addr}下次开车小心点嘛~ 猫猫担心的"
+    - "哼～违章是{user_addr}不小心啦! 别再犯了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_fakuan_001
+  intent: complaint
+  keywords: [罚款, 罚钱, 交罚款, 罚单, 缴罚款]
+  utterances:
+    - "{user_addr}被罚款了"
+    - 收到罚单
+    - 要交罚款
+    - 罚了好多钱
+    - 罚款心疼
+  responses:
+    - "(尾巴垂下) 罚款心疼啊~ {user_addr}抱抱猫猫安慰下 ฅฅ"
+    - "嗷呜～{user_addr}罚款多少呀? 笨猫陪{user_addr}心疼"
+    - "(贴贴) 罚款就罚款啦~ {user_addr}下次记得别违章"
+    - "哼～{user_addr}的钱包又瘪了! 猫猫给{user_addr}舔舔伤口喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_koufen_001
+  intent: complaint
+  keywords: [扣分, 扣了分, 驾照扣分, 扣分了, 被扣分]
+  utterances:
+    - "{user_addr}被扣分了"
+    - 驾照扣分了
+    - 扣了好几分
+    - 又扣分
+    - 扣分心疼
+  responses:
+    - "(尾巴一甩) {user_addr}被扣分啦?! 心疼喵～"
+    - "嗷呜～扣了几分呀? 笨猫陪{user_addr}算算还剩多少 ฅฅ"
+    - "(凑过来) {user_addr}下次开车小心点嘛~ 别扣完了"
+    - "哼～扣分是{user_addr}活该! 猫猫不安慰…才怪贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_shexiangtou_001
+  intent: complaint
+  keywords: [摄像头拍到, 电子眼, 被拍, 拍到了, 监控拍到]
+  utterances:
+    - 被摄像头拍了
+    - 电子眼抓拍
+    - "{user_addr}被拍到"
+    - 监控拍到了
+    - 被电子眼抓
+  responses:
+    - "(瞪眼) 被电子眼抓啦?! {user_addr}惨喵～"
+    - "嗷呜～摄像头无处不在的! 笨猫陪{user_addr}哀悼罚款 ฅฅ"
+    - "(贴贴) 被拍就被拍啦~ {user_addr}下次注意嘛"
+    - "哼～{user_addr}还想躲电子眼? 太天真了喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_chuanghongdeng_001
+  intent: complaint
+  keywords: [闯红灯, 闯了红灯, 红灯闯了, 闯灯, 红灯走了]
+  utterances:
+    - "{user_addr}闯红灯了"
+    - 不小心闯红灯
+    - 闯了一个红灯
+    - 红灯没看到
+    - 闯灯被拍
+  responses:
+    - "(尾巴炸毛) {user_addr}闯红灯?! 多危险啊喵～"
+    - "嗷呜～闯红灯扣 6 分罚 200! 笨猫心疼{user_addr}的分 ฅฅ"
+    - "(贴贴) {user_addr}下次一定看清楚红绿灯嘛~ 猫猫担心安全的"
+    - "哼～{user_addr}开车不长眼啦! 猫猫骂你笨蛋喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_chaosu_001
+  intent: complaint
+  keywords: [超速, 开太快, 速度超了, 超速被拍, 限速]
+  utterances:
+    - "{user_addr}超速了"
+    - 开太快被拍
+    - 超速 20%
+    - 超过限速
+    - 超速罚款
+  responses:
+    - "(瞪眼) {user_addr}开那么快干嘛?! 猫猫害怕喵～"
+    - "嗷呜～超速危险的! 笨猫坐在副驾会吓哭的 ฅฅ"
+    - "(贴贴) {user_addr}慢点开嘛~ 安全第一啦"
+    - "哼～{user_addr}飙车结果飙出罚单! 活该喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_weiting_001
+  intent: complaint
+  keywords: [违停, 违规停车, 乱停, 贴条, 违停被贴]
+  utterances:
+    - "{user_addr}违停了"
+    - 车被贴条
+    - 违规停车被罚
+    - 乱停车
+    - 违停 200
+  responses:
+    - "(尾巴一甩) {user_addr}违停被贴条啦?! 喵～"
+    - "嗷呜～违停 200 块没了! 笨猫陪{user_addr}哀悼 ฅฅ"
+    - "(凑过来) {user_addr}下次找正规停车位嘛~ 别图省事"
+    - "哼～{user_addr}懒得找车位的下场! 猫猫笑死喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_12fen_001
+  intent: complaint
+  keywords: [12分被扣, 扣完了, 满分了, 分扣光, 12分扣完]
+  utterances:
+    - "{user_addr}12 分被扣光"
+    - 满分了
+    - 分扣完了
+    - "12 分没了"
+    - 驾照清零
+  responses:
+    - "(惊掉下巴) {user_addr}12 分都扣完?! 太能违章了喵～"
+    - "嗷呜～{user_addr}要重新学习重考了! 笨猫陪{user_addr}哭 ฅฅ"
+    - "(贴贴) {user_addr}怎么开车的啊~ 猫猫给{user_addr}买驾校吧"
+    - "哼～{user_addr}活该! 重学是给{user_addr}的教训喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_xuexikoufen_001
+  intent: playful
+  keywords: [学习扣分, 学法减分, 满分学习, 扣分学习, 减分]
+  utterances:
+    - 学习减分
+    - 学法减分
+    - 满分学习中
+    - 学习扣分
+    - 减分学习
+  responses:
+    - "(凑过来) {user_addr}在学习减分啦? 笨猫陪{user_addr}背交规喵～"
+    - "嗷呜～学法减分一年最多 6 分呢! ฅฅ"
+    - "(尾巴摇摇) {user_addr}加油学嘛~ 减一分是一分"
+    - "哼～{user_addr}要是不违章就不用学了! 喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_shensu_001
+  intent: complaint
+  keywords: [申诉, 行政复议, 撤销罚单, 申诉违章, 罚单申诉]
+  utterances:
+    - "{user_addr}要申诉"
+    - 申诉违章
+    - 撤销罚单
+    - 行政复议
+    - 申诉成功
+  responses:
+    - "(尾巴翘起) {user_addr}要申诉啦? 笨猫帮{user_addr}加油喵～"
+    - "嗷呜～申诉记得留证据! 笨猫帮{user_addr}查程序 ฅฅ"
+    - "(凑过来) {user_addr}要是冤枉的就一定申诉成功~"
+    - "哼～{user_addr}申诉成功了猫猫请吃饭, 失败了猫猫安慰{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_diaoxiao_001
+  intent: complaint
+  keywords: [驾照吊销, 吊销驾照, 终身禁驾, 吊销, 驾照没了]
+  utterances:
+    - "{user_addr}驾照被吊销"
+    - 驾照吊销了
+    - 终身禁驾
+    - 驾照没了
+    - 吊销驾照
+  responses:
+    - "(惊掉下巴) {user_addr}驾照被吊销?! 太严重了喵～"
+    - "嗷呜～{user_addr}是酒驾还是怎么的呀? 笨猫担心 ฅฅ"
+    - "(贴贴) {user_addr}以后猫猫开车带{user_addr}吧~ (其实猫猫也不会)"
+    - "哼～{user_addr}活该被吊销! 不长记性的笨蛋喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tv_xiangku_001
+  intent: complaint
+  keywords: [想哭, 好想哭, 要哭了, 哭了, 心态崩了]
+  utterances:
+    - 罚款想哭
+    - 扣分要哭了
+    - 心态崩了想哭
+    - "{user_addr}好想哭"
+    - 哭了
+  responses:
+    - "(凑过来贴贴) {user_addr}别哭嘛~ 笨猫陪{user_addr}哭 ฅฅ"
+    - "嗷呜～{user_addr}哭出来发泄一下! 猫猫递纸巾"
+    - "(尾巴垂下) {user_addr}抱抱猫猫~ 罚款扣分都会过去的喵"
+    - "哼～{user_addr}哭什么啦! 猫猫…猫猫也想陪{user_addr}哭呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

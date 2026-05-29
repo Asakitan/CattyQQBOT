@@ -1,0 +1,206 @@
+# 二手车 / 瓜子 优信 / 平台 routes (S6 R473 NLU 节点扩充, 第四十七周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: uc_guazi_001
+  intent: question
+  keywords: [推荐瓜子二手车, 推荐瓜子, 推荐二手车平台, 推荐 Guazi, 笨猫瓜子]
+  utterances:
+    - 推荐瓜子二手车
+    - 推荐瓜子
+    - 推荐二手车平台
+    - 推荐 Guazi
+    - 笨猫瓜子
+  responses:
+    - "嗷呜～{user_addr}瓜子二手车 - 没有中间商ฅฅ"
+    - "(尾巴翘) 个人车源 / 平台担保"
+    - "{user_addr}严选店 / 7 天无理由"
+    - "(挺胸) 笨猫推荐: 严选店更稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uc_uxin_001
+  intent: question
+  keywords: [推荐优信二手车, 推荐优信, 推荐 Uxin, 推荐异地购车, 笨猫优信]
+  utterances:
+    - 推荐优信二手车
+    - 推荐优信
+    - 推荐 Uxin
+    - 推荐异地购车
+    - 笨猫优信
+  responses:
+    - "嗷呜～{user_addr}优信二手车 - 全国直购ฅฅ"
+    - "(尾巴翘) 异地购车 / 一成首付"
+    - "{user_addr}超级买手 / 检测报告"
+    - "(挺胸) 笨猫推荐: 适合外地选车!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uc_renren_001
+  intent: question
+  keywords: [推荐人人车, 推荐人人, 推荐 Renrenche, 推荐二手车 C2C, 笨猫人人车]
+  utterances:
+    - 推荐人人车
+    - 推荐人人
+    - 推荐 Renrenche
+    - 推荐二手车 C2C
+    - 笨猫人人车
+  responses:
+    - "嗷呜～{user_addr}人人车 - C2C 模式ฅฅ"
+    - "(尾巴翘) 个人对个人 / 评估师上门"
+    - "{user_addr}保卖 / 质保服务"
+    - "(挺胸) 笨猫推荐: 看车前先查口碑!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: uc_yiche_001
+  intent: question
+  keywords: [推荐易车二手车, 推荐易车, 推荐 Bitauto, 推荐汽车之家二手车, 笨猫易车]
+  utterances:
+    - 推荐易车二手车
+    - 推荐易车
+    - 推荐 Bitauto
+    - 推荐汽车之家二手车
+    - 笨猫易车
+  responses:
+    - "嗷呜～{user_addr}易车 / 汽车之家二手车ฅฅ"
+    - "(尾巴翘) 信息聚合 / 经销商车源"
+    - "{user_addr}懂车帝 - 评测+二手"
+    - "(挺胸) 笨猫推荐: 先看评测再选车!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: uc_check_001
+  intent: question
+  keywords: [推荐二手车检测, 推荐第三方检测, 推荐 检车无忧, 推荐查博士, 笨猫检测]
+  utterances:
+    - 推荐二手车检测
+    - 推荐第三方检测
+    - 推荐 检车无忧
+    - 推荐查博士
+    - 笨猫检测
+  responses:
+    - "嗷呜～{user_addr}第三方检测必做ฅฅ"
+    - "(尾巴翘) 检车无忧 / 查博士 / 优卡"
+    - "{user_addr}300-500 元 / 出具报告"
+    - "(挺胸) 笨猫推荐: 别省检测钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uc_4s_001
+  intent: question
+  keywords: [推荐 4S 店二手车, 推荐官方认证, 推荐准新车, 推荐 CPO, 笨猫 4S]
+  utterances:
+    - 推荐 4S 店二手车
+    - 推荐官方认证
+    - 推荐准新车
+    - 推荐 CPO
+    - 笨猫 4S
+  responses:
+    - "嗷呜～{user_addr}4S 店认证二手车 (CPO)ฅฅ"
+    - "(尾巴翘) 官方质保 / 价格略高"
+    - "{user_addr}省心 / 适合预算够"
+    - "(挺胸) 笨猫推荐: 怕踩坑就 CPO!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uc_new_001
+  intent: question
+  keywords: [推荐二手车 vs 准新车, 推荐准新车选择, 推荐一年车, 推荐新车 vs 二手, 笨猫准新车]
+  utterances:
+    - 推荐二手车 vs 准新车
+    - 推荐准新车选择
+    - 推荐一年车
+    - 推荐新车 vs 二手
+    - 笨猫准新车
+  responses:
+    - "嗷呜～{user_addr}准新车 - 1-2 年车龄ฅฅ"
+    - "(尾巴翘) 折旧最猛 / 性价比高"
+    - "{user_addr}避开第一年折旧"
+    - "(挺胸) 笨猫推荐: 1 年准新车香!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: uc_value_001
+  intent: question
+  keywords: [推荐二手车保值率, 推荐保值率, 推荐丰田保值, 推荐本田保值, 笨猫保值率]
+  utterances:
+    - 推荐二手车保值率
+    - 推荐保值率
+    - 推荐丰田保值
+    - 推荐本田保值
+    - 笨猫保值率
+  responses:
+    - "嗷呜～{user_addr}保值率: 丰田 > 本田 > 大众ฅฅ"
+    - "(尾巴翘) 卡罗拉 / 雷凌 / 凯美瑞"
+    - "{user_addr}日系普遍保值"
+    - "(挺胸) 笨猫推荐: 丰田最保值!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: uc_mile_001
+  intent: question
+  keywords: [推荐二手车里程数, 推荐里程数, 推荐公里数, 推荐调表车, 笨猫里程]
+  utterances:
+    - 推荐二手车里程数
+    - 推荐里程数
+    - 推荐公里数
+    - 推荐调表车
+    - 笨猫里程
+  responses:
+    - "嗷呜～{user_addr}年均 1-2 万公里正常ฅฅ"
+    - "(尾巴翘) 警惕调表 / 查保养记录"
+    - "{user_addr}低里程不一定好"
+    - "(挺胸) 笨猫推荐: 看保养记录!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: uc_transfer_001
+  intent: question
+  keywords: [推荐二手车过户, 推荐过户流程, 推荐车辆过户, 推荐转籍, 笨猫过户]
+  utterances:
+    - 推荐二手车过户
+    - 推荐过户流程
+    - 推荐车辆过户
+    - 推荐转籍
+    - 笨猫过户
+  responses:
+    - "嗷呜～{user_addr}过户: 车管所一站式ฅฅ"
+    - "(尾巴翘) 身份证 / 行驶证 / 登记证"
+    - "{user_addr}过户费 200-800 元"
+    - "(挺胸) 笨猫推荐: 必须过户保平安!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: uc_insurance_001
+  intent: question
+  keywords: [推荐二手车保险, 推荐过户保险, 推荐交强险过户, 推荐商业险, 笨猫二手保险]
+  utterances:
+    - 推荐二手车保险
+    - 推荐过户保险
+    - 推荐交强险过户
+    - 推荐商业险
+    - 笨猫二手保险
+  responses:
+    - "嗷呜～{user_addr}交强险随车过户ฅฅ"
+    - "(尾巴翘) 商业险可退 / 重新买"
+    - "{user_addr}10 天内办理过户"
+    - "(挺胸) 笨猫推荐: 别忘办保险过户!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: uc_pit_001
+  intent: question
+  keywords: [推荐二手车避坑, 推荐避坑指南, 推荐事故车识别, 推荐泡水车, 笨猫避坑]
+  utterances:
+    - 推荐二手车避坑指南
+    - 推荐避坑指南
+    - 推荐事故车识别
+    - 推荐泡水车
+    - 笨猫避坑
+  responses:
+    - "嗷呜～{user_addr}避坑: 远离事故/泡水/火烧ฅฅ"
+    - "(尾巴翘) 查 4S 保养记录 / 出险记录"
+    - "{user_addr}必做第三方检测"
+    - "(挺胸) 笨猫推荐: 三查一检, 别图便宜!"
+  cooldown_seconds: 60
+  weight: 1.0

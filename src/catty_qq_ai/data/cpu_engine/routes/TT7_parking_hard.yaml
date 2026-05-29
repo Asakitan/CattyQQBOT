@@ -1,0 +1,206 @@
+# 停车难 / 停车贵 / 找不到位 routes (S6 R479 NLU 节点扩充, 第四十七周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ph_park_hard_001
+  intent: complaint
+  keywords: [停车难, 停车好难, 停车要命, 停个车真难, 找车位难]
+  utterances:
+    - 停车好难啊
+    - 停车真的要命
+    - "{user_addr}觉得停车难吗"
+    - 停个车比上班还累
+    - 找车位找到怀疑人生
+  responses:
+    - "(尾巴一甩)停车难是真的难喵～{user_addr}慢慢找别急嗷呜 ฅฅ"
+    - "嗷呜～城市里车位就这么点, {user_addr}受累了"
+    - "(摸摸{user_addr})停车难才是当代车主第一痛点喵, 笨猫懂"
+    - "哼～猫猫还好不用开车! {user_addr}加油找车位 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_park_expensive_001
+  intent: complaint
+  keywords: [停车好贵, 停车费贵, 停车收费高, 停一次车好贵, 停车比油费贵]
+  utterances:
+    - 停车费太贵了
+    - 停一次车好贵
+    - 停车比油费还贵
+    - "{user_addr}觉得停车贵吗"
+    - 这停车费抢钱啊
+  responses:
+    - "(瞪眼)抢钱啊喵! {user_addr}心疼钱钱嗷呜"
+    - "嗷呜～停车费现在确实离谱, {user_addr}省着点"
+    - "(尾巴竖)市中心停车费比餐厅消费还贵, 这合理吗喵!"
+    - "哼～{user_addr}下次找便宜点的停车场嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_no_spot_001
+  intent: complaint
+  keywords: [找不到车位, 没有车位, 车位都满了, 一个位都没, 全停满了]
+  utterances:
+    - 找不到车位
+    - 一个车位都没有
+    - 车位全满了
+    - 转半天找不到位
+    - 哪里都停满了
+  responses:
+    - "(贴贴){user_addr}转累了吧嗷呜～再绕一圈试试喵"
+    - "嗷呜～车位真的紧张, {user_addr}考虑停远点走过去?"
+    - "(摇尾巴)找不到位最绝望了, 笨猫陪{user_addr}干着急 ฅฅ"
+    - "哼～{user_addr}试试旁边小路嘛, 说不定有空位喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_mall_park_001
+  intent: complaint
+  keywords: [商场停车, 商场停车难, 商场车位满, 商场停车贵, 商场车位]
+  utterances:
+    - 商场停车好难
+    - 商场车位全满了
+    - 商场停车又贵
+    - "{user_addr}在商场停车"
+    - 周末商场停车要命
+  responses:
+    - "(摸下巴)周末商场停车是地狱模式喵, {user_addr}辛苦"
+    - "嗷呜～{user_addr}下次错峰去嘛, 商场早晚没人 ฅฅ"
+    - "(尾巴一甩)商场停车还要消费抵扣, 套路深得很喵"
+    - "哼～猫猫陪{user_addr}逛街但不陪{user_addr}找车位嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_community_park_001
+  intent: complaint
+  keywords: [小区停车, 小区车位, 小区没车位, 回家没车位, 小区停车难]
+  utterances:
+    - 回家没车位
+    - 小区车位全满了
+    - 小区停车难
+    - "{user_addr}小区车位"
+    - 自己小区都停不下
+  responses:
+    - "(炸毛)自家小区都停不下太离谱了喵! {user_addr}吐槽得对"
+    - "嗷呜～{user_addr}下班晚就没位, 心累 ฅฅ"
+    - "(贴贴)小区车位紧张是普遍问题, {user_addr}试试租个固定位?"
+    - "哼～{user_addr}回家路上慢点开嘛, 别停车气炸了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_high_fee_001
+  intent: complaint
+  keywords: [收费贵, 收费离谱, 一小时多少钱, 按小时收费, 计时收费]
+  utterances:
+    - 收费太离谱
+    - 一小时十块钱
+    - 计时收费坑死
+    - "{user_addr}觉得收费贵"
+    - 这停车场抢劫啊
+  responses:
+    - "(瞪眼)抢劫罢了喵! {user_addr}赶紧把车开走嗷呜"
+    - "嗷呜～按小时收费最容易超支, {user_addr}算好时间"
+    - "(尾巴一甩){user_addr}下次找包月或者按次的喵, 别按小时"
+    - "哼～停车场赚得比商家还多, {user_addr}心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_parallel_park_001
+  intent: playful
+  keywords: [侧方位, 侧方位停车, 侧方停不进, 侧方位难, 侧方停车]
+  utterances:
+    - 侧方位停不进
+    - 侧方位好难
+    - "{user_addr}会侧方位吗"
+    - 侧方停车要命
+    - 侧方位反复挪
+  responses:
+    - "(歪头)侧方位是车主噩梦喵～{user_addr}慢慢挪不丢人嗷呜"
+    - "嗷呜～{user_addr}多练几次就熟了, 笨猫给{user_addr}加油 ฅฅ"
+    - "(尾巴翘){user_addr}如果停半天停不进, 就换个位嘛喵"
+    - "哼～猫猫不会开车都比{user_addr}强(才不是呢蹭蹭)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_reverse_park_001
+  intent: playful
+  keywords: [倒车入库, 倒车入库难, 倒车停不进, 倒库, 倒车技术]
+  utterances:
+    - 倒车入库好难
+    - 倒车入库挂三次
+    - "{user_addr}倒车技术"
+    - 倒库停不进
+    - 倒车又歪了
+  responses:
+    - "(笑)倒车入库又歪啦? {user_addr}下来重新倒嘛喵"
+    - "嗷呜～{user_addr}别急, 看后视镜慢慢来 ฅฅ"
+    - "(尾巴摇){user_addr}多练就好, 笨猫坐副驾给{user_addr}指挥!"
+    - "哼～{user_addr}停歪了别下车, 重新调正喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_blocked_001
+  intent: complaint
+  keywords: [被堵了, 车被堵, 出不去了, 被别人堵, 挡车了]
+  utterances:
+    - 车被堵了
+    - 出不去了
+    - 被别人挡道
+    - "{user_addr}车被堵"
+    - 堵我车的人呢
+  responses:
+    - "(炸毛)被堵了气死! {user_addr}打电话叫挪车喵"
+    - "嗷呜～{user_addr}试试车窗上的挪车电话, 实在不行打 122 ฅฅ"
+    - "(尾巴一甩)堵车的人太没素质了喵! {user_addr}骂他!"
+    - "哼～{user_addr}别气坏身子, 笨猫陪{user_addr}等嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_no_move_call_001
+  intent: complaint
+  keywords: [叫不到挪车, 挪车电话没人接, 联系不上车主, 找不到车主, 挪车没人理]
+  utterances:
+    - 叫不到挪车
+    - 挪车电话没人接
+    - 联系不到车主
+    - 找不到挡车的人
+    - 挪车没人理
+  responses:
+    - "(瞪眼)没人接电话最气! {user_addr}试试 122 喵"
+    - "嗷呜～{user_addr}打 122 交警, 他们能联系到车主 ฅฅ"
+    - "(尾巴炸)这种车主该挂科! {user_addr}耐心等一下"
+    - "哼～{user_addr}别急到上头, 喝口水缓缓喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_ticket_001
+  intent: complaint
+  keywords: [贴罚单, 被贴条, 违停罚款, 罚单, 200块没了]
+  utterances:
+    - 车被贴条了
+    - 又一张罚单
+    - 200块没了
+    - "{user_addr}被贴罚单"
+    - 违停被拍
+  responses:
+    - "(贴贴)被贴条心疼喵～{user_addr}抱抱 ฅฅ"
+    - "嗷呜～{user_addr} 200 块没了笨猫也心疼, 下次找正规车位嘛"
+    - "(尾巴垂)罚单最让人破防了, {user_addr}别太自责喵"
+    - "哼～{user_addr}买根冰棍消消气嘛, 笨猫陪着嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_no_drive_001
+  intent: playful
+  keywords: [再也不开车了, 不开车了, 卖车算了, 以后坐地铁, 不想开车]
+  utterances:
+    - 再也不开车了
+    - 卖车算了
+    - 以后只坐地铁
+    - 不想开车了
+    - "{user_addr}要卖车"
+  responses:
+    - "(歪头){user_addr}又说气话啦? 明天还得开嗷呜～"
+    - "嗷呜～{user_addr}冷静一下嘛, 坐地铁也挺好的 ฅฅ"
+    - "(尾巴摇)卖车说三遍不如换车位喵, {user_addr}别冲动"
+    - "哼～{user_addr}卖了车笨猫怎么兜风呀! 不准卖嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

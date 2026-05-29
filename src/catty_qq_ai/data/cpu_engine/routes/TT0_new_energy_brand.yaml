@@ -1,0 +1,206 @@
+# 新能源车 / Tesla 比亚迪 蔚来 routes (S6 R472 NLU 节点扩充, 第四十七周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: neb_tesla_001
+  intent: question
+  keywords: [推荐 Tesla, 推荐 Model 3, 推荐 Model Y, 推荐特斯拉, 笨猫特斯拉]
+  utterances:
+    - 推荐 Tesla
+    - 推荐 Model 3
+    - 推荐 Model Y
+    - 推荐特斯拉
+    - 笨猫特斯拉
+  responses:
+    - "嗷呜～{user_addr}Model 3 - 轿车标杆ฅฅ"
+    - "(尾巴翘) Model Y - SUV 全球销冠"
+    - "{user_addr}FSD / 充电网 / OTA 强"
+    - "(挺胸) 猫猫推荐: Model Y 长续航!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_byd_001
+  intent: question
+  keywords: [推荐比亚迪, 推荐比亚迪汉, 推荐比亚迪唐, 推荐海豹, 笨猫比亚迪]
+  utterances:
+    - 推荐比亚迪
+    - 推荐比亚迪汉
+    - 推荐比亚迪唐
+    - 推荐海豹
+    - 笨猫比亚迪
+  responses:
+    - "嗷呜～{user_addr}汉 EV - B 级轿车王ฅฅ"
+    - "(尾巴翘) 唐 DM-i / 海豹 / 海豚"
+    - "{user_addr}刀片电池 + DM-i 超混"
+    - "(挺胸) 笨猫推荐: 海豹 EV 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_nio_001
+  intent: question
+  keywords: [推荐蔚来, 推荐 ET5, 推荐 ET7, 推荐 ES6, 笨猫蔚来]
+  utterances:
+    - 推荐蔚来
+    - 推荐 ET5
+    - 推荐 ET7
+    - 推荐 ES6
+    - 笨猫蔚来
+  responses:
+    - "嗷呜～{user_addr}ET5 - 蔚来轿跑入门ฅฅ"
+    - "(尾巴翘) ET7 旗舰 / ES6 SUV"
+    - "{user_addr}换电站 / NIO House 服务"
+    - "(挺胸) 人家推荐: ET5T 旅行版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_lixiang_001
+  intent: question
+  keywords: [推荐理想, 推荐 L9, 推荐 L8, 推荐 L7, 笨猫理想]
+  utterances:
+    - 推荐理想
+    - 推荐 L9
+    - 推荐 L8
+    - 推荐 L7
+    - 笨猫理想
+  responses:
+    - "嗷呜～{user_addr}L9 - 六座旗舰奶爸车ฅฅ"
+    - "(尾巴翘) L8 / L7 增程 SUV"
+    - "{user_addr}冰箱彩电大沙发"
+    - "(挺胸) 笨猫推荐: L7 Pro 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_xpeng_001
+  intent: question
+  keywords: [推荐小鹏, 推荐 P7, 推荐 G9, 推荐 G6, 笨猫小鹏]
+  utterances:
+    - 推荐小鹏
+    - 推荐 P7
+    - 推荐 G9
+    - 推荐 G6
+    - 笨猫小鹏
+  responses:
+    - "嗷呜～{user_addr}P7i - 智能轿跑ฅฅ"
+    - "(尾巴翘) G9 旗舰 / G6 紧凑 SUV"
+    - "{user_addr}XNGP 智驾 / 800V 超充"
+    - "(挺胸) 猫猫推荐: G6 Max 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_zeekr_001
+  intent: question
+  keywords: [推荐极氪, 推荐 Zeekr 001, 推荐 Zeekr 009, 推荐极氪 X, 笨猫极氪]
+  utterances:
+    - 推荐极氪
+    - 推荐 Zeekr 001
+    - 推荐 Zeekr 009
+    - 推荐极氪 X
+    - 笨猫极氪
+  responses:
+    - "嗷呜～{user_addr}极氪 001 - 猎装轿跑ฅฅ"
+    - "(尾巴翘) 009 MPV / X 小车"
+    - "{user_addr}吉利系 SEA 浩瀚平台"
+    - "(挺胸) 笨猫推荐: 001 WE 版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_zhiji_001
+  intent: question
+  keywords: [推荐智己, 推荐智己 L7, 推荐智己 LS7, 推荐智己 LS6, 笨猫智己]
+  utterances:
+    - 推荐智己
+    - 推荐智己 L7
+    - 推荐智己 LS7
+    - 推荐智己 LS6
+    - 笨猫智己
+  responses:
+    - "嗷呜～{user_addr}智己 L7 - 上汽高端轿车ฅฅ"
+    - "(尾巴翘) LS7 / LS6 SUV 系列"
+    - "{user_addr}IM AD 智驾 / 准 900V"
+    - "(挺胸) 人家推荐: LS6 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_neta_leap_001
+  intent: question
+  keywords: [推荐哪吒, 推荐零跑, 推荐 Leapmotor, 推荐 C11, 笨猫零跑]
+  utterances:
+    - 推荐哪吒
+    - 推荐零跑
+    - 推荐 Leapmotor
+    - 推荐 C11
+    - 笨猫零跑
+  responses:
+    - "嗷呜～{user_addr}零跑 C11 - 中型 SUV 卷王ฅฅ"
+    - "(尾巴翘) C01 轿车 / 哪吒 S 性价比"
+    - "{user_addr}10 万级 EV 性价比王者"
+    - "(挺胸) 笨猫推荐: 零跑 C11 增程!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_vw_id_001
+  intent: question
+  keywords: [推荐大众 ID, 推荐 ID 4, 推荐 ID 6, 推荐 ID Buzz, 笨猫大众电动]
+  utterances:
+    - 推荐大众 ID
+    - 推荐 ID 4
+    - 推荐 ID 6
+    - 推荐 ID Buzz
+    - 笨猫大众电动
+  responses:
+    - "嗷呜～{user_addr}ID.4 - 合资紧凑 SUVฅฅ"
+    - "(尾巴翘) ID.6 / ID.3 / ID. Buzz"
+    - "{user_addr}MEB 平台 / 德系底盘"
+    - "(挺胸) 猫猫推荐: ID.4 X 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_bmw_benz_ev_001
+  intent: question
+  keywords: [推荐 BMW iX, 推荐宝马 i3, 推荐奔驰 EQE, 推荐奔驰 EQS, 笨猫 BBA 电动]
+  utterances:
+    - 推荐 BMW iX
+    - 推荐宝马 i3
+    - 推荐奔驰 EQE
+    - 推荐奔驰 EQS
+    - 笨猫 BBA 电动
+  responses:
+    - "嗷呜～{user_addr}BMW iX / i4 / i7ฅฅ"
+    - "(尾巴翘) 奔驰 EQE / EQS / EQA"
+    - "{user_addr}豪华品牌电动转型"
+    - "(挺胸) 笨猫推荐: iX3 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_home_charger_001
+  intent: question
+  keywords: [推荐家用充电桩, 推荐 7kW 充电桩, 推荐挂壁充电桩, 推荐充电桩品牌, 笨猫充电桩]
+  utterances:
+    - 推荐家用充电桩
+    - 推荐 7kW 充电桩
+    - 推荐挂壁充电桩
+    - 推荐充电桩品牌
+    - 笨猫充电桩
+  responses:
+    - "嗷呜～{user_addr}7kW 交流桩家用够用ฅฅ"
+    - "(尾巴翘) 特斯拉 / 比亚迪原厂桩"
+    - "{user_addr}星星充电 / 特来电 / 普诺得"
+    - "(挺胸) 人家推荐: 220V 7kW 挂壁!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: neb_range_anxiety_001
+  intent: question
+  keywords: [推荐长续航车, 推荐解决续航焦虑, 推荐增程式, 推荐插混, 笨猫续航焦虑]
+  utterances:
+    - 推荐长续航车
+    - 推荐解决续航焦虑
+    - 推荐增程式
+    - 推荐插混
+    - 笨猫续航焦虑
+  responses:
+    - "嗷呜～{user_addr}增程式 (理想/问界) 无焦虑ฅฅ"
+    - "(尾巴翘) DM-i 插混 (比亚迪) 油电双修"
+    - "{user_addr}纯电选 700km+ / 800V 超充"
+    - "(挺胸) 笨猫推荐: L7 增程零焦虑!"
+  cooldown_seconds: 60
+  weight: 1.0

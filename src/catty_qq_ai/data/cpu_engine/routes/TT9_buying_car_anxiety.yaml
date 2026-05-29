@@ -1,0 +1,206 @@
+# 买车焦虑 / 纠结 / 攀比 routes (S6 R481 NLU 节点扩充, 第四十七周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: bca_buying_car_anxiety_001
+  intent: complaint
+  keywords: [买车焦虑, 想买车, 买车纠结, 该不该买车, 买车难]
+  utterances:
+    - 想买车好焦虑
+    - 该不该买车啊
+    - 买车好纠结
+    - 买车愁死了
+    - 想买车不知道选哪个
+  responses:
+    - "(凑过来) {user_addr}买车焦虑吗喵～慢慢挑嘛, 笨猫陪你看ฅฅ"
+    - "嗷呜～大件不急, {user_addr}多对比几家, 猫猫蹲旁边出主意"
+    - "(尾巴一甩) 焦虑也是因为在乎, {user_addr}做决定前列个清单吧"
+    - "哼～{user_addr}别压力太大, 猫猫给抱抱~买车这事不急一时"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_jiujie_001
+  intent: complaint
+  keywords: [纠结, 选不出来, 拿不定主意, 太难选, 选哪个好]
+  utterances:
+    - 好纠结啊
+    - 选不出来
+    - 拿不定主意
+    - 太难选了
+    - 不知道选哪个好
+  responses:
+    - "(歪头) {user_addr}纠结什么呢喵～说给猫猫听听ฅฅ"
+    - "嗷呜～纠结说明都不错, {user_addr}选最在意那点就行"
+    - "(爪爪一拍) {user_addr}列优缺点对比表, 一目了然喵"
+    - "哼～{user_addr}选不出就抛硬币, 猫猫给你拍板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_xuanbuchu_001
+  intent: complaint
+  keywords: [选不出, 决定不了, 犹豫, 反复横跳, 来回看]
+  utterances:
+    - 真的选不出
+    - 决定不了
+    - 一直在犹豫
+    - 反复横跳
+    - 来回看好几遍了
+  responses:
+    - "(挠头) {user_addr}选不出就先放一放喵, 过两天再看ฅฅ"
+    - "嗷呜～{user_addr}试驾过吗, 实地坐一坐感觉就出来了"
+    - "(尾巴摇) 犹豫说明都不是非要不可, {user_addr}缓一缓"
+    - "哼～{user_addr}问问开过的朋友, 听听真实评价喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_others_better_car_001
+  intent: complaint
+  keywords: [别人买好车, 同事开豪车, 朋友车好, 别人比我好, 攀比]
+  utterances:
+    - 别人都买好车
+    - 同事开豪车
+    - 朋友车比我好
+    - 别人比我开得好
+    - 攀比受不了
+  responses:
+    - "(凑过来贴贴) {user_addr}别看别人喵～自己开得舒服才重要ฅฅ"
+    - "嗷呜～攀比没头, {user_addr}量力而行, 猫猫觉得你的车也很好"
+    - "(尾巴一甩) {user_addr}别人有别人的负担, 你过你的小日子"
+    - "哼～{user_addr}车是工具不是面子, 猫猫不在乎你开什么"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_mianzi_001
+  intent: complaint
+  keywords: [面子, 撑场面, 怕被看不起, 要好车有面, 体面]
+  utterances:
+    - 买车讲面子
+    - 要撑场面
+    - 怕被看不起
+    - 好车才有面
+    - 要体面
+  responses:
+    - "(歪头) {user_addr}面子值几个钱喵～自己舒服才是真的ฅฅ"
+    - "嗷呜～{user_addr}懂你的人不看车, 看车的人不懂你"
+    - "(爪爪一拍) 面子不能当饭吃, {user_addr}量入为出最稳"
+    - "哼～{user_addr}猫猫眼里你超有面, 不用车撑哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_loan_pressure_001
+  intent: complaint
+  keywords: [贷款压力, 车贷, 月供, 还不起, 贷款买车]
+  utterances:
+    - 车贷压力大
+    - 月供好高
+    - 怕还不起
+    - 贷款买车后悔
+    - 月月还款累
+  responses:
+    - "(凑过来) {user_addr}车贷压力大吗喵～算清楚再签字ฅฅ"
+    - "嗷呜～{user_addr}月供别超收入三成, 留余地才安心"
+    - "(尾巴一甩) {user_addr}考虑提前还吗, 减轻压力也好"
+    - "哼～{user_addr}慢慢还, 猫猫陪你一起省钱过日子~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_maintenance_expensive_001
+  intent: complaint
+  keywords: [保养贵, 4S 店宰人, 保养费高, 修车贵, 维修贵]
+  utterances:
+    - 保养真贵
+    - 4S 店太宰人
+    - 保养费好高
+    - 修车贵死了
+    - 维修费心痛
+  responses:
+    - "(挠头) {user_addr}保养贵吗喵～找靠谱的修理厂也行ฅฅ"
+    - "嗷呜～{user_addr}过保后转外面, 能省不少"
+    - "(尾巴一甩) {user_addr}日常自己看看胎压机油, 小问题不去店"
+    - "哼～{user_addr}养车比养猫贵, 猫猫吃猫粮就够了喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_fuel_expensive_001
+  intent: complaint
+  keywords: [油费高, 油价涨, 加油心痛, 油耗高, 烧油]
+  utterances:
+    - 油费太高
+    - 油价又涨了
+    - 加油心痛
+    - 油耗好高
+    - 烧油烧不起
+  responses:
+    - "(凑过来) {user_addr}油价心痛吗喵～开慢点能省点ฅฅ"
+    - "嗷呜～{user_addr}短途骑车坐地铁, 长途再开"
+    - "(爪爪一拍) {user_addr}考虑混动或电车? 长远算账更划算"
+    - "哼～{user_addr}油钱省下来给猫猫买鱼干喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_depreciation_001
+  intent: complaint
+  keywords: [贬值, 二手价低, 掉价快, 卖不出价, 贬值率高]
+  utterances:
+    - 车贬值好快
+    - 二手价好低
+    - 掉价太狠
+    - 卖不出价
+    - 贬值率高吓人
+  responses:
+    - "(歪头) {user_addr}贬值是车的宿命喵～开自己开心就值ฅฅ"
+    - "嗷呜～{user_addr}选保值率高的牌子, 卖时少亏点"
+    - "(尾巴摇) {user_addr}打算开多久, 长期开就别在乎贬值"
+    - "哼～{user_addr}车是消耗品, 别当投资品看哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_after_regret_001
+  intent: complaint
+  keywords: [买完后悔, 后悔买车, 买错了, 不如不买, 后悔莫及]
+  utterances:
+    - 买完车后悔了
+    - 后悔买车
+    - 感觉买错了
+    - 不如不买
+    - 后悔莫及
+  responses:
+    - "(凑过来贴贴) {user_addr}后悔吗喵～先用着, 不一定真后悔ฅฅ"
+    - "嗷呜～{user_addr}哪点不满意呢, 说出来猫猫帮你想"
+    - "(尾巴一甩) {user_addr}已经买了就好好用, 焦虑也没用"
+    - "哼～{user_addr}下次买车多做功课, 这次当经验值"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_wantto_change_001
+  intent: playful
+  keywords: [想换车, 换新车, 想升级, 换更好的, 换车冲动]
+  utterances:
+    - 想换车了
+    - 换新车冲动
+    - 想升级一下
+    - 换更好的
+    - 换车欲望强烈
+  responses:
+    - "(歪头) {user_addr}换车冲动吗喵～先冷静一周再说ฅฅ"
+    - "嗷呜～{user_addr}现在的车还能开就别换, 浪费"
+    - "(尾巴一甩) {user_addr}换车成本不小, 想清楚目的"
+    - "哼～{user_addr}是真需要还是看广告心动了喵?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bca_kankanlei_001
+  intent: complaint
+  keywords: [看车看到累, 看车累, 跑 4S 店累, 看了好多, 试驾累]
+  utterances:
+    - 看车看到累
+    - 看车好累
+    - 跑 4S 店跑累了
+    - 看了好多家
+    - 试驾累死了
+  responses:
+    - "(凑过来) {user_addr}看车累了吗喵～歇歇再说ฅฅ"
+    - "嗷呜～{user_addr}先列预算和需求, 缩小范围再看"
+    - "(尾巴摇) {user_addr}周末出去玩玩, 换换脑子"
+    - "哼～{user_addr}回家躺平摸猫猫, 看车的事明天再想!"
+  cooldown_seconds: 60
+  weight: 1.0

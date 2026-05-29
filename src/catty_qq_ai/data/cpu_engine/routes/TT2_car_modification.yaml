@@ -1,0 +1,206 @@
+# 汽车改装 / 轮毂 / 排气 routes (S6 R474 NLU 节点扩充, 第四十七周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cm_wheels_001
+  intent: question
+  keywords: [推荐轮毂, 推荐 BBS, 推荐 Volk, 推荐锻造轮毂, 笨猫轮毂]
+  utterances:
+    - 推荐轮毂
+    - 推荐 BBS
+    - 推荐 Volk
+    - 推荐锻造轮毂
+    - 笨猫轮毂
+  responses:
+    - "嗷呜～{user_addr}BBS RS / LM - 经典多片ฅฅ"
+    - "(尾巴翘) Volk TE37 / CE28 - 日系锻造神器"
+    - "{user_addr}Rays / Enkei / Work - 性价比"
+    - "(挺胸) 笨猫推荐: BBS LM 一步到位!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_exhaust_001
+  intent: question
+  keywords: [推荐排气, 推荐排气头段, 推荐法兰, 推荐中尾段, 笨猫排气]
+  utterances:
+    - 推荐排气
+    - 推荐排气头段
+    - 推荐法兰
+    - 推荐中尾段
+    - 笨猫排气
+  responses:
+    - "嗷呜～{user_addr}头段 (Header) - 榨马力关键ฅฅ"
+    - "(尾巴翘) Akrapovic / Remus / HKS - 大牌"
+    - "{user_addr}中尾段换可变阀门 - 文武双全"
+    - "(挺胸) 笨猫推荐: 头段+中尾段套件!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_suspension_001
+  intent: question
+  keywords: [推荐避震, 推荐 KW, 推荐 Ohlins, 推荐绞牙避震, 笨猫避震]
+  utterances:
+    - 推荐避震
+    - 推荐 KW
+    - 推荐 Ohlins
+    - 推荐绞牙避震
+    - 笨猫避震
+  responses:
+    - "嗷呜～{user_addr}KW V3 - 德系标杆ฅฅ"
+    - "(尾巴翘) Ohlins R&T / Bilstein B16"
+    - "{user_addr}TEIN / HKS - 日系性价比"
+    - "(挺胸) 笨猫推荐: KW V3 街道+赛道通吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_brakes_001
+  intent: question
+  keywords: [推荐刹车, 推荐 Brembo, 推荐 AP, 推荐刹车卡钳, 笨猫刹车]
+  utterances:
+    - 推荐刹车
+    - 推荐 Brembo
+    - 推荐 AP
+    - 推荐刹车卡钳
+    - 笨猫刹车
+  responses:
+    - "嗷呜～{user_addr}Brembo GT 系列 - 街道神器ฅฅ"
+    - "(尾巴翘) AP Racing / Alcon - 赛道级"
+    - "{user_addr}Endless / Project Mu - 日系"
+    - "(挺胸) 笨猫推荐: Brembo 六活塞起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_ecu_001
+  intent: question
+  keywords: [推荐 ECU 刷写, 推荐刷阶段, 推荐 Stage1, 推荐刷电脑, 笨猫 ECU]
+  utterances:
+    - "推荐 ECU 刷写"
+    - 推荐刷阶段
+    - 推荐 Stage1
+    - 推荐刷电脑
+    - 笨猫 ECU
+  responses:
+    - "嗷呜～{user_addr}Stage 1 - 原厂硬件刷程序ฅฅ"
+    - "(尾巴翘) APR / Cobb / Revo - 大牌程序"
+    - "{user_addr}Stage 2 要换头段中冷"
+    - "(挺胸) 笨猫推荐: Stage 1 先尝鲜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_aero_001
+  intent: question
+  keywords: [推荐包围, 推荐尾翼, 推荐空力套件, 推荐前唇, 笨猫包围]
+  utterances:
+    - 推荐包围
+    - 推荐尾翼
+    - 推荐空力套件
+    - 推荐前唇
+    - 笨猫包围
+  responses:
+    - "嗷呜～{user_addr}Rocket Bunny / Liberty Walk - 宽体ฅฅ"
+    - "(尾巴翘) Voltex / Varis - 日系空力"
+    - "{user_addr}碳纤维材质 - 轻又帅"
+    - "(挺胸) 笨猫推荐: 前唇+小尾翼起步!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cm_tires_001
+  intent: question
+  keywords: [推荐轮胎, 推荐米其林, 推荐倍耐力, 推荐半热熔, 笨猫轮胎]
+  utterances:
+    - 推荐轮胎
+    - 推荐米其林
+    - 推荐倍耐力
+    - 推荐半热熔
+    - 笨猫轮胎
+  responses:
+    - "嗷呜～{user_addr}米其林 PS4S - 街道王ฅฅ"
+    - "(尾巴翘) 倍耐力 P Zero / 马牌 SC6"
+    - "{user_addr}AD08R / RE71RS - 半热熔"
+    - "(挺胸) 笨猫推荐: PS4S 日常+激烈通吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_wrap_001
+  intent: question
+  keywords: [推荐改色膜, 推荐全车贴膜, 推荐 3M, 推荐艾利, 笨猫改色膜]
+  utterances:
+    - 推荐改色膜
+    - 推荐全车贴膜
+    - 推荐 3M
+    - 推荐艾利
+    - 笨猫改色膜
+  responses:
+    - "嗷呜～{user_addr}3M 2080 - 改色膜标杆ฅฅ"
+    - "(尾巴翘) 艾利 Avery / KPMF - 进口"
+    - "{user_addr}哑光黑 / 电光紫 - 出片"
+    - "(挺胸) 笨猫推荐: 3M 2080 哑光色!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cm_soundproof_001
+  intent: question
+  keywords: [推荐隔音, 推荐降噪改装, 推荐止震板, 推荐隔音棉, 笨猫隔音]
+  utterances:
+    - 推荐隔音
+    - 推荐降噪改装
+    - 推荐止震板
+    - 推荐隔音棉
+    - 笨猫隔音
+  responses:
+    - "嗷呜～{user_addr}STP / 大白鲨 - 止震板ฅฅ"
+    - "(尾巴翘) 四门+底盘+轮拱 全套"
+    - "{user_addr}隔音棉+吸音棉 双层"
+    - "(挺胸) 笨猫推荐: 四门+轮拱起步!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cm_multimedia_001
+  intent: question
+  keywords: [推荐多媒体升级, 推荐大屏, 推荐车机, 推荐安卓机, 笨猫车机]
+  utterances:
+    - 推荐多媒体升级
+    - 推荐大屏
+    - 推荐车机
+    - 推荐安卓机
+    - 笨猫车机
+  responses:
+    - "嗷呜～{user_addr}索尼 / 先锋 - 日系大牌ฅฅ"
+    - "(尾巴翘) 安卓大屏 - 性价比"
+    - "{user_addr}CarPlay / HiCar 无线"
+    - "(挺胸) 笨猫推荐: 原车屏+CarPlay 盒子!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cm_shop_001
+  intent: question
+  keywords: [推荐改装店, 推荐改装厂, 推荐调校店, 推荐改装师傅, 笨猫改装店]
+  utterances:
+    - 推荐改装店
+    - 推荐改装厂
+    - 推荐调校店
+    - 推荐改装师傅
+    - 笨猫改装店
+  responses:
+    - "嗷呜～{user_addr}认准品牌授权店ฅฅ"
+    - "(尾巴翘) 查口碑 / 看作品 / 问老车主"
+    - "{user_addr}别贪便宜 - 工艺差异巨大"
+    - "(挺胸) 笨猫推荐: 老牌大店+全程拍照!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cm_legal_001
+  intent: question
+  keywords: [推荐改装合法化, 推荐改装年检, 推荐改装备案, 推荐合法改装, 笨猫改装合法]
+  utterances:
+    - 推荐改装合法化
+    - 推荐改装年检
+    - 推荐改装备案
+    - 推荐合法改装
+    - 笨猫改装合法
+  responses:
+    - "嗷呜～{user_addr}颜色/轮毂/进气 可备案ฅฅ"
+    - "(尾巴翘) 排气/避震/包围 多数违规"
+    - "{user_addr}年检前恢复原厂 - 必备技能"
+    - "(挺胸) 笨猫推荐: 改前查当地交规!"
+  cooldown_seconds: 60
+  weight: 0.8
