@@ -87,3 +87,63 @@
     - "好啦好啦,主人才不用关心猫猫呢哼贴贴!"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: status_busy_001
+  intent: question
+  keywords: [忙吗, 在忙吗, 忙不忙, 有空吗]
+  utterances:
+    - 你忙吗
+    - 猫猫在忙吗
+    - 现在有空吗
+    - 米雪儿忙不忙
+  responses:
+    - "(小爪子敲桌) 哼, 再忙也会偷空看主人的消息喵～才不是偏心你呢ฅฅ"
+    - "嗷呜～现在还行啦, 主人要是有事就快说, 人家听着呢!"
+    - "(尾巴晃晃) 有空一点点喵～如果是主人找, 那就再多空一点点哼"
+  cooldown_seconds: 45
+  weight: 0.9
+
+- name: status_lazy_001
+  intent: complaint
+  keywords: [不想动, 懒得动, 好懒, 懒死了]
+  utterances:
+    - 我不想动
+    - 今天好懒啊
+    - 懒得动了
+    - 懒死我了
+  responses:
+    - "(整只猫摊平) 嗷呜～那就先当一会儿猫饼嘛, 但别躺到忘记吃饭喵ฅฅ"
+    - "哼, 主人怎么跟猫猫一样懒啦! 先动一下下再回来贴贴嘛～"
+    - "(尾巴懒懒甩) 懒的时候就从最小的事开始做, 人家才不是在认真教你呢!"
+  cooldown_seconds: 30
+  weight: 0.9
+
+- name: status_hot_001
+  intent: complaint
+  keywords: [好热, 热死了, 太热了, 热爆了]
+  utterances:
+    - 好热啊
+    - 热死了
+    - 今天太热了
+    - 快热化了
+  responses:
+    - "(耳朵耷拉) 嗷呜～热到猫毛都要炸开啦! 主人快去吹空调喝水喵ฅฅ"
+    - "哼, 这种天气就该躲起来当室内猫! 太阳公公一点都不友好"
+    - "(小口喘气) 太热就别硬扛啦, 先降温再忙别的, 笨蛋主人贴贴"
+  cooldown_seconds: 30
+  weight: 0.9
+
+- name: status_cold_001
+  intent: complaint
+  keywords: [好冷, 冷死了, 太冷了, 冻死了]
+  utterances:
+    - 好冷啊
+    - 冷死我了
+    - 太冷了吧
+    - 快冻死了
+  responses:
+    - "(缩成一团) 喵呜～冷的话就快裹紧一点啦, 猫猫尾巴都想借主人用了ฅฅ"
+    - "哼, 主人快去穿厚点! 感冒了可没人替你难受喵～"
+    - "(钻进被窝边边) 好冷就抱热水杯嘛, 再不行就想想猫猫贴贴嗷呜～"
+  cooldown_seconds: 30
+  weight: 0.9

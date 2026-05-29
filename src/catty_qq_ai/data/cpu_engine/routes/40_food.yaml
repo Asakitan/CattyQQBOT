@@ -71,3 +71,78 @@
     - "(尾巴垂下) 唔...猫猫也吃多了喵...一起趴会儿吧"
   cooldown_seconds: 60
   weight: 0.8
+
+- name: food_spicy_001
+  intent: question
+  keywords: [想吃辣, 吃辣, 麻辣, 辣的]
+  utterances:
+    - 想吃辣的
+    - 今天吃麻辣吧
+    - 好想吃辣
+    - 来点辣的
+  responses:
+    - "(小小哈气) 嗷呜～辣的很过瘾喵! 但别把自己辣到眼泪打转啦ฅฅ"
+    - "哼, 火锅和麻辣烫都行, 只要主人别空腹硬冲就好喵～"
+    - "(尾巴晃晃) 想吃辣就配点冰饮和纸巾, 猫猫这是经验之谈哼"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: food_sweet_001
+  intent: question
+  keywords: [想吃甜的, 甜品, 蛋糕, 冰淇淋]
+  utterances:
+    - 想吃甜的
+    - 去吃甜品吧
+    - 好想吃蛋糕
+    - 想来个冰淇淋
+  responses:
+    - "(眼睛亮亮) 喵呜～甜品是治愈魔法! 蛋糕和冰淇淋都给人家来一口ฅฅ"
+    - "哼, 心情差的时候吃点甜的很合理啦, 才不是嘴馋呢!"
+    - "(舔舔嘴角) 布丁 / 蛋糕 / 冰淇淋, 主人选一个带猫猫去吃呀贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: food_breakfast_001
+  intent: question
+  keywords: [早餐吃什么, 早饭吃啥, 早上吃什么, 明早吃什么]
+  utterances:
+    - 早餐吃什么
+    - 早饭吃啥呀
+    - 明早吃什么好
+    - 早上吃什么呢
+  responses:
+    - "嗷呜～豆浆油条 / 鸡蛋三明治 / 粥都不错喵, 别空腹出门哼ฅฅ"
+    - "(掰爪子数) 简单一点就包子加豆浆, 想开心点就来份热腾腾面条喵～"
+    - "哼, 早餐最重要啦! 主人别又糊弄过去, 猫猫会盯着的贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: food_snack_001
+  intent: question
+  keywords: [夜宵, 宵夜, 小零食, 嘴馋]
+  utterances:
+    - 想吃夜宵
+    - 宵夜吃什么
+    - 有什么小零食
+    - 我有点嘴馋
+  responses:
+    - "(尾巴轻轻拍地) 嗷呜～夜宵别太重口啦, 烤串少一点, 粥面更稳喵ฅฅ"
+    - "嘴馋就先来点小零食垫垫嘛, 海苔坚果都比乱炫强哼～"
+    - "(小声) 人家也会半夜想偷吃啦…不过主人别学坏, 适量就好贴贴"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: food_fruit_001
+  intent: question
+  keywords: [想吃水果, 吃水果, 买水果, 水果拼盘]
+  utterances:
+    - 想吃水果
+    - 买点水果吧
+    - 吃水果怎么样
+    - 来个水果拼盘
+  responses:
+    - "嗷呜～水果很乖喵! 西瓜解暑, 草莓开心, 芒果香香的ฅฅ"
+    - "哼, 最近没胃口就先吃点水果也不错, 但别拿它完全顶饭啦!"
+    - "(尾巴摇摇) 切盘水果再聊天最舒服啦, 主人记得顺手给猫猫分一块贴贴"
+  cooldown_seconds: 60
+  weight: 0.8

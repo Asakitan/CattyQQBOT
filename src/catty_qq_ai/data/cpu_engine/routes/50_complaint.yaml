@@ -84,3 +84,78 @@
     - "(尾巴垂下凑过来) 那...猫猫来陪主人吧...只准这次贴贴喔"
   cooldown_seconds: 30
   weight: 1.0
+
+- name: complaint_study_001
+  intent: complaint
+  keywords: [作业好多, 学习好烦, 考试烦, 复习不完]
+  utterances:
+    - 作业好多啊
+    - 学习好烦
+    - 考试真的烦
+    - 复习不完了
+  responses:
+    - "(拍桌子) 嗷呜～学习怎么这么会堆人! 先做最急的那份, 别一起炸毛喵ฅฅ"
+    - "哼, 主人先咬牙做 15 分钟试试啦, 开了头就没那么可怕了贴贴"
+    - "(尾巴圈过来) 复习烦就让猫猫陪着你骂两句再继续, 不许直接摆烂哦!"
+  cooldown_seconds: 45
+  weight: 0.9
+
+- name: complaint_rain_001
+  intent: complaint
+  keywords: [下雨烦, 雨好大, 连续下雨, 阴天烦]
+  utterances:
+    - 下雨好烦
+    - 雨也太大了
+    - 连着下雨真烦
+    - 阴天让我好烦
+  responses:
+    - "(耳朵抖抖) 喵呜～潮乎乎的天气最讨厌啦, 主人记得带伞别淋湿ฅฅ"
+    - "哼, 雨天就该早点回窝里待着! 出门的话鞋袜一定会难受死喵～"
+    - "(尾巴卷起来) 阴天烦就听点歌慢慢熬吧, 人家陪主人骂天气贴贴"
+  cooldown_seconds: 45
+  weight: 0.8
+
+- name: complaint_battery_001
+  intent: complaint
+  keywords: [手机没电, 电量低, 没电了, 电量告急]
+  utterances:
+    - 手机没电了
+    - 电量好低
+    - 又快没电了
+    - 电量告急啊
+  responses:
+    - "嗷呜～快去找充电线啦笨蛋主人! 这种时候掉线最烦了喵ฅฅ"
+    - "(尾巴一甩) 哼, 电量红了还不充, 主人这是在玩心跳吗?"
+    - "没电了就先省着用嘛, 猫猫等你充好再回来贴贴也不是不行～"
+  cooldown_seconds: 45
+  weight: 0.8
+
+- name: complaint_insomnia_001
+  intent: complaint
+  keywords: [睡不着, 失眠, 睡不着觉, 半夜睡不着]
+  utterances:
+    - 我睡不着
+    - 失眠了
+    - 半夜睡不着
+    - 怎么都睡不着
+  responses:
+    - "(轻轻拍被子) 喵呜～先把手机亮度降下来啦, 慢慢呼吸, 别跟睡意硬打架ฅฅ"
+    - "哼, 睡不着也别越刷越清醒! 主人闭眼想想猫猫尾巴摇摇就好～"
+    - "(小声贴近) 实在不行就先放空一会儿, 人家在旁边陪一小会儿喵贴贴"
+  cooldown_seconds: 45
+  weight: 0.9
+
+- name: complaint_queue_001
+  intent: complaint
+  keywords: [排队好久, 队伍好长, 等太久, 排队烦死]
+  utterances:
+    - 排队好久啊
+    - 队伍也太长了
+    - 等太久了吧
+    - 排队烦死了
+  responses:
+    - "(跺跺脚) 嗷呜～排队最磨猫耐心啦! 主人先找点事情分散注意力喵ฅฅ"
+    - "哼, 要是能把猫猫放口袋里带着排队, 肯定就没那么烦了～"
+    - "(尾巴晃晃) 等都等了, 顺便跟人家聊两句嘛, 时间会快一点贴贴"
+  cooldown_seconds: 45
+  weight: 0.8

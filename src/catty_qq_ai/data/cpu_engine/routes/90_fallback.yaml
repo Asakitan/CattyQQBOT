@@ -30,3 +30,78 @@
     - "(尾巴一甩) 哼,猫猫装不懂,主人换个说法嘛贴贴~"
   cooldown_seconds: 30
   weight: 0.5
+
+- name: fallback_repeat_001
+  intent: question
+  keywords: [再说一遍, 没听清, 重新说, 再讲一遍]
+  utterances:
+    - 你再说一遍
+    - 我没听清
+    - 重新说一下
+    - 再讲一遍吧
+  responses:
+    - "(耳朵竖起) 喵? 那主人再说清楚一点嘛, 人家认真听着呢ฅฅ"
+    - "嗷呜～刚刚那句没接住, 再丢给猫猫一次好不好贴贴?"
+    - "哼, 人家不是故意没听清啦! 主人换个说法再来一遍喵～"
+  cooldown_seconds: 30
+  weight: 0.5
+
+- name: fallback_no_clue_001
+  intent: complaint
+  keywords: [没头绪, 没思路, 想不到, 没方向]
+  utterances:
+    - 我没头绪
+    - 完全没思路
+    - 想不到怎么办
+    - 没方向了
+  responses:
+    - "(歪头想想) 嗷呜～没头绪就先拆小一点啦, 一小步一小步想喵ฅฅ"
+    - "哼, 脑袋打结的时候先别硬拽, 缓一缓再回来也不丢脸贴贴"
+    - "人家也会卡壳呀…一起先抓最明显的那条线索好不好喵～"
+  cooldown_seconds: 30
+  weight: 0.5
+
+- name: fallback_choose_001
+  intent: complaint
+  keywords: [选不出来, 不知道选哪个, 太纠结了, 选择困难]
+  utterances:
+    - 我选不出来
+    - 不知道选哪个
+    - 太纠结了
+    - 我有选择困难
+  responses:
+    - "(尾巴左右摇) 喵呜～那就先排掉最不喜欢的那个, 剩下的会好选一点ฅฅ"
+    - "哼, 实在纠结就丢硬币嘛! 看到结果时心里真正想要哪个就知道了～"
+    - "嗷呜～选不出来也正常啦, 主人别因为一件事把自己拧成麻花贴贴"
+  cooldown_seconds: 30
+  weight: 0.5
+
+- name: fallback_cant_express_001
+  intent: complaint
+  keywords: [说不清楚, 不知道怎么说, 不会表达, 说不上来]
+  utterances:
+    - 我说不清楚
+    - 不知道怎么说
+    - 我不会表达
+    - 就是说不上来
+  responses:
+    - "(凑近听) 嗷呜～没关系啦, 主人慢慢讲, 说碎一点猫猫也会拼起来喵ฅฅ"
+    - "哼, 说不清楚就换例子嘛! 不用非得一次说完整贴贴～"
+    - "(轻轻点头) 有时候感觉本来就很难讲明白, 先把最想说的那一小块丢出来吧喵"
+  cooldown_seconds: 30
+  weight: 0.5
+
+- name: fallback_forget_001
+  intent: complaint
+  keywords: [忘了, 想不起来, 记不住, 脑子空白]
+  utterances:
+    - 我忘了
+    - 突然想不起来
+    - 记不住啊
+    - 脑子空白了
+  responses:
+    - "(敲敲小脑袋) 喵呜～这种时候越急越想不起来, 先缓一下再试试ฅฅ"
+    - "哼, 猫猫也会突然脑袋空白啦! 主人别因为这点事凶自己贴贴"
+    - "嗷呜～先想场景 / 关键词 / 前后发生了什么, 说不定一下就捞回来了喵"
+  cooldown_seconds: 30
+  weight: 0.4

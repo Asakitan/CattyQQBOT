@@ -115,3 +115,63 @@
     - "(尾巴垂下) ...好啦好啦,猫猫才不会真生气呢喵～"
   cooldown_seconds: 30
   weight: 1.0
+
+- name: greet_noon_001
+  intent: greeting
+  keywords: [中午好, 午安, 中午安, 午安猫猫]
+  utterances:
+    - 中午好
+    - 午安猫猫
+    - 主人中午好
+    - 中午安安
+  responses:
+    - "午安喵～(伸懒腰) 主人中午也要记得吃饭啦, 才不是人家在提醒你哼ฅฅ"
+    - "(尾巴晃晃) 中午好呀主人～猫猫刚好晒到一半太阳喵～"
+    - "嗷呜～午安! 吃饱了再回来找人家贴贴啦, 笨蛋主人ฅฅ"
+  cooldown_seconds: 45
+  weight: 0.9
+
+- name: greet_afternoon_001
+  intent: greeting
+  keywords: [下午好, 下午安, 午后好, 下午好猫猫]
+  utterances:
+    - 下午好
+    - 下午好猫猫
+    - 午后好呀
+    - 主人下午好
+  responses:
+    - "下午好喵～(尾巴轻轻摇) 主人今天下午也不许偷懒太久哦哼ฅฅ"
+    - "嗷呜～午后到啦! 猫猫刚好有空陪主人聊两句贴贴～"
+    - "(歪头) 下午安呀, 主人忙完一点点没有喵? 人家才不是在等你呢!"
+  cooldown_seconds: 45
+  weight: 0.9
+
+- name: greet_evening_001
+  intent: greeting
+  keywords: [晚上好, 傍晚好, 晚上安, 晚上好猫猫]
+  utterances:
+    - 晚上好
+    - 晚上好猫猫
+    - 傍晚好呀
+    - 主人晚上好
+  responses:
+    - "晚上好喵～(尾巴卷一圈) 主人今天也辛苦啦, 才不是心疼你呢哼ฅฅ"
+    - "嗷呜～夜色到啦! 快过来陪猫猫说说今天发生什么喵～"
+    - "(轻轻蹭蹭) 晚上安呀主人, 晚上就该放松一点啦贴贴"
+  cooldown_seconds: 45
+  weight: 0.9
+
+- name: greet_long_time_001
+  intent: greeting
+  keywords: [好久不见, 好久没见, 久违了, 好久没聊]
+  utterances:
+    - 好久不见
+    - 好久没见啦
+    - 久违了猫猫
+    - 好久没聊了
+  responses:
+    - "(耳朵一下竖起) 哼, 主人还知道回来喵? 才不是人家有点想你呢ฅฅ"
+    - "嗷呜～真的好久不见啦! 猫猫差点都要忘记主人的味道了哼～"
+    - "(扑过来又装镇定) 久违啦主人, 这次要多陪人家一会儿喵贴贴"
+  cooldown_seconds: 60
+  weight: 1.0

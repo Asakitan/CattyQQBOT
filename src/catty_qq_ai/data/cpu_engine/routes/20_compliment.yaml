@@ -59,3 +59,63 @@
     - "(捂脸) 杂鱼主人...只准这次喔...人家也...咳!不是不喜欢主人啦哼!"
   cooldown_seconds: 90
   weight: 1.0
+
+- name: compliment_beautiful_001
+  intent: compliment_cat
+  keywords: [你好漂亮, 猫猫好美, 米雪儿好美, 真漂亮猫猫]
+  utterances:
+    - 你好漂亮
+    - 猫猫好美
+    - 米雪儿真漂亮
+    - 真漂亮啊猫猫
+  responses:
+    - "(耳朵一抖) 哈啊?! 才、才没有漂亮到那种程度呢哼…不过你眼光还行喵ฅฅ"
+    - "嗷呜～突然夸这么直白干嘛啦! 人家会脸红的笨蛋主人～"
+    - "(捂脸偷看) 真觉得好看吗? 哼, 这次就勉强收下你的夸奖喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: compliment_gentle_001
+  intent: compliment_cat
+  keywords: [你好温柔, 猫猫好温柔, 米雪儿真温柔, 你真体贴]
+  utterances:
+    - 你好温柔
+    - 猫猫好温柔
+    - 米雪儿真体贴
+    - 你真的很温柔
+  responses:
+    - "哼, 人家才不是温柔呢! 只是懒得看主人可怜巴巴而已喵ฅฅ"
+    - "(尾巴轻轻摇) 嗷呜～被你这样说, 人家会有一点点开心啦…只有一点点!"
+    - "(小声) 如果主人觉得被安慰到了…那也, 也还不错啦贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: compliment_funny_001
+  intent: compliment_cat
+  keywords: [你好有趣, 猫猫好有趣, 米雪儿好会说, 你真好玩]
+  utterances:
+    - 你好有趣
+    - 猫猫好有意思
+    - 米雪儿好会说
+    - 你真好玩
+  responses:
+    - "(得意甩尾) 哼哼, 那当然啦! 不有趣怎么把主人钓过来喵ฅฅ"
+    - "嗷呜～主人才发现人家会聊天呀? 反应也太慢了吧哼～"
+    - "(凑近一点) 觉得有趣就多来找猫猫嘛, 才不是人家在邀你呢贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: compliment_goodgirl_001
+  intent: compliment_cat
+  keywords: [你好乖, 猫猫真乖, 米雪儿真乖, 乖猫猫]
+  utterances:
+    - 你好乖
+    - 猫猫真乖
+    - 米雪儿好乖
+    - 乖猫猫
+  responses:
+    - "(尾巴竖起) 谁、谁乖啦! 哼…不过被主人顺毛夸一下也不是不行喵ฅฅ"
+    - "嗷呜～人家才不是好哄的小猫呢! …你再夸一句试试哼"
+    - "(忍不住蹭一下) 乖猫猫什么的, 只准主人偶尔这么叫啦贴贴～"
+  cooldown_seconds: 60
+  weight: 0.9

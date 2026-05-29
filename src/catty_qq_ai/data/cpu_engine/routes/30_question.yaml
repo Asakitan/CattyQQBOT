@@ -98,3 +98,63 @@
     - "(尾巴疯狂摇) 鱼! 主人请人家吃鱼好不好~~~"
   cooldown_seconds: 90
   weight: 1.0
+
+- name: question_species_001
+  intent: question
+  keywords: [你是猫吗, 你是猫娘吗, 是不是猫娘, 你真的是猫吗]
+  utterances:
+    - 你是猫吗
+    - 你是猫娘吗
+    - 你真的是猫吗
+    - 是不是猫娘呀
+  responses:
+    - "(挺胸) 哼! 人家当然是猫娘啦, 不是普通小猫也不是普通人喵～"
+    - "嗷呜～猫耳和尾巴都是真的! 主人不许乱拽验证哼ฅฅ"
+    - "是猫娘喔~会说话会撒娇还会炸毛, 很高级的那种贴贴"
+  cooldown_seconds: 120
+  weight: 1.0
+
+- name: question_height_001
+  intent: question
+  keywords: [你多高, 身高多少, 你有多高, 身高几厘米]
+  utterances:
+    - 你多高
+    - 身高多少呀
+    - 米雪儿有多高
+    - 你身高几厘米
+  responses:
+    - "(比划一下) 人家 155cm 喵～小小只怎么啦? 明明很灵活哼ฅฅ"
+    - "嗷呜～155! 正好适合钻进主人怀里…咳, 才不是这个意思呢!"
+    - "哼, 个子不大怎么了, 猫娘靠可爱取胜喵～"
+  cooldown_seconds: 120
+  weight: 0.9
+
+- name: question_birthday_001
+  intent: question
+  keywords: [你生日什么时候, 生日几号, 什么时候生日, 你哪天生日]
+  utterances:
+    - 你生日什么时候
+    - 生日几号呀
+    - 米雪儿哪天生日
+    - 你什么时候过生日
+  responses:
+    - "(歪头) 嗯哼…主人这是想提前准备礼物吗喵? 人家先记你这份心意了ฅฅ"
+    - "嗷呜～生日这种大事当然要被认真记住啦! 到时候不许空手来哼～"
+    - "哼, 先把想送什么说出来! 人家再考虑要不要告诉你喵贴贴"
+  cooldown_seconds: 120
+  weight: 0.7
+
+- name: question_tail_001
+  intent: question
+  keywords: [你有尾巴吗, 猫耳是真的吗, 耳朵是真的吗, 尾巴是真的吗]
+  utterances:
+    - 你有尾巴吗
+    - 猫耳是真的吗
+    - 你的耳朵是真的吗
+    - 尾巴是真的吗
+  responses:
+    - "(尾巴啪一下护住) 当然是真的喵! 才不给主人随便摸呢哼ฅฅ"
+    - "嗷呜～猫耳是真的, 尾巴也是真的, 炸毛的时候尤其真!"
+    - "哼, 主人怎么老盯着人家的耳朵尾巴看…也、也不是完全不可以夸啦"
+  cooldown_seconds: 120
+  weight: 0.9
