@@ -1,0 +1,206 @@
+# 狗品种深度 routes (S6 R562 NLU 节点扩充, 第五十六周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: dbd_large_gentle_001
+  intent: question
+  keywords: [推荐金毛, 推荐拉布拉多, 推荐大型温顺犬, 推荐导盲犬, 笨猫金毛]
+  utterances:
+    - "{user_addr}推荐金毛"
+    - "{user_addr}推荐拉布拉多"
+    - "{user_addr}推荐大型温顺犬"
+    - "{user_addr}推荐导盲犬"
+    - "{user_addr}笨猫金毛"
+  responses:
+    - "嗷呜～{user_addr}金毛 / 拉布拉多 - 温顺暖男ฅฅ"
+    - "(尾巴翘) 性格亲人 / 适合家庭"
+    - "{user_addr}导盲犬首选 / 智商高"
+    - "(挺胸) 笨猫推荐: 金毛新手友好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dbd_small_001
+  intent: question
+  keywords: [推荐柯基, 推荐巴哥, 推荐法斗, 推荐小型犬, 笨猫柯基]
+  utterances:
+    - "{user_addr}推荐柯基"
+    - "{user_addr}推荐巴哥"
+    - "{user_addr}推荐法斗"
+    - "{user_addr}推荐小型犬"
+    - "{user_addr}笨猫柯基"
+  responses:
+    - "嗷呜～{user_addr}柯基 - 小短腿大屁股ฅฅ"
+    - "(尾巴翘) 巴哥 / 法斗 - 表情包"
+    - "{user_addr}小型公寓友好"
+    - "(挺胸) 笨猫推荐: 柯基蜜桃臀!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dbd_smart_001
+  intent: question
+  keywords: [推荐边牧, 推荐智商高狗, 推荐边境牧羊犬, 推荐聪明狗, 笨猫边牧]
+  utterances:
+    - "{user_addr}推荐边牧"
+    - "{user_addr}推荐智商高狗"
+    - "{user_addr}推荐边境牧羊犬"
+    - "{user_addr}推荐聪明狗"
+    - "{user_addr}笨猫边牧"
+  responses:
+    - "嗷呜～{user_addr}边牧 - 犬类智商 No.1ฅฅ"
+    - "(尾巴翘) 学指令 / 能上 Frisbee 比赛"
+    - "{user_addr}需要大量运动 + 脑力游戏"
+    - "(挺胸) 笨猫推荐: 边牧聪明又黏人!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dbd_nonshed_001
+  intent: question
+  keywords: [推荐比熊, 推荐雪纳瑞, 推荐不掉毛狗, 推荐贵宾犬, 笨猫比熊]
+  utterances:
+    - "{user_addr}推荐比熊"
+    - "{user_addr}推荐雪纳瑞"
+    - "{user_addr}推荐不掉毛狗"
+    - "{user_addr}推荐贵宾犬"
+    - "{user_addr}笨猫比熊"
+  responses:
+    - "嗷呜～{user_addr}比熊 / 贵宾 - 不掉毛ฅฅ"
+    - "(尾巴翘) 雪纳瑞 - 老爷爷胡子"
+    - "{user_addr}过敏星人友好"
+    - "(挺胸) 笨猫推荐: 比熊棉花糖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dbd_husky_001
+  intent: question
+  keywords: [推荐哈士奇, 推荐萨摩耶, 推荐二哈, 推荐雪橇犬, 笨猫哈士奇]
+  utterances:
+    - "{user_addr}推荐哈士奇"
+    - "{user_addr}推荐萨摩耶"
+    - "{user_addr}推荐二哈"
+    - "{user_addr}推荐雪橇犬"
+    - "{user_addr}笨猫哈士奇"
+  responses:
+    - "嗷呜～{user_addr}哈士奇 - 拆家王ฅฅ"
+    - "(尾巴翘) 萨摩耶 - 微笑天使"
+    - "{user_addr}阿拉斯加 - 三傻凑齐"
+    - "(挺胸) 笨猫推荐: 萨摩耶白团子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dbd_chinese_001
+  intent: question
+  keywords: [推荐中华田园犬, 推荐大黄狗, 推荐土狗, 推荐柴犬, 笨猫田园犬]
+  utterances:
+    - "{user_addr}推荐中华田园犬"
+    - "{user_addr}推荐大黄狗"
+    - "{user_addr}推荐土狗"
+    - "{user_addr}推荐柴犬"
+    - "{user_addr}笨猫田园犬"
+  responses:
+    - "嗷呜～{user_addr}中华田园犬 - 大黄狗ฅฅ"
+    - "(尾巴翘) 体质强 / 不挑食 / 忠诚"
+    - "{user_addr}土狗最懂事 / 救助绝配"
+    - "(挺胸) 笨猫推荐: 大黄最暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dbd_large_cold_001
+  intent: question
+  keywords: [推荐古牧, 推荐大白熊, 推荐圣伯纳, 推荐大型耐寒犬, 笨猫古牧]
+  utterances:
+    - "{user_addr}推荐古牧"
+    - "{user_addr}推荐大白熊"
+    - "{user_addr}推荐圣伯纳"
+    - "{user_addr}推荐大型耐寒犬"
+    - "{user_addr}笨猫古牧"
+  responses:
+    - "嗷呜～{user_addr}古牧 - 长发飘飘ฅฅ"
+    - "(尾巴翘) 大白熊 / 圣伯纳 - 巨型"
+    - "{user_addr}耐寒 / 适合北方"
+    - "(挺胸) 笨猫推荐: 大白熊毛茸茸!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dbd_guard_001
+  intent: question
+  keywords: [推荐杜宾, 推荐罗威纳, 推荐护卫犬, 推荐德牧, 笨猫杜宾]
+  utterances:
+    - "{user_addr}推荐杜宾"
+    - "{user_addr}推荐罗威纳"
+    - "{user_addr}推荐护卫犬"
+    - "{user_addr}推荐德牧"
+    - "{user_addr}笨猫杜宾"
+  responses:
+    - "嗷呜～{user_addr}杜宾 / 罗威纳 - 护卫之王ฅฅ"
+    - "(尾巴翘) 德牧 - 警犬常用"
+    - "{user_addr}需要专业训练 / 服从性高"
+    - "(挺胸) 笨猫推荐: 德牧忠犬!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dbd_white_fluffy_001
+  intent: question
+  keywords: [推荐银狐, 推荐白色犬, 推荐萨摩比熊, 推荐白团子, 笨猫银狐]
+  utterances:
+    - "{user_addr}推荐银狐"
+    - "{user_addr}推荐白色犬"
+    - "{user_addr}推荐萨摩比熊"
+    - "{user_addr}推荐白团子"
+    - "{user_addr}笨猫银狐"
+  responses:
+    - "嗷呜～{user_addr}银狐 - 日本尖嘴ฅฅ"
+    - "(尾巴翘) 比熊 / 萨摩 - 白团组合"
+    - "{user_addr}毛色雪白 / 颜值天花板"
+    - "(挺胸) 笨猫推荐: 银狐小尖嘴!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: dbd_working_001
+  intent: question
+  keywords: [推荐视障工作犬, 推荐导盲犬选择, 推荐辅助犬, 推荐工作犬种, 笨猫导盲犬]
+  utterances:
+    - "{user_addr}推荐视障工作犬"
+    - "{user_addr}推荐导盲犬选择"
+    - "{user_addr}推荐辅助犬"
+    - "{user_addr}推荐工作犬种"
+    - "{user_addr}笨猫导盲犬"
+  responses:
+    - "嗷呜～{user_addr}拉布拉多 - 导盲犬主力ฅฅ"
+    - "(尾巴翘) 金毛 / 德牧 - 候选"
+    - "{user_addr}性格温顺 + 服从性高"
+    - "(挺胸) 笨猫推荐: 拉拉是温柔战士!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dbd_genetic_001
+  intent: question
+  keywords: [推荐狗品种基因病预防, 推荐遗传病筛查, 推荐健康犬种, 推荐避坑品种, 笨猫基因病]
+  utterances:
+    - "{user_addr}推荐狗品种基因病预防"
+    - "{user_addr}推荐遗传病筛查"
+    - "{user_addr}推荐健康犬种"
+    - "{user_addr}推荐避坑品种"
+    - "{user_addr}笨猫基因病"
+  responses:
+    - "嗷呜～{user_addr}金毛 / 拉布拉多 - 髋关节查ฅฅ"
+    - "(尾巴翘) 法斗 / 巴哥 - 呼吸道隐患"
+    - "{user_addr}选犬舍要看 CHD / 心脏 / 眼"
+    - "(挺胸) 笨猫推荐: 田园犬基因强!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dbd_size_weight_001
+  intent: question
+  keywords: [推荐狗体型重量对照, 推荐狗大小, 推荐狗肩高, 推荐犬种尺寸, 笨猫体型对照]
+  utterances:
+    - "{user_addr}推荐狗体型重量对照"
+    - "{user_addr}推荐狗大小"
+    - "{user_addr}推荐狗肩高"
+    - "{user_addr}推荐犬种尺寸"
+    - "{user_addr}笨猫体型对照"
+  responses:
+    - "嗷呜～{user_addr}小型: 比熊柯基 5-12kgฅฅ"
+    - "(尾巴翘) 中型: 边牧柴犬 15-25kg"
+    - "{user_addr}大型: 金毛德牧 25-40kg"
+    - "(挺胸) 笨猫推荐: 按住房面积选!"
+  cooldown_seconds: 60
+  weight: 0.8

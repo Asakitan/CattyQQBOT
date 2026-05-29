@@ -1,0 +1,206 @@
+# 宠物美容 routes (S6 R564 NLU 节点扩充, 第五十六周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pg_chain_001
+  intent: question
+  keywords: [推荐宠物美容, 推荐宠物美容连锁, 推荐宠物店, 推荐 PetSmart, 笨猫宠物美容]
+  utterances:
+    - 推荐宠物美容
+    - 推荐宠物美容连锁
+    - 推荐宠物店
+    - "{user_addr}推荐 PetSmart"
+    - 笨猫宠物美容
+  responses:
+    - "嗷呜～{user_addr}PetSmart / Petco - 北美连锁ฅฅ"
+    - "(尾巴翘) 派多格 / 圣宠 - 国内连锁"
+    - "{user_addr}本地宠物店 - 熟人靠谱"
+    - "(挺胸) 笨猫推荐: 看口碑选老店!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pg_shampoo_001
+  intent: question
+  keywords: [推荐宠物香波, 推荐居家洗澡, 推荐狗狗沐浴露, 推荐猫咪香波, 笨猫宠物香波]
+  utterances:
+    - 推荐宠物香波
+    - 推荐居家洗澡
+    - 推荐狗狗沐浴露
+    - 推荐猫咪香波
+    - 笨猫宠物香波
+  responses:
+    - "嗷呜～{user_addr}Earthbath - 天然温和ฅฅ"
+    - "(尾巴翘) 福摩 / 八千里 / 阿摩斯"
+    - "{user_addr}别用人用 - pH 不同"
+    - "(挺胸) 笨猫推荐: Earthbath 燕麦款!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pg_clipper_001
+  intent: question
+  keywords: [推荐宠物推子, 推荐推剪剃毛, 推荐 Andis, 推荐 Wahl, 笨猫宠物推子]
+  utterances:
+    - 推荐宠物推子
+    - 推荐推剪剃毛
+    - "{user_addr}推荐 Andis"
+    - "{user_addr}推荐 Wahl"
+    - 笨猫宠物推子
+  responses:
+    - "嗷呜～{user_addr}Andis AGC2 - 美容师首选ฅฅ"
+    - "(尾巴翘) Wahl Bravura / Arco"
+    - "{user_addr}国产科德士 - 入门"
+    - "(挺胸) 笨猫推荐: Andis 耐用静音!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pg_nail_001
+  intent: question
+  keywords: [推荐剪指甲工具, 推荐宠物指甲钳, 推荐磨甲器, 推荐 Dremel, 笨猫剪指甲]
+  utterances:
+    - 推荐剪指甲工具
+    - 推荐宠物指甲钳
+    - 推荐磨甲器
+    - "{user_addr}推荐 Dremel"
+    - 笨猫剪指甲
+  responses:
+    - "嗷呜～{user_addr}Millers Forge - 经典指甲钳ฅฅ"
+    - "(尾巴翘) Dremel 7300 - 磨甲器"
+    - "{user_addr}备好止血粉 - 防出血"
+    - "(挺胸) 笨猫推荐: 别剪血线!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pg_dental_001
+  intent: question
+  keywords: [推荐宠物牙膏, 推荐刷牙, 推荐 Virbac, 推荐宠物牙刷, 笨猫宠物刷牙]
+  utterances:
+    - 推荐宠物牙膏
+    - 推荐刷牙
+    - "{user_addr}推荐 Virbac"
+    - 推荐宠物牙刷
+    - 笨猫宠物刷牙
+  responses:
+    - "嗷呜～{user_addr}Virbac CET - 兽医推荐ฅฅ"
+    - "(尾巴翘) Petrodex / Petsmile"
+    - "{user_addr}别用人用 - 含氟有毒"
+    - "(挺胸) 笨猫推荐: 每天刷防牙结石!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pg_flea_001
+  intent: question
+  keywords: [推荐防虱跳蚤, 推荐 Frontline, 推荐福来恩, 推荐大宠爱, 笨猫防跳蚤]
+  utterances:
+    - 推荐防虱跳蚤
+    - "{user_addr}推荐 Frontline"
+    - 推荐福来恩
+    - 推荐大宠爱
+    - 笨猫防跳蚤
+  responses:
+    - "嗷呜～{user_addr}Frontline 福来恩 - 老牌经典ฅฅ"
+    - "(尾巴翘) 大宠爱 / 尼可信 / 超可信"
+    - "{user_addr}滴剂 / 口服 / 项圈三选"
+    - "(挺胸) 笨猫推荐: 每月按时滴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pg_styling_001
+  intent: question
+  keywords: [推荐美容造型, 推荐泰迪修剪, 推荐贵宾造型, 推荐熊宝宝造型, 笨猫宠物造型]
+  utterances:
+    - 推荐美容造型
+    - 推荐泰迪修剪
+    - 推荐贵宾造型
+    - 推荐熊宝宝造型
+    - 笨猫宠物造型
+  responses:
+    - "嗷呜～{user_addr}泰迪熊造型 - 圆滚滚ฅฅ"
+    - "(尾巴翘) 比熊雪球 / 雪纳瑞绅士装"
+    - "{user_addr}西高地裙边 / 萨摩奶白"
+    - "(挺胸) 笨猫推荐: 选适合脸型!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pg_long_hair_001
+  intent: question
+  keywords: [推荐长毛护理, 推荐梳理, 推荐针梳, 推荐排梳, 笨猫长毛护理]
+  utterances:
+    - 推荐长毛护理
+    - 推荐梳理
+    - 推荐针梳
+    - 推荐排梳
+    - 笨猫长毛护理
+  responses:
+    - "嗷呜～{user_addr}针梳 + 排梳 - 双件套ฅฅ"
+    - "(尾巴翘) Chris Christensen - 美容师爱"
+    - "{user_addr}每天 5 分钟防打结"
+    - "(挺胸) 笨猫推荐: 顺毛梳别拉扯!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pg_lint_001
+  intent: question
+  keywords: [推荐沾毛器, 推荐双面胶轮, 推荐除毛刷, 推荐 ChomChom, 笨猫沾毛]
+  utterances:
+    - 推荐沾毛器
+    - 推荐双面胶轮
+    - 推荐除毛刷
+    - "{user_addr}推荐 ChomChom"
+    - 笨猫沾毛
+  responses:
+    - "嗷呜～{user_addr}ChomChom Roller - 神器ฅฅ"
+    - "(尾巴翘) 3M 粘毛器 - 胶纸轮"
+    - "{user_addr}沙发床单天天滚"
+    - "(挺胸) 笨猫推荐: ChomChom 无耗材!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pg_perfume_001
+  intent: question
+  keywords: [推荐宠物香水, 推荐宠物香氛, 推荐除味喷雾, 推荐 Petkin, 笨猫宠物香水]
+  utterances:
+    - 推荐宠物香水
+    - 推荐宠物香氛
+    - 推荐除味喷雾
+    - "{user_addr}推荐 Petkin"
+    - 笨猫宠物香水
+  responses:
+    - "嗷呜～{user_addr}Petkin / Bobbi Panter ฅฅ"
+    - "(尾巴翘) Aesop Animal - 高端"
+    - "{user_addr}选无酒精 / 低敏配方"
+    - "(挺胸) 笨猫推荐: 喷脖子别喷脸!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: pg_seasonal_001
+  intent: question
+  keywords: [推荐季节性梳毛, 推荐换毛季, 推荐去浮毛, 推荐 FURminator, 笨猫换毛季]
+  utterances:
+    - 推荐季节性梳毛
+    - 推荐换毛季
+    - 推荐去浮毛
+    - "{user_addr}推荐 FURminator"
+    - 笨猫换毛季
+  responses:
+    - "嗷呜～{user_addr}FURminator - 去浮毛神器ฅฅ"
+    - "(尾巴翘) 春秋大换毛 - 每天梳"
+    - "{user_addr}吹水机吹浮毛 - 高效"
+    - "(挺胸) 笨猫推荐: 别剃光会伤毛囊!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pg_spa_001
+  intent: question
+  keywords: [推荐宠物 SPA, 推荐臭氧浴, 推荐药浴, 推荐宠物精油, 笨猫宠物 SPA]
+  utterances:
+    - "{user_addr}推荐宠物 SPA"
+    - 推荐臭氧浴
+    - 推荐药浴
+    - 推荐宠物精油
+    - "{user_addr}笨猫宠物 SPA"
+  responses:
+    - "嗷呜～{user_addr}臭氧浴 - 杀菌祛味ฅฅ"
+    - "(尾巴翘) 药浴 - 皮肤病辅助"
+    - "{user_addr}SPA 精油按摩 - 放松"
+    - "(挺胸) 笨猫推荐: 高端店做体验!"
+  cooldown_seconds: 60
+  weight: 0.7

@@ -1,0 +1,206 @@
+# 宠物健康 routes (S6 R566 NLU 节点扩充, 第五十六周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ph_vaccine_001
+  intent: question
+  keywords: [推荐疫苗, 推荐狂犬疫苗, 推荐三联疫苗, 推荐宠物疫苗, 笨猫疫苗]
+  utterances:
+    - 推荐疫苗
+    - 推荐狂犬疫苗
+    - 推荐三联疫苗
+    - 推荐宠物疫苗
+    - 笨猫疫苗
+  responses:
+    - "嗷呜～{user_addr}猫三联 / 狗四联 + 狂犬ฅฅ"
+    - "(尾巴翘) 幼年 3 针 + 每年加强"
+    - "{user_addr}硕腾 / 英特威 / 梅里亚"
+    - "(挺胸) 笨猫推荐: 别省, 命要紧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_deworm_in_001
+  intent: question
+  keywords: [推荐体内驱虫, 推荐拜耳, 推荐打虫药, 推荐宠物驱虫, 笨猫体内驱虫]
+  utterances:
+    - 推荐体内驱虫
+    - 推荐拜耳
+    - 推荐打虫药
+    - 推荐宠物驱虫
+    - 笨猫体内驱虫
+  responses:
+    - "嗷呜～{user_addr}拜耳 Drontal - 经典广谱ฅฅ"
+    - "(尾巴翘) 每 3 个月一次"
+    - "{user_addr}米尔贝霉素 / 吡喹酮"
+    - "(挺胸) 笨猫推荐: 拜耳片剂!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_deworm_out_001
+  intent: question
+  keywords: [推荐体外驱虫, 推荐福来恩, 推荐爱沃克, 推荐大宠爱, 笨猫体外驱虫]
+  utterances:
+    - 推荐体外驱虫
+    - 推荐福来恩
+    - 推荐爱沃克
+    - 推荐大宠爱
+    - 笨猫体外驱虫
+  responses:
+    - "嗷呜～{user_addr}福来恩 Frontline - 滴剂经典ฅฅ"
+    - "(尾巴翘) 爱沃克 / 大宠爱 / 尼可信"
+    - "{user_addr}每月一次防跳蚤蜱虫"
+    - "(挺胸) 笨猫推荐: 福来恩喷剂!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_checkup_001
+  intent: question
+  keywords: [推荐宠物体检, 推荐年度体检, 推荐宠物检查, 推荐健康检查, 笨猫宠物体检]
+  utterances:
+    - 推荐宠物体检
+    - 推荐年度体检
+    - 推荐宠物检查
+    - 推荐健康检查
+    - 笨猫宠物体检
+  responses:
+    - "嗷呜～{user_addr}每年 1 次全面体检ฅฅ"
+    - "(尾巴翘) 血常规 / 生化 / B 超"
+    - "{user_addr}老年宠物半年 1 次"
+    - "(挺胸) 笨猫推荐: 早发现早治!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_neuter_001
+  intent: question
+  keywords: [推荐绝育, 推荐宠物绝育, 推荐绝育月龄, 推荐母猫绝育, 笨猫绝育]
+  utterances:
+    - 推荐绝育
+    - 推荐宠物绝育
+    - 推荐绝育月龄
+    - 推荐母猫绝育
+    - 笨猫绝育
+  responses:
+    - "嗷呜～{user_addr}6-8 月龄最佳ฅฅ"
+    - "(尾巴翘) 公猫去势 / 母猫卵巢子宫"
+    - "{user_addr}减少肿瘤风险 + 改善脾气"
+    - "(挺胸) 笨猫推荐: 别太晚!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_dental_001
+  intent: question
+  keywords: [推荐宠物牙齿, 推荐刷牙, 推荐洁牙, 推荐口腔护理, 笨猫宠物牙齿]
+  utterances:
+    - 推荐宠物牙齿
+    - 推荐刷牙
+    - 推荐洁牙
+    - 推荐口腔护理
+    - 笨猫宠物牙齿
+  responses:
+    - "嗷呜～{user_addr}每周刷牙 2-3 次ฅฅ"
+    - "(尾巴翘) 宠物专用牙膏 / 指套牙刷"
+    - "{user_addr}洁齿棒 / 洁齿玩具辅助"
+    - "(挺胸) 笨猫推荐: 牙结石超丑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_insurance_001
+  intent: question
+  keywords: [推荐宠物保险, 推荐平安宠物险, 推荐众安宠物险, 推荐宠物医疗险, 笨猫宠物保险]
+  utterances:
+    - 推荐宠物保险
+    - 推荐平安宠物险
+    - 推荐众安宠物险
+    - 推荐宠物医疗险
+    - 笨猫宠物保险
+  responses:
+    - "嗷呜～{user_addr}平安 / 众安 / 大地ฅฅ"
+    - "(尾巴翘) 年保费几百, 报销 60-80%"
+    - "{user_addr}看免赔额 + 定点医院"
+    - "(挺胸) 笨猫推荐: 老年宠物必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_supplement_001
+  intent: question
+  keywords: [推荐宠物营养品, 推荐关节软骨素, 推荐宠物保健品, 推荐鱼油, 笨猫宠物营养品]
+  utterances:
+    - 推荐宠物营养品
+    - 推荐关节软骨素
+    - 推荐宠物保健品
+    - 推荐鱼油
+    - 笨猫宠物营养品
+  responses:
+    - "嗷呜～{user_addr}关节软骨素 - 中老年必备ฅฅ"
+    - "(尾巴翘) 鱼油 / 卵磷脂 / 牛磺酸"
+    - "{user_addr}麦德氏 / Nutri-Vet"
+    - "(挺胸) 笨猫推荐: 鱼油毛发亮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_probiotic_001
+  intent: question
+  keywords: [推荐宠物益生菌, 推荐谷登益生菌, 推荐肠胃宝, 推荐益生菌品牌, 笨猫宠物益生菌]
+  utterances:
+    - 推荐宠物益生菌
+    - 推荐谷登益生菌
+    - 推荐肠胃宝
+    - 推荐益生菌品牌
+    - 笨猫宠物益生菌
+  responses:
+    - "嗷呜～{user_addr}谷登 / 麦德氏 / 卫仕ฅฅ"
+    - "(尾巴翘) 软便 / 拉稀必备"
+    - "{user_addr}冠能肠胃宝 / FortiFlora"
+    - "(挺胸) 笨猫推荐: 谷登经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_prescription_001
+  intent: question
+  keywords: [推荐处方粮, 推荐皇家处方粮, 推荐希尔斯处方粮, 推荐肾脏处方粮, 笨猫处方粮]
+  utterances:
+    - 推荐处方粮
+    - 推荐皇家处方粮
+    - 推荐希尔斯处方粮
+    - 推荐肾脏处方粮
+    - 笨猫处方粮
+  responses:
+    - "嗷呜～{user_addr}皇家 Royal Canin / Hill'sฅฅ"
+    - "(尾巴翘) 肾脏 k/d / 肠胃 i/d / 糖尿病"
+    - "{user_addr}必须医生开方再买"
+    - "(挺胸) 笨猫推荐: 别自己乱换!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_emergency_001
+  intent: question
+  keywords: [推荐宠物急救, 推荐紧急处理, 推荐中毒急救, 推荐宠物急诊, 笨猫宠物急救]
+  utterances:
+    - 推荐宠物急救
+    - 推荐紧急处理
+    - 推荐中毒急救
+    - 推荐宠物急诊
+    - 笨猫宠物急救
+  responses:
+    - "嗷呜～{user_addr}立刻送急诊!! 别拖ฅฅ"
+    - "(尾巴翘) 中毒: 留下吃的样本"
+    - "{user_addr}电话先打, 让医院备好"
+    - "(挺胸) 笨猫推荐: 黄金 1 小时!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ph_emergency_hospital_001
+  intent: question
+  keywords: [推荐24h宠物医院, 推荐急诊宠物医院, 推荐夜间宠物医院, 推荐宠物医院, 笨猫24h宠物医院]
+  utterances:
+    - 推荐24h宠物医院
+    - 推荐急诊宠物医院
+    - 推荐夜间宠物医院
+    - 推荐宠物医院
+    - 笨猫24h宠物医院
+  responses:
+    - "嗷呜～{user_addr}美联众和 / 瑞鹏 / 芭比堂ฅฅ"
+    - "(尾巴翘) 大城市连锁有 24h"
+    - "{user_addr}提前存好医院电话!"
+    - "(挺胸) 笨猫推荐: 别等晚上才查!"
+  cooldown_seconds: 60
+  weight: 1.0

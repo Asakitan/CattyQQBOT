@@ -1,0 +1,206 @@
+# 宠物训练 routes (S6 R565 NLU 节点扩充, 第五十六周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pt_obey_001
+  intent: question
+  keywords: [推荐服从训练, 推荐坐下, 推荐卧下, 推荐过来, 笨猫服从训练]
+  utterances:
+    - 推荐服从训练
+    - 推荐坐下
+    - 推荐卧下
+    - 推荐过来
+    - 笨猫服从训练
+  responses:
+    - "嗷呜～{user_addr}Sit / Down / Come - 基础三件套ฅฅ"
+    - "(尾巴翘) 口令短 + 手势 + 零食"
+    - "{user_addr}每次 5 分钟 / 一天多次"
+    - "(挺胸) 笨猫推荐: 先坐下最易学!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_potty_001
+  intent: question
+  keywords: [推荐大小便定点, 推荐定点排泄, 推荐尿垫, 推荐厕所训练, 笨猫定点]
+  utterances:
+    - 推荐大小便定点
+    - 推荐定点排泄
+    - 推荐尿垫
+    - 推荐厕所训练
+    - 笨猫定点
+  responses:
+    - "嗷呜～{user_addr}尿垫 / 固定位置ฅฅ"
+    - "(尾巴翘) 饭后/睡醒带去 + 完事即奖"
+    - "{user_addr}失误别打 / 静默清理"
+    - "(挺胸) 笨猫推荐: 一致性最重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_nobite_001
+  intent: question
+  keywords: [推荐不咬人, 推荐不扑人, 推荐控制咬, 推荐控嘴, 笨猫不咬人]
+  utterances:
+    - 推荐不咬人
+    - 推荐不扑人
+    - 推荐控制咬
+    - 推荐控嘴
+    - 笨猫不咬人
+  responses:
+    - "嗷呜～{user_addr}咬人立刻停止互动ฅฅ"
+    - "(尾巴翘) 转移到玩具 / 啃咬胶"
+    - "{user_addr}扑人转身忽视 / 四脚落地才理"
+    - "(挺胸) 笨猫推荐: 一致+耐心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_guard_001
+  intent: question
+  keywords: [推荐看家, 推荐警戒, 推荐守卫犬, 推荐护卫训练, 笨猫看家]
+  utterances:
+    - 推荐看家
+    - 推荐警戒
+    - 推荐守卫犬
+    - 推荐护卫训练
+    - 笨猫看家
+  responses:
+    - "嗷呜～{user_addr}德牧 / 罗威纳 / 杜宾ฅฅ"
+    - "(尾巴翘) 服从基础 + 警戒口令 Watch"
+    - "{user_addr}专业护卫训犬师 / 别自学"
+    - "(挺胸) 笨猫推荐: 普通家庭吠叫提示就够!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_walk_001
+  intent: question
+  keywords: [推荐散步不拽, 推荐牵绳训练, 推荐 Loose Leash, 推荐不拉绳, 笨猫散步]
+  utterances:
+    - 推荐散步不拽
+    - 推荐牵绳训练
+    - 推荐 Loose Leash
+    - 推荐不拉绳
+    - 笨猫散步
+  responses:
+    - "嗷呜～{user_addr}拽绳立停 / 松了再走ฅฅ"
+    - "(尾巴翘) 胸背带 / 防爆冲牵引"
+    - "{user_addr}转身换方向法 / 跟随奖励"
+    - "(挺胸) 笨猫推荐: 别用电击项圈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_fetch_001
+  intent: question
+  keywords: [推荐衔回, 推荐找物品, 推荐 Fetch, 推荐捡球, 笨猫衔回]
+  utterances:
+    - 推荐衔回
+    - 推荐找物品
+    - 推荐 Fetch
+    - 推荐捡球
+    - 笨猫衔回
+  responses:
+    - "嗷呜～{user_addr}先培养兴趣 / 玩具追逐ฅฅ"
+    - "(尾巴翘) 衔回口令 Bring / Drop"
+    - "{user_addr}金毛拉布拉多天生爱衔"
+    - "(挺胸) 笨猫推荐: 双球法不松口的话!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_clicker_001
+  intent: question
+  keywords: [推荐响片训练, 推荐 Clicker, 推荐正向激励, 推荐响片, 笨猫响片]
+  utterances:
+    - 推荐响片训练
+    - 推荐 Clicker
+    - 推荐正向激励
+    - 推荐响片
+    - 笨猫响片
+  responses:
+    - "嗷呜～{user_addr}Clicker 响片+零食ฅฅ"
+    - "(尾巴翘) 精准标记瞬间 / 0.5 秒内奖励"
+    - "{user_addr}科学最人道 / 训鸟训鼠都用"
+    - "(挺胸) 笨猫推荐: Karen Pryor 系统!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_anxiety_001
+  intent: question
+  keywords: [推荐行为矫正, 推荐分离焦虑, 推荐焦虑训练, 推荐脱敏, 笨猫焦虑矫正]
+  utterances:
+    - 推荐行为矫正
+    - 推荐分离焦虑
+    - 推荐焦虑训练
+    - 推荐脱敏
+    - 笨猫焦虑矫正
+  responses:
+    - "嗷呜～{user_addr}分离焦虑要脱敏 / 渐进ฅฅ"
+    - "(尾巴翘) 出门仪式淡化 / 短分离起步"
+    - "{user_addr}严重要找兽医行为学家"
+    - "(挺胸) 笨猫推荐: Adaptil 信息素辅助!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_school_001
+  intent: question
+  keywords: [推荐犬学校, 推荐 Pet Smart, 推荐训犬学校, 推荐集体课, 笨猫犬学校]
+  utterances:
+    - 推荐犬学校
+    - 推荐 Pet Smart
+    - 推荐训犬学校
+    - 推荐集体课
+    - 笨猫犬学校
+  responses:
+    - "嗷呜～{user_addr}PetSmart / Petco 入门班ฅฅ"
+    - "(尾巴翘) 国内圣宠 / 派多格连锁"
+    - "{user_addr}社会化机会 + 教练指导"
+    - "(挺胸) 笨猫推荐: 幼犬 12 周后报名!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_private_001
+  intent: question
+  keywords: [推荐私教训练, 推荐上门服务, 推荐训犬师, 推荐一对一, 笨猫私教]
+  utterances:
+    - 推荐私教训练
+    - 推荐上门服务
+    - 推荐训犬师
+    - 推荐一对一
+    - 笨猫私教
+  responses:
+    - "嗷呜～{user_addr}上门训犬师 200-500/次ฅฅ"
+    - "(尾巴翘) IPDTA / CCPDT 持证优先"
+    - "{user_addr}问清方法 / 拒绝打骂派"
+    - "(挺胸) 笨猫推荐: 正向激励派!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_cat_001
+  intent: question
+  keywords: [推荐猫训练, 推荐猫击掌, 推荐猫坐下, 推荐猫服从, 笨猫训猫]
+  utterances:
+    - 推荐猫训练
+    - 推荐猫击掌
+    - 推荐猫坐下
+    - 推荐猫服从
+    - 笨猫训猫
+  responses:
+    - "嗷呜～{user_addr}猫也能训!击掌坐下没问题ฅฅ"
+    - "(尾巴翘) 响片+冻干 / 短时高频"
+    - "{user_addr}猫记性短 / 别超 3 分钟"
+    - "(挺胸) 笨猫推荐: 趁饭前训最积极!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_book_001
+  intent: question
+  keywords: [推荐训练书, 推荐 Dunbar, 推荐训犬书, 推荐养狗书, 笨猫训练书]
+  utterances:
+    - 推荐训练书
+    - 推荐 Dunbar
+    - 推荐训犬书
+    - 推荐养狗书
+    - 笨猫训练书
+  responses:
+    - "嗷呜～{user_addr}Ian Dunbar《狗狗教养》ฅฅ"
+    - "(尾巴翘) Karen Pryor《别毙了那只狗》"
+    - "{user_addr}Cesar Millan 派别有争议"
+    - "(挺胸) 笨猫推荐: Dunbar 正向派入门!"
+  cooldown_seconds: 60
+  weight: 1.0

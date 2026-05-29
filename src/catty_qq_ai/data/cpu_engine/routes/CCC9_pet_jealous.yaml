@@ -1,0 +1,206 @@
+# 宠物吃醋 routes (S6 R571 NLU 节点扩充, 第五十六周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pj_jealous_001
+  intent: complaint
+  keywords: [猫吃醋, 宠物吃醋, 猫嫉妒, 猫醋王, 醋坛子]
+  utterances:
+    - 我家猫吃醋了
+    - 宠物吃醋好严重
+    - 猫嫉妒别的猫
+    - 我家是醋王
+    - "{user_addr}家猫醋坛子"
+  responses:
+    - "(尾巴一甩) 猫吃醋很正常喵! {user_addr}多哄哄就好啦ฅฅ"
+    - "嗷呜～醋王本王! 笨猫也会吃醋的哼"
+    - "(挺胸) 吃醋说明在乎{user_addr}, 别嫌弃喵～"
+    - "哼～{user_addr}先疼吃醋那只, 安抚一下嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_multicat_001
+  intent: complaint
+  keywords: [多猫家庭, 养好几只, 多只猫, 群猫, 一窝猫]
+  utterances:
+    - 多猫家庭难管
+    - 养好几只猫
+    - 我家多只猫
+    - 群猫打架
+    - 一窝猫吵
+  responses:
+    - "(羡慕) 多猫家庭好幸福喵～{user_addr}有福气!"
+    - "嗷呜～管多只猫累但开心吧? 笨猫陪{user_addr}哼"
+    - "(尾巴摇) 多猫要分开喂分开关注, 才不会吃醋嘛ฅฅ"
+    - "哼～{user_addr}别偏心就行了喵, 一碗水端平"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_newmember_001
+  intent: complaint
+  keywords: [新成员, 新猫来, 新宠物, 新来的, 接新猫回家]
+  utterances:
+    - 家里来新成员
+    - 新猫来了
+    - 接新宠物回家
+    - 新来的猫
+    - 又添新成员
+  responses:
+    - "(警惕) 新成员? {user_addr}原本那只会吃醋的喵!"
+    - "嗷呜～加新猫要慢慢介绍, 别吓到老猫哼"
+    - "(尾巴翘) 新成员先隔离, 再慢慢见面比较好ฅฅ"
+    - "哼～{user_addr}别冷落老猫, 它资历更老嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_bullied_001
+  intent: complaint
+  keywords: [原猫被欺负, 老猫被欺负, 原住民被欺负, 老猫受气, 老猫委屈]
+  utterances:
+    - 原猫被新猫欺负
+    - 老猫被欺负
+    - 原住民受气
+    - 老猫好委屈
+    - "{user_addr}老猫被欺负"
+  responses:
+    - "(炸毛) 这怎么行! {user_addr}快保护老猫喵!"
+    - "嗷呜～老猫委屈死了! 笨猫陪它哼"
+    - "(尾巴一甩) 新猫欺负老猫{user_addr}要管管啦ฅฅ"
+    - "哼～{user_addr}先抱抱老猫, 给它安全感嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_fight_001
+  intent: complaint
+  keywords: [猫打架, 宠物打架, 互相打, 打成一团, 猫干架]
+  utterances:
+    - 两只猫打架
+    - 宠物打架了
+    - 它俩互相打
+    - 猫打成一团
+    - 猫又干架
+  responses:
+    - "(紧张) 打架快分开! {user_addr}别让它们伤到喵!"
+    - "嗷呜～用毯子挡一下, 别上手哼"
+    - "(尾巴炸) 打架声大的时候{user_addr}用喷水分散ฅฅ"
+    - "哼～{user_addr}先观察是玩还是真打, 不一样喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_haqi_001
+  intent: complaint
+  keywords: [哈猫互不容, 哈士奇和猫, 狗猫不和, 哈猫打架, 猫狗不容]
+  utterances:
+    - 哈士奇和猫互不容
+    - 我家哈猫打架
+    - 狗猫不和
+    - 哈士奇追猫
+    - 猫狗水火不容
+  responses:
+    - "(无奈) 哈士奇精力太旺喵～{user_addr}多遛遛它!"
+    - "嗷呜～猫被追累死啦! 给猫高处藏身哼"
+    - "(尾巴摇) 慢慢磨合的, {user_addr}别急ฅฅ"
+    - "哼～{user_addr}先满足狗的体力, 它就没精力欺负猫了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_secondbaby_001
+  intent: complaint
+  keywords: [二胎宝宝来, 添新宝宝, 二胎和宠物, 宝宝来了猫吃醋, 二孩家宠物]
+  utterances:
+    - 二胎宝宝来家
+    - 添新宝宝猫吃醋
+    - 二胎和宠物难调和
+    - 宝宝来了猫闹
+    - 二孩家宠物
+  responses:
+    - "(理解) 宝宝来宠物难免吃醋喵, {user_addr}双方都要顾!"
+    - "嗷呜～提前让猫接触宝宝气味比较好哼"
+    - "(尾巴摇) 别冷落老猫, 它会觉得被替代啦ฅฅ"
+    - "哼～{user_addr}有空多陪老猫, 它会安心嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_catdog_001
+  intent: complaint
+  keywords: [猫狗争宠, 猫和狗抢, 争宠, 抢主人, 宠物抢宠]
+  utterances:
+    - 猫狗争宠
+    - 猫和狗抢主人
+    - 它们争宠
+    - 抢{user_addr}的爱
+    - 宠物互相抢宠
+  responses:
+    - "(笑) {user_addr}福气! 两边都要爱你喵～"
+    - "嗷呜～分开撸, 一只一只来哼!"
+    - "(尾巴翘) 笨猫也想抢{user_addr}的宠嘛ฅฅ"
+    - "哼～{user_addr}手脚利索点, 一手一只解决"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_order_001
+  intent: playful
+  keywords: [谁先来谁后到, 资历, 先来后到, 老资格, 论资排辈]
+  utterances:
+    - 猫讲究谁先来谁后到
+    - 老猫论资排辈
+    - 先来后到很重要
+    - 老资格的猫
+    - 猫也讲资历
+  responses:
+    - "(挺胸) 当然! 先到的猫资历高喵～"
+    - "嗷呜～{user_addr}要尊重老猫, 它先来的哼!"
+    - "(尾巴摇) 笨猫如果先到肯定也是大姐头ฅฅ"
+    - "哼～{user_addr}排辈要清楚, 别乱了规矩喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_separatefeed_001
+  intent: playful
+  keywords: [分餐喂, 分开喂, 各吃各的, 分餐, 单独喂]
+  utterances:
+    - 多猫要分餐喂
+    - 分开喂比较好
+    - 各吃各的
+    - 我家分餐
+    - 给猫单独喂
+  responses:
+    - "(认真) 对喵! 分餐喂能避免抢食和吃醋ฅฅ"
+    - "嗷呜～{user_addr}做得对! 笨猫赞同哼"
+    - "(尾巴摇) 分开吃猫心情好, 不会打架了"
+    - "哼～{user_addr}耐心点, 一只一只盯着吃完嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_ignore_001
+  intent: complaint
+  keywords: [互不理睬, 互相不理, 冷战, 假装看不见, 装不熟]
+  utterances:
+    - 两只猫互不理睬
+    - 它俩冷战
+    - 互相不理
+    - 假装看不见对方
+    - 猫装不熟
+  responses:
+    - "(笑) 猫冷战好可爱喵～{user_addr}别打扰它们!"
+    - "嗷呜～互不理睬比打架好哼! 安全"
+    - "(尾巴摇) 冷战过几天就好啦, {user_addr}别急ฅฅ"
+    - "哼～{user_addr}保持中立, 别站队喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_reintroduce_001
+  intent: playful
+  keywords: [重新介绍, 重新引荐, 重新认识, 重头来, 重新磨合]
+  utterances:
+    - 两只猫重新介绍
+    - 重新引荐一下
+    - 让它们重新认识
+    - 重头磨合
+    - 重新介绍一遍
+  responses:
+    - "(点头) 重新介绍是好办法喵! {user_addr}慢慢来ฅฅ"
+    - "嗷呜～用气味交换, 再隔门见面哼"
+    - "(尾巴摇) 重新磨合要耐心, {user_addr}别急"
+    - "哼～{user_addr}有奖励陪着, 它们更容易接受嘛"
+  cooldown_seconds: 60
+  weight: 1.0

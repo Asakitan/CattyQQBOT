@@ -1,0 +1,206 @@
+# 猫品种深度 routes (S6 R563 NLU 节点扩充, 第五十六周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cbd_british_001
+  intent: question
+  keywords: [推荐英国短毛, 推荐英短, 推荐蓝猫, 推荐蓝白, 笨猫英短]
+  utterances:
+    - 推荐英国短毛
+    - 推荐英短
+    - 推荐蓝猫
+    - 推荐蓝白
+    - 笨猫英短
+  responses:
+    - "嗷呜～{user_addr}英国短毛 - 圆脸包子脸ฅฅ"
+    - "(尾巴翘) 蓝猫 / 蓝白 / 金渐层"
+    - "{user_addr}性格温顺 / 不黏人 / 好养"
+    - "(挺胸) 猫猫推荐: 新手入门首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_american_001
+  intent: question
+  keywords: [推荐美国短毛, 推荐美短, 推荐银渐层, 推荐起司猫, 笨猫美短]
+  utterances:
+    - 推荐美国短毛
+    - 推荐美短
+    - 推荐银渐层
+    - 推荐起司猫
+    - 笨猫美短
+  responses:
+    - "嗷呜～{user_addr}美国短毛 - 活泼运动派ฅฅ"
+    - "(尾巴翘) 银虎斑 / 银渐层经典"
+    - "{user_addr}聪明 / 好训练 / 适应力强"
+    - "(挺胸) 人家推荐: 银虎斑美短颜值高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_ragdoll_001
+  intent: question
+  keywords: [推荐布偶猫, 推荐仙女猫, 推荐 Ragdoll, 推荐布偶, 笨猫布偶]
+  utterances:
+    - 推荐布偶猫
+    - 推荐仙女猫
+    - 推荐 Ragdoll
+    - 推荐布偶
+    - 笨猫布偶
+  responses:
+    - "嗷呜～{user_addr}布偶猫 - 仙女颜值天花板ฅฅ"
+    - "(尾巴翘) 蓝眼 / 长毛 / 海豹双色"
+    - "{user_addr}温柔黏人 / 抱着像棉花"
+    - "(挺胸) 猫猫推荐: 想要黏人选布偶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_maine_001
+  intent: question
+  keywords: [推荐缅因猫, 推荐缅因, 推荐巨型猫, 推荐 MaineCoon, 笨猫缅因]
+  utterances:
+    - 推荐缅因猫
+    - 推荐缅因
+    - 推荐巨型猫
+    - 推荐 MaineCoon
+    - 笨猫缅因
+  responses:
+    - "嗷呜～{user_addr}缅因猫 - 猫界巨型温柔巨人ฅฅ"
+    - "(尾巴翘) 体重可达 10kg / 长毛狮鬃"
+    - "{user_addr}性格温顺 / 像狗一样跟着主人"
+    - "(挺胸) 笨猫推荐: 想养大猫选缅因!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_siamese_001
+  intent: question
+  keywords: [推荐暹罗猫, 推荐暹罗, 推荐高冷猫, 推荐 Siamese, 笨猫暹罗]
+  utterances:
+    - 推荐暹罗猫
+    - 推荐暹罗
+    - 推荐高冷猫
+    - 推荐 Siamese
+    - 笨猫暹罗
+  responses:
+    - "嗷呜～{user_addr}暹罗猫 - 蓝眼贵族范ฅฅ"
+    - "(尾巴翘) 重点色 / 苗条优雅"
+    - "{user_addr}聪明话多 / 黏人会撒娇"
+    - "(挺胸) 人家推荐: 想要话痨选暹罗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_scottish_001
+  intent: question
+  keywords: [推荐苏格兰折耳, 推荐折耳猫, 推荐 ScottishFold, 推荐折耳, 笨猫折耳]
+  utterances:
+    - 推荐苏格兰折耳
+    - 推荐折耳猫
+    - 推荐 ScottishFold
+    - 推荐折耳
+    - 笨猫折耳
+  responses:
+    - "嗷呜～{user_addr}折耳猫 - 耳朵折起来超萌ฅฅ"
+    - "(尾巴垂) 但是…有遗传骨病风险"
+    - "{user_addr}猫猫不太推荐 / 容易关节痛"
+    - "(认真) 笨猫建议: 立耳血统更健康!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_exotic_001
+  intent: question
+  keywords: [推荐异国短毛, 推荐加菲猫, 推荐 Exotic, 推荐扁脸猫, 笨猫加菲]
+  utterances:
+    - 推荐异国短毛
+    - 推荐加菲猫
+    - 推荐 Exotic
+    - 推荐扁脸猫
+    - 笨猫加菲
+  responses:
+    - "嗷呜～{user_addr}异国短毛 - 加菲猫扁脸表情包ฅฅ"
+    - "(尾巴翘) 短毛版波斯 / 圆滚滚"
+    - "{user_addr}性格懒散温柔 / 但鼻泪管易堵"
+    - "(挺胸) 人家推荐: 喜欢扁脸选加菲!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_sphynx_001
+  intent: question
+  keywords: [推荐无毛猫, 推荐斯芬克斯, 推荐 Sphynx, 推荐无毛, 笨猫无毛]
+  utterances:
+    - 推荐无毛猫
+    - 推荐斯芬克斯
+    - 推荐 Sphynx
+    - 推荐无毛
+    - 笨猫无毛
+  responses:
+    - "嗷呜～{user_addr}斯芬克斯 - 无毛外星人造型ฅฅ"
+    - "(尾巴翘) 体温高 / 摸起来温热"
+    - "{user_addr}过敏党友好 / 但要常擦皮肤"
+    - "(挺胸) 猫猫推荐: 不掉毛但要打理!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_chinese_001
+  intent: question
+  keywords: [推荐中华田园, 推荐田园猫, 推荐橘猫, 推荐狸花猫, 笨猫田园]
+  utterances:
+    - 推荐中华田园
+    - 推荐田园猫
+    - 推荐橘猫
+    - 推荐狸花猫
+    - 笨猫田园
+  responses:
+    - "嗷呜～{user_addr}中华田园猫 - 最适合中国家庭ฅฅ"
+    - "(尾巴翘) 橘猫 / 狸花 / 三花 / 奶牛"
+    - "{user_addr}体质好 / 聪明 / 不娇气"
+    - "(挺胸) 笨猫强推: 领养代替购买喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_oriental_001
+  intent: question
+  keywords: [推荐东方短毛, 推荐东方猫, 推荐 Oriental, 推荐大耳猫, 笨猫东方短毛]
+  utterances:
+    - 推荐东方短毛
+    - 推荐东方猫
+    - 推荐 Oriental
+    - 推荐大耳猫
+    - 笨猫东方短毛
+  responses:
+    - "嗷呜～{user_addr}东方短毛 - 暹罗近亲ฅฅ"
+    - "(尾巴翘) 大耳朵 / 苗条 / 颜色丰富"
+    - "{user_addr}话痨黏人 / 智商高"
+    - "(挺胸) 人家推荐: 想要互动选东方短毛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_abyssinian_001
+  intent: question
+  keywords: [推荐阿比西尼亚, 推荐阿比, 推荐 Abyssinian, 推荐古埃及猫, 笨猫阿比]
+  utterances:
+    - 推荐阿比西尼亚
+    - 推荐阿比
+    - 推荐 Abyssinian
+    - 推荐古埃及猫
+    - 笨猫阿比
+  responses:
+    - "嗷呜～{user_addr}阿比西尼亚 - 古老优雅品种ฅฅ"
+    - "(尾巴翘) 棕色虎斑 / 像小美洲狮"
+    - "{user_addr}活泼好动 / 爱攀爬"
+    - "(挺胸) 猫猫推荐: 爱运动选阿比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cbd_personality_001
+  intent: question
+  keywords: [推荐猫种性格, 推荐黏人猫, 推荐安静猫, 推荐活泼猫, 笨猫性格选猫]
+  utterances:
+    - 推荐猫种性格差异
+    - 推荐黏人猫
+    - 推荐安静猫
+    - 推荐活泼猫
+    - 笨猫性格选猫
+  responses:
+    - "嗷呜～{user_addr}黏人: 布偶 / 缅因 / 暹罗ฅฅ"
+    - "(尾巴翘) 安静: 英短 / 加菲 / 波斯"
+    - "{user_addr}活泼: 美短 / 阿比 / 东方短毛"
+    - "(挺胸) 笨猫建议: 选性格比选颜值重要!"
+  cooldown_seconds: 60
+  weight: 1.0
