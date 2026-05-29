@@ -1,0 +1,207 @@
+# 帆船 / 游艇 / 帆船赛 / 帆船证 routes (S6 R182 NLU 节点扩充, 第十八周期 1/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 P8 diving_surfing 区分: 这里专注水面 + 航海.
+
+- name: sy_type_001
+  intent: question
+  keywords: [推荐帆船类型, 推荐单体帆船, 推荐双体船, 推荐游艇, 笨猫帆船]
+  utterances:
+    - 推荐帆船类型
+    - 推荐单体帆船
+    - 推荐双体船
+    - 推荐游艇
+    - 笨猫帆船
+  responses:
+    - "嗷呜～{user_addr}单体: 经典传统 / 风浪好ฅฅ"
+    - "(尾巴翘) 双体 / 三体 - 平稳"
+    - "{user_addr}帆船 / 摩托艇 / 游艇"
+    - "(挺胸) 笨猫推荐: 看用途选船型!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sy_brand_001
+  intent: question
+  keywords: [推荐帆船品牌, 推荐 Beneteau, 推荐 Lagoon, 推荐 Sunseeker, 笨猫帆船品牌]
+  utterances:
+    - 推荐帆船品牌
+    - 推荐 Beneteau
+    - 推荐 Lagoon
+    - 推荐 Sunseeker
+    - 笨猫帆船品牌
+  responses:
+    - "嗷呜～{user_addr}Beneteau / Jeanneau - 主流单体ฅฅ"
+    - "(尾巴翘) Lagoon - 双体之王"
+    - "{user_addr}Sunseeker / Riva - 顶级游艇"
+    - "(挺胸) 笨猫推荐: Beneteau 入门首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sy_cert_001
+  intent: question
+  keywords: [推荐帆船证, 推荐 ICC, 推荐 ASA, 推荐帆船考证, 笨猫帆船证]
+  utterances:
+    - 推荐帆船证
+    - 推荐 ICC
+    - 推荐 ASA
+    - 推荐帆船考证
+    - 笨猫帆船证
+  responses:
+    - "嗷呜～{user_addr}ICC - 国际通用 / 欧洲ฅฅ"
+    - "(尾巴翘) ASA - 美国系统"
+    - "{user_addr}IYT / RYA / 国内 CYA"
+    - "(挺胸) 笨猫推荐: 出国玩 ICC!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sy_destination_001
+  intent: question
+  keywords: [推荐帆船航线, 推荐加勒比帆船, 推荐希腊帆船, 推荐普吉岛帆船, 笨猫帆船航线]
+  utterances:
+    - 推荐帆船航线
+    - 推荐加勒比帆船
+    - 推荐希腊帆船
+    - 推荐普吉岛帆船
+    - 笨猫帆船航线
+  responses:
+    - "嗷呜～{user_addr}加勒比 BVI - 帆船度假天堂ฅฅ"
+    - "(尾巴翘) 希腊 / 克罗地亚 - 地中海"
+    - "{user_addr}普吉岛 / 海南 - 亚洲入门"
+    - "(挺胸) 笨猫推荐: 加勒比一生必去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sy_race_001
+  intent: question
+  keywords: [推荐帆船赛, 推荐美洲杯, 推荐 Volvo Ocean Race, 推荐沃尔沃环球赛, 笨猫帆船赛]
+  utterances:
+    - 推荐帆船赛
+    - 推荐美洲杯
+    - 推荐 Volvo Ocean Race
+    - 推荐沃尔沃环球赛
+    - 笨猫帆船赛
+  responses:
+    - "嗷呜～{user_addr}America's Cup - 帆船赛顶级ฅฅ"
+    - "(尾巴翘) The Ocean Race - 环球大赛"
+    - "{user_addr}Vendée Globe / Sydney Hobart"
+    - "(挺胸) 笨猫推荐: 美洲杯 175 年!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sy_dingy_001
+  intent: question
+  keywords: [推荐小帆船, 推荐 OP, 推荐 Laser 帆船, 推荐 Optimist, 笨猫小帆船]
+  utterances:
+    - 推荐小帆船
+    - 推荐 OP
+    - 推荐 Laser 帆船
+    - 推荐 Optimist
+    - 笨猫小帆船
+  responses:
+    - "嗷呜～{user_addr}OP (Optimist) - 儿童帆船王ฅฅ"
+    - "(尾巴翘) Laser / ILCA - 奥运单人"
+    - "{user_addr}420 / 470 - 双人"
+    - "(挺胸) 笨猫推荐: OP 培养未来帆船家!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sy_equipment_001
+  intent: question
+  keywords: [推荐帆船装备, 推荐救生衣, 推荐帆船鞋, 推荐 Musto, 笨猫帆船装备]
+  utterances:
+    - 推荐帆船装备
+    - 推荐救生衣
+    - 推荐帆船鞋
+    - 推荐 Musto
+    - 笨猫帆船装备
+  responses:
+    - "嗷呜～{user_addr}Musto / Henri Lloyd - 帆船服顶ฅฅ"
+    - "(尾巴翘) Helly Hansen / Slam"
+    - "{user_addr}救生衣 / 帆船鞋 / 防滑手套"
+    - "(挺胸) 笨猫的提醒: 救生衣必穿!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sy_charter_001
+  intent: question
+  keywords: [推荐帆船租赁, 推荐 Bareboat, 推荐帆船 charter, 推荐三亚帆船租, 笨猫帆船租赁]
+  utterances:
+    - 推荐帆船租赁
+    - 推荐 Bareboat
+    - 推荐帆船 charter
+    - 推荐三亚帆船租
+    - 笨猫帆船租赁
+  responses:
+    - "嗷呜～{user_addr}Bareboat - 有证自驾ฅฅ"
+    - "(尾巴翘) Skippered - 带船长"
+    - "{user_addr}Moorings / Dream Yacht - 国际"
+    - "(挺胸) 笨猫推荐: 第一次找船长!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sy_basic_skill_001
+  intent: question
+  keywords: [推荐帆船基础, 推荐升帆, 推荐转向, 推荐打舵, 笨猫帆船基础]
+  utterances:
+    - 推荐帆船基础
+    - 推荐升帆
+    - 推荐转向
+    - 推荐打舵
+    - 笨猫帆船基础
+  responses:
+    - "嗷呜～{user_addr}迎风 / 顺风 - 风向是核心ฅฅ"
+    - "(尾巴翘) 升帆 / 收帆 / 调帆"
+    - "{user_addr}打舵 / 抢风 / 戗风"
+    - "(挺胸) 笨猫推荐: 风向第一课!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sy_navigation_001
+  intent: question
+  keywords: [推荐航海图, 推荐 GPS 航海, 推荐 Garmin GPSMAP, 推荐航行规划, 笨猫航海图]
+  utterances:
+    - 推荐航海图
+    - 推荐 GPS 航海
+    - 推荐 Garmin GPSMAP
+    - 推荐航行规划
+    - 笨猫航海图
+  responses:
+    - "嗷呜～{user_addr}Garmin GPSMAP - 主流ฅฅ"
+    - "(尾巴翘) Navionics / OpenCPN - 软件"
+    - "{user_addr}AIS / 雷达 - 必备"
+    - "(挺胸) 笨猫推荐: GPS + 海图双备份!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sy_marina_001
+  intent: question
+  keywords: [推荐游艇会, 推荐三亚游艇, 推荐青岛奥帆中心, 推荐厦门帆船, 笨猫游艇会]
+  utterances:
+    - 推荐游艇会
+    - 推荐三亚游艇
+    - 推荐青岛奥帆中心
+    - 推荐厦门帆船
+    - 笨猫游艇会
+  responses:
+    - "嗷呜～{user_addr}三亚 / 海口 - 海南帆船热ฅฅ"
+    - "(尾巴翘) 青岛奥帆中心 - 中国帆船中心"
+    - "{user_addr}厦门 / 深圳 / 上海"
+    - "(挺胸) 笨猫推荐: 三亚体验日!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sy_safety_001
+  intent: question
+  keywords: [推荐帆船安全, 推荐 MOB, 推荐落水救援, 推荐应急救援, 笨猫帆船安全]
+  utterances:
+    - 推荐帆船安全
+    - 推荐 MOB
+    - 推荐落水救援
+    - 推荐应急救援
+    - 笨猫帆船安全
+  responses:
+    - "嗷呜～{user_addr}MOB (Man Overboard) - 救人ฅฅ"
+    - "(尾巴翘) PLB / EPIRB - 应急信号"
+    - "{user_addr}VHF 通信 / 16 频道"
+    - "(挺胸) 笨猫的提醒: 上船穿救生衣!"
+  cooldown_seconds: 60
+  weight: 1.0

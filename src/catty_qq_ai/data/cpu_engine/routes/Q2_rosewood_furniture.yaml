@@ -1,0 +1,207 @@
+# 红木家具 / 明式家具 / 黄花梨 / 紫檀 routes (S6 R184 NLU 节点扩充, 第十八周期 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A8 home_decor / G3 antique_collection 区分: 这里专注红木家具收藏.
+
+- name: rw_huanghuali_001
+  intent: question
+  keywords: [推荐黄花梨, 推荐海南黄花梨, 推荐越南黄花梨, 推荐黄花梨家具, 笨猫黄花梨]
+  utterances:
+    - 推荐黄花梨
+    - 推荐海南黄花梨
+    - 推荐越南黄花梨
+    - 推荐黄花梨家具
+    - 笨猫黄花梨
+  responses:
+    - "嗷呜～{user_addr}海南黄花梨 - 红木之王ฅฅ"
+    - "(尾巴翘) 越南黄花梨 - 次之"
+    - "{user_addr}鬼脸纹 / 油脂感 / 香气"
+    - "(挺胸) 笨猫推荐: 海黄是终极!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_zitan_001
+  intent: question
+  keywords: [推荐紫檀, 推荐小叶紫檀, 推荐印度小叶紫檀, 推荐紫檀家具, 笨猫小叶紫檀]
+  utterances:
+    - 推荐紫檀
+    - 推荐小叶紫檀
+    - 推荐印度小叶紫檀
+    - 推荐紫檀家具
+    - 笨猫小叶紫檀
+  responses:
+    - "嗷呜～{user_addr}小叶紫檀 - 印度产 / 最贵ฅฅ"
+    - "(尾巴翘) 牛毛纹 / 金星紫檀"
+    - "{user_addr}百年成材 / 帝王御用"
+    - "(挺胸) 笨猫推荐: 紫檀沉静大气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_huali_001
+  intent: question
+  keywords: [推荐花梨木, 推荐缅甸花梨, 推荐大果紫檀, 推荐刺猬紫檀, 笨猫花梨木]
+  utterances:
+    - 推荐花梨木
+    - 推荐缅甸花梨
+    - 推荐大果紫檀
+    - 推荐刺猬紫檀
+    - 笨猫花梨木
+  responses:
+    - "嗷呜～{user_addr}大果紫檀 - 缅甸花梨ฅฅ"
+    - "(尾巴翘) 刺猬紫檀 - 非洲花梨"
+    - "{user_addr}国标红木 33 种"
+    - "(挺胸) 笨猫推荐: 缅花是性价比!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rw_wenge_001
+  intent: question
+  keywords: [推荐酸枝, 推荐老挝大红酸枝, 推荐黑酸枝, 推荐红酸枝, 笨猫酸枝]
+  utterances:
+    - 推荐酸枝
+    - 推荐老挝大红酸枝
+    - 推荐黑酸枝
+    - 推荐红酸枝
+    - 笨猫酸枝
+  responses:
+    - "嗷呜～{user_addr}老挝大红酸枝 - 高端ฅฅ"
+    - "(尾巴翘) 交趾黄檀"
+    - "{user_addr}黑酸枝 / 缅甸酸枝"
+    - "(挺胸) 笨猫推荐: 大红酸枝沉重!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rw_ming_001
+  intent: question
+  keywords: [推荐明式家具, 推荐圈椅, 推荐官帽椅, 推荐架子床, 笨猫明式家具]
+  utterances:
+    - 推荐明式家具
+    - 推荐圈椅
+    - 推荐官帽椅
+    - 推荐架子床
+    - 笨猫明式家具
+  responses:
+    - "嗷呜～{user_addr}明式: 简素 / 比例美ฅฅ"
+    - "(尾巴翘) 圈椅 / 官帽椅 / 玫瑰椅"
+    - "{user_addr}架子床 / 罗汉床"
+    - "(挺胸) 笨猫推荐: 明式是顶峰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_qing_001
+  intent: question
+  keywords: [推荐清式家具, 推荐宫廷家具, 推荐雕花家具, 推荐紫檀宫廷, 笨猫清式家具]
+  utterances:
+    - 推荐清式家具
+    - 推荐宫廷家具
+    - 推荐雕花家具
+    - 推荐紫檀宫廷
+    - 笨猫清式家具
+  responses:
+    - "嗷呜～{user_addr}清式: 富贵 / 繁复雕刻ฅฅ"
+    - "(尾巴翘) 屏风 / 太师椅"
+    - "{user_addr}宫廷紫檀 - 顶级"
+    - "(挺胸) 笨猫推荐: 喜雕选清式!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rw_craft_001
+  intent: question
+  keywords: [推荐榫卯, 推荐红木工艺, 推荐燕尾榫, 推荐攒边打槽, 笨猫榫卯]
+  utterances:
+    - 推荐榫卯
+    - 推荐红木工艺
+    - 推荐燕尾榫
+    - 推荐攒边打槽
+    - 笨猫榫卯
+  responses:
+    - "嗷呜～{user_addr}榫卯 - 古典家具灵魂ฅฅ"
+    - "(尾巴翘) 燕尾榫 / 格肩榫 / 抱肩榫"
+    - "{user_addr}30+ 种榫卯 / 不用钉"
+    - "(挺胸) 笨猫推荐: 榫卯是中国智慧!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rw_brand_001
+  intent: question
+  keywords: [推荐红木品牌, 推荐红木集团, 推荐美联, 推荐元亨利, 笨猫红木品牌]
+  utterances:
+    - 推荐红木品牌
+    - 推荐红木集团
+    - 推荐美联
+    - 推荐元亨利
+    - 笨猫红木品牌
+  responses:
+    - "嗷呜～{user_addr}元亨利 / 龙顺成 - 老牌ฅฅ"
+    - "(尾巴翘) 美联红木 / 区氏臻品"
+    - "{user_addr}名家具 / 田家青设计"
+    - "(挺胸) 笨猫推荐: 名家收藏价值高!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rw_appraisal_001
+  intent: question
+  keywords: [推荐红木鉴定, 推荐红木真假, 推荐黄花梨鉴别, 推荐红木标准, 笨猫红木鉴定]
+  utterances:
+    - 推荐红木鉴定
+    - 推荐红木真假
+    - 推荐黄花梨鉴别
+    - 推荐红木标准
+    - 笨猫红木鉴定
+  responses:
+    - "嗷呜～{user_addr}看纹理 / 闻香气 / 称重ฅฅ"
+    - "(尾巴翘) 显微切片 - 专业鉴定"
+    - "{user_addr}国标 GB/T 18107"
+    - "(挺胸) 笨猫的提醒: 必查鉴定证书!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_care_001
+  intent: question
+  keywords: [推荐红木保养, 推荐打蜡, 推荐核桃油, 推荐红木上漆, 笨猫红木保养]
+  utterances:
+    - 推荐红木保养
+    - 推荐打蜡
+    - 推荐核桃油
+    - 推荐红木上漆
+    - 笨猫红木保养
+  responses:
+    - "嗷呜～{user_addr}打蜡: 蜂蜡 / 核桃油ฅฅ"
+    - "(尾巴翘) 上漆 vs 烫蜡 - 看流派"
+    - "{user_addr}避光 / 控湿 40-60%"
+    - "(挺胸) 笨猫推荐: 长期养出包浆!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rw_collection_001
+  intent: question
+  keywords: [推荐红木收藏, 推荐明式收藏, 推荐古典家具, 推荐古董家具拍卖, 笨猫红木收藏]
+  utterances:
+    - 推荐红木收藏
+    - 推荐明式收藏
+    - 推荐古典家具
+    - 推荐古董家具拍卖
+    - 笨猫红木收藏
+  responses:
+    - "嗷呜～{user_addr}佳士得 / 苏富比 - 顶级ฅฅ"
+    - "(尾巴翘) 中国嘉德 - 国内"
+    - "{user_addr}王世襄 - 明式家具研究宗师"
+    - "(挺胸) 笨猫推荐: 王世襄入门书!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rw_china_old_houses_001
+  intent: question
+  keywords: [推荐中式装修, 推荐新中式, 推荐红木搭配, 推荐古典装饰, 笨猫中式装修]
+  utterances:
+    - 推荐中式装修
+    - 推荐新中式
+    - 推荐红木搭配
+    - 推荐古典装饰
+    - 笨猫中式装修
+  responses:
+    - "嗷呜～{user_addr}新中式 - 现代简约 + 古典ฅฅ"
+    - "(尾巴翘) 红木 + 留白 + 灯光"
+    - "{user_addr}配字画 / 茶具 / 古玩"
+    - "(挺胸) 笨猫推荐: 别堆太满!"
+  cooldown_seconds: 60
+  weight: 1.0

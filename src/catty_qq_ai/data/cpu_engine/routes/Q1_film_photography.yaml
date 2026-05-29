@@ -1,0 +1,207 @@
+# 胶片摄影 / 老相机 / 暗房 routes (S6 R183 NLU 节点扩充, 第十八周期 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 N0 camera_pro / K5 photography 区分: 这里专注胶片 + 老相机.
+
+- name: fp_brand_001
+  intent: question
+  keywords: [推荐胶片相机, 推荐 Leica M, 推荐 Contax, 推荐 Nikon FM, 笨猫胶片相机]
+  utterances:
+    - 推荐胶片相机
+    - 推荐 Leica M
+    - 推荐 Contax
+    - 推荐 Nikon FM
+    - 笨猫胶片相机
+  responses:
+    - "嗷呜～{user_addr}Leica M6 / M7 - 旁轴信仰ฅฅ"
+    - "(尾巴翘) Contax T2 / T3 - 口袋"
+    - "{user_addr}Nikon FM2 / FE2 - 入门"
+    - "(挺胸) 笨猫推荐: FM2 学习首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_film_001
+  intent: question
+  keywords: [推荐胶卷, 推荐 Portra, 推荐柯达金, 推荐 Kodak Tri-X, 笨猫胶卷]
+  utterances:
+    - 推荐胶卷
+    - 推荐 Portra
+    - 推荐柯达金
+    - 推荐 Kodak Tri-X
+    - 笨猫胶卷
+  responses:
+    - "嗷呜～{user_addr}Portra 400 - 人像神片ฅฅ"
+    - "(尾巴翘) Kodak Gold 200 - 日常"
+    - "{user_addr}Tri-X 400 / HP5+ - 黑白"
+    - "(挺胸) 笨猫推荐: Portra 400 顶级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_format_001
+  intent: question
+  keywords: [推荐胶片画幅, 推荐 35mm, 推荐 120 中画幅, 推荐大画幅, 笨猫画幅]
+  utterances:
+    - 推荐胶片画幅
+    - 推荐 35mm
+    - 推荐 120 中画幅
+    - 推荐大画幅
+    - 笨猫画幅
+  responses:
+    - "嗷呜～{user_addr}135 / 35mm - 主流便携ฅฅ"
+    - "(尾巴翘) 120 / 中画幅 - Hasselblad"
+    - "{user_addr}4x5 / 8x10 - 大画幅"
+    - "(挺胸) 笨猫推荐: 入门 135 起!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fp_hasselblad_001
+  intent: question
+  keywords: [推荐哈苏, 推荐 Hasselblad, 推荐 Rolleiflex, 推荐 503CW, 笨猫哈苏]
+  utterances:
+    - 推荐哈苏
+    - 推荐 Hasselblad
+    - 推荐 Rolleiflex
+    - 推荐 503CW
+    - 笨猫哈苏
+  responses:
+    - "嗷呜～{user_addr}Hasselblad 500 系列 - 经典ฅฅ"
+    - "(尾巴翘) Rolleiflex 双反 - 经典"
+    - "{user_addr}Mamiya 7 / Pentax 67"
+    - "(挺胸) 笨猫推荐: 哈苏 503CW 经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fp_develop_001
+  intent: question
+  keywords: [推荐冲洗, 推荐冲卷, 推荐胶片冲扫, 推荐 D-76, 笨猫冲洗]
+  utterances:
+    - 推荐冲洗
+    - 推荐冲卷
+    - 推荐胶片冲扫
+    - 推荐 D-76
+    - 笨猫冲洗
+  responses:
+    - "嗷呜～{user_addr}彩色 C-41 / E-6 - 商业冲洗ฅฅ"
+    - "(尾巴翘) 黑白 D-76 / HC-110 - 自冲"
+    - "{user_addr}国内: 上海映像 / 印帝印社"
+    - "(挺胸) 笨猫推荐: 黑白自冲乐趣!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fp_scanner_001
+  intent: question
+  keywords: [推荐胶片扫描, 推荐 Plustek, 推荐 Epson V850, 推荐胶片扫描仪, 笨猫胶片扫描]
+  utterances:
+    - 推荐胶片扫描
+    - 推荐 Plustek
+    - 推荐 Epson V850
+    - 推荐胶片扫描仪
+    - 笨猫胶片扫描
+  responses:
+    - "嗷呜～{user_addr}Plustek 8200i - 135 神器ฅฅ"
+    - "(尾巴翘) Epson V850 - 中画幅 + 大画幅"
+    - "{user_addr}相机翻拍 + 微距头"
+    - "(挺胸) 笨猫推荐: 翻拍是新趋势!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fp_lens_old_001
+  intent: question
+  keywords: [推荐老镜头, 推荐 Carl Zeiss, 推荐 Voigtlander, 推荐 Summilux, 笨猫老镜头]
+  utterances:
+    - 推荐老镜头
+    - 推荐 Carl Zeiss
+    - 推荐 Voigtlander
+    - 推荐 Summilux
+    - 笨猫老镜头
+  responses:
+    - "嗷呜～{user_addr}Leica Summilux 35 - 旁轴神镜ฅฅ"
+    - "(尾巴翘) Carl Zeiss 50 1.4 - 蔡司味"
+    - "{user_addr}Voigtlander Nokton"
+    - "(挺胸) 笨猫推荐: 老镜头玄学!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fp_polaroid_001
+  intent: question
+  keywords: [推荐宝丽来, 推荐 Polaroid, 推荐拍立得, 推荐 Instax, 笨猫宝丽来]
+  utterances:
+    - 推荐宝丽来
+    - 推荐 Polaroid
+    - 推荐拍立得
+    - 推荐 Instax
+    - 笨猫宝丽来
+  responses:
+    - "嗷呜～{user_addr}Polaroid SX-70 / 600 - 经典ฅฅ"
+    - "(尾巴翘) Polaroid Now+ - 新款"
+    - "{user_addr}Fujifilm Instax / Mini Evo"
+    - "(挺胸) 笨猫推荐: Instax 性价比!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fp_darkroom_001
+  intent: question
+  keywords: [推荐暗房, 推荐放大机, 推荐银盐照片, 推荐相纸, 笨猫暗房]
+  utterances:
+    - 推荐暗房
+    - 推荐放大机
+    - 推荐银盐照片
+    - 推荐相纸
+    - 笨猫暗房
+  responses:
+    - "嗷呜～{user_addr}放大机 - Meopta / Durstฅฅ"
+    - "(尾巴翘) 相纸: Ilford / 富士 / 柯达"
+    - "{user_addr}红灯 + 显影定影 + 水洗"
+    - "(挺胸) 笨猫推荐: 暗房是艺术!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: fp_master_001
+  intent: question
+  keywords: [推荐布列松, 推荐 Henri Cartier-Bresson, 推荐马格南, 推荐荒木经惟, 笨猫布列松]
+  utterances:
+    - 推荐布列松
+    - 推荐 Henri Cartier-Bresson
+    - 推荐马格南
+    - 推荐荒木经惟
+    - 笨猫布列松
+  responses:
+    - "嗷呜～{user_addr}布列松 - 决定性瞬间之父ฅฅ"
+    - "(尾巴翘) 马格南图片社 - 顶级"
+    - "{user_addr}森山大道 / 荒木经惟"
+    - "(挺胸) 笨猫推荐: 看布列松学构图!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fp_japanese_001
+  intent: question
+  keywords: [推荐日系胶片, 推荐 Fujifilm Pro, 推荐日系胶片机, 推荐 Olympus 胶片, 笨猫日系胶片]
+  utterances:
+    - 推荐日系胶片
+    - 推荐 Fujifilm Pro
+    - 推荐日系胶片机
+    - 推荐 Olympus 胶片
+    - 笨猫日系胶片
+  responses:
+    - "嗷呜～{user_addr}Fuji Pro 400H - 日系神片 (停产)ฅฅ"
+    - "(尾巴翘) Olympus PEN / OM-1"
+    - "{user_addr}Yashica Electro 35 - 性价比"
+    - "(挺胸) 笨猫推荐: Pro 400H 已经神化!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: fp_storage_001
+  intent: question
+  keywords: [推荐胶片保存, 推荐胶卷储存, 推荐底片防潮, 推荐数字化, 笨猫胶片保存]
+  utterances:
+    - 推荐胶片保存
+    - 推荐胶卷储存
+    - 推荐底片防潮
+    - 推荐数字化
+    - 笨猫胶片保存
+  responses:
+    - "嗷呜～{user_addr}冷藏 - 减缓衰退ฅฅ"
+    - "(尾巴翘) 底片本 / 防潮箱"
+    - "{user_addr}扫描数字化备份"
+    - "(挺胸) 笨猫的提醒: 别让底片晒太阳!"
+  cooldown_seconds: 60
+  weight: 0.7

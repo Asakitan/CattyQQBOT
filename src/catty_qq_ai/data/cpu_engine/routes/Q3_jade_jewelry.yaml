@@ -1,0 +1,207 @@
+# 翡翠 / 玉石 / 玉雕 / 收藏 routes (S6 R185 NLU 节点扩充, 第十八周期 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 L8 luxury_watch / G3 antique_collection 区分: 这里专注翡翠玉石.
+
+- name: jd_jadeite_001
+  intent: question
+  keywords: [推荐翡翠, 推荐缅甸翡翠, 推荐 A 货翡翠, 推荐天然翡翠, 笨猫翡翠]
+  utterances:
+    - 推荐翡翠
+    - 推荐缅甸翡翠
+    - 推荐 A 货翡翠
+    - 推荐天然翡翠
+    - 笨猫翡翠
+  responses:
+    - "嗷呜～{user_addr}A 货 - 天然无处理ฅฅ"
+    - "(尾巴翘) 缅甸是顶级产地"
+    - "{user_addr}B 货 / C 货 - 处理过"
+    - "(挺胸) 笨猫的提醒: 买必看 A 货证书!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jd_color_001
+  intent: question
+  keywords: [推荐翡翠颜色, 推荐帝王绿, 推荐冰种翡翠, 推荐紫罗兰, 笨猫翡翠颜色]
+  utterances:
+    - 推荐翡翠颜色
+    - 推荐帝王绿
+    - 推荐冰种翡翠
+    - 推荐紫罗兰
+    - 笨猫翡翠颜色
+  responses:
+    - "嗷呜～{user_addr}帝王绿 - 翡翠绿色之王ฅฅ"
+    - "(尾巴翘) 玻璃种 / 冰种 / 糯种"
+    - "{user_addr}紫罗兰 / 黄翡 / 春带彩"
+    - "(挺胸) 笨猫推荐: 玻璃种最珍贵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jd_quality_001
+  intent: question
+  keywords: [推荐翡翠品质, 推荐种水, 推荐翡翠等级, 推荐翡翠鉴别, 笨猫翡翠品质]
+  utterances:
+    - 推荐翡翠品质
+    - 推荐种水
+    - 推荐翡翠等级
+    - 推荐翡翠鉴别
+    - 笨猫翡翠品质
+  responses:
+    - "嗷呜～{user_addr}种 + 水 + 色 - 三要素ฅฅ"
+    - "(尾巴翘) 玻璃 > 冰 > 糯 > 豆种"
+    - "{user_addr}帝王绿 > 阳绿 > 苹果绿"
+    - "(挺胸) 笨猫推荐: 看种水超色!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jd_white_jade_001
+  intent: question
+  keywords: [推荐和田玉, 推荐羊脂玉, 推荐青海玉, 推荐俄罗斯白玉, 笨猫和田玉]
+  utterances:
+    - 推荐和田玉
+    - 推荐羊脂玉
+    - 推荐青海玉
+    - 推荐俄罗斯白玉
+    - 笨猫和田玉
+  responses:
+    - "嗷呜～{user_addr}羊脂玉 - 和田玉之王ฅฅ"
+    - "(尾巴翘) 青海玉 / 俄罗斯玉 - 性价比"
+    - "{user_addr}籽料 > 山流水 > 山料"
+    - "(挺胸) 笨猫推荐: 籽料最贵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jd_nephrite_001
+  intent: question
+  keywords: [推荐软玉, 推荐碧玉, 推荐黄玉, 推荐墨玉, 笨猫软玉]
+  utterances:
+    - 推荐软玉
+    - 推荐碧玉
+    - 推荐黄玉
+    - 推荐墨玉
+    - 笨猫软玉
+  responses:
+    - "嗷呜～{user_addr}碧玉 - 新疆 / 加拿大产ฅฅ"
+    - "(尾巴翘) 黄玉 / 墨玉 - 稀有"
+    - "{user_addr}软玉 = 和田玉 + 多色"
+    - "(挺胸) 笨猫推荐: 碧玉性价比!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jd_carve_001
+  intent: question
+  keywords: [推荐玉雕, 推荐苏工玉雕, 推荐扬派玉雕, 推荐玉雕大师, 笨猫玉雕]
+  utterances:
+    - 推荐玉雕
+    - 推荐苏工玉雕
+    - 推荐扬派玉雕
+    - 推荐玉雕大师
+    - 笨猫玉雕
+  responses:
+    - "嗷呜～{user_addr}苏工 - 细腻精致ฅฅ"
+    - "(尾巴翘) 扬派 / 海派 / 京派"
+    - "{user_addr}中国玉石雕刻大师"
+    - "(挺胸) 笨猫推荐: 苏工玉雕顶级!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jd_jewelry_001
+  intent: question
+  keywords: [推荐翡翠手镯, 推荐玉佩, 推荐翡翠戒指, 推荐玉吊坠, 笨猫翡翠手镯]
+  utterances:
+    - 推荐翡翠手镯
+    - 推荐玉佩
+    - 推荐翡翠戒指
+    - 推荐玉吊坠
+    - 笨猫翡翠手镯
+  responses:
+    - "嗷呜～{user_addr}手镯 - 翡翠首选载体ฅฅ"
+    - "(尾巴翘) 圆条 / 平安镯 / 福镯"
+    - "{user_addr}戒面 / 吊坠 / 耳环"
+    - "(挺胸) 笨猫推荐: 一镯传家宝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jd_pearl_001
+  intent: question
+  keywords: [推荐珍珠, 推荐 Akoya, 推荐 Tahitian, 推荐淡水珍珠, 笨猫珍珠]
+  utterances:
+    - 推荐珍珠
+    - 推荐 Akoya
+    - 推荐 Tahitian
+    - 推荐淡水珍珠
+    - 笨猫珍珠
+  responses:
+    - "嗷呜～{user_addr}Akoya - 日本海水珍珠ฅฅ"
+    - "(尾巴翘) Tahitian - 大溪地黑珍珠"
+    - "{user_addr}南洋珠 / 淡水珠"
+    - "(挺胸) 笨猫推荐: Akoya 经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: jd_gemstone_001
+  intent: question
+  keywords: [推荐宝石, 推荐红宝石, 推荐祖母绿, 推荐蓝宝石, 笨猫宝石]
+  utterances:
+    - 推荐宝石
+    - 推荐红宝石
+    - 推荐祖母绿
+    - 推荐蓝宝石
+    - 笨猫宝石
+  responses:
+    - "嗷呜～{user_addr}三大宝石: 红宝 / 蓝宝 / 祖母绿ฅฅ"
+    - "(尾巴翘) 钻石 - 4C 标准"
+    - "{user_addr}彩宝: 帕拉伊巴 / 沙弗莱"
+    - "(挺胸) 笨猫推荐: 看品质看证书!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: jd_amber_001
+  intent: question
+  keywords: [推荐琥珀, 推荐蜜蜡, 推荐缅甸琥珀, 推荐血珀, 笨猫琥珀]
+  utterances:
+    - 推荐琥珀
+    - 推荐蜜蜡
+    - 推荐缅甸琥珀
+    - 推荐血珀
+    - 笨猫琥珀
+  responses:
+    - "嗷呜～{user_addr}缅甸琥珀 - 古老 / 9900 万年ฅฅ"
+    - "(尾巴翘) 血珀 / 金珀 / 蓝珀"
+    - "{user_addr}蜜蜡 - 不透明琥珀"
+    - "(挺胸) 笨猫推荐: 缅珀稀有!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jd_appraisal_001
+  intent: question
+  keywords: [推荐玉石鉴定, 推荐 GIA, 推荐 NGTC, 推荐翡翠证书, 笨猫鉴定]
+  utterances:
+    - 推荐玉石鉴定
+    - 推荐 GIA
+    - 推荐 NGTC
+    - 推荐翡翠证书
+    - 笨猫鉴定
+  responses:
+    - "嗷呜～{user_addr}GIA - 国际权威ฅฅ"
+    - "(尾巴翘) NGTC - 国家标准"
+    - "{user_addr}省质检 - 国内常用"
+    - "(挺胸) 笨猫的提醒: 必须看证书!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jd_market_001
+  intent: question
+  keywords: [推荐翡翠市场, 推荐瑞丽翡翠, 推荐四会, 推荐平洲, 笨猫翡翠市场]
+  utterances:
+    - 推荐翡翠市场
+    - 推荐瑞丽翡翠
+    - 推荐四会
+    - 推荐平洲
+    - 笨猫翡翠市场
+  responses:
+    - "嗷呜～{user_addr}瑞丽 / 腾冲 - 边贸首选ฅฅ"
+    - "(尾巴翘) 四会 / 平洲 - 加工集散"
+    - "{user_addr}广州 / 揭阳 - 批发"
+    - "(挺胸) 笨猫的提醒: 第一次别下大!"
+  cooldown_seconds: 60
+  weight: 0.9

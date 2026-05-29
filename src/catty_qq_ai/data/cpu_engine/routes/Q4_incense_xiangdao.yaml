@@ -1,0 +1,207 @@
+# 香道 / 沉香 / 檀香 / 线香 routes (S6 R186 NLU 节点扩充, 第十八周期 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 O1 aromatherapy (西式精油) 区分: 这里专注东方香道.
+
+- name: xd_aloeswood_001
+  intent: question
+  keywords: [推荐沉香, 推荐惠安沉香, 推荐越南沉香, 推荐奇楠, 笨猫沉香]
+  utterances:
+    - 推荐沉香
+    - 推荐惠安沉香
+    - 推荐越南沉香
+    - 推荐奇楠
+    - 笨猫沉香
+  responses:
+    - "嗷呜～{user_addr}奇楠 - 沉香之王ฅฅ"
+    - "(尾巴翘) 惠安系: 越南 / 海南"
+    - "{user_addr}星洲系: 印尼 / 加里曼丹"
+    - "(挺胸) 笨猫推荐: 奇楠极珍稀!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: xd_sandalwood_001
+  intent: question
+  keywords: [推荐檀香, 推荐老山檀, 推荐印度老山, 推荐 sandalwood, 笨猫檀香]
+  utterances:
+    - 推荐檀香
+    - 推荐老山檀
+    - 推荐印度老山
+    - 推荐 sandalwood
+    - 笨猫檀香
+  responses:
+    - "嗷呜～{user_addr}印度老山檀 - 顶级ฅฅ"
+    - "(尾巴翘) 澳檀 / 雪檀 / 斐济檀"
+    - "{user_addr}新山檀 - 性价比"
+    - "(挺胸) 笨猫推荐: 老山香气沉静!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: xd_incense_stick_001
+  intent: question
+  keywords: [推荐线香, 推荐日本线香, 推荐 Shoyeido, 推荐松荣堂, 笨猫线香]
+  utterances:
+    - 推荐线香
+    - 推荐日本线香
+    - 推荐 Shoyeido
+    - 推荐松荣堂
+    - 笨猫线香
+  responses:
+    - "嗷呜～{user_addr}Shoyeido 松荣堂 - 日系顶ฅฅ"
+    - "(尾巴翘) Kungyokudo 鸠居堂"
+    - "{user_addr}国产: 妙吉 / 香至尊"
+    - "(挺胸) 笨猫推荐: 日本线香细腻!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: xd_coil_001
+  intent: question
+  keywords: [推荐盘香, 推荐塔香, 推荐倒流香, 推荐香篆, 笨猫盘香]
+  utterances:
+    - 推荐盘香
+    - 推荐塔香
+    - 推荐倒流香
+    - 推荐香篆
+    - 笨猫盘香
+  responses:
+    - "嗷呜～{user_addr}盘香 - 长时间燃烧ฅฅ"
+    - "(尾巴翘) 倒流香 - 烟流瀑布"
+    - "{user_addr}香篆 - 古法印香"
+    - "(挺胸) 笨猫推荐: 倒流香超治愈!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: xd_natural_001
+  intent: question
+  keywords: [推荐天然香, 推荐合香, 推荐无烟香, 推荐有烟香, 笨猫天然香]
+  utterances:
+    - 推荐天然香
+    - 推荐合香
+    - 推荐无烟香
+    - 推荐有烟香
+    - 笨猫天然香
+  responses:
+    - "嗷呜～{user_addr}天然香 - 沉檀本香ฅฅ"
+    - "(尾巴翘) 合香 - 多种配方"
+    - "{user_addr}化学香伤身 / 别买"
+    - "(挺胸) 笨猫推荐: 必选天然!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: xd_burner_001
+  intent: question
+  keywords: [推荐香炉, 推荐铜香炉, 推荐宣德炉, 推荐陶瓷香炉, 笨猫香炉]
+  utterances:
+    - 推荐香炉
+    - 推荐铜香炉
+    - 推荐宣德炉
+    - 推荐陶瓷香炉
+    - 笨猫香炉
+  responses:
+    - "嗷呜～{user_addr}宣德炉 - 铜炉顶级ฅฅ"
+    - "(尾巴翘) 陶瓷 / 紫砂 / 铜"
+    - "{user_addr}日式香道炉 - 雅致"
+    - "(挺胸) 笨猫推荐: 入门陶瓷便宜!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: xd_tools_001
+  intent: question
+  keywords: [推荐香道具, 推荐香道七宝, 推荐银叶, 推荐香匙, 笨猫香道具]
+  utterances:
+    - 推荐香道具
+    - 推荐香道七宝
+    - 推荐银叶
+    - 推荐香匙
+    - 笨猫香道具
+  responses:
+    - "嗷呜～{user_addr}七宝: 香炉/银叶/香铲/羽帚/灰押/香夹/香匙ฅฅ"
+    - "(尾巴翘) 银叶 - 隔火熏香"
+    - "{user_addr}羽帚 - 扫炉灰"
+    - "(挺胸) 笨猫推荐: 仪式感拉满!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: xd_school_001
+  intent: question
+  keywords: [推荐香道流派, 推荐御家流, 推荐志野流, 推荐日本香道, 笨猫香道流派]
+  utterances:
+    - 推荐香道流派
+    - 推荐御家流
+    - 推荐志野流
+    - 推荐日本香道
+    - 笨猫香道流派
+  responses:
+    - "嗷呜～{user_addr}御家流 - 公家贵族ฅฅ"
+    - "(尾巴翘) 志野流 - 武士流派"
+    - "{user_addr}中国宋元盛 + 传入日本"
+    - "(挺胸) 笨猫推荐: 日本两大流派!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: xd_zen_001
+  intent: question
+  keywords: [推荐打坐用香, 推荐禅修香, 推荐茶席用香, 推荐瑜伽香, 笨猫打坐香]
+  utterances:
+    - 推荐打坐用香
+    - 推荐禅修香
+    - 推荐茶席用香
+    - 推荐瑜伽香
+    - 笨猫打坐香
+  responses:
+    - "嗷呜～{user_addr}沉静类: 沉香 / 老山ฅฅ"
+    - "(尾巴翘) 茶席: 单一原料淡香"
+    - "{user_addr}冥想: 短时 + 轻柔"
+    - "(挺胸) 笨猫推荐: 静心一炉香!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: xd_chinese_001
+  intent: question
+  keywords: [推荐中国香, 推荐宋代香谱, 推荐香道复兴, 推荐中国香道, 笨猫中国香道]
+  utterances:
+    - 推荐中国香
+    - 推荐宋代香谱
+    - 推荐香道复兴
+    - 推荐中国香道
+    - 笨猫中国香道
+  responses:
+    - "嗷呜～{user_addr}宋代 - 香道鼎盛 / 香谱传世ฅฅ"
+    - "(尾巴翘) 焚香 / 品香 / 鉴香"
+    - "{user_addr}中国香学院 / 当代复兴"
+    - "(挺胸) 笨猫推荐: 香道起源在中国!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: xd_aged_aroma_001
+  intent: question
+  keywords: [推荐香道入门, 推荐学习香道, 推荐香道课程, 推荐香事, 笨猫香道入门]
+  utterances:
+    - 推荐香道入门
+    - 推荐学习香道
+    - 推荐香道课程
+    - 推荐香事
+    - 笨猫香道入门
+  responses:
+    - "嗷呜～{user_addr}从一支天然香开始ฅฅ"
+    - "(尾巴翘) 一炉香 + 茶 + 静"
+    - "{user_addr}中国香学院 / 名家课程"
+    - "(挺胸) 笨猫推荐: 静下心 / 慢品!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: xd_oud_001
+  intent: question
+  keywords: [推荐 Oud 香, 推荐沉香精油, 推荐中东沉香, 推荐 Amouage, 笨猫 Oud]
+  utterances:
+    - 推荐 Oud 香
+    - 推荐沉香精油
+    - 推荐中东沉香
+    - 推荐 Amouage
+    - 笨猫 Oud
+  responses:
+    - "嗷呜～{user_addr}Oud - 中东最爱沉香味ฅฅ"
+    - "(尾巴翘) Amouage / Tom Ford Oud"
+    - "{user_addr}沉香精油 - 极昂贵"
+    - "(挺胸) 笨猫推荐: Oud 是奢侈香水!"
+  cooldown_seconds: 60
+  weight: 0.7
