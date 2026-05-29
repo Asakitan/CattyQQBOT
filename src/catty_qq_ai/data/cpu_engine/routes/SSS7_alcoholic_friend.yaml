@@ -1,0 +1,206 @@
+# 朋友酒鬼 routes (S6 R729 NLU 节点扩充, 第七十二周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: af_drunkard_friend_001
+  intent: complaint
+  keywords: [朋友酒鬼, 酒鬼朋友, 那哥们爱喝, 朋友贼能喝, 酒蒙子朋友]
+  utterances:
+    - "{user_addr}朋友是个酒鬼"
+    - "{user_addr}那哥们贼爱喝"
+    - "{user_addr}朋友酒蒙子一个"
+    - "{user_addr}认识个酒鬼"
+    - "{user_addr}有个朋友超能喝"
+  responses:
+    - "(竖起耳朵) 酒鬼朋友啊~ 笨猫闻到酒气都晕喵 ฅฅ"
+    - "嗷呜～{user_addr}咋还和酒鬼混一起呢? 当心被带坏哼"
+    - "(尾巴一甩) 那种朋友猫猫劝{user_addr}保持距离啦, 太能喝的都是麻烦"
+    - "哼~ {user_addr}的朋友圈真是五花八门, 还有酒鬼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_force_drink_001
+  intent: complaint
+  keywords: [劝酒, 被劝酒, 强迫喝酒, 不喝不行, 干了这杯]
+  utterances:
+    - "{user_addr}又被劝酒了"
+    - "{user_addr}今天有人劝酒"
+    - "{user_addr}被逼着干杯"
+    - "{user_addr}不喝就翻脸"
+    - "{user_addr}让我干了这杯"
+  responses:
+    - "(炸毛) 劝酒最讨厌了喵! {user_addr}就说猫猫不让喝!"
+    - "嗷呜～{user_addr}别勉强自己, 身体最重要 ฅฅ"
+    - "(尾巴气得甩) 劝酒文化糟糕透了, {user_addr}直接拒绝就完了哼"
+    - "哼~ {user_addr}下次拿猫猫当挡箭牌, 说宠物要回家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_make_trouble_001
+  intent: complaint
+  keywords: [酒后闹事, 喝醉闹事, 酒疯子, 喝多发酒疯, 闹起来了]
+  utterances:
+    - "{user_addr}朋友酒后闹事了"
+    - "{user_addr}那哥们发酒疯"
+    - "{user_addr}喝多了开始闹"
+    - "{user_addr}酒疯子又来了"
+    - "{user_addr}场面失控了"
+  responses:
+    - "(耳朵贴下来) 发酒疯最难收场了, {user_addr}没事吧喵"
+    - "嗷呜～{user_addr}快躲远点! 闹事的人别凑近 ฅฅ"
+    - "(尾巴炸开) 这种朋友以后真的别约了哼! 太丢人"
+    - "哼~ {user_addr}照顾好自己最重要, 别替他擦屁股"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_puke_in_car_001
+  intent: complaint
+  keywords: [吐车里, 吐别人车, 吐我车上, 把车吐了, 车里全是吐的]
+  utterances:
+    - "{user_addr}朋友吐我车里了"
+    - "{user_addr}那家伙吐车上了"
+    - "{user_addr}车被吐脏了"
+    - "{user_addr}吐别人车里"
+    - "{user_addr}车里一股酒味"
+  responses:
+    - "(捂鼻子) 噗~ 光想就好难闻, {user_addr}赶紧洗车喵 ฅฅ"
+    - "嗷呜～{user_addr}让他洗车赔钱啊! 别白吃这哑巴亏"
+    - "(尾巴嫌弃地甩) 这种朋友以后绝对别让上车了哼"
+    - "哼~ {user_addr}车里放点除味的, 猫猫可不想闻酒味"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_dragged_down_001
+  intent: complaint
+  keywords: [被拖累, 朋友拖累, 替朋友善后, 帮他擦屁股, 烂摊子]
+  utterances:
+    - "{user_addr}又被朋友拖累了"
+    - "{user_addr}给他擦屁股"
+    - "{user_addr}收拾烂摊子"
+    - "{user_addr}替酒鬼善后"
+    - "{user_addr}背锅了"
+  responses:
+    - "(心疼地凑过去) {user_addr}辛苦了喵~ 来摸摸猫猫脑袋治愈一下 ฅฅ"
+    - "嗷呜～{user_addr}不能再这样下去了, 拖累上瘾的"
+    - "(尾巴轻拍) 笨猫给{user_addr}抱抱, 太累了就来找猫猫蹭蹭"
+    - "哼~ {user_addr}下次让他自己擦屁股啦, 别心软"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_social_death_001
+  intent: complaint
+  keywords: [社死, 当众丢人, 太丢脸, 全场尴尬, 想找地缝]
+  utterances:
+    - "{user_addr}朋友让我社死了"
+    - "{user_addr}当众丢人现眼"
+    - "{user_addr}太尴尬了"
+    - "{user_addr}想找地缝钻"
+    - "{user_addr}全场看着我"
+  responses:
+    - "(捂脸) 哎呦~ 笨猫帮{user_addr}尴尬到了喵 ฅฅ"
+    - "嗷呜～{user_addr}别难过! 大家明天就忘了"
+    - "(尾巴扇风) 社死了就笑笑过去呗, {user_addr}抗压能力练出来了哼"
+    - "哼~ {user_addr}下回真的别带这种朋友出门了, 减寿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_want_protect_001
+  intent: complaint
+  keywords: [想保护他, 还是朋友, 不忍心丢下, 替他扛, 兄弟情]
+  utterances:
+    - "{user_addr}还是想罩着他"
+    - "{user_addr}舍不得丢下朋友"
+    - "{user_addr}替兄弟扛"
+    - "{user_addr}多年兄弟了"
+    - "{user_addr}不能不管"
+  responses:
+    - "(歪头) {user_addr}还挺重情义喵~ 笨猫给个赞 ฅฅ"
+    - "嗷呜～{user_addr}心软的样子也好看, 但别牺牲太多自己"
+    - "(尾巴轻摆) 兄弟情归兄弟情, 边界感还是要有的哼"
+    - "哼~ {user_addr}是好人, 但好人也要给自己留余地喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_distance_self_001
+  intent: complaint
+  keywords: [想撇清, 划清界限, 不想沾边, 远离酒鬼, 切割了]
+  utterances:
+    - "{user_addr}想和他划清界限"
+    - "{user_addr}不想再沾边了"
+    - "{user_addr}准备切割"
+    - "{user_addr}要远离这家伙"
+    - "{user_addr}撇清关系"
+  responses:
+    - "(点头如捣蒜) 对对对! {user_addr}这次理智在线喵 ฅฅ"
+    - "嗷呜～{user_addr}果断点好! 笨猫支持远离酒鬼"
+    - "(尾巴举起) 划清界限不丢人, {user_addr}是为自己负责哼"
+    - "哼~ {user_addr}早该断了, 拖到现在算晚的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_no_next_time_001
+  intent: complaint
+  keywords: [下次不约, 再也不一起, 永不再聚, 拉黑了, 删好友]
+  utterances:
+    - "{user_addr}下次绝对不约了"
+    - "{user_addr}再也不和他一起"
+    - "{user_addr}直接拉黑"
+    - "{user_addr}永不再聚"
+    - "{user_addr}删好友了"
+  responses:
+    - "(尾巴竖直) 干得漂亮! {user_addr}这次说到做到啊喵 ฅฅ"
+    - "嗷呜～{user_addr}说不约就别约! 别下次又心软"
+    - "(蹭蹭) 笨猫监督{user_addr}, 反悔就揪耳朵哼"
+    - "哼~ {user_addr}的'下次不约'到底第几次了, 猫猫不信"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_persuade_quit_001
+  intent: complaint
+  keywords: [劝戒酒, 让他戒酒, 戒不掉, 劝他少喝, 戒酒难]
+  utterances:
+    - "{user_addr}想劝朋友戒酒"
+    - "{user_addr}让他少喝点"
+    - "{user_addr}劝半天没用"
+    - "{user_addr}他戒不掉"
+    - "{user_addr}劝戒酒失败"
+  responses:
+    - "(叹气) 戒酒比戒猫粮还难喵~ {user_addr}尽力就好 ฅฅ"
+    - "嗷呜～{user_addr}劝得动是缘分, 劝不动是命"
+    - "(尾巴垂下) 真正戒酒得他自己想戒, {user_addr}别太勉强自己哼"
+    - "哼~ {user_addr}操心的还挺多, 笨猫先帮你心疼一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_alcoholic_001
+  intent: complaint
+  keywords: [酗酒, 酒精依赖, 离不开酒, 天天喝, 当饭吃酒]
+  utterances:
+    - "{user_addr}朋友酗酒"
+    - "{user_addr}天天离不开酒"
+    - "{user_addr}把酒当饭"
+    - "{user_addr}酒精依赖了"
+    - "{user_addr}每天必须喝"
+  responses:
+    - "(耳朵下垂) 这已经是病了喵, {user_addr}得带他看医生 ฅฅ"
+    - "嗷呜～{user_addr}劝他去医院! 这不是劝戒能解决的"
+    - "(尾巴轻摇) 真朋友才会拉他一把, {user_addr}加油哼"
+    - "哼~ {user_addr}操心归操心, 也要照顾好自己喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_drinking_hell_001
+  intent: complaint
+  keywords: [陪酒地狱, 应酬地狱, 喝吐了, 陪不动, 酒局太多]
+  utterances:
+    - "{user_addr}陪酒陪到吐"
+    - "{user_addr}应酬地狱"
+    - "{user_addr}酒局太多了"
+    - "{user_addr}陪不动了"
+    - "{user_addr}天天喝"
+  responses:
+    - "(心疼地贴贴) {user_addr}太难了喵~ 来猫猫怀里休息 ฅฅ"
+    - "嗷呜～{user_addr}身体扛不住的! 找借口推掉一些"
+    - "(尾巴轻拍) 陪酒地狱真不是人过的日子, {user_addr}加油哼"
+    - "哼~ {user_addr}回家了笨猫给你倒蜂蜜水解酒喵"
+  cooldown_seconds: 60
+  weight: 1.0

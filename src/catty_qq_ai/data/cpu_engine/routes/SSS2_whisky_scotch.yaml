@@ -1,0 +1,206 @@
+# 苏威 routes (S6 R724 NLU 节点扩充, 第七十二周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ws_macallan_001
+  intent: question
+  keywords: [推荐麦卡伦, 推荐 Macallan, 推荐雪莉桶王, 推荐苏威贵族, 笨猫麦卡伦]
+  utterances:
+    - 推荐麦卡伦
+    - 推荐 Macallan
+    - 推荐雪莉桶王
+    - 推荐苏威贵族
+    - 笨猫麦卡伦
+  responses:
+    - "嗷呜～{user_addr}Macallan 12 双桶 - 雪莉入门ฅฅ"
+    - "(尾巴翘) 18 年雪莉 - 干果焦糖巧克力"
+    - "{user_addr}Sherry Oak / Double Cask / Triple Cask"
+    - "(挺胸) 猫猫推荐: 12 双桶, 性价比最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_glenfiddich_001
+  intent: question
+  keywords: [推荐格兰菲迪, 推荐 Glenfiddich, 推荐苏威销冠, 推荐入门苏威, 笨猫格兰菲迪]
+  utterances:
+    - 推荐格兰菲迪
+    - 推荐 Glenfiddich
+    - 推荐苏威销冠
+    - 推荐入门苏威
+    - 笨猫格兰菲迪
+  responses:
+    - "嗷呜～{user_addr}Glenfiddich 12 - 苏威全球销冠ฅฅ"
+    - "(尾巴翘) 青梨果香, 入门最温柔"
+    - "{user_addr}15 索莱拉 / 18 / 21 加勒比"
+    - "(挺胸) 笨猫推荐: 12 年入门一瓶不踩雷!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_glenlivet_001
+  intent: question
+  keywords: [推荐格兰利威, 推荐 Glenlivet, 推荐斯佩塞优等生, 推荐花果苏威, 笨猫格兰利威]
+  utterances:
+    - 推荐格兰利威
+    - 推荐 Glenlivet
+    - 推荐斯佩塞优等生
+    - 推荐花果苏威
+    - 笨猫格兰利威
+  responses:
+    - "嗷呜～{user_addr}Glenlivet 12 - Speyside 教科书ฅฅ"
+    - "(尾巴翘) 花香+蜂蜜+青苹果, 干净优雅"
+    - "{user_addr}Founder's Reserve / 15 法国橡木 / 18"
+    - "(挺胸) 人家推荐: 跟格兰菲迪二选一都行!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_ardbeg_001
+  intent: question
+  keywords: [推荐雅伯, 推荐 Ardbeg, 推荐艾雷重泥煤, 推荐烟熏怪兽, 笨猫雅伯]
+  utterances:
+    - 推荐雅伯
+    - 推荐 Ardbeg
+    - 推荐艾雷重泥煤
+    - 推荐烟熏怪兽
+    - 笨猫雅伯
+  responses:
+    - "嗷呜～{user_addr}Ardbeg 10 - 艾雷泥煤怪兽ฅฅ"
+    - "(尾巴炸) 烟熏+海盐+碘酒, 重口顶配"
+    - "{user_addr}Uigeadail / Corryvreckan 进阶"
+    - "(挺胸) 笨猫推荐: 重口党闭眼买 10 年!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_laphroaig_001
+  intent: question
+  keywords: [推荐拉弗格, 推荐 Laphroaig, 推荐药水味, 推荐艾雷消毒水, 笨猫拉弗格]
+  utterances:
+    - 推荐拉弗格
+    - 推荐 Laphroaig
+    - 推荐药水味
+    - 推荐艾雷消毒水
+    - 笨猫拉弗格
+  responses:
+    - "嗷呜～{user_addr}Laphroaig 10 - 药水味教主ฅฅ"
+    - "(尾巴翘) 碘酒+创可贴+海风, 一秒上头"
+    - "{user_addr}Quarter Cask / Lore / 18 年"
+    - "(挺胸) 猫猫推荐: 想体验药水味必喝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_bowmore_001
+  intent: question
+  keywords: [推荐波摩, 推荐 Bowmore, 推荐艾雷温柔款, 推荐烟熏+雪莉, 笨猫波摩]
+  utterances:
+    - 推荐波摩
+    - 推荐 Bowmore
+    - 推荐艾雷温柔款
+    - 推荐烟熏+雪莉
+    - 笨猫波摩
+  responses:
+    - "嗷呜～{user_addr}Bowmore 12 - 艾雷里的温柔一面ฅฅ"
+    - "(尾巴翘) 轻泥煤+雪莉果香, 平衡感顶"
+    - "{user_addr}15 Darkest / 18 / Tempest"
+    - "(挺胸) 笨猫推荐: 怕重口选波摩 12 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_highland_park_001
+  intent: question
+  keywords: [推荐高原骑士, 推荐 Highland Park, 推荐奥克尼, 推荐维京风, 笨猫高原骑士]
+  utterances:
+    - 推荐高原骑士
+    - 推荐 Highland Park
+    - 推荐奥克尼
+    - 推荐维京风
+    - 笨猫高原骑士
+  responses:
+    - "嗷呜～{user_addr}Highland Park 12 - 维京之魂ฅฅ"
+    - "(尾巴翘) 蜂蜜石楠+轻烟熏, 北境独一份"
+    - "{user_addr}18 维京荣耀 / Dark Origins / Valknut"
+    - "(挺胸) 人家推荐: 12 维京尊享平衡王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_peat_entry_001
+  intent: question
+  keywords: [推荐泥煤入门, 推荐烟熏入门, 推荐轻泥煤, 推荐初尝烟熏, 笨猫泥煤入门]
+  utterances:
+    - 推荐泥煤入门
+    - 推荐烟熏入门
+    - 推荐轻泥煤
+    - 推荐初尝烟熏
+    - 笨猫泥煤入门
+  responses:
+    - "嗷呜～{user_addr}泥煤入门 - 别一上来就 Ardbegฅฅ"
+    - "(尾巴翘) Bowmore 12 / Highland Park 12 轻泥煤"
+    - "{user_addr}Talisker 10 海风+胡椒过渡"
+    - "(挺胸) 笨猫推荐: 波摩→泰斯卡→拉弗格阶梯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_sherry_cask_001
+  intent: question
+  keywords: [推荐雪莉桶, 推荐 Sherry Cask, 推荐干果焦糖, 推荐雪莉炸弹, 笨猫雪莉桶]
+  utterances:
+    - 推荐雪莉桶
+    - 推荐 Sherry Cask
+    - 推荐干果焦糖
+    - 推荐雪莉炸弹
+    - 笨猫雪莉桶
+  responses:
+    - "嗷呜～{user_addr}雪莉桶 - 葡萄干焦糖巧克力ฅฅ"
+    - "(尾巴翘) Macallan 12 / GlenDronach 12 / Aberlour"
+    - "{user_addr}Aberlour A'Bunadh - 雪莉炸弹原桶强"
+    - "(挺胸) 人家推荐: GlenDronach 12 性价比之王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_bourbon_cask_001
+  intent: question
+  keywords: [推荐波本桶, 推荐 Bourbon Cask, 推荐香草蜂蜜, 推荐清新苏威, 笨猫波本桶]
+  utterances:
+    - 推荐波本桶
+    - 推荐 Bourbon Cask
+    - 推荐香草蜂蜜
+    - 推荐清新苏威
+    - 笨猫波本桶
+  responses:
+    - "嗷呜～{user_addr}波本桶 - 香草+蜂蜜+椰子ฅฅ"
+    - "(尾巴翘) Glenfiddich 12 / Glenlivet 12 / Glenmorangie 10"
+    - "{user_addr}Glenmorangie Original - 波本桶教科书"
+    - "(挺胸) 笨猫推荐: Glenmorangie 10 清新入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_region_001
+  intent: question
+  keywords: [推荐苏威产区, 推荐 Speyside, 推荐 Highland, 推荐 Islay, 笨猫苏威产区]
+  utterances:
+    - 推荐苏威产区
+    - 推荐 Speyside
+    - 推荐 Highland
+    - 推荐 Islay
+    - 笨猫苏威产区
+  responses:
+    - "嗷呜～{user_addr}Speyside - 花果优雅 (麦卡伦/格兰菲迪)ฅฅ"
+    - "(尾巴翘) Islay 艾雷 - 泥煤海风 (雅伯/拉弗格)"
+    - "{user_addr}Highland 高地 / Lowland 低地 / Campbeltown"
+    - "(挺胸) 人家推荐: 先 Speyside 入门再玩 Islay!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_investment_001
+  intent: question
+  keywords: [推荐苏威投资, 推荐威士忌收藏, 推荐限量版, 推荐保值苏威, 笨猫苏威投资]
+  utterances:
+    - 推荐苏威投资
+    - 推荐威士忌收藏
+    - 推荐限量版
+    - 推荐保值苏威
+    - 笨猫苏威投资
+  responses:
+    - "嗷呜～{user_addr}投资苏威 - Macallan 限量最硬ฅฅ"
+    - "(尾巴翘) Springbank / 关停酒厂 (Port Ellen/Brora)"
+    - "{user_addr}年份+酒厂+包装+原箱 缺一不可"
+    - "(挺胸) 笨猫推荐: 别冲新酒, 老瓶 OB 保值!"
+  cooldown_seconds: 60
+  weight: 1.0

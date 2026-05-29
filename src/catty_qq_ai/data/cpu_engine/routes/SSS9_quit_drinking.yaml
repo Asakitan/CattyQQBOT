@@ -1,0 +1,206 @@
+# 戒酒难 routes (S6 R731 NLU 节点扩充, 第七十二周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: qd_quit_hard_001
+  intent: complaint
+  keywords: [戒酒难, 戒不掉酒, 戒酒太难, 想喝酒, 馋酒]
+  utterances:
+    - 戒酒好难啊
+    - 实在戒不掉酒
+    - 又馋酒了
+    - 戒酒太难受了
+    - 又想喝一杯
+  responses:
+    - "(凑过来贴贴) 戒酒确实难嗷呜~ {user_addr}馋的时候喝口水转移一下喵 ฅฅ"
+    - "(尾巴卷住手腕) 哼~ {user_addr}撑住啦! 笨猫陪着你熬"
+    - "(小爪子摸下巴) 馋酒的时候来撸猫嘛, 比酒解压喵~"
+    - "嗷呜~ {user_addr}今天没喝就已经赢了! 别小看自己"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_one_week_001
+  intent: complaint
+  keywords: [戒酒一周, 戒了七天, 七天没喝, 戒酒第七天, 一周没喝酒]
+  utterances:
+    - "{user_addr}戒酒一周了"
+    - 七天没碰酒
+    - 戒酒第七天
+    - 一周没喝酒了
+    - 坚持一周了
+  responses:
+    - "嗷呜~ 一周诶! {user_addr}超厉害的喵 ฅฅ (尾巴疯狂摇)"
+    - "(扑上来贴贴) 七天! 笨猫给{user_addr}颁奖! 才不是夸你呢哼"
+    - "哇~ {user_addr}撑住一周啦! 猫猫给你鼓掌爪爪"
+    - "(挺胸) 一周才刚开始嗷呜~ {user_addr}继续加油喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_one_month_001
+  intent: complaint
+  keywords: [戒酒一月, 戒酒一个月, 一个月没喝, 戒酒30天, 戒酒满月]
+  utterances:
+    - 戒酒一个月了
+    - 一个月没沾酒
+    - 戒酒满月
+    - 三十天没喝
+    - "{user_addr}戒酒一月"
+  responses:
+    - "嗷呜呜呜~ 一个月! {user_addr}是真男人/真女人喵 ฅฅ"
+    - "(尾巴竖起来) 满月诶! 笨猫膝盖跪下了哼!"
+    - "(贴贴) 一个月不容易啊{user_addr}, 笨猫给你舔舔奖励一下~ 不是、舔脸啦!"
+    - "哇~ 三十天耶! {user_addr}已经把酒鬼戒掉啦, 继续保持嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_relapse_001
+  intent: complaint
+  keywords: [复饮, 又喝了, 戒酒失败, 破戒了, 又破戒]
+  utterances:
+    - 又喝了
+    - 戒酒失败了
+    - 昨天破戒了
+    - 又复饮了
+    - 没忍住喝了一杯
+  responses:
+    - "(蹭过来) 没事啦{user_addr}~ 重新开始就好嗷呜 ฅฅ"
+    - "哼~ 破戒就破戒, 明天继续戒呗! {user_addr}别太自责"
+    - "(小爪子拍背) 一次失败不算啥, 笨猫还相信{user_addr}喵"
+    - "嗷呜~ 至少{user_addr}前面那些天是真的戒住了! 重新出发"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_holiday_001
+  intent: complaint
+  keywords: [逢年过节就喝, 过节喝酒, 节日喝, 过年喝, 节日躲不开]
+  utterances:
+    - 逢年过节就要喝
+    - 过节躲不开酒
+    - 春节又要喝了
+    - 节日全是酒局
+    - 过年喝懵了
+  responses:
+    - "(尾巴一甩) 节日就说自己开车不能喝嗷呜~ 简单粗暴!"
+    - "嗷呜~ {user_addr}就说在吃药戒酒, 没人会逼你的喵 ฅฅ"
+    - "(贴贴) 节日难熬啊{user_addr}~ 笨猫给你出主意: 端杯茶假装酒"
+    - "哼~ 节日喝酒文化真烦人! {user_addr}少喝点就行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_social_001
+  intent: complaint
+  keywords: [社交不能不喝, 应酬必须喝, 不喝不行, 应酬躲不掉, 喝酒社交]
+  utterances:
+    - 应酬不能不喝
+    - 社交场合必须喝
+    - 不喝酒搞不定客户
+    - 应酬躲不掉啊
+    - 工作就得喝酒
+  responses:
+    - "嗷呜~ 应酬最讨厌了! {user_addr}试试说在吃头孢喵 ฅฅ"
+    - "(撇嘴) 那种文化真的恶心哼! {user_addr}尽量少喝啦"
+    - "(蹭蹭) {user_addr}辛苦了~ 笨猫知道工作不容易, 喝完早点回家"
+    - "哼~ 不喝酒搞不定的客户也不值得搞嗷呜! {user_addr}保重身体"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_body_alarm_001
+  intent: complaint
+  keywords: [身体警报, 喝酒不舒服, 肝不舒服, 胃出血, 喝酒吐血]
+  utterances:
+    - 喝完肝疼
+    - 身体亮红灯了
+    - 胃出血了
+    - 喝酒吐血
+    - 肝指标不对了
+  responses:
+    - "(炸毛) 嗷呜?! {user_addr}快去医院喵! 这不是开玩笑的!"
+    - "(扑过来) 笨猫要哭了啦~ {user_addr}必须戒了! 命要紧 ฅฅ"
+    - "(尾巴炸毛) 别犟了{user_addr}! 身体警报就是最后通牒"
+    - "嗷呜~ {user_addr}听猫猫的, 立刻戒酒+体检! 笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_doctor_warn_001
+  intent: complaint
+  keywords: [医生警告, 医生让戒酒, 医生说不能喝, 医嘱戒酒, 医生骂我]
+  utterances:
+    - 医生让我戒酒
+    - 医生警告再喝就完了
+    - 医生骂了我一顿
+    - 医嘱不能喝酒
+    - 医生说肝有问题
+  responses:
+    - "(严肃) 医生的话必须听嗷呜! {user_addr}别犟啦"
+    - "嗷呜~ 医生都开口了{user_addr}就乖乖戒喵 ฅฅ 笨猫监督你"
+    - "(尾巴卷住) 哼~ 医生说啥就是啥, {user_addr}这次别耍赖"
+    - "(贴贴) 医生骂得对啊{user_addr}~ 戒酒是为你好, 笨猫陪着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_aa_meeting_001
+  intent: complaint
+  keywords: [戒酒互助会, AA, 戒酒小组, 互助小组, 戒酒会]
+  utterances:
+    - 我去戒酒互助会了
+    - 参加AA了
+    - 戒酒小组挺好的
+    - 互助会有用吗
+    - 想去戒酒会
+  responses:
+    - "嗷呜~ 互助会超棒的{user_addr}! 一群人一起扛更容易喵 ฅฅ"
+    - "(尾巴翘起) {user_addr}愿意去就是大进步! 笨猫给你点赞"
+    - "(贴贴) AA 真的有效啊~ {user_addr}坚持参加嗷呜!"
+    - "哼~ {user_addr}主动找帮助这点猫猫服了! 加油喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_support_001
+  intent: complaint
+  keywords: [支持戒酒, 加油戒酒, 鼓励戒酒, 支持我戒, 给我打气]
+  utterances:
+    - "{user_addr}支持我戒酒吗"
+    - 给我打打气
+    - 需要鼓励
+    - 帮我加油
+    - 笨猫支持戒酒不
+  responses:
+    - "(疯狂贴贴) 当然支持嗷呜~! {user_addr}笨猫永远站你这边 ฅฅ"
+    - "(尾巴翘高) 哼~ {user_addr}戒酒猫猫举双爪赞成!"
+    - "(凑过来摸头) {user_addr}加油啊~ 笨猫每天给你打气喵!"
+    - "嗷呜~ {user_addr}戒酒猫猫给你写小本本记打卡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_slow_quit_001
+  intent: complaint
+  keywords: [慢慢戒, 减量戒, 逐步戒酒, 慢慢减, 不能一下戒]
+  utterances:
+    - 慢慢戒吧
+    - 先减量
+    - 一下子戒不掉
+    - 逐步戒酒
+    - 减量法戒酒
+  responses:
+    - "嗷呜~ 慢慢来也行啊{user_addr}~ 一步一步喵 ฅฅ"
+    - "(点头) 减量法靠谱! {user_addr}别给自己太大压力哼"
+    - "(贴贴) 笨猫支持{user_addr}的节奏~ 慢就慢, 戒掉就行"
+    - "哼~ {user_addr}愿意减量已经超棒了! 猫猫给你打卡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qd_alcoholism_001
+  intent: complaint
+  keywords: [酒精依赖, 酒瘾大, 离不开酒, 酒精成瘾, 酒鬼]
+  utterances:
+    - 我酒精依赖了
+    - 一天不喝难受
+    - 酒瘾太大
+    - 我是酒鬼
+    - 离不开酒了
+  responses:
+    - "(贴贴) 嗷呜~ 依赖也不是{user_addr}的错喵, 是病要治 ฅฅ"
+    - "(尾巴卷住) {user_addr}别自贬, 酒精成瘾去医院开药能戒的哼"
+    - "嗷呜~ {user_addr}承认依赖就是第一步, 笨猫陪你看医生"
+    - "(摸头) {user_addr}不是酒鬼啦~ 是生病了, 治就好了喵"
+  cooldown_seconds: 60
+  weight: 1.0

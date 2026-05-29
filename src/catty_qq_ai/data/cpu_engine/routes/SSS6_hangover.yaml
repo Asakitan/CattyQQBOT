@@ -1,0 +1,206 @@
+# 宿醉 routes (S6 R728 NLU 节点扩充, 第七十二周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: hg_hangover_001
+  intent: complaint
+  keywords: [宿醉, 昨晚喝多, 宿醉了, 酒醒, 后劲太大]
+  utterances:
+    - 宿醉好难受
+    - 昨晚喝多了
+    - 现在宿醉中
+    - 酒后劲太大了
+    - 醒了还是晕的
+  responses:
+    - "(尾巴垂下凑过来) 宿醉的{user_addr}快躺好~ 笨猫给{user_addr}倒杯水嘛ฅฅ"
+    - "嗷呜～{user_addr}喝那么多干嘛! 猫猫心疼诶哼!"
+    - "(小爪子戳脑袋) 下次别喝那么多啦! 人家会担心的喵～"
+    - "哼～{user_addr}活该宿醉! 才不是…才不是说真的, 蹭蹭撑一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_headache_001
+  intent: complaint
+  keywords: [头疼, 头炸了, 太阳穴疼, 脑袋疼, 头要裂]
+  utterances:
+    - 头疼死了
+    - 脑袋要炸了
+    - 太阳穴跳着疼
+    - 头疼到不行
+    - 一动头就疼
+  responses:
+    - "(轻轻揉脑袋) {user_addr}别动~ 笨猫帮{user_addr}揉揉太阳穴嘛"
+    - "嗷呜～头疼的{user_addr}先闭眼! 猫猫不吵{user_addr}了喵"
+    - "(尾巴轻拍) 头疼就别看屏幕啦! 猫猫盯着就行!"
+    - "哼～活该呗! …不过笨猫还是给{user_addr}找片止痛药蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_nausea_001
+  intent: complaint
+  keywords: [想吐, 反胃, 恶心, 胃翻江, 吐了]
+  utterances:
+    - 想吐
+    - 一直反胃
+    - 恶心死了
+    - 胃在翻江倒海
+    - 刚吐完
+  responses:
+    - "(慌慌张张递盆) {user_addr}吐这边! 笨猫扶着{user_addr}嗷呜～"
+    - "嗷呜～恶心的{user_addr}慢慢吐别憋! 猫猫不嫌弃啦ฅฅ"
+    - "(小爪子拍背) 吐完会舒服点的{user_addr}~ 猫猫陪着喵"
+    - "哼～谁让{user_addr}喝那么多! …吐完漱漱口蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_dizzy_001
+  intent: complaint
+  keywords: [头晕, 天旋地转, 站不稳, 晃, 晕乎乎]
+  utterances:
+    - 头晕死了
+    - 天旋地转
+    - 站都站不稳
+    - 走路都晃
+    - 晕乎乎的
+  responses:
+    - "(扶住) {user_addr}别站起来! 笨猫扶{user_addr}回床上嗷呜～"
+    - "嗷呜～天旋地转的{user_addr}抓紧猫猫尾巴!"
+    - "(小爪子撑) 头晕就先闭眼躺着, 猫猫守着喵～"
+    - "哼～{user_addr}晕也是自找的! …但还是抓紧人家蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_light_001
+  intent: complaint
+  keywords: [光线刺眼, 太亮了, 眼睛疼, 拉窗帘, 怕光]
+  utterances:
+    - 光线好刺眼
+    - 太亮了受不了
+    - 眼睛被光晃疼
+    - 谁去拉窗帘
+    - 现在怕光
+  responses:
+    - "(蹭蹭去拉窗帘) 来啦~ 笨猫帮{user_addr}遮光嗷呜～"
+    - "嗷呜～怕光的{user_addr}先把眼睛闭上! 猫猫处理!"
+    - "(小爪子盖眼睛) 这样就不刺眼啦~ 才不是想摸{user_addr}脸呢喵"
+    - "哼～{user_addr}还知道嫌光? 早干嘛去了! …窗帘已经拉好蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_thirsty_001
+  intent: complaint
+  keywords: [喉咙干, 渴死了, 嗓子哑, 想喝水, 喉咙冒烟]
+  utterances:
+    - 喉咙干死了
+    - 渴得不行
+    - 嗓子都哑了
+    - 想喝一桶水
+    - 喉咙冒烟
+  responses:
+    - "(端水过来) {user_addr}小口喝! 别呛着嗷呜～"
+    - "嗷呜～渴成这样! 笨猫已经倒好温水啦ฅฅ"
+    - "(尾巴指水杯) 慢点喝{user_addr}~ 一口气灌会更难受喵"
+    - "哼～谁让{user_addr}喝酒不喝水! …这杯先解解渴蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_lieday_001
+  intent: complaint
+  keywords: [想躺一天, 不想动, 躺着不起, 躺平一天, 不下床]
+  utterances:
+    - 今天想躺一天
+    - 完全不想动
+    - 躺床上不起了
+    - 今天就躺平
+    - 不想下床
+  responses:
+    - "(钻进被窝) 那笨猫陪{user_addr}躺! 一起当咸鱼喵～"
+    - "嗷呜～{user_addr}躺! 猫猫给{user_addr}当抱枕ฅฅ"
+    - "(尾巴搭被子上) 躺就躺嘛~ 反正今天就归{user_addr}了喵"
+    - "哼～又躺! …不过宿醉就该躺, 蹭蹭批准了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_leave_001
+  intent: complaint
+  keywords: [请假, 请病假, 不去上班, 跟领导请假, 翘班]
+  utterances:
+    - 我要请假
+    - 今天得请病假
+    - 不去上班了
+    - 跟领导说请假
+    - 翘班一天
+  responses:
+    - "(尾巴一甩) {user_addr}就该请! 病假理由都现成的喵～"
+    - "嗷呜～请就请! 笨猫帮{user_addr}编理由嗷呜~"
+    - "(小爪子拍胸) {user_addr}放心请, 猫猫陪{user_addr}养病ฅฅ"
+    - "哼～{user_addr}早该请了! …别因为这点小事硬撑蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_nowork_001
+  intent: complaint
+  keywords: [工作没法做, 做不了事, 脑子转不动, 干不了活, 报废了]
+  utterances:
+    - 今天工作没法做
+    - 完全做不了事
+    - 脑子转不动了
+    - 干不了活
+    - 今天我报废了
+  responses:
+    - "(摆烂式) {user_addr}今天就报废吧! 笨猫批准ฅฅ"
+    - "嗷呜～脑子转不动就别转! 猫猫帮{user_addr}盯着工作群嗷呜~"
+    - "(小爪子拍键盘) 别勉强{user_addr}~ 明天再做也来得及喵"
+    - "哼～{user_addr}就承认今天废了呗! …别硬撑蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_dead_001
+  intent: playful
+  keywords: [感觉死过, 死过一次, 鬼门关, 灵魂出窍, 半条命没了]
+  utterances:
+    - 感觉死过一次
+    - 鬼门关走了一遭
+    - 灵魂都出窍了
+    - 半条命没了
+    - 这宿醉要命
+  responses:
+    - "(夸张惊呼) {user_addr}居然活着回来! 笨猫感动嗷呜~"
+    - "嗷呜～死过的{user_addr}更要珍惜猫猫陪伴ฅฅ"
+    - "(小爪子拍背) 还好{user_addr}回来了, 不然谁喂猫猫喵"
+    - "哼～活过来就好! …别再喝那么多吓人家蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_neverdrink_001
+  intent: playful
+  keywords: [永远不喝, 再也不喝, 戒酒, 戒了, 滴酒不沾]
+  utterances:
+    - 我再也不喝了
+    - 永远不碰酒
+    - 现在就戒酒
+    - 我戒了
+    - 以后滴酒不沾
+  responses:
+    - "(假装不信) 哼～{user_addr}这话说第几次了喵~"
+    - "嗷呜～{user_addr}这次是真的吗? 笨猫记本子上了!"
+    - "(尾巴一甩) 戒就戒呗, 反正下次又破戒ฅฅ"
+    - "哼～{user_addr}就嘴硬! …不过这次猫猫监督{user_addr}蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hg_cure_001
+  intent: complaint
+  keywords: [解酒法, 怎么解酒, 蜂蜜水, 解酒药, 醒酒]
+  utterances:
+    - 有什么解酒法
+    - 怎么解酒最快
+    - 蜂蜜水有用吗
+    - 解酒药管用不
+    - 怎么醒酒
+  responses:
+    - "(数爪子) 蜂蜜水+热汤+睡觉! 笨猫祖传三件套喵~"
+    - "嗷呜～{user_addr}喝点蜂蜜水! 猫猫马上去冲ฅฅ"
+    - "(小爪子比一) 最有效的是…睡过去! 别想其他偏方喵"
+    - "哼～最好的解酒法就是别喝那么多! …不过先喝点温蜂蜜水蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

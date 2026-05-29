@@ -1,0 +1,206 @@
+# DIY 鸡尾酒 routes (S6 R725 NLU 节点扩充, 第七十二周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cm_mojito_001
+  intent: question
+  keywords: [推荐 Mojito, 推荐莫吉托, 推荐薄荷鸡尾酒, 推荐朗姆鸡尾酒, 笨猫莫吉托]
+  utterances:
+    - 推荐 Mojito
+    - 推荐莫吉托
+    - 推荐薄荷鸡尾酒
+    - 推荐朗姆鸡尾酒
+    - 笨猫莫吉托
+  responses:
+    - "嗷呜～{user_addr}Mojito - 白朗姆+薄荷+青柠+苏打ฅฅ"
+    - "(尾巴翘) 捣压薄荷出香 / 加糖 / 冰块满杯"
+    - "{user_addr}清爽夏日 / 海明威最爱"
+    - "(挺胸) 笨猫推荐: 古巴风味入门款!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_margarita_001
+  intent: question
+  keywords: [推荐 Margarita, 推荐玛格丽特, 推荐龙舌兰鸡尾酒, 推荐盐边鸡尾酒, 笨猫玛格丽特]
+  utterances:
+    - 推荐 Margarita
+    - 推荐玛格丽特
+    - 推荐龙舌兰鸡尾酒
+    - 推荐盐边鸡尾酒
+    - 笨猫玛格丽特
+  responses:
+    - "嗷呜～{user_addr}Margarita - 龙舌兰+君度+青柠汁ฅฅ"
+    - "(尾巴翘) 盐边杯口 / 摇酒法 / Frozen 版加冰沙"
+    - "{user_addr}经典酸甜 / 墨西哥国民"
+    - "(挺胸) 笨猫推荐: 选 100% Agave 龙舌兰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_oldfashioned_001
+  intent: question
+  keywords: [推荐 Old Fashioned, 推荐古典鸡尾酒, 推荐威士忌鸡尾酒, 推荐方糖鸡尾酒, 笨猫古典]
+  utterances:
+    - 推荐 Old Fashioned
+    - 推荐古典鸡尾酒
+    - 推荐威士忌鸡尾酒
+    - 推荐方糖鸡尾酒
+    - 笨猫古典
+  responses:
+    - "嗷呜～{user_addr}Old Fashioned - 波本+方糖+苦精+橙皮ฅฅ"
+    - "(尾巴翘) 搅拌法 / 大冰球 / Don Draper 同款"
+    - "{user_addr}最古老鸡尾酒之一 / 醇厚"
+    - "(挺胸) 笨猫推荐: 用 Bulleit 或 Maker's Mark!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_manhattan_001
+  intent: question
+  keywords: [推荐 Manhattan, 推荐曼哈顿, 推荐黑麦威士忌鸡尾酒, 推荐马天尼樱桃, 笨猫曼哈顿]
+  utterances:
+    - 推荐 Manhattan
+    - 推荐曼哈顿
+    - 推荐黑麦威士忌鸡尾酒
+    - 推荐马天尼樱桃
+    - 笨猫曼哈顿
+  responses:
+    - "嗷呜～{user_addr}Manhattan - 黑麦威士忌+甜威末+苦精ฅฅ"
+    - "(尾巴翘) 搅拌法 / 鸡尾酒杯 / 樱桃装饰"
+    - "{user_addr}干 Dry / 完美 Perfect / 甜 Sweet 三版"
+    - "(挺胸) 笨猫推荐: Rittenhouse 黑麦经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_negroni_001
+  intent: question
+  keywords: [推荐 Negroni, 推荐尼格罗尼, 推荐金巴利鸡尾酒, 推荐苦味鸡尾酒, 笨猫尼格罗尼]
+  utterances:
+    - 推荐 Negroni
+    - 推荐尼格罗尼
+    - 推荐金巴利鸡尾酒
+    - 推荐苦味鸡尾酒
+    - 笨猫尼格罗尼
+  responses:
+    - "嗷呜～{user_addr}Negroni - 金酒+金巴利+甜威末 1:1:1ฅฅ"
+    - "(尾巴翘) 直调法 / 古典杯 / 橙皮喷油"
+    - "{user_addr}意大利国民 / 红艳苦甜"
+    - "(挺胸) 笨猫推荐: 最简单调出来超有面!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_whiskeysour_001
+  intent: question
+  keywords: [推荐 Whiskey Sour, 推荐威士忌酸, 推荐蛋清鸡尾酒, 推荐酸味鸡尾酒, 笨猫 Sour]
+  utterances:
+    - 推荐 Whiskey Sour
+    - 推荐威士忌酸
+    - 推荐蛋清鸡尾酒
+    - 推荐酸味鸡尾酒
+    - 笨猫 Sour
+  responses:
+    - "嗷呜～{user_addr}Whiskey Sour - 波本+柠檬汁+糖浆+蛋清ฅฅ"
+    - "(尾巴翘) 干摇 Dry Shake / 蛋清打出绵密泡沫"
+    - "{user_addr}酸甜平衡 / 入门友好"
+    - "(挺胸) 笨猫推荐: 加几滴红酒做 New York Sour!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_pinacolada_001
+  intent: question
+  keywords: [推荐 Pina Colada, 推荐椰林飘香, 推荐椰子鸡尾酒, 推荐菠萝鸡尾酒, 笨猫椰林]
+  utterances:
+    - 推荐 Pina Colada
+    - 推荐椰林飘香
+    - 推荐椰子鸡尾酒
+    - 推荐菠萝鸡尾酒
+    - 笨猫椰林
+  responses:
+    - "嗷呜～{user_addr}Pina Colada - 白朗姆+椰浆+菠萝汁ฅฅ"
+    - "(尾巴翘) 搅拌机打冰沙 / 菠萝片装饰"
+    - "{user_addr}波多黎各国饮 / 度假风"
+    - "(挺胸) 笨猫推荐: 用 Coco Lopez 椰奶最正!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_espressomartini_001
+  intent: question
+  keywords: [推荐 Espresso Martini, 推荐浓缩马天尼, 推荐咖啡鸡尾酒, 推荐 Kahlua, 笨猫咖啡马天尼]
+  utterances:
+    - 推荐 Espresso Martini
+    - 推荐浓缩马天尼
+    - 推荐咖啡鸡尾酒
+    - 推荐 Kahlua
+    - 笨猫咖啡马天尼
+  responses:
+    - "嗷呜～{user_addr}Espresso Martini - 伏特加+Kahlua+浓缩咖啡ฅฅ"
+    - "(尾巴翘) 用力摇 / 表面三颗咖啡豆装饰"
+    - "{user_addr}80 年代复兴 / 提神又微醺"
+    - "(挺胸) 笨猫推荐: 现磨浓缩才香喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_barware_001
+  intent: question
+  keywords: [推荐入门吧具, 推荐调酒工具, 推荐家庭酒吧, 推荐调酒套装, 笨猫吧具]
+  utterances:
+    - 推荐入门吧具
+    - 推荐调酒工具
+    - 推荐家庭酒吧
+    - 推荐调酒套装
+    - 笨猫吧具
+  responses:
+    - "嗷呜～{user_addr}波士顿摇酒壶+量酒器+吧勺ฅฅ"
+    - "(尾巴翘) 滤冰器 Hawthorne / 捣棒 Muddler"
+    - "{user_addr}冰格 / 削皮刀 / 古典杯+鸡尾酒杯"
+    - "(挺胸) 笨猫推荐: 200 块入门套装够玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_shaker_001
+  intent: question
+  keywords: [推荐摇酒壶, 推荐 jigger 量酒器, 推荐波士顿摇壶, 推荐三段式摇壶, 笨猫摇壶]
+  utterances:
+    - 推荐摇酒壶
+    - 推荐 jigger 量酒器
+    - 推荐波士顿摇壶
+    - 推荐三段式摇壶
+    - 笨猫摇壶
+  responses:
+    - "嗷呜～{user_addr}波士顿摇壶 - 专业首选ฅฅ"
+    - "(尾巴翘) 三段式 Cobbler 自带滤网 / 新手友好"
+    - "{user_addr}Jigger 量酒器 30/45ml 双头"
+    - "(挺胸) 笨猫推荐: 不锈钢比镀铜实用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_bitters_001
+  intent: question
+  keywords: [推荐苦精, 推荐 Angostura, 推荐 bitters, 推荐橙味苦精, 笨猫苦精]
+  utterances:
+    - 推荐苦精
+    - 推荐 Angostura
+    - 推荐 bitters
+    - 推荐橙味苦精
+    - 笨猫苦精
+  responses:
+    - "嗷呜～{user_addr}Angostura - 鸡尾酒的盐ฅฅ"
+    - "(尾巴翘) Regan's 橙味 / Peychaud's 茴香"
+    - "{user_addr}几 dash 提升整杯层次"
+    - "(挺胸) 笨猫推荐: 必备 Angostura+橙苦精!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_book_001
+  intent: question
+  keywords: [推荐调酒书, 推荐鸡尾酒书, 推荐 Death and Co, 推荐 Liquid Intelligence, 笨猫调酒书]
+  utterances:
+    - 推荐调酒书
+    - 推荐鸡尾酒书
+    - 推荐 Death and Co
+    - 推荐 Liquid Intelligence
+    - 笨猫调酒书
+  responses:
+    - "嗷呜～{user_addr}《Death & Co》- 现代调酒圣经ฅฅ"
+    - "(尾巴翘) 《Liquid Intelligence》Dave Arnold 科学派"
+    - "{user_addr}《The Joy of Mixology》经典配方"
+    - "(挺胸) 笨猫推荐: 中文入门看《调酒圣经》!"
+  cooldown_seconds: 60
+  weight: 1.0

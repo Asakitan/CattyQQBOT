@@ -1,0 +1,206 @@
+# 精酿啤酒 routes (S6 R722 NLU 节点扩充, 第七十二周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cb_ipa_001
+  intent: question
+  keywords: [推荐精酿入门, 推荐 IPA, 推荐印度淡啤, 推荐精酿啤酒入门, 笨猫 IPA]
+  utterances:
+    - 推荐精酿入门
+    - 推荐 IPA
+    - 推荐印度淡啤
+    - 推荐精酿啤酒入门
+    - 笨猫 IPA
+  responses:
+    - "嗷呜～{user_addr}IPA - 精酿入门首选ฅฅ"
+    - "(尾巴翘) Stone IPA / Lagunitas IPA"
+    - "{user_addr}苦味+柑橘香, 5-7% 酒精度"
+    - "(挺胸) 猫猫推荐: West Coast IPA 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_stout_001
+  intent: question
+  keywords: [推荐世涛, 推荐 Stout, 推荐黑啤, 推荐健力士, 笨猫世涛]
+  utterances:
+    - 推荐世涛
+    - 推荐 Stout
+    - 推荐黑啤
+    - 推荐健力士
+    - 笨猫世涛
+  responses:
+    - "嗷呜～{user_addr}Stout - 咖啡巧克力香ฅฅ"
+    - "(尾巴翘) Guinness 健力士 / 帝国世涛"
+    - "{user_addr}浓郁醇厚, 适合冬天暖身"
+    - "(舔爪) 笨猫推荐: 燕麦世涛丝滑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_witbier_001
+  intent: question
+  keywords: [推荐比利时白啤, 推荐 Witbier, 推荐福佳白, 推荐 Hoegaarden, 笨猫白啤]
+  utterances:
+    - 推荐比利时白啤
+    - 推荐 Witbier
+    - 推荐福佳白
+    - 推荐 Hoegaarden
+    - 笨猫白啤
+  responses:
+    - "嗷呜～{user_addr}Hoegaarden 福佳白 - 经典ฅฅ"
+    - "(尾巴翘) 橙皮+芫荽香, 小麦顺滑"
+    - "{user_addr}Blue Moon / 比利时修道院白"
+    - "(挺胸) 人家推荐: 夏天冰镇喝爆爽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_lager_001
+  intent: question
+  keywords: [推荐拉格, 推荐 Lager, 推荐皮尔森, 推荐 Pilsner, 笨猫拉格]
+  utterances:
+    - 推荐拉格
+    - 推荐 Lager
+    - 推荐皮尔森
+    - 推荐 Pilsner
+    - 笨猫拉格
+  responses:
+    - "嗷呜～{user_addr}Pilsner Urquell - 皮尔森鼻祖ฅฅ"
+    - "(尾巴翘) 清爽淡雅, 全世界最流行"
+    - "{user_addr}捷克 / 德国传统拉格"
+    - "(舔爪) 笨猫推荐: 配烧烤一绝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_jingA_001
+  intent: question
+  keywords: [推荐京 A, 推荐国产精酿, 推荐北京精酿, 推荐 Jing A, 笨猫京 A]
+  utterances:
+    - 推荐京 A
+    - 推荐国产精酿
+    - 推荐北京精酿
+    - 推荐 Jing A
+    - 笨猫京 A
+  responses:
+    - "嗷呜～{user_addr}京 A - 北京顶流精酿ฅฅ"
+    - "(尾巴翘) 工人 IPA / 飞跨黑啤经典"
+    - "{user_addr}本土风味+国际水准"
+    - "(挺胸) 猫猫推荐: 去三里屯店喝最棒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_master_001
+  intent: question
+  keywords: [推荐高大师, 推荐婴儿肥, 推荐国产 IPA, 推荐 Master Gao, 笨猫高大师]
+  utterances:
+    - 推荐高大师
+    - 推荐婴儿肥
+    - 推荐国产 IPA
+    - 推荐 Master Gao
+    - 笨猫高大师
+  responses:
+    - "嗷呜～{user_addr}高大师 婴儿肥 IPA - 网红ฅฅ"
+    - "(尾巴翘) 南京本土, 茉莉小麦也经典"
+    - "{user_addr}国产精酿先驱品牌"
+    - "(舔爪) 笨猫推荐: 入门国产精酿首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_gooseisland_001
+  intent: question
+  keywords: [推荐鹅岛, 推荐 Goose Island, 推荐 312, 推荐 IPA 鹅岛, 笨猫鹅岛]
+  utterances:
+    - 推荐鹅岛
+    - 推荐 Goose Island
+    - 推荐 312
+    - 推荐 IPA 鹅岛
+    - 笨猫鹅岛
+  responses:
+    - "嗷呜～{user_addr}Goose Island 鹅岛 IPA - 经典ฅฅ"
+    - "(尾巴翘) 312 城市小麦 / Bourbon County"
+    - "{user_addr}芝加哥起家, 现已全球"
+    - "(挺胸) 人家推荐: BCBS 桶陈帝国世涛神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_stone_001
+  intent: question
+  keywords: [推荐鲸园, 推荐 Stone, 推荐 Stone IPA, 推荐巨石, 笨猫 Stone]
+  utterances:
+    - 推荐鲸园
+    - 推荐 Stone
+    - 推荐 Stone IPA
+    - 推荐巨石
+    - 笨猫 Stone
+  responses:
+    - "嗷呜～{user_addr}Stone IPA - 美西 IPA 教科书ฅฅ"
+    - "(尾巴翘) Arrogant Bastard / Ruination"
+    - "{user_addr}苦度爆表, 老饕最爱"
+    - "(舔爪) 笨猫推荐: Enjoy By IPA 新鲜炸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_trillium_001
+  intent: question
+  keywords: [推荐 Trillium, 推荐美东精酿, 推荐 NEIPA, 推荐浑浊 IPA, 笨猫 Trillium]
+  utterances:
+    - 推荐 Trillium
+    - 推荐美东精酿
+    - 推荐 NEIPA
+    - 推荐浑浊 IPA
+    - 笨猫 Trillium
+  responses:
+    - "嗷呜～{user_addr}Trillium - 波士顿神级精酿ฅฅ"
+    - "(尾巴翘) NEIPA 浑浊 IPA 顶流"
+    - "{user_addr}果汁感+丝滑口感"
+    - "(挺胸) 猫猫推荐: 抢酒难度堪比限定!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_bar_bj_001
+  intent: question
+  keywords: [推荐北京精酿吧, 推荐北京精酿酒吧, 推荐悠航, 推荐牛啤堂, 笨猫北京精酿吧]
+  utterances:
+    - 推荐北京精酿吧
+    - 推荐北京精酿酒吧
+    - 推荐悠航
+    - 推荐牛啤堂
+    - 笨猫北京精酿吧
+  responses:
+    - "嗷呜～{user_addr}京 A 三里屯 / 悠航ฅฅ"
+    - "(尾巴翘) 牛啤堂 / Great Leap 大跃"
+    - "{user_addr}NBeer Pub / Slow Boat 悠航"
+    - "(挺胸) 人家推荐: 五道营胡同精酿一条街!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_bar_sh_001
+  intent: question
+  keywords: [推荐上海精酿吧, 推荐上海精酿酒吧, 推荐拳击猫, 推荐 Boxing Cat, 笨猫上海精酿吧]
+  utterances:
+    - 推荐上海精酿吧
+    - 推荐上海精酿酒吧
+    - 推荐拳击猫
+    - 推荐 Boxing Cat
+    - 笨猫上海精酿吧
+  responses:
+    - "嗷呜～{user_addr}Boxing Cat 拳击猫 - 上海老字号ฅฅ"
+    - "(尾巴翘) Liquid Laundry / Daga Brewpub"
+    - "{user_addr}巨鹿路+永康路精酿聚集地"
+    - "(舔爪) 笨猫推荐: 周末巡店一晚走 3 家!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_homebrew_001
+  intent: question
+  keywords: [推荐自酿啤酒, 推荐自酿入门, 推荐自酿套件, 推荐 homebrew, 笨猫自酿]
+  utterances:
+    - 推荐自酿啤酒
+    - 推荐自酿入门
+    - 推荐自酿套件
+    - 推荐 homebrew
+    - 笨猫自酿
+  responses:
+    - "嗷呜～{user_addr}入门套件 ~ 500-1000 元ฅฅ"
+    - "(尾巴翘) 发酵桶+麦芽+酵母+啤酒花"
+    - "{user_addr}从 Extract 麦芽浸膏开始练手"
+    - "(挺胸) 猫猫推荐: 第一缸做艾尔最稳!"
+  cooldown_seconds: 60
+  weight: 1.0

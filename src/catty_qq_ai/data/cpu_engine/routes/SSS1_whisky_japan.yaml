@@ -1,0 +1,206 @@
+# 日威 routes (S6 R723 NLU 节点扩充, 第七十二周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: wj_yamazaki12_001
+  intent: question
+  keywords: [推荐山崎12年, 推荐 Yamazaki 12, 推荐山崎入门, 推荐三得利山崎, 笨猫山崎12]
+  utterances:
+    - 推荐山崎12年
+    - 推荐 Yamazaki 12
+    - 推荐山崎入门
+    - 推荐三得利山崎
+    - "{user_addr}笨猫山崎12年咋样"
+  responses:
+    - "嗷呜～{user_addr}山崎 12 - 日威王者ฅฅ"
+    - "(尾巴翘) 蜂蜜 / 果香 / 微烟"
+    - "{user_addr}三得利 Suntory 旗舰款"
+    - "(挺胸) 猫猫推荐: 山崎 12 一杯入魂!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wj_yamazaki18_001
+  intent: question
+  keywords: [推荐山崎18年, 推荐 Yamazaki 18, 推荐山崎高端, 推荐山崎收藏, 笨猫山崎18]
+  utterances:
+    - 推荐山崎18年
+    - 推荐 Yamazaki 18
+    - 推荐山崎高端
+    - 推荐山崎收藏
+    - "{user_addr}笨猫山崎18年值得吗"
+  responses:
+    - "嗷呜～{user_addr}山崎 18 - 神级ฅฅ"
+    - "(尾巴翘) Mizunara 水楢桶 / 檀香"
+    - "{user_addr}超难买 / 价格爆表"
+    - "(挺胸) 人家推荐: 山崎 18 收藏首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wj_hakushu12_001
+  intent: question
+  keywords: [推荐白州12年, 推荐 Hakushu 12, 推荐白州, 推荐森林威士忌, 笨猫白州]
+  utterances:
+    - 推荐白州12年
+    - 推荐 Hakushu 12
+    - 推荐白州
+    - 推荐森林威士忌
+    - "{user_addr}笨猫白州咋样"
+  responses:
+    - "嗷呜～{user_addr}白州 12 - 森林系ฅฅ"
+    - "(尾巴翘) 青草 / 薄荷 / 淡烟"
+    - "{user_addr}夏天 highball 神器"
+    - "(挺胸) 猫猫推荐: 白州 12 highball 配!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wj_hibiki17_001
+  intent: question
+  keywords: [推荐响17年, 推荐 Hibiki 17, 推荐响, 推荐调和日威, 笨猫响]
+  utterances:
+    - 推荐响17年
+    - 推荐 Hibiki 17
+    - 推荐响
+    - 推荐调和日威
+    - "{user_addr}笨猫响17值得收吗"
+  responses:
+    - "嗷呜～{user_addr}响 Hibiki 17 - 调和之神ฅฅ"
+    - "(尾巴翘) 24 面切子瓶 / 优雅"
+    - "{user_addr}已停产 / 收藏品"
+    - "(挺胸) 笨猫推荐: 响 17 找到就收!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wj_yoichi_001
+  intent: question
+  keywords: [推荐余市, 推荐 Yoichi, 推荐 Nikka 余市, 推荐北海道威士忌, 笨猫余市]
+  utterances:
+    - 推荐余市
+    - 推荐 Yoichi
+    - 推荐 Nikka 余市
+    - 推荐北海道威士忌
+    - "{user_addr}笨猫余市好喝吗"
+  responses:
+    - "嗷呜～{user_addr}余市 Yoichi - Nikka 旗舰ฅฅ"
+    - "(尾巴翘) 煤炭直火蒸馏 / 浓郁泥煤"
+    - "{user_addr}苏格兰风骨日本魂"
+    - "(挺胸) 人家推荐: 余市 single malt!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wj_miyagikyo_001
+  intent: question
+  keywords: [推荐宫城峡, 推荐 Miyagikyo, 推荐宫城峡威士忌, 推荐 Nikka 宫城峡, 笨猫宫城峡]
+  utterances:
+    - 推荐宫城峡
+    - 推荐 Miyagikyo
+    - 推荐宫城峡威士忌
+    - 推荐 Nikka 宫城峡
+    - "{user_addr}笨猫宫城峡咋样"
+  responses:
+    - "嗷呜～{user_addr}宫城峡 Miyagikyo - 优雅花香ฅฅ"
+    - "(尾巴翘) 蒸气加热 / 果香突出"
+    - "{user_addr}和余市并列 Nikka 双骄"
+    - "(挺胸) 猫猫推荐: 宫城峡轻盈入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wj_chichibu_001
+  intent: question
+  keywords: [推荐秩父, 推荐 Chichibu, 推荐 Ichiro, 推荐新兴日威, 笨猫秩父]
+  utterances:
+    - 推荐秩父
+    - 推荐 Chichibu
+    - 推荐 Ichiro
+    - 推荐新兴日威
+    - "{user_addr}笨猫秩父值得收吗"
+  responses:
+    - "嗷呜～{user_addr}秩父 Chichibu - 工艺派新星ฅฅ"
+    - "(尾巴翘) Ichiro's Malt / 一郎"
+    - "{user_addr}小批量 / 拍卖价飙"
+    - "(挺胸) 笨猫推荐: 秩父扑克牌系列神!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wj_suntory_001
+  intent: question
+  keywords: [推荐三得利, 推荐 Suntory, 推荐角瓶, 推荐知多, 笨猫三得利]
+  utterances:
+    - 推荐三得利
+    - 推荐 Suntory
+    - 推荐角瓶
+    - 推荐知多
+    - "{user_addr}笨猫三得利哪款好"
+  responses:
+    - "嗷呜～{user_addr}Suntory 旗下: 山崎/白州/响ฅฅ"
+    - "(尾巴翘) 角瓶 highball 国民款"
+    - "{user_addr}知多 Chita - 谷物轻盈"
+    - "(挺胸) 猫猫推荐: 角瓶 highball 日常!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wj_starter_001
+  intent: question
+  keywords: [推荐日威入门, 推荐日威新手, 推荐便宜日威, 推荐日威自饮, 笨猫日威入门]
+  utterances:
+    - 推荐日威入门
+    - 推荐日威新手
+    - 推荐便宜日威
+    - 推荐日威自饮
+    - "{user_addr}笨猫日威新手买啥"
+  responses:
+    - "嗷呜～{user_addr}入门: 角瓶 / 知多ฅฅ"
+    - "(尾巴翘) 白州 NAS / 山崎 NAS"
+    - "{user_addr}先 highball 再纯饮"
+    - "(挺胸) 笨猫推荐: 角瓶 highball 起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wj_collection_001
+  intent: question
+  keywords: [推荐日威收藏, 推荐日威投资, 推荐稀有日威, 推荐绝版日威, 笨猫日威收藏]
+  utterances:
+    - 推荐日威收藏
+    - 推荐日威投资
+    - 推荐稀有日威
+    - 推荐绝版日威
+    - "{user_addr}笨猫日威藏啥升值"
+  responses:
+    - "嗷呜～{user_addr}收藏: 响 17/21/30ฅฅ"
+    - "(尾巴翘) 山崎 18/25 / 秩父扑克"
+    - "{user_addr}轻井泽 Karuizawa - 神级"
+    - "(挺胸) 人家推荐: 响 17 + 山崎 18!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wj_pairing_001
+  intent: question
+  keywords: [推荐日威搭配, 推荐日威下酒菜, 推荐日威配餐, 推荐 highball 配, 笨猫日威配]
+  utterances:
+    - 推荐日威搭配
+    - 推荐日威下酒菜
+    - 推荐日威配餐
+    - 推荐 highball 配
+    - "{user_addr}笨猫日威配啥吃"
+  responses:
+    - "嗷呜～{user_addr}highball 配炸鸡 / 唐扬げฅฅ"
+    - "(尾巴翘) 纯饮配生鱼片 / 寿司"
+    - "{user_addr}巧克力 / 烟熏奶酪"
+    - "(挺胸) 猫猫推荐: highball + 炸鸡 yyds!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wj_bar_001
+  intent: question
+  keywords: [推荐日威吧, 推荐威士忌吧, 推荐日威酒吧, 推荐喝日威地方, 笨猫日威吧]
+  utterances:
+    - 推荐日威吧
+    - 推荐威士忌吧
+    - 推荐日威酒吧
+    - 推荐喝日威地方
+    - "{user_addr}笨猫日威吧推荐"
+  responses:
+    - "嗷呜～{user_addr}银座 Bar High Five 神店ฅฅ"
+    - "(尾巴翘) 京都 Bar Rocking Chair"
+    - "{user_addr}国内: 上海 The Whisky Library"
+    - "(挺胸) 笨猫推荐: 银座 High Five 朝圣!"
+  cooldown_seconds: 60
+  weight: 0.8

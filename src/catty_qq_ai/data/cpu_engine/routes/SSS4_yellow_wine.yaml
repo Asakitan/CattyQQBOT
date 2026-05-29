@@ -1,0 +1,206 @@
+# 黄酒 routes (S6 R726 NLU 节点扩充, 第七十二周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: yw_shaoxing_001
+  intent: question
+  keywords: [推荐绍兴黄酒, 推荐绍兴酒, 推荐绍兴, 推荐黄酒, 笨猫绍兴黄酒]
+  utterances:
+    - 推荐绍兴黄酒
+    - 推荐绍兴酒
+    - 推荐绍兴
+    - 推荐黄酒
+    - 笨猫绍兴黄酒
+  responses:
+    - "嗷呜～{user_addr}绍兴黄酒 - 黄酒之祖ฅฅ"
+    - "(尾巴翘) 鉴湖水 + 糯米 + 麦曲, 千年工艺"
+    - "{user_addr}元红 / 加饭 / 善酿 / 香雪 四大类"
+    - "(挺胸) 猫猫推荐: 绍兴产地正宗入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_jiafan_001
+  intent: question
+  keywords: [推荐加饭酒, 推荐加饭, 推荐加饭黄酒, 推荐绍兴加饭, 笨猫加饭酒]
+  utterances:
+    - 推荐加饭酒
+    - 推荐加饭
+    - 推荐加饭黄酒
+    - 推荐绍兴加饭
+    - 笨猫加饭酒
+  responses:
+    - "嗷呜～{user_addr}加饭酒 - 多加糯米更醇厚ฅฅ"
+    - "(尾巴翘) 酒精 17-18%, 半干型代表"
+    - "{user_addr}颜色橙黄, 香气浓郁回甘"
+    - "(挺胸) 人家推荐: 古越龙山五年陈加饭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_huadiao_001
+  intent: question
+  keywords: [推荐花雕, 推荐花雕酒, 推荐花雕黄酒, 推荐雕花酒, 笨猫花雕]
+  utterances:
+    - 推荐花雕
+    - 推荐花雕酒
+    - 推荐花雕黄酒
+    - 推荐雕花酒
+    - 笨猫花雕
+  responses:
+    - "嗷呜～{user_addr}花雕 - 陶坛雕花外观超漂亮ฅฅ"
+    - "(尾巴翘) 加饭酒长期陈酿, 5/10/20年"
+    - "{user_addr}做菜也超棒, 花雕鸡 / 花雕醉蟹"
+    - "(挺胸) 笨猫推荐: 十年花雕送礼有面!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_nverhong_001
+  intent: question
+  keywords: [推荐女儿红, 推荐女儿红黄酒, 推荐女儿酒, 推荐绍兴女儿红, 笨猫女儿红]
+  utterances:
+    - 推荐女儿红
+    - 推荐女儿红黄酒
+    - 推荐女儿酒
+    - 推荐绍兴女儿红
+    - 笨猫女儿红
+  responses:
+    - "嗷呜～{user_addr}女儿红 - 生女埋酒嫁女启封超浪漫ฅฅ"
+    - "(尾巴翘) 花雕同源, 民俗故事加持"
+    - "{user_addr}口感醇厚, 回味甘甜悠长"
+    - "(挺胸) 猫猫推荐: 婚宴 / 生日礼送爆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_zhuangyuanhong_001
+  intent: question
+  keywords: [推荐状元红, 推荐状元红黄酒, 推荐状元酒, 推荐绍兴状元红, 笨猫状元红]
+  utterances:
+    - 推荐状元红
+    - 推荐状元红黄酒
+    - 推荐状元酒
+    - 推荐绍兴状元红
+    - 笨猫状元红
+  responses:
+    - "嗷呜～{user_addr}状元红 - 生男埋酒中状元启封ฅฅ"
+    - "(尾巴翘) 跟女儿红配套, 寓意金榜题名"
+    - "{user_addr}元红工艺, 干型为主回甘清爽"
+    - "(挺胸) 人家推荐: 升学宴 / 考试季首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_guyuelongshan_001
+  intent: question
+  keywords: [推荐古越龙山, 推荐古越龙山黄酒, 推荐龙山黄酒, 推荐古越龙山花雕, 笨猫古越龙山]
+  utterances:
+    - 推荐古越龙山
+    - 推荐古越龙山黄酒
+    - 推荐龙山黄酒
+    - 推荐古越龙山花雕
+    - 笨猫古越龙山
+  responses:
+    - "嗷呜～{user_addr}古越龙山 - 黄酒界扛把子ฅฅ"
+    - "(尾巴翘) 国家级非遗, 绍兴黄酒龙头"
+    - "{user_addr}中央库 / 五年陈 / 十年陈系列全覆盖"
+    - "(挺胸) 笨猫推荐: 中央库八年陈日常喝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_kuaijishan_001
+  intent: question
+  keywords: [推荐会稽山, 推荐会稽山黄酒, 推荐会稽山花雕, 推荐会稽山纯正, 笨猫会稽山]
+  utterances:
+    - 推荐会稽山
+    - 推荐会稽山黄酒
+    - 推荐会稽山花雕
+    - 推荐会稽山纯正
+    - 笨猫会稽山
+  responses:
+    - "嗷呜～{user_addr}会稽山 - 绍兴老牌三杰之一ฅฅ"
+    - "(尾巴翘) 跟古越龙山 / 塔牌齐名"
+    - "{user_addr}纯正五年 / 大师兰亭系列经典"
+    - "(挺胸) 猫猫推荐: 会稽山纯正三年性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_shanniang_001
+  intent: question
+  keywords: [推荐善酿酒, 推荐善酿, 推荐善酿黄酒, 推荐绍兴善酿, 笨猫善酿]
+  utterances:
+    - 推荐善酿酒
+    - 推荐善酿
+    - 推荐善酿黄酒
+    - 推荐绍兴善酿
+    - 笨猫善酿
+  responses:
+    - "嗷呜～{user_addr}善酿 - 用陈年元红代水酿ฅฅ"
+    - "(尾巴翘) 半甜型, 酒精 15% 上下"
+    - "{user_addr}颜色深琥珀, 香气醇厚带焦香"
+    - "(挺胸) 人家推荐: 配甜点 / 月饼超搭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_jimo_001
+  intent: question
+  keywords: [推荐即墨老酒, 推荐即墨, 推荐山东黄酒, 推荐北方黄酒, 笨猫即墨老酒]
+  utterances:
+    - 推荐即墨老酒
+    - 推荐即墨
+    - 推荐山东黄酒
+    - 推荐北方黄酒
+    - 笨猫即墨老酒
+  responses:
+    - "嗷呜～{user_addr}即墨老酒 - 山东青岛特产ฅฅ"
+    - "(尾巴翘) 黍米黄酒代表, 北方派系"
+    - "{user_addr}焦黑色, 焦香突出微苦回甘"
+    - "(挺胸) 笨猫推荐: 跟绍兴黄酒口感很不同!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_huiquan_001
+  intent: question
+  keywords: [推荐惠泉酒, 推荐江苏惠泉, 推荐惠泉黄酒, 推荐无锡黄酒, 笨猫惠泉]
+  utterances:
+    - 推荐惠泉酒
+    - 推荐江苏惠泉
+    - 推荐惠泉黄酒
+    - 推荐无锡黄酒
+    - 笨猫惠泉
+  responses:
+    - "嗷呜～{user_addr}惠泉酒 - 江苏无锡名产ฅฅ"
+    - "(尾巴翘) 惠山泉水酿, 红楼梦里出现过"
+    - "{user_addr}清爽型, 口感比绍兴更轻"
+    - "(挺胸) 猫猫推荐: 江南菜配惠泉很搭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_pairing_001
+  intent: question
+  keywords: [推荐黄酒搭配, 推荐黄酒配菜, 推荐黄酒下酒菜, 推荐黄酒佐餐, 笨猫黄酒搭配]
+  utterances:
+    - 推荐黄酒搭配
+    - 推荐黄酒配菜
+    - 推荐黄酒下酒菜
+    - 推荐黄酒佐餐
+    - 笨猫黄酒搭配
+  responses:
+    - "嗷呜～{user_addr}加饭酒配大闸蟹 - 江南经典ฅฅ"
+    - "(尾巴翘) 花雕配红烧肉 / 东坡肉"
+    - "{user_addr}善酿配甜点, 香雪配凉菜"
+    - "(挺胸) 笨猫推荐: 温到 38℃ 喝最香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_health_001
+  intent: question
+  keywords: [推荐黄酒养生, 推荐黄酒功效, 推荐黄酒好处, 推荐黄酒养生喝法, 笨猫黄酒养生]
+  utterances:
+    - 推荐黄酒养生
+    - 推荐黄酒功效
+    - 推荐黄酒好处
+    - 推荐黄酒养生喝法
+    - 笨猫黄酒养生
+  responses:
+    - "嗷呜～{user_addr}黄酒含 21 种氨基酸 - 液体蛋糕ฅฅ"
+    - "(尾巴翘) 温饮活血, 适合冬天驱寒"
+    - "{user_addr}加姜丝 / 话梅 / 枸杞更养生"
+    - "(挺胸) 人家提醒: 每天 100ml 即可别贪杯!"
+  cooldown_seconds: 60
+  weight: 1.0
