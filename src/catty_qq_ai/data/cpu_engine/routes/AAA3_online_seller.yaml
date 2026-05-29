@@ -1,0 +1,206 @@
+# 网店开张 / Shopify 淘宝 routes (S6 R545 NLU 节点扩充, 第五十四周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: os_shopify_001
+  intent: question
+  keywords: [推荐 Shopify, 推荐海外建店, 推荐独立站, 推荐跨境电商, 笨猫 Shopify]
+  utterances:
+    - 推荐 Shopify
+    - 推荐海外建店
+    - 推荐独立站
+    - 推荐跨境电商
+    - "{user_addr}笨猫 Shopify 怎么开"
+  responses:
+    - "嗷呜～{user_addr}Shopify - 独立站之王ฅฅ"
+    - "(尾巴翘) 月费 $39 起 / 主题多 / 插件全"
+    - "{user_addr}收 PayPal / Stripe / 全球发货"
+    - "(挺胸) 人家推荐: Dawn 免费主题入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_taobao_001
+  intent: question
+  keywords: [推荐淘宝开店, 推荐淘宝店铺, 推荐个人开店, 推荐 C 店, 笨猫淘宝]
+  utterances:
+    - 推荐淘宝开店
+    - 推荐淘宝店铺
+    - 推荐个人开店
+    - 推荐 C 店
+    - "{user_addr}笨猫淘宝怎么开"
+  responses:
+    - "嗷呜～{user_addr}淘宝 - 国内最大平台ฅฅ"
+    - "(尾巴翘) 押金 1000 / 实名认证 / 7 天上架"
+    - "{user_addr}个人店免费 / 企业店要 30 资质"
+    - "(挺胸) 猫猫推荐: 先从 1688 找货源!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_pdd_001
+  intent: question
+  keywords: [推荐拼多多开店, 推荐拼多多店, 推荐砍价电商, 推荐下沉市场, 笨猫拼多多]
+  utterances:
+    - 推荐拼多多开店
+    - 推荐拼多多店
+    - 推荐砍价电商
+    - 推荐下沉市场
+    - "{user_addr}笨猫拼多多怎么开"
+  responses:
+    - "嗷呜～{user_addr}拼多多 - 下沉市场之王ฅฅ"
+    - "(尾巴翘) 押金 1000 / 流量便宜 / 转化高"
+    - "{user_addr}主打低价 / 适合白牌 / 现金补贴"
+    - "(挺胸) 笨猫推荐: 选品避开品牌雷区!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_douyin_001
+  intent: question
+  keywords: [推荐抖音小店, 推荐抖店, 推荐短视频电商, 推荐直播带货, 笨猫抖音小店]
+  utterances:
+    - 推荐抖音小店
+    - 推荐抖店
+    - 推荐短视频电商
+    - 推荐直播带货
+    - "{user_addr}笨猫抖音小店"
+  responses:
+    - "嗷呜～{user_addr}抖音小店 - 内容电商ฅฅ"
+    - "(尾巴翘) 个体店 2000 / 公司店看类目"
+    - "{user_addr}直播 + 短视频 / 流量爆发力强"
+    - "(挺胸) 人家推荐: 自播 + 达人分销!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_weixin_001
+  intent: question
+  keywords: [推荐微信小店, 推荐视频号小店, 推荐微信电商, 推荐私域电商, 笨猫微信小店]
+  utterances:
+    - 推荐微信小店
+    - 推荐视频号小店
+    - 推荐微信电商
+    - 推荐私域电商
+    - "{user_addr}笨猫微信小店"
+  responses:
+    - "嗷呜～{user_addr}微信小店 - 私域之王ฅฅ"
+    - "(尾巴翘) 视频号 + 公众号 + 小程序联动"
+    - "{user_addr}低门槛 / 0 入驻费 / 社交裂变"
+    - "(挺胸) 猫猫推荐: 视频号直播打底!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_jd_001
+  intent: question
+  keywords: [推荐京东开店, 推荐京东 POP, 推荐自营京东, 推荐 3C 电商, 笨猫京东]
+  utterances:
+    - 推荐京东开店
+    - 推荐京东 POP
+    - 推荐自营京东
+    - 推荐 3C 电商
+    - "{user_addr}笨猫京东怎么开"
+  responses:
+    - "嗷呜～{user_addr}京东 - 品质电商ฅฅ"
+    - "(尾巴翘) POP 店 / 旗舰店 / 专营店"
+    - "{user_addr}押金 1-10w / 资质严 / 客单价高"
+    - "(挺胸) 笨猫推荐: 3C / 家电类目最香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_aliexpress_001
+  intent: question
+  keywords: [推荐速卖通, 推荐 AliExpress, 推荐阿里跨境, 推荐俄罗斯电商, 笨猫速卖通]
+  utterances:
+    - 推荐速卖通
+    - 推荐 AliExpress
+    - 推荐阿里跨境
+    - 推荐俄罗斯电商
+    - "{user_addr}笨猫速卖通"
+  responses:
+    - "嗷呜～{user_addr}AliExpress - 阿里跨境ฅฅ"
+    - "(尾巴翘) 主攻俄罗斯 / 西班牙 / 巴西"
+    - "{user_addr}年费 $1500 起 / 菜鸟物流加持"
+    - "(挺胸) 人家推荐: 半托管模式省心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_amazon_001
+  intent: question
+  keywords: [推荐亚马逊 FBA, 推荐 Amazon, 推荐美国电商, 推荐欧洲站, 笨猫亚马逊]
+  utterances:
+    - 推荐亚马逊 FBA
+    - 推荐 Amazon
+    - 推荐美国电商
+    - 推荐欧洲站
+    - "{user_addr}笨猫亚马逊怎么开"
+  responses:
+    - "嗷呜～{user_addr}Amazon FBA - 跨境霸主ฅฅ"
+    - "(尾巴翘) 月费 $39.99 / FBA 仓储发货"
+    - "{user_addr}美/欧/日站 / 流量大 / 竞争激烈"
+    - "(挺胸) 猫猫推荐: 先做精品 / 别铺货!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_etsy_001
+  intent: question
+  keywords: [推荐 Etsy, 推荐手工电商, 推荐原创设计, 推荐文创平台, 笨猫 Etsy]
+  utterances:
+    - 推荐 Etsy
+    - 推荐手工电商
+    - 推荐原创设计
+    - 推荐文创平台
+    - "{user_addr}笨猫 Etsy 怎么开"
+  responses:
+    - "嗷呜～{user_addr}Etsy - 手工原创之家ฅฅ"
+    - "(尾巴翘) 上架费 $0.20 / 件 / 佣金 6.5%"
+    - "{user_addr}手工 / 复古 / 数字下载香"
+    - "(挺胸) 笨猫推荐: SVG 数字下载零库存!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_dropship_001
+  intent: question
+  keywords: [推荐一件代发, 推荐 dropshipping, 推荐无货源, 推荐分销, 笨猫一件代发]
+  utterances:
+    - 推荐一件代发
+    - 推荐 dropshipping
+    - 推荐无货源
+    - 推荐分销
+    - "{user_addr}笨猫一件代发"
+  responses:
+    - "嗷呜～{user_addr}Dropshipping - 零库存ฅฅ"
+    - "(尾巴翘) AliExpress / CJ / Spocket 供货"
+    - "{user_addr}DSers / Oberlo 插件自动同步"
+    - "(挺胸) 人家推荐: 选品 + 广告才是核心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_select_001
+  intent: question
+  keywords: [推荐开店选品, 推荐爆款选品, 推荐选品工具, 推荐市场调研, 笨猫选品]
+  utterances:
+    - 推荐开店选品
+    - 推荐爆款选品
+    - 推荐选品工具
+    - 推荐市场调研
+    - "{user_addr}笨猫怎么选品"
+  responses:
+    - "嗷呜～{user_addr}选品 = 成功一半ฅฅ"
+    - "(尾巴翘) 生意参谋 / 蝉妈妈 / 卖家精灵"
+    - "{user_addr}Helium10 / Jungle Scout 亚马逊用"
+    - "(挺胸) 笨猫推荐: 蓝海 + 高毛利 + 复购!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_design_001
+  intent: question
+  keywords: [推荐店铺装修, 推荐店铺美工, 推荐详情页设计, 推荐主图设计, 笨猫店铺装修]
+  utterances:
+    - 推荐店铺装修
+    - 推荐店铺美工
+    - 推荐详情页设计
+    - 推荐主图设计
+    - "{user_addr}笨猫店铺装修"
+  responses:
+    - "嗷呜～{user_addr}装修 - 转化率关键ฅฅ"
+    - "(尾巴翘) Photoshop / Figma / Canva 三件套"
+    - "{user_addr}详情页突出卖点 / 主图要点击"
+    - "(挺胸) 猫猫推荐: 找美工外包 80-200/张!"
+  cooldown_seconds: 60
+  weight: 1.0

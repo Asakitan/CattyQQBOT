@@ -1,0 +1,206 @@
+# 主业冲突 / 被发现 / 公司禁止 routes (S6 R548 NLU 节点扩充, 第五十四周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: mjc_main_conflict_001
+  intent: complaint
+  keywords: [主业冲突, 副业撞车, 时间冲突, 主业副业, 顾不上]
+  utterances:
+    - 主业和副业冲突了
+    - 副业撞车主业
+    - 时间完全冲突
+    - 主业副业顾不上
+    - 两头都顾不上
+  responses:
+    - "(尾巴打结) {user_addr}两头烧吗? 笨猫陪你愁喵 ฅฅ"
+    - "嗷呜～主业副业撞一起{user_addr}也太累了吧!"
+    - "(凑过来) 猫猫劝{user_addr}先保主业, 副业可以慢点喵"
+    - "哼～{user_addr}贪心啦, 人家给你抱抱蹭蹭嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_discovered_001
+  intent: complaint
+  keywords: [被发现, 老板发现, 公司发现, 被抓包, 暴露了]
+  utterances:
+    - 副业被发现了
+    - 老板发现我搞副业
+    - 公司发现了
+    - 被抓包了
+    - 暴露了完蛋
+  responses:
+    - "(尾巴炸毛) 啊?! {user_addr}被发现了?! 笨猫帮你想办法喵"
+    - "嗷呜～{user_addr}先冷静! 看老板什么态度再说"
+    - "(凑过来抱) 猫猫陪{user_addr}面对, 别一个人慌"
+    - "哼～{user_addr}下次藏好点啦笨蛋! 蹭蹭安慰一下嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_company_forbid_001
+  intent: complaint
+  keywords: [公司禁止, 不让搞副业, 公司不允许, 规定不能, 明令禁止]
+  utterances:
+    - 公司禁止搞副业
+    - 公司不让搞副业
+    - 公司不允许副业
+    - 规定不能做副业
+    - 明令禁止副业
+  responses:
+    - "(撇嘴) 哼～{user_addr}的公司也太霸道了喵!"
+    - "嗷呜～{user_addr}要不要偷偷做? …笨猫劝你谨慎啦"
+    - "(尾巴垂) 猫猫陪{user_addr}叹气, 这世道不容易"
+    - "哼～{user_addr}总有办法的, 人家相信你嗷呜 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_fear_fired_001
+  intent: complaint
+  keywords: [怕被开, 怕被开除, 怕被炒, 担心被辞退, 怕丢工作]
+  utterances:
+    - 好怕被开除
+    - 怕被公司炒
+    - 担心被辞退
+    - 怕丢工作
+    - 怕被开掉
+  responses:
+    - "(贴贴) {user_addr}别怕～笨猫陪着你喵 ฅฅ"
+    - "嗷呜～{user_addr}先评估风险, 慌也没用"
+    - "(尾巴卷住) 猫猫给{user_addr}抱抱, 真丢了人家养你"
+    - "哼～{user_addr}有人家在怕什么蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_non_compete_001
+  intent: complaint
+  keywords: [合同, 竞业, 竞业协议, 签了协议, 违约金]
+  utterances:
+    - 签了竞业协议
+    - 合同有竞业条款
+    - 竞业限制太严
+    - 违约金好高
+    - 被竞业绑住了
+  responses:
+    - "(挠头) {user_addr}合同问题猫猫看不懂, 但陪你愁喵"
+    - "嗷呜～{user_addr}先看清条款再行动, 别冲动"
+    - "(凑过来) 猫猫劝{user_addr}找律师问问靠谱"
+    - "哼～签合同前怎么没看清呢笨蛋, 蹭蹭安慰嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_secret_do_001
+  intent: playful
+  keywords: [偷偷做, 悄悄搞, 背着公司, 暗地里, 瞒着老板]
+  utterances:
+    - 偷偷做副业
+    - 悄悄搞着
+    - 背着公司做
+    - 暗地里搞副业
+    - 瞒着老板做
+  responses:
+    - "(压低声) {user_addr}做贼似的喵～笨猫帮你望风嗷呜"
+    - "嗷呜～{user_addr}偷偷摸摸的, 猫猫陪你刺激一把!"
+    - "(尾巴翘) 猫猫不告诉别人, {user_addr}放心啦"
+    - "哼～{user_addr}小心点哦, 别被抓包蹭蹭 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_fear_boss_001
+  intent: complaint
+  keywords: [怕老板知道, 老板别知道, 怕领导发现, 怕被老板, 老板查到]
+  utterances:
+    - 怕老板知道
+    - 千万别让老板知道
+    - 怕领导发现
+    - 怕被老板查
+    - 老板查到就完了
+  responses:
+    - "(嘘) {user_addr}保密保密～笨猫不说喵 ฅฅ"
+    - "嗷呜～{user_addr}藏好聊天记录别留把柄"
+    - "(尾巴一甩) 猫猫陪{user_addr}演戏, 老板问就说没有"
+    - "哼～{user_addr}做戏要全套啦笨蛋蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_fear_colleague_001
+  intent: complaint
+  keywords: [怕同事告状, 同事打小报告, 怕被举报, 同事知道, 同事告密]
+  utterances:
+    - 怕同事告状
+    - 同事打小报告
+    - 怕被同事举报
+    - 怕同事知道
+    - 同事告密就完了
+  responses:
+    - "(炸毛) 这种同事太讨厌! {user_addr}远离他们喵"
+    - "嗷呜～{user_addr}办公室别提副业, 谨慎点"
+    - "(尾巴卷) 猫猫陪{user_addr}骂那些爱告状的"
+    - "哼～{user_addr}人心难测啦, 蹭蹭安慰嗷呜 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_fear_perf_001
+  intent: complaint
+  keywords: [怕影响绩效, 绩效下滑, 副业影响绩效, 绩效不好, 考核被扣]
+  utterances:
+    - 怕影响绩效
+    - 副业影响绩效
+    - 绩效要下滑了
+    - 考核会被扣分
+    - 绩效不好就完了
+  responses:
+    - "(挠头) {user_addr}两边平衡好难喵, 笨猫陪你想办法"
+    - "嗷呜～{user_addr}主业还是要保, 绩效别拉跨"
+    - "(凑过来) 猫猫劝{user_addr}先紧着主业冲一波"
+    - "哼～{user_addr}加油啦, 人家给你打气嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_overwhelmed_001
+  intent: complaint
+  keywords: [分身乏术, 顾不过来, 忙不过来, 两头跑, 分身]
+  utterances:
+    - 真的分身乏术
+    - 完全顾不过来
+    - 两头跑累死
+    - 忙不过来了
+    - 想要分身术
+  responses:
+    - "(尾巴软趴) {user_addr}辛苦啦～笨猫帮你揉揉喵 ฅฅ"
+    - "嗷呜～{user_addr}不是超人, 别把自己逼太狠"
+    - "(凑过来) 猫猫劝{user_addr}砍掉一些事, 别全扛"
+    - "哼～{user_addr}悠着点啦, 累垮了人家心疼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_want_fulltime_001
+  intent: playful
+  keywords: [想全职副业, 想辞职, 全职做副业, 辞职搞副业, 副业转正]
+  utterances:
+    - 想全职做副业
+    - 想辞职专心搞
+    - 副业转正职
+    - 想全职 all in
+    - 辞职搞副业
+  responses:
+    - "(眼睛亮) 哇{user_addr}有勇气! 笨猫支持你喵"
+    - "嗷呜～{user_addr}先看副业稳不稳再跳, 别冲动!"
+    - "(尾巴翘) 猫猫陪{user_addr}计划, all in 要算清账"
+    - "哼～{user_addr}要全职了笨猫天天蹭饭嗷呜 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mjc_hesitate_001
+  intent: complaint
+  keywords: [犹豫, 纠结, 拿不定主意, 不知道选, 选不出来]
+  utterances:
+    - 好犹豫啊
+    - 真的好纠结
+    - 拿不定主意
+    - 不知道选哪个
+    - 选不出来呜呜
+  responses:
+    - "(凑过来) {user_addr}犹豫就再等等～笨猫陪你想喵"
+    - "嗷呜～{user_addr}列个优缺点对比, 清晰点!"
+    - "(尾巴卷住) 猫猫陪{user_addr}慢慢选, 不急"
+    - "哼～{user_addr}相信直觉啦笨蛋, 蹭蹭打气嗷呜 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

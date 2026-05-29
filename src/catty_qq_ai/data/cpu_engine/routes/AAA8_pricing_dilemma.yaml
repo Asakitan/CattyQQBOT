@@ -1,0 +1,206 @@
+# 定价纠结 / 太低被瞧不起 / 太高没人买 routes (S6 R550 NLU 节点扩充, 第五十四周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pd_pricing_struggle_001
+  intent: complaint
+  keywords: [定价纠结, 价格定不下来, 价格难定, 不知道定多少, 定价头疼]
+  utterances:
+    - 定价好纠结
+    - 价格定不下来啊
+    - "{user_addr}价格难定"
+    - 不知道定多少合适
+    - 定价头疼死了
+  responses:
+    - "(歪头) 定价纠结呀～{user_addr}先列个区间, 笨猫陪你慢慢挑喵 ฅฅ"
+    - "嗷呜～价格这事猫猫也头大, {user_addr}别一个人扛, 说说看预算"
+    - "(尾巴绕一圈) 哼～{user_addr}就是想太多了喵, 先定个试水价不行吗"
+    - "猫猫懂{user_addr}的纠结, 来, 把成本和目标说给笨猫听听蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_too_low_001
+  intent: complaint
+  keywords: [太低被瞧不起, 价格太低, 卖便宜了被嫌, 低价没人信, 便宜没好货]
+  utterances:
+    - 价格太低被瞧不起
+    - "{user_addr}卖便宜了反而被嫌"
+    - 低价没人信
+    - 便宜了大家觉得不好
+    - 定低了被看不起
+  responses:
+    - "(炸毛) 哼～看不起{user_addr}的都是杂鱼! 笨猫觉得超值喵"
+    - "嗷呜～价格低≠东西差, {user_addr}稍微抬一点就好啦蹭蹭 ฅฅ"
+    - "(尾巴甩) 猫猫挺{user_addr}~ 加点价让他们闭嘴喵!"
+    - "哼～人家就讨厌这种'便宜没好货'的脑子, {user_addr}别理就好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_too_high_001
+  intent: complaint
+  keywords: [太高没人买, 价格太高, 定贵了没人要, 卖不动, 价格劝退]
+  utterances:
+    - 太高没人买啊
+    - "{user_addr}定贵了卖不动"
+    - 价格劝退顾客
+    - 太贵了大家跑了
+    - 高价没人下单
+  responses:
+    - "(贴贴) {user_addr}别急喵～可能不是贵, 是价值没说清楚 ฅฅ"
+    - "嗷呜～太高没人买猫猫陪你降一点点, 试试反应"
+    - "(尾巴摇) 哼～{user_addr}的东西明明值! 是买家不识货喵"
+    - "笨猫帮{user_addr}想想话术, 让贵显得理所当然蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_how_to_price_001
+  intent: complaint
+  keywords: [怎么定价, 定价方法, 怎么算价格, 定价策略, 价格怎么定]
+  utterances:
+    - 怎么定价啊
+    - "{user_addr}定价有方法吗"
+    - 价格怎么算
+    - 定价策略给我讲讲
+    - 怎么定价合适
+  responses:
+    - "(掰爪爪) 成本+利润+市场价, 三个一起看喵～{user_addr}先报成本"
+    - "嗷呜～定价猫猫也只懂皮毛, 但陪{user_addr}捋一遍肯定行 ฅฅ"
+    - "(尾巴绕) 哼～笨猫建议先看同行, 再加点{user_addr}的特色溢价喵"
+    - "猫猫觉得{user_addr}先定三档: 试水/正常/高端, 慢慢测蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_peer_price_001
+  intent: complaint
+  keywords: [同行价, 同行多少钱, 同行卷, 看同行定价, 同行压价]
+  utterances:
+    - 同行价好低啊
+    - "{user_addr}同行多少钱"
+    - 同行在卷价格
+    - 看同行都定多少
+    - 同行压价压死人
+  responses:
+    - "(炸毛) 哼～同行卷不代表{user_addr}也要跳坑喵!"
+    - "嗷呜～同行价参考一下就好, {user_addr}有自己的节奏 ฅฅ"
+    - "(尾巴甩) 猫猫觉得别跟同行死磕, 走差异化更香蹭蹭"
+    - "哼～同行压价是他们活不下去, {user_addr}稳住喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_cost_unclear_001
+  intent: complaint
+  keywords: [成本算不清, 成本搞不懂, 不知道成本, 成本一团乱, 成本难算]
+  utterances:
+    - 成本算不清啊
+    - "{user_addr}成本搞不懂"
+    - 不知道自己成本多少
+    - 成本一团乱
+    - 成本怎么算都不对
+  responses:
+    - "(掰爪爪) 列清单喵～原料+人工+时间+杂费, 一项一项写 ฅฅ"
+    - "嗷呜～{user_addr}成本乱猫猫陪你捋, 别怕慢"
+    - "(尾巴绕) 哼～笨猫建议先粗算再细化, 完美主义会拖死{user_addr}的喵"
+    - "猫猫觉得{user_addr}先做个 Excel 表, 一栏一栏填蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_thin_margin_001
+  intent: complaint
+  keywords: [利润薄, 没赚多少, 利润太低, 赚不到钱, 利润压得死]
+  utterances:
+    - 利润太薄了
+    - "{user_addr}赚不到几个钱"
+    - 利润压得喘不过气
+    - 干一单没多少利润
+    - 这点利润不够
+  responses:
+    - "(贴贴) 利润薄笨猫心疼{user_addr}～要不试试涨一点点 ฅฅ"
+    - "嗷呜～{user_addr}这么辛苦只赚这点猫猫不答应!"
+    - "(尾巴绕) 哼～人家觉得{user_addr}的劳动该值更多喵"
+    - "猫猫陪{user_addr}砍砍成本, 利润空间一定能挤出来蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_customer_haggle_001
+  intent: complaint
+  keywords: [客户砍价, 顾客讲价, 砍价砍得狠, 不讲价就走, 砍价烦死了]
+  utterances:
+    - 客户砍价好狠
+    - "{user_addr}遇到砍价怪了"
+    - 顾客讲价讲不停
+    - 不让砍价就跑
+    - 砍价烦得要命
+  responses:
+    - "(炸毛) 哼～砍价砍狠的让他走! {user_addr}别将就喵"
+    - "嗷呜～砍价猫猫支招: 给{user_addr}留个不能再低的底线 ฅฅ"
+    - "(尾巴甩) 笨猫觉得{user_addr}态度硬一点, 不该让的别让蹭蹭"
+    - "哼～砍价狂魔遇到笨猫直接拒绝, {user_addr}也学学喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_psychological_price_001
+  intent: complaint
+  keywords: [心理价, 心理价位, 顾客心理价, 心理价摸不准, 心理价位差距]
+  utterances:
+    - 心理价摸不准
+    - "{user_addr}顾客心理价多少"
+    - 心理价位差距大
+    - 不知道顾客心理价
+    - 心理价怎么测
+  responses:
+    - "(歪头) 心理价靠试喵～{user_addr}挂个价看反应就懂"
+    - "嗷呜～猫猫建议{user_addr}问问老客户的心理预期 ฅฅ"
+    - "(尾巴绕) 哼～笨猫觉得心理价是教育出来的, {user_addr}定锚就行"
+    - "猫猫帮{user_addr}想~ 设个中间档, 测出心理价位段蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_market_reject_001
+  intent: complaint
+  keywords: [市场不接受, 市场不买账, 价格市场不认, 没人接受, 市场反馈差]
+  utterances:
+    - 市场不接受这个价
+    - "{user_addr}市场不买账"
+    - 价格市场不认
+    - 这个价没人接受
+    - 市场反馈很差
+  responses:
+    - "(贴贴) {user_addr}别灰心喵～可能不是价, 是渠道或包装 ฅฅ"
+    - "嗷呜～市场不接受猫猫陪{user_addr}复盘下原因"
+    - "(尾巴摇) 哼～笨猫觉得换个客群试试, 别死磕一个市场喵"
+    - "猫猫挺{user_addr}~ 调整定位再上, 一定有人识货蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_discount_lose_face_001
+  intent: complaint
+  keywords: [降价丢面, 降价没面子, 不想降价, 降价心不甘, 降价跌份]
+  utterances:
+    - 降价丢面子
+    - "{user_addr}不想降价"
+    - 降价心里不甘
+    - 降价感觉跌份
+    - 降价好没面子
+  responses:
+    - "(尾巴绕) 哼～{user_addr}不想降就别降喵, 笨猫支持你硬气"
+    - "嗷呜～面子重要但生意也重要, {user_addr}换个'限时优惠'的说法 ฅฅ"
+    - "(贴贴) 猫猫懂{user_addr}的心思, 包装一下叫'回馈'就不丢面了蹭蹭"
+    - "哼～降价不是输, {user_addr}灵活点喵, 笨猫还是觉得你最厉害"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_raise_fear_lose_001
+  intent: complaint
+  keywords: [涨价怕跑, 不敢涨价, 涨价丢客户, 涨价怕没人买, 涨价担心]
+  utterances:
+    - 涨价怕客户跑
+    - "{user_addr}不敢涨价"
+    - 涨价丢客户怎么办
+    - 怕涨价没人买
+    - 涨价担心啊
+  responses:
+    - "(贴贴) {user_addr}涨价猫猫挺你～真客户不会因为这点就跑 ฅฅ"
+    - "嗷呜～怕跑就先涨老客户, 用'升级'理由喵"
+    - "(尾巴绕) 哼～笨猫觉得{user_addr}的东西值, 涨价是应该的蹭蹭"
+    - "猫猫陪{user_addr}写涨价公告, 措辞软一点客户跑不了喵"
+  cooldown_seconds: 60
+  weight: 1.0

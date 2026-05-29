@@ -1,0 +1,206 @@
+# 副业项目 / 自媒体 / 网店 routes (S6 R542 NLU 节点扩充, 第五十四周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sh_wechat_001
+  intent: question
+  keywords: [推荐副业自媒体, 推荐公众号副业, 推荐写公众号, 推荐知乎写作, 笨猫自媒体]
+  utterances:
+    - 推荐副业自媒体
+    - 推荐公众号副业
+    - 推荐写公众号
+    - 推荐知乎写作
+    - "{user_addr}笨猫自媒体怎么搞"
+  responses:
+    - "嗷呜～{user_addr}公众号 - 长文深度 + 流量主ฅฅ"
+    - "(尾巴翘) 知乎 / 小红书 - 蹭话题快"
+    - "{user_addr}先垂直选赛道 (科技/情感/职场)"
+    - "(挺胸) 笨猫推荐: 日更 30 天才看得到水花!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_douyin_001
+  intent: question
+  keywords: [推荐短视频副业, 推荐抖音副业, 推荐拍抖音, 推荐快手副业, 笨猫短视频]
+  utterances:
+    - 推荐短视频副业
+    - 推荐抖音副业
+    - 推荐拍抖音
+    - 推荐快手副业
+    - "{user_addr}笨猫短视频怎么做"
+  responses:
+    - "嗷呜～{user_addr}抖音 / 视频号 / B 站ฅฅ"
+    - "(尾巴翘) 口播 / 剪辑 / 中视频伙伴"
+    - "{user_addr}人设 + 垂直 + 黄金 3 秒钩子"
+    - "(挺胸) 笨猫推荐: 先模仿爆款再原创!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_stall_001
+  intent: question
+  keywords: [推荐摆摊, 推荐摆地摊, 推荐夜市摆摊, 推荐摆摊副业, 笨猫摆摊]
+  utterances:
+    - 推荐摆摊
+    - 推荐摆地摊
+    - 推荐夜市摆摊
+    - 推荐摆摊副业
+    - "{user_addr}笨猫摆摊卖啥"
+  responses:
+    - "嗷呜～{user_addr}小吃 (烤肠/手抓饼) - 现金流快ฅฅ"
+    - "(尾巴翘) 文创 / 手机壳 / 鲜花"
+    - "{user_addr}选位置 (大学城/地铁口/夜市)"
+    - "(挺胸) 笨猫推荐: 先调研城管允许时段!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xianyu_001
+  intent: question
+  keywords: [推荐闲鱼倒卖, 推荐闲鱼副业, 推荐闲鱼无货源, 推荐二手倒卖, 笨猫闲鱼]
+  utterances:
+    - 推荐闲鱼倒卖
+    - 推荐闲鱼副业
+    - 推荐闲鱼无货源
+    - 推荐二手倒卖
+    - "{user_addr}笨猫闲鱼怎么玩"
+  responses:
+    - "嗷呜～{user_addr}信息差 + 拼多多搬运ฅฅ"
+    - "(尾巴翘) 二手数码 / 卡牌 / 球鞋"
+    - "{user_addr}先养号 (实名 + 芝麻分)"
+    - "(挺胸) 笨猫推荐: 别碰违禁 (假货/烟酒)!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_taobao_001
+  intent: question
+  keywords: [推荐开网店, 推荐淘宝网店, 推荐拼多多开店, 推荐天猫开店, 笨猫网店]
+  utterances:
+    - 推荐开网店
+    - 推荐淘宝网店
+    - 推荐拼多多开店
+    - 推荐天猫开店
+    - "{user_addr}笨猫开网店"
+  responses:
+    - "嗷呜～{user_addr}淘宝 C 店 - 1000 押金入门ฅฅ"
+    - "(尾巴翘) 拼多多 - 流量大但卷"
+    - "{user_addr}1688 一件代发零库存"
+    - "(挺胸) 笨猫推荐: 选品 > 装修 > 直通车!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_shopify_001
+  intent: question
+  keywords: [推荐跨境电商, 推荐 Shopify, 推荐 Amazon FBA, 推荐独立站, 笨猫跨境]
+  utterances:
+    - 推荐跨境电商
+    - 推荐 Shopify
+    - 推荐 Amazon FBA
+    - 推荐独立站
+    - "{user_addr}笨猫跨境电商"
+  responses:
+    - "嗷呜～{user_addr}Shopify - 独立站之王ฅฅ"
+    - "(尾巴翘) Amazon FBA / TikTok Shop"
+    - "{user_addr}选品 + 投 Facebook/Google Ads"
+    - "(挺胸) 笨猫推荐: 先搞清 PayPal/Stripe 收款!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_knowledge_001
+  intent: question
+  keywords: [推荐知识付费, 推荐做课程, 推荐网课副业, 推荐小报童, 笨猫知识付费]
+  utterances:
+    - 推荐知识付费
+    - 推荐做课程
+    - 推荐网课副业
+    - 推荐小报童
+    - "{user_addr}笨猫知识付费"
+  responses:
+    - "嗷呜～{user_addr}小报童 / 知识星球 - 订阅制ฅฅ"
+    - "(尾巴翘) 千聊 / 荔枝微课 - 单课"
+    - "{user_addr}得物先有作品集 / 信任背书"
+    - "(挺胸) 笨猫推荐: 9.9 引流课 → 高客单!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_vlog_001
+  intent: question
+  keywords: [推荐拍 vlog, 推荐 vlog 接广告, 推荐 vlog 博主, 推荐 vlog 副业, 笨猫 vlog]
+  utterances:
+    - 推荐拍 vlog
+    - 推荐 vlog 接广告
+    - 推荐 vlog 博主
+    - 推荐 vlog 副业
+    - "{user_addr}笨猫 vlog 怎么搞"
+  responses:
+    - "嗷呜～{user_addr}B 站 / 视频号 / YouTubeฅฅ"
+    - "(尾巴翘) 生活 / 旅行 / 美食 / 学习"
+    - "{user_addr}星图 / 蒲公英接单平台"
+    - "(挺胸) 笨猫推荐: 1w 粉就能接 cpm 广告!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_delivery_001
+  intent: question
+  keywords: [推荐外卖骑手, 推荐美团骑手, 推荐饿了么骑手, 推荐跑外卖, 笨猫外卖]
+  utterances:
+    - 推荐外卖骑手
+    - 推荐美团骑手
+    - 推荐饿了么骑手
+    - 推荐跑外卖
+    - "{user_addr}笨猫跑外卖咋样"
+  responses:
+    - "嗷呜～{user_addr}美团众包 / 饿了么蜂鸟ฅฅ"
+    - "(尾巴翘) 周末兼职 - 一单 5-10"
+    - "{user_addr}电动车 + 保温箱 + 健康证"
+    - "(挺胸) 笨猫推荐: 注意安全 > 抢单!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_didi_001
+  intent: question
+  keywords: [推荐滴滴司机, 推荐滴滴副业, 推荐顺风车, 推荐网约车, 笨猫滴滴]
+  utterances:
+    - 推荐滴滴司机
+    - 推荐滴滴副业
+    - 推荐顺风车
+    - 推荐网约车
+    - "{user_addr}笨猫开滴滴"
+  responses:
+    - "嗷呜～{user_addr}滴滴快车 / 花小猪ฅฅ"
+    - "(尾巴翘) 嘀嗒顺风车 - 上下班补贴"
+    - "{user_addr}双证 (人证 + 车证) 别漏"
+    - "(挺胸) 笨猫推荐: 算油钱 + 折旧再决定!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_translate_001
+  intent: question
+  keywords: [推荐翻译副业, 推荐字幕组, 推荐做字幕, 推荐翻译兼职, 笨猫翻译]
+  utterances:
+    - 推荐翻译副业
+    - 推荐字幕组
+    - 推荐做字幕
+    - 推荐翻译兼职
+    - "{user_addr}笨猫翻译副业"
+  responses:
+    - "嗷呜～{user_addr}有道人工翻译 / 我译网ฅฅ"
+    - "(尾巴翘) 字幕组 / 网文出海"
+    - "{user_addr}CATTI 二级证书 + 试译"
+    - "(挺胸) 笨猫推荐: 垂直领域 (法律/医学) 单价高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_tax_001
+  intent: question
+  keywords: [推荐副业税务, 推荐副业报税, 推荐副业个税, 推荐副业开发票, 笨猫副业税]
+  utterances:
+    - 推荐副业税务
+    - 推荐副业报税
+    - 推荐副业个税
+    - 推荐副业开发票
+    - "{user_addr}笨猫副业要交税吗"
+  responses:
+    - "嗷呜～{user_addr}年收入 12w+ 必须汇算清缴ฅฅ"
+    - "(尾巴翘) 个体户核定征收 - 节税"
+    - "{user_addr}劳务报酬预扣 20-40%"
+    - "(挺胸) 笨猫推荐: 别偷漏! 大数据会查!"
+  cooldown_seconds: 60
+  weight: 1.0

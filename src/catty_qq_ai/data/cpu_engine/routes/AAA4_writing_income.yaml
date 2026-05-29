@@ -1,0 +1,206 @@
+# 写作变现 / 公众号 知乎 routes (S6 R546 NLU 节点扩充, 第五十四周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: wi_wechat_001
+  intent: question
+  keywords: [推荐公众号变现, 推荐公众号写作, 推荐公众号运营, 推荐公众号接广, 笨猫公众号]
+  utterances:
+    - 推荐公众号变现
+    - 推荐公众号写作
+    - 推荐公众号运营
+    - 推荐公众号接广
+    - 笨猫公众号
+  responses:
+    - "嗷呜～{user_addr}公众号 - 流量主+广告主+赞赏ฅฅ"
+    - "(尾巴翘) 垂直定位 / 日更 / 互推涨粉"
+    - "{user_addr}1W 粉开广告 / 5W 粉接软文"
+    - "(挺胸) 笨猫推荐: 先深耕垂直号!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_zhihu_001
+  intent: question
+  keywords: [推荐知乎专栏, 推荐知乎 Live, 推荐知乎好物, 推荐知乎盐选, 笨猫知乎]
+  utterances:
+    - 推荐知乎专栏
+    - 推荐知乎 Live
+    - 推荐知乎好物
+    - 推荐知乎盐选
+    - 笨猫知乎
+  responses:
+    - "嗷呜～{user_addr}知乎 - 盐选+好物+Live 三件套ฅฅ"
+    - "(尾巴翘) 高赞回答 / 专业领域 / 带货"
+    - "{user_addr}盐选稿费高 / 好物按佣金"
+    - "(挺胸) 笨猫推荐: 盐选签约!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_jianshu_001
+  intent: question
+  keywords: [推荐简书写作, 推荐简书签约, 推荐简书钻, 推荐简书贝, 笨猫简书]
+  utterances:
+    - 推荐简书写作
+    - 推荐简书签约
+    - 推荐简书钻
+    - 推荐简书贝
+    - 笨猫简书
+  responses:
+    - "嗷呜～{user_addr}简书 - 文艺青年聚集地ฅฅ"
+    - "(尾巴翘) 简书钻挖矿 / 签约作者"
+    - "{user_addr}门槛低 / 适合新手练笔"
+    - "(挺胸) 笨猫推荐: 散文+随笔起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_toutiao_001
+  intent: question
+  keywords: [推荐头条号, 推荐百家号, 推荐大鱼号, 推荐企鹅号, 笨猫自媒体]
+  utterances:
+    - 推荐头条号
+    - 推荐百家号
+    - 推荐大鱼号
+    - 推荐企鹅号
+    - 笨猫自媒体
+  responses:
+    - "嗷呜～{user_addr}头条号 / 百家号 - 算法分发ฅฅ"
+    - "(尾巴翘) 单价收益 / 爆款万元起"
+    - "{user_addr}多平台分发 / 一稿多投"
+    - "(挺胸) 笨猫推荐: 头条原创+视频化!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_novel_001
+  intent: question
+  keywords: [推荐番茄小说, 推荐起点, 推荐晋江, 推荐七猫, 笨猫网文]
+  utterances:
+    - 推荐番茄小说
+    - 推荐起点
+    - 推荐晋江
+    - 推荐七猫
+    - 笨猫网文
+  responses:
+    - "嗷呜～{user_addr}番茄/七猫 - 免费阅读分成ฅฅ"
+    - "(尾巴翘) 起点中文网 / 晋江女频"
+    - "{user_addr}日更 4K / 签约后稿费"
+    - "(挺胸) 笨猫推荐: 番茄新手友好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_douban_001
+  intent: question
+  keywords: [推荐豆瓣写作, 推荐豆瓣阅读, 推荐豆瓣专栏, 推荐豆瓣日记, 笨猫豆瓣]
+  utterances:
+    - 推荐豆瓣写作
+    - 推荐豆瓣阅读
+    - 推荐豆瓣专栏
+    - 推荐豆瓣日记
+    - 笨猫豆瓣
+  responses:
+    - "嗷呜～{user_addr}豆瓣阅读 - 短篇+专栏ฅฅ"
+    - "(尾巴翘) 影评 / 书评 / 文艺向"
+    - "{user_addr}稿费按销量 / 征文比赛"
+    - "(挺胸) 笨猫推荐: 文艺青年首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_medium_001
+  intent: question
+  keywords: [推荐 Medium, 推荐英文写作, 推荐 Partner Program, 推荐海外写作, 笨猫 Medium]
+  utterances:
+    - "推荐 Medium"
+    - 推荐英文写作
+    - "推荐 Partner Program"
+    - 推荐海外写作
+    - "笨猫 Medium"
+  responses:
+    - "嗷呜～{user_addr}Medium - 海外阅读分成ฅฅ"
+    - "(尾巴翘) Partner Program / 按阅读时长"
+    - "{user_addr}英文门槛 / 美元结算"
+    - "(挺胸) 笨猫推荐: 科技+成长类!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_substack_001
+  intent: question
+  keywords: [推荐 Substack, 推荐订阅 newsletter, 推荐邮件订阅, 推荐付费专栏, 笨猫 Substack]
+  utterances:
+    - "推荐 Substack"
+    - "推荐订阅 newsletter"
+    - 推荐邮件订阅
+    - 推荐付费专栏
+    - "笨猫 Substack"
+  responses:
+    - "嗷呜～{user_addr}Substack - 付费 newsletterฅฅ"
+    - "(尾巴翘) 月费订阅 / 直接 to C"
+    - "{user_addr}垂直深度 / 粉丝铁粉"
+    - "(挺胸) 笨猫推荐: 月 5 刀订阅起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_course_001
+  intent: question
+  keywords: [推荐写作课程, 推荐写作训练营, 推荐弘丹写作, 推荐 Spenser, 笨猫写作课]
+  utterances:
+    - 推荐写作课程
+    - 推荐写作训练营
+    - 推荐弘丹写作
+    - "推荐 Spenser"
+    - 笨猫写作课
+  responses:
+    - "嗷呜～{user_addr}弘丹 / Spenser / 师北宸ฅฅ"
+    - "(尾巴翘) 训练营 21 天 / 体系课"
+    - "{user_addr}学完能变现 / 注意割韭菜"
+    - "(挺胸) 笨猫推荐: 先免费试听!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_freelance_001
+  intent: question
+  keywords: [推荐写作接单, 推荐写手平台, 推荐稿稿, 推荐千图网, 笨猫接单]
+  utterances:
+    - 推荐写作接单
+    - 推荐写手平台
+    - 推荐稿稿
+    - 推荐千图网
+    - 笨猫接单
+  responses:
+    - "嗷呜～{user_addr}稿稿 / 千图 / 米国度ฅฅ"
+    - "(尾巴翘) 软文 / 公关稿 / SEO 文"
+    - "{user_addr}单价 50-500 / 看资历"
+    - "(挺胸) 笨猫推荐: 先积累作品集!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_copywriting_001
+  intent: question
+  keywords: [推荐文案兼职, 推荐广告文案, 推荐小红书文案, 推荐带货文案, 笨猫文案]
+  utterances:
+    - 推荐文案兼职
+    - 推荐广告文案
+    - 推荐小红书文案
+    - 推荐带货文案
+    - 笨猫文案
+  responses:
+    - "嗷呜～{user_addr}小红书种草 / 抖音脚本ฅฅ"
+    - "(尾巴翘) 品牌方对接 / 公关公司"
+    - "{user_addr}单篇 100-1000 / 爆款分成"
+    - "(挺胸) 笨猫推荐: 小红书入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wi_translation_001
+  intent: question
+  keywords: [推荐翻译写作, 推荐译言网, 推荐 ProZ, 推荐字幕组, 笨猫翻译]
+  utterances:
+    - 推荐翻译写作
+    - 推荐译言网
+    - "推荐 ProZ"
+    - 推荐字幕组
+    - 笨猫翻译
+  responses:
+    - "嗷呜～{user_addr}译言 / ProZ / Gengoฅฅ"
+    - "(尾巴翘) 中英互译 / 日韩小语种"
+    - "{user_addr}千字 100-300 / 专业领域更高"
+    - "(挺胸) 笨猫推荐: 先 CATTI 二笔!"
+  cooldown_seconds: 60
+  weight: 1.0

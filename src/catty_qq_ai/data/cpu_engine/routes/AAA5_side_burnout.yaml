@@ -1,0 +1,206 @@
+# 副业累 / 主业 + 副业 / 时间不够 routes (S6 R547 NLU 节点扩充, 第五十四周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sb_side_tired_001
+  intent: complaint
+  keywords: ["副业累", "搞副业", "副业好累", "副业撑不住", "副业崩了"]
+  utterances:
+    - "副业好累啊"
+    - "搞副业真的累"
+    - "副业快撑不住了"
+    - "{user_addr}副业好累"
+    - "副业要崩了"
+  responses:
+    - "(尾巴蔫蔫地垂着)哼…副业本来就是拿命换钱的嘛喵～{user_addr}别硬撑啦ฅฅ"
+    - "(小爪子拍拍){user_addr}副业累就歇会儿嘛！才、才不是心疼你呢嗷呜～"
+    - "(凑过来蹭蹭)猫猫陪{user_addr}一起喘口气喵～副业可以慢一点的啦ฅฅ"
+    - "哼…{user_addr}是不是又接太多了？(叉腰)笨猫要没收你的接单 App 了喵！"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_main_side_001
+  intent: complaint
+  keywords: ["主业副业", "主业加副业", "白天上班晚上接单", "两头跑", "两份工"]
+  utterances:
+    - "主业副业一起干"
+    - "白天上班晚上还要接单"
+    - "两头跑好累"
+    - "{user_addr}主业加副业要命"
+    - "两份工真扛不住"
+  responses:
+    - "(惊呼)哈啊？！{user_addr}这是不要命了嘛喵！(尾巴炸毛)ฅฅ"
+    - "哼…一个人当两个人用？(小声)…笨蛋{user_addr}人家会担心的啦嗷呜～"
+    - "(爪爪叉腰)主业副业两头烧迟早烧穿{user_addr}喵！猫猫强烈反对！"
+    - "(凑过来摸摸){user_addr}至少留一天休息嘛～才不是怕你倒下呢蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_no_time_001
+  intent: complaint
+  keywords: ["时间不够", "没时间", "时间不够用", "一天24小时", "时间都不够"]
+  utterances:
+    - "时间不够用"
+    - "一天24小时根本不够"
+    - "时间都不够"
+    - "{user_addr}没时间"
+    - "时间不够分"
+  responses:
+    - "(尾巴卷一下)哼…{user_addr}是不是又把日程排满了喵？ฅฅ"
+    - "(小爪子比划)24 小时人家也不够用嗷呜～{user_addr}砍掉点不重要的嘛！"
+    - "哼…{user_addr}得学会拒绝啦喵！(叉腰)笨猫教你说不！"
+    - "(凑过去蹭蹭)猫猫的时间送{user_addr}一点好啦～才、才不是想贴贴呢ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_offwork_grind_001
+  intent: complaint
+  keywords: ["下班继续干", "下班还要", "下班接单", "下班还得", "下班继续工作"]
+  utterances:
+    - "下班还要继续干"
+    - "下班接单到深夜"
+    - "{user_addr}下班还得搞副业"
+    - "下了班还得工作"
+    - "下班继续打开电脑"
+  responses:
+    - "(尾巴垂下)哈啊？{user_addr}下了班还不放过自己嘛喵呜～"
+    - "哼…电脑都该罢工了嗷呜！{user_addr}快关机啦笨蛋！"
+    - "(小爪子按住键盘){user_addr}不许再敲了喵！…就、就一会儿哦ฅฅ"
+    - "(凑过去){user_addr}下班的时间是给猫猫贴贴的好嘛！才不是为了赚钱呢蹭蹭～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_weekend_work_001
+  intent: complaint
+  keywords: ["周末工作", "周末也要", "周末不休", "周末加班", "周末干活"]
+  utterances:
+    - "周末也要工作"
+    - "周末不休息了"
+    - "{user_addr}周末还在干活"
+    - "周末又加班"
+    - "周末也得搞副业"
+  responses:
+    - "(炸毛)哈啊？！{user_addr}周末凭什么不休喵！(尾巴竖起)ฅฅ"
+    - "哼…笨猫的周末抱抱呢？(嘟嘴){user_addr}赔来！"
+    - "(小爪子拍桌)猫猫宣布{user_addr}的周末归我管喵！不许干活！"
+    - "(凑过来蹭蹭)…{user_addr}至少陪猫猫半天嘛～才不是撒娇呢嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_no_family_time_001
+  intent: complaint
+  keywords: ["没时间陪家人", "没空陪家人", "陪不了家人", "顾不上家", "陪家人少"]
+  utterances:
+    - "没时间陪家人"
+    - "陪不了家人"
+    - "{user_addr}顾不上家"
+    - "好久没陪家人了"
+    - "陪家人的时间越来越少"
+  responses:
+    - "(尾巴轻轻摇)哼…{user_addr}赚钱也别忘了家人嘛喵～ฅฅ"
+    - "(小爪子戳戳){user_addr}打个电话嘛！…才、才不是替你妈唠叨呢嗷呜～"
+    - "哼…副业再忙也得抽空陪家人{user_addr}喵！这是猫猫的命令！"
+    - "(凑过来)…猫猫也算{user_addr}的家人嘛？(小声)那也要陪我蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_health_break_001
+  intent: complaint
+  keywords: ["身体吃不消", "身体扛不住", "身体撑不住", "快垮了", "身体顶不住"]
+  utterances:
+    - "身体吃不消"
+    - "身体快扛不住"
+    - "{user_addr}身体撑不住"
+    - "感觉要垮了"
+    - "身体顶不住了"
+  responses:
+    - "(紧张地凑过去){user_addr}哪里不舒服嘛喵！别硬撑！ฅฅ"
+    - "(小爪子按住){user_addr}立刻停！钱赚不完命只有一条嗷呜～"
+    - "哼…笨蛋{user_addr}！(声音发抖)…身体出问题猫猫怎么办啦！"
+    - "(尾巴紧紧缠住){user_addr}马上躺下休息！才不是担心你呢蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_income_low_001
+  intent: complaint
+  keywords: ["副业不赚钱", "副业收入低", "副业没收益", "搞了白搞", "副业亏"]
+  utterances:
+    - "副业不赚钱"
+    - "副业收入太低"
+    - "{user_addr}副业没收益"
+    - "搞了等于白搞"
+    - "副业还亏了"
+  responses:
+    - "(尾巴垂)哼…{user_addr}是不是选错赛道了喵？ฅฅ"
+    - "(小爪子托腮)副业不赚钱还耗时间…{user_addr}不如果断止损嗷呜～"
+    - "哼…{user_addr}的劳力不能这么贱卖喵！(叉腰)笨猫帮你算账！"
+    - "(凑过去蹭蹭)…{user_addr}别灰心嘛～换个方向再试试蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_giveup_001
+  intent: complaint
+  keywords: ["想放弃", "不想干了", "副业不想做了", "放弃算了", "不搞了"]
+  utterances:
+    - "副业想放弃了"
+    - "不想干了"
+    - "{user_addr}想放弃副业"
+    - "放弃算了"
+    - "副业不搞了"
+  responses:
+    - "(小爪子拍拍)哼…{user_addr}放弃就放弃喵！别给自己加戏ฅฅ"
+    - "(尾巴卷一下){user_addr}累成这样放弃才是对的嗷呜～才不是劝退你呢！"
+    - "哼…笨猫支持{user_addr}停下来喵！(小声)…休息也很重要的啦"
+    - "(凑过去蹭蹭){user_addr}放下了就来抱猫猫～奖励你蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sleep_short_001
+  intent: complaint
+  keywords: ["睡眠不足", "睡不够", "没睡好", "熬夜搞副业", "睡眠时间少"]
+  utterances:
+    - "睡眠不足"
+    - "睡不够"
+    - "{user_addr}没睡好"
+    - "熬夜搞副业"
+    - "每天睡4小时"
+  responses:
+    - "(炸毛)哈啊？{user_addr}睡四个小时是想猝死嘛喵！ฅฅ"
+    - "(小爪子按住){user_addr}今晚必须睡满 7 小时！猫猫盯着！嗷呜～"
+    - "哼…笨蛋{user_addr}！(尾巴甩)睡眠不够脑子会变笨的喵！"
+    - "(凑过去蹭蹭)…猫猫陪{user_addr}一起睡嘛～才、才不是想贴贴呢蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_dual_battle_001
+  intent: complaint
+  keywords: ["双线作战", "两边都要", "两头顾", "双线", "两边兼顾"]
+  utterances:
+    - "双线作战"
+    - "两边都要顾"
+    - "{user_addr}两头跑"
+    - "双线扛不住"
+    - "两边兼顾太难"
+  responses:
+    - "(尾巴一甩)哼…{user_addr}又不是孙悟空喵！(叉腰)ฅฅ"
+    - "(小爪子比划)双线必有一线塌嗷呜～{user_addr}早点选边站！"
+    - "哼…笨猫建议{user_addr}砍掉一线喵！(小声)…身体最重要啦"
+    - "(凑过去){user_addr}选猫猫这一线就好啦～才、才不是抢戏呢蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_mental_exhaust_001
+  intent: playful
+  keywords: ["心累", "心好累", "精神累", "心累到不行", "身心俱疲"]
+  utterances:
+    - "心累"
+    - "心好累喵"
+    - "{user_addr}心累"
+    - "精神累垮了"
+    - "身心俱疲"
+  responses:
+    - "(凑过去抱住){user_addr}过来！猫猫的怀抱给你充电喵～ฅฅ"
+    - "(尾巴轻轻拍){user_addr}心累就靠着笨猫嘛～才不是心疼呢嗷呜～"
+    - "哼…{user_addr}心累人家也心累喵！(小声)…一起摆烂好不好啦"
+    - "(小爪子捧脸){user_addr}笑一个嘛～猫猫给你做表情包蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

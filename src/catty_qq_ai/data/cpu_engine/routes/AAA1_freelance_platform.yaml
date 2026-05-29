@@ -1,0 +1,206 @@
+# 自由职业平台 / Upwork Fiverr routes (S6 R543 NLU 节点扩充, 第五十四周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: fp_upwork_001
+  intent: question
+  keywords: [推荐 Upwork, 推荐 upwork, 推荐自由职业, 推荐海外接单, 笨猫 Upwork]
+  utterances:
+    - 推荐 Upwork
+    - 推荐 upwork
+    - 推荐自由职业
+    - 推荐海外接单
+    - 笨猫 Upwork
+  responses:
+    - "嗷呜～{user_addr}Upwork - 全球最大自由职业平台ฅฅ"
+    - "(尾巴翘) 程序/设计/写作/翻译 全有"
+    - "{user_addr}抽成 10% (新规), 时薪/固定价"
+    - "(挺胸) 猫猫推荐: 英文能力强先入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_fiverr_001
+  intent: question
+  keywords: [推荐 Fiverr, 推荐 fiverr, 推荐五美元, 推荐 gig, 笨猫 Fiverr]
+  utterances:
+    - 推荐 Fiverr
+    - 推荐 fiverr
+    - 推荐五美元
+    - 推荐 gig
+    - 笨猫 Fiverr
+  responses:
+    - "嗷呜～{user_addr}Fiverr - gig 服务平台ฅฅ"
+    - "(尾巴翘) $5 起步, 高级套餐可上千"
+    - "{user_addr}抽成 20%, 买家主动找你"
+    - "(挺胸) 笨猫推荐: 包装好作品集!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_toptal_001
+  intent: question
+  keywords: [推荐 Toptal, 推荐 toptal, 推荐高端自由职业, 推荐顶级开发者, 笨猫 Toptal]
+  utterances:
+    - 推荐 Toptal
+    - 推荐 toptal
+    - 推荐高端自由职业
+    - 推荐顶级开发者
+    - 笨猫 Toptal
+  responses:
+    - "嗷呜～{user_addr}Toptal - 顶级 3% 平台ฅฅ"
+    - "(尾巴翘) 通过率仅 3%, 时薪高"
+    - "{user_addr}开发/设计/金融专家"
+    - "(挺胸) 人家推荐: 资深大佬走这里!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_99designs_001
+  intent: question
+  keywords: [推荐 99designs, 推荐设计比稿, 推荐 logo 设计平台, 推荐设计师比赛, 笨猫 99designs]
+  utterances:
+    - 推荐 99designs
+    - 推荐设计比稿
+    - 推荐 logo 设计平台
+    - 推荐设计师比赛
+    - 笨猫 99designs
+  responses:
+    - "嗷呜～{user_addr}99designs - 设计比稿平台ฅฅ"
+    - "(尾巴翘) Logo/包装/网页比赛模式"
+    - "{user_addr}多人提案客户挑选, 1v1 也行"
+    - "(挺胸) 笨猫推荐: 视觉设计师练手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_zbj_001
+  intent: question
+  keywords: [推荐猪八戒, 推荐国内自由职业, 推荐 zbj, 推荐中文威客, 笨猫猪八戒]
+  utterances:
+    - 推荐猪八戒
+    - 推荐国内自由职业
+    - 推荐 zbj
+    - 推荐中文威客
+    - 笨猫猪八戒
+  responses:
+    - "嗷呜～{user_addr}猪八戒网 - 国内最大威客ฅฅ"
+    - "(尾巴翘) 设计/营销/IT/工商代办"
+    - "{user_addr}中文友好, 但价格内卷严重"
+    - "(挺胸) 猫猫推荐: 国内单子走这!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_epwk_001
+  intent: question
+  keywords: [推荐一品威客, 推荐 epwk, 推荐国内接单, 推荐威客网站, 笨猫一品威客]
+  utterances:
+    - 推荐一品威客
+    - 推荐 epwk
+    - 推荐国内接单
+    - 推荐威客网站
+    - 笨猫一品威客
+  responses:
+    - "嗷呜～{user_addr}一品威客 - 国内老牌平台ฅฅ"
+    - "(尾巴翘) 设计/开发/文案/营销"
+    - "{user_addr}竞争激烈, 适合新手练手"
+    - "(挺胸) 笨猫推荐: 配合猪八戒一起用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_behance_001
+  intent: question
+  keywords: [推荐 Behance, 推荐 behance, 推荐设计师作品集, 推荐设计师社区, 笨猫 Behance]
+  utterances:
+    - 推荐 Behance
+    - 推荐 behance
+    - 推荐设计师作品集
+    - 推荐设计师社区
+    - 笨猫 Behance
+  responses:
+    - "嗷呜～{user_addr}Behance - Adobe 旗下设计社区ฅฅ"
+    - "(尾巴翘) 作品集展示+接单流量"
+    - "{user_addr}全球设计师都在这里挂作品"
+    - "(挺胸) 人家推荐: 设计师必备主页!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_codementor_001
+  intent: question
+  keywords: [推荐 Codementor, 推荐 codementor, 推荐程序员接单, 推荐技术辅导, 笨猫 Codementor]
+  utterances:
+    - 推荐 Codementor
+    - 推荐 codementor
+    - 推荐程序员接单
+    - 推荐技术辅导
+    - 笨猫 Codementor
+  responses:
+    - "嗷呜～{user_addr}Codementor - 程序员答疑平台ฅฅ"
+    - "(尾巴翘) 1v1 辅导/Code Review/项目"
+    - "{user_addr}时薪 $20-200, 按经验"
+    - "(挺胸) 猫猫推荐: 开发者副业首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_rev_001
+  intent: question
+  keywords: [推荐 Rev, 推荐字幕兼职, 推荐转录, 推荐 transcription, 笨猫字幕]
+  utterances:
+    - 推荐 Rev
+    - 推荐字幕兼职
+    - 推荐转录
+    - 推荐 transcription
+    - 笨猫字幕
+  responses:
+    - "嗷呜～{user_addr}Rev - 字幕/转录平台ฅฅ"
+    - "(尾巴翘) 听写英文音频, 按分钟计费"
+    - "{user_addr}$0.30-1.10/分钟, 英语听力要好"
+    - "(挺胸) 笨猫推荐: 英语好的副业!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_preply_001
+  intent: question
+  keywords: [推荐 Preply, 推荐教学副业, 推荐在线家教, 推荐语言教学, 笨猫 Preply]
+  utterances:
+    - 推荐 Preply
+    - 推荐教学副业
+    - 推荐在线家教
+    - 推荐语言教学
+    - 笨猫 Preply
+  responses:
+    - "嗷呜～{user_addr}Preply - 全球语言教学平台ฅฅ"
+    - "(尾巴翘) 中文/英文/任何技能都能教"
+    - "{user_addr}$5-50/小时, 自己定价"
+    - "(挺胸) 人家推荐: 母语者轻松接单!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_remoteok_001
+  intent: question
+  keywords: [推荐 RemoteOK, 推荐 remoteok, 推荐远程工作, 推荐远程职位, 笨猫远程]
+  utterances:
+    - 推荐 RemoteOK
+    - 推荐 remoteok
+    - 推荐远程工作
+    - 推荐远程职位
+    - 笨猫远程
+  responses:
+    - "嗷呜～{user_addr}RemoteOK - 远程工作聚合站ฅฅ"
+    - "(尾巴翘) 全职/兼职远程职位"
+    - "{user_addr}技术/设计/营销/客服全有"
+    - "(挺胸) 猫猫推荐: 数字游民必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_wwr_001
+  intent: question
+  keywords: [推荐 We Work Remotely, 推荐 wwr, 推荐远程招聘, 推荐 weworkremotely, 笨猫 WWR]
+  utterances:
+    - 推荐 We Work Remotely
+    - 推荐 wwr
+    - 推荐远程招聘
+    - 推荐 weworkremotely
+    - 笨猫 WWR
+  responses:
+    - "嗷呜～{user_addr}We Work Remotely - 老牌远程站ฅฅ"
+    - "(尾巴翘) 月访问 300 万+, 职位质量高"
+    - "{user_addr}雇主付费发布, 真实可靠"
+    - "(挺胸) 笨猫推荐: 配合 RemoteOK 双开!"
+  cooldown_seconds: 60
+  weight: 1.0

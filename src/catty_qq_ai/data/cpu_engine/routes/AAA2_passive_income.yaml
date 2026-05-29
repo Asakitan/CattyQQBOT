@@ -1,0 +1,206 @@
+# 被动收入 / 股息 / 房租 routes (S6 R544 NLU 节点扩充, 第五十四周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pi_dividend_001
+  intent: question
+  keywords: [推荐股息股票, 推荐高分红, 推荐红利股, 推荐分红, 笨猫股息]
+  utterances:
+    - 推荐股息股票
+    - 推荐高分红
+    - 推荐红利股
+    - 推荐分红
+    - 笨猫股息股票
+  responses:
+    - "嗷呜～{user_addr}股息股票 - 长期现金流ฅฅ"
+    - "(尾巴翘) A股: 长江电力 / 工商银行 / 中国神华"
+    - "{user_addr}美股: KO / JNJ / PG / VYM ETF"
+    - "(挺胸) 笨猫推荐: VYM / SCHD 高息ETF!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_reits_001
+  intent: question
+  keywords: [推荐 REITs, 推荐房地产信托, 推荐 REIT, 推荐房地产基金, 笨猫 REITs]
+  utterances:
+    - 推荐 REITs
+    - 推荐房地产信托
+    - 推荐 REIT
+    - 推荐房地产基金
+    - 笨猫 REITs
+  responses:
+    - "嗷呜～{user_addr}REITs - 不用买房收租ฅฅ"
+    - "(尾巴翘) 美股: O (Realty Income) / VNQ"
+    - "{user_addr}A股公募 REITs / 港股领展"
+    - "(挺胸) 笨猫推荐: O月月分红香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_bond_001
+  intent: question
+  keywords: [推荐债券基金, 推荐债券, 推荐利息, 推荐国债, 笨猫债券]
+  utterances:
+    - 推荐债券基金
+    - 推荐债券
+    - 推荐利息收入
+    - 推荐国债
+    - 笨猫债券
+  responses:
+    - "嗷呜～{user_addr}债券基金 - 稳定利息ฅฅ"
+    - "(尾巴翘) 国债 / 企业债 / 可转债"
+    - "{user_addr}美股: BND / AGG / TLT"
+    - "(挺胸) 笨猫推荐: 国债逆回购周末躺收!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_royalty_001
+  intent: question
+  keywords: [推荐版税, 推荐书籍版税, 推荐数字版税, 推荐内容版税, 笨猫版税]
+  utterances:
+    - 推荐版税收入
+    - 推荐书籍版税
+    - 推荐数字版税
+    - 推荐内容版税
+    - 笨猫版税
+  responses:
+    - "嗷呜～{user_addr}版税 - 写一次收一辈子ฅฅ"
+    - "(尾巴翘) 书籍 / 音乐 / 摄影 / 课程"
+    - "{user_addr}Kindle Direct / Udemy / 网课"
+    - "(挺胸) 笨猫推荐: 出本电子书最低门槛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_p2p_001
+  intent: question
+  keywords: [推荐 P2P, 推荐 P2P 理财, 推荐网贷, 推荐借贷理财, 笨猫 P2P]
+  utterances:
+    - 推荐 P2P
+    - 推荐 P2P 理财
+    - 推荐网贷理财
+    - 推荐借贷理财
+    - 笨猫 P2P
+  responses:
+    - "(炸毛)！{user_addr}P2P 国内已清退ฅฅ"
+    - "(尾巴炸) 海外: LendingClub / Prosper 谨慎"
+    - "{user_addr}风险极高 / 本金可能归零"
+    - "(挺胸) 笨猫劝退: 别碰 P2P 选债基!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_rental_001
+  intent: question
+  keywords: [推荐房产出租, 推荐房租收入, 推荐出租房, 推荐包租, 笨猫房租]
+  utterances:
+    - 推荐房产出租
+    - 推荐房租收入
+    - 推荐出租房
+    - 推荐包租
+    - 笨猫房租
+  responses:
+    - "嗷呜～{user_addr}房产出租 - 经典被动收入ฅฅ"
+    - "(尾巴翘) 长租 / 短租 Airbnb / 公寓"
+    - "{user_addr}注意: 空置率 / 维修 / 物业"
+    - "(挺胸) 笨猫推荐: 地铁口小户型最香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_wechat_001
+  intent: question
+  keywords: [推荐公众号广告, 推荐微信公众号, 推荐公众号变现, 推荐流量主, 笨猫公众号]
+  utterances:
+    - 推荐公众号广告
+    - 推荐微信公众号变现
+    - 推荐公众号变现
+    - 推荐流量主
+    - 笨猫公众号
+  responses:
+    - "嗷呜～{user_addr}公众号 - 流量主+广告ฅฅ"
+    - "(尾巴翘) 流量主 / 互选广告 / 付费阅读"
+    - "{user_addr}垂直领域 / 1万粉起步变现"
+    - "(挺胸) 笨猫推荐: 写垂直内容养号!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_youtube_001
+  intent: question
+  keywords: [推荐 YouTube 广告, 推荐 YouTube 变现, 推荐油管广告, 推荐 YouTube, 笨猫 YouTube]
+  utterances:
+    - 推荐 YouTube 广告
+    - 推荐 YouTube 变现
+    - 推荐油管广告
+    - 推荐 YouTube 收益
+    - 笨猫 YouTube
+  responses:
+    - "嗷呜～{user_addr}YouTube - 全球广告分成ฅฅ"
+    - "(尾巴翘) AdSense / 会员 / Super Chat"
+    - "{user_addr}门槛: 1000粉+4000小时观看"
+    - "(挺胸) 笨猫推荐: 做长视频+CPM高的英文区!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_affiliate_001
+  intent: question
+  keywords: [推荐联盟营销, 推荐 Affiliate, 推荐 CPS, 推荐返佣, 笨猫联盟营销]
+  utterances:
+    - 推荐联盟营销
+    - 推荐 Affiliate
+    - 推荐 CPS 推广
+    - 推荐返佣
+    - 笨猫联盟营销
+  responses:
+    - "嗷呜～{user_addr}联盟营销 - 推广拿提成ฅฅ"
+    - "(尾巴翘) Amazon Associates / 淘宝客 / 京东联盟"
+    - "{user_addr}博客 / SEO / 测评内容引流"
+    - "(挺胸) 笨猫推荐: Amazon 联盟+SEO博客!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_nft_001
+  intent: question
+  keywords: [推荐 NFT 版税, 推荐 NFT, 推荐 NFT 创作, 推荐数字藏品, 笨猫 NFT]
+  utterances:
+    - 推荐 NFT 版税
+    - 推荐 NFT 创作
+    - 推荐 NFT 收入
+    - 推荐数字藏品
+    - 笨猫 NFT
+  responses:
+    - "嗷呜～{user_addr}NFT 版税 - 二次交易抽成ฅฅ"
+    - "(尾巴翘) OpenSea / Blur / Magic Eden"
+    - "{user_addr}注意: 市场冷 / 版税被绕过"
+    - "(挺胸) 笨猫提醒: NFT 寒冬 / 谨慎入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_staking_001
+  intent: question
+  keywords: [推荐区块链质押, 推荐 Staking, 推荐质押, 推荐 ETH 质押, 笨猫质押]
+  utterances:
+    - 推荐区块链质押
+    - 推荐 Staking
+    - 推荐质押收益
+    - 推荐 ETH 质押
+    - 笨猫质押
+  responses:
+    - "嗷呜～{user_addr}Staking - 持币生息ฅฅ"
+    - "(尾巴翘) ETH (3-5%) / SOL / ATOM"
+    - "{user_addr}平台: Lido / Coinbase / Binance"
+    - "(挺胸) 笨猫推荐: Lido stETH 流动性好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pi_book_001
+  intent: question
+  keywords: [推荐被动收入书, 推荐财务自由书, 推荐理财书, 推荐富爸爸, 笨猫被动收入书]
+  utterances:
+    - 推荐被动收入书
+    - 推荐财务自由书
+    - 推荐理财书
+    - 推荐富爸爸
+    - 笨猫被动收入书
+  responses:
+    - "嗷呜～{user_addr}《富爸爸穷爸爸》经典ฅฅ"
+    - "(尾巴翘) 《财务自由之路》《money》"
+    - "{user_addr}《一生的理财计划》/《小狗钱钱》"
+    - "(挺胸) 笨猫推荐: 富爸爸入门启蒙!"
+  cooldown_seconds: 60
+  weight: 1.0
