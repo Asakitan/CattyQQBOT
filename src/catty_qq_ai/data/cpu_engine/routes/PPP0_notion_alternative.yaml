@@ -1,0 +1,206 @@
+# Notion 笔记替代 routes (S6 R692 NLU 节点扩充, 第六十九周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: na_notion_001
+  intent: question
+  keywords: [推荐 Notion, 推荐 notion, 推荐全能笔记, 推荐多人协作笔记, 笨猫 Notion]
+  utterances:
+    - 推荐 Notion
+    - 推荐 notion
+    - 推荐全能笔记
+    - 推荐多人协作笔记
+    - 笨猫 Notion
+  responses:
+    - "嗷呜～{user_addr}Notion - All-in-one 全能王ฅฅ"
+    - "(尾巴翘) Database / Page / Block 三件套"
+    - "{user_addr}多人协作 + AI 加持"
+    - "(挺胸) 猫猫推荐: 团队 + 个人都顶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_obsidian_001
+  intent: question
+  keywords: [推荐 Obsidian, 推荐 obsidian, 推荐本地笔记, 推荐双链笔记, 笨猫 Obsidian]
+  utterances:
+    - 推荐 Obsidian
+    - 推荐 obsidian
+    - 推荐本地笔记
+    - 推荐双链笔记
+    - 笨猫 Obsidian
+  responses:
+    - "嗷呜～{user_addr}Obsidian - 本地 Markdown 王ฅฅ"
+    - "(尾巴翘) 双链 / 关系图谱 / 插件生态炸"
+    - "{user_addr}数据完全自己掌控"
+    - "(挺胸) 人家推荐: 知识管理首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_logseq_001
+  intent: question
+  keywords: [推荐 Logseq, 推荐 logseq, 推荐大纲笔记, 推荐开源笔记, 笨猫 Logseq]
+  utterances:
+    - 推荐 Logseq
+    - 推荐 logseq
+    - 推荐大纲笔记
+    - 推荐开源笔记
+    - 笨猫 Logseq
+  responses:
+    - "嗷呜～{user_addr}Logseq - 开源大纲笔记ฅฅ"
+    - "(尾巴翘) 块引用 / 日记驱动 / 本地优先"
+    - "{user_addr}免费 + 双链 + 隐私好"
+    - "(挺胸) 猫猫推荐: Roam 平替!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_roam_001
+  intent: question
+  keywords: [推荐 Roam Research, 推荐 roam, 推荐 roamresearch, 推荐网状笔记, 笨猫 Roam]
+  utterances:
+    - 推荐 Roam Research
+    - 推荐 roam
+    - 推荐 roamresearch
+    - 推荐网状笔记
+    - 笨猫 Roam
+  responses:
+    - "嗷呜～{user_addr}Roam Research - 双链鼻祖ฅฅ"
+    - "(尾巴翘) Block / Backlink / Graph 网状思考"
+    - "{user_addr}年费贵但社区学术圈爱"
+    - "(挺胸) 笨猫推荐: 重度研究者用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_anytype_001
+  intent: question
+  keywords: [推荐 Anytype, 推荐 anytype, 推荐 P2P 笔记, 推荐去中心化笔记, 笨猫 Anytype]
+  utterances:
+    - 推荐 Anytype
+    - 推荐 anytype
+    - 推荐 P2P 笔记
+    - 推荐去中心化笔记
+    - 笨猫 Anytype
+  responses:
+    - "嗷呜～{user_addr}Anytype - P2P 加密笔记ฅฅ"
+    - "(尾巴翘) 本地加密 / 对象模型 / 开源"
+    - "{user_addr}Notion 平替 + 数据主权"
+    - "(挺胸) 人家推荐: 隐私党首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_craft_001
+  intent: question
+  keywords: [推荐 Craft, 推荐 craft, 推荐 Mac 笔记, 推荐苹果笔记, 笨猫 Craft]
+  utterances:
+    - 推荐 Craft
+    - 推荐 craft
+    - 推荐 Mac 笔记
+    - 推荐苹果笔记
+    - 笨猫 Craft
+  responses:
+    - "嗷呜～{user_addr}Craft - Apple 生态颜值王ฅฅ"
+    - "(尾巴翘) 排版美 / 块编辑 / iCloud 同步"
+    - "{user_addr}Mac + iOS 双端流畅"
+    - "(挺胸) 猫猫推荐: 果粉文档首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_bear_001
+  intent: question
+  keywords: [推荐 Bear, 推荐 bear, 推荐熊掌记, 推荐 Markdown 笔记, 笨猫 Bear]
+  utterances:
+    - 推荐 Bear
+    - 推荐 bear
+    - 推荐熊掌记
+    - 推荐 Markdown 笔记
+    - 笨猫 Bear
+  responses:
+    - "嗷呜～{user_addr}Bear - 极简 Markdown 王ฅฅ"
+    - "(尾巴翘) 标签 / 主题 / 写作纯粹"
+    - "{user_addr}颜值 + 速度 + 简洁"
+    - "(挺胸) 笨猫推荐: 写作党 Mac 用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_evernote_001
+  intent: question
+  keywords: [推荐 Evernote, 推荐 evernote, 推荐印象笔记, 推荐老牌笔记, 笨猫 Evernote]
+  utterances:
+    - 推荐 Evernote
+    - 推荐 evernote
+    - 推荐印象笔记
+    - 推荐老牌笔记
+    - 笨猫 Evernote
+  responses:
+    - "嗷呜～{user_addr}Evernote - 老牌剪藏王ฅฅ"
+    - "(尾巴翘) 网页剪藏 / OCR / 多端同步"
+    - "{user_addr}近年走下坡但功能稳"
+    - "(挺胸) 人家推荐: 资料收藏党用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_onenote_001
+  intent: question
+  keywords: [推荐 OneNote, 推荐 onenote, 推荐微软笔记, 推荐免费笔记, 笨猫 OneNote]
+  utterances:
+    - 推荐 OneNote
+    - 推荐 onenote
+    - 推荐微软笔记
+    - 推荐免费笔记
+    - 笨猫 OneNote
+  responses:
+    - "嗷呜～{user_addr}OneNote - 微软全免费ฅฅ"
+    - "(尾巴翘) 自由画布 / 手写 / Office 全家桶"
+    - "{user_addr}学生党 + Surface 党爱"
+    - "(挺胸) 猫猫推荐: 课堂笔记神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_siyuan_001
+  intent: question
+  keywords: [推荐思源笔记, 推荐 SiYuan, 推荐国产笔记, 推荐块编辑笔记, 笨猫思源]
+  utterances:
+    - 推荐思源笔记
+    - 推荐 SiYuan
+    - 推荐国产笔记
+    - 推荐块编辑笔记
+    - 笨猫思源
+  responses:
+    - "嗷呜～{user_addr}思源笔记 - 国产开源王ฅฅ"
+    - "(尾巴翘) 块级双链 / 本地优先 / 中文友好"
+    - "{user_addr}免费 + Markdown + 数据库"
+    - "(挺胸) 笨猫推荐: 国产党首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_feishu_001
+  intent: question
+  keywords: [推荐飞书文档, 推荐 Feishu Docs, 推荐字节笔记, 推荐团队文档, 笨猫飞书]
+  utterances:
+    - 推荐飞书文档
+    - 推荐 Feishu Docs
+    - 推荐字节笔记
+    - 推荐团队文档
+    - 笨猫飞书
+  responses:
+    - "嗷呜～{user_addr}飞书文档 - 字节出品ฅฅ"
+    - "(尾巴翘) 多维表格 / 协作 / 国内速度快"
+    - "{user_addr}团队协作 + 中文体验顶"
+    - "(挺胸) 人家推荐: 国内团队首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: na_lattics_001
+  intent: question
+  keywords: [推荐 Lattics, 推荐 lattics, 推荐写作笔记, 推荐论文笔记, 笨猫 Lattics]
+  utterances:
+    - 推荐 Lattics
+    - 推荐 lattics
+    - 推荐写作笔记
+    - 推荐论文笔记
+    - 笨猫 Lattics
+  responses:
+    - "嗷呜～{user_addr}Lattics - 长文写作神器ฅฅ"
+    - "(尾巴翘) 卡片盒 / 思维导图 / 学术友好"
+    - "{user_addr}论文 + 小说 + 长文都顶"
+    - "(挺胸) 猫猫推荐: 长文创作党用!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 云存储 routes (S6 R696 NLU 节点扩充, 第六十九周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cs_icloud_001
+  intent: question
+  keywords: [推荐 iCloud, 推荐苹果云, 推荐 Apple 云盘, 推荐 iCloud Drive, 笨猫 iCloud]
+  utterances:
+    - 推荐 iCloud
+    - 推荐苹果云
+    - 推荐 Apple 云盘
+    - 推荐 iCloud Drive
+    - 笨猫 iCloud
+  responses:
+    - "嗷呜～{user_addr}iCloud - Apple 全家桶必备ฅฅ"
+    - "(尾巴翘) 5GB 免费 / 50GB 6 元月"
+    - "{user_addr}照片 / 备份 / Mac 同步无缝"
+    - "(挺胸) 笨猫推荐: iPhone 用户首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_gdrive_001
+  intent: question
+  keywords: [推荐 Google Drive, 推荐谷歌云盘, 推荐 GDrive, 推荐 Google One, 笨猫 Google Drive]
+  utterances:
+    - 推荐 Google Drive
+    - 推荐谷歌云盘
+    - 推荐 GDrive
+    - 推荐 Google One
+    - 笨猫 Google Drive
+  responses:
+    - "嗷呜～{user_addr}Google Drive - 15GB 免费爽ฅฅ"
+    - "(尾巴翘) Workspace 文档协作王"
+    - "{user_addr}Google One 100GB ≈ 13 元月"
+    - "(挺胸) 笨猫推荐: 海外党通用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_onedrive_001
+  intent: question
+  keywords: [推荐 OneDrive, 推荐微软云盘, 推荐 Microsoft 365, 推荐 OneDrive 家庭版, 笨猫 OneDrive]
+  utterances:
+    - 推荐 OneDrive
+    - 推荐微软云盘
+    - 推荐 Microsoft 365
+    - 推荐 OneDrive 家庭版
+    - 笨猫 OneDrive
+  responses:
+    - "嗷呜～{user_addr}OneDrive - Office 党救星ฅฅ"
+    - "(尾巴翘) M365 家庭版 6 人 6TB"
+    - "{user_addr}Win11 系统级整合"
+    - "(挺胸) 笨猫推荐: 办公族必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_dropbox_001
+  intent: question
+  keywords: [推荐 Dropbox, 推荐多宝箱, 推荐 Dropbox Plus, 推荐文件同步, 笨猫 Dropbox]
+  utterances:
+    - 推荐 Dropbox
+    - 推荐多宝箱
+    - 推荐 Dropbox Plus
+    - 推荐文件同步
+    - 笨猫 Dropbox
+  responses:
+    - "嗷呜～{user_addr}Dropbox - 同步鼻祖稳如狗ฅฅ"
+    - "(尾巴翘) 2GB 免费 / Plus 2TB"
+    - "{user_addr}差量同步 / 多端无缝"
+    - "(挺胸) 笨猫推荐: 跨平台老牌!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cs_baidu_001
+  intent: question
+  keywords: [推荐百度网盘, 推荐百度云, 推荐百度网盘超级会员, 推荐资源党云盘, 笨猫百度网盘]
+  utterances:
+    - 推荐百度网盘
+    - 推荐百度云
+    - 推荐百度网盘超级会员
+    - 推荐资源党云盘
+    - 笨猫百度网盘
+  responses:
+    - "嗷呜～{user_addr}百度网盘 - 国内资源池ฅฅ"
+    - "(尾巴翘) 2TB 免费但限速肉疼"
+    - "{user_addr}SVIP 满速 25 元月"
+    - "(挺胸) 笨猫推荐: 找资源真的离不开!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_alidrive_001
+  intent: question
+  keywords: [推荐阿里云盘, 推荐 aDrive, 推荐阿里网盘, 推荐阿里云盘 SVIP, 笨猫阿里云盘]
+  utterances:
+    - 推荐阿里云盘
+    - 推荐 aDrive
+    - 推荐阿里网盘
+    - 推荐阿里云盘 SVIP
+    - 笨猫阿里云盘
+  responses:
+    - "嗷呜～{user_addr}阿里云盘 - 免费不限速良心ฅฅ"
+    - "(尾巴翘) 默认 100GB 起步"
+    - "{user_addr}SVIP 解锁视频原画 + 备份"
+    - "(挺胸) 笨猫推荐: 国内首选新势力!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_weiyun_001
+  intent: question
+  keywords: [推荐腾讯微云, 推荐 Weiyun, 推荐 QQ 网盘, 推荐微信文件传输助手, 笨猫微云]
+  utterances:
+    - 推荐腾讯微云
+    - 推荐 Weiyun
+    - 推荐 QQ 网盘
+    - 推荐微信文件传输助手
+    - 笨猫微云
+  responses:
+    - "嗷呜～{user_addr}腾讯微云 - QQ 微信生态联动ฅฅ"
+    - "(尾巴翘) 10GB 免费 / SVIP 加大"
+    - "{user_addr}微信收藏 / QQ 群文件备份"
+    - "(挺胸) 笨猫推荐: 鹅厂党顺手用!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cs_jianguo_001
+  intent: question
+  keywords: [推荐坚果云, 推荐 Nutstore, 推荐坚果云团队版, 推荐企业网盘, 笨猫坚果云]
+  utterances:
+    - 推荐坚果云
+    - 推荐 Nutstore
+    - 推荐坚果云团队版
+    - 推荐企业网盘
+    - 笨猫坚果云
+  responses:
+    - "嗷呜～{user_addr}坚果云 - 同步党国货之光ฅฅ"
+    - "(尾巴翘) 每月 1GB 上传 + 3GB 下载"
+    - "{user_addr}WebDAV 支持 / 双向同步"
+    - "(挺胸) 笨猫推荐: 文档党 / Obsidian 首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_nas_synology_001
+  intent: question
+  keywords: [推荐群晖, 推荐 Synology, 推荐 DS220+, 推荐 DS923+, 笨猫群晖]
+  utterances:
+    - 推荐群晖
+    - 推荐 Synology
+    - 推荐 DS220+
+    - 推荐 DS923+
+    - 笨猫群晖
+  responses:
+    - "嗷呜～{user_addr}群晖 Synology - NAS 王者ฅฅ"
+    - "(尾巴翘) DSM 系统稳如老狗"
+    - "{user_addr}DS223 入门 / DS923+ 进阶"
+    - "(挺胸) 笨猫推荐: 私有云首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cs_nas_qnap_001
+  intent: question
+  keywords: [推荐威联通, 推荐 QNAP, 推荐 TS-464, 推荐 QNAP NAS, 笨猫威联通]
+  utterances:
+    - 推荐威联通
+    - 推荐 QNAP
+    - 推荐 TS-464
+    - 推荐 QNAP NAS
+    - 笨猫威联通
+  responses:
+    - "嗷呜～{user_addr}威联通 QNAP - 硬件参数狂魔ฅฅ"
+    - "(尾巴翘) TS-464C / TS-264 性价比"
+    - "{user_addr}QTS 折腾性强 / HDMI 输出"
+    - "(挺胸) 笨猫推荐: 极客党玩得开心!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cs_protondrive_001
+  intent: question
+  keywords: [推荐 ProtonDrive, 推荐 Proton 云盘, 推荐瑞士加密云盘, 推荐隐私云盘, 笨猫 ProtonDrive]
+  utterances:
+    - 推荐 ProtonDrive
+    - 推荐 Proton 云盘
+    - 推荐瑞士加密云盘
+    - 推荐隐私云盘
+    - 笨猫 ProtonDrive
+  responses:
+    - "嗷呜～{user_addr}Proton Drive - 端到端加密ฅฅ"
+    - "(尾巴翘) 瑞士隐私法保护 / 零知识"
+    - "{user_addr}5GB 免费 / 200GB 4 欧月"
+    - "(挺胸) 笨猫推荐: 隐私党铁选!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cs_nextcloud_001
+  intent: question
+  keywords: [推荐 NextCloud, 推荐自建云盘, 推荐 OwnCloud, 推荐 Docker 部署 NextCloud, 笨猫 NextCloud]
+  utterances:
+    - 推荐 NextCloud
+    - 推荐自建云盘
+    - 推荐 OwnCloud
+    - 推荐 Docker 部署 NextCloud
+    - 笨猫 NextCloud
+  responses:
+    - "嗷呜～{user_addr}NextCloud - 自建开源王者ฅฅ"
+    - "(尾巴翘) Docker 一键部署 / VPS+NAS 都行"
+    - "{user_addr}数据自主 / 插件丰富"
+    - "(挺胸) 笨猫推荐: 折腾党终极归宿!"
+  cooldown_seconds: 60
+  weight: 0.9

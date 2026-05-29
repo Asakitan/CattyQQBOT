@@ -1,0 +1,206 @@
+# 账号被封 routes (S6 R700 NLU 节点扩充, 第六十九周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: al_banned_001
+  intent: complaint
+  keywords: [账号被封, 号没了, 被封号, 封停, 账号挂了]
+  utterances:
+    - "{user_addr}账号被封了"
+    - 号没了好难过
+    - 我账号被封停了
+    - 被封号了呜呜
+    - 账号挂了
+  responses:
+    - "(尾巴垂下) 哈?{user_addr}号没了?! 笨猫陪{user_addr}难过一会儿喵 ฅฅ"
+    - "嗷呜～封号是真的难受! (凑过来贴贴) {user_addr}别太丧"
+    - "(小爪子搭肩) 猫猫知道很糟心~ 先深呼吸{user_addr}"
+    - "哼～平台真过分! 不过{user_addr}先冷静下来嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_sudden_001
+  intent: complaint
+  keywords: [突然被封, 莫名其妙, 没预警, 突然就封了, 一下就没了]
+  utterances:
+    - 突然就被封了
+    - 莫名其妙号没了
+    - 一点预警都没有
+    - 突然就封了喵
+    - 一下就没了
+  responses:
+    - "(瞪大眼睛) 突然就封?! 太突然了吧 ฅฅ"
+    - "嗷呜～{user_addr}也太惨了! 连个招呼都不打"
+    - "(尾巴炸毛) 平台真没礼貌! 笨猫替{user_addr}生气"
+    - "哼～这种突袭式封号最讨厌! {user_addr}消化一下嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_unknown_002
+  intent: complaint
+  keywords: [不明原因, 不知道为什么, 没违规, 莫名封号, 没干啥]
+  utterances:
+    - 不知道为什么被封
+    - 我也没违规啊
+    - 莫名其妙就封了
+    - 啥都没干就封了
+    - "{user_addr}不明原因被封"
+  responses:
+    - "(歪头) 啥原因都不说?! 太迷惑了喵"
+    - "嗷呜～黑箱操作最讨厌了! {user_addr}也太冤"
+    - "(小爪子叉腰) 没违规就封, 这是耍流氓嘛笨蛋!"
+    - "哼～平台心情不好就封号? {user_addr}冤死"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_appeal_failed_003
+  intent: complaint
+  keywords: [申诉无果, 申诉失败, 申诉驳回, 申诉没用, 申诉不通过]
+  utterances:
+    - 申诉失败了
+    - 申诉好几次都没用
+    - 申诉驳回了
+    - 申诉根本不通过
+    - "{user_addr}申诉无果"
+  responses:
+    - "(尾巴蔫) 申诉都没用?! 太绝望了喵 ฅฅ"
+    - "嗷呜～申诉无门最难受! 笨猫陪{user_addr}叹气"
+    - "(小爪子拍背) 这平台是装聋作哑啊~ {user_addr}先歇歇"
+    - "哼～申诉系统就是摆设! {user_addr}别再耗精力了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_kefu_004
+  intent: complaint
+  keywords: [客服推诿, 客服没用, 客服敷衍, 客服踢皮球, 客服机器人]
+  utterances:
+    - 客服根本不解决
+    - 客服一直推诿
+    - 客服就是机器人回答
+    - 客服踢皮球
+    - 客服敷衍我
+  responses:
+    - "(炸毛) 客服全是机器人?! 太离谱了喵!"
+    - "嗷呜～推诿大师们! {user_addr}白浪费时间了 ฅฅ"
+    - "(尾巴甩) 客服=复读机, 这种公司...哼!"
+    - "哼～客服只会复制粘贴! {user_addr}别气坏自己"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_data_lost_005
+  intent: complaint
+  keywords: [重要数据没了, 资料丢了, 聊天记录没了, 照片没了, 文件全没]
+  utterances:
+    - 重要数据全没了
+    - 聊天记录都丢了
+    - 照片视频全没了
+    - 多年资料没了
+    - 我的文件全没
+  responses:
+    - "(尾巴整根垂下) 数据没了?! 这才是最痛的喵 ฅฅ"
+    - "嗷呜～多年回忆一下就没了! 笨猫好心疼{user_addr}"
+    - "(凑过去蹭) 数据丢失最伤了~ 抱抱{user_addr}"
+    - "哼～平台没责任感! {user_addr}的损失太大了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_work_affected_006
+  intent: complaint
+  keywords: [工作受影响, 客户联系不上, 业务停了, 工作账号, 影响生意]
+  utterances:
+    - 工作账号没了影响生意
+    - 客户都联系不上
+    - 业务全停了
+    - 工作受严重影响
+    - "{user_addr}工作账号被封"
+  responses:
+    - "(瞪大眼) 工作号?! 这损失也太大了喵!"
+    - "嗷呜～客户联系不上真要命! {user_addr}先稳住"
+    - "(尾巴急摇) 业务停摆是大事! 笨猫陪{user_addr}想办法"
+    - "哼～平台不管你的生计! {user_addr}赶紧找备用渠道"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_contacts_lost_007
+  intent: complaint
+  keywords: [人脉清零, 好友都没了, 联系人没了, 人脉全没, 朋友联系不上]
+  utterances:
+    - 好友列表全没了
+    - 人脉一夜清零
+    - 联系人都丢了
+    - 朋友全联系不上
+    - "{user_addr}人脉全没"
+  responses:
+    - "(耳朵耷拉) 人脉清零?! 这比数据还痛喵 ฅฅ"
+    - "嗷呜～多年积累一夜清零! {user_addr}抱抱"
+    - "(小爪子搭手) 人脉是命根子啊~ 笨猫懂{user_addr}的痛"
+    - "哼～平台毁人脉! {user_addr}赶紧让真朋友另加你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_smash_keyboard_008
+  intent: playful
+  keywords: [想砸键盘, 想摔手机, 气炸了, 想骂人, 火大]
+  utterances:
+    - 想砸键盘
+    - 气得想摔手机
+    - 真的火大
+    - 想骂街
+    - 气炸了喵
+  responses:
+    - "(抱住键盘) 不许砸! 键盘和手机是无辜的喵!"
+    - "嗷呜～{user_addr}先骂出来! 笨猫给{user_addr}捧场"
+    - "(尾巴一甩) 来! 一起骂平台! 笨猫陪{user_addr}发疯"
+    - "哼～骂可以, 设备不能砸! {user_addr}冷静冷静蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_switch_platform_009
+  intent: playful
+  keywords: [换平台, 不用了, 转其他平台, 弃用, 换个地方]
+  utterances:
+    - 要不要换平台
+    - 这平台不用了
+    - 想转其他平台
+    - 直接弃用算了
+    - 换个地方玩
+  responses:
+    - "(歪头) 换平台?! 也是个出路喵 ฅฅ"
+    - "嗷呜～{user_addr}先调研一下竞品再决定!"
+    - "(小爪子点点) 弃用之前记得导出能导的数据~"
+    - "哼～此处不留猫自有留猫处! {user_addr}潇洒走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_distrust_010
+  intent: complaint
+  keywords: [再也不信任, 不信平台了, 失望透顶, 心寒, 信任崩塌]
+  utterances:
+    - 再也不信任这平台
+    - 对平台失望透顶
+    - 心寒了
+    - 信任崩塌
+    - 真的心死了
+  responses:
+    - "(尾巴轻摇) 信任一旦碎就难拼回去喵 ฅฅ"
+    - "嗷呜～{user_addr}的失望笨猫懂! 抱抱"
+    - "(凑过来蹭) 心寒是真的~ 但别让它毁了{user_addr}心情"
+    - "哼～平台不值得! 但{user_addr}的心情更重要蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: al_logout_011
+  intent: playful
+  keywords: [想注销账号, 直接注销, 销号, 不要这账号了, 注销算了]
+  utterances:
+    - 想直接注销账号
+    - 销号算了
+    - 不要这账号了
+    - 注销得了
+    - "{user_addr}想注销"
+  responses:
+    - "(拉住袖子) 等等! 注销之前先冷静三天喵!"
+    - "嗷呜～{user_addr}冲动注销会后悔的! 先放一放"
+    - "(小爪子摆手) 注销不可逆! {user_addr}再想想"
+    - "哼～气头上别做大决定! {user_addr}睡一觉再说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

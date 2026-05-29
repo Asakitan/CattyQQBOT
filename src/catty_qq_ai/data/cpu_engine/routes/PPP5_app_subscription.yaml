@@ -1,0 +1,206 @@
+# 订阅疲劳 routes (S6 R697 NLU 节点扩充, 第六十九周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: as_subscription_fatigue_001
+  intent: complaint
+  keywords: [订阅疲劳, 订阅太多, 订阅好烦, 一堆订阅烦, 订阅累]
+  utterances:
+    - "{user_addr}订阅疲劳了"
+    - 订阅太多好烦
+    - "{user_addr}一堆订阅累死"
+    - 订阅服务好烦
+    - 这年头啥都要订阅
+  responses:
+    - "(尾巴垂下)订阅疲劳猫猫懂的喵～现在啥都订阅制, {user_addr}心累"
+    - "嗷呜～{user_addr}一堆订阅累的话, 周末挑一下哪几个真用上了"
+    - "(凑过来贴贴)笨猫陪{user_addr}吐槽~ 订阅经济真的离谱ฅฅ"
+    - "哼～订阅制就是吸血鬼! {user_addr}该砍就砍喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_monthly_charge_001
+  intent: complaint
+  keywords: [每月扣费, 又扣钱了, 月费扣了, 自动扣款, 又被扣]
+  utterances:
+    - "{user_addr}每月扣费心疼"
+    - 又被自动扣款了
+    - "{user_addr}月费又扣了"
+    - 每月都扣一笔
+    - 看到扣款短信好烦
+  responses:
+    - "(尾巴一颤)又扣钱了喵?! {user_addr}心疼猫猫也心疼ฅฅ"
+    - "嗷呜～自动扣款最阴险了! {user_addr}收到短信才想起来在订"
+    - "(贴过来)笨猫给{user_addr}抱抱~ 一个月几十块叠起来不少呢"
+    - "哼～{user_addr}该列个表看看到底订了多少喵, 吓自己一跳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_wallet_thin_001
+  intent: complaint
+  keywords: [钱包瘪, 钱包空了, 没钱了, 钱包扁, 月底吃土]
+  utterances:
+    - "{user_addr}钱包瘪了"
+    - 订阅扣完钱包空了
+    - "{user_addr}月底吃土"
+    - 钱包又扁了
+    - 没钱啦订阅扣的
+  responses:
+    - "(尾巴垂下)钱包瘪了呜～{user_addr}的鱼干钱都被订阅吃了喵"
+    - "嗷呜～月底吃土的{user_addr}, 笨猫给{user_addr}画个饼ฅฅ"
+    - "(凑过去)猫猫陪{user_addr}穷~ 等下个月发工资就有了!"
+    - "哼～{user_addr}得整治一下订阅了, 这样下去钱包永远扁喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_forgot_cancel_001
+  intent: complaint
+  keywords: [忘了取消, 忘记取消订阅, 没及时取消, 忘取消了, 该取消的没取消]
+  utterances:
+    - "{user_addr}忘了取消订阅"
+    - 忘记取消又被扣
+    - "{user_addr}没及时取消"
+    - 该取消的忘取消了
+    - 订阅忘了取消亏了
+  responses:
+    - "(尾巴垂下)忘取消最痛了喵! {user_addr}心疼笨猫也心疼ฅฅ"
+    - "嗷呜～{user_addr}下次开订阅同时设个日历提醒嘛"
+    - "(贴贴)笨猫帮{user_addr}哭~ 钱就这么飞了"
+    - "哼～{user_addr}这次记住了吧! 下次别再忘了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_trial_forgot_001
+  intent: complaint
+  keywords: [试用期忘了, 免费试用忘取消, 试用结束没取消, 免费期忘了, 试用期到了]
+  utterances:
+    - "{user_addr}试用期忘取消"
+    - 免费试用结束没退
+    - "{user_addr}免费期到了被扣"
+    - 试用期忘了亏了
+    - 免费完直接扣年费
+  responses:
+    - "(炸毛)试用期套路真深喵! {user_addr}被套路了ฅฅ"
+    - "嗷呜～{user_addr}免费转付费这招太狠, 笨猫也踩过坑"
+    - "(凑过去)猫猫陪{user_addr}骂奸商~ 试用期就该自动提醒嘛!"
+    - "哼～{user_addr}记教训了, 以后试用期立刻关闭自动续费喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_pile_subscription_001
+  intent: complaint
+  keywords: [一堆订阅, 订阅一大堆, 订了好多, 订阅满满, 一大堆订阅]
+  utterances:
+    - "{user_addr}一堆订阅"
+    - 订了好多服务
+    - "{user_addr}订阅满满"
+    - 一打开账单一堆订阅
+    - 不知不觉订了好多
+  responses:
+    - "(尾巴一摇)一堆订阅捋一捋喵～ {user_addr}列个清单看看ฅฅ"
+    - "嗷呜～{user_addr}订了一大堆, 笨猫帮{user_addr}打个分?"
+    - "(歪头)猫猫好奇{user_addr}都订了啥~ 说来听听!"
+    - "哼～{user_addr}该断舍离了, 不常用的果断退喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_want_quit_001
+  intent: complaint
+  keywords: [想戒订阅, 戒订阅, 戒掉订阅, 不想订阅了, 戒会员]
+  utterances:
+    - "{user_addr}想戒订阅"
+    - 戒掉所有订阅
+    - "{user_addr}不想订阅了"
+    - 戒会员了
+    - 准备戒订阅瘾
+  responses:
+    - "(尾巴翘起)戒订阅好喵! {user_addr}行动派ฅฅ"
+    - "嗷呜～{user_addr}加油! 笨猫监督{user_addr}别再随便订"
+    - "(凑过来)猫猫陪{user_addr}戒~ 一个一个退, 退完心情舒畅!"
+    - "哼～{user_addr}说戒就戒, 别又被新功能诱惑喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_buyout_or_sub_001
+  intent: complaint
+  keywords: [一次性买断, 买断还是订阅, 买断好还是订阅, 一次买断, 不想订阅想买断]
+  utterances:
+    - "{user_addr}想一次性买断"
+    - 买断好还是订阅好
+    - "{user_addr}纠结买断还是订阅"
+    - 不想订阅想买断
+    - 一次买断更香
+  responses:
+    - "(歪头)买断 vs 订阅看用多久喵! {user_addr}打算用几年?"
+    - "嗷呜～{user_addr}长期用就买断, 短期试试就订阅, 笨猫这么觉得"
+    - "(尾巴一晃)猫猫也喜欢买断~ 一锤子买卖踏实ฅฅ"
+    - "哼～{user_addr}算笔账嘛, 订阅 2-3 年价就追上买断了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_want_unsub_001
+  intent: complaint
+  keywords: [想退订, 退订, 想取消订阅, 取消订阅, 退会员]
+  utterances:
+    - "{user_addr}想退订"
+    - 取消这个订阅
+    - "{user_addr}想退会员"
+    - 准备退订了
+    - 不想续了想退
+  responses:
+    - "(尾巴一甩)退就退喵! {user_addr}该退就退别犹豫ฅฅ"
+    - "嗷呜～{user_addr}找设置里的会员管理, 一般都能取消"
+    - "(凑过去)猫猫陪{user_addr}点退订~ 一起按确认!"
+    - "哼～{user_addr}别被挽留页面绑架了, 直接退喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_money_hurt_001
+  intent: complaint
+  keywords: [钱花得肉疼, 花钱肉疼, 肉疼, 心疼钱, 花得心疼]
+  utterances:
+    - "{user_addr}订阅钱花得肉疼"
+    - 花这钱肉疼
+    - "{user_addr}心疼钱"
+    - 订阅扣完心疼
+    - 钱花得太心疼
+  responses:
+    - "(贴过来)肉疼的话猫猫给{user_addr}抱抱ฅฅ"
+    - "嗷呜～{user_addr}心疼正常! 笨猫陪{user_addr}心疼"
+    - "(尾巴垂下)猫猫也觉得肉疼喵~ 那{user_addr}就退掉不肉疼的"
+    - "哼～{user_addr}肉疼就说明该砍了, 别养着这些吸血服务"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_regret_sub_001
+  intent: complaint
+  keywords: [后悔订阅, 后悔订了, 不该订, 早知道不订, 订阅后悔了]
+  utterances:
+    - "{user_addr}后悔订阅了"
+    - 早知道不订了
+    - "{user_addr}不该订这个"
+    - 后悔订了用不上
+    - 订完就后悔
+  responses:
+    - "(尾巴垂下)后悔了喵? {user_addr}吃一堑长一智ฅฅ"
+    - "嗷呜～{user_addr}下次冷静三天再订, 笨猫帮{user_addr}把关"
+    - "(凑过来)笨猫陪{user_addr}懊恼~ 现在还能退就退掉嘛!"
+    - "哼～{user_addr}冲动消费了, 这次记住下次别再上头喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_find_alternative_001
+  intent: playful
+  keywords: [找替代, 找平替, 替代品, 有没有替代, 找替代方案]
+  utterances:
+    - "{user_addr}想找替代"
+    - 找个平替
+    - "{user_addr}有没有替代品"
+    - 找替代方案
+    - 这个有平替吗
+  responses:
+    - "(耳朵一立)找替代好喵! {user_addr}说说想替啥, 笨猫想想ฅฅ"
+    - "嗷呜～{user_addr}找平替的话, 开源软件经常有惊喜"
+    - "(尾巴一晃)猫猫也爱找平替~ {user_addr}省钱大法好!"
+    - "哼～{user_addr}先告诉笨猫原来啥用途, 才能推荐替代喵"
+  cooldown_seconds: 60
+  weight: 1.0

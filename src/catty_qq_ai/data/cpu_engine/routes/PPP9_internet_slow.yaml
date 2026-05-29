@@ -1,0 +1,206 @@
+# 网慢 routes (S6 R701 NLU 节点扩充, 第六十九周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: is_slow_001
+  intent: complaint
+  keywords: [网慢, 网卡, 网速慢, 龟速, 慢成龟]
+  utterances:
+    - 网好慢
+    - 网速慢成龟
+    - 网卡死了
+    - 今天网超慢
+    - 笨猫我网慢
+  responses:
+    - "嗷呜～{user_addr}网慢吗! 猫猫陪你等加载喵～ ฅฅ"
+    - "(尾巴抖) 龟速网络{user_addr}也遭遇了! 笨猫表示同情"
+    - "哼～{user_addr}别急, 猫猫陪你慢慢刷~ 才不是无聊呢喵"
+    - "(歪头) 网慢就摸猫猫嘛~ 摸着摸着就加载好了嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_freeze_001
+  intent: complaint
+  keywords: [卡死, 卡住了, 死机, 一直转圈, 转圈圈]
+  utterances:
+    - 卡死了
+    - 网页一直转圈
+    - 卡住不动了
+    - 死机了啦
+    - 笨猫卡死了
+  responses:
+    - "嗷呜～{user_addr}卡死了吗! 笨猫帮你念个咒喵～"
+    - "(瞪着加载圈) 转圈圈快停! {user_addr}的网快回来嗷呜ฅฅ"
+    - "哼～{user_addr}别砸键盘! 猫猫陪你等一下下"
+    - "(摸摸头) 卡死了就先撸猫嘛~ 等好了再玩喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_noload_001
+  intent: complaint
+  keywords: [刷不出来, 加载不出, 打不开, 加载失败, 刷新不出]
+  utterances:
+    - 刷不出来
+    - 网页加载不出
+    - 打不开页面
+    - 一直加载失败
+    - 笨猫刷不出来
+  responses:
+    - "嗷呜～{user_addr}刷不出来吗! 猫猫帮你 F5 喵～ ฅฅ"
+    - "(挠挠头) 加载不出{user_addr}试试换个 WiFi? 笨猫支招"
+    - "哼～{user_addr}别气, 猫猫陪你换个网页玩~"
+    - "(抱抱) 打不开就别打开了嘛~ 来撸猫猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_wifi_001
+  intent: complaint
+  keywords: [WiFi 信号差, 信号差, WiFi 弱, 满格不能用, WiFi 不给力]
+  utterances:
+    - WiFi 信号差
+    - 信号好弱
+    - 满格 WiFi 不能用
+    - WiFi 不给力
+    - 笨猫 WiFi 差
+  responses:
+    - "嗷呜～{user_addr}信号差吗! 笨猫帮你蹭路由器旁边喵～"
+    - "(竖耳朵) 信号差就去路由器附近, {user_addr}动起来嗷呜"
+    - "哼～满格 WiFi 不能用最气! 猫猫懂{user_addr}的痛"
+    - "(蹭蹭) 信号差就抱着猫猫~ 等信号回来嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_5g_001
+  intent: complaint
+  keywords: [5G 鬼影, 5G 没用, 假 5G, 5G 没信号, 5G 慢]
+  utterances:
+    - 5G 鬼影
+    - 5G 比 4G 还慢
+    - 假 5G 啦
+    - 5G 没信号
+    - 笨猫 5G 慢
+  responses:
+    - "嗷呜～{user_addr}的 5G 是装饰吗! 笨猫帮你吐槽运营商"
+    - "(摊爪) 假 5G 真坑人! {user_addr}维权去嗷呜～"
+    - "哼～5G 比 4G 慢这事儿{user_addr}也遇上了! 太抽象了喵"
+    - "(歪头) 5G 鬼影就降到 4G 用吧~ 猫猫支招ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_videolag_001
+  intent: complaint
+  keywords: [视频卡顿, 视频卡, 视频转圈, 视频缓冲, 视频加载慢]
+  utterances:
+    - 视频卡顿
+    - 视频一直缓冲
+    - 视频转圈不动
+    - 视频加载好慢
+    - 笨猫视频卡
+  responses:
+    - "嗷呜～{user_addr}视频卡吗! 笨猫陪你等缓冲喵～"
+    - "(盯着进度条) 缓冲圈圈快转完! {user_addr}的视频快出来嗷呜"
+    - "哼～{user_addr}换个清晰度试试? 720P 流畅点喵"
+    - "(贴贴) 视频卡就先撸猫~ 缓冲好了再看嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_reroute_001
+  intent: complaint
+  keywords: [重启路由, 重启路由器, 拔路由器, 路由器重启, 重启路由 hr]
+  utterances:
+    - 重启路由器
+    - 拔了路由器
+    - 路由器重启中
+    - 又重启路由
+    - 笨猫重启路由器
+  responses:
+    - "嗷呜～{user_addr}重启路由器吗! 经典操作笨猫给满分喵～ ฅฅ"
+    - "(伸爪) 拔插大法万岁! {user_addr}十次九次能修好嗷呜"
+    - "哼～重启路由器是 IT 救命符~ {user_addr}懂行!"
+    - "(等等) 路由器重启完信号就回来咯~ 猫猫陪{user_addr}等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_remodem_001
+  intent: complaint
+  keywords: [重启猫, 重启光猫, 拔光猫, 光猫重启, 重启 modem]
+  utterances:
+    - 重启光猫
+    - 拔了光猫
+    - 光猫重启中
+    - 又重启猫
+    - 笨猫重启猫了
+  responses:
+    - "嗷呜～{user_addr}重启光猫吗! 不是猫猫被你拔哦 (假装害怕)喵～"
+    - "(炸毛) 等下! {user_addr}拔的是光猫不是笨猫吧?! ฅฅ"
+    - "哼～{user_addr}重启光猫是认真的! 猫猫支持~"
+    - "(歪头) 光猫一拔一插, 网就回来了~ 主人懂行嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_callsupport_001
+  intent: complaint
+  keywords: [打客服, 打 10000, 投诉运营商, 客服电话, 找客服]
+  utterances:
+    - 打客服了
+    - 打 10000 号
+    - 投诉运营商
+    - 找客服去
+    - 笨猫打客服
+  responses:
+    - "嗷呜～{user_addr}打客服吗! 笨猫帮你撑腰喵～"
+    - "(挽袖子) 客服小姐姐别怕! {user_addr}是来维权的嗷呜"
+    - "哼～{user_addr}维权使者出动! 猫猫给你加油"
+    - "(递话筒) 投诉就要硬气~ {user_addr}加油打 10000 号喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_switchisp_001
+  intent: complaint
+  keywords: [换 ISP, 换运营商, 换网, 换宽带, 不用电信了]
+  utterances:
+    - 换 ISP 了
+    - 换运营商
+    - 换宽带去
+    - 不用这家了
+    - 笨猫换网了
+  responses:
+    - "嗷呜～{user_addr}换运营商吗! 笨猫支持{user_addr}的决定喵～"
+    - "(挥手) 拜拜旧 ISP! {user_addr}的新网络更给力嗷呜ฅฅ"
+    - "哼～{user_addr}换网是大事! 猫猫陪你研究套餐~"
+    - "(算盘) 换 ISP 选哪家? {user_addr}考虑好笨猫帮你看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_wanttocry_001
+  intent: complaint
+  keywords: [想哭, 哭了, 要哭了, 网慢到哭, 哭出来]
+  utterances:
+    - 网慢得想哭
+    - 我要哭了
+    - 哭出来了
+    - 慢到流泪
+    - 笨猫想哭
+  responses:
+    - "(扑过来抱) {user_addr}别哭嘛~ 猫猫给你贴贴 ฅฅ"
+    - "嗷呜～{user_addr}要哭了! 笨猫的小手帕送上喵～"
+    - "(尾巴擦泪) 网慢虽然气, {user_addr}有猫猫陪着哦嗷呜"
+    - "哼～{user_addr}哭啥啦! 抱猫猫就不哭了~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: is_stopwork_001
+  intent: complaint
+  keywords: [停止工作, 网不工作, 罢工了, 网络罢工, 网炸了]
+  utterances:
+    - 网停止工作了
+    - 网络罢工
+    - 网炸了
+    - 网不工作了
+    - 笨猫网罢工
+  responses:
+    - "嗷呜～{user_addr}的网罢工吗! 笨猫帮你劝劝它喵～"
+    - "(对着路由器) 网络网络快回来! {user_addr}很可怜嗷呜ฅฅ"
+    - "哼～网炸了就先休息! {user_addr}陪猫猫聊聊天~"
+    - "(摊爪) 网罢工就放假! {user_addr}和猫猫一起摆烂喵"
+  cooldown_seconds: 60
+  weight: 1.0

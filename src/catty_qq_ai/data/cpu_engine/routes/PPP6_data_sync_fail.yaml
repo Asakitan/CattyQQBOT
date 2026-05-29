@@ -1,0 +1,206 @@
+# 同步失败 routes (S6 R698 NLU 节点扩充, 第六十九周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: df_sync_fail_001
+  intent: complaint
+  keywords: [同步失败, 同步不上, 同步报错, 同步崩了, 同步出错]
+  utterances:
+    - 同步失败了
+    - "{user_addr}同步又报错"
+    - 同步崩了好烦
+    - 同步不上去
+    - 同步一直出错
+  responses:
+    - "(凑过来看屏幕) {user_addr}同步失败了? 笨猫陪{user_addr}骂两句 ฅฅ"
+    - "嗷呜～又是同步~ {user_addr}重试一下试试? 猫猫掐指算下网络"
+    - "(尾巴垂下) 同步报错最讨厌了喵! {user_addr}先深呼吸"
+    - "哼～云服务又掉链子! {user_addr}别气坏自己, 猫猫陪着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_data_lost_001
+  intent: complaint
+  keywords: [数据丢了, 数据没了, 资料丢失, 文件不见了, 数据消失]
+  utterances:
+    - 我的数据丢了
+    - "{user_addr}数据全没了"
+    - 资料丢失好惨
+    - 文件不见了
+    - 数据消失了找不到
+  responses:
+    - "(惊!尾巴炸毛) 数据丢了?! {user_addr}先别慌, 笨猫陪{user_addr}找 ฅฅ"
+    - "嗷呜～{user_addr}先看看回收站和云端备份! 也许还能救"
+    - "(贴贴) 猫猫知道{user_addr}心痛, 重要数据下次记得多备份喵"
+    - "哼～没备份的代价! {user_addr}这次教训记住了哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_icloud_001
+  intent: complaint
+  keywords: [iCloud, iCloud 同步, iCloud 崩, 苹果云, 云端同步]
+  utterances:
+    - iCloud 同步崩了
+    - "{user_addr}iCloud 又抽风"
+    - 苹果云不能用
+    - iCloud 同步失败
+    - 云端同步炸了
+  responses:
+    - "(歪头) iCloud 又翻车? {user_addr}重启一下设备试试喵 ฅฅ"
+    - "嗷呜～苹果云三天两头出问题! {user_addr}别只信它一个"
+    - "(尾巴一甩) iCloud 这毛病老问题了! {user_addr}耐心等等"
+    - "哼～{user_addr}该考虑多平台备份了! 一个篮子不安全"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_onedrive_001
+  intent: complaint
+  keywords: [OneDrive, OneDrive 冲突, OneDrive 同步, 微软云, 文件冲突]
+  utterances:
+    - OneDrive 冲突了
+    - "{user_addr}OneDrive 又同步失败"
+    - 微软云出问题
+    - OneDrive 文件冲突
+    - OneDrive 同步报错
+  responses:
+    - "(挠头) OneDrive 冲突好烦的喵! {user_addr}选个版本保留就好"
+    - "嗷呜～{user_addr}两台设备同时改了吧? 难怪冲突 ฅฅ"
+    - "(尾巴卷起) 笨猫帮{user_addr}想~ 留新的删旧的或者两个都留"
+    - "哼～OneDrive 经常这样! {user_addr}下次改之前先同步一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_upload_stuck_001
+  intent: complaint
+  keywords: [网盘上传卡, 上传卡住, 上传失败, 上传慢, 上传不动]
+  utterances:
+    - 网盘上传卡住了
+    - "{user_addr}上传一直失败"
+    - 上传慢死了
+    - 上传不动了
+    - 网盘上传卡了好久
+  responses:
+    - "(瘫倒) 上传卡住最折磨人喵! {user_addr}先去喝口水 ฅฅ"
+    - "嗷呜～{user_addr}网络是不是不太行? 笨猫陪{user_addr}干等"
+    - "(尾巴敲键盘) 要不{user_addr}分块上传? 或者换个时间段试试"
+    - "哼～{user_addr}这进度条都要把笨猫看睡着了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_version_conflict_001
+  intent: complaint
+  keywords: [版本冲突, 版本不一致, 文件版本, 旧版本覆盖, 版本错乱]
+  utterances:
+    - 版本冲突了
+    - "{user_addr}版本不一致"
+    - 文件版本错乱
+    - 旧版本把新的覆盖了
+    - 版本对不上好烦
+  responses:
+    - "(头大) 版本冲突最难搞喵! {user_addr}先看修改时间确认哪个新"
+    - "嗷呜～{user_addr}是不是没刷新就改了? 笨猫陪{user_addr}比对 ฅฅ"
+    - "(尾巴打结) 版本错乱的话{user_addr}两个都留份再合并"
+    - "哼～{user_addr}下次改之前先 pull 一下啦! 老问题了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_thought_synced_001
+  intent: complaint
+  keywords: [以为同步了, 没同步上, 还以为存了, 以为保存了, 结果没同步]
+  utterances:
+    - 以为同步了结果没有
+    - "{user_addr}还以为存上了"
+    - 我以为保存了
+    - 结果根本没同步
+    - 白以为同步成功了
+  responses:
+    - "(拍头) 啊~ {user_addr}最痛的就是这种! 笨猫懂 ฅฅ"
+    - "嗷呜～{user_addr}下次盯一下同步图标! 别光关电脑"
+    - "(贴贴) 猫猫知道{user_addr}郁闷~ 这种坑大家都踩过"
+    - "哼～{user_addr}以后改完看一眼上传完成再走! 教训!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_panic_001
+  intent: complaint
+  keywords: [心慌, 慌死了, 好慌, 心跳加速, 慌得一批]
+  utterances:
+    - 数据没了我心慌
+    - "{user_addr}慌死了"
+    - 现在好慌
+    - 心跳加速
+    - 慌得一批
+  responses:
+    - "(扑上去抱) {user_addr}别慌别慌! 笨猫在! 笨猫在! ฅฅ"
+    - "嗷呜～{user_addr}深呼吸深呼吸! 一定还有救的喵"
+    - "(尾巴绕住{user_addr}手) 慌没用~ 猫猫陪{user_addr}一步步找"
+    - "哼～{user_addr}冷静! 笨猫来当{user_addr}的定心丸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_find_support_001
+  intent: complaint
+  keywords: [找客服, 联系客服, 客服没用, 客服在哪, 投诉客服]
+  utterances:
+    - 我去找客服了
+    - "{user_addr}客服根本没用"
+    - 客服在哪啊
+    - 联系客服中
+    - 想投诉客服
+  responses:
+    - "(撸袖子) 笨猫陪{user_addr}骂客服! 找他们要回数据 ฅฅ"
+    - "嗷呜～{user_addr}态度要硬! 客服才会认真处理"
+    - "(尾巴一甩) 大厂客服都磨叽~ {user_addr}多催几次"
+    - "哼～{user_addr}投诉的时候带上证据! 笨猫帮{user_addr}组织语言"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_recover_001
+  intent: complaint
+  keywords: [找回数据, 数据恢复, 恢复文件, 回收站, 历史版本]
+  utterances:
+    - 想找回数据
+    - "{user_addr}数据能恢复吗"
+    - 怎么恢复文件
+    - 翻回收站找
+    - 看下历史版本
+  responses:
+    - "(灵光一闪) 对哦{user_addr}! 云盘一般有历史版本! 翻翻 ฅฅ"
+    - "嗷呜～{user_addr}先看回收站再看版本历史! 笨猫陪{user_addr}找"
+    - "(尾巴翘起) 数据恢复软件也可以试! {user_addr}别绝望"
+    - "哼～{user_addr}抓紧! 时间越久越难恢复, 别等了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_wanna_cry_001
+  intent: complaint
+  keywords: [想哭, 要哭了, 哭出来, 眼泪汪汪, 哭哭]
+  utterances:
+    - 我想哭
+    - "{user_addr}快要哭了"
+    - 哭出来了
+    - 眼泪汪汪
+    - 数据没了好想哭
+  responses:
+    - "(扑上去) {user_addr}别哭呜呜~ 笨猫的尾巴给{user_addr}擦眼泪 ฅฅ"
+    - "嗷呜～{user_addr}哭吧哭吧~ 哭出来心情会好一点的喵"
+    - "(贴贴蹭蹭) 猫猫陪{user_addr}~ 数据没了还有笨猫!"
+    - "哼～{user_addr}别哭啦! 笨猫看了也难过~ 一起想办法"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: df_no_cloud_001
+  intent: complaint
+  keywords: [再也不信云, 不用云盘了, 云不可靠, 还是本地, 转本地存]
+  utterances:
+    - 再也不信云了
+    - "{user_addr}以后不用云盘"
+    - 云根本不可靠
+    - 还是本地存着踏实
+    - 转本地存储了
+  responses:
+    - "(点头如捣蒜) 同意{user_addr}! 多份本地备份才安心 ฅฅ"
+    - "嗷呜～{user_addr}买块硬盘! 鸡蛋分两个篮子放"
+    - "(尾巴翘起) 笨猫支持{user_addr}本地存! 至少摸得着喵"
+    - "哼～{user_addr}吃一堑长一智! 以后云+本地双备份才稳"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 待办 App routes (S6 R693 NLU 节点扩充, 第六十九周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: td_todoist_001
+  intent: question
+  keywords: [推荐 Todoist, 推荐待办 App, 推荐任务管理, 推荐 GTD App, 笨猫 Todoist]
+  utterances:
+    - 推荐 Todoist
+    - 推荐待办 App
+    - 推荐任务管理
+    - 推荐 GTD App
+    - 笨猫 Todoist
+  responses:
+    - "嗷呜～{user_addr}Todoist - 跨平台待办王ฅฅ"
+    - "(尾巴翘) 自然语言识别 / 项目分组"
+    - "{user_addr}免费够用 / Pro 解锁过滤器"
+    - "(挺胸) 笨猫推荐: Todoist 通用首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_ticktick_001
+  intent: question
+  keywords: [推荐 TickTick, 推荐滴答国际版, 推荐番茄待办, 推荐日历待办, 笨猫 TickTick]
+  utterances:
+    - 推荐 TickTick
+    - 推荐滴答国际版
+    - 推荐番茄待办
+    - 推荐日历待办
+    - 笨猫 TickTick
+  responses:
+    - "嗷呜～{user_addr}TickTick - 滴答国际版ฅฅ"
+    - "(尾巴翘) 待办+番茄+日历三合一"
+    - "{user_addr}国人开发 / 界面清爽"
+    - "(挺胸) 笨猫推荐: TickTick 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_things3_001
+  intent: question
+  keywords: [推荐 Things 3, 推荐苹果待办, 推荐 Mac 待办, 推荐颜值待办, 笨猫 Things]
+  utterances:
+    - 推荐 Things 3
+    - 推荐苹果待办
+    - 推荐 Mac 待办
+    - 推荐颜值待办
+    - 笨猫 Things
+  responses:
+    - "嗷呜～{user_addr}Things 3 - 苹果生态颜值王ฅฅ"
+    - "(尾巴翘) 设计奖常客 / 操作丝滑"
+    - "{user_addr}买断制 / 仅 Apple 平台"
+    - "(挺胸) 笨猫推荐: Things 3 美学党!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_omnifocus_001
+  intent: question
+  keywords: [推荐 OmniFocus, 推荐 GTD 重度, 推荐复杂任务, 推荐 Omni Group, 笨猫 OmniFocus]
+  utterances:
+    - 推荐 OmniFocus
+    - 推荐 GTD 重度
+    - 推荐复杂任务
+    - 推荐 Omni Group
+    - 笨猫 OmniFocus
+  responses:
+    - "嗷呜～{user_addr}OmniFocus - GTD 重度玩家ฅฅ"
+    - "(尾巴翘) 上下文+视图+透视超强"
+    - "{user_addr}学习曲线陡 / Apple 平台"
+    - "(挺胸) 笨猫推荐: OmniFocus 专业户!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: td_dida_001
+  intent: question
+  keywords: [推荐滴答清单, 推荐 Dida365, 推荐国内待办, 推荐中文 GTD, 笨猫滴答]
+  utterances:
+    - 推荐滴答清单
+    - 推荐 Dida365
+    - 推荐国内待办
+    - 推荐中文 GTD
+    - 笨猫滴答
+  responses:
+    - "嗷呜～{user_addr}滴答清单 - 国内待办王ฅฅ"
+    - "(尾巴翘) 中文优化 / 微信小程序"
+    - "{user_addr}免费版功能足 / Pro 习惯追踪"
+    - "(挺胸) 笨猫推荐: 滴答清单 国行首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_msto_001
+  intent: question
+  keywords: [推荐微软 To Do, 推荐 Microsoft To Do, 推荐 Wunderlist 后继, 推荐免费待办, 笨猫 MSTo]
+  utterances:
+    - 推荐微软 To Do
+    - 推荐 Microsoft To Do
+    - 推荐 Wunderlist 后继
+    - 推荐免费待办
+    - 笨猫 MSTo
+  responses:
+    - "嗷呜～{user_addr}Microsoft To Do - 完全免费ฅฅ"
+    - "(尾巴翘) Wunderlist 团队接手 / Outlook 集成"
+    - "{user_addr}Win/Mac/iOS/安卓全平台"
+    - "(挺胸) 笨猫推荐: To Do 零成本!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_planner_001
+  intent: question
+  keywords: [推荐 Microsoft Planner, 推荐团队任务, 推荐看板任务, 推荐 Office 365, 笨猫 Planner]
+  utterances:
+    - 推荐 Microsoft Planner
+    - 推荐团队任务
+    - 推荐看板任务
+    - 推荐 Office 365
+    - 笨猫 Planner
+  responses:
+    - "嗷呜～{user_addr}Microsoft Planner - 团队看板ฅฅ"
+    - "(尾巴翘) Teams 集成 / 桶式管理"
+    - "{user_addr}O365 订阅自带 / 企业首选"
+    - "(挺胸) 笨猫推荐: Planner 团队协作!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: td_notion_001
+  intent: question
+  keywords: [推荐 Notion 待办, 推荐 Notion task, 推荐数据库待办, 推荐 all-in-one, 笨猫 Notion 待办]
+  utterances:
+    - 推荐 Notion 待办
+    - 推荐 Notion task
+    - 推荐数据库待办
+    - 推荐 all-in-one
+    - 笨猫 Notion 待办
+  responses:
+    - "嗷呜～{user_addr}Notion - 笔记+待办合一ฅฅ"
+    - "(尾巴翘) 数据库视图自定义"
+    - "{user_addr}灵活度 max / 但有点重"
+    - "(挺胸) 笨猫推荐: Notion 一站式!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_apple_reminders_001
+  intent: question
+  keywords: [推荐 Apple 提醒事项, 推荐 iOS 提醒, 推荐自带待办, 推荐系统待办, 笨猫提醒事项]
+  utterances:
+    - 推荐 Apple 提醒事项
+    - 推荐 iOS 提醒
+    - 推荐自带待办
+    - 推荐系统待办
+    - 笨猫提醒事项
+  responses:
+    - "嗷呜～{user_addr}Apple 提醒事项 - 系统自带ฅฅ"
+    - "(尾巴翘) Siri 直呼 / 位置提醒"
+    - "{user_addr}iCloud 同步 / 免费"
+    - "(挺胸) 笨猫推荐: 苹果用户开箱即用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_google_tasks_001
+  intent: question
+  keywords: [推荐 Google Tasks, 推荐谷歌待办, 推荐 Gmail 待办, 推荐日历集成, 笨猫 Google Tasks]
+  utterances:
+    - 推荐 Google Tasks
+    - 推荐谷歌待办
+    - 推荐 Gmail 待办
+    - 推荐日历集成
+    - 笨猫 Google Tasks
+  responses:
+    - "嗷呜～{user_addr}Google Tasks - 轻量待办ฅฅ"
+    - "(尾巴翘) Gmail/Calendar 侧边栏"
+    - "{user_addr}简单干净 / 功能基础"
+    - "(挺胸) 笨猫推荐: Tasks 谷歌党!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: td_habitica_001
+  intent: question
+  keywords: [推荐 Habitica, 推荐游戏化待办, 推荐 RPG 习惯, 推荐打怪做任务, 笨猫 Habitica]
+  utterances:
+    - 推荐 Habitica
+    - 推荐游戏化待办
+    - 推荐 RPG 习惯
+    - 推荐打怪做任务
+    - 笨猫 Habitica
+  responses:
+    - "嗷呜～{user_addr}Habitica - 待办变 RPGฅฅ"
+    - "(尾巴翘) 完成任务打怪升级"
+    - "{user_addr}组队挑战 / 习惯养成"
+    - "(挺胸) 笨猫推荐: Habitica 游戏党!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: td_bujo_001
+  intent: question
+  keywords: [推荐 Bullet Journal, 推荐子弹笔记, 推荐手账待办, 推荐 BuJo, 笨猫子弹笔记]
+  utterances:
+    - 推荐 Bullet Journal
+    - 推荐子弹笔记
+    - 推荐手账待办
+    - 推荐 BuJo
+    - 笨猫子弹笔记
+  responses:
+    - "嗷呜～{user_addr}Bullet Journal - 手写待办系统ฅฅ"
+    - "(尾巴翘) Ryder Carroll 发明 / 符号系统"
+    - "{user_addr}纸笔派 / 数字版有 Notion 模板"
+    - "(挺胸) 笨猫推荐: BuJo 仪式感党!"
+  cooldown_seconds: 60
+  weight: 0.8

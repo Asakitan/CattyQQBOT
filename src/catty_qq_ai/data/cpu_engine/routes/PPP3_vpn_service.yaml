@@ -1,0 +1,206 @@
+# VPN 服务 routes (S6 R695 NLU 节点扩充, 第六十九周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: vp_nordvpn_001
+  intent: question
+  keywords: [推荐 NordVPN, 推荐 Nord, 推荐 NordVPN 套餐, 推荐 NordVPN 服务, 笨猫 NordVPN]
+  utterances:
+    - 推荐 NordVPN
+    - 推荐 Nord
+    - 推荐 NordVPN 套餐
+    - 推荐 NordVPN 服务
+    - 笨猫 NordVPN
+  responses:
+    - "嗷呜～{user_addr}NordVPN - 老牌大厂ฅฅ"
+    - "(尾巴翘) 5400+ 服务器 / 双重加密"
+    - "{user_addr}NordLynx 协议 / 速度快"
+    - "(挺胸) 猫猫推荐: 2 年套餐性价比高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_expressvpn_001
+  intent: question
+  keywords: [推荐 ExpressVPN, 推荐 Express, 推荐 ExpressVPN 套餐, 推荐 ExpressVPN 服务, 笨猫 ExpressVPN]
+  utterances:
+    - 推荐 ExpressVPN
+    - 推荐 Express
+    - 推荐 ExpressVPN 套餐
+    - 推荐 ExpressVPN 服务
+    - 笨猫 ExpressVPN
+  responses:
+    - "嗷呜～{user_addr}ExpressVPN - 速度王ฅฅ"
+    - "(尾巴翘) Lightway 协议 / 94 国节点"
+    - "{user_addr}流媒体解锁强 / Netflix 友好"
+    - "(挺胸) 人家推荐: 看剧首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_surfshark_001
+  intent: question
+  keywords: [推荐 Surfshark, 推荐 Surfshark VPN, 推荐 Surfshark 套餐, 推荐 Surfshark 多设备, 笨猫 Surfshark]
+  utterances:
+    - 推荐 Surfshark
+    - 推荐 Surfshark VPN
+    - 推荐 Surfshark 套餐
+    - 推荐 Surfshark 多设备
+    - 笨猫 Surfshark
+  responses:
+    - "嗷呜～{user_addr}Surfshark - 无限设备ฅฅ"
+    - "(尾巴翘) 一个账号全家用 / 便宜"
+    - "{user_addr}CleanWeb 拦广告 / 多跳"
+    - "(挺胸) 笨猫推荐: 学生党友好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_protonvpn_001
+  intent: question
+  keywords: [推荐 ProtonVPN, 推荐 ProtonVPN 免费, 推荐 Proton 免费 VPN, 推荐 Proton VPN, 笨猫 ProtonVPN]
+  utterances:
+    - 推荐 ProtonVPN
+    - 推荐 ProtonVPN 免费
+    - 推荐 Proton 免费 VPN
+    - 推荐 Proton VPN
+    - 笨猫 ProtonVPN
+  responses:
+    - "嗷呜～{user_addr}ProtonVPN - 免费档良心ฅฅ"
+    - "(尾巴翘) 瑞士隐私法 / 无限流量"
+    - "{user_addr}免费 3 节点 / 付费解锁全部"
+    - "(挺胸) 猫猫推荐: 隐私党首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_mullvad_001
+  intent: question
+  keywords: [推荐 Mullvad, 推荐 Mullvad VPN, 推荐 Mullvad 匿名, 推荐 Mullvad 月付, 笨猫 Mullvad]
+  utterances:
+    - 推荐 Mullvad
+    - 推荐 Mullvad VPN
+    - 推荐 Mullvad 匿名
+    - 推荐 Mullvad 月付
+    - 笨猫 Mullvad
+  responses:
+    - "嗷呜～{user_addr}Mullvad - 匿名度爆表ฅฅ"
+    - "(尾巴翘) 不要邮箱 / 现金都收"
+    - "{user_addr}€5/月 固定价 / 不打折"
+    - "(挺胸) 人家推荐: 极致隐私党!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_selfhost_001
+  intent: question
+  keywords: [推荐自建 VPN, 推荐 自建 VPN, 推荐自搭 VPN, 推荐 VPS VPN, 笨猫自建 VPN]
+  utterances:
+    - 推荐自建 VPN
+    - 推荐 自建 VPN
+    - 推荐自搭 VPN
+    - 推荐 VPS VPN
+    - 笨猫自建 VPN
+  responses:
+    - "嗷呜～{user_addr}自建 VPN - 独享带宽ฅฅ"
+    - "(尾巴翘) VPS + WireGuard / 月 $5"
+    - "{user_addr}DigitalOcean / Vultr / Linode"
+    - "(挺胸) 笨猫推荐: 折腾党乐趣!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_wireguard_001
+  intent: question
+  keywords: [推荐 WireGuard, 推荐 WireGuard 协议, 推荐 WG, 推荐 WireGuard 配置, 笨猫 WireGuard]
+  utterances:
+    - 推荐 WireGuard
+    - 推荐 WireGuard 协议
+    - 推荐 WG
+    - 推荐 WireGuard 配置
+    - 笨猫 WireGuard
+  responses:
+    - "嗷呜～{user_addr}WireGuard - 协议新王ฅฅ"
+    - "(尾巴翘) 代码量小 / 速度飞快"
+    - "{user_addr}UDP 协议 / 内核态实现"
+    - "(挺胸) 猫猫推荐: 自建首选协议!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_openvpn_001
+  intent: question
+  keywords: [推荐 OpenVPN, 推荐 OpenVPN 协议, 推荐 OpenVPN 配置, 推荐 OVPN, 笨猫 OpenVPN]
+  utterances:
+    - 推荐 OpenVPN
+    - 推荐 OpenVPN 协议
+    - 推荐 OpenVPN 配置
+    - 推荐 OVPN
+    - 笨猫 OpenVPN
+  responses:
+    - "嗷呜～{user_addr}OpenVPN - 兼容老大哥ฅฅ"
+    - "(尾巴翘) TCP/UDP 都行 / 穿透强"
+    - "{user_addr}稳定多年 / 路由器友好"
+    - "(挺胸) 人家推荐: 复杂网络必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_warp_001
+  intent: question
+  keywords: [推荐 Cloudflare Warp, 推荐 Warp, 推荐 1.1.1.1, 推荐 Warp+, 笨猫 Warp]
+  utterances:
+    - 推荐 Cloudflare Warp
+    - 推荐 Warp
+    - 推荐 1.1.1.1
+    - 推荐 Warp+
+    - 笨猫 Warp
+  responses:
+    - "嗷呜～{user_addr}Cloudflare Warp - 免费良心ฅฅ"
+    - "(尾巴翘) 1.1.1.1 加速 DNS"
+    - "{user_addr}Warp+ 付费提速 / 全球节点"
+    - "(挺胸) 笨猫推荐: 应急党首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_tailscale_001
+  intent: question
+  keywords: [推荐 Tailscale, 推荐 Tailscale 内网, 推荐 Tailscale 组网, 推荐 Headscale, 笨猫 Tailscale]
+  utterances:
+    - 推荐 Tailscale
+    - 推荐 Tailscale 内网
+    - 推荐 Tailscale 组网
+    - 推荐 Headscale
+    - 笨猫 Tailscale
+  responses:
+    - "嗷呜～{user_addr}Tailscale - 零配置组网ฅฅ"
+    - "(尾巴翘) WireGuard 内核 / P2P 打洞"
+    - "{user_addr}免费 100 设备 / 远程访问"
+    - "(挺胸) 猫猫推荐: 异地组网神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_multidevice_001
+  intent: question
+  keywords: [推荐 VPN 多设备, 推荐多设备 VPN, 推荐全家 VPN, 推荐家庭 VPN, 笨猫多设备 VPN]
+  utterances:
+    - 推荐 VPN 多设备
+    - 推荐多设备 VPN
+    - 推荐全家 VPN
+    - 推荐家庭 VPN
+    - 笨猫多设备 VPN
+  responses:
+    - "嗷呜～{user_addr}Surfshark - 无限设备ฅฅ"
+    - "(尾巴翘) NordVPN 6 台 / IPVanish 无限"
+    - "{user_addr}路由器装 VPN / 全家覆盖"
+    - "(挺胸) 人家推荐: Surfshark 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vp_nolog_001
+  intent: question
+  keywords: [推荐隐私 VPN, 推荐 No-Log VPN, 推荐无日志 VPN, 推荐匿名 VPN, 笨猫隐私 VPN]
+  utterances:
+    - 推荐隐私 VPN
+    - 推荐 No-Log VPN
+    - 推荐无日志 VPN
+    - 推荐匿名 VPN
+    - 笨猫隐私 VPN
+  responses:
+    - "嗷呜～{user_addr}Mullvad - 无日志认证ฅฅ"
+    - "(尾巴翘) ProtonVPN / IVPN 审计过"
+    - "{user_addr}选海外司法管辖区 / 瑞士巴拿马"
+    - "(挺胸) 笨猫推荐: Mullvad 最硬核!"
+  cooldown_seconds: 60
+  weight: 1.0
