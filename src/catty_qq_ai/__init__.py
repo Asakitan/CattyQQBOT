@@ -7704,6 +7704,73 @@ except Exception as _cpu_engine_import_exc:  # noqa: BLE001
     _CPU_ENGINE_IMPORT_OK = False
 
 
+def _build_distill_sanitize_terms(event: MessageEvent, is_owner: bool) -> list[str]:
+    """S6 (主人 2026-05-29): 构造蒸馏脱敏词表.
+
+    含: 用户 QQ 号 / nickname / card / 群名 + bot 给该用户用过的称呼 (主人 if is_owner).
+    **绝不含 bot 自称** (米雪儿 / 笨猫 / 猫猫 / 雪儿) — 这些是 character voice 保留.
+    """
+    terms: list[str] = []
+    uid = str(getattr(event, "user_id", "") or "")
+    if uid:
+        terms.append(uid)
+    sender = getattr(event, "sender", None)
+    if sender is not None:
+        for attr in ("nickname", "card", "title"):
+            val = str(getattr(sender, attr, "") or "").strip()
+            if val:
+                terms.append(val)
+    if isinstance(event, GroupMessageEvent):
+        gid = str(getattr(event, "group_id", "") or "")
+        if gid:
+            terms.append(gid)
+    if is_owner:
+        # bot 对主人的常用称呼 (用户特定, 不是 bot 自称)
+        terms.extend(["主人", "笨蛋主人", "杂鱼主人"])
+    return [t for t in terms if t]
+
+
+def _trigger_l3_distill(event: MessageEvent, user_text: str, assistant_text: str) -> None:
+    """S6: handle_chat finish 前调用, fire-and-forget 异步蒸馏到 L3 corpus.
+
+    用 asyncio.create_task 不阻塞 matcher.finish; 失败永不抛 (内部 try/catch).
+    """
+    if not _CPU_ENGINE_IMPORT_OK or _cpu_engine_get_router is None:
+        return
+    if not bool(getattr(config, "catty_cpu_engine_l3_distill_enabled", False)):
+        return
+    try:
+        router = _cpu_engine_get_router(config)
+    except Exception:  # noqa: BLE001
+        return
+    if not router.enabled or not router.ready:
+        return
+    try:
+        from .cpu_engine.corpus_distill import get_distiller
+        distiller = get_distiller(config, router_reload_async=router.reload_l3_corpus)
+        scope = _conversation_queue_key(event)
+        is_owner = _event_is_owner(event)
+        intent = ""
+        try:
+            from .intent_classifier import classify_intent
+            intent = classify_intent(user_text, has_image=False) or "default"
+        except Exception:  # noqa: BLE001
+            intent = "default"
+        terms = _build_distill_sanitize_terms(event, is_owner)
+        asyncio.create_task(
+            distiller.maybe_distill(
+                scope=scope,
+                user_text=user_text,
+                assistant_text=assistant_text,
+                intent=intent,
+                source="deepseek",
+                sanitize_terms=terms,
+            )
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.debug(f"[cpu_engine.distill] trigger failed: {exc}")
+
+
 async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> bool:
     if not _CPU_ENGINE_IMPORT_OK or _cpu_engine_get_router is None:
         return False
@@ -11197,6 +11264,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
         _mark_consumed_reply_source_if_sent(event, state)
         final_message = chunks[-1] if chunks else "喵喵！猫猫现在很忙哦，等一下再来找人家～"
         _remember_bot_reply_for_event(event, _chunk_to_history(final_message) if chunks else final_message, open_continuation=not bool(state.get("catty_session_closing")))
+        # S6 (主人 2026-05-29): 异步蒸馏 user → final_message 到 L3 corpus, 不阻塞 finish
+        try:
+            _trigger_l3_distill(event, incoming.text or "", _chunk_to_history(final_message) if chunks else final_message)
+        except Exception:  # noqa: BLE001
+            pass
         await matcher.finish(
             _compose_reply_message(
                 event,
@@ -11251,11 +11323,12 @@ async def _mount_dev_sim_chat_endpoint() -> None:
         live = bool(body.get("live", True))
         history_replace = bool(body.get("history_replace", False))
         include_messages = bool(body.get("include_messages", True))
+        persist = bool(body.get("persist", False))
         try:
             from .catty_sim_chat import sim_chat
             result = await sim_chat(
                 text=text, user_id=user_id, group_id=group_id,
-                live=live, history_replace=history_replace,
+                live=live, history_replace=history_replace, persist=persist,
             )
         except Exception as exc:  # noqa: BLE001
             import traceback

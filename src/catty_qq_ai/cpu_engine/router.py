@@ -38,12 +38,27 @@ from .semantic_route import (
 class CPURouteResult:
     reply: str
     confidence: float
-    layer: str  # "L1" / "L2" / "L3" / "L4"
+    layer: str  # "L1" / "L2" / "L3" / "L4" / "L4_catnify" / "L0_beg"
     route_name: str
     intent: str = ""
     matched_text: str = ""
     is_low_confidence: bool = False
     latency_ms: float = 0.0
+
+
+@dataclass(slots=True)
+class CatnifyOutput:
+    """S5 catnify() 返回值. 调用方按字段决定后续动作:
+
+    - ``styled`` 非 None → 用 styled 发回复
+    - ``deepseek_reason`` 非空 → 走 L5 + 扣积分 (透传)
+    - ``overload`` True → 队列满, 调用方按 fallback_on_fail 处理
+    - 三者全空 → LLM 调用失败/超时, 调用方按 fallback_on_fail 处理
+    """
+
+    styled: "CPURouteResult | None"
+    deepseek_reason: str
+    overload: bool
 
 
 class CPUEngineRouter:
@@ -103,9 +118,18 @@ class CPUEngineRouter:
         try:
             corpus_path = getattr(self._config, "catty_cpu_engine_corpus_path", "")
             index_path = getattr(self._config, "catty_cpu_engine_txtai_index_path", "")
+            # S6 (主人 2026-05-29): live 蒸馏 corpus (DeepSeek 自动写入)
+            live_corpus_path = getattr(
+                self._config, "catty_cpu_engine_l3_distill_live_corpus_path", ""
+            ) or None
             model_name = getattr(self._config, "catty_text2vec_model_name", "BAAI/bge-small-zh-v1.5")
             if corpus_path and index_path:
-                self._txtai_corpus = TxtaiCorpus(corpus_path, index_path, model_name=model_name)
+                self._txtai_corpus = TxtaiCorpus(
+                    corpus_path,
+                    index_path,
+                    model_name=model_name,
+                    live_corpus_path=live_corpus_path,
+                )
                 self._txtai_corpus.prepare()
                 if not self._txtai_corpus.ready:
                     self._txtai_corpus = None
@@ -316,6 +340,16 @@ class CPUEngineRouter:
             return None
         return max(candidates, key=lambda r: r.confidence)
 
+    def reload_l3_corpus(self) -> bool:
+        """S6 (主人 2026-05-29) 给 corpus_distill 用: 累积 N 条后异步触发 L3 重 build.
+
+        同步返回 (txtai.index 是 CPU bound, distill 在 asyncio.create_task 里调,
+        不阻塞主链路). 失败保留旧 _ready 状态.
+        """
+        if self._txtai_corpus is None:
+            return False
+        return self._txtai_corpus.reload()
+
     async def stylize_l4(
         self,
         candidate: CPURouteResult,
@@ -363,6 +397,84 @@ class CPUEngineRouter:
             is_low_confidence=False,
             latency_ms=candidate.latency_ms + (time.monotonic() - t0) * 1000.0,
         )
+
+    async def catnify(
+        self,
+        candidate: CPURouteResult,
+        user_text: str,
+        scope: str,
+        *,
+        user_addr: str = "你",
+        group_name: str = "",
+        history: list[tuple[str, str]] | None = None,
+        ctx_builder: Callable[[str], ScriptContext] | None = None,
+    ) -> "CatnifyOutput":
+        """S5 L4: 全量改写 candidate 成笨猫体质 + 自决 DeepSeek 透传.
+
+        返回 CatnifyOutput:
+        - deepseek_reason 非空 → 调用方走 L5 + 扣积分
+        - styled 非 None → 调用方用 styled 直接发
+        - 两者都为 None → fallback (主人 ``fallback_on_fail`` 配置决定: raw / transparent)
+
+        和 stylize_l4 的差异:
+        - 这里**不**按 scope 区分 enabled (主人决策: 全量上)
+        - 队列满/超时返回 overload=True, 调用方按 fallback 走
+        """
+        if not self._enabled or candidate is None:
+            return CatnifyOutput(styled=None, deepseek_reason="", overload=False)
+
+        try:
+            from .catnify_rewrite import catnify_rewrite
+            from .catnify_queue import get_queue, CatnifyOverload
+        except ImportError as exc:
+            logger.warning(f"[cpu_engine.L4_catnify] import failed: {exc}")
+            return CatnifyOutput(styled=None, deepseek_reason="", overload=False)
+
+        queue = get_queue(self._config)
+        if not queue.can_accept():
+            logger.info(f"[cpu_engine.L4_catnify] queue overload, stats={queue.stats}")
+            return CatnifyOutput(styled=None, deepseek_reason="", overload=True)
+
+        scope_type = scope.split(":", 1)[0] if ":" in scope else "private"
+        t0 = time.monotonic()
+        try:
+            async with queue.slot():
+                result = await catnify_rewrite(
+                    config=self._config,
+                    candidate=candidate.reply,
+                    user_text=user_text,
+                    user_addr=user_addr,
+                    scope_type=scope_type,
+                    group_name=group_name,
+                    history=history,
+                )
+        except CatnifyOverload:
+            return CatnifyOutput(styled=None, deepseek_reason="", overload=True)
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"[cpu_engine.L4_catnify] raised: {exc}")
+            return CatnifyOutput(styled=None, deepseek_reason="", overload=False)
+
+        elapsed = (time.monotonic() - t0) * 1000.0
+        if result is None:
+            return CatnifyOutput(styled=None, deepseek_reason="", overload=False)
+        if result.deepseek_reason:
+            return CatnifyOutput(
+                styled=None,
+                deepseek_reason=result.deepseek_reason,
+                overload=False,
+            )
+        rendered = self._render(result.text, candidate.intent, ctx_builder)
+        styled_result = CPURouteResult(
+            reply=rendered,
+            confidence=max(candidate.confidence, 0.85),
+            layer="L4_catnify",
+            route_name=candidate.route_name,
+            intent=candidate.intent,
+            matched_text=candidate.matched_text,
+            is_low_confidence=False,
+            latency_ms=candidate.latency_ms + elapsed,
+        )
+        return CatnifyOutput(styled=styled_result, deepseek_reason="", overload=False)
 
     def _render(
         self,

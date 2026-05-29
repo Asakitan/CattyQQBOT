@@ -30,6 +30,22 @@ _EMOTION_LEXICON: dict[str, float] = {
     "好棒": 0.5, "牛逼": 0.5, "厉害": 0.4, "绝了": 0.5, "yyds": 0.5,
 }
 
+# S5 (2026-05-29 主人方案): 学术问题双轨检测词典.
+# 命中只记 metric, **不强制** 走 DeepSeek (让本地 LLM 自决输出 <DEEPSEEK>).
+# 主人决策: LLM 自决占主导, 这词典只是事后对照用.
+_ACADEMIC_KEYWORDS: tuple[str, ...] = (
+    "论文", "原理", "为什么", "推导", "证明", "算法", "定理", "公式",
+    "怎么解释", "什么是", "如何理解", "区别", "对比", "分析",
+    "代码", "实现", "调试", "报错", "怎么写",
+)
+
+
+def detect_academic_signal(text: str) -> bool:
+    """轻量学术信号检测. 仅 metric 用, 不影响主决策."""
+    if not text:
+        return False
+    return any(kw in text for kw in _ACADEMIC_KEYWORDS)
+
 
 @dataclass(slots=True)
 class StrongInteractionResult:

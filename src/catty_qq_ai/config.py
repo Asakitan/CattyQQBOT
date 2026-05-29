@@ -401,6 +401,44 @@ class Config(BaseModel):
     catty_cpu_engine_l4_enabled_private: bool = True
     catty_cpu_engine_l4_enabled_group: bool = False
     catty_cpu_engine_l4_timeout_ms: int = 800
+    # ── S5 (2026-05-29 主人方案): 本地 CPU LLM 全量笨猫体质改写 ───────────
+    # mode:
+    #   off       — L4 不动 (S1-S4 行为, 强互动直走 L5)
+    #   stylize   — S3 旧 stylize_l4 (qwen2.5:7b 800ms, 只在低信心区改)
+    #   catnify   — S5 新全量改写 (qwen3:4b 3000ms, 任何 L1/L2/L3 命中都改),
+    #               LLM 可在输出加 <DEEPSEEK reason="..."> 标记自决透传
+    # 主人决策: 服务器关 MC 后 16.3GB free, 直接全量 catnify 上线.
+    catty_cpu_engine_l4_mode: str = "catnify"
+    catty_cpu_engine_l4_catnify_model: str = "qwen3:4b"
+    catty_cpu_engine_l4_catnify_timeout_ms: int = 3000
+    catty_cpu_engine_l4_catnify_max_input_tokens: int = 4000
+    catty_cpu_engine_l4_catnify_temperature: float = 0.7
+    catty_cpu_engine_l4_catnify_max_tokens: int = 200
+    catty_cpu_engine_l4_catnify_history_turns: int = 4
+    catty_cpu_engine_l4_catnify_concurrency: int = 2
+    catty_cpu_engine_l4_catnify_queue_max: int = 8
+    # 队列满/超时/LLM 失败时的兜底:
+    #   raw       — 发原 CPU 候选 (主人决策默认, 信任 L1/L2/L3)
+    #   transparent — return False 透传 L5 (旧行为)
+    catty_cpu_engine_l4_catnify_fallback_on_fail: str = "raw"
+    # DEEPSEEK 透传限流: 每用户每小时最多透传 N 次, 防 LLM 标滥
+    catty_cpu_engine_l4_catnify_deepseek_per_hour: int = 12
+    # 搜索短路: 命中 web search 关键词时跳过整个 CPU 引擎让旧搜索链处理
+    catty_cpu_engine_l4_catnify_search_shortcut: bool = True
+    # ── S6 (主人 2026-05-29): L3 corpus 自动蒸馏 (DeepSeek 回复 → qa_corpus_live.jsonl) ──
+    # 主链路 emit 完 DeepSeek 回复后异步追加, 累积 N 条触发 L3 index reload.
+    # 私聊默认不采 (隐私), 仅采群聊.
+    catty_cpu_engine_l3_distill_enabled: bool = True
+    catty_cpu_engine_l3_distill_skip_private: bool = True
+    catty_cpu_engine_l3_distill_live_corpus_path: str = (
+        "src/catty_qq_ai/data/cpu_engine/corpus/qa_corpus_live.jsonl"
+    )
+    catty_cpu_engine_l3_distill_rebuild_threshold: int = 50
+    catty_cpu_engine_l3_distill_dedup_window: int = 1000
+    catty_cpu_engine_l3_distill_min_user_len: int = 4
+    catty_cpu_engine_l3_distill_max_user_len: int = 200
+    catty_cpu_engine_l3_distill_min_assistant_len: int = 8
+    catty_cpu_engine_l3_distill_max_assistant_len: int = 500
     # 米雪儿语气后缀池 (Script 变量 {cat_suffix} 随机取)
     catty_cpu_engine_cat_suffixes: list[str] = Field(
         default_factory=lambda: ["喵～", "喵呜", "ฅฅ", "嗷呜～", "爪爪", "贴贴"]

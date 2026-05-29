@@ -273,6 +273,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "owner_qq": 0,
         "forward_private_messages": True,
         "block_ai_reply": True,
+        "paid_auto_accept_enabled": False,
     },
     "turtle_soup": {
         "cooldown_seconds": 300,
@@ -626,6 +627,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_NLU_CACHE_DIR", _nlu("nlu_cache_dir"))
     _set_env("CATTY_NLU_WARMUP_ON_STARTUP", _nlu("nlu_warmup_on_startup"))
     _set_env("CATTY_NLU_HF_ENDPOINT", _nlu("nlu_hf_endpoint"))
+    # S5.6 (主人 2026-05-29): 同时设 HF_ENDPOINT, 让 txtai / huggingface_hub
+    # (cpu_engine.L3 + transformers 走的下载路径) 走镜像, 修 L3 启动 hf.co 超时.
+    # 复用 nlu_hf_endpoint 字段, 不引入新配置项.
+    _set_env("HF_ENDPOINT", _nlu("nlu_hf_endpoint"))
 
     local_critic = _section(data, "local_critic")
     local_critic_extra_body = local_critic.get("extra_body")
@@ -704,6 +709,10 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_OWNER_QQ", owner_forward.get("owner_qq"))
     _set_env("CATTY_OWNER_FORWARD_PRIVATE_MESSAGES", owner_forward.get("forward_private_messages"))
     _set_env("CATTY_OWNER_FORWARD_BLOCK_AI_REPLY", owner_forward.get("block_ai_reply"))
+    _set_env(
+        "CATTY_OWNER_FORWARD_PAID_AUTO_ACCEPT_ENABLED",
+        owner_forward.get("paid_auto_accept_enabled"),
+    )
 
     turtle_soup = _section(data, "turtle_soup")
     _set_env("CATTY_TURTLE_SOUP_COOLDOWN_SECONDS", turtle_soup.get("cooldown_seconds"))
@@ -765,6 +774,29 @@ def _apply_config(data: dict[str, Any], base_dir: Path) -> None:
     _set_env("CATTY_CPU_ENGINE_L4_ENABLED_GROUP", cpu_engine.get("l4_enabled_group"))
     _set_env("CATTY_CPU_ENGINE_L4_OLLAMA_MODEL", cpu_engine.get("l4_ollama_model"))
     _set_env("CATTY_CPU_ENGINE_L4_TIMEOUT_MS", cpu_engine.get("l4_timeout_ms"))
+    # S5 (主人 2026-05-29) 本地 CPU LLM 全量笨猫体质改写 + 自决 DeepSeek 透传
+    _set_env("CATTY_CPU_ENGINE_L4_MODE", cpu_engine.get("l4_mode"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_MODEL", cpu_engine.get("l4_catnify_model"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_TIMEOUT_MS", cpu_engine.get("l4_catnify_timeout_ms"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_MAX_INPUT_TOKENS", cpu_engine.get("l4_catnify_max_input_tokens"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_TEMPERATURE", cpu_engine.get("l4_catnify_temperature"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_MAX_TOKENS", cpu_engine.get("l4_catnify_max_tokens"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_HISTORY_TURNS", cpu_engine.get("l4_catnify_history_turns"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_CONCURRENCY", cpu_engine.get("l4_catnify_concurrency"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_QUEUE_MAX", cpu_engine.get("l4_catnify_queue_max"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_FALLBACK_ON_FAIL", cpu_engine.get("l4_catnify_fallback_on_fail"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_DEEPSEEK_PER_HOUR", cpu_engine.get("l4_catnify_deepseek_per_hour"))
+    _set_env("CATTY_CPU_ENGINE_L4_CATNIFY_SEARCH_SHORTCUT", cpu_engine.get("l4_catnify_search_shortcut"))
+    # S6 (主人 2026-05-29): L3 corpus 自动蒸馏 (DeepSeek 回复 → qa_corpus_live.jsonl)
+    _set_env("CATTY_CPU_ENGINE_L3_DISTILL_ENABLED", cpu_engine.get("l3_distill_enabled"))
+    _set_env("CATTY_CPU_ENGINE_L3_DISTILL_SKIP_PRIVATE", cpu_engine.get("l3_distill_skip_private"))
+    _set_env("CATTY_CPU_ENGINE_L3_DISTILL_LIVE_CORPUS_PATH", cpu_engine.get("l3_distill_live_corpus_path"))
+    _set_env("CATTY_CPU_ENGINE_L3_DISTILL_REBUILD_THRESHOLD", cpu_engine.get("l3_distill_rebuild_threshold"))
+    _set_env("CATTY_CPU_ENGINE_L3_DISTILL_DEDUP_WINDOW", cpu_engine.get("l3_distill_dedup_window"))
+    _set_env("CATTY_CPU_ENGINE_L3_DISTILL_MIN_USER_LEN", cpu_engine.get("l3_distill_min_user_len"))
+    _set_env("CATTY_CPU_ENGINE_L3_DISTILL_MAX_USER_LEN", cpu_engine.get("l3_distill_max_user_len"))
+    _set_env("CATTY_CPU_ENGINE_L3_DISTILL_MIN_ASSISTANT_LEN", cpu_engine.get("l3_distill_min_assistant_len"))
+    _set_env("CATTY_CPU_ENGINE_L3_DISTILL_MAX_ASSISTANT_LEN", cpu_engine.get("l3_distill_max_assistant_len"))
     _set_env("CATTY_CPU_ENGINE_CAT_SUFFIXES", cpu_engine.get("cat_suffixes"), json_value=True)
     _set_env("CATTY_CPU_ENGINE_FORCE_AI_PREFIXES", cpu_engine.get("force_ai_prefixes"), json_value=True)
     _set_env("CATTY_CPU_ENGINE_NATIVE_ENABLED", cpu_engine.get("native_enabled"))
