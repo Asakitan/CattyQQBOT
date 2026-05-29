@@ -111,8 +111,9 @@ class CPUEngineRouter:
             logger.warning(f"[cpu_engine] routes_dir not found: {routes_dir}, engine NOT ready")
             return
 
+        overrides_path = routes_dir.parent / "disambiguate_overrides.yaml"
         try:
-            keyword_routes = load_kw_routes(routes_dir)
+            keyword_routes = load_kw_routes(routes_dir, disambiguate_overrides_path=overrides_path)
             self._keyword_matcher = KeywordMatcher(keyword_routes)
         except Exception as exc:
             logger.exception(f"[cpu_engine] L1 keyword matcher init failed: {exc}")
@@ -212,9 +213,10 @@ class CPUEngineRouter:
             f"old_files={old_sig.count('|')+1 if old_sig else 0} "
             f"new_files={new_sig.count('|')+1}"
         )
-        # 重建 L1
+        # 重建 L1 (含 disambiguate_overrides 热重载)
+        overrides_path = routes_dir.parent / "disambiguate_overrides.yaml"
         try:
-            keyword_routes = load_kw_routes(routes_dir)
+            keyword_routes = load_kw_routes(routes_dir, disambiguate_overrides_path=overrides_path)
             new_matcher = KeywordMatcher(keyword_routes)
             self._keyword_matcher = new_matcher
         except Exception as exc:
