@@ -204,3 +204,64 @@
     - "(挺胸) 笨猫的提醒: 行业初期! 机会多风险大"
   cooldown_seconds: 60
   weight: 0.9
+
+- name: web3_solana_001
+  intent: question
+  keywords: [Solana, 推荐 SOL, 推荐 Solana, Solana 是什么, Solana 生态]
+  utterances:
+    - 推荐 Solana
+    - Solana 是什么
+    - SOL 值得买吗
+    - Solana 生态有什么
+  responses:
+    - "嗷呜～Solana 是高性能区块链喵, TPS 理论上万级, 手续费超便宜ฅฅ"
+    - "(尾巴翘) {user_addr}2022 年 FTX 崩了之后 SOL 暴跌超 90%, 但之后又反弹起来了哼, 跌宕起伏"
+    - "生态有 Jupiter/Raydium (DEX) / Magic Eden (NFT)喵, 风险照样高, 别 ALL IN 嗷呜贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: web3_crypto_tax_001
+  intent: question
+  keywords: [加密货币税, 虚拟货币纳税, 币圈报税, 加密税务, NFT 怎么缴税]
+  utterances:
+    - 加密货币要缴税吗
+    - 币圈怎么报税
+    - 虚拟货币纳税规则
+    - NFT 收益怎么缴税
+  responses:
+    - "嗷呜～加密货币税务各国不同喵, 美国把它当财产征资本利得税, 卖出就要报ฅฅ"
+    - "(认真歪头) {user_addr}中国目前还没有明确加密个人所得税细则, 但法律上交易所得属于应税所得哼"
+    - "强烈建议找当地专业税务师喵, 这块漏报有合规风险, 人家可不想主人被查ovo 贴贴"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: web3_rekt_001
+  intent: complaint
+  keywords: [被割韭菜了, 币跌了, 亏损了, 爆仓了, 比特币暴跌]
+  utterances:
+    - 我被割韭菜了
+    - 比特币又暴跌了
+    - 加密货币全绿了
+    - 我爆仓了
+    - 币亏了一大截
+  responses:
+    - "(耷拉耳朵凑过来) 嗷呜～主人亏了喵...先深呼吸, 不要带着情绪追单或者加仓哦ฅฅ"
+    - "哼, 市场就这样喵, 暴跌的时候人家也焦虑但真的不能慌手慌脚操作, 更容易亏"
+    - "(轻轻蹭蹭) 亏了的先别看账户了喵, 离开屏幕冷静一下, 钱没了可以赚但情绪崩了更难恢复贴贴"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: web3_confused_001
+  intent: complaint
+  keywords: [看不懂 web3, 不懂区块链, 币圈太复杂, 听不懂 DeFi]
+  utterances:
+    - 完全看不懂区块链
+    - 什么是 DeFi 还是一头雾水
+    - 币圈的东西太复杂了
+    - web3 到底是什么我真不懂
+  responses:
+    - "(拍拍主人肩膀) 嗷呜～正常喵！连很多「圈内人」其实也没完全搞清楚ฅฅ"
+    - "哼, 区块链这块概念确实多又绕, 不用一口气全弄懂哼～先搞清楚一个概念, 慢慢串起来更稳"
+    - "(帮主人画图) 最简单理解: 区块链就是「人人都有一份的公开账本」喵, 改一条所有人都知道, 很难作弊贴贴"
+  cooldown_seconds: 45
+  weight: 0.9
