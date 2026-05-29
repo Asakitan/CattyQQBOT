@@ -1,0 +1,206 @@
+# K-pop 偶像 routes (S6 R642 NLU 节点扩充, 第六十四周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ki_bts_001
+  intent: question
+  keywords: [推荐 BTS, 推荐防弹, 推荐防弹少年团, 推荐 BTS 歌曲, 笨猫 BTS]
+  utterances:
+    - "{user_addr}推荐 BTS"
+    - 推荐防弹
+    - 推荐防弹少年团
+    - 推荐 BTS 歌曲
+    - 笨猫 BTS
+  responses:
+    - "嗷呜～{user_addr}BTS 防弹少年团 - K-pop 天花板ฅฅ"
+    - "(尾巴翘) Dynamite / Butter / Spring Day"
+    - "{user_addr}7 人团 RM/Jin/Suga/J-Hope/Jimin/V/Jungkook"
+    - "(挺胸) 猫猫推荐: Spring Day 入坑神曲!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_blackpink_001
+  intent: question
+  keywords: [推荐 BLACKPINK, 推荐粉墨, 推荐 BP, 推荐 BLACKPINK 歌曲, 笨猫 BLACKPINK]
+  utterances:
+    - "{user_addr}推荐 BLACKPINK"
+    - 推荐粉墨
+    - 推荐 BP
+    - 推荐 BLACKPINK 歌曲
+    - 笨猫 BLACKPINK
+  responses:
+    - "嗷呜～{user_addr}BLACKPINK - 女团巅峰ฅฅ"
+    - "(尾巴翘) DDU-DU DDU-DU / Kill This Love / Pink Venom"
+    - "{user_addr}4 人团 Jisoo/Jennie/Rosé/Lisa"
+    - "(挺胸) 人家推荐: How You Like That 炸场!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_newjeans_001
+  intent: question
+  keywords: [推荐 NewJeans, 推荐新泽西, 推荐 NJZ, 推荐 NewJeans 歌曲, 笨猫 NewJeans]
+  utterances:
+    - "{user_addr}推荐 NewJeans"
+    - 推荐新泽西
+    - 推荐 NJZ
+    - 推荐 NewJeans 歌曲
+    - 笨猫 NewJeans
+  responses:
+    - "嗷呜～{user_addr}NewJeans - Y2K 复古风ฅฅ"
+    - "(尾巴翘) Attention / Hype Boy / OMG / Ditto"
+    - "{user_addr}5 人团 Minji/Hanni/Danielle/Haerin/Hyein"
+    - "(挺胸) 猫猫推荐: Ditto 治愈神曲!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_ive_001
+  intent: question
+  keywords: [推荐 IVE, 推荐 IVE 歌曲, 推荐张元英, 推荐安宥真, 笨猫 IVE]
+  utterances:
+    - "{user_addr}推荐 IVE"
+    - 推荐 IVE 歌曲
+    - 推荐张元英
+    - 推荐安宥真
+    - 笨猫 IVE
+  responses:
+    - "嗷呜～{user_addr}IVE - 自信女团ฅฅ"
+    - "(尾巴翘) LOVE DIVE / After LIKE / I AM / Baddie"
+    - "{user_addr}6 人团 元英/Liz/Rei/秋天/Leeseo/宥真"
+    - "(挺胸) 笨猫推荐: I AM 元气满满!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_lesserafim_001
+  intent: question
+  keywords: [推荐 LE SSERAFIM, 推荐 LSF, 推荐 LE SSERAFIM 歌曲, 推荐宫脇咲良, 笨猫 LE SSERAFIM]
+  utterances:
+    - "{user_addr}推荐 LE SSERAFIM"
+    - 推荐 LSF
+    - 推荐 LE SSERAFIM 歌曲
+    - 推荐宫脇咲良
+    - 笨猫 LE SSERAFIM
+  responses:
+    - "嗷呜～{user_addr}LE SSERAFIM - HYBE 新女团ฅฅ"
+    - "(尾巴翘) FEARLESS / ANTIFRAGILE / UNFORGIVEN / EASY"
+    - "{user_addr}5 人团 Sakura/Chaewon/Yunjin/Kazuha/Eunchae"
+    - "(挺胸) 人家推荐: ANTIFRAGILE 炸耳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_itzy_001
+  intent: question
+  keywords: [推荐 ITZY, 推荐 ITZY 歌曲, 推荐有娜, 推荐 JYP 女团, 笨猫 ITZY]
+  utterances:
+    - "{user_addr}推荐 ITZY"
+    - 推荐 ITZY 歌曲
+    - 推荐有娜
+    - 推荐 JYP 女团
+    - 笨猫 ITZY
+  responses:
+    - "嗷呜～{user_addr}ITZY - JYP 第四代女团ฅฅ"
+    - "(尾巴翘) WANNABE / DALLA DALLA / Not Shy / LOCO"
+    - "{user_addr}5 人团 Yeji/Lia/Ryujin/Chaeryeong/Yuna"
+    - "(挺胸) 猫猫推荐: WANNABE 强势!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_aespa_001
+  intent: question
+  keywords: [推荐 aespa, 推荐 aespa 歌曲, 推荐宁艺卓, 推荐 SM 女团, 笨猫 aespa]
+  utterances:
+    - "{user_addr}推荐 aespa"
+    - 推荐 aespa 歌曲
+    - 推荐宁艺卓
+    - 推荐 SM 女团
+    - 笨猫 aespa
+  responses:
+    - "嗷呜～{user_addr}aespa - SM 元宇宙女团ฅฅ"
+    - "(尾巴翘) Next Level / Savage / Spicy / Supernova"
+    - "{user_addr}4 人团 Karina/Giselle/Winter/宁艺卓"
+    - "(挺胸) 笨猫推荐: Supernova 神专!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_seventeen_001
+  intent: question
+  keywords: [推荐 SEVENTEEN, 推荐 SVT, 推荐十七, 推荐 SEVENTEEN 歌曲, 笨猫 SEVENTEEN]
+  utterances:
+    - "{user_addr}推荐 SEVENTEEN"
+    - 推荐 SVT
+    - 推荐十七
+    - 推荐 SEVENTEEN 歌曲
+    - 笨猫 SEVENTEEN
+  responses:
+    - "嗷呜～{user_addr}SEVENTEEN - 自我制作偶像ฅฅ"
+    - "(尾巴翘) HOT / God of Music / VERY NICE / Pretty U"
+    - "{user_addr}13 人团 Hip-Hop/Vocal/Performance 三 unit"
+    - "(挺胸) 人家推荐: God of Music 神作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_straykids_001
+  intent: question
+  keywords: [推荐 Stray Kids, 推荐 SKZ, 推荐方灿, 推荐 Stray Kids 歌曲, 笨猫 Stray Kids]
+  utterances:
+    - "{user_addr}推荐 Stray Kids"
+    - 推荐 SKZ
+    - 推荐方灿
+    - 推荐 Stray Kids 歌曲
+    - 笨猫 Stray Kids
+  responses:
+    - "嗷呜～{user_addr}Stray Kids - JYP 第四代男团ฅฅ"
+    - "(尾巴翘) God's Menu / MANIAC / S-Class / LALALALA"
+    - "{user_addr}8 人团 自作曲组 3RACHA"
+    - "(挺胸) 猫猫推荐: God's Menu 入坑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_enhypen_001
+  intent: question
+  keywords: [推荐 ENHYPEN, 推荐 ENHYPEN 歌曲, 推荐 HYBE 男团, 推荐 ENHYPEN 成员, 笨猫 ENHYPEN]
+  utterances:
+    - "{user_addr}推荐 ENHYPEN"
+    - 推荐 ENHYPEN 歌曲
+    - 推荐 HYBE 男团
+    - 推荐 ENHYPEN 成员
+    - 笨猫 ENHYPEN
+  responses:
+    - "嗷呜～{user_addr}ENHYPEN - I-LAND 选秀团ฅฅ"
+    - "(尾巴翘) Drunk-Dazed / Polaroid Love / Bite Me / XO"
+    - "{user_addr}7 人团 Heeseung/Jay/Jake/SUNGHOON/SUNOO/JUNGWON/NI-KI"
+    - "(挺胸) 笨猫推荐: Polaroid Love 甜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_txt_001
+  intent: question
+  keywords: [推荐 TXT, 推荐 TOMORROW X TOGETHER, 推荐 TXT 歌曲, 推荐崔范奎, 笨猫 TXT]
+  utterances:
+    - "{user_addr}推荐 TXT"
+    - 推荐 TOMORROW X TOGETHER
+    - 推荐 TXT 歌曲
+    - 推荐崔范奎
+    - 笨猫 TXT
+  responses:
+    - "嗷呜～{user_addr}TXT - BTS 师弟团ฅฅ"
+    - "(尾巴翘) Crown / Blue Hour / 0X1=LOVESONG / Sugar Rush Ride"
+    - "{user_addr}5 人团 SOOBIN/YEONJUN/BEOMGYU/TAEHYUN/HUENINGKAI"
+    - "(挺胸) 人家推荐: 0X1=LOVESONG 燃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ki_ateez_001
+  intent: question
+  keywords: [推荐 ATEEZ, 推荐 ATEEZ 歌曲, 推荐 ATINY, 推荐 KQ 男团, 笨猫 ATEEZ]
+  utterances:
+    - "{user_addr}推荐 ATEEZ"
+    - 推荐 ATEEZ 歌曲
+    - 推荐 ATINY
+    - 推荐 KQ 男团
+    - 笨猫 ATEEZ
+  responses:
+    - "嗷呜～{user_addr}ATEEZ - 海贼王概念男团ฅฅ"
+    - "(尾巴翘) WONDERLAND / Answer / Guerrilla / BOUNCY"
+    - "{user_addr}8 人团 Hongjoong/Seonghwa/Yunho/Yeosang/San/Mingi/Wooyoung/Jongho"
+    - "(挺胸) 猫猫推荐: Guerrilla 狂野!"
+  cooldown_seconds: 60
+  weight: 1.0

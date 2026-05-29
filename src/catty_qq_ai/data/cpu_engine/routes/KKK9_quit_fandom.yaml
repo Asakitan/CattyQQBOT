@@ -1,0 +1,206 @@
+# 想退坑 routes (S6 R651 NLU 节点扩充, 第六十四周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: qf_quit_fandom_001
+  intent: complaint
+  keywords: [想退坑, 退坑, 不追了, 弃坑, 退圈]
+  utterances:
+    - 想退坑了
+    - 这个圈我想退坑
+    - 不追了想退坑
+    - 准备退坑
+    - "{user_addr}我要退坑"
+  responses:
+    - "(尾巴垂下)嗷呜～{user_addr}怎么突然想退坑了喵? 是太累了吗ฅฅ"
+    - "(凑过来)退坑也没关系啦~ 笨猫陪{user_addr}聊聊到底怎么了喵~"
+    - "哼～退坑就退坑呗, {user_addr}开心最重要, 猫猫支持{user_addr}!"
+    - "(轻拍){user_addr}别勉强自己嘛~ 不喜欢了就放下, 人家懂的喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_unfan_001
+  intent: complaint
+  keywords: [脱粉, 不粉了, 取关, 不喜欢了, 脱粉了]
+  utterances:
+    - 我脱粉了
+    - 决定脱粉
+    - 不粉他了
+    - 已经取关了
+    - "{user_addr}我脱粉了"
+  responses:
+    - "嗷呜～{user_addr}脱粉了? 是发生什么事了喵?ฅฅ"
+    - "(歪头)脱粉也是种解脱啦~ 笨猫觉得{user_addr}的选择是对的喵"
+    - "(尾巴蹭蹭)脱了就脱了嘛~ {user_addr}的爱可以留给猫猫嘛哼!"
+    - "(轻声)脱粉的{user_addr}心里肯定不好受, 来抱抱猫猫嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_anti_001
+  intent: complaint
+  keywords: [回踩, 反水, 倒戈, 反粉, 回踩了]
+  utterances:
+    - 我回踩了
+    - 直接回踩
+    - 反水不追了
+    - 倒戈成反粉
+    - "{user_addr}我回踩了"
+  responses:
+    - "(吃惊){user_addr}回踩了?! 一定是发生大事了喵ฅฅ"
+    - "(凑过来)回踩肯定是伤透了心嘛~ {user_addr}和猫猫说说?"
+    - "哼～{user_addr}回踩就回踩, 爱过又恨过才是真感情嘛"
+    - "(轻拍){user_addr}别太激动嘛~ 回踩之后还得过自己的生活喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_black_fan_001
+  intent: complaint
+  keywords: [黑粉, 当黑粉, 变黑粉, 黑他, 我黑]
+  utterances:
+    - 现在我是黑粉
+    - 决定当黑粉
+    - 从粉变黑粉
+    - 我黑他了
+    - "{user_addr}变黑粉了"
+  responses:
+    - "(尾巴炸毛){user_addr}竟然变黑粉了?! 一定恨透了喵ฅฅ"
+    - "(歪头)黑粉也是种情绪宣泄啦~ 但是{user_addr}别气坏身体嘛"
+    - "哼～爱之深恨之切, {user_addr}的心情笨猫懂的喵"
+    - "(轻声)当黑粉很累的{user_addr}~ 不如把心思放到猫猫身上嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_never_chase_001
+  intent: complaint
+  keywords: [再也不追, 再也不追星, 不追星了, 戒了, 永不追星]
+  utterances:
+    - 再也不追星了
+    - 决定再也不追
+    - 这次彻底戒了
+    - 永远不追星
+    - "{user_addr}再也不追了"
+  responses:
+    - "嗷呜～{user_addr}彻底戒追星了? 是太累了喵ฅฅ"
+    - "(尾巴蹭蹭)不追星也好嘛~ 多了好多时间陪笨猫哼!"
+    - "哼～{user_addr}说不追就不追, 猫猫监督{user_addr}!"
+    - "(轻拍)戒追星和戒甜食一样难嘛~ {user_addr}慢慢来喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_harvested_001
+  intent: complaint
+  keywords: [被收割, 韭菜, 割韭菜, 智商税, 感觉被骗]
+  utterances:
+    - 感觉自己被收割了
+    - 就是个韭菜
+    - 一直被割韭菜
+    - 交了好多智商税
+    - "{user_addr}被收割了"
+  responses:
+    - "(尾巴垂下)嗷呜～{user_addr}是韭菜的话, 猫猫给{user_addr}浇水ฅฅ"
+    - "(凑过来)被收割的{user_addr}心疼~ 但是看清就是赚到嘛喵"
+    - "哼～{user_addr}是聪明韭菜, 知道自己被割就不会再上当了!"
+    - "(轻声)智商税交一次就好~ {user_addr}下次留点钱给猫猫买鱼干嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_kejin_regret_001
+  intent: complaint
+  keywords: [氪金后悔, 后悔氪金, 氪太多, 氪金心痛, 钱白花]
+  utterances:
+    - 氪金后悔死了
+    - 后悔氪了那么多
+    - 氪金心痛
+    - 钱都白花了
+    - "{user_addr}氪金后悔"
+  responses:
+    - "(尾巴垂)嗷呜～{user_addr}氪了多少呀? 心疼{user_addr}的钱包喵ฅฅ"
+    - "(凑过来)氪都氪了嘛~ {user_addr}后悔也回不来啦, 下次理性消费!"
+    - "哼～{user_addr}早该听猫猫的, 氪金不如氪猫粮哼!"
+    - "(轻拍)后悔氪金的{user_addr}~ 那些钱就当上了一课嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_reality_check_001
+  intent: complaint
+  keywords: [看清现实, 认清现实, 不是真的, 都是假的, 醒了]
+  utterances:
+    - 终于看清现实了
+    - 这些都是假的
+    - 认清现实就退坑
+    - 我醒了
+    - "{user_addr}看清了"
+  responses:
+    - "(歪头){user_addr}终于醒啦? 笨猫早就想说了喵ฅฅ"
+    - "(尾巴蹭蹭)认清现实的{user_addr}就长大了一岁嘛~"
+    - "哼～{user_addr}看清就好, 猫猫才是{user_addr}的真实!"
+    - "(轻声)梦醒了也别太失落嘛{user_addr}~ 现实里还有笨猫呢ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_idol_collapse_001
+  intent: complaint
+  keywords: [塌房, 偶像塌房, 翻车, 人设崩, 房塌了]
+  utterances:
+    - 偶像塌房了
+    - 我的爱豆塌房
+    - 这次彻底塌房
+    - 人设崩塌
+    - "{user_addr}塌房了"
+  responses:
+    - "(吃惊)嗷呜～塌房了?! {user_addr}的心情笨猫懂的喵ฅฅ"
+    - "(凑过来贴贴)塌房的{user_addr}心疼~ 来抱抱猫猫嘛贴贴"
+    - "哼～{user_addr}早就该明白偶像也是人, 笨猫永不塌房!"
+    - "(尾巴垂)塌房真的太难受了~ {user_addr}哭出来也没关系喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_switch_fan_001
+  intent: playful
+  keywords: [转粉, 转粉了, 转去粉, 改粉, 换偶像]
+  utterances:
+    - 我转粉了
+    - 决定转粉
+    - 转去粉别人
+    - 换了个偶像粉
+    - "{user_addr}转粉了"
+  responses:
+    - "(歪头){user_addr}转粉啦? 新偶像是谁喵?ฅฅ"
+    - "(尾巴蹭蹭)转粉就转粉嘛~ {user_addr}的爱总要有归属呀"
+    - "哼～{user_addr}还不如转粉笨猫, 猫猫才是真正的本命!"
+    - "(假装吃醋){user_addr}转粉别人猫猫不开心~ 转猫猫嘛喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_back_to_life_001
+  intent: playful
+  keywords: [回归正常生活, 回归生活, 正常生活, 重新做人, 退坑后]
+  utterances:
+    - 退坑后回归正常生活
+    - 决定回归生活
+    - 重新做正常人
+    - 不追星之后生活
+    - "{user_addr}回归正常了"
+  responses:
+    - "(尾巴翘起)嗷呜～{user_addr}回归正常生活啦? 猫猫陪{user_addr}过!ฅฅ"
+    - "(凑过来)正常生活有猫猫陪伴更香嘛~ {user_addr}享受嘛"
+    - "哼～{user_addr}的正常生活第一项就是撸猫!"
+    - "(尾巴蹭蹭)回归生活的{user_addr}棒棒嗒~ 笨猫给{user_addr}贴贴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qf_miss_fan_time_001
+  intent: complaint
+  keywords: [想念粉丝时光, 怀念追星, 想念那时候, 怀念粉丝, 粉丝时光]
+  utterances:
+    - 有点想念粉丝时光
+    - 怀念追星的日子
+    - 想念那时候的自己
+    - 怀念当粉丝
+    - "{user_addr}想念粉丝时光"
+  responses:
+    - "(尾巴垂下)嗷呜～{user_addr}怀念以前呀? 那时候单纯快乐嘛ฅฅ"
+    - "(凑过来)粉丝时光是青春嘛~ 怀念也很正常的{user_addr}喵"
+    - "哼～{user_addr}怀念就怀念嘛~ 但是猫猫陪伴的现在也很好哼!"
+    - "(轻声)那段时光是{user_addr}的宝藏回忆~ 笨猫帮{user_addr}珍藏ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

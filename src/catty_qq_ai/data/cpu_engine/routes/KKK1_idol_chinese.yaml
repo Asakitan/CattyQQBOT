@@ -1,0 +1,206 @@
+# 中国偶像 routes (S6 R643 NLU 节点扩充, 第六十四周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ic_caixukun_001
+  intent: question
+  keywords: [推荐蔡徐坤, 推荐王嘉尔, 推荐 ikun, 推荐 Jackson, 笨猫蔡徐坤]
+  utterances:
+    - 推荐蔡徐坤
+    - 推荐王嘉尔
+    - 推荐 ikun
+    - 推荐 Jackson
+    - 笨猫蔡徐坤
+  responses:
+    - "嗷呜～{user_addr}蔡徐坤 - 偶像练习生 C 位ฅฅ"
+    - "(尾巴翘) 王嘉尔 - GOT7 / 中国说唱"
+    - "{user_addr}打篮球 / 鸡你太美梗"
+    - "(挺胸) 猫猫推荐: 蔡徐坤 << 只因 >>!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_luhan_001
+  intent: question
+  keywords: [推荐鹿晗, 推荐吴亦凡, 推荐 EXO 中国, 推荐归国四子, 笨猫鹿晗]
+  utterances:
+    - 推荐鹿晗
+    - 推荐吴亦凡
+    - 推荐 EXO 中国
+    - 推荐归国四子
+    - 笨猫鹿晗
+  responses:
+    - "嗷呜～{user_addr}鹿晗 - EXO 元老ฅฅ"
+    - "(尾巴翘) 吴亦凡 / 黄子韬 / 张艺兴"
+    - "{user_addr}归国四子 - 顶流时代"
+    - "(挺胸) 猫猫推荐: 鹿晗 << 致爱 >>!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_zhangyixing_001
+  intent: question
+  keywords: [推荐张艺兴, 推荐 Lay, 推荐努力努力再努力, 推荐 M-Pop, 笨猫张艺兴]
+  utterances:
+    - 推荐张艺兴
+    - 推荐 Lay
+    - 推荐努力努力再努力
+    - 推荐 M-Pop
+    - 笨猫张艺兴
+  responses:
+    - "嗷呜～{user_addr}张艺兴 Lay - EXO 主舞ฅฅ"
+    - "(尾巴翘) 努力努力再努力 / M-Pop"
+    - "{user_addr}极限挑战 / 这就是街舞"
+    - "(挺胸) 猫猫推荐: 张艺兴 << 莲 >>!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_tnt_001
+  intent: question
+  keywords: [推荐时代少年团, 推荐 TNT, 推荐时代峰峻, 推荐七子, 笨猫时代少年团]
+  utterances:
+    - 推荐时代少年团
+    - 推荐 TNT
+    - 推荐时代峰峻
+    - 推荐七子
+    - 笨猫时代少年团
+  responses:
+    - "嗷呜～{user_addr}时代少年团 TNT - 七子ฅฅ"
+    - "(尾巴翘) 马嘉祺 / 丁程鑫 / 宋亚轩"
+    - "{user_addr}刘耀文 / 张真源 / 严浩翔 / 贺峻霖"
+    - "(挺胸) 猫猫推荐: TNT << 朱雀 >>!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_tfboys_001
+  intent: question
+  keywords: [推荐 TFBOYS, 推荐王俊凯, 推荐王源, 推荐易烊千玺, 笨猫 TFBOYS]
+  utterances:
+    - "推荐 TFBOYS"
+    - 推荐王俊凯
+    - 推荐王源
+    - 推荐易烊千玺
+    - "笨猫 TFBOYS"
+  responses:
+    - "嗷呜～{user_addr}TFBOYS - 三小只ฅฅ"
+    - "(尾巴翘) 王俊凯 / 王源 / 易烊千玺"
+    - "{user_addr}少年中国说 / 青春修炼手册"
+    - "(挺胸) 猫猫推荐: TFBOYS << 大梦想家 >>!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_boygroup_001
+  intent: question
+  keywords: [推荐中国男团, 推荐 R1SE, 推荐 INTO1, 推荐 UNINE, 笨猫中国男团]
+  utterances:
+    - 推荐中国男团
+    - "推荐 R1SE"
+    - "推荐 INTO1"
+    - "推荐 UNINE"
+    - 笨猫中国男团
+  responses:
+    - "嗷呜～{user_addr}R1SE - 创造营 2019ฅฅ"
+    - "(尾巴翘) INTO1 / UNINE / NINE PERCENT"
+    - "{user_addr}选秀 C 位 / 限定团"
+    - "(挺胸) 猫猫推荐: R1SE << 就要喜欢你 >>!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_girlgroup_001
+  intent: question
+  keywords: [推荐中国女团, 推荐火箭少女, 推荐 THE9, 推荐硬糖少女, 笨猫中国女团]
+  utterances:
+    - 推荐中国女团
+    - 推荐火箭少女
+    - "推荐 THE9"
+    - 推荐硬糖少女
+    - 笨猫中国女团
+  responses:
+    - "嗷呜～{user_addr}火箭少女 101 - 创造 101ฅฅ"
+    - "(尾巴翘) THE9 / 硬糖少女 303"
+    - "{user_addr}孟美岐 / 吴宣仪 / 杨超越"
+    - "(挺胸) 猫猫推荐: 火箭少女 << 卡路里 >>!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_audition_001
+  intent: question
+  keywords: [推荐选秀偶像, 推荐青你, 推荐创造营, 推荐偶像练习生, 笨猫选秀]
+  utterances:
+    - 推荐选秀偶像
+    - 推荐青你
+    - 推荐创造营
+    - 推荐偶像练习生
+    - 笨猫选秀
+  responses:
+    - "嗷呜～{user_addr}偶像练习生 / 创造 101ฅฅ"
+    - "(尾巴翘) 青春有你 / 创造营 2019"
+    - "{user_addr}爱奇艺 / 腾讯视频 / 限定团"
+    - "(挺胸) 猫猫推荐: 选秀时代经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_traffic_001
+  intent: question
+  keywords: [推荐流量明星, 推荐顶流, 推荐肖战, 推荐王一博, 笨猫流量]
+  utterances:
+    - 推荐流量明星
+    - 推荐顶流
+    - 推荐肖战
+    - 推荐王一博
+    - 笨猫流量
+  responses:
+    - "嗷呜～{user_addr}肖战 / 王一博 - 陈情令双顶流ฅฅ"
+    - "(尾巴翘) 龚俊 / 张哲瀚 / 任嘉伦"
+    - "{user_addr}粉丝经济 / 代言天花板"
+    - "(挺胸) 猫猫推荐: 肖战 << 光点 >>!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_actor_001
+  intent: question
+  keywords: [推荐演员偶像, 推荐胡歌, 推荐霍建华, 推荐杨洋, 笨猫演员偶像]
+  utterances:
+    - 推荐演员偶像
+    - 推荐胡歌
+    - 推荐霍建华
+    - 推荐杨洋
+    - 笨猫演员偶像
+  responses:
+    - "嗷呜～{user_addr}胡歌 - 仙剑 / 琅琊榜ฅฅ"
+    - "(尾巴翘) 霍建华 / 杨洋 / 李易峰"
+    - "{user_addr}颜值演技并存 / 国民男神"
+    - "(挺胸) 猫猫推荐: 胡歌 << 琅琊榜 >>!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_drama_001
+  intent: question
+  keywords: [推荐电视剧出圈, 推荐陈情令, 推荐山河令, 推荐镇魂, 笨猫剧出圈]
+  utterances:
+    - 推荐电视剧出圈
+    - 推荐陈情令
+    - 推荐山河令
+    - 推荐镇魂
+    - 笨猫剧出圈
+  responses:
+    - "嗷呜～{user_addr}陈情令 - 肖战王一博ฅฅ"
+    - "(尾巴翘) 山河令 / 镇魂 / 君有云"
+    - "{user_addr}耽改剧 / CP 文化 / 出圈神剧"
+    - "(挺胸) 猫猫推荐: 陈情令 全网刷屏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_variety_001
+  intent: question
+  keywords: [推荐综艺常驻, 推荐跑男, 推荐极限挑战, 推荐向往的生活, 笨猫综艺]
+  utterances:
+    - 推荐综艺常驻
+    - 推荐跑男
+    - 推荐极限挑战
+    - 推荐向往的生活
+    - 笨猫综艺
+  responses:
+    - "嗷呜～{user_addr}跑男 - 邓超鹿晗 Angelababyฅฅ"
+    - "(尾巴翘) 极限挑战 / 向往的生活"
+    - "{user_addr}国民综艺 / 综艺咖天花板"
+    - "(挺胸) 猫猫推荐: 跑男 第一季最经典!"
+  cooldown_seconds: 60
+  weight: 1.0

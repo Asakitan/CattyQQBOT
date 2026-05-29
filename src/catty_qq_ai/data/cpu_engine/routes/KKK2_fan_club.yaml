@@ -1,0 +1,206 @@
+# 饭圈文化 routes (S6 R644 NLU 节点扩充, 第六十四周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: fc_slang_001
+  intent: question
+  keywords: [推荐饭圈黑话, 推荐饭圈术语, 推荐饭圈词典, 推荐饭圈用语, 笨猫饭圈黑话]
+  utterances:
+    - 推荐饭圈黑话
+    - 推荐饭圈术语
+    - 推荐饭圈词典
+    - 推荐饭圈用语
+    - "{user_addr}饭圈黑话怎么说"
+  responses:
+    - "嗷呜～{user_addr}awsl / xswl / yyds / 哥哥姐姐ฅฅ"
+    - "(尾巴翘) 唯粉 / CP 粉 / 团粉 / 妈粉"
+    - "{user_addr}打 call / 应援 / 控评 / 反黑"
+    - "(挺胸) 笨猫提醒: 黑话多到劝退新人喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_data_001
+  intent: question
+  keywords: [推荐数据组, 推荐打投, 推荐做数据, 推荐冲销量, 笨猫数据组]
+  utterances:
+    - 推荐数据组
+    - 推荐打投
+    - 推荐做数据
+    - 推荐冲销量
+    - 笨猫数据组
+  responses:
+    - "嗷呜～{user_addr}数据组 - 微博转评赞 / 超话签到ฅฅ"
+    - "(尾巴翘) 打投 - 各平台投票冲榜"
+    - "{user_addr}音源数据 / 销量数据 / 热搜数据"
+    - "(挺胸) 笨猫提醒: 别为了数据透支自己嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_yingyuan_001
+  intent: question
+  keywords: [推荐应援站, 推荐官博站子, 推荐站姐, 推荐大站, 笨猫应援站]
+  utterances:
+    - 推荐应援站
+    - 推荐官博站子
+    - 推荐站姐
+    - 推荐大站
+    - 笨猫应援站
+  responses:
+    - "嗷呜～{user_addr}应援站 - 站姐扛大炮拍美图ฅฅ"
+    - "(尾巴翘) 大站 / 中站 / 小站 / 个站"
+    - "{user_addr}产出图 / 修图 / 视频 / 周边"
+    - "(挺胸) 笨猫推荐: 关注几个稳定输出的站!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_houyuan_001
+  intent: question
+  keywords: [推荐后援会, 推荐大粉, 推荐头粉, 推荐粉头, 笨猫后援会]
+  utterances:
+    - 推荐后援会
+    - 推荐大粉
+    - 推荐头粉
+    - 推荐粉头
+    - 笨猫后援会
+  responses:
+    - "嗷呜～{user_addr}后援会 - 官方/非官方组织ฅฅ"
+    - "(尾巴翘) 大粉 - 影响力大的粉丝"
+    - "{user_addr}组织应援 / 集资 / 公益"
+    - "(挺胸) 笨猫提醒: 集资要透明嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_fanji_001
+  intent: question
+  keywords: [推荐粉籍, 推荐粉丝身份, 推荐唯粉, 推荐团粉, 笨猫粉籍]
+  utterances:
+    - 推荐粉籍
+    - 推荐粉丝身份
+    - 推荐唯粉
+    - 推荐团粉
+    - 笨猫粉籍
+  responses:
+    - "嗷呜～{user_addr}唯粉 - 只粉一个人ฅฅ"
+    - "(尾巴翘) 团粉 / CP 粉 / 妈粉 / 事业粉"
+    - "{user_addr}粉籍 - 你的粉丝身份标签"
+    - "(挺胸) 笨猫提醒: 粉籍内战是大忌嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_kongping_001
+  intent: question
+  keywords: [推荐控评, 推荐举报, 推荐反黑, 推荐净化, 笨猫控评]
+  utterances:
+    - 推荐控评
+    - 推荐举报
+    - 推荐反黑
+    - 推荐净化
+    - 笨猫控评
+  responses:
+    - "嗷呜～{user_addr}控评 - 把好评顶上去ฅฅ"
+    - "(尾巴翘) 举报黑评 / 屠版 / 反黑"
+    - "{user_addr}话术统一 / 不要骂战"
+    - "(挺胸) 笨猫提醒: 别越界变网暴嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_fanhei_001
+  intent: question
+  keywords: [推荐反黑组, 推荐反黑站, 推荐净化组, 推荐打黑组, 笨猫反黑组]
+  utterances:
+    - 推荐反黑组
+    - 推荐反黑站
+    - 推荐净化组
+    - 推荐打黑组
+    - 笨猫反黑组
+  responses:
+    - "嗷呜～{user_addr}反黑组 - 专门举报恶意黑帖ฅฅ"
+    - "(尾巴翘) 微博反黑 / 抖音反黑 / 豆瓣反黑"
+    - "{user_addr}固定时段冲 / 群内分工"
+    - "(挺胸) 笨猫提醒: 反黑别变成扣帽子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_yingyuanbang_001
+  intent: question
+  keywords: [推荐应援棒, 推荐手幅, 推荐应援物, 推荐灯牌, 笨猫应援棒]
+  utterances:
+    - 推荐应援棒
+    - 推荐手幅
+    - 推荐应援物
+    - 推荐灯牌
+    - 笨猫应援棒
+  responses:
+    - "嗷呜～{user_addr}应援棒 - K-pop 标配ฅฅ"
+    - "(尾巴翘) 手幅 / 灯牌 / 应援服 / 横幅"
+    - "{user_addr}买正版别买盗版!"
+    - "(挺胸) 笨猫推荐: 蓝牙联动应援棒超酷!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_jieji_001
+  intent: question
+  keywords: [推荐接机, 推荐机场, 推荐送机, 推荐航班, 笨猫接机]
+  utterances:
+    - 推荐接机
+    - 推荐机场
+    - 推荐送机
+    - 推荐航班
+    - 笨猫接机
+  responses:
+    - "嗷呜～{user_addr}接机 - 机场举牌迎偶像ฅฅ"
+    - "(尾巴翘) 守秩序 / 别冲卡 / 别推搡"
+    - "{user_addr}人多别凑 / 别影响航班"
+    - "(挺胸) 笨猫提醒: 接机有边界 别变私生嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_concert_001
+  intent: question
+  keywords: [推荐看演唱会, 推荐演唱会攻略, 推荐应援现场, 推荐 livehouse, 笨猫演唱会]
+  utterances:
+    - 推荐看演唱会
+    - 推荐演唱会攻略
+    - 推荐应援现场
+    - 推荐 livehouse
+    - 笨猫演唱会
+  responses:
+    - "嗷呜～{user_addr}抢票 - 大麦/猫眼/纷玩岛ฅฅ"
+    - "(尾巴翘) 内场 / 看台 / 山顶位"
+    - "{user_addr}带应援棒 / 防身手机充电宝"
+    - "(挺胸) 笨猫推荐: 第一次冲一次必去爱豆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_chaohua_001
+  intent: question
+  keywords: [推荐微博超话, 推荐超话签到, 推荐超话等级, 推荐超话排名, 笨猫超话]
+  utterances:
+    - 推荐微博超话
+    - 推荐超话签到
+    - 推荐超话等级
+    - 推荐超话排名
+    - 笨猫超话
+  responses:
+    - "嗷呜～{user_addr}超话 - 微博粉丝大本营ฅฅ"
+    - "(尾巴翘) 每天签到攒等级 / 冲影响力榜"
+    - "{user_addr}发帖带话题 / 互动多升级快"
+    - "(挺胸) 笨猫提醒: 别为了签到熬夜嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_sisheng_001
+  intent: question
+  keywords: [推荐私生饭警惕, 推荐私生, 推荐越界粉丝, 推荐反私生, 笨猫私生饭]
+  utterances:
+    - 推荐私生饭警惕
+    - 推荐私生
+    - 推荐越界粉丝
+    - 推荐反私生
+    - 笨猫私生饭
+  responses:
+    - "嗷呜～{user_addr}私生饭 - 偷拍/跟踪/装 GPSฅฅ"
+    - "(炸毛) 这不是爱! 是骚扰是犯罪!"
+    - "{user_addr}追星有边界 - 别买行程别装定位器"
+    - "(挺胸) 笨猫立场: 反私生! 理性追星嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0

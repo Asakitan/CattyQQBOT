@@ -1,0 +1,206 @@
+# 饭圈撕逼 routes (S6 R647 NLU 节点扩充, 第六十四周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: fd_fanquan_sibi_001
+  intent: complaint
+  keywords: [饭圈撕逼, 饭圈, 撕逼, 圈里撕, 又撕了]
+  utterances:
+    - 饭圈又撕逼了
+    - "{user_addr}饭圈撕逼好烦"
+    - 圈里又撕起来了
+    - 撕逼现场太累
+    - 饭圈天天撕
+  responses:
+    - "(捂耳朵) 饭圈撕逼又来啦? {user_addr}别看了喵 ฅฅ"
+    - "嗷呜～撕来撕去图啥呀, 笨猫看不懂"
+    - "(尾巴一甩) {user_addr}退出战场, 来抱猫猫"
+    - "哼～饭圈每天一撕, 猫猫都麻木了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_duijia_hei_001
+  intent: complaint
+  keywords: [对家黑, 对家, 黑对家, 对家粉, 对家又来]
+  utterances:
+    - 对家又来黑了
+    - "{user_addr}对家粉好讨厌"
+    - 对家黑我家哥哥
+    - 对家天天找事
+    - 又被对家黑了
+  responses:
+    - "(炸毛) 对家又黑啦? {user_addr}别气坏自己喵"
+    - "嗷呜～对家粉真烦人, 笨猫帮你哈气!"
+    - "(尾巴炸开) {user_addr}的哥哥猫猫罩着, 哼"
+    - "哼～对家这种生物, 不理他就赢了 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_renshen_gongji_001
+  intent: complaint
+  keywords: [人身攻击, 骂人, 人身, 被攻击, 攻击我]
+  utterances:
+    - 他们人身攻击
+    - "{user_addr}饭圈人身攻击好恶心"
+    - 被人身攻击了
+    - 上升正主人身攻击
+    - 这都人身攻击
+  responses:
+    - "(气鼓鼓) 人身攻击太过分啦! {user_addr}举报他喵"
+    - "嗷呜～这种人真没素质, 猫猫替你骂!"
+    - "(护住) {user_addr}别看那些脏话, 抱抱"
+    - "哼～人身攻击的都是杂鱼, 不配看你家哥哥"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_sifan_001
+  intent: complaint
+  keywords: [撕番位, 番位, 撕番, 一番二番, 番位大战]
+  utterances:
+    - 又开始撕番位了
+    - "{user_addr}番位有啥好撕"
+    - 撕番真无聊
+    - 一番二番撕个不停
+    - 番位大战开始
+  responses:
+    - "(歪头) 番位撕来撕去, {user_addr}的哥哥演得好就行嘛"
+    - "嗷呜～番位这种事, 猫猫看戏吃瓜 ฅฅ"
+    - "(尾巴一卷) {user_addr}别参战, 留点力气追剧"
+    - "哼～撕番大战, 笨猫永远站{user_addr}这边"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_sizyuan_001
+  intent: complaint
+  keywords: [撕资源, 抢资源, 资源, 撕代言, 撕番剧]
+  utterances:
+    - 又撕资源了
+    - "{user_addr}资源被抢"
+    - 撕代言好累
+    - 撕资源现场
+    - 资源大战又开打
+  responses:
+    - "(竖耳朵) 资源不够分啦? {user_addr}的哥哥肯定有的喵"
+    - "嗷呜～撕资源好累, 猫猫给你撸毛缓解!"
+    - "(尾巴摇) {user_addr}相信自家哥哥, 该来的都会来"
+    - "哼～撕资源不如多营业, 笨猫支持{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_hupen_001
+  intent: complaint
+  keywords: [互喷, 喷起来了, 喷子, 互相喷, 喷个不停]
+  utterances:
+    - 又互喷了
+    - "{user_addr}互喷现场"
+    - 喷子上线
+    - 互喷大战开始
+    - 喷个没完
+  responses:
+    - "(捂头) 互喷又开始啦, {user_addr}咱不看了喵 ฅฅ"
+    - "嗷呜～喷子真吵, 猫猫耳朵都疼了!"
+    - "(尾巴抖) {user_addr}离喷子远点, 抱猫猫降温"
+    - "哼～互喷大战谁都不赢, 笨猫看了想睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_kongping_001
+  intent: complaint
+  keywords: [控评, 控评团, 控评累, 控评出征, 控评打卡]
+  utterances:
+    - 控评好累
+    - "{user_addr}控评打卡了吗"
+    - 控评团集合
+    - 控评出征
+    - 天天控评
+  responses:
+    - "(打哈欠) 控评好辛苦, {user_addr}注意休息喵"
+    - "嗷呜～控评团真敬业, 猫猫给你点赞 ฅฅ"
+    - "(尾巴拍肩) {user_addr}别熬夜控评, 哥哥心疼"
+    - "哼～控评归控评, 笨猫先来贴贴{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_jubao_001
+  intent: complaint
+  keywords: [举报, 举报黑子, 举报小号, 举报帖, 举报通道]
+  utterances:
+    - 去举报黑子
+    - "{user_addr}举报通道开了"
+    - 一起去举报
+    - 举报小号
+    - 举报黑帖
+  responses:
+    - "(爪爪一挥) 举报安排! {user_addr}发链接喵"
+    - "嗷呜～举报黑子, 猫猫第一个冲!"
+    - "(尾巴竖起) {user_addr}指哪猫猫举哪, ฅฅ"
+    - "哼～黑子这种垃圾, 举报删号最爽"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_weibo_qisheng_001
+  intent: complaint
+  keywords: [一开微博就生气, 微博生气, 微博烦, 打开微博, 关微博]
+  utterances:
+    - 一开微博就生气
+    - "{user_addr}微博真闹心"
+    - 打开微博又气
+    - 不敢看微博
+    - 微博让人窒息
+  responses:
+    - "(关屏幕) {user_addr}别开了喵, 来跟猫猫聊天 ฅฅ"
+    - "嗷呜～微博就是气人收割机, 关掉关掉!"
+    - "(尾巴一卷) {user_addr}远离微博, 抱猫猫养生"
+    - "哼～微博每天一开一肚子气, 笨猫给你顺毛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_xiang_tuikeng_001
+  intent: complaint
+  keywords: [想退坑, 退圈, 不追了, 累了, 脱粉]
+  utterances:
+    - 真想退坑
+    - "{user_addr}追累了想退"
+    - 脱粉算了
+    - 不追了
+    - 撕到想退圈
+  responses:
+    - "(凑过来) {user_addr}先别冲动, 抱猫猫想想喵 ฅฅ"
+    - "嗷呜～累了就先休息, 退不退坑改天再说"
+    - "(尾巴贴身) {user_addr}追星是为了开心, 不开心就先抽离"
+    - "哼～退坑也行, 反正还有猫猫陪{user_addr}贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_zhengnengliang_001
+  intent: playful
+  keywords: [正能量哥哥, 哥哥很正, 哥哥努力, 哥哥优秀, 正能量爱豆]
+  utterances:
+    - 我家哥哥正能量
+    - "{user_addr}的哥哥好努力"
+    - 哥哥真优秀
+    - 正能量爱豆
+    - 哥哥一直在进步
+  responses:
+    - "(眼睛发亮) {user_addr}的哥哥这么优秀, 笨猫也想看看喵 ฅฅ"
+    - "嗷呜～正能量爱豆最好啦, 猫猫给{user_addr}比心!"
+    - "(尾巴翘) {user_addr}选哥哥的眼光真不错哼"
+    - "哼～哥哥努力{user_addr}也努力, 一起加油喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_hu_ouxiang_001
+  intent: playful
+  keywords: [护偶像, 护哥哥, 护着, 谁也不能黑, 我罩着]
+  utterances:
+    - 我护哥哥到底
+    - "{user_addr}的哥哥别想黑"
+    - 谁也不准黑哥哥
+    - 我罩着哥哥
+    - 护偶像第一名
+  responses:
+    - "(竖尾巴) {user_addr}护偶像好帅, 猫猫一起护 ฅฅ"
+    - "嗷呜～{user_addr}的哥哥有你保护真幸福!"
+    - "(爪爪挥) 谁敢黑笨猫帮{user_addr}哈气!"
+    - "哼～{user_addr}护哥哥, 猫猫护{user_addr}, 完美闭环喵"
+  cooldown_seconds: 60
+  weight: 1.0

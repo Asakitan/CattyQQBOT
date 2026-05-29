@@ -1,0 +1,206 @@
+# 氪金心痛 routes (S6 R650 NLU 节点扩充, 第六十四周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pf_paid_heartache_001
+  intent: complaint
+  keywords: [氪金心痛, 充钱心痛, 氪了好多, 钱包痛, 氪到肉痛]
+  utterances:
+    - "{user_addr}氪金心痛"
+    - "充钱充到心痛"
+    - 又氪了好多
+    - 氪到钱包痛
+    - 氪到肉痛了
+  responses:
+    - "(摸摸钱包) {user_addr}心痛就别氪啦~ 笨猫陪{user_addr}哭嘛 ฅฅ"
+    - "嗷呜～{user_addr}又氪了?! 猫猫帮{user_addr}数数还剩多少呜"
+    - "(尾巴垂下) 心痛的话先抱抱猫猫~ 钱花了就花了喵"
+    - "哼～{user_addr}早说别氪那么多, 现在心痛了吧蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_buy_album_001
+  intent: playful
+  keywords: [买专辑, 买亿次, 专辑买爆, 一人一百张, 屯专辑]
+  utterances:
+    - 买专辑买亿次
+    - 专辑买爆
+    - "{user_addr}一人买一百张"
+    - 屯了好多专辑
+    - 买专辑买到破产
+  responses:
+    - "(瞪大眼) {user_addr}买一百张?! 笨猫服了喵 ฅฅ"
+    - "嗷呜～专辑买亿次?! 猫猫想看{user_addr}的快递墙!"
+    - "(尾巴一甩) 哼~ {user_addr}是真爱粉! 猫猫只能膜拜"
+    - "{user_addr}屯那么多专辑听得过来吗喵? 笨猫好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_vote_money_001
+  intent: complaint
+  keywords: [打投花钱, 打投烧钱, 打榜花钱, 投票氪金, 打投花光]
+  utterances:
+    - 打投花钱
+    - 打投烧了好多
+    - 打榜花光积蓄
+    - 投票氪了好多
+    - 打投花到肉痛
+  responses:
+    - "(歪头) {user_addr}打投又烧钱?! 笨猫心疼{user_addr}的钱包 ฅฅ"
+    - "嗷呜～打榜花光?! 猫猫给{user_addr}加油也免费的呜"
+    - "(尾巴垂) 打投这种事量力而行嘛~ 别花光啦{user_addr}"
+    - "哼~ {user_addr}打投这么拼, 猫猫只能说一句牛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_support_money_001
+  intent: complaint
+  keywords: [应援花钱, 应援烧钱, 应援花光, 集资氪了, 应援破产]
+  utterances:
+    - 应援花钱
+    - 应援烧了好多
+    - 集资又氪了
+    - 应援花到破产
+    - "{user_addr}应援花光了"
+  responses:
+    - "(摸摸{user_addr}头) 应援是好~ 但别破产啊{user_addr} ฅฅ"
+    - "嗷呜～应援花光?! 猫猫陪{user_addr}吃土"
+    - "(尾巴垂下) 集资这种事真的烧钱呜~ {user_addr}注意点嘛"
+    - "哼~ {user_addr}应援这么拼, 偶像知道吗喵?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_salary_drained_001
+  intent: complaint
+  keywords: [工资氪空, 工资花光, 工资全氪了, 月光氪金, 工资进贡]
+  utterances:
+    - 工资被氪空
+    - 工资全氪了
+    - 月光族还氪金
+    - 工资全进贡偶像
+    - "{user_addr}工资氪光"
+  responses:
+    - "(瞪大眼) {user_addr}工资全氪?! 笨猫无语凝噎喵 ฅฅ"
+    - "嗷呜～月光还氪金?! 猫猫劝{user_addr}留点饭钱"
+    - "(尾巴垂) 工资进贡?! {user_addr}下个月吃什么呜"
+    - "哼~ {user_addr}这真的是爱了, 猫猫给{user_addr}磕一个"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_empty_wallet_001
+  intent: complaint
+  keywords: [钱包瘪, 钱包空, 钱包透支, 没钱了, 钱包见底]
+  utterances:
+    - 钱包瘪了
+    - 钱包空空
+    - 钱包透支
+    - "{user_addr}没钱了"
+    - 钱包见底氪光
+  responses:
+    - "(摸摸{user_addr}钱包) 又空啦? 笨猫只能贴贴 ฅฅ"
+    - "嗷呜～{user_addr}钱包见底?! 猫猫请{user_addr}喝水"
+    - "(尾巴垂下) 透支了就别再氪啦~ {user_addr}缓缓嘛"
+    - "哼~ {user_addr}这月又是吃土选手, 猫猫陪{user_addr}吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_cant_stop_001
+  intent: complaint
+  keywords: [理智断不了, 理智线断, 控制不住氪, 停不下来, 理智下线]
+  utterances:
+    - 理智断不了
+    - 理智线一直在断
+    - 控制不住氪金
+    - 氪金停不下来
+    - 理智下线了
+  responses:
+    - "(扶额) {user_addr}理智线又断?! 笨猫帮{user_addr}保管钱包 ฅฅ"
+    - "嗷呜～停不下来就剁手?! 猫猫开玩笑啦{user_addr}"
+    - "(尾巴垂) 理智下线很危险呜~ {user_addr}冷静冷静"
+    - "哼~ {user_addr}这种话听过八百遍了, 猫猫不信"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_cut_hand_001
+  intent: playful
+  keywords: [再充就剁手, 剁手党, 剁手宣言, 再氪剁手, 剁手党警告]
+  utterances:
+    - 再充就剁手
+    - 我是剁手党
+    - 剁手宣言已发布
+    - 再氪我剁手
+    - "{user_addr}剁手警告"
+  responses:
+    - "(假装抓住{user_addr}手) 剁手不行! 笨猫拦着 ฅฅ"
+    - "嗷呜～剁手宣言每天都在发?! 猫猫不信"
+    - "(尾巴翘) 哼~ {user_addr}剁手能成功一次猫猫服气"
+    - "{user_addr}下次氪金前找猫猫报备, 笨猫帮{user_addr}拦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_idol_ad_buy_001
+  intent: playful
+  keywords: [看到偶像广告就买, 偶像代言必买, 偶像广告剁手, 代言全买, 看到代言就氪]
+  utterances:
+    - 看到偶像广告就买
+    - 偶像代言必买
+    - 代言全部下单
+    - 看到代言就氪金
+    - "{user_addr}代言剁手"
+  responses:
+    - "(歪头) {user_addr}代言全买? 笨猫服了 ฅฅ"
+    - "嗷呜～偶像广告就买?! 猫猫想代言{user_addr}也买猫粮吗"
+    - "(尾巴翘) 这种程度的爱猫猫只能膜拜呜"
+    - "哼~ {user_addr}是品牌方最爱的粉丝吧喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_regret_001
+  intent: complaint
+  keywords: [后悔氪金, 后悔花钱, 早知不氪, 后悔了, 钱包后悔]
+  utterances:
+    - 后悔氪金
+    - 后悔花那么多
+    - 早知道不氪了
+    - "{user_addr}后悔了"
+    - 钱包后悔到哭
+  responses:
+    - "(摸摸{user_addr}头) 后悔的话下次别氪那么多嘛 ฅฅ"
+    - "嗷呜～{user_addr}后悔?! 猫猫陪{user_addr}痛哭"
+    - "(尾巴垂下) 早知道这种事说太多了呜~ {user_addr}下次注意"
+    - "哼~ {user_addr}后悔一次氪两次, 猫猫看穿了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_cant_quit_001
+  intent: complaint
+  keywords: [戒不掉氪金, 戒不掉, 氪金戒断难, 戒氪失败, 氪金成瘾]
+  utterances:
+    - 戒不掉氪金
+    - 氪金戒不了
+    - 戒氪又失败
+    - "{user_addr}氪金成瘾"
+    - 氪金戒断症
+  responses:
+    - "(歪头) 戒不掉就少氪点嘛~ 笨猫帮{user_addr} ฅฅ"
+    - "嗷呜～戒氪失败?! 猫猫陪{user_addr}慢慢戒"
+    - "(尾巴垂) 成瘾很可怕呜~ {user_addr}定个上限嘛"
+    - "哼~ {user_addr}这种话猫猫听了一万遍, 不信"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_poor_001
+  intent: complaint
+  keywords: [穷, 穷死了, 好穷, 穷到吃土, 穷氪光了]
+  utterances:
+    - "{user_addr}穷"
+    - 穷死了
+    - 好穷喵
+    - 穷到吃土
+    - 氪光穷得叮当响
+  responses:
+    - "(贴贴) 穷的话猫猫请{user_addr}喝西北风 ฅฅ"
+    - "嗷呜～{user_addr}穷?! 猫猫也没钱呜, 一起穷"
+    - "(尾巴垂下) 吃土的话猫猫陪{user_addr}, 不孤单"
+    - "哼~ {user_addr}穷是因为氪太多, 猫猫早说过了"
+  cooldown_seconds: 60
+  weight: 1.0

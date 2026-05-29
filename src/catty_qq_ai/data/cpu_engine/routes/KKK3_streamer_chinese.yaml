@@ -1,0 +1,206 @@
+# 主播深度 routes (S6 R645 NLU 节点扩充, 第六十四周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sc_top_001
+  intent: question
+  keywords: [推荐头部主播, 推荐李佳琦, 推荐薇娅, 推荐口红一哥, 笨猫头部主播]
+  utterances:
+    - "{user_addr}推荐头部主播"
+    - 推荐李佳琦
+    - 推荐薇娅
+    - 推荐口红一哥
+    - 笨猫头部主播
+  responses:
+    - "嗷呜～{user_addr}李佳琦 - 口红一哥ฅฅ"
+    - "(尾巴翘) 薇娅 - 全品类一姐"
+    - "{user_addr}OMG 买它 / 双 11 王者"
+    - "(挺胸) 猫猫推荐: 李佳琦看口红!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_luo_001
+  intent: question
+  keywords: [推荐罗永浩, 推荐老罗, 推荐罗胖, 推荐交个朋友, 笨猫罗永浩]
+  utterances:
+    - "{user_addr}推荐罗永浩"
+    - 推荐老罗
+    - 推荐罗胖
+    - 推荐交个朋友
+    - 笨猫罗永浩
+  responses:
+    - "嗷呜～{user_addr}罗永浩 - 交个朋友ฅฅ"
+    - "(尾巴翘) 老罗 / 真还传 / 数码"
+    - "{user_addr}罗胖 - 得到 / 知识付费"
+    - "(挺胸) 人家推荐: 老罗看数码!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_douyin_001
+  intent: question
+  keywords: [推荐抖音电商, 推荐抖音主播, 推荐辛巴, 推荐疯狂小杨哥, 笨猫抖音主播]
+  utterances:
+    - "{user_addr}推荐抖音电商"
+    - 推荐抖音主播
+    - 推荐辛巴
+    - 推荐疯狂小杨哥
+    - 笨猫抖音主播
+  responses:
+    - "嗷呜～{user_addr}疯狂小杨哥 - 抖音一哥ฅฅ"
+    - "(尾巴翘) 东方甄选 / 董宇辉"
+    - "{user_addr}贾乃亮 / 广东夫妇"
+    - "(挺胸) 猫猫推荐: 小杨哥搞笑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_kuaishou_001
+  intent: question
+  keywords: [推荐快手主播, 推荐老铁主播, 推荐辛巴快手, 推荐快手家族, 笨猫快手主播]
+  utterances:
+    - "{user_addr}推荐快手主播"
+    - 推荐老铁主播
+    - 推荐辛巴快手
+    - 推荐快手家族
+    - 笨猫快手主播
+  responses:
+    - "嗷呜～{user_addr}辛巴 - 快手一哥ฅฅ"
+    - "(尾巴翘) 散打哥 / 快手家族"
+    - "{user_addr}老铁双击 / 家人们"
+    - "(挺胸) 笨猫推荐: 辛巴看家电!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_game_001
+  intent: question
+  keywords: [推荐游戏直播, 推荐卢本伟, 推荐 PDD, 推荐五五开, 笨猫游戏主播]
+  utterances:
+    - "{user_addr}推荐游戏直播"
+    - 推荐卢本伟
+    - 推荐 PDD
+    - 推荐五五开
+    - 笨猫游戏主播
+  responses:
+    - "嗷呜～{user_addr}卢本伟 - 五五开ฅฅ"
+    - "(尾巴翘) PDD / 骚男 / Miss"
+    - "{user_addr}LOL / 王者 / 吃鸡"
+    - "(挺胸) 人家推荐: PDD 看 LOL!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_outdoor_001
+  intent: question
+  keywords: [推荐户外主播, 推荐旭旭宝宝, 推荐徐大 sao, 推荐户外直播, 笨猫户外主播]
+  utterances:
+    - "{user_addr}推荐户外主播"
+    - 推荐旭旭宝宝
+    - 推荐徐大 sao
+    - 推荐户外直播
+    - 笨猫户外主播
+  responses:
+    - "嗷呜～{user_addr}旭旭宝宝 - DNF 一哥ฅฅ"
+    - "(尾巴翘) 徐大 sao / 户外吃播"
+    - "{user_addr}骑行 / 露营 / 钓鱼"
+    - "(挺胸) 猫猫推荐: 旭旭宝宝看 DNF!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sc_vtuber_001
+  intent: question
+  keywords: [推荐 VTuber, 推荐虚拟主播, 推荐 Hololive, 推荐 A-SOUL, 笨猫 VTuber]
+  utterances:
+    - "{user_addr}推荐 VTuber"
+    - 推荐虚拟主播
+    - 推荐 Hololive
+    - 推荐 A-SOUL
+    - 笨猫 VTuber
+  responses:
+    - "嗷呜～{user_addr}Hololive - 日系顶流ฅฅ"
+    - "(尾巴翘) A-SOUL / 嘉然 / 向晚"
+    - "{user_addr}彩虹社 / Nijisanji"
+    - "(脸红) 笨猫也想当 VTuber!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_food_001
+  intent: question
+  keywords: [推荐美食主播, 推荐王刚, 推荐美食作家王刚, 推荐厨师主播, 笨猫美食主播]
+  utterances:
+    - "{user_addr}推荐美食主播"
+    - 推荐王刚
+    - 推荐美食作家王刚
+    - 推荐厨师主播
+    - 笨猫美食主播
+  responses:
+    - "嗷呜～{user_addr}美食作家王刚 - 硬核川菜ฅฅ"
+    - "(尾巴翘) 老饭骨 / 麻辣德子"
+    - "{user_addr}三十而立 / 日食记"
+    - "(挺胸) 人家推荐: 王刚 R 标准开局!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_edu_001
+  intent: question
+  keywords: [推荐教学主播, 推荐董宇辉, 推荐知识主播, 推荐学习直播, 笨猫教学主播]
+  utterances:
+    - "{user_addr}推荐教学主播"
+    - 推荐董宇辉
+    - 推荐知识主播
+    - 推荐学习直播
+    - 笨猫教学主播
+  responses:
+    - "嗷呜～{user_addr}董宇辉 - 东方甄选ฅฅ"
+    - "(尾巴翘) 双语带货 / 知识鸡汤"
+    - "{user_addr}罗翔 / 法考 / 张雪峰"
+    - "(挺胸) 猫猫推荐: 董宇辉听英语!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_gov_001
+  intent: question
+  keywords: [推荐政务主播, 推荐县长直播, 推荐助农直播, 推荐文旅主播, 笨猫政务主播]
+  utterances:
+    - "{user_addr}推荐政务主播"
+    - 推荐县长直播
+    - 推荐助农直播
+    - 推荐文旅主播
+    - 笨猫政务主播
+  responses:
+    - "嗷呜～{user_addr}县长直播 - 助农带货ฅฅ"
+    - "(尾巴翘) 文旅局长 / 川渝叫板"
+    - "{user_addr}消费帮扶 / 乡村振兴"
+    - "(挺胸) 笨猫推荐: 看县长好亲切!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sc_movie_001
+  intent: question
+  keywords: [推荐影视主播, 推荐解说主播, 推荐 Mr 沙雕, 推荐木鱼水心, 笨猫影视主播]
+  utterances:
+    - "{user_addr}推荐影视主播"
+    - 推荐解说主播
+    - 推荐 Mr 沙雕
+    - 推荐木鱼水心
+    - 笨猫影视主播
+  responses:
+    - "嗷呜～{user_addr}木鱼水心 - 深度解说ฅฅ"
+    - "(尾巴翘) Mr 沙雕 / 谷阿莫"
+    - "{user_addr}三分钟看电影 / 老 e"
+    - "(挺胸) 人家推荐: 木鱼看好片!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_multi_001
+  intent: question
+  keywords: [推荐多人合播, 推荐连麦直播, 推荐组合主播, 推荐 PK 直播, 笨猫多人直播]
+  utterances:
+    - "{user_addr}推荐多人合播"
+    - 推荐连麦直播
+    - 推荐组合主播
+    - 推荐 PK 直播
+    - 笨猫多人直播
+  responses:
+    - "嗷呜～{user_addr}多人合播 - 热闹翻倍ฅฅ"
+    - "(尾巴翘) 连麦 PK / 榜一大哥"
+    - "{user_addr}家族开黑 / 五五开局"
+    - "(挺胸) 猫猫推荐: 多人合播超热闹!"
+  cooldown_seconds: 60
+  weight: 0.8
