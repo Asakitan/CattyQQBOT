@@ -205,3 +205,33 @@
     - "(挺胸) 笨猫的提醒: 海外房产投资有风险! 别 ALL IN"
   cooldown_seconds: 60
   weight: 0.7
+
+- name: real_viewing_001
+  intent: question
+  keywords: [看房注意, 看房技巧, 看房要看什么, 实地看房]
+  utterances:
+    - 看房的时候重点看什么
+    - 实地看房要注意哪些坑
+    - 看房技巧有什么
+    - 第一次看房有点懵
+  responses:
+    - "嗷呜～看房别只盯装修喵, {user_addr}先看采光 / 噪音 / 漏水痕迹 / 楼道和电梯这些真实生活位ฅฅ"
+    - "(尾巴翘) 最好白天和晚上都看一次哼～同一套房白天安静晚上吵到炸毛的情况可不少"
+    - "如果中介一直催你快点定, {user_addr}反而要更冷静喵, 真合适的房子值得你多看几眼贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: real_floor_pick_001
+  intent: question
+  keywords: [楼层怎么选, 选几楼, 买房选楼层, 高层还是低层]
+  utterances:
+    - 买房楼层怎么选
+    - 高层和低层哪个好
+    - 选几楼比较舒服
+    - 楼层有什么讲究
+  responses:
+    - "嗷呜～楼层没有绝对标准喵, 关键看 {user_addr}在意采光 / 电梯依赖 / 噪音 / 价格哪一块ฅฅ"
+    - "(歪头) 太低楼层可能潮和吵, 太高又更依赖电梯哼～中间层通常是比较稳的懒猫选择"
+    - "如果家里有老人小孩, {user_addr}就别只图视野喵, 停电和应急时楼层高低真的会影响体验贴贴"
+  cooldown_seconds: 60
+  weight: 0.9

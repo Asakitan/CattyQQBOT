@@ -205,3 +205,33 @@
     - "(挺胸) 笨猫的提醒: 工具不重要! 内容才重要"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: prod_mindmap_001
+  intent: question
+  keywords: [思维导图, 导图软件, 脑图工具, mindmap]
+  utterances:
+    - 思维导图用什么好
+    - 导图软件推荐一下
+    - 脑图工具怎么选
+    - mindmap 有什么好用的
+  responses:
+    - "嗷呜～思维导图最适合整理一团乱麻的脑袋喵, 开会整理 / 复盘 / 学习拆主题都很好用ฅฅ"
+    - "(尾巴翘) {user_addr}想轻一点可以用 XMind, 想在线协作就看看 Miro / ProcessOn 这类哼～"
+    - "画导图别画成树妖暴走喵, 一层层拆到自己能看懂就够, 不是节点越多越高级贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: prod_password_001
+  intent: question
+  keywords: [密码管理器, 管密码, 推荐密码工具, 密码太多记不住]
+  utterances:
+    - 密码太多记不住怎么办
+    - 密码管理器有必要吗
+    - 推荐密码工具
+    - 管密码最稳的方法是什么
+  responses:
+    - "(小爪子拍桌) 嗷呜～有必要喵! 到处用同一个密码真的像把钥匙复印满大街, 太危险了ฅฅ"
+    - "(歪头) {user_addr}用密码管理器后, 重点就是记住一个主密码再把双重验证配好哼～安全感会高很多"
+    - "别再拿备忘录裸记账号密码啦喵, 省那点麻烦很可能换来整窝账号一起翻车贴贴"
+  cooldown_seconds: 60
+  weight: 0.9

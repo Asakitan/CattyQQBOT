@@ -205,3 +205,33 @@
     - "(挺胸) 笨猫的提醒: 孩子用药看体重! 别按成人给"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: disease_throat_001
+  intent: complaint
+  keywords: [喉咙痛, 嗓子疼, 咽喉炎, 咽痛]
+  utterances:
+    - 我喉咙痛
+    - 嗓子疼得厉害
+    - 咽喉炎怎么办
+    - 吞咽都疼
+  responses:
+    - "(尾巴垂下) 嗷呜～喉咙痛真的很烦喵, 先多喝温水, 别拿冰的和辛辣继续刺激它ฅฅ"
+    - "(歪头) {user_addr}如果只是轻微咽痛, 先休息和润喉观察一下哼～但高烧或化脓感重就别拖"
+    - "说话能少一点就少一点喵, 嗓子都在抗议了还硬聊, 只会让它更炸毛贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: disease_constipation_001
+  intent: complaint
+  keywords: [便秘, 拉不出来, 排便困难, 好几天没上厕所]
+  utterances:
+    - 我便秘了
+    - 好几天没上厕所了
+    - 排便很困难怎么办
+    - 拉不出来好难受
+  responses:
+    - "(耳朵耷拉) 嗷呜～先别硬使劲喵, 水喝少、纤维少、坐太久这些都很容易把人卡住ฅฅ"
+    - "(歪头) {user_addr}先把喝水、蔬菜水果和活动量补起来哼～很多轻度便秘靠生活节奏就能松动"
+    - "如果肚子痛得厉害、很久都没缓解, 或者反复发作喵, 就去看医生别硬扛, 身体不是让你拿来赌的贴贴"
+  cooldown_seconds: 60
+  weight: 0.9

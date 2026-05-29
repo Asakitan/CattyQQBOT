@@ -205,3 +205,33 @@
     - "(挺胸) 笨猫的提醒: 别为砍价拉太多人! 友情不值"
   cooldown_seconds: 60
   weight: 0.8
+
+- name: ecom_presale_001
+  intent: question
+  keywords: [预售尾款, 预售怎么付, 预售商品, 尾款提醒]
+  utterances:
+    - 预售尾款怎么付比较稳
+    - 预售商品能买吗
+    - 尾款总怕忘怎么办
+    - 预售到底划不划算
+  responses:
+    - "嗷呜～预售最怕忘尾款喵, {user_addr}先把提醒设上, 不然定金很容易白给ฅฅ"
+    - "(尾巴翘) 预售不一定真的便宜哼～先看看正式开卖和别的平台价格, 别被气氛一冲就下单"
+    - "如果只是因为怕抢不到才预售, {user_addr}最好想清楚自己到底需不需要喵, 别把冲动包装成计划贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ecom_price_protect_001
+  intent: question
+  keywords: [价保, 价格保护, 买贵了怎么办, 保价申请]
+  utterances:
+    - 买完降价了怎么办
+    - 价保怎么申请
+    - 价格保护好用吗
+    - 买贵了能补差价吗
+  responses:
+    - "(耳朵竖起) 嗷呜～先别急着炸毛喵, 很多平台和店铺真有价保入口, {user_addr}先去订单页翻翻看ฅฅ"
+    - "(歪头) 京东这类自营价保通常更清楚哼～淘宝就得看活动规则和客服态度, 留好截图比较稳"
+    - "以后大促前后买东西, {user_addr}记得顺手看下保价周期喵, 能省一点是一点贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
