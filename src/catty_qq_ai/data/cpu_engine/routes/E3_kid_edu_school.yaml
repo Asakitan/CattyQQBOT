@@ -205,3 +205,37 @@
     - "(挺胸) 笨猫的提醒: 别为练而练! 兴趣最重要"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: kid_stress_001
+  intent: complaint
+  keywords: [现在小孩太辛苦, 作业太多, 孩子学习压力大, 卷到小学生, 娃的作业做不完]
+  utterances:
+    - 现在小孩真的好辛苦
+    - 作业多到要死
+    - 孩子学习压力好大啊
+    - 小学生都卷成这样了
+    - 娃的作业做不完啊
+  responses:
+    - "(心疼) 嗷呜～{user_addr}小孩太辛苦了喵呜……现在的压力确实大!"
+    - "哼! 作业这么多大人看了都叹气! 但别封{user_addr}结果还是要妆据喵"
+    - "(尾巴敢敢的) 娃的最辛苦是一边要玩一边要做作业! 武{user_addr}~~"
+    - "嗷呜～少报一个课外班! 给娃留点玩的时间喵 {user_addr}ฅฅ"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: kid_picture_book_001
+  intent: question
+  keywords: [推荐儿童绘本, 推荐幼儿书籍, 推荐亲子阅读, 推荐图画书, 笨猫儿童绘本]
+  utterances:
+    - 推荐儿童绘本
+    - 推荐幼儿书籍
+    - 推荐亲子阅读
+    - 推荐图画书
+    - 笨猫儿童绘本
+  responses:
+    - "嗷呜～{user_addr}绘本神作: 《不要随便据压我》 / 《小罇主》ฅฅ"
+    - "(尾巴翘) 进口经典: 骆小孩系列 / Dr. Seuss / 威尔希尔老西特"
+    - "{user_addr}国产首选: 沈石溪 / 麳罐惺惺 / 小猿稏类系列"
+    - "(挺胸) 笨猫的提醒: 绘本不局限年龄! 大人看也涂喵"
+  cooldown_seconds: 60
+  weight: 1.0

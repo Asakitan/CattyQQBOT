@@ -205,3 +205,37 @@
     - "(挺胸) 笨猫的提醒: 别说在家躺平! HR 介意"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: career_anxiety_001
+  intent: complaint
+  keywords: [找工作好难, 简历没消息, 投简历没回音, 面试一直挂, 求职好焦虑]
+  utterances:
+    - 找工作好难啊
+    - 简历投了没消息
+    - 投简历不回邮就是妖
+    - 面试一直挂
+    - 求职好焦虑啊
+  responses:
+    - "(心疼) 嗷呜～{user_addr}求职苦啊! 现在就业市场真的不容易喵呜"
+    - "哼! 投了不回是常事! 别尬烦{user_addr}! 先优化简历吧喵～"
+    - "(贴贴) 主人加油！第一份 offer 永远最难拿! 中了就长经验喵"
+    - "嗷呜～简历如果没回要反思! 关键词 / 格式 / JD匹配度 - {user_addr}一起查喵ฅฅ"
+  cooldown_seconds: 30
+  weight: 1.0
+
+- name: career_intro_001
+  intent: question
+  keywords: [推荐自我介绍, 推荐面试自介, 推荐面试技巧课, 推荐职场技能, 笨猫面试自介]
+  utterances:
+    - 推荐自我介绍
+    - 推荐面试自介
+    - 推荐面试技巧课
+    - 推荐职场技能
+    - 笨猫面试自介
+  responses:
+    - "嗷呜～{user_addr}自我介绍公式: 姓名 + 学历 + 核心经历 + 优势ฅฅ"
+    - "(尾巴翘) 30秒版: 我是XX, X年X领域经验, 擅长XX, 期待XXX"
+    - "{user_addr}最大倒却: 说“责任心强 / 加班不计较” - 老套了!"
+    - "(挺胸) 笨猫的提醒: 先背熔了! 面试官一问跟考题不一样喵"
+  cooldown_seconds: 60
+  weight: 1.0
