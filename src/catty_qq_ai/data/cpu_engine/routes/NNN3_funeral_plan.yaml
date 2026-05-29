@@ -1,0 +1,206 @@
+# 殡葬规划 routes (S6 R675 NLU 节点扩充, 第六十七周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: fp_funeral_home_001
+  intent: question
+  keywords: [推荐殡仪馆, 推荐殡仪馆流程, 推荐告别仪式, 推荐殡仪服务, 笨猫殡仪馆]
+  utterances:
+    - 推荐殡仪馆
+    - 推荐殡仪馆流程
+    - 推荐告别仪式
+    - 推荐殡仪服务
+    - 笨猫殡仪馆
+  responses:
+    - "嗷呜～{user_addr}接灵 / 入殓 / 告别 / 火化 / 安葬ฅฅ"
+    - "(尾巴轻轻) 一条龙: 遗体接运→冷藏→化妆→告别厅"
+    - "{user_addr}选择正规殡仪馆 / 提前预约时间"
+    - "(小声) 笨猫推荐: 提前问清流程, 别慌喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_cremation_001
+  intent: question
+  keywords: [推荐火化, 推荐遗体处理, 推荐火葬, 推荐骨灰盒, 笨猫火化]
+  utterances:
+    - 推荐火化
+    - 推荐遗体处理
+    - 推荐火葬
+    - 推荐骨灰盒
+    - 笨猫火化
+  responses:
+    - "嗷呜～{user_addr}火化是国内主流方式ฅฅ"
+    - "(尾巴翘) 骨灰盒: 红木 / 玉石 / 陶瓷 都可选"
+    - "{user_addr}火化证明 / 死亡证明要保管好"
+    - "(挺胸) 笨猫推荐: 红木骨灰盒经典稳妥!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_cemetery_001
+  intent: question
+  keywords: [推荐公墓, 推荐公墓选择, 推荐墓地, 推荐陵园, 笨猫公墓]
+  utterances:
+    - 推荐公墓
+    - 推荐公墓选择
+    - 推荐墓地
+    - 推荐陵园
+    - 笨猫公墓
+  responses:
+    - "嗷呜～{user_addr}选公墓看位置 / 价格 / 管理ฅฅ"
+    - "(尾巴翘) 经营性公墓 / 公益性公墓 区别看证"
+    - "{user_addr}北京八宝山 / 上海福寿园 老牌"
+    - "(挺胸) 笨猫推荐: 离家近 + 风景好 + 正规证!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_eco_burial_001
+  intent: question
+  keywords: [推荐海葬, 推荐树葬, 推荐生态葬, 推荐花葬, 笨猫生态葬]
+  utterances:
+    - 推荐海葬
+    - 推荐树葬
+    - 推荐生态葬
+    - 推荐花葬
+    - 笨猫生态葬
+  responses:
+    - "嗷呜～{user_addr}海葬 / 树葬 / 花坛葬 环保ฅฅ"
+    - "(尾巴轻摆) 很多城市生态葬有补贴"
+    - "{user_addr}回归自然 / 不占土地 / 仪式感也够"
+    - "(小声) 笨猫推荐: 树葬最温柔, 像睡在森林里喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_living_will_001
+  intent: question
+  keywords: [推荐生前预嘱, 推荐预立医疗指示, 推荐安宁疗护, 推荐尊严死, 笨猫生前预嘱]
+  utterances:
+    - 推荐生前预嘱
+    - 推荐预立医疗指示
+    - 推荐安宁疗护
+    - 推荐尊严死
+    - 笨猫生前预嘱
+  responses:
+    - "嗷呜～{user_addr}生前预嘱=自己决定临终方式ฅฅ"
+    - "(尾巴轻轻) 选择我的医疗 五个愿望 模板"
+    - "{user_addr}是否插管 / 是否抢救 / 安宁疗护"
+    - "(小声) 笨猫推荐: 早点写好, 给家人少一份难"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_elder_will_001
+  intent: question
+  keywords: [推荐老年遗嘱, 推荐遗嘱公证, 推荐遗嘱库, 推荐继承安排, 笨猫遗嘱]
+  utterances:
+    - 推荐老年遗嘱
+    - 推荐遗嘱公证
+    - 推荐遗嘱库
+    - 推荐继承安排
+    - 笨猫遗嘱
+  responses:
+    - "嗷呜～{user_addr}自书 / 代书 / 公证 / 录音录像ฅฅ"
+    - "(尾巴翘) 中华遗嘱库 60+免费登记"
+    - "{user_addr}写清财产 / 继承人 / 见证人"
+    - "(挺胸) 笨猫推荐: 公证遗嘱效力最强!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_shroud_001
+  intent: question
+  keywords: [推荐寿衣, 推荐寿衣选择, 推荐老衣, 推荐入殓服, 笨猫寿衣]
+  utterances:
+    - 推荐寿衣
+    - 推荐寿衣选择
+    - 推荐老衣
+    - 推荐入殓服
+    - 笨猫寿衣
+  responses:
+    - "嗷呜～{user_addr}寿衣按 五领三腰 / 七领五腰 套数ฅฅ"
+    - "(尾巴轻摆) 材质: 棉 / 真丝 / 织锦缎 都常见"
+    - "{user_addr}颜色避大红, 用蓝 / 灰 / 古铜"
+    - "(小声) 笨猫推荐: 老人生前选好, 心里更踏实"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fp_ceremony_001
+  intent: question
+  keywords: [推荐葬礼仪式, 推荐告别会, 推荐追悼会, 推荐葬礼流程, 笨猫葬礼]
+  utterances:
+    - 推荐葬礼仪式
+    - 推荐告别会
+    - 推荐追悼会
+    - 推荐葬礼流程
+    - 笨猫葬礼
+  responses:
+    - "嗷呜～{user_addr}默哀 / 致辞 / 献花 / 鞠躬ฅฅ"
+    - "(尾巴轻轻) 主持人引导, 亲属答谢"
+    - "{user_addr}遗像 / 挽联 / 哀乐 / 白菊 都备齐"
+    - "(小声) 笨猫推荐: 流程别太长, 亲属体力顾着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_wake_001
+  intent: question
+  keywords: [推荐守灵, 推荐守灵流程, 推荐灵堂布置, 推荐守夜, 笨猫守灵]
+  utterances:
+    - 推荐守灵
+    - 推荐守灵流程
+    - 推荐灵堂布置
+    - 推荐守夜
+    - 笨猫守灵
+  responses:
+    - "嗷呜～{user_addr}灵堂: 遗像 / 长明灯 / 香炉 / 供品ฅฅ"
+    - "(尾巴轻摆) 一般守 1-3 晚, 亲属轮值"
+    - "{user_addr}白布 / 黑纱 / 素花 别用艳色"
+    - "(小声) 笨猫推荐: 留人陪着, 灯别灭喵～"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fp_seven_days_001
+  intent: question
+  keywords: [推荐七日祭, 推荐头七, 推荐做七, 推荐七七四十九, 笨猫做七]
+  utterances:
+    - 推荐七日祭
+    - 推荐头七
+    - 推荐做七
+    - 推荐七七四十九
+    - 笨猫做七
+  responses:
+    - "嗷呜～{user_addr}头七 / 三七 / 五七 / 七七ฅฅ"
+    - "(尾巴轻轻) 各地习俗不同, 问问长辈"
+    - "{user_addr}烧纸 / 供饭 / 念经 / 上坟"
+    - "(小声) 笨猫推荐: 重在心意, 别太铺张"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fp_grave_care_001
+  intent: question
+  keywords: [推荐墓地保养, 推荐扫墓, 推荐清明祭扫, 推荐墓碑维护, 笨猫扫墓]
+  utterances:
+    - 推荐墓地保养
+    - 推荐扫墓
+    - 推荐清明祭扫
+    - 推荐墓碑维护
+    - 笨猫扫墓
+  responses:
+    - "嗷呜～{user_addr}清明 / 冬至 / 忌日 三大祭ฅฅ"
+    - "(尾巴翘) 擦墓碑 / 除杂草 / 添新土"
+    - "{user_addr}鲜花 / 水果 / 纸钱 / 默哀三鞠躬"
+    - "(挺胸) 笨猫推荐: 每年至少去两次, 别让墓荒了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fp_online_memorial_001
+  intent: question
+  keywords: [推荐网络祭祀, 推荐云祭扫, 推荐网上墓园, 推荐数字纪念, 笨猫网上祭祀]
+  utterances:
+    - 推荐网络祭祀
+    - 推荐云祭扫
+    - 推荐网上墓园
+    - 推荐数字纪念
+    - 笨猫网上祭祀
+  responses:
+    - "嗷呜～{user_addr}心纪奠 / 无尽思念 / 各地民政平台ฅฅ"
+    - "(尾巴轻摆) 建纪念馆 / 上传照片 / 留言献花"
+    - "{user_addr}异地家人也能一起祭, 很方便"
+    - "(小声) 笨猫推荐: 实地+网络 双线, 心意更全"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,206 @@
+# 老人 App routes (S6 R673 NLU 节点扩充, 第六十七周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sa_wechat_001
+  intent: question
+  keywords: [推荐老人版微信, 推荐微信关怀模式, 推荐老人微信, 推荐微信大字版, 笨猫老人微信]
+  utterances:
+    - 推荐老人版微信
+    - 推荐微信关怀模式
+    - 推荐老人微信
+    - 推荐微信大字版
+    - 笨猫老人微信
+  responses:
+    - "嗷呜～{user_addr}微信 - 我-设置-关怀模式ฅฅ"
+    - "(尾巴翘) 字体加大 / 按钮变粗 / 语音转文字"
+    - "{user_addr}视频通话教爷爷奶奶最实用"
+    - "(挺胸) 笨猫推荐: 直接开关怀模式!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_care_mode_001
+  intent: question
+  keywords: [推荐关怀模式, 推荐老人模式, 推荐手机老人模式, 推荐简易模式, 笨猫关怀模式]
+  utterances:
+    - 推荐关怀模式
+    - 推荐老人模式
+    - 推荐手机老人模式
+    - 推荐简易模式
+    - 笨猫关怀模式
+  responses:
+    - "嗷呜～{user_addr}华为/小米/OPPO 都有简易模式ฅฅ"
+    - "(尾巴翘) 大图标 / 大字体 / SOS 紧急呼叫"
+    - "{user_addr}设置-辅助功能-简易模式 一键开"
+    - "(挺胸) 笨猫推荐: 系统级最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_big_font_001
+  intent: question
+  keywords: [推荐大字体 App, 推荐大屏 App, 推荐老人字体, 推荐老花眼 App, 笨猫大字体]
+  utterances:
+    - 推荐大字体 App
+    - 推荐大屏 App
+    - 推荐老人字体
+    - 推荐老花眼 App
+    - 笨猫大字体
+  responses:
+    - "嗷呜～{user_addr}系统设置-显示-字体大小ฅฅ"
+    - "(尾巴翘) 大字版浏览器 / 大字版新闻"
+    - "{user_addr}今日头条极速版 / UC 大字版"
+    - "(挺胸) 笨猫推荐: 先调系统字体!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_health_001
+  intent: question
+  keywords: [推荐老人养生 App, 推荐养生堂, 推荐中医养生, 推荐健康养生, 笨猫养生 App]
+  utterances:
+    - 推荐老人养生 App
+    - 推荐养生堂
+    - 推荐中医养生
+    - 推荐健康养生
+    - 笨猫养生 App
+  responses:
+    - "嗷呜～{user_addr}养生堂 / 丁香医生ฅฅ"
+    - "(尾巴翘) 央视频-养生堂 / 健康之路"
+    - "{user_addr}注意分辨!别信偏方"
+    - "(挺胸) 笨猫推荐: 丁香医生最靠谱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_fitness_001
+  intent: question
+  keywords: [推荐老人健身 App, 推荐老人运动, 推荐老人体操, 推荐八段锦, 笨猫老人健身]
+  utterances:
+    - 推荐老人健身 App
+    - 推荐老人运动
+    - 推荐老人体操
+    - 推荐八段锦
+    - 笨猫老人健身
+  responses:
+    - "嗷呜～{user_addr}Keep - 有老年专区ฅฅ"
+    - "(尾巴翘) 八段锦 / 太极 / 五禽戏视频"
+    - "{user_addr}B 站搜「八段锦慢动作」"
+    - "(挺胸) 笨猫推荐: 跟着视频练最方便!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_square_dance_001
+  intent: question
+  keywords: [推荐老人广场舞, 推荐糖豆广场舞, 推荐广场舞 App, 推荐广场舞视频, 笨猫广场舞]
+  utterances:
+    - 推荐老人广场舞
+    - 推荐糖豆广场舞
+    - 推荐广场舞 App
+    - 推荐广场舞视频
+    - 笨猫广场舞
+  responses:
+    - "嗷呜～{user_addr}糖豆 - 广场舞祖师爷ฅฅ"
+    - "(尾巴翘) 99 广场舞 / 就爱广场舞"
+    - "{user_addr}抖音搜「广场舞教学」也行"
+    - "(挺胸) 笨猫推荐: 糖豆 App 第一选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_short_video_001
+  intent: question
+  keywords: [推荐老人短视频, 推荐抖音极速版, 推荐快手极速版, 推荐老人刷视频, 笨猫老人短视频]
+  utterances:
+    - 推荐老人短视频
+    - 推荐抖音极速版
+    - 推荐快手极速版
+    - 推荐老人刷视频
+    - 笨猫老人短视频
+  responses:
+    - "嗷呜～{user_addr}抖音极速版 / 快手极速版ฅฅ"
+    - "(尾巴翘) 界面简单 / 字体大 / 还能赚零花"
+    - "{user_addr}注意防沉迷!别刷一整天"
+    - "(挺胸) 笨猫推荐: 抖音极速版上手快!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_chess_001
+  intent: question
+  keywords: [推荐老人棋牌, 推荐老人象棋, 推荐老人麻将, 推荐天天象棋, 笨猫老人棋牌]
+  utterances:
+    - 推荐老人棋牌
+    - 推荐老人象棋
+    - 推荐老人麻将
+    - 推荐天天象棋
+    - 笨猫老人棋牌
+  responses:
+    - "嗷呜～{user_addr}天天象棋 / JJ 斗地主ฅฅ"
+    - "(尾巴翘) 中国象棋 / 欢乐麻将 / 微乐"
+    - "{user_addr}别玩带充值的!纯娱乐版"
+    - "(挺胸) 笨猫推荐: 天天象棋免费纯净!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_radio_001
+  intent: question
+  keywords: [推荐老人收音机, 推荐喜马拉雅, 推荐蜻蜓 FM, 推荐老人听书, 笨猫老人收音机]
+  utterances:
+    - 推荐老人收音机
+    - 推荐喜马拉雅
+    - 推荐蜻蜓 FM
+    - 推荐老人听书
+    - 笨猫老人收音机
+  responses:
+    - "嗷呜～{user_addr}喜马拉雅 - 听书祖师爷ฅฅ"
+    - "(尾巴翘) 蜻蜓 FM / 懒人听书 / 央广云听"
+    - "{user_addr}评书 / 戏曲 / 新闻 全都有"
+    - "(挺胸) 笨猫推荐: 喜马拉雅评书区!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_medical_001
+  intent: question
+  keywords: [推荐老人医疗 App, 推荐挂号 App, 推荐健康码, 推荐医保 App, 笨猫老人医疗]
+  utterances:
+    - 推荐老人医疗 App
+    - 推荐挂号 App
+    - 推荐健康码
+    - 推荐医保 App
+    - 笨猫老人医疗
+  responses:
+    - "嗷呜～{user_addr}国家医保服务平台 - 官方ฅฅ"
+    - "(尾巴翘) 微医 / 好大夫在线 / 平安好医生"
+    - "{user_addr}各地都有「健康XX」官方 App"
+    - "(挺胸) 笨猫推荐: 认准官方蓝标!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_anti_fraud_001
+  intent: question
+  keywords: [推荐老人金融防诈骗, 推荐国家反诈, 推荐老人防骗, 推荐反诈中心, 笨猫防诈骗]
+  utterances:
+    - 推荐老人金融防诈骗
+    - 推荐国家反诈
+    - 推荐老人防骗
+    - 推荐反诈中心
+    - 笨猫防诈骗
+  responses:
+    - "嗷呜～{user_addr}国家反诈中心 - 必装!ฅฅ"
+    - "(尾巴翘) 来电预警 / 短信识别 / 一键举报"
+    - "{user_addr}爷爷奶奶手机必须装这个"
+    - "(挺胸) 笨猫推荐: 国家反诈中心第一位!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_contacts_001
+  intent: question
+  keywords: [推荐老人通讯录, 推荐大字通讯录, 推荐老人电话本, 推荐一键拨号, 笨猫老人通讯录]
+  utterances:
+    - 推荐老人通讯录
+    - 推荐大字通讯录
+    - 推荐老人电话本
+    - 推荐一键拨号
+    - 笨猫老人通讯录
+  responses:
+    - "嗷呜～{user_addr}系统自带通讯录-开简易模式ฅฅ"
+    - "(尾巴翘) 桌面挂亲情号一键拨"
+    - "{user_addr}华为/小米 都有「亲情卡片」"
+    - "(挺胸) 笨猫推荐: 桌面直接放儿女号码!"
+  cooldown_seconds: 60
+  weight: 1.0

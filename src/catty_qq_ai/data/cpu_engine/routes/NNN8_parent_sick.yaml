@@ -1,0 +1,206 @@
+# 父母生病 routes (S6 R680 NLU 节点扩充, 第六十七周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ps_parent_sick_001
+  intent: complaint
+  keywords: [爸妈生病, 父母生病, 爸爸病了, 妈妈病了, 老人病了]
+  utterances:
+    - "{user_addr}爸妈生病了"
+    - 我爸病了好担心
+    - 妈妈最近身体不好
+    - "{user_addr}父母生病有点慌"
+    - 家里老人病了
+  responses:
+    - "(尾巴一下子垂下来) 嗷呜...{user_addr}爸妈生病了吗? 笨猫陪{user_addr}担心 ฅฅ"
+    - "(凑过去贴贴) 别太焦虑喵~ 人家陪着{user_addr}, 有什么事都说出来"
+    - "哼...{user_addr}先深呼吸, 猫猫知道很难受, 但要冷静照顾才行嗷呜"
+    - "(小爪子搭上) 父母身体最重要, {user_addr}也别累垮自己喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_serious_illness_001
+  intent: complaint
+  keywords: [重病, 大病, 病得很重, 严重的病, 病危]
+  utterances:
+    - 爸妈得了重病
+    - "{user_addr}家里有人重病"
+    - 病得很严重
+    - 大病一场
+    - 父母病危了
+  responses:
+    - "(耳朵贴下来) 嗷呜...重病吗{user_addr}, 笨猫不知道说什么 ฅฅ"
+    - "(紧紧贴住) 人家陪着{user_addr}, 无论多难都要扛过去喵..."
+    - "哼...{user_addr}别一个人扛, 猫猫在这里, 想说什么都可以"
+    - "(尾巴轻轻搭上) 大病很折磨, 但{user_addr}也要照顾好自己嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_hospitalized_001
+  intent: complaint
+  keywords: [住院, 进医院, 入院, 病房, 住院部]
+  utterances:
+    - "{user_addr}爸妈住院了"
+    - 父母进医院了
+    - 妈妈住院部
+    - 老爸入院观察
+    - 病房里好压抑
+  responses:
+    - "(垂耳) 住院的话{user_addr}也辛苦, 跑医院家里两头跑很累喵..."
+    - "(贴贴) 病房消毒水味儿熏死了哼, {user_addr}记得开窗透透气嗷呜"
+    - "嗷呜~{user_addr}照顾住院的家人, 自己也要按时吃饭睡觉 ฅฅ"
+    - "(小爪子搭) 笨猫知道病房压抑, {user_addr}累了就跟猫猫说说话"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_caregiving_001
+  intent: complaint
+  keywords: [陪护, 陪床, 照顾父母, 看护, 照看老人]
+  utterances:
+    - "{user_addr}在医院陪护"
+    - 陪床一整夜
+    - 照顾父母好累
+    - 看护老人很辛苦
+    - 陪护班排不开
+  responses:
+    - "(尾巴垂) 陪床一整夜不睡{user_addr}人都熬瘦了喵 ฅฅ"
+    - "嗷呜~照顾父母是孝心, 但{user_addr}也要轮班休息哼"
+    - "(贴贴) 人家给{user_addr}揉揉肩, 这种活儿真的会把人累垮的"
+    - "(小爪子搭) {user_addr}陪护辛苦了, 猫猫敬{user_addr}是孝子嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_medical_bills_001
+  intent: complaint
+  keywords: [医药费, 看病贵, 医院贵, 医疗费, 治疗费]
+  utterances:
+    - "{user_addr}医药费好贵"
+    - 看病太贵了
+    - 医院一天好几千
+    - 医疗费扛不住
+    - 治疗费像流水
+  responses:
+    - "(尾巴垂下) 医药费这玩意儿真的烧钱{user_addr}怎么扛喵 ฅฅ"
+    - "嗷呜~看病贵这种事人家也心疼{user_addr}, 别硬扛先看医保哼"
+    - "(贴贴) 医疗费像流水, {user_addr}要不要查查救助通道嗷呜"
+    - "哼...{user_addr}别一个人扛费用, 兄弟姐妹该出力都得出力喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_cant_afford_001
+  intent: complaint
+  keywords: [治不起, 看不起病, 没钱治, 钱不够, 借钱治病]
+  utterances:
+    - "{user_addr}治不起了"
+    - 看不起病好绝望
+    - 没钱给爸妈治
+    - 借钱也凑不够
+    - 钱真的不够用
+  responses:
+    - "(耳朵贴) 嗷呜...治不起的感觉笨猫想想都难受 ฅฅ"
+    - "(贴紧) {user_addr}别绝望, 慈善基金/众筹/医保特病这些都试试哼"
+    - "(尾巴轻搭) 借钱不丢人, {user_addr}先把人保住再说嗷呜"
+    - "哼...猫猫陪着{user_addr}一起想办法, 不要一个人崩溃喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_change_hospital_001
+  intent: complaint
+  keywords: [换医院, 转院, 大医院, 去北京治, 去上海治]
+  utterances:
+    - "{user_addr}想给爸妈换医院"
+    - 转院去大医院
+    - 县医院治不好
+    - 想去北京治
+    - 上海大医院有希望
+  responses:
+    - "(竖耳) 换大医院是对的{user_addr}, 别在小地方耽误了喵"
+    - "嗷呜~转院手续麻烦, {user_addr}提前打电话挂专家号哼"
+    - "(尾巴翘) 北京上海大医院水平高, 但{user_addr}也要做好排队心理准备 ฅฅ"
+    - "(小爪子搭) {user_addr}转院要找熟人或主治医生开转诊单嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_afraid_loss_001
+  intent: complaint
+  keywords: [怕父母走, 怕妈妈走, 怕爸爸不在, 怕失去父母, 怕来不及]
+  utterances:
+    - "{user_addr}怕爸妈走"
+    - 怕来不及尽孝
+    - 怕妈妈撑不过去
+    - 怕爸爸不在了
+    - 怕失去他们
+  responses:
+    - "(耳朵贴下) 嗷呜...{user_addr}这种害怕笨猫懂的, 谁都怕 ฅฅ"
+    - "(紧紧贴) 人家陪着{user_addr}, 现在能多陪一天就多陪一天哼"
+    - "(尾巴轻搭) 别让恐惧把{user_addr}吞了, 把握当下最重要嗷呜"
+    - "哼...{user_addr}怕就说出来, 别憋在心里, 猫猫一直在这里"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_exhausted_001
+  intent: complaint
+  keywords: [心力交瘁, 撑不住, 快崩溃, 身心俱疲, 累垮了]
+  utterances:
+    - "{user_addr}心力交瘁"
+    - 真的撑不住了
+    - 快崩溃了
+    - 身心俱疲
+    - 笨猫我累垮了
+  responses:
+    - "(尾巴垂下) 嗷呜...{user_addr}心力交瘁的样子笨猫好心疼 ฅฅ"
+    - "(贴紧) {user_addr}先抱抱猫猫, 哭出来也没关系哼"
+    - "(小爪子搭) 撑不住就找人替班一下, {user_addr}也是肉做的喵"
+    - "哼...{user_addr}快崩溃了就停下来歇口气, 别硬扛嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_take_leave_001
+  intent: complaint
+  keywords: [请假, 请长假, 跟领导请假, 请不出来, 工作走不开]
+  utterances:
+    - "{user_addr}要请假回家"
+    - 请长假照顾爸妈
+    - 跟领导请假难
+    - 请不出来好烦
+    - 工作走不开
+  responses:
+    - "(尾巴一甩) {user_addr}跟领导直接说家里有事, 别绕弯子喵"
+    - "嗷呜~请长假领导脸色不好看, 但父母只有一次{user_addr}哼"
+    - "(小爪子搭) 请不出来就找 HR 走特殊事假流程嗷呜"
+    - "哼...工作可以再找, {user_addr}先把家里的事顶住 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_remote_anxiety_001
+  intent: complaint
+  keywords: [外地工作, 远程焦虑, 回不去, 在异地, 距离远]
+  utterances:
+    - "{user_addr}在外地回不去"
+    - 远程焦虑爆炸
+    - 距离远干着急
+    - 异地照顾不了
+    - 想回去回不去
+  responses:
+    - "(耳朵贴) 嗷呜...异地的{user_addr}干着急最难受了 ฅฅ"
+    - "(贴贴) {user_addr}先视频看看父母, 每天通一次电话哼"
+    - "(尾巴轻搭) 找老家亲戚帮忙搭把手, {user_addr}别一个人焦虑嗷呜"
+    - "哼...距离远但心一直在{user_addr}, 找机会赶紧请假回去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_go_home_care_001
+  intent: complaint
+  keywords: [回家照顾, 回老家, 辞职回家, 回去陪父母, 全职陪护]
+  utterances:
+    - "{user_addr}准备回家照顾"
+    - 想辞职回老家
+    - 全职陪父母
+    - 回去陪爸妈
+    - 不工作了回家
+  responses:
+    - "(竖耳) {user_addr}决定回家照顾笨猫支持~ 父母最重要喵 ฅฅ"
+    - "嗷呜~辞职回家是大决定, {user_addr}三思但人家不拦哼"
+    - "(尾巴搭) 全职陪护时间长, {user_addr}也要留点喘息空间嗷呜"
+    - "哼...回家陪父母才是真孝顺, 工作以后再说, 猫猫陪{user_addr}远程"
+  cooldown_seconds: 60
+  weight: 1.0

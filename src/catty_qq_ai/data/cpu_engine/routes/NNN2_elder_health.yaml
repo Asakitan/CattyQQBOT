@@ -1,0 +1,206 @@
+# 老人保健 routes (S6 R674 NLU 节点扩充, 第六十七周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: eh_calcium_001
+  intent: question
+  keywords: [推荐老人钙片, 推荐钙片, 推荐补钙, 推荐 Caltrate, 笨猫钙片]
+  utterances:
+    - 推荐老人钙片
+    - 推荐钙片
+    - 推荐补钙
+    - 推荐 Caltrate
+    - 笨猫钙片
+  responses:
+    - "嗷呜～{user_addr}钙尔奇 Caltrate - 老牌ฅฅ"
+    - "(尾巴翘) 安利纽崔莱 / 汤臣倍健"
+    - "{user_addr}钙+VD3 - 吸收好"
+    - "(挺胸) 笨猫推荐: 钙尔奇D 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_fishoil_001
+  intent: question
+  keywords: [推荐老人鱼油, 推荐鱼油, 推荐 Omega3, 推荐深海鱼油, 笨猫鱼油]
+  utterances:
+    - 推荐老人鱼油
+    - 推荐鱼油
+    - 推荐 Omega3
+    - 推荐深海鱼油
+    - 笨猫鱼油
+  responses:
+    - "嗷呜～{user_addr}Move Free / Swisse - 进口ฅฅ"
+    - "(尾巴翘) 汤臣倍健 / Nature Made"
+    - "{user_addr}EPA+DHA 比例看清楚"
+    - "(挺胸) 笨猫推荐: Swisse 高浓度!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_melatonin_001
+  intent: question
+  keywords: [推荐老人褪黑素, 推荐褪黑素, 推荐助眠, 推荐 Melatonin, 笨猫褪黑素]
+  utterances:
+    - 推荐老人褪黑素
+    - 推荐褪黑素
+    - 推荐助眠
+    - 推荐 Melatonin
+    - 笨猫褪黑素
+  responses:
+    - "嗷呜～{user_addr}Natrol / GNC - 美国主流ฅฅ"
+    - "(尾巴翘) 脑白金 - 国内经典"
+    - "{user_addr}1-3mg 起步 / 别长期依赖"
+    - "(挺胸) 笨猫提醒: 先调作息再吃药!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: eh_glucosamine_001
+  intent: question
+  keywords: [推荐老人氨糖, 推荐氨糖, 推荐关节, 推荐软骨素, 笨猫氨糖]
+  utterances:
+    - 推荐老人氨糖
+    - 推荐氨糖
+    - 推荐关节
+    - 推荐软骨素
+    - 笨猫氨糖
+  responses:
+    - "嗷呜～{user_addr}Move Free 维骨力 - 老牌ฅฅ"
+    - "(尾巴翘) Schiff / GNC / 汤臣倍健"
+    - "{user_addr}氨糖+软骨素+MSM 三合一"
+    - "(挺胸) 笨猫推荐: Move Free 绿瓶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_bp_monitor_001
+  intent: question
+  keywords: [推荐老人血压计, 推荐血压计, 推荐欧姆龙, 推荐鱼跃血压计, 笨猫血压计]
+  utterances:
+    - 推荐老人血压计
+    - 推荐血压计
+    - 推荐欧姆龙
+    - 推荐鱼跃血压计
+    - 笨猫血压计
+  responses:
+    - "嗷呜～{user_addr}欧姆龙 Omron - 全球第一ฅฅ"
+    - "(尾巴翘) 鱼跃 / 九安 - 国产可靠"
+    - "{user_addr}上臂式比腕式准!"
+    - "(挺胸) 笨猫推荐: 欧姆龙 7136 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_glucose_meter_001
+  intent: question
+  keywords: [推荐老人血糖仪, 推荐血糖仪, 推荐罗氏, 推荐强生稳豪, 笨猫血糖仪]
+  utterances:
+    - 推荐老人血糖仪
+    - 推荐血糖仪
+    - 推荐罗氏
+    - 推荐强生稳豪
+    - 笨猫血糖仪
+  responses:
+    - "嗷呜～{user_addr}罗氏 Accu-Chek - 金标准ฅฅ"
+    - "(尾巴翘) 强生稳豪 / 雅培"
+    - "{user_addr}三诺 / 鱼跃 - 性价比"
+    - "(挺胸) 笨猫推荐: 罗氏卓越精采!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_hearing_aid_001
+  intent: question
+  keywords: [推荐老人助听器, 推荐助听器, 推荐索尼助听器, 推荐瑞声达, 笨猫助听器]
+  utterances:
+    - 推荐老人助听器
+    - 推荐助听器
+    - 推荐索尼助听器
+    - 推荐瑞声达
+    - 笨猫助听器
+  responses:
+    - "嗷呜～{user_addr}瑞声达 ReSound - 高端ฅฅ"
+    - "(尾巴翘) 索尼 Sony CRE-C10 - 平价"
+    - "{user_addr}峰力 Phonak / 西嘉 Signia"
+    - "(挺胸) 笨猫提醒: 先验配再买!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: eh_wheelchair_001
+  intent: question
+  keywords: [推荐老人轮椅, 推荐轮椅, 推荐电动轮椅, 推荐鱼跃轮椅, 笨猫轮椅]
+  utterances:
+    - 推荐老人轮椅
+    - 推荐轮椅
+    - 推荐电动轮椅
+    - 推荐鱼跃轮椅
+    - 笨猫轮椅
+  responses:
+    - "嗷呜～{user_addr}鱼跃 / 互邦 - 国产经典ฅฅ"
+    - "(尾巴翘) 可孚 / 凯洋 - 轻便折叠"
+    - "{user_addr}电动选英洛华 / 贝珍"
+    - "(挺胸) 笨猫推荐: 鱼跃 H058B 性价比!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: eh_cane_001
+  intent: question
+  keywords: [推荐老人拐杖, 推荐拐杖, 推荐手杖, 推荐四脚拐, 笨猫拐杖]
+  utterances:
+    - 推荐老人拐杖
+    - 推荐拐杖
+    - 推荐手杖
+    - 推荐四脚拐
+    - 笨猫拐杖
+  responses:
+    - "嗷呜～{user_addr}可孚 / 鱼跃 - 国产主流ฅฅ"
+    - "(尾巴翘) 四脚拐稳 / 单脚拐轻"
+    - "{user_addr}带 LED 灯+座椅升级款"
+    - "(挺胸) 笨猫推荐: 铝合金可调高!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: eh_bathroom_handrail_001
+  intent: question
+  keywords: [推荐老人浴室扶手, 推荐扶手, 推荐防滑垫, 推荐浴室安全, 笨猫扶手]
+  utterances:
+    - 推荐老人浴室扶手
+    - 推荐扶手
+    - 推荐防滑垫
+    - 推荐浴室安全
+    - 笨猫扶手
+  responses:
+    - "嗷呜～{user_addr}TOTO / 科勒 - 大牌靠谱ฅฅ"
+    - "(尾巴翘) 304 不锈钢扶手 / 吸盘式"
+    - "{user_addr}+防滑垫 / 沐浴椅 套装"
+    - "(挺胸) 笨猫提醒: 浴室摔倒最危险!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: eh_emergency_call_001
+  intent: question
+  keywords: [推荐智能呼叫器, 推荐老人呼叫, 推荐 SOS, 推荐紧急呼叫, 笨猫呼叫器]
+  utterances:
+    - 推荐智能呼叫器
+    - 推荐老人呼叫
+    - 推荐 SOS
+    - 推荐紧急呼叫
+    - 笨猫呼叫器
+  responses:
+    - "嗷呜～{user_addr}小度 / 小爱 - 一键呼叫ฅฅ"
+    - "(尾巴翘) 华为儿童手表给老人也行"
+    - "{user_addr}带 GPS+跌倒检测 优先"
+    - "(挺胸) 笨猫推荐: 智能手表+家庭组!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: eh_insurance_001
+  intent: question
+  keywords: [推荐老人医保, 推荐医保, 推荐惠民保, 推荐百万医疗, 笨猫医保]
+  utterances:
+    - 推荐老人医保
+    - 推荐医保
+    - 推荐惠民保
+    - 推荐百万医疗
+    - 笨猫医保
+  responses:
+    - "嗷呜～{user_addr}城市惠民保 - 便宜门槛低ฅฅ"
+    - "(尾巴翘) 百万医疗看年龄 / 多数 65 截止"
+    - "{user_addr}防癌险 / 意外险 补漏"
+    - "(挺胸) 笨猫推荐: 先社保后惠民保!"
+  cooldown_seconds: 60
+  weight: 0.9

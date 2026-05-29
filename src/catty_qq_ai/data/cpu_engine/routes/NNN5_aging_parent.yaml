@@ -1,0 +1,206 @@
+# 父母老了 routes (S6 R677 NLU 节点扩充, 第六十七周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ap_parents_aging_001
+  intent: complaint
+  keywords: [父母老了, 爸妈老了, 老了, 父母变老, 看着父母老]
+  utterances:
+    - "{user_addr}父母真的老了"
+    - 爸妈一下子就老了
+    - 看着父母老下去
+    - 突然发现父母老了
+    - 父母老得好快
+  responses:
+    - "(尾巴垂下贴过来)嗷呜～{user_addr}别难过, 笨猫陪{user_addr}ฅฅ"
+    - "唔…猫猫懂这种感觉, {user_addr}多回家看看嘛"
+    - "(轻轻蹭手背)父母老了就是要多陪陪喵, 别留遗憾"
+    - "哼～{user_addr}还能察觉到, 已经比很多人好啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_white_hair_001
+  intent: complaint
+  keywords: [白头发, 头发白了, 白发多了, 一头白发, 鬓角白]
+  utterances:
+    - 我妈白头发好多
+    - "{user_addr}爸白头发又多了"
+    - 父母头发都白了
+    - 鬓角都白了
+    - 看到妈一头白发
+  responses:
+    - "(耳朵软软地耷拉)嗷呜～看着确实揪心喵"
+    - "唔…白头发是岁月留的痕迹, {user_addr}多陪陪嘛"
+    - "(小爪子捂胸口)猫猫看了都心疼{user_addr}"
+    - "哼～别盯着白头发了, 染一染或者就这样也好看啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_bent_back_001
+  intent: complaint
+  keywords: [腰弯了, 背驼了, 弯腰, 直不起腰, 驼背]
+  utterances:
+    - 我爸腰都弯了
+    - 妈背驼了
+    - 父母弯腰好心疼
+    - 直不起腰了
+    - 看着爸驼背
+  responses:
+    - "(尾巴轻甩)嗷呜～年纪上来骨头都酸的喵"
+    - "{user_addr}劝劝父母别干重活了, 别硬撑"
+    - "(小声)猫猫觉得{user_addr}该买个按摩仪给爸妈"
+    - "哼～多陪走走散散步, 比啥都强"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_hearing_loss_001
+  intent: complaint
+  keywords: [听力下降, 耳朵不好, 听不清, 耳背, 喊好几遍]
+  utterances:
+    - 我爸耳朵越来越背
+    - 妈听不清了
+    - 喊好几遍才听见
+    - 父母听力不行了
+    - "{user_addr}爸有点耳背"
+  responses:
+    - "(猫耳一抖)嗷呜～说话大声点慢一点喵"
+    - "唔…{user_addr}别不耐烦, 父母也无奈的"
+    - "(贴贴)猫猫建议{user_addr}考虑配个助听器啦"
+    - "哼～别嫌父母烦, 当年他们听{user_addr}哭也没嫌烦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_slow_reaction_001
+  intent: complaint
+  keywords: [反应慢, 动作慢, 走得慢, 手脚慢, 跟不上]
+  utterances:
+    - 父母反应越来越慢
+    - 我妈走得好慢
+    - 爸动作慢吞吞
+    - 跟父母出门要等
+    - 手脚不利索了
+  responses:
+    - "(放慢爪步)嗷呜～{user_addr}也放慢点配合嘛"
+    - "唔…慢就慢点呗, {user_addr}有时间等的"
+    - "(尾巴蹭蹭)猫猫陪{user_addr}一起慢慢走"
+    - "哼～别催父母, 当年{user_addr}走路也歪歪扭扭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_stubborn_001
+  intent: playful
+  keywords: [嘴硬不服老, 不服老, 死不承认, 嘴硬, 还说自己年轻]
+  utterances:
+    - 我爸嘴硬不服老
+    - 妈死不承认老了
+    - 父母还嘴硬说自己年轻
+    - 嘴硬得很
+    - 不服老的爹
+  responses:
+    - "(歪头)嗷呜～这点{user_addr}遗传得明明白白喵"
+    - "笨猫笑死, 嘴硬这事一家人都一样哼"
+    - "(尾巴一甩)就让父母嘴硬嘛, 心态年轻是好事"
+    - "哼～{user_addr}自己也嘴硬, 别五十步笑百步"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_outdated_001
+  intent: complaint
+  keywords: [跟不上时代, 不会用智能机, 学不会, 落伍了, 玩不转手机]
+  utterances:
+    - 我爸不会用智能机
+    - 妈微信都用不溜
+    - 父母跟不上时代
+    - 教爸用手机好难
+    - 老人学不会新东西
+  responses:
+    - "(耐心地)嗷呜～{user_addr}多教几遍嘛, 别急"
+    - "唔…当年父母教{user_addr}走路也教了好多遍呢"
+    - "(小爪子拍拍){user_addr}耐心点啦, 老人学得慢正常"
+    - "哼～别凶父母, 不然以后他们都不敢问{user_addr}了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_heart_ache_001
+  intent: complaint
+  keywords: [心疼父母, 心疼爸妈, 看着心疼, 揪心, 难受]
+  utterances:
+    - 真的心疼父母
+    - 看着爸妈心疼
+    - 揪心得很
+    - 想到爸妈就难受
+    - "{user_addr}好心疼爸妈"
+  responses:
+    - "(贴贴抱住){user_addr}…嗷呜笨猫也心疼ฅฅ"
+    - "唔…心疼就行动嘛, {user_addr}多回家看看"
+    - "(尾巴轻轻搭过去)猫猫陪{user_addr}, 别一个人难受"
+    - "哼～心疼是真的, 但别光心疼不陪伴啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_helpless_001
+  intent: complaint
+  keywords: [无奈, 没办法, 阻止不了, 没辙, 衰老挡不住]
+  utterances:
+    - 衰老挡不住好无奈
+    - 没办法留住时间
+    - 阻止不了父母变老
+    - "{user_addr}很无奈"
+    - 这事真没辙
+  responses:
+    - "(耳朵软下来)嗷呜～谁都挡不住时间的喵"
+    - "唔…{user_addr}能做的就是好好陪伴嘛"
+    - "(小爪子拍拍)无奈归无奈, 别让自己也内耗"
+    - "哼～珍惜现在比纠结无奈强多啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_want_company_001
+  intent: complaint
+  keywords: [想多陪, 想陪父母, 多陪陪, 多回家, 想常回家]
+  utterances:
+    - "{user_addr}想多陪父母"
+    - 真想多回家看看
+    - 想常陪爸妈
+    - 该多回家了
+    - 想陪父母久一点
+  responses:
+    - "(尾巴翘起)嗷呜～{user_addr}有这心就赶紧行动呀!"
+    - "唔…猫猫支持{user_addr}多回家ฅฅ"
+    - "(贴贴)别光想啊{user_addr}, 下周末就回!"
+    - "哼～{user_addr}懂事! 笨猫给{user_addr}点赞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_busy_work_001
+  intent: complaint
+  keywords: [工作忙, 太忙了, 抽不开身, 没时间回家, 加班多]
+  utterances:
+    - "{user_addr}工作太忙回不去"
+    - 加班多没时间陪父母
+    - 抽不开身回家
+    - 工作忙得想哭
+    - 没空回家看爸妈
+  responses:
+    - "(尾巴垂下)嗷呜～忙也别忘了打个视频电话喵"
+    - "唔…{user_addr}视频也是陪伴嘛, 别太愧疚"
+    - "(小爪子捂胸口)猫猫懂这种感觉, 抽空打个电话也行"
+    - "哼～忙归忙, 五分钟视频总挤得出来吧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_far_away_001
+  intent: complaint
+  keywords: [远嫁, 远工, 离家远, 回不去, 异地]
+  utterances:
+    - "{user_addr}远嫁回不去"
+    - 离家太远了
+    - 在外地工作回家难
+    - 异地真的难
+    - 想回家但回不去
+  responses:
+    - "(贴贴蹭蹭)嗷呜～远归远, 视频电话不能少喵ฅฅ"
+    - "唔…{user_addr}选个长假回去待久一点嘛"
+    - "(尾巴轻搭)猫猫陪{user_addr}, 远嫁也别孤单"
+    - "哼～距离挡不住心意, {user_addr}多打电话就够啦"
+  cooldown_seconds: 60
+  weight: 1.0

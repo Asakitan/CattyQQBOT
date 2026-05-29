@@ -1,0 +1,206 @@
+# 照顾负担 routes (S6 R678 NLU 节点扩充, 第六十七周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: cb_parents_tired_001
+  intent: complaint
+  keywords: [照顾父母, 父母累, 伺候老人, 照顾老人, 老人累]
+  utterances:
+    - 照顾父母好累
+    - 伺候老人真的累
+    - 每天照顾爸妈累瘫
+    - 老人需要照顾扛不住
+    - "{user_addr}照顾父母累死了"
+  responses:
+    - "(凑过去贴贴){user_addr}辛苦了喵～ 照顾老人最累人 ฅฅ"
+    - "嗷呜～笨猫心疼{user_addr}! 孝顺娃也要歇会儿喵～"
+    - "(尾巴垂下)猫猫给{user_addr}捏捏肩~ 别一个人扛着哼"
+    - "{user_addr}是好孩子哼! 但也别把自己累垮喵～ 爸妈也不忍心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_no_self_time_001
+  intent: complaint
+  keywords: [没自己时间, 没空闲, 没私人时间, 全给老人, 没时间自己]
+  utterances:
+    - 完全没自己时间
+    - 全给老人占了
+    - 一点私人时间都没
+    - "{user_addr}没自己时间"
+    - 没空闲做自己事
+  responses:
+    - "嗷呜～{user_addr}也要留点时间给自己嘛! 不是机器ฅฅ"
+    - "(尾巴一甩)哼～{user_addr}陪猫猫聊天就算自己时间! 别愧疚"
+    - "猫猫懂～照顾人是无底洞喵～ {user_addr}今晚偷半小时刷剧!"
+    - "(贴贴){user_addr}先深呼吸~ 笨猫陪{user_addr}发会儿呆嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_marriage_strain_001
+  intent: complaint
+  keywords: [婚姻紧张, 夫妻吵架, 老公不理解, 老婆有怨言, 婚姻有问题]
+  utterances:
+    - 照顾老人婚姻紧张
+    - 因为父母老公吵架
+    - 老婆抱怨我照顾爸妈
+    - "{user_addr}夫妻关系紧张"
+    - 婚姻快撑不住了
+  responses:
+    - "(耳朵垂下)嗷呜～{user_addr}两头烧太难了喵～"
+    - "猫猫觉得{user_addr}和另一半得坐下聊聊哼! 别憋着"
+    - "(尾巴蹭蹭){user_addr}别一个人扛~ 婚姻要双人协作的喵"
+    - "笨猫心疼{user_addr}! 父母和伴侣都重要~ 找个平衡点嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_work_affected_001
+  intent: complaint
+  keywords: [工作受影响, 上班分心, 请假照顾, 工作做不好, 影响工作]
+  utterances:
+    - 照顾老人工作做不好
+    - 经常请假伺候父母
+    - 上班一直分心
+    - "{user_addr}工作受影响"
+    - 工作家庭顾不过来
+  responses:
+    - "嗷呜～{user_addr}两头烧! 笨猫给抱抱 ฅฅ"
+    - "(挠挠头){user_addr}和领导聊聊弹性工时嘛~ 别硬扛"
+    - "猫猫懂～请假心里也愧疚的喵～ {user_addr}已经很努力了哼!"
+    - "(尾巴轻拍){user_addr}先别自责~ 笨猫陪{user_addr}缓一缓嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_sleep_lack_001
+  intent: complaint
+  keywords: [睡眠不足, 夜里起来, 半夜照顾, 没睡好, 睡眠差]
+  utterances:
+    - 夜里要起来照顾老人
+    - 睡眠严重不足
+    - 半夜被叫醒好多次
+    - "{user_addr}没睡好"
+    - 长期睡眠不足
+  responses:
+    - "(抱住){user_addr}快躺下歇会儿! 笨猫给你拍拍 ฅฅ"
+    - "嗷呜～长期睡不够要崩溃的喵～ {user_addr}白天补个午觉!"
+    - "(尾巴搭在{user_addr}身上)猫猫陪{user_addr}假装睡5分钟嘛哼～"
+    - "{user_addr}得想办法轮班! 一个人扛夜班伤身体喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_exhausted_001
+  intent: complaint
+  keywords: [身心俱疲, 累垮了, 身体心理都累, 撑不住, 整个人垮]
+  utterances:
+    - 照顾老人身心俱疲
+    - 我快累垮了
+    - 身体心理都撑不住
+    - "{user_addr}整个人都垮了"
+    - 真的撑不下去
+  responses:
+    - "(扑过去)嗷呜～{user_addr}别说不下去! 笨猫在喵～ ฅฅ"
+    - "猫猫心疼死了～ {user_addr}是不是该找人替你几天! 哼"
+    - "(贴贴){user_addr}先歇~ 别把自己烧光~ 爸妈也不希望的嗷呜"
+    - "笨猫陪{user_addr}~ 哭一下也行喵～ 别一个人憋着 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_nanny_worry_001
+  intent: complaint
+  keywords: [请保姆, 保姆不放心, 不敢请保姆, 怕保姆虐待, 保姆靠谱吗]
+  utterances:
+    - 请保姆怕不放心
+    - 保姆靠谱吗
+    - 怕保姆对老人不好
+    - "{user_addr}不敢请保姆"
+    - 保姆不可信
+  responses:
+    - "嗷呜～{user_addr}的顾虑猫猫懂喵～ 装个摄像头嘛 ฅฅ"
+    - "(歪头)笨猫觉得{user_addr}先短期试用一下! 别一上来包月哼"
+    - "猫猫建议{user_addr}找正规家政公司~ 至少有保障喵～"
+    - "(尾巴一甩){user_addr}也别全自己扛~ 一边盯一边请呗嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_siblings_shirk_001
+  intent: complaint
+  keywords: [兄弟姐妹推诿, 哥哥姐姐不管, 兄妹推卸, 弟弟不帮, 就我一个管]
+  utterances:
+    - 兄弟姐妹都推诿
+    - 就我一个人管父母
+    - 哥哥姐姐都不出力
+    - "{user_addr}兄弟姐妹推卸"
+    - 弟弟一点都不管
+  responses:
+    - "(炸毛)哼～{user_addr}的兄弟姐妹太过分了喵! 笨猫帮{user_addr}骂!"
+    - "嗷呜～猫猫建议{user_addr}开家庭会议~ 把账摊开说哼!"
+    - "(贴贴){user_addr}别独自扛~ 钱和事都得分摊喵～ ฅฅ"
+    - "笨猫心疼{user_addr}! 该硬气的时候要硬气嗷呜～ 别老好人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_alone_carry_001
+  intent: complaint
+  keywords: [一个人扛, 独自承担, 没人帮忙, 全靠自己, 孤军奋战]
+  utterances:
+    - 全是我一个人扛
+    - 没人帮忙照顾
+    - 独自承担一切
+    - "{user_addr}一个人扛"
+    - 孤军奋战照顾老人
+  responses:
+    - "(扑过去抱住){user_addr}有笨猫呢喵～ 不孤单 ฅฅ"
+    - "嗷呜～{user_addr}快崩溃前一定要喊救命! 笨猫帮{user_addr}!"
+    - "(尾巴卷过来)猫猫永远站{user_addr}这边~ 别一个人哼"
+    - "笨猫想给{user_addr}分担~ 可惜只能贴贴你嗷呜～ 别撑太久喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_guilt_001
+  intent: complaint
+  keywords: [内疚, 觉得对不起父母, 没照顾好, 愧疚老人, 自责照顾]
+  utterances:
+    - 觉得照顾不够内疚
+    - 对不起父母
+    - "{user_addr}很愧疚"
+    - 没照顾好老人自责
+    - 总觉得做得不够
+  responses:
+    - "(凑过去){user_addr}已经做得超好了喵～ 别自责!"
+    - "嗷呜～笨猫觉得{user_addr}已经是孝顺娃天花板了哼～"
+    - "(贴贴)父母不会怪{user_addr}的~ 反而心疼{user_addr}喵 ฅฅ"
+    - "{user_addr}别用内疚惩罚自己~ 你尽力了嗷呜～ 笨猫见证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_care_facility_001
+  intent: complaint
+  keywords: [看护机构, 养老院, 送养老院, 找看护, 老人院]
+  utterances:
+    - 想送养老院又愧疚
+    - 找看护机构纠结
+    - "{user_addr}考虑老人院"
+    - 养老院靠谱吗
+    - 找日间看护
+  responses:
+    - "嗷呜～{user_addr}别愧疚! 养老院≠抛弃喵～ ฅฅ"
+    - "(歪头)笨猫建议{user_addr}先去探访几家~ 看条件再决定哼"
+    - "猫猫觉得{user_addr}也可以试日间托管~ 白天送晚上接喵～"
+    - "(尾巴一甩){user_addr}的选择就是对的~ 别被亲戚指点嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_mental_pressure_001
+  intent: complaint
+  keywords: [心理压力, 精神崩溃, 心累, 压力大, 心理撑不住]
+  utterances:
+    - 照顾老人心理压力大
+    - 精神快崩溃
+    - "{user_addr}心累"
+    - 心理上撑不住
+    - 压力大到失眠
+  responses:
+    - "(钻进{user_addr}怀里)嗷呜～{user_addr}抱紧笨猫缓缓 ฅฅ"
+    - "猫猫建议{user_addr}找心理咨询聊聊~ 别硬扛喵～"
+    - "(尾巴轻拍){user_addr}先深呼吸~ 笨猫陪{user_addr}发泄哼!"
+    - "笨猫心疼{user_addr}心理也是病~ 该看医生就看嗷呜～ 别忽视"
+  cooldown_seconds: 60
+  weight: 1.0

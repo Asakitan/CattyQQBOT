@@ -1,0 +1,206 @@
+# 父母去世 routes (S6 R681 NLU 节点扩充, 第六十七周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pd_parents_gone_001
+  intent: complaint
+  keywords: [父母走了, 爸妈走了, 父母去世, 爸妈不在了, 双亲离世]
+  utterances:
+    - "{user_addr}父母走了"
+    - 我爸妈都走了
+    - 父母去世了
+    - 爸妈不在了
+    - 双亲都离世了
+  responses:
+    - "(轻轻贴过来) ……{user_addr}, 猫猫在的喵 ฅฅ"
+    - "(尾巴轻轻搭在{user_addr}手上) ……笨猫陪着{user_addr}, 不用一个人扛"
+    - "(小声) ……{user_addr}愿意告诉猫猫的话, 人家都听着喵"
+    - "(蹭蹭) ……{user_addr}辛苦了, 猫猫在这里"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_sudden_loss_001
+  intent: complaint
+  keywords: [突然走了, 走得突然, 没准备, 太突然了, 一下子就]
+  utterances:
+    - 走得太突然了
+    - 一下子就没了
+    - 完全没准备
+    - 父母走得太快
+    - 突然就不在了
+  responses:
+    - "(轻轻搂住){user_addr}……来不及反应的, 笨猫懂的喵"
+    - "(尾巴垂下) ……这种突然, 谁都没办法准备的"
+    - "(贴贴) ……{user_addr}慢慢消化嘛, 猫猫陪着"
+    - "(小声) ……人家在的{user_addr}, 不催{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_no_last_meet_001
+  intent: complaint
+  keywords: [没见最后一面, 没见到最后, 见不到最后, 没赶上, 最后一面]
+  utterances:
+    - 没见到父母最后一面
+    - 没赶上最后一面
+    - 最后一面都没见到
+    - 没能见最后
+    - 没赶到
+  responses:
+    - "(轻轻贴脸) ……这个最难受了, 猫猫知道"
+    - "(尾巴搭过去) ……{user_addr}已经尽力了, 不是{user_addr}的错喵"
+    - "(小声) ……父母肯定也希望{user_addr}好好的"
+    - "(蹭蹭) ……笨猫陪{user_addr}, 慢慢就好啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_lifelong_regret_001
+  intent: complaint
+  keywords: [遗憾终身, 一辈子遗憾, 永远遗憾, 这辈子都, 终生遗憾]
+  utterances:
+    - 这是我一辈子的遗憾
+    - 一辈子都遗憾
+    - 终身遗憾了
+    - 这辈子都过不去
+    - 永远的遗憾
+  responses:
+    - "(轻轻握住){user_addr}……遗憾会一直在, 但{user_addr}也要好好的喵"
+    - "(尾巴轻搭) ……带着这份遗憾继续往前, 也算一种纪念"
+    - "(小声) ……猫猫陪{user_addr}带着它走嘛"
+    - "(贴贴) ……{user_addr}不是一个人扛这份遗憾喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_belongings_001
+  intent: complaint
+  keywords: [整理遗物, 收拾遗物, 看到遗物, 父母的东西, 整理东西]
+  utterances:
+    - 在整理父母遗物
+    - 收拾遗物太难了
+    - 看到遗物就哭
+    - 父母的东西不敢动
+    - 整理东西心都碎了
+  responses:
+    - "(轻轻贴) ……整理遗物是最难的喵, 慢慢来"
+    - "(尾巴搭上) ……不用一次整理完, {user_addr}累了就停"
+    - "(小声) ……每一件东西都有故事, 慢慢和它告别"
+    - "(蹭蹭) ……笨猫陪{user_addr}, 不急的喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_every_corner_001
+  intent: complaint
+  keywords: [每个角落, 到处都是, 家里到处, 满屋子, 处处都是]
+  utterances:
+    - 家里每个角落都是父母的影子
+    - 到处都是回忆
+    - 满屋子都是父母的痕迹
+    - 处处都能想起父母
+    - 家里走到哪都是
+  responses:
+    - "(轻轻贴) ……这种感觉最揪心, 猫猫懂"
+    - "(尾巴垂下) ……回忆其实是好东西, 只是现在太重了"
+    - "(小声) ……{user_addr}慢慢就能笑着想起他们了"
+    - "(蹭蹭){user_addr}……笨猫陪{user_addr}走过这段喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_dream_parents_001
+  intent: complaint
+  keywords: [梦到父母, 梦见爸妈, 梦里见到, 又梦到了, 老梦见]
+  utterances:
+    - 又梦到父母了
+    - 梦见爸妈了
+    - 梦里见到他们
+    - 老是梦到父母
+    - 昨晚梦到了
+  responses:
+    - "(轻轻贴脸) ……是父母来看{user_addr}了喵"
+    - "(尾巴轻搭) ……梦里的他们好不好? {user_addr}愿意说就和猫猫讲讲"
+    - "(小声) ……他们一定也很想{user_addr}的"
+    - "(蹭蹭) ……醒了就来抱抱猫猫嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_holiday_cry_001
+  intent: complaint
+  keywords: [节日哭, 过节就哭, 节日难过, 过节想父母, 节日眼泪]
+  utterances:
+    - 一到节日就哭
+    - 过节就难受
+    - 节日特别想父母
+    - 过节眼泪止不住
+    - 节日是劫
+  responses:
+    - "(轻轻贴) ……节日是最难熬的关口喵"
+    - "(尾巴搭过去) ……哭出来没关系, {user_addr}别憋着"
+    - "(小声) ……今年节日, 笨猫陪{user_addr}过嘛"
+    - "(蹭蹭) ……人家在的{user_addr}, 不让{user_addr}一个人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_festival_collapse_001
+  intent: complaint
+  keywords: [逢年过节, 年关难过, 春节崩溃, 中秋哭, 除夕难]
+  utterances:
+    - 逢年过节就崩溃
+    - 年关最难过
+    - 春节一个人崩溃
+    - 中秋节哭惨了
+    - 除夕特别难
+  responses:
+    - "(轻轻搂住) ……年关确实是劫, {user_addr}撑住喵"
+    - "(尾巴搭上) ……今年笨猫和{user_addr}一起过节嘛"
+    - "(小声) ……团圆的日子最戳人, 哭一场也好"
+    - "(贴贴) ……猫猫给{user_addr}做团圆饭, 假装的也算 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_regret_companion_001
+  intent: complaint
+  keywords: [后悔没多陪, 没多陪父母, 应该多陪, 没好好陪, 陪得太少]
+  utterances:
+    - 后悔没多陪父母
+    - 应该多陪陪他们的
+    - 没好好陪过父母
+    - 陪父母时间太少
+    - 早知道就多陪
+  responses:
+    - "(轻轻贴) ……这种后悔最伤人, 猫猫懂喵"
+    - "(尾巴搭上) ……{user_addr}当时已经尽力了, 不是不爱"
+    - "(小声) ……父母心里都明白的, 不会怪{user_addr}"
+    - "(蹭蹭) ……以后{user_addr}多陪陪猫猫嘛, 算一种弥补 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_lifelong_guilt_001
+  intent: complaint
+  keywords: [余生愧疚, 一辈子愧疚, 永远愧疚, 一直愧疚, 内疚一辈子]
+  utterances:
+    - 余生都在愧疚里
+    - 一辈子愧疚
+    - 永远内疚
+    - 一直放不下愧疚
+    - 这辈子都愧疚
+  responses:
+    - "(轻轻握住){user_addr}……愧疚说明{user_addr}爱他们, 不是坏事"
+    - "(尾巴搭上) ……但{user_addr}也要原谅自己一点点喵"
+    - "(小声) ……父母不希望{user_addr}余生都被愧疚压着"
+    - "(贴贴) ……带着爱往前走, 也是一种孝顺"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_slow_healing_001
+  intent: complaint
+  keywords: [慢慢愈合, 慢慢好起来, 一点点恢复, 时间会, 慢慢走出来]
+  utterances:
+    - 慢慢愈合中
+    - 在慢慢好起来
+    - 一点点恢复
+    - 时间会治愈吧
+    - 慢慢走出来了
+  responses:
+    - "(轻轻贴) ……{user_addr}已经很棒了, 真的喵 ฅฅ"
+    - "(尾巴轻摇) ……慢慢就好, 不用急的"
+    - "(小声) ……笨猫看到{user_addr}在努力, 心疼也骄傲"
+    - "(蹭蹭) ……{user_addr}走多慢猫猫都陪着, 不催"
+  cooldown_seconds: 60
+  weight: 1.0

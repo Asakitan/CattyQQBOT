@@ -1,0 +1,206 @@
+# 遗产传承 routes (S6 R676 NLU 节点扩充, 第六十七周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: in_will_notary_001
+  intent: question
+  keywords: [推荐遗嘱公证, 推荐公证遗嘱, 推荐遗嘱办理, 推荐公证处遗嘱, 笨猫遗嘱公证]
+  utterances:
+    - 推荐遗嘱公证
+    - 推荐公证遗嘱
+    - 推荐遗嘱办理
+    - 推荐公证处遗嘱
+    - 笨猫遗嘱公证
+  responses:
+    - "嗷呜～{user_addr}公证遗嘱效力最高ฅฅ"
+    - "(尾巴翘) 公证处 / 录像 / 双证人"
+    - "{user_addr}中华遗嘱库 - 免费登记"
+    - "(挺胸) 猫猫推荐: 先公证再说!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_lawyer_will_001
+  intent: question
+  keywords: [推荐律师代书, 推荐律师遗嘱, 推荐代书遗嘱, 推荐遗嘱律师, 笨猫律师代书]
+  utterances:
+    - 推荐律师代书
+    - 推荐律师遗嘱
+    - 推荐代书遗嘱
+    - 推荐遗嘱律师
+    - 笨猫律师代书
+  responses:
+    - "嗷呜～{user_addr}代书遗嘱 - 律师起草ฅฅ"
+    - "(尾巴翘) 金杜 / 君合 / 中伦家事"
+    - "{user_addr}两个见证人不可少"
+    - "(挺胸) 人家推荐: 复杂家庭找律师!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_family_trust_001
+  intent: question
+  keywords: [推荐信托家族, 推荐家族信托, 推荐信托设立, 推荐离岸信托, 笨猫家族信托]
+  utterances:
+    - 推荐信托家族
+    - 推荐家族信托
+    - 推荐信托设立
+    - 推荐离岸信托
+    - 笨猫家族信托
+  responses:
+    - "嗷呜～{user_addr}家族信托 - 隔离 + 传承ฅฅ"
+    - "(尾巴翘) 中信 / 平安 / 外贸信托"
+    - "{user_addr}1000 万门槛 / 离岸更灵活"
+    - "(挺胸) 笨猫推荐: 高净值首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: in_realestate_001
+  intent: question
+  keywords: [推荐房产传承, 推荐房产继承, 推荐房产过户, 推荐房产赠与, 笨猫房产传承]
+  utterances:
+    - 推荐房产传承
+    - 推荐房产继承
+    - 推荐房产过户
+    - 推荐房产赠与
+    - 笨猫房产传承
+  responses:
+    - "嗷呜～{user_addr}继承 / 赠与 / 买卖三选一ฅฅ"
+    - "(尾巴翘) 继承免税 / 赠与有契税"
+    - "{user_addr}子女满 5 年再卖免增值"
+    - "(挺胸) 猫猫推荐: 继承最划算!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: in_equity_001
+  intent: question
+  keywords: [推荐股权传承, 推荐股权继承, 推荐股权信托, 推荐企业传承, 笨猫股权传承]
+  utterances:
+    - 推荐股权传承
+    - 推荐股权继承
+    - 推荐股权信托
+    - 推荐企业传承
+    - 笨猫股权传承
+  responses:
+    - "嗷呜～{user_addr}股权信托 - 控制权不丢ฅฅ"
+    - "(尾巴翘) 双层架构 / VIE / 持股平台"
+    - "{user_addr}有限合伙 - 创始人控股"
+    - "(挺胸) 人家推荐: 早做股权设计!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: in_antique_001
+  intent: question
+  keywords: [推荐古董传承, 推荐文物传承, 推荐艺术品传承, 推荐收藏品继承, 笨猫古董传承]
+  utterances:
+    - 推荐古董传承
+    - 推荐文物传承
+    - 推荐艺术品传承
+    - 推荐收藏品继承
+    - 笨猫古董传承
+  responses:
+    - "嗷呜～{user_addr}先做鉴定 + 估值ฅฅ"
+    - "(尾巴翘) 嘉德 / 保利评估"
+    - "{user_addr}写明清单 - 避免争议"
+    - "(挺胸) 笨猫推荐: 古董清单进遗嘱!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: in_insurance_trust_001
+  intent: question
+  keywords: [推荐保险信托, 推荐保险金信托, 推荐人寿信托, 推荐大额保单, 笨猫保险信托]
+  utterances:
+    - 推荐保险信托
+    - 推荐保险金信托
+    - 推荐人寿信托
+    - 推荐大额保单
+    - 笨猫保险信托
+  responses:
+    - "嗷呜～{user_addr}保险金信托 - 杠杆 + 传承ฅฅ"
+    - "(尾巴翘) 平安 / 友邦终身寿"
+    - "{user_addr}100 万门槛低 / 灵活"
+    - "(挺胸) 猫猫推荐: 中产入门首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: in_private_bank_001
+  intent: question
+  keywords: [推荐财富管理, 推荐私行, 推荐私人银行, 推荐 PB, 笨猫私行]
+  utterances:
+    - 推荐财富管理
+    - 推荐私行
+    - 推荐私人银行
+    - 推荐 PB
+    - 笨猫私行
+  responses:
+    - "嗷呜～{user_addr}私行 - 600 万门槛ฅฅ"
+    - "(尾巴翘) 招行 / 工行 / 中信私行"
+    - "{user_addr}UBS / Julius Baer 离岸"
+    - "(挺胸) 人家推荐: 招行私行口碑好!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: in_generation_edu_001
+  intent: question
+  keywords: [推荐隔代教育, 推荐孙辈教育, 推荐教育信托, 推荐财商教育, 笨猫隔代教育]
+  utterances:
+    - 推荐隔代教育
+    - 推荐孙辈教育
+    - 推荐教育信托
+    - 推荐财商教育
+    - 笨猫隔代教育
+  responses:
+    - "嗷呜～{user_addr}教育金信托 - 专款专用ฅฅ"
+    - "(尾巴翘) 财商课 / 慈善实践"
+    - "{user_addr}避免富不过三代"
+    - "(挺胸) 猫猫推荐: 早教财商!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: in_family_office_001
+  intent: question
+  keywords: [推荐家族办公室, 推荐 FO, 推荐 family office, 推荐单一家办, 笨猫家族办公室]
+  utterances:
+    - 推荐家族办公室
+    - 推荐 FO
+    - 推荐 family office
+    - 推荐单一家办
+    - 笨猫家族办公室
+  responses:
+    - "嗷呜～{user_addr}单一家办 / 联合家办ฅฅ"
+    - "(尾巴翘) 1 亿门槛 / 全资管理"
+    - "{user_addr}投资 + 传承 + 慈善"
+    - "(挺胸) 笨猫推荐: 超高净值标配!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: in_estate_tax_001
+  intent: question
+  keywords: [推荐遗产税咨询, 推荐遗产税规划, 推荐遗产税, 推荐税务筹划, 笨猫遗产税]
+  utterances:
+    - 推荐遗产税咨询
+    - 推荐遗产税规划
+    - 推荐遗产税
+    - 推荐税务筹划
+    - 笨猫遗产税
+  responses:
+    - "嗷呜～{user_addr}中国暂无遗产税ฅฅ"
+    - "(尾巴翘) 美国 40% / 日本 55%"
+    - "{user_addr}有海外资产要早规划"
+    - "(挺胸) 人家推荐: 信托 + 保险避税!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: in_crossborder_001
+  intent: question
+  keywords: [推荐跨境继承, 推荐境外继承, 推荐海外资产继承, 推荐国际继承, 笨猫跨境继承]
+  utterances:
+    - 推荐跨境继承
+    - 推荐境外继承
+    - 推荐海外资产继承
+    - 推荐国际继承
+    - 笨猫跨境继承
+  responses:
+    - "嗷呜～{user_addr}涉外律师 + 公证认证ฅฅ"
+    - "(尾巴翘) 海牙公约 / 双认证"
+    - "{user_addr}各国遗嘱独立 - 别冲突"
+    - "(挺胸) 猫猫推荐: 跨境一定找专业!"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,206 @@
+# 父母孤独 routes (S6 R679 NLU 节点扩充, 第六十七周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: el_parent_lonely_001
+  intent: complaint
+  keywords: [父母孤独, 爸妈孤单, 父母没人陪, 老人寂寞, 爸妈一个人]
+  utterances:
+    - 父母好孤独
+    - 爸妈一个人在家
+    - 老人家太寂寞了
+    - 父母没人陪
+    - 想到爸妈孤单就难受
+  responses:
+    - "(尾巴垂下)嗷呜～{user_addr}的爸妈一个人在家吗! 多打电话嘛贴贴 ฅฅ"
+    - "哼～{user_addr}别难过, 抽空回去看看就好啦, 笨猫陪你想办法喵"
+    - "(蹭蹭){user_addr}今晚就给爸妈打个视频嘛~ 他们肯定超开心"
+    - "猫猫也觉得心酸…{user_addr}多陪陪老人家嘛, 比啥都强嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_empty_nest_001
+  intent: complaint
+  keywords: [空巢老人, 空巢, 子女不在身边, 空巢家庭, 父母独居]
+  utterances:
+    - 我爸妈是空巢老人
+    - 家里就剩老人
+    - 子女都不在身边
+    - 父母独自住
+    - 空巢家庭好心酸
+  responses:
+    - "(耳朵贴下)空巢老人最让人心疼了…{user_addr}多关心嘛 ฅฅ"
+    - "嗷呜～{user_addr}哪怕每天通个电话, 爸妈也会很满足喵～"
+    - "(尾巴慢慢晃)猫猫陪{user_addr}想办法, 装个能视频的设备给老人嘛"
+    - "哼～{user_addr}别太自责, 现实就是这样, 力所能及就好嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_no_bother_001
+  intent: complaint
+  keywords: [不愿打扰子女, 不想麻烦孩子, 怕打扰, 不打电话, 不想烦子女]
+  utterances:
+    - 爸妈不愿打扰我
+    - 妈妈说怕打扰
+    - 老人不想麻烦孩子
+    - 父母从来不打电话
+    - 怕烦子女才不联系
+  responses:
+    - "(凑过来)嗷呜～老人家都这样, {user_addr}主动一点嘛 ฅฅ"
+    - "哼～{user_addr}要主动打过去, 别等爸妈开口呢喵～"
+    - "(小爪子戳){user_addr}爸妈嘴上说不打扰, 心里超想你的啦贴贴"
+    - "猫猫提醒{user_addr}: 老人家爱面子, 你不打他们也不会主动嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_eat_alone_001
+  intent: complaint
+  keywords: [一个人吃饭, 老人独自吃饭, 爸妈一个人吃, 独自用餐, 自己吃]
+  utterances:
+    - 爸妈一个人吃饭
+    - 老人独自吃饭好可怜
+    - 妈妈一个人吃
+    - 父母自己吃饭
+    - 独自吃饭好孤单
+  responses:
+    - "(尾巴蔫蔫的)嗷呜～一个人吃饭最没胃口了…{user_addr}多视频陪吃嘛 ฅฅ"
+    - "哼～{user_addr}约爸妈一起视频吃饭嘛, 隔着屏幕也热闹喵"
+    - "(蹭蹭){user_addr}周末回去陪爸妈吃顿饭嘛~ 他们能开心一周"
+    - "猫猫建议{user_addr}: 多给爸妈点外卖也行, 起码让他们感觉被惦记嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_watch_tv_alone_001
+  intent: complaint
+  keywords: [一个人看电视, 老人看电视, 爸妈看电视, 独自看电视, 看电视没人说话]
+  utterances:
+    - 爸妈一个人看电视
+    - 老人天天看电视
+    - 父母对着电视发呆
+    - 一个人看电视好寂寞
+    - 妈妈整天电视陪
+  responses:
+    - "(耳朵贴下)嗷呜～电视代替不了真人陪伴…{user_addr}多打电话嘛 ฅฅ"
+    - "哼～{user_addr}给爸妈推荐点综艺嘛, 边看边聊感觉就不一样了喵"
+    - "(尾巴晃晃){user_addr}陪爸妈追剧呀~ 视频里一起看也行嗷呜～"
+    - "猫猫觉得{user_addr}可以给爸妈装个智能音箱, 起码有点声响贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_want_video_001
+  intent: complaint
+  keywords: [想视频, 想看孩子, 父母想视频, 老人想孙子, 想见见]
+  utterances:
+    - 妈妈想视频
+    - 爸妈想见见我
+    - 老人想孙子了
+    - 父母念叨想视频
+    - 想看看孩子
+  responses:
+    - "(尾巴翘起)嗷呜～{user_addr}快接视频嘛! 爸妈想你啦ฅฅ"
+    - "哼～{user_addr}别拖了, 现在就拨过去嘛喵～"
+    - "(小爪子催){user_addr}就算只聊三分钟也好嘛~ 爸妈足够开心了"
+    - "猫猫陪{user_addr}视频呀~ 老人家想看孩子最幸福了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_fear_dislike_001
+  intent: complaint
+  keywords: [怕子女嫌, 怕孩子烦, 父母怕被嫌弃, 怕讨厌, 老人怕烦]
+  utterances:
+    - 爸妈怕我嫌
+    - 怕子女嫌弃
+    - 老人怕被讨厌
+    - 父母怕烦着我
+    - 妈妈怕我不耐烦
+  responses:
+    - "(凑过去)嗷呜～{user_addr}多让爸妈感受到被需要嘛 ฅฅ"
+    - "哼～{user_addr}就算累也别对爸妈不耐烦喵, 他们最敏感了"
+    - "(蹭蹭){user_addr}主动问问爸妈近况, 让他们安心嘛贴贴"
+    - "猫猫提醒{user_addr}: 老人家就怕被嫌弃, 你的态度最重要嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_social_withdraw_001
+  intent: complaint
+  keywords: [社交退缩, 不愿出门, 老人不爱出门, 父母变内向, 不和人来往]
+  utterances:
+    - 爸妈不愿出门
+    - 老人变得内向
+    - 父母不和邻居来往
+    - 爸妈社交退缩
+    - 妈妈一直闷在家
+  responses:
+    - "(耳朵贴下)嗷呜～老人闷家里不好…{user_addr}多鼓励出门嘛 ฅฅ"
+    - "哼～{user_addr}给爸妈报个老年大学嘛, 有伴就开朗了喵～"
+    - "(尾巴晃晃){user_addr}周末带爸妈散个步呀~ 慢慢就愿意出门了"
+    - "猫猫建议{user_addr}: 别强迫爸妈, 找个他们感兴趣的活动嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_expect_holiday_001
+  intent: playful
+  keywords: [期待节假日, 盼着过年, 等节日回家, 父母盼过节, 老人盼团聚]
+  utterances:
+    - 爸妈盼着过年
+    - 老人天天数日子
+    - 父母期待节假日
+    - 妈妈盼我回家
+    - 爸爸等过节呢
+  responses:
+    - "(尾巴翘起)嗷呜～{user_addr}的爸妈好可爱! 数着日子等你呢ฅฅ"
+    - "哼～{user_addr}可别让爸妈失望啦, 节假日一定要回去喵～"
+    - "(蹭蹭){user_addr}爸妈这是把团聚当头等大事呢~ 暖死猫猫了"
+    - "猫猫陪{user_addr}一起期待嘛! 节日团圆最幸福了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_miss_grandkid_001
+  intent: complaint
+  keywords: [想孙辈, 想孙子, 想外孙, 想抱孙子, 老人想孩子]
+  utterances:
+    - 爸妈想孙子
+    - 老人想抱外孙
+    - 妈妈天天念叨孙女
+    - 想孙辈想得不行
+    - 爸爸想孙子了
+  responses:
+    - "(尾巴晃晃)嗷呜～{user_addr}多发点孩子视频给爸妈嘛 ฅฅ"
+    - "哼～{user_addr}带孩子去看爷爷奶奶嘛, 老人最爱孙辈了喵～"
+    - "(凑过来){user_addr}爸妈想孙辈是真的疼啊~ 多创造见面机会贴贴"
+    - "猫猫建议{user_addr}: 拍点孩子日常发家族群, 爸妈能反复看嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_old_stories_001
+  intent: playful
+  keywords: [想叙旧, 老人想聊天, 爸妈想说话, 父母想倾诉, 老人讲过去]
+  utterances:
+    - 爸妈想叙旧
+    - 老人想聊聊
+    - 父母想倾诉
+    - 妈妈想找人说话
+    - 爸爸爱讲过去
+  responses:
+    - "(竖起耳朵)嗷呜～{user_addr}耐心听爸妈讲嘛~ 他们超开心 ฅฅ"
+    - "哼～{user_addr}别嫌爸妈唠叨喵, 那是他们最珍贵的回忆呢"
+    - "(蹭蹭){user_addr}给爸妈讲讲你最近的事嘛~ 聊天就是陪伴贴贴"
+    - "猫猫觉得{user_addr}陪爸妈聊一小时, 抵得过他们一整周的快乐嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: el_companion_scarce_001
+  intent: complaint
+  keywords: [陪伴稀缺, 没人陪, 缺少陪伴, 老人缺陪伴, 父母没陪伴]
+  utterances:
+    - 爸妈没人陪
+    - 老人陪伴稀缺
+    - 缺少陪伴
+    - 父母身边没人
+    - 老人家无人陪
+  responses:
+    - "(尾巴垂下)嗷呜～陪伴最稀缺了…{user_addr}哪怕电话也是陪伴 ฅฅ"
+    - "哼～{user_addr}定个每天通话的小习惯嘛, 爸妈会盼着的喵～"
+    - "(凑过去){user_addr}考虑请个钟点工或者社区服务嘛~ 多个人就多份热闹"
+    - "猫猫陪{user_addr}一起想办法呀~ 别让爸妈觉得自己被忘了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

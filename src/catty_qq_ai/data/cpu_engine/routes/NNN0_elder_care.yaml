@@ -1,0 +1,206 @@
+# 养老院 routes (S6 R672 NLU 节点扩充, 第六十七周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ec_public_001
+  intent: question
+  keywords: [推荐养老院, 推荐公立养老院, 推荐社会福利院, 推荐普惠养老, 笨猫养老院]
+  utterances:
+    - 推荐养老院
+    - 推荐公立养老院
+    - 推荐社会福利院
+    - 推荐普惠养老
+    - 笨猫养老院
+  responses:
+    - "嗷呜～{user_addr}公立养老院 - 价格亲民ฅฅ"
+    - "(尾巴翘) 第一社会福利院 / 区级敬老院"
+    - "{user_addr}排队长 / 床位紧张 / 户籍优先"
+    - "(挺胸) 笨猫推荐: 普惠养老床位补贴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_taikang_001
+  intent: question
+  keywords: [推荐民营高端养老, 推荐泰康之家, 推荐燕园, 推荐申园, 笨猫高端养老]
+  utterances:
+    - 推荐民营高端养老
+    - 推荐泰康之家
+    - 推荐燕园
+    - 推荐申园
+    - 笨猫高端养老
+  responses:
+    - "嗷呜～{user_addr}泰康之家 - 高端养老社区ฅฅ"
+    - "(尾巴翘) 燕园(北京) / 申园(上海) / 粤园"
+    - "{user_addr}保险+养老 / 月费 1-2 万"
+    - "(挺胸) 笨猫推荐: 泰康之家旗舰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_chunxuanmao_001
+  intent: question
+  keywords: [推荐经济型养老, 推荐椿萱茂, 推荐远洋椿萱茂, 推荐中端养老, 笨猫椿萱茂]
+  utterances:
+    - 推荐经济型养老
+    - 推荐椿萱茂
+    - 推荐远洋椿萱茂
+    - 推荐中端养老
+    - 笨猫椿萱茂
+  responses:
+    - "嗷呜～{user_addr}椿萱茂 - 远洋集团旗下ฅฅ"
+    - "(尾巴翘) 失智照护见长 / 全国连锁"
+    - "{user_addr}月费 8000-1.5 万 / 中端定位"
+    - "(挺胸) 笨猫推荐: 椿萱茂失智专区!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_jialehui_001
+  intent: question
+  keywords: [推荐嘉乐荟, 推荐九如城, 推荐亲和源, 推荐光大养老, 笨猫嘉乐荟]
+  utterances:
+    - 推荐嘉乐荟
+    - 推荐九如城
+    - 推荐亲和源
+    - 推荐光大养老
+    - 笨猫嘉乐荟
+  responses:
+    - "嗷呜～{user_addr}嘉乐荟 / 九如城ฅฅ"
+    - "(尾巴翘) 亲和源(上海) / 光大百龄帮"
+    - "{user_addr}国企背景 / 服务规范"
+    - "(挺胸) 笨猫推荐: 九如城连锁稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_medical_001
+  intent: question
+  keywords: [推荐医养结合, 推荐养老医院, 推荐康复养老, 推荐护理院, 笨猫医养]
+  utterances:
+    - 推荐医养结合
+    - 推荐养老医院
+    - 推荐康复养老
+    - 推荐护理院
+    - 笨猫医养
+  responses:
+    - "嗷呜～{user_addr}医养结合 - 失能老人首选ฅฅ"
+    - "(尾巴翘) 护理院 / 康复医院 / 安宁疗护"
+    - "{user_addr}医保可报 / 24h 医护"
+    - "(挺胸) 笨猫推荐: 二级护理院+医保!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_apartment_001
+  intent: question
+  keywords: [推荐长者公寓, 推荐养老公寓, 推荐活力老人公寓, 推荐自理型公寓, 笨猫长者公寓]
+  utterances:
+    - 推荐长者公寓
+    - 推荐养老公寓
+    - 推荐活力老人公寓
+    - 推荐自理型公寓
+    - 笨猫长者公寓
+  responses:
+    - "嗷呜～{user_addr}长者公寓 - 活力老人住ฅฅ"
+    - "(尾巴翘) 自理型 / 独立单元 / 配套餐厅"
+    - "{user_addr}社交活动多 / 旅居式"
+    - "(挺胸) 笨猫推荐: 60-75岁自理首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_home_001
+  intent: question
+  keywords: [推荐居家养老, 推荐居家养老服务, 推荐社区养老, 推荐养老服务券, 笨猫居家养老]
+  utterances:
+    - 推荐居家养老
+    - 推荐居家养老服务
+    - 推荐社区养老
+    - 推荐养老服务券
+    - 笨猫居家养老
+  responses:
+    - "嗷呜～{user_addr}居家养老 - 9073格局主力ฅฅ"
+    - "(尾巴翘) 社区嵌入式 / 助餐助洁助浴"
+    - "{user_addr}政府服务券 / 适老化改造"
+    - "(挺胸) 笨猫推荐: 街道养老服务中心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_homecare_001
+  intent: question
+  keywords: [推荐上门护理, 推荐护工, 推荐养老护理员, 推荐居家护理, 笨猫上门护理]
+  utterances:
+    - 推荐上门护理
+    - 推荐护工
+    - 推荐养老护理员
+    - 推荐居家护理
+    - 笨猫上门护理
+  responses:
+    - "嗷呜～{user_addr}上门护理 - 福寿康/安康通ฅฅ"
+    - "(尾巴翘) 护工 200-400/天 / 24h 陪护"
+    - "{user_addr}持证护理员 / 长护险定点"
+    - "(挺胸) 笨猫推荐: 福寿康长护险报销!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_daycare_001
+  intent: question
+  keywords: [推荐日间照料, 推荐日托中心, 推荐老年日托, 推荐托老所, 笨猫日间照料]
+  utterances:
+    - 推荐日间照料
+    - 推荐日托中心
+    - 推荐老年日托
+    - 推荐托老所
+    - 笨猫日间照料
+  responses:
+    - "嗷呜～{user_addr}日间照料中心 - 白天去晚上回ฅฅ"
+    - "(尾巴翘) 一日三餐 / 康复活动 / 喘息服务"
+    - "{user_addr}100-200/天 / 子女白天上班"
+    - "(挺胸) 笨猫推荐: 社区日托性价比高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_community_001
+  intent: question
+  keywords: [推荐养老社区, 推荐 CCRC, 推荐持续照料社区, 推荐养老综合体, 笨猫养老社区]
+  utterances:
+    - 推荐养老社区
+    - 推荐 CCRC
+    - 推荐持续照料社区
+    - 推荐养老综合体
+    - 笨猫养老社区
+  responses:
+    - "嗷呜～{user_addr}CCRC 持续照料社区ฅฅ"
+    - "(尾巴翘) 自理→介助→介护一站式"
+    - "{user_addr}泰康/国寿/太平/合众都做"
+    - "(挺胸) 笨猫推荐: CCRC 一住到老!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_overseas_001
+  intent: question
+  keywords: [推荐海外养老, 推荐日本养老, 推荐泰国养老, 推荐清迈养老, 笨猫海外养老]
+  utterances:
+    - 推荐海外养老
+    - 推荐日本养老
+    - 推荐泰国养老
+    - 推荐清迈养老
+    - 笨猫海外养老
+  responses:
+    - "嗷呜～{user_addr}泰国清迈 - 低成本养老天堂ฅฅ"
+    - "(尾巴翘) 日本介护 / 马来西亚 MM2H"
+    - "{user_addr}签证 / 医疗 / 语言要考虑"
+    - "(挺胸) 笨猫推荐: 清迈月费 3-5 千!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ec_insurance_001
+  intent: question
+  keywords: [推荐养老保险, 推荐长护险, 推荐长期护理保险, 推荐商业养老险, 笨猫长护险]
+  utterances:
+    - 推荐养老保险
+    - 推荐长护险
+    - 推荐长期护理保险
+    - 推荐商业养老险
+    - 笨猫长护险
+  responses:
+    - "嗷呜～{user_addr}长护险 - 失能老人福音ฅฅ"
+    - "(尾巴翘) 49 城试点 / 报销护理费 70%"
+    - "{user_addr}商业养老险 / 个人养老金账户"
+    - "(挺胸) 笨猫推荐: 先办长护险评估!"
+  cooldown_seconds: 60
+  weight: 1.0
