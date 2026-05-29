@@ -1,0 +1,206 @@
+# 智能手表 / Apple Watch / Garmin routes (S6 R465 NLU 节点扩充, 第四十六周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sw_apple_s10_001
+  intent: question
+  keywords: [推荐 Apple Watch S10, 推荐 Apple Watch Series 10, 推荐苹果手表 S10, 推荐 AW S10, 笨猫 Apple Watch S10]
+  utterances:
+    - 推荐 Apple Watch S10
+    - 推荐 Apple Watch Series 10
+    - 推荐苹果手表 S10
+    - 推荐 AW S10
+    - 笨猫 Apple Watch S10
+  responses:
+    - "嗷呜～{user_addr}Apple Watch Series 10 - 更薄更轻ฅฅ"
+    - "(尾巴翘) 42/46mm / S10 芯片 / 睡眠呼吸暂停"
+    - "{user_addr}iPhone 用户首选 / ¥2999 起"
+    - "(挺胸) 笨猫推荐: 46mm 铝合金 GPS!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_apple_ultra_001
+  intent: question
+  keywords: [推荐 Apple Watch Ultra, 推荐 AW Ultra, 推荐苹果户外手表, 推荐 Ultra 2, 笨猫 Apple Watch Ultra]
+  utterances:
+    - 推荐 Apple Watch Ultra
+    - 推荐 AW Ultra
+    - 推荐苹果户外手表
+    - 推荐 Ultra 2
+    - 笨猫 Apple Watch Ultra
+  responses:
+    - "嗷呜～{user_addr}Apple Watch Ultra 2 - 户外旗舰ฅฅ"
+    - "(尾巴翘) 49mm 钛合金 / 36h 续航 / 100m 防水"
+    - "{user_addr}潜水 / 越野 / 登山专用 / ¥6499"
+    - "(挺胸) 笨猫推荐: 越野跑橙色表带!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_garmin_fenix8_001
+  intent: question
+  keywords: [推荐 Garmin Fenix 8, 推荐佳明 Fenix 8, 推荐 Fenix 8, 推荐户外运动表, 笨猫 Fenix 8]
+  utterances:
+    - 推荐 Garmin Fenix 8
+    - 推荐佳明 Fenix 8
+    - 推荐 Fenix 8
+    - 推荐户外运动表
+    - 笨猫 Fenix 8
+  responses:
+    - "嗷呜～{user_addr}Garmin Fenix 8 - 户外之王ฅฅ"
+    - "(尾巴翘) AMOLED / 多频 GPS / 潜水模式"
+    - "{user_addr}续航 16 天 / ¥7480 起 / 钛合金"
+    - "(挺胸) 笨猫推荐: 47mm Sapphire 版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_huawei_gt4_001
+  intent: question
+  keywords: [推荐华为 GT4, 推荐 Huawei Watch GT4, 推荐华为手表, 推荐 GT4, 笨猫华为 GT4]
+  utterances:
+    - 推荐华为 GT4
+    - 推荐 Huawei Watch GT4
+    - 推荐华为手表
+    - 推荐 GT4
+    - 笨猫华为 GT4
+  responses:
+    - "嗷呜～{user_addr}华为 Watch GT4 - 国产性价比ฅฅ"
+    - "(尾巴翘) 41/46mm / 14 天续航 / TruSeen 5.5+"
+    - "{user_addr}¥1488 起 / 鸿蒙 / 安卓 iOS 通用"
+    - "(挺胸) 笨猫推荐: 46mm 活力款!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_xiaomi_001
+  intent: question
+  keywords: [推荐小米手表, 推荐 Xiaomi Watch, 推荐小米 S3, 推荐红米手表, 笨猫小米手表]
+  utterances:
+    - 推荐小米手表
+    - 推荐 Xiaomi Watch
+    - 推荐小米 S3
+    - 推荐红米手表
+    - 笨猫小米手表
+  responses:
+    - "嗷呜～{user_addr}小米 Watch S3 - 高性价比ฅฅ"
+    - "(尾巴翘) 47mm / AMOLED / HyperOS / ¥999"
+    - "{user_addr}Redmi Watch 4 / ¥449 入门"
+    - "(挺胸) 笨猫推荐: S3 可换表圈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_samsung_001
+  intent: question
+  keywords: [推荐三星 Galaxy Watch, 推荐三星手表, 推荐 Galaxy Watch 7, 推荐 Watch Ultra, 笨猫 Galaxy Watch]
+  utterances:
+    - 推荐三星 Galaxy Watch
+    - 推荐三星手表
+    - 推荐 Galaxy Watch 7
+    - 推荐 Watch Ultra
+    - 笨猫 Galaxy Watch
+  responses:
+    - "嗷呜～{user_addr}Galaxy Watch 7 - 安卓旗舰ฅฅ"
+    - "(尾巴翘) Wear OS / BioActive 传感器"
+    - "{user_addr}Galaxy Watch Ultra ¥4399 户外款"
+    - "(挺胸) 笨猫推荐: 三星手机用户必选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_fitbit_001
+  intent: question
+  keywords: [推荐 Fitbit Charge, 推荐 Fitbit, 推荐 Fitbit Charge 6, 推荐手环, 笨猫 Fitbit]
+  utterances:
+    - 推荐 Fitbit Charge
+    - 推荐 Fitbit
+    - 推荐 Fitbit Charge 6
+    - 推荐手环
+    - 笨猫 Fitbit
+  responses:
+    - "嗷呜～{user_addr}Fitbit Charge 6 - 健康手环王ฅฅ"
+    - "(尾巴翘) ECG / 心率 / 7 天续航"
+    - "{user_addr}Google 旗下 / Premium 订阅"
+    - "(挺胸) 笨猫推荐: 睡眠监测顶级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_oppo_001
+  intent: question
+  keywords: [推荐 OPPO 手表, 推荐 OPPO Watch, 推荐 OPPO Watch X, 推荐一加手表, 笨猫 OPPO 手表]
+  utterances:
+    - 推荐 OPPO 手表
+    - 推荐 OPPO Watch
+    - 推荐 OPPO Watch X
+    - 推荐一加手表
+    - 笨猫 OPPO 手表
+  responses:
+    - "嗷呜～{user_addr}OPPO Watch X - 双擎旗舰ฅฅ"
+    - "(尾巴翘) ColorOS / 12 天续航 / ¥2299"
+    - "{user_addr}OnePlus Watch 2 ¥2299 海外热"
+    - "(挺胸) 笨猫推荐: OPPO Watch X 钛合金!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_battery_001
+  intent: question
+  keywords: [推荐智能手表续航, 推荐长续航手表, 推荐手表电池, 推荐续航久, 笨猫手表续航]
+  utterances:
+    - 推荐智能手表续航
+    - 推荐长续航手表
+    - 推荐手表电池
+    - 推荐续航久
+    - 笨猫手表续航
+  responses:
+    - "嗷呜～{user_addr}Garmin Fenix 8 - 16 天ฅฅ"
+    - "(尾巴翘) 华为 GT4 14 天 / 小米 S3 15 天"
+    - "{user_addr}Apple Watch 18h / Ultra 36h"
+    - "(挺胸) 笨猫推荐: Garmin 续航无敌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_health_001
+  intent: question
+  keywords: [推荐运动健康监测, 推荐健康手表, 推荐运动手表, 推荐健身手表, 笨猫健康手表]
+  utterances:
+    - 推荐运动健康监测
+    - 推荐健康手表
+    - 推荐运动手表
+    - 推荐健身手表
+    - 笨猫健康手表
+  responses:
+    - "嗷呜～{user_addr}Garmin Forerunner - 跑步专用ฅฅ"
+    - "(尾巴翘) Polar Vantage / Coros Pace"
+    - "{user_addr}Apple Watch / Whoop 4.0 手环"
+    - "(挺胸) 笨猫推荐: 跑步选 Garmin 965!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_ecg_001
+  intent: question
+  keywords: [推荐心率手表, 推荐血氧手表, 推荐 ECG 手表, 推荐心电图手表, 笨猫 ECG]
+  utterances:
+    - 推荐心率手表
+    - 推荐血氧手表
+    - 推荐 ECG 手表
+    - 推荐心电图手表
+    - 笨猫 ECG
+  responses:
+    - "嗷呜～{user_addr}Apple Watch - ECG 顶级ฅฅ"
+    - "(尾巴翘) 华为 GT4 / 三星 Galaxy Watch"
+    - "{user_addr}Fitbit Charge 6 / Withings ScanWatch"
+    - "(挺胸) 笨猫推荐: AW S10 房颤监测!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_strap_001
+  intent: question
+  keywords: [推荐表带, 推荐手表表带, 推荐表带替换, 推荐尼龙表带, 笨猫表带]
+  utterances:
+    - 推荐表带
+    - 推荐手表表带
+    - 推荐表带替换
+    - 推荐尼龙表带
+    - 笨猫表带
+  responses:
+    - "嗷呜～{user_addr}硅胶 - 运动防汗ฅฅ"
+    - "(尾巴翘) 尼龙编织 / 皮革 / 米兰尼斯"
+    - "{user_addr}钛合金链节 / 氟橡胶户外"
+    - "(挺胸) 笨猫推荐: 运动选硅胶通勤皮革!"
+  cooldown_seconds: 60
+  weight: 1.0

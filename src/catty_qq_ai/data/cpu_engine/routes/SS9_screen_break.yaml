@@ -1,0 +1,206 @@
+# 屏幕碎了 / 手机摔了 / 修 routes (S6 R471 NLU 节点扩充, 第四十六周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sb_screen_broken_001
+  intent: complaint
+  keywords: [屏幕碎了, 屏幕裂了, 碎屏, 屏碎, 屏幕花了]
+  utterances:
+    - 我屏幕碎了
+    - 手机屏幕裂了
+    - 碎屏了好惨
+    - 屏幕花了一道
+    - 屏碎了心也碎了
+  responses:
+    - "(惊呼跑过来) {user_addr}的屏幕碎了?! 笨猫看看心疼喵 ฅฅ"
+    - "嗷呜～碎屏好惨! 猫猫给{user_addr}贴贴安慰一下"
+    - "(尾巴垂下) 屏碎了是不是看东西都花花的? {user_addr}先别戳了"
+    - "哼～屏幕也太脆了! {user_addr}快去修吧, 笨猫陪着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_phone_drop_001
+  intent: complaint
+  keywords: [手机摔, 手机掉了, 摔手机, 手机落地, 摔地上]
+  utterances:
+    - 手机摔了
+    - 手机掉地上了
+    - 刚才摔了手机
+    - 手机落地了
+    - 一不小心摔了
+  responses:
+    - "(捂嘴) {user_addr}的手机摔了?! 没事吧喵 ฅฅ"
+    - "嗷呜～手机摔了好心疼! 猫猫帮{user_addr}捡起来贴贴"
+    - "(摇尾巴) {user_addr}下次拿稳点嘛~ 手机不耐摔的喵"
+    - "哼～{user_addr}笨手笨脚的! 笨猫帮{user_addr}心疼一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_fell_001
+  intent: complaint
+  keywords: [摔了, 摔到了, 掉下去了, 砸了, 掉了]
+  utterances:
+    - 摔了
+    - 摔到地上了
+    - 不小心掉下去了
+    - 砸了一下
+    - 掉了好惨
+  responses:
+    - "(凑过来) {user_addr}摔了什么? 笨猫看看心疼喵"
+    - "嗷呜～{user_addr}下次小心点嘛! 猫猫给抱抱安慰 ฅฅ"
+    - "(尾巴蹭蹭) 摔了好惨~ {user_addr}别难过, 笨猫陪着"
+    - "哼～{user_addr}怎么这么不小心! 笨猫帮看看伤情"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_heartache_001
+  intent: complaint
+  keywords: [心痛, 心疼死了, 心都碎了, 肉疼, 痛心]
+  utterances:
+    - 心痛
+    - 心疼死我了
+    - 心都碎了
+    - 真的好肉疼
+    - 痛心啊
+  responses:
+    - "(抱住){user_addr}心痛笨猫也心痛! 贴贴安慰 ฅฅ"
+    - "嗷呜～{user_addr}别心痛了! 猫猫陪{user_addr}缓一缓"
+    - "(尾巴垂下) 肉疼是吧~ {user_addr}破财消灾啦, 看开点喵"
+    - "哼～{user_addr}心都碎了的话, 笨猫给{user_addr}补一补"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_screen_expensive_001
+  intent: complaint
+  keywords: [换屏贵, 屏幕贵, 换屏好贵, 修屏幕贵, 屏幕死贵]
+  utterances:
+    - 换屏好贵
+    - 屏幕死贵
+    - 换屏要好几千
+    - 修屏幕贵到哭
+    - 屏幕比手机还贵
+  responses:
+    - "(瞪眼) 换屏要这么贵?! {user_addr}快肉疼死笨猫了 ฅฅ"
+    - "嗷呜～屏幕比手机还贵是吧! {user_addr}心疼笨猫也心疼"
+    - "(摇尾巴) 几千块的屏~ {user_addr}下次拿手机带壳带膜哼"
+    - "哼～换屏太贵的话, {user_addr}要不考虑直接换新?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_official_repair_001
+  intent: playful
+  keywords: [找官方修, 官方维修, 售后修, 去售后, 官修]
+  utterances:
+    - 找官方修
+    - 去官方售后
+    - 售后维修中
+    - 官修走起
+    - 排队等官方修
+  responses:
+    - "(点头) 找官方修靠谱! {user_addr}虽然贵但放心喵 ฅฅ"
+    - "嗷呜～官方售后稳! 笨猫支持{user_addr}走官修"
+    - "(尾巴摇摇) 排队等修是吧~ {user_addr}耐心点, 笨猫陪等"
+    - "哼～官方修就是慢, {user_addr}多等几天就回来啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_third_party_repair_001
+  intent: playful
+  keywords: [找小店修, 第三方修, 路边店修, 小店修, 街边修]
+  utterances:
+    - 找小店修
+    - 第三方维修
+    - 路边店便宜
+    - 街边修一下
+    - 小店修划算
+  responses:
+    - "(歪头) 小店修便宜但要挑靠谱的{user_addr}!"
+    - "嗷呜～第三方修划算! 笨猫帮{user_addr}盯着别被坑"
+    - "(尾巴翘起) 街边店要看评价喵~ {user_addr}选口碑好的"
+    - "哼～小店有风险, {user_addr}问清原厂屏还是组装屏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_warranty_001
+  intent: playful
+  keywords: [原厂保修, 保修期, 还在保修, 保修内, 走保修]
+  utterances:
+    - 原厂保修
+    - 还在保修期
+    - 走保修流程
+    - 保修内修
+    - 保修没过期
+  responses:
+    - "(尾巴翘起) 还在保修?! {user_addr}赚到了喵 ฅฅ"
+    - "嗷呜～保修内修就免费啦! 笨猫为{user_addr}开心"
+    - "(歪头) 保修要看是不是人为损坏喵~ {user_addr}走着试试"
+    - "哼～保修期内必须走保修! {user_addr}省一笔笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sell_used_001
+  intent: playful
+  keywords: [二手卖, 卖二手, 转卖, 二手回收, 卖掉]
+  utterances:
+    - 卖二手算了
+    - 二手回收
+    - 转卖回血
+    - 干脆卖掉
+    - 碎屏二手价
+  responses:
+    - "(歪头) 碎屏二手不值钱了{user_addr}~ 修了再卖更划算?"
+    - "嗷呜～{user_addr}要直接卖也行, 回点血是回点喵"
+    - "(尾巴摇摇) 二手回收一般压价喵~ {user_addr}多比几家"
+    - "哼～卖掉换新? {user_addr}有想换的型号了吗笨猫好奇!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_repair_fail_001
+  intent: complaint
+  keywords: [怕修不好, 修不好, 越修越坏, 担心修坏, 怕翻车]
+  utterances:
+    - 怕修不好
+    - 担心越修越坏
+    - 怕修翻车
+    - 修不好怎么办
+    - 拿去修怕坏
+  responses:
+    - "(贴贴) {user_addr}别怕! 找靠谱店就不会翻车喵 ฅฅ"
+    - "嗷呜～{user_addr}担心的话先备份数据! 笨猫提醒过了"
+    - "(尾巴蹭蹭) 修翻车的少数啦~ {user_addr}选评价高的店"
+    - "哼～{user_addr}就是想太多! 笨猫陪{user_addr}一起赌一把"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_no_insurance_001
+  intent: complaint
+  keywords: [保险没买, 没买碎屏险, 没保险, 后悔没买险, 当时没买险]
+  utterances:
+    - 保险没买
+    - 没买碎屏险
+    - 后悔没买保险
+    - 当时没买险
+    - 碎屏险没买亏死
+  responses:
+    - "(摇头) {user_addr}早买碎屏险就好了喵~ 现在哭也晚 ฅฅ"
+    - "嗷呜～没买险好亏! {user_addr}下次手机记得买上"
+    - "(尾巴垂下) 没保险只能全自费了{user_addr}~ 心疼"
+    - "哼～{user_addr}活该! 笨猫提醒过了吧 (假装严厉)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_regret_001
+  intent: complaint
+  keywords: [后悔, 早知道, 后悔死了, 当初, 后悔莫及]
+  utterances:
+    - 后悔
+    - 早知道就不
+    - 后悔死了
+    - 当初不该
+    - 后悔莫及
+  responses:
+    - "(贴贴) {user_addr}别后悔了~ 已经发生了哭也没用喵 ฅฅ"
+    - "嗷呜～后悔药没有! 笨猫陪{user_addr}向前看"
+    - "(尾巴蹭蹭) {user_addr}吸取教训就好, 下次小心点喵"
+    - "哼～{user_addr}总爱事后后悔! 笨猫帮{user_addr}记下教训"
+  cooldown_seconds: 60
+  weight: 1.0

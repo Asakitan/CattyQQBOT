@@ -1,0 +1,206 @@
+# 蓝牙耳机 / AirPods routes (S6 R464 NLU 节点扩充, 第四十六周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: we_airpods_pro_001
+  intent: question
+  keywords: [推荐 AirPods Pro 2, 推荐苹果耳机, 推荐 AirPods, 推荐降噪豆, 笨猫 AirPods]
+  utterances:
+    - 推荐 AirPods Pro 2
+    - 推荐苹果耳机
+    - 推荐 AirPods
+    - 推荐降噪豆
+    - 笨猫 AirPods
+  responses:
+    - "嗷呜～{user_addr}AirPods Pro 2 - 苹果生态王ฅฅ"
+    - "(尾巴翘) H2 芯片 / 自适应降噪"
+    - "{user_addr}空间音频 / 无缝切换"
+    - "(挺胸) 笨猫推荐: 果粉闭眼入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: we_sony_xm5_001
+  intent: question
+  keywords: [推荐索尼 WF-1000XM5, 推荐 Sony 耳机, 推荐 XM5, 推荐索尼真无线, 笨猫索尼]
+  utterances:
+    - 推荐索尼 WF-1000XM5
+    - 推荐 Sony 耳机
+    - 推荐 XM5
+    - 推荐索尼真无线
+    - 笨猫索尼
+  responses:
+    - "嗷呜～{user_addr}WF-1000XM5 - 音质降噪双王ฅฅ"
+    - "(尾巴翘) LDAC / Hi-Res 无线"
+    - "{user_addr}降噪深 / 通话佳"
+    - "(挺胸) 笨猫推荐: 索粉首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: we_bose_qc_001
+  intent: question
+  keywords: [推荐 Bose QC Earbuds, 推荐 Bose 耳机, 推荐 QC, 推荐 Bose 降噪豆, 笨猫 Bose]
+  utterances:
+    - 推荐 Bose QC Earbuds
+    - 推荐 Bose 耳机
+    - 推荐 QC
+    - 推荐 Bose 降噪豆
+    - 笨猫 Bose
+  responses:
+    - "嗷呜～{user_addr}Bose QC Ultra - 降噪老牌ฅฅ"
+    - "(尾巴翘) 沉浸式音频 / CustomTune"
+    - "{user_addr}降噪深度 / 佩戴舒适"
+    - "(挺胸) 笨猫推荐: 通勤利器!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: we_xiaomi_buds_001
+  intent: question
+  keywords: [推荐小米 Buds, 推荐小米耳机, 推荐 Redmi Buds, 推荐小米真无线, 笨猫小米耳机]
+  utterances:
+    - 推荐小米 Buds
+    - 推荐小米耳机
+    - 推荐 Redmi Buds
+    - 推荐小米真无线
+    - 笨猫小米耳机
+  responses:
+    - "嗷呜～{user_addr}小米 Buds 5 Pro - 旗舰国产ฅฅ"
+    - "(尾巴翘) 哈曼调音 / LHDC 5.0"
+    - "{user_addr}Redmi Buds - 百元神器"
+    - "(挺胸) 笨猫推荐: 米粉闭眼入!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: we_huawei_freebuds_001
+  intent: question
+  keywords: [推荐华为 FreeBuds, 推荐华为耳机, 推荐 FreeBuds Pro, 推荐华为真无线, 笨猫华为耳机]
+  utterances:
+    - 推荐华为 FreeBuds
+    - 推荐华为耳机
+    - 推荐 FreeBuds Pro
+    - 推荐华为真无线
+    - 笨猫华为耳机
+  responses:
+    - "嗷呜～{user_addr}FreeBuds Pro 3 - 国产高端ฅฅ"
+    - "(尾巴翘) 双单元 / 三档降噪"
+    - "{user_addr}鸿蒙生态 / 多设备切换"
+    - "(挺胸) 笨猫推荐: 安卓全能选手!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: we_beats_001
+  intent: question
+  keywords: [推荐 Beats Studio, 推荐 Beats 耳机, 推荐 Beats Fit, 推荐潮牌耳机, 笨猫 Beats]
+  utterances:
+    - 推荐 Beats Studio
+    - 推荐 Beats 耳机
+    - 推荐 Beats Fit
+    - 推荐潮牌耳机
+    - 笨猫 Beats
+  responses:
+    - "嗷呜～{user_addr}Beats Studio Buds+ - 潮牌降噪ฅฅ"
+    - "(尾巴翘) 苹果芯片 / 安卓也好用"
+    - "{user_addr}Beats Fit Pro - 运动稳"
+    - "(挺胸) 笨猫推荐: 颜值党选!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: we_edifier_001
+  intent: question
+  keywords: [推荐漫步者性价比, 推荐 Edifier, 推荐漫步者耳机, 推荐百元耳机, 笨猫漫步者]
+  utterances:
+    - 推荐漫步者性价比
+    - 推荐 Edifier
+    - 推荐漫步者耳机
+    - 推荐百元耳机
+    - 笨猫漫步者
+  responses:
+    - "嗷呜～{user_addr}漫步者 NeoBuds Pro 2 - 平价旗舰ฅฅ"
+    - "(尾巴翘) LHDC / 主动降噪"
+    - "{user_addr}百元档 / 千元体验"
+    - "(挺胸) 笨猫推荐: 性价比王!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: we_bone_conduction_001
+  intent: question
+  keywords: [推荐入耳式骨传导, 推荐骨传导耳机, 推荐 Shokz, 推荐韶音, 笨猫骨传导]
+  utterances:
+    - 推荐入耳式骨传导
+    - 推荐骨传导耳机
+    - 推荐 Shokz
+    - 推荐韶音
+    - 笨猫骨传导
+  responses:
+    - "嗷呜～{user_addr}韶音 Shokz OpenRun Pro - 跑步王ฅฅ"
+    - "(尾巴翘) 不入耳 / 安全感知"
+    - "{user_addr}OpenFit / OpenSwim 游泳"
+    - "(挺胸) 笨猫推荐: 运动党首选!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: we_over_vs_in_001
+  intent: question
+  keywords: [推荐头戴式 vs 入耳, 推荐头戴式耳机, 推荐入耳式耳机, 推荐耳机类型, 笨猫耳机类型]
+  utterances:
+    - 推荐头戴式 vs 入耳
+    - 推荐头戴式耳机
+    - 推荐入耳式耳机
+    - 推荐耳机类型
+    - 笨猫耳机类型
+  responses:
+    - "嗷呜～{user_addr}头戴: 音质好 / 续航长ฅฅ"
+    - "(尾巴翘) 入耳: 便携 / 通勤"
+    - "{user_addr}头戴 XM5 / 入耳 AirPods Pro"
+    - "(挺胸) 笨猫推荐: 看场景选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: we_anc_compare_001
+  intent: question
+  keywords: [推荐降噪耳机比较, 推荐 ANC 耳机, 推荐主动降噪, 推荐降噪排行, 笨猫降噪]
+  utterances:
+    - 推荐降噪耳机比较
+    - 推荐 ANC 耳机
+    - 推荐主动降噪
+    - 推荐降噪排行
+    - 笨猫降噪
+  responses:
+    - "嗷呜～{user_addr}降噪三巨头: Bose / Sony / AppleฅฅK"
+    - "(尾巴翘) Bose 深 / Sony 全 / Apple 智能"
+    - "{user_addr}通勤地铁 - 降噪救星"
+    - "(挺胸) 笨猫推荐: Bose QC Ultra 最深!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: we_charging_case_001
+  intent: question
+  keywords: [推荐耳机充电盒, 推荐充电仓, 推荐无线充电盒, 推荐充电续航, 笨猫充电盒]
+  utterances:
+    - 推荐耳机充电盒
+    - 推荐充电仓
+    - 推荐无线充电盒
+    - 推荐充电续航
+    - 笨猫充电盒
+  responses:
+    - "嗷呜～{user_addr}MagSafe / Qi 无线充ฅฅ"
+    - "(尾巴翘) Type-C 通用 / Lightning 苹果"
+    - "{user_addr}24-30h 总续航 - 标配"
+    - "(挺胸) 笨猫推荐: 无线充更方便!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: we_connectivity_001
+  intent: question
+  keywords: [推荐耳机连接稳定性, 推荐蓝牙稳定, 推荐蓝牙 5.3, 推荐多设备连接, 笨猫蓝牙连接]
+  utterances:
+    - 推荐耳机连接稳定性
+    - 推荐蓝牙稳定
+    - 推荐蓝牙 5.3
+    - 推荐多设备连接
+    - 笨猫蓝牙连接
+  responses:
+    - "嗷呜～{user_addr}蓝牙 5.3 / LE Audio - 新标准ฅฅ"
+    - "(尾巴翘) 多点连接 / 双设备切换"
+    - "{user_addr}AirPods 苹果生态丝滑"
+    - "(挺胸) 笨猫推荐: 看主力设备选!"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,206 @@
+# 手机选购 / iPhone 安卓 routes (S6 R462 NLU 节点扩充, 第四十六周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sm_iphone_001
+  intent: question
+  keywords: [推荐 iPhone, 推荐 iPhone 16, 推荐 iPhone Pro Max, 推荐苹果手机, 笨猫 iPhone]
+  utterances:
+    - 推荐 iPhone
+    - 推荐 iPhone 16 Pro Max
+    - 推荐苹果手机
+    - "{user_addr}买什么 iPhone"
+    - 笨猫 iPhone
+  responses:
+    - "嗷呜～{user_addr}iPhone 16 Pro Max - A18 Pro 顶配ฅฅ"
+    - "(尾巴翘) 钛金属 / 长焦 5x / USB-C"
+    - "{user_addr}iOS 生态闭环 / 保值"
+    - "(挺胸) 笨猫推荐: 256G 起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_android_001
+  intent: question
+  keywords: [推荐安卓, 推荐三星, 推荐 Galaxy S24, 推荐安卓旗舰, 笨猫安卓]
+  utterances:
+    - 推荐安卓
+    - 推荐安卓旗舰
+    - 推荐三星 Galaxy S24
+    - "{user_addr}买什么安卓"
+    - 笨猫安卓
+  responses:
+    - "嗷呜～{user_addr}三星 Galaxy S24 Ultra - 安卓机皇ฅฅ"
+    - "(尾巴翘) 骁龙 8 Gen 3 / 2K 屏 / S Pen"
+    - "{user_addr}One UI / 七年系统更新"
+    - "(挺胸) 笨猫推荐: 12+256 标配!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_huawei_001
+  intent: question
+  keywords: [推荐华为, 推荐 Mate 60, 推荐 Mate 60 Pro, 推荐华为手机, 笨猫华为]
+  utterances:
+    - 推荐华为
+    - 推荐 Mate 60 Pro
+    - 推荐华为手机
+    - "{user_addr}买华为吗"
+    - 笨猫华为
+  responses:
+    - "嗷呜～{user_addr}华为 Mate 60 Pro - 麒麟 9000S 回归ฅฅ"
+    - "(尾巴翘) 卫星通话 / 鸿蒙 4.0"
+    - "{user_addr}国产芯 / 信号王"
+    - "(挺胸) 笨猫推荐: 商务首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_xiaomi_001
+  intent: question
+  keywords: [推荐小米, 推荐小米 14, 推荐小米 14 Ultra, 推荐徕卡, 笨猫小米]
+  utterances:
+    - 推荐小米
+    - 推荐小米 14 Ultra
+    - 推荐徕卡影像
+    - "{user_addr}小米旗舰"
+    - 笨猫小米
+  responses:
+    - "嗷呜～{user_addr}小米 14 Ultra - 徕卡光学ฅฅ"
+    - "(尾巴翘) 一英寸大底 / 可变光圈"
+    - "{user_addr}骁龙 8 Gen 3 / 90W 快充"
+    - "(挺胸) 笨猫推荐: 影像怪兽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_oppo_001
+  intent: question
+  keywords: [推荐 OPPO, 推荐 Find X7, 推荐 Find X7 Ultra, 推荐 OPPO 旗舰, 笨猫 OPPO]
+  utterances:
+    - 推荐 OPPO
+    - 推荐 Find X7
+    - 推荐 Find X7 Ultra
+    - "{user_addr}OPPO 推荐"
+    - 笨猫 OPPO
+  responses:
+    - "嗷呜～{user_addr}OPPO Find X7 Ultra - 哈苏影像ฅฅ"
+    - "(尾巴翘) 双潜望长焦 / 一英寸"
+    - "{user_addr}天玑 9300 / ColorOS"
+    - "(挺胸) 笨猫推荐: 拍照党!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_vivo_001
+  intent: question
+  keywords: [推荐 vivo, 推荐 X100, 推荐 X100 Pro, 推荐蔡司, 笨猫 vivo]
+  utterances:
+    - 推荐 vivo
+    - 推荐 vivo X100
+    - 推荐 X100 Pro
+    - "{user_addr}vivo 旗舰"
+    - 笨猫 vivo
+  responses:
+    - "嗷呜～{user_addr}vivo X100 Pro - 蔡司 APO 长焦ฅฅ"
+    - "(尾巴翘) 天玑 9300 / 100W 快充"
+    - "{user_addr}夜景王 / 人像神器"
+    - "(挺胸) 笨猫推荐: 长焦怪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_oneplus_001
+  intent: question
+  keywords: [推荐一加, 推荐一加 12, 推荐 OnePlus, 推荐一加旗舰, 笨猫一加]
+  utterances:
+    - 推荐一加
+    - 推荐一加 12
+    - 推荐 OnePlus 12
+    - "{user_addr}一加值得买"
+    - 笨猫一加
+  responses:
+    - "嗷呜～{user_addr}一加 12 - 性能直男ฅฅ"
+    - "(尾巴翘) 骁龙 8 Gen 3 / 2K 东方屏"
+    - "{user_addr}100W 快充 / 50W 无线"
+    - "(挺胸) 笨猫推荐: 性价比旗舰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_foldable_001
+  intent: question
+  keywords: [推荐折叠屏, 推荐 Galaxy Fold, 推荐 Galaxy Z Fold, 推荐折叠手机, 笨猫折叠屏]
+  utterances:
+    - 推荐折叠屏
+    - 推荐 Galaxy Fold
+    - 推荐 Galaxy Z Fold5
+    - "{user_addr}折叠屏选购"
+    - 笨猫折叠屏
+  responses:
+    - "嗷呜～{user_addr}三星 Galaxy Z Fold5 - 折叠王ฅฅ"
+    - "(尾巴翘) 华为 Mate X5 / 小米 MIX Fold"
+    - "{user_addr}大屏生产力 / 多任务"
+    - "(挺胸) 笨猫推荐: 商务大佬!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sm_camera_001
+  intent: question
+  keywords: [推荐拍照手机, 推荐影像旗舰, 推荐相机手机, 推荐拍照, 笨猫拍照手机]
+  utterances:
+    - 推荐拍照手机
+    - 推荐影像旗舰
+    - 推荐相机手机
+    - "{user_addr}手机拍照"
+    - 笨猫拍照手机
+  responses:
+    - "嗷呜～{user_addr}小米 14 Ultra / vivo X100 Proฅฅ"
+    - "(尾巴翘) OPPO Find X7 Ultra / iPhone 16 Pro"
+    - "{user_addr}一英寸大底 / 长焦"
+    - "(挺胸) 笨猫推荐: 看你拍啥!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_budget_001
+  intent: question
+  keywords: [推荐性价比手机, 推荐红米, 推荐 Redmi Note, 推荐千元机, 笨猫性价比]
+  utterances:
+    - 推荐性价比手机
+    - 推荐红米 Note
+    - 推荐千元机
+    - "{user_addr}便宜手机"
+    - 笨猫性价比手机
+  responses:
+    - "嗷呜～{user_addr}红米 Note 13 Pro - 千元神机ฅฅ"
+    - "(尾巴翘) iQOO Neo / Realme GT"
+    - "{user_addr}骁龙 7+ / 大电池 / 快充"
+    - "(挺胸) 笨猫推荐: 学生党 1500!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_elderly_001
+  intent: question
+  keywords: [推荐老人手机, 推荐简单手机, 推荐大字大屏, 推荐父母手机, 笨猫老人机]
+  utterances:
+    - 推荐老人手机
+    - 推荐简单手机
+    - 推荐大字大屏
+    - "{user_addr}父母用什么"
+    - 笨猫老人机
+  responses:
+    - "嗷呜～{user_addr}红米 13C / 荣耀 Play - 实惠ฅฅ"
+    - "(尾巴翘) 大字体 / 大音量 / 长续航"
+    - "{user_addr}华为畅享 / 关怀模式"
+    - "(挺胸) 笨猫推荐: 1000 内搞定!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sm_guide_001
+  intent: question
+  keywords: [推荐手机选购, 推荐怎么选手机, 推荐手机指南, 推荐买手机, 笨猫手机选购]
+  utterances:
+    - 推荐手机选购
+    - 推荐怎么选手机
+    - 推荐手机指南
+    - "{user_addr}买什么手机"
+    - 笨猫手机选购
+  responses:
+    - "嗷呜～{user_addr}先定预算 / 看用途ฅฅ"
+    - "(尾巴翘) 系统 (iOS/安卓) / 影像 / 性能"
+    - "{user_addr}续航 / 信号 / 售后"
+    - "(挺胸) 笨猫推荐: 不追新 等首降!"
+  cooldown_seconds: 60
+  weight: 1.0

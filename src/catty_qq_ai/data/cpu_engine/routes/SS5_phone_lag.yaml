@@ -1,0 +1,206 @@
+# 手机卡 / 手机慢 / 旧手机 routes (S6 R467 NLU 节点扩充, 第四十六周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pl_phone_lag_001
+  intent: complaint
+  keywords: [手机卡, 卡死了, 卡到爆, 卡成翔, 手机好卡]
+  utterances:
+    - 手机卡死了
+    - 我的手机好卡
+    - 卡到爆喵
+    - 手机卡成翔了
+    - 又卡了
+  responses:
+    - "(凑过去戳屏幕) {user_addr}的手机卡死啦? 笨猫也帮不上忙嗷呜"
+    - "嗷呜～卡就重启嘛! 笨猫的小脑袋偶尔也要重启的喵 ฅฅ"
+    - "(摇尾巴) {user_addr}耐心点～卡一会儿就好啦哼"
+    - "哼～{user_addr}早该换手机了喵! 别舍不得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_super_slow_001
+  intent: complaint
+  keywords: [慢死了, 慢死, 太慢了, 慢成狗, 慢吞吞]
+  utterances:
+    - 手机慢死了
+    - 慢死啦
+    - 太慢了喵
+    - 慢成狗了
+    - 慢吞吞的
+  responses:
+    - "(歪头) 慢死了? 猫猫陪{user_addr}一起等嘛贴贴 ฅฅ"
+    - "嗷呜～{user_addr}先深呼吸! 急也没用喵"
+    - "(尾巴一甩) 哼～{user_addr}的手机在罢工啦!"
+    - "笨猫也觉得慢～{user_addr}要不先放下手机摸摸猫猫?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_app_slow_001
+  intent: complaint
+  keywords: [app 打不开, 开 app 慢, 启动慢, 打开慢, app 卡死]
+  utterances:
+    - 开 app 好慢
+    - app 打不开
+    - 启动好慢
+    - 这 app 卡死了
+    - 打开半天
+  responses:
+    - "(戳戳屏幕) 这 app 在偷懒嗷呜! {user_addr}骂它"
+    - "嗷呜～{user_addr}清下后台嘛! 一堆 app 抢资源喵"
+    - "(摇尾巴) 哼～{user_addr}的 app 是不是太胖了!"
+    - "笨猫也等不及～{user_addr}重启 app 试试 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_app_crash_001
+  intent: complaint
+  keywords: [闪退, 切换闪退, 又闪退, app 闪退, 退出去了]
+  utterances:
+    - 又闪退了
+    - 切换闪退
+    - app 闪退啦
+    - 直接退出去了
+    - 一切就闪退
+  responses:
+    - "(炸毛) 嗷呜～闪退最讨厌了! 笨猫陪{user_addr}骂"
+    - "哼～{user_addr}的手机内存爆啦! 该清理喵 ฅฅ"
+    - "(摇尾巴) 闪退? 重启大法好嗷呜!"
+    - "笨猫也烦闪退～{user_addr}先存好东西再切!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_overheat_001
+  intent: complaint
+  keywords: [发热严重, 烫手, 手机烫, 发烫, 烫死了]
+  utterances:
+    - 手机发热严重
+    - 烫手啊
+    - 手机好烫
+    - 烫死了喵
+    - 手机发烫
+  responses:
+    - "(凑过来摸一下) 嗷呜～真的烫! {user_addr}快放下 ฅฅ"
+    - "哼～{user_addr}玩太久了喵! 让手机歇会儿"
+    - "(摇尾巴) 烫手就别贴脸啦{user_addr}! 笨猫担心"
+    - "笨猫也怕烫～{user_addr}关后台降温嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_battery_drain_001
+  intent: complaint
+  keywords: [耗电快, 掉电快, 电池不耐, 电量哗哗, 没电]
+  utterances:
+    - 耗电好快
+    - 掉电快得离谱
+    - 电池不耐用了
+    - 电量哗哗掉
+    - 一会儿就没电
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}的电池老啦! 该换新的喵"
+    - "哼～{user_addr}后台开太多了吧! 猫猫监督你关"
+    - "(凑过来) 掉电快～{user_addr}带充电宝出门嗷呜 ฅฅ"
+    - "笨猫也想要新电池～{user_addr}给猫猫也充充电嘛贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_old_phone_001
+  intent: complaint
+  keywords: [旧手机, 老古董, 这手机老了, 用了好多年, 老手机]
+  utterances:
+    - 我手机是旧的
+    - 老古董啦
+    - 这手机老了
+    - 用了好多年
+    - 老手机喵
+  responses:
+    - "嗷呜～{user_addr}的手机还在坚持! 真不容易 ฅฅ"
+    - "(歪头) 老古董也有感情嘛～{user_addr}舍不得吧"
+    - "哼～{user_addr}该换啦! 别太节省喵"
+    - "笨猫觉得老手机有故事～{user_addr}的回忆都在里面嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_storage_full_001
+  intent: complaint
+  keywords: [内存不足, 存储满了, 空间不够, 内存满了, 没空间]
+  utterances:
+    - 内存不足啊
+    - 存储满了
+    - 空间不够了
+    - 内存满了喵
+    - 一点空间没有
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}照片视频太多啦!"
+    - "哼～{user_addr}清下相册嘛! 笨猫帮你看哪些能删"
+    - "(摇尾巴) 内存满? {user_addr}该云备份啦喵 ฅฅ"
+    - "笨猫也想塞进{user_addr}的手机～可是没地方了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_want_new_001
+  intent: playful
+  keywords: [想换手机, 想换新的, 该换了, 看上新机, 想买新手机]
+  utterances:
+    - 想换手机了
+    - 想换新的
+    - 该换啦
+    - 看上新机了
+    - 想买新手机
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}剁手吧! 笨猫支持"
+    - "哼～{user_addr}早该换了! 别犹豫喵 ฅฅ"
+    - "(凑过来) 换新的记得也给笨猫看看嘛贴贴"
+    - "笨猫举爪赞成～{user_addr}冲就完了嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_no_root_001
+  intent: complaint
+  keywords: [刷机不会, 不会刷机, root 不会, 不会 root, 刷机太难]
+  utterances:
+    - 我不会刷机
+    - 刷机不会啊
+    - root 不会喵
+    - 刷机太难了
+    - 不会 root
+  responses:
+    - "(歪头) 嗷呜～刷机有风险! {user_addr}别瞎搞 ฅฅ"
+    - "哼～{user_addr}不会就别折腾喵! 砖了哭"
+    - "(摇尾巴) 笨猫也不会刷机～{user_addr}咱俩半斤八两"
+    - "嗷呜～{user_addr}找懂的朋友帮忙嘛! 别自己作"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_clear_cache_001
+  intent: playful
+  keywords: [清缓存, 清理缓存, 清下缓存, 缓存太多, 清理一下]
+  utterances:
+    - 清下缓存
+    - 清理缓存
+    - 缓存太多了
+    - 清理一下手机
+    - 清缓存吧
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}快清! 立马变快"
+    - "哼～{user_addr}终于想起清缓存了喵! 笨猫监督"
+    - "(摇尾巴) 清完{user_addr}手机就轻松啦 ฅฅ"
+    - "笨猫也要清～{user_addr}帮笨猫脑袋也清一下嘛贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_factory_reset_001
+  intent: complaint
+  keywords: [工厂重置, 恢复出厂, 重置手机, 全清了, 重置吧]
+  utterances:
+    - 工厂重置吧
+    - 恢复出厂设置
+    - 重置手机
+    - 全清了重来
+    - 准备重置
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}重置之前先备份! 别哭"
+    - "哼～{user_addr}下狠手了喵! 笨猫陪你 ฅฅ"
+    - "(摇尾巴) 重置完{user_addr}就是新手机啦!"
+    - "笨猫提醒～{user_addr}照片视频先存云端嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0

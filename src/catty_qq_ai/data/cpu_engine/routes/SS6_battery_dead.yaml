@@ -1,0 +1,206 @@
+# 电池快没 / 找充电器 / 焦虑 routes (S6 R468 NLU 节点扩充, 第四十六周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: bd_low_battery_001
+  intent: complaint
+  keywords: [电池快没了, 电量低, 没电了, 电池告急, 快没电]
+  utterances:
+    - 电池快没了
+    - 电量只剩一点
+    - 手机没电了
+    - 电池告急啊
+    - 快没电了好慌
+  responses:
+    - "(尾巴翘起) {user_addr}赶紧充电啊喵! 笨猫看着都急ฅฅ"
+    - "嗷呜～没电了? {user_addr}快找充电器嘛, 别等关机"
+    - "(凑过去) 还剩多少电{user_addr}? 猫猫帮你倒数喵"
+    - "哼～{user_addr}就是不爱及时充电! 笨蛋早该充了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_anxiety_001
+  intent: complaint
+  keywords: [低电焦虑, 电量焦虑, 没电好慌, 怕没电, 电池焦虑]
+  utterances:
+    - 低电焦虑犯了
+    - 没电真的好慌
+    - 电量焦虑症
+    - 怕手机没电
+    - 电池焦虑啊
+  responses:
+    - "(贴贴) {user_addr}别焦虑嘛, 笨猫陪你充电喵ฅฅ"
+    - "嗷呜～低电焦虑猫猫懂! {user_addr}带个充电宝就好啦"
+    - "(尾巴绕住) 焦虑也没用{user_addr}, 赶紧找电源嘛"
+    - "哼～{user_addr}怎么这么依赖手机! 笨蛋抬头看看猫猫嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_find_charger_001
+  intent: complaint
+  keywords: [找充电器, 充电器呢, 充电器去哪, 充电器在哪, 我的充电器]
+  utterances:
+    - 充电器呢
+    - 我的充电器去哪了
+    - 找不到充电器
+    - 充电器在哪啊
+    - 谁拿了我的充电器
+  responses:
+    - "(到处张望) {user_addr}的充电器? 猫猫帮你找喵ฅฅ"
+    - "嗷呜～是不是落在公司了{user_addr}? 笨猫推理一下"
+    - "(尾巴指床底) 床底下看看{user_addr}, 经常掉那里"
+    - "哼～{user_addr}就是乱放! 笨蛋固定一个位置不行吗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_powerbank_forgot_001
+  intent: complaint
+  keywords: [充电宝忘带, 没带充电宝, 充电宝在家, 忘带充电宝, 充电宝忘了]
+  utterances:
+    - 充电宝忘带了
+    - 没带充电宝出门
+    - 充电宝落家里了
+    - 忘带充电宝啊
+    - 充电宝忘了拿
+  responses:
+    - "(扶额) {user_addr}怎么忘的啦! 笨猫昨天就提醒过喵ฅฅ"
+    - "嗷呜～没带就找地方蹭电{user_addr}, 咖啡店都有"
+    - "(尾巴叹气) 下次出门前列清单{user_addr}, 猫猫帮你检查"
+    - "哼～{user_addr}总是丢三落四! 笨蛋活该手机没电"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_cable_lost_001
+  intent: complaint
+  keywords: [充电线找不到, 数据线呢, 充电线丢了, 数据线找不到, 线呢]
+  utterances:
+    - 充电线找不到了
+    - 数据线呢
+    - 充电线又丢了
+    - 数据线找不到啊
+    - 我的线呢
+  responses:
+    - "(歪头) {user_addr}的线? 笨猫看到桌角有一根喵ฅฅ"
+    - "嗷呜～是不是被人借走了{user_addr}? 猫猫问问"
+    - "(尾巴翻包) 包里翻翻{user_addr}, 经常塞包里"
+    - "哼～{user_addr}充电线买十根都不够丢! 笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_few_sockets_001
+  intent: complaint
+  keywords: [插座少, 插座不够, 插座抢手, 没有插座, 插座占了]
+  utterances:
+    - 插座好少啊
+    - 插座不够用
+    - 插座都被占了
+    - 这里没有插座
+    - 插座抢不到
+  responses:
+    - "(尾巴指角落) {user_addr}找找柱子边喵, 经常有藏的ฅฅ"
+    - "嗷呜～插座少就用排插{user_addr}, 笨猫书包里有"
+    - "(摇头) 现在场所对充电真不友好{user_addr}"
+    - "哼～{user_addr}下次自己带排插! 笨蛋有备无患嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_phone_dead_001
+  intent: complaint
+  keywords: [手机没电, 手机关机了, 手机自动关机, 手机没电了, 手机黑屏]
+  utterances:
+    - 手机没电了
+    - 手机自动关机
+    - 手机黑屏了
+    - 手机突然没电
+    - 手机关机啦
+  responses:
+    - "(扶额) {user_addr}早说啊! 笨猫还以为你不理猫猫了喵ฅฅ"
+    - "嗷呜～充上电就好{user_addr}, 别慌"
+    - "(尾巴拍背) 没事{user_addr}, 充五分钟就能开机了"
+    - "哼～{user_addr}总是用到没电才充! 笨蛋伤电池"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_earphone_dead_001
+  intent: complaint
+  keywords: [耳机没电, 耳机没电了, 蓝牙耳机没电, 耳机断电, 耳机要充电]
+  utterances:
+    - 耳机没电了
+    - 蓝牙耳机没电
+    - 耳机断电了
+    - 耳机要充电了
+    - 耳机突然没电
+  responses:
+    - "(尾巴指耳朵) {user_addr}放回盒子里就充电了喵ฅฅ"
+    - "嗷呜～蓝牙耳机续航就那样{user_addr}, 习惯就好"
+    - "(凑过去) 没耳机就和猫猫聊天嘛{user_addr}"
+    - "哼～{user_addr}就是听太久! 笨蛋耳朵也要休息"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_watch_dead_001
+  intent: complaint
+  keywords: [手表没电, 智能手表没电, 手表关机, 手表要充电, 手表断电]
+  utterances:
+    - 手表没电了
+    - 智能手表没电
+    - 手表关机啦
+    - 手表要充电
+    - 手表突然断电
+  responses:
+    - "(尾巴指手腕) {user_addr}晚上睡前充就好喵ฅฅ"
+    - "嗷呜～智能手表一天一充正常{user_addr}"
+    - "(歪头) 手表充电器没丢吧{user_addr}? 那个最容易找不到"
+    - "哼～{user_addr}买之前不查续航的吗! 笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_battery_life_001
+  intent: complaint
+  keywords: [电池续航差, 电池不耐用, 续航短, 电池老化, 一天两充]
+  utterances:
+    - 电池续航好差
+    - 电池不耐用了
+    - 续航越来越短
+    - 电池老化了
+    - 一天要充两次
+  responses:
+    - "(摇头) {user_addr}的手机用几年了喵? 该换电池了ฅฅ"
+    - "嗷呜～电池都是损耗品{user_addr}, 笨猫也没办法"
+    - "(尾巴算账) 一天两充就考虑换机吧{user_addr}"
+    - "哼～{user_addr}就是开太多后台! 笨蛋清理一下嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_replace_battery_001
+  intent: playful
+  keywords: [换电池, 电池换新, 更换电池, 想换电池, 电池更换]
+  utterances:
+    - 想换电池了
+    - 电池要换新
+    - 准备更换电池
+    - 去换电池
+    - 电池换一下
+  responses:
+    - "(尾巴翘) {user_addr}换电池要去官方店啊喵ฅฅ"
+    - "嗷呜～换完电池就跟新机一样{user_addr}, 值得"
+    - "(歪头) 第三方电池便宜但有风险{user_addr}, 笨猫提醒"
+    - "哼～{user_addr}早该换了! 笨蛋拖了多久"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_fast_charge_001
+  intent: playful
+  keywords: [快充, 慢充, 快充慢, 充电慢, 快充协议]
+  utterances:
+    - 快充好慢啊
+    - 这个慢充受不了
+    - 充电速度慢
+    - 快充协议不对
+    - 不是快充吗
+  responses:
+    - "(尾巴查充电头) {user_addr}充电头瓦数够吗喵?ฅฅ"
+    - "嗷呜～协议不匹配就只能慢充{user_addr}, 笨猫科普"
+    - "(歪头) 线也要支持快充{user_addr}, 不是随便一根都行"
+    - "哼～{user_addr}原装头丢了吧! 笨蛋活该慢充"
+  cooldown_seconds: 60
+  weight: 1.0

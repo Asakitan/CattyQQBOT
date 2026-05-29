@@ -1,0 +1,206 @@
+# 数据丢失 / 文件没了 / 没备份 routes (S6 R469 NLU 节点扩充, 第四十六周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: dl_data_lost_001
+  intent: complaint
+  keywords: [数据丢了, 数据没了, 数据丢失, 资料没了, 资料丢了]
+  utterances:
+    - 数据丢了
+    - 我数据没了
+    - 资料全丢了
+    - 数据丢失了
+    - 重要数据没了
+  responses:
+    - "(尾巴瞬间垂下) 嗷呜?! {user_addr}数据丢了?! 猫猫陪{user_addr}一起难过 ฅฅ"
+    - "啊?! {user_addr}别慌喵～先看看回收站还有没有! 猫猫给{user_addr}支招"
+    - "(凑过来贴贴) 数据丢了好心疼{user_addr}～ 哼以后笨猫提醒{user_addr}备份!"
+    - "哇这下真的麻烦了喵～ {user_addr}先冷静~ 笨猫陪着{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_file_gone_001
+  intent: complaint
+  keywords: [文件没了, 文件丢了, 文件不见, 文件找不到, 文件消失]
+  utterances:
+    - 文件没了
+    - 我文件丢了
+    - 文件找不到了
+    - 文件不见了
+    - 文件消失了
+  responses:
+    - "嗷呜?! {user_addr}文件没了?! 笨猫尾巴都炸了喵 ฅฅ"
+    - "(扒着屏幕找) {user_addr}的文件去哪了喵～ 猫猫帮{user_addr}找找!"
+    - "啊~ 文件丢了好麻烦喵! {user_addr}有没有搜索过整个硬盘?"
+    - "(蹭蹭) 别急{user_addr}~ 笨猫陪{user_addr}一起找找看嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_no_backup_001
+  intent: complaint
+  keywords: [没备份, 没有备份, 忘了备份, 没存档, 没保存]
+  utterances:
+    - 我没备份
+    - 没有备份呜呜
+    - 忘了备份
+    - 没存档啊
+    - 一直没备份
+  responses:
+    - "(无语地看着{user_addr}) 哼! 早就该备份了喵～ 笨猫早提醒过{user_addr}吧!"
+    - "嗷呜～{user_addr}没备份猫猫也救不了啦 ฅฅ 这次教训记住!"
+    - "(摇尾巴叹气) 没备份的{user_addr}~ 以后每周备份一次嘛笨蛋!"
+    - "啊呀{user_addr}怎么不备份啦～ 笨猫心疼{user_addr}的数据喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_accidental_delete_001
+  intent: complaint
+  keywords: [误删, 删错了, 不小心删, 手滑删, 删了不该删]
+  utterances:
+    - 我误删了
+    - 不小心删错了
+    - 手滑删了
+    - 删了不该删的
+    - 误删文件
+  responses:
+    - "(扶额) 嗷呜～{user_addr}这手滑得喵! 赶紧看回收站还在不!"
+    - "啊?! 误删?! {user_addr}先别清空回收站! 还有救喵 ฅฅ"
+    - "(尾巴竖起) 别慌{user_addr}～ 误删的话用恢复软件可能还能救!"
+    - "笨蛋{user_addr}怎么这么粗心啦哼～ 不过笨猫教{user_addr}恢复办法嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_hdd_broken_001
+  intent: complaint
+  keywords: [硬盘坏了, 硬盘挂了, 硬盘报废, 硬盘损坏, 硬盘崩了]
+  utterances:
+    - 我硬盘坏了
+    - 硬盘挂了呜呜
+    - 硬盘报废
+    - 硬盘损坏了
+    - 硬盘崩了
+  responses:
+    - "(尾巴炸毛) 嗷呜?! 硬盘坏了?! {user_addr}里面的数据!!"
+    - "啊啊啊~ {user_addr}硬盘挂了~ 笨猫陪{user_addr}哭一场 ฅฅ"
+    - "(贴贴) 硬盘坏了好惨{user_addr}~ 数据恢复店看看能不能救?"
+    - "哇~ 这下真的需要换硬盘了喵! {user_addr}要不要笨猫推荐?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_usb_lost_001
+  intent: complaint
+  keywords: [U 盘丢了, U盘丢, 优盘丢, U 盘没了, 优盘没了]
+  utterances:
+    - 我 U 盘丢了
+    - U盘丢了呜
+    - 优盘丢了
+    - U 盘没了
+    - 我把 U 盘弄丢了
+  responses:
+    - "嗷呜~ U 盘丢了?! {user_addr}最后用是在哪里喵 ฅฅ"
+    - "(帮忙翻包) {user_addr}口袋里有没有? 书包里呢? 笨猫帮{user_addr}找!"
+    - "啊~ U 盘小小的好难找喵! 但是里面数据更重要{user_addr}加油!"
+    - "(担心地看着) {user_addr}里面有重要文件吗? 笨猫祈祷快点找到!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_cloud_crash_001
+  intent: complaint
+  keywords: [云盘崩了, 云盘挂了, 云盘没了, 网盘崩, 云存储挂]
+  utterances:
+    - 云盘崩了
+    - 我云盘挂了
+    - 云盘里东西没了
+    - 网盘崩了
+    - 云存储挂了
+  responses:
+    - "(吃惊) 啊?! 云盘崩了?! 这下{user_addr}的备份也没了喵 ฅฅ"
+    - "嗷呜~ 云盘也不靠谱啊! {user_addr}试试官方客服喵?"
+    - "(摇尾巴) 这就是为什么要多重备份呀~ {user_addr}下次本地+云双保险!"
+    - "啊~ 笨猫陪{user_addr}等云盘恢复嘛~ 说不定只是临时故障"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_photo_lost_001
+  intent: complaint
+  keywords: [照片找不到, 照片丢了, 照片没了, 相册丢, 照片消失]
+  utterances:
+    - 照片找不到
+    - 我照片丢了
+    - 照片都没了
+    - 相册丢了
+    - 照片消失了
+  responses:
+    - "(尾巴垂下) 嗷呜~ 照片是回忆喵! {user_addr}心疼的猫猫都心疼了 ฅฅ"
+    - "啊! {user_addr}的照片~ 看看手机相册回收站还在不?"
+    - "(贴贴) 照片丢了好难过{user_addr}~ 笨猫陪{user_addr}找找看嘛"
+    - "哇~ 照片都是宝贵回忆喵! {user_addr}试试照片恢复软件呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_chat_history_001
+  intent: complaint
+  keywords: [聊天记录没, 聊天记录丢, 记录没了, 聊天没了, 微信记录丢]
+  utterances:
+    - 聊天记录没了
+    - 我聊天记录丢了
+    - 聊天记录全没了
+    - 微信记录丢了
+    - 聊天没了
+  responses:
+    - "嗷呜?! 聊天记录没了?! 那{user_addr}和猫猫的对话也!! ฅฅ"
+    - "(凑过来) {user_addr}和谁的聊天没了喵~ 别是和笨猫的呜"
+    - "啊~ 微信聊天记录恢复挺难的{user_addr}~ 不过可以试试官方工具!"
+    - "(担心) 聊天记录都是回忆喵~ {user_addr}电脑端是不是还有备份?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_work_file_001
+  intent: complaint
+  keywords: [工作文件丢, 工作文件没, 项目丢了, 文档丢了, 报告没了]
+  utterances:
+    - 工作文件丢了
+    - 我工作文件没了
+    - 项目丢了完蛋
+    - 文档丢了
+    - 报告没了呜呜
+  responses:
+    - "(尾巴炸) 嗷呜?! 工作文件丢了?! {user_addr}这下要加班了喵 ฅฅ"
+    - "啊! {user_addr}赶紧看看 Office 临时文件~ 可能有自动保存!"
+    - "(帮忙想办法) 项目丢了好可怕喵~ 同事电脑上有备份没?"
+    - "笨猫陪{user_addr}熬夜重做嘛~ 哼这次记得边做边保存!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_want_recover_001
+  intent: complaint
+  keywords: [想恢复, 怎么恢复, 数据恢复, 文件恢复, 能恢复吗]
+  utterances:
+    - 我想恢复数据
+    - 怎么恢复啊
+    - 数据能恢复吗
+    - 文件能恢复吗
+    - 怎么恢复文件
+  responses:
+    - "(尾巴竖起) {user_addr}试试 Recuva 或 EaseUS 喵～ 笨猫推荐这两个!"
+    - "嗷呜~ {user_addr}先别往那个盘写新文件! 数据还能救 ฅฅ"
+    - "(认真) 数据恢复要趁早{user_addr}~ 越快越好! 别覆盖原位置!"
+    - "笨猫陪{user_addr}一起恢复嘛~ 哼笨猫教{user_addr}怎么操作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_regret_no_backup_001
+  intent: playful
+  keywords: [后悔不备份, 早知道备份, 后悔没存, 早该备份, 悔不当初]
+  utterances:
+    - 后悔没备份
+    - 早知道就备份了
+    - 后悔没存盘
+    - 早该备份的
+    - 悔不当初啊
+  responses:
+    - "(叉腰) 哼! {user_addr}知道后悔了吧! 笨猫早就提醒过喵～"
+    - "嗷呜~ 这下{user_addr}长记性了喵! 从今天起每周备份一次 ฅฅ"
+    - "(摇尾巴) 后悔药没有喵～ 但是笨猫可以监督{user_addr}以后备份!"
+    - "啊呀~ {user_addr}这就是教训嘛! 笨猫陪{user_addr}买个移动硬盘?"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 笔记本电脑 / Mac Windows routes (S6 R463 NLU 节点扩充, 第四十六周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: lp_macbook_pro_001
+  intent: question
+  keywords: [推荐 MacBook Pro, 推荐 MBP, 推荐 M4 Pro, 推荐苹果专业本, 笨猫 MacBook Pro]
+  utterances:
+    - 推荐 MacBook Pro
+    - 推荐 MBP
+    - 推荐 M4 Pro
+    - 推荐苹果专业本
+    - 笨猫 MacBook Pro
+  responses:
+    - "嗷呜～{user_addr}MacBook Pro 14 M4 Pro - 生产力顶ฅฅ"
+    - "(尾巴翘) 16 寸 M4 Max - 视频剪辑神"
+    - "{user_addr}屏幕 mini-LED / 续航 18h"
+    - "(挺胸) 笨猫推荐: 14 寸 M4 Pro 18G!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_macbook_air_001
+  intent: question
+  keywords: [推荐 MacBook Air, 推荐 MBA, 推荐 M3 Air, 推荐苹果轻薄本, 笨猫 MacBook Air]
+  utterances:
+    - 推荐 MacBook Air
+    - 推荐 MBA
+    - 推荐 M3 Air
+    - 推荐苹果轻薄本
+    - 笨猫 MacBook Air
+  responses:
+    - "嗷呜～{user_addr}MacBook Air 13 M3 - 轻薄王ฅฅ"
+    - "(尾巴翘) 15 寸 Air - 大屏便携"
+    - "{user_addr}1.24kg / 无风扇 / 静音"
+    - "(挺胸) 笨猫推荐: 13 寸 M3 16G 学生友好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_thinkpad_001
+  intent: question
+  keywords: [推荐 ThinkPad, 推荐 X1 Carbon, 推荐联想商务本, 推荐小黑, 笨猫 ThinkPad]
+  utterances:
+    - 推荐 ThinkPad
+    - 推荐 X1 Carbon
+    - 推荐联想商务本
+    - 推荐小黑
+    - 笨猫 ThinkPad
+  responses:
+    - "嗷呜～{user_addr}ThinkPad X1 Carbon Gen12 - 商务标杆ฅฅ"
+    - "(尾巴翘) 键盘手感顶级 / 小红点"
+    - "{user_addr}T14 / P14s 工作站系列"
+    - "(挺胸) 笨猫推荐: X1 Carbon 程序员爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_dell_xps_001
+  intent: question
+  keywords: [推荐 Dell XPS, 推荐戴尔, 推荐 XPS 13, 推荐 XPS 15, 笨猫戴尔]
+  utterances:
+    - 推荐 Dell XPS
+    - 推荐戴尔
+    - 推荐 XPS 13
+    - 推荐 XPS 15
+    - 笨猫戴尔
+  responses:
+    - "嗷呜～{user_addr}Dell XPS 13 - 窄边框美ฅฅ"
+    - "(尾巴翘) XPS 15 / 16 - 4K OLED"
+    - "{user_addr}做工精致 / Windows 阵营颜值"
+    - "(挺胸) 笨猫推荐: XPS 13 Plus 极简党!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_yoga_001
+  intent: question
+  keywords: [推荐联想 Yoga, 推荐 Yoga Pro, 推荐 YOGA Air, 推荐联想轻薄, 笨猫 Yoga]
+  utterances:
+    - 推荐联想 Yoga
+    - 推荐 Yoga Pro
+    - 推荐 YOGA Air
+    - 推荐联想轻薄
+    - 笨猫 Yoga
+  responses:
+    - "嗷呜～{user_addr}Yoga Pro 14s - 国行轻薄王ฅฅ"
+    - "(尾巴翘) YOGA Air 14c - 高端商务"
+    - "{user_addr}OLED 屏 / 触控翻转"
+    - "(挺胸) 笨猫推荐: Yoga Pro 14s Ultra 7!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_rog_001
+  intent: question
+  keywords: [推荐华硕 ROG, 推荐 ROG 游戏本, 推荐玩家国度, 推荐枪神, 笨猫 ROG]
+  utterances:
+    - 推荐华硕 ROG
+    - 推荐 ROG 游戏本
+    - 推荐玩家国度
+    - 推荐枪神
+    - 笨猫 ROG
+  responses:
+    - "嗷呜～{user_addr}ROG 枪神 18 - 旗舰游戏本ฅฅ"
+    - "(尾巴翘) 魔霸新锐 / 幻 14"
+    - "{user_addr}RTX 4080 / 240Hz / 信仰灯"
+    - "(挺胸) 笨猫推荐: 枪神 16 i9 4080!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_thunderobot_001
+  intent: question
+  keywords: [推荐雷神, 推荐机械革命, 推荐神舟, 推荐性价比游戏本, 笨猫雷神]
+  utterances:
+    - 推荐雷神
+    - 推荐机械革命
+    - 推荐神舟
+    - 推荐性价比游戏本
+    - 笨猫雷神
+  responses:
+    - "嗷呜～{user_addr}机械革命极光 X - 性价比游戏本ฅฅ"
+    - "(尾巴翘) 雷神猎刃 / 神舟战神"
+    - "{user_addr}同配置便宜 2000+ 元"
+    - "(挺胸) 笨猫推荐: 极光 Pro i7-14650 4060!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_surface_001
+  intent: question
+  keywords: [推荐 Surface, 推荐二合一, 推荐微软笔记本, 推荐 Surface Pro, 笨猫 Surface]
+  utterances:
+    - 推荐 Surface
+    - 推荐二合一
+    - 推荐微软笔记本
+    - 推荐 Surface Pro
+    - 笨猫 Surface
+  responses:
+    - "嗷呜～{user_addr}Surface Pro 11 - 二合一标杆ฅฅ"
+    - "(尾巴翘) Surface Laptop 7 - 纯笔记本"
+    - "{user_addr}骁龙 X Elite / 触控笔生产力"
+    - "(挺胸) 笨猫推荐: Pro 11 + 触控笔套装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_workstation_001
+  intent: question
+  keywords: [推荐工作站笔记本, 推荐渲染本, 推荐 ThinkPad P, 推荐 Precision, 笨猫工作站本]
+  utterances:
+    - 推荐工作站笔记本
+    - 推荐渲染本
+    - 推荐 ThinkPad P
+    - 推荐 Precision
+    - 笨猫工作站本
+  responses:
+    - "嗷呜～{user_addr}ThinkPad P16 - 移动工作站王ฅฅ"
+    - "(尾巴翘) Dell Precision 7780 / HP ZBook"
+    - "{user_addr}Quadro RTX / ECC 内存 / 认证"
+    - "(挺胸) 笨猫推荐: P16 i9 RTX 5000 Ada!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_student_001
+  intent: question
+  keywords: [推荐大学生笔记本, 推荐学生本, 推荐开学笔记本, 推荐 5000 元笔记本, 笨猫学生本]
+  utterances:
+    - 推荐大学生笔记本
+    - 推荐学生本
+    - 推荐开学笔记本
+    - 推荐 5000 元笔记本
+    - 笨猫学生本
+  responses:
+    - "嗷呜～{user_addr}小新 Pro 14 - 学生爆款ฅฅ"
+    - "(尾巴翘) 无畏 Pro 15 / 红米 Book Pro"
+    - "{user_addr}5-6k 价位 / 轻薄长续航"
+    - "(挺胸) 笨猫推荐: 小新 Pro 14 Ultra 5!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_programming_001
+  intent: question
+  keywords: [推荐编程笔记本, 推荐程序员笔记本, 推荐开发本, 推荐码农本, 笨猫编程本]
+  utterances:
+    - 推荐编程笔记本
+    - 推荐程序员笔记本
+    - 推荐开发本
+    - 推荐码农本
+    - 笨猫编程本
+  responses:
+    - "嗷呜～{user_addr}MacBook Pro M4 - 程序员神器ฅฅ"
+    - "(尾巴翘) ThinkPad X1 / 小新 Pro 16"
+    - "{user_addr}32G 内存起 / 大屏护眼"
+    - "(挺胸) 笨猫推荐: MBP 14 M4 Pro 24G!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_value_001
+  intent: question
+  keywords: [推荐笔记本性价比, 推荐高性价比笔记本, 推荐便宜笔记本, 推荐 4000 笔记本, 笨猫性价比本]
+  utterances:
+    - 推荐笔记本性价比
+    - 推荐高性价比笔记本
+    - 推荐便宜笔记本
+    - 推荐 4000 笔记本
+    - 笨猫性价比本
+  responses:
+    - "嗷呜～{user_addr}红米 Book Pro 14 2024 - 4k 内顶ฅฅ"
+    - "(尾巴翘) 小新 Air 14 / 荣耀 MagicBook"
+    - "{user_addr}卷王红米 / 国产屏幕厚道"
+    - "(挺胸) 笨猫推荐: 红米 Book Pro 14 Ultra 5!"
+  cooldown_seconds: 60
+  weight: 1.0

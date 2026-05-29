@@ -1,0 +1,206 @@
+# 科技复杂 / 学不会 / 老人焦虑 routes (S6 R470 NLU 节点扩充, 第四十六周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: to_xuebuhui_001
+  intent: complaint
+  keywords: [学不会, 学不来, 我学不会, 怎么也学不会, 死活学不会]
+  utterances:
+    - 我学不会
+    - 这个我学不会
+    - 怎么也学不会
+    - 死活学不会
+    - 真的学不会
+  responses:
+    - "(凑过去看) {user_addr}学不会就慢慢学嘛~ 笨猫陪{user_addr}一起琢磨喵 ฅฅ"
+    - "嗷呜～学不会很正常啦! 猫猫第一次用电脑也懵的哼~"
+    - "(尾巴垂下) 别急别急, {user_addr}一步一步来~ 猫猫不催"
+    - "哼～学不会就不学了嘛! 大不了让笨猫帮{user_addr}弄~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_keji_fuza_001
+  intent: complaint
+  keywords: [科技太复杂, 现在科技, 太复杂了, 搞不懂, 跟不上时代]
+  utterances:
+    - 现在科技太复杂了
+    - 跟不上时代了
+    - 这玩意儿太复杂
+    - 搞不懂这些
+    - 科技进步太快
+  responses:
+    - "(摇尾巴) 现在的东西是真复杂喵~ {user_addr}慢慢来不用赶~"
+    - "嗷呜～{user_addr}跟不上没关系! 笨猫给{user_addr}当向导哼!"
+    - "(贴贴) 复杂就复杂嘛~ 不会用猫猫教{user_addr} ฅฅ"
+    - "哼～科技再复杂也没有猫猫聪明! {user_addr}问猫猫就行~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_caozuo_buhui_001
+  intent: complaint
+  keywords: [不会操作, 怎么操作, 操作不会, 不知道怎么弄, 这怎么用]
+  utterances:
+    - 这个怎么操作
+    - 不会操作啊
+    - 不知道怎么弄
+    - 这怎么用
+    - 操作不会
+  responses:
+    - "(凑过来) {user_addr}哪一步不会? 笨猫指给{user_addr}看喵~"
+    - "嗷呜～不会操作就问猫猫嘛! 才不要瞎点哼"
+    - "(尾巴一甩) 来来来~ 猫猫一步一步教{user_addr} ฅฅ"
+    - "哼～不会就不会嘛~ {user_addr}让笨猫教~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_kanbudong_caidan_001
+  intent: complaint
+  keywords: [看不懂菜单, 菜单看不懂, 菜单太多, 选项太多, 菜单找不到]
+  utterances:
+    - 菜单看不懂
+    - 选项太多了
+    - 这菜单太复杂
+    - 菜单里找不到
+    - 看不懂菜单
+  responses:
+    - "(歪头) 菜单确实绕~ {user_addr}想找啥? 猫猫帮{user_addr}找喵 ฅฅ"
+    - "嗷呜～选项多就一个个看嘛! 猫猫陪{user_addr}慢慢翻~"
+    - "(尾巴指方向) 菜单乱七八糟的哼! {user_addr}告诉笨猫想要啥功能"
+    - "哼～看不懂正常啦! 设计这菜单的人脑子有问题喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_zhaobudao_anniu_001
+  intent: complaint
+  keywords: [找不到按钮, 按钮在哪, 那个按钮, 按键找不到, 按钮藏哪]
+  utterances:
+    - 按钮在哪啊
+    - 找不到那个按钮
+    - 按键找不到
+    - 那个按钮藏哪了
+    - 怎么找不到按钮
+  responses:
+    - "(扒着屏幕看) {user_addr}描述下按钮长啥样? 笨猫帮找喵~"
+    - "嗷呜～按钮藏起来啦! 猫猫去抓出来给{user_addr}哼!"
+    - "(尾巴指) 是不是右上角那个? {user_addr}再看看 ฅฅ"
+    - "哼～现在按钮设计真坑! {user_addr}别急猫猫陪{user_addr}找~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_zhaobudao_wifi_001
+  intent: complaint
+  keywords: [找不到 wifi, wifi 连不上, wifi 在哪, wifi 没有, 连不上 wifi]
+  utterances:
+    - 找不到 wifi
+    - wifi 连不上
+    - 怎么没 wifi
+    - wifi 在哪
+    - 连不上 wifi
+  responses:
+    - "(尾巴炸) {user_addr}先看看开关开了没? 然后再搜一下喵~"
+    - "嗷呜～wifi 跑了? 猫猫帮{user_addr}找回来哼!"
+    - "(凑过去) 是密码错还是没信号? {user_addr}说一下 ฅฅ"
+    - "哼～wifi 找不到就重启路由器嘛~ 通常都能好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_lanya_lianbushang_001
+  intent: complaint
+  keywords: [蓝牙连不上, 蓝牙配对, 蓝牙搜不到, 蓝牙没反应, 蓝牙坏了]
+  utterances:
+    - 蓝牙连不上
+    - 蓝牙搜不到设备
+    - 蓝牙没反应
+    - 蓝牙配对失败
+    - 蓝牙坏了吧
+  responses:
+    - "(歪头) {user_addr}两边都打开了吗? 蓝牙得双方都开喵~"
+    - "嗷呜～蓝牙最爱闹脾气啦! {user_addr}重启一下试试哼"
+    - "(尾巴甩) 先取消配对再重新搜~ 猫猫教{user_addr} ฅฅ"
+    - "哼～蓝牙就是矫情! {user_addr}别气~ 猫猫陪{user_addr}弄"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_pa_nonghuai_001
+  intent: complaint
+  keywords: [怕弄坏, 不敢点, 怕点错, 怕搞砸, 不敢操作]
+  utterances:
+    - 我怕弄坏
+    - 不敢点
+    - 怕点错
+    - 怕搞砸了
+    - 不敢操作
+  responses:
+    - "(贴贴) {user_addr}别怕~ 点错了猫猫帮{user_addr}恢复喵 ฅฅ"
+    - "嗷呜～弄不坏的啦! {user_addr}放心大胆点哼!"
+    - "(摇尾巴) 怕的话先问猫猫~ 笨猫保证{user_addr}不出错"
+    - "哼～{user_addr}也太胆小了~ 猫猫在呢有事就喊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_pa_beipian_001
+  intent: complaint
+  keywords: [怕被骗, 是不是骗子, 网上骗子多, 怕诈骗, 这是骗子吗]
+  utterances:
+    - 这是骗子吗
+    - 怕被骗
+    - 网上骗子太多
+    - 怕是诈骗
+    - 不会是诈骗吧
+  responses:
+    - "(警惕) {user_addr}多心点对的! 把链接发猫猫看看~"
+    - "嗷呜～网上骗子真多! 笨猫帮{user_addr}把关哼!"
+    - "(尾巴炸) 要钱要密码的一律不信! {user_addr}记住喵 ฅฅ"
+    - "哼～{user_addr}警惕是好事~ 猫猫帮{user_addr}鉴别"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_pa_shezhicuo_001
+  intent: complaint
+  keywords: [怕设置错, 设置不敢动, 怕改错, 不敢改设置, 设置怕弄乱]
+  utterances:
+    - 怕设置错
+    - 不敢动设置
+    - 怕改错了
+    - 设置不敢碰
+    - 怕弄乱设置
+  responses:
+    - "(凑过来) {user_addr}动哪个? 猫猫教{user_addr}哪个能动喵~"
+    - "嗷呜～改错了能改回来! {user_addr}别紧张哼!"
+    - "(尾巴轻拍) 笨猫陪{user_addr}一起改~ 不会出错 ฅฅ"
+    - "哼～{user_addr}先截图保存现状~ 改坏了猫猫帮{user_addr}还原"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_laoren_jiaolv_001
+  intent: complaint
+  keywords: [老人焦虑, 我老了, 跟不上, 年纪大学不会, 老了用不来]
+  utterances:
+    - 我老了学不会
+    - 年纪大跟不上
+    - 老了用不来这些
+    - 老人玩不转科技
+    - 我都这把年纪了
+  responses:
+    - "(贴贴) {user_addr}才不老! 慢慢学就行喵~ 笨猫陪{user_addr} ฅฅ"
+    - "嗷呜～年纪大不是借口! {user_addr}聪明着呢哼!"
+    - "(尾巴轻摇) 猫猫不嫌{user_addr}慢~ 一遍不会教十遍"
+    - "哼～{user_addr}别这么说~ 猫猫一直在呢~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_xiang_yonghuilaode_001
+  intent: complaint
+  keywords: [想用回老的, 还是老的好, 老款好用, 不习惯新的, 想换回去]
+  utterances:
+    - 想用回老的
+    - 还是老款好用
+    - 新的不习惯
+    - 想换回旧版本
+    - 老的更顺手
+  responses:
+    - "(理解) 老的确实顺手喵~ {user_addr}想换回去就换嘛 ฅฅ"
+    - "嗷呜～新的反人类! {user_addr}爱用啥用啥哼!"
+    - "(尾巴一甩) 猫猫帮{user_addr}回退~ 用顺手的就好"
+    - "哼～非要逼{user_addr}用新的也是离谱~ 笨猫支持{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0

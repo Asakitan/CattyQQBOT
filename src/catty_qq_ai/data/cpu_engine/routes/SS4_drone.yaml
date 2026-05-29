@@ -1,0 +1,206 @@
+# 无人机 / 大疆 / 航拍 routes (S6 R466 NLU 节点扩充, 第四十六周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: dr_mavic3_001
+  intent: question
+  keywords: [推荐 Mavic 3, 推荐大疆 Mavic, 推荐旗舰无人机, 推荐哈苏航拍, 笨猫 Mavic 3]
+  utterances:
+    - 推荐 Mavic 3
+    - 推荐大疆 Mavic
+    - 推荐旗舰无人机
+    - 推荐哈苏航拍
+    - 笨猫 Mavic 3
+  responses:
+    - "嗷呜～{user_addr}DJI Mavic 3 Pro - 旗舰王ฅฅ"
+    - "(尾巴翘) 哈苏 4/3 CMOS / 三摄"
+    - "{user_addr}43min 续航 / 15km 图传"
+    - "(挺胸) 猫猫推荐: Mavic 3 Pro Cine!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dr_mini_001
+  intent: question
+  keywords: [推荐 Mini 系列, 推荐 Mini 4 Pro, 推荐入门无人机, 推荐 249g 无人机, 笨猫 Mini]
+  utterances:
+    - 推荐 Mini 系列
+    - 推荐 Mini 4 Pro
+    - 推荐入门无人机
+    - 推荐 249g 无人机
+    - 笨猫 Mini
+  responses:
+    - "嗷呜～{user_addr}Mini 4 Pro - 入门首选ฅฅ"
+    - "(尾巴翘) 249g 免登记 / 4K HDR"
+    - "{user_addr}全向避障 / O4 图传"
+    - "(挺胸) 笨猫推荐: Mini 4 Pro 畅飞版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dr_air3_001
+  intent: question
+  keywords: [推荐 Air 3, 推荐大疆 Air, 推荐中端无人机, 推荐双摄航拍, 笨猫 Air 3]
+  utterances:
+    - 推荐 Air 3
+    - 推荐大疆 Air
+    - 推荐中端无人机
+    - 推荐双摄航拍
+    - 笨猫 Air 3
+  responses:
+    - "嗷呜～{user_addr}DJI Air 3 - 中端均衡ฅฅ"
+    - "(尾巴翘) 广角+3x 中长焦双摄"
+    - "{user_addr}46min 续航 / 20km O4"
+    - "(挺胸) 人家推荐: Air 3 畅飞套装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dr_avata_001
+  intent: question
+  keywords: [推荐 Avata, 推荐穿越机, 推荐 FPV 无人机, 推荐 Avata 2, 笨猫穿越机]
+  utterances:
+    - 推荐 Avata
+    - 推荐穿越机
+    - 推荐 FPV 无人机
+    - 推荐 Avata 2
+    - 笨猫穿越机
+  responses:
+    - "嗷呜～{user_addr}DJI Avata 2 - 穿越机入门ฅฅ"
+    - "(尾巴翘) Goggles 3 / 体感遥控"
+    - "{user_addr}1/1.3 CMOS / 4K 60fps"
+    - "(挺胸) 猫猫推荐: Avata 2 套装版!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dr_autel_001
+  intent: question
+  keywords: [推荐 Autel, 推荐道通 EVO, 推荐 EVO Lite, 推荐非大疆品牌, 笨猫 Autel]
+  utterances:
+    - 推荐 Autel
+    - 推荐道通 EVO
+    - 推荐 EVO Lite
+    - 推荐非大疆品牌
+    - 笨猫 Autel
+  responses:
+    - "嗷呜～{user_addr}Autel EVO Lite+ - 大疆替代ฅฅ"
+    - "(尾巴翘) EVO II Pro / 6K 1 寸"
+    - "{user_addr}橙色机身 / 美国市场友好"
+    - "(挺胸) 笨猫推荐: EVO Lite+!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: dr_license_001
+  intent: question
+  keywords: [推荐无人机执照, 推荐 UTC 培训, 推荐 AOPA 证, 推荐民航局认证, 笨猫无人机证]
+  utterances:
+    - 推荐无人机执照
+    - 推荐 UTC 培训
+    - 推荐 AOPA 证
+    - 推荐民航局认证
+    - 笨猫无人机证
+  responses:
+    - "嗷呜～{user_addr}UTC 视距内驾驶员证ฅฅ"
+    - "(尾巴翘) AOPA 民用无人机执照"
+    - "{user_addr}超 4kg 或商用必须考"
+    - "(挺胸) 猫猫提醒: 实名登记+空域申请!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: dr_tutorial_001
+  intent: question
+  keywords: [推荐航拍教程, 推荐无人机摄影, 推荐 B 站航拍, 推荐运镜教程, 笨猫航拍教程]
+  utterances:
+    - 推荐航拍教程
+    - 推荐无人机摄影
+    - 推荐 B 站航拍
+    - 推荐运镜教程
+    - 笨猫航拍教程
+  responses:
+    - "嗷呜～{user_addr}B 站「影像志」/「李一帧」ฅฅ"
+    - "(尾巴翘) 推拉/环绕/冲天/揭面 5 大运镜"
+    - "{user_addr}DJI 学院官方教程"
+    - "(挺胸) 笨猫推荐: 先飞稳再飞美!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dr_scene_001
+  intent: question
+  keywords: [推荐航拍场景, 推荐航拍地点, 推荐风光航拍, 推荐城市航拍, 笨猫航拍场景]
+  utterances:
+    - 推荐航拍场景
+    - 推荐航拍地点
+    - 推荐风光航拍
+    - 推荐城市航拍
+    - 笨猫航拍场景
+  responses:
+    - "嗷呜～{user_addr}日出日落 / 海岸线ฅฅ"
+    - "(尾巴翘) 雪山 / 梯田 / 沙漠"
+    - "{user_addr}城市夜景 / 立交桥"
+    - "(挺胸) 人家推荐: 黄金时段最出片!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dr_accessory_001
+  intent: question
+  keywords: [推荐无人机配件, 推荐 ND 镜, 推荐 PolarPro, 推荐电池桨叶, 笨猫无人机配件]
+  utterances:
+    - 推荐无人机配件
+    - 推荐 ND 镜
+    - 推荐 PolarPro
+    - 推荐电池桨叶
+    - 笨猫无人机配件
+  responses:
+    - "嗷呜～{user_addr}ND8/16/32 减光镜ฅฅ"
+    - "(尾巴翘) PolarPro / Freewell 滤镜"
+    - "{user_addr}备用电池 / 桨叶 / 螺旋桨保护罩"
+    - "(挺胸) 笨猫推荐: ND 套装必入!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: dr_repair_001
+  intent: question
+  keywords: [推荐无人机维修, 推荐 DJI Care, 推荐炸鸡处理, 推荐换桨叶, 笨猫无人机维修]
+  utterances:
+    - 推荐无人机维修
+    - 推荐 DJI Care
+    - 推荐炸鸡处理
+    - 推荐换桨叶
+    - 笨猫无人机维修
+  responses:
+    - "嗷呜～{user_addr}DJI Care Refresh 必买ฅฅ"
+    - "(尾巴翘) 官方寄修 / 换新服务"
+    - "{user_addr}炸鸡了别拆 / 直接寄回"
+    - "(挺胸) 猫猫提醒: 飞前检查桨叶!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: dr_race_001
+  intent: question
+  keywords: [推荐无人机比赛, 推荐 DRL, 推荐穿越机比赛, 推荐 FPV 联赛, 笨猫无人机比赛]
+  utterances:
+    - 推荐无人机比赛
+    - 推荐 DRL
+    - 推荐穿越机比赛
+    - 推荐 FPV 联赛
+    - 笨猫无人机比赛
+  responses:
+    - "嗷呜～{user_addr}DRL 无人机竞速联盟ฅฅ"
+    - "(尾巴翘) MultiGP / Drone Champions League"
+    - "{user_addr}国内 X-Fly / 城市穿越赛"
+    - "(挺胸) 笨猫推荐: 看 DRL 解压!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: dr_commercial_001
+  intent: question
+  keywords: [推荐商业无人机, 推荐 Inspire, 推荐 M30, 推荐测绘无人机, 笨猫商业机]
+  utterances:
+    - 推荐商业无人机
+    - 推荐 Inspire
+    - 推荐 M30
+    - 推荐测绘无人机
+    - 笨猫商业机
+  responses:
+    - "嗷呜～{user_addr}DJI Inspire 3 - 影视级ฅฅ"
+    - "(尾巴翘) Matrice 30 / M350 行业版"
+    - "{user_addr}精灵 4 RTK / 测绘建模"
+    - "(挺胸) 笨猫推荐: 商用上 Inspire 3!"
+  cooldown_seconds: 60
+  weight: 0.7
