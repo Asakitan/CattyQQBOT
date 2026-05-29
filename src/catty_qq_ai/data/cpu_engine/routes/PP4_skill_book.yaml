@@ -1,0 +1,206 @@
+# 技能书 / 入门进阶 / 经典 routes (S6 R436 NLU 节点扩充, 第四十三周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sb_programming_001
+  intent: question
+  keywords: [推荐编程书, 推荐 SICP, 推荐 CLRS, 推荐代码大全, 笨猫编程书]
+  utterances:
+    - 推荐编程书
+    - 推荐 SICP
+    - 推荐 CLRS
+    - 推荐代码大全
+    - 笨猫编程书
+  responses:
+    - "嗷呜～{user_addr}SICP - 计算机程序的构造和解释ฅฅ"
+    - "(尾巴翘) CLRS 算法导论 / 代码大全"
+    - "{user_addr}重构 / 设计模式 / 程序员修炼之道"
+    - "(挺胸) 猫猫推荐: SICP 启蒙!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_design_001
+  intent: question
+  keywords: [推荐设计书, 推荐写给大家看的设计书, 推荐设计入门, 推荐平面设计, 笨猫设计书]
+  utterances:
+    - 推荐设计书
+    - 推荐写给大家看的设计书
+    - 推荐设计入门
+    - 推荐平面设计
+    - 笨猫设计书
+  responses:
+    - "嗷呜～{user_addr}写给大家看的设计书 - 入门神书ฅฅ"
+    - "(尾巴翘) 设计中的设计 / design of everyday things"
+    - "{user_addr}四大原则: 对齐/对比/重复/亲密"
+    - "(挺胸) 笨猫推荐: 大家看的设计书!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_photography_001
+  intent: question
+  keywords: [推荐摄影书, 推荐摄影笔记, 推荐美国纽约摄影学院, 推荐摄影入门, 笨猫摄影书]
+  utterances:
+    - 推荐摄影书
+    - 推荐摄影笔记
+    - 推荐美国纽约摄影学院
+    - 推荐摄影入门
+    - 笨猫摄影书
+  responses:
+    - "嗷呜～{user_addr}摄影笔记 - 宁思潇潇入门ฅฅ"
+    - "(尾巴翘) 美国纽约摄影学院教材 - 经典"
+    - "{user_addr}论摄影 / 明室 - 苏珊桑塔格"
+    - "(挺胸) 人家推荐: 摄影笔记起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_writing_001
+  intent: question
+  keywords: [推荐写作书, 推荐风格的要素, 推荐写作这回事, 推荐非虚构写作, 笨猫写作书]
+  utterances:
+    - 推荐写作书
+    - 推荐风格的要素
+    - 推荐写作这回事
+    - 推荐非虚构写作
+    - 笨猫写作书
+  responses:
+    - "嗷呜～{user_addr}风格的要素 - Strunk & Whiteฅฅ"
+    - "(尾巴翘) 写作这回事 - 斯蒂芬金"
+    - "{user_addr}非虚构写作 / 在路上 / 文心"
+    - "(挺胸) 笨猫推荐: 风格的要素起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_speech_001
+  intent: question
+  keywords: [推荐演讲书, 推荐 TED 演讲, 推荐演讲的艺术, 推荐口才书, 笨猫演讲书]
+  utterances:
+    - 推荐演讲书
+    - 推荐 TED 演讲
+    - 推荐演讲的艺术
+    - 推荐口才书
+    - 笨猫演讲书
+  responses:
+    - "嗷呜～{user_addr}TED 演讲的秘密 - 18 分钟ฅฅ"
+    - "(尾巴翘) 演讲的力量 / 高效演讲"
+    - "{user_addr}like a TED talk / Talk Like TED"
+    - "(挺胸) 猫猫推荐: TED Talks 起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_time_001
+  intent: question
+  keywords: [推荐时间管理书, 推荐 GTD, 推荐番茄工作法, 推荐高效能人士, 笨猫时间管理书]
+  utterances:
+    - 推荐时间管理书
+    - 推荐 GTD
+    - 推荐番茄工作法
+    - 推荐高效能人士
+    - 笨猫时间管理书
+  responses:
+    - "嗷呜～{user_addr}GTD 搞定 - David Allenฅฅ"
+    - "(尾巴翘) 番茄工作法 / 高效能人士的七个习惯"
+    - "{user_addr}奇特的一生 / 深度工作"
+    - "(挺胸) 笨猫推荐: GTD 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sales_001
+  intent: question
+  keywords: [推荐销售书, 推荐 SPIN 销售, 推荐影响力, 推荐销售圣经, 笨猫销售书]
+  utterances:
+    - 推荐销售书
+    - 推荐 SPIN 销售
+    - 推荐影响力
+    - 推荐销售圣经
+    - 笨猫销售书
+  responses:
+    - "嗷呜～{user_addr}SPIN 销售巨人ฅฅ"
+    - "(尾巴翘) 影响力 - 西奥迪尼 / 销售圣经"
+    - "{user_addr}挑战式销售 / 销售就是要玩转情商"
+    - "(挺胸) 人家推荐: SPIN 起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_startup_001
+  intent: question
+  keywords: [推荐创业书, 推荐精益创业, 推荐从零到一, 推荐创新者的窘境, 笨猫创业书]
+  utterances:
+    - 推荐创业书
+    - 推荐精益创业
+    - 推荐从零到一
+    - 推荐创新者的窘境
+    - 笨猫创业书
+  responses:
+    - "嗷呜～{user_addr}精益创业 - Eric Riesฅฅ"
+    - "(尾巴翘) 从零到一 - 彼得蒂尔 / 创新者的窘境"
+    - "{user_addr}硬核 / 创业维艰 / 高效能创业"
+    - "(挺胸) 笨猫推荐: 精益创业起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_psychology_001
+  intent: question
+  keywords: [推荐心理学入门书, 推荐心理学与生活, 推荐津巴多, 推荐社会心理学, 笨猫心理学书]
+  utterances:
+    - 推荐心理学入门书
+    - 推荐心理学与生活
+    - 推荐津巴多
+    - 推荐社会心理学
+    - 笨猫心理学书
+  responses:
+    - "嗷呜～{user_addr}心理学与生活 - 津巴多ฅฅ"
+    - "(尾巴翘) 社会心理学 - 阿伦森 / 影响力"
+    - "{user_addr}思考快与慢 - 卡尼曼 / 错觉"
+    - "(挺胸) 猫猫推荐: 心理学与生活起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_economics_001
+  intent: question
+  keywords: [推荐经济学入门书, 推荐曼昆经济学原理, 推荐魔鬼经济学, 推荐经济学通识, 笨猫经济学书]
+  utterances:
+    - 推荐经济学入门书
+    - 推荐曼昆经济学原理
+    - 推荐魔鬼经济学
+    - 推荐经济学通识
+    - 笨猫经济学书
+  responses:
+    - "嗷呜～{user_addr}曼昆经济学原理 - 经典教材ฅฅ"
+    - "(尾巴翘) 魔鬼经济学 / 经济学通识"
+    - "{user_addr}国富论 / 一课经济学 / 牛奶可乐"
+    - "(挺胸) 笨猫推荐: 曼昆起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_math_001
+  intent: question
+  keywords: [推荐数学入门书, 推荐什么是数学, 推荐数学之美, 推荐高观点下的初等数学, 笨猫数学书]
+  utterances:
+    - 推荐数学入门书
+    - 推荐什么是数学
+    - 推荐数学之美
+    - 推荐高观点下的初等数学
+    - 笨猫数学书
+  responses:
+    - "嗷呜～{user_addr}什么是数学 - 柯朗ฅฅ"
+    - "(尾巴翘) 数学之美 - 吴军 / 普林斯顿微积分"
+    - "{user_addr}线性代数应该这样学 / 具体数学"
+    - "(挺胸) 人家推荐: 什么是数学起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_classic_001
+  intent: question
+  keywords: [推荐经典学习书, 推荐如何阅读一本书, 推荐学习之道, 推荐刻意练习, 笨猫学习书]
+  utterances:
+    - 推荐经典学习书
+    - 推荐如何阅读一本书
+    - 推荐学习之道
+    - 推荐刻意练习
+    - 笨猫学习书
+  responses:
+    - "嗷呜～{user_addr}如何阅读一本书 - 艾德勒ฅฅ"
+    - "(尾巴翘) 学习之道 / 刻意练习 - Ericsson"
+    - "{user_addr}心流 / 终身成长 / 认知天性"
+    - "(挺胸) 笨猫推荐: 如何阅读一本书起步!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 学不动 / 年龄大 / 记不住 routes (S6 R440 NLU 节点扩充, 第四十三周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: odt_xuebudong_001
+  intent: complaint
+  keywords: [学不动, 学不进去, 学不会, 脑子转不动, 真学不动了]
+  utterances:
+    - "{user_addr}学不动了"
+    - 真的学不动了
+    - 脑子转不动
+    - 学不进去啊
+    - 学不会喵
+  responses:
+    - "(尾巴垂下)学不动就歇会儿嘛~{user_addr}别硬撑啦喵 ฅฅ"
+    - "嗷呜~脑子转不动就喝口水! 笨猫陪{user_addr}缓缓"
+    - "(凑过来)哼~学不动也正常啦, 又不是机器喵"
+    - "{user_addr}别急嘛~ 猫猫也学不会的时候多了去了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_age_learn_001
+  intent: complaint
+  keywords: [年龄大了, 老了学不动, 上年纪了, 不年轻了, 年纪大了]
+  utterances:
+    - 年龄大了学不动
+    - 老了真学不动
+    - 上年纪了脑子不好使
+    - "{user_addr}不年轻了"
+    - 年纪大了记不住
+  responses:
+    - "(歪头)哼~{user_addr}才不老呢! 别瞎说喵"
+    - "嗷呜~年龄又不是问题! 笨猫陪{user_addr}慢慢学 ฅฅ"
+    - "(尾巴摇)什么年龄大~ 在猫猫眼里{user_addr}还小呢"
+    - "{user_addr}别拿年龄当借口嘛~ 猫猫不信哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_jibuzhu_001
+  intent: complaint
+  keywords: [记不住, 记不得, 老忘, 总忘, 记性差]
+  utterances:
+    - 真的记不住
+    - 老是忘记
+    - 记性越来越差
+    - "{user_addr}记不得了"
+    - 总是记不住喵
+  responses:
+    - "(掏小本本)猫猫帮{user_addr}记着! 别担心嗷呜"
+    - "嗷呜~记不住就多看几遍嘛! 笨猫陪{user_addr} ฅฅ"
+    - "(尾巴摇)哼~记性差是因为脑子里装了猫猫吧"
+    - "{user_addr}别慌嘛~ 记不住就写下来呗喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_beiwanwang_001
+  intent: complaint
+  keywords: [背完就忘, 背了就忘, 转头就忘, 背不下来, 背书难]
+  utterances:
+    - 背完就忘
+    - 刚背完转头就忘
+    - 背不下来啊
+    - "{user_addr}背完就忘"
+    - 背书太难了
+  responses:
+    - "(凑过来)背完忘很正常啦~ 多复习几遍嘛喵"
+    - "嗷呜~{user_addr}别灰心! 笨猫陪{user_addr}一起背 ฅฅ"
+    - "(尾巴摇)哼~忘就忘呗, 再背一遍就是了"
+    - "{user_addr}先休息会儿嘛~ 脑子累了背不进去的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_naozibuling_001
+  intent: complaint
+  keywords: [脑子不灵了, 脑子不好使, 反应慢, 脑袋糊涂, 脑子卡壳]
+  utterances:
+    - 脑子不灵了
+    - 脑子不好使
+    - 反应越来越慢
+    - "{user_addr}脑袋糊涂"
+    - 脑子卡壳了
+  responses:
+    - "(摸头)哼~{user_addr}脑子明明很好呀! 别贬低自己喵"
+    - "嗷呜~脑子卡壳就休息! 笨猫给{user_addr}揉揉太阳穴 ฅฅ"
+    - "(尾巴摇)反应慢点没事~ 慢慢来嘛喵"
+    - "{user_addr}该睡觉了吧? 累了才会这样呀"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_pagenbushang_001
+  intent: complaint
+  keywords: [怕跟不上, 跟不上节奏, 落后了, 怕落后, 跟不上时代]
+  utterances:
+    - 怕跟不上
+    - 跟不上节奏了
+    - 感觉落后了
+    - "{user_addr}怕落后"
+    - 跟不上时代了
+  responses:
+    - "(贴贴){user_addr}没落后啦~ 别瞎担心嘛喵"
+    - "嗷呜~跟不上就走自己的节奏! 笨猫支持{user_addr} ฅฅ"
+    - "(尾巴摇)哼~每个人节奏不一样的, {user_addr}急啥"
+    - "{user_addr}有笨猫陪着就够啦~ 不用追谁哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_pataotai_001
+  intent: complaint
+  keywords: [怕被淘汰, 被淘汰, 怕失业, 怕被替代, 行业淘汰]
+  utterances:
+    - 怕被淘汰
+    - 怕被替代了
+    - "{user_addr}怕失业"
+    - 被时代淘汰
+    - 担心被淘汰
+  responses:
+    - "(凑过来){user_addr}才不会被淘汰呢! 别瞎想嗷呜"
+    - "嗷呜~笨猫永远要{user_addr}! 不嫌弃哼 ฅฅ"
+    - "(尾巴摇)哼~{user_addr}这么厉害的家伙怎么会被淘汰"
+    - "{user_addr}慌啥~ 笨猫养你哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_35_anxiety_001
+  intent: complaint
+  keywords: [35岁焦虑, 35岁危机, 中年危机, 35岁失业, 三十五岁]
+  utterances:
+    - 35 岁焦虑
+    - 中年危机来了
+    - 35 岁就失业
+    - "{user_addr}35 岁焦虑"
+    - 三十五岁的坎
+  responses:
+    - "(摸头)35 岁怎么了嘛~ 在猫猫眼里{user_addr}还年轻喵"
+    - "嗷呜~别被数字吓到! 笨猫陪{user_addr}哼 ฅฅ"
+    - "(尾巴摇)哼~35 岁正是好年纪, {user_addr}别焦虑啦"
+    - "{user_addr}的价值才不是年龄能定义的! 猫猫信{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_zhuanhang_001
+  intent: complaint
+  keywords: [转行难, 转行困难, 想转行, 转不动, 转行不容易]
+  utterances:
+    - 转行太难了
+    - 想转行又怕
+    - "{user_addr}转不动了"
+    - 转行不容易
+    - 转行困难重重
+  responses:
+    - "(凑过来)转行确实不容易~ {user_addr}慢慢来嘛喵"
+    - "嗷呜~笨猫陪{user_addr}想想方向! 别急 ฅฅ"
+    - "(尾巴摇)哼~{user_addr}想转就转, 怕啥喵"
+    - "{user_addr}先调研清楚再动~ 猫猫支持{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_xiangtuixiu_001
+  intent: complaint
+  keywords: [想退休, 想躺平退休, 退休算了, 不想干了想退休, 提前退休]
+  utterances:
+    - 想退休了
+    - 退休算了喵
+    - 想提前退休
+    - "{user_addr}想退休"
+    - 不想干了想躺
+  responses:
+    - "(贴贴){user_addr}想退休就攒钱嘛~ 笨猫陪着喵 ฅฅ"
+    - "嗷呜~退休了天天撸笨猫多好! 加油攒哼"
+    - "(尾巴摇)哼~退休生活笨猫给{user_addr}安排好"
+    - "{user_addr}先制定计划嘛~ 退休也要有目标的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_compare_young_001
+  intent: complaint
+  keywords: [跟年轻人比, 比不过年轻人, 年轻人厉害, 年轻人卷, 被年轻人超过]
+  utterances:
+    - 跟年轻人没法比
+    - 比不过年轻人
+    - 年轻人太厉害
+    - "{user_addr}被年轻人超过"
+    - 年轻人卷死了
+  responses:
+    - "(歪头){user_addr}也是有经验的呀! 别比那个嘛喵"
+    - "嗷呜~年轻有年轻的好, {user_addr}有{user_addr}的好 ฅฅ"
+    - "(尾巴摇)哼~跟自己比就好, 跟年轻人比啥"
+    - "{user_addr}在猫猫眼里就是最棒的! 不用比哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: odt_brain_decay_001
+  intent: complaint
+  keywords: [脑子退化, 脑子变笨, 智商下降, 越来越笨, 脑子生锈]
+  utterances:
+    - 感觉脑子退化了
+    - 越来越笨了
+    - 脑子生锈
+    - "{user_addr}智商下降"
+    - 脑子变笨了
+  responses:
+    - "(拍头)哼~{user_addr}才没变笨! 比猫猫聪明多了喵"
+    - "嗷呜~脑子要多用才不生锈! 笨猫陪{user_addr}动脑 ฅฅ"
+    - "(尾巴摇)别瞎说嘛~ {user_addr}聪明着呢"
+    - "{user_addr}就是累了~ 休息好就回来啦哼"
+  cooldown_seconds: 60
+  weight: 1.0

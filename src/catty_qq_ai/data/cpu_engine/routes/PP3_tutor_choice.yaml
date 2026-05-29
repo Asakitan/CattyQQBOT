@@ -1,0 +1,206 @@
+# 名师 / 网课老师 / 1 对 1 routes (S6 R435 NLU 节点扩充, 第四十三周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: tc_online_001
+  intent: question
+  keywords: [推荐网课名师, 推荐极课老师, 推荐网课老师, 推荐线上名师, 笨猫网课老师]
+  utterances:
+    - 推荐网课名师
+    - 推荐极课老师
+    - 推荐网课老师
+    - 推荐线上名师
+    - 笨猫网课老师
+  responses:
+    - "嗷呜～{user_addr}极课 / 学而思 / 猿辅导ฅฅ"
+    - "(尾巴翘) 名师工作室 / 个人 IP 课"
+    - "{user_addr}B 站 UP 主也有大佬!"
+    - "(挺胸) 笨猫推荐: 先试听再付费!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_one2one_001
+  intent: question
+  keywords: [推荐 1 对 1, 推荐 italki, 推荐 Cambly, 推荐外教平台, 笨猫 1 对 1]
+  utterances:
+    - 推荐 1 对 1
+    - 推荐 italki
+    - 推荐 Cambly
+    - 推荐外教平台
+    - 笨猫 1 对 1
+  responses:
+    - "嗷呜～{user_addr}italki - 全球外教ฅฅ"
+    - "(尾巴翘) Cambly / Preply / Verbling"
+    - "{user_addr}51Talk / VIPKID - 国内"
+    - "(挺胸) 人家推荐: italki 自由约!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_criteria_001
+  intent: question
+  keywords: [推荐私教选择标准, 推荐选老师, 推荐辨别名师, 推荐试课标准, 笨猫选老师]
+  utterances:
+    - 推荐私教选择标准
+    - 推荐选老师
+    - 推荐辨别名师
+    - 推荐试课标准
+    - 笨猫选老师
+  responses:
+    - "嗷呜～{user_addr}背景 + 评价 + 试听ฅฅ"
+    - "(尾巴翘) 看课件 / 看互动 / 看反馈"
+    - "{user_addr}别只看头衔, 看实战!"
+    - "(挺胸) 猫猫推荐: 三试三比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_academic_001
+  intent: question
+  keywords: [推荐学历老师, 推荐实战老师, 推荐学院派, 推荐工业派, 笨猫老师类型]
+  utterances:
+    - 推荐学历老师
+    - 推荐实战老师
+    - 推荐学院派
+    - 推荐工业派
+    - 笨猫老师类型
+  responses:
+    - "嗷呜～{user_addr}学历=理论扎实ฅฅ"
+    - "(尾巴翘) 实战=经验丰富 / 接地气"
+    - "{user_addr}看你目标: 学术选学院"
+    - "(挺胸) 笨猫推荐: 求职选实战!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_online_vs_offline_001
+  intent: question
+  keywords: [推荐网课 vs 线下, 推荐网课线下, 推荐线上线下, 推荐课程形式, 笨猫课程形式]
+  utterances:
+    - 推荐网课 vs 线下
+    - 推荐网课线下
+    - 推荐线上线下
+    - 推荐课程形式
+    - 笨猫课程形式
+  responses:
+    - "嗷呜～{user_addr}网课便宜 / 灵活ฅฅ"
+    - "(尾巴翘) 线下=氛围 + 互动强"
+    - "{user_addr}自律强选网课省钱"
+    - "(挺胸) 人家推荐: 混合最香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_value_001
+  intent: question
+  keywords: [推荐名师性价比, 推荐课程性价比, 推荐高性价比课程, 推荐划算名师, 笨猫课程性价比]
+  utterances:
+    - 推荐名师性价比
+    - 推荐课程性价比
+    - 推荐高性价比课程
+    - 推荐划算名师
+    - 笨猫课程性价比
+  responses:
+    - "嗷呜～{user_addr}录播 < 直播 < 1 对 1ฅฅ"
+    - "(尾巴翘) 拼团 / 老学员折扣"
+    - "{user_addr}双十一 / 618 大促"
+    - "(挺胸) 猫猫推荐: 录播套餐最划算!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_community_001
+  intent: question
+  keywords: [推荐课程社群, 推荐学习社群, 推荐学员群, 推荐课后服务, 笨猫课程社群]
+  utterances:
+    - 推荐课程社群
+    - 推荐学习社群
+    - 推荐学员群
+    - 推荐课后服务
+    - 笨猫课程社群
+  responses:
+    - "嗷呜～{user_addr}有社群的课更好ฅฅ"
+    - "(尾巴翘) 答疑 + 打卡 + 同学"
+    - "{user_addr}知识星球 / 微信群常见"
+    - "(挺胸) 笨猫推荐: 选活跃社群!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_mentor_001
+  intent: question
+  keywords: [推荐师徒制, 推荐导师, 推荐 mentor, 推荐一对一带, 笨猫导师]
+  utterances:
+    - 推荐师徒制
+    - 推荐导师
+    - 推荐 mentor
+    - 推荐一对一带
+    - 笨猫导师
+  responses:
+    - "嗷呜～{user_addr}师徒=深度陪跑ฅฅ"
+    - "(尾巴翘) 行业前辈 / 学长学姐"
+    - "{user_addr}LinkedIn / 知乎找人"
+    - "(挺胸) 人家推荐: 礼貌真诚约!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_continuing_001
+  intent: question
+  keywords: [推荐在职再教育, 推荐成人教育, 推荐进修课程, 推荐技能进修, 笨猫再教育]
+  utterances:
+    - 推荐在职再教育
+    - 推荐成人教育
+    - 推荐进修课程
+    - 推荐技能进修
+    - 笨猫再教育
+  responses:
+    - "嗷呜～{user_addr}MBA / 非全日制硕ฅฅ"
+    - "(尾巴翘) Coursera / edX 证书"
+    - "{user_addr}得到 / 极客时间"
+    - "(挺胸) 猫猫推荐: 短平快技能课!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_channel_001
+  intent: question
+  keywords: [推荐找老师渠道, 推荐找名师, 推荐老师渠道, 推荐找私教, 笨猫找老师]
+  utterances:
+    - 推荐找老师渠道
+    - 推荐找名师
+    - 推荐老师渠道
+    - 推荐找私教
+    - 笨猫找老师
+  responses:
+    - "嗷呜～{user_addr}小红书 / B 站推荐ฅฅ"
+    - "(尾巴翘) 知乎 / 豆瓣测评"
+    - "{user_addr}朋友推荐最靠谱!"
+    - "(挺胸) 笨猫推荐: 多平台比对!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_trial_001
+  intent: question
+  keywords: [推荐名师试听, 推荐试听课, 推荐免费试课, 推荐体验课, 笨猫试听课]
+  utterances:
+    - 推荐名师试听
+    - 推荐试听课
+    - 推荐免费试课
+    - 推荐体验课
+    - 笨猫试听课
+  responses:
+    - "嗷呜～{user_addr}先试听再下单!ฅฅ"
+    - "(尾巴翘) 看授课节奏 / 风格"
+    - "{user_addr}多约几个对比"
+    - "(挺胸) 人家推荐: 试听别跳过!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_refund_001
+  intent: question
+  keywords: [推荐课程退款政策, 推荐退款政策, 推荐退课, 推荐课程退费, 笨猫退款政策]
+  utterances:
+    - 推荐课程退款政策
+    - 推荐退款政策
+    - 推荐退课
+    - 推荐课程退费
+    - 笨猫退款政策
+  responses:
+    - "嗷呜～{user_addr}付款前先看退款!ฅฅ"
+    - "(尾巴翘) 7 天无理由 / 按节扣"
+    - "{user_addr}留好合同截图"
+    - "(挺胸) 猫猫推荐: 避坑无退款机构!"
+  cooldown_seconds: 60
+  weight: 1.0

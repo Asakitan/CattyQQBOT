@@ -1,0 +1,206 @@
+# 在线课 / MOOC / Coursera 网易云课堂 routes (S6 R433 NLU 节点扩充, 第四十三周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: oc_coursera_001
+  intent: question
+  keywords: [推荐 Coursera, 推荐国际名校课, 推荐斯坦福课, 推荐 Coursera 课程, 笨猫 Coursera]
+  utterances:
+    - 推荐 Coursera
+    - 推荐国际名校课
+    - 推荐斯坦福课
+    - 推荐 Coursera 课程
+    - 笨猫 Coursera
+  responses:
+    - "嗷呜～{user_addr}Coursera - 斯坦福 / 耶鲁 / 杜克ฅฅ"
+    - "(尾巴翘) Machine Learning (吴恩达) - 经典"
+    - "{user_addr}Specialization / 专项证书"
+    - "(挺胸) 笨猫推荐: 吴恩达 ML 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_edx_001
+  intent: question
+  keywords: [推荐 edX, 推荐 MIT 课, 推荐哈佛课, 推荐 edX 课程, 笨猫 edX]
+  utterances:
+    - 推荐 edX
+    - 推荐 MIT 课
+    - 推荐哈佛课
+    - 推荐 edX 课程
+    - 笨猫 edX
+  responses:
+    - "嗷呜～{user_addr}edX - MIT / 哈佛 / 伯克利ฅฅ"
+    - "(尾巴翘) CS50 (哈佛) - 计算机入门神课"
+    - "{user_addr}MicroMasters / 微硕士项目"
+    - "(挺胸) 笨猫推荐: CS50 - 必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_netease_001
+  intent: question
+  keywords: [推荐网易云课堂, 推荐网易课, 推荐网易公开课, 推荐网易云课程, 笨猫网易云课堂]
+  utterances:
+    - 推荐网易云课堂
+    - 推荐网易课
+    - 推荐网易公开课
+    - 推荐网易云课程
+    - 笨猫网易云课堂
+  responses:
+    - "嗷呜～{user_addr}网易云课堂 - 中文实用ฅฅ"
+    - "(尾巴翘) 网易公开课 - 名校免费"
+    - "{user_addr}微专业 / 职业技能"
+    - "(挺胸) 笨猫推荐: 网易公开课白嫖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_geektime_001
+  intent: question
+  keywords: [推荐极客时间, 推荐极客课, 推荐 IT 课, 推荐技术专栏, 笨猫极客时间]
+  utterances:
+    - 推荐极客时间
+    - 推荐极客课
+    - 推荐 IT 课
+    - 推荐技术专栏
+    - 笨猫极客时间
+  responses:
+    - "嗷呜～{user_addr}极客时间 - 程序员充电ฅฅ"
+    - "(尾巴翘) 左耳朵耗子 / 陈皓 - 顶级专栏"
+    - "{user_addr}专栏 / 视频课 / 训练营"
+    - "(挺胸) 笨猫推荐: 程序员必装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_imooc_001
+  intent: question
+  keywords: [推荐慕课网, 推荐中国大学 MOOC, 推荐 imooc, 推荐 icourse, 笨猫慕课]
+  utterances:
+    - 推荐慕课网
+    - 推荐中国大学 MOOC
+    - 推荐 imooc
+    - 推荐 icourse
+    - 笨猫慕课
+  responses:
+    - "嗷呜～{user_addr}中国大学 MOOC - 985 名校ฅฅ"
+    - "(尾巴翘) 慕课网 imooc - 实战项目"
+    - "{user_addr}免费课 / 证书课 / 学分课"
+    - "(挺胸) 笨猫推荐: 国家精品课!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_udemy_001
+  intent: question
+  keywords: [推荐 Udemy, 推荐实用技能课, 推荐 Udemy 课程, 推荐技能课, 笨猫 Udemy]
+  utterances:
+    - 推荐 Udemy
+    - 推荐实用技能课
+    - 推荐 Udemy 课程
+    - 推荐技能课
+    - 笨猫 Udemy
+  responses:
+    - "嗷呜～{user_addr}Udemy - 技能万花筒ฅฅ"
+    - "(尾巴翘) 编程 / 设计 / 摄影 / 商业"
+    - "{user_addr}经常打折 - 10 美元买课"
+    - "(挺胸) 笨猫推荐: 等促销再买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_linkedin_001
+  intent: question
+  keywords: [推荐 LinkedIn Learning, 推荐领英课, 推荐 Lynda, 推荐职场课, 笨猫 LinkedIn 课]
+  utterances:
+    - 推荐 LinkedIn Learning
+    - 推荐领英课
+    - 推荐 Lynda
+    - 推荐职场课
+    - 笨猫 LinkedIn 课
+  responses:
+    - "嗷呜～{user_addr}LinkedIn Learning - 职场技能ฅฅ"
+    - "(尾巴翘) 前 Lynda.com - 软件教程鼻祖"
+    - "{user_addr}订阅制 / 证书加 LinkedIn"
+    - "(挺胸) 笨猫推荐: 找工作必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_khan_001
+  intent: question
+  keywords: [推荐 Khan Academy, 推荐可汗学院, 推荐基础免费课, 推荐数学基础课, 笨猫可汗学院]
+  utterances:
+    - 推荐 Khan Academy
+    - 推荐可汗学院
+    - 推荐基础免费课
+    - 推荐数学基础课
+    - 笨猫可汗学院
+  responses:
+    - "嗷呜～{user_addr}Khan Academy - 全免费ฅฅ"
+    - "(尾巴翘) 数学 / 物理 / 经济 - 基础打底"
+    - "{user_addr}K-12 / SAT / 大学入门"
+    - "(挺胸) 笨猫推荐: 补基础首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_skillshare_001
+  intent: question
+  keywords: [推荐 Skillshare, 推荐创意课, 推荐设计课, 推荐 Skillshare 课程, 笨猫 Skillshare]
+  utterances:
+    - 推荐 Skillshare
+    - 推荐创意课
+    - 推荐设计课
+    - 推荐 Skillshare 课程
+    - 笨猫 Skillshare
+  responses:
+    - "嗷呜～{user_addr}Skillshare - 创意人天堂ฅฅ"
+    - "(尾巴翘) 插画 / 摄影 / 写作 / 手工"
+    - "{user_addr}订阅制 / 项目式学习"
+    - "(挺胸) 笨猫推荐: 培养兴趣超棒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_sanjieke_001
+  intent: question
+  keywords: [推荐三节课, 推荐互联网产品课, 推荐运营课, 推荐 PM 课, 笨猫三节课]
+  utterances:
+    - 推荐三节课
+    - 推荐互联网产品课
+    - 推荐运营课
+    - 推荐 PM 课
+    - 笨猫三节课
+  responses:
+    - "嗷呜～{user_addr}三节课 - 互联网人黄埔ฅฅ"
+    - "(尾巴翘) 产品 / 运营 / 数据 / 增长"
+    - "{user_addr}P1-P3 体系 / 大厂导师"
+    - "(挺胸) 笨猫推荐: PM 必修!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_zhihu_001
+  intent: question
+  keywords: [推荐知乎 Live, 推荐知乎课, 推荐知乎讲座, 推荐知乎私家课, 笨猫知乎 Live]
+  utterances:
+    - 推荐知乎 Live
+    - 推荐知乎课
+    - 推荐知乎讲座
+    - 推荐知乎私家课
+    - 笨猫知乎 Live
+  responses:
+    - "嗷呜～{user_addr}知乎 Live - 大 V 分享ฅฅ"
+    - "(尾巴翘) 私家课 / 盐选 / 短讲座"
+    - "{user_addr}9.9 - 99 元 / 性价比高"
+    - "(挺胸) 笨猫推荐: 碎片学习!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oc_wechat_001
+  intent: question
+  keywords: [推荐微信公众号课, 推荐公众号免费课, 推荐微信课, 推荐 wx 公众号课, 笨猫公众号课]
+  utterances:
+    - 推荐微信公众号课
+    - 推荐公众号免费课
+    - 推荐微信课
+    - 推荐 wx 公众号课
+    - 笨猫公众号课
+  responses:
+    - "嗷呜～{user_addr}公众号免费课 - 白嫖天堂ฅฅ"
+    - "(尾巴翘) 行业大号常发免费课"
+    - "{user_addr}留意推送 / 加入社群"
+    - "(挺胸) 笨猫推荐: 0 元薅羊毛!"
+  cooldown_seconds: 60
+  weight: 1.0

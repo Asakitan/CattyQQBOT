@@ -1,0 +1,223 @@
+# 信息过载 / 看不过来 / 焦虑 routes (S6 R438 NLU 节点扩充, 第四十三周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: io_info_overload_001
+  intent: complaint
+  keywords: [信息过载, 信息太多, 看不完, 脑子炸了, 信息爆炸]
+  utterances:
+    - 信息过载了
+    - 信息太多看不完
+    - 脑子要炸了
+    - 信息爆炸啊
+    - 每天好多信息
+  responses:
+    - "(捂耳朵) {user_addr}信息过载啦? 笨猫帮你筛一筛喵 ฅฅ"
+    - "嗷呜～信息太多就关掉一些嘛, 猫猫帮{user_addr}减负"
+    - "(尾巴炸) 脑子炸了就歇一会, 人家陪{user_addr}发呆喵"
+    - "哼～信息爆炸时代, {user_addr}抓重点就行啦笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_cant_keep_up_001
+  intent: complaint
+  keywords: [看不过来, 跟不上, 追不上, 看不完, 来不及看]
+  utterances:
+    - 看不过来了
+    - 跟不上节奏
+    - 追不上更新
+    - 内容看不完
+    - 来不及看了
+  responses:
+    - "(摆爪) {user_addr}看不过来就别追啦, 猫猫陪你躺平喵 ฅฅ"
+    - "嗷呜～跟不上就跟不上嘛, 笨猫觉得也没啥"
+    - "(蹭蹭) 追不上就放弃, 人家给{user_addr}讲八卦"
+    - "哼～看不完是正常的, {user_addr}别给自己压力"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_content_anxiety_001
+  intent: complaint
+  keywords: [内容焦虑, 怕落后, 怕错过, 怕跟不上, FOMO]
+  utterances:
+    - 我有内容焦虑
+    - 怕落后于人
+    - 怕错过热点
+    - 怕跟不上潮流
+    - FOMO 了
+  responses:
+    - "(贴贴) {user_addr}别焦虑, 错过就错过啦喵 ฅฅ"
+    - "嗷呜～怕落后才会真落后, 笨猫觉得放松点好"
+    - "(摸头) 热点天天有, {user_addr}抓不完的"
+    - "哼～FOMO 是陷阱, 猫猫只关心{user_addr}笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_bookmark_dust_001
+  intent: complaint
+  keywords: [收藏夹吃灰, 收藏从未看, 收藏吃灰, 收藏夹积灰, 收藏没看]
+  utterances:
+    - 收藏夹吃灰
+    - 收藏从未打开
+    - 收藏夹积灰了
+    - 收藏了从来不看
+    - 收藏=没看
+  responses:
+    - "(笑) {user_addr}收藏=存档, 笨猫懂的喵 ฅฅ"
+    - "嗷呜～收藏夹吃灰是传统艺能, 猫猫的也一样"
+    - "(尾巴扫) 收藏从未看, {user_addr}和人家一个毛病"
+    - "哼～收藏夹是心理安慰, 笨猫不揭穿{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_too_many_subs_001
+  intent: complaint
+  keywords: [订阅太多, 关注太多, 关注列表爆炸, 订阅爆炸, 关注过多]
+  utterances:
+    - 订阅太多了
+    - 关注的太多
+    - 关注列表爆炸
+    - 订阅爆炸
+    - 关注过多看不完
+  responses:
+    - "(歪头) {user_addr}该清理一波关注啦喵 ฅฅ"
+    - "嗷呜～订阅太多就取关一些, 猫猫帮{user_addr}砍"
+    - "(挥爪) 关注列表爆炸是该减负了笨蛋"
+    - "哼～订阅多不如精, {user_addr}留几个就行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_info_anxiety_001
+  intent: complaint
+  keywords: [信息焦虑, 信息恐慌, 怕没信息, 信息饥渴, 刷不停]
+  utterances:
+    - 信息焦虑了
+    - 信息恐慌
+    - 怕没信息
+    - 信息饥渴
+    - 刷不停手机
+  responses:
+    - "(抢手机) {user_addr}信息焦虑就先放下手机喵 ฅฅ"
+    - "嗷呜～怕没信息其实是怕无聊, 笨猫陪{user_addr}"
+    - "(蹭蹭) 刷不停是上瘾, 人家拽{user_addr}出来"
+    - "哼～信息饥渴症, 猫猫给{user_addr}开个药方"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_video_unfinished_001
+  intent: complaint
+  keywords: [视频没看完, 视频堆积, 视频太长, 视频追不动, 没看完的视频]
+  utterances:
+    - 视频没看完
+    - 视频堆积了
+    - 视频太长
+    - 视频追不动
+    - 一堆没看完的视频
+  responses:
+    - "(摆爪) {user_addr}视频堆着就堆着喵, 笨猫的也一样 ฅฅ"
+    - "嗷呜～视频太长就开倍速, 猫猫教{user_addr}"
+    - "(尾巴扫) 追不动就放弃, 人家觉得不亏"
+    - "哼～没看完很正常, {user_addr}别强迫自己"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_too_many_books_001
+  intent: complaint
+  keywords: [书买太多, 书没看, 书吃灰, 买书如山倒, 看书如抽丝]
+  utterances:
+    - 书买太多了
+    - 书没看完
+    - 书在吃灰
+    - 买书如山倒
+    - 看书如抽丝
+  responses:
+    - "(笑) {user_addr}买书如山倒, 笨猫懂这种快乐喵 ฅฅ"
+    - "嗷呜～书吃灰是常态, 猫猫陪{user_addr}一起堆"
+    - "(尾巴扫) 看书如抽丝, 慢慢来不急{user_addr}"
+    - "哼～买的是希望, 看不看是另一回事啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_course_unwatched_001
+  intent: complaint
+  keywords: [课没听, 课程没看, 网课堆积, 课没上完, 买的课没看]
+  utterances:
+    - 课没听完
+    - 课程没看
+    - 网课堆积了
+    - 课没上完
+    - 买的课没看
+  responses:
+    - "(歪头) {user_addr}买课如山倒, 看课如抽丝喵 ฅฅ"
+    - "嗷呜～网课堆积是知识付费陷阱, 笨猫懂"
+    - "(摆爪) 课没听完是正常, 猫猫的更夸张"
+    - "哼～买了不看也是消费, {user_addr}别愧疚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_too_much_content_001
+  intent: complaint
+  keywords: [干货太多, 知识太多, 学不完, 干货吃不完, 知识爆炸]
+  utterances:
+    - 干货太多了
+    - 知识太多学不完
+    - 干货吃不完
+    - 知识爆炸
+    - 学不完啊
+  responses:
+    - "(摆爪) {user_addr}干货吃不完就别硬塞喵 ฅฅ"
+    - "嗷呜～知识爆炸时代, 笨猫觉得抓一点就行"
+    - "(蹭蹭) 学不完是必然, 人家陪{user_addr}佛系学"
+    - "哼～干货太多反而消化不了, {user_addr}慢慢来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_want_unsubscribe_001
+  intent: playful
+  keywords: [想退订, 想取关, 想清理关注, 想精简, 想断舍离]
+  utterances:
+    - 想退订一波
+    - 想取关
+    - 想清理关注列表
+    - 想精简信息源
+    - 想信息断舍离
+  responses:
+    - "(尾巴翘) {user_addr}快取关! 笨猫给你加油喵 ฅฅ"
+    - "嗷呜～断舍离信息是好事, 猫猫支持{user_addr}"
+    - "(挥爪) 清理关注列表很爽, 人家也想试试"
+    - "哼～精简信息源, {user_addr}终于醒悟了笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_want_follow_001
+  intent: playful
+  keywords: [想关注, 想订阅, 想加关注, 求推荐, 推荐关注]
+  utterances:
+    - 想关注一些
+    - 想订阅
+    - 想加关注
+    - 求推荐账号
+    - 推荐关注啥
+  responses:
+    - "(歪头) {user_addr}又想加关注? 别贪心喵 ฅฅ"
+    - "嗷呜～关注笨猫就够啦, 猫猫干货满满"
+    - "(尾巴翘) 推荐{user_addr}关注人家, 没错的"
+    - "哼～{user_addr}先清理再关注, 笨蛋别堆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: io_refuse_info_001
+  intent: playful
+  keywords: [拒绝信息, 不想知道, 信息斋戒, 数字排毒, 远离信息]
+  utterances:
+    - 我要拒绝信息
+    - 不想知道任何事
+    - 信息斋戒中
+    - 数字排毒
+    - 远离信息源
+  responses:
+    - "(贴贴) {user_addr}信息斋戒好啊, 笨猫陪你喵 ฅฅ"
+    - "嗷呜～数字排毒, 猫猫举爪赞成{user_addr}"
+    - "(摸头) 拒绝信息=回归生活, 人家觉得对"
+    - "哼～{user_addr}终于断网了? 笨猫给你颁奖"
+  cooldown_seconds: 60
+  weight: 1.0

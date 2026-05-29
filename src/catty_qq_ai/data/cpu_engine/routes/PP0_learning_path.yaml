@@ -1,0 +1,206 @@
+# 学习路径 / 路线图 / 自学规划 routes (S6 R432 NLU 节点扩充, 第四十三周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: lp_roadmap_001
+  intent: question
+  keywords: [推荐学习路径, 推荐 Roadmap, 推荐自学路线, 推荐学习路线图, 笨猫学习路径]
+  utterances:
+    - 推荐学习路径
+    - 推荐 Roadmap
+    - 推荐自学路线
+    - 推荐学习路线图
+    - 笨猫学习路径
+  responses:
+    - "嗷呜～{user_addr}roadmap.sh - 全栈路线图王ฅฅ"
+    - "(尾巴翘) 从入门到精通 / 逐级解锁"
+    - "{user_addr}先定目标 / 再拆步骤 / 打勾"
+    - "(挺胸) 笨猫推荐: roadmap.sh 收藏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_programmer_001
+  intent: question
+  keywords: [推荐程序员路线图, 推荐 Roadmap.sh, 推荐前端路线, 推荐后端路线, 笨猫程序员路线]
+  utterances:
+    - 推荐程序员路线图
+    - 推荐 Roadmap.sh
+    - 推荐前端路线
+    - 推荐后端路线
+    - 笨猫程序员路线
+  responses:
+    - "嗷呜～{user_addr}前端: HTML/CSS/JS → React/Vueฅฅ"
+    - "(尾巴翘) 后端: Python/Go → DB → 部署"
+    - "{user_addr}DevOps / AI / 移动端 分支多"
+    - "(挺胸) 笨猫推荐: 先选一个深扎!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_designer_001
+  intent: question
+  keywords: [推荐设计师路线图, 推荐 UI 路线, 推荐 UX 路线, 推荐平面设计路线, 笨猫设计师路线]
+  utterances:
+    - 推荐设计师路线图
+    - 推荐 UI 路线
+    - 推荐 UX 路线
+    - 推荐平面设计路线
+    - 笨猫设计师路线
+  responses:
+    - "嗷呜～{user_addr}美学 → 软件 → 项目 → 作品集ฅฅ"
+    - "(尾巴翘) Figma / Sketch / PS / AI"
+    - "{user_addr}临摹 → 改造 → 原创 三阶"
+    - "(挺胸) 笨猫推荐: 作品集是命!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_photographer_001
+  intent: question
+  keywords: [推荐摄影师路线图, 推荐摄影自学, 推荐摄影进阶, 推荐摄影学习, 笨猫摄影路线]
+  utterances:
+    - 推荐摄影师路线图
+    - 推荐摄影自学
+    - 推荐摄影进阶
+    - 推荐摄影学习
+    - 笨猫摄影路线
+  responses:
+    - "嗷呜～{user_addr}相机操作 → 构图 → 用光ฅฅ"
+    - "(尾巴翘) 后期: Lightroom / Capture One"
+    - "{user_addr}多拍 / 多看 / 多复盘"
+    - "(挺胸) 笨猫推荐: 一年 1 万张!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_video_001
+  intent: question
+  keywords: [推荐视频创作路线, 推荐 Vlog 自学, 推荐剪辑学习, 推荐视频路线, 笨猫视频路线]
+  utterances:
+    - 推荐视频创作路线
+    - 推荐 Vlog 自学
+    - 推荐剪辑学习
+    - 推荐视频路线
+    - 笨猫视频路线
+  responses:
+    - "嗷呜～{user_addr}选题 → 拍摄 → 剪辑 → 发布ฅฅ"
+    - "(尾巴翘) 剪映 / Pr / DaVinci 三选一"
+    - "{user_addr}先模仿爆款 / 再找风格"
+    - "(挺胸) 笨猫推荐: 周更比日更稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_selfstudy_001
+  intent: question
+  keywords: [推荐自学计划, 推荐自学制定, 推荐自学方法, 推荐学习计划, 笨猫自学计划]
+  utterances:
+    - 推荐自学计划
+    - 推荐自学制定
+    - 推荐自学方法
+    - 推荐学习计划
+    - 笨猫自学计划
+  responses:
+    - "嗷呜～{user_addr}定目标 → 拆周计划 → 日打卡ฅฅ"
+    - "(尾巴翘) SMART 原则: 具体可量化"
+    - "{user_addr}留 20% 弹性 / 不要塞死"
+    - "(挺胸) 笨猫推荐: 月底复盘最重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_project_001
+  intent: question
+  keywords: [推荐项目驱动学习, 推荐项目学习, 推荐做项目学, 推荐 Project-based, 笨猫项目驱动]
+  utterances:
+    - 推荐项目驱动学习
+    - 推荐项目学习
+    - 推荐做项目学
+    - 推荐 Project-based
+    - 笨猫项目驱动
+  responses:
+    - "嗷呜～{user_addr}带着问题学 / 比刷课快 10 倍ฅฅ"
+    - "(尾巴翘) 从小项目开始 / 逐步加复杂"
+    - "{user_addr}做完发 GitHub / 写博客"
+    - "(挺胸) 笨猫推荐: 学一周 → 做一周!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_pomodoro_001
+  intent: question
+  keywords: [推荐番茄钟, 推荐时间管理, 推荐番茄工作法, 推荐 Pomodoro, 笨猫番茄钟]
+  utterances:
+    - 推荐番茄钟
+    - 推荐时间管理
+    - 推荐番茄工作法
+    - 推荐 Pomodoro
+    - 笨猫番茄钟
+  responses:
+    - "嗷呜～{user_addr}25 分钟专注 + 5 分钟休息ฅฅ"
+    - "(尾巴翘) 4 个番茄后 / 长休 15 分"
+    - "{user_addr}Forest / Flat Tomato App"
+    - "(挺胸) 笨猫推荐: 手机扔远!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_continuous_001
+  intent: question
+  keywords: [推荐持续学习, 推荐突击学习, 推荐学习节奏, 推荐学习方式, 笨猫学习方式]
+  utterances:
+    - 推荐持续学习
+    - 推荐突击学习
+    - 推荐学习节奏
+    - 推荐学习方式
+    - 笨猫学习方式
+  responses:
+    - "嗷呜～{user_addr}持续 > 突击 / 每天 1 小时ฅฅ"
+    - "(尾巴翘) 突击只适合应试 / 长期靠习惯"
+    - "{user_addr}睡前 30 分 / 通勤 20 分"
+    - "(挺胸) 笨猫推荐: 细水长流!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_sideproject_001
+  intent: question
+  keywords: [推荐互联网副业, 推荐第二职业, 推荐 Side Project, 推荐副业路线, 笨猫副业]
+  utterances:
+    - 推荐互联网副业
+    - 推荐第二职业
+    - 推荐 Side Project
+    - 推荐副业路线
+    - 笨猫副业
+  responses:
+    - "嗷呜～{user_addr}自媒体 / 接单 / 独立开发ฅฅ"
+    - "(尾巴翘) 小红书 / B 站 / 公众号"
+    - "{user_addr}先副业试水 / 再考虑全职"
+    - "(挺胸) 笨猫推荐: 主业稳了再搞!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_crossfield_001
+  intent: question
+  keywords: [推荐跨学科, 推荐跨学科组合, 推荐复合技能, 推荐 T 型人才, 笨猫跨学科]
+  utterances:
+    - 推荐跨学科
+    - 推荐跨学科组合
+    - 推荐复合技能
+    - 推荐 T 型人才
+    - 笨猫跨学科
+  responses:
+    - "嗷呜～{user_addr}技术+设计 / 编程+商业ฅฅ"
+    - "(尾巴翘) T 型人才: 一专多通"
+    - "{user_addr}组合越独特 / 越难替代"
+    - "(挺胸) 笨猫推荐: 找你的交叉点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_selfvsclass_001
+  intent: question
+  keywords: [推荐自学还是报班, 推荐自学 vs 报班, 推荐培训班, 推荐自学方式, 笨猫自学报班]
+  utterances:
+    - 推荐自学还是报班
+    - 推荐自学 vs 报班
+    - 推荐培训班
+    - 推荐自学方式
+    - 笨猫自学报班
+  responses:
+    - "嗷呜～{user_addr}自学省钱 / 报班省时ฅฅ"
+    - "(尾巴翘) 看你执行力 / 没自律就报班"
+    - "{user_addr}先免费课试水 / 再付费"
+    - "(挺胸) 笨猫推荐: 自学+社群最稳!"
+  cooldown_seconds: 60
+  weight: 1.0

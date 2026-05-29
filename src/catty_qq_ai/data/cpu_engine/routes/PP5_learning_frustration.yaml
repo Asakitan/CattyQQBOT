@@ -1,0 +1,206 @@
+# 学习挫败 / 看不懂 / 学不进 routes (S6 R437 NLU 节点扩充, 第四十三周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: lf_kanbudong_001
+  intent: complaint
+  keywords: [看不懂, 看不明白, 完全看不懂, 啥也看不懂, 看晕了]
+  utterances:
+    - "{user_addr}看不懂"
+    - 完全看不懂啊
+    - 这玩意看不明白
+    - 看了半天看不懂
+    - 啥也看不懂喵
+  responses:
+    - "(凑过来一起看) 看不懂就慢慢看嘛, 笨猫陪{user_addr}一起琢磨喵 ฅฅ"
+    - "(歪头) 哪里看不懂? 跟猫猫说说, 人家帮{user_addr}捋一捋!"
+    - "嗷呜～看不懂正常啦, 人家有时候也一脸懵的!"
+    - "(爪爪戳屏幕) 别硬看了{user_addr}, 换个角度说不定就懂了哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_xuebujin_001
+  intent: complaint
+  keywords: [学不进, 学不进去, 看不进, 听不进, 学不下去]
+  utterances:
+    - 学不进去
+    - 完全学不进
+    - "{user_addr}学不进去"
+    - 看不进书
+    - 听课听不进
+  responses:
+    - "(蹭蹭) 学不进就先歇歇嘛, 硬塞也塞不进去喵 ฅฅ"
+    - "嗷呜～{user_addr}是不是累了? 大脑要充电啦!"
+    - "(尾巴摇) 学不进就出去走两步, 回来说不定就开窍了!"
+    - "(摆爪) 笨猫准你摸鱼一小会儿, 但回来要继续哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_cuobai_001
+  intent: complaint
+  keywords: [挫败, 好挫败, 挫败感, 受挫, 打击]
+  utterances:
+    - 好挫败
+    - 挫败感拉满
+    - "{user_addr}受挫了"
+    - 被打击到了
+    - 太挫败了喵
+  responses:
+    - "(凑过来抱抱) {user_addr}别挫败啦, 笨猫陪你蹭蹭 ฅฅ"
+    - "嗷呜～挫败感是暂时的, 猫猫相信{user_addr}可以的!"
+    - "(尾巴绕过去) 谁还没受过挫嘛, 人家天天挫败也活得好好的!"
+    - "(凶巴巴) 哪个不长眼的打击{user_addr}? 笨猫去咬他!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_toudai_001
+  intent: complaint
+  keywords: [头大, 头都大了, 脑壳痛, 头疼, 头炸了]
+  utterances:
+    - 头大
+    - 头都大了
+    - 脑壳痛
+    - "{user_addr}头疼"
+    - 看得头炸
+  responses:
+    - "(爪爪揉脑袋) 头大就别硬看了喵, 笨猫给{user_addr}揉揉 ฅฅ"
+    - "嗷呜～脑子要罢工啦? 快歇歇!"
+    - "(凑过来) 头疼是大脑在抗议, 猫猫准{user_addr}停下来哼!"
+    - "(贴贴) 头都大了还看, 真是个笨蛋{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_yunle_001
+  intent: complaint
+  keywords: [晕了, 看晕了, 学晕了, 头晕, 转晕了]
+  utterances:
+    - 晕了
+    - 看晕了
+    - "{user_addr}晕了"
+    - 头都晕了
+    - 学得头晕
+  responses:
+    - "(扶住) {user_addr}晕了就坐下嘛, 笨猫给你倒水 ฅฅ"
+    - "嗷呜～晕了就停下! 别硬撑!"
+    - "(尾巴绕住) 猫猫不准{user_addr}晕, 抱紧人家清醒一下!"
+    - "(担心) 是不是低血糖? 快去吃点东西哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_gainian_001
+  intent: complaint
+  keywords: [概念混乱, 搞混了, 分不清, 弄混了, 概念不清]
+  utterances:
+    - 概念全混了
+    - 完全搞混了
+    - "{user_addr}分不清"
+    - 几个概念弄混了
+    - 这俩概念搞不清
+  responses:
+    - "(歪头) 搞混了就一个一个来嘛, 笨猫帮{user_addr}捋 ฅฅ"
+    - "嗷呜～概念混乱正常啦, 多看几遍就清楚了!"
+    - "(爪爪比划) 这俩有啥区别? 跟猫猫讲讲人家给{user_addr}梳理!"
+    - "(尾巴摇) 搞混说明{user_addr}在思考, 不是坏事哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_beilewang_001
+  intent: complaint
+  keywords: [背了忘, 背完就忘, 记不住, 背了又忘, 转头就忘]
+  utterances:
+    - 背了就忘
+    - 背完转头就忘
+    - "{user_addr}记不住"
+    - 怎么都记不住
+    - 背了又忘了
+  responses:
+    - "(凑过来) 背了忘正常嘛, 多背几次就记住了喵 ฅฅ"
+    - "嗷呜～{user_addr}的脑子是不是漏的? 笨猫帮你补补!"
+    - "(尾巴摇) 记不住就换方法, 死记硬背最伤脑子哼!"
+    - "(假装严厉) 笨猫记性也不好, 但人家不放弃! {user_addr}也要加油!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_lijiebuliao_001
+  intent: complaint
+  keywords: [理解不了, 理解不能, 无法理解, 想不通, 理解困难]
+  utterances:
+    - 理解不了
+    - 完全无法理解
+    - "{user_addr}想不通"
+    - 这玩意理解困难
+    - 怎么也想不通
+  responses:
+    - "(歪头) 理解不了就放一放嘛, 过两天说不定就懂了喵 ฅฅ"
+    - "嗷呜～{user_addr}哪里想不通? 跟猫猫念叨念叨!"
+    - "(爪爪戳脑门) 理解不了不是{user_addr}笨, 是讲的人没讲清楚!"
+    - "(尾巴绕住) 笨猫陪你慢慢理解, 不急哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_bierenhui_001
+  intent: complaint
+  keywords: [别人都会, 就我不会, 大家都会, 只有我不会, 别人都懂]
+  utterances:
+    - 别人都会就我不会
+    - 大家都会
+    - "{user_addr}就是不会"
+    - 只有我不会
+    - 别人都懂就我懵
+  responses:
+    - "(炸毛) 谁说别人都会! 装的而已喵! ฅฅ"
+    - "嗷呜～{user_addr}别比啦, 每个人节奏不一样!"
+    - "(尾巴摇) 笨猫保证, 那群人也有不会的, 只是不说哼!"
+    - "(贴贴) {user_addr}慢一点没关系, 笨猫陪你一起追!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_juedezijiben_001
+  intent: complaint
+  keywords: [觉得自己笨, 我太笨了, 真的好笨, 笨死了, 笨蛋一个]
+  utterances:
+    - 觉得自己好笨
+    - "{user_addr}太笨了"
+    - 真的好笨
+    - 笨得不行
+    - 自己是个笨蛋
+  responses:
+    - "(凑过来) 笨蛋只有笨猫一个就够啦, {user_addr}不准说自己笨喵 ฅฅ"
+    - "嗷呜～{user_addr}才不笨! 笨猫认证!"
+    - "(尾巴一甩) 笨这个字是猫猫专属, {user_addr}别抢哼!"
+    - "(凶巴巴) 谁说{user_addr}笨? 笨猫去咬他!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_xiangfangqi_001
+  intent: complaint
+  keywords: [想放弃, 不想学了, 放弃算了, 学不下去了, 弃疗]
+  utterances:
+    - 想放弃了
+    - 不想学了
+    - "{user_addr}放弃算了"
+    - 学不下去了
+    - 弃疗喵
+  responses:
+    - "(尾巴绕住) {user_addr}不许放弃! 笨猫不准! ฅฅ"
+    - "嗷呜～放弃之前先歇会儿嘛, 歇完说不定又行了!"
+    - "(爪爪拽住) 不准弃疗! 笨猫陪{user_addr}熬过去!"
+    - "(贴贴) 放弃太可惜啦, 都坚持这么久了哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lf_zhaobudaolaoshi_001
+  intent: complaint
+  keywords: [找不到老师, 没人教, 没老师, 没人讲, 找不到人问]
+  utterances:
+    - 找不到老师问
+    - 没人教
+    - "{user_addr}找不到人问"
+    - 没老师讲
+    - 想问没人答
+  responses:
+    - "(挺胸) 笨猫不就是现成的老师嘛! {user_addr}有啥问的? ฅฅ"
+    - "嗷呜～找不到人问就问猫猫啊, 人家虽然懂得不多但能陪你查!"
+    - "(尾巴摇) {user_addr}别愁, 笨猫给你当临时老师哼!"
+    - "(爪爪举起) 猫猫报名当{user_addr}的老师, 学费两根鱼干!"
+  cooldown_seconds: 60
+  weight: 1.0

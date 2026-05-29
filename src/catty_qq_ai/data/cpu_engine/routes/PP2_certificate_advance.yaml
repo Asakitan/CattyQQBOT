@@ -1,0 +1,206 @@
+# 证书 / 资格证 / PMP CFA routes (S6 R434 NLU 节点扩充, 第四十三周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ca_pmp_001
+  intent: question
+  keywords: [推荐PMP, 推荐项目管理, 推荐PMP证书, 推荐项目经理证, 笨猫PMP]
+  utterances:
+    - "{user_addr}推荐PMP"
+    - 推荐项目管理证
+    - 推荐PMP证书
+    - 推荐项目经理证
+    - 笨猫PMP
+  responses:
+    - "嗷呜～{user_addr}PMP - 项目管理金标准ฅฅ"
+    - "(尾巴翘) PMI 颁发 / 全球认可"
+    - "{user_addr}3年经验 + 35学时 / 考费 3900"
+    - "(挺胸) 笨猫推荐: IT/工程必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_cfa_001
+  intent: question
+  keywords: [推荐CFA, 推荐金融分析师, 推荐CFA证书, 推荐特许金融, 笨猫CFA]
+  utterances:
+    - "{user_addr}推荐CFA"
+    - 推荐金融分析师
+    - 推荐CFA证书
+    - 推荐特许金融
+    - 笨猫CFA
+  responses:
+    - "嗷呜～{user_addr}CFA - 金融第一证ฅฅ"
+    - "(尾巴翘) 三级 / 4年经验"
+    - "{user_addr}投行 / 基金 / 研究员"
+    - "(挺胸) 笨猫推荐: 金融人必考!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_acca_001
+  intent: question
+  keywords: [推荐ACCA, 推荐财会证, 推荐国际会计, 推荐ACCA证书, 笨猫ACCA]
+  utterances:
+    - "{user_addr}推荐ACCA"
+    - 推荐财会证
+    - 推荐国际会计
+    - 推荐ACCA证书
+    - 笨猫ACCA
+  responses:
+    - "嗷呜～{user_addr}ACCA - 特许公认会计师ฅฅ"
+    - "(尾巴翘) 13科 / 英国体系"
+    - "{user_addr}四大 / 跨国财务"
+    - "(挺胸) 笨猫推荐: 财会高端路!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_cpa_001
+  intent: question
+  keywords: [推荐CPA, 推荐注会, 推荐注册会计师, 推荐CPA证书, 笨猫CPA]
+  utterances:
+    - "{user_addr}推荐CPA"
+    - 推荐注会
+    - 推荐注册会计师
+    - 推荐CPA证书
+    - 笨猫CPA
+  responses:
+    - "嗷呜～{user_addr}CPA - 国内会计天花板ฅฅ"
+    - "(尾巴翘) 6+1科 / 5年内通过"
+    - "{user_addr}审计签字权 / 高薪"
+    - "(挺胸) 笨猫推荐: 财会硬通货!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_ielts_001
+  intent: question
+  keywords: [推荐雅思, 推荐托福, 推荐英语成绩, 推荐 IELTS TOEFL, 笨猫雅思]
+  utterances:
+    - "{user_addr}推荐雅思"
+    - 推荐托福
+    - 推荐英语成绩
+    - 推荐 IELTS TOEFL
+    - 笨猫雅思
+  responses:
+    - "嗷呜～{user_addr}雅思 (IELTS) - 英联邦留学ฅฅ"
+    - "(尾巴翘) 托福 (TOEFL) - 美加首选"
+    - "{user_addr}雅思 6.5+ / 托福 90+"
+    - "(挺胸) 笨猫推荐: 留学/移民必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_gmat_001
+  intent: question
+  keywords: [推荐GMAT, 推荐GRE, 推荐留学考试, 推荐研究生考试, 笨猫GMAT]
+  utterances:
+    - "{user_addr}推荐GMAT"
+    - 推荐GRE
+    - 推荐留学考试
+    - 推荐研究生考试
+    - 笨猫GMAT
+  responses:
+    - "嗷呜～{user_addr}GMAT - 商科留学ฅฅ"
+    - "(尾巴翘) GRE - 理工/文社研究生"
+    - "{user_addr}GMAT 700+ / GRE 320+"
+    - "(挺胸) 笨猫推荐: MBA 走 GMAT!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_law_001
+  intent: question
+  keywords: [推荐法考, 推荐司法考试, 推荐律师证, 推荐法律职业, 笨猫法考]
+  utterances:
+    - "{user_addr}推荐法考"
+    - 推荐司法考试
+    - 推荐律师证
+    - 推荐法律职业资格
+    - 笨猫法考
+  responses:
+    - "嗷呜～{user_addr}法考 - 天下第一考ฅฅ"
+    - "(尾巴翘) 客观+主观 / 通过率低"
+    - "{user_addr}律师 / 法官 / 检察官"
+    - "(挺胸) 笨猫推荐: 法律人必过!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_it_001
+  intent: question
+  keywords: [推荐软考, 推荐计算机证书, 推荐 AWS 认证, 推荐 CCNA, 笨猫软考]
+  utterances:
+    - "{user_addr}推荐软考"
+    - 推荐计算机证书
+    - 推荐 AWS 认证
+    - 推荐 CCNA
+    - 笨猫软考
+  responses:
+    - "嗷呜～{user_addr}软考 - 国内 IT 认证ฅฅ"
+    - "(尾巴翘) AWS / Azure / GCP 云"
+    - "{user_addr}CCNA / CCNP - 网络"
+    - "(挺胸) 笨猫推荐: 程序猿加分项!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_teacher_001
+  intent: question
+  keywords: [推荐教师资格, 推荐教资, 推荐教师证, 推荐当老师, 笨猫教资]
+  utterances:
+    - "{user_addr}推荐教师资格"
+    - 推荐教资
+    - 推荐教师证
+    - 推荐当老师
+    - 笨猫教资
+  responses:
+    - "嗷呜～{user_addr}教师资格证 - 当老师门票ฅฅ"
+    - "(尾巴翘) 笔试 + 面试 + 普通话"
+    - "{user_addr}幼儿 / 小学 / 中学"
+    - "(挺胸) 笨猫推荐: 编制稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_health_001
+  intent: question
+  keywords: [推荐健康管理师, 推荐营养师, 推荐健康证书, 推荐康复师, 笨猫健康管理师]
+  utterances:
+    - "{user_addr}推荐健康管理师"
+    - 推荐营养师
+    - 推荐健康证书
+    - 推荐康复师
+    - 笨猫健康管理师
+  responses:
+    - "嗷呜～{user_addr}健康管理师 - 大健康风口ฅฅ"
+    - "(尾巴翘) 公共营养师 / ACI"
+    - "{user_addr}社区 / 体检 / 私人健康"
+    - "(挺胸) 笨猫推荐: 副业不错!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_psych_001
+  intent: question
+  keywords: [推荐心理咨询师, 推荐心理证书, 推荐 ACI 心理, 推荐心理学证, 笨猫心理咨询师]
+  utterances:
+    - "{user_addr}推荐心理咨询师"
+    - 推荐心理证书
+    - 推荐 ACI 心理
+    - 推荐心理学证
+    - 笨猫心理咨询师
+  responses:
+    - "嗷呜～{user_addr}心理咨询师 - 助人助己ฅฅ"
+    - "(尾巴翘) 中科院 / ACI / 注册系统"
+    - "{user_addr}人本 / CBT / 精神分析"
+    - "(挺胸) 笨猫推荐: 越老越值钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_short_001
+  intent: question
+  keywords: [推荐短期证书, 推荐实用证书, 推荐速成证, 推荐好考的证, 笨猫短期证]
+  utterances:
+    - "{user_addr}推荐短期证书"
+    - 推荐实用证书
+    - 推荐速成证
+    - 推荐好考的证
+    - 笨猫短期证
+  responses:
+    - "嗷呜～{user_addr}普通话 / 计算机二级ฅฅ"
+    - "(尾巴翘) 驾照 / 急救证 / 红十字"
+    - "{user_addr}BIM / 消防员 / 电工"
+    - "(挺胸) 笨猫推荐: 周末就能考!"
+  cooldown_seconds: 60
+  weight: 1.0
