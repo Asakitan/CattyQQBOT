@@ -1,0 +1,206 @@
+# 人像摄影 / 85mm / 摆姿势 routes (S6 R483 NLU 节点扩充, 第四十八周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pp_85mm_001
+  intent: question
+  keywords: [推荐人像85mm, 推荐 85mm 1.4, 推荐人像大光圈, 推荐人像定焦, 笨猫85mm镜头]
+  utterances:
+    - 推荐人像85mm
+    - 推荐 85mm 1.4
+    - 推荐人像大光圈
+    - 推荐人像定焦
+    - 笨猫85mm镜头
+  responses:
+    - "嗷呜～{user_addr}索尼 85mm F1.4 GM - 人像王ฅฅ"
+    - "(尾巴翘) 佳能 RF 85mm F1.2 / 尼康 Z 85mm 1.8"
+    - "{user_addr}虚化奶油 / 空气切割感"
+    - "(挺胸) 笨猫推荐: 85GM 一镜成神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_50mm_001
+  intent: question
+  keywords: [推荐人像50mm, 推荐 50mm 1.8, 推荐标头人像, 推荐小痰盂, 笨猫50mm镜头]
+  utterances:
+    - 推荐人像50mm
+    - 推荐 50mm 1.8
+    - 推荐标头人像
+    - 推荐小痰盂
+    - 笨猫50mm镜头
+  responses:
+    - "嗷呜～{user_addr}索尼 50mm F1.2 GM - 顶级标头ฅฅ"
+    - "(尾巴翘) 佳能 50 1.8 STM - 小痰盂入门"
+    - "{user_addr}尼康 Z 50mm 1.8S - 锐利清透"
+    - "(挺胸) 人家推荐: 50 1.8 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_softbox_001
+  intent: question
+  keywords: [推荐人像柔光箱, 推荐柔光罩, 推荐八角柔光箱, 推荐人像灯具, 笨猫柔光箱]
+  utterances:
+    - 推荐人像柔光箱
+    - 推荐柔光罩
+    - 推荐八角柔光箱
+    - 推荐人像灯具
+    - 笨猫柔光箱
+  responses:
+    - "嗷呜～{user_addr}神牛 AD200 + 八角柔光箱ฅฅ"
+    - "(尾巴翘) 90cm 八角 - 人像标配"
+    - "{user_addr}保荣口 / Profoto 接口"
+    - "(挺胸) 猫猫推荐: 神牛全家桶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_studio_light_001
+  intent: question
+  keywords: [推荐影楼布光, 推荐人像布光教程, 推荐三点布光, 推荐伦勃朗光, 笨猫影楼布光]
+  utterances:
+    - 推荐影楼布光
+    - 推荐人像布光教程
+    - 推荐三点布光
+    - 推荐伦勃朗光
+    - 笨猫影楼布光
+  responses:
+    - "嗷呜～{user_addr}三点布光 - 主光+辅光+轮廓光ฅฅ"
+    - "(尾巴翘) 伦勃朗光 / 蝴蝶光 / 环形光"
+    - "{user_addr}45° 高位主光经典"
+    - "(挺胸) 笨猫推荐: 先练蝴蝶光!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_natural_light_001
+  intent: question
+  keywords: [推荐自然光人像, 推荐黄金时刻, 推荐窗光人像, 推荐外景人像, 笨猫自然光]
+  utterances:
+    - 推荐自然光人像
+    - 推荐黄金时刻
+    - 推荐窗光人像
+    - 推荐外景人像
+    - 笨猫自然光
+  responses:
+    - "嗷呜～{user_addr}黄金时刻 (日出后/日落前 1h)ฅฅ"
+    - "(尾巴翘) 窗光侧逆 - 文艺范"
+    - "{user_addr}阴天散射光也超出片"
+    - "(挺胸) 人家推荐: 反光板必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_pose_001
+  intent: question
+  keywords: [推荐人像摆姿, 推荐摆姿教程, 推荐 pose 参考, 推荐人像动作, 笨猫摆姿势]
+  utterances:
+    - 推荐人像摆姿
+    - 推荐摆姿教程
+    - 推荐 pose 参考
+    - 推荐人像动作
+    - 笨猫摆姿势
+  responses:
+    - "嗷呜～{user_addr}S 型曲线 / 三角构图ฅฅ"
+    - "(尾巴翘) 手别贴身 / 下巴微前伸"
+    - "{user_addr}Pinterest 找 pose 灵感"
+    - "(挺胸) 猫猫推荐: 引导比摆姿重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_wedding_001
+  intent: question
+  keywords: [推荐婚纱摄影, 推荐婚礼跟拍, 推荐婚纱外景, 推荐婚纱风格, 笨猫婚纱摄影]
+  utterances:
+    - 推荐婚纱摄影
+    - 推荐婚礼跟拍
+    - 推荐婚纱外景
+    - 推荐婚纱风格
+    - 笨猫婚纱摄影
+  responses:
+    - "嗷呜～{user_addr}韩式清新 / 港风复古ฅฅ"
+    - "(尾巴翘) 海景 / 教堂 / 城市夜景"
+    - "{user_addr}双机位 70-200 + 35mm"
+    - "(挺胸) 笨猫推荐: 找有作品集的!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pp_portrait_001
+  intent: question
+  keywords: [推荐写真摄影, 推荐个人写真, 推荐艺术写真, 推荐生日写真, 笨猫写真]
+  utterances:
+    - 推荐写真摄影
+    - 推荐个人写真
+    - 推荐艺术写真
+    - 推荐生日写真
+    - 笨猫写真
+  responses:
+    - "嗷呜～{user_addr}日系小清新 / 暗调艺术ฅฅ"
+    - "(尾巴翘) 海马体 / 天真蓝 / 独立摄影师"
+    - "{user_addr}主题: 文艺/复古/赛博"
+    - "(挺胸) 人家推荐: 独立工作室!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pp_commercial_001
+  intent: question
+  keywords: [推荐商业人像, 推荐广告人像, 推荐杂志人像, 推荐封面人像, 笨猫商业人像]
+  utterances:
+    - 推荐商业人像
+    - 推荐广告人像
+    - 推荐杂志人像
+    - 推荐封面人像
+    - 笨猫商业人像
+  responses:
+    - "嗷呜～{user_addr}中画幅 - 富士 GFX / 哈苏ฅฅ"
+    - "(尾巴翘) Profoto 灯 + 专业修图团队"
+    - "{user_addr}日费率 ¥10k+ 起"
+    - "(挺胸) 笨猫提醒: 团队协作!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pp_fashion_001
+  intent: question
+  keywords: [推荐时尚大片, 推荐 fashion 摄影, 推荐 lookbook, 推荐时装摄影, 笨猫时尚摄影]
+  utterances:
+    - 推荐时尚大片
+    - 推荐 fashion 摄影
+    - 推荐 lookbook
+    - 推荐时装摄影
+    - 笨猫时尚摄影
+  responses:
+    - "嗷呜～{user_addr}Vogue / Harper's Bazaar 风格ฅฅ"
+    - "(尾巴翘) 张家诚 / 陈漫 / 黎晓亮"
+    - "{user_addr}强造型 + 概念叙事"
+    - "(挺胸) 猫猫推荐: 多看大片养眼!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pp_influencer_001
+  intent: question
+  keywords: [推荐网红人像, 推荐小红书人像, 推荐 ins 风, 推荐网红打卡, 笨猫网红人像]
+  utterances:
+    - 推荐网红人像
+    - 推荐小红书人像
+    - 推荐 ins 风
+    - 推荐网红打卡
+    - 笨猫网红人像
+  responses:
+    - "嗷呜～{user_addr}小红书爆款滤镜 + 氛围感ฅฅ"
+    - "(尾巴翘) 莫兰迪 / 胶片色 / 奶油色"
+    - "{user_addr}竖构图 / 三分线 / 留白"
+    - "(挺胸) 人家推荐: VSCO + Lightroom!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pp_retouch_001
+  intent: question
+  keywords: [推荐人像后期, 推荐人像修图, 推荐磨皮教程, 推荐液化, 笨猫人像后期]
+  utterances:
+    - 推荐人像后期
+    - 推荐人像修图
+    - 推荐磨皮教程
+    - 推荐液化
+    - 笨猫人像后期
+  responses:
+    - "嗷呜～{user_addr}双曲线磨皮 / 中性灰ฅฅ"
+    - "(尾巴翘) PS + Lightroom + Portraiture"
+    - "{user_addr}液化 / D&B / 锐化分层"
+    - "(挺胸) 笨猫推荐: 别磨成塑料!"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,206 @@
+# 野生动物摄影 / 长焦 / 鸟 routes (S6 R485 NLU 节点扩充, 第四十八周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: wp_telephoto_001
+  intent: question
+  keywords: [推荐野生动物长焦, 推荐 600mm, 推荐超长焦, 推荐打鸟镜头, 笨猫长焦]
+  utterances:
+    - 推荐野生动物长焦
+    - 推荐 600mm
+    - 推荐超长焦
+    - 推荐打鸟镜头
+    - 笨猫长焦
+  responses:
+    - "嗷呜～{user_addr}600mm f/4 - 打鸟旗舰ฅฅ"
+    - "(尾巴翘) 索尼 200-600 / 佳能 RF100-500"
+    - "{user_addr}尼康 500PF / 适马 150-600"
+    - "(挺胸) 笨猫推荐: 200-600 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_bird_001
+  intent: question
+  keywords: [推荐飞羽摄影, 推荐鸟类摄影, 推荐打鸟, 推荐拍鸟技巧, 笨猫拍鸟]
+  utterances:
+    - 推荐飞羽摄影
+    - 推荐鸟类摄影
+    - 推荐打鸟
+    - 推荐拍鸟技巧
+    - 笨猫拍鸟
+  responses:
+    - "嗷呜～{user_addr}飞羽 - 高速快门 1/2000+ฅฅ"
+    - "(尾巴翘) 眼对焦 / 连拍 / 大光圈"
+    - "{user_addr}晨昏黄金光 / 背景干净"
+    - "(挺胸) 笨猫推荐: 公园喂食点起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_africa_001
+  intent: question
+  keywords: [推荐非洲野生动物, 推荐 Safari, 推荐肯尼亚, 推荐坦桑尼亚, 笨猫非洲]
+  utterances:
+    - 推荐非洲野生动物
+    - 推荐 Safari
+    - 推荐肯尼亚
+    - 推荐坦桑尼亚
+    - 笨猫非洲
+  responses:
+    - "嗷呜～{user_addr}马赛马拉 - 角马大迁徙ฅฅ"
+    - "(尾巴翘) 塞伦盖蒂 / 恩戈罗恩戈罗"
+    - "{user_addr}7-10 月旱季最佳"
+    - "(挺胸) 笨猫推荐: 跟队 Safari 车!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_natgeo_001
+  intent: question
+  keywords: [推荐国家地理摄影, 推荐 NatGeo, 推荐自然纪实, 推荐生态摄影, 笨猫国家地理]
+  utterances:
+    - 推荐国家地理摄影
+    - 推荐 NatGeo
+    - 推荐自然纪实
+    - 推荐生态摄影
+    - 笨猫国家地理
+  responses:
+    - "嗷呜～{user_addr}NatGeo - 故事性+技术ฅฅ"
+    - "(尾巴翘) 长期蹲守 / 行为瞬间"
+    - "{user_addr}Steve Winter / Joel Sartore"
+    - "(挺胸) 笨猫推荐: 看 NatGeo YearBook!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_reserve_001
+  intent: question
+  keywords: [推荐自然保护区, 推荐拍摄保护区, 推荐国家公园, 推荐野生动物园, 笨猫保护区]
+  utterances:
+    - 推荐自然保护区
+    - 推荐拍摄保护区
+    - 推荐国家公园
+    - 推荐野生动物园
+    - 笨猫保护区
+  responses:
+    - "嗷呜～{user_addr}卧龙 / 三江源ฅฅ"
+    - "(尾巴翘) 可可西里 / 唐家河"
+    - "{user_addr}需申请许可 / 跟向导"
+    - "(挺胸) 笨猫推荐: 卧龙拍金丝猴!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wp_camera_001
+  intent: question
+  keywords: [推荐高速连拍相机, 推荐索尼 A1, 推荐 R3, 推荐 Z9, 笨猫野生机身]
+  utterances:
+    - 推荐高速连拍相机
+    - "{user_addr}推荐索尼 A1"
+    - 推荐 R3
+    - 推荐 Z9
+    - 笨猫野生机身
+  responses:
+    - "嗷呜～{user_addr}索尼 A1 - 30fps+8Kฅฅ"
+    - "(尾巴翘) 佳能 R3 / 尼康 Z9"
+    - "{user_addr}A9III - 全局快门"
+    - "(挺胸) 笨猫推荐: A1 打鸟王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_camo_001
+  intent: question
+  keywords: [推荐野外伪装服, 推荐迷彩, 推荐伪装帐, 推荐 Ghillie, 笨猫伪装]
+  utterances:
+    - 推荐野外伪装服
+    - 推荐迷彩
+    - 推荐伪装帐
+    - 推荐 Ghillie
+    - 笨猫伪装
+  responses:
+    - "嗷呜～{user_addr}迷彩外套 - 融入环境ฅฅ"
+    - "(尾巴翘) Ghillie 吉利服 / 伪装帐"
+    - "{user_addr}镜头炮衣 / 防反光"
+    - "(挺胸) 笨猫推荐: 伪装帐拍鸟!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wp_tripod_001
+  intent: question
+  keywords: [推荐三脚架云台, 推荐悬臂云台, 推荐 Gitzo, 推荐 RRS, 笨猫云台]
+  utterances:
+    - 推荐三脚架云台
+    - 推荐悬臂云台
+    - 推荐 Gitzo
+    - 推荐 RRS
+    - 笨猫云台
+  responses:
+    - "嗷呜～{user_addr}悬臂云台 - 长焦救星ฅฅ"
+    - "(尾巴翘) Wimberley / Jobu / 思锐"
+    - "{user_addr}Gitzo 5 号脚 / RRS"
+    - "(挺胸) 笨猫推荐: 思锐悬臂入门!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wp_ethics_001
+  intent: question
+  keywords: [推荐野生动物伦理, 推荐不打扰, 推荐拍摄道德, 推荐生态保护, 笨猫伦理]
+  utterances:
+    - 推荐野生动物伦理
+    - 推荐不打扰
+    - 推荐拍摄道德
+    - 推荐生态保护
+    - 笨猫伦理
+  responses:
+    - "嗷呜～{user_addr}不打扰 - 第一原则ฅฅ"
+    - "(炸毛) 不诱拍 / 不喂食 / 不破坏"
+    - "{user_addr}保持距离 / 用长焦"
+    - "(挺胸) 笨猫推荐: 动物优先于片子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_birdapp_001
+  intent: question
+  keywords: [推荐鸟类识别软件, 推荐 Merlin, 推荐懂鸟, 推荐 eBird, 笨猫识鸟]
+  utterances:
+    - 推荐鸟类识别软件
+    - 推荐 Merlin
+    - 推荐懂鸟
+    - 推荐 eBird
+    - 笨猫识鸟
+  responses:
+    - "嗷呜～{user_addr}Merlin - 康奈尔出品ฅฅ"
+    - "(尾巴翘) 懂鸟 / 中国观鸟记录中心"
+    - "{user_addr}eBird - 全球记录"
+    - "(挺胸) 笨猫推荐: Merlin 声纹识别!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wp_cn_bird_001
+  intent: question
+  keywords: [推荐国内拍鸟点, 推荐北戴河, 推荐盐城, 推荐百花山, 笨猫拍鸟点]
+  utterances:
+    - 推荐国内拍鸟点
+    - 推荐北戴河
+    - 推荐盐城
+    - 推荐百花山
+    - 笨猫拍鸟点
+  responses:
+    - "嗷呜～{user_addr}北戴河 - 猛禽迁徙ฅฅ"
+    - "(尾巴翘) 盐城 / 鄱阳湖 / 香港米埔"
+    - "{user_addr}百花山 / 云南百花岭"
+    - "(挺胸) 笨猫推荐: 百花岭塘鸟!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wp_community_001
+  intent: question
+  keywords: [推荐野生动物社区, 推荐鸟网, 推荐 500px, 推荐影像中国, 笨猫摄影社]
+  utterances:
+    - 推荐野生动物社区
+    - 推荐鸟网
+    - 推荐 500px
+    - 推荐影像中国
+    - 笨猫摄影社
+  responses:
+    - "嗷呜～{user_addr}鸟网 - 国内拍鸟大本营ฅฅ"
+    - "(尾巴翘) 500px / 1x / Flickr"
+    - "{user_addr}影像中国 / 图虫"
+    - "(挺胸) 笨猫推荐: 鸟网交流上手快!"
+  cooldown_seconds: 60
+  weight: 0.8

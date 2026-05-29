@@ -1,0 +1,206 @@
+# 风光摄影 / 广角 / 慢门 routes (S6 R482 NLU 节点扩充, 第四十八周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: lp_wideangle_001
+  intent: question
+  keywords: [推荐风光广角镜头, 推荐广角镜头, 推荐 16-35, 推荐风光镜头, 笨猫广角镜头]
+  utterances:
+    - 推荐风光广角镜头
+    - 推荐广角镜头
+    - 推荐 16-35
+    - 推荐风光镜头
+    - 笨猫广角镜头
+  responses:
+    - "嗷呜～{user_addr}索尼 16-35 GM - 风光神镜ฅฅ"
+    - "(尾巴翘) 佳能 RF 15-35 / 尼康 14-24"
+    - "{user_addr}适马 14-24 Art - 性价比"
+    - "(挺胸) 猫猫推荐: 16-35 通用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_longexposure_001
+  intent: question
+  keywords: [推荐慢门 ND 镜, 推荐慢门长曝, 推荐 ND1000, 推荐减光镜, 笨猫 ND 镜]
+  utterances:
+    - 推荐慢门 ND 镜
+    - 推荐慢门长曝
+    - 推荐 ND1000
+    - 推荐减光镜
+    - 笨猫 ND 镜
+  responses:
+    - "嗷呜～{user_addr}NiSi 耐司 ND1000 - 国产顶级ฅฅ"
+    - "(尾巴翘) Lee / Haida 海大 / B+W"
+    - "{user_addr}方形滤镜 / 圆形滤镜"
+    - "(挺胸) 笨猫推荐: NiSi V7 套装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_location_001
+  intent: question
+  keywords: [推荐风光摄影地点, 推荐张家界, 推荐黄山, 推荐稻城亚丁, 笨猫风光地点]
+  utterances:
+    - 推荐风光摄影地点
+    - 推荐张家界
+    - 推荐黄山
+    - 推荐稻城亚丁
+    - 笨猫风光地点
+  responses:
+    - "嗷呜～{user_addr}张家界 / 黄山 - 国内经典ฅฅ"
+    - "(尾巴翘) 稻城亚丁 / 新疆喀纳斯 / 西藏"
+    - "{user_addr}冰岛 / 挪威 / 巴塔哥尼亚 - 国外"
+    - "(挺胸) 人家推荐: 黄山日出!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_sunrise_001
+  intent: question
+  keywords: [推荐日出日落摄影, 推荐黄金时刻, 推荐蓝调时刻, 推荐风光日出, 笨猫日出摄影]
+  utterances:
+    - 推荐日出日落摄影
+    - 推荐黄金时刻
+    - 推荐蓝调时刻
+    - 推荐风光日出
+    - 笨猫日出摄影
+  responses:
+    - "嗷呜～{user_addr}黄金时刻 - 日出后日落前 1hฅฅ"
+    - "(尾巴翘) 蓝调时刻 / Magic Hour"
+    - "{user_addr}PhotoPills app 算时间"
+    - "(挺胸) 猫猫推荐: 提前 30 分到位!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_milkyway_001
+  intent: question
+  keywords: [推荐银河摄影, 推荐星空摄影, 推荐银河拍摄, 推荐星轨, 笨猫银河]
+  utterances:
+    - 推荐银河摄影
+    - 推荐星空摄影
+    - 推荐银河拍摄
+    - 推荐星轨
+    - 笨猫银河
+  responses:
+    - "嗷呜～{user_addr}500 法则 / 大光圈 f/2.8ฅฅ"
+    - "(尾巴翘) ISO 3200-6400 / 20s 曝光"
+    - "{user_addr}赤道仪 / 堆栈降噪 / Sequator"
+    - "(挺胸) 笨猫推荐: 4-9 月银河季!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_aurora_001
+  intent: question
+  keywords: [推荐极光摄影, 推荐北极光拍摄, 推荐冰岛极光, 推荐挪威极光, 笨猫极光]
+  utterances:
+    - 推荐极光摄影
+    - 推荐北极光拍摄
+    - 推荐冰岛极光
+    - 推荐挪威极光
+    - 笨猫极光
+  responses:
+    - "嗷呜～{user_addr}冰岛 / 挪威 / 芬兰 / 阿拉斯加ฅฅ"
+    - "(尾巴翘) KP 指数 ≥ 3 / 9-3 月"
+    - "{user_addr}f/2.8 / ISO 1600 / 5-15s"
+    - "(挺胸) 人家推荐: 挪威罗弗敦!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: lp_snow_001
+  intent: question
+  keywords: [推荐雪景拍摄, 推荐雪景技巧, 推荐冬季摄影, 推荐雪景曝光, 笨猫雪景]
+  utterances:
+    - 推荐雪景拍摄
+    - 推荐雪景技巧
+    - 推荐冬季摄影
+    - 推荐雪景曝光
+    - 笨猫雪景
+  responses:
+    - "嗷呜～{user_addr}雪景+1 至+2 EV 曝光ฅฅ"
+    - "(尾巴翘) 偏振镜 / 白平衡偏冷"
+    - "{user_addr}电池保暖 / 防起雾"
+    - "(挺胸) 猫猫推荐: 雾凇岛 / 长白山!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_postprocess_001
+  intent: question
+  keywords: [推荐风光后期, 推荐 LR 修图, 推荐 Lightroom, 推荐风光修图, 笨猫风光后期]
+  utterances:
+    - 推荐风光后期
+    - 推荐 LR 修图
+    - 推荐 Lightroom
+    - 推荐风光修图
+    - 笨猫风光后期
+  responses:
+    - "嗷呜～{user_addr}Lightroom + Photoshopฅฅ"
+    - "(尾巴翘) Capture One / Luminar Neo"
+    - "{user_addr}蒙版 / 堆栈 / 全景接片"
+    - "(挺胸) 笨猫推荐: LR 入门最快!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_photographer_001
+  intent: question
+  keywords: [推荐风光摄影师, 推荐 Marc Adamus, 推荐 Max Rive, 推荐风光大师, 笨猫摄影师]
+  utterances:
+    - 推荐风光摄影师
+    - 推荐 Marc Adamus
+    - 推荐 Max Rive
+    - 推荐风光大师
+    - 笨猫摄影师
+  responses:
+    - "嗷呜～{user_addr}Marc Adamus - 色彩大师ฅฅ"
+    - "(尾巴翘) Max Rive / Daniel Kordan"
+    - "{user_addr}Peter Lik / 国内: 谢墨"
+    - "(挺胸) 人家推荐: Marc Adamus 入门!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: lp_gear_001
+  intent: question
+  keywords: [推荐风光摄影器材, 推荐风光相机, 推荐三脚架, 推荐快门线, 笨猫风光器材]
+  utterances:
+    - 推荐风光摄影器材
+    - 推荐风光相机
+    - 推荐三脚架
+    - 推荐快门线
+    - 笨猫风光器材
+  responses:
+    - "嗷呜～{user_addr}全画幅+广角+脚架ฅฅ"
+    - "(尾巴翘) 捷信 / 思锐 / Manfrotto"
+    - "{user_addr}快门线 / L 板 / 滤镜支架"
+    - "(挺胸) 猫猫推荐: A7R5 + 16-35!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_composition_001
+  intent: question
+  keywords: [推荐风光构图, 推荐三分法, 推荐前景构图, 推荐引导线, 笨猫风光构图]
+  utterances:
+    - 推荐风光构图
+    - 推荐三分法
+    - 推荐前景构图
+    - 推荐引导线
+    - 笨猫风光构图
+  responses:
+    - "嗷呜～{user_addr}三分法 / 前景 / 引导线ฅฅ"
+    - "(尾巴翘) 黄金分割 / 框架构图"
+    - "{user_addr}对称 / 留白 / 透视"
+    - "(挺胸) 笨猫推荐: 强前景!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_natgeo_001
+  intent: question
+  keywords: [推荐国家地理摄影, 推荐 National Geographic, 推荐 NatGeo, 推荐纪实风光, 笨猫国家地理]
+  utterances:
+    - 推荐国家地理摄影
+    - 推荐 National Geographic
+    - 推荐 NatGeo
+    - 推荐纪实风光
+    - 笨猫国家地理
+  responses:
+    - "嗷呜～{user_addr}National Geographic 经典ฅฅ"
+    - "(尾巴翘) Steve McCurry / Jimmy Chin"
+    - "{user_addr}人文+风光+故事性"
+    - "(挺胸) 人家推荐: NatGeo 年度大赛!"
+  cooldown_seconds: 60
+  weight: 0.8

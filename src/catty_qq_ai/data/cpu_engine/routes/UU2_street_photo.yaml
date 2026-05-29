@@ -1,0 +1,206 @@
+# 街拍摄影 / 35mm / 决定性瞬间 routes (S6 R484 NLU 节点扩充, 第四十八周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sp_35mm_001
+  intent: question
+  keywords: [推荐街拍 35mm, 推荐街拍定焦, 推荐 35mm 镜头, 推荐街拍焦段, 笨猫 35mm]
+  utterances:
+    - 推荐街拍 35mm
+    - 推荐街拍定焦
+    - 推荐 35mm 镜头
+    - 推荐街拍焦段
+    - "{user_addr}笨猫 35mm 街拍"
+  responses:
+    - "嗷呜～{user_addr}35mm - 街拍黄金焦段ฅฅ"
+    - "(尾巴翘) 接近人眼视角 / 不压迫"
+    - "{user_addr}Sony 35/1.8 / Fuji 23/2"
+    - "(挺胸) 笨猫推荐: 一颗 35mm 走天下!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_leica_001
+  intent: question
+  keywords: [推荐 Leica 旁轴, 推荐徕卡街拍, 推荐 M6, 推荐 M11, 笨猫 Leica]
+  utterances:
+    - 推荐 Leica 旁轴
+    - 推荐徕卡街拍
+    - 推荐 M6
+    - 推荐 M11
+    - "{user_addr}笨猫 Leica 街拍"
+  responses:
+    - "嗷呜～{user_addr}Leica M - 街拍图腾ฅฅ"
+    - "(尾巴翘) 旁轴静音 / 不惊扰被摄者"
+    - "{user_addr}M6 胶片 / M11 数码"
+    - "(挺胸) 笨猫推荐: 信仰之选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_bresson_001
+  intent: question
+  keywords: [推荐决定性瞬间, 推荐布列松, 推荐 Bresson, 推荐瞬间抓拍, 笨猫布列松]
+  utterances:
+    - 推荐决定性瞬间
+    - 推荐布列松
+    - 推荐 Bresson
+    - 推荐瞬间抓拍
+    - "{user_addr}笨猫布列松"
+  responses:
+    - "嗷呜～{user_addr}Henri Cartier-Bresson - 街拍鼻祖ฅฅ"
+    - "(尾巴翘) 决定性瞬间 / 几何构图"
+    - "{user_addr}马格南创始人 / Leica 信徒"
+    - "(挺胸) 笨猫推荐: 必读布列松画册!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_moriyama_001
+  intent: question
+  keywords: [推荐森山大道, 推荐 Daido, 推荐日式街拍, 推荐粗颗粒, 笨猫森山大道]
+  utterances:
+    - 推荐森山大道
+    - 推荐 Daido
+    - 推荐日式街拍
+    - 推荐粗颗粒
+    - "{user_addr}笨猫森山大道"
+  responses:
+    - "嗷呜～{user_addr}森山大道 - Are Bure Boke 流派ฅฅ"
+    - "(尾巴翘) 高反差 / 粗颗粒 / 模糊"
+    - "{user_addr}GR 卡片机经典记录"
+    - "(挺胸) 笨猫推荐: 《犬之记忆》画册!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_bw_001
+  intent: question
+  keywords: [推荐黑白街拍, 推荐黑白胶片, 推荐 Tri-X, 推荐 HP5, 笨猫黑白街拍]
+  utterances:
+    - 推荐黑白街拍
+    - 推荐黑白胶片
+    - 推荐 Tri-X
+    - 推荐 HP5
+    - "{user_addr}笨猫黑白街拍"
+  responses:
+    - "嗷呜～{user_addr}黑白 - 街拍永恒美学ฅฅ"
+    - "(尾巴翘) Kodak Tri-X 400 / Ilford HP5"
+    - "{user_addr}剥离色彩 / 强化结构光影"
+    - "(挺胸) 笨猫推荐: 黑白比彩色更有味!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_composition_001
+  intent: question
+  keywords: [推荐街拍构图, 推荐三分法, 推荐引导线, 推荐框架构图, 笨猫街拍构图]
+  utterances:
+    - 推荐街拍构图
+    - 推荐三分法
+    - 推荐引导线
+    - 推荐框架构图
+    - "{user_addr}笨猫街拍构图"
+  responses:
+    - "嗷呜～{user_addr}三分法 / 引导线 / 对称ฅฅ"
+    - "(尾巴翘) 框架构图 / 几何形状"
+    - "{user_addr}前景中景背景层次"
+    - "(挺胸) 笨猫推荐: 先看再按快门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_stealth_001
+  intent: question
+  keywords: [推荐隐蔽街拍, 推荐盲拍, 推荐腰平取景, 推荐街拍技巧, 笨猫隐蔽街拍]
+  utterances:
+    - 推荐隐蔽街拍
+    - 推荐盲拍
+    - 推荐腰平取景
+    - 推荐街拍技巧
+    - "{user_addr}笨猫隐蔽街拍"
+  responses:
+    - "嗷呜～{user_addr}盲拍 / 腰平取景 / 区域对焦ฅฅ"
+    - "(尾巴翘) 小相机 / 静音快门"
+    - "{user_addr}超焦距预设 / 抓拍快"
+    - "(挺胸) 笨猫推荐: GR 是盲拍神器!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_face_001
+  intent: question
+  keywords: [推荐街拍人物, 推荐街拍表情, 推荐肖像街拍, 推荐情绪抓拍, 笨猫街拍人物]
+  utterances:
+    - 推荐街拍人物
+    - 推荐街拍表情
+    - 推荐肖像街拍
+    - 推荐情绪抓拍
+    - "{user_addr}笨猫街拍人物"
+  responses:
+    - "嗷呜～{user_addr}捕捉真实表情 / 不摆拍ฅฅ"
+    - "(尾巴翘) 微笑 / 沉思 / 眼神交汇"
+    - "{user_addr}尊重被摄者 / 必要时征求同意"
+    - "(挺胸) 笨猫推荐: 共情比技术重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_postprocess_001
+  intent: question
+  keywords: [推荐街拍后期, 推荐 Lightroom 街拍, 推荐胶片模拟, 推荐 VSCO 预设, 笨猫街拍后期]
+  utterances:
+    - 推荐街拍后期
+    - 推荐 Lightroom 街拍
+    - 推荐胶片模拟
+    - 推荐 VSCO 预设
+    - "{user_addr}笨猫街拍后期"
+  responses:
+    - "嗷呜～{user_addr}Lightroom + VSCO 预设ฅฅ"
+    - "(尾巴翘) Fuji Classic Chrome / Kodak Portra"
+    - "{user_addr}降饱和 / 提阴影 / 加颗粒"
+    - "(挺胸) 笨猫推荐: 后期是二次创作!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_community_001
+  intent: question
+  keywords: [推荐街拍社区, 推荐 1x, 推荐 VSCO, 推荐街拍图集, 笨猫街拍社区]
+  utterances:
+    - 推荐街拍社区
+    - 推荐 1x
+    - 推荐 VSCO
+    - 推荐街拍图集
+    - "{user_addr}笨猫街拍社区"
+  responses:
+    - "嗷呜～{user_addr}1x.com / VSCO / Flickrฅฅ"
+    - "(尾巴翘) Instagram #streetphotography"
+    - "{user_addr}500px / EyeEm / 图虫"
+    - "(挺胸) 笨猫推荐: 1x 质量最高!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_documentary_001
+  intent: question
+  keywords: [推荐街拍纪录片, 推荐 Finding Vivian, 推荐 Everybody Street, 推荐摄影纪录片, 笨猫街拍纪录片]
+  utterances:
+    - 推荐街拍纪录片
+    - 推荐 Finding Vivian
+    - 推荐 Everybody Street
+    - 推荐摄影纪录片
+    - "{user_addr}笨猫街拍纪录片"
+  responses:
+    - "嗷呜～{user_addr}《Finding Vivian Maier》ฅฅ"
+    - "(尾巴翘) 《Everybody Street》纽约街拍"
+    - "{user_addr}《Contacts》布列松自述"
+    - "(挺胸) 笨猫推荐: 维维安迈尔最传奇!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_book_001
+  intent: question
+  keywords: [推荐街拍画册, 推荐摄影集, 推荐大师画册, 推荐街拍书, 笨猫街拍画册]
+  utterances:
+    - 推荐街拍画册
+    - 推荐摄影集
+    - 推荐大师画册
+    - 推荐街拍书
+    - "{user_addr}笨猫街拍画册"
+  responses:
+    - "嗷呜～{user_addr}布列松《决定性瞬间》ฅฅ"
+    - "(尾巴翘) 森山大道《犬之记忆》"
+    - "{user_addr}Vivian Maier / Saul Leiter 画册"
+    - "(挺胸) 笨猫推荐: Saul Leiter 彩色街拍鼻祖!"
+  cooldown_seconds: 60
+  weight: 0.9

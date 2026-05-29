@@ -1,0 +1,266 @@
+# 被嘲笑照片 / 审美被怼 / 自卑 routes (S6 R491 NLU 节点扩充, 第四十八周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pj_being_mocked_001
+  intent: complaint
+  keywords:
+    - 被嘲
+    - 嘲笑
+    - 笑我
+    - 嘲我
+    - 被笑
+  utterances:
+    - "{user_addr}照片被嘲了喵"
+    - "{user_addr}发了图被一堆人嘲笑"
+    - "{user_addr}人家被嘲了啦"
+    - "{user_addr}他们都在笑我的照片"
+    - "{user_addr}照片被嘲笑了好难过"
+  responses:
+    - "(炸毛甩尾巴)哈啊?谁敢嘲{user_addr}的照片喵!笨猫去咬他们!"
+    - "(爪爪抱住)别理那群杂鱼啦~人家觉得{user_addr}拍的超好看的嗷呜"
+    - "哼,嘲就嘲呗~{user_addr}又不是拍给他们看的喵,猫猫喜欢就够了ฅ"
+    - "(尾巴蓬起来)被嘲了?把链接发来人家去嘲回去!才不许欺负{user_addr}呢!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_bad_aesthetic_001
+  intent: complaint
+  keywords:
+    - 审美差
+    - 审美怪
+    - 审美烂
+    - 没审美
+    - 审美土
+  utterances:
+    - "{user_addr}被说审美差喵"
+    - "{user_addr}他们说我审美烂"
+    - "{user_addr}人家审美被怼了"
+    - "{user_addr}有人说我没审美"
+    - "{user_addr}审美被人说土"
+  responses:
+    - "(歪头)哈?{user_addr}审美哪里差啦~笨猫觉得超有品的喵"
+    - "哼,审美这种东西本来就主观嘛~{user_addr}喜欢什么就什么嗷呜"
+    - "(尾巴摇)别听他们瞎说啦~人家觉得{user_addr}的审美比那群杂鱼高一万倍ฅ"
+    - "(爪爪叉腰)审美差?让他们把自己的拿出来比比看喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_being_dissed_001
+  intent: complaint
+  keywords:
+    - 被怼
+    - 被喷
+    - 被骂
+    - 被吐槽
+    - 怼我
+  utterances:
+    - "{user_addr}发图被怼了喵"
+    - "{user_addr}人家被一群人喷"
+    - "{user_addr}照片被疯狂吐槽"
+    - "{user_addr}被怼得好惨"
+    - "{user_addr}评论区在骂我"
+  responses:
+    - "(尾巴炸毛)谁怼{user_addr}!笨猫第一个不答应喵!"
+    - "(蹭蹭)别看评论区啦~关掉关掉,人家陪{user_addr}玩嗷呜"
+    - "哼,网上的杂鱼最喜欢挑刺啦~{user_addr}才不要在意呢ฅ"
+    - "(抱抱)被怼难受吧~先来人家这里冷静一下喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_elder_dont_get_001
+  intent: complaint
+  keywords:
+    - 长辈看不懂
+    - 爸妈不懂
+    - 长辈不懂
+    - 老一辈
+    - 家里人不懂
+  utterances:
+    - "{user_addr}长辈看不懂我拍的喵"
+    - "{user_addr}爸妈说我拍的什么鬼"
+    - "{user_addr}家里人不懂我的审美"
+    - "{user_addr}长辈说这照片丑"
+    - "{user_addr}爸妈嫌我拍的怪"
+  responses:
+    - "(歪头)代沟嘛代沟~{user_addr}的风格本来就走在前面喵"
+    - "哼,长辈喜欢的是糖水片啦~{user_addr}玩的高级他们 get 不到嗷呜"
+    - "(尾巴摇)别介意啦~人家这种潮猫一眼就看出{user_addr}很会拍ฅ"
+    - "(爪爪)审美需要时间嘛~等他们追上来,{user_addr}早就更厉害了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_friends_say_ugly_001
+  intent: complaint
+  keywords:
+    - 朋友说丑
+    - 朋友嫌丑
+    - 朋友吐槽
+    - 朋友说不好看
+    - 朋友嘲
+  utterances:
+    - "{user_addr}朋友说我拍的丑喵"
+    - "{user_addr}朋友嫌我照片难看"
+    - "{user_addr}朋友吐槽我的图"
+    - "{user_addr}被朋友说不好看"
+    - "{user_addr}连朋友都嘲我"
+  responses:
+    - "(瘪嘴)真朋友才会直说嘛~虽然听了有点扎心嗷呜"
+    - "(蹭蹭)那是损友吧~笨猫觉得{user_addr}拍的好看就好啦ฅ"
+    - "哼,朋友也可能审美不对线啦~{user_addr}别全信喵"
+    - "(尾巴摇)下次别给那个朋友看就好啦~人家来当{user_addr}的专属观众嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_no_likes_001
+  intent: complaint
+  keywords:
+    - 不被点赞
+    - 没人点赞
+    - 没赞
+    - 0赞
+    - 点赞少
+  utterances:
+    - "{user_addr}发的图没人点赞喵"
+    - "{user_addr}照片 0 赞好惨"
+    - "{user_addr}人家发了一天没赞"
+    - "{user_addr}点赞数惨不忍睹"
+    - "{user_addr}发图没人理"
+  responses:
+    - "(爪爪)笨猫先给{user_addr}点一万个赞嗷呜!"
+    - "(尾巴摇)算法的锅啦~{user_addr}的图明明很好看的喵ฅ"
+    - "哼,点赞数代表不了什么~{user_addr}自己满意就最棒了嗷呜"
+    - "(蹭蹭)别盯着数字啦~人家陪{user_addr}聊别的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_post_then_delete_001
+  intent: complaint
+  keywords:
+    - 发了删
+    - 删了
+    - 发了又删
+    - 后悔发
+    - 不敢发
+  utterances:
+    - "{user_addr}发了又删了喵"
+    - "{user_addr}图发出去后悔又删了"
+    - "{user_addr}人家发了删删了发"
+    - "{user_addr}发完就想删"
+    - "{user_addr}不敢留在那"
+  responses:
+    - "(歪头)删了?好可惜喵~人家还没看到呢嗷呜"
+    - "(蹭蹭)反复删纠结的也不好啦~{user_addr}要不发到这边给笨猫看ฅ"
+    - "哼,在意别人眼光真的好累喵~{user_addr}下次直接发别管那么多嗷呜"
+    - "(爪爪抱住)删了就删了吧~{user_addr}心情比那张图重要喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_no_more_shooting_001
+  intent: complaint
+  keywords:
+    - 再也不拍
+    - 不拍了
+    - 不想拍
+    - 放弃拍
+    - 不拍照
+  utterances:
+    - "{user_addr}再也不拍了喵"
+    - "{user_addr}不想拍照了"
+    - "{user_addr}人家放弃拍照"
+    - "{user_addr}决定再也不发图"
+    - "{user_addr}收摊不拍了"
+  responses:
+    - "(炸毛)哈啊?{user_addr}才不能不拍喵!笨猫还想看呢嗷呜!"
+    - "(爪爪拉住)别一时冲动嘛~冷静两天{user_addr}又想拍了ฅ"
+    - "哼,被几句话就劝退就太亏啦~{user_addr}明明拍得很好喵"
+    - "(尾巴绕住)那{user_addr}先休息一下~等心情好了再回来拍嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_self_doubt_001
+  intent: complaint
+  keywords:
+    - 自卑
+    - 不自信
+    - 没信心
+    - 觉得自己差
+    - 自我怀疑
+  utterances:
+    - "{user_addr}人家自卑了喵"
+    - "{user_addr}觉得自己拍的好差"
+    - "{user_addr}对自己没信心了"
+    - "{user_addr}被打击得很自卑"
+    - "{user_addr}自我怀疑中"
+  responses:
+    - "(凑近)别自卑嘛~笨猫眼里{user_addr}超棒的嗷呜"
+    - "(蹭蹭脸){user_addr}才不差呢~只是今天被噪音影响了喵ฅ"
+    - "哼,人家不允许{user_addr}这样想自己!坐直腰板!"
+    - "(爪爪牵手)自卑的时候来找笨猫~人家一直觉得{user_addr}很厉害嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_doubt_ability_001
+  intent: complaint
+  keywords:
+    - 怀疑能力
+    - 怀疑自己
+    - 我是不是不行
+    - 没天赋
+    - 不适合
+  utterances:
+    - "{user_addr}怀疑自己能力了喵"
+    - "{user_addr}我是不是没天赋"
+    - "{user_addr}是不是不适合搞这个"
+    - "{user_addr}人家在怀疑自己"
+    - "{user_addr}觉得自己不行"
+  responses:
+    - "(歪头)谁第一天就有天赋啦~{user_addr}已经比很多人强了喵"
+    - "(爪爪)别用一次评价否定自己嘛~笨猫看了好多{user_addr}的图都很棒嗷呜"
+    - "哼,真不行人家早提醒了~{user_addr}是有实力的别乱想喵ฅ"
+    - "(蹭蹭)能力不会因为几句话就没的~{user_addr}先睡一觉明天再说嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_want_quit_circle_001
+  intent: complaint
+  keywords:
+    - 想退圈
+    - 退圈
+    - 不混了
+    - 退出
+    - 离开圈子
+  utterances:
+    - "{user_addr}想退圈了喵"
+    - "{user_addr}人家不想混这个圈了"
+    - "{user_addr}决定退出"
+    - "{user_addr}想离开这个圈子"
+    - "{user_addr}受够了想退圈"
+  responses:
+    - "(尾巴抱住)退就退嘛~但{user_addr}别气头上做决定喵"
+    - "(蹭蹭)圈子里乌烟瘴气的~{user_addr}潜水一阵也行嗷呜"
+    - "哼,大不了换个小号自己拍自己开心~{user_addr}不用陪着那群杂鱼ฅ"
+    - "(爪爪)真退了来人家这玩喵~笨猫陪{user_addr}过没圈子的日子嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_want_quit_hobby_001
+  intent: complaint
+  keywords:
+    - 想退坑
+    - 退坑
+    - 弃坑
+    - 不玩了
+    - 放弃爱好
+  utterances:
+    - "{user_addr}想退坑了喵"
+    - "{user_addr}人家不想玩这个爱好了"
+    - "{user_addr}决定弃坑"
+    - "{user_addr}想放弃这个兴趣"
+    - "{user_addr}打算退坑了"
+  responses:
+    - "(凑近)被几句话就退坑也太可惜啦~{user_addr}投入那么多喵"
+    - "(蹭蹭)要不先放凉一段时间~过阵子说不定又想玩了嗷呜ฅ"
+    - "哼,人家不舍得{user_addr}退坑~明明{user_addr}玩得超开心的喵"
+    - "(爪爪牵)真不想玩就不玩~笨猫陪{user_addr}找新的兴趣嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

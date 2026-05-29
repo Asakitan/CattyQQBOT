@@ -1,0 +1,206 @@
+# 微距摄影 / 昆虫 / 珠宝 routes (S6 R486 NLU 节点扩充, 第四十八周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: mp_lens_001
+  intent: question
+  keywords: [推荐微距镜头, 推荐 100mm 微距, 推荐 105mm 微距, 推荐 90mm 微距, 笨猫微距镜头]
+  utterances:
+    - 推荐微距镜头
+    - 推荐 100mm 微距
+    - 推荐 105mm 微距
+    - 推荐 90mm 微距
+    - 笨猫微距镜头
+  responses:
+    - "嗷呜～{user_addr}佳能 RF 100mm F2.8L - 微距王ฅฅ"
+    - "(尾巴翘) 尼康 105mm / 索尼 90mm G"
+    - "{user_addr}1:1 放大倍率 / 防抖必备"
+    - "(挺胸) 笨猫推荐: 100mm 焦段最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mp_flash_001
+  intent: question
+  keywords: [推荐微距闪光灯, 推荐环形闪, 推荐双头闪, 推荐 MR-14EX, 笨猫微距闪]
+  utterances:
+    - 推荐微距闪光灯
+    - 推荐环形闪
+    - 推荐双头闪
+    - 推荐 MR-14EX
+    - 笨猫微距闪
+  responses:
+    - "嗷呜～{user_addr}佳能 MR-14EX II - 环形闪ฅฅ"
+    - "(尾巴翘) 尼康 R1C1 / 永诺双头闪"
+    - "{user_addr}柔光罩必备 / TTL 自动"
+    - "(挺胸) 笨猫推荐: 双头闪立体感强!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mp_tripod_001
+  intent: question
+  keywords: [推荐微距三脚架, 推荐微距云台, 推荐微距导轨, 推荐移轴架, 笨猫微距架]
+  utterances:
+    - 推荐微距三脚架
+    - 推荐微距云台
+    - 推荐微距导轨
+    - 推荐移轴架
+    - 笨猫微距架
+  responses:
+    - "嗷呜～{user_addr}捷信 / 思锐 微距三脚架ฅฅ"
+    - "(尾巴翘) 微距导轨 / 四向调节"
+    - "{user_addr}横置中轴 / 反折设计"
+    - "(挺胸) 笨猫推荐: 思锐 N2204!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mp_led_001
+  intent: question
+  keywords: [推荐微距 LED, 推荐环形灯, 推荐补光灯, 推荐持续光, 笨猫微距 LED]
+  utterances:
+    - 推荐微距 LED
+    - 推荐环形灯
+    - 推荐补光灯
+    - 推荐持续光
+    - 笨猫微距 LED
+  responses:
+    - "嗷呜～{user_addr}神牛 ML150 / 永诺环灯ฅฅ"
+    - "(尾巴翘) LED 环形灯 / 双色温"
+    - "{user_addr}珠宝商业必备 / 无频闪"
+    - "(挺胸) 笨猫推荐: 神牛 LED 性价比!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mp_insect_001
+  intent: question
+  keywords: [推荐拍昆虫, 推荐昆虫摄影, 推荐拍蜻蜓, 推荐拍蝴蝶, 笨猫昆虫摄影]
+  utterances:
+    - 推荐拍昆虫
+    - 推荐昆虫摄影
+    - 推荐拍蜻蜓
+    - 推荐拍蝴蝶
+    - 笨猫昆虫摄影
+  responses:
+    - "嗷呜～{user_addr}清晨露水时段最佳ฅฅ"
+    - "(尾巴翘) f/8-f/11 景深够 / 高速快门"
+    - "{user_addr}低角度 / 复眼对焦"
+    - "(挺胸) 笨猫推荐: 晨拍 + 闪光灯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mp_flower_001
+  intent: question
+  keywords: [推荐拍花卉, 推荐花卉微距, 推荐拍花蕊, 推荐花瓣微距, 笨猫花卉摄影]
+  utterances:
+    - 推荐拍花卉
+    - 推荐花卉微距
+    - 推荐拍花蕊
+    - 推荐花瓣微距
+    - 笨猫花卉摄影
+  responses:
+    - "嗷呜～{user_addr}逆光 / 透光花瓣超美ฅฅ"
+    - "(尾巴翘) 黑卡背景 / 喷水珠营造"
+    - "{user_addr}浅景深 / 焦点在花蕊"
+    - "(挺胸) 笨猫推荐: 逆光 + 黑背景!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mp_jewelry_001
+  intent: question
+  keywords: [推荐拍珠宝, 推荐商业微距, 推荐珠宝摄影, 推荐拍钻石, 笨猫珠宝摄影]
+  utterances:
+    - 推荐拍珠宝
+    - 推荐商业微距
+    - 推荐珠宝摄影
+    - 推荐拍钻石
+    - 笨猫珠宝摄影
+  responses:
+    - "嗷呜～{user_addr}静物台 + 偏振镜消反光ฅฅ"
+    - "(尾巴翘) 双柔光箱 / 黑卡塑形"
+    - "{user_addr}焦点堆栈必备 / f/16"
+    - "(挺胸) 笨猫推荐: 偏振 + 堆栈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mp_stack_001
+  intent: question
+  keywords: [推荐焦点堆栈, 推荐 Helicon Focus, 推荐 Zerene Stacker, 推荐微距后期, 笨猫焦点堆栈]
+  utterances:
+    - 推荐焦点堆栈
+    - 推荐 Helicon Focus
+    - 推荐 Zerene Stacker
+    - 推荐微距后期
+    - 笨猫焦点堆栈
+  responses:
+    - "嗷呜～{user_addr}Helicon Focus - 业界标准ฅฅ"
+    - "(尾巴翘) Zerene Stacker / PS 自动混合"
+    - "{user_addr}步进 0.1mm / 50-100 张"
+    - "(挺胸) 笨猫推荐: Helicon Focus Pro!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mp_micro_001
+  intent: question
+  keywords: [推荐显微摄影, 推荐显微镜接相机, 推荐 10x 物镜, 推荐微观摄影, 笨猫显微摄影]
+  utterances:
+    - 推荐显微摄影
+    - 推荐显微镜接相机
+    - 推荐 10x 物镜
+    - 推荐微观摄影
+    - 笨猫显微摄影
+  responses:
+    - "嗷呜～{user_addr}Mitutoyo 物镜 - 顶级ฅฅ"
+    - "(尾巴翘) Nikon CFI / 三目显微镜"
+    - "{user_addr}雪花 / 矿物结晶超震撼"
+    - "(挺胸) 笨猫推荐: Mitutoyo 5x 入门!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: mp_tilt_001
+  intent: question
+  keywords: [推荐移轴镜头, 推荐 TS-E, 推荐移轴创意, 推荐小人国效果, 笨猫移轴]
+  utterances:
+    - 推荐移轴镜头
+    - 推荐 TS-E
+    - 推荐移轴创意
+    - 推荐小人国效果
+    - 笨猫移轴
+  responses:
+    - "嗷呜～{user_addr}佳能 TS-E 90mm 微距移轴ฅฅ"
+    - "(尾巴翘) 老蛙 25mm / 100mm 微距"
+    - "{user_addr}全焦平面 / 小人国效果"
+    - "(挺胸) 笨猫推荐: 老蛙 100mm 2:1!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: mp_contest_001
+  intent: question
+  keywords: [推荐微距大赛, 推荐国家地理微距, 推荐尼康小世界, 推荐微距比赛, 笨猫微距大赛]
+  utterances:
+    - 推荐微距大赛
+    - 推荐国家地理微距
+    - 推荐尼康小世界
+    - 推荐微距比赛
+    - 笨猫微距大赛
+  responses:
+    - "嗷呜～{user_addr}尼康 Small World - 显微圣殿ฅฅ"
+    - "(尾巴翘) 国家地理 / 索尼世界摄影"
+    - "{user_addr}Olympus 生物图像 / IPA"
+    - "(挺胸) 笨猫推荐: 尼康小世界!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: mp_master_001
+  intent: question
+  keywords: [推荐微距摄影师, 推荐 Levon Biss, 推荐 Thomas Shahan, 推荐微距大师, 笨猫微距师]
+  utterances:
+    - 推荐微距摄影师
+    - 推荐 Levon Biss
+    - 推荐 Thomas Shahan
+    - 推荐微距大师
+    - 笨猫微距师
+  responses:
+    - "嗷呜～{user_addr}Levon Biss - 昆虫微距神ฅฅ"
+    - "(尾巴翘) Thomas Shahan / 蜘蛛微距"
+    - "{user_addr}John Hallmen / 北欧微距"
+    - "(挺胸) 笨猫推荐: Levon Biss 作品集!"
+  cooldown_seconds: 60
+  weight: 0.7
