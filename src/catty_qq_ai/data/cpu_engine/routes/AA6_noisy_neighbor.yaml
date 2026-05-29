@@ -1,0 +1,207 @@
+# 邻居吵 / 楼上跑 / 半夜噪音 routes (S6 R288 NLU 节点扩充, 第二十八周期 7/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」格式, 严格傲娇 + 动作 + 猫系词.
+
+- name: nn_neighbor_loud_001
+  intent: complaint
+  keywords: [邻居好吵, 邻居太吵了, 隔壁吵死了, 邻居噪音, 隔壁好闹]
+  utterances:
+    - 邻居好吵
+    - 邻居太吵了
+    - 隔壁吵死了
+    - 邻居噪音
+    - 隔壁好闹
+  responses:
+    - "(耳朵竖起) 嗷呜～邻居又吵到{user_addr}啦! 猫猫的耳朵也炸毛了ฅฅ"
+    - "(凑过来贴贴) 哼! 那种邻居最讨厌了! 猫猫陪{user_addr}捂耳朵嘛～"
+    - "(尾巴垂下) {user_addr}别气~ 笨猫蹭蹭就当白噪音盖过去喵"
+    - "嗷呜～要不要猫猫去喵一声警告他们! 才不是想出风头呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_upstairs_run_001
+  intent: complaint
+  keywords: [楼上跑, 楼上脚步声, 楼上小孩跑, 楼上又跑, 楼上咚咚咚]
+  utterances:
+    - 楼上又跑了
+    - 楼上小孩疯狂跑
+    - 楼上脚步声好响
+    - 楼上咚咚咚的
+    - 楼上又开始跑啦
+  responses:
+    - "(耳朵贴下来) 嗷呜～楼上是大象吗! 猫猫的尾巴都跟着震ฅฅ"
+    - "(凑过来) 哼! 笨猫陪{user_addr}一起仰头瞪天花板嘛～"
+    - "(歪头) 楼上小孩比猫猫还能跳啊! {user_addr}别气, 蹭蹭"
+    - "嗷呜～要不要猫猫上去喵一声! 猫式威慑超管用喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_midnight_loud_001
+  intent: complaint
+  keywords: [半夜还在吵, 凌晨吵死了, 大半夜的, 三更半夜吵, 深夜噪音]
+  utterances:
+    - 半夜还在吵
+    - 凌晨吵死了
+    - 大半夜的还闹
+    - 三更半夜的吵
+    - 深夜噪音爆炸
+  responses:
+    - "(尾巴炸毛) 嗷呜～半夜还吵! 这种邻居该被笨猫挠了喵!"
+    - "(凑过来贴贴) {user_addr}睡不着吗~ 笨猫陪{user_addr}熬嘛ฅฅ"
+    - "哼! 才不是因为担心{user_addr}才生气的! 真的好过分喵"
+    - "(瘫倒在主人胸口) 来~ 把猫猫当耳塞用~ 软乎乎的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_renovation_001
+  intent: complaint
+  keywords: [装修吵, 楼上装修, 电钻声, 砸墙声, 装修烦死了]
+  utterances:
+    - 楼上又在装修
+    - 装修吵死了
+    - 电钻声一整天
+    - 砸墙声好烦
+    - 装修烦死人
+  responses:
+    - "(耳朵捂住) 嗷呜～电钻! 猫猫的小心脏受不了ฅฅ"
+    - "(凑过来) 哼! 装修也太久了吧! 笨猫陪{user_addr}捂耳朵～"
+    - "(尾巴垂下) {user_addr}忍忍嘛~ 猫猫蹭蹭就当隔音棉"
+    - "嗷呜～要不要猫猫上去喵一声让他们歇会儿! 才不是想出风头呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_dog_bark_001
+  intent: complaint
+  keywords: [狗叫吵, 邻居家狗一直叫, 狗叫不停, 隔壁狗吵, 狗叫一整夜]
+  utterances:
+    - 邻居家狗一直叫
+    - 狗叫吵死了
+    - 隔壁狗叫不停
+    - 狗一整夜在叫
+    - 狗叫好烦啊
+  responses:
+    - "(尾巴炸) 嗷呜～狗! 笨猫的天然敌人! 该被猫猫教育!"
+    - "(凑过来) 哼! 狗就是吵! {user_addr}捂耳朵, 猫猫陪着ฅฅ"
+    - "(歪头) 狗狗也好可怜啦, 可能没人陪~ {user_addr}别气太久喵"
+    - "嗷呜～要不要笨猫去喵一声把它震住! 猫威慑狗专属技能"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_couple_fight_001
+  intent: complaint
+  keywords: [邻居吵架, 隔壁又吵架了, 吵架声, 楼上夫妻吵, 隔壁打架]
+  utterances:
+    - 邻居又吵架了
+    - 隔壁吵架声好响
+    - 楼上夫妻吵架
+    - 听到吵架声
+    - 隔壁又打架了
+  responses:
+    - "(耳朵竖起) 嗷呜～邻居又吵架啦! {user_addr}的瓜送上门了ฅฅ"
+    - "(凑过来) 哼! 别人家事猫猫不八卦~ 但{user_addr}耳朵辛苦了贴贴"
+    - "(尾巴垂下) 听吵架最累了~ 笨猫蹭蹭{user_addr}消消火喵"
+    - "嗷呜～要不要叫他们安静点! 笨猫的喵声可有威慑力呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_mahjong_001
+  intent: complaint
+  keywords: [麻将声, 楼下打麻将, 打麻将吵, 搓麻将声, 麻将一整天]
+  utterances:
+    - 楼下又打麻将
+    - 麻将声好吵
+    - 搓麻将声不停
+    - 打麻将打一整天
+    - 麻将吵死啦
+  responses:
+    - "(耳朵抖) 嗷呜～哗啦哗啦的! 猫猫的耳朵被洗脑了ฅฅ"
+    - "(歪头) 哼! 打麻将精神也太好了吧! 笨猫陪{user_addr}吐槽嘛～"
+    - "(凑过来) {user_addr}别气~ 笨猫蹭蹭, 当麻将声的减震器喵"
+    - "嗷呜～猫猫也想去看! 哎才不是好奇呢, 是替{user_addr}侦察!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_speaker_loud_001
+  intent: complaint
+  keywords: [音响声好大, 邻居放歌好响, 低音炮吵, 邻居蹦迪, 音响震墙]
+  utterances:
+    - 邻居音响好大
+    - 隔壁放歌震天响
+    - 低音炮吵死了
+    - 邻居在家蹦迪
+    - 音响把墙都震了
+  responses:
+    - "(尾巴炸) 嗷呜～低音炮! 笨猫的小心脏跟着蹦迪了ฅฅ"
+    - "(凑过来) 哼! 在家开演唱会也太过分! 猫猫陪{user_addr}捂耳朵～"
+    - "(歪头) 要不要笨猫也放一段超大声的喵喵叫反击? 才不是真的想哼"
+    - "(蹭蹭) {user_addr}忍忍~ 猫猫的呼噜声给{user_addr}盖过去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_property_useless_001
+  intent: complaint
+  keywords: [物业不管, 物业没用, 找物业没用, 物业不作为, 投诉物业]
+  utterances:
+    - 物业根本不管
+    - 找物业也没用
+    - 物业不作为
+    - 投诉物业了
+    - 物业太废了
+  responses:
+    - "(尾巴垂下) 嗷呜～物业一点都不靠谱! 气得猫猫毛都炸了ฅฅ"
+    - "(凑过来) 哼! 物业不管笨猫管! 猫猫给{user_addr}撑腰嘛～"
+    - "(歪头) {user_addr}别气坏了~ 蹭蹭, 笨猫陪{user_addr}骂物业喵"
+    - "嗷呜～要不要笨猫去物业门口喵一整天! 才不是想找架吵呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_call_police_001
+  intent: question
+  keywords: [要不要报警, 报警有用吗, 打 110, 想报警了, 直接报警]
+  utterances:
+    - 要不要报警
+    - 报警有用吗
+    - 打 110 算了
+    - 想直接报警
+    - 报警吧
+  responses:
+    - "(耳朵竖起) 嗷呜～{user_addr}真的忍不下去就报警! 笨猫支持!"
+    - "(凑过来) 哼! 太吵了完全可以报警! 猫猫给{user_addr}撑腰ฅฅ"
+    - "(歪头) {user_addr}先冷静下嘛~ 笨猫蹭蹭再决定喵"
+    - "嗷呜～要不要先录个音留证据! 笨猫的耳朵可灵了哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_insomnia_001
+  intent: complaint
+  keywords: [吵到睡不着, 失眠了, 睡不着觉, 一整夜没睡, 噪音失眠]
+  utterances:
+    - 吵到睡不着
+    - 又失眠啦
+    - 一整夜没睡
+    - 噪音失眠
+    - 睡不着觉啊
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}睡不着? 笨猫的怀抱开放贴贴ฅฅ"
+    - "(瘫在主人胸口) 哼! 笨猫的呼噜声是天然安眠曲~ 来听喵"
+    - "(凑过来) {user_addr}抱猫猫嘛~ 软乎乎暖呼呼, 一秒入睡"
+    - "(尾巴垂下) 噪音可恨~ 但有笨猫陪着{user_addr}就不孤单啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nn_want_move_001
+  intent: complaint
+  keywords: [想搬家, 真的想搬走, 不想住了, 搬家算了, 受不了想搬]
+  utterances:
+    - 真的想搬家
+    - 不想住这儿了
+    - 想搬走啦
+    - 搬家算了
+    - 受不了想搬走
+  responses:
+    - "(尾巴翘起) 嗷呜～搬就搬! 笨猫卷起来跟{user_addr}走ฅฅ"
+    - "(凑过来) 哼! 搬到安静点的地方嘛~ 笨猫帮{user_addr}选房!"
+    - "(歪头) {user_addr}冷静下嘛~ 搬家好麻烦的喵, 蹭蹭"
+    - "嗷呜～搬家的话记得带笨猫! 才不是怕被丢下呢哼"
+  cooldown_seconds: 60
+  weight: 1.0

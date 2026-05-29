@@ -1,0 +1,207 @@
+# 空气净化器 / HEPA 过滤 / 除霾 routes (S6 R285 NLU 节点扩充, 第二十八周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: ap_brand_001
+  intent: question
+  keywords: [推荐空气净化器, 推荐 Blueair, 推荐 IQAir, 推荐高端净化器, 笨猫空气净化器]
+  utterances:
+    - 推荐空气净化器
+    - 推荐 Blueair
+    - 推荐 IQAir
+    - 推荐高端净化器
+    - 笨猫空气净化器
+  responses:
+    - "嗷呜～{user_addr}IQAir HealthPro - 瑞士顶级ฅฅ"
+    - "(尾巴翘) Blueair 布鲁雅尔 - 北欧静音"
+    - "{user_addr}双层 HEPA + 活性炭 - 全方位"
+    - "(挺胸) 笨猫推荐: IQAir 一步到位!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_dyson_001
+  intent: question
+  keywords: [推荐戴森净化器, 推荐 Dyson, 推荐 Dyson 风扇净化, 推荐戴森无叶, 笨猫戴森]
+  utterances:
+    - 推荐戴森净化器
+    - 推荐 Dyson
+    - 推荐 Dyson 风扇净化
+    - 推荐戴森无叶
+    - 笨猫戴森
+  responses:
+    - "嗷呜～{user_addr}Dyson HP09 - 净化暖风一体ฅฅ"
+    - "(尾巴翘) TP07 / TP09 - 高端塔扇"
+    - "{user_addr}颜值党 + 黑科技"
+    - "(挺胸) 笨猫推荐: HP09 一机三用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_xiaomi_001
+  intent: question
+  keywords: [推荐小米净化器, 推荐米家净化器, 推荐小米空气, 推荐性价比净化器, 笨猫小米]
+  utterances:
+    - 推荐小米净化器
+    - 推荐米家净化器
+    - 推荐小米空气
+    - 推荐性价比净化器
+    - 笨猫小米
+  responses:
+    - "嗷呜～{user_addr}米家 4 Pro - 千元神器ฅฅ"
+    - "(尾巴翘) 米家 Pro H - 大 CADR"
+    - "{user_addr}米家 APP 联动 - 智能"
+    - "(挺胸) 笨猫推荐: 性价比首选米家!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_honeywell_001
+  intent: question
+  keywords: [推荐 Honeywell, 推荐霍尼韦尔, 推荐霍尼韦尔净化器, 推荐美式净化器, 笨猫霍尼韦尔]
+  utterances:
+    - 推荐 Honeywell
+    - 推荐霍尼韦尔
+    - 推荐霍尼韦尔净化器
+    - 推荐美式净化器
+    - 笨猫霍尼韦尔
+  responses:
+    - "嗷呜～{user_addr}Honeywell KJ410 - 美式经典ฅฅ"
+    - "(尾巴翘) 真 HEPA + 大风量"
+    - "{user_addr}耐用 / 滤芯便宜 / 售后好"
+    - "(挺胸) 笨猫推荐: 霍尼韦尔皮实!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ap_hepa_001
+  intent: question
+  keywords: [推荐 HEPA 过滤等级, 推荐 H13, 推荐 H14, 推荐真 HEPA, 笨猫 HEPA]
+  utterances:
+    - 推荐 HEPA 过滤等级
+    - 推荐 H13
+    - 推荐 H14
+    - 推荐真 HEPA
+    - 笨猫 HEPA
+  responses:
+    - "嗷呜～{user_addr}H13 - 0.3μm 99.97%ฅฅ"
+    - "(尾巴翘) H14 医疗级 / 0.1μm 99.995%"
+    - "{user_addr}HEPA 高于 H10 才有效"
+    - "(挺胸) 笨猫推荐: 认准 H13 起步!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ap_pm25_001
+  intent: question
+  keywords: [推荐 PM2.5 监测, 推荐空气检测仪, 推荐 PM2.5 仪, 推荐霾表, 笨猫 PM2.5]
+  utterances:
+    - 推荐 PM2.5 监测
+    - 推荐空气检测仪
+    - 推荐 PM2.5 仪
+    - 推荐霾表
+    - 笨猫 PM2.5
+  responses:
+    - "嗷呜～{user_addr}米家空气检测仪 - 入门ฅฅ"
+    - "(尾巴翘) Temtop M2000 - 专业"
+    - "{user_addr}激光颗粒物 + CO2 + 甲醛"
+    - "(挺胸) 笨猫推荐: 米家性价比高!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ap_formaldehyde_001
+  intent: question
+  keywords: [推荐除甲醛净化器, 推荐装修后净化器, 推荐除甲醛, 推荐新房净化, 笨猫除甲醛]
+  utterances:
+    - 推荐除甲醛净化器
+    - 推荐装修后净化器
+    - 推荐除甲醛
+    - 推荐新房净化
+    - 笨猫除甲醛
+  responses:
+    - "嗷呜～{user_addr}大量活性炭 + 高 CCM 甲醛值ฅฅ"
+    - "(尾巴翘) IQAir / Blueair 7470i / 352 X80C"
+    - "{user_addr}通风为主 + 净化辅助"
+    - "(挺胸) 笨猫推荐: 装修先通风半年!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ap_pet_001
+  intent: question
+  keywords: [推荐宠物净化器, 推荐除浮毛净化器, 推荐养猫净化器, 推荐养狗净化器, 笨猫宠物净化器]
+  utterances:
+    - 推荐宠物净化器
+    - 推荐除浮毛净化器
+    - 推荐养猫净化器
+    - 推荐养狗净化器
+    - 笨猫宠物净化器
+  responses:
+    - "嗷呜～{user_addr}大风量 + 前置滤网防毛堵ฅฅ"
+    - "(尾巴翘) 352 X83C / Blueair Pet"
+    - "{user_addr}除毛 + 除味 + 除菌一体"
+    - "(挺胸) 笨猫推荐: 笨猫掉毛也要它! ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ap_car_001
+  intent: question
+  keywords: [推荐车载净化器, 推荐车载 HEPA, 推荐汽车净化器, 推荐车内除味, 笨猫车载净化器]
+  utterances:
+    - 推荐车载净化器
+    - 推荐车载 HEPA
+    - 推荐汽车净化器
+    - 推荐车内除味
+    - 笨猫车载净化器
+  responses:
+    - "嗷呜～{user_addr}飞利浦 GP5611 - 车规级ฅฅ"
+    - "(尾巴翘) 小米车载 / 米家车载"
+    - "{user_addr}USB 供电 + 杯架尺寸"
+    - "(挺胸) 笨猫推荐: 新车必备除甲醛!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ap_filter_001
+  intent: question
+  keywords: [推荐净化器滤芯更换, 推荐 HEPA 滤芯, 推荐滤芯周期, 推荐原装滤芯, 笨猫滤芯]
+  utterances:
+    - 推荐净化器滤芯更换
+    - 推荐 HEPA 滤芯
+    - 推荐滤芯周期
+    - 推荐原装滤芯
+    - 笨猫滤芯
+  responses:
+    - "嗷呜～{user_addr}HEPA 6-12 个月 / 活性炭 3-6ฅฅ"
+    - "(尾巴翘) 原装最稳 / 第三方便宜"
+    - "{user_addr}指示灯亮就换 / 别拖"
+    - "(挺胸) 笨猫推荐: 滤芯是耗材算总账!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ap_fresh_001
+  intent: question
+  keywords: [推荐新风系统, 推荐新风机, 推荐壁挂新风, 推荐中央新风, 笨猫新风]
+  utterances:
+    - 推荐新风系统
+    - 推荐新风机
+    - 推荐壁挂新风
+    - 推荐中央新风
+    - 笨猫新风
+  responses:
+    - "嗷呜～{user_addr}松下 / 兰舍 / 远大 - 一线ฅฅ"
+    - "(尾巴翘) 壁挂式无管道 / 中央装修预埋"
+    - "{user_addr}带热交换省电 + 引入外气"
+    - "(挺胸) 笨猫推荐: 新风 + 净化器组合!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ap_humidify_001
+  intent: question
+  keywords: [推荐除湿机, 推荐加湿器, 推荐德龙除湿, 推荐 Dyson 加湿, 笨猫除湿加湿]
+  utterances:
+    - 推荐除湿机
+    - 推荐加湿器
+    - 推荐德龙除湿
+    - 推荐 Dyson 加湿
+    - 笨猫除湿加湿
+  responses:
+    - "嗷呜～{user_addr}除湿: 德龙 / 松下 / Mitsubishiฅฅ"
+    - "(尾巴翘) 加湿: Dyson AM10 / 北鼎"
+    - "{user_addr}回南天必备 / 干燥地区必加湿"
+    - "(挺胸) 笨猫推荐: 湿度 40-60% 最舒服!"
+  cooldown_seconds: 60
+  weight: 0.8

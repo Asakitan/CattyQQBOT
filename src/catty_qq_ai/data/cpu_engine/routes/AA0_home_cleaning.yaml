@@ -1,0 +1,207 @@
+# 家居清洁 / 清洁剂 / 厨卫深度 routes (S6 R282 NLU 节点扩充, 第二十八周期 1/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: hc_general_001
+  intent: question
+  keywords: [推荐家居清洁, 推荐清洁服务, 推荐清洁方法, 推荐日常清洁, 笨猫家居清洁]
+  utterances:
+    - 推荐家居清洁
+    - 推荐清洁服务
+    - 推荐清洁方法
+    - 推荐日常清洁
+    - 笨猫家居清洁
+  responses:
+    - "嗷呜～{user_addr}日常分区清洁 - 厨卫客卧ฅฅ"
+    - "(尾巴翘) 每日扫拖 + 每周深度"
+    - "{user_addr}工具: 抹布 / 拖把 / 清洁剂"
+    - "(挺胸) 笨猫推荐: 分区每周轮一次!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_toilet_001
+  intent: question
+  keywords: [推荐马桶清洁剂, 推荐洁厕灵, 推荐蓝月亮洁厕, 推荐威猛先生洁厕, 笨猫马桶清洁]
+  utterances:
+    - 推荐马桶清洁剂
+    - 推荐洁厕灵
+    - 推荐蓝月亮洁厕
+    - 推荐威猛先生洁厕
+    - 笨猫马桶清洁
+  responses:
+    - "嗷呜～{user_addr}蓝月亮洁厕灵 - 国民经典ฅฅ"
+    - "(尾巴翘) 威猛先生 / 洁宜佳 / Domestos"
+    - "{user_addr}盐酸型强力 / 表活型温和"
+    - "(挺胸) 笨猫推荐: 蓝月亮日常够用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_glass_001
+  intent: question
+  keywords: [推荐玻璃清洁, 推荐 Windex, 推荐玻璃水, 推荐擦窗剂, 笨猫玻璃清洁]
+  utterances:
+    - 推荐玻璃清洁
+    - 推荐 Windex
+    - 推荐玻璃水
+    - 推荐擦窗剂
+    - 笨猫玻璃清洁
+  responses:
+    - "嗷呜～{user_addr}Windex - 蓝瓶北美标配ฅฅ"
+    - "(尾巴翘) 蓝月亮 / 威猛先生玻璃"
+    - "{user_addr}配合超细纤维布 - 无水痕"
+    - "(挺胸) 笨猫推荐: Windex + 报纸擦干!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_floor_001
+  intent: question
+  keywords: [推荐木地板清洁, 推荐 Bona, 推荐地板蜡, 推荐地板精油, 笨猫木地板]
+  utterances:
+    - 推荐木地板清洁
+    - 推荐 Bona
+    - 推荐地板蜡
+    - 推荐地板精油
+    - 笨猫木地板
+  responses:
+    - "嗷呜～{user_addr}Bona - 木地板专家ฅฅ"
+    - "(尾巴翘) Method / Murphy / 立白木地板"
+    - "{user_addr}中性清洁 / 别用水泡"
+    - "(挺胸) 笨猫推荐: Bona 喷雾 + 平板拖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_kitchen_oil_001
+  intent: question
+  keywords: [推荐厨房油烟, 推荐去油剂, 推荐洁霸去油, 推荐 Easy-Off, 笨猫厨房去油]
+  utterances:
+    - 推荐厨房油烟
+    - 推荐去油剂
+    - 推荐洁霸去油
+    - 推荐 Easy-Off
+    - 笨猫厨房去油
+  responses:
+    - "嗷呜～{user_addr}洁霸 (Mr Muscle) - 重油杀手ฅฅ"
+    - "(尾巴翘) Easy-Off / 威猛先生厨房"
+    - "{user_addr}小苏打 + 白醋 - 天然组合"
+    - "(挺胸) 笨猫推荐: 洁霸喷 + 静置 5 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_mold_001
+  intent: question
+  keywords: [推荐浴室霉斑, 推荐除霉剂, 推荐除霉啫喱, 推荐霉斑清除, 笨猫除霉]
+  utterances:
+    - 推荐浴室霉斑
+    - 推荐除霉剂
+    - 推荐除霉啫喱
+    - 推荐霉斑清除
+    - 笨猫除霉
+  responses:
+    - "嗷呜～{user_addr}日本 KINBATA 除霉啫喱 - 网红ฅฅ"
+    - "(尾巴翘) 美国 Tilex / 蓝月亮除霉"
+    - "{user_addr}啫喱型贴霉斑 - 5 小时神效"
+    - "(挺胸) 笨猫推荐: KINBATA 玻璃胶霉斑无敌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_housekeeping_001
+  intent: question
+  keywords: [推荐家政服务, 推荐保洁阿姨, 推荐阿姨平台, 推荐 e家洁, 笨猫家政]
+  utterances:
+    - 推荐家政服务
+    - 推荐保洁阿姨
+    - 推荐阿姨平台
+    - 推荐 e家洁
+    - 笨猫家政
+  responses:
+    - "嗷呜～{user_addr}58 到家 / e 家洁 - 主流平台ฅฅ"
+    - "(尾巴翘) 天鹅到家 / 京东到家"
+    - "{user_addr}3-4 小时基础 / 600-800 深度"
+    - "(挺胸) 笨猫推荐: 先 4 小时试用阿姨!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hc_robot_vacuum_001
+  intent: question
+  keywords: [推荐扫地机, 推荐扫地机器人, 推荐石头扫地机, 推荐云鲸, 笨猫扫地机]
+  utterances:
+    - 推荐扫地机
+    - 推荐扫地机器人
+    - 推荐石头扫地机
+    - 推荐云鲸
+    - 笨猫扫地机
+  responses:
+    - "嗷呜～{user_addr}石头 / 云鲸 / 追觅 - 国产三巨头ฅฅ"
+    - "(尾巴翘) iRobot Roomba - 美系经典"
+    - "{user_addr}带基站自清洁 - 真省事"
+    - "(挺胸) 笨猫推荐: 石头 G20 / 云鲸 J4!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_mop_robot_001
+  intent: question
+  keywords: [推荐拖地机, 推荐洗地机, 推荐追觅, 推荐添可, 笨猫拖地机]
+  utterances:
+    - 推荐拖地机
+    - 推荐洗地机
+    - 推荐追觅
+    - 推荐添可
+    - 笨猫拖地机
+  responses:
+    - "嗷呜～{user_addr}追觅 / 添可芙万 - 洗地一体ฅฅ"
+    - "(尾巴翘) 米家洗地机 / 莱克"
+    - "{user_addr}吸拖洗一体 - 干湿垃圾"
+    - "(挺胸) 笨猫推荐: 添可芙万 3.0 自清洁!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hc_dishwasher_001
+  intent: question
+  keywords: [推荐洗碗机, 推荐西门子洗碗机, 推荐美的洗碗机, 推荐 Bosch 洗碗机, 笨猫洗碗机]
+  utterances:
+    - 推荐洗碗机
+    - 推荐西门子洗碗机
+    - 推荐美的洗碗机
+    - 推荐 Bosch 洗碗机
+    - 笨猫洗碗机
+  responses:
+    - "嗷呜～{user_addr}西门子 / Bosch - 德系标杆ฅฅ"
+    - "(尾巴翘) 美的 / 海尔 / 方太 - 国产"
+    - "{user_addr}13 套大容量 / 75° 高温除菌"
+    - "(挺胸) 笨猫推荐: 西门子 SJ43 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_vacuum_001
+  intent: question
+  keywords: [推荐吸尘器, 推荐 Dyson, 推荐戴森吸尘器, 推荐手持吸尘器, 笨猫吸尘器]
+  utterances:
+    - 推荐吸尘器
+    - 推荐 Dyson
+    - 推荐戴森吸尘器
+    - 推荐手持吸尘器
+    - 笨猫吸尘器
+  responses:
+    - "嗷呜～{user_addr}Dyson V12 / V15 - 无线之王ฅฅ"
+    - "(尾巴翘) 小米 / 追觅 / 莱克 - 平替"
+    - "{user_addr}吸力 / 续航 / 滤网 三要素"
+    - "(挺胸) 笨猫推荐: Dyson V12 Detect 激光!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_air_purifier_001
+  intent: question
+  keywords: [推荐空气净化器, 推荐 Blueair, 推荐布鲁雅尔, 推荐 IQAir, 笨猫空气净化器]
+  utterances:
+    - 推荐空气净化器
+    - 推荐 Blueair
+    - 推荐布鲁雅尔
+    - 推荐 IQAir
+    - 笨猫空气净化器
+  responses:
+    - "嗷呜～{user_addr}Blueair / IQAir - 瑞士瑞典高端ฅฅ"
+    - "(尾巴翘) 戴森 / 飞利浦 / 小米米家"
+    - "{user_addr}CADR / CCM / HEPA H13"
+    - "(挺胸) 笨猫推荐: Blueair 7440i 静音!"
+  cooldown_seconds: 60
+  weight: 1.0

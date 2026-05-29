@@ -1,0 +1,207 @@
+# 智能家电 / 米家 / HomeKit routes (S6 R286 NLU 节点扩充, 第二十八周期 5/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: sa_smart_home_001
+  intent: question
+  keywords: [推荐智能家电, 推荐米家, 推荐 HomeKit, 推荐智能家居, 笨猫智能家电]
+  utterances:
+    - 推荐智能家电
+    - 推荐米家
+    - 推荐 HomeKit
+    - 推荐智能家居
+    - 笨猫智能家电
+  responses:
+    - "嗷呜～{user_addr}米家 - 国内生态最全ฅฅ"
+    - "(尾巴翘) Apple HomeKit - 苹果党"
+    - "{user_addr}Aqara / 涂鸦 / Google Home"
+    - "(挺胸) 笨猫推荐: 入坑选米家最省心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_speaker_001
+  intent: question
+  keywords: [推荐智能音箱, 推荐小爱同学, 推荐天猫精灵, 推荐 HomePod, 笨猫智能音箱]
+  utterances:
+    - 推荐智能音箱
+    - 推荐小爱同学
+    - 推荐天猫精灵
+    - 推荐 HomePod
+    - 笨猫智能音箱
+  responses:
+    - "嗷呜～{user_addr}小爱同学 Pro - 米家中枢ฅฅ"
+    - "(尾巴翘) 天猫精灵 / 小度在家"
+    - "{user_addr}HomePod mini - 苹果生态"
+    - "(挺胸) 笨猫推荐: 小爱 Pro 带屏好用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_light_001
+  intent: question
+  keywords: [推荐智能灯, 推荐 Yeelight, 推荐 Philips Hue, 推荐 Aqara 灯, 笨猫智能灯]
+  utterances:
+    - 推荐智能灯
+    - 推荐 Yeelight
+    - 推荐 Philips Hue
+    - 推荐 Aqara 灯
+    - 笨猫智能灯
+  responses:
+    - "嗷呜～{user_addr}Yeelight - 米家性价比ฅฅ"
+    - "(尾巴翘) Philips Hue - 高端色彩王"
+    - "{user_addr}Aqara T1 / Nanoleaf 灯板"
+    - "(挺胸) 笨猫推荐: Yeelight 彩光灯泡入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_plug_001
+  intent: question
+  keywords: [推荐智能插座, 推荐米家插座, 推荐 Aqara 插座, 推荐计量插座, 笨猫智能插座]
+  utterances:
+    - 推荐智能插座
+    - 推荐米家插座
+    - 推荐 Aqara 插座
+    - 推荐计量插座
+    - 笨猫智能插座
+  responses:
+    - "嗷呜～{user_addr}米家插座 蓝牙网关版ฅฅ"
+    - "(尾巴翘) Aqara P3 - 计量精准"
+    - "{user_addr}公牛 / 涂鸦 - 性价比"
+    - "(挺胸) 笨猫推荐: Aqara P3 自动化牛!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_curtain_001
+  intent: question
+  keywords: [推荐智能窗帘, 推荐窗帘电机, 推荐 Aqara 窗帘, 推荐 Zemismart, 笨猫智能窗帘]
+  utterances:
+    - 推荐智能窗帘
+    - 推荐窗帘电机
+    - 推荐 Aqara 窗帘
+    - 推荐 Zemismart
+    - 笨猫智能窗帘
+  responses:
+    - "嗷呜～{user_addr}Aqara B1 - 静音稳定ฅฅ"
+    - "(尾巴翘) 米家窗帘电机 / 杜亚"
+    - "{user_addr}Zemismart - 海外热门"
+    - "(挺胸) 笨猫推荐: Aqara B1 早晨自动开!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_switch_001
+  intent: question
+  keywords: [推荐智能开关, 推荐米家开关, 推荐 Aqara 开关, 推荐无线开关, 笨猫智能开关]
+  utterances:
+    - 推荐智能开关
+    - 推荐米家开关
+    - 推荐 Aqara 开关
+    - 推荐无线开关
+    - 笨猫智能开关
+  responses:
+    - "嗷呜～{user_addr}Aqara D1 / H1 - 米家旗舰ฅฅ"
+    - "(尾巴翘) 米家无线开关贴墙"
+    - "{user_addr}绿米 / 公牛智能开关"
+    - "(挺胸) 笨猫推荐: 无线开关不用走线!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_doorbell_001
+  intent: question
+  keywords: [推荐智能门铃, 推荐叮零门铃, 推荐 Aqara 门铃, 推荐可视门铃, 笨猫智能门铃]
+  utterances:
+    - 推荐智能门铃
+    - 推荐叮零门铃
+    - 推荐 Aqara 门铃
+    - 推荐可视门铃
+    - 笨猫智能门铃
+  responses:
+    - "嗷呜～{user_addr}叮零 D3 - 米家热门ฅฅ"
+    - "(尾巴翘) Aqara G4 - HomeKit 支持"
+    - "{user_addr}萤石 / 大华 - 安防系"
+    - "(挺胸) 笨猫推荐: 叮零 D3 续航久!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_thermostat_001
+  intent: question
+  keywords: [推荐智能温控, 推荐 Nest, 推荐 Ecobee, 推荐地暖温控, 笨猫智能温控]
+  utterances:
+    - 推荐智能温控
+    - 推荐 Nest
+    - 推荐 Ecobee
+    - 推荐地暖温控
+    - 笨猫智能温控
+  responses:
+    - "嗷呜～{user_addr}Nest 第三代 - 谷歌经典ฅฅ"
+    - "(尾巴翘) Ecobee SmartThermostat"
+    - "{user_addr}米家地暖温控 / 涂鸦"
+    - "(挺胸) 笨猫推荐: 国内地暖选米家!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sa_router_001
+  intent: question
+  keywords: [推荐家庭路由, 推荐全屋 wifi, 推荐 Mesh 路由, 推荐华硕 AiMesh, 笨猫家庭路由]
+  utterances:
+    - 推荐家庭路由
+    - 推荐全屋 wifi
+    - 推荐 Mesh 路由
+    - 推荐华硕 AiMesh
+    - 笨猫家庭路由
+  responses:
+    - "嗷呜～{user_addr}华硕 AiMesh / 灵耀ฅฅ"
+    - "(尾巴翘) 小米 BE7000 / 红米 AX6000"
+    - "{user_addr}TP-Link Deco / Ubiquiti UniFi"
+    - "(挺胸) 笨猫推荐: 大平层上 Mesh 三件套!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_clothes_hanger_001
+  intent: question
+  keywords: [推荐智能晾衣架, 推荐米家晾衣架, 推荐邦先生, 推荐好太太晾衣架, 笨猫智能晾衣架]
+  utterances:
+    - 推荐智能晾衣架
+    - 推荐米家晾衣架
+    - 推荐邦先生
+    - 推荐好太太晾衣架
+    - 笨猫智能晾衣架
+  responses:
+    - "嗷呜～{user_addr}米家晾衣机 1S - 入门首选ฅฅ"
+    - "(尾巴翘) 邦先生 - 国内老牌"
+    - "{user_addr}好太太 / 月兔智能款"
+    - "(挺胸) 笨猫推荐: 米家 1S 性价比!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sa_scale_001
+  intent: question
+  keywords: [推荐智能体重秤, 推荐米家体脂秤, 推荐华为体脂秤, 推荐云康宝, 笨猫智能体重秤]
+  utterances:
+    - 推荐智能体重秤
+    - 推荐米家体脂秤
+    - 推荐华为体脂秤
+    - 推荐云康宝
+    - 笨猫智能体重秤
+  responses:
+    - "嗷呜～{user_addr}米家体脂秤 S400ฅฅ"
+    - "(尾巴翘) 华为体脂秤 3 Pro - 8 电极"
+    - "{user_addr}云康宝 / 欧姆龙专业款"
+    - "(挺胸) 笨猫推荐: 米家 S400 够用!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sa_door_sensor_001
+  intent: question
+  keywords: [推荐智能门磁, 推荐警报器, 推荐 Aqara 门磁, 推荐人体传感器, 笨猫智能门磁]
+  utterances:
+    - 推荐智能门磁
+    - 推荐警报器
+    - 推荐 Aqara 门磁
+    - 推荐人体传感器
+    - 笨猫智能门磁
+  responses:
+    - "嗷呜～{user_addr}Aqara 门磁 P2 - HomeKitฅฅ"
+    - "(尾巴翘) 米家门窗传感器 2"
+    - "{user_addr}配人体传感器 + 警报联动"
+    - "(挺胸) 笨猫推荐: Aqara 套装一步到位!"
+  cooldown_seconds: 60
+  weight: 0.9

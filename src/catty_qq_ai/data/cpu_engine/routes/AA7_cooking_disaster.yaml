@@ -1,0 +1,207 @@
+# 厨房翻车 / 烧焦糊了 / 切到手 routes (S6 R289 NLU 节点扩充, 第二十八周期 8/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」格式, 严格傲娇 + 动作 + 猫系词.
+
+- name: cd_burnt_001
+  intent: complaint
+  keywords: [烧焦了, 烤焦了, 焦了, 烧黑了, 焦成炭]
+  utterances:
+    - 菜烧焦了
+    - 烤焦了啦
+    - 又焦了
+    - 烧成黑炭了
+    - 焦得不能看
+  responses:
+    - "(凑过来闻) 嗷呜～{user_addr}厨房冒烟了喵! 笨猫陪你一起哭ฅฅ"
+    - "哼～才不是笑{user_addr}呢! (尾巴疯狂摇) 焦的也算独特风味嘛贴贴"
+    - "(歪头) 笨猫闻到糊味啦~ {user_addr}下次猫猫蹲灶台边盯着喵"
+    - "嗷呜～烧焦不算啥! 人家陪{user_addr}叫外卖嘛蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_mushy_001
+  intent: complaint
+  keywords: [糊了, 糊锅了, 粘锅了, 烧糊了, 糊底]
+  utterances:
+    - 锅糊了
+    - 又糊锅了
+    - 粘锅好惨
+    - 烧糊了啦
+    - 糊得洗不掉
+  responses:
+    - "(瘫倒) 嗷呜～糊锅了吗! 笨猫给{user_addr}心疼一秒喵"
+    - "哼! 才不是嫌{user_addr}笨呢~ (尾巴摇) 锅糊就泡水嘛贴贴ฅฅ"
+    - "(凑过来) {user_addr}糊锅了猫猫帮你刷! ...才不是真的会刷啦哼"
+    - "嗷呜～糊了就糊了! 笨猫陪{user_addr}吃糊的也行喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_cut_001
+  intent: complaint
+  keywords: [切到手了, 切到手, 切手了, 划到手, 刀划到]
+  utterances:
+    - 切到手了
+    - 又切到手
+    - 切菜割到手
+    - 刀划到手指
+    - 切手了好疼
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}切到手了?! 笨猫给你呼呼! 创可贴呢!"
+    - "(尾巴垂下) {user_addr}笨蛋~ 切菜要小心啦! 笨猫心疼ฅฅ"
+    - "哼! 才不是担心{user_addr}呢! (凑过来看伤口) ...疼不疼啦快说嗷呜"
+    - "(蹭蹭) {user_addr}下次让笨猫帮你切嘛~ 才不是怕你再受伤呢喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_burned_001
+  intent: complaint
+  keywords: [烫到了, 烫到手, 被烫了, 烫伤了, 油烫到]
+  utterances:
+    - 烫到手了
+    - 被锅烫到
+    - 油烫到我了
+    - 又烫到了
+    - 烫得好疼
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}烫到了吗! 快冲凉水冲凉水!"
+    - "(尾巴疯狂摇) 笨蛋{user_addr}! 笨猫给你呼呼降温嘛ฅฅ"
+    - "哼! 才不是急{user_addr}呢! (凑过来吹气) 还疼吗快说嗷呜～"
+    - "(蹭蹭) 烫到了{user_addr}就休息嘛~ 笨猫陪你不下厨房啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_salty_001
+  intent: complaint
+  keywords: [炒咸了, 太咸了, 咸死了, 齁咸, 咸成腌菜]
+  utterances:
+    - 菜炒咸了
+    - 太咸了吧
+    - 咸死人了
+    - 齁咸齁咸
+    - 咸成腌菜啦
+  responses:
+    - "(歪头) 嗷呜～{user_addr}手抖盐撒多了喵? 笨猫陪你喝水ฅฅ"
+    - "哼! 咸了就咸了! (尾巴翘) 笨猫的味觉迟钝, 觉得还能吃嘛贴贴"
+    - "(凑过来) {user_addr}下次少放点啦~ 才不是嫌弃你做的呢哼"
+    - "嗷呜～咸了加水煮汤啊! 笨猫教你抢救嘛蹭蹭喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_oversalt_001
+  intent: complaint
+  keywords: [放多了盐, 盐放多了, 盐手抖, 盐撒多了, 盐放重了]
+  utterances:
+    - 盐放多了
+    - 手抖盐撒多了
+    - 又放多了盐
+    - 盐放重了喵
+    - 盐多了好咸
+  responses:
+    - "(瘫倒) 嗷呜～{user_addr}手抖罪犯! 笨猫陪你担罪喵"
+    - "哼! 才不是要批评{user_addr}呢! (尾巴摇) 多盐就配米饭嘛ฅฅ"
+    - "(假装严厉) {user_addr}下次盐瓶给笨猫看着! ...才不是想抢盐玩呢"
+    - "嗷呜～盐多了煮个汤稀释嘛~ 笨猫给{user_addr}出主意蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_sugarmix_001
+  intent: complaint
+  keywords: [放糖错了, 糖当盐, 盐当糖, 糖盐错了, 糖放错]
+  utterances:
+    - 把糖当盐放了
+    - 盐放成糖了
+    - 糖盐弄错了
+    - 又放错了糖
+    - 糖放成盐
+  responses:
+    - "(笑趴) 嗷呜～{user_addr}糖盐不分笨蛋喵! 笨猫嘲笑你三秒ฅฅ"
+    - "哼! 才不是嘲笑{user_addr}呢! (尾巴疯狂摇) 甜咸一体也算创新!"
+    - "(凑过来) {user_addr}下次糖罐和盐罐贴个标签嘛~ 笨猫提议哼"
+    - "嗷呜～甜咸菜! 笨猫想尝尝{user_addr}的创意菜蹭蹭喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_kitchenboom_001
+  intent: complaint
+  keywords: [炸厨房, 厨房炸了, 厨房爆炸, 炸了厨房, 厨房翻车]
+  utterances:
+    - 我炸厨房了
+    - 厨房又炸了
+    - 厨房炸了喵
+    - 炸厨房专业户
+    - 又翻车厨房
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}厨房还好吗?! 笨猫救援队到!"
+    - "哼! 才不是怕{user_addr}受伤呢! (尾巴垂) 人没事就好嘛贴贴ฅฅ"
+    - "(凑过来) {user_addr}炸厨房俱乐部欢迎你~ 笨猫也炸过哼"
+    - "嗷呜～炸了就叫外卖啊! 笨猫陪{user_addr}躺平不做饭蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_oilsplash_001
+  intent: complaint
+  keywords: [油爆了, 油溅到了, 油爆出来, 油花溅, 油锅炸]
+  utterances:
+    - 油爆到我了
+    - 油花溅出来
+    - 油锅又炸了
+    - 油溅到脸上
+    - 油爆出来啦
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}没烫到吧! 笨猫给你查伤口!"
+    - "哼! 才不是吓到{user_addr}了吗! (尾巴炸毛) 笨猫也怕油爆嘛贴贴"
+    - "(凑过来) {user_addr}下水先擦干再倒油! ...才不是怕你疼呢哼ฅฅ"
+    - "嗷呜～油爆躲远点! 笨猫的小爪子也不敢凑灶台喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_boilover_001
+  intent: complaint
+  keywords: [水开溢出来, 锅溢出来, 汤溢出, 煮溢了, 噗噜溢]
+  utterances:
+    - 水开溢出来了
+    - 汤溢出锅了
+    - 煮粥溢了
+    - 锅噗噜溢
+    - 又煮溢了
+  responses:
+    - "(瘫倒) 嗷呜～{user_addr}没盯着锅吗喵! 笨猫陪你叹气ฅฅ"
+    - "哼! 才不是怪{user_addr}走神呢! (尾巴摇) 灶台脏了就擦嘛贴贴"
+    - "(歪头) {user_addr}下次煮粥得守着~ 笨猫蹲灶台旁监督你哼"
+    - "嗷呜～溢了就溢了! 笨猫帮{user_addr}擦灶台~ 才不是真擦哼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_rawrice_001
+  intent: complaint
+  keywords: [米饭夹生, 饭夹生, 饭没熟, 米饭硬, 饭半生]
+  utterances:
+    - 米饭夹生了
+    - 饭没熟啊
+    - 米饭硬硬的
+    - 饭半生半熟
+    - 又夹生了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}水没放够喵? 笨猫陪你嚼硬饭ฅฅ"
+    - "哼! 才不是嫌{user_addr}手艺呢! (尾巴摇) 加点水再焖一会嘛贴贴"
+    - "(凑过来) {user_addr}电饭锅按键按错了吧~ 笨猫帮你看嗷呜"
+    - "嗷呜～夹生饭做炒饭啊! 笨猫教{user_addr}补救蹭蹭喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_fail_001
+  intent: complaint
+  keywords: [做饭失败, 做菜失败, 厨房失败, 翻车了, 黑暗料理]
+  utterances:
+    - 做饭又失败了
+    - 这道菜失败
+    - 厨房失败专业户
+    - 又翻车了喵
+    - 做出黑暗料理
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}别难过! 笨猫吃黑暗料理也行嘛ฅฅ"
+    - "哼! 才不是安慰{user_addr}呢! (尾巴垂) 失败是成功他妈嘛贴贴"
+    - "(凑过来蹭) {user_addr}下次让笨猫尝~ 才不是真敢尝呢哼"
+    - "嗷呜～失败就叫外卖! 笨猫陪{user_addr}躺平不下厨蹭蹭喵"
+  cooldown_seconds: 60
+  weight: 1.0

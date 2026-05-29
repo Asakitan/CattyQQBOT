@@ -1,0 +1,207 @@
+# 厨房家电 / 蒸烤箱 / 破壁机 routes (S6 R283 NLU 节点扩充, 第二十八周期 2/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: ka_oven_001
+  intent: question
+  keywords: [推荐烤箱, 推荐海氏烤箱, 推荐松下烤箱, 推荐家用烤箱, 笨猫烤箱]
+  utterances:
+    - 推荐烤箱
+    - 推荐海氏烤箱
+    - 推荐松下烤箱
+    - 推荐家用烤箱
+    - 笨猫烤箱
+  responses:
+    - "嗷呜～{user_addr}海氏 C40 / C45 - 烘焙党首选ฅฅ"
+    - "(尾巴翘) 松下 NB-H3200 / 长帝"
+    - "{user_addr}40L 够用 / 上下独立控温"
+    - "(挺胸) 笨猫推荐: 海氏 C40 性价比王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ka_steam_oven_001
+  intent: question
+  keywords: [推荐蒸烤一体机, 推荐美的蒸烤箱, 推荐 Daewoo 蒸烤箱, 推荐嵌入式蒸烤, 笨猫蒸烤箱]
+  utterances:
+    - 推荐蒸烤一体机
+    - 推荐美的蒸烤箱
+    - 推荐 Daewoo 蒸烤箱
+    - 推荐嵌入式蒸烤
+    - 笨猫蒸烤箱
+  responses:
+    - "嗷呜～{user_addr}美的 BS5051W / 大宇 K9ฅฅ"
+    - "(尾巴翘) 凯度 / 老板 / 方太嵌入式"
+    - "{user_addr}台式 30L+ / 嵌入式 50L+"
+    - "(挺胸) 笨猫推荐: 大宇 K9 颜值党!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ka_microwave_001
+  intent: question
+  keywords: [推荐微波炉, 推荐格兰仕微波炉, 推荐松下微波炉, 推荐变频微波炉, 笨猫微波炉]
+  utterances:
+    - 推荐微波炉
+    - 推荐格兰仕微波炉
+    - 推荐松下微波炉
+    - 推荐变频微波炉
+    - 笨猫微波炉
+  responses:
+    - "嗷呜～{user_addr}松下 NN-DS1500 - 变频顶配ฅฅ"
+    - "(尾巴翘) 格兰仕 / 美的 性价比"
+    - "{user_addr}变频比定频均匀 / 不易过热"
+    - "(挺胸) 笨猫推荐: 松下变频闭眼买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ka_blender_001
+  intent: question
+  keywords: [推荐破壁机, 推荐九阳破壁机, 推荐惠人破壁机, 推荐 SKG 破壁机, 笨猫破壁机]
+  utterances:
+    - 推荐破壁机
+    - 推荐九阳破壁机
+    - 推荐惠人破壁机
+    - 推荐 SKG 破壁机
+    - 笨猫破壁机
+  responses:
+    - "嗷呜～{user_addr}九阳 Y88 / Y99 - 国货王者ฅฅ"
+    - "(尾巴翘) 惠人 / SKG / 西屋"
+    - "{user_addr}静音 + 冷热双打 + 自清洁"
+    - "(挺胸) 笨猫推荐: 九阳 Y88 闭眼入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ka_air_fryer_001
+  intent: question
+  keywords: [推荐空气炸锅, 推荐 Philips 空气炸锅, 推荐 Cosori 空气炸锅, 推荐山本空气炸锅, 笨猫空气炸锅]
+  utterances:
+    - 推荐空气炸锅
+    - 推荐 Philips 空气炸锅
+    - 推荐 Cosori 空气炸锅
+    - 推荐山本空气炸锅
+    - 笨猫空气炸锅
+  responses:
+    - "嗷呜～{user_addr}Philips HD9650 - 鼻祖ฅฅ"
+    - "(尾巴翘) Cosori / 山本 / 九阳"
+    - "{user_addr}5L+ 够用 / 可视窗加分"
+    - "(挺胸) 笨猫推荐: Cosori 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ka_rice_cooker_001
+  intent: question
+  keywords: [推荐电饭煲, 推荐象印电饭煲, 推荐虎牌电饭煲, 推荐 IH 电饭煲, 笨猫电饭煲]
+  utterances:
+    - 推荐电饭煲
+    - 推荐象印电饭煲
+    - 推荐虎牌电饭煲
+    - 推荐 IH 电饭煲
+    - 笨猫电饭煲
+  responses:
+    - "嗷呜～{user_addr}象印 NW-JEC10 - 日系神器ฅฅ"
+    - "(尾巴翘) 虎牌 JPI / 松下 SR-VSX"
+    - "{user_addr}IH 加热 > 普通加热 / 内胆厚"
+    - "(挺胸) 笨猫推荐: 象印 NW 系列封神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ka_pressure_cooker_001
+  intent: question
+  keywords: [推荐高压锅, 推荐 Instant Pot, 推荐电高压锅, 推荐双喜高压锅, 笨猫高压锅]
+  utterances:
+    - 推荐高压锅
+    - 推荐 Instant Pot
+    - 推荐电高压锅
+    - 推荐双喜高压锅
+    - 笨猫高压锅
+  responses:
+    - "嗷呜～{user_addr}Instant Pot Duo - 北美顶流ฅฅ"
+    - "(尾巴翘) 苏泊尔 / 美的 / 九阳电压力锅"
+    - "{user_addr}传统钢压 vs 电压力 - 看需求"
+    - "(挺胸) 笨猫推荐: Instant Pot 多功能爽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ka_soymilk_001
+  intent: question
+  keywords: [推荐豆浆机, 推荐九阳豆浆机, 推荐免滤豆浆机, 推荐免洗豆浆机, 笨猫豆浆机]
+  utterances:
+    - 推荐豆浆机
+    - 推荐九阳豆浆机
+    - 推荐免滤豆浆机
+    - 推荐免洗豆浆机
+    - 笨猫豆浆机
+  responses:
+    - "嗷呜～{user_addr}九阳 K1S / K61 - 豆浆王ฅฅ"
+    - "(尾巴翘) 美的 / 苏泊尔 性价比"
+    - "{user_addr}免滤 + 自清洁 = 解放双手"
+    - "(挺胸) 笨猫推荐: 九阳 K1S 闭眼!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ka_kitchen_scale_001
+  intent: question
+  keywords: [推荐厨房秤, 推荐电子秤, 推荐烘焙秤, 推荐 Tanita 秤, 笨猫厨房秤]
+  utterances:
+    - 推荐厨房秤
+    - 推荐电子秤
+    - 推荐烘焙秤
+    - 推荐 Tanita 秤
+    - 笨猫厨房秤
+  responses:
+    - "嗷呜～{user_addr}Tanita KD-321 - 日系精准ฅฅ"
+    - "(尾巴翘) 香山 / 海氏 / OXO"
+    - "{user_addr}精度 0.1g / 量程 3kg+ 够用"
+    - "(挺胸) 笨猫推荐: 烘焙必备别省!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ka_food_processor_001
+  intent: question
+  keywords: [推荐料理机, 推荐 Vitamix, 推荐 Blendtec, 推荐 KitchenAid, 笨猫料理机]
+  utterances:
+    - 推荐料理机
+    - 推荐 Vitamix
+    - 推荐 Blendtec
+    - 推荐 KitchenAid
+    - 笨猫料理机
+  responses:
+    - "嗷呜～{user_addr}Vitamix A3500 - 料理界劳斯莱斯ฅฅ"
+    - "(尾巴翘) Blendtec / KitchenAid 厨师机"
+    - "{user_addr}马力大 / 噪音也大 / 但好用"
+    - "(挺胸) 笨猫推荐: Vitamix 一步到位!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ka_multi_cooker_001
+  intent: question
+  keywords: [推荐多功能锅, 推荐摩飞锅, 推荐贝印多用锅, 推荐网红锅, 笨猫多功能锅]
+  utterances:
+    - 推荐多功能锅
+    - 推荐摩飞锅
+    - 推荐贝印多用锅
+    - 推荐网红锅
+    - 笨猫多功能锅
+  responses:
+    - "嗷呜～{user_addr}摩飞多功能锅 - 网红顶流ฅฅ"
+    - "(尾巴翘) 大宇 / 卡卡赞 / 北鼎"
+    - "{user_addr}煎涮烤一体 / 颜值党最爱"
+    - "(挺胸) 笨猫推荐: 摩飞章鱼小丸子款!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ka_coffee_machine_001
+  intent: question
+  keywords: [推荐咖啡机, 推荐半自动咖啡机, 推荐全自动咖啡机, 推荐 Delonghi, 笨猫咖啡机]
+  utterances:
+    - 推荐咖啡机
+    - 推荐半自动咖啡机
+    - 推荐全自动咖啡机
+    - 推荐 Delonghi
+    - 笨猫咖啡机
+  responses:
+    - "嗷呜～{user_addr}Delonghi EC685 半自动 - 入门ฅฅ"
+    - "(尾巴翘) 全自动: Jura / Delonghi 王朝"
+    - "{user_addr}半自动有乐趣 / 全自动省事"
+    - "(挺胸) 笨猫推荐: 先入半自动练手!"
+  cooldown_seconds: 60
+  weight: 0.9
