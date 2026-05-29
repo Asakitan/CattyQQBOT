@@ -197,6 +197,14 @@ class KeywordMatcher:
         return None
 
 
+# 主人 2026-05-30: CSafeLoader (C-backed LibYAML, 5-10x faster than pure Python safe_load)
+def _yaml_load(file_obj):
+    try:
+        return yaml.load(file_obj, Loader=yaml.CSafeLoader)
+    except AttributeError:
+        return yaml.safe_load(file_obj)
+
+
 def load_routes_from_dir(
     routes_dir: str | Path,
     disambiguate_overrides_path: str | Path | None = None,
@@ -219,7 +227,7 @@ def load_routes_from_dir(
     for yaml_path in sorted(routes_dir.glob("*.yaml")):
         try:
             with yaml_path.open(encoding="utf-8") as f:
-                data = yaml.safe_load(f)
+                data = _yaml_load(f)
         except Exception as exc:
             logger.warning(f"[cpu_engine.L1] failed to load {yaml_path}: {exc}")
             continue
@@ -261,7 +269,7 @@ def _load_disambiguate_overrides(path: str | Path) -> dict[str, list[str]]:
         return {}
     try:
         with path.open(encoding="utf-8") as f:
-            data = yaml.safe_load(f)
+            data = _yaml_load(f)
     except Exception as exc:
         logger.warning(f"[cpu_engine.L1] failed to load disambiguate_overrides {path}: {exc}")
         return {}

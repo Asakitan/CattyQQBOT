@@ -122,8 +122,16 @@ class CPUEngineRouter:
         try:
             from ..nlu.text2vec_engine import embed_sync_batch  # type: ignore
 
+            # 主人 2026-05-30: L2 磁盘缓存 — 传 cache_dir (corpus/) + mtime_sig 给 SemanticRouter
+            _cache_dir = routes_dir.parent / "corpus"
+            _mtime_sig = self._compute_routes_mtime_signature(routes_dir)
             semantic_routes = load_sem_routes(routes_dir)
-            self._semantic_router = SemanticRouter(semantic_routes, embed_batch_fn=embed_sync_batch)
+            self._semantic_router = SemanticRouter(
+                semantic_routes,
+                embed_batch_fn=embed_sync_batch,
+                cache_dir=_cache_dir,
+                routes_mtime_sig=_mtime_sig,
+            )
             self._semantic_router.prepare()
         except Exception as exc:
             logger.exception(f"[cpu_engine] L2 semantic router init failed: {exc}")
@@ -224,8 +232,14 @@ class CPUEngineRouter:
         # 重建 L2 (重新 embed all utterances)
         try:
             from ..nlu.text2vec_engine import embed_sync_batch  # type: ignore
+            _cache_d = routes_dir.parent / "corpus"
             semantic_routes = load_sem_routes(routes_dir)
-            new_sr = SemanticRouter(semantic_routes, embed_batch_fn=embed_sync_batch)
+            new_sr = SemanticRouter(
+                semantic_routes,
+                embed_batch_fn=embed_sync_batch,
+                cache_dir=_cache_d,
+                routes_mtime_sig=new_sig,
+            )
             new_sr.prepare()
             self._semantic_router = new_sr
         except Exception as exc:
