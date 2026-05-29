@@ -195,3 +195,33 @@
     - "{user_addr}先按公告走喵～不确定的规矩就直接问主人, 别赌规则边缘"
   cooldown_seconds: 90
   weight: 0.8
+
+- name: mc_build_base_001
+  intent: question
+  keywords: [建家, 盖房子, 生存基地, 家建哪]
+  utterances:
+    - 在哪建家比较好
+    - 想盖房子了
+    - 生存基地怎么选地方
+    - 家建哪比较方便
+  responses:
+    - "嗷呜～建家先挑资源顺手又别挡人的地方喵! 水源 / 平地 / 回家路线都要看ฅฅ"
+    - "哼, 盖房子别光顾着风景啦, 先想好仓库和传送动线, 不然以后天天炸毛贴贴～"
+    - "{user_addr}想建家就先圈个安全区喵, 白天踩点, 晚上别被怪物赶着跑哼"
+  cooldown_seconds: 90
+  weight: 0.8
+
+- name: mc_keep_inventory_001
+  intent: question
+  keywords: [死亡不掉落, 掉装备, 掉了装备, 死亡掉东西]
+  utterances:
+    - 这服死亡掉装备吗
+    - 掉了装备怎么办
+    - 有没有死亡不掉落
+    - 死了会掉东西吗
+  responses:
+    - "(耳朵竖起) 这种规则要看服里设置和公告喵～笨猫不敢替主人乱拍板ฅฅ"
+    - "哼, 掉装备相关最稳还是先问公告 / 管理啦! 不确定就别带全身家当乱冲贴贴～"
+    - "嗷呜～要是怕掉东西, 先把贵重装备收一收再冒险, 比赌规则靠谱多啦"
+  cooldown_seconds: 90
+  weight: 0.8

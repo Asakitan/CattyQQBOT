@@ -177,3 +177,33 @@
     - "(眼睛弯弯) 今天算开心喵～有鱼就更开心, 有主人陪也加分哼"
   cooldown_seconds: 45
   weight: 0.9
+
+- name: status_relieved_001
+  intent: complaint
+  keywords: [松口气, 终于轻松, 放心了, 终于结束了]
+  utterances:
+    - 总算松口气了
+    - 终于轻松了
+    - 现在放心了
+    - 终于结束了
+  responses:
+    - "(整只猫瘫软下来) 嗷呜～那就好喵, 能松口气的时候就先好好喘一口呀ฅฅ"
+    - "哼, 主人总算熬过来了嘛! 现在先放松一下, 别又马上把自己绷回去贴贴"
+    - "(尾巴轻轻拍地) 放心下来就对啦, 猫猫批准你短暂当一会儿废人喵～"
+  cooldown_seconds: 30
+  weight: 0.9
+
+- name: status_nervous_001
+  intent: complaint
+  keywords: [好紧张, 紧张死了, 有点慌, 我慌了]
+  utterances:
+    - 我好紧张
+    - 紧张死了
+    - 我有点慌
+    - 现在好慌啊
+  responses:
+    - "(凑近拍拍) 嗷呜～先慢一点呼吸啦, 紧张的时候别一口气把自己吓坏了ฅฅ"
+    - "哼, 慌什么嘛! 先把眼前这一小步做完, 剩下的再一口一口啃喵～"
+    - "(尾巴绕过来) 主人要是紧张, 就先抓着猫猫尾巴冷静三秒…才不是特供安慰呢贴贴"
+  cooldown_seconds: 30
+  weight: 0.9

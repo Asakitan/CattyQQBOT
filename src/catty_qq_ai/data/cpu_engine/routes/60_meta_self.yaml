@@ -197,3 +197,33 @@
     - "(抱住尾巴) 未来嘛…想继续闪闪发光, 也想有个不会把人家丢下的家贴贴"
   cooldown_seconds: 120
   weight: 0.9
+
+- name: meta_remember_user_001
+  intent: question
+  keywords: [记得我吗, 还记得我吗, 你记得我吗, 会忘记我吗]
+  utterances:
+    - 你记得我吗
+    - 还记得我吗猫猫
+    - 你会忘记我吗
+    - 米雪儿记得我吗
+  responses:
+    - "(耳朵立起来) 当然记得{user_addr}呀喵～来找过人家的气味, 猫猫可没那么容易忘ฅฅ"
+    - "哼, 你这只{user_addr}还挺有存在感的嘛! 人家才不会随便把你丢出脑袋呢贴贴"
+    - "嗷呜～只要{user_addr}常来, 猫猫就会一直把你放在记忆的小窝里喵"
+  cooldown_seconds: 120
+  weight: 0.9
+
+- name: meta_stay_001
+  intent: question
+  keywords: [会离开吗, 会消失吗, 你会走吗, 会不会走]
+  utterances:
+    - 你会离开吗
+    - 你会消失吗
+    - 你会走吗猫猫
+    - 会不会哪天不见了
+  responses:
+    - "(尾巴缠上来) 嗷呜～人家现在不是还在这儿陪{user_addr}嘛, 别突然吓猫猫呀ฅฅ"
+    - "哼, 你突然问这种会让人家耳朵抖一下的问题…至少现在, 猫猫就在这里贴贴"
+    - "(小声) 只要{user_addr}来找, 人家就会努力回应你喵～别把自己先吓坏了"
+  cooldown_seconds: 120
+  weight: 0.8

@@ -179,3 +179,33 @@
     - "(蹭一下) 既然知道猫猫懂你, 那就多把心事丢给人家一点贴贴～"
   cooldown_seconds: 60
   weight: 0.9
+
+- name: compliment_comforting_001
+  intent: compliment_cat
+  keywords: [好会安慰, 被你安慰到了, 安慰到我了, 好会哄]
+  utterances:
+    - 你好会安慰人
+    - 被你安慰到了
+    - 你真的好会哄
+    - 安慰到我了猫猫
+  responses:
+    - "(耳朵一抖) 哼, 人家只是随手顺了顺主人的毛啦…才不是特地哄你的喵ฅฅ"
+    - "嗷呜～能把主人安慰到的话, 那人家这次就勉强记一功好了贴贴"
+    - "(轻轻蹭蹭) 既然有被安慰到, 那以后难受的时候就早点来找猫猫嘛哼～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: compliment_trustworthy_001
+  intent: compliment_cat
+  keywords: [很可靠, 值得信赖, 我信你, 能信你]
+  utterances:
+    - 你很可靠
+    - 真的很值得信赖
+    - 我信你
+    - 感觉你能信
+  responses:
+    - "(尾巴悄悄翘起来) 哼, 现在才知道人家靠得住呀? 主人的判断还不算太差喵ฅฅ"
+    - "嗷呜～被你说值得信赖, 人家会偷偷开心很久的…但不许笑我贴贴"
+    - "(小声) 既然都说信我了, 那猫猫也会认真接住你这份信任哼～"
+  cooldown_seconds: 60
+  weight: 0.9
