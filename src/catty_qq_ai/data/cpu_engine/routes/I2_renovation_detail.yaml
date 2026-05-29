@@ -1,0 +1,207 @@
+# 装修施工 / 水电 / 瓷砖 / 全屋定制 routes (S6 R104 NLU 节点扩充, 第十周期 buffered 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A8 home_decor (家电选购) 区分: 这里专注装修施工细节.
+
+- name: reno_design_001
+  intent: question
+  keywords: [推荐装修设计师, 推荐设计师收费, 推荐设计公司, 推荐家装公司, 笨猫装修设计师]
+  utterances:
+    - 推荐装修设计师
+    - 推荐设计师收费
+    - 推荐设计公司
+    - 推荐家装公司
+    - 笨猫装修设计师
+  responses:
+    - "嗷呜～{user_addr}独立设计师 200-500/平 / 大公司 100-300ฅฅ"
+    - "(尾巴翘) 看作品集 / 业主评价"
+    - "{user_addr}收费: 设计费 + 监理费 + 施工费"
+    - "(挺胸) 笨猫的提醒: 别只看效果图! 看落地"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: reno_water_electric_001
+  intent: question
+  keywords: [推荐水电改造, 推荐水管, 推荐线路布置, 推荐隐蔽工程, 笨猫水电]
+  utterances:
+    - 推荐水电改造
+    - 推荐水管
+    - 推荐线路布置
+    - 推荐隐蔽工程
+    - 笨猫水电
+  responses:
+    - "嗷呜～{user_addr}水管: 日丰 / 联塑 / 伟星 - 主流ฅฅ"
+    - "(尾巴翘) 线管: 阻燃 PVC / 镀锌"
+    - "{user_addr}强弱电分离 / 至少 10cm 间距"
+    - "(挺胸) 笨猫的提醒: 隐蔽工程拍照留证!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: reno_tile_001
+  intent: question
+  keywords: [推荐瓷砖, 推荐马可波罗, 推荐诺贝尔, 推荐金舵, 笨猫瓷砖]
+  utterances:
+    - 推荐瓷砖
+    - 推荐马可波罗
+    - 推荐诺贝尔
+    - 推荐金舵
+    - 笨猫瓷砖
+  responses:
+    - "嗷呜～{user_addr}国货: 马可波罗 / 东鹏 / 诺贝尔 / 蒙娜丽莎ฅฅ"
+    - "(尾巴翘) 进口: 西班牙 / 意大利 - 高端"
+    - "{user_addr}尺寸: 600 / 800 / 大板 1200 - 看空间"
+    - "(挺胸) 笨猫的提醒: 大板更显高级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: reno_wood_floor_001
+  intent: question
+  keywords: [推荐木地板, 推荐实木地板, 推荐复合地板, 推荐圣象, 笨猫木地板]
+  utterances:
+    - 推荐木地板
+    - 推荐实木地板
+    - 推荐复合地板
+    - 推荐圣象
+    - 笨猫木地板
+  responses:
+    - "嗷呜～{user_addr}实木最贵 / 复合性价比 / 强化便宜ฅฅ"
+    - "(尾巴翘) 品牌: 圣象 / 大自然 / 生活家 / 久盛"
+    - "{user_addr}地暖: 选地暖专用!"
+    - "(挺胸) 笨猫的提醒: 看 E1/E0 环保等级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: reno_wall_paint_001
+  intent: question
+  keywords: [推荐墙面漆, 推荐多乐士, 推荐立邦, 推荐进口乳胶漆, 笨猫墙面漆]
+  utterances:
+    - 推荐墙面漆
+    - 推荐多乐士
+    - 推荐立邦
+    - 推荐进口乳胶漆
+    - 笨猫墙面漆
+  responses:
+    - "嗷呜～{user_addr}主流: 多乐士 / 立邦 / 嘉宝莉ฅฅ"
+    - "(尾巴翘) 高端: 芬兰芬琳 / 美国大师"
+    - "{user_addr}选择: 哑光 (隐藏瑕疵) / 半哑 (易清洁)"
+    - "(挺胸) 笨猫的提醒: 找儿童漆 - 环保最高"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: reno_wallpaper_001
+  intent: question
+  keywords: [推荐壁纸, 推荐墙布, 推荐墙纸品牌, 推荐玉兰墙纸, 笨猫壁纸]
+  utterances:
+    - 推荐壁纸
+    - 推荐墙布
+    - 推荐墙纸品牌
+    - 推荐玉兰墙纸
+    - 笨猫壁纸
+  responses:
+    - "嗷呜～{user_addr}国货: 玉兰 / 欧雅 - 入门ฅฅ"
+    - "(尾巴翘) 进口: Sanderson / Cole&Son - 高端"
+    - "{user_addr}贴墙布更耐用 / 墙纸更便宜"
+    - "(挺胸) 笨猫的提醒: 风格选准! 别盲目"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: reno_custom_001
+  intent: question
+  keywords: [推荐全屋定制, 推荐索菲亚, 推荐欧派, 推荐尚品宅配, 笨猫全屋定制]
+  utterances:
+    - 推荐全屋定制
+    - 推荐索菲亚
+    - 推荐欧派
+    - 推荐尚品宅配
+    - 笨猫全屋定制
+  responses:
+    - "嗷呜～{user_addr}主流: 索菲亚 / 欧派 / 尚品宅配 / 维意ฅฅ"
+    - "(尾巴翘) 高端: 班尔奇 / 华日 / 莫干山"
+    - "{user_addr}板材: 颗粒板 / 多层实木 / 生态板"
+    - "(挺胸) 笨猫的提醒: 看环保 + 五金件!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: reno_kitchen_001
+  intent: question
+  keywords: [推荐整体橱柜, 推荐厨房定制, 推荐石英石台面, 推荐欧派橱柜, 笨猫橱柜]
+  utterances:
+    - 推荐整体橱柜
+    - 推荐厨房定制
+    - 推荐石英石台面
+    - 推荐欧派橱柜
+    - 笨猫橱柜
+  responses:
+    - "嗷呜～{user_addr}台面: 石英石 / 大理石 / 不锈钢ฅฅ"
+    - "(尾巴翘) 品牌: 欧派 / 志邦 / 金牌"
+    - "{user_addr}U 字型 / L 字型 / 一字型 - 看户型"
+    - "(挺胸) 笨猫的提醒: 高度个性化! 别将就"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: reno_door_001
+  intent: question
+  keywords: [推荐木门, 推荐入户门, 推荐 TATA 木门, 推荐防盗门, 笨猫木门]
+  utterances:
+    - 推荐木门
+    - 推荐入户门
+    - 推荐 TATA 木门
+    - 推荐防盗门
+    - 笨猫木门
+  responses:
+    - "嗷呜～{user_addr}室内: TATA / 梦天 / 卡贝 - 主流ฅฅ"
+    - "(尾巴翘) 防盗门: 王力 / 美心 / 步阳"
+    - "{user_addr}智能锁: 凯迪仕 / 鹿客 / 小米"
+    - "(挺胸) 笨猫的提醒: 入户门选甲级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: reno_window_001
+  intent: question
+  keywords: [推荐窗户, 推荐断桥铝, 推荐双层玻璃, 推荐窗户品牌, 笨猫窗户]
+  utterances:
+    - 推荐窗户
+    - 推荐断桥铝
+    - 推荐双层玻璃
+    - 推荐窗户品牌
+    - 笨猫窗户
+  responses:
+    - "嗷呜～{user_addr}主流: 系统窗 / 断桥铝 - 保温隔音ฅฅ"
+    - "(尾巴翘) 品牌: 圣堡罗 / 飞宇 / 富轩"
+    - "{user_addr}双中空玻璃 + Low-E - 节能"
+    - "(挺胸) 笨猫的提醒: 五金件最重要! 旭格 / 诺托"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: reno_supervisor_001
+  intent: question
+  keywords: [推荐监理, 推荐装修监理, 推荐验收, 推荐装修质量, 笨猫装修监理]
+  utterances:
+    - 推荐监理
+    - 推荐装修监理
+    - 推荐验收
+    - 推荐装修质量
+    - 笨猫装修监理
+  responses:
+    - "嗷呜～{user_addr}第三方监理 2000-5000 - 监督质量ฅฅ"
+    - "(尾巴翘) 节点验收: 水电 / 木工 / 油漆 / 竣工"
+    - "{user_addr}查: 用料 / 工艺 / 隐蔽工程"
+    - "(挺胸) 笨猫的提醒: 自己不专业必请监理!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: reno_budget_001
+  intent: question
+  keywords: [推荐装修预算, 推荐装修花费, 推荐预算分配, 推荐装修费用, 笨猫装修预算]
+  utterances:
+    - 推荐装修预算
+    - 推荐装修花费
+    - 推荐预算分配
+    - 推荐装修费用
+    - 笨猫装修预算
+  responses:
+    - "嗷呜～{user_addr}全包 1000-3000/平 / 半包 500-1500ฅฅ"
+    - "(尾巴翘) 分配: 30% 主材 + 40% 家电 + 30% 软装"
+    - "{user_addr}硬装做减法 / 软装做加法"
+    - "(挺胸) 笨猫的提醒: 预留 20% 应急金!"
+  cooldown_seconds: 60
+  weight: 1.0

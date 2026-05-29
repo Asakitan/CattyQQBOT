@@ -1,0 +1,207 @@
+# 二次元手游 / 抽卡 / 原神 / 明日方舟 routes (S6 R110 NLU 节点扩充, 第十周期 buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B8 games_play (浅触) / D9 subculture 区分: 这里专注二次元手游.
+
+- name: gacha_genshin_002
+  intent: question
+  keywords: [推荐原神攻略, 推荐原神抽卡, 推荐 UP 池, 推荐原神保底, 笨猫原神攻略]
+  utterances:
+    - 推荐原神攻略
+    - 推荐原神抽卡
+    - 推荐 UP 池
+    - 推荐原神保底
+    - 笨猫原神攻略
+  responses:
+    - "嗷呜～{user_addr}保底机制: 90 抽 5 星 / 50% 概率 UPฅฅ"
+    - "(尾巴翘) 大保底 180 抽必出 UP!"
+    - "{user_addr}强势角色: 钟离 / 雷神 / 神里 / 申鹤"
+    - "(挺胸) 笨猫的提醒: 月卡党也能玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gacha_arknights_001
+  intent: question
+  keywords: [推荐明日方舟, 推荐方舟干员, 推荐明日方舟抽卡, 推荐塔防, 笨猫明日方舟]
+  utterances:
+    - 推荐明日方舟
+    - 推荐方舟干员
+    - 推荐明日方舟抽卡
+    - 推荐塔防
+    - 笨猫明日方舟
+  responses:
+    - "嗷呜～{user_addr}鹰角网络 / 国货之光 / 高品质塔防ฅฅ"
+    - "(尾巴翘) 6 星干员: 阿米娅 / 银灰 / 史尔特尔"
+    - "{user_addr}保底: 50 抽必 6 星! 良心保底"
+    - "(挺胸) 笨猫推荐: 剧情值得追!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gacha_honkai_001
+  intent: question
+  keywords: [推荐崩坏星穹铁道, 推荐 HSR, 推荐崩铁攻略, 推荐崩铁抽卡, 笨猫崩铁]
+  utterances:
+    - 推荐崩坏星穹铁道
+    - 推荐 HSR
+    - 推荐崩铁攻略
+    - 推荐崩铁抽卡
+    - 笨猫崩铁
+  responses:
+    - "嗷呜～{user_addr}米哈游回合制 / 视觉炸裂ฅฅ"
+    - "(尾巴翘) 强势: 卡芙卡 / 飞霄 / 镜流"
+    - "{user_addr}保底类原神 / 80 抽 + 大保底"
+    - "(挺胸) 笨猫推荐: 剧情 + 颜值双在线"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gacha_pgr_001
+  intent: question
+  keywords: [推荐战双帕弥什, 推荐 PGR, 推荐战双攻略, 推荐战双构造体, 笨猫战双]
+  utterances:
+    - 推荐战双帕弥什
+    - 推荐 PGR
+    - 推荐战双攻略
+    - 推荐战双构造体
+    - 笨猫战双
+  responses:
+    - "嗷呜～{user_addr}库洛游戏 / 高品质 ACT 手游ฅฅ"
+    - "(尾巴翘) 60 抽必 S 级! 80 抽必出限定"
+    - "{user_addr}强势: 比安卡 / 露西亚 / 卡列宁"
+    - "(挺胸) 笨猫的提醒: 良心氪金!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gacha_onmyoji_001
+  intent: question
+  keywords: [推荐阴阳师, 推荐 SSR 式神, 推荐阴阳师抽卡, 推荐网易阴阳师, 笨猫阴阳师]
+  utterances:
+    - 推荐阴阳师
+    - 推荐 SSR 式神
+    - 推荐阴阳师抽卡
+    - 推荐网易阴阳师
+    - 笨猫阴阳师
+  responses:
+    - "嗷呜～{user_addr}日式和风 / 美术天花板ฅฅ"
+    - "(尾巴翘) 抽卡靠脸! SSR 概率 1%"
+    - "{user_addr}强势: 大岳丸 / 须佐之男 / 阎魔"
+    - "(挺胸) 笨猫的提醒: 别贪多! 别冲SP"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gacha_klee_001
+  intent: question
+  keywords: [推荐恋与制作人, 推荐光与夜之恋, 推荐乙女游戏抽卡, 推荐未定事件簿, 笨猫乙游抽卡]
+  utterances:
+    - 推荐恋与制作人
+    - 推荐光与夜之恋
+    - 推荐乙女游戏抽卡
+    - 推荐未定事件簿
+    - 笨猫乙游抽卡
+  responses:
+    - "嗷呜～{user_addr}国乙四大: 恋与 / 光与夜 / 未定 / 时空ฅฅ"
+    - "(尾巴翘) SSR 概率 1% 起步"
+    - "{user_addr}活动 + 月卡 - 福利党"
+    - "(挺胸) 笨猫的提醒: 别冲动氪!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gacha_fgo_001
+  intent: question
+  keywords: [推荐 FGO, 推荐 Fate Grand Order, 推荐圣晶石, 推荐五星从者, 笨猫 FGO]
+  utterances:
+    - 推荐 FGO
+    - 推荐 Fate Grand Order
+    - 推荐圣晶石
+    - 推荐五星从者
+    - 笨猫 FGO
+  responses:
+    - "嗷呜～{user_addr}FGO: 抽卡之祖 / 1% SSR 概率ฅฅ"
+    - "(尾巴翘) 无保底! 全靠脸 - 又名传统手游"
+    - "{user_addr}强势: 双 C / 太公望 / 梅林"
+    - "(挺胸) 笨猫的提醒: 别陷入沉没成本!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gacha_uma_001
+  intent: question
+  keywords: [推荐赛马娘, 推荐 Umamusume, 推荐马娘培育, 推荐赛马娘氪金, 笨猫赛马娘]
+  utterances:
+    - 推荐赛马娘
+    - 推荐 Umamusume
+    - 推荐马娘培育
+    - 推荐赛马娘氪金
+    - 笨猫赛马娘
+  responses:
+    - "嗷呜～{user_addr}日服爆款 / Cygames 出品ฅฅ"
+    - "(尾巴翘) 玩法: 育成 + 赛跑 - 三国杀风"
+    - "{user_addr}强势: 大树伟人 / 名将 / 美浦"
+    - "(挺胸) 笨猫的提醒: 卡池毒! 量力而行"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: gacha_mlbb_001
+  intent: question
+  keywords: [推荐王者荣耀, 推荐 KPL, 推荐王者皮肤, 推荐王者英雄, 笨猫王者]
+  utterances:
+    - 推荐王者荣耀
+    - 推荐 KPL
+    - 推荐王者皮肤
+    - 推荐王者英雄
+    - 笨猫王者
+  responses:
+    - "嗷呜～{user_addr}国民 MOBA / 6 亿玩家ฅฅ"
+    - "(尾巴翘) KPL: 王者职业联赛 / 顶级赛事"
+    - "{user_addr}强势: 鲁班 / 妲己 / 后羿 - 新手友好"
+    - "(挺胸) 笨猫的提醒: 别上瘾! 控制时间"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gacha_lol_mobile_001
+  intent: question
+  keywords: [推荐 LOL 手游, 推荐英雄联盟手游, 推荐 LOL Wild Rift, 推荐英雄联盟手机, 笨猫 LOL 手游]
+  utterances:
+    - 推荐 LOL 手游
+    - 推荐英雄联盟手游
+    - 推荐 LOL Wild Rift
+    - 推荐英雄联盟手机
+    - 笨猫 LOL 手游
+  responses:
+    - "嗷呜～{user_addr}腾讯 + 拳头 / LOL 手游版ฅฅ"
+    - "(尾巴翘) 国内外同台! 国际服 Wild Rift"
+    - "{user_addr}对标王者 / 操作更复杂"
+    - "(挺胸) 笨猫的提醒: 学好补刀!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gacha_pp_001
+  intent: question
+  keywords: [推荐和平精英, 推荐吃鸡手游, 推荐 PUBG 手游, 推荐手游吃鸡, 笨猫和平精英]
+  utterances:
+    - 推荐和平精英
+    - 推荐吃鸡手游
+    - 推荐 PUBG 手游
+    - 推荐手游吃鸡
+    - 笨猫和平精英
+  responses:
+    - "嗷呜～{user_addr}腾讯版 PUBG / 国民吃鸡ฅฅ"
+    - "(尾巴翘) 经典: 战神 / 突围 / 雪山地图"
+    - "{user_addr}画面: 90 帧 + 1080p - 顶级"
+    - "(挺胸) 笨猫的提醒: 看战术! 别一路冲"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gacha_card_001
+  intent: question
+  keywords: [推荐炉石传说, 推荐万智牌, 推荐影之诗, 推荐 TCG 卡牌, 笨猫卡牌游戏]
+  utterances:
+    - 推荐炉石传说
+    - 推荐万智牌
+    - 推荐影之诗
+    - 推荐 TCG 卡牌
+    - 笨猫卡牌游戏
+  responses:
+    - "嗷呜～{user_addr}炉石: 暴雪经典 / 流派多ฅฅ"
+    - "(尾巴翘) 万智牌: 卡牌鼻祖 / 35 年历史"
+    - "{user_addr}国货: 影之诗 / 阴阳师百闻牌"
+    - "(挺胸) 笨猫推荐: 烧脑慢节奏"
+  cooldown_seconds: 60
+  weight: 0.8

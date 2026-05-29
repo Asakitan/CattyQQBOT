@@ -1,0 +1,206 @@
+# 设计 / 平面 / UI / UX 设计 routes (S6 R108 NLU 节点扩充, 第十周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: design_ui_001
+  intent: question
+  keywords: [推荐 UI 设计, 推荐界面设计, 推荐 Material Design, 推荐 iOS HIG, 笨猫 UI]
+  utterances:
+    - 推荐 UI 设计
+    - 推荐界面设计
+    - 推荐 Material Design
+    - 推荐 iOS HIG
+    - 笨猫 UI
+  responses:
+    - "嗷呜～{user_addr}规范: Material Design (Google) / HIG (Apple)ฅฅ"
+    - "(尾巴翘) 工具: Figma / Sketch / XD"
+    - "{user_addr}原型: Axure / Principle / 即时设计"
+    - "(挺胸) 笨猫推荐: 看 Dribbble 找灵感!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: design_ux_001
+  intent: question
+  keywords: [推荐 UX, 推荐用户体验, 推荐用户研究, 推荐可用性, 笨猫 UX]
+  utterances:
+    - 推荐 UX
+    - 推荐用户体验
+    - 推荐用户研究
+    - 推荐可用性
+    - 笨猫 UX
+  responses:
+    - "嗷呜～{user_addr}UX 5 要素: 战略 / 范围 / 结构 / 框架 / 表现ฅฅ"
+    - "(尾巴翘) 用户研究: 访谈 / 问卷 / 可用性测试"
+    - "{user_addr}经典: Don Norman《设计心理学》"
+    - "(挺胸) 笨猫的提醒: 用户中心 / 别只设计师视角"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: design_figma_001
+  intent: question
+  keywords: [推荐 Figma, 推荐设计工具, 推荐 Sketch, 推荐 Adobe XD, 笨猫 Figma]
+  utterances:
+    - 推荐 Figma
+    - 推荐设计工具
+    - 推荐 Sketch
+    - 推荐 Adobe XD
+    - 笨猫 Figma
+  responses:
+    - "嗷呜～{user_addr}Figma: 在线协作 / 现行业霸主ฅฅ"
+    - "(尾巴翘) Sketch: Mac 限定 / 老牌"
+    - "{user_addr}国货: 即时设计 / Pixso - 国产替代"
+    - "(挺胸) 笨猫推荐: Figma 永久免费版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: design_typography_001
+  intent: question
+  keywords: [推荐字体设计, 推荐字体, 推荐中文字体, 推荐免费字体, 笨猫字体]
+  utterances:
+    - 推荐字体设计
+    - 推荐字体
+    - 推荐中文字体
+    - 推荐免费字体
+    - 笨猫字体
+  responses:
+    - "嗷呜～{user_addr}免费商用: 思源黑体 / 站酷字体 / 阿里巴巴普惠ฅฅ"
+    - "(尾巴翘) 经典: Helvetica / Arial / 微软雅黑"
+    - "{user_addr}手写感: Pacifico / 江西拙楷"
+    - "(挺胸) 笨猫的提醒: 字体侵权严! 别乱用"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: design_color_001
+  intent: question
+  keywords: [推荐配色, 推荐色彩搭配, 推荐 Pantone, 推荐莫兰迪色, 笨猫配色]
+  utterances:
+    - 推荐配色
+    - 推荐色彩搭配
+    - 推荐 Pantone
+    - 推荐莫兰迪色
+    - 笨猫配色
+  responses:
+    - "嗷呜～{user_addr}年度色: Pantone 每年发布ฅฅ"
+    - "(尾巴翘) 莫兰迪: 低饱和 / 高级感"
+    - "{user_addr}工具: Coolors / Color Hunt / 千色"
+    - "(挺胸) 笨猫推荐: 60/30/10 三色搭配法"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: design_logo_001
+  intent: question
+  keywords: [推荐 logo 设计, 推荐品牌 logo, 推荐 logo 灵感, 推荐字标, 笨猫 logo]
+  utterances:
+    - 推荐 logo 设计
+    - 推荐品牌 logo
+    - 推荐 logo 灵感
+    - 推荐字标
+    - 笨猫 logo
+  responses:
+    - "嗷呜～{user_addr}类型: 字标 / 图形 / 组合 / 徽章ฅฅ"
+    - "(尾巴翘) 苹果 / 耐克 / Google - 经典案例"
+    - "{user_addr}简洁 + 可记 + 适配性 - 三要素"
+    - "(挺胸) 笨猫推荐: 大学美院 logo 设计课"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: design_motion_001
+  intent: question
+  keywords: [推荐动效设计, 推荐 motion design, 推荐 Lottie, 推荐 After Effects, 笨猫动效]
+  utterances:
+    - 推荐动效设计
+    - 推荐 motion design
+    - 推荐 Lottie
+    - 推荐 After Effects
+    - 笨猫动效
+  responses:
+    - "嗷呜～{user_addr}工具: After Effects + Lottie - 黄金组合ฅฅ"
+    - "(尾巴翘) 原则: 12 大动画原则 (迪士尼)"
+    - "{user_addr}Web 动效: GSAP / Framer Motion"
+    - "(挺胸) 笨猫的提醒: 别过度动画! 影响性能"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: design_illustration_001
+  intent: question
+  keywords: [推荐插画设计, 推荐插画师, 推荐 Procreate, 推荐数字绘画, 笨猫插画]
+  utterances:
+    - 推荐插画设计
+    - 推荐插画师
+    - 推荐 Procreate
+    - 推荐数字绘画
+    - 笨猫插画
+  responses:
+    - "嗷呜～{user_addr}工具: Procreate (iPad) / Photoshop / Illustratorฅฅ"
+    - "(尾巴翘) 风格: 扁平 / 渐变 / 拟物 / 像素"
+    - "{user_addr}国货: 米画师 / 千库网 / 站酷"
+    - "(挺胸) 笨猫推荐: 国内插画师 - 唐弢 / Tango"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: design_industrial_001
+  intent: question
+  keywords: [推荐工业设计, 推荐产品设计, 推荐 Dieter Rams, 推荐 Apple 设计, 笨猫工业设计]
+  utterances:
+    - 推荐工业设计
+    - 推荐产品设计
+    - 推荐 Dieter Rams
+    - 推荐 Apple 设计
+    - 笨猫工业设计
+  responses:
+    - "嗷呜～{user_addr}十大设计原则: Dieter Rams - 设计圣经ฅฅ"
+    - "(尾巴翘) 苹果 Jonathan Ive 师承 Rams"
+    - "{user_addr}工业: 喷墨 / 注塑 / CNC - 工艺"
+    - "(挺胸) 笨猫推荐: 《设计中的设计》原研哉"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: design_brand_002
+  intent: question
+  keywords: [推荐品牌设计, 推荐 VI 设计, 推荐 LOGO 系统, 推荐品牌指南, 笨猫品牌设计]
+  utterances:
+    - 推荐品牌设计
+    - 推荐 VI 设计
+    - 推荐 LOGO 系统
+    - 推荐品牌指南
+    - 笨猫品牌设计
+  responses:
+    - "嗷呜～{user_addr}VI: 视觉识别系统 - LOGO + 字体 + 配色 + 应用ฅฅ"
+    - "(尾巴翘) 品牌手册: 几十-几百页规范"
+    - "{user_addr}经典案例: 苹果 / Nike / Mailchimp"
+    - "(挺胸) 笨猫推荐: 看 Brand New 网站"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: design_3d_001
+  intent: question
+  keywords: [推荐 3D 设计, 推荐建模, 推荐 Blender, 推荐 C4D, 笨猫 3D]
+  utterances:
+    - 推荐 3D 设计
+    - 推荐建模
+    - 推荐 Blender
+    - 推荐 C4D
+    - 笨猫 3D
+  responses:
+    - "嗷呜～{user_addr}开源: Blender - 免费且强大ฅฅ"
+    - "(尾巴翘) 商业: Cinema 4D / Maya / 3ds Max"
+    - "{user_addr}雕刻: ZBrush - 角色雕刻王"
+    - "(挺胸) 笨猫推荐: Blender 中文教程"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: design_portfolio_001
+  intent: question
+  keywords: [推荐设计作品集, 推荐 portfolio, 推荐 Behance, 推荐 Dribbble, 笨猫作品集]
+  utterances:
+    - 推荐设计作品集
+    - 推荐 portfolio
+    - 推荐 Behance
+    - 推荐 Dribbble
+    - 笨猫作品集
+  responses:
+    - "嗷呜～{user_addr}平台: Behance (Adobe) / Dribbbleฅฅ"
+    - "(尾巴翘) 国内: 站酷 / UI 中国"
+    - "{user_addr}个人站: Notion / Webflow / Wix"
+    - "(挺胸) 笨猫的提醒: 1 个好作品 > 10 个一般"
+  cooldown_seconds: 60
+  weight: 1.0

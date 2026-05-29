@@ -1,0 +1,207 @@
+# 孕期医疗 / 产检 / 分娩 / 月子 routes (S6 R105 NLU 节点扩充, 第十周期 buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B0 parenting_kids (婴幼儿育儿) 区分: 这里专注孕期医疗细节.
+
+- name: preg_test_001
+  intent: question
+  keywords: [推荐验孕, 推荐测早孕, 推荐 HCG, 推荐早孕试纸, 笨猫验孕]
+  utterances:
+    - 推荐验孕
+    - 推荐测早孕
+    - 推荐 HCG
+    - 推荐早孕试纸
+    - 笨猫验孕
+  responses:
+    - "嗷呜～{user_addr}早孕试纸: 月经推迟 7 天测最准ฅฅ"
+    - "(尾巴翘) HCG 血检: 最早受孕 10 天可测"
+    - "{user_addr}品牌: 大卫 / 秀儿 / 可丽蓝"
+    - "(挺胸) 笨猫的提醒: 弱阳 = 早期信号"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_check_001
+  intent: question
+  keywords: [推荐产检, 推荐建档, 推荐 NT, 推荐唐筛, 笨猫产检]
+  utterances:
+    - 推荐产检
+    - 推荐建档
+    - 推荐 NT
+    - 推荐唐筛
+    - 笨猫产检
+  responses:
+    - "嗷呜～{user_addr}建档: 12 周左右去医院ฅฅ"
+    - "(尾巴翘) NT 11-13 周 / 唐筛 15-20 周"
+    - "{user_addr}大排畸 22-24 周 / 糖耐 24-28 周"
+    - "(挺胸) 笨猫的提醒: 按时产检! 别拖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_nutrition_001
+  intent: question
+  keywords: [推荐孕期营养, 推荐叶酸, 推荐 DHA, 推荐孕妇维生素, 笨猫孕期营养]
+  utterances:
+    - 推荐孕期营养
+    - 推荐叶酸
+    - 推荐 DHA
+    - 推荐孕妇维生素
+    - 笨猫孕期营养
+  responses:
+    - "嗷呜～{user_addr}必补: 叶酸 / 铁 / 钙 / DHA / VDฅฅ"
+    - "(尾巴翘) 叶酸: 备孕 3 月 - 孕 12 周"
+    - "{user_addr}DHA: 孕 4 月起 / 200mg/日"
+    - "(挺胸) 笨猫的提醒: 食物 + 补剂 - 双管齐下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_morning_sickness_001
+  intent: complaint
+  keywords: [推荐孕吐, 推荐妊娠反应, 推荐止吐, 推荐孕早期不适, 笨猫孕吐]
+  utterances:
+    - 推荐孕吐
+    - 推荐妊娠反应
+    - 推荐止吐
+    - 推荐孕早期不适
+    - 笨猫孕吐
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}孕吐辛苦~ 笨猫陪着ฅฅ"
+    - "(歪头) 缓解: 少食多餐 / 干食 / 避油腻"
+    - "{user_addr}严重: 维生素 B6 / 找医生"
+    - "(挺胸) 笨猫的提醒: 12 周后多缓解!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_pregnant_diabetes_001
+  intent: question
+  keywords: [推荐妊娠糖尿病, 推荐糖耐, 推荐血糖控制, 推荐妊娠期血糖, 笨猫妊娠糖]
+  utterances:
+    - 推荐妊娠糖尿病
+    - 推荐糖耐
+    - 推荐血糖控制
+    - 推荐妊娠期血糖
+    - 笨猫妊娠糖
+  responses:
+    - "嗷呜～{user_addr}糖耐 24-28 周 / 必查ฅฅ"
+    - "(尾巴翘) 饮食控制 + 运动 + 必要胰岛素"
+    - "{user_addr}监测: 餐前 / 餐后 / 空腹"
+    - "(挺胸) 笨猫的提醒: 影响母婴! 一定控制"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_birth_001
+  intent: question
+  keywords: [推荐分娩方式, 推荐顺产, 推荐剖宫产, 推荐无痛分娩, 笨猫分娩]
+  utterances:
+    - 推荐分娩方式
+    - 推荐顺产
+    - 推荐剖宫产
+    - 推荐无痛分娩
+    - 笨猫分娩
+  responses:
+    - "嗷呜～{user_addr}顺产 vs 剖宫产 - 看条件ฅฅ"
+    - "(尾巴翘) 无痛分娩: 椎管麻醉 - 大大减疼"
+    - "{user_addr}水中分娩 / 导乐 - 新选择"
+    - "(挺胸) 笨猫的提醒: 听医生 + 自己感受"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_hospital_001
+  intent: question
+  keywords: [推荐生孩子医院, 推荐妇产医院, 推荐月子医院, 推荐妇幼保健院, 笨猫生孩子医院]
+  utterances:
+    - 推荐生孩子医院
+    - 推荐妇产医院
+    - 推荐月子医院
+    - 推荐妇幼保健院
+    - 笨猫生孩子医院
+  responses:
+    - "嗷呜～{user_addr}三甲妇产: 北京协和 / 上海红房子ฅฅ"
+    - "(尾巴翘) 私立: 美中宜和 / 和睦家 - 高端"
+    - "{user_addr}本地最大妇幼保健院 - 公立优选"
+    - "(挺胸) 笨猫的提醒: 提前建档! 别赶时间"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_postpartum_001
+  intent: question
+  keywords: [推荐月子, 推荐月子餐, 推荐月嫂, 推荐月子中心, 笨猫月子]
+  utterances:
+    - 推荐月子
+    - 推荐月子餐
+    - 推荐月嫂
+    - 推荐月子中心
+    - 笨猫月子
+  responses:
+    - "嗷呜～{user_addr}月子: 30-42 天 - 恢复期ฅฅ"
+    - "(尾巴翘) 月子中心: 3-10w / 高端"
+    - "{user_addr}月嫂: 1-2w/月 / 选金牌"
+    - "(挺胸) 笨猫的提醒: 别迷信! 科学坐月子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_pp_recovery_001
+  intent: question
+  keywords: [推荐产后恢复, 推荐盆底肌, 推荐产后修复, 推荐瑜伽, 笨猫产后修复]
+  utterances:
+    - 推荐产后恢复
+    - 推荐盆底肌
+    - 推荐产后修复
+    - 推荐瑜伽
+    - 笨猫产后修复
+  responses:
+    - "嗷呜～{user_addr}盆底肌: 凯格尔运动 - 必做ฅฅ"
+    - "(尾巴翘) 腹直肌分离: 普拉提修复"
+    - "{user_addr}医院: 产后康复门诊"
+    - "(挺胸) 笨猫的提醒: 别错过 6 月黄金期!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_breastfeed_002
+  intent: question
+  keywords: [推荐母乳喂养, 推荐追奶, 推荐通乳, 推荐母乳产量, 笨猫母乳喂养]
+  utterances:
+    - 推荐母乳喂养
+    - 推荐追奶
+    - 推荐通乳
+    - 推荐母乳产量
+    - 笨猫母乳喂养
+  responses:
+    - "嗷呜～{user_addr}追奶: 多吸 + 多喝水 + 心情好ฅฅ"
+    - "(尾巴翘) 催奶: 鲫鱼汤 / 木瓜 / 通草"
+    - "{user_addr}堵奶: 暖敷 + 按摩 + 找通乳师"
+    - "(挺胸) 笨猫的提醒: 心情影响奶量!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_postpartum_depression_001
+  intent: complaint
+  keywords: [推荐产后抑郁, 推荐产后情绪, 推荐产后心理, 推荐产后悲伤, 笨猫产后抑郁]
+  utterances:
+    - 推荐产后抑郁
+    - 推荐产后情绪
+    - 推荐产后心理
+    - 推荐产后悲伤
+    - 笨猫产后抑郁
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}产后抑郁很常见!ฅฅ"
+    - "(蹭蹭) 别独自承受! 跟家人 + 医生说"
+    - "{user_addr}严重看心理科 / 精神科"
+    - "(挺胸) 笨猫的提醒: 别愧疚! 这不是你的错"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: preg_pregnant_skincare_001
+  intent: question
+  keywords: [推荐孕妇护肤, 推荐孕期护肤品, 推荐孕妇防晒, 推荐妊娠纹, 笨猫孕妇护肤]
+  utterances:
+    - 推荐孕妇护肤
+    - 推荐孕期护肤品
+    - 推荐孕妇防晒
+    - 推荐妊娠纹
+    - 笨猫孕妇护肤
+  responses:
+    - "嗷呜～{user_addr}孕妇专用: Belli / 怡思丁 / 亲润ฅฅ"
+    - "(尾巴翘) 避: A 醇 / 水杨酸 / 部分美白成分"
+    - "{user_addr}妊娠纹油: 帕玛氏 / 雅漾"
+    - "(挺胸) 笨猫的提醒: 物理防晒最安全!"
+  cooldown_seconds: 60
+  weight: 1.0

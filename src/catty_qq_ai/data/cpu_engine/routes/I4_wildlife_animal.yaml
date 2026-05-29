@@ -1,0 +1,207 @@
+# 野生动物 / 濒危物种 / 海洋生物 routes (S6 R106 NLU 节点扩充, 第十周期 buffered 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 89 pet_animal (家养) / C4 pet_care 区分: 这里专注野生动物.
+
+- name: wild_panda_001
+  intent: question
+  keywords: [推荐熊猫, 推荐大熊猫, 推荐 panda, 推荐成都熊猫基地, 笨猫熊猫]
+  utterances:
+    - 推荐熊猫
+    - 推荐大熊猫
+    - 推荐 panda
+    - 推荐成都熊猫基地
+    - 笨猫熊猫
+  responses:
+    - "嗷呜～{user_addr}国宝! 现存 2000+ 只 - 易危物种ฅฅ"
+    - "(尾巴翘) 主食: 99% 竹子 / 偶尔肉"
+    - "{user_addr}成都基地 + 卧龙 - 必去!"
+    - "(挺胸) 笨猫的提醒: 别打扰野生熊猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wild_tiger_001
+  intent: question
+  keywords: [推荐老虎, 推荐东北虎, 推荐华南虎, 推荐 tiger, 笨猫老虎]
+  utterances:
+    - 推荐老虎
+    - 推荐东北虎
+    - 推荐华南虎
+    - 推荐 tiger
+    - 笨猫老虎
+  responses:
+    - "嗷呜～{user_addr}虎: 百兽之王! 6 个亚种ฅฅ"
+    - "(尾巴翘) 东北虎: 最大 / 现存 600+"
+    - "{user_addr}华南虎: 中国特有 / 野外可能灭绝"
+    - "(挺胸) 笨猫的提醒: 全球野生虎 3900 只"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wild_lion_001
+  intent: question
+  keywords: [推荐狮子, 推荐非洲狮, 推荐亚洲狮, 推荐 lion, 笨猫狮子]
+  utterances:
+    - 推荐狮子
+    - 推荐非洲狮
+    - 推荐亚洲狮
+    - 推荐 lion
+    - 笨猫狮子
+  responses:
+    - "嗷呜～{user_addr}狮子: 草原之王 / 唯一群居大型猫科ฅฅ"
+    - "(尾巴翘) 非洲狮: 20w+ 只 / 易危"
+    - "{user_addr}亚洲狮: 仅印度森林 / 千只"
+    - "(挺胸) 笨猫推荐: 看 BBC 非洲纪录片"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wild_whale_001
+  intent: question
+  keywords: [推荐鲸鱼, 推荐蓝鲸, 推荐鲸豚保护, 推荐座头鲸, 笨猫鲸鱼]
+  utterances:
+    - 推荐鲸鱼
+    - 推荐蓝鲸
+    - 推荐鲸豚保护
+    - 推荐座头鲸
+    - 笨猫鲸鱼
+  responses:
+    - "嗷呜～{user_addr}蓝鲸: 史上最大动物 / 30m+ฅฅ"
+    - "(尾巴翘) 座头鲸 唱歌 / 抹香鲸 深潜"
+    - "{user_addr}鲸落: 大鲸死后 - 海底生态"
+    - "(挺胸) 笨猫的提醒: 别支持鲸肉消费!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wild_shark_001
+  intent: question
+  keywords: [推荐鲨鱼, 推荐大白鲨, 推荐鲨鱼物种, 推荐 shark, 笨猫鲨鱼]
+  utterances:
+    - 推荐鲨鱼
+    - 推荐大白鲨
+    - 推荐鲨鱼物种
+    - 推荐 shark
+    - 笨猫鲨鱼
+  responses:
+    - "嗷呜～{user_addr}鲨鱼: 4 亿年生物 / 500+ 物种ฅฅ"
+    - "(尾巴翘) 大白鲨 / 虎鲨 / 鲸鲨 (温和)"
+    - "{user_addr}鱼翅汤 = 杀鲨! 别吃"
+    - "(挺胸) 笨猫的提醒: 鲨鱼对人类袭击稀有"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wild_dolphin_001
+  intent: question
+  keywords: [推荐海豚, 推荐 dolphin, 推荐虎鲸, 推荐白海豚, 笨猫海豚]
+  utterances:
+    - 推荐海豚
+    - 推荐 dolphin
+    - 推荐虎鲸
+    - 推荐白海豚
+    - 笨猫海豚
+  responses:
+    - "嗷呜～{user_addr}海豚: 高智商 / 复杂社会行为ฅฅ"
+    - "(尾巴翘) 虎鲸: 杀手鲸 / 最大海豚科"
+    - "{user_addr}中华白海豚: 珠江口 / 国家一级"
+    - "(挺胸) 笨猫的提醒: 别去海豚表演!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wild_elephant_001
+  intent: question
+  keywords: [推荐大象, 推荐非洲象, 推荐亚洲象, 推荐 elephant, 笨猫大象]
+  utterances:
+    - 推荐大象
+    - 推荐非洲象
+    - 推荐亚洲象
+    - 推荐 elephant
+    - 笨猫大象
+  responses:
+    - "嗷呜～{user_addr}陆地最大动物! 非洲象 / 亚洲象ฅฅ"
+    - "(尾巴翘) 高智商 / 复杂情感 / 长寿"
+    - "{user_addr}象牙 = 杀象! 别买象牙制品"
+    - "(挺胸) 笨猫的提醒: 云南野生亚洲象 - 中国唯一"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wild_bird_001
+  intent: question
+  keywords: [推荐鸟类, 推荐观鸟, 推荐迁徙, 推荐丹顶鹤, 笨猫观鸟]
+  utterances:
+    - 推荐鸟类
+    - 推荐观鸟
+    - 推荐迁徙
+    - 推荐丹顶鹤
+    - 笨猫观鸟
+  responses:
+    - "嗷呜～{user_addr}国宝: 丹顶鹤 / 朱鹮 / 大鸨ฅฅ"
+    - "(尾巴翘) 迁徙: 东亚-澳大利亚通道"
+    - "{user_addr}观鸟: 望远镜 + 鸟类指南"
+    - "(挺胸) 笨猫推荐: 看《最后的迁徙》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wild_reptile_001
+  intent: question
+  keywords: [推荐爬行动物, 推荐蛇, 推荐鳄鱼, 推荐变色龙, 笨猫爬行动物]
+  utterances:
+    - 推荐爬行动物
+    - 推荐蛇
+    - 推荐鳄鱼
+    - 推荐变色龙
+    - 笨猫爬行动物
+  responses:
+    - "嗷呜～{user_addr}主要类型: 蛇 / 蜥 / 龟 / 鳄鱼ฅฅ"
+    - "(尾巴翘) 毒蛇: 眼镜王蛇 / 黑曼巴 / 银环"
+    - "{user_addr}科莫多巨蜥: 最大蜥蜴 / 印尼"
+    - "(挺胸) 笨猫的提醒: 别野外抓!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: wild_endangered_001
+  intent: question
+  keywords: [推荐濒危物种, 推荐保护动物, 推荐 WWF, 推荐 IUCN, 笨猫濒危物种]
+  utterances:
+    - 推荐濒危物种
+    - 推荐保护动物
+    - 推荐 WWF
+    - 推荐 IUCN
+    - 笨猫濒危物种
+  responses:
+    - "嗷呜～{user_addr}IUCN 红色名录: 极危 → 濒危 → 易危ฅฅ"
+    - "(尾巴翘) 国宝: 大熊猫 / 朱鹮 / 中华白海豚"
+    - "{user_addr}国际: 北极熊 / 山地大猩猩 / 苏门答腊虎"
+    - "(挺胸) 笨猫的提醒: 每个物种都值得保护!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wild_safari_001
+  intent: question
+  keywords: [推荐 safari, 推荐非洲狩猎旅行, 推荐肯尼亚, 推荐塞伦盖蒂, 笨猫 safari]
+  utterances:
+    - 推荐 safari
+    - 推荐非洲狩猎旅行
+    - 推荐肯尼亚
+    - 推荐塞伦盖蒂
+    - 笨猫 safari
+  responses:
+    - "嗷呜～{user_addr}肯尼亚 / 坦桑尼亚 - safari 圣地ฅฅ"
+    - "(尾巴翘) 塞伦盖蒂大迁徙 7-8 月最佳"
+    - "{user_addr}5 大: 狮 / 豹 / 象 / 犀 / 水牛"
+    - "(挺胸) 笨猫的提醒: 别去打猎 safari!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wild_zoo_001
+  intent: question
+  keywords: [推荐动物园, 推荐野生动物园, 推荐圈养, 推荐保护中心, 笨猫动物园]
+  utterances:
+    - 推荐动物园
+    - 推荐野生动物园
+    - 推荐圈养
+    - 推荐保护中心
+    - 笨猫动物园
+  responses:
+    - "嗷呜～{user_addr}北京 / 上海野生动物园 - 大型ฅฅ"
+    - "(尾巴翘) 现代动物园 = 物种保护中心"
+    - "{user_addr}避免: 海洋公园 / 表演动物"
+    - "(挺胸) 笨猫的提醒: 支持伦理动物园!"
+  cooldown_seconds: 60
+  weight: 0.9

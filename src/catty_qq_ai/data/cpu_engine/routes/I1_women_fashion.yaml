@@ -1,0 +1,207 @@
+# 女装 / 连衣裙 / 职业装 / 通勤穿搭 routes (S6 R103 NLU 节点扩充, 第十周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B7 fashion_style (混合) 区分: 这里专注女装.
+
+- name: women_dress_001
+  intent: question
+  keywords: [推荐连衣裙, 推荐小黑裙, 推荐法式连衣裙, 推荐茶歇裙, 笨猫连衣裙]
+  utterances:
+    - 推荐连衣裙
+    - 推荐小黑裙
+    - 推荐法式连衣裙
+    - 推荐茶歇裙
+    - 笨猫连衣裙
+  responses:
+    - "嗷呜～{user_addr}小黑裙: 永远经典 / 香奶奶发明ฅฅ"
+    - "(尾巴翘) 法式: Sezane / Rouje / Maje"
+    - "{user_addr}茶歇 / 雪纺 / 一字肩 - 多款式"
+    - "(挺胸) 笨猫的提醒: 收腰款显瘦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: women_skirt_001
+  intent: question
+  keywords: [推荐半身裙, 推荐 A 字裙, 推荐百褶裙, 推荐铅笔裙, 笨猫半身裙]
+  utterances:
+    - 推荐半身裙
+    - 推荐 A 字裙
+    - 推荐百褶裙
+    - 推荐铅笔裙
+    - 笨猫半身裙
+  responses:
+    - "嗷呜～{user_addr}A 字裙: 显瘦遮腿百搭ฅฅ"
+    - "(尾巴翘) 铅笔裙: 职场利器"
+    - "{user_addr}百褶: 学院风 / 半身长裙浪漫"
+    - "(挺胸) 笨猫推荐: 高腰款显腿长!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: women_pants_001
+  intent: question
+  keywords: [推荐阔腿裤, 推荐高腰裤, 推荐烟管裤, 推荐九分裤, 笨猫女士裤子]
+  utterances:
+    - 推荐阔腿裤
+    - 推荐高腰裤
+    - 推荐烟管裤
+    - 推荐九分裤
+    - 笨猫女士裤子
+  responses:
+    - "嗷呜～{user_addr}阔腿裤: 显瘦显高 / 万能ฅฅ"
+    - "(尾巴翘) 烟管裤: 职场知性"
+    - "{user_addr}九分裤: 显瘦露脚踝"
+    - "(挺胸) 笨猫的提醒: 高腰显腿长!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: women_shirt_001
+  intent: question
+  keywords: [推荐女士衬衫, 推荐法式衬衫, 推荐白衬衫女, 推荐丝绸衬衫, 笨猫女士衬衫]
+  utterances:
+    - 推荐女士衬衫
+    - 推荐法式衬衫
+    - 推荐白衬衫女
+    - 推荐丝绸衬衫
+    - 笨猫女士衬衫
+  responses:
+    - "嗷呜～{user_addr}经典: 白衬衫 - 通勤百搭ฅฅ"
+    - "(尾巴翘) 法式: Sezane / 当娜卡兰"
+    - "{user_addr}丝绸: 优雅高级感"
+    - "(挺胸) 笨猫的提醒: 半透明的不适合正式场合!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: women_blazer_001
+  intent: question
+  keywords: [推荐女士西装, 推荐小西装, 推荐西装外套, 推荐双排扣, 笨猫女士西装]
+  utterances:
+    - 推荐女士西装
+    - 推荐小西装
+    - 推荐西装外套
+    - 推荐双排扣
+    - 笨猫女士西装
+  responses:
+    - "嗷呜～{user_addr}入门: ZARA / COS / Massimo Duttiฅฅ"
+    - "(尾巴翘) 高端: Theory / Max Mara / Brunello"
+    - "{user_addr}显瘦修身收腰 / 廓形宽松"
+    - "(挺胸) 笨猫推荐: 白衬衫 + 西装 - 永远 OK"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: women_shoes_001
+  intent: question
+  keywords: [推荐女士鞋, 推荐高跟鞋, 推荐 Christian Louboutin, 推荐尖头鞋, 笨猫女士鞋]
+  utterances:
+    - 推荐女士鞋
+    - 推荐高跟鞋
+    - 推荐 Christian Louboutin
+    - 推荐尖头鞋
+    - 笨猫女士鞋
+  responses:
+    - "嗷呜～{user_addr}顶级: CL 红底 / Manolo Blahnik / Jimmy Chooฅฅ"
+    - "(尾巴翘) 入门: Charles Keith / 思加图"
+    - "{user_addr}5-7cm 跟最舒适 / 显瘦"
+    - "(挺胸) 笨猫的提醒: 备双平底鞋上班!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: women_bag_lux_001
+  intent: question
+  keywords: [推荐女士奢侈品包, 推荐 LV Speedy, 推荐 Chanel CF, 推荐 Gucci Marmont, 笨猫奢侈品包]
+  utterances:
+    - 推荐女士奢侈品包
+    - 推荐 LV Speedy
+    - 推荐 Chanel CF
+    - 推荐 Gucci Marmont
+    - 笨猫奢侈品包
+  responses:
+    - "嗷呜～{user_addr}入门: Tory Burch / Coach - 千元级ฅฅ"
+    - "(尾巴翘) 中端: Polène / Cuyana / 莱姆斯"
+    - "{user_addr}高端: Chanel / Hermes / Dior"
+    - "(挺胸) 笨猫的提醒: 1 个大牌 vs 几个中端!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: women_bra_001
+  intent: question
+  keywords: [推荐内衣, 推荐 bra, 推荐内裤, 推荐塑身衣, 笨猫内衣]
+  utterances:
+    - 推荐内衣
+    - 推荐 bra
+    - 推荐内裤
+    - 推荐塑身衣
+    - 笨猫内衣
+  responses:
+    - "嗷呜～{user_addr}主流: 维秘 / La Perla / 优衣库 - 各价位ฅฅ"
+    - "(尾巴翘) 国货: 都市丽人 / 安莉芳 / 婷美"
+    - "{user_addr}无钢圈 / 运动 / 蕾丝 - 多功能"
+    - "(挺胸) 笨猫的提醒: 测量再买! 别将就"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: women_lingerie_001
+  intent: question
+  keywords: [推荐家居服, 推荐睡衣女, 推荐丝绸睡衣, 推荐雪纺睡裙, 笨猫女士睡衣]
+  utterances:
+    - 推荐家居服
+    - 推荐睡衣女
+    - 推荐丝绸睡衣
+    - 推荐雪纺睡裙
+    - 笨猫女士睡衣
+  responses:
+    - "嗷呜～{user_addr}入门: 蕉内 / 内外 / 丽柏国际ฅฅ"
+    - "(尾巴翘) 高端: 真丝睡衣 - Olivia von Halle"
+    - "{user_addr}舒适 + 透气 + 颜值 - 三要素"
+    - "(挺胸) 笨猫推荐: 真丝睡衣 - 高品质生活"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: women_jewelry_001
+  intent: question
+  keywords: [推荐项链, 推荐手链, 推荐耳环, 推荐叠戴, 笨猫项链]
+  utterances:
+    - 推荐项链
+    - 推荐手链
+    - 推荐耳环
+    - 推荐叠戴
+    - 笨猫项链
+  responses:
+    - "嗷呜～{user_addr}入门: APM / Pandora / Apm Monaco - 千元ฅฅ"
+    - "(尾巴翘) 高端: Cartier / Bvlgari / Van Cleef"
+    - "{user_addr}叠戴: 多层 / 不同长度 / 同色系"
+    - "(挺胸) 笨猫的提醒: 别一身亮闪闪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: women_winter_002
+  intent: question
+  keywords: [推荐女士羽绒服, 推荐加拿大鹅, 推荐 Moncler, 推荐波司登, 笨猫羽绒服]
+  utterances:
+    - 推荐女士羽绒服
+    - 推荐加拿大鹅
+    - 推荐 Moncler
+    - 推荐波司登
+    - 笨猫羽绒服
+  responses:
+    - "嗷呜～{user_addr}加鹅: 加拿大极地科学家最爱ฅฅ"
+    - "(尾巴翘) Moncler: 意大利轻奢"
+    - "{user_addr}国货: 波司登高端化 / 海澜入门"
+    - "(挺胸) 笨猫的提醒: 蓬松度 700+ 才暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: women_office_001
+  intent: question
+  keywords: [推荐通勤穿搭, 推荐女士职业装, 推荐 OL 风, 推荐知性穿搭, 笨猫职业装]
+  utterances:
+    - 推荐通勤穿搭
+    - 推荐女士职业装
+    - 推荐 OL 风
+    - 推荐知性穿搭
+    - 笨猫职业装
+  responses:
+    - "嗷呜～{user_addr}基本款: 衬衫 + 半身裙 / 西装 + 阔腿裤ฅฅ"
+    - "(尾巴翘) 配色: 黑白灰 + 1 抹亮"
+    - "{user_addr}必备: 西装 / 衬衫 / 高跟 / 包"
+    - "(挺胸) 笨猫的提醒: 别太低胸短裙!"
+  cooldown_seconds: 60
+  weight: 1.0

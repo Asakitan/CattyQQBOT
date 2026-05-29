@@ -1,0 +1,207 @@
+# 男装 / 西装 / 正装 / 休闲穿搭 routes (S6 R102 NLU 节点扩充, 第十周期 buffered 1/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B7 fashion_style (混合) 区分: 这里专注男装.
+
+- name: men_suit_001
+  intent: question
+  keywords: [推荐男士西装, 推荐西服定制, 推荐西装品牌, 推荐 suit, 笨猫西装]
+  utterances:
+    - 推荐男士西装
+    - 推荐西服定制
+    - 推荐西装品牌
+    - 推荐 suit
+    - 笨猫西装
+  responses:
+    - "嗷呜～{user_addr}入门: 海澜之家 / 杉杉 - 千元级ฅฅ"
+    - "(尾巴翘) 中高: BOSS / Armani / Canali - 万元"
+    - "{user_addr}顶级: Brioni / Kiton - 5w+ 定制"
+    - "(挺胸) 笨猫的提醒: 量身定做 > 成衣!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: men_shoes_001
+  intent: question
+  keywords: [推荐男士皮鞋, 推荐 Oxford, 推荐 Loake, 推荐 Allen Edmonds, 笨猫男士皮鞋]
+  utterances:
+    - 推荐男士皮鞋
+    - 推荐 Oxford
+    - 推荐 Loake
+    - 推荐 Allen Edmonds
+    - 笨猫男士皮鞋
+  responses:
+    - "嗷呜～{user_addr}入门: Clarks / Geox - 舒适ฅฅ"
+    - "(尾巴翘) 中端: Allen Edmonds / Loake - 英美范"
+    - "{user_addr}顶级: John Lobb / Edward Green - 手工"
+    - "(挺胸) 笨猫的提醒: 牛津鞋最正式 / 德比鞋休闲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: men_watch_001
+  intent: question
+  keywords: [推荐男士手表, 推荐机械男表, 推荐入门男表, 推荐西铁城, 笨猫男表]
+  utterances:
+    - 推荐男士手表
+    - 推荐机械男表
+    - 推荐入门男表
+    - 推荐西铁城
+    - 笨猫男表
+  responses:
+    - "嗷呜～{user_addr}入门: 西铁城 / 卡西欧 - 1-3kฅฅ"
+    - "(尾巴翘) 中端: 浪琴 / 美度 / 雪铁纳 - 1-2w"
+    - "{user_addr}高端: 万国 / 欧米茄 / 劳力士 - 5w+"
+    - "(挺胸) 笨猫推荐: 商务腕表选黑表带"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: men_shirt_001
+  intent: question
+  keywords: [推荐男士衬衫, 推荐衬衫品牌, 推荐意大利衬衫, 推荐 OCBD, 笨猫男衬衫]
+  utterances:
+    - 推荐男士衬衫
+    - 推荐衬衫品牌
+    - 推荐意大利衬衫
+    - 推荐 OCBD
+    - 笨猫男衬衫
+  responses:
+    - "嗷呜～{user_addr}入门: 海蓝之谜衬衫 / 优衣库ฅฅ"
+    - "(尾巴翘) 中高: Brooks Brothers / TM Lewin"
+    - "{user_addr}顶级: Eton / Charvet - 手工"
+    - "(挺胸) 笨猫的提醒: 白蓝白蓝白 - 经典 5 件"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: men_polo_001
+  intent: question
+  keywords: [推荐 Polo 衫, 推荐男士 T 恤, 推荐 Ralph Lauren, 推荐 Lacoste, 笨猫 Polo]
+  utterances:
+    - 推荐 Polo 衫
+    - 推荐男士 T 恤
+    - 推荐 Ralph Lauren
+    - 推荐 Lacoste
+    - 笨猫 Polo
+  responses:
+    - "嗷呜～{user_addr}经典: Ralph Lauren / Lacoste - 老钱风ฅฅ"
+    - "(尾巴翘) 入门: 优衣库 / Banana Republic"
+    - "{user_addr}夏季商务休闲必备"
+    - "(挺胸) 笨猫的提醒: Logo 别太大!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: men_jeans_001
+  intent: question
+  keywords: [推荐男士牛仔裤, 推荐 Levi's, 推荐日本牛仔裤, 推荐丹宁, 笨猫牛仔裤]
+  utterances:
+    - 推荐男士牛仔裤
+    - 推荐 Levi's
+    - 推荐日本牛仔裤
+    - 推荐丹宁
+    - 笨猫牛仔裤
+  responses:
+    - "嗷呜～{user_addr}入门: Levi's 501 / 511 - 经典款ฅฅ"
+    - "(尾巴翘) 日牛: Momotaro / Iron Heart - 顶级"
+    - "{user_addr}修身 / 直筒 / Loose - 选体型"
+    - "(挺胸) 笨猫的提醒: 原色牛仔养出包浆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: men_coat_001
+  intent: question
+  keywords: [推荐男士大衣, 推荐风衣, 推荐 Burberry, 推荐羊绒大衣, 笨猫男大衣]
+  utterances:
+    - 推荐男士大衣
+    - 推荐风衣
+    - 推荐 Burberry
+    - 推荐羊绒大衣
+    - 笨猫男大衣
+  responses:
+    - "嗷呜～{user_addr}风衣经典: Burberry / Aquascutum - 老牌ฅฅ"
+    - "(尾巴翘) 羊绒大衣: Loro Piana / Brunello"
+    - "{user_addr}入门: 海蓝之谜 / 苏太 - 千元"
+    - "(挺胸) 笨猫的提醒: 卡其色风衣百搭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: men_sneaker_001
+  intent: question
+  keywords: [推荐男士球鞋, 推荐 Nike, 推荐 New Balance, 推荐潮鞋, 笨猫男士球鞋]
+  utterances:
+    - 推荐男士球鞋
+    - 推荐 Nike
+    - 推荐 New Balance
+    - 推荐潮鞋
+    - 笨猫男士球鞋
+  responses:
+    - "嗷呜～{user_addr}经典: AJ / Air Force / Dunk / NB 990ฅฅ"
+    - "(尾巴翘) 跑鞋: Adidas Boost / Nike React"
+    - "{user_addr}国货: 安踏 / 李宁 / 特步 - 性价比"
+    - "(挺胸) 笨猫的提醒: 别买太多! 5-8 双轮换"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: men_tie_001
+  intent: question
+  keywords: [推荐领带, 推荐 Hermes 领带, 推荐打领带, 推荐领结, 笨猫领带]
+  utterances:
+    - 推荐领带
+    - 推荐 Hermes 领带
+    - 推荐打领带
+    - 推荐领结
+    - 笨猫领带
+  responses:
+    - "嗷呜～{user_addr}顶级: Hermes / Charvet / Zegnaฅฅ"
+    - "(尾巴翘) 打法: 四手结 / 温莎结 / 半温莎"
+    - "{user_addr}颜色: 红 (热情) / 蓝 (沉稳) / 黑 (正式)"
+    - "(挺胸) 笨猫的提醒: 长度到皮带扣!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: men_grooming_001
+  intent: question
+  keywords: [推荐男士护肤, 推荐男士剃须, 推荐男士香水, 推荐男士发型, 笨猫男士护理]
+  utterances:
+    - 推荐男士护肤
+    - 推荐男士剃须
+    - 推荐男士香水
+    - 推荐男士发型
+    - 笨猫男士护理
+  responses:
+    - "嗷呜～{user_addr}护肤 4 步: 洁面 + 爽肤 + 精华 + 防晒ฅฅ"
+    - "(尾巴翘) 香水: 木质调 / 海洋调 - 商务"
+    - "{user_addr}剃须: 飞利浦 / 博朗 - 电动主流"
+    - "(挺胸) 笨猫的提醒: 男生也要护肤!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: men_belt_001
+  intent: question
+  keywords: [推荐男士皮带, 推荐 Hermes 皮带, 推荐皮带品牌, 推荐 LV 皮带, 笨猫男士皮带]
+  utterances:
+    - 推荐男士皮带
+    - 推荐 Hermes 皮带
+    - 推荐皮带品牌
+    - 推荐 LV 皮带
+    - 笨猫男士皮带
+  responses:
+    - "嗷呜～{user_addr}入门: 金利来 / 七匹狼 - 千元ฅฅ"
+    - "(尾巴翘) 奢品: Hermes / Ferragamo / Gucci"
+    - "{user_addr}皮带颜色与鞋同色! 黑配黑 / 棕配棕"
+    - "(挺胸) 笨猫的提醒: 别太大 logo!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: men_business_001
+  intent: question
+  keywords: [推荐男士商务穿搭, 推荐职场男装, 推荐面试穿什么, 推荐男士正装, 笨猫商务男装]
+  utterances:
+    - 推荐男士商务穿搭
+    - 推荐职场男装
+    - 推荐面试穿什么
+    - 推荐男士正装
+    - 笨猫商务男装
+  responses:
+    - "嗷呜～{user_addr}商务: 西装 + 衬衫 + 领带 + 皮鞋ฅฅ"
+    - "(尾巴翘) 商务休闲: Polo + 西裤 + 乐福鞋"
+    - "{user_addr}面试: 中性色 / 简洁 / 整洁"
+    - "(挺胸) 笨猫的提醒: 别穿运动鞋上班!"
+  cooldown_seconds: 60
+  weight: 1.0

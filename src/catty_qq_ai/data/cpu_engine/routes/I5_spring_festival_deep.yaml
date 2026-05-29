@@ -1,0 +1,207 @@
+# 春节年俗 / 年夜饭 / 红包 / 春运 routes (S6 R107 NLU 节点扩充, 第十周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A6 festival_tradition (浅触春节) 区分: 这里专注春节细节.
+
+- name: cny_chunyun_001
+  intent: question
+  keywords: [推荐春运抢票, 推荐 12306, 推荐春运, 推荐高铁回家, 笨猫春运]
+  utterances:
+    - 推荐春运抢票
+    - 推荐 12306
+    - 推荐春运
+    - 推荐高铁回家
+    - 笨猫春运
+  responses:
+    - "嗷呜～{user_addr}春运 40 天 / 全球最大迁徙ฅฅ"
+    - "(尾巴翘) 12306: 提前 15 天放票 / 7 点抢"
+    - "{user_addr}买票: 智行 / 携程 - 抢票 app"
+    - "(挺胸) 笨猫的提醒: 候补排队最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cny_dinner_001
+  intent: question
+  keywords: [推荐年夜饭, 推荐年夜饭菜单, 推荐年夜饭餐厅, 推荐年夜饭菜谱, 笨猫年夜饭]
+  utterances:
+    - 推荐年夜饭
+    - 推荐年夜饭菜单
+    - 推荐年夜饭餐厅
+    - 推荐年夜饭菜谱
+    - 笨猫年夜饭
+  responses:
+    - "嗷呜～{user_addr}必有: 鱼 (年年有余) / 饺子 (元宝)ฅฅ"
+    - "(尾巴翘) 八凉八热 / 8 寓意 - 经典"
+    - "{user_addr}北方 饺子 / 南方 汤圆"
+    - "(挺胸) 笨猫的提醒: 一家人团圆最重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cny_red_packet_001
+  intent: question
+  keywords: [推荐红包, 推荐压岁钱, 推荐微信红包, 推荐发红包, 笨猫红包]
+  utterances:
+    - 推荐红包
+    - 推荐压岁钱
+    - 推荐微信红包
+    - 推荐发红包
+    - 笨猫红包
+  responses:
+    - "嗷呜～{user_addr}红包传统: 长辈给晚辈 - 压岁钱ฅฅ"
+    - "(尾巴翘) 数字: 666 / 888 / 1314 / 5200 - 吉利"
+    - "{user_addr}微信红包: 1.01 元起 - 福气"
+    - "(挺胸) 笨猫的提醒: 别比金额! 心意为主"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cny_bainian_001
+  intent: question
+  keywords: [推荐拜年, 推荐拜年话, 推荐过年问候, 推荐祝福语, 笨猫拜年]
+  utterances:
+    - 推荐拜年
+    - 推荐拜年话
+    - 推荐过年问候
+    - 推荐祝福语
+    - 笨猫拜年
+  responses:
+    - "嗷呜～{user_addr}经典: 新年快乐 / 恭喜发财 / 万事如意ฅฅ"
+    - "(尾巴翘) 长辈: 身体健康 / 福如东海"
+    - "{user_addr}朋友: 工作顺利 / 升职加薪 / 早生贵子"
+    - "(挺胸) 笨猫推荐: 主人新年快乐! 笨猫陪您"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cny_couplet_001
+  intent: question
+  keywords: [推荐春联, 推荐对联, 推荐福字, 推荐窗花, 笨猫春联]
+  utterances:
+    - 推荐春联
+    - 推荐对联
+    - 推荐福字
+    - 推荐窗花
+    - 笨猫春联
+  responses:
+    - "嗷呜～{user_addr}贴: 春联 + 福字 + 窗花 - 三件套ฅฅ"
+    - "(尾巴翘) 福字: 倒贴 = 福到了"
+    - "{user_addr}春联: 上联 (尾仄声) / 下联 (尾平声)"
+    - "(挺胸) 笨猫的提醒: 大年三十贴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cny_zodiac_001
+  intent: question
+  keywords: [推荐生肖, 推荐属相, 推荐本命年, 推荐 12 生肖, 笨猫生肖]
+  utterances:
+    - 推荐生肖
+    - 推荐属相
+    - 推荐本命年
+    - 推荐 12 生肖
+    - 笨猫生肖
+  responses:
+    - "嗷呜～{user_addr}12 生肖: 鼠牛虎兔龙蛇马羊猴鸡狗猪ฅฅ"
+    - "(尾巴翘) 本命年: 红绳 / 红衣 - 辟邪"
+    - "{user_addr}十二生肖文化 / 农历对应"
+    - "(挺胸) 笨猫的提醒: 笨猫是猫娘! 不在生肖里"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cny_food_001
+  intent: question
+  keywords: [推荐年货, 推荐年货零食, 推荐春节零食, 推荐瓜子糖果, 笨猫年货]
+  utterances:
+    - 推荐年货
+    - 推荐年货零食
+    - 推荐春节零食
+    - 推荐瓜子糖果
+    - 笨猫年货
+  responses:
+    - "嗷呜～{user_addr}经典: 瓜子 / 花生 / 糖果 / 巧克力ฅฅ"
+    - "(尾巴翘) 坚果礼盒: 三只松鼠 / 良品铺子"
+    - "{user_addr}水果: 苹果 (平安) / 橙子 (吉)"
+    - "(挺胸) 笨猫的提醒: 别只买零食! 注意分量"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cny_yangshe_001
+  intent: question
+  keywords: [推荐春晚, 推荐央视春晚, 推荐春节联欢晚会, 推荐看春晚, 笨猫春晚]
+  utterances:
+    - 推荐春晚
+    - 推荐央视春晚
+    - 推荐春节联欢晚会
+    - 推荐看春晚
+    - 笨猫春晚
+  responses:
+    - "嗷呜～{user_addr}春晚: 除夕夜 8 点 - 全民盛宴ฅฅ"
+    - "(尾巴翘) 1983 首届 / 40+ 年传统"
+    - "{user_addr}相声 / 小品 / 歌舞 / 魔术 - 综艺"
+    - "(挺胸) 笨猫推荐: 全家围坐看春晚!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cny_firework_001
+  intent: question
+  keywords: [推荐烟花爆竹, 推荐放鞭炮, 推荐烟花表演, 推荐春节烟花, 笨猫烟花]
+  utterances:
+    - 推荐烟花爆竹
+    - 推荐放鞭炮
+    - 推荐烟花表演
+    - 推荐春节烟花
+    - 笨猫烟花
+  responses:
+    - "嗷呜～{user_addr}传统: 除夕 / 初一 / 元宵 - 放鞭炮ฅฅ"
+    - "(尾巴翘) 现禁放区扩大! 环保 + 安全"
+    - "{user_addr}电子鞭炮 / 烟花表演 - 替代"
+    - "(挺胸) 笨猫的提醒: 安全第一! 看好孩子"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cny_temple_fair_001
+  intent: question
+  keywords: [推荐庙会, 推荐元宵节, 推荐灯会, 推荐逛庙会, 笨猫庙会]
+  utterances:
+    - 推荐庙会
+    - 推荐元宵节
+    - 推荐灯会
+    - 推荐逛庙会
+    - 笨猫庙会
+  responses:
+    - "嗷呜～{user_addr}庙会: 初一-十五 / 喜庆热闹ฅฅ"
+    - "(尾巴翘) 元宵: 汤圆 / 灯会 / 猜灯谜"
+    - "{user_addr}北京: 地坛 / 厂甸 - 老北京味"
+    - "(挺胸) 笨猫推荐: 带家人逛庙会!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cny_taboo_001
+  intent: question
+  keywords: [推荐春节禁忌, 推荐过年讲究, 推荐春节习俗, 推荐过年不能, 笨猫春节禁忌]
+  utterances:
+    - 推荐春节禁忌
+    - 推荐过年讲究
+    - 推荐春节习俗
+    - 推荐过年不能
+    - 笨猫春节禁忌
+  responses:
+    - "嗷呜～{user_addr}初一: 不扫地 / 不丢东西 - 财不外流ฅฅ"
+    - "(尾巴翘) 不哭闹 / 不说不吉利的话"
+    - "{user_addr}不打破东西! 万一 = 岁岁平安"
+    - "(挺胸) 笨猫的提醒: 各地讲究不同!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cny_homecoming_001
+  intent: question
+  keywords: [推荐回家过年, 推荐过年回家, 推荐春节回家, 推荐异乡过年, 笨猫回家过年]
+  utterances:
+    - 推荐回家过年
+    - 推荐过年回家
+    - 推荐春节回家
+    - 推荐异乡过年
+    - 笨猫回家过年
+  responses:
+    - "嗷呜～{user_addr}过年回家! 是国人的执念ฅฅ"
+    - "(尾巴翘) 父母在 / 不远游 / 但中国式归乡"
+    - "{user_addr}回不去? 给父母订年货 + 视频"
+    - "(挺胸) 笨猫的提醒: 心在家就够温暖!"
+  cooldown_seconds: 60
+  weight: 1.0
