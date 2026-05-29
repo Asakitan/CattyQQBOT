@@ -1,0 +1,206 @@
+# 商业书 routes (S6 R666 NLU 节点扩充, 第六十六周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: bb_lean_startup_001
+  intent: question
+  keywords: [推荐精益创业, 推荐 Lean Startup, 推荐 MVP, 推荐 Eric Ries, 笨猫精益创业]
+  utterances:
+    - 推荐精益创业
+    - 推荐 Lean Startup
+    - 推荐 MVP
+    - 推荐 Eric Ries
+    - 笨猫精益创业
+  responses:
+    - "嗷呜～{user_addr}《精益创业》Eric Ries - 创业圣经ฅฅ"
+    - "(尾巴翘) MVP / 构建-测量-学习"
+    - "{user_addr}小步快跑 / 快速验证"
+    - "(挺胸) 笨猫推荐: 创业前必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_zero_to_one_001
+  intent: question
+  keywords: [推荐从 0 到 1, 推荐 Zero to One, 推荐 Peter Thiel, 推荐彼得蒂尔, 笨猫从 0 到 1]
+  utterances:
+    - 推荐从 0 到 1
+    - 推荐 Zero to One
+    - 推荐 Peter Thiel
+    - 推荐彼得蒂尔
+    - 笨猫从 0 到 1
+  responses:
+    - "嗷呜～{user_addr}《从 0 到 1》Peter Thiel - 垄断哲学ฅฅ"
+    - "(尾巴翘) 创新 / 反竞争 / 垂直进步"
+    - "{user_addr}硅谷思想钢印"
+    - "(挺胸) 笨猫推荐: PayPal 黑帮亲笔!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_innovator_dilemma_001
+  intent: question
+  keywords: [推荐创新者的窘境, 推荐 Innovator Dilemma, 推荐 Christensen, 推荐颠覆式创新, 笨猫创新者窘境]
+  utterances:
+    - 推荐创新者的窘境
+    - 推荐 Innovator Dilemma
+    - 推荐 Christensen
+    - 推荐颠覆式创新
+    - 笨猫创新者窘境
+  responses:
+    - "嗷呜～{user_addr}《创新者的窘境》Christensen - 经典ฅฅ"
+    - "(尾巴翘) 颠覆式创新 / 大公司困境"
+    - "{user_addr}为什么巨头会输给新创"
+    - "(挺胸) 笨猫推荐: MBA 神书!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bb_second_curve_001
+  intent: question
+  keywords: [推荐第二曲线, 推荐 Second Curve, 推荐 Charles Handy, 推荐查尔斯汉迪, 笨猫第二曲线]
+  utterances:
+    - 推荐第二曲线
+    - 推荐 Second Curve
+    - 推荐 Charles Handy
+    - 推荐查尔斯汉迪
+    - 笨猫第二曲线
+  responses:
+    - "嗷呜～{user_addr}《第二曲线》Charles Handy - 转型ฅฅ"
+    - "(尾巴翘) 巅峰前找下一条曲线"
+    - "{user_addr}个人 / 企业都适用"
+    - "(挺胸) 笨猫推荐: 中年焦虑解药!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bb_growth_hacker_001
+  intent: question
+  keywords: [推荐增长黑客, 推荐 Growth Hacker, 推荐 Sean Ellis, 推荐增长引擎, 笨猫增长黑客]
+  utterances:
+    - 推荐增长黑客
+    - 推荐 Growth Hacker
+    - 推荐 Sean Ellis
+    - 推荐增长引擎
+    - 笨猫增长黑客
+  responses:
+    - "嗷呜～{user_addr}《增长黑客》Sean Ellis - 增长ฅฅ"
+    - "(尾巴翘) AARRR 漏斗 / 数据驱动"
+    - "{user_addr}产品 / 运营必修"
+    - "(挺胸) 笨猫推荐: 互联网运营圣经!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bb_seven_habits_001
+  intent: question
+  keywords: [推荐高效能人士的 7 个习惯, 推荐 7 Habits, 推荐 Stephen Covey, 推荐高效能, 笨猫 7 个习惯]
+  utterances:
+    - 推荐高效能人士的 7 个习惯
+    - 推荐 7 Habits
+    - 推荐 Stephen Covey
+    - 推荐高效能
+    - 笨猫 7 个习惯
+  responses:
+    - "嗷呜～{user_addr}《高效能人士的 7 个习惯》Covey - 经典ฅฅ"
+    - "(尾巴翘) 主动积极 / 以终为始 / 要事第一"
+    - "{user_addr}个人管理 + 团队管理"
+    - "(挺胸) 笨猫推荐: 自我提升必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_influence_001
+  intent: question
+  keywords: [推荐影响力, 推荐 Cialdini, 推荐 Influence, 推荐西奥迪尼, 笨猫影响力]
+  utterances:
+    - 推荐影响力
+    - 推荐 Cialdini
+    - 推荐 Influence
+    - 推荐西奥迪尼
+    - 笨猫影响力
+  responses:
+    - "嗷呜～{user_addr}《影响力》Cialdini - 心理学ฅฅ"
+    - "(尾巴翘) 互惠 / 承诺 / 社会认同 / 喜好 / 权威 / 稀缺"
+    - "{user_addr}销售 / 营销 / 谈判必读"
+    - "(挺胸) 笨猫推荐: 防忽悠 + 提升说服力!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_hackers_painters_001
+  intent: question
+  keywords: [推荐黑客与画家, 推荐 Hackers and Painters, 推荐 Paul Graham, 推荐 PG, 笨猫黑客与画家]
+  utterances:
+    - 推荐黑客与画家
+    - 推荐 Hackers and Painters
+    - 推荐 Paul Graham
+    - 推荐 PG
+    - 笨猫黑客与画家
+  responses:
+    - "嗷呜～{user_addr}《黑客与画家》Paul Graham - YCฅฅ"
+    - "(尾巴翘) 编程 + 创业 + 思想"
+    - "{user_addr}极客必读 / 文笔好"
+    - "(挺胸) 笨猫推荐: 程序员思想启蒙!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bb_wharton_001
+  intent: question
+  keywords: [推荐沃顿商学院, 推荐 Wharton, 推荐沃顿谈判, 推荐 MBA 教材, 笨猫沃顿]
+  utterances:
+    - 推荐沃顿商学院
+    - 推荐 Wharton
+    - 推荐沃顿谈判
+    - 推荐 MBA 教材
+    - 笨猫沃顿
+  responses:
+    - "嗷呜～{user_addr}《沃顿商学院最受欢迎的谈判课》ฅฅ"
+    - "(尾巴翘) Stuart Diamond - 谈判圣经"
+    - "{user_addr}MBA 三大商学院之一"
+    - "(挺胸) 笨猫推荐: 谈判必读!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bb_buffett_letters_001
+  intent: question
+  keywords: [推荐巴菲特致股东信, 推荐 Buffett Letters, 推荐巴菲特, 推荐价值投资, 笨猫巴菲特]
+  utterances:
+    - 推荐巴菲特致股东信
+    - 推荐 Buffett Letters
+    - 推荐巴菲特
+    - 推荐价值投资
+    - 笨猫巴菲特
+  responses:
+    - "嗷呜～{user_addr}《巴菲特致股东信》- 投资圣经ฅฅ"
+    - "(尾巴翘) 价值投资 / 长期主义 / 护城河"
+    - "{user_addr}伯克希尔几十年精华"
+    - "(挺胸) 笨猫推荐: 投资入门 + 进阶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_business_model_001
+  intent: question
+  keywords: [推荐商业模式新生代, 推荐 Business Model Generation, 推荐 Osterwalder, 推荐画布, 笨猫商业模式]
+  utterances:
+    - 推荐商业模式新生代
+    - 推荐 Business Model Generation
+    - 推荐 Osterwalder
+    - 推荐画布
+    - 笨猫商业模式
+  responses:
+    - "嗷呜～{user_addr}《商业模式新生代》Osterwalder - 画布ฅฅ"
+    - "(尾巴翘) 9 宫格画布 / 可视化"
+    - "{user_addr}创业 / 战略必备工具"
+    - "(挺胸) 笨猫推荐: 商业模式可视化神器!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bb_hooked_001
+  intent: question
+  keywords: [推荐 Hooked, 推荐上瘾, 推荐 Nir Eyal, 推荐产品上瘾, 笨猫 Hooked]
+  utterances:
+    - 推荐 Hooked
+    - 推荐上瘾
+    - 推荐 Nir Eyal
+    - 推荐产品上瘾
+    - 笨猫 Hooked
+  responses:
+    - "嗷呜～{user_addr}《Hooked 上瘾》Nir Eyal - 产品ฅฅ"
+    - "(尾巴翘) 触发 / 行动 / 奖励 / 投入"
+    - "{user_addr}产品经理必读"
+    - "(挺胸) 笨猫推荐: 让用户离不开你!"
+  cooldown_seconds: 60
+  weight: 0.9

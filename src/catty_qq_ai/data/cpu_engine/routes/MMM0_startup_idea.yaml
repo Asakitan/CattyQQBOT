@@ -1,0 +1,206 @@
+# 创业想法 routes (S6 R662 NLU 节点扩充, 第六十六周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: si_saas_001
+  intent: question
+  keywords: [推荐 SaaS 创业, 推荐 SaaS 方向, 推荐 SaaS 赛道, 推荐订阅产品, 笨猫 SaaS]
+  utterances:
+    - 推荐 SaaS 创业
+    - 推荐 SaaS 方向
+    - 推荐 SaaS 赛道
+    - 推荐订阅产品
+    - 笨猫 SaaS
+  responses:
+    - "嗷呜～{user_addr}垂直 SaaS - 行业切片ฅฅ"
+    - "(尾巴翘) AI Copilot / 工作流自动化"
+    - "{user_addr}低代码 / 协作工具"
+    - "(挺胸) 笨猫推荐: 切小众, 留存高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_content_001
+  intent: question
+  keywords: [推荐内容创业, 推荐内容方向, 推荐知识付费, 推荐订阅号, 笨猫内容创业]
+  utterances:
+    - 推荐内容创业
+    - 推荐内容方向
+    - 推荐知识付费
+    - 推荐订阅号
+    - 笨猫内容创业
+  responses:
+    - "嗷呜～{user_addr}垂直领域深耕 - 信任最值钱ฅฅ"
+    - "(尾巴翘) Newsletter / 播客 / 视频专栏"
+    - "{user_addr}知识付费 / 社群订阅"
+    - "(挺胸) 笨猫推荐: 先免费打透, 再收费!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_ecommerce_001
+  intent: question
+  keywords: [推荐电商创业, 推荐网店方向, 推荐淘宝创业, 推荐抖音小店, 笨猫电商]
+  utterances:
+    - 推荐电商创业
+    - 推荐网店方向
+    - 推荐淘宝创业
+    - 推荐抖音小店
+    - 笨猫电商
+  responses:
+    - "嗷呜～{user_addr}抖音小店 / 视频号 - 流量红利ฅฅ"
+    - "(尾巴翘) 私域 + 复购品类"
+    - "{user_addr}选品 > 流量 > 供应链"
+    - "(挺胸) 笨猫推荐: 别碰红海, 选细分!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_ai_app_001
+  intent: question
+  keywords: [推荐 AI 应用, 推荐 AI 创业, 推荐 AI 方向, 推荐 LLM 产品, 笨猫 AI 应用]
+  utterances:
+    - 推荐 AI 应用
+    - 推荐 AI 创业
+    - 推荐 AI 方向
+    - 推荐 LLM 产品
+    - 笨猫 AI 应用
+  responses:
+    - "嗷呜～{user_addr}AI Agent / Copilot - 当红ฅฅ"
+    - "(尾巴翘) 垂直行业 RAG / 工作流"
+    - "{user_addr}陪伴 / 教育 / 法律 / 医疗"
+    - "(挺胸) 笨猫推荐: 找付费意愿强的人!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: si_crossborder_001
+  intent: question
+  keywords: [推荐跨境电商, 推荐 Amazon, 推荐 Shopify, 推荐独立站, 笨猫跨境]
+  utterances:
+    - 推荐跨境电商
+    - 推荐 Amazon
+    - 推荐 Shopify
+    - 推荐独立站
+    - 笨猫跨境
+  responses:
+    - "嗷呜～{user_addr}Amazon FBA / Shopify 独立站ฅฅ"
+    - "(尾巴翘) TikTok Shop / Temu 卖家"
+    - "{user_addr}3C / 户外 / 宠物 / 家居"
+    - "(挺胸) 笨猫推荐: 独立站做品牌!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: si_offline_shop_001
+  intent: question
+  keywords: [推荐实体小店, 推荐开店, 推荐线下创业, 推荐小生意, 笨猫实体小店]
+  utterances:
+    - 推荐实体小店
+    - 推荐开店
+    - 推荐线下创业
+    - 推荐小生意
+    - 笨猫实体小店
+  responses:
+    - "嗷呜～{user_addr}咖啡 / 烘焙 / 小酒馆ฅฅ"
+    - "(尾巴翘) 社区便利店 / 鲜花店"
+    - "{user_addr}选址 > 产品 > 服务"
+    - "(挺胸) 笨猫推荐: 先小试不要重资产!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: si_franchise_001
+  intent: question
+  keywords: [推荐加盟连锁, 推荐加盟品牌, 推荐茶饮加盟, 推荐快餐加盟, 笨猫加盟]
+  utterances:
+    - 推荐加盟连锁
+    - 推荐加盟品牌
+    - 推荐茶饮加盟
+    - 推荐快餐加盟
+    - 笨猫加盟
+  responses:
+    - "嗷呜～{user_addr}蜜雪冰城 / 古茗 / 霸王茶姬ฅฅ"
+    - "(尾巴翘) 华莱士 / 塔斯汀 / 米村拌饭"
+    - "{user_addr}低加盟费 + 供应链稳"
+    - "(挺胸) 笨猫推荐: 看真实门店数据!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: si_media_company_001
+  intent: question
+  keywords: [推荐自媒体公司, 推荐 MCN, 推荐短视频公司, 推荐工作室, 笨猫自媒体]
+  utterances:
+    - 推荐自媒体公司
+    - 推荐 MCN
+    - 推荐短视频公司
+    - 推荐工作室
+    - 笨猫自媒体
+  responses:
+    - "嗷呜～{user_addr}垂类 IP 矩阵 - 复用模板ฅฅ"
+    - "(尾巴翘) 短视频 + 直播 + 私域"
+    - "{user_addr}剪辑 / 投流 / 商务 分工"
+    - "(挺胸) 笨猫推荐: 先跑通一个号!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: si_education_001
+  intent: question
+  keywords: [推荐教育培训, 推荐教培创业, 推荐成人教育, 推荐技能培训, 笨猫教培]
+  utterances:
+    - 推荐教育培训
+    - 推荐教培创业
+    - 推荐成人教育
+    - 推荐技能培训
+    - 笨猫教培
+  responses:
+    - "嗷呜～{user_addr}成人技能 / 兴趣班 - 政策稳ฅฅ"
+    - "(尾巴翘) 编程 / 设计 / AI / 考证"
+    - "{user_addr}小班 / 一对一 / 录播课"
+    - "(挺胸) 笨猫推荐: 别碰 K12 学科!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: si_wellness_001
+  intent: question
+  keywords: [推荐健康养生, 推荐养生创业, 推荐健身工作室, 推荐康养, 笨猫养生]
+  utterances:
+    - 推荐健康养生
+    - 推荐养生创业
+    - 推荐健身工作室
+    - 推荐康养
+    - 笨猫养生
+  responses:
+    - "嗷呜～{user_addr}私教工作室 / 普拉提ฅฅ"
+    - "(尾巴翘) 中医理疗 / 推拿 / SPA"
+    - "{user_addr}轻食 / 营养代餐 / 健康管理"
+    - "(挺胸) 笨猫推荐: 复购才是王道!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: si_pet_economy_001
+  intent: question
+  keywords: [推荐宠物经济, 推荐宠物创业, 推荐宠物店, 推荐宠物服务, 笨猫宠物经济]
+  utterances:
+    - 推荐宠物经济
+    - 推荐宠物创业
+    - 推荐宠物店
+    - 推荐宠物服务
+    - 笨猫宠物经济
+  responses:
+    - "嗷呜～{user_addr}宠物医院 / 美容 / 寄养ฅฅ"
+    - "(尾巴翘) 高端粮 / 智能用品 / 殡葬"
+    - "{user_addr}单身经济 + 情感陪伴"
+    - "(挺胸) 笨猫推荐: 猫猫赛道更香!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: si_silver_economy_001
+  intent: question
+  keywords: [推荐银发经济, 推荐老年创业, 推荐养老服务, 推荐适老产品, 笨猫银发]
+  utterances:
+    - 推荐银发经济
+    - 推荐老年创业
+    - 推荐养老服务
+    - 推荐适老产品
+    - 笨猫银发
+  responses:
+    - "嗷呜～{user_addr}居家适老化改造 - 蓝海ฅฅ"
+    - "(尾巴翘) 老年旅游 / 兴趣社群 / 大学"
+    - "{user_addr}健康监测 / 助行 / 智能设备"
+    - "(挺胸) 笨猫推荐: 子女买单的赛道!"
+  cooldown_seconds: 60
+  weight: 0.8

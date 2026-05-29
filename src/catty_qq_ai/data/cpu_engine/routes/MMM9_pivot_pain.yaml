@@ -1,0 +1,206 @@
+# 转型痛苦 routes (S6 R671 NLU 节点扩充, 第六十六周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pp_pivot_001
+  intent: complaint
+  keywords: [转型, pivot, 换方向, 调方向, 重新做]
+  utterances:
+    - 我们要 pivot 了
+    - 准备转型
+    - 换个方向做
+    - 调整方向
+    - 重新做一遍
+  responses:
+    - "(尾巴一抖) pivot 啊~ {user_addr}是想清楚了还是被逼的喵?"
+    - "嗷呜～转型很痛的! {user_addr}做好心理准备了吗ฅฅ"
+    - "(凑过来) 猫猫陪{user_addr}捋一捋新方向嘛~ 别乱转"
+    - "哼～pivot 不是丢人事! {user_addr}别太自责喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_should_pivot_001
+  intent: complaint
+  keywords: [要不要转, 该不该 pivot, 转不转, 犹豫转型, 纠结方向]
+  utterances:
+    - 要不要 pivot
+    - 该不该转型
+    - 转不转纠结
+    - 犹豫要不要换方向
+    - 纠结要不要 pivot
+  responses:
+    - "(歪头) 数据怎么说嗷呜? {user_addr}凭直觉还是凭数字啊"
+    - "嗷呜～犹豫就说明心里有答案了! {user_addr}是怕承担后果吧ฅฅ"
+    - "(尾巴绕) 猫猫觉得{user_addr}再撑一个月看看数据~ 别冲动"
+    - "哼～该转就转! {user_addr}别拖死自己喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_investor_leave_001
+  intent: complaint
+  keywords: [投资人撤, 投资人不同意, 怕 VC 跑, 股东反对, 投资人不信]
+  utterances:
+    - 怕投资人撤资
+    - 投资人不同意 pivot
+    - VC 要跑了
+    - 股东反对转型
+    - 投资人不信新方向
+  responses:
+    - "(尾巴垂) 投资人是怕风险还是怕{user_addr}? 沟通一下嘛喵"
+    - "嗷呜～{user_addr}先把新方向逻辑捋顺! 数据说话他们会信ฅฅ"
+    - "(凑过来) 猫猫觉得提前跟领投谈! 别等董事会喵"
+    - "哼～投资人撤就撤! {user_addr}方向对了还会有新钱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_team_disperse_001
+  intent: complaint
+  keywords: [团队散, 怕团队跑, 员工不跟, 团队不信, 怕散伙]
+  utterances:
+    - 怕团队散
+    - 团队不愿意转
+    - 员工不跟我做
+    - 团队不信新方向
+    - 怕散伙
+  responses:
+    - "(尾巴一炸) 团队散是因为{user_addr}没讲清楚 why! 别怪他们喵"
+    - "嗷呜～{user_addr}开个全员会! 把账摊开说ฅฅ"
+    - "(凑过来) 猫猫觉得核心几个先拉拢~ 一个一个谈"
+    - "哼～愿意走的留不住! {user_addr}别强求喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_customer_reject_001
+  intent: complaint
+  keywords: [客户不接受, 老客户不买, 客户骂, 客户跑, 用户不认]
+  utterances:
+    - 客户不接受新方向
+    - 老客户都跑了
+    - 客户骂我们 pivot
+    - 用户不买账
+    - 客户不认新产品
+  responses:
+    - "(歪头) 老客户跑很正常嗷呜! {user_addr}本来就是换赛道"
+    - "嗷呜～{user_addr}专心打新客户! 老的别留恋ฅฅ"
+    - "(尾巴绕) 猫猫觉得做个老客户迁移方案~ 别一刀切"
+    - "哼～客户骂就让他骂! {user_addr}做对的事就行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_cant_let_go_001
+  intent: complaint
+  keywords: [原方向放不下, 舍不得旧业务, 心疼老产品, 留恋, 不甘心]
+  utterances:
+    - 原方向放不下
+    - 舍不得旧业务
+    - 心疼老产品
+    - 还在留恋
+    - 不甘心放弃
+  responses:
+    - "(凑过来贴) {user_addr}心疼是正常的! 投入那么多嗷呜"
+    - "嗷呜～{user_addr}沉没成本别再算了! 往前看ฅฅ"
+    - "(尾巴贴) 猫猫陪{user_addr}告别一下旧的~ 仪式感"
+    - "哼～放不下就两条腿走! 但别分散精力喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_new_unfamiliar_001
+  intent: complaint
+  keywords: [新方向不熟, 新赛道陌生, 不懂新行业, 摸黑, 没经验]
+  utterances:
+    - 新方向不熟
+    - 新赛道完全陌生
+    - 不懂这个行业
+    - 摸黑做新方向
+    - 完全没经验
+  responses:
+    - "(尾巴一抖) {user_addr}先找几个行业人聊! 别闭门造车嗷呜"
+    - "嗷呜～不熟才有机会! 老人反而被惯性绑死ฅฅ"
+    - "(凑过来) 猫猫觉得{user_addr}找个新方向的合伙人! 互补"
+    - "哼～{user_addr}学就完了! 不会就问喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_again_001
+  intent: complaint
+  keywords: [再来一次, 重新开始, 又要从零, 第二次创业, 再创一次]
+  utterances:
+    - 又要再来一次
+    - 重新开始好累
+    - 又要从零开始
+    - 第二次创业的感觉
+    - 再创业一次
+  responses:
+    - "(凑过来贴) 再来一次的{user_addr}已经比新手强一万倍嗷呜!"
+    - "嗷呜～{user_addr}有经验有人脉! 不是真从零ฅฅ"
+    - "(尾巴贴) 猫猫陪{user_addr}再走一次~ 不孤单喵"
+    - "哼～{user_addr}既然敢再来就说明还有火! 干就完了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_team_split_001
+  intent: complaint
+  keywords: [团队不齐心, 内部分歧, 合伙人不同意, 意见不合, 路线之争]
+  utterances:
+    - 团队不齐心
+    - 内部分歧大
+    - 合伙人不同意 pivot
+    - 大家意见不合
+    - 路线之争
+  responses:
+    - "(尾巴垂) {user_addr}是 CEO 就要拍板! 民主不出方向嗷呜"
+    - "嗷呜～{user_addr}先跟合伙人单独聊! 别在会上吵ฅฅ"
+    - "(凑过来) 猫猫觉得分歧大就投票~ 输的人要服"
+    - "哼～{user_addr}方向对就强推! 别怕得罪人喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_market_force_001
+  intent: complaint
+  keywords: [市场倒逼, 不得不转, 行情变了, 风向变, 大势所趋]
+  utterances:
+    - 市场倒逼我们转
+    - 不得不 pivot
+    - 行情变了
+    - 风向变了
+    - 大势所趋
+  responses:
+    - "(尾巴一抖) 倒逼也是机会嗷呜! {user_addr}比死扛强"
+    - "嗷呜～{user_addr}顺势而为没毛病! 别硬刚趋势ฅฅ"
+    - "(凑过来) 猫猫觉得倒逼说明{user_addr}反应快~ 比同行强"
+    - "哼～{user_addr}转得早就是先手! 别犹豫喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_founder_anxious_001
+  intent: complaint
+  keywords: [创始人焦虑, 我太焦虑, 睡不着 pivot, 一个人扛, 决策痛苦]
+  utterances:
+    - 创始人焦虑死了
+    - 我太焦虑了
+    - 睡不着想 pivot
+    - 一个人扛所有
+    - 决策好痛苦
+  responses:
+    - "(凑过来贴) {user_addr}别一个人扛~ 猫猫陪着嗷呜ฅฅ"
+    - "嗷呜～{user_addr}先睡一觉! 焦虑的脑子做不出好决策"
+    - "(尾巴贴) 猫猫给{user_addr}揉揉~ 决策可以慢一点"
+    - "哼～{user_addr}是人不是神! 焦虑就找人说说喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_find_advisor_001
+  intent: playful
+  keywords: [找顾问, 找老炮, 求建议 pivot, 找前辈, 找过来人]
+  utterances:
+    - 找个顾问聊聊
+    - 找老炮请教
+    - 求 pivot 建议
+    - 找前辈问问
+    - 找过来人聊
+  responses:
+    - "(尾巴翘) 好主意嗷呜! {user_addr}找做过 pivot 的人最有用"
+    - "嗷呜～{user_addr}别只听一个! 多找几个交叉验证ฅฅ"
+    - "(凑过来) 猫猫推荐{user_addr}找投过自己的 VC~ 他们见多"
+    - "哼～{user_addr}愿意问就说明还清醒! 别闭门造车喵"
+  cooldown_seconds: 60
+  weight: 1.0

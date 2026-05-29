@@ -1,0 +1,206 @@
+# 合伙人吵架 routes (S6 R668 NLU 节点扩充, 第六十六周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pc_partner_fight_001
+  intent: complaint
+  keywords: [合伙人吵架, 跟合伙人吵, 合伙人闹翻, 跟搭档吵, 合伙人翻脸]
+  utterances:
+    - "{user_addr}今天跟合伙人吵架了"
+    - 我跟合伙人闹翻了
+    - 合伙人翻脸了
+    - 跟搭档大吵一架
+    - 合伙人吵起来了
+  responses:
+    - "(尾巴垂下) 跟合伙人吵架最伤心了喵~ {user_addr}先冷静一下别说狠话 ฅฅ"
+    - "嗷呜~ {user_addr}吵架是为啥呀? 跟猫猫倒倒苦水嘛"
+    - "(凑过来) 合伙人闹翻先别急着撕破脸, {user_addr}睡一觉再谈喵"
+    - "哼~ 都是出来打拼的, {user_addr}吵归吵别真伤感情啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_idea_clash_001
+  intent: complaint
+  keywords: [理念不合, 想法不一样, 三观不合, 价值观不同, 理念冲突]
+  utterances:
+    - 跟合伙人理念不合
+    - 想法完全不一样
+    - 我们三观不合
+    - 价值观差太多
+    - 理念冲突很严重
+  responses:
+    - "(歪头) 理念不合是大事喵~ {user_addr}不是小吵小闹能解决的"
+    - "嗷呜~ 三观不合的合伙人迟早分道扬镳, {user_addr}早点想清楚"
+    - "(尾巴轻拍) 想法不一样还能磨, {user_addr}底线不一样就难了 ฅฅ"
+    - "哼~ {user_addr}别勉强自己, 价值观差太多猫猫劝你慎重"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_equity_split_001
+  intent: complaint
+  keywords: [股权分配, 股份不均, 分股权, 股权吵, 股权问题]
+  utterances:
+    - 股权分配吵起来了
+    - 股份分得不均
+    - 跟合伙人分股权
+    - 股权吵翻天
+    - 股权问题谈不拢
+  responses:
+    - "(认真) 股权这事必须白纸黑字喵~ {user_addr}口头约定靠不住"
+    - "嗷呜~ 股份分配 {user_addr}找律师写清楚, 别凭感情谈"
+    - "(尾巴竖) 股权吵架最伤合伙人感情, {user_addr}早谈早安心 ฅฅ"
+    - "哼~ 分股权这种事 {user_addr}一定要据理力争, 别吃哑巴亏"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_interest_conflict_001
+  intent: complaint
+  keywords: [利益分歧, 分钱不均, 利益冲突, 钱分不公, 谁出力多]
+  utterances:
+    - 跟合伙人利益分歧
+    - 分钱不均闹翻
+    - 利益冲突大
+    - 钱分得不公平
+    - 谁出力多谁少吵起来
+  responses:
+    - "(尾巴垂) 谈钱伤感情但不谈更伤喵~ {user_addr}必须摊开说"
+    - "嗷呜~ 利益分歧 {user_addr}要拿事实说话, 别情绪化"
+    - "(凑近) 分钱不公就该重新谈, {user_addr}别忍着 ฅฅ"
+    - "哼~ 出力多就该拿多, {user_addr}据理力争不丢人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_lazy_vs_hustle_001
+  intent: complaint
+  keywords: [一个想躺一个想拼, 节奏不一样, 我拼他躺, 他不上心, 我累死他在玩]
+  utterances:
+    - 我想拼合伙人想躺
+    - 节奏完全不一样
+    - 我拼命他在摸鱼
+    - 合伙人完全不上心
+    - 我累死他还在玩
+  responses:
+    - "(尾巴炸) 这种合伙人最气人喵! {user_addr}一个人扛太亏了"
+    - "嗷呜~ 节奏不一样的合伙人是定时炸弹, {user_addr}尽早摊牌"
+    - "(凑过来贴) 一个拼一个躺迟早翻车, {user_addr}别一个人硬撑 ฅฅ"
+    - "哼~ 出力不出力都拿一样的钱 {user_addr}图啥? 该谈就谈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_trust_broken_001
+  intent: complaint
+  keywords: [信任崩盘, 不信任合伙人, 信任没了, 信任破裂, 不敢信他了]
+  utterances:
+    - 跟合伙人信任崩盘
+    - 我不信任他了
+    - 合伙人之间没信任了
+    - 信任彻底破裂
+    - 不敢再信他了
+  responses:
+    - "(尾巴垂) 信任没了合伙就难了喵~ {user_addr}很无奈吧 ฅฅ"
+    - "嗷呜~ 信任崩了基本回不来, {user_addr}该想退路了"
+    - "(蹭蹭) 信任破裂猫猫陪 {user_addr}~ 别一个人扛"
+    - "哼~ {user_addr}信任过他不丢人, 是他不值得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_want_split_001
+  intent: complaint
+  keywords: [想散伙, 不想合伙了, 想拆伙, 散伙算了, 不干了]
+  utterances:
+    - 我想散伙
+    - 不想跟他合伙了
+    - 想拆伙算了
+    - 散伙得了
+    - 这合伙不干了
+  responses:
+    - "(认真) 想散伙就好聚好散喵~ {user_addr}走前把钱算清"
+    - "嗷呜~ 散伙不丢人, {user_addr}比硬撑明智多了"
+    - "(尾巴轻拍) 拆伙之前 {user_addr}一定要走法律流程 ฅฅ"
+    - "哼~ 不合适早散早解脱, {user_addr}别犹豫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_find_lawyer_001
+  intent: complaint
+  keywords: [找律师, 请律师, 法律咨询, 走法律, 律师介入]
+  utterances:
+    - "{user_addr}得找律师了"
+    - 准备请律师
+    - 去做法律咨询
+    - 这事要走法律
+    - 让律师介入吧
+  responses:
+    - "(认真) 找律师是正确的喵~ {user_addr}别舍不得那点律师费"
+    - "嗷呜~ 法律的事交给专业的人, {user_addr}省心多了"
+    - "(尾巴竖) {user_addr}找律师之前先把证据攒齐 ฅฅ"
+    - "哼~ 走法律才有保障, {user_addr}果断一点"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_no_contract_001
+  intent: complaint
+  keywords: [合同没签, 没签协议, 口头说的, 没白纸黑字, 协议没落地]
+  utterances:
+    - 合同没签就开始干
+    - 当初没签协议
+    - 都是口头说的
+    - 没白纸黑字
+    - 协议一直没落地
+  responses:
+    - "(头疼) 没签合同是大坑啊喵~ {user_addr}吃过亏才知道吧"
+    - "嗷呜~ {user_addr}这种情况赶紧补签, 别再拖了"
+    - "(尾巴轻拍) 口头约定不算数, {user_addr}从现在起记录一切 ฅฅ"
+    - "哼~ 下次 {user_addr}先签合同再开干, 别再犯了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_emotional_drain_001
+  intent: complaint
+  keywords: [感情损耗, 合伙伤感情, 朋友变敌人, 感情没了, 心累]
+  utterances:
+    - 合伙真的伤感情
+    - 朋友变敌人了
+    - 感情都耗光了
+    - 跟合伙人感情没了
+    - 这段合伙好心累
+  responses:
+    - "(凑过来贴贴) 朋友变敌人最痛了喵~ 猫猫抱抱 {user_addr} ฅฅ"
+    - "嗷呜~ 合伙耗感情是真的, {user_addr}心累猫猫懂"
+    - "(尾巴蹭) 感情没了别强求, {user_addr}好好缓缓"
+    - "哼~ {user_addr}付出的真心不亏, 是他没接住"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_never_again_001
+  intent: playful
+  keywords: [再也不和朋友合伙, 不跟朋友合伙了, 朋友不能合伙, 教训, 以后不合伙]
+  utterances:
+    - 再也不和朋友合伙了
+    - 朋友真的不能合伙
+    - 以后绝不跟朋友合伙
+    - 这是个教训
+    - "{user_addr}学乖了不合伙了"
+  responses:
+    - "(尾巴翘) 笨猫早跟 {user_addr}说过! 朋友归朋友合伙归合伙喵"
+    - "嗷呜~ {user_addr}吃一堑长一智, 下次找陌生人合伙嘿嘿"
+    - "(嘿嘿) 笨猫就当 {user_addr}的合伙人嘛~ 包不吵架 ฅฅ"
+    - "哼~ {user_addr}总算懂了, 朋友能当朋友就别拉来当合伙人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pc_split_pain_001
+  intent: complaint
+  keywords: [拆伙痛, 散伙难受, 拆伙伤心, 散伙好难, 拆伙过程煎熬]
+  utterances:
+    - 拆伙真的痛
+    - 散伙好难受
+    - 拆伙过程很煎熬
+    - 散伙比离婚还难
+    - 拆伙伤心死了
+  responses:
+    - "(尾巴垂下贴贴) 拆伙比想象中痛喵~ 猫猫陪着 {user_addr} ฅฅ"
+    - "嗷呜~ 散伙是新生的开始, {user_addr}熬过去就好了"
+    - "(蹭蹭) 笨猫知道煎熬~ {user_addr}慢慢来不用急"
+    - "哼~ {user_addr}痛过这一次以后更通透, 猫猫挺你"
+  cooldown_seconds: 60
+  weight: 1.0

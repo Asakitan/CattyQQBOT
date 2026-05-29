@@ -1,0 +1,206 @@
+# 小生意 routes (S6 R664 NLU 节点扩充, 第六十六周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sb_street_stall_001
+  intent: question
+  keywords: [推荐摆摊生意, 推荐地摊, 推荐摆摊项目, 推荐夜市摆摊, 笨猫摆摊]
+  utterances:
+    - 推荐摆摊生意
+    - 推荐地摊
+    - 推荐摆摊项目
+    - 推荐夜市摆摊
+    - 笨猫摆摊
+  responses:
+    - "嗷呜～{user_addr}夜市摆摊 - 烤肠 / 关东煮 / 鸡蛋仔ฅฅ"
+    - "(尾巴翘) 早市卖煎饼 / 手抓饼 / 包子"
+    - "{user_addr}投入低 / 启动快 / 现金流"
+    - "(挺胸) 笨猫推荐: 先选人流位置!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_food_truck_001
+  intent: question
+  keywords: [推荐小吃车, 推荐流动餐车, 推荐美食车, 推荐路边摊车, 笨猫小吃车]
+  utterances:
+    - 推荐小吃车
+    - 推荐流动餐车
+    - 推荐美食车
+    - 推荐路边摊车
+    - 笨猫小吃车
+  responses:
+    - "嗷呜～{user_addr}流动小吃车 - 章鱼小丸子 / 铁板烧ฅฅ"
+    - "(尾巴翘) 改装三轮 / 移动方便"
+    - "{user_addr}3-5 万投入 / 哪里人多去哪"
+    - "(挺胸) 笨猫推荐: 选差异化品类!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_milk_tea_001
+  intent: question
+  keywords: [推荐奶茶店, 推荐茶饮店, 推荐奶茶加盟, 推荐开奶茶, 笨猫奶茶店]
+  utterances:
+    - 推荐奶茶店
+    - 推荐茶饮店
+    - 推荐奶茶加盟
+    - 推荐开奶茶
+    - 笨猫奶茶店
+  responses:
+    - "嗷呜～{user_addr}蜜雪冰城 / 茶百道 / 古茗ฅฅ"
+    - "(尾巴翘) 加盟 5-20 万 / 看品牌"
+    - "{user_addr}选址第一 / 学校 / 商圈"
+    - "(挺胸) 笨猫推荐: 蜜雪低风险!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_laundry_001
+  intent: question
+  keywords: [推荐干洗店, 推荐洗衣店, 推荐洗护店, 推荐开干洗, 笨猫干洗店]
+  utterances:
+    - 推荐干洗店
+    - 推荐洗衣店
+    - 推荐洗护店
+    - 推荐开干洗
+    - 笨猫干洗店
+  responses:
+    - "嗷呜～{user_addr}社区干洗店 - 复购稳ฅฅ"
+    - "(尾巴翘) 设备 8-15 万 / 小区门口"
+    - "{user_addr}冬季旺 / 羽绒服 / 大衣"
+    - "(挺胸) 笨猫推荐: 选老小区!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_nail_salon_001
+  intent: question
+  keywords: [推荐美甲店, 推荐美甲工作室, 推荐开美甲, 推荐美睫店, 笨猫美甲店]
+  utterances:
+    - 推荐美甲店
+    - 推荐美甲工作室
+    - 推荐开美甲
+    - 推荐美睫店
+    - 笨猫美甲店
+  responses:
+    - "嗷呜～{user_addr}美甲工作室 - 小成本起ฅฅ"
+    - "(尾巴翘) 1-3 万启动 / 单人也能开"
+    - "{user_addr}小红书引流 / 私域复购"
+    - "(挺胸) 笨猫推荐: 先学手艺再开!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_pet_shop_001
+  intent: question
+  keywords: [推荐宠物店, 推荐宠物用品店, 推荐宠物美容, 推荐开宠物店, 笨猫宠物店]
+  utterances:
+    - 推荐宠物店
+    - 推荐宠物用品店
+    - 推荐宠物美容
+    - 推荐开宠物店
+    - 笨猫宠物店
+  responses:
+    - "嗷呜～{user_addr}宠物店 - 用品+美容+寄养ฅฅ"
+    - "(尾巴翘) 10-30 万投入 / 高端社区"
+    - "{user_addr}猫猫狗狗经济涨!"
+    - "(挺胸) 笨猫推荐: 美容+食品组合!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_bakery_001
+  intent: question
+  keywords: [推荐烘焙店, 推荐面包店, 推荐蛋糕店, 推荐开烘焙, 笨猫烘焙店]
+  utterances:
+    - 推荐烘焙店
+    - 推荐面包店
+    - 推荐蛋糕店
+    - 推荐开烘焙
+    - 笨猫烘焙店
+  responses:
+    - "嗷呜～{user_addr}烘焙店 - 现烤面包 / 蛋糕ฅฅ"
+    - "(尾巴翘) 15-50 万投入 / 设备贵"
+    - "{user_addr}选社区 / 学校 / 商圈"
+    - "(挺胸) 笨猫推荐: 单品爆款打开局!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_bbq_001
+  intent: question
+  keywords: [推荐烧烤店, 推荐烤串店, 推荐撸串店, 推荐开烧烤, 笨猫烧烤店]
+  utterances:
+    - 推荐烧烤店
+    - 推荐烤串店
+    - 推荐撸串店
+    - 推荐开烧烤
+    - 笨猫烧烤店
+  responses:
+    - "嗷呜～{user_addr}夜市烧烤 - 利润王ฅฅ"
+    - "(尾巴翘) 5-20 万 / 选夜经济区"
+    - "{user_addr}羊肉串 / 烤生蚝 / 啤酒"
+    - "(挺胸) 笨猫推荐: 味道是命!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_breakfast_001
+  intent: question
+  keywords: [推荐早餐店, 推荐早点店, 推荐包子铺, 推荐开早餐, 笨猫早餐店]
+  utterances:
+    - 推荐早餐店
+    - 推荐早点店
+    - 推荐包子铺
+    - 推荐开早餐
+    - 笨猫早餐店
+  responses:
+    - "嗷呜～{user_addr}早餐店 - 包子 / 豆浆 / 油条ฅฅ"
+    - "(尾巴翘) 3-10 万 / 小区写字楼门口"
+    - "{user_addr}起早辛苦 / 现金流好"
+    - "(挺胸) 笨猫推荐: 选刚需口味!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_stationery_001
+  intent: question
+  keywords: [推荐文具店, 推荐学生文具店, 推荐文创店, 推荐开文具, 笨猫文具店]
+  utterances:
+    - 推荐文具店
+    - 推荐学生文具店
+    - 推荐文创店
+    - 推荐开文具
+    - 笨猫文具店
+  responses:
+    - "嗷呜～{user_addr}学校门口文具店 - 稳ฅฅ"
+    - "(尾巴翘) 5-15 万 / 学期高峰"
+    - "{user_addr}文具+零食+打印组合"
+    - "(挺胸) 笨猫推荐: 必选小学/中学门口!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_dropshipping_001
+  intent: question
+  keywords: [推荐网店一件代发, 推荐无货源电商, 推荐开网店, 推荐淘宝代发, 笨猫一件代发]
+  utterances:
+    - 推荐网店一件代发
+    - 推荐无货源电商
+    - 推荐开网店
+    - 推荐淘宝代发
+    - 笨猫一件代发
+  responses:
+    - "嗷呜～{user_addr}一件代发 - 零库存ฅฅ"
+    - "(尾巴翘) 1688 找货源 / 淘宝/拼多多开店"
+    - "{user_addr}投入小 / 选品是命"
+    - "(挺胸) 笨猫推荐: 蓝海类目切入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_maternal_001
+  intent: question
+  keywords: [推荐母婴店, 推荐母婴用品店, 推荐婴儿用品店, 推荐开母婴, 笨猫母婴店]
+  utterances:
+    - 推荐母婴店
+    - 推荐母婴用品店
+    - 推荐婴儿用品店
+    - 推荐开母婴
+    - 笨猫母婴店
+  responses:
+    - "嗷呜～{user_addr}母婴店 - 奶粉 / 纸尿裤ฅฅ"
+    - "(尾巴翘) 20-80 万 / 利润高"
+    - "{user_addr}选社区 / 加盟更稳"
+    - "(挺胸) 笨猫推荐: 私域+服务取胜!"
+  cooldown_seconds: 60
+  weight: 1.0

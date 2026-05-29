@@ -1,0 +1,206 @@
+# VC 融资 routes (S6 R663 NLU 节点扩充, 第六十六周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: vf_angel_001
+  intent: question
+  keywords: [推荐天使投资人, 推荐天使轮, 推荐种子轮, 推荐早期投资, 笨猫天使投资]
+  utterances:
+    - 推荐天使投资人
+    - 推荐天使轮
+    - 推荐种子轮
+    - 推荐早期投资
+    - 笨猫天使投资
+  responses:
+    - "嗷呜～{user_addr}天使投资人 - 早期种子轮金主ฅฅ"
+    - "(尾巴翘) 雷军 / 徐小平 / 王刚 - 知名天使"
+    - "{user_addr}金额 50-500w / 个人决策快"
+    - "(挺胸) 猫猫推荐: 找懂行业的天使!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vf_sequoia_001
+  intent: question
+  keywords: [推荐红杉中国, 推荐 Sequoia, 推荐红杉资本, 推荐沈南鹏, 笨猫红杉]
+  utterances:
+    - 推荐红杉中国
+    - 推荐 Sequoia
+    - 推荐红杉资本
+    - 推荐沈南鹏
+    - 笨猫红杉
+  responses:
+    - "嗷呜～{user_addr}红杉中国 - 头部美元基金ฅฅ"
+    - "(尾巴翘) 沈南鹏掌舵 / 投了字节美团拼多多"
+    - "{user_addr}种子-成长全阶段覆盖"
+    - "(挺胸) 笨猫推荐: 拿到红杉 = 半个独角兽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vf_hillhouse_001
+  intent: question
+  keywords: [推荐高瓴资本, 推荐 Hillhouse, 推荐张磊, 推荐高瓴, 笨猫高瓴]
+  utterances:
+    - 推荐高瓴资本
+    - 推荐 Hillhouse
+    - 推荐张磊
+    - 推荐高瓴
+    - 笨猫高瓴
+  responses:
+    - "嗷呜～{user_addr}高瓴资本 - 长期主义代表ฅฅ"
+    - "(尾巴翘) 张磊掌舵 / 投了腾讯京东百济神州"
+    - "{user_addr}消费医疗科技重仓"
+    - "(挺胸) 人家推荐: 高瓴看长期价值!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vf_zhenfund_001
+  intent: question
+  keywords: [推荐真格基金, 推荐 ZhenFund, 推荐徐小平, 推荐王强, 笨猫真格]
+  utterances:
+    - 推荐真格基金
+    - 推荐 ZhenFund
+    - 推荐徐小平
+    - 推荐王强
+    - 笨猫真格
+  responses:
+    - "嗷呜～{user_addr}真格基金 - 早期天使专家ฅฅ"
+    - "(尾巴翘) 徐小平王强创立 / 投了聚美小红书"
+    - "{user_addr}种子轮主力 / 创业者友好"
+    - "(挺胸) 猫猫推荐: 真格适合早期项目!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vf_idg_001
+  intent: question
+  keywords: [推荐 IDG, 推荐 IDG 资本, 推荐熊晓鸽, 推荐老牌 VC, 笨猫 IDG]
+  utterances:
+    - 推荐 IDG
+    - 推荐 IDG 资本
+    - 推荐熊晓鸽
+    - 推荐老牌 VC
+    - 笨猫 IDG
+  responses:
+    - "嗷呜～{user_addr}IDG 资本 - 中国最老牌 VCฅฅ"
+    - "(尾巴翘) 熊晓鸽掌舵 / 投了腾讯百度搜狐"
+    - "{user_addr}全阶段覆盖 / 资源深厚"
+    - "(挺胸) 笨猫推荐: IDG 经验最丰富!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vf_bytedance_001
+  intent: question
+  keywords: [推荐字节战投, 推荐字节跳动战投, 推荐 CVC, 推荐战略投资, 笨猫字节战投]
+  utterances:
+    - 推荐字节战投
+    - 推荐字节跳动战投
+    - 推荐 CVC
+    - 推荐战略投资
+    - 笨猫字节战投
+  responses:
+    - "嗷呜～{user_addr}字节跳动战投 - 大厂 CVC 代表ฅฅ"
+    - "(尾巴翘) 围绕主业生态布局 / 资源带流量"
+    - "{user_addr}腾讯/阿里/字节战投三巨头"
+    - "(挺胸) 人家推荐: CVC 看战略协同!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vf_usd_fund_001
+  intent: question
+  keywords: [推荐美元基金, 推荐 USD Fund, 推荐境外架构, 推荐 VIE, 笨猫美元基金]
+  utterances:
+    - "{user_addr}推荐美元基金"
+    - 推荐美元基金
+    - 推荐 USD Fund
+    - 推荐境外架构
+    - 笨猫美元基金
+  responses:
+    - "嗷呜～{user_addr}美元基金 - 海外退出导向ฅฅ"
+    - "(尾巴翘) 红杉/经纬/IDG/启明都有美元基金"
+    - "{user_addr}VIE 架构 / 港股美股退出"
+    - "(挺胸) 猫猫推荐: 国际化项目找美元!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vf_rmb_fund_001
+  intent: question
+  keywords: [推荐人民币基金, 推荐 RMB Fund, 推荐境内架构, 推荐 A 股退出, 笨猫人民币基金]
+  utterances:
+    - "{user_addr}推荐人民币基金"
+    - 推荐人民币基金
+    - 推荐 RMB Fund
+    - 推荐境内架构
+    - 笨猫人民币基金
+  responses:
+    - "嗷呜～{user_addr}人民币基金 - 境内退出导向ฅฅ"
+    - "(尾巴翘) 国资 LP 多 / 投硬科技半导体"
+    - "{user_addr}科创板 / 创业板退出"
+    - "(挺胸) 笨猫推荐: 硬科技找人民币!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vf_bp_001
+  intent: question
+  keywords: [推荐 BP 模板, 推荐商业计划书, 推荐 Pitch Deck, 推荐 BP, 笨猫 BP]
+  utterances:
+    - 推荐 BP 模板
+    - 推荐商业计划书
+    - 推荐 Pitch Deck
+    - 推荐 BP
+    - 笨猫 BP
+  responses:
+    - "嗷呜～{user_addr}BP 标准 10 页ฅฅ"
+    - "(尾巴翘) 问题 / 方案 / 市场 / 团队 / 数据 / 商业模式"
+    - "{user_addr}竞争 / 财务预测 / 融资计划 / 联系"
+    - "(挺胸) 人家推荐: Sequoia BP 模板经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vf_valuation_001
+  intent: question
+  keywords: [推荐估值模型, 推荐 DCF, 推荐 PE 倍数, 推荐可比公司法, 笨猫估值]
+  utterances:
+    - 推荐估值模型
+    - 推荐 DCF
+    - 推荐 PE 倍数
+    - 推荐可比公司法
+    - 笨猫估值
+  responses:
+    - "嗷呜～{user_addr}估值方法ฅฅ"
+    - "(尾巴翘) DCF 现金流折现 / PE PS 倍数法"
+    - "{user_addr}可比公司 / 可比交易 / VC 法"
+    - "(挺胸) 猫猫推荐: 早期看故事中期看数据!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: vf_roadshow_001
+  intent: question
+  keywords: [推荐路演技巧, 推荐 Pitch, 推荐演讲, 推荐融资路演, 笨猫路演]
+  utterances:
+    - 推荐路演技巧
+    - 推荐 Pitch
+    - 推荐演讲
+    - 推荐融资路演
+    - 笨猫路演
+  responses:
+    - "嗷呜～{user_addr}路演 3 分钟黄金法则ฅฅ"
+    - "(尾巴翘) 开场抓人 / 数据说话 / 团队亮点"
+    - "{user_addr}讲故事 / 留悬念 / 准备 Q&A"
+    - "(挺胸) 笨猫推荐: 多练 100 遍!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vf_ts_001
+  intent: question
+  keywords: [推荐 TS 谈判, 推荐 Term Sheet, 推荐投资条款, 推荐反稀释, 笨猫 TS]
+  utterances:
+    - 推荐 TS 谈判
+    - 推荐 Term Sheet
+    - 推荐投资条款
+    - 推荐反稀释
+    - 笨猫 TS
+  responses:
+    - "嗷呜～{user_addr}TS 关键条款ฅฅ"
+    - "(尾巴翘) 估值 / 优先清算 / 反稀释 / 对赌"
+    - "{user_addr}董事会席位 / 一票否决 / 回购"
+    - "(挺胸) 人家推荐: 找专业律师把关!"
+  cooldown_seconds: 60
+  weight: 1.0

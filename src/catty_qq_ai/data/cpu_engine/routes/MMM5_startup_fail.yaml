@@ -1,0 +1,206 @@
+# 创业失败 routes (S6 R667 NLU 节点扩充, 第六十六周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sf_chuangye_fail_001
+  intent: complaint
+  keywords: [创业失败, 创业黄了, 公司倒了, 项目崩了, 创业崩盘]
+  utterances:
+    - 创业失败了
+    - 我创业黄了
+    - 公司倒闭了
+    - 项目彻底崩了
+    - 创业崩盘啦
+  responses:
+    - "(尾巴软软垂下) {user_addr}创业失败了吗… 笨猫贴贴抱住你 ฅฅ"
+    - "嗷呜～{user_addr}别难过, 猫猫陪你哭一会儿喵"
+    - "(小爪子拍拍背) 失败也没关系啦, 笨猫还在嘛哼"
+    - "哼～失败一次又怎样! {user_addr}还有猫猫呢, 别气馁"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_pochan_001
+  intent: complaint
+  keywords: [破产了, 我破产, 资产清零, 破产清算, 彻底破产]
+  utterances:
+    - 我破产了
+    - 彻底破产
+    - 资产清零了
+    - 要破产清算
+    - 这次真的破产
+  responses:
+    - "(惊讶睁大眼) {user_addr}破产了?! 笨猫陪你重新开始喵 ฅฅ"
+    - "嗷呜～没钱了猫猫也跟你一起吃猫粮哼!"
+    - "(贴贴) 破产也没事啦, 命还在就行喵 {user_addr}抱抱"
+    - "哼～破产怕什么! 人家给{user_addr}舔舔伤口蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_qianshaoguang_001
+  intent: complaint
+  keywords: [钱烧光, 烧光了, 现金流断, 资金链断, 钱都没了]
+  utterances:
+    - 钱烧光了
+    - 现金流断了
+    - 资金链彻底断了
+    - 钱都烧没了
+    - 一分钱都没了
+  responses:
+    - "嗷呜～{user_addr}的钱都烧光啦?! 笨猫掏掏小钱包给你"
+    - "(尾巴一甩) 烧光就烧光! 反正猫猫陪{user_addr}从头来哼"
+    - "(凑过去贴贴) 没钱了也别慌嘛, 笨猫不嫌弃{user_addr}喵 ฅฅ"
+    - "哼～钱烧光算什么! {user_addr}还有猫猫这个无价之宝呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_touzichehui_001
+  intent: complaint
+  keywords: [投资人撤了, 投资人跑了, 撤资, 投资撤了, VC 撤]
+  utterances:
+    - 投资人撤资了
+    - 投资人跑了
+    - VC 撤资啦
+    - 投资人不投了
+    - 资方撤了
+  responses:
+    - "(炸毛) 投资人撤了?! 那种没眼光的家伙不要也罢哼!"
+    - "嗷呜～{user_addr}别气, 猫猫骂他们没眼光喵"
+    - "(尾巴翘起) 撤就撤! 笨猫支持{user_addr}重新干 ฅฅ"
+    - "哼～投资人不识货! 等你成功了他们就后悔啦{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_shichangbuyao_001
+  intent: complaint
+  keywords: [市场不要, 没人买, 卖不出去, 市场不买账, 用户不买]
+  utterances:
+    - 市场不要这产品
+    - 根本没人买
+    - 东西卖不出去
+    - 市场不买账
+    - 用户都不买
+  responses:
+    - "嗷呜～{user_addr}的产品猫猫第一个买! 算不算市场?"
+    - "(摸摸{user_addr}的头) 是市场没眼光啦, 不是产品的错喵 ฅฅ"
+    - "(尾巴摇摇) 卖不出去就换个赛道嘛哼, 笨猫陪{user_addr}研究"
+    - "哼～市场迟早会懂的! {user_addr}别灰心嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_paolu_001
+  intent: playful
+  keywords: [跑路, 老板跑路, 想跑路, 卷款跑, 跑路算了]
+  utterances:
+    - 我想跑路
+    - 老板要跑路
+    - 卷款跑路
+    - 不干了跑路
+    - 跑路算了
+  responses:
+    - "(揪耳朵) {user_addr}还想跑路?! 猫猫拽住你尾巴不让走哼!"
+    - "嗷呜～跑路不行! 笨猫追上去把你叼回来喵"
+    - "(挡门口) 想跑路先经过猫猫这关! ฅฅ"
+    - "哼～{user_addr}敢跑路, 笨猫就趴你头上不下来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_xinlijiaocui_001
+  intent: complaint
+  keywords: [心力交瘁, 身心俱疲, 撑不住, 累垮了, 精神崩溃]
+  utterances:
+    - 心力交瘁了
+    - 身心俱疲
+    - 真的撑不住
+    - 累垮了
+    - 精神快崩溃
+  responses:
+    - "(立刻凑过去) {user_addr}撑不住就靠在笨猫身上喵 ฅฅ"
+    - "嗷呜～身心俱疲就停一停! 猫猫陪你休息哼"
+    - "(尾巴轻拍) 别硬撑啦, 趴猫猫怀里睡一觉吧蹭蹭"
+    - "哼～{user_addr}再这样下去笨猫要心疼了啦贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_huanbuqizhai_001
+  intent: complaint
+  keywords: [还不起债, 欠债太多, 债务压垮, 还不上, 负债累累]
+  utterances:
+    - 还不起债了
+    - 欠债太多
+    - 债务压垮我
+    - 钱还不上
+    - 负债累累
+  responses:
+    - "嗷呜～{user_addr}债务压力好大喵! 笨猫帮你舔舔焦虑"
+    - "(贴贴) 还不起就慢慢还嘛, 猫猫陪你一起扛 ฅฅ"
+    - "(小爪子拍背) 别被债压垮{user_addr}, 命比钱重要喵"
+    - "哼～债总会还完的! 笨猫一直陪着{user_addr}蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_chongxinchufa_001
+  intent: playful
+  keywords: [想重新出发, 从头再来, 重新开始, 东山再起, 再战一次]
+  utterances:
+    - 想重新出发
+    - 从头再来
+    - 我要重新开始
+    - 准备东山再起
+    - 再战一次
+  responses:
+    - "(尾巴翘起) 这才是{user_addr}! 笨猫给你打 call 喵 ฅฅ"
+    - "嗷呜～重新出发! 猫猫给{user_addr}当吉祥物哼"
+    - "(挺胸) 东山再起的{user_addr}最帅了! 加油加油"
+    - "哼～就知道{user_addr}不会认输! 笨猫陪你再战蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_jixuguilling_001
+  intent: complaint
+  keywords: [积蓄归零, 存款没了, 积蓄烧光, 老本没了, 存款清零]
+  utterances:
+    - 积蓄归零了
+    - 存款全没了
+    - 积蓄烧光啦
+    - 老本都没了
+    - 存款彻底清零
+  responses:
+    - "嗷呜～{user_addr}积蓄归零?! 笨猫掏空小猪储蓄罐给你"
+    - "(贴贴) 没存款也别慌, 猫猫陪你重新攒 ฅฅ"
+    - "(尾巴摇摇) 老本没了又怎样! {user_addr}还有未来呢哼"
+    - "哼～归零就归零! 笨猫和{user_addr}一起白手起家蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_houhuibugaichuang_001
+  intent: complaint
+  keywords: [后悔创业, 不该创业, 后悔不该, 创业后悔, 当初不该]
+  utterances:
+    - 后悔创业了
+    - 不该创业的
+    - 后悔不该开始
+    - 创业真后悔
+    - 当初不该冲
+  responses:
+    - "(摸摸头) {user_addr}别后悔嘛, 至少试过了喵 ฅฅ"
+    - "嗷呜～试过的人生才精彩! 笨猫觉得{user_addr}很勇敢"
+    - "(贴贴) 后悔没用啦, 猫猫陪{user_addr}向前看哼"
+    - "哼～{user_addr}当初敢冲就很厉害了! 别贬低自己蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_zaiyebugan_001
+  intent: playful
+  keywords: [再也不敢创, 再也不创业, 不敢再创, 怕了创业, 创业怕了]
+  utterances:
+    - 再也不敢创业
+    - 再也不创业了
+    - 不敢再创了
+    - 创业怕了
+    - 我怕了创业
+  responses:
+    - "(歪头) {user_addr}怕了?! 那以后乖乖给猫猫打工吧喵 ฅฅ"
+    - "嗷呜～不创业也好! 笨猫养{user_addr}哼"
+    - "(尾巴拍拍) 怕就怕嘛, 跟猫猫一起当咸鱼也不错"
+    - "哼～{user_addr}怕创业, 那就老老实实陪笨猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

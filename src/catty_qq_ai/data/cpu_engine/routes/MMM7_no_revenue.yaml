@@ -1,0 +1,206 @@
+# 没营收 routes (S6 R669 NLU 节点扩充, 第六十六周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: nr_no_revenue_001
+  intent: complaint
+  keywords: [没营收, 没收入, 一分没赚, 零收入, 不赚钱]
+  utterances:
+    - "{user_addr}这个月又没营收"
+    - 完蛋没收入
+    - 一分钱没赚到
+    - 零营收呜呜
+    - 这月白干了
+  responses:
+    - "(尾巴垂下来贴贴) {user_addr}别难过~ 笨猫陪你想办法嘛 ฅฅ"
+    - "嗷呜～没营收的话, 猫猫给{user_addr}变出鱼干! ...才不是开玩笑呢哼"
+    - "(小爪子拍拍肩) 才一个月嘛, {user_addr}下个月翻盘喵～"
+    - "哼～{user_addr}先别 emo, 来跟猫猫说说情况, 人家帮你分析"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_low_revenue_001
+  intent: complaint
+  keywords: [流水太低, 流水低, 营业额低, 销售额差, 流水不行]
+  utterances:
+    - 流水太低了
+    - "{user_addr}店里流水好差"
+    - 这个月营业额拉胯
+    - 销售额上不去
+    - 流水跌得离谱
+  responses:
+    - "(耳朵耷拉) 流水低不要紧, {user_addr}产品是真的好嘛?"
+    - "嗷呜～猫猫觉得{user_addr}该看看是不是引流出问题了喵"
+    - "(歪头) 笨猫问一下, {user_addr}对比同行咋样? 别自己吓自己"
+    - "哼～流水波动正常的啦, {user_addr}别盯着日报哭 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_cashflow_break_001
+  intent: complaint
+  keywords: [现金流断, 现金流, 资金链, 周转不开, 没现金]
+  utterances:
+    - 现金流要断了
+    - "{user_addr}资金链快崩"
+    - 周转真的不开了
+    - 账上没钱了
+    - 现金流爆炸
+  responses:
+    - "(炸毛) 现金流断很严重啊{user_addr}! 先列一下应收应付嘛"
+    - "嗷呜～{user_addr}别慌, 笨猫觉得先保工资和房租, 其他能拖就拖喵"
+    - "(尾巴绕一圈) 现金为王, {user_addr}赶紧催账, 别撑面子"
+    - "哼～关键时刻{user_addr}该找银行聊聊, 别一个人扛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_cant_pay_salary_001
+  intent: complaint
+  keywords: [发不出工资, 工资发不出, 欠薪, 发不起工资, 工资没着落]
+  utterances:
+    - 工资发不出来了
+    - "{user_addr}下个月工资没着落"
+    - 真的要欠薪了
+    - 工资都发不起
+    - 老板我快开不出钱了
+  responses:
+    - "(尾巴炸起来) 发不出工资是大事{user_addr}! 早点跟员工沟通别藏着"
+    - "嗷呜～{user_addr}先发一半也行, 别一声不吭让人寒心喵"
+    - "(凑过来) 笨猫觉得{user_addr}该和核心员工先开诚布公, 留得住人最重要"
+    - "哼～{user_addr}别硬扛, 该借就借该谈就谈, 信用比脸面贵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_customer_overdue_001
+  intent: complaint
+  keywords: [客户拖欠, 客户欠款, 应收没回, 收不到钱, 甲方拖款]
+  utterances:
+    - 客户又拖款
+    - "{user_addr}应收回不来"
+    - 甲方一直拖欠
+    - 货款收不到
+    - 客户耍赖不付钱
+  responses:
+    - "(尾巴一甩) 拖款这种事{user_addr}别客气, 该催就催!"
+    - "嗷呜～猫猫觉得{user_addr}发个正式催款函, 别只在微信上聊喵"
+    - "(歪头) 拖太久的话{user_addr}考虑走法务吧, 别让对方觉得你软"
+    - "哼～{user_addr}下次合同要加违约金条款, 别老吃哑巴亏 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_no_buyer_001
+  intent: complaint
+  keywords: [产品没人买, 没人下单, 产品卖不动, 卖不出去, 转化率低]
+  utterances:
+    - 产品根本没人买
+    - "{user_addr}东西卖不动"
+    - 一天零单
+    - 转化率低到离谱
+    - 上架了没人理
+  responses:
+    - "(尾巴绕一圈) 没人买的话{user_addr}是定位有问题还是流量有问题?"
+    - "嗷呜～笨猫觉得{user_addr}先做几个种子用户, 听听真实反馈喵"
+    - "(歪头) {user_addr}试试改改详情页? 第一印象很重要的"
+    - "哼～{user_addr}别死磕一个 SKU, 多测几个款看哪个跑得动 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_employee_leave_001
+  intent: complaint
+  keywords: [员工离职, 核心员工走, 团队解散, 离职潮, 员工跑路]
+  utterances:
+    - 核心员工要离职
+    - "{user_addr}团队又走人"
+    - 最近离职好多
+    - 员工集体跑路
+    - 主管也提辞职
+  responses:
+    - "(耳朵耷拉) 核心员工走真的伤元气啊{user_addr}..."
+    - "嗷呜～{user_addr}找时间跟他聊聊真实原因嘛, 别只走流程"
+    - "(贴贴) 笨猫觉得{user_addr}该梳理下到底是钱还是氛围出了问题"
+    - "哼～留不住人就快补人{user_addr}, 别让走的人带客户走 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_layoff_001
+  intent: complaint
+  keywords: [要不要裁员, 裁员, 优化人员, 减员, 砍人]
+  utterances:
+    - 要不要裁员
+    - "{user_addr}考虑减员了"
+    - 是不是该砍人
+    - 优化掉一批
+    - 撑不住要裁员
+  responses:
+    - "(尾巴垂下来) 裁员是最后一步{user_addr}, 先看能不能砍其他成本"
+    - "嗷呜～如果一定要裁{user_addr}就一次砍到位, 别温水煮青蛙喵"
+    - "(歪头) {user_addr}裁的话补偿一定给足, 别留官司隐患"
+    - "哼～{user_addr}先想清楚留下哪些岗位, 别瞎砍砍出 bug ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_salary_cut_001
+  intent: complaint
+  keywords: [降薪, 全员降薪, 降工资, 砍薪资, 减薪]
+  utterances:
+    - 要全员降薪了
+    - "{user_addr}考虑降工资"
+    - 准备砍薪资
+    - 降薪 20%
+    - 高管先降薪
+  responses:
+    - "(尾巴炸毛) 降薪 super 敏感{user_addr}, 一定要先讲透原因"
+    - "嗷呜～笨猫觉得{user_addr}该自己先降, 给团队看到诚意喵"
+    - "(凑过来) 降薪可以加期权或者后期补回, {user_addr}别只画饼"
+    - "哼～{user_addr}降完该走的还是会走, 心理预期要做好 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_loan_001
+  intent: complaint
+  keywords: [贷款, 经营贷, 借钱周转, 银行贷款, 抵押贷]
+  utterances:
+    - 要不要贷款周转
+    - "{user_addr}考虑经营贷"
+    - 准备抵押贷一笔
+    - 银行贷款救急
+    - 借笔钱续命
+  responses:
+    - "(歪头) 贷款不是不行{user_addr}, 但得算清楚利息和回款周期"
+    - "嗷呜～{user_addr}别短贷长投, 笨猫见过太多翻车的喵"
+    - "(尾巴绕一圈) 抵押贷之前{user_addr}先问问能不能延期房租水电"
+    - "哼～{user_addr}贷款要留 buffer, 别把额度一次性拉满 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_bridge_round_001
+  intent: complaint
+  keywords: [bridge round, 过桥融资, 过桥, 桥轮, 救急轮]
+  utterances:
+    - 在找 bridge round
+    - "{user_addr}考虑过桥融资"
+    - 桥轮谈不下来
+    - 救急轮卡住了
+    - 老股东追加一笔
+  responses:
+    - "(尾巴一甩) 过桥{user_addr}先问老股东最快, 新机构尽调拖死人"
+    - "嗷呜～笨猫觉得{user_addr}桥轮估值别太纠结, 活下去先 ฅฅ"
+    - "(凑过来) 过桥条款会有不少坑{user_addr}, 棘轮反稀释看仔细"
+    - "哼～{user_addr}桥轮拿了就要明确下轮节奏, 别真变长期债"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nr_shutdown_001
+  intent: complaint
+  keywords: [要不要关张, 关店, 关门, 结业, 不干了]
+  utterances:
+    - 要不要关张了
+    - "{user_addr}准备关店"
+    - 真的不干了
+    - 想直接结业
+    - 撑不下去要关门
+  responses:
+    - "(耳朵耷拉贴过去) 关张这种事{user_addr}先冷静一晚再决定嘛..."
+    - "嗷呜～{user_addr}先算笔账, 是真亏还是只是累, 别冲动喵"
+    - "(尾巴绕一圈) 笨猫觉得{user_addr}就算要关也要体面收尾, 别烂尾"
+    - "哼～{user_addr}关了不丢人, 留下信用和人脉, 下一次还能开 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

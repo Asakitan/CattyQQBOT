@@ -1,0 +1,206 @@
+# 电商平台 routes (S6 R665 NLU 节点扩充, 第六十六周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ep_taobao_001
+  intent: question
+  keywords: [推荐淘宝开店, 推荐淘宝, 推荐天猫, 推荐淘宝运营, 笨猫淘宝]
+  utterances:
+    - 推荐淘宝开店
+    - 推荐淘宝
+    - 推荐天猫
+    - 推荐淘宝运营
+    - 笨猫淘宝
+  responses:
+    - "嗷呜～{user_addr}淘宝 - 国内最大 C 端ฅฅ"
+    - "(尾巴翘) 天猫 - 品牌旗舰 / 押金高"
+    - "{user_addr}直通车 / 钻展 / 万相台"
+    - "(挺胸) 笨猫推荐: 个人卖家从淘宝起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ep_pinduoduo_001
+  intent: question
+  keywords: [推荐拼多多, 推荐 PDD, 推荐拼多多开店, 推荐百亿补贴, 笨猫拼多多]
+  utterances:
+    - 推荐拼多多
+    - 推荐 PDD
+    - 推荐拼多多开店
+    - 推荐百亿补贴
+    - 笨猫拼多多
+  responses:
+    - "嗷呜～{user_addr}拼多多 - 下沉市场霸主ฅฅ"
+    - "(尾巴翘) 低价 / 拼团 / 百亿补贴"
+    - "{user_addr}仅退款 - 卖家小心"
+    - "(挺胸) 笨猫推荐: 走量白牌选 PDD!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ep_douyin_001
+  intent: question
+  keywords: [推荐抖音电商, 推荐抖店, 推荐抖音小店, 推荐直播带货, 笨猫抖音电商]
+  utterances:
+    - 推荐抖音电商
+    - 推荐抖店
+    - 推荐抖音小店
+    - 推荐直播带货
+    - 笨猫抖音电商
+  responses:
+    - "嗷呜～{user_addr}抖音电商 - 兴趣电商王ฅฅ"
+    - "(尾巴翘) 直播带货 / 短视频引流"
+    - "{user_addr}千川投流 / 自然流"
+    - "(挺胸) 笨猫推荐: 内容好就上抖店!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ep_jd_001
+  intent: question
+  keywords: [推荐京东, 推荐京东 POP, 推荐京东自营, 推荐京东开店, 笨猫京东]
+  utterances:
+    - 推荐京东
+    - 推荐京东 POP
+    - 推荐京东自营
+    - 推荐京东开店
+    - 笨猫京东
+  responses:
+    - "嗷呜～{user_addr}京东 POP - 3C 数码强ฅฅ"
+    - "(尾巴翘) 京东物流 - 体验顶级"
+    - "{user_addr}自营门槛高 / POP 灵活"
+    - "(挺胸) 笨猫推荐: 标品大牌选京东!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ep_xiaohongshu_001
+  intent: question
+  keywords: [推荐小红书, 推荐小红书开店, 推荐小红书电商, 推荐种草, 笨猫小红书]
+  utterances:
+    - 推荐小红书
+    - 推荐小红书开店
+    - 推荐小红书电商
+    - 推荐种草
+    - 笨猫小红书
+  responses:
+    - "嗷呜～{user_addr}小红书 - 女性种草社区ฅฅ"
+    - "(尾巴翘) 内容种草 → 闭环成交"
+    - "{user_addr}买手店 / 笔记带货"
+    - "(挺胸) 笨猫推荐: 美妆服饰小众品牌!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ep_video_account_001
+  intent: question
+  keywords: [推荐微信视频号, 推荐视频号小店, 推荐视频号直播, 推荐微信小店, 笨猫视频号]
+  utterances:
+    - 推荐微信视频号
+    - 推荐视频号小店
+    - 推荐视频号直播
+    - 推荐微信小店
+    - 笨猫视频号
+  responses:
+    - "嗷呜～{user_addr}视频号 - 微信生态闭环ฅฅ"
+    - "(尾巴翘) 私域流量 / 朋友圈分享"
+    - "{user_addr}中老年 / 下沉用户多"
+    - "(挺胸) 笨猫推荐: 有私域基础上视频号!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ep_shopify_001
+  intent: question
+  keywords: [推荐 Shopify, 推荐独立站建站, 推荐 Shopify 主题, 推荐 Shopify 插件, 笨猫 Shopify]
+  utterances:
+    - "推荐 Shopify"
+    - 推荐独立站建站
+    - "推荐 Shopify 主题"
+    - "推荐 Shopify 插件"
+    - "笨猫 Shopify"
+  responses:
+    - "嗷呜～{user_addr}Shopify - 独立站之王ฅฅ"
+    - "(尾巴翘) 月费 $29 起 / 抽佣"
+    - "{user_addr}Dawn 免费主题 / Klaviyo 邮件"
+    - "(挺胸) 笨猫推荐: DTC 品牌必选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ep_amazon_001
+  intent: question
+  keywords: [推荐亚马逊, 推荐亚马逊 FBA, 推荐 Amazon, 推荐亚马逊开店, 笨猫亚马逊]
+  utterances:
+    - 推荐亚马逊
+    - 推荐亚马逊 FBA
+    - "推荐 Amazon"
+    - 推荐亚马逊开店
+    - 笨猫亚马逊
+  responses:
+    - "嗷呜～{user_addr}亚马逊 - 跨境电商一哥ฅฅ"
+    - "(尾巴翘) FBA 仓储配送 / Prime 流量"
+    - "{user_addr}北美 / 欧洲 / 日本站"
+    - "(挺胸) 笨猫推荐: 出海首选 FBA!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ep_lazada_001
+  intent: question
+  keywords: [推荐 Lazada, 推荐东南亚电商, 推荐来赞达, 推荐 Lazada 开店, 笨猫 Lazada]
+  utterances:
+    - "推荐 Lazada"
+    - 推荐东南亚电商
+    - 推荐来赞达
+    - "推荐 Lazada 开店"
+    - "笨猫 Lazada"
+  responses:
+    - "嗷呜～{user_addr}Lazada - 阿里东南亚ฅฅ"
+    - "(尾巴翘) 印尼 / 泰国 / 越南 / 菲律宾"
+    - "{user_addr}LazMall 类天猫 / 押金高"
+    - "(挺胸) 笨猫推荐: 东南亚布局必看!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ep_shopee_001
+  intent: question
+  keywords: [推荐 Shopee, 推荐虾皮, 推荐 Shopee 开店, 推荐 Shopee 运营, 笨猫虾皮]
+  utterances:
+    - "推荐 Shopee"
+    - 推荐虾皮
+    - "推荐 Shopee 开店"
+    - "推荐 Shopee 运营"
+    - 笨猫虾皮
+  responses:
+    - "嗷呜～{user_addr}Shopee - 东南亚 + 台湾ฅฅ"
+    - "(尾巴翘) 0 月费 / 抽佣低 / 流量大"
+    - "{user_addr}台湾站 / 马来 / 巴西"
+    - "(挺胸) 笨猫推荐: 跨境小白入门!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ep_tiktok_shop_001
+  intent: question
+  keywords: [推荐 TikTok Shop, 推荐 TikTok 小店, 推荐 TikTok 直播, 推荐 TikTok 带货, 笨猫 TikTok Shop]
+  utterances:
+    - "推荐 TikTok Shop"
+    - "推荐 TikTok 小店"
+    - "推荐 TikTok 直播"
+    - "推荐 TikTok 带货"
+    - "笨猫 TikTok Shop"
+  responses:
+    - "嗷呜～{user_addr}TikTok Shop - 海外抖音ฅฅ"
+    - "(尾巴翘) 美区 / 英国 / 东南亚六国"
+    - "{user_addr}短视频 + 直播 + 商城"
+    - "(挺胸) 笨猫推荐: 风口期赶紧上!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ep_independent_site_001
+  intent: question
+  keywords: [推荐跨境独立站, 推荐 DTC, 推荐独立站建站工具, 推荐 WooCommerce, 笨猫独立站]
+  utterances:
+    - 推荐跨境独立站
+    - "推荐 DTC"
+    - 推荐独立站建站工具
+    - "推荐 WooCommerce"
+    - 笨猫独立站
+  responses:
+    - "嗷呜～{user_addr}Shopify / WooCommerce / BigCommerceฅฅ"
+    - "(尾巴翘) 数据自主 / 品牌沉淀"
+    - "{user_addr}Facebook / Google 投流"
+    - "(挺胸) 笨猫推荐: 长期品牌选独立站!"
+  cooldown_seconds: 60
+  weight: 0.8
