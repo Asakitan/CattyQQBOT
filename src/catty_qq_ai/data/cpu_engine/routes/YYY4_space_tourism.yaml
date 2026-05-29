@@ -1,0 +1,206 @@
+# 太空旅游 routes (S6 R786 NLU 节点扩充, 第七十八周期 5/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: st_spacex_001
+  intent: question
+  keywords: [推荐 SpaceX, 推荐星舰, 推荐 Starship, 推荐马斯克火箭, 笨猫 SpaceX]
+  utterances:
+    - 推荐 SpaceX
+    - 推荐星舰
+    - 推荐 Starship
+    - 推荐马斯克火箭
+    - 笨猫 SpaceX
+  responses:
+    - "嗷呜～{user_addr}SpaceX Starship - 史上最大火箭ฅฅ"
+    - "(尾巴翘) 可回收 / Falcon 9 / Dragon"
+    - "{user_addr}目标月球 + 火星 / 商业领头"
+    - "(挺胸) 笨猫推荐: 看星舰试飞最热血!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_blueorigin_001
+  intent: question
+  keywords: [推荐 Blue Origin, 推荐蓝色起源, 推荐 New Shepard, 推荐贝索斯, 笨猫蓝色起源]
+  utterances:
+    - 推荐 Blue Origin
+    - 推荐蓝色起源
+    - 推荐 New Shepard
+    - 推荐贝索斯
+    - 笨猫蓝色起源
+  responses:
+    - "嗷呜～{user_addr}New Shepard - 亚轨道旅游ฅฅ"
+    - "(尾巴翘) 贝索斯创立 / 大窗户观景"
+    - "{user_addr}11 分钟无重力 / 单座 28 万刀"
+    - "(挺胸) 笨猫推荐: 想体验失重选它!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_virgin_001
+  intent: question
+  keywords: [推荐 Virgin Galactic, 推荐维珍银河, 推荐 SpaceShipTwo, 推荐布兰森, 笨猫维珍银河]
+  utterances:
+    - 推荐 Virgin Galactic
+    - 推荐维珍银河
+    - 推荐 SpaceShipTwo
+    - 推荐布兰森
+    - 笨猫维珍银河
+  responses:
+    - "嗷呜～{user_addr}SpaceShipTwo - 飞机背着升空ฅฅ"
+    - "(尾巴翘) 布兰森爵士 / 母机 + 火箭飞机"
+    - "{user_addr}45 万刀 / 几分钟失重"
+    - "(挺胸) 笨猫推荐: 体验最舒适的太空游!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_iss_001
+  intent: question
+  keywords: [推荐国际空间站, 推荐 ISS, 推荐空间站旅游, 推荐 Axiom, 笨猫 ISS]
+  utterances:
+    - 推荐国际空间站
+    - 推荐 ISS
+    - 推荐空间站旅游
+    - 推荐 Axiom
+    - 笨猫 ISS
+  responses:
+    - "嗷呜～{user_addr}ISS - 400km 高空绕地ฅฅ"
+    - "(尾巴翘) Axiom Space 商业舱段"
+    - "{user_addr}单人 5500 万刀 / 住一周"
+    - "(挺胸) 笨猫推荐: 富豪级太空体验!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: st_cnstation_001
+  intent: question
+  keywords: [推荐中国空间站, 推荐天宫, 推荐神舟, 推荐 CSS, 笨猫天宫]
+  utterances:
+    - 推荐中国空间站
+    - 推荐天宫
+    - 推荐神舟
+    - 推荐 CSS
+    - 笨猫天宫
+  responses:
+    - "嗷呜～{user_addr}天宫空间站 - 中国自主ฅฅ"
+    - "(尾巴翘) 神舟载人 / 长征火箭"
+    - "{user_addr}三舱构型 / 未来商业航天员"
+    - "(挺胸) 笨猫推荐: 看天宫直播也很燃!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: st_moon_001
+  intent: question
+  keywords: [推荐月球旅行, 推荐 dearMoon, 推荐绕月, 推荐前泽友作, 笨猫月球旅行]
+  utterances:
+    - 推荐月球旅行
+    - 推荐 dearMoon
+    - 推荐绕月
+    - 推荐前泽友作
+    - 笨猫月球旅行
+  responses:
+    - "嗷呜～{user_addr}dearMoon - 星舰绕月ฅฅ"
+    - "(尾巴翘) 前泽友作包船 / 艺术家成员"
+    - "{user_addr}NASA Artemis 重返月球"
+    - "(挺胸) 笨猫推荐: 绕月飞行最浪漫!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: st_mars_001
+  intent: question
+  keywords: [推荐火星移民, 推荐 Mars, 推荐马斯克火星, 推荐红色星球, 笨猫火星]
+  utterances:
+    - 推荐火星移民
+    - 推荐 Mars
+    - 推荐马斯克火星
+    - 推荐红色星球
+    - 笨猫火星
+  responses:
+    - "嗷呜～{user_addr}Musk 火星城 100 万人ฅฅ"
+    - "(尾巴翘) 单程 6-9 个月 / 星舰运输"
+    - "{user_addr}NASA / SpaceX / 长期梦想"
+    - "(挺胸) 笨猫推荐: 想当火星第一代!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: st_satellite_001
+  intent: question
+  keywords: [推荐私人卫星, 推荐 CubeSat, 推荐发射卫星, 推荐 Starlink, 笨猫卫星]
+  utterances:
+    - 推荐私人卫星
+    - 推荐 CubeSat
+    - 推荐发射卫星
+    - 推荐 Starlink
+    - 笨猫卫星
+  responses:
+    - "嗷呜～{user_addr}CubeSat - 立方体小卫星ฅฅ"
+    - "(尾巴翘) 高校项目 / SpaceX 拼车发射"
+    - "{user_addr}几万到几十万刀 / 个人可玩"
+    - "(挺胸) 笨猫推荐: 极客最高浪漫!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: st_hotel_001
+  intent: question
+  keywords: [推荐太空酒店, 推荐 Aurora Station, 推荐 Orbital Reef, 推荐轨道酒店, 笨猫太空酒店]
+  utterances:
+    - 推荐太空酒店
+    - 推荐 Aurora Station
+    - 推荐 Orbital Reef
+    - 推荐轨道酒店
+    - 笨猫太空酒店
+  responses:
+    - "嗷呜～{user_addr}Aurora Station - 12 天 950 万ฅฅ"
+    - "(尾巴翘) Orbital Reef / Voyager Station"
+    - "{user_addr}未来人造重力 / 360 度地球景"
+    - "(挺胸) 笨猫推荐: 蜜月首选 (超贵)!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: st_elevator_001
+  intent: question
+  keywords: [推荐太空电梯, 推荐 Space Elevator, 推荐碳纳米管, 推荐轨道缆绳, 笨猫太空电梯]
+  utterances:
+    - 推荐太空电梯
+    - 推荐 Space Elevator
+    - 推荐碳纳米管
+    - 推荐轨道缆绳
+    - 笨猫太空电梯
+  responses:
+    - "嗷呜～{user_addr}太空电梯 - 赤道地静轨道缆ฅฅ"
+    - "(尾巴翘) 大林组 2050 计划 / 日本"
+    - "{user_addr}碳纳米管材料 / 还在概念"
+    - "(挺胸) 笨猫推荐: 科幻迷必关注!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: st_grave_001
+  intent: question
+  keywords: [推荐太空墓地, 推荐 Celestis, 推荐骨灰发射, 推荐 Memorial Spaceflight, 笨猫太空墓地]
+  utterances:
+    - 推荐太空墓地
+    - 推荐 Celestis
+    - 推荐骨灰发射
+    - 推荐 Memorial Spaceflight
+    - 笨猫太空墓地
+  responses:
+    - "嗷呜～{user_addr}Celestis - 骨灰送太空ฅฅ"
+    - "(尾巴翘) 1 克骨灰 / 2500 刀起"
+    - "{user_addr}近地轨道 / 月球 / 深空选项"
+    - "(挺胸) 笨猫推荐: 死后也能浪迹星海!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: st_skydiving_001
+  intent: question
+  keywords: [推荐高空跳伞, 推荐 Skydiving, 推荐 Red Bull Stratos, 推荐平流层跳伞, 笨猫跳伞]
+  utterances:
+    - 推荐高空跳伞
+    - 推荐 Skydiving
+    - 推荐 Red Bull Stratos
+    - 推荐平流层跳伞
+    - 笨猫跳伞
+  responses:
+    - "嗷呜～{user_addr}Red Bull Stratos - 39km 跳伞ฅฅ"
+    - "(尾巴翘) 鲍姆加特纳 / 突破音速"
+    - "{user_addr}普通跳伞 4km / 体验门槛低"
+    - "(挺胸) 笨猫推荐: 平民版太空体验!"
+  cooldown_seconds: 60
+  weight: 0.8

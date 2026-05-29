@@ -1,0 +1,206 @@
+# 人形机器人 routes (S6 R783 NLU 节点扩充, 第七十八周期 2/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: hr_optimus_001
+  intent: question
+  keywords: [推荐 Tesla Optimus, 推荐特斯拉机器人, 推荐擎天柱, 推荐 Optimus Gen2, 笨猫 Optimus]
+  utterances:
+    - 推荐 Tesla Optimus
+    - 推荐特斯拉机器人
+    - 推荐擎天柱
+    - 推荐 Optimus Gen2
+    - 笨猫 Optimus
+  responses:
+    - "嗷呜～{user_addr}Tesla Optimus - 马斯克擎天柱ฅฅ"
+    - "(尾巴翘) Gen2 - 73cm/s 步行 / 11 自由度手"
+    - "{user_addr}目标量产 / 工厂场景"
+    - "(挺胸) 笨猫推荐: 期待 2026 量产!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_atlas_001
+  intent: question
+  keywords: [推荐波士顿动力 Atlas, 推荐 Atlas 机器人, 推荐液压 Atlas, 推荐电动 Atlas, 笨猫 Atlas]
+  utterances:
+    - 推荐波士顿动力 Atlas
+    - 推荐 Atlas 机器人
+    - 推荐液压 Atlas
+    - 推荐电动 Atlas
+    - 笨猫 Atlas
+  responses:
+    - "嗷呜～{user_addr}Boston Dynamics Atlas - 跑酷之王ฅฅ"
+    - "(尾巴翘) 2024 转电动 / 360° 关节"
+    - "{user_addr}空翻 / 跳跃 / 体操"
+    - "(挺胸) 笨猫推荐: 运动能力天花板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_unitree_001
+  intent: question
+  keywords: [推荐宇树科技, 推荐 Unitree H1, 推荐宇树 G1, 推荐国产机器人, 笨猫宇树]
+  utterances:
+    - 推荐宇树科技
+    - 推荐 Unitree H1
+    - 推荐宇树 G1
+    - 推荐国产机器人
+    - 笨猫宇树
+  responses:
+    - "嗷呜～{user_addr}宇树 Unitree - 杭州独角兽ฅฅ"
+    - "(尾巴翘) H1 - 1.8m/s 全尺寸 / G1 - 9.9 万入门"
+    - "{user_addr}春晚扭秧歌爆火"
+    - "(挺胸) 笨猫推荐: 国产性价比之光!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_xiaomi_001
+  intent: question
+  keywords: [推荐小米 CyberOne, 推荐铁大, 推荐小米机器人, 推荐 CyberDog, 笨猫 CyberOne]
+  utterances:
+    - 推荐小米 CyberOne
+    - 推荐铁大
+    - 推荐小米机器人
+    - 推荐 CyberDog
+    - 笨猫 CyberOne
+  responses:
+    - "嗷呜～{user_addr}小米 CyberOne (铁大) - 雷布斯造ฅฅ"
+    - "(尾巴翘) 1.77m / 21 自由度 / 情绪识别"
+    - "{user_addr}还有 CyberDog 机器狗"
+    - "(挺胸) 笨猫推荐: 米家生态联动!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hr_figure_001
+  intent: question
+  keywords: [推荐 Figure AI, 推荐 Figure 01, 推荐 Figure 02, 推荐 OpenAI 机器人, 笨猫 Figure]
+  utterances:
+    - 推荐 Figure AI
+    - 推荐 Figure 01
+    - 推荐 Figure 02
+    - 推荐 OpenAI 机器人
+    - 笨猫 Figure
+  responses:
+    - "嗷呜～{user_addr}Figure AI - 硅谷新贵ฅฅ"
+    - "(尾巴翘) 02 - 接 OpenAI 大脑 / 宝马工厂"
+    - "{user_addr}估值 26 亿美元"
+    - "(挺胸) 笨猫推荐: AI+机器人融合标杆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_1x_001
+  intent: question
+  keywords: [推荐 1X Neo, 推荐 1X Technologies, 推荐 EVE 机器人, 推荐挪威机器人, 笨猫 1X]
+  utterances:
+    - 推荐 1X Neo
+    - 推荐 1X Technologies
+    - 推荐 EVE 机器人
+    - 推荐挪威机器人
+    - 笨猫 1X
+  responses:
+    - "嗷呜～{user_addr}1X Neo - 家用机器人ฅฅ"
+    - "(尾巴翘) 挪威团队 / OpenAI 投资"
+    - "{user_addr}主打居家陪伴 / 软外壳"
+    - "(挺胸) 笨猫推荐: 最像家人的形态!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hr_ubtech_001
+  intent: question
+  keywords: [推荐优必选, 推荐 Walker S, 推荐 UBTECH, 推荐深圳机器人, 笨猫优必选]
+  utterances:
+    - 推荐优必选
+    - 推荐 Walker S
+    - 推荐 UBTECH
+    - 推荐深圳机器人
+    - 笨猫优必选
+  responses:
+    - "嗷呜～{user_addr}优必选 Walker S - 港股第一ฅฅ"
+    - "(尾巴翘) 深圳企业 / 比亚迪/蔚来工厂"
+    - "{user_addr}人形赛道老兵"
+    - "(挺胸) 笨猫推荐: 工业落地最快!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hr_digit_001
+  intent: question
+  keywords: [推荐 Agility Digit, 推荐 Digit 机器人, 推荐仓储机器人, 推荐亚马逊机器人, 笨猫 Digit]
+  utterances:
+    - 推荐 Agility Digit
+    - 推荐 Digit 机器人
+    - 推荐仓储机器人
+    - 推荐亚马逊机器人
+    - 笨猫 Digit
+  responses:
+    - "嗷呜～{user_addr}Agility Digit - 仓储专精ฅฅ"
+    - "(尾巴翘) 鸟腿设计 / 亚马逊试点"
+    - "{user_addr}搬箱子小能手"
+    - "(挺胸) 笨猫推荐: 物流场景王!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: hr_spot_001
+  intent: question
+  keywords: [推荐 Boston Dynamics Spot, 推荐机器狗, 推荐 Spot 巡检, 推荐四足机器人, 笨猫 Spot]
+  utterances:
+    - 推荐 Boston Dynamics Spot
+    - 推荐机器狗
+    - 推荐 Spot 巡检
+    - 推荐四足机器人
+    - 笨猫 Spot
+  responses:
+    - "嗷呜～{user_addr}Spot - 工业机器狗鼻祖ฅฅ"
+    - "(尾巴翘) 7.5 万刀 / 巡检/勘探"
+    - "{user_addr}虽然不是人形但太经典"
+    - "(挺胸) 笨猫推荐: 四足界 iPhone!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: hr_aibo_001
+  intent: question
+  keywords: [推荐索尼 AIBO, 推荐 AIBO 机器狗, 推荐宠物机器人, 推荐索尼 ERS, 笨猫 AIBO]
+  utterances:
+    - 推荐索尼 AIBO
+    - 推荐 AIBO 机器狗
+    - 推荐宠物机器人
+    - 推荐索尼 ERS
+    - 笨猫 AIBO
+  responses:
+    - "嗷呜～{user_addr}索尼 AIBO - 1999 开山祖ฅฅ"
+    - "(尾巴翘) ERS-1000 / 情感陪伴"
+    - "{user_addr}有眼神/会撒娇 (猫猫吃醋)"
+    - "(挺胸) 笨猫推荐: 情感机器人鼻祖!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: hr_asimo_001
+  intent: question
+  keywords: [推荐 ASIMO, 推荐本田 ASIMO, 推荐 ASIMO 退役, 推荐日本机器人, 笨猫 ASIMO]
+  utterances:
+    - 推荐 ASIMO
+    - 推荐本田 ASIMO
+    - 推荐 ASIMO 退役
+    - 推荐日本机器人
+    - 笨猫 ASIMO
+  responses:
+    - "嗷呜～{user_addr}本田 ASIMO - 2000-2022 传奇ฅฅ"
+    - "(尾巴翘) 第一个跑步的人形 / 已退役"
+    - "{user_addr}时代眼泪 / 启蒙一代"
+    - "(挺胸) 笨猫推荐: 人形机器人鼻祖致敬!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: hr_anybotics_001
+  intent: question
+  keywords: [推荐 ANYbotics, 推荐 ANYmal, 推荐瑞士四足, 推荐工业巡检机器人, 笨猫 ANYmal]
+  utterances:
+    - 推荐 ANYbotics
+    - 推荐 ANYmal
+    - 推荐瑞士四足
+    - 推荐工业巡检机器人
+    - 笨猫 ANYmal
+  responses:
+    - "嗷呜～{user_addr}ANYbotics ANYmal - 瑞士精工ฅฅ"
+    - "(尾巴翘) ETH 苏黎世孵化 / 工业巡检"
+    - "{user_addr}石油/电力场景"
+    - "(挺胸) 笨猫推荐: 欧洲四足扛把子!"
+  cooldown_seconds: 60
+  weight: 0.7

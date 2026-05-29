@@ -1,0 +1,206 @@
+# AR/VR 眼镜 routes (S6 R782 NLU 节点扩充, 第七十八周期 1/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: sg_vision_pro_001
+  intent: question
+  keywords: [推荐 Apple Vision Pro, 推荐苹果头显, 推荐 visionOS, 推荐空间计算, 笨猫 Vision Pro]
+  utterances:
+    - 推荐 Apple Vision Pro
+    - 推荐苹果头显
+    - 推荐 visionOS
+    - 推荐空间计算
+    - 笨猫 Vision Pro
+  responses:
+    - "嗷呜～{user_addr}Vision Pro - 苹果空间计算ฅฅ"
+    - "(尾巴翘) M2+R1 双芯 / 4K Micro-OLED"
+    - "{user_addr}EyeSight / 手眼追踪 - 黑科技"
+    - "(挺胸) 笨猫推荐: 信仰充值 / 钱包准备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_quest3_001
+  intent: question
+  keywords: [推荐 Meta Quest 3, 推荐 Quest 3, 推荐 Oculus, 推荐 Meta VR, 笨猫 Quest 3]
+  utterances:
+    - 推荐 Meta Quest 3
+    - 推荐 Quest 3
+    - 推荐 Oculus
+    - 推荐 Meta VR
+    - 笨猫 Quest 3
+  responses:
+    - "嗷呜～{user_addr}Quest 3 - VR 销量王ฅฅ"
+    - "(尾巴翘) XR2 Gen2 / 彩色透视"
+    - "{user_addr}游戏库丰富 / 一体机"
+    - "(挺胸) 笨猫推荐: VR 入门首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_psvr2_001
+  intent: question
+  keywords: [推荐 PSVR2, 推荐 PS VR2, 推荐索尼头显, 推荐 PlayStation VR, 笨猫 PSVR2]
+  utterances:
+    - 推荐 PSVR2
+    - 推荐 PS VR2
+    - 推荐索尼头显
+    - 推荐 PlayStation VR
+    - 笨猫 PSVR2
+  responses:
+    - "嗷呜～{user_addr}PSVR2 - PS5 专属ฅฅ"
+    - "(尾巴翘) OLED HDR / 眼动追踪"
+    - "{user_addr}地平线 / GT7 VR - 神作"
+    - "(挺胸) 笨猫推荐: PS5 玩家必入!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sg_pico4_001
+  intent: question
+  keywords: [推荐 Pico 4, 推荐 Pico, 推荐字节 VR, 推荐 Pico Neo, 笨猫 Pico]
+  utterances:
+    - 推荐 Pico 4
+    - 推荐 Pico
+    - 推荐字节 VR
+    - 推荐 Pico Neo
+    - 笨猫 Pico
+  responses:
+    - "嗷呜～{user_addr}Pico 4 - 国产 VR 标杆ฅฅ"
+    - "(尾巴翘) Pancake 光学 / 轻薄"
+    - "{user_addr}字节亲儿子 / 内容多"
+    - "(挺胸) 笨猫推荐: 国行 Quest 替代!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sg_magic_leap_001
+  intent: question
+  keywords: [推荐 Magic Leap 2, 推荐 Magic Leap, 推荐企业 AR, 推荐 ML2, 笨猫 Magic Leap]
+  utterances:
+    - 推荐 Magic Leap 2
+    - 推荐 Magic Leap
+    - 推荐企业 AR
+    - 推荐 ML2
+    - 笨猫 Magic Leap
+  responses:
+    - "嗷呜～{user_addr}Magic Leap 2 - 企业级 ARฅฅ"
+    - "(尾巴翘) 70° FOV / 动态调光"
+    - "{user_addr}医疗 / 工业 - 专业场景"
+    - "(挺胸) 笨猫推荐: B 端用户专用!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sg_hololens_001
+  intent: question
+  keywords: [推荐 Hololens 2, 推荐微软 AR, 推荐 Hololens, 推荐 MR 头显, 笨猫 Hololens]
+  utterances:
+    - 推荐 Hololens 2
+    - 推荐微软 AR
+    - 推荐 Hololens
+    - 推荐 MR 头显
+    - 笨猫 Hololens
+  responses:
+    - "嗷呜～{user_addr}Hololens 2 - 微软 MRฅฅ"
+    - "(尾巴翘) 全息显示 / 手势识别"
+    - "{user_addr}军工 / 设计 / 培训"
+    - "(挺胸) 笨猫推荐: MR 鼻祖!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sg_rayban_meta_001
+  intent: question
+  keywords: [推荐 Ray-Ban Meta, 推荐雷朋智能眼镜, 推荐 Meta 眼镜, 推荐 AI 眼镜, 笨猫雷朋 Meta]
+  utterances:
+    - 推荐 Ray-Ban Meta
+    - 推荐雷朋智能眼镜
+    - 推荐 Meta 眼镜
+    - 推荐 AI 眼镜
+    - 笨猫雷朋 Meta
+  responses:
+    - "嗷呜～{user_addr}Ray-Ban Meta - 时尚 AI 眼镜ฅฅ"
+    - "(尾巴翘) 摄像头 / 喇叭 / Meta AI"
+    - "{user_addr}日常佩戴 / 第一人称拍摄"
+    - "(挺胸) 笨猫推荐: 最实用 AI 眼镜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_xreal_001
+  intent: question
+  keywords: [推荐 Xreal, 推荐 Xreal Air, 推荐 Nreal, 推荐 AR 眼镜, 笨猫 Xreal]
+  utterances:
+    - 推荐 Xreal
+    - 推荐 Xreal Air
+    - 推荐 Nreal
+    - 推荐 AR 眼镜
+    - 笨猫 Xreal
+  responses:
+    - "嗷呜～{user_addr}Xreal Air 2 - 便携观影神器ฅฅ"
+    - "(尾巴翘) Sony Micro-OLED / 轻薄"
+    - "{user_addr}接手机 / Switch / Steam Deck"
+    - "(挺胸) 笨猫推荐: 移动巨幕!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sg_leibird_x2_001
+  intent: question
+  keywords: [推荐雷鸟 X2, 推荐雷鸟创新, 推荐 RayNeo, 推荐国产 AR, 笨猫雷鸟]
+  utterances:
+    - 推荐雷鸟 X2
+    - 推荐雷鸟创新
+    - 推荐 RayNeo
+    - 推荐国产 AR
+    - 笨猫雷鸟
+  responses:
+    - "嗷呜～{user_addr}雷鸟 X2 - 双目全彩 ARฅฅ"
+    - "(尾巴翘) 衍射光波导 / AI 助手"
+    - "{user_addr}TCL 系 / 翻译/导航"
+    - "(挺胸) 笨猫推荐: 国产 AR 头部!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sg_rokid_max_001
+  intent: question
+  keywords: [推荐 Rokid Max, 推荐 Rokid, 推荐 Rokid AR, 推荐若琪, 笨猫 Rokid]
+  utterances:
+    - 推荐 Rokid Max
+    - 推荐 Rokid
+    - 推荐 Rokid AR
+    - 推荐若琪
+    - 笨猫 Rokid
+  responses:
+    - "嗷呜～{user_addr}Rokid Max - 国产观影 ARฅฅ"
+    - "(尾巴翘) 215 寸虚拟巨幕"
+    - "{user_addr}Type-C 直连 / 便携"
+    - "(挺胸) 笨猫推荐: Xreal 平替!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sg_luo_ar_001
+  intent: question
+  keywords: [推荐罗永浩 AR, 推荐细红线, 推荐 Thin Red Line, 推荐老罗 AR, 笨猫罗永浩 AR]
+  utterances:
+    - 推荐罗永浩 AR
+    - 推荐细红线
+    - 推荐 Thin Red Line
+    - 推荐老罗 AR
+    - 笨猫罗永浩 AR
+  responses:
+    - "嗷呜～{user_addr}细红线 - 老罗再创业ฅฅ"
+    - "(尾巴翘) JINGAR / 还在画饼"
+    - "{user_addr}情怀股 / 等产品"
+    - "(挺胸) 笨猫推荐: 持续观察!"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: sg_pico_bytedance_001
+  intent: question
+  keywords: [推荐字节 PICO, 推荐 PICO 4 Ultra, 推荐字节跳动 VR, 推荐 PICO 一体机, 笨猫字节 PICO]
+  utterances:
+    - 推荐字节 PICO
+    - 推荐 PICO 4 Ultra
+    - 推荐字节跳动 VR
+    - 推荐 PICO 一体机
+    - 笨猫字节 PICO
+  responses:
+    - "嗷呜～{user_addr}PICO 4 Ultra - 字节旗舰ฅฅ"
+    - "(尾巴翘) 骁龙 XR2 Gen2 / MR"
+    - "{user_addr}抖音 VR / 直播带货"
+    - "(挺胸) 笨猫推荐: 国行 VR 首选!"
+  cooldown_seconds: 60
+  weight: 0.9

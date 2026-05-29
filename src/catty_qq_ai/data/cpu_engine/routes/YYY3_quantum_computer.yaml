@@ -1,0 +1,206 @@
+# 量子计算 routes (S6 R785 NLU 节点扩充, 第七十八周期 4/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: qc_ibm_001
+  intent: question
+  keywords: [推荐 IBM Quantum, 推荐 IBM 量子, 推荐 Qiskit 平台, 推荐 IBM Q, 笨猫 IBM 量子]
+  utterances:
+    - 推荐 IBM Quantum
+    - 推荐 IBM 量子
+    - 推荐 Qiskit 平台
+    - 推荐 IBM Q
+    - 笨猫 IBM 量子
+  responses:
+    - "嗷呜～{user_addr}IBM Quantum - 超导先锋ฅฅ"
+    - "(尾巴翘) Eagle 127 / Condor 1121 量子比特"
+    - "{user_addr}免费云访问 / Qiskit 配套"
+    - "(挺胸) 笨猫推荐: 入门首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_google_001
+  intent: question
+  keywords: [推荐 Google Quantum AI, 推荐 Sycamore, 推荐谷歌量子, 推荐 Google 量子, 笨猫谷歌量子]
+  utterances:
+    - 推荐 Google Quantum AI
+    - 推荐 Sycamore
+    - 推荐谷歌量子
+    - 推荐 Google 量子
+    - 笨猫谷歌量子
+  responses:
+    - "嗷呜～{user_addr}Google Quantum AI - 量子霸权宣告ฅฅ"
+    - "(尾巴翘) Sycamore 53 / Willow 105"
+    - "{user_addr}超导路线 / 纠错领先"
+    - "(挺胸) 笨猫推荐: Willow 纠错里程碑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_jiuzhang_001
+  intent: question
+  keywords: [推荐九章三号, 推荐中科大九章, 推荐光量子九章, 推荐 Jiuzhang, 笨猫九章]
+  utterances:
+    - 推荐九章三号
+    - 推荐中科大九章
+    - 推荐光量子九章
+    - 推荐 Jiuzhang
+    - 笨猫九章
+  responses:
+    - "嗷呜～{user_addr}九章三号 - 中科大光量子骄傲ฅฅ"
+    - "(尾巴翘) 255 光子 / 高斯玻色采样"
+    - "{user_addr}潘建伟团队 / 国货之光"
+    - "(挺胸) 笨猫推荐: 中国量子顶流!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_zuchongzhi_001
+  intent: question
+  keywords: [推荐祖冲之, 推荐祖冲之三号, 推荐中科大祖冲之, 推荐 Zuchongzhi, 笨猫祖冲之]
+  utterances:
+    - 推荐祖冲之
+    - 推荐祖冲之三号
+    - 推荐中科大祖冲之
+    - 推荐 Zuchongzhi
+    - 笨猫祖冲之
+  responses:
+    - "嗷呜～{user_addr}祖冲之三号 - 超导路线扛把子ฅฅ"
+    - "(尾巴翘) 105 量子比特 / 对标 Google"
+    - "{user_addr}中科大双线并进 / 光+超导"
+    - "(挺胸) 笨猫推荐: 国产超导旗舰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_dwave_001
+  intent: question
+  keywords: [推荐 D-Wave, 推荐量子退火, 推荐 Advantage, 推荐 D-Wave 退火机, 笨猫 D-Wave]
+  utterances:
+    - 推荐 D-Wave
+    - 推荐量子退火
+    - 推荐 Advantage
+    - 推荐 D-Wave 退火机
+    - 笨猫 D-Wave
+  responses:
+    - "嗷呜～{user_addr}D-Wave - 退火路线独苗ฅฅ"
+    - "(尾巴翘) Advantage 5000+ / 优化问题强"
+    - "{user_addr}非通用量子 / 组合优化神器"
+    - "(挺胸) 笨猫推荐: 实用化最早!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: qc_rigetti_001
+  intent: question
+  keywords: [推荐 Rigetti, 推荐 Rigetti 超导, 推荐 Aspen, 推荐 Ankaa, 笨猫 Rigetti]
+  utterances:
+    - 推荐 Rigetti
+    - 推荐 Rigetti 超导
+    - 推荐 Aspen
+    - 推荐 Ankaa
+    - 笨猫 Rigetti
+  responses:
+    - "嗷呜～{user_addr}Rigetti - 美国超导新秀ฅฅ"
+    - "(尾巴翘) Aspen-M / Ankaa-3 84 量子比特"
+    - "{user_addr}Forest SDK / 云访问"
+    - "(挺胸) 笨猫推荐: 创业公司硬核!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: qc_ionq_001
+  intent: question
+  keywords: [推荐 IonQ, 推荐离子阱, 推荐 IonQ 量子, 推荐 Aria, 笨猫离子阱]
+  utterances:
+    - 推荐 IonQ
+    - 推荐离子阱
+    - 推荐 IonQ 量子
+    - 推荐 Aria
+    - 笨猫离子阱
+  responses:
+    - "嗷呜～{user_addr}IonQ - 离子阱龙头ฅฅ"
+    - "(尾巴翘) Aria / Forte 35 算法量子比特"
+    - "{user_addr}保真度高 / 室温运行"
+    - "(挺胸) 笨猫推荐: 离子阱代表!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: qc_psiquantum_001
+  intent: question
+  keywords: [推荐 PsiQuantum, 推荐光量子计算, 推荐光子量子, 推荐 Xanadu, 笨猫光量子]
+  utterances:
+    - 推荐 PsiQuantum
+    - 推荐光量子计算
+    - 推荐光子量子
+    - 推荐 Xanadu
+    - 笨猫光量子
+  responses:
+    - "嗷呜～{user_addr}PsiQuantum - 百万光子比特野心ฅฅ"
+    - "(尾巴翘) Xanadu Borealis / 加拿大光量子"
+    - "{user_addr}室温运行 / 光纤兼容"
+    - "(挺胸) 笨猫推荐: 光路线潜力股!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: qc_qiskit_001
+  intent: question
+  keywords: [推荐 Qiskit, 推荐 Qiskit 编程, 推荐 IBM SDK, 推荐 Qiskit 入门, 笨猫 Qiskit]
+  utterances:
+    - 推荐 Qiskit
+    - 推荐 Qiskit 编程
+    - 推荐 IBM SDK
+    - 推荐 Qiskit 入门
+    - 笨猫 Qiskit
+  responses:
+    - "嗷呜～{user_addr}Qiskit - Python 量子编程王ฅฅ"
+    - "(尾巴翘) 开源 / 文档全 / 社区大"
+    - "{user_addr}pip install qiskit / Jupyter 友好"
+    - "(挺胸) 笨猫推荐: 量子编程入门必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_cirq_001
+  intent: question
+  keywords: [推荐 Cirq, 推荐 Google Cirq, 推荐 Cirq 编程, 推荐 TensorFlow Quantum, 笨猫 Cirq]
+  utterances:
+    - 推荐 Cirq
+    - 推荐 Google Cirq
+    - 推荐 Cirq 编程
+    - 推荐 TensorFlow Quantum
+    - 笨猫 Cirq
+  responses:
+    - "嗷呜～{user_addr}Cirq - Google 出品 NISQ 框架ฅฅ"
+    - "(尾巴翘) Python / TFQ 机器学习集成"
+    - "{user_addr}面向 Sycamore 优化"
+    - "(挺胸) 笨猫推荐: Google 系首选!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: qc_shor_001
+  intent: question
+  keywords: [推荐 Shor 算法, 推荐 Shor, 推荐量子分解算法, 推荐 RSA 破解, 笨猫 Shor]
+  utterances:
+    - 推荐 Shor 算法
+    - 推荐 Shor
+    - 推荐量子分解算法
+    - 推荐 RSA 破解
+    - 笨猫 Shor
+  responses:
+    - "嗷呜～{user_addr}Shor - 大数分解神算法ฅฅ"
+    - "(尾巴翘) 指数加速 / RSA 杀手"
+    - "{user_addr}1994 Peter Shor 提出"
+    - "(挺胸) 笨猫推荐: 量子计算招牌!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: qc_grover_001
+  intent: question
+  keywords: [推荐 Grover 算法, 推荐 Grover, 推荐量子搜索算法, 推荐量子搜索, 笨猫 Grover]
+  utterances:
+    - 推荐 Grover 算法
+    - 推荐 Grover
+    - 推荐量子搜索算法
+    - 推荐量子搜索
+    - 笨猫 Grover
+  responses:
+    - "嗷呜～{user_addr}Grover - 量子搜索 √N 加速ฅฅ"
+    - "(尾巴翘) 无序数据库搜索王者"
+    - "{user_addr}1996 Lov Grover 提出"
+    - "(挺胸) 笨猫推荐: 平方加速经典!"
+  cooldown_seconds: 60
+  weight: 0.9

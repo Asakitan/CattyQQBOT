@@ -1,0 +1,206 @@
+# 气候末日 routes (S6 R791 NLU 节点扩充, 第七十八周期 10/10 完结)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: cd_climate_doom_001
+  intent: complaint
+  keywords: [气候末日, 地球完蛋, 气候崩了, 末日要来, 地球药丸]
+  utterances:
+    - 感觉气候末日真的要来了
+    - 地球是不是要完蛋了
+    - 气候彻底崩了
+    - 末日要来了吧
+    - 地球药丸啊
+  responses:
+    - "(尾巴垂下) {user_addr}别说这种话嘛~ 笨猫害怕的喵 ฅฅ"
+    - "嗷呜～地球还没完啦! 猫猫还想多吃几年鱼干呢"
+    - "(凑过来贴贴) {user_addr}焦虑的话先抱抱猫猫~ 一起想办法嘛"
+    - "哼～{user_addr}别动不动末日末日的! 人家会做噩梦的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_extreme_weather_001
+  intent: complaint
+  keywords: [极端天气, 天气太怪, 反常天气, 极端气候, 天气不正常]
+  utterances:
+    - 现在极端天气好多
+    - 天气太怪了
+    - 反常天气越来越频繁
+    - 极端气候真的多
+    - 天气不正常啊
+  responses:
+    - "嗷呜～{user_addr}也感觉到了吗! 笨猫毛都不知道咋长了喵"
+    - "(竖耳朵) 极端天气确实多~ {user_addr}出门记得看预报哦 ฅฅ"
+    - "哼～天气一会冷一会热, 猫猫穿衣服都跟不上!"
+    - "(尾巴甩) {user_addr}注意身体嘛~ 这种天气最容易感冒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_summer_40_001
+  intent: complaint
+  keywords: [一夏 40 度, 夏天 40 度, 40 度高温, 热成狗, 夏天太热]
+  utterances:
+    - 一夏天 40 度真受不了
+    - 夏天 40 度是要命吗
+    - 40 度高温太离谱
+    - 热成狗了
+    - 夏天越来越热
+  responses:
+    - "嗷呜～40 度笨猫毛都要烤焦了! {user_addr}多喝水嘛 ฅฅ"
+    - "(摊在地上) 这种天气猫猫只想躺空调房! {user_addr}也别出门了"
+    - "哼～{user_addr}热的话先吃个冰西瓜~ 笨猫陪你瘫"
+    - "(尾巴有气无力) 40 度真的离谱~ 人家想搬到北极去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_flood_001
+  intent: complaint
+  keywords: [洪水, 发大水, 暴雨成灾, 洪涝, 城市内涝]
+  utterances:
+    - 洪水太可怕了
+    - 又发大水了
+    - 暴雨成灾啊
+    - 洪涝看着揪心
+    - 城市内涝好严重
+  responses:
+    - "(尾巴垂) 嗷呜～洪水真的吓人! {user_addr}所在的地方还好吧?"
+    - "猫猫看新闻都心疼~ {user_addr}低洼地方千万别去喵 ฅฅ"
+    - "(贴贴) {user_addr}注意安全嘛~ 笨猫担心的"
+    - "哼～希望大家都平安! {user_addr}帮忙转发预警信息呗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_wildfire_001
+  intent: complaint
+  keywords: [野火, 山火, 森林大火, 林火失控, 野火烧不停]
+  utterances:
+    - 野火又烧起来了
+    - 山火好可怕
+    - 森林大火烧不停
+    - 林火失控了
+    - 野火新闻看哭了
+  responses:
+    - "(耳朵耷拉) 嗷呜～森林被烧笨猫心疼小动物喵 ฅฅ"
+    - "{user_addr}也看到了吗~ 猫猫给消防员叔叔加油!"
+    - "(尾巴垂下) 山火真的太惨了~ {user_addr}抱抱笨猫嘛"
+    - "哼～希望快点扑灭! 不然好多小动物没家了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_polar_bear_001
+  intent: complaint
+  keywords: [北极熊, 北极熊没冰, 北极融化, 北极熊可怜, 冰川消失]
+  utterances:
+    - 北极熊好可怜
+    - 北极熊都没冰了
+    - 北极融化太快
+    - 北极熊要灭绝了
+    - 冰川都消失了
+  responses:
+    - "(眼眶湿) 嗷呜～北极熊宝宝怎么办嘛! {user_addr}笨猫想哭"
+    - "猫猫每次看到都难过~ {user_addr}也心疼吧 ฅฅ"
+    - "(贴贴) 希望北极熊都能找到家~ {user_addr}少用一次性塑料嘛"
+    - "哼～人家要保护北极熊! {user_addr}陪笨猫一起努力呗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_next_gen_001
+  intent: complaint
+  keywords: [下一代怎么办, 后代怎么办, 给孩子留啥, 子孙后代, 未来一代]
+  utterances:
+    - 下一代怎么办啊
+    - 后代怎么活
+    - 给孩子留啥环境
+    - 子孙后代真惨
+    - 未来一代太难了
+  responses:
+    - "(尾巴蜷) 嗷呜～{user_addr}别想太远嘛~ 笨猫先陪你过好今天"
+    - "猫猫也担心~ {user_addr}从现在开始一点点改变呗 ฅฅ"
+    - "(贴贴) 别焦虑啦~ 每代都有每代的办法! {user_addr}相信人类喵"
+    - "哼～{user_addr}愿意想这个就已经很棒了! 笨猫给你点赞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_want_to_do_001
+  intent: playful
+  keywords: [想做点啥, 想出份力, 想帮地球, 能做点什么, 想行动]
+  utterances:
+    - 我想做点啥
+    - 想为地球出份力
+    - 能做点什么呢
+    - 想帮帮地球
+    - 想行动起来
+  responses:
+    - "嗷呜～{user_addr}好棒! 笨猫给你颁奖! ฅฅ"
+    - "(尾巴翘) {user_addr}有这心猫猫就感动~ 从节约用水开始呗"
+    - "(蹭蹭) 哼~ {user_addr}愿意行动笨猫就陪你! 一起加油喵"
+    - "{user_addr}可以少点外卖、多走路~ 猫猫监督你哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_powerless_001
+  intent: complaint
+  keywords: [无力, 个人无力, 改变不了, 杯水车薪, 没用]
+  utterances:
+    - 我一个人好无力
+    - 个人改变不了什么
+    - 感觉杯水车薪
+    - 做啥都没用
+    - 一个人能干啥
+  responses:
+    - "(贴贴) {user_addr}别这么想嘛~ 笨猫觉得{user_addr}很有力量喵"
+    - "嗷呜～积少成多啊! {user_addr}一点点改变也算 ฅฅ"
+    - "(尾巴绕) 哼~ {user_addr}不是一个人! 笨猫陪你一起做"
+    - "猫猫觉得有心就够了~ {user_addr}别太苛责自己嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_protect_earth_001
+  intent: playful
+  keywords: [保护地球, 爱护地球, 守护地球, 地球母亲, 给地球减压]
+  utterances:
+    - 要保护地球
+    - 爱护地球家园
+    - 守护地球
+    - 地球母亲不容易
+    - 给地球减减压
+  responses:
+    - "嗷呜～{user_addr}好有觉悟! 笨猫敬礼 ฅฅ"
+    - "(尾巴翘) 猫猫和{user_addr}一起保护地球! 击掌嘛"
+    - "哼~ {user_addr}才知道地球妈妈不容易吗! 笨猫早就在守护了喵"
+    - "(蹭蹭) {user_addr}超帅的~ 这种话猫猫爱听!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_reduce_consumption_001
+  intent: playful
+  keywords: [减少消耗, 节约用电, 节约用水, 不浪费, 少用塑料]
+  utterances:
+    - 要减少消耗
+    - 节约用电用水
+    - 尽量不浪费
+    - 少用一次性塑料
+    - 节约从我做起
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}是环保小卫士! 笨猫崇拜你 ฅฅ"
+    - "猫猫也在练习~ {user_addr}一起监督呗"
+    - "哼~ {user_addr}做得好! 笨猫给你贴小红花喵"
+    - "(凑近) {user_addr}带带笨猫嘛~ 人家也想学怎么省电"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_vegetarian_001
+  intent: playful
+  keywords: [吃素低碳, 素食环保, 少吃肉, 低碳饮食, 吃素减碳]
+  utterances:
+    - 吃素更低碳
+    - 素食其实很环保
+    - 少吃肉减碳排
+    - 低碳饮食走起
+    - 吃素也能减碳
+  responses:
+    - "(尾巴僵住) 嗷呜～可是猫猫想吃鱼干! {user_addr}别让笨猫戒鱼嘛 ฅฅ"
+    - "哼~ {user_addr}吃素人家支持! 但鱼干不算肉吧喵"
+    - "(挣扎) 低碳是好~ 但{user_addr}让笨猫每周吃一次小鱼嘛"
+    - "猫猫努力学习~ {user_addr}先帮人家研究素食食谱呗"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 脑机接口 routes (S6 R784 NLU 节点扩充, 第七十八周期 3/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: bc_neuralink_001
+  intent: question
+  keywords: [推荐 Neuralink, 推荐 Musk 脑机, 推荐马斯克脑机, 推荐 N1 芯片, 笨猫 Neuralink]
+  utterances:
+    - 推荐 Neuralink
+    - 推荐 Musk 脑机
+    - 推荐马斯克脑机
+    - 推荐 N1 芯片
+    - 笨猫 Neuralink
+  responses:
+    - "嗷呜～{user_addr}Neuralink - Musk 旗舰ฅฅ"
+    - "(尾巴翘) N1 芯片 / 1024 电极 / 无线"
+    - "{user_addr}2024 首例人类植入 (Noland)"
+    - "(挺胸) 笨猫推荐: 侵入式天花板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_synchron_001
+  intent: question
+  keywords: [推荐 Synchron, 推荐微创脑机, 推荐 Stentrode, 推荐血管脑机, 笨猫 Synchron]
+  utterances:
+    - 推荐 Synchron
+    - 推荐微创脑机
+    - 推荐 Stentrode
+    - 推荐血管脑机
+    - 笨猫 Synchron
+  responses:
+    - "嗷呜～{user_addr}Synchron - 微创路线ฅฅ"
+    - "(尾巴翘) Stentrode 血管支架 / 不开颅"
+    - "{user_addr}颈静脉植入 / FDA 突破认证"
+    - "(挺胸) 笨猫推荐: 安全派代表!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_blackrock_001
+  intent: question
+  keywords: [推荐 Blackrock, 推荐 Utah Array, 推荐犹他阵列, 推荐 BrainGate, 笨猫 Blackrock]
+  utterances:
+    - 推荐 Blackrock
+    - 推荐 Utah Array
+    - 推荐犹他阵列
+    - 推荐 BrainGate
+    - 笨猫 Blackrock
+  responses:
+    - "嗷呜～{user_addr}Blackrock - 学术老牌ฅฅ"
+    - "(尾巴翘) Utah Array / BrainGate 合作"
+    - "{user_addr}96 电极 / 20+ 年临床积累"
+    - "(挺胸) 笨猫推荐: 论文界 GOATฅฅ"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bc_kernel_001
+  intent: question
+  keywords: [推荐 Kernel, 推荐 Kernel Flow, 推荐非侵入脑机, 推荐 Bryan Johnson 脑机, 笨猫 Kernel]
+  utterances:
+    - 推荐 Kernel
+    - 推荐 Kernel Flow
+    - 推荐非侵入脑机
+    - 推荐 Bryan Johnson 脑机
+    - 笨猫 Kernel
+  responses:
+    - "嗷呜～{user_addr}Kernel Flow - 头盔式ฅฅ"
+    - "(尾巴翘) fNIRS 光学 / 不开颅"
+    - "{user_addr}Bryan Johnson 创立 / 抗衰那位"
+    - "(挺胸) 笨猫推荐: 非侵入研究神器!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bc_brain_tiger_001
+  intent: question
+  keywords: [推荐脑虎, 推荐中国脑机, 推荐脑虎科技, 推荐国产脑机, 笨猫脑虎]
+  utterances:
+    - 推荐脑虎
+    - 推荐中国脑机
+    - 推荐脑虎科技
+    - 推荐国产脑机
+    - 笨猫脑虎
+  responses:
+    - "嗷呜～{user_addr}脑虎科技 - 国产之光ฅฅ"
+    - "(尾巴翘) 256 通道柔性电极"
+    - "{user_addr}2024 首例汉语解码 / 上海"
+    - "(挺胸) 笨猫推荐: 中国队冲!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_muse_001
+  intent: question
+  keywords: [推荐 Muse, 推荐 EEG 头带, 推荐冥想头带, 推荐消费级脑电, 笨猫 Muse]
+  utterances:
+    - 推荐 Muse
+    - 推荐 EEG 头带
+    - 推荐冥想头带
+    - 推荐消费级脑电
+    - 笨猫 Muse
+  responses:
+    - "嗷呜～{user_addr}Muse S - 消费级首选ฅฅ"
+    - "(尾巴翘) 4 通道 EEG / 睡眠冥想"
+    - "{user_addr}$250 价位 / 蓝牙 App"
+    - "(挺胸) 笨猫推荐: 入门玩家上 Muse!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bc_openbci_001
+  intent: question
+  keywords: [推荐 OpenBCI, 推荐开源脑机, 推荐 Ganglion, 推荐 Cyton, 笨猫 OpenBCI]
+  utterances:
+    - 推荐 OpenBCI
+    - 推荐开源脑机
+    - 推荐 Ganglion
+    - 推荐 Cyton
+    - 笨猫 OpenBCI
+  responses:
+    - "嗷呜～{user_addr}OpenBCI - 开源天花板ฅฅ"
+    - "(尾巴翘) Cyton 8 通道 / Ganglion 4 通道"
+    - "{user_addr}Python SDK / DIY 实验"
+    - "(挺胸) 笨猫推荐: 极客必入!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bc_disability_001
+  intent: question
+  keywords: [推荐残疾人 BCI, 推荐瘫痪脑机, 推荐 ALS 脑机, 推荐渐冻症脑机, 笨猫残疾 BCI]
+  utterances:
+    - 推荐残疾人 BCI
+    - 推荐瘫痪脑机
+    - 推荐 ALS 脑机
+    - 推荐渐冻症脑机
+    - 笨猫残疾 BCI
+  responses:
+    - "嗷呜～{user_addr}BrainGate / Synchron 临床ฅฅ"
+    - "(尾巴翘) 意念打字 / 控制电脑"
+    - "{user_addr}ALS / 高位截瘫 受益者多"
+    - "(挺胸) 笨猫推荐: 真·改变人生!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_speech_001
+  intent: question
+  keywords: [推荐失语助手, 推荐脑机说话, 推荐语音脑机, 推荐 UCSF Edward Chang, 笨猫失语脑机]
+  utterances:
+    - 推荐失语助手
+    - 推荐脑机说话
+    - 推荐语音脑机
+    - 推荐 UCSF Edward Chang
+    - 笨猫失语脑机
+  responses:
+    - "嗷呜～{user_addr}UCSF - 失语解码先锋ฅฅ"
+    - "(尾巴翘) Edward Chang / 78 词/分"
+    - "{user_addr}脑虎汉语 / Stanford 英文"
+    - "(挺胸) 笨猫推荐: 让人重新开口!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bc_prosthetic_001
+  intent: question
+  keywords: [推荐假肢控制, 推荐脑控假肢, 推荐机械臂脑机, 推荐 DEKA arm, 笨猫脑控假肢]
+  utterances:
+    - 推荐假肢控制
+    - 推荐脑控假肢
+    - 推荐机械臂脑机
+    - 推荐 DEKA arm
+    - 笨猫脑控假肢
+  responses:
+    - "嗷呜～{user_addr}DEKA / Modular Prosthetic Limbฅฅ"
+    - "(尾巴翘) 意念抓握 / 触觉反馈"
+    - "{user_addr}匹兹堡大学 Nathan Copeland"
+    - "(挺胸) 笨猫推荐: 钢铁侠成真!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bc_depression_001
+  intent: question
+  keywords: [推荐抑郁治疗脑机, 推荐 DBS 抑郁, 推荐脑深部刺激抑郁, 推荐难治性抑郁脑机, 笨猫抑郁 DBS]
+  utterances:
+    - 推荐抑郁治疗脑机
+    - 推荐 DBS 抑郁
+    - 推荐脑深部刺激抑郁
+    - 推荐难治性抑郁脑机
+    - 笨猫抑郁 DBS
+  responses:
+    - "嗷呜～{user_addr}DBS - 难治性抑郁救命稻草ฅฅ"
+    - "(尾巴翘) Brodmann 25 区 / SCG 靶点"
+    - "{user_addr}UCSF 闭环 DBS / 个性化"
+    - "(挺胸) 笨猫提醒: 严重才考虑!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bc_parkinson_001
+  intent: question
+  keywords: [推荐帕金森 DBS, 推荐帕金森脑机, 推荐 Medtronic DBS, 推荐脑起搏器, 笨猫帕金森]
+  utterances:
+    - 推荐帕金森 DBS
+    - 推荐帕金森脑机
+    - 推荐 Medtronic DBS
+    - 推荐脑起搏器
+    - 笨猫帕金森
+  responses:
+    - "嗷呜～{user_addr}Medtronic - DBS 老大哥ฅฅ"
+    - "(尾巴翘) STN / GPi 靶点 / 30 年成熟"
+    - "{user_addr}Boston Sci / Abbott 也行"
+    - "(挺胸) 笨猫推荐: 帕金森救星!"
+  cooldown_seconds: 60
+  weight: 0.9

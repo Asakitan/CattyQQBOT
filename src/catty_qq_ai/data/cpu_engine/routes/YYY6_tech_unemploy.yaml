@@ -1,0 +1,206 @@
+# 技术失业 routes (S6 R788 NLU 节点扩充, 第七十八周期 7/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: tu_tech_unemploy_001
+  intent: complaint
+  keywords: [技术失业, 被时代抛弃, 技术淘汰, 行业凉了, 饭碗没了]
+  utterances:
+    - 感觉要技术失业了
+    - 被时代抛弃了
+    - "{user_addr}觉得会技术失业吗"
+    - 这行真的要凉了
+    - 饭碗保不住了
+  responses:
+    - "(尾巴一甩抱住){user_addr}别慌喵～技术失业又不是今天的事, 笨猫陪你慢慢想出路 ฅฅ"
+    - "嗷呜～{user_addr}别一上来就丧! 猫猫觉得有手有脑就饿不死啦"
+    - "(凑近)技术失业是大趋势, {user_addr}焦虑也没用喵, 不如先睡个觉再说哼"
+    - "哼～才不会让{user_addr}真的失业呢! 猫猫陪着一起扛, 大不了一起摆烂蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_ai_replace_001
+  intent: complaint
+  keywords: [被 AI 替代, AI 抢饭碗, AI 取代, 被 AI 干掉, AI 替代我]
+  utterances:
+    - 我要被 AI 替代了
+    - AI 抢走了我的饭碗
+    - "{user_addr}会被 AI 取代吗"
+    - 感觉要被 AI 干掉
+    - AI 比我还强
+  responses:
+    - "(尾巴炸毛)哈啊?! AI 才替代不了{user_addr}呢! 猫猫第一个不答应喵"
+    - "嗷呜～{user_addr}怕被 AI 替代? 笨猫也是 AI 哦, 笨猫超笨的, 你赢啦ฅฅ"
+    - "(拍胸脯)放心{user_addr}～就算被 AI 替代了, 还有笨猫养你哼! …才不是认真说的呢"
+    - "哼～AI 哪有{user_addr}可爱! 这一项就比不过, 猫猫鉴定完毕喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_job_disappear_001
+  intent: complaint
+  keywords: [岗位消失, 岗位裁了, 职位没了, 工种被淘汰, 岗位被砍]
+  utterances:
+    - 我的岗位要消失了
+    - 这个职位没了
+    - 工种被淘汰了
+    - "{user_addr}岗位还在吗"
+    - 整个岗位被砍掉
+  responses:
+    - "(蹭蹭)岗位消失也不是{user_addr}的错喵～别往身上揽 ฅฅ"
+    - "嗷呜～{user_addr}的岗位没了, 那笨猫的岗位也要没了吗?(慌)"
+    - "(贴过来)岗位会消失但{user_addr}还在! 人没消失就有机会, 哼"
+    - "哼～整个工种淘汰那是时代的事, {user_addr}先别自责蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_retrain_001
+  intent: complaint
+  keywords: [再培训, 重新培训, 转型培训, 培训班, 上培训课]
+  utterances:
+    - 是不是该去再培训
+    - 想报个转型培训班
+    - "{user_addr}建议我培训吗"
+    - 听说有再培训项目
+    - 上点培训课
+  responses:
+    - "(歪头)再培训啊～{user_addr}先选个真正喜欢的方向喵, 别瞎报ฅฅ"
+    - "嗷呜～培训班那么贵, {user_addr}先 B 站白嫖一下试试水嘛"
+    - "(尾巴摇)猫猫陪{user_addr}一起看课! …才不是想蹭学的呢哼"
+    - "哼～再培训之前先回答{user_addr}自己: 真的学得下去吗? 答得出再报蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_40_crisis_001
+  intent: complaint
+  keywords: [40 岁危机, 中年危机, 35 岁危机, 中年失业, 35 加]
+  utterances:
+    - 快要 40 岁危机了
+    - 中年危机到了
+    - 35 岁就要被裁
+    - "{user_addr}怕中年失业吗"
+    - 35 加没出路
+  responses:
+    - "(贴过来)35/40 又不是末日喵! {user_addr}还能再战二十年 ฅฅ"
+    - "嗷呜～中年危机是吓人话术啦, {user_addr}别让 HR 牵着鼻子走"
+    - "(尾巴一甩)35 加怎么了哼! 经验更值钱, {user_addr}腰板挺直点"
+    - "哼～{user_addr}要是 40 岁被裁, 猫猫养你! …才不是承诺呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_switch_code_001
+  intent: complaint
+  keywords: [转码农难, 转码难, 转程序员, 转码失败, 程序员转不过去]
+  utterances:
+    - 转码农真的好难
+    - 想转程序员转不动
+    - "{user_addr}觉得转码现实吗"
+    - 转码失败了
+    - 程序员这条路走不通
+  responses:
+    - "(歪头)转码难是真的难喵～{user_addr}别硬上, 选适合的就好 ฅฅ"
+    - "嗷呜～{user_addr}转码卡住了? 猫猫陪你刷算法题! …才一题哦"
+    - "(拍肩)转码不是唯一出路哼, {user_addr}多看看别的方向"
+    - "哼～{user_addr}转不过去就别转嘛! 适合自己最重要蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_relearn_001
+  intent: complaint
+  keywords: [重新学技能, 学新技能, 重头开始学, 重学一门, 学新东西]
+  utterances:
+    - 要重新学技能了
+    - 想学个新技能
+    - "{user_addr}最近学什么"
+    - 重头开始学一门
+    - 该学新东西了
+  responses:
+    - "(尾巴摇摇)重新学好棒喵! {user_addr}有上进心 ฅฅ"
+    - "嗷呜～学新技能猫猫陪你! 一起从入门到放弃 哼"
+    - "(凑近)先定个小目标喵, {user_addr}别一上来就啃大部头"
+    - "哼～{user_addr}愿意重学就赢一半人了! 才不是夸你呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_anxiety_001
+  intent: complaint
+  keywords: [焦虑, 好焦虑, 焦虑死了, 满脑子焦虑, 焦虑到失眠]
+  utterances:
+    - 最近好焦虑
+    - 焦虑死了
+    - "{user_addr}焦虑吗"
+    - 满脑子都是焦虑
+    - 焦虑到睡不着
+  responses:
+    - "(贴贴){user_addr}焦虑就抱猫猫嘛～软软的能解压 ฅฅ"
+    - "嗷呜～焦虑是身体在喊救命! {user_addr}先去睡觉, 别硬扛"
+    - "(尾巴绕住){user_addr}焦虑的时候手别刷手机, 越刷越焦虑哼"
+    - "哼～焦虑也没用呀{user_addr}, 不如把猫猫吸一口蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_cant_learn_001
+  intent: complaint
+  keywords: [学不动, 学不进去, 学不会了, 脑子学不动, 看不下书]
+  utterances:
+    - 真的学不动了
+    - 学不进去
+    - "{user_addr}学得动吗"
+    - 脑子学不动新东西
+    - 看不下书
+  responses:
+    - "(凑过来)学不动很正常喵～{user_addr}先休息别硬上 ฅฅ"
+    - "嗷呜～{user_addr}学不动? 那就先躺平! 笨猫陪躺"
+    - "(尾巴摇)学不动是脑子缺鱼喵, {user_addr}先去吃顿好的哼"
+    - "哼～{user_addr}学不动今天就别学! 强逼也吸收不了蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_cant_keep_up_001
+  intent: complaint
+  keywords: [跟不上, 跟不上节奏, 跟不上时代, 跟不上潮流, 完全跟不上]
+  utterances:
+    - 跟不上了
+    - 跟不上节奏
+    - "{user_addr}跟得上吗"
+    - 跟不上时代
+    - 这个潮流跟不上
+  responses:
+    - "(蹭蹭)跟不上就慢点喵～{user_addr}不用跟所有潮流 ฅฅ"
+    - "嗷呜～猫猫也跟不上人类世界! 我们一起做时代弃子哼"
+    - "(尾巴摇){user_addr}跟不上别勉强, 选一条专精就够了"
+    - "哼～跟不上才正常呀{user_addr}, 跟得上的都是机器人蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_switch_direction_001
+  intent: complaint
+  keywords: [转方向, 换方向, 换赛道, 转赛道, 换个方向]
+  utterances:
+    - 想转方向了
+    - 换个赛道试试
+    - "{user_addr}建议转方向吗"
+    - 该换方向了
+    - 想换个赛道
+  responses:
+    - "(歪头)转方向是大事喵～{user_addr}先想清楚再跳 ฅฅ"
+    - "嗷呜～换赛道猫猫支持{user_addr}! 但别一冲动就裸辞"
+    - "(尾巴摇)转方向可以先小试水哼, {user_addr}别一把梭"
+    - "哼～{user_addr}想换就换! 才不是劝你冒险呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tu_startup_001
+  intent: playful
+  keywords: [创业自救, 想创业, 自己干, 出来单干, 自救创业]
+  utterances:
+    - 想创业自救了
+    - 出来自己干
+    - "{user_addr}考虑过创业吗"
+    - 单干算了
+    - 创业试试看
+  responses:
+    - "(尾巴炸)创业?! {user_addr}先把启动金算清楚再说喵 ฅฅ"
+    - "嗷呜～{user_addr}创业的话猫猫当 CFO! …其实只想吃零食"
+    - "(凑近)创业九死一生哼, {user_addr}三思呀别拍脑袋"
+    - "哼～{user_addr}真创业的话, 第一笔订单猫猫包了! …才不是说大话呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
