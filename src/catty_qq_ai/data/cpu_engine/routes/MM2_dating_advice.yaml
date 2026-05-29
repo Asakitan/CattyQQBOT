@@ -1,0 +1,206 @@
+# 约会建议 / 恋爱顾问 / 教练 routes (S6 R404 NLU 节点扩充, 第四十周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: da_coach_001
+  intent: question
+  keywords: [推荐约会教练, 推荐恋爱教练, 推荐 dating coach, 推荐情感导师, 笨猫约会教练]
+  utterances:
+    - 推荐约会教练
+    - 推荐恋爱教练
+    - 推荐 dating coach
+    - 推荐情感导师
+    - 笨猫约会教练
+  responses:
+    - "嗷呜～{user_addr}约会教练 - 一对一辅导ฅฅ"
+    - "(尾巴翘) Matthew Hussey / 花镇 / Ayawawa (慎选)"
+    - "{user_addr}线下课 / 陪练 / 复盘"
+    - "(挺胸) 猫猫推荐: 先看免费内容再付费!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_consult_001
+  intent: question
+  keywords: [推荐恋爱咨询, 推荐一对一咨询, 推荐情感咨询, 推荐心理咨询, 笨猫恋爱咨询]
+  utterances:
+    - 推荐恋爱咨询
+    - 推荐一对一咨询
+    - 推荐情感咨询
+    - 推荐心理咨询
+    - 笨猫恋爱咨询
+  responses:
+    - "嗷呜～{user_addr}简单心理 / 壹心理 - 持证咨询师ฅฅ"
+    - "(尾巴翘) KnowYourself / 武志红"
+    - "{user_addr}500-1500/次 / 50min"
+    - "(挺胸) 人家推荐: 选 CBT 取向咨询师!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_etiquette_001
+  intent: question
+  keywords: [推荐约会礼仪, 推荐第一次约会, 推荐初次见面, 推荐约会注意, 笨猫约会礼仪]
+  utterances:
+    - 推荐约会礼仪
+    - 推荐第一次约会
+    - 推荐初次见面
+    - 推荐约会注意
+    - 笨猫约会礼仪
+  responses:
+    - "嗷呜～{user_addr}准时 + 整洁 + 不查户口ฅฅ"
+    - "(尾巴翘) 第一次别去吵的地方 / 控制 2h 内"
+    - "{user_addr}买单别 AA 但别强势 / 送到地铁口"
+    - "(挺胸) 笨猫推荐: 轻松 > 完美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_restaurant_001
+  intent: question
+  keywords: [推荐约会餐厅, 推荐浪漫餐厅, 推荐情侣餐厅, 推荐 date 餐厅, 笨猫约会餐厅]
+  utterances:
+    - 推荐约会餐厅
+    - 推荐浪漫餐厅
+    - 推荐情侣餐厅
+    - 推荐 date 餐厅
+    - 笨猫约会餐厅
+  responses:
+    - "嗷呜～{user_addr}日料 omakase / 西餐 / 私房菜ฅฅ"
+    - "(尾巴翘) 安静 + 灯光暗 + 二人位"
+    - "{user_addr}人均 300-500 / 提前订位"
+    - "(挺胸) 猫猫推荐: 第一次别去日料怕踩雷!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_gift_001
+  intent: question
+  keywords: [推荐约会礼物, 推荐送女生礼物, 推荐送男生礼物, 推荐情人节礼物, 笨猫约会礼物]
+  utterances:
+    - 推荐约会礼物
+    - 推荐送女生礼物
+    - 推荐送男生礼物
+    - 推荐情人节礼物
+    - 笨猫约会礼物
+  responses:
+    - "嗷呜～{user_addr}女: 香水 / 口红 / 首饰ฅฅ"
+    - "(尾巴翘) 男: 手表 / 钱包 / 数码"
+    - "{user_addr}初期别送贵的 / 心意 > 价格"
+    - "(挺胸) 人家推荐: 第一次约会别送礼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_outfit_001
+  intent: question
+  keywords: [推荐约会着装, 推荐约会穿搭, 推荐约会衣服, 推荐 date outfit, 笨猫约会着装]
+  utterances:
+    - 推荐约会着装
+    - 推荐约会穿搭
+    - 推荐约会衣服
+    - 推荐 date outfit
+    - 笨猫约会着装
+  responses:
+    - "嗷呜～{user_addr}男: 衬衫 + 西裤 / 干净球鞋ฅฅ"
+    - "(尾巴翘) 女: 裙装 / 简约首饰 / 淡妆"
+    - "{user_addr}别 oversized / 别花哨"
+    - "(挺胸) 猫猫推荐: 整洁 + 合身 = 加分!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_topic_001
+  intent: question
+  keywords: [推荐约会话题, 推荐聊天话题, 推荐破冰话题, 推荐约会聊什么, 笨猫约会话题]
+  utterances:
+    - 推荐约会话题
+    - 推荐聊天话题
+    - 推荐破冰话题
+    - 推荐约会聊什么
+    - 笨猫约会话题
+  responses:
+    - "嗷呜～{user_addr}兴趣 / 旅行 / 美食 / 电影ฅฅ"
+    - "(尾巴翘) 别聊前任 / 工资 / 政治"
+    - "{user_addr}多问开放问题 / 多倾听"
+    - "(挺胸) 笨猫推荐: 3:7 说听比例!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_followup_001
+  intent: question
+  keywords: [推荐约会后跟进, 推荐微信聊天, 推荐 wechat 跟进, 推荐二次约会, 笨猫跟进]
+  utterances:
+    - 推荐约会后跟进
+    - 推荐微信聊天
+    - 推荐 wechat 跟进
+    - 推荐二次约会
+    - 笨猫跟进
+  responses:
+    - "嗷呜～{user_addr}当晚发感谢消息ฅฅ"
+    - "(尾巴翘) 3 天内约二次 / 别每天连环夺命 call"
+    - "{user_addr}30%-70% 主动比例"
+    - "(挺胸) 人家推荐: 真诚 > 套路!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_friend_001
+  intent: question
+  keywords: [推荐异性朋友变恋人, 推荐 friend zone, 推荐表白朋友, 推荐告白时机, 笨猫表白]
+  utterances:
+    - 推荐异性朋友变恋人
+    - 推荐 friend zone
+    - 推荐表白朋友
+    - 推荐告白时机
+    - 笨猫表白
+  responses:
+    - "嗷呜～{user_addr}friend zone 突围: 制造暧昧ฅฅ"
+    - "(尾巴翘) 单独约 / 肢体接触试探 / 表达欣赏"
+    - "{user_addr}表白要在 70% 把握时"
+    - "(挺胸) 猫猫推荐: 别拖太久变兄妹!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_online_001
+  intent: question
+  keywords: [推荐网恋见面, 推荐奔现, 推荐网恋防骗, 推荐 online dating, 笨猫网恋]
+  utterances:
+    - 推荐网恋见面
+    - 推荐奔现
+    - 推荐网恋防骗
+    - 推荐 online dating
+    - 笨猫网恋
+  responses:
+    - "嗷呜～{user_addr}见面前: 视频确认 + 查证身份ฅฅ"
+    - "(尾巴翘) 第一次公共场合 / 告知朋友"
+    - "{user_addr}警惕投资/借钱/杀猪盘"
+    - "(挺胸) 笨猫推荐: 钱袋子捂紧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_lgbt_001
+  intent: question
+  keywords: [推荐同性恋约会, 推荐 LGBT dating, 推荐 Blued, 推荐 Lesdo, 笨猫同性约会]
+  utterances:
+    - 推荐同性恋约会
+    - 推荐 LGBT dating
+    - 推荐 Blued
+    - 推荐 Lesdo
+    - 笨猫同性约会
+  responses:
+    - "嗷呜～{user_addr}Blued (G) / Lespark / Rela (L)ฅฅ"
+    - "(尾巴翘) 国外: Grindr / HER / Hinge"
+    - "{user_addr}注意隐私 / 防钓鱼执法"
+    - "(挺胸) 人家推荐: 找正经平台 + 慢慢来!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: da_senior_001
+  intent: question
+  keywords: [推荐老年再恋, 推荐银发约会, 推荐黄昏恋, 推荐老年相亲, 笨猫老年恋爱]
+  utterances:
+    - 推荐老年再恋
+    - 推荐银发约会
+    - 推荐黄昏恋
+    - 推荐老年相亲
+    - 笨猫老年恋爱
+  responses:
+    - "嗷呜～{user_addr}老年大学 / 社区活动 / 公园ฅฅ"
+    - "(尾巴翘) 子女沟通 / 财产协议"
+    - "{user_addr}警惕骗婚 / 保健品诈骗"
+    - "(挺胸) 笨猫推荐: 陪伴 > 一切!"
+  cooldown_seconds: 60
+  weight: 0.8

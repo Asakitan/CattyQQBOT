@@ -1,0 +1,206 @@
+# 朋友撕逼 / 闹矛盾 / 绝交 routes (S6 R408 NLU 节点扩充, 第四十周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: fd_silibi_001
+  intent: complaint
+  keywords: [朋友撕逼, 撕逼, 撕起来了, 跟朋友撕, 撕破脸]
+  utterances:
+    - 跟朋友撕逼了
+    - 我们俩撕起来了
+    - 朋友撕逼太累
+    - 撕破脸了喵
+    - "{user_addr}今天撕逼了"
+  responses:
+    - "(惊讶) 撕逼?! {user_addr}还好吗喵 ฅฅ"
+    - "嗷呜～撕破脸了猫猫陪{user_addr}冷静~"
+    - "(递纸巾) 撕逼好累的, {user_addr}先喝口水~"
+    - "哼～谁惹{user_addr}了! 猫猫挠他喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_naomaodun_001
+  intent: complaint
+  keywords: [闹矛盾, 有矛盾, 起矛盾, 矛盾了, 闹别扭]
+  utterances:
+    - 跟朋友闹矛盾了
+    - 我们俩有矛盾
+    - 闹别扭中
+    - 起矛盾了喵
+    - "{user_addr}跟人闹矛盾"
+  responses:
+    - "(歪头) 闹矛盾啦? {user_addr}说说怎么了喵~"
+    - "嗷呜～别扭就别扭着吧, 猫猫陪{user_addr} ฅฅ"
+    - "(摸头) 矛盾过几天就好了的, {user_addr}别愁~"
+    - "哼～谁先惹{user_addr}的, 猫猫去骂他!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_juejiao_001
+  intent: complaint
+  keywords: [绝交, 不做朋友了, 拜拜了您嘞, 跟他绝交, 朋友做不成了]
+  utterances:
+    - 跟他绝交了
+    - 我跟她不做朋友了
+    - 拜拜了您嘞
+    - 绝交了喵
+    - "{user_addr}绝交了"
+  responses:
+    - "(瞪眼) 绝交?! 那人惹{user_addr}很厉害?"
+    - "嗷呜～绝交就绝交, {user_addr}还有猫猫呢 ฅฅ"
+    - "(贴贴) 那种朋友不要也罢, 猫猫陪{user_addr}~"
+    - "哼～绝交了好! 猫猫给{user_addr}当朋友喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_chaojia_001
+  intent: complaint
+  keywords: [吵架了, 跟朋友吵, 吵起来, 大吵一架, 吵翻了]
+  utterances:
+    - 跟朋友吵架了
+    - 我们吵起来了
+    - 大吵一架
+    - 吵翻了喵
+    - "{user_addr}吵架了"
+  responses:
+    - "(担心) 吵架啦? {user_addr}声音都吵哑了吧~"
+    - "嗷呜～吵架伤感情, {user_addr}先消消气 ฅฅ"
+    - "(递水) 吵完先喝水, {user_addr}冷静一下~"
+    - "哼～{user_addr}吵赢了吗? 没赢猫猫去帮忙!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_lahei_001
+  intent: complaint
+  keywords: [拉黑了, 被拉黑, 拉黑朋友, 互删了, 删好友]
+  utterances:
+    - 我把他拉黑了
+    - 朋友拉黑我了
+    - 我们互删了
+    - 删好友了喵
+    - "{user_addr}被拉黑"
+  responses:
+    - "(惊) 拉黑了?! {user_addr}还好吧~"
+    - "嗷呜～拉黑就拉黑, 不联系也清净 ฅฅ"
+    - "(贴贴) 互删了别难过, 猫猫一直在喵~"
+    - "哼～拉黑活该! 谁让他惹{user_addr}的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_wuhui_001
+  intent: complaint
+  keywords: [误会, 被误会, 有误会, 误会了, 解释不清]
+  utterances:
+    - 朋友误会我了
+    - 有误会喵
+    - 解释不清楚
+    - 被误会了
+    - "{user_addr}被误会"
+  responses:
+    - "(着急) 误会?! {user_addr}解释清楚没喵~"
+    - "嗷呜～误会最难受了, 猫猫信{user_addr} ฅฅ"
+    - "(贴贴) 解释不清就慢慢说, {user_addr}别急~"
+    - "哼～她不听解释? 猫猫去帮{user_addr}说!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_sanjiao_001
+  intent: complaint
+  keywords: [三角关系, 三个人, 夹在中间, 三角友谊, 卡中间]
+  utterances:
+    - 三角关系好累
+    - 夹在两人中间
+    - 三角友谊难处
+    - 卡中间了喵
+    - "{user_addr}三角关系"
+  responses:
+    - "(同情) 夹中间最难受了, {user_addr}辛苦~"
+    - "嗷呜～三角关系猫猫都听晕了 ฅฅ"
+    - "(摸头) 不选边也是一种选择, {user_addr}别压力~"
+    - "哼～{user_addr}选猫猫这边! 我们俩才好玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_bagua_001
+  intent: complaint
+  keywords: [八卦传到, 传话, 背后说, 八卦我, 传开了]
+  utterances:
+    - 八卦传到我耳朵了
+    - 朋友背后说我
+    - 八卦传开了
+    - 被传话了喵
+    - "{user_addr}被八卦"
+  responses:
+    - "(炸毛) 谁背后嚼舌根?! 猫猫挠他喵!"
+    - "嗷呜～{user_addr}别理那些八卦 ฅฅ"
+    - "(贴贴) 传就传吧, {user_addr}清者自清~"
+    - "哼～嚼舌根的没好下场! {user_addr}别气~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_wuchuanhua_001
+  intent: complaint
+  keywords: [误传话, 话传错了, 传话失真, 传错了, 中间传话]
+  utterances:
+    - 话被传错了
+    - 中间传话变味了
+    - 误传话喵
+    - 传错意思
+    - "{user_addr}话被传错"
+  responses:
+    - "(气) 传话最容易出问题! {user_addr}冤啊~"
+    - "嗷呜～传话不如直接问, 猫猫去帮{user_addr}澄清 ฅฅ"
+    - "(贴贴) 传话变味很常见, {user_addr}解释下就好~"
+    - "哼～以后不要让人转话! {user_addr}自己说喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_wuhuihen_001
+  intent: complaint
+  keywords: [误会很深, 解不开, 化解不了, 死结了, 怎么都说不清]
+  utterances:
+    - 误会很深解不开
+    - 化解不了
+    - 死结了喵
+    - 怎么都说不清
+    - "{user_addr}误会很深"
+  responses:
+    - "(担心) 误会很深啊~ {user_addr}慢慢来 ฅฅ"
+    - "嗷呜～死结也能解开, 猫猫陪{user_addr}想办法~"
+    - "(贴贴) 解不开就先放放, {user_addr}别钻牛角尖~"
+    - "哼～她不愿意听就算了! 猫猫陪{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_xiangdaoqian_001
+  intent: complaint
+  keywords: [想道歉, 该道歉, 我错了, 道歉好难, 怎么道歉]
+  utterances:
+    - 我想跟朋友道歉
+    - 该道歉了
+    - 道歉好难开口
+    - 不知道怎么道歉喵
+    - "{user_addr}想道歉"
+  responses:
+    - "(支持) {user_addr}愿意道歉好棒喵~ ฅฅ"
+    - "嗷呜～直接说对不起就行, {user_addr}加油~"
+    - "(摸头) 想道歉的{user_addr}最善良了~"
+    - "哼～{user_addr}主动好评! 猫猫给{user_addr}撑腰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fd_xianglahei_001
+  intent: playful
+  keywords: [想拉黑, 要拉黑他, 准备拉黑, 拉黑算了, 想删好友]
+  utterances:
+    - 我想拉黑他
+    - 准备拉黑了
+    - 拉黑算了喵
+    - 想删好友
+    - "{user_addr}想拉黑"
+  responses:
+    - "(凑近) 拉黑?! {user_addr}三思啊~"
+    - "嗷呜～拉黑前先冷静一下, {user_addr}别冲动 ฅฅ"
+    - "(歪头) 真的要拉黑? {user_addr}想清楚~"
+    - "哼～{user_addr}决定就好! 拉黑了猫猫陪~"
+  cooldown_seconds: 60
+  weight: 1.0

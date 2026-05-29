@@ -1,0 +1,206 @@
+# 沟通书 / 表达 / 演讲 routes (S6 R402 NLU 节点扩充, 第四十周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cb_nvc_001
+  intent: question
+  keywords: [推荐沟通书, 推荐非暴力沟通, 推荐 NVC, 推荐马歇尔卢森堡, 笨猫沟通书]
+  utterances:
+    - 推荐沟通书
+    - 推荐非暴力沟通
+    - 推荐 NVC
+    - 推荐马歇尔卢森堡
+    - 笨猫沟通书
+  responses:
+    - "嗷呜～{user_addr}《非暴力沟通》马歇尔卢森堡ฅฅ"
+    - "(尾巴翘) 观察 / 感受 / 需要 / 请求 四步"
+    - "{user_addr}不评判 不指责 / 表达真实需求"
+    - "(挺胸) 笨猫推荐: NVC 入门必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_crucial_001
+  intent: question
+  keywords: [推荐关键对话, 推荐高难度对话, 推荐 Crucial Conversations, 推荐帕特森, 笨猫关键对话]
+  utterances:
+    - 推荐关键对话
+    - 推荐高难度对话
+    - 推荐 Crucial Conversations
+    - 推荐帕特森
+    - 笨猫关键对话
+  responses:
+    - "嗷呜～{user_addr}《关键对话》帕特森ฅฅ"
+    - "(尾巴翘) 高风险 / 高情绪 / 高分歧场景"
+    - "{user_addr}营造安全感 / 共享意义池"
+    - "(挺胸) 笨猫推荐: 职场冲突必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_tuobuhua_001
+  intent: question
+  keywords: [推荐沟通的方法, 推荐脱不花, 推荐得到沟通, 推荐沟通训练营, 笨猫沟通方法]
+  utterances:
+    - 推荐沟通的方法
+    - 推荐脱不花
+    - 推荐得到沟通
+    - 推荐沟通训练营
+    - 笨猫沟通方法
+  responses:
+    - "嗷呜～{user_addr}《沟通的方法》脱不花ฅฅ"
+    - "(尾巴翘) 18 个场景 / 结构化话术"
+    - "{user_addr}破冰 / 赞美 / 说服 / 求助"
+    - "(挺胸) 笨猫推荐: 中国职场实战!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_influence_001
+  intent: question
+  keywords: [推荐影响力, 推荐西奥迪尼, 推荐 Influence, 推荐说服心理学, 笨猫影响力]
+  utterances:
+    - 推荐影响力
+    - 推荐西奥迪尼
+    - 推荐 Influence
+    - 推荐说服心理学
+    - 笨猫影响力
+  responses:
+    - "嗷呜～{user_addr}《影响力》西奥迪尼ฅฅ"
+    - "(尾巴翘) 互惠 / 承诺 / 社会认同 / 喜好"
+    - "{user_addr}权威 / 稀缺 六大武器"
+    - "(挺胸) 笨猫推荐: 说服心理学圣经!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_ted_001
+  intent: question
+  keywords: [推荐演讲圣经, 推荐 TED 演讲, 推荐演讲的力量, 推荐安德森, 笨猫演讲]
+  utterances:
+    - 推荐演讲圣经
+    - 推荐 TED 演讲
+    - 推荐演讲的力量
+    - 推荐安德森
+    - 笨猫演讲
+  responses:
+    - "嗷呜～{user_addr}《TED 演讲的秘密》安德森ฅฅ"
+    - "(尾巴翘) 一个 idea / 故事 / 视觉化"
+    - "{user_addr}18 分钟黄金时长 / 真诚"
+    - "(挺胸) 笨猫推荐: 演讲入门必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_question_001
+  intent: question
+  keywords: [推荐提问的力量, 推荐苏格拉底, 推荐提问技巧, 推荐好问题, 笨猫提问]
+  utterances:
+    - 推荐提问的力量
+    - 推荐苏格拉底
+    - 推荐提问技巧
+    - 推荐好问题
+    - 笨猫提问
+  responses:
+    - "嗷呜～{user_addr}《学会提问》布朗ฅฅ"
+    - "(尾巴翘) 苏格拉底式 / 5W1H / 开放问题"
+    - "{user_addr}批判性思维 / 不要诱导"
+    - "(挺胸) 笨猫推荐: 教练必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_listen_001
+  intent: question
+  keywords: [推荐倾听, 推荐听见, 推荐主动倾听, 推荐 Active Listening, 笨猫倾听]
+  utterances:
+    - 推荐倾听
+    - 推荐听见
+    - 推荐主动倾听
+    - 推荐 Active Listening
+    - 笨猫倾听
+  responses:
+    - "嗷呜～{user_addr}《倾听的艺术》迈克尔ฅฅ"
+    - "(尾巴翘) 不打断 / 复述确认 / 共情"
+    - "{user_addr}3F: Fact / Feeling / Focus"
+    - "(挺胸) 笨猫推荐: 比说更重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_feedback_001
+  intent: question
+  keywords: [推荐反馈技巧, 推荐一分钟经理, 推荐布兰佳, 推荐 SBI 反馈, 笨猫反馈]
+  utterances:
+    - 推荐反馈技巧
+    - 推荐一分钟经理
+    - 推荐布兰佳
+    - 推荐 SBI 反馈
+    - 笨猫反馈
+  responses:
+    - "嗷呜～{user_addr}《一分钟经理人》布兰佳ฅฅ"
+    - "(尾巴翘) SBI: 情境 / 行为 / 影响"
+    - "{user_addr}及时 / 具体 / 对事不对人"
+    - "(挺胸) 笨猫推荐: 管理者必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cb_cross_culture_001
+  intent: question
+  keywords: [推荐跨文化沟通, 推荐文化地图, 推荐迈耶, 推荐 Culture Map, 笨猫跨文化]
+  utterances:
+    - 推荐跨文化沟通
+    - 推荐文化地图
+    - 推荐迈耶
+    - 推荐 Culture Map
+    - 笨猫跨文化
+  responses:
+    - "嗷呜～{user_addr}《文化地图》艾琳迈耶ฅฅ"
+    - "(尾巴翘) 8 个维度 / 高低语境"
+    - "{user_addr}直接 vs 间接 / 共识 vs 自上而下"
+    - "(挺胸) 笨猫推荐: 外企必读!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cb_cross_gen_001
+  intent: question
+  keywords: [推荐跨代沟通, 推荐代际沟通, 推荐 Z 世代沟通, 推荐与父母沟通, 笨猫跨代沟通]
+  utterances:
+    - 推荐跨代沟通
+    - 推荐代际沟通
+    - 推荐 Z 世代沟通
+    - 推荐与父母沟通
+    - 笨猫跨代沟通
+  responses:
+    - "嗷呜～{user_addr}《代际沟通》代际差异理解ฅฅ"
+    - "(尾巴翘) Z 世代 / 千禧 / X / 婴儿潮"
+    - "{user_addr}尊重差异 / 共同价值"
+    - "(挺胸) 笨猫推荐: 家庭职场都用!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cb_spin_001
+  intent: question
+  keywords: [推荐销售沟通, 推荐 SPIN, 推荐尼尔雷克汉姆, 推荐销售巨人, 笨猫销售]
+  utterances:
+    - 推荐销售沟通
+    - 推荐 SPIN
+    - 推荐尼尔雷克汉姆
+    - 推荐销售巨人
+    - 笨猫销售
+  responses:
+    - "嗷呜～{user_addr}《销售巨人》雷克汉姆ฅฅ"
+    - "(尾巴翘) SPIN: 情境 / 难点 / 暗示 / 需求"
+    - "{user_addr}顾问式销售 / 大客户"
+    - "(挺胸) 笨猫推荐: B2B 销售圣经!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cb_negotiation_001
+  intent: question
+  keywords: [推荐谈判, 推荐哈佛谈判术, 推荐谈判力, 推荐费雪, 笨猫谈判]
+  utterances:
+    - 推荐谈判
+    - 推荐哈佛谈判术
+    - 推荐谈判力
+    - 推荐费雪
+    - 笨猫谈判
+  responses:
+    - "嗷呜～{user_addr}《谈判力》费雪 (哈佛)ฅฅ"
+    - "(尾巴翘) 原则谈判 / BATNA / 立场 vs 利益"
+    - "{user_addr}对人软 / 对事硬"
+    - "(挺胸) 笨猫推荐: 双赢谈判经典!"
+  cooldown_seconds: 60
+  weight: 1.0

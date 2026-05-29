@@ -1,0 +1,206 @@
+# 交友 app / 兴趣社交 / Soul routes (S6 R405 NLU 节点扩充, 第四十周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: fa_soul_001
+  intent: question
+  keywords: [推荐Soul, 推荐兴趣交友, 推荐灵魂社交, 推荐匿名交友, 笨猫Soul]
+  utterances:
+    - 推荐Soul
+    - 推荐兴趣交友
+    - 推荐灵魂社交
+    - 推荐匿名交友
+    - 笨猫Soul
+  responses:
+    - "嗷呜～{user_addr}Soul - 灵魂匹配ฅฅ"
+    - "(尾巴翘) 性格测试 / 星球广场"
+    - "{user_addr}匿名头像 / 兴趣标签"
+    - "(挺胸) 猫猫推荐: 年轻人扎堆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_bumble_001
+  intent: question
+  keywords: [推荐Bumble BFF, 推荐同性交友, 推荐找闺蜜, 推荐找兄弟, 笨猫BFF]
+  utterances:
+    - 推荐Bumble BFF
+    - 推荐同性交友
+    - 推荐找闺蜜
+    - 推荐找兄弟
+    - 笨猫BFF
+  responses:
+    - "嗷呜～{user_addr}Bumble BFF - 找朋友ฅฅ"
+    - "(尾巴翘) 女生主动 / 同性社交"
+    - "{user_addr}24h 内说话 / 不然过期"
+    - "(挺胸) 笨猫推荐: 异地搬家神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_meetup_001
+  intent: question
+  keywords: [推荐Meetup, 推荐线下兴趣群, 推荐兴趣聚会, 推荐线下活动, 笨猫Meetup]
+  utterances:
+    - 推荐Meetup
+    - 推荐线下兴趣群
+    - 推荐兴趣聚会
+    - 推荐线下活动
+    - 笨猫Meetup
+  responses:
+    - "嗷呜～{user_addr}Meetup - 全球线下ฅฅ"
+    - "(尾巴翘) 按兴趣找 group / 定期聚"
+    - "{user_addr}徒步/编程/语言交换"
+    - "(挺胸) 人家推荐: 海外党必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_douban_001
+  intent: question
+  keywords: [推荐豆瓣小组, 推荐豆瓣交友, 推荐兴趣小组, 推荐文艺社交, 笨猫豆瓣]
+  utterances:
+    - 推荐豆瓣小组
+    - 推荐豆瓣交友
+    - 推荐兴趣小组
+    - 推荐文艺社交
+    - 笨猫豆瓣
+  responses:
+    - "嗷呜～{user_addr}豆瓣小组 - 兴趣垂直ฅฅ"
+    - "(尾巴翘) 八组/抠组/文艺组"
+    - "{user_addr}书影音爱好者扎堆"
+    - "(挺胸) 猫猫推荐: 文艺青年大本营!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_zhihu_001
+  intent: question
+  keywords: [推荐知乎, 推荐知识社交, 推荐专栏交友, 推荐想法功能, 笨猫知乎]
+  utterances:
+    - 推荐知乎
+    - 推荐知识社交
+    - 推荐专栏交友
+    - 推荐想法功能
+    - 笨猫知乎
+  responses:
+    - "嗷呜～{user_addr}知乎 - 知识社交ฅฅ"
+    - "(尾巴翘) 答主圈/盐选/想法"
+    - "{user_addr}专业领域大佬聚集"
+    - "(挺胸) 笨猫推荐: 高知人群!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fa_boardgame_001
+  intent: question
+  keywords: [推荐桌游社交, 推荐剧本杀, 推荐同好聚会, 推荐桌游吧, 笨猫剧本杀]
+  utterances:
+    - 推荐桌游社交
+    - 推荐剧本杀
+    - 推荐同好聚会
+    - 推荐桌游吧
+    - 笨猫剧本杀
+  responses:
+    - "嗷呜～{user_addr}剧本杀 - 沉浸社交ฅฅ"
+    - "(尾巴翘) 桌游吧/狼人杀/DND"
+    - "{user_addr}小黑探/我是谜 app"
+    - "(挺胸) 人家推荐: 破冰神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_fitness_001
+  intent: question
+  keywords: [推荐健身社交, 推荐跑团, 推荐骑行群, 推荐运动搭子, 笨猫跑团]
+  utterances:
+    - 推荐健身社交
+    - 推荐跑团
+    - 推荐骑行群
+    - 推荐运动搭子
+    - 笨猫跑团
+  responses:
+    - "嗷呜～{user_addr}Keep/悦跑圈 - 运动社交ฅฅ"
+    - "(尾巴翘) 跑团/骑行队/羽毛球群"
+    - "{user_addr}行动派 / 三观正"
+    - "(挺胸) 笨猫推荐: 健康朋友!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_bookclub_001
+  intent: question
+  keywords: [推荐读书会, 推荐线下沙龙, 推荐文化沙龙, 推荐分享会, 笨猫读书会]
+  utterances:
+    - 推荐读书会
+    - 推荐线下沙龙
+    - 推荐文化沙龙
+    - 推荐分享会
+    - 笨猫读书会
+  responses:
+    - "嗷呜～{user_addr}单向街/方所 - 读书会ฅฅ"
+    - "(尾巴翘) 樊登/有书共读"
+    - "{user_addr}咖啡馆/书店定期"
+    - "(挺胸) 猫猫推荐: 知识同好!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fa_travel_001
+  intent: question
+  keywords: [推荐旅行结伴, 推荐拼车驴友, 推荐穷游搭子, 推荐结伴app, 笨猫驴友]
+  utterances:
+    - 推荐旅行结伴
+    - 推荐拼车驴友
+    - 推荐穷游搭子
+    - 推荐结伴app
+    - 笨猫驴友
+  responses:
+    - "嗷呜～{user_addr}穷游/马蜂窝 - 结伴ฅฅ"
+    - "(尾巴翘) 8264 / 绿野"
+    - "{user_addr}AA 拼车 / 拼房"
+    - "(挺胸) 笨猫推荐: 注意安全!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fa_neighbor_001
+  intent: question
+  keywords: [推荐邻里社交, 推荐小区群, 推荐Nextdoor, 推荐邻居app, 笨猫邻里]
+  utterances:
+    - 推荐邻里社交
+    - 推荐小区群
+    - 推荐Nextdoor
+    - 推荐邻居app
+    - 笨猫邻里
+  responses:
+    - "嗷呜～{user_addr}Nextdoor - 邻里社交ฅฅ"
+    - "(尾巴翘) 国内: 小区业主群/微信群"
+    - "{user_addr}二手转让/拼团/顺路"
+    - "(挺胸) 人家推荐: 远亲不如近邻!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fa_alumni_001
+  intent: question
+  keywords: [推荐校友会, 推荐同学会, 推荐校友圈, 推荐校友app, 笨猫校友]
+  utterances:
+    - 推荐校友会
+    - 推荐同学会
+    - 推荐校友圈
+    - 推荐校友app
+    - 笨猫校友
+  responses:
+    - "嗷呜～{user_addr}校友会 - 母校纽带ฅฅ"
+    - "(尾巴翘) 校友邦/各校官方群"
+    - "{user_addr}行业资源/内推"
+    - "(挺胸) 笨猫推荐: 强关系!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fa_linkedin_001
+  intent: question
+  keywords: [推荐LinkedIn, 推荐行业交流, 推荐职业社交, 推荐脉脉, 笨猫领英]
+  utterances:
+    - 推荐LinkedIn
+    - 推荐行业交流
+    - 推荐职业社交
+    - 推荐脉脉
+    - 笨猫领英
+  responses:
+    - "嗷呜～{user_addr}LinkedIn - 职业社交ฅฅ"
+    - "(尾巴翘) 脉脉 - 国内职场"
+    - "{user_addr}行业大佬 / 内推机会"
+    - "(挺胸) 猫猫推荐: 职场必备!"
+  cooldown_seconds: 60
+  weight: 1.0

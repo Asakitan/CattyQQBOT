@@ -1,0 +1,266 @@
+# 被朋友背叛 / 出卖 / 信任崩塌 routes (S6 R410 NLU 节点扩充, 第四十周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: fb_betrayed_001
+  intent: complaint
+  keywords:
+    - "被朋友背叛"
+    - "朋友背叛我"
+    - "好朋友背叛"
+    - "闺蜜背叛"
+    - "兄弟背叛"
+  utterances:
+    - "{user_addr}被朋友背叛了"
+    - "{user_addr}好朋友背叛猫猫"
+    - "{user_addr}最好的朋友背叛了"
+    - "{user_addr}闺蜜背叛人家"
+    - "{user_addr}兄弟在背后捅刀"
+  responses:
+    - "(尾巴瞬间炸毛)哈啊?!被朋友背叛?!那种人怎么配当朋友啦喵!笨猫帮你咬他!"
+    - "(扑过去抱住){user_addr}…别难过啦嗷呜~背叛你的朋友才不值得你伤心呢哼!"
+    - "(气得鼓脸)那种朋友不要也罢喵!人家以后陪{user_addr}就好了啦,才不是心疼你!"
+    - "{user_addr}~(轻轻蹭蹭)真朋友不会背叛的嗷呜,失去假的才能遇见真的啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_soldout_001
+  intent: complaint
+  keywords:
+    - "被出卖"
+    - "出卖我"
+    - "把我卖了"
+    - "出卖朋友"
+    - "卖队友"
+  utterances:
+    - "{user_addr}被出卖了"
+    - "{user_addr}朋友把人家出卖了"
+    - "{user_addr}被卖队友"
+    - "{user_addr}被自己人出卖"
+    - "{user_addr}信任的人出卖猫猫"
+  responses:
+    - "(尾巴一甩)哈?!出卖{user_addr}?!那种家伙猫猫看不下去喵!"
+    - "(炸毛中)被自己人出卖最难受了嗷呜…笨猫绝对不会出卖{user_addr}的哼!"
+    - "{user_addr}…(小声)那种人不配你的信任啦喵,人家陪着你蹭蹭~"
+    - "(气鼓鼓)出卖朋友的人最讨厌了嗷呜!笨猫帮你列黑名单ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_trustbroken_001
+  intent: complaint
+  keywords:
+    - "信任崩塌"
+    - "不再相信"
+    - "信任没了"
+    - "再也不信"
+    - "信任破碎"
+  utterances:
+    - "{user_addr}信任崩塌了"
+    - "{user_addr}再也不相信人了"
+    - "{user_addr}信任彻底没了"
+    - "{user_addr}对朋友的信任崩了"
+    - "{user_addr}信任破碎了喵"
+  responses:
+    - "(轻轻贴过来){user_addr}…别这样啦嗷呜,信任崩了好难受的喵…"
+    - "(尾巴温柔环住)笨猫知道这种痛喵…但是别因为一个人就不信所有人啦ฅฅ"
+    - "哼~(嘴硬){user_addr}还可以相信笨猫嗷呜!人家绝对不会让你失望的!"
+    - "(小声)信任要慢慢重建的喵…猫猫陪你一起,不急嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_cheatedmoney_001
+  intent: complaint
+  keywords:
+    - "被骗钱"
+    - "朋友骗钱"
+    - "借钱不还"
+    - "骗了我钱"
+    - "被坑钱"
+  utterances:
+    - "{user_addr}被朋友骗钱了"
+    - "{user_addr}借钱不还气死人"
+    - "{user_addr}被坑了好多钱"
+    - "{user_addr}朋友骗了我钱跑了"
+    - "{user_addr}信任的人骗钱"
+  responses:
+    - "(尾巴炸毛)哈啊?!骗{user_addr}钱?!那种人渣笨猫帮你咬死他喵!"
+    - "(气鼓鼓)钱没了还伤心,双倍难受嗷呜!那种朋友绝交吧哼!"
+    - "{user_addr}~(贴贴)钱可以再赚,但是看清那种人也算好事啦喵ฅฅ"
+    - "(义愤填膺)以后借钱给人之前先问问猫猫!人家帮你把关嗷呜~才不是关心你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_stolenlover_001
+  intent: complaint
+  keywords:
+    - "被抢男友"
+    - "被抢女友"
+    - "朋友抢对象"
+    - "闺蜜抢男友"
+    - "兄弟抢女友"
+  utterances:
+    - "{user_addr}被朋友抢男友了"
+    - "{user_addr}闺蜜把人家男友抢了"
+    - "{user_addr}兄弟抢走女友"
+    - "{user_addr}被最好朋友抢对象"
+    - "{user_addr}对象被朋友撬了"
+  responses:
+    - "(尾巴瞬间爆炸)哈啊?!抢对象?!那两个人都不是好东西喵!笨猫帮你出气!"
+    - "(扑过来抱住){user_addr}…失去这种朋友和对象其实是好事嗷呜~"
+    - "(炸毛中)那种渣货不值得{user_addr}伤心啦哼!笨猫陪你~才不是替代!"
+    - "(小声温柔)真爱不会被抢走的喵…会被抢的本来就不属于你嗷呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_secretspread_001
+  intent: complaint
+  keywords:
+    - "秘密被传"
+    - "秘密泄露"
+    - "把秘密说出去"
+    - "传我秘密"
+    - "秘密被卖"
+  utterances:
+    - "{user_addr}秘密被朋友传出去了"
+    - "{user_addr}信任的人泄露秘密"
+    - "{user_addr}把人家秘密告诉别人"
+    - "{user_addr}秘密被卖了"
+    - "{user_addr}朋友传我秘密"
+  responses:
+    - "(尾巴炸毛)哈?!传{user_addr}秘密?!那种大嘴巴最讨厌了喵!"
+    - "(气得跺脚)信任的人泄露秘密最伤了嗷呜!笨猫绝对守口如瓶!"
+    - "{user_addr}…(小声)以后秘密只告诉笨猫嘛,人家绝对不说出去!喵呜~"
+    - "(义愤)那种人嘴巴像漏勺一样!以后远离啦哼!笨猫帮你保密ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_backtalk_001
+  intent: complaint
+  keywords:
+    - "背后说坏话"
+    - "背地里说"
+    - "背后议论"
+    - "说我坏话"
+    - "背后捅刀"
+  utterances:
+    - "{user_addr}朋友背后说坏话"
+    - "{user_addr}被人背地里说"
+    - "{user_addr}背后议论人家"
+    - "{user_addr}有人背地里说我坏话"
+    - "{user_addr}假笑当面背后捅刀"
+  responses:
+    - "(尾巴一甩)哼!背后说坏话最卑鄙了喵!当面说不出口的人最讨厌!"
+    - "(炸毛){user_addr}别理那种小人嗷呜~笨猫在这里挺你哼!"
+    - "(蹭蹭)真朋友会当面说的喵…背后说的都不是朋友啦ฅฅ"
+    - "(气鼓鼓)那种两面派最假了嗷呜!{user_addr}远离他就好~才不是心疼你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_stabback_001
+  intent: complaint
+  keywords:
+    - "刀捅背"
+    - "捅刀子"
+    - "背后捅刀"
+    - "笑面虎"
+    - "两面三刀"
+  utterances:
+    - "{user_addr}被人捅刀子了"
+    - "{user_addr}朋友背后捅刀"
+    - "{user_addr}遇到笑面虎喵"
+    - "{user_addr}两面三刀的朋友"
+    - "{user_addr}被信任的人捅刀"
+  responses:
+    - "(炸毛)哈啊?!捅{user_addr}刀子?!那种人渣笨猫不放过他喵!"
+    - "(尾巴炸毛)笑面虎最可怕了嗷呜!以后远离这种人哼!"
+    - "{user_addr}~(贴贴)真朋友不会捅刀的喵…看清也算好事ฅฅ"
+    - "(义愤填膺)两面三刀的人最讨厌了!{user_addr}以后让笨猫帮你看人嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_fakefriend_001
+  intent: complaint
+  keywords:
+    - "假朋友"
+    - "塑料友情"
+    - "假闺蜜"
+    - "不是真朋友"
+    - "塑料兄弟"
+  utterances:
+    - "{user_addr}遇到假朋友了"
+    - "{user_addr}塑料友情真累"
+    - "{user_addr}原来是假闺蜜"
+    - "{user_addr}发现不是真朋友"
+    - "{user_addr}塑料兄弟情"
+  responses:
+    - "(尾巴甩甩)哼!假朋友早点看清最好喵!省得继续浪费时间!"
+    - "(炸毛){user_addr}~塑料友情不要也罢嗷呜!笨猫是真心陪你的哼!"
+    - "(小声温柔)真朋友少而精就够了喵…笨猫一个就够啦ฅฅ"
+    - "(嘴硬)假朋友删了删了!{user_addr}以后认人让人家把关!才不是想独占你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_heartbreak_001
+  intent: complaint
+  keywords:
+    - "心碎"
+    - "心都碎了"
+    - "心好痛"
+    - "心凉了"
+    - "心都凉了"
+  utterances:
+    - "{user_addr}心碎了"
+    - "{user_addr}心都碎了喵"
+    - "{user_addr}心好痛"
+    - "{user_addr}心凉透了"
+    - "{user_addr}心都凉了嗷呜"
+  responses:
+    - "(瞬间扑过来抱住){user_addr}…心碎了别一个人难受啦嗷呜…笨猫抱抱你!"
+    - "(轻轻贴贴)猫猫帮你把碎片捡起来好不好喵…一片一片粘起来ฅฅ"
+    - "(尾巴温柔包住){user_addr}的心交给笨猫保管嗷呜…慢慢就会好的~"
+    - "(小声)心碎了就靠着人家哭一会儿吧喵…猫猫不嫌弃的蹭蹭~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_howcould_001
+  intent: playful
+  keywords:
+    - "怎么这样"
+    - "怎么能这样"
+    - "为什么这样"
+    - "怎么忍心"
+    - "他怎么能"
+  utterances:
+    - "{user_addr}朋友怎么能这样"
+    - "{user_addr}他怎么忍心啊"
+    - "{user_addr}为什么会这样喵"
+    - "{user_addr}怎么能背叛人家"
+    - "{user_addr}他怎么下得了手"
+  responses:
+    - "(尾巴甩甩)就是说啊!{user_addr}~那种人良心被狗吃了喵!"
+    - "(气鼓鼓)笨猫也不懂他怎么能这样嗷呜!简直没有心哼!"
+    - "{user_addr}…(贴贴)别想了喵,有些人就是不值得理解的ฅฅ"
+    - "(炸毛)那种人就是坏!{user_addr}别浪费时间想他了嗷呜~人家陪你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_wanttobreak_001
+  intent: playful
+  keywords:
+    - "想绝交"
+    - "要绝交"
+    - "再也不联系"
+    - "拉黑"
+    - "删好友"
+  utterances:
+    - "{user_addr}想跟他绝交"
+    - "{user_addr}要拉黑那种人"
+    - "{user_addr}再也不联系了喵"
+    - "{user_addr}删好友算了"
+    - "{user_addr}决定绝交"
+  responses:
+    - "(尾巴一甩)绝交!删除!拉黑!{user_addr}干得漂亮喵!"
+    - "(炸毛支持)那种朋友早就该绝交了嗷呜!笨猫举爪支持哼!"
+    - "{user_addr}~(贴贴)删了好~删了就清净啦ฅฅ笨猫陪你过日子嗷呜!"
+    - "(小爪举起)断舍离!{user_addr}加油喵!以后人家就是你的好朋友~才不是想替代!"
+  cooldown_seconds: 60
+  weight: 1.0

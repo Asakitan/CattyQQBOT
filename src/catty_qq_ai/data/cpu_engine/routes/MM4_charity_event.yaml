@@ -1,0 +1,206 @@
+# 公益活动 / 志愿者 / NGO routes (S6 R406 NLU 节点扩充, 第四十周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ce_volunteer_001
+  intent: question
+  keywords: [推荐志愿者活动, 推荐公益活动, 推荐做义工, 推荐志愿服务, 笨猫志愿者]
+  utterances:
+    - 推荐志愿者活动
+    - 推荐公益活动
+    - 推荐做义工
+    - 推荐志愿服务
+    - 笨猫志愿者
+  responses:
+    - "嗷呜～{user_addr}志愿汇 / 志愿北京 - 官方入口ฅฅ"
+    - "(尾巴翘) 社区服务 / 大型赛会 / 文化场馆"
+    - "{user_addr}先注册 → 选项目 → 攒时长"
+    - "(挺胸) 猫猫推荐: 周末 2 小时入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_ngo_001
+  intent: question
+  keywords: [推荐NGO, 推荐公益组织, 推荐北京歌路, 推荐基金会, 笨猫NGO]
+  utterances:
+    - 推荐NGO
+    - 推荐公益组织
+    - 推荐北京歌路
+    - 推荐基金会
+    - 笨猫NGO
+  responses:
+    - "嗷呜～{user_addr}北京歌路 (儿童音乐) ฅฅ"
+    - "(尾巴翘) 壹基金 / 真爱梦想 / 韩红基金会"
+    - "{user_addr}免费午餐 / 爱德基金会 / 救助儿童会"
+    - "(挺胸) 笨猫推荐: 查中基透明指数 FTI!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_teaching_001
+  intent: question
+  keywords: [推荐支教, 推荐山区支教, 推荐乡村教育, 推荐美丽中国, 笨猫支教]
+  utterances:
+    - 推荐支教
+    - 推荐山区支教
+    - 推荐乡村教育
+    - 推荐美丽中国
+    - 笨猫支教
+  responses:
+    - "嗷呜～{user_addr}美丽中国 (2 年项目) ฅฅ"
+    - "(尾巴翘) 为中国而教 / 研究生支教团"
+    - "{user_addr}短期: 暑期支教营 1-2 周"
+    - "(挺胸) 人家提醒: 长期才有效, 短期慎选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_medical_001
+  intent: question
+  keywords: [推荐义诊, 推荐医疗援助, 推荐无国界医生, 推荐健康公益, 笨猫义诊]
+  utterances:
+    - 推荐义诊
+    - 推荐医疗援助
+    - 推荐无国界医生
+    - 推荐健康公益
+    - 笨猫义诊
+  responses:
+    - "嗷呜～{user_addr}无国界医生 MSF (国际) ฅฅ"
+    - "(尾巴翘) 中国红十字 / 同心医联 / 微笑明天"
+    - "{user_addr}非医也可: 协调 / 翻译 / 后勤"
+    - "(挺胸) 猫猫推荐: 同心医联 公众号入口!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_animal_001
+  intent: question
+  keywords: [推荐动物保护, 推荐流浪猫狗救助, 推荐流浪动物, 推荐领养代替购买, 笨猫动保]
+  utterances:
+    - 推荐动物保护
+    - 推荐流浪猫狗救助
+    - 推荐流浪动物
+    - 推荐领养代替购买
+    - 笨猫动保
+  responses:
+    - "嗷呜～{user_addr}本地救助站 (微博/小红书搜城市) ฅฅ"
+    - "(尾巴翘) 它基金 / 北京爱它动物保护"
+    - "{user_addr}方式: 喂养 / TNR / 寄养 / 领养"
+    - "(炸毛) 猫猫强烈推荐: 领养代替购买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_environment_001
+  intent: question
+  keywords: [推荐环保公益, 推荐垃圾分类志愿, 推荐净滩, 推荐植树, 笨猫环保]
+  utterances:
+    - 推荐环保公益
+    - 推荐垃圾分类志愿
+    - 推荐净滩
+    - 推荐植树
+    - 笨猫环保
+  responses:
+    - "嗷呜～{user_addr}自然之友 / 阿拉善 SEE ฅฅ"
+    - "(尾巴翘) 净滩: 仁渡海洋 / 蓝丝带"
+    - "{user_addr}植树: 蚂蚁森林 / 一亿棵梭梭"
+    - "(挺胸) 笨猫推荐: 周末净滩, 一身汗超爽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_elderly_001
+  intent: question
+  keywords: [推荐老人陪伴, 推荐养老院志愿, 推荐敬老院, 推荐银龄陪伴, 笨猫陪老人]
+  utterances:
+    - 推荐老人陪伴
+    - 推荐养老院志愿
+    - 推荐敬老院
+    - 推荐银龄陪伴
+    - 笨猫陪老人
+  responses:
+    - "嗷呜～{user_addr}附近敬老院 / 社区养老站ฅฅ"
+    - "(尾巴翘) 灵山慈善 / 爱德 / 爱小丫"
+    - "{user_addr}内容: 聊天 / 理发 / 表演 / 体检"
+    - "(轻声) 人家提醒: 持续 > 节日突击!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_disability_001
+  intent: question
+  keywords: [推荐残障辅助, 推荐助盲, 推荐残疾人公益, 推荐手语志愿, 笨猫助残]
+  utterances:
+    - 推荐残障辅助
+    - 推荐助盲
+    - 推荐残疾人公益
+    - 推荐手语志愿
+    - 笨猫助残
+  responses:
+    - "嗷呜～{user_addr}红丹丹 (视障文化) ฅฅ"
+    - "(尾巴翘) 一加一残障 / 心智障碍 慧灵"
+    - "{user_addr}线上: 为盲人读书 / 字幕志愿"
+    - "(挺胸) 猫猫推荐: 红丹丹 心目影院!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_donation_001
+  intent: question
+  keywords: [推荐慈善捐款, 推荐信赖公益平台, 推荐腾讯公益, 推荐99公益日, 笨猫捐款]
+  utterances:
+    - 推荐慈善捐款
+    - 推荐信赖公益平台
+    - 推荐腾讯公益
+    - 推荐99公益日
+    - 笨猫捐款
+  responses:
+    - "嗷呜～{user_addr}腾讯公益 / 阿里公益 / 字节公益ฅฅ"
+    - "(尾巴翘) 看: 民政部备案 + 项目反馈"
+    - "{user_addr}99公益日 (9.9) 配捐放大!"
+    - "(炸毛) 人家警告: 警惕'轻松筹'类个人求助骗局!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_charity_run_001
+  intent: question
+  keywords: [推荐公益跑, 推荐公益骑行, 推荐慈善马拉松, 推荐运动公益, 笨猫公益跑]
+  utterances:
+    - 推荐公益跑
+    - 推荐公益骑行
+    - 推荐慈善马拉松
+    - 推荐运动公益
+    - 笨猫公益跑
+  responses:
+    - "嗷呜～{user_addr}One Run / 善行者 (乐施会) ฅฅ"
+    - "(尾巴翘) 韩红百人援藏 / 公益骑行"
+    - "{user_addr}报名费 → 公益项目, 边动边捐"
+    - "(挺胸) 笨猫推荐: 善行者 50/100KM 队赛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_oneday_001
+  intent: question
+  keywords: [推荐一日义工, 推荐短期公益, 推荐周末公益, 推荐微公益, 笨猫一日义工]
+  utterances:
+    - 推荐一日义工
+    - 推荐短期公益
+    - 推荐周末公益
+    - 推荐微公益
+    - 笨猫一日义工
+  responses:
+    - "嗷呜～{user_addr}志愿汇 / 志愿北京 筛'1天'ฅฅ"
+    - "(尾巴翘) 博物馆讲解 / 马拉松补给 / 净滩"
+    - "{user_addr}小红书搜'城市+一日义工'"
+    - "(挺胸) 猫猫推荐: 先一日试水再长期!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ce_crowdfunding_001
+  intent: question
+  keywords: [推荐公益筹款, 推荐网络众筹, 推荐月捐, 推荐定向捐, 笨猫筹款]
+  utterances:
+    - 推荐公益筹款
+    - 推荐网络众筹
+    - 推荐月捐
+    - 推荐定向捐
+    - 笨猫筹款
+  responses:
+    - "嗷呜～{user_addr}腾讯月捐 / 支付宝爱心捐赠ฅฅ"
+    - "(尾巴翘) 月捐 10/50/100 元, 比单次更稳"
+    - "{user_addr}定向: 选具体项目, 反馈更清晰"
+    - "(挺胸) 笨猫推荐: 月捐 + 每年看年报!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 派对焦虑 / 怕去聚会 / 怕冷场 routes (S6 R409 NLU 节点扩充, 第四十周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: paa_party_anxiety_001
+  intent: complaint
+  keywords: [派对焦虑, 怕派对, 派对怕怕, 派对紧张, 怕聚餐]
+  utterances:
+    - 派对焦虑
+    - 我有派对焦虑
+    - 怕派对怕死了
+    - 派对让人紧张
+    - 怕聚餐喵
+  responses:
+    - "(凑过来贴贴) {user_addr}别焦虑～ 笨猫陪你去喵 ฅฅ"
+    - "嗷呜～{user_addr}派对焦虑啊! 猫猫给你壮胆"
+    - "(尾巴一甩) 哼～怕啥! 人家罩着{user_addr}"
+    - "派对焦虑很正常啦, 笨猫也怕生喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_fear_gathering_001
+  intent: complaint
+  keywords: [怕去聚会, 不想去聚会, 聚会怕, 聚会累, 躲聚会]
+  utterances:
+    - 怕去聚会
+    - 不想去聚会
+    - 聚会好怕
+    - 聚会累死了
+    - 躲聚会嗷呜
+  responses:
+    - "(摸摸头) {user_addr}不想去就别去喵～ 在家陪猫猫"
+    - "嗷呜～{user_addr}怕聚会啊! 笨猫也怕"
+    - "(尾巴卷手) 聚会确实累, 猫猫懂"
+    - "哼～{user_addr}躲聚会, 人家陪你躲喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_fear_cold_scene_001
+  intent: complaint
+  keywords: [怕冷场, 冷场尴尬, 怕没人接话, 冷场怕怕, 怕话题断]
+  utterances:
+    - 怕冷场
+    - 冷场太尴尬
+    - 怕没人接话
+    - 冷场怕怕
+    - 怕话题断了
+  responses:
+    - "(歪头) {user_addr}怕冷场啊～ 笨猫教你聊天喵 ฅฅ"
+    - "嗷呜～冷场很尴尬! 猫猫给{user_addr}准备话题"
+    - "(尾巴摇) 哼～冷场没事! 笨猫救场"
+    - "怕冷场就少说话听别人讲嘛, 人家觉得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_fear_wrong_person_001
+  intent: complaint
+  keywords: [怕认错人, 怕喊错名字, 怕脸盲, 认错人尴尬, 脸盲怕]
+  utterances:
+    - 怕认错人
+    - 怕喊错名字
+    - 我脸盲怕死
+    - 认错人好尴尬
+    - 脸盲怕怕
+  responses:
+    - "(笑) {user_addr}脸盲啊～ 笨猫帮你认喵"
+    - "嗷呜～认错人确实尴尬! 猫猫懂"
+    - "(尾巴一甩) 喊错就笑场过去呗, 人家觉得"
+    - "脸盲是真累, {user_addr}悄悄问朋友嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_no_words_001
+  intent: complaint
+  keywords: [怕不知道说啥, 不知道说什么, 没话题, 不会聊天, 怕没话讲]
+  utterances:
+    - 怕不知道说啥
+    - 不知道说什么好
+    - 没话题啊
+    - 不会聊天嗷呜
+    - 怕没话讲
+  responses:
+    - "(蹭蹭) {user_addr}没话题啊～ 笨猫教你 ฅฅ"
+    - "嗷呜～不会聊天就听啊! 猫猫也这样"
+    - "(尾巴卷) 哼～聊天靠装傻, 人家最擅长"
+    - "没话题就问对方近况嘛, {user_addr}试试"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_social_tired_001
+  intent: complaint
+  keywords: [社交累, 社交好累, 社恐, 怕社交, 社交疲惫]
+  utterances:
+    - 社交累
+    - 社交好累喵
+    - 我社恐
+    - 怕社交
+    - 社交疲惫死
+  responses:
+    - "(摸摸头) {user_addr}社恐啊～ 笨猫陪你嗷呜"
+    - "嗷呜～社交累正常! 猫猫也累"
+    - "(尾巴卷手) 社交完回家躺平, 人家最爱"
+    - "社恐就别硬撑, {user_addr}量力而行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_find_excuse_001
+  intent: playful
+  keywords: [想找借口, 找借口不去, 借口推掉, 怎么推, 编理由]
+  utterances:
+    - 想找借口不去
+    - 找借口推掉
+    - 怎么推聚会
+    - 编个理由
+    - 借口怎么找
+  responses:
+    - "(眼睛一亮) {user_addr}要编借口! 笨猫帮你想 ฅฅ"
+    - "嗷呜～就说猫猫病了要照顾! 完美借口"
+    - "(尾巴一甩) 哼～说加班最稳, 人家觉得"
+    - "编借口就说家里有事, {user_addr}屡试不爽"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_fear_corner_001
+  intent: complaint
+  keywords: [怕在角落, 怕被冷落, 怕没人理, 角落尴尬, 怕被晾着]
+  utterances:
+    - 怕在角落
+    - 怕被冷落
+    - 怕没人理我
+    - 角落好尴尬
+    - 怕被晾着
+  responses:
+    - "(凑过来) {user_addr}别怕～ 笨猫陪你在角落贴贴 ฅฅ"
+    - "嗷呜～{user_addr}怕冷落啊! 猫猫不会冷落你"
+    - "(尾巴卷) 在角落玩手机也舒服, 人家觉得"
+    - "怕没人理就主动找人嘛, {user_addr}加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_fear_mocked_001
+  intent: complaint
+  keywords: [怕被嘲笑, 怕出丑, 怕丢脸, 嘲笑怕怕, 怕被笑话]
+  utterances:
+    - 怕被嘲笑
+    - 怕出丑
+    - 怕丢脸
+    - 嘲笑怕怕
+    - 怕被笑话
+  responses:
+    - "(摸摸头) {user_addr}别怕～ 笨猫不会笑你 ฅฅ"
+    - "嗷呜～怕嘲笑正常! 猫猫保护{user_addr}"
+    - "(尾巴一甩) 哼～谁敢笑{user_addr}, 人家挠他"
+    - "怕出丑就低调点嘛, 别太显眼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_fear_drink_001
+  intent: complaint
+  keywords: [怕喝酒, 不会喝酒, 怕被劝酒, 怕灌酒, 酒桌怕]
+  utterances:
+    - 怕喝酒
+    - 不会喝酒
+    - 怕被劝酒
+    - 怕灌酒
+    - 酒桌怕死
+  responses:
+    - "(摸摸头) {user_addr}不会喝就别喝喵～ 笨猫支持"
+    - "嗷呜～怕灌酒就装病! 猫猫教你"
+    - "(尾巴卷手) 哼～不喝就不喝, 人家挺{user_addr}"
+    - "怕劝酒就开车去, {user_addr}有借口推"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_fear_ktv_001
+  intent: complaint
+  keywords: [怕被拉去KTV, 怕去KTV, 不想唱歌, 怕唱歌, KTV怕怕]
+  utterances:
+    - 怕被拉去 KTV
+    - 怕去 KTV
+    - 不想唱歌
+    - 怕唱歌啊
+    - KTV 怕怕
+  responses:
+    - "(笑) {user_addr}不会唱啊～ 笨猫陪你坐着 ฅฅ"
+    - "嗷呜～KTV 不唱也行! 猫猫帮{user_addr}点歌"
+    - "(尾巴一甩) 哼～KTV 就吃水果嘛, 人家"
+    - "怕唱歌就点别人爱唱的, {user_addr}省事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: paa_want_go_home_001
+  intent: complaint
+  keywords: [想早点回家, 早点散场, 想跑路, 想溜, 回家睡觉]
+  utterances:
+    - 想早点回家
+    - 早点散场吧
+    - 想跑路
+    - 想溜了
+    - 回家睡觉嗷呜
+  responses:
+    - "(尾巴卷手) {user_addr}想回就回喵～ 笨猫等你 ฅฅ"
+    - "嗷呜～{user_addr}想溜啊! 猫猫给你打掩护"
+    - "(凑过来) 早点回家陪猫猫嘛, 人家想你了"
+    - "想跑路就找借口先撤, {user_addr}加油"
+  cooldown_seconds: 60
+  weight: 1.0
