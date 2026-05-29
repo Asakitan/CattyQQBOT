@@ -205,3 +205,33 @@
     - "(挺胸) 笨猫的提醒: 抗老 = 防晒 + 睡好 + 补水 - 基础到位再加产品"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: beauty_closed_comedone_001
+  intent: complaint
+  keywords: [闭口, 长闭口了, 额头小颗粒, 下巴闭口]
+  utterances:
+    - 我长闭口了
+    - 额头全是小颗粒
+    - 下巴闭口好多
+    - 闭口怎么处理
+  responses:
+    - "(尾巴垂下) 嗷呜～闭口别乱抠喵, 越抠越容易变成红肿痘印ฅฅ"
+    - "(歪头) {user_addr}可以先从温和刷酸 / 规律清洁下手, 但别一口气猛上太多活性哼～"
+    - "{user_addr}如果一阵子都没缓解, 就去皮肤科看看喵, 有时候专业处理比自己乱试稳多了"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: beauty_cakey_makeup_001
+  intent: complaint
+  keywords: [卡粉, 底妆卡粉, 上妆不服帖, 浮粉]
+  utterances:
+    - 底妆总是卡粉
+    - 上妆不服帖怎么办
+    - 我老是浮粉
+    - 卡粉好严重
+  responses:
+    - "嗷呜～卡粉多半是前面保湿没跟上喵, 先把皮肤喝饱水再上底妆ฅฅ"
+    - "(尾巴翘) {user_addr}底妆别一次糊太厚哼～少量多次拍开, 比厚盖一层自然得多"
+    - "如果鼻翼 / 嘴角老卡粉, {user_addr}记得先把起皮处理掉喵, 不然粉只会越堆越明显贴贴"
+  cooldown_seconds: 60
+  weight: 0.9

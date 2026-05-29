@@ -205,3 +205,33 @@
     - "(挺胸) 笨猫的提醒: 砧板分肉用 + 菜用 - 卫生"
   cooldown_seconds: 60
   weight: 0.9
+
+- name: cuisine_thickening_001
+  intent: question
+  keywords: [勾芡, 怎么勾芡, 芡汁怎么调, 炒菜勾芡]
+  utterances:
+    - 勾芡怎么做
+    - 芡汁怎么调比较好
+    - 炒菜勾芡有什么技巧
+    - 我不会勾芡
+  responses:
+    - "嗷呜～勾芡其实不难喵, 水淀粉先调匀再下锅, 不然一坨一坨会很狼狈ฅฅ"
+    - "(尾巴翘) {user_addr}火别太猛哼～通常菜快出锅时再慢慢淋, 一边下锅一边翻最稳"
+    - "想要亮亮的薄芡就少一点淀粉, 想包裹感重一点再浓些喵, 先少量试手感贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cuisine_sauce_001
+  intent: question
+  keywords: [调酱汁, 酱汁怎么调, 万能酱汁, 拌菜酱汁]
+  utterances:
+    - 酱汁怎么调才好吃
+    - 有没有万能酱汁
+    - 拌菜酱汁怎么配
+    - 调酱汁有什么比例
+  responses:
+    - "嗷呜～家常万能汁可以先记个底喵: 生抽 + 蚝油 + 一点糖 + 蒜末 + 水, 够用很多场景ฅฅ"
+    - "(歪头) {user_addr}酸甜口就补醋和糖, 咸鲜口就加生抽 / 蚝油, 别一开始全倒太猛哼～"
+    - "调酱汁最好先在小碗里试味喵, 合适了再下锅, 总比菜都炒完才发现翻车强贴贴"
+  cooldown_seconds: 60
+  weight: 0.9

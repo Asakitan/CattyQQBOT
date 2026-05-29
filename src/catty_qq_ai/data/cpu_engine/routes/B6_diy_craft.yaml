@@ -204,3 +204,33 @@
     - "(挺胸) 笨猫的提醒: 开窗通风! 有刺激气味"
   cooldown_seconds: 60
   weight: 0.8
+
+- name: diy_cream_glue_001
+  intent: question
+  keywords: [奶油胶, 奶油胶 DIY, 奶油胶教程, 奶油胶手机壳]
+  utterances:
+    - 奶油胶怎么做
+    - 奶油胶 DIY 好上手吗
+    - 奶油胶手机壳怎么做
+    - 奶油胶教程有吗
+  responses:
+    - "嗷呜～奶油胶很适合做可爱系手作喵, 挤一圈奶油边再放配件, 成就感来得超快ฅฅ"
+    - "(尾巴翘) {user_addr}先少量挤练手哼～别一上来挤太满, 不然还没放装饰就糊成一坨啦"
+    - "做手机壳或镜子的时候记得先想好主色和主题喵, 不然元素一多就会乱得像猫窝贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: diy_shrinky_dink_001
+  intent: question
+  keywords: [热缩片, 热缩片 DIY, 热缩片教程, 热缩片挂件]
+  utterances:
+    - 热缩片怎么做
+    - 热缩片 DIY 难吗
+    - 热缩片挂件怎么弄
+    - 热缩片教程推荐
+  responses:
+    - "嗷呜～热缩片超有意思喵! 先画大一点, 烤完缩小的那下会让人疯狂盯着看ฅฅ"
+    - "(歪头) {user_addr}记得打孔要在加热前做哼～不然缩完再想挂起来就只能干瞪眼了"
+    - "上色时线条尽量清楚一点喵, 烤的时候最好压平收尾, 这样做出来当挂件才更精致贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
