@@ -1,0 +1,207 @@
+# 古琴 / 古筝 / 民乐 / 雅集 routes (S6 R188 NLU 节点扩充, 第十八周期 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A3 music_instrument / O2 calligraphy 区分: 这里专注中国民乐器.
+
+- name: gq_intro_001
+  intent: question
+  keywords: [推荐古琴, 推荐七弦琴, 推荐古琴入门, 推荐古琴选购, 笨猫古琴]
+  utterances:
+    - 推荐古琴
+    - 推荐七弦琴
+    - 推荐古琴入门
+    - 推荐古琴选购
+    - 笨猫古琴
+  responses:
+    - "嗷呜～{user_addr}古琴 - 三千年文人乐器ฅฅ"
+    - "(尾巴翘) 七弦 / 十三徽"
+    - "{user_addr}入门 1000-3000 / 演奏 5000+"
+    - "(挺胸) 笨猫推荐: 古琴是文人雅器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gq_school_001
+  intent: question
+  keywords: [推荐古琴流派, 推荐广陵派, 推荐虞山派, 推荐梅庵派, 笨猫古琴流派]
+  utterances:
+    - 推荐古琴流派
+    - 推荐广陵派
+    - 推荐虞山派
+    - 推荐梅庵派
+    - 笨猫古琴流派
+  responses:
+    - "嗷呜～{user_addr}广陵派 / 虞山派 / 浙派ฅฅ"
+    - "(尾巴翘) 梅庵派 / 诸城派"
+    - "{user_addr}各有指法 / 韵味"
+    - "(挺胸) 笨猫推荐: 看老师选流派!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gq_famous_001
+  intent: question
+  keywords: [推荐古琴曲, 推荐高山流水, 推荐广陵散, 推荐平沙落雁, 笨猫古琴曲]
+  utterances:
+    - 推荐古琴曲
+    - 推荐高山流水
+    - 推荐广陵散
+    - 推荐平沙落雁
+    - 笨猫古琴曲
+  responses:
+    - "嗷呜～{user_addr}高山流水 / 广陵散 - 千古名曲ฅฅ"
+    - "(尾巴翘) 平沙落雁 / 渔樵问答"
+    - "{user_addr}梅花三弄 / 流水"
+    - "(挺胸) 笨猫推荐: 高山流水入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gq_master_001
+  intent: question
+  keywords: [推荐古琴大师, 推荐管平湖, 推荐查阜西, 推荐龚一, 笨猫古琴大师]
+  utterances:
+    - 推荐古琴大师
+    - 推荐管平湖
+    - 推荐查阜西
+    - 推荐龚一
+    - 笨猫古琴大师
+  responses:
+    - "嗷呜～{user_addr}管平湖 / 查阜西 - 二十世纪宗师ฅฅ"
+    - "(尾巴翘) 吴景略 / 张子谦"
+    - "{user_addr}龚一 / 李祥霆 - 当代"
+    - "(挺胸) 笨猫推荐: 管平湖广陵散!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gq_zither_001
+  intent: question
+  keywords: [推荐古筝, 推荐古筝选购, 推荐古筝品牌, 推荐敦煌古筝, 笨猫古筝]
+  utterances:
+    - 推荐古筝
+    - 推荐古筝选购
+    - 推荐古筝品牌
+    - 推荐敦煌古筝
+    - 笨猫古筝
+  responses:
+    - "嗷呜～{user_addr}敦煌 - 古筝霸主ฅฅ"
+    - "(尾巴翘) 朱雀 / 中州 - 性价比"
+    - "{user_addr}21 弦 - 当代标准"
+    - "(挺胸) 笨猫推荐: 入门敦煌 689!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gq_zither_song_001
+  intent: question
+  keywords: [推荐古筝曲, 推荐渔舟唱晚, 推荐战台风, 推荐高山流水古筝, 笨猫古筝曲]
+  utterances:
+    - 推荐古筝曲
+    - 推荐渔舟唱晚
+    - 推荐战台风
+    - 推荐高山流水古筝
+    - 笨猫古筝曲
+  responses:
+    - "嗷呜～{user_addr}渔舟唱晚 / 高山流水 - 经典ฅฅ"
+    - "(尾巴翘) 战台风 - 难度大"
+    - "{user_addr}春江花月夜 / 出水莲"
+    - "(挺胸) 笨猫推荐: 入门渔舟唱晚!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gq_pipa_001
+  intent: question
+  keywords: [推荐琵琶, 推荐二胡, 推荐扬琴, 推荐民乐器, 笨猫琵琶]
+  utterances:
+    - 推荐琵琶
+    - 推荐二胡
+    - 推荐扬琴
+    - 推荐民乐器
+    - 笨猫琵琶
+  responses:
+    - "嗷呜～{user_addr}琵琶 / 二胡 / 扬琴 - 主流ฅฅ"
+    - "(尾巴翘) 笛子 / 笙 / 唢呐"
+    - "{user_addr}阮 / 三弦 / 中阮"
+    - "(挺胸) 笨猫推荐: 二胡情感深!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gq_pipa_song_001
+  intent: question
+  keywords: [推荐琵琶曲, 推荐十面埋伏, 推荐霸王卸甲, 推荐春江花月夜, 笨猫琵琶曲]
+  utterances:
+    - 推荐琵琶曲
+    - 推荐十面埋伏
+    - 推荐霸王卸甲
+    - 推荐春江花月夜
+    - 笨猫琵琶曲
+  responses:
+    - "嗷呜～{user_addr}十面埋伏 - 琵琶名曲ฅฅ"
+    - "(尾巴翘) 霸王卸甲 / 春江花月夜"
+    - "{user_addr}赵聪 / 吴蛮 - 当代"
+    - "(挺胸) 笨猫推荐: 十面埋伏震撼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gq_erhu_song_001
+  intent: question
+  keywords: [推荐二胡曲, 推荐二泉映月, 推荐赛马, 推荐良宵, 笨猫二胡曲]
+  utterances:
+    - 推荐二胡曲
+    - 推荐二泉映月
+    - 推荐赛马
+    - 推荐良宵
+    - 笨猫二胡曲
+  responses:
+    - "嗷呜～{user_addr}二泉映月 - 阿炳神作ฅฅ"
+    - "(尾巴翘) 赛马 / 良宵 - 欢快"
+    - "{user_addr}江河水 / 病中吟"
+    - "(挺胸) 笨猫推荐: 二泉映月伤感!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gq_yaji_001
+  intent: question
+  keywords: [推荐古琴雅集, 推荐文人雅集, 推荐古琴音乐会, 推荐古琴茶会, 笨猫雅集]
+  utterances:
+    - 推荐古琴雅集
+    - 推荐文人雅集
+    - 推荐古琴音乐会
+    - 推荐古琴茶会
+    - 笨猫雅集
+  responses:
+    - "嗷呜～{user_addr}古琴 + 茶 + 香 + 花ฅฅ"
+    - "(尾巴翘) 雅集 - 文人共乐"
+    - "{user_addr}北京 / 杭州 / 苏州常有"
+    - "(挺胸) 笨猫推荐: 雅集是体验!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gq_notation_001
+  intent: question
+  keywords: [推荐古琴谱, 推荐减字谱, 推荐古琴打谱, 推荐文献琴谱, 笨猫古琴谱]
+  utterances:
+    - 推荐古琴谱
+    - 推荐减字谱
+    - 推荐古琴打谱
+    - 推荐文献琴谱
+    - 笨猫古琴谱
+  responses:
+    - "嗷呜～{user_addr}减字谱 - 古琴专属ฅฅ"
+    - "(尾巴翘) 神奇秘谱 / 大还阁琴谱"
+    - "{user_addr}打谱 - 还原古曲"
+    - "(挺胸) 笨猫推荐: 减字谱有意思!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: gq_competition_001
+  intent: question
+  keywords: [推荐古筝比赛, 推荐民乐比赛, 推荐金钟奖, 推荐文华奖, 笨猫民乐比赛]
+  utterances:
+    - 推荐古筝比赛
+    - 推荐民乐比赛
+    - 推荐金钟奖
+    - 推荐文华奖
+    - 笨猫民乐比赛
+  responses:
+    - "嗷呜～{user_addr}金钟奖 - 民乐最高奖ฅฅ"
+    - "(尾巴翘) 文华奖 / 央视民乐"
+    - "{user_addr}国乐少年 / 民乐新声代"
+    - "(挺胸) 笨猫推荐: 看青年民乐家!"
+  cooldown_seconds: 60
+  weight: 0.7

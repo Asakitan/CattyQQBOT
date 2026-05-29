@@ -1,0 +1,207 @@
+# 烹饪刀具 / 日式刀 / 西式刀 / 磨刀 routes (S6 R191 NLU 节点扩充, 第十八周期 10/10 完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 K0 western_cuisine / M4 chinese_cuisine 区分: 这里专注刀具.
+
+- name: kk_type_001
+  intent: question
+  keywords: [推荐厨房刀具, 推荐主厨刀, 推荐三德刀, 推荐多用刀, 笨猫厨房刀具]
+  utterances:
+    - 推荐厨房刀具
+    - 推荐主厨刀
+    - 推荐三德刀
+    - 推荐多用刀
+    - 笨猫厨房刀具
+  responses:
+    - "嗷呜～{user_addr}主厨刀 (Chef) - 通用王ฅฅ"
+    - "(尾巴翘) 三德刀 - 日式万能"
+    - "{user_addr}水果刀 / 面包刀 / 切片刀"
+    - "(挺胸) 笨猫推荐: 一把主厨刀够!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kk_japanese_001
+  intent: question
+  keywords: [推荐日本刀, 推荐 Shun, 推荐 Global, 推荐贝印, 笨猫日本刀]
+  utterances:
+    - 推荐日本刀
+    - 推荐 Shun
+    - 推荐 Global
+    - 推荐贝印
+    - 笨猫日本刀
+  responses:
+    - "嗷呜～{user_addr}Shun (旬) - 美感顶级ฅฅ"
+    - "(尾巴翘) Global / Kai / 藤次郎"
+    - "{user_addr}Tojiro / Tojiro - 性价比"
+    - "(挺胸) 笨猫推荐: Shun Classic 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kk_german_001
+  intent: question
+  keywords: [推荐德国刀, 推荐双立人, 推荐 Wusthof, 推荐三叉牌, 笨猫德国刀]
+  utterances:
+    - 推荐德国刀
+    - 推荐双立人
+    - 推荐 Wusthof
+    - 推荐三叉牌
+    - 笨猫德国刀
+  responses:
+    - "嗷呜～{user_addr}双立人 Zwilling - 德国经典ฅฅ"
+    - "(尾巴翘) Wusthof / 三叉牌 Henckels"
+    - "{user_addr}厚重耐用 / 多用途"
+    - "(挺胸) 笨猫推荐: 双立人四星!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kk_steel_001
+  intent: question
+  keywords: [推荐刀具钢材, 推荐 VG-10, 推荐 SG2, 推荐 AUS-8, 笨猫刀具钢材]
+  utterances:
+    - 推荐刀具钢材
+    - 推荐 VG-10
+    - 推荐 SG2
+    - 推荐 AUS-8
+    - 笨猫刀具钢材
+  responses:
+    - "嗷呜～{user_addr}VG-10 - 日系经典ฅฅ"
+    - "(尾巴翘) SG2 / R2 - 高端粉末钢"
+    - "{user_addr}AUS-8 - 性价比"
+    - "(挺胸) 笨猫推荐: VG-10 入门!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kk_handmade_001
+  intent: question
+  keywords: [推荐手工刀, 推荐打铁屋, 推荐越前打刃物, 推荐 Sakai, 笨猫手工刀]
+  utterances:
+    - 推荐手工刀
+    - 推荐打铁屋
+    - 推荐越前打刃物
+    - 推荐 Sakai
+    - 笨猫手工刀
+  responses:
+    - "嗷呜～{user_addr}Sakai (堺) - 关西刀都ฅฅ"
+    - "(尾巴翘) 越前 / 燕三条 / 关市"
+    - "{user_addr}手工锻打 - 个性钢材"
+    - "(挺胸) 笨猫推荐: 手工有灵魂!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kk_chinese_001
+  intent: question
+  keywords: [推荐中式菜刀, 推荐张小泉, 推荐王麻子, 推荐章丘铁锅, 笨猫中式菜刀]
+  utterances:
+    - 推荐中式菜刀
+    - 推荐张小泉
+    - 推荐王麻子
+    - 推荐章丘铁锅
+    - 笨猫中式菜刀
+  responses:
+    - "嗷呜～{user_addr}张小泉 / 王麻子 - 老字号ฅฅ"
+    - "(尾巴翘) 阳江 / 十八子"
+    - "{user_addr}斩切两用 - 中餐之魂"
+    - "(挺胸) 笨猫推荐: 张小泉性价比!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kk_specific_001
+  intent: question
+  keywords: [推荐柳刃, 推荐出刃, 推荐薄刃, 推荐刺身刀, 笨猫柳刃]
+  utterances:
+    - 推荐柳刃
+    - 推荐出刃
+    - 推荐薄刃
+    - 推荐刺身刀
+    - 笨猫柳刃
+  responses:
+    - "嗷呜～{user_addr}柳刃 - 刺身专用ฅฅ"
+    - "(尾巴翘) 出刃 - 鱼头硬骨"
+    - "{user_addr}薄刃 - 蔬菜切丝"
+    - "(挺胸) 笨猫推荐: 日料和食必备!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kk_sharpen_001
+  intent: question
+  keywords: [推荐磨刀石, 推荐天然磨石, 推荐 Shapton, 推荐 Naniwa, 笨猫磨刀石]
+  utterances:
+    - 推荐磨刀石
+    - 推荐天然磨石
+    - 推荐 Shapton
+    - 推荐 Naniwa
+    - 笨猫磨刀石
+  responses:
+    - "嗷呜～{user_addr}Shapton Glass - 入门首选ฅฅ"
+    - "(尾巴翘) Naniwa Super Stone"
+    - "{user_addr}1000# + 6000# 两块够用"
+    - "(挺胸) 笨猫推荐: Shapton 1000# 经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kk_sharpen_skill_001
+  intent: question
+  keywords: [推荐磨刀技巧, 推荐磨刀角度, 推荐磨刀入门, 推荐 sharpening, 笨猫磨刀技巧]
+  utterances:
+    - 推荐磨刀技巧
+    - 推荐磨刀角度
+    - 推荐磨刀入门
+    - 推荐 sharpening
+    - 笨猫磨刀技巧
+  responses:
+    - "嗷呜～{user_addr}日式: 15-17° / 西式: 20°ฅฅ"
+    - "(尾巴翘) 推动 + 拉动 + 均匀"
+    - "{user_addr}两面交替 - 翻面"
+    - "(挺胸) 笨猫推荐: 多练 / 别急!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kk_cutting_board_001
+  intent: question
+  keywords: [推荐砧板, 推荐木砧板, 推荐银杏砧板, 推荐 Hinoki 桧木, 笨猫砧板]
+  utterances:
+    - 推荐砧板
+    - 推荐木砧板
+    - 推荐银杏砧板
+    - 推荐 Hinoki 桧木
+    - 笨猫砧板
+  responses:
+    - "嗷呜～{user_addr}银杏 / 桧木 - 日式高端ฅฅ"
+    - "(尾巴翘) 美国黑胡桃 - 高端"
+    - "{user_addr}竹砧板 - 性价比"
+    - "(挺胸) 笨猫推荐: 银杏砧板对刀好!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kk_storage_001
+  intent: question
+  keywords: [推荐刀架, 推荐磁吸刀架, 推荐刀盒, 推荐刀套, 笨猫刀架]
+  utterances:
+    - 推荐刀架
+    - 推荐磁吸刀架
+    - 推荐刀盒
+    - 推荐刀套
+    - 笨猫刀架
+  responses:
+    - "嗷呜～{user_addr}磁吸刀架 - 现代美观ฅฅ"
+    - "(尾巴翘) 木质插刀架 - 经典"
+    - "{user_addr}刀套 / 刀卷 - 出行"
+    - "(挺胸) 笨猫推荐: 磁吸不伤刀!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: kk_care_001
+  intent: question
+  keywords: [推荐刀具保养, 推荐刀具防锈, 推荐山茶油, 推荐刀具收藏, 笨猫刀具保养]
+  utterances:
+    - 推荐刀具保养
+    - 推荐刀具防锈
+    - 推荐山茶油
+    - 推荐刀具收藏
+    - 笨猫刀具保养
+  responses:
+    - "嗷呜～{user_addr}用完擦干 + 上山茶油ฅฅ"
+    - "(尾巴翘) 高碳钢易锈 / 不锈钢省心"
+    - "{user_addr}避免洗碗机 / 别撞硬物"
+    - "(挺胸) 笨猫推荐: 一把好刀养一辈子!"
+  cooldown_seconds: 60
+  weight: 0.9

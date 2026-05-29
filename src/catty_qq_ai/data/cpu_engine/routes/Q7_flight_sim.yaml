@@ -1,0 +1,207 @@
+# 飞行模拟 / MSFS / DCS / 真实飞行 routes (S6 R189 NLU 节点扩充, 第十八周期 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 H6 space_tech / F5 military_weapon 区分: 这里专注模拟飞行.
+
+- name: fs_sim_001
+  intent: question
+  keywords: [推荐飞行模拟, 推荐 MSFS, 推荐 Microsoft Flight Simulator, 推荐 X-Plane, 笨猫飞行模拟]
+  utterances:
+    - 推荐飞行模拟
+    - 推荐 MSFS
+    - 推荐 Microsoft Flight Simulator
+    - 推荐 X-Plane
+    - 笨猫飞行模拟
+  responses:
+    - "嗷呜～{user_addr}MSFS 2024 - 民航模拟王ฅฅ"
+    - "(尾巴翘) X-Plane 12 - 物理真实"
+    - "{user_addr}Prepar3D - 专业"
+    - "(挺胸) 笨猫推荐: 入门 MSFS 2024!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_dcs_001
+  intent: question
+  keywords: [推荐 DCS, 推荐 DCS World, 推荐战斗机模拟, 推荐 F18 DCS, 笨猫 DCS]
+  utterances:
+    - 推荐 DCS
+    - 推荐 DCS World
+    - 推荐战斗机模拟
+    - 推荐 F18 DCS
+    - 笨猫 DCS
+  responses:
+    - "嗷呜～{user_addr}DCS World - 战斗机模拟王ฅฅ"
+    - "(尾巴翘) F-18 / F-16 / F-14 模块"
+    - "{user_addr}A-10C / Mi-24 - 经典"
+    - "(挺胸) 笨猫推荐: DCS F-18 入坑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_joystick_001
+  intent: question
+  keywords: [推荐飞行摇杆, 推荐 HOTAS, 推荐 Thrustmaster, 推荐 VKB, 笨猫飞行摇杆]
+  utterances:
+    - 推荐飞行摇杆
+    - 推荐 HOTAS
+    - 推荐 Thrustmaster
+    - 推荐 VKB
+    - 笨猫飞行摇杆
+  responses:
+    - "嗷呜～{user_addr}Thrustmaster Warthog - 顶级 HOTASฅฅ"
+    - "(尾巴翘) VKB Gladiator - 高端"
+    - "{user_addr}TM T16000M - 入门"
+    - "(挺胸) 笨猫推荐: 入门 T16000M!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fs_pedal_001
+  intent: question
+  keywords: [推荐方向舵, 推荐脚舵, 推荐 Thrustmaster TPR, 推荐 Saitek Rudder, 笨猫脚舵]
+  utterances:
+    - 推荐方向舵
+    - 推荐脚舵
+    - 推荐 Thrustmaster TPR
+    - 推荐 Saitek Rudder
+    - 笨猫脚舵
+  responses:
+    - "嗷呜～{user_addr}Thrustmaster TPR - 顶级脚舵ฅฅ"
+    - "(尾巴翘) Saitek Pro Flight - 主流"
+    - "{user_addr}MFG Crosswind - 极品"
+    - "(挺胸) 笨猫推荐: TPR 是终极!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: fs_vr_001
+  intent: question
+  keywords: [推荐 VR 飞行, 推荐 Pimax Crystal, 推荐 Quest 3 飞行, 推荐 VR 模拟器, 笨猫 VR 飞行]
+  utterances:
+    - 推荐 VR 飞行
+    - 推荐 Pimax Crystal
+    - 推荐 Quest 3 飞行
+    - 推荐 VR 模拟器
+    - 笨猫 VR 飞行
+  responses:
+    - "嗷呜～{user_addr}Pimax Crystal - VR 飞行顶级ฅฅ"
+    - "(尾巴翘) Varjo Aero / Quest 3"
+    - "{user_addr}VR + DCS = 沉浸震撼"
+    - "(挺胸) 笨猫推荐: VR 飞行体验绝!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fs_pilot_real_001
+  intent: question
+  keywords: [推荐真实飞行, 推荐 PPL 私照, 推荐学飞行, 推荐美国飞行培训, 笨猫真实飞行]
+  utterances:
+    - 推荐真实飞行
+    - 推荐 PPL 私照
+    - 推荐学飞行
+    - 推荐美国飞行培训
+    - 笨猫真实飞行
+  responses:
+    - "嗷呜～{user_addr}美国 PPL 私照 - 5-15 万人民币ฅฅ"
+    - "(尾巴翘) 国内 - 培训机构有限"
+    - "{user_addr}40 小时 + 笔试 + 实飞"
+    - "(挺胸) 笨猫推荐: 暑假美国速成!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fs_aircraft_001
+  intent: question
+  keywords: [推荐民航机型, 推荐 A320, 推荐 B737, 推荐 B777, 笨猫民航]
+  utterances:
+    - 推荐民航机型
+    - 推荐 A320
+    - 推荐 B737
+    - 推荐 B777
+    - 笨猫民航
+  responses:
+    - "嗷呜～{user_addr}A320 / B737 - 短程主力ฅฅ"
+    - "(尾巴翘) A350 / B787 / B777 - 长程"
+    - "{user_addr}A380 - 超大宽体"
+    - "(挺胸) 笨猫推荐: A320 入门最佳!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fs_pmdg_001
+  intent: question
+  keywords: [推荐 PMDG, 推荐 Fenix A320, 推荐 MSFS 飞机插件, 推荐高保真插件, 笨猫 PMDG]
+  utterances:
+    - 推荐 PMDG
+    - 推荐 Fenix A320
+    - 推荐 MSFS 飞机插件
+    - 推荐高保真插件
+    - 笨猫 PMDG
+  responses:
+    - "嗷呜～{user_addr}PMDG 737 / 777 - 顶级ฅฅ"
+    - "(尾巴翘) Fenix A320 - 神级 A320"
+    - "{user_addr}iniBuilds A310 - 性价比"
+    - "(挺胸) 笨猫推荐: Fenix A320 真实!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fs_atc_001
+  intent: question
+  keywords: [推荐 VATSIM, 推荐 IVAO, 推荐 ATC 模拟, 推荐空中交通管制, 笨猫 VATSIM]
+  utterances:
+    - 推荐 VATSIM
+    - 推荐 IVAO
+    - 推荐 ATC 模拟
+    - 推荐空中交通管制
+    - 笨猫 VATSIM
+  responses:
+    - "嗷呜～{user_addr}VATSIM - 全球在线 ATC 网络ฅฅ"
+    - "(尾巴翘) IVAO - 另一选择"
+    - "{user_addr}真实空管 / 真实飞友"
+    - "(挺胸) 笨猫推荐: VATSIM 沉浸 100%!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fs_helicopter_001
+  intent: question
+  keywords: [推荐直升机模拟, 推荐 DCS Apache, 推荐 R44, 推荐 EC135 模拟, 笨猫直升机]
+  utterances:
+    - 推荐直升机模拟
+    - 推荐 DCS Apache
+    - 推荐 R44
+    - 推荐 EC135 模拟
+    - 笨猫直升机
+  responses:
+    - "嗷呜～{user_addr}DCS Apache AH-64D / Mi-24ฅฅ"
+    - "(尾巴翘) MSFS H145 / R44"
+    - "{user_addr}直升机难度大!"
+    - "(挺胸) 笨猫推荐: Mi-24 雌鹿酷!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: fs_scenery_001
+  intent: question
+  keywords: [推荐 MSFS 机场插件, 推荐 ORBX, 推荐 FlyTampa, 推荐机场场景, 笨猫机场插件]
+  utterances:
+    - 推荐 MSFS 机场插件
+    - 推荐 ORBX
+    - 推荐 FlyTampa
+    - 推荐机场场景
+    - 笨猫机场插件
+  responses:
+    - "嗷呜～{user_addr}ORBX - 场景顶级ฅฅ"
+    - "(尾巴翘) FlyTampa / Drzewiecki"
+    - "{user_addr}中国机场: 国内开发者"
+    - "(挺胸) 笨猫推荐: ORBX True Earth!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: fs_airline_001
+  intent: question
+  keywords: [推荐飞行员日常, 推荐航空公司, 推荐机长, 推荐航空职业, 笨猫飞行员]
+  utterances:
+    - 推荐飞行员日常
+    - 推荐航空公司
+    - 推荐机长
+    - 推荐航空职业
+    - 笨猫飞行员
+  responses:
+    - "嗷呜～{user_addr}飞行员 - 高强度 + 时差ฅฅ"
+    - "(尾巴翘) 国航 / 东航 / 南航 / 海航"
+    - "{user_addr}ATPL 航线运输执照"
+    - "(挺胸) 笨猫推荐: 真飞行员超酷!"
+  cooldown_seconds: 60
+  weight: 0.7

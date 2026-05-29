@@ -1,0 +1,207 @@
+# Gunpla / 高达模型 / 塑模玩家 / 涂装 routes (S6 R190 NLU 节点扩充, 第十八周期 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 N4 anime_goods 区分: 这里专注高达模型 + 塑料拼装.
+
+- name: gp_grade_001
+  intent: question
+  keywords: [推荐高达模型, 推荐 PG MG HG, 推荐 SD 高达, 推荐 Real Grade, 笨猫高达]
+  utterances:
+    - 推荐高达模型
+    - 推荐 PG MG HG
+    - 推荐 SD 高达
+    - 推荐 Real Grade
+    - 笨猫高达
+  responses:
+    - "嗷呜～{user_addr}HG (1/144) - 入门首选ฅฅ"
+    - "(尾巴翘) MG (1/100) - 中端"
+    - "{user_addr}RG / PG (1/60) - 高端"
+    - "(挺胸) 笨猫推荐: HG 起步省钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gp_classic_001
+  intent: question
+  keywords: [推荐 RX-78, 推荐独角兽高达, 推荐扎古, 推荐沙扎比, 笨猫高达机体]
+  utterances:
+    - 推荐 RX-78
+    - 推荐独角兽高达
+    - 推荐扎古
+    - 推荐沙扎比
+    - 笨猫高达机体
+  responses:
+    - "嗷呜～{user_addr}RX-78-2 - 元祖高达ฅฅ"
+    - "(尾巴翘) 独角兽 / 报丧女妖"
+    - "{user_addr}扎古 / 沙扎比 / 红色彗星"
+    - "(挺胸) 笨猫推荐: 元祖必入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gp_brand_001
+  intent: question
+  keywords: [推荐 Bandai, 推荐 Premium Bandai, 推荐限定高达, 推荐魂限定, 笨猫 Bandai]
+  utterances:
+    - 推荐 Bandai
+    - 推荐 Premium Bandai
+    - 推荐限定高达
+    - 推荐魂限定
+    - 笨猫 Bandai
+  responses:
+    - "嗷呜～{user_addr}Bandai 万代 - 高达唯一官ฅฅ"
+    - "(尾巴翘) Premium Bandai - 限定"
+    - "{user_addr}魂限定 / 抽签 / 翻倍价"
+    - "(挺胸) 笨猫推荐: 别买太多魂限!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gp_tools_001
+  intent: question
+  keywords: [推荐模型工具, 推荐 GodHand, 推荐神之手剪钳, 推荐打磨棒, 笨猫模型工具]
+  utterances:
+    - 推荐模型工具
+    - 推荐 GodHand
+    - 推荐神之手剪钳
+    - 推荐打磨棒
+    - 笨猫模型工具
+  responses:
+    - "嗷呜～{user_addr}GodHand 神之手 - 剪钳之王ฅฅ"
+    - "(尾巴翘) Tamiya / Hasegawa 工具"
+    - "{user_addr}田宫剪 / 打磨棒 / 锉刀"
+    - "(挺胸) 笨猫推荐: 神之手开心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gp_paint_001
+  intent: question
+  keywords: [推荐模型漆, 推荐 Mr. Color, 推荐 Tamiya 漆, 推荐喷涂, 笨猫模型漆]
+  utterances:
+    - 推荐模型漆
+    - 推荐 Mr. Color
+    - 推荐 Tamiya 漆
+    - 推荐喷涂
+    - 笨猫模型漆
+  responses:
+    - "嗷呜～{user_addr}Mr. Color - 万年油性漆ฅฅ"
+    - "(尾巴翘) Tamiya / Gaia / Vallejo"
+    - "{user_addr}水性 vs 油性 / 油性强度高"
+    - "(挺胸) 笨猫推荐: 入门 Mr. Color!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gp_airbrush_001
+  intent: question
+  keywords: [推荐喷笔, 推荐 Iwata, 推荐田宫喷笔, 推荐 Anest, 笨猫喷笔]
+  utterances:
+    - 推荐喷笔
+    - 推荐 Iwata
+    - 推荐田宫喷笔
+    - 推荐 Anest
+    - 笨猫喷笔
+  responses:
+    - "嗷呜～{user_addr}Iwata HP-CS / HP-C 顶级ฅฅ"
+    - "(尾巴翘) Tamiya HG / Anest Iwata"
+    - "{user_addr}入门: 多美卡 / 国产"
+    - "(挺胸) 笨猫推荐: Iwata 是终极!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gp_decal_001
+  intent: question
+  keywords: [推荐水贴, 推荐高达水贴, 推荐 dry transfer, 推荐荧光贴纸, 笨猫水贴]
+  utterances:
+    - 推荐水贴
+    - 推荐高达水贴
+    - 推荐 dry transfer
+    - 推荐荧光贴纸
+    - 笨猫水贴
+  responses:
+    - "嗷呜～{user_addr}HIQParts / Bandai 水贴ฅฅ"
+    - "(尾巴翘) 干印 / 黑色机种用"
+    - "{user_addr}荧光 / 金属箔贴"
+    - "(挺胸) 笨猫推荐: 水贴是细节!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: gp_panel_line_001
+  intent: question
+  keywords: [推荐渗线, 推荐勾线笔, 推荐 Tamiya 渗线液, 推荐高达马克笔, 笨猫渗线]
+  utterances:
+    - 推荐渗线
+    - 推荐勾线笔
+    - 推荐 Tamiya 渗线液
+    - 推荐高达马克笔
+    - 笨猫渗线
+  responses:
+    - "嗷呜～{user_addr}Tamiya 渗线液 - 入门首选ฅฅ"
+    - "(尾巴翘) 高达马克笔 - 便捷"
+    - "{user_addr}稀释 + 牙签擦掉多余"
+    - "(挺胸) 笨猫推荐: 渗线让细节出!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gp_weather_001
+  intent: question
+  keywords: [推荐旧化, 推荐高达旧化, 推荐战损涂装, 推荐 Vallejo 旧化, 笨猫旧化]
+  utterances:
+    - 推荐旧化
+    - 推荐高达旧化
+    - 推荐战损涂装
+    - 推荐 Vallejo 旧化
+    - 笨猫旧化
+  responses:
+    - "嗷呜～{user_addr}AK / Mig - 旧化神器ฅฅ"
+    - "(尾巴翘) 油画棒 / 旧化粉"
+    - "{user_addr}模拟战损 - 沙尘 / 锈迹"
+    - "(挺胸) 笨猫推荐: 旧化让模型活!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gp_mecha_other_001
+  intent: question
+  keywords: [推荐机甲模型, 推荐 Hi-Nu, 推荐 Frame Arms, 推荐美少女模型, 笨猫机甲模型]
+  utterances:
+    - 推荐机甲模型
+    - 推荐 Hi-Nu
+    - 推荐 Frame Arms
+    - 推荐美少女模型
+    - 笨猫机甲模型
+  responses:
+    - "嗷呜～{user_addr}Frame Arms Girl - 美少女机娘ฅฅ"
+    - "(尾巴翘) 30MM / MS Girl"
+    - "{user_addr}寿屋 / Volks - 高端"
+    - "(挺胸) 笨猫推荐: 美少女机模可爱!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gp_action_001
+  intent: question
+  keywords: [推荐成品高达, 推荐 Metal Build, 推荐 Robot 魂, 推荐 Soul of Chogokin, 笨猫成品高达]
+  utterances:
+    - 推荐成品高达
+    - 推荐 Metal Build
+    - 推荐 Robot 魂
+    - 推荐 Soul of Chogokin
+    - 笨猫成品高达
+  responses:
+    - "嗷呜～{user_addr}Metal Build - 合金顶级ฅฅ"
+    - "(尾巴翘) Robot 魂 - 多样选择"
+    - "{user_addr}超合金魂 / 魂之限定"
+    - "(挺胸) 笨猫推荐: Metal Build 信仰!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gp_competition_001
+  intent: question
+  keywords: [推荐高达模型大赛, 推荐 GBWC, 推荐高达大会, 推荐模型展, 笨猫高达大赛]
+  utterances:
+    - 推荐高达模型大赛
+    - 推荐 GBWC
+    - 推荐高达大会
+    - 推荐模型展
+    - 笨猫高达大赛
+  responses:
+    - "嗷呜～{user_addr}GBWC - 高达全球大赛ฅฅ"
+    - "(尾巴翘) 静冈模型展 / 高达基地"
+    - "{user_addr}国内: 中文 GBWC / 万代展"
+    - "(挺胸) 笨猫推荐: 看顶尖作品涨眼!"
+  cooldown_seconds: 60
+  weight: 0.7

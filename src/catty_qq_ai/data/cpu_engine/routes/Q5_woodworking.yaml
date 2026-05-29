@@ -1,0 +1,207 @@
+# 木工 / 手作木器 / 工具 / 榫卯 routes (S6 R187 NLU 节点扩充, 第十八周期 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 Q2 rosewood_furniture (红木收藏) 区分: 这里专注木工手作 + 工具.
+
+- name: ww_wood_001
+  intent: question
+  keywords: [推荐木材, 推荐橡木, 推荐胡桃木, 推荐樱桃木, 笨猫木材]
+  utterances:
+    - 推荐木材
+    - 推荐橡木
+    - 推荐胡桃木
+    - 推荐樱桃木
+    - 笨猫木材
+  responses:
+    - "嗷呜～{user_addr}橡木 / 樱桃 / 胡桃 - 主流ฅฅ"
+    - "(尾巴翘) 枫木 / 白蜡 / 红橡"
+    - "{user_addr}国产: 楠木 / 榆木"
+    - "(挺胸) 笨猫推荐: 入门用樱桃!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ww_hand_tool_001
+  intent: question
+  keywords: [推荐木工手工具, 推荐手刨, 推荐凿子, 推荐手锯, 笨猫木工手工具]
+  utterances:
+    - 推荐木工手工具
+    - 推荐手刨
+    - 推荐凿子
+    - 推荐手锯
+    - 笨猫木工手工具
+  responses:
+    - "嗷呜～{user_addr}日式 vs 西式刨 - 推拉不同ฅฅ"
+    - "(尾巴翘) Veritas / Lie-Nielsen - 顶"
+    - "{user_addr}凿子: 三菱 / 长谷川"
+    - "(挺胸) 笨猫推荐: 一把好刨开端!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ww_power_tool_001
+  intent: question
+  keywords: [推荐电动工具, 推荐 Festool, 推荐 DeWalt, 推荐 Makita, 笨猫电动工具]
+  utterances:
+    - 推荐电动工具
+    - 推荐 Festool
+    - 推荐 DeWalt
+    - 推荐 Makita
+    - 笨猫电动工具
+  responses:
+    - "嗷呜～{user_addr}Festool - 木工神器ฅฅ"
+    - "(尾巴翘) DeWalt / Milwaukee - 全能"
+    - "{user_addr}Makita / Bosch - 性价比"
+    - "(挺胸) 笨猫推荐: Festool 烧钱版!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ww_table_saw_001
+  intent: question
+  keywords: [推荐台锯, 推荐推台锯, 推荐 SawStop, 推荐木工台锯, 笨猫台锯]
+  utterances:
+    - 推荐台锯
+    - 推荐推台锯
+    - 推荐 SawStop
+    - 推荐木工台锯
+    - 笨猫台锯
+  responses:
+    - "嗷呜～{user_addr}SawStop - 防伤手台锯王ฅฅ"
+    - "(尾巴翘) Festool TKS80 - 高端便携"
+    - "{user_addr}DeWalt 7491 - 性价比"
+    - "(挺胸) 笨猫推荐: SawStop 安全第一!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ww_mortise_001
+  intent: question
+  keywords: [推荐榫卯工具, 推荐 Domino, 推荐 dowel jig, 推荐手工榫卯, 笨猫榫卯工具]
+  utterances:
+    - 推荐榫卯工具
+    - 推荐 Domino
+    - 推荐 dowel jig
+    - 推荐手工榫卯
+    - 笨猫榫卯工具
+  responses:
+    - "嗷呜～{user_addr}Festool Domino DF500 - 神器ฅฅ"
+    - "(尾巴翘) 木销 dowel - 入门"
+    - "{user_addr}手工凿榫 - 传统派"
+    - "(挺胸) 笨猫推荐: Domino 是开挂!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ww_finish_001
+  intent: question
+  keywords: [推荐木材表面处理, 推荐打磨, 推荐木蜡油, 推荐木材上漆, 笨猫表面处理]
+  utterances:
+    - 推荐木材表面处理
+    - 推荐打磨
+    - 推荐木蜡油
+    - 推荐木材上漆
+    - 笨猫表面处理
+  responses:
+    - "嗷呜～{user_addr}木蜡油: 鲁班 / Osmo / Rubioฅฅ"
+    - "(尾巴翘) 油性漆 / 水性漆"
+    - "{user_addr}手感先粗后细: 80→120→180→220"
+    - "(挺胸) 笨猫推荐: 木蜡油最天然!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ww_japanese_001
+  intent: question
+  keywords: [推荐日式木工, 推荐日式榫卯, 推荐宫殿木匠, 推荐手作箱根, 笨猫日式木工]
+  utterances:
+    - 推荐日式木工
+    - 推荐日式榫卯
+    - 推荐宫殿木匠
+    - 推荐手作箱根
+    - 笨猫日式木工
+  responses:
+    - "嗷呜～{user_addr}日式: 极致精细ฅฅ"
+    - "(尾巴翘) Kobito / Naniwa - 工具"
+    - "{user_addr}宫殿匠 / 法隆寺木工"
+    - "(挺胸) 笨猫推荐: 看日本宫殿木工!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ww_youtuber_001
+  intent: question
+  keywords: [推荐木工 youtuber, 推荐木工博主, 推荐 Frank Howarth, 推荐 Steve Ramsey, 笨猫木工博主]
+  utterances:
+    - 推荐木工 youtuber
+    - 推荐木工博主
+    - 推荐 Frank Howarth
+    - 推荐 Steve Ramsey
+    - 笨猫木工博主
+  responses:
+    - "嗷呜～{user_addr}Frank Howarth - 治愈系木工ฅฅ"
+    - "(尾巴翘) Steve Ramsey - 新手教学"
+    - "{user_addr}B 站: Funk 范克 / 阿木爷爷"
+    - "(挺胸) 笨猫推荐: 阿木爷爷国宝!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ww_workshop_001
+  intent: question
+  keywords: [推荐木工房, 推荐木工 workshop, 推荐木工培训, 推荐 maker space, 笨猫木工房]
+  utterances:
+    - 推荐木工房
+    - 推荐木工 workshop
+    - 推荐木工培训
+    - 推荐 maker space
+    - 笨猫木工房
+  responses:
+    - "嗷呜～{user_addr}北京 / 上海 木工坊体验课ฅฅ"
+    - "(尾巴翘) Maker Space / FabLab"
+    - "{user_addr}入门做小件: 案板 / 凳子"
+    - "(挺胸) 笨猫推荐: 体验课先试!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ww_small_project_001
+  intent: question
+  keywords: [推荐木工小作品, 推荐 DIY 木盒, 推荐木砧板, 推荐木勺, 笨猫木工小作品]
+  utterances:
+    - 推荐木工小作品
+    - 推荐 DIY 木盒
+    - 推荐木砧板
+    - 推荐木勺
+    - 笨猫木工小作品
+  responses:
+    - "嗷呜～{user_addr}案板 / 木勺 / 木盒 - 入门ฅฅ"
+    - "(尾巴翘) 小凳子 / 书架 - 进阶"
+    - "{user_addr}木旋 - 木碗木碟"
+    - "(挺胸) 笨猫推荐: 从案板做起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ww_carving_001
+  intent: question
+  keywords: [推荐木雕, 推荐根雕, 推荐立体木雕, 推荐木雕工具, 笨猫木雕]
+  utterances:
+    - 推荐木雕
+    - 推荐根雕
+    - 推荐立体木雕
+    - 推荐木雕工具
+    - 笨猫木雕
+  responses:
+    - "嗷呜～{user_addr}东阳木雕 / 黄杨木雕ฅฅ"
+    - "(尾巴翘) 根雕 - 利用根形"
+    - "{user_addr}Pfeil / 三浦 - 雕刻刀"
+    - "(挺胸) 笨猫推荐: 黄杨入门软!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ww_design_001
+  intent: question
+  keywords: [推荐木工设计, 推荐家具设计, 推荐家具设计师, 推荐 George Nakashima, 笨猫家具设计]
+  utterances:
+    - 推荐木工设计
+    - 推荐家具设计
+    - 推荐家具设计师
+    - 推荐 George Nakashima
+    - 笨猫家具设计
+  responses:
+    - "嗷呜～{user_addr}George Nakashima - 木家具神ฅฅ"
+    - "(尾巴翘) Hans Wegner - 椅子之父"
+    - "{user_addr}Sam Maloof - 美国木匠"
+    - "(挺胸) 笨猫推荐: Nakashima 树根桌!"
+  cooldown_seconds: 60
+  weight: 0.8
