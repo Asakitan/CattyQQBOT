@@ -389,11 +389,11 @@
     "cpu_engine": {
         "_note_l4_catnify": "S5 (2026-05-29) 主人方案: 本地 CPU LLM 全量改写 + 自决 DEEPSEEK 透传",
         "l4_mode": "catnify",
-        "l4_catnify_model": "qwen2.5:3b",
+        "l4_catnify_model": "qwen2.5:7b",
         "l4_catnify_timeout_ms": 8000,
         "l4_catnify_max_input_tokens": 4000,
         "l4_catnify_temperature": 0.7,
-        "l4_catnify_max_tokens": 200,
+        "l4_catnify_max_tokens": 80,
         "l4_catnify_history_turns": 4,
         "l4_catnify_concurrency": 2,
         "l4_catnify_queue_max": 8,

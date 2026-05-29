@@ -409,9 +409,9 @@ class Config(BaseModel):
     #               LLM 可在输出加 <DEEPSEEK reason="..."> 标记自决透传
     # 主人决策: 服务器关 MC 后 16.3GB free, 直接全量 catnify 上线.
     catty_cpu_engine_l4_mode: str = "catnify"
-    # 主人 2026-05-29 S5.6e: 实测 qwen3 thinking 关不掉超时, qwen2.5:1.5b 扮演弱.
-    # 最终选 qwen2.5:3b: warm 2.85s / decode 11.6 tok/s / 笨猫扮演完美 (4 核 affinity 下).
-    catty_cpu_engine_l4_catnify_model: str = "qwen2.5:3b"
+    # 主人 2026-05-29 v4: 3B 演技不够还原 (echo prompt 字面字符) → 切 7B.
+    # qwen2.5:7b 4 核 affinity warm 5.6s / decode 5.4 tok/s / 角色扮演显著强于 3B.
+    catty_cpu_engine_l4_catnify_model: str = "qwen2.5:7b"
     # S5.6f (主人 2026-05-29) BUG FIX: catnify 必须走本地 Ollama, 不能复用 ai_fallback
     # (主人 ai_fallback 配的是 deepseek.com 兜底, catnify 调它会跑去 DeepSeek 烧 token).
     catty_cpu_engine_l4_catnify_base_url: str = "http://127.0.0.1:11434/v1"
@@ -422,7 +422,8 @@ class Config(BaseModel):
     # 主人 2026-05-29 v2: token 输入只能 < 1000 (6C CPU prefill 慢, 保守 800 留余量)
     catty_cpu_engine_l4_catnify_max_input_tokens: int = 800
     catty_cpu_engine_l4_catnify_temperature: float = 0.7
-    catty_cpu_engine_l4_catnify_max_tokens: int = 200
+    # 主人 2026-05-29 v4: 7B 5.4 tok/s × 200 = 37s decode 超时. 改 80 让笨猫回复短.
+    catty_cpu_engine_l4_catnify_max_tokens: int = 80
     catty_cpu_engine_l4_catnify_history_turns: int = 4
     catty_cpu_engine_l4_catnify_concurrency: int = 2
     catty_cpu_engine_l4_catnify_queue_max: int = 8

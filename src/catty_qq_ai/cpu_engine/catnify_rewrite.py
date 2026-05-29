@@ -25,13 +25,14 @@ import httpx
 from loguru import logger
 
 
-# 主人 2026-05-29 v3 (最终): 极简 prompt - 主人原则"只传 CPU 候选 + 改写 + 理解当前用户问题".
-# 之前 v2 还塞了 [场景]/[群名]/DEEPSEEK 透传规则等 prefix 注入, 主人指出 6C CPU 跑不动.
-# 新设计: system ~50 字 + user 2 块 (用户问 / 待改写), 总 < 100 token.
-# DEEPSEEK 透传降级到 strong_interaction 前置规则 (NSFW phase / academic / emotion / conf),
-# LLM 只做"理解上下文 → 改写句子", 不再自决路径选择.
+# 主人 2026-05-29 v4: 7B 还原 + prompt 不再 echo.
+# v3 用 3B 输出 "喵~/嗷呜~/ฅฅ 我是人家笨猫" — 模型把 prompt 里『喵~/嗷呜~/ฅฅ』和『人家/笨猫』
+# 当字面字符 echo 出来. 修法: 不写具体字符, 让模型自然演绎.
+# 切 qwen2.5:7b (4 核 affinity 下 warm 5.6s) 角色扮演显著强于 3B.
 _MICHEL_PERSONA_HINT = (
-    "把下面的回复改写成笨猫语气. 必带『喵~/嗷呜~/ฅฅ』, 1-3 句, 自称『人家/笨猫』."
+    "你是傲娇黏人猫娘. 用第一人称把『待改写』的句子换成你的语气, "
+    "保留原意但加入猫娘可爱感. 自称不要用『我』. 句尾用一个可爱的猫语拟声. "
+    "只输出改写后的句子, 不要解释."
 )
 
 # 兼容老代码: 解析器保留, 但 prompt 不再告诉 LLM 这个机制, _parse_deepseek_marker 不会触发.
@@ -133,7 +134,7 @@ async def catnify_rewrite(
         else int(getattr(config, "catty_cpu_engine_l4_catnify_timeout_ms", 0) or 3000)
     )
     temperature = float(getattr(config, "catty_cpu_engine_l4_catnify_temperature", 0.7))
-    max_tokens = int(getattr(config, "catty_cpu_engine_l4_catnify_max_tokens", 0) or 200)
+    max_tokens = int(getattr(config, "catty_cpu_engine_l4_catnify_max_tokens", 0) or 80)
     timeout_s = max(timeout_ms / 1000.0, 0.5)
 
     # 主人 2026-05-29 v3: 极简, system = 一句改写指令, _DEEPSEEK_RULE_HINT 已置空
