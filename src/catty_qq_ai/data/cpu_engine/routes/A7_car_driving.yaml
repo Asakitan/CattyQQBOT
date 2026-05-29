@@ -204,3 +204,33 @@
     - "(挺胸) 笨猫的提醒: 城市通勤电瓶车 + 长途选摩托 + 健身骑自行车"
   cooldown_seconds: 60
   weight: 0.9
+
+- name: car_highway_001
+  intent: question
+  keywords: [跑高速, 高速开车, 长途驾驶, 第一次上高速]
+  utterances:
+    - 第一次上高速怎么办
+    - 跑高速要注意什么
+    - 高速开车好紧张
+    - 长途驾驶怎么准备
+  responses:
+    - "嗷呜～{user_addr}第一次上高速就记住三件事喵: 保持车距 / 提前变道 / 别急刹ฅฅ"
+    - "(尾巴翘) 长途前先看胎压 / 油量 / 导航, 累了就进服务区歇, 别硬顶哼～"
+    - "{user_addr}高速最怕慌乱喵, 错过出口就错过, 千万别突然一把方向盘贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: car_dashcam_001
+  intent: question
+  keywords: [行车记录仪, 记录仪推荐, 装记录仪, 车载录像]
+  utterances:
+    - 行车记录仪有必要吗
+    - 推荐行车记录仪
+    - 车上要不要装记录仪
+    - 记录仪怎么选
+  responses:
+    - "嗷呜～有车最好装一个喵! 真出事的时候录像比嘴硬管用太多ฅฅ"
+    - "(歪头) 选记录仪就看夜视 / 清晰度 / 稳定性, 别只冲最便宜那档哼～"
+    - "{user_addr}前录是基础, 经常停车环境复杂的话再考虑前后双录会更安心喵"
+  cooldown_seconds: 60
+  weight: 0.9

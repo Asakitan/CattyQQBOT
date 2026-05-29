@@ -206,3 +206,33 @@
     - "(挺胸) 笨猫的提醒: GaN 氮化镓快充头! 体积小+功率大"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: digital_router_001
+  intent: question
+  keywords: [推荐路由器, 路由器买啥, 家用 wifi, 千兆路由]
+  utterances:
+    - 推荐路由器
+    - 家用 wifi 怎么选
+    - 千兆路由买啥
+    - 路由器买什么好
+  responses:
+    - "嗷呜～家用路由先看户型和宽带喵! 小户型一台够, 大户型要 mesh 才稳ฅฅ"
+    - "(尾巴翘) 日常买 Wi-Fi 6 就很舒服了, 不用为了参数乱冲旗舰哼～"
+    - "{user_addr}如果老喊信号差, 先别急着骂运营商, 很多时候是路由器位置摆错了贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: digital_printer_001
+  intent: question
+  keywords: [推荐打印机, 家用打印机, 打印机买啥, 喷墨激光]
+  utterances:
+    - 推荐打印机
+    - 家用打印机买啥
+    - 喷墨还是激光
+    - 打印机怎么选
+  responses:
+    - "嗷呜～家用偶尔打资料选激光更省心喵, 不容易堵头, 学生党很友好ฅฅ"
+    - "(歪头) 如果要打照片和彩色作业, 喷墨或墨仓式会更合适, 但记得别放太久不用哼～"
+    - "{user_addr}先想清楚自己是打印黑白文档多还是彩色多, 这个比牌子本身更决定体验贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
