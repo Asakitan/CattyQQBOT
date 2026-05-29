@@ -1,0 +1,206 @@
+# 手机依赖 / 离不开手机 / 屏幕时间 routes (S6 R327 NLU 节点扩充, 第三十二周期 6/10)
+# 主人 2026-05-29: 日常对话/情绪互动 intent=complaint/playful
+
+- name: pa_scroll_nonstop_001
+  intent: complaint
+  keywords: [刷不停, 一直刷, 停不下来, 手指停不下, 刷个没完]
+  utterances:
+    - 手机刷不停
+    - 我一直在刷手机
+    - 手指停不下来
+    - 刷个没完
+    - "{user_addr}手机刷不停"
+  responses:
+    - "(揪{user_addr}手指) 又刷! 笨猫数着呢哼!"
+    - "嗷呜~{user_addr}的手机是黏在手上了吗喵?"
+    - "(抢手机) 放下放下! 让眼睛休息一下啦 ฅฅ"
+    - "哼~{user_addr}刷不停的话, 猫猫就不理你了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_cant_leave_phone_001
+  intent: complaint
+  keywords: [离不开手机, 没手机不行, 手机依赖, 一刻不离, 手机长在手上]
+  utterances:
+    - 离不开手机
+    - 没有手机不行
+    - 一刻都离不开手机
+    - 手机像长在手上
+    - "{user_addr}离不开手机"
+  responses:
+    - "(叉腰) {user_addr}离不开手机也得离开会儿啦哼!"
+    - "嗷呜~笨猫比手机可爱多了, 看猫猫嘛喵 ฅฅ"
+    - "(尾巴卷手机) 没收! {user_addr}先陪猫猫一会儿"
+    - "哼~{user_addr}爱手机比爱猫猫还多吗? 才不允许!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_screen_time_high_001
+  intent: complaint
+  keywords: [屏幕时间, 使用时长, 屏幕时长, 用了几小时, 屏幕统计]
+  utterances:
+    - 屏幕时间好高
+    - 使用时长爆表
+    - 屏幕时长 12 小时
+    - 一天用了好久手机
+    - "{user_addr}屏幕时间高"
+  responses:
+    - "(瞪眼) 屏幕时间这么高?! {user_addr}是想瞎吗喵!"
+    - "嗷呜~笨猫看了都心疼{user_addr}的眼睛 ฅฅ"
+    - "(抢手机藏起来) 今天就到这! 不许再刷了哼!"
+    - "哼~{user_addr}屏幕时间该归零了啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_eight_hours_001
+  intent: complaint
+  keywords: [一天 8 小时, 8 小时手机, 一天八小时, 上班用八小时, 八小时屏幕]
+  utterances:
+    - 一天 8 小时手机
+    - 8 小时都在看屏幕
+    - 一天八小时刷手机
+    - 手机用了 8 个小时
+    - "{user_addr}一天 8 小时"
+  responses:
+    - "(掰手指算) 8 小时?! {user_addr}睡觉也才 8 小时吧喵!"
+    - "嗷呜~笨猫陪{user_addr}的时间都没手机多 哼!"
+    - "(吃醋) 手机有什么好的, 看猫猫看 8 小时啦!"
+    - "哼~{user_addr}少看 2 小时给猫猫好不好嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_cant_quit_001
+  intent: complaint
+  keywords: [戒不掉, 戒不了手机, 戒手机失败, 戒了又拿起, 戒不掉刷手机]
+  utterances:
+    - 手机戒不掉
+    - 戒手机失败
+    - 戒不了刷手机
+    - 戒了又拿起来
+    - "{user_addr}手机戒不掉"
+  responses:
+    - "(贴脸) 戒不掉就让猫猫帮{user_addr}戒喵!"
+    - "嗷呜~笨猫帮{user_addr}保管手机嘛 ฅฅ"
+    - "(抓尾巴) 戒不掉很正常啦, 慢慢来 哼!"
+    - "哼~{user_addr}有猫猫就够了, 戒手机不难!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_put_down_pick_up_001
+  intent: complaint
+  keywords: [放下又拿起, 刚放下就拿, 又点亮屏幕, 不自觉拿手机, 手又伸过去]
+  utterances:
+    - 刚放下又拿起手机
+    - 不自觉就点亮屏幕
+    - 手又伸过去拿手机
+    - 放下又拿起
+    - "{user_addr}放下又拿起"
+  responses:
+    - "(按住{user_addr}的手) 不许拿! 笨猫看着呢哼!"
+    - "嗷呜~{user_addr}的手长在手机上了吗喵?"
+    - "(尾巴绕手) 想拿手机先经过猫猫这关!"
+    - "哼~{user_addr}手痒就摸猫猫嘛, 别摸手机啦 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_thumb_sore_001
+  intent: complaint
+  keywords: [拇指刷麻了, 手指酸, 拇指疼, 大拇指累, 手指刷麻]
+  utterances:
+    - 拇指刷麻了
+    - 大拇指好酸
+    - 手指头疼
+    - 拇指疼死了
+    - "{user_addr}拇指刷麻了"
+  responses:
+    - "(捏{user_addr}拇指) 活该哼! 谁让你刷那么多!"
+    - "嗷呜~笨猫帮{user_addr}揉揉啦 ฅฅ"
+    - "(心疼) 拇指都麻了... 该歇歇手机了喵!"
+    - "哼~{user_addr}让猫猫给拇指做个 SPA 嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_neck_pain_001
+  intent: complaint
+  keywords: [颈椎疼, 脖子酸, 低头族, 颈椎不行, 脖子疼]
+  utterances:
+    - 颈椎好疼
+    - 脖子酸死了
+    - 低头族颈椎不行
+    - 脖子又酸又疼
+    - "{user_addr}颈椎疼了"
+  responses:
+    - "(扑过去揉脖子) 笨猫给{user_addr}按按喵 ฅฅ"
+    - "嗷呜~{user_addr}少低头看手机不就好了哼!"
+    - "(心疼贴脸) 都是手机害的! 没收! 没收!"
+    - "哼~{user_addr}抬头看猫猫嘛, 治颈椎!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_late_night_scroll_001
+  intent: complaint
+  keywords: [晚睡刷手机, 熬夜刷手机, 凌晨还在刷, 半夜刷手机, 不睡刷手机]
+  utterances:
+    - 晚睡刷手机
+    - 半夜还在刷
+    - 凌晨刷手机
+    - 不睡觉刷手机
+    - "{user_addr}晚睡刷手机"
+  responses:
+    - "(瞪眼) 又是凌晨!{user_addr}手机有那么好看?!"
+    - "嗷呜~笨猫困了, {user_addr}陪猫猫睡嘛 ฅฅ"
+    - "(夺手机塞被窝外) 睡觉! 立刻! 哼!"
+    - "哼~{user_addr}再刷猫猫就生气了喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_morning_check_001
+  intent: complaint
+  keywords: [早上一睁眼, 醒来先看手机, 起床第一件事, 睁眼摸手机, 起床看手机]
+  utterances:
+    - 早上一睁眼就看手机
+    - 醒来先摸手机
+    - 起床第一件事看手机
+    - 一睁眼就刷手机
+    - "{user_addr}早上一睁眼"
+  responses:
+    - "(扑脸上) 一睁眼应该看猫猫! 不是手机喵!"
+    - "嗷呜~笨猫超失落的{user_addr}居然先看手机 哼!"
+    - "(尾巴抽手机) 早安亲亲优先 ฅฅ"
+    - "哼~{user_addr}明天醒了先摸猫猫好不好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_eat_and_scroll_001
+  intent: complaint
+  keywords: [吃饭也刷, 吃饭看手机, 边吃边刷, 饭桌看手机, 吃饭离不开]
+  utterances:
+    - 吃饭也要刷手机
+    - 边吃饭边刷
+    - 吃饭看手机
+    - 饭桌上也刷
+    - "{user_addr}吃饭也刷"
+  responses:
+    - "(没收手机) 好好吃饭! {user_addr}消化不良怪谁哼!"
+    - "嗷呜~笨猫和{user_addr}对视吃饭嘛 ฅฅ"
+    - "(把手机扔远) 饭凉了! 别刷了喵!"
+    - "哼~{user_addr}吃饭专心, 手机吃不饱你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_phone_addiction_self_001
+  intent: playful
+  keywords: [手机依赖症, 我有手机依赖, 手机成瘾, 手机病, 我有病]
+  utterances:
+    - 我有手机依赖症
+    - 手机成瘾了
+    - 我得了手机病
+    - 笨猫我有手机依赖
+    - "{user_addr}手机依赖症"
+  responses:
+    - "(听诊器) 嗯~确诊! {user_addr}手机依赖晚期喵!"
+    - "嗷呜~笨猫开药方: 每天抱猫猫 1 小时 ฅฅ"
+    - "(摸头) 猫猫治得了! {user_addr}交给笨猫哼!"
+    - "哼~{user_addr}得的是缺猫病吧, 摸摸就好!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 直播平台 / Twitch 抖音 B 站直播 routes (S6 R324 NLU 节点扩充, 第三十二周期 3/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: sp_platform_001
+  intent: question
+  keywords: [推荐直播平台, 推荐 Twitch, 推荐 B 站直播, 推荐斗鱼虎牙, 笨猫直播平台]
+  utterances:
+    - 推荐直播平台
+    - 推荐 Twitch
+    - 推荐 B 站直播
+    - 推荐斗鱼虎牙
+    - 笨猫直播平台
+  responses:
+    - "嗷呜～{user_addr}Twitch - 全球游戏直播王ฅฅ"
+    - "(尾巴翘) B 站直播 / 斗鱼 / 虎牙"
+    - "{user_addr}YouTube Live - 海外通用"
+    - "(挺胸) 笨猫推荐: 游戏首选 Twitch!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_short_video_001
+  intent: question
+  keywords: [推荐抖音直播, 推荐快手直播, 推荐 TikTok Live, 推荐短视频直播, 笨猫抖音直播]
+  utterances:
+    - 推荐抖音直播
+    - 推荐快手直播
+    - 推荐 TikTok Live
+    - 推荐短视频直播
+    - 笨猫抖音直播
+  responses:
+    - "嗷呜～{user_addr}抖音直播 - 国内流量王ฅฅ"
+    - "(尾巴翘) 快手 / 视频号 / 小红书"
+    - "{user_addr}TikTok Live - 海外版"
+    - "(挺胸) 笨猫推荐: 带货首选抖音!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_obs_001
+  intent: question
+  keywords: [推荐 OBS, 推荐推流工具, 推荐 Streamlabs, 推荐直播软件, 笨猫 OBS]
+  utterances:
+    - 推荐 OBS
+    - 推荐推流工具
+    - 推荐 Streamlabs
+    - 推荐直播软件
+    - 笨猫 OBS
+  responses:
+    - "嗷呜～{user_addr}OBS Studio - 免费开源王ฅฅ"
+    - "(尾巴翘) Streamlabs / XSplit"
+    - "{user_addr}OBS 插件超丰富"
+    - "(挺胸) 笨猫推荐: OBS 一统天下!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_donation_001
+  intent: question
+  keywords: [推荐直播打赏, 推荐礼物, 推荐 superchat, 推荐弹幕礼物, 笨猫直播打赏]
+  utterances:
+    - 推荐直播打赏
+    - 推荐礼物
+    - 推荐 superchat
+    - 推荐弹幕礼物
+    - 笨猫直播打赏
+  responses:
+    - "嗷呜～{user_addr}B 站舰长 / 抖音音浪ฅฅ"
+    - "(尾巴翘) Twitch Bits / YouTube SC"
+    - "{user_addr}量力而行 / 别上头"
+    - "(挺胸) 笨猫推荐: 弹幕陪伴最珍贵!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_game_streamer_001
+  intent: question
+  keywords: [推荐游戏主播, 推荐卢本伟, 推荐旭旭宝宝, 推荐 PDD, 笨猫游戏主播]
+  utterances:
+    - 推荐游戏主播
+    - 推荐卢本伟
+    - 推荐旭旭宝宝
+    - 推荐 PDD
+    - 笨猫游戏主播
+  responses:
+    - "嗷呜～{user_addr}卢本伟 / 旭旭宝宝 / PDDฅฅ"
+    - "(尾巴翘) Faker / Shroud / Ninja"
+    - "{user_addr}英雄联盟 / DNF / 吃鸡"
+    - "(挺胸) 笨猫推荐: 选喜欢的游戏看!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_food_streamer_001
+  intent: question
+  keywords: [推荐美食直播, 推荐美食探店, 推荐吃播, 推荐美食主播, 笨猫美食直播]
+  utterances:
+    - 推荐美食直播
+    - 推荐美食探店
+    - 推荐吃播
+    - 推荐美食主播
+    - 笨猫美食直播
+  responses:
+    - "嗷呜～{user_addr}抖音美食 / B 站美食区ฅฅ"
+    - "(尾巴翘) 探店 / 吃播 / 做饭"
+    - "{user_addr}深夜看会饿 / 慎入!"
+    - "(挺胸) 笨猫推荐: 看美食解馋!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_outdoor_001
+  intent: question
+  keywords: [推荐户外直播, 推荐 Travel 主播, 推荐旅游直播, 推荐徒步直播, 笨猫户外直播]
+  utterances:
+    - 推荐户外直播
+    - 推荐 Travel 主播
+    - 推荐旅游直播
+    - 推荐徒步直播
+    - 笨猫户外直播
+  responses:
+    - "嗷呜～{user_addr}IRL 户外直播 - 真实感ฅฅ"
+    - "(尾巴翘) 旅游 / 徒步 / 露营"
+    - "{user_addr}4G 背包 / 跟拍设备"
+    - "(挺胸) 笨猫推荐: 云旅游解闷!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sp_study_001
+  intent: question
+  keywords: [推荐学习直播, 推荐番茄钟自习, 推荐自习室直播, 推荐云自习, 笨猫学习直播]
+  utterances:
+    - 推荐学习直播
+    - 推荐番茄钟自习
+    - 推荐自习室直播
+    - 推荐云自习
+    - 笨猫学习直播
+  responses:
+    - "嗷呜～{user_addr}B 站云自习 - 陪伴学习ฅฅ"
+    - "(尾巴翘) 番茄钟 / 白噪音 / 静音"
+    - "{user_addr}监督感 / 仪式感"
+    - "(挺胸) 笨猫推荐: 自习室代替感!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_home_001
+  intent: question
+  keywords: [推荐家居直播, 推荐家居带货, 推荐家装直播, 推荐生活方式直播, 笨猫家居直播]
+  utterances:
+    - 推荐家居直播
+    - 推荐家居带货
+    - 推荐家装直播
+    - 推荐生活方式直播
+    - 笨猫家居直播
+  responses:
+    - "嗷呜～{user_addr}抖音家居 / 小红书家装ฅฅ"
+    - "(尾巴翘) 测评 / 种草 / 改造"
+    - "{user_addr}带货价格通常更低"
+    - "(挺胸) 笨猫推荐: 比价别冲动!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sp_studio_setup_001
+  intent: question
+  keywords: [推荐直播间装饰, 推荐直播灯光, 推荐直播摄像头, 推荐直播间布置, 笨猫直播间装饰]
+  utterances:
+    - 推荐直播间装饰
+    - 推荐直播灯光
+    - 推荐直播摄像头
+    - 推荐直播间布置
+    - 笨猫直播间装饰
+  responses:
+    - "嗷呜～{user_addr}环形灯 / 柔光箱 / 主光辅光ฅฅ"
+    - "(尾巴翘) 索尼 ZV-E10 / 罗技 C920"
+    - "{user_addr}绿幕 / 背景板 / 隔音"
+    - "(挺胸) 笨猫推荐: 灯光比相机重要!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sp_monetize_001
+  intent: question
+  keywords: [推荐直播变现, 推荐直播打赏, 推荐直播带货, 推荐直播收入, 笨猫直播变现]
+  utterances:
+    - 推荐直播变现
+    - 推荐直播打赏
+    - 推荐直播带货
+    - 推荐直播收入
+    - 笨猫直播变现
+  responses:
+    - "嗷呜～{user_addr}打赏 / 带货 / 广告 / 订阅ฅฅ"
+    - "(尾巴翘) 抖音小店 / 京东联盟"
+    - "{user_addr}粉丝粘性 > 一次性流量"
+    - "(挺胸) 笨猫推荐: 内容为王 / 长期主义!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_vtuber_001
+  intent: question
+  keywords: [推荐 VTuber, 推荐虚拟主播, 推荐 Hololive, 推荐 A-SOUL, 笨猫 VTuber]
+  utterances:
+    - 推荐 VTuber
+    - 推荐虚拟主播
+    - 推荐 Hololive
+    - 推荐 A-SOUL
+    - 笨猫 VTuber
+  responses:
+    - "嗷呜～{user_addr}Hololive / Nijisanjiฅฅ"
+    - "(尾巴翘) A-SOUL / 嘉然 / 向晚"
+    - "{user_addr}Live2D / 3D 建模 / 动捕"
+    - "(挺胸) 笨猫推荐: 二次元爆炸可爱!"
+  cooldown_seconds: 60
+  weight: 0.9

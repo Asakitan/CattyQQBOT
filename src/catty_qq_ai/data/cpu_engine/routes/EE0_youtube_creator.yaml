@@ -1,0 +1,206 @@
+# YouTube 博主 / 频道 / 主题 routes (S6 R322 NLU 节点扩充, 第三十二周期 1/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: yc_knowledge_001
+  intent: question
+  keywords: [推荐 YouTube 知识博主, 推荐 Ali Abdaal, 推荐 Veritasium, 推荐 YouTube 科普, 笨猫 YouTube 知识]
+  utterances:
+    - 推荐 YouTube 知识博主
+    - 推荐 Ali Abdaal
+    - 推荐 Veritasium
+    - 推荐 YouTube 科普
+    - 笨猫 YouTube 知识
+  responses:
+    - "嗷呜～{user_addr}Ali Abdaal - 效率学习王ฅฅ"
+    - "(尾巴翘) Veritasium - 物理科普神"
+    - "{user_addr}Kurzgesagt - 动画科普顶级"
+    - "(挺胸) 笨猫推荐: Veritasium 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_food_001
+  intent: question
+  keywords: [推荐 YouTube 美食频道, 推荐 Joshua Weissman, 推荐王刚, 推荐 YouTube 厨艺, 笨猫 YouTube 美食]
+  utterances:
+    - 推荐 YouTube 美食频道
+    - 推荐 Joshua Weissman
+    - 推荐王刚
+    - 推荐 YouTube 厨艺
+    - 笨猫 YouTube 美食
+  responses:
+    - "嗷呜～{user_addr}Joshua Weissman - 西餐魔王ฅฅ"
+    - "(尾巴翘) 王刚 R - 硬核中餐"
+    - "{user_addr}Babish / Binging - 影视复刻"
+    - "(挺胸) 笨猫推荐: Joshua + 王刚组合!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_vlog_001
+  intent: question
+  keywords: [推荐 YouTube Vlog 频道, 推荐 Casey Neistat, 推荐生活博主, 推荐 YouTube 日常, 笨猫 YouTube Vlog]
+  utterances:
+    - 推荐 YouTube Vlog 频道
+    - 推荐 Casey Neistat
+    - 推荐生活博主
+    - 推荐 YouTube 日常
+    - 笨猫 YouTube Vlog
+  responses:
+    - "嗷呜～{user_addr}Casey Neistat - Vlog 教父ฅฅ"
+    - "(尾巴翘) Peter McKinnon - 摄影 Vlog"
+    - "{user_addr}Matt D'Avella - 极简生活"
+    - "(挺胸) 笨猫推荐: Casey 经典必看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_gaming_001
+  intent: question
+  keywords: [推荐 YouTube 游戏, 推荐 PewDiePie, 推荐 Markiplier, 推荐游戏实况, 笨猫 YouTube 游戏]
+  utterances:
+    - 推荐 YouTube 游戏
+    - 推荐 PewDiePie
+    - 推荐 Markiplier
+    - 推荐游戏实况
+    - 笨猫 YouTube 游戏
+  responses:
+    - "嗷呜～{user_addr}PewDiePie - 史上最大订阅ฅฅ"
+    - "(尾巴翘) Markiplier - 恐怖游戏"
+    - "{user_addr}Jacksepticeye / DanTDM"
+    - "(挺胸) 笨猫推荐: PewDiePie 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_tech_001
+  intent: question
+  keywords: [推荐 YouTube 科技数码, 推荐 MKBHD, 推荐 JerryRig, 推荐数码评测, 笨猫 YouTube 科技]
+  utterances:
+    - 推荐 YouTube 科技数码
+    - 推荐 MKBHD
+    - 推荐 JerryRig
+    - 推荐数码评测
+    - 笨猫 YouTube 科技
+  responses:
+    - "嗷呜～{user_addr}MKBHD - 数码评测之神ฅฅ"
+    - "(尾巴翘) JerryRigEverything - 耐用测试"
+    - "{user_addr}Linus Tech Tips - PC 硬核"
+    - "(挺胸) 笨猫推荐: MKBHD 必订阅!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_learning_001
+  intent: question
+  keywords: [推荐 YouTube 学习频道, 推荐 Crash Course, 推荐 TED-Ed, 推荐 YouTube 教育, 笨猫 YouTube 学习]
+  utterances:
+    - 推荐 YouTube 学习频道
+    - 推荐 Crash Course
+    - 推荐 TED-Ed
+    - 推荐 YouTube 教育
+    - 笨猫 YouTube 学习
+  responses:
+    - "嗷呜～{user_addr}Crash Course - 全学科速成ฅฅ"
+    - "(尾巴翘) TED-Ed - 动画讲解"
+    - "{user_addr}Khan Academy - 数学英语"
+    - "(挺胸) 笨猫推荐: Crash Course 入门!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yc_travel_001
+  intent: question
+  keywords: [推荐 YouTube 旅行频道, 推荐 Drew Binsky, 推荐 Mark Wiens, 推荐旅游博主, 笨猫 YouTube 旅行]
+  utterances:
+    - 推荐 YouTube 旅行频道
+    - 推荐 Drew Binsky
+    - 推荐 Mark Wiens
+    - 推荐旅游博主
+    - 笨猫 YouTube 旅行
+  responses:
+    - "嗷呜～{user_addr}Drew Binsky - 走遍全球ฅฅ"
+    - "(尾巴翘) Mark Wiens - 美食旅行"
+    - "{user_addr}Yes Theory - 冒险出走"
+    - "(挺胸) 笨猫推荐: Drew 故事感强!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yc_coding_001
+  intent: question
+  keywords: [推荐 YouTube 编程频道, 推荐 Fireship, 推荐 freeCodeCamp, 推荐程序员博主, 笨猫 YouTube 编程]
+  utterances:
+    - 推荐 YouTube 编程频道
+    - 推荐 Fireship
+    - 推荐 freeCodeCamp
+    - 推荐程序员博主
+    - 笨猫 YouTube 编程
+  responses:
+    - "嗷呜～{user_addr}Fireship - 100s 速通新技术ฅฅ"
+    - "(尾巴翘) freeCodeCamp - 几小时硬核教程"
+    - "{user_addr}ThePrimeagen / Theo - 大佬观点"
+    - "(挺胸) 笨猫推荐: Fireship 节奏感最强!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_fitness_001
+  intent: question
+  keywords: [推荐 YouTube 健身频道, 推荐 Athlean-X, 推荐 Jeff Nippard, 推荐健身博主, 笨猫 YouTube 健身]
+  utterances:
+    - 推荐 YouTube 健身频道
+    - 推荐 Athlean-X
+    - 推荐 Jeff Nippard
+    - 推荐健身博主
+    - 笨猫 YouTube 健身
+  responses:
+    - "嗷呜～{user_addr}Athlean-X - 解剖学硬核ฅฅ"
+    - "(尾巴翘) Jeff Nippard - 科学训练"
+    - "{user_addr}Chris Heria - 街头健身"
+    - "(挺胸) 笨猫推荐: Athlean 不练就废!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yc_chinese_001
+  intent: question
+  keywords: [推荐 YouTube 中文频道, 推荐老外讲故事, 推荐中文 YouTuber, 推荐华人博主, 笨猫 YouTube 中文]
+  utterances:
+    - 推荐 YouTube 中文频道
+    - 推荐老外讲故事
+    - 推荐中文 YouTuber
+    - 推荐华人博主
+    - 笨猫 YouTube 中文
+  responses:
+    - "嗷呜～{user_addr}老高与小茉 - 都市传说ฅฅ"
+    - "(尾巴翘) 阿滴英文 / 蔡阿嘎"
+    - "{user_addr}志祺七七 / 李永乐"
+    - "(挺胸) 笨猫推荐: 老高睡前必看!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yc_premium_001
+  intent: question
+  keywords: [推荐 YouTube Premium, 推荐 YouTube 订阅, 推荐 YouTube 无广告, 推荐 YouTube Music, 笨猫 YouTube Premium]
+  utterances:
+    - 推荐 YouTube Premium
+    - 推荐 YouTube 订阅
+    - 推荐 YouTube 无广告
+    - 推荐 YouTube Music
+    - 笨猫 YouTube Premium
+  responses:
+    - "嗷呜～{user_addr}Premium - 无广告 + 后台播放ฅฅ"
+    - "(尾巴翘) 家庭版 - 6 人均摊"
+    - "{user_addr}土耳其/阿根廷区 - 性价比高"
+    - "(挺胸) 笨猫推荐: 重度用户必开!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: yc_monetize_001
+  intent: question
+  keywords: [推荐 YouTube 创作变现, 推荐 YouTube 广告分成, 推荐 YouTube 入门, 推荐做 YouTube, 笨猫 YouTube 变现]
+  utterances:
+    - 推荐 YouTube 创作变现
+    - 推荐 YouTube 广告分成
+    - 推荐 YouTube 入门
+    - 推荐做 YouTube
+    - 笨猫 YouTube 变现
+  responses:
+    - "嗷呜～{user_addr}1000 粉 + 4000h 才开广告ฅฅ"
+    - "(尾巴翘) 会员 / Super Chat / 带货"
+    - "{user_addr}垂直深耕 + 稳定更新"
+    - "(挺胸) 笨猫推荐: 先做内容别想钱!"
+  cooldown_seconds: 60
+  weight: 0.9

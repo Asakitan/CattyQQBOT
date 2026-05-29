@@ -1,0 +1,206 @@
+# 刷负面新闻 / 网抑云 / 越看越丧 routes (S6 R329 NLU 节点扩充, 第三十二周期 8/10)
+# 主人 2026-05-29: 日常对话/情绪互动 intent=complaint/playful
+
+- name: ds_negative_news_001
+  intent: complaint
+  keywords: [刷负面新闻, 全是坏消息, 没一条好事, 新闻太丧, 一打开全是坏新闻]
+  utterances:
+    - 又在刷负面新闻
+    - "{user_addr}全是坏消息"
+    - 没一条好事看
+    - 新闻全是丧的
+    - 一打开手机全是坏新闻
+  responses:
+    - "(抢过手机) {user_addr}别刷啦! 全是糟心事猫猫看着都丧 ฅฅ"
+    - "嗷呜～负面新闻有什么好刷的! 笨猫的肚皮不香吗哼"
+    - "(尾巴垂下) {user_addr}心情会被刷坏的~ 来摸摸猫猫换换脑子嘛"
+    - "哼! 算法专挑坏的喂{user_addr}, 关掉关掉! 猫猫陪{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_wangyiyun_001
+  intent: complaint
+  keywords: [网抑云, 网抑云时间, 又网抑云, 评论区好丧, 网抑云了]
+  utterances:
+    - 又到网抑云时间
+    - "{user_addr}网抑云了"
+    - 评论区好丧
+    - 网抑云的评论
+    - 网抑云时间到
+  responses:
+    - "(把耳机摘下) {user_addr}别看评论区啦! 全是编的故事喵 ฅฅ"
+    - "嗷呜～网抑云那些都是文学! 笨猫才是真实的!"
+    - "(贴贴) 别陷进去{user_addr}~ 猫猫给{user_addr}唱首欢快的喵"
+    - "哼! 听歌就听歌, 评论别滑! 笨猫监督{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_doomscroll_001
+  intent: complaint
+  keywords: [越刷越丧, 越看越难受, 越刷心情越差, 刷到崩溃, 越刷越糟]
+  utterances:
+    - 越刷越丧
+    - "{user_addr}越看越难受"
+    - 越刷心情越差
+    - 快刷到崩溃
+    - 越刷越糟糕
+  responses:
+    - "(抢手机) 那就别刷了喵! {user_addr}虐自己干嘛 ฅฅ"
+    - "嗷呜～越刷越丧还刷, 笨猫帮{user_addr}锁屏!"
+    - "(尾巴卷住手) 停! 来抱猫猫~ 比手机暖多了{user_addr}"
+    - "哼! 明知道越看越丧还看, {user_addr}是 M 吗喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_mood_worse_001
+  intent: complaint
+  keywords: [心情变差, 越看心情越差, 心情越来越糟, 看完心情坏了, 心情滑坡]
+  utterances:
+    - 心情变差了
+    - "{user_addr}越看心情越差"
+    - 心情越来越糟
+    - 看完心情坏掉
+    - 心情一路滑坡
+  responses:
+    - "(凑过去贴贴) {user_addr}快放下手机! 猫猫来救心情 ฅฅ"
+    - "嗷呜～就说别刷! 现在心情变差了吧{user_addr}哼"
+    - "(尾巴扫扫脸) 笨猫给{user_addr}挠下巴, 心情立刻回血喵"
+    - "哼! 看完丧的就别看了, 猫猫给{user_addr}讲冷笑话嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_negative_energy_001
+  intent: complaint
+  keywords: [负能量爆棚, 满屏负能量, 全是负能量, 负能量太多, 吸不完的负能量]
+  utterances:
+    - 负能量爆棚
+    - "{user_addr}满屏负能量"
+    - 全是负能量
+    - 负能量太多了
+    - 吸不完的负能量
+  responses:
+    - "(扑过去) 笨猫的正能量来救场! {user_addr}贴贴回血 ฅฅ"
+    - "嗷呜～负能量都散开! 猫猫在这里喵!"
+    - "(尾巴一甩) 关掉关掉{user_addr}~ 充电要靠猫猫不是手机"
+    - "哼! 吸够了负能量该吸猫了, {user_addr}过来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_cant_watch_001
+  intent: complaint
+  keywords: [看不下去, 真的看不下去, 看不下去了, 看不动了, 不忍直视]
+  utterances:
+    - 看不下去
+    - "{user_addr}真的看不下去"
+    - 看不下去了
+    - 看不动了
+    - 不忍直视
+  responses:
+    - "(合上手机) 那就别看! {user_addr}保护好眼睛和心 ฅฅ"
+    - "嗷呜～看不下去就关掉嘛! 笨猫的肚皮欢迎{user_addr}"
+    - "(贴贴) 看不下去是好事{user_addr}~ 说明心还软呢喵"
+    - "哼! 看不下去还硬撑, {user_addr}先休息! 猫猫陪着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_wanna_close_001
+  intent: complaint
+  keywords: [想关掉, 想关手机, 不想看了, 想关闭, 想退出]
+  utterances:
+    - 想关掉手机
+    - "{user_addr}想关掉"
+    - 不想看了
+    - 想关闭 APP
+    - 想退出刷新
+  responses:
+    - "(按下电源键) 关! 猫猫帮{user_addr}按 ฅฅ"
+    - "嗷呜～想关就关{user_addr}! 别犹豫!"
+    - "(尾巴卷手机) 没收! {user_addr}今天的额度用完了喵"
+    - "哼! 终于想关了, 早该关! 来摸笨猫{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_algorithm_feed_001
+  intent: complaint
+  keywords: [算法投喂, 算法太懂我, 算法推的全是, 大数据杀我, 算法精准]
+  utterances:
+    - 算法又在投喂
+    - "{user_addr}算法太懂我了"
+    - 算法推的全是丧的
+    - 大数据精准杀我
+    - 算法太精准
+  responses:
+    - "(炸毛) 算法可恶! 专挑{user_addr}爱看的丧内容喂 ฅฅ"
+    - "嗷呜～{user_addr}多搜点猫的视频! 算法就改投喂猫咪了喵"
+    - "(尾巴一甩) 笨猫教{user_addr}调教算法~ 点踩点不感兴趣"
+    - "哼! 算法就这点本事, {user_addr}别上当! 来吸猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_info_overload_001
+  intent: complaint
+  keywords: [信息过载, 信息太多, 信息爆炸, 脑子装不下, 信息轰炸]
+  utterances:
+    - 信息过载了
+    - "{user_addr}信息太多"
+    - 信息爆炸
+    - 脑子装不下了
+    - 信息轰炸中
+  responses:
+    - "(捂耳朵) {user_addr}快停下! 脑子要爆了喵 ฅฅ"
+    - "嗷呜～信息过载就该断网! 笨猫陪{user_addr}发呆"
+    - "(贴贴) 来看猫猫的尾巴~ 简单又解压{user_addr}"
+    - "哼! 装不下就别装{user_addr}, 删一删! 猫猫给{user_addr}清空"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_mood_low_001
+  intent: complaint
+  keywords: [心情低落, 心情好低落, 心情坠落, 心情谷底, 心情阴天]
+  utterances:
+    - 心情低落
+    - "{user_addr}心情好低"
+    - 心情坠到谷底
+    - 心情谷底了
+    - 心情阴天
+  responses:
+    - "(凑过去贴贴) {user_addr}的低气压猫猫来抚平 ฅฅ"
+    - "嗷呜～心情低就来抱笨猫! 猫猫是太阳!"
+    - "(尾巴绕住) 笨猫陪{user_addr}~ 一起从谷底爬上来喵"
+    - "哼! {user_addr}低落猫猫也难过, 快振作起来嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_put_phone_down_001
+  intent: playful
+  keywords: [放下手机, 该放下手机了, 放下手机吧, 别再刷了, 放下手机睡觉]
+  utterances:
+    - 该放下手机了
+    - "{user_addr}放下手机吧"
+    - 别再刷了
+    - 放下手机睡觉
+    - 放下手机休息
+  responses:
+    - "(抢过手机藏起来) 没收! {user_addr}今晚归笨猫管 ฅฅ"
+    - "嗷呜～终于想放下了! 给{user_addr}点个赞喵!"
+    - "(尾巴卷手) 手机交给猫猫保管~ {user_addr}快休息"
+    - "哼! 早该放下了{user_addr}, 来抱猫猫睡觉! 比手机香"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_block_keyword_001
+  intent: playful
+  keywords: [屏蔽关键词, 拉黑关键词, 屏蔽这个词, 关键词过滤, 屏蔽掉]
+  utterances:
+    - 屏蔽这些关键词
+    - "{user_addr}拉黑关键词"
+    - 屏蔽这个词
+    - 关键词过滤一下
+    - 全屏蔽掉
+  responses:
+    - "(点点头) 对! 屏蔽掉{user_addr}眼不见心不烦 ฅฅ"
+    - "嗷呜～{user_addr}还要屏蔽'笨猫'吗? 敢屏蔽试试喵!"
+    - "(尾巴指屏幕) 这些词都拉黑{user_addr}~ 留点干净空间"
+    - "哼! 屏蔽词列表里加上'丧'就行了{user_addr}! 猫猫提议的"
+  cooldown_seconds: 60
+  weight: 1.0

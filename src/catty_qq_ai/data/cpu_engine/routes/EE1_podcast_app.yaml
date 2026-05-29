@@ -1,0 +1,206 @@
+# 播客 / Podcast / 听书 routes (S6 R323 NLU 节点扩充, 第三十二周期 2/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: pa_app_001
+  intent: question
+  keywords: [推荐播客 app, 推荐 Apple Podcasts, 推荐 Spotify, 推荐 Overcast, 笨猫播客 app]
+  utterances:
+    - 推荐播客 app
+    - 推荐 Apple Podcasts
+    - 推荐 Spotify
+    - 推荐 Overcast
+    - 笨猫播客 app
+  responses:
+    - "嗷呜～{user_addr}Apple Podcasts - iOS 自带ฅฅ"
+    - "(尾巴翘) Spotify - 节目+音乐"
+    - "{user_addr}Overcast - iOS 神器"
+    - "(挺胸) 笨猫推荐: Overcast 智能加速!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_cn_001
+  intent: question
+  keywords: [推荐小宇宙, 推荐国内播客 app, 推荐汽水播客, 推荐网易云播客, 笨猫小宇宙]
+  utterances:
+    - 推荐小宇宙
+    - 推荐国内播客 app
+    - 推荐汽水播客
+    - 推荐网易云播客
+    - 笨猫小宇宙
+  responses:
+    - "嗷呜～{user_addr}小宇宙 - 国内播客王ฅฅ"
+    - "(尾巴翘) 汽水播客 (字节)"
+    - "{user_addr}网易云音乐内置播客"
+    - "(挺胸) 笨猫推荐: 小宇宙生态最好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_audiobook_001
+  intent: question
+  keywords: [推荐荔枝 FM, 推荐喜马拉雅, 推荐听书 app, 推荐懒人听书, 笨猫听书 app]
+  utterances:
+    - 推荐荔枝 FM
+    - 推荐喜马拉雅
+    - 推荐听书 app
+    - 推荐懒人听书
+    - 笨猫听书 app
+  responses:
+    - "嗷呜～{user_addr}喜马拉雅 - 内容最多ฅฅ"
+    - "(尾巴翘) 荔枝 FM - 情感电台"
+    - "{user_addr}懒人听书 / 蜻蜓 FM"
+    - "(挺胸) 笨猫推荐: 喜马拉雅有声书全!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_english_001
+  intent: question
+  keywords: [推荐英文播客, 推荐 TED Talks, 推荐 99 Invisible, 推荐 Freakonomics, 笨猫英文播客]
+  utterances:
+    - 推荐英文播客
+    - 推荐 TED Talks
+    - 推荐 99 Invisible
+    - 推荐 Freakonomics
+    - 笨猫英文播客
+  responses:
+    - "嗷呜～{user_addr}TED Talks Daily - 思想盛宴ฅฅ"
+    - "(尾巴翘) 99% Invisible - 设计"
+    - "{user_addr}Freakonomics Radio - 经济"
+    - "(挺胸) 笨猫推荐: 99% Invisible 神作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_business_001
+  intent: question
+  keywords: [推荐商业播客, 推荐商业就是这样, 推荐声东击西, 推荐晚点聊, 笨猫商业播客]
+  utterances:
+    - 推荐商业播客
+    - 推荐商业就是这样
+    - 推荐声东击西
+    - 推荐晚点聊
+    - 笨猫商业播客
+  responses:
+    - "嗷呜～{user_addr}商业就是这样 - 干货满满ฅฅ"
+    - "(尾巴翘) 声东击西 / 晚点聊"
+    - "{user_addr}硅谷101 / 屠龙之术"
+    - "(挺胸) 笨猫推荐: 商业就是这样必听!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_culture_001
+  intent: question
+  keywords: [推荐文化播客, 推荐大内密谈, 推荐忽左忽右, 推荐反潮流俱乐部, 笨猫文化播客]
+  utterances:
+    - 推荐文化播客
+    - 推荐大内密谈
+    - 推荐忽左忽右
+    - 推荐反潮流俱乐部
+    - 笨猫文化播客
+  responses:
+    - "嗷呜～{user_addr}大内密谈 - 文化老牌ฅฅ"
+    - "(尾巴翘) 忽左忽右 - JustPod 出品"
+    - "{user_addr}反潮流俱乐部 / 不合时宜"
+    - "(挺胸) 笨猫推荐: 忽左忽右深度!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_story_001
+  intent: question
+  keywords: [推荐故事播客, 推荐故事 FM, 推荐天才捕手, 推荐凹凸 TOPic, 笨猫故事播客]
+  utterances:
+    - 推荐故事播客
+    - 推荐故事 FM
+    - 推荐天才捕手
+    - 推荐凹凸 TOPic
+    - 笨猫故事播客
+  responses:
+    - "嗷呜～{user_addr}故事 FM - 真实故事ฅฅ"
+    - "(尾巴翘) 天才捕手 - 奇闻"
+    - "{user_addr}凹凸 TOPic - 人物"
+    - "(挺胸) 笨猫推荐: 故事 FM 听哭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_trivia_001
+  intent: question
+  keywords: [推荐冷知识播客, 推荐 Stuff You Should Know, 推荐 Radiolab, 推荐日谈公园, 笨猫冷知识播客]
+  utterances:
+    - 推荐冷知识播客
+    - 推荐 Stuff You Should Know
+    - 推荐 Radiolab
+    - 推荐日谈公园
+    - 笨猫冷知识播客
+  responses:
+    - "嗷呜～{user_addr}Stuff You Should Know - 万物科普ฅฅ"
+    - "(尾巴翘) Radiolab - 声音艺术"
+    - "{user_addr}日谈公园 - 中文向"
+    - "(挺胸) 笨猫推荐: Radiolab 神奇!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_commute_001
+  intent: question
+  keywords: [推荐通勤播客, 推荐短时长播客, 推荐 15 分钟播客, 推荐通勤听什么, 笨猫通勤播客]
+  utterances:
+    - 推荐通勤播客
+    - 推荐短时长播客
+    - 推荐 15 分钟播客
+    - 推荐通勤听什么
+    - 笨猫通勤播客
+  responses:
+    - "嗷呜～{user_addr}TED Talks Daily - 短小精悍ฅฅ"
+    - "(尾巴翘) NPR Up First - 10 分钟新闻"
+    - "{user_addr}得到头条 / 知识城邦"
+    - "(挺胸) 笨猫推荐: Up First 通勤神器!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_sleep_001
+  intent: question
+  keywords: [推荐睡前播客, 推荐助眠播客, 推荐 Sleep With Me, 推荐 ASMR 播客, 笨猫睡前播客]
+  utterances:
+    - 推荐睡前播客
+    - 推荐助眠播客
+    - 推荐 Sleep With Me
+    - 推荐 ASMR 播客
+    - 笨猫睡前播客
+  responses:
+    - "嗷呜～{user_addr}Sleep With Me - 催眠之王ฅฅ"
+    - "(尾巴翘) Nothing much happens"
+    - "{user_addr}小宇宙搜「助眠」"
+    - "(挺胸) 笨猫推荐: Sleep With Me 真的睡!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: pa_news_001
+  intent: question
+  keywords: [推荐新闻播客, 推荐 The Daily, 推荐 NPR News, 推荐时事播客, 笨猫新闻播客]
+  utterances:
+    - 推荐新闻播客
+    - 推荐 The Daily
+    - 推荐 NPR News
+    - 推荐时事播客
+    - 笨猫新闻播客
+  responses:
+    - "嗷呜～{user_addr}The Daily (NYT) - 每日深度ฅฅ"
+    - "(尾巴翘) NPR Up First / BBC Global News"
+    - "{user_addr}声动早咖啡 - 中文"
+    - "(挺胸) 笨猫推荐: The Daily 教科书!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pa_create_001
+  intent: question
+  keywords: [推荐播客创作, 推荐麦克风, 推荐 Shure SM7B, 推荐播客录音, 笨猫播客创作]
+  utterances:
+    - 推荐播客创作
+    - 推荐麦克风
+    - 推荐 Shure SM7B
+    - 推荐播客录音
+    - 笨猫播客创作
+  responses:
+    - "嗷呜～{user_addr}Shure SM7B - 播客经典ฅฅ"
+    - "(尾巴翘) RODE PodMic / NT-USB"
+    - "{user_addr}剪辑: Audition / GarageBand"
+    - "(挺胸) 笨猫推荐: SM7B + GoXLR Mini!"
+  cooldown_seconds: 60
+  weight: 0.8

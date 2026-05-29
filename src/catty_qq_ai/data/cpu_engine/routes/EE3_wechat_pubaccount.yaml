@@ -1,0 +1,206 @@
+# 公众号 / 自媒体平台 / 知乎 routes (S6 R325 NLU 节点扩充, 第三十二周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: wpa_wechat_001
+  intent: question
+  keywords: [推荐微信公众号, 推荐优质公众号, 推荐订阅号, 推荐服务号, 笨猫公众号]
+  utterances:
+    - 推荐微信公众号
+    - 推荐优质公众号
+    - 推荐订阅号
+    - 推荐服务号
+    - 笨猫公众号
+  responses:
+    - "嗷呜～{user_addr}三联生活周刊 / 人物 / GQ 报道ฅฅ"
+    - "(尾巴翘) 半佛仙人 / 沸腾新十年 - 财经"
+    - "{user_addr}量子位 / 机器之心 - AI"
+    - "(挺胸) 笨猫推荐: 深度长文优先!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wpa_zhihu_001
+  intent: question
+  keywords: [推荐知乎, 推荐知乎高赞, 推荐知乎大V, 推荐知乎盐选, 笨猫知乎]
+  utterances:
+    - 推荐知乎
+    - 推荐知乎高赞
+    - 推荐知乎大V
+    - 推荐知乎盐选
+    - 笨猫知乎
+  responses:
+    - "嗷呜～{user_addr}知乎 - 深度问答社区ฅฅ"
+    - "(尾巴翘) 盐选会员 / 故事专栏不错"
+    - "{user_addr}科技 / 金融 / 历史板块强"
+    - "(挺胸) 笨猫推荐: 看高赞先看反对!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wpa_toutiao_001
+  intent: question
+  keywords: [推荐头条号, 推荐百家号, 推荐企鹅号, 推荐大鱼号, 笨猫头条号]
+  utterances:
+    - 推荐头条号
+    - 推荐百家号
+    - 推荐企鹅号
+    - 推荐大鱼号
+    - 笨猫头条号
+  responses:
+    - "嗷呜～{user_addr}头条号 - 流量推荐机制ฅฅ"
+    - "(尾巴翘) 百家号 / 企鹅号 - 多平台分发"
+    - "{user_addr}大鱼号 UC / 网易号"
+    - "(挺胸) 笨猫推荐: 一稿多发涨流量!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wpa_douban_001
+  intent: question
+  keywords: [推荐豆瓣, 推荐豆瓣小组, 推荐豆瓣日记, 推荐豆瓣广播, 笨猫豆瓣]
+  utterances:
+    - 推荐豆瓣
+    - 推荐豆瓣小组
+    - 推荐豆瓣日记
+    - 推荐豆瓣广播
+    - 笨猫豆瓣
+  responses:
+    - "嗷呜～{user_addr}豆瓣 - 文艺青年大本营ฅฅ"
+    - "(尾巴翘) 书影音评分权威"
+    - "{user_addr}小组生态丰富 / 八组热闹"
+    - "(挺胸) 笨猫推荐: 评分 + 短评双看!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wpa_bilibili_001
+  intent: question
+  keywords: [推荐B站专栏, 推荐B站Up主, 推荐B站知识区, 推荐B站科普, 笨猫B站]
+  utterances:
+    - 推荐B站专栏
+    - 推荐B站Up主
+    - 推荐B站知识区
+    - 推荐B站科普
+    - 笨猫B站
+  responses:
+    - "嗷呜～{user_addr}B 站知识区 - 青年向ฅฅ"
+    - "(尾巴翘) 罗翔说刑法 / 何同学 / 老师好我叫何同学"
+    - "{user_addr}科技 / 鬼畜 / 游戏 / 番剧"
+    - "(挺胸) 笨猫推荐: 三连支持 Up!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wpa_xiaohongshu_001
+  intent: question
+  keywords: [推荐小红书, 推荐种草, 推荐小红书博主, 推荐小红书笔记, 笨猫小红书]
+  utterances:
+    - 推荐小红书
+    - 推荐种草
+    - 推荐小红书博主
+    - 推荐小红书笔记
+    - 笨猫小红书
+  responses:
+    - "嗷呜～{user_addr}小红书 - 女性向种草社区ฅฅ"
+    - "(尾巴翘) 美妆 / 穿搭 / 美食 / 旅行"
+    - "{user_addr}搜索功能强 - 攻略首选"
+    - "(挺胸) 笨猫推荐: 看素人笔记防滤镜!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wpa_more_platform_001
+  intent: question
+  keywords: [推荐自媒体平台, 推荐内容平台, 推荐写作平台, 推荐 even, 笨猫自媒体]
+  utterances:
+    - 推荐自媒体平台
+    - 推荐内容平台
+    - 推荐写作平台
+    - 推荐 even
+    - 笨猫自媒体
+  responses:
+    - "嗷呜～{user_addr}简书 / 即刻 / Matters 海外ฅฅ"
+    - "(尾巴翘) 少数派 - 数码深度"
+    - "{user_addr}Substack / Medium - 海外"
+    - "(挺胸) 笨猫推荐: 多平台同步分发!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wpa_distribute_001
+  intent: question
+  keywords: [推荐多平台分发, 推荐一键分发, 推荐 Mediakits, 推荐分发工具, 笨猫多平台分发]
+  utterances:
+    - 推荐多平台分发
+    - 推荐一键分发
+    - 推荐 Mediakits
+    - 推荐分发工具
+    - 笨猫多平台分发
+  responses:
+    - "嗷呜～{user_addr}蚁小二 / 易媒助手 - 国内ฅฅ"
+    - "(尾巴翘) 一键 30+ 平台同步"
+    - "{user_addr}省时省力 / 矩阵账号必备"
+    - "(挺胸) 笨猫推荐: 别一稿多投同平台!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wpa_grow_fans_001
+  intent: question
+  keywords: [推荐起号, 推荐涨粉, 推荐冷启动, 推荐账号定位, 笨猫起号]
+  utterances:
+    - 推荐起号
+    - 推荐涨粉
+    - 推荐冷启动
+    - 推荐账号定位
+    - 笨猫起号
+  responses:
+    - "嗷呜～{user_addr}先定位垂直赛道 / 别杂ฅฅ"
+    - "(尾巴翘) 标题党 + 封面图 = 点击"
+    - "{user_addr}日更 30 天 / 算法养号"
+    - "(挺胸) 笨猫推荐: 持续输出比一夜爆款重要!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wpa_traffic_share_001
+  intent: question
+  keywords: [推荐流量分成, 推荐创作激励, 推荐西瓜计划, 推荐头条收益, 笨猫流量分成]
+  utterances:
+    - 推荐流量分成
+    - 推荐创作激励
+    - 推荐西瓜计划
+    - 推荐头条收益
+    - 笨猫流量分成
+  responses:
+    - "嗷呜～{user_addr}头条 / 百家号 - 千次阅读 1-3 元ฅฅ"
+    - "(尾巴翘) B 站创作激励 / 知乎海盐"
+    - "{user_addr}公众号流量主 - CPM 高"
+    - "(挺胸) 笨猫推荐: 单平台到瓶颈再扩!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: wpa_business_001
+  intent: question
+  keywords: [推荐商单, 推荐广告变现, 推荐接广告, 推荐品牌合作, 笨猫商单]
+  utterances:
+    - 推荐商单
+    - 推荐广告变现
+    - 推荐接广告
+    - 推荐品牌合作
+    - 笨猫商单
+  responses:
+    - "嗷呜～{user_addr}1 万粉起接广告 / 看垂直度ฅฅ"
+    - "(尾巴翘) 千粉 100-500 元 / 万粉 3000+"
+    - "{user_addr}巨量星图 / 蒲公英 / 阿里 V任务"
+    - "(挺胸) 笨猫推荐: 软广要带价值不要硬塞!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wpa_topic_001
+  intent: question
+  keywords: [推荐文案选题, 推荐爆款选题, 推荐选题库, 推荐写作素材, 笨猫文案选题]
+  utterances:
+    - 推荐文案选题
+    - 推荐爆款选题
+    - 推荐选题库
+    - 推荐写作素材
+    - 笨猫文案选题
+  responses:
+    - "嗷呜～{user_addr}新榜 / 西瓜数据 - 看爆款ฅฅ"
+    - "(尾巴翘) 热点 + 情绪 + 共鸣 = 爆款"
+    - "{user_addr}5W1H 拆题 / 反常识切入"
+    - "(挺胸) 笨猫推荐: 标题占 50% 流量!"
+  cooldown_seconds: 60
+  weight: 0.9
