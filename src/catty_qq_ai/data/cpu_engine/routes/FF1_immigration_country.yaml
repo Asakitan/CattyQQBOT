@@ -1,0 +1,206 @@
+# 移民国家 / 美加澳新欧洲 routes (S6 R333 NLU 节点扩充, 第三十三周期 2/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: ic_us_canada_001
+  intent: question
+  keywords: [推荐移民国家, 推荐美国移民, 推荐加拿大移民, 推荐北美移民, 笨猫美加]
+  utterances:
+    - 推荐移民国家
+    - 推荐美国移民
+    - 推荐加拿大移民
+    - 推荐北美移民
+    - 笨猫美加
+  responses:
+    - "嗷呜～{user_addr}美国 EB-1A/EB-5 / 加拿大 Express Entryฅฅ"
+    - "(尾巴翘) 美国机会多 / 加拿大福利好"
+    - "{user_addr}美国排期长 / 加拿大相对快"
+    - "(挺胸) 笨猫推荐: 加拿大 EE 性价比高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_australia_001
+  intent: question
+  keywords: [推荐澳洲移民, 推荐澳大利亚, 推荐技术移民澳洲, 推荐 189 签证, 笨猫澳洲]
+  utterances:
+    - 推荐澳洲移民
+    - 推荐澳大利亚
+    - 推荐技术移民澳洲
+    - "推荐 189 签证"
+    - 笨猫澳洲
+  responses:
+    - "嗷呜～{user_addr}189 独立技术 / 190 州担保ฅฅ"
+    - "(尾巴翘) EOI 打分 65+ / 雅思 4*6"
+    - "{user_addr}IT / 工程 / 会计 / 护士热门"
+    - "(挺胸) 笨猫推荐: 189 自由度最高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_singapore_001
+  intent: question
+  keywords: [推荐新加坡移民, 推荐新加坡工作签, 推荐 EP 签证, 推荐 ONE Pass, 笨猫新加坡]
+  utterances:
+    - 推荐新加坡移民
+    - 推荐新加坡工作签
+    - "推荐 EP 签证"
+    - "推荐 ONE Pass"
+    - 笨猫新加坡
+  responses:
+    - "嗷呜～{user_addr}EP 就业准证 / ONE Pass 顶尖人才ฅฅ"
+    - "(尾巴翘) 月薪 5000+ 新币 / PR 后入籍"
+    - "{user_addr}华人友好 / 低税 / 教育强"
+    - "(挺胸) 笨猫推荐: EP 转 PR 主流路径!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_europe_001
+  intent: question
+  keywords: [推荐欧洲移民, 推荐葡萄牙黄金签证, 推荐马耳他移民, 推荐希腊买房, 笨猫欧洲]
+  utterances:
+    - 推荐欧洲移民
+    - 推荐葡萄牙黄金签证
+    - 推荐马耳他移民
+    - 推荐希腊买房
+    - 笨猫欧洲
+  responses:
+    - "嗷呜～{user_addr}葡萄牙 D7/D8 / 马耳他 MPRPฅฅ"
+    - "(尾巴翘) 希腊 25 万欧买房 / 西班牙 50 万"
+    - "{user_addr}申根畅游 / 5 年转永居"
+    - "(挺胸) 笨猫推荐: 葡萄牙 D7 性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_japan_korea_001
+  intent: question
+  keywords: [推荐日本移民, 推荐日本工作签, 推荐韩国移民, 推荐高度人才, 笨猫日韩]
+  utterances:
+    - 推荐日本移民
+    - 推荐日本工作签
+    - 推荐韩国移民
+    - 推荐高度人才
+    - 笨猫日韩
+  responses:
+    - "嗷呜～{user_addr}日本高度人才 70 分 / 1 年永居ฅฅ"
+    - "(尾巴翘) 经营管理签 / 工作签转永居 10 年"
+    - "{user_addr}韩国 F-2-7 积分制 / F-5 永居"
+    - "(挺胸) 笨猫推荐: 日本高度人才最快!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ic_investment_001
+  intent: question
+  keywords: [推荐投资移民, 推荐 EB-5, 推荐黄金签证, 推荐购房移民, 笨猫投资移民]
+  utterances:
+    - 推荐投资移民
+    - "推荐 EB-5"
+    - 推荐黄金签证
+    - 推荐购房移民
+    - 笨猫投资移民
+  responses:
+    - "嗷呜～{user_addr}美国 EB-5 80 万美元 / 排期5年+ฅฅ"
+    - "(尾巴翘) 葡萄牙基金 50 万欧 / 希腊房产"
+    - "{user_addr}爱尔兰 IIP / 加拿大 SUV"
+    - "(挺胸) 笨猫推荐: 资金充足看葡萄牙!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ic_skilled_001
+  intent: question
+  keywords: [推荐技术移民, 推荐加拿大 EE, 推荐 Express Entry, 推荐 CRS 打分, 笨猫技术移民]
+  utterances:
+    - 推荐技术移民
+    - "推荐加拿大 EE"
+    - "推荐 Express Entry"
+    - "推荐 CRS 打分"
+    - 笨猫技术移民
+  responses:
+    - "嗷呜～{user_addr}加拿大 EE CRS 470+ 稳邀ฅฅ"
+    - "(尾巴翘) 雅思 4*7 / 学历 WES 认证"
+    - "{user_addr}省提名 PNP / 联邦快速通道"
+    - "(挺胸) 笨猫推荐: 提前刷雅思!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_study_001
+  intent: question
+  keywords: [推荐留学移民, 推荐雅思托福, 推荐留学转移民, 推荐 IELTS, 笨猫留学移民]
+  utterances:
+    - 推荐留学移民
+    - 推荐雅思托福
+    - 推荐留学转移民
+    - "推荐 IELTS"
+    - 笨猫留学移民
+  responses:
+    - "嗷呜～{user_addr}加拿大 study→work→PR 黄金链ฅฅ"
+    - "(尾巴翘) 雅思 6.5+ / 托福 90+ 基础线"
+    - "{user_addr}澳洲 485 PSW / 英国 Graduate"
+    - "(挺胸) 笨猫推荐: 留学是最稳路径!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_agent_001
+  intent: question
+  keywords: [推荐移民中介, 推荐移民律师, 推荐持牌顾问, 推荐 RCIC, 笨猫移民中介]
+  utterances:
+    - 推荐移民中介
+    - 推荐移民律师
+    - 推荐持牌顾问
+    - "推荐 RCIC"
+    - 笨猫移民中介
+  responses:
+    - "嗷呜～{user_addr}加拿大认 RCIC / 美国找移民律师ฅฅ"
+    - "(尾巴翘) 澳洲 MARA 注册 / 持牌可查"
+    - "{user_addr}避免 DIY 复杂案 / 别贪便宜"
+    - "(挺胸) 笨猫推荐: 查牌照 + 看口碑!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ic_runxue_001
+  intent: question
+  keywords: [推荐润学路线, 推荐润, 推荐出国路径, 推荐润学攻略, 笨猫润学]
+  utterances:
+    - 推荐润学路线
+    - 推荐润
+    - 推荐出国路径
+    - 推荐润学攻略
+    - 笨猫润学
+  responses:
+    - "嗷呜～{user_addr}留学润 / 技术润 / 投资润ฅฅ"
+    - "(尾巴翘) 加澳新性价比 / 美欧高门槛"
+    - "{user_addr}英语 + 技能 + 资金 三选一"
+    - "(挺胸) 笨猫推荐: 早规划早走!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_tax_001
+  intent: question
+  keywords: [推荐税务规划, 推荐跨境税务, 推荐 CRS 申报, 推荐税务居民, 笨猫税务]
+  utterances:
+    - 推荐税务规划
+    - 推荐跨境税务
+    - "推荐 CRS 申报"
+    - 推荐税务居民
+    - 笨猫税务
+  responses:
+    - "嗷呜～{user_addr}美国全球征税 / 加澳类似ฅฅ"
+    - "(尾巴翘) 新加坡 / 香港 / 迪拜 低税"
+    - "{user_addr}CRS 信息互换 / 注销户籍 183 天"
+    - "(挺胸) 笨猫推荐: 找跨境会计师!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ic_education_001
+  intent: question
+  keywords: [推荐子女教育移民, 推荐教育移民, 推荐为孩子移民, 推荐学区, 笨猫教育移民]
+  utterances:
+    - 推荐子女教育移民
+    - 推荐教育移民
+    - 推荐为孩子移民
+    - 推荐学区
+    - 笨猫教育移民
+  responses:
+    - "嗷呜～{user_addr}加拿大公校免费 / 美国学区房ฅฅ"
+    - "(尾巴翘) 澳洲新州维州教育强"
+    - "{user_addr}新加坡 AEIS / 英国寄宿学校"
+    - "(挺胸) 笨猫推荐: 为娃就走加拿大!"
+  cooldown_seconds: 60
+  weight: 1.0

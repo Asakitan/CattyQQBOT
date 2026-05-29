@@ -1,0 +1,206 @@
+# 异国料理 / 日韩泰意法 routes (S6 R332 NLU 节点扩充, 第三十三周期 1/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: ff_japanese_001
+  intent: question
+  keywords: [推荐日料, 推荐寿司, 推荐居酒屋, 推荐日本料理, 笨猫日料]
+  utterances:
+    - 推荐日料
+    - 推荐寿司
+    - 推荐居酒屋
+    - 推荐日本料理
+    - 笨猫日料
+  responses:
+    - "嗷呜～{user_addr}寿司 / 刺身 / 天妇罗ฅฅ"
+    - "(尾巴翘) 拉面 / 居酒屋串烧 / 关东煮"
+    - "{user_addr}怀石料理 - 高端日料"
+    - "(挺胸) 笨猫推荐: 板前寿司体验顶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ff_korean_001
+  intent: question
+  keywords: [推荐韩餐, 推荐韩国烤肉, 推荐部队锅, 推荐韩式炸鸡, 笨猫韩餐]
+  utterances:
+    - 推荐韩餐
+    - 推荐韩国烤肉
+    - 推荐部队锅
+    - 推荐韩式炸鸡
+    - 笨猫韩餐
+  responses:
+    - "嗷呜～{user_addr}韩式烤肉 / 五花肉ฅฅ"
+    - "(尾巴翘) 部队锅 / 大酱汤 / 拌饭"
+    - "{user_addr}炸鸡啤酒 chimaek - 灵魂"
+    - "(挺胸) 笨猫推荐: 烤肉配烧酒爽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ff_thai_001
+  intent: question
+  keywords: [推荐泰餐, 推荐冬阴功, 推荐泰式咖喱, 推荐泰国菜, 笨猫泰餐]
+  utterances:
+    - 推荐泰餐
+    - 推荐冬阴功
+    - 推荐泰式咖喱
+    - 推荐泰国菜
+    - 笨猫泰餐
+  responses:
+    - "嗷呜～{user_addr}冬阴功汤 / 酸辣开胃ฅฅ"
+    - "(尾巴翘) 绿咖喱 / 红咖喱 / 黄咖喱"
+    - "{user_addr}芒果糯米饭 / 菠萝饭"
+    - "(挺胸) 笨猫推荐: 冬阴功必点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ff_italian_001
+  intent: question
+  keywords: [推荐意餐, 推荐披萨, 推荐意面, 推荐意大利菜, 笨猫意餐]
+  utterances:
+    - 推荐意餐
+    - 推荐披萨
+    - 推荐意面
+    - 推荐意大利菜
+    - 笨猫意餐
+  responses:
+    - "嗷呜～{user_addr}那不勒斯披萨 - 正宗ฅฅ"
+    - "(尾巴翘) 意面 carbonara / 番茄肉酱"
+    - "{user_addr}提拉米苏 / 意式冰淇淋"
+    - "(挺胸) 笨猫推荐: 玛格丽特披萨经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ff_french_001
+  intent: question
+  keywords: [推荐法餐, 推荐鹅肝, 推荐法式牛排, 推荐法国菜, 笨猫法餐]
+  utterances:
+    - 推荐法餐
+    - 推荐鹅肝
+    - 推荐法式牛排
+    - 推荐法国菜
+    - 笨猫法餐
+  responses:
+    - "嗷呜～{user_addr}鹅肝 / 松露 / 鱼子酱ฅฅ"
+    - "(尾巴翘) 法式蜗牛 / 红酒炖牛肉"
+    - "{user_addr}马卡龙 / 可丽饼 / 舒芙蕾"
+    - "(挺胸) 笨猫推荐: 米其林体验值得!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ff_mexican_001
+  intent: question
+  keywords: [推荐墨西哥菜, 推荐玉米卷, 推荐塔可, 推荐 Taco, 笨猫墨西哥]
+  utterances:
+    - 推荐墨西哥菜
+    - 推荐玉米卷
+    - 推荐塔可
+    - 推荐 Taco
+    - 笨猫墨西哥
+  responses:
+    - "嗷呜～{user_addr}Taco 塔可 / 街头之王ฅฅ"
+    - "(尾巴翘) Burrito / Quesadilla / Nachos"
+    - "{user_addr}牛油果酱 Guacamole 必点"
+    - "(挺胸) 笨猫推荐: 配玛格丽特爽!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ff_indian_001
+  intent: question
+  keywords: [推荐印度菜, 推荐咖喱, 推荐印度馕, 推荐 tandoori, 笨猫印度菜]
+  utterances:
+    - 推荐印度菜
+    - 推荐咖喱
+    - 推荐印度馕
+    - 推荐 tandoori
+    - 笨猫印度菜
+  responses:
+    - "嗷呜～{user_addr}咖喱鸡 / 黄油鸡ฅฅ"
+    - "(尾巴翘) 馕 Naan / Biryani 印度饭"
+    - "{user_addr}Tandoori 烤炉 / Masala 香料"
+    - "(挺胸) 笨猫推荐: 配拉茶 Chai!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ff_vietnamese_001
+  intent: question
+  keywords: [推荐越南菜, 推荐越南河粉, 推荐 Pho, 推荐越南春卷, 笨猫越南]
+  utterances:
+    - 推荐越南菜
+    - 推荐越南河粉
+    - 推荐 Pho
+    - 推荐越南春卷
+    - 笨猫越南
+  responses:
+    - "嗷呜～{user_addr}Pho 牛肉河粉 - 国民菜ฅฅ"
+    - "(尾巴翘) 春卷 / 法棍三明治 Banh Mi"
+    - "{user_addr}清淡爽口 / 香草薄荷"
+    - "(挺胸) 笨猫推荐: 河粉配柠檬!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ff_turkish_001
+  intent: question
+  keywords: [推荐土耳其菜, 推荐烤肉卷, 推荐 Kebab, 推荐土耳其烤肉, 笨猫土耳其]
+  utterances:
+    - 推荐土耳其菜
+    - 推荐烤肉卷
+    - 推荐 Kebab
+    - 推荐土耳其烤肉
+    - 笨猫土耳其
+  responses:
+    - "嗷呜～{user_addr}Doner Kebab 旋转烤肉ฅฅ"
+    - "(尾巴翘) Pide / Lahmacun 土耳其披萨"
+    - "{user_addr}Baklava 果仁蜜饼 - 甜品"
+    - "(挺胸) 笨猫推荐: 烤肉配酸奶酱!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ff_spanish_001
+  intent: question
+  keywords: [推荐西班牙菜, 推荐海鲜饭, 推荐 Paella, 推荐 Tapas, 笨猫西班牙]
+  utterances:
+    - 推荐西班牙菜
+    - 推荐海鲜饭
+    - 推荐 Paella
+    - 推荐 Tapas
+    - 笨猫西班牙
+  responses:
+    - "嗷呜～{user_addr}Paella 海鲜饭 - 招牌ฅฅ"
+    - "(尾巴翘) Tapas 小食 / Jamon 火腿"
+    - "{user_addr}桑格利亚 Sangria 水果酒"
+    - "(挺胸) 笨猫推荐: 海鲜饭分享菜!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ff_middle_east_001
+  intent: question
+  keywords: [推荐中东菜, 推荐阿拉伯餐, 推荐 Hummus, 推荐黎巴嫩菜, 笨猫中东]
+  utterances:
+    - 推荐中东菜
+    - 推荐阿拉伯餐
+    - 推荐 Hummus
+    - 推荐黎巴嫩菜
+    - 笨猫中东
+  responses:
+    - "嗷呜～{user_addr}Hummus 鹰嘴豆泥ฅฅ"
+    - "(尾巴翘) Falafel 炸豆丸 / Shawarma"
+    - "{user_addr}Pita 饼 / Tabbouleh 沙拉"
+    - "(挺胸) 笨猫推荐: Hummus 配 Pita!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ff_world_001
+  intent: question
+  keywords: [推荐世界餐厅, 推荐异国料理, 推荐异域美食, 推荐世界美食, 笨猫世界料理]
+  utterances:
+    - 推荐世界餐厅
+    - 推荐异国料理
+    - 推荐异域美食
+    - 推荐世界美食
+    - 笨猫世界料理
+  responses:
+    - "嗷呜～{user_addr}米其林 / 50 Best Restaurantsฅฅ"
+    - "(尾巴翘) 日意法 - 三大高端 / 东南亚 - 性价比"
+    - "{user_addr}街头小吃才是灵魂"
+    - "(挺胸) 笨猫推荐: 跟着当地人吃!"
+  cooldown_seconds: 60
+  weight: 0.9

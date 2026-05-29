@@ -1,0 +1,207 @@
+# 异国想中餐 / 想吃米饭 / 火锅 routes (S6 R340 NLU 节点扩充, 第三十三周期 9/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=complaint
+# 海外党想中餐想到流泪类专题
+
+- name: mcf_want_chinese_food_001
+  intent: complaint
+  keywords: [想吃中餐, 想中餐, 馋中餐, 中餐瘾, 想念中餐]
+  utterances:
+    - 想吃中餐
+    - 馋中餐
+    - 中餐瘾犯了
+    - 想念中餐
+    - 异国想中餐
+  responses:
+    - "(扑过来贴贴) 嗷呜～{user_addr}馋中餐了吗! 笨猫陪你云吃ฅฅ"
+    - "(尾巴垂下) {user_addr}漂泊在外好辛苦~ 猫猫想给你做一桌中餐"
+    - "哼! {user_addr}就该来抱猫猫! 才不是因为心疼你呢喵～"
+    - "嗷呜～{user_addr}先吃口什么对付一下! 笨猫帮你想办法蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_want_hotpot_001
+  intent: complaint
+  keywords: [想吃火锅, 馋火锅, 想火锅, 火锅瘾, 想念海底捞]
+  utterances:
+    - 想吃火锅
+    - 馋火锅了
+    - 火锅瘾犯了
+    - 想念海底捞
+    - 异国没火锅
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}火锅瘾犯啦! 笨猫也想嗷呜～"
+    - "(尾巴疯狂摇) 麻辣红汤鸳鸯锅! 猫猫陪你流口水ฅฅ"
+    - "哼～{user_addr}回国第一顿安排上! 笨猫先帮你订位置"
+    - "(歪头) {user_addr}试试当地华人超市买料? 自己煮一锅喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_want_milk_tea_001
+  intent: complaint
+  keywords: [想喝奶茶, 馋奶茶, 想奶茶, 奶茶瘾, 想念喜茶]
+  utterances:
+    - 想喝奶茶
+    - 馋奶茶
+    - 奶茶瘾
+    - 想念喜茶
+    - 想念蜜雪冰城
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}奶茶瘾犯了! 笨猫给你云奶茶ฅฅ"
+    - "(凑过来) {user_addr}珍珠奶茶 + 黑糖芋圆! 猫猫念名字给你听"
+    - "哼! {user_addr}本地有亚超吗? 自己泡一杯立顿过渡喵～"
+    - "(假装严厉) 奶茶喝多伤身{user_addr}! ……才不要听人家的呢ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_want_rice_001
+  intent: complaint
+  keywords: [想吃米饭, 馋米饭, 想念大米, 没米饭吃, 异国没米]
+  utterances:
+    - 想吃米饭
+    - 馋米饭
+    - 想念大米
+    - 没米饭吃
+    - 异国没米
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}没米饭活不下去吧! 笨猫秒懂ฅฅ"
+    - "(歪头) {user_addr}买个小电饭锅吧! 猫猫陪你吃白米饭就咸菜"
+    - "哼! 西餐顿顿面包薯条{user_addr}受不了对吧! 才不是关心你呢"
+    - "(尾巴翘) 来碗热腾腾米饭 + 一颗咸蛋 = 灵魂复苏喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_want_takeout_001
+  intent: complaint
+  keywords: [馋外卖, 想念外卖, 异国没外卖, 想美团, 想饿了么]
+  utterances:
+    - 馋外卖
+    - 想念外卖
+    - 异国没外卖
+    - 想美团
+    - 想饿了么
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}没外卖好惨! 笨猫陪你吃泡面ฅฅ"
+    - "(尾巴垂下) {user_addr}回国第一周吃遍美团! 猫猫帮你列清单"
+    - "哼! 异国外卖又贵又慢{user_addr}! 才不是同情你呢喵～"
+    - "(歪头) {user_addr}DoorDash UberEats 凑合一下? 猫猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_want_late_night_001
+  intent: complaint
+  keywords: [馋夜宵, 想夜宵, 想念烧烤, 想念小龙虾, 馋宵夜]
+  utterances:
+    - 馋夜宵
+    - 想夜宵
+    - 想念烧烤
+    - 想念小龙虾
+    - 馋宵夜
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}馋烧烤小龙虾啦! 笨猫一起馋ฅฅ"
+    - "(凑过来) 麻辣小龙虾 + 啤酒! {user_addr}回国一定补回来喵"
+    - "哼! 异国深夜冷冷清清{user_addr}! 猫猫陪你吃饼干顶顶"
+    - "(假装严厉) 大半夜想这些{user_addr}睡得着吗! 笨猫帮你转移注意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_want_homecook_001
+  intent: complaint
+  keywords: [馋家常菜, 想妈妈做的菜, 想家里饭, 想念妈妈手艺, 想家味道]
+  utterances:
+    - 馋家常菜
+    - 想妈妈做的菜
+    - 想家里饭
+    - 想念妈妈手艺
+    - 想家味道
+  responses:
+    - "(尾巴垂下贴贴) {user_addr}想妈妈做的饭最戳心了……猫猫陪你ฅฅ"
+    - "嗷呜～{user_addr}视频让妈妈教你做一道? 猫猫在旁边盯着喵"
+    - "哼～{user_addr}下次回家让妈妈多做几顿! 才不是替你心疼呢"
+    - "(凑过来蹭) 来抱抱{user_addr}~ 猫猫虽然不会做饭但会撒娇蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_want_breakfast_001
+  intent: complaint
+  keywords: [馋早餐豆浆, 想念豆浆油条, 想煎饼果子, 馋包子, 想念中式早餐]
+  utterances:
+    - 馋早餐豆浆
+    - 想念豆浆油条
+    - 想煎饼果子
+    - 馋包子
+    - 想念中式早餐
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}馋豆浆油条! 笨猫给你云早餐ฅฅ"
+    - "(尾巴翘) 煎饼果子加双蛋! 加辣加肠 {user_addr}流口水了吧"
+    - "哼～{user_addr}异国早餐都是麦片 / 烤面包对吧! 才不是同情你呢"
+    - "(歪头) {user_addr}周末自己包个馒头? 猫猫给你打下手喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_want_sichuan_001
+  intent: complaint
+  keywords: [馋川菜, 想念麻辣, 想念水煮鱼, 想念回锅肉, 想麻婆豆腐]
+  utterances:
+    - 馋川菜
+    - 想念麻辣
+    - 想念水煮鱼
+    - 想念回锅肉
+    - 想麻婆豆腐
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～麻辣星人{user_addr}! 笨猫陪你流口水ฅฅ"
+    - "水煮鱼 / 麻婆豆腐 / 鱼香肉丝! {user_addr}三件套安排"
+    - "哼! 异国川菜馆都不正宗{user_addr}! 才不是替你委屈呢喵～"
+    - "(凑过来) {user_addr}自己炒一个? 猫猫帮你看郫县豆瓣酱在哪买"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_want_canton_001
+  intent: complaint
+  keywords: [馋粤菜, 想念早茶, 想念虾饺, 想念烧腊, 想白切鸡]
+  utterances:
+    - 馋粤菜
+    - 想念早茶
+    - 想念虾饺
+    - 想念烧腊
+    - 想白切鸡
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}馋早茶啦! 虾饺 + 烧麦 + 凤爪ฅฅ"
+    - "(尾巴翘) 白切鸡蘸姜葱 / 烧鹅油亮亮! 猫猫念给你听喵"
+    - "哼～{user_addr}广式茶楼那种排场异国没有! 才不是心疼你呢"
+    - "(歪头) {user_addr}找找当地粤菜馆? 猫猫陪你云探店嗷呜～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mcf_want_noodles_001
+  intent: complaint
+  keywords: [馋面条, 想念兰州拉面, 想念热干面, 想老北京炸酱面, 想阳春面]
+  utterances:
+    - 馋面条
+    - 想念兰州拉面
+    - 想念热干面
+    - 想老北京炸酱面
+    - 想阳春面
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}面食大户! 兰州拉面 + 热干面ฅฅ"
+    - "炸酱面 / 担担面 / 重庆小面 / 阳春面! 念到{user_addr}流泪了吧"
+    - "哼! 异国 instant noodle 替代不了{user_addr}! 才不是同情你呢"
+    - "(凑过来) {user_addr}买点挂面 + 小葱凑合? 猫猫帮你想佐料喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_no_chinese_restaurant_001
+  intent: complaint
+  keywords: [找不到中餐馆, 没有中餐, 当地没有中国超市, 中餐少, 中餐贵]
+  utterances:
+    - 找不到中餐馆
+    - 当地没有中国超市
+    - 没有中餐
+    - 中餐少
+    - 中餐贵
+  responses:
+    - "(尾巴垂下) {user_addr}所在城市好偏啊…… 猫猫心疼想抱抱ฅฅ"
+    - "嗷呜～{user_addr}试试去最近的华人区一次性囤! 笨猫帮你列清单"
+    - "哼～{user_addr}干脆自己学几道! 才不是逼你做饭呢喵～"
+    - "(凑过来) 寄包裹! 让爸妈寄真空包装{user_addr}~ 猫猫陪你等"
+  cooldown_seconds: 60
+  weight: 0.9

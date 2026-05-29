@@ -1,0 +1,206 @@
+# 签证申请 / 美签申根日签 routes (S6 R334 NLU 节点扩充, 第三十三周期 3/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: va_us_001
+  intent: question
+  keywords: [推荐美签, 推荐 B1/B2, 推荐美国签证, 推荐 DS-160, 笨猫美签]
+  utterances:
+    - 推荐美签
+    - 推荐 B1/B2
+    - 推荐美国签证
+    - 推荐 DS-160
+    - 笨猫美签
+  responses:
+    - "嗷呜～{user_addr}B1/B2 - 商务+旅游ฅฅ"
+    - "(尾巴翘) DS-160 + 面签 + 185 美金"
+    - "{user_addr}十年多次 - 黄金签"
+    - "(挺胸) 笨猫推荐: 材料齐+诚实回答!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: va_schengen_001
+  intent: question
+  keywords: [推荐申根签, 推荐法国签证, 推荐意大利签证, 推荐德国签证, 笨猫申根签]
+  utterances:
+    - 推荐申根签
+    - 推荐法国签证
+    - 推荐意大利签证
+    - 推荐德国签证
+    - 笨猫申根签
+  responses:
+    - "嗷呜～{user_addr}申根 26 国 - 一签通玩ฅฅ"
+    - "(尾巴翘) 法签 / 意签 - 出签快"
+    - "{user_addr}停留最长国家送签"
+    - "(挺胸) 笨猫推荐: 法签材料友好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: va_japan_001
+  intent: question
+  keywords: [推荐日签, 推荐日本签证, 推荐三年多次, 推荐五年多次, 笨猫日签]
+  utterances:
+    - 推荐日签
+    - 推荐日本签证
+    - 推荐三年多次
+    - 推荐五年多次
+    - 笨猫日签
+  responses:
+    - "嗷呜～{user_addr}单次 / 三年 / 五年多次ฅฅ"
+    - "(尾巴翘) 冲绳 / 东北三县 - 三年门槛低"
+    - "{user_addr}年薪 10w+ / 房产 - 五年"
+    - "(挺胸) 笨猫推荐: 三年多次性价比高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: va_korea_001
+  intent: question
+  keywords: [推荐韩签, 推荐韩国签证, 推荐个人签, 推荐贴纸签, 笨猫韩签]
+  utterances:
+    - 推荐韩签
+    - 推荐韩国签证
+    - 推荐个人签
+    - 推荐贴纸签
+    - 笨猫韩签
+  responses:
+    - "嗷呜～{user_addr}C-3-9 个人旅游签ฅฅ"
+    - "(尾巴翘) 单次 / 多次 - 学历加分"
+    - "{user_addr}济州免签 / 团签便利"
+    - "(挺胸) 笨猫推荐: 在职+流水好出签!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: va_uk_001
+  intent: question
+  keywords: [推荐英国签, 推荐英签, 推荐 Standard Visitor, 推荐英国旅游签, 笨猫英签]
+  utterances:
+    - 推荐英国签
+    - 推荐英签
+    - 推荐 Standard Visitor
+    - 推荐英国旅游签
+    - 笨猫英签
+  responses:
+    - "嗷呜～{user_addr}Standard Visitor - 标准访客ฅฅ"
+    - "(尾巴翘) 6 个月 / 2 年 / 5 年 / 10 年"
+    - "{user_addr}线上 + 录指纹 + 100 镑"
+    - "(挺胸) 笨猫推荐: 行程信材料关键!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: va_australia_001
+  intent: question
+  keywords: [推荐澳洲签, 推荐 ETA, 推荐 600 签证, 推荐澳大利亚电子签, 笨猫澳签]
+  utterances:
+    - 推荐澳洲签
+    - 推荐 ETA
+    - 推荐 600 签证
+    - 推荐澳大利亚电子签
+    - 笨猫澳签
+  responses:
+    - "嗷呜～{user_addr}600 类访客签 - 电子签ฅฅ"
+    - "(尾巴翘) ETA 仅护照持有者 / 中国大陆走 600"
+    - "{user_addr}三年多次常见 / 出签快"
+    - "(挺胸) 笨猫推荐: 全程线上方便!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: va_canada_001
+  intent: question
+  keywords: [推荐加拿大签, 推荐加签, 推荐 eTA, 推荐十年多次, 笨猫加签]
+  utterances:
+    - 推荐加拿大签
+    - 推荐加签
+    - 推荐 eTA
+    - 推荐十年多次
+    - 笨猫加签
+  responses:
+    - "嗷呜～{user_addr}十年多次访客签 - 长效ฅฅ"
+    - "(尾巴翘) eTA 仅免签国 / 中国走访客签"
+    - "{user_addr}线上申请 + 录指纹"
+    - "(挺胸) 笨猫推荐: 美签持有者好过!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: va_visafree_001
+  intent: question
+  keywords: [推荐免签, 推荐落地签, 推荐免签国家, 推荐说走就走, 笨猫免签]
+  utterances:
+    - 推荐免签
+    - 推荐落地签
+    - 推荐免签国家
+    - 推荐说走就走
+    - 笨猫免签
+  responses:
+    - "嗷呜～{user_addr}泰国 / 新马 / 阿联酋 免签ฅฅ"
+    - "(尾巴翘) 印尼 / 越南 / 柬埔寨 落地签"
+    - "{user_addr}毛里求斯 / 塞尔维亚 免签"
+    - "(挺胸) 笨猫推荐: 东南亚说走就走!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: va_materials_001
+  intent: question
+  keywords: [推荐签证材料, 推荐在职证明, 推荐户口本, 推荐行程单, 笨猫签证材料]
+  utterances:
+    - 推荐签证材料
+    - 推荐在职证明
+    - 推荐户口本
+    - 推荐行程单
+    - 笨猫签证材料
+  responses:
+    - "嗷呜～{user_addr}护照 + 照片 + 申请表ฅฅ"
+    - "(尾巴翘) 在职 + 流水 + 存款"
+    - "{user_addr}行程单 + 机酒 + 邀请函"
+    - "(挺胸) 笨猫推荐: 真实+完整=高过签!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: va_refusal_001
+  intent: question
+  keywords: [推荐拒签处理, 推荐拒签补救, 推荐 214b, 推荐拒签再签, 笨猫拒签]
+  utterances:
+    - 推荐拒签处理
+    - 推荐拒签补救
+    - 推荐 214b
+    - 推荐拒签再签
+    - 笨猫拒签
+  responses:
+    - "嗷呜～{user_addr}先冷静 + 复盘原因ฅฅ"
+    - "(尾巴翘) 214b 移民倾向 - 补强约束力"
+    - "{user_addr}再签隔 3-6 个月 / 换材料"
+    - "(挺胸) 笨猫推荐: 别隐瞒拒签史!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: va_bank_001
+  intent: question
+  keywords: [推荐存款证明, 推荐银行流水, 推荐资产证明, 推荐冻结存款, 笨猫存款证明]
+  utterances:
+    - 推荐存款证明
+    - 推荐银行流水
+    - 推荐资产证明
+    - 推荐冻结存款
+    - 笨猫存款证明
+  responses:
+    - "嗷呜～{user_addr}5w-10w 冻结 3 个月ฅฅ"
+    - "(尾巴翘) 流水半年 / 工资入账"
+    - "{user_addr}房产证 / 车产 - 加分"
+    - "(挺胸) 笨猫推荐: 真实流水比突击靠谱!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: va_app_001
+  intent: question
+  keywords: [推荐签证 app, 推荐携程签证, 推荐飞猪签证, 推荐百程, 笨猫签证 app]
+  utterances:
+    - "推荐签证 app"
+    - 推荐携程签证
+    - 推荐飞猪签证
+    - 推荐百程
+    - "笨猫签证 app"
+  responses:
+    - "嗷呜～{user_addr}携程 / 飞猪 - 代办主流ฅฅ"
+    - "(尾巴翘) 百程 / 熊猫签证 - 老牌"
+    - "{user_addr}免邮材料 + 拒签退款可选"
+    - "(挺胸) 笨猫推荐: 携程客服响应快!"
+  cooldown_seconds: 60
+  weight: 0.8

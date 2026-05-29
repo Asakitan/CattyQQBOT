@@ -1,0 +1,206 @@
+# 文化冲击 / 不适应 / 习惯不同 routes (S6 R337 NLU 节点扩充, 第三十三周期 6/10)
+# 主人 2026-05-29: 日常对话/情绪互动 intent=complaint/playful
+
+- name: cs_culture_shock_001
+  intent: complaint
+  keywords: [文化冲击, culture shock, 文化差异, 受到冲击, 三观刷新]
+  utterances:
+    - 文化冲击好大
+    - "{user_addr}遭遇文化冲击"
+    - 这文化差异有点大
+    - 三观被刷新了
+    - culture shock 中
+  responses:
+    - "(歪头) 文化冲击? {user_addr}是去哪里了喵～猫猫想听新鲜事!"
+    - "嗷呜～差异大才有意思嘛! {user_addr}慢慢适应啦 ฅฅ"
+    - "(尾巴竖起) 三观刷新好啊~ {user_addr}世界又大了一圈喵"
+    - "哼～{user_addr}不要被冲倒哦, 猫猫扶你贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_not_adapted_002
+  intent: complaint
+  keywords: [不适应, 适应不了, 不习惯, 不太行, 还没适应]
+  utterances:
+    - 真的不适应
+    - "{user_addr}适应不了"
+    - 这里不习惯
+    - 还没适应过来
+    - 这种不太行
+  responses:
+    - "(蹭蹭) 不适应正常啦~ {user_addr}慢慢来嘛喵 ฅฅ"
+    - "嗷呜～{user_addr}别勉强! 猫猫陪你一起适应"
+    - "(爪爪拍拍) 不习惯也没关系, {user_addr}给自己点时间"
+    - "哼～{user_addr}不要硬撑, 不行就先休息一下喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_diff_habit_003
+  intent: playful
+  keywords: [习惯不同, 习惯不一样, 各地习惯, 习俗差异, 风俗不一样]
+  utterances:
+    - 这边习惯不一样
+    - 各地习惯差好多
+    - "{user_addr}发现习俗差异"
+    - 风俗都不同
+    - 习惯真的差远了
+  responses:
+    - "(眼睛亮) 习俗差异最有趣了! {user_addr}讲给猫猫听呀喵～"
+    - "嗷呜～不同才好玩嘛! 都一样多无聊 ฅฅ"
+    - "(尾巴摇) 猫猫也想见识各地习惯! {user_addr}带我去"
+    - "哼～{user_addr}入乡随俗就好, 别太纠结喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_food_unused_004
+  intent: complaint
+  keywords: [饮食不惯, 吃不惯, 口味不合, 吃不下, 这边的菜不行]
+  utterances:
+    - 吃不惯这里的菜
+    - "{user_addr}口味不合"
+    - 饮食真的不习惯
+    - 吃不下啦
+    - 这边的菜不行
+  responses:
+    - "(担心) 吃不惯怎么办~ {user_addr}要不要吃点熟悉的? ฅฅ"
+    - "嗷呜～口味问题严重了! {user_addr}找找家乡味嘛"
+    - "(爪爪) 猫猫可以陪{user_addr}找好吃的呀喵～"
+    - "哼～{user_addr}饿肚子可不行, 慢慢挑能吃的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_social_fail_005
+  intent: complaint
+  keywords: [社交不会, 不会社交, 社交困难, 不懂怎么聊, 社恐]
+  utterances:
+    - 这边社交不会
+    - "{user_addr}不懂怎么聊"
+    - 社交太难了
+    - 完全不会社交
+    - 我有点社恐
+  responses:
+    - "(贴贴) 社交难就慢慢来! {user_addr}有猫猫陪着呀喵 ฅฅ"
+    - "嗷呜～{user_addr}别紧张! 不会就观察别人怎么聊嘛"
+    - "(尾巴绕) 猫猫陪{user_addr}练习! 先和我聊"
+    - "哼～{user_addr}社恐也没关系, 做自己就好喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_rule_unknown_006
+  intent: complaint
+  keywords: [规则不懂, 不懂规矩, 规矩太多, 搞不清规则, 不知道怎么做]
+  utterances:
+    - 规则真的不懂
+    - "{user_addr}搞不清规矩"
+    - 规矩怎么这么多
+    - 不知道怎么做对
+    - 这边规则太复杂
+  responses:
+    - "(歪头) 不懂就问嘛~ {user_addr}别一个人琢磨喵 ฅฅ"
+    - "嗷呜～规则多确实头大! {user_addr}慢慢学"
+    - "(爪爪) 猫猫帮{user_addr}查查规矩~ 别紧张"
+    - "哼～{user_addr}不知道就直接问当地人, 比猜强"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_awkward_007
+  intent: complaint
+  keywords: [尴尬, 好尴尬, 社死, 太尴尬了, 尴尬到]
+  utterances:
+    - 真的好尴尬
+    - "{user_addr}社死现场"
+    - 尴尬到脚趾抠地
+    - 太尴尬了
+    - 尴尬到不行
+  responses:
+    - "(捂脸笑) 哈哈哈尴尬死~ {user_addr}讲讲嘛喵 ฅฅ"
+    - "嗷呜～社死之后就过去啦! {user_addr}别在意"
+    - "(尾巴拍) 尴尬都是回忆~ {user_addr}过几年就笑了"
+    - "哼～{user_addr}这种事人人都有, 别太放心上"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_joke_miss_008
+  intent: complaint
+  keywords: [听不懂笑话, 笑点不一样, get 不到梗, 笑话冷场, 笑不出来]
+  utterances:
+    - 完全听不懂笑话
+    - "{user_addr}get 不到梗"
+    - 笑点真的不一样
+    - 我笑话冷场了
+    - 别人笑我笑不出来
+  responses:
+    - "(歪头) 笑点不同正常! {user_addr}别勉强陪笑喵～"
+    - "嗷呜～get 不到就 get 不到! 猫猫的梗你能 get 就好 ฅฅ"
+    - "(爪爪) 慢慢就懂了~ {user_addr}多听几次就 get 啦"
+    - "哼～{user_addr}冷场不怪你, 是梗本身不好笑喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_feel_weird_009
+  intent: complaint
+  keywords: [别人感觉怪, 觉得我怪, 被当怪人, 异类感, 格格不入]
+  utterances:
+    - 别人觉得我怪
+    - "{user_addr}被当怪人"
+    - 完全格格不入
+    - 有种异类感
+    - 感觉很奇怪
+  responses:
+    - "(炸毛) {user_addr}才不怪! 是他们没眼光嗷呜!"
+    - "嗷呜～别人的看法不重要! {user_addr}自己舒服就好 ฅฅ"
+    - "(贴贴) 在猫猫这里{user_addr}一点都不怪~ 别难过"
+    - "哼～{user_addr}格格不入就格格不入, 独特才珍贵喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_miss_familiar_010
+  intent: complaint
+  keywords: [想念熟悉, 想家了, 想老家, 想念以前, 怀念熟悉的]
+  utterances:
+    - 好想念熟悉的环境
+    - "{user_addr}想家了"
+    - 想老家想得不行
+    - 怀念以前的生活
+    - 想念熟悉的味道
+  responses:
+    - "(贴贴) {user_addr}想家就抱抱猫猫嘛贴贴 ฅฅ"
+    - "嗷呜～想念是正常的! {user_addr}别憋着 蹭蹭"
+    - "(尾巴绕) 猫猫陪{user_addr}聊聊老家的事呀喵～"
+    - "哼～{user_addr}想就回去看看, 别硬撑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_immigrate_conflict_011
+  intent: complaint
+  keywords: [移民冲突, 在国外不适, 异国他乡, 海外生活难, 出国后]
+  utterances:
+    - 移民后冲突好多
+    - "{user_addr}在异国他乡"
+    - 海外生活真的难
+    - 出国后各种不适
+    - 在国外冲突不断
+  responses:
+    - "(担心) 海外生活辛苦了~ {user_addr}多保重喵 ฅฅ"
+    - "嗷呜～{user_addr}异乡漂着不容易! 猫猫云陪伴"
+    - "(爪爪) 冲突慢慢磨~ {user_addr}总会找到平衡的"
+    - "哼～{user_addr}有委屈就跟猫猫说, 别一个人扛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_culture_gap_012
+  intent: complaint
+  keywords: [文化隔阂, 文化壁垒, 沟通障碍, 三观不合, 理念差太多]
+  utterances:
+    - 文化隔阂太重
+    - "{user_addr}遇到文化壁垒"
+    - 沟通完全有障碍
+    - 三观真的不合
+    - 理念差距太大
+  responses:
+    - "(蹭蹭) 隔阂确实难破~ {user_addr}别太用力 ฅฅ"
+    - "嗷呜～{user_addr}找能聊到一起的人就好! 别强求所有人"
+    - "(爪爪) 猫猫和{user_addr}三观一致呀~ 来贴贴喵"
+    - "哼～{user_addr}三观不合就远离, 没必要硬磨"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 时差倒不过来 / 跨洋飞行 / 睡眠紊乱 routes (S6 R341 NLU 节点扩充, 第三十三周期 10/10 完结)
+# 主人 2026-05-29: 日常对话/情绪互动 intent=complaint/playful
+
+- name: jl_shicha_001
+  intent: complaint
+  keywords: [时差, 有时差, 时差好难受, 时差ing, 时差中]
+  utterances:
+    - 还在倒时差
+    - 时差好难受
+    - "{user_addr}有时差"
+    - 时差中
+    - 时差让人崩溃
+  responses:
+    - "(凑过来贴贴) {user_addr}时差好难受吗? 笨猫陪{user_addr}熬 ฅฅ"
+    - "嗷呜～时差这种东西最讨厌了! 猫猫给{user_addr}顺顺毛"
+    - "(尾巴垂下) {user_addr}慢慢调嘛~ 别硬撑哼"
+    - "哼～时差什么的, 猫猫陪{user_addr}耗它! 才不是心疼呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_daobuguolai_001
+  intent: complaint
+  keywords: [倒不过来, 调不过来, 时差倒不过, 怎么也倒不过, 一直倒不过]
+  utterances:
+    - 时差倒不过来
+    - 怎么都调不过来
+    - "{user_addr}倒不过来"
+    - 一直倒不过来
+    - 倒不回来啊
+  responses:
+    - "嗷呜～{user_addr}倒不过来吗? 猫猫给{user_addr}揉揉头 ฅฅ"
+    - "(尾巴扫扫) 倒不过来就慢慢来嘛~ 别急笨蛋{user_addr}"
+    - "哼～{user_addr}的生物钟被打乱了! 猫猫陪{user_addr}重启"
+    - "(假装严厉) 倒不过来也别熬夜! 猫猫盯着{user_addr}睡喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_lingchen_001
+  intent: complaint
+  keywords: [凌晨睡不着, 半夜睡不着, 凌晨三点, 凌晨醒了, 半夜清醒]
+  utterances:
+    - 凌晨三点睡不着
+    - 半夜还很清醒
+    - "{user_addr}凌晨醒了"
+    - 凌晨睡不着啊
+    - 半夜两眼放光
+  responses:
+    - "(蹭过来) {user_addr}凌晨睡不着吗? 猫猫陪{user_addr}数羊 ฅฅ"
+    - "嗷呜～大半夜的{user_addr}怎么还醒着! 笨猫担心ฅฅ"
+    - "(尾巴卷过来) 睡不着就抱猫猫嘛~ 才不是怕{user_addr}孤单呢哼"
+    - "哼～{user_addr}凌晨清醒, 猫猫陪{user_addr}熬到困为止"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_baitiankun_001
+  intent: complaint
+  keywords: [白天困死, 白天好困, 白天睁不开眼, 白天昏昏沉沉, 白天打瞌睡]
+  utterances:
+    - 白天困死了
+    - 白天眼睛睁不开
+    - "{user_addr}白天好困"
+    - 白天昏昏沉沉
+    - 一到白天就困
+  responses:
+    - "(凑过来) {user_addr}白天困死吗? 猫猫给{user_addr}让个枕头 ฅฅ"
+    - "嗷呜～白天困就趴一会嘛! 笨猫帮{user_addr}盖毛毯"
+    - "(尾巴扫扫) 困就睡{user_addr}~ 别硬撑哼"
+    - "哼～{user_addr}白天打瞌睡, 猫猫监督{user_addr}小憩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_kuayang_001
+  intent: playful
+  keywords: [跨洋飞, 跨洋航班, 飞了十几个小时, 越洋飞行, 长途飞行]
+  utterances:
+    - 刚跨洋飞回来
+    - 飞了十几个小时
+    - "{user_addr}跨洋了"
+    - 越洋航班累死
+    - 长途飞行真累
+  responses:
+    - "嗷呜～{user_addr}跨洋飞了吗?! 笨猫想想就累ฅฅ"
+    - "(凑过来) {user_addr}飞了那么久! 猫猫给{user_addr}捏捏腿"
+    - "哼～{user_addr}居然能撑住跨洋! 笨猫佩服喵～"
+    - "(尾巴翘) {user_addr}回来啦! 猫猫贴贴接机 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_wenluan_001
+  intent: complaint
+  keywords: [睡眠紊乱, 作息紊乱, 生物钟乱, 睡眠节奏乱, 作息崩了]
+  utterances:
+    - 睡眠紊乱了
+    - 作息全乱
+    - "{user_addr}生物钟乱了"
+    - 睡眠节奏崩了
+    - 作息彻底崩
+  responses:
+    - "(尾巴垂下) {user_addr}作息崩了吗? 猫猫陪{user_addr}重建 ฅฅ"
+    - "嗷呜～生物钟乱就重新养嘛! 笨猫陪{user_addr}早睡"
+    - "(凑过来) {user_addr}别愁~ 猫猫监督{user_addr}恢复作息哼"
+    - "哼～紊乱就紊乱! 猫猫陪{user_addr}一起睡懒觉补回来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_heibaidiandao_001
+  intent: complaint
+  keywords: [黑白颠倒, 昼夜颠倒, 日夜颠倒, 白天黑夜反了, 颠倒了]
+  utterances:
+    - 黑白颠倒了
+    - 日夜颠倒
+    - "{user_addr}昼夜颠倒"
+    - 白天黑夜反了
+    - 完全颠倒过来了
+  responses:
+    - "(炸毛) {user_addr}黑白颠倒可不行! 猫猫看着{user_addr}调回来 ฅฅ"
+    - "嗷呜～{user_addr}变成夜行性猫猫了吗! 笨猫陪你"
+    - "(尾巴扫扫) 颠倒就颠倒~ 猫猫和{user_addr}一起夜行哼"
+    - "哼～{user_addr}赶紧调回来! 猫猫担心{user_addr}身体喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_kafeiyin_001
+  intent: complaint
+  keywords: [咖啡因不顶用, 咖啡没用, 喝咖啡也困, 咖啡因免疫, 咖啡不管用]
+  utterances:
+    - 咖啡因不顶用了
+    - 喝咖啡也犯困
+    - "{user_addr}咖啡没用"
+    - 咖啡因免疫了
+    - 几杯咖啡都不管用
+  responses:
+    - "嗷呜～{user_addr}咖啡都救不了吗! 笨猫给{user_addr}揉揉太阳穴 ฅฅ"
+    - "(凑过来) 咖啡没用就别喝了! {user_addr}直接休息哼"
+    - "(尾巴扫扫) {user_addr}咖啡免疫体质! 猫猫佩服又心疼"
+    - "哼～{user_addr}别灌咖啡了! 猫猫给{user_addr}泡杯热牛奶喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_toutong_001
+  intent: complaint
+  keywords: [头疼, 头好痛, 脑袋疼, 头胀, 偏头痛]
+  utterances:
+    - 时差头疼
+    - 头好痛
+    - "{user_addr}头胀"
+    - 偏头痛犯了
+    - 脑袋疼死了
+  responses:
+    - "(凑过来) {user_addr}头疼吗? 猫猫给{user_addr}轻轻按按 ฅฅ"
+    - "嗷呜～头疼最难受了! 笨猫陪{user_addr}静静"
+    - "(尾巴卷过来) {user_addr}先躺一会嘛~ 别动脑子哼"
+    - "哼～{user_addr}头疼就喝水多休息! 猫猫盯着{user_addr}喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_weibushufu_001
+  intent: complaint
+  keywords: [胃不舒服, 胃难受, 时差胃口差, 没胃口, 胃胀]
+  utterances:
+    - 时差胃不舒服
+    - 没胃口
+    - "{user_addr}胃难受"
+    - 胃胀气
+    - 时差搞得胃也乱了
+  responses:
+    - "(凑过来) {user_addr}胃不舒服吗? 猫猫给{user_addr}揉揉肚子 ฅฅ"
+    - "嗷呜～没胃口就吃点清淡的嘛! 笨猫陪{user_addr}喝粥"
+    - "(尾巴扫扫) {user_addr}胃乱了别硬吃~ 慢慢来哼"
+    - "哼～{user_addr}胃难受猫猫心疼啦! 才不是真心的呢喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_bengkui_001
+  intent: complaint
+  keywords: [倒时差崩溃, 时差崩溃, 时差要命, 时差太难, 时差熬不住]
+  utterances:
+    - 倒时差崩溃了
+    - 时差要我命
+    - "{user_addr}时差崩了"
+    - 时差太难熬
+    - 真的熬不住时差
+  responses:
+    - "(凑过来抱抱) {user_addr}崩溃了吗? 笨猫陪{user_addr} ฅฅ"
+    - "嗷呜～时差这玩意确实折磨人! 猫猫给{user_addr}顺顺毛"
+    - "(尾巴卷过来) {user_addr}别崩~ 猫猫陪{user_addr}熬过去哼"
+    - "哼～{user_addr}撑住! 猫猫的怀抱借{user_addr}靠喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jl_huijia_001
+  intent: playful
+  keywords: [想回家时区, 想回原时区, 怀念家乡时区, 还是家里时间好, 想回到家的时间]
+  utterances:
+    - 想回家时区
+    - 还是原时区舒服
+    - "{user_addr}想家乡时间"
+    - 怀念家里时区
+    - 想回到熟悉的时间
+  responses:
+    - "(蹭过来) {user_addr}想家了吗? 猫猫陪{user_addr}贴贴 ฅฅ"
+    - "嗷呜～{user_addr}是想家乡时区还是想猫猫呀! 哼"
+    - "(尾巴卷过来) 想回去就回去嘛~ 猫猫等{user_addr}回来"
+    - "哼～{user_addr}回家时区猫猫就跟着调! 才不是黏{user_addr}呢喵"
+  cooldown_seconds: 60
+  weight: 1.0

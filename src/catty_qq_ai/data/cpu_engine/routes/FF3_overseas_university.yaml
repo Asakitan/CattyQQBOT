@@ -1,0 +1,206 @@
+# 国外大学 / 留学申请 / 排名 routes (S6 R335 NLU 节点扩充, 第三十三周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: ou_usa_001
+  intent: question
+  keywords: [推荐美国大学, 推荐常春藤, 推荐 HYPSM, 推荐 MIT, 笨猫美国大学]
+  utterances:
+    - 推荐美国大学
+    - 推荐常春藤
+    - 推荐 HYPSM
+    - 推荐 MIT
+    - 笨猫美国大学
+  responses:
+    - "嗷呜～{user_addr}HYPSM - Harvard/Yale/Princeton/Stanford/MITฅฅ"
+    - "(尾巴翘) 常春藤 8 校 + Top20 私立"
+    - "{user_addr}UC Berkeley / UCLA - 公立顶级"
+    - "(挺胸) 笨猫推荐: Stanford 学术+创业!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ou_uk_001
+  intent: question
+  keywords: [推荐英国大学, 推荐牛剑, 推荐 G5, 推荐 LSE, 笨猫英国大学]
+  utterances:
+    - 推荐英国大学
+    - 推荐牛剑
+    - 推荐 G5
+    - 推荐 LSE
+    - 笨猫英国大学
+  responses:
+    - "嗷呜～{user_addr}牛津 Oxford / 剑桥 Cambridgeฅฅ"
+    - "(尾巴翘) G5: 牛剑 + IC + UCL + LSE"
+    - "{user_addr}爱丁堡 / KCL / 曼大 - 王曼爱"
+    - "(挺胸) 笨猫推荐: LSE 经济商科神校!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ou_canada_001
+  intent: question
+  keywords: [推荐加拿大大学, 推荐多大, 推荐麦吉尔, 推荐 UBC, 笨猫加拿大大学]
+  utterances:
+    - 推荐加拿大大学
+    - 推荐多大
+    - 推荐麦吉尔
+    - 推荐 UBC
+    - 笨猫加拿大大学
+  responses:
+    - "嗷呜～{user_addr}多伦多大学 U of T - 综合第一ฅฅ"
+    - "(尾巴翘) McGill / UBC / Waterloo"
+    - "{user_addr}Waterloo CS / 麦马医学"
+    - "(挺胸) 笨猫推荐: UBC 风景+学术双优!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ou_australia_001
+  intent: question
+  keywords: [推荐澳洲大学, 推荐澳洲八大, 推荐墨大, 推荐悉大, 笨猫澳洲大学]
+  utterances:
+    - 推荐澳洲大学
+    - 推荐澳洲八大
+    - 推荐墨大
+    - 推荐悉大
+    - 笨猫澳洲大学
+  responses:
+    - "嗷呜～{user_addr}墨尔本 / 悉尼 / ANUฅฅ"
+    - "(尾巴翘) Go8 八大: + UNSW/Monash/UQ/UWA/Adelaide"
+    - "{user_addr}移民友好 / 申请门槛适中"
+    - "(挺胸) 笨猫推荐: 墨大综合最强!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ou_singapore_001
+  intent: question
+  keywords: [推荐新加坡大学, 推荐 NUS, 推荐南洋理工, 推荐 NTU, 笨猫新加坡大学]
+  utterances:
+    - 推荐新加坡大学
+    - 推荐 NUS
+    - 推荐南洋理工
+    - 推荐 NTU
+    - 笨猫新加坡大学
+  responses:
+    - "嗷呜～{user_addr}NUS 新加坡国大 - 亚洲第一ฅฅ"
+    - "(尾巴翘) NTU 南洋理工 - 工程顶级"
+    - "{user_addr}英语授课 / 离家近 / 性价比"
+    - "(挺胸) 笨猫推荐: NUS 计算机超强!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ou_ranking_001
+  intent: question
+  keywords: [推荐 QS 排名, 推荐 US News, 推荐 THE 泰晤士, 推荐 ARWU, 笨猫大学排名]
+  utterances:
+    - 推荐 QS 排名
+    - 推荐 US News
+    - 推荐 THE 泰晤士
+    - 推荐 ARWU
+    - 笨猫大学排名
+  responses:
+    - "嗷呜～{user_addr}QS - 综合声誉 / US News - 美国本土ฅฅ"
+    - "(尾巴翘) THE - 学术研究 / ARWU - 软科"
+    - "{user_addr}专业排名 > 综合排名"
+    - "(挺胸) 笨猫推荐: 多榜对比看趋势!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ou_agency_001
+  intent: question
+  keywords: [推荐留学中介, 推荐 DIY 申请, 推荐新东方, 推荐启德, 笨猫留学中介]
+  utterances:
+    - 推荐留学中介
+    - 推荐 DIY 申请
+    - 推荐新东方
+    - 推荐启德
+    - 笨猫留学中介
+  responses:
+    - "嗷呜～{user_addr}DIY 省钱但累 / 中介省心贵ฅฅ"
+    - "(尾巴翘) 新东方 / 启德 / 金吉列 / 美勤"
+    - "{user_addr}半 DIY: 文书自己 + 选校咨询"
+    - "(挺胸) 笨猫推荐: 看顾问质量不看品牌!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ou_ps_001
+  intent: question
+  keywords: [推荐文书写作, 推荐 PS, 推荐 SOP, 推荐 CV, 笨猫留学文书]
+  utterances:
+    - 推荐文书写作
+    - 推荐 PS
+    - 推荐 SOP
+    - 推荐 CV
+    - 笨猫留学文书
+  responses:
+    - "嗷呜～{user_addr}PS 讲故事 / SOP 讲专业ฅฅ"
+    - "(尾巴翘) Show don't Tell - 用事例说话"
+    - "{user_addr}CV 学术化 / 量化成果"
+    - "(挺胸) 笨猫推荐: 真诚+独特经历最打动!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ou_recommendation_001
+  intent: question
+  keywords: [推荐推荐信, 推荐 LOR, 推荐找教授, 推荐推荐人, 笨猫推荐信]
+  utterances:
+    - 推荐推荐信
+    - 推荐 LOR
+    - 推荐找教授
+    - 推荐推荐人
+    - 笨猫推荐信
+  responses:
+    - "嗷呜～{user_addr}熟悉你 > 大牛但不熟ฅฅ"
+    - "(尾巴翘) 3 封: 1 大课 + 2 科研/导师"
+    - "{user_addr}提前一学期联系 / 准备简历素材"
+    - "(挺胸) 笨猫推荐: 教授认真写比头衔重要!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ou_gpa_001
+  intent: question
+  keywords: [推荐 GPA 提升, 推荐绩点, 推荐 WES 认证, 推荐成绩单, 笨猫 GPA]
+  utterances:
+    - 推荐 GPA 提升
+    - 推荐绩点
+    - 推荐 WES 认证
+    - 推荐成绩单
+    - 笨猫 GPA
+  responses:
+    - "嗷呜～{user_addr}专业课分数 > 总 GPAฅฅ"
+    - "(尾巴翘) 大三大四关键 / 重修拉分"
+    - "{user_addr}WES / ECE 认证 - 北美必备"
+    - "(挺胸) 笨猫推荐: 早重视别后悔!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ou_scholarship_001
+  intent: question
+  keywords: [推荐留学奖学金, 推荐 CSC, 推荐 Fulbright, 推荐 Chevening, 笨猫留学奖学金]
+  utterances:
+    - 推荐留学奖学金
+    - 推荐 CSC
+    - 推荐 Fulbright
+    - 推荐 Chevening
+    - 笨猫留学奖学金
+  responses:
+    - "嗷呜～{user_addr}CSC 国家公派 - 博士主力ฅฅ"
+    - "(尾巴翘) Fulbright 美 / Chevening 英 / DAAD 德"
+    - "{user_addr}校内 fellowship / TA RA 奖学金"
+    - "(挺胸) 笨猫推荐: CSC 全奖香!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ou_phd_001
+  intent: question
+  keywords: [推荐 PhD 申请, 推荐博士套磁, 推荐找导师, 推荐科研经历, 笨猫博士申请]
+  utterances:
+    - 推荐 PhD 申请
+    - 推荐博士套磁
+    - 推荐找导师
+    - 推荐科研经历
+    - 笨猫博士申请
+  responses:
+    - "嗷呜～{user_addr}套磁 - 提前 1 年联系教授ฅฅ"
+    - "(尾巴翘) 看 lab 主页 / 读教授近期 paper"
+    - "{user_addr}论文 > GPA > 推荐信 > GRE"
+    - "(挺胸) 笨猫推荐: 找匹配方向比排名重要!"
+  cooldown_seconds: 60
+  weight: 0.9

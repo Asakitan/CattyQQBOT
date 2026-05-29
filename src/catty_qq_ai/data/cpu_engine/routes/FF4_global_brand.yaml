@@ -1,0 +1,206 @@
+# 全球大牌 / 奢侈品 / 国际品牌 routes (S6 R336 NLU 节点扩充, 第三十三周期 5/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: gb_luxury_001
+  intent: question
+  keywords: [推荐奢侈品, 推荐 LV, 推荐 Gucci, 推荐 Chanel, 推荐 Hermes]
+  utterances:
+    - 推荐奢侈品大牌
+    - 推荐 LV
+    - 推荐 Gucci
+    - 推荐 Chanel
+    - 推荐 Hermes
+  responses:
+    - "嗷呜～{user_addr}Hermes (爱马仕) - 顶级天花板ฅฅ"
+    - "(尾巴翘) LV / Gucci / Chanel / Dior"
+    - "{user_addr}入门: LV 老花 / Gucci 双 G"
+    - "(挺胸) 笨猫推荐: LV Neverfull 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_sports_001
+  intent: question
+  keywords: [推荐运动品牌, 推荐 Nike, 推荐 Adidas, 推荐 Puma, 推荐 New Balance]
+  utterances:
+    - 推荐运动大牌
+    - 推荐 Nike
+    - 推荐 Adidas
+    - 推荐 Puma
+    - 推荐 New Balance
+  responses:
+    - "嗷呜～{user_addr}Nike - 全球运动王者ฅฅ"
+    - "(尾巴翘) Adidas / Puma / NB / Under Armour"
+    - "{user_addr}跑鞋 Nike, 篮球 Jordan, 休闲 NB"
+    - "(挺胸) 笨猫推荐: Nike Air Force 1 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_fastfashion_001
+  intent: question
+  keywords: [推荐快时尚, 推荐 Zara, 推荐 HM, 推荐 Uniqlo, 推荐 GAP]
+  utterances:
+    - 推荐快时尚品牌
+    - 推荐 Zara
+    - 推荐 HM
+    - 推荐 Uniqlo
+    - 推荐 GAP
+  responses:
+    - "嗷呜～{user_addr}Uniqlo (优衣库) - 基础款王者ฅฅ"
+    - "(尾巴翘) Zara - 设计感 / HM - 性价比"
+    - "{user_addr}GAP / MUJI / COS 也不错"
+    - "(挺胸) 笨猫推荐: Uniqlo U 系列!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_auto_001
+  intent: question
+  keywords: [推荐汽车大牌, 推荐 Tesla, 推荐 BMW, 推荐 Toyota, 推荐 Benz]
+  utterances:
+    - 推荐汽车大牌
+    - 推荐 Tesla
+    - 推荐 BMW
+    - 推荐 Toyota
+    - 推荐 Benz
+  responses:
+    - "嗷呜～{user_addr}Toyota - 全球销冠耐造ฅฅ"
+    - "(尾巴翘) BBA (BMW/Benz/Audi) 豪华"
+    - "{user_addr}电车: Tesla / 比亚迪"
+    - "(挺胸) 笨猫推荐: Toyota Camry 家用神车!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_tech_001
+  intent: question
+  keywords: [推荐科技大牌, 推荐 Apple, 推荐 Samsung, 推荐 Sony, 推荐 Microsoft]
+  utterances:
+    - 推荐科技大牌
+    - 推荐 Apple
+    - 推荐 Samsung
+    - 推荐 Sony
+    - 推荐 Microsoft
+  responses:
+    - "嗷呜～{user_addr}Apple - 生态闭环天花板ฅฅ"
+    - "(尾巴翘) Samsung 屏幕 / Sony 影音"
+    - "{user_addr}Microsoft Surface / Google Pixel"
+    - "(挺胸) 笨猫推荐: iPhone + MacBook 组合!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_watch_001
+  intent: question
+  keywords: [推荐手表大牌, 推荐 Rolex, 推荐 Omega, 推荐 PP, 推荐 AP]
+  utterances:
+    - 推荐手表大牌
+    - 推荐 Rolex
+    - 推荐 Omega
+    - 推荐 PP
+    - 推荐 AP
+  responses:
+    - "嗷呜～{user_addr}Rolex (劳力士) - 保值王ฅฅ"
+    - "(尾巴翘) PP / AP / VC 三大顶级"
+    - "{user_addr}入门 Omega / Tudor / Tag Heuer"
+    - "(挺胸) 笨猫推荐: Rolex Submariner 黑水鬼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_jewelry_001
+  intent: question
+  keywords: [推荐珠宝大牌, 推荐 Tiffany, 推荐 Cartier, 推荐 Bulgari, 推荐 VCA]
+  utterances:
+    - 推荐珠宝大牌
+    - 推荐 Tiffany
+    - 推荐 Cartier
+    - 推荐 Bulgari
+    - 推荐 VCA
+  responses:
+    - "嗷呜～{user_addr}Cartier (卡地亚) - 珠宝之王ฅฅ"
+    - "(尾巴翘) Tiffany 蓝盒 / VCA 四叶草"
+    - "{user_addr}Bulgari 蛇 / Chaumet 冠冕"
+    - "(挺胸) 笨猫推荐: Cartier Love 手镯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_beauty_001
+  intent: question
+  keywords: [推荐美妆大牌, 推荐 SK-II, 推荐 雅诗兰黛, 推荐 La Mer, 推荐 Lancome]
+  utterances:
+    - 推荐美妆大牌
+    - 推荐 SK-II
+    - 推荐 雅诗兰黛
+    - 推荐 La Mer
+    - 推荐 Lancome
+  responses:
+    - "嗷呜～{user_addr}SK-II 神仙水 - 抗老经典ฅฅ"
+    - "(尾巴翘) La Mer 海蓝之谜 / Lancome 小黑瓶"
+    - "{user_addr}雅诗兰黛小棕瓶 / 资生堂红腰子"
+    - "(挺胸) 笨猫推荐: 神仙水 + 小棕瓶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_health_001
+  intent: question
+  keywords: [推荐保健品, 推荐 GNC, 推荐 Swisse, 推荐 Blackmores, 推荐 Centrum]
+  utterances:
+    - 推荐保健品大牌
+    - 推荐 GNC
+    - 推荐 Swisse
+    - 推荐 Blackmores
+    - 推荐 Centrum
+  responses:
+    - "嗷呜～{user_addr}Swisse (澳洲) - 综合性价比ฅฅ"
+    - "(尾巴翘) GNC 美国 / Blackmores 澳"
+    - "{user_addr}Centrum 善存 / Move Free 维骨力"
+    - "(挺胸) 笨猫推荐: Swisse 复合维生素!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_outdoor_001
+  intent: question
+  keywords: [推荐户外品牌, 推荐 Patagonia, 推荐 Arcteryx, 推荐 始祖鸟, 推荐 TNF]
+  utterances:
+    - 推荐户外大牌
+    - 推荐 Patagonia
+    - 推荐 Arcteryx
+    - 推荐 始祖鸟
+    - 推荐 TNF
+  responses:
+    - "嗷呜～{user_addr}Arc'teryx (始祖鸟) - 户外天花板ฅฅ"
+    - "(尾巴翘) Patagonia / TNF 北面 / Mammut"
+    - "{user_addr}Salomon 鞋 / Osprey 包"
+    - "(挺胸) 笨猫推荐: 始祖鸟 Beta AR 冲锋衣!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_appliance_001
+  intent: question
+  keywords: [推荐家电品牌, 推荐 Dyson, 推荐 戴森, 推荐 Bosch, 推荐 西门子]
+  utterances:
+    - 推荐家电大牌
+    - 推荐 Dyson
+    - 推荐 戴森
+    - 推荐 Bosch
+    - 推荐 西门子
+  responses:
+    - "嗷呜～{user_addr}Dyson (戴森) - 黑科技家电ฅฅ"
+    - "(尾巴翘) Bosch / 西门子 / 松下 / LG"
+    - "{user_addr}吸尘器 Dyson, 洗碗机 Bosch"
+    - "(挺胸) 笨猫推荐: Dyson V12 吸尘器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gb_dutyfree_001
+  intent: question
+  keywords: [推荐免税店, 推荐 DFS, 推荐 海南免税, 推荐 韩国免税, 推荐 日上]
+  utterances:
+    - 推荐免税店购物
+    - 推荐 DFS
+    - 推荐 海南免税
+    - 推荐 韩国免税
+    - 推荐 日上免税
+  responses:
+    - "嗷呜～{user_addr}海南免税 - 国内最香ฅฅ"
+    - "(尾巴翘) DFS 全球 / 日上首都机场"
+    - "{user_addr}化妆品韩国, 包包欧洲, 电子日本"
+    - "(挺胸) 笨猫推荐: 海南三亚 cdf 免税城!"
+  cooldown_seconds: 60
+  weight: 0.8

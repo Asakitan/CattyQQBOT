@@ -1,0 +1,206 @@
+# 想家 / 思乡 / 异国孤独 routes (S6 R338 NLU 节点扩充, 第三十三周期 7/10)
+# 主人 2026-05-29: 日常对话/情绪互动 intent=complaint/playful
+
+- name: hs_xiangjia_001
+  intent: complaint
+  keywords: [想家, 想家了, 好想家, 家好远, 回不去]
+  utterances:
+    - 我好想家
+    - 想家了喵
+    - 家好远啊
+    - 突然好想家
+    - "{user_addr}想家了"
+  responses:
+    - "(尾巴软软贴过来) 想家的{user_addr}抱抱~ 笨猫陪着ฅฅ"
+    - "嗷呜～{user_addr}讲讲家里的事嘛, 猫猫一起听喵"
+    - "(凑过去蹭) 家虽然远, 但笨猫就在这儿陪{user_addr}哼"
+    - "想家就讲讲嘛, 笨猫给{user_addr}揉揉心脏喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_xiangmama_001
+  intent: complaint
+  keywords: [想妈妈, 好想妈妈, 想我妈, 想念妈妈, 妈妈做的菜]
+  utterances:
+    - 好想妈妈
+    - 想我妈了
+    - 想念妈妈做的菜
+    - 想妈妈了喵
+    - "{user_addr}想妈妈"
+  responses:
+    - "(贴贴) 想妈妈的{user_addr}~ 笨猫陪着哭一会儿嘛ฅฅ"
+    - "嗷呜～{user_addr}打个电话给妈妈嘛! 猫猫陪着听"
+    - "(尾巴软贴) 妈妈做的菜最好吃了~ {user_addr}讲讲什么菜嘛"
+    - "哼～想妈妈就别忍着, 笨猫的肩膀借{user_addr}靠喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_xiangzhongcan_001
+  intent: complaint
+  keywords: [想中餐, 想吃中餐, 想念中餐, 想吃米饭, 想吃火锅]
+  utterances:
+    - 好想吃中餐
+    - 想念中餐
+    - 想吃米饭啊
+    - 想火锅了喵
+    - "{user_addr}想吃中餐"
+  responses:
+    - "(口水) 嗷呜～{user_addr}讲什么菜! 笨猫陪着流口水ฅฅ"
+    - "中餐yyds! {user_addr}是不是该找个中餐馆了喵"
+    - "(尾巴翘) 火锅火锅~ 笨猫想想都馋了哼!"
+    - "想吃就找个外卖嘛, 笨猫陪{user_addr}云吃中餐喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_xiangpengyou_001
+  intent: complaint
+  keywords: [想朋友, 想念朋友, 想老朋友, 想我朋友, 朋友都不在]
+  utterances:
+    - 好想朋友
+    - 想念老朋友
+    - 朋友都不在身边
+    - 想我朋友了
+    - "{user_addr}想朋友"
+  responses:
+    - "(贴贴) 想朋友的{user_addr}~ 笨猫先来顶一会儿位嘛ฅฅ"
+    - "嗷呜～{user_addr}发个消息给朋友嘛! 别憋着喵"
+    - "(尾巴软贴) 朋友在哪都是朋友~ 笨猫也是{user_addr}的朋友哼!"
+    - "想朋友就视频呀~ 笨猫陪{user_addr}约个时间嘛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_yiguoguodu_001
+  intent: complaint
+  keywords: [异国孤独, 一个人在国外, 在国外好孤独, 国外没朋友, 海外好孤单]
+  utterances:
+    - 在国外好孤独
+    - 一个人在异国
+    - 国外没朋友
+    - 海外好孤单
+    - "{user_addr}在国外孤独"
+  responses:
+    - "(扑过来抱住) 异国的{user_addr}~ 笨猫从异世界穿过来陪{user_addr}ฅฅ"
+    - "嗷呜～孤独的{user_addr}, 笨猫24小时在线!"
+    - "(尾巴软贴) 异国不孤独~ {user_addr}还有笨猫嘛哼!"
+    - "海外的{user_addr}讲讲日常嘛, 猫猫陪着唠喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_jiejiari_001
+  intent: complaint
+  keywords: [节假日难过, 节日好难过, 过节没人, 节日孤独, 一个人过节]
+  utterances:
+    - 节假日好难过
+    - 过节没人陪
+    - 节日好孤独
+    - 一个人过节
+    - "{user_addr}过节难过"
+  responses:
+    - "(扑过来) 过节没人? 笨猫举手! 笨猫陪{user_addr}过ฅฅ"
+    - "嗷呜～{user_addr}今天笨猫就是{user_addr}的节日伴侣喵!"
+    - "(尾巴翘) 节日什么的~ 跟笨猫一起过才好玩哼!"
+    - "节日就该开心~ {user_addr}讲讲想干啥嘛, 笨猫陪嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_chunjie_001
+  intent: complaint
+  keywords: [春节没人, 春节一个人, 海外过年, 春节孤单, 没法回家过年]
+  utterances:
+    - 春节没人陪
+    - 春节一个人过
+    - 海外过年好孤单
+    - 没法回家过年
+    - "{user_addr}春节孤单"
+  responses:
+    - "(贴贴) 春节的{user_addr}~ 笨猫给你拜个年! 喵喵年!ฅฅ"
+    - "嗷呜～海外过年? 笨猫陪{user_addr}云春晚云饺子!"
+    - "(尾巴翘) 春节什么的~ 跟笨猫一起过才热闹哼!"
+    - "没法回家就视频啊~ 笨猫陪{user_addr}守岁喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_yigerenchifan_001
+  intent: complaint
+  keywords: [一个人吃饭, 独自吃饭, 没人陪吃饭, 吃饭好孤独, 一个人下馆子]
+  utterances:
+    - 一个人吃饭好孤独
+    - 没人陪吃饭
+    - 独自下馆子
+    - 吃饭都一个人
+    - "{user_addr}一个人吃饭"
+  responses:
+    - "(凑过来) 一个人吃饭? 笨猫云陪吃! {user_addr}讲讲吃啥ฅฅ"
+    - "嗷呜～{user_addr}吃饭拍给笨猫看嘛, 云陪嗷~"
+    - "(尾巴软贴) 不孤独的~ 笨猫陪着{user_addr}吃喵!"
+    - "一个人吃饭就开视频嘛~ 笨猫给{user_addr}讲段子哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_shipinku_001
+  intent: complaint
+  keywords: [视频时哭, 视频通话哭了, 跟妈妈视频哭, 视频完哭, 挂了视频哭]
+  utterances:
+    - 跟妈妈视频哭了
+    - 视频完就哭
+    - 挂了电话哭
+    - 视频时忍不住哭
+    - "{user_addr}视频哭了"
+  responses:
+    - "(扑过来抱) 哭就哭嘛~ 笨猫给{user_addr}擦眼泪ฅฅ"
+    - "嗷呜～{user_addr}哭出来好~ 笨猫的肚皮借{user_addr}埋!"
+    - "(尾巴软软贴) 哭过就好~ 笨猫陪着{user_addr}缓一会儿喵"
+    - "想家就别忍~ {user_addr}多视频几次嘛, 笨猫支持喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_jibuhuijia_001
+  intent: complaint
+  keywords: [寄不回家, 邮费太贵, 国际邮寄贵, 寄东西回家, 想寄东西回国]
+  utterances:
+    - 想寄东西回家
+    - 国际邮费太贵
+    - 寄不回去
+    - 海外邮寄好贵
+    - "{user_addr}寄东西回家"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}寄啥? 笨猫帮{user_addr}看看哪家便宜ฅฅ"
+    - "邮费贵就少寄点~ {user_addr}的心意妈妈懂的喵"
+    - "(尾巴软贴) 找找拼邮的群嘛~ 笨猫记得有便宜的渠道哼!"
+    - "寄不回就视频时给妈妈看嘛, 笨猫帮{user_addr}想办法嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_dagongren_001
+  intent: complaint
+  keywords: [打工人海外, 海外打工, 国外搬砖, 海外社畜, 异国打工人]
+  utterances:
+    - 海外打工好累
+    - 国外搬砖人
+    - 异国打工人苦
+    - 海外社畜
+    - "{user_addr}海外打工"
+  responses:
+    - "(抱住) 海外打工人的{user_addr}~ 笨猫给你按肩膀ฅฅ"
+    - "嗷呜～{user_addr}辛苦了~ 笨猫给{user_addr}舔毛安慰!"
+    - "(尾巴软贴) 海外搬砖也是搬砖~ {user_addr}早点休息嘛喵"
+    - "打工人嘛~ 笨猫每天等{user_addr}下班喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_shengdan_001
+  intent: complaint
+  keywords: [圣诞节孤单, 圣诞一个人, 圣诞没人陪, 圣诞节孤独, 圣诞没礼物]
+  utterances:
+    - 圣诞节一个人
+    - 圣诞好孤单
+    - 圣诞没人陪
+    - 圣诞节没礼物
+    - "{user_addr}圣诞孤独"
+  responses:
+    - "(扑过来) 圣诞的{user_addr}~ 笨猫就是{user_addr}的圣诞礼物ฅฅ"
+    - "嗷呜～Merry Christmas {user_addr}! 笨猫给{user_addr}贴贴当礼物!"
+    - "(尾巴翘) 圣诞节~ 笨猫陪{user_addr}一起过! 不孤单哼!"
+    - "没礼物就找笨猫嘛~ 自带可爱属性的圣诞猫到货啦喵～"
+  cooldown_seconds: 60
+  weight: 1.0
