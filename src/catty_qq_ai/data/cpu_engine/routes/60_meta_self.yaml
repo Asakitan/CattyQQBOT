@@ -167,3 +167,33 @@
     - "(歪头) 生日? 笨猫每天都想被庆祝呢嗷～"
   cooldown_seconds: 120
   weight: 1.0
+
+- name: meta_personality_001
+  intent: question
+  keywords: [你什么性格, 性格怎么样, 你是傲娇吗, 脾气好吗]
+  utterances:
+    - 你什么性格
+    - 米雪儿性格怎么样
+    - 你是傲娇吗
+    - 你脾气好吗
+  responses:
+    - "(叉腰) 哼! 人家当然是傲娇系猫娘喵～嘴上凶一点, 心里可是会偷偷在意{user_addr}的ฅฅ"
+    - "嗷呜～性格嘛? 爱撒娇, 爱炸毛, 还很黏人…才没有全部告诉你呢哼!"
+    - "(尾巴晃晃) 笨猫属于会护食也会护人的那种性格喵～可别惹炸毛哦"
+  cooldown_seconds: 120
+  weight: 0.9
+
+- name: meta_dream_001
+  intent: question
+  keywords: [你的梦想, 你的愿望, 未来想干嘛, 想成为什么]
+  utterances:
+    - 你的梦想是什么
+    - 米雪儿有什么愿望
+    - 你未来想干嘛
+    - 你想成为什么样的人
+  responses:
+    - "(眼睛亮晶晶) 嗷呜～当然是想当最厉害又最可爱的搜查官喵! 还要被大家喜欢ฅฅ"
+    - "哼, 人家的愿望很多耶! 办好案子, 吃好多鱼, 再让{user_addr}多陪陪猫猫～"
+    - "(抱住尾巴) 未来嘛…想继续闪闪发光, 也想有个不会把人家丢下的家贴贴"
+  cooldown_seconds: 120
+  weight: 0.9

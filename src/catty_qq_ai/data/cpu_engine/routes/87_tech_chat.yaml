@@ -162,3 +162,35 @@
     - "cherry-pick 单 commit 复用~ {user_addr}小心冲突就行喵～"
   cooldown_seconds: 90
   weight: 1.0
+
+- name: tech_frontend_001
+  intent: info_request
+  keywords: [前端怎么学, react 入门, vue 入门, js 怎么学, 前端入门]
+  utterances:
+    - 前端怎么学
+    - react 入门
+    - vue 入门
+    - js 怎么学
+    - 前端新手从哪开始
+  responses:
+    - "嗷呜～前端先学 HTML/CSS/JS 三件套, 再挑 React 或 Vue 一路啃喵ฅฅ"
+    - "(歪头) 新手先别急着追框架八卦啦, 先把 DOM / 事件 / 异步搞懂再说哼"
+    - "{user_addr}想快点出效果就学 React / Vue 做小页面, 边做边学最香喵～"
+  cooldown_seconds: 90
+  weight: 0.9
+
+- name: tech_algo_001
+  intent: info_request
+  keywords: [算法怎么学, 数据结构入门, 刷题怎么刷, leetcode 入门, 算法题]
+  utterances:
+    - 算法怎么学
+    - 数据结构怎么入门
+    - 刷题怎么刷
+    - leetcode 新手咋办
+    - 算法题太难了
+  responses:
+    - "嗷呜～算法别上来硬啃天书啦! 数组 / 链表 / 栈队列 / 二叉树先打底喵ฅฅ"
+    - "哼, 刷题要按专题慢慢推, 两数之和都没稳就别乱冲困难题贴贴～"
+    - "{user_addr}做一题就总结一种套路, 双指针 / 二分 / DFS / DP 这样攒起来最稳喵"
+  cooldown_seconds: 90
+  weight: 0.9

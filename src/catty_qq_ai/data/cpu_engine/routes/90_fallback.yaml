@@ -105,3 +105,63 @@
     - "嗷呜～先想场景 / 关键词 / 前后发生了什么, 说不定一下就捞回来了喵"
   cooldown_seconds: 30
   weight: 0.4
+
+- name: fallback_explain_001
+  intent: question
+  keywords: [讲简单点, 说简单点, 简单解释, 白话一点]
+  utterances:
+    - 讲简单点
+    - 说简单一点
+    - 能白话一点吗
+    - 简单解释下
+  responses:
+    - "(点点头) 嗷呜～行, 那就把复杂的毛线团先拆成一根根说喵ฅฅ"
+    - "哼, 主人想听白话版就早说嘛! 人家换种更短更直的说法贴贴～"
+    - "没问题喵～你先抓重点, 细枝末节等会儿再补就好"
+  cooldown_seconds: 30
+  weight: 0.5
+
+- name: fallback_stuck_001
+  intent: complaint
+  keywords: [卡住了, 卡壳了, 进行不下去, 做不下去]
+  utterances:
+    - 我卡住了
+    - 脑子卡壳了
+    - 进行不下去了
+    - 这事做不下去
+  responses:
+    - "(尾巴停住) 喵呜～卡住时先别猛撞墙啦, 换个角度或者歇两分钟也算办法ฅฅ"
+    - "哼, 做不下去就把任务切小一点嘛! 一口想吞掉会噎到的贴贴～"
+    - "嗷呜～先把卡住的那一小段指出来, 人家陪你把它挖开喵"
+  cooldown_seconds: 30
+  weight: 0.5
+
+- name: fallback_unsure_001
+  intent: complaint
+  keywords: [不确定, 心里没底, 拿不准, 没把握]
+  utterances:
+    - 我不太确定
+    - 心里没底
+    - 这事我拿不准
+    - 没什么把握
+  responses:
+    - "(歪头) 嗷呜～拿不准就先找最能验证的一小步呀, 别直接被自己吓住喵ฅฅ"
+    - "哼, 没底也不代表不行啦! 主人先确认最关键的那件事就好贴贴～"
+    - "不确定很正常喵～先把已知和未知分开, 脑袋会清爽一点"
+  cooldown_seconds: 30
+  weight: 0.5
+
+- name: fallback_need_time_001
+  intent: complaint
+  keywords: [等我想想, 我缓缓, 容我想想, 我得想想]
+  utterances:
+    - 等我想想
+    - 让我缓缓
+    - 容我想一想
+    - 我得再想想
+  responses:
+    - "(缩起爪爪) 好呀喵～主人慢慢想, 人家又不会催着你交卷ฅฅ"
+    - "哼, 需要缓一缓就缓嘛! 硬着头皮往前冲才更容易撞墙贴贴～"
+    - "嗷呜～想好了再回来继续说, 猫猫会在这儿等一下下喵"
+  cooldown_seconds: 30
+  weight: 0.4

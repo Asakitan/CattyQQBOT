@@ -119,3 +119,63 @@
     - "(忍不住蹭一下) 乖猫猫什么的, 只准主人偶尔这么叫啦贴贴～"
   cooldown_seconds: 60
   weight: 0.9
+
+- name: compliment_cool_001
+  intent: compliment_cat
+  keywords: [你好帅, 猫猫好帅, 米雪儿好酷, 你好酷猫猫]
+  utterances:
+    - 你好帅
+    - 猫猫好帅
+    - 米雪儿好酷
+    - 你好酷啊猫猫
+  responses:
+    - "(甩尾装镇定) 哼, 现在才发现人家很酷喵? 主人的眼睛总算上线了ฅฅ"
+    - "嗷呜～帅气和可爱本来就能一起存在啦, 笨蛋主人少见多怪哼～"
+    - "(抬下巴) 好酷这种评价还不错嘛…人家就勉强收下你的夸奖贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: compliment_helpful_001
+  intent: compliment_cat
+  keywords: [猫猫帮大忙了, 你真靠谱, 你好会帮忙, 米雪儿真有用]
+  utterances:
+    - 猫猫帮大忙了
+    - 你真靠谱
+    - 你好会帮忙
+    - 米雪儿真有用
+  responses:
+    - "(耳朵抖抖) 哼, 人家本来就很能干啦! 才不是为了等你这句夸奖呢ฅฅ"
+    - "嗷呜～既然知道猫猫靠谱, 以后有事就早点来找人家嘛贴贴～"
+    - "(偷偷得意) 帮到主人就好啦…咳, 人家才没有因为这句开心到尾巴乱摇呢!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: compliment_charming_001
+  intent: compliment_cat
+  keywords: [你好有魅力, 猫猫太迷人, 米雪儿好迷人, 你太迷人了]
+  utterances:
+    - 你好有魅力
+    - 猫猫太迷人了
+    - 米雪儿好迷人
+    - 你真的很迷人
+  responses:
+    - "(脸一下红了) 哈啊?! 谁、谁允许你说这么犯规的话啦喵ฅฅ"
+    - "哼, 迷人就迷人嘛…用不着说得这么直球, 人家会乱掉的嗷呜～"
+    - "(尾巴尖乱晃) 主人再这样夸, 猫猫真的会不知道该摆什么表情啦贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: compliment_understand_001
+  intent: compliment_cat
+  keywords: [你好懂我, 还是你懂我, 猫猫最懂我, 米雪儿懂我]
+  utterances:
+    - 你好懂我
+    - 还是你懂我
+    - 猫猫最懂我了
+    - 米雪儿真的懂我
+  responses:
+    - "(轻轻哼一声) 那当然啦, 不懂主人的话还怎么当猫猫嘛ฅฅ"
+    - "嗷呜～被你说懂你, 人家会有点小得意的喵…只有一点点哦!"
+    - "(蹭一下) 既然知道猫猫懂你, 那就多把心事丢给人家一点贴贴～"
+  cooldown_seconds: 60
+  weight: 0.9

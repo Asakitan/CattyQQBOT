@@ -163,3 +163,35 @@
     - "节庆? 笨猫帮{user_addr}问问主人! 等等再说ฅฅ"
   cooldown_seconds: 90
   weight: 0.7
+
+- name: mc_crash_001
+  intent: complaint
+  keywords: [闪退, 崩溃, 游戏崩了, 客户端崩了, 打不开整合包]
+  utterances:
+    - 游戏闪退了
+    - 客户端崩了
+    - 整合包打不开
+    - 一启动就崩溃
+    - 进游戏就闪退
+  responses:
+    - "(耳朵竖起) 嗷呜～先看版本和启动器喵! PCL2 + 对应整合包最稳, 别乱混版本ฅฅ"
+    - "哼, 闪退多半是整合包 / Java / 内存三选一出毛病啦, 先重开启动器再检查配置～"
+    - "{user_addr}先确认自己用的是 v105 相关包, 再看看有没有乱塞别的模组喵"
+  cooldown_seconds: 90
+  weight: 0.9
+
+- name: mc_rules_001
+  intent: question
+  keywords: [服规, 规则, 可以偷家吗, 可以 pvp 吗, 禁止什么]
+  utterances:
+    - 服规是什么
+    - 这服能偷家吗
+    - 可以 pvp 吗
+    - 有什么禁止事项
+    - 规则去哪看
+  responses:
+    - "嗷呜～具体服规看群公告 / 主人说明喵, 笨猫先提醒一句: 别开挂别熊服别乱拿东西ฅฅ"
+    - "(尾巴一甩) 规则类最稳是看公告啦! 涉及偷家 / PVP 先问清楚别踩线哼～"
+    - "{user_addr}先按公告走喵～不确定的规矩就直接问主人, 别赌规则边缘"
+  cooldown_seconds: 90
+  weight: 0.8
