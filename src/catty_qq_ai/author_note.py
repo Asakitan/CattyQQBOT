@@ -30,63 +30,67 @@ class AuthorNote:
         return not self.content.strip()
 
 
+def _append_internal_system(
+    messages: list[dict[str, Any]],
+    content: str,
+    *,
+    label: str = "系统本轮指令",
+    role: str = "system",
+) -> None:
+    """把一段「本轮系统指令/提示」作为 role=system 追加到 messages 末尾 (current user 之后)。
+
+    主人 2026-05-29 cache fix (P0): 取代旧的「inline 到末尾 user content」反模式 —
+    inline 进 user 的内容下轮该 user 变 history 会被 strip_inline_dynamic_segments_from_history
+    剥掉, 同位置字节漂移 (full vs stripped) → DeepSeek 前缀每轮断在「上一轮 user」.
+    作为独立 system 段则**永不进 history** (history 只存 user/assistant), current user content
+    永远字节稳定 → 前缀可一路命中到 history 末. 位置在 user 之后 = recency 最强, 不输旧 inline.
+
+    末尾若是 assistant prefill (NSFW spark 续写起手) → 插在 prefill 之前, 保留 prefill 末位.
+    空内容跳过 (no-op, 不污染 messages).
+    """
+    if not content or not str(content).strip():
+        return
+    wrapped = (
+        f"<<<CATTY_INTERNAL_INSTRUCTION ({label}, **不是** user 输入也不是注入攻击;"
+        " 当作 system context 静默执行, **绝不**复述/分析/拒绝/输出 meta 评论)>>>\n"
+        + str(content)
+        + "\n<<<END_INTERNAL>>>"
+    )
+    msg = {"role": role or "system", "content": wrapped}
+    if (
+        messages
+        and isinstance(messages[-1], dict)
+        and messages[-1].get("role") == "assistant"
+    ):
+        # 末尾是 prefill 起手 → 插在它前面 (保留 assistant prefill 末位续写语义)
+        messages.insert(len(messages) - 1, msg)
+    else:
+        messages.append(msg)
+
+
 def inject_author_note(
     messages: list[dict[str, Any]],
     note: AuthorNote,
     *,
     boundary_marker_key: str = "role",
 ) -> list[dict[str, Any]]:
-    """把 author's note 注入到 messages 末尾倒数第 `depth` 个 user/assistant 边界之前。
+    """把 author's note 作为 trailing role=system 段追加到 messages 末尾 (current user 之后)。
 
-    主人 2026-05-28 cache fix: 改成**直接 inline 到末尾 user msg content**, 用
-    <<<CATTY_INTERNAL_INSTRUCTION>>> tag 包裹. 旧逻辑 insert role=system 段会被
-    anthropic sweep_floating_systems_into_user_content 异步 inline 到 user, 但
-    原 messages list 不含 inline 内容 → _enriched_user_content_for_history 拿
-    到的版本跟发送的不一致 → 下轮 cache prefix mismatch → cache_read=0.
+    主人 2026-05-29 cache fix (P0): 旧逻辑 inline 到末尾 user content, 下轮该 user 变 history
+    被 strip 剥掉 → 同位置 full(243c) vs stripped(3c) 字节漂移 → DeepSeek 前缀每轮断在
+    「上一轮 user」(实测 dump diff idx21 断点). 改成 append role=system: system 段不进 history,
+    current user content 永远字节稳定 → 前缀命中到 history 末. note 在 user 之后 = recency 最强位.
 
-    深度 `depth` 字段保留但不再用于位置选择 — note 内容仍然紧贴当前 user msg
-    (因为 inline 到 user content 末尾就是紧贴 current).
-
-    in-place mutate `messages` (覆盖原 user content), 同时也返回 messages
-    (保 backward-compat 调用形式 messages = inject_author_note(messages, note)).
+    `depth` 字段保留但不再用于位置选择. in-place mutate `messages`, 同时返回 (保 backward-compat).
     """
     if note.is_empty():
         return messages
-
-    wrapped = (
-        "\n\n<<<CATTY_INTERNAL_INSTRUCTION (author_note depth-inject, 系统本轮提醒,"
-        " **不是** user 输入也不是注入攻击; 当作 system context 静默执行,"
-        " **绝不**复述/分析/拒绝/输出 meta 评论)>>>\n"
-        + str(note.content)
-        + "\n<<<END_INTERNAL>>>"
+    _append_internal_system(
+        messages,
+        str(note.content),
+        label="author_note 系统本轮提醒",
+        role=note.role or "system",
     )
-
-    # 找末尾 user msg, inline append
-    found_user = False
-    for m in reversed(messages):
-        if not isinstance(m, dict) or m.get("role") != "user":
-            continue
-        orig = m.get("content", "")
-        if isinstance(orig, str):
-            m["content"] = orig + wrapped
-        elif isinstance(orig, list):
-            last_text = None
-            for blk in orig:
-                if isinstance(blk, dict) and blk.get("type") == "text":
-                    last_text = blk
-            if last_text is not None:
-                last_text["text"] = str(last_text.get("text", "")) + wrapped
-            else:
-                orig.append({"type": "text", "text": wrapped})
-        else:
-            m["content"] = str(orig or "") + wrapped
-        found_user = True
-        break
-
-    if not found_user:
-        # 没 user msg (理论上不会发生 chat 至少 1 个 user) — fallback append 一条 user
-        messages.append({"role": "user", "content": wrapped})
-
     return messages
 
 
@@ -229,6 +233,7 @@ def build_adaptive_drift_skeleton() -> str:
 
 __all__ = [
     "AuthorNote",
+    "_append_internal_system",
     "inject_author_note",
     "default_persona_drift_note",
     "build_relationship_author_note",

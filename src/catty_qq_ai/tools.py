@@ -3643,11 +3643,12 @@ def available_tool_schemas(
     if not enabled:
         return []
 
-    # NLU intent 检测
-    intent_hits = _detect_tool_intent(user_text, has_image)
-    if not intent_hits:
-        return []
-
+    # 主人 2026-05-29 P3: tools 恒定全量 (不再 NLU intent gate). 旧 gate 让 tools 数组每轮变
+    # (闲聊命中→[], 关键词命中→[子集]) → DeepSeek tools 前缀(它排在 system 之前)每轮漂移 → 全 miss.
+    # 恒定全量 + 字典序锁定(发送前 stabilize_tools_order) → tools 前缀字节稳定进 cache, 且 P4 按需
+    # 上下文工具(catty_self_state / catty_user_profile / catty_recall)任意轮次都可调.
+    # lazy schema 下全量 ~1.2K, 命中价 0.1x 几乎免费. has_image 不再门控(无图时 image tool 由
+    # executor 自己 guard, 但 schema 恒定保证前缀稳定). user_text/has_image 参数保留兼容签名.
     excluded_list: list[str] = []
     if is_private:
         for name in getattr(config, "catty_tools_disabled_in_private", []) or []:
@@ -3655,14 +3656,12 @@ def available_tool_schemas(
     excluded_set = set(excluded_list)
 
     # 主人 2026-05-28 P5.5: lazy schema 默认开 — description ≤30 字, properties 极简.
-    # 砍 ~3K tools description tokens. Anthropic 走 convert_openai_tool_to_anthropic 转格式.
     _lazy = bool(getattr(config, "catty_tools_lazy_schema_enabled", True))
     _schema_pool = _LAZY_TOOL_SCHEMAS if _lazy else ALL_TOOL_SCHEMAS
 
-    # 按命中意图选 tools, exclude 私聊禁用的
     result = [
         schema for name, schema in _schema_pool.items()
-        if name in intent_hits and name not in excluded_set
+        if name not in excluded_set
     ]
     return result
 

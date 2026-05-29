@@ -635,12 +635,15 @@ def register_catty_persona(
     mgr.register(
         "catty_scenario_playbook",
         content_fn=lambda: _pp.build_scenario_playbook_prompt(no_reply),
-        order=463,  # 看 no_reply 状态 (binary), 仍 post-boundary
+        # 主人 2026-05-29 P1 PROMOTE: 463→157 进 cache prefix. no_reply 是常量 NO_REPLY_MARKER,
+        # 内容 100% byte-stable 跨 sender/scope/turn → 一次性写、之后全命中, 不再每轮 ~400c miss.
+        order=157,
     )
     mgr.register(
         "catty_scene_discrimination",
         content_fn=lambda: _pp.build_scene_discrimination_prompt(no_reply),
-        order=464,  # P5.2: 移到 boundary 后
+        # 主人 2026-05-29 P1 PROMOTE: 464→158 进 cache prefix (同上, byte-stable).
+        order=158,
     )
 
     # === ST 风新模块: daily_life / world_info / story_arc ===
@@ -789,24 +792,29 @@ def register_catty_persona(
                 content_fn=lambda: _build_image_reaction(_image_desc),
                 order=467,  # dynamic (image_description), post-boundary
             )
-    # 示例对话只在冷会话(<HOT_SESSION 阈值)注入 — 热会话从历史里就能学到口吻,
-    # 这两段加起来 ~1.5K token,省下 30-40% system prompt 体积。
-    if style_examples_enabled and is_cold_session:
-        # P5.2: 冷会话 example 段移到 boundary 后
+    # 主人 2026-05-29 P2: 取消「冷会话才注入」门控 + 移进 cache prefix.
+    # 旧逻辑 (is_cold_session 才注入, order 478/479/480 post-boundary) 让冷/热会话产生两种静态
+    # 前缀变体 → 冷热交替时分裂 DeepSeek 共享缓存池 (实测第 4 个 dump 6758c 变体 vs 主流 9084c).
+    # 改成所有会话恒定注入 + order → 159/160/161 (boundary=455 前, 进 cache prefix). 例句 100% 静态,
+    # 一次性写、之后全命中, 跨会话/跨用户共享同一前缀. 多 ~1.5K 缓存量但按命中价 0.1x 几乎免费.
+    # 地雷1 (红队): mes_example 模板含 {{user}}: 行, 私聊 user_display=真名 会让前缀按私聊用户分叉.
+    # 强制 user="用户" (字面常量, 跟群聊占位一致) 保证 byte-stable 不分叉.
+    # (catgirl_examples / disambiguation 只吃 no_reply/split_marker 常量, 本就 byte-stable.)
+    if style_examples_enabled:
         mgr.register(
             "catty_catgirl_examples",
             content_fn=lambda: _pp.build_catgirl_examples_prompt(no_reply, split_marker),
-            order=478,
+            order=159,
         )
         mgr.register(
             "catty_disambiguation",
             content_fn=lambda: _pp.build_disambiguation_examples_prompt(no_reply),
-            order=479,
+            order=160,
         )
         mgr.register(
             "catty_mes_example",
-            content_fn=lambda: _cc.get_mes_example(ctx=macro_ctx, user_display=user_display),
-            order=480,
+            content_fn=lambda: _cc.get_mes_example(ctx={**macro_ctx, "user": "用户"}, user_display="用户"),
+            order=161,
         )
 
     # 主人 2026-05-28 C16-1: 砍 catty_mood_overlay dynamic register —

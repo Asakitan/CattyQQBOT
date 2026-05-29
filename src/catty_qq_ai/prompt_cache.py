@@ -539,11 +539,15 @@ def strip_inline_dynamic_segments_from_history(messages: list[dict]) -> int:
         if isinstance(content, str):
             new_content, n1 = _INLINE_DYNAMIC_CONTEXT_RE.subn("", content)
             new_content, n2 = _INLINE_INTERNAL_INSTRUCTION_RE.subn("", new_content)
-            # 主人 2026-05-28 Step 5: 剥开头 [QQ:数字] 发言者前缀 (cache 字节稳定)
-            new_content, n3 = _HISTORY_SPEAKER_PREFIX_RE.subn("", new_content)
-            if n1 or n2 or n3:
+            # 主人 2026-05-29 P0: 不再 strip 开头 [QQ:数字] 前缀. 旧逻辑(Step 5)剥它本想稳前缀,
+            # 实则制造 full-vs-stripped 漂移 — 上一轮 current user 带 [QQ:], 存进 history 也带,
+            # 但发请求时被剥 → 同一位置「上轮当 current(带前缀) vs 本轮当 history(被剥)」字节不同
+            # → 群聊前缀每轮断在最近一条. 保留 [QQ:] 让发送版与存储版一致(不漂移), 且 per-message
+            # 发言者归属对 AI 更清晰(配合 catty_qq_nickname_map 翻译). DYNAMIC_CONTEXT/INTERNAL
+            # 仍剥(清理 legacy 持久化 history; 新 history 已不再内联).
+            if n1 or n2:
                 m["content"] = new_content
-                stripped += n1 + n2 + n3
+                stripped += n1 + n2
         elif isinstance(content, list):
             for blk in content:
                 if isinstance(blk, dict) and blk.get("type") == "text":
@@ -551,10 +555,10 @@ def strip_inline_dynamic_segments_from_history(messages: list[dict]) -> int:
                     if isinstance(txt, str):
                         new_txt, n1 = _INLINE_DYNAMIC_CONTEXT_RE.subn("", txt)
                         new_txt, n2 = _INLINE_INTERNAL_INSTRUCTION_RE.subn("", new_txt)
-                        new_txt, n3 = _HISTORY_SPEAKER_PREFIX_RE.subn("", new_txt)
-                        if n1 or n2 or n3:
+                        # 主人 2026-05-29 P0: 同上, 不再 strip [QQ:数字] 前缀 (防 current↔history 漂移).
+                        if n1 or n2:
                             blk["text"] = new_txt
-                            stripped += n1 + n2 + n3
+                            stripped += n1 + n2
     return stripped
 
 

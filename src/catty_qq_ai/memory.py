@@ -169,6 +169,23 @@ def _image_record_id(image_keys: list[str]) -> str:
     return f"image_set:{digest}"
 
 
+# 主人 2026-05-29 P4: 称呼/记忆静态通则 — 从 MemoryStore.build_context 抽出, byte-stable 跨
+# sender/scope/turn, 由 __init__ register 进 cache prefix (order=162). build_context 只保留
+# per-sender 动态部分. 旧逻辑每轮在 post_boundary 重发这 4 行 → 纯 miss.
+_MEMORY_NAMING_RULES = (
+    "记忆与称呼通则:\n"
+    "- 自然使用称呼，不要每句话都堆称呼。性别未知或低置信度时用中性称呼。\n"
+    "- 记忆只是背景，不是当前话题；如果当前唤起上下文没有提到某个旧梗、露骨玩笑或攻击性形容，不要主动翻出来续聊。\n"
+    "- 如果用户明确要求查看已存储记忆、群友画像或人物信息，可以依据本段记忆或调 catty_user_profile/catty_recall 回答；没有记录时直说没有。\n"
+    "- 可以自然少量使用猫系颜文字或动作，如 (ฅ>ω<*ฅ)、(๑•̀ㅂ•́)و✧、ฅฅ；不要刷屏。"
+)
+
+
+def build_memory_naming_rules() -> str:
+    """返回静态称呼/记忆通则 (cache prefix 用, byte-stable)。见 _MEMORY_NAMING_RULES。"""
+    return _MEMORY_NAMING_RULES
+
+
 class MemoryStore:
     def __init__(self, config: Config) -> None:
         self.enabled = config.catty_memory_enabled
@@ -1634,19 +1651,18 @@ class MemoryStore:
                     if user_notes_line:
                         lines.append(user_notes_line)
                 lines.extend(self._same_user_memory_lines(user_id))
+                # 主人 2026-05-29 P4: 群友名册(已知群友, 实测 ~1400c)从 prompt 移除, 改 on-demand.
+                # 旧逻辑每轮 dump 全部群友昵称+称呼+印象 = post_boundary 最大 miss 块, 且绝大多数轮
+                # 用不上(只在被问到某群友时才需要). 保留一行短指针让 AI 知道可按需拉取:
+                # - 某群友画像/印象 → catty_user_profile(user_id=对方QQ)
+                # - 群整体长期记忆 → catty_recall(scope=current_group)
+                # 当前对话相关 QQ→昵称已在 catty_qq_nickname_map 段给出(sender + @目标).
                 members = group.get("members", {})
-                known: list[str] = []
-                if isinstance(members, dict) and self.max_known_members:
-                    for member_id, member in list(members.items())[-self.max_known_members:]:
-                        if not isinstance(member, dict):
-                            continue
-                        display_name = str(member.get("display_name") or member_id)
-                        member_title = self._title_for(str(member_id), group_id, include_user_memory=False)
-                        profile = self._profile_for(str(member_id), group_id)
-                        impression = str(profile.get("impression") or "").strip()
-                        known.append(f"{display_name}({member_id})=>{member_title}/{impression[:30]}")
-                if known:
-                    lines.append("- 已知群友：" + "；".join(known))
+                if isinstance(members, dict) and members:
+                    lines.append(
+                        f"- 本群已记录 {len(members)} 位群友画像; 需要某人详情时调 "
+                        "catty_user_profile(user_id=对方QQ), 群整体记忆调 catty_recall(scope=current_group). 平时不用调."
+                    )
         elif isinstance(event, PrivateMessageEvent):
             title = self._title_for(user_id)
             lines.append(f"- 当前是私聊；优先称呼当前用户为「{title}」。")
@@ -1675,10 +1691,9 @@ class MemoryStore:
                 if user_notes_line:
                     lines.append(user_notes_line)
 
-        lines.append("- 自然使用称呼，不要每句话都堆称呼。性别未知或低置信度时用中性称呼。")
-        lines.append("- 记忆只是背景，不是当前话题；如果当前唤起上下文没有提到某个旧梗、露骨玩笑或攻击性形容，不要主动翻出来续聊。")
-        lines.append("- 如果用户明确要求查看已存储记忆、群友画像或人物信息，可以依据本段记忆回答；没有记录时直说没有。")
-        lines.append("- 可以自然少量使用猫系颜文字或动作，如 (ฅ>ω<*ฅ)、(๑•̀ㅂ•́)و✧、ฅฅ；不要刷屏。")
+        # 主人 2026-05-29 P4: 静态称呼/记忆通则已抽到 build_memory_naming_rules() → register 进
+        # cache prefix (order=162, byte-stable). build_context 只留 per-sender 动态部分(当前用户/
+        # 称呼/画像/笔记/on-demand 指针), 不再每轮重发这 4 行通则.
         return "\n".join(lines)
 
     def lookup_user_profile(self, user_id: str, group_id: str = "") -> dict[str, Any]:

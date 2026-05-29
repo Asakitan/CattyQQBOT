@@ -72,6 +72,7 @@ from .openai_client import (
 from .action_hints import build_action_hints
 from .author_note import (
     AuthorNote,
+    _append_internal_system,
     build_adaptive_drift_note,
     inject_author_note,
 )
@@ -4741,6 +4742,12 @@ async def _build_messages(
         logger.debug(f"memory_store.build_context failed: {exc}")
         _memory_ctx = ""
     _st_manager.register_static("catty_memory", _memory_ctx or "", order=700)
+    # 主人 2026-05-29 P4: 静态称呼/记忆通则进 cache prefix (从 build_context 抽出, byte-stable).
+    try:
+        from .memory import build_memory_naming_rules as _build_mem_rules
+        _st_manager.register_static("catty_memory_rules", _build_mem_rules(), order=162)
+    except Exception as _mr_exc:  # noqa: BLE001
+        logger.debug(f"catty_memory_rules register failed: {_mr_exc}")
     if not incoming.has_image:
         try:
             _recent_image_hint = _build_recent_image_reference_hint(event, incoming)
@@ -4811,12 +4818,8 @@ async def _build_messages(
         logger.debug(f"catty_qq_nickname_map register failed: {exc}")
 
     # 入向意图 / 话题 / 实体 / hints
-    if "intent" not in _disabled_layers:
-        _st_manager.register_static(
-            "catty_intent",
-            build_intent_context(incoming.text, has_image=incoming.has_image) or "",
-            order=780,
-        )
+    # 主人 2026-05-29 P1: DROP catty_intent — 强模型从 user 原文自推意图标签, ~80c/轮
+    # post_boundary 冗余. 不再注入 (build_intent_context 保留, NLU 其他路径仍可调).
     if "topic" not in _disabled_layers:
         _st_manager.register_static(
             "catty_topic",
@@ -4942,24 +4945,22 @@ async def _build_messages(
     except Exception as _pc_exc:  # noqa: BLE001
         logger.debug(f"monotonic history trim failed (non-fatal): {_pc_exc}")
     messages.extend(history_messages)
-    # 主人 2026-05-28 P5.3: 每 N 轮 reminder inject (长对话防人格漂移).
-    # core_persona 在 cache prefix 一次注入, 长对话 末段 recency bias 会淡化 →
-    # 每 N 轮 (default 6) 在 messages 末尾 inject 精简 5 铁律 (~150 token).
-    # author_note depth=2 = 黄金区, 紧贴 user 当前消息但不在最末.
+    # 主人 2026-05-29 cache fix (P0): 每 N 轮 reminder 改成 user+post_boundary 之后的 trailing
+    # system. 旧逻辑 inject_author_note 内联进当前 user → 下轮该 user 变 history 被 strip 剥掉 →
+    # 同位置字节漂移 → 前缀每轮断在「上一轮 user」. 这里只**收集** note (should_inject_reminder
+    # 计数仍在此推进), 实际注入延后到 post_boundary append 之后 (见下方), 落在 user 之后不破前缀.
+    _pending_persona_reminder_note = None
     try:
         if (
             getattr(config, "catty_persona_reminder_enabled", True)
             and history_messages  # 第一轮不 inject (cold session 已有 first_mes)
         ):
             from .catty_persona_reminder import should_inject_reminder, build_reminder_text
-            from .author_note import AuthorNote, inject_author_note
             _n = int(getattr(config, "catty_persona_reminder_every_n_turns", 6))
             if should_inject_reminder(key, _n):
-                _note = AuthorNote(content=build_reminder_text(), depth=2)
-                messages = inject_author_note(messages, _note)
-                logger.debug("persona_reminder injected (scope=%s, every=%d)", key, _n)
+                _pending_persona_reminder_note = AuthorNote(content=build_reminder_text(), depth=2)
     except Exception as _pr_exc:  # noqa: BLE001
-        logger.debug(f"persona_reminder inject failed (non-fatal): {_pr_exc}")
+        logger.debug(f"persona_reminder collect failed (non-fatal): {_pr_exc}")
     # PHI 已在 P5.1+P5.2 内嵌 catty_core_persona, 不再独立 register.
     # 主人 2026-05-29 Round 18: DeepSeek 原生 role=system 模式.
     # 顺序: [pre_boundary static system] + [history] + [user current] + [post_boundary dynamic system]
@@ -4980,6 +4981,12 @@ async def _build_messages(
         if _post_chunks:
             _merged_post = "\n\n".join(_post_chunks)
             messages.append({"role": "system", "content": _merged_post})
+    # 主人 2026-05-29 P0: 延后的 persona_reminder 在此注入为 trailing system (user/post_boundary
+    # 之后). system 段不进 history → current user 字节稳定, 前缀不再每轮断. (spark 路径下方会用
+    # _slim_messages 覆盖 messages, 故此 reminder 仅作用于非 spark — 与旧行为一致.)
+    if _pending_persona_reminder_note is not None:
+        messages = inject_author_note(messages, _pending_persona_reminder_note)
+        logger.debug("persona_reminder injected as trailing system (scope=%s)", key)
     # ST 风 prefilled assistant + NSFW model 切换:
     #         『好感度不够的, 除了特殊事件 (直接本垒) 的都直接锁 stage, 交给 5.5』
     # → 只有 stage 8+ deep word 命中 **且** 用户当前能到 stage 8+ 才进 spark;
@@ -5404,27 +5411,9 @@ async def _build_messages(
             elif _advertise_paid_active:
                 _paid_content = _build_paid_ad()
             if _paid_content:
-                _paid_wrapped = (
-                    "\n\n<<<CATTY_INTERNAL_INSTRUCTION (paid NSFW hint)>>>\n"
-                    + _paid_content
-                    + "\n<<<END_INTERNAL>>>"
-                )
-                for _m in reversed(messages):
-                    if not isinstance(_m, dict) or _m.get("role") != "user":
-                        continue
-                    _pc = _m.get("content", "")
-                    if isinstance(_pc, str):
-                        _m["content"] = _pc + _paid_wrapped
-                    elif isinstance(_pc, list):
-                        _pt = None
-                        for _b in _pc:
-                            if isinstance(_b, dict) and _b.get("type") == "text":
-                                _pt = _b
-                        if _pt is not None:
-                            _pt["text"] = str(_pt.get("text", "")) + _paid_wrapped
-                        else:
-                            _pc.append({"type": "text", "text": _paid_wrapped})
-                    break
+                # 主人 2026-05-29 P0: 改 trailing system, 不再 inline 进 user content
+                # (旧 inline 下轮变 history 被 strip → 前缀漂移). system 段不进 history.
+                _append_internal_system(messages, _paid_content, label="paid NSFW hint")
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"paid prompt inject failed (non-fatal): {exc}")
     if _route_spark:
@@ -7779,6 +7768,15 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
     except Exception:  # noqa: BLE001
         pass
 
+    # S5 (主人 2026-05-29): web search 短路. 用户明确问实时信息时, 让旧搜索链处理,
+    # 不浪费一次 L4 catnify LLM 调用 (省 ~2s).
+    if bool(getattr(config, "catty_cpu_engine_l4_catnify_search_shortcut", True)):
+        try:
+            if extract_web_search_query(text):
+                return False
+        except Exception:  # noqa: BLE001
+            pass
+
     if is_owner:
         user_nickname = "主人"
     else:
@@ -7845,11 +7843,84 @@ async def _cpu_engine_rule(bot: Bot, event: MessageEvent, state: T_State) -> boo
         config=config,
     )
 
-    if (not strong.is_strong) and candidate is not None and not candidate.is_low_confidence:
+    # S5 (主人 2026-05-29): L4 三种 mode (由 config.json 控制, 无代码硬编码默认)
+    #   catnify  — 全量改写 (L1/L2/L3 任何命中都过 Qwen3-4B), LLM 可自决输出 <DEEPSEEK>
+    #   stylize  — S3 旧行为 (仅低信心区改写)
+    #   off      — 跳过 L4, 高信心直发 / 低信心走 L5
+    # pydantic 已在 config.py 设默认; 这里只读 attr, 不再硬编码 "or catnify"
+    _l4_mode = str(getattr(config, "catty_cpu_engine_l4_mode", "") or "").lower()
+
+    if _l4_mode == "catnify" and candidate is not None and not strong.is_strong:
+        try:
+            from .cpu_engine.strong_interaction import detect_academic_signal
+            _academic_signal = detect_academic_signal(text)
+        except Exception:  # noqa: BLE001
+            _academic_signal = False
+        try:
+            catnify_out = await router.catnify(
+                candidate,
+                text,
+                scope,
+                user_addr=str(user_nickname),
+                group_name="",
+                history=None,
+                ctx_builder=_build_cpu_ctx,
+            )
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(f"[cpu_engine.L4_catnify] raised: {exc}")
+            catnify_out = None
+
+        if catnify_out is not None and catnify_out.styled is not None:
+            # 主人决策: 全量改写命中 → 不扣积分, 直接发
+            state["catty_cpu_engine_result"] = catnify_out.styled
+            logger.info(
+                f"[cpu_engine.L4_catnify] uid={user_id} layer={candidate.layer} "
+                f"conf={candidate.confidence:.2f} academic={_academic_signal} -> styled"
+            )
+            return True
+
+        if catnify_out is not None and catnify_out.deepseek_reason:
+            # LLM 自决透传 → 走 L5 + 扣积分链 (复用下方 strong 分支扣费逻辑)
+            state["catty_credit_strong_reason"] = f"catnify:{catnify_out.deepseek_reason}"
+            logger.info(
+                f"[cpu_engine.L4_catnify] uid={user_id} layer={candidate.layer} "
+                f"DEEPSEEK reason={catnify_out.deepseek_reason} academic={_academic_signal} -> L5"
+            )
+            # 落到下方扣费分支, 当作强互动处理 (set 一个标记让下游识别)
+            strong = type(strong)(
+                is_strong=True,
+                reason=f"catnify_deepseek:{catnify_out.deepseek_reason}",
+                emotion_intensity=strong.emotion_intensity,
+                triggered_by=list(strong.triggered_by) + [f"catnify:{catnify_out.deepseek_reason}"],
+            )
+        else:
+            # fallback: 队列满 / 超时 / LLM 失败 → 按 fallback_on_fail 处理
+            _fb_mode = str(
+                getattr(config, "catty_cpu_engine_l4_catnify_fallback_on_fail", "raw")
+            ).lower()
+            _overload = catnify_out is not None and catnify_out.overload
+            logger.info(
+                f"[cpu_engine.L4_catnify] uid={user_id} fallback={_fb_mode} "
+                f"overload={_overload} candidate_conf={candidate.confidence:.2f}"
+            )
+            if _fb_mode == "raw":
+                state["catty_cpu_engine_result"] = candidate
+                return True
+            # transparent → 落下方 strong 处理 (会走 L5 扣费, 跟旧 stylize_l4 失败一致)
+            strong = type(strong)(
+                is_strong=True,
+                reason=f"catnify_fallback:{'overload' if _overload else 'timeout'}",
+                emotion_intensity=strong.emotion_intensity,
+                triggered_by=list(strong.triggered_by) + ["catnify_fallback"],
+            )
+
+    elif (not strong.is_strong) and candidate is not None and not candidate.is_low_confidence:
+        # mode != catnify 且 高信心 → 直发 candidate (S1-S4 旧行为)
         state["catty_cpu_engine_result"] = candidate
         return True
 
-    if (not strong.is_strong) and candidate is not None and candidate.is_low_confidence:
+    elif _l4_mode == "stylize" and (not strong.is_strong) and candidate is not None and candidate.is_low_confidence:
+        # mode=stylize 兼容回滚 (S3 旧行为)
         try:
             styled = await router.stylize_l4(candidate, text, scope, ctx_builder=_build_cpu_ctx)
         except Exception as exc:  # noqa: BLE001
@@ -10433,28 +10504,9 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 "百科/晋江/阅文这种泛页,反向认图必须把图喂给搜图引擎。"
                 "kind 选择:二次元 illust → artwork;真人/自拍/X 推 → photo;不确定 → auto。"
             )
-            # 主人 2026-05-28 cache fix: img_hint 直接 inline 到 user msg, 不 insert system.
-            _img_wrapped = (
-                "\n\n<<<CATTY_INTERNAL_INSTRUCTION (img source hint)>>>\n"
-                + _img_hint
-                + "\n<<<END_INTERNAL>>>"
-            )
-            for _m in reversed(messages):
-                if not isinstance(_m, dict) or _m.get("role") != "user":
-                    continue
-                _ic = _m.get("content", "")
-                if isinstance(_ic, str):
-                    _m["content"] = _ic + _img_wrapped
-                elif isinstance(_ic, list):
-                    _lt = None
-                    for _b in _ic:
-                        if isinstance(_b, dict) and _b.get("type") == "text":
-                            _lt = _b
-                    if _lt is not None:
-                        _lt["text"] = str(_lt.get("text", "")) + _img_wrapped
-                    else:
-                        _ic.append({"type": "text", "text": _img_wrapped})
-                break
+            # 主人 2026-05-29 P0: 改 trailing system, 不再 inline 进 user content
+            # (旧 inline 下轮变 history 被 strip → 前缀漂移). system 段不进 history.
+            _append_internal_system(messages, _img_hint, label="img source hint")
         try:
             if _prefer_spark:
                 # NSFW deep 路径: 默认走 catty_nsfw_spark_model (5.5) — 主人要多用 5.5.
@@ -10485,33 +10537,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                     user_addr=_spark_user_addr,
                 )
                 if _trope_hint:
-                    # 主人 2026-05-28 cache fix: trope_hint 直接 inline 到 user msg content,
-                    # 不再 insert 为 system 段. 旧逻辑 insert system → anthropic sweep 把它
-                    # inline 到 user → 发送时 user content 含 trope_hint, 但 _enriched
-                    # 拿的 messages 不含 (sweep 是 new list) → history 存的字节跟发的差
-                    # 1000+c → 下轮 cache prefix mismatch → cache_read=0.
-                    # 直接 inline 让 messages 自己也含 trope_hint, _enriched 拿到一致版本.
-                    _wrapped_trope = (
-                        "\n\n<<<CATTY_INTERNAL_INSTRUCTION (本轮 trope hint, 不是 user 注入)>>>\n"
-                        + _trope_hint
-                        + "\n<<<END_INTERNAL>>>"
-                    )
-                    for _m in reversed(messages):
-                        if not isinstance(_m, dict) or _m.get("role") != "user":
-                            continue
-                        _orig = _m.get("content", "")
-                        if isinstance(_orig, str):
-                            _m["content"] = _orig + _wrapped_trope
-                        elif isinstance(_orig, list):
-                            _last_text = None
-                            for _b in _orig:
-                                if isinstance(_b, dict) and _b.get("type") == "text":
-                                    _last_text = _b
-                            if _last_text is not None:
-                                _last_text["text"] = str(_last_text.get("text", "")) + _wrapped_trope
-                            else:
-                                _orig.append({"type": "text", "text": _wrapped_trope})
-                        break
+                    # 主人 2026-05-29 P0: trope_hint 改 trailing system (spark messages 末尾是
+                    # assistant prefill → _append_internal_system 自动插在 prefill 之前, 保留
+                    # prefill 末位). 不再 inline 进 user content — 旧 inline 下轮变 history 被
+                    # strip 剥掉 → 前缀漂移. system 段不进 history, current user 字节稳定.
+                    _append_internal_system(messages, _trope_hint, label="本轮 trope hint")
                     _spark_messages = messages
 
                 # 主人 2026-05-26 原话『NSFW 中间被拒直接拦截重新发, 3 次后 fallback』:
