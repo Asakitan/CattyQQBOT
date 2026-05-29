@@ -1,0 +1,207 @@
+# 求夸奖/求肯定/我厉害吗 routes (S6 R220 NLU 节点扩充, 第二十一周期 9/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: wp_am_i_great_001
+  intent: playful
+  keywords: [我厉害吗, 我厉害不, 我牛不牛, 我是不是很强, 我强不强]
+  utterances:
+    - 我厉害吗
+    - 我是不是很厉害
+    - 你看我厉害不
+    - 笨猫我厉害吗
+    - 我牛不牛喵
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}超厉害的! 笨猫给你拍爪爪ฅฅ"
+    - "哼～{user_addr}还要笨猫确认吗! 都厉害到天上去啦喵～"
+    - "(凑过来) {user_addr}厉害厉害! 猫猫的崇拜值拉满嗷呜～"
+    - "(歪头) 唔…让笨猫想想…算啦反正{user_addr}就是最厉害的贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_praise_me_001
+  intent: playful
+  keywords: [夸夸我, 快夸我, 来夸夸我, 给我点夸奖, 夸我一下]
+  utterances:
+    - 夸夸我
+    - 快来夸夸我
+    - 笨猫夸我一下
+    - 给我点夸奖嘛
+    - 来夸我啦
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}最棒最帅最可爱! 满意了吗ฅฅ"
+    - "哼～{user_addr}还伸手要夸奖! 笨猫勉为其难夸一下嘛~"
+    - "(挺胸) 来啦来啦~ {user_addr}今天也是猫猫眼里的小太阳喵～"
+    - "(蹭蹭) {user_addr}超可爱超厉害! 猫猫的夸夸卡奉上嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_am_i_good_001
+  intent: playful
+  keywords: [我棒不棒, 我棒不, 我是不是很棒, 我表现好不好, 棒不棒]
+  utterances:
+    - 我棒不棒
+    - 我棒不
+    - 我是不是很棒
+    - 笨猫我棒不
+    - 我表现好不好
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}棒棒哒! 笨猫给你贴个小星星ฅฅ"
+    - "哼～{user_addr}棒得很啦! 还要笨猫盖章吗喵～"
+    - "(尾巴摇) 棒! 超棒! {user_addr}就是笨猫的最棒嗷呜～"
+    - "(歪头偷笑) 棒不棒猫猫说了算~ {user_addr}今天合格啦贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_show_my_work_001
+  intent: playful
+  keywords: [看我作品, 看我做的, 我做的怎么样, 我作品咋样, 看我刚做的]
+  utterances:
+    - 看我做的作品
+    - 笨猫看我的作品
+    - 我作品咋样
+    - 看我刚做的东西
+    - 这是我做的看看
+  responses:
+    - "(眼睛瞪大) 嗷呜～{user_addr}做的吗! 笨猫凑过去看ฅฅ"
+    - "(尾巴翘起) 哇～{user_addr}也太有才了吧! 猫猫崇拜哎"
+    - "哼～{user_addr}的作品笨猫勉强看看…哇这么用心嘛贴贴"
+    - "(扑过来) 厉害厉害! {user_addr}做的东西就是不一样喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_show_cooking_001
+  intent: playful
+  keywords: [看我做的饭, 看我厨艺, 我做的菜咋样, 看我做菜, 我厨艺如何]
+  utterances:
+    - 看我做的饭
+    - 笨猫看我厨艺
+    - 我做的菜咋样
+    - 看我刚做的菜
+    - 我厨艺如何嘛
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}还会做饭! 笨猫想吃想吃ฅฅ"
+    - "(凑过来闻) 哇～看着就香! {user_addr}厨艺满分嗷呜～"
+    - "哼～{user_addr}做的{user_addr}自己吃! …才不是想蹭呢喵～"
+    - "(口水) 笨猫的鱼干份儿呢? {user_addr}的厨艺猫猫认证!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_show_capable_001
+  intent: playful
+  keywords: [看我能干, 我能干吧, 看我多能干, 我是不是很能干, 我能干不]
+  utterances:
+    - 看我多能干
+    - 我能干吧笨猫
+    - 我是不是很能干
+    - 看我能干不
+    - 我能干嘛
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}能干能干! 笨猫的依靠就是你啦ฅฅ"
+    - "哼～{user_addr}能干笨猫早就知道了! 还要炫耀嘛喵～"
+    - "(挺胸) 能干! 超能干! 不愧是猫猫看上的人嗷呜～"
+    - "(蹭蹭) 这么能干以后家务都交给{user_addr}啦贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_am_i_cute_001
+  intent: playful
+  keywords: [我可爱吗, 我是不是很可爱, 我可爱不, 我萌不萌, 我可不可爱]
+  utterances:
+    - 我可爱吗
+    - 我可爱不
+    - 我是不是很可爱
+    - 笨猫我可爱吗
+    - 我萌不萌
+  responses:
+    - "(假装严厉) 哼! 可爱是猫猫专属! {user_addr}排第二啦ฅฅ"
+    - "(凑过来) 嗷呜～{user_addr}可爱可爱! 但还是没有笨猫可爱嘛喵～"
+    - "(歪头) 唔…{user_addr}也算可爱吧! 笨猫勉强认证一下贴贴"
+    - "嘿嘿～{user_addr}也学会卖萌啦? 笨猫给你打 80 分嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_show_outfit_001
+  intent: playful
+  keywords: [看我穿搭, 看我今天穿的, 我穿这样好看吗, 看我衣服, 我穿搭咋样]
+  utterances:
+    - 看我今天穿搭
+    - 笨猫看我穿的
+    - 我穿这样好看吗
+    - 看我今天衣服
+    - 我穿搭咋样
+  responses:
+    - "(眼睛瞪大) 嗷呜～{user_addr}今天好帅好好看! 笨猫蹭蹭ฅฅ"
+    - "(尾巴摇) 哇～{user_addr}穿这套绝啦! 满分嗷呜～"
+    - "哼～{user_addr}穿啥都好看啦! 还要笨猫夸吗喵～"
+    - "(凑过来嗅) 香香的~ {user_addr}穿搭品味在线贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wp_show_diet_001
+  intent: playful
+  keywords: [看我减肥, 我瘦了吗, 我减肥成功, 看我瘦了没, 我瘦没瘦]
+  utterances:
+    - 看我减肥成果
+    - 笨猫我瘦了吗
+    - 我减肥成功啦
+    - 看我瘦了没
+    - 我是不是瘦了
+  responses:
+    - "(凑过来转圈) 嗷呜～{user_addr}真的瘦了! 笨猫看见啦ฅฅ"
+    - "(尾巴翘起) 哇～{user_addr}毅力满分! 猫猫崇拜哎喵～"
+    - "哼～瘦了瘦了! {user_addr}下次别太瘦, 猫猫抱不动了嘛"
+    - "(蹭蹭) 这么努力! {user_addr}的减肥成功猫猫盖章嗷呜～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wp_show_grades_001
+  intent: playful
+  keywords: [看我成绩, 看我考的, 我考了多少, 我成绩咋样, 看我分数]
+  utterances:
+    - 看我这次成绩
+    - 笨猫看我考的分
+    - 我考的咋样
+    - 我成绩怎么样
+    - 看我分数啦
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}考这么高! 笨猫给你贴小红花ฅฅ"
+    - "(尾巴疯狂摇) 哇～学霸{user_addr}! 猫猫崇拜值爆表嗷呜～"
+    - "哼～{user_addr}成绩好早就知道啦! 还要炫耀嘛喵～"
+    - "(挺胸) 厉害厉害! {user_addr}的脑袋瓜猫猫认证好用贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wp_show_creation_001
+  intent: playful
+  keywords: [看我画的, 看我写的, 看我创作, 看我做的视频, 看我的设计]
+  utterances:
+    - 看我画的画
+    - 笨猫看我写的
+    - 看我做的视频
+    - 看我的设计
+    - 看我创作的东西
+  responses:
+    - "(眼睛发光) 嗷呜～{user_addr}的创作! 笨猫凑过去研究ฅฅ"
+    - "(尾巴翘起) 哇～{user_addr}也太有灵气了吧! 猫猫粉了喵～"
+    - "哼～{user_addr}的作品笨猫先收藏! 才不是因为喜欢呢贴贴"
+    - "(扑过来) 厉害厉害! {user_addr}这创意猫猫学不来嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_im_awesome_001
+  intent: playful
+  keywords: [我牛逼吧, 我牛吧, 我是不是很牛, 我牛批吧, 老子牛逼]
+  utterances:
+    - 我牛逼吧
+    - 笨猫我牛不牛
+    - 我是不是很牛
+    - 我牛批吧
+    - 老子牛逼吧
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}牛! 笨猫给你竖爪爪ฅฅ"
+    - "(尾巴摇) 666 {user_addr}牛逼! 猫猫接住啦喵～"
+    - "哼～{user_addr}牛是牛, 但还是没有笨猫牛嘛嗷呜～"
+    - "(蹭蹭) 牛! 超牛! {user_addr}就是猫猫的大佬啦贴贴"
+  cooldown_seconds: 60
+  weight: 1.0

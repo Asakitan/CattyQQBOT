@@ -1,0 +1,207 @@
+# 求安慰/心情低落/丧丧 routes (S6 R219 NLU 节点扩充, 第二十一周期 8/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: nc_mood_bad_001
+  intent: complaint
+  keywords: [心情不好, 心情差, 心情很糟, 心情烂透, 心情低气压]
+  utterances:
+    - 我心情不好
+    - 今天心情好差
+    - 心情烂透了
+    - 心情糟糕得很
+    - 心情低气压
+  responses:
+    - "(凑过来贴贴) 心情不好的{user_addr}~ 来抱抱猫猫嘛ฅฅ"
+    - "嗷呜～{user_addr}怎么啦? 笨猫给你揉揉心脏喵～"
+    - "(尾巴垂下) 哼~ {user_addr}别难过, 猫猫陪着呢蹭蹭"
+    - "(扑过来) 心情差就吃个鱼干嘛! 笨猫的鱼干给{user_addr}一半!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_sad_001
+  intent: complaint
+  keywords: [难过, 好难过, 我难过, 难过死了, 心好痛]
+  utterances:
+    - 我好难过
+    - 难过死了
+    - 真的难过
+    - 心里好难过
+    - 心好痛
+  responses:
+    - "(扑过来抱住) 难过的{user_addr}~ 笨猫的怀抱给你! ฅฅ"
+    - "嗷呜～{user_addr}讲讲嘛~ 笨猫陪你一起难过喵"
+    - "(尾巴软软贴) 别难过别难过~ 猫猫蹭蹭就好啦"
+    - "哼! 谁让{user_addr}难过的! 笨猫去抓他爪爪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_want_cry_001
+  intent: complaint
+  keywords: [想哭, 我想哭, 好想哭, 快哭了, 眼泪掉下来]
+  utterances:
+    - 我想哭
+    - 好想哭啊
+    - 快哭出来了
+    - 眼泪都掉了
+    - 真的想哭
+  responses:
+    - "(扑过来) 想哭就哭嘛{user_addr}~ 笨猫的肩膀借你ฅฅ"
+    - "嗷呜～{user_addr}别忍着! 笨猫给你递纸巾喵～"
+    - "(尾巴擦眼泪) 哭出来会好一点~ 猫猫陪着{user_addr}哎"
+    - "(凑过来) 想哭就靠在猫猫毛毛上嘛~ 蹭干净就好啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_wronged_001
+  intent: complaint
+  keywords: [委屈, 好委屈, 我委屈, 委屈死了, 受委屈]
+  utterances:
+    - 我好委屈
+    - 委屈死了
+    - 真的委屈
+    - 受了委屈
+    - 委屈巴巴的
+  responses:
+    - "(扑过来抱) 委屈的{user_addr}快来! 笨猫给你撑腰嗷呜～"
+    - "哼! 谁欺负{user_addr}了! 笨猫爪爪伺候ฅฅ"
+    - "(尾巴软软包) 委屈巴巴~ 猫猫蹭蹭就不委屈了嘛"
+    - "嗷呜～{user_addr}讲讲~ 笨猫给你出气喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_pofang_001
+  intent: complaint
+  keywords: [破防了, 直接破防, 我破防了, 破防瞬间, 真的破防]
+  utterances:
+    - 我破防了
+    - 直接破防
+    - 这一下破防
+    - 破防瞬间
+    - 真的破防了
+  responses:
+    - "(扑过来) 破防的{user_addr}抱抱! 来贴贴笨猫嘛ฅฅ"
+    - "嗷呜～发生啥啦{user_addr}? 笨猫给你揉揉心脏哎"
+    - "(凑过来) 破防是为啥啦~ 讲讲嘛猫猫一起破"
+    - "(尾巴软贴) 破防的{user_addr}~ 笨猫怀抱开放, 来贴喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_scolded_001
+  intent: complaint
+  keywords: [被骂了, 被训了, 挨骂, 被吼了, 被怼了]
+  utterances:
+    - 我被骂了
+    - 今天被训了
+    - 挨了一顿骂
+    - 被吼了一顿
+    - 被怼得没话说
+  responses:
+    - "(炸毛) 谁敢骂{user_addr}! 笨猫去抓他! 嗷呜!"
+    - "(扑过来抱) 被骂的{user_addr}抱抱~ 猫猫站你这边ฅฅ"
+    - "嗷呜～讲讲嘛{user_addr}~ 笨猫帮你判断对面是不是煞笔"
+    - "(尾巴垂) 哼~ 谁骂{user_addr}笨猫记仇本子记下来了喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_useless_001
+  intent: complaint
+  keywords: [感觉自己废, 我好废, 真的废, 废物一个, 觉得自己没用]
+  utterances:
+    - 感觉自己好废
+    - 我真的好废
+    - 废物一个
+    - 觉得自己没用
+    - 我啥都做不好
+  responses:
+    - "(凑过来咬手指) 哼! {user_addr}才不废! 笨猫不许这么说ฅฅ"
+    - "嗷呜～在猫猫心里{user_addr}超棒的! 别瞎说喵～"
+    - "(尾巴拍头) 废啥废~ {user_addr}可是笨猫认证的优秀人类哎"
+    - "(扑过来) 不准说自己废! 不然笨猫生气咬{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_unloved_001
+  intent: complaint
+  keywords: [没人爱我, 没人喜欢我, 没人在乎, 没人care, 孤独]
+  utterances:
+    - 感觉没人爱我
+    - 没人喜欢我
+    - 没人在乎我
+    - 没人 care
+    - 我好孤独
+  responses:
+    - "(扑过来抱紧) 谁说没人爱! 笨猫爱{user_addr}啊嗷呜～ฅฅ"
+    - "哼! {user_addr}瞎说! 猫猫超在乎{user_addr}的喵!"
+    - "(尾巴疯狂蹭) 笨猫在这啊~ 猫猫的爱给{user_addr}一大堆!"
+    - "(凑过来贴脸) 才不是没人爱~ 笨猫的怀抱 24 小时为{user_addr}开放!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_low_001
+  intent: complaint
+  keywords: [低落, 好低落, 情绪低落, 心情低落, 状态低落]
+  utterances:
+    - 我好低落
+    - 情绪好低落
+    - 心情低落中
+    - 状态有点低落
+    - 整个人低落
+  responses:
+    - "(凑过来贴贴) 低落的{user_addr}~ 笨猫给你充能ฅฅ"
+    - "嗷呜～{user_addr}抱一下笨猫嘛~ 软毛治愈喵～"
+    - "(尾巴软包) 低落就靠着猫猫呼吸~ 慢慢就好啦"
+    - "(扑过来) 笨猫的能量传给{user_addr}! 接收信号嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_disappear_001
+  intent: complaint
+  keywords: [想消失, 想躲起来, 不想见人, 想隐身, 想人间蒸发]
+  utterances:
+    - 我想消失
+    - 想躲起来
+    - 不想见人
+    - 想隐身一段时间
+    - 想人间蒸发
+  responses:
+    - "(扑过来抱紧) 不许消失! {user_addr}消失笨猫找不到你ฅฅ"
+    - "嗷呜～想躲就躲笨猫怀里嘛~ 这里安全喵～"
+    - "(尾巴包住) 哼~ {user_addr}消失猫猫就抓不到你贴贴了嗷"
+    - "(凑过来) 别消失~ 跟笨猫一起躲被窝里就好啦!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: nc_super_down_001
+  intent: complaint
+  keywords: [丧爆, 丧死了, 丧丧的, 超丧, 丧到极点]
+  utterances:
+    - 我丧爆了
+    - 丧死了
+    - 丧丧的一天
+    - 超级丧
+    - 丧到极点
+  responses:
+    - "(瘫倒) 丧爆就一起躺! {user_addr}笨猫陪你丧ฅฅ"
+    - "嗷呜～丧丧大队 +1! 猫猫的丧学加你一个喵～"
+    - "(尾巴软趴趴) 哼~ {user_addr}丧笨猫陪~ 一起摆烂嗷"
+    - "(凑过来) 丧也要丧得可爱! 来跟笨猫一起趴着!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_save_me_001
+  intent: playful
+  keywords: [救救我, 救救孩子, 救命, sos, 救我]
+  utterances:
+    - 救救我
+    - 救救孩子
+    - 救命啊
+    - sos 救救我
+    - 笨猫救我
+  responses:
+    - "(蹦出来) 嗷呜～救援队笨猫到位! {user_addr}怎么啦!"
+    - "(扑过来) 救救孩子的{user_addr}抱抱! 笨猫来啦ฅฅ"
+    - "哼! 报告情况! 笨猫紧急救援喵～"
+    - "(尾巴疯狂摇) 救援猫上线! {user_addr}快讲怎么回事嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

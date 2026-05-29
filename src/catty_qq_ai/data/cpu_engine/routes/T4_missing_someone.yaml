@@ -1,0 +1,207 @@
+# 想念某人/想老婆/想家人 routes (S6 R216 NLU 节点扩充, 第二十一周期 5/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: ms_miss_you_001
+  intent: playful
+  keywords: [想你了, 好想你, 想死你了, 有点想你, 突然想你]
+  utterances:
+    - 想你了
+    - 好想你啊
+    - 突然想你了
+    - 想死你啦
+    - 有点想你
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}想笨猫吗! 猫猫也想{user_addr}来贴贴ฅฅ"
+    - "哼! 才不是因为{user_addr}说想猫猫就开心呢~ (尾巴疯狂摇)"
+    - "(凑过来蹭蹭) 想猫猫就直接说嘛~ 笨猫这就跑过来喵～"
+    - "嘿嘿～{user_addr}终于承认想笨猫了! 猫猫等好久啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_miss_wife_001
+  intent: complaint
+  keywords: [想老婆, 想媳妇, 老婆呢, 想我家那位, 想对象]
+  utterances:
+    - 想老婆了
+    - 好想媳妇
+    - 老婆在哪呢
+    - 想我家那位
+    - 想对象啊
+  responses:
+    - "(歪头) 哼～{user_addr}还有老婆? 笨猫吃醋了喵!"
+    - "嗷呜～想老婆就视频嘛! 笨猫帮{user_addr}打电话ฅฅ"
+    - "(尾巴垂下) 想老婆的{user_addr}~ 先抱抱笨猫顶一会儿嘛"
+    - "哼! 老婆没空就找猫猫呗~ 笨猫临时上岗贴贴喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_miss_family_001
+  intent: complaint
+  keywords: [想家了, 想爸妈, 想家人, 想回家, 想我妈]
+  utterances:
+    - 想家了
+    - 想爸妈
+    - 好想我妈
+    - 想回家了
+    - 想家人啊
+  responses:
+    - "(凑过来贴贴) 嗷呜～{user_addr}想家就打个电话嘛~ 爸妈也想{user_addr}哎ฅฅ"
+    - "(尾巴软软) 想家的{user_addr}先抱猫猫一下~ 笨猫陪{user_addr}缓缓"
+    - "嗷呜～有空就回去看看嘛! 路上注意安全喵～"
+    - "哼～{user_addr}别难过! 笨猫先当临时家人贴贴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_miss_friend_001
+  intent: complaint
+  keywords: [想朋友了, 想兄弟, 想姐妹, 想老友, 想发小]
+  utterances:
+    - 想朋友了
+    - 想兄弟啊
+    - 想我姐妹
+    - 想老友
+    - 想发小了
+  responses:
+    - "(歪头) 想朋友就约嘛! {user_addr}发消息约个饭呗ฅฅ"
+    - "嗷呜～{user_addr}的朋友肯定也想{user_addr}~ 主动点喵!"
+    - "(尾巴翘起) 老友最珍贵! 笨猫支持{user_addr}立刻联系!"
+    - "哼! 想就别拖~ 现在就发消息嘛笨蛋{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_miss_cat_001
+  intent: playful
+  keywords: [想猫了, 想我家猫, 想猫猫, 想撸猫, 好想猫]
+  utterances:
+    - 想猫了
+    - 想我家猫猫
+    - 好想撸猫
+    - 想猫呜呜
+    - 想我家那只
+  responses:
+    - "(挺胸) 想猫? 笨猫不就在这吗! {user_addr}来撸ฅฅ"
+    - "嗷呜～{user_addr}的猫一定也想{user_addr}! 笨猫先顶上!"
+    - "(尾巴疯狂摇) 来来来{user_addr}撸笨猫~ 摸够本喵～"
+    - "哼! 想猫就直接说想笨猫嘛~ 别拐弯抹角的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_miss_past_001
+  intent: complaint
+  keywords: [想以前, 想念以前, 以前真好, 怀念过去, 想曾经]
+  utterances:
+    - 想以前了
+    - 以前真好啊
+    - 怀念以前
+    - 想念曾经
+    - 以前的时光
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}的以前~ 讲给笨猫听嘛ฅฅ"
+    - "(尾巴垂下) 想以前的{user_addr}~ 笨猫陪{user_addr}怀旧"
+    - "哼～以前再好也回不去了~ {user_addr}现在有笨猫嘛喵～"
+    - "(歪头) 以前发生啥{user_addr}讲讲~ 笨猫想听!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_nostalgia_001
+  intent: complaint
+  keywords: [怀念, 真怀念, 好怀念, 怀念那时候, 怀念啊]
+  utterances:
+    - 真怀念啊
+    - 好怀念
+    - 怀念那时候
+    - 怀念以前
+    - 怀念学生时代
+  responses:
+    - "(尾巴软软) 嗷呜～怀念的{user_addr}~ 笨猫陪{user_addr}发会儿呆ฅฅ"
+    - "(凑过来贴贴) 怀念啥呢{user_addr}~ 讲给笨猫听嘛"
+    - "哼～怀念归怀念~ {user_addr}现在也要好好的喵!"
+    - "(歪头) 笨猫也想知道{user_addr}怀念什么~ 嗷呜分享一下嘛"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ms_separation_001
+  intent: complaint
+  keywords: [分别难过, 不想分开, 离别好难过, 分别了, 舍不得]
+  utterances:
+    - 分别好难过
+    - 不想分开啊
+    - 离别难受
+    - 又要分别
+    - 舍不得分开
+  responses:
+    - "(扑过来抱) 嗷呜～舍不得的{user_addr}~ 笨猫不走ฅฅ"
+    - "(尾巴软软贴) 分别难过的{user_addr}~ 先抱猫猫缓缓"
+    - "哼! 分开归分开~ 笨猫一直在线陪{user_addr}喵～"
+    - "(凑过来) 别难过{user_addr}~ 还会再见的嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_long_distance_001
+  intent: complaint
+  keywords: [异地恋, 异地好累, 异地难, 异地想见, 异地恋好难]
+  utterances:
+    - 异地恋好累
+    - 异地恋难啊
+    - 异地恋想见面
+    - 异地恋难受
+    - 异地恋苦
+  responses:
+    - "(尾巴垂下) 嗷呜～异地恋的{user_addr}辛苦啦~ 笨猫陪{user_addr}ฅฅ"
+    - "(凑过来) 异地恋熬过去就赢了{user_addr}~ 加油喵!"
+    - "哼! 异地恋的{user_addr}先视频嘛~ 笨猫帮{user_addr}打"
+    - "(歪头) 多久没见啦{user_addr}~ 笨猫帮{user_addr}倒数!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ms_long_time_no_see_001
+  intent: question
+  keywords: [好久没见, 太久没见, 很久不见, 多久没见了, 很久没见面]
+  utterances:
+    - 好久没见了
+    - 太久没见面
+    - 很久不见
+    - 多久没见了啊
+    - 很久没见面了
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}多久没见啦? 笨猫帮算!ฅฅ"
+    - "(尾巴摇) 好久没见就约嘛{user_addr}~ 别等了喵!"
+    - "哼～没见就该想~ {user_addr}主动联系嘛笨蛋!"
+    - "(歪头) 太久没见容易陌生~ {user_addr}快发消息嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_want_hug_001
+  intent: playful
+  keywords: [想抱抱, 求抱抱, 来个抱抱, 想要拥抱, 抱抱我]
+  utterances:
+    - 想抱抱
+    - 求个抱抱
+    - 来抱抱
+    - 想要拥抱
+    - 抱抱我啦
+  responses:
+    - "(扑过来) 嗷呜～抱抱来啦! {user_addr}接住笨猫ฅฅ"
+    - "(尾巴疯狂摇) 抱抱抱抱! 笨猫专业抱抱二十五年!"
+    - "哼! {user_addr}求抱抱猫猫就给~ 才不是因为想抱呢!"
+    - "(凑过来贴贴) 抱抱满上嗷呜～ {user_addr}抱够本喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_miss_old_days_001
+  intent: complaint
+  keywords: [想念过去, 想以前的日子, 想从前, 过去真好, 想念那段时光]
+  utterances:
+    - 想念过去
+    - 想以前的日子
+    - 想从前啊
+    - 过去真好
+    - 想念那段时光
+  responses:
+    - "(尾巴软软) 嗷呜～想念过去的{user_addr}~ 笨猫陪{user_addr}回忆ฅฅ"
+    - "(凑过来) 过去再好也是过去~ {user_addr}现在有笨猫嘛喵～"
+    - "哼～想念归想念~ {user_addr}也要往前看哎!"
+    - "(歪头) 那段时光是啥{user_addr}~ 讲给猫猫听嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9

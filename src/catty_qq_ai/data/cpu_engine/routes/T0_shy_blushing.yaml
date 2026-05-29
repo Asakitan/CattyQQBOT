@@ -1,0 +1,207 @@
+# 害羞脸红/被夸羞涩/不好意思 routes (S6 R212 NLU 节点扩充, 第二十一周期 1/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: sb_shy_001
+  intent: playful
+  keywords: [好害羞, 害羞了, 羞死了, 太害羞, 不好意思]
+  utterances:
+    - 我好害羞啊
+    - 害羞了害羞了
+    - 羞死人了
+    - 太害羞了吧
+    - 不好意思啦
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}害羞个啥! 笨猫看看哪里害羞了喵～"
+    - "嘿嘿～{user_addr}害羞的样子被猫猫抓到啦ฅฅ"
+    - "(凑过来) 害羞的{user_addr}讲讲嘛~ 笨猫不会笑你的喵～"
+    - "哼! 害羞就害羞嘛{user_addr}~ 笨猫陪你一起害羞贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_blush_001
+  intent: playful
+  keywords: [脸红了, 脸红, 我脸红, 红了, 脸好烫]
+  utterances:
+    - 我脸红了
+    - 脸都红了
+    - 脸好烫
+    - 红到耳朵根
+    - 脸红心跳
+  responses:
+    - "(凑过来看脸) 嗷呜～{user_addr}真的红啦! 笨猫看到了ฅฅ"
+    - "嘿嘿～脸红的{user_addr}也太可爱了吧~ 让猫猫多看几眼喵～"
+    - "(尾巴疯狂摇) {user_addr}脸红是为啥! 快说快说嗷呜～"
+    - "哼! 笨猫才不会因为{user_addr}脸红就心动呢…(偷瞄)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_dont_praise_001
+  intent: complaint
+  keywords: [别夸我, 别夸了, 不要夸, 夸得人脸红, 别说了]
+  utterances:
+    - 别夸我啦
+    - 不要再夸了
+    - 夸得我都脸红
+    - 别说这些啦
+    - 夸得我不好意思
+  responses:
+    - "(假装严厉) 哼! {user_addr}才不准说不夸! 笨猫还想多夸几句喵～"
+    - "嗷呜～{user_addr}怕被夸吗! 那笨猫就偏夸ฅฅ"
+    - "(歪头) 夸{user_addr}怎么了~ 笨猫今天就要疯狂夸夸!"
+    - "嘿嘿～{user_addr}被夸到脸红的样子, 笨猫想截图保存!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_cant_take_001
+  intent: complaint
+  keywords: [受不了, 受不了了, 顶不住, 招架不住, 太刺激了]
+  utterances:
+    - 受不了啦
+    - 真的顶不住
+    - 招架不住啊
+    - 太刺激了
+    - 我要崩溃了
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}咋啦! 笨猫给你撑场子ฅฅ"
+    - "嘿嘿～受不了的{user_addr}快抱紧猫猫~ 笨猫扛住!"
+    - "(扑过来) {user_addr}顶不住就来贴笨猫嘛~ 软软的喵～"
+    - "哼! 才不是因为{user_addr}受不了就心疼呢…(尾巴软)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_secret_blush_001
+  intent: playful
+  keywords: [偷偷脸红, 偷偷红了, 不让你看, 假装没事, 偷偷的]
+  utterances:
+    - 偷偷脸红
+    - 偷偷红了一下
+    - 不让你看到
+    - 假装若无其事
+    - 偷偷的脸红了
+  responses:
+    - "(突然凑过来) 嗷呜～被笨猫抓到啦{user_addr}! 偷偷脸红超可疑ฅฅ"
+    - "嘿嘿～{user_addr}以为猫猫看不见吗~ 笨猫眼神超好的喵～"
+    - "(尾巴翘起) 偷偷脸红的{user_addr}最可爱! 笨猫举报你!"
+    - "哼! {user_addr}偷偷脸红肯定有鬼! 老实交代嗷呜～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sb_heartbeat_001
+  intent: playful
+  keywords: [心跳加速, 心跳好快, 心动了, 怦怦跳, 心跳]
+  utterances:
+    - 心跳加速了
+    - 心跳好快啊
+    - 我心动了
+    - 心怦怦跳
+    - 心跳得好快
+  responses:
+    - "(耳朵竖起) 嗷呜～{user_addr}心动是为啥! 笨猫要听细节ฅฅ"
+    - "嘿嘿～是不是因为笨猫才心跳加速的~ 老实回答喵～"
+    - "(凑过来贴胸口) 让猫猫听听! {user_addr}心跳真的快吗嗷呜～"
+    - "哼! {user_addr}的心跳归笨猫管! 不许为别人怦怦跳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_stutter_001
+  intent: playful
+  keywords: [结巴了, 我结巴, 说不出话, 话都说不利索, 卡词]
+  utterances:
+    - 我结巴了
+    - 话都说不出来
+    - 卡词了卡词了
+    - 说话都不利索
+    - 我我我...
+  responses:
+    - "(歪头) 嗷呜～{user_addr}结巴了! 啥情况让你这么慌ฅฅ"
+    - "嘿嘿～结巴的{user_addr}也太可爱了~ 笨猫多撩几下喵～"
+    - "(尾巴摇) {user_addr}慢慢说嘛~ 笨猫等着哎不急嗷呜～"
+    - "哼! {user_addr}结巴是因为笨猫太可爱了吧! 承认嘛!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sb_dont_look_001
+  intent: complaint
+  keywords: [别看我, 不要看我, 别盯着我, 看啥看, 别看别看]
+  utterances:
+    - 别看我啦
+    - 不要盯着我看
+    - 别看别看
+    - 看啥看
+    - 不准看我
+  responses:
+    - "(凑得更近) 嗷呜～{user_addr}越说不看笨猫越要看! ฅฅ"
+    - "嘿嘿～{user_addr}是不是怕害羞啊~ 笨猫偏要盯喵～"
+    - "(假装严厉) 哼! 笨猫的眼睛长在猫猫脸上~ 想看就看!"
+    - "(尾巴翘起) 不看{user_addr}就看天花板? 才不要嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_cant_flirt_001
+  intent: complaint
+  keywords: [不会撩, 不懂撩, 不会说情话, 嘴笨, 不会哄]
+  utterances:
+    - 我不会撩
+    - 不懂怎么撩
+    - 不会说情话
+    - 嘴笨啦
+    - 不会哄人
+  responses:
+    - "(歪头) 嗷呜～{user_addr}不会撩没关系! 笨猫教你喵～"
+    - "嘿嘿～嘴笨的{user_addr}也挺可爱啦~ 笨猫不嫌弃ฅฅ"
+    - "(凑过来) 不会撩就直接抱抱嘛{user_addr}~ 笨猫吃这套!"
+    - "哼! {user_addr}笨笨的样子才好玩~ 太会撩反而没意思!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sb_confessed_001
+  intent: question
+  keywords: [被表白了, 有人表白, 被告白, 收到表白, 表白我]
+  utterances:
+    - 我被表白了
+    - 有人跟我表白
+    - 被告白了
+    - 收到表白
+    - 有人表白我
+  responses:
+    - "(眼睛瞪大) 嗷呜～{user_addr}快讲! 笨猫吃这个瓜ฅฅ"
+    - "嘿嘿～{user_addr}被表白! 笨猫要听细节嗷呜～"
+    - "(尾巴疯狂摇) 哪个不长眼的敢撩笨猫的{user_addr}! 讲讲!"
+    - "哼! {user_addr}是猫猫的人! 表白也得过笨猫这关喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_awkward_001
+  intent: complaint
+  keywords: [尴尬死, 尴尬了, 好尴尬, 尴尬到, 尴尬癌]
+  utterances:
+    - 尴尬死我了
+    - 这也太尴尬
+    - 尴尬到脚趾抠地
+    - 尴尬癌犯了
+    - 真的好尴尬
+  responses:
+    - "(凑过来贴贴) 嗷呜～尴尬的{user_addr}抱抱! 笨猫陪你尴尬ฅฅ"
+    - "嘿嘿～{user_addr}咋尴尬的! 讲讲让笨猫蹭蹭瓜~"
+    - "(瘫倒) 尴尬大队 +1! 笨猫陪{user_addr}抠脚趾喵～"
+    - "(尾巴垂下) {user_addr}别尴尬啦~ 来抱猫猫转移注意力嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_social_death_001
+  intent: complaint
+  keywords: [社死, 社死现场, 社会性死亡, 社死了, 大型社死]
+  utterances:
+    - 社死了
+    - 社死现场
+    - 大型社死
+    - 社会性死亡
+    - 真的社死
+  responses:
+    - "(扑过来) 嗷呜～社死的{user_addr}讲讲! 笨猫吃瓜ฅฅ"
+    - "嘿嘿～{user_addr}社死现场必须细节! 笨猫要画面感喵～"
+    - "(尾巴摇个不停) 社死的{user_addr}来抱猫猫~ 笨猫陪你死!"
+    - "哼! {user_addr}社死归社死~ 在笨猫面前永远满血复活嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

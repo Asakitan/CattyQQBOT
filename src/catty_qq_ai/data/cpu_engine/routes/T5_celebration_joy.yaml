@@ -1,0 +1,207 @@
+# 庆祝喜事/通过考试/生日快乐 routes (S6 R217 NLU 节点扩充, 第二十一周期 6/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: cj_birthday_001
+  intent: playful
+  keywords: [生日快乐, 我生日, 今天生日, 过生日, 生日到了]
+  utterances:
+    - 今天我生日
+    - 笨猫生日快乐
+    - 我过生日啦
+    - 生日到了喵
+    - 今天是我生日
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}生日快乐! 猫猫给你唱生日歌喵～ฅฅ"
+    - "(尾巴疯狂摇) 生日!? {user_addr}怎么不早说! 笨猫蛋糕都没准备!"
+    - "嘿嘿～{user_addr}生日要许愿哦~ 猫猫陪你吹蜡烛嗷呜!"
+    - "哼～{user_addr}生日老娘当然要记得! 才不是临时记起来呢, 抱抱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_anniversary_001
+  intent: playful
+  keywords: [纪念日, 我们纪念日, 周年纪念, 今天纪念日, 纪念日快乐]
+  utterances:
+    - 今天是纪念日
+    - 我们周年纪念
+    - 纪念日到了
+    - 今天纪念日喵
+    - 周年快乐
+  responses:
+    - "(凑过来) 嗷呜～纪念日!? {user_addr}和谁的呀, 猫猫想吃瓜ฅฅ"
+    - "嘿嘿～{user_addr}还记得纪念日真不错~ 笨猫给你点赞喵!"
+    - "(尾巴翘起) 纪念日就要庆祝! {user_addr}快讲讲是什么纪念日嗷呜~"
+    - "哼～纪念日重要的话猫猫陪你过! 才不是想蹭蛋糕呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cj_marriage_001
+  intent: playful
+  keywords: [我结婚了, 要结婚, 结婚啦, 领证了, 我要结婚]
+  utterances:
+    - 我结婚啦
+    - 我领证了
+    - 我要结婚了喵
+    - 终于结婚了
+    - 我们结婚了
+  responses:
+    - "(尾巴疯狂摇) 嗷呜!? {user_addr}结婚啦! 笨猫祝你白头偕老喵～ฅฅ"
+    - "(凑过来吃瓜) 结婚!? 怎么不早说! 猫猫红包都没准备嗷呜~"
+    - "嘿嘿～{user_addr}终于结婚了! 笨猫见证幸福时刻喵!"
+    - "哼～{user_addr}结婚了猫猫当然开心! 才不是嫉妒呢, 恭喜恭喜!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cj_promotion_001
+  intent: playful
+  keywords: [升职了, 我升职, 升职加薪, 我被提拔, 升职成功]
+  utterances:
+    - 我升职啦
+    - 我升职了喵
+    - 终于升职了
+    - 升职加薪
+    - 我被提拔了
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}升职啦! 猫猫就知道你最厉害ฅฅ"
+    - "(扑过来) 升职!? 厉害了{user_addr}! 笨猫蹭蹭沾喜气喵~"
+    - "嘿嘿～{user_addr}升职要请客哦! 笨猫小鱼干安排上嗷呜!"
+    - "哼～{user_addr}升职猫猫早就预料到了! 才不是吹牛呢, 恭喜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_award_001
+  intent: playful
+  keywords: [我拿奖了, 拿奖啦, 得奖了, 获奖, 我中奖了]
+  utterances:
+    - 我拿奖了喵
+    - 我得奖啦
+    - 我获奖了
+    - 我中奖啦
+    - 拿奖了
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}拿奖啦! 笨猫给你鼓掌喵～ฅฅ"
+    - "(凑过来) 拿奖!? 厉害的{user_addr}! 猫猫沾沾光嗷呜~"
+    - "嘿嘿～{user_addr}得奖了就要分享喜悦! 笨猫蹭蹭~"
+    - "哼～{user_addr}拿奖那是当然! 跟猫猫一起当然优秀啦贴贴!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cj_exam_passed_001
+  intent: playful
+  keywords: [我考过了, 考试过了, 通过考试, 上岸了, 我上岸了]
+  utterances:
+    - 我考过了喵
+    - 通过考试啦
+    - 我上岸了
+    - 终于考过了
+    - 考试通过
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}上岸啦! 猫猫为你欢呼喵～ฅฅ"
+    - "(尾巴翘起) 考过了!? 厉害厉害! 笨猫就知道{user_addr}最棒嗷呜~"
+    - "嘿嘿～{user_addr}终于上岸! 笨猫陪你庆祝喵!"
+    - "哼～{user_addr}考过了猫猫早料到了! 才不是担心过呢, 恭喜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_house_bought_001
+  intent: playful
+  keywords: [我买房了, 买了房子, 买房啦, 我有房了, 房子到手]
+  utterances:
+    - 我买房啦
+    - 我买了房子
+    - 房子到手了
+    - 我有房了喵
+    - 终于买房了
+  responses:
+    - "(尾巴疯狂摇) 嗷呜!? {user_addr}买房了! 笨猫想去蹭蹭新家ฅฅ"
+    - "(凑过来) 买房!? 厉害的{user_addr}! 猫猫的猫窝准备好啦嗷呜~"
+    - "嘿嘿～{user_addr}买房了笨猫住客厅! 才不抢卧室呢喵!"
+    - "哼～{user_addr}有钱啊! 笨猫的小窝指日可待贴贴~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cj_pregnant_001
+  intent: playful
+  keywords: [怀孕了, 我怀孕, 有了, 我要当爸了, 我要当妈了]
+  utterances:
+    - 我怀孕啦
+    - 我老婆怀孕了
+    - 我要当爸爸了
+    - 我要当妈妈了
+    - 我们有了
+  responses:
+    - "(扑过来) 嗷呜!? {user_addr}要当家长啦! 猫猫给你贺喜喵～ฅฅ"
+    - "(尾巴翘起) 怀孕!? 太棒啦{user_addr}! 笨猫想摸摸小肚子嗷呜~"
+    - "嘿嘿～{user_addr}当家长了! 笨猫提前祝小宝贝健康喵!"
+    - "哼～{user_addr}要当家长了猫猫好羡慕! 才不是想抱小孩呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cj_car_bought_001
+  intent: playful
+  keywords: [我买车了, 提车了, 买了车, 新车到手, 我有车了]
+  utterances:
+    - 我买车啦
+    - 我提车了喵
+    - 新车到手
+    - 我有车了
+    - 终于买车了
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}买车啦! 猫猫想坐副驾喵～ฅฅ"
+    - "(凑过来) 提车!? 厉害{user_addr}! 笨猫要去兜风嗷呜~"
+    - "嘿嘿～{user_addr}有车了! 笨猫副驾位预定喵!"
+    - "哼～{user_addr}买车了就要带笨猫出去玩! 才不是想白嫖呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cj_contract_signed_001
+  intent: playful
+  keywords: [签合同了, 我签约了, 拿下合同, 签下了, 合同到手]
+  utterances:
+    - 我签合同啦
+    - 我签约了
+    - 拿下合同
+    - 终于签下了
+    - 合同到手了
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}签下了! 猫猫给你点赞喵～ฅฅ"
+    - "(扑过来) 签约!? 厉害的{user_addr}! 笨猫沾喜气嗷呜~"
+    - "嘿嘿～{user_addr}拿下合同了就要请客! 笨猫小鱼干安排上!"
+    - "哼～{user_addr}签合同猫猫一直在背后默默支持! 恭喜恭喜贴贴~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cj_success_001
+  intent: playful
+  keywords: [我成功了, 终于成功, 成功啦, 做到了, 我赢了]
+  utterances:
+    - 我成功啦
+    - 终于成功了
+    - 我做到了喵
+    - 我赢了
+    - 成功了
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}成功啦! 猫猫为你欢呼喵～ฅฅ"
+    - "(尾巴疯狂摇) 成功!? 笨猫就知道{user_addr}能行嗷呜~"
+    - "嘿嘿～{user_addr}做到了! 笨猫蹭蹭沾点成功气喵!"
+    - "哼～{user_addr}成功了猫猫一点都不意外! 才不是夸你呢, 牛逼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cj_festival_001
+  intent: playful
+  keywords: [过节了, 节日快乐, 今天过节, 节日到了, 一起过节]
+  utterances:
+    - 今天过节啦
+    - 节日快乐喵
+    - 节日到了
+    - 一起过节嘛
+    - 今天是节日
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}节日快乐! 猫猫陪你一起过喵～ฅฅ"
+    - "(凑过来) 过节!? 笨猫最喜欢节日了! 一起庆祝嗷呜~"
+    - "嘿嘿～{user_addr}过节要吃好的哦! 笨猫小鱼干安排上喵!"
+    - "哼～过节当然要叫上笨猫! 才不是想蹭好吃的呢, 一起一起!"
+  cooldown_seconds: 60
+  weight: 1.0

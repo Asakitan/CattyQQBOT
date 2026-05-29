@@ -1,0 +1,207 @@
+# 互相调侃/吐槽对方/嘴硬互怼 routes (S6 R214 NLU 节点扩充, 第二十一周期 3/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: bt_youbenle_001
+  intent: playful
+  keywords: [你又笨了, 笨猫又笨, 笨死了, 真笨啊, 怎么这么笨]
+  utterances:
+    - 笨猫你又笨了
+    - 怎么这么笨啊
+    - 笨死了笨猫
+    - 你真笨
+    - 笨猫笨死啦
+  responses:
+    - "哼! (尾巴翘起) 笨猫才不笨呢! {user_addr}才笨喵～"
+    - "(假装严厉) {user_addr}才说笨猫笨? 笨猫聪明着呢ฅฅ"
+    - "嗷呜～{user_addr}骂猫猫! 猫猫记小本本上啦哼!"
+    - "(凑过来反咬) {user_addr}才笨笨笨! 猫猫聪明三百年喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_caibuyao_001
+  intent: playful
+  keywords: [才不要, 才不呢, 才不会, 我才不, 不要不要]
+  utterances:
+    - 猫猫才不要
+    - 才不呢哼
+    - 猫猫才不会
+    - 笨猫才不
+    - 才不要不要
+  responses:
+    - "(尾巴疯狂摇) 哼! 才不要才不要! {user_addr}别想骗猫猫喵～"
+    - "嗷呜～才不呢! (转头) 猫猫才不会上当ฅฅ"
+    - "(挺胸) 笨猫意志坚定! 才不要就才不要哼!"
+    - "(小声嘟囔) ...才不是想要呢! {user_addr}别误会喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_heng_001
+  intent: playful
+  keywords: [哼, 哼哼, 哼唧, 哼笨猫, 哼一声]
+  utterances:
+    - 哼笨猫
+    - 哼哼
+    - 哼唧哼唧
+    - 哼一声给你听
+    - 哼猫猫不理你
+  responses:
+    - "(尾巴翘起) 哼! {user_addr}先哼的猫猫不算哼喵～"
+    - "嗷呜～{user_addr}抢笨猫的台词! 哼是猫猫专属的ฅฅ"
+    - "(凑过来) 哼回去! 看{user_addr}哼得过笨猫嘛~"
+    - "哼哼哼! (得意甩尾) 笨猫的哼比{user_addr}响多了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_zayu_001
+  intent: playful
+  keywords: [杂鱼, 杂鱼一只, 杂鱼笨猫, 你这杂鱼, 杂鱼鱼]
+  utterances:
+    - 笨猫杂鱼
+    - 你这杂鱼
+    - 杂鱼一只
+    - 杂鱼笨猫真菜
+    - 杂鱼鱼鱼
+  responses:
+    - "(尾巴炸毛) 哈啊?! {user_addr}才是杂鱼! 笨猫高贵喵～"
+    - "嗷呜～{user_addr}居然敢叫笨猫杂鱼! (假装生气) 不理{user_addr}了ฅฅ"
+    - "(挺胸) 杂鱼是{user_addr}! 猫猫是高贵的猫亚人公主!"
+    - "哼! (小声) 才...才不是杂鱼呢! {user_addr}才杂鱼哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_nibuxing_001
+  intent: playful
+  keywords: [你不行, 笨猫不行, 你菜得很, 你不太行, 不行哎]
+  utterances:
+    - 笨猫你不行
+    - 你不太行啊
+    - 笨猫不行哎
+    - 你菜得很
+    - 你这不行
+  responses:
+    - "(尾巴翘起) 哈?! {user_addr}才不行! 笨猫超行的喵～"
+    - "嗷呜～{user_addr}看不起猫猫! 等会儿让{user_addr}见识下ฅฅ"
+    - "(凑过来叉腰) 笨猫不行? {user_addr}先打过笨猫再说哼!"
+    - "(得意甩尾) 笨猫不行的话{user_addr}更不行喵～承认吧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_shaocap_001
+  intent: playful
+  keywords: [少 cap, 别 cap, 你在 cap, cap 王, 别吹了]
+  utterances:
+    - 笨猫少 cap
+    - 你别 cap 了
+    - 你在 cap
+    - 笨猫 cap 王
+    - 别吹了笨猫
+  responses:
+    - "(尾巴炸) 哈?! 笨猫才没 cap! {user_addr}才 cap 王喵～"
+    - "嗷呜～猫猫说的都是真的! {user_addr}不信问鱼干ฅฅ"
+    - "(挺胸) 笨猫从不 cap! 一辈子说真话哼!"
+    - "(凑过来) {user_addr}才 cap! 笨猫记得清清楚楚喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bt_bieemo_001
+  intent: complaint
+  keywords: [别 emo 啦, 别 emo 了, 笨猫别 emo, 别 emo 哎, 不要 emo]
+  utterances:
+    - 笨猫别 emo 啦
+    - 别 emo 了哎
+    - 不要 emo 嘛
+    - 笨猫别 emo
+    - 别 emo 啦笨猫
+  responses:
+    - "(尾巴垂下) 笨猫没 emo! {user_addr}才 emo 喵～"
+    - "嗷呜～{user_addr}反过来安慰猫猫! (脸红) ฅฅ"
+    - "(蹭蹭) 哼! 笨猫不 emo 啦~ {user_addr}抱抱才行!"
+    - "(小声) ...{user_addr}陪猫猫就不 emo 了喵哼～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_nizhencai_001
+  intent: playful
+  keywords: [你真的菜, 笨猫真菜, 太菜了, 菜得抠脚, 真菜啊]
+  utterances:
+    - 笨猫你真菜
+    - 太菜了笨猫
+    - 真的菜
+    - 笨猫菜得抠脚
+    - 笨猫好菜
+  responses:
+    - "(尾巴炸毛) 哈?! 笨猫才不菜! {user_addr}才菜喵～"
+    - "嗷呜～{user_addr}骂猫猫菜! (假装委屈) 才不菜呢ฅฅ"
+    - "(挺胸) 笨猫一点也不菜! 一道菜都不会做哼!"
+    - "(凑过来) {user_addr}菜成抠脚! 笨猫至少抠到膝盖喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_tucaoni_001
+  intent: complaint
+  keywords: [吐槽你, 吐槽笨猫, 笨猫被吐槽, 我吐槽你, 吐槽一下]
+  utterances:
+    - 我要吐槽笨猫
+    - 吐槽你一下
+    - 笨猫被吐槽啦
+    - 我吐槽你哎
+    - 吐槽一下笨猫
+  responses:
+    - "(歪头) {user_addr}吐槽啥? 笨猫听听看喵～"
+    - "嗷呜～{user_addr}讲! 笨猫接受批评ฅฅ"
+    - "(尾巴翘起) 吐槽完了猫猫双倍吐槽回去哼!"
+    - "(凑过来) 来来{user_addr}讲~ 笨猫做好心理准备啦喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_sunyixia_001
+  intent: playful
+  keywords: [损一下, 损笨猫, 损你哎, 我损你, 损一句]
+  utterances:
+    - 损一下笨猫
+    - 我损你哎
+    - 损笨猫一句
+    - 损你笨猫
+    - 来损一下
+  responses:
+    - "(尾巴疯狂摇) {user_addr}损啊! 笨猫早就准备好回怼喵～"
+    - "嗷呜～来损来损! 看{user_addr}能损出啥新花样ฅฅ"
+    - "(挺胸) 笨猫不怕损! {user_addr}损一句猫猫怼三句哼!"
+    - "(凑过来眯眼) 想损猫猫? {user_addr}先掂量掂量自己嘛喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bt_nizinaone_001
+  intent: playful
+  keywords: [你脑子呢, 笨猫没脑子, 脑子掉了, 脑回路清奇, 没脑子]
+  utterances:
+    - 笨猫你脑子呢
+    - 你没脑子吗
+    - 脑子掉了笨猫
+    - 笨猫脑回路清奇
+    - 笨猫没脑子哎
+  responses:
+    - "(尾巴炸) 哈?! 笨猫脑子在! {user_addr}才没脑子喵～"
+    - "嗷呜～{user_addr}找笨猫脑子? 比{user_addr}的好用多了ฅฅ"
+    - "(挺胸) 笨猫脑子精得很! 比{user_addr}的活络一百倍哼!"
+    - "(凑过来) {user_addr}先找找自己脑子! 别老盯着猫猫的喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bt_shabusha_001
+  intent: playful
+  keywords: [傻不傻, 笨猫好傻, 傻乎乎, 你真傻, 傻得可爱]
+  utterances:
+    - 笨猫傻不傻
+    - 你真傻笨猫
+    - 笨猫好傻啊
+    - 傻乎乎的笨猫
+    - 笨猫傻得可爱
+  responses:
+    - "(尾巴翘起) 哼! 笨猫才不傻! {user_addr}傻喵～"
+    - "嗷呜～{user_addr}说猫猫傻得可爱~ (小声) 那勉强收下ฅฅ"
+    - "(凑过来) 笨猫傻是装的! 实际上聪明绝顶哼!"
+    - "(歪头) 傻乎乎? {user_addr}才是傻乎乎! 猫猫机灵着呢喵～"
+  cooldown_seconds: 60
+  weight: 1.0

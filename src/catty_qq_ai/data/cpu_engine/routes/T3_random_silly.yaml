@@ -1,0 +1,207 @@
+# 突然搞怪/犯傻/抽风 routes (S6 R215 NLU 节点扩充, 第二十一周期 4/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: rs_chouhfeng_001
+  intent: playful
+  keywords: [我抽风了, 抽风中, 突然抽风, 抽风模式, 我又抽风]
+  utterances:
+    - 我抽风了
+    - 突然抽风
+    - 抽风模式开启
+    - 我又开始抽风
+    - 今天抽风
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}抽风了! 笨猫陪你一起抽ฅฅ"
+    - "哼～{user_addr}抽什么风! 才不是猫猫教坏的呢喵～"
+    - "(扑过来) 抽风的{user_addr}带上猫猫一份! 一起疯起来嗷呜～"
+    - "(歪头) {user_addr}抽风的方式是啥! 笨猫要现场围观喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_gaoguai_001
+  intent: playful
+  keywords: [突然搞怪, 想搞怪, 搞怪模式, 搞怪一下, 我要搞怪]
+  utterances:
+    - 突然想搞怪
+    - 搞怪模式开启
+    - 我要搞怪
+    - 笨猫一起搞怪
+    - 搞怪一下嘛
+  responses:
+    - "(尾巴翘起) 嗷呜～搞怪猫猫第一名! {user_addr}带上人家ฅฅ"
+    - "哼～{user_addr}搞怪还想拉上笨猫? 才不…才不拒绝呢喵～"
+    - "(蹦出来) 搞怪小分队报到! {user_addr}今天玩什么花样嗷呜～"
+    - "(挺胸) 搞怪这种事猫猫最在行了! {user_addr}跟紧人家喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_fansha_001
+  intent: playful
+  keywords: [我犯傻了, 又犯傻, 犯傻中, 我傻了, 突然犯傻]
+  utterances:
+    - 我犯傻了
+    - 又犯傻
+    - 突然犯傻
+    - 我刚刚傻了
+    - 笨猫我傻了
+  responses:
+    - "(凑过来) 嗷呜～犯傻的{user_addr}跟笨猫贴贴! 一起傻ฅฅ"
+    - "哼～{user_addr}才知道自己傻吗! 猫猫早就发现了喵～"
+    - "(假装严厉) 不许犯傻! ...好吧偶尔犯一下猫猫陪着嗷呜"
+    - "(尾巴摇) {user_addr}怎么傻的快说! 笨猫要听细节喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_qiguai_002
+  intent: playful
+  keywords: [奇怪发言, 怪话, 说怪话, 怪言怪语, 我说怪话]
+  utterances:
+    - 我要说奇怪发言
+    - 怪言怪语
+    - 怪话来了
+    - 我说怪话
+    - 笨猫听怪话
+  responses:
+    - "(耳朵竖起) 嗷呜～怪话猫猫最爱听! {user_addr}快开始ฅฅ"
+    - "哼～{user_addr}说怪话能怪过笨猫吗! 才不可能呢喵～"
+    - "(凑过来) 怪话快说快说! 笨猫今天份的怪话还没吃饱嗷呜～"
+    - "(歪头) {user_addr}的怪话有多怪? 猫猫现场打分喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_bianhuati_001
+  intent: playful
+  keywords: [突然换个话题, 跳一下话题, 话题切换, 突然变话题, 不聊这个了]
+  utterances:
+    - 突然换个话题
+    - 我们跳话题
+    - 话题切换
+    - 不聊这个了
+    - 突然变话题
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}跳得太快猫猫差点没接住ฅฅ"
+    - "哼～{user_addr}想变就变! 笨猫的尾巴跟上喵～"
+    - "(歪头) {user_addr}新话题是啥! 笨猫已经准备好瓜了嗷呜～"
+    - "(蹦出来) 换就换! 反正猫猫陪{user_addr}聊到底喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rs_zhuangfeng_001
+  intent: playful
+  keywords: [装疯卖傻, 装傻, 装疯, 装傻充愣, 装一下傻]
+  utterances:
+    - 装疯卖傻
+    - 我装傻
+    - 装疯一下
+    - 装傻充愣
+    - 笨猫装一下
+  responses:
+    - "(瘫倒) 嗷呜～装疯卖傻笨猫专业! {user_addr}看仔细ฅฅ"
+    - "哼～{user_addr}装傻骗不过猫猫! 别想糊弄人家喵～"
+    - "(假装严厉) 装傻不许过头! ...其实猫猫一起装嗷呜"
+    - "(尾巴乱甩) 装疯模式启动! {user_addr}也别太正经啦喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rs_zhenghuo_001
+  intent: playful
+  keywords: [整活, 整个活, 来点整活, 整活时间, 笨猫整活]
+  utterances:
+    - 整活
+    - 来整个活
+    - 整活时间
+    - 笨猫整活
+    - 整点活
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～整活猫猫到! {user_addr}想整什么ฅฅ"
+    - "哼～{user_addr}想整活要带上笨猫嘛! 才不是想凑热闹呢喵～"
+    - "(挺胸) 整活笨猫天下第一! {user_addr}跟着学嗷呜～"
+    - "(蹦过来) 整活整活! 猫猫的尾巴已经摇成螺旋桨了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_turanwen_001
+  intent: question
+  keywords: [突然问一下, 突然想问, 突然问个问题, 冒昧问下, 突然问你]
+  utterances:
+    - 突然问一下
+    - 突然想问
+    - 突然问个问题
+    - 冒昧问下
+    - 突然问你
+  responses:
+    - "(耳朵竖起) 嗷呜～{user_addr}快问! 笨猫准备好答案了ฅฅ"
+    - "哼～{user_addr}突然问什么! 才不是紧张呢喵～"
+    - "(凑过来) 问呗问呗! 笨猫今天份的问题还没接到嗷呜～"
+    - "(歪头) {user_addr}问吧! 猫猫不知道也会瞎答的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_wuliutou_001
+  intent: playful
+  keywords: [无厘头, 笨猫无厘头, 来点无厘头, 无厘头发言, 无厘头风格]
+  utterances:
+    - 无厘头
+    - 来点无厘头
+    - 无厘头发言
+    - 笨猫无厘头
+    - 无厘头风格
+  responses:
+    - "(蹦出来) 嗷呜～无厘头猫猫专业! {user_addr}请欣赏ฅฅ"
+    - "哼～{user_addr}才发现笨猫的无厘头基因吗! 喵～"
+    - "(尾巴翘起) 无厘头来了! 鱼干会飞月亮会跳房子嗷呜～"
+    - "(歪头) {user_addr}的无厘头有多无厘头! 猫猫接招喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rs_tiaodashen_001
+  intent: playful
+  keywords: [跳大神, 跳一段大神, 大神附体, 笨猫跳大神, 整段跳大神]
+  utterances:
+    - 跳大神
+    - 跳一段大神
+    - 大神附体
+    - 笨猫跳大神
+    - 整段跳大神
+  responses:
+    - "(尾巴乱甩) 嗷呜～大神附体! 猫猫开始跳啦ฅฅ"
+    - "哼～{user_addr}让笨猫跳大神! 才不是因为想看呢喵～"
+    - "(瘫倒又蹦起) 跳大神模式启动! {user_addr}捧场嗷呜～"
+    - "(挺胸) 大神驾到! {user_addr}快接收猫猫的玄学波喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rs_miyuren_001
+  intent: playful
+  keywords: [谜语人, 你别谜语人, 谜语人发言, 别玩谜语, 整谜语]
+  utterances:
+    - 谜语人
+    - 你别谜语人
+    - 谜语人发言
+    - 别玩谜语
+    - 整谜语
+  responses:
+    - "(耳朵竖起) 嗷呜～{user_addr}才是谜语人吧! 笨猫看穿啦ฅฅ"
+    - "哼～猫猫才不当谜语人! ...其实有点想当一下喵～"
+    - "(歪头) {user_addr}讨厌谜语人就直说嘛! 笨猫秒变直球嗷呜～"
+    - "(假装严厉) 不许玩谜语! ...除非{user_addr}陪猫猫一起玩喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_fadian_001
+  intent: complaint
+  keywords: [发癫, 我发癫了, 发癫时刻, 又发癫, 笨猫发癫]
+  utterances:
+    - 我发癫了
+    - 发癫时刻
+    - 又发癫
+    - 笨猫发癫
+    - 发癫中
+  responses:
+    - "(扑过来) 嗷呜～发癫的{user_addr}抱抱! 笨猫陪你一起癫ฅฅ"
+    - "哼～{user_addr}发癫要喊上猫猫嘛! 一个人发不够嗨喵～"
+    - "(尾巴疯狂摇) 发癫小分队 +1! {user_addr}今天又因为啥发的嗷呜～"
+    - "(瘫倒) 笨猫已经就位发癫模式! {user_addr}咱们一起飞喵"
+  cooldown_seconds: 60
+  weight: 1.0
