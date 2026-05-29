@@ -1,0 +1,206 @@
+# 滤镜 routes (S6 R754 NLU 节点扩充, 第七十五周期 3/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: fb_nisi_001
+  intent: question
+  keywords: [推荐 NiSi, 推荐耐司, 推荐 NiSi 滤镜, 推荐耐司滤镜, 笨猫 NiSi]
+  utterances:
+    - 推荐 NiSi
+    - 推荐耐司
+    - 推荐 NiSi 滤镜
+    - 推荐耐司滤镜
+    - 笨猫 NiSi
+  responses:
+    - "嗷呜～{user_addr}NiSi 耐司 - 国产风光王ฅฅ"
+    - "(尾巴翘) V7 / V6 方形支架 - 风光神器"
+    - "{user_addr}玻璃高透 / 色彩中性"
+    - "(挺胸) 笨猫推荐: NiSi V7 入门套装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_hy_001
+  intent: question
+  keywords: [推荐 H&Y, 推荐 HY 滤镜, 推荐磁吸滤镜, 推荐 H&Y 磁吸, 笨猫 HY]
+  utterances:
+    - 推荐 H&Y
+    - 推荐 HY 滤镜
+    - 推荐磁吸滤镜
+    - 推荐 H&Y 磁吸
+    - 笨猫 HY
+  responses:
+    - "嗷呜～{user_addr}H&Y - 磁吸开创者ฅฅ"
+    - "(尾巴翘) Magnetic 系列 - 秒换滤镜"
+    - "{user_addr}方圆兼用 / Drop-in 设计"
+    - "(挺胸) 笨猫推荐: H&Y Revoring 磁吸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_kf_001
+  intent: question
+  keywords: [推荐 K&F, 推荐 KF Concept, 推荐 K&F 滤镜, 推荐性价比滤镜, 笨猫 KF]
+  utterances:
+    - 推荐 K&F
+    - 推荐 KF Concept
+    - 推荐 K&F 滤镜
+    - 推荐性价比滤镜
+    - 笨猫 KF
+  responses:
+    - "嗷呜～{user_addr}K&F Concept - 性价比之王ฅฅ"
+    - "(尾巴翘) Nano-X 系列 - 入门首选"
+    - "{user_addr}价格亲民 / 涂层不错"
+    - "(挺胸) 笨猫推荐: K&F Nano-X 套装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_lee_001
+  intent: question
+  keywords: [推荐 Lee Filter, 推荐 Lee 滤镜, 推荐英国 Lee, 推荐 Lee 渐变, 笨猫 Lee]
+  utterances:
+    - 推荐 Lee Filter
+    - 推荐 Lee 滤镜
+    - 推荐英国 Lee
+    - 推荐 Lee 渐变
+    - 笨猫 Lee
+  responses:
+    - "嗷呜～{user_addr}Lee Filter - 英国老牌天花板ฅฅ"
+    - "(尾巴翘) 100mm 方形系统 - 风光圣经"
+    - "{user_addr}树脂 / 玻璃版 / 渐变镜祖宗"
+    - "(挺胸) 笨猫推荐: Lee Big Stopper!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_bw_001
+  intent: question
+  keywords: [推荐 B+W, 推荐德国 B+W, 推荐 BW 滤镜, 推荐施耐德, 笨猫 BW]
+  utterances:
+    - 推荐 B+W
+    - 推荐德国 B+W
+    - 推荐 BW 滤镜
+    - 推荐施耐德
+    - 笨猫 BW
+  responses:
+    - "嗷呜～{user_addr}B+W - 德国施耐德血统ฅฅ"
+    - "(尾巴翘) XS-Pro / Master 系列"
+    - "{user_addr}MRC nano 涂层 / 黄铜框"
+    - "(挺胸) 笨猫推荐: B+W XS-Pro CPL!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_hoya_001
+  intent: question
+  keywords: [推荐 Hoya, 推荐保谷, 推荐 Hoya 滤镜, 推荐日本滤镜, 笨猫 Hoya]
+  utterances:
+    - 推荐 Hoya
+    - 推荐保谷
+    - 推荐 Hoya 滤镜
+    - 推荐日本滤镜
+    - 笨猫 Hoya
+  responses:
+    - "嗷呜～{user_addr}Hoya 保谷 - 日本玻璃大厂ฅฅ"
+    - "(尾巴翘) HD / Fusion 系列"
+    - "{user_addr}光学玻璃自产 / 老牌稳"
+    - "(挺胸) 笨猫推荐: Hoya HD Nano CPL!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_gnd_001
+  intent: question
+  keywords: [推荐渐变镜, 推荐 GND, 推荐 GND 滤镜, 推荐软渐变, 笨猫渐变镜]
+  utterances:
+    - 推荐渐变镜
+    - 推荐 GND
+    - 推荐 GND 滤镜
+    - 推荐软渐变
+    - 笨猫渐变镜
+  responses:
+    - "嗷呜～{user_addr}GND 渐变 - 平衡天地光比ฅฅ"
+    - "(尾巴翘) 软渐变 / 硬渐变 / 反向渐变"
+    - "{user_addr}GND 0.6 / 0.9 / 1.2 档"
+    - "(挺胸) 笨猫推荐: NiSi 软 GND 0.9!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_nd_001
+  intent: question
+  keywords: [推荐减光镜, 推荐 ND, 推荐 ND 滤镜, 推荐 ND1000, 笨猫减光镜]
+  utterances:
+    - 推荐减光镜
+    - 推荐 ND
+    - 推荐 ND 滤镜
+    - 推荐 ND1000
+    - 笨猫减光镜
+  responses:
+    - "嗷呜～{user_addr}ND 减光 - 长曝必备ฅฅ"
+    - "(尾巴翘) ND8 / ND64 / ND1000 / 可调 ND"
+    - "{user_addr}雾化水流 / 抹云神器"
+    - "(挺胸) 笨猫推荐: NiSi ND1000 + 可调 ND!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_cpl_001
+  intent: question
+  keywords: [推荐偏振镜, 推荐 CPL, 推荐 CPL 滤镜, 推荐偏光镜, 笨猫 CPL]
+  utterances:
+    - 推荐偏振镜
+    - 推荐 CPL
+    - 推荐 CPL 滤镜
+    - 推荐偏光镜
+    - 笨猫 CPL
+  responses:
+    - "嗷呜～{user_addr}CPL 偏振 - 消反光增饱和ฅฅ"
+    - "(尾巴翘) 蓝天更蓝 / 水面更透"
+    - "{user_addr}B+W / Hoya / NiSi 都行"
+    - "(挺胸) 笨猫推荐: B+W XS-Pro Kasemann!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_uv_001
+  intent: question
+  keywords: [推荐 UV 镜, 推荐 UV 滤镜, 推荐保护镜, 推荐镜头保护, 笨猫 UV]
+  utterances:
+    - 推荐 UV 镜
+    - 推荐 UV 滤镜
+    - 推荐保护镜
+    - 推荐镜头保护
+    - 笨猫 UV
+  responses:
+    - "嗷呜～{user_addr}UV 镜 - 镜头守护神ฅฅ"
+    - "(尾巴翘) B+W 010 / Hoya HD / NiSi Pro"
+    - "{user_addr}多层镀膜 / 防刮防油污"
+    - "(挺胸) 笨猫推荐: B+W XS-Pro UV!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fb_blackmist_001
+  intent: question
+  keywords: [推荐黑柔焦, 推荐黑柔, 推荐 Black Mist, 推荐 Tiffen, 笨猫黑柔]
+  utterances:
+    - 推荐黑柔焦
+    - 推荐黑柔
+    - 推荐 Black Mist
+    - 推荐 Tiffen
+    - 笨猫黑柔
+  responses:
+    - "嗷呜～{user_addr}黑柔焦 - 电影感秘籍ฅฅ"
+    - "(尾巴翘) Tiffen Black Pro Mist 1/4 / 1/8"
+    - "{user_addr}高光柔化 / 肤色奶油"
+    - "(挺胸) 笨猫推荐: Tiffen BPM 1/4!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_starlight_001
+  intent: question
+  keywords: [推荐星光镜, 推荐星芒镜, 推荐 Star Filter, 推荐星光滤镜, 笨猫星光镜]
+  utterances:
+    - 推荐星光镜
+    - 推荐星芒镜
+    - 推荐 Star Filter
+    - 推荐星光滤镜
+    - 笨猫星光镜
+  responses:
+    - "嗷呜～{user_addr}星光镜 - 点光源开花ฅฅ"
+    - "(尾巴翘) 4 线 / 6 线 / 8 线星芒"
+    - "{user_addr}夜景 / 烟花 / 圣诞树"
+    - "(挺胸) 笨猫推荐: Kenko 6 线星光!"
+  cooldown_seconds: 60
+  weight: 0.8

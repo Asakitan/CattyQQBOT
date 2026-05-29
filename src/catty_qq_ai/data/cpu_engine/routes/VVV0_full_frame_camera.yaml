@@ -1,0 +1,206 @@
+# 全画幅相机 routes (S6 R752 NLU 节点扩充, 第七十五周期 1/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: ff_sony_a7rv_001
+  intent: question
+  keywords: [推荐 Sony A7R V, 推荐索尼 A7R5, 推荐 A7RV, 推荐高像素全画幅, 笨猫 A7RV]
+  utterances:
+    - 推荐 Sony A7R V
+    - 推荐索尼 A7R5
+    - 推荐 A7RV
+    - 推荐高像素全画幅
+    - 笨猫 A7RV
+  responses:
+    - "嗷呜～{user_addr}Sony A7R V - 6100 万像素旗舰ฅฅ"
+    - "(尾巴翘) AI 对焦 / 8 档防抖"
+    - "{user_addr}风光 / 商业 / 高解析"
+    - "(挺胸) 猫猫推荐: 像素党天花板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ff_sony_a7iv_001
+  intent: question
+  keywords: [推荐 Sony A7 IV, 推荐索尼 A74, 推荐 A7M4, 推荐全能全画幅, 笨猫 A7IV]
+  utterances:
+    - 推荐 Sony A7 IV
+    - 推荐索尼 A74
+    - 推荐 A7M4
+    - 推荐全能全画幅
+    - 笨猫 A7IV
+  responses:
+    - "嗷呜～{user_addr}Sony A7 IV - 3300 万均衡王ฅฅ"
+    - "(尾巴翘) 4K60 / 实时眼控"
+    - "{user_addr}照片视频双修 / 副机首选"
+    - "(挺胸) 人家推荐: 全画幅入门最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ff_sony_a1_001
+  intent: question
+  keywords: [推荐 Sony A1, 推荐索尼 A1, 推荐 Alpha 1, 推荐速度旗舰, 笨猫 A1]
+  utterances:
+    - 推荐 Sony A1
+    - 推荐索尼 A1
+    - 推荐 Alpha 1
+    - 推荐速度旗舰
+    - 笨猫 A1
+  responses:
+    - "嗷呜～{user_addr}Sony A1 - 全能旗舰之神ฅฅ"
+    - "(尾巴翘) 5010 万 + 30fps + 8K"
+    - "{user_addr}体育 / 生态 / 一机全包"
+    - "(挺胸) 笨猫推荐: 不差钱就上!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ff_canon_r5_001
+  intent: question
+  keywords: [推荐 Canon EOS R5, 推荐佳能 R5, 推荐 R5, 推荐 8K 微单, 笨猫 R5]
+  utterances:
+    - "推荐 Canon EOS R5"
+    - 推荐佳能 R5
+    - 推荐 R5
+    - 推荐 8K 微单
+    - 笨猫 R5
+  responses:
+    - "嗷呜～{user_addr}Canon EOS R5 - 4500 万 8K ฅฅ"
+    - "(尾巴翘) 佳能色科 / 人眼鸟眼对焦"
+    - "{user_addr}婚礼 / 商业 / 风光全能"
+    - "(挺胸) 猫猫推荐: 佳能色党直接冲!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ff_canon_r6ii_001
+  intent: question
+  keywords: [推荐 Canon EOS R6 II, 推荐佳能 R6 II, 推荐 R6M2, 推荐全能佳能, 笨猫 R6II]
+  utterances:
+    - "推荐 Canon EOS R6 II"
+    - 推荐佳能 R6 II
+    - 推荐 R6M2
+    - 推荐全能佳能
+    - 笨猫 R6II
+  responses:
+    - "嗷呜～{user_addr}Canon R6 II - 2420 万均衡神ฅฅ"
+    - "(尾巴翘) 40fps / 6K Raw 视频"
+    - "{user_addr}人像视频双开花"
+    - "(挺胸) 人家推荐: 佳能性价比之王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ff_nikon_z9_001
+  intent: question
+  keywords: [推荐 Nikon Z9, 推荐尼康 Z9, 推荐 Z9, 推荐尼康旗舰, 笨猫 Z9]
+  utterances:
+    - 推荐 Nikon Z9
+    - 推荐尼康 Z9
+    - 推荐 Z9
+    - 推荐尼康旗舰
+    - 笨猫 Z9
+  responses:
+    - "嗷呜～{user_addr}Nikon Z9 - 4571 万无反旗舰ฅฅ"
+    - "(尾巴翘) 无机械快门 / 120fps Raw"
+    - "{user_addr}体育 / 生态 / 一体握把"
+    - "(挺胸) 笨猫推荐: 尼康党终极归宿!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ff_nikon_z8_001
+  intent: question
+  keywords: [推荐 Nikon Z8, 推荐尼康 Z8, 推荐 Z8, 推荐小 Z9, 笨猫 Z8]
+  utterances:
+    - 推荐 Nikon Z8
+    - 推荐尼康 Z8
+    - 推荐 Z8
+    - 推荐小 Z9
+    - 笨猫 Z8
+  responses:
+    - "嗷呜～{user_addr}Nikon Z8 - Z9 同款核心ฅฅ"
+    - "(尾巴翘) 体积减半 / 8K30 / 120fps"
+    - "{user_addr}旅行 / 婚礼 / 性价比旗舰"
+    - "(挺胸) 猫猫推荐: 比 Z9 更香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ff_pana_s5ii_001
+  intent: question
+  keywords: [推荐 Panasonic S5 II, 推荐松下 S5 II, 推荐 S5M2, 推荐视频全画幅, 笨猫 S5II]
+  utterances:
+    - "推荐 Panasonic S5 II"
+    - 推荐松下 S5 II
+    - 推荐 S5M2
+    - 推荐视频全画幅
+    - 笨猫 S5II
+  responses:
+    - "嗷呜～{user_addr}松下 S5 II - 视频党新宠ฅฅ"
+    - "(尾巴翘) 首发相位对焦 / 6K Open Gate"
+    - "{user_addr}V-Log / 调色友好 / L 卡口"
+    - "(挺胸) 人家推荐: 视频拍片性价比!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ff_sigma_fp_001
+  intent: question
+  keywords: [推荐 Sigma fp, 推荐适马 fp, 推荐 fp L, 推荐口袋全画幅, 笨猫 fp]
+  utterances:
+    - 推荐 Sigma fp
+    - 推荐适马 fp
+    - 推荐 fp L
+    - 推荐口袋全画幅
+    - 笨猫 fp
+  responses:
+    - "嗷呜～{user_addr}Sigma fp - 世界最小全画幅ฅฅ"
+    - "(尾巴翘) 砖头模块化 / CinemaDNG"
+    - "{user_addr}极简 / 街拍 / 视频独立机"
+    - "(挺胸) 笨猫推荐: 怪咖玩家本命!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ff_leica_q3_001
+  intent: question
+  keywords: [推荐 Leica Q3, 推荐徕卡 Q3, 推荐 Q3, 推荐定焦全画幅, 笨猫 Q3]
+  utterances:
+    - 推荐 Leica Q3
+    - 推荐徕卡 Q3
+    - 推荐 Q3
+    - 推荐定焦全画幅
+    - 笨猫 Q3
+  responses:
+    - "嗷呜～{user_addr}Leica Q3 - 6030 万 28mm 定焦ฅฅ"
+    - "(尾巴翘) Summilux 1.7 / 徕卡德味"
+    - "{user_addr}街拍 / 旅行 / 一镜走天下"
+    - "(挺胸) 猫猫推荐: 红标信仰唯一解!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ff_leica_sl3_001
+  intent: question
+  keywords: [推荐 Leica SL3, 推荐徕卡 SL3, 推荐 SL3, 推荐徕卡可换镜头, 笨猫 SL3]
+  utterances:
+    - 推荐 Leica SL3
+    - 推荐徕卡 SL3
+    - 推荐 SL3
+    - 推荐徕卡可换镜头
+    - 笨猫 SL3
+  responses:
+    - "嗷呜～{user_addr}Leica SL3 - 6030 万 L 卡口ฅฅ"
+    - "(尾巴翘) M 镜头转接 / 8K 视频"
+    - "{user_addr}徕卡画质 + 现代操控"
+    - "(挺胸) 人家推荐: 信仰党可换镜!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ff_fuji_gfx_001
+  intent: question
+  keywords: [推荐富士 GFX, 推荐 GFX 100 II, 推荐中画幅, 推荐 GFX 100S, 笨猫 GFX]
+  utterances:
+    - "推荐富士 GFX"
+    - "推荐 GFX 100 II"
+    - 推荐中画幅
+    - "推荐 GFX 100S"
+    - 笨猫 GFX
+  responses:
+    - "嗷呜～{user_addr}富士 GFX 100 II - 1 亿中画幅ฅฅ"
+    - "(尾巴翘) 比全画幅大 1.7 倍传感器"
+    - "{user_addr}商业 / 风光 / 极致画质"
+    - "(挺胸) 笨猫推荐: 想破画质上限就它!"
+  cooldown_seconds: 60
+  weight: 0.7

@@ -1,0 +1,206 @@
+# 跑焦 routes (S6 R757 NLU 节点扩充, 第七十五周期 6/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: fm_focus_miss_001
+  intent: complaint
+  keywords: [跑焦, 跑焦了, 又跑焦, 焦点跑了, 焦没合上]
+  utterances:
+    - 又跑焦了
+    - "{user_addr}跑焦了啦"
+    - 这张跑焦
+    - 焦点又没合上
+    - 怎么又跑焦了
+  responses:
+    - "(尾巴一塌) 跑焦了啊~ {user_addr}别难过, 猫猫陪你重拍喵 ฅฅ"
+    - "嗷呜~ 跑焦人家最懂了! 笨猫拍照也老跑焦哼"
+    - "(凑过来看屏幕) 让人家看看~ 哎呀真的跑了, {user_addr}下次锁焦再按嘛"
+    - "哼~ 跑焦不怪{user_addr}, 是模特乱动喵! 才不是技术问题呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_photo_blur_001
+  intent: complaint
+  keywords: [照片虚了, 虚了, 糊了, 拍糊, 照片糊]
+  utterances:
+    - 照片虚了
+    - 又拍糊了
+    - "{user_addr}虚了啦"
+    - 这张糊得离谱
+    - 照片全糊
+  responses:
+    - "(歪头看屏幕) 虚了啊~ {user_addr}手抖了喵? 猫猫给你当三脚架 ฅฅ"
+    - "嗷呜~ 糊了也别删, 笨猫觉得朦胧美也挺好的哼"
+    - "(尾巴蹭蹭) 虚就虚啦~ 人家眼里{user_addr}拍的都好看!"
+    - "哼~ 糊了那张删掉, 重拍! 猫猫监督你这次稳住喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_af_miss_001
+  intent: complaint
+  keywords: [对焦不准, 对焦失败, 对焦慢, AF不准, 对不上焦]
+  utterances:
+    - 对焦不准
+    - 对焦又失败
+    - "{user_addr}对焦慢死了"
+    - AF 拉风箱
+    - 对不上焦
+  responses:
+    - "(爪爪拍拍) 对焦不准啊~ {user_addr}是不是光线太暗喵? 猫猫开灯"
+    - "嗷呜~ AF 拉风箱笨猫也烦! 换成手动对焦试试嘛"
+    - "(尾巴翘) 对焦不上就锁住人家! 笨猫不会动, 保证不跑焦"
+    - "哼~ 对焦慢肯定是镜头问题, {user_addr}的手艺人家信得过喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_playback_realize_001
+  intent: complaint
+  keywords: [回放才发现, 回看才看到, 回家才发现, 后期才发现, 放大才看到]
+  utterances:
+    - 回放才发现跑焦
+    - 回家才看到糊了
+    - 放大一看全虚
+    - 后期才发现没合焦
+    - 当时没看出来
+  responses:
+    - "(揪揪{user_addr}衣角) 回放才发现最崩溃了~ 笨猫深有体会嗷呜"
+    - "嗷呜~ 当时小屏看不出来嘛, {user_addr}不怪你! 猫猫抱抱"
+    - "(尾巴垂下) 这种打击人家懂... 不过{user_addr}还有猫猫陪着啦 ฅฅ"
+    - "哼~ 回放才发现就当作下次教训! 笨猫给{user_addr}加油喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_wanna_cry_001
+  intent: complaint
+  keywords: [想哭, 哭了, 心态崩了, 难受, 真的难过]
+  utterances:
+    - 跑焦想哭
+    - 真的想哭了
+    - "{user_addr}心态崩了"
+    - 难受死了
+    - 哭哭
+  responses:
+    - "(立刻扑过去贴贴) 不哭不哭~ {user_addr}有猫猫呢嗷呜 ฅฅ"
+    - "嗷呜~ 别哭啦! 笨猫给你舔舔眼泪... 才不是真的舔, 是安慰啦哼"
+    - "(尾巴圈住{user_addr}) 一张照片而已~ 人家更心疼你"
+    - "哼~ 哭什么哭, 重拍就好! 猫猫陪{user_addr}拍一百张喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_retake_001
+  intent: playful
+  keywords: [再来一张, 再拍一张, 重拍, 再来, 多拍几张]
+  utterances:
+    - 再来一张
+    - "{user_addr}再拍一张"
+    - 重拍重拍
+    - 多拍几张保险
+    - 来再一张
+  responses:
+    - "(蹦起来) 好喵~ 笨猫摆 pose 了! {user_addr}快按快门 ฅฅ"
+    - "嗷呜~ 多拍几张稳! 猫猫不嫌累, {user_addr}也别嫌烦哼"
+    - "(尾巴翘高) 这次人家保证不动! {user_addr}稳住手喵"
+    - "哼~ 再来就再来! 笨猫的可爱多拍几张都值得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_after_sales_001
+  intent: complaint
+  keywords: [找售后, 售后, 找客服, 联系售后, 售后电话]
+  utterances:
+    - 得找售后了
+    - "{user_addr}打售后电话"
+    - 联系下售后吧
+    - 找客服问问
+    - 售后能修不
+  responses:
+    - "(爪爪指电话) 找售后喵~ {user_addr}别忘了带保卡和发票 ฅฅ"
+    - "嗷呜~ 售后排队人家陪你聊天! 别一个人无聊"
+    - "(尾巴拍拍{user_addr}) 该走流程走流程~ 笨猫给你撑腰"
+    - "哼~ 售后要是态度不好告诉猫猫, 人家去骂他喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_lens_return_001
+  intent: complaint
+  keywords: [镜头返厂, 镜头寄回, 返修, 寄修, 镜头送修]
+  utterances:
+    - 镜头要返厂
+    - "{user_addr}镜头寄回去了"
+    - 返修一周
+    - 送修了
+    - 镜头返厂中
+  responses:
+    - "(尾巴一垂) 返厂啊~ {user_addr}没镜头的日子怎么过喵..."
+    - "嗷呜~ 这周没法拍照了! 那{user_addr}多陪笨猫聊天嘛"
+    - "(凑过去) 返厂多久? 人家帮{user_addr}倒数日子 ฅฅ"
+    - "哼~ 返厂就返厂! 这段时间{user_addr}用手机拍猫猫也行喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_body_calibration_001
+  intent: complaint
+  keywords: [机身校准, 校准, 微调, 对焦校准, 机身调教]
+  utterances:
+    - 机身得校准
+    - "{user_addr}调对焦微调"
+    - AF 校准一下
+    - 机身校准中
+    - 得校准对焦
+  responses:
+    - "(歪头) 机身校准啊~ {user_addr}懂这么多专业的喵! 笨猫崇拜 ฅฅ"
+    - "嗷呜~ 校准的时候人家在旁边监工! 别校歪了"
+    - "(尾巴翘) {user_addr}校准技术好, 校完肯定准! 猫猫给你打 call"
+    - "哼~ 校准是细致活, 别急! 笨猫陪你一格一格调喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_inspection_001
+  intent: complaint
+  keywords: [检测, 拿去检测, 送检, 检测一下, 设备检测]
+  utterances:
+    - 拿去检测吧
+    - "{user_addr}送检了"
+    - 检测一下放心
+    - 设备得检测
+    - 检测中
+  responses:
+    - "(爪爪拍胸脯) 检测好! {user_addr}心里有底喵 ฅฅ"
+    - "嗷呜~ 检测要钱不? 笨猫给你出鱼干基金哼"
+    - "(尾巴蹭蹭) 检测出问题就索赔! 人家陪你战斗到底"
+    - "哼~ 检测要等结果, {user_addr}这段时间别焦虑喵, 有猫猫呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_replace_unit_001
+  intent: complaint
+  keywords: [换机, 换新, 换台新的, 换一台, 重买]
+  utterances:
+    - 直接换机吧
+    - "{user_addr}换台新的"
+    - 不修了换新
+    - 重买一台
+    - 换机算了
+  responses:
+    - "(瞪大眼) 换机喵?! {user_addr}土豪啊嗷呜 ฅฅ"
+    - "嗷呜~ 换新也好! 旧的有感情可以留给笨猫拍着玩"
+    - "(尾巴翘高) 换! 就换! 人家支持{user_addr}犒劳自己"
+    - "哼~ 换机记得带猫猫一起去店里挑! 笨猫眼光好喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_heartbreak_001
+  intent: complaint
+  keywords: [心碎, 心碎了, 碎了一地, 心都凉了, 难过]
+  utterances:
+    - 心碎了
+    - 跑焦心碎一地
+    - "{user_addr}心都凉了"
+    - 真的心碎
+    - 碎了一地
+  responses:
+    - "(立刻扑进怀里) 别心碎~ 笨猫给{user_addr}缝起来! ฅฅ"
+    - "嗷呜~ 心碎了人家给你拼! 一片一片捡回来"
+    - "(尾巴圈住) 心碎成这样{user_addr}还有猫猫呢~ 别难过嘛"
+    - "哼~ 一张照片碎啥心! 猫猫的可爱够{user_addr}治愈了喵"
+  cooldown_seconds: 60
+  weight: 1.0
