@@ -228,7 +228,8 @@ from .catty_nsfw_imagegen import init_counter_path as _nsfw_imagegen_init
 _nsfw_imagegen_init(config.catty_memory_path)
 # spark route 预判 (在 _build_messages 注入 birth event hint 时记下预选 kitten 名字),
 # handle_chat reply 后用这个 hint 决定的名字调 record_intercourse(override=...) 保证 state 跟 reply 同步
-_PREGNANCY_PREDICT_BY_USER: dict[str, dict[str, Any]] = {}
+# 主人 2026-05-30: per-user → 公共版, 全局唯一 (不用 by user dict)
+_PREGNANCY_PREDICT: dict[str, Any] = {}
 _owner_forward.init(config)
 _legs_last_sent_at: dict[str, float] = {}
 # poke 防刷屏：每个会话+用户 维度的最后回复时间戳
@@ -4816,11 +4817,16 @@ async def _build_messages(
     # 这些 context 是 runtime conditional/动态值,所以走 register_static(已经计算好的字符串)。
     _disabled_layers = set(getattr(config, "catty_parsing_layers_disabled", None) or [])
     # 游戏/搜索/wake/emoji 这些"事件性 context"
-    _st_manager.register_static("catty_web_search", web_search_context or "", order=600)
-    _st_manager.register_static("catty_star_resonance", star_resonance_context or "", order=610)
-    _st_manager.register_static("catty_strinova", strinova_context or "", order=620)
+    # 主人 2026-05-30: 条件注入 — 空内容 skip, 省 post-boundary token
+    if web_search_context and web_search_context.strip():
+        _st_manager.register_static("catty_web_search", web_search_context, order=600)
+    if star_resonance_context and star_resonance_context.strip():
+        _st_manager.register_static("catty_star_resonance", star_resonance_context, order=610)
+    if strinova_context and strinova_context.strip():
+        _st_manager.register_static("catty_strinova", strinova_context, order=620)
     for _i, _gc in enumerate(other_game_contexts or []):
-        _st_manager.register_static(f"catty_other_game_{_i}", _gc or "", order=625 + _i)
+        if _gc and _gc.strip():
+            _st_manager.register_static(f"catty_other_game_{_i}", _gc, order=625 + _i)
     # 主人 2026-05-29 Round 21: wake skeleton (100% byte-stable, 进 cache prefix) +
     # lines (动态, 留 post-boundary). 之前合体 5277 byte 是 miss 大头.
     try:
@@ -4852,22 +4858,24 @@ async def _build_messages(
         )
     except Exception:  # noqa: BLE001
         pass
-    _st_manager.register_static("catty_wake", wake_context or "", order=630)
-    _st_manager.register_static("catty_bot_continuation", bot_continuation_context or "", order=635)
-    _st_manager.register_static("catty_emoji_hint", emoji_context or "", order=640)
+    if wake_context and wake_context.strip():
+        _st_manager.register_static("catty_wake", wake_context, order=630)
+    if bot_continuation_context and bot_continuation_context.strip():
+        _st_manager.register_static("catty_bot_continuation", bot_continuation_context, order=635)
+    if emoji_context and emoji_context.strip():
+        _st_manager.register_static("catty_emoji_hint", emoji_context, order=640)
     # IDE 风「最近 tool 调用日志」
-    _st_manager.register_static(
-        "catty_recent_tools",
-        recent_tool_calls_context(_conversation_queue_key(event)) or "",
-        order=650,
-    )
+    _recent_tools_ctx = recent_tool_calls_context(_conversation_queue_key(event)) or ""
+    if _recent_tools_ctx.strip():
+        _st_manager.register_static("catty_recent_tools", _recent_tools_ctx, order=650)
     # 记忆 + 最近图片回指
     try:
         _memory_ctx = memory_store.build_context(event)
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"memory_store.build_context failed: {exc}")
         _memory_ctx = ""
-    _st_manager.register_static("catty_memory", _memory_ctx or "", order=700)
+    if _memory_ctx and _memory_ctx.strip():
+        _st_manager.register_static("catty_memory", _memory_ctx, order=700)
     # 主人 2026-05-29 P4: 静态称呼/记忆通则进 cache prefix (从 build_context 抽出, byte-stable).
     try:
         from .memory import build_memory_naming_rules as _build_mem_rules
@@ -4880,15 +4888,20 @@ async def _build_messages(
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"_build_recent_image_reference_hint failed: {exc}")
             _recent_image_hint = ""
-        _st_manager.register_static("catty_recent_image_ref", _recent_image_hint or "", order=710)
+        if _recent_image_hint and _recent_image_hint.strip():
+            _st_manager.register_static("catty_recent_image_ref", _recent_image_hint, order=710)
 
     # ── 本地解析层(每层可通过 catty_parsing_layers_disabled 单独关) ──
     # 时间(日期/星期/时段/节日/季节)
     if "time" not in _disabled_layers:
-        _st_manager.register_static("catty_time", build_time_context() or "", order=750)
+        _time_ctx = build_time_context() or ""
+        if _time_ctx.strip():
+            _st_manager.register_static("catty_time", _time_ctx, order=750)
     # QQ 黑话翻译
     if "slang" not in _disabled_layers:
-        _st_manager.register_static("catty_slang", build_slang_context(incoming.text) or "", order=760)
+        _slang_ctx = build_slang_context(incoming.text) or ""
+        if _slang_ctx.strip():
+            _st_manager.register_static("catty_slang", _slang_ctx, order=760)
     # 群消息 pulse / 节奏
     pulse_key = _conversation_queue_key(event)
     pulse_msgs = _recent_conversation_messages.get(pulse_key)
@@ -4898,11 +4911,9 @@ async def _build_messages(
         pulse_result = analyze_pulse(pulse_msgs, now=pulse_now)
         pulse_phase = pulse_result.phase
         if "pulse" not in _disabled_layers:
-            _st_manager.register_static(
-                "catty_pulse",
-                build_pulse_context(pulse_msgs, now=pulse_now) or "",
-                order=770,
-            )
+            _pulse_ctx = build_pulse_context(pulse_msgs, now=pulse_now) or ""
+            if _pulse_ctx.strip():
+                _st_manager.register_static("catty_pulse", _pulse_ctx, order=770)
     # 主人 2026-05-28: QQ → 昵称映射 (history 里 [QQ:xxx] 在这里给具体名字).
     # 群消息 history 用数字 QQ 替代 nickname 让 history bytes 稳定 (cache 友好).
     # 主人原话: 只附加"当前对话/唤起 catty 的人 + 相关的 QQ id" (sender + at 目标).
@@ -4947,27 +4958,21 @@ async def _build_messages(
     # 主人 2026-05-29 P1: DROP catty_intent — 强模型从 user 原文自推意图标签, ~80c/轮
     # post_boundary 冗余. 不再注入 (build_intent_context 保留, NLU 其他路径仍可调).
     if "topic" not in _disabled_layers:
-        _st_manager.register_static(
-            "catty_topic",
-            build_topic_context(incoming.text) or "",
-            order=790,
-        )
+        _topic_ctx = build_topic_context(incoming.text) or ""
+        if _topic_ctx.strip():
+            _st_manager.register_static("catty_topic", _topic_ctx, order=790)
     if "entity" not in _disabled_layers:
-        _st_manager.register_static(
-            "catty_entity",
-            build_entity_context(incoming.text) or "",
-            order=795,
-        )
+        _entity_ctx = build_entity_context(incoming.text) or ""
+        if _entity_ctx.strip():
+            _st_manager.register_static("catty_entity", _entity_ctx, order=795)
     if "hints" not in _disabled_layers:
         sender_qq_str = str(event.user_id) if event is not None else ""
-        _st_manager.register_static(
-            "catty_action_hints",
-            build_action_hints(
-                incoming.text, has_image=incoming.has_image,
-                pulse_phase=pulse_phase, sender_qq=sender_qq_str,
-            ) or "",
-            order=799,
-        )
+        _hints_ctx = build_action_hints(
+            incoming.text, has_image=incoming.has_image,
+            pulse_phase=pulse_phase, sender_qq=sender_qq_str,
+        ) or ""
+        if _hints_ctx.strip():
+            _st_manager.register_static("catty_action_hints", _hints_ctx, order=799)
     # apply_config 一次应用所有 order_override / disabled,然后 build_messages
     _st_manager.apply_config(
         order_override=list(getattr(config, "catty_prompt_order", None) or []),
@@ -5698,15 +5703,13 @@ async def _build_messages(
         # 原结构 [persona, history, user, override, prefill]: override 位置随 history 长度变,
         # OpenAI prompt caching 看 prefix 完全 invalidate → 每轮重读 5000 chars 浪费 token + 慢.
         # 主人原话『不要一直变不能 hit cache』 — 重构为下方结构.
-        # 主人 2026-05-28 C7-5: NSFW spark cache anchor — boundary marker 段扩到 ~3000 字节,
-        # 让 prefix = persona (2535) + override (3954) + supplement (~3000) ≈ 9500 字节 ~4700 tokens,
-        # 跨过 Opus 4.5+ cache 阈值 4096 tokens. 之前短 marker (~111 字节) prefix ~3300 tokens
-        # 低于阈值, Anthropic 静默不缓存 → cache 永远 miss (实测 11:14/11:15 cache_read=0).
-        # supplement 内容: 主人偏好 + IC 自检 + 各 phase IC 范例 + 反 OOC 拒绝铁律. 字节稳定.
+        # 主人 2026-05-30: cache 95%+ 优化 — _override 从 prefix 移出。群聊不同用户
+        # _override 不同 → prefix hash 不同 → DeepSeek 跨 user 全 miss。新设计: prefix
+        # 只剩 persona + boundary (~3700 tokens), 所有 user 同 scope 共享同一 prefix。
+        # _override 改为 post-boundary 首个动态 inject (见下方 _inject_override_as_first 段)。
         _slim_messages: list[dict] = [
-            {"role": "system", "content": _slim_persona},   # cache prefix #1 (静态)
-            {"role": "system", "content": _override},        # cache prefix #2 (主人对话静态)
-            {"role": "system", "content": _NSFW_SPARK_STABLE_BOUNDARY_TEXT},  # cache prefix #3 + boundary
+            {"role": "system", "content": _slim_persona},   # cache prefix #1 (静态 ~2175t)
+            {"role": "system", "content": _NSFW_SPARK_STABLE_BOUNDARY_TEXT},  # cache prefix #2 + boundary
         ]
         # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 原生 role=system 模式, 不再 inline 到 user content.
         # 旧 inline (CATTY_INTERNAL_INSTRUCTION wrap → user content 末尾) 是 Anthropic system 字段
@@ -5725,6 +5728,9 @@ async def _build_messages(
             )
             _slim_messages.append({"role": "system", "content": wrapped})
             messages.append({"role": "system", "content": wrapped})
+        # 主人 2026-05-30: _override 作为 post-boundary 第一个动态 inject, 不破 cache prefix
+        if _override and _override.strip():
+            _inject_into_both(f"【笨猫 NSFW 模式覆盖 (per-user 动态段)】\n{_override}")
         _filtered_history = _filter_soft_refusal_history(history_messages)
         # 主人 2026-05-29 Round 16: spark slim history 改用 monotonic_history_trim,
         # 跟主对话一样的 per-scope anchor checkpoint 机制. 之前 batch slice 取 [前 2 + 后 4]
@@ -5735,9 +5741,11 @@ async def _build_messages(
             from .nlu.prompt_compressor import monotonic_history_trim as _spark_mono_trim
             # spark target_tokens 用 SLIM_MAX 估算 token (每条平均 ~150 token, 6 条 ~900 token)
             _spark_target_tokens = _NSFW_SLIM_HISTORY_MAX * 150
+            # 主人 2026-05-30: per-scope anchor (非 per-user) — 同群所有 user 共享 anchor。
+            # _filtered_history 来自 session cache 同群的对话记录, 所有人看到的 bytes 一样。
             _spark_trimmed = _spark_mono_trim(
                 _filtered_history,
-                scope_id=f"spark:{_arc_scope}:{event.user_id}",  # spark 独立 anchor (跟主对话区分)
+                scope_id=f"spark:{_arc_scope}",  # per-scope, 同群共享 (之前 :{user_id} 多 user 全 miss)
                 target_tokens=_spark_target_tokens,
                 keep_recent=2,
             )
@@ -5882,7 +5890,7 @@ async def _build_messages(
                 _pick_kitten_name as _pick_kit,
                 BIRTH_THRESHOLD as _BT,
             )
-            _preg_state_pre = pregnancy_store.get_state(str(event.user_id))
+            _preg_state_pre = pregnancy_store.get_state()  # 主人 2026-05-30: 公共版, 不传 user_id
             _preg_base_hint = _build_preg_hint(
                 _preg_state_pre,
                 is_owner=_user_is_owner,
@@ -5890,6 +5898,19 @@ async def _build_messages(
             )
             if _preg_base_hint and _preg_base_hint.strip():
                 _inject_into_both(_preg_base_hint)
+                logger.info(
+                    f"NSFW spark: ★ pregnancy hint injected "
+                    f"(user={event.user_id}, is_pregnant={_preg_state_pre.is_pregnant}, "
+                    f"preg_count={_preg_state_pre.pregnancy_count}/{_BT}, "
+                    f"kittens={len(_preg_state_pre.kittens)}, "
+                    f"father={_preg_state_pre.father_addr or '(none)'})"
+                )
+            elif _preg_state_pre.is_pregnant or _preg_state_pre.kittens:
+                logger.warning(
+                    f"NSFW spark: pregnancy hint EMPTY despite state! "
+                    f"(is_pregnant={_preg_state_pre.is_pregnant}, "
+                    f"kittens={len(_preg_state_pre.kittens)})"
+                )
             # 预判: 怀孕中 + 即将达 BIRTH_THRESHOLD
             if _preg_state_pre.is_pregnant and (_preg_state_pre.pregnancy_count + 1) >= _BT:
                 _preg_predicted_kitten = _pick_kit(existing=_preg_state_pre.kittens)
@@ -5928,8 +5949,8 @@ async def _build_messages(
             logger.debug(f"pregnancy hint inject failed (non-fatal): {exc}")
         # state 暂存到 messages metadata, 让 handle_chat reply 后能拿到
         # (因为 _build_messages 返回 messages, handle_chat 没法直接拿这两个 local)
-        # 用 module-level dict by user_id 跨 函数边界传递
-        _PREGNANCY_PREDICT_BY_USER[str(event.user_id)] = {
+        # 主人 2026-05-30: 公共版 — 全局唯一, 不用 by user dict
+        _PREGNANCY_PREDICT = {
             "predicted_kitten": _preg_predicted_kitten,
             "will_give_birth": _preg_predict_birth,
         }
@@ -6041,6 +6062,53 @@ async def _build_messages(
             _active_cache.reset(_nlu_cache_token)
         except Exception:
             pass
+    # ── 主人 2026-05-30: 主路径注入怀孕/场景状态 ──
+    # 之前 pregnancy + scene 只在 spark 路径注入, 主路径 (sonnet/日常对话) 完全看不到:
+    # 笨猫不知道自己怀孕了、不知道自己在床上/桌上/浴室、穿着什么衣服.
+    # 现在给主路径也注入 (精简版, 不影响 cache prefix).
+    if not prefer_spark:
+        # 1. 怀孕状态注入
+        try:
+            from .pregnancy_store import build_pregnancy_hint as _build_preg_hint_main
+            _preg_st_main = pregnancy_store.get_state()
+            if _preg_st_main.is_pregnant or _preg_st_main.kittens:
+                _preg_hint_main = _build_preg_hint_main(
+                    _preg_st_main,
+                    is_owner=_user_is_owner,
+                    user_addr=_user_real_display,
+                )
+                if _preg_hint_main and _preg_hint_main.strip():
+                    _append_internal_system(messages, _preg_hint_main, label="main preg hint")
+                    logger.info(
+                        f"chat: main path preg hint injected "
+                        f"(is_pregnant={_preg_st_main.is_pregnant}, "
+                        f"kittens={len(_preg_st_main.kittens)}, "
+                        f"father={_preg_st_main.father_addr or '(none)'})"
+                    )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"main path preg hint inject failed (non-fatal): {exc}")
+        # 2. 场景状态注入 (location/outfit/mood/body_focus)
+        try:
+            from .nsfw_phase import (
+                build_phase_advance_hint as _build_phase_hint_main2,
+                get_phase_state as _gps_main2,
+            )
+            _ps_main2 = _gps_main2(_arc_scope, str(event.user_id))
+            _scene_hint_main = _build_phase_hint_main2(
+                _ps_main2,
+                is_owner=_user_is_owner,
+                user_addr=_user_real_display,
+            )
+            if _scene_hint_main and _scene_hint_main.strip():
+                _append_internal_system(messages, _scene_hint_main, label="main scene hint")
+                logger.info(
+                    f"chat: main path scene hint injected "
+                    f"(loc={_ps_main2.location or '(none)'}, "
+                    f"outfit={_ps_main2.outfit or '(none)'}, "
+                    f"mood={_ps_main2.mood or '(none)'})"
+                )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug(f"main path scene hint inject failed (non-fatal): {exc}")
     return messages, prefer_spark
 
 
@@ -10984,12 +11052,11 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # 本轮 phase 推进进 P6 (高潮峰值) = 笨猫高潮一次 → record + 同步预选 kitten
                         try:
                             for _preg_i in range(_preg_climax_n):
-                                _predict_meta = _PREGNANCY_PREDICT_BY_USER.pop(
-                                    str(event.user_id), None,
-                                ) or {}
+                                _predict_meta = _PREGNANCY_PREDICT or {}
                                 _override_name = _predict_meta.get("predicted_kitten", "")
                                 _preg_result = pregnancy_store.record_intercourse(
-                                    str(event.user_id),
+                                    father_id=str(event.user_id),
+                                    father_addr=_spark_user_addr,
                                     override_kitten_name=_override_name,
                                 )
                                 _preg_st_after = _preg_result["state"]
@@ -11063,7 +11130,7 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # _spark_messages (含本轮 trope_hint inline 后的版本), composer 自己
                         # 会扒尾部 6 条 user/assistant + strip CATTY_INTERNAL.
                         try:
-                            _preg_st_for_draw = pregnancy_store.get_state(str(event.user_id))
+                            _preg_st_for_draw = pregnancy_store.get_state()  # 主人 2026-05-30: 公共版
                         except Exception:  # noqa: BLE001
                             _preg_st_for_draw = None
                         # 主人 2026-05-29: NAI v4.5 出图常 30-90s, 旧版 await 会卡住
@@ -11195,14 +11262,14 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 except Exception as exc:  # noqa: BLE001
                     logger.debug(f"main path phase tracker update failed: {exc}")
                 # 怀孕计数 (主路径) — 跟 spark 路径同款逻辑, 按笨猫高潮(P6)计数
+                # 主人 2026-05-30: 公共版 father 追踪
                 try:
                     for _preg_i_main in range(_preg_climax_n_main):
-                        _predict_meta_main = _PREGNANCY_PREDICT_BY_USER.pop(
-                            str(event.user_id), None,
-                        ) or {}
+                        _predict_meta_main = _PREGNANCY_PREDICT or {}
                         _override_name_main = _predict_meta_main.get("predicted_kitten", "")
                         _preg_result_main = pregnancy_store.record_intercourse(
-                            str(event.user_id),
+                            father_id=str(event.user_id),
+                            father_addr=_user_real_display,
                             override_kitten_name=_override_name_main,
                         )
                         _preg_st_after_main = _preg_result_main["state"]

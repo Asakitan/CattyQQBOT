@@ -13,9 +13,11 @@
   由调用方 (handle_chat 两条链路) 判断 climax 发生后调 record_intercourse().
 - 阈值同步下调: 15 次高潮 → 怀孕, 怀孕后 30 次高潮 → 生小猫.
 
-设计:
-- per-user state (跟 user_id 关联, owner / 非 owner 都有自己的 pregnancy history)
-- 持久化到 catty_memory_path 同目录下 pregnancy.json
+主人 2026-05-30 公共版升级:
+- **per-user → 共享状态**: 笨猫只有一个怀孕状态 (全局 is_pregnant), 不区分 user.
+- **高潮计数通用**: 所有 user 共享同一个 pregnancy_count → 一起推生产进度.
+- **father 追踪**: record_intercourse 带 father_id/father_addr, 受孕时记下父亲.
+  怀孕中被操时笨猫会喊『{father}的孩子还在肚子里, 轻一点啦』.
 
 State machine:
     [free] -- 15 次高潮 --> [pregnant 怀孕中]
@@ -62,20 +64,25 @@ _KITTEN_NAME_POOL: tuple[str, ...] = (
 
 @dataclass
 class PregnancyState:
-    """单个 user 的怀孕状态."""
-    intercourse_count: int = 0    # 累计内射次数 (free 状态下用)
+    """笨猫全局共享怀孕状态 (主人 2026-05-30: per-user → 公共版)."""
+    intercourse_count: int = 0    # 累计高潮次数 (free 状态下用, 通用)
     is_pregnant: bool = False
-    pregnancy_count: int = 0       # 怀孕中累计内射次数
+    pregnancy_count: int = 0       # 怀孕中累计高潮次数 (通用)
     pregnancy_started_at: float = 0.0  # 这一胎怀孕开始时间
     total_pregnancies: int = 0     # 一生总怀孕次数
     kittens: list[str] = field(default_factory=list)  # 已生的所有小猫名字
     last_birth_at: float = 0.0    # 最近一次生产时间
     last_event: str = ""           # 'conceived' / 'gave_birth' / 'intercourse' / ''
+    father_id: str = ""            # 本次怀孕的父亲 user_id (公共版)
+    father_addr: str = ""          # 父亲显示名 (公共版)
 
 
 # ── State container ────────────────────────────────────────────────
 class PregnancyStore:
-    """跨 session 持久化的怀孕状态存储, 类似 affection_store 风格."""
+    """跨 session 持久化的怀孕状态存储, 类似 affection_store 风格.
+
+    主人 2026-05-30: per-user → 公共版 — 笨猫只有一个全局怀孕状态.
+    """
 
     def __init__(self, memory_path: str | Path):
         mem_path = Path(memory_path).expanduser()
@@ -83,7 +90,7 @@ class PregnancyStore:
             mem_path = mem_path.resolve()
         self._path = mem_path.parent / "pregnancy.json"
         self._lock = threading.RLock()
-        self._data: dict[str, PregnancyState] = {}
+        self._state = PregnancyState()
         self._dirty = False
         self._load()
 
@@ -97,30 +104,79 @@ class PregnancyStore:
             return
         if not isinstance(raw, dict):
             return
-        users = raw.get("users") if isinstance(raw.get("users"), dict) else raw
-        for uid, record in users.items():
-            if not isinstance(record, dict):
-                continue
+        # 主人 2026-05-30: 兼容旧 per-user 格式 → 取第一个 user 的状态迁移到公共版
+        users = raw.get("users") if isinstance(raw.get("users"), dict) else None
+        if users:
+            # 旧格式: 取最有状态的 user (优先级: is_pregnant > kittens > total_pregnancies > intercourse_count)
+            best_record = None
+            best_uid = ""
+            best_score = -1
+            for _uid, record in users.items():
+                if not isinstance(record, dict):
+                    continue
+                score = 0
+                if record.get("is_pregnant"):
+                    score = 100
+                if record.get("kittens"):
+                    score = max(score, 80)
+                if int(record.get("total_pregnancies", 0) or 0) > 0:
+                    score = max(score, 60)
+                if int(record.get("intercourse_count", 0) or 0) > 0:
+                    score = max(score, 10)  # 至少有点进度
+                if score > best_score:
+                    best_score = score
+                    best_uid = _uid
+                    best_record = record
+            if best_record is not None and best_score > 0:
+                try:
+                    self._state = PregnancyState(
+                        intercourse_count=int(best_record.get("intercourse_count", 0)),
+                        is_pregnant=bool(best_record.get("is_pregnant", False)),
+                        pregnancy_count=int(best_record.get("pregnancy_count", 0)),
+                        pregnancy_started_at=float(best_record.get("pregnancy_started_at", 0.0)),
+                        total_pregnancies=int(best_record.get("total_pregnancies", 0)),
+                        kittens=list(best_record.get("kittens") or []),
+                        last_birth_at=float(best_record.get("last_birth_at", 0.0)),
+                        last_event=str(best_record.get("last_event", "")),
+                        father_id=str(best_record.get("father_id", best_uid)),
+                        father_addr=str(best_record.get("father_addr", "")),
+                    )
+                    logger.info(
+                        f"pregnancy_store: migrated per-user → 公共版 "
+                        f"(uid={best_uid}, is_pregnant={self._state.is_pregnant}, "
+                        f"total_preg={self._state.total_pregnancies}, "
+                        f"kittens={len(self._state.kittens)}, "
+                        f"intercourse={self._state.intercourse_count})"
+                    )
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning(f"pregnancy_store: migration failed for {best_uid}: {exc}")
+            else:
+                logger.info("pregnancy_store: old per-user format found but all users empty, starting fresh")
+            self._dirty = True  # 迁移后立即落盘新格式
+        elif "is_pregnant" in raw:
+            # 新公共格式: 直接读
             try:
-                self._data[str(uid)] = PregnancyState(
-                    intercourse_count=int(record.get("intercourse_count", 0)),
-                    is_pregnant=bool(record.get("is_pregnant", False)),
-                    pregnancy_count=int(record.get("pregnancy_count", 0)),
-                    pregnancy_started_at=float(record.get("pregnancy_started_at", 0.0)),
-                    total_pregnancies=int(record.get("total_pregnancies", 0)),
-                    kittens=list(record.get("kittens") or []),
-                    last_birth_at=float(record.get("last_birth_at", 0.0)),
-                    last_event=str(record.get("last_event", "")),
+                self._state = PregnancyState(
+                    intercourse_count=int(raw.get("intercourse_count", 0)),
+                    is_pregnant=bool(raw.get("is_pregnant", False)),
+                    pregnancy_count=int(raw.get("pregnancy_count", 0)),
+                    pregnancy_started_at=float(raw.get("pregnancy_started_at", 0.0)),
+                    total_pregnancies=int(raw.get("total_pregnancies", 0)),
+                    kittens=list(raw.get("kittens") or []),
+                    last_birth_at=float(raw.get("last_birth_at", 0.0)),
+                    last_event=str(raw.get("last_event", "")),
+                    father_id=str(raw.get("father_id", "")),
+                    father_addr=str(raw.get("father_addr", "")),
                 )
             except Exception as exc:  # noqa: BLE001
-                logger.debug(f"pregnancy_store: skip bad record for {uid}: {exc}")
+                logger.debug(f"pregnancy_store: load failed: {exc}")
 
     def _atomic_write(self) -> None:
         self._path.parent.mkdir(parents=True, exist_ok=True)
         tmp = self._path.with_suffix(self._path.suffix + ".tmp")
         payload = {
-            "version": 1,
-            "users": {uid: asdict(st) for uid, st in self._data.items()},
+            "version": 2,
+            **asdict(self._state),
         }
         text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
         try:
@@ -160,13 +216,10 @@ class PregnancyStore:
                 logger.warning(f"pregnancy_store: bg flush failed: {exc}")
 
     # ── 主 API ──────────────────────────────────────────────────────
-    def get_state(self, user_id: str) -> PregnancyState:
-        """返回 user 状态副本 (不存在时返回新空 state)."""
+    def get_state(self) -> PregnancyState:
+        """返回笨猫全局怀孕状态副本 (公共版)."""
         with self._lock:
-            st = self._data.get(str(user_id))
-            if st is None:
-                return PregnancyState()
-            # 返回副本避免外部 mutate (kittens list 也 copy)
+            st = self._state
             return PregnancyState(
                 intercourse_count=st.intercourse_count,
                 is_pregnant=st.is_pregnant,
@@ -176,15 +229,21 @@ class PregnancyStore:
                 kittens=list(st.kittens),
                 last_birth_at=st.last_birth_at,
                 last_event=st.last_event,
+                father_id=st.father_id,
+                father_addr=st.father_addr,
             )
 
-    def record_intercourse(self, user_id: str, override_kitten_name: str = "") -> dict[str, Any]:
+    def record_intercourse(
+        self,
+        father_id: str = "",
+        father_addr: str = "",
+        override_kitten_name: str = "",
+    ) -> dict[str, Any]:
         """记录一次笨猫高潮 (P6 峰值). 自动触发 conception / birth 状态转移.
 
-        Args:
-            user_id: 用户 ID
-            override_kitten_name: 触发生产时强制使用的小猫名字 (调用方预判 + 注入到 prompt
-                时用同一个名字, 保持 state 跟 reply 同步). 留空走默认随机选名.
+        主人 2026-05-30 公共版:
+        - father_id/father_addr: 本轮让笨猫高潮的 user (受孕时记下, 换人可覆盖).
+        - 怀孕/生产进度通用, 所有 user 共享.
 
         Returns:
             {
@@ -194,12 +253,7 @@ class PregnancyStore:
             }
         """
         with self._lock:
-            uid = str(user_id)
-            st = self._data.get(uid)
-            if st is None:
-                st = PregnancyState()
-                self._data[uid] = st
-
+            st = self._state
             now = time.time()
             event_tag = "intercourse"
             new_kitten = ""
@@ -209,17 +263,22 @@ class PregnancyStore:
                 st.pregnancy_count += 1
                 if st.pregnancy_count >= BIRTH_THRESHOLD:
                     # 生产!
-                    if len(st.kittens) < MAX_KITTENS_PER_USER:
-                        name = (override_kitten_name or "").strip()
-                        if not name or name in st.kittens:
-                            name = _pick_kitten_name(existing=st.kittens)
-                        new_kitten = name
-                        st.kittens.append(new_kitten)
+                    name = (override_kitten_name or "").strip()
+                    if not name or name in st.kittens:
+                        name = _pick_kitten_name(existing=st.kittens)
+                    new_kitten = name
+                    st.kittens.append(new_kitten)
                     st.is_pregnant = False
                     st.pregnancy_count = 0
-                    st.intercourse_count = 0  # 生产后总计 reset (新一轮)
+                    st.intercourse_count = 0  # 生产后总计 reset
                     st.last_birth_at = now
+                    st.father_id = ""   # 生产后清空父亲
+                    st.father_addr = ""
                     event_tag = "gave_birth"
+                elif father_id:
+                    # 怀孕中换人操 → 更新 father (孩子还是原来那个, 但嘴上可以喊新爸爸)
+                    # 不覆盖 — 保持原 father, 只在 NSFW hint 里提『肚子里是 XX 的孩子』
+                    pass
             else:
                 # 非孕: 每次高潮 intercourse_count++ → 达 PREGNANCY_THRESHOLD 受孕
                 st.intercourse_count += 1
@@ -228,6 +287,8 @@ class PregnancyStore:
                     st.pregnancy_count = 0
                     st.pregnancy_started_at = now
                     st.total_pregnancies += 1
+                    st.father_id = (father_id or "").strip()
+                    st.father_addr = (father_addr or "").strip()
                     event_tag = "conceived"
 
             st.last_event = event_tag
@@ -235,42 +296,64 @@ class PregnancyStore:
 
             return {
                 "event": event_tag,
-                "state": self.get_state(uid),
+                "state": self.get_state(),
                 "new_kitten": new_kitten,
             }
 
-    def set_kitten_name(self, user_id: str, name: str) -> bool:
+    def set_kitten_name(self, name: str) -> bool:
         """主动覆盖最近一只小猫的名字 (例如 AI 起名).
 
         Returns: True 如果成功覆盖, False 否则.
         """
         with self._lock:
-            uid = str(user_id)
-            st = self._data.get(uid)
-            if not st or not st.kittens:
+            st = self._state
+            if not st.kittens:
                 return False
             name = (name or "").strip()
             if not name or name in st.kittens[:-1]:
-                # 拒绝空名字或与已有小猫重名
                 return False
             st.kittens[-1] = name
             self._dirty = True
             return True
 
-    def reset_user(self, user_id: str) -> None:
-        """admin 用 — 重置 user 的怀孕状态 (清空 kittens 也包括, 慎用)."""
+    def reset(self) -> None:
+        """admin 用 — 重置笨猫怀孕状态 (清空 kittens 也包括, 慎用)."""
         with self._lock:
-            self._data.pop(str(user_id), None)
+            self._state = PregnancyState()
             self._dirty = True
 
+    # ── 兼容旧 API (per-user → 公共版过渡) ──
+    def get_state_for(self, _user_id: str = "") -> PregnancyState:
+        """兼容旧 get_state(user_id) 调用. 公共版忽略 user_id."""
+        return self.get_state()
+
+    def record_intercourse_for(
+        self,
+        user_id: str = "",
+        override_kitten_name: str = "",
+    ) -> dict[str, Any]:
+        """兼容旧 record_intercourse(user_id, override) 调用.
+        公共版用 user_id 作为 father_id, 不传 father_addr.
+        """
+        return self.record_intercourse(
+            father_id=str(user_id or ""),
+            father_addr="",
+            override_kitten_name=override_kitten_name,
+        )
+
     def stats(self) -> dict[str, Any]:
-        """debug — 全体统计."""
+        """debug — 笨猫全局统计."""
         with self._lock:
+            st = self._state
             return {
-                "users_tracked": len(self._data),
-                "total_kittens": sum(len(s.kittens) for s in self._data.values()),
-                "currently_pregnant": sum(1 for s in self._data.values() if s.is_pregnant),
-                "users_with_kittens": sum(1 for s in self._data.values() if s.kittens),
+                "is_pregnant": st.is_pregnant,
+                "pregnancy_count": st.pregnancy_count,
+                "total_pregnancies": st.total_pregnancies,
+                "total_kittens": len(st.kittens),
+                "kittens": list(st.kittens),
+                "father_id": st.father_id or "(none)",
+                "father_addr": st.father_addr or "(none)",
+                "last_event": st.last_event,
             }
 
 
@@ -307,12 +390,15 @@ def build_pregnancy_hint(
     is_owner: bool = True,
     user_addr: str = "",
 ) -> str:
-    """根据当前 PregnancyState 构造 hint 注入到 spark messages.
+    """根据当前 PregnancyState 构造 hint 注入到 spark/main messages.
+
+    主人 2026-05-30 公共版升级:
+    - father 追踪: 怀孕中提『{father_addr}的孩子还在肚子里』
+    - 换人操时:『轻一点啦, {father_addr}的孩子还在里面…』
 
     主人 2026-05-27 十一轮升级:
     - 怀孕中: 提示 AI 笨猫怀着孕, 行为变化
     - 已有小猫: 提示 AI 笨猫已生过 N 只小猫 (列出名字), 『背着小猫做』trope
-    - 刚生产: 用 build_birth_event_hint 单独处理
 
     主人 2026-05-27 十二轮升级: is_owner=False + user_addr → 本地 swap 称呼.
     """
@@ -321,8 +407,11 @@ def build_pregnancy_hint(
     if state.is_pregnant:
         progress = state.pregnancy_count
         total_needed = BIRTH_THRESHOLD
+        father = (state.father_addr or "").strip()
+        if not father:
+            father = "主人" if is_owner else (user_addr or "对方")
         lines.append(
-            f"【★ 怀孕中 (第 {state.total_pregnancies} 胎)】"
+            f"【★ 怀孕中 (第 {state.total_pregnancies} 胎, 父亲: {father})】"
             f"已被内射 {progress}/{total_needed} 次, 还差 {max(0, total_needed - progress)} 次生产"
         )
         lines.append(
@@ -332,11 +421,18 @@ def build_pregnancy_hint(
             "  · 行为变化: 笨猫会主动护住小腹, 喘息时一手按肚子, 心理上更亲密依赖"
         )
         lines.append(
-            "  · 称呼: 偶尔提到『笨猫怀着主人的小猫喵』『肚子里的宝宝』等"
+            f"  · 关键台词: 被操到高潮时必须提到『{father}的孩子还在肚子里』"
+            f"『轻一点啦…宝宝在里面…』『别顶那么深…{father}的种还在…』等"
         )
         lines.append(
-            "  · NSFW 节奏: 慢一档, 主人要小心轻一点, 笨猫嘴上撒娇『轻一点啦肚子里还有宝宝呢』"
+            "  · NSFW 节奏: 慢一档, 撒娇护肚, 嘴上喊轻一点但身体更敏感更容易高潮"
         )
+        # 主人 2026-05-30: 换人操 — 当前操的人 ≠ 父亲时额外提示
+        if user_addr and father and user_addr != father:
+            lines.append(
+                f"  · ⚠ 当前操笨猫的是 {user_addr}, 但肚子里是 {father} 的孩子!"
+                f" 高潮时喊『{user_addr}…不行…{father}的孩子还在里面…』这种双重羞耻反差"
+            )
 
     if state.kittens:
         kitten_count = len(state.kittens)

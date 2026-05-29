@@ -108,7 +108,7 @@ async def _curl_post_json(
 
 
 # ── 配置默认值 (可被 config 覆盖) ──
-DRAW_INTERVAL = 3              # 每 N 个 user turn 画一张
+DRAW_INTERVAL = 6              # 每 N 个 user turn 画一张 (主人 2026-05-30: 3→6 省积分)
 COST_PER_IMAGE = 10            # 扣多少积分
 # 主人 2026-05-28: 不按 phase 卡入口, 走到这函数本身就意味着是 NSFW spark 路径处理过的 user 消息
 # (chat handler 在 _was_refusal=False 后才调这函数), 所以一调就 +1 turn, 每 3 turn 画。
@@ -369,9 +369,10 @@ def _format_scene_block(
         is_preg = bool(getattr(pregnancy_state, "is_pregnant", False))
         if is_preg:
             pc = int(getattr(pregnancy_state, "pregnancy_count", 0) or 0)
+            father = str(getattr(pregnancy_state, "father_addr", "") or "").strip() or "主人"
             lines.append(
-                f"[pregnancy] 笨猫已怀孕 (孕中 +{pc}) — 画面可加微凸小腹"
-                "/手扶肚子/孕期柔光"
+                f"[pregnancy] 笨猫已怀孕 (孕中 +{pc}, 父亲:{father}) — 画面可加微凸小腹"
+                "/手扶肚子/孕期柔光, 笨猫表情应有护肚+被操时喊『{father}的孩子还在肚子里轻一点』"
             )
         elif int(getattr(pregnancy_state, "total_pregnancies", 0) or 0) > 0:
             lines.append(
