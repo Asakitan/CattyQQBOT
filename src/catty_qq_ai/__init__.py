@@ -3315,17 +3315,42 @@ def _wake_context_prompt(
     if not recent:
         return ""
     current_index = _find_current_recent_index(recent, event)
-    limit = _wake_context_message_limit(
-        event,
-        incoming,
-        group_filter_context=group_filter_context,
-        bot_continuation=bot_continuation,
-        recent=recent,
-        current_index=current_index,
-    )
-    start, end = _recent_context_window(recent, current_index, limit)
+    # 主人 2026-05-29 Round 24: wake_lines 是 cache miss 大头 (实测 6125c/~3370tok, 占 input 30%).
+    # 主人指令: 「1. history 去重 2. 砍到 6 条, 上下 3 条」.
+    # 之前 limit 16-50 条把群里近 50 条全列, 每轮全 miss + 跟 history 大量重叠.
+    # 现窗口硬 cap = 当前唤起 + 上 3 + 下 2 (共 6 条), 且跟 session history 去重.
+    _WAKE_BEFORE = 3
+    _WAKE_AFTER = 2
+    start = max(0, current_index - _WAKE_BEFORE)
+    end = min(len(recent), current_index + _WAKE_AFTER + 1)
+    # history 去重: 收集 session history 每条核心文本 (去前缀/inline 噪音后逐行).
+    # wake 里跟 history 重复的 (主要是 catty 自己回过的 + 触发过 catty 的 user 消息) 跳过,
+    # 但当前唤起消息**必留**.
+    _hist_norm: set[str] = set()
+    try:
+        from .message_utils import build_history_key as _bhk
+        _hist = _get_session_cache().get(_bhk(event, config)) or []
+        for _hm in _hist:
+            if not isinstance(_hm, dict):
+                continue
+            _c = _hm.get("content")
+            if isinstance(_c, list):
+                _c = "".join(b.get("text", "") for b in _c if isinstance(b, dict))
+            for _ln in str(_c or "").split("\n"):
+                _ln = _ln.strip()
+                # 剥 [QQ:数字] / 昵称(QQ): 前缀, 取冒号后核心
+                if "]" in _ln[:24]:
+                    _ln = _ln.split("]", 1)[-1].strip()
+                if len(_ln) >= 5:
+                    _hist_norm.add(_ln)
+    except Exception:  # noqa: BLE001
+        pass
     lines: list[str] = []
     for index, item in enumerate(recent[start:end], start=start):
+        _itxt = (item.text or "").strip()
+        # history 去重 (当前唤起消息除外)
+        if index != current_index and _itxt and len(_itxt) >= 5 and _itxt in _hist_norm:
+            continue
         marker = " <- 当前唤起消息" if index == current_index else ""
         image_marker = " [含图片]" if item.has_image else ""
         speaker = f"{item.display_name}({item.user_id})"
@@ -3338,7 +3363,7 @@ def _wake_context_prompt(
         return ""
     # 短指针 + lines. 处理规则看 cache 里 catty_wake_context_skeleton.
     return (
-        f"【catty_wake_lines · 本轮实际 {len(lines)}/{limit} 条】(处理规则见 cache 里 catty_wake_context_skeleton)\n"
+        f"【catty_wake_lines · 本轮 {len(lines)} 条 (含去重)】(处理规则见 cache 里 catty_wake_context_skeleton)\n"
         + "\n".join(lines)
     )
 
