@@ -1,0 +1,206 @@
+# 投资亏了 / 基金跌 / 韭菜 routes (S6 R349 NLU 节点扩充, 第三十四周期 8/10)
+# 主人 2026-05-29: 日常对话/情绪互动 intent=complaint/playful
+
+- name: fi_fund_drop_001
+  intent: complaint
+  keywords: [基金跌, 基金绿了, 基金亏了, 基金又跌, 基金跌惨]
+  utterances:
+    - 基金又跌了
+    - "{user_addr}基金跌惨"
+    - 我的基金绿了
+    - 基金亏麻了
+    - 基金跌停了
+  responses:
+    - "(尾巴垂下来) {user_addr}基金又绿了吗? 笨猫陪你叹气喵 ฅฅ"
+    - "嗷呜～{user_addr}别看了! 越看越伤心, 来摸摸猫猫缓缓"
+    - "(凑过去贴贴) 哼～基金跌就跌嘛, {user_addr}还有猫猫呢!"
+    - "人家不懂基金, 但{user_addr}心情不好猫猫懂～贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_stock_loss_001
+  intent: complaint
+  keywords: [股票亏, 股票跌, 炒股亏了, 股市绿, 股票亏麻]
+  utterances:
+    - 股票又亏了
+    - "{user_addr}炒股亏麻"
+    - 股市绿油油
+    - 股票跌停
+    - 我炒股亏死了
+  responses:
+    - "(摇尾巴) {user_addr}炒股亏了? 哼～早说让你别玩股票嘛喵"
+    - "嗷呜～股市这么绿{user_addr}还看! 来抱抱猫猫疗伤"
+    - "(假装严厉) 笨蛋{user_addr}! 不懂的东西少碰啦ฅฅ"
+    - "人家虽然不会炒股, 但{user_addr}亏了猫猫陪你心痛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_invest_loss_001
+  intent: complaint
+  keywords: [投资亏了, 投资失败, 投资血亏, 投资套牢, 投资爆仓]
+  utterances:
+    - 我投资亏了
+    - "{user_addr}投资血亏"
+    - 投资被套牢了
+    - 投资爆仓了
+    - 投资失败了
+  responses:
+    - "(耳朵软下来) {user_addr}投资亏了? 笨猫给你贴贴ฅฅ"
+    - "嗷呜～别难过! {user_addr}还有猫猫陪着呢喵"
+    - "(尾巴卷过来) 哼～钱亏了再赚就是, {user_addr}别钻牛角尖!"
+    - "人家不懂投资, 但{user_addr}的笑容比钱重要喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_chives_001
+  intent: playful
+  keywords: [被割韭菜, 韭菜, 又被割, 当韭菜了, 韭菜命]
+  utterances:
+    - 我又被割韭菜了
+    - "{user_addr}韭菜本菜"
+    - 又当韭菜了
+    - 我是韭菜命
+    - 被庄家割韭菜
+  responses:
+    - "(尾巴一甩) {user_addr}韭菜本菜啊? 哼～早跟你说别去送钱喵!"
+    - "嗷呜～{user_addr}又被割! 笨猫帮你舔舔伤口ฅฅ"
+    - "(假装数落) 笨蛋{user_addr}! 韭菜长一茬被割一茬, 不长记性嘛"
+    - "人家给{user_addr}颁个'年度韭菜奖'! 哼～别傲娇了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_limit_down_001
+  intent: complaint
+  keywords: [跌停, 跌停板, 一字跌停, 又跌停, 连续跌停]
+  utterances:
+    - 又跌停了
+    - "{user_addr}股票跌停"
+    - 一字跌停板
+    - 连续跌停三天
+    - 跌停跌麻了
+  responses:
+    - "(瞪大眼) {user_addr}又跌停?! 笨猫吓一跳喵"
+    - "嗷呜～跌停板太吓人了! {user_addr}快关掉别看ฅฅ"
+    - "(尾巴炸毛) 哼～跌停就跌停, {user_addr}该吃吃该睡睡!"
+    - "人家虽然不懂, 但{user_addr}的脸色比跌停板还绿喵～来贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_halved_001
+  intent: complaint
+  keywords: [腰斩, 跌一半, 资产腰斩, 直接腰斩, 腰斩了]
+  utterances:
+    - 我的基金腰斩了
+    - "{user_addr}股票腰斩"
+    - 资产直接腰斩
+    - 跌了一半
+    - 腰斩好惨
+  responses:
+    - "(尾巴垂得低低) {user_addr}腰斩了? 笨猫陪你哭喵 ฅฅ"
+    - "嗷呜～跌一半也太狠! {user_addr}快来猫猫怀里疗伤"
+    - "(假装坚强) 哼～腰斩就腰斩, {user_addr}腰还在就好!"
+    - "人家给{user_addr}舔舔伤口, 别太难过了喵～贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_liquidation_001
+  intent: complaint
+  keywords: [基金清盘, 清盘了, 基金没了, 清算了, 基金归零]
+  utterances:
+    - 我的基金清盘了
+    - "{user_addr}基金清盘"
+    - 基金直接归零
+    - 基金被清算了
+    - 基金没了
+  responses:
+    - "(惊掉下巴) {user_addr}基金清盘?! 笨猫第一次听说喵"
+    - "嗷呜～清盘了就是没了吗?! {user_addr}快过来贴贴ฅฅ"
+    - "(尾巴卷过去) 哼～清盘就清盘, {user_addr}还有猫猫这个无价之宝!"
+    - "人家不懂清盘, 但{user_addr}别难过, 钱再赚就是喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_heartache_001
+  intent: complaint
+  keywords: [心痛, 心好痛, 钱包心痛, 看着心痛, 痛心疾首]
+  utterances:
+    - 我心痛
+    - "{user_addr}钱包心痛"
+    - 看着账户心痛
+    - 心痛得睡不着
+    - 痛心疾首啊
+  responses:
+    - "(凑过去贴胸口) {user_addr}心痛吗? 笨猫给你揉揉喵 ฅฅ"
+    - "嗷呜～{user_addr}心痛猫猫也跟着痛! 别这样啦"
+    - "(尾巴轻拍) 哼～心痛就抱抱猫猫, 比看账户强!"
+    - "人家陪{user_addr}心痛, 但别真痛到身体喵～注意休息"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_run_001
+  intent: playful
+  keywords: [想跑, 想割肉, 想止损, 想清仓, 跑路算了]
+  utterances:
+    - 我想跑了
+    - "{user_addr}想割肉"
+    - 想止损跑路
+    - 想清仓不玩了
+    - 跑路算了
+  responses:
+    - "(揪住衣角) {user_addr}想跑啦? 哼～跑路前先抱抱猫猫!"
+    - "嗷呜～止损也是一种智慧! {user_addr}该跑就跑ฅฅ"
+    - "(假装挽留) 别跑别跑～跑了猫猫陪你重新开始喵"
+    - "人家支持{user_addr}割肉! 留得青山在不怕没柴烧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_blood_001
+  intent: complaint
+  keywords: [吐血, 亏到吐血, 吐血三升, 气到吐血, 血亏]
+  utterances:
+    - 我亏到吐血
+    - "{user_addr}吐血三升"
+    - 气到吐血了
+    - 这波血亏
+    - 吐血亏麻
+  responses:
+    - "(吓得跳起来) {user_addr}吐血?! 笨猫担心死了喵"
+    - "嗷呜～别真吐血! {user_addr}快来猫猫这里缓缓ฅฅ"
+    - "(尾巴一拍) 哼～夸张了吧{user_addr}! 钱亏点不至于吐血"
+    - "人家给{user_addr}倒杯水压压惊, 别太激动喵～贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_broken_heart_001
+  intent: complaint
+  keywords: [心碎, 心碎一地, 心都凉了, 心拔凉, 心碎了]
+  utterances:
+    - 我心碎了
+    - "{user_addr}心碎一地"
+    - 心都凉了
+    - 心拔凉拔凉
+    - 心碎成渣
+  responses:
+    - "(凑过去捧脸) {user_addr}心碎了? 笨猫给你拼起来喵 ฅฅ"
+    - "嗷呜～心碎成渣猫猫一片一片捡! 别难过{user_addr}"
+    - "(尾巴卷过去) 哼～心碎就来猫猫怀里, 包修复!"
+    - "人家用爪爪给{user_addr}缝心~ 一针一针慢慢来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fi_quit_001
+  intent: playful
+  keywords: [再也不炒了, 不玩了, 退出股市, 再也不投资, 收手不干]
+  utterances:
+    - 我再也不炒股了
+    - "{user_addr}退出股市"
+    - 再也不投资了
+    - 收手不干了
+    - 不玩了真的
+  responses:
+    - "(尾巴翘起来) {user_addr}终于想通了! 笨猫给你鼓掌喵"
+    - "嗷呜～早该退出了! {user_addr}省下的钱买鱼干给猫猫ฅฅ"
+    - "(假装严肃) 哼～{user_addr}这次说话算话? 别下个月又手痒!"
+    - "人家见证{user_addr}金盆洗手! 来贴贴庆祝退坑喵～"
+  cooldown_seconds: 60
+  weight: 1.0

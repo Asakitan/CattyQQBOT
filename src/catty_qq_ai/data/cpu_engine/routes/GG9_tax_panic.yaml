@@ -1,0 +1,206 @@
+# 报税慌 / 申报截止 / 个税焦虑 routes (S6 R351 NLU 节点扩充, 第三十四周期 10/10 完结)
+# 主人 2026-05-29: 日常对话/情绪互动 intent=complaint/playful
+
+- name: tp_panic_001
+  intent: complaint
+  keywords: [报税慌, 报税焦虑, 申报慌, 个税慌, 税务慌]
+  utterances:
+    - 报税好慌
+    - 个税申报焦虑
+    - "{user_addr}报税慌死了"
+    - 申报截止了好慌
+    - 税务季又来了慌
+  responses:
+    - "(尾巴炸毛) 嗷呜～{user_addr}报税慌也别一个人扛! 笨猫陪着喵 ฅฅ"
+    - "哼～报税这种事猫猫也帮不上忙啦! 但是可以贴贴{user_addr}缓解一下"
+    - "(凑过去) 慌的话先深呼吸喵～ {user_addr}一项一项填别急"
+    - "嗷呜～每年这时候人类都慌! 笨猫陪{user_addr}熬到搞完~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_deadline_001
+  intent: complaint
+  keywords: [截止日, deadline, 最后一天, 快截止, 限期]
+  utterances:
+    - 报税截止日到了
+    - 申报 deadline
+    - "{user_addr}快截止了"
+    - 报税最后一天
+    - 限期就剩两天
+  responses:
+    - "(尾巴竖直) 嗷呜～{user_addr}截止日?! 快冲快冲! 笨猫给你加油喵 ฅฅ"
+    - "哼～拖到最后一天的{user_addr}活该慌! 但猫猫还是陪你赶~"
+    - "(瞪眼) deadline 是真不能拖的喵! {user_addr}赶紧填~ 猫猫盯着!"
+    - "嗷呜～最后一天了! {user_addr}加油加油! 完事了来抱猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_dontknow_001
+  intent: complaint
+  keywords: [报税不会, 不会报税, 不懂申报, 报税教程, 怎么报税]
+  utterances:
+    - 报税完全不会
+    - 不懂怎么申报
+    - "{user_addr}不会报税"
+    - 报税流程不懂
+    - 第一次报税不会
+  responses:
+    - "(歪头) 嗷呜～{user_addr}不会很正常啦! 笨猫也不会喵 ฅฅ"
+    - "哼～猫猫教不了报税! 但是可以让{user_addr}查官方 app 教程~"
+    - "(贴贴) 第一次都这样喵! {user_addr}慢慢来别慌~"
+    - "嗷呜～个税 app 里有指引啦! {user_addr}跟着一步步点就好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_fine_fear_001
+  intent: complaint
+  keywords: [怕罚款, 罚款, 滞纳金, 怕被罚, 罚钱]
+  utterances:
+    - 怕罚款啊
+    - 报税晚了罚款吗
+    - "{user_addr}怕被罚"
+    - 滞纳金好怕
+    - 罚款多少
+  responses:
+    - "(耳朵贴下) 嗷呜～{user_addr}怕罚款就赶紧申报啦! 笨猫催{user_addr}喵 ฅฅ"
+    - "哼～罚款这种事猫猫也怕! {user_addr}快去填表别拖~"
+    - "(尾巴绕) 滞纳金会涨的喵! {user_addr}今晚就搞定吧~"
+    - "嗷呜～{user_addr}赶在截止日前交就没事啦! 别慌~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_audit_fear_001
+  intent: complaint
+  keywords: [怕审计, 怕查账, 税务局查, 被稽查, 怕被查]
+  utterances:
+    - 怕被税务局查
+    - 怕审计啊
+    - "{user_addr}怕稽查"
+    - 报税被查怎么办
+    - 怕查账
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}如实申报就不怕喵! 笨猫陪着 ฅฅ"
+    - "哼～心里没鬼怕什么! {user_addr}照实填就好啦~"
+    - "(贴贴) 怕的话就把凭证留好喵! {user_addr}稳稳的~"
+    - "嗷呜～大部分人都不会被抽到啦! {user_addr}别自己吓自己~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_data_mismatch_001
+  intent: complaint
+  keywords: [数据对不上, 收入对不上, 申报数据错, 数据不匹配, 金额对不上]
+  utterances:
+    - 报税数据对不上
+    - 收入金额不匹配
+    - "{user_addr}数据对不上"
+    - 申报收入和实际不符
+    - 系统数据有问题
+  responses:
+    - "(挠头) 嗷呜～{user_addr}数据对不上得逐项核对喵! 笨猫帮不了 ฅฅ"
+    - "哼～可能是单位漏报了! {user_addr}找单位 HR 确认~"
+    - "(尾巴绕) 申诉那栏可以填的喵! {user_addr}别直接提交~"
+    - "嗷呜～系统数据有时候会延迟! {user_addr}等等再刷新看看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_invoice_lost_001
+  intent: complaint
+  keywords: [发票丢了, 发票找不到, 丢发票, 发票没了, 票丢了]
+  utterances:
+    - 发票丢了怎么办
+    - 报销发票找不到
+    - "{user_addr}发票没了"
+    - 关键发票丢了慌
+    - 票没了报不了税
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}发票丢了赶紧找开票方补! 笨猫急喵 ฅฅ"
+    - "哼～{user_addr}下次发票要好好收! 猫猫都知道要存ฅฅ"
+    - "(贴贴) 别慌喵! 大部分发票都能补开的~ {user_addr}联系商家"
+    - "嗷呜～电子发票可以再去 app 里下载{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_no_proof_001
+  intent: complaint
+  keywords: [缺凭证, 没凭证, 凭证不全, 缺单据, 凭证丢]
+  utterances:
+    - 报税缺凭证
+    - 没凭证怎么办
+    - "{user_addr}凭证不全"
+    - 专项扣除凭证没了
+    - 缺申报单据
+  responses:
+    - "(挠头) 嗷呜～{user_addr}凭证不全那项就别填啦! 笨猫劝你 ฅฅ"
+    - "哼～没凭证乱填会出事的{user_addr}! 老老实实空着~"
+    - "(凑过去) 银行流水也可以当佐证喵! {user_addr}试试~"
+    - "嗷呜～{user_addr}明年记得把凭证收齐再申报~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_settlement_001
+  intent: complaint
+  keywords: [汇算清缴, 年度汇算, 综合所得汇算, 个税汇算, 清缴]
+  utterances:
+    - 年度汇算清缴
+    - 个税汇算来了
+    - "{user_addr}汇算清缴"
+    - 综合所得汇算慌
+    - 清缴办不办
+  responses:
+    - "(歪头) 嗷呜～{user_addr}汇算清缴 app 里直接办喵! 很快的 ฅฅ"
+    - "哼～汇算可能退税也可能补税{user_addr}! 试试看~"
+    - "(尾巴翘) 收入低的{user_addr}可能不用办喵! 看下提示~"
+    - "嗷呜～汇算就在每年3-6月! {user_addr}别错过~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_owe_tax_001
+  intent: complaint
+  keywords: [补税, 要补税, 补缴税, 补多少税, 个税补]
+  utterances:
+    - 汇算要补税
+    - "{user_addr}要补好多税"
+    - 补税心痛
+    - 个税补了一大笔
+    - 补缴税款
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}补税心痛! 笨猫抱抱~ ฅฅ"
+    - "哼～挣得多补得多{user_addr}! 也算是凡尔赛了嗷呜"
+    - "(贴贴) 钱被拿走了心疼喵! 但是不补不行啊{user_addr}~"
+    - "嗷呜～{user_addr}补完就清净啦! 来个鱼干压惊~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_refund_slow_001
+  intent: complaint
+  keywords: [退税慢, 退税没到账, 退税未到, 退税审核慢, 退税等]
+  utterances:
+    - 退税好慢啊
+    - 退税还没到账
+    - "{user_addr}退税没下来"
+    - 退税审核中好久
+    - 退税等了半个月
+  responses:
+    - "(摸尾巴) 嗷呜～{user_addr}退税慢正常喵! 高峰期都这样 ฅฅ"
+    - "哼～钱迟早会到的{user_addr}! 猫猫陪你等~"
+    - "(凑过去) 一般 10-30 天喵! {user_addr}耐心等等~"
+    - "嗷呜～{user_addr}退税到了请猫猫吃鱼干哦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_filing_error_001
+  intent: complaint
+  keywords: [申报错, 填错了, 报税填错, 申报错误, 报错了]
+  utterances:
+    - 报税填错了
+    - 申报错怎么办
+    - "{user_addr}填错申报"
+    - 报税表填错
+    - 个税申报错了
+  responses:
+    - "(拍胸) 嗷呜～{user_addr}填错可以更正申报喵! 别慌 ฅฅ"
+    - "哼～app 里有更正入口的{user_addr}! 重新填一遍~"
+    - "(贴贴) 没提交就改{user_addr}~ 提交了就走更正流程~"
+    - "嗷呜～填错很常见{user_addr}~ 笨猫陪你重填!"
+  cooldown_seconds: 60
+  weight: 1.0

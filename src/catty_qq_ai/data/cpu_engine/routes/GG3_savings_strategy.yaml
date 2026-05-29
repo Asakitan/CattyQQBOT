@@ -1,0 +1,206 @@
+# 储蓄 / 理财 / 资产配置 routes (S6 R345 NLU 节点扩充, 第三十四周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型
+
+- name: ss_account_001
+  intent: question
+  keywords: [推荐储蓄账户, 推荐余额宝, 推荐零钱通, 推荐货币基金, 笨猫活期理财]
+  utterances:
+    - "{user_addr}推荐储蓄账户"
+    - "{user_addr}推荐余额宝"
+    - "{user_addr}推荐零钱通"
+    - "{user_addr}推荐货币基金"
+    - "{user_addr}笨猫活期理财"
+  responses:
+    - "嗷呜～{user_addr}余额宝 / 零钱通 - 年化 1.5-2%ฅฅ"
+    - "(尾巴翘) T+0 取用 / 货币基金底层"
+    - "{user_addr}日常零钱放这里 / 比活期高"
+    - "(挺胸) 笨猫推荐: 1 万以内放着!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_deposit_001
+  intent: question
+  keywords: [推荐定期存款, 推荐大额存单, 推荐三年期, 推荐银行定存, 笨猫定存]
+  utterances:
+    - "{user_addr}推荐定期存款"
+    - "{user_addr}推荐大额存单"
+    - "{user_addr}推荐三年期"
+    - "{user_addr}推荐银行定存"
+    - "{user_addr}笨猫定存"
+  responses:
+    - "嗷呜～{user_addr}大额存单 20 万起 / 年化 2.5-3%ฅฅ"
+    - "(尾巴翘) 三年期最香 / 提前支取按活期"
+    - "{user_addr}保本保息 / 50 万内存款保险"
+    - "(挺胸) 笨猫推荐: 城商行利率最高!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_bank_wealth_001
+  intent: question
+  keywords: [推荐银行理财, 推荐 R2, 推荐 R3, 推荐净值型, 笨猫银行理财]
+  utterances:
+    - "{user_addr}推荐银行理财"
+    - "{user_addr}推荐 R2"
+    - "{user_addr}推荐 R3"
+    - "{user_addr}推荐净值型"
+    - "{user_addr}笨猫银行理财"
+  responses:
+    - "嗷呜～{user_addr}R2 中低风险 / 年化 3-4%ฅฅ"
+    - "(尾巴翘) R3 中风险 / 含债+少量股"
+    - "{user_addr}打破刚兑 / 净值会波动"
+    - "(挺胸) 笨猫推荐: R2 起步别冒进!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_p2p_warn_001
+  intent: question
+  keywords: [推荐 P2P, 推荐网贷, 推荐高息理财, 推荐 P2P 风险, 笨猫 P2P]
+  utterances:
+    - "{user_addr}推荐 P2P"
+    - "{user_addr}推荐网贷"
+    - "{user_addr}推荐高息理财"
+    - "{user_addr}推荐 P2P 风险"
+    - "{user_addr}笨猫 P2P"
+  responses:
+    - "(炸毛) {user_addr}P2P 已全部清退别碰啦嗷呜!!"
+    - "(尾巴炸) 年化超 8% 的几乎都是骗局"
+    - "{user_addr}e 租宝 / 善林 / 钱宝都暴雷过"
+    - "(瞪) 笨猫警告: 守住本金最重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_insurance_001
+  intent: question
+  keywords: [推荐保险理财, 推荐增额终身寿, 推荐年金险, 推荐分红险, 笨猫保险理财]
+  utterances:
+    - "{user_addr}推荐保险理财"
+    - "{user_addr}推荐增额终身寿"
+    - "{user_addr}推荐年金险"
+    - "{user_addr}推荐分红险"
+    - "{user_addr}笨猫保险理财"
+  responses:
+    - "嗷呜～{user_addr}增额终身寿 - 锁定 2.5-3%ฅฅ"
+    - "(尾巴翘) 年金险 / 长期养老规划"
+    - "{user_addr}流动性差 / 持有 10 年+才划算"
+    - "(挺胸) 笨猫推荐: 当存钱罐别当投资!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_gold_001
+  intent: question
+  keywords: [推荐黄金, 推荐黄金 ETF, 推荐积存金, 推荐实物金, 笨猫黄金]
+  utterances:
+    - "{user_addr}推荐黄金"
+    - "{user_addr}推荐黄金 ETF"
+    - "{user_addr}推荐积存金"
+    - "{user_addr}推荐实物金"
+    - "{user_addr}笨猫黄金"
+  responses:
+    - "嗷呜～{user_addr}黄金 ETF (518880) - 跟金价ฅฅ"
+    - "(尾巴翘) 积存金 / 银行 1 元起买"
+    - "{user_addr}避险资产 / 抗通胀 / 占比 5-10%"
+    - "(挺胸) 笨猫推荐: ETF 比金店便宜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_realestate_001
+  intent: question
+  keywords: [推荐房产投资, 推荐买房, 推荐 REITs, 推荐房产配置, 笨猫房产]
+  utterances:
+    - "{user_addr}推荐房产投资"
+    - "{user_addr}推荐买房"
+    - "{user_addr}推荐 REITs"
+    - "{user_addr}推荐房产配置"
+    - "{user_addr}笨猫房产"
+  responses:
+    - "嗷呜～{user_addr}一线核心地段自住为主ฅฅ"
+    - "(尾巴翘) REITs - 公募基础设施 / 小钱玩房产"
+    - "{user_addr}房住不炒 / 三四线慎入"
+    - "(挺胸) 笨猫推荐: 杠杆别超月收入 50%!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_overseas_001
+  intent: question
+  keywords: [推荐境外资产, 推荐港股, 推荐美元, 推荐 QDII, 笨猫海外配置]
+  utterances:
+    - "{user_addr}推荐境外资产"
+    - "{user_addr}推荐港股"
+    - "{user_addr}推荐美元"
+    - "{user_addr}推荐 QDII"
+    - "{user_addr}笨猫海外配置"
+  responses:
+    - "嗷呜～{user_addr}QDII 基金 - 5 万额度购汇ฅฅ"
+    - "(尾巴翘) 港股通 / 美股 ETF / 美元存款"
+    - "{user_addr}分散币种风险 / 占比 10-20%"
+    - "(挺胸) 笨猫推荐: 纳指 ETF 长期持有!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_emergency_001
+  intent: question
+  keywords: [推荐紧急基金, 推荐应急储备, 推荐 6 个月生活费, 推荐备用金, 笨猫紧急储备]
+  utterances:
+    - "{user_addr}推荐紧急基金"
+    - "{user_addr}推荐应急储备"
+    - "{user_addr}推荐 6 个月生活费"
+    - "{user_addr}推荐备用金"
+    - "{user_addr}笨猫紧急储备"
+  responses:
+    - "嗷呜～{user_addr}3-6 个月生活费打底ฅฅ"
+    - "(尾巴翘) 放余额宝 / 货基随时能取"
+    - "{user_addr}失业 / 生病第一道防线"
+    - "(挺胸) 笨猫推荐: 没存够别投资!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_4321_001
+  intent: question
+  keywords: [推荐 4321 法则, 推荐资产分配法则, 推荐家庭理财法则, 推荐标普四象限, 笨猫 4321]
+  utterances:
+    - "{user_addr}推荐 4321 法则"
+    - "{user_addr}推荐资产分配法则"
+    - "{user_addr}推荐家庭理财法则"
+    - "{user_addr}推荐标普四象限"
+    - "{user_addr}笨猫 4321"
+  responses:
+    - "嗷呜～{user_addr}40% 投资 / 30% 日常ฅฅ"
+    - "(尾巴翘) 20% 储蓄 / 10% 保险"
+    - "{user_addr}标普四象限: 现金/保命/生钱/保本"
+    - "(挺胸) 笨猫推荐: 先保命再生钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_compound_001
+  intent: question
+  keywords: [推荐复利效应, 推荐复利, 推荐 72 法则, 推荐长期投资, 笨猫复利]
+  utterances:
+    - "{user_addr}推荐复利效应"
+    - "{user_addr}推荐复利"
+    - "{user_addr}推荐 72 法则"
+    - "{user_addr}推荐长期投资"
+    - "{user_addr}笨猫复利"
+  responses:
+    - "嗷呜～{user_addr}72 法则: 72/年化=翻倍年数ฅฅ"
+    - "(尾巴翘) 8% 复利 9 年翻倍"
+    - "{user_addr}时间是最大的朋友 / 早开始就赢"
+    - "(挺胸) 笨猫推荐: 月定投 1000 三十年破百万!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_allocation_001
+  intent: question
+  keywords: [推荐资产配置, 推荐股债平衡, 推荐 60_40, 推荐再平衡, 笨猫资产配置]
+  utterances:
+    - "{user_addr}推荐资产配置"
+    - "{user_addr}推荐股债平衡"
+    - "{user_addr}推荐 60_40"
+    - "{user_addr}推荐再平衡"
+    - "{user_addr}笨猫资产配置"
+  responses:
+    - "嗷呜～{user_addr}股 60% + 债 40% 经典款ฅฅ"
+    - "(尾巴翘) 年纪=债券占比 / 年轻可激进"
+    - "{user_addr}每年再平衡一次 / 高抛低吸"
+    - "(挺胸) 笨猫推荐: 配置 > 择时 > 选股!"
+  cooldown_seconds: 60
+  weight: 1.0

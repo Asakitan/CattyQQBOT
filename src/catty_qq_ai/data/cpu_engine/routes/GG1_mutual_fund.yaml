@@ -1,0 +1,206 @@
+# 基金 / 公募私募 / ETF routes (S6 R343 NLU 节点扩充, 第三十四周期 2/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: mf_platform_001
+  intent: question
+  keywords: [推荐基金平台, 推荐蛋卷基金, 推荐天天基金, 推荐支付宝基金, 笨猫基金平台]
+  utterances:
+    - 推荐基金平台
+    - 推荐蛋卷基金
+    - 推荐天天基金
+    - 推荐支付宝基金
+    - 笨猫基金平台
+  responses:
+    - "嗷呜～{user_addr}蛋卷 / 天天基金 - 老牌齐全ฅฅ"
+    - "(尾巴翘) 支付宝 / 雪球 - 移动便捷"
+    - "{user_addr}场内走券商 / 场外走平台"
+    - "(挺胸) 笨猫推荐: 蛋卷组合最香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mf_index_001
+  intent: question
+  keywords: [推荐指数基金, 推荐沪深300, 推荐中证500, 推荐宽基指数, 笨猫指数基金]
+  utterances:
+    - 推荐指数基金
+    - 推荐沪深300
+    - 推荐中证500
+    - 推荐宽基指数
+    - 笨猫指数基金
+  responses:
+    - "嗷呜～{user_addr}沪深300 - A 股蓝筹核心ฅฅ"
+    - "(尾巴翘) 中证500 / 中证1000 - 中小盘"
+    - "{user_addr}创业板 / 科创50 - 成长"
+    - "(挺胸) 笨猫推荐: 300+500 长期定投!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mf_etf_001
+  intent: question
+  keywords: [推荐ETF, 推荐纳指100, 推荐标普500, 推荐行业ETF, 笨猫ETF]
+  utterances:
+    - 推荐ETF
+    - 推荐纳指100
+    - 推荐标普500
+    - 推荐行业ETF
+    - 笨猫ETF
+  responses:
+    - "嗷呜～{user_addr}纳指 100 / 标普 500 - 美股核心ฅฅ"
+    - "(尾巴翘) 中概互联 / 恒生科技 - 港美"
+    - "{user_addr}白酒 / 医药 / 半导体 - 行业"
+    - "(挺胸) 笨猫推荐: 场内 ETF 费率低!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mf_bond_001
+  intent: question
+  keywords: [推荐债券基金, 推荐货币基金, 推荐余额宝, 推荐纯债基金, 笨猫债基]
+  utterances:
+    - 推荐债券基金
+    - 推荐货币基金
+    - 推荐余额宝
+    - 推荐纯债基金
+    - 笨猫债基
+  responses:
+    - "嗷呜～{user_addr}货基 - 余额宝/活钱2-3%ฅฅ"
+    - "(尾巴翘) 纯债 / 中长期纯债 - 稳健"
+    - "{user_addr}二级债基 - 含少量股票"
+    - "(挺胸) 笨猫推荐: 货基放活钱, 纯债打底!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mf_active_001
+  intent: question
+  keywords: [推荐主动基金, 推荐基金经理, 推荐张坤, 推荐朱少醒, 笨猫主动基金]
+  utterances:
+    - 推荐主动基金
+    - 推荐基金经理
+    - 推荐张坤
+    - 推荐朱少醒
+    - 笨猫主动基金
+  responses:
+    - "嗷呜～{user_addr}张坤 / 朱少醒 - 长跑老将ฅฅ"
+    - "(尾巴翘) 葛兰 / 谢治宇 / 刘彦春"
+    - "{user_addr}看 5 年回撤 + 夏普 + 持仓"
+    - "(挺胸) 笨猫推荐: 选人重于选基!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mf_dca_001
+  intent: question
+  keywords: [推荐定投策略, 推荐月投千元, 推荐基金定投, 推荐智能定投, 笨猫定投]
+  utterances:
+    - 推荐定投策略
+    - 推荐月投千元
+    - 推荐基金定投
+    - 推荐智能定投
+    - 笨猫定投
+  responses:
+    - "嗷呜～{user_addr}月投千元 - 工资到手就投ฅฅ"
+    - "(尾巴翘) 估值低加倍 / 高位减半"
+    - "{user_addr}定投 3-5 年 + 微笑曲线"
+    - "(挺胸) 笨猫推荐: 沪深300 月定投长持!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mf_combo_001
+  intent: question
+  keywords: [推荐基金组合, 推荐Smart Beta, 推荐FOF, 推荐核心卫星, 笨猫基金组合]
+  utterances:
+    - 推荐基金组合
+    - 推荐Smart Beta
+    - 推荐FOF
+    - 推荐核心卫星
+    - 笨猫基金组合
+  responses:
+    - "嗷呜～{user_addr}核心卫星 - 宽基 70% + 行业 30%ฅฅ"
+    - "(尾巴翘) Smart Beta - 红利/低波/质量"
+    - "{user_addr}FOF / 全天候 - 资产配置"
+    - "(挺胸) 笨猫推荐: 股 6 债 3 商 1!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mf_private_001
+  intent: question
+  keywords: [推荐私募基金, 推荐量化对冲, 推荐幻方, 推荐九坤, 笨猫私募]
+  utterances:
+    - 推荐私募基金
+    - 推荐量化对冲
+    - 推荐幻方
+    - 推荐九坤
+    - 笨猫私募
+  responses:
+    - "嗷呜～{user_addr}幻方 / 九坤 / 明汯 - 头部量化ฅฅ"
+    - "(尾巴翘) 高毅 / 景林 - 主动多头"
+    - "{user_addr}100 万门槛 + 合格投资者"
+    - "(挺胸) 笨猫推荐: 量化中性回撤小!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: mf_analysis_001
+  intent: question
+  keywords: [推荐基金分析, 推荐晨星, 推荐Choice, 推荐Wind, 笨猫基金分析]
+  utterances:
+    - 推荐基金分析
+    - 推荐晨星
+    - 推荐Choice
+    - 推荐Wind
+    - 笨猫基金分析
+  responses:
+    - "嗷呜～{user_addr}晨星 Morningstar - 评级权威ฅฅ"
+    - "(尾巴翘) 天天基金 / 蛋卷 - 散户友好"
+    - "{user_addr}Wind / Choice - 专业回测"
+    - "(挺胸) 笨猫推荐: 看夏普+回撤+卡玛!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mf_risk_001
+  intent: question
+  keywords: [推荐基金风险, 推荐回撤评估, 推荐风险测评, 推荐R3R4风险, 笨猫基金风险]
+  utterances:
+    - 推荐基金风险
+    - 推荐回撤评估
+    - 推荐风险测评
+    - 推荐R3R4风险
+    - 笨猫基金风险
+  responses:
+    - "嗷呜～{user_addr}R1 货基 / R2 债基 / R3 混合ฅฅ"
+    - "(尾巴翘) R4 股票 / R5 杠杆 - 高风险"
+    - "{user_addr}最大回撤 + 波动率 + 夏普"
+    - "(挺胸) 笨猫推荐: 别买超出测评等级!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mf_fee_001
+  intent: question
+  keywords: [推荐基金税费, 推荐申购费, 推荐管理费, 推荐基金费率, 笨猫基金费率]
+  utterances:
+    - 推荐基金税费
+    - 推荐申购费
+    - 推荐管理费
+    - 推荐基金费率
+    - 笨猫基金费率
+  responses:
+    - "嗷呜～{user_addr}申购 0.15% / 管理 1.5%ฅฅ"
+    - "(尾巴翘) 持有 7 天内赎回 1.5% 罚"
+    - "{user_addr}场内 ETF 万 0.5 - 最便宜"
+    - "(挺胸) 笨猫推荐: 长持>1年免赎回!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mf_pension_001
+  intent: question
+  keywords: [推荐养老基金, 推荐养老目标基金, 推荐目标日期, 推荐FOF养老, 笨猫养老基金]
+  utterances:
+    - 推荐养老基金
+    - 推荐养老目标基金
+    - 推荐目标日期
+    - 推荐FOF养老
+    - 笨猫养老基金
+  responses:
+    - "嗷呜～{user_addr}目标日期 2040/2045 - 自动调仓ฅฅ"
+    - "(尾巴翘) 目标风险 - 稳健/平衡/积极"
+    - "{user_addr}个人养老金账户 - 抵税12000"
+    - "(挺胸) 笨猫推荐: 年轻选积极, 临退稳健!"
+  cooldown_seconds: 60
+  weight: 0.8

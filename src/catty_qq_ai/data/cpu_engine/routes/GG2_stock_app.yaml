@@ -1,0 +1,206 @@
+# 炒股 app / A 股美股港股 routes (S6 R344 NLU 节点扩充, 第三十四周期 3/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: sa_ashare_001
+  intent: question
+  keywords: [推荐 A 股 app, 推荐同花顺, 推荐东方财富, 推荐通达信, 笨猫 A 股 app]
+  utterances:
+    - 推荐 A 股 app
+    - 推荐同花顺
+    - 推荐东方财富
+    - 推荐通达信
+    - 笨猫 A 股 app
+  responses:
+    - "嗷呜～{user_addr}同花顺 - A 股老牌 No.1ฅฅ"
+    - "(尾巴翘) 东方财富 - 资讯 + 交易"
+    - "{user_addr}通达信 - 专业看盘"
+    - "(挺胸) 笨猫推荐: 同花顺日常 + 东财资讯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_usstock_001
+  intent: question
+  keywords: [推荐美股 app, 推荐富途牛牛, 推荐老虎证券, 推荐 Robinhood, 笨猫美股 app]
+  utterances:
+    - 推荐美股 app
+    - 推荐富途牛牛
+    - 推荐老虎证券
+    - 推荐 Robinhood
+    - 笨猫美股 app
+  responses:
+    - "嗷呜～{user_addr}富途牛牛 - 港美股神器ฅฅ"
+    - "(尾巴翘) 老虎 Tiger - 中文友好"
+    - "{user_addr}Robinhood / IBKR 盈透"
+    - "(挺胸) 笨猫推荐: 富途入门 + IBKR 进阶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_hkstock_001
+  intent: question
+  keywords: [推荐港股 app, 推荐雪盈, 推荐富途港股, 推荐华盛通, 笨猫港股]
+  utterances:
+    - 推荐港股 app
+    - 推荐雪盈
+    - 推荐富途港股
+    - 推荐华盛通
+    - 笨猫港股
+  responses:
+    - "嗷呜～{user_addr}富途 / 老虎 - 港股主流ฅฅ"
+    - "(尾巴翘) 雪盈证券 - 雪球旗下"
+    - "{user_addr}华盛通 / 耀才 / 辉立"
+    - "(挺胸) 笨猫推荐: 富途港美一站式!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_quant_001
+  intent: question
+  keywords: [推荐量化交易, 推荐 iQuant, 推荐雪球量化, 推荐聚宽, 笨猫量化]
+  utterances:
+    - 推荐量化交易
+    - 推荐 iQuant
+    - 推荐雪球量化
+    - 推荐聚宽
+    - 笨猫量化
+  responses:
+    - "嗷呜～{user_addr}聚宽 JoinQuant - 入门首选ฅฅ"
+    - "(尾巴翘) 米筐 RiceQuant / 优矿"
+    - "{user_addr}vnpy 开源 / Backtrader"
+    - "(挺胸) 笨猫推荐: 聚宽学策略 + vnpy 实盘!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sa_learn_001
+  intent: question
+  keywords: [推荐投资学习, 推荐雪球社区, 推荐东方财富吧, 推荐股票入门, 笨猫投资学习]
+  utterances:
+    - 推荐投资学习
+    - 推荐雪球社区
+    - 推荐东方财富吧
+    - 推荐股票入门
+    - 笨猫投资学习
+  responses:
+    - "嗷呜～{user_addr}雪球 - 投资社区龙头ฅฅ"
+    - "(尾巴翘) 东方财富股吧 / 知乎"
+    - "{user_addr}《聪明的投资者》《股票作手》"
+    - "(挺胸) 笨猫推荐: 先看书再开户!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_kline_001
+  intent: question
+  keywords: [推荐 K 线分析, 推荐技术分析, 推荐均线, 推荐 MACD, 笨猫 K 线]
+  utterances:
+    - 推荐 K 线分析
+    - 推荐技术分析
+    - 推荐均线
+    - 推荐 MACD
+    - 笨猫 K 线
+  responses:
+    - "嗷呜～{user_addr}日 K + 周 K + 月 K 三维度ฅฅ"
+    - "(尾巴翘) MA5/MA20/MA60 均线"
+    - "{user_addr}MACD / KDJ / BOLL 三件套"
+    - "(挺胸) 笨猫提醒: 技术分析只是参考!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sa_fundamental_001
+  intent: question
+  keywords: [推荐基本面分析, 推荐财报分析, 推荐 PE PB, 推荐 ROE, 笨猫基本面]
+  utterances:
+    - 推荐基本面分析
+    - 推荐财报分析
+    - 推荐 PE PB
+    - 推荐 ROE
+    - 笨猫基本面
+  responses:
+    - "嗷呜～{user_addr}PE 市盈率 + PB 市净率ฅฅ"
+    - "(尾巴翘) ROE > 15% 是好公司"
+    - "{user_addr}年报 / 季报 / 现金流"
+    - "(挺胸) 笨猫推荐: 长期看基本面!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_value_001
+  intent: question
+  keywords: [推荐价值投资, 推荐巴菲特, 推荐芒格, 推荐长期持有, 笨猫价值投资]
+  utterances:
+    - 推荐价值投资
+    - 推荐巴菲特
+    - 推荐芒格
+    - 推荐长期持有
+    - 笨猫价值投资
+  responses:
+    - "嗷呜～{user_addr}巴菲特《致股东信》必读ฅฅ"
+    - "(尾巴翘) 护城河 + 安全边际 + 复利"
+    - "{user_addr}买股票 = 买公司股权"
+    - "(挺胸) 笨猫推荐: 时间是朋友!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_ipo_001
+  intent: question
+  keywords: [推荐打新股, 推荐 IPO, 推荐新股申购, 推荐港股打新, 笨猫打新]
+  utterances:
+    - 推荐打新股
+    - 推荐 IPO
+    - 推荐新股申购
+    - 推荐港股打新
+    - 笨猫打新
+  responses:
+    - "嗷呜～{user_addr}A 股打新 - 市值门槛ฅฅ"
+    - "(尾巴翘) 港股打新 - 现金 / 融资"
+    - "{user_addr}科创板 / 创业板需开通"
+    - "(挺胸) 笨猫提醒: 新股也会破发!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sa_futures_001
+  intent: question
+  keywords: [推荐期货, 推荐外汇, 推荐高杠杆, 推荐衍生品, 笨猫期货]
+  utterances:
+    - 推荐期货
+    - 推荐外汇
+    - 推荐高杠杆
+    - 推荐衍生品
+    - 笨猫期货
+  responses:
+    - "嗷呜～{user_addr}期货高杠杆高风险ฅฅ"
+    - "(尾巴翘) 文华财经 / 博易大师"
+    - "{user_addr}外汇 MT4 / MT5"
+    - "(警告) 笨猫提醒: 小白远离!爆仓血本无归!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sa_stoploss_001
+  intent: question
+  keywords: [推荐止损, 推荐止盈, 推荐风险控制, 推荐仓位管理, 笨猫止损]
+  utterances:
+    - 推荐止损
+    - 推荐止盈
+    - 推荐风险控制
+    - 推荐仓位管理
+    - 笨猫止损
+  responses:
+    - "嗷呜～{user_addr}止损 -7% 铁律ฅฅ"
+    - "(尾巴翘) 止盈分批 / 移动止盈"
+    - "{user_addr}单只仓位 < 20%"
+    - "(挺胸) 笨猫推荐: 活下来比赚钱重要!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_psychology_001
+  intent: question
+  keywords: [推荐避免追涨杀跌, 推荐情绪控制, 推荐定投, 推荐反人性, 笨猫炒股心态]
+  utterances:
+    - 推荐避免追涨杀跌
+    - 推荐情绪控制
+    - 推荐定投
+    - 推荐反人性
+    - 笨猫炒股心态
+  responses:
+    - "嗷呜～{user_addr}追涨杀跌 = 韭菜典型ฅฅ"
+    - "(尾巴翘) 别人贪婪我恐惧"
+    - "{user_addr}定投 ETF 最反人性"
+    - "(挺胸) 笨猫推荐: 闲钱 + 长期 + 不看!"
+  cooldown_seconds: 60
+  weight: 0.9

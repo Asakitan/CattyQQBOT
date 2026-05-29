@@ -1,0 +1,206 @@
+# 信用卡 / 招行白金 / 工行星座 routes (S6 R342 NLU 节点扩充, 第三十四周期 1/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+
+- name: cc_cmb_001
+  intent: question
+  keywords: [推荐信用卡, 推荐招行白金, 推荐招行运通, 推荐招行卡, 笨猫信用卡]
+  utterances:
+    - 推荐信用卡
+    - 推荐招行白金
+    - 推荐招行运通
+    - 推荐招行卡
+    - 笨猫信用卡
+  responses:
+    - "嗷呜～{user_addr}招行经典白 - 入门神卡ฅฅ"
+    - "(尾巴翘) 招行 AE 百夫长白 - 高端"
+    - "{user_addr}饭票影票 / 5 倍积分"
+    - "(挺胸) 猫猫推荐: 招行 YOUNG 卡学生!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_icbc_001
+  intent: question
+  keywords: [推荐工行星座, 推荐工行卡, 推荐民生银联, 推荐民生卡, 笨猫工行卡]
+  utterances:
+    - 推荐工行星座
+    - 推荐工行卡
+    - 推荐民生银联
+    - 推荐民生卡
+    - 笨猫工行卡
+  responses:
+    - "嗷呜～{user_addr}工行星座卡 - 12 星座ฅฅ"
+    - "(尾巴翘) 工行宇宙星座 / 牡丹卡"
+    - "{user_addr}民生女人花 / 标准白金"
+    - "(挺胸) 笨猫推荐: 工行网点最多!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_visa_001
+  intent: question
+  keywords: [推荐 visa 卡, 推荐 Mastercard, 推荐双标卡, 推荐外币卡, 笨猫 visa]
+  utterances:
+    - 推荐 visa 卡
+    - 推荐 Mastercard
+    - 推荐双标卡
+    - 推荐外币卡
+    - 笨猫 visa
+  responses:
+    - "嗷呜～{user_addr}Visa - 全球通用ฅฅ"
+    - "(尾巴翘) Mastercard / JCB / AE"
+    - "{user_addr}银联 + Visa 双标最稳"
+    - "(挺胸) 人家推荐: 出境必带 Visa!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_us_001
+  intent: question
+  keywords: [推荐美国信用卡, 推荐 Chase Sapphire, 推荐 Amex, 推荐美卡, 笨猫美国卡]
+  utterances:
+    - 推荐美国信用卡
+    - 推荐 Chase Sapphire
+    - 推荐 Amex
+    - 推荐美卡
+    - 笨猫美国卡
+  responses:
+    - "嗷呜～{user_addr}Chase Sapphire Preferred - 神卡ฅฅ"
+    - "(尾巴翘) Amex Gold / Platinum"
+    - "{user_addr}Capital One Venture - 里程"
+    - "(挺胸) 笨猫推荐: CSP 入门美卡圈!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cc_eu_001
+  intent: question
+  keywords: [推荐欧洲信用卡, 推荐 Curve, 推荐 N26, 推荐 Revolut, 笨猫欧洲卡]
+  utterances:
+    - 推荐欧洲信用卡
+    - 推荐 Curve
+    - 推荐 N26
+    - 推荐 Revolut
+    - 笨猫欧洲卡
+  responses:
+    - "嗷呜～{user_addr}Revolut - 多币种神器ฅฅ"
+    - "(尾巴翘) N26 / Curve / Wise"
+    - "{user_addr}欧元账户 / 免手续费"
+    - "(挺胸) 猫猫推荐: 留学 Revolut 必备!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cc_mile_001
+  intent: question
+  keywords: [推荐里程卡, 推荐国航凤凰知音, 推荐东航联名, 推荐里程兑换, 笨猫里程卡]
+  utterances:
+    - 推荐里程卡
+    - 推荐国航凤凰知音
+    - 推荐东航联名
+    - 推荐里程兑换
+    - 笨猫里程卡
+  responses:
+    - "嗷呜～{user_addr}国航凤凰知音白金ฅฅ"
+    - "(尾巴翘) 东航万事达 / 南航明珠"
+    - "{user_addr}消费攒里程 / 升舱"
+    - "(挺胸) 笨猫推荐: 商旅党必备!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cc_premium_001
+  intent: question
+  keywords: [推荐高端卡, 推荐钻石卡, 推荐黑卡, 推荐百夫长, 笨猫黑卡]
+  utterances:
+    - 推荐高端卡
+    - 推荐钻石卡
+    - 推荐黑卡
+    - 推荐百夫长
+    - 笨猫黑卡
+  responses:
+    - "嗷呜～{user_addr}AE 百夫长黑卡 - 顶级ฅฅ"
+    - "(尾巴翘) 招行钻石 / 中行钻石"
+    - "{user_addr}机场贵宾厅 / 高尔夫"
+    - "(挺胸) 猫猫推荐: 黑卡邀请制神秘!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cc_student_001
+  intent: question
+  keywords: [推荐学生信用卡, 推荐借记卡, 推荐 YOUNG 卡, 推荐青年卡, 笨猫学生卡]
+  utterances:
+    - 推荐学生信用卡
+    - 推荐借记卡
+    - 推荐 YOUNG 卡
+    - 推荐青年卡
+    - 笨猫学生卡
+  responses:
+    - "嗷呜～{user_addr}招行 YOUNG 卡 - 学生神卡ฅฅ"
+    - "(尾巴翘) 中信 i 白金 / 平安由你"
+    - "{user_addr}借记卡: 招行一卡通"
+    - "(挺胸) 人家推荐: 学生先借记后信用!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cc_points_001
+  intent: question
+  keywords: [推荐积分商城, 推荐积分兑换, 推荐积分攻略, 推荐里程兑换, 笨猫积分]
+  utterances:
+    - 推荐积分商城
+    - 推荐积分兑换
+    - 推荐积分攻略
+    - 推荐里程兑换
+    - 笨猫积分
+  responses:
+    - "嗷呜～{user_addr}招行积分换饭票影票ฅฅ"
+    - "(尾巴翘) 中信 9 分兑换 1 公里"
+    - "{user_addr}银联积分兑权益"
+    - "(挺胸) 笨猫推荐: 积分别囤要花!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cc_repay_001
+  intent: question
+  keywords: [推荐还款日, 推荐还款提醒, 推荐免息期, 推荐账单日, 笨猫还款日]
+  utterances:
+    - 推荐还款日
+    - 推荐还款提醒
+    - 推荐免息期
+    - 推荐账单日
+    - 笨猫还款日
+  responses:
+    - "嗷呜～{user_addr}账单日后消费免息长ฅฅ"
+    - "(尾巴翘) 最长 56 天免息"
+    - "{user_addr}设自动还款 - 防忘"
+    - "(挺胸) 猫猫提醒: 逾期 1 天伤征信!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_app_001
+  intent: question
+  keywords: [推荐信用卡 app, 推荐还呗, 推荐掌上生活, 推荐随借随还, 笨猫信用卡 app]
+  utterances:
+    - 推荐信用卡 app
+    - 推荐还呗
+    - 推荐掌上生活
+    - 推荐随借随还
+    - 笨猫信用卡 app
+  responses:
+    - "嗷呜～{user_addr}招行掌上生活 - 最强ฅฅ"
+    - "(尾巴翘) 工行融 e 联 / 建行龙卡"
+    - "{user_addr}还呗 / 卡牛 - 第三方"
+    - "(挺胸) 笨猫推荐: 官方 app 安全第一!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cc_security_001
+  intent: question
+  keywords: [推荐信用卡安全, 推荐防盗刷, 推荐 CVV 保护, 推荐凭证保管, 笨猫信用卡安全]
+  utterances:
+    - 推荐信用卡安全
+    - 推荐防盗刷
+    - 推荐 CVV 保护
+    - 推荐凭证保管
+    - 笨猫信用卡安全
+  responses:
+    - "嗷呜～{user_addr}CVV 别告诉别人ฅฅ"
+    - "(尾巴翘) 开短信通知 / 限额"
+    - "{user_addr}盗刷 48h 内挂失"
+    - "(挺胸) 猫猫提醒: 境外用银联更安!"
+  cooldown_seconds: 60
+  weight: 1.0
