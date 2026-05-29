@@ -1,0 +1,206 @@
+# 语言交换 / HelloTalk / Tandem routes (S6 R556 NLU 节点扩充, 第五十五周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: le_hellotalk_001
+  intent: question
+  keywords: [推荐HelloTalk, 推荐语言交换, 推荐找语伴, 推荐外语聊天, 笨猫HelloTalk]
+  utterances:
+    - 推荐HelloTalk
+    - 推荐语言交换
+    - 推荐找语伴
+    - 推荐外语聊天
+    - 笨猫HelloTalk
+  responses:
+    - "嗷呜～{user_addr}HelloTalk - 全球语伴ฅฅ"
+    - "(尾巴翘) 文字 / 语音 / 视频 / 朋友圈"
+    - "{user_addr}免费 + VIP / 实时翻译"
+    - "(挺胸) 笨猫推荐: 找母语者聊!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_tandem_001
+  intent: question
+  keywords: [推荐Tandem, 推荐Tandem语伴, 推荐欧美语伴, 推荐 Tandem App, 笨猫Tandem]
+  utterances:
+    - "{user_addr}推荐Tandem"
+    - 推荐Tandem语伴
+    - 推荐欧美语伴
+    - 推荐 Tandem App
+    - 笨猫Tandem
+  responses:
+    - "嗷呜～{user_addr}Tandem - 欧美主流ฅฅ"
+    - "(尾巴翘) 审核严格 / 质量高"
+    - "{user_addr}文字 + 通话 / 翻译辅助"
+    - "(挺胸) 笨猫推荐: 学英语德语首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_italki_001
+  intent: question
+  keywords: [推荐italki, 推荐1对1外教, 推荐在线外教, 推荐付费语伴, 笨猫italki]
+  utterances:
+    - 推荐italki
+    - 推荐1对1外教
+    - 推荐在线外教
+    - 推荐付费语伴
+    - 笨猫italki
+  responses:
+    - "嗷呜～{user_addr}italki - 1对1外教ฅฅ"
+    - "(尾巴翘) 专业老师 / 社区老师"
+    - "{user_addr}按课时付费 / 试听课"
+    - "(挺胸) 笨猫推荐: 想认真学就上!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_cambly_001
+  intent: question
+  keywords: [推荐Cambly, 推荐英语30分钟, 推荐随时外教, 推荐英语口语App, 笨猫Cambly]
+  utterances:
+    - 推荐Cambly
+    - 推荐英语30分钟
+    - 推荐随时外教
+    - 推荐英语口语App
+    - 笨猫Cambly
+  responses:
+    - "嗷呜～{user_addr}Cambly - 随时连线外教ฅฅ"
+    - "(尾巴翘) 母语外教 / 自动录像复盘"
+    - "{user_addr}按分钟订阅 / 适合口语"
+    - "(挺胸) 笨猫推荐: 30 分钟练嘴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_speakly_001
+  intent: question
+  keywords: [推荐Speakly, 推荐口语提升, 推荐沉浸式语言, 推荐语言App, 笨猫Speakly]
+  utterances:
+    - 推荐Speakly
+    - 推荐口语提升
+    - 推荐沉浸式语言
+    - 推荐语言App
+    - 笨猫Speakly
+  responses:
+    - "嗷呜～{user_addr}Speakly - 沉浸式口语ฅฅ"
+    - "(尾巴翘) 高频词驱动 / 真实场景"
+    - "{user_addr}听说为主 / 进度明确"
+    - "(挺胸) 笨猫推荐: 想开口就练!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_pimsleur_001
+  intent: question
+  keywords: [推荐Pimsleur, 推荐听说训练, 推荐音频学语言, 推荐通勤学外语, 笨猫Pimsleur]
+  utterances:
+    - 推荐Pimsleur
+    - 推荐听说训练
+    - 推荐音频学语言
+    - 推荐通勤学外语
+    - 笨猫Pimsleur
+  responses:
+    - "嗷呜～{user_addr}Pimsleur - 听说经典ฅฅ"
+    - "(尾巴翘) 30 分钟音频 / 间隔重复"
+    - "{user_addr}通勤路上听 / 不用看屏幕"
+    - "(挺胸) 笨猫推荐: 入门最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_drops_001
+  intent: question
+  keywords: [推荐Drops, 推荐背单词, 推荐词汇App, 推荐每天5分钟, 笨猫Drops]
+  utterances:
+    - 推荐Drops
+    - 推荐背单词
+    - 推荐词汇App
+    - 推荐每天5分钟
+    - 笨猫Drops
+  responses:
+    - "嗷呜～{user_addr}Drops - 词汇游戏化ฅฅ"
+    - "(尾巴翘) 每天 5 分钟 / 图像记忆"
+    - "{user_addr}支持小语种 / 界面漂亮"
+    - "(挺胸) 笨猫推荐: 摸鱼也能背!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_anki_001
+  intent: question
+  keywords: [推荐Anki, 推荐闪卡复习, 推荐间隔重复, 推荐自制词卡, 笨猫Anki]
+  utterances:
+    - 推荐Anki
+    - 推荐闪卡复习
+    - 推荐间隔重复
+    - 推荐自制词卡
+    - 笨猫Anki
+  responses:
+    - "嗷呜～{user_addr}Anki - 闪卡神器ฅฅ"
+    - "(尾巴翘) SRS 间隔重复 / 自定义"
+    - "{user_addr}牌组共享 / 跨平台同步"
+    - "(挺胸) 笨猫推荐: 长期记忆王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_lang8_001
+  intent: question
+  keywords: [推荐Lang-8, 推荐写作纠错, 推荐 HiNative, 推荐母语者批改, 笨猫Lang8]
+  utterances:
+    - "{user_addr}推荐Lang-8"
+    - 推荐写作纠错
+    - 推荐 HiNative
+    - 推荐母语者批改
+    - 笨猫Lang8
+  responses:
+    - "嗷呜～{user_addr}Lang-8 / HiNative - 写作批改ฅฅ"
+    - "(尾巴翘) 母语者免费改 / 互助文化"
+    - "{user_addr}写日记 / 问短句怎么说"
+    - "(挺胸) 笨猫推荐: 写作必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_lingoda_001
+  intent: question
+  keywords: [推荐Lingoda, 推荐群课, 推荐小班课, 推荐马拉松课程, 笨猫Lingoda]
+  utterances:
+    - 推荐Lingoda
+    - 推荐群课
+    - 推荐小班课
+    - 推荐马拉松课程
+    - 笨猫Lingoda
+  responses:
+    - "嗷呜～{user_addr}Lingoda - 小班群课ฅฅ"
+    - "(尾巴翘) 7 天 24 小时排课"
+    - "{user_addr}Marathon 全勤返现 / CEFR 体系"
+    - "(挺胸) 笨猫推荐: 想系统学就报!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_offline_001
+  intent: question
+  keywords: [推荐面对面语言交换, 推荐线下语伴, 推荐 Meetup 语言, 推荐外语角, 笨猫线下语伴]
+  utterances:
+    - 推荐面对面语言交换
+    - 推荐线下语伴
+    - 推荐 Meetup 语言
+    - 推荐外语角
+    - 笨猫线下语伴
+  responses:
+    - "嗷呜～{user_addr}Meetup / 外语角 - 面对面ฅฅ"
+    - "(尾巴翘) 咖啡馆 / 图书馆 / 大学"
+    - "{user_addr}约 1 对 1 互教 30 分钟"
+    - "(挺胸) 笨猫推荐: 真人最快上手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: le_school_001
+  intent: question
+  keywords: [推荐短期游学, 推荐Language School, 推荐海外语言学校, 推荐马耳他游学, 笨猫游学]
+  utterances:
+    - 推荐短期游学
+    - 推荐Language School
+    - 推荐海外语言学校
+    - 推荐马耳他游学
+    - 笨猫游学
+  responses:
+    - "嗷呜～{user_addr}短期游学 - 沉浸式杀手锏ฅฅ"
+    - "(尾巴翘) 马耳他 / 爱尔兰 / 加拿大"
+    - "{user_addr}2-4 周 / 课程 + 寄宿家庭"
+    - "(挺胸) 笨猫推荐: 攒钱去一次!"
+  cooldown_seconds: 60
+  weight: 1.0

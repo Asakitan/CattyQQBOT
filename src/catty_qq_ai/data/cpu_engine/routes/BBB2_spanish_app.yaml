@@ -1,0 +1,206 @@
+# 学西语 / DELE / 应用 routes (S6 R554 NLU 节点扩充, 第五十五周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sp_app_001
+  intent: question
+  keywords: [推荐西语 app, 推荐学西班牙语 app, 推荐 Duolingo, 推荐西语软件, 笨猫西语 app]
+  utterances:
+    - 推荐西语 app
+    - 推荐学西班牙语 app
+    - 推荐 Duolingo
+    - 推荐西语软件
+    - 笨猫西语 app
+  responses:
+    - "嗷呜～{user_addr}Duolingo - 入门趣味ฅฅ"
+    - "(尾巴翘) Busuu / Babbel - 系统课"
+    - "{user_addr}HelloTalk - 找母语者聊"
+    - "(挺胸) 猫猫推荐: Duolingo 打卡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_dele_001
+  intent: question
+  keywords: [推荐 DELE, 推荐 DELE 考试, 推荐 DELE A1, 推荐 DELE B2, 笨猫 DELE]
+  utterances:
+    - 推荐 DELE
+    - 推荐 DELE 考试
+    - 推荐 DELE A1
+    - 推荐 DELE B2
+    - 笨猫 DELE
+  responses:
+    - "嗷呜～{user_addr}DELE 塞万提斯学院官方ฅฅ"
+    - "(尾巴翘) A1-C2 六级, 终身有效"
+    - "{user_addr}B2 是留学/工作分水岭"
+    - "(挺胸) 笨猫推荐: 先 A2 试水!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_memrise_001
+  intent: question
+  keywords: [推荐西语单词, 推荐 Memrise, 推荐 Anki 西语, 推荐西语词汇, 笨猫西语单词]
+  utterances:
+    - 推荐西语单词
+    - 推荐 Memrise
+    - 推荐 Anki 西语
+    - 推荐西语词汇
+    - 笨猫西语单词
+  responses:
+    - "嗷呜～{user_addr}Memrise - 真人视频带读ฅฅ"
+    - "(尾巴翘) Anki - 间隔重复神器"
+    - "{user_addr}Quizlet - 卡片记忆"
+    - "(挺胸) 人家推荐: Memrise + Anki!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_movie_001
+  intent: question
+  keywords: [推荐西语电影, 推荐阿莫多瓦, 推荐西班牙电影, 推荐拉美电影, 笨猫西语电影]
+  utterances:
+    - 推荐西语电影
+    - 推荐阿莫多瓦
+    - 推荐西班牙电影
+    - 推荐拉美电影
+    - 笨猫西语电影
+  responses:
+    - "嗷呜～{user_addr}阿莫多瓦《对她说》ฅฅ"
+    - "(尾巴翘) 《潘神的迷宫》/《看不见的客人》"
+    - "{user_addr}《罗马》- 墨西哥黑白经典"
+    - "(挺胸) 笨猫推荐: 阿莫多瓦入坑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_speaking_001
+  intent: question
+  keywords: [推荐西语口语, 推荐 Pimsleur, 推荐西语听说, 推荐口语练习, 笨猫西语口语]
+  utterances:
+    - 推荐西语口语
+    - 推荐 Pimsleur
+    - 推荐西语听说
+    - 推荐口语练习
+    - 笨猫西语口语
+  responses:
+    - "嗷呜～{user_addr}Pimsleur - 听说沉浸ฅฅ"
+    - "(尾巴翘) italki - 1v1 外教课"
+    - "{user_addr}Tandem - 语伴交换"
+    - "(挺胸) 猫猫推荐: Pimsleur 打底!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_tvshow_001
+  intent: question
+  keywords: [推荐西语综艺, 推荐西班牙剧, 推荐西语电视剧, 推荐 Money Heist, 笨猫西语剧]
+  utterances:
+    - 推荐西语综艺
+    - 推荐西班牙剧
+    - 推荐西语电视剧
+    - 推荐 Money Heist
+    - 笨猫西语剧
+  responses:
+    - "嗷呜～{user_addr}《纸钞屋》La Casa de Papelฅฅ"
+    - "(尾巴翘) 《精英》Élite - 校园剧"
+    - "{user_addr}《名校风暴》/《时间的针脚》"
+    - "(挺胸) 笨猫推荐: 纸钞屋追!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_variant_001
+  intent: question
+  keywords: [推荐拉美西语, 推荐欧洲西语, 推荐西语口音, 推荐 ll 发音, 笨猫西语口音]
+  utterances:
+    - 推荐拉美西语
+    - 推荐欧洲西语
+    - 推荐西语口音
+    - 推荐 ll 发音
+    - 笨猫西语口音
+  responses:
+    - "嗷呜～{user_addr}欧洲西语 - DELE 标准ฅฅ"
+    - "(尾巴翘) 拉美西语 - 使用人口多"
+    - "{user_addr}vosotros vs ustedes 差异"
+    - "(挺胸) 猫猫建议: 留学西班牙选欧洲!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_music_001
+  intent: question
+  keywords: [推荐西语音乐, 推荐 Latin Pop, 推荐 Shakira, 推荐 Despacito, 笨猫西语歌]
+  utterances:
+    - 推荐西语音乐
+    - 推荐 Latin Pop
+    - 推荐 Shakira
+    - 推荐 Despacito
+    - 笨猫西语歌
+  responses:
+    - "嗷呜～{user_addr}Shakira / Enrique Iglesiasฅฅ"
+    - "(尾巴翘) Despacito / Bailando 神曲"
+    - "{user_addr}Rosalía - 西班牙新锐"
+    - "(挺胸) 笨猫推荐: Despacito 启蒙!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_youtube_001
+  intent: question
+  keywords: [推荐西语博主, 推荐西语 YouTube, 推荐 Dreaming Spanish, 推荐西语频道, 笨猫西语 up]
+  utterances:
+    - 推荐西语博主
+    - 推荐西语 YouTube
+    - 推荐 Dreaming Spanish
+    - 推荐西语频道
+    - 笨猫西语 up
+  responses:
+    - "嗷呜～{user_addr}Dreaming Spanish - 沉浸输入ฅฅ"
+    - "(尾巴翘) Butterfly Spanish / SpanishPod101"
+    - "{user_addr}Easy Spanish - 街采系列"
+    - "(挺胸) 人家推荐: Dreaming Spanish!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_listening_001
+  intent: question
+  keywords: [推荐西语听力, 推荐 BBC Mundo, 推荐西语新闻, 推荐西语播客, 笨猫西语听力]
+  utterances:
+    - 推荐西语听力
+    - 推荐 BBC Mundo
+    - 推荐西语新闻
+    - 推荐西语播客
+    - 笨猫西语听力
+  responses:
+    - "嗷呜～{user_addr}BBC Mundo - 标准西语ฅฅ"
+    - "(尾巴翘) RTVE / CNN Español"
+    - "{user_addr}Notes in Spanish 播客"
+    - "(挺胸) 笨猫推荐: BBC Mundo 每日听!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_grammar_001
+  intent: question
+  keywords: [推荐西语语法, 推荐西语语法书, 推荐现西, 推荐走遍西班牙, 笨猫西语语法]
+  utterances:
+    - 推荐西语语法
+    - 推荐西语语法书
+    - 推荐现西
+    - 推荐走遍西班牙
+    - 笨猫西语语法
+  responses:
+    - "嗷呜～{user_addr}《现代西班牙语》董燕生ฅฅ"
+    - "(尾巴翘) 《走遍西班牙》西班牙原版"
+    - "{user_addr}《速成西班牙语》入门快"
+    - "(挺胸) 猫猫推荐: 现西打底!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_plan_001
+  intent: question
+  keywords: [推荐西语自学, 推荐西语计划, 推荐西语学习路线, 推荐零基础西语, 笨猫西语自学]
+  utterances:
+    - 推荐西语自学
+    - 推荐西语计划
+    - 推荐西语学习路线
+    - 推荐零基础西语
+    - 笨猫西语自学
+  responses:
+    - "嗷呜～{user_addr}发音 → 现西1册 → A2ฅฅ"
+    - "(尾巴翘) 每日 Duolingo + Anki 词汇"
+    - "{user_addr}B1 起追剧 + 播客输入"
+    - "(挺胸) 笨猫建议: 半年冲 A2!"
+  cooldown_seconds: 60
+  weight: 1.0

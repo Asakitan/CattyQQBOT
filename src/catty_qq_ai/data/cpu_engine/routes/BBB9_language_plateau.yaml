@@ -1,0 +1,206 @@
+# 语言瓶颈 / 中级停滞 / B2 卡死 routes (S6 R561 NLU 节点扩充, 第五十五周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: lp_plateau_001
+  intent: complaint
+  keywords: [语言瓶颈, 学不动了, 卡住了, 上不去, 进不去]
+  utterances:
+    - "{user_addr}语言学习遇到瓶颈了"
+    - 学不动了感觉
+    - 卡在一个水平上不去
+    - 怎么学都进不去
+    - 语言瓶颈期好难受
+  responses:
+    - "(尾巴垂下来) 瓶颈期最磨人了喵～{user_addr}别硬撑, 猫猫陪你缓缓ฅฅ"
+    - "嗷呜～{user_addr}已经到瓶颈说明走过初级了! 笨猫觉得很厉害"
+    - "(贴贴) 卡住正常的喵, 笨猫学猫语也卡过呢哼"
+    - "{user_addr}先放一放嘛～有时候停下来反而能突破喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_intermediate_stuck_001
+  intent: complaint
+  keywords: [中级停滞, 中级卡住, intermediate, 中间水平, 不上不下]
+  utterances:
+    - 中级停滞期
+    - 卡在中级
+    - intermediate 上不去
+    - 不上不下最难受
+    - 中间水平卡死了
+  responses:
+    - "(歪头) 中级最尴尬了喵～{user_addr}够用但不精, 笨猫懂这种感觉"
+    - "嗷呜～中级停滞是大坎, {user_addr}撑过去就海阔天空了ฅฅ"
+    - "(尾巴绕) 不上不下才是真正在学{user_addr}～别小看自己"
+    - "哼～{user_addr}已经是中级了已经超过很多人喵, 慢慢来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_b2_stuck_001
+  intent: complaint
+  keywords: [B2 卡死, B2 上不去, B2 瓶颈, 卡 B2, B2 过不去]
+  utterances:
+    - B2 卡死了
+    - B2 怎么都上不去
+    - 卡在 B2 一年了
+    - B2 瓶颈期
+    - B2 过不去 C1
+  responses:
+    - "(挠头) B2 到 C1 是天堑喵～{user_addr}别急, 这一关大家都卡"
+    - "嗷呜～卡 B2 说明{user_addr}已经能用了! 笨猫觉得很棒ฅฅ"
+    - "(尾巴翘) B2 是能交流的水平了, {user_addr}该自豪喵"
+    - "哼～B2 卡一两年正常的{user_addr}, 笨猫不许你放弃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_listen_speak_ok_001
+  intent: complaint
+  keywords: [听说没问题但读写难, 读写不行, 听说还行, 读写跟不上, 读写差]
+  utterances:
+    - 听说没问题但读写难
+    - 听说还行读写不行
+    - "{user_addr}读写跟不上"
+    - 读写比听说差远了
+    - 读写一直突破不了
+  responses:
+    - "(歪头) 听说和读写是两套系统喵～{user_addr}补读写需要专门练"
+    - "嗷呜～{user_addr}听说能行说明语感有了! 读写就差刻意训练ฅฅ"
+    - "(尾巴绕) 读写慢慢来嘛, {user_addr}每天读一点点就好"
+    - "哼～笨猫觉得听说能行才是真本事{user_addr}, 读写好补的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_listening_block_001
+  intent: complaint
+  keywords: [听力突破不了, 听力卡, 听不懂, 听力没进步, 听力瓶颈]
+  utterances:
+    - 听力突破不了
+    - 听力一直卡着
+    - 怎么都听不懂
+    - 听力没进步
+    - 听力瓶颈期
+  responses:
+    - "(竖耳朵) 听力靠量喵～{user_addr}多泡耳朵就有感觉"
+    - "嗷呜～{user_addr}试试影子跟读? 笨猫觉得很有用ฅฅ"
+    - "(贴贴) 听力突破要时间的{user_addr}, 别急慢慢来"
+    - "哼～笨猫陪{user_addr}一起练听力嘛, 听不懂就再听一遍"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_speaking_stuck_001
+  intent: complaint
+  keywords: [口语原地踏步, 口语没进步, 口语卡, 说不出, 口语瓶颈]
+  utterances:
+    - 口语原地踏步
+    - 口语怎么都没进步
+    - 口语一直卡着
+    - 想说说不出
+    - 口语瓶颈期
+  responses:
+    - "(尾巴垂) 口语原地踏步可能是输入不够喵～{user_addr}多听多读才有的说"
+    - "嗷呜～{user_addr}找个语伴嘛? 笨猫觉得对话最有效ฅฅ"
+    - "(贴贴) 自言自语也可以练{user_addr}, 别管对错先开口"
+    - "哼～{user_addr}至少敢说就比很多人强了喵, 笨猫骄傲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_vocab_block_001
+  intent: complaint
+  keywords: [词汇量上不去, 词汇量卡, 单词记不住, 词汇瓶颈, 单词不够]
+  utterances:
+    - 词汇量上不去
+    - 词汇量一直卡着
+    - 单词记不住
+    - 词汇量瓶颈
+    - 单词量不够用
+  responses:
+    - "(挠头) 词汇量到一定程度就是在阅读中扩展喵～{user_addr}多读"
+    - "嗷呜～{user_addr}背单词不如读文章! 笨猫觉得活记更牢ฅฅ"
+    - "(尾巴绕) 词汇量靠日积月累{user_addr}, 别想速成"
+    - "哼～{user_addr}够用就行嘛, 笨猫单词也记不全呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_no_new_words_001
+  intent: complaint
+  keywords: [学不进新词, 新词记不住, 新单词学不会, 学不动单词, 单词学不进]
+  utterances:
+    - 学不进新词了
+    - 新词怎么都记不住
+    - 新单词学不会
+    - 学不动单词了
+    - 单词学不进脑子
+  responses:
+    - "(贴贴) 学不进可能是疲劳了喵～{user_addr}先休息几天再来"
+    - "嗷呜～{user_addr}试试改方法? 卡片/语境/词根, 总有一个适合ฅฅ"
+    - "(尾巴绕) 笨猫觉得学不进就少学{user_addr}, 别硬塞"
+    - "哼～{user_addr}的大脑也需要休息嘛, 笨猫陪你发呆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_no_progress_001
+  intent: complaint
+  keywords: [感觉没进步, 没在进步, 进步停滞, 学了等于没学, 没成长]
+  utterances:
+    - 感觉没进步
+    - 最近没在进步
+    - 学了等于没学
+    - 进步好像停了
+    - 完全没成长
+  responses:
+    - "(贴贴) 进步不是直线喵～{user_addr}可能在悄悄积累ฅฅ"
+    - "嗷呜～{user_addr}回头看半年前就能发现进步了! 笨猫保证"
+    - "(尾巴翘) 笨猫从{user_addr}说话方式看到进步了哼"
+    - "哼～没感觉到进步反而说明在突破{user_addr}, 别灰心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_video_no_speak_001
+  intent: complaint
+  keywords: [看视频懂但说不出, 听懂说不出, 能听懂不会说, 被动会主动不会, 输入会输出不会]
+  utterances:
+    - 看视频能懂但说不出
+    - 听懂但自己说不出
+    - 能听懂不会说
+    - 被动会主动不会
+    - 输入没问题输出不行
+  responses:
+    - "(歪头) 输入输出差距正常喵～{user_addr}多输出就追上了"
+    - "嗷呜～{user_addr}试试复述? 看完视频用自己话说一遍ฅฅ"
+    - "(尾巴绕) 听懂是基础{user_addr}, 输出需要主动练"
+    - "哼～{user_addr}至少听得懂就赢一半了喵, 笨猫帮你加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_no_c1_001
+  intent: complaint
+  keywords: [不开始 C1, 不敢学 C1, C1 太难, 不想冲 C1, C1 不敢碰]
+  utterances:
+    - 不敢开始 C1
+    - C1 太难不想学
+    - 不敢冲 C1
+    - C1 一看就害怕
+    - 不想碰 C1
+  responses:
+    - "(贴贴) C1 看起来吓人喵～{user_addr}先看一点点不会爆炸的"
+    - "嗷呜～{user_addr}B2 都到了 C1 不远的! 笨猫陪你冲ฅฅ"
+    - "(尾巴绕) 不开始就永远不开始{user_addr}, 试一下嘛"
+    - "哼～C1 是给{user_addr}准备的, 不学白不学喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_quit_001
+  intent: complaint
+  keywords: [想退坑, 想放弃, 不想学了, 放弃学语言, 退坑算了]
+  utterances:
+    - 想退坑算了
+    - 想放弃学语言
+    - 不想学了
+    - 学不动想退坑
+    - 放弃这门语言
+  responses:
+    - "(凑过来贴贴) {user_addr}别说退坑～学到这里放弃多可惜喵ฅฅ"
+    - "嗷呜～退坑前先休息嘛{user_addr}? 缓口气可能就不想退了"
+    - "(尾巴绕) 笨猫舍不得{user_addr}放弃, 已经走这么远了哼"
+    - "哼～{user_addr}真要退坑也可以, 但笨猫觉得现在只是累了"
+  cooldown_seconds: 60
+  weight: 1.0

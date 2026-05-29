@@ -1,0 +1,206 @@
+# 学法语 / DELF / 应用 routes (S6 R553 NLU 节点扩充, 第五十五周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: fr_app_001
+  intent: question
+  keywords: [推荐学法语 app, 推荐 Duolingo, 推荐法语 app, 推荐法语软件, 笨猫法语 app]
+  utterances:
+    - 推荐学法语 app
+    - 推荐 Duolingo
+    - 推荐法语 app
+    - 推荐法语软件
+    - 笨猫法语 app
+  responses:
+    - "嗷呜～{user_addr}Duolingo - 入门最轻松ฅฅ"
+    - "(尾巴翘) Busuu / Babbel - 系统课"
+    - "{user_addr}法语助手 - 词典神器"
+    - "(挺胸) 笨猫推荐: Duolingo 打卡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_delf_001
+  intent: question
+  keywords: [推荐 DELF, 推荐 DALF, 推荐法语考试, 推荐法语证书, 笨猫 DELF]
+  utterances:
+    - 推荐 DELF
+    - 推荐 DALF
+    - 推荐法语考试
+    - 推荐法语证书
+    - 笨猫 DELF
+  responses:
+    - "嗷呜～{user_addr}DELF A1-B2 - 通用ฅฅ"
+    - "(尾巴翘) DALF C1-C2 - 进阶"
+    - "{user_addr}TCF / TEF - 移民方向"
+    - "(挺胸) 笨猫推荐: B2 留学够!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_words_001
+  intent: question
+  keywords: [推荐法语单词, 推荐 Memrise, 推荐法语词汇, 推荐背单词, 笨猫法语单词]
+  utterances:
+    - 推荐法语单词
+    - 推荐 Memrise
+    - 推荐法语词汇
+    - 推荐背单词
+    - 笨猫法语单词
+  responses:
+    - "嗷呜～{user_addr}Memrise - 母语者音ฅฅ"
+    - "(尾巴翘) Anki - 自制卡片"
+    - "{user_addr}Quizlet - 题库多"
+    - "(挺胸) 笨猫推荐: Memrise 听!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_movie_learn_001
+  intent: question
+  keywords: [推荐法语电影学习, 推荐法语电影学, 推荐看电影学法语, 推荐法语影视学, 笨猫法语电影学]
+  utterances:
+    - 推荐法语电影学习
+    - 推荐法语电影学
+    - 推荐看电影学法语
+    - 推荐法语影视学
+    - 笨猫法语电影学
+  responses:
+    - "嗷呜～{user_addr}《天使爱美丽》- 经典ฅฅ"
+    - "(尾巴翘) 《放牛班的春天》- 清晰"
+    - "{user_addr}《触不可及》- 现代口语"
+    - "(挺胸) 笨猫推荐: 天使爱美丽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_speak_001
+  intent: question
+  keywords: [推荐法语口语, 推荐 italki, 推荐 Babbel, 推荐法语陪练, 笨猫法语口语]
+  utterances:
+    - 推荐法语口语
+    - 推荐 italki
+    - 推荐 Babbel
+    - 推荐法语陪练
+    - 笨猫法语口语
+  responses:
+    - "嗷呜～{user_addr}italki - 真人外教ฅฅ"
+    - "(尾巴翘) Babbel - 对话课"
+    - "{user_addr}Tandem / HelloTalk - 免费"
+    - "(挺胸) 笨猫推荐: italki 找老师!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_listen_001
+  intent: question
+  keywords: [推荐法语听力, 推荐 RFI, 推荐法语广播, 推荐法语播客, 笨猫法语听力]
+  utterances:
+    - 推荐法语听力
+    - 推荐 RFI
+    - 推荐法语广播
+    - 推荐法语播客
+    - 笨猫法语听力
+  responses:
+    - "嗷呜～{user_addr}RFI Savoirs - 慢速ฅฅ"
+    - "(尾巴翘) France Inter / Culture"
+    - "{user_addr}InnerFrench 播客 - 中级"
+    - "(挺胸) 笨猫推荐: RFI 慢速版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_variety_001
+  intent: question
+  keywords: [推荐法语综艺, 推荐法国综艺, 推荐法语真人秀, 推荐法语脱口秀, 笨猫法语综艺]
+  utterances:
+    - 推荐法语综艺
+    - 推荐法国综艺
+    - 推荐法语真人秀
+    - 推荐法语脱口秀
+    - 笨猫法语综艺
+  responses:
+    - "嗷呜～{user_addr}Top Chef France ฅฅ"
+    - "(尾巴翘) Quotidien - 脱口秀"
+    - "{user_addr}C à vous - 访谈"
+    - "(挺胸) 笨猫推荐: Top Chef 看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_movie_001
+  intent: question
+  keywords: [推荐法国电影, 推荐法语电影, 推荐法国片, 推荐法国影片, 笨猫法国电影]
+  utterances:
+    - 推荐法国电影
+    - 推荐法语电影
+    - 推荐法国片
+    - 推荐法国影片
+    - 笨猫法国电影
+  responses:
+    - "嗷呜～{user_addr}《天使爱美丽》ฅฅ"
+    - "(尾巴翘) 《这个杀手不太冷》"
+    - "{user_addr}《暴雨将至》/《阿黛尔》"
+    - "(挺胸) 笨猫推荐: 阿黛尔的生活!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_youtube_001
+  intent: question
+  keywords: [推荐法语博主, 推荐法语 YouTube, 推荐法语 UP 主, 推荐法语频道, 笨猫法语博主]
+  utterances:
+    - 推荐法语博主
+    - 推荐法语 YouTube
+    - 推荐法语 UP 主
+    - 推荐法语频道
+    - 笨猫法语博主
+  responses:
+    - "嗷呜～{user_addr}Français Authentique ฅฅ"
+    - "(尾巴翘) Piece of French"
+    - "{user_addr}Learn French with Alexa"
+    - "(挺胸) 笨猫推荐: Authentique!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_pronounce_001
+  intent: question
+  keywords: [推荐法语发音, 推荐法语 nasal, 推荐法语鼻音, 推荐法语小舌音, 笨猫法语发音]
+  utterances:
+    - 推荐法语发音
+    - 推荐法语 nasal
+    - 推荐法语鼻音
+    - 推荐法语小舌音
+    - 笨猫法语发音
+  responses:
+    - "嗷呜～{user_addr}小舌 R - 漱口练ฅฅ"
+    - "(尾巴翘) Nasal: on/an/in/un"
+    - "{user_addr}Forvo 听母语发音"
+    - "(挺胸) 笨猫推荐: 每天念报纸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_grammar_001
+  intent: question
+  keywords: [推荐法语语法, 推荐法语语法书, 推荐法语教材, 推荐法语参考书, 笨猫法语语法]
+  utterances:
+    - 推荐法语语法
+    - 推荐法语语法书
+    - 推荐法语教材
+    - 推荐法语参考书
+    - 笨猫法语语法
+  responses:
+    - "嗷呜～{user_addr}《简明法语教程》ฅฅ"
+    - "(尾巴翘) 《走遍法国》Reflets"
+    - "{user_addr}Grammaire Progressive"
+    - "(挺胸) 笨猫推荐: 简明法语!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_accent_001
+  intent: question
+  keywords: [推荐法语口音, 推荐巴黎口音, 推荐南法口音, 推荐魁北克法语, 笨猫法语口音]
+  utterances:
+    - 推荐法语口音
+    - 推荐巴黎口音
+    - 推荐南法口音
+    - 推荐魁北克法语
+    - 笨猫法语口音
+  responses:
+    - "嗷呜～{user_addr}巴黎口音 - 标准ฅฅ"
+    - "(尾巴翘) 南法 - 唱歌感"
+    - "{user_addr}魁北克 - 北美味"
+    - "(挺胸) 笨猫推荐: 学巴黎口音!"
+  cooldown_seconds: 60
+  weight: 1.0

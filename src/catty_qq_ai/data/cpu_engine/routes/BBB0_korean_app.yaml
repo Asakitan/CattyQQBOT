@@ -1,0 +1,206 @@
+# 学韩语 / TOPIK / 应用 routes (S6 R552 NLU 节点扩充, 第五十五周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: kr_app_001
+  intent: question
+  keywords: [推荐学韩语 app, 推荐 Duolingo, 推荐沪江韩语, 推荐韩语学习软件, 笨猫韩语 app]
+  utterances:
+    - 推荐学韩语 app
+    - 推荐 Duolingo
+    - 推荐沪江韩语
+    - 推荐韩语学习软件
+    - 笨猫韩语 app
+  responses:
+    - "嗷呜～{user_addr}Duolingo - 入门趣味化ฅฅ"
+    - "(尾巴翘) 沪江韩语 / 莱特韩语"
+    - "{user_addr}韩语 U 学院 - 系统化"
+    - "(挺胸) 猫猫推荐: Duolingo 打底每天 15 分钟!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kr_topik_001
+  intent: question
+  keywords: [推荐 TOPIK 考试, 推荐 TOPIK 1 级, 推荐 TOPIK 6 级, 推荐韩语等级考, 笨猫 TOPIK]
+  utterances:
+    - 推荐 TOPIK 考试
+    - 推荐 TOPIK 1 级
+    - 推荐 TOPIK 6 级
+    - 推荐韩语等级考
+    - 笨猫 TOPIK
+  responses:
+    - "嗷呜～{user_addr}TOPIK I (1-2级) / TOPIK II (3-6级)ฅฅ"
+    - "(尾巴翘) 听力+阅读, II 多写作"
+    - "{user_addr}留学读研一般要 4 级以上"
+    - "(挺胸) 笨猫推荐: 真题刷三轮稳过!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kr_word_001
+  intent: question
+  keywords: [推荐韩语单词, 推荐韩语开心词场, 推荐韩语背单词, 推荐 TOPIK 词汇, 笨猫韩语单词]
+  utterances:
+    - 推荐韩语单词
+    - 推荐韩语开心词场
+    - 推荐韩语背单词
+    - 推荐 TOPIK 词汇
+    - 笨猫韩语单词
+  responses:
+    - "嗷呜～{user_addr}沪江开心词场 - 闯关式ฅฅ"
+    - "(尾巴翘) Anki 自建牌组 - 间隔重复"
+    - "{user_addr}TOPIK 必备 5000 词"
+    - "(挺胸) 猫猫推荐: 每天 30 词雷打不动!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kr_drama_001
+  intent: question
+  keywords: [推荐韩剧学韩语, 推荐经典韩剧, 推荐学韩语韩剧, 推荐韩剧入门, 笨猫韩剧学韩语]
+  utterances:
+    - 推荐韩剧学韩语
+    - 推荐经典韩剧
+    - 推荐学韩语韩剧
+    - 推荐韩剧入门
+    - 笨猫韩剧学韩语
+  responses:
+    - "嗷呜～{user_addr}请回答 1988 - 日常口语神剧ฅฅ"
+    - "(尾巴翘) 鬼怪 / 来自星星的你"
+    - "{user_addr}爱的迫降 / 财阀家的小儿子"
+    - "(挺胸) 猫猫推荐: 双语字幕反复看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kr_speak_001
+  intent: question
+  keywords: [推荐韩语口语, 推荐 italki, 推荐 HelloTalk, 推荐韩语陪练, 笨猫韩语口语]
+  utterances:
+    - 推荐韩语口语
+    - 推荐 italki
+    - 推荐 HelloTalk
+    - 推荐韩语陪练
+    - 笨猫韩语口语
+  responses:
+    - "嗷呜～{user_addr}italki - 一对一外教ฅฅ"
+    - "(尾巴翘) HelloTalk / Tandem 语伴"
+    - "{user_addr}Cake / Eggbun 跟读"
+    - "(挺胸) 猫猫推荐: 每周 2 次外教强化!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kr_listen_001
+  intent: question
+  keywords: [推荐韩语听力, 推荐 KBS, 推荐韩语广播, 推荐韩语 podcast, 笨猫韩语听力]
+  utterances:
+    - 推荐韩语听力
+    - 推荐 KBS
+    - 推荐韩语广播
+    - 推荐韩语 podcast
+    - 笨猫韩语听力
+  responses:
+    - "嗷呜～{user_addr}KBS World Radio - 免费正音ฅฅ"
+    - "(尾巴翘) Talk To Me In Korean podcast"
+    - "{user_addr}KBS 新闻 / SBS 8 点新闻"
+    - "(挺胸) 猫猫推荐: 每天 20 分钟磨耳朵!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kr_kpop_001
+  intent: question
+  keywords: [推荐 K-pop 学韩语, 推荐韩语歌, 推荐 BTS 学韩语, 推荐 IU 学韩语, 笨猫 K-pop 学韩语]
+  utterances:
+    - "推荐 K-pop 学韩语"
+    - 推荐韩语歌
+    - 推荐 BTS 学韩语
+    - 推荐 IU 学韩语
+    - "笨猫 K-pop 学韩语"
+  responses:
+    - "嗷呜～{user_addr}IU - 发音清晰咬字标准ฅฅ"
+    - "(尾巴翘) BTS / NewJeans / 防弹"
+    - "{user_addr}抄歌词背 - 语感+词汇"
+    - "(挺胸) 猫猫推荐: 跟唱比死记有趣!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kr_movie_001
+  intent: question
+  keywords: [推荐韩语电影, 推荐韩国电影, 推荐韩语原声电影, 推荐韩国经典电影, 笨猫韩语电影]
+  utterances:
+    - 推荐韩语电影
+    - 推荐韩国电影
+    - 推荐韩语原声电影
+    - 推荐韩国经典电影
+    - 笨猫韩语电影
+  responses:
+    - "嗷呜～{user_addr}寄生虫 - 奥斯卡得主ฅฅ"
+    - "(尾巴翘) 燃烧 / 杀人回忆 / 老男孩"
+    - "{user_addr}小森林 / 建筑学概论 - 治愈"
+    - "(挺胸) 猫猫推荐: 一周一部慢慢啃!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kr_variety_001
+  intent: question
+  keywords: [推荐韩语综艺, 推荐 Running Man, 推荐无限挑战, 推荐韩国综艺, 笨猫韩语综艺]
+  utterances:
+    - 推荐韩语综艺
+    - 推荐 Running Man
+    - 推荐无限挑战
+    - 推荐韩国综艺
+    - 笨猫韩语综艺
+  responses:
+    - "嗷呜～{user_addr}Running Man - 长寿综艺ฅฅ"
+    - "(尾巴翘) 无限挑战 / 新西游记"
+    - "{user_addr}尹食堂 / 三时三餐 - 日常韩语"
+    - "(挺胸) 猫猫推荐: 综艺学口语接地气!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kr_pron_001
+  intent: question
+  keywords: [推荐韩语发音教程, 推荐韩语发音, 推荐韩语收音, 推荐韩语连读, 笨猫韩语发音]
+  utterances:
+    - 推荐韩语发音教程
+    - 推荐韩语发音
+    - 推荐韩语收音
+    - 推荐韩语连读
+    - 笨猫韩语发音
+  responses:
+    - "嗷呜～{user_addr}延世韩国语发音篇ฅฅ"
+    - "(尾巴翘) 韩语 40 音入门 - YouTube"
+    - "{user_addr}收音 / 连音 / 紧音是难点"
+    - "(挺胸) 猫猫推荐: 跟读模仿+录音对比!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kr_grammar_001
+  intent: question
+  keywords: [推荐韩语语法书, 推荐延世韩国语, 推荐首尔大韩国语, 推荐标准韩国语, 笨猫韩语语法]
+  utterances:
+    - 推荐韩语语法书
+    - 推荐延世韩国语
+    - 推荐首尔大韩国语
+    - 推荐标准韩国语
+    - 笨猫韩语语法
+  responses:
+    - "嗷呜～{user_addr}延世韩国语 1-6 - 经典ฅฅ"
+    - "(尾巴翘) 首尔大韩国语 / 标韩"
+    - "{user_addr}TOPIK 语法词典 - 工具书"
+    - "(挺胸) 猫猫推荐: 延世全套啃下来超扎实!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kr_plan_001
+  intent: question
+  keywords: [推荐韩语自学规划, 推荐韩语学习计划, 推荐韩语零基础, 推荐韩语入门路线, 笨猫韩语自学]
+  utterances:
+    - 推荐韩语自学规划
+    - 推荐韩语学习计划
+    - 推荐韩语零基础
+    - 推荐韩语入门路线
+    - 笨猫韩语自学
+  responses:
+    - "嗷呜～{user_addr}1 月: 40 音+发音ฅฅ"
+    - "(尾巴翘) 2-6 月: 延世 1-2 + TOPIK I"
+    - "{user_addr}7-12 月: 延世 3-4 + 韩剧泛听"
+    - "(挺胸) 猫猫推荐: 一年冲 TOPIK 4 没问题!"
+  cooldown_seconds: 60
+  weight: 1.0
