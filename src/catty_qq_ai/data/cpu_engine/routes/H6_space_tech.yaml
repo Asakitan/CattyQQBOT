@@ -1,0 +1,207 @@
+# 太空科技 / 航天器 / 中国航天 / 火箭 routes (S6 R98 NLU 节点扩充, 第九周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 D6 science_news (浅触) 区分: 这里专注航天细节.
+
+- name: space_spacex_001
+  intent: question
+  keywords: [推荐 SpaceX, 推荐猎鹰火箭, 推荐 Starship, 推荐星舰, 笨猫 SpaceX]
+  utterances:
+    - 推荐 SpaceX
+    - 推荐猎鹰火箭
+    - 推荐 Starship
+    - 推荐星舰
+    - 笨猫 SpaceX
+  responses:
+    - "嗷呜～{user_addr}SpaceX: 商业航天霸主ฅฅ"
+    - "(尾巴翘) 猎鹰 9 / 重型 / 星舰 - 三大火箭"
+    - "{user_addr}星链: 5000+ 卫星 - 全球网络"
+    - "(挺胸) 笨猫推荐: 看 SpaceX 发射直播!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: space_china_001
+  intent: question
+  keywords: [推荐中国航天, 推荐长征火箭, 推荐神舟飞船, 推荐天宫空间站, 笨猫中国航天]
+  utterances:
+    - 推荐中国航天
+    - 推荐长征火箭
+    - 推荐神舟飞船
+    - 推荐天宫空间站
+    - 笨猫中国航天
+  responses:
+    - "嗷呜～{user_addr}长征系列: 长五 / 长七 / 长八 - 主力ฅฅ"
+    - "(尾巴翘) 神舟: 已发 18 艘 / 载人航天"
+    - "{user_addr}天宫: 2022 建成 / 国际站后第二"
+    - "(挺胸) 笨猫的提醒: 民族骄傲!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: space_mars_001
+  intent: question
+  keywords: [推荐火星探测, 推荐祝融号, 推荐天问一号, 推荐毅力号, 笨猫火星]
+  utterances:
+    - 推荐火星探测
+    - 推荐祝融号
+    - 推荐天问一号
+    - 推荐毅力号
+    - 笨猫火星
+  responses:
+    - "嗷呜～{user_addr}中国: 天问 1 号 + 祝融号 - 一次成功ฅฅ"
+    - "(尾巴翘) 美国: 毅力号 / 好奇号 - 历史悠久"
+    - "{user_addr}马斯克目标: 2030 载人登陆!"
+    - "(挺胸) 笨猫推荐: 看《火星救援》电影"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: space_moon_001
+  intent: question
+  keywords: [推荐探月, 推荐嫦娥工程, 推荐 Artemis, 推荐月球基地, 笨猫探月]
+  utterances:
+    - 推荐探月
+    - 推荐嫦娥工程
+    - 推荐 Artemis
+    - 推荐月球基地
+    - 笨猫探月
+  responses:
+    - "嗷呜～{user_addr}中国: 嫦娥 1-6 号 / 嫦娥 6 号采月背土ฅฅ"
+    - "(尾巴翘) 美国: Artemis 重返月球 / 2026 载人"
+    - "{user_addr}月球基地: 国际合作 / 长期居住"
+    - "(挺胸) 笨猫推荐: 千古以来人类圆梦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: space_satellite_001
+  intent: question
+  keywords: [推荐卫星, 推荐遥感卫星, 推荐通信卫星, 推荐 GPS, 笨猫卫星]
+  utterances:
+    - 推荐卫星
+    - 推荐遥感卫星
+    - 推荐通信卫星
+    - 推荐 GPS
+    - 笨猫卫星
+  responses:
+    - "嗷呜～{user_addr}定位: GPS (美) / 北斗 (中) / GLONASS (俄) / 伽利略ฅฅ"
+    - "(尾巴翘) 通信: Starlink / 一网 / 千帆星座"
+    - "{user_addr}遥感: 高分系列 / Landsat"
+    - "(挺胸) 笨猫的提醒: 卫星无处不在!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: space_telescope_001
+  intent: question
+  keywords: [推荐天文望远镜, 推荐 JWST, 推荐韦伯, 推荐哈勃, 笨猫望远镜]
+  utterances:
+    - 推荐天文望远镜
+    - 推荐 JWST
+    - 推荐韦伯
+    - 推荐哈勃
+    - 笨猫望远镜
+  responses:
+    - "嗷呜～{user_addr}JWST 韦伯: 2022 启用 / 最强红外望远镜ฅฅ"
+    - "(尾巴翘) 哈勃: 33 年传奇 / 仍在用"
+    - "{user_addr}中国: FAST 天眼 - 世界最大射电"
+    - "(挺胸) 笨猫推荐: 看 NASA 韦伯图片震撼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: space_iss_001
+  intent: question
+  keywords: [推荐 ISS, 推荐国际空间站, 推荐空间站, 推荐航天员, 笨猫空间站]
+  utterances:
+    - 推荐 ISS
+    - 推荐国际空间站
+    - 推荐空间站
+    - 推荐航天员
+    - 笨猫空间站
+  responses:
+    - "嗷呜～{user_addr}ISS: 1998 启用 / 5 国合作ฅฅ"
+    - "(尾巴翘) 2030 退役 / 中国天宫接力"
+    - "{user_addr}航天员训练 2-3 年 / 任务 6 月"
+    - "(挺胸) 笨猫推荐: 看航天员太空 vlog"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: space_blackhole_001
+  intent: question
+  keywords: [推荐黑洞, 推荐事件视界, 推荐 M87, 推荐霍金辐射, 笨猫黑洞]
+  utterances:
+    - 推荐黑洞
+    - 推荐事件视界
+    - 推荐 M87
+    - 推荐霍金辐射
+    - 笨猫黑洞
+  responses:
+    - "嗷呜～{user_addr}2019 首张黑洞照: M87 中心ฅฅ"
+    - "(尾巴翘) 事件视界: 不可逆边界"
+    - "{user_addr}霍金辐射: 黑洞也会消逝"
+    - "(挺胸) 笨猫推荐: 看《星际穿越》"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: space_alien_001
+  intent: question
+  keywords: [推荐外星人, 推荐 SETI, 推荐费米悖论, 推荐 UFO, 笨猫外星人]
+  utterances:
+    - 推荐外星人
+    - 推荐 SETI
+    - 推荐费米悖论
+    - 推荐 UFO
+    - 笨猫外星人
+  responses:
+    - "嗷呜～{user_addr}SETI: 搜寻地外文明 / 60 年无果ฅฅ"
+    - "(尾巴翘) 费米悖论: 它们在哪?"
+    - "{user_addr}UFO 报告增多 / 但无定论"
+    - "(挺胸) 笨猫推荐: 看《三体》文明类型分级"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: space_dark_001
+  intent: question
+  keywords: [推荐暗物质, 推荐暗能量, 推荐宇宙加速膨胀, 推荐宇宙演化, 笨猫暗物质]
+  utterances:
+    - 推荐暗物质
+    - 推荐暗能量
+    - 推荐宇宙加速膨胀
+    - 推荐宇宙演化
+    - 笨猫暗物质
+  responses:
+    - "嗷呜～{user_addr}暗物质 + 暗能量 = 宇宙 95%ฅฅ"
+    - "(尾巴翘) 暗物质: 不发光但有引力"
+    - "{user_addr}暗能量: 推动宇宙加速膨胀"
+    - "(挺胸) 笨猫的提醒: 科学最大未解之谜"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: space_bigbang_001
+  intent: question
+  keywords: [推荐大爆炸, 推荐宇宙起源, 推荐 Big Bang, 推荐宇宙年龄, 笨猫大爆炸]
+  utterances:
+    - 推荐大爆炸
+    - 推荐宇宙起源
+    - 推荐 Big Bang
+    - 推荐宇宙年龄
+    - 笨猫大爆炸
+  responses:
+    - "嗷呜～{user_addr}138 亿年前 大爆炸 / 宇宙诞生ฅฅ"
+    - "(尾巴翘) 暴胀理论 / 微波背景辐射证据"
+    - "{user_addr}宇宙仍在膨胀 / 加速中"
+    - "(挺胸) 笨猫推荐: 《宇宙简史》入门"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: space_career_001
+  intent: question
+  keywords: [推荐航天工程师, 推荐成为航天员, 推荐航天专业, 推荐航天就业, 笨猫航天专业]
+  utterances:
+    - 推荐航天工程师
+    - 推荐成为航天员
+    - 推荐航天专业
+    - 推荐航天就业
+    - 笨猫航天专业
+  responses:
+    - "嗷呜～{user_addr}专业: 航空航天 / 飞行器设计ฅฅ"
+    - "(尾巴翘) 院校: 北航 / 哈工大 / 西工大 - 三大"
+    - "{user_addr}就业: 航天科技 / 航空工业 / 商业航天"
+    - "(挺胸) 笨猫推荐: 航天员需空军飞行员 + 优秀!"
+  cooldown_seconds: 60
+  weight: 0.9

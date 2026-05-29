@@ -1,0 +1,207 @@
+# 基础物理化学生物科普 routes (S6 R100 NLU 节点扩充, 第九周期 buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 D6 science_news (科学家) 区分: 这里专注基础知识科普.
+
+- name: sci_physics_basic_001
+  intent: question
+  keywords: [推荐物理基础, 推荐牛顿三定律, 推荐力学, 推荐物理公式, 笨猫物理基础]
+  utterances:
+    - 推荐物理基础
+    - 推荐牛顿三定律
+    - 推荐力学
+    - 推荐物理公式
+    - 笨猫物理基础
+  responses:
+    - "嗷呜～{user_addr}牛顿三定律: 惯性 / F=ma / 作用反作用ฅฅ"
+    - "(尾巴翘) 万有引力: 苹果落地 = 月球绕地"
+    - "{user_addr}动能 = 1/2mv² / 势能 = mgh"
+    - "(挺胸) 笨猫推荐: 看费曼物理学讲义"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sci_chemistry_basic_001
+  intent: question
+  keywords: [推荐化学基础, 推荐元素周期表, 推荐原子结构, 推荐化学反应, 笨猫化学基础]
+  utterances:
+    - 推荐化学基础
+    - 推荐元素周期表
+    - 推荐原子结构
+    - 推荐化学反应
+    - 笨猫化学基础
+  responses:
+    - "嗷呜～{user_addr}元素周期表 118 种 / 门捷列夫创立ฅฅ"
+    - "(尾巴翘) 化学键: 离子 / 共价 / 金属"
+    - "{user_addr}有机: 碳 4 价 / 无机: 其他元素"
+    - "(挺胸) 笨猫推荐: 看 B 站李永乐物理化学"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sci_biology_basic_001
+  intent: question
+  keywords: [推荐生物基础, 推荐细胞结构, 推荐 DNA 双螺旋, 推荐遗传学, 笨猫生物基础]
+  utterances:
+    - 推荐生物基础
+    - 推荐细胞结构
+    - 推荐 DNA 双螺旋
+    - 推荐遗传学
+    - 笨猫生物基础
+  responses:
+    - "嗷呜～{user_addr}细胞: 生命基本单位 / 真核 vs 原核ฅฅ"
+    - "(尾巴翘) DNA → RNA → 蛋白质 - 中心法则"
+    - "{user_addr}进化: 自然选择 + 突变 + 适应"
+    - "(挺胸) 笨猫推荐: 《自私的基因》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sci_relativity_001
+  intent: question
+  keywords: [推荐狭义相对论, 推荐广义相对论, 推荐时空, 推荐 E=mc2, 笨猫相对论]
+  utterances:
+    - 推荐狭义相对论
+    - 推荐广义相对论
+    - 推荐时空
+    - 推荐 E=mc2
+    - 笨猫相对论
+  responses:
+    - "嗷呜～{user_addr}狭义: 光速不变 / 时间膨胀 / 长度收缩ฅฅ"
+    - "(尾巴翘) 广义: 引力 = 时空弯曲"
+    - "{user_addr}E = mc² / 质能等价"
+    - "(挺胸) 笨猫推荐: 看《星际穿越》"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sci_quantum_basic_001
+  intent: question
+  keywords: [推荐量子力学基础, 推荐波粒二象性, 推荐量子纠缠, 推荐双缝实验, 笨猫量子基础]
+  utterances:
+    - 推荐量子力学基础
+    - 推荐波粒二象性
+    - 推荐量子纠缠
+    - 推荐双缝实验
+    - 笨猫量子基础
+  responses:
+    - "嗷呜～{user_addr}波粒二象性: 光既是波又是粒ฅฅ"
+    - "(尾巴翘) 双缝实验: 观察改变结果 - 神奇"
+    - "{user_addr}量子纠缠: 爱因斯坦称鬼魅"
+    - "(挺胸) 笨猫的提醒: 反直觉但实证"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sci_periodic_001
+  intent: question
+  keywords: [推荐元素, 推荐金属, 推荐非金属, 推荐稀有元素, 笨猫元素]
+  utterances:
+    - 推荐元素
+    - 推荐金属
+    - 推荐非金属
+    - 推荐稀有元素
+    - 笨猫元素
+  responses:
+    - "嗷呜～{user_addr}常见: H / C / N / O / Si / Ca / Fe / Cuฅฅ"
+    - "(尾巴翘) 稀有: 锂 / 钴 / 镧系 - 电池关键"
+    - "{user_addr}金属 vs 非金属 - 周期表两侧"
+    - "(挺胸) 笨猫推荐: 化学元素卡片游戏"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sci_geology_001
+  intent: question
+  keywords: [推荐地质, 推荐地震, 推荐火山, 推荐板块构造, 笨猫地质]
+  utterances:
+    - 推荐地质
+    - 推荐地震
+    - 推荐火山
+    - 推荐板块构造
+    - 笨猫地质
+  responses:
+    - "嗷呜～{user_addr}板块: 6 大主要板块 / 漂移ฅฅ"
+    - "(尾巴翘) 环太平洋火山带 / 地震多发"
+    - "{user_addr}火山: 活 / 休眠 / 死火山"
+    - "(挺胸) 笨猫推荐: 看 BBC《地球的力量》"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sci_weather_001
+  intent: question
+  keywords: [推荐气象, 推荐天气预报原理, 推荐台风形成, 推荐厄尔尼诺, 笨猫气象]
+  utterances:
+    - 推荐气象
+    - 推荐天气预报原理
+    - 推荐台风形成
+    - 推荐厄尔尼诺
+    - 笨猫气象
+  responses:
+    - "嗷呜～{user_addr}天气预报: 数值模式 + 卫星 + 雷达ฅฅ"
+    - "(尾巴翘) 台风: 西太洋盛 / 8-10 月高发"
+    - "{user_addr}厄尔尼诺 vs 拉尼娜 - 海洋大气交互"
+    - "(挺胸) 笨猫的提醒: 关注气候变化!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sci_evolution_001
+  intent: question
+  keywords: [推荐进化论, 推荐物种起源, 推荐自然选择, 推荐生物多样性, 笨猫进化论]
+  utterances:
+    - 推荐进化论
+    - 推荐物种起源
+    - 推荐自然选择
+    - 推荐生物多样性
+    - 笨猫进化论
+  responses:
+    - "嗷呜～{user_addr}达尔文 1859 物种起源 - 革命ฅฅ"
+    - "(尾巴翘) 加拉帕戈斯雀 - 物种分化经典"
+    - "{user_addr}人类 vs 黑猩猩 DNA 98%+ 相似"
+    - "(挺胸) 笨猫推荐: 《人类简史》尤瓦尔赫拉利"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sci_brain_002
+  intent: question
+  keywords: [推荐脑神经科学, 推荐神经元, 推荐脑机接口科普, 推荐认知科学, 笨猫脑科学科普]
+  utterances:
+    - 推荐脑神经科学
+    - 推荐神经元
+    - 推荐脑机接口科普
+    - 推荐认知科学
+    - 笨猫脑科学科普
+  responses:
+    - "嗷呜～{user_addr}人脑 860 亿神经元 / 100 万亿突触ฅฅ"
+    - "(尾巴翘) 多巴胺 / 血清素 - 神经递质"
+    - "{user_addr}记忆: 海马体 / 情绪: 杏仁核"
+    - "(挺胸) 笨猫推荐: 《大脑使用指南》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sci_environment_001
+  intent: question
+  keywords: [推荐生态学, 推荐生态系统, 推荐生物链, 推荐物种灭绝, 笨猫生态学]
+  utterances:
+    - 推荐生态学
+    - 推荐生态系统
+    - 推荐生物链
+    - 推荐物种灭绝
+    - 笨猫生态学
+  responses:
+    - "嗷呜～{user_addr}生态系统: 生产者 → 消费者 → 分解者ฅฅ"
+    - "(尾巴翘) 6 次大灭绝事件 / 第 6 次进行中"
+    - "{user_addr}保护: 防止生物多样性丧失"
+    - "(挺胸) 笨猫的提醒: 我们都是大自然一员"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sci_anatomy_001
+  intent: question
+  keywords: [推荐人体解剖, 推荐人体系统, 推荐器官, 推荐生理学, 笨猫人体解剖]
+  utterances:
+    - 推荐人体解剖
+    - 推荐人体系统
+    - 推荐器官
+    - 推荐生理学
+    - 笨猫人体解剖
+  responses:
+    - "嗷呜～{user_addr}11 大系统: 神经 / 循环 / 消化 / 呼吸 等ฅฅ"
+    - "(尾巴翘) 心脏: 每天跳 10w 次"
+    - "{user_addr}小肠 4-7m / 大肠 1.5m"
+    - "(挺胸) 笨猫推荐: 看《人体奥秘》纪录片"
+  cooldown_seconds: 60
+  weight: 0.9

@@ -1,0 +1,206 @@
+# 名人传记 / 企业家 / 科学家 / 政治家 routes (S6 R93 NLU 节点扩充, 第九周期 buffered 2/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: bio_musk_001
+  intent: question
+  keywords: [推荐马斯克, 推荐 Elon Musk, 推荐特斯拉创始人, 推荐 SpaceX 老板, 笨猫马斯克]
+  utterances:
+    - 推荐马斯克
+    - 推荐 Elon Musk
+    - 推荐特斯拉创始人
+    - 推荐 SpaceX 老板
+    - 笨猫马斯克
+  responses:
+    - "嗷呜～{user_addr}马斯克: 特斯拉 / SpaceX / X (Twitter) 老板ฅฅ"
+    - "(尾巴翘) 现金流之王 / 火星移民梦"
+    - "{user_addr}争议大! 但科技推进者"
+    - "(挺胸) 笨猫推荐: Walter Isaacson《埃隆马斯克传》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bio_jobs_001
+  intent: question
+  keywords: [推荐乔布斯, 推荐 Steve Jobs, 推荐苹果创始人, 推荐 iPhone 发布, 笨猫乔布斯]
+  utterances:
+    - 推荐乔布斯
+    - 推荐 Steve Jobs
+    - 推荐苹果创始人
+    - 推荐 iPhone 发布
+    - 笨猫乔布斯
+  responses:
+    - "嗷呜～{user_addr}乔布斯: 苹果传奇 / 改变 4 个行业ฅฅ"
+    - "(尾巴翘) iPhone 2007 / 智能手机革命"
+    - "{user_addr}Stay hungry, stay foolish - 斯坦福演讲"
+    - "(挺胸) 笨猫推荐: Walter Isaacson《史蒂夫乔布斯传》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bio_gates_001
+  intent: question
+  keywords: [推荐比尔盖茨, 推荐 Bill Gates, 推荐微软创始人, 推荐盖茨基金会, 笨猫盖茨]
+  utterances:
+    - 推荐比尔盖茨
+    - 推荐 Bill Gates
+    - 推荐微软创始人
+    - 推荐盖茨基金会
+    - 笨猫盖茨
+  responses:
+    - "嗷呜～{user_addr}盖茨: 微软创始 / 长期世界首富ฅฅ"
+    - "(尾巴翘) 退休后: 比尔盖茨基金会 - 公益千亿"
+    - "{user_addr}投资: 微软 / 巴菲特好友"
+    - "(挺胸) 笨猫推荐: 《盖茨之道》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bio_buffet_001
+  intent: question
+  keywords: [推荐巴菲特, 推荐 Warren Buffett, 推荐股神, 推荐伯克希尔, 笨猫巴菲特]
+  utterances:
+    - 推荐巴菲特
+    - 推荐 Warren Buffett
+    - 推荐股神
+    - 推荐伯克希尔
+    - 笨猫巴菲特
+  responses:
+    - "嗷呜～{user_addr}股神: 价值投资 / 复利大师ฅฅ"
+    - "(尾巴翘) 伯克希尔: 60 年 20%+ 年化"
+    - "{user_addr}投资准则: 别买不懂的"
+    - "(挺胸) 笨猫推荐: 《滚雪球》《巴菲特致股东信》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bio_jack_ma_001
+  intent: question
+  keywords: [推荐马云, 推荐 Jack Ma, 推荐阿里创始人, 推荐马云语录, 笨猫马云]
+  utterances:
+    - 推荐马云
+    - 推荐 Jack Ma
+    - 推荐阿里创始人
+    - 推荐马云语录
+    - 笨猫马云
+  responses:
+    - "嗷呜～{user_addr}马云: 阿里巴巴 / 改变中国电商ฅฅ"
+    - "(尾巴翘) 18 罗汉 / 杭州起家 / 2014 IPO"
+    - "{user_addr}争议大! 但商业成就斐然"
+    - "(挺胸) 笨猫推荐: 看其商业演讲视频"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bio_ren_001
+  intent: question
+  keywords: [推荐任正非, 推荐华为创始人, 推荐 Ren Zhengfei, 推荐华为故事, 笨猫任正非]
+  utterances:
+    - 推荐任正非
+    - 推荐华为创始人
+    - 推荐 Ren Zhengfei
+    - 推荐华为故事
+    - 笨猫任正非
+  responses:
+    - "嗷呜～{user_addr}任正非: 华为创始人 / 中国制造代表ฅฅ"
+    - "(尾巴翘) 43 岁创业 / 1987 万元起家"
+    - "{user_addr}华为狼性文化 / 7+1 工作制"
+    - "(挺胸) 笨猫推荐: 《下一个倒下的会不会是华为》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bio_mao_001
+  intent: question
+  keywords: [推荐毛泽东, 推荐毛主席, 推荐建国领袖, 推荐毛泽东著作, 笨猫毛泽东]
+  utterances:
+    - 推荐毛泽东
+    - 推荐毛主席
+    - 推荐建国领袖
+    - 推荐毛泽东著作
+    - 笨猫毛泽东
+  responses:
+    - "嗷呜～{user_addr}毛主席: 新中国缔造者 / 1949ฅฅ"
+    - "(尾巴翘) 著作: 论持久战 / 矛盾论 / 实践论"
+    - "{user_addr}伟大领袖 / 战略思想家"
+    - "(挺胸) 笨猫推荐: 《毛泽东选集》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bio_deng_001
+  intent: question
+  keywords: [推荐邓小平, 推荐改革开放, 推荐邓公, 推荐南巡讲话, 笨猫邓小平]
+  utterances:
+    - 推荐邓小平
+    - 推荐改革开放
+    - 推荐邓公
+    - 推荐南巡讲话
+    - 笨猫邓小平
+  responses:
+    - "嗷呜～{user_addr}邓小平: 改革开放总设计师ฅฅ"
+    - "(尾巴翘) 1978 改革开放 / 改变中国"
+    - "{user_addr}白猫黑猫论 / 摸着石头过河"
+    - "(挺胸) 笨猫推荐: 《邓小平时代》傅高义"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bio_lincoln_001
+  intent: question
+  keywords: [推荐林肯, 推荐 Lincoln, 推荐美国南北战争, 推荐解放黑奴, 笨猫林肯]
+  utterances:
+    - 推荐林肯
+    - 推荐 Lincoln
+    - 推荐美国南北战争
+    - 推荐解放黑奴
+    - 笨猫林肯
+  responses:
+    - "嗷呜～{user_addr}林肯: 美国第 16 任总统ฅฅ"
+    - "(尾巴翘) 解放黑奴 / 葛底斯堡演说"
+    - "{user_addr}1865 遇刺 / 民主象征"
+    - "(挺胸) 笨猫推荐: 斯皮尔伯格《林肯》电影"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bio_napoleon_001
+  intent: question
+  keywords: [推荐拿破仑, 推荐 Napoleon, 推荐拿破仑战争, 推荐法国皇帝, 笨猫拿破仑]
+  utterances:
+    - 推荐拿破仑
+    - 推荐 Napoleon
+    - 推荐拿破仑战争
+    - 推荐法国皇帝
+    - 笨猫拿破仑
+  responses:
+    - "嗷呜～{user_addr}拿破仑: 法国皇帝 / 军事天才ฅฅ"
+    - "(尾巴翘) 滑铁卢 1815 - 终结"
+    - "{user_addr}拿破仑法典 - 现代法律影响深"
+    - "(挺胸) 笨猫推荐: 雷德利斯科特《拿破仑》电影"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: bio_zhang_001
+  intent: question
+  keywords: [推荐张一鸣, 推荐字节跳动创始人, 推荐 TikTok 老板, 推荐张一鸣金句, 笨猫张一鸣]
+  utterances:
+    - 推荐张一鸣
+    - 推荐字节跳动创始人
+    - 推荐 TikTok 老板
+    - 推荐张一鸣金句
+    - 笨猫张一鸣
+  responses:
+    - "嗷呜～{user_addr}张一鸣: 字节跳动 / 80 后创业之星ฅฅ"
+    - "(尾巴翘) 抖音 / TikTok / 头条 - 矩阵霸主"
+    - "{user_addr}极致延迟满足 - 个人哲学"
+    - "(挺胸) 笨猫推荐: 看其知乎/微博公开发言"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bio_huang_renxun_001
+  intent: question
+  keywords: [推荐黄仁勋, 推荐英伟达 CEO, 推荐 Jensen Huang, 推荐 NVIDIA 老板, 笨猫黄仁勋]
+  utterances:
+    - 推荐黄仁勋
+    - 推荐英伟达 CEO
+    - 推荐 Jensen Huang
+    - 推荐 NVIDIA 老板
+    - 笨猫黄仁勋
+  responses:
+    - "嗷呜～{user_addr}黄仁勋: 英伟达创始 / AI 浪潮王ฅฅ"
+    - "(尾巴翘) 30 年专注 GPU - 终爆发"
+    - "{user_addr}台湾出生 / 美籍 / 皮衣男人"
+    - "(挺胸) 笨猫推荐: 看其 AI 时代演讲"
+  cooldown_seconds: 60
+  weight: 1.0

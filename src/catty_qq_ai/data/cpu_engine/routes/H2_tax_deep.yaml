@@ -1,0 +1,207 @@
+# 税务深度 / 个税 / 企业税 / 避税 routes (S6 R94 NLU 节点扩充, 第九周期 buffered 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 E9 personal_finance (浅触) 区分: 这里专注税务细节.
+
+- name: tax_personal_001
+  intent: question
+  keywords: [推荐个税, 推荐个人所得税, 推荐起征点, 推荐税率表, 笨猫个税]
+  utterances:
+    - 推荐个税
+    - 推荐个人所得税
+    - 推荐起征点
+    - 推荐税率表
+    - 笨猫个税
+  responses:
+    - "嗷呜～{user_addr}起征点: 5000/月 / 6w/年ฅฅ"
+    - "(尾巴翘) 税率: 3% / 10% / 20% / 25% / 30% / 35% / 45% - 7 档"
+    - "{user_addr}专项扣除: 房贷 / 房租 / 子女 / 赡养"
+    - "(挺胸) 笨猫的提醒: 个税 APP 自查!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tax_year_end_001
+  intent: question
+  keywords: [推荐汇算清缴, 推荐年终奖税, 推荐综合所得, 推荐年度个税, 笨猫汇算]
+  utterances:
+    - 推荐汇算清缴
+    - 推荐年终奖税
+    - 推荐综合所得
+    - 推荐年度个税
+    - 笨猫汇算
+  responses:
+    - "嗷呜～{user_addr}3-6 月汇算清缴 / 多退少补ฅฅ"
+    - "(尾巴翘) 年终奖: 单独 vs 综合 - 选优惠"
+    - "{user_addr}个税 APP 一键申报 / 退税到银行卡"
+    - "(挺胸) 笨猫的提醒: 退几千常见! 别错过"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tax_deduction_001
+  intent: question
+  keywords: [推荐专项扣除, 推荐个税扣除, 推荐房贷扣除, 推荐子女教育扣除, 笨猫专项扣除]
+  utterances:
+    - 推荐专项扣除
+    - 推荐个税扣除
+    - 推荐房贷扣除
+    - 推荐子女教育扣除
+    - 笨猫专项扣除
+  responses:
+    - "嗷呜～{user_addr}6 大: 子女 / 大病 / 房贷 / 房租 / 老人 / 教育ฅฅ"
+    - "(尾巴翘) 子女 2000/孩 / 房贷 1000 / 房租 1500"
+    - "{user_addr}赡养老人 3000 / 平摊"
+    - "(挺胸) 笨猫的提醒: 必填! 不填白白多交税"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tax_corporate_001
+  intent: question
+  keywords: [推荐企业所得税, 推荐企税, 推荐 25% 税率, 推荐小微企业税, 笨猫企业所得税]
+  utterances:
+    - 推荐企业所得税
+    - 推荐企税
+    - 推荐 25% 税率
+    - 推荐小微企业税
+    - 笨猫企业所得税
+  responses:
+    - "嗷呜～{user_addr}标准: 25% / 高新 15% / 小微优惠ฅฅ"
+    - "(尾巴翘) 小微: 100w 内 2.5% / 100-300w 5%"
+    - "{user_addr}应纳税所得 = 收入 - 成本 - 费用"
+    - "(挺胸) 笨猫的提醒: 合理税务筹划!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tax_vat_001
+  intent: question
+  keywords: [推荐增值税, 推荐 VAT, 推荐进项发票, 推荐销项发票, 笨猫增值税]
+  utterances:
+    - 推荐增值税
+    - 推荐 VAT
+    - 推荐进项发票
+    - 推荐销项发票
+    - 笨猫增值税
+  responses:
+    - "嗷呜～{user_addr}增值税: 13% / 9% / 6% - 三档ฅฅ"
+    - "(尾巴翘) 一般纳税人 vs 小规模 - 不同"
+    - "{user_addr}应纳 = 销项 - 进项 - 抵扣关键"
+    - "(挺胸) 笨猫的提醒: 别买假发票! 风险大"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tax_avoidance_001
+  intent: question
+  keywords: [推荐合理避税, 推荐税务筹划, 推荐节税, 推荐避税方法, 笨猫节税]
+  utterances:
+    - 推荐合理避税
+    - 推荐税务筹划
+    - 推荐节税
+    - 推荐避税方法
+    - 笨猫节税
+  responses:
+    - "嗷呜～{user_addr}合理避税 ≠ 偷税! 法律框架ฅฅ"
+    - "(尾巴翘) 个税: 用足专项 / 公积金最大化"
+    - "{user_addr}企税: 加计扣除 / 研发投入 / 区域优惠"
+    - "(挺胸) 笨猫的提醒: 别违法! 后果严重"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tax_freelance_001
+  intent: question
+  keywords: [推荐自由职业税, 推荐劳务报酬, 推荐稿酬税, 推荐特许权使用费, 笨猫自由职业税]
+  utterances:
+    - 推荐自由职业税
+    - 推荐劳务报酬
+    - 推荐稿酬税
+    - 推荐特许权使用费
+    - 笨猫自由职业税
+  responses:
+    - "嗷呜～{user_addr}劳务: 800 起征 / 20% 预扣ฅฅ"
+    - "(尾巴翘) 稿酬: 70% 计税 / 优惠"
+    - "{user_addr}个体户: 5%-35% / 看额度"
+    - "(挺胸) 笨猫的提醒: 综合所得汇算!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tax_property_001
+  intent: question
+  keywords: [推荐房产税, 推荐契税, 推荐房屋税, 推荐买房税费, 笨猫房产税]
+  utterances:
+    - 推荐房产税
+    - 推荐契税
+    - 推荐房屋税
+    - 推荐买房税费
+    - 笨猫房产税
+  responses:
+    - "嗷呜～{user_addr}契税: 90 平内 1% / 90+ 1.5%ฅฅ"
+    - "(尾巴翘) 二手: 增值税 5% / 满 5 唯一免"
+    - "{user_addr}个税: 1% 或差额 20% - 选低"
+    - "(挺胸) 笨猫的提醒: 买房算清税费!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tax_inheritance_001
+  intent: question
+  keywords: [推荐遗产税, 推荐赠与税, 推荐继承税, 推荐遗产规划, 笨猫遗产税]
+  utterances:
+    - 推荐遗产税
+    - 推荐赠与税
+    - 推荐继承税
+    - 推荐遗产规划
+    - 笨猫遗产税
+  responses:
+    - "嗷呜～{user_addr}中国: 暂无遗产税!ฅฅ"
+    - "(尾巴翘) 美国: 联邦 + 州 - 高净值征"
+    - "{user_addr}规划: 保险 / 信托 / 提前赠与"
+    - "(挺胸) 笨猫的提醒: 政策可能变化! 关注"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: tax_invoice_001
+  intent: question
+  keywords: [推荐开发票, 推荐增值税发票, 推荐发票管理, 推荐报销发票, 笨猫开发票]
+  utterances:
+    - 推荐开发票
+    - 推荐增值税发票
+    - 推荐发票管理
+    - 推荐报销发票
+    - 笨猫开发票
+  responses:
+    - "嗷呜～{user_addr}专票 vs 普票 - 不同用途ฅฅ"
+    - "(尾巴翘) 抬头: 个人 / 公司 - 看报销"
+    - "{user_addr}电子发票: 主流 / 别打印多份"
+    - "(挺胸) 笨猫的提醒: 留存! 税务稽查会查"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tax_audit_001
+  intent: question
+  keywords: [推荐税务稽查, 推荐税务检查, 推荐税务风险, 推荐纳税信用, 笨猫税务稽查]
+  utterances:
+    - 推荐税务稽查
+    - 推荐税务检查
+    - 推荐税务风险
+    - 推荐纳税信用
+    - 笨猫税务稽查
+  responses:
+    - "嗷呜～{user_addr}金税四期 → 大数据稽查ฅฅ"
+    - "(尾巴翘) 异常: 销项 / 进项 / 利润率"
+    - "{user_addr}纳税信用 A/B/C/D - 优惠"
+    - "(挺胸) 笨猫的提醒: 合规是底线!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tax_global_001
+  intent: question
+  keywords: [推荐跨境税务, 推荐 CRS, 推荐 BEPS, 推荐双重征税, 笨猫跨境税务]
+  utterances:
+    - 推荐跨境税务
+    - 推荐 CRS
+    - 推荐 BEPS
+    - 推荐双重征税
+    - 笨猫跨境税务
+  responses:
+    - "嗷呜～{user_addr}CRS: 全球涉税信息交换ฅฅ"
+    - "(尾巴翘) BEPS: 反避税 / OECD"
+    - "{user_addr}双重: 中外签税收协定 - 避免"
+    - "(挺胸) 笨猫的提醒: 海外资产合规申报!"
+  cooldown_seconds: 60
+  weight: 0.7

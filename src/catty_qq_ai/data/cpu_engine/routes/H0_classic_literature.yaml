@@ -1,0 +1,207 @@
+# 古典文学 / 唐诗宋词 / 元曲 / 名著 routes (S6 R92 NLU 节点扩充, 第九周期 buffered 1/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 99 culture_history (浅触) / D4 history_event 区分: 这里专注文学经典.
+
+- name: lit_tang_001
+  intent: question
+  keywords: [推荐唐诗, 推荐李白, 推荐杜甫, 推荐白居易, 笨猫唐诗]
+  utterances:
+    - 推荐唐诗
+    - 推荐李白
+    - 推荐杜甫
+    - 推荐白居易
+    - 笨猫唐诗
+  responses:
+    - "嗷呜～{user_addr}唐诗三大家: 李白 (诗仙) / 杜甫 (诗圣) / 白居易ฅฅ"
+    - "(尾巴翘) 必读: 静夜思 / 春望 / 长恨歌"
+    - "{user_addr}盛唐 / 中唐 / 晚唐 - 风格不同"
+    - "(挺胸) 笨猫推荐: 《唐诗三百首》入门"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_song_001
+  intent: question
+  keywords: [推荐宋词, 推荐苏轼, 推荐李清照, 推荐辛弃疾, 笨猫宋词]
+  utterances:
+    - 推荐宋词
+    - 推荐苏轼
+    - 推荐李清照
+    - 推荐辛弃疾
+    - 笨猫宋词
+  responses:
+    - "嗷呜～{user_addr}宋词: 婉约 (柳永/李清照) / 豪放 (苏轼/辛弃疾)ฅฅ"
+    - "(尾巴翘) 苏东坡: 念奴娇 / 水调歌头 - 千古绝唱"
+    - "{user_addr}李清照: 千古才女 / 易安体"
+    - "(挺胸) 笨猫推荐: 《宋词三百首》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_4classics_001
+  intent: question
+  keywords: [推荐四大名著, 推荐红楼梦, 推荐三国演义, 推荐水浒传, 笨猫四大名著]
+  utterances:
+    - 推荐四大名著
+    - 推荐红楼梦
+    - 推荐三国演义
+    - 推荐水浒传
+    - 笨猫四大名著
+  responses:
+    - "嗷呜～{user_addr}红楼梦 (曹) / 三国 (罗) / 水浒 (施) / 西游 (吴)ฅฅ"
+    - "(尾巴翘) 红楼: 文学巅峰 / 红学专门研究"
+    - "{user_addr}西游: 神魔 / 三国: 历史 / 水浒: 英雄"
+    - "(挺胸) 笨猫推荐: 一辈子读 5 遍 - 各有体会"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_redmansions_001
+  intent: question
+  keywords: [推荐红楼梦, 推荐曹雪芹, 推荐林黛玉, 推荐贾宝玉, 笨猫红楼梦]
+  utterances:
+    - 推荐红楼梦
+    - 推荐曹雪芹
+    - 推荐林黛玉
+    - 推荐贾宝玉
+    - 笨猫红楼梦
+  responses:
+    - "嗷呜～{user_addr}红楼梦: 4 大家族兴衰 / 中国文学顶峰ฅฅ"
+    - "(尾巴翘) 87 央版 / 王扶林导演 - 最经典改编"
+    - "{user_addr}人物: 宝黛钗 + 12 钗 - 形象鲜明"
+    - "(挺胸) 笨猫的提醒: 别只看故事! 看文化内涵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_ancient_prose_001
+  intent: question
+  keywords: [推荐古文, 推荐文言文, 推荐唐宋八大家, 推荐韩愈, 笨猫古文]
+  utterances:
+    - 推荐古文
+    - 推荐文言文
+    - 推荐唐宋八大家
+    - 推荐韩愈
+    - 笨猫古文
+  responses:
+    - "嗷呜～{user_addr}唐宋八大家: 韩柳 (唐) / 欧苏曾王三苏ฅฅ"
+    - "(尾巴翘) 必读: 师说 / 醉翁亭记 / 岳阳楼记"
+    - "{user_addr}先秦: 孟子 / 庄子 / 史记 - 古文源头"
+    - "(挺胸) 笨猫推荐: 《古文观止》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lit_shijing_001
+  intent: question
+  keywords: [推荐诗经, 推荐楚辞, 推荐离骚, 推荐屈原, 笨猫诗经]
+  utterances:
+    - 推荐诗经
+    - 推荐楚辞
+    - 推荐离骚
+    - 推荐屈原
+    - 笨猫诗经
+  responses:
+    - "嗷呜～{user_addr}诗经: 中国诗歌源头 / 305 篇ฅฅ"
+    - "(尾巴翘) 关雎: 风雅颂之首 / 经典中经典"
+    - "{user_addr}楚辞: 屈原 / 离骚 - 浪漫主义之祖"
+    - "(挺胸) 笨猫推荐: 必读《诗经》《楚辞》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lit_yuan_drama_001
+  intent: question
+  keywords: [推荐元曲, 推荐杂剧, 推荐西厢记, 推荐窦娥冤, 笨猫元曲]
+  utterances:
+    - 推荐元曲
+    - 推荐杂剧
+    - 推荐西厢记
+    - 推荐窦娥冤
+    - 笨猫元曲
+  responses:
+    - "嗷呜～{user_addr}元曲: 关汉卿 / 王实甫 / 马致远 / 白朴ฅฅ"
+    - "(尾巴翘) 经典: 西厢记 / 窦娥冤 / 牡丹亭"
+    - "{user_addr}元杂剧 + 散曲 - 元代文学"
+    - "(挺胸) 笨猫推荐: 看戏曲版改编"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: lit_strange_001
+  intent: question
+  keywords: [推荐聊斋, 推荐蒲松龄, 推荐儒林外史, 推荐封神演义, 笨猫聊斋]
+  utterances:
+    - 推荐聊斋
+    - 推荐蒲松龄
+    - 推荐儒林外史
+    - 推荐封神演义
+    - 笨猫聊斋
+  responses:
+    - "嗷呜～{user_addr}聊斋志异: 鬼狐精怪 / 蒲松龄 491 篇ฅฅ"
+    - "(尾巴翘) 儒林外史: 吴敬梓 / 讽刺小说"
+    - "{user_addr}封神演义: 神魔小说 / 商周大战"
+    - "(挺胸) 笨猫推荐: 看现代影视改编入门"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: lit_modern_classic_001
+  intent: question
+  keywords: [推荐鲁迅, 推荐茅盾, 推荐巴金, 推荐老舍, 笨猫鲁迅]
+  utterances:
+    - 推荐鲁迅
+    - 推荐茅盾
+    - 推荐巴金
+    - 推荐老舍
+    - 笨猫鲁迅
+  responses:
+    - "嗷呜～{user_addr}现代文学四大家: 鲁郭茅巴老曹ฅฅ"
+    - "(尾巴翘) 鲁迅: 狂人日记 / 阿 Q 正传 / 呐喊"
+    - "{user_addr}老舍: 骆驼祥子 / 四世同堂 - 北京味儿"
+    - "(挺胸) 笨猫推荐: 中学课文重读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_contemporary_001
+  intent: question
+  keywords: [推荐当代文学, 推荐莫言, 推荐余华, 推荐刘慈欣, 笨猫当代文学]
+  utterances:
+    - 推荐当代文学
+    - 推荐莫言
+    - 推荐余华
+    - 推荐刘慈欣
+    - 笨猫当代文学
+  responses:
+    - "嗷呜～{user_addr}诺奖: 莫言 (2012) - 中国第一位ฅฅ"
+    - "(尾巴翘) 余华: 活着 / 兄弟 / 在细雨中呼喊"
+    - "{user_addr}刘慈欣: 三体 - 雨果奖 / 国货科幻"
+    - "(挺胸) 笨猫推荐: 《活着》《三体》必读"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_world_class_001
+  intent: question
+  keywords: [推荐世界名著, 推荐百年孤独, 推荐战争与和平, 推荐悲惨世界, 笨猫世界名著]
+  utterances:
+    - 推荐世界名著
+    - 推荐百年孤独
+    - 推荐战争与和平
+    - 推荐悲惨世界
+    - 笨猫世界名著
+  responses:
+    - "嗷呜～{user_addr}经典: 百年孤独 / 战争与和平 / 悲惨世界ฅฅ"
+    - "(尾巴翘) 俄: 托尔斯泰 / 陀思妥耶夫斯基"
+    - "{user_addr}法: 雨果 / 加缪 / 巴尔扎克"
+    - "(挺胸) 笨猫推荐: 一年读 5 本世界名著"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lit_poetry_modern_001
+  intent: question
+  keywords: [推荐现代诗, 推荐徐志摩, 推荐海子, 推荐顾城, 笨猫现代诗]
+  utterances:
+    - 推荐现代诗
+    - 推荐徐志摩
+    - 推荐海子
+    - 推荐顾城
+    - 笨猫现代诗
+  responses:
+    - "嗷呜～{user_addr}徐志摩: 再别康桥 / 偶然 - 浪漫派ฅฅ"
+    - "(尾巴翘) 海子: 面朝大海 / 春暖花开 - 朴素哲学"
+    - "{user_addr}顾城: 一代人 / 黑夜给我黑色的眼睛"
+    - "(挺胸) 笨猫推荐: 北岛 / 舒婷 / 食指 - 朦胧派"
+  cooldown_seconds: 60
+  weight: 0.9

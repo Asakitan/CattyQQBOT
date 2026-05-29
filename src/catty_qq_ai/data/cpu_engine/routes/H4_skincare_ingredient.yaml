@@ -1,0 +1,207 @@
+# 护肤成分 / 科学护肤 / 成分党 routes (S6 R96 NLU 节点扩充, 第九周期 buffered 5/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 B2 beauty_skincare (步骤/品牌) 区分: 这里专注护肤成分科学.
+
+- name: skin_retinol_001
+  intent: question
+  keywords: [推荐 A 醇, 推荐视黄醇, 推荐 retinol, 推荐维 A 酸, 笨猫 A 醇]
+  utterances:
+    - 推荐 A 醇
+    - 推荐视黄醇
+    - 推荐 retinol
+    - 推荐维 A 酸
+    - 笨猫 A 醇
+  responses:
+    - "嗷呜～{user_addr}A 醇: 抗老金标准 / 临床证据最足ฅฅ"
+    - "(尾巴翘) 浓度: 0.025% 入门 → 0.5% 专业"
+    - "{user_addr}晚上用 + 防晒必须"
+    - "(挺胸) 笨猫的提醒: 建立耐受! 慢慢加量"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: skin_vc_001
+  intent: question
+  keywords: [推荐 VC, 推荐左旋 VC, 推荐 L-AA, 推荐维 C 精华, 笨猫 VC]
+  utterances:
+    - 推荐 VC
+    - 推荐左旋 VC
+    - 推荐 L-AA
+    - 推荐维 C 精华
+    - 笨猫 VC
+  responses:
+    - "嗷呜～{user_addr}VC: 美白 + 抗氧化 + 抗光老ฅฅ"
+    - "(尾巴翘) 左旋 VC (L-AA): 黄金标准 / 不稳定"
+    - "{user_addr}OK: 修丽可 CE / 倩碧 VC"
+    - "(挺胸) 笨猫的提醒: VC + VE + 阿魏酸 = 强力配方"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: skin_ha_001
+  intent: question
+  keywords: [推荐玻尿酸, 推荐透明质酸, 推荐保湿, 推荐 HA, 笨猫玻尿酸]
+  utterances:
+    - 推荐玻尿酸
+    - 推荐透明质酸
+    - 推荐保湿
+    - 推荐 HA
+    - 笨猫玻尿酸
+  responses:
+    - "嗷呜～{user_addr}玻尿酸: 吸水神器 / 1g 吸 1000g 水ฅฅ"
+    - "(尾巴翘) 大分子 (表面) / 小分子 (深层)"
+    - "{user_addr}各品牌都有 / 关键看浓度"
+    - "(挺胸) 笨猫的提醒: 干环境锁水! 配封闭剂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: skin_niacinamide_001
+  intent: question
+  keywords: [推荐烟酰胺, 推荐 niacinamide, 推荐 OLAY 小白瓶, 推荐 niacinamide 浓度, 笨猫烟酰胺]
+  utterances:
+    - 推荐烟酰胺
+    - 推荐 niacinamide
+    - 推荐 OLAY 小白瓶
+    - 推荐 niacinamide 浓度
+    - 笨猫烟酰胺
+  responses:
+    - "嗷呜～{user_addr}烟酰胺: 美白 + 控油 + 修复屏障ฅฅ"
+    - "(尾巴翘) 浓度 4-5% 黄金 / 10% 易刺激"
+    - "{user_addr}OLAY 小白瓶 / The Ordinary 10%"
+    - "(挺胸) 笨猫的提醒: 敏感肌先建立耐受!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: skin_acid_001
+  intent: question
+  keywords: [推荐刷酸, 推荐 BHA, 推荐水杨酸, 推荐果酸, 笨猫刷酸]
+  utterances:
+    - 推荐刷酸
+    - 推荐 BHA
+    - 推荐水杨酸
+    - 推荐果酸
+    - 笨猫刷酸
+  responses:
+    - "嗷呜～{user_addr}BHA (水杨酸): 油性 / 痘肌ฅฅ"
+    - "(尾巴翘) AHA (果酸): 干性 / 老化"
+    - "{user_addr}PHA (葡萄糖酸): 敏感肌温和"
+    - "(挺胸) 笨猫的提醒: 别天天刷! 1-2 次/周"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: skin_peptide_001
+  intent: question
+  keywords: [推荐胜肽, 推荐 peptide, 推荐六胜肽, 推荐五胜肽, 笨猫胜肽]
+  utterances:
+    - 推荐胜肽
+    - 推荐 peptide
+    - 推荐六胜肽
+    - 推荐五胜肽
+    - 笨猫胜肽
+  responses:
+    - "嗷呜～{user_addr}胜肽: 类似肉毒 / 抗皱抗老ฅฅ"
+    - "(尾巴翘) 六胜肽: 类肉毒 / 五胜肽: 胶原"
+    - "{user_addr}产品: HABA 多胜肽 / 倩碧"
+    - "(挺胸) 笨猫的提醒: 效果慢 / 长期坚持"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: skin_sunscreen_002
+  intent: question
+  keywords: [推荐防晒成分, 推荐物理防晒, 推荐化学防晒, 推荐 SPF50, 笨猫防晒成分]
+  utterances:
+    - 推荐防晒成分
+    - 推荐物理防晒
+    - 推荐化学防晒
+    - 推荐 SPF50
+    - 笨猫防晒成分
+  responses:
+    - "嗷呜～{user_addr}物理: 氧化锌 / 二氧化钛 - 敏感肌ฅฅ"
+    - "(尾巴翘) 化学: 阿伏苯宗 / 二苯酮 - 透明"
+    - "{user_addr}日常 SPF30 / 户外 SPF50+ PA+++"
+    - "(挺胸) 笨猫的提醒: 2-3 小时补涂!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: skin_arbutin_001
+  intent: question
+  keywords: [推荐熊果苷, 推荐 arbutin, 推荐美白成分, 推荐曲酸, 笨猫熊果苷]
+  utterances:
+    - 推荐熊果苷
+    - 推荐 arbutin
+    - 推荐美白成分
+    - 推荐曲酸
+    - 笨猫熊果苷
+  responses:
+    - "嗷呜～{user_addr}美白家族: 熊果苷 / 曲酸 / 鞣花酸 / 传明酸ฅฅ"
+    - "(尾巴翘) α-熊果苷 比 β 强 10 倍"
+    - "{user_addr}医美级: 氢醌 - 需处方"
+    - "(挺胸) 笨猫的提醒: 防晒 > 美白! 重要"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: skin_ceramide_001
+  intent: question
+  keywords: [推荐神经酰胺, 推荐 ceramide, 推荐修复屏障, 推荐 CeraVe, 笨猫神经酰胺]
+  utterances:
+    - 推荐神经酰胺
+    - 推荐 ceramide
+    - 推荐修复屏障
+    - 推荐 CeraVe
+    - 笨猫神经酰胺
+  responses:
+    - "嗷呜～{user_addr}神经酰胺: 角质间脂质 / 屏障修复ฅฅ"
+    - "(尾巴翘) 干燥 / 敏感 / 屏障受损 - 必用"
+    - "{user_addr}品牌: CeraVe / 适乐肤 / 玉泽"
+    - "(挺胸) 笨猫的提醒: 配胆固醇 + 脂肪酸 = 3:1:1"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: skin_squalane_001
+  intent: question
+  keywords: [推荐角鲨烷, 推荐 squalane, 推荐霍霍巴油, 推荐脸油, 笨猫角鲨烷]
+  utterances:
+    - 推荐角鲨烷
+    - 推荐 squalane
+    - 推荐霍霍巴油
+    - 推荐脸油
+    - 笨猫角鲨烷
+  responses:
+    - "嗷呜～{user_addr}角鲨烷: 仿生皮脂 / 不刺激ฅฅ"
+    - "(尾巴翘) 干性肌 / 敏感肌 福音"
+    - "{user_addr}The Ordinary 100% 角鲨烷 - 性价比"
+    - "(挺胸) 笨猫的提醒: 油皮少用!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: skin_acne_treatment_001
+  intent: question
+  keywords: [推荐祛痘成分, 推荐过氧化苯, 推荐 BPO, 推荐杜鹃花酸, 笨猫祛痘成分]
+  utterances:
+    - 推荐祛痘成分
+    - 推荐过氧化苯
+    - 推荐 BPO
+    - 推荐杜鹃花酸
+    - 笨猫祛痘成分
+  responses:
+    - "嗷呜～{user_addr}BPO (过氧化苯甲酰): 杀菌 / 临床有效ฅฅ"
+    - "(尾巴翘) 杜鹃花酸: 温和 / 痘印痘红"
+    - "{user_addr}严重痘: 看皮肤科 / 异维 A 酸"
+    - "(挺胸) 笨猫的提醒: 别挤! 留疤"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: skin_DIY_001
+  intent: question
+  keywords: [推荐 DIY 面膜, 推荐自制护肤品, 推荐天然护肤, 推荐手工皂, 笨猫 DIY 护肤]
+  utterances:
+    - 推荐 DIY 面膜
+    - 推荐自制护肤品
+    - 推荐天然护肤
+    - 推荐手工皂
+    - 笨猫 DIY 护肤
+  responses:
+    - "嗷呜～{user_addr}DIY 风险大! 不建议ฅฅ"
+    - "(尾巴翘) 卫生 / 浓度 / 配方 - 难控制"
+    - "{user_addr}天然 ≠ 安全 / 有效"
+    - "(挺胸) 笨猫的提醒: 买正规品牌!"
+  cooldown_seconds: 60
+  weight: 0.8

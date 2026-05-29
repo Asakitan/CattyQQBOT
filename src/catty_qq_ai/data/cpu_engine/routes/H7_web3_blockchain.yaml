@@ -1,0 +1,206 @@
+# Web3 / 区块链 / DeFi / Bitcoin routes (S6 R99 NLU 节点扩充, 第九周期 buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: web3_bitcoin_001
+  intent: question
+  keywords: [推荐比特币, 推荐 BTC, 推荐中本聪, 推荐比特币挖矿, 笨猫比特币]
+  utterances:
+    - 推荐比特币
+    - 推荐 BTC
+    - 推荐中本聪
+    - 推荐比特币挖矿
+    - 笨猫比特币
+  responses:
+    - "嗷呜～{user_addr}BTC: 2009 中本聪 / 区块链鼻祖ฅฅ"
+    - "(尾巴翘) 总量 2100w / 减半 4 年一次"
+    - "{user_addr}最高 10w+ 美金 / 数字黄金"
+    - "(挺胸) 笨猫的提醒: 高风险! 别 ALL IN"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: web3_eth_001
+  intent: question
+  keywords: [推荐以太坊, 推荐 ETH, 推荐智能合约, 推荐 Vitalik, 笨猫以太坊]
+  utterances:
+    - 推荐以太坊
+    - 推荐 ETH
+    - 推荐智能合约
+    - 推荐 Vitalik
+    - 笨猫以太坊
+  responses:
+    - "嗷呜～{user_addr}ETH: 智能合约平台 / V 神创立ฅฅ"
+    - "(尾巴翘) 2022 合并: PoS / 节能"
+    - "{user_addr}应用: DeFi / NFT / DAO - 生态丰富"
+    - "(挺胸) 笨猫的提醒: 学开发: Solidity 编程"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: web3_defi_001
+  intent: question
+  keywords: [推荐 DeFi, 推荐去中心化金融, 推荐 Uniswap, 推荐 AAVE, 笨猫 DeFi]
+  utterances:
+    - 推荐 DeFi
+    - 推荐去中心化金融
+    - 推荐 Uniswap
+    - 推荐 AAVE
+    - 笨猫 DeFi
+  responses:
+    - "嗷呜～{user_addr}DeFi: 去中心化金融 / 颠覆传统ฅฅ"
+    - "(尾巴翘) Uniswap (DEX) / AAVE (借贷) / Curve"
+    - "{user_addr}流动性挖矿 / 收益高但风险高"
+    - "(挺胸) 笨猫的提醒: 智能合约风险! 一夜归零"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: web3_wallet_001
+  intent: question
+  keywords: [推荐数字钱包, 推荐 MetaMask, 推荐 Ledger, 推荐冷钱包, 笨猫钱包]
+  utterances:
+    - 推荐数字钱包
+    - 推荐 MetaMask
+    - 推荐 Ledger
+    - 推荐冷钱包
+    - 笨猫钱包
+  responses:
+    - "嗷呜～{user_addr}热钱包: MetaMask / TrustWallet - 方便ฅฅ"
+    - "(尾巴翘) 冷钱包: Ledger / Trezor - 大额"
+    - "{user_addr}助记词 12/24 - 离线保存!"
+    - "(挺胸) 笨猫的提醒: 私钥丢就完蛋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: web3_exchange_001
+  intent: question
+  keywords: [推荐交易所, 推荐 Binance, 推荐 Coinbase, 推荐 OKX, 笨猫交易所]
+  utterances:
+    - 推荐交易所
+    - 推荐 Binance
+    - 推荐 Coinbase
+    - 推荐 OKX
+    - 笨猫交易所
+  responses:
+    - "嗷呜～{user_addr}主流: Binance / Coinbase / OKX / Bybit ฅฅ"
+    - "(尾巴翘) 美国合规: Coinbase / Kraken"
+    - "{user_addr}国内禁止! 用海外平台"
+    - "(挺胸) 笨猫的提醒: 别用小交易所! 跑路风险"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: web3_stablecoin_001
+  intent: question
+  keywords: [推荐稳定币, 推荐 USDT, 推荐 USDC, 推荐 DAI, 笨猫稳定币]
+  utterances:
+    - 推荐稳定币
+    - 推荐 USDT
+    - 推荐 USDC
+    - 推荐 DAI
+    - 笨猫稳定币
+  responses:
+    - "嗷呜～{user_addr}USDT: 市占第一 / 但合规争议ฅฅ"
+    - "(尾巴翘) USDC: 合规 / Coinbase + Circle"
+    - "{user_addr}DAI: 去中心 / 算法稳定币"
+    - "(挺胸) 笨猫的提醒: 稳定币不 100% 稳! 历史 depeg"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: web3_dao_001
+  intent: question
+  keywords: [推荐 DAO, 推荐去中心化组织, 推荐 governance token, 推荐 DAO 治理, 笨猫 DAO]
+  utterances:
+    - 推荐 DAO
+    - 推荐去中心化组织
+    - 推荐 governance token
+    - 推荐 DAO 治理
+    - 笨猫 DAO
+  responses:
+    - "嗷呜～{user_addr}DAO: 去中心化自治组织 / 区块链治理ฅฅ"
+    - "(尾巴翘) MakerDAO / Uniswap DAO - 治理代币"
+    - "{user_addr}智能合约 + 投票 - 自动执行"
+    - "(挺胸) 笨猫推荐: 看 a16z DAO 报告"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: web3_layer2_001
+  intent: question
+  keywords: [推荐 Layer 2, 推荐 Arbitrum, 推荐 Optimism, 推荐 zkSync, 笨猫 Layer 2]
+  utterances:
+    - 推荐 Layer 2
+    - 推荐 Arbitrum
+    - 推荐 Optimism
+    - 推荐 zkSync
+    - 笨猫 Layer 2
+  responses:
+    - "嗷呜～{user_addr}Layer 2: 以太坊扩容 / 降 gasฅฅ"
+    - "(尾巴翘) Arbitrum / Optimism / zkSync - 三大"
+    - "{user_addr}转账几分钱 / 速度秒级"
+    - "(挺胸) 笨猫的提醒: 未来主流!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: web3_meme_001
+  intent: question
+  keywords: [推荐 meme 币, 推荐 Dogecoin, 推荐 Shiba, 推荐 PEPE, 笨猫 meme 币]
+  utterances:
+    - 推荐 meme 币
+    - 推荐 Dogecoin
+    - 推荐 Shiba
+    - 推荐 PEPE
+    - 笨猫 meme 币
+  responses:
+    - "嗷呜～{user_addr}meme 币: 文化驱动 / 高波动ฅฅ"
+    - "(尾巴翘) DOGE (狗狗) / SHIB (柴犬) / PEPE"
+    - "{user_addr}赌博性质! 涨千倍 / 跌 99%"
+    - "(挺胸) 笨猫的提醒: 别 ALL IN! 玩玩可以"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: web3_china_policy_001
+  intent: question
+  keywords: [推荐中国数字货币, 推荐 e-CNY, 推荐 DCEP, 推荐数字人民币, 笨猫数字人民币]
+  utterances:
+    - 推荐中国数字货币
+    - 推荐 e-CNY
+    - 推荐 DCEP
+    - 推荐数字人民币
+    - 笨猫数字人民币
+  responses:
+    - "嗷呜～{user_addr}数字人民币: 央行数字货币 (CBDC)ฅฅ"
+    - "(尾巴翘) 试点城市: 北京 / 深圳 / 苏州 等"
+    - "{user_addr}与加密货币不同! 中心化"
+    - "(挺胸) 笨猫的提醒: 国家政策! 关注最新"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: web3_security_001
+  intent: question
+  keywords: [推荐加密安全, 推荐防黑客 web3, 推荐钓鱼防, 推荐 rug pull, 笨猫加密安全]
+  utterances:
+    - 推荐加密安全
+    - 推荐防黑客 web3
+    - 推荐钓鱼防
+    - 推荐 rug pull
+    - 笨猫加密安全
+  responses:
+    - "嗷呜～{user_addr}rug pull: 项目方跑路 / 常见骗局ฅฅ"
+    - "(尾巴翘) 钓鱼网站 / 假合约 - 防不胜防"
+    - "{user_addr}DYOR (做自己研究) - 黄金法则"
+    - "(挺胸) 笨猫的提醒: 别签名陌生合约!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: web3_career_001
+  intent: question
+  keywords: [推荐 web3 工作, 推荐区块链开发, 推荐进入加密行业, 推荐 web3 学习, 笨猫 web3 学习]
+  utterances:
+    - 推荐 web3 工作
+    - 推荐区块链开发
+    - 推荐进入加密行业
+    - 推荐 web3 学习
+    - 笨猫 web3 学习
+  responses:
+    - "嗷呜～{user_addr}技术: Solidity / Rust - 智能合约ฅฅ"
+    - "(尾巴翘) 非技术: 社区 / 营销 / 研究员"
+    - "{user_addr}学: Cryptozombies / Cyfrin / Speedrun ETH"
+    - "(挺胸) 笨猫的提醒: 行业初期! 机会多风险大"
+  cooldown_seconds: 60
+  weight: 0.9

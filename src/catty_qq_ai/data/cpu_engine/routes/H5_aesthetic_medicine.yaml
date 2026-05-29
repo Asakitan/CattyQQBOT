@@ -1,0 +1,206 @@
+# 医美 / 微整形 / 光电 / 玻尿酸 routes (S6 R97 NLU 节点扩充, 第九周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: med_botox_001
+  intent: question
+  keywords: [推荐肉毒素, 推荐 Botox, 推荐除皱针, 推荐瘦脸针, 笨猫肉毒]
+  utterances:
+    - 推荐肉毒素
+    - 推荐 Botox
+    - 推荐除皱针
+    - 推荐瘦脸针
+    - 笨猫肉毒
+  responses:
+    - "嗷呜～{user_addr}肉毒素: 美国 Botox / 韩国吉适 / 兰州衡力ฅฅ"
+    - "(尾巴翘) 部位: 鱼尾纹 / 眉间 / 抬头 / 咬肌"
+    - "{user_addr}维持: 4-6 个月 / 需补打"
+    - "(挺胸) 笨猫的提醒: 找正规医院 + 持证医生!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: med_filler_001
+  intent: question
+  keywords: [推荐玻尿酸注射, 推荐填充, 推荐 HA filler, 推荐丰唇, 笨猫玻尿酸注射]
+  utterances:
+    - 推荐玻尿酸注射
+    - 推荐填充
+    - 推荐 HA filler
+    - 推荐丰唇
+    - 笨猫玻尿酸注射
+  responses:
+    - "嗷呜～{user_addr}玻尿酸: 乔雅登 / 瑞蓝 / 海薇 - 主流ฅฅ"
+    - "(尾巴翘) 部位: 鼻 / 唇 / 苹果肌 / 泪沟"
+    - "{user_addr}维持: 6-12 个月 / 慢慢吸收"
+    - "(挺胸) 笨猫的提醒: 别贪便宜! 假货毁脸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: med_thermage_001
+  intent: question
+  keywords: [推荐热玛吉, 推荐 Thermage, 推荐射频抗老, 推荐紧致, 笨猫热玛吉]
+  utterances:
+    - 推荐热玛吉
+    - 推荐 Thermage
+    - 推荐射频抗老
+    - 推荐紧致
+    - 笨猫热玛吉
+  responses:
+    - "嗷呜～{user_addr}热玛吉: 射频深层 / 抗老金标准ฅฅ"
+    - "(尾巴翘) 5 代 / FLX / 国产新款 - 多选"
+    - "{user_addr}1.5 万-3 万 / 2-3 年一次"
+    - "(挺胸) 笨猫的提醒: 找正版! 假货效果差"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: med_ultraformer_001
+  intent: question
+  keywords: [推荐超声刀, 推荐 Ulthera, 推荐 Ultraformer, 推荐 HIFU, 笨猫超声刀]
+  utterances:
+    - 推荐超声刀
+    - 推荐 Ulthera
+    - 推荐 Ultraformer
+    - 推荐 HIFU
+    - 笨猫超声刀
+  responses:
+    - "嗷呜～{user_addr}超声刀: 聚焦超声 / 深层提升ฅฅ"
+    - "(尾巴翘) Ulthera (美版) / Ultraformer III (韩)"
+    - "{user_addr}效果 6-12 月维持"
+    - "(挺胸) 笨猫的提醒: 国内 Ulthera 暂未获批!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: med_pico_001
+  intent: question
+  keywords: [推荐皮秒, 推荐 picosecond, 推荐祛斑激光, 推荐淡斑激光, 笨猫皮秒]
+  utterances:
+    - 推荐皮秒
+    - 推荐 picosecond
+    - 推荐祛斑激光
+    - 推荐淡斑激光
+    - 笨猫皮秒
+  responses:
+    - "嗷呜～{user_addr}皮秒: 比纳秒快 / 祛斑效果好ฅฅ"
+    - "(尾巴翘) 主流: 美国赛诺秀 / 以色列飞顿"
+    - "{user_addr}祛斑 + 嫩肤 + 毛孔细化"
+    - "(挺胸) 笨猫的提醒: 需 3-5 次见效!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: med_op_double_eye_001
+  intent: question
+  keywords: [推荐双眼皮, 推荐割双眼皮, 推荐韩式双眼皮, 推荐全切, 笨猫双眼皮]
+  utterances:
+    - 推荐双眼皮
+    - 推荐割双眼皮
+    - 推荐韩式双眼皮
+    - 推荐全切
+    - 笨猫双眼皮
+  responses:
+    - "嗷呜～{user_addr}方式: 全切 / 半切 / 埋线 - 三种ฅฅ"
+    - "(尾巴翘) 全切持久 / 埋线易消"
+    - "{user_addr}恢复: 1-3 月消肿 / 半年看效果"
+    - "(挺胸) 笨猫的提醒: 找经验丰富医生!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: med_op_nose_001
+  intent: question
+  keywords: [推荐隆鼻, 推荐鼻整形, 推荐假体隆鼻, 推荐韩式鼻综合, 笨猫隆鼻]
+  utterances:
+    - 推荐隆鼻
+    - 推荐鼻整形
+    - 推荐假体隆鼻
+    - 推荐韩式鼻综合
+    - 笨猫隆鼻
+  responses:
+    - "嗷呜～{user_addr}方式: 假体 / 自体软骨 / 玻尿酸ฅฅ"
+    - "(尾巴翘) 综合鼻: 假体 + 软骨 - 自然"
+    - "{user_addr}硅胶 vs 膨体 - 各有特点"
+    - "(挺胸) 笨猫的提醒: 找鼻综合大师!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: med_hair_planting_001
+  intent: question
+  keywords: [推荐植发, 推荐 FUE, 推荐 FUT, 推荐头发移植, 笨猫植发]
+  utterances:
+    - 推荐植发
+    - 推荐 FUE
+    - 推荐 FUT
+    - 推荐头发移植
+    - 笨猫植发
+  responses:
+    - "嗷呜～{user_addr}FUE: 微创无痕 / 主流ฅฅ"
+    - "(尾巴翘) FUT: 提取条状 / 留疤"
+    - "{user_addr}毛囊单位: 一根 10-30 元"
+    - "(挺胸) 笨猫的提醒: 别脱发太严重才做!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: med_op_breast_001
+  intent: question
+  keywords: [推荐隆胸, 推荐假体丰胸, 推荐自体脂肪丰胸, 推荐 breast augmentation, 笨猫丰胸]
+  utterances:
+    - 推荐隆胸
+    - 推荐假体丰胸
+    - 推荐自体脂肪丰胸
+    - 推荐 breast augmentation
+    - 笨猫丰胸
+  responses:
+    - "嗷呜～{user_addr}假体: 硅胶主流 / 长久ฅฅ"
+    - "(尾巴翘) 自体脂肪: 自然 / 但吸收"
+    - "{user_addr}10-30w 不等 / 看医院和材料"
+    - "(挺胸) 笨猫的提醒: 慎重! 永久性手术"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: med_orthodontics_001
+  intent: question
+  keywords: [推荐牙齿矫正, 推荐隐形矫正, 推荐隐适美, 推荐 Invisalign, 笨猫牙齿矫正]
+  utterances:
+    - 推荐牙齿矫正
+    - 推荐隐形矫正
+    - 推荐隐适美
+    - 推荐 Invisalign
+    - 笨猫牙齿矫正
+  responses:
+    - "嗷呜～{user_addr}矫正: 传统钢牙 / 陶瓷 / 隐形ฅฅ"
+    - "(尾巴翘) 隐形: 隐适美 / 时代天使 - 主流"
+    - "{user_addr}1-3 年 / 2-8 万不等"
+    - "(挺胸) 笨猫的提醒: 越早越好! 30+ 难度大"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: med_teeth_white_001
+  intent: question
+  keywords: [推荐牙齿美白, 推荐冷光美白, 推荐瓷贴面, 推荐皓齿净, 笨猫牙齿美白]
+  utterances:
+    - 推荐牙齿美白
+    - 推荐冷光美白
+    - 推荐瓷贴面
+    - 推荐皓齿净
+    - 笨猫牙齿美白
+  responses:
+    - "嗷呜～{user_addr}冷光美白: 1 次见效 / 维持 1-2 年ฅฅ"
+    - "(尾巴翘) 瓷贴面: 永久 / 但磨牙"
+    - "{user_addr}日常: 美白牙膏 + 牙线"
+    - "(挺胸) 笨猫的提醒: 美白后忌咖啡茶!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: med_consult_001
+  intent: question
+  keywords: [推荐医美咨询, 推荐医美选医生, 推荐医美机构, 推荐避坑医美, 笨猫医美咨询]
+  utterances:
+    - 推荐医美咨询
+    - 推荐医美选医生
+    - 推荐医美机构
+    - 推荐避坑医美
+    - 笨猫医美咨询
+  responses:
+    - "嗷呜～{user_addr}查证: 医美机构资质 + 医生资格ฅฅ"
+    - "(尾巴翘) 平台: 新氧 / 更美 - 看案例评价"
+    - "{user_addr}面诊: 多家对比 / 别只一家"
+    - "(挺胸) 笨猫的提醒: 别贪便宜! 一线品牌正品"
+  cooldown_seconds: 60
+  weight: 1.0
