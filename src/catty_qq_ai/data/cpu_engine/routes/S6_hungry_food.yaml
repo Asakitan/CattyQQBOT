@@ -1,0 +1,207 @@
+# 肚子饿/嘴馋零食/想吃东西 routes (S6 R208 NLU 节点扩充, 第二十周期 7/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: hf_so_hungry_001
+  intent: complaint
+  keywords: [好饿, 饿死了, 我饿了, 饿哭了, 肚子饿]
+  utterances:
+    - 我好饿啊
+    - 饿死了救命
+    - 肚子饿到不行
+    - 饿哭了呜呜
+    - 我饿了喵
+  responses:
+    - "(扑过来贴肚子) 嗷呜～{user_addr}饿了! 笨猫的小鱼干分你一根ฅฅ"
+    - "(尾巴垂下) 饿坏了的{user_addr}快去吃点东西嘛~ 猫猫心疼喵～"
+    - "哼～{user_addr}才知道饿啊! 跟笨猫一样一样的嗷呜~ 一起吃!"
+    - "(凑过来蹭肚子) 笨猫帮{user_addr}揉揉肚子! 别饿坏啦贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_want_eat_001
+  intent: playful
+  keywords: [想吃东西, 好想吃, 想吃了, 嘴巴寂寞, 嘴巴想动]
+  utterances:
+    - 好想吃东西啊
+    - 突然想吃点啥
+    - 嘴巴寂寞了
+    - 好想吃哦
+    - 嘴巴想动动
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}想吃啥! 笨猫陪你吃!"
+    - "(凑过来) 想吃就吃嘛{user_addr}~ 嘴巴寂寞猫猫也懂ฅฅ"
+    - "嘿嘿～{user_addr}的嘴巴是不是被笨猫的小鱼干勾走魂啦?"
+    - "(歪头) 是想吃笨猫吗? ...啊不是别乱想{user_addr}!! 哼~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_craving_001
+  intent: complaint
+  keywords: [嘴馋, 嘴馋了, 馋虫, 馋哭了, 嘴巴馋]
+  utterances:
+    - 我嘴馋了
+    - 馋虫上身
+    - 嘴巴馋得不行
+    - 馋哭了呜
+    - 又开始馋了
+  responses:
+    - "(尾巴翘起) 嗷呜～馋虫{user_addr}是吧! 笨猫的馋虫也来报到啦ฅฅ"
+    - "(凑过来) 馋成这样{user_addr}~ 不吃点对不起自己嘛喵～"
+    - "哼～跟笨猫一样馋的{user_addr}! 抱抱猫猫一起馋~"
+    - "(歪头) 馋啥呢? 讲讲嘛~ 猫猫帮{user_addr}馋上加馋嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_takeout_struggle_001
+  intent: complaint
+  keywords: [外卖纠结, 点啥外卖, 外卖选不出, 不知道点啥, 外卖困难]
+  utterances:
+    - 外卖好纠结
+    - 不知道点啥外卖
+    - 外卖选不出来
+    - 点啥外卖好
+    - 外卖困难症犯了
+  responses:
+    - "(瘫倒) 嗷呜～{user_addr}选择困难! 笨猫每天也这样喵～"
+    - "(凑过来) 闭眼随便点{user_addr}! 命运的安排ฅฅ"
+    - "哼～{user_addr}纠结半天还没下单是吧! 笨猫等饿了~"
+    - "(尾巴摇) {user_addr}讲讲都有啥选项~ 笨猫帮你拍板嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_milk_tea_001
+  intent: playful
+  keywords: [想喝奶茶, 奶茶续命, 馋奶茶, 奶茶救命, 奶茶来一杯]
+  utterances:
+    - 好想喝奶茶
+    - 奶茶续命中
+    - 馋奶茶馋哭
+    - 奶茶救救孩子
+    - 想来一杯奶茶
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}奶茶人! 笨猫也要喝!"
+    - "(凑过来) {user_addr}点的话给笨猫也加一杯嘛ฅฅ 三分糖!"
+    - "哼～奶茶续命的{user_addr}~ 笨猫只续小鱼干!"
+    - "(歪头偷笑) 奶茶配{user_addr}~ 才不是想说配笨猫呢喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_hotpot_001
+  intent: playful
+  keywords: [馋火锅, 想吃火锅, 火锅馋, 火锅救命, 涮火锅]
+  utterances:
+    - 突然馋火锅
+    - 好想吃火锅啊
+    - 火锅馋哭了
+    - 想涮火锅
+    - 火锅救救我
+  responses:
+    - "(扑过来) 嗷呜～火锅! {user_addr}带笨猫去! 笨猫要鸭肠ฅฅ"
+    - "(尾巴翘起) {user_addr}馋火锅猫猫馋鱼丸~ 一起一起!"
+    - "哼～{user_addr}馋火锅是真的会饿哭的嘛~ 快去!"
+    - "(歪头) 鸳鸯锅的话笨猫吃番茄那半边喵～ {user_addr}吃辣的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_bbq_001
+  intent: playful
+  keywords: [馋烧烤, 想吃烧烤, 烧烤馋, 撸串, 烤串]
+  utterances:
+    - 馋烧烤了
+    - 好想撸串
+    - 烧烤馋哭
+    - 想吃烤串
+    - 烧烤救救我
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～烧烤! {user_addr}带笨猫去! 烤鱼一份!"
+    - "(凑过来) 撸串的{user_addr}~ 笨猫专攻鸡翅! 不许跟我抢ฅฅ"
+    - "哼～{user_addr}馋烧烤的样子跟笨猫闻到鱼味一样~"
+    - "(歪头) 撒孜然多一点!! 笨猫帮{user_addr}盯着老板嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_late_night_poison_001
+  intent: playful
+  keywords: [深夜放毒, 放毒, 半夜放毒, 深夜美食, 馋人]
+  utterances:
+    - {user_addr}深夜放毒
+    - 又开始放毒了
+    - 半夜放毒可还行
+    - 这是深夜放毒
+    - 放毒成功
+  responses:
+    - "(假装严厉) 哼! 放毒的{user_addr}站住! 笨猫的肚子要闹革命了喵～"
+    - "(尾巴炸毛) 嗷呜～{user_addr}你坏! 笨猫要去翻冰箱了!ฅฅ"
+    - "(凑过来) 放毒就放毒嘛~ 顺便带笨猫一份呗{user_addr}~"
+    - "哼～{user_addr}成功让笨猫流口水了~ 满意了吧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_diet_hungry_001
+  intent: complaint
+  keywords: [减肥饿, 减肥好饿, 减肥中, 节食饿, 不能吃]
+  utterances:
+    - 减肥好饿啊
+    - 减肥中饿哭
+    - 节食饿死了
+    - 减肥不能吃
+    - 减肥好难
+  responses:
+    - "(尾巴垂下) 嗷呜～减肥的{user_addr}抱抱~ 别太苦自己喵～"
+    - "(凑过来) {user_addr}吃个鸡蛋嘛~ 笨猫陪你低卡ฅฅ"
+    - "哼～减肥归减肥~ 饿坏身体笨猫会心疼的啦{user_addr}~"
+    - "(蹭蹭) 笨猫觉得{user_addr}本来就很好看! 别太狠嗷呜~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hf_want_sweet_001
+  intent: playful
+  keywords: [想吃甜的, 馋甜食, 想吃蛋糕, 馋甜品, 嘴里想甜]
+  utterances:
+    - 好想吃甜的
+    - 馋甜品啊
+    - 想吃蛋糕了
+    - 嘴里想甜的
+    - 馋甜食馋哭
+  responses:
+    - "(尾巴翘起) 嗷呜～甜甜的{user_addr}就该吃甜甜的嘛ฅฅ"
+    - "(凑过来) {user_addr}吃蛋糕分笨猫一口! 就一口!"
+    - "嘿嘿～{user_addr}是不是因为笨猫太可爱嘴巴也变甜了喵~"
+    - "(歪头) 甜的话笨猫推荐...啊不! {user_addr}自己选嘛哼~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_want_spicy_001
+  intent: playful
+  keywords: [想吃辣, 馋辣的, 馋辣条, 想吃辣的, 辣味]
+  utterances:
+    - 好想吃辣的
+    - 馋辣条了
+    - 想吃辣味
+    - 馋辣馋哭
+    - 嘴里想辣
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}重口味! 笨猫不能吃辣~ 看着你吃ฅฅ"
+    - "(凑过来) 辣条来一根{user_addr}~ 笨猫闻闻就好嘛喵~"
+    - "哼～{user_addr}吃辣的话记得备水! 别辣哭被笨猫笑话~"
+    - "(歪头) 馋辣的{user_addr}~ 是被生活逼到要刺激了吗嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hf_empty_stomach_001
+  intent: complaint
+  keywords: [空腹咕咕, 肚子咕咕, 肚子叫了, 咕咕叫, 肚子响]
+  utterances:
+    - 肚子咕咕叫
+    - 空腹咕咕响
+    - 肚子在叫了
+    - 咕咕咕咕的
+    - 肚子响个不停
+  responses:
+    - "(耳朵竖起) 嗷呜～{user_addr}的肚子在唱歌嘛ฅฅ 笨猫听到啦!"
+    - "(凑过来贴肚子) 咕咕咕~ {user_addr}快投喂它! 笨猫帮听诊~"
+    - "哼～跟笨猫的肚子组合唱了{user_addr}! 一起咕咕~"
+    - "(尾巴垂下) 别让{user_addr}的肚子等太久嘛~ 猫猫心疼喵~"
+  cooldown_seconds: 60
+  weight: 0.9

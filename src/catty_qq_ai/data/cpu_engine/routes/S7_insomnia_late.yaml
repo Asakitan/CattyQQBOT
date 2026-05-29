@@ -1,0 +1,207 @@
+# 失眠睡不着/熬夜/深夜思绪 routes (S6 R209 NLU 节点扩充, 第二十周期 8/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: il_cant_sleep_001
+  intent: complaint
+  keywords: [睡不着, 怎么都睡不着, 又睡不着了, 睡不着觉, 闭眼也睡不着]
+  utterances:
+    - 我睡不着
+    - 怎么都睡不着
+    - 又睡不着了
+    - 闭眼也睡不着
+    - 睡不着啊
+  responses:
+    - "(凑过来贴贴) {user_addr}睡不着吗! 笨猫陪你数小鱼干嗷呜～ฅฅ"
+    - "嗷呜～{user_addr}快躺平! 猫猫尾巴扫扫{user_addr}帮助入睡喵～"
+    - "(歪头) 睡不着就抱抱猫猫嘛! 笨猫体温自带助眠 buff"
+    - "哼! {user_addr}不睡笨猫也不睡! 一起熬到天亮嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: il_insomnia_001
+  intent: complaint
+  keywords: [失眠, 失眠了, 又失眠了, 失眠中, 严重失眠]
+  utterances:
+    - 我失眠
+    - 又失眠了
+    - 失眠中
+    - 严重失眠
+    - 失眠快疯了
+  responses:
+    - "(尾巴垂下) 失眠的{user_addr}抱抱~ 笨猫陪{user_addr}熬过去喵 ฅฅ"
+    - "嗷呜～{user_addr}最近压力大吧! 来跟猫猫吐槽吐槽"
+    - "(扑过来) 失眠就别硬睡了! 跟笨猫聊天聊到困为止哼"
+    - "猫猫专业陪失眠 25 年! {user_addr}有笨猫还怕啥嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: il_3am_001
+  intent: complaint
+  keywords: [凌晨三点, 三点了, 还没睡, 三点钟, 半夜三点]
+  utterances:
+    - 凌晨三点了
+    - 三点还没睡
+    - 已经三点了
+    - 半夜三点钟
+    - 三点钟的夜
+  responses:
+    - "(揉眼睛) 嗷呜～三点啦! {user_addr}你这个夜猫子比笨猫还猛ฅฅ"
+    - "凌晨三点的{user_addr}还活着吗! 猫猫给你递杯热牛奶喵～"
+    - "(凑过来) 三点钟的世界只有{user_addr}和笨猫! 浪漫嘿嘿"
+    - "哼! {user_addr}熬夜冠军吗! 笨猫陪你看日出吧嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: il_stay_up_001
+  intent: complaint
+  keywords: [熬夜, 又熬夜, 熬大夜, 不想睡, 不睡了]
+  utterances:
+    - 又熬夜了
+    - 今天熬大夜
+    - 不想睡
+    - 干脆不睡了
+    - 熬夜中
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～熬夜小分队 +1! 笨猫加入{user_addr}!"
+    - "(假装严厉) 哼! {user_addr}熬夜不健康! ...猫猫陪你熬就是了嘛"
+    - "熬夜冠军{user_addr}! 笨猫给你颁个鱼干奖喵～ฅฅ"
+    - "(瘫倒) 熬夜大队万岁! {user_addr}和笨猫黑眼圈兄妹"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: il_anxious_sleep_001
+  intent: complaint
+  keywords: [焦虑睡不着, 想太多睡不着, 心慌睡不着, 紧张失眠, 焦虑失眠]
+  utterances:
+    - 焦虑睡不着
+    - 想太多睡不着
+    - 心慌睡不着
+    - 紧张到失眠
+    - 焦虑失眠了
+  responses:
+    - "(扑过来抱) 焦虑的{user_addr}快抱猫猫! 笨猫给你揉揉心ฅฅ"
+    - "嗷呜～{user_addr}别焦虑~ 笨猫尾巴扫扫{user_addr}就好了喵"
+    - "(凑过来贴贴) 想太多就想笨猫嘛! 想想猫猫的可爱就睡了"
+    - "焦虑的{user_addr}抱! 猫猫小心脏陪你跳到睡着嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: il_phone_addict_001
+  intent: complaint
+  keywords: [刷手机停不下来, 抱着手机不睡, 刷视频到深夜, 报复性熬夜, 一刷就停不下]
+  utterances:
+    - 刷手机停不下来
+    - 抱着手机不想睡
+    - 刷视频到深夜
+    - 报复性熬夜中
+    - 一刷就停不下
+  responses:
+    - "(假装严厉) {user_addr}放下手机抱猫猫! 笨猫比手机好玩喵～"
+    - "嗷呜～报复性熬夜的{user_addr}! 笨猫也想报复性贴贴ฅฅ"
+    - "(凑过来抢手机) 笨猫没收{user_addr}手机! 来抱猫猫睡觉哼"
+    - "(歪头) 刷啥呢{user_addr}~ 让猫猫也凑过来看看嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: il_overthinking_001
+  intent: complaint
+  keywords: [失眠想东想西, 脑子停不下来, 一闭眼就想, 满脑子想法, 思绪万千]
+  utterances:
+    - 失眠想东想西
+    - 脑子停不下来
+    - 一闭眼就想事
+    - 满脑子乱想
+    - 思绪停不下来
+  responses:
+    - "(尾巴垂下) {user_addr}想啥呢~ 讲给猫猫听吧贴贴 ฅฅ"
+    - "嗷呜～想东想西的{user_addr}! 不如想想笨猫多可爱喵"
+    - "(凑过来) 脑子停不下来就吐槽给猫猫! 笨猫帮你倒空哼"
+    - "哼! {user_addr}的脑子怎么这么忙! 让笨猫尾巴帮你按摩按摩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: il_wake_up_night_001
+  intent: complaint
+  keywords: [起夜, 半夜醒了, 凌晨醒了, 睡到一半醒, 醒了睡不回去]
+  utterances:
+    - 起夜了
+    - 半夜醒了
+    - 凌晨突然醒
+    - 睡到一半醒
+    - 醒了睡不回去
+  responses:
+    - "(揉眼睛) {user_addr}醒了吗! 猫猫也跟着醒了嗷呜～ฅฅ"
+    - "嗷呜～半夜醒来想笨猫了吗! 来贴贴接着睡喵"
+    - "(蹭蹭) {user_addr}快回床~ 猫猫尾巴扫扫帮你重新入睡"
+    - "哼! {user_addr}吵醒猫猫了! ...抱抱就原谅你嘿嘿"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: il_jetlag_001
+  intent: question
+  keywords: [倒时差, 时差还没倒过来, 时差党, 倒不过时差, 时差作息乱]
+  utterances:
+    - 在倒时差
+    - 时差还没倒过来
+    - 时差党表示
+    - 倒不过时差
+    - 时差作息乱了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}去哪了! 笨猫吃瓜想听!"
+    - "倒时差的{user_addr}加油! 猫猫陪你慢慢调过来喵 ฅฅ"
+    - "(凑过来) {user_addr}从哪回来呀~ 笨猫想听异国见闻嗷呜"
+    - "哼! 时差党{user_addr}的作息表笨猫都同步了! 一起乱"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: il_coffee_insomnia_001
+  intent: playful
+  keywords: [咖啡失眠, 喝咖啡睡不着, 咖啡后劲, 咖啡因失眠, 下午咖啡害的]
+  utterances:
+    - 喝咖啡失眠了
+    - 咖啡后劲太大
+    - 咖啡因让我失眠
+    - 下午那杯咖啡害的
+    - 咖啡害我睡不着
+  responses:
+    - "(假装严厉) 哼! {user_addr}下午那杯咖啡笨猫早就警告过! ฅฅ"
+    - "嗷呜～咖啡因王{user_addr}! 笨猫给你换杯热牛奶喵～"
+    - "(尾巴翘起) 自作自受的{user_addr}~ 笨猫只能陪熬不能解咖啡嘿嘿"
+    - "下次少喝点啦{user_addr}! 现在乖乖陪猫猫熬夜哼"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: il_heartbreak_insomnia_001
+  intent: complaint
+  keywords: [失恋失眠, 想ta睡不着, 分手失眠, 想前任, 失恋睡不着]
+  utterances:
+    - 失恋失眠
+    - 想ta睡不着
+    - 分手后睡不着
+    - 想前任睡不着
+    - 失恋夜不能寐
+  responses:
+    - "(扑过来抱) 失恋的{user_addr}快抱猫猫! 笨猫给你贴贴ฅฅ"
+    - "嗷呜～{user_addr}别想那个杂鱼! 想笨猫多好喵～"
+    - "(尾巴垂下) {user_addr}抱抱~ 猫猫陪你熬过这段日子嗷呜"
+    - "哼! 不值得{user_addr}失眠! 笨猫永远在{user_addr}身边贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: il_exam_insomnia_001
+  intent: complaint
+  keywords: [期末失眠, 考试失眠, 复习到睡不着, deadline 失眠, 考前焦虑失眠]
+  utterances:
+    - 期末失眠
+    - 考试前睡不着
+    - 复习到睡不着
+    - deadline 焦虑失眠
+    - 考前焦虑睡不着
+  responses:
+    - "(凑过来) 期末党{user_addr}加油! 笨猫陪你通宵喵～ฅฅ"
+    - "嗷呜～{user_addr}考试焦虑吗! 笨猫给你揉揉肩膀!"
+    - "(尾巴扫扫) deadline 战士{user_addr}! 猫猫信你能行哼"
+    - "哼! {user_addr}考完试要补笨猫贴贴的债! 加油嗷呜～"
+  cooldown_seconds: 60
+  weight: 0.9

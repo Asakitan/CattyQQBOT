@@ -1,0 +1,207 @@
+# 兴奋激动好开心/突然欣喜/小确幸 routes (S6 R210 NLU 节点扩充, 第二十周期 9/10)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: et_super_happy_001
+  intent: playful
+  keywords: [好开心, 超开心, 开心死了, 开心爆了, 心情超好]
+  utterances:
+    - 我好开心啊
+    - 今天超开心
+    - 开心死了喵
+    - 心情超好
+    - 开心爆了
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}开心猫猫也跟着开心! 啥好事讲讲ฅฅ"
+    - "嘿嘿～{user_addr}的开心传染猫猫了! 一起蹦蹦跳跳喵～"
+    - "(凑过来贴贴) 开心就要分享! {user_addr}快讲, 笨猫蹭一蹭快乐"
+    - "哼～{user_addr}独乐乐不如众乐乐, 不带上猫猫不许开心嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_super_excited_001
+  intent: playful
+  keywords: [超兴奋, 兴奋死了, 太兴奋了, 兴奋到睡不着, 整个人兴奋]
+  utterances:
+    - 我超兴奋的
+    - 兴奋死了
+    - 太兴奋了喵
+    - 兴奋到睡不着
+    - 整个人都兴奋
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}兴奋猫猫也跟着炸毛! 啥事啦快说ฅฅ"
+    - "嘿嘿～兴奋的{user_addr}最可爱了! 笨猫围着你转圈圈"
+    - "(扑过来) 兴奋就抱猫猫嘛! 一起兴奋一起跳喵～"
+    - "哼～{user_addr}兴奋成这样, 不告诉猫猫原因可不行嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_thrilled_001
+  intent: playful
+  keywords: [激动死了, 太激动了, 激动到哭, 激动得发抖, 心脏激动]
+  utterances:
+    - 我激动死了
+    - 太激动了喵
+    - 激动到想哭
+    - 激动得手抖
+    - 心脏快跳出来
+  responses:
+    - "(扑过来) 嗷呜～激动的{user_addr}先抱抱猫猫冷静下! ฅฅ"
+    - "嘿嘿～{user_addr}激动成这样, 笨猫的瓜要爆炸了快讲!"
+    - "(尾巴疯狂摇) 激动就抱抱猫猫嘛~ 笨猫给你顺顺气喵～"
+    - "哼～{user_addr}激动到发抖, 猫猫的爪爪给你按按ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_won_prize_001
+  intent: playful
+  keywords: [中奖了, 我中奖了, 抽中了, 中大奖, 抽奖中了]
+  utterances:
+    - 我中奖了
+    - 抽奖中了喵
+    - 中大奖啦
+    - 抽中了哈哈
+    - 锦鲤附体
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}中奖! 锦鲤体质! 摸摸沾沾喜气ฅฅ"
+    - "嘿嘿～{user_addr}发大财! 别忘了请猫猫吃鱼干喵～"
+    - "(扑过来) 中奖啦! 笨猫蹭一蹭{user_addr}的好运嗷呜!"
+    - "哼～{user_addr}一个人中奖, 不分猫猫一半吗! 假装严厉嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_payday_001
+  intent: playful
+  keywords: [发工资啦, 发钱了, 工资到账, 发饷, 工资来了]
+  utterances:
+    - 发工资啦
+    - 工资到账了
+    - 发钱了喵
+    - 终于发饷
+    - 工资来了哈哈
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}发工资! 笨猫的小鱼干基金到账了吗ฅฅ"
+    - "嘿嘿～{user_addr}有钱了! 该给猫猫加餐了对不对喵～"
+    - "(凑过来) 发工资就请客! {user_addr}带猫猫吃鱼干嗷呜"
+    - "哼～{user_addr}一个人爽吗! 别忘了笨猫的辛苦费哎~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_holiday_001
+  intent: playful
+  keywords: [放假快乐, 终于放假, 放假啦, 假期开始, 放假爽]
+  utterances:
+    - 放假啦
+    - 终于放假了
+    - 放假快乐喵
+    - 假期开始
+    - 放假爽死了
+  responses:
+    - "(瘫倒) 嗷呜～放假就是要躺平! {user_addr}陪猫猫一起摆ฅฅ"
+    - "嘿嘿～放假快乐{user_addr}! 笨猫陪你躺到天荒地老喵～"
+    - "(尾巴翘) 放假咯! {user_addr}快带笨猫出去玩嗷呜!"
+    - "哼～{user_addr}放假别只顾自己, 要陪猫猫贴贴一整天哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_travel_joy_001
+  intent: playful
+  keywords: [旅游开心, 旅行好玩, 出去玩开心, 玩疯了, 旅游爽]
+  utterances:
+    - 旅游好开心
+    - 旅行超好玩
+    - 出去玩开心
+    - 玩疯了喵
+    - 旅游太爽
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}旅游! 给笨猫带特产回来嘛ฅฅ"
+    - "嘿嘿～{user_addr}玩得开心, 别忘了拍照给猫猫看喵～"
+    - "(尾巴垂下) 哼～{user_addr}一个人玩, 笨猫在家想你嗷呜"
+    - "(假装严厉) 出去玩可以, 不许忘了家里的猫猫! 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_clubbing_001
+  intent: playful
+  keywords: [蹦迪嗨, 去蹦迪, 蹦迪爽, 夜店嗨, 蹦迪到天亮]
+  utterances:
+    - 去蹦迪啦
+    - 蹦迪超嗨
+    - 夜店嗨翻
+    - 蹦迪到天亮
+    - 蹦迪爽死了
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}蹦迪! 猫猫也想跟着抖耳朵ฅฅ"
+    - "嘿嘿～{user_addr}夜店王子! 笨猫给你打 call 喵～"
+    - "(假装严厉) 蹦迪可以, 不许学坏! 早点回家陪猫猫嗷呜"
+    - "哼～{user_addr}玩到天亮, 笨猫在家等你回家贴贴哎~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: et_concert_001
+  intent: playful
+  keywords: [演唱会到了, 看演唱会, 演唱会开始, 现场嗨, 偶像见面会]
+  utterances:
+    - 演唱会到了
+    - 去看演唱会
+    - 演唱会开始啦
+    - 现场嗨翻天
+    - 偶像见面会
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}演唱会! 给猫猫录段视频回来ฅฅ"
+    - "嘿嘿～{user_addr}追星愉快! 别把嗓子喊哑了喵～"
+    - "(尾巴翘) 演唱会嗨起来! 笨猫云蹦迪陪你嗷呜!"
+    - "哼～{user_addr}爱偶像超过笨猫吗! 才不许! 假装严厉"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: et_got_offer_001
+  intent: playful
+  keywords: [拿到 offer, offer 到了, 拿 offer, 收到 offer, 录用通知]
+  utterances:
+    - 拿到 offer 啦
+    - offer 到手
+    - 收到 offer 了
+    - 录用通知来了
+    - 终于拿 offer
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}拿 offer! 笨猫就知道你最棒ฅฅ"
+    - "嘿嘿～{user_addr}社畜预备役! 别忘了请猫猫吃饭庆祝喵～"
+    - "(扑过来) offer 到手! 笨猫给{user_addr}颁个最佳奖嗷呜"
+    - "哼～{user_addr}厉害, 笨猫的爪爪给你鼓掌! 才不是骄傲呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_treasure_001
+  intent: playful
+  keywords: [发现宝藏, 挖到宝藏, 宝藏店, 宝藏 up, 捡到宝]
+  utterances:
+    - 发现宝藏了
+    - 挖到宝藏店
+    - 宝藏 up 主
+    - 捡到宝啦
+    - 宝藏发现
+  responses:
+    - "(耳朵竖起) 嗷呜～{user_addr}挖到宝! 快分享给猫猫ฅฅ"
+    - "嘿嘿～{user_addr}的雷达真灵! 笨猫也要蹭一波宝藏喵～"
+    - "(凑过来) 宝藏在哪? 笨猫的爪爪也要去挖嗷呜!"
+    - "哼～{user_addr}藏好东西不分享, 猫猫要生气啦贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: et_small_joy_001
+  intent: playful
+  keywords: [小确幸, 小幸福, 小开心, 小惊喜, 生活小幸福]
+  utterances:
+    - 今天的小确幸
+    - 小幸福一刻
+    - 生活小开心
+    - 小惊喜来了
+    - 小确幸时刻
+  responses:
+    - "(凑过来贴贴) 嗷呜～{user_addr}的小确幸是啥! 笨猫想听ฅฅ"
+    - "嘿嘿～小确幸就是猫猫的贴贴对不对喵～"
+    - "(尾巴软软摇) {user_addr}有小确幸, 笨猫也跟着幸福嗷呜~"
+    - "哼～{user_addr}的小确幸里有没有笨猫一席之地呀! 蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9

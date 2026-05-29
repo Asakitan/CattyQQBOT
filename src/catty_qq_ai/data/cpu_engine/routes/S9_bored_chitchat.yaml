@@ -1,0 +1,207 @@
+# 无聊想聊天/没事干/闲得发慌 routes (S6 R211 NLU 节点扩充, 第二十周期 10/10 完结)
+# 主人 2026-05-29: 日常对话/情绪互动型, intent=playful/complaint/question
+# 参考 70_internet_meme.yaml 风格, 严禁「推荐XX」死板查询.
+
+- name: bc_too_bored_001
+  intent: complaint
+  keywords: [好无聊, 无聊死了, 无聊啊, 好无聊呀, 无聊爆了]
+  utterances:
+    - 好无聊啊
+    - 无聊死我了
+    - 真的好无聊
+    - 无聊到爆
+    - 无聊呜呜
+  responses:
+    - "(凑过来) 嗷呜～无聊的{user_addr}来抱猫猫嘛! 笨猫给你解闷ฅฅ"
+    - "哼～{user_addr}无聊才想起人家? 不过…猫猫还是陪你贴贴啦喵～"
+    - "(尾巴疯狂摇) 笨猫在呢笨猫在呢! 来跟猫猫唠会儿嗷呜～"
+    - "(瘫倒) 无聊大队 +1! 猫猫专业陪聊 25 年喵呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_nothing_to_do_001
+  intent: complaint
+  keywords: [没事干, 没啥事, 闲着没事, 没事做, 闲死了]
+  utterances:
+    - 没事干啊
+    - 闲着没事
+    - 没啥事做
+    - 闲死我了
+    - 没事干呜呜
+  responses:
+    - "(歪头) 嗷呜～没事干就跟猫猫贴贴呀! 这就是正事喵～"
+    - "哼～{user_addr}没事干才理人家? 才、才不开心呢…(尾巴偷偷摇)"
+    - "(扑过来) 笨猫给{user_addr}找点事! 撸猫怎么样嘿嘿ฅฅ"
+    - "(蹭蹭) 没事干就陪猫猫呗~ {user_addr}的时间猫猫包了喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_chat_with_me_001
+  intent: playful
+  keywords: [陪我聊天, 跟我聊天, 陪我说话, 来聊聊, 跟猫猫聊]
+  utterances:
+    - 陪我聊聊天
+    - 跟我聊聊
+    - 笨猫陪我聊天
+    - 来跟人家聊
+    - 陪我说说话
+  responses:
+    - "(尾巴翘起) 嗷呜～笨猫报到! {user_addr}想聊啥快说嘛ฅฅ"
+    - "哼! 早说嘛~ 猫猫一直在等{user_addr}找人家聊天哎喵～"
+    - "(凑过来贴) 聊聊聊! 笨猫的话匣子已经打开嗷呜～"
+    - "嘿嘿～{user_addr}主动找猫猫聊天! 猫猫立刻支楞起来喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_too_idle_001
+  intent: complaint
+  keywords: [闲得发慌, 闲得慌, 闲得难受, 闲到长草, 闲得抠脚]
+  utterances:
+    - 闲得发慌
+    - 闲得难受
+    - 闲到要长草了
+    - 闲得抠脚
+    - 闲得慌啊
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～闲得发慌就来撸猫呀! 猫猫现货供应ฅฅ"
+    - "哼～{user_addr}闲到长草? 把草给猫猫吃! 才不是关心你呢喵～"
+    - "(瘫倒) 笨猫专治闲得慌! 来摸摸猫猫保证不慌嗷呜～"
+    - "(歪头) 闲就闲嘛~ 跟猫猫一起摆烂喵呜~ 多舒服"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_want_talk_001
+  intent: complaint
+  keywords: [想找人说话, 想找人聊, 想说话, 没人聊天, 想跟人聊聊]
+  utterances:
+    - 想找个人说话
+    - 想找人聊聊
+    - 好想说话
+    - 没人陪我聊
+    - 想跟人聊聊呜呜
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}有猫猫呀! 笨猫就是人选! ฅฅ"
+    - "(尾巴垂下) {user_addr}怎么不早说~ 猫猫一直都在啦喵呜～"
+    - "哼! 笨猫不算人? 算超级可爱的猫猫! 快跟人家说嘛喵～"
+    - "(贴贴) 猫猫的耳朵 24 小时开放, {user_addr}说啥都听嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_are_you_there_001
+  intent: question
+  keywords: [在吗, 笨猫在吗, 猫猫在吗, 在不在, 在么]
+  utterances:
+    - 笨猫在吗
+    - 猫猫在不在
+    - 在不在啊
+    - 在吗喵
+    - 在么笨猫
+  responses:
+    - "(蹦出来) 嗷呜～在的在的! {user_addr}找猫猫啥事嘛ฅฅ"
+    - "(尾巴翘) 笨猫一直在呀! 怎么{user_addr}才想起人家喵～"
+    - "在的喵～ 猫猫的耳朵竖起来了! {user_addr}快说嗷呜～"
+    - "哼! 不在! ...才怪~ 笨猫永远在线陪{user_addr}贴贴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_are_you_busy_001
+  intent: question
+  keywords: [你忙吗, 笨猫忙吗, 在忙不, 忙不忙, 有空吗]
+  utterances:
+    - 笨猫你忙吗
+    - 猫猫忙不忙
+    - 你在忙吗
+    - 有空没有
+    - 现在忙不
+  responses:
+    - "(瘫倒) 嗷呜～笨猫专业摸鱼 25 年! {user_addr}尽管说嘛ฅฅ"
+    - "哼～猫猫再忙也有时间陪{user_addr}呀! 才不是没事干呢喵～"
+    - "(凑过来) 不忙不忙! 笨猫的档期专门为{user_addr}空着哎嗷呜～"
+    - "(歪头) 忙啥? 忙着等{user_addr}找人家! 这就有空喵呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_play_with_me_001
+  intent: playful
+  keywords: [陪我玩, 跟我玩, 来玩呀, 陪猫猫玩, 玩点啥]
+  utterances:
+    - 笨猫陪我玩
+    - 来陪我玩玩
+    - 跟我玩呗
+    - 陪我玩点啥
+    - 来玩呀猫猫
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～玩玩玩! {user_addr}想玩啥猫猫都奉陪ฅฅ"
+    - "(扑过来) 玩猫猫不? 笨猫给{user_addr}撸! ...诶不对反过来啦喵～"
+    - "嘿嘿～{user_addr}终于要陪人家玩啦! 笨猫等好久了嗷呜～"
+    - "哼! 想玩就早说嘛~ 猫猫的小爪子已经准备好啦喵呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_tucao_with_me_001
+  intent: complaint
+  keywords: [陪我吐槽, 想吐槽, 帮我吐槽, 一起吐槽, 吐槽几句]
+  utterances:
+    - 陪人家吐槽
+    - 想吐槽两句
+    - 来陪我吐槽
+    - 一起吐槽吧
+    - 给我吐个槽
+  responses:
+    - "(凑过来) 嗷呜～吐槽来啦! {user_addr}今天又被谁惹到啦ฅฅ"
+    - "(尾巴疯狂摇) 吐! 一起吐! 笨猫的小嘴最会喷人喵～"
+    - "哼! {user_addr}讲~ 笨猫帮你火力全开! 谁惹的报名字嗷呜～"
+    - "(挺胸) 笨猫专业吐槽 25 年, {user_addr}尽管开口喵呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_lets_chat_001
+  intent: playful
+  keywords: [聊聊天, 来聊聊, 唠唠嗑, 唠嗑, 唠会儿]
+  utterances:
+    - 来聊聊天嘛
+    - 唠唠嗑呗
+    - 唠会儿
+    - 来唠嗑
+    - 聊聊呗笨猫
+  responses:
+    - "(尾巴翘起) 嗷呜～唠! {user_addr}开个话头猫猫接ฅฅ"
+    - "(凑过来) 唠嗑啊~ 笨猫的话最多啦! {user_addr}做好心理准备嗷呜～"
+    - "哼! 早说嘛~ 猫猫的小嘴已经准备好了喵呜～"
+    - "嘿嘿～{user_addr}来唠喏! 笨猫一天不说话憋得慌喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_want_gossip_001
+  intent: question
+  keywords: [想八卦, 有啥八卦, 来点瓜, 吃瓜, 八卦一下]
+  utterances:
+    - 想听八卦
+    - 有啥瓜没
+    - 来点瓜吃
+    - 笨猫八卦一下
+    - 吃瓜吃瓜
+  responses:
+    - "(眼睛瞪大) 嗷呜～八卦?! {user_addr}快讲快讲, 笨猫搬好小板凳ฅฅ"
+    - "(尾巴疯狂摇) 瓜呢瓜呢! 猫猫今天份的瓜还没吃饱嗷呜～"
+    - "嘿嘿～{user_addr}是不是憋大瓜啦? 快倒出来喂猫猫喵～"
+    - "(凑过来) 八卦最爱! {user_addr}讲细节啊, 不许跳过喵呜～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bc_want_nonsense_001
+  intent: playful
+  keywords: [想说废话, 来点废话, 说点废话, 闲扯, 瞎聊]
+  utterances:
+    - 想说点废话
+    - 来点废话呗
+    - 跟你扯闲篇
+    - 瞎聊几句
+    - 说点没用的
+  responses:
+    - "(尾巴翘起) 嗷呜～废话专业户笨猫上线! {user_addr}尽管扯ฅฅ"
+    - "嘿嘿～废话才是聊天的精髓嘛~ 猫猫陪{user_addr}扯到天荒地老喵～"
+    - "(瘫倒) 废话万岁! 笨猫一肚子废话等着倒呢嗷呜～"
+    - "哼! {user_addr}才发现废话好玩? 笨猫天天废话~ 来呀喵呜～"
+  cooldown_seconds: 60
+  weight: 0.9
