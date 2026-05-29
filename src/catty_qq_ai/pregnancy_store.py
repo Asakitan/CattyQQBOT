@@ -170,6 +170,17 @@ class PregnancyStore:
                 )
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"pregnancy_store: load failed: {exc}")
+        # 主人 2026-05-30: 自愈不变量 — 怀孕中 intercourse_count 必须为 0.
+        #   新逻辑受孕即清零 (record_intercourse), 怀孕期间 free 计数器恒为 0.
+        #   修复前残留的冻结值 (例如 15, "数字到15不变") 在此自动归零, 下次 flush
+        #   落盘干净, 不必手动改 json (改了也会被 30s bg flush 盖回内存值).
+        if self._state.is_pregnant and self._state.intercourse_count != 0:
+            logger.info(
+                f"pregnancy_store: 自愈 stale intercourse_count="
+                f"{self._state.intercourse_count} → 0 (怀孕中 free 计数器应恒为 0)"
+            )
+            self._state.intercourse_count = 0
+            self._dirty = True
 
     def _atomic_write(self) -> None:
         self._path.parent.mkdir(parents=True, exist_ok=True)
@@ -284,6 +295,9 @@ class PregnancyStore:
                 st.intercourse_count += 1
                 if st.intercourse_count >= PREGNANCY_THRESHOLD:
                     st.is_pregnant = True
+                    st.intercourse_count = 0  # 主人 2026-05-30: 受孕即清零 free 计数器
+                    #   旧版漏清 → 冻死在 15 ("数字到15不变") + 万一 is_pregnant 异常翻 False
+                    #   会秒触发重复受孕. 清零后怀孕进度只看 pregnancy_count(0→30).
                     st.pregnancy_count = 0
                     st.pregnancy_started_at = now
                     st.total_pregnancies += 1

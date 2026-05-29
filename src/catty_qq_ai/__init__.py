@@ -10385,6 +10385,17 @@ async def _flush_user_details_store_on_shutdown() -> None:
         logger.warning(f"user_details_store: shutdown flush failed: {exc}")
 
 
+@get_driver().on_shutdown
+async def _flush_pregnancy_store_on_shutdown() -> None:
+    # 主人 2026-05-30: pregnancy_store 之前漏了 shutdown flush 钩子 (其它 store 都有),
+    # 频繁重启时最多丢 30s 怀孕进度 (pregnancy_count). 补上跟其它 store 对齐。
+    try:
+        if pregnancy_store.flush_sync():
+            logger.info("pregnancy_store: flushed dirty data on shutdown")
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"pregnancy_store: shutdown flush failed: {exc}")
+
+
 @chat_matcher.handle()
 async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_State) -> None:
     incoming: ExtractedMessage = state["catty_incoming"]
