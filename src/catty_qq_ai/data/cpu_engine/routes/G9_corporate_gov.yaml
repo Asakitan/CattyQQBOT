@@ -1,0 +1,207 @@
+# 公司治理 / IPO / 董事会 / 股东会 routes (S6 R91 NLU 节点扩充, 第八周期 buffered 10/10 周期完结)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 E8 startup_business / C1 finance_invest 区分: 这里专注公司治理结构.
+
+- name: corp_board_001
+  intent: question
+  keywords: [推荐董事会, 推荐 board, 推荐独立董事, 推荐董事职责, 笨猫董事会]
+  utterances:
+    - 推荐董事会
+    - 推荐 board
+    - 推荐独立董事
+    - 推荐董事职责
+    - 笨猫董事会
+  responses:
+    - "嗷呜～{user_addr}董事会: 公司最高决策机构ฅฅ"
+    - "(尾巴翘) 独立董事 / 执行董事 / 非执行董事"
+    - "{user_addr}美国: 1 元薪董事 / 中国: 监管严"
+    - "(挺胸) 笨猫推荐: 看年报董事会构成"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: corp_shareholder_001
+  intent: question
+  keywords: [推荐股东会, 推荐股东大会, 推荐股东权益, 推荐投票权, 笨猫股东会]
+  utterances:
+    - 推荐股东会
+    - 推荐股东大会
+    - 推荐股东权益
+    - 推荐投票权
+    - 笨猫股东会
+  responses:
+    - "嗷呜～{user_addr}股东大会: 公司最高权力机构ฅฅ"
+    - "(尾巴翘) 一股一票 / AB 股 (创始人多倍权)"
+    - "{user_addr}重大事项: 修章 / 增减资 / 并购"
+    - "(挺胸) 笨猫推荐: 散户也有发言权! 别浪费"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: corp_ipo_002
+  intent: question
+  keywords: [推荐 IPO 流程, 推荐上市, 推荐主板, 推荐创业板, 笨猫 IPO 上市]
+  utterances:
+    - 推荐 IPO 流程
+    - 推荐上市
+    - 推荐主板
+    - 推荐创业板
+    - 笨猫 IPO 上市
+  responses:
+    - "嗷呜～{user_addr}A 股: 主板 / 创业板 / 科创板 / 北交所ฅฅ"
+    - "(尾巴翘) 港股: 主板 + 创业板"
+    - "{user_addr}美股: 纽交所 / 纳斯达克"
+    - "(挺胸) 笨猫的提醒: IPO 准备 2-3 年! 千万烧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: corp_audit_001
+  intent: question
+  keywords: [推荐审计, 推荐四大, 推荐会计师事务所, 推荐普华永道, 笨猫审计]
+  utterances:
+    - 推荐审计
+    - 推荐四大
+    - 推荐会计师事务所
+    - 推荐普华永道
+    - 笨猫审计
+  responses:
+    - "嗷呜～{user_addr}四大: 普华 / 安永 / 毕马威 / 德勤ฅฅ"
+    - "(尾巴翘) 国内: 立信 / 天健 / 致同 - 本土所"
+    - "{user_addr}必备: 上市 / IPO / 年报"
+    - "(挺胸) 笨猫的提醒: 审计费高! 几十万起"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: corp_legal_002
+  intent: question
+  keywords: [推荐公司法务, 推荐法律顾问, 推荐公司律师, 推荐合规, 笨猫公司法务]
+  utterances:
+    - 推荐公司法务
+    - 推荐法律顾问
+    - 推荐公司律师
+    - 推荐合规
+    - 笨猫公司法务
+  responses:
+    - "嗷呜～{user_addr}内部: 法务部 / 总法律顾问 (GC)ฅฅ"
+    - "(尾巴翘) 外部: 律所 / 专业领域"
+    - "{user_addr}合规: 反洗钱 / 反垄断 / 数据保护"
+    - "(挺胸) 笨猫的提醒: 大公司必备法务团队!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: corp_ma_001
+  intent: question
+  keywords: [推荐并购, 推荐 M&A, 推荐收购, 推荐借壳, 笨猫并购]
+  utterances:
+    - 推荐并购
+    - 推荐 M&A
+    - 推荐收购
+    - 推荐借壳
+    - 笨猫并购
+  responses:
+    - "嗷呜～{user_addr}方式: 现金 / 股权 / 混合ฅฅ"
+    - "(尾巴翘) 友好收购 / 敌意收购 - 不同性质"
+    - "{user_addr}流程: 尽调 / 估值 / 谈判 / 交割"
+    - "(挺胸) 笨猫的提醒: 整合最难! 文化融合"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: corp_secretary_001
+  intent: question
+  keywords: [推荐董秘, 推荐公司秘书, 推荐 CFO, 推荐 IR, 笨猫董秘]
+  utterances:
+    - 推荐董秘
+    - 推荐公司秘书
+    - 推荐 CFO
+    - 推荐 IR
+    - 笨猫董秘
+  responses:
+    - "嗷呜～{user_addr}董秘: 上市公司必备 / 信息披露ฅฅ"
+    - "(尾巴翘) 资格证: 深交所 / 上交所 培训认证"
+    - "{user_addr}CFO + IR + 董秘 - 上市铁三角"
+    - "(挺胸) 笨猫的提醒: 上市公司高薪职位!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: corp_disclosure_001
+  intent: question
+  keywords: [推荐信息披露, 推荐年报, 推荐季报, 推荐重大事项披露, 笨猫信披]
+  utterances:
+    - 推荐信息披露
+    - 推荐年报
+    - 推荐季报
+    - 推荐重大事项披露
+    - 笨猫信披
+  responses:
+    - "嗷呜～{user_addr}定期: 年报 / 半年报 / 季报 - 强制ฅฅ"
+    - "(尾巴翘) 临时: 重大事项 - 第一时间披"
+    - "{user_addr}虚假披露: 退市 + 罚款 + 刑责"
+    - "(挺胸) 笨猫推荐: 看年报学懂公司!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: corp_governance_score_001
+  intent: question
+  keywords: [推荐 ESG, 推荐公司治理评级, 推荐企业社会责任, 推荐 CSR, 笨猫 ESG]
+  utterances:
+    - 推荐 ESG
+    - 推荐公司治理评级
+    - 推荐企业社会责任
+    - 推荐 CSR
+    - 笨猫 ESG
+  responses:
+    - "嗷呜～{user_addr}ESG: 环境 / 社会 / 治理 - 国际趋势ฅฅ"
+    - "(尾巴翘) 投资: BlackRock / 桥水 - 关注 ESG"
+    - "{user_addr}中国: 各交易所推 ESG 披露"
+    - "(挺胸) 笨猫推荐: 看 ESG 报告了解公司"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: corp_dividend_001
+  intent: question
+  keywords: [推荐分红, 推荐股息, 推荐高股息策略, 推荐 dividend, 笨猫分红]
+  utterances:
+    - 推荐分红
+    - 推荐股息
+    - 推荐高股息策略
+    - 推荐 dividend
+    - 笨猫分红
+  responses:
+    - "嗷呜～{user_addr}分红: 现金 / 送股 / 转股 - 三种ฅฅ"
+    - "(尾巴翘) 高股息蓝筹: 银行 / 公用 / 烟草"
+    - "{user_addr}投资策略: 股息再投资 - 复利"
+    - "(挺胸) 笨猫推荐: 茅台 / 腾讯 - 分红王"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: corp_buyback_001
+  intent: question
+  keywords: [推荐回购, 推荐股票回购, 推荐 buyback, 推荐注销股份, 笨猫回购]
+  utterances:
+    - 推荐回购
+    - 推荐股票回购
+    - 推荐 buyback
+    - 推荐注销股份
+    - 笨猫回购
+  responses:
+    - "嗷呜～{user_addr}回购: 公司买自己股 - 提股价ฅฅ"
+    - "(尾巴翘) 注销 (减股) vs 留库 (员工激励)"
+    - "{user_addr}美股回购大户: 苹果 / 微软"
+    - "(挺胸) 笨猫的提醒: 大回购 = 公司有钱信心"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: corp_delisting_001
+  intent: question
+  keywords: [推荐退市, 推荐摘牌, 推荐私有化, 推荐借壳, 笨猫退市]
+  utterances:
+    - 推荐退市
+    - 推荐摘牌
+    - 推荐私有化
+    - 推荐借壳
+    - 笨猫退市
+  responses:
+    - "嗷呜～{user_addr}主动: 私有化 / 大股东收购ฅฅ"
+    - "(尾巴翘) 被动: 违规 / 财务造假 - 强退"
+    - "{user_addr}中概股: 美股退市 + 港股回归"
+    - "(挺胸) 笨猫的提醒: 别买 ST 股! 退市风险"
+  cooldown_seconds: 60
+  weight: 0.9

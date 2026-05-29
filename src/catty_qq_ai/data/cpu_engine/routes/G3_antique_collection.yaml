@@ -1,0 +1,206 @@
+# 古玩 / 收藏品 / 拍卖 / 钱币 routes (S6 R85 NLU 节点扩充, 第八周期 buffered 4/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+
+- name: ant_porcelain_001
+  intent: question
+  keywords: [推荐瓷器, 推荐青花瓷, 推荐元青花, 推荐景德镇, 笨猫瓷器]
+  utterances:
+    - 推荐瓷器
+    - 推荐青花瓷
+    - 推荐元青花
+    - 推荐景德镇
+    - 笨猫瓷器
+  responses:
+    - "嗷呜～{user_addr}元青花 / 明永宣 / 清三代 - 三大顶峰ฅฅ"
+    - "(尾巴翘) 鬼谷子下山图罐: 2005 拍卖 2.3 亿"
+    - "{user_addr}景德镇: 千年瓷都"
+    - "(挺胸) 笨猫的提醒: 别在地摊上捡漏! 假货多"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ant_calligraphy_001
+  intent: question
+  keywords: [推荐书画, 推荐字画, 推荐齐白石, 推荐张大千, 笨猫书画]
+  utterances:
+    - 推荐书画
+    - 推荐字画
+    - 推荐齐白石
+    - 推荐张大千
+    - 笨猫书画
+  responses:
+    - "嗷呜～{user_addr}近现代四王: 齐白石 / 张大千 / 徐悲鸿 / 黄宾虹ฅฅ"
+    - "(尾巴翘) 顶级: 王羲之 / 怀素 / 米芾 (古代)"
+    - "{user_addr}拍卖: 嘉德 / 保利 / 苏富比 / 佳士得"
+    - "(挺胸) 笨猫的提醒: 拍卖前看实物!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ant_jadeite_002
+  intent: question
+  keywords: [推荐翡翠收藏, 推荐古玉, 推荐和田玉收藏, 推荐玉镯, 笨猫翡翠收藏]
+  utterances:
+    - 推荐翡翠收藏
+    - 推荐古玉
+    - 推荐和田玉收藏
+    - 推荐玉镯
+    - 笨猫翡翠收藏
+  responses:
+    - "嗷呜～{user_addr}翡翠看种水: 玻璃种 / 冰种 / 糯种ฅฅ"
+    - "(尾巴翘) 和田玉: 籽料最贵 / 山料次之"
+    - "{user_addr}古玉: 高古 / 战国 / 汉玉 - 文化价值高"
+    - "(挺胸) 笨猫的提醒: 必看 NGTC 证书!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ant_stamp_001
+  intent: question
+  keywords: [推荐邮票收藏, 推荐集邮, 推荐生肖邮票, 推荐邮票投资, 笨猫邮票]
+  utterances:
+    - 推荐邮票收藏
+    - 推荐集邮
+    - 推荐生肖邮票
+    - 推荐邮票投资
+    - 笨猫邮票
+  responses:
+    - "嗷呜～{user_addr}文革票: 全国山河一片红 - 1.6 亿ฅฅ"
+    - "(尾巴翘) 生肖票: 80 庚申猴 - 经典"
+    - "{user_addr}小型张 / 整版 - 升值快"
+    - "(挺胸) 笨猫的提醒: 邮市低迷! 慎入"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ant_coin_001
+  intent: question
+  keywords: [推荐古钱币, 推荐银元, 推荐袁大头, 推荐银币收藏, 笨猫钱币]
+  utterances:
+    - 推荐古钱币
+    - 推荐银元
+    - 推荐袁大头
+    - 推荐银币收藏
+    - 笨猫钱币
+  responses:
+    - "嗷呜～{user_addr}古钱: 春秋战国 / 秦半两 / 五铢 - 历代经典ฅฅ"
+    - "(尾巴翘) 银元: 袁大头 / 孙小头 / 鹰洋"
+    - "{user_addr}评级: PCGS / NGC - 第三方权威"
+    - "(挺胸) 笨猫的提醒: 评级币 + 真品 = 保值"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ant_furniture_001
+  intent: question
+  keywords: [推荐红木家具, 推荐黄花梨, 推荐紫檀, 推荐明清家具, 笨猫红木]
+  utterances:
+    - 推荐红木家具
+    - 推荐黄花梨
+    - 推荐紫檀
+    - 推荐明清家具
+    - 笨猫红木
+  responses:
+    - "嗷呜～{user_addr}顶级: 黄花梨 / 紫檀 - 红木之王ฅฅ"
+    - "(尾巴翘) 明式简约 / 清式繁复 - 不同流派"
+    - "{user_addr}投资: 老料 + 大师 = 升值"
+    - "(挺胸) 笨猫的提醒: 假冒多! 找权威鉴定"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ant_tea_001
+  intent: question
+  keywords: [推荐普洱收藏, 推荐 茶叶收藏, 推荐老茶, 推荐普洱投资, 笨猫普洱收藏]
+  utterances:
+    - 推荐普洱收藏
+    - 推荐 茶叶收藏
+    - 推荐老茶
+    - 推荐普洱投资
+    - 笨猫普洱收藏
+  responses:
+    - "嗷呜～{user_addr}号级茶 / 印级茶 / 7542 - 普洱传奇ฅฅ"
+    - "(尾巴翘) 大白菜 / 大芒拍 - 大益高端"
+    - "{user_addr}存茶讲: 干仓 / 通风 / 无异味"
+    - "(挺胸) 笨猫的提醒: 自己喝得起! 别为投资买"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ant_auction_001
+  intent: question
+  keywords: [推荐拍卖会, 推荐苏富比, 推荐佳士得, 推荐保利拍卖, 笨猫拍卖]
+  utterances:
+    - 推荐拍卖会
+    - 推荐苏富比
+    - 推荐佳士得
+    - 推荐保利拍卖
+    - 笨猫拍卖
+  responses:
+    - "嗷呜～{user_addr}国际四大: 苏富比 / 佳士得 / 邦瀚斯 / 飞利浦ฅฅ"
+    - "(尾巴翘) 国内: 嘉德 / 保利 / 翰海 - 顶尖"
+    - "{user_addr}春拍 + 秋拍 - 一年两届"
+    - "(挺胸) 笨猫的提醒: 拍卖前提前看! 别冲动"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ant_blue_001
+  intent: question
+  keywords: [推荐文玩, 推荐核桃, 推荐橄榄核, 推荐手串, 笨猫文玩]
+  utterances:
+    - 推荐文玩
+    - 推荐核桃
+    - 推荐橄榄核
+    - 推荐手串
+    - 笨猫文玩
+  responses:
+    - "嗷呜～{user_addr}主流: 文玩核桃 / 橄榄核 / 菩提 / 紫檀手串ฅฅ"
+    - "(尾巴翘) 配对核桃: 越对称越值钱"
+    - "{user_addr}盘玩: 自然包浆 - 别用油"
+    - "(挺胸) 笨猫的提醒: 玩心头好! 别为投资"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ant_modern_art_001
+  intent: question
+  keywords: [推荐当代艺术, 推荐现代艺术, 推荐 KAWS, 推荐村上隆, 笨猫当代艺术]
+  utterances:
+    - 推荐当代艺术
+    - 推荐现代艺术
+    - 推荐 KAWS
+    - 推荐村上隆
+    - 笨猫当代艺术
+  responses:
+    - "嗷呜～{user_addr}潮流: KAWS / 村上隆 / 草间弥生 - 当代红ฅฅ"
+    - "(尾巴翘) 国内: 曾梵志 / 张晓刚 / 岳敏君"
+    - "{user_addr}限量版画: 入门级收藏"
+    - "(挺胸) 笨猫的提醒: 看自己审美! 别盲跟"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ant_book_001
+  intent: question
+  keywords: [推荐古籍, 推荐善本, 推荐绝版书, 推荐藏书, 笨猫古籍]
+  utterances:
+    - 推荐古籍
+    - 推荐善本
+    - 推荐绝版书
+    - 推荐藏书
+    - 笨猫古籍
+  responses:
+    - "嗷呜～{user_addr}古籍: 宋元善本 - 顶级价值ฅฅ"
+    - "(尾巴翘) 拍卖: 国家图书馆 / 文献价值"
+    - "{user_addr}现代: 首版签名书 / 绝版"
+    - "(挺胸) 笨猫的提醒: 保存! 防虫防潮"
+  cooldown_seconds: 60
+  weight: 0.6
+
+- name: ant_appraisal_001
+  intent: question
+  keywords: [推荐鉴定, 推荐古玩鉴定, 推荐文物鉴定, 推荐捡漏, 笨猫鉴定]
+  utterances:
+    - 推荐鉴定
+    - 推荐古玩鉴定
+    - 推荐文物鉴定
+    - 推荐捡漏
+    - 笨猫鉴定
+  responses:
+    - "嗷呜～{user_addr}权威: 故宫专家 / 国博 / 拍卖行鉴定ฅฅ"
+    - "(尾巴翘) 现代: 热释光 / 显微 / 化学分析"
+    - "{user_addr}捡漏几乎不可能! 别信故事"
+    - "(挺胸) 笨猫的提醒: 古玩水深! 多学少买"
+  cooldown_seconds: 60
+  weight: 0.8

@@ -1,0 +1,207 @@
+# 婚礼策划 / 婚纱摄影 / 酒席 / 喜糖 routes (S6 R87 NLU 节点扩充, 第八周期 buffered 6/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A6 festival_tradition (浅触) 区分: 这里专注婚礼细节.
+
+- name: wed_planner_001
+  intent: question
+  keywords: [推荐婚庆公司, 推荐婚礼策划, 推荐婚庆策划师, 推荐婚礼布置, 笨猫婚礼策划]
+  utterances:
+    - 推荐婚庆公司
+    - 推荐婚礼策划
+    - 推荐婚庆策划师
+    - 推荐婚礼布置
+    - 笨猫婚礼策划
+  responses:
+    - "嗷呜～{user_addr}主流: 蜜匠 / 罗曼花园 / 八合里ฅฅ"
+    - "(尾巴翘) 全包 1-3w 主流 / 5w+ 高端定制"
+    - "{user_addr}独立婚礼策划师 - 更个性化"
+    - "(挺胸) 笨猫的提醒: 提前 6 个月预订!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wed_photo_001
+  intent: question
+  keywords: [推荐婚纱照, 推荐婚纱摄影, 推荐铂爵, 推荐 ME 我们, 笨猫婚纱照]
+  utterances:
+    - 推荐婚纱照
+    - 推荐婚纱摄影
+    - 推荐铂爵
+    - 推荐 ME 我们
+    - 笨猫婚纱照
+  responses:
+    - "嗷呜～{user_addr}全国连锁: 铂爵 / 韩国艺匠 / 金夫人ฅฅ"
+    - "(尾巴翘) 高端工作室: ME 我们 / 法盟 / Y2 影像"
+    - "{user_addr}价格: 5000-3w+ - 看选片数量"
+    - "(挺胸) 笨猫的提醒: 别相信免费送! 隐性消费多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wed_dress_001
+  intent: question
+  keywords: [推荐婚纱, 推荐婚纱品牌, 推荐 Vera Wang, 推荐婚纱定制, 笨猫婚纱]
+  utterances:
+    - 推荐婚纱
+    - 推荐婚纱品牌
+    - 推荐 Vera Wang
+    - 推荐婚纱定制
+    - 笨猫婚纱
+  responses:
+    - "嗷呜～{user_addr}国际: Vera Wang / Pronovias / EleSaab - 顶级ฅฅ"
+    - "(尾巴翘) 国货: SOLENNE / Aliencouture / 苏菲"
+    - "{user_addr}租 vs 买: 主婚纱买 / 仪式纱租"
+    - "(挺胸) 笨猫的提醒: 提前 3 月定! 修身要时间"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wed_venue_001
+  intent: question
+  keywords: [推荐婚礼场地, 推荐婚宴酒店, 推荐草坪婚礼, 推荐海岛婚礼, 笨猫婚礼场地]
+  utterances:
+    - 推荐婚礼场地
+    - 推荐婚宴酒店
+    - 推荐草坪婚礼
+    - 推荐海岛婚礼
+    - 笨猫婚礼场地
+  responses:
+    - "嗷呜～{user_addr}酒店: 五星级 / 主题酒店 - 室内首选ฅฅ"
+    - "(尾巴翘) 户外: 草坪 / 海岛 / 庄园 - 浪漫"
+    - "{user_addr}巴厘岛 / 三亚 / 普吉 - 目的地婚礼热门"
+    - "(挺胸) 笨猫的提醒: 提前 1 年预定!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wed_banquet_001
+  intent: question
+  keywords: [推荐喜宴, 推荐婚宴菜单, 推荐婚宴酒店, 推荐酒席多少钱, 笨猫喜宴]
+  utterances:
+    - 推荐喜宴
+    - 推荐婚宴菜单
+    - 推荐婚宴酒店
+    - 推荐酒席多少钱
+    - 笨猫喜宴
+  responses:
+    - "嗷呜～{user_addr}酒席: 中等 1500/桌 / 高端 3000+/桌ฅฅ"
+    - "(尾巴翘) 菜单: 10-12 道菜 / 4 凉 8 热 + 汤"
+    - "{user_addr}必有: 全鱼 / 全鸡 / 海鲜 - 体面"
+    - "(挺胸) 笨猫的提醒: 试菜! 别只看菜单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wed_invitation_001
+  intent: question
+  keywords: [推荐请柬, 推荐婚礼邀请函, 推荐电子请柬, 推荐请柬模板, 笨猫请柬]
+  utterances:
+    - 推荐请柬
+    - 推荐婚礼邀请函
+    - 推荐电子请柬
+    - 推荐请柬模板
+    - 笨猫请柬
+  responses:
+    - "嗷呜～{user_addr}电子: 小程序 / H5 - 主流ฅฅ"
+    - "(尾巴翘) 实体: 烫金 / 蕾丝 / 复古 - 个性化"
+    - "{user_addr}提前 1-2 个月发出"
+    - "(挺胸) 笨猫的提醒: 长辈仍要纸质! 电子年轻人"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wed_ring_001
+  intent: question
+  keywords: [推荐婚戒, 推荐求婚戒指, 推荐结婚戒, 推荐对戒, 笨猫婚戒]
+  utterances:
+    - 推荐婚戒
+    - 推荐求婚戒指
+    - 推荐结婚戒
+    - 推荐对戒
+    - 笨猫婚戒
+  responses:
+    - "嗷呜～{user_addr}求婚戒: 钻石 / 1 克拉起 - Tiffany / Cartierฅฅ"
+    - "(尾巴翘) 对戒: 简约 / 实用 / 老凤祥 / 周大福"
+    - "{user_addr}预算: 月薪 2-3 倍传统"
+    - "(挺胸) 笨猫的提醒: 留收据! 长期保值"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wed_makeup_001
+  intent: question
+  keywords: [推荐新娘妆, 推荐婚礼化妆, 推荐跟妆师, 推荐婚礼造型, 笨猫新娘妆]
+  utterances:
+    - 推荐新娘妆
+    - 推荐婚礼化妆
+    - 推荐跟妆师
+    - 推荐婚礼造型
+    - 笨猫新娘妆
+  responses:
+    - "嗷呜～{user_addr}找独立化妆师 / 跟妆 8 小时ฅฅ"
+    - "(尾巴翘) 新娘妆: 仪式款 / 敬酒款 / 送客款"
+    - "{user_addr}试妆 1-2 次 / 找最佳风格"
+    - "(挺胸) 笨猫的提醒: 试妆别只一家! 货比三家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wed_videography_001
+  intent: question
+  keywords: [推荐婚礼摄像, 推荐婚礼跟拍, 推荐婚礼视频, 推荐婚礼录像, 笨猫婚礼摄像]
+  utterances:
+    - 推荐婚礼摄像
+    - 推荐婚礼跟拍
+    - 推荐婚礼视频
+    - 推荐婚礼录像
+    - 笨猫婚礼摄像
+  responses:
+    - "嗷呜～{user_addr}摄像 + 摄影: 必备 - 一生回忆ฅฅ"
+    - "(尾巴翘) 三机位: 主机 + 灯光 + 航拍"
+    - "{user_addr}快闪 + 主片 - 抖音年代必备"
+    - "(挺胸) 笨猫的提醒: 找有作品的!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wed_candy_001
+  intent: question
+  keywords: [推荐喜糖, 推荐婚礼伴手礼, 推荐喜糖盒子, 推荐婚礼礼物, 笨猫喜糖]
+  utterances:
+    - 推荐喜糖
+    - 推荐婚礼伴手礼
+    - 推荐喜糖盒子
+    - 推荐婚礼礼物
+    - 笨猫喜糖
+  responses:
+    - "嗷呜～{user_addr}喜糖: 费列罗 / 德芙 / 嘉云 - 主流ฅฅ"
+    - "(尾巴翘) 伴手礼: 茶 / 香薰 / 定制纪念品"
+    - "{user_addr}预算: 5-30/份 - 看档次"
+    - "(挺胸) 笨猫的提醒: 提前 3 月定! 包装"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wed_vow_001
+  intent: question
+  keywords: [推荐婚礼誓词, 推荐婚礼致辞, 推荐婚礼发言, 推荐婚礼演讲, 笨猫婚礼誓词]
+  utterances:
+    - 推荐婚礼誓词
+    - 推荐婚礼致辞
+    - 推荐婚礼发言
+    - 推荐婚礼演讲
+    - 笨猫婚礼誓词
+  responses:
+    - "嗷呜～{user_addr}誓词: 真情 + 故事 + 承诺 - 三件套ฅฅ"
+    - "(尾巴翘) 1-2 分钟 / 别太长"
+    - "{user_addr}写下来 + 排练 - 别现场卡"
+    - "(挺胸) 笨猫的提醒: 真情才动人! 别套模板"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wed_honeymoon_001
+  intent: question
+  keywords: [推荐蜜月, 推荐蜜月旅行, 推荐蜜月目的地, 推荐马尔代夫蜜月, 笨猫蜜月]
+  utterances:
+    - 推荐蜜月
+    - 推荐蜜月旅行
+    - 推荐蜜月目的地
+    - 推荐马尔代夫蜜月
+    - 笨猫蜜月
+  responses:
+    - "嗷呜～{user_addr}热门: 马尔代夫 / 巴厘岛 / 斐济 / 普吉ฅฅ"
+    - "(尾巴翘) 欧洲: 巴黎 / 圣托里尼 / 瑞士 - 浪漫"
+    - "{user_addr}国内: 三亚 / 大理 - 性价比"
+    - "(挺胸) 笨猫的提醒: 别累! 蜜月是放松"
+  cooldown_seconds: 60
+  weight: 1.0

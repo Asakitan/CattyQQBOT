@@ -1,0 +1,207 @@
+# 赛车 / F1 / 拉力 / 超跑 / 汽车爱好者 routes (S6 R84 NLU 节点扩充, 第八周期 buffered 3/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A7 car_driving (日常) / A5 sports_match (F1 浅触) 区分: 这里专注赛车文化深度.
+
+- name: race_f1_team_001
+  intent: question
+  keywords: [推荐 F1 车队, 推荐红牛车队, 推荐法拉利车队, 推荐迈凯轮, 笨猫 F1 车队]
+  utterances:
+    - 推荐 F1 车队
+    - 推荐红牛车队
+    - 推荐法拉利车队
+    - 推荐迈凯轮
+    - 笨猫 F1 车队
+  responses:
+    - "嗷呜～{user_addr}红牛: 维斯塔潘 / 4 连冠ฅฅ"
+    - "(尾巴翘) 法拉利: 勒克莱尔 / 历史最悠久"
+    - "{user_addr}迈凯伦 / 梅奔 / 阿斯顿马丁 / 阿尔法"
+    - "(挺胸) 笨猫推荐: 跟着 Drive to Survive 入坑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: race_f1_driver_001
+  intent: question
+  keywords: [推荐 F1 车手, 推荐汉密尔顿, 推荐维斯塔潘, 推荐周冠宇, 笨猫 F1 车手]
+  utterances:
+    - 推荐 F1 车手
+    - 推荐汉密尔顿
+    - 推荐维斯塔潘
+    - 推荐周冠宇
+    - 笨猫 F1 车手
+  responses:
+    - "嗷呜～{user_addr}传奇: 舒马赫 (7 冠) / 汉密尔顿 (7 冠)ฅฅ"
+    - "(尾巴翘) 维斯塔潘: 新王 4 连冠"
+    - "{user_addr}周冠宇: 中国首位 F1 车手!"
+    - "(挺胸) 笨猫的提醒: 看汉密尔顿 vs 维斯塔潘 史诗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: race_rally_001
+  intent: question
+  keywords: [推荐拉力赛, 推荐 WRC, 推荐达喀尔, 推荐越野赛, 笨猫拉力]
+  utterances:
+    - 推荐拉力赛
+    - 推荐 WRC
+    - 推荐达喀尔
+    - 推荐越野赛
+    - 笨猫拉力
+  responses:
+    - "嗷呜～{user_addr}WRC: 世界拉力锦标赛 - 路况极限ฅฅ"
+    - "(尾巴翘) 达喀尔: 历时 2 周 / 沙漠跨国"
+    - "{user_addr}中国: CCR / 喀拉峻 / 阿尔金山"
+    - "(挺胸) 笨猫的提醒: 比 F1 还危险!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: race_le_mans_001
+  intent: question
+  keywords: [推荐勒芒 24, 推荐 Le Mans, 推荐耐力赛, 推荐 WEC, 笨猫勒芒]
+  utterances:
+    - 推荐勒芒 24
+    - 推荐 Le Mans
+    - 推荐耐力赛
+    - 推荐 WEC
+    - 笨猫勒芒
+  responses:
+    - "嗷呜～{user_addr}勒芒: 24 小时连续比赛 / 1923 创办ฅฅ"
+    - "(尾巴翘) WEC: 世界耐力锦标赛 - 6 站"
+    - "{user_addr}冠军: 丰田 / 保时捷 / 奥迪 - 大厂角逐"
+    - "(挺胸) 笨猫推荐: 看《极速车王》电影"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: race_supercar_001
+  intent: question
+  keywords: [推荐超跑, 推荐法拉利, 推荐兰博基尼, 推荐布加迪, 笨猫超跑]
+  utterances:
+    - 推荐超跑
+    - 推荐法拉利
+    - 推荐兰博基尼
+    - 推荐布加迪
+    - 笨猫超跑
+  responses:
+    - "嗷呜～{user_addr}三大: 法拉利 / 兰博基尼 / 迈凯轮ฅฅ"
+    - "(尾巴翘) 顶级: 布加迪 / 帕加尼 / 柯尼塞格"
+    - "{user_addr}入门超跑: 488 / Huracán / 720S"
+    - "(挺胸) 笨猫的提醒: 价格 + 维护 + 油耗 - 玩超跑烧钱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: race_classic_001
+  intent: question
+  keywords: [推荐老爷车, 推荐经典车, 推荐古董车, 推荐 vintage car, 笨猫老爷车]
+  utterances:
+    - 推荐老爷车
+    - 推荐经典车
+    - 推荐古董车
+    - 推荐 vintage car
+    - 笨猫老爷车
+  responses:
+    - "嗷呜～{user_addr}经典: 甲壳虫 / 福特 GT40 / 福特野马ฅฅ"
+    - "(尾巴翘) 收藏: 投资 / 情怀 / 文化"
+    - "{user_addr}佳士得 / 苏富比 - 老爷车拍卖"
+    - "(挺胸) 笨猫的提醒: 维护贵! 配件难找"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: race_modify_001
+  intent: question
+  keywords: [推荐改装, 推荐车改, 推荐改装件, 推荐 JDM, 笨猫改装]
+  utterances:
+    - 推荐改装
+    - 推荐车改
+    - 推荐改装件
+    - 推荐 JDM
+    - 笨猫改装
+  responses:
+    - "嗷呜～{user_addr}改装方向: 性能 / 外观 / 内饰 - 选目标ฅฅ"
+    - "(尾巴翘) JDM: 日本本土 - 改装文化代表"
+    - "{user_addr}国内改装受限! 别违规"
+    - "(挺胸) 笨猫的提醒: 改装影响安全! 找专业店"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: race_drift_001
+  intent: question
+  keywords: [推荐漂移, 推荐 drift, 推荐 GT 漂移, 推荐头文字 D, 笨猫漂移]
+  utterances:
+    - 推荐漂移
+    - 推荐 drift
+    - 推荐 GT 漂移
+    - 推荐头文字 D
+    - 笨猫漂移
+  responses:
+    - "嗷呜～{user_addr}漂移: 后驱车 / 大马力 / 技术高ฅฅ"
+    - "(尾巴翘) 头文字 D: 经典漂移作品"
+    - "{user_addr}赛事: D1 GP / Formula D"
+    - "(挺胸) 笨猫的提醒: 别开公路漂! 危险违法"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: race_drag_001
+  intent: question
+  keywords: [推荐直线加速, 推荐 drag race, 推荐 1/4 英里, 推荐百公里加速, 笨猫直线加速]
+  utterances:
+    - 推荐直线加速
+    - 推荐 drag race
+    - 推荐 1/4 英里
+    - 推荐百公里加速
+    - 笨猫直线加速
+  responses:
+    - "嗷呜～{user_addr}NHRA: 美国直线加速赛 - 0-400m 极限ฅฅ"
+    - "(尾巴翘) Top Fuel: 3.5 秒跑完 1/4 英里"
+    - "{user_addr}百公里: 超跑 2-3 秒 / 家用 7-10 秒"
+    - "(挺胸) 笨猫的提醒: 街头别飙车!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: race_track_day_001
+  intent: question
+  keywords: [推荐跑赛道, 推荐赛道日, 推荐上赛道, 推荐 track day, 笨猫赛道日]
+  utterances:
+    - 推荐跑赛道
+    - 推荐赛道日
+    - 推荐上赛道
+    - 推荐 track day
+    - 笨猫赛道日
+  responses:
+    - "嗷呜～{user_addr}国内赛道: 上海 F1 / 珠海 / 浙江 / 武汉ฅฅ"
+    - "(尾巴翘) 必备: 头盔 / 手套 / 防火服 - 安全"
+    - "{user_addr}赛道日体验: 500-2000/小时"
+    - "(挺胸) 笨猫的提醒: 赛道才安全飙车!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: race_game_001
+  intent: question
+  keywords: [推荐赛车游戏, 推荐神力科莎, 推荐 iRacing, 推荐 GT 赛车, 笨猫赛车游戏]
+  utterances:
+    - 推荐赛车游戏
+    - 推荐神力科莎
+    - 推荐 iRacing
+    - 推荐 GT 赛车
+    - 笨猫赛车游戏
+  responses:
+    - "嗷呜～{user_addr}模拟向: 神力科莎 / iRacing - 真实ฅฅ"
+    - "(尾巴翘) 主机: GT7 (PS) / Forza (XBox/PC)"
+    - "{user_addr}街机: 山脊赛车 / 极品飞车 - 爽快"
+    - "(挺胸) 笨猫推荐: 配方向盘 + 踏板 = 沉浸感"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: race_motorcycle_001
+  intent: question
+  keywords: [推荐 MotoGP, 推荐摩托赛, 推荐摩托锦标赛, 推荐马奎斯, 笨猫 MotoGP]
+  utterances:
+    - 推荐 MotoGP
+    - 推荐摩托赛
+    - 推荐摩托锦标赛
+    - 推荐马奎斯
+    - 笨猫 MotoGP
+  responses:
+    - "嗷呜～{user_addr}MotoGP: 摩托圈 F1 - 顶级赛事ฅฅ"
+    - "(尾巴翘) 主流厂: 杜卡迪 / 雅马哈 / 本田"
+    - "{user_addr}传奇: 罗西 / 马奎斯 / 多维齐奥索"
+    - "(挺胸) 笨猫的提醒: 危险! 比 F1 更刺激"
+  cooldown_seconds: 60
+  weight: 0.8

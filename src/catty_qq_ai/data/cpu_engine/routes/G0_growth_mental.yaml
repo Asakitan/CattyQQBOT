@@ -1,0 +1,207 @@
+# 个人成长 / 心智模型 / 学习能力 routes (S6 R82 NLU 节点扩充, 第八周期 buffered 1/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 A2 philosophy_life (人生) / B5 workout 区分: 这里专注现代成长理论.
+
+- name: growth_mental_model_001
+  intent: question
+  keywords: [推荐心智模型, 推荐 mental model, 推荐第一性原理, 推荐查理芒格, 笨猫心智模型]
+  utterances:
+    - 推荐心智模型
+    - 推荐 mental model
+    - 推荐第一性原理
+    - 推荐查理芒格
+    - 笨猫心智模型
+  responses:
+    - "嗷呜～{user_addr}查理芒格: 多元思维模型 - 100+ 个ฅฅ"
+    - "(尾巴翘) 第一性原理: 马斯克常用 / 物理思维"
+    - "{user_addr}逆向思维: 反过来想 / 解决难题"
+    - "(挺胸) 笨猫推荐: 《穷查理宝典》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: growth_compound_001
+  intent: question
+  keywords: [推荐复利, 推荐复利效应, 推荐 compound, 推荐时间投资, 笨猫复利]
+  utterances:
+    - 推荐复利
+    - 推荐复利效应
+    - 推荐 compound
+    - 推荐时间投资
+    - 笨猫复利
+  responses:
+    - "嗷呜～{user_addr}复利: 世界第八大奇迹 - 爱因斯坦说ฅฅ"
+    - "(尾巴翘) 1.01^365 = 37.78 / 每天进步 1%"
+    - "{user_addr}用在: 学习 / 健康 / 关系 / 财富"
+    - "(挺胸) 笨猫的提醒: 长期主义! 别短视"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: growth_habit_001
+  intent: question
+  keywords: [推荐养习惯, 推荐微习惯, 推荐 21 天养成, 推荐《原子习惯》, 笨猫习惯]
+  utterances:
+    - 推荐养习惯
+    - 推荐微习惯
+    - 推荐 21 天养成
+    - 推荐原子习惯
+    - 笨猫习惯
+  responses:
+    - "嗷呜～{user_addr}原子习惯: 1% 微改变 + 持续ฅฅ"
+    - "(尾巴翘) 四要素: 提示 / 渴望 / 反应 / 奖励"
+    - "{user_addr}66 天形成习惯! 不是 21 天"
+    - "(挺胸) 笨猫推荐: 《原子习惯》《掌控习惯》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: growth_deep_work_001
+  intent: question
+  keywords: [推荐深度工作, 推荐 deep work, 推荐心流, 推荐专注力, 笨猫深度工作]
+  utterances:
+    - 推荐深度工作
+    - 推荐 deep work
+    - 推荐心流
+    - 推荐专注力
+    - 笨猫深度工作
+  responses:
+    - "嗷呜～{user_addr}深度工作: Cal Newport - 知识工作者必备ฅฅ"
+    - "(尾巴翘) 心流: Mihaly - 最佳体验 / 时间感消失"
+    - "{user_addr}方法: 隔离干扰 / 固定时段 / 高强度"
+    - "(挺胸) 笨猫推荐: 《深度工作》/《心流》经典"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: growth_growth_mindset_001
+  intent: question
+  keywords: [推荐成长型思维, 推荐 growth mindset, 推荐固定思维, 推荐 Dweck, 笨猫成长型思维]
+  utterances:
+    - 推荐成长型思维
+    - 推荐 growth mindset
+    - 推荐固定思维
+    - 推荐 Dweck
+    - 笨猫成长型思维
+  responses:
+    - "嗷呜～{user_addr}Dweck: 成长型 vs 固定型 - 思维差异ฅฅ"
+    - "(尾巴翘) 成长型: 拥抱挑战 / 错误是学习"
+    - "{user_addr}固定型: 避免失败 / 自我证明"
+    - "(挺胸) 笨猫推荐: 《终身成长》"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: growth_feynman_001
+  intent: question
+  keywords: [推荐费曼学习法, 推荐 Feynman 技巧, 推荐教是最好的学, 推荐知识输出, 笨猫费曼]
+  utterances:
+    - 推荐费曼学习法
+    - 推荐 Feynman 技巧
+    - 推荐教是最好的学
+    - 推荐知识输出
+    - 笨猫费曼
+  responses:
+    - "嗷呜～{user_addr}费曼: 解释给 12 岁懂 - 验证理解ฅฅ"
+    - "(尾巴翘) 步骤: 学 → 教 → 找漏洞 → 补"
+    - "{user_addr}写文章 / 录视频 / 教别人"
+    - "(挺胸) 笨猫的提醒: 输出强化输入!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: growth_reading_001
+  intent: question
+  keywords: [推荐阅读, 推荐如何阅读, 推荐主题阅读, 推荐快速阅读, 笨猫阅读]
+  utterances:
+    - 推荐阅读
+    - 推荐如何阅读
+    - 推荐主题阅读
+    - 推荐快速阅读
+    - 笨猫阅读
+  responses:
+    - "嗷呜～{user_addr}《如何阅读一本书》: 4 个层次ฅฅ"
+    - "(尾巴翘) 检视 → 分析 → 主题 - 进阶"
+    - "{user_addr}主题阅读: 同主题 5-10 本 - 深入"
+    - "(挺胸) 笨猫的提醒: 看书要做笔记!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: growth_writing_001
+  intent: question
+  keywords: [推荐写作, 推荐写作方法, 推荐 zettelkasten, 推荐卡片笔记法, 笨猫写作]
+  utterances:
+    - 推荐写作
+    - 推荐写作方法
+    - 推荐 zettelkasten
+    - 推荐卡片笔记法
+    - 笨猫写作
+  responses:
+    - "嗷呜～{user_addr}卡片笔记法: 卢曼 - 思想原子化ฅฅ"
+    - "(尾巴翘) 闪念 / 文献 / 永久笔记 - 三层"
+    - "{user_addr}工具: Obsidian / Roam / Logseq"
+    - "(挺胸) 笨猫推荐: 《卡片笔记写作法》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: growth_failure_002
+  intent: question
+  keywords: [推荐失败学, 推荐 fail fast, 推荐 antifragile, 推荐反脆弱, 笨猫失败]
+  utterances:
+    - 推荐失败学
+    - 推荐 fail fast
+    - 推荐 antifragile
+    - 推荐反脆弱
+    - 笨猫失败
+  responses:
+    - "嗷呜～{user_addr}反脆弱: Taleb - 失败让你更强ฅฅ"
+    - "(尾巴翘) 黑天鹅: 不可预测的大事件"
+    - "{user_addr}投资: 别孤注一掷 / 留余地"
+    - "(挺胸) 笨猫推荐: 《反脆弱》《黑天鹅》"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: growth_oc_001
+  intent: question
+  keywords: [推荐目标管理, 推荐 OKR, 推荐 SMART, 推荐目标设定, 笨猫 OKR]
+  utterances:
+    - 推荐目标管理
+    - 推荐 OKR
+    - 推荐 SMART
+    - 推荐目标设定
+    - 笨猫 OKR
+  responses:
+    - "嗷呜～{user_addr}OKR: O (目标) + KR (关键结果)ฅฅ"
+    - "(尾巴翘) SMART: 具体 / 可测 / 可达 / 相关 / 时限"
+    - "{user_addr}季度目标 + 周复盘 - 持续改进"
+    - "(挺胸) 笨猫的提醒: 别只设! 必须执行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: growth_negative_001
+  intent: complaint
+  keywords: [推荐应对负面, 推荐自我怀疑, 推荐冒名顶替综合症, 推荐情绪管理, 笨猫负面]
+  utterances:
+    - 推荐应对负面
+    - 推荐自我怀疑
+    - 推荐冒名顶替综合症
+    - 推荐情绪管理
+    - 笨猫负面
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}冒名顶替综合症常见!ฅฅ"
+    - "(歪头) 别完美主义! 80% 够好"
+    - "{user_addr}写感恩日记 / 多关注小确幸"
+    - "(挺胸) 笨猫的提醒: 严重看心理师"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: growth_70_20_10_001
+  intent: question
+  keywords: [推荐 70-20-10, 推荐学习金字塔, 推荐学习方法论, 推荐主动学习, 笨猫学习金字塔]
+  utterances:
+    - 推荐 70-20-10
+    - 推荐学习金字塔
+    - 推荐学习方法论
+    - 推荐主动学习
+    - 笨猫学习金字塔
+  responses:
+    - "嗷呜～{user_addr}70-20-10: 70% 实践 + 20% 他人 + 10% 课程ฅฅ"
+    - "(尾巴翘) 学习金字塔: 教别人 90% / 听课 5%"
+    - "{user_addr}主动 > 被动! 输出 > 输入"
+    - "(挺胸) 笨猫的提醒: 别只刷视频! 写练讲"
+  cooldown_seconds: 60
+  weight: 0.9

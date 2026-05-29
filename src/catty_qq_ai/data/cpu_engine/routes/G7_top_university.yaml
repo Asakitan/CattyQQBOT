@@ -1,0 +1,207 @@
+# 国际名校 / 排名 / 常青藤 / G5 / UC routes (S6 R89 NLU 节点扩充, 第八周期 buffered 8/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 F3 overseas_travel (浅触留学) 区分: 这里专注名校深度.
+
+- name: top_ivy_001
+  intent: question
+  keywords: [推荐常青藤, 推荐 Ivy League, 推荐 Harvard, 推荐 Yale, 笨猫常青藤]
+  utterances:
+    - 推荐常青藤
+    - 推荐 Ivy League
+    - 推荐 Harvard
+    - 推荐 Yale
+    - 笨猫常青藤
+  responses:
+    - "嗷呜～{user_addr}8 所: 哈佛 / 耶鲁 / 普林斯顿 / 哥大 / 宾大 / 布朗 / 达特茅斯 / 康奈尔ฅฅ"
+    - "(尾巴翘) 录取率 4-10% / 顶级名校"
+    - "{user_addr}文理学院 / 综合大学 - 不同方向"
+    - "(挺胸) 笨猫的提醒: 申请季最早一年准备"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: top_harvard_001
+  intent: question
+  keywords: [推荐哈佛, 推荐 Harvard, 推荐哈佛申请, 推荐哈佛专业, 笨猫哈佛]
+  utterances:
+    - 推荐哈佛
+    - 推荐 Harvard
+    - 推荐哈佛申请
+    - 推荐哈佛专业
+    - 笨猫哈佛
+  responses:
+    - "嗷呜～{user_addr}哈佛: 1636 创立 / 美国第一大学ฅฅ"
+    - "(尾巴翘) 录取率 3-4% / SAT 1500+ + GPA 4.0+"
+    - "{user_addr}强势: 法学院 / 商学院 / 公共卫生"
+    - "(挺胸) 笨猫的提醒: 不只学术好! 看 leadership"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: top_mit_001
+  intent: question
+  keywords: [推荐 MIT, 推荐麻省理工, 推荐斯坦福, 推荐 Stanford, 笨猫 MIT]
+  utterances:
+    - 推荐 MIT
+    - 推荐麻省理工
+    - 推荐斯坦福
+    - 推荐 Stanford
+    - 笨猫 MIT
+  responses:
+    - "嗷呜～{user_addr}MIT: 工程/科学第一 / 黑客文化ฅฅ"
+    - "(尾巴翘) Stanford: 创业/AI 第一 / 硅谷血脉"
+    - "{user_addr}录取率 4-6% / 数理基础极强"
+    - "(挺胸) 笨猫的提醒: 学神聚集地! 抗压力强"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: top_g5_001
+  intent: question
+  keywords: [推荐 G5, 推荐牛剑, 推荐牛津, 推荐剑桥, 笨猫 G5]
+  utterances:
+    - 推荐 G5
+    - 推荐牛剑
+    - 推荐牛津
+    - 推荐剑桥
+    - 笨猫 G5
+  responses:
+    - "嗷呜～{user_addr}G5: 牛津 / 剑桥 / IC / LSE / UCLฅฅ"
+    - "(尾巴翘) 牛剑 800 年历史 / 学院制"
+    - "{user_addr}录取率 15-20% / 比常青藤稍高"
+    - "(挺胸) 笨猫推荐: 准备 Personal Statement"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: top_uc_001
+  intent: question
+  keywords: [推荐 UC, 推荐加州大学, 推荐 UCLA, 推荐伯克利, 笨猫 UC]
+  utterances:
+    - 推荐 UC
+    - 推荐加州大学
+    - 推荐 UCLA
+    - 推荐伯克利
+    - 笨猫 UC
+  responses:
+    - "嗷呜～{user_addr}UC 系: 伯克利 / UCLA / 圣地亚哥 / 戴维斯ฅฅ"
+    - "(尾巴翘) 伯克利: 公立第一 / 学术强"
+    - "{user_addr}UCLA: 体育+学术兼优 / 综合排名高"
+    - "(挺胸) 笨猫的提醒: 国际生申请竞争激烈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: top_qs_001
+  intent: question
+  keywords: [推荐 QS 排名, 推荐 THE 排名, 推荐 US News, 推荐世界大学排名, 笨猫 QS]
+  utterances:
+    - 推荐 QS 排名
+    - 推荐 THE 排名
+    - 推荐 US News
+    - 推荐世界大学排名
+    - 笨猫 QS
+  responses:
+    - "嗷呜～{user_addr}四大排名: QS / THE / ARWU (软科) / US Newsฅฅ"
+    - "(尾巴翘) 综合大学 vs 文理学院 - 不同体系"
+    - "{user_addr}专业排名 > 综合排名 - 看用途"
+    - "(挺胸) 笨猫的提醒: 排名仅供参考! 看 fit"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: top_china_985_001
+  intent: question
+  keywords: [推荐 985, 推荐 211, 推荐双一流, 推荐 C9, 笨猫 985]
+  utterances:
+    - 推荐 985
+    - 推荐 211
+    - 推荐双一流
+    - 推荐 C9
+    - 笨猫 985
+  responses:
+    - "嗷呜～{user_addr}C9: 清北复交浙南科西工大ฅฅ"
+    - "(尾巴翘) 985: 39 所 / 211: 100+ 所"
+    - "{user_addr}双一流: 政府重点扶持名单"
+    - "(挺胸) 笨猫推荐: 选学校看专业实力!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: top_japan_uni_001
+  intent: question
+  keywords: [推荐日本大学, 推荐东京大学, 推荐京都大学, 推荐早稻田, 笨猫日本大学]
+  utterances:
+    - 推荐日本大学
+    - 推荐东京大学
+    - 推荐京都大学
+    - 推荐早稻田
+    - 笨猫日本大学
+  responses:
+    - "嗷呜～{user_addr}帝大 7 所: 东大 / 京大 / 东北 / 阪大 等ฅฅ"
+    - "(尾巴翘) 私立顶级: 早稻田 / 庆应"
+    - "{user_addr}留学: 语言学校 → 大学/研究生"
+    - "(挺胸) 笨猫的提醒: 日语 N1 + 英语 - 双语优势"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: top_germany_uni_001
+  intent: question
+  keywords: [推荐德国大学, 推荐慕尼黑工大, 推荐 TU9, 推荐德国留学, 笨猫德国大学]
+  utterances:
+    - 推荐德国大学
+    - 推荐慕尼黑工大
+    - 推荐 TU9
+    - 推荐德国留学
+    - 笨猫德国大学
+  responses:
+    - "嗷呜～{user_addr}TU9 工科联盟: 慕尼黑工大 / 亚琛工大 等ฅฅ"
+    - "(尾巴翘) 综合: 海德堡 / 慕尼黑大学 / LMU"
+    - "{user_addr}学费免费! 学生 social 服务"
+    - "(挺胸) 笨猫的提醒: 德语 B2-C1 必备"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: top_singapore_uni_001
+  intent: question
+  keywords: [推荐新加坡国立, 推荐 NUS, 推荐南洋理工, 推荐 NTU, 笨猫新加坡]
+  utterances:
+    - 推荐新加坡国立
+    - 推荐 NUS
+    - 推荐南洋理工
+    - 推荐 NTU
+    - 笨猫新加坡
+  responses:
+    - "嗷呜～{user_addr}亚洲顶级: NUS + NTU - 不输牛剑ฅฅ"
+    - "(尾巴翘) QS 排名常年 10-15"
+    - "{user_addr}全英文授课 / 离家近 / 性价比高"
+    - "(挺胸) 笨猫的提醒: 申请难! 国际生录取卷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: top_hk_uni_001
+  intent: question
+  keywords: [推荐香港大学, 推荐港大, 推荐港中文, 推荐港科大, 笨猫港校]
+  utterances:
+    - 推荐香港大学
+    - 推荐港大
+    - 推荐港中文
+    - 推荐港科大
+    - 笨猫港校
+  responses:
+    - "嗷呜～{user_addr}港三: 港大 / 港中文 / 港科大ฅฅ"
+    - "(尾巴翘) 港五加: 城大 / 理大"
+    - "{user_addr}就业方向: 金融 / 法律 / 商科 - 强"
+    - "(挺胸) 笨猫的提醒: 内地生申请配额!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: top_mba_001
+  intent: question
+  keywords: [推荐 MBA, 推荐 INSEAD, 推荐沃顿, 推荐 Wharton, 笨猫 MBA]
+  utterances:
+    - 推荐 MBA
+    - 推荐 INSEAD
+    - 推荐沃顿
+    - 推荐 Wharton
+    - 笨猫 MBA
+  responses:
+    - "嗷呜～{user_addr}M7: 哈佛 / 沃顿 / 斯坦福 / 哥大 / 芝加哥布斯 等ฅฅ"
+    - "(尾巴翘) 欧洲: INSEAD / LBS - 1 年制"
+    - "{user_addr}国内: 长江 / 中欧 / 清华经管"
+    - "(挺胸) 笨猫的提醒: 工作 3-5 年再读 MBA"
+  cooldown_seconds: 60
+  weight: 1.0

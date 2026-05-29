@@ -1,0 +1,207 @@
+# 保健品 / 维生素 / 营养品 / 补剂 routes (S6 R88 NLU 节点扩充, 第八周期 buffered 7/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 91 health / C5 disease / F4 weight 区分: 这里专注保健品/补剂.
+
+- name: supp_vitamin_001
+  intent: question
+  keywords: [推荐维生素, 推荐 VC, 推荐 VD, 推荐复合维生素, 笨猫维生素]
+  utterances:
+    - 推荐维生素
+    - 推荐 VC
+    - 推荐 VD
+    - 推荐复合维生素
+    - 笨猫维生素
+  responses:
+    - "嗷呜～{user_addr}基础: VC / VD / B 族 - 现代人易缺ฅฅ"
+    - "(尾巴翘) VD 缺乏率 80%! 补充必要"
+    - "{user_addr}复合维 vs 单一 - 看缺什么"
+    - "(挺胸) 笨猫的提醒: 食物为主! 补剂辅助"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: supp_protein_002
+  intent: question
+  keywords: [推荐蛋白粉, 推荐乳清蛋白, 推荐 whey, 推荐酪蛋白, 笨猫蛋白粉]
+  utterances:
+    - 推荐蛋白粉
+    - 推荐乳清蛋白
+    - 推荐 whey
+    - 推荐酪蛋白
+    - 笨猫蛋白粉
+  responses:
+    - "嗷呜～{user_addr}主流: 乳清浓缩 (WPC) / 分离 (WPI)ฅฅ"
+    - "(尾巴翘) 品牌: 肌肉科技 / Optimum / 康比特"
+    - "{user_addr}健身人 1.6-2.2g/kg 蛋白"
+    - "(挺胸) 笨猫的提醒: 别替代正餐!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: supp_creatine_001
+  intent: question
+  keywords: [推荐肌酸, 推荐 creatine, 推荐增肌补剂, 推荐力量补剂, 笨猫肌酸]
+  utterances:
+    - 推荐肌酸
+    - 推荐 creatine
+    - 推荐增肌补剂
+    - 推荐力量补剂
+    - 笨猫肌酸
+  responses:
+    - "嗷呜～{user_addr}肌酸: 增力增肌 - 健身界最有证据补剂ฅฅ"
+    - "(尾巴翘) 每天 3-5g / 不需 loading"
+    - "{user_addr}选一水肌酸 / Creapure 品牌 - 性价比"
+    - "(挺胸) 笨猫的提醒: 多喝水! 别脱水"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: supp_fish_oil_001
+  intent: question
+  keywords: [推荐鱼油, 推荐 Omega 3, 推荐 DHA EPA, 推荐欧米伽, 笨猫鱼油]
+  utterances:
+    - 推荐鱼油
+    - 推荐 Omega 3
+    - 推荐 DHA EPA
+    - 推荐欧米伽
+    - 笨猫鱼油
+  responses:
+    - "嗷呜～{user_addr}Omega-3: 心脑血管 / 抗炎 / 健脑ฅฅ"
+    - "(尾巴翘) 品牌: 普丽普莱 / Move Free / 海王"
+    - "{user_addr}每日 1-2g EPA+DHA - 够用"
+    - "(挺胸) 笨猫的提醒: 深海鱼比补剂好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: supp_collagen_001
+  intent: question
+  keywords: [推荐胶原蛋白, 推荐胶原肽, 推荐玻尿酸口服, 推荐美容补剂, 笨猫胶原蛋白]
+  utterances:
+    - 推荐胶原蛋白
+    - 推荐胶原肽
+    - 推荐玻尿酸口服
+    - 推荐美容补剂
+    - 笨猫胶原蛋白
+  responses:
+    - "嗷呜～{user_addr}胶原: 口服争议大! 效果有限ฅฅ"
+    - "(尾巴翘) Pola / Swisse / 颜如玉 - 主流品牌"
+    - "{user_addr}多吃 VC + 蛋白质 - 自己合成"
+    - "(挺胸) 笨猫的提醒: 别冲动! 效果因人而异"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: supp_probiotic_001
+  intent: question
+  keywords: [推荐益生菌, 推荐 Probiotic, 推荐肠道菌群, 推荐益生元, 笨猫益生菌]
+  utterances:
+    - 推荐益生菌
+    - 推荐 Probiotic
+    - 推荐肠道菌群
+    - 推荐益生元
+    - 笨猫益生菌
+  responses:
+    - "嗷呜～{user_addr}益生菌: 肠道健康 - 调节菌群ฅฅ"
+    - "(尾巴翘) 品牌: Culturelle / 妈咪爱 / 合生元"
+    - "{user_addr}空腹 / 餐前 30 分钟 服用"
+    - "(挺胸) 笨猫的提醒: 持续 2-4 周看效果"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: supp_calcium_001
+  intent: question
+  keywords: [推荐钙片, 推荐钙补充, 推荐钙加 D, 推荐儿童钙, 笨猫钙]
+  utterances:
+    - 推荐钙片
+    - 推荐钙补充
+    - 推荐钙加 D
+    - 推荐儿童钙
+    - 笨猫钙
+  responses:
+    - "嗷呜～{user_addr}成人 800-1000mg / 日 - 钙需求ฅฅ"
+    - "(尾巴翘) 钙 + VD3 + K2 - 一起吸收最好"
+    - "{user_addr}品牌: 钙尔奇 / Caltrate / 迪巧"
+    - "(挺胸) 笨猫的提醒: 食物钙优先! 牛奶 / 豆腐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: supp_iron_001
+  intent: question
+  keywords: [推荐铁补充, 推荐补铁, 推荐贫血补剂, 推荐铁剂, 笨猫补铁]
+  utterances:
+    - 推荐铁补充
+    - 推荐补铁
+    - 推荐贫血补剂
+    - 推荐铁剂
+    - 笨猫补铁
+  responses:
+    - "嗷呜～{user_addr}缺铁: 月经多 / 素食 / 孕妇 - 易缺ฅฅ"
+    - "(尾巴翘) 铁剂: 富血酸亚铁 / 多糖铁"
+    - "{user_addr}配 VC 吸收好 / 避免与钙同服"
+    - "(挺胸) 笨猫的提醒: 验血确认缺铁再补"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: supp_melatonin_001
+  intent: question
+  keywords: [推荐褪黑素, 推荐 melatonin, 推荐助眠补剂, 推荐倒时差, 笨猫褪黑素]
+  utterances:
+    - 推荐褪黑素
+    - 推荐 melatonin
+    - 推荐助眠补剂
+    - 推荐倒时差
+    - 笨猫褪黑素
+  responses:
+    - "嗷呜～{user_addr}褪黑素: 调时差 / 帮入睡ฅฅ"
+    - "(尾巴翘) 0.5-3mg 睡前 30 分钟"
+    - "{user_addr}美剂: Natrol / Nature Made"
+    - "(挺胸) 笨猫的提醒: 别天天吃! 调节用"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: supp_msm_001
+  intent: question
+  keywords: [推荐关节保健, 推荐氨糖, 推荐 Move Free, 推荐软骨素, 笨猫关节保健]
+  utterances:
+    - 推荐关节保健
+    - 推荐氨糖
+    - 推荐 Move Free
+    - 推荐软骨素
+    - 笨猫关节保健
+  responses:
+    - "嗷呜～{user_addr}氨糖 + 软骨素 + MSM - 关节三件套ฅฅ"
+    - "(尾巴翘) Move Free / Schiff - 美国主流"
+    - "{user_addr}40+ 适用 / 30 岁前不必要"
+    - "(挺胸) 笨猫的提醒: 效果有限! 运动更重要"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: supp_traditional_001
+  intent: question
+  keywords: [推荐中式保健, 推荐枸杞, 推荐人参, 推荐燕窝, 笨猫中式保健]
+  utterances:
+    - 推荐中式保健
+    - 推荐枸杞
+    - 推荐人参
+    - 推荐燕窝
+    - 笨猫中式保健
+  responses:
+    - "嗷呜～{user_addr}日常: 枸杞 / 红枣 / 黄芪 / 当归ฅฅ"
+    - "(尾巴翘) 高端: 燕窝 / 海参 / 鹿茸 / 人参"
+    - "{user_addr}中医辨证施补! 别盲补"
+    - "(挺胸) 笨猫的提醒: 食疗 > 滥用补品"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: supp_kids_001
+  intent: question
+  keywords: [推荐儿童保健品, 推荐儿童维生素, 推荐儿童钙片, 推荐儿童 DHA, 笨猫儿童保健品]
+  utterances:
+    - 推荐儿童保健品
+    - 推荐儿童维生素
+    - 推荐儿童钙片
+    - 推荐儿童 DHA
+    - 笨猫儿童保健品
+  responses:
+    - "嗷呜～{user_addr}儿童: VD / 钙 / DHA - 必要时补ฅฅ"
+    - "(尾巴翘) 不偏食孩子: 食物足够"
+    - "{user_addr}补充剂找儿科推荐!"
+    - "(挺胸) 笨猫的提醒: 别给孩子乱补保健品!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,207 @@
+# 网络安全 / 防黑客 / 隐私保护 / 密码 routes (S6 R90 NLU 节点扩充, 第八周期 buffered 9/10)
+# 主人 2026-05-29: intent=question/info_request, 短语级 keywords.
+# 跟 C0 ai_programming (推荐学网络安全) 区分: 这里专注实操防护.
+
+- name: cyber_password_001
+  intent: question
+  keywords: [推荐密码管理, 推荐 1Password, 推荐 Bitwarden, 推荐 LastPass, 笨猫密码管理]
+  utterances:
+    - 推荐密码管理
+    - 推荐 1Password
+    - 推荐 Bitwarden
+    - 推荐 LastPass
+    - 笨猫密码管理
+  responses:
+    - "嗷呜～{user_addr}主流: 1Password / Bitwarden (开源)ฅฅ"
+    - "(尾巴翘) 一个主密码 / 所有密码不一样"
+    - "{user_addr}国货: Keeper / Enpass - 选择多"
+    - "(挺胸) 笨猫的提醒: 必装! 别一个密码用所有"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cyber_2fa_001
+  intent: question
+  keywords: [推荐 2FA, 推荐两步验证, 推荐 Authenticator, 推荐 Authy, 笨猫 2FA]
+  utterances:
+    - 推荐 2FA
+    - 推荐两步验证
+    - 推荐 Authenticator
+    - 推荐 Authy
+    - 笨猫 2FA
+  responses:
+    - "嗷呜～{user_addr}必开 2FA! 比单密码安全 100 倍ฅฅ"
+    - "(尾巴翘) Google Authenticator / Authy / Microsoft"
+    - "{user_addr}硬件 key: YubiKey - 最高级别"
+    - "(挺胸) 笨猫的提醒: 关键账号必开!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cyber_vpn_001
+  intent: question
+  keywords: [推荐 VPN, 推荐翻墙, 推荐安全代理, 推荐 NordVPN, 笨猫 VPN]
+  utterances:
+    - 推荐 VPN
+    - 推荐翻墙
+    - 推荐安全代理
+    - 推荐 NordVPN
+    - 笨猫 VPN
+  responses:
+    - "嗷呜～{user_addr}用 VPN 保护隐私 / 公共 WiFi 必备ฅฅ"
+    - "(尾巴翘) 主流: NordVPN / ExpressVPN / Surfshark"
+    - "{user_addr}国内别用! 政策风险"
+    - "(挺胸) 笨猫的提醒: 别为隐私用免费 VPN!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cyber_phishing_001
+  intent: question
+  keywords: [推荐识别钓鱼, 推荐 phishing, 推荐反钓鱼, 推荐识破假邮件, 笨猫钓鱼]
+  utterances:
+    - 推荐识别钓鱼
+    - 推荐 phishing
+    - 推荐反钓鱼
+    - 推荐识破假邮件
+    - 笨猫钓鱼
+  responses:
+    - "嗷呜～{user_addr}钓鱼邮件: 检查发件人 + 链接 + 紧迫感ฅฅ"
+    - "(尾巴翘) 银行 / 平台 不会主动要密码"
+    - "{user_addr}悬停链接看真实地址! 别点"
+    - "(挺胸) 笨猫的提醒: 收到可疑的别回!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cyber_wifi_001
+  intent: question
+  keywords: [推荐 WiFi 安全, 推荐公共 WiFi, 推荐 WiFi 防黑, 推荐 WPA3, 笨猫 WiFi 安全]
+  utterances:
+    - 推荐 WiFi 安全
+    - 推荐公共 WiFi
+    - 推荐 WiFi 防黑
+    - 推荐 WPA3
+    - 笨猫 WiFi 安全
+  responses:
+    - "嗷呜～{user_addr}家用: WPA3 加密 + 强密码 + 关 WPSฅฅ"
+    - "(尾巴翘) 公共 WiFi: 别登银行 / 用 VPN"
+    - "{user_addr}修改默认路由密码! 别 admin/admin"
+    - "(挺胸) 笨猫的提醒: 关闭 SSID 广播更安全"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cyber_privacy_001
+  intent: question
+  keywords: [推荐隐私保护, 推荐 GDPR, 推荐反追踪, 推荐数据保护, 笨猫隐私保护]
+  utterances:
+    - 推荐隐私保护
+    - 推荐 GDPR
+    - 推荐反追踪
+    - 推荐数据保护
+    - 笨猫隐私保护
+  responses:
+    - "嗷呜～{user_addr}浏览器: Brave / Firefox + uBlock Originฅฅ"
+    - "(尾巴翘) 搜索: DuckDuckGo / Startpage - 不追踪"
+    - "{user_addr}邮件: ProtonMail - 端对端加密"
+    - "(挺胸) 笨猫的提醒: 别给 app 过多权限!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cyber_backup_001
+  intent: question
+  keywords: [推荐数据备份, 推荐云备份, 推荐 3-2-1 备份, 推荐勒索病毒, 笨猫数据备份]
+  utterances:
+    - 推荐数据备份
+    - 推荐云备份
+    - 推荐 3-2-1 备份
+    - 推荐勒索病毒
+    - 笨猫数据备份
+  responses:
+    - "嗷呜～{user_addr}3-2-1 法则: 3 份 + 2 介质 + 1 异地ฅฅ"
+    - "(尾巴翘) 云: 百度网盘 / 阿里云盘 / iCloud / Google Drive"
+    - "{user_addr}本地: NAS / 移动硬盘"
+    - "(挺胸) 笨猫的提醒: 勒索病毒猛! 备份救命"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cyber_antivirus_001
+  intent: question
+  keywords: [推荐杀毒软件, 推荐 Windows Defender, 推荐火绒, 推荐卡巴斯基, 笨猫杀毒]
+  utterances:
+    - 推荐杀毒软件
+    - 推荐 Windows Defender
+    - 推荐火绒
+    - 推荐卡巴斯基
+    - 笨猫杀毒
+  responses:
+    - "嗷呜～{user_addr}Windows: 自带 Defender 够 + 火绒 (国货)ฅฅ"
+    - "(尾巴翘) Mac: 系统自带 / 不必额外"
+    - "{user_addr}避: 360 / 腾讯管家 - 太吃资源"
+    - "(挺胸) 笨猫的提醒: 别下盗版! 病毒来源"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cyber_browser_001
+  intent: question
+  keywords: [推荐安全浏览器, 推荐 Tor, 推荐 Brave, 推荐隐私浏览器, 笨猫安全浏览器]
+  utterances:
+    - 推荐安全浏览器
+    - 推荐 Tor
+    - 推荐 Brave
+    - 推荐隐私浏览器
+    - 笨猫安全浏览器
+  responses:
+    - "嗷呜～{user_addr}Brave: 默认拦截广告/追踪 - 快ฅฅ"
+    - "(尾巴翘) Firefox + 隐私扩展 - 自定义强"
+    - "{user_addr}Tor: 极致匿名 / 暗网入口"
+    - "(挺胸) 笨猫的提醒: 别下载未知扩展!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cyber_doxxing_001
+  intent: question
+  keywords: [推荐人肉搜索防, 推荐网暴防护, 推荐个人信息泄露, 推荐网络暴力, 笨猫人肉]
+  utterances:
+    - 推荐人肉搜索防
+    - 推荐网暴防护
+    - 推荐个人信息泄露
+    - 推荐网络暴力
+    - 笨猫人肉
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}网暴可怕!ฅฅ"
+    - "(歪头) 防: 别晒地址 / 工作单位 / 真名"
+    - "{user_addr}被网暴: 截图 + 报警 + 法律"
+    - "(挺胸) 笨猫的提醒: 信息一旦泄难收回!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cyber_payment_001
+  intent: question
+  keywords: [推荐支付安全, 推荐网银安全, 推荐信用卡安全, 推荐扫码风险, 笨猫支付安全]
+  utterances:
+    - 推荐支付安全
+    - 推荐网银安全
+    - 推荐信用卡安全
+    - 推荐扫码风险
+    - 笨猫支付安全
+  responses:
+    - "嗷呜～{user_addr}U盾 / 短信验证 - 多重保护ฅฅ"
+    - "(尾巴翘) 扫码: 别扫陌生 / 街头 / 不明二维码"
+    - "{user_addr}虚拟卡 / 一次性 CVV - 网购保护"
+    - "(挺胸) 笨猫的提醒: 别用公共 WiFi 支付!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cyber_kid_001
+  intent: question
+  keywords: [推荐儿童网络安全, 推荐家长控制, 推荐儿童手机管理, 推荐 family link, 笨猫儿童网络安全]
+  utterances:
+    - 推荐儿童网络安全
+    - 推荐家长控制
+    - 推荐儿童手机管理
+    - 推荐 family link
+    - 笨猫儿童网络安全
+  responses:
+    - "嗷呜～{user_addr}工具: Google Family Link / Apple 屏幕时间ฅฅ"
+    - "(尾巴翘) 限制: 时长 / 应用 / 内容"
+    - "{user_addr}教育: 不加陌生人 / 不晒个人信息"
+    - "(挺胸) 笨猫的提醒: 多陪伴 > 监控"
+  cooldown_seconds: 60
+  weight: 1.0
