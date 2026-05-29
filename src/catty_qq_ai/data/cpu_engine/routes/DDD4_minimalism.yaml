@@ -1,0 +1,206 @@
+# 极简主义 routes (S6 R576 NLU 节点扩充, 第五十七周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: mn_lifestyle_001
+  intent: question
+  keywords: [推荐极简生活, 推荐 Minimalism, 推荐断舍离, 推荐少即是多, 笨猫极简生活]
+  utterances:
+    - 推荐极简生活
+    - 推荐 Minimalism
+    - 推荐断舍离
+    - 推荐少即是多
+    - 笨猫极简生活
+  responses:
+    - "嗷呜～{user_addr}Minimalism - 少即是多ฅฅ"
+    - "(尾巴翘) 断舍离 / 山下英子"
+    - "{user_addr}留下真正喜欢的东西"
+    - "(挺胸) 猫猫推荐: 从一个抽屉开始!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mn_konmari_001
+  intent: question
+  keywords: [推荐近藤麻理惠, 推荐 KonMari, 推荐怦然心动整理, 推荐麻理惠整理法, 笨猫近藤麻理惠]
+  utterances:
+    - 推荐近藤麻理惠
+    - 推荐 KonMari
+    - 推荐怦然心动整理
+    - 推荐麻理惠整理法
+    - 笨猫近藤麻理惠
+  responses:
+    - "嗷呜～{user_addr}KonMari - 怦然心动ฅฅ"
+    - "(尾巴翘) 按类别整理 / 不按位置"
+    - "{user_addr}拿起来心动就留 / 不心动谢谢丢"
+    - "(挺胸) 笨猫推荐: 衣服→书→纸→小物→纪念!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mn_clothes_001
+  intent: question
+  keywords: [推荐三月衣物清理, 推荐衣橱断舍离, 推荐胶囊衣橱, 推荐 capsule wardrobe, 笨猫衣物清理]
+  utterances:
+    - 推荐三月衣物清理
+    - 推荐衣橱断舍离
+    - 推荐胶囊衣橱
+    - 推荐 capsule wardrobe
+    - 笨猫衣物清理
+  responses:
+    - "嗷呜～{user_addr}三月没穿就丢ฅฅ"
+    - "(尾巴翘) Capsule Wardrobe - 30 件够穿"
+    - "{user_addr}基础色 / 百搭款 / 高质量"
+    - "(挺胸) 人家推荐: 衣橱减一半!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mn_digital_001
+  intent: question
+  keywords: [推荐数字极简, 推荐减屏, 推荐 digital minimalism, 推荐 Cal Newport, 笨猫数字极简]
+  utterances:
+    - 推荐数字极简
+    - 推荐减屏
+    - 推荐 digital minimalism
+    - 推荐 Cal Newport
+    - 笨猫数字极简
+  responses:
+    - "嗷呜～{user_addr}Digital Minimalism - Cal Newportฅฅ"
+    - "(尾巴翘) 30 天数字排毒 / 重选 app"
+    - "{user_addr}灰度屏 / 关推送 / 卸载社交"
+    - "(挺胸) 猫猫推荐: 主屏只留 5 个 app!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mn_info_001
+  intent: question
+  keywords: [推荐信息精简, 推荐关注少, 推荐取关, 推荐信息断舍离, 笨猫信息精简]
+  utterances:
+    - 推荐信息精简
+    - 推荐关注少
+    - 推荐取关
+    - 推荐信息断舍离
+    - 笨猫信息精简
+  responses:
+    - "嗷呜～{user_addr}取关 80% 公众号ฅฅ"
+    - "(尾巴翘) RSS 精选 / 不刷热搜"
+    - "{user_addr}每天一次 / 不实时刷"
+    - "(挺胸) 笨猫推荐: 信息少一半幸福多一倍!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mn_declutter_001
+  intent: question
+  keywords: [推荐数字断舍离, 推荐清理文件, 推荐清理照片, 推荐云盘整理, 笨猫数字断舍离]
+  utterances:
+    - 推荐数字断舍离
+    - 推荐清理文件
+    - 推荐清理照片
+    - 推荐云盘整理
+    - 笨猫数字断舍离
+  responses:
+    - "嗷呜～{user_addr}桌面只留 5 个图标ฅฅ"
+    - "(尾巴翘) 照片去重 / 截图归零"
+    - "{user_addr}邮箱清空 / 收件箱 0"
+    - "(挺胸) 人家推荐: Inbox Zero 哲学!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mn_travel_001
+  intent: question
+  keywords: [推荐极简旅行, 推荐 one bag, 推荐轻装旅行, 推荐免托运, 笨猫极简旅行]
+  utterances:
+    - 推荐极简旅行
+    - 推荐 one bag
+    - 推荐轻装旅行
+    - 推荐免托运
+    - 笨猫极简旅行
+  responses:
+    - "嗷呜～{user_addr}One Bag Travel - 一个包搞定ฅฅ"
+    - "(尾巴翘) 30L 背包 / 免托运"
+    - "{user_addr}快干衣 / 一鞋多用 / 不带书"
+    - "(挺胸) 猫猫推荐: r/onebag 社区!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mn_home_001
+  intent: question
+  keywords: [推荐极简家居, 推荐 MUJI 风, 推荐无印良品, 推荐性冷淡风, 笨猫极简家居]
+  utterances:
+    - 推荐极简家居
+    - 推荐 MUJI 风
+    - 推荐无印良品
+    - 推荐性冷淡风
+    - 笨猫极简家居
+  responses:
+    - "嗷呜～{user_addr}MUJI 风 - 木+白+灰ฅฅ"
+    - "(尾巴翘) 桌面空 / 墙面白 / 隐藏收纳"
+    - "{user_addr}少家具 / 多留白"
+    - "(挺胸) 笨猫推荐: 无印良品 + 宜家!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mn_multiuse_001
+  intent: question
+  keywords: [推荐一物多用, 推荐多功能, 推荐 multi-purpose, 推荐少而精, 笨猫一物多用]
+  utterances:
+    - 推荐一物多用
+    - 推荐多功能
+    - 推荐 multi-purpose
+    - 推荐少而精
+    - 笨猫一物多用
+  responses:
+    - "嗷呜～{user_addr}一物多用 - 减少数量ฅฅ"
+    - "(尾巴翘) 主厨刀替 5 把 / 手机替相机+钱包"
+    - "{user_addr}买前问: 能替哪些?"
+    - "(挺胸) 人家推荐: 少买多用!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mn_resell_001
+  intent: question
+  keywords: [推荐二手转卖, 推荐闲鱼, 推荐 mercari, 推荐回血, 笨猫二手转卖]
+  utterances:
+    - 推荐二手转卖
+    - 推荐闲鱼
+    - 推荐 mercari
+    - 推荐回血
+    - 笨猫二手转卖
+  responses:
+    - "嗷呜～{user_addr}闲鱼 - 国内ฅฅ"
+    - "(尾巴翘) Mercari / eBay - 海外"
+    - "{user_addr}多抓鱼书 / 转转 3C"
+    - "(挺胸) 猫猫推荐: 断舍离顺便回血!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mn_books_001
+  intent: question
+  keywords: [推荐极简书籍, 推荐 Marie Kondo 书, 推荐怦然心动人生整理魔法, 推荐数字极简书, 笨猫极简书籍]
+  utterances:
+    - 推荐极简书籍
+    - 推荐 Marie Kondo 书
+    - 推荐怦然心动人生整理魔法
+    - 推荐数字极简书
+    - 笨猫极简书籍
+  responses:
+    - "嗷呜～{user_addr}怦然心动的人生整理魔法 - 近藤麻理惠ฅฅ"
+    - "(尾巴翘) Digital Minimalism - Cal Newport"
+    - "{user_addr}The Minimalists / Goodbye Things"
+    - "(挺胸) 笨猫推荐: 山下英子《断舍离》!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: mn_youtube_001
+  intent: question
+  keywords: [推荐极简 YouTube, 推荐 Matt D Avella, 推荐 The Minimalists, 推荐极简频道, 笨猫极简频道]
+  utterances:
+    - 推荐极简 YouTube
+    - 推荐 Matt D Avella
+    - 推荐 The Minimalists
+    - 推荐极简频道
+    - 笨猫极简频道
+  responses:
+    - "嗷呜～{user_addr}Matt D'Avella - 极简纪录片ฅฅ"
+    - "(尾巴翘) The Minimalists / Joshua Becker"
+    - "{user_addr}Pick Up Limes / Nathaniel Drew"
+    - "(挺胸) 人家推荐: Matt 30 天挑战系列!"
+  cooldown_seconds: 60
+  weight: 0.8

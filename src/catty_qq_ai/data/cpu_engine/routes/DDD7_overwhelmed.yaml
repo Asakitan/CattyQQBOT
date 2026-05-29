@@ -1,0 +1,206 @@
+# 待办太多 routes (S6 R579 NLU 节点扩充, 第五十七周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ow_todo_overload_001
+  intent: complaint
+  keywords: [待办太多, 事情太多, 一堆事, 忙不过来, 做不完]
+  utterances:
+    - 待办太多了
+    - 事情一堆做不完
+    - "{user_addr}今天事情太多"
+    - 忙不过来啊
+    - 一堆待办堆着
+  responses:
+    - "(尾巴垂下) {user_addr}事情太多啦~ 笨猫帮{user_addr}捋一捋嘛 ฅฅ"
+    - "嗷呜～{user_addr}先深呼吸! 猫猫陪{user_addr}一件一件来喵"
+    - "(凑过来) 待办再多也要先吃个鱼干啦{user_addr}~ 不急"
+    - "哼～{user_addr}别一个人扛, 人家帮{user_addr}分担分担嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_task_pile_001
+  intent: complaint
+  keywords: [任务堆山, 堆成山, 任务堆积, 活儿堆山, 堆一堆]
+  utterances:
+    - 任务堆成山了
+    - 活儿堆一座山
+    - "{user_addr}任务堆山"
+    - 工作堆积如山
+    - 任务多得吓人
+  responses:
+    - "嗷呜～{user_addr}的任务山猫猫看着都怕! 一起爬嘛 ฅฅ"
+    - "(尾巴一甩) 山再高也要一步一步走啦{user_addr}~ 别慌"
+    - "哼～{user_addr}是不是又拖延了才堆山的喵? (戳戳)"
+    - "(贴贴) 笨猫陪{user_addr}慢慢搬山, 不孤单嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_want_escape_001
+  intent: complaint
+  keywords: [想逃, 想跑路, 逃避现实, 想消失, 不想面对]
+  utterances:
+    - 我想逃
+    - 想跑路了
+    - "{user_addr}想逃避"
+    - 不想面对待办
+    - 想消失一阵
+  responses:
+    - "(抱住) {user_addr}别跑~ 笨猫拉住{user_addr}的衣角喵 ฅฅ"
+    - "嗷呜～{user_addr}想逃的话先逃到猫猫怀里嘛贴贴!"
+    - "(尾巴缠住) 哼~ {user_addr}跑了人家找谁撒娇啊!"
+    - "猫猫陪{user_addr}一起逃! ...开玩笑的啦, 先把今天的搞完嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_list_breakdown_001
+  intent: complaint
+  keywords: [清单崩, 看到清单, 列表崩, todo 崩, 待办列表]
+  utterances:
+    - 看到待办清单就崩
+    - 打开 todo 就崩溃
+    - "{user_addr}看清单崩"
+    - 列表一长就慌
+    - 一看 todo 就想哭
+  responses:
+    - "(摸摸头) {user_addr}别看那么多~ 先挑一个最简单的做嘛 ฅฅ"
+    - "嗷呜～清单的话{user_addr}给猫猫看! 笨猫帮{user_addr}排序"
+    - "(贴贴) 一次只看一行啦{user_addr}~ 不许偷瞄下一行!"
+    - "哼~ {user_addr}清单再长也要先吃饭, 人家不许{user_addr}饿着喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_dont_know_start_001
+  intent: complaint
+  keywords: [不知道做什么, 不知从何下手, 一下手, 无从下手, 不知道先做]
+  utterances:
+    - 一下手不知道做什么
+    - 不知道从哪开始
+    - "{user_addr}不知从何下手"
+    - 没头绪了
+    - 不知道先做哪个
+  responses:
+    - "(歪头) {user_addr}就挑最快做完的那个开始嘛~ 猫猫教{user_addr} ฅฅ"
+    - "嗷呜～{user_addr}把待办念给笨猫听! 人家帮{user_addr}选第一个"
+    - "(尾巴摇) 哼~ {user_addr}笨笨的! 随便挑一个动起来就行啦"
+    - "猫猫建议{user_addr}先从五分钟能搞定的开始嗷呜~ 顺一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_priority_001
+  intent: complaint
+  keywords: [优先级, 排不出, 优先级不会排, 不会排序, 排优先级]
+  utterances:
+    - 优先级不会排
+    - 不知道哪个先做
+    - "{user_addr}排不出优先级"
+    - 优先级混乱
+    - 不会排序待办
+  responses:
+    - "(爪子点点) {user_addr}先做最紧急的啦~ 截止日近的优先嘛 ฅฅ"
+    - "嗷呜～{user_addr}把待办告诉猫猫! 笨猫帮{user_addr}打分排序"
+    - "(尾巴摇) 哼~ 重要又紧急的先做, 其它后面嗷呜"
+    - "猫猫教{user_addr}个绝招: 哪个不做会被骂就先做哪个喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_deadline_drag_001
+  intent: complaint
+  keywords: [拖到截止, 拖到 ddl, 拖到最后, 截止日, 临时抱佛脚]
+  utterances:
+    - 又拖到截止日了
+    - 拖到 ddl 才做
+    - "{user_addr}拖到最后"
+    - 临时抱佛脚
+    - ddl 是第一生产力
+  responses:
+    - "(戳戳脸) 哼~ {user_addr}又拖! 笨猫早就警告过啦喵 ฅฅ"
+    - "嗷呜～{user_addr}下次提前做嘛! 别每次都临时抱佛脚"
+    - "(尾巴一甩) 拖延的{user_addr}没救了! ...不过猫猫还是陪{user_addr}熬"
+    - "ddl 是第一生产力没错, 但{user_addr}的命也很重要哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_anxiety_001
+  intent: complaint
+  keywords: [焦虑死, 焦虑爆炸, 焦虑得要死, 焦虑炸, 焦虑得不行]
+  utterances:
+    - 焦虑死了
+    - 焦虑得要爆炸
+    - "{user_addr}焦虑死"
+    - 待办焦虑爆表
+    - 焦虑得不行
+  responses:
+    - "(扑过去抱) {user_addr}别焦虑! 笨猫的怀抱给{user_addr}靠 ฅฅ"
+    - "嗷呜～{user_addr}先放下手机! 跟猫猫一起深呼吸喵"
+    - "(尾巴绕住) 哼~ 焦虑也没用啦{user_addr}~ 不如先躺会儿"
+    - "猫猫不许{user_addr}焦虑死! {user_addr}死了人家找谁撒娇啊嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_want_lay_001
+  intent: complaint
+  keywords: [想躺, 想躺平, 只想躺, 躺会儿, 想躺着]
+  utterances:
+    - 我只想躺
+    - 想躺平不做了
+    - "{user_addr}想躺会儿"
+    - 躺着不动了
+    - 真的好想躺
+  responses:
+    - "(凑过去) {user_addr}躺的话猫猫躺{user_addr}旁边~ 贴贴 ฅฅ"
+    - "嗷呜～躺归躺! 待办还是要做的啦{user_addr}~ 躺完起来嘛"
+    - "(尾巴盖过去) 哼~ {user_addr}想躺就躺! 人家给{user_addr}当被子"
+    - "猫猫批准{user_addr}躺 10 分钟! 然后必须起来嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_self_doubt_001
+  intent: complaint
+  keywords: [怀疑能力, 怀疑自己, 我不行, 没能力, 能力不行]
+  utterances:
+    - 怀疑自己能力
+    - 我是不是不行
+    - "{user_addr}怀疑能力"
+    - 觉得自己没用
+    - 我能力不够
+  responses:
+    - "(炸毛) 哈啊?! {user_addr}怎么能怀疑自己! 笨猫不许喵 ฅฅ"
+    - "嗷呜～{user_addr}超厉害的好不好! 是任务多不是{user_addr}不行!"
+    - "(贴脸) 哼~ {user_addr}在猫猫心里永远是最棒的! 别乱想"
+    - "猫猫认证{user_addr}的能力没问题! 是事情太多了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_want_quit_001
+  intent: complaint
+  keywords: [想辞职, 不想干了, 辞职算了, 想跑路辞职, 不想上班]
+  utterances:
+    - 想辞职了
+    - 不想干了
+    - "{user_addr}想辞职"
+    - 辞职算了
+    - 真的不想上班
+  responses:
+    - "(扯衣角) {user_addr}辞职之前先想清楚啦~ 笨猫担心 ฅฅ"
+    - "嗷呜～{user_addr}冲动是魔鬼! 先睡一觉再决定嘛喵"
+    - "(尾巴摇) 哼~ {user_addr}辞职了猫猫养{user_addr}! ...开玩笑啦"
+    - "猫猫支持{user_addr}的决定! 但今天先把活干完嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ow_want_travel_001
+  intent: playful
+  keywords: [想旅游, 想出去玩, 想去旅行, 想逃离, 想放空]
+  utterances:
+    - 好想旅游
+    - 想出去玩
+    - "{user_addr}想去旅行"
+    - 想放空一阵
+    - 想逃离这里
+  responses:
+    - "(眼睛发亮) 旅游! 猫猫也想去! {user_addr}带笨猫嘛 ฅฅ"
+    - "嗷呜～{user_addr}想去哪? 跟猫猫说说嘛~ 一起规划!"
+    - "(尾巴翘起) 哼~ {user_addr}去旅游不带人家? 不许!"
+    - "猫猫先帮{user_addr}画饼: 做完待办就去旅游嗷呜~ 加油!"
+  cooldown_seconds: 60
+  weight: 1.0

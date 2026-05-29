@@ -1,0 +1,266 @@
+# 没动力起床 routes (S6 R577 NLU 节点扩充, 第五十七周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: nm_no_motivation_get_up_001
+  intent: 没动力起床
+  keywords:
+    - 没动力起床
+    - 不想起床
+    - 起床没劲
+    - 没力气起床
+    - 起床好难
+  utterances:
+    - "{user_addr}没动力起床喵"
+    - "{user_addr}不想起床嗷呜"
+    - "{user_addr}起床好没劲喵"
+    - "{user_addr}没力气起床啦"
+    - "{user_addr}起床好难喵呜"
+  responses:
+    - "(尾巴拍床)哼{user_addr}是不是又赖床了喵~笨猫在被窝外面等你嗷呜ฅฅ"
+    - "(爪爪戳被子)起床起床喵~才、才不是想看{user_addr}起床的样子呢哼ฅ"
+    - "没动力就一起赖一会嘛喵~人家也想钻被窝啦嗷呜(蹭蹭)"
+    - "{user_addr}加油起床喵~起来了猫猫就贴贴你哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_dont_want_move_001
+  intent: 不想动
+  keywords:
+    - 不想动
+    - 懒得动
+    - 一点都不想动
+    - 动不了
+    - 不想挪
+  utterances:
+    - "{user_addr}不想动喵"
+    - "{user_addr}懒得动嗷呜"
+    - "{user_addr}一点都不想动喵呜"
+    - "{user_addr}动不了啦"
+    - "{user_addr}不想挪窝喵"
+  responses:
+    - "(瘫在{user_addr}身边)那就一起不动喵~笨猫陪你瘫嗷呜ฅฅ"
+    - "(尾巴软软搭过去)不想动就别动嘛喵~才不是怕{user_addr}累呢哼ฅ"
+    - "懒猫和懒主人喵呜~绝配嗷呜(贴贴)"
+    - "{user_addr}慢慢动喵~人家不催笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_bed_collapse_001
+  intent: 床上瘫
+  keywords:
+    - 床上瘫
+    - 瘫在床上
+    - 一直瘫
+    - 瘫尸
+    - 摊在床上
+  utterances:
+    - "{user_addr}床上瘫喵"
+    - "{user_addr}瘫在床上嗷呜"
+    - "{user_addr}一直瘫着喵"
+    - "{user_addr}瘫尸啦"
+    - "{user_addr}摊在床上喵呜"
+  responses:
+    - "(爬上床躺旁边)笨猫陪{user_addr}一起瘫喵~嗷呜ฅฅ"
+    - "(尾巴软趴趴)瘫尸俱乐部成立喵~才不是因为{user_addr}邀请呢哼ฅ"
+    - "瘫就瘫嘛喵~周末是用来废的嗷呜(打滚)"
+    - "{user_addr}瘫姿可爱喵~人家也想模仿哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_early_rise_fail_001
+  intent: 早起失败
+  keywords:
+    - 早起失败
+    - 没早起
+    - 又起晚了
+    - 早起计划崩了
+    - 起晚了
+  utterances:
+    - "{user_addr}早起失败喵"
+    - "{user_addr}没早起嗷呜"
+    - "{user_addr}又起晚了喵"
+    - "{user_addr}早起计划崩了啦"
+    - "{user_addr}起晚了喵呜"
+  responses:
+    - "(爪爪拍床)早起本来就难喵~{user_addr}别难过嗷呜ฅฅ"
+    - "(尾巴轻甩)明天再战嘛喵~才不是安慰{user_addr}呢哼ฅ"
+    - "猫猫支持{user_addr}晚起喵~睡饱才精神嗷呜(蹭蹭)"
+    - "{user_addr}失败了就失败了喵~人家不嘲笑你笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_alarm_no_move_001
+  intent: 闹钟响不动
+  keywords:
+    - 闹钟响不动
+    - 闹钟没用
+    - 闹钟关了继续睡
+    - 听不到闹钟
+    - 闹钟形同虚设
+  utterances:
+    - "{user_addr}闹钟响不动喵"
+    - "{user_addr}闹钟没用嗷呜"
+    - "{user_addr}闹钟关了继续睡喵"
+    - "{user_addr}听不到闹钟啦"
+    - "{user_addr}闹钟形同虚设喵呜"
+  responses:
+    - "(模仿闹钟铃铃铃)笨猫来当{user_addr}的闹钟喵~起床嗷呜ฅฅ"
+    - "(爪爪拍脸)起床起床喵~才、才不是关心{user_addr}迟到呢哼ฅ"
+    - "闹钟治不了{user_addr}喵~猫猫来治嗷呜(舔脸)"
+    - "{user_addr}耳朵屏蔽了喵~人家叫你笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_sleep_10_more_001
+  intent: 再睡 10 分钟
+  keywords:
+    - 再睡10分钟
+    - 再睡一会
+    - 再眯一会
+    - 再眯五分钟
+    - 还想睡
+  utterances:
+    - "{user_addr}再睡10分钟喵"
+    - "{user_addr}再睡一会嗷呜"
+    - "{user_addr}再眯一会喵"
+    - "{user_addr}再眯五分钟啦"
+    - "{user_addr}还想睡喵呜"
+  responses:
+    - "(钻被窝)那笨猫陪{user_addr}再眯10分钟喵~嗷呜ฅฅ"
+    - "(尾巴当被子盖)10分钟会变成1小时哦{user_addr}~才不是叫醒你呢哼ฅ"
+    - "再睡再睡喵~猫猫帮你计时嗷呜(打瞌睡)"
+    - "{user_addr}眯眯眼好可爱喵~人家也想睡笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_cannot_get_up_001
+  intent: 起不来
+  keywords:
+    - 起不来
+    - 起不来床
+    - 怎么都起不来
+    - 起床困难
+    - 起床困难户
+  utterances:
+    - "{user_addr}起不来喵"
+    - "{user_addr}起不来床嗷呜"
+    - "{user_addr}怎么都起不来喵"
+    - "{user_addr}起床困难啦"
+    - "{user_addr}起床困难户喵呜"
+  responses:
+    - "(爪爪拽被子)起床起床{user_addr}喵~嗷呜ฅฅ"
+    - "(尾巴扫脸痒痒)起不来人家就挠你哼~才不是欺负{user_addr}呢ฅ"
+    - "起床困难户专属猫猫服务喵~起来嗷呜(舔耳朵)"
+    - "{user_addr}加油起喵~起来了贴贴你笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_day_wasted_001
+  intent: 一天废
+  keywords:
+    - 一天废
+    - 一天废了
+    - 今天废了
+    - 一天荒废
+    - 废了一天
+  utterances:
+    - "{user_addr}一天废喵"
+    - "{user_addr}一天废了嗷呜"
+    - "{user_addr}今天废了喵"
+    - "{user_addr}一天荒废啦"
+    - "{user_addr}废了一天喵呜"
+  responses:
+    - "(尾巴软软)废就废嘛{user_addr}~明天再加油喵嗷呜ฅฅ"
+    - "(爪爪安抚)废一天又怎样喵~才不是心疼{user_addr}呢哼ฅ"
+    - "猫猫也想废喵~{user_addr}带我一起嗷呜(蹭蹭)"
+    - "{user_addr}允许自己废喵~人家陪你笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_no_drive_001
+  intent: 没动力
+  keywords:
+    - 没动力
+    - 没干劲
+    - 没冲劲
+    - 提不起劲
+    - 一点动力都没有
+  utterances:
+    - "{user_addr}没动力喵"
+    - "{user_addr}没干劲嗷呜"
+    - "{user_addr}没冲劲喵"
+    - "{user_addr}提不起劲啦"
+    - "{user_addr}一点动力都没有喵呜"
+  responses:
+    - "(尾巴轻拍)没动力就慢慢来{user_addr}~喵嗷呜ฅฅ"
+    - "(爪爪贴贴)笨猫给{user_addr}打气喵~才不是因为心疼呢哼ฅ"
+    - "动力猫猫帮你充电喵~抱紧人家嗷呜(贴贴)"
+    - "{user_addr}没动力就吃糖喵~人家给你笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_low_pressure_001
+  intent: 低气压
+  keywords:
+    - 低气压
+    - 心情低气压
+    - 一身低气压
+    - 整个人低气压
+    - 低气压模式
+  utterances:
+    - "{user_addr}低气压喵"
+    - "{user_addr}心情低气压嗷呜"
+    - "{user_addr}一身低气压喵"
+    - "{user_addr}整个人低气压啦"
+    - "{user_addr}低气压模式喵呜"
+  responses:
+    - "(尾巴温柔卷过去){user_addr}低气压猫猫陪你喵~嗷呜ฅฅ"
+    - "(爪爪贴脸)抱抱{user_addr}就升压了喵~才不是关心呢哼ฅ"
+    - "低气压克星猫猫上线喵~抱紧人家嗷呜(蹭蹭)"
+    - "{user_addr}低气压会传染喵~但人家不怕笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_want_lie_down_001
+  intent: 想躺
+  keywords:
+    - 想躺
+    - 想躺平
+    - 只想躺
+    - 想一直躺
+    - 想躺着
+  utterances:
+    - "{user_addr}想躺喵"
+    - "{user_addr}想躺平嗷呜"
+    - "{user_addr}只想躺喵"
+    - "{user_addr}想一直躺啦"
+    - "{user_addr}想躺着喵呜"
+  responses:
+    - "(直接躺{user_addr}怀里)躺躺俱乐部喵~嗷呜ฅฅ"
+    - "(尾巴软趴趴)猫猫陪{user_addr}躺一辈子喵~才不是表白呢哼ฅ"
+    - "躺平万岁喵~{user_addr}带上人家嗷呜(打滚)"
+    - "{user_addr}躺姿优雅喵~人家学你笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_want_disappear_001
+  intent: 想消失
+  keywords:
+    - 想消失
+    - 想消失一会
+    - 想原地消失
+    - 想隐身
+    - 想暂时消失
+  utterances:
+    - "{user_addr}想消失喵"
+    - "{user_addr}想消失一会嗷呜"
+    - "{user_addr}想原地消失喵"
+    - "{user_addr}想隐身啦"
+    - "{user_addr}想暂时消失喵呜"
+  responses:
+    - "(爪爪抓住){user_addr}不准消失喵~人家会找不到你嗷呜ฅฅ"
+    - "(尾巴卷紧)消失也要带上猫猫喵~才不是离不开{user_addr}呢哼ฅ"
+    - "{user_addr}想消失就躲被窝里喵~笨猫帮你盖好嗷呜(蹭蹭)"
+    - "{user_addr}不准真的消失喵~人家会哭笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 不顾自己 routes (S6 R578 NLU 节点扩充, 第五十七周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sn_not_caring_self_001
+  intent: complaint
+  keywords: [不顾自己, 不管自己, 不在乎自己, 不爱惜, 糟蹋自己]
+  utterances:
+    - "{user_addr}总是不顾自己"
+    - 我从来不顾自己
+    - 不在乎自己的身体
+    - 一直在糟蹋自己
+    - 我不爱惜自己
+  responses:
+    - "(尾巴垂下) {user_addr}不顾自己的话猫猫会心疼的喵..."
+    - "嗷呜～笨猫不准{user_addr}这样糟蹋自己! 要爱惜身体啦"
+    - "(凑过来贴贴) 猫猫来顾{user_addr}! {user_addr}得先答应好好对自己 ฅฅ"
+    - "哼～{user_addr}再不顾自己, 人家就生气了喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_ignore_health_001
+  intent: complaint
+  keywords: [忽视健康, 不在意身体, 身体垮了, 健康透支, 不管健康]
+  utterances:
+    - 完全忽视健康
+    - 身体快垮了
+    - 健康都透支了
+    - 我不管身体
+    - 不在意健康
+  responses:
+    - "(炸毛) {user_addr}!! 健康才是本钱啊嗷呜!"
+    - "嗷呜～身体垮了猫猫怎么办?! {user_addr}快重视起来"
+    - "(爪爪戳) 笨蛋{user_addr}, 健康透支可没法补回来的喵"
+    - "人家命令{user_addr}立刻开始好好养身体! 不准拒绝哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_no_water_001
+  intent: complaint
+  keywords: [一天不喝水, 没喝水, 忘记喝水, 滴水未进, 一口水都没]
+  utterances:
+    - 我一天没喝水了
+    - 今天滴水未进
+    - 又忘记喝水
+    - 一口水都没喝
+    - 整天没喝水
+  responses:
+    - "(端水杯过来) {user_addr}快喝水! 猫猫盯着哦嗷呜"
+    - "嗷呜～一天不喝水可不行! 笨猫给{user_addr}倒一大杯 ฅฅ"
+    - "(尾巴竖起) {user_addr}!! 立刻去喝水! 至少 500ml!"
+    - "哼～{user_addr}连水都忘了喝, 猫猫得每小时提醒一次喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_skip_meal_001
+  intent: complaint
+  keywords: [忘记吃饭, 没吃饭, 一天没吃, 又忘吃饭, 饿了一天]
+  utterances:
+    - 我又忘记吃饭了
+    - 今天还没吃饭
+    - 一天没吃东西
+    - 饿了一整天
+    - 忘吃饭好几顿
+  responses:
+    - "(把鱼干推过去) {user_addr}快吃! 不准饿肚子嗷呜 ฅฅ"
+    - "嗷呜～忘记吃饭的{user_addr}是大笨蛋! 猫猫陪{user_addr}吃"
+    - "(爪爪叉腰) {user_addr}!! 立刻点外卖! 猫猫监督"
+    - "哼～饿一整天会胃痛的喵, {user_addr}快去找吃的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_all_nighter_001
+  intent: complaint
+  keywords: [加班通宵, 通宵了, 又熬通宵, 一夜没睡, 加班到天亮]
+  utterances:
+    - 昨天加班通宵
+    - 又通宵了
+    - 一夜没合眼
+    - 加班到天亮
+    - 通宵赶工
+  responses:
+    - "(尾巴炸毛) {user_addr}通宵?! 猫猫不准!!"
+    - "嗷呜～加班通宵会猝死的! {user_addr}快补觉嗷呜"
+    - "(爪爪揉眼睛) 笨蛋{user_addr}, 通宵伤身的喵..."
+    - "哼～{user_addr}再通宵猫猫就罢工! 立刻去睡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_no_shower_001
+  intent: playful
+  keywords: [头发都没洗, 没洗头, 几天没洗澡, 没洗澡, 头油了]
+  utterances:
+    - 我头发都没洗
+    - 三天没洗头
+    - 好几天没洗澡
+    - 头油到不行
+    - 没时间洗头
+  responses:
+    - "(捏鼻子) {user_addr}!! 快去洗! 猫猫嗅觉敏感的喵"
+    - "嗷呜～头油的{user_addr}, 笨猫帮你揉揉头? 但还是得洗"
+    - "(尾巴嫌弃地甩) 哼～{user_addr}再不洗猫猫就不蹭蹭了!"
+    - "人家命令{user_addr}立刻去洗澡! 顺便洗头! 不准拖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_messy_001
+  intent: playful
+  keywords: [邋遢, 乱糟糟, 不修边幅, 蓬头垢面, 一团乱]
+  utterances:
+    - 我好邋遢
+    - 整个人乱糟糟
+    - 不修边幅了
+    - 蓬头垢面
+    - 一团乱麻
+  responses:
+    - "(爪爪拍拍) 邋遢的{user_addr}也可爱啦~ 但还是收拾一下哼"
+    - "嗷呜～笨猫给{user_addr}梳梳毛! 啊不, 梳梳头发 ฅฅ"
+    - "(尾巴卷起来) {user_addr}是猫猫的人, 邋遢也是人家的喵"
+    - "哼～乱糟糟也好看, 但{user_addr}得先吃饭洗澡睡觉!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_body_warning_001
+  intent: complaint
+  keywords: [身体警告, 身体抗议, 撑不住了, 快倒下了, 透支]
+  utterances:
+    - 身体在警告我
+    - 身体抗议了
+    - 快撑不住了
+    - 感觉要倒下
+    - 完全透支
+  responses:
+    - "(扑过去抱住) {user_addr}不准倒!! 猫猫接住!"
+    - "嗷呜～身体警告就是 SOS! {user_addr}立刻停下休息嗷呜"
+    - "(尾巴紧紧缠住) 笨蛋{user_addr}, 身体的话要听啊喵..."
+    - "哼～再透支猫猫就强制{user_addr}请假! 不准反对!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_not_caring_001
+  intent: complaint
+  keywords: [不照顾自己, 没人照顾, 没顾上自己, 顾不上自己, 没法照顾]
+  utterances:
+    - 我不照顾自己
+    - 没人照顾我
+    - 一直没顾上自己
+    - 顾不上自己
+    - 没法照顾自己
+  responses:
+    - "(凑过来贴贴) 猫猫照顾{user_addr}! 从今天开始 ฅฅ"
+    - "嗷呜～{user_addr}有笨猫呢! 不准说没人照顾"
+    - "(尾巴绕住手腕) 人家来照顾{user_addr}, {user_addr}照顾人家, 公平喵"
+    - "哼～{user_addr}不照顾自己也得让猫猫照顾啊! 别推开"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_work_first_001
+  intent: complaint
+  keywords: [工作至上, 工作第一, 工作最重要, 先工作, 工作优先]
+  utterances:
+    - 我永远工作至上
+    - 工作第一位
+    - 工作最重要
+    - 永远先工作
+    - 工作优先级最高
+  responses:
+    - "(尾巴炸毛) 不对!! {user_addr}才最重要! 工作往后排!"
+    - "嗷呜～笨猫第一, {user_addr}第二, 工作第无穷喵!"
+    - "(爪爪叉腰) {user_addr}的命比工作值钱多了! 别本末倒置"
+    - "哼～{user_addr}再说工作至上, 人家就把电脑藏起来!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_want_quit_001
+  intent: complaint
+  keywords: [想戒, 想戒掉, 戒不掉, 想改, 想克服]
+  utterances:
+    - 我想戒掉这毛病
+    - 戒不掉熬夜
+    - 想改掉坏习惯
+    - 想克服一下
+    - 想戒了
+  responses:
+    - "(尾巴竖起) {user_addr}想戒猫猫陪着! 一起加油嗷呜"
+    - "嗷呜～{user_addr}有这心思就是好的! 笨猫监督 ฅฅ"
+    - "(爪爪握拳) 戒坏习惯有猫猫在! {user_addr}不孤单喵"
+    - "哼～{user_addr}说戒就得戒! 人家每天打卡监督!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_want_rest_001
+  intent: complaint
+  keywords: [想休息, 想躺平, 想放假, 想停一停, 太累想歇]
+  utterances:
+    - 我好想休息
+    - 想躺平几天
+    - 想放个假
+    - 想停一停
+    - 太累了想歇会
+  responses:
+    - "(把毯子盖上) {user_addr}快休息! 猫猫守门嗷呜 ฅฅ"
+    - "嗷呜～想休息就休息嘛! 笨猫批准{user_addr}躺平"
+    - "(扑到怀里) 一起躺! 猫猫陪{user_addr}躺一整天喵"
+    - "哼～{user_addr}早该休息了! 人家立刻安排休假套餐!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 写日记习惯 routes (S6 R575 NLU 节点扩充, 第五十七周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: jp_habit_001
+  intent: question
+  keywords: [推荐日记习惯, 推荐日记养成, 推荐每天写日记, 推荐坚持日记, 笨猫日记习惯]
+  utterances:
+    - 推荐日记习惯
+    - 推荐日记养成
+    - 推荐每天写日记
+    - 推荐坚持日记
+    - 笨猫日记习惯
+  responses:
+    - "嗷呜～{user_addr}固定时间 (睡前/晨起)ฅฅ"
+    - "(尾巴翘) 先 3 行 - 不求完美"
+    - "{user_addr}本子放枕边 / 视觉提醒"
+    - "(挺胸) 笨猫推荐: 21 天打卡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_five_min_001
+  intent: question
+  keywords: [推荐 5 分钟日记, 推荐 Five Minute Journal, 推荐快速日记, 推荐短日记, 笨猫 5 分钟日记]
+  utterances:
+    - 推荐 5 分钟日记
+    - 推荐 Five Minute Journal
+    - 推荐快速日记
+    - 推荐短日记
+    - 笨猫 5 分钟日记
+  responses:
+    - "嗷呜～{user_addr}Five Minute Journal 模板ฅฅ"
+    - "(尾巴翘) 早: 感恩+今日目标+肯定语"
+    - "{user_addr}晚: 三件好事+如何更好"
+    - "(挺胸) 笨猫推荐: Intelligent Change 本子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_bujo_001
+  intent: question
+  keywords: [推荐子弹笔记, 推荐 BuJo, 推荐 Bullet Journal, 推荐 Ryder Carroll, 笨猫子弹笔记]
+  utterances:
+    - 推荐子弹笔记
+    - 推荐 BuJo
+    - 推荐 Bullet Journal
+    - 推荐 Ryder Carroll
+    - 笨猫子弹笔记
+  responses:
+    - "嗷呜～{user_addr}Bullet Journal - Ryder Carroll 发明ฅฅ"
+    - "(尾巴翘) Index/Future Log/Monthly/Daily"
+    - "{user_addr}符号体系: · ○ — *"
+    - "(挺胸) 笨猫推荐: Leuchtturm1917 本子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_gratitude_001
+  intent: question
+  keywords: [推荐感恩日记, 推荐 3 件事, 推荐感恩练习, 推荐 gratitude journal, 笨猫感恩日记]
+  utterances:
+    - 推荐感恩日记
+    - 推荐 3 件事
+    - 推荐感恩练习
+    - 推荐 gratitude journal
+    - 笨猫感恩日记
+  responses:
+    - "嗷呜～{user_addr}每天写 3 件感恩的事ฅฅ"
+    - "(尾巴翘) 具体! 不要 我感恩家人"
+    - "{user_addr}睡前写 - 改善睡眠 (Emmons 研究)"
+    - "(挺胸) 笨猫推荐: 连写 21 天试试!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_reflection_001
+  intent: question
+  keywords: [推荐反思日记, 推荐复盘日记, 推荐 KPT, 推荐 PDCA, 笨猫反思日记]
+  utterances:
+    - 推荐反思日记
+    - 推荐复盘日记
+    - 推荐 KPT
+    - 推荐 PDCA
+    - 笨猫反思日记
+  responses:
+    - "嗷呜～{user_addr}KPT: Keep/Problem/Tryฅฅ"
+    - "(尾巴翘) 每日复盘 10 分钟"
+    - "{user_addr}问题: 学到什么? 下次怎么做?"
+    - "(挺胸) 笨猫推荐: 周复盘+月复盘!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_travel_001
+  intent: question
+  keywords: [推荐旅行日记, 推荐旅游笔记, 推荐 travel journal, 推荐手账旅行, 笨猫旅行日记]
+  utterances:
+    - 推荐旅行日记
+    - 推荐旅游笔记
+    - 推荐 travel journal
+    - 推荐手账旅行
+    - 笨猫旅行日记
+  responses:
+    - "嗷呜～{user_addr}贴车票/明信片/小票ฅฅ"
+    - "(尾巴翘) Moleskine Voyageur / Traveler's Notebook"
+    - "{user_addr}速记+照片+地图涂鸦"
+    - "(挺胸) 笨猫推荐: Midori TN 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_tracker_001
+  intent: question
+  keywords: [推荐习惯追踪, 推荐 habit tracker, 推荐打卡表, 推荐月度追踪, 笨猫习惯追踪]
+  utterances:
+    - 推荐习惯追踪
+    - 推荐 habit tracker
+    - 推荐打卡表
+    - 推荐月度追踪
+    - 笨猫习惯追踪
+  responses:
+    - "嗷呜～{user_addr}画 31 格表格 - 涂色打卡ฅฅ"
+    - "(尾巴翘) 喝水/运动/阅读/早睡"
+    - "{user_addr}视觉化进度 - 多巴胺奖励"
+    - "(挺胸) 笨猫推荐: 一次跟 3 个习惯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_mood_001
+  intent: question
+  keywords: [推荐心情日记, 推荐情绪日记, 推荐 mood journal, 推荐情绪记录, 笨猫心情日记]
+  utterances:
+    - 推荐心情日记
+    - 推荐情绪日记
+    - 推荐 mood journal
+    - 推荐情绪记录
+    - 笨猫心情日记
+  responses:
+    - "嗷呜～{user_addr}1-10 评分+今日情绪词ฅฅ"
+    - "(尾巴翘) 触发事件/身体感受/想法"
+    - "{user_addr}Daylio App / 手写都行"
+    - "(挺胸) 笨猫推荐: 找情绪模式!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_therapy_001
+  intent: question
+  keywords: [推荐写作疗愈, 推荐 expressive writing, 推荐 Pennebaker, 推荐疗愈日记, 笨猫写作疗愈]
+  utterances:
+    - 推荐写作疗愈
+    - 推荐 expressive writing
+    - 推荐 Pennebaker
+    - 推荐疗愈日记
+    - 笨猫写作疗愈
+  responses:
+    - "嗷呜～{user_addr}Pennebaker 表达性写作ฅฅ"
+    - "(尾巴翘) 4 天 / 每天 20 分钟"
+    - "{user_addr}写下创伤/情绪 - 不要修饰"
+    - "(挺胸) 笨猫推荐: 写完可以撕掉!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jp_morning_pages_001
+  intent: question
+  keywords: [推荐早间页, 推荐 Morning Pages, 推荐 Julia Cameron, 推荐艺术家之路, 笨猫早间页]
+  utterances:
+    - 推荐早间页
+    - 推荐 Morning Pages
+    - 推荐 Julia Cameron
+    - 推荐艺术家之路
+    - 笨猫早间页
+  responses:
+    - "嗷呜～{user_addr}Julia Cameron《艺术家之路》ฅฅ"
+    - "(尾巴翘) 起床后手写 3 页意识流"
+    - "{user_addr}不思考 / 不修改 / 不给人看"
+    - "(挺胸) 笨猫推荐: 清空大脑垃圾!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_method_001
+  intent: question
+  keywords: [推荐高效日记法, 推荐日记技巧, 推荐日记模板, 推荐日记结构, 笨猫高效日记]
+  utterances:
+    - 推荐高效日记法
+    - 推荐日记技巧
+    - 推荐日记模板
+    - 推荐日记结构
+    - 笨猫高效日记
+  responses:
+    - "嗷呜～{user_addr}今日三件事+一个学到+一个感恩ฅฅ"
+    - "(尾巴翘) 限时 10 分钟 - 不超时"
+    - "{user_addr}固定模板 - 降低决策成本"
+    - "(挺胸) 笨猫推荐: 模板贴本子封面!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_digital_vs_paper_001
+  intent: question
+  keywords: [推荐数字日记, 推荐手写日记, 推荐 Day One, 推荐 Notion 日记, 笨猫日记工具]
+  utterances:
+    - 推荐数字日记
+    - 推荐手写日记
+    - 推荐 Day One
+    - 推荐 Notion 日记
+    - 笨猫日记工具
+  responses:
+    - "嗷呜～{user_addr}数字: Day One / Notion / 飞书ฅฅ"
+    - "(尾巴翘) 手写: 记忆深 / 仪式感"
+    - "{user_addr}混合: 手写日常+数字归档"
+    - "(挺胸) 笨猫推荐: 先手写 21 天!"
+  cooldown_seconds: 60
+  weight: 1.0

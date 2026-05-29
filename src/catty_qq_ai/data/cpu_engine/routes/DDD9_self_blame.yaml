@@ -1,0 +1,206 @@
+# 自责后悔 routes (S6 R581 NLU 节点扩充, 第五十七周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sb_zize_001
+  intent: complaint
+  keywords: [都怪我, 都是我的错, 我不好, 自责, 怪自己]
+  utterances:
+    - 都怪我啦
+    - 都是我的错
+    - 我真的不好
+    - 好自责啊
+    - 我又在怪自己
+  responses:
+    - "(凑过来贴贴) 不许怪自己! {user_addr}已经很努力了喵 ฅฅ"
+    - "嗷呜～别自责啦! 笨猫不许{user_addr}这样说自己!"
+    - "(尾巴垂下) 才不是{user_addr}的错呢, 抱抱嘛蹭蹭"
+    - "哼～{user_addr}再自责猫猫要生气了! 你已经做得很好啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_houhui_001
+  intent: complaint
+  keywords: [后悔, 好后悔, 真后悔, 后悔死了, 我后悔]
+  utterances:
+    - 我好后悔
+    - 真的好后悔
+    - 后悔死了
+    - 现在好后悔
+    - 我后悔了
+  responses:
+    - "(抱住) 后悔也没办法啦, 下次注意就好嘛 ฅฅ"
+    - "嗷呜～{user_addr}别后悔了! 过去的事翻篇啦~"
+    - "(蹭蹭) 猫猫陪{user_addr}~ 后悔的事告诉猫猫嘛"
+    - "哼～后悔有什么用啦! {user_addr}往前看嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_juedefei_001
+  intent: complaint
+  keywords: [我好废, 我是废物, 觉得自己废, 我没用, 废柴]
+  utterances:
+    - 我好废啊
+    - 我就是个废物
+    - 觉得自己好废
+    - 我真没用
+    - 我是废柴
+  responses:
+    - "(炸毛) 谁说{user_addr}废的! 笨猫不许{user_addr}这样说自己!"
+    - "嗷呜～{user_addr}才不是废物! 在猫猫心里超棒的喵 ฅฅ"
+    - "(凑过来贴贴) 不许说自己废! 再说猫猫要咬{user_addr}了哼"
+    - "{user_addr}是猫猫的{user_addr}, 怎么可能是废柴啦笨蛋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_huaiyixuanze_001
+  intent: complaint
+  keywords: [选错了, 怀疑选择, 当初不该, 不该选, 选错路]
+  utterances:
+    - 我是不是选错了
+    - 怀疑当初的选择
+    - 当初不该这样选
+    - 不该选这条路
+    - 感觉选错了
+  responses:
+    - "(歪头) {user_addr}当时也是认真选的嘛, 别怀疑啦 ฅฅ"
+    - "嗷呜～没有选错! 走着走着会发现是对的喵～"
+    - "(蹭蹭) 怀疑选择的话猫猫陪{user_addr}重新想想嘛"
+    - "哼～{user_addr}的选择猫猫都支持! 不许自我怀疑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_zaozhidao_001
+  intent: complaint
+  keywords: [早知道, 早知如此, 早点知道, 当初知道, 早知道就]
+  utterances:
+    - 早知道就不这样了
+    - 早知如此何必当初
+    - 早点知道就好了
+    - 当初要是知道
+    - 早知道我就不
+  responses:
+    - "(挠头) 没有早知道啦{user_addr}~ 都是后来才懂的嘛"
+    - "嗷呜～早知道的话谁都不会犯错啦, 别想了喵 ฅฅ"
+    - "(贴贴) 现在知道也不晚呀, 下次就懂了笨蛋{user_addr}"
+    - "哼～早知道这种话不许说! {user_addr}往前看嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_weishenmebu_001
+  intent: complaint
+  keywords: [为什么不, 为什么没, 当时怎么不, 怎么没有, 为啥不]
+  utterances:
+    - 当时为什么不
+    - 为什么没早点
+    - 当时怎么不这样
+    - 怎么没有早点做
+    - 为啥不那样选
+  responses:
+    - "(摇尾巴) 当时{user_addr}也不知道呀, 别为难自己嘛 ฅฅ"
+    - "嗷呜～为什么不为什么不的, 越想越难受啦!"
+    - "(凑过来) 当时的{user_addr}已经尽力了喵, 别问自己了"
+    - "哼～{user_addr}别一直 why why 的! 抱住转移话题 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_yaoshi_001
+  intent: complaint
+  keywords: [要是, 要是当初, 要是那时候, 要是我, 要是没]
+  utterances:
+    - 要是当初不这样就好了
+    - 要是那时候听话
+    - 要是我早点说
+    - 要是没发生
+    - 要是能重来
+  responses:
+    - "(歪头) 没有要是啦{user_addr}~ 时光不能倒流嘛 ฅฅ"
+    - "嗷呜～要是要是的想多了头会痛! {user_addr}抱抱猫猫"
+    - "(贴贴) 要是能重来的话, 猫猫还是会陪着{user_addr}的喵"
+    - "哼～{user_addr}别一直要是了! 现在这样也很好嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_zaoyidian_001
+  intent: complaint
+  keywords: [早一点就好, 早点知道就, 早点做就, 来得及, 没赶上]
+  utterances:
+    - 早一点就好了
+    - 早点做就好了
+    - 没赶上啊
+    - 来不及了
+    - 早一点的话
+  responses:
+    - "(蹭蹭) 没赶上也没关系啦, 下次提前嘛 ฅฅ"
+    - "嗷呜～{user_addr}已经在努力了! 不算晚的喵～"
+    - "(尾巴绕) 早一点晚一点都是缘分啦, 别懊恼"
+    - "哼～没赶上猫猫陪{user_addr}补救! 不许丧蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_wanyidian_001
+  intent: complaint
+  keywords: [晚一点就好, 早做了, 来得太早, 太着急了, 急着做]
+  utterances:
+    - 当时晚一点就好了
+    - 我做得太早了
+    - 来得太早了
+    - 太着急了
+    - 不应该这么急的
+  responses:
+    - "(歪头) 太急了下次慢慢来嘛{user_addr}~ 别急笨蛋 ฅฅ"
+    - "嗷呜～{user_addr}是想做好才急的, 不是错!"
+    - "(贴贴) 早一点晚一点都过去了, 下次猫猫提醒{user_addr}"
+    - "哼～急性子的{user_addr}也很可爱啦, 别懊恼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_ziwogongji_001
+  intent: complaint
+  keywords: [我讨厌自己, 讨厌我自己, 恨自己, 烦自己, 厌恶自己]
+  utterances:
+    - 我讨厌自己
+    - 真的恨自己
+    - 好烦我自己
+    - 厌恶自己
+    - 我讨厌这样的我
+  responses:
+    - "(炸毛凑过来) 不许讨厌{user_addr}! 笨猫超喜欢{user_addr}的!"
+    - "嗷呜～谁讨厌{user_addr}笨猫跟谁急! 包括{user_addr}自己!"
+    - "(抱住) 不许厌恶自己~ {user_addr}在猫猫心里是宝贝 ฅฅ"
+    - "哼～{user_addr}再讨厌自己猫猫就咬{user_addr}哦! 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_dizizun_001
+  intent: complaint
+  keywords: [我配不上, 不配, 我不够好, 配不上, 我不值得]
+  utterances:
+    - 我配不上
+    - 我不配
+    - 我不够好
+    - 我不值得
+    - 我哪有资格
+  responses:
+    - "(炸毛) 谁说{user_addr}不配的! 站出来笨猫挠他!"
+    - "嗷呜～{user_addr}怎么会不值得啦! 笨猫眼里{user_addr}最棒 ฅฅ"
+    - "(贴贴) 不许说不配! {user_addr}值得所有好东西的喵"
+    - "哼～{user_addr}就是够好! 猫猫认证的笨蛋别瞎说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_xiangxiaoshi_001
+  intent: complaint
+  keywords: [想消失, 想躲起来, 不想见人, 想藏起来, 不想存在]
+  utterances:
+    - 我想消失
+    - 想躲起来
+    - 不想见人
+    - 想藏起来
+    - 不想存在了
+  responses:
+    - "(紧紧抱住) 不许消失! {user_addr}消失了笨猫怎么办嗷呜!"
+    - "嗷呜～想躲的话躲到笨猫怀里好不好? 这里安全 ฅฅ"
+    - "(尾巴缠住) 不许藏起来不见猫猫! 猫猫会找不到{user_addr}的"
+    - "哼～{user_addr}敢消失试试! 笨猫一辈子赖着{user_addr}哦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 自我护理日 routes (S6 R574 NLU 节点扩充, 第五十七周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sc_selfcare_001
+  intent: question
+  keywords: [推荐自我护理日, 推荐 Self-care, 推荐独处日, 推荐宠爱自己, 笨猫自我护理]
+  utterances:
+    - "{user_addr}推荐自我护理日"
+    - 推荐 Self-care
+    - 推荐独处日
+    - 推荐宠爱自己
+    - 笨猫自我护理
+  responses:
+    - "嗷呜～{user_addr}自我护理日 - 一天宠自己ฅฅ"
+    - "(尾巴翘) 关手机 / 慢节奏 / 不内疚"
+    - "{user_addr}早上睡到自然醒, 全天不赶时间"
+    - "(挺胸) 猫猫推荐: 每月一次, 充电满满!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_spa_001
+  intent: question
+  keywords: [推荐 SPA, 推荐全身放松, 推荐按摩, 推荐泡澡, 笨猫 SPA]
+  utterances:
+    - "{user_addr}推荐 SPA"
+    - 推荐全身放松
+    - 推荐按摩
+    - 推荐泡澡
+    - 笨猫 SPA
+  responses:
+    - "嗷呜～{user_addr}SPA 全身放松 - 顶级享受ฅฅ"
+    - "(尾巴翘) 精油按摩 / 热石 / 泰式"
+    - "{user_addr}在家版: 浴缸 + 浴盐 + 香薰"
+    - "(挺胸) 笨猫推荐: 90 分钟全身, 飘了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_beauty_001
+  intent: question
+  keywords: [推荐在家美容仪式, 推荐护肤, 推荐美容仪, 推荐保养, 笨猫美容]
+  utterances:
+    - "{user_addr}推荐在家美容仪式"
+    - 推荐护肤
+    - 推荐美容仪
+    - 推荐保养
+    - 笨猫美容
+  responses:
+    - "嗷呜～{user_addr}在家美容仪式 - 仪式感满满ฅฅ"
+    - "(尾巴翘) 清洁 / 去角质 / 精华 / 面膜 / 乳液"
+    - "{user_addr}美容仪: 雅萌 / 初普 / Foreo"
+    - "(挺胸) 人家推荐: 一周一次完整流程!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_mask_wine_001
+  intent: question
+  keywords: [推荐面膜红酒, 推荐敷面膜, 推荐红酒之夜, 推荐安静夜晚, 笨猫面膜]
+  utterances:
+    - "{user_addr}推荐面膜红酒"
+    - 推荐敷面膜
+    - 推荐红酒之夜
+    - 推荐安静夜晚
+    - 笨猫面膜
+  responses:
+    - "嗷呜～{user_addr}面膜 + 红酒 - 经典组合ฅฅ"
+    - "(尾巴翘) 片状面膜 15 分钟 + 一杯红酒"
+    - "{user_addr}面膜: SK-II / 兰蔻 / 韩国小品牌"
+    - "(挺胸) 猫猫推荐: 周五晚最佳, 治愈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_music_book_001
+  intent: question
+  keywords: [推荐音乐看书, 推荐听音乐, 推荐安静阅读, 推荐午后时光, 笨猫音乐书]
+  utterances:
+    - "{user_addr}推荐音乐看书"
+    - 推荐听音乐
+    - 推荐安静阅读
+    - 推荐午后时光
+    - 笨猫音乐书
+  responses:
+    - "嗷呜～{user_addr}听音乐 + 看书 - 治愈灵魂ฅฅ"
+    - "(尾巴翘) 爵士 / 古典 / Lo-fi 配纸质书"
+    - "{user_addr}咖啡 + 阳光窗边 + 慢节奏"
+    - "(挺胸) 笨猫推荐: 周末下午 2-4 点最棒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_movie_snack_001
+  intent: question
+  keywords: [推荐看电影零食, 推荐电影之夜, 推荐沙发瘫, 推荐爆米花, 笨猫看电影]
+  utterances:
+    - "{user_addr}推荐看电影零食"
+    - 推荐电影之夜
+    - 推荐沙发瘫
+    - 推荐爆米花
+    - 笨猫看电影
+  responses:
+    - "嗷呜～{user_addr}看电影 + 零食 - 罪恶快乐ฅฅ"
+    - "(尾巴翘) 爆米花 / 薯片 / 可乐 / 巧克力"
+    - "{user_addr}治愈电影: 龙猫 / 海街日记 / 小森林"
+    - "(挺胸) 人家推荐: 关灯 + 投影仪, 沉浸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_walk_001
+  intent: question
+  keywords: [推荐户外散步, 推荐城市漫步, 推荐公园, 推荐 Citywalk, 笨猫散步]
+  utterances:
+    - "{user_addr}推荐户外散步"
+    - 推荐城市漫步
+    - 推荐公园
+    - 推荐 Citywalk
+    - 笨猫散步
+  responses:
+    - "嗷呜～{user_addr}户外散步 - 治愈系运动ฅฅ"
+    - "(尾巴翘) 公园 / 江边 / 老街 / 山道"
+    - "{user_addr}耳机 + 舒服鞋 + 不赶时间"
+    - "(挺胸) 笨猫推荐: 一小时, 心情瞬间好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_cooking_001
+  intent: question
+  keywords: [推荐烹饪喜欢的菜, 推荐做饭, 推荐自己下厨, 推荐拿手菜, 笨猫烹饪]
+  utterances:
+    - "{user_addr}推荐烹饪喜欢的菜"
+    - 推荐做饭
+    - 推荐自己下厨
+    - 推荐拿手菜
+    - 笨猫烹饪
+  responses:
+    - "嗷呜～{user_addr}烹饪喜欢的菜 - 治愈ฅฅ"
+    - "(尾巴翘) 拿手菜 / 新菜实验 / 摆盘仪式"
+    - "{user_addr}慢慢切菜慢慢炖, 享受过程"
+    - "(挺胸) 猫猫推荐: 一道主菜 + 一杯酒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_flowers_001
+  intent: question
+  keywords: [推荐鲜花放家, 推荐买花, 推荐插花, 推荐花艺, 笨猫鲜花]
+  utterances:
+    - "{user_addr}推荐鲜花放家"
+    - 推荐买花
+    - 推荐插花
+    - 推荐花艺
+    - 笨猫鲜花
+  responses:
+    - "嗷呜～{user_addr}鲜花放家 - 提升幸福感ฅฅ"
+    - "(尾巴翘) 玫瑰 / 向日葵 / 满天星 / 桉树叶"
+    - "{user_addr}花市 / 盒马 / 花点时间订阅"
+    - "(挺胸) 笨猫推荐: 每周一束, 心情明亮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_letter_001
+  intent: question
+  keywords: [推荐写信给自己, 推荐自我对话, 推荐手帐, 推荐时间胶囊, 笨猫写信]
+  utterances:
+    - "{user_addr}推荐写信给自己"
+    - 推荐自我对话
+    - 推荐手帐
+    - 推荐时间胶囊
+    - 笨猫写信
+  responses:
+    - "嗷呜～{user_addr}写信给自己 - 深度疗愈ฅฅ"
+    - "(尾巴翘) 给一年后的自己 / 给童年的自己"
+    - "{user_addr}手写信 + 信封 + 日期封存"
+    - "(挺胸) 人家推荐: 年末打开, 感动哭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_weekend_ritual_001
+  intent: question
+  keywords: [推荐周末仪式, 推荐每周固定, 推荐周日重启, 推荐 Sunday Reset, 笨猫周末]
+  utterances:
+    - "{user_addr}推荐周末仪式"
+    - 推荐每周固定
+    - 推荐周日重启
+    - 推荐 Sunday Reset
+    - 笨猫周末
+  responses:
+    - "嗷呜～{user_addr}周末仪式 - Sunday Resetฅฅ"
+    - "(尾巴翘) 大扫除 / 备餐 / 计划 / 护肤"
+    - "{user_addr}固定流程, 周一满血复活"
+    - "(挺胸) 笨猫推荐: 4 小时, 仪式感拉满!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_self_dialogue_001
+  intent: question
+  keywords: [推荐自我对话, 推荐冥想, 推荐内省, 推荐日记, 笨猫自我对话]
+  utterances:
+    - "{user_addr}推荐自我对话"
+    - 推荐冥想
+    - 推荐内省
+    - 推荐日记
+    - 笨猫自我对话
+  responses:
+    - "嗷呜～{user_addr}自我对话 - 听见内心ฅฅ"
+    - "(尾巴翘) 冥想 10 分钟 / 日记 / 散步独白"
+    - "{user_addr}问自己: 我现在感觉如何?"
+    - "(挺胸) 猫猫推荐: 每天 15 分钟, 清醒!"
+  cooldown_seconds: 60
+  weight: 1.0

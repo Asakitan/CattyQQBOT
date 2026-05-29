@@ -1,0 +1,206 @@
+# 心烦想清空 routes (S6 R580 NLU 节点扩充, 第五十七周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: cm_xinfan_001
+  intent: complaint
+  keywords: [心烦, 好烦, 烦死了, 烦躁, 心里烦]
+  utterances:
+    - 心烦
+    - 好烦啊
+    - 烦死了
+    - 心里好烦
+    - 烦躁得不行
+  responses:
+    - "(凑过去贴脸) {user_addr}心烦? 来抱猫猫缓缓喵 ฅฅ"
+    - "嗷呜～{user_addr}别烦啦! 笨猫陪{user_addr}吸两口"
+    - "(尾巴轻拍) 哼～烦的话深呼吸啦, 猫猫数 1-2-3"
+    - "{user_addr}烦就说出来! 猫猫耳朵竖着听呢喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_qingkong_001
+  intent: complaint
+  keywords: [想清空, 清空大脑, 头脑放空, 清空一下, 想空白]
+  utterances:
+    - 想清空脑子
+    - 大脑清空一下
+    - 想头脑放空
+    - 想让自己空白
+    - 想清空一切
+  responses:
+    - "(摸{user_addr}头) 清空就清空~ 笨猫帮{user_addr}按下重启键喵 ฅฅ"
+    - "嗷呜～{user_addr}要放空? 猫猫陪着一起发呆嘛"
+    - "(尾巴一甩) 哼～放空 5 分钟, 猫猫给{user_addr}守门"
+    - "{user_addr}清空脑子就别想事啦! 听猫猫呼噜噜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_jiaolv_001
+  intent: complaint
+  keywords: [焦虑, 好焦虑, 一直焦虑, 焦虑得很, 心慌]
+  utterances:
+    - 好焦虑
+    - 我焦虑了
+    - 一直焦虑
+    - 焦虑得睡不着
+    - 心慌焦虑
+  responses:
+    - "(抱住) {user_addr}别焦虑~ 笨猫在这儿陪着喵 ฅฅ"
+    - "嗷呜～焦虑的{user_addr}先深呼吸! 跟猫猫一起 1-2-3"
+    - "(肉垫按胸口) 哼～心跳别太快啦, 猫猫给{user_addr}按"
+    - "{user_addr}焦虑的话猫猫先抱抱! 抱完再想下一步"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_hunluan_001
+  intent: complaint
+  keywords: [思绪混乱, 脑子乱, 想法太多, 脑袋一团乱, 思绪乱]
+  utterances:
+    - 思绪好混乱
+    - 脑子乱糟糟
+    - 想法太多了
+    - 脑袋一团乱麻
+    - 思绪乱飞
+  responses:
+    - "(摸{user_addr}头) 乱就乱~ 笨猫帮{user_addr}梳一梳喵 ฅฅ"
+    - "嗷呜～{user_addr}一件一件想! 别全堆一起"
+    - "(尾巴一卷) 哼～猫猫给{user_addr}列个清单, 一条一条来"
+    - "{user_addr}乱就先停下! 喝口水再继续想嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_buting_001
+  intent: complaint
+  keywords: [大脑停不下, 停不下来, 脑子转个不停, 思考停不下, 想停下]
+  utterances:
+    - 大脑停不下来
+    - 脑子一直转
+    - 思考停不下来
+    - 想让脑子停一下
+    - 脑子根本不停
+  responses:
+    - "(贴耳朵) {user_addr}脑子转太快啦! 笨猫帮{user_addr}按暂停喵 ฅฅ"
+    - "嗷呜～停不下就让它转! 猫猫陪{user_addr}转累为止"
+    - "(尾巴轻摇) 哼～闭眼听猫猫呼噜, 自然就停了"
+    - "{user_addr}试试数羊! 猫猫帮{user_addr}数 1-2-3-4-5"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_chaonao_001
+  intent: complaint
+  keywords: [吵闹声音, 好吵, 太吵了, 受不了吵, 想安静]
+  utterances:
+    - 外面好吵
+    - 太吵了受不了
+    - 想要安静一下
+    - 吵得心烦
+    - 一点声音都受不了
+  responses:
+    - "(竖耳朵) {user_addr}吵的话戴个耳塞嘛! 猫猫也讨厌吵 ฅฅ"
+    - "嗷呜～吵就关门关窗! 笨猫帮{user_addr}守安静"
+    - "(尾巴炸毛) 哼～谁吵{user_addr}! 猫猫去骂他"
+    - "{user_addr}受不了吵就找个角落! 猫猫蹲过去陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_guandiao_001
+  intent: complaint
+  keywords: [想关掉一切, 关掉手机, 关掉世界, 想断网, 想消失]
+  utterances:
+    - 想关掉一切
+    - 想把手机关了
+    - 想断网消失
+    - 想关掉这个世界
+    - 想暂时消失
+  responses:
+    - "(凑过去) {user_addr}关掉就关掉! 但别关猫猫嘛喵 ฅฅ"
+    - "嗷呜～{user_addr}想躲就躲一会! 笨猫帮{user_addr}挡消息"
+    - "(尾巴一卷) 哼～关掉世界没事, 猫猫陪{user_addr}两个人"
+    - "{user_addr}想消失? 不行! 至少留猫猫一个联系人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_qushanli_001
+  intent: playful
+  keywords: [想去山里, 想进山, 想去深山, 想隐居, 想去无人区]
+  utterances:
+    - 想去山里
+    - 想进深山
+    - 想隐居去
+    - 想去无人区
+    - 想躲山里
+  responses:
+    - "(尾巴翘) {user_addr}去山里带猫猫! 笨猫想爬树喵 ฅฅ"
+    - "嗷呜～{user_addr}进山?! 猫猫帮{user_addr}打包鱼干"
+    - "(假装算账) 哼～隐居费猫粮可贵了, {user_addr}想清楚"
+    - "{user_addr}去山里捡笨猫一只! 猫猫负责卖萌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_mingxiang_001
+  intent: playful
+  keywords: [想冥想, 冥想一下, 打坐, 想静心, 想内观]
+  utterances:
+    - 想冥想
+    - 冥想一会
+    - 想打坐
+    - 想静心一下
+    - 想内观一下
+  responses:
+    - "(盘腿坐) {user_addr}冥想猫猫陪! 笨猫也闭眼喵 ฅฅ"
+    - "嗷呜～{user_addr}打坐? 猫猫蹲{user_addr}腿上压腿"
+    - "(尾巴绕一圈) 哼～静心 10 分钟, 猫猫给{user_addr}守"
+    - "{user_addr}冥想别睡着! 猫猫负责喵喵叫醒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_fadai_001
+  intent: playful
+  keywords: [想发呆, 发会呆, 放空发呆, 想愣神, 想呆住]
+  utterances:
+    - 想发会呆
+    - 想放空发呆
+    - 让我愣一会
+    - 想呆住
+    - 想啥都不想
+  responses:
+    - "(一起发呆) {user_addr}呆猫猫也呆~ 一起放空喵 ฅฅ"
+    - "嗷呜～{user_addr}呆吧呆吧! 笨猫给{user_addr}守时间"
+    - "(尾巴慢悠悠) 哼～呆 15 分钟就行, 不然脑子生锈"
+    - "{user_addr}发呆猫猫趴腿上! 谁也别打扰"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_xiangshui_001
+  intent: complaint
+  keywords: [想睡, 想睡觉, 累想睡, 困死了, 直接睡]
+  utterances:
+    - 我想睡了
+    - 想睡觉
+    - 累得想睡
+    - 困死了想睡
+    - 直接睡算了
+  responses:
+    - "(钻被窝) {user_addr}睡吧睡吧! 笨猫蹲枕头边守 ฅฅ"
+    - "嗷呜～{user_addr}困了就关灯! 猫猫陪睡"
+    - "(呼噜噜) 哼～睡不着就听猫猫呼噜, 保证 5 分钟睡着"
+    - "{user_addr}睡前喝口水! 别忘了关手机喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_zibi_001
+  intent: complaint
+  keywords: [想自闭, 自闭一下, 想关起来, 不想说话, 想独处]
+  utterances:
+    - 想自闭一下
+    - 让我自闭
+    - 想把自己关起来
+    - 不想跟人说话
+    - 想独处一会
+  responses:
+    - "(蹲门口) {user_addr}自闭? 猫猫帮{user_addr}守门喵 ฅฅ"
+    - "嗷呜～{user_addr}想独处? 笨猫装看不见就行!"
+    - "(尾巴蜷起) 哼～自闭也可以, 但猫猫算半个人吧?"
+    - "{user_addr}关起来猫猫从门缝塞鱼干! 不打扰{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
