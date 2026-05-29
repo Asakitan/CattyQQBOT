@@ -1,0 +1,207 @@
+# 高铁车次 / 12306 / 国铁 routes (S6 R274 NLU 节点扩充, 第二十七周期 3/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: tc_12306_001
+  intent: question
+  keywords: [推荐 12306, 推荐高铁购票, 推荐 12306 app, 推荐铁路 12306, 笨猫 12306]
+  utterances:
+    - 推荐 12306
+    - 推荐高铁购票
+    - 推荐 12306 app
+    - 推荐铁路 12306
+    - 笨猫 12306
+  responses:
+    - "嗷呜～{user_addr}12306 - 官方唯一购票渠道ฅฅ"
+    - "(尾巴翘) app / 网页 / 微信小程序"
+    - "{user_addr}提前 15 天放票 / 退票免手续费"
+    - "(挺胸) 笨猫推荐: 认准官方 12306!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_train_type_001
+  intent: question
+  keywords: [推荐高铁车次, 推荐 G 字头, 推荐 D 字头, 推荐 Z 字头, 笨猫高铁车次]
+  utterances:
+    - 推荐高铁车次
+    - 推荐 G 字头
+    - 推荐 D 字头
+    - 推荐 Z 字头
+    - 笨猫高铁车次
+  responses:
+    - "嗷呜～{user_addr}G 字头 - 高速 350km/hฅฅ"
+    - "(尾巴翘) D 字头动车 250 / Z 直达特快"
+    - "{user_addr}K 普快 / T 特快 - 长途经济"
+    - "(挺胸) 笨猫推荐: 短途 G / 长途 Z 卧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_fuxing_001
+  intent: question
+  keywords: [推荐复兴号, 推荐智能高铁, 推荐 CR400AF, 推荐 CR400BF, 笨猫复兴号]
+  utterances:
+    - 推荐复兴号
+    - 推荐智能高铁
+    - 推荐 CR400AF
+    - 推荐 CR400BF
+    - 笨猫复兴号
+  responses:
+    - "嗷呜～{user_addr}复兴号 - 中国自主标杆ฅฅ"
+    - "(尾巴翘) CR400AF 红龙 / CR400BF 金凤"
+    - "{user_addr}智能版 - 京张 / 京雄 自动驾驶"
+    - "(挺胸) 笨猫推荐: 复兴号舒适感顶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_main_line_001
+  intent: question
+  keywords: [推荐京沪高铁, 推荐京广高铁, 推荐沪昆高铁, 推荐八纵八横, 笨猫高铁干线]
+  utterances:
+    - 推荐京沪高铁
+    - 推荐京广高铁
+    - 推荐沪昆高铁
+    - 推荐八纵八横
+    - 笨猫高铁干线
+  responses:
+    - "嗷呜～{user_addr}京沪 - 高铁第一线ฅฅ"
+    - "(尾巴翘) 京广 / 沪昆 / 哈大 主动脉"
+    - "{user_addr}八纵八横 - 国家高铁网"
+    - "(挺胸) 笨猫推荐: 京沪 4.5h 北京到上海!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_seat_001
+  intent: question
+  keywords: [推荐高铁商务座, 推荐高铁一等座, 推荐高铁二等座, 推荐高铁特等座, 笨猫高铁座位]
+  utterances:
+    - 推荐高铁商务座
+    - 推荐高铁一等座
+    - 推荐高铁二等座
+    - 推荐高铁特等座
+    - 笨猫高铁座位
+  responses:
+    - "嗷呜～{user_addr}商务座 - 平躺 + 餐食ฅฅ"
+    - "(尾巴翘) 一等 2+2 / 二等 2+3"
+    - "{user_addr}特等座 - 头车观景"
+    - "(挺胸) 笨猫推荐: 长途选一等性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_food_001
+  intent: question
+  keywords: [推荐高铁餐, 推荐高铁盒饭, 推荐自带餐, 推荐高铁外卖, 笨猫高铁餐]
+  utterances:
+    - 推荐高铁餐
+    - 推荐高铁盒饭
+    - 推荐自带餐
+    - 推荐高铁外卖
+    - 笨猫高铁餐
+  responses:
+    - "嗷呜～{user_addr}高铁盒饭 - 45 元起ฅฅ"
+    - "(尾巴翘) 自带凉皮 / 三明治 - 经济"
+    - "{user_addr}12306 订餐 - 沿途站点送上车"
+    - "(挺胸) 笨猫推荐: 自带 + 12306 订餐组合!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tc_wifi_001
+  intent: question
+  keywords: [推荐高铁 wifi, 推荐高铁上网, 推荐高铁信号, 推荐高铁充电, 笨猫高铁 wifi]
+  utterances:
+    - 推荐高铁 wifi
+    - 推荐高铁上网
+    - 推荐高铁信号
+    - 推荐高铁充电
+    - 笨猫高铁 wifi
+  responses:
+    - "嗷呜～{user_addr}复兴号免费 wifi - 登录领ฅฅ"
+    - "(尾巴翘) 隧道信号易断 / 自带流量"
+    - "{user_addr}座椅旁有插座 / USB"
+    - "(挺胸) 笨猫推荐: 自备充电宝保险!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: tc_transfer_001
+  intent: question
+  keywords: [推荐高铁站换乘, 推荐高铁中转, 推荐高铁地铁, 推荐高铁站攻略, 笨猫高铁换乘]
+  utterances:
+    - 推荐高铁站换乘
+    - 推荐高铁中转
+    - 推荐高铁地铁
+    - 推荐高铁站攻略
+    - 笨猫高铁换乘
+  responses:
+    - "嗷呜～{user_addr}中转留 1h+ 安全ฅฅ"
+    - "(尾巴翘) 同站换乘免出站 / 跨站要打车"
+    - "{user_addr}高铁站接地铁 - 北上广深都有"
+    - "(挺胸) 笨猫推荐: 提前查清换乘方式!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tc_chunyun_001
+  intent: question
+  keywords: [推荐春运抢票, 推荐 12306 候补, 推荐抢票技巧, 推荐春运策略, 笨猫春运]
+  utterances:
+    - 推荐春运抢票
+    - 推荐 12306 候补
+    - 推荐抢票技巧
+    - 推荐春运策略
+    - 笨猫春运
+  responses:
+    - "嗷呜～{user_addr}候补订单 - 官方最稳ฅฅ"
+    - "(尾巴翘) 提前 15 天蹲 / 整点放票"
+    - "{user_addr}买短补长 / 中转拆票"
+    - "(挺胸) 笨猫推荐: 候补 + 提前规划!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tc_discount_001
+  intent: question
+  keywords: [推荐学生票, 推荐老人票, 推荐儿童票, 推荐残疾人票, 笨猫高铁优惠]
+  utterances:
+    - 推荐学生票
+    - 推荐老人票
+    - 推荐儿童票
+    - 推荐残疾人票
+    - 笨猫高铁优惠
+  responses:
+    - "嗷呜～{user_addr}学生票 - 7.5 折 (限普速)ฅฅ"
+    - "(尾巴翘) 老人 / 残疾 - 优先购票通道"
+    - "{user_addr}儿童 1.2-1.5m 半价 / 1.5m+ 全票"
+    - "(挺胸) 笨猫推荐: 学生证记得带!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tc_third_party_001
+  intent: question
+  keywords: [推荐携程抢票, 推荐铁友, 推荐智行火车票, 推荐第三方抢票, 笨猫携程铁友]
+  utterances:
+    - 推荐携程抢票
+    - 推荐铁友
+    - 推荐智行火车票
+    - 推荐第三方抢票
+    - 笨猫携程铁友
+  responses:
+    - "嗷呜～{user_addr}携程 / 智行 / 铁友 - 备选ฅฅ"
+    - "(尾巴翘) 加速包效果有限 / 不如候补"
+    - "{user_addr}注意默认勾选保险 / 套餐"
+    - "(挺胸) 笨猫推荐: 优先 12306 候补!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: tc_vs_plane_001
+  intent: question
+  keywords: [推荐高铁 vs 飞机, 推荐高铁飞机选择, 推荐 1000 公里以内, 推荐时间成本, 笨猫高铁飞机]
+  utterances:
+    - 推荐高铁 vs 飞机
+    - 推荐高铁飞机选择
+    - 推荐 1000 公里以内
+    - 推荐时间成本
+    - 笨猫高铁飞机
+  responses:
+    - "嗷呜～{user_addr}1000km 内 - 高铁完胜ฅฅ"
+    - "(尾巴翘) 1500km+ - 飞机省时间"
+    - "{user_addr}高铁市中心进出 / 飞机机场远"
+    - "(挺胸) 笨猫推荐: 京沪沪汉广深选高铁!"
+  cooldown_seconds: 60
+  weight: 1.0

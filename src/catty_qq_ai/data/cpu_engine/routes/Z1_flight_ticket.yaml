@@ -1,0 +1,207 @@
+# 机票 / 航司 / 国际国内 routes (S6 R273 NLU 节点扩充, 第二十七周期 2/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: ft_platform_001
+  intent: question
+  keywords: [推荐机票平台, 推荐携程, 推荐飞猪, 推荐 Skyscanner, 笨猫机票平台]
+  utterances:
+    - 推荐机票平台
+    - 推荐携程
+    - 推荐飞猪
+    - 推荐 Skyscanner
+    - 笨猫机票平台
+  responses:
+    - "嗷呜～{user_addr}携程 / 飞猪 - 国内主流ฅฅ"
+    - "(尾巴翘) Skyscanner / Google Flights - 国际比价"
+    - "{user_addr}去哪儿 / 同程 / 航司官网"
+    - "(挺胸) 笨猫推荐: 官网最稳 + Skyscanner 找便宜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ft_domestic_airline_001
+  intent: question
+  keywords: [推荐国内航司, 推荐国航, 推荐东航, 推荐南航, 笨猫国内航司]
+  utterances:
+    - 推荐国内航司
+    - 推荐国航
+    - 推荐东航
+    - 推荐南航
+    - 笨猫国内航司
+  responses:
+    - "嗷呜～{user_addr}国航 CA - 服务稳定旗舰ฅฅ"
+    - "(尾巴翘) 东航 MU / 南航 CZ - 三大主力"
+    - "{user_addr}海航 HU - 服务口碑好"
+    - "(挺胸) 笨猫推荐: 国航星空联盟里程通用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ft_lcc_001
+  intent: question
+  keywords: [推荐廉航, 推荐春秋, 推荐亚航, 推荐九元, 笨猫廉航]
+  utterances:
+    - 推荐廉航
+    - 推荐春秋
+    - 推荐亚航
+    - 推荐九元
+    - 笨猫廉航
+  responses:
+    - "嗷呜～{user_addr}春秋 9C - 国内廉航龙头ฅฅ"
+    - "(尾巴翘) 亚航 AirAsia / 酷航 Scoot - 东南亚"
+    - "{user_addr}九元 / 西部 - 行李水餐都加钱"
+    - "(挺胸) 笨猫推荐: 短途没行李超划算!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ft_intl_airline_001
+  intent: question
+  keywords: [推荐国际航司, 推荐阿联酋, 推荐新航, 推荐国泰, 笨猫国际航司]
+  utterances:
+    - 推荐国际航司
+    - 推荐阿联酋
+    - 推荐新航
+    - 推荐国泰
+    - 笨猫国际航司
+  responses:
+    - "嗷呜～{user_addr}阿联酋 EK - 长途奢华天花板ฅฅ"
+    - "(尾巴翘) 新航 SQ / 国泰 CX - 服务顶级"
+    - "{user_addr}卡塔尔 QR / 全日空 NH / 日航 JL"
+    - "(挺胸) 笨猫推荐: 新航 A380 体验拉满!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ft_first_class_001
+  intent: question
+  keywords: [推荐头等舱, 推荐商务舱, 推荐 First Class, 推荐 Business, 笨猫头等舱]
+  utterances:
+    - 推荐头等舱
+    - 推荐商务舱
+    - 推荐 First Class
+    - 推荐 Business
+    - 笨猫头等舱
+  responses:
+    - "嗷呜～{user_addr}阿联酋 First - 套房+淋浴ฅฅ"
+    - "(尾巴翘) 新航 Suites / 国泰 The Pier"
+    - "{user_addr}全平躺 / 香槟 / 高级餐饮"
+    - "(挺胸) 笨猫推荐: 长途 12h+ 商务舱值得!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ft_miles_001
+  intent: question
+  keywords: [推荐里程兑换, 推荐凤凰知音, 推荐星空联盟, 推荐 KrisFlyer, 笨猫里程]
+  utterances:
+    - 推荐里程兑换
+    - 推荐凤凰知音
+    - 推荐星空联盟
+    - 推荐 KrisFlyer
+    - 笨猫里程
+  responses:
+    - "嗷呜～{user_addr}国航凤凰知音 - 星空联盟核心ฅฅ"
+    - "(尾巴翘) 东航万里行 / 南航明珠 - 天合"
+    - "{user_addr}新航 KrisFlyer / 国泰亚万 - 兑换爽"
+    - "(挺胸) 笨猫推荐: 信用卡积分转里程更香!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ft_season_001
+  intent: question
+  keywords: [推荐机票折扣季节, 推荐淡季机票, 推荐错峰出行, 推荐特价季, 笨猫机票季节]
+  utterances:
+    - 推荐机票折扣季节
+    - 推荐淡季机票
+    - 推荐错峰出行
+    - 推荐特价季
+    - 笨猫机票季节
+  responses:
+    - "嗷呜～{user_addr}3-4 月 / 11 月淡季最便宜ฅฅ"
+    - "(尾巴翘) 春节国庆暑假必涨"
+    - "{user_addr}周二周三起飞 - 最划算"
+    - "(挺胸) 笨猫推荐: 错峰 + 周中起飞省一半!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ft_advance_001
+  intent: question
+  keywords: [推荐提前订票, 推荐预订时机, 推荐订票时间, 推荐机票黄金期, 笨猫提前订票]
+  utterances:
+    - 推荐提前订票
+    - 推荐预订时机
+    - 推荐订票时间
+    - 推荐机票黄金期
+    - 笨猫提前订票
+  responses:
+    - "嗷呜～{user_addr}国内提前 2-4 周最划算ฅฅ"
+    - "(尾巴翘) 国际提前 2-3 个月"
+    - "{user_addr}太早涨 / 太晚也涨"
+    - "(挺胸) 笨猫推荐: 设置 Skyscanner 价格提醒!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ft_refund_001
+  intent: question
+  keywords: [推荐机票退改签, 推荐退票规则, 推荐改签政策, 推荐机票险, 笨猫退改签]
+  utterances:
+    - 推荐机票退改签
+    - 推荐退票规则
+    - 推荐改签政策
+    - 推荐机票险
+    - 笨猫退改签
+  responses:
+    - "嗷呜～{user_addr}全价票退改最宽松ฅฅ"
+    - "(尾巴翘) 特价票多半不退不改"
+    - "{user_addr}起飞前越远手续费越低"
+    - "(挺胸) 笨猫推荐: 不确定的行程买退改险!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ft_child_senior_001
+  intent: question
+  keywords: [推荐儿童机票, 推荐老人机票, 推荐婴儿票, 推荐无人陪伴, 笨猫儿童机票]
+  utterances:
+    - 推荐儿童机票
+    - 推荐老人机票
+    - 推荐婴儿票
+    - 推荐无人陪伴
+    - 笨猫儿童机票
+  responses:
+    - "嗷呜～{user_addr}婴儿 (0-2岁) 一般 10% 价ฅฅ"
+    - "(尾巴翘) 儿童 (2-12) 半价 / 老人无折扣"
+    - "{user_addr}无人陪伴儿童 UM 服务要预约"
+    - "(挺胸) 笨猫推荐: 提前申请儿童餐和摇篮!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ft_pet_001
+  intent: question
+  keywords: [推荐宠物托运, 推荐航空宠物, 推荐宠物舱, 推荐宠物机票, 笨猫宠物托运]
+  utterances:
+    - 推荐宠物托运
+    - 推荐航空宠物
+    - 推荐宠物舱
+    - 推荐宠物机票
+    - 笨猫宠物托运
+  responses:
+    - "嗷呜～{user_addr}国内国航海航支持有氧舱ฅฅ"
+    - "(尾巴翘) 短鼻犬 / 高温拒收"
+    - "{user_addr}航空箱 + 检疫证 + 提前预约"
+    - "(挺胸) 笨猫推荐: 笨猫这种猫娘要随身ฅฅ!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ft_redeye_001
+  intent: question
+  keywords: [推荐特价机票, 推荐红眼航班, 推荐凌晨航班, 推荐廉价机票, 笨猫红眼航班]
+  utterances:
+    - 推荐特价机票
+    - 推荐红眼航班
+    - 推荐凌晨航班
+    - 推荐廉价机票
+    - 笨猫红眼航班
+  responses:
+    - "嗷呜～{user_addr}红眼 (0-6点) 便宜 30%+ฅฅ"
+    - "(尾巴翘) 春秋 / 9C 经常放白菜价"
+    - "{user_addr}航司官网会员日 / 大促"
+    - "(挺胸) 笨猫推荐: 红眼省钱但记得补觉!"
+  cooldown_seconds: 60
+  weight: 0.9

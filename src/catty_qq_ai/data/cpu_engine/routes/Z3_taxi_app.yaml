@@ -1,0 +1,207 @@
+# 打车 / 滴滴 Uber / 网约车 routes (S6 R275 NLU 节点扩充, 第二十七周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: ta_china_app_001
+  intent: question
+  keywords: [推荐打车 app, 推荐滴滴, 推荐高德打车, 推荐国内网约车, 笨猫打车 app]
+  utterances:
+    - 推荐打车 app
+    - 推荐滴滴
+    - 推荐高德打车
+    - 推荐国内网约车
+    - 笨猫打车 app
+  responses:
+    - "嗷呜～{user_addr}滴滴出行 - 国内王者ฅฅ"
+    - "(尾巴翘) 高德打车 - 聚合多平台比价"
+    - "{user_addr}美团打车 / 百度地图"
+    - "(挺胸) 笨猫推荐: 滴滴 + 高德双开!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ta_us_app_001
+  intent: question
+  keywords: [推荐 Uber, 推荐 Lyft, 推荐美国打车, 推荐美国网约车, 笨猫 Uber]
+  utterances:
+    - 推荐 Uber
+    - 推荐 Lyft
+    - 推荐美国打车
+    - 推荐美国网约车
+    - 笨猫 Uber
+  responses:
+    - "嗷呜～{user_addr}Uber - 全美覆盖ฅฅ"
+    - "(尾巴翘) Lyft - 价格友好 / 司机口碑好"
+    - "{user_addr}Uber Eats 顺便点外卖"
+    - "(挺胸) 笨猫推荐: 美国 Uber + Lyft 比价!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ta_eu_app_001
+  intent: question
+  keywords: [推荐 Bolt, 推荐 Free Now, 推荐欧洲打车, 推荐欧洲网约车, 笨猫 Bolt]
+  utterances:
+    - 推荐 Bolt
+    - 推荐 Free Now
+    - 推荐欧洲打车
+    - 推荐欧洲网约车
+    - 笨猫 Bolt
+  responses:
+    - "嗷呜～{user_addr}Bolt - 欧洲性价比之王ฅฅ"
+    - "(尾巴翘) Free Now - 德国 / 西欧覆盖"
+    - "{user_addr}Heetch (法国) / Cabify (西班牙)"
+    - "(挺胸) 笨猫推荐: 欧洲 Bolt 最便宜!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ta_jp_app_001
+  intent: question
+  keywords: [推荐 GO 打车, 推荐 JapanTaxi, 推荐日本打车, 推荐 DiDi 日本, 笨猫日本打车]
+  utterances:
+    - 推荐 GO 打车
+    - 推荐 JapanTaxi
+    - 推荐日本打车
+    - 推荐 DiDi 日本
+    - 笨猫日本打车
+  responses:
+    - "嗷呜～{user_addr}GO - 日本第一打车 appฅฅ"
+    - "(尾巴翘) S.RIDE / DiDi 日本"
+    - "{user_addr}Uber 日本 - 主要是高端"
+    - "(挺胸) 笨猫推荐: 日本下载 GO!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ta_comfort_001
+  intent: question
+  keywords: [推荐网约车舒适度, 推荐专车, 推荐礼橙专车, 推荐高端车型, 笨猫专车]
+  utterances:
+    - 推荐网约车舒适度
+    - 推荐专车
+    - 推荐礼橙专车
+    - 推荐高端车型
+    - 笨猫专车
+  responses:
+    - "嗷呜～{user_addr}滴滴礼橙专车 - 国内高端ฅฅ"
+    - "(尾巴翘) Uber Black / Lyft Lux"
+    - "{user_addr}空间大 / 司机西装 / 矿泉水"
+    - "(挺胸) 笨猫推荐: 商务接送选专车!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ta_carpool_001
+  intent: question
+  keywords: [推荐顺风车, 推荐拼车, 推荐嘀嗒, 推荐哈啰顺风车, 笨猫顺风车]
+  utterances:
+    - 推荐顺风车
+    - 推荐拼车
+    - 推荐嘀嗒
+    - 推荐哈啰顺风车
+    - 笨猫顺风车
+  responses:
+    - "嗷呜～{user_addr}嘀嗒出行 - 顺风车老牌ฅฅ"
+    - "(尾巴翘) 哈啰顺风车 / 滴滴拼车"
+    - "{user_addr}省钱 / 跨城便宜一半"
+    - "(挺胸) 笨猫推荐: 长途首选顺风车!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ta_caocao_t3_001
+  intent: question
+  keywords: [推荐曹操出行, 推荐 T3 出行, 推荐如祺出行, 推荐新势力网约车, 笨猫曹操]
+  utterances:
+    - 推荐曹操出行
+    - 推荐 T3 出行
+    - 推荐如祺出行
+    - 推荐新势力网约车
+    - 笨猫曹操
+  responses:
+    - "嗷呜～{user_addr}曹操出行 - 吉利系电车ฅฅ"
+    - "(尾巴翘) T3 出行 - 一汽东风长安"
+    - "{user_addr}如祺 (广汽) / 享道 (上汽)"
+    - "(挺胸) 笨猫推荐: 曹操新车多 / 体验好!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ta_taxi_vs_001
+  intent: question
+  keywords: [推荐计程车, 推荐出租车, 推荐出租车 vs 网约车, 推荐扬招出租车, 笨猫出租车]
+  utterances:
+    - 推荐计程车
+    - 推荐出租车
+    - 推荐出租车 vs 网约车
+    - 推荐扬招出租车
+    - 笨猫出租车
+  responses:
+    - "嗷呜～{user_addr}出租车 - 路边扬招最快ฅฅ"
+    - "(尾巴翘) 网约车 - 价格透明 / 评价机制"
+    - "{user_addr}机场 / 火车站还是出租车稳"
+    - "(挺胸) 笨猫推荐: 高峰期出租, 平时网约!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ta_driver_rating_001
+  intent: question
+  keywords: [推荐司机评价, 推荐五星司机, 推荐好评打车, 推荐司机选择, 笨猫司机评价]
+  utterances:
+    - 推荐司机评价
+    - 推荐五星司机
+    - 推荐好评打车
+    - 推荐司机选择
+    - 笨猫司机评价
+  responses:
+    - "嗷呜～{user_addr}看星级 + 接单数ฅฅ"
+    - "(尾巴翘) 4.9★ + 万单老司机最稳"
+    - "{user_addr}评价多看「车干净」「不绕路」"
+    - "(挺胸) 笨猫推荐: 好司机记得给五星!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ta_coupon_001
+  intent: question
+  keywords: [推荐打车优惠券, 推荐打车补贴, 推荐网约车红包, 推荐打车省钱, 笨猫优惠券]
+  utterances:
+    - 推荐打车优惠券
+    - 推荐打车补贴
+    - 推荐网约车红包
+    - 推荐打车省钱
+    - 笨猫优惠券
+  responses:
+    - "嗷呜～{user_addr}高德聚合常有 5-10 元券ฅฅ"
+    - "(尾巴翘) 滴滴月卡 / 美团打车券"
+    - "{user_addr}支付宝 / 微信支付偶尔有立减"
+    - "(挺胸) 笨猫推荐: 出门前先领券!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ta_safety_001
+  intent: question
+  keywords: [推荐网约车安全, 推荐打车安全, 推荐夜间打车, 推荐女性打车, 笨猫打车安全]
+  utterances:
+    - 推荐网约车安全
+    - 推荐打车安全
+    - 推荐夜间打车
+    - 推荐女性打车
+    - 笨猫打车安全
+  responses:
+    - "嗷呜～{user_addr}行程分享给家人朋友ฅฅ"
+    - "(尾巴翘) 核对车牌 / 上车录音"
+    - "{user_addr}夜间坐后排 / 110 一键报警"
+    - "(挺胸) 笨猫推荐: 安全永远第一!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ta_airport_001
+  intent: question
+  keywords: [推荐机场专车, 推荐机场接送, 推荐机场打车, 推荐航站楼接机, 笨猫机场专车]
+  utterances:
+    - 推荐机场专车
+    - 推荐机场接送
+    - 推荐机场打车
+    - 推荐航站楼接机
+    - 笨猫机场专车
+  responses:
+    - "嗷呜～{user_addr}滴滴接送机 - 提前预约ฅฅ"
+    - "(尾巴翘) 高德机场专车 - 一口价不堵心"
+    - "{user_addr}机场大巴更便宜 / 地铁最经济"
+    - "(挺胸) 笨猫推荐: 行李多打专车舒服!"
+  cooldown_seconds: 60
+  weight: 0.9

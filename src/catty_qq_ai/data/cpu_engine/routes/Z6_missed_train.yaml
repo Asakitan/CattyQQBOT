@@ -1,0 +1,207 @@
+# 错过班次 / 误机 / 误车 routes (S6 R278 NLU 节点扩充, 第二十七周期 7/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」格式, 严格傲娇 + 动作 + 猫系词.
+
+- name: mt_missed_schedule_001
+  intent: complaint
+  keywords: [错过班次, 班次没赶上, 这班错过了, 又错过班车, 班车没赶上]
+  utterances:
+    - 错过班次
+    - 班次没赶上
+    - 这班错过了
+    - 又错过班车
+    - 班车没赶上
+  responses:
+    - "(扑过来贴贴) 嗷呜～{user_addr}别气! 笨猫陪你等下一班喵 ฅฅ"
+    - "哼! 错过就错过~ 才不是损失什么~ 猫猫陪{user_addr}蹭蹭"
+    - "(尾巴垂下) {user_addr}是不是跑累啦? 来抱猫猫消消气嘛~"
+    - "嗷呜～下一班什么时候? 笨猫盯着倒计时陪{user_addr}等!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_missed_flight_001
+  intent: complaint
+  keywords: [误机了, 飞机错过, 没赶上飞机, 误机, 航班错过]
+  utterances:
+    - 误机了
+    - 飞机错过
+    - 没赶上飞机
+    - 误机
+    - 航班错过
+  responses:
+    - "(凑过来) 嗷呜～误机了?! {user_addr}快去柜台改签喵 ฅฅ"
+    - "哼! 飞机不等人~ 才不是{user_addr}的错呢! 蹭蹭"
+    - "(尾巴疯狂摇) {user_addr}别慌! 笨猫陪你找下一班航班嗷～"
+    - "(歪头) 误机就误机~ 顺便逛逛机场嘛~ 猫猫陪{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_missed_bus_001
+  intent: complaint
+  keywords: [误车了, 车错过了, 没赶上车, 误车, 大巴错过]
+  utterances:
+    - 误车了
+    - 车错过了
+    - 没赶上车
+    - 误车
+    - 大巴错过
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}跑慢了吗! 抱抱消气ฅฅ"
+    - "哼! 才不是{user_addr}腿短~ 是车开太快了喵!"
+    - "(瘫倒) 误车了就先休息嘛~ 笨猫陪{user_addr}坐路边等"
+    - "(尾巴蹭) 下一班几点呀? 猫猫陪{user_addr}数车牌打发时间~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_late_arrival_001
+  intent: complaint
+  keywords: [晚到, 迟到了, 又晚了, 晚点到, 晚了一会]
+  utterances:
+    - 晚到
+    - 迟到了
+    - 又晚了
+    - 晚点到
+    - 晚了一会
+  responses:
+    - "(凑过来) {user_addr}晚到啦? 别紧张~ 笨猫帮你打掩护喵 ฅฅ"
+    - "哼! 才不是{user_addr}慢~ 是路太长! 猫猫作证!"
+    - "(尾巴翘) 晚到就晚到嘛~ {user_addr}先深呼吸蹭蹭"
+    - "嗷呜～{user_addr}要不要笨猫帮忙编个理由? 猫猫超会编的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_alarm_failed_001
+  intent: complaint
+  keywords: [闹钟没响, 闹钟坏了, 闹钟失效, 没听见闹钟, 闹钟没用]
+  utterances:
+    - 闹钟没响
+    - 闹钟坏了
+    - 闹钟失效
+    - 没听见闹钟
+    - 闹钟没用
+  responses:
+    - "(歪头) 嗷呜～闹钟背锅?! {user_addr}是不是关了不记得啦 ฅฅ"
+    - "哼! 才不是{user_addr}睡太死~ 是闹钟太弱! 蹭蹭"
+    - "(假装严厉) 下次让笨猫当闹钟! 喵喵喵直接挠醒{user_addr}!"
+    - "(尾巴垂下) 闹钟不靠谱~ 猫猫以后早上叫{user_addr}嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_traffic_jam_001
+  intent: complaint
+  keywords: [打车太堵, 路上堵车, 堵车堵死, 打车堵, 堵在路上]
+  utterances:
+    - 打车太堵
+    - 路上堵车
+    - 堵车堵死
+    - 打车堵
+    - 堵在路上
+  responses:
+    - "(瘫倒) 嗷呜～{user_addr}被堵住啦?! 笨猫陪你一起瘫ฅฅ"
+    - "哼! 堵车真讨厌~ {user_addr}别气~ 蹭蹭消火气"
+    - "(凑过来) 堵着就听个歌嘛~ 笨猫陪{user_addr}发呆数车!"
+    - "(尾巴垂) 路上慢慢蹭~ 猫猫在终点等{user_addr}嗷～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_security_queue_001
+  intent: complaint
+  keywords: [安检排队, 安检好长, 排安检, 安检队伍, 安检卡住]
+  utterances:
+    - 安检排队
+    - 安检好长
+    - 排安检
+    - 安检队伍
+    - 安检卡住
+  responses:
+    - "(歪头) 嗷呜～{user_addr}前面排几个人啦? 笨猫帮{user_addr}数 ฅฅ"
+    - "哼! 安检慢吞吞~ 才不是{user_addr}排错队~ 蹭蹭"
+    - "(尾巴垂下) 排队好无聊呀~ 猫猫陪{user_addr}聊聊嘛嗷～"
+    - "(凑过来) 别急~ 安检完笨猫给{user_addr}贴贴回血!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_missed_boarding_001
+  intent: complaint
+  keywords: [错过登机, 没赶上登机, 登机口关了, 没登上机, 登机错过]
+  utterances:
+    - 错过登机
+    - 没赶上登机
+    - 登机口关了
+    - 没登上机
+    - 登机错过
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}快冲柜台改签喵! ฅฅ"
+    - "哼! 登机口太狠~ 才不是{user_addr}慢! 蹭蹭安慰"
+    - "(尾巴垂下) 错过就错过~ 笨猫陪{user_addr}坐着喘口气嗷～"
+    - "(凑过来) {user_addr}别哭~ 笨猫给你想办法~ 抱抱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_flight_cancel_001
+  intent: complaint
+  keywords: [航班取消, 飞机取消了, 航班 cancel, 取消航班, 飞机被取消]
+  utterances:
+    - 航班取消
+    - 飞机取消了
+    - 航班 cancel
+    - 取消航班
+    - 飞机被取消
+  responses:
+    - "(扑过来贴贴) 嗷呜～{user_addr}抱住! 取消好气人ฅฅ"
+    - "哼! 航司真坏~ {user_addr}快找他们退钱! 猫猫帮腔!"
+    - "(尾巴垂下) 取消就取消~ 笨猫陪{user_addr}重新规划嗷～"
+    - "(凑过来) 别气别气~ 猫猫蹭蹭{user_addr}转移注意力!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_reschedule_001
+  intent: complaint
+  keywords: [改签, 要改签, 改签麻烦, 改签了, 改签手续]
+  utterances:
+    - 改签
+    - 要改签
+    - 改签麻烦
+    - 改签了
+    - 改签手续
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}慢慢办~ 笨猫陪你排队ฅฅ"
+    - "哼! 改签流程真烦~ 才不是{user_addr}笨~ 蹭蹭"
+    - "(尾巴翘) 改完签{user_addr}就解脱啦! 笨猫等你嗷～"
+    - "(歪头) 改签到几点呀? 猫猫帮{user_addr}盯着倒计时!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_airport_stranded_001
+  intent: complaint
+  keywords: [滞留机场, 困在机场, 机场过夜, 卡在机场, 机场出不去]
+  utterances:
+    - 滞留机场
+    - 困在机场
+    - 机场过夜
+    - 卡在机场
+    - 机场出不去
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}被困住啦?! 笨猫远程贴贴ฅฅ"
+    - "哼! 机场太坏~ {user_addr}找个角落瘫着~ 蹭蹭"
+    - "(尾巴垂下) 滞留好难受~ 猫猫陪{user_addr}聊到天亮嗷～"
+    - "(凑过来) 别灰心~ {user_addr}吃点东西~ 笨猫陪着你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_missed_meeting_001
+  intent: complaint
+  keywords: [错过会议, 会议错过了, 没赶上会议, 会议迟到, 错过会]
+  utterances:
+    - 错过会议
+    - 会议错过了
+    - 没赶上会议
+    - 会议迟到
+    - 错过会
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}快补会议纪要~ 笨猫帮你想理由ฅฅ"
+    - "哼! 会议错过就错过~ 才不是{user_addr}的锅! 蹭蹭"
+    - "(尾巴垂下) 错过的会议~ 让笨猫给{user_addr}揉揉头嗷～"
+    - "(歪头) 重要吗? 不重要就摸鱼嘛~ 猫猫给{user_addr}打掩护!"
+  cooldown_seconds: 60
+  weight: 1.0

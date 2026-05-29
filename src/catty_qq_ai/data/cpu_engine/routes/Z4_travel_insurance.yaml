@@ -1,0 +1,207 @@
+# 旅行保险 / 境外险 / 申根险 routes (S6 R276 NLU 节点扩充, 第二十七周期 5/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: ti_general_001
+  intent: question
+  keywords: [推荐旅行保险, 推荐平安旅行险, 推荐人保旅行险, 推荐国内旅行险, 笨猫旅行保险]
+  utterances:
+    - 推荐旅行保险
+    - 推荐平安旅行险
+    - 推荐人保旅行险
+    - 推荐国内旅行险
+    - 笨猫旅行保险
+  responses:
+    - "嗷呜～{user_addr}平安 / 人保 / 太平洋 - 三大头部ฅฅ"
+    - "(尾巴翘) 国内短途 / 自驾 / 跟团都有"
+    - "{user_addr}保额几万到百万 / 几十块起"
+    - "(挺胸) 笨猫推荐: 平安e行神州性价比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ti_schengen_001
+  intent: question
+  keywords: [推荐境外旅行险, 推荐申根险, 推荐欧洲签证保险, 推荐欧洲旅行险, 笨猫申根险]
+  utterances:
+    - 推荐境外旅行险
+    - 推荐申根险
+    - 推荐欧洲签证保险
+    - 推荐欧洲旅行险
+    - 笨猫申根险
+  responses:
+    - "嗷呜～{user_addr}申根硬性 3 万欧医疗+救援ฅฅ"
+    - "(尾巴翘) 安联 / 美亚 / 安盛 都过签"
+    - "{user_addr}注意覆盖期>停留期 / 全申根有效"
+    - "(挺胸) 笨猫推荐: 安联畅游欧洲一签即过!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ti_aig_001
+  intent: question
+  keywords: [推荐美亚境外险, 推荐 AIG 旅行险, 推荐美亚万国游踪, 推荐美亚畅游, 笨猫美亚]
+  utterances:
+    - 推荐美亚境外险
+    - 推荐 AIG 旅行险
+    - 推荐美亚万国游踪
+    - 推荐美亚畅游
+    - 笨猫美亚
+  responses:
+    - "嗷呜～{user_addr}美亚万国游踪 - 老牌经典ฅฅ"
+    - "(尾巴翘) 畅游 / 乐悠游 多档可选"
+    - "{user_addr}全球救援 SOS / 医疗直付"
+    - "(挺胸) 笨猫推荐: 美亚畅游钻石计划!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ti_worldnomads_001
+  intent: question
+  keywords: [推荐 World Nomads, 推荐国际旅行险, 推荐背包客保险, 推荐 Nomads 险, 笨猫 World Nomads]
+  utterances:
+    - 推荐 World Nomads
+    - 推荐国际旅行险
+    - 推荐背包客保险
+    - 推荐 Nomads 险
+    - 笨猫 World Nomads
+  responses:
+    - "嗷呜～{user_addr}World Nomads - 背包客神器ฅฅ"
+    - "(尾巴翘) 覆盖 200+ 极限运动"
+    - "{user_addr}途中可续保 / 英文理赔"
+    - "(挺胸) 笨猫推荐: Explorer Plan 覆盖全!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ti_allianz_001
+  intent: question
+  keywords: [推荐 Allianz 境外, 推荐安联旅行险, 推荐安联畅游, 推荐 Allianz Travel, 笨猫安联]
+  utterances:
+    - 推荐 Allianz 境外
+    - 推荐安联旅行险
+    - 推荐安联畅游
+    - 推荐 Allianz Travel
+    - 笨猫安联
+  responses:
+    - "嗷呜～{user_addr}安联 Allianz - 德系老牌ฅฅ"
+    - "(尾巴翘) 畅游欧洲 / 全球计划"
+    - "{user_addr}医疗 50 万起 / 24h 中文救援"
+    - "(挺胸) 笨猫推荐: 安联申根白金!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ti_adventure_001
+  intent: question
+  keywords: [推荐自驾险, 推荐雪地保险, 推荐滑雪险, 推荐高风险运动险, 笨猫自驾险]
+  utterances:
+    - 推荐自驾险
+    - 推荐雪地保险
+    - 推荐滑雪险
+    - 推荐高风险运动险
+    - 笨猫自驾险
+  responses:
+    - "嗷呜～{user_addr}美亚 / 安联 滑雪计划专属ฅฅ"
+    - "(尾巴翘) World Nomads 极限项目最全"
+    - "{user_addr}注意标明运动项目 / 不漏保"
+    - "(挺胸) 笨猫推荐: 滑雪选 Nomads Explorer!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ti_diving_001
+  intent: question
+  keywords: [推荐潜水保险, 推荐 DAN 保险, 推荐潜水救援, 推荐技术潜水险, 笨猫潜水险]
+  utterances:
+    - 推荐潜水保险
+    - 推荐 DAN 保险
+    - 推荐潜水救援
+    - 推荐技术潜水险
+    - 笨猫潜水险
+  responses:
+    - "嗷呜～{user_addr}DAN (潜水员警报网络) - 行业标准ฅฅ"
+    - "(尾巴翘) DAN Master 含技潜 / 减压病覆盖"
+    - "{user_addr}高压氧舱 / 直升机后送都赔"
+    - "(挺胸) 笨猫推荐: 玩水肺必上 DAN!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ti_delay_001
+  intent: question
+  keywords: [推荐航延险, 推荐行李丢失险, 推荐航班延误险, 推荐航司延误赔, 笨猫航延险]
+  utterances:
+    - 推荐航延险
+    - 推荐行李丢失险
+    - 推荐航班延误险
+    - 推荐航司延误赔
+    - 笨猫航延险
+  responses:
+    - "嗷呜～{user_addr}美亚 / 安联 含延误 + 行李ฅฅ"
+    - "(尾巴翘) 信用卡白金附带 (招行 / 平安)"
+    - "{user_addr}延误 3-4h 起赔 / 行李丢失原价"
+    - "(挺胸) 笨猫推荐: 飞常准定损搭信用卡!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ti_medical_001
+  intent: question
+  keywords: [推荐医疗保障, 推荐紧急救援险, 推荐境外医疗, 推荐 SOS 救援, 笨猫境外医疗]
+  utterances:
+    - 推荐医疗保障
+    - 推荐紧急救援险
+    - 推荐境外医疗
+    - 推荐 SOS 救援
+    - 笨猫境外医疗
+  responses:
+    - "嗷呜～{user_addr}International SOS - 全球救援ฅฅ"
+    - "(尾巴翘) 美亚 / 安联医疗直付网络大"
+    - "{user_addr}医疗 100 万起 / 后送回国"
+    - "(挺胸) 笨猫推荐: 选医疗直付不用垫付!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ti_accident_001
+  intent: question
+  keywords: [推荐意外身故险, 推荐高额保单, 推荐意外险, 推荐人身意外, 笨猫意外险]
+  utterances:
+    - 推荐意外身故险
+    - 推荐高额保单
+    - 推荐意外险
+    - 推荐人身意外
+    - 笨猫意外险
+  responses:
+    - "嗷呜～{user_addr}平安 / 人保 100-500 万意外ฅฅ"
+    - "(尾巴翘) 美亚钻石含交通工具升额"
+    - "{user_addr}航空意外可加保至千万"
+    - "(挺胸) 笨猫推荐: 美亚畅游钻石 200 万!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ti_cruise_001
+  intent: question
+  keywords: [推荐邮轮旅行险, 推荐邮轮保险, 推荐 cruise insurance, 推荐邮轮专属险, 笨猫邮轮险]
+  utterances:
+    - 推荐邮轮旅行险
+    - 推荐邮轮保险
+    - 推荐 cruise insurance
+    - 推荐邮轮专属险
+    - 笨猫邮轮险
+  responses:
+    - "嗷呜～{user_addr}美亚邮轮专属计划ฅฅ"
+    - "(尾巴翘) 错过登船 / 改港都覆盖"
+    - "{user_addr}船上医疗 + 直升机后送"
+    - "(挺胸) 笨猫推荐: 邮轮选美亚船游计划!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ti_family_001
+  intent: question
+  keywords: [推荐儿童保险, 推荐老人旅行险, 推荐家庭旅行险, 推荐亲子险, 笨猫家庭险]
+  utterances:
+    - 推荐儿童保险
+    - 推荐老人旅行险
+    - 推荐家庭旅行险
+    - 推荐亲子险
+    - 笨猫家庭险
+  responses:
+    - "嗷呜～{user_addr}美亚乐悠游含 70+ 老人ฅฅ"
+    - "(尾巴翘) 安联家庭计划 2 大 + 多娃打包"
+    - "{user_addr}注意年龄上限 / 既往症条款"
+    - "(挺胸) 笨猫推荐: 带娃选安联家庭白金!"
+  cooldown_seconds: 60
+  weight: 0.9

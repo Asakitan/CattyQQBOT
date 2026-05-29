@@ -1,0 +1,207 @@
+# 酒店预订 / Booking 携程 Hotels routes (S6 R272 NLU 节点扩充, 第二十七周期 1/10)
+# 主人 2026-05-29: intent=question 推荐型, 带笨猫语气
+# 推荐型, 但带笨猫语气不要冷冰冰.
+
+- name: hb_platform_001
+  intent: question
+  keywords: [推荐酒店预订平台, 推荐 Booking, 推荐携程, 推荐订酒店 App, 笨猫酒店预订平台]
+  utterances:
+    - 推荐酒店预订平台
+    - 推荐 Booking
+    - 推荐携程
+    - 推荐订酒店 App
+    - 笨猫酒店预订平台
+  responses:
+    - "嗷呜～{user_addr}Booking.com - 全球通吃ฅฅ"
+    - "(尾巴翘) 携程 - 国内王 / 飞猪"
+    - "{user_addr}Trip.com / 去哪儿 / 美团"
+    - "(挺胸) 笨猫推荐: 国内携程 / 国外 Booking!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_agoda_001
+  intent: question
+  keywords: [推荐 Agoda, 推荐雅高达, 推荐亚洲酒店预订, 推荐东南亚酒店, 笨猫 Agoda]
+  utterances:
+    - 推荐 Agoda
+    - 推荐雅高达
+    - 推荐亚洲酒店预订
+    - 推荐东南亚酒店
+    - 笨猫 Agoda
+  responses:
+    - "嗷呜～{user_addr}Agoda - 亚洲价格杀手ฅฅ"
+    - "(尾巴翘) 东南亚 / 日韩港台超全"
+    - "{user_addr}有时比 Booking 便宜不少"
+    - "(挺胸) 笨猫推荐: 去亚洲对比 Agoda!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_hotels_001
+  intent: question
+  keywords: [推荐 Hotels.com, 推荐 Expedia, 推荐美国酒店预订, 推荐欧美酒店, 笨猫 Hotels.com]
+  utterances:
+    - 推荐 Hotels.com
+    - 推荐 Expedia
+    - 推荐美国酒店预订
+    - 推荐欧美酒店
+    - 笨猫 Hotels.com
+  responses:
+    - "嗷呜～{user_addr}Hotels.com - 集 10 送 1ฅฅ"
+    - "(尾巴翘) Expedia - 机+酒套餐划算"
+    - "{user_addr}欧美房源比携程全"
+    - "(挺胸) 笨猫推荐: Hotels.com 攒免费夜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_luxury_001
+  intent: question
+  keywords: [推荐高端酒店, 推荐 Marriott, 推荐 Hilton, 推荐万豪希尔顿, 笨猫高端酒店]
+  utterances:
+    - 推荐高端酒店
+    - 推荐 Marriott
+    - 推荐 Hilton
+    - 推荐万豪希尔顿
+    - 笨猫高端酒店
+  responses:
+    - "嗷呜～{user_addr}Marriott 万豪 - 全球第一ฅฅ"
+    - "(尾巴翘) Hilton 希尔顿 / Hyatt 凯悦"
+    - "{user_addr}IHG 洲际 / 雅高 Accor"
+    - "(挺胸) 笨猫推荐: 万豪体系最全!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_budget_001
+  intent: question
+  keywords: [推荐性价比酒店, 推荐汉庭, 推荐七天, 推荐如家, 笨猫经济型酒店]
+  utterances:
+    - 推荐性价比酒店
+    - 推荐汉庭
+    - 推荐七天
+    - 推荐如家
+    - 笨猫经济型酒店
+  responses:
+    - "嗷呜～{user_addr}汉庭 / 全季 - 华住系ฅฅ"
+    - "(尾巴翘) 7 天 / 如家 / 锦江之星"
+    - "{user_addr}300 以内能睡得安心"
+    - "(挺胸) 笨猫推荐: 全季升级版!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_bnb_001
+  intent: question
+  keywords: [推荐民宿, 推荐 Airbnb, 推荐木鸟, 推荐爱彼迎, 笨猫民宿]
+  utterances:
+    - 推荐民宿
+    - 推荐 Airbnb
+    - 推荐木鸟
+    - 推荐爱彼迎
+    - 笨猫民宿
+  responses:
+    - "嗷呜～{user_addr}Airbnb 爱彼迎 - 全球ฅฅ"
+    - "(尾巴翘) 木鸟 / 途家 / 小猪 - 国内"
+    - "{user_addr}长住 / 多人比酒店划算"
+    - "(挺胸) 笨猫推荐: 看评分 + 房东沟通!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_points_001
+  intent: question
+  keywords: [推荐酒店积分, 推荐 Marriott Bonvoy, 推荐希尔顿荣誉客会, 推荐酒店会员, 笨猫酒店积分]
+  utterances:
+    - 推荐酒店积分
+    - 推荐 Marriott Bonvoy
+    - 推荐希尔顿荣誉客会
+    - 推荐酒店会员
+    - 笨猫酒店积分
+  responses:
+    - "嗷呜～{user_addr}Marriott Bonvoy - 万豪积分ฅฅ"
+    - "(尾巴翘) Hilton Honors / IHG One"
+    - "{user_addr}信用卡联名快速升钛金"
+    - "(挺胸) 笨猫推荐: 积分换免费夜赚!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hb_timing_001
+  intent: question
+  keywords: [推荐酒店预订时机, 推荐提前订酒店, 推荐酒店预订时间, 推荐最佳预订日, 笨猫酒店预订时机]
+  utterances:
+    - 推荐酒店预订时机
+    - 推荐提前订酒店
+    - 推荐酒店预订时间
+    - 推荐最佳预订日
+    - 笨猫酒店预订时机
+  responses:
+    - "嗷呜～{user_addr}提前 1 周最稳ฅฅ"
+    - "(尾巴翘) 节假日提前 1 个月"
+    - "{user_addr}周二订往往最低 / 当晚捡漏"
+    - "(挺胸) 笨猫推荐: 选免费取消先锁!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_cancel_001
+  intent: question
+  keywords: [推荐取消政策, 推荐免费取消, 推荐酒店退订, 推荐 free cancellation, 笨猫取消政策]
+  utterances:
+    - 推荐取消政策
+    - 推荐免费取消
+    - 推荐酒店退订
+    - 推荐 free cancellation
+    - 笨猫取消政策
+  responses:
+    - "嗷呜～{user_addr}优先选免费取消ฅฅ"
+    - "(尾巴翘) 不退款便宜但风险大"
+    - "{user_addr}看清最后取消时间点"
+    - "(挺胸) 笨猫推荐: 行程没定死必须免取消!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_location_001
+  intent: question
+  keywords: [推荐酒店地段, 推荐酒店选址, 推荐看交通, 推荐酒店位置, 笨猫酒店地段]
+  utterances:
+    - 推荐酒店地段
+    - 推荐酒店选址
+    - 推荐看交通
+    - 推荐酒店位置
+    - 笨猫酒店地段
+  responses:
+    - "嗷呜～{user_addr}地铁站 500m 内最香ฅฅ"
+    - "(尾巴翘) 市中心贵但省时间"
+    - "{user_addr}看地图 + 看景点距离"
+    - "(挺胸) 笨猫推荐: 地段 > 房型!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_fivestar_001
+  intent: question
+  keywords: [推荐五星酒店, 推荐五星设施, 推荐五星服务, 推荐酒店硬件, 笨猫五星酒店]
+  utterances:
+    - 推荐五星酒店
+    - 推荐五星设施
+    - 推荐五星服务
+    - 推荐酒店硬件
+    - 笨猫五星酒店
+  responses:
+    - "嗷呜～{user_addr}泳池 / 健身房 / 早餐ฅฅ"
+    - "(尾巴翘) 行政酒廊 / 管家服务"
+    - "{user_addr}看大堂 + 看房型 + 看评价"
+    - "(挺胸) 笨猫推荐: 度假就住带泳池的!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hb_boutique_001
+  intent: question
+  keywords: [推荐 boutique 酒店, 推荐精品酒店, 推荐设计酒店, 推荐小众酒店, 笨猫精品酒店]
+  utterances:
+    - 推荐 boutique 酒店
+    - 推荐精品酒店
+    - 推荐设计酒店
+    - 推荐小众酒店
+    - 笨猫精品酒店
+  responses:
+    - "嗷呜～{user_addr}精品酒店 - 个性设计ฅฅ"
+    - "(尾巴翘) Design Hotels / Mr & Mrs Smith"
+    - "{user_addr}国内: 隐居 / 松赞 / 既下山"
+    - "(挺胸) 笨猫推荐: 拍照党必住精品!"
+  cooldown_seconds: 60
+  weight: 0.8

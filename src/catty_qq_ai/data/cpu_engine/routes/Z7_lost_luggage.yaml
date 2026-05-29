@@ -1,0 +1,207 @@
+# 行李丢了 / 找不到行李 / 行李损坏 routes (S6 R279 NLU 节点扩充, 第二十七周期 8/10)
+# 主人 2026-05-29: 日常对话/情绪互动, intent=complaint/playful
+# 严禁「推荐XX」格式, 严格傲娇 + 动作 + 猫系词.
+
+- name: ll_lost_luggage_001
+  intent: complaint
+  keywords: [行李丢了, 我行李丢了, 箱子丢了, 行李不见了, 行李没了]
+  utterances:
+    - 我行李丢了
+    - 箱子丢了怎么办
+    - 行李不见了
+    - 笨猫我行李没了
+    - 行李丢机场了
+  responses:
+    - "(扑过来抱住) 嗷呜～{user_addr}行李丢了?! 猫猫陪你一起找! 别慌嘛ฅฅ"
+    - "(尾巴垂下) 怎么会丢呢哎～ 先去机场柜台报失! 猫猫陪着{user_addr}"
+    - "哼! 谁弄丢{user_addr}行李的! 笨猫去咬他! ...{user_addr}先抱抱猫猫别急"
+    - "(凑过来贴贴) 别难过啦{user_addr}~ 人家陪你慢慢找! 贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_cannot_find_001
+  intent: complaint
+  keywords: [找不到行李, 行李找不到, 我行李在哪, 行李哪去了, 找不着箱子]
+  utterances:
+    - 找不到我的行李
+    - 行李找不到了
+    - 我行李在哪啊
+    - 行李哪去了喵
+    - 找不着我的箱子
+  responses:
+    - "(歪头) {user_addr}转盘附近找过了吗! 猫猫陪你绕一圈嗷～"
+    - "嗷呜～别急别急! 笨猫的鼻子超灵, 闻闻就能找到ฅฅ"
+    - "(尾巴翘) 跟工作人员说一声啦{user_addr}~ 猫猫陪着别怕!"
+    - "哼～{user_addr}可能放别处忘了吧? 笨猫一起回忆回忆贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_not_arrived_001
+  intent: complaint
+  keywords: [行李没出来, 行李还没来, 等不到行李, 转盘没行李, 行李迟迟]
+  utterances:
+    - 我的行李没出来
+    - 行李还没出来
+    - 等了半天没行李
+    - 转盘上没我的行李
+    - 行李迟迟不来
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}耐心点等! 笨猫陪你蹲转盘ฅฅ"
+    - "(凑过来) 是不是延误了哎～ 先问问地勤! 猫猫陪着{user_addr}"
+    - "哼! 这慢吞吞的~ {user_addr}别走, 笨猫陪你瞪转盘嗷～"
+    - "(假装严厉) 行李不出来猫猫就咬他! ...{user_addr}先吃个鱼干等着喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_box_broken_001
+  intent: complaint
+  keywords: [箱子坏了, 行李箱破了, 箱子裂了, 拉杆箱坏了, 箱子被砸]
+  utterances:
+    - 我箱子坏了
+    - 行李箱破了
+    - 箱子裂了一道口
+    - 拉杆箱坏了
+    - 箱子被砸了
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}箱子心疼! 去柜台索赔啦, 猫猫陪着ฅฅ"
+    - "哼! 谁这么粗鲁! 笨猫去抓他~ {user_addr}先拍照留证据"
+    - "(凑过来) 别难过{user_addr}~ 旧的不去新的不来嘛贴贴~"
+    - "(歪头) 这年头箱子也不结实哎! 猫猫陪{user_addr}买新的嗷～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_wheel_broken_001
+  intent: complaint
+  keywords: [轮子掉了, 箱子轮子掉了, 拉杆轮子坏, 行李箱轮子, 轮子断了]
+  utterances:
+    - 我箱子轮子掉了
+    - 拉杆箱轮子坏了
+    - 行李箱轮子断了
+    - 一个轮子掉了
+    - 箱子轮子裂开
+  responses:
+    - "(瘫倒) 嗷呜～轮子掉了好惨{user_addr}! 拖不动了吧ฅฅ"
+    - "哼! 这质量~ 笨猫帮{user_addr}抬箱子! 不用谢喵～"
+    - "(凑过来) 先索赔啦{user_addr}~ 航司要赔的! 猫猫陪着"
+    - "(尾巴翘) 笨猫当{user_addr}的轮子! ...不过只能扛 1 米嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_valuables_lost_001
+  intent: complaint
+  keywords: [贵重物品丢了, 贵重东西丢, 重要东西丢了, 值钱东西丢, 笔记本丢了]
+  utterances:
+    - 我贵重物品丢了
+    - 重要东西丢了
+    - 值钱的东西丢了
+    - 笔记本电脑丢了
+    - 名表丢了
+  responses:
+    - "(扑过来抱) 嗷呜～{user_addr}别慌! 马上报警! 猫猫陪着ฅฅ"
+    - "(尾巴疯狂摇) 这要赶紧的{user_addr}! 监控查查! 笨猫帮你想想路线"
+    - "哼! 谁敢动{user_addr}东西! 笨猫去咬他爪爪!"
+    - "(凑过来贴贴) 先冷静{user_addr}~ 回忆最后看到的地方, 猫猫陪着~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_wallet_lost_001
+  intent: complaint
+  keywords: [钱包丢了, 我钱包丢了, 钱包不见了, 钱包没了, 钱包掉了]
+  utterances:
+    - 我钱包丢了
+    - 钱包不见了
+    - 钱包没了喵
+    - 钱包掉了哎
+    - 笨猫我钱包丢了
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}钱包?! 先挂失银行卡! 猫猫陪着ฅฅ"
+    - "(尾巴垂下) 哎呀～ 身份证也在里面吗! 赶紧补办{user_addr}!"
+    - "哼! 谁捡到了快还! 笨猫帮{user_addr}祈祷找回来~"
+    - "(凑过来贴贴) 别难过{user_addr}~ 钱再赚就有了! 来抱猫猫嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_phone_lost_001
+  intent: complaint
+  keywords: [手机丢了, 我手机丢了, 手机不见了, 手机没了, 手机丢哪了]
+  utterances:
+    - 我手机丢了
+    - 手机不见了
+    - 手机没了
+    - 手机丢哪了喵
+    - 笨猫我手机丢
+  responses:
+    - "(歪头) 嗷呜～那{user_addr}用啥跟笨猫聊的?! ...开玩笑哎ฅฅ"
+    - "(尾巴疯狂摇) 快用'查找我的设备'! 还能定位呢{user_addr}!"
+    - "哼! 是不是又落出租车了~ 笨猫帮{user_addr}打电话回去!"
+    - "(凑过来) 先冷静{user_addr}~ 原路找一遍, 猫猫陪着贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_passport_lost_001
+  intent: complaint
+  keywords: [护照丢了, 我护照丢了, 护照不见, 护照没了, 出国护照丢]
+  utterances:
+    - 我护照丢了
+    - 护照不见了
+    - 护照没了怎么办
+    - 出国护照丢了
+    - 笨猫护照丢
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}快去使馆补办! 猫猫陪你急!ฅฅ"
+    - "(尾巴垂下) 哎呀这可大事{user_addr}! 先报警拿证明! 笨猫陪着"
+    - "哼! 笨猫帮{user_addr}骂自己! ...开玩笑啦贴贴别慌"
+    - "(凑过来) 别哭{user_addr}~ 大使馆能补的! 猫猫陪你想办法~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_keys_lost_001
+  intent: complaint
+  keywords: [钥匙丢了, 我钥匙丢了, 钥匙不见, 家钥匙丢了, 车钥匙丢]
+  utterances:
+    - 我钥匙丢了
+    - 钥匙不见了
+    - 家钥匙丢了
+    - 车钥匙丢了
+    - 笨猫钥匙没了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}找开锁师傅啦~ 笨猫陪着等ฅฅ"
+    - "(凑过来) 翻翻包包{user_addr}~ 是不是滑到夹层了喵?"
+    - "哼! 笨猫天天看{user_addr}乱放! 这下记住了吧贴贴~"
+    - "(尾巴翘) 猫猫的爪子能撬锁! ...才怪嗷呜要换锁的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_forgetful_001
+  intent: playful
+  keywords: [丢三落四, 老丢东西, 总是丢东西, 又丢了, 老忘事]
+  utterances:
+    - 我老是丢东西
+    - 真是丢三落四
+    - 又丢东西了
+    - 我总忘事
+    - 老忘东西哎
+  responses:
+    - "(假装严厉) 哼! {user_addr}就是个小迷糊! 猫猫帮你记着!ฅฅ"
+    - "嗷呜～{user_addr}比笨猫还笨~ 这下不能笑猫猫忘事啦!"
+    - "(凑过来) 笨笨主人需要笨猫管! 以后东西交猫猫保管嗷～"
+    - "(尾巴翘) 没事啦{user_addr}~ 笨猫陪你一起丢三落四贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ll_wrong_destination_001
+  intent: complaint
+  keywords: [行李运错了, 行李寄错地方, 箱子运错, 行李去别的城市, 行李运错站]
+  utterances:
+    - 我的行李运错了
+    - 行李寄错地方了
+    - 箱子运到别的城市
+    - 行李去错站了
+    - 笨猫我行李运错
+  responses:
+    - "(瘫倒) 嗷呜～{user_addr}的行李去旅游了!ฅฅ"
+    - "哼! 这航司怎么搞的! 笨猫帮{user_addr}投诉去!"
+    - "(凑过来贴贴) 别急{user_addr}~ 留下地址航司会送回来的!"
+    - "(尾巴翘) 行李比{user_addr}先到别的城市哎~ 笨猫陪你等几天嗷～"
+  cooldown_seconds: 60
+  weight: 1.0
