@@ -1,0 +1,206 @@
+# 独自旅行 / 一个人 / 安全 routes (S6 R422 NLU 节点扩充, 第四十二周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: st_destination_jp_001
+  intent: question
+  keywords: [推荐独自旅行目的地, 推荐独旅日本, 推荐独旅日韩, 推荐一个人去日本, 笨猫独旅目的地]
+  utterances:
+    - 推荐独自旅行目的地
+    - 推荐独旅日本
+    - 推荐独旅日韩
+    - 推荐一个人去日本
+    - 笨猫独旅目的地
+  responses:
+    - "嗷呜～{user_addr}日本 - 独旅天堂ฅฅ"
+    - "(尾巴翘) 韩国首尔 / 日本京都"
+    - "{user_addr}治安好 / 交通方便 / 中文友好"
+    - "(挺胸) 猫猫推荐: 京都+大阪入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_destination_eu_001
+  intent: question
+  keywords: [推荐独旅欧洲, 推荐独旅地, 推荐一个人欧洲, 推荐独旅欧日, 笨猫独旅欧洲]
+  utterances:
+    - 推荐独旅欧洲
+    - 推荐独旅地
+    - 推荐一个人欧洲
+    - 推荐独旅欧日
+    - 笨猫独旅欧洲
+  responses:
+    - "嗷呜～{user_addr}欧洲 - 独旅经典ฅฅ"
+    - "(尾巴翘) 葡萄牙 / 捷克 / 冰岛"
+    - "{user_addr}日本依然神级 / 安全度高"
+    - "(挺胸) 笨猫推荐: 里斯本独旅天花板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_safety_checklist_001
+  intent: question
+  keywords: [推荐独旅安全清单, 推荐独旅安全, 推荐独自旅行安全, 推荐独旅注意, 笨猫独旅安全]
+  utterances:
+    - 推荐独旅安全清单
+    - 推荐独旅安全
+    - 推荐独自旅行安全
+    - 推荐独旅注意
+    - 笨猫独旅安全
+  responses:
+    - "嗷呜～{user_addr}行程报备家人ฅฅ"
+    - "(尾巴翘) 证件备份 / 紧急联系人 / 保险"
+    - "{user_addr}夜间不外出 / 不喝陌生人饮料"
+    - "(挺胸) 人家叮嘱: 安全第一!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_gear_defense_001
+  intent: question
+  keywords: [推荐独旅装备, 推荐防身, 推荐独旅防身, 推荐独自旅行装备, 笨猫独旅装备]
+  utterances:
+    - 推荐独旅装备
+    - 推荐防身
+    - 推荐独旅防身
+    - 推荐独自旅行装备
+    - 笨猫独旅装备
+  responses:
+    - "嗷呜～{user_addr}防狼报警器 - 必备ฅฅ"
+    - "(尾巴翘) 门挡 / 防割手套 / 战术笔"
+    - "{user_addr}腰包贴身 / 假钱包"
+    - "(挺胸) 笨猫推荐: 报警器+门挡套装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_app_mapsme_001
+  intent: question
+  keywords: [推荐独旅app, 推荐 Maps.me, 推荐独旅应用, 推荐旅行app, 笨猫独旅app]
+  utterances:
+    - 推荐独旅app
+    - 推荐 Maps.me
+    - 推荐独旅应用
+    - 推荐旅行app
+    - 笨猫独旅app
+  responses:
+    - "嗷呜～{user_addr}Maps.me - 离线地图神器ฅฅ"
+    - "(尾巴翘) Google Maps / Booking / Hostelworld"
+    - "{user_addr}Citymapper / Rome2Rio / XE"
+    - "(挺胸) 猫猫推荐: Maps.me 必装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_budget_001
+  intent: question
+  keywords: [推荐独旅预算, 推荐独自旅行预算, 推荐独旅花费, 推荐独旅省钱, 笨猫独旅预算]
+  utterances:
+    - 推荐独旅预算
+    - 推荐独自旅行预算
+    - 推荐独旅花费
+    - 推荐独旅省钱
+    - 笨猫独旅预算
+  responses:
+    - "嗷呜～{user_addr}东南亚 50-100/天ฅฅ"
+    - "(尾巴翘) 日本 300-500 / 欧洲 500-1000"
+    - "{user_addr}青旅+便利店能省一半"
+    - "(挺胸) 笨猫推荐: 留 20% 应急金!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_social_couchsurfing_001
+  intent: question
+  keywords: [推荐独旅交友, 推荐沙发客, 推荐 Couchsurfing, 推荐独旅认识人, 笨猫独旅交友]
+  utterances:
+    - 推荐独旅交友
+    - 推荐沙发客
+    - 推荐 Couchsurfing
+    - 推荐独旅认识人
+    - 笨猫独旅交友
+  responses:
+    - "嗷呜～{user_addr}Couchsurfing - 沙发客经典ฅฅ"
+    - "(尾巴翘) Meetup / Tinder / 青旅 bar"
+    - "{user_addr}Free walking tour 最容易搭话"
+    - "(挺胸) 笨猫提醒: 看评价再约!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_accommodation_hostel_001
+  intent: question
+  keywords: [推荐独旅住宿, 推荐青旅, 推荐独旅 hostel, 推荐独自住宿, 笨猫独旅住宿]
+  utterances:
+    - 推荐独旅住宿
+    - 推荐青旅
+    - 推荐独旅 hostel
+    - 推荐独自住宿
+    - 笨猫独旅住宿
+  responses:
+    - "嗷呜～{user_addr}青旅 Hostel - 独旅首选ฅฅ"
+    - "(尾巴翘) Hostelworld / Booking / Airbnb"
+    - "{user_addr}女生间 / 胶囊旅馆更安全"
+    - "(挺胸) 猫猫推荐: 评分 8.5+ 才订!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_photo_tripod_001
+  intent: question
+  keywords: [推荐独旅拍照, 推荐三脚架, 推荐独旅自拍, 推荐独旅摄影, 笨猫独旅拍照]
+  utterances:
+    - 推荐独旅拍照
+    - 推荐三脚架
+    - 推荐独旅自拍
+    - 推荐独旅摄影
+    - 笨猫独旅拍照
+  responses:
+    - "嗷呜～{user_addr}迷你三脚架+蓝牙快门ฅฅ"
+    - "(尾巴翘) Joby GorillaPod / 八爪鱼"
+    - "{user_addr}请陌生人拍 / 找同游人换拍"
+    - "(挺胸) 笨猫推荐: GorillaPod 万能!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_solo_female_001
+  intent: question
+  keywords: [推荐独自女生旅行, 推荐女生独旅, 推荐独旅女生, 推荐女孩独旅, 笨猫女生独旅]
+  utterances:
+    - 推荐独自女生旅行
+    - 推荐女生独旅
+    - 推荐独旅女生
+    - 推荐女孩独旅
+    - 笨猫女生独旅
+  responses:
+    - "嗷呜～{user_addr}日本 / 台湾 / 韩国 - 女生友好ฅฅ"
+    - "(尾巴翘) 新西兰 / 冰岛 / 葡萄牙"
+    - "{user_addr}穿低调 / 避开夜路 / 报备行程"
+    - "(挺胸) 人家叮嘱: 直觉不对马上撤!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_diary_travelog_001
+  intent: question
+  keywords: [推荐独旅日记, 推荐游记, 推荐独旅记录, 推荐旅行日记, 笨猫独旅日记]
+  utterances:
+    - 推荐独旅日记
+    - 推荐游记
+    - 推荐独旅记录
+    - 推荐旅行日记
+    - 笨猫独旅日记
+  responses:
+    - "嗷呜～{user_addr}小红书 / 马蜂窝 - 中文游记ฅฅ"
+    - "(尾巴翘) Polarsteps - GPS 自动记录"
+    - "{user_addr}手写本+拍立得最有温度"
+    - "(挺胸) 笨猫推荐: Polarsteps 真香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_community_share_001
+  intent: question
+  keywords: [推荐独旅社群, 推荐独旅分享, 推荐独旅论坛, 推荐独旅圈子, 笨猫独旅社群]
+  utterances:
+    - 推荐独旅社群
+    - 推荐独旅分享
+    - 推荐独旅论坛
+    - 推荐独旅圈子
+    - 笨猫独旅社群
+  responses:
+    - "嗷呜～{user_addr}穷游网 / 马蜂窝 - 中文老牌ฅฅ"
+    - "(尾巴翘) Reddit r/solotravel / Lonely Planet"
+    - "{user_addr}小红书独旅 tag / 豆瓣独旅小组"
+    - "(挺胸) 猫猫推荐: r/solotravel 干货多!"
+  cooldown_seconds: 60
+  weight: 1.0

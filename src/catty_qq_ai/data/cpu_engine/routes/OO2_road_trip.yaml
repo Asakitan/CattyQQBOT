@@ -1,0 +1,206 @@
+# 公路旅行 / 自驾游 / 路线 routes (S6 R424 NLU 节点扩充, 第四十二周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: rt_g318_001
+  intent: question
+  keywords: [推荐自驾路线, 推荐 318, 推荐川藏, 推荐川藏线, 笨猫 318]
+  utterances:
+    - 推荐自驾路线
+    - 推荐 318
+    - 推荐川藏
+    - 推荐川藏线
+    - 笨猫 318
+  responses:
+    - "嗷呜～{user_addr}318 川藏 - 中国最美ฅฅ"
+    - "(尾巴翘) 成都→拉萨 / 2140km"
+    - "{user_addr}折多山 / 怒江 72 拐 / 然乌湖"
+    - "(挺胸) 笨猫推荐: 318 一生一次!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_diantibet_001
+  intent: question
+  keywords: [推荐滇藏, 推荐新藏, 推荐 219, 推荐 G214, 笨猫滇藏]
+  utterances:
+    - 推荐滇藏
+    - 推荐新藏
+    - 推荐 219
+    - 推荐 G214
+    - 笨猫滇藏
+  responses:
+    - "嗷呜～{user_addr}滇藏 G214 - 香格里拉ฅฅ"
+    - "(尾巴翘) 新藏 G219 - 喀什→拉萨"
+    - "{user_addr}梅里雪山 / 阿里大环线"
+    - "(挺胸) 笨猫推荐: 219 极致荒凉!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_xinjiang_001
+  intent: question
+  keywords: [推荐北疆环线, 推荐新疆自驾, 推荐独库公路, 推荐喀纳斯, 笨猫北疆]
+  utterances:
+    - 推荐北疆环线
+    - 推荐新疆自驾
+    - 推荐独库公路
+    - 推荐喀纳斯
+    - 笨猫北疆
+  responses:
+    - "嗷呜～{user_addr}北疆 - 喀纳斯 / 禾木ฅฅ"
+    - "(尾巴翘) 独库公路 G217 - 一日四季"
+    - "{user_addr}赛里木湖 / 那拉提"
+    - "(挺胸) 笨猫推荐: 7-8 月最佳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_hainan_001
+  intent: question
+  keywords: [推荐海南环岛, 推荐海南自驾, 推荐三亚, 推荐文昌, 笨猫海南]
+  utterances:
+    - 推荐海南环岛
+    - 推荐海南自驾
+    - 推荐三亚
+    - 推荐文昌
+    - 笨猫海南
+  responses:
+    - "嗷呜～{user_addr}海南环岛 - 1000km 海景ฅฅ"
+    - "(尾巴翘) 海口→三亚 / 东线高速"
+    - "{user_addr}文昌椰林 / 万宁冲浪"
+    - "(挺胸) 笨猫推荐: 冬天暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_route66_001
+  intent: question
+  keywords: [推荐 66 号公路, 推荐美国公路, 推荐 Route 66, 推荐母亲之路, 笨猫 66]
+  utterances:
+    - 推荐 66 号公路
+    - 推荐美国公路
+    - 推荐 Route 66
+    - 推荐母亲之路
+    - 笨猫 66
+  responses:
+    - "嗷呜～{user_addr}Route 66 - 芝加哥→洛杉矶ฅฅ"
+    - "(尾巴翘) 3940km / 8 个州"
+    - "{user_addr}大峡谷 / 圣莫尼卡终点"
+    - "(挺胸) 笨猫推荐: 美式公路文化!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_icefields_001
+  intent: question
+  keywords: [推荐加拿大冰原大道, 推荐 Icefields Parkway, 推荐落基山脉, 推荐班夫, 笨猫冰原]
+  utterances:
+    - 推荐加拿大冰原大道
+    - 推荐 Icefields Parkway
+    - 推荐落基山脉
+    - 推荐班夫
+    - 笨猫冰原
+  responses:
+    - "嗷呜～{user_addr}冰原大道 - 班夫→贾斯珀ฅฅ"
+    - "(尾巴翘) 232km / 全球最美之一"
+    - "{user_addr}露易丝湖 / 哥伦比亚冰原"
+    - "(挺胸) 笨猫推荐: 9 月秋色!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_greatocean_001
+  intent: question
+  keywords: [推荐大洋路, 推荐 Great Ocean Road, 推荐澳洲自驾, 推荐十二门徒, 笨猫大洋路]
+  utterances:
+    - 推荐大洋路
+    - 推荐 Great Ocean Road
+    - 推荐澳洲自驾
+    - 推荐十二门徒
+    - 笨猫大洋路
+  responses:
+    - "嗷呜～{user_addr}大洋路 - 墨尔本出发ฅฅ"
+    - "(尾巴翘) 243km / 海岸悬崖"
+    - "{user_addr}十二门徒 / 洛克阿德峡谷"
+    - "(挺胸) 笨猫推荐: 日落最美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_car_choice_001
+  intent: question
+  keywords: [推荐自驾车, 推荐 SUV, 推荐越野车, 推荐普拉多, 笨猫自驾车]
+  utterances:
+    - 推荐自驾车
+    - 推荐 SUV
+    - 推荐越野车
+    - 推荐普拉多
+    - 笨猫自驾车
+  responses:
+    - "嗷呜～{user_addr}SUV 通过性好ฅฅ"
+    - "(尾巴翘) 普拉多 / 帕杰罗 / 牧马人"
+    - "{user_addr}城市路 - 汉兰达 / 途昂"
+    - "(挺胸) 笨猫推荐: 高原选四驱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_gear_001
+  intent: question
+  keywords: [推荐公路旅行装备, 推荐 GPS, 推荐行车记录仪, 推荐车载冰箱, 笨猫公路装备]
+  utterances:
+    - 推荐公路旅行装备
+    - 推荐 GPS
+    - 推荐行车记录仪
+    - 推荐车载冰箱
+    - 笨猫公路装备
+  responses:
+    - "嗷呜～{user_addr}行车记录仪 70 迈 / 盯盯拍ฅฅ"
+    - "(尾巴翘) Garmin GPS / 车载冰箱"
+    - "{user_addr}充气泵 / 拖车绳 / 三角架"
+    - "(挺胸) 笨猫推荐: 安全锤必备!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rt_lodging_001
+  intent: question
+  keywords: [推荐自驾住宿, 推荐民宿, 推荐 RV, 推荐房车, 笨猫自驾住宿]
+  utterances:
+    - 推荐自驾住宿
+    - 推荐民宿
+    - 推荐 RV
+    - 推荐房车
+    - 笨猫自驾住宿
+  responses:
+    - "嗷呜～{user_addr}民宿 - Airbnb / 木鸟ฅฅ"
+    - "(尾巴翘) RV 房车 - 自由灵活"
+    - "{user_addr}汽车旅馆 Motel / 营地"
+    - "(挺胸) 笨猫推荐: 提前订!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rt_plan_001
+  intent: question
+  keywords: [推荐自驾计划, 推荐路线规划, 推荐自驾攻略, 推荐自驾 App, 笨猫自驾计划]
+  utterances:
+    - 推荐自驾计划
+    - 推荐路线规划
+    - 推荐自驾攻略
+    - 推荐自驾 App
+    - 笨猫自驾计划
+  responses:
+    - "嗷呜～{user_addr}高德 / 百度地图规划ฅฅ"
+    - "(尾巴翘) 每天 ≤ 500km / 留弹性"
+    - "{user_addr}穷游 / 马蜂窝看攻略"
+    - "(挺胸) 笨猫推荐: 别赶!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rt_photo_001
+  intent: question
+  keywords: [推荐自驾摄影, 推荐机位, 推荐风光摄影, 推荐航拍, 笨猫自驾摄影]
+  utterances:
+    - 推荐自驾摄影
+    - 推荐机位
+    - 推荐风光摄影
+    - 推荐航拍
+    - 笨猫自驾摄影
+  responses:
+    - "嗷呜～{user_addr}广角 + 长焦组合ฅฅ"
+    - "(尾巴翘) 大疆 Mavic 航拍神器"
+    - "{user_addr}日出日落 - 黄金时刻"
+    - "(挺胸) 笨猫推荐: 路边随停!"
+  cooldown_seconds: 60
+  weight: 0.8

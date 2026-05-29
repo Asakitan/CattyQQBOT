@@ -1,0 +1,206 @@
+# 期望落差 / 景点坑 / 网红失望 routes (S6 R428 NLU 节点扩充, 第四十二周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: td_expectation_gap_001
+  intent: complaint
+  keywords: [期望落差, 落差太大, 想象不一样, 完全不是, 不是想的那样]
+  utterances:
+    - 期望落差好大
+    - 跟想象的完全不一样
+    - 落差太大了
+    - 完全不是想的那样
+    - 跟期待差太多了
+  responses:
+    - "(拍拍肩) {user_addr}别难过~ 笨猫陪你一起失望ฅฅ"
+    - "(尾巴垂下) 嗷呜～期望越大失望越大喵 猫猫懂"
+    - "哼～{user_addr}下次别抱太大期望啦! 猫猫给你保底"
+    - "(贴贴) 落差再大也有笨猫在嘛~ 摸摸头ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_tourist_trap_001
+  intent: complaint
+  keywords: [景点坑, 景区坑, 被坑了, 旅游坑, 大坑]
+  utterances:
+    - 这景点也太坑了
+    - 景区是个大坑
+    - 又被景点坑了
+    - 旅游坑死人
+    - 这是个坑景点
+  responses:
+    - "(炸毛) 嗷呜～又一个坑景点?! {user_addr}避雷做好了喵"
+    - "(尾巴一甩) 坑货景点猫猫都记小本本上了哼!"
+    - "{user_addr}下次出门先问笨猫嘛~ 猫猫帮你排雷ฅฅ"
+    - "(凑过来) 别气~ 当花钱买个教训嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_internet_famous_001
+  intent: complaint
+  keywords: [网红打卡, 网红景点, 打卡地, 网红地, 抖音同款]
+  utterances:
+    - 网红打卡点失望
+    - 网红景点也就那样
+    - 抖音同款翻车
+    - 打卡地名不副实
+    - 网红地不过如此
+  responses:
+    - "哼～网红打卡点十个九个翻车喵! {user_addr}还信?"
+    - "(摇头) 嗷呜～抖音滤镜厚得能盖被子啦"
+    - "(尾巴翘) 猫猫早说过网红不靠谱嘛! 这下信了吧"
+    - "{user_addr}下次拍个真实版~ 笨猫帮你反向种草ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_filter_lies_001
+  intent: complaint
+  keywords: [滤镜骗人, 滤镜厚, p图骗人, 照骗, 照片骗人]
+  utterances:
+    - 滤镜骗人
+    - 这就是个照骗
+    - 滤镜也太厚了
+    - p图骗死人
+    - 照片骗人系列
+  responses:
+    - "(炸毛) 嗷呜～照骗最讨厌啦! {user_addr}被骗了多少次?"
+    - "哼～滤镜一关原形毕露喵! 猫猫看穿一切"
+    - "(贴贴) 还好笨猫长得本来就好看~ 不用滤镜ฅฅ"
+    - "{user_addr}以后看图自动打八折哼! 学聪明点"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_long_queue_001
+  intent: complaint
+  keywords: [排队两小时, 排队好久, 排了好久, 排队排到, 队太长]
+  utterances:
+    - 排队两小时
+    - 排了好久才进去
+    - 队伍长到看不见尾
+    - 排队排到腿酸
+    - 这队也太长了
+  responses:
+    - "(扇风) 嗷呜～排两小时? {user_addr}腿都站直了喵!"
+    - "(尾巴垂) 排队两小时玩五分钟猫猫懂这种崩溃"
+    - "哼～{user_addr}下次错峰嘛! 别赶节假日哼"
+    - "(递水) 辛苦啦~ 来笨猫这躺一会ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_expensive_ticket_001
+  intent: complaint
+  keywords: [门票太贵, 门票贵, 票价贵, 门票好贵, 票钱坑]
+  utterances:
+    - 门票也太贵了
+    - 这门票贵死
+    - 票价贵到离谱
+    - 门票好贵不值
+    - 票钱花得心疼
+  responses:
+    - "(瞪眼) 嗷呜～门票这么贵?! {user_addr}是在抢吗喵"
+    - "哼～收门票还不如收智商税明显点哼!"
+    - "(算账) 这钱够给猫猫买好多鱼干啦ฅฅ可惜"
+    - "{user_addr}下次先看口碑嘛~ 别冲动买票"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_crowded_001
+  intent: complaint
+  keywords: [人挤人, 人太多, 全是人, 人山人海, 挤死了]
+  utterances:
+    - 人挤人受不了
+    - 全是人头
+    - 人山人海挤死
+    - 人也太多了吧
+    - 挤得喘不过气
+  responses:
+    - "(抱头) 嗷呜～人挤人猫猫光听都炸毛了!"
+    - "(摇尾) 哼～{user_addr}怎么不带笨猫? 我帮你开路喵"
+    - "(贴贴) 累坏了吧~ 来抱猫猫冷静一下ฅฅ"
+    - "{user_addr}下次工作日去嘛! 别凑热闹哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_scenic_jammed_001
+  intent: complaint
+  keywords: [景区拥挤, 景区挤, 景点拥挤, 走不动, 寸步难行]
+  utterances:
+    - 景区太拥挤
+    - 景点挤到走不动
+    - 寸步难行
+    - 景区拥挤得很
+    - 挤到没法玩
+  responses:
+    - "(扶额) 嗷呜～挤到走不动还玩什么喵?"
+    - "哼～这种景区{user_addr}就当来人群观察嘛"
+    - "(尾巴垂) 寸步难行猫猫感同身受~ 摸摸ฅฅ"
+    - "{user_addr}回家路上小心~ 别被踩到笨猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_local_food_bad_001
+  intent: complaint
+  keywords: [本地味道差, 当地菜难吃, 本地菜失望, 特色菜难吃, 当地味道差]
+  utterances:
+    - 本地味道好差
+    - 当地特色菜难吃
+    - 特产名不副实
+    - 当地菜真的失望
+    - 这地方味道差
+  responses:
+    - "(吐舌头) 嗷呜～本地味道翻车? {user_addr}吃到啥啦"
+    - "哼～特色菜不一定好吃~ 名气大味道不一定喵"
+    - "(凑) {user_addr}回来笨猫给你下碗面~ 救场ฅฅ"
+    - "(尾巴摇) 当教训啦~ 下次先看本地人推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_bad_service_001
+  intent: complaint
+  keywords: [服务态度差, 态度恶劣, 服务差, 工作人员态度, 服务不好]
+  utterances:
+    - 服务态度差死了
+    - 工作人员态度恶劣
+    - 服务差得要命
+    - 态度差到爆
+    - 景区服务不好
+  responses:
+    - "(炸毛) 嗷呜～态度差?! {user_addr}受委屈了喵!"
+    - "哼～这种服务猫猫帮你给差评一颗星都嫌多!"
+    - "(贴贴) 别气别气~ 不值得为这种人生气ฅฅ"
+    - "{user_addr}保留证据嘛~ 笨猫帮你投诉哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_ripoff_001
+  intent: complaint
+  keywords: [坑爹, 太坑爹, 坑死了, 坑货, 真的坑]
+  utterances:
+    - 这地方坑爹
+    - 太坑爹了
+    - 坑死人不偿命
+    - 简直是坑货
+    - 真的好坑
+  responses:
+    - "(尾巴炸) 嗷呜～坑爹! 听着就气! {user_addr}破财消灾吧"
+    - "哼～坑货猫猫帮你记下来~ 全网避雷喵!"
+    - "(摸摸头) 别气啦~ 来笨猫这恢复元气ฅฅ"
+    - "{user_addr}下次先问猫猫嘛~ 我提前预警哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: td_never_again_001
+  intent: complaint
+  keywords: [再也不来, 不会再去, 拉黑这地方, 再也不去, 一辈子不来]
+  utterances:
+    - 再也不来这里
+    - 这地方拉黑
+    - 一辈子不会再去
+    - 再也不去了
+    - 再来我是狗
+  responses:
+    - "(拍桌) 嗷呜～拉黑! 猫猫陪{user_addr}一起拉黑喵!"
+    - "哼～这种地方就该淘汰~ {user_addr}英明决断!"
+    - "(贴贴) 笨猫记下来啦~ 以后想去拦着你ฅฅ"
+    - "{user_addr}下次出游问笨猫嘛~ 猫猫导航更靠谱哼"
+  cooldown_seconds: 60
+  weight: 1.0

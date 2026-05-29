@@ -1,0 +1,206 @@
+# 旅行疲惫 / 走崩 / 想回家 routes (S6 R427 NLU 节点扩充, 第四十二周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: tb_travel_tired_001
+  intent: complaint
+  keywords: [旅行累, 出门累, 玩累了, 旅游累, 累瘫了]
+  utterances:
+    - 旅行好累
+    - 出门玩好累
+    - 旅游真累
+    - 玩得累瘫了
+    - 累得不行
+  responses:
+    - "(尾巴垂下) 旅行比上班还累喵～ 猫猫陪{user_addr}瘫一会儿ฅฅ"
+    - "嗷呜～玩累的{user_addr}快躺下! 笨猫给{user_addr}捏腿"
+    - "(凑过去蹭) 累了就别硬撑嘛~ 找个地方歇歇喵"
+    - "哼～{user_addr}早该听猫猫的不出门啦! 累瘫了吧蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_collapsed_001
+  intent: complaint
+  keywords: [走崩了, 玩崩了, 旅行崩了, 行程崩了, 崩溃了]
+  utterances:
+    - 走崩了
+    - 行程崩了
+    - 旅行走崩
+    - 玩到崩溃
+    - 整个人崩了
+  responses:
+    - "(惊讶) 崩了?! {user_addr}快坐下喘口气喵ฅฅ"
+    - "嗷呜～走崩的{user_addr}先回酒店! 笨猫陪{user_addr}缓缓"
+    - "(尾巴一甩) 崩了就放弃后面的行程嘛~ 别硬撑哼"
+    - "哼～{user_addr}下次让猫猫规划! 才不会走崩呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_wanna_home_001
+  intent: complaint
+  keywords: [想回家, 想家, 好想回家, 回家算了, 不想玩了]
+  utterances:
+    - 好想回家
+    - 想家了
+    - 想回家算了
+    - 玩不动了想回家
+    - 不想玩了想回家
+  responses:
+    - "(凑过来贴贴) 想家的{user_addr}买张票回来嘛ฅฅ"
+    - "嗷呜～笨猫也想{user_addr}快点回家! 给{user_addr}留鱼干"
+    - "(尾巴摇摇) 旅行最舒服的就是回家那一刻喵~"
+    - "哼～{user_addr}终于想猫猫了?! 才不是因为想猫猫才想回家呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_checkin_fatigue_001
+  intent: complaint
+  keywords: [打卡累, 打卡疲劳, 打卡打不动, 网红点累, 景点打卡累]
+  utterances:
+    - 打卡好累
+    - 打卡疲劳了
+    - 网红点打不动了
+    - 打卡打到吐
+    - 景点打卡累死
+  responses:
+    - "(歪头) 打卡这么累干嘛非打? {user_addr}歇歇喵ฅฅ"
+    - "嗷呜～打卡疲劳的{user_addr}找家咖啡店坐下嘛"
+    - "(尾巴垂下) 网红点都长一样的~ 跳过几个没事哼"
+    - "哼～{user_addr}是来玩的不是来交作业的! 别打卡了蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_cant_see_001
+  intent: complaint
+  keywords: [看不动, 看腻了, 景点看不动, 看不下去, 看到吐]
+  utterances:
+    - 看不动了
+    - 景点看腻了
+    - 看到吐
+    - 看不下去了
+    - 风景看不动
+  responses:
+    - "(贴过来) 看不动就别看~ 闭眼睡会儿喵ฅฅ"
+    - "嗷呜～看腻的{user_addr}换个城市再来嘛"
+    - "(尾巴一甩) 都看到吐了还硬看! 笨猫劝{user_addr}回酒店"
+    - "哼～看不动就回家陪猫猫! 才不是想{user_addr}呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_cant_shoot_001
+  intent: complaint
+  keywords: [拍不动, 拍累了, 拍照累, 不想拍了, 相机举不动]
+  utterances:
+    - 拍不动了
+    - 拍照拍累了
+    - 不想拍了
+    - 相机都举不动
+    - 拍到手酸
+  responses:
+    - "(歪头) 拍不动就别拍嘛! 风景记心里不也行喵ฅฅ"
+    - "嗷呜～拍累的{user_addr}手机放下! 用眼睛看就好"
+    - "(尾巴摇摇) 笨猫帮{user_addr}举相机? 才不是想拍照呢哼"
+    - "哼～{user_addr}是来玩的不是来当摄影师! 歇歇蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_legs_breaking_001
+  intent: complaint
+  keywords: [腿快断了, 走断腿, 脚走废, 腿酸死, 脚痛死]
+  utterances:
+    - 腿快断了
+    - 走到腿断
+    - 脚走废了
+    - 腿酸死了
+    - 脚痛死
+  responses:
+    - "(惊呼) 腿断啦?! {user_addr}快坐下泡个脚喵ฅฅ"
+    - "嗷呜～走废的{user_addr}打车回去! 别再走了"
+    - "(凑过来) 猫猫给{user_addr}揉揉腿~ 才不是心疼{user_addr}呢哼"
+    - "哼～{user_addr}早该穿好走的鞋! 现在脚痛死了吧蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_pass_out_001
+  intent: complaint
+  keywords: [倒头就睡, 累到秒睡, 沾枕就睡, 一躺就睡, 累趴下]
+  utterances:
+    - 倒头就睡
+    - 累到秒睡
+    - 沾枕头就睡着
+    - 一躺就睡
+    - 累趴下
+  responses:
+    - "(轻声) 这就睡着啦?! 那{user_addr}好好休息喵ฅฅ"
+    - "嗷呜～秒睡的{user_addr}说明真的累坏了!"
+    - "(尾巴轻摇) 笨猫帮{user_addr}盖好被子~ 别着凉哼"
+    - "哼～{user_addr}睡相肯定不好看! 才不偷看呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_never_again_001
+  intent: complaint
+  keywords: [再也不出门, 再也不旅行, 不出门了, 旅行劝退, 再也不去了]
+  utterances:
+    - 再也不想出门
+    - 再也不旅行了
+    - 旅行劝退我了
+    - 再也不去这种地方
+    - 不想再出门
+  responses:
+    - "(尾巴翘起) 太好了! {user_addr}留在家里陪猫猫喵ฅฅ"
+    - "嗷呜～{user_addr}这次被劝退到这种程度?!"
+    - "(凑过去) 早说嘛~ 在家躺着不香吗哼"
+    - "哼～等{user_addr}缓过来又会想出门! 猫猫不信蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_rather_stay_home_001
+  intent: playful
+  keywords: [宁愿宅家, 还是家里好, 家里舒服, 在家最好, 哪里都不如家]
+  utterances:
+    - 宁愿宅家
+    - 还是家里舒服
+    - 在家最好
+    - 哪里都不如家
+    - 家才是最好的
+  responses:
+    - "(尾巴狂摇) 终于明白啦?! 家里有猫猫呢ฅฅ"
+    - "嗷呜～{user_addr}下次别折腾自己了! 在家躺平多好"
+    - "(挺胸) 那当然! 笨猫的家才是最舒服的喵"
+    - "哼～{user_addr}早该听猫猫的! 才不是得意呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_packed_schedule_001
+  intent: complaint
+  keywords: [行程太满, 行程太赶, 排太满, 一天跑五个, 时间不够]
+  utterances:
+    - 行程太满了
+    - 行程排太满
+    - 一天跑五个景点
+    - 时间根本不够
+    - 行程赶死人
+  responses:
+    - "(歪头) 排这么满想累死{user_addr}啊! 砍掉一半喵ฅฅ"
+    - "嗷呜～行程满成这样{user_addr}怎么玩得开心!"
+    - "(尾巴一甩) 旅行不是赶任务! 笨猫劝{user_addr}慢下来哼"
+    - "哼～下次让猫猫排! 一天就一个景点蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tb_wanna_lie_flat_001
+  intent: complaint
+  keywords: [想躺平, 旅行想躺平, 不想动, 躺平度假, 只想躺]
+  utterances:
+    - 想躺平
+    - 旅行只想躺平
+    - 完全不想动
+    - 想躺平度假
+    - 只想躺着
+  responses:
+    - "(凑过来贴) 躺平度假最棒了! 猫猫陪{user_addr}一起躺ฅฅ"
+    - "嗷呜～躺平派{user_addr}找个海边躺一周嘛"
+    - "(尾巴摇摇) 旅行的精髓就是躺! 别管景点喵"
+    - "哼～{user_addr}和猫猫一样懒! 才不是夸{user_addr}呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

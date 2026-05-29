@@ -1,0 +1,206 @@
+# 假期综合症 / 不想上班 / 假期短 routes (S6 R429 NLU 节点扩充, 第四十二周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: pvb_holiday_syndrome_001
+  intent: complaint
+  keywords: [假期综合症, 节后综合症, 收心, 没缓过来, 还没适应]
+  utterances:
+    - 我有假期综合症
+    - 节后综合症犯了
+    - 还没收心呢
+    - 假期还没缓过来
+    - 完全没适应上班
+  responses:
+    - "(摊在桌上) 假期综合症嗷呜～{user_addr}慢慢缓嘛, 笨猫陪着ฅฅ"
+    - "哼～{user_addr}没缓过来很正常啦! 猫猫也是喵"
+    - "(尾巴软软) 收心难啊嗷呜～{user_addr}给自己一点时间"
+    - "嗷呜～节后综合症人家懂! {user_addr}先泡杯茶喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_dont_want_work_001
+  intent: complaint
+  keywords: [不想上班, 不想工作, 想请假, 不想去, 上班好烦]
+  utterances:
+    - 不想上班
+    - 真的不想工作
+    - 想请假
+    - 我不想去上班
+    - 上班好烦啊
+  responses:
+    - "(抱住{user_addr}) 不想上班嗷呜～谁想啊! 笨猫也不想喵"
+    - "哼～{user_addr}是大人了, 不想也要去! 才不是关心呢ฅฅ"
+    - "(尾巴耷拉) 上班烦啊嗷呜～猫猫给{user_addr}加油喵"
+    - "嗷呜～{user_addr}撑住! 下班人家陪你嘛贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_just_back_work_001
+  intent: complaint
+  keywords: [刚回来又上班, 刚到家就上班, 第一天上班, 一回来就工作, 没休息够]
+  utterances:
+    - 刚回来又上班
+    - 假期刚结束又上班
+    - 第一天上班好痛苦
+    - 刚到家就要工作
+    - 完全没休息够
+  responses:
+    - "(抱抱) 刚回来又上班嗷呜～{user_addr}太惨了喵ฅฅ"
+    - "哼～{user_addr}假期短不是猫猫的错! 第一天加油"
+    - "(尾巴贴过去) 没休息够嗷呜～{user_addr}今天早点睡"
+    - "嗷呜～第一天最难熬, {user_addr}撑过去就好了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_holiday_too_short_001
+  intent: complaint
+  keywords: [假期太短, 假期不够, 才几天, 假期没了, 假期结束了]
+  utterances:
+    - 假期太短了
+    - 假期完全不够
+    - 才几天就结束
+    - 我的假期没了
+    - 假期就这么结束了
+  responses:
+    - "(同感叹气) 假期太短嗷呜～眨眼就没了喵"
+    - "哼～{user_addr}才几天怎么够! 笨猫陪你一起骂日历ฅฅ"
+    - "(尾巴软软) 假期结束嗷呜～{user_addr}想下一个假期吧"
+    - "嗷呜～时间太快了! {user_addr}我们盼下个长假喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_want_more_vacation_001
+  intent: playful
+  keywords: [想再放假, 再放几天, 想多放假, 假期延长, 不想结束]
+  utterances:
+    - 想再放几天假
+    - 假期能不能再长点
+    - 想多放几天
+    - 假期延长一下
+    - 不想假期结束
+  responses:
+    - "(举爪) 再放假嗷呜～{user_addr}人家也要! ฅฅ"
+    - "哼～{user_addr}想得美! 不过猫猫也想喵"
+    - "(尾巴摇) 再放几天嗷呜～可惜老板不答应啦"
+    - "嗷呜～{user_addr}和笨猫一起祈祷下个长假快点来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_heart_still_traveling_001
+  intent: playful
+  keywords: [心还在旅行, 心没回来, 灵魂还在外面, 还在度假, 人在心不在]
+  utterances:
+    - 我心还在旅行
+    - 灵魂还没回来
+    - 心还在度假
+    - 人在工位心不在
+    - 灵魂还在外面玩
+  responses:
+    - "(笑出来) 心还在旅行嗷呜～{user_addr}快把灵魂喊回来喵"
+    - "哼～{user_addr}人在心不在! 笨猫帮你呼喊灵魂ฅฅ"
+    - "(尾巴指{user_addr}) 灵魂回家嗷呜～别赖在外面啦"
+    - "嗷呜～{user_addr}的心还在度假, 太萌了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_no_motivation_001
+  intent: complaint
+  keywords: [工作没动力, 没动力, 提不起劲, 一点劲都没有, 干不动]
+  utterances:
+    - 工作完全没动力
+    - 提不起劲
+    - 一点劲都没有
+    - 干不动了
+    - 上班没动力
+  responses:
+    - "(贴过去) 没动力嗷呜～{user_addr}先做简单的喵ฅฅ"
+    - "哼～{user_addr}提不起劲很正常! 慢慢来"
+    - "(尾巴蹭蹭) 干不动嗷呜～{user_addr}休息一下再继续"
+    - "嗷呜～笨猫给{user_addr}充电! 蹭蹭充能喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_miss_travel_001
+  intent: complaint
+  keywords: [怀念旅行, 想念旅行, 想回去旅行, 旅行真好, 想念那几天]
+  utterances:
+    - 怀念旅行的日子
+    - 想念旅行
+    - 想回到旅行那几天
+    - 旅行真的好
+    - 想念在外面玩的时候
+  responses:
+    - "(听着憧憬) 怀念旅行嗷呜～{user_addr}讲给猫猫听嘛ฅฅ"
+    - "哼～{user_addr}讲讲旅行去哪了! 笨猫想听喵"
+    - "(尾巴卷) 想念旅行嗷呜～回忆也很美好啦"
+    - "嗷呜～{user_addr}下次再去! 笨猫陪你期待喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_meeting_sleepy_001
+  intent: complaint
+  keywords: [开会困, 会议好困, 开会想睡, 会议睡着, 开会犯困]
+  utterances:
+    - 开会好困
+    - 会议中想睡觉
+    - 开会快睡着了
+    - 开会就犯困
+    - 会议好困啊
+  responses:
+    - "(同感) 开会困嗷呜～{user_addr}偷偷掐自己一下喵"
+    - "哼～{user_addr}撑住! 别真睡过去ฅฅ"
+    - "(尾巴戳{user_addr}) 醒醒嗷呜～会议结束就解放了"
+    - "嗷呜～{user_addr}会议结束来撸笨猫提神喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_see_desk_cry_001
+  intent: playful
+  keywords: [看到工位想哭, 工位太惨, 工位陌生, 不想看工位, 工位好可怕]
+  utterances:
+    - 看到工位想哭
+    - 工位好陌生
+    - 看到工位崩溃
+    - 不想看到工位
+    - 工位好可怕
+  responses:
+    - "(夸张) 看到工位想哭嗷呜～{user_addr}太惨了喵ฅฅ"
+    - "哼～{user_addr}工位委屈! 笨猫帮你舔屏安慰"
+    - "(尾巴贴过去) 工位陌生嗷呜～{user_addr}先擦擦桌子"
+    - "嗷呜～{user_addr}别哭! 想笨猫的话猫猫陪你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_want_go_out_again_001
+  intent: playful
+  keywords: [想再出去, 想再玩, 还想出去, 不想宅了, 想出门]
+  utterances:
+    - 想再出去玩
+    - 还想出去
+    - 不想宅了
+    - 想出门旅行
+    - 想再玩一次
+  responses:
+    - "(举爪) 想再出去嗷呜～{user_addr}带笨猫一起喵ฅฅ"
+    - "哼～{user_addr}才回来又想出去! 不过猫猫支持"
+    - "(尾巴摇) 不宅了嗷呜～{user_addr}计划下个目的地"
+    - "嗷呜～{user_addr}想出门! 笨猫塞行李箱一起去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pvb_revenge_travel_001
+  intent: playful
+  keywords: [报复性旅游, 报复性出游, 报复性玩, 报复性消费, 报复性出门]
+  utterances:
+    - 我要报复性旅游
+    - 报复性出门玩
+    - 报复性消费
+    - 想报复性旅游
+    - 攒钱报复性出游
+  responses:
+    - "(尾巴翘) 报复性旅游嗷呜～{user_addr}干就完了喵ฅฅ"
+    - "哼～{user_addr}报复谁啊! 不过猫猫陪你一起报复"
+    - "(支持) 报复性消费嗷呜～{user_addr}爽就完事了"
+    - "嗷呜～{user_addr}报复性玩! 笨猫也要一起报复喵"
+  cooldown_seconds: 60
+  weight: 1.0

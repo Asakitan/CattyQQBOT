@@ -1,0 +1,206 @@
+# 精致露营 / glamping / 营地 routes (S6 R425 NLU 节点扩充, 第四十二周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cg_brand_001
+  intent: question
+  keywords: [推荐露营品牌, 推荐精致露营装备, 推荐露营户外品牌, 推荐 outdoor 品牌, 笨猫露营品牌]
+  utterances:
+    - 推荐露营品牌
+    - 推荐精致露营装备
+    - 推荐露营户外品牌
+    - 推荐 outdoor 品牌
+    - 笨猫露营品牌
+  responses:
+    - "嗷呜～{user_addr}Snow Peak (雪峰) - 日系顶级ฅฅ"
+    - "(尾巴翘) Coleman / Nordisk / MSR"
+    - "{user_addr}Helinox / Black Diamond"
+    - "(挺胸) 笨猫推荐: Snow Peak 颜值天花板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_tent_001
+  intent: question
+  keywords: [推荐帐篷, 推荐 Snow Peak 帐篷, 推荐 Coleman 帐篷, 推荐 Nordisk 帐篷, 笨猫帐篷]
+  utterances:
+    - 推荐帐篷
+    - 推荐 Snow Peak 帐篷
+    - 推荐 Coleman 帐篷
+    - 推荐 Nordisk 帐篷
+    - 笨猫帐篷
+  responses:
+    - "嗷呜～{user_addr}Snow Peak Land Breeze - 日系经典ฅฅ"
+    - "(尾巴翘) Nordisk Asgard - 北欧棉布"
+    - "{user_addr}Coleman / MSR - 性价比"
+    - "(挺胸) 笨猫推荐: Nordisk 棉布帐颜值爆表!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_chair_001
+  intent: question
+  keywords: [推荐露营椅, 推荐 Helinox, 推荐月亮椅, 推荐折叠椅, 笨猫露营椅]
+  utterances:
+    - 推荐露营椅
+    - 推荐 Helinox
+    - 推荐月亮椅
+    - 推荐折叠椅
+    - 笨猫露营椅
+  responses:
+    - "嗷呜～{user_addr}Helinox Chair One - 露营椅之王ฅฅ"
+    - "(尾巴翘) Helinox Sunset / Beach"
+    - "{user_addr}Snow Peak 月亮椅 - 颜值高"
+    - "(挺胸) 笨猫推荐: Helinox 轻便又舒服!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_site_001
+  intent: question
+  keywords: [推荐营地, 推荐露营营地, 推荐户外平台, 推荐露营地预订, 笨猫营地]
+  utterances:
+    - 推荐营地
+    - 推荐露营营地
+    - 推荐户外平台
+    - 推荐露营地预订
+    - 笨猫营地
+  responses:
+    - "嗷呜～{user_addr}大热荒野 / ABC Camping - 国内ฅฅ"
+    - "(尾巴翘) 路远营地 / 嗨king野奢营地"
+    - "{user_addr}小红书搜城市+露营"
+    - "(挺胸) 笨猫推荐: 大热荒野连锁稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_food_001
+  intent: question
+  keywords: [推荐露营美食, 推荐露营食谱, 推荐户外烹饪, 推荐露营菜单, 笨猫露营美食]
+  utterances:
+    - 推荐露营美食
+    - 推荐露营食谱
+    - 推荐户外烹饪
+    - 推荐露营菜单
+    - 笨猫露营美食
+  responses:
+    - "嗷呜～{user_addr}烤肉 + 烤棉花糖 - 经典ฅฅ"
+    - "(尾巴翘) 铸铁锅炖菜 / 法棍三明治"
+    - "{user_addr}早餐 pancake / 户外咖啡"
+    - "(挺胸) 笨猫推荐: 铸铁锅一锅出!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_photo_001
+  intent: question
+  keywords: [推荐露营摄影, 推荐露营出片, 推荐露营拍照, 推荐露营 ins 风, 笨猫露营摄影]
+  utterances:
+    - 推荐露营摄影
+    - 推荐露营出片
+    - 推荐露营拍照
+    - 推荐露营 ins 风
+    - 笨猫露营摄影
+  responses:
+    - "嗷呜～{user_addr}黄昏帐篷剪影 - 最出片ฅฅ"
+    - "(尾巴翘) 夜晚串灯 / 篝火长曝光"
+    - "{user_addr}晨雾 / 帐篷内透光"
+    - "(挺胸) 笨猫推荐: 黄昏 magic hour 必拍!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_hot_001
+  intent: question
+  keywords: [推荐网红营地, 推荐人气营地, 推荐打卡营地, 推荐 ins 营地, 笨猫网红营地]
+  utterances:
+    - 推荐网红营地
+    - 推荐人气营地
+    - 推荐打卡营地
+    - 推荐 ins 营地
+    - 笨猫网红营地
+  responses:
+    - "嗷呜～{user_addr}莫干山 / 千岛湖 - 江浙沪ฅฅ"
+    - "(尾巴翘) 北京延庆 / 京郊营地"
+    - "{user_addr}成都金堂 / 大理苍山"
+    - "(挺胸) 笨猫推荐: 莫干山精致露营天花板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_checklist_001
+  intent: question
+  keywords: [推荐露营清单, 推荐露营装备清单, 推荐新手露营, 推荐露营必备, 笨猫露营清单]
+  utterances:
+    - 推荐露营清单
+    - 推荐露营装备清单
+    - 推荐新手露营
+    - 推荐露营必备
+    - 笨猫露营清单
+  responses:
+    - "嗷呜～{user_addr}帐篷 / 睡袋 / 防潮垫 - 三件套ฅฅ"
+    - "(尾巴翘) 桌椅 / 灯具 / 炉具"
+    - "{user_addr}急救包 / 头灯 / 雨具"
+    - "(挺胸) 笨猫推荐: 新手先租后买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_safety_001
+  intent: question
+  keywords: [推荐露营安全, 推荐露营防虫, 推荐露营防雨, 推荐户外防护, 笨猫露营安全]
+  utterances:
+    - 推荐露营安全
+    - 推荐露营防虫
+    - 推荐露营防雨
+    - 推荐户外防护
+    - 笨猫露营安全
+  responses:
+    - "嗷呜～{user_addr}防蚊液 (DEET) / 长袖裤ฅฅ"
+    - "(尾巴翘) 防水帐篷 / 地席 / 雨布"
+    - "{user_addr}急救包 / 蛇虫药"
+    - "(挺胸) 笨猫推荐: 安全第一别逞强!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cg_family_001
+  intent: question
+  keywords: [推荐亲子露营, 推荐家庭露营, 推荐带娃露营, 推荐儿童营地, 笨猫亲子露营]
+  utterances:
+    - 推荐亲子露营
+    - 推荐家庭露营
+    - 推荐带娃露营
+    - 推荐儿童营地
+    - 笨猫亲子露营
+  responses:
+    - "嗷呜～{user_addr}选拎包入住营地 - 省心ฅฅ"
+    - "(尾巴翘) 大热荒野 / 嗨king - 带娃友好"
+    - "{user_addr}白天活动 / 夜晚星空"
+    - "(挺胸) 笨猫推荐: 第一次带娃别折腾!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cg_rv_001
+  intent: question
+  keywords: [推荐房车, 推荐 RV 露营, 推荐房车租赁, 推荐房车营地, 笨猫房车]
+  utterances:
+    - 推荐房车
+    - 推荐 RV 露营
+    - 推荐房车租赁
+    - 推荐房车营地
+    - 笨猫房车
+  responses:
+    - "嗷呜～{user_addr}国内: 进口 Hymer / 国产上汽大通ฅฅ"
+    - "(尾巴翘) 租赁: 路途家 / 房车生活家"
+    - "{user_addr}房车营地: 配水电桩"
+    - "(挺胸) 笨猫推荐: 新手先租 7 天体验!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cg_overseas_001
+  intent: question
+  keywords: [推荐海外 glamping, 推荐帐篷酒店, 推荐野奢酒店, 推荐海外露营, 笨猫海外露营]
+  utterances:
+    - 推荐海外 glamping
+    - 推荐帐篷酒店
+    - 推荐野奢酒店
+    - 推荐海外露营
+    - 笨猫海外露营
+  responses:
+    - "嗷呜～{user_addr}非洲 Safari 帐篷酒店 - 顶级ฅฅ"
+    - "(尾巴翘) 蒙古包 / 北欧极光帐篷"
+    - "{user_addr}Under Canvas / Nayara Tented"
+    - "(挺胸) 笨猫推荐: 肯尼亚 Safari 一生一次!"
+  cooldown_seconds: 60
+  weight: 0.8

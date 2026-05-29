@@ -1,0 +1,206 @@
+# 跟团游 / 旅行社 / 老人团 routes (S6 R423 NLU 节点扩充, 第四十二周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: gt_platform_001
+  intent: question
+  keywords: [推荐跟团游平台, 推荐携程, 推荐凯撒, 推荐众信, 笨猫跟团平台]
+  utterances:
+    - 推荐跟团游平台
+    - 推荐携程
+    - 推荐凯撒
+    - 推荐众信
+    - 笨猫跟团平台
+  responses:
+    - "嗷呜～{user_addr}携程 / 飞猪 - 大平台ฅฅ"
+    - "(尾巴翘) 凯撒 / 众信 - 老牌旅行社"
+    - "{user_addr}途牛 / 同程 - 性价比"
+    - "(挺胸) 笨猫推荐: 携程入门稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_elderly_001
+  intent: question
+  keywords: [推荐老年人专项团, 推荐老人团, 推荐夕阳红, 推荐银发团, 笨猫老人团]
+  utterances:
+    - 推荐老年人专项团
+    - 推荐老人团
+    - 推荐夕阳红
+    - 推荐银发团
+    - 笨猫老人团
+  responses:
+    - "嗷呜～{user_addr}夕阳红 / 银发团 - 慢节奏ฅฅ"
+    - "(尾巴翘) 凯撒老年专列 / 中青旅"
+    - "{user_addr}注意: 看清购物点条款!"
+    - "(挺胸) 笨猫推荐: 给爸妈选 0 购物!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_premium_001
+  intent: question
+  keywords: [推荐高端定制团, 推荐私家团, 推荐小包团, 推荐 HHtravel, 笨猫高端团]
+  utterances:
+    - 推荐高端定制团
+    - 推荐私家团
+    - 推荐小包团
+    - 推荐 HHtravel
+    - 笨猫高端团
+  responses:
+    - "嗷呜～{user_addr}HHtravel 鸿鹄 - 顶奢ฅฅ"
+    - "(尾巴翘) 携程私家团 / 6 人小团"
+    - "{user_addr}定制猫 / 6 人友团"
+    - "(挺胸) 笨猫推荐: 小包团体验最好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_cruise_001
+  intent: question
+  keywords: [推荐邮轮团, 推荐皇家加勒比, 推荐歌诗达, 推荐 MSC, 笨猫邮轮]
+  utterances:
+    - 推荐邮轮团
+    - 推荐皇家加勒比
+    - 推荐歌诗达
+    - 推荐 MSC
+    - 笨猫邮轮
+  responses:
+    - "嗷呜～{user_addr}皇家加勒比 - 海洋号系列ฅฅ"
+    - "(尾巴翘) 歌诗达 / MSC / 公主"
+    - "{user_addr}日韩短线 3-5 天起!"
+    - "(挺胸) 笨猫推荐: 阳台房值得加钱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_photo_001
+  intent: question
+  keywords: [推荐摄影团, 推荐主题旅行, 推荐风光团, 推荐人文摄影, 笨猫摄影团]
+  utterances:
+    - 推荐摄影团
+    - 推荐主题旅行
+    - 推荐风光团
+    - 推荐人文摄影
+    - 笨猫摄影团
+  responses:
+    - "嗷呜～{user_addr}行行摄色 / 色影无忌团ฅฅ"
+    - "(尾巴翘) 中艺摄影 / 图虫旅拍"
+    - "{user_addr}冰岛极光 / 西藏阿里 / 喀纳斯"
+    - "(挺胸) 笨猫推荐: 跟队领队带最爽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_outdoor_001
+  intent: question
+  keywords: [推荐户外团, 推荐徒步营, 推荐磨房, 推荐绿野, 笨猫户外团]
+  utterances:
+    - 推荐户外团
+    - 推荐徒步营
+    - 推荐磨房
+    - 推荐绿野
+    - 笨猫户外团
+  responses:
+    - "嗷呜～{user_addr}磨房 / 绿野 / 8264ฅฅ"
+    - "(尾巴翘) 行知探索 / 凯乐石越野"
+    - "{user_addr}雨崩 / EBC / 鳌太线"
+    - "(挺胸) 笨猫推荐: 量力而行别贪线!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_honeymoon_001
+  intent: question
+  keywords: [推荐蜜月专项, 推荐蜜月团, 推荐马代蜜月, 推荐巴厘蜜月, 笨猫蜜月]
+  utterances:
+    - 推荐蜜月专项
+    - 推荐蜜月团
+    - 推荐马代蜜月
+    - 推荐巴厘蜜月
+    - 笨猫蜜月
+  responses:
+    - "嗷呜～{user_addr}马代 / 巴厘 / 大溪地ฅฅ"
+    - "(尾巴翘) 凯撒蜜月 / 携程私家蜜月"
+    - "{user_addr}水屋 + 浮潜 + 海钓套餐"
+    - "(挺胸) 笨猫推荐: 提前 3 个月订便宜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_study_001
+  intent: question
+  keywords: [推荐学生研学游, 推荐研学团, 推荐夏令营, 推荐游学, 笨猫研学]
+  utterances:
+    - 推荐学生研学游
+    - 推荐研学团
+    - 推荐夏令营
+    - 推荐游学
+    - 笨猫研学
+  responses:
+    - "嗷呜～{user_addr}世纪明德 / 新东方游学ฅฅ"
+    - "(尾巴翘) EF 海外游学 / 学而思营地"
+    - "{user_addr}北京清北 / 西安考古 / 海外名校"
+    - "(挺胸) 笨猫推荐: 选有教育资质的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_international_001
+  intent: question
+  keywords: [推荐国际跟团, 推荐欧洲团, 推荐日韩团, 推荐美加团, 笨猫国际团]
+  utterances:
+    - 推荐国际跟团
+    - 推荐欧洲团
+    - 推荐日韩团
+    - 推荐美加团
+    - 笨猫国际团
+  responses:
+    - "嗷呜～{user_addr}凯撒欧洲 / 众信美加ฅฅ"
+    - "(尾巴翘) JTB 日本 / 哈拿多乐韩国"
+    - "{user_addr}注意签证 + 小费 + 时差"
+    - "(挺胸) 笨猫推荐: 第一次出国跟团稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_private_vs_group_001
+  intent: question
+  keywords: [推荐私人游, 推荐跟团对比, 推荐自由行, 推荐半自助, 笨猫私人vs跟团]
+  utterances:
+    - 推荐私人游
+    - 推荐跟团对比
+    - 推荐自由行
+    - 推荐半自助
+    - 笨猫私人vs跟团
+  responses:
+    - "嗷呜～{user_addr}省心选跟团, 自由选自由行ฅฅ"
+    - "(尾巴翘) 半自助 = 机酒 + 自选行程"
+    - "{user_addr}老人/孩子跟团, 年轻人自由行"
+    - "(挺胸) 笨猫推荐: 看自己折腾能力!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_avoid_pit_001
+  intent: question
+  keywords: [推荐跟团避坑, 推荐防购物, 推荐0购物团, 推荐纯玩团, 笨猫跟团避坑]
+  utterances:
+    - 推荐跟团避坑
+    - 推荐防购物
+    - 推荐0购物团
+    - 推荐纯玩团
+    - 笨猫跟团避坑
+  responses:
+    - "嗷呜～{user_addr}认准 纯玩 / 0 购物 字样ฅฅ"
+    - "(尾巴翘) 看团费 - 太低必有坑!"
+    - "{user_addr}签合同前看清楚条款!"
+    - "(挺胸) 笨猫推荐: 一分钱一分货!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gt_contract_001
+  intent: question
+  keywords: [推荐跟团社签合同, 推荐旅游合同, 推荐合同要点, 推荐合同陷阱, 笨猫跟团合同]
+  utterances:
+    - 推荐跟团社签合同
+    - 推荐旅游合同
+    - 推荐合同要点
+    - 推荐合同陷阱
+    - 笨猫跟团合同
+  responses:
+    - "嗷呜～{user_addr}必看: 行程 + 住宿 + 餐标ฅฅ"
+    - "(尾巴翘) 退团条款 / 自费项目清单"
+    - "{user_addr}保留发票 + 合同复印件!"
+    - "(挺胸) 笨猫推荐: 签前拍照存证!"
+  cooldown_seconds: 60
+  weight: 1.0

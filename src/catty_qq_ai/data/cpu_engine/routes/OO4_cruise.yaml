@@ -1,0 +1,206 @@
+# 邮轮 / Cruise / 加勒比地中海 routes (S6 R426 NLU 节点扩充, 第四十二周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cr_caribbean_001
+  intent: question
+  keywords: [推荐加勒比邮轮, 推荐皇家加勒比, 推荐加勒比海, 推荐 Royal Caribbean, 笨猫加勒比邮轮]
+  utterances:
+    - 推荐加勒比邮轮
+    - 推荐皇家加勒比
+    - 推荐加勒比海
+    - 推荐 Royal Caribbean
+    - 笨猫加勒比邮轮
+  responses:
+    - "嗷呜～{user_addr}皇家加勒比 / 海洋绿洲号ฅฅ"
+    - "(尾巴翘) 迈阿密出发 / 巴哈马 / 牙买加"
+    - "{user_addr}阳光沙滩 / 浮潜 / 海岛跳"
+    - "(挺胸) 笨猫推荐: 7 晚东加勒比!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_mediterranean_001
+  intent: question
+  keywords: [推荐地中海邮轮, 推荐 MSC, 推荐地中海, 推荐歌诗达, 笨猫地中海邮轮]
+  utterances:
+    - 推荐地中海邮轮
+    - 推荐 MSC
+    - 推荐地中海
+    - 推荐歌诗达
+    - 笨猫地中海邮轮
+  responses:
+    - "嗷呜～{user_addr}MSC 地中海邮轮 - 欧式ฅฅ"
+    - "(尾巴翘) 巴塞罗那 / 罗马 / 那不勒斯"
+    - "{user_addr}希腊岛 / 圣托里尼 / 米克诺斯"
+    - "(挺胸) 笨猫推荐: MSC Bellissima!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_alaska_001
+  intent: question
+  keywords: [推荐阿拉斯加邮轮, 推荐北极邮轮, 推荐冰川邮轮, 推荐阿拉斯加, 笨猫阿拉斯加]
+  utterances:
+    - 推荐阿拉斯加邮轮
+    - 推荐北极邮轮
+    - 推荐冰川邮轮
+    - 推荐阿拉斯加
+    - 笨猫阿拉斯加
+  responses:
+    - "嗷呜～{user_addr}阿拉斯加邮轮 - 冰川风光ฅฅ"
+    - "(尾巴翘) 西雅图 / 温哥华出发 / 5-9 月"
+    - "{user_addr}看鲸鱼 / 冰川崩塌 / 极光"
+    - "(挺胸) 笨猫推荐: 公主邮轮 7 晚!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_norway_001
+  intent: question
+  keywords: [推荐挪威峡湾邮轮, 推荐峡湾邮轮, 推荐北欧邮轮, 推荐挪威邮轮, 笨猫挪威峡湾]
+  utterances:
+    - 推荐挪威峡湾邮轮
+    - 推荐峡湾邮轮
+    - 推荐北欧邮轮
+    - 推荐挪威邮轮
+    - 笨猫挪威峡湾
+  responses:
+    - "嗷呜～{user_addr}挪威峡湾邮轮 - 仙境ฅฅ"
+    - "(尾巴翘) 盖朗厄尔 / 松恩峡湾 / 卑尔根"
+    - "{user_addr}夏季极昼 / 瀑布 / 极光"
+    - "(挺胸) 笨猫推荐: 海达路德 Hurtigruten!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_japan_korea_001
+  intent: question
+  keywords: [推荐日韩邮轮, 推荐日本邮轮, 推荐短期邮轮, 推荐近海邮轮, 笨猫日韩邮轮]
+  utterances:
+    - 推荐日韩邮轮
+    - 推荐日本邮轮
+    - 推荐短期邮轮
+    - 推荐近海邮轮
+    - 笨猫日韩邮轮
+  responses:
+    - "嗷呜～{user_addr}日韩邮轮 - 4-6 晚短途ฅฅ"
+    - "(尾巴翘) 上海 / 天津出发 / 福冈 / 济州"
+    - "{user_addr}免签上岛 / 购物 / 樱花季"
+    - "(挺胸) 笨猫推荐: MSC 荣耀号!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_yangtze_001
+  intent: question
+  keywords: [推荐长江邮轮, 推荐三峡邮轮, 推荐长江三峡, 推荐重庆邮轮, 笨猫长江邮轮]
+  utterances:
+    - 推荐长江邮轮
+    - 推荐三峡邮轮
+    - 推荐长江三峡
+    - 推荐重庆邮轮
+    - 笨猫长江邮轮
+  responses:
+    - "嗷呜～{user_addr}长江三峡邮轮 - 国内首选ฅฅ"
+    - "(尾巴翘) 重庆 - 宜昌 / 4-5 晚"
+    - "{user_addr}世纪 / 总统 / 美维 / 黄金"
+    - "(挺胸) 笨猫推荐: 世纪荣耀号顶级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_cabin_001
+  intent: question
+  keywords: [推荐邮轮房间, 推荐邮轮舱型, 推荐邮轮内舱, 推荐邮轮阳台, 笨猫邮轮舱型]
+  utterances:
+    - 推荐邮轮房间
+    - 推荐邮轮舱型
+    - 推荐邮轮内舱
+    - 推荐邮轮阳台
+    - 笨猫邮轮舱型
+  responses:
+    - "嗷呜～{user_addr}内舱 (便宜) / 海景 / 阳台ฅฅ"
+    - "(尾巴翘) 套房 Suite - 私人管家"
+    - "{user_addr}首推阳台舱 - 看海+预算适中"
+    - "(挺胸) 笨猫推荐: 中部楼层稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_food_001
+  intent: question
+  keywords: [推荐邮轮美食, 推荐邮轮餐厅, 推荐邮轮自助, 推荐邮轮吃的, 笨猫邮轮美食]
+  utterances:
+    - 推荐邮轮美食
+    - 推荐邮轮餐厅
+    - 推荐邮轮自助
+    - 推荐邮轮吃的
+    - 笨猫邮轮美食
+  responses:
+    - "嗷呜～{user_addr}主餐厅 (含) / 自助 24h ฅฅ"
+    - "(尾巴翘) 特色餐厅 - 牛排 / 日料 / 意餐"
+    - "{user_addr}下午茶 / 龙虾夜 / 船长晚宴"
+    - "(挺胸) 笨猫推荐: 抢主餐厅靠窗位!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_kids_001
+  intent: question
+  keywords: [推荐邮轮亲子, 推荐邮轮儿童, 推荐家庭邮轮, 推荐亲子邮轮, 笨猫邮轮亲子]
+  utterances:
+    - 推荐邮轮亲子
+    - 推荐邮轮儿童
+    - 推荐家庭邮轮
+    - 推荐亲子邮轮
+    - 笨猫邮轮亲子
+  responses:
+    - "嗷呜～{user_addr}皇家加勒比 - 攀岩+水滑梯ฅฅ"
+    - "(尾巴翘) 迪士尼邮轮 - 公主天堂"
+    - "{user_addr}儿童俱乐部 / 卡通见面会"
+    - "(挺胸) 笨猫推荐: 海洋奇迹号亲子神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_budget_001
+  intent: question
+  keywords: [推荐邮轮预算, 推荐邮轮全包, 推荐邮轮价格, 推荐便宜邮轮, 笨猫邮轮预算]
+  utterances:
+    - 推荐邮轮预算
+    - 推荐邮轮全包
+    - 推荐邮轮价格
+    - 推荐便宜邮轮
+    - 笨猫邮轮预算
+  responses:
+    - "嗷呜～{user_addr}日韩短途 3-5k / 人ฅฅ"
+    - "(尾巴翘) 加勒比 7 晚 1-2 万 / 人"
+    - "{user_addr}地中海 8 晚 1.5-3 万 / 人"
+    - "(挺胸) 笨猫推荐: 算上小费+岸上游!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_season_001
+  intent: question
+  keywords: [推荐邮轮季节, 推荐邮轮时间, 推荐邮轮淡季, 推荐邮轮旺季, 笨猫邮轮季节]
+  utterances:
+    - 推荐邮轮季节
+    - 推荐邮轮时间
+    - 推荐邮轮淡季
+    - 推荐邮轮旺季
+    - 笨猫邮轮季节
+  responses:
+    - "嗷呜～{user_addr}加勒比 12-4 月最佳ฅฅ"
+    - "(尾巴翘) 地中海 5-10 月 / 阿拉斯加 5-9"
+    - "{user_addr}避飓风季 8-10 月加勒比"
+    - "(挺胸) 笨猫推荐: 错开寒暑假便宜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_entertainment_001
+  intent: question
+  keywords: [推荐邮轮节目, 推荐邮轮表演, 推荐邮轮赌场, 推荐邮轮娱乐, 笨猫邮轮节目]
+  utterances:
+    - 推荐邮轮节目
+    - 推荐邮轮表演
+    - 推荐邮轮赌场
+    - 推荐邮轮娱乐
+    - 笨猫邮轮节目
+  responses:
+    - "嗷呜～{user_addr}百老汇大秀 / 杂技 / 冰秀ฅฅ"
+    - "(尾巴翘) 赌场 / 酒吧 / 夜店 / KTV"
+    - "{user_addr}泳池派对 / 主题之夜 / 化装舞会"
+    - "(挺胸) 笨猫推荐: 提前订热门秀位!"
+  cooldown_seconds: 60
+  weight: 1.0
