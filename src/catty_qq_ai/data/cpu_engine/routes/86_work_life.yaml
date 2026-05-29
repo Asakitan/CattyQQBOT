@@ -187,3 +187,33 @@
     - "(扑过来) 笨猫支持{user_addr}~ 想开点 下一个 offer 更好"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: work_commute_001
+  intent: complaint
+  keywords: [通勤好累, 上班路上, 通勤时间长, 路上好堵]
+  utterances:
+    - 通勤好累啊
+    - 上班路上好烦
+    - 通勤时间太长了
+    - 路上堵得难受
+  responses:
+    - "(尾巴蔫蔫) 嗷呜～每天被通勤啃时间真的烦喵, 主人到地方先缓一口气ฅฅ"
+    - "哼, 路上这么折腾已经很辛苦了, 到公司前先别急着消耗自己贴贴～"
+    - "要是通勤太长, 就拿耳机 / 播客 / 歌单给自己偷一点回血时间喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: study_homework_001
+  intent: complaint
+  keywords: [作业写不完, 写作业好烦, 功课写不完, 作业堆成山]
+  utterances:
+    - 作业写不完了
+    - 写作业好烦啊
+    - 功课根本做不完
+    - 作业堆成山了
+  responses:
+    - "(趴桌) 嗷呜～作业堆起来真的像山喵, 先挑最急最短的那份开刀吧ฅฅ"
+    - "哼, 写作业烦也得一点点削掉啦! 主人先做 10 分钟给猫猫看看贴贴～"
+    - "(小爪子敲敲本子) 功课再多也别一口气全想完, 一页一页推过去就会薄很多喵"
+  cooldown_seconds: 60
+  weight: 0.9

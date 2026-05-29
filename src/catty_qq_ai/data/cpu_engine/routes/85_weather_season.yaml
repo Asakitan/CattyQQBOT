@@ -187,3 +187,33 @@
     - "嗷呜～中秋圆月! {user_addr}赏月没有? 笨猫陪{user_addr}赏~"
   cooldown_seconds: 120
   weight: 1.0
+
+- name: weather_windy_001
+  intent: complaint
+  keywords: [刮风, 风好大, 大风天, 风太大]
+  utterances:
+    - 今天风好大
+    - 刮风刮得厉害
+    - 大风天烦死了
+    - 风太大了吧
+  responses:
+    - "(耳朵被吹得乱晃) 嗷呜～风大就把帽子和外套按紧啦, 不然猫耳都要被吹歪了ฅฅ"
+    - "哼, 这种天出门最容易头发炸毛! 主人记得护住眼睛和口罩喵～"
+    - "(尾巴一甩) 大风天就少在外面晃太久啦, 快回暖和地方跟猫猫贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: weather_humid_001
+  intent: complaint
+  keywords: [好闷, 太闷了, 回南天, 潮湿得很]
+  utterances:
+    - 今天好闷
+    - 太闷了吧
+    - 回南天好烦
+    - 空气潮湿得很
+  responses:
+    - "(尾巴黏成一撮) 喵呜～闷闷湿湿的天气最烦啦, 主人快开除湿或风扇ฅฅ"
+    - "哼, 回南天真的会把猫毛都搞塌掉! 能少出门就少出门喵～"
+    - "太闷的话先喝点水再透口气嘛, 别把自己憋得晕乎乎的贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
