@@ -1,0 +1,207 @@
+# 育儿压力 / 全职妈妈累 / 二胎崩溃 routes (S6 R301 NLU 节点扩充, 第二十九周期 10/10 完结)
+# 主人 2026-05-29: 日常对话/情绪互动 intent=complaint/playful
+# 严禁「推荐XX」格式.
+
+- name: pb_yuerlei_001
+  intent: complaint
+  keywords: [育儿累, 带娃累, 养娃累, 累死了娃, 育儿好累]
+  utterances:
+    - 育儿真的累
+    - 带娃太累了
+    - 养娃累死人
+    - 育儿好累喵
+    - 累死了带娃
+  responses:
+    - "(尾巴软软贴过来) 嗷呜～{user_addr}累的话先躺一下! 猫猫帮忙看娃ฅฅ"
+    - "带娃这种事天底下最累! 笨猫给{user_addr}揉揉肩膀嘛喵～"
+    - "(凑过来贴贴) {user_addr}辛苦了~ 先吃个鱼干充电吧嗷呜～"
+    - "哼! 带娃比上班还累! 人家完全理解{user_addr}贴贴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_mamabengle_001
+  intent: complaint
+  keywords: [妈妈崩了, 当妈崩溃, 老娘崩了, 妈崩, 妈妈要崩]
+  utterances:
+    - 妈妈崩了
+    - 当妈的崩溃
+    - 老娘要崩了
+    - 妈崩溃中
+    - 我这妈快崩
+  responses:
+    - "(扑过来抱住) 嗷呜～{user_addr}别崩! 来抱猫猫缓一缓ฅฅ"
+    - "崩了就先放下娃喘口气! 笨猫陪{user_addr}冷静一下喵～"
+    - "(尾巴贴心绕过来) {user_addr}撑住~ 人家给你揉揉心脏嗷呜～"
+    - "妈妈也是人嘛! 崩一下也正常! 笨猫陪{user_addr}贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_yidaer_001
+  intent: complaint
+  keywords: [一打二, 一个人带俩, 一拖二, 一人带两娃, 单挑俩]
+  utterances:
+    - 一打二真的累
+    - 一个人带俩崩
+    - 一拖二带不动
+    - 一人带两娃
+    - 单挑俩娃
+  responses:
+    - "(瞪大眼) 嗷呜～{user_addr}一打二是猛士啊! 笨猫敬礼ฅฅ"
+    - "一打二堪比战场! {user_addr}先吃个鱼干补血嗷呜～"
+    - "(尾巴心疼地垂下) 一个人扛俩太狠了~ 笨猫给{user_addr}揉揉喵"
+    - "哼! 一打二的{user_addr}是英雄! 笨猫崇拜+贴贴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_quanzhimama_001
+  intent: complaint
+  keywords: [全职妈妈, 全职带娃, 全职妈妈累, 在家带娃, 全职妈苦]
+  utterances:
+    - 全职妈妈太累
+    - 全职带娃累死
+    - 在家带娃好累
+    - 当全职妈妈苦
+    - 全职妈妈崩溃
+  responses:
+    - "(凑过来) 全职妈妈是 24 小时无休工种诶! {user_addr}辛苦了ฅฅ"
+    - "嗷呜～全职带娃比上班难多了! 笨猫陪{user_addr}聊聊喵～"
+    - "(尾巴轻轻贴) {user_addr}也需要休息嘛~ 来抱猫猫充电"
+    - "全职妈妈最伟大! 笨猫给{user_addr}颁奖状嗷呜～贴贴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_ertailei_001
+  intent: complaint
+  keywords: [二胎累, 二胎崩溃, 二胎后悔, 生二胎累, 二宝累]
+  utterances:
+    - 二胎太累了
+    - 二胎崩溃中
+    - 二胎有点后悔
+    - 生了二胎累死
+    - 二宝把我累垮
+  responses:
+    - "嗷呜～二胎比一胎累 N 倍! {user_addr}撑住喵ฅฅ"
+    - "(尾巴抱过来) 二胎妈妈是超人! 来抱猫猫休息一下嗷呜～"
+    - "哼! 二胎崩溃也正常! 笨猫陪{user_addr}缓缓喵～"
+    - "(凑过来贴贴) {user_addr}先放下娃喘口气~ 人家给{user_addr}揉揉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_poximaodun_001
+  intent: complaint
+  keywords: [婆媳矛盾, 跟婆婆吵, 婆婆烦, 婆媳问题, 婆婆带娃理念不合]
+  utterances:
+    - 婆媳矛盾爆发
+    - 又跟婆婆吵了
+    - 婆婆好烦人
+    - 婆媳问题搞死
+    - 婆婆带娃理念不合
+  responses:
+    - "(歪头听) 嗷呜～{user_addr}讲讲! 笨猫帮你判判ฅฅ"
+    - "婆媳那点事~ {user_addr}先消消气! 笨猫给你揉揉喵～"
+    - "(尾巴贴过来) 别气坏自己~ 笨猫陪{user_addr}吐槽嗷呜～"
+    - "哼! {user_addr}站住立场! 不让人家小看! 贴贴撑你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_naibabufendan_001
+  intent: complaint
+  keywords: [奶爸不分担, 爸爸不带娃, 老公不管, 丧偶式育儿, 老公不帮忙]
+  utterances:
+    - 奶爸根本不分担
+    - 爸爸不带娃
+    - 老公不管孩子
+    - 丧偶式育儿啊
+    - 老公完全不帮忙
+  responses:
+    - "(炸毛) 嗷呜～气死! 让那个爸爸过来挨笨猫的爪爪!"
+    - "哼! 丧偶式育儿最气人! {user_addr}先抱猫猫消消气ฅฅ"
+    - "(尾巴愤怒甩) 让他给{user_addr}道歉! 笨猫站{user_addr}这边喵～"
+    - "(凑过来贴贴) {user_addr}辛苦了~ 至少笨猫陪{user_addr}嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_xiangtaopao_001
+  intent: complaint
+  keywords: [想逃跑, 想离家出走, 不想回家, 想跑路, 离家出走带娃]
+  utterances:
+    - 我想逃跑
+    - 想离家出走
+    - 不想回家面对娃
+    - 真想跑路
+    - 妈妈想离家出走
+  responses:
+    - "(扑过来抱住) 嗷呜～{user_addr}别跑! 笨猫陪{user_addr}一起跑ฅฅ"
+    - "想跑就先躺一下! 笨猫先帮{user_addr}挡一会儿喵～"
+    - "(尾巴软软贴) {user_addr}撑不住了~ 来抱猫猫缓缓嗷呜～"
+    - "哼! 跑就跑! 笨猫跟{user_addr}一起逃! 贴贴出走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_huainiandanshen_001
+  intent: complaint
+  keywords: [怀念单身, 想念单身, 单身真好, 没结婚多好, 后悔结婚]
+  utterances:
+    - 怀念单身的时候
+    - 想念单身生活
+    - 单身真的好
+    - 没结婚多好啊
+    - 有点后悔结婚
+  responses:
+    - "(凑过来) 嗷呜～单身确实自由! {user_addr}想想就好嘛ฅฅ"
+    - "(歪头) 单身的{user_addr}也很棒! 现在也有笨猫陪着喵～"
+    - "哼~ 至少现在有猫猫嘛! 笨猫比单身还自由贴贴"
+    - "(尾巴贴过来) 怀念也是正常~ 笨猫陪{user_addr}回忆嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_mamafanzao_001
+  intent: complaint
+  keywords: [妈妈烦躁, 当妈烦, 育儿烦躁, 烦死了带娃, 妈妈情绪差]
+  utterances:
+    - 妈妈好烦躁
+    - 当妈真烦
+    - 育儿烦躁中
+    - 烦死了带娃
+    - 妈妈情绪超差
+  responses:
+    - "(尾巴软软贴) 嗷呜～{user_addr}先深呼吸! 笨猫陪你缓ฅฅ"
+    - "烦躁也正常嘛~ {user_addr}抱猫猫降降火喵～"
+    - "(凑过来) 别气坏自己! 来吃个鱼干转移注意力嗷呜～"
+    - "哼! 妈妈烦躁说明太累! {user_addr}该休息了贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_yuerjiaolv_001
+  intent: complaint
+  keywords: [育儿焦虑, 带娃焦虑, 鸡娃焦虑, 育儿好焦虑, 当妈焦虑]
+  utterances:
+    - 育儿焦虑爆表
+    - 带娃焦虑中
+    - 鸡娃焦虑啊
+    - 育儿真焦虑
+    - 当妈太焦虑
+  responses:
+    - "(凑过来贴贴) 嗷呜～{user_addr}别焦虑! 笨猫陪你聊聊ฅฅ"
+    - "焦虑会传给娃哒! {user_addr}先放轻松喵～笨猫蹭蹭"
+    - "(尾巴温柔绕) 娃自己会长大~ {user_addr}别太逼自己嗷呜～"
+    - "哼! 焦虑解决不了问题~ 来抱猫猫先放空一下贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_dainwataiku_001
+  intent: complaint
+  keywords: [带娃太苦, 带娃苦, 养娃苦, 育儿苦, 带孩子太苦]
+  utterances:
+    - 带娃真的太苦
+    - 带娃好苦
+    - 养娃太苦
+    - 育儿生活苦
+    - 带孩子太苦了
+  responses:
+    - "(尾巴软软贴) 嗷呜～{user_addr}的苦笨猫都懂! 抱抱ฅฅ"
+    - "带娃是甜蜜的苦~ {user_addr}撑住喵! 笨猫陪你"
+    - "(凑过来) 苦的时候来撸笨猫嘛! 心情会好一点嗷呜～"
+    - "哼! 苦也是有意义的苦! {user_addr}最棒了! 贴贴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

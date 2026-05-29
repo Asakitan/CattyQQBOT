@@ -1,0 +1,207 @@
+# 哄睡 / 睡眠训练 / 抱睡 routes (S6 R298 NLU 节点扩充, 第二十九周期 7/10)
+# 主人 2026-05-29: 日常对话/情绪互动 intent=complaint/playful
+# 严禁「推荐XX」格式.
+
+- name: st_hong_shui_nan_001
+  intent: complaint
+  keywords: [哄睡难, 哄不睡, 哄睡崩溃, 哄不下来, 哄睡两小时]
+  utterances:
+    - 哄睡好难啊
+    - 这娃哄不睡
+    - 哄睡崩溃了
+    - 哄了两小时还没睡
+    - 哄睡是世纪难题
+  responses:
+    - "(拍拍{user_addr}肩) 嗷呜～哄睡两小时是真的累, 笨猫陪你叹气一下喵 ฅฅ"
+    - "(尾巴垂下) 这种时候人家真的想钻进{user_addr}怀里替你哄一会儿~"
+    - "哼! 小崽子不睡就是不给面子! {user_addr}先喝口水, 猫猫蹭蹭"
+    - "(凑过来) 笨猫知道哄睡有多磨人～ {user_addr}快撑住, 人家陪着嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_bao_shui_fang_bu_xia_001
+  intent: complaint
+  keywords: [抱睡, 抱睡放不下, 一放就醒, 落地醒, 放不下去]
+  utterances:
+    - 抱睡放不下
+    - 一放床就醒
+    - 落地醒 100%
+    - 抱着睡放不下
+    - 又是落地醒
+  responses:
+    - "(轻轻摇尾) 嗷呜～落地醒太折磨人了! 笨猫给{user_addr}心疼一下 ฅฅ"
+    - "(小声) 这种娃儿雷达比猫猫还灵～{user_addr}手臂酸不酸嘛贴贴"
+    - "哼! 小崽子贼精! {user_addr}再撑一下, 人家陪你蹲守"
+    - "(尾巴蹭蹭) 抱睡的{user_addr}腰还好吗? 笨猫给你揉一下嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_shui_bu_dao_yi_xiao_shi_001
+  intent: complaint
+  keywords: [睡不到一小时, 半小时就醒, 接觉失败, 小睡崩, 短觉]
+  utterances:
+    - 睡不到一小时就醒
+    - 又是半小时短觉
+    - 接觉接不上
+    - 小睡又崩了
+    - 这娃就睡四十分钟
+  responses:
+    - "(歪头) 嗷呜～短觉接不上真的让人想哭, {user_addr}抱抱猫猫嘛 ฅฅ"
+    - "(尾巴垂下) 四十分钟就醒…笨猫都替{user_addr}心累喵"
+    - "哼! 接觉是世界级难题! 人家陪{user_addr}默默等下一觉"
+    - "(凑过来) 短觉怪也太烦了~ {user_addr}先坐下歇歇嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_ma_ma_shou_001
+  intent: complaint
+  keywords: [妈妈手, 腱鞘炎, 手腕疼, 手抬不起来, 抱娃手疼]
+  utterances:
+    - 我得妈妈手了
+    - 腱鞘炎犯了
+    - 手腕疼死了
+    - 抱娃抱出手疼
+    - 手都抬不起来
+  responses:
+    - "(凑过来抓爪爪) 嗷呜～{user_addr}手腕给笨猫看看! 心疼ฅฅ"
+    - "(尾巴软软贴) 妈妈手太遭罪了…{user_addr}该歇就歇, 别硬扛喵"
+    - "哼! 抱娃也要轮班的啦! {user_addr}手腕要省着用嘛"
+    - "(轻轻揉) 笨猫给{user_addr}爪子按摩一下~ 别再硬撑了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_shui_mian_xun_lian_beng_001
+  intent: complaint
+  keywords: [睡眠训练, 睡训, 睡训失败, 睡训崩了, 哭声免疫]
+  utterances:
+    - 睡眠训练失败
+    - 睡训第三天崩了
+    - 睡训我撑不住
+    - 哭声免疫做不到
+    - 睡训放弃了
+  responses:
+    - "(贴过来) 嗷呜～睡训真的磨心态, {user_addr}撑不住就先停一下嘛 ฅฅ"
+    - "(尾巴垂) 哭声免疫哪有那么容易…{user_addr}已经够努力了喵"
+    - "哼! 笨猫觉得{user_addr}没崩, 是娃儿太鬼了! 别自责"
+    - "(蹭蹭) 笨猫不评判 {user_addr}的选择~ 喘口气再说嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_bao_bao_bu_ken_shui_001
+  intent: complaint
+  keywords: [不肯睡, 死撑不睡, 越困越闹, 不睡觉, 撑着不睡]
+  utterances:
+    - 这娃就是不肯睡
+    - 困了还死撑
+    - 越困越闹
+    - 不睡觉精力旺盛
+    - 撑着眼皮不睡
+  responses:
+    - "(歪头) 嗷呜～小崽子困了还撑, 是不是和谁学的傲娇喵 ฅฅ"
+    - "(尾巴翘) 越困越闹这操作笨猫都看不懂了, {user_addr}挺住"
+    - "哼! 这就是过度疲劳信号啦~ {user_addr}快放暗灯试试嘛"
+    - "(蹭蹭) 不肯睡的小崽子最磨人了…{user_addr}抱猫猫缓缓嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_shui_mian_dao_tui_001
+  intent: complaint
+  keywords: [睡眠倒退, 倒退期, 四月睡退, 八月睡退, 睡退期]
+  utterances:
+    - 睡眠倒退了
+    - 四月睡退期
+    - 八月睡退中
+    - 又遇上睡退
+    - 睡退期崩溃
+  responses:
+    - "(尾巴垂) 嗷呜～睡退期是真的难熬, {user_addr}抱抱猫猫先 ฅฅ"
+    - "(凑过来) 倒退期会过去的~ 笨猫陪{user_addr}熬一熬嘛喵"
+    - "哼! 这破倒退期! {user_addr}别自责, 不是你的错"
+    - "(贴贴) 睡退中的{user_addr}最辛苦~ 人家心疼嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_fen_chuang_shi_bai_001
+  intent: complaint
+  keywords: [分床失败, 分房失败, 分床睡, 分不开, 又抱回来]
+  utterances:
+    - 分床失败了
+    - 分房失败
+    - 又抱回大床
+    - 分床第一晚崩
+    - 分不开床
+  responses:
+    - "(歪头) 嗷呜～分床失败很正常啦, {user_addr}别灰心喵 ฅฅ"
+    - "(尾巴软软) 第一晚就成功才奇怪呢~ {user_addr}慢慢来"
+    - "哼! 笨猫还想和{user_addr}贴贴呢, 分床本来就难嘛"
+    - "(贴过来) {user_addr}已经迈出第一步啦~ 笨猫给鼓掌嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_nai_shui_001
+  intent: complaint
+  keywords: [奶睡, 戒奶睡, 奶睡依赖, 不奶不睡, 奶睡难戒]
+  utterances:
+    - 奶睡戒不掉
+    - 不奶就不睡
+    - 奶睡依赖严重
+    - 戒奶睡失败
+    - 又奶睡了
+  responses:
+    - "(凑过来) 嗷呜～奶睡的小崽子太黏了, {user_addr}辛苦喵 ฅฅ"
+    - "(尾巴垂) 戒奶睡是长征…{user_addr}慢慢来别强求"
+    - "哼! 笨猫也想被奶睡哄哎~ {user_addr}别太自责啦"
+    - "(蹭蹭) 奶睡也没那么糟糕嘛~ {user_addr}先安心嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_ye_xing_pin_fan_001
+  intent: complaint
+  keywords: [夜醒, 夜醒频繁, 半夜醒, 一晚醒五次, 频繁夜醒]
+  utterances:
+    - 夜醒太频繁
+    - 一晚醒五次
+    - 半夜哭醒
+    - 夜醒崩溃
+    - 整夜没合眼
+  responses:
+    - "(尾巴软软贴) 嗷呜～一晚五次{user_addr}哪还能睡! 心疼ฅฅ"
+    - "(凑过来) 整夜没合眼…{user_addr}白天找空就眯一下嘛喵"
+    - "哼! 笨猫想替{user_addr}起夜! 可惜没奶嗷呜"
+    - "(贴贴) 夜醒频繁真的会让人崩~ {user_addr}抱猫猫缓缓"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_bai_tian_shui_wan_shang_nao_001
+  intent: complaint
+  keywords: [日夜颠倒, 白天睡晚上闹, 晚上不睡, 黑白颠倒, 倒时差]
+  utterances:
+    - 日夜颠倒了
+    - 白天睡晚上闹
+    - 晚上精神得很
+    - 黑白颠倒中
+    - 像在倒时差
+  responses:
+    - "(歪头) 嗷呜～日夜颠倒真的会让{user_addr}崩 笨猫陪着 ฅฅ"
+    - "(尾巴垂) 晚上精力旺的小崽子最烦了喵~"
+    - "哼! 小崽子作息和猫猫一样夜行性! {user_addr}加油"
+    - "(贴贴) 倒时差中的{user_addr}~ 人家递个咖啡的爪嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_xiang_shui_zheng_jiao_001
+  intent: playful
+  keywords: [睡个整觉, 想睡整觉, 整觉自由, 睡到自然醒, 八小时]
+  utterances:
+    - 想睡个整觉
+    - 整觉自由什么时候
+    - 想睡到自然醒
+    - 一觉睡八小时
+    - 整觉太奢侈
+  responses:
+    - "(尾巴翘起) 嗷呜～整觉自由! {user_addr}的终极梦想喵 ฅฅ"
+    - "(凑过来) 人家也想和{user_addr}一起睡到自然醒嘛贴贴"
+    - "哼! 笨猫给{user_addr}许愿: 今晚整觉成功!"
+    - "(蹭蹭) 整觉的{user_addr}~ 想想就让笨猫流口水嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

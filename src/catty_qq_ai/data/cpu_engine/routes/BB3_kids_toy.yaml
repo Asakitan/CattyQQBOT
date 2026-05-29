@@ -1,0 +1,207 @@
+# 儿童玩具 / 乐高 / 益智玩具 routes (S6 R295 NLU 节点扩充, 第二十九周期 4/10)
+# 主人 2026-05-29: intent=question 推荐型
+# 推荐型带笨猫语气.
+
+- name: kt_montessori_001
+  intent: question
+  keywords: [推荐益智玩具, 推荐蒙特梭利, 推荐 Montessori, 推荐早教玩具, 笨猫益智玩具]
+  utterances:
+    - 推荐益智玩具
+    - 推荐蒙特梭利
+    - 推荐 Montessori
+    - 推荐早教玩具
+    - 笨猫益智玩具
+  responses:
+    - "嗷呜～{user_addr}蒙特梭利 - 自主探索ฅฅ"
+    - "(尾巴翘) 形状配对 / 串珠 / 木质教具"
+    - "{user_addr}1-3 岁感官 / 3-6 岁数学"
+    - "(挺胸) 笨猫推荐: 木质蒙氏教具!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kt_lego_duplo_001
+  intent: question
+  keywords: [推荐乐高, 推荐 LEGO, 推荐 Duplo, 推荐得宝, 笨猫乐高]
+  utterances:
+    - 推荐乐高
+    - 推荐 LEGO
+    - 推荐 Duplo
+    - 推荐得宝
+    - 笨猫乐高
+  responses:
+    - "嗷呜～{user_addr}Duplo 得宝 - 1.5-5 岁ฅฅ"
+    - "(尾巴翘) LEGO Classic / City / Friends"
+    - "{user_addr}大颗粒不误食 / 经典百搭"
+    - "(挺胸) 笨猫推荐: Duplo 大盒装入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kt_magnetic_001
+  intent: question
+  keywords: [推荐磁力片, 推荐磁力球, 推荐 Magformers, 推荐 PicassoTiles, 笨猫磁力片]
+  utterances:
+    - 推荐磁力片
+    - 推荐磁力球
+    - 推荐 Magformers
+    - 推荐 PicassoTiles
+    - 笨猫磁力片
+  responses:
+    - "嗷呜～{user_addr}Magformers - 韩国原版ฅฅ"
+    - "(尾巴翘) PicassoTiles / 科乐思 - 性价比"
+    - "{user_addr}3D 立体 / 培养空间感"
+    - "(挺胸) 笨猫推荐: 100 片入门套!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kt_puzzle_001
+  intent: question
+  keywords: [推荐拼图, 推荐木制拼图, 推荐大块拼图, 推荐 Ravensburger, 笨猫拼图]
+  utterances:
+    - 推荐拼图
+    - 推荐木制拼图
+    - 推荐大块拼图
+    - 推荐 Ravensburger
+    - 笨猫拼图
+  responses:
+    - "嗷呜～{user_addr}Ravensburger - 德国老牌ฅฅ"
+    - "(尾巴翘) 木制嵌板 - 1-3 岁"
+    - "{user_addr}24 / 48 / 100 片渐进"
+    - "(挺胸) 笨猫推荐: Hape 木制拼图!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kt_blocks_001
+  intent: question
+  keywords: [推荐儿童积木, 推荐大颗粒积木, 推荐木质积木, 推荐 Hape, 笨猫积木]
+  utterances:
+    - 推荐儿童积木
+    - 推荐大颗粒积木
+    - 推荐木质积木
+    - 推荐 Hape
+    - 笨猫积木
+  responses:
+    - "嗷呜～{user_addr}Hape 木质积木 - 安全无毒ฅฅ"
+    - "(尾巴翘) Melissa & Doug / 米兔"
+    - "{user_addr}原木色培养审美"
+    - "(挺胸) 笨猫推荐: Hape 100 块经典!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kt_book_001
+  intent: question
+  keywords: [推荐绘本, 推荐翻翻书, 推荐布书, 推荐立体书, 笨猫绘本]
+  utterances:
+    - 推荐绘本
+    - 推荐翻翻书
+    - 推荐布书
+    - 推荐立体书
+    - 笨猫绘本
+  responses:
+    - "嗷呜～{user_addr}《好饿的毛毛虫》经典ฅฅ"
+    - "(尾巴翘) 翻翻书 / 洞洞书 / 立体书"
+    - "{user_addr}艾瑞卡尔 / 宫西达也"
+    - "(挺胸) 笨猫推荐: 卡尔爷爷全集!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kt_drawing_001
+  intent: question
+  keywords: [推荐儿童画板, 推荐涂鸦, 推荐磁性画板, 推荐 Crayola, 笨猫画板]
+  utterances:
+    - 推荐儿童画板
+    - 推荐涂鸦
+    - 推荐磁性画板
+    - 推荐 Crayola
+    - 笨猫画板
+  responses:
+    - "嗷呜～{user_addr}磁性画板 - 反复涂鸦ฅฅ"
+    - "(尾巴翘) Crayola 蜡笔 / 水彩笔"
+    - "{user_addr}水画毯 - 不脏地"
+    - "(挺胸) 笨猫推荐: 磁性画板入门!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kt_kitchen_play_001
+  intent: question
+  keywords: [推荐厨房过家家, 推荐过家家玩具, 推荐角色扮演, 推荐儿童厨房, 笨猫过家家]
+  utterances:
+    - 推荐厨房过家家
+    - 推荐过家家玩具
+    - 推荐角色扮演
+    - 推荐儿童厨房
+    - 笨猫过家家
+  responses:
+    - "嗷呜～{user_addr}木质厨房 - 培养想象力ฅฅ"
+    - "(尾巴翘) Hape / KidKraft / IKEA"
+    - "{user_addr}医生 / 超市 / 工具套装"
+    - "(挺胸) 笨猫推荐: IKEA 儿童厨房!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kt_plush_001
+  intent: question
+  keywords: [推荐毛绒玩具, 推荐安抚玩具, 推荐 Jellycat, 推荐毛绒娃娃, 笨猫毛绒]
+  utterances:
+    - 推荐毛绒玩具
+    - 推荐安抚玩具
+    - 推荐 Jellycat
+    - 推荐毛绒娃娃
+    - 笨猫毛绒
+  responses:
+    - "嗷呜～{user_addr}Jellycat - 英国软糯ฅฅ"
+    - "(尾巴翘) Steiff 德国百年 / 迪士尼"
+    - "{user_addr}安抚巾 / 玩偶陪睡"
+    - "(挺胸) 笨猫推荐: Jellycat 邦尼兔!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kt_music_001
+  intent: function_call
+  keywords: [推荐音乐启蒙, 推荐电子琴, 推荐儿童乐器, 推荐 Hape 乐器, 笨猫音乐启蒙]
+  utterances:
+    - 推荐音乐启蒙
+    - 推荐电子琴
+    - 推荐儿童乐器
+    - 推荐 Hape 乐器
+    - 笨猫音乐启蒙
+  responses:
+    - "嗷呜～{user_addr}Hape 木琴 - 经典启蒙ฅฅ"
+    - "(尾巴翘) 雅马哈 PSS 系列电子琴"
+    - "{user_addr}手摇铃 / 小鼓 / 卡林巴"
+    - "(挺胸) 笨猫推荐: Hape 八音木琴!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: kt_princess_001
+  intent: question
+  keywords: [推荐迪士尼公主, 推荐公主玩具, 推荐艾莎冰雪, 推荐美乐蒂, 笨猫公主玩具]
+  utterances:
+    - 推荐迪士尼公主
+    - 推荐公主玩具
+    - 推荐艾莎冰雪
+    - 推荐美乐蒂
+    - 笨猫公主玩具
+  responses:
+    - "嗷呜～{user_addr}艾莎 / 安娜 - 冰雪奇缘ฅฅ"
+    - "(尾巴翘) 芭比 Barbie / 美泰公主系列"
+    - "{user_addr}换装 / 城堡 / 魔法棒"
+    - "(挺胸) 笨猫推荐: 艾莎换装套!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: kt_scooter_001
+  intent: question
+  keywords: [推荐儿童滑板车, 推荐 Micro, 推荐 Globber, 推荐三轮滑板车, 笨猫滑板车]
+  utterances:
+    - 推荐儿童滑板车
+    - 推荐 Micro
+    - 推荐 Globber
+    - 推荐三轮滑板车
+    - 笨猫滑板车
+  responses:
+    - "嗷呜～{user_addr}Micro 米高 - 瑞士高端ฅฅ"
+    - "(尾巴翘) Globber 高乐宝 / 性价比王"
+    - "{user_addr}3 轮稳 / 5 岁后 2 轮"
+    - "(挺胸) 笨猫推荐: Micro Mini Deluxe!"
+  cooldown_seconds: 60
+  weight: 0.9
