@@ -1,0 +1,206 @@
+# 咨询 App routes (S6 R653 NLU 节点扩充, 第六十五周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ca_jiandan_001
+  intent: question
+  keywords: [推荐简单心理, 推荐 jiandanxinli, 简单心理 App, 笨猫简单心理, 简单心理 咨询]
+  utterances:
+    - "{user_addr}推荐简单心理"
+    - 推荐简单心理
+    - 简单心理 App
+    - 笨猫简单心理
+    - 简单心理 咨询
+  responses:
+    - "嗷呜～{user_addr}简单心理 - 国内老牌平台ฅฅ"
+    - "(尾巴翘) 咨询师筛选严格 / 师资好"
+    - "{user_addr}单次 400-1000+ / 长程靠谱"
+    - "(挺胸) 猫猫推荐: 国内首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_yixinli_001
+  intent: question
+  keywords: [推荐壹心理, 推荐 xinli001, 壹心理 App, 笨猫壹心理, 壹心理 测评]
+  utterances:
+    - "{user_addr}推荐壹心理"
+    - 推荐壹心理
+    - 壹心理 App
+    - 笨猫壹心理
+    - 壹心理 测评
+  responses:
+    - "嗷呜～{user_addr}壹心理 - 内容+咨询双开ฅฅ"
+    - "(尾巴翘) 心理文章 / 测评 / FM 都有"
+    - "{user_addr}咨询价位友好 / 入门好用"
+    - "(挺胸) 人家推荐: 先看文章再约!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_betterhelp_001
+  intent: question
+  keywords: [推荐 BetterHelp, 推荐 betterhelp, BetterHelp App, 笨猫 BetterHelp, BetterHelp 咨询]
+  utterances:
+    - "{user_addr}推荐 BetterHelp"
+    - 推荐 BetterHelp
+    - BetterHelp App
+    - 笨猫 BetterHelp
+    - BetterHelp 咨询
+  responses:
+    - "嗷呜～{user_addr}BetterHelp - 美国最大在线咨询ฅฅ"
+    - "(尾巴翘) 订阅制 / 文字+语音+视频"
+    - "{user_addr}周费 65-90 美元 / 英文为主"
+    - "(挺胸) 笨猫推荐: 海外党首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_talkspace_001
+  intent: question
+  keywords: [推荐 Talkspace, 推荐 talkspace, Talkspace App, 笨猫 Talkspace, Talkspace 咨询]
+  utterances:
+    - "{user_addr}推荐 Talkspace"
+    - 推荐 Talkspace
+    - Talkspace App
+    - 笨猫 Talkspace
+    - Talkspace 咨询
+  responses:
+    - "嗷呜～{user_addr}Talkspace - 美国老牌竞争者ฅฅ"
+    - "(尾巴翘) 支持精神科开药 / 保险报销"
+    - "{user_addr}订阅 69-109 美元/周"
+    - "(挺胸) 猫猫推荐: 需要药物联合时选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_kyc_001
+  intent: question
+  keywords: [推荐 KnowYourself, 推荐 KY, KnowYourself App, 笨猫 KY, KY 心理]
+  utterances:
+    - "{user_addr}推荐 KnowYourself"
+    - 推荐 KnowYourself
+    - KnowYourself App
+    - 笨猫 KY
+    - KY 心理
+  responses:
+    - "嗷呜～{user_addr}KnowYourself (KY) - 公众号起家ฅฅ"
+    - "(尾巴翘) 心理科普 / 自助练习"
+    - "{user_addr}有冥想 + 月光会员"
+    - "(挺胸) 人家推荐: 喜欢看文章的选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_yihe_001
+  intent: question
+  keywords: [推荐怡禾心理, 推荐怡禾, 怡禾心理 App, 笨猫怡禾, 怡禾心理 咨询]
+  utterances:
+    - "{user_addr}推荐怡禾心理"
+    - 推荐怡禾心理
+    - 怡禾心理 App
+    - 笨猫怡禾
+    - 怡禾心理 咨询
+  responses:
+    - "嗷呜～{user_addr}怡禾心理 - 怡禾健康旗下ฅฅ"
+    - "(尾巴翘) 医学背景 / 循证靠谱"
+    - "{user_addr}也可线下儿童/家庭咨询"
+    - "(挺胸) 笨猫推荐: 看重医学背景选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_zhihu_001
+  intent: question
+  keywords: [推荐知乎心理, 推荐知乎咨询, 知乎心理咨询, 笨猫知乎心理, 知乎 心理服务]
+  utterances:
+    - "{user_addr}推荐知乎心理"
+    - 推荐知乎咨询
+    - 知乎心理咨询
+    - 笨猫知乎心理
+    - 知乎 心理服务
+  responses:
+    - "嗷呜～{user_addr}知乎心理 - 知乎平台咨询服务ฅฅ"
+    - "(尾巴翘) 可以先看答主再约"
+    - "{user_addr}价格档位多 / 灵活选"
+    - "(挺胸) 猫猫推荐: 知乎重度用户合适!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_akeso_001
+  intent: question
+  keywords: [推荐 Akeso, 推荐 akeso, Akeso 心理, 笨猫 Akeso, Akeso 咨询]
+  utterances:
+    - "{user_addr}推荐 Akeso"
+    - 推荐 Akeso
+    - Akeso 心理
+    - 笨猫 Akeso
+    - Akeso 咨询
+  responses:
+    - "嗷呜～{user_addr}Akeso - 海外心理咨询平台ฅฅ"
+    - "(尾巴翘) 注重循证 CBT / DBT"
+    - "{user_addr}英文环境 / 多语种"
+    - "(挺胸) 人家推荐: 找循证流派选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_calm_001
+  intent: question
+  keywords: [推荐 Calm, 推荐 Calm 冥想, Calm App, 笨猫 Calm, Calm 助眠]
+  utterances:
+    - "{user_addr}推荐 Calm"
+    - 推荐 Calm 冥想
+    - Calm App
+    - 笨猫 Calm
+    - Calm 助眠
+  responses:
+    - "嗷呜～{user_addr}Calm - 冥想助眠 App 王者ฅฅ"
+    - "(尾巴翘) 睡前故事 / 自然音"
+    - "{user_addr}年费 ~70 美元"
+    - "(挺胸) 笨猫推荐: 睡不着的来这!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_headspace_001
+  intent: question
+  keywords: [推荐 Headspace, 推荐 headspace, Headspace App, 笨猫 Headspace, Headspace 冥想]
+  utterances:
+    - "{user_addr}推荐 Headspace"
+    - 推荐 Headspace
+    - Headspace App
+    - 笨猫 Headspace
+    - Headspace 冥想
+  responses:
+    - "嗷呜～{user_addr}Headspace - 入门冥想最友好ฅฅ"
+    - "(尾巴翘) 卡通引导 / 适合新手"
+    - "{user_addr}月费 ~13 美元 / 学生折扣"
+    - "(挺胸) 猫猫推荐: 冥想小白起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_nuanxin_ai_001
+  intent: question
+  keywords: [推荐暖心 AI, 推荐暖心, 暖心 AI App, 笨猫暖心 AI, AI 心理咨询]
+  utterances:
+    - "{user_addr}推荐暖心 AI"
+    - 推荐暖心
+    - 暖心 AI App
+    - 笨猫暖心 AI
+    - AI 心理咨询
+  responses:
+    - "嗷呜～{user_addr}暖心 AI - AI 陪伴+情绪倾诉ฅฅ"
+    - "(尾巴甩) AI 不能替代医生 / 但能 24h 在"
+    - "{user_addr}做应急倾诉口可以"
+    - "(小声) 人家提醒: 严重情况一定找真人!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ca_depression_test_001
+  intent: question
+  keywords: [推荐抑郁评测, 推荐 PHQ-9, 抑郁自评 App, 笨猫抑郁评测, 心理量表 App]
+  utterances:
+    - "{user_addr}推荐抑郁评测"
+    - 推荐 PHQ-9
+    - 抑郁自评 App
+    - 笨猫抑郁评测
+    - 心理量表 App
+  responses:
+    - "嗷呜～{user_addr}PHQ-9 / GAD-7 / SDS / SAS 常用ฅฅ"
+    - "(尾巴翘) 壹心理 / 简单心理 内置量表"
+    - "{user_addr}结果只是参考 / 不是诊断"
+    - "(小声挺胸) 笨猫提醒: 分高一定看医生!"
+  cooldown_seconds: 60
+  weight: 1.0

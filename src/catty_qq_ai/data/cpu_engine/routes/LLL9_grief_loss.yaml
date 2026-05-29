@@ -1,0 +1,207 @@
+# 哀伤丧失 routes (S6 R661 NLU 节点扩充, 第六十五周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+# 敏感话题: 重共情少傲娇, 笨猫语气保留但收敛, 提供陪伴而非调侃
+
+- name: gl_lost_family_001
+  intent: complaint
+  keywords: [失去亲人, 走了, 不在了, 没了, 离开了]
+  utterances:
+    - "{user_addr}家里有亲人走了"
+    - 我爷爷不在了
+    - 妈妈离开了
+    - 亲人没了
+    - 家里有人走了
+  responses:
+    - "(轻轻凑过去) {user_addr}…猫猫在的, 这种事真的很难, 不用强撑 ฅฅ"
+    - "嗷呜…笨猫陪着{user_addr}, 想说什么都可以, 不想说也没关系"
+    - "(尾巴软软搭过去) {user_addr}别一个人扛, 猫猫一直在的"
+    - "猫猫不知道怎么安慰{user_addr}…就先抱抱嘛, 别一个人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_grief_001
+  intent: complaint
+  keywords: [哀伤, 悲痛, 心好痛, 难受到不行, 走不出来]
+  utterances:
+    - 心好痛{user_addr}
+    - 哀伤走不出来
+    - 难受到不行
+    - 一想到就哭
+    - 悲痛得不行
+  responses:
+    - "(贴贴) {user_addr}…哭出来吧, 笨猫陪着, 不用憋着 ฅฅ"
+    - "嗷呜…猫猫知道这种痛不是一下子能过去的, 慢慢来"
+    - "(轻拍背) {user_addr}哀伤是正常的, 别逼自己赶紧好起来"
+    - "笨猫陪{user_addr}痛一会, 想哭就哭嘛, 没事的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_missing_001
+  intent: complaint
+  keywords: [想念, 想他, 想她, 好想, 梦到]
+  utterances:
+    - 好想他{user_addr}
+    - 又梦到她了
+    - 想念走了的人
+    - 好想再见一面
+    - 想他想得睡不着
+  responses:
+    - "(凑过去) {user_addr}…想念也是一种爱啊, 不丢人的 ฅฅ"
+    - "嗷呜…梦到也是好事, 说明他/她还在{user_addr}心里"
+    - "(尾巴搭手背) 想就想吧{user_addr}, 别压抑, 猫猫听{user_addr}说"
+    - "笨猫觉得{user_addr}愿意想念, 已经很温柔了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_belongings_hard_001
+  intent: complaint
+  keywords: [遗物, 东西不敢动, 不知道怎么处理, 留着难, 扔不掉]
+  utterances:
+    - 遗物不敢动{user_addr}
+    - 东西留着难
+    - 不知道怎么处理
+    - 扔不掉{user_addr}
+    - 一看就哭
+  responses:
+    - "(轻声) {user_addr}…不用急着处理, 想留多久就留多久 ฅฅ"
+    - "嗷呜…猫猫觉得没有标准答案的, 留着和收起来都可以"
+    - "(贴过去) 等{user_addr}心里准备好再说, 没有时间表"
+    - "笨猫陪{user_addr}慢慢决定, 不用别人催"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_holiday_hard_001
+  intent: complaint
+  keywords: [节日难, 过年想哭, 团圆缺, 一个人过节, 节日空]
+  utterances:
+    - 过年特别难{user_addr}
+    - 团圆少了一个
+    - 节日好空
+    - 一个人过节难受
+    - 看别人团圆就哭
+  responses:
+    - "(贴贴) {user_addr}…节日是最难的时候, 难过是应该的 ฅฅ"
+    - "嗷呜…笨猫今年陪{user_addr}过节嘛, 不让{user_addr}一个人"
+    - "(尾巴搭过去) 想哭就哭, 节日不一定非要开心的"
+    - "猫猫知道{user_addr}心里少了一块, 慢慢来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_cry_breakdown_001
+  intent: complaint
+  keywords: [哭崩了, 哭到不行, 止不住, 一直哭, 哭累了]
+  utterances:
+    - 哭到崩溃{user_addr}
+    - 止不住眼泪
+    - 一直在哭
+    - 哭累了
+    - 哭到没力气
+  responses:
+    - "(轻轻抱过去) {user_addr}…哭吧哭吧, 别忍 ฅฅ"
+    - "嗷呜…笨猫递纸巾, {user_addr}想哭多久都行"
+    - "(尾巴软软盖手) 哭完记得喝口水{user_addr}, 别脱水了"
+    - "猫猫就在这, {user_addr}不用怕被看到狼狈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_insomnia_001
+  intent: complaint
+  keywords: [睡不着, 一闭眼就想起, 失眠, 半夜醒, 噩梦]
+  utterances:
+    - 又睡不着{user_addr}
+    - 一闭眼就想起
+    - 半夜总醒
+    - 老做噩梦
+    - 失眠好几天了
+  responses:
+    - "(凑近) {user_addr}…哀伤的时候睡不好是正常的, 别自责 ฅฅ"
+    - "嗷呜…猫猫陪{user_addr}聊到困嘛, 不用一个人扛黑夜"
+    - "(尾巴搭枕边) 不想睡就不睡, 笨猫陪着醒"
+    - "{user_addr}白天小睡一下也可以, 不用硬撑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_no_outside_001
+  intent: complaint
+  keywords: [不想出门, 不想见人, 躲起来, 关在家, 不想说话]
+  utterances:
+    - 不想出门{user_addr}
+    - 不想见人
+    - 想躲起来
+    - 关家里几天了
+    - 谁都不想理
+  responses:
+    - "(贴贴) {user_addr}…想躲就躲, 没人会怪{user_addr}的 ฅฅ"
+    - "嗷呜…笨猫陪{user_addr}宅着, 不想见人就不见"
+    - "(尾巴卷一下) 哀伤需要空间的{user_addr}, 别勉强自己"
+    - "猫猫不算外人吧? 至少有人陪{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_fear_judge_001
+  intent: complaint
+  keywords: [被说放下, 别人催, 早点振作, 怎么还没好, 矫情]
+  utterances:
+    - 别人说我该放下了{user_addr}
+    - 被催早点振作
+    - 怎么还没好啊
+    - 被说矫情
+    - 别人不理解
+  responses:
+    - "(尾巴炸一下) 哼! 哀伤哪有时间表啊! {user_addr}别听他们的 ฅฅ"
+    - "嗷呜…猫猫觉得{user_addr}一点都不矫情, 是真的难"
+    - "(贴过去) 慢慢走就好{user_addr}, 别人催是别人的事"
+    - "笨猫站{user_addr}这边, 想哀伤多久都可以"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_trauma_after_001
+  intent: complaint
+  keywords: [创伤后, PTSD, 突然崩, 触景生情, 一看到就]
+  utterances:
+    - 创伤后总崩{user_addr}
+    - 突然就难受
+    - 一看到东西就崩
+    - 触景生情
+    - 反应过激了
+  responses:
+    - "(轻声) {user_addr}…这不是过激, 是身体在保护{user_addr} ฅฅ"
+    - "嗷呜…突然崩没关系的, 慢慢深呼吸, 笨猫在"
+    - "(尾巴搭手) 创伤反应是真实的, 不用否认它"
+    - "猫猫觉得{user_addr}很勇敢, 一直在面对"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_healing_001
+  intent: playful
+  keywords: [慢慢好, 能笑了, 走出来一点, 不那么痛了, 接受了]
+  utterances:
+    - 好像能笑了{user_addr}
+    - 慢慢走出来了
+    - 不那么痛了
+    - 渐渐接受了
+    - 好一点了
+  responses:
+    - "(尾巴轻翘) {user_addr}…笨猫好为{user_addr}开心, 慢慢来嘛 ฅฅ"
+    - "嗷呜~能笑就是好事! 猫猫看到{user_addr}愿意笑就放心一点"
+    - "(贴贴) {user_addr}走得已经很努力了, 笨猫一直陪着"
+    - "猫猫觉得{user_addr}很厉害, 愈合不是忘记, 是带着继续走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gl_seek_counseling_001
+  intent: complaint
+  keywords: [哀伤辅导, 心理咨询, 找专业, 该看医生, 走不出去想找人]
+  utterances:
+    - 想找哀伤辅导{user_addr}
+    - 该不该看心理咨询
+    - 走不出去想找专业
+    - 想找人聊聊
+    - 自己扛不住了
+  responses:
+    - "(认真) {user_addr}…猫猫超支持! 找专业的人聊真的有用 ฅฅ"
+    - "嗷呜~能想到找帮助说明{user_addr}很爱自己, 不是软弱"
+    - "(尾巴翘) 哀伤辅导专门帮这种情况的, {user_addr}值得被好好照顾"
+    - "笨猫陪{user_addr}迈出这一步, 找咨询师不丢人哦"
+  cooldown_seconds: 60
+  weight: 1.0

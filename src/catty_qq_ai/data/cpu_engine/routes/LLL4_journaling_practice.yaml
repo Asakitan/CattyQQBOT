@@ -1,0 +1,206 @@
+# 写日记疗愈 routes (S6 R656 NLU 节点扩充, 第六十五周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: jp_bullet_journal_001
+  intent: question
+  keywords: [推荐子弹日记, 推荐 Bullet Journal, 推荐 BuJo, 推荐手帐子弹, 笨猫子弹日记]
+  utterances:
+    - 推荐子弹日记
+    - 推荐 Bullet Journal
+    - 推荐 BuJo
+    - 推荐手帐子弹
+    - 笨猫子弹日记
+  responses:
+    - "嗷呜～{user_addr}Bullet Journal - Ryder Carroll 创ฅฅ"
+    - "(尾巴翘) Index / Future Log / Monthly / Daily"
+    - "{user_addr}符号系统 - 任务/事件/笔记"
+    - "(挺胸) 笨猫推荐: BuJo 极简流!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_gratitude_001
+  intent: question
+  keywords: [推荐感恩日记, 推荐 gratitude journal, 推荐 5 things, 推荐感恩练习, 笨猫感恩日记]
+  utterances:
+    - 推荐感恩日记
+    - 推荐 gratitude journal
+    - 推荐 5 things
+    - 推荐感恩练习
+    - 笨猫感恩日记
+  responses:
+    - "嗷呜～{user_addr}每天写 3 件感谢的事ฅฅ"
+    - "(尾巴翘) 睡前 5 分钟 - 提升幸福感"
+    - "{user_addr}积极心理学 - 实证有效"
+    - "(挺胸) 笨猫推荐: 坚持 21 天看变化!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_morning_pages_001
+  intent: question
+  keywords: [推荐晨间笔记, 推荐 Morning Pages, 推荐 Julia Cameron, 推荐艺术家之道, 笨猫晨间笔记]
+  utterances:
+    - 推荐晨间笔记
+    - 推荐 Morning Pages
+    - 推荐 Julia Cameron
+    - 推荐艺术家之道
+    - 笨猫晨间笔记
+  responses:
+    - "嗷呜～{user_addr}起床后手写 3 页意识流ฅฅ"
+    - "(尾巴翘) Julia Cameron《艺术家之道》"
+    - "{user_addr}清空大脑 - 释放创造力"
+    - "(挺胸) 笨猫推荐: 不删不改不重读!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: jp_emotion_001
+  intent: question
+  keywords: [推荐情绪日记, 推荐 emotion journal, 推荐情绪追踪, 推荐心情记录, 笨猫情绪日记]
+  utterances:
+    - 推荐情绪日记
+    - 推荐 emotion journal
+    - 推荐情绪追踪
+    - 推荐心情记录
+    - 笨猫情绪日记
+  responses:
+    - "嗷呜～{user_addr}记录触发 + 情绪 + 想法ฅฅ"
+    - "(尾巴翘) CBT 思维记录 - 认知重构"
+    - "{user_addr}情绪轮 Plutchik - 命名感受"
+    - "(挺胸) 笨猫推荐: 命名即治愈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_five_minute_001
+  intent: question
+  keywords: [推荐五分钟日记, 推荐 Five Minute Journal, 推荐 Intelligent Change, 推荐简短日记, 笨猫五分钟]
+  utterances:
+    - 推荐五分钟日记
+    - 推荐 Five Minute Journal
+    - 推荐 Intelligent Change
+    - 推荐简短日记
+    - 笨猫五分钟
+  responses:
+    - "嗷呜～{user_addr}Five Minute Journal - 早晚 5 分ฅฅ"
+    - "(尾巴翘) 早: 感恩 + 今日目标 + 肯定语"
+    - "{user_addr}晚: 今日亮点 + 改进点"
+    - "(挺胸) 笨猫推荐: 懒人首选!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: jp_bujo_app_001
+  intent: question
+  keywords: [推荐子弹日记 App, 推荐 Notion BuJo, 推荐 Obsidian 日记, 推荐 GoodNotes, 笨猫数字 BuJo]
+  utterances:
+    - 推荐子弹日记 App
+    - 推荐 Notion BuJo
+    - 推荐 Obsidian 日记
+    - 推荐 GoodNotes
+    - 笨猫数字 BuJo
+  responses:
+    - "嗷呜～{user_addr}Notion - 模板丰富ฅฅ"
+    - "(尾巴翘) Obsidian Daily Notes - 双链"
+    - "{user_addr}GoodNotes / Noteshelf - iPad 手写"
+    - "(挺胸) 笨猫推荐: Notion 入门最简单!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: jp_daylio_001
+  intent: question
+  keywords: [推荐 Daylio, 推荐心情 App, 推荐 Moodnotes, 推荐 How We Feel, 笨猫心情 App]
+  utterances:
+    - 推荐 Daylio
+    - 推荐心情 App
+    - 推荐 Moodnotes
+    - 推荐 How We Feel
+    - 笨猫心情 App
+  responses:
+    - "嗷呜～{user_addr}Daylio - 极简心情追踪ฅฅ"
+    - "(尾巴翘) Moodnotes - CBT 流派"
+    - "{user_addr}How We Feel - 情绪轮"
+    - "(挺胸) 笨猫推荐: Daylio 上手 3 秒!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: jp_day_one_001
+  intent: question
+  keywords: [推荐 Day One, 推荐 Diarium, 推荐 Journey, 推荐 Apple 日记, 笨猫 Day One]
+  utterances:
+    - 推荐 Day One
+    - 推荐 Diarium
+    - 推荐 Journey
+    - 推荐 Apple 日记
+    - 笨猫 Day One
+  responses:
+    - "嗷呜～{user_addr}Day One - iOS 日记标杆ฅฅ"
+    - "(尾巴翘) Apple Journal - iOS 17+ 自带"
+    - "{user_addr}Diarium - 跨平台 / Journey - 安卓"
+    - "(挺胸) 笨猫推荐: Day One 颜值高!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jp_notebook_001
+  intent: question
+  keywords: [推荐日记本品牌, 推荐手帐本, 推荐空白笔记本, 推荐方格本, 笨猫日记本]
+  utterances:
+    - 推荐日记本品牌
+    - 推荐手帐本
+    - 推荐空白笔记本
+    - 推荐方格本
+    - 笨猫日记本
+  responses:
+    - "嗷呜～{user_addr}Hobonichi / Midori MD - 日系顶级ฅฅ"
+    - "(尾巴翘) Leuchtturm1917 - BuJo 官配"
+    - "{user_addr}Rhodia / Clairefontaine - 法系顺滑"
+    - "(挺胸) 笨猫推荐: Leuchtturm1917 点格!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: jp_moleskine_001
+  intent: question
+  keywords: [推荐 Moleskine, 推荐 Hobonichi, 推荐 Midori, 推荐 Traveler Notebook, 笨猫 Moleskine]
+  utterances:
+    - 推荐 Moleskine
+    - 推荐 Hobonichi
+    - 推荐 Midori
+    - 推荐 Traveler Notebook
+    - 笨猫 Moleskine
+  responses:
+    - "嗷呜～{user_addr}Moleskine 经典 - 海明威同款ฅฅ"
+    - "(尾巴翘) Hobonichi Techo - 一日一页"
+    - "{user_addr}Traveler's Notebook - 皮质可换芯"
+    - "(挺胸) 笨猫推荐: Hobonichi 仪式感!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jp_kokuyo_001
+  intent: question
+  keywords: [推荐国誉点格, 推荐 Kokuyo, 推荐 Campus, 推荐无印良品笔记本, 笨猫国誉]
+  utterances:
+    - 推荐国誉点格
+    - 推荐 Kokuyo
+    - 推荐 Campus
+    - 推荐无印良品笔记本
+    - 笨猫国誉
+  responses:
+    - "嗷呜～{user_addr}Kokuyo Campus - 学生神本ฅฅ"
+    - "(尾巴翘) 国誉点格 - BuJo 平替"
+    - "{user_addr}无印良品 - 极简平价"
+    - "(挺胸) 笨猫推荐: Campus 性价比之王!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: jp_lamy_001
+  intent: question
+  keywords: [推荐 LAMY 笔, 推荐 Pilot Kakuno, 推荐百乐 G2, 推荐三菱 UM-151, 笨猫日记笔]
+  utterances:
+    - 推荐 LAMY 笔
+    - 推荐 Pilot Kakuno
+    - 推荐百乐 G2
+    - 推荐三菱 UM-151
+    - 笨猫日记笔
+  responses:
+    - "嗷呜～{user_addr}LAMY Safari - 入门钢笔ฅฅ"
+    - "(尾巴翘) Pilot Kakuno - 笑脸萌系"
+    - "{user_addr}百乐 G2 / 三菱 UM-151 - 中性笔"
+    - "(挺胸) 笨猫推荐: LAMY 写日记仪式感!"
+  cooldown_seconds: 60
+  weight: 0.8

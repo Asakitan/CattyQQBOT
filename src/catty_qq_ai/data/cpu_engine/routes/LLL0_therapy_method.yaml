@@ -1,0 +1,206 @@
+# 心理疗愈方法 routes (S6 R652 NLU 节点扩充, 第六十五周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: tm_cbt_001
+  intent: question
+  keywords: [推荐 CBT, 推荐认知行为, 推荐 CBT 疗法, 推荐认知重塑, 笨猫 CBT]
+  utterances:
+    - 推荐 CBT
+    - 推荐认知行为
+    - 推荐 CBT 疗法
+    - 推荐认知重塑
+    - 笨猫 CBT
+  responses:
+    - "嗷呜～{user_addr}CBT 认知行为疗法 - 改思维模式ฅฅ"
+    - "(尾巴翘) 识别自动化思维 / 重构信念"
+    - "{user_addr}焦虑 / 抑郁 / 强迫首选"
+    - "(挺胸) 笨猫推荐: 短期高效循证!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_dbt_001
+  intent: question
+  keywords: [推荐 DBT, 推荐辩证行为, 推荐 DBT 疗法, 推荐情绪调节, 笨猫 DBT]
+  utterances:
+    - 推荐 DBT
+    - 推荐辩证行为
+    - 推荐 DBT 疗法
+    - 推荐情绪调节
+    - 笨猫 DBT
+  responses:
+    - "嗷呜～{user_addr}DBT 辩证行为疗法 - Linehan 创立ฅฅ"
+    - "(尾巴翘) 正念 / 情绪调节 / 人际效能"
+    - "{user_addr}边缘型人格 / 自伤适用"
+    - "(挺胸) 笨猫推荐: 接纳+改变两手抓!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_emdr_001
+  intent: question
+  keywords: [推荐 EMDR, 推荐眼动疗法, 推荐眼动脱敏, 推荐创伤疗法, 笨猫 EMDR]
+  utterances:
+    - 推荐 EMDR
+    - 推荐眼动疗法
+    - 推荐眼动脱敏
+    - 推荐创伤疗法
+    - 笨猫 EMDR
+  responses:
+    - "嗷呜～{user_addr}EMDR 眼动脱敏再加工ฅฅ"
+    - "(尾巴翘) 双侧刺激 / 处理创伤记忆"
+    - "{user_addr}PTSD / 单次创伤首选"
+    - "(挺胸) 笨猫推荐: WHO 推荐疗法!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_act_001
+  intent: question
+  keywords: [推荐 ACT, 推荐接纳承诺, 推荐 ACT 疗法, 推荐心理灵活, 笨猫 ACT]
+  utterances:
+    - 推荐 ACT
+    - 推荐接纳承诺
+    - 推荐 ACT 疗法
+    - 推荐心理灵活
+    - 笨猫 ACT
+  responses:
+    - "嗷呜～{user_addr}ACT 接纳承诺疗法 - 第三浪潮ฅฅ"
+    - "(尾巴翘) 接纳 / 认知解离 / 价值澄清"
+    - "{user_addr}慢性疼痛 / 焦虑通吃"
+    - "(挺胸) 笨猫推荐: 跟想法做朋友!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_mindfulness_001
+  intent: question
+  keywords: [推荐正念, 推荐 MBSR, 推荐正念减压, 推荐冥想疗法, 笨猫正念]
+  utterances:
+    - 推荐正念
+    - 推荐 MBSR
+    - 推荐正念减压
+    - 推荐冥想疗法
+    - 笨猫正念
+  responses:
+    - "嗷呜～{user_addr}MBSR 正念减压 - Kabat-Zinnฅฅ"
+    - "(尾巴翘) 8 周课程 / 身体扫描 / 觉察"
+    - "{user_addr}压力 / 慢病管理友好"
+    - "(挺胸) 笨猫推荐: 每天 10 分钟就行!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_exposure_001
+  intent: question
+  keywords: [推荐暴露疗法, 推荐系统脱敏, 推荐 ERP, 推荐恐惧治疗, 笨猫暴露]
+  utterances:
+    - 推荐暴露疗法
+    - 推荐系统脱敏
+    - 推荐 ERP
+    - 推荐恐惧治疗
+    - 笨猫暴露
+  responses:
+    - "嗷呜～{user_addr}暴露疗法 - 直面恐惧ฅฅ"
+    - "(尾巴翘) 系统脱敏 / ERP 反应预防"
+    - "{user_addr}恐惧症 / 强迫症金标准"
+    - "(挺胸) 笨猫推荐: 循序渐进别硬冲!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tm_sandplay_001
+  intent: question
+  keywords: [推荐沙盘游戏, 推荐沙盘疗法, 推荐沙游, 推荐儿童疗法, 笨猫沙盘]
+  utterances:
+    - 推荐沙盘游戏
+    - 推荐沙盘疗法
+    - 推荐沙游
+    - 推荐儿童疗法
+    - 笨猫沙盘
+  responses:
+    - "嗷呜～{user_addr}沙盘游戏 - Kalff 创立ฅฅ"
+    - "(尾巴翘) 沙箱 / 玩具 / 无意识表达"
+    - "{user_addr}儿童 / 不善言辞者友好"
+    - "(挺胸) 笨猫推荐: 玩着玩着就疗愈!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tm_innerchild_001
+  intent: question
+  keywords: [推荐内在小孩, 推荐内在儿童, 推荐童年疗愈, 推荐 inner child, 笨猫内在小孩]
+  utterances:
+    - 推荐内在小孩
+    - 推荐内在儿童
+    - 推荐童年疗愈
+    - 推荐 inner child
+    - 笨猫内在小孩
+  responses:
+    - "嗷呜～{user_addr}内在小孩疗愈ฅฅ"
+    - "(尾巴翘) 看见 / 接纳 / 重新养育"
+    - "{user_addr}童年创伤 / 依恋修复"
+    - "(挺胸) 笨猫推荐: 抱抱小时候的自己!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_group_001
+  intent: question
+  keywords: [推荐团体咨询, 推荐团体治疗, 推荐小组治疗, 推荐 group therapy, 笨猫团体]
+  utterances:
+    - 推荐团体咨询
+    - 推荐团体治疗
+    - 推荐小组治疗
+    - 推荐 group therapy
+    - 笨猫团体
+  responses:
+    - "嗷呜～{user_addr}团体咨询 - Yalom 经典ฅฅ"
+    - "(尾巴翘) 普遍性 / 利他 / 现实重演"
+    - "{user_addr}社交困难 / 价格更友好"
+    - "(挺胸) 笨猫推荐: 不是只有你这样!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tm_family_001
+  intent: question
+  keywords: [推荐家庭治疗, 推荐系统家庭, 推荐萨提亚, 推荐 family therapy, 笨猫家庭]
+  utterances:
+    - 推荐家庭治疗
+    - 推荐系统家庭
+    - 推荐萨提亚
+    - 推荐 family therapy
+    - 笨猫家庭
+  responses:
+    - "嗷呜～{user_addr}系统家庭治疗 - Bowenฅฅ"
+    - "(尾巴翘) 萨提亚 / 结构 / 叙事流派"
+    - "{user_addr}亲子 / 夫妻 / 三角化议题"
+    - "(挺胸) 笨猫推荐: 问题在系统不在个人!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_art_001
+  intent: question
+  keywords: [推荐艺术治疗, 推荐绘画疗法, 推荐音乐治疗, 推荐表达性艺术, 笨猫艺术治疗]
+  utterances:
+    - 推荐艺术治疗
+    - 推荐绘画疗法
+    - 推荐音乐治疗
+    - 推荐表达性艺术
+    - 笨猫艺术治疗
+  responses:
+    - "嗷呜～{user_addr}表达性艺术治疗ฅฅ"
+    - "(尾巴翘) 绘画 / 音乐 / 舞动 / 戏剧"
+    - "{user_addr}非语言情绪释放出口"
+    - "(挺胸) 笨猫推荐: 画就完了不用像!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tm_ifs_001
+  intent: question
+  keywords: [推荐 IFS, 推荐内在家庭, 推荐部分疗法, 推荐 Schwartz, 笨猫 IFS]
+  utterances:
+    - 推荐 IFS
+    - 推荐内在家庭
+    - 推荐部分疗法
+    - 推荐 Schwartz
+    - 笨猫 IFS
+  responses:
+    - "嗷呜～{user_addr}IFS 内在家庭系统 - Schwartzฅฅ"
+    - "(尾巴翘) 管理者 / 流放者 / 消防员"
+    - "{user_addr}创伤 / 解离 / 自我整合"
+    - "(挺胸) 笨猫推荐: 每个部分都值得听!"
+  cooldown_seconds: 60
+  weight: 1.0

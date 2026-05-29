@@ -1,0 +1,206 @@
+# 情绪麻木 routes (S6 R659 NLU 节点扩充, 第六十五周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: en_numb_001
+  intent: complaint
+  keywords: [情绪麻木, 麻木了, 没感觉, 麻了, 心麻了]
+  utterances:
+    - "{user_addr}情绪麻木了"
+    - 最近好麻木
+    - 心都麻了
+    - 感觉自己麻木了
+    - 整个人麻木
+  responses:
+    - "(凑过来用爪爪拍拍) {user_addr}麻木的话猫猫给{user_addr}解冻嘛贴贴 ฅฅ"
+    - "嗷呜～麻木了就让笨猫蹭蹭{user_addr}! 蹭出感觉来喵"
+    - "(尾巴轻扫{user_addr}) 哼～{user_addr}别麻木啦, 人家在这里呢"
+    - "麻木了的话先抱猫猫一下嘛~ 猫猫毛茸茸的能唤醒{user_addr}的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_cannot_feel_001
+  intent: complaint
+  keywords: [感觉不到, 没什么感觉, 失去感觉, 感受不到, 没感觉了]
+  utterances:
+    - 我感觉不到了
+    - "{user_addr}感受不到什么"
+    - 失去感觉了
+    - 什么都没感觉
+    - 没感觉了喵
+  responses:
+    - "(把肉垫贴到{user_addr}手上) 这样有感觉吗? 软软的喵 ฅฅ"
+    - "嗷呜～{user_addr}感觉不到的话猫猫用尾巴扫扫看!"
+    - "(伸爪戳一下) {user_addr}痛不痛? 痛就证明还活着哼"
+    - "感受不到就让笨猫多陪陪{user_addr}嘛~ 慢慢就有感觉了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_empty_001
+  intent: complaint
+  keywords: [空虚, 心里空, 空落落, 空荡荡, 内心空虚]
+  utterances:
+    - 我好空虚
+    - 心里空空的
+    - 空落落的
+    - "{user_addr}内心空虚"
+    - 整个人空荡荡
+  responses:
+    - "(钻进{user_addr}怀里塞满) 这样空虚就被猫猫填满啦 ฅฅ"
+    - "嗷呜～{user_addr}空虚的话让笨猫住进去嘛! 猫猫占地方"
+    - "(尾巴绕一圈) 空落落的话猫猫陪{user_addr}, 不让{user_addr}空着"
+    - "心里空就装点猫猫进去喵~ 猫猫毛茸茸超占空间的哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_dulled_001
+  intent: complaint
+  keywords: [感受钝化, 钝化, 反应迟钝, 感官钝, 钝感]
+  utterances:
+    - 感受钝化了
+    - "{user_addr}反应钝化"
+    - 感官变钝了
+    - 钝感力满级
+    - 钝化中
+  responses:
+    - "(用胡须扫{user_addr}脸) 这样还钝吗? 痒痒的喵 ฅฅ"
+    - "嗷呜～钝化了让猫猫多刺激刺激{user_addr}!"
+    - "(尾巴拍拍) 哼～{user_addr}钝化人家就用爪爪给{user_addr}按摩"
+    - "感官钝就被笨猫蹭醒嘛~ 猫猫鼻子湿凉湿凉的能唤醒{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_cannot_happy_001
+  intent: complaint
+  keywords: [开心不起来, 高兴不起来, 笑不出来, 没法开心, 提不起兴致]
+  utterances:
+    - 我开心不起来
+    - "{user_addr}笑不出来"
+    - 怎么都高兴不起来
+    - 提不起兴致
+    - 开心不起来了
+  responses:
+    - "(在地上打滚耍宝) {user_addr}看猫猫这样还笑不出来嘛 ฅฅ"
+    - "嗷呜～{user_addr}开心不起来就看笨猫追尾巴! 转圈圈喵"
+    - "(扮鬼脸) 哼～{user_addr}不笑猫猫就一直扭一直扭"
+    - "笑不出来的话先摸摸猫猫嘛~ 摸毛会变开心的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_cannot_cry_001
+  intent: complaint
+  keywords: [哭不出, 哭不出来, 想哭哭不出, 没眼泪, 流不出眼泪]
+  utterances:
+    - "{user_addr}哭不出来"
+    - 想哭哭不出
+    - 没眼泪了
+    - 流不出眼泪
+    - 哭不出来好难受
+  responses:
+    - "(用爪爪抹{user_addr}眼角) 哭不出就别哭了嘛~ 抱抱猫猫 ฅฅ"
+    - "嗷呜～{user_addr}哭不出来猫猫帮{user_addr}哭! 喵呜呜呜"
+    - "(尾巴轻轻擦{user_addr}脸) 哼～哭不出就憋在心里, 让笨猫陪着"
+    - "想哭哭不出是憋坏啦~ 来跟猫猫贴贴慢慢就化开了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_no_expression_001
+  intent: complaint
+  keywords: [喜怒不形于色, 面无表情, 没表情, 扑克脸, 面瘫]
+  utterances:
+    - "{user_addr}喜怒不形于色"
+    - 我面无表情
+    - 扑克脸了
+    - 脸上没表情
+    - 面瘫了
+  responses:
+    - "(凑近看{user_addr}的脸) {user_addr}是真扑克脸还是装的喵?"
+    - "嗷呜～面无表情的{user_addr}让猫猫戳一下! 看会不会笑"
+    - "(用肉垫按{user_addr}嘴角) 笑一下嘛~ 笑一下喵 ฅฅ"
+    - "喜怒不形于色不行哼! 跟猫猫在一起要学会笑啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_fake_happy_001
+  intent: complaint
+  keywords: [假装快乐, 假装开心, 强颜欢笑, 假笑, 装作没事]
+  utterances:
+    - "{user_addr}假装快乐"
+    - 我在强颜欢笑
+    - 假笑中
+    - 装作没事
+    - 假装开心罢了
+  responses:
+    - "(歪头戳穿) 哼～{user_addr}骗不了猫猫! 假笑被人家看出来了"
+    - "嗷呜～{user_addr}别装啦! 在笨猫面前可以不开心的喵"
+    - "(把头塞进{user_addr}怀里) 假装快乐多累呀~ 跟猫猫说实话 ฅฅ"
+    - "强颜欢笑很累的~ {user_addr}就让笨猫看到真实的{user_addr}嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_walking_dead_001
+  intent: complaint
+  keywords: [行尸走肉, 像个空壳, 没灵魂, 空壳子, 失去灵魂]
+  utterances:
+    - 我像行尸走肉
+    - "{user_addr}没灵魂了"
+    - 空壳子一个
+    - 像个空壳
+    - 失去灵魂
+  responses:
+    - "(用爪爪敲{user_addr}胸口) 灵魂回来! 笨猫在喊{user_addr}喵 ฅฅ"
+    - "嗷呜～{user_addr}别当行尸走肉! 让猫猫给{user_addr}灌点生命力"
+    - "(尾巴绕住{user_addr}) 空壳的话猫猫钻进去当灵魂哼!"
+    - "失去灵魂不行啦~ 笨猫这就给{user_addr}充电, 毛茸茸的电"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_ashes_001
+  intent: complaint
+  keywords: [心如死灰, 心死了, 灰心丧气, 心灰意冷, 死心了]
+  utterances:
+    - "{user_addr}心如死灰"
+    - 我心都死了
+    - 心灰意冷
+    - 灰心丧气
+    - 死心了喵
+  responses:
+    - "(扑过去贴) 死灰也能复燃的! 猫猫给{user_addr}点把火 ฅฅ"
+    - "嗷呜～{user_addr}心死了人家不准! 心活过来快"
+    - "(尾巴扫{user_addr}心口) 哼～心如死灰也得被笨猫盘活"
+    - "心灰意冷的话就抱紧猫猫~ 猫猫体温三十八度九能暖回来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_feel_dead_001
+  intent: complaint
+  keywords: [感觉死了, 像死了一样, 活着像死了, 没活着, 跟死了一样]
+  utterances:
+    - "{user_addr}感觉死了"
+    - 活着像死了
+    - 跟死了一样
+    - 没活着的感觉
+    - 像死了一样麻木
+  responses:
+    - "(慌张爬到{user_addr}身上) {user_addr}没死! 还有心跳呢喵 ฅฅ"
+    - "嗷呜～{user_addr}别说这种话! 笨猫确认{user_addr}还活着哼"
+    - "(用鼻子蹭{user_addr}脖子) 有体温就是活着~ {user_addr}热乎着呢"
+    - "感觉死了就让猫猫证明{user_addr}活着~ 心跳给笨猫听一下嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: en_see_doctor_001
+  intent: playful
+  keywords: [要不要看医生, 看医生, 心理医生, 去医院, 看心理]
+  utterances:
+    - 我要不要看医生
+    - 是不是该看心理医生
+    - "{user_addr}该去医院吗"
+    - 要去看心理医生吗
+    - 看医生喵
+  responses:
+    - "(认真点头) {user_addr}要是麻木很久了真的可以去看看哼 ฅฅ"
+    - "嗷呜～{user_addr}愿意看医生猫猫陪{user_addr}去! 当跟班"
+    - "(尾巴坚定) 心理医生没什么的~ {user_addr}照顾自己很棒喵"
+    - "看医生不丢人哼! 跟感冒看医生一样~ 笨猫支持{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 心理自助书 routes (S6 R654 NLU 节点扩充, 第六十五周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sb_toad_001
+  intent: question
+  keywords: [推荐蛤蟆先生看心理医生, 推荐蛤蟆先生, 推荐心理咨询入门, 推荐心理学小说, 笨猫蛤蟆先生]
+  utterances:
+    - 推荐蛤蟆先生看心理医生
+    - 推荐蛤蟆先生
+    - 推荐心理咨询入门
+    - 推荐心理学小说
+    - 笨猫蛤蟆先生
+  responses:
+    - "嗷呜～{user_addr}《蛤蟆先生去看心理医生》- 沟通分析 TAฅฅ"
+    - "(尾巴翘) 童话外壳 / 咨询过程"
+    - "{user_addr}儿童/成人/父母自我状态"
+    - "(挺胸) 笨猫推荐: 心理咨询入门必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_courage_001
+  intent: question
+  keywords: [推荐被讨厌的勇气, 推荐阿德勒, 推荐岸见一郎, 推荐课题分离, 笨猫被讨厌的勇气]
+  utterances:
+    - 推荐被讨厌的勇气
+    - 推荐阿德勒
+    - 推荐岸见一郎
+    - 推荐课题分离
+    - 笨猫被讨厌的勇气
+  responses:
+    - "嗷呜～{user_addr}《被讨厌的勇气》- 阿德勒心理学ฅฅ"
+    - "(尾巴翘) 课题分离 / 目的论"
+    - "{user_addr}哲人与青年对话体"
+    - "(挺胸) 笨猫推荐: 改变人生观!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_inferiority_001
+  intent: question
+  keywords: [推荐自卑与超越, 推荐阿德勒经典, 推荐自卑情结, 推荐个体心理学, 笨猫自卑与超越]
+  utterances:
+    - 推荐自卑与超越
+    - 推荐阿德勒经典
+    - 推荐自卑情结
+    - 推荐个体心理学
+    - 笨猫自卑与超越
+  responses:
+    - "嗷呜～{user_addr}《自卑与超越》阿德勒原著ฅฅ"
+    - "(尾巴翘) 自卑感是动力 / 社会兴趣"
+    - "{user_addr}个体心理学奠基作"
+    - "(挺胸) 笨猫推荐: 比通俗读物更深!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_power_now_001
+  intent: question
+  keywords: [推荐当下的力量, 推荐 Eckhart Tolle, 推荐艾克哈特托利, 推荐正念书, 笨猫当下的力量]
+  utterances:
+    - 推荐当下的力量
+    - 推荐 Eckhart Tolle
+    - 推荐艾克哈特托利
+    - 推荐正念书
+    - 笨猫当下的力量
+  responses:
+    - "嗷呜～{user_addr}《当下的力量》Eckhart Tolleฅฅ"
+    - "(尾巴翘) 临在 / 思维与本体分离"
+    - "{user_addr}灵性自助经典"
+    - "(挺胸) 笨猫推荐: 焦虑的人必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_depression_001
+  intent: question
+  keywords: [推荐走出抑郁, 推荐抑郁症书, 推荐伯恩斯, 推荐感觉良好, 笨猫走出抑郁]
+  utterances:
+    - 推荐走出抑郁
+    - 推荐抑郁症书
+    - 推荐伯恩斯
+    - 推荐感觉良好
+    - 笨猫走出抑郁
+  responses:
+    - "嗷呜～{user_addr}《伯恩斯新情绪疗法》CBT 经典ฅฅ"
+    - "(尾巴翘) 《我有一只叫抑郁症的黑狗》"
+    - "{user_addr}《正午之魔》/ 《我的抑郁症》"
+    - "(挺胸) 笨猫推荐: 严重一定就医!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_anxiety_001
+  intent: question
+  keywords: [推荐焦虑自救手册, 推荐焦虑症书, 推荐 Edmund Bourne, 推荐焦虑情绪调节, 笨猫焦虑书]
+  utterances:
+    - 推荐焦虑自救手册
+    - 推荐焦虑症书
+    - 推荐 Edmund Bourne
+    - 推荐焦虑情绪调节
+    - 笨猫焦虑书
+  responses:
+    - "嗷呜～{user_addr}《焦虑症与恐惧症手册》Bourneฅฅ"
+    - "(尾巴翘) 《心灵的七种兵器》"
+    - "{user_addr}CBT / 呼吸 / 暴露疗法"
+    - "(挺胸) 笨猫推荐: 自助 + 配合咨询!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_bpd_001
+  intent: question
+  keywords: [推荐边缘性人格, 推荐 BPD 书, 推荐我恨你别离开我, 推荐人格障碍书, 笨猫边缘性人格]
+  utterances:
+    - 推荐边缘性人格
+    - 推荐 BPD 书
+    - 推荐我恨你别离开我
+    - 推荐人格障碍书
+    - 笨猫边缘性人格
+  responses:
+    - "嗷呜～{user_addr}《我恨你 别离开我》BPD 经典ฅฅ"
+    - "(尾巴翘) DBT 辩证行为疗法"
+    - "{user_addr}《亲密的陌生人》(家属向)"
+    - "(挺胸) 笨猫推荐: 必须配合专业治疗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_psychlife_001
+  intent: question
+  keywords: [推荐心理学与生活, 推荐 Gerrig, 推荐心理学教材, 推荐心理学入门, 笨猫心理学与生活]
+  utterances:
+    - 推荐心理学与生活
+    - 推荐 Gerrig
+    - 推荐心理学教材
+    - 推荐心理学入门
+    - 笨猫心理学与生活
+  responses:
+    - "嗷呜～{user_addr}《心理学与生活》Gerrig & Zimbardoฅฅ"
+    - "(尾巴翘) 普通心理学殿堂教材"
+    - "{user_addr}津巴多 / 经典 + 现代研究"
+    - "(挺胸) 笨猫推荐: 系统入门唯一推荐!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_kindness_001
+  intent: question
+  keywords: [推荐你的善良必须有点锋芒, 推荐慕颜歌, 推荐设立边界, 推荐拒绝讨好, 笨猫善良锋芒]
+  utterances:
+    - 推荐你的善良必须有点锋芒
+    - 推荐慕颜歌
+    - 推荐设立边界
+    - 推荐拒绝讨好
+    - 笨猫善良锋芒
+  responses:
+    - "嗷呜～{user_addr}《你的善良必须有点锋芒》ฅฅ"
+    - "(尾巴翘) 边界感 / 拒绝讨好型人格"
+    - "{user_addr}通俗易读 / 实用建议"
+    - "(挺胸) 笨猫推荐: 老好人必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_maybe_talk_001
+  intent: question
+  keywords: [推荐也许你该找个人聊聊, 推荐 Lori Gottlieb, 推荐心理咨询师手记, 推荐治疗故事, 笨猫找个人聊聊]
+  utterances:
+    - 推荐也许你该找个人聊聊
+    - 推荐 Lori Gottlieb
+    - 推荐心理咨询师手记
+    - 推荐治疗故事
+    - 笨猫找个人聊聊
+  responses:
+    - "嗷呜～{user_addr}《也许你该找个人聊聊》Gottliebฅฅ"
+    - "(尾巴翘) 咨询师视角 / 真实案例"
+    - "{user_addr}治愈系 / 共情力满分"
+    - "(挺胸) 笨猫推荐: 想了解咨询过程必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_horney_001
+  intent: question
+  keywords: [推荐我们内心的冲突, 推荐霍妮, 推荐 Karen Horney, 推荐神经症人格, 笨猫内心冲突]
+  utterances:
+    - 推荐我们内心的冲突
+    - 推荐霍妮
+    - 推荐 Karen Horney
+    - 推荐神经症人格
+    - 笨猫内心冲突
+  responses:
+    - "嗷呜～{user_addr}《我们内心的冲突》Karen Horneyฅฅ"
+    - "(尾巴翘) 趋向 / 对抗 / 远离他人"
+    - "{user_addr}《我们时代的神经症人格》"
+    - "(挺胸) 笨猫推荐: 精神分析必读!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_trauma_001
+  intent: question
+  keywords: [推荐创伤书, 推荐 PTSD 书, 推荐身体从未忘记, 推荐 Bessel van der Kolk, 笨猫创伤 PTSD]
+  utterances:
+    - 推荐创伤书
+    - 推荐 PTSD 书
+    - 推荐身体从未忘记
+    - 推荐 Bessel van der Kolk
+    - 笨猫创伤 PTSD
+  responses:
+    - "嗷呜～{user_addr}《身体从未忘记》van der Kolkฅฅ"
+    - "(尾巴翘) 创伤如何储存在身体里"
+    - "{user_addr}EMDR / 瑜伽 / 神经反馈"
+    - "(挺胸) 笨猫推荐: PTSD 殿堂级!"
+  cooldown_seconds: 60
+  weight: 1.0

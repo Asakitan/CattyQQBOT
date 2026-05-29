@@ -1,0 +1,206 @@
+# 冥想深度 routes (S6 R655 NLU 节点扩充, 第六十五周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: md_vipassana_001
+  intent: question
+  keywords: [推荐内观, 推荐 Vipassana, 推荐观呼吸, 推荐觉察, 笨猫内观]
+  utterances:
+    - 推荐内观
+    - 推荐 Vipassana
+    - 推荐观呼吸
+    - 推荐觉察
+    - 笨猫内观
+  responses:
+    - "嗷呜～{user_addr}内观 Vipassana - 观察当下ฅฅ"
+    - "(尾巴翘) 葛印卡十日课 / 免费"
+    - "{user_addr}如实观照 / 不评判"
+    - "(挺胸) 笨猫推荐: 入门读《观呼吸》!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_metta_001
+  intent: question
+  keywords: [推荐慈心禅, 推荐 Metta, 推荐慈悲冥想, 推荐祝福冥想, 笨猫慈心禅]
+  utterances:
+    - 推荐慈心禅
+    - 推荐 Metta
+    - 推荐慈悲冥想
+    - 推荐祝福冥想
+    - 笨猫慈心禅
+  responses:
+    - "嗷呜～{user_addr}慈心禅 Metta - 散发善意ฅฅ"
+    - "(尾巴翘) 愿你平安 / 愿你健康"
+    - "{user_addr}从自己 → 亲人 → 陌生人 → 敌人"
+    - "(挺胸) 笨猫推荐: 心情低落首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_bodyscan_001
+  intent: question
+  keywords: [推荐身体扫描, 推荐 Body Scan, 推荐躯体觉察, 推荐睡前冥想, 笨猫身体扫描]
+  utterances:
+    - 推荐身体扫描
+    - 推荐 Body Scan
+    - 推荐躯体觉察
+    - 推荐睡前冥想
+    - 笨猫身体扫描
+  responses:
+    - "嗷呜～{user_addr}身体扫描 - 从头到脚ฅฅ"
+    - "(尾巴翘) 躺着做 / 睡前神器"
+    - "{user_addr}MBSR 经典 / 卡巴金博士"
+    - "(挺胸) 笨猫推荐: 失眠党必试!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_breath_001
+  intent: question
+  keywords: [推荐呼吸冥想, 推荐数息, 推荐 4-7-8, 推荐腹式呼吸, 笨猫呼吸冥想]
+  utterances:
+    - 推荐呼吸冥想
+    - 推荐数息
+    - 推荐 4-7-8
+    - 推荐腹式呼吸
+    - 笨猫呼吸冥想
+  responses:
+    - "嗷呜～{user_addr}呼吸冥想 - 最朴素ฅฅ"
+    - "(尾巴翘) 数息 1-10 循环 / 4-7-8"
+    - "{user_addr}腹式呼吸 / 鼻吸口呼"
+    - "(挺胸) 笨猫推荐: 焦虑发作立刻用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_walking_001
+  intent: question
+  keywords: [推荐走路冥想, 推荐经行, 推荐 Walking Meditation, 推荐步行禅, 笨猫走路冥想]
+  utterances:
+    - 推荐走路冥想
+    - 推荐经行
+    - 推荐 Walking Meditation
+    - 推荐步行禅
+    - 笨猫走路冥想
+  responses:
+    - "嗷呜～{user_addr}走路冥想 - 动中禅ฅฅ"
+    - "(尾巴翘) 觉察脚掌触地 / 缓慢"
+    - "{user_addr}一行禅师推广 / 边走边觉知"
+    - "(挺胸) 笨猫推荐: 坐不住的人首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_eating_001
+  intent: question
+  keywords: [推荐进食冥想, 推荐正念吃饭, 推荐葡萄干练习, 推荐慢食, 笨猫进食冥想]
+  utterances:
+    - 推荐进食冥想
+    - 推荐正念吃饭
+    - 推荐葡萄干练习
+    - 推荐慢食
+    - 笨猫进食冥想
+  responses:
+    - "嗷呜～{user_addr}进食冥想 - 一颗葡萄干吃 5 分钟ฅฅ"
+    - "(尾巴翘) 看 / 闻 / 咬 / 嚼 / 咽 全觉察"
+    - "{user_addr}MBSR 经典练习 / 减肥也有效"
+    - "(挺胸) 笨猫推荐: 暴食党自救!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_nature_001
+  intent: question
+  keywords: [推荐自然冥想, 推荐森林冥想, 推荐 Shinrin-yoku, 推荐海边冥想, 笨猫自然冥想]
+  utterances:
+    - 推荐自然冥想
+    - 推荐森林冥想
+    - 推荐 Shinrin-yoku
+    - 推荐海边冥想
+    - 笨猫自然冥想
+  responses:
+    - "嗷呜～{user_addr}森林浴 Shinrin-yoku - 日本国宝ฅฅ"
+    - "(尾巴翘) 树林 / 溪流 / 海浪声"
+    - "{user_addr}降皮质醇 / 提升 NK 细胞"
+    - "(挺胸) 笨猫推荐: 周末进山一次!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_app_001
+  intent: question
+  keywords: [推荐冥想 App, 推荐 Headspace, 推荐 Calm, 推荐潮汐, 笨猫冥想 App]
+  utterances:
+    - 推荐冥想 App
+    - 推荐 Headspace
+    - 推荐 Calm
+    - 推荐潮汐
+    - 笨猫冥想 App
+  responses:
+    - "嗷呜～{user_addr}Headspace / Calm - 国际大牌ฅฅ"
+    - "(尾巴翘) 潮汐 / Now 正念 - 国内好用"
+    - "{user_addr}Insight Timer - 免费海量"
+    - "(挺胸) 笨猫推荐: 新手潮汐入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_retreat_001
+  intent: question
+  keywords: [推荐闭关静修, 推荐内观十日, 推荐禅七, 推荐 Retreat, 笨猫闭关]
+  utterances:
+    - 推荐闭关静修
+    - 推荐内观十日
+    - 推荐禅七
+    - 推荐 Retreat
+    - 笨猫闭关
+  responses:
+    - "嗷呜～{user_addr}葛印卡内观十日 - 全球免费ฅฅ"
+    - "(尾巴翘) 禅宗禅七 / 南传止语营"
+    - "{user_addr}手机上交 / 完全止语"
+    - "(挺胸) 笨猫推荐: 一生至少一次!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_watch_001
+  intent: question
+  keywords: [推荐苹果手表呼吸, 推荐 Apple Watch 正念, 推荐手表冥想, 推荐 Mindfulness, 笨猫手表冥想]
+  utterances:
+    - 推荐苹果手表呼吸
+    - 推荐 Apple Watch 正念
+    - 推荐手表冥想
+    - 推荐 Mindfulness
+    - 笨猫手表冥想
+  responses:
+    - "嗷呜～{user_addr}Apple Watch 正念 App - 1 分钟ฅฅ"
+    - "(尾巴翘) 触觉震动引导呼吸"
+    - "{user_addr}华为 / 小米手环都有"
+    - "(挺胸) 笨猫推荐: 工位摸鱼神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_micro_001
+  intent: question
+  keywords: [推荐微习惯冥想, 推荐 1 分钟冥想, 推荐红绿灯冥想, 推荐碎片冥想, 笨猫微冥想]
+  utterances:
+    - 推荐微习惯冥想
+    - 推荐 1 分钟冥想
+    - 推荐红绿灯冥想
+    - 推荐碎片冥想
+    - 笨猫微冥想
+  responses:
+    - "嗷呜～{user_addr}1 分钟冥想 - 等红灯做ฅฅ"
+    - "(尾巴翘) 等电梯 / 排队 / 上厕所"
+    - "{user_addr}3 次深呼吸就是一次"
+    - "(挺胸) 笨猫推荐: 坚持比时长重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_starter_001
+  intent: question
+  keywords: [推荐 5 分钟入门, 推荐冥想新手, 推荐冥想入门, 推荐零基础冥想, 笨猫冥想入门]
+  utterances:
+    - 推荐 5 分钟入门
+    - 推荐冥想新手
+    - 推荐冥想入门
+    - 推荐零基础冥想
+    - 笨猫冥想入门
+  responses:
+    - "嗷呜～{user_addr}坐直 / 闭眼 / 数呼吸 5 分钟ฅฅ"
+    - "(尾巴翘) 走神不批判 / 拉回来就行"
+    - "{user_addr}每天同一时间 / 早晨最佳"
+    - "(挺胸) 笨猫推荐: 21 天养习惯!"
+  cooldown_seconds: 60
+  weight: 1.0
