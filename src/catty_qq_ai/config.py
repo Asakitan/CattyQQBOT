@@ -409,9 +409,18 @@ class Config(BaseModel):
     #               LLM 可在输出加 <DEEPSEEK reason="..."> 标记自决透传
     # 主人决策: 服务器关 MC 后 16.3GB free, 直接全量 catnify 上线.
     catty_cpu_engine_l4_mode: str = "catnify"
-    catty_cpu_engine_l4_catnify_model: str = "qwen3:4b"
-    catty_cpu_engine_l4_catnify_timeout_ms: int = 3000
-    catty_cpu_engine_l4_catnify_max_input_tokens: int = 4000
+    # 主人 2026-05-29 S5.6e: 实测 qwen3 thinking 关不掉超时, qwen2.5:1.5b 扮演弱.
+    # 最终选 qwen2.5:3b: warm 2.85s / decode 11.6 tok/s / 笨猫扮演完美 (4 核 affinity 下).
+    catty_cpu_engine_l4_catnify_model: str = "qwen2.5:3b"
+    # S5.6f (主人 2026-05-29) BUG FIX: catnify 必须走本地 Ollama, 不能复用 ai_fallback
+    # (主人 ai_fallback 配的是 deepseek.com 兜底, catnify 调它会跑去 DeepSeek 烧 token).
+    catty_cpu_engine_l4_catnify_base_url: str = "http://127.0.0.1:11434/v1"
+    catty_cpu_engine_l4_catnify_api_key: str = "ollama"
+    # S5.6f (主人 2026-05-29): 实测 qwen2.5:3b cold load 4.9s (磁盘→内存),
+    # warm 2.85s; timeout 8s 留 cold 余地, 主人 ≤10s 上限内.
+    catty_cpu_engine_l4_catnify_timeout_ms: int = 8000
+    # 主人 2026-05-29 v2: token 输入只能 < 1000 (6C CPU prefill 慢, 保守 800 留余量)
+    catty_cpu_engine_l4_catnify_max_input_tokens: int = 800
     catty_cpu_engine_l4_catnify_temperature: float = 0.7
     catty_cpu_engine_l4_catnify_max_tokens: int = 200
     catty_cpu_engine_l4_catnify_history_turns: int = 4
@@ -426,14 +435,19 @@ class Config(BaseModel):
     # 搜索短路: 命中 web search 关键词时跳过整个 CPU 引擎让旧搜索链处理
     catty_cpu_engine_l4_catnify_search_shortcut: bool = True
     # ── S6 (主人 2026-05-29): L3 corpus 自动蒸馏 (DeepSeek 回复 → qa_corpus_live.jsonl) ──
-    # 主链路 emit 完 DeepSeek 回复后异步追加, 累积 N 条触发 L3 index reload.
-    # 私聊默认不采 (隐私), 仅采群聊.
+    # openai_client 的回复入口 (chat_completion / _with_tools / _instant / _codex_instant)
+    # 拿到 DeepSeek 生成的【面向用户回复】后异步追加, 累积 N 条触发 L3 index reload.
+    # 主人 2026-05-29 决策: 私聊 (含 NSFW) 也采, 全采 — 只在写入前脱敏 (@/QQ号/称呼).
+    # filter/分类/判断 (输出 bool/JSON) 不采 (埋点不在那些入口, 见 corpus_distill 模块头).
     catty_cpu_engine_l3_distill_enabled: bool = True
-    catty_cpu_engine_l3_distill_skip_private: bool = True
+    # 主人 2026-05-29: 默认 False = 私聊也采 (全采). 之前误为 True 导致私聊全被跳过.
+    catty_cpu_engine_l3_distill_skip_private: bool = False
     catty_cpu_engine_l3_distill_live_corpus_path: str = (
         "src/catty_qq_ai/data/cpu_engine/corpus/qa_corpus_live.jsonl"
     )
-    catty_cpu_engine_l3_distill_rebuild_threshold: int = 50
+    # 主人 2026-05-29: 50 太高 (单链路时 pending 卡 11/50 永不 rebuild). 现在全链路采集 +
+    # 调到 12, 让新蒸馏的语料更快进 L3 index. 热重载可随时改 config.json 即生效.
+    catty_cpu_engine_l3_distill_rebuild_threshold: int = 12
     catty_cpu_engine_l3_distill_dedup_window: int = 1000
     catty_cpu_engine_l3_distill_min_user_len: int = 4
     catty_cpu_engine_l3_distill_max_user_len: int = 200

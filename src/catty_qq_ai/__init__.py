@@ -6378,10 +6378,13 @@ async def _local_critic_warmup_loop() -> None:
 
 
 async def _cpu_engine_warmup_loop() -> None:
-    """启动时异步初始化 CPU 引擎 (加载 routes + 预算 embeddings).
+    """启动时异步初始化 CPU 引擎 (加载 routes + 预算 embeddings + 预热 Ollama catnify).
 
     enabled=False 时直接退出 loop, 不占资源.
     异常仅 warn, 业务侧已有 enabled/ready 保护透传到现链路.
+
+    S5.6h (主人 2026-05-29): 加 catnify Ollama 预热 — Ollama runner cold load
+    qwen2.5:3b 需要 ~20s, 不预热第一条 QQ 消息会被 catnify timeout 8s 拦掉走 fallback.
     """
     if not _CPU_ENGINE_IMPORT_OK or _cpu_engine_get_router is None:
         return
@@ -6393,6 +6396,38 @@ async def _cpu_engine_warmup_loop() -> None:
         logger.info("[cpu_engine] startup warmup done")
     except Exception as exc:  # noqa: BLE001
         logger.exception(f"[cpu_engine] startup warmup failed: {exc}")
+
+    # S5.6h: 预热 Ollama catnify (仅 mode=catnify 才需要)
+    _l4_mode = str(getattr(config, "catty_cpu_engine_l4_mode", "") or "").lower()
+    if _l4_mode != "catnify":
+        return
+    try:
+        import httpx
+        base_url = str(
+            getattr(config, "catty_cpu_engine_l4_catnify_base_url", "") or ""
+        ).rstrip("/")
+        api_key = str(getattr(config, "catty_cpu_engine_l4_catnify_api_key", "") or "")
+        model = str(getattr(config, "catty_cpu_engine_l4_catnify_model", "") or "")
+        if not base_url or not model:
+            logger.info("[cpu_engine.catnify_warmup] config missing, skip warmup")
+            return
+        payload = {
+            "model": model,
+            "messages": [{"role": "user", "content": "hi"}],
+            "temperature": 0,
+            "max_tokens": 1,
+        }
+        headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+        t0 = time.monotonic()
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            resp = await client.post(f"{base_url}/chat/completions", json=payload, headers=headers)
+            resp.raise_for_status()
+        elapsed_ms = (time.monotonic() - t0) * 1000.0
+        logger.info(
+            f"[cpu_engine.catnify_warmup] ollama warmup OK model={model} latency_ms={elapsed_ms:.0f}"
+        )
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"[cpu_engine.catnify_warmup] ollama warmup failed (非致命): {exc}")
 
 
 async def _cpu_engine_routes_watch_loop() -> None:
@@ -7004,6 +7039,10 @@ async def _generate_placeholder_line(*, is_owner: bool) -> str | None:
         config.catty_filter_api_key or config.catty_audit_ai_api_key or config.catty_openai_api_key
     ):
         return None
+    # 主人 2026-05-29: 占位话是"垫场话"不是真正回答, 不蒸馏 (否则会和同轮正式回复抢
+    # 同一个 user_text, 触发 dedup 把正式回复挤掉). 占位在独立 task 跑, suppress 仅影响本 task.
+    from .openai_client import set_distill_suppressed, reset_distill_suppressed
+    _sup_token = set_distill_suppressed(True)
     try:
         reply = await chat_completion_codex_instant(
             config,
@@ -7019,6 +7058,8 @@ async def _generate_placeholder_line(*, is_owner: bool) -> str | None:
     except Exception as exc:  # noqa: BLE001
         logger.info(f"placeholder spark unexpected (fallback to lines): {type(exc).__name__}: {exc}")
         return None
+    finally:
+        reset_distill_suppressed(_sup_token)
     text = _sanitize_residual_markers(reply or "")
     text = text.replace(NO_REPLY_MARKER, "").strip()
     # 多行/超长一概不要(placeholder 必须短)

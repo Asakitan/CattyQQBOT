@@ -87,6 +87,19 @@ class CPUEngineRouter:
     def ready(self) -> bool:
         return self._ready
 
+    def update_config(self, config: Any) -> None:
+        """S6 (主人 2026-05-29 hotreload): 刷新 config 引用让【参数】热生效, 不重启 bot.
+
+        覆盖所有方法里 getattr(self._config) 动态读的参数 (L2/L3 阈值、catnify
+        mode/timeout/并发/fallback、l4_mode、l3_distill 等). 不改 self._enabled 和
+        已构建的索引 — 开关 CPU 引擎 (catty_cpu_engine_enabled) 或换 routes/语料/索引
+        路径属于结构性变更, 仍需重启 bot 重 prepare().
+        """
+        self._config = config
+        self._cat_suffixes = list(
+            getattr(config, "catty_cpu_engine_cat_suffixes", []) or []
+        )
+
     def prepare(self) -> None:
         """启动时调用. 失败仅 warn 不抛, 让 bot 仍能跑."""
         if not self._enabled:
@@ -542,6 +555,9 @@ def get_router(config: Any) -> CPUEngineRouter:
     if _GLOBAL_ROUTER is None:
         _GLOBAL_ROUTER = CPUEngineRouter(config)
         _GLOBAL_ROUTER.prepare()
+    else:
+        # S6 hotreload: 单例已存在 → 刷新 config 引用, 让 config.json 改的参数热生效 (不重 prepare).
+        _GLOBAL_ROUTER.update_config(config)
     return _GLOBAL_ROUTER
 
 

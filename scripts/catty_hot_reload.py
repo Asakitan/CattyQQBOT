@@ -20,9 +20,14 @@ WATCH_FILES = (
     "pyproject.toml",
     "CattyQQAI.spec",
     "README.md",
-    "config.example.json",
+    "config.example.json",  # 模板文件: 改它=代码级变更 → 重启
     "start_catty.bat",
 )
+# 主人 2026-05-29 hotreload guard: 运行时配置 config.json 【故意】不在 WATCH_FILES /
+# WATCH_DIRS(src/scripts) 内 — 守护进程绝不为它 kill/重启 bot.py。改 config.json 只走
+# bot 进程内 _hot_reload_loop: 重建全局 config + get_router/get_distiller 的 update_config
+# 刷新单例, distill 阈值 / skip_private / catnify 参数等当场热生效。
+# 「能不关 bot.py 就不关、只重载参数」就靠这条分工 —— 别把 config.json 加进上面的监听清单。
 WATCH_EXTENSIONS = {".bat", ".json", ".md", ".ps1", ".py", ".spec", ".toml", ".yaml", ".yml"}
 IGNORED_DIR_NAMES = {
     ".git",

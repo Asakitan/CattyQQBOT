@@ -1,11 +1,17 @@
 """S6 (主人 2026-05-29): 自动抓 DeepSeek 问答蒸馏到 L3 corpus.
 
-DeepSeek 主链路每次 emit 回复后异步调 ``maybe_distill(scope, user_text, assistant_text)``:
+主人 2026-05-29: 蒸馏埋点收口在 openai_client 的【面向用户回复入口】(chat_completion /
+chat_completion_with_tools / chat_completion_instant / chat_completion_codex_instant),
+一处覆盖主 AI / fallback DeepSeek / catnify 透传回 L5 / NSFW spark / 占位话 / 签到 caption.
+**不采** filter/分类/情绪/怒气判断 (输出 bool/JSON) 和后台 summary / local_critic — 那些
+入口不埋, 避免把判断结果当问答污染语料. CPU 自产的 L1/L2/L3 直答也不蒸 (杜绝自循环).
+
+回调 ``maybe_distill(scope, user_text, assistant_text, intent, source, sanitize_terms)``:
 - 过滤无效对 (含 CQ 媒体 / URL / 过长过短) — 复用 bootstrap_corpus.py 规则
 - 去重 (normalized hash + LRU 窗口)
-- 隐私: 私聊**不**采 (复用 ``sample_only_group`` 思路), 群聊 + 主人指定群采
+- 隐私: 私聊 (含 NSFW) 也采 = 全采, 写入前 ``_sanitize`` 脱敏 (@标签 / QQ号 / 调用方传的称呼)
 - 追加 ``qa_corpus_live.jsonl`` (与 bootstrap 静态 corpus 分文件)
-- 累积 ``rebuild_threshold`` 条触发 ``router.l3.reload()`` 异步重 build index, 不阻塞主链路
+- 累积 ``rebuild_threshold`` 条触发 ``router.reload_l3_corpus()`` 异步重 build index, 不阻塞主链路
 
 跟 plan S4 evolution 的差异:
 - S4 = 每日 03:00 批量, DeepSeek 评审 + git commit + 回滚栅栏
@@ -122,6 +128,24 @@ class CorpusDistiller:
         self._total_appended: int = 0
         self._last_rebuild_ts: float = 0.0
         self._rebuild_lock = asyncio.Lock()
+
+    def update_config(self, config: Any) -> None:
+        """S6 (主人 2026-05-29 hotreload): 热重载时刷新 config 引用, 让 distill 参数
+        (enabled / skip_private / rebuild_threshold / 长度门槛) 不重启 bot 即生效.
+
+        这些参数都在 _enabled / _skip_private / _rebuild_threshold / _min_*_len 里
+        每次 getattr(self._config) 动态读 — 换掉引用就热生效. 只有 dedup_window 是
+        构造期定的 deque maxlen, 变了才重建窗口 (保留最近 N 条).
+        """
+        self._config = config
+        new_window = int(
+            getattr(config, "catty_cpu_engine_l3_distill_dedup_window", 0) or 1000
+        )
+        if new_window != self._dedup_window:
+            self._dedup_window = new_window
+            kept = list(self._dedup)[-new_window:]
+            self._dedup = deque(kept, maxlen=new_window)
+            self._dedup_set = set(self._dedup)
 
     @property
     def stats(self) -> dict[str, Any]:
@@ -322,6 +346,9 @@ def get_distiller(
             f"enabled={_GLOBAL_DISTILLER._enabled()} "
             f"threshold={_GLOBAL_DISTILLER._rebuild_threshold()}"
         )
+    else:
+        # S6 hotreload: 单例已存在 → 刷新 config 引用, 让 config.json 改的 distill 参数热生效.
+        _GLOBAL_DISTILLER.update_config(config)
     return _GLOBAL_DISTILLER
 
 

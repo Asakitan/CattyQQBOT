@@ -438,6 +438,96 @@ def get_current_scope_key() -> str | None:
     return _current_scope_key_var.get()
 
 
+# === S6 (主人 2026-05-29): DeepSeek 回复统一蒸馏 hook ===
+# 主人决策: 所有"主 AI / catnify 透传 / NSFW spark / 占位/签到"等【生成自然语言回复】
+# 的链路都要蒸馏到 L3 corpus, 但 filter/分类/判断 (输出 bool/JSON) 绝不采.
+# 落点选在 openai_client 的【面向用户回复入口】(chat_completion / _with_tools 自返回点 /
+# _instant / _codex_instant), 一处覆盖所有调用者, 不管 handle_chat 内部怎么分段都只采一次
+# 完整回复. _filter_completion / _post_with_fallback / summary / local_critic 不埋 (分类/总结).
+#
+# 解耦: openai_client 不 import cpu_engine. __init__.py 在 router ready 后 set 一个 hook,
+# 这里只负责"在拿到 reply 时, 若当前轮是真实聊天 (有 distill ctx + scope 是 private/group)
+# 就把 (user_text, reply) 交给 hook". hook 内部自己 fire-and-forget 调 distiller.
+#
+# 签名: hook(user_text: str, assistant_text: str, scope: str, terms: list[str], source: str)
+_reply_distill_hook: Any = None
+
+# 当前轮蒸馏上下文 (handle_chat 入口 set): 干净的 user 原文 + 脱敏 terms.
+# 后台 summary / sim_chat / 分类判断路径不 set → 留 None → 不蒸 (安全阀).
+_current_distill_ctx_var: contextvars.ContextVar[dict[str, Any] | None] = contextvars.ContextVar(
+    "catty_current_distill_ctx", default=None,
+)
+
+
+def set_reply_distill_hook(fn: Any) -> None:
+    """__init__.py 在 cpu_engine router ready 后注册. fn 为 None 时关闭蒸馏."""
+    global _reply_distill_hook
+    _reply_distill_hook = fn
+
+
+def set_current_distill_context(user_text: str | None, terms: list[str] | None) -> None:
+    """bot handler 入口 (handle_chat) 调: 记下当前轮干净 user 原文 + 脱敏 terms.
+
+    只有 set 过的 async context 才会触发蒸馏 — 后台总结 / dev sim / 分类判断路径不 set,
+    自然被 _maybe_distill_reply 的安全阀挡掉, 不会把非聊天内容污染进 L3.
+    """
+    _current_distill_ctx_var.set(
+        {"user_text": user_text or "", "terms": list(terms or [])}
+    )
+
+
+def clear_current_distill_context() -> None:
+    _current_distill_ctx_var.set(None)
+
+
+# 主人 2026-05-29: 占位话 / 超时垫场话 ("猫猫现在很忙~稍等喵") 等"非真正回答"路径用此
+# 临时抑制蒸馏 — 它们不是用户问题的答案, 且和同轮正式回复共享 user_text, 不排除会被
+# dedup 挤掉真正的回复. 占位在独立 task 跑 (contextvar 已隔离), 仍 try/finally reset 兜底.
+_distill_suppressed_var: contextvars.ContextVar[bool] = contextvars.ContextVar(
+    "catty_distill_suppressed", default=False,
+)
+
+
+def set_distill_suppressed(flag: bool) -> contextvars.Token:
+    return _distill_suppressed_var.set(bool(flag))
+
+
+def reset_distill_suppressed(token: Any) -> None:
+    try:
+        _distill_suppressed_var.reset(token)
+    except Exception:  # noqa: BLE001
+        pass
+
+
+def _maybe_distill_reply(reply: str, *, source: str) -> None:
+    """面向用户回复入口拿到 reply 后调. 同步、永不抛 — 失败静默.
+
+    安全阀 (任一不满足直接跳过, 保证只采真实聊天的猫娘回复):
+      1. hook 已注册 (router ready)
+      2. reply 非空
+      3. 当前 async context 有 distill ctx 且 user_text 非空 (= 经过 handle_chat 入口)
+      4. scope 是 private:* / group:* (排除 summary: / sim: / 空 scope)
+    """
+    if _distill_suppressed_var.get():
+        return
+    hook = _reply_distill_hook
+    if hook is None or not reply or not reply.strip():
+        return
+    ctx = _current_distill_ctx_var.get()
+    if not ctx:
+        return
+    user_text = str(ctx.get("user_text") or "")
+    if not user_text.strip():
+        return
+    scope = get_current_scope_key() or ""
+    if not (scope.startswith("private:") or scope.startswith("group:")):
+        return
+    try:
+        hook(user_text, reply, scope, list(ctx.get("terms") or []), source)
+    except Exception:  # noqa: BLE001
+        pass
+
+
 def _scope_to_metadata_user_id(scope_key: str | None) -> str | None:
     """scope key (private:123 / group:456) → Anthropic metadata.user_id 格式.
 
@@ -1484,7 +1574,10 @@ async def chat_completion_with_tools(
             # 模型直接给了最终回复
             if _cloud_is_unhealthy():
                 _mark_cloud_healthy()
-            return _extract_content(data)
+            _reply = _extract_content(data)
+            # S6: 有 tools 但模型直接出文本回复 (不经 chat_completion) → 在此蒸馏
+            _maybe_distill_reply(_reply, source="deepseek")
+            return _reply
 
         # 协议要求:把 assistant 含 tool_calls 的消息原样写回 history
         assistant_msg: dict[str, Any] = {
@@ -1580,6 +1673,8 @@ async def chat_completion_with_tools(
         if short_circuit_reply:
             if _cloud_is_unhealthy():
                 _mark_cloud_healthy()
+            # S6: tool 短路回复 (catty_imagegen agent 模式等, 不经 chat_completion) → 蒸馏
+            _maybe_distill_reply(short_circuit_reply, source="deepseek_tool")
             return short_circuit_reply
 
         # Phase B1: tool cascade — 看上一轮 tool 结果, 给 AI 一个『下一步推荐调 X』hint
@@ -1626,6 +1721,18 @@ async def chat_completion_with_tools(
 
 
 async def chat_completion(config: Config, messages: list[ChatMessage]) -> str:
+    """主回复入口 (plain chat). S6: 成功返回后统一蒸馏到 L3.
+
+    with_tools 的多数降级路径也委托到这里 → 一处覆盖主 AI / fallback DeepSeek /
+    catnify 透传回 L5 等所有走主回复的链路. _maybe_distill_reply 内部有安全阀,
+    后台 summary (走 chat_completion_summary 兜底进来) 因 scope=summary:* 被自动挡掉.
+    """
+    reply = await _chat_completion_impl(config, messages)
+    _maybe_distill_reply(reply, source="deepseek")
+    return reply
+
+
+async def _chat_completion_impl(config: Config, messages: list[ChatMessage]) -> str:
     fallback_ready = _fallback_is_configured(config)
     cooldown = float(getattr(config, "catty_ai_fallback_cooldown_seconds", 300.0))
 
@@ -1799,7 +1906,12 @@ async def chat_completion_instant(config: Config, messages: list[ChatMessage], *
     主回复模型 (gpt-5.5 等) 响应慢,这里需要『立刻』出文案不能等。
     复用 _filter_completion 的路由逻辑;无 spark 配置时自动回退到 audit/openai。
     """
-    return await _filter_completion(config, messages, fallback_max_tokens=fallback_max_tokens)
+    reply = await _filter_completion(config, messages, fallback_max_tokens=fallback_max_tokens)
+    # S6: instant 是面向用户的猫娘短回复 (占位话/签到 caption) → 蒸馏.
+    # 注意: 这里在 chat_completion_instant 埋而非 _filter_completion, 因为 _filter_completion
+    # 还被 classify_mood / assess_anger / should_reply 等分类判断复用 (输出 bool/JSON, 不能采).
+    _maybe_distill_reply(reply, source="deepseek_instant")
+    return reply
 
 
 async def _post_with_fallback(
@@ -1914,7 +2026,7 @@ async def chat_completion_codex_instant(
         or config.catty_audit_ai_api_key
         or config.catty_openai_api_key
     )
-    return await _post_with_fallback(
+    reply = await _post_with_fallback(
         config,
         base_url=base_url,
         api_key=api_key,
@@ -1929,6 +2041,10 @@ async def chat_completion_codex_instant(
         cache_depth=int(getattr(config, "catty_prompt_cache_depth", 2) or 2),
         label=f"codex_instant({nsfw_model})",
     )
+    # S6: codex_instant 覆盖 NSFW spark / 占位话 / 签到 caption — 都是面向用户的猫娘回复 → 蒸馏.
+    # (在此入口埋而非 _post_with_fallback, 后者还被 _filter_completion 分类路径复用.)
+    _maybe_distill_reply(reply, source="deepseek_codex")
+    return reply
 
 
 async def _filter_completion(config: Config, messages: list[ChatMessage], *, fallback_max_tokens: int = 64) -> str:
