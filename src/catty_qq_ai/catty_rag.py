@@ -24,6 +24,7 @@ import logging
 import re
 import threading
 import time
+from collections import OrderedDict
 from pathlib import Path
 from typing import Any
 
@@ -33,6 +34,10 @@ logger = logging.getLogger(__name__)
 _MAX_RECALL_TOP_K = 5     # query 默认 top-K
 _MAX_PER_SCOPE_DOCS = 2000  # per-scope 文档上限, 老的自动 drop
 _RECALL_MIN_SIMILARITY = 0.3  # 余弦相似度低于此值不召回 (噪音过滤)
+# 主人 2026-05-30: 803 users × HNSW 索引 → 17GB 泄漏; LRU 限 100 active scope
+# evict 时间: collection 超 1h 未访问 → 主动 release
+_MAX_ACTIVE_COLLECTIONS = 100
+_COLLECTION_STALE_SECONDS = 3600.0
 
 
 def _sanitize_collection_name(scope: str) -> str:
@@ -69,7 +74,9 @@ class CattyRAGStore:
         self._client = None
         self._embedding_fn = None  # 显式传给 collection, 不用 chromadb default
         self._embedding_source: str = ""  # debug: "openai" / "onnx" / ""
-        self._collections: dict[str, Any] = {}  # scope → collection (cache)
+        # 主人 2026-05-30: 改 dict → OrderedDict + last_access_at, LRU evict
+        self._collections: OrderedDict[str, Any] = OrderedDict()  # name → collection
+        self._collection_last_access: dict[str, float] = {}  # name → last access ts
         self._enabled = False
         self._init_error: str = ""
         self._try_init()
@@ -180,8 +187,12 @@ class CattyRAGStore:
         if not self._enabled or not scope:
             return None
         name = _sanitize_collection_name(scope)
+        now = time.time()
         with self._lock:
             if name in self._collections:
+                # LRU touch
+                self._collections.move_to_end(name)
+                self._collection_last_access[name] = now
                 return self._collections[name]
             try:
                 col = self._client.get_or_create_collection(
@@ -190,10 +201,40 @@ class CattyRAGStore:
                     embedding_function=self._embedding_fn,
                 )
                 self._collections[name] = col
+                self._collection_last_access[name] = now
+                # LRU evict 超额, popitem(last=False) 是 oldest
+                while len(self._collections) > _MAX_ACTIVE_COLLECTIONS:
+                    evict_name, _ = self._collections.popitem(last=False)
+                    self._collection_last_access.pop(evict_name, None)
                 return col
             except Exception as exc:  # noqa: BLE001
                 logger.debug(f"catty_rag: get_collection({name}) failed: {exc}")
                 return None
+
+    def evict_stale_collections(self) -> int:
+        """主人 2026-05-30: 后台调用, 释放 _COLLECTION_STALE_SECONDS 未访问的 collection.
+
+        chromadb collection 持有 HNSW 索引内存, 100 个活跃也可能几 GB.
+        prune_loop 在每 30min 调一次此函数 + 自身的 doc-level prune.
+
+        Returns: 释放的 collection 数量.
+        """
+        if not self._enabled:
+            return 0
+        now = time.time()
+        evicted = 0
+        with self._lock:
+            stale = [
+                n for n, last in list(self._collection_last_access.items())
+                if (now - last) > _COLLECTION_STALE_SECONDS
+            ]
+            for n in stale:
+                self._collections.pop(n, None)
+                self._collection_last_access.pop(n, None)
+                evicted += 1
+        if evicted > 0:
+            logger.info(f"catty_rag: evicted {evicted} stale collections (>1h idle)")
+        return evicted
 
     def add(
         self,

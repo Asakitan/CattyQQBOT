@@ -3171,8 +3171,14 @@ def _remember_bot_reply_for_event(event: MessageEvent, text: str, *, open_contin
         logger.debug(f"anti_repetition record failed (non-fatal): {exc}")
     # Catty RAG: 把笨猫这条 assistant reply 也向量化存进 per-scope chromadb,
     # 让下次 query 能召回笨猫之前怎么回的(避免重复 + 一致性 + 角色发展记忆)。
+    # 主人 2026-05-30: 改 fire-and-forget to_thread 避免阻塞 event loop
+    # (chromadb upsert 走 OpenAI embedding HTTP API 100-500ms, sync 调会卡死)
     try:
-        catty_rag_store.add(scope, text, role="assistant", user_id=str(event.user_id))
+        asyncio.create_task(
+            asyncio.to_thread(
+                catty_rag_store.add, scope, text, role="assistant", user_id=str(event.user_id)
+            )
+        )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"catty_rag_store.add (assistant) failed: {exc}")
     # 每次猫猫对该用户实际回复一次,+1 好感度(主人 / 已 cap 用户自动 no-op);
@@ -4575,12 +4581,16 @@ async def _build_messages(
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"catty_mood record_decay_only failed: {exc}")
     # Catty RAG: 把 user 消息向量化存进 per-scope chromadb (graceful fallback if no chromadb)
+    # 主人 2026-05-30: 改 fire-and-forget to_thread (chromadb upsert sync IO 卡 event loop)
     try:
-        catty_rag_store.add(
-            _arc_scope,
-            incoming.text or "",
-            role="user",
-            user_id=str(event.user_id),
+        asyncio.create_task(
+            asyncio.to_thread(
+                catty_rag_store.add,
+                _arc_scope,
+                incoming.text or "",
+                role="user",
+                user_id=str(event.user_id),
+            )
         )
     except Exception as exc:  # noqa: BLE001
         logger.debug(f"catty_rag_store.add failed: {exc}")
@@ -10021,6 +10031,11 @@ async def _catty_rag_prune_loop() -> None:
                     logger.debug(f"catty_rag prune [{key}] failed: {exc}")
             if total_dropped > 0:
                 logger.info(f"catty_rag prune tick: total dropped {total_dropped}")
+            # 主人 2026-05-30: 同时 evict 超 1h 未访问的 collection (释放 HNSW 索引内存)
+            try:
+                catty_rag_store.evict_stale_collections()
+            except Exception as exc:  # noqa: BLE001
+                logger.debug(f"catty_rag evict_stale failed: {exc}")
         except asyncio.CancelledError:
             break
         except Exception as exc:  # noqa: BLE001

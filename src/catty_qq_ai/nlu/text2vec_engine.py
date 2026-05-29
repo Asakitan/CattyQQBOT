@@ -111,9 +111,20 @@ def _load_onnx_blocking() -> bool:
             from transformers import AutoTokenizer  # type: ignore
             model_name = _get_model_name()
             logger.info("loading text2vec ONNX model: %s (first export ~15s)", model_name)
-            _ONNX_MODEL = ORTModelForFeatureExtraction.from_pretrained(
-                model_name, export=True,
-            )
+            # 主人 2026-05-30: 关 ONNX BFC arena, 让推理后 buffer 立即释放,
+            # 不然 BiasGelu 等层会累积 chunk 撑爆 17GB 内存 (远端 OOM 实测)
+            try:
+                from onnxruntime import SessionOptions  # type: ignore
+                _opts = SessionOptions()
+                _opts.enable_mem_pattern = False
+                _opts.enable_cpu_mem_arena = False
+            except Exception:
+                _opts = None
+            _kwargs = {"model_name_or_path": model_name, "export": True}
+            if _opts is not None:
+                _kwargs["session_options"] = _opts
+                _kwargs["provider_options"] = [{"arena_extend_strategy": "kSameAsRequested"}]
+            _ONNX_MODEL = ORTModelForFeatureExtraction.from_pretrained(**_kwargs)
             _ONNX_TOKENIZER = AutoTokenizer.from_pretrained(model_name)
             # 探测 dim
             try:

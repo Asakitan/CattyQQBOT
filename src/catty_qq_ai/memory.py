@@ -51,9 +51,14 @@ def _parse_time(value: Any) -> datetime | None:
     if not value:
         return None
     try:
-        return datetime.fromisoformat(str(value))
+        dt = datetime.fromisoformat(str(value))
     except ValueError:
         return None
+    # 主人 2026-05-30: 老格式 last_summary_at 可能没 tz, 跟 now(utc) 减会 TypeError
+    # 统一返回 aware UTC, 调用方 (now - last_summary) 不再炸
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt
 
 
 def _utc_now() -> datetime:
