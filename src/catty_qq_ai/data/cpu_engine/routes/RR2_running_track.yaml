@@ -1,0 +1,206 @@
+# 跑步路线 / 公园 / 马拉松 routes (S6 R454 NLU 节点扩充, 第四十五周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: rt_aosen_001
+  intent: question
+  keywords: [推荐北京奥森, 推荐奥森跑道, 推荐奥林匹克森林公园, 推荐北京跑步路线, 笨猫奥森]
+  utterances:
+    - 推荐北京奥森
+    - 推荐奥森跑道
+    - 推荐奥林匹克森林公园
+    - 推荐北京跑步路线
+    - 笨猫奥森
+  responses:
+    - "嗷呜～{user_addr}北京奥森 - 5km/10km 标准跑道ฅฅ"
+    - "(尾巴翘) 南园 5km / 北园延伸 10km"
+    - "{user_addr}塑胶跑道 / 林荫 / 跑团多"
+    - "(挺胸) 笨猫推荐: 北京跑者圣地!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_shiji_001
+  intent: question
+  keywords: [推荐上海世纪公园, 推荐世纪公园跑, 推荐上海跑步, 推荐浦东跑道, 笨猫世纪公园]
+  utterances:
+    - 推荐上海世纪公园
+    - 推荐世纪公园跑
+    - 推荐上海跑步
+    - 推荐浦东跑道
+    - 笨猫世纪公园
+  responses:
+    - "嗷呜～{user_addr}上海世纪公园 - 一圈 5kmฅฅ"
+    - "(尾巴翘) 绿道宽 / 湖景 / 早晨跑爽"
+    - "{user_addr}徐汇滨江 / 后滩公园也行"
+    - "(挺胸) 笨猫推荐: 上海首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_xihu_001
+  intent: question
+  keywords: [推荐杭州西湖跑, 推荐西湖一圈, 推荐杭州跑步, 推荐苏堤白堤, 笨猫西湖跑]
+  utterances:
+    - 推荐杭州西湖跑
+    - 推荐西湖一圈
+    - 推荐杭州跑步
+    - 推荐苏堤白堤
+    - 笨猫西湖跑
+  responses:
+    - "嗷呜～{user_addr}西湖一圈 ~15kmฅฅ"
+    - "(尾巴翘) 苏堤 / 白堤 / 杨公堤景美"
+    - "{user_addr}早晨人少 / 半马练习首选"
+    - "(挺胸) 笨猫推荐: 跑完吃片儿川!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_city_001
+  intent: question
+  keywords: [推荐城市跑步路线, 推荐最佳跑步路线, 推荐城市跑道, 推荐户外跑, 笨猫城市跑]
+  utterances:
+    - 推荐城市跑步路线
+    - 推荐最佳跑步路线
+    - 推荐城市跑道
+    - 推荐户外跑
+    - 笨猫城市跑
+  responses:
+    - "嗷呜～{user_addr}北京奥森 / 上海世纪 / 杭州西湖ฅฅ"
+    - "(尾巴翘) 广州二沙岛 / 深圳湾 / 成都桂溪"
+    - "{user_addr}选塑胶跑道 / 滨水绿道"
+    - "(挺胸) 笨猫推荐: 看城市选路线!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_treadmill_001
+  intent: question
+  keywords: [推荐室内跑步机, 推荐 NordicTrack, 推荐跑步机品牌, 推荐家用跑步机, 笨猫跑步机]
+  utterances:
+    - 推荐室内跑步机
+    - 推荐 NordicTrack
+    - 推荐跑步机品牌
+    - 推荐家用跑步机
+    - 笨猫跑步机
+  responses:
+    - "嗷呜～{user_addr}NordicTrack / Peloton Treadฅฅ"
+    - "(尾巴翘) 国产舒华 / 亿健 / 小乔"
+    - "{user_addr}马达 ≥3HP / 跑带 ≥45cm"
+    - "(挺胸) 笨猫推荐: NordicTrack 1750!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_app_001
+  intent: question
+  keywords: [推荐跑步 app, 推荐 Strava, 推荐悦跑圈, 推荐 Nike Run, 笨猫跑步 app]
+  utterances:
+    - 推荐跑步 app
+    - 推荐 Strava
+    - 推荐悦跑圈
+    - 推荐 Nike Run
+    - 笨猫跑步 app
+  responses:
+    - "嗷呜～{user_addr}Strava - 国际跑者社区ฅฅ"
+    - "(尾巴翘) 悦跑圈 / Keep / Nike Run Club"
+    - "{user_addr}咕咚 / Garmin Connect 也行"
+    - "(挺胸) 笨猫推荐: Strava + NRC 配!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_course_001
+  intent: question
+  keywords: [推荐跑步训练课程, 推荐跑步教程, 推荐入门跑步, 推荐跑步视频, 笨猫跑步课程]
+  utterances:
+    - 推荐跑步训练课程
+    - 推荐跑步教程
+    - 推荐入门跑步
+    - 推荐跑步视频
+    - 笨猫跑步课程
+  responses:
+    - "嗷呜～{user_addr}Nike Run Club 免费课ฅฅ"
+    - "(尾巴翘) Keep 跑步训练营 / B 站徐国峰"
+    - "{user_addr}Hal Higdon / Jack Daniels 计划"
+    - "(挺胸) 笨猫推荐: NRC 入门免费!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rt_club_001
+  intent: question
+  keywords: [推荐跑步社群, 推荐北马跑团, 推荐跑团, 推荐跑步圈子, 笨猫跑团]
+  utterances:
+    - 推荐跑步社群
+    - 推荐北马跑团
+    - 推荐跑团
+    - 推荐跑步圈子
+    - 笨猫跑团
+  responses:
+    - "嗷呜～{user_addr}北京 BRC / 上海 SRCฅฅ"
+    - "(尾巴翘) 悦跑圈跑团 / Nike Run Club"
+    - "{user_addr}本地 lululemon 周二跑团免费"
+    - "(挺胸) 笨猫推荐: 加跑团坚持得久!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rt_marathon_001
+  intent: question
+  keywords: [推荐海外马拉松, 推荐波士顿马拉松, 推荐六大满贯, 推荐国际马拉松, 笨猫海外马拉松]
+  utterances:
+    - 推荐海外马拉松
+    - 推荐波士顿马拉松
+    - 推荐六大满贯
+    - 推荐国际马拉松
+    - 笨猫海外马拉松
+  responses:
+    - "嗷呜～{user_addr}六大满贯: 波士顿/纽约/伦敦ฅฅ"
+    - "(尾巴翘) 柏林 / 芝加哥 / 东京"
+    - "{user_addr}波士顿要 BQ 成绩 / 其他抽签"
+    - "(挺胸) 笨猫推荐: 柏林破 PB 圣地!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rt_trail_001
+  intent: question
+  keywords: [推荐越野跑, 推荐越野跑路线, 推荐山地跑, 推荐 trail run, 笨猫越野跑]
+  utterances:
+    - 推荐越野跑
+    - 推荐越野跑路线
+    - 推荐山地跑
+    - 推荐 trail run
+    - 笨猫越野跑
+  responses:
+    - "嗷呜～{user_addr}TNF100 / UTMB / HK100ฅฅ"
+    - "(尾巴翘) 香港麦理浩径 / 北京灵山"
+    - "{user_addr}穿越野跑鞋 / 带水袋包"
+    - "(挺胸) 笨猫推荐: 麦理浩径入门!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rt_gear_001
+  intent: question
+  keywords: [推荐跑步装备, 推荐跑鞋, 推荐跑步服装, 推荐跑步配件, 笨猫跑步装备]
+  utterances:
+    - 推荐跑步装备
+    - 推荐跑鞋
+    - 推荐跑步服装
+    - 推荐跑步配件
+    - 笨猫跑步装备
+  responses:
+    - "嗷呜～{user_addr}Nike Vaporfly / Adidas Adios Proฅฅ"
+    - "(尾巴翘) Garmin 手表 / 压缩裤 / 速干衣"
+    - "{user_addr}Asics / Hoka / Saucony 也强"
+    - "(挺胸) 笨猫推荐: Vaporfly 比赛日!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rt_plan_001
+  intent: question
+  keywords: [推荐跑步训练计划, 推荐马拉松训练, 推荐半马计划, 推荐训练表, 笨猫跑步计划]
+  utterances:
+    - 推荐跑步训练计划
+    - 推荐马拉松训练
+    - 推荐半马计划
+    - 推荐训练表
+    - 笨猫跑步计划
+  responses:
+    - "嗷呜～{user_addr}Hal Higdon 12 周半马ฅฅ"
+    - "(尾巴翘) Jack Daniels VDOT / Pfitzinger"
+    - "{user_addr}周三次跑 + 长距离周末"
+    - "(挺胸) 笨猫推荐: Hal Higdon 入门!"
+  cooldown_seconds: 60
+  weight: 1.0

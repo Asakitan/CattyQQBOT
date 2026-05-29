@@ -1,0 +1,206 @@
+# 攀岩馆 / 抱石 / 教学 routes (S6 R456 NLU 节点扩充, 第四十五周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cg_boulder_bj_001
+  intent: question
+  keywords: [推荐抱石馆, 推荐北京岩馆, 推荐 SAY, 推荐魔石, 笨猫北京岩馆]
+  utterances:
+    - 推荐抱石馆
+    - 推荐北京岩馆
+    - 推荐 SAY
+    - 推荐魔石
+    - 笨猫北京岩馆
+  responses:
+    - "嗷呜～{user_addr}北京 SAY 攀岩馆 - 顶级ฅฅ"
+    - "(尾巴翘) 魔石 MoStone / 岩时 RockTime"
+    - "{user_addr}首体 / 望京 / 朝阳分馆"
+    - "(挺胸) 笨猫推荐: SAY 线路最丰富!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_boulder_sh_001
+  intent: question
+  keywords: [推荐上海攀岩馆, 推荐上海抱石, 推荐 O2, 推荐岩舞, 笨猫上海攀岩]
+  utterances:
+    - 推荐上海攀岩馆
+    - 推荐上海抱石
+    - 推荐 O2
+    - 推荐岩舞
+    - 笨猫上海攀岩
+  responses:
+    - "嗷呜～{user_addr}上海 O2 攀岩馆ฅฅ"
+    - "(尾巴翘) 岩舞 / 岩点 / Climbeyond"
+    - "{user_addr}徐汇 / 浦东 / 静安分布"
+    - "(挺胸) 笨猫推荐: O2 是上海老牌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_v_grade_001
+  intent: question
+  keywords: [推荐抱石难度, 推荐 V 难度, 推荐 V0 V1, 推荐抱石分级, 笨猫 V 难度]
+  utterances:
+    - 推荐抱石难度
+    - 推荐 V 难度
+    - 推荐 V0 V1
+    - 推荐抱石分级
+    - 笨猫 V 难度
+  responses:
+    - "嗷呜～{user_addr}V0-V2 入门 / V3-V5 进阶ฅฅ"
+    - "(尾巴翘) V6-V8 高手 / V10+ 大神"
+    - "{user_addr}对应法系 Font: V4=6B"
+    - "(挺胸) 笨猫推荐: V3 是分水岭!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_rope_001
+  intent: question
+  keywords: [推荐攀岩绳, 推荐 GRIGRI, 推荐 ATC, 推荐保护器, 笨猫攀岩绳]
+  utterances:
+    - 推荐攀岩绳
+    - 推荐 GRIGRI
+    - 推荐 ATC
+    - 推荐保护器
+    - 笨猫攀岩绳
+  responses:
+    - "嗷呜～{user_addr}Petzl GRIGRI - 辅助制动神器ฅฅ"
+    - "(尾巴翘) Black Diamond ATC - 经典"
+    - "{user_addr}动力绳 9.8mm - 单绳通用"
+    - "(挺胸) 笨猫推荐: GRIGRI+ 新手友好!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_shoes_001
+  intent: question
+  keywords: [推荐攀岩鞋, 推荐 La Sportiva, 推荐 Scarpa, 推荐 Five Ten, 笨猫攀岩鞋]
+  utterances:
+    - 推荐攀岩鞋
+    - 推荐 La Sportiva
+    - 推荐 Scarpa
+    - 推荐 Five Ten
+    - 笨猫攀岩鞋
+  responses:
+    - "嗷呜～{user_addr}La Sportiva Solution - 抱石神鞋ฅฅ"
+    - "(尾巴翘) Scarpa Instinct / Five Ten Hiangle"
+    - "{user_addr}入门 Tarantula / Mythos"
+    - "(挺胸) 笨猫推荐: 第一双别买太弯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_coach_001
+  intent: question
+  keywords: [推荐攀岩教练, 推荐攀岩教学, 推荐攀岩入门课, 推荐攀岩私教, 笨猫攀岩教学]
+  utterances:
+    - 推荐攀岩教练
+    - 推荐攀岩教学
+    - 推荐攀岩入门课
+    - 推荐攀岩私教
+    - 笨猫攀岩教学
+  responses:
+    - "嗷呜～{user_addr}先上馆内入门课 - 安全第一ฅฅ"
+    - "(尾巴翘) CMA / SPI 认证教练"
+    - "{user_addr}保护考核 / 先锋考核分级"
+    - "(挺胸) 笨猫推荐: 别跳过基础!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_outdoor_001
+  intent: question
+  keywords: [推荐户外岩场, 推荐阳朔, 推荐白河, 推荐黎明, 笨猫户外攀岩]
+  utterances:
+    - 推荐户外岩场
+    - 推荐阳朔
+    - 推荐白河
+    - 推荐黎明
+    - 笨猫户外攀岩
+  responses:
+    - "嗷呜～{user_addr}阳朔 - 中国攀岩圣地ฅฅ"
+    - "(尾巴翘) 北京白河 / 云南黎明"
+    - "{user_addr}月亮山 / 雷劈山 / 酒瓶山"
+    - "(挺胸) 笨猫推荐: 阳朔冬季最佳!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_ice_001
+  intent: question
+  keywords: [推荐攀冰, 推荐双桥沟, 推荐四姑娘山, 推荐冰爪, 笨猫攀冰]
+  utterances:
+    - 推荐攀冰
+    - 推荐双桥沟
+    - 推荐四姑娘山
+    - 推荐冰爪
+    - 笨猫攀冰
+  responses:
+    - "嗷呜～{user_addr}四川双桥沟 - 攀冰天堂ฅฅ"
+    - "(尾巴翘) 冰镐 + 冰爪 + 冰锥"
+    - "{user_addr}1-2 月最佳冰期"
+    - "(挺胸) 笨猫推荐: 双桥沟冰瀑震撼!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cg_multipitch_001
+  intent: question
+  keywords: [推荐多绳距, 推荐 multi-pitch, 推荐大岩壁, 推荐传统攀, 笨猫多绳距]
+  utterances:
+    - 推荐多绳距
+    - 推荐 multi-pitch
+    - 推荐大岩壁
+    - 推荐传统攀
+    - 笨猫多绳距
+  responses:
+    - "嗷呜～{user_addr}多绳距 - 真正的攀登ฅฅ"
+    - "(尾巴翘) 传攀 trad / 运动攀 sport"
+    - "{user_addr}阳朔白山 / 黎明大岩壁"
+    - "(挺胸) 笨猫推荐: 有教练再上!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cg_gear_001
+  intent: question
+  keywords: [推荐攀岩装备, 推荐攀岩头盔, 推荐安全带, 推荐镁粉, 笨猫攀岩装备]
+  utterances:
+    - 推荐攀岩装备
+    - 推荐攀岩头盔
+    - 推荐安全带
+    - 推荐镁粉
+    - 笨猫攀岩装备
+  responses:
+    - "嗷呜～{user_addr}鞋 + 安全带 + 镁粉袋ฅฅ"
+    - "(尾巴翘) Petzl 头盔 / Black Diamond 镁粉"
+    - "{user_addr}快挂 / 主锁 / 扁带"
+    - "(挺胸) 笨猫推荐: 装备别省钱!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cg_competition_001
+  intent: question
+  keywords: [推荐攀岩比赛, 推荐 IFSC, 推荐世界杯, 推荐攀岩节, 笨猫攀岩比赛]
+  utterances:
+    - 推荐攀岩比赛
+    - 推荐 IFSC
+    - 推荐世界杯
+    - 推荐攀岩节
+    - 笨猫攀岩比赛
+  responses:
+    - "嗷呜～{user_addr}IFSC 世界杯 - 顶级赛事ฅฅ"
+    - "(尾巴翘) 抱石 / 难度 / 速度三项"
+    - "{user_addr}中国全锦赛 / 全国攀岩联赛"
+    - "(挺胸) 笨猫推荐: 看央吉马 / 伍鹏!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: cg_film_001
+  intent: question
+  keywords: [推荐攀岩纪录片, 推荐 Free Solo, 推荐 Dawn Wall, 推荐 Alex Honnold, 笨猫攀岩纪录片]
+  utterances:
+    - 推荐攀岩纪录片
+    - 推荐 Free Solo
+    - 推荐 Dawn Wall
+    - 推荐 Alex Honnold
+    - 笨猫攀岩纪录片
+  responses:
+    - "嗷呜～{user_addr}Free Solo - 奥斯卡神作ฅฅ"
+    - "(尾巴翘) Dawn Wall / Meru / 14 Peaks"
+    - "{user_addr}Alex Honnold 徒手酋长岩"
+    - "(挺胸) 笨猫推荐: Free Solo 必看!"
+  cooldown_seconds: 60
+  weight: 0.9

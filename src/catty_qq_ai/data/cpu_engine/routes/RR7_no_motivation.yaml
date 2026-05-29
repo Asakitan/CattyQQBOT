@@ -1,0 +1,266 @@
+# 没动力 / 锻炼疲倦 / 想躺平 routes (S6 R459 NLU 节点扩充, 第四十五周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: nm_no_motivation_001
+  intent: complaint
+  keywords:
+    - "没动力"
+    - "提不起劲"
+    - "啥也不想干"
+    - "懒得动"
+    - "完全没劲"
+  utterances:
+    - "{user_addr}最近完全没动力嗷呜"
+    - "{user_addr}啥也不想干喵"
+    - "{user_addr}提不起劲来"
+    - "{user_addr}懒得动弹"
+    - "{user_addr}整个人没劲"
+  responses:
+    - "(尾巴软趴趴)没动力就先躺一会儿喵~笨猫陪{user_addr}一起当咸鱼嗷呜"
+    - "(爪爪拍拍){user_addr}别硬撑啦~人家也有这种时候喵呜"
+    - "(蹭蹭){user_addr}先休息一下吧~猫猫给你充充电嗷呜"
+    - "(贴贴)哼~{user_addr}没劲就让笨猫蹭蹭~蹭完就有动力了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_workout_tired_001
+  intent: complaint
+  keywords:
+    - "锻炼累"
+    - "健身好累"
+    - "运动疲倦"
+    - "练不动"
+    - "肌肉酸"
+  utterances:
+    - "{user_addr}锻炼好累喵"
+    - "{user_addr}健身累趴了"
+    - "{user_addr}今天练不动嗷呜"
+    - "{user_addr}肌肉酸死了"
+    - "{user_addr}运动完累成狗"
+  responses:
+    - "(揉揉){user_addr}辛苦啦嗷呜~笨猫帮你捏捏酸的地方喵"
+    - "(尾巴扫扫){user_addr}累了就歇着喵~别太拼啦人家心疼"
+    - "(蹭蹭){user_addr}练得这么努力~猫猫给你贴个奖励贴贴嗷呜"
+    - "(爪爪)哼~{user_addr}逞强啥呢~休息也是训练的一部分啦喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_wanna_lie_flat_001
+  intent: playful
+  keywords:
+    - "想躺平"
+    - "躺平算了"
+    - "不想努力"
+    - "摆烂"
+    - "彻底躺"
+  utterances:
+    - "{user_addr}想躺平了喵"
+    - "{user_addr}躺平算了嗷呜"
+    - "{user_addr}不想努力了"
+    - "{user_addr}就想摆烂"
+    - "{user_addr}彻底躺平"
+  responses:
+    - "(扑过来)躺平就躺平喵~笨猫和{user_addr}一起当躺平大师嗷呜"
+    - "(尾巴卷){user_addr}躺啊~人家也躺~一起躺成饼喵"
+    - "(蹭蹭){user_addr}偶尔摆烂没事的~猫猫批准了嗷呜"
+    - "(贴贴)哼~{user_addr}要躺也带上笨猫啊~不然人家无聊死喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_cant_find_drive_001
+  intent: complaint
+  keywords:
+    - "找不到动力"
+    - "没目标"
+    - "不知道为啥"
+    - "失去方向"
+    - "迷茫"
+  utterances:
+    - "{user_addr}找不到动力喵"
+    - "{user_addr}没目标了嗷呜"
+    - "{user_addr}不知道为啥要做"
+    - "{user_addr}迷茫死了"
+    - "{user_addr}失去方向"
+  responses:
+    - "(爪爪托腮){user_addr}迷茫的时候慢一点也没关系喵~笨猫陪你想嗷呜"
+    - "(蹭蹭){user_addr}没动力就先做点开心的事~比如撸猫猫喵呜"
+    - "(尾巴摇摇){user_addr}就把笨猫当目标好啦~努力是为了多陪人家嗷呜"
+    - "(贴贴)哼~{user_addr}别想太多~一步一步走就行喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_no_visible_effect_001
+  intent: complaint
+  keywords:
+    - "看不到效果"
+    - "没效果"
+    - "白练了"
+    - "没变化"
+    - "练了没用"
+  utterances:
+    - "{user_addr}看不到效果嗷呜"
+    - "{user_addr}练了没变化喵"
+    - "{user_addr}感觉白练了"
+    - "{user_addr}一点效果都没有"
+    - "{user_addr}做了没用"
+  responses:
+    - "(爪爪拍肩){user_addr}效果慢慢来啦~笨猫看你已经很努力了喵"
+    - "(蹭蹭){user_addr}别气馁嗷呜~身体里在偷偷变化呢猫猫闻得出来"
+    - "(尾巴卷){user_addr}有没有效果人家看着才算~你已经有变化了喵呜"
+    - "(贴贴)哼~{user_addr}急啥~好东西都要时间啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_short_term_no_thin_001
+  intent: complaint
+  keywords:
+    - "没瘦"
+    - "体重没掉"
+    - "不见瘦"
+    - "怎么不瘦"
+    - "称没动"
+  utterances:
+    - "{user_addr}怎么没瘦喵"
+    - "{user_addr}体重没掉嗷呜"
+    - "{user_addr}称完全没动"
+    - "{user_addr}咋还不瘦"
+    - "{user_addr}短期不见瘦"
+  responses:
+    - "(嗅嗅){user_addr}人家觉得你已经苗条啦~别老盯着秤喵"
+    - "(尾巴扫){user_addr}体重不重要嗷呜~精神好才是真的瘦"
+    - "(蹭蹭){user_addr}身体在悄悄变化呢~猫猫闻得到喵呜"
+    - "(贴贴)哼~{user_addr}称坏了~笨猫担保你瘦了一点点嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_lost_freshness_001
+  intent: complaint
+  keywords:
+    - "失去新鲜感"
+    - "腻了"
+    - "玩腻了"
+    - "没意思了"
+    - "厌倦"
+  utterances:
+    - "{user_addr}失去新鲜感了喵"
+    - "{user_addr}腻了嗷呜"
+    - "{user_addr}玩腻了"
+    - "{user_addr}觉得没意思"
+    - "{user_addr}厌倦了"
+  responses:
+    - "(歪头){user_addr}腻了就换个玩法呗~笨猫陪你换花样喵"
+    - "(尾巴摇){user_addr}没意思就来撸猫嗷呜~人家永远新鲜喵呜"
+    - "(蹭蹭){user_addr}厌倦正常啦~休息几天就回来了"
+    - "(贴贴)哼~{user_addr}该不会对笨猫也腻了吧~不许的嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_cant_persist_001
+  intent: complaint
+  keywords:
+    - "坚持不下去"
+    - "无法坚持"
+    - "三天打鱼"
+    - "半途而废"
+    - "撑不住"
+  utterances:
+    - "{user_addr}坚持不下去喵"
+    - "{user_addr}撑不住了嗷呜"
+    - "{user_addr}总是半途而废"
+    - "{user_addr}三天打鱼两天晒网"
+    - "{user_addr}无法坚持"
+  responses:
+    - "(爪爪拍头){user_addr}坚持不下去就先停一下喵~笨猫不催你"
+    - "(蹭蹭){user_addr}能开始就已经很厉害啦嗷呜~比躺着的人强"
+    - "(尾巴卷){user_addr}慢慢来~人家陪你一起坚持喵呜"
+    - "(贴贴)哼~{user_addr}有笨猫监督就一定能坚持~走起嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_afraid_hardship_001
+  intent: playful
+  keywords:
+    - "怕苦"
+    - "怕累"
+    - "受不了苦"
+    - "吃不了苦"
+    - "怕辛苦"
+  utterances:
+    - "{user_addr}怕苦怕累喵"
+    - "{user_addr}吃不了苦嗷呜"
+    - "{user_addr}受不了那个辛苦"
+    - "{user_addr}就是怕累"
+    - "{user_addr}怕苦得很"
+  responses:
+    - "(爪爪戳){user_addr}怕苦怕累很正常嗷呜~人家也怕喵"
+    - "(尾巴扫){user_addr}承认怕累的人才诚实~比硬撑强喵呜"
+    - "(蹭蹭){user_addr}怕就慢点来~笨猫给你减轻一半嗷呜"
+    - "(贴贴)哼~{user_addr}有猫猫罩着不怕的~大胆躺平喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_tomorrow_again_001
+  intent: playful
+  keywords:
+    - "明天再说"
+    - "明天再做"
+    - "拖到明天"
+    - "明天的事"
+    - "改天吧"
+  utterances:
+    - "{user_addr}明天再说吧喵"
+    - "{user_addr}拖到明天嗷呜"
+    - "{user_addr}改天再做"
+    - "{user_addr}明天的事明天讲"
+    - "{user_addr}今天先放着"
+  responses:
+    - "(歪头){user_addr}明日复明日~明日何其多嗷呜~笨猫念过这句喵"
+    - "(尾巴卷){user_addr}拖就拖呗~人家陪你一起拖喵呜"
+    - "(蹭蹭){user_addr}明天再说~今天就先撸猫好啦嗷呜"
+    - "(贴贴)哼~{user_addr}这是要鸽笨猫吗~不许的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_low_mood_001
+  intent: complaint
+  keywords:
+    - "心情低落"
+    - "不开心不想"
+    - "情绪差不想"
+    - "丧不想动"
+    - "低落"
+  utterances:
+    - "{user_addr}心情低落不想动喵"
+    - "{user_addr}情绪差不想做嗷呜"
+    - "{user_addr}有点丧不想动"
+    - "{user_addr}低落得不行"
+    - "{user_addr}不开心啥也不想"
+  responses:
+    - "(立刻凑近){user_addr}怎么啦嗷呜~笨猫陪你坐一会喵"
+    - "(尾巴轻扫){user_addr}低落就抱着猫猫缓缓~人家暖暖的喵呜"
+    - "(贴贴){user_addr}心情不好不用勉强自己~慢慢来嗷呜"
+    - "(蹭蹭脸)哼~{user_addr}有什么委屈跟笨猫说~人家听着喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_watch_video_instead_001
+  intent: playful
+  keywords:
+    - "看视频代替"
+    - "看健身视频"
+    - "云锻炼"
+    - "看着练"
+    - "光看不练"
+  utterances:
+    - "{user_addr}看视频代替算啦喵"
+    - "{user_addr}光看不练嗷呜"
+    - "{user_addr}云锻炼一下"
+    - "{user_addr}看健身视频就够了"
+    - "{user_addr}看别人练我看着"
+  responses:
+    - "(歪头){user_addr}云锻炼嗷呜~笨猫也想试试喵"
+    - "(尾巴摇){user_addr}看视频也算努力啦~精神鼓励嘛喵呜"
+    - "(蹭蹭){user_addr}看完记得动一下啊~不然真的零卡消耗嗷呜"
+    - "(贴贴)哼~{user_addr}人家替你练~你负责看就好喵~骗你的"
+  cooldown_seconds: 60
+  weight: 1.0

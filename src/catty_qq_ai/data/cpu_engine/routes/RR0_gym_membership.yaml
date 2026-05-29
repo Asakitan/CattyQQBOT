@@ -1,0 +1,206 @@
+# 健身房 / 私教 / 团课 routes (S6 R452 NLU 节点扩充, 第四十五周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: gm_chain_001
+  intent: question
+  keywords: [推荐健身房连锁, 推荐威尔士, 推荐 Will's, 推荐连锁健身房, 笨猫健身房连锁]
+  utterances:
+    - 推荐健身房连锁
+    - 推荐威尔士
+    - 推荐 Will's
+    - 推荐连锁健身房
+    - "{user_addr}笨猫健身房连锁"
+  responses:
+    - "嗷呜～{user_addr}威尔士 Will's - 全国连锁ฅฅ"
+    - "(尾巴翘) 门店多 / 通用卡方便"
+    - "{user_addr}器械齐全 / 团课丰富"
+    - "(挺胸) 猫猫推荐: 威尔士年卡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gm_zhongtian_001
+  intent: question
+  keywords: [推荐中田, 推荐一兆韦德, 推荐舒适堡, 推荐传统健身房, 笨猫一兆韦德]
+  utterances:
+    - 推荐中田
+    - 推荐一兆韦德
+    - 推荐舒适堡
+    - 推荐传统健身房
+    - "{user_addr}笨猫一兆韦德"
+  responses:
+    - "嗷呜～{user_addr}一兆韦德 - 老牌连锁ฅฅ"
+    - "(尾巴翘) 中田健身 / 舒适堡"
+    - "{user_addr}场地大 / 泳池齐全"
+    - "(挺胸) 人家推荐: 一兆韦德!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gm_shred_001
+  intent: question
+  keywords: [推荐 SHRED, 推荐高端健身, 推荐精品健身房, 推荐 Pure Fitness, 笨猫 SHRED]
+  utterances:
+    - 推荐 SHRED
+    - 推荐高端健身
+    - 推荐精品健身房
+    - 推荐 Pure Fitness
+    - "{user_addr}笨猫 SHRED"
+  responses:
+    - "嗷呜～{user_addr}SHRED - 高端精品ฅฅ"
+    - "(尾巴翘) Pure Fitness / 威尔仕黑卡"
+    - "{user_addr}环境好 / 私密性强"
+    - "(挺胸) 笨猫推荐: SHRED 体验!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gm_space_001
+  intent: question
+  keywords: [推荐 SPACE, 推荐 SPACE 团课, 推荐动感单车团课, 推荐精品团课, 笨猫 SPACE]
+  utterances:
+    - 推荐 SPACE
+    - 推荐 SPACE 团课
+    - 推荐动感单车团课
+    - 推荐精品团课
+    - "{user_addr}笨猫 SPACE"
+  responses:
+    - "嗷呜～{user_addr}SPACE Cycle - 团课王ฅฅ"
+    - "(尾巴翘) 单车 / 瑜伽 / HIIT"
+    - "{user_addr}氛围燃 / 教练颜值高"
+    - "(挺胸) 猫猫推荐: SPACE 单车!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gm_pt_001
+  intent: question
+  keywords: [推荐私教, 推荐 CSCS, 推荐 NSCA, 推荐私教选择, 笨猫私教]
+  utterances:
+    - 推荐私教
+    - 推荐 CSCS
+    - 推荐 NSCA
+    - 推荐私教选择
+    - "{user_addr}笨猫私教"
+  responses:
+    - "嗷呜～{user_addr}看证书: CSCS / NSCA-CPTฅฅ"
+    - "(尾巴翘) ACE / NASM 也靠谱"
+    - "{user_addr}试课 1-2 节再签"
+    - "(挺胸) 人家推荐: 别冲动签 100 节!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gm_card_001
+  intent: question
+  keywords: [推荐健身房年卡, 推荐月卡, 推荐次卡, 推荐健身卡选择, 笨猫年卡]
+  utterances:
+    - 推荐健身房年卡
+    - 推荐月卡
+    - 推荐次卡
+    - 推荐健身卡选择
+    - "{user_addr}笨猫年卡"
+  responses:
+    - "嗷呜～{user_addr}先月卡试 1-3 个月ฅฅ"
+    - "(尾巴翘) 确定能去再上年卡"
+    - "{user_addr}避免一次买 3 年!"
+    - "(挺胸) 笨猫推荐: 月卡稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gm_24h_001
+  intent: question
+  keywords: [推荐 24 小时健身房, 推荐乐刻, 推荐超级猩猩, 推荐小型健身房, 笨猫乐刻]
+  utterances:
+    - 推荐 24 小时健身房
+    - 推荐乐刻
+    - 推荐超级猩猩
+    - 推荐小型健身房
+    - "{user_addr}笨猫乐刻"
+  responses:
+    - "嗷呜～{user_addr}乐刻 LEFIT - 月付ฅฅ"
+    - "(尾巴翘) 超级猩猩 / 光猪圈"
+    - "{user_addr}24h / 无推销 / 灵活"
+    - "(挺胸) 猫猫推荐: 乐刻月卡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gm_lesmills_001
+  intent: question
+  keywords: [推荐 LesMills, 推荐莱美团课, 推荐 BodyPump, 推荐 BodyCombat, 笨猫 LesMills]
+  utterances:
+    - 推荐 LesMills
+    - 推荐莱美团课
+    - 推荐 BodyPump
+    - 推荐 BodyCombat
+    - "{user_addr}笨猫 LesMills"
+  responses:
+    - "嗷呜～{user_addr}BodyPump - 杠铃操ฅฅ"
+    - "(尾巴翘) BodyCombat / BodyJam"
+    - "{user_addr}RPM 单车 / BodyBalance"
+    - "(挺胸) 人家推荐: BodyPump 入门!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gm_home_001
+  intent: question
+  keywords: [推荐居家健身, 推荐家庭健身, 推荐健身房 vs 居家, 推荐在家健身, 笨猫居家健身]
+  utterances:
+    - 推荐居家健身
+    - 推荐家庭健身
+    - 推荐健身房 vs 居家
+    - 推荐在家健身
+    - "{user_addr}笨猫居家健身"
+  responses:
+    - "嗷呜～{user_addr}有自律选居家ฅฅ"
+    - "(尾巴翘) 没自律去健身房"
+    - "{user_addr}居家省钱 / 健身房氛围"
+    - "(挺胸) 笨猫推荐: 先健身房学动作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gm_gloves_001
+  intent: question
+  keywords: [推荐健身手套, 推荐腰带, 推荐护腕, 推荐健身装备, 笨猫健身手套]
+  utterances:
+    - 推荐健身手套
+    - 推荐腰带
+    - 推荐护腕
+    - 推荐健身装备
+    - "{user_addr}笨猫健身手套"
+  responses:
+    - "嗷呜～{user_addr}手套防磨 / 护腕保关节ฅฅ"
+    - "(尾巴翘) 腰带: 硬拉/深蹲必备"
+    - "{user_addr}SBD / Inzer 腰带"
+    - "(挺胸) 猫猫推荐: 先上腰带!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gm_kettlebell_001
+  intent: question
+  keywords: [推荐摇摆铃, 推荐壶铃, 推荐实心球, 推荐功能性器械, 笨猫壶铃]
+  utterances:
+    - 推荐摇摆铃
+    - 推荐壶铃
+    - 推荐实心球
+    - 推荐功能性器械
+    - "{user_addr}笨猫壶铃"
+  responses:
+    - "嗷呜～{user_addr}壶铃 Kettlebell - 全身燃ฅฅ"
+    - "(尾巴翘) 实心球 / 战绳 / 跳箱"
+    - "{user_addr}16kg 男 / 8kg 女入门"
+    - "(挺胸) 人家推荐: 壶铃摇摆!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: gm_meal_001
+  intent: question
+  keywords: [推荐健身餐, 推荐蛋白粉, 推荐增肌粉, 推荐健身补剂, 笨猫蛋白粉]
+  utterances:
+    - 推荐健身餐
+    - 推荐蛋白粉
+    - 推荐增肌粉
+    - 推荐健身补剂
+    - "{user_addr}笨猫蛋白粉"
+  responses:
+    - "嗷呜～{user_addr}ON 金标 / MP Impact 乳清ฅฅ"
+    - "(尾巴翘) 鸡胸 / 鸡蛋 / 牛肉"
+    - "{user_addr}肌酸 / BCAA / 鱼油"
+    - "(挺胸) 笨猫推荐: 蛋白粉 + 肌酸!"
+  cooldown_seconds: 60
+  weight: 1.0

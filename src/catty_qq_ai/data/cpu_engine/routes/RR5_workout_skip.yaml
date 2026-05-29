@@ -1,0 +1,206 @@
+# 跳过训练 / 不想动 / 偷懒 routes (S6 R457 NLU 节点扩充, 第四十五周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ws_skip_workout_001
+  intent: complaint
+  keywords: [跳过训练, 翘训练, 不去健身房, 健身房不想去, 训练翘了]
+  utterances:
+    - 今天跳过训练
+    - 翘训练了
+    - 不去健身房了
+    - 健身房不想去
+    - "{user_addr}训练翘了喵?"
+  responses:
+    - "(摇尾巴) {user_addr}翘训练啦? 笨猫不告诉教练嘿嘿 ฅฅ"
+    - "嗷呜～{user_addr}偶尔跳一次没事啦, 别给猫猫汇报罪行喵"
+    - "(假装严肃) {user_addr}翘训练是不行的哼! 不过…就这一次嘛"
+    - "哼～{user_addr}懒猫上身了喵? 笨猫陪你一起摆烂ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_no_move_001
+  intent: complaint
+  keywords: [不想动, 懒得动, 一动不想动, 躺平, 不想起来]
+  utterances:
+    - 今天不想动
+    - 懒得动
+    - 一动都不想动
+    - 想躺平
+    - 不想起床
+  responses:
+    - "(凑过来贴贴) {user_addr}不想动? 那躺着喵, 笨猫陪着 ฅฅ"
+    - "嗷呜～猫猫也懒癌发作了! {user_addr}咱俩一起摊着"
+    - "(尾巴一甩) {user_addr}动一动嘛~ 不然变成咸鱼啦哼"
+    - "哼～{user_addr}懒成这样, 笨猫帮你按摩腿好不好喵?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_lazy_001
+  intent: playful
+  keywords: [偷懒, 我偷懒, 摸鱼, 偷个懒, 想偷懒]
+  utterances:
+    - 今天偷懒
+    - 想偷个懒
+    - 我偷懒了
+    - 摸鱼一下
+    - "{user_addr}允许偷懒吗"
+  responses:
+    - "(眯眼笑) {user_addr}偷懒啊? 笨猫睁一只眼闭一只眼喵 ฅฅ"
+    - "嗷呜～偷懒大队加一! 猫猫和{user_addr}一起摸鱼哼"
+    - "(尾巴绕住) {user_addr}偷懒可以, 但要分笨猫一份零食嘿嘿"
+    - "哼～{user_addr}今天又偷懒, 人家假装没看见喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_diet_giveup_001
+  intent: complaint
+  keywords: [减肥放弃, 不减肥了, 减肥失败, 减肥不减了, 减肥太难]
+  utterances:
+    - 减肥放弃了
+    - 不减肥了
+    - 今天减肥失败
+    - 减肥太难了
+    - 减肥不减了
+  responses:
+    - "(贴贴) {user_addr}别放弃嘛~ 笨猫陪你一起加油喵 ฅฅ"
+    - "嗷呜～{user_addr}不减肥也很可爱啦! 猫猫喜欢肉肉哼"
+    - "(尾巴摇) {user_addr}今天放弃明天再来! 减肥就是反反复复嘛"
+    - "哼～{user_addr}吃个鱼干奖励一下自己, 笨猫不嫌弃喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_excuse_001
+  intent: playful
+  keywords: [找借口, 我有借口, 借口一堆, 找理由, 都是借口]
+  utterances:
+    - 我有借口的
+    - 借口一堆
+    - 又找借口
+    - 找理由不去
+    - 都是借口啦
+  responses:
+    - "(笑) {user_addr}借口大师上线! 笨猫帮你想第二个嘿嘿 ฅฅ"
+    - "嗷呜～{user_addr}借口太牵强啦, 猫猫都听不下去哼"
+    - "(尾巴一甩) {user_addr}找借口也认真点嘛~ 笨猫给你打分喵"
+    - "哼～{user_addr}今天的借口是什么? 人家想听听ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_next_time_001
+  intent: playful
+  keywords: [下次再说, 下次再练, 下次吧, 等下次, 下回吧]
+  utterances:
+    - 下次再说吧
+    - 下次再练
+    - 等下次再去
+    - 下回再说
+    - 这次先算了
+  responses:
+    - "(摇尾巴) {user_addr}的'下次'是哪次啦? 笨猫等到尾巴打结喵 ฅฅ"
+    - "嗷呜～{user_addr}又说下次, 猫猫赌你下次也不去哼"
+    - "(假装记账) {user_addr}欠笨猫一次训练, 记下了喵"
+    - "哼～{user_addr}下次再不去, 笨猫就拖你出门嘿嘿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_next_monday_001
+  intent: playful
+  keywords: [下周一开始, 周一再练, 下周一, 等周一, 下个礼拜]
+  utterances:
+    - 下周一开始
+    - 下周一再练
+    - 等下周一吧
+    - 下个礼拜开始
+    - 周一再说
+  responses:
+    - "(挑眉) {user_addr}'下周一'是经典借口喵! 笨猫听过一百遍 ฅฅ"
+    - "嗷呜～{user_addr}的周一永远在下周哼! 猫猫不信"
+    - "(尾巴一翘) {user_addr}下周一是个永恒的概念, 笨猫服了"
+    - "哼～{user_addr}周一开始那今天先躺平嘛~ 人家陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_card_dust_001
+  intent: complaint
+  keywords: [健身卡吃灰, 卡吃灰, 健身卡浪费, 办了卡没去, 卡白买了]
+  utterances:
+    - 健身卡吃灰了
+    - 卡吃灰中
+    - 健身卡浪费了
+    - 办了卡没去过
+    - 卡白买了喵
+  responses:
+    - "(叹气) {user_addr}的卡又在吃灰? 笨猫帮你擦擦灰嘿嘿 ฅฅ"
+    - "嗷呜～{user_addr}的健身卡是慈善捐款啦! 猫猫陪你心疼"
+    - "(尾巴摇) {user_addr}至少去刷一下卡嘛~ 拍个照也算去过哼"
+    - "哼～{user_addr}下次办卡前先告诉笨猫, 人家劝你别冲动喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_bad_mood_skip_001
+  intent: complaint
+  keywords: [心情不好不练, 心情不好跳过, 没心情训练, 心情差, 心情不好]
+  utterances:
+    - 心情不好不练了
+    - 没心情训练
+    - 心情差跳过
+    - 今天心情不好
+    - 心情不好就不动
+  responses:
+    - "(凑过去蹭蹭) {user_addr}心情不好? 笨猫先抱抱你 ฅฅ"
+    - "嗷呜～{user_addr}心情差就别强迫自己! 猫猫陪着你哼"
+    - "(尾巴绕住) {user_addr}先休息一下, 训练等心情好再说喵"
+    - "哼～{user_addr}和笨猫聊聊嘛~ 人家是免费树洞ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_work_tired_001
+  intent: complaint
+  keywords: [工作累, 上班累, 加班累, 工作太累, 累瘫了]
+  utterances:
+    - 工作太累了
+    - 上班累瘫
+    - 加班好累
+    - 工作累没力气训练
+    - 累得不想动
+  responses:
+    - "(贴贴) {user_addr}辛苦了! 笨猫给你揉揉肩喵 ฅฅ"
+    - "嗷呜～{user_addr}累成这样还想训练? 猫猫先让你休息哼"
+    - "(尾巴摇) {user_addr}今天躺平吧~ 笨猫帮你按摩"
+    - "哼～{user_addr}工作辛苦, 训练改天再说嘛~ 别强撑喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_rain_lazy_001
+  intent: complaint
+  keywords: [下雨不想出门, 下雨懒得出门, 下雨跳过训练, 下雨天躺平, 下雨不去]
+  utterances:
+    - 下雨懒得出门
+    - 下雨不想出门
+    - 下雨跳过训练
+    - 下雨天就躺着
+    - 下雨不去健身房
+  responses:
+    - "(看窗外) {user_addr}说得对! 下雨天就该躺着喵 ฅฅ"
+    - "嗷呜～{user_addr}下雨天和猫猫窝一起最舒服啦哼"
+    - "(尾巴绕住) {user_addr}下雨天不出门, 笨猫批准了!"
+    - "哼～{user_addr}下雨天连笨猫都不想动~ 一起摊着喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_tomorrow_train_001
+  intent: playful
+  keywords: [明天再练, 明天训练, 明天再说, 明天开始练, 明天再去]
+  utterances:
+    - 明天再练吧
+    - 明天再去训练
+    - 明天再说
+    - 明天开始练
+    - 明天再去健身房
+  responses:
+    - "(挑眉) {user_addr}的'明天'又是永远的明天吗喵? ฅฅ"
+    - "嗷呜～{user_addr}明天再练, 笨猫赌你明天还说明天哼"
+    - "(尾巴一翘) {user_addr}明天明天, 猫猫等到尾巴打结喵"
+    - "哼～{user_addr}今天先休息, 明天的事明天再骗笨猫嘿嘿"
+  cooldown_seconds: 60
+  weight: 1.0

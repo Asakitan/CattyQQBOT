@@ -1,0 +1,206 @@
+# 游泳馆 / 教练 / 装备 routes (S6 R455 NLU 节点扩充, 第四十五周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sp_chain_001
+  intent: question
+  keywords: [推荐游泳馆, 推荐一兆韦德, 推荐游泳连锁, 推荐健身房游泳, 笨猫游泳馆]
+  utterances:
+    - 推荐游泳馆
+    - 推荐一兆韦德
+    - 推荐游泳连锁
+    - 推荐健身房游泳
+    - 笨猫游泳馆
+  responses:
+    - "嗷呜～{user_addr}一兆韦德 - 上海连锁ฅฅ"
+    - "(尾巴翘) 威尔士 / 舒适堡 - 全国连锁"
+    - "{user_addr}全民健身中心 - 政府平价"
+    - "(挺胸) 笨猫推荐: 一兆韦德有泳池!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_highend_001
+  intent: question
+  keywords: [推荐高端游泳, 推荐游泳俱乐部, 推荐五星泳池, 推荐酒店泳池, 笨猫高端游泳]
+  utterances:
+    - 推荐高端游泳
+    - 推荐游泳俱乐部
+    - 推荐五星泳池
+    - 推荐酒店泳池
+    - 笨猫高端游泳
+  responses:
+    - "嗷呜～{user_addr}希尔顿 / 香格里拉酒店泳池ฅฅ"
+    - "(尾巴翘) Equinox - 顶级俱乐部"
+    - "{user_addr}恒温恒湿 / 私教一对一"
+    - "(挺胸) 笨猫推荐: 酒店日卡体验!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sp_baby_001
+  intent: question
+  keywords: [推荐婴幼儿游泳, 推荐宝宝游泳, 推荐亲子游泳, 推荐少儿培训, 笨猫婴儿游泳]
+  utterances:
+    - 推荐婴幼儿游泳
+    - 推荐宝宝游泳
+    - 推荐亲子游泳
+    - 推荐少儿培训
+    - 笨猫婴儿游泳
+  responses:
+    - "嗷呜～{user_addr}马博士婴儿游泳ฅฅ"
+    - "(尾巴翘) 鱼乐贝贝 / 月儿湾"
+    - "{user_addr}水中早教 / 颈圈别用"
+    - "(挺胸) 笨猫推荐: 4 个月+开始!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_coach_001
+  intent: question
+  keywords: [推荐游泳教练, 推荐中国游泳队, 推荐孙杨, 推荐张雨霏, 笨猫游泳教练]
+  utterances:
+    - 推荐游泳教练
+    - 推荐中国游泳队
+    - 推荐孙杨
+    - 推荐张雨霏
+    - 笨猫游泳教练
+  responses:
+    - "嗷呜～{user_addr}孙杨 / 叶诗文 - 中国游泳ฅฅ"
+    - "(尾巴翘) 张雨霏 / 覃海洋 - 新生代"
+    - "{user_addr}菲尔普斯 - 28 块奥运奖牌"
+    - "(挺胸) 笨猫推荐: 找持证教练学技术!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_swimsuit_001
+  intent: question
+  keywords: [推荐泳裤, 推荐泳衣, 推荐 Speedo, 推荐 Arena, 笨猫泳衣]
+  utterances:
+    - 推荐泳裤
+    - 推荐泳衣
+    - 推荐 Speedo
+    - 推荐 Arena
+    - 笨猫泳衣
+  responses:
+    - "嗷呜～{user_addr}Speedo - 泳衣鼻祖ฅฅ"
+    - "(尾巴翘) Arena / Mizuno - 专业训练"
+    - "{user_addr}三角 / 平角 / 五分裤"
+    - "(挺胸) 笨猫推荐: Arena 速干!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_goggles_001
+  intent: question
+  keywords: [推荐泳镜, 推荐泳帽, 推荐防雾泳镜, 推荐硅胶泳帽, 笨猫泳镜]
+  utterances:
+    - 推荐泳镜
+    - 推荐泳帽
+    - 推荐防雾泳镜
+    - 推荐硅胶泳帽
+    - 笨猫泳镜
+  responses:
+    - "嗷呜～{user_addr}Speedo / Arena 泳镜ฅฅ"
+    - "(尾巴翘) View / TYR - 日系"
+    - "{user_addr}硅胶泳帽防滑 / 布泳帽舒适"
+    - "(挺胸) 笨猫推荐: 防雾镀膜镜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_float_001
+  intent: question
+  keywords: [推荐浮板, 推荐浮力裤, 推荐打腿板, 推荐 pull buoy, 笨猫浮板]
+  utterances:
+    - 推荐浮板
+    - 推荐浮力裤
+    - 推荐打腿板
+    - 推荐 pull buoy
+    - 笨猫浮板
+  responses:
+    - "嗷呜～{user_addr}浮板 (kick board) - 练腿ฅฅ"
+    - "(尾巴翘) Pull Buoy 夹腿板 - 练手"
+    - "{user_addr}浮力裤 - 初学者救命"
+    - "(挺胸) 笨猫推荐: 浮板+夹腿板组合!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sp_freestyle_001
+  intent: question
+  keywords: [推荐自由泳, 推荐自由泳教学, 推荐换气技巧, 推荐打腿, 笨猫自由泳]
+  utterances:
+    - 推荐自由泳
+    - 推荐自由泳教学
+    - 推荐换气技巧
+    - 推荐打腿
+    - 笨猫自由泳
+  responses:
+    - "嗷呜～{user_addr}自由泳 - 最快泳姿ฅฅ"
+    - "(尾巴翘) 侧身换气 / 高肘抓水"
+    - "{user_addr}打腿不弯膝 / 转髋"
+    - "(挺胸) 笨猫推荐: 先学漂浮再学换气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_breast_001
+  intent: question
+  keywords: [推荐蛙泳, 推荐仰泳, 推荐蛙泳教学, 推荐仰泳打腿, 笨猫蛙泳]
+  utterances:
+    - 推荐蛙泳
+    - 推荐仰泳
+    - 推荐蛙泳教学
+    - 推荐仰泳打腿
+    - 笨猫蛙泳
+  responses:
+    - "嗷呜～{user_addr}蛙泳 - 最省力入门ฅฅ"
+    - "(尾巴翘) 仰泳 - 不用憋气"
+    - "{user_addr}蛙泳收翻蹬夹 / 仰泳直臂"
+    - "(挺胸) 笨猫推荐: 蛙泳先学起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_butterfly_001
+  intent: question
+  keywords: [推荐蝶泳, 推荐蝶泳难度, 推荐海豚腿, 推荐蝶泳波浪, 笨猫蝶泳]
+  utterances:
+    - 推荐蝶泳
+    - 推荐蝶泳难度
+    - 推荐海豚腿
+    - 推荐蝶泳波浪
+    - 笨猫蝶泳
+  responses:
+    - "嗷呜～{user_addr}蝶泳 - 最帅最累ฅฅ"
+    - "(尾巴翘) 海豚腿 / 波浪驱动"
+    - "{user_addr}核心力量 / 节奏感"
+    - "(挺胸) 笨猫推荐: 学完前三种再玩蝶泳!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sp_ows_001
+  intent: question
+  keywords: [推荐开放水域, 推荐 OWS, 推荐海泳, 推荐铁人三项游泳, 笨猫开放水域]
+  utterances:
+    - 推荐开放水域
+    - 推荐 OWS
+    - 推荐海泳
+    - 推荐铁人三项游泳
+    - 笨猫开放水域
+  responses:
+    - "嗷呜～{user_addr}OWS (Open Water) - 海/湖泳ฅฅ"
+    - "(尾巴翘) 铁三 1.5km / 3.8km"
+    - "{user_addr}穿湿衣 wetsuit / 抬头看方向"
+    - "(挺胸) 笨猫推荐: 先池泳达标再玩!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: sp_outdoor_001
+  intent: question
+  keywords: [推荐室外游泳池, 推荐露天泳池, 推荐夏天游泳, 推荐温泉泳池, 笨猫露天泳池]
+  utterances:
+    - 推荐室外游泳池
+    - 推荐露天泳池
+    - 推荐夏天游泳
+    - 推荐温泉泳池
+    - 笨猫露天泳池
+  responses:
+    - "嗷呜～{user_addr}露天泳池 - 夏天首选ฅฅ"
+    - "(尾巴翘) 防晒霜防水款必备"
+    - "{user_addr}温泉泳池冬天也能游"
+    - "(挺胸) 笨猫推荐: 早晨/傍晚去人少!"
+  cooldown_seconds: 60
+  weight: 0.8

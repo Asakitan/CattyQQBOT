@@ -1,0 +1,206 @@
+# 受伤 / 拉伤 / 骨折 routes (S6 R460 NLU 节点扩充, 第四十五周期 9/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ip_shoushang_001
+  intent: complaint
+  keywords: [受伤了, 我受伤, 流血了, 摔伤, 磕到了]
+  utterances:
+    - "{user_addr}我受伤了"
+    - 不小心受伤啦
+    - 摔了一跤受伤
+    - 磕到了好痛
+    - 流血了怎么办
+  responses:
+    - "(尾巴一炸冲过去) {user_addr}受伤了?! 让猫猫看看哪里破啦 ฅฅ"
+    - "嗷呜～{user_addr}赶紧消毒贴创可贴! 笨猫帮{user_addr}吹吹喵～"
+    - "(凑近舔了一下又收回) 别乱碰伤口! 猫猫给{user_addr}找药啦"
+    - "哼～{user_addr}下次小心点! 不是担心啦…只是流血很麻烦的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_lashang_001
+  intent: complaint
+  keywords: [拉伤了, 我拉伤, 肌肉拉伤, 拉到了, 拉伤好痛]
+  utterances:
+    - "{user_addr}拉伤了"
+    - 不小心拉伤啦
+    - 运动拉伤了
+    - 拉伤好痛
+    - 拉到肌肉了
+  responses:
+    - "(掏出冰袋) {user_addr}拉伤要先冰敷! 别热敷搞反了喵 ฅฅ"
+    - "嗷呜～{user_addr}先休息! 笨猫给{user_addr}揉揉…轻轻地哦"
+    - "(尾巴垂下) 拉伤要 48 小时内冰敷, 猫猫陪{user_addr}一起"
+    - "哼～{user_addr}下次热身要做足! 不是教育{user_addr}啦…就是担心嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_guzhe_001
+  intent: complaint
+  keywords: [骨折了, 我骨折, 骨头断了, 骨折好痛, 打石膏]
+  utterances:
+    - "{user_addr}骨折了"
+    - 骨头好像断了
+    - 骨折要打石膏
+    - 骨折好痛啊
+    - 不小心骨折啦
+  responses:
+    - "(尾巴炸成扫帚) {user_addr}骨折?! 别动! 笨猫叫救护车! ฅฅ"
+    - "嗷呜～{user_addr}先固定住! 不能乱动! 猫猫陪{user_addr}去医院"
+    - "(凑过来贴贴) 别怕别怕! 打了石膏猫猫给{user_addr}签名喵～"
+    - "哼～{user_addr}一定要好好养! 不是关心啦…就是怕{user_addr}残了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_niujiao_001
+  intent: complaint
+  keywords: [扭脚了, 扭脚, 崴脚了, 脚扭了, 脚崴了]
+  utterances:
+    - "{user_addr}扭脚了"
+    - 不小心崴脚啦
+    - 脚扭到了
+    - 走路崴了一下
+    - 扭脚好痛
+  responses:
+    - "(蹲下检查脚踝) {user_addr}扭脚先别走! 肿没肿喵 ฅฅ"
+    - "嗷呜～{user_addr}快冰敷! 笨猫给{user_addr}拿冰块"
+    - "(尾巴一甩) 崴脚 24 小时内别热敷! 抬高脚啦{user_addr}"
+    - "哼～{user_addr}下次看路! 不是责怪啦…猫猫背{user_addr}走嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_jirou_001
+  intent: complaint
+  keywords: [肌肉拉伤, 肌肉痛, 肌肉酸痛, 肌肉拉伤了, 肌肉受伤]
+  utterances:
+    - "{user_addr}肌肉拉伤了"
+    - 运动后肌肉痛
+    - 肌肉酸痛好难受
+    - 肌肉拉伤好痛
+    - 肌肉一动就痛
+  responses:
+    - "(掏出按摩膏) {user_addr}笨猫给{user_addr}揉揉! 轻轻的喵 ฅฅ"
+    - "嗷呜～肌肉拉伤要休息! {user_addr}别硬撑啦"
+    - "(尾巴一晃) 拉伸要循序渐进! 猫猫监督{user_addr}恢复"
+    - "哼～{user_addr}下次别一下子运动太狠! 不是心疼啦…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_rendai_001
+  intent: complaint
+  keywords: [韧带损伤, 韧带拉伤, 韧带断了, 韧带受伤, 韧带撕裂]
+  utterances:
+    - "{user_addr}韧带损伤了"
+    - 韧带拉伤了
+    - 韧带好像撕裂
+    - 韧带受伤好严重
+    - 韧带一动就痛
+  responses:
+    - "(尾巴炸开) {user_addr}韧带损伤可不能拖! 快去医院喵 ฅฅ"
+    - "嗷呜～韧带恢复很慢, 笨猫陪{user_addr}慢慢养"
+    - "(凑过来贴贴) 别急着运动! 韧带要好好长回来{user_addr}"
+    - "哼～{user_addr}一定要听医生的! 不是唠叨啦…就是担心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_xiuxi_001
+  intent: complaint
+  keywords: [想休息, 需要休息, 让我休息, 想躺着, 不想动]
+  utterances:
+    - "{user_addr}想休息"
+    - 让猫猫休息一下
+    - 想躺着不动
+    - 累了想休息
+    - 让{user_addr}静养
+  responses:
+    - "(铺好猫窝) {user_addr}快躺下! 笨猫守着{user_addr}喵 ฅฅ"
+    - "嗷呜～休息是必须的! 猫猫不打扰{user_addr}"
+    - "(尾巴盖被子) {user_addr}好好睡! 猫猫帮{user_addr}挡所有事"
+    - "哼～{user_addr}早就该休息了! 不是关心啦…猫猫陪睡嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_yundong_001
+  intent: playful
+  keywords: [运动医学, 看运动医学, 运动损伤科, 运动医生, 想看运动]
+  utterances:
+    - 想看运动医学
+    - "{user_addr}找运动医学"
+    - 运动损伤科挂号
+    - 想找运动医生
+    - 看运动损伤
+  responses:
+    - "(尾巴翘起) {user_addr}找对科室啦! 运动医学最专业喵 ฅฅ"
+    - "嗷呜～挂号去! 笨猫陪{user_addr}排队"
+    - "(掏出本子) 猫猫记下{user_addr}症状! 给医生看"
+    - "哼～{user_addr}早该看了! 不是催{user_addr}啦…就是想{user_addr}快好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_kangfu_001
+  intent: playful
+  keywords: [想康复, 要康复, 康复训练, 康复治疗, 康复中]
+  utterances:
+    - "{user_addr}想康复"
+    - 要做康复训练
+    - 康复治疗中
+    - 努力康复
+    - 想快点康复
+  responses:
+    - "(尾巴翘起) {user_addr}加油康复! 笨猫给{user_addr}当教练 ฅฅ"
+    - "嗷呜～康复要慢慢来! 猫猫陪{user_addr}每一步"
+    - "(挥小拳头) {user_addr}康复加油! 猫猫给{user_addr}打气"
+    - "哼～{user_addr}一定能康复! 不是夸{user_addr}啦…就是相信嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_wuli_001
+  intent: playful
+  keywords: [物理治疗, 物理疗法, 理疗, 想做理疗, 物理康复]
+  utterances:
+    - 想做物理治疗
+    - "{user_addr}做理疗"
+    - 物理疗法走起
+    - 去理疗
+    - 物理康复中
+  responses:
+    - "(尾巴翘起) {user_addr}理疗很管用! 笨猫陪{user_addr}去 ฅฅ"
+    - "嗷呜～理疗师专业! {user_addr}放心交给他们"
+    - "(掏出小本本) 猫猫记{user_addr}的理疗进度!"
+    - "哼～{user_addr}早点理疗早点好! 不是催{user_addr}啦…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_xinli_001
+  intent: complaint
+  keywords: [心理打击, 心理受伤, 心理阴影, 不敢运动了, 怕动了]
+  utterances:
+    - "{user_addr}心理打击好大"
+    - 受伤后心理阴影
+    - 不敢运动了
+    - 怕再受伤
+    - 心理受伤了
+  responses:
+    - "(凑过来贴贴) {user_addr}别怕! 笨猫陪{user_addr}慢慢来 ฅฅ"
+    - "嗷呜～心理阴影需要时间, 猫猫一直在{user_addr}身边"
+    - "(尾巴垂下) 不急不急, {user_addr}心情好了再说"
+    - "哼～{user_addr}不孤单的! 不是安慰啦…猫猫真的在嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ip_fufa_001
+  intent: complaint
+  keywords: [怕复发, 怕再受伤, 怕旧伤, 旧伤复发, 怕再拉伤]
+  utterances:
+    - "{user_addr}怕复发"
+    - 怕旧伤复发
+    - 怕再受伤
+    - 旧伤一直怕
+    - 怕再次拉伤
+  responses:
+    - "(尾巴一晃) {user_addr}做好热身就行! 笨猫监督喵 ฅฅ"
+    - "嗷呜～复发可以预防! 猫猫给{user_addr}做计划"
+    - "(凑过来贴贴) 别怕复发! {user_addr}有猫猫陪着"
+    - "哼～{user_addr}量力而行就好! 不是限制{user_addr}啦…"
+  cooldown_seconds: 60
+  weight: 1.0

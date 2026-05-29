@@ -1,0 +1,206 @@
+# 瑜伽课程 / 流派选择 routes (S6 R453 NLU 节点扩充, 第四十五周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: yc_vinyasa_001
+  intent: question
+  keywords: [推荐流瑜伽, 推荐 Vinyasa, 推荐流派瑜伽, 推荐动态瑜伽, 笨猫流瑜伽]
+  utterances:
+    - 推荐流瑜伽
+    - 推荐 Vinyasa
+    - 推荐流派瑜伽
+    - 推荐动态瑜伽
+    - 笨猫流瑜伽
+  responses:
+    - "嗷呜～{user_addr}Vinyasa 流瑜伽 - 呼吸串体式ฅฅ"
+    - "(尾巴翘) 节奏快 / 流汗 / 塑形"
+    - "{user_addr}适合有基础 / 想动起来"
+    - "(挺胸) 笨猫推荐: Vinyasa Flow 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_ashtanga_001
+  intent: question
+  keywords: [推荐阿斯汤伽, 推荐 Ashtanga, 推荐传统瑜伽, 推荐八支瑜伽, 笨猫阿斯汤伽]
+  utterances:
+    - 推荐阿斯汤伽
+    - 推荐 Ashtanga
+    - 推荐传统瑜伽
+    - 推荐八支瑜伽
+    - 笨猫阿斯汤伽
+  responses:
+    - "嗷呜～{user_addr}Ashtanga 阿斯汤伽 - 固定序列ฅฅ"
+    - "(尾巴翘) 强度大 / 自律 / 体能强"
+    - "{user_addr}Primary Series 入门"
+    - "(挺胸) 笨猫推荐: Mysore 自修课!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yc_yin_001
+  intent: question
+  keywords: [推荐阴瑜伽, 推荐 Yin Yoga, 推荐拉伸瑜伽, 推荐放松瑜伽, 笨猫阴瑜伽]
+  utterances:
+    - 推荐阴瑜伽
+    - 推荐 Yin Yoga
+    - 推荐拉伸瑜伽
+    - 推荐放松瑜伽
+    - 笨猫阴瑜伽
+  responses:
+    - "嗷呜～{user_addr}阴瑜伽 - 长时保持体式ฅฅ"
+    - "(尾巴翘) 慢 / 深层筋膜 / 静心"
+    - "{user_addr}适合压力大 / 睡前"
+    - "(挺胸) 笨猫推荐: 阴瑜伽放松神器!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_bikram_001
+  intent: question
+  keywords: [推荐高温瑜伽, 推荐 Bikram, 推荐热瑜伽, 推荐 Hot Yoga, 笨猫高温瑜伽]
+  utterances:
+    - 推荐高温瑜伽
+    - 推荐 Bikram
+    - 推荐热瑜伽
+    - 推荐 Hot Yoga
+    - 笨猫高温瑜伽
+  responses:
+    - "嗷呜～{user_addr}Bikram - 40°C 26 式ฅฅ"
+    - "(尾巴翘) 排毒 / 大汗 / 减脂"
+    - "{user_addr}注意补水 / 心脏弱别试"
+    - "(挺胸) 笨猫推荐: 排毒爽到爆!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: yc_partner_001
+  intent: question
+  keywords: [推荐双人瑜伽, 推荐空中瑜伽, 推荐 Acro Yoga, 推荐 Aerial, 笨猫双人瑜伽]
+  utterances:
+    - 推荐双人瑜伽
+    - 推荐空中瑜伽
+    - 推荐 Acro Yoga
+    - 推荐 Aerial
+    - 笨猫双人瑜伽
+  responses:
+    - "嗷呜～{user_addr}Acro Yoga - 双人配合ฅฅ"
+    - "(尾巴翘) Aerial 空中 / 吊布瑜伽"
+    - "{user_addr}有趣 / 增进感情 / 出片"
+    - "(挺胸) 笨猫推荐: 情侣闺蜜首选!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: yc_ryt200_001
+  intent: question
+  keywords: [推荐瑜伽教练, 推荐 RYT 200, 推荐瑜伽资格证, 推荐瑜伽认证, 笨猫瑜伽教练]
+  utterances:
+    - 推荐瑜伽教练
+    - 推荐 RYT 200
+    - 推荐瑜伽资格证
+    - 推荐瑜伽认证
+    - 笨猫瑜伽教练
+  responses:
+    - "嗷呜～{user_addr}RYT 200 - 国际瑜伽联盟ฅฅ"
+    - "(尾巴翘) 200h / 500h 进阶"
+    - "{user_addr}印度 / 巴厘岛 / 国内都有"
+    - "(挺胸) 笨猫推荐: RYT 200 入行门槛!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: yc_app_001
+  intent: question
+  keywords: [推荐瑜伽 app, 推荐 Glo, 推荐 Down Dog, 推荐 Keep 瑜伽, 笨猫瑜伽 app]
+  utterances:
+    - 推荐瑜伽 app
+    - 推荐 Glo
+    - 推荐 Down Dog
+    - 推荐 Keep 瑜伽
+    - 笨猫瑜伽 app
+  responses:
+    - "嗷呜～{user_addr}Glo - 大师级课程ฅฅ"
+    - "(尾巴翘) Down Dog / Asana Rebel"
+    - "{user_addr}国内 Keep / 每日瑜伽"
+    - "(挺胸) 笨猫推荐: Glo 课程最全!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yc_studio_001
+  intent: question
+  keywords: [推荐瑜伽馆, 推荐 Yang, 推荐 Y+, 推荐梵音, 笨猫瑜伽馆]
+  utterances:
+    - 推荐瑜伽馆
+    - 推荐 Yang
+    - 推荐 Y+
+    - 推荐梵音
+    - 笨猫瑜伽馆
+  responses:
+    - "嗷呜～{user_addr}Y+ / Yang / 梵音ฅฅ"
+    - "(尾巴翘) 一兆韦德 / 乐刻有瑜伽"
+    - "{user_addr}试体验课 / 看老师"
+    - "(挺胸) 笨猫推荐: Y+ 高端选择!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: yc_india_001
+  intent: question
+  keywords: [推荐印度瑜伽, 推荐 Rishikesh, 推荐瑞诗凯诗, 推荐 Mysore, 笨猫印度瑜伽]
+  utterances:
+    - 推荐印度瑜伽
+    - 推荐 Rishikesh
+    - 推荐瑞诗凯诗
+    - 推荐 Mysore
+    - 笨猫印度瑜伽
+  responses:
+    - "嗷呜～{user_addr}Rishikesh - 瑜伽之都ฅฅ"
+    - "(尾巴翘) Mysore - Ashtanga 圣地"
+    - "{user_addr}Goa / Kerala 海滨瑜伽"
+    - "(挺胸) 笨猫推荐: 瑞诗凯诗朝圣!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: yc_mat_001
+  intent: question
+  keywords: [推荐瑜伽垫, 推荐 Manduka, 推荐 Liforme, 推荐 Lululemon 垫, 笨猫瑜伽垫]
+  utterances:
+    - 推荐瑜伽垫
+    - 推荐 Manduka
+    - 推荐 Liforme
+    - 推荐 Lululemon 垫
+    - 笨猫瑜伽垫
+  responses:
+    - "嗷呜～{user_addr}Manduka PRO - 终身保修ฅฅ"
+    - "(尾巴翘) Liforme - 对齐线"
+    - "{user_addr}Lululemon Reversible 性价比"
+    - "(挺胸) 笨猫推荐: Manduka 用十年!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yc_pants_001
+  intent: question
+  keywords: [推荐瑜伽裤, 推荐 Lululemon, 推荐 Alo Yoga, 推荐 Beyond Yoga, 笨猫瑜伽裤]
+  utterances:
+    - 推荐瑜伽裤
+    - 推荐 Lululemon
+    - 推荐 Alo Yoga
+    - 推荐 Beyond Yoga
+    - 笨猫瑜伽裤
+  responses:
+    - "嗷呜～{user_addr}Lululemon Align - 经典ฅฅ"
+    - "(尾巴翘) Alo Yoga / Beyond Yoga"
+    - "{user_addr}MAIA / Particle Fever 国货"
+    - "(挺胸) 笨猫推荐: Lulu Align 必入!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yc_meditation_001
+  intent: question
+  keywords: [推荐瑜伽冥想, 推荐冥想结合, 推荐 Pranayama, 推荐呼吸法, 笨猫瑜伽冥想]
+  utterances:
+    - 推荐瑜伽冥想
+    - 推荐冥想结合
+    - 推荐 Pranayama
+    - 推荐呼吸法
+    - 笨猫瑜伽冥想
+  responses:
+    - "嗷呜～{user_addr}Pranayama - 呼吸控制ฅฅ"
+    - "(尾巴翘) Savasana 摊尸式收尾"
+    - "{user_addr}冥想 10min + 体式 50min"
+    - "(挺胸) 笨猫推荐: 身心合一才完整!"
+  cooldown_seconds: 60
+  weight: 0.9
