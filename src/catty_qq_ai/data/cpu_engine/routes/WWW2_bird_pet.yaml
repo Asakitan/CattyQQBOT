@@ -1,0 +1,206 @@
+# 鹦鹉宠物 routes (S6 R764 NLU 节点扩充, 第七十六周期 3/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: bp_cockatiel_001
+  intent: question
+  keywords: [推荐玄凤鹦鹉, 推荐玄凤, 推荐鸡尾鹦鹉, 推荐卡妹, 笨猫玄凤鹦鹉]
+  utterances:
+    - 推荐玄凤鹦鹉
+    - 推荐玄凤
+    - 推荐鸡尾鹦鹉
+    - 推荐卡妹
+    - 笨猫玄凤鹦鹉
+  responses:
+    - "嗷呜～{user_addr}玄凤 (Cockatiel) - 头顶小揪揪超萌ฅฅ"
+    - "(尾巴翘) 黄化 / 珍珠 / 白子 - 颜色多"
+    - "{user_addr}会吹口哨学旋律 / 寿命 15-20 年"
+    - "(挺胸) 笨猫推荐: 新手友好首选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_budgie_001
+  intent: question
+  keywords: [推荐虎皮鹦鹉, 推荐虎皮, 推荐小型鹦鹉, 推荐入门鹦鹉, 笨猫虎皮鹦鹉]
+  utterances:
+    - 推荐虎皮鹦鹉
+    - 推荐虎皮
+    - 推荐小型鹦鹉
+    - 推荐入门鹦鹉
+    - 笨猫虎皮鹦鹉
+  responses:
+    - "嗷呜～{user_addr}虎皮 (Budgie) - 国民鹦鹉ฅฅ"
+    - "(尾巴翘) 便宜 / 好养 / 颜色超多"
+    - "{user_addr}英国虎皮 / 普通虎皮 / 大头虎皮"
+    - "(挺胸) 笨猫推荐: 50 块入门, 最适合新手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_lovebird_001
+  intent: question
+  keywords: [推荐牡丹鹦鹉, 推荐牡丹, 推荐情侣鹦鹉, 推荐爱情鸟, 笨猫牡丹鹦鹉]
+  utterances:
+    - 推荐牡丹鹦鹉
+    - 推荐牡丹
+    - 推荐情侣鹦鹉
+    - 推荐爱情鸟
+    - 笨猫牡丹鹦鹉
+  responses:
+    - "嗷呜～{user_addr}牡丹 (Lovebird) - 成双成对粘人ฅฅ"
+    - "(尾巴翘) 黑牡丹 / 桃脸 / 费氏"
+    - "{user_addr}叫声大 / 颜色艳丽 / 占有欲强"
+    - "(挺胸) 笨猫推荐: 一对养, 别拆散!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_suncheek_001
+  intent: question
+  keywords: [推荐太阳锥尾, 推荐锥尾鹦鹉, 推荐 Conure, 推荐绿颊锥尾, 笨猫锥尾鹦鹉]
+  utterances:
+    - 推荐太阳锥尾
+    - 推荐锥尾鹦鹉
+    - 推荐 Conure
+    - 推荐绿颊锥尾
+    - 笨猫锥尾鹦鹉
+  responses:
+    - "嗷呜～{user_addr}锥尾 (Conure) - 中型活泼派ฅฅ"
+    - "(尾巴翘) 绿颊 / 金太阳 / 鹊脸"
+    - "{user_addr}智商高 / 互动强 / 叫声响"
+    - "(挺胸) 笨猫推荐: 绿颊性格最稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_sunconure_001
+  intent: question
+  keywords: [推荐金太阳, 推荐金太阳鹦鹉, 推荐 Sun Conure, 推荐黄金鹦鹉, 笨猫金太阳]
+  utterances:
+    - 推荐金太阳
+    - 推荐金太阳鹦鹉
+    - 推荐 Sun Conure
+    - 推荐黄金鹦鹉
+    - 笨猫金太阳
+  responses:
+    - "嗷呜～{user_addr}金太阳 - 颜值天花板ฅฅ"
+    - "(尾巴翘) 橙黄渐变 / 像火焰 / 超亮眼"
+    - "{user_addr}叫声很大 / 适合独栋别墅"
+    - "(挺胸) 笨猫推荐: 别在公寓养, 邻居会哭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_ringneck_001
+  intent: question
+  keywords: [推荐月轮鹦鹉, 推荐月轮, 推荐环颈鹦鹉, 推荐印度环颈, 笨猫月轮鹦鹉]
+  utterances:
+    - 推荐月轮鹦鹉
+    - 推荐月轮
+    - 推荐环颈鹦鹉
+    - 推荐印度环颈
+    - 笨猫月轮鹦鹉
+  responses:
+    - "嗷呜～{user_addr}月轮 (Ringneck) - 脖子一圈黑环ฅฅ"
+    - "(尾巴翘) 绿 / 黄 / 蓝 / 白化"
+    - "{user_addr}学说话强 / 性格独立 / 不黏人"
+    - "(挺胸) 笨猫推荐: 适合想要会说话又不黏人的!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bp_cockatoo_001
+  intent: question
+  keywords: [推荐葵花, 推荐葵花鹦鹉, 推荐凤头鹦鹉, 推荐 Cockatoo, 笨猫葵花]
+  utterances:
+    - 推荐葵花
+    - 推荐葵花鹦鹉
+    - 推荐凤头鹦鹉
+    - 推荐 Cockatoo
+    - 笨猫葵花
+  responses:
+    - "嗷呜～{user_addr}葵花 - 大型鹦鹉粘人精ฅฅ"
+    - "(尾巴翘) 大葵花 / 小葵花 / 米切尔"
+    - "{user_addr}寿命 60-80 年 / 智商超高 / 价格上万"
+    - "(挺胸) 笨猫推荐: 心理建设要做好, 它会哭闹的!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bp_macaw_001
+  intent: question
+  keywords: [推荐蓝头金刚, 推荐金刚鹦鹉, 推荐 Macaw, 推荐大型鹦鹉, 笨猫金刚鹦鹉]
+  utterances:
+    - 推荐蓝头金刚
+    - 推荐金刚鹦鹉
+    - 推荐 Macaw
+    - 推荐大型鹦鹉
+    - 笨猫金刚鹦鹉
+  responses:
+    - "嗷呜～{user_addr}金刚 (Macaw) - 鹦鹉之王ฅฅ"
+    - "(尾巴翘) 蓝黄 / 绯红 / 紫蓝 / 琉璃"
+    - "{user_addr}体型巨大 / 寿命 80+ 年 / 嘴超有力"
+    - "(挺胸) 笨猫推荐: 蓝头小金刚入门最稳!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bp_grey_001
+  intent: question
+  keywords: [推荐灰鹦鹉, 推荐非洲灰, 推荐 African Grey, 推荐会说话鹦鹉, 笨猫灰鹦鹉]
+  utterances:
+    - 推荐灰鹦鹉
+    - 推荐非洲灰
+    - 推荐 African Grey
+    - 推荐会说话鹦鹉
+    - 笨猫灰鹦鹉
+  responses:
+    - "嗷呜～{user_addr}非洲灰 - 鹦鹉界爱因斯坦ฅฅ"
+    - "(尾巴翘) 刚果灰 / 提姆那 - 智商 = 5 岁小孩"
+    - "{user_addr}学说话天花板 / 敏感 / 易掉毛抑郁"
+    - "(挺胸) 笨猫推荐: 想要会聊天的就选它!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bp_food_001
+  intent: question
+  keywords: [推荐鹦鹉粮, 推荐鹦鹉饲料, 推荐滋养丸, 推荐谷子, 笨猫鹦鹉粮]
+  utterances:
+    - 推荐鹦鹉粮
+    - 推荐鹦鹉饲料
+    - 推荐滋养丸
+    - 推荐谷子
+    - 笨猫鹦鹉粮
+  responses:
+    - "嗷呜～{user_addr}滋养丸 (Pellet) - 营养均衡ฅฅ"
+    - "(尾巴翘) Zupreem / Harrison / 凡赛尔"
+    - "{user_addr}谷子做零食 / 蔬果补充 / 别只喂瓜子"
+    - "(挺胸) 笨猫推荐: 滋养丸 60% + 蔬果 30% + 谷子 10%!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bp_cage_001
+  intent: question
+  keywords: [推荐鹦鹉笼, 推荐鸟笼, 推荐鹦鹉栖架, 推荐鹦鹉用品, 笨猫鸟笼]
+  utterances:
+    - 推荐鹦鹉笼
+    - 推荐鸟笼
+    - 推荐鹦鹉栖架
+    - 推荐鹦鹉用品
+    - 笨猫鸟笼
+  responses:
+    - "嗷呜～{user_addr}不锈钢笼 - 防咬不生锈ฅฅ"
+    - "(尾巴翘) 大不锈钢 / 木质栖架 / 玩具"
+    - "{user_addr}笼宽 > 翼展 1.5 倍 / 横向飞"
+    - "(挺胸) 笨猫推荐: 别买涂漆笼, 鹦鹉啃了中毒!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bp_training_001
+  intent: question
+  keywords: [推荐鹦鹉训练, 推荐鹦鹉说话, 推荐教鹦鹉, 推荐手养鹦鹉, 笨猫鹦鹉训练]
+  utterances:
+    - 推荐鹦鹉训练
+    - 推荐鹦鹉说话
+    - 推荐教鹦鹉
+    - 推荐手养鹦鹉
+    - 笨猫鹦鹉训练
+  responses:
+    - "嗷呜～{user_addr}手养奶鸟 - 最亲人ฅฅ"
+    - "(尾巴翘) 短句重复 / 同一时间段教 / 奖励瓜子"
+    - "{user_addr}你好 / 拜拜 / 主人 - 先教单词"
+    - "(挺胸) 笨猫推荐: 灰鹦/月轮/葵花学得最快!"
+  cooldown_seconds: 60
+  weight: 1.0

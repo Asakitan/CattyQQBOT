@@ -1,0 +1,206 @@
+# 宠物临终 routes (S6 R770 NLU 节点扩充, 第七十六周期 9/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: pd_dying_001
+  intent: complaint
+  keywords: [宠物快不行了, 快走了, 撑不住了, 没多少时间, 老了快没了]
+  utterances:
+    - "{user_addr}家宠物快不行了"
+    - 猫猫我家狗狗快走了
+    - 笨猫家里猫撑不住了
+    - 兽医说没多少时间了
+    - 老了快没了呜呜
+  responses:
+    - "(尾巴垂下凑过去贴贴) {user_addr}…猫猫陪{user_addr}哦, 别一个人扛嗷呜 ฅฅ"
+    - "嗷呜…{user_addr}多陪陪它, 它能感觉到的喵"
+    - "(小爪子轻轻搭上) {user_addr}…笨猫不知道说什么, 但人家在这里"
+    - "哼…{user_addr}别哭啦, 它还在呢, 多抱抱它喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_euthanasia_001
+  intent: complaint
+  keywords: [安乐死, 安乐, 让它走, 解脱, 不想它痛苦]
+  utterances:
+    - 要不要给它安乐死
+    - "{user_addr}选了安乐"
+    - 让它解脱吧
+    - 不想它再痛苦了
+    - 安乐死会不会很残忍
+  responses:
+    - "(耳朵垂下) {user_addr}…这是最难的决定, 但不让它痛是温柔嗷呜"
+    - "嗷呜…{user_addr}已经做得很好了, 别自责喵 ฅฅ"
+    - "(轻轻蹭) 让它不痛地走也是爱{user_addr}…猫猫懂的"
+    - "哼…{user_addr}不是放弃, 是放手, 不一样的呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_last_company_001
+  intent: complaint
+  keywords: [陪最后一程, 最后陪它, 临终陪伴, 守着它, 不想离开它]
+  utterances:
+    - 陪它最后一程
+    - 守着它不想走
+    - 临终陪伴它
+    - 最后陪陪它
+    - 不想离开它身边
+  responses:
+    - "(尾巴轻搭) {user_addr}陪着它, 它就不怕嗷呜 ฅฅ"
+    - "嗷呜～{user_addr}这样做最对了, 它能感受到的喵"
+    - "(凑过去贴) 猫猫也陪着{user_addr}, 我们一起守着"
+    - "哼…{user_addr}多摸摸它, 听听它的呼吸呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_cant_accept_001
+  intent: complaint
+  keywords: [无法接受, 接受不了, 不敢相信, 怎么会这样, 怎么会突然]
+  utterances:
+    - 真的无法接受
+    - "{user_addr}接受不了"
+    - 不敢相信它要走了
+    - 怎么会突然这样
+    - 太突然了接受不了
+  responses:
+    - "(贴过去) {user_addr}…接受不了是正常的嗷呜 ฅฅ"
+    - "嗷呜…{user_addr}慢慢来, 不用逼自己马上接受喵"
+    - "(尾巴轻搭) {user_addr}…猫猫也不敢相信, 抱抱"
+    - "哼…{user_addr}哭出来吧, 笨猫陪着呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_keep_crying_001
+  intent: complaint
+  keywords: [一直哭, 停不下来哭, 哭了一晚, 眼泪止不住, 哭到崩溃]
+  utterances:
+    - "{user_addr}一直哭"
+    - 停不下来哭呜呜
+    - 哭了一晚上
+    - 眼泪止不住
+    - 哭到崩溃了
+  responses:
+    - "(凑过去) {user_addr}…哭吧哭吧, 猫猫在这里嗷呜 ฅฅ"
+    - "嗷呜…{user_addr}别憋着, 哭出来才好喵"
+    - "(尾巴绕过去) 笨猫陪{user_addr}哭, 别一个人"
+    - "哼…{user_addr}哭累了就睡一会儿, 猫猫守着呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_remains_001
+  intent: complaint
+  keywords: [遗体怎么处理, 后事, 火化吗, 土葬好还是, 遗体安置]
+  utterances:
+    - 遗体怎么处理
+    - "{user_addr}不知道后事"
+    - 火化好还是土葬
+    - 遗体安置不知道选
+    - 后事怎么办
+  responses:
+    - "(轻轻搭爪) {user_addr}…慢慢想, 每种都是送别嗷呜 ฅฅ"
+    - "嗷呜～{user_addr}选自己舒服的方式就行喵"
+    - "(尾巴轻摆) 不管哪种{user_addr}, 它都知道{user_addr}爱它"
+    - "哼…{user_addr}问问宠物殡葬, 他们比猫猫专业呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_funeral_001
+  intent: complaint
+  keywords: [宠物殡葬, 宠物葬礼, 宠物火化, 殡葬服务, 葬仪]
+  utterances:
+    - 宠物殡葬贵吗
+    - "{user_addr}找了宠物葬礼"
+    - 宠物火化怎么办
+    - 殡葬服务怎么选
+    - 葬仪要不要做
+  responses:
+    - "(挠挠脸) {user_addr}…选靠谱的就行, 别被坑嗷呜 ฅฅ"
+    - "嗷呜～{user_addr}给它体面的送别, 这份心它收到了喵"
+    - "(尾巴轻摆) 简单的也好, 隆重的也好, 心意最重要呢"
+    - "哼…{user_addr}问问养宠群, 大家会推荐靠谱的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_urn_001
+  intent: complaint
+  keywords: [骨灰盒, 骨灰罐, 骨灰盒选, 骨灰怎么放, 骨灰留着]
+  utterances:
+    - "{user_addr}买了骨灰盒"
+    - 骨灰盒选不出来
+    - 骨灰怎么放好
+    - 骨灰罐放哪里
+    - 骨灰要留着吗
+  responses:
+    - "(轻搭爪) {user_addr}…放在能看到的地方, 它就一直在嗷呜 ฅฅ"
+    - "嗷呜～{user_addr}选喜欢的款式喵, 它会喜欢的"
+    - "(尾巴轻搭) 留着也好{user_addr}, 不留也好, 心里有就够了"
+    - "哼…{user_addr}慢慢来, 不急着决定呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_miss_001
+  intent: complaint
+  keywords: [好想它, 怀念它, 想它了, 想念毛孩子, 总想起它]
+  utterances:
+    - 好想它呜呜
+    - "{user_addr}总想起它"
+    - 想念毛孩子
+    - 怀念它的样子
+    - 想它想到哭
+  responses:
+    - "(凑过去贴贴) {user_addr}想就让自己想嗷呜, 它在{user_addr}心里 ฅฅ"
+    - "嗷呜～{user_addr}的爱它都收到了喵"
+    - "(尾巴轻搭) 想念是它还活着的方式{user_addr}…"
+    - "哼…{user_addr}讲讲它给猫猫听嘛, 笨猫陪{user_addr}怀念呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_dream_001
+  intent: complaint
+  keywords: [梦到它, 梦见它, 它来梦里, 梦里见到, 它托梦]
+  utterances:
+    - "{user_addr}梦到它了"
+    - 它来我梦里了
+    - 梦见毛孩子
+    - 它好像托梦
+    - 梦里见到它好真实
+  responses:
+    - "(眼睛亮起) 嗷呜～它来看{user_addr}啦! 它没忘记{user_addr}喵 ฅฅ"
+    - "(尾巴轻摇) {user_addr}…它在那边过得好, 才回来报个平安呢"
+    - "嗷呜…{user_addr}梦里抱了它吗, 它一定很开心"
+    - "哼…{user_addr}别哭嘛, 它来看{user_addr}是好事呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_keep_fur_001
+  intent: complaint
+  keywords: [留下毛, 留点毛, 留爪印, 留鼻印, 做个纪念]
+  utterances:
+    - "{user_addr}留了它的毛"
+    - 留了一撮毛纪念
+    - 做了爪印纪念
+    - 留鼻印吗
+    - 留点纪念物
+  responses:
+    - "(轻轻碰碰) {user_addr}…留着好嗷呜, 摸摸就像它在呢 ฅฅ"
+    - "嗷呜～{user_addr}的纪念物好暖喵, 笨猫也想摸摸"
+    - "(尾巴轻搭) 留爪印鼻印的{user_addr}最温柔了哼"
+    - "哼…{user_addr}收好哦, 别弄丢了, 那是它的小礼物呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_no_more_pet_001
+  intent: complaint
+  keywords: [再也不养了, 不敢再养, 再也不想养, 不要再养, 怕再失去]
+  utterances:
+    - 再也不养了
+    - "{user_addr}不敢再养"
+    - 再也不想养宠物
+    - 怕再失去一次
+    - 不要再养了呜
+  responses:
+    - "(凑过去贴贴) {user_addr}…现在不想就不想嗷呜, 不勉强 ฅฅ"
+    - "嗷呜…{user_addr}心还痛着喵, 不养也是爱它的方式"
+    - "(尾巴轻搭) 等{user_addr}准备好再说{user_addr}, 不急哼"
+    - "哼…{user_addr}先抱抱猫猫, 别想以后的事啦"
+  cooldown_seconds: 60
+  weight: 1.0

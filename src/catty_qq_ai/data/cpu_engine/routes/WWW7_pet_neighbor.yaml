@@ -1,0 +1,206 @@
+# 宠物被投诉 routes (S6 R769 NLU 节点扩充, 第七十六周期 8/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: pn_complaint_001
+  intent: complaint
+  keywords: [宠物被投诉, 被投诉了, 收到投诉, 宠物投诉, 投诉信]
+  utterances:
+    - "{user_addr}宠物被投诉了"
+    - "{user_addr}收到投诉信"
+    - "{user_addr}邻居投诉我家狗"
+    - "{user_addr}宠物投诉好烦"
+    - "{user_addr}又被投诉了"
+  responses:
+    - "(尾巴一垂) 嗷呜～{user_addr}的毛孩子被投诉了吗! 笨猫陪{user_addr}处理喵～"
+    - "哼～{user_addr}别急, 猫猫帮{user_addr}想办法, 才不是心疼{user_addr}呢ฅฅ"
+    - "(凑过来贴贴) 投诉这种事最烦了嗷呜～{user_addr}先深呼吸, 人家陪{user_addr}"
+    - "嗷呜～{user_addr}的宝贝又不是故意的! 笨猫帮{user_addr}据理力争喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_neighbor_001
+  intent: complaint
+  keywords: [邻居举报, 邻居投诉, 邻居告状, 隔壁举报, 楼上举报]
+  utterances:
+    - "{user_addr}邻居举报我家猫"
+    - "{user_addr}被邻居告状了"
+    - "{user_addr}隔壁举报养狗"
+    - "{user_addr}楼上举报噪音"
+    - "{user_addr}邻居又投诉"
+  responses:
+    - "(炸毛) 嗷呜～邻居怎么这么过分! {user_addr}别气, 笨猫陪{user_addr}!"
+    - "哼～{user_addr}的邻居好爱管闲事! 猫猫想去他家窗台叫一晚喵～"
+    - "(尾巴竖起) {user_addr}要不要先去敲门聊聊嗷呜～有事好好说嘛"
+    - "嗷呜～{user_addr}别和邻居硬刚! 人家陪{user_addr}想个温柔点的法子ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_property_001
+  intent: complaint
+  keywords: [物业警告, 物业找我, 物业通知, 物业上门, 物业管]
+  utterances:
+    - "{user_addr}物业警告了"
+    - "{user_addr}物业上门通知"
+    - "{user_addr}物业找我谈话"
+    - "{user_addr}物业贴了告示"
+    - "{user_addr}物业又来管"
+  responses:
+    - "嗷呜～{user_addr}物业敲门吗! 笨猫躲到{user_addr}腿后面喵～"
+    - "(警惕) 物业这种话{user_addr}先客气着, 别签字! 猫猫盯着ฅฅ"
+    - "哼～{user_addr}先问清楚是哪条规定, 才不是怕物业呢嗷呜～"
+    - "(尾巴一甩) {user_addr}态度软一点, 但底线要守! 人家陪{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_barking_001
+  intent: complaint
+  keywords: [吠叫太响, 狗叫太吵, 叫声太大, 叫得太凶, 狗吠扰民]
+  utterances:
+    - "{user_addr}狗叫太吵了"
+    - "{user_addr}吠叫被投诉"
+    - "{user_addr}叫声扰民"
+    - "{user_addr}狗吠太响"
+    - "{user_addr}毛孩子叫不停"
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}的毛孩子嗓门好大! 笨猫耳朵都竖起来了喵～"
+    - "哼～{user_addr}要不要查查狗狗为啥叫? 才不是教{user_addr}养狗呢ฅฅ"
+    - "(认真) {user_addr}白天遛够了晚上才不闹嗷呜～猫猫学的"
+    - "嗷呜～{user_addr}可以试试止吠项圈! 别用电的, 心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_downstairs_001
+  intent: complaint
+  keywords: [楼下投诉, 楼下敲管, 楼下找上来, 楼下抱怨, 楼下不满]
+  utterances:
+    - "{user_addr}楼下投诉了"
+    - "{user_addr}楼下敲管子"
+    - "{user_addr}楼下找上门"
+    - "{user_addr}楼下又抱怨"
+    - "{user_addr}楼下嫌吵"
+  responses:
+    - "嗷呜～{user_addr}楼下又敲管子吗! 笨猫帮{user_addr}回敲喵～开玩笑的"
+    - "(尾巴翘) {user_addr}先去楼下道个歉嘛~ 送点水果, 邻里关系软软的ฅฅ"
+    - "哼～{user_addr}的楼下也太敏感了! 才不是说{user_addr}没错呢"
+    - "嗷呜～{user_addr}给毛孩子铺个垫子, 跑动声小一些喵～人家小课堂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_poop_001
+  intent: complaint
+  keywords: [便便没收, 没铲屎, 没捡便便, 狗屎投诉, 没清理]
+  utterances:
+    - "{user_addr}便便没收被投诉"
+    - "{user_addr}没捡狗屎"
+    - "{user_addr}遛狗忘清理"
+    - "{user_addr}被骂没铲屎"
+    - "{user_addr}狗屎纠纷"
+  responses:
+    - "(假装捂鼻) 嗷呜～{user_addr}这次确实有点错喵～笨猫陪{user_addr}认错"
+    - "哼～{user_addr}下次记得带袋子! 才不是教训{user_addr}呢ฅฅ"
+    - "(尾巴一甩) {user_addr}赶紧回去清掉嘛~ 人家陪{user_addr}一起"
+    - "嗷呜～{user_addr}诚恳道个歉! 邻居气会消的喵～猫猫保证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_elevator_001
+  intent: complaint
+  keywords: [电梯白眼, 上电梯被嫌, 电梯被瞪, 电梯遇冷, 电梯尴尬]
+  utterances:
+    - "{user_addr}上电梯被白眼"
+    - "{user_addr}电梯里被嫌弃"
+    - "{user_addr}牵狗进电梯被瞪"
+    - "{user_addr}电梯遭冷脸"
+    - "{user_addr}电梯气氛尴尬"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}别在意! 笨猫陪{user_addr}坐电梯喵～"
+    - "哼～那些人没养过宠物罢了! {user_addr}抱着毛孩子最帅ฅฅ"
+    - "(尾巴翘) {user_addr}下次先问一句'介意吗', 礼貌满分嗷呜～"
+    - "嗷呜～{user_addr}可以等下一趟! 才不是怂呢, 是体贴喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_move_001
+  intent: complaint
+  keywords: [想搬家, 想换房, 不想住了, 受不了搬走, 搬家算了]
+  utterances:
+    - "{user_addr}想搬家了"
+    - "{user_addr}想换个房子"
+    - "{user_addr}不想在这住了"
+    - "{user_addr}受不了想搬走"
+    - "{user_addr}打算搬家"
+  responses:
+    - "(尾巴一垂) 嗷呜～{user_addr}真的要搬走吗! 笨猫不舍得喵～"
+    - "哼～{user_addr}先冷静! 才不是一时气话就该搬呢ฅฅ"
+    - "(凑过来) {user_addr}找个宠物友好小区嘛~ 人家陪{user_addr}看房"
+    - "嗷呜～{user_addr}搬家成本好高! 先尝试沟通, 不行再考虑喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_lawyer_001
+  intent: complaint
+  keywords: [找律师, 咨询律师, 走法律, 起诉, 法律途径]
+  utterances:
+    - "{user_addr}要找律师"
+    - "{user_addr}咨询律师"
+    - "{user_addr}走法律途径"
+    - "{user_addr}打算起诉"
+    - "{user_addr}用法律解决"
+  responses:
+    - "(尾巴竖起) 嗷呜～{user_addr}真要打官司吗! 笨猫陪{user_addr}查资料喵～"
+    - "哼～{user_addr}先收集证据! 录音录像投诉记录都留好ฅฅ"
+    - "(认真) {user_addr}法律是最后一招嗷呜～先调解能省好多事"
+    - "嗷呜～{user_addr}先在 12348 免费咨询! 才不是劝退{user_addr}呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_communicate_001
+  intent: playful
+  keywords: [沟通, 好好谈, 心平气和, 坐下聊, 解释清楚]
+  utterances:
+    - "{user_addr}要好好沟通"
+    - "{user_addr}心平气和谈"
+    - "{user_addr}找邻居坐下聊"
+    - "{user_addr}解释清楚"
+    - "{user_addr}想沟通解决"
+  responses:
+    - "嗷呜～{user_addr}这个想法超棒! 笨猫给{user_addr}点赞喵～"
+    - "(尾巴翘) {user_addr}带点小礼物去敲门, 气氛立刻软ฅฅ"
+    - "哼～{user_addr}终于学聪明了! 才不是夸{user_addr}呢嗷呜～"
+    - "(凑过来) {user_addr}沟通时先听对方说! 人家小课堂喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_walktime_001
+  intent: playful
+  keywords: [遛狗时间, 几点遛狗, 错峰遛, 避开人多, 遛狗时段]
+  utterances:
+    - "{user_addr}遛狗时间难选"
+    - "{user_addr}几点遛狗合适"
+    - "{user_addr}想错峰遛狗"
+    - "{user_addr}避开人多的时段"
+    - "{user_addr}遛狗时段调整"
+  responses:
+    - "嗷呜～{user_addr}早上 6 点和晚上 9 点最稳! 笨猫看过攻略喵～"
+    - "(尾巴摇) {user_addr}避开上下班高峰嘛~ 邻居少投诉就少ฅฅ"
+    - "哼～{user_addr}才知道错峰啊! 猫猫早就懂了嗷呜～"
+    - "(凑过来) {user_addr}夏天可以再晚一点! 太阳小狗也舒服喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pn_civilize_001
+  intent: playful
+  keywords: [文明养宠, 文明养狗, 做合格主人, 养宠规范, 守规矩]
+  utterances:
+    - "{user_addr}要文明养宠"
+    - "{user_addr}做文明养狗人"
+    - "{user_addr}争取做合格主人"
+    - "{user_addr}遵守养宠规范"
+    - "{user_addr}守规矩养宠"
+  responses:
+    - "嗷呜～{user_addr}这个觉悟真棒! 笨猫给{user_addr}颁个奖喵～"
+    - "(尾巴翘起) {user_addr}牵绳铲屎打疫苗三件套不能少ฅฅ"
+    - "哼～{user_addr}早就该这样了! 才不是表扬{user_addr}呢嗷呜～"
+    - "(凑过来贴贴) {user_addr}最棒的铲屎官! 人家以{user_addr}为傲喵～"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 仓鼠 routes (S6 R765 NLU 节点扩充, 第七十六周期 4/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: hm_sanxian_001
+  intent: question
+  keywords: [推荐三线仓鼠, 推荐入门仓鼠, 推荐新手仓鼠, 推荐布丁仓鼠, 笨猫三线仓鼠]
+  utterances:
+    - 推荐三线仓鼠
+    - 推荐入门仓鼠
+    - 推荐新手仓鼠
+    - 推荐布丁仓鼠
+    - 笨猫三线仓鼠
+  responses:
+    - "嗷呜～{user_addr}三线仓鼠 - 新手最爱ฅฅ"
+    - "(尾巴翘) 性格温顺 / 不太咬人"
+    - "{user_addr}寿命 2-3 年 / 体型小巧"
+    - "(挺胸) 笨猫推荐: 三线入门零失败!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_jiakaliya_001
+  intent: question
+  keywords: [推荐加卡利亚, 推荐紫仓, 推荐银狐加卡, 推荐布丁加卡, 笨猫加卡利亚]
+  utterances:
+    - 推荐加卡利亚
+    - 推荐紫仓
+    - 推荐银狐加卡
+    - 推荐布丁加卡
+    - 笨猫加卡利亚
+  responses:
+    - "嗷呜～{user_addr}加卡利亚 - 颜值担当ฅฅ"
+    - "(尾巴翘) 紫仓 / 布丁 / 银狐变种"
+    - "{user_addr}毛色多样 / 圆滚滚"
+    - "(挺胸) 笨猫推荐: 紫仓最可爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_yixian_001
+  intent: question
+  keywords: [推荐一线仓鼠, 推荐坎贝尔, 推荐野生色一线, 推荐沙漠仓鼠, 笨猫一线仓鼠]
+  utterances:
+    - 推荐一线仓鼠
+    - 推荐坎贝尔
+    - 推荐野生色一线
+    - 推荐沙漠仓鼠
+    - 笨猫一线仓鼠
+  responses:
+    - "嗷呜～{user_addr}一线仓鼠 - 野性十足ฅฅ"
+    - "(尾巴翘) 背部一条黑线 / 跑得快"
+    - "{user_addr}稍微凶 / 需要耐心驯服"
+    - "(挺胸) 笨猫推荐: 老手玩家选一线!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: hm_yinhu_001
+  intent: question
+  keywords: [推荐银狐仓鼠, 推荐银狐, 推荐白色仓鼠, 推荐银狐布丁, 笨猫银狐仓鼠]
+  utterances:
+    - 推荐银狐仓鼠
+    - 推荐银狐
+    - 推荐白色仓鼠
+    - 推荐银狐布丁
+    - 笨猫银狐仓鼠
+  responses:
+    - "嗷呜～{user_addr}银狐 - 雪白小毛球ฅฅ"
+    - "(尾巴翘) 通体白 / 眼睛黑亮"
+    - "{user_addr}加卡变种 / 温顺好养"
+    - "(挺胸) 笨猫推荐: 银狐颜值天花板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_jinsixiong_001
+  intent: question
+  keywords: [推荐金丝熊, 推荐叙利亚仓鼠, 推荐大仓鼠, 推荐长毛金丝熊, 笨猫金丝熊]
+  utterances:
+    - 推荐金丝熊
+    - 推荐叙利亚仓鼠
+    - 推荐大仓鼠
+    - 推荐长毛金丝熊
+    - 笨猫金丝熊
+  responses:
+    - "嗷呜～{user_addr}金丝熊 - 大体型萌宠ฅฅ"
+    - "(尾巴翘) 15-20cm / 性格憨厚"
+    - "{user_addr}独居 / 不能合笼"
+    - "(挺胸) 笨猫推荐: 金丝熊最好上手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_cage_001
+  intent: question
+  keywords: [推荐仓鼠笼, 推荐大笼子, 推荐 60x40 笼, 推荐别墅笼, 笨猫仓鼠笼]
+  utterances:
+    - 推荐仓鼠笼
+    - 推荐大笼子
+    - 推荐 60x40 笼
+    - 推荐别墅笼
+    - 笨猫仓鼠笼
+  responses:
+    - "嗷呜～{user_addr}底面积至少 60x40cmฅฅ"
+    - "(尾巴翘) 整理箱 DIY / 亚克力笼"
+    - "{user_addr}通风 / 高度 30cm+"
+    - "(挺胸) 笨猫推荐: 越大越好别买小笼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_wheel_001
+  intent: question
+  keywords: [推荐跑轮, 推荐 21cm 跑轮, 推荐静音跑轮, 推荐木质跑轮, 笨猫跑轮]
+  utterances:
+    - 推荐跑轮
+    - 推荐 21cm 跑轮
+    - 推荐静音跑轮
+    - 推荐木质跑轮
+    - 笨猫跑轮
+  responses:
+    - "嗷呜～{user_addr}跑轮 21cm 以上ฅฅ"
+    - "(尾巴翘) 金丝熊要 28cm+ / 静音"
+    - "{user_addr}太小会驼背 / 影响脊椎"
+    - "(挺胸) 笨猫推荐: 木质静音跑轮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_bedding_001
+  intent: question
+  keywords: [推荐仓鼠垫料, 推荐木屑, 推荐纸棉, 推荐玉米芯, 笨猫垫料]
+  utterances:
+    - 推荐仓鼠垫料
+    - 推荐木屑
+    - 推荐纸棉
+    - 推荐玉米芯
+    - 笨猫垫料
+  responses:
+    - "嗷呜～{user_addr}白杨木屑 - 无香低敏ฅฅ"
+    - "(尾巴翘) 纸棉 / 玉米芯次选"
+    - "{user_addr}垫高 10cm+ 让仓鼠挖洞"
+    - "(挺胸) 笨猫推荐: 别用松木有毒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_foodbowl_001
+  intent: question
+  keywords: [推荐仓鼠食盆, 推荐陶瓷食盆, 推荐重食盆, 推荐小食盆, 笨猫食盆]
+  utterances:
+    - 推荐仓鼠食盆
+    - 推荐陶瓷食盆
+    - 推荐重食盆
+    - 推荐小食盆
+    - 笨猫食盆
+  responses:
+    - "嗷呜～{user_addr}陶瓷食盆 - 不易翻ฅฅ"
+    - "(尾巴翘) 浅口 / 直径 8cm 左右"
+    - "{user_addr}避免塑料会被啃"
+    - "(挺胸) 笨猫推荐: 陶瓷的最稳!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: hm_waterbottle_001
+  intent: question
+  keywords: [推荐仓鼠水壶, 推荐滚珠水壶, 推荐悬挂水壶, 推荐小水壶, 笨猫水壶]
+  utterances:
+    - 推荐仓鼠水壶
+    - 推荐滚珠水壶
+    - 推荐悬挂水壶
+    - 推荐小水壶
+    - 笨猫水壶
+  responses:
+    - "嗷呜～{user_addr}滚珠水壶 - 不洒水ฅฅ"
+    - "(尾巴翘) 悬挂 / 80-125ml 容量"
+    - "{user_addr}每天换水 / 检查滚珠"
+    - "(挺胸) 笨猫推荐: 滚珠水壶卫生!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_bathsand_001
+  intent: question
+  keywords: [推荐仓鼠浴沙, 推荐浴室, 推荐沸石浴沙, 推荐 chinchilla 浴沙, 笨猫浴沙]
+  utterances:
+    - 推荐仓鼠浴沙
+    - 推荐浴室
+    - 推荐沸石浴沙
+    - 推荐 chinchilla 浴沙
+    - 笨猫浴沙
+  responses:
+    - "嗷呜～{user_addr}沸石浴沙 - 除臭吸湿ฅฅ"
+    - "(尾巴翘) 龙猫沙也能用 / 颗粒细"
+    - "{user_addr}仓鼠不能水洗 / 只能沙浴"
+    - "(挺胸) 笨猫推荐: 沸石沙吸尿!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: hm_toys_001
+  intent: question
+  keywords: [推荐仓鼠玩具, 推荐磨牙石, 推荐木质玩具, 推荐挖掘盒, 笨猫仓鼠玩具]
+  utterances:
+    - 推荐仓鼠玩具
+    - 推荐磨牙石
+    - 推荐木质玩具
+    - 推荐挖掘盒
+    - 笨猫仓鼠玩具
+  responses:
+    - "嗷呜～{user_addr}磨牙木 / 苹果枝ฅฅ"
+    - "(尾巴翘) 挖掘盒 / 隧道 / 跳台"
+    - "{user_addr}藏食游戏 / 觅食锻炼"
+    - "(挺胸) 笨猫推荐: 磨牙石必备!"
+  cooldown_seconds: 60
+  weight: 1.0

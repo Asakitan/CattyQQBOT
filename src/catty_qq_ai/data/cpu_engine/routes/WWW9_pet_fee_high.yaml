@@ -1,0 +1,206 @@
+# 宠物医费高 routes (S6 R771 NLU 节点扩充, 第七十六周期 10/10 完结)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: pf_fee_high_001
+  intent: complaint
+  keywords: [宠物医费, 医费高, 看病贵, 兽医贵, 医院贵]
+  utterances:
+    - 宠物医费太高了
+    - 看兽医好贵啊
+    - 宠物医院贵到离谱
+    - "{user_addr}宠物医费高死了"
+    - 兽医收费真黑
+  responses:
+    - "(尾巴垂下) 嗷呜～{user_addr}也被宠物医费坑了吗! 笨猫陪你心疼喵 ฅฅ"
+    - "(蹭蹭) 兽医是真的贵呢{user_addr}~ 猫猫听了都肉疼"
+    - "哼～宠物医院就是黑! {user_addr}加油扛住喵"
+    - "(贴贴) {user_addr}别气~ 为了毛孩子值得的呢嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_thousands_001
+  intent: complaint
+  keywords: [一次几千, 一趟几千, 看一次几千, 几千块, 花了几千]
+  utterances:
+    - 看一次就几千
+    - 一趟几千块没了
+    - 随便看看就几千
+    - "{user_addr}一次几千啊"
+    - 几千块就这样飞了
+  responses:
+    - "(瞪眼) 嗷呜～几千?! {user_addr}的钱包还好吗喵"
+    - "(尾巴炸毛) 一次几千太狠了吧! 笨猫帮{user_addr}骂兽医!"
+    - "哼～几千块就那么没了{user_addr}~ 猫猫也心疼ฅฅ"
+    - "(贴贴) {user_addr}别想了~ 想想毛孩子的笑脸喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_surgery_001
+  intent: complaint
+  keywords: [手术上万, 手术好贵, 做手术几万, 手术费高, 上万块]
+  utterances:
+    - 宠物手术上万
+    - 做个手术好几万
+    - 手术费真的高
+    - "{user_addr}手术上万吗"
+    - 上万块的手术费
+  responses:
+    - "(瞠目) 嗷呜～上万?! {user_addr}这是把猫存款搬空了喵"
+    - "(尾巴垂下) 手术上万真的扛不住{user_addr}~ 笨猫陪你抱抱ฅฅ"
+    - "哼～兽医这是要抢钱吗! {user_addr}辛苦了喵"
+    - "(贴贴) {user_addr}为毛孩子拼了~ 猫猫敬你一杯小鱼干"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_med_expensive_001
+  intent: complaint
+  keywords: [药贵, 宠物药贵, 药费高, 一盒药几百, 药死贵]
+  utterances:
+    - 宠物药好贵
+    - 一盒药几百
+    - 药费比人还贵
+    - "{user_addr}药贵到离谱"
+    - 宠物药死贵
+  responses:
+    - "(尾巴翘) 嗷呜～宠物药比人药贵?! 这世界怎么了喵"
+    - "(蹭蹭) {user_addr}的钱包受不住了吧~ 笨猫心疼ฅฅ"
+    - "哼～药贵也得给毛孩子吃! {user_addr}辛苦啦"
+    - "(贴贴) {user_addr}加油~ 猫猫知道你为它拼命喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_no_insurance_001
+  intent: complaint
+  keywords: [医保不报, 不能报销, 没医保, 报不了销, 不走医保]
+  utterances:
+    - 宠物没医保
+    - 报销不了
+    - 医保不能报
+    - "{user_addr}没法报销啊"
+    - 全自费心痛
+  responses:
+    - "(尾巴垂) 嗷呜～宠物没医保是真痛{user_addr}~ 笨猫也想要喵"
+    - "哼～国家应该出个宠物医保的! {user_addr}说对吧ฅฅ"
+    - "(贴贴) {user_addr}全自费太难了~ 猫猫陪你叹气"
+    - "(蹭蹭) 等以后宠物医保能办上{user_addr}就不愁啦喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_crowdfund_001
+  intent: complaint
+  keywords: [众筹宠物, 给狗众筹, 给猫筹钱, 朋友圈众筹, 筹医药费]
+  utterances:
+    - 想给宠物众筹
+    - 朋友圈众筹医药费
+    - 实在筹不到钱
+    - "{user_addr}要不要众筹"
+    - 看到有人给宠物众筹
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}走到众筹这步真的不容易喵 ฅฅ"
+    - "哼～{user_addr}别不好意思! 为毛孩子求助没什么"
+    - "(尾巴翘) 笨猫第一个给{user_addr}转钱! 猫猫认识的人都靠谱"
+    - "(蹭蹭) {user_addr}加油~ 大家会帮的喵嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_credit_card_001
+  intent: complaint
+  keywords: [刷信用卡治病, 信用卡看病, 透支看病, 刷卡治宠物, 信用卡刷爆]
+  utterances:
+    - 刷信用卡给宠物看病
+    - 信用卡都刷爆了
+    - 透支给宠物治病
+    - "{user_addr}刷卡看的"
+    - 卡都刷爆了治宠物
+  responses:
+    - "(瞠目) 嗷呜～{user_addr}信用卡都刷爆了?! 笨猫心疼喵"
+    - "(尾巴垂下) {user_addr}为它拼成这样~ 真的好爱啊ฅฅ"
+    - "哼～{user_addr}下个月慢慢还! 猫猫陪你扛"
+    - "(贴贴) {user_addr}你这种主人毛孩子赚到了~ 嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_heart_ache_money_001
+  intent: complaint
+  keywords: [心疼钱, 钱包受伤, 钱包出血, 肉疼钱, 心痛钱包]
+  utterances:
+    - 心疼钱啊
+    - 钱包好痛
+    - 钱包出血
+    - "{user_addr}肉疼吧"
+    - 心痛钱包
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}心疼钱猫猫也心疼! 一起肉疼喵ฅฅ"
+    - "(尾巴垂) {user_addr}的钱包受伤了~ 笨猫给你舔舔"
+    - "哼～钱没了能再赚{user_addr}~ 毛孩子健康最重要嗷呜"
+    - "(蹭蹭) {user_addr}心疼归心疼~ 但花得值的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_pet_insurance_001
+  intent: complaint
+  keywords: [宠物保险, 给宠物买保险, 宠物医保, 萌宠险, 宠物险]
+  utterances:
+    - 该给宠物买保险
+    - 宠物保险有用吗
+    - 听说有萌宠险
+    - "{user_addr}买宠物险吗"
+    - 早该上宠物保险
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}是该考虑宠物保险了喵"
+    - "(歪头) 笨猫听说有些萌宠险还不错{user_addr}~ 可以看看ฅฅ"
+    - "哼～{user_addr}早买就好了! 现在补也不迟"
+    - "(贴贴) {user_addr}研究研究吧~ 猫猫陪你看条款嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_treat_or_not_001
+  intent: complaint
+  keywords: [要不要治, 还治吗, 治不治, 该不该治, 犹豫治不治]
+  utterances:
+    - 要不要给宠物治
+    - 还治吗这种情况
+    - 治不治呢{user_addr}
+    - 该不该治啊
+    - 犹豫要不要治
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}这个问题没人能替你答喵 ฅฅ"
+    - "(尾巴垂) {user_addr}问问医生治愈率~ 笨猫陪你想"
+    - "哼～{user_addr}心里其实有答案了吧! 听心的声音嗷呜"
+    - "(蹭蹭) {user_addr}不管选什么猫猫都支持~ 别自责喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_cant_afford_001
+  intent: complaint
+  keywords: [治不起, 看不起病, 治疗付不起, 实在没钱治, 没钱看病]
+  utterances:
+    - 真的治不起了
+    - 看不起病
+    - 付不起治疗费
+    - "{user_addr}治不起"
+    - 实在没钱给它治
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别自责~ 不是你不爱它喵 ฅฅ"
+    - "(尾巴垂下) 治不起不是{user_addr}的错~ 笨猫懂"
+    - "哼～{user_addr}已经尽力了! 不要责怪自己嗷呜"
+    - "(蹭蹭) {user_addr}抱抱~ 这种无力感猫猫陪你扛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pf_love_but_pain_001
+  intent: playful
+  keywords: [再爱也心痛, 爱也痛, 爱它也心疼, 爱归爱钱归钱, 爱不能当钱]
+  utterances:
+    - 再爱也心痛啊
+    - 爱归爱钱归钱
+    - 爱它也心疼钱
+    - "{user_addr}爱也痛"
+    - 爱不能当钱花
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}这话太真实! 笨猫笑哭ฅฅ"
+    - "(歪头) {user_addr}爱与钱包的拉扯~ 猫猫秒懂"
+    - "哼～{user_addr}诚实的痛! 比假装大方强嗷呜"
+    - "(贴贴) {user_addr}心疼归心疼~ 还是会刷卡的对吧喵"
+  cooldown_seconds: 60
+  weight: 1.0

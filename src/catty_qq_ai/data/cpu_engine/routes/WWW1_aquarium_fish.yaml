@@ -1,0 +1,206 @@
+# 观赏鱼 routes (S6 R763 NLU 节点扩充, 第七十六周期 2/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: af_koi_001
+  intent: question
+  keywords: [推荐锦鲤, 推荐红白锦鲤, 推荐大正三色, 推荐昭和三色, 笨猫锦鲤]
+  utterances:
+    - 推荐锦鲤
+    - 推荐红白锦鲤
+    - 推荐大正三色
+    - 推荐昭和三色
+    - 笨猫锦鲤
+  responses:
+    - "嗷呜～{user_addr}红白 / 大正三色 / 昭和三色 - 御三家ฅฅ"
+    - "(尾巴翘) 别光鲤 / 写鲤 / 浅黄"
+    - "{user_addr}广岛产 / 新潟产 - 血统硬"
+    - "(挺胸) 笨猫推荐: 红白入门最经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_arowana_001
+  intent: question
+  keywords: [推荐龙鱼, 推荐金龙, 推荐红龙, 推荐过背金龙, 笨猫龙鱼]
+  utterances:
+    - 推荐龙鱼
+    - 推荐金龙
+    - 推荐红龙
+    - 推荐过背金龙
+    - 笨猫龙鱼
+  responses:
+    - "嗷呜～{user_addr}过背金龙 / 红尾金龙ฅฅ"
+    - "(尾巴翘) 辣椒红龙 / 血红龙 - 顶级"
+    - "{user_addr}印尼 / 马来产地 - 有 CITES"
+    - "(挺胸) 笨猫推荐: 镇宅神鱼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_flowerhorn_001
+  intent: question
+  keywords: [推荐罗汉鱼, 推荐金花罗汉, 推荐马骝, 推荐德萨罗汉, 笨猫罗汉鱼]
+  utterances:
+    - 推荐罗汉鱼
+    - 推荐金花罗汉
+    - 推荐马骝
+    - 推荐德萨罗汉
+    - 笨猫罗汉鱼
+  responses:
+    - "嗷呜～{user_addr}金花 / 马骝 / 珍珠ฅฅ"
+    - "(尾巴翘) 起头 / 起珠 / 黑印"
+    - "{user_addr}互动性强 - 会认主人"
+    - "(挺胸) 笨猫推荐: 起头才是真男人!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: af_discus_001
+  intent: question
+  keywords: [推荐七彩神仙, 推荐 discus, 推荐红松石, 推荐蓝松石, 笨猫七彩]
+  utterances:
+    - 推荐七彩神仙
+    - 推荐 discus
+    - 推荐红松石
+    - 推荐蓝松石
+    - 笨猫七彩
+  responses:
+    - "嗷呜～{user_addr}红松石 / 蓝松石 / 鸽子红ฅฅ"
+    - "(尾巴翘) 野彩 / 改良彩 - 各有美"
+    - "{user_addr}水质要稳 / 温度 28-30°"
+    - "(挺胸) 笨猫推荐: 热带鱼之王!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: af_guppy_001
+  intent: question
+  keywords: [推荐孔雀鱼, 推荐 guppy, 推荐礼服孔雀, 推荐马赛克孔雀, 笨猫孔雀鱼]
+  utterances:
+    - 推荐孔雀鱼
+    - 推荐 guppy
+    - 推荐礼服孔雀
+    - 推荐马赛克孔雀
+    - 笨猫孔雀鱼
+  responses:
+    - "嗷呜～{user_addr}礼服 / 马赛克 / 草尾ฅฅ"
+    - "(尾巴翘) 蓝礼服 / 红尾礼服 - 经典"
+    - "{user_addr}好养易繁殖 - 新手友好"
+    - "(挺胸) 笨猫推荐: 入门必养!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_planted_001
+  intent: question
+  keywords: [推荐草缸, 推荐灯鱼, 推荐红绿灯, 推荐宝莲灯, 笨猫草缸]
+  utterances:
+    - 推荐草缸
+    - 推荐灯鱼
+    - 推荐红绿灯
+    - 推荐宝莲灯
+    - 笨猫草缸
+  responses:
+    - "嗷呜～{user_addr}红绿灯 / 宝莲灯 / 黑莲灯ฅฅ"
+    - "(尾巴翘) 群游灯科 - 草缸点睛"
+    - "{user_addr}ADA 风格 / 天野尚审美"
+    - "(挺胸) 笨猫推荐: 一群红绿灯超治愈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_cichlid_001
+  intent: question
+  keywords: [推荐三湖慈鲷, 推荐马鲷, 推荐坦鲷, 推荐维鲷, 笨猫三湖慈鲷]
+  utterances:
+    - 推荐三湖慈鲷
+    - 推荐马鲷
+    - 推荐坦鲷
+    - 推荐维鲷
+    - 笨猫三湖慈鲷
+  responses:
+    - "嗷呜～{user_addr}马鲷 / 坦鲷 / 维鲷ฅฅ"
+    - "(尾巴翘) 蓝六间 / 黄帝 / 阿里"
+    - "{user_addr}非洲三大湖 - 慈鲷天堂"
+    - "(挺胸) 笨猫推荐: 蓝六间霸气!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: af_corydoras_001
+  intent: question
+  keywords: [推荐鼠鱼, 推荐熊猫鼠, 推荐豹鼠, 推荐青铜鼠, 笨猫鼠鱼]
+  utterances:
+    - 推荐鼠鱼
+    - 推荐熊猫鼠
+    - 推荐豹鼠
+    - 推荐青铜鼠
+    - 笨猫鼠鱼
+  responses:
+    - "嗷呜～{user_addr}熊猫鼠 / 豹鼠 / 青铜鼠ฅฅ"
+    - "(尾巴翘) 底层清道夫 - 萌萌的"
+    - "{user_addr}群游 6 只起 - 才有安全感"
+    - "(挺胸) 笨猫推荐: 熊猫鼠最可爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: af_pleco_001
+  intent: question
+  keywords: [推荐异型鱼, 推荐金斑马, 推荐红尾皇冠豹, 推荐 L046, 笨猫异型鱼]
+  utterances:
+    - 推荐异型鱼
+    - 推荐金斑马
+    - 推荐红尾皇冠豹
+    - 推荐 L046
+    - 笨猫异型鱼
+  responses:
+    - "嗷呜～{user_addr}L046 帝王老虎 / L260 国王ฅฅ"
+    - "(尾巴翘) 金斑马 / 红尾皇冠豹"
+    - "{user_addr}L 编号 - 异型分类系统"
+    - "(挺胸) 笨猫推荐: L046 颜值天花板!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: af_marine_intro_001
+  intent: question
+  keywords: [推荐海水缸入门, 推荐海水鱼, 推荐 FOWLR, 推荐入门海水, 笨猫海水缸]
+  utterances:
+    - 推荐海水缸入门
+    - 推荐海水鱼
+    - 推荐 FOWLR
+    - 推荐入门海水
+    - 笨猫海水缸
+  responses:
+    - "嗷呜～{user_addr}FOWLR (活石+鱼) - 入门稳ฅฅ"
+    - "(尾巴翘) 蛋分 / 主泵 / 灯 - 三大件"
+    - "{user_addr}NSW 比重 1.025 / 盐度稳"
+    - "(挺胸) 笨猫推荐: 先 FOWLR 再上珊瑚!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: af_sps_001
+  intent: question
+  keywords: [推荐珊瑚, 推荐 SPS, 推荐鹿角珊瑚, 推荐脑珊瑚, 笨猫珊瑚]
+  utterances:
+    - 推荐珊瑚
+    - 推荐 SPS
+    - 推荐鹿角珊瑚
+    - 推荐脑珊瑚
+    - 笨猫珊瑚
+  responses:
+    - "嗷呜～{user_addr}SPS (硬骨) / LPS (大水螅) / 软体ฅฅ"
+    - "(尾巴翘) 鹿角 / 脑珊瑚 / 火柴头"
+    - "{user_addr}KH 8-9 / Ca 420 / Mg 1350"
+    - "(挺胸) 笨猫推荐: LPS 入门 SPS 进阶!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: af_anemone_001
+  intent: question
+  keywords: [推荐海葵, 推荐公子小丑, 推荐双带小丑, 推荐紫点海葵, 笨猫海葵]
+  utterances:
+    - 推荐海葵
+    - 推荐公子小丑
+    - 推荐双带小丑
+    - 推荐紫点海葵
+    - 笨猫海葵
+  responses:
+    - "嗷呜～{user_addr}公子小丑 + 紫点海葵 - 经典CPฅฅ"
+    - "(尾巴翘) 双带 / 黑公子 / 番茄小丑"
+    - "{user_addr}尼莫同款 - 互利共生"
+    - "(挺胸) 笨猫推荐: 海葵窝小丑超治愈!"
+  cooldown_seconds: 60
+  weight: 0.9

@@ -1,0 +1,206 @@
+# 宠物用品 routes (S6 R766 NLU 节点扩充, 第七十六周期 5/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: ps_feeder_001
+  intent: question
+  keywords: [推荐自动喂食器, 推荐 PETKIT, 推荐小佩喂食器, 推荐定时喂食器, 笨猫自动喂食器]
+  utterances:
+    - 推荐自动喂食器
+    - 推荐 PETKIT
+    - 推荐小佩喂食器
+    - 推荐定时喂食器
+    - 笨猫自动喂食器
+  responses:
+    - "嗷呜～{user_addr}PETKIT 小佩 - 智能喂食王ฅฅ"
+    - "(尾巴翘) 霍曼 / 小米 / Petlibro"
+    - "{user_addr}APP 控制 / 定时 / 摄像头"
+    - "(挺胸) 笨猫推荐: 小佩 Solo 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_litterbox_001
+  intent: question
+  keywords: [推荐智能猫砂盆, 推荐自动猫砂盆, 推荐 PETKIT 猫砂盆, 推荐 Litter Robot, 笨猫智能猫砂盆]
+  utterances:
+    - 推荐智能猫砂盆
+    - 推荐自动猫砂盆
+    - 推荐 PETKIT 猫砂盆
+    - 推荐 Litter Robot
+    - 笨猫智能猫砂盆
+  responses:
+    - "嗷呜～{user_addr}Litter Robot 4 - 顶级旗舰ฅฅ"
+    - "(尾巴翘) PETKIT Pura Max / 霍曼"
+    - "{user_addr}自动铲屎 / 称重 / APP"
+    - "(哼) 笨猫推荐: 预算够上 LR4!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_waterfountain_001
+  intent: question
+  keywords: [推荐智能饮水机, 推荐宠物饮水机, 推荐 PETKIT 饮水机, 推荐无线饮水机, 笨猫饮水机]
+  utterances:
+    - 推荐智能饮水机
+    - 推荐宠物饮水机
+    - 推荐 PETKIT 饮水机
+    - 推荐无线饮水机
+    - 笨猫饮水机
+  responses:
+    - "嗷呜～{user_addr}PETKIT Eversweet 系列ฅฅ"
+    - "(尾巴翘) 霍曼 / 小佩无线款 / Catlink"
+    - "{user_addr}过滤 / 静音 / 无线泵"
+    - "(挺胸) 笨猫推荐: 无线款不怕咬电线!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_dryer_001
+  intent: question
+  keywords: [推荐宠物烘干箱, 推荐烘干机, 推荐 PETKIT 烘干箱, 推荐霍曼烘干箱, 笨猫烘干箱]
+  utterances:
+    - 推荐宠物烘干箱
+    - 推荐烘干机
+    - 推荐 PETKIT 烘干箱
+    - 推荐霍曼烘干箱
+    - 笨猫烘干箱
+  responses:
+    - "嗷呜～{user_addr}PETKIT 烘干箱 - 旗舰ฅฅ"
+    - "(尾巴翘) 霍曼 / 米家 / Catlink"
+    - "{user_addr}恒温 / 静音 / 360°风道"
+    - "(挺胸) 笨猫推荐: 洗完不用吹风机!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_stroller_001
+  intent: question
+  keywords: [推荐宠物推车, 推荐狗推车, 推荐猫推车, 推荐 Ibiyaya, 笨猫宠物推车]
+  utterances:
+    - 推荐宠物推车
+    - 推荐狗推车
+    - 推荐猫推车
+    - 推荐 Ibiyaya
+    - 笨猫宠物推车
+  responses:
+    - "嗷呜～{user_addr}Ibiyaya 依比呀呀ฅฅ"
+    - "(尾巴翘) Pet Gear / Doggy Ride / 小佩"
+    - "{user_addr}承重 / 减震 / 可折叠"
+    - "(挺胸) 笨猫推荐: Ibiyaya 蜗牛车!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_carrier_001
+  intent: question
+  keywords: [推荐宠物背带, 推荐宠物包, 推荐外出包, 推荐太空舱包, 笨猫宠物包]
+  utterances:
+    - 推荐宠物背带
+    - 推荐宠物包
+    - 推荐外出包
+    - 推荐太空舱包
+    - 笨猫宠物包
+  responses:
+    - "嗷呜～{user_addr}小佩太空舱 - 网红款ฅฅ"
+    - "(尾巴翘) Sleepypod / Petkit Breezy"
+    - "{user_addr}航空舱 / 双肩包 / 透气"
+    - "(挺胸) 笨猫推荐: Sleepypod 飞行也能上!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_leash_001
+  intent: question
+  keywords: [推荐牵引绳, 推荐狗绳, 推荐胸背带, 推荐 Julius K9, 笨猫牵引绳]
+  utterances:
+    - 推荐牵引绳
+    - 推荐狗绳
+    - 推荐胸背带
+    - 推荐 Julius K9
+    - 笨猫牵引绳
+  responses:
+    - "嗷呜～{user_addr}Julius K9 - 工作犬级ฅฅ"
+    - "(尾巴翘) Ruffwear / EzyDog / Truelove"
+    - "{user_addr}胸背 / P 链 / 自动伸缩"
+    - "(挺胸) 笨猫推荐: 中大型犬上 K9!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_chewtoy_001
+  intent: question
+  keywords: [推荐防咬玩具, 推荐磨牙玩具, 推荐 Kong, 推荐橡胶玩具, 笨猫防咬玩具]
+  utterances:
+    - 推荐防咬玩具
+    - 推荐磨牙玩具
+    - 推荐 Kong
+    - 推荐橡胶玩具
+    - 笨猫防咬玩具
+  responses:
+    - "嗷呜～{user_addr}Kong Classic - 经典之王ฅฅ"
+    - "(尾巴翘) West Paw / Nylabone / Goughnuts"
+    - "{user_addr}耐咬 / 可塞零食 / 安全橡胶"
+    - "(挺胸) 笨猫推荐: Kong 红黑双色!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_puzzle_001
+  intent: question
+  keywords: [推荐益智玩具, 推荐漏食球, 推荐 Nina Ottosson, 推荐慢食玩具, 笨猫益智玩具]
+  utterances:
+    - 推荐益智玩具
+    - 推荐漏食球
+    - 推荐 Nina Ottosson
+    - 推荐慢食玩具
+    - 笨猫益智玩具
+  responses:
+    - "嗷呜～{user_addr}Nina Ottosson - 益智鼻祖ฅฅ"
+    - "(尾巴翘) Outward Hound / Trixie / Kong Wobbler"
+    - "{user_addr}藏食 / 翻盖 / 滚动漏食"
+    - "(挺胸) 笨猫推荐: 防止狗狗拆家!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_pad_001
+  intent: question
+  keywords: [推荐厕所训练贴, 推荐尿垫, 推荐诱导剂, 推荐尿不湿垫, 笨猫训练贴]
+  utterances:
+    - 推荐厕所训练贴
+    - 推荐尿垫
+    - 推荐诱导剂
+    - 推荐尿不湿垫
+    - 笨猫训练贴
+  responses:
+    - "嗷呜～{user_addr}诱导剂 + 尿垫组合ฅฅ"
+    - "(尾巴翘) 多可特 / 怡亲 / Hartz"
+    - "{user_addr}固定位置 / 闻味定点"
+    - "(挺胸) 笨猫推荐: 配合零食奖励!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_deodorizer_001
+  intent: question
+  keywords: [推荐除味剂, 推荐宠物除臭剂, 推荐 Nature's Miracle, 推荐酶解除味, 笨猫除味剂]
+  utterances:
+    - 推荐除味剂
+    - 推荐宠物除臭剂
+    - 推荐 Nature's Miracle
+    - 推荐酶解除味
+    - 笨猫除味剂
+  responses:
+    - "嗷呜～{user_addr}Nature's Miracle 自然奇迹ฅฅ"
+    - "(尾巴翘) Simple Solution / 怡亲酶解"
+    - "{user_addr}酶解分解 / 不伤宠 / 除味+防记号"
+    - "(挺胸) 笨猫推荐: 猫尿克星 NM!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_gpscollar_001
+  intent: question
+  keywords: [推荐 GPS 项圈, 推荐宠物定位, 推荐 Tractive, 推荐 Whistle, 笨猫 GPS 项圈]
+  utterances:
+    - 推荐 GPS 项圈
+    - 推荐宠物定位
+    - 推荐 Tractive
+    - 推荐 Whistle
+    - 笨猫 GPS 项圈
+  responses:
+    - "嗷呜～{user_addr}Tractive GPS - 欧洲销冠ฅฅ"
+    - "(尾巴翘) Whistle / Fi / Apple AirTag (简版)"
+    - "{user_addr}实时定位 / 防丢 / 运动追踪"
+    - "(挺胸) 笨猫推荐: Tractive 月费但全球!"
+  cooldown_seconds: 60
+  weight: 1.0

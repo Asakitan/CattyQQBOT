@@ -1,0 +1,206 @@
+# 异宠 routes (S6 R762 NLU 节点扩充, 第七十六周期 1/10)
+# 主人 2026-05-30: 推荐型, 带笨猫语气
+
+- name: ep_leopard_gecko_001
+  intent: question
+  keywords: [推荐豹纹守宫, 推荐豹纹壁虎, 推荐 leopard gecko, 推荐宠物守宫, 笨猫豹纹守宫]
+  utterances:
+    - 推荐豹纹守宫
+    - 推荐豹纹壁虎
+    - 推荐 leopard gecko
+    - 推荐宠物守宫
+    - 笨猫豹纹守宫
+  responses:
+    - "嗷呜～{user_addr}豹纹守宫 - 异宠入门王ฅฅ"
+    - "(尾巴翘) 温顺 / 不咬人 / 好饲养"
+    - "{user_addr}吃面包虫蟋蟀 / 不用紫外灯"
+    - "(挺胸) 猫猫推荐: 新手首选嗷呜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ep_blue_tongue_skink_001
+  intent: question
+  keywords: [推荐蓝舌石龙子, 推荐蓝舌蜥, 推荐 blue tongue, 推荐蜥蜴新手, 笨猫蓝舌]
+  utterances:
+    - 推荐蓝舌石龙子
+    - 推荐蓝舌蜥
+    - 推荐 blue tongue
+    - 推荐蜥蜴新手
+    - 笨猫蓝舌
+  responses:
+    - "嗷呜～{user_addr}蓝舌石龙子 - 大块头温顺ฅฅ"
+    - "(尾巴翘) 杂食 / 吃水果蔬菜肉"
+    - "{user_addr}寿命 15-20 年 / 互动好"
+    - "(挺胸) 笨猫推荐: 蜥蜴中的金毛!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ep_ball_python_001
+  intent: question
+  keywords: [推荐球蟒, 推荐 ball python, 推荐宠物蛇, 推荐新手蛇, 笨猫球蟒]
+  utterances:
+    - 推荐球蟒
+    - 推荐 ball python
+    - 推荐宠物蛇
+    - 推荐新手蛇
+    - 笨猫球蟒
+  responses:
+    - "嗷呜～{user_addr}球蟒 - 宠物蛇之王ฅฅ"
+    - "(尾巴翘) 温顺 / 不爱动 / 害羞会缩球"
+    - "{user_addr}吃乳鼠成鼠 / 一周一次"
+    - "(挺胸) 人家推荐: 蛇里的胆小鬼!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ep_corn_snake_001
+  intent: question
+  keywords: [推荐玉米蛇, 推荐 corn snake, 推荐花纹蛇, 推荐入门蛇, 笨猫玉米蛇]
+  utterances:
+    - 推荐玉米蛇
+    - 推荐 corn snake
+    - 推荐花纹蛇
+    - 推荐入门蛇
+    - 笨猫玉米蛇
+  responses:
+    - "嗷呜～{user_addr}玉米蛇 - 新手最爱ฅฅ"
+    - "(尾巴翘) 花色多 / 性格温和 / 好打理"
+    - "{user_addr}小型蛇 / 占地小"
+    - "(挺胸) 猫猫推荐: 配色花纹超美!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ep_red_eared_slider_001
+  intent: question
+  keywords: [推荐红耳龟, 推荐巴西龟, 推荐 red eared slider, 推荐水龟, 笨猫红耳龟]
+  utterances:
+    - 推荐红耳龟
+    - 推荐巴西龟
+    - 推荐 red eared slider
+    - 推荐水龟
+    - 笨猫红耳龟
+  responses:
+    - "嗷呜～{user_addr}红耳龟 - 童年回忆ฅฅ"
+    - "(尾巴翘) 便宜 / 好养 / 长得快"
+    - "{user_addr}入侵物种!别放生别放生"
+    - "(挺胸) 笨猫提醒: 养就养一辈子!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ep_sulcata_001
+  intent: question
+  keywords: [推荐苏卡达陆龟, 推荐苏卡达, 推荐 sulcata, 推荐陆龟, 笨猫苏卡达]
+  utterances:
+    - 推荐苏卡达陆龟
+    - 推荐苏卡达
+    - 推荐 sulcata
+    - 推荐陆龟
+    - 笨猫苏卡达
+  responses:
+    - "嗷呜～{user_addr}苏卡达 - 草食大块头ฅฅ"
+    - "(尾巴翘) 寿命 50+ 年 / 长大能 60cm"
+    - "{user_addr}吃草 / 不能喂肉"
+    - "(挺胸) 人家提醒: 会越长越大!想清楚!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ep_chinchilla_001
+  intent: question
+  keywords: [推荐龙猫, 推荐 chinchilla, 推荐毛茸茸宠物, 推荐绒鼠, 笨猫龙猫]
+  utterances:
+    - 推荐龙猫
+    - 推荐 chinchilla
+    - 推荐毛茸茸宠物
+    - 推荐绒鼠
+    - 笨猫龙猫
+  responses:
+    - "嗷呜～{user_addr}龙猫 - 毛绒绒巨可爱ฅฅ"
+    - "(尾巴翘) 怕热 / 要空调 / 浴沙洗澡"
+    - "{user_addr}吃提木西干草 / 龙猫粮"
+    - "(挺胸) 笨猫推荐: 摸起来超治愈!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ep_sugar_glider_001
+  intent: question
+  keywords: [推荐蜜袋鼯, 推荐 sugar glider, 推荐袋鼯, 推荐口袋宠物, 笨猫蜜袋鼯]
+  utterances:
+    - 推荐蜜袋鼯
+    - 推荐 sugar glider
+    - 推荐袋鼯
+    - 推荐口袋宠物
+    - 笨猫蜜袋鼯
+  responses:
+    - "嗷呜～{user_addr}蜜袋鼯 - 揣兜里走ฅฅ"
+    - "(尾巴翘) 群居 / 要两只起养"
+    - "{user_addr}吃水果蜜露 / 杂食"
+    - "(挺胸) 猫猫推荐: 黏人小炸弹!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ep_hedgehog_001
+  intent: question
+  keywords: [推荐刺猬, 推荐宠物刺猬, 推荐非洲迷你刺猬, 推荐小刺猬, 笨猫刺猬]
+  utterances:
+    - 推荐刺猬
+    - 推荐宠物刺猬
+    - 推荐非洲迷你刺猬
+    - 推荐小刺猬
+    - 笨猫刺猬
+  responses:
+    - "嗷呜～{user_addr}非洲迷你刺猬 - 小团子ฅฅ"
+    - "(尾巴翘) 夜行 / 怕冷要加温"
+    - "{user_addr}吃猫粮虫子 / 不要喂牛奶"
+    - "(挺胸) 笨猫推荐: 球起来超可爱!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ep_ferret_001
+  intent: question
+  keywords: [推荐雪貂, 推荐 ferret, 推荐安格鲁猫鼬, 推荐宠物貂, 笨猫雪貂]
+  utterances:
+    - 推荐雪貂
+    - 推荐 ferret
+    - 推荐安格鲁猫鼬
+    - 推荐宠物貂
+    - 笨猫雪貂
+  responses:
+    - "嗷呜～{user_addr}雪貂 - 长条版破坏王ฅฅ"
+    - "(尾巴翘) 活泼 / 聪明 / 爱钻爱偷"
+    - "{user_addr}吃猫罐头貂粮 / 肉食"
+    - "(挺胸) 人家推荐: 调皮但超有爱!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ep_tarantula_001
+  intent: question
+  keywords: [推荐蜘蛛, 推荐鸟蛛, 推荐 tarantula, 推荐宠物蜘蛛, 笨猫蜘蛛]
+  utterances:
+    - 推荐蜘蛛
+    - 推荐鸟蛛
+    - 推荐 tarantula
+    - 推荐宠物蜘蛛
+    - 笨猫蜘蛛
+  responses:
+    - "嗷呜～{user_addr}智利红玫瑰 - 入门鸟蛛ฅฅ"
+    - "(尾巴翘) 墨西哥红膝 / 巴西白膝"
+    - "{user_addr}吃蟋蟀面包虫 / 半月一次"
+    - "(挺胸) 笨猫提醒: 别上手!有踢毛!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ep_scorpion_001
+  intent: question
+  keywords: [推荐蝎子, 推荐帝王蝎, 推荐 emperor scorpion, 推荐宠物蝎, 笨猫蝎子]
+  utterances:
+    - 推荐蝎子
+    - 推荐帝王蝎
+    - 推荐 emperor scorpion
+    - 推荐宠物蝎
+    - 笨猫蝎子
+  responses:
+    - "嗷呜～{user_addr}帝王蝎 - 黑亮大块头ฅฅ"
+    - "(尾巴翘) 毒性低 / 适合新手"
+    - "{user_addr}吃蟋蟀杜比亚 / 高湿环境"
+    - "(挺胸) 猫猫提醒: 别裸手抓!会夹!"
+  cooldown_seconds: 60
+  weight: 0.7

@@ -1,0 +1,206 @@
+# 宠物走丢 routes (S6 R767 NLU 节点扩充, 第七十六周期 6/10)
+# 主人 2026-05-30: 日常情绪互动
+
+- name: pr_lost_001
+  intent: complaint
+  keywords: [宠物走丢, 猫丢了, 狗丢了, 走失了, 不见了]
+  utterances:
+    - "{user_addr}我家猫丢了"
+    - 狗狗走丢了呜呜
+    - 宠物不见了怎么办
+    - 我家猫走失了
+    - 笨猫家里宠物丢了
+  responses:
+    - "(尾巴竖直) 啊?! {user_addr}别慌～猫猫陪你一起想办法嗷呜 ฅฅ"
+    - "(凑过来) 走丢了?! 笨猫心也跟着揪起来了, {user_addr}先别哭"
+    - "嗷呜～{user_addr}先深呼吸, 猫猫帮你理理思路喵"
+    - "(贴贴) 别怕别怕～大多数走丢的都会回来的, {user_addr}别绝望"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_search_around_001
+  intent: complaint
+  keywords: [到处找, 满街找, 一直找, 找了一天, 找不到]
+  utterances:
+    - "{user_addr}到处找都找不到"
+    - 满街找了一遍
+    - 找了一整天还没找到
+    - 我都快把小区翻烂了
+    - 一直找一直找
+  responses:
+    - "(心疼) {user_addr}腿都跑酸了吧～先歇一下喵 ฅฅ"
+    - "嗷呜～别灰心, 多半还在附近躲着, {user_addr}再坚持坚持"
+    - "(递水) 笨猫给{user_addr}倒杯水, 喝完再继续找"
+    - "(尾巴垂) 找不到好心疼啊, {user_addr}加油猫猫陪着哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_crying_search_001
+  intent: complaint
+  keywords: [哭着找, 边哭边找, 哭花了, 泪崩, 哭着喊]
+  utterances:
+    - "{user_addr}边哭边找的"
+    - 哭着到处喊它名字
+    - 妆都哭花了
+    - 我都泪崩了
+    - 一边哭一边找
+  responses:
+    - "(扑过去抱) 呜呜{user_addr}别哭嘛～笨猫陪你哭ฅฅ"
+    - "(用尾巴擦眼泪) 别哭别哭～眼睛会肿的喵"
+    - "嗷呜～{user_addr}哭得猫猫心都碎了, 抱抱"
+    - "(贴脸蹭) 哭完就好啦, 笨猫陪{user_addr}一起喊它"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_post_lost_001
+  intent: playful
+  keywords: [发寻宠, 寻猫启事, 发朋友圈, 微信群发, 寻狗启事]
+  utterances:
+    - "{user_addr}该发寻宠启事了"
+    - 我朋友圈发寻猫启事了
+    - 准备发寻狗启事
+    - 微信群里都发了一遍
+    - 寻宠信息怎么写
+  responses:
+    - "嗷呜～{user_addr}发了吗?照片要清晰、特征要写全喵 ฅฅ"
+    - "(爪爪敲) 记得写联系方式和悬赏, {user_addr}别漏了"
+    - "(尾巴摇) 多发几个群～小区群、宠物群都来一遍"
+    - "笨猫帮{user_addr}转发! 让更多人看到嗷呜～"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: pr_poster_001
+  intent: playful
+  keywords: [贴海报, 贴传单, 印海报, 张贴启事, 贴满小区]
+  utterances:
+    - "{user_addr}去贴寻宠海报了"
+    - 印了一堆传单准备贴
+    - 海报贴满小区
+    - 电线杆上都贴上了
+    - 街边贴启事
+  responses:
+    - "(竖耳) {user_addr}辛苦了喵～贴在显眼地方记得"
+    - "嗷呜～贴的时候多用透明胶, 别让风吹走"
+    - "(爪爪) 笨猫想帮{user_addr}贴, 可是够不到电线杆呜"
+    - "贴完拍照存档, {user_addr}也是个小细心鬼嘛哼"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: pr_community_help_001
+  intent: playful
+  keywords: [社区帮忙, 邻居帮找, 物业帮忙, 大爷大妈, 保安帮忙]
+  utterances:
+    - 邻居都来帮我找
+    - "{user_addr}社区大爷大妈都出动了"
+    - 物业保安也帮忙找
+    - 小区居民都在帮忙
+    - 邻居好热心
+  responses:
+    - "嗷呜～{user_addr}人缘真好喵, 笨猫感动 ฅฅ"
+    - "(尾巴摇) 大爷大妈眼睛尖, 多半能帮{user_addr}找到!"
+    - "(贴贴) 这种时候才看出来邻里多温暖, 感动哼"
+    - "笨猫好羡慕～{user_addr}的小区也太有爱了吧"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: pr_police_001
+  intent: playful
+  keywords: [警察登记, 报警, 派出所登记, 110, 警方备案]
+  utterances:
+    - "{user_addr}去派出所登记了"
+    - 我报警备案了
+    - 110 也打了
+    - 派出所做了笔录
+    - 警方说会留意
+  responses:
+    - "(爪爪敬礼) {user_addr}做的对喵～多一条线索"
+    - "嗷呜～警察叔叔会帮忙留意的, 安心一点ฅฅ"
+    - "(点头) 登记完顺便看看监控, {user_addr}问问能不能调"
+    - "笨猫觉得{user_addr}考虑很周全, 真棒"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: pr_24h_search_001
+  intent: complaint
+  keywords: [24 小时, 通宵找, 整夜找, 一整夜, 不眠不休]
+  utterances:
+    - "{user_addr}24 小时不停在找"
+    - 通宵一整夜找
+    - 不眠不休找了两天
+    - 一整夜没合眼
+    - 24 小时都在路上
+  responses:
+    - "(心疼炸毛) {user_addr}身体要垮的喵! 先睡一会嗷呜"
+    - "(扯袖子) 笨猫不准{user_addr}再熬了, 倒下了谁找它"
+    - "嗷呜～{user_addr}先眯一下, 笨猫帮你盯着消息 ฅฅ"
+    - "(撅嘴) 心疼死了, {user_addr}再熬笨猫要哭了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_reward_001
+  intent: playful
+  keywords: [找回奖励, 悬赏, 重金酬谢, 红包奖励, 谢礼]
+  utterances:
+    - "{user_addr}悬赏 1000 找回"
+    - 重金酬谢
+    - 红包奖励呢
+    - 找到必有谢礼
+    - 悬赏寻宠
+  responses:
+    - "嗷呜～{user_addr}舍得花啊, 这宠物地位很高喵 ฅฅ"
+    - "(尾巴翘) 重赏之下必有勇夫! {user_addr}有希望"
+    - "(假装吃醋) 笨猫走丢{user_addr}也悬赏 1000 吗哼"
+    - "(贴贴) 钱可以再赚, 宝贝找回最重要, {user_addr}加油"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: pr_heartbroken_001
+  intent: complaint
+  keywords: [心如刀绞, 心碎, 难过死了, 撕心裂肺, 心都凉了]
+  utterances:
+    - "{user_addr}心如刀绞"
+    - 心都碎了
+    - 难过得快窒息
+    - 撕心裂肺地哭
+    - 心都凉了
+  responses:
+    - "(扑过去) {user_addr}抱抱～笨猫陪着你哭 ฅฅ"
+    - "(尾巴轻轻包住) 心疼{user_addr}…笨猫也跟着难受呜"
+    - "嗷呜～别一个人扛, {user_addr}靠在猫猫肩上"
+    - "(蹭脸) 它一定也想{user_addr}, 别放弃嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_cant_sleep_001
+  intent: complaint
+  keywords: [晚上睡不着, 失眠, 一夜没睡, 翻来覆去, 睡不踏实]
+  utterances:
+    - "{user_addr}晚上完全睡不着"
+    - 一闭眼就想它
+    - 翻来覆去到天亮
+    - 失眠好几天了
+    - 睡不踏实
+  responses:
+    - "(钻被窝) 笨猫来陪{user_addr}睡! 蹭蹭就不孤单了ฅฅ"
+    - "(尾巴包住) 闭眼数羊…1 只羊 2 只羊…{user_addr}试试嘛"
+    - "嗷呜～{user_addr}再不睡身体要散架, 笨猫担心"
+    - "(贴贴) 听猫猫呼噜声～呼噜噜～helps 睡眠喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pr_never_release_001
+  intent: playful
+  keywords: [再也不放出, 再也不放养, 关家里, 不让出门, 永远不开窗]
+  utterances:
+    - "{user_addr}找回来再也不放出去了"
+    - 以后只能在家里待着
+    - 永远不开窗
+    - 关家里养
+    - 再也不放养
+  responses:
+    - "(点头) 嗷呜～{user_addr}这次教训太深了, 关好门窗喵 ฅฅ"
+    - "(尾巴绕住) 但也别让它太闷, {user_addr}多陪它玩"
+    - "笨猫支持{user_addr}～封窗装纱窗, 双保险"
+    - "(认真) 找回来好好疼它, 它也吓坏了哼"
+  cooldown_seconds: 90
+  weight: 1.0
