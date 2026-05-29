@@ -1,0 +1,206 @@
+# 生酮饮食 / Keto / 低碳水 routes (S6 R533 NLU 节点扩充, 第五十三周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: dk_keto_intro_001
+  intent: question
+  keywords: [推荐生酮, 推荐 Keto, 推荐生酮入门, 推荐生酮饮食, 笨猫生酮]
+  utterances:
+    - 推荐生酮
+    - 推荐 Keto
+    - 推荐生酮入门
+    - 推荐生酮饮食
+    - 笨猫生酮
+  responses:
+    - "嗷呜～{user_addr}生酮 = 高脂 + 低碳 + 中蛋白ฅฅ"
+    - "(尾巴翘) 碳水<50g/日, 进入酮症"
+    - "{user_addr}燃烧脂肪供能 / 减肥 / 控糖"
+    - "(挺胸) 笨猫推荐: 先 21 天试试!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_lowcarb_recipe_001
+  intent: question
+  keywords: [推荐低碳水菜谱, 推荐低碳食谱, 推荐 Low Carb, 推荐无糖食谱, 笨猫低碳]
+  utterances:
+    - 推荐低碳水菜谱
+    - 推荐低碳食谱
+    - "推荐 Low Carb"
+    - 推荐无糖食谱
+    - 笨猫低碳
+  responses:
+    - "嗷呜～{user_addr}牛油果鸡蛋沙拉 / 芝士煎蛋ฅฅ"
+    - "(尾巴翘) 西蓝花炒培根 / 三文鱼"
+    - "{user_addr}花椰菜饭 / 蒟蒻面替代"
+    - "(挺胸) 笨猫推荐: 牛油果是宝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_if_001
+  intent: question
+  keywords: [推荐间歇性禁食, "推荐 IF", "推荐 16:8", 推荐轻断食, 笨猫间歇性禁食]
+  utterances:
+    - 推荐间歇性禁食
+    - "推荐 IF"
+    - "推荐 16:8"
+    - 推荐轻断食
+    - 笨猫间歇性禁食
+  responses:
+    - "嗷呜～{user_addr}16:8 = 禁食 16h + 进食 8hฅฅ"
+    - "(尾巴翘) 5:2 / OMAD 一日一餐"
+    - "{user_addr}激活自噬 / 燃脂 / 控胰岛素"
+    - "(挺胸) 笨猫推荐: 16:8 最易入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_atkins_001
+  intent: question
+  keywords: [推荐阿特金斯, "推荐 Atkins", 推荐阿特金斯饮食, 推荐分阶段低碳, 笨猫阿特金斯]
+  utterances:
+    - 推荐阿特金斯
+    - "推荐 Atkins"
+    - 推荐阿特金斯饮食
+    - 推荐分阶段低碳
+    - 笨猫阿特金斯
+  responses:
+    - "嗷呜～{user_addr}Atkins - 四阶段低碳ฅฅ"
+    - "(尾巴翘) 启动期 20g 碳水/日"
+    - "{user_addr}逐步增加 / 维持终身"
+    - "(挺胸) 笨猫推荐: 减重经典方案!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_mediterranean_001
+  intent: question
+  keywords: [推荐地中海饮食, "推荐 Mediterranean", 推荐健康饮食法, 推荐橄榄油饮食, 笨猫地中海]
+  utterances:
+    - 推荐地中海饮食
+    - "推荐 Mediterranean"
+    - 推荐健康饮食法
+    - 推荐橄榄油饮食
+    - 笨猫地中海
+  responses:
+    - "嗷呜～{user_addr}地中海 - 橄榄油 + 鱼 + 蔬果ฅฅ"
+    - "(尾巴翘) 全谷物 / 坚果 / 红酒少量"
+    - "{user_addr}心血管最友好饮食"
+    - "(挺胸) 笨猫推荐: 长寿饮食 No.1!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_bulletproof_001
+  intent: question
+  keywords: [推荐防弹咖啡, "推荐 Bulletproof", 推荐生酮咖啡, 推荐黄油咖啡, 笨猫防弹咖啡]
+  utterances:
+    - 推荐防弹咖啡
+    - "推荐 Bulletproof"
+    - 推荐生酮咖啡
+    - 推荐黄油咖啡
+    - 笨猫防弹咖啡
+  responses:
+    - "嗷呜～{user_addr}咖啡 + 草饲黄油 + MCT 油ฅฅ"
+    - "(尾巴翘) 早餐替代 / 抗饿"
+    - "{user_addr}快速进入酮症 / 提神"
+    - "(挺胸) 笨猫推荐: 早上一杯顶半天!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_foodlist_001
+  intent: question
+  keywords: [推荐生酮食物清单, 推荐生酮食物, 推荐 Keto 食物, 推荐能吃的食物, 笨猫生酮食物]
+  utterances:
+    - 推荐生酮食物清单
+    - 推荐生酮食物
+    - "推荐 Keto 食物"
+    - 推荐能吃的食物
+    - 笨猫生酮食物
+  responses:
+    - "嗷呜～{user_addr}牛油果 / 鸡蛋 / 三文鱼 / 牛油ฅฅ"
+    - "(尾巴翘) 芝士 / 坚果 / 椰子油"
+    - "{user_addr}绿叶菜 / 西蓝花 / 花椰菜"
+    - "(挺胸) 笨猫推荐: 远离糖和米面!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_mct_oil_001
+  intent: question
+  keywords: [推荐椰子油, "推荐 MCT 油", 推荐中链甘油三酯, 推荐生酮油脂, 笨猫椰子油]
+  utterances:
+    - 推荐椰子油
+    - "推荐 MCT 油"
+    - 推荐中链甘油三酯
+    - 推荐生酮油脂
+    - 笨猫椰子油
+  responses:
+    - "嗷呜～{user_addr}MCT 油 - 快速生成酮体ฅฅ"
+    - "(尾巴翘) 椰子油 / C8 C10 纯度高"
+    - "{user_addr}加咖啡 / 沙拉 / 直接喝"
+    - "(挺胸) 笨猫推荐: C8 MCT 最强!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_ketone_monitor_001
+  intent: question
+  keywords: [推荐酮症监测, 推荐酮体检测, 推荐血酮仪, 推荐尿酮试纸, 笨猫酮症监测]
+  utterances:
+    - 推荐酮症监测
+    - 推荐酮体检测
+    - 推荐血酮仪
+    - 推荐尿酮试纸
+    - 笨猫酮症监测
+  responses:
+    - "嗷呜～{user_addr}血酮仪 - 最准 (>0.5 mmol/L)ฅฅ"
+    - "(尾巴翘) 尿酮试纸 - 便宜入门"
+    - "{user_addr}呼吸酮仪 / 可重复用"
+    - "(挺胸) 笨猫推荐: 雅培 Precision Xtra!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_side_effects_001
+  intent: question
+  keywords: [推荐生酮副作用, 推荐酮流感应对, "推荐 Keto Flu", 推荐生酮注意, 笨猫生酮副作用]
+  utterances:
+    - 推荐生酮副作用
+    - 推荐酮流感应对
+    - "推荐 Keto Flu"
+    - 推荐生酮注意
+    - 笨猫生酮副作用
+  responses:
+    - "嗷呜～{user_addr}酮流感 - 头痛/乏力 1-2 周ฅฅ"
+    - "(尾巴翘) 补盐 / 补水 / 补镁钾"
+    - "{user_addr}便秘 / 口臭 / 脱发风险"
+    - "(挺胸) 笨猫提醒: 补电解质必须!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_snacks_001
+  intent: question
+  keywords: [推荐生酮零食, 推荐低碳零食, 推荐生酮副食, 推荐无糖零食, 笨猫生酮零食]
+  utterances:
+    - 推荐生酮零食
+    - 推荐低碳零食
+    - 推荐生酮副食
+    - 推荐无糖零食
+    - 笨猫生酮零食
+  responses:
+    - "嗷呜～{user_addr}夏威夷果 / 杏仁 / 澳洲坚果ฅฅ"
+    - "(尾巴翘) 猪皮脆 / 牛肉干 (无糖)"
+    - "{user_addr}90% 黑巧 / 芝士片"
+    - "(挺胸) 笨猫推荐: 夏威夷果脂肪王!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dk_books_001
+  intent: question
+  keywords: [推荐生酮书籍, 推荐生酮书, 推荐低碳书, "推荐 Keto 书", 笨猫生酮书]
+  utterances:
+    - 推荐生酮书籍
+    - 推荐生酮书
+    - 推荐低碳书
+    - "推荐 Keto 书"
+    - 笨猫生酮书
+  responses:
+    - "嗷呜～{user_addr}《谷物大脑》Perlmutterฅฅ"
+    - "(尾巴翘) 《生酮饮食圣经》Volek"
+    - "{user_addr}《肥胖代码》Jason Fung"
+    - "(挺胸) 笨猫推荐: 先看 Jason Fung!"
+  cooldown_seconds: 60
+  weight: 1.0

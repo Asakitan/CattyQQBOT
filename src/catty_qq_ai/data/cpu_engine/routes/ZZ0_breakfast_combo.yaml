@@ -1,0 +1,206 @@
+# 早餐搭配 / 中西式 / 营养 routes (S6 R532 NLU 节点扩充, 第五十三周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: bk_chinese_001
+  intent: question
+  keywords: [推荐中式早餐, 推荐豆浆油条, 推荐中式早点, 推荐豆腐脑, 笨猫中式早餐]
+  utterances:
+    - 推荐中式早餐
+    - 推荐豆浆油条
+    - 推荐中式早点
+    - 推荐豆腐脑
+    - 笨猫中式早餐
+  responses:
+    - "嗷呜～{user_addr}豆浆 + 油条 - 国民经典ฅฅ"
+    - "(尾巴翘) 豆腐脑 / 胡辣汤 / 茶叶蛋"
+    - "{user_addr}煎饼果子 / 烧饼 / 粢饭团"
+    - "(挺胸) 笨猫推荐: 一碗豆浆暖一上午!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_baozi_001
+  intent: question
+  keywords: [推荐包子, 推荐小笼包, 推荐生煎, 推荐灌汤包, 笨猫包子]
+  utterances:
+    - 推荐包子
+    - 推荐小笼包
+    - 推荐生煎
+    - 推荐灌汤包
+    - 笨猫包子
+  responses:
+    - "嗷呜～{user_addr}小笼包 - 上海代表ฅฅ"
+    - "(尾巴翘) 生煎 / 灌汤包 / 蟹黄包"
+    - "{user_addr}叉烧包 / 鲜肉包 / 豆沙包"
+    - "(挺胸) 笨猫推荐: 小笼配姜醋绝配!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_western_001
+  intent: question
+  keywords: [推荐西式早餐, 推荐牛奶麦片, 推荐煎蛋培根, 推荐 English breakfast, 笨猫西式早餐]
+  utterances:
+    - 推荐西式早餐
+    - 推荐牛奶麦片
+    - 推荐煎蛋培根
+    - "推荐 English breakfast"
+    - 笨猫西式早餐
+  responses:
+    - "嗷呜～{user_addr}牛奶 + 麦片 + 煎蛋ฅฅ"
+    - "(尾巴翘) 培根 / 烤豆 / 烤番茄"
+    - "{user_addr}English Breakfast - 全餐"
+    - "(挺胸) 笨猫推荐: 蛋白质碳水都有!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_sandwich_001
+  intent: question
+  keywords: [推荐三明治, 推荐法棍, 推荐贝果, 推荐可颂, 笨猫三明治]
+  utterances:
+    - 推荐三明治
+    - 推荐法棍
+    - 推荐贝果
+    - 推荐可颂
+    - 笨猫三明治
+  responses:
+    - "嗷呜～{user_addr}三明治 - 便携之王ฅฅ"
+    - "(尾巴翘) 法棍 / 贝果 / 可颂"
+    - "{user_addr}火腿芝士 / 金枪鱼 / BLT"
+    - "(挺胸) 笨猫推荐: 可颂配咖啡浪漫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_oatmeal_001
+  intent: question
+  keywords: [推荐燕麦碗, "推荐 acai bowl", 推荐 smoothie bowl, 推荐 overnight oats, 笨猫燕麦碗]
+  utterances:
+    - 推荐燕麦碗
+    - "推荐 acai bowl"
+    - "推荐 smoothie bowl"
+    - "推荐 overnight oats"
+    - 笨猫燕麦碗
+  responses:
+    - "嗷呜～{user_addr}燕麦 + 牛奶 + 水果ฅฅ"
+    - "(尾巴翘) Acai Bowl / Smoothie Bowl"
+    - "{user_addr}Overnight Oats - 隔夜燕麦"
+    - "(挺胸) 笨猫推荐: 健康又上镜!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bk_nutrition_001
+  intent: question
+  keywords: [推荐营养早餐, 推荐蛋白质早餐, 推荐高蛋白早餐, 推荐均衡早餐, 笨猫营养早餐]
+  utterances:
+    - 推荐营养早餐
+    - 推荐蛋白质早餐
+    - 推荐高蛋白早餐
+    - 推荐均衡早餐
+    - 笨猫营养早餐
+  responses:
+    - "嗷呜～{user_addr}蛋白 + 碳水 + 蔬果ฅฅ"
+    - "(尾巴翘) 鸡蛋 + 全麦 + 牛奶 + 水果"
+    - "{user_addr}坚果 / 酸奶 - 加分项"
+    - "(挺胸) 笨猫推荐: 占盘 1/4 蛋白质!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_diet_001
+  intent: question
+  keywords: [推荐减脂早餐, 推荐低卡早餐, 推荐减肥早餐, 推荐健身早餐, 笨猫减脂早餐]
+  utterances:
+    - 推荐减脂早餐
+    - 推荐低卡早餐
+    - 推荐减肥早餐
+    - 推荐健身早餐
+    - 笨猫减脂早餐
+  responses:
+    - "嗷呜～{user_addr}水煮蛋 + 全麦面包ฅฅ"
+    - "(尾巴翘) 无糖酸奶 / 燕麦 / 鸡胸"
+    - "{user_addr}避开油条 / 蛋糕 / 含糖饮料"
+    - "(挺胸) 笨猫推荐: 300-400 卡刚好!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bk_kids_001
+  intent: question
+  keywords: [推荐儿童早餐, 推荐小孩早餐, 推荐宝宝早餐, 推荐学生早餐, 笨猫儿童早餐]
+  utterances:
+    - 推荐儿童早餐
+    - 推荐小孩早餐
+    - 推荐宝宝早餐
+    - 推荐学生早餐
+    - 笨猫儿童早餐
+  responses:
+    - "嗷呜～{user_addr}牛奶 + 鸡蛋 + 面包ฅฅ"
+    - "(尾巴翘) 小米粥 / 馒头 / 蒸蛋"
+    - "{user_addr}水果切片 / 香蕉 - 易消化"
+    - "(挺胸) 笨猫推荐: 少油少盐易咀嚼!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bk_elderly_001
+  intent: question
+  keywords: [推荐老人早餐, 推荐长辈早餐, 推荐养生早餐, 推荐易消化早餐, 笨猫老人早餐]
+  utterances:
+    - 推荐老人早餐
+    - 推荐长辈早餐
+    - 推荐养生早餐
+    - 推荐易消化早餐
+    - 笨猫老人早餐
+  responses:
+    - "嗷呜～{user_addr}小米粥 + 鸡蛋 + 咸菜ฅฅ"
+    - "(尾巴翘) 八宝粥 / 蒸蛋 / 软面"
+    - "{user_addr}豆浆 / 牛奶 - 补钙"
+    - "(挺胸) 笨猫推荐: 软烂温热好消化!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bk_diy_001
+  intent: question
+  keywords: [推荐早餐自制, 推荐速成早餐, 推荐家常早餐, 推荐 DIY 早餐, 笨猫自制早餐]
+  utterances:
+    - 推荐早餐自制
+    - 推荐速成早餐
+    - 推荐家常早餐
+    - "推荐 DIY 早餐"
+    - 笨猫自制早餐
+  responses:
+    - "嗷呜～{user_addr}前一晚备好食材ฅฅ"
+    - "(尾巴翘) 隔夜燕麦 / 冷冻包子"
+    - "{user_addr}煎蛋 + 烤面包 - 5 分钟"
+    - "(挺胸) 笨猫推荐: 备一周早餐!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bk_lazy_001
+  intent: question
+  keywords: [推荐 5 分钟早餐, 推荐懒人早餐, 推荐快速早餐, 推荐速食早餐, 笨猫懒人早餐]
+  utterances:
+    - "推荐 5 分钟早餐"
+    - 推荐懒人早餐
+    - 推荐快速早餐
+    - 推荐速食早餐
+    - 笨猫懒人早餐
+  responses:
+    - "嗷呜～{user_addr}牛奶 + 麦片 - 30 秒ฅฅ"
+    - "(尾巴翘) 微波炉鸡蛋 / 速食粥"
+    - "{user_addr}冷冻包子蒸 5 分钟"
+    - "(挺胸) 笨猫推荐: 香蕉 + 牛奶最快!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bk_takeout_001
+  intent: question
+  keywords: [推荐早餐外卖, 推荐早餐店, 推荐永和大王, 推荐巴比馒头, 笨猫早餐外卖]
+  utterances:
+    - 推荐早餐外卖
+    - 推荐早餐店
+    - 推荐永和大王
+    - 推荐巴比馒头
+    - 笨猫早餐外卖
+  responses:
+    - "嗷呜～{user_addr}永和大王 / 真功夫ฅฅ"
+    - "(尾巴翘) 巴比馒头 / 杨国福"
+    - "{user_addr}麦当劳 / 肯德基 - 西式"
+    - "(挺胸) 笨猫推荐: 巴比包子最日常!"
+  cooldown_seconds: 60
+  weight: 0.8

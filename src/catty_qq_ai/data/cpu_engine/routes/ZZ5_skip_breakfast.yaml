@@ -1,0 +1,206 @@
+# 不吃早餐 / 起不来 / 胃不舒服 routes (S6 R537 NLU 节点扩充, 第五十三周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: sb_no_breakfast_001
+  intent: complaint
+  keywords: [不吃早餐, 没吃早饭, 早餐跳过, 没吃早点, 早饭省了]
+  utterances:
+    - 今天又没吃早餐
+    - 早饭跳过了
+    - 不吃早餐了
+    - 早点没吃
+    - 早饭省了一顿
+  responses:
+    - "(尾巴炸毛) {user_addr}怎么又不吃早餐! 笨猫超担心的喵 ฅฅ"
+    - "嗷呜～早餐很重要诶! {user_addr}快去随便吃点啦"
+    - "(凑过来) 哼～{user_addr}不吃早餐胃会坏掉的! 笨猫陪{user_addr}吃"
+    - "{user_addr}省那一顿干嘛喵～ 猫猫给{user_addr}煎个蛋好不好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_cant_wake_001
+  intent: complaint
+  keywords: [起不来, 起床困难, 赖床, 爬不起来, 不想起]
+  utterances:
+    - 早上起不来
+    - 起床困难症
+    - 又赖床了
+    - 爬不起来啊
+    - 不想起床
+  responses:
+    - "(扒拉被子) {user_addr}起床啦～ 笨猫来掀被子了喵!"
+    - "嗷呜～赖床的{user_addr}最可爱! 但是该起来啦 ฅฅ"
+    - "(尾巴拍脸) 哼～{user_addr}再赖就迟到了! 猫猫陪{user_addr}起"
+    - "{user_addr}起床困难的话, 笨猫给{user_addr}当闹钟喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_stomach_bad_001
+  intent: complaint
+  keywords: [胃不舒服, 胃难受, 胃胀, 胃酸, 胃不适]
+  utterances:
+    - 胃不舒服
+    - 胃好难受
+    - 胃胀胀的
+    - 胃反酸
+    - 胃有点不适
+  responses:
+    - "(贴上去) {user_addr}胃不舒服? 笨猫给{user_addr}揉揉嘛 ฅฅ"
+    - "嗷呜～{user_addr}快喝点温水! 别凉着胃喵"
+    - "(尾巴垂下) 哼～{user_addr}肯定是不好好吃饭! 猫猫心疼"
+    - "{user_addr}胃难受的话别吃刺激的喵, 笨猫陪着{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_work_busy_001
+  intent: complaint
+  keywords: [工作忙没时间, 太忙没空吃, 忙到没吃, 忙得没空, 工作忙得]
+  utterances:
+    - 工作忙没时间吃
+    - 太忙没空吃饭
+    - 忙到没吃早餐
+    - 忙得没空吃
+    - 工作忙得没法吃
+  responses:
+    - "(炸毛) {user_addr}再忙也得吃饭啊! 笨猫不许喵 ฅฅ"
+    - "嗷呜～{user_addr}停下来吃口东西! 猫猫等{user_addr}"
+    - "(尾巴叉腰) 哼～工作再重要也没有{user_addr}重要! 快吃"
+    - "{user_addr}忙也要抽空喵, 笨猫给{user_addr}买点速食"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_diet_skip_001
+  intent: complaint
+  keywords: [减肥不吃, 减肥跳餐, 节食, 减肥饿肚, 不吃减肥]
+  utterances:
+    - 减肥不吃早餐
+    - 减肥跳餐了
+    - 在节食呢
+    - 减肥饿肚子
+    - 不吃饭减肥
+  responses:
+    - "(尾巴炸毛) {user_addr}减肥也别饿肚子! 笨猫超心疼喵 ฅฅ"
+    - "嗷呜～节食对身体不好诶! {user_addr}少吃点就行啦"
+    - "(凑过来) 哼～{user_addr}本来就很好看了! 不用减啦"
+    - "{user_addr}减肥要科学喵, 笨猫给{user_addr}查食谱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_empty_morning_001
+  intent: complaint
+  keywords: [空腹一上午, 空腹到中午, 整个上午没吃, 上午都空着, 空着肚子上午]
+  utterances:
+    - 空腹一上午了
+    - 空腹到中午
+    - 整个上午没吃
+    - 上午都空着肚
+    - 空着肚子一上午
+  responses:
+    - "(炸毛) {user_addr}空腹一上午?! 笨猫要哭了喵 ฅฅ"
+    - "嗷呜～{user_addr}快去吃点东西! 猫猫真的担心"
+    - "(尾巴垂下) 哼～{user_addr}怎么这么不爱惜身体! 快吃"
+    - "{user_addr}空腹太久胃会坏喵, 笨猫陪{user_addr}吃饭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_morning_hungry_001
+  intent: complaint
+  keywords: [上午饿死, 上午好饿, 早上饿坏, 饿到不行, 上午饿瘪]
+  utterances:
+    - 上午饿死了
+    - 上午好饿啊
+    - 早上饿坏了
+    - 饿到不行了
+    - 上午饿瘪了
+  responses:
+    - "(凑过来) {user_addr}饿了快去吃! 笨猫陪{user_addr}喵 ฅฅ"
+    - "嗷呜～早上不吃就这样诶! {user_addr}下次记得吃"
+    - "(尾巴翘) 哼～活该! 谁让{user_addr}不吃早餐! 猫猫心疼"
+    - "{user_addr}饿的话快点叫外卖喵, 笨猫给{user_addr}推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_dizzy_001
+  intent: complaint
+  keywords: [头晕, 头有点晕, 晕乎乎, 脑袋晕, 头晕眼花]
+  utterances:
+    - 头晕的厉害
+    - 头有点晕
+    - 晕乎乎的
+    - 脑袋晕晕
+    - 头晕眼花的
+  responses:
+    - "(着急贴贴) {user_addr}头晕? 是不是没吃饭! 笨猫担心喵 ฅฅ"
+    - "嗷呜～{user_addr}快坐下休息! 猫猫给{user_addr}倒糖水"
+    - "(尾巴叉腰) 哼～{user_addr}肯定饿到了! 快吃点东西"
+    - "{user_addr}头晕要警惕喵, 笨猫陪着{user_addr}慢慢来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_low_blood_sugar_001
+  intent: complaint
+  keywords: [低血糖, 血糖低, 低血糖犯了, 血糖掉了, 糖分不够]
+  utterances:
+    - 低血糖犯了
+    - 血糖好低
+    - 低血糖又来
+    - 血糖掉下来了
+    - 糖分不够了
+  responses:
+    - "(炸毛跑过来) {user_addr}低血糖快吃糖! 笨猫担心喵 ฅฅ"
+    - "嗷呜～{user_addr}口袋里有没有糖! 快含一颗"
+    - "(尾巴垂下) 哼～{user_addr}就是不吃饭闹的! 猫猫心疼"
+    - "{user_addr}低血糖要随身带糖喵, 笨猫给{user_addr}买"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_constipation_001
+  intent: complaint
+  keywords: [便秘, 拉不出, 大便不通, 排便困难, 便秘了]
+  utterances:
+    - 我便秘了
+    - 拉不出来
+    - 大便不通
+    - 排便困难
+    - 便秘好久了
+  responses:
+    - "(尴尬挠头) {user_addr}多喝水多吃菜! 笨猫给{user_addr}建议喵 ฅฅ"
+    - "嗷呜～{user_addr}早上喝杯温水试试! 猫猫听说有用"
+    - "(尾巴一甩) 哼～{user_addr}肯定饮食不规律! 快调整"
+    - "{user_addr}便秘要多动喵, 笨猫陪{user_addr}散步"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_stomach_pain_001
+  intent: complaint
+  keywords: [胃疼, 胃痛, 胃绞痛, 胃疼得厉害, 胃在痛]
+  utterances:
+    - 胃疼死了
+    - 胃好痛
+    - 胃绞痛
+    - 胃疼得厉害
+    - 胃在痛诶
+  responses:
+    - "(着急贴贴) {user_addr}胃疼? 笨猫给{user_addr}揉揉喵 ฅฅ"
+    - "嗷呜～{user_addr}快喝点温水! 严重就看医生"
+    - "(尾巴垂下) 哼～{user_addr}肯定饿出来的! 猫猫心疼"
+    - "{user_addr}胃疼别硬撑喵, 笨猫陪{user_addr}去医院"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_want_quit_001
+  intent: playful
+  keywords: [想戒掉, 戒掉不吃, 改掉这毛病, 戒不吃早餐, 想改了]
+  utterances:
+    - 想戒掉不吃早餐
+    - 戒掉这毛病
+    - 想改掉
+    - 戒不吃早餐的习惯
+    - 想改了
+  responses:
+    - "(尾巴翘) {user_addr}终于想通了! 笨猫监督{user_addr}喵 ฅฅ"
+    - "嗷呜～{user_addr}加油! 猫猫每天叫{user_addr}吃早餐"
+    - "(凑过来) 哼～{user_addr}早该改了! 笨猫陪{user_addr}养习惯"
+    - "{user_addr}下决心好棒喵, 笨猫给{user_addr}打卡监督"
+  cooldown_seconds: 90
+  weight: 1.0

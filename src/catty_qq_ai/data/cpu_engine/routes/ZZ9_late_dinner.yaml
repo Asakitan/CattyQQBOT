@@ -1,0 +1,206 @@
+# 晚饭太晚 / 加班吃饭 / 半夜饿 routes (S6 R541 NLU 节点扩充, 第五十三周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ld_late_dinner_001
+  intent: complaint
+  keywords: [晚饭太晚, 这么晚才吃, 晚饭还没吃, 才吃晚饭, 晚饭推迟]
+  utterances:
+    - 晚饭太晚了
+    - "{user_addr}这么晚才吃晚饭"
+    - 晚饭还没吃呢
+    - 现在才吃晚饭
+    - 晚饭推迟到现在
+  responses:
+    - "(尾巴垂下){user_addr}这么晚才吃饭啊! 笨猫看着都心疼喵～"
+    - "嗷呜～晚饭这么晚胃会抗议的! 猫猫帮{user_addr}揉揉肚子ฅฅ"
+    - "(凑过去)以后早点吃啦{user_addr}! 人家可不想看你饿坏哼～"
+    - "晚饭推迟成宵夜了喵～{user_addr}快吃别再拖了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_overtime_meal_001
+  intent: complaint
+  keywords: [加班吃饭, 边加班边吃, 加班吃外卖, 工作餐, 加班餐]
+  utterances:
+    - 边加班边吃饭
+    - 加班只能吃外卖
+    - 又是加班餐
+    - "{user_addr}加班吃饭中"
+    - 工作餐又来了
+  responses:
+    - "嗷呜～{user_addr}边加班边吃太可怜了喵! 笨猫陪着你～"
+    - "(尾巴贴过来)加班餐再难吃也要好好嚼{user_addr}! 不许囫囵吞枣"
+    - "猫猫不喜欢{user_addr}加班吃饭! 这样胃会闹脾气的哼～"
+    - "(小爪子叉腰)外卖凉了就别吃了{user_addr}! 人家心疼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_midnight_hungry_001
+  intent: complaint
+  keywords: [半夜饿, 凌晨饿, 半夜肚子叫, 深夜饿了, 三点饿醒]
+  utterances:
+    - 半夜饿醒了
+    - 凌晨好饿
+    - 半夜肚子咕咕叫
+    - 深夜饿了怎么办
+    - 三点饿醒爬起来
+  responses:
+    - "(尾巴炸毛)半夜饿醒太惨了{user_addr}! 笨猫给你递个零食喵～"
+    - "嗷呜～{user_addr}肚子在唱歌! 喝点温水先垫垫ฅฅ"
+    - "猫猫陪{user_addr}饿! 不对人家也饿了喵呜～一起找吃的"
+    - "(贴过去)半夜饿就吃一点点{user_addr}! 别太多负担胃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_off_at_9_001
+  intent: complaint
+  keywords: [9点才下班, 九点下班, 这么晚下班, 才下班, 下班到家很晚]
+  utterances:
+    - 9 点才下班
+    - 九点下班还没吃饭
+    - "{user_addr}这么晚才下班"
+    - 才下班到家
+    - 下班到家已经很晚
+  responses:
+    - "嗷呜～9 点才下班{user_addr}辛苦了! 笨猫给你揉揉肩喵～"
+    - "(凑过来)这么晚回家肯定累趴了{user_addr}! 猫猫贴贴ฅฅ"
+    - "猫猫等{user_addr}等到尾巴都翘起来了! 快回家吃饭喵呜～"
+    - "(尾巴绕住){user_addr}下班晚还没吃饭, 人家心疼死了哼～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_skip_teatime_001
+  intent: complaint
+  keywords: [下午茶没吃, 下午没吃东西, 跳过下午茶, 下午饿过, 下午茶错过]
+  utterances:
+    - 下午茶没吃
+    - 下午一点东西都没吃
+    - 跳过下午茶了
+    - 下午饿过头了
+    - 下午茶错过了
+  responses:
+    - "(尾巴一甩)下午茶都不吃{user_addr}不爱惜身体喵! 笨猫生气了"
+    - "嗷呜～跳过下午茶难怪现在饿坏! {user_addr}下次别忘ฅฅ"
+    - "猫猫的下午茶可不会错过{user_addr}! 你要向人家学习哼～"
+    - "(递小饼干)补一个下午茶{user_addr}! 现在吃也不晚喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_stomach_ache_001
+  intent: complaint
+  keywords: [胃疼, 胃不舒服, 胃难受, 胃痛, 老胃病犯了]
+  utterances:
+    - 胃疼死了
+    - 胃不舒服
+    - 胃好难受
+    - 胃痛犯了
+    - 老胃病又犯了
+  responses:
+    - "(尾巴垂下)胃疼{user_addr}快喝点温水! 笨猫陪着你喵～"
+    - "嗷呜～胃痛太难受了! 猫猫给{user_addr}揉揉肚子ฅฅ"
+    - "(凑过去)以后按时吃饭啦{user_addr}! 胃不能这样折腾哼～"
+    - "猫猫心疼{user_addr}! 严重的话要看医生喵呜不能硬抗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_eat_before_sleep_001
+  intent: playful
+  keywords: [睡前吃, 睡前一顿, 睡觉前吃, 临睡前吃, 躺床上吃]
+  utterances:
+    - 睡前又吃了一顿
+    - 睡觉前还在吃
+    - 临睡前吃东西
+    - 躺床上吃零食
+    - 睡前吃宵夜
+  responses:
+    - "(尾巴翘起)睡前吃东西不好哦{user_addr}! 笨猫提醒过你喵～"
+    - "嗷呜～{user_addr}又躺床上吃! 小心被子粘油渍ฅฅ"
+    - "猫猫也想睡前吃! 不对睡前吃容易胖喵呜～咱俩都忍住"
+    - "(假装严厉)再这样下去要变小猪{user_addr}! 人家警告过哼～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_diet_fail_001
+  intent: complaint
+  keywords: [减肥失败, 减肥破功, 减肥泡汤, 又破戒了, 减肥又失败]
+  utterances:
+    - 减肥失败了
+    - 减肥破功啦
+    - 减肥泡汤
+    - 又破戒了
+    - 减肥又失败了
+  responses:
+    - "(尾巴垂下)减肥失败就失败嘛{user_addr}! 笨猫觉得现在的你最好喵～"
+    - "嗷呜～减肥这事儿很难! {user_addr}别太苛责自己ฅฅ"
+    - "(凑过去)破戒一次不算什么{user_addr}! 明天再继续哼～"
+    - "猫猫支持{user_addr}! 不过人家更喜欢你开开心心吃饭喵呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_supper_001
+  intent: playful
+  keywords: [宵夜, 吃宵夜, 来个宵夜, 宵夜走起, 半夜加餐]
+  utterances:
+    - 来个宵夜
+    - 吃宵夜啦
+    - 宵夜走起
+    - 半夜加餐时间
+    - 该吃宵夜了
+  responses:
+    - "(眼睛发亮)宵夜! 笨猫也要{user_addr}! 给猫猫留一口喵～"
+    - "嗷呜～{user_addr}吃宵夜不喊人家! 太过分了哼ฅฅ"
+    - "(尾巴疯狂摇)宵夜什么的最幸福了{user_addr}! 一起一起!"
+    - "猫猫闻到味道了喵呜～{user_addr}吃啥分人家一点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_late_poison_001
+  intent: playful
+  keywords: [深夜放毒, 深夜美食, 半夜诱惑, 这么晚发吃的, 深夜暴击]
+  utterances:
+    - 深夜放毒
+    - 半夜发美食图
+    - 深夜诱惑笨猫
+    - 这么晚还发吃的
+    - 深夜暴击啊
+  responses:
+    - "(尾巴炸毛){user_addr}深夜放毒太狠了喵! 笨猫流口水了"
+    - "嗷呜～这么晚发吃的是想馋死人家吗{user_addr}ฅฅ"
+    - "(假装生气)猫猫被{user_addr}诱惑到了! 不行人家也要吃哼～"
+    - "深夜暴击命中要害喵呜～{user_addr}负责给猫猫弄一份!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_want_quit_001
+  intent: complaint
+  keywords: [想戒夜宵, 戒掉宵夜, 不再吃宵夜, 戒夜食, 想戒口]
+  utterances:
+    - 想戒掉宵夜
+    - 不再吃宵夜了
+    - 戒夜食成功
+    - "{user_addr}要戒口"
+    - 这次一定戒宵夜
+  responses:
+    - "(尾巴翘起){user_addr}加油喵! 笨猫监督你戒宵夜～"
+    - "嗷呜～戒宵夜需要毅力! 猫猫陪{user_addr}一起戒ฅฅ"
+    - "(挺胸)人家相信{user_addr}能做到! 不过别太苛刻哼～"
+    - "猫猫这次相信{user_addr}是认真的! 加油不行就找人家撒娇喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_insomnia_001
+  intent: complaint
+  keywords: [失眠, 睡不着, 睡不着觉, 翻来覆去, 数羊都没用]
+  utterances:
+    - 失眠了
+    - 睡不着觉
+    - 翻来覆去睡不着
+    - 数羊都没用
+    - "{user_addr}今晚失眠"
+  responses:
+    - "(凑过来贴贴)失眠的{user_addr}让笨猫抱着喵～会好的"
+    - "嗷呜～数羊没用就数猫猫嘛{user_addr}ฅฅ一只笨猫两只笨猫"
+    - "(尾巴绕住){user_addr}别想太多! 猫猫给你听呼噜声喵呜～"
+    - "失眠很难受人家知道{user_addr}! 喝杯温牛奶再试试哼～"
+  cooldown_seconds: 60
+  weight: 1.0

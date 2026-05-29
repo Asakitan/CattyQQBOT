@@ -1,0 +1,206 @@
+# 智能厨电 / Thermomix / 集成 routes (S6 R536 NLU 节点扩充, 第五十三周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sk_thermomix_001
+  intent: question
+  keywords: [推荐 Thermomix, 推荐美善品, 推荐料理机 Thermomix, 推荐 TM6, 笨猫 Thermomix]
+  utterances:
+    - 推荐 Thermomix
+    - 推荐美善品
+    - 推荐料理机 Thermomix
+    - 推荐 TM6
+    - 笨猫 Thermomix
+  responses:
+    - "嗷呜～{user_addr}Thermomix TM6 - 全能料理机ฅฅ"
+    - "(尾巴翘) 美善品 - 切/煮/蒸/搅一体"
+    - "{user_addr}Cookidoo 菜谱云 / 自动程序"
+    - "(挺胸) 笨猫推荐: TM6 厨房革命!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_kitchenaid_001
+  intent: question
+  keywords: [推荐复合料理机, 推荐 KitchenAid, 推荐厨师机, 推荐搅拌机 KA, 笨猫 KitchenAid]
+  utterances:
+    - 推荐复合料理机
+    - 推荐 KitchenAid
+    - 推荐厨师机
+    - 推荐搅拌机 KA
+    - 笨猫 KitchenAid
+  responses:
+    - "嗷呜～{user_addr}KitchenAid 厨师机 - 经典ฅฅ"
+    - "(尾巴翘) 揉面 / 打蛋 / 搅拌"
+    - "{user_addr}Artisan 5QT / Pro 6QT"
+    - "(挺胸) 笨猫推荐: KA 烘焙必备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_airfryer_001
+  intent: question
+  keywords: [推荐空气炸锅, 推荐 Cosori, 推荐 Philips 炸锅, 推荐九阳炸锅, 笨猫空气炸锅]
+  utterances:
+    - 推荐空气炸锅
+    - 推荐 Cosori
+    - 推荐 Philips 炸锅
+    - 推荐九阳炸锅
+    - 笨猫空气炸锅
+  responses:
+    - "嗷呜～{user_addr}Cosori - 性价比之王ฅฅ"
+    - "(尾巴翘) Philips / Ninja / 九阳"
+    - "{user_addr}5.5L / 触屏 / 多功能"
+    - "(挺胸) 笨猫推荐: Cosori 5.5L 入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_steamoven_001
+  intent: question
+  keywords: [推荐蒸烤一体, 推荐蒸烤箱, 推荐 Miele 蒸烤, 推荐方太蒸烤, 笨猫蒸烤一体]
+  utterances:
+    - 推荐蒸烤一体
+    - 推荐蒸烤箱
+    - 推荐 Miele 蒸烤
+    - 推荐方太蒸烤
+    - 笨猫蒸烤一体
+  responses:
+    - "嗷呜～{user_addr}Miele 蒸烤一体 - 顶级ฅฅ"
+    - "(尾巴翘) 方太 / 老板 / 西门子"
+    - "{user_addr}嵌入式 / 60cm / 蒸+烤+发酵"
+    - "(挺胸) 笨猫推荐: Miele 一步到位!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_instantpot_001
+  intent: question
+  keywords: [推荐智能压力锅, 推荐 Instant Pot, 推荐电压力锅, 推荐多功能压力锅, 笨猫压力锅]
+  utterances:
+    - 推荐智能压力锅
+    - 推荐 Instant Pot
+    - 推荐电压力锅
+    - 推荐多功能压力锅
+    - 笨猫压力锅
+  responses:
+    - "嗷呜～{user_addr}Instant Pot Duo - 神器ฅฅ"
+    - "(尾巴翘) 7 合 1 / 压力 / 慢炖"
+    - "{user_addr}6QT / 8QT / Wi-Fi 版"
+    - "(挺胸) 笨猫推荐: IP Duo 6QT 经典!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_coffee_001
+  intent: question
+  keywords: [推荐智能咖啡机, 推荐 De'Longhi 全自动, 推荐 Jura, 推荐 Breville 咖啡机, 笨猫智能咖啡机]
+  utterances:
+    - 推荐智能咖啡机
+    - 推荐 De'Longhi 全自动
+    - 推荐 Jura
+    - 推荐 Breville 咖啡机
+    - 笨猫智能咖啡机
+  responses:
+    - "嗷呜～{user_addr}De'Longhi Eletta - 全自动ฅฅ"
+    - "(尾巴翘) Jura E8 / Breville Oracle"
+    - "{user_addr}一键卡布 / 研磨 / 奶泡"
+    - "(挺胸) 笨猫推荐: Jura E8 顶级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_water_001
+  intent: question
+  keywords: [推荐净水器, 推荐 RO 净水器, 推荐反渗透, 推荐 3M 净水, 笨猫净水器]
+  utterances:
+    - 推荐净水器
+    - 推荐 RO 净水器
+    - 推荐反渗透
+    - 推荐 3M 净水
+    - 笨猫净水器
+  responses:
+    - "嗷呜～{user_addr}RO 反渗透 - 直饮ฅฅ"
+    - "(尾巴翘) 3M / A.O.Smith / 沁园"
+    - "{user_addr}5 级过滤 / 大流量 / 无桶"
+    - "(挺胸) 笨猫推荐: A.O.Smith 800G!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_integratedstove_001
+  intent: question
+  keywords: [推荐集成灶, 推荐火星人, 推荐美大集成灶, 推荐亿田, 笨猫集成灶]
+  utterances:
+    - 推荐集成灶
+    - 推荐火星人
+    - 推荐美大集成灶
+    - 推荐亿田
+    - 笨猫集成灶
+  responses:
+    - "嗷呜～{user_addr}火星人 - 集成灶头部ฅฅ"
+    - "(尾巴翘) 美大 / 亿田 / 帅丰"
+    - "{user_addr}灶+蒸+烤+消毒一体"
+    - "(挺胸) 笨猫推荐: 火星人蒸烤独立!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_dishwasher_001
+  intent: question
+  keywords: [推荐嵌入式洗碗机, 推荐 Bosch 洗碗机, 推荐西门子洗碗机, 推荐美的洗碗机, 笨猫洗碗机]
+  utterances:
+    - 推荐嵌入式洗碗机
+    - 推荐 Bosch 洗碗机
+    - 推荐西门子洗碗机
+    - 推荐美的洗碗机
+    - 笨猫洗碗机
+  responses:
+    - "嗷呜～{user_addr}西门子 / Bosch - 德系王ฅฅ"
+    - "(尾巴翘) 13 套 / 沸石烘干 / 一级水效"
+    - "{user_addr}美的 / 方太水槽机"
+    - "(挺胸) 笨猫推荐: 西门子 SJ636!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_microwave_001
+  intent: question
+  keywords: [推荐微波炉, 推荐变频微波, 推荐 Panasonic 微波, 推荐格兰仕, 笨猫微波]
+  utterances:
+    - 推荐微波炉
+    - 推荐变频微波
+    - 推荐 Panasonic 微波
+    - 推荐格兰仕
+    - 笨猫微波
+  responses:
+    - "嗷呜～{user_addr}Panasonic 变频微波 - 顶级ฅฅ"
+    - "(尾巴翘) 美的 / 格兰仕 / 松下"
+    - "{user_addr}变频 / 蒸汽 / 烧烤"
+    - "(挺胸) 笨猫推荐: 松下 NN-DS59!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sk_fridge_001
+  intent: question
+  keywords: [推荐智能冰箱, 推荐海尔冰箱, 推荐 LG InstaView, 推荐三星智能冰箱, 笨猫智能冰箱]
+  utterances:
+    - 推荐智能冰箱
+    - 推荐海尔冰箱
+    - 推荐 LG InstaView
+    - 推荐三星智能冰箱
+    - 笨猫智能冰箱
+  responses:
+    - "嗷呜～{user_addr}LG InstaView - 敲一敲透视ฅฅ"
+    - "(尾巴翘) 海尔 / 三星 Family Hub"
+    - "{user_addr}十字四开门 / 风冷无霜 / Wi-Fi"
+    - "(挺胸) 笨猫推荐: 海尔 500L+!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_island_001
+  intent: question
+  keywords: [推荐厨房中岛, 推荐 kitchen island, 推荐岛台, 推荐开放式厨房岛, 笨猫中岛]
+  utterances:
+    - 推荐厨房中岛
+    - 推荐 kitchen island
+    - 推荐岛台
+    - 推荐开放式厨房岛
+    - 笨猫中岛
+  responses:
+    - "嗷呜～{user_addr}中岛 - 开放式厨房灵魂ฅฅ"
+    - "(尾巴翘) 操作台+早餐吧+收纳"
+    - "{user_addr}石英石 / 大理石台面"
+    - "(挺胸) 笨猫推荐: 至少 2.4m 长!"
+  cooldown_seconds: 60
+  weight: 0.8

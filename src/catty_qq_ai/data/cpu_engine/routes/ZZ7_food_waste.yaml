@@ -1,0 +1,206 @@
+# 浪费食物 / 蔬菜坏了 / 浪费焦虑 routes (S6 R539 NLU 节点扩充, 第五十三周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: fw_waste_food_001
+  intent: complaint
+  keywords: [浪费食物, 浪费了, 食物浪费, 又浪费, 浪费可惜]
+  utterances:
+    - 又浪费食物了
+    - 浪费了好多
+    - 食物浪费太严重
+    - 浪费可惜啊
+    - 又浪费了
+  responses:
+    - "(尾巴垂下) {user_addr}下次少买点嘛~ 猫猫帮你吃也行哼!"
+    - "嗷呜~浪费食物罪过罪过! 笨猫看着都心疼ฅฅ"
+    - "(叹气) {user_addr}下次按量买啦, 猫猫监督你喵"
+    - "哼~浪费可耻! 不过偶尔一次原谅你啦{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_veggie_bad_001
+  intent: complaint
+  keywords: [蔬菜坏了, 菜烂了, 青菜坏, 蔬菜烂, 菜叶黄了]
+  utterances:
+    - 蔬菜又坏了
+    - 青菜烂了
+    - 菜叶都黄了
+    - 蔬菜放坏了
+    - 买的菜烂了
+  responses:
+    - "(捂脸) 蔬菜坏了好可惜! {user_addr}下次少买点嘛"
+    - "嗷呜~菜叶发黄就赶紧吃啊{user_addr}, 笨猫提醒过的喵!"
+    - "(尾巴一甩) 冰箱也救不了所有菜~ 节奏要算好{user_addr}"
+    - "哼~猫猫早说了买太多! {user_addr}就是不听ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_fruit_rot_001
+  intent: complaint
+  keywords: [水果烂, 水果坏, 香蕉黑了, 苹果烂, 水果发霉]
+  utterances:
+    - 水果都烂了
+    - 香蕉全黑了
+    - 苹果烂了
+    - 水果发霉了
+    - 水果放坏了
+  responses:
+    - "(尾巴抖) 水果烂了好心疼! {user_addr}下次别囤太多嘛"
+    - "嗷呜~香蕉黑了还能做香蕉蛋糕喵! 别全扔啊{user_addr}"
+    - "(叹气) 水果保鲜期短的, {user_addr}买回来就吃啦"
+    - "哼~笨猫看{user_addr}就是不会管理水果哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_milk_expire_001
+  intent: complaint
+  keywords: [奶过期, 牛奶过期, 牛奶坏了, 酸奶过期, 奶变质]
+  utterances:
+    - 牛奶过期了
+    - 奶又过期
+    - 酸奶过期了
+    - 牛奶变质了
+    - 奶坏了
+  responses:
+    - "(看保质期) {user_addr}下次买小盒装啦, 喝得完才买"
+    - "嗷呜~过期奶不能喝喵! 倒了倒了{user_addr}别舍不得"
+    - "(尾巴垂) 牛奶过期好可惜~ 猫猫陪{user_addr}难过一下ฅฅ"
+    - "哼~买之前看看保质期啊{user_addr}, 笨猫提醒过的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_ordered_too_much_001
+  intent: complaint
+  keywords: [点多了, 点太多, 外卖多了, 菜点多了, 又点多]
+  utterances:
+    - 外卖点多了
+    - 菜又点多了
+    - 点太多吃不完
+    - 又点多了
+    - 点多了好后悔
+  responses:
+    - "(尾巴一甩) {user_addr}下次少点一份嘛~ 笨猫帮你算"
+    - "嗷呜~点多了打包啊! 别浪费喵{user_addr}"
+    - "(无奈) 又点多了~ {user_addr}永远学不会"
+    - "哼~猫猫监督你下次只点两个菜{user_addr}哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_cant_finish_001
+  intent: complaint
+  keywords: [吃不完, 太多吃不完, 撑了吃不完, 剩太多, 吃不下]
+  utterances:
+    - 吃不完啊
+    - 太多吃不完
+    - 撑了吃不下
+    - 剩太多了
+    - 已经吃不下了
+  responses:
+    - "(摸{user_addr}肚子) 撑了就别吃啦~ 打包明天再吃嘛"
+    - "嗷呜~吃不完装盒子里冰箱见喵! 别硬撑{user_addr}"
+    - "(尾巴摇摇) {user_addr}下次按胃口点啦~ 猫猫提醒你"
+    - "哼~量力而行啦{user_addr}~ 撑坏了猫猫心疼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_throw_away_sad_001
+  intent: complaint
+  keywords: [倒掉心疼, 扔了心疼, 倒掉可惜, 扔食物心疼, 倒掉舍不得]
+  utterances:
+    - 倒掉好心疼
+    - 扔了好可惜
+    - 倒掉舍不得
+    - 扔食物心疼
+    - 倒掉真的心疼
+  responses:
+    - "(贴贴) {user_addr}心疼就记住下次少买嘛~ 笨猫陪你"
+    - "嗷呜~倒掉确实心疼! 不过坏的不能吃喵{user_addr}"
+    - "(尾巴蹭) 化心疼为节制{user_addr}~ 下次会改的对吧"
+    - "哼~下次猫猫帮你看着量~ 不会再浪费啦{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_eco_anxiety_001
+  intent: complaint
+  keywords: [环保焦虑, 浪费焦虑, 浪费有罪, 浪费罪恶感, 食物浪费焦虑]
+  utterances:
+    - 浪费好焦虑
+    - 有罪恶感
+    - 浪费有罪
+    - 环保焦虑
+    - 浪费罪恶感
+  responses:
+    - "(贴贴) {user_addr}别太焦虑~ 下次注意就好啦"
+    - "嗷呜~有意识到就是进步喵! 笨猫支持{user_addr}"
+    - "(尾巴绕) {user_addr}已经比很多人强了~ 慢慢改"
+    - "哼~承认就好啦{user_addr}~ 行动比愧疚有用ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_stockpile_too_much_001
+  intent: complaint
+  keywords: [囤太多, 囤货太多, 买太多, 又囤多了, 囤了一堆]
+  utterances:
+    - 又囤太多了
+    - 囤货又过期
+    - 买太多了
+    - 囤了一堆没吃
+    - 囤太多吃不完
+  responses:
+    - "(摇头) {user_addr}囤货癖犯了~ 笨猫劝过的喵"
+    - "嗷呜~少囤多买几次啦{user_addr}! 新鲜还不浪费"
+    - "(尾巴一甩) 囤太多就这下场~ 下次记教训{user_addr}"
+    - "哼~猫猫早说了别囤! {user_addr}就是不听ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_bad_storage_001
+  intent: complaint
+  keywords: [收纳不当, 放错地方, 没冷藏, 没保鲜, 储存不对]
+  utterances:
+    - 放错地方坏了
+    - 没冷藏就坏了
+    - 没保鲜放坏
+    - 收纳不当
+    - 储存方式不对
+  responses:
+    - "(教训) {user_addr}冰箱分区记一下嘛~ 笨猫教你"
+    - "嗷呜~叶菜要保鲜袋喵! {user_addr}下次注意"
+    - "(尾巴指) 肉冷冻菜冷藏水果常温~ {user_addr}记住"
+    - "哼~储存有学问的{user_addr}~ 不是塞冰箱就行哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_want_save_001
+  intent: playful
+  keywords: [想节省, 想省钱, 不想浪费, 想节约, 节俭]
+  utterances:
+    - 想节省点
+    - 不想浪费了
+    - 想省钱
+    - 想节约
+    - 要节俭
+  responses:
+    - "(眼睛亮) {user_addr}有觉悟! 笨猫支持你节约喵"
+    - "嗷呜~节约从买菜开始{user_addr}! 列清单按需买"
+    - "(尾巴翘) 猫猫陪{user_addr}一起节约~ 攒钱买鱼干ฅฅ"
+    - "哼~能想到节省就是进步{user_addr}~ 加油哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_plan_failed_001
+  intent: complaint
+  keywords: [计划失败, 没按计划, 又没吃完, 计划落空, 又泡汤]
+  utterances:
+    - 计划又失败了
+    - 没按计划吃
+    - 又没吃完
+    - 食谱计划落空
+    - 计划泡汤了
+  responses:
+    - "(拍拍) {user_addr}计划赶不上变化嘛~ 下次再来"
+    - "嗷呜~计划失败正常喵! 调整下就好{user_addr}"
+    - "(尾巴蹭) 别气馁{user_addr}~ 猫猫陪你重新计划"
+    - "哼~笨猫早说计划要灵活{user_addr}~ 别太死板ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
