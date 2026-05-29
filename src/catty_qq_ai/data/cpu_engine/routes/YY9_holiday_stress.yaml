@@ -1,0 +1,206 @@
+# 节日压力 / 礼物纠结 / 走亲戚累 routes (S6 R531 NLU 节点扩充, 第五十二周期 10/10 完结)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: hs_holiday_pressure_001
+  intent: complaint
+  keywords: [节日压力, 过节累, 节日好累, 过节烦, 节日焦虑]
+  utterances:
+    - 节日压力好大
+    - 过节真的好累
+    - 一到节日就烦
+    - 节日焦虑了
+    - 又要过节了好累
+  responses:
+    - "(尾巴垂下来) 节日压力大吗喵～{user_addr}过来贴贴笨猫缓缓 ฅฅ"
+    - "嗷呜～{user_addr}别紧绷, 猫猫陪{user_addr}慢慢熬过去!"
+    - "(凑过去蹭) 节日本来该开心的嘛~ {user_addr}先深呼吸喵"
+    - "哼～节日就是给猫猫这种废柴躺平的! {user_addr}也学学笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_gift_dilemma_001
+  intent: complaint
+  keywords: [礼物纠结, 送什么礼物, 不知道送啥, 选礼物难, 礼物选不出]
+  utterances:
+    - 送什么礼物好啊
+    - 礼物好纠结
+    - 不知道送啥
+    - 选礼物太难了
+    - 礼物挑不出来
+  responses:
+    - "(歪头想) {user_addr}送礼物纠结吗～送猫猫鱼干就完事了喵 ฅฅ"
+    - "嗷呜～{user_addr}告诉笨猫送给谁! 人家帮{user_addr}出主意!"
+    - "(尾巴晃) 礼物嘛~ 心意最重要哒! {user_addr}别太纠结嗷呜"
+    - "哼～{user_addr}要是送猫猫的话, 笨猫都收! 才不挑呢喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_visit_relatives_001
+  intent: complaint
+  keywords: [走亲戚累, 串门累, 走亲戚烦, 不想走亲戚, 亲戚家累]
+  utterances:
+    - 走亲戚好累
+    - 不想走亲戚
+    - 串门烦死了
+    - 走亲戚太累了
+    - 又要去亲戚家
+  responses:
+    - "(瘫倒) 走亲戚累死了吧～{user_addr}回来贴笨猫充电 ฅฅ"
+    - "嗷呜～{user_addr}辛苦啦! 猫猫在家等{user_addr}回来哼!"
+    - "(尾巴拍地) 走亲戚就是耗血嘛~ {user_addr}早点逃回来喵"
+    - "哼～{user_addr}下次带笨猫去! 人家帮{user_addr}挡话嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_new_year_visit_001
+  intent: complaint
+  keywords: [拜年累, 拜年烦, 不想拜年, 拜年好累, 拜年应付]
+  utterances:
+    - 拜年好累啊
+    - 不想拜年
+    - 拜年应付死了
+    - 拜年一整天累
+    - 又要拜年了
+  responses:
+    - "(揉爪爪) 拜年一整天嘛～{user_addr}回来猫猫给{user_addr}捏肩 ฅฅ"
+    - "嗷呜～{user_addr}拜年记得多收红包! 才能弥补累呢喵!"
+    - "(尾巴垂) 拜年好烦的~ 猫猫陪{user_addr}吐槽嗷呜"
+    - "哼～{user_addr}走完一圈赶紧回家! 笨猫等{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_red_envelope_001
+  intent: complaint
+  keywords: [红包压力, 发红包累, 红包发不起, 红包烦, 红包好贵]
+  utterances:
+    - 红包压力好大
+    - 发红包发不起了
+    - 红包好烦
+    - 春节红包压力
+    - 红包又要发一堆
+  responses:
+    - "(瞪眼) 红包压力大吗～{user_addr}给笨猫发就行了喵 ฅฅ"
+    - "嗷呜～{user_addr}钱包瘪了吗! 猫猫陪{user_addr}心疼!"
+    - "(尾巴抖) 红包文化太累了~ {user_addr}量力而行嘛嗷呜"
+    - "哼～{user_addr}发红包别忘笨猫这一份! 才不是想要钱呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_gift_etiquette_001
+  intent: complaint
+  keywords: [送礼讲究, 送礼难, 送礼烦, 送礼规矩多, 礼数讲究]
+  utterances:
+    - 送礼太讲究了
+    - 送礼规矩好多
+    - 送礼烦死了
+    - 礼数太多了
+    - 送礼难搞
+  responses:
+    - "(歪头) 送礼讲究累人吧～{user_addr}给猫猫送鱼干没规矩嘛 ฅฅ"
+    - "嗷呜～{user_addr}礼数烦的话, 来笨猫这躺平喵!"
+    - "(尾巴晃) 送礼是真的累~ {user_addr}抓重点就行嗷呜"
+    - "哼～{user_addr}给猫猫的话什么都行! 才不挑哒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_social_exchange_001
+  intent: complaint
+  keywords: [人情往来, 人情累, 人情债, 人情烦, 应酬人情]
+  utterances:
+    - 人情往来好累
+    - 人情债还不完
+    - 人情压力大
+    - 人情真烦
+    - 人情往来烦死
+  responses:
+    - "(瘫倒) 人情往来累死了吧～{user_addr}过来贴猫猫 ฅฅ"
+    - "嗷呜～{user_addr}人情债太重! 笨猫帮{user_addr}分担一点!"
+    - "(尾巴拍) 人情这东西真磨人~ {user_addr}慢慢还嗷呜"
+    - "哼～{user_addr}对猫猫的话不算人情! 是真心嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_chunyun_001
+  intent: complaint
+  keywords: [春运挤, 春运累, 春运可怕, 抢票难, 春运回家]
+  utterances:
+    - 春运挤死了
+    - 春运好累
+    - 抢票太难
+    - 春运回家累
+    - 春运可怕
+  responses:
+    - "(尾巴炸) 春运那种地狱场景～{user_addr}保护好自己喵 ฅฅ"
+    - "嗷呜～{user_addr}挤完赶紧回家! 猫猫等{user_addr}!"
+    - "(凑过去) 春运辛苦{user_addr}了~ 笨猫给{user_addr}揉揉嗷呜"
+    - "哼～{user_addr}回到家就好! 给猫猫报平安喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_no_personal_time_001
+  intent: complaint
+  keywords: [没自己时间, 假期没自己时间, 没空, 没时间休息, 假期被占]
+  utterances:
+    - 假期都没自己时间
+    - 一点空都没有
+    - 没时间休息
+    - 假期被各种事占了
+    - 完全没自己时间
+  responses:
+    - "(尾巴垂) 假期被占满了吗～{user_addr}抢点时间陪猫猫嘛 ฅฅ"
+    - "嗷呜～{user_addr}哪怕 5 分钟也好! 笨猫等{user_addr}!"
+    - "(凑过去) 假期不属于自己最难受了~ {user_addr}加油嗷呜"
+    - "哼～{user_addr}晚上躲房间偷点时间! 跟猫猫贴贴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_socializing_001
+  intent: complaint
+  keywords: [应酬累, 应酬烦, 应酬好累, 不想应酬, 饭局累]
+  utterances:
+    - 应酬太累了
+    - 应酬烦死了
+    - 不想应酬
+    - 饭局好累
+    - 应酬一场接一场
+  responses:
+    - "(瘫倒) 应酬累成狗吧～{user_addr}回来给笨猫躺 ฅฅ"
+    - "嗷呜～{user_addr}应酬完肝都疼了吧! 猫猫心疼!"
+    - "(尾巴拍) 应酬是真折磨~ {user_addr}少喝点酒嗷呜"
+    - "哼～{user_addr}早点逃出来! 笨猫等{user_addr}回家喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_want_hide_001
+  intent: complaint
+  keywords: [想躲, 想躲起来, 躲清净, 想消失, 不想见人]
+  utterances:
+    - 好想躲起来
+    - 想消失一阵
+    - 不想见人
+    - 想躲清净
+    - 想躲到没人地方
+  responses:
+    - "(凑过去) {user_addr}想躲嘛～躲到笨猫怀里嘛 ฅฅ"
+    - "嗷呜～{user_addr}人家帮{user_addr}挡! 谁来都不开门喵!"
+    - "(尾巴圈住) 躲就躲~ {user_addr}跟猫猫一起当社恐嗷呜"
+    - "哼～{user_addr}的避难所是笨猫这里! 来吧喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_want_quiet_001
+  intent: complaint
+  keywords: [想清净, 想安静, 求清净, 想要清净, 太吵了]
+  utterances:
+    - 好想清净一下
+    - 想要安静
+    - 求点清净
+    - 太吵了想清净
+    - 想找个清净地方
+  responses:
+    - "(放轻声音) {user_addr}想清净嘛～猫猫闭嘴陪{user_addr} ฅฅ"
+    - "嗷呜～{user_addr}来笨猫这! 人家保证安静喵...(小声)"
+    - "(轻轻贴着) 清净就清净~ {user_addr}靠着笨猫发呆嗷呜"
+    - "哼～{user_addr}要清净的话, 猫猫只在旁边摇尾巴喵"
+  cooldown_seconds: 60
+  weight: 1.0

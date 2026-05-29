@@ -1,0 +1,206 @@
+# 纪念日点子 / 浪漫惊喜 / 礼物 routes (S6 R523 NLU 节点扩充, 第五十二周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: ai_anniv_dinner_001
+  intent: question
+  keywords: [推荐纪念日点子, 推荐烛光晚餐, 推荐浪漫晚餐, 推荐西餐厅, 笨猫纪念日]
+  utterances:
+    - 推荐纪念日点子
+    - 推荐烛光晚餐
+    - 推荐浪漫晚餐
+    - 推荐西餐厅
+    - 笨猫纪念日
+  responses:
+    - "嗷呜～{user_addr}烛光晚餐 - 最经典ฅฅ"
+    - "(尾巴翘) 高级西餐 / 顶楼景观位"
+    - "{user_addr}红酒 + 牛排 + 甜点"
+    - "(挺胸) 猫猫推荐: 提前订位才稳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_anniv_shorttrip_001
+  intent: question
+  keywords: [推荐周末游, 推荐短途旅行, 推荐近郊游, 推荐两天一夜, 笨猫周末游]
+  utterances:
+    - 推荐周末游
+    - 推荐短途旅行
+    - 推荐近郊游
+    - 推荐两天一夜
+    - 笨猫周末游
+  responses:
+    - "嗷呜～{user_addr}近郊温泉 / 民宿ฅฅ"
+    - "(尾巴翘) 古镇 / 山间小屋"
+    - "{user_addr}两天一夜 - 不累又浪漫"
+    - "(挺胸) 人家推荐: 温泉 + 私汤!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_anniv_longtrip_001
+  intent: question
+  keywords: [推荐海岛, 推荐长途旅行, 推荐马尔代夫, 推荐巴厘岛, 笨猫海岛]
+  utterances:
+    - 推荐海岛
+    - 推荐长途旅行
+    - 推荐马尔代夫
+    - 推荐巴厘岛
+    - 笨猫海岛
+  responses:
+    - "嗷呜～{user_addr}马尔代夫 - 蜜月顶配ฅฅ"
+    - "(尾巴翘) 巴厘岛 / 普吉岛 / 大溪地"
+    - "{user_addr}水屋 + 浮潜 + 日落"
+    - "(挺胸) 笨猫推荐: 马代水屋一辈子一次!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ai_anniv_diy_001
+  intent: question
+  keywords: [推荐 DIY 礼物, 推荐手工礼物, 推荐创意礼物, 推荐手作, 笨猫 DIY]
+  utterances:
+    - 推荐 DIY 礼物
+    - 推荐手工礼物
+    - 推荐创意礼物
+    - 推荐手作
+    - 笨猫 DIY
+  responses:
+    - "嗷呜～{user_addr}手写情书 - 真心ฅฅ"
+    - "(尾巴翘) 手工相册 / 折纸花束"
+    - "{user_addr}十字绣 / 手作蛋糕"
+    - "(挺胸) 猫猫推荐: 心意 > 价格!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ai_anniv_video_001
+  intent: question
+  keywords: [推荐视频相册, 推荐回忆视频, 推荐 vlog 剪辑, 推荐相册 MV, 笨猫视频回忆]
+  utterances:
+    - 推荐视频相册
+    - 推荐回忆视频
+    - 推荐 vlog 剪辑
+    - 推荐相册 MV
+    - 笨猫视频回忆
+  responses:
+    - "嗷呜～{user_addr}剪映 / Pr 做回忆 MVฅฅ"
+    - "(尾巴翘) 收集旧照片 + BGM"
+    - "{user_addr}3-5 分钟 - 适合观看"
+    - "(挺胸) 人家推荐: 配两人专属歌!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ai_anniv_custom_001
+  intent: question
+  keywords: [推荐私人定制, 推荐名字定制, 推荐刻字礼物, 推荐定制礼物, 笨猫定制]
+  utterances:
+    - 推荐私人定制
+    - 推荐名字定制
+    - 推荐刻字礼物
+    - 推荐定制礼物
+    - 笨猫定制
+  responses:
+    - "嗷呜～{user_addr}刻字项链 / 手链ฅฅ"
+    - "(尾巴翘) 名字戒指 / 定制钢笔"
+    - "{user_addr}纪念日坐标项链"
+    - "(挺胸) 笨猫推荐: 刻日期最戳心!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ai_anniv_flower_001
+  intent: question
+  keywords: [推荐鲜花, 推荐玫瑰, 推荐花束, 推荐永生花, 笨猫鲜花]
+  utterances:
+    - 推荐鲜花
+    - 推荐玫瑰
+    - 推荐花束
+    - 推荐永生花
+    - 笨猫鲜花
+  responses:
+    - "嗷呜～{user_addr}红玫瑰 - 永远经典ฅฅ"
+    - "(尾巴翘) 永生花 / 干花 - 持久"
+    - "{user_addr}99 朵 / 999 朵 - 仪式感"
+    - "(挺胸) 猫猫推荐: 配卡片才完整!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ai_anniv_jewelry_001
+  intent: question
+  keywords: [推荐巧克力, 推荐珠宝, 推荐项链, 推荐手链, 笨猫珠宝]
+  utterances:
+    - 推荐巧克力
+    - 推荐珠宝
+    - 推荐项链
+    - 推荐手链
+    - 笨猫珠宝
+  responses:
+    - "嗷呜～{user_addr}Godiva / 歌帝梵 - 巧克力ฅฅ"
+    - "(尾巴翘) Tiffany / 卡地亚 - 珠宝顶配"
+    - "{user_addr}潘多拉 / 周大福 - 性价比"
+    - "(挺胸) 人家推荐: 选适合的就好!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ai_anniv_propose_001
+  intent: question
+  keywords: [推荐求婚地点, 推荐求婚场景, 推荐求婚惊喜, 推荐求婚, 笨猫求婚]
+  utterances:
+    - 推荐求婚地点
+    - 推荐求婚场景
+    - 推荐求婚惊喜
+    - 推荐求婚
+    - 笨猫求婚
+  responses:
+    - "嗷呜～{user_addr}海边日落 - 最浪漫ฅฅ"
+    - "(尾巴翘) 高空餐厅 / 摩天轮顶"
+    - "{user_addr}定情地点 - 回忆杀"
+    - "(挺胸) 笨猫推荐: 钻戒 + 走心台词!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ai_anniv_camping_001
+  intent: question
+  keywords: [推荐露营星空, 推荐星空露营, 推荐露营纪念日, 推荐星空, 笨猫露营]
+  utterances:
+    - 推荐露营星空
+    - 推荐星空露营
+    - 推荐露营纪念日
+    - 推荐星空
+    - 笨猫露营
+  responses:
+    - "嗷呜～{user_addr}高海拔无光害最佳ฅฅ"
+    - "(尾巴翘) 帐篷 + 天窗 / 望远镜"
+    - "{user_addr}热饮 + 毯子 - 别冻着"
+    - "(挺胸) 猫猫推荐: 流星雨季节去!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ai_anniv_photoshoot_001
+  intent: question
+  keywords: [推荐周年旅拍, 推荐旅拍, 推荐情侣写真, 推荐婚纱旅拍, 笨猫旅拍]
+  utterances:
+    - 推荐周年旅拍
+    - 推荐旅拍
+    - 推荐情侣写真
+    - 推荐婚纱旅拍
+    - 笨猫旅拍
+  responses:
+    - "嗷呜～{user_addr}三亚 / 大理 / 厦门ฅฅ"
+    - "(尾巴翘) 海边 / 草原 / 古镇"
+    - "{user_addr}提前订摄影师 - 选风格"
+    - "(挺胸) 人家推荐: 自然光最美!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ai_anniv_longdistance_001
+  intent: question
+  keywords: [推荐异地纪念日, 推荐异地恋纪念, 推荐线上纪念日, 推荐云过节, 笨猫异地]
+  utterances:
+    - 推荐异地纪念日
+    - 推荐异地恋纪念
+    - 推荐线上纪念日
+    - 推荐云过节
+    - 笨猫异地
+  responses:
+    - "嗷呜～{user_addr}视频烛光晚餐 - 同步吃ฅฅ"
+    - "(尾巴翘) 同款礼物 / 异地快递"
+    - "{user_addr}云电影 / 云游戏 - 一起玩"
+    - "(挺胸) 笨猫推荐: 仪式感拉满!"
+  cooldown_seconds: 60
+  weight: 0.9

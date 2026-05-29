@@ -1,0 +1,206 @@
+# 生日蛋糕 / 烘焙坊 / 网红款 routes (S6 R522 NLU 节点扩充, 第五十二周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: bc_holiland_001
+  intent: question
+  keywords: [推荐生日蛋糕, 推荐好利来, 推荐半熟芝士, 推荐好利来蛋糕, 笨猫好利来]
+  utterances:
+    - 推荐生日蛋糕
+    - 推荐好利来
+    - 推荐半熟芝士
+    - 推荐好利来蛋糕
+    - 笨猫好利来
+  responses:
+    - "嗷呜～{user_addr}好利来 Holiland - 国民老牌ฅฅ"
+    - "(尾巴翘) 半熟芝士 / 爆浆系列招牌"
+    - "{user_addr}门店多 / 现做新鲜 / 颜值高"
+    - "(挺胸) 笨猫推荐: 半熟芝士不踩雷!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_ganso_001
+  intent: question
+  keywords: [推荐元祖, 推荐元祖蛋糕, 推荐鲜奶蛋糕, 推荐元祖鲜奶, 笨猫元祖]
+  utterances:
+    - 推荐元祖
+    - 推荐元祖蛋糕
+    - 推荐鲜奶蛋糕
+    - 推荐元祖鲜奶
+    - 笨猫元祖
+  responses:
+    - "嗷呜～{user_addr}元祖 Ganso - 鲜奶蛋糕祖师ฅฅ"
+    - "(尾巴翘) 雪月饼 / 鲜奶油轻盈不腻"
+    - "{user_addr}台式风 / 老人小孩都爱"
+    - "(挺胸) 笨猫推荐: 元祖鲜奶水果款!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_haagendazs_001
+  intent: question
+  keywords: [推荐哈根达斯, 推荐冰淇淋蛋糕, 推荐 Haagen-Dazs, 推荐冰淇淋, 笨猫哈根达斯]
+  utterances:
+    - 推荐哈根达斯
+    - 推荐冰淇淋蛋糕
+    - 推荐 Haagen-Dazs
+    - 推荐冰淇淋
+    - 笨猫哈根达斯
+  responses:
+    - "嗷呜～{user_addr}哈根达斯 Haagen-Dazs - 冰淇淋蛋糕王ฅฅ"
+    - "(尾巴翘) 七色花 / 心花路放经典款"
+    - "{user_addr}夏天首选 / 适合送礼有面子"
+    - "(挺胸) 笨猫推荐: 哈根达斯七色花!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_21cake_001
+  intent: question
+  keywords: [推荐 21cake, 推荐 21 客, 推荐网红蛋糕品牌, 推荐21cake, 笨猫 21cake]
+  utterances:
+    - 推荐 21cake
+    - 推荐 21 客
+    - 推荐网红蛋糕品牌
+    - 推荐21cake
+    - 笨猫 21cake
+  responses:
+    - "嗷呜～{user_addr}21cake (21 客) - 互联网网红ฅฅ"
+    - "(尾巴翘) 黑天鹅 / 栗子蛋糕 / 简约设计风"
+    - "{user_addr}冷链配送 / 高端轻奢路线"
+    - "(挺胸) 笨猫推荐: 21cake 栗子蛋糕!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_creative_001
+  intent: question
+  keywords: [推荐网红创意蛋糕, 推荐创意蛋糕, 推荐手绘蛋糕, 推荐 ins 风, 笨猫创意蛋糕]
+  utterances:
+    - 推荐网红创意蛋糕
+    - 推荐创意蛋糕
+    - 推荐手绘蛋糕
+    - 推荐 ins 风
+    - 笨猫创意蛋糕
+  responses:
+    - "嗷呜～{user_addr}手绘油画风 / ins 极简风ฅฅ"
+    - "(尾巴翘) 复古韩式 / 鲜花裸蛋糕"
+    - "{user_addr}找本地私房烘焙工作室定制"
+    - "(挺胸) 笨猫推荐: 韩式裸蛋糕颜值炸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_cartoon_001
+  intent: question
+  keywords: [推荐儿童蛋糕, 推荐卡通蛋糕, 推荐小朋友蛋糕, 推荐宝宝蛋糕, 笨猫卡通蛋糕]
+  utterances:
+    - 推荐儿童蛋糕
+    - 推荐卡通蛋糕
+    - 推荐小朋友蛋糕
+    - 推荐宝宝蛋糕
+    - 笨猫卡通蛋糕
+  responses:
+    - "嗷呜～{user_addr}小猪佩奇 / 汪汪队 / 冰雪奇缘ฅฅ"
+    - "(尾巴翘) 翻糖造型 / 数字蛋糕"
+    - "{user_addr}选低糖鲜奶款别用色素奶油"
+    - "(挺胸) 笨猫推荐: 数字蛋糕实用又好看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_healthy_001
+  intent: question
+  keywords: [推荐低糖蛋糕, 推荐健康蛋糕, 推荐无糖蛋糕, 推荐减脂蛋糕, 笨猫低糖蛋糕]
+  utterances:
+    - 推荐低糖蛋糕
+    - 推荐健康蛋糕
+    - 推荐无糖蛋糕
+    - 推荐减脂蛋糕
+    - 笨猫低糖蛋糕
+  responses:
+    - "嗷呜～{user_addr}低糖鲜奶 / 木糖醇款ฅฅ"
+    - "(尾巴翘) 全麦戚风 / 燕麦慕斯"
+    - "{user_addr}老人/孕妇/控糖人首选"
+    - "(挺胸) 笨猫推荐: 低糖鲜奶水果蛋糕!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bc_chocolate_001
+  intent: question
+  keywords: [推荐巧克力蛋糕, 推荐黑森林, 推荐熔岩巧克力, 推荐布朗尼, 笨猫巧克力蛋糕]
+  utterances:
+    - 推荐巧克力蛋糕
+    - 推荐黑森林
+    - 推荐熔岩巧克力
+    - 推荐布朗尼
+    - 笨猫巧克力蛋糕
+  responses:
+    - "嗷呜～{user_addr}黑森林 - 樱桃+巧克力经典ฅฅ"
+    - "(尾巴翘) 熔岩巧克力 / 布朗尼 / 歌剧院"
+    - "{user_addr}选 70% 黑巧不齁甜"
+    - "(挺胸) 笨猫推荐: 黑森林永远的神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_mousse_001
+  intent: question
+  keywords: [推荐慕斯蛋糕, 推荐芒果慕斯, 推荐草莓慕斯, 推荐抹茶慕斯, 笨猫慕斯蛋糕]
+  utterances:
+    - 推荐慕斯蛋糕
+    - 推荐芒果慕斯
+    - 推荐草莓慕斯
+    - 推荐抹茶慕斯
+    - 笨猫慕斯蛋糕
+  responses:
+    - "嗷呜～{user_addr}芒果 / 草莓 / 抹茶慕斯ฅฅ"
+    - "(尾巴翘) 入口即化 / 夏天救命款"
+    - "{user_addr}冷冻 4 小时口感最佳"
+    - "(挺胸) 笨猫推荐: 芒果慕斯一口爆汁!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_mille_001
+  intent: question
+  keywords: [推荐千层蛋糕, 推荐榴莲千层, 推荐 Lady M, 推荐芒果千层, 笨猫千层]
+  utterances:
+    - 推荐千层蛋糕
+    - 推荐榴莲千层
+    - 推荐 Lady M
+    - 推荐芒果千层
+    - 笨猫千层
+  responses:
+    - "嗷呜～{user_addr}Lady M - 千层界爱马仕ฅฅ"
+    - "(尾巴翘) 榴莲千层 / 芒果千层 / 抹茶千层"
+    - "{user_addr}饼皮薄+奶油轻才是真千层"
+    - "(挺胸) 笨猫推荐: 榴莲千层封神!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_gift_001
+  intent: question
+  keywords: [推荐同事生日蛋糕, 推荐老婆生日蛋糕, 推荐送人蛋糕, 推荐礼物蛋糕, 笨猫送人蛋糕]
+  utterances:
+    - 推荐同事生日蛋糕
+    - 推荐老婆生日蛋糕
+    - 推荐送人蛋糕
+    - 推荐礼物蛋糕
+    - 笨猫送人蛋糕
+  responses:
+    - "嗷呜～{user_addr}老婆: 鲜花裸蛋糕+卡片ฅฅ"
+    - "(尾巴翘) 同事: 好利来/元祖 8 寸经典款"
+    - "{user_addr}加贺卡+生日帽更有诚意"
+    - "(挺胸) 笨猫推荐: 老婆选鲜花裸蛋糕!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_diy_001
+  intent: question
+  keywords: [推荐自制蛋糕, 推荐家庭烘焙, 推荐戚风蛋糕, 推荐 DIY 蛋糕, 笨猫自制蛋糕]
+  utterances:
+    - 推荐自制蛋糕
+    - 推荐家庭烘焙
+    - 推荐戚风蛋糕
+    - 推荐 DIY 蛋糕
+    - 笨猫自制蛋糕
+  responses:
+    - "嗷呜～{user_addr}戚风 / 海绵 - 新手入门款ฅฅ"
+    - "(尾巴翘) 烤箱 + 6 寸模具就够"
+    - "{user_addr}b 站君之 / 王森教程跟着学"
+    - "(挺胸) 笨猫推荐: 戚风从 6 寸练起!"
+  cooldown_seconds: 60
+  weight: 0.8

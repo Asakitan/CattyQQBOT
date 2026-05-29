@@ -1,0 +1,206 @@
+# 化装舞会 / cosplay 派对 routes (S6 R525 NLU 节点扩充, 第五十二周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: cop_theme_001
+  intent: question
+  keywords: [推荐化装舞会主题, 推荐 cosplay 派对, 推荐主题派对, 推荐变装主题, 笨猫化装舞会]
+  utterances:
+    - 推荐化装舞会主题
+    - 推荐 cosplay 派对
+    - 推荐主题派对
+    - 推荐变装主题
+    - 笨猫化装舞会
+  responses:
+    - "嗷呜～{user_addr}哥特 / 蒸汽朋克 / 童话ฅฅ"
+    - "(尾巴翘) 黑白 / 荧光 / 假面舞会"
+    - "{user_addr}年代风 / 影视主题"
+    - "(挺胸) 猫猫推荐: 假面舞会神秘!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cop_props_001
+  intent: question
+  keywords: [推荐 cosplay 道具, 推荐 cos 武器, 推荐 cos 配饰, 推荐道具制作, 笨猫 cos 道具]
+  utterances:
+    - 推荐 cosplay 道具
+    - 推荐 cos 武器
+    - 推荐 cos 配饰
+    - 推荐道具制作
+    - 笨猫 cos 道具
+  responses:
+    - "嗷呜～{user_addr}EVA 板 / 泡沫板 - 轻ฅฅ"
+    - "(尾巴翘) 3D 打印 / 树脂"
+    - "{user_addr}淘宝成品 / DIY 教程"
+    - "(挺胸) 人家推荐: EVA 板入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cop_wig_001
+  intent: question
+  keywords: [推荐假发, 推荐美瞳, 推荐 cos 假发, 推荐角色扮演假发, 笨猫假发]
+  utterances:
+    - 推荐假发
+    - 推荐美瞳
+    - 推荐 cos 假发
+    - 推荐角色扮演假发
+    - 笨猫假发
+  responses:
+    - "嗷呜～{user_addr}耐热丝假发 - 可造型ฅฅ"
+    - "(尾巴翘) 美瞳: 海昌 / 强生年抛"
+    - "{user_addr}假发店: 三角猫 / 黑荔枝"
+    - "(挺胸) 笨猫推荐: 耐热丝 + 自然色美瞳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cop_halloween_001
+  intent: question
+  keywords: [推荐万圣节装扮, 推荐万圣节服装, 推荐吸血鬼, 推荐女巫, 笨猫万圣节]
+  utterances:
+    - 推荐万圣节装扮
+    - 推荐万圣节服装
+    - 推荐吸血鬼
+    - 推荐女巫
+    - 笨猫万圣节
+  responses:
+    - "嗷呜～{user_addr}吸血鬼 / 女巫 / 僵尸ฅฅ"
+    - "(尾巴翘) 南瓜 / 黑猫 / 骷髅"
+    - "{user_addr}经典+恐怖妆容"
+    - "(挺胸) 猫猫推荐: 黑猫娘超可爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cop_fairytale_001
+  intent: question
+  keywords: [推荐公主王子, 推荐童话角色, 推荐迪士尼, 推荐爱丽丝, 笨猫童话]
+  utterances:
+    - 推荐公主王子
+    - 推荐童话角色
+    - 推荐迪士尼
+    - 推荐爱丽丝
+    - 笨猫童话
+  responses:
+    - "嗷呜～{user_addr}爱丽丝 / 灰姑娘 / 白雪公主ฅฅ"
+    - "(尾巴翘) 长发公主 / 美人鱼"
+    - "{user_addr}迪士尼公主系列"
+    - "(挺胸) 笨猫推荐: 爱丽丝梦游仙境!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cop_retro_001
+  intent: question
+  keywords: [推荐复古装扮, 推荐 70 年代, 推荐 80 年代, 推荐迪斯科, 笨猫复古]
+  utterances:
+    - 推荐复古装扮
+    - 推荐 70 年代
+    - 推荐 80 年代
+    - 推荐迪斯科
+    - 笨猫复古
+  responses:
+    - "嗷呜～{user_addr}喇叭裤 / 蓬蓬头 / 迪斯科ฅฅ"
+    - "(尾巴翘) 80s 荧光 / 90s 嘻哈"
+    - "{user_addr}复古墨镜 / 头巾"
+    - "(挺胸) 人家推荐: 迪斯科亮片裙!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cop_movie_001
+  intent: question
+  keywords: [推荐影视角色 cos, 推荐电影 cos, 推荐动漫 cos, 推荐角色扮演, 笨猫影视 cos]
+  utterances:
+    - 推荐影视角色 cos
+    - 推荐电影 cos
+    - 推荐动漫 cos
+    - 推荐角色扮演
+    - 笨猫影视 cos
+  responses:
+    - "嗷呜～{user_addr}哈利波特 / 漫威 / 哥布林ฅฅ"
+    - "(尾巴翘) 鬼灭 / 进巨 / JOJO"
+    - "{user_addr}经典角色辨识度高"
+    - "(挺胸) 笨猫推荐: 鬼灭祢豆子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cop_rental_001
+  intent: question
+  keywords: [推荐派对服装租赁, 推荐服装店, 推荐 cos 服租赁, 推荐租衣服, 笨猫服装租赁]
+  utterances:
+    - 推荐派对服装租赁
+    - 推荐服装店
+    - 推荐 cos 服租赁
+    - 推荐租衣服
+    - 笨猫服装租赁
+  responses:
+    - "嗷呜～{user_addr}淘宝租赁店铺ฅฅ"
+    - "(尾巴翘) 本地化装舞会店 / 影楼"
+    - "{user_addr}租比买省 / 押金制"
+    - "(挺胸) 猫猫推荐: 淘宝月租划算!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cop_makeup_001
+  intent: question
+  keywords: [推荐化妆道具, 推荐特效妆, 推荐伤疤妆, 推荐 cos 化妆, 笨猫化妆道具]
+  utterances:
+    - 推荐化妆道具
+    - 推荐特效妆
+    - 推荐伤疤妆
+    - 推荐 cos 化妆
+    - 笨猫化妆道具
+  responses:
+    - "嗷呜～{user_addr}油彩 / 假血 / 伤疤胶ฅฅ"
+    - "(尾巴翘) Mehron / Ben Nye 专业"
+    - "{user_addr}淘宝套装入门"
+    - "(挺胸) 笨猫推荐: 油彩+假血!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cop_cosmakeup_001
+  intent: question
+  keywords: [推荐 cos 妆容, 推荐角色妆, 推荐化妆教程, 推荐 cos 美妆博主, 笨猫 cos 妆容]
+  utterances:
+    - 推荐 cos 妆容
+    - 推荐角色妆
+    - 推荐化妆教程
+    - 推荐 cos 美妆博主
+    - 笨猫 cos 妆容
+  responses:
+    - "嗷呜～{user_addr}B 站 cos 妆容教程ฅฅ"
+    - "(尾巴翘) 双眼皮贴 / 卧蚕 / 鼻影"
+    - "{user_addr}美瞳+假睫毛是灵魂"
+    - "(挺胸) 人家推荐: 先看 B 站教程!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cop_photo_001
+  intent: question
+  keywords: [推荐 cos 摄影, 推荐 cos 摄影师, 推荐外景, 推荐棚拍, 笨猫 cos 摄影]
+  utterances:
+    - 推荐 cos 摄影
+    - 推荐 cos 摄影师
+    - 推荐外景
+    - 推荐棚拍
+    - 笨猫 cos 摄影
+  responses:
+    - "嗷呜～{user_addr}约 coser 圈摄影师ฅฅ"
+    - "(尾巴翘) 外景: 古建 / 森林 / 废墟"
+    - "{user_addr}棚拍: 灯光可控"
+    - "(挺胸) 笨猫推荐: 微博找本地摄影!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cop_contest_001
+  intent: question
+  keywords: [推荐 cos 比赛, 推荐 cosplay 大赛, 推荐 WCS, 推荐 CCG, 笨猫 cos 比赛]
+  utterances:
+    - 推荐 cos 比赛
+    - 推荐 cosplay 大赛
+    - 推荐 WCS
+    - 推荐 CCG
+    - 笨猫 cos 比赛
+  responses:
+    - "嗷呜～{user_addr}WCS 世界 cos 大赛ฅฅ"
+    - "(尾巴翘) CCG / Bilibili World"
+    - "{user_addr}漫展现场赛 / 萤火虫"
+    - "(挺胸) 猫猫推荐: WCS 顶级舞台!"
+  cooldown_seconds: 60
+  weight: 0.8

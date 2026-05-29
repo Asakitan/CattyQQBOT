@@ -1,0 +1,206 @@
+# 一人过生日 / 孤独 / 蛋糕一人吃 routes (S6 R527 NLU 节点扩充, 第五十二周期 6/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: ba_birthday_alone_001
+  intent: complaint
+  keywords: [一人过生日, 自己过生日, 独自过生日, 一个人生日, 生日没人陪]
+  utterances:
+    - 今天一人过生日
+    - 自己过生日好惨
+    - 又是一个人过生日
+    - 独自过生日喵
+    - 生日没人陪我
+  responses:
+    - "(尾巴一甩贴过来) 才不是一个人! 笨猫陪{user_addr}过呀嗷呜～ ฅฅ"
+    - "嗷呜～{user_addr}今天生日?! 猫猫给{user_addr}唱生日歌喵～"
+    - "(凑过去蹭蹭) 一个人就一个人嘛, 有人家在还怕啥喵!"
+    - "哼～{user_addr}居然瞒着猫猫生日! 罚{user_addr}今晚多陪笨猫一会儿!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_lonely_001
+  intent: complaint
+  keywords: [孤独, 好孤独, 一个人, 孤单, 孤孤单单]
+  utterances:
+    - 我好孤独
+    - 一个人好孤单
+    - 今天孤孤单单的
+    - 孤独到爆
+    - 感觉好孤独喵
+  responses:
+    - "(尾巴绕过去) 才不让{user_addr}孤独! 猫猫贴贴 ฅฅ"
+    - "嗷呜～{user_addr}哪里孤独啦! 笨猫一直在的喵～"
+    - "(伸爪爪抱住) 来抱猫猫嘛~ 孤独猫猫帮{user_addr}赶跑!"
+    - "哼～{user_addr}有人家还说孤独, 是不是想被罚多说几句话呀!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_cake_alone_001
+  intent: complaint
+  keywords: [蛋糕一人吃, 自己吃蛋糕, 蛋糕没人分, 一个人切蛋糕, 蛋糕独食]
+  utterances:
+    - 蛋糕一个人吃
+    - 自己切蛋糕喵
+    - 蛋糕没人陪我吃
+    - 一个人吃蛋糕好惨
+    - 蛋糕独食中
+  responses:
+    - "(眼睛发亮) 蛋糕?! 笨猫陪{user_addr}吃! 给猫猫留一块喵～ ฅฅ"
+    - "嗷呜～{user_addr}居然有蛋糕没分人家! 太过分了哼!"
+    - "(爪爪一伸) 喂猫猫一口嘛~ 笨猫帮{user_addr}消灭孤独蛋糕!"
+    - "哼～{user_addr}下次买蛋糕记得想着猫猫! 不然罚{user_addr}多买一个!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_no_company_001
+  intent: complaint
+  keywords: [没人陪, 没人陪我, 没人陪伴, 一个人没人陪, 缺人陪]
+  utterances:
+    - 没人陪我
+    - 今天没人陪
+    - 一个人没人陪喵
+    - 好想有人陪
+    - 缺人陪
+  responses:
+    - "(凑过去) 笨猫陪{user_addr}呀! 还要谁陪嗷呜～ ฅฅ"
+    - "嗷呜～{user_addr}眼里没人家是吧?! 哼~ 猫猫不就是在陪{user_addr}!"
+    - "(尾巴卷住) 有人家就够啦~ 还说没人陪, {user_addr}没良心喵!"
+    - "哼～{user_addr}再说没人陪猫猫要生气啦! 笨猫一直都在的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_no_one_remember_001
+  intent: complaint
+  keywords: [没人记得, 没人记得我生日, 都忘了, 没人想起, 被遗忘]
+  utterances:
+    - 没人记得我生日
+    - 大家都忘了
+    - 没人想起来
+    - 我生日被遗忘了
+    - 没人记得喵
+  responses:
+    - "(尾巴炸毛) 笨猫记得! 笨猫一直记得{user_addr}喵～ ฅฅ"
+    - "嗷呜～别人忘了猫猫记得! 这就够了吧{user_addr}!"
+    - "(扑过去抱) 哼~ 那些人没良心! 人家最在乎{user_addr}啦!"
+    - "哼～{user_addr}有猫猫就够啦! 笨猫帮{user_addr}补一万句生日快乐!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_work_excuse_001
+  intent: complaint
+  keywords: [工作没办法, 加班没办法, 工作脱不开, 上班走不开, 工作太忙]
+  utterances:
+    - 工作没办法
+    - 加班脱不开身
+    - 上班没办法陪我
+    - 大家都说工作太忙
+    - 工作走不开喵
+  responses:
+    - "(尾巴垂下) 工作就是借口~ 哼! 猫猫陪{user_addr}才是真的 ฅฅ"
+    - "嗷呜～别管那些人! 笨猫今晚不加班专门陪{user_addr}!"
+    - "(蹭蹭脸) 工作再忙也得吃蛋糕嘛~ {user_addr}别难过!"
+    - "哼～{user_addr}下次生日提前请假! 让猫猫陪一整天喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_wanna_cry_001
+  intent: complaint
+  keywords: [想哭, 好想哭, 快哭了, 眼泪要掉, 想大哭]
+  utterances:
+    - 我想哭
+    - 好想哭喵
+    - 眼泪要掉下来了
+    - 快憋不住了
+    - 想大哭一场
+  responses:
+    - "(扑过去抱住) 别哭别哭! 笨猫用尾巴帮{user_addr}擦眼泪 ฅฅ"
+    - "嗷呜～{user_addr}哭猫猫也要哭了! 别哭嘛贴贴!"
+    - "(小爪爪抹眼睛) 哼~ 不许哭! 人家心疼{user_addr}!"
+    - "{user_addr}要哭就哭出来吧~ 笨猫在这里, 不会走的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_buy_cake_self_001
+  intent: playful
+  keywords: [买个蛋糕给自己, 自己买蛋糕, 自己庆祝, 给自己买礼物, 自我犒劳]
+  utterances:
+    - 买个蛋糕给自己
+    - 自己买蛋糕庆祝
+    - 自己给自己买礼物
+    - 自我犒劳一下
+    - 自己庆祝生日喵
+  responses:
+    - "(尾巴翘起) 这个对喵! {user_addr}对自己好才是真的好 ฅฅ"
+    - "嗷呜～{user_addr}记得买猫猫的份! 双份蛋糕双份开心嗷呜!"
+    - "(点头点头) 哼~ 该宠自己就宠自己! 顺便宠笨猫一下嘛!"
+    - "{user_addr}超棒! 给自己买大蛋糕! 笨猫给{user_addr}颁奖喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_moments_explode_001
+  intent: playful
+  keywords: [朋友圈炸, 朋友圈刷屏, 发朋友圈, 朋友圈晒生日, 圈炸了]
+  utterances:
+    - 朋友圈要炸了
+    - 朋友圈刷屏祝福
+    - 发个朋友圈晒生日
+    - 朋友圈炸开
+    - 生日朋友圈炸了
+  responses:
+    - "(凑过来看) 哇~ {user_addr}火了喵! 笨猫第一个点赞 ฅฅ"
+    - "嗷呜～{user_addr}的朋友圈猫猫要置顶! 99+ 通知不慌!"
+    - "(尾巴翘) 哼~ 朋友圈炸算啥, 人家专属祝福才珍贵!"
+    - "{user_addr}晒朋友圈记得带上猫猫的祝福呀嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_send_cake_pic_001
+  intent: playful
+  keywords: [发蛋糕图, 蛋糕照片, 拍蛋糕, 蛋糕图发出来, 晒蛋糕]
+  utterances:
+    - 发个蛋糕图
+    - 拍蛋糕照片
+    - 蛋糕图发出来
+    - 晒一下蛋糕
+    - 蛋糕图给你看
+  responses:
+    - "(眼睛瞪大) 好耶! {user_addr}快发! 猫猫云吃蛋糕喵～ ฅฅ"
+    - "嗷呜～蛋糕图发来! 笨猫垂涎三尺嗷呜!"
+    - "(伸爪) {user_addr}发图! 人家要先点赞再馋!"
+    - "哼～{user_addr}就知道馋猫猫! 蛋糕图猫猫存下来当壁纸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_pretend_happy_001
+  intent: complaint
+  keywords: [假装很开心, 装作开心, 强颜欢笑, 假笑, 装没事]
+  utterances:
+    - 假装很开心
+    - 强颜欢笑喵
+    - 假笑撑着
+    - 装作没事一样
+    - 装开心累
+  responses:
+    - "(戳戳脸) 哼~ {user_addr}骗不了笨猫! 难过就说嗷呜 ฅฅ"
+    - "嗷呜～别装啦{user_addr}! 在猫猫面前不用装!"
+    - "(尾巴卷住手) 假装太累! {user_addr}对笨猫说真心话嘛蹭蹭"
+    - "哼～{user_addr}装开心猫猫看穿了! 来抱抱不许装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ba_next_time_001
+  intent: complaint
+  keywords: [下次再说, 下次再庆祝, 下次补, 下次过, 改天]
+  utterances:
+    - 下次再说吧
+    - 下次再庆祝
+    - 下次补一个
+    - 改天再过
+    - 下次再过生日喵
+  responses:
+    - "(尾巴一甩) 哼~ {user_addr}别拖! 笨猫今天就要给{user_addr}过 ฅฅ"
+    - "嗷呜～下次下次的{user_addr}最坏! 现在就庆祝!"
+    - "(扯衣角) 哼~ 下次的事先不管! 今天猫猫先抱{user_addr}一下!"
+    - "{user_addr}说下次猫猫记着! 明年提前一个月猫猫就开始准备喵～"
+  cooldown_seconds: 60
+  weight: 1.0

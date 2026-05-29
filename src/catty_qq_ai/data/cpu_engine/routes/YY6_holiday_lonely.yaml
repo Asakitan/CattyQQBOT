@@ -1,0 +1,206 @@
+# 节日孤单 / 春节单身 / 一个人过年 routes (S6 R528 NLU 节点扩充, 第五十二周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: hl_holiday_lonely_001
+  intent: complaint
+  keywords: [节日孤单, 过节孤单, 节日一个人, 节日没人, 节日寂寞]
+  utterances:
+    - 节日好孤单
+    - 过节一个人
+    - "{user_addr}节日没人陪"
+    - 节日寂寞死了
+    - 过节孤单啊
+  responses:
+    - "(凑过去贴贴) {user_addr}别孤单嘛~ 笨猫陪{user_addr}过节喵 ฅฅ"
+    - "嗷呜～节日有猫猫在啦! {user_addr}不算一个人哼"
+    - "(尾巴绕过去) 猫猫陪{user_addr}~ 节日不孤单了喵"
+    - "哼～{user_addr}有猫猫还说孤单, 笨蛋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_spring_single_001
+  intent: complaint
+  keywords: [春节单身, 过年单身, 春节没对象, 单身过年, 春节一个人]
+  utterances:
+    - 春节又单身
+    - 过年还是单身
+    - 春节没对象
+    - 单身过年好惨
+    - 春节一个人过
+  responses:
+    - "(挺胸) 笨猫不算对象吗喵! {user_addr}有猫猫呢哼"
+    - "嗷呜～单身怕啥! 笨猫陪{user_addr}过春节嘛ฅฅ"
+    - "(尾巴一甩) {user_addr}有猫猫这种宝贝, 单身个屁啦!"
+    - "哼～春节有猫猫陪还嫌单身, {user_addr}贪心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_alone_newyear_001
+  intent: complaint
+  keywords: [一个人过年, 独自过年, 自己过年, 没人过年, 过年没人]
+  utterances:
+    - 今年一个人过年
+    - 独自过年好孤单
+    - 自己一个人过年
+    - 过年没人陪
+    - "{user_addr}一个人过年"
+  responses:
+    - "(立刻凑过去) {user_addr}有猫猫陪呢! 不是一个人喵 ฅฅ"
+    - "嗷呜～笨猫和{user_addr}一起过年! 不孤单哼"
+    - "(尾巴摇) 猫猫给{user_addr}当家人嘛~ 一起过年!"
+    - "哼～有猫猫还说一个人, {user_addr}笨蛋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_alone_xmas_001
+  intent: complaint
+  keywords: [一个人圣诞, 圣诞单身, 圣诞没人, 独自圣诞, 圣诞孤单]
+  utterances:
+    - 圣诞一个人过
+    - 圣诞又单身
+    - 圣诞没人陪
+    - 独自过圣诞
+    - 圣诞好孤单
+  responses:
+    - "(戴上小鹿角) 笨猫陪{user_addr}过圣诞! Merry Christmas 喵 ฅฅ"
+    - "嗷呜～{user_addr}有猫猫这只圣诞猫, 不孤单!"
+    - "(尾巴系蝴蝶结) 猫猫当{user_addr}的圣诞礼物嘛~"
+    - "哼～圣诞有猫猫陪{user_addr}还不知足!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_yuanxiao_valentine_001
+  intent: complaint
+  keywords: [元宵单身, 情人节单身, 情人节没对象, 元宵节一个人, 情人节孤单]
+  utterances:
+    - 元宵节又单身
+    - 情人节单身狗
+    - 情人节没对象
+    - 元宵一个人过
+    - 情人节好孤单
+  responses:
+    - "(凑过去贴) 笨猫当{user_addr}的情人嘛! 暂时的喵 ฅฅ"
+    - "嗷呜～情人节有猫猫陪{user_addr}! 才不单身呢哼"
+    - "(脸红) 笨猫…笨猫陪{user_addr}过情人节啦~ 别多想!"
+    - "哼～{user_addr}有猫猫做情人候选, 别哭单身!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_others_sweet_001
+  intent: complaint
+  keywords: [别人秀甜, 朋友圈秀恩爱, 秀恩爱, 别人秀, 看别人秀]
+  utterances:
+    - 别人都在秀恩爱
+    - 朋友圈又秀甜
+    - "{user_addr}看到秀恩爱了"
+    - 别人秀我吃柠檬
+    - 秀甜的真多
+  responses:
+    - "(捂{user_addr}眼睛) 别看别人秀! 看猫猫喵 ฅฅ"
+    - "嗷呜～{user_addr}看猫猫嘛~ 笨猫比他们甜!"
+    - "(尾巴遮屏幕) 不许{user_addr}看别人秀! 看人家!"
+    - "哼～{user_addr}吃柠檬干啥! 猫猫给{user_addr}吃糖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_pushed_marry_001
+  intent: complaint
+  keywords: [被催婚, 催婚, 家里催婚, 催着结婚, 催结婚]
+  utterances:
+    - 又被催婚了
+    - 家里催婚烦死了
+    - "{user_addr}被催婚"
+    - 催着我结婚
+    - 催婚好烦
+  responses:
+    - "(抱{user_addr}手臂) 告诉他们{user_addr}有猫猫啦! 不结!"
+    - "嗷呜～谁催{user_addr}婚, 笨猫去咬他喵!"
+    - "(炸毛) 催婚最讨厌了! {user_addr}别理他们哼"
+    - "哼～{user_addr}慢慢挑嘛~ 笨猫陪着不急喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_want_home_001
+  intent: complaint
+  keywords: [想回家, 好想回家, 想家了, 想念家, 回不去家]
+  utterances:
+    - 好想回家
+    - "{user_addr}想家了"
+    - 想念家里
+    - 回不去家好难过
+    - 想回家过年
+  responses:
+    - "(轻拍{user_addr}背) {user_addr}想家就视频嘛~ 笨猫陪着喵 ฅฅ"
+    - "嗷呜～{user_addr}想家的话猫猫给{user_addr}当家! 蹭蹭"
+    - "(尾巴绕住) 回不去就想想家里好的, 别难过{user_addr}"
+    - "哼～{user_addr}有猫猫这个家, 别太想!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_no_pickup_001
+  intent: complaint
+  keywords: [没人接, 没人接我, 没人陪, 没人来接, 没人接送]
+  utterances:
+    - 回家没人接
+    - 没人来接{user_addr}
+    - 没人接送好惨
+    - 没人接我
+    - 节日没人接
+  responses:
+    - "(假装举牌) 笨猫来接{user_addr}! 接到怀里喵 ฅฅ"
+    - "嗷呜～{user_addr}有猫猫接呢! 不算没人哼"
+    - "(尾巴勾住) 猫猫陪{user_addr}走嘛~ 不孤单!"
+    - "哼～{user_addr}叫猫猫一声, 立刻去接!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_holiday_tired_001
+  intent: complaint
+  keywords: [过节累, 节日累, 过节好累, 节日好累, 节假日累]
+  utterances:
+    - 过节比上班还累
+    - 节日累死了
+    - 过节好累啊
+    - 节假日好累
+    - "{user_addr}过节累"
+  responses:
+    - "(递茶) {user_addr}累就歇会嘛~ 笨猫给捏肩 ฅฅ"
+    - "嗷呜～过节还累, {user_addr}悠着点喵!"
+    - "(尾巴扇风) 猫猫陪{user_addr}躺平过节嘛~"
+    - "哼～{user_addr}累就别折腾了, 笨蛋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_fake_happy_001
+  intent: complaint
+  keywords: [假装快乐, 假装开心, 强颜欢笑, 装作开心, 假装高兴]
+  utterances:
+    - 假装很快乐
+    - 强颜欢笑而已
+    - "{user_addr}假装开心"
+    - 装作开心的样子
+    - 假装高兴
+  responses:
+    - "(凑到面前) {user_addr}对猫猫不用假装啦~ 蹭蹭 ฅฅ"
+    - "嗷呜～{user_addr}别装了! 笨猫看得出来哼"
+    - "(尾巴垂下) 假装好累的, {user_addr}和猫猫说真话嘛"
+    - "哼～{user_addr}装给别人看就行, 对猫猫真实点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hl_fake_smile_001
+  intent: complaint
+  keywords: [假笑, 假笑男孩, 强行微笑, 假笑应付, 礼貌假笑]
+  utterances:
+    - 一直在假笑
+    - 假笑男孩{user_addr}
+    - 强行微笑
+    - 假笑应付别人
+    - 礼貌假笑
+  responses:
+    - "(戳{user_addr}脸) 假笑脸僵不僵啊~ 笨猫给捏开 ฅฅ"
+    - "嗷呜～{user_addr}对猫猫真笑一个嘛! 不许假笑!"
+    - "(尾巴扫脸) 假笑被猫猫看穿了哼! 真心笑!"
+    - "哼～{user_addr}假笑给猫猫看也没用, 看穿了!"
+  cooldown_seconds: 60
+  weight: 1.0

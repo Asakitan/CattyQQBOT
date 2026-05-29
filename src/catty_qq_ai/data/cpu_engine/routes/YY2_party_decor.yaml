@@ -1,0 +1,206 @@
+# 派对装饰 / 气球 / 彩带 routes (S6 R524 NLU 节点扩充, 第五十二周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: pd_balloon_001
+  intent: question
+  keywords: [推荐派对装饰, 推荐气球, 推荐铝膜气球, 推荐乳胶气球, 笨猫气球]
+  utterances:
+    - 推荐派对装饰
+    - 推荐气球
+    - 推荐铝膜气球
+    - 推荐乳胶气球
+    - 笨猫气球
+  responses:
+    - "嗷呜～{user_addr}乳胶气球 - 便宜大碗ฅฅ"
+    - "(尾巴翘) 铝膜数字 / 字母气球 - 仪式感"
+    - "{user_addr}马卡龙色 / 金属色 / 透明波波球"
+    - "(挺胸) 猫猫推荐: 波波球+乳胶气球串!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_ribbon_001
+  intent: question
+  keywords: [推荐拉花, 推荐彩带, 推荐流苏帘, 推荐纸扇花, 笨猫拉花]
+  utterances:
+    - 推荐拉花
+    - 推荐彩带
+    - 推荐流苏帘
+    - 推荐纸扇花
+    - 笨猫拉花
+  responses:
+    - "嗷呜～{user_addr}流苏雨丝帘 - 拍照神器ฅฅ"
+    - "(尾巴翘) 纸扇花 / 蜂窝球 / 三角旗"
+    - "{user_addr}金属彩带 / 雪梨纸拉花"
+    - "(挺胸) 笨猫推荐: 流苏帘背景超出片!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_theme_001
+  intent: question
+  keywords: [推荐主题派对装饰, 推荐生日主题, 推荐婚礼主题, 推荐圣诞主题, 笨猫主题派对]
+  utterances:
+    - 推荐主题派对装饰
+    - 推荐生日主题
+    - 推荐婚礼主题
+    - 推荐圣诞主题
+    - 笨猫主题派对
+  responses:
+    - "嗷呜～{user_addr}迪士尼 / 漫威 / 哈利波特ฅฅ"
+    - "(尾巴翘) 公主风 / 恐龙 / 太空 / 海洋"
+    - "{user_addr}莫兰迪色 / ins 风 / 复古风"
+    - "(挺胸) 人家推荐: 先定主题色再买装饰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_venue_001
+  intent: question
+  keywords: [推荐派对场地, 推荐网红场地, 推荐生日趴场地, 推荐包场, 笨猫派对场地]
+  utterances:
+    - 推荐派对场地
+    - 推荐网红场地
+    - 推荐生日趴场地
+    - 推荐包场
+    - 笨猫派对场地
+  responses:
+    - "嗷呜～{user_addr}派对馆 / 私人影院ฅฅ"
+    - "(尾巴翘) 民宿包场 / 露台 / 屋顶花园"
+    - "{user_addr}KTV 包房 / 餐厅包间 / Loft"
+    - "(挺胸) 笨猫推荐: 派对馆装饰齐全!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_candle_001
+  intent: question
+  keywords: [推荐蜡烛, 推荐 LED 灯串, 推荐装饰灯, 推荐氛围灯, 笨猫派对灯]
+  utterances:
+    - 推荐蜡烛
+    - 推荐 LED 灯串
+    - 推荐装饰灯
+    - 推荐氛围灯
+    - 笨猫派对灯
+  responses:
+    - "嗷呜～{user_addr}LED 灯串 - 暖白色超温馨ฅฅ"
+    - "(尾巴翘) 电子蜡烛 / 香薰蜡烛 / 浮水蜡烛"
+    - "{user_addr}星星灯 / 萤火虫灯 / 月球灯"
+    - "(挺胸) 猫猫推荐: 灯串绕一圈氛围拉满!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_table_001
+  intent: question
+  keywords: [推荐餐桌布置, 推荐桌布, 推荐餐巾, 推荐餐具搭配, 笨猫餐桌]
+  utterances:
+    - 推荐餐桌布置
+    - 推荐桌布
+    - 推荐餐巾
+    - 推荐餐具搭配
+    - 笨猫餐桌
+  responses:
+    - "嗷呜～{user_addr}亚麻桌布 - 高级感ฅฅ"
+    - "(尾巴翘) 餐巾环 / 桌花 / 烛台"
+    - "{user_addr}金边餐盘 / 香槟杯 / 刀叉"
+    - "(挺胸) 笨猫推荐: 桌旗+桌花点睛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_photo_001
+  intent: question
+  keywords: [推荐拍照背景墙, 推荐 KT 板, 推荐气球墙, 推荐鲜花墙, 笨猫背景墙]
+  utterances:
+    - 推荐拍照背景墙
+    - 推荐 KT 板
+    - 推荐气球墙
+    - 推荐鲜花墙
+    - 笨猫背景墙
+  responses:
+    - "嗷呜～{user_addr}气球拱门 - 朋友圈封面ฅฅ"
+    - "(尾巴翘) KT 板定制 / 鲜花墙 / 绢花墙"
+    - "{user_addr}流苏帘背景 / 灯串墙 / 雪梨纸花"
+    - "(挺胸) 人家推荐: 气球拱门+定制 KT 板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_tableware_001
+  intent: question
+  keywords: [推荐一次性餐具, 推荐纸盘, 推荐纸杯, 推荐刀叉勺, 笨猫一次性餐具]
+  utterances:
+    - 推荐一次性餐具
+    - 推荐纸盘
+    - 推荐纸杯
+    - 推荐刀叉勺
+    - 笨猫一次性餐具
+  responses:
+    - "嗷呜～{user_addr}加厚纸盘 - 不漏汤ฅฅ"
+    - "(尾巴翘) 透明塑料杯 / 香槟杯 / 纸杯"
+    - "{user_addr}竹木刀叉 / 金色塑料餐具"
+    - "(挺胸) 笨猫推荐: 主题图案纸盘超可爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_game_001
+  intent: question
+  keywords: [推荐派对游戏, 推荐桌游, 推荐你画我猜, 推荐狼人杀, 笨猫派对游戏]
+  utterances:
+    - 推荐派对游戏
+    - 推荐桌游
+    - 推荐你画我猜
+    - 推荐狼人杀
+    - 笨猫派对游戏
+  responses:
+    - "嗷呜～{user_addr}狼人杀 / 谁是卧底ฅฅ"
+    - "(尾巴翘) 你画我猜 / 真心话大冒险"
+    - "{user_addr}UNO / 阿瓦隆 / 三国杀"
+    - "(挺胸) 猫猫推荐: 谁是卧底门槛最低!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_dresscode_001
+  intent: question
+  keywords: [推荐派对穿搭, 推荐 dresscode, 推荐主题穿搭, 推荐派对礼服, 笨猫派对穿搭]
+  utterances:
+    - 推荐派对穿搭
+    - 推荐 dresscode
+    - 推荐主题穿搭
+    - 推荐派对礼服
+    - 笨猫派对穿搭
+  responses:
+    - "嗷呜～{user_addr}小黑裙 - 万能百搭ฅฅ"
+    - "(尾巴翘) 主题 cosplay / 复古风 / Y2K"
+    - "{user_addr}亮片裙 / 西装 / 渔夫帽派对"
+    - "(挺胸) 笨猫推荐: 定一个 dresscode 仪式感!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_music_001
+  intent: question
+  keywords: [推荐派对音乐, 推荐 DJ, 推荐歌单, 推荐 BGM, 笨猫派对音乐]
+  utterances:
+    - 推荐派对音乐
+    - 推荐 DJ
+    - 推荐歌单
+    - 推荐 BGM
+    - 笨猫派对音乐
+  responses:
+    - "嗷呜～{user_addr}电子舞曲 / House / EDMฅฅ"
+    - "(尾巴翘) K-pop / 欧美流行 / Disco"
+    - "{user_addr}Spotify Party 歌单 / 网易云派对"
+    - "(挺胸) 人家推荐: 蓝牙音箱+歌单提前准备!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pd_planner_001
+  intent: question
+  keywords: [推荐派对策划, 推荐策划公司, 推荐婚庆公司, 推荐生日策划, 笨猫派对策划]
+  utterances:
+    - 推荐派对策划
+    - 推荐策划公司
+    - 推荐婚庆公司
+    - 推荐生日策划
+    - 笨猫派对策划
+  responses:
+    - "嗷呜～{user_addr}本地婚庆 / 派对策划工作室ฅฅ"
+    - "(尾巴翘) 大众点评搜 / 小红书种草"
+    - "{user_addr}一站式: 场地+装饰+主持+摄影"
+    - "(挺胸) 笨猫推荐: 看作品集+砍价!"
+  cooldown_seconds: 60
+  weight: 1.0

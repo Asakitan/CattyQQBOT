@@ -1,0 +1,206 @@
+# 暖房 party / 入住 / 邀请朋友 routes (S6 R526 NLU 节点扩充, 第五十二周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: oh_party_flow_001
+  intent: question
+  keywords: [推荐暖房party流程, 推荐暖房流程, 推荐入伙流程, 推荐 housewarming, 笨猫暖房流程]
+  utterances:
+    - 推荐暖房party流程
+    - 推荐暖房流程
+    - 推荐入伙流程
+    - 推荐 housewarming
+    - 笨猫暖房流程
+  responses:
+    - "嗷呜～{user_addr}迎客→参观新家→自助餐ฅฅ"
+    - "(尾巴翘) 开场敬酒 / 合影 / 抽奖小游戏"
+    - "{user_addr}晚上甜品+茶话会收尾"
+    - "(挺胸) 笨猫推荐: 3-4 小时刚好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_gift_plant_001
+  intent: question
+  keywords: [推荐暖房礼物, 推荐暖房鲜花, 推荐暖房植物, 推荐绿植, 笨猫暖房礼物]
+  utterances:
+    - 推荐暖房礼物
+    - 推荐暖房鲜花
+    - 推荐暖房植物
+    - 推荐绿植
+    - 笨猫暖房礼物
+  responses:
+    - "嗷呜～{user_addr}发财树 / 绿萝 / 龟背竹ฅฅ"
+    - "(尾巴翘) 香薰蜡烛 / 精油扩香"
+    - "{user_addr}手冲咖啡套装 / 红酒"
+    - "(挺胸) 笨猫推荐: 发财树最讨喜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_food_buffet_001
+  intent: question
+  keywords: [推荐暖房食物, 推荐暖房自助餐, 推荐 party 菜单, 推荐冷餐, 笨猫暖房食物]
+  utterances:
+    - 推荐暖房食物
+    - 推荐暖房自助餐
+    - 推荐 party 菜单
+    - 推荐冷餐
+    - 笨猫暖房食物
+  responses:
+    - "嗷呜～{user_addr}冷盘 / 三明治 / 沙拉ฅฅ"
+    - "(尾巴翘) 烤鸡 / 披萨 / 寿司拼盘"
+    - "{user_addr}水果塔 / 蛋糕 / 气泡水"
+    - "(挺胸) 笨猫推荐: 一半外卖一半自做!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_invitation_001
+  intent: question
+  keywords: [推荐暖房邀请函, 推荐邀请文案, 推荐邀请方式, 推荐电子请柬, 笨猫暖房邀请]
+  utterances:
+    - 推荐暖房邀请函
+    - 推荐邀请文案
+    - 推荐邀请方式
+    - 推荐电子请柬
+    - 笨猫暖房邀请
+  responses:
+    - "嗷呜～{user_addr}微信电子请柬最方便ฅฅ"
+    - "(尾巴翘) 文案: 新家落成 / 望莅临"
+    - "{user_addr}附地址 / 时间 / 着装提示"
+    - "(挺胸) 笨猫推荐: 提前 1 周发!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_guest_gift_001
+  intent: question
+  keywords: [推荐朋友带什么礼物, 推荐做客送礼, 推荐暖房伴手礼, 推荐祝贺礼品, 笨猫朋友礼物]
+  utterances:
+    - 推荐朋友带什么礼物
+    - 推荐做客送礼
+    - 推荐暖房伴手礼
+    - 推荐祝贺礼品
+    - 笨猫朋友礼物
+  responses:
+    - "嗷呜～{user_addr}红酒 / 香槟最得体ฅฅ"
+    - "(尾巴翘) 香薰 / 厨房好物 / 小家电"
+    - "{user_addr}避免大件家具 (主人已选好)"
+    - "(挺胸) 笨猫推荐: 实用+有心意!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_move_in_ceremony_001
+  intent: question
+  keywords: [推荐入住仪式, 推荐入伙仪式, 推荐进宅仪式, 推荐新家仪式, 笨猫入住仪式]
+  utterances:
+    - 推荐入住仪式
+    - 推荐入伙仪式
+    - 推荐进宅仪式
+    - 推荐新家仪式
+    - 笨猫入住仪式
+  responses:
+    - "嗷呜～{user_addr}择吉日 / 长辈先进门ฅฅ"
+    - "(尾巴翘) 带米 / 带水 / 带火种"
+    - "{user_addr}开灯通宵 / 放鞭炮 (允许时)"
+    - "(挺胸) 笨猫推荐: 简化版也很有仪式感!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_chinese_fire_001
+  intent: question
+  keywords: [推荐中式开火, 推荐开火仪式, 推荐第一顿饭, 推荐开灶, 笨猫开火]
+  utterances:
+    - 推荐中式开火
+    - 推荐开火仪式
+    - 推荐第一顿饭
+    - 推荐开灶
+    - 笨猫开火
+  responses:
+    - "嗷呜～{user_addr}第一顿煮汤圆 / 长寿面ฅฅ"
+    - "(尾巴翘) 烧水煮饭 / 寓意红火"
+    - "{user_addr}全家一起吃象征团圆"
+    - "(挺胸) 笨猫推荐: 红枣银耳汤甜蜜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_neighbor_001
+  intent: question
+  keywords: [推荐拜邻居, 推荐拜访邻居, 推荐认识邻居, 推荐邻居礼仪, 笨猫拜邻居]
+  utterances:
+    - 推荐拜邻居
+    - 推荐拜访邻居
+    - 推荐认识邻居
+    - 推荐邻居礼仪
+    - 笨猫拜邻居
+  responses:
+    - "嗷呜～{user_addr}送小点心 / 自制饼干ฅฅ"
+    - "(尾巴翘) 自我介绍 + 留联系方式"
+    - "{user_addr}告知装修期可能噪音致歉"
+    - "(挺胸) 笨猫推荐: 远亲不如近邻!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_property_001
+  intent: question
+  keywords: [推荐物业沟通, 推荐物业入住, 推荐办理入住, 推荐物业手续, 笨猫物业]
+  utterances:
+    - 推荐物业沟通
+    - 推荐物业入住
+    - 推荐办理入住
+    - 推荐物业手续
+    - 笨猫物业
+  responses:
+    - "嗷呜～{user_addr}办门禁卡 / 停车位ฅฅ"
+    - "(尾巴翘) 装修押金 / 垃圾清运费"
+    - "{user_addr}加物业群 / 报修电话存好"
+    - "(挺胸) 笨猫推荐: 一次性问清省心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_decor_photo_001
+  intent: question
+  keywords: [推荐装修拍照, 推荐新家拍照, 推荐入住纪念, 推荐家居摄影, 笨猫拍照]
+  utterances:
+    - 推荐装修拍照
+    - 推荐新家拍照
+    - 推荐入住纪念
+    - 推荐家居摄影
+    - 笨猫拍照
+  responses:
+    - "嗷呜～{user_addr}空房 vs 入住对比照ฅฅ"
+    - "(尾巴翘) 每个房间广角+细节"
+    - "{user_addr}自然光下午 3-4 点最美"
+    - "(挺胸) 笨猫推荐: 拍完打印成相册!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_video_001
+  intent: question
+  keywords: [推荐暖房视频, 推荐新家 vlog, 推荐入住记录, 推荐 walkthrough, 笨猫暖房视频]
+  utterances:
+    - 推荐暖房视频
+    - 推荐新家 vlog
+    - 推荐入住记录
+    - 推荐 walkthrough
+    - 笨猫暖房视频
+  responses:
+    - "嗷呜～{user_addr}入门到每个房间一镜到底ฅฅ"
+    - "(尾巴翘) 配 BGM / 加字幕讲解"
+    - "{user_addr}小红书 / B站 / 抖音都好发"
+    - "(挺胸) 笨猫推荐: 横屏+竖屏各拍一次!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: oh_party_game_001
+  intent: question
+  keywords: [推荐暖房游戏, 推荐 party 游戏, 推荐暖房活动, 推荐互动游戏, 笨猫暖房游戏]
+  utterances:
+    - 推荐暖房游戏
+    - 推荐 party 游戏
+    - 推荐暖房活动
+    - 推荐互动游戏
+    - 笨猫暖房游戏
+  responses:
+    - "嗷呜～{user_addr}你画我猜 / 谁是卧底ฅฅ"
+    - "(尾巴翘) 桌游 (狼人杀 / UNO)"
+    - "{user_addr}抽奖 / 寻宝找彩蛋"
+    - "(挺胸) 笨猫推荐: 留一小时自由社交!"
+  cooldown_seconds: 60
+  weight: 1.0
