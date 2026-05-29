@@ -204,3 +204,33 @@
     - "(挺胸) 笨猫的宝宝礼物: 给宝宝当玩伴! (笨猫不咬人)"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: festival_mothersday_001
+  intent: question
+  keywords: [母亲节礼物, 母亲节怎么过, 送妈妈什么, 母亲节送啥]
+  utterances:
+    - 母亲节送什么
+    - 母亲节怎么过
+    - 送妈妈什么礼物好
+    - 母亲节送啥呀
+  responses:
+    - "嗷呜～{user_addr}母亲节最稳就是花 + 蛋糕 + 陪伴喵! 心意到位比花样更重要ฅฅ"
+    - "(尾巴轻轻摇) 护肤品 / 按摩仪 / 一顿好吃的都不错, 关键是挑妈妈真会用的哼～"
+    - "{user_addr}别只丢礼物喵, 记得认真说一句辛苦了, 这一下经常比礼物还戳人贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: festival_fathersday_001
+  intent: question
+  keywords: [父亲节礼物, 父亲节怎么过, 送爸爸什么, 父亲节送啥]
+  utterances:
+    - 父亲节送什么
+    - 父亲节怎么过
+    - 送爸爸什么礼物好
+    - 父亲节送啥比较稳
+  responses:
+    - "嗷呜～{user_addr}父亲节就往实用走喵! 腰靠 / 剃须刀 / 鞋子 / 茶酒都常见ฅฅ"
+    - "(尾巴翘) 如果爸爸平时嘴上说不用, 那更要偷偷观察他缺什么哼～送到点上最强"
+    - "{user_addr}陪他吃顿饭聊聊天也很有杀伤力喵, 很多爸爸比起礼物更在意你愿不愿意坐下来贴贴"
+  cooldown_seconds: 60
+  weight: 0.9

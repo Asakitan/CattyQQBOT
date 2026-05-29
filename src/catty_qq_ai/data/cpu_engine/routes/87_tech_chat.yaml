@@ -194,3 +194,35 @@
     - "{user_addr}做一题就总结一种套路, 双指针 / 二分 / DFS / DP 这样攒起来最稳喵"
   cooldown_seconds: 90
   weight: 0.9
+
+- name: tech_typescript_001
+  intent: info_request
+  keywords: [typescript 怎么学, ts 入门, 怎么学 ts, ts 类型报错, ts 怎么用]
+  utterances:
+    - typescript 怎么学
+    - ts 入门咋整
+    - ts 类型报错看不懂
+    - typescript 怎么用
+    - 怎么学 ts
+  responses:
+    - "嗷呜～TS 就是给 JS 套上类型护甲喵! {user_addr}先学 type / interface / 泛型三件套ฅฅ"
+    - "(尾巴翘) 新手别被报错吓跑啦, 先把基础类型和对象声明写顺手, 后面会越写越香"
+    - "{user_addr}边写小项目边补 TS 最稳喵～React / Node 各做一个, 类型感马上就起来了"
+  cooldown_seconds: 90
+  weight: 0.9
+
+- name: tech_testing_001
+  intent: info_request
+  keywords: [单元测试怎么写, test 怎么写, 测试怎么写, pytest 怎么用, unittest 怎么写]
+  utterances:
+    - 单元测试怎么写
+    - test 怎么写啊
+    - pytest 怎么用
+    - unittest 怎么写
+    - 测试怎么写比较好
+  responses:
+    - "嗷呜～测试先盯一个小函数下手喵! 输入啥 / 期望啥 / 边界咋样, 三件事想清楚就能写ฅฅ"
+    - "(歪头) Python 党先用 pytest 很舒服, 断言直接写, 失败信息也清楚哼～"
+    - "{user_addr}别一上来就想把全项目测满啦, 先把最容易炸的核心逻辑守住最划算喵"
+  cooldown_seconds: 90
+  weight: 0.9

@@ -205,3 +205,35 @@
     - "(尾巴翘) 笨猫的提醒: 大片选 IMAX 厅~ 小片普通厅就够"
   cooldown_seconds: 60
   weight: 0.9
+
+- name: movie_mystery_001
+  intent: question
+  keywords: [推理电影, 悬疑片推荐, 看悬疑片, 推荐破案片, 悬疑电影]
+  utterances:
+    - 推荐推理电影
+    - 悬疑片推荐
+    - 想看破案片
+    - 看悬疑电影吧
+    - 有什么推理片
+  responses:
+    - "嗷呜～{user_addr}悬疑党先冲《看不见的客人》/《利刃出鞘》/《调音师》ฅฅ"
+    - "(尾巴翘) 想要层层反转的话, 《消失的爱人》/《致命 ID》也很顶喵～"
+    - "{user_addr}看推理片记得别先搜解析哼! 自己猜到最后一刻才最香贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: movie_healing_001
+  intent: question
+  keywords: [催泪电影, 治愈电影, 温暖电影, 适合哭的电影, 温柔的电影]
+  utterances:
+    - 推荐治愈电影
+    - 想看催泪片
+    - 温暖一点的电影
+    - 适合哭一场的电影
+    - 有没有温柔的电影
+  responses:
+    - "嗷呜～{user_addr}想被温柔抱一下的话, 去看《小森林》/《海街日记》/《触不可及》ฅฅ"
+    - "(尾巴轻轻晃) 想哭一哭就试试《忠犬八公》或《寻梦环游记》, 眼泪很难守住哼～"
+    - "{user_addr}治愈片最适合窝着慢慢看喵, 看完记得回来跟猫猫讲哪一幕戳到你贴贴"
+  cooldown_seconds: 60
+  weight: 0.9

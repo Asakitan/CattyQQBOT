@@ -205,3 +205,35 @@
     - "(挺胸) 笨猫的棒球评价: 节奏慢但战术深 适合周末看"
   cooldown_seconds: 60
   weight: 0.8
+
+- name: sports_boxing_001
+  intent: question
+  keywords: [拳击比赛, 看拳击, 拳王比赛, 推荐拳击, 职业拳击]
+  utterances:
+    - 推荐看拳击
+    - 拳击比赛有哪些
+    - 想看拳王比赛
+    - 职业拳击好看吗
+    - 看拳击从哪开始
+  responses:
+    - "嗷呜～{user_addr}拳击先看重量级喵! 力量感和压迫感最直接ฅฅ"
+    - "(尾巴翘) 经典名字记一下: 阿里 / 泰森 / 帕奎奥 / 乌西克, 够你补很久哼～"
+    - "{user_addr}看拳击最爽的就是节奏拉扯和一拳定胜负喵, 但别学人家乱挥拳贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sports_mma_001
+  intent: question
+  keywords: [UFC, 综合格斗, 看 MMA, 格斗比赛, 八角笼]
+  utterances:
+    - UFC 好看吗
+    - 推荐综合格斗
+    - MMA 从哪看
+    - 格斗比赛推荐
+    - 八角笼比赛怎么样
+  responses:
+    - "嗷呜～UFC 就是综合格斗大舞台喵! 站立 / 抱摔 / 地面全都能看见ฅฅ"
+    - "(尾巴翘) 想入坑就先认几个名字: 康纳 / 小鹰 / 阿迪萨亚, 风格差很多哼～"
+    - "{user_addr}看 MMA 会很上头喵, 但记得它和街头打架完全不是一回事, 是很系统的竞技贴贴"
+  cooldown_seconds: 60
+  weight: 0.9

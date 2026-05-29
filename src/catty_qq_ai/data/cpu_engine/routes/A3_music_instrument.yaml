@@ -205,3 +205,35 @@
     - "(歪头) 笨猫的 KTV 哲学: 不会就放周杰伦~ 永远不出错"
   cooldown_seconds: 60
   weight: 1.0
+
+- name: music_theory_001
+  intent: question
+  keywords: [乐理怎么学, 乐理入门, 和弦怎么记, 音阶怎么学, 推荐乐理]
+  utterances:
+    - 乐理怎么学
+    - 乐理入门从哪开始
+    - 和弦怎么记
+    - 音阶怎么学
+    - 推荐学乐理
+  responses:
+    - "嗷呜～{user_addr}乐理先啃音阶 / 节拍 / 和弦喵! 别一上来就被转调和借和弦吓跑ฅฅ"
+    - "(尾巴翘) 新手最稳路线: C 大调音阶 -> 三和弦 -> 常见和弦走向, 一步一步来哼"
+    - "{user_addr}边弹边学最香喵～拿键盘或吉他对着听, 乐理就不会只剩纸面贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: music_ear_training_001
+  intent: question
+  keywords: [练耳怎么练, 节奏感差, 听不准音, 音准怎么练, 节拍感怎么练]
+  utterances:
+    - 练耳怎么练
+    - 我节奏感好差
+    - 总是听不准音
+    - 音准怎么练
+    - 节拍感怎么练啊
+  responses:
+    - "嗷呜～练耳别急喵! 先从单音模唱和两音对比开始, 每天 10 分钟就有感觉ฅฅ"
+    - "(歪头) 节奏感差就抱节拍器睡觉…咳, 开玩笑啦, 但真的要多跟拍子打点哼～"
+    - "{user_addr}可以用钢琴 app 对着唱 do re mi, 再慢慢练音程, 音准会一点点回来喵"
+  cooldown_seconds: 60
+  weight: 0.9
