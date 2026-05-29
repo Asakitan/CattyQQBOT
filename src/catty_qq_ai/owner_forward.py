@@ -174,10 +174,13 @@ def _is_paid_auto_accept_enabled() -> bool:
 async def _try_paid_friend_accept(
     bot: Bot, user_id: int, flag: str, *, source: str
 ) -> None:
-    """『包养笨猫』命中 → (有 flag 则)自动同意好友 + 扣 100 积分.
+    """『包养笨猫』命中 → **先算积分够不够 PAID_NSFW_COST, 不够直接拒绝好友, 够才同意 + 扣分 + 开场**.
 
-    够 → 开援交 sticky 窗口 + 主动私聊开场, 对方下一句私聊由 handle_chat 走完整 NSFW。
-    不够 → 主动私聊嘴硬催签到。
+    主人 2026-05-29 两条铁律 (先验资格再加好友):
+    - 不够 PAID_NSFW_COST: **拒绝好友申请** (有 flag) + 6h 冷却内催签到, 不浪费好友位、不扣分。
+    - 够但加不上好友 (临时会话无 flag / approve 失败): 不扣分, 只提示先加好友。
+    - 够且加上好友: 扣 PAID_NSFW_COST 积分 + 开援交 sticky 窗口 + 主动私聊开场
+      (下一句私聊由 handle_chat 走完整 NSFW)。
     source ∈ {'friend_request', 'temp_msg'}, 仅用于日志/通知。
     """
     if user_id <= 0:
@@ -194,7 +197,40 @@ async def _try_paid_friend_accept(
         logger.warning(f"owner_forward: paid auto-accept import failed: {exc}")
         return
 
-    # 1) 有 pending flag 才能同意好友 (临时会话无 flag 时只回提示, 不凭空加好友)
+    # 1) 先算积分够不够 (主人 2026-05-29: 先判够不够 PAID_NSFW_COST, 不够直接拒绝, 不浪费好友位/不扣分).
+    balance = affection_store.get_points(str(user_id))
+    if balance < PAID_NSFW_COST:
+        rejected = False
+        if flag:
+            try:
+                await bot.set_friend_add_request(flag=flag, approve=False)
+                rejected = True
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"owner_forward: paid reject set_friend_add_request failed: {exc}")
+        # 6h 冷却内催一次签到 (防对方刷屏)。
+        if _should_hint_stranger(user_id):
+            nag = (
+                f"哼，才 {balance} 积分就想包养笨猫？连 {PAID_NSFW_COST} 都凑不齐喵！"
+                f"笨猫才不做亏本买卖～先发『签到』攒够 {PAID_NSFW_COST} 积分再来加好友啦杂鱼～(尾巴一甩) ฅฅ"
+            )
+            try:
+                await bot.send_private_msg(user_id=user_id, message=nag)
+                _mark_stranger_hinted(user_id)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"owner_forward: paid reject nag send failed to {user_id}: {exc}")
+            await _send_to_owner(
+                bot,
+                f"[包养自动接收] QQ {user_id} 发了包养关键词({source})但积分不足喵～\n"
+                f"积分 {balance} < {PAID_NSFW_COST}，已{'拒绝好友申请' if rejected else '提示充值'}（未扣分）。",
+            )
+        logger.info(
+            f"owner_forward: PAID friend auto-accept 积分不足 [{source}] "
+            f"(user={user_id}, balance={balance}, need={PAID_NSFW_COST}, rejected={rejected}) "
+            f"→ {'拒绝好友' if rejected else '无flag仅提示'}"
+        )
+        return
+
+    # 2) 积分够 → 同意好友 (临时会话无 flag / approve 失败 → 加不上 → 不扣分只提示)。
     accepted = False
     if flag:
         try:
@@ -203,11 +239,33 @@ async def _try_paid_friend_accept(
         except Exception as exc:  # noqa: BLE001
             logger.warning(f"owner_forward: paid auto-accept set_friend_add_request failed: {exc}")
 
-    # 2) 扣 100 积分
+    if not accepted:
+        reason = "无好友申请 flag(临时会话)" if not flag else "set_friend_add_request 失败"
+        if _should_hint_stranger(user_id):
+            hint = (
+                "哼，积分够了嘛～不过想包养笨猫得先加上好友才算数喵！(尾巴一甩) "
+                "先发个好友申请、附言写上『包养笨猫』，加上了笨猫再…再乖乖履约啦杂鱼～ ฅฅ"
+            )
+            try:
+                await bot.send_private_msg(user_id=user_id, message=hint)
+                _mark_stranger_hinted(user_id)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning(f"owner_forward: paid no-friend hint send failed to {user_id}: {exc}")
+            await _send_to_owner(
+                bot,
+                f"[包养自动接收] QQ {user_id} 发了包养关键词({source})且积分够喵～\n"
+                f"但没能加上好友（{reason}），已提示对方先加好友，未扣积分。",
+            )
+        logger.info(
+            f"owner_forward: PAID friend auto-accept 够分但未加上好友, 不扣分 [{source}] "
+            f"(user={user_id}, balance={balance}, reason={reason}) → 提示先加好友"
+        )
+        return
+
+    # 3) 加上好友 → 扣 PAID_NSFW_COST 积分 + 开 sticky 窗口 + 主动开场
     consume = affection_store.consume_points(str(user_id), PAID_NSFW_COST)
     balance_before = int(consume.get("balance_before") or 0)
     if consume.get("ok"):
-        # 够 → 开 sticky 窗口 + 主动开场
         import random as _r
         trope, scene = pick_paid_nsfw_scene()
         outcome = "pleasant" if _r.random() < 0.6 else "unpleasant"
@@ -226,34 +284,34 @@ async def _try_paid_friend_accept(
             logger.warning(f"owner_forward: paid opener send failed to {user_id}: {exc}")
         logger.info(
             f"owner_forward: ★ PAID friend auto-accept [{source}] (user={user_id}, "
-            f"accepted={accepted}, cost={PAID_NSFW_COST}, "
+            f"accepted=True, cost={PAID_NSFW_COST}, "
             f"balance {balance_before}→{consume.get('balance_after')}, "
             f"trope={trope!r}, outcome={outcome})"
         )
         await _send_to_owner(
             bot,
             f"[包养自动接收] QQ {user_id} 发了包养关键词({source})喵～\n"
-            f"已{'同意好友 + ' if accepted else ''}扣 {PAID_NSFW_COST} 积分"
+            f"已同意好友 + 扣 {PAID_NSFW_COST} 积分"
             f"(余 {consume.get('balance_after')})进援交 sticky，结果 {outcome}。",
         )
     else:
-        # 不够 → 嘴硬催签到
+        # 竞态兜底: 第 1 步查过够, 这里仍失败 (并发扣分) → 好友已加上, 催签到。
         nag = (
-            f"哼，才 {balance_before} 积分就想包养笨猫？连 {PAID_NSFW_COST} 都凑不齐喵！"
-            f"先发『签到』攒够积分再来啦杂鱼～(尾巴一甩) ฅฅ"
+            f"咦？积分好像不太够了喵…({balance_before}/{PAID_NSFW_COST}) "
+            f"先发『签到』补上再私聊笨猫啦杂鱼～(尾巴一甩) ฅฅ"
         )
         try:
             await bot.send_private_msg(user_id=user_id, message=nag)
         except Exception as exc:  # noqa: BLE001
             logger.warning(f"owner_forward: paid nag send failed to {user_id}: {exc}")
         logger.info(
-            f"owner_forward: PAID friend auto-accept 积分不足 [{source}] (user={user_id}, "
-            f"accepted={accepted}, balance={balance_before}, need={PAID_NSFW_COST}) → 催签到"
+            f"owner_forward: PAID friend auto-accept 竞态积分不足 [{source}] (user={user_id}, "
+            f"accepted=True, balance_before={balance_before}, need={PAID_NSFW_COST}) → 催签到"
         )
         await _send_to_owner(
             bot,
-            f"[包养自动接收] QQ {user_id} 发了包养关键词({source})但积分不足喵～\n"
-            f"已{'同意好友，' if accepted else ''}积分 {balance_before} < {PAID_NSFW_COST}，已催他签到。",
+            f"[包养自动接收] QQ {user_id} 已同意好友但扣分时积分不足喵～\n"
+            f"(可能并发) 余 {balance_before} < {PAID_NSFW_COST}，已催他签到。",
         )
 
 

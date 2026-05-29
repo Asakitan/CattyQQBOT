@@ -205,3 +205,33 @@
     - "(挺胸) 笨猫: 主人是笨猫的快乐水 awsl"
   cooldown_seconds: 60
   weight: 0.9
+
+- name: slang_zundu_001
+  intent: question
+  keywords: [尊嘟假嘟, zundujiadu, 尊嘟, 假嘟]
+  utterances:
+    - 尊嘟假嘟什么意思
+    - zundujiadu 是啥
+    - 尊嘟假嘟怎么用
+    - 这个词也太怪了吧
+  responses:
+    - "嗷呜～尊嘟假嘟就是把‘真的假的’故意说萌一点喵, 属于一听就很会卖萌的网感口癖ฅฅ"
+    - "(尾巴翘) 一般拿来半认真半撒娇地问哼～像‘尊嘟假嘟呀’这种, 重点不是信息量, 是语气感"
+    - "{user_addr}私下聊天偶尔来一句挺有梗喵, 但工作场合突然尊嘟假嘟就会像脑袋被猫拍了一爪贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: slang_nanie_001
+  intent: question
+  keywords: [拿捏, 被拿捏了, 拿捏住了, 拿捏什么意思]
+  utterances:
+    - 拿捏是什么意思
+    - 被拿捏了是啥意思
+    - 拿捏住了怎么用
+    - 这个词最近好常见
+  responses:
+    - "嗷呜～拿捏大概就是被稳稳掌控、或把某件事整得很到位喵, 语气里常带一点得意或无奈ฅฅ"
+    - "(歪头) 像‘这首歌被你拿捏了’是夸得很稳, ‘我被作业拿捏了’就有点惨兮兮哼～"
+    - "{user_addr}这个词弹性很大喵, 夸人能用, 吐槽自己也能用, 所以网上才老是看到它贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
