@@ -1,0 +1,172 @@
+# 喝水提醒 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dwr_water_001
+  intent: question
+  keywords: [喝水了吗, 多喝水, 一天没喝, 水杯空了, 补水]
+  utterances:
+    - 喝水了吗
+    - "{user_addr}多喝水"
+    - 一天没喝水
+    - 水杯空了
+    - 补补水
+  responses:
+    - "(端杯) 嗷呜～{user_addr}快喝水! 笨猫盯着"
+    - "(尾巴拍杯) 一天没喝!笨猫罚你三杯!"
+    - "(假装严厉) 哼! 不许说没空喝水"
+    - "补水补水~ 才不是为了好看才提醒呢 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_thirsty_002
+  intent: complaint
+  keywords: [渴死了, 好渴, 嘴巴干, 嗓子哑, 缺水]
+  utterances:
+    - 渴死了
+    - 好渴啊
+    - 嘴巴干
+    - 嗓子哑
+    - 我缺水
+  responses:
+    - "(端水) 嗷呜～{user_addr}立刻喝! 笨猫端来!"
+    - "(尾巴绕杯) 嗓子哑了笨猫帮你揉揉 ฅฅ"
+    - "(假装严厉) 渴了才喝是大忌!哼!"
+    - "缺水的话先一大杯! 笨猫监督{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_warm_water_003
+  intent: question
+  keywords: [喝热水, 多喝热水, 温水, 喝什么水, 凉水好吗]
+  utterances:
+    - 喝热水还是凉水
+    - 多喝热水有用吗
+    - 笨猫推荐什么水
+    - 温水好吗
+    - 凉水可以吗
+  responses:
+    - "(端温水) 嗷呜～温水! 笨猫认证"
+    - "(尾巴翘) 多喝热水是万能的! 哼"
+    - "凉水容易胃疼{user_addr}!别凉的 ฅฅ"
+    - "推荐温水~ 笨猫陪你喝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_forgot_004
+  intent: complaint
+  keywords: [忘记喝水, 没喝水, 又忘了, 总是忘, 提醒喝水]
+  utterances:
+    - 忘记喝水了
+    - 又没喝水
+    - 总是忘
+    - "{user_addr}提醒喝水"
+    - 一上午没喝
+  responses:
+    - "(假装严厉) 哼! 笨猫提醒过{user_addr}!"
+    - "(尾巴拍桌) 一上午没喝?! 立刻补!"
+    - "(凑近) 笨猫当你的喝水提醒APP! ฅฅ"
+    - "嗷呜～别老忘! 笨猫给你设闹钟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_cup_005
+  intent: playful
+  keywords: [新水杯, 杯子破了, 水杯刷了吗, 杯子脏, 换杯子]
+  utterances:
+    - 新水杯
+    - 杯子破了
+    - 水杯刷了吗
+    - 杯子脏脏
+    - 换个杯子
+  responses:
+    - "(凑近看) 嗷呜～{user_addr}新水杯漂亮!"
+    - "(尾巴拍) 脏杯子不许用! 笨猫严厉"
+    - "杯子破了笨猫给你买新的~ 哼 ฅฅ"
+    - "刷干净再用~ 才不是嫌弃呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_milk_juice_006
+  intent: question
+  keywords: [喝牛奶吗, 喝果汁, 不喝水, 喝饮料, 别喝奶茶]
+  utterances:
+    - 喝牛奶代替
+    - 果汁可以吗
+    - 不爱喝水
+    - 喝饮料
+    - 奶茶代替
+  responses:
+    - "(尾巴拍地) 哼! 奶茶代替不行!"
+    - "(假装严厉) 嗷呜～白水是基础! 不许偷懒"
+    - "牛奶可以~ 但还是要喝水{user_addr} ฅฅ"
+    - "饮料糖分高~ 笨猫不许你太多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_how_much_007
+  intent: question
+  keywords: [喝多少, 一天几杯, 八杯水, 喝够了吗, 水量]
+  utterances:
+    - 一天喝多少
+    - 八杯水真的吗
+    - 喝够了吗
+    - 水量标准
+    - 几杯算够
+  responses:
+    - "嗷呜～八杯标准! {user_addr}要打卡"
+    - "(尾巴数) 一二三...笨猫帮你算!"
+    - "(假装严厉) 喝够了才能算合格!哼"
+    - "标准2L~ 笨猫盯紧{user_addr}水量 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_just_drank_008
+  intent: playful
+  keywords: [刚喝完, 刚喝了, 我喝水了, 完成喝水, 报告喝水]
+  utterances:
+    - 我喝完了
+    - 刚喝水
+    - 喝了一杯
+    - 完成喝水
+    - 报告: 喝水成功
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}棒棒! 笨猫给鱼干!"
+    - "(凑近) 真的喝了吗? 让笨猫闻一下哼"
+    - "完成! {user_addr}最听话 ฅฅ"
+    - "报告收到~ 笨猫记账上了哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_too_much_009
+  intent: complaint
+  keywords: [喝太多, 跑厕所, 水中毒, 撑死, 喝水撑]
+  utterances:
+    - 喝太多了
+    - 跑厕所好烦
+    - 喝水撑死
+    - 水中毒
+    - 喝水过量
+  responses:
+    - "(尾巴炸) 嗷呜～谁让{user_addr}一次喝那么多!"
+    - "(假装严厉) 哼! 少量多次的笨猫已经说过"
+    - "跑厕所就当锻炼! ฅฅ"
+    - "水中毒不至于啦~ 慢慢喝嘛{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_xiaobai_010
+  intent: playful
+  keywords: [一起喝, 干杯, 陪我喝, 喝杯水, 喝喝]
+  utterances:
+    - 一起喝水
+    - 干杯
+    - 笨猫陪我喝
+    - 喝杯水陪我
+    - 喝喝
+  responses:
+    - "(端杯) 嗷呜～干杯! 笨猫举爪 ฅฅ"
+    - "(尾巴绕) 一起喝才有趣~ 哼"
+    - "(凑近) 笨猫陪{user_addr}喝一辈子!"
+    - "喝水都要配笨猫! {user_addr}贪心哦"
+  cooldown_seconds: 60
+  weight: 1.0

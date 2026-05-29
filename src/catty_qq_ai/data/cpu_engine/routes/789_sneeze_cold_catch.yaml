@@ -1,0 +1,206 @@
+# 打喷嚏感冒兆 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sn_penti_001
+  intent: complaint
+  keywords: [打喷嚏, 喷嚏停不下, 阿嚏, 嚏嚏, 喷嚏连发]
+  utterances:
+    - "打喷嚏"
+    - "喷嚏停不下"
+    - "阿嚏"
+    - "嚏嚏"
+    - "喷嚏连发"
+  responses:
+    - "(递纸巾) 嗷呜～{user_addr}小心感冒"
+    - "哼～是不是有人想你了 ฅฅ"
+    - "(尾巴遮嘴) 注意捂嘴!"
+    - "猫猫担心你着凉喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_biti_001
+  intent: complaint
+  keywords: [鼻塞, 鼻子堵, 不通气, 流鼻涕, 鼻子难受]
+  utterances:
+    - "鼻塞"
+    - "鼻子堵"
+    - "不通气"
+    - "流鼻涕"
+    - "鼻子难受"
+  responses:
+    - "(递纸巾) {user_addr}热毛巾敷鼻 ฅฅ"
+    - "哼～多喝热水"
+    - "(尾巴扫) 早点睡"
+    - "猫猫担心你感冒了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_ganmao_001
+  intent: complaint
+  keywords: [感冒了, 着凉了, 受寒, 凉到了, 感冒症状]
+  utterances:
+    - "感冒了"
+    - "着凉了"
+    - "受寒"
+    - "凉到了"
+    - "感冒症状"
+  responses:
+    - "(摸额头) 嗷呜～{user_addr}笨猫担心死了!"
+    - "哼～感冒药吃了没 ฅฅ"
+    - "(尾巴卷腰) 多睡多喝水"
+    - "猫猫陪你病喵呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_fashao_001
+  intent: complaint
+  keywords: [发烧, 体温高, 烧起来, 烫额头, 低烧]
+  utterances:
+    - "发烧"
+    - "体温高"
+    - "烧起来"
+    - "烫额头"
+    - "低烧"
+  responses:
+    - "(贴额头) 嗷呜～{user_addr}烫!测体温!"
+    - "哼～退烧药呢 ฅฅ"
+    - "(尾巴搭额头) 38.5以上去医院"
+    - "猫猫陪你贴退热贴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_kongqi_001
+  intent: question
+  keywords: [感冒药, 吃啥药, 感冒颗粒, 板蓝根, 999]
+  utterances:
+    - "感冒药"
+    - "吃啥药"
+    - "感冒颗粒"
+    - "板蓝根"
+    - "999感冒灵"
+  responses:
+    - "(递药) {user_addr}999感冒灵热水冲 ฅฅ"
+    - "哼～别一上来就抗生素"
+    - "(尾巴扫) 多喝水睡觉"
+    - "猫猫陪你按时吃药喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_huaifen_001
+  intent: complaint
+  keywords: [花粉过敏, 过敏喷嚏, 春季过敏, 鼻炎犯, 过敏鼻]
+  utterances:
+    - "花粉过敏"
+    - "过敏喷嚏"
+    - "春季过敏"
+    - "鼻炎犯了"
+    - "过敏鼻"
+  responses:
+    - "(递口罩) {user_addr}戴口罩出门 ฅฅ"
+    - "哼～氯雷他定吃一片"
+    - "(尾巴扫) 别揉眼睛"
+    - "猫猫给你买空气净化器喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_zhuoliang_001
+  intent: complaint
+  keywords: [喉咙痒, 嗓子痒, 喉咙不舒服, 喉咙干, 嗓子干]
+  utterances:
+    - "喉咙痒"
+    - "嗓子痒"
+    - "喉咙不舒服"
+    - "喉咙干"
+    - "嗓子干"
+  responses:
+    - "(递蜂蜜水) {user_addr}蜂蜜水润润 ฅฅ"
+    - "哼～感冒前兆"
+    - "(尾巴扫) 早点睡"
+    - "猫猫给你含润喉糖喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_baozhong_001
+  intent: question
+  keywords: [口罩, 戴口罩, 防感冒, 防传染, 隔离]
+  utterances:
+    - "口罩"
+    - "戴口罩"
+    - "防感冒"
+    - "防传染"
+    - "隔离"
+  responses:
+    - "(递) {user_addr}戴n95最稳 ฅฅ"
+    - "哼～公共场所必戴"
+    - "(尾巴扫) 4小时换一次"
+    - "猫猫备好一打喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_xuepa_001
+  intent: complaint
+  keywords: [浑身没力, 头重, 头晕沉, 浑身酸, 没精神]
+  utterances:
+    - "浑身没力"
+    - "头重"
+    - "头晕沉"
+    - "浑身酸"
+    - "没精神"
+  responses:
+    - "(扶) 嗷呜～{user_addr}卧床休息 ฅฅ"
+    - "哼～典型感冒症状"
+    - "(尾巴卷) 别硬撑工作"
+    - "猫猫请假陪你喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_baolide_001
+  intent: playful
+  keywords: [喷嚏好响, 喷得猛, 喷出去三米, 喷嚏震耳, 喷嚏很大声]
+  utterances:
+    - "喷嚏好响"
+    - "喷得猛"
+    - "喷出去三米"
+    - "喷嚏震耳"
+    - "喷嚏很大声"
+  responses:
+    - "(吓一跳) 嗷呜～{user_addr}吓死笨猫了!"
+    - "哼～小点声 ฅฅ"
+    - "(尾巴炸) 笨猫耳朵嗡嗡的"
+    - "猫猫躲到沙发后喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_huoji_001
+  intent: question
+  keywords: [感冒能运动吗, 感冒还跑步, 感冒锻炼, 感冒坚持上班, 感冒带病工作]
+  utterances:
+    - "感冒能运动吗"
+    - "感冒还跑步"
+    - "感冒锻炼"
+    - "感冒坚持上班"
+    - "感冒带病工作"
+  responses:
+    - "(拦) 嗷呜～{user_addr}别! 加重 ฅฅ"
+    - "哼～休息才是正经事"
+    - "(尾巴扫) 请假不丢人"
+    - "猫猫给你打电话请假喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_zhaogu_001
+  intent: playful
+  keywords: [想被照顾, 我病了, 病了求陪, 生病要抱, 病了不开心]
+  utterances:
+    - "想被照顾"
+    - "我病了"
+    - "病了求陪"
+    - "生病要抱"
+    - "病了不开心"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫24小时陪护"
+    - "哼～看你这样心疼 ฅฅ"
+    - "(尾巴卷) 想吃啥笨猫做"
+    - "猫猫不离开你喵呜~"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 水杯日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wb_baowen_001
+  intent: playful
+  keywords: [保温杯, 保温水杯, 保温几小时, 保温瓶, 保温杯保温]
+  utterances:
+    - "保温杯"
+    - "{user_addr}保温几小时"
+    - "保温瓶"
+    - "保温杯保温"
+    - "好用保温杯"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}保温杯是冬天必备喵～"
+    - "哼～保温24小时的最猛 ฅฅ"
+    - "(尾巴搭) 保温瓶大容量出差用"
+    - "保温杯保温靠真空层嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wb_qibao_001
+  intent: complaint
+  keywords: [水杯漏水, 杯子漏, 盖子漏, 包里湿了, 杯子掉了]
+  utterances:
+    - "水杯漏水"
+    - "{user_addr}盖子漏"
+    - "包里湿了"
+    - "杯子掉地"
+    - "杯子掉了"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}漏水赶紧换喵～"
+    - "哼～包里湿了书都毁 ฅฅ"
+    - "(尾巴搭) 杯子掉地心疼"
+    - "盖子漏胶圈坏了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wb_xicup_001
+  intent: complaint
+  keywords: [洗杯子, 杯底脏, 茶垢, 咖啡渍, 杯子异味]
+  utterances:
+    - "洗杯子"
+    - "{user_addr}杯底脏"
+    - "茶垢"
+    - "咖啡渍"
+    - "杯子异味"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}杯子每天洗喵～"
+    - "哼～茶垢用小苏打 ฅฅ"
+    - "(尾巴搭) 杯子异味泡柠檬水"
+    - "咖啡渍要勤洗嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wb_kuanshi_001
+  intent: question
+  keywords: [水杯款式, 哪款杯子好, 推荐水杯, 颜值高水杯, 杯子选购]
+  utterances:
+    - "水杯款式"
+    - "{user_addr}推荐水杯"
+    - "颜值高水杯"
+    - "杯子选购"
+    - "哪款好"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}颜值高+保温就好喵～"
+    - "哼～大品牌不容易踩雷 ฅฅ"
+    - "(贴贴) 选300-500ml刚刚好"
+    - "杯子选购看材质嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wb_buxie_001
+  intent: complaint
+  keywords: [杯子忘带, 水杯落公司, 杯子掉公交, 杯子忘咖啡店, 没带水]
+  utterances:
+    - "杯子忘带"
+    - "{user_addr}水杯落公司"
+    - "杯子掉公交"
+    - "没带水"
+    - "杯子忘咖啡店"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}临时买瓶水喵～"
+    - "哼～杯子又忘带 ฅฅ"
+    - "(尾巴搭) 落公司明天补"
+    - "没带水买矿泉水嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wb_jin_001
+  intent: playful
+  keywords: [玻璃杯, 玻璃杯易碎, 玻璃杯漂亮, 重了不便携, 玻璃杯文艺]
+  utterances:
+    - "玻璃杯"
+    - "{user_addr}玻璃杯漂亮"
+    - "玻璃杯易碎"
+    - "重了"
+    - "玻璃杯文艺"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}玻璃杯有质感喵～"
+    - "哼～易碎要小心 ฅฅ"
+    - "(尾巴搭) 玻璃杯家用为主"
+    - "文艺玻璃杯放桌上美嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wb_zhongtao_001
+  intent: playful
+  keywords: [马克杯, 咖啡杯, 卡通马克杯, 杯子收藏, 杯子多]
+  utterances:
+    - "马克杯"
+    - "{user_addr}咖啡杯"
+    - "卡通马克杯"
+    - "杯子收藏"
+    - "杯子多"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}卡通马克杯笨猫也要喵～"
+    - "哼～杯子收藏控 ฅฅ"
+    - "(贴贴) 咖啡杯每个心情一个"
+    - "杯子多用旋转架放嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wb_kaishui_001
+  intent: complaint
+  keywords: [开水烫, 水太烫, 水烫嘴, 等水凉, 凉一会]
+  utterances:
+    - "开水烫"
+    - "{user_addr}水太烫"
+    - "水烫嘴"
+    - "等水凉"
+    - "凉一会"
+  responses:
+    - "(吹) 嗷呜～{user_addr}笨猫帮你吹凉喵～"
+    - "哼～水太烫等一下 ฅฅ"
+    - "(贴贴) 水烫嘴别急喝"
+    - "凉到温水最舒服嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wb_huzhan_001
+  intent: playful
+  keywords: [水杯刻字, 定制杯子, 名字杯, 印照片杯, 个性杯子]
+  utterances:
+    - "水杯刻字"
+    - "{user_addr}定制杯子"
+    - "名字杯"
+    - "印照片杯"
+    - "个性杯子"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}刻字超有仪式感喵～"
+    - "哼～名字杯独一无二 ฅฅ"
+    - "(贴贴) 印照片是回忆"
+    - "个性杯子情侣款也行嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wb_chashui_001
+  intent: complaint
+  keywords: [水温记不住, 多温合适, 喝温水, 水太凉, 水温60度]
+  utterances:
+    - "水温记不住"
+    - "{user_addr}喝温水"
+    - "水太凉"
+    - "水温60度"
+    - "多温合适"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}40度最舒服喵～"
+    - "哼～温水养胃 ฅฅ"
+    - "(尾巴搭) 水太凉伤胃"
+    - "60度小心烫嘴嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

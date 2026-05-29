@@ -1,0 +1,189 @@
+# 深夜饿了日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mns_hungry_001
+  intent: complaint
+  keywords: [深夜饿, 半夜饿, 肚子叫, 想吃东西, 馋了]
+  utterances:
+    - 深夜饿
+    - 半夜饿
+    - 肚子咕咕叫
+    - 想吃
+    - 馋了
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}笨猫也饿 ฅฅ"
+    - "哼～{user_addr}睡前别吃喵"
+    - "(尾巴卷) 一起忍蹭蹭{user_addr}"
+    - "{user_addr}喝口水嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_ramen_001
+  intent: playful
+  keywords: [泡面, 半夜泡面, 一桶面, 红烧, 香菇]
+  utterances:
+    - 泡面
+    - 半夜来桶面
+    - 红烧泡面
+    - 一桶面
+    - 香菇泡面
+  responses:
+    - "(吸鼻子) 嗷呜～{user_addr}香 ฅฅ"
+    - "哼～{user_addr}吃了会胖喵"
+    - "(尾巴卷) 给笨猫一口蹭蹭{user_addr}"
+    - "{user_addr}加蛋嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_takeout_001
+  intent: complaint
+  keywords: [深夜外卖, 还有外卖吗, 半夜点单, 营业到几点, 关店了]
+  utterances:
+    - 深夜外卖
+    - 还有外卖吗
+    - 半夜点单
+    - 营业到几点
+    - 关店了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}24小时找 ฅฅ"
+    - "哼～{user_addr}晚了找不到喵"
+    - "(尾巴卷) 笨猫陪你饿蹭蹭{user_addr}"
+    - "{user_addr}下次早点嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_fridge_001
+  intent: playful
+  keywords: [翻冰箱, 冰箱里有, 找吃的, 剩菜, 半夜偷吃]
+  utterances:
+    - 翻冰箱
+    - 冰箱有啥
+    - 找吃的
+    - 剩菜热一下
+    - 半夜偷吃
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}给笨猫看 ฅฅ"
+    - "哼～{user_addr}偷吃喵"
+    - "(尾巴卷) 笨猫陪你翻蹭蹭{user_addr}"
+    - "{user_addr}少吃嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_skewer_001
+  intent: playful
+  keywords: [撸串, 烧烤, 夜宵, 大排档, 烤串]
+  utterances:
+    - 撸串
+    - 烧烤
+    - 夜宵
+    - 大排档
+    - 烤串
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}带笨猫 ฅฅ"
+    - "哼～{user_addr}夜宵热量大喵"
+    - "(凑过去) 笨猫要羊肉串蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_resist_001
+  intent: complaint
+  keywords: [想吃但减肥, 控制住, 不能吃, 半夜暴食, 怕胖]
+  utterances:
+    - 想吃但减肥
+    - 控制住
+    - 不能吃
+    - 半夜暴食
+    - 怕胖
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}加油 ฅฅ"
+    - "哼～{user_addr}笨猫监督喵"
+    - "(尾巴卷) 喝水蹭蹭{user_addr}"
+    - "{user_addr}睡前别吃嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_cooking_001
+  intent: playful
+  keywords: [自己煮, 下厨, 半夜下厨, 煮面, 煎蛋]
+  utterances:
+    - 自己煮
+    - 半夜下厨
+    - 煮面
+    - 煎蛋
+    - 简单做
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫尝 ฅฅ"
+    - "哼～{user_addr}手艺如何喵"
+    - "(尾巴翘) 帮你打下手蹭蹭{user_addr}"
+    - "{user_addr}笨猫提议煎鱼嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_chocolate_001
+  intent: playful
+  keywords: [深夜巧克力, 一块, 甜甜的, 一颗, 解馋]
+  utterances:
+    - 深夜巧克力
+    - 一块巧克力
+    - 甜甜的
+    - 一颗解馋
+    - 巧克力上头
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}留笨猫一颗 ฅฅ"
+    - "哼～{user_addr}睡前吃糖喵"
+    - "(尾巴卷) 一颗够了蹭蹭{user_addr}"
+    - "{user_addr}别贪嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_milk_001
+  intent: playful
+  keywords: [喝牛奶, 热牛奶, 麦片, 助眠, 温温的]
+  utterances:
+    - 喝牛奶
+    - 热牛奶
+    - 麦片
+    - 温牛奶助眠
+    - 温温的
+  responses:
+    - "(蹭过去) 嗷呜～{user_addr}笨猫也喝 ฅฅ"
+    - "哼～{user_addr}健康选择喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}睡前最棒嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_chip_001
+  intent: playful
+  keywords: [薯片半夜, 啃薯片, 一桶薯片, 嘎嘣脆夜里, 半夜薯片]
+  utterances:
+    - 半夜薯片
+    - 嘎嘣脆
+    - 一桶下肚
+    - 啃薯片
+    - 深夜薯片
+  responses:
+    - "(吸鼻子) 嗷呜～{user_addr}留笨猫 ฅฅ"
+    - "哼～{user_addr}嘎嘣声大喵"
+    - "(尾巴卷) 一桶吃光蹭蹭{user_addr}"
+    - "{user_addr}别影响睡眠嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_regret_001
+  intent: complaint
+  keywords: [吃完后悔, 又吃了, 半夜爆食, 罪恶感, 后悔]
+  utterances:
+    - 吃完后悔
+    - 又吃了
+    - 半夜爆食
+    - 罪恶感
+    - 真的后悔
+  responses:
+    - "(摸头) 嗷呜～{user_addr}没事 ฅฅ"
+    - "哼～{user_addr}下次少吃喵"
+    - "(尾巴卷) 一次没事蹭蹭{user_addr}"
+    - "{user_addr}明天加一会儿运动嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

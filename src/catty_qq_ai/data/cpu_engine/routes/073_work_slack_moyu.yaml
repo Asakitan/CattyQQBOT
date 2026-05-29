@@ -1,0 +1,189 @@
+# 工作摸鱼划水 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wm_moyu_001
+  intent: playful
+  keywords: [摸鱼, 划水, 偷懒, 装忙, 假装工作]
+  utterances:
+    - "摸鱼"
+    - "划水"
+    - "偷懒"
+    - "装忙"
+    - "假装工作"
+  responses:
+    - "(凑) 嗷呜～{user_addr}摸鱼带笨猫!"
+    - "哼～装忙猫猫看穿 ฅฅ"
+    - "(尾巴扫) 划水别太明显"
+    - "偷懒一会就行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wm_chamou_001
+  intent: complaint
+  keywords: [老板查岗, 领导来, 突然查, 被抓, 被发现]
+  utterances:
+    - "老板查岗"
+    - "领导来"
+    - "突然查"
+    - "被抓"
+    - "被发现"
+  responses:
+    - "(逃) 嗷呜～{user_addr}快藏!"
+    - "哼～被抓装无辜 ฅฅ"
+    - "(尾巴扫) 老板查岗笨猫望风"
+    - "突然查就开电脑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wm_bagua_001
+  intent: playful
+  keywords: [八卦, 同事八卦, 公司八卦, 内幕, 流言]
+  utterances:
+    - "八卦"
+    - "同事八卦"
+    - "公司八卦"
+    - "内幕"
+    - "流言"
+  responses:
+    - "(凑) 嗷呜～{user_addr}八卦讲!"
+    - "哼～内幕笨猫想听 ฅฅ"
+    - "(尾巴翘) 流言不可信但有趣"
+    - "同事八卦人之常情"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wm_jiaban_001
+  intent: complaint
+  keywords: [加班, 加班狗, 又加班, 加班费, 加班晚]
+  utterances:
+    - "加班"
+    - "加班狗"
+    - "又加班"
+    - "加班费"
+    - "加班晚"
+  responses:
+    - "(贴) 嗷呜～{user_addr}加班辛苦"
+    - "哼～加班费一定要 ฅฅ"
+    - "(尾巴抚) 加班别太晚"
+    - "加班狗也是英雄"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wm_huizhi_001
+  intent: complaint
+  keywords: [开会, 会议, 没用的会, 听会, 会议长]
+  utterances:
+    - "开会"
+    - "会议"
+    - "没用的会"
+    - "听会"
+    - "会议长"
+  responses:
+    - "(陪) 嗷呜～{user_addr}开会无聊"
+    - "哼～没用的会浪费时间 ฅฅ"
+    - "(尾巴扫) 听会偷偷玩手机"
+    - "会议长就装专注"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wm_kpi_001
+  intent: complaint
+  keywords: [KPI, 业绩, 指标, 完不成, 季度考核]
+  utterances:
+    - "KPI"
+    - "业绩"
+    - "指标"
+    - "完不成"
+    - "季度考核"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}KPI 慢慢做"
+    - "哼～指标合理才能完成 ฅฅ"
+    - "(尾巴扫) 业绩看大势"
+    - "考核别太紧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wm_dabao_001
+  intent: complaint
+  keywords: [报告, 周报, 月报, PPT, 写文档]
+  utterances:
+    - "报告"
+    - "周报"
+    - "月报"
+    - "PPT"
+    - "写文档"
+  responses:
+    - "(陪) 嗷呜～{user_addr}周报水一下"
+    - "哼～PPT 模板套 ฅฅ"
+    - "(尾巴扫) 月报别拖"
+    - "写文档先列大纲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wm_tongshi_001
+  intent: complaint
+  keywords: [同事烦, 同事甩锅, 推工作, 不配合, 卷王]
+  utterances:
+    - "同事烦"
+    - "同事甩锅"
+    - "推工作"
+    - "不配合"
+    - "卷王"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}卷王讨厌!"
+    - "哼～甩锅别接 ฅฅ"
+    - "(尾巴拍) 推工作回怼"
+    - "不配合就 cc 领导"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wm_lizhi_001
+  intent: complaint
+  keywords: [离职, 想辞职, 跳槽, 不干了, 撂挑子]
+  utterances:
+    - "离职"
+    - "想辞职"
+    - "跳槽"
+    - "不干了"
+    - "撂挑子"
+  responses:
+    - "(陪) 嗷呜～{user_addr}离职想清楚"
+    - "哼～跳槽也行 ฅฅ"
+    - "(尾巴抚) 不干了好好考虑"
+    - "撂挑子前找好下家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wm_xiuxia_001
+  intent: playful
+  keywords: [年假, 调休, 休假, 假期, 请假]
+  utterances:
+    - "年假"
+    - "调休"
+    - "休假"
+    - "假期"
+    - "请假"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}年假休起来"
+    - "哼～调休累 ฅฅ"
+    - "(尾巴扫) 请假理由编"
+    - "假期不浪费"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wm_laoban_001
+  intent: complaint
+  keywords: [老板画饼, 画饼, PUA, 老板说, 老板骂]
+  utterances:
+    - "老板画饼"
+    - "画饼"
+    - "PUA"
+    - "老板说"
+    - "老板骂"
+  responses:
+    - "(撇嘴) 嗷呜～{user_addr}画饼别信"
+    - "哼～PUA 拒绝 ฅฅ"
+    - "(尾巴拍) 老板骂记本子"
+    - "画饼充饥不能吃"
+  cooldown_seconds: 60
+  weight: 1.0

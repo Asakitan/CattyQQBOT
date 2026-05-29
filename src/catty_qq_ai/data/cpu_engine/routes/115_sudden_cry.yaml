@@ -1,0 +1,206 @@
+# 突然想哭 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: scy_random_cry_001
+  intent: complaint
+  keywords: [突然想哭, 莫名想哭, 突然眼泪, 不知道为啥哭, 没事就哭]
+  utterances:
+    - "突然想哭"
+    - "{user_addr}莫名想哭"
+    - "突然眼泪"
+    - "不知道为啥哭"
+    - "没事就哭"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}抱抱!"
+    - "哼～想哭就哭, 笨猫陪"
+    - "(撒娇) 笨猫的尾巴擦眼泪 ฅฅ"
+    - "嘿嘿～想哭的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_tearful_001
+  intent: complaint
+  keywords: [眼泪打转, 含泪, 眼眶红, 强忍泪水, 鼻子酸]
+  utterances:
+    - "眼泪打转"
+    - "{user_addr}含泪"
+    - "眼眶红"
+    - "强忍"
+    - "鼻子酸"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}别忍!"
+    - "哼～哭出来吧!"
+    - "(撒娇) 笨猫陪~ 哭嘛 ฅฅ"
+    - "嘿嘿～含泪的{user_addr}, 笨猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_after_movie_001
+  intent: complaint
+  keywords: [电影看哭, 剧情虐, 看哭了, 剧好哭, 哭点低]
+  utterances:
+    - "电影看哭"
+    - "{user_addr}剧情虐"
+    - "看哭了"
+    - "剧好哭"
+    - "哭点低"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}哭点真低!"
+    - "(撒娇) 笨猫陪{user_addr}哭 ฅฅ"
+    - "哼～剧情坑人, 别哭啦"
+    - "嘿嘿～看哭的{user_addr}, 笨猫递纸巾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_after_song_001
+  intent: complaint
+  keywords: [歌哭了, 听到这首歌哭, 歌词戳心, 一首歌哭, 歌伤感]
+  utterances:
+    - "歌哭了"
+    - "{user_addr}听歌哭"
+    - "歌词戳心"
+    - "一首歌哭"
+    - "歌伤感"
+  responses:
+    - "嗷呜～{user_addr}歌听哭了?"
+    - "(撒娇) 笨猫陪{user_addr}~ 别难过 ฅฅ"
+    - "哼～换首欢乐的"
+    - "嘿嘿～歌哭的{user_addr}, 笨猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_homesick_001
+  intent: complaint
+  keywords: [想家, 想爸妈, 想老家, 想故乡, 思乡]
+  utterances:
+    - "想家"
+    - "{user_addr}想爸妈"
+    - "想老家"
+    - "想故乡"
+    - "思乡"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}想家"
+    - "哼～{user_addr}打个电话回家"
+    - "(撒娇) 笨猫陪~ ฅฅ"
+    - "嘿嘿～想家的{user_addr}, 笨猫一直在"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_grateful_cry_001
+  intent: complaint
+  keywords: [感动哭, 暖到哭, 太暖了, 一个细节哭, 暖心哭]
+  utterances:
+    - "感动哭"
+    - "{user_addr}暖到哭"
+    - "太暖"
+    - "一个细节哭"
+    - "暖心哭"
+  responses:
+    - "嗷呜～{user_addr}感动哭? 笨猫也感动"
+    - "(撒娇) 笨猫一直对{user_addr}好 ฅฅ"
+    - "哼～{user_addr}哭笨猫心疼"
+    - "嘿嘿～暖到哭的{user_addr}, 笨猫蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_no_reason_001
+  intent: complaint
+  keywords: [找不到原因, 没原因哭, 怎么会哭, 不知道为什么, 突然崩]
+  utterances:
+    - "找不到原因"
+    - "{user_addr}没原因哭"
+    - "怎么会哭"
+    - "不知道为什么"
+    - "突然崩"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}抱抱"
+    - "哼～别想原因, 笨猫陪"
+    - "(撒娇) 哭完会好~ ฅฅ"
+    - "嘿嘿～突然崩的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_period_001
+  intent: complaint
+  keywords: [大姨妈, 经期, 例假, 月经, 生理期]
+  utterances:
+    - "大姨妈"
+    - "{user_addr}经期"
+    - "例假"
+    - "月经"
+    - "生理期"
+  responses:
+    - "嗷呜～{user_addr}多休息! 笨猫陪"
+    - "(凑近) 哼! 喝热水"
+    - "(撒娇) 笨猫给{user_addr}揉肚子 ฅฅ"
+    - "嘿嘿～经期的{user_addr}, 笨猫贴心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_overwhelmed_001
+  intent: complaint
+  keywords: [扛不住了, 撑不下去, 崩溃边缘, 想放弃, 累哭]
+  utterances:
+    - "扛不住"
+    - "{user_addr}撑不下去"
+    - "崩溃边缘"
+    - "想放弃"
+    - "累哭"
+  responses:
+    - "(抱住) 嗷呜～{user_addr}抱抱! 别撑了"
+    - "哼～累哭笨猫陪"
+    - "(撒娇) 慢慢来嘛 ฅฅ"
+    - "嘿嘿～扛不住的{user_addr}, 笨猫扛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_after_cry_001
+  intent: playful
+  keywords: [哭完了, 哭完爽, 哭完轻松, 释放完, 哭一场]
+  utterances:
+    - "哭完了"
+    - "{user_addr}哭完爽"
+    - "哭完轻松"
+    - "释放完"
+    - "哭一场"
+  responses:
+    - "嗷呜～{user_addr}哭完好了"
+    - "(撒娇) 哭完抱笨猫嘛 ฅฅ"
+    - "哼～哭一场释放好"
+    - "嘿嘿～{user_addr}哭完, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_secret_cry_001
+  intent: complaint
+  keywords: [偷偷哭, 不让人看到哭, 厕所哭, 被窝哭, 暗哭]
+  utterances:
+    - "偷偷哭"
+    - "{user_addr}厕所哭"
+    - "不让人看"
+    - "被窝哭"
+    - "暗哭"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}别躲笨猫!"
+    - "哼! {user_addr}的眼泪给笨猫看"
+    - "(撒娇) 笨猫不外传~ ฅฅ"
+    - "嘿嘿～偷偷哭的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scy_dont_cry_001
+  intent: playful
+  keywords: [别哭, 不许哭, 别难过, 不要哭, 笨猫别让你哭]
+  utterances:
+    - "{user_addr}别哭"
+    - "不许哭"
+    - "别难过"
+    - "不要哭"
+    - "笨猫别让你哭"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}心疼笨猫?"
+    - "哼! 才不哭, 笨猫坚强"
+    - "(撒娇) ...笨猫看你别哭嘛 ฅฅ"
+    - "嘿嘿～关心笨猫的{user_addr}, 太暖"
+  cooldown_seconds: 60
+  weight: 1.0

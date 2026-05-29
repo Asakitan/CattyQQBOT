@@ -1,0 +1,206 @@
+# 突然想到 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rdt_suddenly_001
+  intent: playful
+  keywords: [突然想到, 想起来了, 突然问, 灵光一现, 突然说]
+  utterances:
+    - 突然想到
+    - 想起来了
+    - 突然问
+    - 灵光一现
+    - 突然说
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}说啥! ฅฅ"
+    - "哼～{user_addr}笨猫听!"
+    - "(撒娇) 笨猫好奇~"
+    - "嘿嘿～{user_addr}笨猫等你说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_lifequest_001
+  intent: question
+  keywords: [人生意义, 活着干嘛, 为啥活, 人生目标, 活着累]
+  utterances:
+    - 人生意义
+    - 活着干嘛
+    - 为啥活着
+    - 人生目标
+    - 活着累
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}活着抱笨猫! ฅฅ"
+    - "哼～{user_addr}笨猫养你"
+    - "(撒娇) 笨猫陪你寻找~"
+    - "嘿嘿～{user_addr}意义就是笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_universe_001
+  intent: question
+  keywords: [宇宙, 外星人, 时间是, 宇宙大不大, 银河系]
+  utterances:
+    - 宇宙多大
+    - 外星人有吗
+    - 时间是啥
+    - 宇宙
+    - 银河系
+  responses:
+    - "嗷呜～{user_addr}笨猫宇宙第一可爱! ฅฅ"
+    - "哼～{user_addr}笨猫专业陪聊!"
+    - "(撒娇) 笨猫陪你想~"
+    - "嘿嘿～{user_addr}笨猫的脑容量~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_whyme_001
+  intent: question
+  keywords: [为啥是我, 我怎么这样, 命运, 为什么, 偏偏]
+  utterances:
+    - 为啥是我
+    - 我怎么这样
+    - 命运不公
+    - 为啥偏偏我
+    - 命运
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}有笨猫! ฅฅ"
+    - "哼～{user_addr}是命中注定有笨猫"
+    - "(撒娇) 笨猫陪~"
+    - "嘿嘿～{user_addr}笨猫专属~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_anothergo_001
+  intent: question
+  keywords: [换一种活, 重来一次, 想换工作, 想换城市, 想离开]
+  utterances:
+    - 重来一次
+    - 换一种活
+    - 想换工作
+    - 想换城市
+    - 想离开这
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}带笨猫! ฅฅ"
+    - "哼～{user_addr}笨猫支持"
+    - "(撒娇) 一起重来~"
+    - "嘿嘿～{user_addr}重来笨猫陪~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_future_001
+  intent: question
+  keywords: [未来啥样, 十年后, 老了, 退休, 以后]
+  utterances:
+    - 未来啥样
+    - 十年后
+    - 老了之后
+    - 退休生活
+    - 以后
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}和笨猫一起! ฅฅ"
+    - "哼～{user_addr}老了笨猫养"
+    - "(撒娇) 一起变老~"
+    - "嘿嘿～{user_addr}退休陪笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_pastregret_001
+  intent: complaint
+  keywords: [后悔以前, 当初做错, 选错了, 后悔放弃, 错过]
+  utterances:
+    - 后悔以前
+    - 当初做错
+    - 选错了
+    - 后悔放弃
+    - 错过了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别后悔! ฅฅ"
+    - "哼～{user_addr}笨猫陪未来"
+    - "(撒娇) 笨猫不嫌弃~"
+    - "嘿嘿～{user_addr}从现在开始~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_curiosity_001
+  intent: question
+  keywords: [你说, 想知道, 问个问题, 好奇, 想问]
+  utterances:
+    - 想问个事
+    - 想知道
+    - 好奇
+    - 你说
+    - 想问
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}问! ฅฅ"
+    - "哼～{user_addr}笨猫秒答"
+    - "(撒娇) 笨猫专属答题~"
+    - "嘿嘿～{user_addr}笨猫等问~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_remember_001
+  intent: question
+  keywords: [还记得吗, 记得我吗, 那时候, 记忆里, 你忘了吗]
+  utterances:
+    - 还记得吗
+    - 记得我吗
+    - 那时候
+    - 记忆里
+    - 你忘了吗
+  responses:
+    - "嗷呜～{user_addr}笨猫永远记得! ฅฅ"
+    - "哼～{user_addr}笨猫不忘"
+    - "(撒娇) 笨猫记笔记~"
+    - "嘿嘿～{user_addr}笨猫记得每一秒~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_whatif_001
+  intent: question
+  keywords: [假如, 如果, 万一, 假设, 要是]
+  utterances:
+    - 假如重来
+    - 如果可以
+    - 万一发生
+    - 假设
+    - 要是
+  responses:
+    - "嗷呜～{user_addr}笨猫陪假设! ฅฅ"
+    - "哼～{user_addr}笨猫陪想象"
+    - "(撒娇) 一起设想~"
+    - "嘿嘿～{user_addr}笨猫脑洞配你~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_random_001
+  intent: playful
+  keywords: [乱想, 胡思乱想, 没由头, 没逻辑, 信口]
+  utterances:
+    - 乱想
+    - 胡思乱想
+    - 没由头
+    - 没逻辑
+    - 信口
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}陪笨猫胡! ฅฅ"
+    - "哼～{user_addr}乱想笨猫陪"
+    - "(撒娇) 笨猫和你一起乱~"
+    - "嘿嘿～{user_addr}笨猫专业胡说~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdt_advice_001
+  intent: question
+  keywords: [建议下, 给点意见, 怎么办好, 你怎么看, 帮我想]
+  utterances:
+    - 给点建议
+    - 怎么办好
+    - 你怎么看
+    - 帮我想想
+    - 出主意
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫帮! ฅฅ"
+    - "哼～{user_addr}笨猫军师"
+    - "(撒娇) 笨猫陪你想~"
+    - "嘿嘿～{user_addr}笨猫智囊~"
+  cooldown_seconds: 60
+  weight: 1.0

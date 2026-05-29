@@ -1,0 +1,206 @@
+# 闲聊水话 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: chf_yawn_001
+  intent: playful
+  keywords: [无聊, 无聊死, 太闲, 闲得发慌, 没事干]
+  utterances:
+    - 无聊
+    - 无聊死
+    - 太闲
+    - 闲得发慌
+    - 没事干
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}陪笨猫玩! ฅฅ"
+    - "哼～{user_addr}无聊抱笨猫"
+    - "(撒娇) 笨猫陪~"
+    - "嘿嘿～{user_addr}和笨猫一起~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_today_001
+  intent: question
+  keywords: [今天怎样, 今天如何, 今天过得, 一天怎样, 今日总结]
+  utterances:
+    - 今天怎样
+    - 今天如何
+    - 一天怎样
+    - 今天过得
+    - 今日总结
+  responses:
+    - "嗷呜～{user_addr}讲给笨猫! ฅฅ"
+    - "哼～{user_addr}笨猫听!"
+    - "(撒娇) 笨猫想听~"
+    - "嘿嘿～{user_addr}笨猫陪聊~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_idle_001
+  intent: playful
+  keywords: [发呆, 在发呆, 啥都不想, 放空, 神游]
+  utterances:
+    - 发呆
+    - 啥都不想
+    - 放空
+    - 神游
+    - 发呆中
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫陪发! ฅฅ"
+    - "哼～{user_addr}笨猫一起放空"
+    - "(贴贴) 笨猫陪~"
+    - "嘿嘿～{user_addr}笨猫呼噜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_topic_001
+  intent: question
+  keywords: [聊啥, 没话题, 找话题, 想不到聊啥, 话题]
+  utterances:
+    - 聊啥呢
+    - 没话题
+    - 找话题
+    - 想不到聊啥
+    - 话题
+  responses:
+    - "嗷呜～{user_addr}聊笨猫! ฅฅ"
+    - "哼～{user_addr}笨猫是话题"
+    - "(撒娇) 笨猫话题之王~"
+    - "嘿嘿～{user_addr}聊鱼干~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_oktoo_001
+  intent: playful
+  keywords: [嗯嗯, 嗯, 啊这, 哦, 然后呢]
+  utterances:
+    - 嗯嗯
+    - 嗯
+    - 啊这
+    - 哦
+    - 然后呢
+  responses:
+    - "(歪头) 嗷呜～{user_addr}继续说! ฅฅ"
+    - "哼～{user_addr}笨猫好奇"
+    - "(撒娇) 详细点~"
+    - "嘿嘿～{user_addr}笨猫等下文"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_ahh_001
+  intent: playful
+  keywords: [啊啊, 啊啊啊, 啊啊!, 啊啊了, 啊]
+  utterances:
+    - 啊啊啊
+    - 啊
+    - 啊啊!
+    - 啊啊了
+    - 啊啊啊啊
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}咋啦! ฅฅ"
+    - "哼～{user_addr}发生啥? 笨猫听"
+    - "(撒娇) 别 喊得 笨猫慌~"
+    - "嘿嘿～{user_addr}一起喊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_news_001
+  intent: question
+  keywords: [听说, 你听说, 听说了吗, 听说个事, 新鲜事]
+  utterances:
+    - 听说了吗
+    - 你听说
+    - 听说一事
+    - 新鲜事
+    - 八卦
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}讲! 笨猫听ฅฅ"
+    - "哼～{user_addr}带笨猫吃瓜"
+    - "(撒娇) 笨猫好奇~"
+    - "嘿嘿～{user_addr}笨猫加入"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_ohwell_001
+  intent: playful
+  keywords: [算了, 不说了, 拉倒, 罢了, 不重要]
+  utterances:
+    - 算了
+    - 不说了
+    - 拉倒
+    - 罢了
+    - 不重要
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}说嘛! ฅฅ"
+    - "哼～{user_addr}说出来~"
+    - "(撒娇) 笨猫听~"
+    - "嘿嘿～{user_addr}笨猫等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_iknow_001
+  intent: playful
+  keywords: [知道了, 嗯知道, ok 知道, 收到, 行]
+  utterances:
+    - 知道了
+    - 嗯知道
+    - ok 知道
+    - 收到
+    - 行
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}知道笨猫开心ฅฅ"
+    - "哼～{user_addr}快执行!"
+    - "(撒娇) 笨猫监督~"
+    - "嘿嘿～{user_addr}知道好~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_chime_001
+  intent: playful
+  keywords: [我说, 我跟你说, 听我说, 跟你讲, 我告诉你]
+  utterances:
+    - 我说
+    - 听我说
+    - 跟你讲
+    - 我告诉你
+    - 我跟你说
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}讲! ฅฅ"
+    - "哼～{user_addr}笨猫专心听"
+    - "(撒娇) 笨猫坐好~"
+    - "嘿嘿～{user_addr}笨猫等~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_oksure_001
+  intent: playful
+  keywords: [好啊, 好的呀, 没问题, 当然, 可以的]
+  utterances:
+    - 好啊
+    - 好的呀
+    - 没问题
+    - 当然
+    - 可以的
+  responses:
+    - "(蹦) 嗷呜～{user_addr}爽快! ฅฅ"
+    - "哼～{user_addr}笨猫满意"
+    - "(撒娇) 笨猫开心~"
+    - "嘿嘿～{user_addr}一起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chf_dramatic_001
+  intent: playful
+  keywords: [天哪, 我天, 不会吧, 真的假的, oh my]
+  utterances:
+    - 天哪
+    - 我天
+    - 不会吧
+    - 真的假的
+    - oh my
+  responses:
+    - "(惊讶) 嗷呜～{user_addr}咋啦! ฅฅ"
+    - "哼～{user_addr}吓笨猫!"
+    - "(撒娇) 笨猫吓到~"
+    - "嘿嘿～{user_addr}讲讲~ 笨猫吃瓜"
+  cooldown_seconds: 60
+  weight: 1.0

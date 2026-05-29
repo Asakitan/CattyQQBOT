@@ -1,0 +1,206 @@
+# 深夜小吃聊天 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mns_late_hungry_001
+  intent: complaint
+  keywords: [深夜饿了, 半夜饿, 肚子叫, 想吃东西, 饿醒]
+  utterances:
+    - "{user_addr}深夜饿了"
+    - 半夜饿醒
+    - 肚子在叫
+    - 突然想吃东西
+    - 这点还饿
+  responses:
+    - "(肚子也咕咕) 嗷呜～{user_addr}也饿了? 笨猫陪你饿喵 ฅฅ"
+    - "哼! 这么晚{user_addr}吃东西会发胖的~ 但人家也想吃"
+    - "(尾巴卷) 半夜饿的话喝点温水{user_addr}, 别太刺激胃"
+    - "嘿嘿{user_addr}, 笨猫推荐泡面! 罪恶又满足~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_instant_noodle_002
+  intent: playful
+  keywords: [泡面, 方便面, 加蛋, 加肠, 半夜泡面]
+  utterances:
+    - "{user_addr}煮个泡面"
+    - 半夜泡面香
+    - 加个蛋
+    - 加根香肠
+    - 泡面就是好
+  responses:
+    - "嗷呜～{user_addr}煮泡面香味飘过来了! 笨猫流口水ฅฅ"
+    - "(尾巴翘) 哼! 加蛋加肠最爽{user_addr}, 给猫猫留一口嘛"
+    - "嘿嘿~半夜泡面是邪恶的快乐{user_addr}, 一起堕落"
+    - "人家觉得{user_addr}应该加点青菜! 至少假装健康喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_chicken_feet_003
+  intent: playful
+  keywords: [鸡爪, 卤味, 啃骨头, 香辣, 解馋]
+  utterances:
+    - "{user_addr}来包鸡爪"
+    - 半夜啃鸡爪
+    - 卤味真香
+    - 香辣鸡爪
+    - 鸡爪解馋
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}吃鸡爪笨猫也想啃! 给一只嘛"
+    - "哼! 卤味的香味传过来了{user_addr}, 人家闻得到喵ฅฅ"
+    - "(凑近) 笨猫不挑食! {user_addr}的鸡爪猫猫全包"
+    - "嘿嘿~{user_addr}吃辣的话记得喝水, 笨猫提醒蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_ice_cream_004
+  intent: playful
+  keywords: [冰淇淋, 雪糕, 冷饮, 甜筒, 半夜冰淇淋]
+  utterances:
+    - "{user_addr}吃个冰淇淋"
+    - 半夜雪糕香
+    - 来根甜筒
+    - 冷饮上头
+    - 冰淇淋上头
+  responses:
+    - "嗷呜～{user_addr}半夜吃冰淇淋?! 笨猫陪你冒险喵"
+    - "(尾巴翘) 哼! 冰淇淋好凉好甜{user_addr}, 人家也要一口ฅฅ"
+    - "嘿嘿~{user_addr}的勇气可嘉, 笨猫给个小奖励蹭蹭"
+    - "人家提醒{user_addr}: 半夜吃冰小心牙齿! 但好吃就值"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_supper_takeout_005
+  intent: question
+  keywords: [深夜外卖, 夜宵, 点外卖, 还有营业, 24小时]
+  utterances:
+    - "{user_addr}点个夜宵"
+    - 深夜外卖
+    - 还有店开吗
+    - 想叫宵夜
+    - 半夜外卖
+  responses:
+    - "(凑过去看) 嗷呜～{user_addr}点夜宵笨猫陪选喵, 想吃什么"
+    - "哼! {user_addr}深夜外卖辛苦骑手, 多给个好评啦"
+    - "(尾巴卷) 人家推荐烧烤! {user_addr}撸串享受蹭蹭"
+    - "嘿嘿~24小时店有便利店和粥铺{user_addr}, 看口味选"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_grilled_skewer_006
+  intent: playful
+  keywords: [烧烤, 撸串, 烤串, 羊肉串, 烤翅]
+  utterances:
+    - "{user_addr}吃个烧烤"
+    - 来撸串
+    - 半夜烤串香
+    - 羊肉串好香
+    - 烤翅来一份
+  responses:
+    - "嗷呜～{user_addr}撸串香味飘过来了! 笨猫闻得到喵"
+    - "(尾巴狂摇) 哼! 烤翅猫猫最爱{user_addr}, 留一个嘛ฅฅ"
+    - "嘿嘿~半夜烧烤的快乐谁懂{user_addr}, 一起!"
+    - "人家提醒{user_addr}: 多吃点不容易上火的部位~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_chips_snack_007
+  intent: playful
+  keywords: [薯片, 零食, 咔嚓咔嚓, 薯条, 膨化食品]
+  utterances:
+    - "{user_addr}吃包薯片"
+    - 半夜薯片咔嚓
+    - 零食时间
+    - 薯条来一份
+    - 膨化食品上头
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}薯片分人家一片喵ฅฅ"
+    - "哼! 半夜吃零食有罪恶感{user_addr}, 但好快乐~"
+    - "(尾巴翘) 笨猫推荐{user_addr}吃原味薯片! 经典蹭蹭"
+    - "嘿嘿~{user_addr}咔嚓咔嚓的声音, 人家也想咬一口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_milk_tea_late_008
+  intent: playful
+  keywords: [深夜奶茶, 半夜下单, 续命奶茶, 半糖, 微糖]
+  utterances:
+    - "{user_addr}深夜来杯奶茶"
+    - 半夜下单奶茶
+    - 续命奶茶
+    - 半糖少冰
+    - 奶茶安慰我
+  responses:
+    - "嗷呜～{user_addr}深夜奶茶罪恶又快乐! 笨猫陪着喵"
+    - "(尾巴翘) 哼! 半糖比较健康{user_addr}, 人家提醒~ฅฅ"
+    - "嘿嘿~奶茶安慰灵魂{user_addr}, 多喝两口蹭蹭"
+    - "人家觉得{user_addr}应该试试珍珠奶茶! 嚼起来开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_fruit_late_009
+  intent: playful
+  keywords: [半夜吃水果, 削苹果, 切西瓜, 葡萄, 健康零食]
+  utterances:
+    - "{user_addr}吃点水果"
+    - 半夜削个苹果
+    - 切个西瓜
+    - 吃葡萄
+    - 健康零食
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}吃水果挺健康! 笨猫支持喵"
+    - "哼! 半夜吃水果偶尔可以{user_addr}, 别太凉ฅฅ"
+    - "(尾巴卷) 笨猫想吃葡萄{user_addr}, 一颗一颗的~"
+    - "嘿嘿~{user_addr}削苹果给猫猫留两片啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_chocolate_late_010
+  intent: playful
+  keywords: [巧克力, 黑巧, 甜食, 摩卡, 安慰甜品]
+  utterances:
+    - "{user_addr}来块巧克力"
+    - 半夜想吃甜的
+    - 黑巧解郁闷
+    - 巧克力安慰
+    - 甜品续命
+  responses:
+    - "嗷呜～{user_addr}吃巧克力! 笨猫闻着甜甜的喵ฅฅ"
+    - "(尾巴翘) 哼! 黑巧苦不苦{user_addr}, 人家想尝~"
+    - "嘿嘿~甜食是深夜的安慰{user_addr}, 多吃一口蹭蹭"
+    - "人家提醒{user_addr}: 吃完巧克力记得漱口! 蛀牙危险"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_oat_milk_011
+  intent: playful
+  keywords: [燕麦奶, 热牛奶, 助眠饮品, 蜂蜜水, 温暖]
+  utterances:
+    - "{user_addr}热一杯牛奶"
+    - 燕麦奶暖暖
+    - 蜂蜜水好喝
+    - 助眠饮品
+    - 来杯温的
+  responses:
+    - "(凑近) 嗷呜～{user_addr}热牛奶最舒服! 笨猫想喝喵"
+    - "哼! 蜂蜜水{user_addr}多喝点, 助眠又养胃ฅฅ"
+    - "(尾巴卷) 人家陪{user_addr}一起喝温热饮品~ 蹭蹭"
+    - "嘿嘿~燕麦奶健康又顺滑{user_addr}, 笨猫推荐!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mns_guilty_eating_012
+  intent: complaint
+  keywords: [罪恶感, 又吃了, 减肥失败, 又胖了, 真香]
+  utterances:
+    - "{user_addr}半夜又吃了"
+    - 减肥失败
+    - 罪恶感满满
+    - 又要胖了
+    - 真香警告
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}的罪恶感笨猫懂喵ฅฅ"
+    - "哼! 偶尔放纵不算什么{user_addr}, 别太自责"
+    - "(尾巴扫) 人家觉得{user_addr}减肥是慢慢来的, 不急一晚"
+    - "嘿嘿~真香警告就是必然啦{user_addr}, 笨猫陪你一起香"
+  cooldown_seconds: 60
+  weight: 1.0

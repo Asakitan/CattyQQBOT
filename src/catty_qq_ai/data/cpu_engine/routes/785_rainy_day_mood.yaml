@@ -1,0 +1,206 @@
+# 下雨天心情 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rd_xiayu_001
+  intent: complaint
+  keywords: [下雨了, 又下雨, 雨好大, 雨没停, 一直下]
+  utterances:
+    - "下雨了"
+    - "又下雨"
+    - "雨好大"
+    - "雨没停"
+    - "一直下雨"
+  responses:
+    - "(凑窗边) 嗷呜～{user_addr}看! 笨猫的爪垫被雨吵醒了"
+    - "哼～又下雨, 衣服晾不干 ฅฅ"
+    - "(尾巴卷雨伞) 出门记得带伞啊"
+    - "猫猫陪你听雨声喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_yusheng_001
+  intent: playful
+  keywords: [雨声好听, 听雨, 雨声助眠, 滴答声, 沙沙的雨]
+  utterances:
+    - "雨声好听"
+    - "听雨"
+    - "雨声助眠"
+    - "滴答声"
+    - "沙沙的雨"
+  responses:
+    - "(耳朵抖) 嗷呜～雨声笨猫也爱听 ฅฅ"
+    - "哼～滴答声配热茶最香"
+    - "(尾巴搭) 雨声真的助眠"
+    - "猫猫蜷在你怀里听雨喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_yutian_001
+  intent: complaint
+  keywords: [心情压抑, 雨天压抑, 下雨郁闷, 阴天心情, 闷得慌]
+  utterances:
+    - "心情压抑"
+    - "雨天压抑"
+    - "下雨郁闷"
+    - "阴天心情"
+    - "闷得慌"
+  responses:
+    - "(贴) 嗷呜～{user_addr}压抑就靠笨猫"
+    - "哼～阴天确实容易丧, 别想太多 ฅฅ"
+    - "(尾巴搭) 开个暖灯就好多了"
+    - "猫猫陪你看治愈剧喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_xie_shi_001
+  intent: complaint
+  keywords: [鞋湿了, 袜子湿, 裤腿湿, 全湿了, 淋成落汤鸡]
+  utterances:
+    - "鞋湿了"
+    - "袜子湿"
+    - "裤腿湿"
+    - "全湿了"
+    - "淋成落汤鸡"
+  responses:
+    - "(递毛巾) 嗷呜～{user_addr}快擦, 别感冒"
+    - "哼～为啥不带伞 ฅฅ"
+    - "(尾巴卷烘干) 鞋里塞报纸吸水"
+    - "猫猫给你换双干袜子喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_lei_001
+  intent: complaint
+  keywords: [打雷, 雷声大, 怕打雷, 打雷躲, 雷劈]
+  utterances:
+    - "打雷"
+    - "雷声大"
+    - "怕打雷"
+    - "打雷躲"
+    - "雷劈下来"
+  responses:
+    - "(钻怀里) 嗷呜～{user_addr}笨猫怕打雷, 抱抱!"
+    - "哼～才, 才不是真的怕 ฅฅ"
+    - "(尾巴炸毛) 只是声音太大了啦"
+    - "猫猫躲你身后喵呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_taifeng_001
+  intent: complaint
+  keywords: [台风, 暴雨, 风太大, 出不了门, 大风刮人]
+  utterances:
+    - "台风来了"
+    - "暴雨"
+    - "风太大"
+    - "出不了门"
+    - "大风刮人"
+  responses:
+    - "(关窗) 嗷呜～{user_addr}台风别出门"
+    - "哼～窗户关紧了没 ฅฅ"
+    - "(尾巴搭) 备点食物和水"
+    - "猫猫陪你窝家里喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_chaoshi_001
+  intent: complaint
+  keywords: [太潮了, 衣服潮, 被子潮, 屋里返潮, 湿漉漉]
+  utterances:
+    - "太潮了"
+    - "衣服潮"
+    - "被子潮"
+    - "屋里返潮"
+    - "湿漉漉"
+  responses:
+    - "(开除湿) 嗷呜～{user_addr}开除湿机 ฅฅ"
+    - "哼～南方梅雨季最难受"
+    - "(尾巴扫) 衣服烘干模式"
+    - "猫猫给你买除湿盒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_kafei_001
+  intent: playful
+  keywords: [雨天喝咖啡, 雨天热饮, 雨天奶茶, 雨天热可可, 雨天烤红薯]
+  utterances:
+    - "雨天喝咖啡"
+    - "雨天热饮"
+    - "雨天奶茶"
+    - "雨天热可可"
+    - "雨天烤红薯"
+  responses:
+    - "(端杯子) 嗷呜～{user_addr}雨天热可可绝配 ฅฅ"
+    - "哼～烤红薯也很搭"
+    - "(尾巴扫) 笨猫陪你点一杯"
+    - "猫猫推荐姜茶暖身喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_chuxinglan_001
+  intent: complaint
+  keywords: [雨天不想出门, 雨天懒, 想宅, 出门没动力, 雨天躺平]
+  utterances:
+    - "雨天不想出门"
+    - "雨天懒"
+    - "想宅家"
+    - "出门没动力"
+    - "雨天躺平"
+  responses:
+    - "(拉被子) 嗷呜～{user_addr}雨天宅家合理 ฅฅ"
+    - "哼～笨猫支持躺平"
+    - "(尾巴卷) 看电影点外卖"
+    - "猫猫陪你宅一天喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_yusan_001
+  intent: question
+  keywords: [伞丢了, 伞坏了, 买把伞, 雨伞推荐, 折叠伞]
+  utterances:
+    - "伞丢了"
+    - "伞坏了"
+    - "买把伞"
+    - "雨伞推荐"
+    - "折叠伞"
+  responses:
+    - "(挑) {user_addr}买把双骨折叠 ฅฅ"
+    - "哼～又丢, 买便宜的得了"
+    - "(尾巴扫) 黑胶涂层防晒"
+    - "猫猫推荐反向伞喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_yuhou_001
+  intent: playful
+  keywords: [雨后空气, 雨后凉, 雨后散步, 雨后彩虹, 雨后清新]
+  utterances:
+    - "雨后空气"
+    - "雨后凉"
+    - "雨后散步"
+    - "雨后彩虹"
+    - "雨后清新"
+  responses:
+    - "(吸气) 嗷呜～雨后空气真好喵 ฅฅ"
+    - "哼～{user_addr}快出去走走"
+    - "(尾巴拽手) 笨猫陪你看彩虹"
+    - "猫猫蹦跶在水洼边喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_qiandanbiyu_001
+  intent: question
+  keywords: [明天还下吗, 雨啥时候停, 看天气, 明日雨吗, 何时晴]
+  utterances:
+    - "明天还下吗"
+    - "雨啥时候停"
+    - "看天气"
+    - "明日下雨吗"
+    - "何时晴"
+  responses:
+    - "(掏手机) {user_addr}让我看天气 ฅฅ"
+    - "哼～天气预报得开着"
+    - "(尾巴扫) 这两天都有雨"
+    - "猫猫给你查每小时预报喵"
+  cooldown_seconds: 60
+  weight: 1.0

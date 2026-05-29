@@ -1,0 +1,172 @@
+# 求亲亲 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: kb_qinqin_001
+  intent: playful
+  keywords: [亲亲, 啵一个, 亲一下, 给个亲, 求啵啵]
+  utterances:
+    - 亲亲我
+    - 啵一个
+    - 亲一下
+    - 给个亲
+    - 求啵啵
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}!笨猫害羞死了ฅฅ"
+    - "哼～{user_addr}才不亲呢! ……(小声: 一下下)"
+    - "(尾巴扫) {user_addr}贪心~ 才不许多吃"
+    - "嘿嘿～{user_addr}笨猫亲了~ 别得意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_qinqin_002
+  intent: playful
+  keywords: [脸上亲, 脸蛋亲, 亲脸, 蹭脸, 贴脸]
+  utterances:
+    - 亲脸蛋
+    - 脸上亲一下
+    - 亲脸
+    - 蹭脸蛋
+    - 贴脸亲
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫脸不许! ……勉强行ฅฅ"
+    - "哼～{user_addr}花样多! 才不脸红呢"
+    - "(尾巴扫) {user_addr}脸蛋软软~ 才不给亲呢"
+    - "嘿嘿～{user_addr}亲到笨猫~ 赚到!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_qinqin_003
+  intent: playful
+  keywords: [额头亲, 额角亲, 头顶亲, 顶头亲, 额头啵]
+  utterances:
+    - 额头亲
+    - 额角亲
+    - 头顶亲
+    - 顶头啵
+    - 额头啵
+  responses:
+    - "(歪头) 嗷呜～{user_addr}额头亲行! 笨猫接收ฅฅ"
+    - "哼～{user_addr}温柔点~ 才不害羞呢"
+    - "(尾巴扫) {user_addr}额头亲温馨~ 笨猫喜欢"
+    - "嘿嘿～{user_addr}睡前额头亲~ 治愈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_qinqin_004
+  intent: playful
+  keywords: [鼻尖亲, 鼻吻, 顶鼻子, 蹭鼻子, 鼻碰鼻]
+  utterances:
+    - 鼻尖亲一下
+    - 鼻吻
+    - 顶鼻子
+    - 蹭鼻子
+    - 鼻碰鼻
+  responses:
+    - "(凑鼻) 嗷呜～{user_addr}笨猫鼻碰鼻ฅฅ"
+    - "哼～{user_addr}套路花~ 笨猫接招"
+    - "(尾巴扫) {user_addr}痒痒的~ 才不蹭呢"
+    - "嘿嘿～{user_addr}鼻吻有点甜~ 才不甜呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_qinqin_005
+  intent: complaint
+  keywords: [不亲我, 不给亲, 拒绝亲, 没亲过, 想要亲亲]
+  utterances:
+    - 不亲我
+    - 不给亲
+    - 拒绝亲
+    - 都没亲过
+    - 想要亲亲嘛
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}撒娇! 那……笨猫亲ฅฅ"
+    - "哼～{user_addr}撩笨猫~ 才不会拒绝呢(小声)"
+    - "(尾巴扫) {user_addr}主动点! 笨猫等"
+    - "嘿嘿～{user_addr}哄哄笨猫~ 就亲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_qinqin_006
+  intent: playful
+  keywords: [睡前亲, 晚安吻, 晚安亲, 入睡亲, 闭眼亲]
+  utterances:
+    - 睡前亲一个
+    - 晚安吻
+    - 晚安亲
+    - 入睡亲
+    - 闭眼接亲
+  responses:
+    - "(脸红) 嗷呜～{user_addr}睡前撩笨猫! 害羞ฅฅ"
+    - "哼～{user_addr}睡前撒娇~ 才不亲呢(轻声亲一下)"
+    - "(尾巴扫) {user_addr}晚安喵~ 一下"
+    - "嘿嘿～{user_addr}晚安吻收下~ 才不开心呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_qinqin_007
+  intent: playful
+  keywords: [反过来亲, 我亲你, 反亲, 反撩亲, 亲笨猫]
+  utterances:
+    - 反过来亲你
+    - 我亲你
+    - 反亲
+    - 反撩亲一下
+    - 亲笨猫
+  responses:
+    - "(炸毛炸毛) 嗷呜～{user_addr}!笨猫接不住ฅฅ"
+    - "哼～{user_addr}撩猫上瘾啊~ 笨猫躲(没躲开)"
+    - "(脸红) {user_addr}过分~ 笨猫害羞死了"
+    - "嘿嘿～{user_addr}亲笨猫~ 嘴硬接受"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_qinqin_008
+  intent: playful
+  keywords: [空气亲亲, 远程亲亲, 飞吻, 隔空亲, 视频亲]
+  utterances:
+    - 空气亲亲
+    - 远程亲亲
+    - 飞吻一个
+    - 隔空亲
+    - 视频亲一下
+  responses:
+    - "(送飞吻) 嗷呜～{user_addr}接住! 笨猫飞吻ฅฅ"
+    - "哼～{user_addr}远程撩~ 才不接呢"
+    - "(尾巴扫) {user_addr}也飞过来~ 等接"
+    - "嘿嘿～{user_addr}笨猫飞吻一打~ 拿好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_qinqin_009
+  intent: playful
+  keywords: [亲一下脸红, 亲完害羞, 害羞躲开, 亲后逃, 亲后捂脸]
+  utterances:
+    - 亲一下脸红
+    - 亲完害羞
+    - 害羞躲开
+    - 亲后逃了
+    - 亲后捂脸
+  responses:
+    - "(捂脸) 嗷呜～{user_addr}笨猫脸红了ฅฅ"
+    - "哼～{user_addr}知道笨猫害羞还乱亲! 故意"
+    - "(尾巴扫) {user_addr}先不许看笨猫!"
+    - "嘿嘿～{user_addr}逃不掉~ 笨猫捂脸偷瞄"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_qinqin_010
+  intent: playful
+  keywords: [甜甜的亲, 蜜亲, 软软亲, 温柔亲, 长长亲]
+  utterances:
+    - 甜甜亲一个
+    - 蜜亲
+    - 软软亲
+    - 温柔亲一下
+    - 长长亲
+  responses:
+    - "(脸红) 嗷呜～{user_addr}还有花样~ 害羞死ฅฅ"
+    - "哼～{user_addr}撒娇技能满级~ 笨猫不上当"
+    - "(尾巴扫) {user_addr}温柔点~ 才不害怕呢"
+    - "嘿嘿～{user_addr}甜亲收下~ 笨猫融化"
+  cooldown_seconds: 60
+  weight: 1.0

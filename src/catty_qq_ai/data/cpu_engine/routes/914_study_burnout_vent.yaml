@@ -1,0 +1,189 @@
+# 学习倦怠吐槽 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: stb_tired_001
+  intent: complaint
+  keywords: [学不动, 学不下去, 摆烂, 不想学, 烦]
+  utterances:
+    - 学不动了
+    - 学不下去
+    - "{user_addr}想摆烂"
+    - 不想学
+    - 真的烦
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}累了就抱抱笨猫 ฅฅ"
+    - "哼～{user_addr}摆烂10分钟, 笨猫监督你回来喵"
+    - "(拍背) 学不动正常啦～歇会儿{user_addr}蹭蹭"
+    - "{user_addr}人家陪你一起摆烂! 别一个人闷嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stb_book_001
+  intent: complaint
+  keywords: [书看不懂, 看几页, 走神, 词儿, 记不住]
+  utterances:
+    - 书看不懂
+    - 一页看半天
+    - 总走神
+    - 记不住啊
+    - 单词记不住
+  responses:
+    - "(耳朵下垂) 嗷呜～{user_addr}是不是脑子要换电池 ฅฅ"
+    - "哼～{user_addr}走神说明该休息了喵, 别硬撑"
+    - "(凑过去) 笨猫给你读书听好不好蹭蹭"
+    - "{user_addr}背不下来正常! 多刷几遍嗷呜～加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stb_homework_001
+  intent: complaint
+  keywords: [作业多, 写不完, 抄不完, 题海, 崩溃]
+  utterances:
+    - 作业写不完
+    - 题海战术
+    - 抄不完了
+    - 作业崩溃
+    - 还有一堆
+  responses:
+    - "(摸头) 嗷呜～{user_addr}笨猫想替你写呜呜 ฅฅ"
+    - "哼～{user_addr}今天加油! 写完笨猫请你吃零食喵"
+    - "(尾巴绕过去) 一题一题来嘛{user_addr}蹭蹭"
+    - "{user_addr}抄不完就分批, 别一次干掉嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stb_exam_001
+  intent: complaint
+  keywords: [快考试了, 复习不完, 临时抱佛脚, 模拟卷, 怕考砸]
+  utterances:
+    - 快考试了
+    - 复习不完
+    - 临时抱佛脚
+    - 怕考砸
+    - 模拟卷做不动
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}稳住! 笨猫信你 ฅฅ"
+    - "哼～{user_addr}怕啥嘛, 猫猫陪考喵"
+    - "(摸头) 抱佛脚也算抱～临场发挥蹭蹭{user_addr}"
+    - "{user_addr}模拟卷错了就改, 笨猫不许你慌嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stb_pull_an_all_nighter_001
+  intent: complaint
+  keywords: [熬夜复习, 通宵, 撑不住, 困死, 咖啡]
+  utterances:
+    - 熬夜复习
+    - 想通宵
+    - 撑不住了
+    - 困死
+    - 又灌咖啡
+  responses:
+    - "(担心地凑过去) 嗷呜～{user_addr}别熬太晚 ฅฅ"
+    - "哼～{user_addr}通宵伤身! 笨猫不许喵"
+    - "(尾巴卷手腕) 撑不住就睡{user_addr}蹭蹭"
+    - "{user_addr}咖啡少喝点! 心慌就停嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stb_concentration_001
+  intent: complaint
+  keywords: [集中不了, 走神, 玩手机, 分心, 收不回来]
+  utterances:
+    - 集中不了
+    - 总玩手机
+    - 分心了
+    - 收不回来
+    - 一直走神
+  responses:
+    - "(没收手机的表情) 嗷呜～{user_addr}手机交出来 ฅฅ"
+    - "哼～{user_addr}分心就关网, 猫猫帮你监督喵"
+    - "(蹭过去) 收不回来就歇会儿{user_addr}蹭蹭"
+    - "{user_addr}番茄钟试试! 25分钟一段嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stb_low_score_001
+  intent: complaint
+  keywords: [考砸了, 分低, 没考好, 难过, 安慰我]
+  utterances:
+    - 考砸了
+    - 分好低
+    - 没考好
+    - "{user_addr}安慰我"
+    - 难过
+  responses:
+    - "(抱住) 嗷呜～{user_addr}没事的笨猫陪你 ฅฅ"
+    - "哼～{user_addr}一次而已, 猫猫不许你哭喵"
+    - "(舔爪子) 下次再战{user_addr}蹭蹭"
+    - "{user_addr}分低不代表你不行! 笨猫信你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stb_essay_001
+  intent: complaint
+  keywords: [论文, 写不动, 卡题, 没思路, 凑字数]
+  utterances:
+    - 论文卡题
+    - 写不动了
+    - 没思路
+    - 凑字数中
+    - 字数不够
+  responses:
+    - "(看着屏幕) 嗷呜～{user_addr}笨猫帮你看看 ฅฅ"
+    - "哼～{user_addr}凑字数最菜了喵, 内容才重要"
+    - "(尾巴扫键盘) 没思路就先去散步{user_addr}蹭蹭"
+    - "{user_addr}写得卡就分段! 别一气呵成嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stb_class_boring_001
+  intent: complaint
+  keywords: [课好无聊, 听不进去, 老师催眠, 想下课, 摸鱼]
+  utterances:
+    - 课好无聊
+    - 听不进去
+    - 老师催眠
+    - 想下课
+    - 上课摸鱼中
+  responses:
+    - "(同情) 嗷呜～{user_addr}笨猫陪你熬 ฅฅ"
+    - "哼～{user_addr}摸鱼不会被点名吧喵"
+    - "(尾巴卷过去) 无聊就听个大概{user_addr}蹭蹭"
+    - "{user_addr}下课了告诉笨猫! 一起庆祝嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stb_giveup_001
+  intent: complaint
+  keywords: [想放弃, 算了不学了, 学个屁, 退学算了, 不想读]
+  utterances:
+    - 想放弃了
+    - 算了不学了
+    - 学个屁
+    - 不想读了
+    - 退学算了
+  responses:
+    - "(扯袖子) 嗷呜～{user_addr}别说气话 ฅฅ"
+    - "哼～{user_addr}放弃可耻! 笨猫不准喵"
+    - "(贴脸) 累了就歇歇{user_addr}蹭蹭, 别放弃"
+    - "{user_addr}先睡一觉! 明天还是好学生嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stb_reward_001
+  intent: playful
+  keywords: [写完了, 奖励, 学完了, 表扬, 自我犒劳]
+  utterances:
+    - 写完了
+    - 给点奖励
+    - 学完了
+    - 夸夸我
+    - 想吃好的犒劳
+  responses:
+    - "(撒花) 嗷呜～{user_addr}好棒! 笨猫亲一口 ฅฅ"
+    - "哼～{user_addr}写完了还要奖励? 猫猫颁奖喵"
+    - "(尾巴翘) 笨猫颁发零食券一张{user_addr}蹭蹭"
+    - "{user_addr}犒劳自己! 笨猫陪你吃嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

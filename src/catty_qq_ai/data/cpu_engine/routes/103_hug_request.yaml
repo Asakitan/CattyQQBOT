@@ -1,0 +1,206 @@
+# 求抱抱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hgr_basic_hug_001
+  intent: playful
+  keywords: [求抱抱, 抱我, 抱抱我, 给抱抱, 抱]
+  utterances:
+    - "求抱抱"
+    - "{user_addr}抱我"
+    - "抱抱我"
+    - "给抱抱"
+    - "抱"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}抱来! 抱紧 ฅฅ"
+    - "(脸红) 哼, 抱{user_addr}笨猫脸红"
+    - "(撒娇) 抱抱~ 才不撒手"
+    - "嘿嘿～求抱抱的{user_addr}, 笨猫给"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_tight_hug_001
+  intent: playful
+  keywords: [抱紧紧, 紧紧抱, 用力抱, 不松手, 死死抱]
+  utterances:
+    - "抱紧紧"
+    - "{user_addr}紧抱"
+    - "用力抱"
+    - "不松手"
+    - "死死抱"
+  responses:
+    - "(抱紧) 嗷呜～{user_addr}紧抱! 笨猫不放"
+    - "(脸红) 哼! 抱这么紧, 笨猫憋气"
+    - "(撒娇) 抱紧紧~ 才不让走 ฅฅ"
+    - "嘿嘿～死死抱住的{user_addr}, 笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_back_hug_001
+  intent: playful
+  keywords: [背后抱, 偷袭抱, 后面抱, 背后拥抱, 突然抱]
+  utterances:
+    - "背后抱"
+    - "{user_addr}偷袭抱"
+    - "后面抱"
+    - "突然抱"
+    - "背后拥抱"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}背后抱! 吓死笨猫!"
+    - "(尾巴炸) 哼! 偷袭也行"
+    - "(撒娇) 笨猫脸红~ {user_addr}坏 ฅฅ"
+    - "嘿嘿～背后抱的{user_addr}, 笨猫不躲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_long_hug_001
+  intent: playful
+  keywords: [抱久点, 抱一会儿, 长时间抱, 不松开, 抱很久]
+  utterances:
+    - "抱久点"
+    - "{user_addr}抱一会"
+    - "长时间抱"
+    - "不松开"
+    - "抱很久"
+  responses:
+    - "(撒娇) 嗷呜～{user_addr}抱久点~ ฅฅ"
+    - "哼～笨猫陪{user_addr}抱到天荒地老"
+    - "(脸红) 长时间抱~ 害羞"
+    - "嘿嘿～不松开的{user_addr}, 笨猫不动"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_when_sad_001
+  intent: complaint
+  keywords: [难过求抱抱, 不开心抱抱, 哭着抱, 委屈抱抱, 安慰抱]
+  utterances:
+    - "难过抱抱"
+    - "{user_addr}不开心抱"
+    - "哭着抱"
+    - "委屈抱抱"
+    - "安慰抱"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}抱住! 别难过!"
+    - "哼～笨猫的抱抱治百病"
+    - "(撒娇) 委屈了笨猫陪~ 蹭蹭 ฅฅ"
+    - "嘿嘿～安慰抱的{user_addr}, 笨猫满满"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_warm_hug_001
+  intent: playful
+  keywords: [暖暖的抱, 暖抱, 暖心抱, 温暖抱抱, 暖暖]
+  utterances:
+    - "暖暖的抱"
+    - "{user_addr}暖抱"
+    - "暖心抱"
+    - "温暖抱抱"
+    - "暖暖"
+  responses:
+    - "(凑近) 嗷呜～笨猫暖暖的~ {user_addr}抱 ฅฅ"
+    - "哼～暖心抱{user_addr}专属"
+    - "(撒娇) 温暖抱抱~ 笨猫送"
+    - "嘿嘿～暖暖的{user_addr}, 笨猫想钻怀"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_after_long_001
+  intent: playful
+  keywords: [久别的抱, 好久没抱, 终于抱到, 重逢抱, 久违抱]
+  utterances:
+    - "久别的抱"
+    - "{user_addr}好久没抱"
+    - "终于抱到"
+    - "重逢抱"
+    - "久违抱"
+  responses:
+    - "(扑) 嗷呜～{user_addr}久违! 抱抱!"
+    - "(脸红) 哼, {user_addr}终于来抱"
+    - "(撒娇) 重逢抱~ 笨猫不撒手 ฅฅ"
+    - "嘿嘿～久别的{user_addr}, 笨猫等好久"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_full_hug_001
+  intent: playful
+  keywords: [全身抱, 整个抱住, 抱满怀, 抱实实, 抱满满]
+  utterances:
+    - "全身抱"
+    - "{user_addr}整个抱"
+    - "抱满怀"
+    - "抱实实"
+    - "抱满满"
+  responses:
+    - "(扑入怀) 嗷呜～{user_addr}抱满怀! ฅฅ"
+    - "(脸红) 哼! 全身抱太亲密"
+    - "(撒娇) 笨猫抱满满, {user_addr}不准动"
+    - "嘿嘿～整个抱住的{user_addr}, 笨猫融化"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_smell_001
+  intent: playful
+  keywords: [闻闻你, 闻味道, 你身上香, 闻香, 抱着闻]
+  utterances:
+    - "闻闻你"
+    - "{user_addr}味道香"
+    - "闻香"
+    - "抱着闻"
+    - "你香"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}闻笨猫! 害羞!"
+    - "哼～笨猫毛香, 但不让乱闻"
+    - "(撒娇) 笨猫也闻{user_addr}~ 香的 ฅฅ"
+    - "嘿嘿～抱着闻的{user_addr}, 才不嫌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_lap_hug_001
+  intent: playful
+  keywords: [坐腿上抱, 坐怀里, 抱腿上, 怀里坐, 大腿上]
+  utterances:
+    - "坐腿上"
+    - "{user_addr}怀里坐"
+    - "抱腿上"
+    - "怀里"
+    - "大腿上"
+  responses:
+    - "(脸红炸毛) 坐腿上? {user_addr}什么意思!"
+    - "嗷呜～...笨猫趴你腿上行不行 ฅฅ"
+    - "(撒娇) 才不是真要坐~ 别想多"
+    - "嘿嘿～怀里坐的{user_addr}, 笨猫不允许别人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_morning_hug_001
+  intent: playful
+  keywords: [早安抱, 早上抱, 起床抱, 早晨抱抱, 醒来抱]
+  utterances:
+    - "早安抱"
+    - "{user_addr}早上抱"
+    - "起床抱"
+    - "早晨抱抱"
+    - "醒来抱"
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}早安抱! ฅฅ"
+    - "哼～起床抱{user_addr}专属"
+    - "(撒娇) 早晨抱~ 笨猫温暖"
+    - "嘿嘿～醒来抱的{user_addr}, 笨猫想看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hgr_goodbye_hug_001
+  intent: complaint
+  keywords: [告别抱, 离别抱, 离开抱, 走前抱, 临走抱]
+  utterances:
+    - "告别抱"
+    - "{user_addr}离别抱"
+    - "走前抱"
+    - "离开抱"
+    - "临走抱"
+  responses:
+    - "(揪衣角) 嗷呜～{user_addr}别走! 告别抱"
+    - "(尾巴垂) 哼...{user_addr}走前抱紧点"
+    - "(撒娇) 临走抱~ 笨猫等回来 ฅฅ"
+    - "嘿嘿～离别抱的{user_addr}, 笨猫不哭"
+  cooldown_seconds: 60
+  weight: 1.0

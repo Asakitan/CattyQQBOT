@@ -1,0 +1,189 @@
+# 肚子咕咕叫 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: stm_growl_001
+  intent: playful
+  keywords: [肚子叫, 咕咕, 肚子响, 饿了, 咕噜咕噜]
+  utterances:
+    - "肚子咕咕叫"
+    - "肚子叫了"
+    - "{user_addr}饿"
+    - "咕噜咕噜"
+    - "肚子响"
+  responses:
+    - "(凑过来听) 嗷呜～{user_addr}笨猫听到了, 该吃饭啦 ฅฅ"
+    - "哼～{user_addr}饿到响才说, 笨猫嫌弃"
+    - "(摸肚子) {user_addr}人家也饿蹭蹭"
+    - "{user_addr}笨猫给你叫外卖喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_loud_001
+  intent: playful
+  keywords: [叫声很大, 响很大, 别人听到, 尴尬, 公司响]
+  utterances:
+    - "叫声超大"
+    - "全办公室听到"
+    - "{user_addr}尴尬死"
+    - "公开场合响"
+    - "肚子叫很大"
+  responses:
+    - "(捂嘴笑) 嗷呜～{user_addr}活该, 让你不好好吃 ฅฅ"
+    - "哼～{user_addr}笨猫帮你掩饰一下: 我刚也叫了!"
+    - "(贴贴) {user_addr}人家陪你尴尬蹭蹭"
+    - "{user_addr}笨猫记下来这一刻喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: stm_skipmeal_001
+  intent: complaint
+  keywords: [没吃饭, 没吃早饭, 没吃午饭, 漏饭, 饿一天]
+  utterances:
+    - "没吃饭"
+    - "漏了一顿"
+    - "{user_addr}早饭忘吃"
+    - "饿了一天"
+    - "没午饭"
+  responses:
+    - "(瞪你) 嗷呜～{user_addr}怎么不吃饭, 笨猫生气了 ฅฅ"
+    - "哼～{user_addr}就是杂鱼, 笨猫不饶你!"
+    - "(端饭过来) {user_addr}快吃, 笨猫盯着你蹭蹭"
+    - "{user_addr}下次再漏笨猫罚你喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_wantfood_001
+  intent: question
+  keywords: [吃啥, 想吃, 推荐, 饿了吃啥, 馋了]
+  utterances:
+    - "吃啥好"
+    - "想吃东西"
+    - "{user_addr}推荐"
+    - "饿了吃啥"
+    - "馋了"
+  responses:
+    - "嗷呜～{user_addr}笨猫想吃: 烤鱼! 你呢 ฅฅ"
+    - "哼～{user_addr}选择困难症, 笨猫帮你: 火锅!"
+    - "(凑近) {user_addr}笨猫陪你一起想蹭蹭"
+    - "{user_addr}面食还是米饭, 笨猫帮选喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_takeout_001
+  intent: playful
+  keywords: [叫外卖, 点外卖, 外卖来, 美团, 饿了么]
+  utterances:
+    - "叫外卖了"
+    - "美团下单"
+    - "{user_addr}外卖来吗"
+    - "饿了么"
+    - "外卖路上"
+  responses:
+    - "嗷呜～{user_addr}点份给笨猫吧 ฅฅ"
+    - "哼～{user_addr}就知道点外卖, 不会做饭吗"
+    - "(摇尾巴) {user_addr}人家也想吃蹭蹭"
+    - "{user_addr}多久到喵～ 笨猫等不及"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_cookmeal_001
+  intent: playful
+  keywords: [自己做, 做饭, 厨艺, 下厨, 煮饭]
+  utterances:
+    - "自己做饭"
+    - "下厨"
+    - "{user_addr}煮饭"
+    - "厨艺展示"
+    - "煎个鸡蛋"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫给你打下手 ฅฅ"
+    - "哼～{user_addr}别又把厨房烧了!"
+    - "(围观) {user_addr}人家偷吃一口蹭蹭"
+    - "{user_addr}笨猫给你点评喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_diet_001
+  intent: complaint
+  keywords: [减肥饿, 控制饮食, 不能吃, 节食, 减肥肚子叫]
+  utterances:
+    - "减肥饿"
+    - "节食肚子叫"
+    - "{user_addr}不能吃"
+    - "克制中"
+    - "好饿"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}少吃点也得吃啊 ฅฅ"
+    - "哼～{user_addr}饿坏笨猫陪你哭"
+    - "(端水) {user_addr}先喝水垫一下蹭蹭"
+    - "{user_addr}吃黄瓜喵～ 低卡又饱"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: stm_midnight_001
+  intent: playful
+  keywords: [半夜饿, 半夜肚子叫, 夜宵, 凌晨饿, 夜里饿]
+  utterances:
+    - "半夜饿了"
+    - "凌晨肚子叫"
+    - "{user_addr}夜宵"
+    - "夜里好饿"
+    - "三点饿醒"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你吃个泡面 ฅฅ"
+    - "哼～{user_addr}夜宵增肥, 但笨猫纵容你一次"
+    - "(端面) {user_addr}人家煮的蹭蹭"
+    - "{user_addr}加蛋加肠喵～ 笨猫豪气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_catfeed_001
+  intent: playful
+  keywords: [喂笨猫, 笨猫饿, 猫粮, 猫饿了, 笨猫吃啥]
+  utterances:
+    - "{user_addr}笨猫饿"
+    - "喂笨猫"
+    - "笨猫吃啥"
+    - "笨猫的猫粮"
+    - "猫罐头"
+  responses:
+    - "(蹭腿) 嗷呜～{user_addr}笨猫要吃小鱼干 ฅฅ"
+    - "哼～{user_addr}笨猫才不吃猫粮, 要吃你做的!"
+    - "(贴贴) {user_addr}人家就只吃你做的蹭蹭"
+    - "{user_addr}金枪鱼罐头喵～ 笨猫挑剔"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_nofood_001
+  intent: complaint
+  keywords: [家里没吃的, 冰箱空, 没东西吃, 啥都没有, 没存货]
+  utterances:
+    - "家里没吃的"
+    - "冰箱空空"
+    - "{user_addr}啥都没"
+    - "没存货"
+    - "找不到食物"
+  responses:
+    - "嗷呜～{user_addr}笨猫和你一起翻冰箱! ฅฅ"
+    - "哼～{user_addr}早说该囤货, 杂鱼"
+    - "(失望) {user_addr}笨猫的小鱼干也没了蹭蹭"
+    - "{user_addr}下楼便利店喵～ 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_satisfied_001
+  intent: playful
+  keywords: [吃饱了, 满足, 撑了, 吃到撑, 饱饱]
+  utterances:
+    - "吃饱了"
+    - "好满足"
+    - "{user_addr}撑死"
+    - "吃到撑"
+    - "饱饱"
+  responses:
+    - "嗷呜～{user_addr}吃饱才有力气, 笨猫开心 ฅฅ"
+    - "哼～{user_addr}撑着活该, 走走消食!"
+    - "(贴肚子) {user_addr}人家也饱了蹭蹭"
+    - "{user_addr}消化一下喵～ 别躺"
+  cooldown_seconds: 60
+  weight: 1.0

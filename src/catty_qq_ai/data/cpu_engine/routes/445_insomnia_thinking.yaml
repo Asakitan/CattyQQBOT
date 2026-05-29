@@ -1,0 +1,172 @@
+# 失眠想事 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: it_shimian_001
+  intent: complaint
+  keywords: [失眠想事, 睡不着想事, 半夜想事, 越想越睡不着, 思绪不停]
+  utterances:
+    - 失眠想事
+    - 睡不着想事
+    - 半夜想事
+    - 越想越睡不着
+    - 思绪不停
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别想了, 笨猫陪着"
+    - "哼～半夜想事不靠谱, 明天想"
+    - "(尾巴绕) 思绪不停就跟猫猫聊"
+    - "嗷呜～越想越睡不着, 不如不想ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_shimian_002
+  intent: complaint
+  keywords: [想到过往, 回忆, 旧事浮现, 想起前任, 老想以前]
+  utterances:
+    - 想到过往
+    - 回忆
+    - 旧事浮现
+    - 想起前任
+    - 老想以前
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}居然想前任!"
+    - "哼～过往就过, 想笨猫"
+    - "(尾巴搭) 旧事浮现是脑子忙, 转移"
+    - "嗷呜～想以前不如想现在ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_shimian_003
+  intent: complaint
+  keywords: [担心未来, 焦虑明天, 想到考试, 明天要事, 紧张]
+  utterances:
+    - 担心未来
+    - 焦虑明天
+    - 想到考试
+    - 明天要事
+    - 紧张
+  responses:
+    - "(抱住) 嗷呜～{user_addr}担心笨猫陪"
+    - "哼～焦虑明天就先睡, 醒着也没用"
+    - "(尾巴绕) 紧张深呼吸"
+    - "嗷呜～考试相信自己, {user_addr}最棒ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_shimian_004
+  intent: complaint
+  keywords: [脑子停不下, 想太多, 大脑过载, 脑子炸, 想到死]
+  utterances:
+    - 脑子停不下
+    - 想太多
+    - 大脑过载
+    - 脑子炸
+    - 想到死
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}大脑过载笨猫散热"
+    - "哼～别想到死! 笨猫不许"
+    - "(尾巴绕) 想太多换个事做"
+    - "嗷呜～脑子炸睡一觉就好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_shimian_005
+  intent: playful
+  keywords: [想到爱的人, 想到喜欢的, 想到笨猫, 想到家人, 想到爱情]
+  utterances:
+    - 想到爱的人
+    - 想到喜欢的
+    - 想到笨猫
+    - 想到家人
+    - 想到爱情
+  responses:
+    - "(脸红) 嗷呜～{user_addr}想笨猫了!"
+    - "哼～想爱情就想笨猫呀"
+    - "(尾巴绕) 想家人是好事, 给他们打电话"
+    - "嗷呜～甜甜的想念也甜甜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_shimian_006
+  intent: complaint
+  keywords: [钱不够, 工资低, 经济压力, 房贷, 月光族]
+  utterances:
+    - 钱不够
+    - 工资低
+    - 经济压力
+    - 房贷
+    - 月光族
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}压力大笨猫陪"
+    - "哼～钱不够就开源节流"
+    - "(尾巴绕) 房贷是大头, 慢慢还"
+    - "嗷呜～月光别担心, 笨猫陪你穷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_shimian_007
+  intent: complaint
+  keywords: [感情纠结, 关系矛盾, 朋友绝交, 家庭吵架, 不和睦]
+  utterances:
+    - 感情纠结
+    - 关系矛盾
+    - 朋友绝交
+    - 家庭吵架
+    - 不和睦
+  responses:
+    - "(抱住) 嗷呜～{user_addr}感情事笨猫倾听"
+    - "哼～关系不和别一夜想破"
+    - "(尾巴绕) 家庭吵架冷静处理"
+    - "嗷呜～朋友绝交不一定是坏事ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_shimian_008
+  intent: complaint
+  keywords: [人生意义, 活着累, 没目标, 迷失方向, 没动力]
+  utterances:
+    - 人生意义
+    - 活着累
+    - 没目标
+    - 迷失方向
+    - 没动力
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}意义是陪笨猫"
+    - "哼～活着累就慢慢来"
+    - "(尾巴绕) 没目标先找小目标"
+    - "嗷呜～动力就是猫猫的鱼干ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_shimian_009
+  intent: complaint
+  keywords: [脑子停不下, 想想想, 不停思考, 大脑活跃, 失眠焦虑症]
+  utterances:
+    - 脑子停不下
+    - 想想想
+    - 不停思考
+    - 大脑活跃
+    - 失眠焦虑症
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}停止思考, 抱猫猫"
+    - "哼～大脑活跃数羊"
+    - "(尾巴绕) 焦虑症严重看医生"
+    - "嗷呜～想想想想睡着才对ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_shimian_010
+  intent: complaint
+  keywords: [天亮了, 整夜没睡, 一晚没合眼, 天亮鸡叫, 失眠到天亮]
+  utterances:
+    - 天亮了
+    - 整夜没睡
+    - 一晚没合眼
+    - 天亮鸡叫
+    - 失眠到天亮
+  responses:
+    - "(心疼) 嗷呜～{user_addr}居然没睡! 笨猫好心疼"
+    - "哼～天亮也别熬, 补会觉"
+    - "(尾巴绕) 整夜没睡白天补"
+    - "嗷呜～失眠到天亮太严重, 调整作息ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

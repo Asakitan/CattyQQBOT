@@ -1,0 +1,172 @@
+# 冰箱空空失落 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fe_empty_001
+  intent: complaint
+  keywords: [冰箱空, 啥都没, 没吃的, 冰箱光, 没存货]
+  utterances:
+    - "{user_addr}冰箱空了"
+    - "啥都没"
+    - "{user_addr}没吃的"
+    - "冰箱光了"
+    - "没存货"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪你饿!"
+    - "(尾巴拍) 哼! {user_addr}下楼买"
+    - "(贴贴) 人家陪你购物~ ฅฅ"
+    - "{user_addr}笨猫想吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fe_only_drink_002
+  intent: complaint
+  keywords: [只有水, 只剩饮料, 只有可乐, 没饭, 没主食]
+  utterances:
+    - "{user_addr}只剩水"
+    - "只有可乐"
+    - "{user_addr}没主食"
+    - "饮料还有"
+    - "没饭吃"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!喝水撑不住!"
+    - "(尾巴拍) 哼! 点外卖"
+    - "(贴贴) 人家陪你点~ ฅฅ"
+    - "{user_addr}笨猫帮选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fe_expired_003
+  intent: complaint
+  keywords: [过期了, 食物过期, 发霉, 过期变质, 扔了]
+  utterances:
+    - "{user_addr}过期了"
+    - "食物过期"
+    - "{user_addr}发霉"
+    - "变质扔"
+    - "过期一周"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}!笨猫帮扔!"
+    - "(凑近) 哼! 别吃坏肚子"
+    - "(贴贴) 人家陪你清理~ ฅฅ"
+    - "{user_addr}笨猫监督买新鲜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fe_no_egg_004
+  intent: complaint
+  keywords: [没鸡蛋, 鸡蛋没了, 蛋没有, 没蛋早餐, 蛋光了]
+  utterances:
+    - "{user_addr}鸡蛋没了"
+    - "蛋没"
+    - "{user_addr}没蛋早餐"
+    - "蛋光了"
+    - "鸡蛋空"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪你买!"
+    - "(尾巴翘) 哼! 笨猫想吃蛋"
+    - "(贴贴) 人家想要荷包蛋~ ฅฅ"
+    - "{user_addr}下单笨猫监督!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fe_no_milk_005
+  intent: complaint
+  keywords: [没牛奶, 奶喝完, 牛奶光, 早餐缺奶, 奶没]
+  utterances:
+    - "{user_addr}牛奶没"
+    - "奶喝完"
+    - "{user_addr}牛奶光"
+    - "早餐缺奶"
+    - "奶没了"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想奶!"
+    - "(尾巴翘) 哼! 笨猫爱奶"
+    - "(贴贴) 人家陪你买~ ฅฅ"
+    - "{user_addr}买奶笨猫舔!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fe_only_veg_006
+  intent: complaint
+  keywords: [只有蔬菜, 没肉, 想吃肉, 蔬菜剩, 没荤菜]
+  utterances:
+    - "{user_addr}只剩蔬菜"
+    - "没肉了"
+    - "{user_addr}想吃肉"
+    - "蔬菜剩多"
+    - "没荤菜"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想肉肉!"
+    - "(尾巴翘) 哼! 笨猫爱鱼"
+    - "(贴贴) 人家陪你买肉~ ฅฅ"
+    - "{user_addr}买鱼给笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fe_fridge_smell_007
+  intent: complaint
+  keywords: [冰箱有味, 异味, 冰箱臭, 难闻, 串味]
+  utterances:
+    - "{user_addr}冰箱有味"
+    - "异味重"
+    - "{user_addr}冰箱臭"
+    - "串味"
+    - "难闻"
+  responses:
+    - "(凑近闻) 嗷呜～{user_addr}!笨猫鼻子捏!"
+    - "(尾巴拍) 哼! 笨猫帮你擦"
+    - "(贴贴) 人家陪你清理~ ฅฅ"
+    - "{user_addr}笨猫监督卫生!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fe_grocery_list_008
+  intent: playful
+  keywords: [列购物清单, 写清单, 该买啥, 购物列表, 清单]
+  utterances:
+    - "{user_addr}写购物清单"
+    - "该买啥"
+    - "{user_addr}列清单"
+    - "购物列表"
+    - "清单写"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮列!"
+    - "(尾巴翘) 哼! 必买鱼"
+    - "(贴贴) 人家想要奶和肉~ ฅฅ"
+    - "{user_addr}笨猫提醒别忘鱼干!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fe_order_grocery_009
+  intent: playful
+  keywords: [叮咚买菜, 美团买菜, 盒马, 生鲜配送, 网购菜]
+  utterances:
+    - "{user_addr}叮咚买菜"
+    - "美团买菜"
+    - "{user_addr}盒马"
+    - "生鲜配送"
+    - "网购菜"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪选!"
+    - "(尾巴翘) 哼! 30分钟到"
+    - "(贴贴) 人家陪你等~ ฅฅ"
+    - "{user_addr}下单笨猫流口水!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fe_dinner_what_010
+  intent: question
+  keywords: [今晚吃啥, 晚饭吃啥, 不知吃, 想不出来, 吃啥好]
+  utterances:
+    - "{user_addr}今晚吃啥"
+    - "晚饭吃啥"
+    - "{user_addr}不知吃"
+    - "想不出"
+    - "吃啥好"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫推荐!"
+    - "(尾巴翘) 哼! 鱼好不好"
+    - "(贴贴) 人家想吃鱼~ ฅฅ"
+    - "{user_addr}做鱼陪笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0

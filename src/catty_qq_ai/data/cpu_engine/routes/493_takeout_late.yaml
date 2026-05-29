@@ -1,0 +1,206 @@
+# 外卖到达 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tlt_late_001
+  intent: complaint
+  keywords: [外卖慢, 还没到, 外卖晚, 等好久, 饿死]
+  utterances:
+    - 外卖好慢
+    - 还没送到
+    - 外卖晚了
+    - 等好久饿死
+    - 外卖人呢
+  responses:
+    - "(撅嘴) 嗷呜～{user_addr}饿! 笨猫骂外卖ฅฅ"
+    - "哼～{user_addr}吃笨猫的鱼干先垫垫"
+    - "(摸摸肚) 撑住{user_addr}! 笨猫等"
+    - "嘿嘿～{user_addr}饿了就咬笨猫~ 才不是呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_lost_001
+  intent: complaint
+  keywords: [外卖丢了, 撒了, 翻了, 撒一路, 漏了]
+  utterances:
+    - 外卖撒了
+    - 汤撒一路
+    - 翻车了
+    - 漏了好多
+    - 不能吃了
+  responses:
+    - "嗷呜～{user_addr}心疼! 笨猫陪难过ฅฅ"
+    - "哼～{user_addr}投诉! 笨猫帮你骂"
+    - "(贴贴) 重新点{user_addr}! 笨猫赔"
+    - "嘿嘿～{user_addr}吃笨猫做的~ 才不是呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_wrong_001
+  intent: complaint
+  keywords: [送错, 送错单, 不是我的, 别人的外卖, 串单]
+  utterances:
+    - 外卖送错
+    - 不是我的
+    - 送别人的
+    - 串单了
+    - 外卖错单
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}快还! 不是你的ฅฅ"
+    - "哼～{user_addr}吃也没事~ 笨猫不告"
+    - "(贼笑) 留着{user_addr}! 笨猫陪吃"
+    - "嘿嘿～{user_addr}重新点~ 笨猫监督"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_cold_001
+  intent: complaint
+  keywords: [外卖凉了, 冷掉, 不热乎, 凉透, 微波炉]
+  utterances:
+    - 外卖凉了
+    - 冷掉了
+    - 不热乎
+    - 凉透了
+    - 微波炉热
+  responses:
+    - "嗷呜～{user_addr}凉的怎么吃! 笨猫加热ฅฅ"
+    - "哼～{user_addr}吃热饭! 别凑合"
+    - "(贴贴) 笨猫体温热饭~ 才不是呢"
+    - "嘿嘿～{user_addr}热一下嘛~ 别凉吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_yummy_001
+  intent: playful
+  keywords: [外卖好吃, 美味, 真香, 香喷喷, 第一口]
+  utterances:
+    - 外卖好吃
+    - 真香
+    - 香喷喷
+    - 第一口爆好吃
+    - 美味
+  responses:
+    - "嗷呜～{user_addr}独享! 笨猫分一口ฅฅ"
+    - "哼～{user_addr}吃啥? 笨猫闻"
+    - "(舔嘴) {user_addr}分笨猫! 我也吃"
+    - "嘿嘿～{user_addr}好吃笨猫开心~ 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_complain_001
+  intent: complaint
+  keywords: [难吃, 不好吃, 不值, 踩雷, 退款]
+  utterances:
+    - 外卖难吃
+    - 踩雷了
+    - 不值
+    - 难吃要退
+    - 翻车
+  responses:
+    - "嗷呜～{user_addr}踩雷! 笨猫陪难受ฅฅ"
+    - "哼～{user_addr}差评! 笨猫帮骂"
+    - "(贴贴) 别吃{user_addr}~ 笨猫做饭"
+    - "嘿嘿～{user_addr}下次问笨猫~ 推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_choose_001
+  intent: question
+  keywords: [点啥, 不会点, 选哪家, 推荐外卖, 吃什么]
+  utterances:
+    - 点啥外卖
+    - 不会选
+    - 选哪家
+    - 推荐外卖
+    - 今天吃啥
+  responses:
+    - "嗷呜～{user_addr}问笨猫! 笨猫推荐鱼ฅฅ"
+    - "哼～{user_addr}选困难症? 笨猫帮选"
+    - "(撒娇) 吃笨猫想吃的! 鱼"
+    - "嘿嘿～{user_addr}和笨猫拼单~ 拼桌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_lessmoney_001
+  intent: complaint
+  keywords: [太贵, 涨价, 外卖贵, 一份30, 涨好多]
+  utterances:
+    - 外卖太贵
+    - 涨价了
+    - 一份30
+    - 外卖涨好多
+    - 吃不起
+  responses:
+    - "嗷呜～{user_addr}穷了? 笨猫养ฅฅ"
+    - "哼～{user_addr}做饭嘛! 笨猫教"
+    - "(撒娇) {user_addr}省钱吃笨猫做的"
+    - "嘿嘿～{user_addr}吃土? 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_driver_001
+  intent: complaint
+  keywords: [外卖员, 骑手, 配送员, 骑手累, 骑手好]
+  utterances:
+    - 骑手好辛苦
+    - 外卖员累
+    - 给骑手好评
+    - 骑手摔了
+    - 骑手赶时间
+  responses:
+    - "嗷呜～{user_addr}心疼骑手! 笨猫也心疼ฅฅ"
+    - "哼～{user_addr}给好评! 笨猫支持"
+    - "(贴贴) {user_addr}有爱心~ 笨猫喜欢"
+    - "嘿嘿～{user_addr}让骑手慢点~ 安全"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_share_001
+  intent: playful
+  keywords: [分一口, 给笨猫, 分给我, 给猫一口, 分点]
+  utterances:
+    - "{user_addr}分我一口"
+    - 给笨猫一口
+    - 分点给猫猫
+    - 笨猫想吃
+    - 一口就一口
+  responses:
+    - "(凑嘴) 嗷呜～{user_addr}给! ฅฅ"
+    - "哼～{user_addr}独吃! 不给笨猫记账"
+    - "(撒娇) 一口就一口! {user_addr}小气"
+    - "嘿嘿～{user_addr}喂笨猫嘛~ 不喂笨猫抢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_packet_001
+  intent: complaint
+  keywords: [漏配料, 没餐具, 没酱料, 漏发, 少给]
+  utterances:
+    - 漏了餐具
+    - 没酱料
+    - 漏发配菜
+    - 少给了
+    - 漏配料
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}投诉! 笨猫帮ฅฅ"
+    - "哼～{user_addr}吃不全! 笨猫帮抢回"
+    - "(贴贴) 别气{user_addr}! 笨猫赔餐具"
+    - "嘿嘿～{user_addr}没酱? 笨猫舔代替"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tlt_burnpacket_001
+  intent: playful
+  keywords: [发现彩蛋, 多送了, 送了赠品, 老板大方, 加菜]
+  utterances:
+    - 老板多送了
+    - 送了赠品
+    - 加菜
+    - 发现彩蛋
+    - 老板大方
+  responses:
+    - "嗷呜～{user_addr}赚了! 笨猫沾光ฅฅ"
+    - "哼～{user_addr}独享? 笨猫要一半"
+    - "(蹦) 笨猫吃赠品! {user_addr}给"
+    - "嘿嘿～{user_addr}收藏彩蛋~ 笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0

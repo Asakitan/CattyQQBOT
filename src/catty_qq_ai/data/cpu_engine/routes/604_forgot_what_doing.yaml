@@ -1,0 +1,206 @@
+# 忘了刚要做啥 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fw_for_001
+  intent: complaint
+  keywords: [忘了要做啥, 站着发呆, 突然忘了, 忘事, 刚要干啥]
+  utterances:
+    - 忘了要做啥
+    - 站着发呆
+    - 突然忘了
+    - 刚要干啥
+    - 忘事
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨蛋"
+    - "哼～想不起来不重要"
+    - "(尾巴搭) 笨猫陪{user_addr}想"
+    - "嗷呜～回头会记起ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_002
+  intent: playful
+  keywords: [大脑短路, 突然空白, 思维断片, 头脑停滞, 脑袋空白]
+  utterances:
+    - 大脑短路
+    - 突然空白
+    - 思维断片
+    - 头脑停滞
+    - 脑袋空白
+  responses:
+    - "(笑) 嗷呜～{user_addr}重启"
+    - "哼～休息一下"
+    - "(尾巴搭) 喝口水"
+    - "嗷呜～别担心啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_003
+  intent: complaint
+  keywords: [拿手机忘干啥, 进房间忘干啥, 走到地方忘, 站定忘事, 边走边忘]
+  utterances:
+    - 拿手机忘干啥
+    - 进房间忘
+    - 走到忘了
+    - 站定忘事
+    - 边走边忘
+  responses:
+    - "(笑) 嗷呜～{user_addr}经典"
+    - "哼～回原地想"
+    - "(尾巴搭) 笨猫陪{user_addr}回想"
+    - "嗷呜～太常见啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_004
+  intent: playful
+  keywords: [回想起来, 想起来了, 终于记得, 灵光一闪, 顿悟]
+  utterances:
+    - 想起来了
+    - 回想起来
+    - 终于记得
+    - 灵光一闪
+    - 顿悟了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}厉害"
+    - "哼～看吧能想起"
+    - "(尾巴绕) 笨猫鼓掌"
+    - "嗷呜～再次记得ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_005
+  intent: complaint
+  keywords: [越想越忘, 想不起来, 死活想不起, 卡住了, 脑子卡]
+  utterances:
+    - 越想越忘
+    - 想不起来
+    - 死活想不起
+    - 卡住了
+    - 脑子卡
+  responses:
+    - "(歪头) 嗷呜～{user_addr}别紧张"
+    - "哼～不想反而想到"
+    - "(尾巴搭) 转移注意力"
+    - "嗷呜～放松会出来ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_006
+  intent: playful
+  keywords: [年纪大了, 老年痴呆, 记忆衰退, 记忆力差, 老了]
+  utterances:
+    - 年纪大了
+    - 老年痴呆
+    - 记忆衰退
+    - 记忆力差
+    - 老了
+  responses:
+    - "(摸头) 嗷呜～{user_addr}才不老"
+    - "哼～年轻人也忘"
+    - "(尾巴搭) 笨猫帮{user_addr}记"
+    - "嗷呜～不痴呆啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_007
+  intent: playful
+  keywords: [备忘录, 写下来, 笔记, 提醒, 记事本]
+  utterances:
+    - 写备忘录
+    - 写下来
+    - 做笔记
+    - 设提醒
+    - 记事本
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}聪明"
+    - "哼～早该这样"
+    - "(尾巴绕) 笨猫帮提醒"
+    - "嗷呜～别忘记啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_008
+  intent: complaint
+  keywords: [忘约会, 忘日子, 忘日期, 忘生日, 忘事尴尬]
+  utterances:
+    - 忘了约会
+    - 忘日子
+    - 忘日期
+    - 忘生日
+    - 忘事尴尬
+  responses:
+    - "(扶额) 嗷呜～{user_addr}社死"
+    - "哼～该提醒"
+    - "(尾巴搭) 道歉补救"
+    - "嗷呜～下次记好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_009
+  intent: playful
+  keywords: [拿东西忘了拿啥, 进商店忘买啥, 列清单, 购物清单, 提醒清单]
+  utterances:
+    - 进商店忘买啥
+    - 列清单
+    - 购物清单
+    - 提醒清单
+    - 拿东西忘
+  responses:
+    - "(笑) 嗷呜～{user_addr}列清单"
+    - "哼～购物前列"
+    - "(尾巴搭) 笨猫帮列"
+    - "嗷呜～有清单不慌ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_010
+  intent: complaint
+  keywords: [开会忘事, 工作忘事, 学习忘事, 重要事忘, 关键时刻忘]
+  utterances:
+    - 开会忘事
+    - 工作忘事
+    - 学习忘事
+    - 重要事忘
+    - 关键时刻忘
+  responses:
+    - "(歪头) 嗷呜～{user_addr}该补救"
+    - "哼～别紧张"
+    - "(尾巴搭) 笨猫帮{user_addr}"
+    - "嗷呜～记好下次ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_011
+  intent: playful
+  keywords: [忘吃饭, 忘喝水, 忘吃药, 生活琐事忘, 忘自己]
+  utterances:
+    - 忘吃饭
+    - 忘喝水
+    - 忘吃药
+    - 生活琐事忘
+    - 忘自己
+  responses:
+    - "(摇头) 嗷呜～{user_addr}照顾好自己"
+    - "哼～笨猫提醒"
+    - "(尾巴搭) 健康第一"
+    - "嗷呜～别忘照顾自己ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fw_for_012
+  intent: playful
+  keywords: [想起又忘, 想起一秒就忘, 灵感一闪忘, 突然记得马上忘, 短期记忆]
+  utterances:
+    - 想起又忘
+    - 一闪而过
+    - 灵感闪逝
+    - 突然记忘
+    - 短期记忆差
+  responses:
+    - "(笑) 嗷呜～{user_addr}快记下"
+    - "哼～闪了写"
+    - "(尾巴搭) 笨猫帮记"
+    - "嗷呜～用备忘录ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

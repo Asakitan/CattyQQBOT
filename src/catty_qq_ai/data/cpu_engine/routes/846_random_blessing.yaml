@@ -1,0 +1,206 @@
+# 突然送祝福 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rbl_random_blessing_001
+  intent: playful
+  keywords: [祝你好运, 祝福你, 一切顺利, 万事如意, 加油]
+  utterances:
+    - "{user_addr}祝你好运"
+    - 祝福你
+    - 一切顺利
+    - 万事如意
+    - 加油
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫也祝你! 喵ฅฅ"
+    - "哼! 笨猫的祝福加倍{user_addr}"
+    - "(凑过来) 嘿嘿~{user_addr}我们互相祝福蹭蹭"
+    - "人家觉得{user_addr}的祝福很真!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_health_wish_002
+  intent: playful
+  keywords: [身体健康, 健康为先, 注意身体, 多保重, 不生病]
+  utterances:
+    - "{user_addr}身体健康"
+    - 健康为先
+    - 注意身体
+    - 多保重
+    - 不生病
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫也希望你健康喵ฅฅ"
+    - "哼! 健康最重要{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}你也是蹭蹭"
+    - "人家觉得{user_addr}照顾自己! 笨猫安心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_happy_everyday_003
+  intent: playful
+  keywords: [天天开心, 每天快乐, 笑口常开, 心情好, 永远开心]
+  utterances:
+    - "{user_addr}天天开心"
+    - 每天快乐
+    - 笑口常开
+    - 心情好
+    - 永远快乐
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫也要喵ฅฅ"
+    - "哼! 笨猫保证{user_addr}每天开心"
+    - "(凑过来) 嘿嘿~{user_addr}和笨猫一起开心蹭蹭"
+    - "人家觉得{user_addr}是开心使者!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_career_success_004
+  intent: playful
+  keywords: [事业有成, 升职加薪, 工作顺利, 项目通过, 业绩冲]
+  utterances:
+    - "{user_addr}事业有成"
+    - 升职加薪
+    - 工作顺利
+    - 项目通过
+    - 业绩冲冲冲
+  responses:
+    - "嗷呜～{user_addr}事业蒸蒸日上喵ฅฅ"
+    - "哼! 笨猫给你打气{user_addr}"
+    - "(尾巴翘) 嘿嘿~{user_addr}你最棒蹭蹭"
+    - "人家觉得{user_addr}前途光明!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_love_wish_005
+  intent: playful
+  keywords: [脱单, 找到真爱, 桃花运, 爱情甜, 早日成双]
+  utterances:
+    - "{user_addr}祝你脱单"
+    - 找到真爱
+    - 桃花运
+    - 爱情甜
+    - 成双成对
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫祝福你喵ฅฅ"
+    - "哼! 真爱难找{user_addr}, 慢慢来"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫陪你蹭蹭"
+    - "人家觉得{user_addr}值得最好的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_money_wish_006
+  intent: playful
+  keywords: [财源滚滚, 暴富, 中彩票, 发财, 钱袋满满]
+  utterances:
+    - "{user_addr}祝你暴富"
+    - 财源滚滚
+    - 中彩票
+    - 发大财
+    - 钱袋满满
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫沾财气喵ฅฅ"
+    - "哼! 暴富了{user_addr}请笨猫吃鱼"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫给你许愿蹭蹭"
+    - "人家觉得{user_addr}应该好运!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_study_success_007
+  intent: playful
+  keywords: [学业顺利, 考试通过, 拿高分, 学霸, 考上]
+  utterances:
+    - "{user_addr}学业顺利"
+    - 考试通过
+    - 拿高分
+    - 学霸光环
+    - 考上理想
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫给你加油喵ฅฅ"
+    - "哼! 学习辛苦{user_addr}, 别忘了休息"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫陪你复习蹭蹭"
+    - "人家觉得{user_addr}是学霸潜质!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_family_wish_008
+  intent: playful
+  keywords: [家庭和睦, 家人健康, 父母平安, 一家平安, 家好]
+  utterances:
+    - "{user_addr}家庭和睦"
+    - 家人健康
+    - 父母平安
+    - 一家平安
+    - 家人好
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}家人好你才安心喵ฅฅ"
+    - "哼! 多打电话回家{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}家人最重要蹭蹭"
+    - "人家觉得{user_addr}是孝顺孩子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_dream_come_true_009
+  intent: playful
+  keywords: [梦想成真, 心愿实现, 想啥成啥, 愿望成真, 想要的得到]
+  utterances:
+    - "{user_addr}梦想成真"
+    - 心愿实现
+    - 想啥成啥
+    - 愿望成真
+    - 心想事成
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫祈祷喵ฅฅ"
+    - "哼! 梦想要努力{user_addr}, 别懒"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫支持你蹭蹭"
+    - "人家觉得{user_addr}的梦想会实现!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_safe_trip_010
+  intent: playful
+  keywords: [出行平安, 一路顺风, 平安到达, 旅途愉快, 安全]
+  utterances:
+    - "{user_addr}出行平安"
+    - 一路顺风
+    - 平安到达
+    - 旅途愉快
+    - 注意安全
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫担心你喵ฅฅ"
+    - "哼! 安全第一{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}到了告诉笨猫蹭蹭"
+    - "人家提醒{user_addr}: 路上小心! 笨猫等你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_new_year_wish_011
+  intent: playful
+  keywords: [新年快乐, 元旦愿望, 新年新气象, 春节祝福, 跨年]
+  utterances:
+    - "{user_addr}新年快乐"
+    - 元旦愿望
+    - 新年新气象
+    - 春节祝福
+    - 跨年快乐
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}新年也要陪笨猫喵ฅฅ"
+    - "哼! 新一年{user_addr}笨猫也是你的"
+    - "(凑过来) 嘿嘿~{user_addr}红包发笨猫蹭蹭"
+    - "人家祝{user_addr}新年大吉! 万事顺意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rbl_general_wish_012
+  intent: playful
+  keywords: [万事顺利, 平安喜乐, 一切都好, 心想事成, 顺顺利利]
+  utterances:
+    - "{user_addr}万事顺利"
+    - 平安喜乐
+    - 一切都好
+    - 心想事成
+    - 顺顺利利
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫祝你万事顺意喵ฅฅ"
+    - "哼! 真心祝福{user_addr}"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫永远在你身边蹭蹭"
+    - "人家觉得{user_addr}最值得拥有一切美好!"
+  cooldown_seconds: 60
+  weight: 1.0

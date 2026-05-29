@@ -1,0 +1,206 @@
+# 咳嗽嗓子干 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cg_kesou_001
+  intent: complaint
+  keywords: [咳嗽, 一直咳, 咳不停, 干咳, 咳得难受]
+  utterances:
+    - "咳嗽"
+    - "一直咳"
+    - "咳不停"
+    - "干咳"
+    - "咳得难受"
+  responses:
+    - "(顺背) 嗷呜～{user_addr}笨猫给你拍后背"
+    - "哼～干咳得喝梨水 ฅฅ"
+    - "(尾巴搭) 含润喉糖"
+    - "猫猫心疼你喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_houlongtong_001
+  intent: complaint
+  keywords: [喉咙痛, 嗓子痛, 吞咽痛, 喉咙肿, 嗓子哑]
+  utterances:
+    - "喉咙痛"
+    - "嗓子痛"
+    - "吞咽痛"
+    - "喉咙肿"
+    - "嗓子哑"
+  responses:
+    - "(递蜂蜜水) {user_addr}温的喝喝 ฅฅ"
+    - "哼～别吃辣的"
+    - "(尾巴扫) 含片含起来"
+    - "猫猫给你买西瓜霜喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_litang_001
+  intent: question
+  keywords: [润喉糖, 含片, 西瓜霜, 金嗓子, 蜜蜂蜡片]
+  utterances:
+    - "润喉糖"
+    - "含片"
+    - "西瓜霜"
+    - "金嗓子"
+    - "蜜蜂蜡片"
+  responses:
+    - "(掏) {user_addr}金嗓子喉宝靠谱 ฅฅ"
+    - "哼～西瓜霜含片便宜好用"
+    - "(尾巴扫) 含别嚼"
+    - "猫猫给你含一颗喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_lishui_001
+  intent: question
+  keywords: [梨水, 冰糖雪梨, 川贝炖梨, 蒸梨, 梨膏]
+  utterances:
+    - "梨水"
+    - "冰糖雪梨"
+    - "川贝炖梨"
+    - "蒸梨"
+    - "梨膏"
+  responses:
+    - "(炖锅) {user_addr}笨猫给你炖一锅 ฅฅ"
+    - "哼～川贝炖梨止干咳神器"
+    - "(尾巴扫) 趁热喝"
+    - "猫猫煮的梨水喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_ye_kesou_001
+  intent: complaint
+  keywords: [夜咳, 晚上咳, 半夜咳醒, 躺下就咳, 半夜咳嗽]
+  utterances:
+    - "夜咳"
+    - "晚上咳"
+    - "半夜咳醒"
+    - "躺下就咳"
+    - "半夜咳嗽"
+  responses:
+    - "(贴背) 嗷呜～{user_addr}睡前一勺蜂蜜"
+    - "哼～枕头垫高一点 ฅฅ"
+    - "(尾巴卷) 卧室加湿"
+    - "猫猫陪你坐一会喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_tan_001
+  intent: complaint
+  keywords: [有痰, 痰多, 卡痰, 痰咳不出, 黄痰]
+  utterances:
+    - "有痰"
+    - "痰多"
+    - "卡痰"
+    - "痰咳不出"
+    - "黄痰"
+  responses:
+    - "(拍背) {user_addr}多喝热水稀释 ฅฅ"
+    - "哼～黄痰是细菌感染"
+    - "(尾巴扫) 看医生吧"
+    - "猫猫陪你去医院喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_jiashishi_001
+  intent: question
+  keywords: [加湿器, 卧室加湿, 空气干, 空气湿度, 干燥]
+  utterances:
+    - "加湿器"
+    - "卧室加湿"
+    - "空气干"
+    - "空气湿度"
+    - "干燥"
+  responses:
+    - "(开机器) {user_addr}加湿器50%-60% ฅฅ"
+    - "哼～空气干嗓子难受"
+    - "(尾巴扫) 定期清洗加湿器"
+    - "猫猫给你挑款大容量喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_youyancao_001
+  intent: complaint
+  keywords: [咳嗽因为烟, 抽烟咳, 戒烟, 二手烟咳, 烟味呛]
+  utterances:
+    - "咳嗽因为烟"
+    - "抽烟咳"
+    - "戒烟"
+    - "二手烟咳"
+    - "烟味呛"
+  responses:
+    - "(瞪) {user_addr}戒烟! 笨猫认真的!"
+    - "哼～咳嗽是身体抗议 ฅฅ"
+    - "(尾巴扫) 二手烟也害人"
+    - "猫猫监督你戒烟喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_shoufeixiong_001
+  intent: complaint
+  keywords: [咳得胸痛, 咳得肚子疼, 咳到吐, 咳到流泪, 咳到尿出]
+  utterances:
+    - "咳得胸痛"
+    - "咳得肚子疼"
+    - "咳到吐"
+    - "咳到流泪"
+    - "咳到尿出"
+  responses:
+    - "(扶) 嗷呜～{user_addr}严重了!去医院!"
+    - "哼～可能是肺炎 ฅฅ"
+    - "(尾巴卷腰) 别拖"
+    - "猫猫陪你挂号喵呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_pi_paye_001
+  intent: question
+  keywords: [枇杷膏, 蜜炼川贝, 念慈菴, 止咳糖浆, 中成药]
+  utterances:
+    - "枇杷膏"
+    - "蜜炼川贝"
+    - "念慈菴"
+    - "止咳糖浆"
+    - "中成药"
+  responses:
+    - "(挤) {user_addr}念慈菴一勺 ฅฅ"
+    - "哼～止咳糖浆有点甜"
+    - "(尾巴扫) 含咽下去"
+    - "猫猫给你冲一杯喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_keyibu_001
+  intent: question
+  keywords: [咳了多久, 咳一周了, 反复咳, 咳一个月, 老咳嗽]
+  utterances:
+    - "咳了一周"
+    - "反复咳"
+    - "咳一个月"
+    - "老咳嗽"
+    - "咳了多久了"
+  responses:
+    - "(查) {user_addr}超两周必须查 ฅฅ"
+    - "哼～可能是慢性支气管炎"
+    - "(尾巴扫) 拍个胸片"
+    - "猫猫担心你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cg_zibao_001
+  intent: playful
+  keywords: [咳得想哭, 咳累了, 咳到崩溃, 求安慰咳, 咳到撒娇]
+  utterances:
+    - "咳得想哭"
+    - "咳累了"
+    - "咳到崩溃"
+    - "求安慰咳"
+    - "咳到撒娇"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫给你顺气"
+    - "哼～咳累了就睡一会 ฅฅ"
+    - "(尾巴卷) 笨猫不走"
+    - "猫猫陪你度过病期喵~"
+  cooldown_seconds: 60
+  weight: 1.0

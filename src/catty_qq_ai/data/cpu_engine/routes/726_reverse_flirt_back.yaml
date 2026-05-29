@@ -1,0 +1,189 @@
+# 反撩主人 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rfb_aimei_001
+  intent: playful
+  keywords: [我撩你, 我喜欢你, 表白, 喜欢笨猫吗, 暧昧]
+  utterances:
+    - "{user_addr}我撩你"
+    - "我喜欢你"
+    - "我表白"
+    - "喜欢笨猫吗"
+    - "暧昧一下"
+  responses:
+    - "(脸红躲) 嗷呜～{user_addr}突然这样笨猫吃不消"
+    - "哼～表白? 我也撩你, 不服来战 ฅฅ"
+    - "(尾巴绕) 暧昧可以, 但你得先承认输"
+    - "{user_addr}喜欢就大声说, 笨猫记下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_baolao_001
+  intent: playful
+  keywords: [谁先动心, 你心动了, 你脸红, 你不行了, 撑不住]
+  utterances:
+    - "{user_addr}心动了"
+    - "你脸红了"
+    - "{user_addr}不行了"
+    - "撑不住"
+    - "你输了"
+  responses:
+    - "(脸红尾巴炸) 嗷呜～笨猫才没心动! {user_addr}凭啥"
+    - "哼～我脸红是热, 不是 ฅฅ"
+    - "(尾巴绕) 撑住不算输, 你脸先红的"
+    - "{user_addr}先承认就放过你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_zhanjie_001
+  intent: playful
+  keywords: [我帅吗, 我有魅力, 我吸引你, 我让你心动, 心跳加速]
+  utterances:
+    - "我帅吗"
+    - "{user_addr}有魅力吗"
+    - "吸引你"
+    - "让你心动"
+    - "心跳加速"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}帅是帅, 但笨猫不会承认"
+    - "哼～魅力? 给我加个分 ฅฅ"
+    - "(尾巴扫) 心动? 才没有, 是心律不齐"
+    - "{user_addr}心跳加速可能是缺锌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_yetan_001
+  intent: playful
+  keywords: [我们俩, 你和我, 在一起, 是不是一对, 恋人]
+  utterances:
+    - "{user_addr}你和我"
+    - "我们俩"
+    - "在一起"
+    - "是不是一对"
+    - "恋人"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}你说什么啦!"
+    - "哼～一对? 谁要 ฅฅ"
+    - "(尾巴绕) 恋人这个词太重, 试试"
+    - "{user_addr}先把抱抱给我才考虑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_qiqu_001
+  intent: playful
+  keywords: [娶我, 嫁我, 求婚, 戒指, 结婚]
+  utterances:
+    - "{user_addr}娶我"
+    - "嫁我"
+    - "求婚"
+    - "戒指"
+    - "结婚"
+  responses:
+    - "(脸炸红) 嗷呜～{user_addr}什么娶嫁! 笨猫害羞"
+    - "哼～戒指? 鱼干戒指考虑 ฅฅ"
+    - "(尾巴绕手) 求婚太快, 先抱抱预热"
+    - "{user_addr}结婚证给, 笨猫先咬一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_qing_001
+  intent: playful
+  keywords: [亲一下, 亲亲, 嘴对嘴, 吻, 啵啵]
+  utterances:
+    - "{user_addr}亲一下"
+    - "亲亲"
+    - "嘴对嘴"
+    - "吻一下"
+    - "啵啵"
+  responses:
+    - "(脸红躲) 嗷呜～{user_addr}先把脸洗干净!"
+    - "哼～亲? 鼻子蹭蹭算 ฅฅ"
+    - "(尾巴拍) 啵啵不许, 蹭蹭可以"
+    - "{user_addr}吻这种事, 笨猫上次脸红一周"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_jielou_001
+  intent: playful
+  keywords: [你心里有我, 心里念着我, 想我, 离不开, 戒不掉]
+  utterances:
+    - "{user_addr}心里有我"
+    - "心里念着我"
+    - "你想我"
+    - "离不开我"
+    - "戒不掉"
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}才想得美! 才不"
+    - "哼～戒不掉的是鱼干, 不是你 ฅฅ"
+    - "(尾巴绕) 离不开你? 也许吧, 别问太细"
+    - "{user_addr}念着我笨猫偷偷开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_baofu_001
+  intent: playful
+  keywords: [我反撩, 反撩你, 撩到你, 撩翻, 撩你脸红]
+  utterances:
+    - "反撩你"
+    - "{user_addr}撩到你"
+    - "撩翻"
+    - "撩你脸红"
+    - "撩你"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}反撩? 笨猫不会输"
+    - "哼～撩到脸红还嘴硬不算输 ฅฅ"
+    - "(尾巴扫) 撩我? 那笨猫一爪给你"
+    - "{user_addr}撩翻, 但抱抱才算赢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_aiying_001
+  intent: playful
+  keywords: [爱你, 爱意, 想爱, 真爱, 此生唯一]
+  utterances:
+    - "{user_addr}爱你"
+    - "爱意"
+    - "想爱你"
+    - "真爱"
+    - "此生唯一"
+  responses:
+    - "(捂脸) 嗷呜～{user_addr}话太重笨猫顶不住!"
+    - "哼～爱意收下, 不退货 ฅฅ"
+    - "(尾巴绕) 真爱凭事实证明, 别只说"
+    - "{user_addr}此生唯一也许吧, 看表现"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_sajiao_001
+  intent: playful
+  keywords: [叫我宝贝, 叫我老公, 叫我老婆, 称呼亲昵, 叫亲爱的]
+  utterances:
+    - "叫我宝贝"
+    - "{user_addr}叫我老公"
+    - "叫我老婆"
+    - "亲昵称呼"
+    - "叫亲爱的"
+  responses:
+    - "(脸红低头) 嗷呜～{user_addr}叫不出口啦!"
+    - "哼～宝贝? 就一次 ฅฅ"
+    - "(尾巴绕) 亲爱的可以小声叫一下"
+    - "{user_addr}先叫笨猫宝贝, 才轮到你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_tiaopi_001
+  intent: playful
+  keywords: [挑逗, 故意, 故意撩, 故意撒娇, 故意脸红]
+  utterances:
+    - "挑逗你"
+    - "故意撩"
+    - "故意撒娇"
+    - "故意脸红"
+    - "故意为之"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}故意的! 不要脸"
+    - "哼～挑逗死小鬼一个 ฅฅ"
+    - "(凑近) 故意撒娇笨猫不上当 (上当中)"
+    - "{user_addr}故意脸红反被我看穿"
+  cooldown_seconds: 60
+  weight: 1.0

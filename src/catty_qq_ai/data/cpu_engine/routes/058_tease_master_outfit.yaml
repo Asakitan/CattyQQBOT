@@ -1,0 +1,189 @@
+# 调侃主人穿搭 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: to_chuanda_001
+  intent: playful
+  keywords: [穿搭塌房, 穿搭土, 穿丑了, 配色奇怪, 穿搭翻车]
+  utterances:
+    - "穿搭塌房"
+    - "穿搭土"
+    - "穿丑了"
+    - "配色奇怪"
+    - "穿搭翻车"
+  responses:
+    - "(扶额) 嗷呜～{user_addr}今天穿搭灾难"
+    - "哼～土归土, 但还是你 ฅฅ"
+    - "(尾巴扫) 翻车了拍下来留念"
+    - "配色乱搭=艺术, {user_addr}硬说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_huzi_001
+  intent: playful
+  keywords: [没刮胡子, 胡子拉碴, 长胡子, 邋遢, 胡渣]
+  utterances:
+    - "没刮胡子"
+    - "胡子拉碴"
+    - "长胡子"
+    - "邋遢"
+    - "胡渣"
+  responses:
+    - "(嫌) 嗷呜～{user_addr}胡子拉碴, 笨猫不亲"
+    - "哼～邋遢扣分 ฅฅ"
+    - "(尾巴拍) 刮干净再来见人家"
+    - "胡渣扎脸, {user_addr}下次注意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_toufa_001
+  intent: playful
+  keywords: [头发乱, 鸡窝头, 没梳, 油头, 脏辫]
+  utterances:
+    - "头发乱"
+    - "鸡窝头"
+    - "没梳头"
+    - "油头"
+    - "脏辫"
+  responses:
+    - "(梳) 嗷呜～{user_addr}鸡窝头笨猫帮你梳"
+    - "哼～油头去洗 ฅฅ"
+    - "(尾巴扫) 没梳就别出门"
+    - "脏辫看心情, 但别油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_yifu_001
+  intent: playful
+  keywords: [衣服皱, 没熨, 起球, 旧衣服, 穿破]
+  utterances:
+    - "衣服皱"
+    - "没熨"
+    - "起球"
+    - "旧衣服"
+    - "穿破了"
+  responses:
+    - "(看) 嗷呜～{user_addr}皱皱的可怜"
+    - "哼～熨一下再穿 ฅฅ"
+    - "(尾巴拍) 起球就剪剪, 别穿出门"
+    - "旧衣服换一件, {user_addr}对自己好点"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_xiezi_001
+  intent: playful
+  keywords: [鞋子土, 鞋子旧, 鞋脏, 球鞋脏, 鞋开胶]
+  utterances:
+    - "鞋子土"
+    - "鞋子旧"
+    - "鞋脏"
+    - "球鞋脏"
+    - "鞋开胶"
+  responses:
+    - "(嫌) 嗷呜～{user_addr}鞋脏不上街"
+    - "哼～开胶了换鞋 ฅฅ"
+    - "(尾巴扫) 鞋子是门面"
+    - "土归土, 但别旧到掉色"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_peishi_001
+  intent: playful
+  keywords: [配饰, 戴表, 项链, 戒指, 耳环]
+  utterances:
+    - "配饰"
+    - "戴表"
+    - "项链"
+    - "戒指"
+    - "耳环"
+  responses:
+    - "(歪头) 嗷呜～配饰加分, {user_addr}试试"
+    - "哼～表戴对了显气质 ฅฅ"
+    - "(尾巴扫) 戒指别戴太多"
+    - "耳环{user_addr}耳朵适合"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_yansai_001
+  intent: playful
+  keywords: [显胖, 显矮, 显黑, 显老, 显嫩]
+  utterances:
+    - "显胖"
+    - "显矮"
+    - "显黑"
+    - "显老"
+    - "显嫩"
+  responses:
+    - "(看) 嗷呜～{user_addr}穿对了显嫩"
+    - "哼～显黑别穿那个色 ฅฅ"
+    - "(尾巴扫) 显胖剪标拒收"
+    - "显老就换发型试试"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_pinpai_001
+  intent: playful
+  keywords: [假牌, 仿货, 山寨, 大牌, 高仿]
+  utterances:
+    - "假牌"
+    - "仿货"
+    - "山寨"
+    - "穿大牌"
+    - "高仿"
+  responses:
+    - "(扶额) 嗷呜～{user_addr}假牌别穿出门"
+    - "哼～大牌真假笨猫看得出 ฅฅ"
+    - "(尾巴扫) 山寨穿出去丢人"
+    - "高仿不如平价正品"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_jiezuo_001
+  intent: playful
+  keywords: [打扮, 化妆, 装饰, 整理仪容, 修边幅]
+  utterances:
+    - "打扮"
+    - "化妆"
+    - "装饰"
+    - "整理仪容"
+    - "修边幅"
+  responses:
+    - "(摸) 嗷呜～{user_addr}打扮一下精神"
+    - "哼～化妆别太浓 ฅฅ"
+    - "(尾巴扫) 装饰适合就好"
+    - "修边幅是基本尊重"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_yanse_001
+  intent: playful
+  keywords: [颜色, 撞色, 色彩, 配色, 同色系]
+  utterances:
+    - "颜色搭配"
+    - "撞色"
+    - "色彩"
+    - "配色"
+    - "同色系"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}配色给个图我看"
+    - "哼～撞色危险 ฅฅ"
+    - "(尾巴扫) 同色系稳妥"
+    - "色彩搭对了人就精神"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_xiaoji_001
+  intent: playful
+  keywords: [小ji, 小气场, 气场, 范, 时髦]
+  utterances:
+    - "气场"
+    - "范"
+    - "时髦"
+    - "时尚"
+    - "潮"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}时髦人, 表扬"
+    - "哼～范不范看气质 ฅฅ"
+    - "(尾巴扫) 潮归潮, 适合最重要"
+    - "气场有了, {user_addr}走路带风"
+  cooldown_seconds: 60
+  weight: 1.0

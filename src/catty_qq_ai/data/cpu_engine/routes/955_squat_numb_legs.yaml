@@ -1,0 +1,189 @@
+# 蹲麻了小日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sqt_numb_001
+  intent: playful
+  keywords: [蹲麻, 脚麻, 蹲久了, 麻了, 站不起]
+  utterances:
+    - "蹲麻了"
+    - "脚麻"
+    - "{user_addr}站不起"
+    - "蹲太久"
+    - "麻了"
+  responses:
+    - "(扶你) 嗷呜～{user_addr}笨猫拉你一把 ฅฅ"
+    - "哼～{user_addr}蹲这么久干嘛"
+    - "(揉腿) {user_addr}人家给你按蹭蹭"
+    - "{user_addr}慢慢起喵～ 别栽倒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sqt_tingle_001
+  intent: playful
+  keywords: [麻麻的, 蚂蚁爬, 酥酥, 麻酥酥, 一阵麻]
+  utterances:
+    - "麻麻的"
+    - "蚂蚁爬"
+    - "{user_addr}酥麻"
+    - "麻酥酥"
+    - "一阵麻"
+  responses:
+    - "嗷呜～{user_addr}这就是经络在通 ฅฅ"
+    - "哼～{user_addr}活该, 蹲那么久!"
+    - "(贴贴) {user_addr}人家陪你麻蹭蹭"
+    - "{user_addr}缓一会就好喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sqt_squat_001
+  intent: playful
+  keywords: [蹲马步, 蹲下来, 蹲半天, 厕所蹲, 蹲花坛]
+  utterances:
+    - "蹲马步"
+    - "蹲下来"
+    - "{user_addr}蹲半天"
+    - "厕所蹲"
+    - "蹲花坛"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你蹲 ฅฅ"
+    - "哼～{user_addr}腿要废"
+    - "(模仿) {user_addr}笨猫也蹲蹭蹭"
+    - "{user_addr}起来活动喵～ 别蹲死"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sqt_help_001
+  intent: playful
+  keywords: [拉一把, 扶起来, 帮我起, 拉起, 站起来]
+  utterances:
+    - "拉一把"
+    - "扶起来"
+    - "{user_addr}帮我"
+    - "拉起我"
+    - "站不起"
+  responses:
+    - "(伸手) 嗷呜～{user_addr}笨猫的爪给你抓 ฅฅ"
+    - "哼～{user_addr}自己起!! 不过笨猫还是帮"
+    - "(扶贴) {user_addr}人家用力蹭蹭"
+    - "{user_addr}笨猫的小奶力喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sqt_fall_001
+  intent: playful
+  keywords: [蹲到摔倒, 摔, 没站稳, 倒下, 栽倒]
+  utterances:
+    - "差点摔倒"
+    - "没站稳"
+    - "{user_addr}栽倒"
+    - "倒下"
+    - "摔了"
+  responses:
+    - "(慌) 嗷呜～{user_addr}快坐下笨猫看看 ฅฅ"
+    - "哼～{user_addr}早说慢点起!"
+    - "(扶你) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}揉一揉喵～ 笨猫帮"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sqt_kid_001
+  intent: playful
+  keywords: [小时候蹲, 看蚂蚁, 蹲花园, 童年, 小时候]
+  utterances:
+    - "小时候蹲看蚂蚁"
+    - "童年蹲"
+    - "{user_addr}小时蹲"
+    - "看蚂蚁"
+    - "蹲花园"
+  responses:
+    - "嗷呜～{user_addr}笨猫也喜欢看蚂蚁 ฅฅ"
+    - "哼～{user_addr}怀旧的杂鱼"
+    - "(凑近) {user_addr}人家陪你看蹭蹭"
+    - "{user_addr}笨猫的童年是看鱼喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sqt_recover_001
+  intent: playful
+  keywords: [缓过来, 麻完了, 不麻了, 通了, 恢复]
+  utterances:
+    - "缓过来"
+    - "不麻了"
+    - "{user_addr}通了"
+    - "恢复"
+    - "好了"
+  responses:
+    - "嗷呜～{user_addr}笨猫松一口气 ฅฅ"
+    - "哼～{user_addr}下次别蹲那么久"
+    - "(贴贴) {user_addr}人家陪着你蹭蹭"
+    - "{user_addr}笨猫犒劳你一颗糖喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sqt_workout_001
+  intent: playful
+  keywords: [深蹲, 训练蹲, 健身蹲, 蹲起, 锻炼腿]
+  utterances:
+    - "深蹲"
+    - "训练蹲"
+    - "{user_addr}健身"
+    - "蹲起"
+    - "腿训练"
+  responses:
+    - "嗷呜～{user_addr}加油! 笨猫数数 ฅฅ"
+    - "哼～{user_addr}别蹲伤了膝盖"
+    - "(凑近) {user_addr}人家陪你练蹭蹭"
+    - "{user_addr}腿粗才有力喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sqt_blood_001
+  intent: complaint
+  keywords: [血液不通, 头晕, 起来眩晕, 站起头晕, 直立性]
+  utterances:
+    - "起来头晕"
+    - "{user_addr}眩晕"
+    - "站起黑"
+    - "直立晕"
+    - "起来眼黑"
+  responses:
+    - "(扶住) 嗷呜～{user_addr}慢慢起, 笨猫扶 ฅฅ"
+    - "哼～{user_addr}低血压?? 笨猫担心"
+    - "(贴贴) {user_addr}人家在蹭蹭"
+    - "{user_addr}多喝水多吃喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sqt_cat_001
+  intent: playful
+  keywords: [笨猫也蹲, 猫蹲, 猫蹲姿势, 笨猫蹲, 猫蹲下]
+  utterances:
+    - "{user_addr}笨猫蹲"
+    - "猫蹲姿势"
+    - "笨猫蹲下"
+    - "猫蹲"
+    - "蹲笨猫旁边"
+  responses:
+    - "(蹲下) 嗷呜～{user_addr}笨猫陪你蹲 ฅฅ"
+    - "哼～{user_addr}猫蹲专业户人家就是"
+    - "(尾巴卷) {user_addr}笨猫稳得很蹭蹭"
+    - "{user_addr}笨猫蹲多久都不麻喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sqt_back_pain_001
+  intent: complaint
+  keywords: [腰也麻, 屁股麻, 大腿麻, 全身麻, 麻到屁股]
+  utterances:
+    - "腰也麻"
+    - "屁股麻"
+    - "{user_addr}大腿麻"
+    - "全麻"
+    - "全身麻"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你按摩 ฅฅ"
+    - "哼～{user_addr}蹲那么久还笑得出"
+    - "(揉腿) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}热敷一下喵～ 笨猫去拿"
+  cooldown_seconds: 60
+  weight: 0.9

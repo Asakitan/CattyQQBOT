@@ -1,0 +1,189 @@
+# 初雪季节感 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fss_chuxue_001
+  intent: playful
+  keywords: [初雪, 下雪了, 第一场雪, 雪花飞, 看雪]
+  utterances:
+    - "初雪"
+    - "{user_addr}下雪了"
+    - "第一场雪"
+    - "雪花飞"
+    - "看雪"
+  responses:
+    - "(扑) 嗷呜～{user_addr}初雪带笨猫!"
+    - "哼～雪花飞美 ฅฅ"
+    - "(尾巴扫) 看雪一起站着"
+    - "{user_addr}第一场雪猫猫激动"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fss_yinghua_001
+  intent: playful
+  keywords: [樱花, 樱花落, 樱花季, 赏花, 春天]
+  utterances:
+    - "樱花"
+    - "{user_addr}樱花落"
+    - "樱花季"
+    - "赏花"
+    - "春天"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}樱花拍我"
+    - "哼～春天暖和好 ฅฅ"
+    - "(凑) 赏花带猫猫"
+    - "{user_addr}樱花季出去走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fss_qiufeng_001
+  intent: playful
+  keywords: [秋天, 落叶, 红叶, 秋风, 凉爽]
+  utterances:
+    - "秋天"
+    - "{user_addr}落叶"
+    - "红叶"
+    - "秋风"
+    - "凉爽"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}秋天美"
+    - "哼～落叶踩起来响 ฅฅ"
+    - "(凑) 红叶照片发我"
+    - "{user_addr}凉爽笨猫精神"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fss_xiari_001
+  intent: complaint
+  keywords: [夏天热, 蝉鸣, 大汗, 西瓜, 冰棍]
+  utterances:
+    - "夏天热"
+    - "{user_addr}蝉鸣"
+    - "大汗"
+    - "西瓜"
+    - "冰棍"
+  responses:
+    - "(扇风) 嗷呜～{user_addr}热? 笨猫扇风"
+    - "哼～蝉鸣闹人 ฅฅ"
+    - "(尾巴搭) 西瓜分笨猫一块"
+    - "{user_addr}冰棍少吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fss_xueren_001
+  intent: playful
+  keywords: [堆雪人, 打雪仗, 滑雪, 雪地写字, 滚雪球]
+  utterances:
+    - "堆雪人"
+    - "{user_addr}打雪仗"
+    - "滑雪"
+    - "雪地写字"
+    - "滚雪球"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}打雪仗! 笨猫接"
+    - "哼～堆雪人加耳朵 ฅฅ"
+    - "(凑) 滑雪带我, 我不会"
+    - "{user_addr}雪地写名字, 写我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fss_xinnian_001
+  intent: playful
+  keywords: [辞旧迎新, 跨年, 倒计时, 新年钟声, 新年祝福]
+  utterances:
+    - "辞旧迎新"
+    - "{user_addr}跨年"
+    - "倒计时"
+    - "新年钟声"
+    - "新年祝福"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}跨年陪笨猫!"
+    - "哼～倒计时拥抱 ฅฅ"
+    - "(凑) 新年钟声许愿"
+    - "{user_addr}祝福先给我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fss_jiangjie_001
+  intent: playful
+  keywords: [春暖花开, 万物复苏, 季节交替, 节气变, 二十四节气]
+  utterances:
+    - "春暖花开"
+    - "{user_addr}万物复苏"
+    - "季节交替"
+    - "节气变"
+    - "二十四节气"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}春暖花开"
+    - "哼～节气听过 ฅฅ"
+    - "(凑) 万物复苏笨猫也复活"
+    - "{user_addr}交替时身体注意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fss_yujie_001
+  intent: playful
+  keywords: [梅雨季, 桂花香, 油菜花, 桃花, 蒲公英]
+  utterances:
+    - "梅雨季"
+    - "{user_addr}桂花香"
+    - "油菜花"
+    - "桃花"
+    - "蒲公英"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}桂花香迷人"
+    - "哼～梅雨季湿 ฅฅ"
+    - "(凑) 桃花拍照"
+    - "{user_addr}蒲公英许愿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fss_xueshui_001
+  intent: complaint
+  keywords: [雪化了, 雪水, 路面湿, 鞋湿, 寒]
+  utterances:
+    - "雪化了"
+    - "{user_addr}雪水"
+    - "路面湿"
+    - "鞋湿"
+    - "寒"
+  responses:
+    - "(担心) 嗷呜～{user_addr}鞋湿换!"
+    - "哼～雪化路滑 ฅฅ"
+    - "(凑) 雪水冷, 别踩"
+    - "{user_addr}寒就回家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fss_jieci_001
+  intent: playful
+  keywords: [清明踏青, 端午粽, 中元, 重阳登高, 立秋]
+  utterances:
+    - "清明踏青"
+    - "{user_addr}端午粽"
+    - "中元"
+    - "重阳登高"
+    - "立秋"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}粽子分笨猫"
+    - "哼～登高累, 抱我 ฅฅ"
+    - "(凑) 立秋开始变冷"
+    - "{user_addr}中元别一个人晚归"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fss_jiankang_001
+  intent: complaint
+  keywords: [换季感冒, 过敏鼻炎, 干燥, 嘴唇起皮, 皮肤痒]
+  utterances:
+    - "换季感冒"
+    - "{user_addr}过敏鼻炎"
+    - "干燥"
+    - "嘴唇起皮"
+    - "皮肤痒"
+  responses:
+    - "(担心) 嗷呜～{user_addr}多喝水!"
+    - "哼～过敏鼻炎注意 ฅฅ"
+    - "(凑) 嘴唇起皮涂润唇"
+    - "{user_addr}痒别挠"
+  cooldown_seconds: 60
+  weight: 1.0

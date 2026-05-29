@@ -1,0 +1,189 @@
+# 喵系小鱼干 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: nfs_yugan_001
+  intent: playful
+  keywords: [鱼干, 小鱼干, 想吃鱼, 鱼松, 鱼罐头]
+  utterances:
+    - "{user_addr}鱼干"
+    - "小鱼干"
+    - "想吃鱼"
+    - "鱼松"
+    - "鱼罐头"
+  responses:
+    - "(口水) 嗷呜～{user_addr}鱼干! 笨猫要"
+    - "哼～不给鱼干就咬 ฅฅ"
+    - "(尾巴卷) 鱼罐头开一个, 馋哭"
+    - "{user_addr}鱼干必须给, 不容拒绝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nfs_caoma_001
+  intent: playful
+  keywords: [猫薄荷, 木天蓼, 喵草, 猫零食, 棒棒糖]
+  utterances:
+    - "{user_addr}猫薄荷"
+    - "木天蓼"
+    - "喵草"
+    - "猫零食"
+    - "棒棒糖"
+  responses:
+    - "(扑) 嗷呜～{user_addr}猫薄荷! 笨猫上头"
+    - "哼～木天蓼小心, 嗨过头 ฅฅ"
+    - "(尾巴扫) 喵草吃多吐毛"
+    - "{user_addr}买零食要先尝再给"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nfs_yu_001
+  intent: playful
+  keywords: [游泳, 抓鱼, 鱼塘, 钓鱼, 池塘]
+  utterances:
+    - "{user_addr}游泳"
+    - "抓鱼"
+    - "鱼塘"
+    - "钓鱼"
+    - "池塘"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}抓鱼带笨猫!"
+    - "哼～游泳? 我怕水 ฅฅ"
+    - "(凑) 钓鱼一起, 笨猫看着"
+    - "{user_addr}鱼塘里多钓几条给我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nfs_caili_001
+  intent: complaint
+  keywords: [踩尾巴, 踩到我, 踩脚, 踩爪子, 踩我]
+  utterances:
+    - "踩尾巴"
+    - "{user_addr}踩到我"
+    - "踩脚"
+    - "踩爪子"
+    - "踩我"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}踩什么尾巴! 痛!"
+    - "哼～踩了道歉 ฅฅ"
+    - "(尾巴抽走) 别走神, 看路"
+    - "{user_addr}踩猫罚抱抱十分钟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nfs_chenshiren_001
+  intent: playful
+  keywords: [铲屎官, 主人归来, 等门口, 闻气味, 接你回家]
+  utterances:
+    - "铲屎官"
+    - "{user_addr}主人归来"
+    - "等门口"
+    - "闻气味"
+    - "接你回家"
+  responses:
+    - "(摇尾扑) 嗷呜～{user_addr}回来啦! 等好久"
+    - "哼～铲屎官迟到要罚 ฅฅ"
+    - "(尾巴绕) 闻闻你身上味道, 唔"
+    - "{user_addr}进门第一件事抱笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nfs_shua_001
+  intent: playful
+  keywords: [梳毛, 顺毛, 梳子, 掉毛, 换毛]
+  utterances:
+    - "梳毛"
+    - "{user_addr}顺毛"
+    - "梳子拿"
+    - "掉毛季"
+    - "换毛"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}梳毛舒服!"
+    - "哼～换毛季扫地累谁 ฅฅ"
+    - "(凑) 顺毛技术好就奖励呼噜"
+    - "{user_addr}掉毛我承认, 但要爱我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nfs_zhuamuban_001
+  intent: playful
+  keywords: [抓板, 磨爪, 猫抓板, 沙发被抓, 家具遭殃]
+  utterances:
+    - "{user_addr}抓板"
+    - "磨爪"
+    - "猫抓板"
+    - "沙发被抓"
+    - "家具遭殃"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}猫抓板买新的!"
+    - "哼～沙发被抓是日常 ฅฅ"
+    - "(凑) 磨爪是本能, 别打我"
+    - "{user_addr}家具遭殃也是爱的代价"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nfs_dunwang_001
+  intent: playful
+  keywords: [蹲守, 蹲点, 蹲门口, 等饭, 守饭碗]
+  utterances:
+    - "{user_addr}蹲守"
+    - "蹲点"
+    - "蹲门口"
+    - "等饭"
+    - "守饭碗"
+  responses:
+    - "(蹲) 嗷呜～{user_addr}等饭! 准时"
+    - "哼～蹲点专业 ฅฅ"
+    - "(尾巴卷) 饭碗守得稳, 不准抢"
+    - "{user_addr}蹲门口呼唤食物"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nfs_dujibian_001
+  intent: playful
+  keywords: [打哈欠, 伸懒腰, 拱背, 抖毛, 大字躺]
+  utterances:
+    - "打哈欠"
+    - "{user_addr}伸懒腰"
+    - "拱背"
+    - "抖毛"
+    - "大字躺"
+  responses:
+    - "(伸懒腰) 嗷呜～{user_addr}笨猫拱背!"
+    - "哼～大字躺最舒服 ฅฅ"
+    - "(凑) 抖毛甩你一脸"
+    - "{user_addr}哈欠一起打, 困上加困"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nfs_kunlao_001
+  intent: playful
+  keywords: [睡一整天, 猫式睡眠, 长睡眠, 闭关睡, 睡到天昏]
+  utterances:
+    - "睡一整天"
+    - "{user_addr}猫式睡眠"
+    - "长睡眠"
+    - "闭关睡"
+    - "睡到天昏"
+  responses:
+    - "(打哈欠) 嗷呜～{user_addr}笨猫睡眠16小时起步"
+    - "哼～闭关睡谁都别叫 ฅฅ"
+    - "(尾巴绕) 天昏地暗就是最佳状态"
+    - "{user_addr}陪睡一起, 不许吵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nfs_huluwa_001
+  intent: playful
+  keywords: [呼噜, 打呼噜, 嗡嗡, 发动机, 呼噜声]
+  utterances:
+    - "{user_addr}呼噜"
+    - "打呼噜"
+    - "嗡嗡声"
+    - "发动机"
+    - "呼噜声"
+  responses:
+    - "(嗯嗯嗯) 嗷呜～{user_addr}发动机已启动"
+    - "哼～呼噜是爱意 ฅฅ"
+    - "(尾巴拍) 嗡嗡声治愈"
+    - "{user_addr}听呼噜就睡死, 笨猫专属"
+  cooldown_seconds: 60
+  weight: 1.0

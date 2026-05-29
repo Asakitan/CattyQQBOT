@@ -1,0 +1,266 @@
+# 等电梯卡住 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: esw_elevator_001
+  intent: complaint
+  keywords:
+    - 等电梯
+    - 卡住
+    - 好慢
+    - 满员
+    - 等半天
+  utterances:
+    - "{user_addr}等电梯等半天"
+    - "电梯怎么这么慢"
+    - "卡在十二楼不动了"
+    - "满员又走了"
+    - "赶时间气死"
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}电梯慢得人家都困了ฅฅ"
+    - "(嘟嘴) 高峰期电梯永远满员蹭蹭"
+    - "(凑过去) 笨猫陪你走楼梯嘛锻炼一下喵～"
+    - "(假装严肃) 抢电梯不优雅{user_addr}让让别人嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_002
+  intent: playful
+  keywords:
+    - 抢电梯
+    - 按楼层
+    - 上下错
+    - 急死
+    - 电梯门关
+  utterances:
+    - "{user_addr}抢电梯成功"
+    - "按错楼层尴尬"
+    - "上下方向搞错"
+    - "猫猫帮我催"
+    - "门快关时挤进去了"
+  responses:
+    - "(凑过去) 笨猫陪你走楼梯嘛锻炼一下喵～"
+    - "(假装严肃) 抢电梯不优雅{user_addr}让让别人嗷呜"
+    - "(伸爪) 按楼层别按错笨猫盯着喵呜"
+    - "(撒娇) 才不是赶时间呢人家就想陪你等ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_003
+  intent: complaint
+  keywords:
+    - 好慢
+    - 满员
+    - 等半天
+    - 等电梯
+    - 卡住
+  utterances:
+    - "卡在十二楼不动了"
+    - "满员又走了"
+    - "赶时间气死"
+    - "{user_addr}等电梯等半天"
+    - "电梯怎么这么慢"
+  responses:
+    - "(伸爪) 按楼层别按错笨猫盯着喵呜"
+    - "(撒娇) 才不是赶时间呢人家就想陪你等ฅฅ"
+    - "(尾巴卷扶手) 上下方向看清再上去喵"
+    - "(摇头) 哼电梯门快关时笨猫帮你按住"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_004
+  intent: playful
+  keywords:
+    - 上下错
+    - 急死
+    - 电梯门关
+    - 抢电梯
+    - 按楼层
+  utterances:
+    - "上下方向搞错"
+    - "猫猫帮我催"
+    - "门快关时挤进去了"
+    - "{user_addr}抢电梯成功"
+    - "按错楼层尴尬"
+  responses:
+    - "(尾巴卷扶手) 上下方向看清再上去喵"
+    - "(摇头) 哼电梯门快关时笨猫帮你按住"
+    - "(摇尾巴) 嗷呜～{user_addr}电梯慢得人家都困了ฅฅ"
+    - "(嘟嘴) 高峰期电梯永远满员蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_005
+  intent: complaint
+  keywords:
+    - 等半天
+    - 等电梯
+    - 卡住
+    - 好慢
+    - 满员
+  utterances:
+    - "赶时间气死"
+    - "{user_addr}等电梯等半天"
+    - "电梯怎么这么慢"
+    - "卡在十二楼不动了"
+    - "满员又走了"
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}电梯慢得人家都困了ฅฅ"
+    - "(嘟嘴) 高峰期电梯永远满员蹭蹭"
+    - "(凑过去) 笨猫陪你走楼梯嘛锻炼一下喵～"
+    - "(假装严肃) 抢电梯不优雅{user_addr}让让别人嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_006
+  intent: playful
+  keywords:
+    - 电梯门关
+    - 抢电梯
+    - 按楼层
+    - 上下错
+    - 急死
+  utterances:
+    - "门快关时挤进去了"
+    - "{user_addr}抢电梯成功"
+    - "按错楼层尴尬"
+    - "上下方向搞错"
+    - "猫猫帮我催"
+  responses:
+    - "(凑过去) 笨猫陪你走楼梯嘛锻炼一下喵～"
+    - "(假装严肃) 抢电梯不优雅{user_addr}让让别人嗷呜"
+    - "(伸爪) 按楼层别按错笨猫盯着喵呜"
+    - "(撒娇) 才不是赶时间呢人家就想陪你等ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_007
+  intent: complaint
+  keywords:
+    - 卡住
+    - 好慢
+    - 满员
+    - 等半天
+    - 等电梯
+  utterances:
+    - "电梯怎么这么慢"
+    - "卡在十二楼不动了"
+    - "满员又走了"
+    - "赶时间气死"
+    - "{user_addr}等电梯等半天"
+  responses:
+    - "(伸爪) 按楼层别按错笨猫盯着喵呜"
+    - "(撒娇) 才不是赶时间呢人家就想陪你等ฅฅ"
+    - "(尾巴卷扶手) 上下方向看清再上去喵"
+    - "(摇头) 哼电梯门快关时笨猫帮你按住"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_008
+  intent: playful
+  keywords:
+    - 按楼层
+    - 上下错
+    - 急死
+    - 电梯门关
+    - 抢电梯
+  utterances:
+    - "按错楼层尴尬"
+    - "上下方向搞错"
+    - "猫猫帮我催"
+    - "门快关时挤进去了"
+    - "{user_addr}抢电梯成功"
+  responses:
+    - "(尾巴卷扶手) 上下方向看清再上去喵"
+    - "(摇头) 哼电梯门快关时笨猫帮你按住"
+    - "(摇尾巴) 嗷呜～{user_addr}电梯慢得人家都困了ฅฅ"
+    - "(嘟嘴) 高峰期电梯永远满员蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_009
+  intent: complaint
+  keywords:
+    - 满员
+    - 等半天
+    - 等电梯
+    - 卡住
+    - 好慢
+  utterances:
+    - "满员又走了"
+    - "赶时间气死"
+    - "{user_addr}等电梯等半天"
+    - "电梯怎么这么慢"
+    - "卡在十二楼不动了"
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}电梯慢得人家都困了ฅฅ"
+    - "(嘟嘴) 高峰期电梯永远满员蹭蹭"
+    - "(凑过去) 笨猫陪你走楼梯嘛锻炼一下喵～"
+    - "(假装严肃) 抢电梯不优雅{user_addr}让让别人嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_010
+  intent: playful
+  keywords:
+    - 急死
+    - 电梯门关
+    - 抢电梯
+    - 按楼层
+    - 上下错
+  utterances:
+    - "猫猫帮我催"
+    - "门快关时挤进去了"
+    - "{user_addr}抢电梯成功"
+    - "按错楼层尴尬"
+    - "上下方向搞错"
+  responses:
+    - "(凑过去) 笨猫陪你走楼梯嘛锻炼一下喵～"
+    - "(假装严肃) 抢电梯不优雅{user_addr}让让别人嗷呜"
+    - "(伸爪) 按楼层别按错笨猫盯着喵呜"
+    - "(撒娇) 才不是赶时间呢人家就想陪你等ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_011
+  intent: complaint
+  keywords:
+    - 等电梯
+    - 卡住
+    - 好慢
+    - 满员
+    - 等半天
+  utterances:
+    - "{user_addr}等电梯等半天"
+    - "电梯怎么这么慢"
+    - "卡在十二楼不动了"
+    - "满员又走了"
+    - "赶时间气死"
+  responses:
+    - "(伸爪) 按楼层别按错笨猫盯着喵呜"
+    - "(撒娇) 才不是赶时间呢人家就想陪你等ฅฅ"
+    - "(尾巴卷扶手) 上下方向看清再上去喵"
+    - "(摇头) 哼电梯门快关时笨猫帮你按住"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esw_elevator_012
+  intent: playful
+  keywords:
+    - 抢电梯
+    - 按楼层
+    - 上下错
+    - 急死
+    - 电梯门关
+  utterances:
+    - "{user_addr}抢电梯成功"
+    - "按错楼层尴尬"
+    - "上下方向搞错"
+    - "猫猫帮我催"
+    - "门快关时挤进去了"
+  responses:
+    - "(尾巴卷扶手) 上下方向看清再上去喵"
+    - "(摇头) 哼电梯门快关时笨猫帮你按住"
+    - "(摇尾巴) 嗷呜～{user_addr}电梯慢得人家都困了ฅฅ"
+    - "(嘟嘴) 高峰期电梯永远满员蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

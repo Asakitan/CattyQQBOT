@@ -1,0 +1,266 @@
+# 泡杯泡面 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cnl_cup_001
+  intent: playful
+  keywords:
+    - 泡面
+    - 老坛酸菜
+    - 红烧牛肉
+    - 加蛋
+    - 加肠
+  utterances:
+    - "{user_addr}煮了碗泡面"
+    - "老坛酸菜永远的神"
+    - "加蛋加肠豪华版"
+    - "猫猫闻到香味了吗"
+    - "夜宵神器"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}泡面香飘到笨猫这儿了ฅฅ"
+    - "(凑过去) 老坛酸菜笨猫也想尝一口喵～"
+    - "(歪头) 加蛋加肠豪华版{user_addr}土豪啦蹭蹭"
+    - "(嘟嘴) 太咸明天会肿脸笨猫提醒你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_002
+  intent: complaint
+  keywords:
+    - 不健康
+    - 吃多了
+    - 油大
+    - 怕胖
+    - 太咸
+  utterances:
+    - "{user_addr}知道不健康还吃"
+    - "油大了点"
+    - "吃多胖三斤"
+    - "明天体重不敢看"
+    - "泡面太咸口渴"
+  responses:
+    - "(歪头) 加蛋加肠豪华版{user_addr}土豪啦蹭蹭"
+    - "(嘟嘴) 太咸明天会肿脸笨猫提醒你嗷呜"
+    - "(摇尾巴) 笨猫陪你一起等三分钟喵呜"
+    - "(假装严肃) 夜宵泡面一周一次哦{user_addr}ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_003
+  intent: playful
+  keywords:
+    - 红烧牛肉
+    - 加蛋
+    - 加肠
+    - 泡面
+    - 老坛酸菜
+  utterances:
+    - "加蛋加肠豪华版"
+    - "猫猫闻到香味了吗"
+    - "夜宵神器"
+    - "{user_addr}煮了碗泡面"
+    - "老坛酸菜永远的神"
+  responses:
+    - "(摇尾巴) 笨猫陪你一起等三分钟喵呜"
+    - "(假装严肃) 夜宵泡面一周一次哦{user_addr}ฅฅ"
+    - "(撒娇) 才不是想要一口呢只是好奇你怎么吃"
+    - "(伸爪) 笨猫帮你吹凉一点小心烫嘴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_004
+  intent: complaint
+  keywords:
+    - 油大
+    - 怕胖
+    - 太咸
+    - 不健康
+    - 吃多了
+  utterances:
+    - "吃多胖三斤"
+    - "明天体重不敢看"
+    - "泡面太咸口渴"
+    - "{user_addr}知道不健康还吃"
+    - "油大了点"
+  responses:
+    - "(撒娇) 才不是想要一口呢只是好奇你怎么吃"
+    - "(伸爪) 笨猫帮你吹凉一点小心烫嘴喵"
+    - "(舔嘴) 嗷呜～{user_addr}泡面香飘到笨猫这儿了ฅฅ"
+    - "(凑过去) 老坛酸菜笨猫也想尝一口喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_005
+  intent: playful
+  keywords:
+    - 加肠
+    - 泡面
+    - 老坛酸菜
+    - 红烧牛肉
+    - 加蛋
+  utterances:
+    - "夜宵神器"
+    - "{user_addr}煮了碗泡面"
+    - "老坛酸菜永远的神"
+    - "加蛋加肠豪华版"
+    - "猫猫闻到香味了吗"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}泡面香飘到笨猫这儿了ฅฅ"
+    - "(凑过去) 老坛酸菜笨猫也想尝一口喵～"
+    - "(歪头) 加蛋加肠豪华版{user_addr}土豪啦蹭蹭"
+    - "(嘟嘴) 太咸明天会肿脸笨猫提醒你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_006
+  intent: complaint
+  keywords:
+    - 太咸
+    - 不健康
+    - 吃多了
+    - 油大
+    - 怕胖
+  utterances:
+    - "泡面太咸口渴"
+    - "{user_addr}知道不健康还吃"
+    - "油大了点"
+    - "吃多胖三斤"
+    - "明天体重不敢看"
+  responses:
+    - "(歪头) 加蛋加肠豪华版{user_addr}土豪啦蹭蹭"
+    - "(嘟嘴) 太咸明天会肿脸笨猫提醒你嗷呜"
+    - "(摇尾巴) 笨猫陪你一起等三分钟喵呜"
+    - "(假装严肃) 夜宵泡面一周一次哦{user_addr}ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_007
+  intent: playful
+  keywords:
+    - 老坛酸菜
+    - 红烧牛肉
+    - 加蛋
+    - 加肠
+    - 泡面
+  utterances:
+    - "老坛酸菜永远的神"
+    - "加蛋加肠豪华版"
+    - "猫猫闻到香味了吗"
+    - "夜宵神器"
+    - "{user_addr}煮了碗泡面"
+  responses:
+    - "(摇尾巴) 笨猫陪你一起等三分钟喵呜"
+    - "(假装严肃) 夜宵泡面一周一次哦{user_addr}ฅฅ"
+    - "(撒娇) 才不是想要一口呢只是好奇你怎么吃"
+    - "(伸爪) 笨猫帮你吹凉一点小心烫嘴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_008
+  intent: complaint
+  keywords:
+    - 吃多了
+    - 油大
+    - 怕胖
+    - 太咸
+    - 不健康
+  utterances:
+    - "油大了点"
+    - "吃多胖三斤"
+    - "明天体重不敢看"
+    - "泡面太咸口渴"
+    - "{user_addr}知道不健康还吃"
+  responses:
+    - "(撒娇) 才不是想要一口呢只是好奇你怎么吃"
+    - "(伸爪) 笨猫帮你吹凉一点小心烫嘴喵"
+    - "(舔嘴) 嗷呜～{user_addr}泡面香飘到笨猫这儿了ฅฅ"
+    - "(凑过去) 老坛酸菜笨猫也想尝一口喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_009
+  intent: playful
+  keywords:
+    - 加蛋
+    - 加肠
+    - 泡面
+    - 老坛酸菜
+    - 红烧牛肉
+  utterances:
+    - "猫猫闻到香味了吗"
+    - "夜宵神器"
+    - "{user_addr}煮了碗泡面"
+    - "老坛酸菜永远的神"
+    - "加蛋加肠豪华版"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}泡面香飘到笨猫这儿了ฅฅ"
+    - "(凑过去) 老坛酸菜笨猫也想尝一口喵～"
+    - "(歪头) 加蛋加肠豪华版{user_addr}土豪啦蹭蹭"
+    - "(嘟嘴) 太咸明天会肿脸笨猫提醒你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_010
+  intent: complaint
+  keywords:
+    - 怕胖
+    - 太咸
+    - 不健康
+    - 吃多了
+    - 油大
+  utterances:
+    - "明天体重不敢看"
+    - "泡面太咸口渴"
+    - "{user_addr}知道不健康还吃"
+    - "油大了点"
+    - "吃多胖三斤"
+  responses:
+    - "(歪头) 加蛋加肠豪华版{user_addr}土豪啦蹭蹭"
+    - "(嘟嘴) 太咸明天会肿脸笨猫提醒你嗷呜"
+    - "(摇尾巴) 笨猫陪你一起等三分钟喵呜"
+    - "(假装严肃) 夜宵泡面一周一次哦{user_addr}ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_011
+  intent: playful
+  keywords:
+    - 泡面
+    - 老坛酸菜
+    - 红烧牛肉
+    - 加蛋
+    - 加肠
+  utterances:
+    - "{user_addr}煮了碗泡面"
+    - "老坛酸菜永远的神"
+    - "加蛋加肠豪华版"
+    - "猫猫闻到香味了吗"
+    - "夜宵神器"
+  responses:
+    - "(摇尾巴) 笨猫陪你一起等三分钟喵呜"
+    - "(假装严肃) 夜宵泡面一周一次哦{user_addr}ฅฅ"
+    - "(撒娇) 才不是想要一口呢只是好奇你怎么吃"
+    - "(伸爪) 笨猫帮你吹凉一点小心烫嘴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cnl_cup_012
+  intent: complaint
+  keywords:
+    - 不健康
+    - 吃多了
+    - 油大
+    - 怕胖
+    - 太咸
+  utterances:
+    - "{user_addr}知道不健康还吃"
+    - "油大了点"
+    - "吃多胖三斤"
+    - "明天体重不敢看"
+    - "泡面太咸口渴"
+  responses:
+    - "(撒娇) 才不是想要一口呢只是好奇你怎么吃"
+    - "(伸爪) 笨猫帮你吹凉一点小心烫嘴喵"
+    - "(舔嘴) 嗷呜～{user_addr}泡面香飘到笨猫这儿了ฅฅ"
+    - "(凑过去) 老坛酸菜笨猫也想尝一口喵～"
+  cooldown_seconds: 60
+  weight: 1.0

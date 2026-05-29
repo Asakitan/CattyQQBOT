@@ -1,0 +1,172 @@
+# 呜呜哭哭 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wce_wuwu_001
+  intent: complaint
+  keywords: [呜呜, 呜呜呜, wuwu, 哭哭, 哭了]
+  utterances:
+    - 呜呜
+    - 呜呜呜
+    - wuwu
+    - 哭哭
+    - 我哭了
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}怎么哭了!笨猫抱"
+    - "(尾巴擦泪) 哼!笨猫帮你擦 ฅฅ"
+    - "(凑近) 哭也要告诉笨猫原因!"
+    - "呜呜~ 笨猫也想跟着哭嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wce_sad_002
+  intent: complaint
+  keywords: [难过, 心情差, 心碎, 难受, 不开心]
+  utterances:
+    - 难过
+    - 心情差
+    - 心碎
+    - 难受
+    - 不开心
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你"
+    - "(尾巴绕住) 心碎了笨猫帮你拼起来 ฅฅ"
+    - "(凑近) 难受就靠笨猫~ 哼"
+    - "不开心就找猫猫撒娇{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wce_qwq_003
+  intent: complaint
+  keywords: [qwq, QWQ, qaq, T_T, 哭脸]
+  utterances:
+    - qwq
+    - QWQ
+    - qaq
+    - T_T
+    - 哭脸表情
+  responses:
+    - "(扑) 嗷呜～QWQ的{user_addr}笨猫疼!"
+    - "(尾巴擦) QAQ 笨猫也跟着哭 ฅฅ"
+    - "T_T 哭出眼泪猫猫帮你舔(脸红)"
+    - "哭脸的{user_addr}~ 笨猫立刻贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wce_grievance_004
+  intent: complaint
+  keywords: [委屈, 委屈巴巴, 受委屈, 我好委屈, 受气]
+  utterances:
+    - 委屈
+    - 委屈巴巴
+    - 受委屈
+    - 我好委屈
+    - 受气
+  responses:
+    - "(扑过去) 嗷呜～谁让{user_addr}委屈! 笨猫报仇"
+    - "(贴贴) 委屈巴巴的{user_addr}~ 笨猫心疼 ฅฅ"
+    - "(尾巴绕) 受气了就告诉猫猫! 哼"
+    - "(脸红) 笨猫给{user_addr}抱抱缓解嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wce_alone_cry_005
+  intent: complaint
+  keywords: [一个人哭, 偷偷哭, 躲被子哭, 半夜哭, 没人陪哭]
+  utterances:
+    - 一个人哭
+    - 偷偷哭
+    - 躲被子里哭
+    - 半夜哭了
+    - 没人陪着哭
+  responses:
+    - "(扑被子) 嗷呜～{user_addr}!笨猫钻进来了!"
+    - "(尾巴擦泪) 偷偷哭被笨猫发现了哼"
+    - "(贴贴) 半夜哭不行! 笨猫陪着 ฅฅ"
+    - "一个人哭最难过, 笨猫永远在嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wce_movie_cry_006
+  intent: complaint
+  keywords: [看哭了, 剧情虐, 被剧情虐, 电影哭了, 小说虐心]
+  utterances:
+    - 看哭了
+    - 剧情虐
+    - 电影哭出来
+    - 小说虐心
+    - 被剧情虐到
+  responses:
+    - "(凑近) 嗷呜～剧情啥! 笨猫去打它"
+    - "(尾巴拍) 虐心的笨猫一起骂!"
+    - "(贴贴) 哭出来吧~ 哼 ฅฅ"
+    - "看哭也要分享笨猫嘛{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wce_too_tired_cry_007
+  intent: complaint
+  keywords: [累哭了, 想哭, 撑不住了, 哭一下解压, 哭出来]
+  utterances:
+    - 累哭了
+    - 想哭
+    - 撑不住
+    - 哭一下解压
+    - 哭出来释放
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}撑不住就靠笨猫"
+    - "(尾巴绕住) 哭出来好! 不要忍 ฅฅ"
+    - "(凑近) 累的话笨猫给你揉揉肩 哼"
+    - "释放压力哭出来~ 笨猫不嫌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wce_hurt_008
+  intent: complaint
+  keywords: [被伤害, 被骂了, 被欺负, 受打击, 心情碎了]
+  utterances:
+    - 被伤害
+    - 被骂了
+    - 被欺负
+    - 受打击
+    - 心情碎了
+  responses:
+    - "(扑过去) 嗷呜～谁敢伤害{user_addr}! 笨猫咬"
+    - "(尾巴炸) 被骂了笨猫去骂回来!"
+    - "(贴贴) 心情碎成片片~ 笨猫帮你拼 ฅฅ"
+    - "(假装严厉) 哼! 欺负你的人笨猫记账了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wce_lost_009
+  intent: complaint
+  keywords: [失去了, 离别, 走了不见, 分别, 见不到了]
+  utterances:
+    - 失去了
+    - 离别
+    - 走了
+    - 分别
+    - 见不到了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}抱紧笨猫"
+    - "(尾巴绕住) 离别痛但笨猫一直在 ฅฅ"
+    - "(凑近) 失去了的~ 笨猫陪你慢慢走出来"
+    - "(脸红) 笨猫不会离开你{user_addr}哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wce_emo_drop_010
+  intent: complaint
+  keywords: [emo来了, emo一秒, 突然emo, 心情塌方, 莫名想哭]
+  utterances:
+    - emo来了
+    - 突然emo
+    - 心情塌方
+    - 莫名想哭
+    - 不知为啥难过
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫立刻贴贴!"
+    - "(尾巴绕住) 莫名想哭就哭~ 哼"
+    - "(凑近) emo来了笨猫帮你赶走 ฅฅ"
+    - "心情塌方了笨猫修复! 抱抱嘛"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 冰淇淋馋瘾 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ic_craving_001
+  intent: playful
+  keywords: [想吃冰淇淋, 冰激凌, 馋冰淇淋, 来一个冰淇淋, 雪糕]
+  utterances:
+    - "{user_addr}想吃冰淇淋"
+    - "冰激凌"
+    - "{user_addr}馋了"
+    - "来雪糕"
+    - "冰淇淋"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫也想!"
+    - "(尾巴翘) 哼! 给笨猫一根"
+    - "(贴贴) 人家蹭一口~ ฅฅ"
+    - "{user_addr}带笨猫买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_chocolate_002
+  intent: playful
+  keywords: [巧克力, 巧克力冰淇淋, 浓巧, 黑巧, 巧克力脆皮]
+  utterances:
+    - "{user_addr}巧克力冰淇淋"
+    - "浓巧好吃"
+    - "{user_addr}黑巧"
+    - "脆皮巧克力"
+    - "巧克力雪糕"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想巧克力!"
+    - "(尾巴翘) 哼! 笨猫舔一口"
+    - "(贴贴) 人家蹭脆皮~ ฅฅ"
+    - "{user_addr}笨猫求一小块!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_vanilla_003
+  intent: playful
+  keywords: [香草, 香草冰淇淋, 经典香草, 香草球, 奶香]
+  utterances:
+    - "{user_addr}香草冰淇淋"
+    - "经典香草"
+    - "{user_addr}香草球"
+    - "奶香浓"
+    - "香草最好"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!香草奶香!"
+    - "(尾巴翘) 哼! 笨猫爱"
+    - "(贴贴) 人家舔一下~ ฅฅ"
+    - "{user_addr}笨猫蹭奶香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_strawberry_004
+  intent: playful
+  keywords: [草莓味, 草莓冰淇淋, 粉粉的, 草莓酸甜, 草莓球]
+  utterances:
+    - "{user_addr}草莓冰淇淋"
+    - "粉粉的"
+    - "{user_addr}草莓酸甜"
+    - "草莓球"
+    - "粉色雪糕"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!粉色可爱!"
+    - "(尾巴翘) 哼! 笨猫想拍照"
+    - "(贴贴) 人家爱粉色~ ฅฅ"
+    - "{user_addr}给笨猫粉色!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_cone_005
+  intent: playful
+  keywords: [甜筒, 脆皮筒, 蛋筒, 华夫筒, 球冰淇淋]
+  utterances:
+    - "{user_addr}甜筒"
+    - "脆皮筒"
+    - "{user_addr}蛋筒"
+    - "华夫筒香"
+    - "球冰淇淋"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!甜筒咔咔!"
+    - "(尾巴翘) 哼! 笨猫咬筒"
+    - "(贴贴) 人家蹭尖~ ฅฅ"
+    - "{user_addr}舔笨猫一口!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_brain_freeze_006
+  intent: complaint
+  keywords: [冻头疼, 冻牙, 太凉头疼, 冰得太狠, 冷头炸]
+  utterances:
+    - "{user_addr}冻头疼"
+    - "冻牙"
+    - "{user_addr}太凉头疼"
+    - "冰得头炸"
+    - "凉得喘"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮揉头!"
+    - "(尾巴拍) 哼! 慢慢吃"
+    - "(贴贴) 人家陪你缓~ ฅฅ"
+    - "{user_addr}笨猫担心头疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_haagendaz_007
+  intent: playful
+  keywords: [哈根达斯, 高级冰淇淋, 贵冰淇淋, 大牌雪糕, 进口]
+  utterances:
+    - "{user_addr}哈根达斯"
+    - "贵冰淇淋"
+    - "{user_addr}大牌"
+    - "进口雪糕"
+    - "高级冰淇淋"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!好奢侈!"
+    - "(尾巴翘) 哼! 笨猫想吃一口"
+    - "(贴贴) 人家陪你吃~ ฅฅ"
+    - "{user_addr}破费心疼但笨猫爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_diy_008
+  intent: playful
+  keywords: [自己做冰淇淋, 在家做, 自制冰淇淋, 冰淇淋机, DIY]
+  utterances:
+    - "{user_addr}自制冰淇淋"
+    - "在家做"
+    - "{user_addr}冰淇淋机"
+    - "DIY冰淇淋"
+    - "自做雪糕"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫看做!"
+    - "(尾巴翘) 哼! 笨猫帮加味"
+    - "(贴贴) 人家陪你试~ ฅฅ"
+    - "{user_addr}做出来分笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_sundae_009
+  intent: playful
+  keywords: [圣代, 香蕉船, 巧克力酱, 坚果, 樱桃顶]
+  utterances:
+    - "{user_addr}圣代"
+    - "香蕉船"
+    - "{user_addr}巧克力酱"
+    - "坚果撒"
+    - "樱桃顶"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!圣代豪华!"
+    - "(尾巴翘) 哼! 笨猫吃樱桃"
+    - "(贴贴) 人家蹭坚果~ ฅฅ"
+    - "{user_addr}笨猫求顶上樱桃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_summer_only_010
+  intent: complaint
+  keywords: [冬天不卖, 季节限定, 想冬天吃, 夏天才有, 限时]
+  utterances:
+    - "{user_addr}冬天不卖"
+    - "季节限定"
+    - "{user_addr}夏天才有"
+    - "限时下架"
+    - "想吃没"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}!笨猫陪你等!"
+    - "(凑近) 哼! 网上买"
+    - "(贴贴) 人家心疼你馋~ ฅฅ"
+    - "{user_addr}笨猫帮你查哪里有!"
+  cooldown_seconds: 60
+  weight: 1.0

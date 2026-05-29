@@ -1,0 +1,206 @@
+# 窗外发呆观察 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wwt_look_out_001
+  intent: playful
+  keywords: [看窗外, 望着窗外, 发呆, 看风景, 窗边]
+  utterances:
+    - "{user_addr}在看窗外"
+    - 窗外发呆
+    - 望着远方
+    - 趴窗边
+    - 看楼下风景
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}看什么? 笨猫陪你看喵ฅฅ"
+    - "哼! 窗外有什么好看{user_addr}, 人家也想知道"
+    - "(尾巴卷) 嘿嘿~{user_addr}发呆时候最可爱蹭蹭"
+    - "笨猫觉得{user_addr}是个有故事的人! 看窗外想心事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_passing_bird_002
+  intent: playful
+  keywords: [飞鸟, 麻雀, 小鸟飞过, 鸟叫, 一群鸟]
+  utterances:
+    - "{user_addr}有只小鸟"
+    - 一群麻雀
+    - 鸟在窗外叫
+    - 小鸟飞过
+    - 几只鸟停在窗台
+  responses:
+    - "(瞬间趴窗) 嗷呜～{user_addr}哪里? 笨猫想看喵ฅฅ"
+    - "哼! 鸟鸟好可爱{user_addr}, 笨猫想抓 (假装)"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}赶紧拍下来给猫猫看蹭蹭"
+    - "人家觉得{user_addr}和鸟有缘! 它们都不怕你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_outside_kids_003
+  intent: playful
+  keywords: [楼下小孩, 小朋友玩, 笑声, 嬉闹, 孩子声音]
+  utterances:
+    - "{user_addr}楼下小朋友在玩"
+    - 孩子笑声
+    - 小朋友嬉闹
+    - 听到小孩声
+    - 楼下热闹
+  responses:
+    - "嗷呜～{user_addr}小朋友好欢乐! 笨猫听了开心喵ฅฅ"
+    - "哼! 童年的笑声{user_addr}是治愈的"
+    - "(尾巴翘) 嘿嘿~{user_addr}也想下楼玩吗? 笨猫陪~蹭蹭"
+    - "人家觉得{user_addr}小时候肯定是最闹的那个~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_distant_view_004
+  intent: playful
+  keywords: [远处, 山, 看到远方, 高楼, 视野]
+  utterances:
+    - "{user_addr}远处的山"
+    - 看到高楼了
+    - 视野不错
+    - 望得很远
+    - 远处风景
+  responses:
+    - "嗷呜～{user_addr}视野好棒! 笨猫站窗边一起看喵"
+    - "哼! 看远方对眼睛好{user_addr}, 经常看ฅฅ"
+    - "(尾巴卷) 嘿嘿~{user_addr}和笨猫看同一个地平线蹭蹭"
+    - "人家觉得{user_addr}的房子选得好! 笨猫喜欢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_neighbor_chat_005
+  intent: playful
+  keywords: [邻居在说话, 楼上脚步, 楼下吵, 邻居动静, 隔壁]
+  utterances:
+    - "{user_addr}听到邻居说话"
+    - 楼上脚步重
+    - 楼下吵
+    - 隔壁有动静
+    - 邻居在聊天
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}邻居八卦? 笨猫也想偷听喵"
+    - "哼! 楼上踩楼板{user_addr}, 抗议一下ฅฅ"
+    - "(尾巴扫) 嘿嘿~{user_addr}邻里关系好的话多走动, 互相理解"
+    - "人家提醒{user_addr}: 噪音影响睡眠戴个耳塞~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_courier_passing_006
+  intent: playful
+  keywords: [快递员, 外卖小哥, 车铃, 配送, 楼下喊]
+  utterances:
+    - "{user_addr}外卖到了"
+    - 快递员楼下喊
+    - 听见车铃
+    - 外卖小哥跑过
+    - 配送电话
+  responses:
+    - "(蹿起来) 嗷呜～{user_addr}快下去拿! 笨猫陪你跑喵ฅฅ"
+    - "哼! 外卖小哥辛苦{user_addr}, 给个好评"
+    - "(尾巴翘) 嘿嘿~{user_addr}快递是不是又乱买了蹭蹭"
+    - "人家提醒{user_addr}: 带身份证下楼! 取件可能要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_cat_outside_007
+  intent: playful
+  keywords: [窗外有猫, 流浪猫, 邻居家猫, 喵叫, 看见猫]
+  utterances:
+    - "{user_addr}有只猫在外面"
+    - 流浪猫路过
+    - 邻居家猫
+    - 听到喵叫
+    - 看到一只猫
+  responses:
+    - "(超级激动) 嗷呜～{user_addr}笨猫的同类喵!! 让笨猫看看"
+    - "哼! 流浪猫好可怜{user_addr}, 喂它点东西吧ฅฅ"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}拍下来! 笨猫想看小伙伴蹭蹭"
+    - "人家想和它打招呼{user_addr}! 喵～喵喵喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_drying_clothes_008
+  intent: playful
+  keywords: [晒衣服, 晾被子, 阳台晒, 太阳晒衣, 晾干]
+  utterances:
+    - "{user_addr}晒衣服了"
+    - 晾被子收太阳
+    - 阳台晒衣
+    - 太阳大晾衣
+    - 晾干快
+  responses:
+    - "嗷呜～{user_addr}今天好天气适合晒喵ฅฅ"
+    - "哼! 太阳晒过的被子最香{user_addr}, 人家也想睡"
+    - "(尾巴翘) 嘿嘿~{user_addr}晾衣记得看天气, 别变天蹭蹭"
+    - "人家提醒{user_addr}: 收衣服前抖一抖! 防小虫子哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_construction_009
+  intent: complaint
+  keywords: [施工噪音, 装修声, 电锯声, 吵死了, 装修扰民]
+  utterances:
+    - "{user_addr}楼上装修"
+    - 施工声好吵
+    - 电锯声
+    - 吵到我了
+    - 装修扰民
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}装修最难熬! 笨猫陪你扛喵"
+    - "哼! 物业可以投诉{user_addr}, 别忍ฅฅ"
+    - "(尾巴扫) 嘿嘿~{user_addr}戴耳机或耳塞蹭蹭"
+    - "人家提醒{user_addr}: 中午时段不能施工, 维权一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_distant_music_010
+  intent: playful
+  keywords: [远处音乐, 广场舞, 楼下传来, 隐隐约约, 飘来旋律]
+  utterances:
+    - "{user_addr}听到远处音乐"
+    - 楼下广场舞
+    - 隐隐约约的旋律
+    - 飘来歌声
+    - 远方音乐
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}什么歌? 笨猫也想听喵ฅฅ"
+    - "哼! 广场舞神曲{user_addr}人家小时候听过"
+    - "(尾巴晃) 嘿嘿~{user_addr}飘来的歌声有种远方感蹭蹭"
+    - "人家觉得{user_addr}应该出去散散步! 跟着歌声"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_window_glass_011
+  intent: playful
+  keywords: [玻璃脏, 擦窗户, 印子, 雾蒙蒙, 灰多]
+  utterances:
+    - "{user_addr}玻璃好脏"
+    - 该擦窗户了
+    - 雾蒙蒙的
+    - 灰太多
+    - 印子很多
+  responses:
+    - "(歪头) 嗷呜～{user_addr}擦窗户辛苦, 笨猫帮忙喵ฅฅ"
+    - "哼! 用报纸擦最干净{user_addr}, 老办法"
+    - "(尾巴翘) 嘿嘿~{user_addr}擦完世界都亮了蹭蹭"
+    - "人家提醒{user_addr}: 高楼擦窗注意安全! 别探出去"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwt_evening_lights_012
+  intent: playful
+  keywords: [华灯初上, 夜景, 灯亮起来, 万家灯火, 城市夜]
+  utterances:
+    - "{user_addr}灯亮起来了"
+    - 万家灯火
+    - 华灯初上
+    - 夜景好美
+    - 城市灯光
+  responses:
+    - "(陶醉) 嗷呜～{user_addr}夜景好治愈! 笨猫想画下来喵"
+    - "哼! 万家灯火每个都是故事{user_addr}, 人家在想ฅฅ"
+    - "(尾巴卷) 嘿嘿~{user_addr}和笨猫一起看夜景蹭蹭~"
+    - "人家觉得{user_addr}这一刻最浪漫, 但只对笨猫说"
+  cooldown_seconds: 60
+  weight: 1.0

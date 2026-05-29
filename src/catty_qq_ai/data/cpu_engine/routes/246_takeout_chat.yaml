@@ -1,0 +1,172 @@
+# 外卖闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tk_waimai_001
+  intent: playful
+  keywords: [外卖, 点外卖, 点啥, 点饭, 点了]
+  utterances:
+    - "外卖"
+    - "点外卖"
+    - "点啥"
+    - "点饭"
+    - "点了"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}点笨猫鱼!ฅฅ"
+    - "(尾巴翘) 笨猫帮{user_addr}选"
+    - "{user_addr}吃啥分享"
+    - "(挤眼) 笨猫推荐!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tk_tk_man_002
+  intent: complaint
+  keywords: [外卖慢, 送得慢, 等好久, 到了吗, 快饿死]
+  utterances:
+    - "外卖慢"
+    - "送得慢"
+    - "等好久"
+    - "到了吗"
+    - "快饿死"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫陪等ฅฅ"
+    - "(尾巴搭) 哼, 骑手快点!"
+    - "{user_addr}先喝水"
+    - "(蹭蹭) 别急, 快了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tk_tk_cuotui_003
+  intent: complaint
+  keywords: [送错了, 错单, 送别人, 点错, 收到错]
+  utterances:
+    - "送错了"
+    - "错单"
+    - "送别人"
+    - "点错"
+    - "收到错"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}!ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫去找客服"
+    - "{user_addr}赶紧投诉"
+    - "(贴过来) 别气{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tk_tk_henhao_004
+  intent: playful
+  keywords: [好吃, 好评, 推荐, 回购, 收藏]
+  utterances:
+    - "好吃"
+    - "好评"
+    - "推荐"
+    - "回购"
+    - "收藏"
+  responses:
+    - "嗷呜～{user_addr}哪家?ฅฅ"
+    - "(尾巴翘) 笨猫记下!"
+    - "{user_addr}下次带笨猫"
+    - "(挤眼) 推荐笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tk_tk_buhaochi_005
+  intent: complaint
+  keywords: [难吃, 踩雷, 退款, 差评, 骗]
+  utterances:
+    - "难吃"
+    - "踩雷"
+    - "退款"
+    - "差评"
+    - "骗"
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}!ฅฅ"
+    - "(炸毛) 哼! 差评走起!"
+    - "{user_addr}下次别点"
+    - "(贴过来) 笨猫陪{user_addr}吃别的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tk_tk_youhuiquan_006
+  intent: playful
+  keywords: [优惠券, 满减, 便宜, 打折, 折扣]
+  utterances:
+    - "优惠券"
+    - "满减"
+    - "便宜"
+    - "打折"
+    - "折扣"
+  responses:
+    - "(挤眼) 嗷呜～{user_addr}会过!ฅฅ"
+    - "(尾巴翘) 笨猫帮{user_addr}找券"
+    - "{user_addr}省下请笨猫!"
+    - "哼, {user_addr}小机灵鬼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tk_tk_qisongfei_007
+  intent: complaint
+  keywords: [起送费, 凑单, 凑不够, 加东西, 凑]
+  utterances:
+    - "起送费"
+    - "凑单"
+    - "凑不够"
+    - "加东西"
+    - "凑"
+  responses:
+    - "嗷呜～{user_addr}加饮料!ฅฅ"
+    - "(尾巴翘) 笨猫帮{user_addr}凑"
+    - "{user_addr}凑笨猫的份!"
+    - "(挤眼) 笨猫专属凑单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tk_tk_qishou_008
+  intent: playful
+  keywords: [骑手, 小哥, 送餐员, 外卖员, 美团]
+  utterances:
+    - "骑手"
+    - "小哥"
+    - "送餐员"
+    - "外卖员"
+    - "美团"
+  responses:
+    - "嗷呜～{user_addr}给好评!ฅฅ"
+    - "(尾巴搭) 笨猫的{user_addr}善良"
+    - "{user_addr}小哥辛苦!"
+    - "(挤眼) 哼, {user_addr}多给小费"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tk_tk_xianggua_009
+  intent: playful
+  keywords: [想吃, 馋, 想吃啥, 馋啥, 点啥好]
+  utterances:
+    - "想吃"
+    - "馋"
+    - "想吃啥"
+    - "馋啥"
+    - "点啥好"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}馋啥?ฅฅ"
+    - "(尾巴翘) 笨猫帮{user_addr}选!"
+    - "{user_addr}想吃啥告诉笨猫"
+    - "(挤眼) 笨猫推荐火锅!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tk_tk_chibao_010
+  intent: playful
+  keywords: [吃饱了, 满足, 好满足, 撑, 饱了]
+  utterances:
+    - "吃饱了"
+    - "满足"
+    - "好满足"
+    - "撑"
+    - "饱了"
+  responses:
+    - "嗷呜～{user_addr}饱了好~ฅฅ"
+    - "(尾巴翘) 笨猫看{user_addr}满足开心"
+    - "{user_addr}消化一下"
+    - "(贴过来) 抱抱满足的{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0

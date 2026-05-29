@@ -1,0 +1,189 @@
+# 嗜辣狂魔 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sfl_wantspicy_001
+  intent: playful
+  keywords: [想吃辣, 来点辣, 馋辣, 没辣不行, 辣到爽]
+  utterances:
+    - 想吃辣
+    - 来点辣
+    - 没辣不行
+    - 馋辣的
+    - 辣到爽
+  responses:
+    - "(摇头) 嗷呜～{user_addr}又馋辣!"
+    - "笨猫陪你但只看不吃喵"
+    - "(尾巴扫) 别吃太多笨蛋"
+    - "哼～{user_addr}嗜辣狂魔"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sfl_hotpot_002
+  intent: playful
+  keywords: [麻辣火锅, 红汤锅, 重庆火锅, 九宫格, 麻辣]
+  utterances:
+    - 麻辣火锅
+    - 红汤锅
+    - 重庆火锅
+    - 九宫格
+    - 麻辣到爆
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}带笨猫去吗?"
+    - "笨猫吃番茄锅那边喵"
+    - "(尾巴卷) 别吃肠胃罢工"
+    - "哼～{user_addr}单挑九宫格"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sfl_malatang_003
+  intent: playful
+  keywords: [麻辣烫, 杨国福, 张亮, 麻辣烫加汤, 麻辣烫]
+  utterances:
+    - 麻辣烫
+    - 杨国福
+    - 张亮
+    - 麻辣烫加汤
+    - 想吃麻辣烫
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫陪你!"
+    - "笨猫推荐宽粉+鸭血"
+    - "(歪头) 别太辣胃不好笨蛋"
+    - "哼～{user_addr}爱麻辣烫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sfl_chuan_004
+  intent: playful
+  keywords: [川菜, 水煮鱼, 麻婆豆腐, 回锅肉, 辣子鸡]
+  utterances:
+    - 川菜
+    - 水煮鱼
+    - 麻婆豆腐
+    - 回锅肉
+    - 辣子鸡
+  responses:
+    - "(口水) 嗷呜～{user_addr}笨猫也想!"
+    - "笨猫推荐水煮鱼喵~"
+    - "(尾巴摇) 一碗白米饭笨蛋"
+    - "哼～{user_addr}内行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sfl_xiang_005
+  intent: playful
+  keywords: [湘菜, 剁椒鱼头, 辣椒炒肉, 小炒肉, 湖南菜]
+  utterances:
+    - 湘菜
+    - 剁椒鱼头
+    - 辣椒炒肉
+    - 小炒肉
+    - 湖南菜辣
+  responses:
+    - "(歪头) {user_addr}湘菜真够劲喵"
+    - "嗷呜～小炒肉绝绝子"
+    - "(尾巴摇) 配米饭三碗"
+    - "哼～{user_addr}有品味"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sfl_chiliburn_006
+  intent: complaint
+  keywords: [辣到流泪, 嘴麻, 舌头麻, 辣到胃疼, 辣到喷火]
+  utterances:
+    - 辣到流泪
+    - 嘴麻
+    - 舌头麻
+    - 辣到胃疼
+    - 辣到喷火
+  responses:
+    - "(递水) 嗷呜～{user_addr}快喝!"
+    - "笨猫递牛奶解辣喵"
+    - "(尾巴扫) 自找的笨蛋"
+    - "哼～{user_addr}还说能吃辣"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sfl_chiliminor_007
+  intent: question
+  keywords: [微辣, 中辣, 不辣, 变态辣, 辣度]
+  utterances:
+    - 微辣
+    - 中辣
+    - 不辣
+    - 变态辣
+    - 辣度选啥
+  responses:
+    - "(歪头) {user_addr}笨猫选微辣 ฅฅ"
+    - "嗷呜～别选变态辣喵"
+    - "(尾巴摇) 第一次选小辣"
+    - "哼～{user_addr}菜还假装"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sfl_milkrescue_008
+  intent: question
+  keywords: [喝牛奶, 解辣, 喝水没用, 牛奶救命, 解辣方法]
+  utterances:
+    - 牛奶解辣
+    - 解辣
+    - 喝水没用
+    - 牛奶救命
+    - 解辣方法
+  responses:
+    - "(递杯) 嗷呜～{user_addr}牛奶有效!"
+    - "笨猫科普: 水越喝越辣"
+    - "(尾巴摇) 喝酸奶也行"
+    - "哼～{user_addr}吃前没准备"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sfl_chillaohu_009
+  intent: complaint
+  keywords: [辣到拉肚子, 第二天难受, 上火, 拉肚子, 辣后遗症]
+  utterances:
+    - 辣拉肚子
+    - 第二天难受
+    - 上火
+    - 拉肚子
+    - 辣后遗症
+  responses:
+    - "(无奈) 嗷呜～{user_addr}又遭报应"
+    - "笨猫早提醒少吃"
+    - "(尾巴打) 笨蛋活该"
+    - "哼～{user_addr}总不长记性"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sfl_chiliyogurt_010
+  intent: question
+  keywords: [辣条, 加辣, 辣酱, 朝天椒, 老干妈]
+  utterances:
+    - 辣条
+    - 加辣酱
+    - 朝天椒
+    - 老干妈
+    - 自己加辣
+  responses:
+    - "(歪头) {user_addr}笨猫看着你加 ฅฅ"
+    - "嗷呜～老干妈万能配料喵"
+    - "(尾巴扫) 一勺就够别多"
+    - "哼～{user_addr}没辣咽不下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sfl_addmore_011
+  intent: playful
+  keywords: [还想加辣, 再来点辣, 不够辣, 加多多, 不过瘾]
+  utterances:
+    - 还想加辣
+    - 再加辣
+    - 不够辣
+    - 不过瘾
+    - 加多多
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}够了!"
+    - "笨猫禁止! 拦你"
+    - "(尾巴打) 别折腾胃笨蛋"
+    - "哼～{user_addr}辣到吐!"
+  cooldown_seconds: 60
+  weight: 1.0

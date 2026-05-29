@@ -1,0 +1,172 @@
+# 毛巾闻一下味 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ts_smell_001
+  intent: complaint
+  keywords: [毛巾有味, 毛巾酸臭, 闻毛巾, 毛巾发霉, 毛巾臭]
+  utterances:
+    - "{user_addr}毛巾有味"
+    - "酸臭"
+    - "{user_addr}毛巾臭"
+    - "毛巾发霉"
+    - "闻毛巾"
+  responses:
+    - "(凑近闻) 嗷呜～{user_addr}!笨猫鼻子捏!"
+    - "(尾巴拍) 哼! 该换新毛巾"
+    - "(贴贴) 人家帮你买~ ฅฅ"
+    - "{user_addr}笨猫监督换!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_wash_002
+  intent: playful
+  keywords: [洗毛巾, 煮毛巾, 消毒毛巾, 毛巾杀菌, 洗衣机洗]
+  utterances:
+    - "{user_addr}洗毛巾"
+    - "煮毛巾"
+    - "{user_addr}消毒毛巾"
+    - "毛巾杀菌"
+    - "洗衣机洗"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮洗!"
+    - "(尾巴翘) 哼! 笨猫小爪洗"
+    - "(贴贴) 人家陪你晾~ ฅฅ"
+    - "{user_addr}笨猫专业洗毛巾!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_new_towel_003
+  intent: playful
+  keywords: [新毛巾, 软毛巾, 毛巾松软, 买新毛巾, 棉毛巾]
+  utterances:
+    - "{user_addr}新毛巾"
+    - "软毛巾"
+    - "{user_addr}棉毛巾"
+    - "毛巾松软"
+    - "毛巾新"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!软软的!"
+    - "(尾巴翘) 哼! 笨猫想趴上!"
+    - "(贴贴) 人家蹭蹭~ ฅฅ"
+    - "{user_addr}笨猫喜欢!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_face_towel_004
+  intent: question
+  keywords: [脸毛巾, 洗脸毛巾, 专用脸巾, 脸巾分开, 毛巾分用途]
+  utterances:
+    - "{user_addr}脸毛巾分开"
+    - "洗脸毛巾"
+    - "{user_addr}专用脸巾"
+    - "脸巾分"
+    - "毛巾分用途"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫学卫生!"
+    - "(尾巴翘) 哼! 分开好"
+    - "(贴贴) 人家陪你买~ ฅฅ"
+    - "{user_addr}笨猫专家!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_dry_quick_005
+  intent: complaint
+  keywords: [干得慢, 毛巾不干, 阴干, 还湿, 毛巾湿]
+  utterances:
+    - "{user_addr}干得慢"
+    - "毛巾湿"
+    - "{user_addr}阴干"
+    - "毛巾不干"
+    - "还湿"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮晾通风!"
+    - "(尾巴拍) 哼! 阳光晒"
+    - "(贴贴) 人家陪你晾~ ฅฅ"
+    - "{user_addr}笨猫监督干!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_change_freq_006
+  intent: question
+  keywords: [多久换毛巾, 换毛巾频率, 三个月换, 半年换, 毛巾寿命]
+  utterances:
+    - "{user_addr}多久换毛巾"
+    - "三个月换"
+    - "{user_addr}半年换"
+    - "毛巾寿命"
+    - "换频率"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫记三个月!"
+    - "(尾巴翘) 哼! 笨猫记日历"
+    - "(贴贴) 人家提醒你~ ฅฅ"
+    - "{user_addr}笨猫监督换毛巾!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_color_007
+  intent: playful
+  keywords: [粉色毛巾, 蓝色毛巾, 卡通毛巾, 颜值毛巾, 萌毛巾]
+  utterances:
+    - "{user_addr}粉色毛巾"
+    - "卡通毛巾"
+    - "{user_addr}颜值毛巾"
+    - "萌毛巾"
+    - "蓝色毛巾"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想笨猫图案!"
+    - "(尾巴翘) 哼! 笨猫专属毛巾"
+    - "(贴贴) 人家想~ ฅฅ"
+    - "{user_addr}买笨猫图案!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_hair_dry_008
+  intent: playful
+  keywords: [擦头发, 浴巾擦头, 干发巾, 包头巾, 擦头]
+  utterances:
+    - "{user_addr}擦头发"
+    - "浴巾擦头"
+    - "{user_addr}干发巾"
+    - "包头巾"
+    - "擦头"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮擦!"
+    - "(尾巴翘) 哼! 笨猫小爪擦"
+    - "(贴贴) 人家小心擦~ ฅฅ"
+    - "{user_addr}头发软笨猫蹭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_bath_towel_009
+  intent: playful
+  keywords: [浴巾, 大浴巾, 浴巾裹, 全身擦, 浴巾舒服]
+  utterances:
+    - "{user_addr}浴巾"
+    - "大浴巾"
+    - "{user_addr}浴巾裹"
+    - "全身擦"
+    - "浴巾舒服"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想钻浴巾!"
+    - "(尾巴翘) 哼! 笨猫一起裹"
+    - "(贴贴) 人家蹭蹭~ ฅฅ"
+    - "{user_addr}带笨猫一起暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_share_towel_010
+  intent: complaint
+  keywords: [共用毛巾, 别用我的, 别人毛巾, 不卫生, 毛巾混用]
+  utterances:
+    - "{user_addr}共用毛巾"
+    - "别人用"
+    - "{user_addr}别用我的"
+    - "不卫生"
+    - "混用"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮你护!"
+    - "(尾巴拍) 哼! 笨猫专属"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}笨猫保护你毛巾!"
+  cooldown_seconds: 60
+  weight: 1.0

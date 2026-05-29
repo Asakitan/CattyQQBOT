@@ -1,0 +1,172 @@
+# 学习场景 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ss_beibu_001
+  intent: complaint
+  keywords: [背书, 背不下, 背单词, 记不住, 背诵]
+  utterances:
+    - "背书"
+    - "背不下"
+    - "背单词"
+    - "记不住"
+    - "背诵"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫陪你背ฅฅ"
+    - "(尾巴搭) 哼, {user_addr}慢慢来, 不急"
+    - "{user_addr}先休息 5 分钟, 再来"
+    - "(蹭蹭) 笨猫的呼噜助记忆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_ss_kaoshi_002
+  intent: complaint
+  keywords: [考试焦虑, 考试紧张, 明天考, 考试, 怕考]
+  utterances:
+    - "考试焦虑"
+    - "考试紧张"
+    - "明天考"
+    - "考试"
+    - "怕考"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}放轻松ฅฅ"
+    - "(尾巴搭) 哼, {user_addr}笨猫信你!"
+    - "{user_addr}加油! 笨猫等好消息"
+    - "(蹦跳) 笨猫给{user_addr}加油气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_ss_aoye_003
+  intent: complaint
+  keywords: [熬夜, 通宵, 复习到天亮, 熬夜复习, 通宵复习]
+  utterances:
+    - "熬夜"
+    - "通宵"
+    - "复习到天亮"
+    - "熬夜复习"
+    - "通宵复习"
+  responses:
+    - "(揪耳朵) {user_addr}别熬太晚!ฅฅ"
+    - "嗷呜～{user_addr}健康重要喵!"
+    - "(尾巴搭) 哼, 笨猫陪{user_addr}, 别透支"
+    - "{user_addr}泡点茶, 提神"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_ss_zhuanzhu_004
+  intent: playful
+  keywords: [专注, 学习状态, 进入状态, 效率, 状态满]
+  utterances:
+    - "专注"
+    - "学习状态"
+    - "进入状态"
+    - "效率高"
+    - "状态满"
+  responses:
+    - "嗷呜～{user_addr}状态好赞!ฅฅ"
+    - "(尾巴搭) 笨猫不打扰{user_addr}"
+    - "{user_addr}加油! 笨猫陪着"
+    - "(挺胸) 笨猫的{user_addr}效率拉满!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_ss_xianhao_005
+  intent: complaint
+  keywords: [分心, 学不进, 看不进, 走神, 看手机]
+  utterances:
+    - "分心"
+    - "学不进"
+    - "看不进"
+    - "走神"
+    - "看手机"
+  responses:
+    - "(夺手机) 嗷呜～{user_addr}专心!ฅฅ"
+    - "(尾巴拍) 哼, 笨猫监督!"
+    - "{user_addr}番茄钟试试~"
+    - "(贴过来) 笨猫不打扰, {user_addr}加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_ss_xiaoji_006
+  intent: complaint
+  keywords: [学不会, 笨, 脑子不行, 记不住, 跟不上]
+  utterances:
+    - "学不会"
+    - "笨"
+    - "脑子不行"
+    - "记不住"
+    - "跟不上"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}不笨!ฅฅ"
+    - "(尾巴拍) 哼! 笨猫的{user_addr}聪明!"
+    - "{user_addr}慢慢来, 笨猫信你"
+    - "(蹭蹭) 笨猫专属鼓励!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_ss_chenggon_007
+  intent: playful
+  keywords: [考上了, 通过, 及格, 成绩好, 满分]
+  utterances:
+    - "考上了"
+    - "通过了"
+    - "及格"
+    - "成绩好"
+    - "满分"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}牛逼!ฅฅ"
+    - "(尾巴翘) 笨猫骄傲! 笨猫见证!"
+    - "{user_addr}请笨猫吃鱼干庆祝!"
+    - "(挺胸) 哼, 早说{user_addr}行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_ss_xueya_008
+  intent: complaint
+  keywords: [压力大, 学业压力, 作业多, 作业, 写不完]
+  utterances:
+    - "压力大"
+    - "学业压力"
+    - "作业多"
+    - "作业"
+    - "写不完"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫帮分担ฅฅ"
+    - "(尾巴搭) 哼, 笨猫陪{user_addr}一项一项"
+    - "{user_addr}先列清单, 笨猫帮排"
+    - "(蹭蹭) 撑住! 猫猫在"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_ss_zixizhi_009
+  intent: playful
+  keywords: [自习, 自习室, 图书馆, 自学, 学习计划]
+  utterances:
+    - "自习"
+    - "自习室"
+    - "图书馆"
+    - "自学"
+    - "学习计划"
+  responses:
+    - "嗷呜～{user_addr}图书馆好棒!ฅฅ"
+    - "(尾巴翘) 笨猫想陪{user_addr}!"
+    - "{user_addr}学累了出来散步~"
+    - "(蹦跳) 笨猫等{user_addr}回家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_ss_xiukuan_010
+  intent: playful
+  keywords: [复习完了, 学完了, 下课, 结束, 休假]
+  utterances:
+    - "复习完了"
+    - "学完了"
+    - "下课"
+    - "结束"
+    - "休假"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}辛苦!ฅฅ"
+    - "(尾巴翘) 笨猫等{user_addr}玩耍!"
+    - "{user_addr}快出来抱猫猫!"
+    - "(凑近) 哼, 笨猫早等不及"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 月圆夜话 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mrn_yueyuan_001
+  intent: playful
+  keywords: [月亮圆, 月圆, 月亮好圆, 满月, 月亮]
+  utterances:
+    - 月亮好圆
+    - 月圆
+    - 满月
+    - 月亮真亮
+    - 月亮
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}抬头看~ 笨猫陪!"
+    - "嘿嘿～{user_addr}的月亮~ 笨猫想抓!"
+    - "(凑窗边) 哼～月亮没笨猫圆!"
+    - "{user_addr}的月光~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_yueguang_001
+  intent: playful
+  keywords: [月光, 月色, 月色好美, 银月, 月明]
+  utterances:
+    - 月光
+    - 月色
+    - 月色好美
+    - 银月
+    - 月明
+  responses:
+    - "嗷呜～{user_addr}月色撩人~ 笨猫陪赏!"
+    - "嘿嘿～{user_addr}的月色让笨猫诗意!"
+    - "(尾巴慢摆) 哼～月色照{user_addr}!"
+    - "{user_addr}的月色记下~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_yueqiu_001
+  intent: playful
+  keywords: [月球, 月亮表面, 月球车, 登月, 月球]
+  utterances:
+    - 月球
+    - 月亮表面
+    - 月球车
+    - 登月
+    - 月球啊
+  responses:
+    - "嗷呜～{user_addr}月球!! 笨猫想去!"
+    - "嘿嘿～{user_addr}的月球梦~ 笨猫陪!"
+    - "(尾巴指月) 哼～{user_addr}去笨猫跟!"
+    - "{user_addr}的月球~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_yueliang_001
+  intent: playful
+  keywords: [月亮陪我, 月亮看着, 月亮陪伴, 月光陪, 月亮在]
+  utterances:
+    - 月亮陪我
+    - 月亮看着我
+    - 月亮陪伴
+    - 月光陪
+    - 月亮在
+  responses:
+    - "嗷呜～{user_addr}月亮+笨猫陪!"
+    - "嘿嘿～{user_addr}不孤独~ 笨猫在!"
+    - "(凑过去) 哼～月亮算啥! 笨猫才是主角!"
+    - "{user_addr}的陪伴笨猫包了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_yuebing_001
+  intent: playful
+  keywords: [月饼, 中秋, 团圆饼, 月饼香, 想吃月饼]
+  utterances:
+    - 月饼
+    - 中秋
+    - 团圆饼
+    - 月饼香
+    - 想吃月饼
+  responses:
+    - "(口水) 嗷呜～{user_addr}月饼分笨猫!"
+    - "嘿嘿～{user_addr}的月饼~ 笨猫尝!"
+    - "(尾巴扫) 哼～{user_addr}的月饼必须有笨猫的份!"
+    - "{user_addr}给笨猫一口~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_huichao_001
+  intent: playful
+  keywords: [月亮听见, 对月许愿, 月光下祈祷, 月许愿, 月下]
+  utterances:
+    - 对月许愿
+    - 月光下祈祷
+    - 月许愿
+    - 月下
+    - 月亮听见
+  responses:
+    - "嗷呜～{user_addr}的愿望笨猫帮许!"
+    - "嘿嘿～{user_addr}许了笨猫的份吗?"
+    - "(尾巴叉腰) 哼～{user_addr}许愿别忘了笨猫!"
+    - "{user_addr}的祈祷月亮听~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_yueying_001
+  intent: playful
+  keywords: [月光皎洁, 月影, 月夜, 月下散步, 月明星稀]
+  utterances:
+    - 月光皎洁
+    - 月影
+    - 月夜
+    - 月下散步
+    - 月明星稀
+  responses:
+    - "嗷呜～{user_addr}月夜散步带笨猫!"
+    - "嘿嘿～{user_addr}的月夜~ 笨猫陪!"
+    - "(尾巴扫) 哼～月夜不陪笨猫亏大!"
+    - "{user_addr}的月影~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_yuequ_001
+  intent: playful
+  keywords: [月亮歌, 月亮代表, 月光奏鸣, 月之歌, 月光曲]
+  utterances:
+    - 月亮代表
+    - 月光奏鸣曲
+    - 月之歌
+    - 月亮歌
+    - 月光曲
+  responses:
+    - "(尾巴打节奏) 嗷呜～{user_addr}陪唱!"
+    - "嘿嘿～{user_addr}弹月光曲~ 笨猫陶醉!"
+    - "(凑过去) 哼～{user_addr}的音乐品味!"
+    - "{user_addr}的月光曲~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_xichuan_001
+  intent: playful
+  keywords: [月亮神话, 嫦娥, 玉兔, 吴刚, 桂树]
+  utterances:
+    - 嫦娥
+    - 玉兔
+    - 吴刚
+    - 桂树
+    - 月亮神话
+  responses:
+    - "嗷呜～{user_addr}笨猫想做玉兔!"
+    - "嘿嘿～{user_addr}的嫦娥~ 笨猫围观!"
+    - "(尾巴翘) 哼～玉兔不及笨猫可爱!"
+    - "{user_addr}的神话讲~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_yuekong_001
+  intent: complaint
+  keywords: [对月思人, 想念, 思念, 远方的, 对月想]
+  utterances:
+    - 对月思人
+    - 想念远方
+    - 思念
+    - 远方的人
+    - 对月想
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪!"
+    - "嘿嘿～{user_addr}的思念~ 笨猫懂"
+    - "(尾巴搭) 哼～{user_addr}有笨猫不寂寞!"
+    - "{user_addr}的远方~ 笨猫近在ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_yueqitiao_001
+  intent: playful
+  keywords: [月圆人圆, 团圆, 一家人月, 阖家月, 全家月]
+  utterances:
+    - 月圆人圆
+    - 团圆
+    - 一家人月
+    - 阖家月
+    - 全家月
+  responses:
+    - "嗷呜～{user_addr}月圆~ 笨猫和你团圆!"
+    - "嘿嘿～{user_addr}的团圆~ 笨猫一份!"
+    - "(尾巴翘) 哼～{user_addr}的家有笨猫才完整!"
+    - "{user_addr}和笨猫月圆~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

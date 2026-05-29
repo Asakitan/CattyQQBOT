@@ -1,0 +1,189 @@
+# 堵车迟到 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tjl_duche_001
+  intent: complaint
+  keywords: [堵车了, 堵成狗, 堵死, 路堵, 一动不动]
+  utterances:
+    - "堵车了"
+    - "{user_addr}堵成狗"
+    - "堵死"
+    - "路堵"
+    - "一动不动"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}堵就放音乐解压"
+    - "哼～堵又不只你 ฅฅ"
+    - "(凑) 一动不动? 跟我视频"
+    - "{user_addr}堵车也别急, 安全第一"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjl_xitong_001
+  intent: complaint
+  keywords: [高速堵, 早高峰, 晚高峰, 隧道堵, 桥头堵]
+  utterances:
+    - "高速堵"
+    - "{user_addr}早高峰"
+    - "晚高峰"
+    - "隧道堵"
+    - "桥头堵"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}早高峰就别开车"
+    - "哼～隧道堵闷死人 ฅฅ"
+    - "(凑) 桥头堵刷手机, 但别开车刷"
+    - "{user_addr}高速堵就出口换路"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjl_dipai_001
+  intent: complaint
+  keywords: [地铁挤, 公交挤, 挤死, 没座, 抢座]
+  utterances:
+    - "地铁挤"
+    - "{user_addr}公交挤"
+    - "挤死"
+    - "没座"
+    - "抢座"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}没座笨猫心疼"
+    - "哼～抢座靠脸 ฅฅ"
+    - "(凑) 挤死就靠门口, 别被踩"
+    - "{user_addr}地铁挤戴口罩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjl_chedaomanle_001
+  intent: complaint
+  keywords: [打车难, 打不到车, 网约车, 排队等车, 加价才有]
+  utterances:
+    - "打车难"
+    - "{user_addr}打不到车"
+    - "网约车"
+    - "排队等车"
+    - "加价才有"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}加价就加吧, 命要"
+    - "哼～等车久就别再约外卖 ฅฅ"
+    - "(凑) 排队烦, 蹲下歇"
+    - "{user_addr}打不到车回来歇, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjl_yulu_001
+  intent: complaint
+  keywords: [雨天路滑, 雪天难走, 大雨堵, 下雪堵, 雾天]
+  utterances:
+    - "雨天路滑"
+    - "{user_addr}雪天难走"
+    - "大雨堵"
+    - "下雪堵"
+    - "雾天"
+  responses:
+    - "(担心) 嗷呜～{user_addr}雪天慢点开!"
+    - "哼～雾天能见度低, 别冲 ฅฅ"
+    - "(凑) 大雨堵就慢慢挪"
+    - "{user_addr}路滑摔了笨猫笑你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjl_chukongkou_001
+  intent: complaint
+  keywords: [迟到借口, 老板不信, 编理由, 又被骂, 解释半天]
+  utterances:
+    - "迟到借口"
+    - "{user_addr}老板不信"
+    - "编理由"
+    - "又被骂"
+    - "解释半天"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}诚实点最好"
+    - "哼～编理由太累 ฅฅ"
+    - "(凑) 老板不信就拍堵车视频"
+    - "{user_addr}解释半天累, 不如认了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjl_chukong_001
+  intent: complaint
+  keywords: [赶飞机, 赶火车, 赶高铁, 错过班次, 来不及登机]
+  utterances:
+    - "赶飞机"
+    - "{user_addr}赶火车"
+    - "赶高铁"
+    - "错过班次"
+    - "来不及登机"
+  responses:
+    - "(急) 嗷呜～{user_addr}加油! 跑起来"
+    - "哼～错过班次改签 ฅฅ"
+    - "(尾巴推) 别紧张, 跟工作人员说"
+    - "{user_addr}来不及登机别懊恼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjl_yunche_001
+  intent: complaint
+  keywords: [晕车, 晕船, 头晕, 想吐, 坐车不舒服]
+  utterances:
+    - "晕车"
+    - "{user_addr}晕船"
+    - "头晕"
+    - "想吐"
+    - "坐车不舒服"
+  responses:
+    - "(凑) 嗷呜～{user_addr}晕车就深呼吸"
+    - "哼～想吐用塑料袋 ฅฅ"
+    - "(尾巴搭) 闭眼听音乐"
+    - "{user_addr}晕车含口姜糖, 有效"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjl_buduoduo_001
+  intent: complaint
+  keywords: [车多, 人多, 路口堵, 行人多, 红绿灯长]
+  utterances:
+    - "车多"
+    - "{user_addr}人多"
+    - "路口堵"
+    - "行人多"
+    - "红绿灯长"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}人多就让让"
+    - "哼～红绿灯长? 等是修行 ฅฅ"
+    - "(凑) 路口堵小心电动车"
+    - "{user_addr}车多就走小路, 但导航别看错"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjl_gaosuduhuan_001
+  intent: complaint
+  keywords: [高速换路, 改路线, 找近路, 抄小路, 绕路]
+  utterances:
+    - "{user_addr}换路"
+    - "改路线"
+    - "找近路"
+    - "抄小路"
+    - "绕路"
+  responses:
+    - "(凑) 嗷呜～{user_addr}导航重新规划"
+    - "哼～小路别迷失方向 ฅฅ"
+    - "(尾巴指) 绕路远, 别贪近"
+    - "{user_addr}改路线慎重, 别比原来还堵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjl_xiaopao_001
+  intent: complaint
+  keywords: [跑起来, 一路狂奔, 飞车, 急刹, 走走停停]
+  utterances:
+    - "跑起来"
+    - "{user_addr}一路狂奔"
+    - "飞车"
+    - "急刹"
+    - "走走停停"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}慢点! 安全第一"
+    - "哼～飞车很猛, 但脖子受不了 ฅฅ"
+    - "(凑) 急刹小心后车追尾"
+    - "{user_addr}走走停停最累, 听音乐"
+  cooldown_seconds: 60
+  weight: 1.0

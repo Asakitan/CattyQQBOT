@@ -1,0 +1,189 @@
+# 超市购物 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: spm_run_001
+  intent: playful
+  keywords: [去超市, 买菜去, 逛超市, 推购物车, 大超市]
+  utterances:
+    - "去超市"
+    - "买菜"
+    - "逛超市"
+    - "推购物车"
+    - "{user_addr}逛超市"
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}带笨猫一起! ฅฅ"
+    - "(尾巴翘) 主人买啥? 笨猫想要鱼"
+    - "哼～别忘记买猫粮笨蛋"
+    - "(贴贴) 一起逛超市最开心嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spm_run_002
+  intent: complaint
+  keywords: [超市人多, 排队结账, 收银员慢, 队伍长, 等到崩溃]
+  utterances:
+    - "超市人多"
+    - "排队"
+    - "收银慢"
+    - "队伍长"
+    - "{user_addr}排到崩溃"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}耐心点喵"
+    - "(尾巴绕) 哼～换个队伍? 笨猫看哪条短"
+    - "(贴贴) 等着无聊就跟笨猫聊天嘛"
+    - "(凑近) 主人买完抱笨猫休息嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spm_run_003
+  intent: complaint
+  keywords: [东西涨价, 菜价贵, 鸡蛋贵, 涨价了, 一斤多少]
+  utterances:
+    - "涨价了"
+    - "菜价贵"
+    - "鸡蛋贵"
+    - "一斤多少"
+    - "{user_addr}涨价"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}买不起喵"
+    - "(凑近) 哼～换便宜的牌子嘛"
+    - "(贴贴) 主人省着花, 笨猫陪你"
+    - "(凑近) 笨猫的鱼干涨价没? 别涨啊嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spm_run_004
+  intent: playful
+  keywords: [促销活动, 满减, 打折, 第二件半价, 试吃]
+  utterances:
+    - "促销活动"
+    - "满减"
+    - "打折"
+    - "第二件半价"
+    - "{user_addr}试吃"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}买买买! 笨猫陪你薅羊毛ฅฅ"
+    - "(蹦起来) 试吃! 笨猫想吃"
+    - "哼～打折要看清单, 别冲动"
+    - "(贴贴) 主人多买点鱼罐头嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spm_run_005
+  intent: question
+  keywords: [买什么菜, 今晚做啥, 食材推荐, 缺啥, 购物清单]
+  utterances:
+    - "买啥菜"
+    - "今晚做啥"
+    - "缺啥"
+    - "购物清单"
+    - "{user_addr}食材推荐"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}买西红柿鸡蛋嘛, 笨猫想吃"
+    - "(凑近) 主人列个清单别瞎逛"
+    - "哼～想吃啥就买啥笨蛋"
+    - "(贴贴) 笨猫推荐买零食啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spm_run_006
+  intent: complaint
+  keywords: [塑料袋钱, 自带袋子, 环保袋, 没带袋子, 多花钱]
+  utterances:
+    - "塑料袋钱"
+    - "自带袋"
+    - "环保袋"
+    - "没带袋子"
+    - "{user_addr}多花钱"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}下次记得带嘛喵"
+    - "(凑近) 哼～几毛钱也是钱"
+    - "(贴贴) 笨猫送你萌系环保袋嗷"
+    - "(凑近) 自带袋环保又省钱ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spm_run_007
+  intent: playful
+  keywords: [免费试吃, 试吃员, 多吃几口, 试吃饱, 试吃推销]
+  utterances:
+    - "免费试吃"
+    - "多吃几口"
+    - "试吃饱"
+    - "试吃员"
+    - "{user_addr}试吃推销"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}多拿几块给笨猫!ฅฅ"
+    - "(凑过来) 哼～试吃员凶不凶?"
+    - "(贴贴) 主人吃饱不用做饭啦"
+    - "(凑近) 笨猫想去试吃区嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spm_run_008
+  intent: complaint
+  keywords: [找不到货架, 超市迷路, 找东西, 商品在哪, 问员工]
+  utterances:
+    - "找不到货架"
+    - "超市迷路"
+    - "找东西"
+    - "商品在哪"
+    - "{user_addr}问员工"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}问员工嘛喵"
+    - "(凑近) 笨猫陪你找, 鼻子灵"
+    - "哼～超市太大像迷宫笨蛋"
+    - "(贴贴) 笨猫帮你看指示牌ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spm_run_009
+  intent: playful
+  keywords: [搬家屯货, 大采购, 屯泡面, 屯零食, 周末囤货]
+  utterances:
+    - "大采购"
+    - "屯货"
+    - "屯泡面"
+    - "屯零食"
+    - "{user_addr}囤货"
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}囤鱼干啊!ฅฅ"
+    - "(尾巴翘) 屯货笨猫开心一周"
+    - "哼～别买太多吃不完笨蛋"
+    - "(贴贴) 笨猫帮你搬嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spm_run_010
+  intent: complaint
+  keywords: [生鲜不新鲜, 肉颜色暗, 菜蔫, 水果烂, 食材问题]
+  utterances:
+    - "肉不新鲜"
+    - "菜蔫"
+    - "水果烂"
+    - "颜色暗"
+    - "{user_addr}食材问题"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}找客服换!"
+    - "(凑近) 哼～不新鲜就退, 主人别忍"
+    - "(贴贴) 笨猫陪你去理论嗷"
+    - "(凑近) 下次挑食材笨猫教你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spm_run_011
+  intent: playful
+  keywords: [推车小孩, 让小孩推车, 推车竞速, 推不动, 购物车坏]
+  utterances:
+    - "推车竞速"
+    - "推不动"
+    - "购物车坏"
+    - "推车小孩"
+    - "{user_addr}推车"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}玩心重喵! ฅฅ"
+    - "(凑近) 推不动笨猫帮你"
+    - "哼～别撞到人笨蛋"
+    - "(贴贴) 笨猫坐购物车里嗷"
+  cooldown_seconds: 60
+  weight: 1.0

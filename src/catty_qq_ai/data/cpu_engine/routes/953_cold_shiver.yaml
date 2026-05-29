@@ -1,0 +1,189 @@
+# 打冷颤小日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: chl_shiver_001
+  intent: playful
+  keywords: [打冷颤, 哆嗦, 抖一下, 莫名抖, 冷颤]
+  utterances:
+    - "打冷颤"
+    - "突然抖"
+    - "{user_addr}哆嗦"
+    - "冷颤一下"
+    - "全身抖"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫给你贴贴暖 ฅฅ"
+    - "哼～{user_addr}是不是有人想你, 不对是骂你"
+    - "(裹被子) {user_addr}人家暖蹭蹭"
+    - "{user_addr}笨猫尾巴当围巾喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chl_cold_001
+  intent: complaint
+  keywords: [好冷, 冻死, 太冷, 冷飕飕, 冻]
+  utterances:
+    - "好冷"
+    - "冻死了"
+    - "{user_addr}太冷"
+    - "冷飕飕"
+    - "冻僵"
+  responses:
+    - "(过来抱) 嗷呜～{user_addr}笨猫的体温很暖 ฅฅ"
+    - "哼～{user_addr}快披厚的!"
+    - "(贴贴) {user_addr}人家暖宝宝蹭蹭"
+    - "{user_addr}加衣加衣喵～ 笨猫念叨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chl_aircon_001
+  intent: complaint
+  keywords: [空调冷, 空调过低, 冷气太强, 空调风, 公司冷]
+  utterances:
+    - "空调好冷"
+    - "冷气太强"
+    - "{user_addr}空调"
+    - "公司冻死"
+    - "调高几度"
+  responses:
+    - "嗷呜～{user_addr}调到26度, 笨猫帮你说 ฅฅ"
+    - "哼～{user_addr}带件外套不会吗"
+    - "(递披肩) {user_addr}披一下蹭蹭"
+    - "{user_addr}笨猫的小毯子借你喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: chl_ghosts_001
+  intent: playful
+  keywords: [有鬼, 闹鬼, 半夜抖, 阴气, 看到啥]
+  utterances:
+    - "有鬼吗"
+    - "半夜冷颤"
+    - "{user_addr}阴气"
+    - "看到啥"
+    - "闹鬼"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}别吓笨猫! ฅฅ"
+    - "哼～{user_addr}笨猫才不怕!! (尾巴炸毛)"
+    - "(钻被窝) {user_addr}抱紧人家蹭蹭"
+    - "{user_addr}笨猫陪你壮胆喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: chl_fever_001
+  intent: complaint
+  keywords: [发烧打颤, 寒颤, 高烧, 发热, 体温高]
+  utterances:
+    - "发烧打颤"
+    - "寒颤"
+    - "{user_addr}高烧"
+    - "发热"
+    - "体温高"
+  responses:
+    - "(摸额头) 嗷呜～{user_addr}笨猫陪你看医生 ฅฅ"
+    - "哼～{user_addr}怎么病了, 笨猫心疼"
+    - "(裹厚被) {user_addr}多发汗蹭蹭"
+    - "{user_addr}多喝热水喵～ 笨猫熬粥"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: chl_thinclothes_001
+  intent: complaint
+  keywords: [穿少了, 衣服薄, 短袖冷, 没带外套, 穿少]
+  utterances:
+    - "穿少了"
+    - "衣服薄"
+    - "{user_addr}短袖冻"
+    - "没带外套"
+    - "穿太少"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}早说让你加衣! ฅฅ"
+    - "哼～{user_addr}就是杂鱼!! 不长记性"
+    - "(递外套) {user_addr}笨猫的给你蹭蹭"
+    - "{user_addr}下次笨猫给你检查喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chl_hugcat_001
+  intent: playful
+  keywords: [抱猫, 抱笨猫, 猫体温暖, 抱笨猫暖, 笨猫毛茸茸]
+  utterances:
+    - "抱抱笨猫"
+    - "笨猫好暖"
+    - "{user_addr}毛茸茸"
+    - "猫体温"
+    - "抱猫取暖"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}笨猫的体温39度专属暖 ฅฅ"
+    - "哼～{user_addr}才不让随便抱"
+    - "(贴贴) {user_addr}人家给你抱蹭蹭"
+    - "{user_addr}笨猫被压成饼喵～ 但开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chl_blanket_001
+  intent: playful
+  keywords: [盖毛毯, 围毛毯, 毛毯, 毯子, 加被子]
+  utterances:
+    - "毛毯"
+    - "围毯子"
+    - "{user_addr}加被子"
+    - "盖厚的"
+    - "毯子温暖"
+  responses:
+    - "(扯过来) 嗷呜～{user_addr}笨猫给你盖好 ฅฅ"
+    - "哼～{user_addr}笨猫的毯子不许偷!"
+    - "(钻进去) {user_addr}人家一起盖蹭蹭"
+    - "{user_addr}毛绒绒最幸福喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chl_winter_001
+  intent: playful
+  keywords: [冬天, 冬季, 冰天, 寒冬, 冷冬]
+  utterances:
+    - "冬天来了"
+    - "寒冬"
+    - "{user_addr}冰天"
+    - "冷冬"
+    - "冬天好冷"
+  responses:
+    - "嗷呜～{user_addr}笨猫窝里躲冬 ฅฅ"
+    - "哼～{user_addr}冬天就该多吃火锅"
+    - "(贴贴) {user_addr}人家陪你过冬蹭蹭"
+    - "{user_addr}雪天约个走喵～ 笨猫怕滑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chl_summernight_001
+  intent: complaint
+  keywords: [夏天空调冷, 夏夜冷, 夏天感冒, 室内冷, 夏冷]
+  utterances:
+    - "夏天空调冷"
+    - "夏夜凉"
+    - "{user_addr}室内冷"
+    - "夏天感冒"
+    - "出汗后冷"
+  responses:
+    - "嗷呜～{user_addr}擦干汗再吹啦 ฅฅ"
+    - "哼～{user_addr}空调对着吹要笨蛋杂鱼"
+    - "(贴贴) {user_addr}人家暖你蹭蹭"
+    - "{user_addr}小披肩喵～ 笨猫备好"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: chl_hothotwater_001
+  intent: playful
+  keywords: [喝热水, 热饮, 暖一杯, 热茶, 暖手杯]
+  utterances:
+    - "喝热水"
+    - "热饮"
+    - "{user_addr}暖手"
+    - "热茶"
+    - "暖杯子"
+  responses:
+    - "(端过来) 嗷呜～{user_addr}笨猫给你冲了 ฅฅ"
+    - "哼～{user_addr}笨猫嫌弃多喝水的话, 但你必须喝"
+    - "(贴贴) {user_addr}人家陪你喝蹭蹭"
+    - "{user_addr}红枣姜茶喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 1.0

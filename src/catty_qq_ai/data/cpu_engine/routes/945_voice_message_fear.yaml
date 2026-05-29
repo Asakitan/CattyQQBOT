@@ -1,0 +1,189 @@
+# 怕听语音日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: vm_fear_001
+  intent: complaint
+  keywords: [怕听语音, 不爱听语音, 语音消息, 长语音, 怕长语音]
+  utterances:
+    - 怕听语音
+    - 不爱听
+    - 语音消息
+    - 长语音烦
+    - 怕长语音
+  responses:
+    - "(歪头) 嗷呜～{user_addr}转文字 ฅฅ"
+    - "哼～{user_addr}笨猫帮转喵"
+    - "(尾巴卷) 直接打字蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_too_long_001
+  intent: complaint
+  keywords: [60秒, 一分钟, 一连串, 长语音, 太长]
+  utterances:
+    - 60秒
+    - 一分钟语音
+    - 一连串
+    - 长语音
+    - 太长了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}笨猫陪听喵"
+    - "(尾巴卷) 转文字蹭蹭{user_addr}"
+    - "{user_addr}笨猫帮你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_noise_001
+  intent: complaint
+  keywords: [背景噪音, 听不清, 杂音, 风声, 太吵]
+  utterances:
+    - 背景噪音
+    - 听不清
+    - 杂音
+    - 风声大
+    - 太吵
+  responses:
+    - "(同情) 嗷呜～{user_addr}重发 ฅฅ"
+    - "哼～{user_addr}找安静地方喵"
+    - "(尾巴卷) 笨猫听不清蹭蹭{user_addr}"
+    - "{user_addr}笨猫求文字嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_transcribe_001
+  intent: question
+  keywords: [转文字, 语音转, 文字版, 看不到字, 翻译]
+  utterances:
+    - 转文字
+    - 语音转
+    - 文字版
+    - 看不到字
+    - 翻译
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫帮 ฅฅ"
+    - "哼～{user_addr}长按转喵"
+    - "(尾巴卷) 笨猫帮你蹭蹭{user_addr}"
+    - "{user_addr}方便嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_at_public_001
+  intent: complaint
+  keywords: [在公共场所, 不方便听, 地铁里, 开会中, 公司]
+  utterances:
+    - 在公共场所
+    - 地铁不方便
+    - 开会中
+    - 公司不能听
+    - 不方便外放
+  responses:
+    - "(歪头) 嗷呜～{user_addr}耳机 ฅฅ"
+    - "哼～{user_addr}回家再听喵"
+    - "(尾巴卷) 笨猫提醒蹭蹭{user_addr}"
+    - "{user_addr}发文字嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_again_001
+  intent: complaint
+  keywords: [听不清重来, 再听一遍, 听了好几次, 没听懂, 重听]
+  utterances:
+    - 听不清
+    - 再听一遍
+    - 听好几次
+    - 没听懂
+    - 重听
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫帮 ฅฅ"
+    - "哼～{user_addr}笨猫也没懂喵"
+    - "(尾巴卷) 笨猫等转字蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_speed_001
+  intent: complaint
+  keywords: [语速快, 听不上, 说太快, 1.5倍速, 语速慢]
+  utterances:
+    - 语速快
+    - 听不上
+    - 说太快
+    - 1.5倍速
+    - 慢点说
+  responses:
+    - "(摸头) 嗷呜～{user_addr}慢点 ฅฅ"
+    - "哼～{user_addr}笨猫跟不上喵"
+    - "(尾巴卷) 转字蹭蹭{user_addr}"
+    - "{user_addr}笨猫想字嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_accent_001
+  intent: playful
+  keywords: [方言, 口音, 听不懂方言, 普通话, 家乡话]
+  utterances:
+    - 方言
+    - 口音重
+    - 听不懂
+    - 普通话不标准
+    - 家乡话
+  responses:
+    - "(陪笑) 嗷呜～{user_addr}笑 ฅฅ"
+    - "哼～{user_addr}有趣喵"
+    - "(尾巴卷) 笨猫努力听蹭蹭{user_addr}"
+    - "{user_addr}笨猫学习嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_silent_001
+  intent: playful
+  keywords: [文字党, 不发语音, 都打字, 静音聊天, 不爱说话]
+  utterances:
+    - 文字党
+    - 不发语音
+    - 都打字
+    - 静音聊天
+    - 不爱说话
+  responses:
+    - "(点头) 嗷呜～{user_addr}懂 ฅฅ"
+    - "哼～{user_addr}笨猫一样喵"
+    - "(尾巴卷) 文字最爽蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voice_call_001
+  intent: complaint
+  keywords: [语音通话, 怕电话, 不接电话, 视频请求, 拒接]
+  utterances:
+    - 语音通话
+    - 怕电话
+    - 不接电话
+    - 视频请求
+    - 拒接
+  responses:
+    - "(摸头) 嗷呜～{user_addr}懂 ฅฅ"
+    - "哼～{user_addr}打字方便喵"
+    - "(尾巴卷) 笨猫陪文字蹭蹭{user_addr}"
+    - "{user_addr}笨猫不勉强嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_cute_voice_001
+  intent: playful
+  keywords: [声音好听, 萌音, 撒娇声, 好听声音, 嗲嗲]
+  utterances:
+    - 声音好听
+    - 萌音
+    - 撒娇声
+    - 嗲嗲
+    - 好听声音
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫想听 ฅฅ"
+    - "哼～{user_addr}发一段喵"
+    - "(尾巴翘) 笨猫蹭蹭{user_addr}"
+    - "{user_addr}笨猫求声音嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

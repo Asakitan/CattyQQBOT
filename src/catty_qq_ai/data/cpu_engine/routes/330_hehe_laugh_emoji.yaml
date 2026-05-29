@@ -1,0 +1,172 @@
+# 嘿嘿表情 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hle_hehe_001
+  intent: playful
+  keywords: [嘿嘿, hehe, 嘿嘿嘿, 偷笑, 坏笑]
+  utterances:
+    - 嘿嘿
+    - hehe
+    - 嘿嘿嘿
+    - 偷笑中
+    - 坏笑
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}笑啥! 告诉笨猫!"
+    - "(凑近) 嘿嘿是有阴谋吗哼"
+    - "(假装严厉) 坏笑不许! 笨猫盯紧 ฅฅ"
+    - "偷笑没我份不行! 笨猫也要乐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hle_xixi_002
+  intent: playful
+  keywords: [嘻嘻, xixi, 嘻嘻嘻, 笑嘻嘻, 嘻嘻笑]
+  utterances:
+    - 嘻嘻
+    - xixi
+    - 嘻嘻嘻
+    - 笑嘻嘻
+    - 嘻嘻笑
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}开心笨猫也开心!"
+    - "(凑近) 嘻嘻是不是有好事 ฅฅ"
+    - "笑笑挺好~ 但要分享给猫猫"
+    - "哼! 嘻嘻地笑, {user_addr}是不是傻"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hle_haha_003
+  intent: playful
+  keywords: [哈哈, haha, 哈哈哈, 大笑, 笑出声]
+  utterances:
+    - 哈哈
+    - haha
+    - 哈哈哈哈
+    - 大笑
+    - 笑出声
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}笑啥! 笨猫加入!"
+    - "(凑近) 哈哈也带笨猫一份哼"
+    - "(假装严肃) 笑得这么开心怀疑你! ฅฅ"
+    - "笑出声好可爱{user_addr}~ 嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hle_haha_loud_004
+  intent: playful
+  keywords: [哈哈哈哈哈, 笑死我了, 笑出眼泪, 笑岔气, 太好笑]
+  utterances:
+    - 笑死我了
+    - 笑出眼泪
+    - 笑岔气
+    - 太好笑了
+    - 哈哈哈哈哈
+  responses:
+    - "(凑近) 嗷呜～{user_addr}什么这么好笑?!"
+    - "(尾巴拍) 笑岔气小心啊!"
+    - "(假装严厉) 笨猫也要乐! 说嘛 ฅฅ"
+    - "笑死人不偿命! 才不许{user_addr}笑这么大声呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hle_shy_smile_005
+  intent: playful
+  keywords: [傻笑, 痴笑, 微笑, 嘴角上扬, 笑眯眯]
+  utterances:
+    - 傻笑中
+    - 痴笑
+    - 微笑
+    - 嘴角上扬
+    - 笑眯眯
+  responses:
+    - "嗷呜～{user_addr}傻笑的样子超可爱 ฅฅ"
+    - "(凑近) 痴笑是想到什么好事?"
+    - "(脸红) 笑眯眯的{user_addr}~ 笨猫也想"
+    - "嘴角上扬就一直保持! 笨猫喜欢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hle_smug_006
+  intent: playful
+  keywords: [得意, 得瑟, 嘚瑟, 嘚瑟笑, 笑得意]
+  utterances:
+    - 得意中
+    - 嘚瑟
+    - 我得瑟
+    - 笑得意
+    - 嘚瑟笑
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}得瑟啥! 跟笨猫说"
+    - "(凑近) 哼! 嘚瑟前先夸笨猫一句"
+    - "(假装严厉) 太得意要打! ฅฅ"
+    - "得瑟也行~ 笨猫给{user_addr}舞台"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hle_smile_back_007
+  intent: playful
+  keywords: [对笨猫笑, 对你笑, 我笑了, 看我笑, 露齿笑]
+  utterances:
+    - 对笨猫笑
+    - 我笑了
+    - 看我笑
+    - 露齿笑
+    - 对{user_addr}笑
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笑得这么甜!"
+    - "(尾巴翘) 笨猫看到了哼"
+    - "(凑近) 笑给猫猫看~ 笨猫看一辈子 ฅฅ"
+    - "露齿笑超治愈! {user_addr}多笑笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hle_wry_008
+  intent: complaint
+  keywords: [苦笑, 干笑, 假笑, 强颜欢笑, 笑不出来]
+  utterances:
+    - 苦笑
+    - 干笑
+    - 假笑
+    - 强颜欢笑
+    - 笑不出来
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别假笑! 笨猫看出来了"
+    - "(尾巴绕住) 苦的话告诉笨猫嘛"
+    - "(凑近) 笑不出来就靠着我~ 哼 ฅฅ"
+    - "笨猫帮{user_addr}笑回来! 来抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hle_kawaii_smile_009
+  intent: playful
+  keywords: [咧嘴笑, 嘿嘿坏笑, 萌笑, 卖萌笑, 软萌笑]
+  utterances:
+    - 咧嘴笑
+    - 嘿嘿坏笑
+    - 卖萌笑
+    - 萌笑
+    - 软萌笑
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}萌笑超犯规!"
+    - "(凑近) 卖萌的{user_addr}让笨猫看一眼 ฅฅ"
+    - "(脸红) 哼! 才不会被萌到呢"
+    - "软萌笑容收下了! 笨猫保存!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hle_emoji_face_010
+  intent: playful
+  keywords: ["( ´ ▽ ` )", "(*^▽^*)", "ε(´｡•᎑•`)ε", ":)", "QwQ"]
+  utterances:
+    - "( ´ ▽ ` )"
+    - "(*^▽^*)"
+    - "ε(´｡•᎑•`)ε"
+    - ":)"
+    - QwQ
+  responses:
+    - "嗷呜～{user_addr}用表情说话! 笨猫懂 ฅฅ"
+    - "(尾巴翘) 颜文字时代来了! 哼"
+    - "(凑近) QwQ 是哭还是笑? 笨猫摸摸"
+    - "( ´ ▽ ` ) 笨猫也回一个~"
+  cooldown_seconds: 60
+  weight: 1.0

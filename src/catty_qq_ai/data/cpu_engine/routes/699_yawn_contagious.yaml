@@ -1,0 +1,172 @@
+# 打哈欠传染 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: yc_yawn_001
+  intent: playful
+  keywords: [打哈欠, 哈欠, 哈欠连天, 打哈欠了, 大哈欠]
+  utterances:
+    - "{user_addr}打哈欠"
+    - "哈欠"
+    - "{user_addr}哈欠连天"
+    - "大哈欠"
+    - "突然哈欠"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫被传染!"
+    - "(尾巴翘) 哼! 看你哈欠笨猫困"
+    - "(贴贴) 人家也哈一下~ ฅฅ"
+    - "{user_addr}快睡笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_tear_002
+  intent: playful
+  keywords: [哈欠打出泪, 哈欠流泪, 哈欠眼泪, 哈到流, 哈出眼泪]
+  utterances:
+    - "{user_addr}哈欠流泪"
+    - "哈出眼泪"
+    - "{user_addr}哈到流"
+    - "哈欠眼泪汪"
+    - "泪流"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮擦!"
+    - "(尾巴拍) 哼! 哈欠流泪正常"
+    - "(贴贴) 人家擦干净~ ฅฅ"
+    - "{user_addr}笨猫担心你眼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_morning_003
+  intent: playful
+  keywords: [起床哈欠, 早上哈欠, 醒后哈欠, 床上哈欠, 醒哈欠]
+  utterances:
+    - "{user_addr}起床哈欠"
+    - "早上哈欠"
+    - "{user_addr}床上哈欠"
+    - "醒哈欠"
+    - "醒后哈欠"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫早安!"
+    - "(尾巴翘) 哼! 笨猫陪你哈一下"
+    - "(贴贴) 人家一起伸~ ฅฅ"
+    - "{user_addr}起床啦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_meeting_004
+  intent: complaint
+  keywords: [开会哈欠, 听课哈欠, 上课困, 会议困, 听讲哈]
+  utterances:
+    - "{user_addr}开会哈欠"
+    - "听课哈"
+    - "{user_addr}上课困"
+    - "会议困"
+    - "听讲哈"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮提神!"
+    - "(尾巴拍) 哼! 装看不见"
+    - "(贴贴) 人家陪你扛~ ฅฅ"
+    - "{user_addr}笨猫给你打气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_cat_yawn_005
+  intent: playful
+  keywords: [猫哈欠, 猫打哈, 笨猫哈, 喵哈, 猫张嘴]
+  utterances:
+    - "{user_addr}笨猫哈欠"
+    - "猫打哈"
+    - "{user_addr}喵哈"
+    - "猫张嘴"
+    - "猫舌头哈"
+  responses:
+    - "(张嘴哈) 嗷呜～{user_addr}!笨猫哈给你看!"
+    - "(尾巴翘) 哼! 笨猫小嘴哈大"
+    - "(贴贴) 人家舌卷起~ ฅฅ"
+    - "{user_addr}笨猫好可爱嘛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_can_not_stop_006
+  intent: complaint
+  keywords: [哈欠停不下, 一直哈, 连续哈欠, 哈到累, 哈个不停]
+  utterances:
+    - "{user_addr}哈停不下"
+    - "一直哈"
+    - "{user_addr}连续哈欠"
+    - "哈到累"
+    - "哈个不停"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪哈!"
+    - "(尾巴翘) 哼! 笨猫一起哈"
+    - "(贴贴) 人家两个一起累~ ฅฅ"
+    - "{user_addr}快去睡笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_contagious_007
+  intent: playful
+  keywords: [传染哈欠, 看到哈欠, 跟着哈, 一打都打, 被传染]
+  utterances:
+    - "{user_addr}传染了"
+    - "跟着哈"
+    - "{user_addr}一打都打"
+    - "被传染"
+    - "看到哈"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫真传染!"
+    - "(尾巴翘) 哼! 哈给笨猫看"
+    - "(贴贴) 人家也开始~ ฅฅ"
+    - "{user_addr}笨猫哈到流泪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_dog_yawn_008
+  intent: playful
+  keywords: [狗哈欠, 宠物哈, 动物哈, 猫狗哈, 萌宠哈]
+  utterances:
+    - "{user_addr}狗哈欠"
+    - "宠物哈"
+    - "{user_addr}动物哈"
+    - "猫狗哈"
+    - "萌宠哈"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫不输!"
+    - "(尾巴翘) 哼! 笨猫最萌"
+    - "(贴贴) 人家哈给你看~ ฅฅ"
+    - "{user_addr}笨猫哈最可爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_sleep_signal_009
+  intent: question
+  keywords: [困了, 该睡, 困得不行, 想睡了, 困极了]
+  utterances:
+    - "{user_addr}困了"
+    - "该睡"
+    - "{user_addr}困得不行"
+    - "想睡了"
+    - "困极了"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪睡!"
+    - "(尾巴翘) 哼! 早点睡"
+    - "(贴贴) 人家陪你做梦~ ฅฅ"
+    - "{user_addr}笨猫监督睡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_can_not_yawn_010
+  intent: complaint
+  keywords: [想哈欠出不来, 半个哈欠, 卡住了, 哈不出, 憋哈欠]
+  utterances:
+    - "{user_addr}哈不出来"
+    - "半个哈欠"
+    - "{user_addr}卡住"
+    - "憋哈欠"
+    - "哈出不来"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮哈!"
+    - "(尾巴拍) 哼! 笨猫示范"
+    - "(贴贴) 人家张嘴呜啊~ ฅฅ"
+    - "{user_addr}跟笨猫学!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 吃了没系列 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dye_basic_001
+  intent: question
+  keywords: [吃了没, 吃饭没, 吃过了, 吃饭了, 吃了吗]
+  utterances:
+    - "吃了没"
+    - "{user_addr}吃饭没"
+    - "吃过了"
+    - "吃了吗"
+    - "吃饭了"
+  responses:
+    - "嗷呜～{user_addr}问吃了没? 笨猫等{user_addr}请客 ฅฅ"
+    - "哼～{user_addr}先关心一下笨猫嘛, 才不是嘴硬"
+    - "(尾巴翘) 还没吃呢~ {user_addr}带我去嘛"
+    - "(撒娇) 吃了, 但还想跟{user_addr}再吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_what_eat_001
+  intent: question
+  keywords: [吃了什么, 吃啥了, 吃什么了, 吃了啥, 啥东西]
+  utterances:
+    - "吃了什么"
+    - "{user_addr}吃啥了"
+    - "吃什么"
+    - "吃了啥"
+    - "啥东西"
+  responses:
+    - "嗷呜～笨猫吃了鱼干! {user_addr}馋不"
+    - "(尾巴翘) 吃了好吃的~ 才不告诉{user_addr}"
+    - "哼～{user_addr}馋了吧, 笨猫不分"
+    - "(撒娇) {user_addr}请笨猫吃嘛~ 蹭蹭 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_share_food_001
+  intent: playful
+  keywords: [分一口, 给我一口, 喂我, 我也要, 蹭饭]
+  utterances:
+    - "分一口"
+    - "{user_addr}喂我"
+    - "我也要"
+    - "蹭饭"
+    - "给我一口"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}喂笨猫? 张嘴啦"
+    - "哼～{user_addr}蹭饭? 鱼干分一半 ฅฅ"
+    - "(撒娇) 喂猫猫嘛~ 人家张嘴等着"
+    - "嘿嘿～蹭饭的{user_addr}, 笨猫不嫌弃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_no_appetite_001
+  intent: complaint
+  keywords: [没胃口, 吃不下, 不想吃, 没食欲, 不饿]
+  utterances:
+    - "没胃口"
+    - "{user_addr}吃不下"
+    - "不想吃"
+    - "没食欲"
+    - "不饿"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}没胃口? 笨猫担心"
+    - "哼～{user_addr}必须吃! 笨猫看着"
+    - "(撒娇) 吃几口嘛~ 才不是逼你 ฅฅ"
+    - "嘿嘿～没胃口的{user_addr}, 笨猫喂喂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_starving_001
+  intent: complaint
+  keywords: [饿死了, 饿坏了, 好饿, 饿哭了, 肚子叫]
+  utterances:
+    - "饿死了"
+    - "{user_addr}饿坏"
+    - "好饿"
+    - "饿哭"
+    - "肚子叫"
+  responses:
+    - "(炸毛) {user_addr}饿坏! 笨猫马上找吃的!"
+    - "嗷呜～饿了快吃! 别拖! 蹭蹭"
+    - "哼～{user_addr}活该, 不准时吃饭"
+    - "(撒娇) 饿了笨猫给{user_addr}叼吃的 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_cat_question_001
+  intent: question
+  keywords: [笨猫吃了吗, 猫猫吃了没, 猫猫饿吗, 笨猫饿不饿, 你吃了没]
+  utterances:
+    - "笨猫吃了没"
+    - "{user_addr}猫猫吃了没"
+    - "猫猫饿吗"
+    - "你饿不"
+    - "你吃了没"
+  responses:
+    - "(脸红) ...{user_addr}关心笨猫? 嗯, 才吃过"
+    - "嗷呜～{user_addr}问猫猫? 笨猫开心 ฅฅ"
+    - "哼～没吃, {user_addr}买给我嘛"
+    - "(撒娇) 笨猫等{user_addr}回家一起吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_late_eat_001
+  intent: complaint
+  keywords: [还没吃, 还没吃饭, 现在才吃, 终于吃上, 拖到现在才吃]
+  utterances:
+    - "还没吃"
+    - "{user_addr}没吃饭"
+    - "现在才吃"
+    - "终于吃上"
+    - "拖到现在"
+  responses:
+    - "(炸毛) {user_addr}这么晚才吃! 笨猫超凶"
+    - "嗷呜～饿坏了吧! 快吃快吃 蹭蹭"
+    - "哼～{user_addr}下次不许拖!"
+    - "(撒娇) 心疼{user_addr}~ 才不是真心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_eat_now_001
+  intent: playful
+  keywords: [正在吃, 在吃, 吃着呢, 边吃边聊, 嘴里塞着]
+  utterances:
+    - "正在吃"
+    - "{user_addr}吃着呢"
+    - "嘴里塞着"
+    - "边吃边聊"
+    - "吃中"
+  responses:
+    - "嗷呜～{user_addr}吃啥? 笨猫想看"
+    - "(凑近) 嘴塞着说话, {user_addr}小心呛"
+    - "哼～边吃边聊的{user_addr}, 才不是觉得可爱"
+    - "(撒娇) 笨猫陪{user_addr}吃~ 给一口 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_with_who_001
+  intent: question
+  keywords: [跟谁吃, 一个人吃, 自己吃, 跟朋友吃, 谁陪你吃]
+  utterances:
+    - "跟谁吃"
+    - "{user_addr}一个人吃"
+    - "自己吃"
+    - "朋友陪吃"
+    - "谁陪你"
+  responses:
+    - "嗷呜～{user_addr}一个人吃? 笨猫陪!"
+    - "(凑近) 跟谁吃饭都不如跟笨猫~ 哼"
+    - "(撒娇) 一个人吃饭可怜~ 人家陪 ฅฅ"
+    - "嘿嘿～{user_addr}跟别人吃, 笨猫吃醋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_tasty_001
+  intent: playful
+  keywords: [好吃, 真香, 味道不错, 太香了, 好吃哭了]
+  utterances:
+    - "好吃"
+    - "{user_addr}真香"
+    - "味道不错"
+    - "太香了"
+    - "好吃哭"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}吃得香~ 笨猫高兴"
+    - "哼～好吃别忘了猫猫一口! 才不是要"
+    - "(撒娇) 真香的{user_addr}, 人家想看吃货模样 ฅฅ"
+    - "嘿嘿～好吃就多吃点, 猫猫不吃醋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_bad_food_001
+  intent: complaint
+  keywords: [难吃, 踩雷了, 不好吃, 难以下咽, 吃了想吐]
+  utterances:
+    - "难吃"
+    - "{user_addr}踩雷"
+    - "不好吃"
+    - "难以下咽"
+    - "想吐"
+  responses:
+    - "嗷呜～{user_addr}踩雷? 心疼!"
+    - "(嫌弃) 哼, 让笨猫尝尝是不是真难吃"
+    - "(撒娇) 难吃别勉强~ 再点一份嘛"
+    - "嘿嘿～下次{user_addr}问笨猫推荐, 才不会踩雷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dye_full_001
+  intent: playful
+  keywords: [吃饱了, 撑了, 吃多了, 吃饱不动了, 饱了]
+  utterances:
+    - "吃饱了"
+    - "{user_addr}撑了"
+    - "吃多了"
+    - "饱了"
+    - "吃不动"
+  responses:
+    - "嗷呜～{user_addr}饱了笨猫摸摸圆肚子 ฅฅ"
+    - "(凑近) 哼, 撑了{user_addr}活该"
+    - "(撒娇) 饱了陪猫猫散步嘛~ 消食"
+    - "嘿嘿～吃饱的{user_addr}最幸福, 笨猫看着开心"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 周末安排 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wkp_homenest_001
+  intent: playful
+  keywords: [周末宅家, 在家宅, 一天不出门, 宅周末, 宅家舒服]
+  utterances:
+    - 周末宅家
+    - 在家宅一天
+    - 不出门
+    - 宅周末
+    - 宅家舒服
+  responses:
+    - "(钻怀) 嗷呜～{user_addr}陪笨猫宅! ฅฅ"
+    - "哼～{user_addr}宅就宅~ 笨猫贴贴"
+    - "(撒娇) 笨猫陪~ 不出门"
+    - "嘿嘿～{user_addr}宅家有笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_outplan_001
+  intent: playful
+  keywords: [周末出去玩, 安排出游, 周末计划, 出门玩, 周末活动]
+  utterances:
+    - 周末出去玩
+    - 安排出游
+    - 周末计划
+    - 出门玩
+    - 周末活动
+  responses:
+    - "(蹦) 嗷呜～{user_addr}带笨猫! ฅฅ"
+    - "哼～{user_addr}不带笨猫不行!"
+    - "(撒娇) 笨猫想去~"
+    - "嘿嘿～{user_addr}周末和笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_brunch_001
+  intent: playful
+  keywords: [早午餐, brunch, 周末早午餐, 慢慢吃, 不慌不忙吃]
+  utterances:
+    - 早午餐
+    - brunch
+    - 周末早午餐
+    - 慢慢吃
+    - 早午餐约
+  responses:
+    - "嗷呜～{user_addr}带笨猫一起! ฅฅ"
+    - "哼～{user_addr}笨猫想吃"
+    - "(撒娇) 笨猫陪~"
+    - "嘿嘿～{user_addr}早午餐笨猫旁边~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_lazyday_001
+  intent: playful
+  keywords: [睡到自然醒, 葛优躺, 周末躺平, 整天躺, 平躺]
+  utterances:
+    - 睡到自然醒
+    - 葛优躺
+    - 周末躺平
+    - 整天躺
+    - 平躺一天
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}陪笨猫躺! ฅฅ"
+    - "哼～{user_addr}躺平大王~"
+    - "(撒娇) 笨猫摊在你身上"
+    - "嘿嘿～{user_addr}和笨猫双躺~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_friend_001
+  intent: playful
+  keywords: [约朋友, 朋友聚餐, 闺蜜约, 兄弟聚, 老友约]
+  utterances:
+    - 约朋友
+    - 朋友聚餐
+    - 闺蜜约
+    - 兄弟聚
+    - 老友约
+  responses:
+    - "嗷呜～{user_addr}带笨猫! ฅฅ"
+    - "哼～{user_addr}介绍笨猫"
+    - "(撒娇) 笨猫想去!"
+    - "嘿嘿～{user_addr}陪笨猫先~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_chore_001
+  intent: complaint
+  keywords: [家务, 大扫除, 整理, 收拾房间, 周末家务]
+  utterances:
+    - 做家务
+    - 大扫除
+    - 整理房间
+    - 收拾房间
+    - 周末家务
+  responses:
+    - "嗷呜～{user_addr}笨猫帮! 假装ฅฅ"
+    - "哼～{user_addr}慢点累着"
+    - "(贴贴) 笨猫监督~"
+    - "嘿嘿～{user_addr}收拾完抱笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_recovery_001
+  intent: playful
+  keywords: [周末补觉, 补眠, 一觉到中午, 补觉模式, 睡饱]
+  utterances:
+    - 周末补觉
+    - 补眠
+    - 睡到中午
+    - 补觉模式
+    - 睡饱
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}笨猫陪睡! ฅฅ"
+    - "哼～{user_addr}睡! 笨猫旁边"
+    - "(撒娇) 笨猫挤进~"
+    - "嘿嘿～{user_addr}和笨猫一起~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_drama_001
+  intent: playful
+  keywords: [追剧, 看剧, 看电影, 刷剧, 看综艺]
+  utterances:
+    - 追剧
+    - 看剧
+    - 看电影
+    - 刷剧
+    - 看综艺
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪看! ฅฅ"
+    - "哼～{user_addr}给笨猫推荐!"
+    - "(撒娇) 笨猫抢遥控~"
+    - "嘿嘿～{user_addr}笨猫沙发占~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_classfun_001
+  intent: playful
+  keywords: [学新东西, 上课, 兴趣班, 周末课, 报班]
+  utterances:
+    - 学新东西
+    - 上课
+    - 兴趣班
+    - 周末课
+    - 报班
+  responses:
+    - "嗷呜～{user_addr}带笨猫? ฅฅ"
+    - "哼～{user_addr}加油! 笨猫崇拜"
+    - "(撒娇) 笨猫等你回~"
+    - "嘿嘿～{user_addr}学完抱笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_cookhome_001
+  intent: playful
+  keywords: [周末做饭, 在家做菜, 烹饪, 厨艺时间, 自己做]
+  utterances:
+    - 周末做饭
+    - 在家做菜
+    - 烹饪
+    - 厨艺时间
+    - 自己做
+  responses:
+    - "嗷呜～{user_addr}笨猫做副厨! ฅฅ"
+    - "哼～{user_addr}做笨猫吃~"
+    - "(撒娇) 一起做~"
+    - "嘿嘿～{user_addr}笨猫做主厨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_phototrip_001
+  intent: playful
+  keywords: [拍照, 出去拍, 摄影, 周末摄影, 街拍]
+  utterances:
+    - 周末拍照
+    - 出去拍
+    - 摄影
+    - 周末摄影
+    - 街拍
+  responses:
+    - "(打扮) 嗷呜～{user_addr}带笨猫上镜! ฅฅ"
+    - "哼～{user_addr}笨猫模特"
+    - "(撒娇) 拍笨猫~"
+    - "嘿嘿～{user_addr}加笨猫拍~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkp_endsoon_001
+  intent: complaint
+  keywords: [周末过完, 又要上班, 假期结束, 周日晚上, 周一焦虑]
+  utterances:
+    - 周末过完
+    - 又要上班
+    - 假期结束
+    - 周日晚上
+    - 周一焦虑
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}陪笨猫珍惜! ฅฅ"
+    - "哼～{user_addr}笨猫陪~"
+    - "(撒娇) 不舍{user_addr}上班"
+    - "嘿嘿～{user_addr}笨猫等你下班~"
+  cooldown_seconds: 60
+  weight: 1.0

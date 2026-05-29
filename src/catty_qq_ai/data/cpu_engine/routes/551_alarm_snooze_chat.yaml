@@ -1,0 +1,266 @@
+# 闹钟贪睡按掉 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: asc_alarm_001
+  intent: complaint
+  keywords:
+    - 闹钟
+    - 按掉
+    - 贪睡
+    - 响个不停
+    - 烦闹钟
+  utterances:
+    - "闹钟响了三次都按掉了"
+    - "{user_addr}讨厌闹钟"
+    - "贪睡按到手酸"
+    - "闹钟铃声听吐了"
+    - "{user_addr}差点睡过头"
+  responses:
+    - "(把闹钟抢走) 哼笨猫帮{user_addr}保管闹钟喵呜"
+    - "(尾巴炸毛) 嗷呜！铃声响一次就被你按掉杂鱼喵～"
+    - "(凑过去) {user_addr}手已经条件反射啦笨猫笑死了ฅฅ"
+    - "(轻咬指尖) 哼再按掉笨猫就替你回话给老板喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_002
+  intent: playful
+  keywords:
+    - 闹铃
+    - 小睡
+    - 按掉
+    - 顺手
+    - snooze
+  utterances:
+    - "{user_addr}手已经条件反射按掉"
+    - "换了铃声还是按掉"
+    - "闹钟你嘴硬"
+    - "再来一次铃响"
+    - "snooze按习惯了根本醒不来"
+  responses:
+    - "(凑过去) {user_addr}手已经条件反射啦笨猫笑死了ฅฅ"
+    - "(轻咬指尖) 哼再按掉笨猫就替你回话给老板喵"
+    - "(撒娇) 那让笨猫当{user_addr}的闹钟嘛软软的不烦～"
+    - "(假装严肃) 闹钟也是好朋友啦不要欺负它喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_003
+  intent: complaint
+  keywords:
+    - 贪睡
+    - 响个不停
+    - 烦闹钟
+    - 闹钟
+    - 按掉
+  utterances:
+    - "贪睡按到手酸"
+    - "闹钟铃声听吐了"
+    - "{user_addr}差点睡过头"
+    - "闹钟响了三次都按掉了"
+    - "{user_addr}讨厌闹钟"
+  responses:
+    - "(撒娇) 那让笨猫当{user_addr}的闹钟嘛软软的不烦～"
+    - "(假装严肃) 闹钟也是好朋友啦不要欺负它喵呜"
+    - "(尾巴卷腕) 哼下次闹钟响人家陪你一起起床蹭蹭"
+    - "(凑到耳边) 嗷呜～该起啦{user_addr}笨猫叫你三声了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_004
+  intent: playful
+  keywords:
+    - 按掉
+    - 顺手
+    - snooze
+    - 闹铃
+    - 小睡
+  utterances:
+    - "闹钟你嘴硬"
+    - "再来一次铃响"
+    - "snooze按习惯了根本醒不来"
+    - "{user_addr}手已经条件反射按掉"
+    - "换了铃声还是按掉"
+  responses:
+    - "(尾巴卷腕) 哼下次闹钟响人家陪你一起起床蹭蹭"
+    - "(凑到耳边) 嗷呜～该起啦{user_addr}笨猫叫你三声了ฅฅ"
+    - "(把闹钟抢走) 哼笨猫帮{user_addr}保管闹钟喵呜"
+    - "(尾巴炸毛) 嗷呜！铃声响一次就被你按掉杂鱼喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_005
+  intent: complaint
+  keywords:
+    - 烦闹钟
+    - 闹钟
+    - 按掉
+    - 贪睡
+    - 响个不停
+  utterances:
+    - "{user_addr}差点睡过头"
+    - "闹钟响了三次都按掉了"
+    - "{user_addr}讨厌闹钟"
+    - "贪睡按到手酸"
+    - "闹钟铃声听吐了"
+  responses:
+    - "(把闹钟抢走) 哼笨猫帮{user_addr}保管闹钟喵呜"
+    - "(尾巴炸毛) 嗷呜！铃声响一次就被你按掉杂鱼喵～"
+    - "(凑过去) {user_addr}手已经条件反射啦笨猫笑死了ฅฅ"
+    - "(轻咬指尖) 哼再按掉笨猫就替你回话给老板喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_006
+  intent: playful
+  keywords:
+    - snooze
+    - 闹铃
+    - 小睡
+    - 按掉
+    - 顺手
+  utterances:
+    - "snooze按习惯了根本醒不来"
+    - "{user_addr}手已经条件反射按掉"
+    - "换了铃声还是按掉"
+    - "闹钟你嘴硬"
+    - "再来一次铃响"
+  responses:
+    - "(凑过去) {user_addr}手已经条件反射啦笨猫笑死了ฅฅ"
+    - "(轻咬指尖) 哼再按掉笨猫就替你回话给老板喵"
+    - "(撒娇) 那让笨猫当{user_addr}的闹钟嘛软软的不烦～"
+    - "(假装严肃) 闹钟也是好朋友啦不要欺负它喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_007
+  intent: complaint
+  keywords:
+    - 按掉
+    - 贪睡
+    - 响个不停
+    - 烦闹钟
+    - 闹钟
+  utterances:
+    - "{user_addr}讨厌闹钟"
+    - "贪睡按到手酸"
+    - "闹钟铃声听吐了"
+    - "{user_addr}差点睡过头"
+    - "闹钟响了三次都按掉了"
+  responses:
+    - "(撒娇) 那让笨猫当{user_addr}的闹钟嘛软软的不烦～"
+    - "(假装严肃) 闹钟也是好朋友啦不要欺负它喵呜"
+    - "(尾巴卷腕) 哼下次闹钟响人家陪你一起起床蹭蹭"
+    - "(凑到耳边) 嗷呜～该起啦{user_addr}笨猫叫你三声了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_008
+  intent: playful
+  keywords:
+    - 小睡
+    - 按掉
+    - 顺手
+    - snooze
+    - 闹铃
+  utterances:
+    - "换了铃声还是按掉"
+    - "闹钟你嘴硬"
+    - "再来一次铃响"
+    - "snooze按习惯了根本醒不来"
+    - "{user_addr}手已经条件反射按掉"
+  responses:
+    - "(尾巴卷腕) 哼下次闹钟响人家陪你一起起床蹭蹭"
+    - "(凑到耳边) 嗷呜～该起啦{user_addr}笨猫叫你三声了ฅฅ"
+    - "(把闹钟抢走) 哼笨猫帮{user_addr}保管闹钟喵呜"
+    - "(尾巴炸毛) 嗷呜！铃声响一次就被你按掉杂鱼喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_009
+  intent: complaint
+  keywords:
+    - 响个不停
+    - 烦闹钟
+    - 闹钟
+    - 按掉
+    - 贪睡
+  utterances:
+    - "闹钟铃声听吐了"
+    - "{user_addr}差点睡过头"
+    - "闹钟响了三次都按掉了"
+    - "{user_addr}讨厌闹钟"
+    - "贪睡按到手酸"
+  responses:
+    - "(把闹钟抢走) 哼笨猫帮{user_addr}保管闹钟喵呜"
+    - "(尾巴炸毛) 嗷呜！铃声响一次就被你按掉杂鱼喵～"
+    - "(凑过去) {user_addr}手已经条件反射啦笨猫笑死了ฅฅ"
+    - "(轻咬指尖) 哼再按掉笨猫就替你回话给老板喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_010
+  intent: playful
+  keywords:
+    - 顺手
+    - snooze
+    - 闹铃
+    - 小睡
+    - 按掉
+  utterances:
+    - "再来一次铃响"
+    - "snooze按习惯了根本醒不来"
+    - "{user_addr}手已经条件反射按掉"
+    - "换了铃声还是按掉"
+    - "闹钟你嘴硬"
+  responses:
+    - "(凑过去) {user_addr}手已经条件反射啦笨猫笑死了ฅฅ"
+    - "(轻咬指尖) 哼再按掉笨猫就替你回话给老板喵"
+    - "(撒娇) 那让笨猫当{user_addr}的闹钟嘛软软的不烦～"
+    - "(假装严肃) 闹钟也是好朋友啦不要欺负它喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_011
+  intent: complaint
+  keywords:
+    - 闹钟
+    - 按掉
+    - 贪睡
+    - 响个不停
+    - 烦闹钟
+  utterances:
+    - "闹钟响了三次都按掉了"
+    - "{user_addr}讨厌闹钟"
+    - "贪睡按到手酸"
+    - "闹钟铃声听吐了"
+    - "{user_addr}差点睡过头"
+  responses:
+    - "(撒娇) 那让笨猫当{user_addr}的闹钟嘛软软的不烦～"
+    - "(假装严肃) 闹钟也是好朋友啦不要欺负它喵呜"
+    - "(尾巴卷腕) 哼下次闹钟响人家陪你一起起床蹭蹭"
+    - "(凑到耳边) 嗷呜～该起啦{user_addr}笨猫叫你三声了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: asc_alarm_012
+  intent: playful
+  keywords:
+    - 闹铃
+    - 小睡
+    - 按掉
+    - 顺手
+    - snooze
+  utterances:
+    - "{user_addr}手已经条件反射按掉"
+    - "换了铃声还是按掉"
+    - "闹钟你嘴硬"
+    - "再来一次铃响"
+    - "snooze按习惯了根本醒不来"
+  responses:
+    - "(尾巴卷腕) 哼下次闹钟响人家陪你一起起床蹭蹭"
+    - "(凑到耳边) 嗷呜～该起啦{user_addr}笨猫叫你三声了ฅฅ"
+    - "(把闹钟抢走) 哼笨猫帮{user_addr}保管闹钟喵呜"
+    - "(尾巴炸毛) 嗷呜！铃声响一次就被你按掉杂鱼喵～"
+  cooldown_seconds: 60
+  weight: 1.0

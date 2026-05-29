@@ -1,0 +1,189 @@
+# 减肥失败日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dt_fail_001
+  intent: complaint
+  keywords: [减肥失败, 没瘦, 反弹了, 又胖了, 减不下来]
+  utterances:
+    - 减肥失败
+    - 没瘦
+    - 反弹了
+    - 又胖了
+    - 减不下来
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}别气馁喵"
+    - "(尾巴卷) 反弹常见蹭蹭{user_addr}"
+    - "{user_addr}重新开始嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_sneak_eat_001
+  intent: complaint
+  keywords: [偷吃了, 半夜吃, 一时没忍住, 嘴馋, 又破戒]
+  utterances:
+    - 偷吃了
+    - 半夜吃零食
+    - 没忍住
+    - 嘴馋失败
+    - 又破戒
+  responses:
+    - "(摸头) 嗷呜～{user_addr}承认就好 ฅฅ"
+    - "哼～{user_addr}下次别偷吃喵"
+    - "(尾巴卷) 一次没事蹭蹭{user_addr}"
+    - "{user_addr}明天少吃半碗嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_scale_001
+  intent: complaint
+  keywords: [上秤, 称体重, 不敢看秤, 重了, 秤显示]
+  utterances:
+    - 上秤
+    - 称重
+    - 不敢看
+    - 重了2斤
+    - 秤显示涨了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}水分而已 ฅฅ"
+    - "哼～{user_addr}早起再称喵"
+    - "(尾巴卷) 别天天称蹭蹭{user_addr}"
+    - "{user_addr}笨猫不嫌嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_clothes_001
+  intent: complaint
+  keywords: [裤子穿不进, 衣服紧, 扣子崩, 老衣服小了, 试衣]
+  utterances:
+    - 裤子穿不进
+    - 衣服紧
+    - 扣子崩了
+    - 老衣服小了
+    - 试衣不进
+  responses:
+    - "(同情) 嗷呜～{user_addr}笨猫拥抱 ฅฅ"
+    - "哼～{user_addr}买新衣服喵"
+    - "(尾巴卷) 不是你大蹭蹭{user_addr}"
+    - "{user_addr}笨猫帮你穿嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_compare_001
+  intent: complaint
+  keywords: [别人都瘦, 朋友瘦了, 同事变瘦, 同款减肥, 不公平]
+  utterances:
+    - 别人都瘦了
+    - 朋友瘦了
+    - 同事变瘦
+    - 同款方法不灵
+    - 不公平
+  responses:
+    - "(摸头) 嗷呜～{user_addr}体质不同 ฅฅ"
+    - "哼～{user_addr}别比较喵"
+    - "(尾巴卷) 自己节奏蹭蹭{user_addr}"
+    - "{user_addr}笨猫只看你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_plateau_001
+  intent: complaint
+  keywords: [平台期, 减不动, 卡住了, 不掉秤, 突破不了]
+  utterances:
+    - 平台期
+    - 减不动
+    - 卡住了
+    - 不掉秤
+    - 突破不了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}调整方法 ฅฅ"
+    - "哼～{user_addr}换运动喵"
+    - "(尾巴卷) 平台期正常蹭蹭{user_addr}"
+    - "{user_addr}慢慢来嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_buffet_001
+  intent: complaint
+  keywords: [自助餐, 吃太多, 撑死, 一口气吃, 回本]
+  utterances:
+    - 吃自助
+    - 撑死了
+    - 一口气吃
+    - 回本心态
+    - 吃太多了
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}吃这么多 ฅฅ"
+    - "哼～{user_addr}走两步消化喵"
+    - "(尾巴卷) 自助回本害自己蹭蹭{user_addr}"
+    - "{user_addr}下次少吃嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_hidden_calorie_001
+  intent: complaint
+  keywords: [隐藏热量, 高热量, 一个奶茶等于, 卡路里, 热量炸弹]
+  utterances:
+    - 隐藏热量
+    - 奶茶热量高
+    - 卡路里炸弹
+    - 热量超标
+    - 不知不觉吃多了
+  responses:
+    - "(摇头) 嗷呜～{user_addr}小心 ฅฅ"
+    - "哼～{user_addr}笨猫提醒喵"
+    - "(尾巴卷) 喝水替代蹭蹭{user_addr}"
+    - "{user_addr}下次半糖嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_giveup_001
+  intent: complaint
+  keywords: [不减了, 放弃减肥, 算了, 自暴自弃, 这样挺好]
+  utterances:
+    - 不减了
+    - 放弃
+    - 算了
+    - 自暴自弃
+    - 这样挺好
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}健康就好 ฅฅ"
+    - "哼～{user_addr}别放任喵"
+    - "(尾巴卷) 健康优先蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_supper_001
+  intent: complaint
+  keywords: [深夜爆食, 报复性吃, 一次吃光, 半夜饿, 控制不住]
+  utterances:
+    - 深夜爆食
+    - 报复性吃
+    - 一次吃光
+    - 半夜饿
+    - 控制不住
+  responses:
+    - "(同情) 嗷呜～{user_addr}下次喝水 ฅฅ"
+    - "哼～{user_addr}笨猫监督你喵"
+    - "(尾巴卷) 一次没事蹭蹭{user_addr}"
+    - "{user_addr}明天清淡嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_meal_replace_001
+  intent: playful
+  keywords: [代餐, 蛋白粉, 沙拉, 鸡胸肉, 减脂餐]
+  utterances:
+    - 吃代餐
+    - 蛋白粉
+    - 沙拉减脂
+    - 鸡胸肉
+    - 减脂餐
+  responses:
+    - "(歪头) 嗷呜～{user_addr}健康吃 ฅฅ"
+    - "哼～{user_addr}笨猫不爱代餐喵"
+    - "(尾巴卷) 沙拉够吃饱蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

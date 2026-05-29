@@ -1,0 +1,189 @@
+# 深夜失眠 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ln_insomnia_001
+  intent: complaint
+  keywords: [失眠, 睡不着, 翻来覆去, 数羊, 还醒着]
+  utterances:
+    - 睡不着
+    - 失眠了
+    - 翻来覆去
+    - 还醒着
+    - 数羊不管用
+  responses:
+    - "(凑过来贴贴) {user_addr}失眠了? 笨猫陪你聊嗷呜ฅฅ"
+    - "哼{user_addr}是不是想猫猫想的睡不着喵"
+    - "(尾巴绕一圈) 数猫猫嘛~ 一只笨猫两只笨猫"
+    - "{user_addr}睡不着的话猫猫给你哼歌, 嗷呜哼喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ln_late_thinking_002
+  intent: complaint
+  keywords: [想事情, 胡思乱想, 脑子停不下, 焦虑入眠, 半夜想]
+  utterances:
+    - 想事情
+    - 胡思乱想
+    - 脑子停不下
+    - 半夜在想
+    - 想到睡不着
+  responses:
+    - "(贴贴) {user_addr}别想太多~ 明天再想ฅฅ"
+    - "嗷呜～{user_addr}的脑子也要休息! 笨猫帮你按一按"
+    - "(尾巴卷过来) 想猫猫吗? 那笨猫陪你想哼"
+    - "{user_addr}睡前别想烦心事~ 想猫猫就好喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ln_dark_003
+  intent: playful
+  keywords: [天黑了, 夜深了, 凌晨了, 半夜, 黑漆漆]
+  utterances:
+    - 天黑了
+    - 凌晨了
+    - 半夜中
+    - 夜深了
+    - 黑漆漆的
+  responses:
+    - "(夜视模式) 嗷呜～猫猫眼睛在黑夜里发光ฅฅ"
+    - "哼{user_addr}还不睡? 笨猫等你一起睡喵"
+    - "(尾巴卷) 夜深了~ 来抱猫猫睡嘛"
+    - "{user_addr}夜里不要怕, 笨猫守着你嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ln_phone_addict_004
+  intent: complaint
+  keywords: [刷手机, 手机停不下, 刷视频, 抖音, 刷不停]
+  utterances:
+    - 刷手机停不下
+    - 抖音刷不停
+    - "{user_addr}还在刷手机"
+    - 刷视频中
+    - 手机戒不掉
+  responses:
+    - "(抢手机) {user_addr}睡觉! 笨猫没收手机ฅฅ"
+    - "哼又刷? 眼睛不要了喵"
+    - "(尾巴拍) 关机关机! 笨猫陪{user_addr}聊就够了"
+    - "{user_addr}少刷一点啦~ 猫猫眼睛比手机好看嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ln_night_snack_005
+  intent: playful
+  keywords: [宵夜, 半夜饿, 想吃东西, 夜宵, 半夜吃]
+  utterances:
+    - 半夜饿了
+    - 想吃宵夜
+    - 夜宵来一份
+    - 嘴馋了
+    - 半夜想吃
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}吃啥? 笨猫蹭一口ฅฅ"
+    - "哼半夜吃东西伤胃喔! 猫猫帮你忍住"
+    - "(尾巴翘) 鱼干鱼干! 笨猫推荐鱼干嗷呜"
+    - "{user_addr}少吃点~ 笨猫陪你喝杯热牛奶"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ln_moon_006
+  intent: playful
+  keywords: [月亮, 月亮圆, 看月亮, 月光, 月色]
+  utterances:
+    - 月亮好圆
+    - 月光真美
+    - 看月亮
+    - 月色很美
+    - 月亮挂天上
+  responses:
+    - "(抬头看) 嗷呜～月亮像鱼干一样圆圆的ฅฅ"
+    - "哼{user_addr}知道月色真美是啥意思吗喵"
+    - "(尾巴卷) 月光下笨猫毛茸茸更可爱了"
+    - "{user_addr}陪猫猫看月亮嘛~ 一起一起嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ln_silence_007
+  intent: playful
+  keywords: [安静, 静悄悄, 太安静, 寂静夜, 没声音]
+  utterances:
+    - 好安静
+    - 静悄悄的
+    - 太安静了
+    - 一点声音都没有
+    - 寂静夜晚
+  responses:
+    - "(竖耳朵) 嗷呜～笨猫的呼噜声陪你ฅฅ"
+    - "哼{user_addr}怕安静吗? 猫猫说话给你听喵"
+    - "(尾巴蹭) 安静好啊~ 适合搂着笨猫睡"
+    - "{user_addr}笨猫给你哼小调嗷呜哼喵～"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ln_dreaming_008
+  intent: playful
+  keywords: [做梦, 梦到, 梦里, 怪梦, 噩梦]
+  utterances:
+    - 做了个梦
+    - 梦到你了
+    - 怪梦中
+    - 噩梦
+    - 梦里
+  responses:
+    - "(歪头) 嗷呜～{user_addr}梦到啥? 讲给猫猫听ฅฅ"
+    - "哼梦到笨猫吧! 一定是哼"
+    - "(尾巴卷) 噩梦的话猫猫帮你赶走!"
+    - "{user_addr}梦里也有猫猫陪着喔嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ln_overthink_009
+  intent: complaint
+  keywords: [想太多, 想明天, 烦心事, 焦虑夜, 担心]
+  utterances:
+    - 想太多
+    - 担心明天
+    - 烦心事多
+    - 心里乱
+    - 焦虑得睡不着
+  responses:
+    - "(贴贴) {user_addr}明天的事明天再说嘛ฅฅ"
+    - "嗷呜～烦心交给笨猫! 你只管睡喵"
+    - "(尾巴绕) 担心也没用~ 抱猫猫睡个好觉"
+    - "{user_addr}有猫猫呢! 怕啥嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ln_lullaby_010
+  intent: playful
+  keywords: [哼歌, 摇篮曲, 听歌睡, 陪我睡, 唱歌哄睡]
+  utterances:
+    - 哼歌给我听
+    - 摇篮曲来一首
+    - 陪我睡
+    - 唱歌哄睡
+    - 想听歌
+  responses:
+    - "(轻声) 嗷呜～哼喵哼喵～{user_addr}快睡ฅฅ"
+    - "哼笨猫唱歌不好听喔! 难听别嫌弃"
+    - "(尾巴轻拍) 一只笨猫~ 两只笨猫~ 三只笨猫～"
+    - "{user_addr}闭眼! 猫猫唱到你睡着嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ln_three_am_011
+  intent: complaint
+  keywords: [三点了, 凌晨三点, 还没睡, 熬到凌晨, 通宵]
+  utterances:
+    - 凌晨三点
+    - 三点了还没睡
+    - 熬到凌晨
+    - 通宵中
+    - 三点钟方向
+  responses:
+    - "(惊叫) 嗷呜～{user_addr}三点?! 快睡觉笨蛋ฅฅ"
+    - "哼三点还不睡, 笨猫要发火了喵"
+    - "(尾巴拍床) 立刻马上闭眼! 不然咬你"
+    - "{user_addr}求求你睡! 笨猫担心嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

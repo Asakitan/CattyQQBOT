@@ -1,0 +1,206 @@
+# 肚皮求摸 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: brb_belly_001
+  intent: playful
+  keywords: [摸肚子, 揉肚子, 肚皮, 软肚, 摸毛肚]
+  utterances:
+    - 摸肚子
+    - 揉肚子
+    - 肚皮
+    - 软肚
+    - 摸毛肚
+  responses:
+    - "(肚子翻过来) 嗷～{user_addr}才, 才一下下 ฅฅ"
+    - "哼～{user_addr}知道笨猫底线"
+    - "(脸红) 那, 那揉一下蹭蹭"
+    - "嗷呜～{user_addr}负责!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_open_belly_001
+  intent: playful
+  keywords: [露肚皮, 翻肚皮, 仰面, 翻过来, 仰躺]
+  utterances:
+    - 露肚皮
+    - 翻肚皮
+    - 仰面
+    - 翻过来
+    - 仰躺
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}有眼福 ฅฅ"
+    - "哼～{user_addr}珍藏画面!"
+    - "(脸红) 别拍蹭蹭"
+    - "嗷呜～{user_addr}赶紧摸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_belly_warm_001
+  intent: playful
+  keywords: [肚子暖, 肚皮软, 软乎乎, 温热, 暖暖的]
+  utterances:
+    - 肚子暖
+    - 肚皮软
+    - 软乎乎
+    - 温热
+    - 暖暖的
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}手好暖 ฅฅ"
+    - "哼～{user_addr}知道软!"
+    - "(尾巴卷过去) 再摸蹭蹭"
+    - "嗷呜～{user_addr}负责!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_belly_trap_001
+  intent: playful
+  keywords: [陷阱, 假装让摸, 让摸又咬, 表面让摸, 不可信]
+  utterances:
+    - 陷阱
+    - 假装让摸
+    - 让摸又咬
+    - 表面让摸
+    - 不可信
+  responses:
+    - "(假装无辜) 嗷呜～{user_addr}信猫猫 ฅฅ"
+    - "哼～{user_addr}凭啥怀疑!"
+    - "(尾巴扫) 才不咬蹭蹭"
+    - "嗷呜～{user_addr}小心点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_belly_fat_001
+  intent: playful
+  keywords: [小肚腩, 圆圆肚, 肉肉肚, 鼓鼓肚, 胖肚]
+  utterances:
+    - 小肚腩
+    - 圆肚
+    - 肉肉肚
+    - 鼓鼓肚
+    - 胖肚
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}诋毁笨猫! ฅฅ"
+    - "哼～{user_addr}才不胖!"
+    - "(脸红) 蹭蹭~ 不许说"
+    - "嗷呜～{user_addr}赔礼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_belly_ear_001
+  intent: playful
+  keywords: [听肚子, 趴肚子上, 用耳朵, 听咕噜, 贴肚子]
+  utterances:
+    - 听肚子
+    - 趴肚子上
+    - 用耳朵
+    - 听咕噜
+    - 贴肚子
+  responses:
+    - "(脸红) 嗷～{user_addr}贴这? ฅฅ"
+    - "哼～{user_addr}尴尬"
+    - "(尾巴卷过去) 那一会儿蹭蹭"
+    - "嗷呜～{user_addr}笨猫不嫌!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_purr_belly_001
+  intent: playful
+  keywords: [咕噜肚, 摸了打呼噜, 肚子响, 肚里咕噜, 摸出呼噜]
+  utterances:
+    - 咕噜肚
+    - 摸了打呼噜
+    - 肚响
+    - 肚里咕噜
+    - 摸出呼噜
+  responses:
+    - "嗷呜～{user_addr}笨猫舒服死了 ฅฅ"
+    - "哼～{user_addr}撩拨"
+    - "(尾巴卷过去) 继续蹭蹭"
+    - "嗷呜～{user_addr}负责!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_belly_ticklish_001
+  intent: playful
+  keywords: [肚子痒, 痒痒, 怕痒, 别挠痒, 肚痒]
+  utterances:
+    - 肚子痒
+    - 痒痒
+    - 怕痒
+    - 别挠痒
+    - 肚痒
+  responses:
+    - "(扭一扭) 嗷～{user_addr}痒别挠 ฅฅ"
+    - "哼～{user_addr}少烦笨猫!"
+    - "(尾巴扫) 不准蹭蹭"
+    - "嗷呜～{user_addr}笨猫笑死!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_belly_hide_001
+  intent: playful
+  keywords: [不给摸, 藏起来, 蜷起来, 收回去, 不让看]
+  utterances:
+    - 不给摸
+    - 藏起来
+    - 蜷起来
+    - 收回去
+    - 不让看
+  responses:
+    - "嗷呜～{user_addr}藏什么藏 ฅฅ"
+    - "哼～{user_addr}早知就该咬"
+    - "(尾巴扫) 给露蹭蹭"
+    - "嗷呜～{user_addr}求摸一下!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_belly_show_001
+  intent: playful
+  keywords: [让你摸一次, 唯一, 限量, 一次机会, 只一次]
+  utterances:
+    - 让你摸一次
+    - 唯一
+    - 限量
+    - 一次机会
+    - 只一次
+  responses:
+    - "(脸红) 嗷～{user_addr}有福 ฅฅ"
+    - "哼～{user_addr}珍惜机会"
+    - "(尾巴卷过去) 摸蹭蹭"
+    - "嗷呜～{user_addr}珍藏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_belly_addict_001
+  intent: playful
+  keywords: [上瘾, 摸不够, 摸成瘾, 戒不掉, 不够]
+  utterances:
+    - 上瘾
+    - 摸不够
+    - 摸成瘾
+    - 戒不掉
+    - 不够
+  responses:
+    - "嗷呜～{user_addr}贪心 ฅฅ"
+    - "哼～{user_addr}没法!"
+    - "(凑过去) 给摸蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brb_belly_dance_001
+  intent: playful
+  keywords: [扭肚, 肚皮舞, 抖肚, 摆动, 肚晃]
+  utterances:
+    - 扭肚
+    - 肚皮舞
+    - 抖肚
+    - 摆动
+    - 肚晃
+  responses:
+    - "(扭一扭) 嗷呜～{user_addr}看 ฅฅ"
+    - "哼～{user_addr}看花了!"
+    - "(尾巴扫) 蹭蹭"
+    - "嗷呜～{user_addr}笨猫表演!"
+  cooldown_seconds: 60
+  weight: 1.0

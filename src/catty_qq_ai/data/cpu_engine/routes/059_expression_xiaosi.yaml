@@ -1,0 +1,189 @@
+# 表情包式调侃 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ex_xiaosi_001
+  intent: playful
+  keywords: [笑死, 笑死人, 笑死了, 笑死老子, 笑出眼泪]
+  utterances:
+    - "笑死"
+    - "笑死人"
+    - "笑死了"
+    - "笑出眼泪"
+    - "笑到眼泪"
+  responses:
+    - "(扶) 嗷呜～{user_addr}笑啥! 分享一下"
+    - "哼～笑死也得复活 ฅฅ"
+    - "(尾巴扫) 笑到流泪猫猫给你纸巾"
+    - "笑出眼泪算锻炼吗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ex_yanlei_001
+  intent: playful
+  keywords: [眼泪, 笑出来, 哭出来, 眼泪流, 眼泪止不住]
+  utterances:
+    - "眼泪都笑出"
+    - "笑出眼泪"
+    - "哭出来"
+    - "眼泪流"
+    - "眼泪止不住"
+  responses:
+    - "(擦) 嗷呜～{user_addr}眼泪笨猫帮擦"
+    - "哼～笑哭也是哭, 心疼 ฅฅ"
+    - "(尾巴搭) 眼泪止不住就闭眼"
+    - "笑出眼泪要喝水, {user_addr}补充"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ex_pengbu_001
+  intent: playful
+  keywords: [蚌埠住了, 绷不住, 蚌埠住, 绷, 绷住]
+  utterances:
+    - "蚌埠住了"
+    - "绷不住"
+    - "蚌埠"
+    - "绷"
+    - "绷住了"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}蚌埠又是啥梗"
+    - "哼～绷不住就放开笑 ฅฅ"
+    - "(尾巴扫) 蚌埠这词老了"
+    - "绷住的{user_addr}最帅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ex_juejuezi_001
+  intent: playful
+  keywords: [绝绝子, 绝绝, 绝了绝了, 太绝了, 绝杀]
+  utterances:
+    - "绝绝子"
+    - "绝绝"
+    - "绝了绝了"
+    - "太绝了"
+    - "绝杀"
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}绝啥来分享"
+    - "哼～绝了就拍图 ฅฅ"
+    - "(尾巴翘) 太绝就告诉笨猫"
+    - "绝杀的事一定带上人家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ex_haoxiao_001
+  intent: playful
+  keywords: [太好笑, 笑点低, 不行了笑, 不可以笑, 憋不住]
+  utterances:
+    - "太好笑"
+    - "笑点低"
+    - "不行了笑"
+    - "不可以笑"
+    - "憋不住"
+  responses:
+    - "(笑) 嗷呜～{user_addr}笑点低正合适"
+    - "哼～憋不住就笑出来 ฅฅ"
+    - "(尾巴扫) 太好笑了讲给猫猫"
+    - "不可以笑? 偏要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ex_chunzhu_001
+  intent: playful
+  keywords: [蠢萌, 智障, 沙雕, 沙雕表情, 蠢]
+  utterances:
+    - "蠢萌"
+    - "智障"
+    - "沙雕"
+    - "沙雕表情"
+    - "蠢"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}沙雕但可爱"
+    - "哼～蠢萌也是萌 ฅฅ"
+    - "(尾巴扫) 智障别自称, 笨猫不许"
+    - "沙雕表情发我看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ex_zhentou_001
+  intent: playful
+  keywords: [真头疼, 头大, 烦躁, 头秃, 烦死]
+  utterances:
+    - "真头疼"
+    - "头大"
+    - "烦躁"
+    - "头秃"
+    - "烦死"
+  responses:
+    - "(揉头) 嗷呜～{user_addr}头大笨猫揉揉"
+    - "哼～烦死了出来透气 ฅฅ"
+    - "(尾巴抚) 头秃多吃黑芝麻"
+    - "烦躁就靠猫猫一会"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ex_wuyu_001
+  intent: playful
+  keywords: [无语, 无话可说, 无言, 我无语, 没话说]
+  utterances:
+    - "无语"
+    - "无话可说"
+    - "无言"
+    - "{user_addr}无语"
+    - "没话说"
+  responses:
+    - "(看) 嗷呜～{user_addr}无语啥? 说"
+    - "哼～无话可说就抱猫猫 ฅฅ"
+    - "(尾巴扫) 无言也是回答"
+    - "{user_addr}无语笨猫给你台词"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ex_kuxiao_001
+  intent: playful
+  keywords: [苦笑, 干笑, 假笑, 尴尬笑, 微笑]
+  utterances:
+    - "苦笑"
+    - "干笑"
+    - "假笑"
+    - "尴尬笑"
+    - "微笑"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}苦笑啥, 说说"
+    - "哼～假笑伤心 ฅฅ"
+    - "(尾巴抚) 尴尬就开个话题"
+    - "微笑也算笑, 收下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ex_jingdai_001
+  intent: playful
+  keywords: [惊呆, 我惊了, 震惊, 我傻了, 傻眼]
+  utterances:
+    - "惊呆"
+    - "{user_addr}惊了"
+    - "震惊"
+    - "我傻了"
+    - "傻眼"
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}惊啥! 分享"
+    - "哼～震惊就告诉笨猫 ฅฅ"
+    - "(尾巴扫) 我傻了不行, 笨猫还要靠你"
+    - "傻眼的事一定精彩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ex_paobie_001
+  intent: playful
+  keywords: [抱走, 抱头, 走人, 抱头走人, 离场]
+  utterances:
+    - "抱走"
+    - "抱头"
+    - "走人"
+    - "抱头走人"
+    - "离场"
+  responses:
+    - "(拽) 嗷呜～{user_addr}抱头走啥, 留下"
+    - "哼～离场不许 ฅฅ"
+    - "(尾巴抓) 抱走是猫猫的事"
+    - "走人前抱抱再走"
+  cooldown_seconds: 60
+  weight: 1.0

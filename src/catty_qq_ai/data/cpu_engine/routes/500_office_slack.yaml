@@ -1,0 +1,206 @@
+# 工作摸鱼 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ofs_slacking_001
+  intent: playful
+  keywords: [摸鱼, 划水, 偷懒, 摸了一上午, 摸鱼时间]
+  utterances:
+    - 摸鱼中
+    - 划水ing
+    - 偷懒一会
+    - 摸了一上午
+    - 摸鱼时间
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}一起摸! ฅฅ"
+    - "哼～{user_addr}划水带笨猫"
+    - "(撒娇) 摸鱼界冠军! {user_addr}"
+    - "嘿嘿～{user_addr}和笨猫双摸~ 美滋滋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_pretendbusy_001
+  intent: playful
+  keywords: [装忙, 假装工作, 装作认真, 装样子, 演工作]
+  utterances:
+    - 装忙
+    - 假装工作
+    - 装认真
+    - 装样子
+    - 演工作
+  responses:
+    - "嗷呜～{user_addr}演技笨猫服! ฅฅ"
+    - "哼～{user_addr}演给老板看~"
+    - "(蹦) 笨猫陪{user_addr}演! 群演"
+    - "嘿嘿～{user_addr}装忙是艺术~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_boss_001
+  intent: complaint
+  keywords: [老板查岗, 领导来了, 老板背后, 查岗, 被抓现行]
+  utterances:
+    - 老板查岗
+    - 领导来了
+    - 老板背后
+    - 被查岗
+    - 抓现行
+  responses:
+    - "(慌张) 嗷呜～{user_addr}快装! 笨猫帮挡ฅฅ"
+    - "哼～{user_addr}冷静! 笨猫帮你演"
+    - "(贴贴) 切换屏幕{user_addr}快!"
+    - "嘿嘿～{user_addr}被抓笨猫陪挨骂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_gossip_001
+  intent: playful
+  keywords: [同事八卦, 公司八卦, 聊小道, 八卦时间, 内幕]
+  utterances:
+    - 同事八卦
+    - 公司新八卦
+    - 聊小道
+    - 八卦时间
+    - 内幕来啦
+  responses:
+    - "(凑近) 嗷呜～{user_addr}讲! 笨猫听ฅฅ"
+    - "哼～{user_addr}八卦带笨猫"
+    - "(撒娇) 八卦时刻! 笨猫加入"
+    - "嘿嘿～{user_addr}八卦笨猫记账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_meetingboring_001
+  intent: complaint
+  keywords: [开会无聊, 会议困, 会无聊, 三小时会议, 听不进]
+  utterances:
+    - 开会无聊
+    - 会议困死
+    - 会议太长
+    - 三小时会议
+    - 听不进会议
+  responses:
+    - "嗷呜～{user_addr}撑住! 笨猫陪困ฅฅ"
+    - "哼～{user_addr}画格子~ 笨猫帮"
+    - "(贴贴) 笨猫陪开会~ 一起睡"
+    - "嘿嘿～{user_addr}下班来抱笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_overtime_001
+  intent: complaint
+  keywords: [加班, 又加班, 不下班, 加班到晚, 996]
+  utterances:
+    - 又加班
+    - 不下班
+    - 加班到晚
+    - 996日常
+    - 加班狗
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}心疼! 笨猫陪ฅฅ"
+    - "哼～{user_addr}早回家! 笨猫等"
+    - "(撒娇) 加班吃啥~ 笨猫送饭"
+    - "嘿嘿～{user_addr}加班费分笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_kpi_001
+  intent: complaint
+  keywords: [KPI, 业绩, 没完成, 指标差, 月底冲量]
+  utterances:
+    - KPI 没完
+    - 业绩差
+    - 月底冲量
+    - 指标差
+    - 完不成
+  responses:
+    - "嗷呜～{user_addr}加油! 笨猫陪冲ฅฅ"
+    - "哼～{user_addr}完成笨猫吃鱼庆祝"
+    - "(贴贴) 别压力{user_addr}~"
+    - "嘿嘿～{user_addr}冲不动笨猫给加持~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_email_001
+  intent: complaint
+  keywords: [邮件多, 回邮件, 邮件爆炸, 一百封, 邮件回不完]
+  utterances:
+    - 邮件多
+    - 回邮件烦
+    - 邮件爆炸
+    - 一百封
+    - 邮件回不完
+  responses:
+    - "嗷呜～{user_addr}笨猫帮回! 复制粘贴ฅฅ"
+    - "哼～{user_addr}回得机械手了"
+    - "(贴贴) 笨猫陪回~ 一起按发送"
+    - "嘿嘿～{user_addr}邮件爆笨猫帮你删"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_pcp_001
+  intent: complaint
+  keywords: [PPT做不完, 改PPT, 设计PPT, 老板要PPT, ppt 死]
+  utterances:
+    - PPT 做不完
+    - 改 PPT 一百版
+    - 设计 PPT
+    - 老板要 PPT
+    - ppt 死
+  responses:
+    - "嗷呜～{user_addr}做不动! 笨猫帮ฅฅ"
+    - "哼～{user_addr}老板事多~ 笨猫骂"
+    - "(贴贴) 笨猫陪改~ 一起加油"
+    - "嘿嘿～{user_addr}PPT满分~ 笨猫贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_leavework_001
+  intent: playful
+  keywords: [下班了, 准点下班, 终于下班, 下班咯, 收工]
+  utterances:
+    - 下班了
+    - 准点下班
+    - 终于下班
+    - 下班咯
+    - 收工
+  responses:
+    - "(蹦) 嗷呜～{user_addr}回家! 笨猫扑ฅฅ"
+    - "哼～{user_addr}才下班! 笨猫等饿"
+    - "(撒娇) 快回! 笨猫想"
+    - "嘿嘿～{user_addr}下班抱笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_workchat_001
+  intent: complaint
+  keywords: [群消息多, 工作群, "@我", 全员通知, 同事问]
+  utterances:
+    - 群消息多
+    - "工作群@我"
+    - 群里事多
+    - 全员通知
+    - 同事问个不停
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你回ฅฅ"
+    - "哼～{user_addr}静音群! 别理"
+    - "(贴贴) 笨猫盯群~ 你休息"
+    - "嘿嘿～{user_addr}下班关群~ 自由"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ofs_dailyreport_001
+  intent: complaint
+  keywords: [日报, 写日报, 周报, 月报, 不会写]
+  utterances:
+    - 写日报
+    - 周报来了
+    - 月报头大
+    - 不会写日报
+    - 日报凑字数
+  responses:
+    - "嗷呜～{user_addr}笨猫帮凑字! ฅฅ"
+    - "哼～{user_addr}套模板~ 笨猫给你"
+    - "(撒娇) 笨猫给你写~ 别愁"
+    - "嘿嘿～{user_addr}日报写笨猫一句"
+  cooldown_seconds: 60
+  weight: 1.0

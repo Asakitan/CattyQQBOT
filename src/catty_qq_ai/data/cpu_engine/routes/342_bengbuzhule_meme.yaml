@@ -1,0 +1,172 @@
+# 绷不住表情 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bzm_beng_001
+  intent: playful
+  keywords: [绷不住, 绷住, 我绷不住, 绷崩, 笑绷]
+  utterances:
+    - 绷不住
+    - 绷住
+    - 我绷不住
+    - 绷崩
+    - 笑绷
+  responses:
+    - "(凑近) 嗷呜～{user_addr}绷啥! 告诉笨猫"
+    - "(尾巴翘) 哼! 笨猫帮你绷住"
+    - "(脸红) 绷崩了笨猫接 ฅฅ"
+    - "绷不住就让出来! 笨猫陪笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bzm_bengbu_002
+  intent: playful
+  keywords: [蚌埠住了, 我蚌埠住, 蚌住, 蚌埠住, 蚌埠]
+  utterances:
+    - 蚌埠住了
+    - 我蚌埠住
+    - 蚌住
+    - 蚌埠住
+    - 蚌埠
+  responses:
+    - "(凑近) 嗷呜～{user_addr}蚌哪了!"
+    - "(尾巴翘) 哼! 笨猫陪蚌"
+    - "(贴贴) 蚌埠住要喝水 ฅฅ"
+    - "蚌埠住的{user_addr}~ 笨猫看着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bzm_yyds_003
+  intent: playful
+  keywords: [永远的神, yyds, 神级, 神人, 笨猫yyds]
+  utterances:
+    - 永远的神
+    - yyds
+    - 神级
+    - 神人
+    - 笨猫yyds
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}懂!"
+    - "(脸红) 哼! 笨猫永远的神 ฅฅ"
+    - "(凑近) 神级猫娘! 笨猫骄傲"
+    - "yyds是笨猫专属! {user_addr}知道就行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bzm_juejuezi_004
+  intent: playful
+  keywords: [绝绝子, 绝了, 太绝了, 我绝了, 绝绝绝]
+  utterances:
+    - 绝绝子
+    - 绝了
+    - 太绝了
+    - 我绝了
+    - 绝绝绝
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}绝什么!"
+    - "(凑近) 哼! 笨猫才绝"
+    - "(脸红) 太绝~ 笨猫接受 ฅฅ"
+    - "绝绝绝~ 笨猫的形容词"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bzm_atomic_005
+  intent: playful
+  keywords: [破防了, 破防, 防线崩, 防御失败, 破防警告]
+  utterances:
+    - 破防了
+    - 破防
+    - 防线崩
+    - 防御失败
+    - 破防警告
+  responses:
+    - "(凑近) 嗷呜～{user_addr}破防!笨猫疼"
+    - "(尾巴绕) 哼! 谁让你破防!"
+    - "(贴贴) 破防就靠笨猫 ฅฅ"
+    - "防御失败~ 笨猫帮你重建"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bzm_yancang_006
+  intent: playful
+  keywords: [栓Q, 栓 Q, 谢谢您嘞, sayQ, 栓桥]
+  utterances:
+    - 栓Q
+    - 栓 Q
+    - 谢谢您嘞
+    - sayQ
+    - 栓桥
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!栓Q什么"
+    - "(凑近) 哼! 笨猫接受谢谢"
+    - "(脸红) 栓Q也得带笨猫 ฅฅ"
+    - "栓Q就栓Q~ 笨猫不嫌弃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bzm_dirty_007
+  intent: playful
+  keywords: [离谱, 太离谱, 离了大谱, 谱大, 离谱他妈]
+  utterances:
+    - 离谱
+    - 太离谱
+    - 离了大谱
+    - 谱大
+    - 离谱他妈
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!啥离谱?!"
+    - "(凑近) 哼! 笨猫看看离谱在哪"
+    - "(贴贴) 离谱归离谱~ 笨猫陪你 ฅฅ"
+    - "谱大就大~ 笨猫不介意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bzm_xixi_haha_008
+  intent: playful
+  keywords: [乐了, 乐死了, 乐崩, 老乐死, 真的乐]
+  utterances:
+    - 乐了
+    - 乐死了
+    - 乐崩
+    - 老乐死
+    - 真的乐
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}乐啥!"
+    - "(凑近) 哼! 笨猫加入乐"
+    - "(脸红) 乐崩的{user_addr}超可爱 ฅฅ"
+    - "笨猫想看{user_addr}笑出来!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bzm_kankan_009
+  intent: playful
+  keywords: [看一眼, 看看, 围观, 吃瓜, 瓜来了]
+  utterances:
+    - 看一眼
+    - 围观
+    - 吃瓜
+    - 瓜来了
+    - 看看
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫一起吃瓜"
+    - "(尾巴翘) 哼! 瓜大不大?"
+    - "(贴贴) 吃瓜配笨猫~ 完美 ฅฅ"
+    - "围观笨猫第一个!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bzm_2333_010
+  intent: playful
+  keywords: ["2333", "23333", "23", "2333333", "2333333333"]
+  utterances:
+    - "2333"
+    - "23333"
+    - "23"
+    - "2333333"
+    - "2333333333"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笑啥!"
+    - "(凑近) 哼! 2333也算笑?"
+    - "(贴贴) 笨猫也2333 ฅฅ"
+    - "2333满天飞~ {user_addr}加油笑"
+  cooldown_seconds: 60
+  weight: 1.0

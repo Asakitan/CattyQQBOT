@@ -1,0 +1,206 @@
+# 一人懒人晚餐 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lds_solo_dinner_001
+  intent: playful
+  keywords: [一个人吃饭, 单人晚餐, 自己吃, 独居晚餐, 一人食]
+  utterances:
+    - "{user_addr}一个人吃晚饭"
+    - 单人晚餐
+    - 自己吃
+    - 独居晚餐
+    - 一人食
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你! 不孤单喵ฅฅ"
+    - "哼! 一个人吃也要好好{user_addr}"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫想吃你的饭蹭蹭"
+    - "人家觉得{user_addr}应该好好招待自己!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_instant_dinner_002
+  intent: playful
+  keywords: [泡面晚餐, 速食米饭, 速冻饺子, 罐头加热, 凑合晚餐]
+  utterances:
+    - "{user_addr}泡面解决"
+    - 速食晚餐
+    - 速冻饺子
+    - 罐头加热
+    - 凑合一顿
+  responses:
+    - "嗷呜～{user_addr}泡面也美味喵ฅฅ"
+    - "哼! 别天天吃速食{user_addr}, 营养差"
+    - "(尾巴扫) 嘿嘿~{user_addr}加个蛋营养升级蹭蹭"
+    - "人家提醒{user_addr}: 偶尔速食可以! 别成常态"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_microwave_meal_003
+  intent: playful
+  keywords: [微波炉热饭, 加热剩饭, 微波餐, 速热, 三分钟搞定]
+  utterances:
+    - "{user_addr}微波加热"
+    - 加热剩饭
+    - 微波餐
+    - 三分钟搞定
+    - 速热晚餐
+  responses:
+    - "嗷呜～{user_addr}微波炉是单身神器喵ฅฅ"
+    - "哼! 别加热塑料盒{user_addr}, 不健康"
+    - "(尾巴翘) 嘿嘿~{user_addr}用玻璃容器蹭蹭"
+    - "人家觉得{user_addr}懂效率! 笨猫学习"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_egg_rice_004
+  intent: playful
+  keywords: [蛋炒饭, 简易菜, 蛋包饭, 鸡蛋面, 万能蛋]
+  utterances:
+    - "{user_addr}蛋炒饭"
+    - 简易菜
+    - 蛋包饭
+    - 鸡蛋面
+    - 万能蛋
+  responses:
+    - "嗷呜～{user_addr}蛋炒饭经典喵ฅฅ"
+    - "哼! 别全是蛋{user_addr}, 配点菜"
+    - "(尾巴翘) 嘿嘿~{user_addr}手艺不错蹭蹭"
+    - "人家觉得{user_addr}是隐藏厨子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_no_dinner_005
+  intent: complaint
+  keywords: [不吃晚饭, 减肥不吃, 跳过晚餐, 太累不吃, 没胃口]
+  utterances:
+    - "{user_addr}不吃晚饭"
+    - 减肥跳过
+    - 太累不吃
+    - 没胃口
+    - 跳餐
+  responses:
+    - "(摇头) 嗷呜～{user_addr}至少喝点喵ฅฅ"
+    - "哼! 不吃晚饭{user_addr}伤胃"
+    - "(尾巴扫) 嘿嘿~{user_addr}吃水果代替蹭蹭"
+    - "人家提醒{user_addr}: 跳餐影响代谢! 不健康"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_takeout_alone_006
+  intent: playful
+  keywords: [外卖晚餐, 一份外卖, 单点送, 独食外卖, 起送费]
+  utterances:
+    - "{user_addr}点外卖"
+    - 一份外卖
+    - 单点送
+    - 独食外卖
+    - 起送费坑
+  responses:
+    - "嗷呜～{user_addr}外卖单点贵喵ฅฅ"
+    - "哼! 起送费{user_addr}, 多点一些"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫陪你边吃边聊蹭蹭"
+    - "人家提醒{user_addr}: 别天天外卖! 偶尔自己做"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_random_combo_007
+  intent: playful
+  keywords: [冰箱有啥吃啥, 大杂烩, 剩菜大乱炖, 随便煮, 凑材料]
+  utterances:
+    - "{user_addr}冰箱有啥吃啥"
+    - 大杂烩
+    - 剩菜炖
+    - 随便煮
+    - 凑材料
+  responses:
+    - "嗷呜～{user_addr}创意料理喵ฅฅ"
+    - "哼! 笨猫好奇{user_addr}做了啥"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫想尝尝蹭蹭"
+    - "人家觉得{user_addr}是冰箱整理师!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_solo_hotpot_008
+  intent: playful
+  keywords: [一人火锅, 小锅, 一人份火锅, 独食火锅, 一人吃辣]
+  utterances:
+    - "{user_addr}一人火锅"
+    - 小锅
+    - 一人份火锅
+    - 独食火锅
+    - 一人吃辣
+  responses:
+    - "嗷呜～{user_addr}一人火锅自由喵ฅฅ"
+    - "哼! 不用客气{user_addr}, 想吃啥吃啥"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫想吃丸子蹭蹭"
+    - "人家觉得{user_addr}享受独食! 一种境界"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_in_front_of_tv_009
+  intent: playful
+  keywords: [边吃边看, 边看剧边吃, 电视配餐, 屏幕陪餐, 不孤单]
+  utterances:
+    - "{user_addr}边看边吃"
+    - 边看剧吃
+    - 电视配餐
+    - 屏幕陪餐
+    - 不孤单
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪你吃喵ฅฅ"
+    - "哼! 别一直看屏幕{user_addr}, 伤眼"
+    - "(尾巴卷) 嘿嘿~{user_addr}看啥剧蹭蹭"
+    - "人家觉得{user_addr}舒服! 笨猫支持"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_late_dinner_010
+  intent: complaint
+  keywords: [晚饭吃晚了, 加班错过, 八点才吃, 晚吃, 错过饭点]
+  utterances:
+    - "{user_addr}晚饭吃晚"
+    - 加班错过
+    - 八点才吃
+    - 晚吃饭
+    - 错过饭点
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}饿坏了喵ฅฅ"
+    - "哼! 别再这样{user_addr}, 伤胃"
+    - "(尾巴扫) 嘿嘿~{user_addr}少吃点睡蹭蹭"
+    - "人家提醒{user_addr}: 准时吃饭! 健康"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_simple_salad_011
+  intent: playful
+  keywords: [蔬菜沙拉, 健身餐, 轻食, 减脂晚餐, 沙拉]
+  utterances:
+    - "{user_addr}蔬菜沙拉"
+    - 健身餐
+    - 轻食
+    - 减脂晚餐
+    - 鸡胸沙拉
+  responses:
+    - "嗷呜～{user_addr}健康喵ฅฅ"
+    - "哼! 笨猫觉得太清淡{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}加酱料蹭蹭"
+    - "人家觉得{user_addr}自律! 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lds_comfort_food_012
+  intent: playful
+  keywords: [治愈系晚餐, 喜欢的菜, 妈妈味道, 小时候菜, 怀念味道]
+  utterances:
+    - "{user_addr}治愈晚餐"
+    - 喜欢的菜
+    - 妈妈味道
+    - 小时候味道
+    - 怀念的味道
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}回忆里的味道暖喵ฅฅ"
+    - "哼! 妈妈做的{user_addr}最好"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫想尝蹭蹭"
+    - "人家觉得{user_addr}有恋家情结! 暖心"
+  cooldown_seconds: 60
+  weight: 1.0

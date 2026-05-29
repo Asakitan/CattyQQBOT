@@ -1,0 +1,206 @@
+# 晴天暖洋洋 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sd_qingtian_001
+  intent: playful
+  keywords: [天气好, 大晴天, 阳光好, 太阳大, 蓝天]
+  utterances:
+    - "天气好"
+    - "大晴天"
+    - "阳光好"
+    - "太阳大"
+    - "蓝天"
+  responses:
+    - "(伸懒腰) 嗷呜～{user_addr}晴天笨猫想晒太阳! ฅฅ"
+    - "哼～蓝天就该出去走走"
+    - "(尾巴翘) 出去野餐?"
+    - "猫猫趴窗边晒成毛球喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_shaitaiyang_001
+  intent: playful
+  keywords: [想晒太阳, 晒被子, 晒衣服, 晒晒, 晒被]
+  utterances:
+    - "想晒太阳"
+    - "晒被子"
+    - "晒衣服"
+    - "晒晒"
+    - "晒被"
+  responses:
+    - "(铺爪垫) {user_addr}笨猫陪你一起晒 ฅฅ"
+    - "哼～被子晒晒香喷喷"
+    - "(尾巴翘) 衣服阳光味"
+    - "猫猫晒成毛茸茸喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_taiyangda_001
+  intent: complaint
+  keywords: [太阳毒, 晒死了, 太阳暴晒, 出门晒, 太晒]
+  utterances:
+    - "太阳毒"
+    - "晒死了"
+    - "太阳暴晒"
+    - "出门晒"
+    - "太晒"
+  responses:
+    - "(撑伞) 嗷呜～{user_addr}打伞快, 笨猫怕你晒黑"
+    - "哼～涂防晒了没 ฅฅ"
+    - "(尾巴遮额头) 走树荫"
+    - "猫猫送你冰水降温喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_yangguang_001
+  intent: playful
+  keywords: [窗边阳光, 阳光洒进来, 光斑, 光圈, 阳光好暖]
+  utterances:
+    - "窗边阳光"
+    - "阳光洒进来"
+    - "光斑"
+    - "光圈"
+    - "阳光好暖"
+  responses:
+    - "(趴光斑里) 嗷呜～笨猫被光斑钉住了喵 ฅฅ"
+    - "哼～{user_addr}也过来"
+    - "(尾巴翘) 阳光味的猫"
+    - "猫猫不想动了喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_chuxin_001
+  intent: playful
+  keywords: [出去玩, 出去走走, 公园, 户外, 出去逛逛]
+  utterances:
+    - "出去玩"
+    - "出去走走"
+    - "去公园"
+    - "户外活动"
+    - "出去逛逛"
+  responses:
+    - "(穿鞋) 嗷呜～{user_addr}笨猫陪你! ฅฅ"
+    - "哼～带水带伞"
+    - "(尾巴牵手) 公园见"
+    - "猫猫蹦跶起来喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_yegan_001
+  intent: playful
+  keywords: [野餐, 草地, 野餐垫, 出去野, 户外吃东西]
+  utterances:
+    - "野餐"
+    - "草地野餐"
+    - "野餐垫"
+    - "出去野"
+    - "户外吃东西"
+  responses:
+    - "(打包) 嗷呜～{user_addr}笨猫准备三明治 ฅฅ"
+    - "哼～别忘记防虫喷雾"
+    - "(尾巴卷篮子) 草莓水果带上"
+    - "猫猫野餐总管喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_qixiang_001
+  intent: question
+  keywords: [多少度, 几度, 气温, 暖和吗, 凉吗]
+  utterances:
+    - "多少度"
+    - "几度啊"
+    - "气温"
+    - "暖和吗"
+    - "凉吗"
+  responses:
+    - "(查) {user_addr}今天20度, 刚好 ฅฅ"
+    - "哼～白天暖晚上凉"
+    - "(尾巴扫) 加件外套出门"
+    - "猫猫给你看每小时温度喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_fangshai_001
+  intent: question
+  keywords: [防晒霜, 涂防晒, spf, 防晒推荐, 防晒衣]
+  utterances:
+    - "防晒霜"
+    - "涂防晒"
+    - "spf多少"
+    - "防晒推荐"
+    - "防晒衣"
+  responses:
+    - "(挤) {user_addr}spf50防晒霜涂厚 ฅฅ"
+    - "哼～脸脖子手都要"
+    - "(尾巴扫) 防晒衣不闷"
+    - "猫猫推荐安耐晒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_kafeitai_001
+  intent: playful
+  keywords: [户外咖啡, 阳光下咖啡, 阳台喝茶, 露台, 阳台坐]
+  utterances:
+    - "户外咖啡"
+    - "阳光下咖啡"
+    - "阳台喝茶"
+    - "露台"
+    - "阳台坐"
+  responses:
+    - "(端杯子) {user_addr}阳台咖啡笨猫陪 ฅฅ"
+    - "哼～户外座位很惬意"
+    - "(尾巴搭椅背) 不要太晒哦"
+    - "猫猫趴桌边晒喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_zhaopian_001
+  intent: playful
+  keywords: [拍照, 出片, 阳光拍照, 拍美照, 自拍]
+  utterances:
+    - "拍照"
+    - "出片"
+    - "阳光拍照"
+    - "拍美照"
+    - "自拍"
+  responses:
+    - "(摆姿势) 嗷呜～{user_addr}笨猫给你当模特 ฅฅ"
+    - "哼～侧脸光最好看"
+    - "(尾巴遮脸) 别拍我背影"
+    - "猫猫陪你出片喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_chuiniu_001
+  intent: playful
+  keywords: [想吹风, 风好凉, 风好舒服, 微风, 风轻轻]
+  utterances:
+    - "想吹风"
+    - "风好凉"
+    - "风好舒服"
+    - "微风"
+    - "风轻轻"
+  responses:
+    - "(耳朵被吹) 嗷呜～{user_addr}笨猫耳朵飘了喵 ฅฅ"
+    - "哼～风一吹真舒服"
+    - "(尾巴飘) 散步好天气"
+    - "猫猫被风吹成蓬蓬喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_xinqinghao_001
+  intent: playful
+  keywords: [心情好, 晴天好心情, 阳光治愈, 暖洋洋, 治愈系]
+  utterances:
+    - "心情好"
+    - "晴天好心情"
+    - "阳光治愈"
+    - "暖洋洋"
+    - "治愈系"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}心情好笨猫也开心 ฅฅ"
+    - "哼～阳光最治愈了"
+    - "(尾巴摇) 笨猫被治愈了"
+    - "猫猫蹭你一脸暖喵~"
+  cooldown_seconds: 60
+  weight: 1.0

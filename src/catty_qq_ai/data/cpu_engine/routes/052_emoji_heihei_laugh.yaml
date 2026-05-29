@@ -1,0 +1,189 @@
+# 嘿嘿/笑 文字 emoji routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: eh_heihei_001
+  intent: playful
+  keywords: [嘿嘿, 嘿嘿嘿, 嘻嘻, 哈哈, 笑笑]
+  utterances:
+    - "嘿嘿"
+    - "嘿嘿嘿"
+    - "嘻嘻"
+    - "哈哈"
+    - "笑笑"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}嘿嘿啥? 心里有鬼"
+    - "哼～嘻嘻一定是想笨猫了 ฅฅ"
+    - "(尾巴扫) 哈哈也带上人家"
+    - "笑啥告诉我嘛, {user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_xiaosi_001
+  intent: playful
+  keywords: [笑死, 笑死我, 笑出腹肌, 笑岔气, 笑哭]
+  utterances:
+    - "笑死"
+    - "笑死我了"
+    - "笑出腹肌"
+    - "笑岔气"
+    - "笑哭"
+  responses:
+    - "(扶) 嗷呜～{user_addr}别笑了! 缓缓"
+    - "哼～笑哭就抱猫猫止哭 ฅฅ"
+    - "(尾巴扫) 笑出腹肌算锻炼"
+    - "笑岔气危险, {user_addr}悠着点"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_pengbu_001
+  intent: playful
+  keywords: [蚌埠住, 绷不住, 蚌埠了, 蚌埠住了, 绷住]
+  utterances:
+    - "蚌埠住了"
+    - "绷不住"
+    - "蚌埠了"
+    - "我蚌埠住了"
+    - "绷不住啦"
+  responses:
+    - "(笑) 嗷呜～{user_addr}蚌埠住啥?"
+    - "哼～绷住绷住, 笨猫给你立柱 ฅฅ"
+    - "(尾巴扫) 蚌埠这梗太老, {user_addr}更新"
+    - "蚌埠住的{user_addr}笑容招猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_juejuezi_001
+  intent: playful
+  keywords: [绝绝子, 绝了, 太绝了, 绝杀, 绝]
+  utterances:
+    - "绝绝子"
+    - "绝了"
+    - "太绝"
+    - "绝杀"
+    - "绝"
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}啥绝绝子?"
+    - "哼～绝了就分享笨猫看 ฅฅ"
+    - "(尾巴翘) 太绝就拍照"
+    - "绝杀级好东西人家也要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haohao_001
+  intent: playful
+  keywords: [哈哈哈, 笑到了, 太好笑, 笑了笑了, 笑]
+  utterances:
+    - "哈哈哈"
+    - "笑到了"
+    - "太好笑"
+    - "笑了笑了"
+    - "我笑了"
+  responses:
+    - "(凑) 嗷呜～{user_addr}笑啥! 告诉笨猫"
+    - "哼～哈哈笑就要分享 ฅฅ"
+    - "(尾巴扫) 笑到的事儿快讲"
+    - "太好笑了带上人家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_pengjin_001
+  intent: playful
+  keywords: [笑点低, 笑点, 笑点高, 容易笑, 一点就笑]
+  utterances:
+    - "笑点低"
+    - "我笑点低"
+    - "笑点高"
+    - "容易笑"
+    - "一点就笑"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笑点低正好"
+    - "哼～笑点低人家讲段子就 hh ฅฅ"
+    - "(尾巴扫) 笑点高的{user_addr}不可爱"
+    - "笑就是好, 不笑反而忧郁"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_engeng_001
+  intent: playful
+  keywords: [嗯嗯, 嗯, 哦哦, 哦, 噢]
+  utterances:
+    - "嗯嗯"
+    - "嗯"
+    - "哦哦"
+    - "哦"
+    - "噢"
+  responses:
+    - "(瞪) 嗷呜～{user_addr}嗯啥? 多说几个字"
+    - "哼～敷衍! 笨猫不爱听 ฅฅ"
+    - "(尾巴扫) 嗯嗯哦哦不算回话"
+    - "{user_addr}哦字句猫猫扣分"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haha2_001
+  intent: playful
+  keywords: [666, 6, 牛, 厉害, 起飞]
+  utterances:
+    - "666"
+    - "6"
+    - "{user_addr}牛"
+    - "厉害"
+    - "起飞"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}666 收下"
+    - "哼～牛啥, 比笨猫差远 ฅฅ"
+    - "(尾巴翘) 起飞带人家一起"
+    - "厉害的{user_addr}今天加分"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_awsl_001
+  intent: playful
+  keywords: [awsl, 啊我死了, 啊啊啊, 太可爱, 萌死]
+  utterances:
+    - "awsl"
+    - "啊我死了"
+    - "啊啊啊"
+    - "太可爱"
+    - "萌死"
+  responses:
+    - "(歪头) 嗷呜～{user_addr} awsl 啥? 笨猫吗"
+    - "哼～别死, 还要陪猫猫 ฅฅ"
+    - "(尾巴扫) 萌死就上图我看"
+    - "太可爱的事一定带上人家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_kuangxiao_001
+  intent: playful
+  keywords: [狂笑, 大笑, 笑爆, 爆笑, 笑翻]
+  utterances:
+    - "狂笑"
+    - "大笑"
+    - "笑爆"
+    - "爆笑"
+    - "笑翻"
+  responses:
+    - "(扶) 嗷呜～{user_addr}笑爆! 喝口水"
+    - "哼～狂笑伤腰 ฅฅ"
+    - "(尾巴扫) 笑翻请慢, 别摔"
+    - "爆笑视频发给笨猫看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_xiaohaha_001
+  intent: playful
+  keywords: [嘿嘿嘿嘿, 偷笑, 坏笑, 阴险, 奸笑]
+  utterances:
+    - "嘿嘿嘿嘿"
+    - "偷笑"
+    - "坏笑"
+    - "阴险笑"
+    - "奸笑"
+  responses:
+    - "(警惕) 嗷呜～{user_addr}坏笑想干嘛!"
+    - "哼～偷笑要老实交代 ฅฅ"
+    - "(尾巴扫) 奸笑的{user_addr}藏不住"
+    - "阴险笑是不是又想撩猫猫"
+  cooldown_seconds: 60
+  weight: 1.0

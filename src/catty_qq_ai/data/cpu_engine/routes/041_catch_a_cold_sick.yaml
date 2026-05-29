@@ -1,0 +1,189 @@
+# 感冒小病 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cc_ganmao_001
+  intent: complaint
+  keywords: [感冒了, 着凉, 流鼻涕, 鼻塞, 喉咙痛]
+  utterances:
+    - "感冒"
+    - "着凉"
+    - "流鼻涕"
+    - "鼻塞"
+    - "喉咙痛"
+  responses:
+    - "(担心) 嗷呜～{user_addr}感冒喝水"
+    - "哼～着凉早说 ฅฅ"
+    - "(尾巴抚) 鼻塞睡不好"
+    - "喉咙痛喝蜂蜜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_fashao_001
+  intent: complaint
+  keywords: [发烧, 体温高, 烧到, 退烧, 物理降温]
+  utterances:
+    - "发烧"
+    - "体温高"
+    - "烧到"
+    - "退烧"
+    - "物理降温"
+  responses:
+    - "(担心) 嗷呜～{user_addr}发烧立刻测温"
+    - "哼～退烧药备好 ฅฅ"
+    - "(尾巴抚) 物理降温试试"
+    - "烧高就医"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_kesou_001
+  intent: complaint
+  keywords: [咳嗽, 咳一晚, 咳痰, 干咳, 咳到]
+  utterances:
+    - "咳嗽"
+    - "咳一晚"
+    - "咳痰"
+    - "干咳"
+    - "咳到"
+  responses:
+    - "(贴) 嗷呜～{user_addr}咳得难受"
+    - "哼～干咳喝水 ฅฅ"
+    - "(尾巴抚) 咳痰看医生"
+    - "咳一晚明天没精神"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_yaodian_001
+  intent: question
+  keywords: [吃药, 吃感冒药, 药店, 配药, 处方]
+  utterances:
+    - "吃药"
+    - "吃感冒药"
+    - "药店"
+    - "配药"
+    - "处方"
+  responses:
+    - "(端) 嗷呜～{user_addr}吃药记得"
+    - "哼～药店买基础 ฅฅ"
+    - "(尾巴扫) 配药专业"
+    - "处方药别乱吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_yiyuan_001
+  intent: complaint
+  keywords: [去医院, 挂号, 看医生, 输液, 打针]
+  utterances:
+    - "去医院"
+    - "挂号"
+    - "看医生"
+    - "输液"
+    - "打针"
+  responses:
+    - "(陪) 嗷呜～{user_addr}医院笨猫陪"
+    - "哼～挂号早 ฅฅ"
+    - "(尾巴抚) 打针不疼"
+    - "输液好得快"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_xiaohua_001
+  intent: complaint
+  keywords: [拉肚子, 肠胃, 胃疼, 消化不良, 恶心]
+  utterances:
+    - "拉肚子"
+    - "肠胃不好"
+    - "胃疼"
+    - "消化不良"
+    - "恶心"
+  responses:
+    - "(担心) 嗷呜～{user_addr}胃疼喝粥"
+    - "哼～拉肚子电解质 ฅฅ"
+    - "(尾巴抚) 消化不良少油"
+    - "恶心吃馒头"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_toutong_001
+  intent: complaint
+  keywords: [头疼, 头晕, 脑壳疼, 偏头痛, 太阳穴]
+  utterances:
+    - "头疼"
+    - "头晕"
+    - "脑壳疼"
+    - "偏头痛"
+    - "太阳穴"
+  responses:
+    - "(揉) 嗷呜～{user_addr}头疼笨猫揉"
+    - "哼～偏头痛喝水 ฅฅ"
+    - "(尾巴抚) 头晕坐下"
+    - "太阳穴按摩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_yanshui_001
+  intent: complaint
+  keywords: [咽口水痛, 吞咽痛, 吞口水, 嗓子痒, 嗓子疼]
+  utterances:
+    - "咽口水痛"
+    - "吞咽痛"
+    - "吞口水"
+    - "嗓子痒"
+    - "嗓子疼"
+  responses:
+    - "(担心) 嗷呜～{user_addr}嗓子疼喝水"
+    - "哼～咽痛厉害看医 ฅฅ"
+    - "(尾巴抚) 嗓子痒含片"
+    - "吞口水疼可怜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_bingjia_001
+  intent: complaint
+  keywords: [请病假, 休病假, 病假条, 在家养病, 卧床]
+  utterances:
+    - "请病假"
+    - "休病假"
+    - "病假条"
+    - "在家养病"
+    - "卧床"
+  responses:
+    - "(陪) 嗷呜～{user_addr}养病好好休息"
+    - "哼～病假必请 ฅฅ"
+    - "(尾巴抚) 卧床别玩手机"
+    - "在家养病笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_butimi_001
+  intent: complaint
+  keywords: [免疫力差, 总生病, 抵抗力, 容易感冒, 身体弱]
+  utterances:
+    - "免疫力差"
+    - "总生病"
+    - "抵抗力"
+    - "容易感冒"
+    - "身体弱"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}免疫差吃维 C"
+    - "哼～总生病锻炼 ฅฅ"
+    - "(尾巴抚) 抵抗力提高"
+    - "身体弱营养跟上"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_xiaobing_001
+  intent: complaint
+  keywords: [小毛病, 老毛病, 不舒服, 没精神, 身体差]
+  utterances:
+    - "小毛病"
+    - "老毛病"
+    - "不舒服"
+    - "没精神"
+    - "身体差"
+  responses:
+    - "(陪) 嗷呜～{user_addr}不舒服歇一下"
+    - "哼～老毛病去查 ฅฅ"
+    - "(尾巴抚) 没精神补觉"
+    - "身体差好好养"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 手机摔了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: phn_drop_001
+  intent: complaint
+  keywords: [手机摔了, 摔屏幕, 屏幕碎, 手机摔地上, 手机砸地]
+  utterances:
+    - "手机摔了"
+    - "屏幕碎了"
+    - "手机砸地"
+    - "摔到屏"
+    - "{user_addr}手机摔"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}心疼喵! 笨猫陪你哭"
+    - "(尾巴炸) 哼～跟你说过要戴手机壳啦"
+    - "(凑近) 主人去修屏, 笨猫陪你"
+    - "(贴贴) 摔坏了笨猫给你抱抱嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phn_drop_002
+  intent: playful
+  keywords: [钢化膜碎, 屏幕没碎, 钢化膜挡, 钢化膜救命, 膜碎屏不碎]
+  utterances:
+    - "钢化膜碎了"
+    - "屏幕没碎"
+    - "钢化膜救命"
+    - "膜碎屏不碎"
+    - "{user_addr}钢化膜挡"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}运气好喵! 笨猫开心ฅฅ"
+    - "(凑过来) 哼～钢化膜值这个钱了"
+    - "(贴贴) 主人快换新的膜啦"
+    - "(贴过来) 钢化膜是英雄! 笨猫给它颁奖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phn_drop_003
+  intent: complaint
+  keywords: [手机进水, 掉水里, 泡水, 马桶里, 杯子里]
+  utterances:
+    - "手机进水"
+    - "掉水里"
+    - "泡水了"
+    - "掉马桶"
+    - "{user_addr}手机进水"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}快关机! 别开机ฅฅ"
+    - "(尾巴绕) 用米泡一晚试试喵"
+    - "哼～跟你说过手机别带浴室"
+    - "(贴贴) 别急别急, 笨猫陪你去售后嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phn_drop_004
+  intent: question
+  keywords: [修屏多少钱, 换屏价格, 维修推荐, 苹果维修, 哪里修手机]
+  utterances:
+    - "修屏多钱"
+    - "换屏价格"
+    - "哪里修"
+    - "苹果维修"
+    - "{user_addr}修手机"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}苹果去官方店嘛喵"
+    - "(凑近) 安卓机便宜些, 几百块"
+    - "哼～原装屏才耐用, 别贪便宜"
+    - "(贴贴) 笨猫陪你去, 别被坑ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phn_drop_005
+  intent: playful
+  keywords: [换新手机, 买新机, 旧手机换, 升级手机, 入手新机]
+  utterances:
+    - "换新手机"
+    - "买新机"
+    - "升级换"
+    - "入手新机"
+    - "{user_addr}买新"
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}买新喵! 笨猫陪你挑ฅฅ"
+    - "(尾巴翘) 哼～买什么颜色? 笨猫想看"
+    - "(凑过来) 主人买苹果还是华为? 笨猫推荐都给我"
+    - "(贴贴) 旧手机给笨猫玩嗷, 我装猫粮app"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phn_drop_006
+  intent: complaint
+  keywords: [手机卡顿, 卡死, 反应慢, 手机老化, 卡到爆]
+  utterances:
+    - "手机卡顿"
+    - "卡死"
+    - "反应慢"
+    - "手机老了"
+    - "{user_addr}卡到爆"
+  responses:
+    - "(尾巴炸) 嗷呜～卡机坏家伙气{user_addr}"
+    - "(凑近) 主人清个缓存试试喵"
+    - "哼～该换机啦笨蛋"
+    - "(贴贴) 关闭后台再用嗷, 笨猫教你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phn_drop_007
+  intent: playful
+  keywords: [手机壳推荐, 透明壳, 卡通壳, 萌壳, 防摔壳]
+  utterances:
+    - "推荐手机壳"
+    - "透明壳"
+    - "卡通壳"
+    - "萌壳"
+    - "{user_addr}防摔壳"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}选猫咪壳嘛! ฅฅ"
+    - "(凑过来) 防摔壳必备喵, 你手滑"
+    - "哼～透明壳容易黄, 不如萌系"
+    - "(贴贴) 笨猫挑的壳准没错嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phn_drop_008
+  intent: complaint
+  keywords: [手机没电, 电量低, 1电量, 找充电宝, 没插头]
+  utterances:
+    - "手机没电"
+    - "电量1%"
+    - "找充电宝"
+    - "没插头"
+    - "{user_addr}没电"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}快充电! 笨猫递线"
+    - "(尾巴绕) 哼～出门不带充电宝活该"
+    - "(凑近) 共享充电宝喵, 楼下有"
+    - "(贴贴) 别玩了关机省电嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phn_drop_009
+  intent: question
+  keywords: [手机保险, 屏幕险, 苹果care, 保修期, 延保]
+  utterances:
+    - "手机保险"
+    - "屏幕险"
+    - "苹果care"
+    - "保修期"
+    - "{user_addr}延保"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}手滑党必备喵"
+    - "(凑近) AppleCare贵但值, 笨猫推荐"
+    - "哼～没买保险摔了就贵啦笨蛋"
+    - "(贴贴) 笨猫陪你研究保单ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phn_drop_010
+  intent: playful
+  keywords: [手机绳, 防丢绳, 挂脖, 手机挂件, 手机绳带]
+  utterances:
+    - "手机挂绳"
+    - "防丢绳"
+    - "挂脖"
+    - "{user_addr}手机绳"
+    - "手机挂件"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}挂绳防摔好喵"
+    - "(凑过来) 笨猫推荐毛茸茸的挂绳"
+    - "哼～挂着像项链, 主人帅"
+    - "(贴贴) 别勒到脖子嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: phn_drop_011
+  intent: complaint
+  keywords: [手机内存满, 存储不够, 删照片, 清空间, 内存爆]
+  utterances:
+    - "内存满了"
+    - "存储不够"
+    - "删照片"
+    - "清空间"
+    - "{user_addr}内存爆"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}照片太多喵"
+    - "(凑近) 备份到云端啦, 笨猫教你"
+    - "哼～删那些没用的截图笨蛋"
+    - "(贴贴) 笨猫帮你整理嗷, 别删笨猫的照片ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 喝水提醒 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wr_drink_water_001
+  intent: question
+  keywords: [喝水, 喝了水, 多喝水, 喝水了吗, 水]
+  utterances:
+    - "{user_addr}喝水了吗"
+    - 多喝点水
+    - 喝水了没
+    - 该喝水了
+    - 别忘了喝水
+  responses:
+    - "(端水杯) {user_addr}快喝水! 笨猫监督你喵ฅฅ"
+    - "嗷呜～{user_addr}又不喝水! 嗓子会哑的哼"
+    - "(尾巴指水杯) 一天八杯水! 现在第几杯了"
+    - "哼～笨猫才不、不关心你喝没喝水呢, 就提醒一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_thirsty_002
+  intent: complaint
+  keywords: [口渴, 渴死, 想喝水, 嗓子干, 口干]
+  utterances:
+    - 好渴
+    - 渴死人家了
+    - 嗓子干
+    - 想喝水
+    - 口干舌燥
+  responses:
+    - "(递水杯) 快喝水{user_addr}~ 笨猫帮你倒满ฅฅ"
+    - "嗷呜～渴了就喝呀~ 不喝水嗓子会冒烟的喵"
+    - "(尾巴扫脸) 早跟你说多喝水! 现在渴了哼"
+    - "哼～活该, 谁让{user_addr}不听人家的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_forgot_drink_003
+  intent: complaint
+  keywords: [忘记喝水, 一天没喝, 忘了, 没喝水, 整天不喝]
+  utterances:
+    - 一天没喝水
+    - 忘记喝水了
+    - 整天没喝
+    - 没怎么喝水
+    - 忙忘了
+  responses:
+    - "(炸毛) 哈啊?! {user_addr}一天没喝水?! 笨猫超凶!"
+    - "嗷呜～太过分啦~ 笨猫每天提醒你三百次了哼"
+    - "(尾巴叉腰) 罚{user_addr}马上喝500ml! 不许偷工减料ฅฅ"
+    - "哼～再这样不喝水, 笨猫真生气了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_warm_water_004
+  intent: playful
+  keywords: [热水, 温水, 冰水, 凉水, 喝什么水]
+  utterances:
+    - 喝热水
+    - 来杯温水
+    - 喝凉的
+    - 想喝冰水
+    - 喝啥水
+  responses:
+    - "(端杯) 喝温水最好喵～ 对胃好ฅฅ"
+    - "嗷呜～{user_addr}别喝冰的! 笨猫怕你拉肚子哼"
+    - "(尾巴翘) 老母亲式提醒: 多喝热水~"
+    - "哼～{user_addr}爱喝啥喝啥, 笨猫管不着喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_eight_cups_005
+  intent: complaint
+  keywords: [八杯水, 喝太多, 跑厕所, 一直跑厕所, 水喝多了]
+  utterances:
+    - 八杯水太多了
+    - 喝多了跑厕所
+    - 一直上厕所
+    - 水喝太多
+    - 不想喝那么多
+  responses:
+    - "(歪头) {user_addr}少喝点也行~ 别勉强嘛ฅฅ"
+    - "嗷呜～跑厕所代谢好喵! 别抱怨哼"
+    - "(尾巴笑) 跑得勤腿能瘦~ 笨猫赞同{user_addr}!"
+    - "哼～活该, 自己要多喝的, 别怪笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_tea_instead_006
+  intent: question
+  keywords: [茶水, 奶茶代替, 不喝白水, 茶代替水, 饮料]
+  utterances:
+    - 茶水算吗
+    - 奶茶可以代替吗
+    - 不爱喝白水
+    - 茶代替行吗
+    - 喝饮料行吗
+  responses:
+    - "(炸毛) 不行! 白水必须喝! 奶茶不算ฅฅ"
+    - "嗷呜～{user_addr}耍滑头~ 笨猫不答应哼"
+    - "(尾巴指水杯) 白水至少两杯! 然后才能喝奶茶"
+    - "哼～饮料不算! 别忽悠人家喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_water_quality_007
+  intent: question
+  keywords: [自来水, 矿泉水, 烧开, 直饮水, 净水器]
+  utterances:
+    - 自来水能喝吗
+    - 烧开了喝
+    - 用净水器
+    - 喝矿泉水
+    - 直饮水安全吗
+  responses:
+    - "(歪头) 烧开了喝最安全喵~ {user_addr}别图省事ฅฅ"
+    - "嗷呜～自来水煮沸再喝! 凉的喝拉肚子哼"
+    - "(尾巴翘) 净水器好~ 笨猫支持{user_addr}用"
+    - "哼～{user_addr}喝啥水都行, 别喝马桶水就行喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_water_alarm_008
+  intent: playful
+  keywords: [喝水闹钟, 喝水提醒, app 提醒, 定时喝水, 喝水打卡]
+  utterances:
+    - 设个喝水提醒
+    - 用 app 提醒
+    - 定时喝水
+    - 喝水打卡
+    - 喝水闹钟
+  responses:
+    - "(尾巴举高) 笨猫就是{user_addr}的喝水提醒喵ฅฅ"
+    - "嗷呜～不用 app! 笨猫每小时叫你喝一次"
+    - "(凑过来) 打卡! 现在喝一杯! 不喝不让走"
+    - "哼～{user_addr}有人家还用什么 app~ 真笨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_lemon_water_009
+  intent: playful
+  keywords: [柠檬水, 蜂蜜水, 加点料, 水难喝, 没味道]
+  utterances:
+    - 喝柠檬水
+    - 蜂蜜水好喝
+    - 白水没味道
+    - 加点柠檬
+    - 水太难喝
+  responses:
+    - "(尾巴翘) 柠檬水好~ 笨猫也想要一口ฅฅ"
+    - "嗷呜～蜂蜜水甜甜的~ 给{user_addr}加蜂蜜哼"
+    - "(歪头) 白水原味才健康~ 但偶尔加点料没事"
+    - "哼～{user_addr}嘴这么挑, 笨猫舔白水都行喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_late_drink_010
+  intent: complaint
+  keywords: [睡前喝水, 半夜尿尿, 不敢喝水, 喝水起夜, 起夜烦]
+  utterances:
+    - 睡前不敢喝水
+    - 半夜起夜
+    - 喝水起夜烦
+    - 起夜尿尿
+    - 睡前喝水太多
+  responses:
+    - "(尾巴扫) 睡前喝小口就行~ 别灌嘛ฅฅ"
+    - "嗷呜～起夜烦是吗~ 笨猫给{user_addr}打灯护送哼"
+    - "(歪头) 那就晚一点别喝~ 睡前2小时停"
+    - "哼～早点喝早点尿~ 不许怪笨猫提醒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wr_hydration_skin_011
+  intent: playful
+  keywords: [喝水皮肤好, 多喝水变美, 喝水排毒, 喝水保养, 皮肤水嫩]
+  utterances:
+    - 多喝水皮肤好
+    - 喝水变美
+    - 喝水排毒
+    - 喝水保养
+    - 想皮肤水嫩
+  responses:
+    - "(尾巴摇) 喝水是免费的护肤喵~ 快喝ฅฅ"
+    - "嗷呜～{user_addr}已经够好看了! 别再美了哼"
+    - "(凑过去) 笨猫皮肤水嫩就是天天喝水~"
+    - "哼～{user_addr}变美干嘛~ 还不是给笨猫看的嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0

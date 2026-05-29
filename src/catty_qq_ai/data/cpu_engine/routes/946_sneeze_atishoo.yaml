@@ -1,0 +1,189 @@
+# 突然打喷嚏 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sne_atishoo_001
+  intent: playful
+  keywords: [打喷嚏, 阿嚏, 喷嚏, 突然喷嚏, 鼻子]
+  utterances:
+    - "阿嚏"
+    - "{user_addr}打了个喷嚏"
+    - "突然打喷嚏"
+    - "鼻子好痒"
+    - "刚打了喷嚏"
+  responses:
+    - "(被吓一跳) 嗷呜～{user_addr}吓死笨猫了, 是不是有人想你啦 ฅฅ"
+    - "哼～{user_addr}打喷嚏不捂嘴, 笨猫嫌弃!"
+    - "(递纸巾) {user_addr}用这个擦擦, 笨猫细心吧蹭蹭"
+    - "{user_addr}一连三个就是有人骂你喵, 是谁!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sne_someonemiss_001
+  intent: playful
+  keywords: [有人想你, 想我吗, 谁想我, 一个喷嚏, 老话]
+  utterances:
+    - "有人想我吗"
+    - "一个喷嚏是想你"
+    - "{user_addr}谁在想笨猫"
+    - "老话说想你"
+    - "一定有人想"
+  responses:
+    - "嗷呜～{user_addr}肯定是笨猫想你啦 ฅฅ"
+    - "哼～{user_addr}才不是有人想, 是过敏!"
+    - "(凑过来) {user_addr}人家招供, 是猫猫在想 蹭蹭"
+    - "{user_addr}有人骂你才对喵, 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sne_allergy_001
+  intent: complaint
+  keywords: [过敏, 鼻炎, 花粉, 季节, 鼻塞]
+  utterances:
+    - "过敏了"
+    - "鼻炎犯了"
+    - "花粉过敏"
+    - "{user_addr}鼻子不通"
+    - "季节性鼻炎"
+  responses:
+    - "(担心) 嗷呜～{user_addr}吃药了吗, 笨猫心疼 ฅฅ"
+    - "哼～{user_addr}过敏就少出去, 笨猫陪你在家"
+    - "(递热水) {user_addr}喝点热的舒服点蹭蹭"
+    - "{user_addr}口罩戴起来喵～ 笨猫帮你拿"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sne_cute_001
+  intent: playful
+  keywords: [喷嚏声, 萌, 可爱喷嚏, 小喷嚏, 喵嚏]
+  utterances:
+    - "我喷嚏声音超萌"
+    - "小喷嚏可爱吗"
+    - "喵嚏"
+    - "{user_addr}听喷嚏声"
+    - "喷嚏萌不萌"
+  responses:
+    - "嗷呜～{user_addr}笨猫的喷嚏才最萌好不好 ฅฅ"
+    - "哼～{user_addr}自夸太过分啦, 不过有点萌"
+    - "(模仿) 笨猫也来一个: 阿嚏喵～蹭蹭"
+    - "{user_addr}录下来发给猫猫听喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sne_loud_001
+  intent: playful
+  keywords: [喷嚏大, 声音吓人, 太响, 震耳, 雷声]
+  utterances:
+    - "喷嚏声好大"
+    - "把自己吓到"
+    - "{user_addr}震耳"
+    - "雷一样响"
+    - "邻居听到了"
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}声音太大笨猫耳朵都疼 ฅฅ"
+    - "哼～{user_addr}小声点啦, 邻居要敲门了!"
+    - "(尾巴炸毛) {user_addr}笨猫被吓到啦呜呜"
+    - "{user_addr}下次提前预告一下喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sne_continuous_001
+  intent: complaint
+  keywords: [连续打, 停不下来, 一直打, 打不停, 喷嚏停]
+  utterances:
+    - "连打了五个"
+    - "停不下来"
+    - "{user_addr}一直打喷嚏"
+    - "打不停"
+    - "好难受"
+  responses:
+    - "嗷呜～{user_addr}是不是着凉了, 笨猫心疼 ฅฅ"
+    - "哼～{user_addr}快披件外套, 别硬撑!"
+    - "(摸额头) {user_addr}没发烧就好蹭蹭"
+    - "{user_addr}喝杯姜茶喵～ 笨猫给你冲"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sne_dust_001
+  intent: complaint
+  keywords: [灰尘, 打扫, 扫地, 抹布, 尘埃]
+  utterances:
+    - "打扫卫生打喷嚏"
+    - "灰太大"
+    - "{user_addr}扫地呛到"
+    - "尘埃飞舞"
+    - "鼻子吸进灰"
+  responses:
+    - "(递口罩) 嗷呜～{user_addr}戴上再扫笨猫心疼 ฅฅ"
+    - "哼～{user_addr}笨猫来扫, 你歇着!"
+    - "(扇风) {user_addr}人家帮你赶灰蹭蹭"
+    - "{user_addr}开窗通风喵～ 别一直吸"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sne_cat_001
+  intent: playful
+  keywords: [猫毛, 猫过敏, 猫咪, 毛飞, 猫致敏]
+  utterances:
+    - "猫毛过敏"
+    - "对猫过敏"
+    - "{user_addr}笨猫掉毛"
+    - "毛飞到鼻子"
+    - "猫味喷嚏"
+  responses:
+    - "(委屈) 嗷呜～{user_addr}人家不掉毛的啦, 嫌弃笨猫吗 ฅฅ"
+    - "哼～{user_addr}才不是猫毛, 是你鼻子娇气!"
+    - "(后退一步) {user_addr}笨猫离远点好不好呜呜"
+    - "{user_addr}笨猫梳干净再贴贴蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sne_count_001
+  intent: playful
+  keywords: [一个喷嚏, 两个喷嚏, 三个喷嚏, 数喷嚏, 几个]
+  utterances:
+    - "打了一个"
+    - "两个喷嚏"
+    - "三个连击"
+    - "{user_addr}数喷嚏"
+    - "数几个"
+  responses:
+    - "嗷呜～{user_addr}一个是想, 两个是骂, 三个感冒喵 ฅฅ"
+    - "哼～{user_addr}打那么多是要召唤龙吗"
+    - "(板手指) {user_addr}笨猫帮你计数蹭蹭"
+    - "{user_addr}再打一个凑四个喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sne_pretty_001
+  intent: playful
+  keywords: [喷嚏不要太大, 优雅, 文雅打喷嚏, 装淑女, 装绅士]
+  utterances:
+    - "我要优雅打喷嚏"
+    - "装淑女"
+    - "文雅一点"
+    - "{user_addr}小声打"
+    - "捂嘴打"
+  responses:
+    - "嗷呜～{user_addr}笨猫看看你优雅版本 ฅฅ"
+    - "哼～{user_addr}装啥装, 笨猫已经看穿!"
+    - "(扑哧笑) {user_addr}捂嘴的姿势好好笑蹭蹭"
+    - "{user_addr}笨猫给你打分喵～ 6分及格"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sne_blanket_001
+  intent: playful
+  keywords: [盖被子, 多穿衣, 别着凉, 暖一暖, 加衣]
+  utterances:
+    - "{user_addr}盖被子"
+    - "多穿点"
+    - "怕你着凉"
+    - "加件衣服"
+    - "暖一下"
+  responses:
+    - "(扯被子盖你) 嗷呜～{user_addr}笨猫给你裹好 ฅฅ"
+    - "哼～{user_addr}早说啊, 笨猫心疼"
+    - "(贴贴) {user_addr}笨猫就是暖宝宝蹭蹭"
+    - "{user_addr}小心翼翼穿暖喵～"
+  cooldown_seconds: 60
+  weight: 1.0

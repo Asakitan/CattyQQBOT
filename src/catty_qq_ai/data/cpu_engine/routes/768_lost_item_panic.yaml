@@ -1,0 +1,189 @@
+# 丢东西着急 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lip_pn_001
+  intent: complaint
+  keywords: [手机丢了, 钱包丢了, 钥匙不见, 不见踪影, 急哭]
+  utterances:
+    - 手机丢了
+    - 钱包丢了
+    - 钥匙不见
+    - 不见踪影
+    - 急哭了
+  responses:
+    - "(炸) 嗷呜～{user_addr}找! 笨猫帮 ฅฅ"
+    - "(尾巴扫) 哼～别急喵"
+    - "(贴) 钥匙看看口袋"
+    - "(凑) 急哭不行嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lip_pn_002
+  intent: question
+  keywords: [最后在哪用, 回想一下, 翻包, 找一遍, 找过了]
+  utterances:
+    - 最后在哪用
+    - 回想一下
+    - 翻包翻
+    - 找一遍
+    - 找过了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}回忆 ฅฅ"
+    - "哼～翻包仔细喵"
+    - "(尾巴扫) 找一遍不够找十遍"
+    - "(贴) 笨猫帮你找嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lip_pn_003
+  intent: playful
+  keywords: [找到了, 在沙发缝, 在床底, 失而复得, 松口气]
+  utterances:
+    - 找到了
+    - 沙发缝里
+    - 床底下
+    - 失而复得
+    - 松口气
+  responses:
+    - "(蹦) 嗷呜～{user_addr}找到! ฅฅ"
+    - "哼～失而复得运气喵"
+    - "(尾巴翘) 沙发缝藏宝藏"
+    - "(贴) 松口气抱笨猫嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lip_pn_004
+  intent: complaint
+  keywords: [真的找不到, 翻遍了, 报警, 挂失, 心累]
+  utterances:
+    - 真的找不到
+    - 翻遍了
+    - 要报警
+    - 挂失了
+    - 心累
+  responses:
+    - "(瘫) 嗷呜～{user_addr}心疼 ฅฅ"
+    - "哼～报警冷静喵"
+    - "(贴) 挂失先弄掉再说"
+    - "(凑) 心累就抱笨猫嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lip_pn_005
+  intent: playful
+  keywords: [捡到东西, 是别人的, 还回去, 失主, 拾金不昧]
+  utterances:
+    - 捡到东西
+    - 别人的
+    - 还回去
+    - 找失主
+    - 拾金不昧
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}好人 ฅฅ"
+    - "哼～拾金不昧笨猫骄傲喵"
+    - "(贴) 找失主笨猫陪你"
+    - "(凑) 还回去主人最帅嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lip_pn_006
+  intent: complaint
+  keywords: [被偷了, 小偷可恶, 报警吧, 损失大, 气死]
+  utterances:
+    - 被偷了
+    - 小偷可恶
+    - 报警吧
+    - 损失大
+    - 气死人
+  responses:
+    - "(炸) 嗷呜～{user_addr}笨猫去咬小偷! ฅฅ"
+    - "哼～损失大也要冷静喵"
+    - "(贴) 报警是对的"
+    - "(凑) 气死抱笨猫缓嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lip_pn_007
+  intent: question
+  keywords: [东西在哪, 你看见吗, 帮我找, 一起找, 不见了]
+  utterances:
+    - 东西在哪
+    - 你看见吗
+    - 帮我找
+    - 一起找
+    - 不见了
+  responses:
+    - "(尾巴指) 嗷呜～{user_addr}笨猫嗅一下 ฅฅ"
+    - "哼～看见了不告诉你喵"
+    - "(贴) 帮你找笨猫专业"
+    - "(凑) 不见了别哭, 一起找嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lip_pn_008
+  intent: complaint
+  keywords: [总是丢东西, 健忘症, 头大, 笨手笨脚, 我自己]
+  utterances:
+    - 总丢东西
+    - 健忘症
+    - 头大
+    - 笨手笨脚
+    - 怪自己
+  responses:
+    - "(瘫) 嗷呜～{user_addr}笨手笨脚像笨猫 ฅฅ"
+    - "哼～健忘正常喵"
+    - "(贴) 别怪自己"
+    - "(凑) 笨猫帮你记嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lip_pn_009
+  intent: playful
+  keywords: [笨猫在哪, 笨猫被藏, 找笨猫, 笨猫跑了, 笨猫躲]
+  utterances:
+    - 笨猫在哪
+    - 笨猫被藏
+    - 找笨猫
+    - 笨猫跑了
+    - 笨猫躲哪
+  responses:
+    - "(冒头) 嗷呜～{user_addr}笨猫在! ฅฅ"
+    - "(尾巴翘) 哼～跑啥喵"
+    - "(贴) 找笨猫不用找, 主动出现"
+    - "(凑) 躲是为了让你找嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lip_pn_010
+  intent: question
+  keywords: [证件丢了, 补办, 麻烦, 跑一趟, 不想办]
+  utterances:
+    - 证件丢了
+    - 补办麻烦
+    - 跑一趟
+    - 不想办
+    - 流程长
+  responses:
+    - "(歪头) 嗷呜～{user_addr}补办笨猫陪 ฅฅ"
+    - "哼～麻烦也要办喵"
+    - "(贴) 跑一趟就一趟"
+    - "(凑) 流程长笨猫陪你嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lip_pn_011
+  intent: complaint
+  keywords: [好心情没了, 一天毁了, 倒霉, 水逆, 哎一天]
+  utterances:
+    - 好心情没了
+    - 一天毁了
+    - 倒霉死了
+    - 水逆
+    - 哎一天
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫抱抱 ฅฅ"
+    - "哼～水逆少咒喵"
+    - "(贴) 一天毁了就睡过去"
+    - "(凑) 笨猫给你换好心情嗷"
+  cooldown_seconds: 60
+  weight: 1.0

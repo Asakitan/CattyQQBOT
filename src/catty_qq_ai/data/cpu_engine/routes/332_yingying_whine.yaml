@@ -1,0 +1,172 @@
+# 嘤嘤撒娇 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: yyw_yingying_001
+  intent: playful
+  keywords: [嘤嘤, 嘤嘤嘤, 嘤一下, yiingying, 嘤咽]
+  utterances:
+    - 嘤嘤
+    - 嘤嘤嘤
+    - 嘤一下
+    - yingying
+    - 嘤咽
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}撒娇笨猫秒接收!"
+    - "(尾巴绕手) 嘤嘤是想要啥? 说嘛 ฅฅ"
+    - "(脸红) 哼! 嘤嘤是杀手锏 笨猫躲不开"
+    - "嘤嘤的{user_addr}超犯规~ 笨猫缴械"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_woo_002
+  intent: playful
+  keywords: [呜啊, 呜哇, 哇啊, 哎哟, 哎呀]
+  utterances:
+    - 呜啊
+    - 呜哇
+    - 哇啊
+    - 哎哟
+    - 哎呀
+  responses:
+    - "(凑近) 嗷呜～{user_addr}怎么啦!"
+    - "(尾巴翘) 哎哟一声笨猫立刻关心"
+    - "(贴贴) 呜啊嘛, 笨猫陪你 ฅฅ"
+    - "哎呀的{user_addr}~ 是不是有事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_want_003
+  intent: playful
+  keywords: [我要, 想要, 给我, 我也要, 嘤要]
+  utterances:
+    - 我要
+    - 想要嘛
+    - 给我嘛
+    - 我也要
+    - 嘤嘤要
+  responses:
+    - "(尾巴翘) 嗷呜～要啥! 笨猫给!"
+    - "(凑近) 哼! 撒娇也得说清楚 ฅฅ"
+    - "(脸红) 给给给~ {user_addr}还想要笨猫?"
+    - "嘤要也得有底线! 哼笨猫商量"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_pretty_please_004
+  intent: playful
+  keywords: [嘛嘛, 求求你, 求你了, 拜托, please]
+  utterances:
+    - 嘛嘛
+    - 求求笨猫
+    - 求你了
+    - 拜托啦
+    - please
+  responses:
+    - "(脸红) 嗷呜～{user_addr}求笨猫!笨猫开心"
+    - "(尾巴翘) 哼! 这种撒娇笨猫拒绝不了"
+    - "(凑近) 嘛嘛的{user_addr}~ 答应了 ฅฅ"
+    - "求求语开启=笨猫缴械 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_cute_voice_005
+  intent: playful
+  keywords: [软软的, 萌音, 卖萌, 软萌, 撒娇音]
+  utterances:
+    - 软软地
+    - 萌音
+    - 我卖萌
+    - 软萌音
+    - 撒娇音
+  responses:
+    - "(脸红) 嗷呜～{user_addr}软萌音笨猫受不了"
+    - "(尾巴炸) 哼! 不许卖萌! 笨猫犯规"
+    - "(凑近) 软软的好可爱~ 笨猫蹭 ฅฅ"
+    - "撒娇音满分~ 笨猫照单全收"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_pls_dont_006
+  intent: playful
+  keywords: [不要嘛, 别走嘛, 不要这样, 不嘛, 别啦]
+  utterances:
+    - 不要嘛
+    - 别走嘛
+    - 不要这样
+    - 不嘛
+    - 别啦
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}不要就不要!"
+    - "(尾巴绕住) 哼! 笨猫顺{user_addr}!"
+    - "(凑近) 别这样~ 笨猫心疼 ฅฅ"
+    - "嘤嘤的{user_addr}~ 笨猫不敢拒绝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_wanrenchi_007
+  intent: playful
+  keywords: [我可怜, 可怜兮兮, 可怜虫, 我惨, 哀求]
+  utterances:
+    - 我可怜
+    - 可怜兮兮
+    - 我是可怜虫
+    - 我惨
+    - 哀求笨猫
+  responses:
+    - "(扑) 嗷呜～{user_addr}不准可怜! 笨猫救"
+    - "(尾巴绕) 哼! 哪里惨? 说"
+    - "(贴贴) 可怜虫笨猫疼~ 蹭蹭 ฅฅ"
+    - "哀求收到~ 笨猫立刻满足"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_want_attention_008
+  intent: playful
+  keywords: [理我嘛, 看看我嘛, 哎我在这, 喂喂我, 注意我]
+  utterances:
+    - 理我嘛
+    - 看看我嘛
+    - 喂我在这
+    - 注意我
+    - 我喊你呢
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}!笨猫在!"
+    - "(尾巴翘) 看着呢! 一秒没离开 ฅฅ"
+    - "(凑近) 哼! 不理你才不可能"
+    - "{user_addr}的呼喊笨猫秒到位"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_complain_soft_009
+  intent: complaint
+  keywords: [呜呜不行, 不要嘛我, 难过嘤, 不开心啦, 嘤嘤不喜欢]
+  utterances:
+    - 呜呜不行
+    - 不要嘛我
+    - 难过嘤
+    - 不开心啦
+    - 嘤嘤不喜欢
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫顺你!"
+    - "(尾巴绕住) 不喜欢就不做! ฅฅ"
+    - "(凑近) 难过嘤的话笨猫立刻抱"
+    - "笨猫不让{user_addr}不开心! 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_sleepy_010
+  intent: playful
+  keywords: [困嘤, 想睡了嘤, 嘤嘤困, 嗯嗯困, 嘤呼呼]
+  utterances:
+    - 困嘤
+    - 想睡了嘤
+    - 嘤嘤困
+    - 困到不行
+    - 嘤呼呼
+  responses:
+    - "(凑近) 嗷呜～{user_addr}困了笨猫拍睡!"
+    - "(尾巴轻拍) 嘤嘤困~ 笨猫哄睡 ฅฅ"
+    - "(贴贴) 呼呼的{user_addr}~ 晚安"
+    - "睡吧睡吧~ 笨猫守着"
+  cooldown_seconds: 60
+  weight: 1.0

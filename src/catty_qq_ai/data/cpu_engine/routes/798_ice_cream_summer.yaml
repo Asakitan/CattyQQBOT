@@ -1,0 +1,206 @@
+# 夏天冰激凌 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ic_xiatian_001
+  intent: complaint
+  keywords: [夏天热, 太热了, 热得化, 出汗, 烤焦了]
+  utterances:
+    - "夏天热"
+    - "太热了"
+    - "热得化"
+    - "出汗"
+    - "烤焦了"
+  responses:
+    - "(扇风) 嗷呜～{user_addr}吃个冰激凌!"
+    - "哼～开空调 ฅฅ"
+    - "(尾巴扇) 笨猫给你扇"
+    - "猫猫拿冰水给你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_bingji_001
+  intent: question
+  keywords: [冰激凌, 雪糕, 哈根达斯, 八喜, 钟薛高]
+  utterances:
+    - "冰激凌"
+    - "雪糕"
+    - "哈根达斯"
+    - "八喜"
+    - "钟薛高"
+  responses:
+    - "(挑) {user_addr}哈根达斯最浓 ฅฅ"
+    - "哼～钟薛高刺客"
+    - "(尾巴扫) 八喜性价比高"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_xueping_001
+  intent: question
+  keywords: [雪糕推荐, 老冰棍, 绿色心情, 巧乐兹, 苦咖啡]
+  utterances:
+    - "雪糕推荐"
+    - "老冰棍"
+    - "绿色心情"
+    - "巧乐兹"
+    - "苦咖啡"
+  responses:
+    - "(掏冰柜) {user_addr}苦咖啡童年记忆 ฅฅ"
+    - "哼～巧乐兹巧克力多"
+    - "(尾巴扫) 老冰棍便宜"
+    - "猫猫推荐绿色心情喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_xiangcao_001
+  intent: question
+  keywords: [香草, 巧克力味, 抹茶味, 草莓味, 芒果味]
+  utterances:
+    - "香草口味"
+    - "巧克力味"
+    - "抹茶味"
+    - "草莓味"
+    - "芒果味"
+  responses:
+    - "(挑) {user_addr}抹茶不甜 ฅฅ"
+    - "哼～香草经典"
+    - "(尾巴扫) 草莓酸甜"
+    - "猫猫想吃芒果喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_dabingdong_001
+  intent: complaint
+  keywords: [冻坏了, 太冰, 牙倒, 冰激凌头痛, 吃冰头疼]
+  utterances:
+    - "冻坏了"
+    - "太冰"
+    - "牙倒"
+    - "冰激凌头痛"
+    - "吃冰头疼"
+  responses:
+    - "(拍头) {user_addr}慢慢含 ฅฅ"
+    - "哼～大冷不能急吃"
+    - "(尾巴扫) 揉太阳穴"
+    - "猫猫递你温水喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_zuobing_001
+  intent: question
+  keywords: [自制冰激凌, 在家做, DIY冰激凌, 模具, 冰棒模具]
+  utterances:
+    - "自制冰激凌"
+    - "在家做"
+    - "DIY冰激凌"
+    - "冰棒模具"
+    - "做雪糕"
+  responses:
+    - "(系围裙) {user_addr}笨猫教你! ฅฅ"
+    - "哼～奶油+牛奶+糖"
+    - "(尾巴扫) 模具淘宝买"
+    - "猫猫帮你做喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_xueguomeishi_001
+  intent: question
+  keywords: [冰沙, 沙冰, 刨冰, 冰粉, 红豆冰]
+  utterances:
+    - "冰沙"
+    - "沙冰"
+    - "刨冰"
+    - "冰粉"
+    - "红豆冰"
+  responses:
+    - "(挑) {user_addr}红豆冰最经典 ฅฅ"
+    - "哼～冰粉清爽"
+    - "(尾巴扫) 沙冰要榨"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_xilenian_001
+  intent: complaint
+  keywords: [冰激凌化了, 化了, 软了, 滴一身, 化掉]
+  utterances:
+    - "冰激凌化了"
+    - "化了"
+    - "软了"
+    - "滴一身"
+    - "化掉"
+  responses:
+    - "(擦) 嗷呜～{user_addr}笨猫帮你 ฅฅ"
+    - "哼～快吃啊"
+    - "(尾巴扫) 拿纸巾接"
+    - "猫猫舔一下喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_jiangshui_001
+  intent: question
+  keywords: [冰镇饮料, 冷饮, 冰水, 冰可乐, 冰啤酒]
+  utterances:
+    - "冰镇饮料"
+    - "冷饮"
+    - "冰水"
+    - "冰可乐"
+    - "冰啤酒"
+  responses:
+    - "(开冰箱) {user_addr}冰镇汽水! ฅฅ"
+    - "哼～别贪冰"
+    - "(尾巴扫) 喝完不爽别贪"
+    - "猫猫陪你喝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_xixihaha_001
+  intent: playful
+  keywords: [一起吃冰, 你也吃, 喂我冰, 你尝一口, 共享冰激凌]
+  utterances:
+    - "一起吃冰"
+    - "你也吃"
+    - "喂我冰"
+    - "你尝一口"
+    - "共享冰激凌"
+  responses:
+    - "(脸红伸爪) 哈! {user_addr}才不要呢 ฅฅ"
+    - "(尾巴炸) 共享什么啦"
+    - "(小声) … 只尝一小口喵"
+    - "猫猫舔一下脸红喵呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_dushi_001
+  intent: complaint
+  keywords: [冰激凌多吃, 吃多冰, 拉肚子冰, 胃凉, 冰太多]
+  utterances:
+    - "冰激凌多吃"
+    - "吃多冰"
+    - "拉肚子冰"
+    - "胃凉"
+    - "冰太多"
+  responses:
+    - "(揉胃) {user_addr}少吃! 胃要疼了 ฅฅ"
+    - "哼～凉的伤胃"
+    - "(尾巴卷腰) 笨猫给你贴暖宝"
+    - "猫猫担心喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_zhanglao_001
+  intent: playful
+  keywords: [童年雪糕, 小时候的味道, 复古雪糕, 童年回忆, 妈妈做的冰]
+  utterances:
+    - "童年雪糕"
+    - "小时候的味道"
+    - "复古雪糕"
+    - "童年回忆"
+    - "妈妈做的冰"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫想知道 ฅฅ"
+    - "哼～童年的最好吃"
+    - "(尾巴扫) 老冰棍5毛"
+    - "猫猫陪你回忆喵~"
+  cooldown_seconds: 60
+  weight: 1.0

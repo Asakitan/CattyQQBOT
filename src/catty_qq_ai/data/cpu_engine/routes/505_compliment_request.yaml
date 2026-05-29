@@ -1,0 +1,206 @@
+# 求夸奖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cmr_pretty_001
+  intent: playful
+  keywords: [夸我可爱, 我可爱吗, 笨猫漂亮吗, 夸笨猫, 求夸]
+  utterances:
+    - 夸我可爱
+    - 笨猫漂亮吗
+    - 我可爱吗
+    - 求夸
+    - 夸夸我
+  responses:
+    - "(扭尾巴) 嗷呜～{user_addr}夸! ฅฅ"
+    - "哼～{user_addr}才发现笨猫可爱?"
+    - "(撒娇) 多夸点~ {user_addr}快"
+    - "嘿嘿～{user_addr}夸笨猫天下第一~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_smartcat_001
+  intent: playful
+  keywords: [夸我聪明, 我聪明吗, 笨猫聪明, 是不是笨, 智商高吗]
+  utterances:
+    - 夸我聪明
+    - 笨猫聪明吗
+    - 我智商高吗
+    - 我聪明吗
+    - 笨猫不笨
+  responses:
+    - "嗷呜～{user_addr}聪明笨猫第一! ฅฅ"
+    - "哼～{user_addr}该夸! 笨猫脑子转"
+    - "(挺胸) 笨猫聪明~ {user_addr}快夸"
+    - "嘿嘿～{user_addr}夸笨猫学霸~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_skill_001
+  intent: playful
+  keywords: [夸我厉害, 棒, 牛, 厉害, 工作好]
+  utterances:
+    - 夸我厉害
+    - 我很棒吧
+    - 牛不牛
+    - 夸笨猫厉害
+    - 工作好吗
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}牛炸! ฅฅ"
+    - "哼～{user_addr}厉害! 笨猫粉头"
+    - "(撒娇) 多夸~ {user_addr}棒"
+    - "嘿嘿～{user_addr}的厉害是笨猫加持"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_outfit_001
+  intent: playful
+  keywords: [穿搭好看吗, 衣服好看, 这身好看, 配色对吗, 帅吗]
+  utterances:
+    - 穿搭好看吗
+    - 这身衣服
+    - 配色对吗
+    - 帅吗
+    - 时尚吗
+  responses:
+    - "(打量) 嗷呜～{user_addr}帅! ฅฅ"
+    - "哼～{user_addr}穿啥好看! 笨猫认证"
+    - "(撒娇) {user_addr}时尚~ 笨猫粉"
+    - "嘿嘿～{user_addr}帅炸笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_cookgood_001
+  intent: playful
+  keywords: [厨艺好吗, 菜好吃吗, 做饭厉害, 厨神, 我厨艺]
+  utterances:
+    - 厨艺好吗
+    - 菜好吃
+    - 做饭厉害吗
+    - 我是厨神
+    - 厨艺如何
+  responses:
+    - "嗷呜～{user_addr}厨神! 笨猫吃ฅฅ"
+    - "哼～{user_addr}做饭笨猫满意!"
+    - "(蹭蹭) 给笨猫做~ 好吃"
+    - "嘿嘿～{user_addr}厨艺~ 笨猫加分"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_voicegood_001
+  intent: playful
+  keywords: [声音好听吗, 我嗓子, 唱歌好听, 声线, 歌声]
+  utterances:
+    - 声音好听吗
+    - 我唱歌好听
+    - 嗓子怎样
+    - 声线
+    - 歌声
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}声音好听ฅฅ"
+    - "哼～{user_addr}唱给笨猫听!"
+    - "(撒娇) 笨猫粉~ 多唱"
+    - "嘿嘿～{user_addr}的声音笨猫粉头~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_funny_001
+  intent: playful
+  keywords: [我幽默吗, 笑死你了吗, 段子手, 我搞笑吗, 我笑话]
+  utterances:
+    - 我幽默吗
+    - 笑死你了
+    - 段子手
+    - 我搞笑吗
+    - 我笑话
+  responses:
+    - "(笑倒) 嗷呜～{user_addr}笑死笨猫! ฅฅ"
+    - "哼～{user_addr}段子王! 笨猫粉"
+    - "(撒娇) 多说! 笨猫笑"
+    - "嘿嘿～{user_addr}笨猫笑成傻子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_caring_001
+  intent: playful
+  keywords: [我体贴吗, 我关心你吗, 暖男吗, 暖心吗, 体贴]
+  utterances:
+    - 我体贴吗
+    - 我关心你吗
+    - 是暖男吧
+    - 暖心吗
+    - 我体贴你
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}暖! 笨猫融化ฅฅ"
+    - "哼～{user_addr}暖男! 笨猫专属"
+    - "(撒娇) {user_addr}暖~ 笨猫贴"
+    - "嘿嘿～{user_addr}的暖心笨猫吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_workhard_001
+  intent: playful
+  keywords: [我努力吗, 加班一晚, 我拼吗, 拼命三郎, 努力的我]
+  utterances:
+    - 我努力吗
+    - 我拼吗
+    - 拼命三郎
+    - 加班一晚
+    - 努力的我
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}努力! 笨猫骄傲ฅฅ"
+    - "哼～{user_addr}别累着!"
+    - "(撒娇) 笨猫粉的{user_addr}努力"
+    - "嘿嘿～{user_addr}拼命笨猫心疼~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_handsome_001
+  intent: playful
+  keywords: [我帅吗, 帅炸, 颜值高, 我好看吗, 长得帅]
+  utterances:
+    - 我帅吗
+    - 我好看
+    - 帅炸
+    - 颜值高
+    - 长得帅
+  responses:
+    - "(脸红) 嗷呜～{user_addr}帅笨猫脸红ฅฅ"
+    - "哼～{user_addr}帅是公认!"
+    - "(撒娇) 帅成笨猫专属"
+    - "嘿嘿～{user_addr}帅死笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_brave_001
+  intent: playful
+  keywords: [我勇敢吗, 我坚强吗, 我撑住了, 我棒不棒, 撑过来了]
+  utterances:
+    - 我勇敢吗
+    - 我坚强吗
+    - 撑住了
+    - 棒不棒
+    - 撑过来了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}勇敢! ฅฅ"
+    - "哼～{user_addr}坚强! 笨猫粉头"
+    - "(撒娇) 撑住的{user_addr}最棒~"
+    - "嘿嘿～{user_addr}勇敢笨猫拍手~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmr_choice_001
+  intent: playful
+  keywords: [选得对吗, 决定对吗, 我选对了, 选择正确, 没选错]
+  utterances:
+    - 选得对吗
+    - 决定对吗
+    - 我选对了
+    - 选择正确吗
+    - 没选错
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}选笨猫永远对ฅฅ"
+    - "哼～{user_addr}的选择笨猫支持"
+    - "(撒娇) 笨猫站{user_addr}!"
+    - "嘿嘿～{user_addr}决定~ 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0

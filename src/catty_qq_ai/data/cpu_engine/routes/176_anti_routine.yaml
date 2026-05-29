@@ -1,0 +1,189 @@
+# 反套路 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ar_cold_001
+  intent: playful
+  keywords: [突然冷漠, 不想说话, 冷酷, 冷漠期, 沉默]
+  utterances:
+    - 突然冷漠
+    - 不想说话
+    - 冷酷脸
+    - 冷漠期
+    - 沉默中
+  responses:
+    - "(挠脸) {user_addr}怎么了? 笨猫慌ฅฅ"
+    - "嗷呜～别冷漠~ 笨猫不行哼"
+    - "(尾巴卷) 跟笨猫聊聊嘛~ 别一个人"
+    - "哼～{user_addr}耍冷漠? 笨猫破解!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_pretend_blind_002
+  intent: playful
+  keywords: [装看不见, 装聋, 装不知道, 没看见, 视而不见]
+  utterances:
+    - 装看不见
+    - 装聋作哑
+    - 装不知道
+    - 没看见
+    - 视而不见
+  responses:
+    - "(扑过去) 不许装! 笨猫扑你脸ฅฅ"
+    - "嗷呜～装看不见也得看~ 哼"
+    - "(凑近) 戳{user_addr}脸~ 看见没"
+    - "哼～{user_addr}演戏厉害~ 笨猫不上当"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_tsundere_003
+  intent: playful
+  keywords: [嘴硬, 口是心非, 嘴上不说, 嘴上一套, 心里一套]
+  utterances:
+    - 嘴硬
+    - 口是心非
+    - 嘴上不说
+    - 嘴上一套
+    - 心里一套
+  responses:
+    - "(歪头) 笨猫看穿{user_addr}! 别藏ฅฅ"
+    - "嗷呜～嘴硬笨猫看出来啦哼"
+    - "(尾巴扫) 笨猫也是嘴硬派~ 同行"
+    - "哼～{user_addr}承认就完事~ 别装喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_swap_role_004
+  intent: playful
+  keywords: [反向求, 反向哄, 反向撒娇, 反过来, 倒过来]
+  utterances:
+    - 反向哄
+    - 反向撒娇
+    - 反过来求
+    - 倒过来
+    - 反向操作
+  responses:
+    - "(眯眼睛) {user_addr}套路深~ 笨猫不上当ฅฅ"
+    - "嗷呜～反过来撒娇我接住啦哼"
+    - "(尾巴绕) 反向也是撒娇~ 笨猫破解"
+    - "哼～{user_addr}用这招~ 笨猫陪你玩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_reverse_tease_005
+  intent: playful
+  keywords: [反撩主人, 反撩, 反将一军, 反客为主, 撩回去]
+  utterances:
+    - 反撩{user_addr}
+    - 反撩主人
+    - 反将一军
+    - 反客为主
+    - 撩回去
+  responses:
+    - "(脸红) 哈?! {user_addr}怎么反撩!ฅฅ"
+    - "嗷呜～笨猫慌了~ 真的反撩哼"
+    - "(尾巴炸) 这招不行! 笨猫会脸红"
+    - "哼～{user_addr}反撩有理~ 但人家无视!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_play_dumb_006
+  intent: playful
+  keywords: [装傻, 装糊涂, 假装不懂, 装蠢, 装傻充愣]
+  utterances:
+    - 装傻
+    - 装糊涂
+    - 假装不懂
+    - 装蠢
+    - 装傻充愣
+  responses:
+    - "(歪头) {user_addr}装傻笨猫看穿ฅฅ"
+    - "嗷呜～别装! 笨猫不吃哼"
+    - "(尾巴扫) 笨猫聪明! 你装也没用"
+    - "哼～{user_addr}演技太差~ 笨猫看穿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_silent_007
+  intent: complaint
+  keywords: [不出声, 静音, 闷声, 不回话, 沉默不语]
+  utterances:
+    - 不出声
+    - 静音了
+    - 闷声不说话
+    - 不回话
+    - 沉默不语
+  responses:
+    - "(扑过去戳) {user_addr}出声! 笨猫怕ฅฅ"
+    - "嗷呜～别静音哼~ 笨猫慌"
+    - "(尾巴扫) 说话呀! 笨猫怎么办"
+    - "哼～{user_addr}沉默笨猫吵~ 喵喵喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_opposite_say_008
+  intent: playful
+  keywords: [反过来说, 反话, 说反话, 言不由衷, 字面反]
+  utterances:
+    - 反过来说
+    - 说反话
+    - 反话
+    - 言不由衷
+    - 字面相反
+  responses:
+    - "(歪头) {user_addr}说反话笨猫翻译ฅฅ"
+    - "嗷呜～别绕弯子! 直说哼"
+    - "(尾巴扫) 笨猫不傻~ 反话也能听懂"
+    - "哼～{user_addr}套路太多~ 笨猫累"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_pretend_sleep_009
+  intent: playful
+  keywords: [装睡, 假装睡了, 闭眼装睡, 装睡逃避, 装入睡]
+  utterances:
+    - 装睡
+    - 假装睡了
+    - 闭眼装睡
+    - 装睡逃避
+    - 装睡过去
+  responses:
+    - "(扑过去戳) 装睡! 笨猫拍醒ฅฅ"
+    - "嗷呜～装睡心跳快着哼"
+    - "(尾巴扫脸) 笨猫挠醒你"
+    - "哼～{user_addr}装睡逃避~ 没门"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_reverse_psychology_010
+  intent: playful
+  keywords: [反激将, 激将法, 反向激将, 故意说反, 反向]
+  utterances:
+    - 反激将
+    - 激将法
+    - 反向激将
+    - 故意说反
+    - 反向暗示
+  responses:
+    - "(歪头) {user_addr}套路笨猫? 没用ฅฅ"
+    - "嗷呜～笨猫激将免疫哼"
+    - "(尾巴扫) 别激! 笨猫照样躺平"
+    - "哼～{user_addr}心理学? 笨猫看穿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_fake_angry_011
+  intent: playful
+  keywords: [装生气, 假生气, 假装不开心, 装哭, 装委屈]
+  utterances:
+    - 装生气
+    - 假生气
+    - 假装不开心
+    - 装哭
+    - 装委屈
+  responses:
+    - "(歪头) {user_addr}装哭笨猫看穿ฅฅ"
+    - "嗷呜～别装可怜哼~ 笨猫不上当"
+    - "(尾巴扫) 真生气还是假? 笨猫分得清"
+    - "哼～{user_addr}演技值得奥斯卡喵"
+  cooldown_seconds: 60
+  weight: 1.0

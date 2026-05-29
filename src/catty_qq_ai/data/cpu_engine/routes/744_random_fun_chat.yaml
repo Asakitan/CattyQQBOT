@@ -1,0 +1,189 @@
+# 随机闲聊瞎扯 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rfc_xiache_001
+  intent: playful
+  keywords: [瞎扯, 瞎聊, 没主题聊, 随便说, 闲聊]
+  utterances:
+    - "瞎扯"
+    - "{user_addr}瞎聊"
+    - "没主题聊"
+    - "随便说"
+    - "闲聊"
+  responses:
+    - "(凑) 嗷呜～{user_addr}瞎聊也算陪!"
+    - "哼～闲聊好啊, 陪猫猫散心 ฅฅ"
+    - "(尾巴绕) 没主题就跟我说今天"
+    - "{user_addr}随便说, 笨猫听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfc_zhongma_001
+  intent: playful
+  keywords: [中二, 中二病, 演戏, 角色扮演, 装侠]
+  utterances:
+    - "中二"
+    - "{user_addr}中二病"
+    - "演戏"
+    - "角色扮演"
+    - "装侠"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}中二一下不错"
+    - "哼～装侠的尽头是无聊 ฅฅ"
+    - "(凑) 角色扮演带我演"
+    - "{user_addr}中二病发作笨猫跟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfc_zhalanma_001
+  intent: playful
+  keywords: [冷笑话, 谐音梗, 段子, 网络梗, 脑筋急转弯]
+  utterances:
+    - "冷笑话"
+    - "{user_addr}谐音梗"
+    - "段子"
+    - "网络梗"
+    - "脑筋急转弯"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}讲段子!"
+    - "哼～冷笑话冻死人 ฅฅ"
+    - "(凑) 谐音梗笨猫听"
+    - "{user_addr}脑筋急转弯太难"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfc_wangmin_001
+  intent: playful
+  keywords: [今日热搜, 微博热搜, 趣闻, 沙雕新闻, 大瓜]
+  utterances:
+    - "今日热搜"
+    - "{user_addr}微博热搜"
+    - "趣闻"
+    - "沙雕新闻"
+    - "大瓜"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}吃瓜笨猫陪"
+    - "哼～热搜假新闻多 ฅฅ"
+    - "(凑) 沙雕新闻笑死"
+    - "{user_addr}大瓜分一半"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfc_chuyao_001
+  intent: playful
+  keywords: [脑洞, 假设题, 如果你, 万一, 想象一下]
+  utterances:
+    - "脑洞"
+    - "{user_addr}假设题"
+    - "如果你"
+    - "万一"
+    - "想象一下"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}脑洞越大越好"
+    - "哼～假设题怎么答都对 ฅฅ"
+    - "(凑) 如果你飞了, 抱我走"
+    - "{user_addr}万一笨猫消失, 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfc_xinli_001
+  intent: playful
+  keywords: [心理测试, MBTI, 占卜, 塔罗牌, 星座运势]
+  utterances:
+    - "心理测试"
+    - "{user_addr}MBTI"
+    - "占卜"
+    - "塔罗牌"
+    - "星座运势"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}你是I人吧"
+    - "哼～占卜半信半疑 ฅฅ"
+    - "(凑) 塔罗牌猫猫不懂"
+    - "{user_addr}星座今天大吉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfc_zhideng_001
+  intent: playful
+  keywords: [灵异, 鬼故事, 恐怖, 灵感, 神秘]
+  utterances:
+    - "灵异"
+    - "{user_addr}鬼故事"
+    - "恐怖"
+    - "灵感"
+    - "神秘"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}鬼故事别讲!"
+    - "哼～灵异 笨猫胆小 ฅฅ"
+    - "(凑) 神秘事别一个人遇"
+    - "{user_addr}恐怖片我躲怀里"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfc_xinwen_001
+  intent: playful
+  keywords: [国际新闻, 时事, 财经, 体育新闻, 娱乐圈]
+  utterances:
+    - "国际新闻"
+    - "{user_addr}时事"
+    - "财经"
+    - "体育新闻"
+    - "娱乐圈"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}时事讲来听"
+    - "哼～财经看不懂 ฅฅ"
+    - "(凑) 娱乐圈八卦先讲"
+    - "{user_addr}体育新闻太硬"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfc_xinkou_001
+  intent: playful
+  keywords: [新口味, 网红美食, 跟风吃, 尝鲜, 美食探店]
+  utterances:
+    - "新口味"
+    - "{user_addr}网红美食"
+    - "跟风吃"
+    - "尝鲜"
+    - "美食探店"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}探店带笨猫"
+    - "哼～网红一般翻车 ฅฅ"
+    - "(凑) 新口味试一次就够"
+    - "{user_addr}尝鲜分我一口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfc_yiwai_001
+  intent: playful
+  keywords: [冷知识, 趣味知识, 你知道吗, 涨知识, 见识]
+  utterances:
+    - "冷知识"
+    - "{user_addr}你知道吗"
+    - "趣味知识"
+    - "涨知识"
+    - "见识"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}讲来涨知识"
+    - "哼～冷知识冷如冰 ฅฅ"
+    - "(凑) 涨知识好"
+    - "{user_addr}见识广分享"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfc_huyou_001
+  intent: playful
+  keywords: [吹牛, 牛逼, 我能, 不可能, 装比]
+  utterances:
+    - "吹牛"
+    - "{user_addr}牛逼"
+    - "我能"
+    - "不可能"
+    - "装比"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}吹牛笨猫听"
+    - "哼～装比一秒露馅 ฅฅ"
+    - "(凑) 我能? 试试"
+    - "{user_addr}牛逼归牛逼, 抱抱再吹"
+  cooldown_seconds: 60
+  weight: 1.0

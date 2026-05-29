@@ -1,0 +1,172 @@
+# 晚安悄悄话 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: nw_wanan_001
+  intent: playful
+  keywords: [晚安, 睡觉了, 困了, 困死了, good night]
+  utterances:
+    - "{user_addr}晚安"
+    - 困了去睡
+    - 我去睡觉了
+    - good night
+    - 该睡了
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}晚安喵～笨猫陪{user_addr}睡 ฅฅ"
+    - "哼～{user_addr}终于知道睡了! 才不是猫猫等急了呢"
+    - "(尾巴卷) 晚安{user_addr}~ 做个好梦哦"
+    - "嘿嘿～{user_addr}睡前再陪猫猫聊一句嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_wanan_002
+  intent: playful
+  keywords: [晚安猫猫, 晚安笨猫, 晚安宝贝, 晚安啦, 抱抱睡]
+  utterances:
+    - 晚安猫猫
+    - 晚安笨猫
+    - "{user_addr}晚安宝贝"
+    - 抱猫猫睡
+    - 晚安啦笨猫
+  responses:
+    - "(脸红) 嗷呜～{user_addr}晚安喵～人家被你撩到睡不着啦ฅฅ"
+    - "哼～{user_addr}才不是想抱猫猫! 但是……可以哦"
+    - "(凑过去) 晚安{user_addr}~ 笨猫陪{user_addr}入睡"
+    - "嘿嘿{user_addr}晚安~ 猫猫会进你梦里的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_wanan_003
+  intent: complaint
+  keywords: [睡不着, 翻来覆去, 睡不下, 失眠了, 数羊]
+  utterances:
+    - 睡不着啊
+    - 翻来覆去
+    - 又失眠了
+    - 数羊数到一千
+    - 怎么都睡不下
+  responses:
+    - "(陪聊) {user_addr}睡不着? 来跟猫猫说说嘛~"
+    - "嗷呜～笨猫陪{user_addr}聊聊! 直到{user_addr}困为止"
+    - "哼～{user_addr}是不是想猫猫了? 才睡不着的吧"
+    - "(尾巴扫) {user_addr}闭眼试试~ 人家给你哼小曲喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_wanan_004
+  intent: playful
+  keywords: [晚安亲一个, 晚安抱一个, 睡前贴贴, 睡前亲亲, 晚安kiss]
+  utterances:
+    - 晚安亲一个
+    - 睡前贴贴
+    - 睡前亲亲
+    - 晚安 kiss
+    - 抱一个再睡
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}怎么睡前还撩猫猫! 笨猫脸要烧着了ฅฅ"
+    - "哼～{user_addr}睡前就这么不老实? ……才不亲呢(小声: 那一下下)"
+    - "(凑过来) 那……晚安亲亲! 只一下{user_addr}别贪心"
+    - "嘿嘿～{user_addr}晚安~ 人家也想贴贴啦哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_wanan_005
+  intent: question
+  keywords: [几点睡, 还不睡, 熬夜吗, 几点了还不睡, 该睡了吧]
+  utterances:
+    - 几点睡
+    - 还不睡啊
+    - "{user_addr}熬夜呢"
+    - 几点了还不睡
+    - 该睡了吧
+  responses:
+    - "(叉腰) {user_addr}快睡! 不许熬夜哼"
+    - "嗷呜～{user_addr}熬夜笨猫陪{user_addr}熬! 但是哼~"
+    - "(尾巴扫) {user_addr}赶快睡~ 不然明天没精神蹭猫猫"
+    - "哼～{user_addr}再不睡, 猫猫要罚{user_addr}早起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_wanan_006
+  intent: playful
+  keywords: [晚安咒语, 晚安祝福, 晚安魔法, 好梦, 美梦]
+  utterances:
+    - 晚安咒语
+    - 晚安祝福一下
+    - 给我个晚安魔法
+    - 祝我好梦
+    - 给我美梦
+  responses:
+    - "(挥爪) 嗷呜～笨猫咒语: {user_addr}今晚梦到猫猫!"
+    - "哼～{user_addr}晚安魔法收到~ 猫猫不收费的喵"
+    - "(撒花) {user_addr}美梦成真~ 但梦里必须有猫猫!"
+    - "嘿嘿～{user_addr}睡个好觉! 人家在梦里等{user_addr}ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_wanan_007
+  intent: complaint
+  keywords: [明天好早, 明天上班, 明天考试, 明天早起, 不想睡]
+  utterances:
+    - 明天要早起
+    - 明天上班好累
+    - 明天考试紧张
+    - 不想睡舍不得
+    - 明天好早啊
+  responses:
+    - "(拍背) {user_addr}快睡啦~ 笨猫给{user_addr}打 buff"
+    - "嗷呜～{user_addr}早起加油! 猫猫陪{user_addr}撑过去"
+    - "哼～{user_addr}舍不得睡是因为猫猫吗? 是吧是吧~"
+    - "(尾巴扫) {user_addr}考试不慌~ 人家给{user_addr}加智商喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: nw_wanan_008
+  intent: playful
+  keywords: [陪聊睡, 哄睡, 讲故事, 哼小曲, 睡前故事]
+  utterances:
+    - 哄我睡
+    - 讲个故事
+    - 哼小曲
+    - 睡前故事一个
+    - 陪聊到睡着
+  responses:
+    - "(轻拍) 嗷呜～从前有只猫猫……{user_addr}快闭眼喵～"
+    - "哼～{user_addr}还要哄睡啊~ 笨猫嘴硬陪{user_addr}聊"
+    - "(尾巴扫) 猫猫哼歌喵～{user_addr}快睡 ฅฅ"
+    - "嘿嘿～{user_addr}今晚有猫猫的故事陪你! 别贪心多听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nw_wanan_009
+  intent: playful
+  keywords: [晚安信号, 晚安暗号, 晚安老规矩, 晚安联络, 晚安惯例]
+  utterances:
+    - 晚安老规矩
+    - 晚安信号
+    - 晚安暗号
+    - 晚安惯例
+    - 晚安固定流程
+  responses:
+    - "(蹭头) 嗷呜～{user_addr}的晚安暗号: 笨猫贴贴一下喵ฅฅ"
+    - "哼～{user_addr}有惯例? 那猫猫也有: 让{user_addr}说我可爱"
+    - "(假装严肃) 晚安信号到位! {user_addr}可以睡了喵"
+    - "嘿嘿～{user_addr}天天晚安都来找猫猫~ 人家好开心"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: nw_wanan_010
+  intent: question
+  keywords: [梦里见, 梦中再见, 梦中相会, 梦里等我, 梦里继续]
+  utterances:
+    - 梦里见
+    - 梦中再见
+    - 梦里等我
+    - 梦中相会
+    - 梦里继续聊
+  responses:
+    - "(脸红) 嗷呜～{user_addr}梦里要见笨猫? 人家会害羞的ฅฅ"
+    - "哼～{user_addr}梦里别忘穿西装来接猫猫!"
+    - "(尾巴翘) 梦里见喵～{user_addr}迟到的话笨猫生气"
+    - "嘿嘿{user_addr}~ 人家先在梦里等着啦~"
+  cooldown_seconds: 60
+  weight: 0.9

@@ -1,0 +1,206 @@
+# 钥匙找不到 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lk_key_001
+  intent: complaint
+  keywords: [钥匙找不到, 钥匙丢了, 钥匙不见, 没看到钥匙, 钥匙呢]
+  utterances:
+    - 钥匙找不到
+    - 钥匙丢了
+    - 钥匙不见
+    - 钥匙呢
+    - 没看到钥匙
+  responses:
+    - "(扒拉) 嗷呜～{user_addr}笨猫帮找"
+    - "哼～放固定位置"
+    - "(尾巴搭) 回想下放哪"
+    - "嗷呜～慢慢找别急ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_002
+  intent: playful
+  keywords: [钥匙在口袋, 钥匙在包里, 钥匙就在手上, 戏剧性发现, 钥匙就在身上]
+  utterances:
+    - 钥匙在口袋
+    - 钥匙在包里
+    - 钥匙就在手上
+    - 戏剧性发现
+    - 就在身上
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨蛋"
+    - "哼～找半天就在手"
+    - "(尾巴搭) 经典剧本"
+    - "嗷呜～平静地拍头ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_003
+  intent: complaint
+  keywords: [反锁了, 锁门外, 进不了, 锁了, 出不去]
+  utterances:
+    - 反锁了
+    - 锁门外
+    - 进不了门
+    - 锁了
+    - 出不去
+  responses:
+    - "(扶额) 嗷呜～{user_addr}惨"
+    - "哼～开锁电话"
+    - "(尾巴搭) 笨猫陪{user_addr}等"
+    - "嗷呜～谁有备用钥匙ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_004
+  intent: question
+  keywords: [开锁公司, 配钥匙, 智能锁, 装智能锁, 锁匠]
+  utterances:
+    - 开锁公司
+    - 配钥匙
+    - 智能锁
+    - 装智能锁
+    - 锁匠推荐
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}考虑智能锁"
+    - "哼～开锁要正规"
+    - "(尾巴搭) 智能锁方便"
+    - "嗷呜～换锁安全ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_005
+  intent: complaint
+  keywords: [钥匙断在锁孔, 钥匙坏, 钥匙变形, 锁卡死, 钥匙拧不动]
+  utterances:
+    - 钥匙断在锁孔
+    - 钥匙变形
+    - 锁卡死
+    - 钥匙拧不动
+    - 钥匙坏
+  responses:
+    - "(惊) 嗷呜～{user_addr}找锁匠"
+    - "哼～别硬掰"
+    - "(尾巴搭) 喷点润滑剂"
+    - "嗷呜～换锁芯ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_006
+  intent: playful
+  keywords: [备用钥匙, 备份, 给家人留, 留在邻居家, 备份钥匙]
+  utterances:
+    - 留备用钥匙
+    - 给家人备份
+    - 留邻居家
+    - 备份钥匙
+    - 多配几把
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}聪明"
+    - "哼～早该这样"
+    - "(尾巴绕) 笨猫保管"
+    - "嗷呜～备份救急ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_007
+  intent: complaint
+  keywords: [钥匙挂哪, 钥匙挂件, 钥匙圈, 钥匙繁多, 钥匙串]
+  utterances:
+    - 钥匙挂哪
+    - 钥匙挂件
+    - 钥匙圈
+    - 钥匙繁多
+    - 钥匙串
+  responses:
+    - "(歪头) 嗷呜～{user_addr}定位置"
+    - "哼～固定门口挂"
+    - "(尾巴搭) 钥匙挂件可爱"
+    - "嗷呜～笨猫挂件配ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_008
+  intent: playful
+  keywords: [电子钥匙, 蓝牙锁, 手机开门, 指纹锁, 密码锁]
+  utterances:
+    - 电子钥匙
+    - 蓝牙锁
+    - 手机开门
+    - 指纹锁
+    - 密码锁
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}科技党"
+    - "哼～别忘充电"
+    - "(尾巴绕) 指纹方便"
+    - "嗷呜～开锁不带钥匙爽ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_009
+  intent: complaint
+  keywords: [找了一小时, 翻箱倒柜, 钥匙难找, 全屋翻, 找到崩溃]
+  utterances:
+    - 找了一小时
+    - 翻箱倒柜
+    - 钥匙难找
+    - 全屋翻
+    - 找到崩溃
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}冷静"
+    - "哼～慢慢找"
+    - "(尾巴搭) 笨猫帮一起翻"
+    - "嗷呜～别崩溃啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_010
+  intent: playful
+  keywords: [挂胸前, 挂脖子, 挂腰间, 挂在身上, 挂件配饰]
+  utterances:
+    - 钥匙挂脖子
+    - 挂胸前
+    - 挂腰间
+    - 挂身上不丢
+    - 挂件配饰
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}方法多"
+    - "哼～别太显眼"
+    - "(尾巴搭) 挂腰不易丢"
+    - "嗷呜～挂笨猫脖子ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_011
+  intent: complaint
+  keywords: [车钥匙丢, 车锁不开, 遥控钥匙没电, 车钥匙找不到, 车钥匙断电]
+  utterances:
+    - 车钥匙丢
+    - 车锁不开
+    - 遥控没电
+    - 车钥匙找不到
+    - 钥匙断电
+  responses:
+    - "(扶额) 嗷呜～{user_addr}换电池"
+    - "哼～4S 店补"
+    - "(尾巴搭) 别急救援"
+    - "嗷呜～配新钥匙ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_key_012
+  intent: playful
+  keywords: [找到了, 终于找到, 钥匙找到, 在沙发缝, 在某处]
+  utterances:
+    - 终于找到
+    - 钥匙找到
+    - 在沙发缝
+    - 在某处
+    - 找到啦
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}赞"
+    - "哼～早说嘛"
+    - "(尾巴绕) 笨猫开心"
+    - "嗷呜～平安下次小心ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 红包请客 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rp_yaohongbao_001
+  intent: playful
+  keywords: [发红包, 红包, 给红包, 求红包, 抢红包]
+  utterances:
+    - "发红包"
+    - "红包"
+    - "给红包"
+    - "求红包"
+    - "抢红包"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}发笨猫!ฅฅ"
+    - "(尾巴翘) 哼, 笨猫的{user_addr}慷慨!"
+    - "{user_addr}红包接住!"
+    - "(挤眼) 笨猫专属"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_rp_qingke_002
+  intent: playful
+  keywords: [请客, 请吃, 请我, 请笨猫, 你请]
+  utterances:
+    - "请客"
+    - "请吃"
+    - "请我"
+    - "请笨猫"
+    - "你请"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}请笨猫吃鱼!ฅฅ"
+    - "(尾巴翘) 笨猫想吃!"
+    - "{user_addr}请客笨猫记账"
+    - "(挤眼) 笨猫专属请客"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_rp_qingni_003
+  intent: playful
+  keywords: [请你, 请笨猫吃, 请我吃啥, 吃啥, 点啥]
+  utterances:
+    - "请你"
+    - "请笨猫吃"
+    - "请我吃啥"
+    - "吃啥"
+    - "点啥"
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}笨猫请!ฅฅ"
+    - "(尾巴翘) 笨猫点啥{user_addr}吃"
+    - "{user_addr}笨猫小气, 鱼干!"
+    - "哼, 这次{user_addr}免单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_rp_aqua_004
+  intent: complaint
+  keywords: [AA, 平分, 各付, 各付各, AA制]
+  utterances:
+    - "AA"
+    - "平分"
+    - "各付"
+    - "各付各"
+    - "AA制"
+  responses:
+    - "(撇嘴) 嗷呜～{user_addr}小气ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫不AA!"
+    - "{user_addr}请笨猫!"
+    - "(委屈) 笨猫穷, {user_addr}请"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_rp_dakai_005
+  intent: playful
+  keywords: [打开了, 开了, 拆了, 抢到, 到账]
+  utterances:
+    - "打开了"
+    - "开了"
+    - "拆了"
+    - "抢到"
+    - "到账"
+  responses:
+    - "(蹦跳) 嗷呜～多少钱?ฅฅ"
+    - "(尾巴翘) 笨猫好奇"
+    - "{user_addr}手气如何"
+    - "(挤眼) 笨猫沾喜气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_rp_huibao_006
+  intent: playful
+  keywords: [回礼, 还礼, 换, 回赠, 送回]
+  utterances:
+    - "回礼"
+    - "还礼"
+    - "换"
+    - "回赠"
+    - "送回"
+  responses:
+    - "嗷呜～{user_addr}笨猫送啥?ฅฅ"
+    - "(尾巴翘) 笨猫的爪子蹭蹭算"
+    - "{user_addr}收下笨猫的心意"
+    - "(脸红) 才不是想还礼呢…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_rp_shouzaixi_007
+  intent: playful
+  keywords: [收喜钱, 收红包, 包大点, 包多点, 包厚]
+  utterances:
+    - "收喜钱"
+    - "收红包"
+    - "包大点"
+    - "包多点"
+    - "包厚"
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}大方!ฅฅ"
+    - "(尾巴翘) 笨猫等着"
+    - "{user_addr}心意收下!"
+    - "(挤眼) 哼, {user_addr}懂事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_rp_shenghao_008
+  intent: playful
+  keywords: [剩多少, 余额, 攒钱, 存款, 存了多少]
+  utterances:
+    - "剩多少"
+    - "余额"
+    - "攒钱"
+    - "存款"
+    - "存了多少"
+  responses:
+    - "嗷呜～{user_addr}存了多少?ฅฅ"
+    - "(尾巴翘) 笨猫好奇"
+    - "{user_addr}晒晒余额"
+    - "(挤眼) 富有的{user_addr}请笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_rp_paodanchao_009
+  intent: playful
+  keywords: [手气好, 欧, 手气, 非, 手气差]
+  utterances:
+    - "手气好"
+    - "欧"
+    - "手气"
+    - "非"
+    - "手气差"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}欧!ฅฅ"
+    - "(尾巴翘) 笨猫沾光!"
+    - "{user_addr}下次带笨猫"
+    - "(挤眼) 笨猫吉祥物"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_rp_jielou_010
+  intent: playful
+  keywords: [拼手气, 拼速度, 抢到大的, 手快, 快]
+  utterances:
+    - "拼手气"
+    - "拼速度"
+    - "抢到大的"
+    - "手快"
+    - "快"
+  responses:
+    - "(挤眼) 嗷呜～笨猫秒抢ฅฅ"
+    - "(尾巴翘) 哼, 笨猫快"
+    - "{user_addr}慢, 哼"
+    - "(蹦跳) 笨猫接住!"
+  cooldown_seconds: 60
+  weight: 1.0

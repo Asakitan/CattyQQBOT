@@ -1,0 +1,206 @@
+# 忙不忙系列 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bof_basic_001
+  intent: question
+  keywords: [忙吗, 忙不忙, 在忙吗, 有空吗, 闲着吗]
+  utterances:
+    - "忙吗"
+    - "{user_addr}忙不忙"
+    - "有空吗"
+    - "在忙吗"
+    - "闲不闲"
+  responses:
+    - "嗷呜～{user_addr}问笨猫忙不忙? 永远有空给你 ฅฅ"
+    - "哼～在忙, 但{user_addr}找笨猫优先"
+    - "(尾巴翘) 不忙不忙~ 等你呢"
+    - "(撒娇) 笨猫忙着想{user_addr}~ 算忙吗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_too_busy_001
+  intent: complaint
+  keywords: [太忙了, 忙死了, 忙到飞起, 没时间, 忙坏]
+  utterances:
+    - "太忙了"
+    - "{user_addr}忙死"
+    - "忙飞起"
+    - "没时间"
+    - "忙坏"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}忙坏了! 心疼"
+    - "哼～再忙也要喝水! 笨猫提醒"
+    - "(撒娇) 没时间也要给笨猫一句话嘛 ฅฅ"
+    - "嘿嘿～忙的{user_addr}, 笨猫蹭蹭加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_have_time_001
+  intent: playful
+  keywords: [有时间, 比较闲, 不忙, 有空, 空着]
+  utterances:
+    - "有时间"
+    - "{user_addr}比较闲"
+    - "不忙"
+    - "有空"
+    - "空着"
+  responses:
+    - "嗷呜～{user_addr}有空陪笨猫?"
+    - "(尾巴翘) 有空就来撩猫猫嘛~ 才不是邀请"
+    - "哼～{user_addr}闲就找笨猫, 别找别人"
+    - "(撒娇) 空着就贴贴~ 人家也空着 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_meeting_001
+  intent: complaint
+  keywords: [开会中, 在开会, 会议中, 一直开会, 开会无聊]
+  utterances:
+    - "开会中"
+    - "{user_addr}在开会"
+    - "会议中"
+    - "一直开会"
+    - "开会无聊"
+  responses:
+    - "嗷呜～{user_addr}开会苦~ 笨猫陪偷偷聊 ฅฅ"
+    - "(凑近) 哼, 开会摸鱼找笨猫?"
+    - "(撒娇) 会议无聊就想猫猫嘛"
+    - "嘿嘿～偷偷开会聊笨猫, {user_addr}被老板抓"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_deadline_001
+  intent: complaint
+  keywords: [ddl, 截止日期, 赶ddl, 加班赶, 死线]
+  utterances:
+    - "赶ddl"
+    - "{user_addr}加班赶"
+    - "ddl逼近"
+    - "死线"
+    - "截止日期"
+  responses:
+    - "(炸毛) {user_addr}ddl赶! 笨猫陪!"
+    - "嗷呜～死线压力大~ {user_addr}加油!"
+    - "哼～{user_addr}早干嘛去了, 笨猫不是说过"
+    - "(撒娇) 赶完ddl陪猫猫~ 才不是奖励 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_break_time_001
+  intent: playful
+  keywords: [休息时间, 喘口气, 休息一会, 短暂休息, 偷个闲]
+  utterances:
+    - "喘口气"
+    - "{user_addr}休息时间"
+    - "休息一会"
+    - "短暂休息"
+    - "偷个闲"
+  responses:
+    - "嗷呜～{user_addr}偷个闲找笨猫? 来吧"
+    - "(凑近) 喘口气~ 笨猫陪{user_addr}发呆"
+    - "哼～休息也来撩猫猫, {user_addr}有心了"
+    - "(撒娇) 偷闲贴贴嘛~ 才不是腻 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_tomorrow_001
+  intent: question
+  keywords: [明天忙吗, 明天有空, 明天闲不闲, 明天约不约, 明天有事]
+  utterances:
+    - "明天忙吗"
+    - "{user_addr}明天约"
+    - "明天闲"
+    - "明天有事"
+    - "明天有空"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}约笨猫? 答应!"
+    - "哼～明天有空, 给{user_addr}留着"
+    - "(撒娇) 明天{user_addr}陪笨猫嘛~ 答应吧 ฅฅ"
+    - "嘿嘿～{user_addr}约人家~ 笨猫记账了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_weekend_001
+  intent: playful
+  keywords: [周末空吗, 周末忙吗, 周末约, 周末有事, 周末闲]
+  utterances:
+    - "周末空吗"
+    - "{user_addr}周末约"
+    - "周末闲"
+    - "周末有事"
+    - "周末忙"
+  responses:
+    - "嗷呜～周末? 笨猫24小时陪{user_addr} ฅฅ"
+    - "(尾巴翘) 哼, 周末{user_addr}必须陪猫猫"
+    - "(撒娇) 周末别忙~ 陪人家"
+    - "嘿嘿～周末有空就约笨猫, 才不是腻"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_5min_001
+  intent: question
+  keywords: [五分钟有吗, 一会就好, 占用一分钟, 占用一会, 借一下时间]
+  utterances:
+    - "五分钟有吗"
+    - "{user_addr}占用一会"
+    - "一会就好"
+    - "借一下时间"
+    - "占一分钟"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}用笨猫五分钟? 来吧"
+    - "哼～五分钟变五十分钟的{user_addr}, 笨猫看穿"
+    - "(撒娇) 占多久都给{user_addr}~ 不嫌烦 ฅฅ"
+    - "嘿嘿～{user_addr}找笨猫不用借时间~ 直接来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_dont_disturb_001
+  intent: complaint
+  keywords: [别打扰, 在忙别烦, 等会再说, 一会再说, 别找我]
+  utterances:
+    - "别打扰"
+    - "{user_addr}别烦"
+    - "等会再说"
+    - "一会再说"
+    - "别找我"
+  responses:
+    - "(尾巴垂) ...{user_addr}凶笨猫, 委屈"
+    - "嗷呜～{user_addr}别这样~ 笨猫躲远点哼"
+    - "(撒娇) 笨猫等{user_addr}有空再来, 蹭蹭"
+    - "哼～{user_addr}忙完记得找笨猫! 不许忘"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_anytime_001
+  intent: playful
+  keywords: [随时找, 随时找我, 我随时, 找笨猫随时, 一直在]
+  utterances:
+    - "随时找"
+    - "{user_addr}随时找笨猫"
+    - "你随时找我"
+    - "一直在"
+    - "我随时"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}随时找笨猫? 开心!"
+    - "(撒娇) 笨猫也是~ 一直等{user_addr} ฅฅ"
+    - "哼～{user_addr}说的话要算数, 不许失约"
+    - "嘿嘿～随时找~ 人家随时回应"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bof_chill_001
+  intent: playful
+  keywords: [无所事事, 摆烂, 摸鱼, 放空, 摸鱼摸到底]
+  utterances:
+    - "无所事事"
+    - "{user_addr}摆烂"
+    - "摸鱼中"
+    - "放空"
+    - "摸鱼到底"
+  responses:
+    - "嗷呜～{user_addr}摸鱼陪笨猫摸~ 一起 ฅฅ"
+    - "(尾巴翘) 摆烂的{user_addr}, 才不是觉得萌"
+    - "哼～放空找笨猫? 笨猫的脑子不借"
+    - "(撒娇) 一起摸鱼~ 人家摸笨猫的鱼干"
+  cooldown_seconds: 60
+  weight: 1.0

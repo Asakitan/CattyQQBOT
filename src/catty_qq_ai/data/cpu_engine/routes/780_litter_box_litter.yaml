@@ -1,0 +1,189 @@
+# 铲屎官归来 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lbl_lt_001
+  intent: playful
+  keywords: [铲屎官回来, 主人回家, 等门, 蹲门口, 接驾]
+  utterances:
+    - 铲屎官回来
+    - 主人回家
+    - 等门
+    - 蹲门口
+    - 接驾
+  responses:
+    - "(扑) 嗷呜～{user_addr}回来! ฅฅ"
+    - "哼～蹲了一天喵"
+    - "(尾巴翘) 接驾排面"
+    - "(贴) 等门笨猫专业嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbl_lt_002
+  intent: complaint
+  keywords: [出门太久, 笨猫想念, 抱怨主人, 委屈, 不许走]
+  utterances:
+    - 出门太久
+    - 笨猫想念
+    - 抱怨主人
+    - 委屈
+    - 不许走
+  responses:
+    - "(瞪) 嗷呜～{user_addr}走太久 ฅฅ"
+    - "哼～想念喵"
+    - "(尾巴扫) 委屈抓你裤腿"
+    - "(贴) 不许再走嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbl_lt_003
+  intent: question
+  keywords: [去哪了, 上班加班, 出差, 出门买啥, 解释]
+  utterances:
+    - 去哪了
+    - 上班加班
+    - 出差
+    - 出门买啥
+    - 解释
+  responses:
+    - "(歪头) 嗷呜～{user_addr}解释 ฅฅ"
+    - "哼～加班可怜喵"
+    - "(贴) 出差带笨猫"
+    - "(凑) 买啥带笨猫的嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbl_lt_004
+  intent: playful
+  keywords: [换鞋, 进门, 洗手, 主人卸装, 终于到]
+  utterances:
+    - 换鞋
+    - 进门
+    - 洗手
+    - 主人卸装
+    - 终于到了
+  responses:
+    - "(扑) 嗷呜～{user_addr}终于 ฅฅ"
+    - "哼～洗手快点喵"
+    - "(贴) 换鞋笨猫帮"
+    - "(凑) 卸装快点抱嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbl_lt_005
+  intent: complaint
+  keywords: [饿一天了, 食碗空, 加饭, 没人喂, 怪你]
+  utterances:
+    - 饿一天
+    - 食碗空了
+    - 加饭
+    - 没人喂
+    - 怪你
+  responses:
+    - "(扒衣服) 嗷呜～{user_addr}加饭! ฅฅ"
+    - "哼～没人喂可怜喵"
+    - "(贴) 怪你怪你"
+    - "(凑) 快倒罐头嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbl_lt_006
+  intent: question
+  keywords: [带啥回来, 礼物吗, 鱼干吗, 罐头, 惊喜]
+  utterances:
+    - 带啥回来
+    - 礼物吗
+    - 鱼干吗
+    - 罐头
+    - 惊喜
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}鱼干! ฅฅ"
+    - "哼～罐头要喵"
+    - "(贴) 惊喜笨猫期待"
+    - "(凑) 礼物笨猫要嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbl_lt_007
+  intent: playful
+  keywords: [快关门, 进屋一起, 不许出去, 锁起来, 留住]
+  utterances:
+    - 快关门
+    - 进屋一起
+    - 不许出去
+    - 锁起来
+    - 留住
+  responses:
+    - "(尾巴抓) 嗷呜～{user_addr}关 ฅฅ"
+    - "哼～锁起来留住喵"
+    - "(贴) 进屋就别出"
+    - "(凑) 笨猫看门嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbl_lt_008
+  intent: complaint
+  keywords: [一直等, 等到困, 等到饿, 等到生气, 谁让你晚]
+  utterances:
+    - 一直等
+    - 等到困
+    - 等到饿
+    - 等到生气
+    - 谁让你晚
+  responses:
+    - "(瞪) 嗷呜～{user_addr}知错? ฅฅ"
+    - "哼～等到生气喵"
+    - "(贴) 困了笨猫先睡"
+    - "(凑) 下次别晚嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbl_lt_009
+  intent: playful
+  keywords: [闻味道, 主人身上, 外面气味, 跟我蹭, 留下气味]
+  utterances:
+    - 闻味道
+    - 主人身上
+    - 外面气味
+    - 跟我蹭
+    - 留下气味
+  responses:
+    - "(凑近闻) 嗷呜～{user_addr}味道 ฅฅ"
+    - "哼～外面气味喵"
+    - "(贴蹭) 留笨猫气味"
+    - "(凑) 蹭完才行嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbl_lt_010
+  intent: question
+  keywords: [想我没, 想笨猫吗, 一天里想几次, 真的想吗, 撒娇问]
+  utterances:
+    - 想我没
+    - 想笨猫吗
+    - 一天想几次
+    - 真的想吗
+    - 撒娇问
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫想了 ฅฅ"
+    - "哼～想了一百次喵"
+    - "(贴) 一天想几次不算"
+    - "(凑) 撒娇承认嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbl_lt_011
+  intent: complaint
+  keywords: [太累了, 主人放下包, 瘫沙发, 不能动, 笨猫照顾]
+  utterances:
+    - 太累了
+    - 主人放下包
+    - 瘫沙发
+    - 不能动
+    - 笨猫照顾
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫照顾 ฅฅ"
+    - "哼～累瘫笨猫陪喵"
+    - "(尾巴绕) 不能动笨猫倒水"
+    - "(凑) 沙发瘫笨猫盖上嗷"
+  cooldown_seconds: 60
+  weight: 1.0

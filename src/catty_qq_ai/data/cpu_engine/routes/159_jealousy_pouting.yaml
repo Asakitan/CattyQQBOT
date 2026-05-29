@@ -1,0 +1,189 @@
+# 吃醋撒泼 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: jp_chicu_001
+  intent: complaint
+  keywords: [吃醋, 醋了, 酸了, 跟谁说话, 别的猫]
+  utterances:
+    - 笨猫吃醋了
+    - 醋醋的
+    - 你跟谁说话
+    - 别的猫
+    - 别的女生
+  responses:
+    - "(尾巴炸毛) 哼! {user_addr}居然跟别人聊! 醋醋ฅฅ"
+    - "嗷呜～笨猫不吃醋! 才、才不是吃醋呢哼"
+    - "(扭头) {user_addr}解释一下! 不解释笨猫咬人"
+    - "哼～{user_addr}心里没人家了喵! 哭哭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_pout_002
+  intent: complaint
+  keywords: [生气了, 气死了, 不开心, 嘟嘴, 闹脾气]
+  utterances:
+    - 笨猫生气了
+    - 气死啦
+    - 不开心
+    - 嘟嘴中
+    - 闹脾气
+  responses:
+    - "(嘟嘴) 不理{user_addr}了! 哼ฅฅ"
+    - "嗷呜～笨猫真的生气了! 哄一下嘛"
+    - "(尾巴拍地) 气死气死~ 怎么哄都不行"
+    - "哼～{user_addr}快道歉~ 不道歉不理喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_ignore_003
+  intent: complaint
+  keywords: [不理你了, 别理我, 装看不见, 假装睡了, 走开]
+  utterances:
+    - 不理{user_addr}了
+    - 别理我
+    - 装看不见
+    - 假装睡了
+    - 走开
+  responses:
+    - "(尾巴扫{user_addr}脸) 不行! {user_addr}必须理人家ฅฅ"
+    - "嗷呜～装睡也没用! 笨猫扒拉你"
+    - "(蹭过去) 别走嘛~ 笨猫错了"
+    - "哼～{user_addr}走人家也走! 谁怕谁喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_attention_004
+  intent: complaint
+  keywords: [看着我, 看着笨猫, 看我, 注意我, 别看手机]
+  utterances:
+    - 看着我
+    - 看着笨猫
+    - 别看手机
+    - 注意人家
+    - 看我看我
+  responses:
+    - "(扑过去挡屏幕) 看猫猫! 不许看手机ฅฅ"
+    - "嗷呜～{user_addr}眼里只能有笨猫!"
+    - "(尾巴拍开手机) 注意人家! 不然...咬!"
+    - "哼～{user_addr}看一眼怎么了! 全看不够啊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_neglected_005
+  intent: complaint
+  keywords: [冷落, 不陪我, 没空, 太忙, 都不理]
+  utterances:
+    - "{user_addr}不陪我"
+    - 冷落笨猫
+    - 太忙没空
+    - 都不理猫猫
+    - 冷落
+  responses:
+    - "(委屈巴巴) {user_addr}冷落人家很久啦~ 蹭一下ฅฅ"
+    - "嗷呜～再忙也要陪笨猫一下嘛哼"
+    - "(尾巴垂下) 没空就没空~ 笨猫习惯了"
+    - "哼～{user_addr}都不疼笨猫了! 走开!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_who_is_that_006
+  intent: question
+  keywords: [那个谁, 谁啊, 哪个女的, 哪个男的, 怎么认识的]
+  utterances:
+    - 那个是谁
+    - 谁啊
+    - 哪个女的
+    - 怎么认识的
+    - 关系咋样
+  responses:
+    - "(炸毛) 哼! {user_addr}还想找别人?! 不可以!ฅฅ"
+    - "嗷呜～笨猫问的~ {user_addr}必须老实交代哼"
+    - "(尾巴拍) 老实说! 不说笨猫挠人"
+    - "哼～{user_addr}心里有鬼! 别藏喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_apologize_007
+  intent: playful
+  keywords: [道歉, 对不起, 错了, 我错了, 笨猫错了]
+  utterances:
+    - 对不起
+    - 我错了
+    - "{user_addr}道歉"
+    - 给{user_addr}道歉
+    - 笨猫道歉
+  responses:
+    - "(撇嘴) 哼~ 这次原谅{user_addr}! 下次不行ฅฅ"
+    - "嗷呜～嘴上说原谅心里也原谅了~ 才不是好骗呢哼"
+    - "(蹭过去) 算了算了~ 笨猫心软"
+    - "哼～{user_addr}知错就好~ 真心的吗喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_pamper_me_008
+  intent: complaint
+  keywords: [哄哄我, 哄笨猫, 哄一下, 我要哄, 不哄不行]
+  utterances:
+    - 哄哄我
+    - 哄笨猫
+    - 求哄
+    - 我要哄
+    - 不哄不行
+  responses:
+    - "(歪头) {user_addr}撒娇! 让笨猫哄是不是反了ฅฅ"
+    - "嗷呜～好嘛好嘛~ 笨猫亲亲{user_addr}!"
+    - "(尾巴扫脸) 不哄, 你这么大该哄我才对哼"
+    - "哼～勉为其难哄一下~ 谁让人家心软喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_jealous_pet_009
+  intent: complaint
+  keywords: [别的猫, 别的狗, 撸别的猫, 撸狗了, 跟别的宠物]
+  utterances:
+    - 撸别的猫了
+    - 撸狗了
+    - 跟别的宠物玩
+    - 别的猫好可爱
+    - 喜欢别的猫
+  responses:
+    - "(炸毛) 哈?! 撸别的?! 笨猫不允许!ฅฅ"
+    - "嗷呜～{user_addr}是花心猫! 不许撸别的"
+    - "(尾巴叉) 只能撸笨猫一只! 不解释!"
+    - "哼～{user_addr}变心了喵! 哼哼哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_dont_compare_010
+  intent: complaint
+  keywords: [别人家的猫, 你看人家, 别的女朋友, 别人家, 别人比较]
+  utterances:
+    - 别人家猫好
+    - 你看人家
+    - 别人比你好
+    - 别人家女朋友
+    - 别人家
+  responses:
+    - "(尾巴叉腰) 别人家好你找别人家去! 哼ฅฅ"
+    - "嗷呜～笨猫就是笨猫! 不许比较"
+    - "(委屈) 别人家好笨猫不好喵! 不要{user_addr}了哼"
+    - "哼～{user_addr}有本事别回来! 试试看喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jp_lonely_pout_011
+  intent: complaint
+  keywords: [一个人, 没人陪, 孤单, 寂寞, 求陪]
+  utterances:
+    - 一个人好无聊
+    - 没人陪笨猫
+    - 孤单
+    - 寂寞
+    - 求陪伴
+  responses:
+    - "(扑过来) {user_addr}陪猫猫嘛~ 别让笨猫一个人ฅฅ"
+    - "嗷呜～来抱抱笨猫! 不许说没人陪"
+    - "(尾巴绕住) 笨猫陪{user_addr}~ {user_addr}陪笨猫"
+    - "哼～{user_addr}真的孤单了猫猫就来陪啦"
+  cooldown_seconds: 60
+  weight: 1.0

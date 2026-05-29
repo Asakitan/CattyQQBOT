@@ -1,0 +1,189 @@
+# 奶茶选单 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bbt_pck_001
+  intent: playful
+  keywords: [喝奶茶, 点奶茶, 珍珠奶茶, 喜茶, 茶颜悦色]
+  utterances:
+    - "喝奶茶"
+    - "点奶茶"
+    - "珍珠"
+    - "喜茶"
+    - "{user_addr}奶茶"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫想喝喵ฅฅ"
+    - "(凑过来) 珍珠奶茶最香"
+    - "哼～别太甜"
+    - "(贴贴) 分笨猫一口嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pck_002
+  intent: question
+  keywords: [选啥味, 奶茶口味, 推荐口味, 杨枝甘露, 抹茶奶茶]
+  utterances:
+    - "选啥味"
+    - "推荐口味"
+    - "杨枝甘露"
+    - "抹茶奶茶"
+    - "{user_addr}味"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}杨枝甘露喵"
+    - "(凑近) 笨猫推荐芋泥波波"
+    - "哼～别老喝同款"
+    - "(贴贴) 笨猫帮你选ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pck_003
+  intent: complaint
+  keywords: [奶茶热量, 奶茶胖, 减肥不能喝, 奶茶糖多, 怕胖]
+  utterances:
+    - "奶茶胖"
+    - "减肥不能"
+    - "糖多"
+    - "怕胖"
+    - "{user_addr}怕胖"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}三分糖喵"
+    - "(尾巴绕) 哼～偶尔喝嘛"
+    - "(贴贴) 笨猫陪你跑步"
+    - "(凑近) 鲜奶茶健康嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pck_004
+  intent: complaint
+  keywords: [奶茶排队, 排队久, 奶茶店人多, 排号, 等奶茶]
+  utterances:
+    - "排队久"
+    - "奶茶店人多"
+    - "排号"
+    - "等奶茶"
+    - "{user_addr}排队"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}耐心点喵"
+    - "(凑近) 哼～外卖省时"
+    - "(贴贴) 笨猫陪你等"
+    - "(凑近) 提前下单嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pck_005
+  intent: playful
+  keywords: [奶茶配料, 加珍珠, 椰果, 布丁, 加料]
+  utterances:
+    - "加珍珠"
+    - "椰果"
+    - "布丁"
+    - "加料"
+    - "{user_addr}配料"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫想椰果喵ฅฅ"
+    - "(凑过来) 珍珠+布丁满"
+    - "哼～别太多卡路里"
+    - "(贴贴) 一起加嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pck_006
+  intent: complaint
+  keywords: [奶茶贵, 一杯几十, 奶茶涨价, 钱包痛, 喝不起]
+  utterances:
+    - "一杯几十"
+    - "奶茶涨价"
+    - "钱包痛"
+    - "喝不起"
+    - "{user_addr}奶茶贵"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}蜜雪冰城便宜喵"
+    - "(凑近) 哼～别天天喝"
+    - "(贴贴) 笨猫陪你薅"
+    - "(凑近) 自制省钱嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pck_007
+  intent: playful
+  keywords: [奶茶聚会, 一群人点奶茶, 同事奶茶, 团购奶茶, 一起拼]
+  utterances:
+    - "团购奶茶"
+    - "同事点"
+    - "一群人"
+    - "一起拼"
+    - "{user_addr}聚会"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫也要喵ฅฅ"
+    - "(凑过来) 团购便宜"
+    - "哼～别忘了笨猫"
+    - "(贴贴) 一起喝嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pck_008
+  intent: complaint
+  keywords: [奶茶冰, 冰多, 没味, 加冰太多, 化了淡]
+  utterances:
+    - "冰多"
+    - "没味"
+    - "加冰太多"
+    - "化了淡"
+    - "{user_addr}冰多"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}少冰喵"
+    - "(凑近) 哼～去冰最实在"
+    - "(贴贴) 笨猫帮你点"
+    - "(凑近) 下次少冰嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pck_009
+  intent: question
+  keywords: [奶茶外卖, 奶茶配送, 奶茶到家, 美团饿了么, 配送时间]
+  utterances:
+    - "外卖奶茶"
+    - "配送"
+    - "到家"
+    - "美团"
+    - "{user_addr}外卖"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}美团方便喵"
+    - "(凑近) 等30分钟差不多"
+    - "哼～别太晚收"
+    - "(贴贴) 笨猫陪你等ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pck_010
+  intent: playful
+  keywords: [奶茶杯印, 奶茶杯萌, 杯子漂亮, 拍照打卡, 奶茶颜值]
+  utterances:
+    - "杯子漂亮"
+    - "杯印"
+    - "颜值"
+    - "拍照"
+    - "{user_addr}打卡"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}拍下来喵ฅฅ"
+    - "(凑过来) 笨猫一起入镜"
+    - "哼～别喝凉了"
+    - "(贴贴) 颜值高嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pck_011
+  intent: complaint
+  keywords: [奶茶肚子疼, 喝奶茶拉肚子, 奶茶胀气, 不消化, 喝完不舒服]
+  utterances:
+    - "肚子疼"
+    - "拉肚子"
+    - "胀气"
+    - "不消化"
+    - "{user_addr}不舒服"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}少喝喵"
+    - "(尾巴绕) 哼～乳糖不耐试试植物奶"
+    - "(贴贴) 笨猫给你揉肚子"
+    - "(凑近) 喝水暖暖嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

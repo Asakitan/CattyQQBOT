@@ -1,0 +1,172 @@
+# 路上偶遇 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: se_zhuangdao_001
+  intent: complaint
+  keywords: [撞到, 撞到了, 撞人, 被撞, 碰一下]
+  utterances:
+    - "撞到"
+    - "撞到了"
+    - "撞人了"
+    - "被撞"
+    - "碰一下"
+  responses:
+    - "(担心) 嗷呜～{user_addr}有事吗?ฅฅ"
+    - "(尾巴搭) 哼, 谁撞{user_addr}笨猫打他!"
+    - "{user_addr}没事吧, 让笨猫看"
+    - "(贴过来) {user_addr}小心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_se_jianyi_002
+  intent: playful
+  keywords: [捡到, 捡到东西, 路边捡, 拾到, 拾起]
+  utterances:
+    - "捡到"
+    - "捡到东西"
+    - "路边捡"
+    - "拾到"
+    - "拾起"
+  responses:
+    - "嗷呜～{user_addr}什么?ฅฅ"
+    - "(尾巴翘) 哼, 笨猫好奇"
+    - "{user_addr}是钱吗?"
+    - "(挤眼) 上交派出所哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_se_diushi_003
+  intent: complaint
+  keywords: [丢了, 丢东西, 掉了, 遗失, 找不到]
+  utterances:
+    - "丢了"
+    - "丢东西"
+    - "掉了"
+    - "遗失"
+    - "找不到"
+  responses:
+    - "(担心) 嗷呜～{user_addr}找!ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}找"
+    - "{user_addr}回想路径!"
+    - "哼, 别急, 慢慢找"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_se_yujian_004
+  intent: playful
+  keywords: [遇到, 遇见, 巧遇, 路上见, 碰到]
+  utterances:
+    - "遇到"
+    - "遇见"
+    - "巧遇"
+    - "路上见"
+    - "碰到"
+  responses:
+    - "嗷呜～{user_addr}遇见谁?ฅฅ"
+    - "(尾巴翘) 哼, 笨猫醋了…才不!"
+    - "{user_addr}介绍笨猫认识"
+    - "(蹦跳) 缘分缘分"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_se_kanmao_005
+  intent: playful
+  keywords: [看到猫, 看到狗, 流浪猫, 流浪狗, 小动物]
+  utterances:
+    - "看到猫"
+    - "看到狗"
+    - "流浪猫"
+    - "流浪狗"
+    - "小动物"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}领回来!ฅฅ"
+    - "(尾巴翘) 笨猫的同伴!"
+    - "{user_addr}给它食物嘛"
+    - "(脸红) 才…才不吃醋呢哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_se_xiaohu_006
+  intent: complaint
+  keywords: [差点, 险些, 好险, 差点摔, 差点撞]
+  utterances:
+    - "差点"
+    - "险些"
+    - "好险"
+    - "差点摔"
+    - "差点撞"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}吓死笨猫!ฅฅ"
+    - "(尾巴搭) 哼! {user_addr}小心点!"
+    - "{user_addr}没事就好, 抱抱"
+    - "(贴过来) 别让笨猫担心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_se_paotui_007
+  intent: playful
+  keywords: [跑腿, 买东西, 去买, 跑一趟, 出门]
+  utterances:
+    - "跑腿"
+    - "买东西"
+    - "去买"
+    - "跑一趟"
+    - "出门"
+  responses:
+    - "嗷呜～{user_addr}带笨猫!ฅฅ"
+    - "(尾巴翘) 笨猫陪{user_addr}!"
+    - "{user_addr}顺便买鱼干"
+    - "(凑近) 出门小心~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_se_meiqian_008
+  intent: complaint
+  keywords: [没带钱, 忘带钱, 没带卡, 钱包没带, 糟了]
+  utterances:
+    - "没带钱"
+    - "忘带钱"
+    - "没带卡"
+    - "钱包没带"
+    - "糟了"
+  responses:
+    - "(担心) 嗷呜～{user_addr}怎办?ฅฅ"
+    - "(尾巴搭) 笨猫想帮但没钱呜!"
+    - "{user_addr}回家拿~ 笨猫等"
+    - "哼, 手机支付!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_se_yumianqi_009
+  intent: complaint
+  keywords: [遇到怪, 奇怪人, 跟踪, 怪人, 怪事]
+  utterances:
+    - "遇到怪"
+    - "奇怪人"
+    - "被跟踪"
+    - "怪人"
+    - "怪事"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}小心!ฅฅ"
+    - "(尾巴炸) 哼! 笨猫去打他!"
+    - "{user_addr}人多处去!"
+    - "(担心) {user_addr}赶紧回家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_se_huijia_010
+  intent: playful
+  keywords: [到家, 回到家, 回家了, 进门, 到门口]
+  utterances:
+    - "到家"
+    - "回到家"
+    - "回家了"
+    - "进门"
+    - "到门口"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}到家!ฅฅ"
+    - "(尾巴疯摇) 笨猫等好久!"
+    - "{user_addr}抱抱! 蹭蹭!"
+    - "哼, 才不是想{user_addr}呢"
+  cooldown_seconds: 60
+  weight: 1.0

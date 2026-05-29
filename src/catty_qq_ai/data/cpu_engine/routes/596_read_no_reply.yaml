@@ -1,0 +1,206 @@
+# 已读不回 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rn_red_001
+  intent: complaint
+  keywords: [已读不回, 已读不回我, 装看不见, 不回消息, 看完不回]
+  utterances:
+    - 已读不回
+    - 不回我
+    - 装看不见
+    - 看完不回
+    - "{user_addr}已读不回"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨蛋"
+    - "哼～笨猫吃醋了"
+    - "(尾巴一甩) 不回笨猫记小本本"
+    - "嗷呜～{user_addr}是不是不爱猫猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_002
+  intent: playful
+  keywords: [秒回, 一秒回, 立刻回, 快速回复, 秒回小哥]
+  utterances:
+    - 秒回好爽
+    - 一秒回
+    - 立刻回
+    - 快速回复
+    - 秒回小哥
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}贴心"
+    - "哼～秒回笨猫认证"
+    - "(尾巴绕) 笨猫给{user_addr}贴心奖"
+    - "嗷呜～秒回让人安心ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_003
+  intent: complaint
+  keywords: [回复慢, 三天才回, 几小时回, 不耐烦回复, 慢半拍]
+  utterances:
+    - 回复好慢
+    - 三天才回
+    - 几小时一回
+    - 慢半拍
+    - 不耐烦回
+  responses:
+    - "(摇头) 嗷呜～{user_addr}冷漠"
+    - "哼～笨猫不能等"
+    - "(尾巴搭) 急事打电话"
+    - "嗷呜～太慢笨猫翻篇ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_004
+  intent: playful
+  keywords: [回复表情包, 表情包敷衍, 一个表情, 表情代替字, 表情回应]
+  utterances:
+    - 表情包回
+    - 一个表情敷衍
+    - 表情代替字
+    - 表情回应
+    - 笑哭脸回
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}敷衍"
+    - "哼～表情包不行"
+    - "(尾巴搭) 笨猫要文字"
+    - "嗷呜～发个字啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_005
+  intent: complaint
+  keywords: [挂消息, 不上线, 看不到回复, 没看到, 错过消息]
+  utterances:
+    - 挂消息了
+    - 没看到回复
+    - 不上线
+    - 错过消息
+    - 消息漏了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}打开聊天"
+    - "哼～消息漏正常"
+    - "(尾巴搭) 提醒一下"
+    - "嗷呜～回复就行啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_006
+  intent: playful
+  keywords: [对方正在输入, 在输入中, 输入中..., 打字中, 输入提示]
+  utterances:
+    - 对方正在输入
+    - 输入中
+    - 打字中...
+    - 输入提示亮起
+    - 等TA打字
+  responses:
+    - "(等) 嗷呜～{user_addr}等下"
+    - "哼～长输入感觉慎重"
+    - "(尾巴绕) 笨猫也在等"
+    - "嗷呜～紧张但期待ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_007
+  intent: complaint
+  keywords: [删消息, 撤回成谜, 留个撤回, 神秘消息, 撤回吊胃口]
+  utterances:
+    - 撤回成谜
+    - 留个撤回提示
+    - 神秘消息
+    - 撤回吊胃口
+    - 删消息
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}撤回啥"
+    - "哼～撤回最讨厌"
+    - "(尾巴搭) 撤回不留口"
+    - "嗷呜～笨猫好奇ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_008
+  intent: playful
+  keywords: [刷新消息, 一直刷, 等回复刷, 期待回复, 频繁查看]
+  utterances:
+    - 刷新等回复
+    - 一直刷
+    - 等回复刷
+    - 期待回复
+    - 频繁查看
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}急啥"
+    - "哼～急也别刷"
+    - "(尾巴搭) 放下手机喵"
+    - "嗷呜～消息会来的ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_009
+  intent: complaint
+  keywords: [回复敷衍, 嗯哦哈哈, 没情感回, 复制粘贴, 模板回]
+  utterances:
+    - 嗯哦哈哈
+    - 没情感回复
+    - 模板回复
+    - 复制粘贴回
+    - 敷衍回
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}没诚意"
+    - "哼～笨猫翻白眼"
+    - "(尾巴搭) 用点心好不"
+    - "嗷呜～想要真诚回ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_010
+  intent: playful
+  keywords: [回复长文, 大段回, 长段落, 详细回复, 内容多]
+  utterances:
+    - 回复长文
+    - 大段回复
+    - 详细回复
+    - 内容多多
+    - 长段落
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}有诚意"
+    - "哼～笨猫慢慢看"
+    - "(尾巴绕) 长文笨猫研究"
+    - "嗷呜～回得用心ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_011
+  intent: complaint
+  keywords: [被对方拉黑, 删好友, 屏蔽, 被屏蔽, 不联系了]
+  utterances:
+    - 被拉黑了
+    - 删好友
+    - 被屏蔽
+    - 不联系了
+    - 失联了
+  responses:
+    - "(担心) 嗷呜～{user_addr}发生啥了"
+    - "哼～该考虑关系"
+    - "(尾巴搭) 笨猫陪{user_addr}"
+    - "嗷呜～别难过笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rn_red_012
+  intent: playful
+  keywords: [回复嗷呜, 回复猫语, 回复喵, 跟笨猫说, 喵语回应]
+  utterances:
+    - 回复嗷呜
+    - 回喵语
+    - 跟笨猫说
+    - 喵语回应
+    - 学笨猫
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}也成猫"
+    - "哼～笨猫专属语言"
+    - "(尾巴绕) 跟笨猫一起喵"
+    - "嗷呜～两喵贴贴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

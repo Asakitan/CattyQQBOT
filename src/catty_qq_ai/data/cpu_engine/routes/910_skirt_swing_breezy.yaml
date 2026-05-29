@@ -1,0 +1,172 @@
+# 裙摆摇摆 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sk_qunzi_001
+  intent: playful
+  keywords: [裙子飘飘, 裙摆, 风吹裙, 转一圈, 仙女裙]
+  utterances:
+    - "裙摆飘飘"
+    - "{user_addr}转一圈"
+    - "风吹裙"
+    - "仙女裙"
+    - "穿裙子"
+  responses:
+    - "(转) 嗷呜～{user_addr}笨猫陪你转! ฅฅ"
+    - "哼～裙子最自由"
+    - "(尾巴翘) 笨猫飘飘超萌"
+    - "猫猫想穿小裙子喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_changqun_001
+  intent: question
+  keywords: [长裙, 短裙, 中长裙, 半身裙, 连衣裙]
+  utterances:
+    - "长裙好看"
+    - "{user_addr}短裙清爽"
+    - "中长裙"
+    - "半身裙"
+    - "连衣裙"
+  responses:
+    - "(挑) 嗷呜～{user_addr}长裙气质 ฅฅ"
+    - "哼～连衣裙省事"
+    - "(尾巴卷) 短裙夏天必备"
+    - "猫猫推荐你都尝试喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_fengchui_001
+  intent: complaint
+  keywords: [风大裙翻, 玛丽莲, 走光, 穿安全裤, 按裙]
+  utterances:
+    - "风太大裙翻"
+    - "{user_addr}玛丽莲既视"
+    - "走光怕"
+    - "穿安全裤"
+    - "按裙"
+  responses:
+    - "(按) 嗷呜～{user_addr}笨猫帮你按! ฅฅ"
+    - "哼～风大穿打底"
+    - "(尾巴搭) 安全裤必须的"
+    - "猫猫陪你避风喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_qiunzhi_001
+  intent: question
+  keywords: [雪纺裙, 棉麻裙, 蕾丝裙, 牛仔裙, 材质对比]
+  utterances:
+    - "雪纺裙"
+    - "{user_addr}棉麻裙"
+    - "蕾丝裙"
+    - "牛仔裙"
+    - "材质对比"
+  responses:
+    - "(摸) 嗷呜～{user_addr}雪纺最仙 ฅฅ"
+    - "哼～棉麻文艺"
+    - "(尾巴卷) 蕾丝甜美"
+    - "猫猫推荐你雪纺+牛仔两件喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_yangba_001
+  intent: complaint
+  keywords: [裙子皱, 不耐穿, 起皱, 雪纺易皱, 熨烫]
+  utterances:
+    - "裙子皱"
+    - "{user_addr}雪纺易皱"
+    - "起皱"
+    - "熨烫"
+    - "不平整"
+  responses:
+    - "(熨斗) 嗷呜～{user_addr}笨猫给你熨 ฅฅ"
+    - "哼～挂烫机方便"
+    - "(尾巴扫) 出门前再熨"
+    - "猫猫帮你抚平喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_chouxian_001
+  intent: playful
+  keywords: [裙子显瘦, 收腰款, 显腰细, 裙子搭配, 显高]
+  utterances:
+    - "显瘦裙"
+    - "{user_addr}收腰款"
+    - "显腰细"
+    - "显高"
+    - "搭配显身材"
+  responses:
+    - "(看) 嗷呜～{user_addr}收腰显腰 ฅฅ"
+    - "哼～高腰显腿长"
+    - "(尾巴卷) 笨猫陪你试穿"
+    - "猫猫推荐A字裙喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_xiazhuang_001
+  intent: question
+  keywords: [夏装裙, 凉鞋搭裙, 帆布鞋裙, 鞋裙搭配, 鞋配裙]
+  utterances:
+    - "凉鞋搭裙"
+    - "{user_addr}鞋配裙"
+    - "帆布鞋裙"
+    - "鞋裙搭配"
+    - "夏装裙"
+  responses:
+    - "(指) 嗷呜～{user_addr}凉鞋+短裙超凉爽 ฅฅ"
+    - "哼～帆布鞋+长裙文艺"
+    - "(尾巴卷) 玛丽珍鞋甜美"
+    - "猫猫推荐你试三种搭配喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_chuanqun_001
+  intent: complaint
+  keywords: [腿粗不敢穿, 胖腿穿裙, 腿型差, 怕短, 怕暴露]
+  utterances:
+    - "腿粗不敢穿裙"
+    - "{user_addr}胖腿穿裙"
+    - "腿型差"
+    - "怕短"
+    - "暴露腿"
+  responses:
+    - "(鼓励) 嗷呜～{user_addr}腿不粗! ฅฅ"
+    - "哼～长裙遮"
+    - "(尾巴搭) 自信就行"
+    - "猫猫推荐你穿A字裙喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_yingyi_001
+  intent: complaint
+  keywords: [冬天穿裙冷, 冬季裙, 加棉裤, 厚打底, 保暖]
+  utterances:
+    - "冬天穿裙冷"
+    - "{user_addr}加棉袜"
+    - "厚打底"
+    - "保暖"
+    - "光腿神器"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}注意保暖 ฅฅ"
+    - "哼～光腿神器配长靴"
+    - "(尾巴卷) 加打底裤"
+    - "猫猫担心你冷喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sk_pi_001
+  intent: playful
+  keywords: [百褶裙, JK裙, 校园风, 学生裙, 经典款]
+  utterances:
+    - "百褶裙"
+    - "{user_addr}JK裙"
+    - "校园风"
+    - "学生裙"
+    - "经典百褶"
+  responses:
+    - "(摸) 嗷呜～{user_addr}笨猫想要JK ฅฅ"
+    - "哼～百褶永远经典"
+    - "(尾巴卷) 笨猫穿百褶超萌"
+    - "猫猫陪你选JK喵~"
+  cooldown_seconds: 60
+  weight: 1.0

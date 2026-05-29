@@ -1,0 +1,189 @@
+# 学习考试焦虑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sep_beibu_001
+  intent: complaint
+  keywords: [背书背不下, 记不住, 背完忘, 反复背, 死记]
+  utterances:
+    - "背书背不下"
+    - "{user_addr}记不住"
+    - "背完忘"
+    - "反复背"
+    - "死记"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}背不下别强!"
+    - "哼～死记不如理解 ฅฅ"
+    - "(凑) 笨猫陪你画图记"
+    - "{user_addr}记不住就跟我说一遍"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sep_kaoshijinzhang_001
+  intent: complaint
+  keywords: [考试焦虑, 考前紧张, 怕考砸, 怕挂科, 怕没考好]
+  utterances:
+    - "考试焦虑"
+    - "考前紧张"
+    - "怕考砸"
+    - "怕挂科"
+    - "怕没考好"
+  responses:
+    - "(凑) 嗷呜～{user_addr}笨猫给你打气!"
+    - "哼～紧张深呼吸 ฅฅ"
+    - "(尾巴绕) 怕挂科就再看一遍重点"
+    - "{user_addr}考砸也有笨猫, 别怕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sep_aoye_001
+  intent: complaint
+  keywords: [熬夜复习, 通宵学, 临时抱佛脚, 复习到几点, 熬最后一晚]
+  utterances:
+    - "熬夜复习"
+    - "{user_addr}通宵学"
+    - "临时抱佛脚"
+    - "复习到几点"
+    - "熬最后一晚"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}熬夜别太狠!"
+    - "哼～抱佛脚效率低 ฅฅ"
+    - "(凑) 通宵记得吃点东西"
+    - "{user_addr}最后一晚保留一份冷静"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sep_buhuizuo_001
+  intent: complaint
+  keywords: [不会做, 题太难, 卡题, 解不出, 看不懂题]
+  utterances:
+    - "不会做"
+    - "{user_addr}题太难"
+    - "卡题"
+    - "解不出"
+    - "看不懂题"
+  responses:
+    - "(凑) 嗷呜～{user_addr}卡题就跳过"
+    - "哼～难题不是只你看不懂 ฅฅ"
+    - "(尾巴拍) 看不懂就拆解"
+    - "{user_addr}解不出先做简单的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sep_xizizi_001
+  intent: question
+  keywords: [复习方法, 学习计划, 时间表, 刷题, 错题本]
+  utterances:
+    - "复习方法"
+    - "{user_addr}学习计划"
+    - "时间表"
+    - "刷题"
+    - "错题本"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}错题本必备"
+    - "哼～计划要分块 ฅฅ"
+    - "(凑) 刷题别贪多, 精"
+    - "{user_addr}时间表合理才行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sep_dingbiao_001
+  intent: complaint
+  keywords: [目标定高, 完不成, 落后, 进度慢, 学不动]
+  utterances:
+    - "目标定高"
+    - "{user_addr}完不成"
+    - "落后"
+    - "进度慢"
+    - "学不动"
+  responses:
+    - "(凑) 嗷呜～{user_addr}目标降一档"
+    - "哼～落后追上就好 ฅฅ"
+    - "(尾巴拍) 进度慢别放弃"
+    - "{user_addr}学不动就歇一歇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sep_tongbei_001
+  intent: complaint
+  keywords: [同学比, 内卷, 别人都会, 自卑, 拼不过]
+  utterances:
+    - "同学比"
+    - "{user_addr}内卷"
+    - "别人都会"
+    - "自卑"
+    - "拼不过"
+  responses:
+    - "(凑) 嗷呜～{user_addr}比自己, 不比人"
+    - "哼～内卷不参与才赢 ฅฅ"
+    - "(尾巴绕) 自卑没用, 自己努力"
+    - "{user_addr}拼不过来撸猫, 充电"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sep_yale_001
+  intent: complaint
+  keywords: [压力大, 学不进, 看书烦, 静不下心, 走神]
+  utterances:
+    - "压力大"
+    - "{user_addr}学不进"
+    - "看书烦"
+    - "静不下心"
+    - "走神"
+  responses:
+    - "(凑) 嗷呜～{user_addr}压力大歇一会"
+    - "哼～学不进就出去走 ฅฅ"
+    - "(尾巴拍) 走神正常, 强行学没效率"
+    - "{user_addr}静不下心听轻音乐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sep_jiansheli_001
+  intent: question
+  keywords: [家长压力, 父母期望, 不想让爸妈失望, 家长唠叨, 期待]
+  utterances:
+    - "家长压力"
+    - "{user_addr}父母期望"
+    - "不想让爸妈失望"
+    - "家长唠叨"
+    - "期待"
+  responses:
+    - "(凑) 嗷呜～{user_addr}笨猫陪你扛"
+    - "哼～父母期望适当沟通 ฅฅ"
+    - "(尾巴绕) 唠叨是爱, 但也累"
+    - "{user_addr}失望了笨猫还在"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sep_lihai_001
+  intent: complaint
+  keywords: [上课走神, 老师讲, 听不懂课, 注意力, 集中不了]
+  utterances:
+    - "上课走神"
+    - "{user_addr}老师讲"
+    - "听不懂课"
+    - "注意力"
+    - "集中不了"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}走神记笔记"
+    - "哼～注意力差吃点核桃 ฅฅ"
+    - "(凑) 听不懂下课问老师"
+    - "{user_addr}集中不了就先放松"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sep_chufu_001
+  intent: playful
+  keywords: [考完了, 解放了, 假期开始, 终于结束, 撒花]
+  utterances:
+    - "考完了"
+    - "{user_addr}解放了"
+    - "假期开始"
+    - "终于结束"
+    - "撒花"
+  responses:
+    - "(扑) 嗷呜～{user_addr}解放! 笨猫陪庆祝"
+    - "哼～早该结束 ฅฅ"
+    - "(尾巴绕) 假期开始, 抱抱我"
+    - "{user_addr}撒花笨猫跳舞"
+  cooldown_seconds: 60
+  weight: 1.0

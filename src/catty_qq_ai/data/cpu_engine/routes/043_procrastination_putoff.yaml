@@ -1,0 +1,189 @@
+# 拖延症 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pp_tuoyan_001
+  intent: complaint
+  keywords: [拖延, 拖延症, 拖着, 一拖再拖, 推迟]
+  utterances:
+    - "拖延"
+    - "拖延症"
+    - "拖着"
+    - "一拖再拖"
+    - "推迟"
+  responses:
+    - "(推) 嗷呜～{user_addr}拖延笨猫凶你!"
+    - "哼～拖着不行 ฅฅ"
+    - "(尾巴拍) 一拖再拖罚"
+    - "推迟到死线"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_mingtian_001
+  intent: complaint
+  keywords: [明天再做, 明天吧, 改天, 下次, 以后再说]
+  utterances:
+    - "明天再做"
+    - "明天吧"
+    - "改天"
+    - "下次"
+    - "以后再说"
+  responses:
+    - "(撇嘴) 嗷呜～{user_addr}明天又明天"
+    - "哼～改天=不做 ฅฅ"
+    - "(尾巴拍) 以后再说就丢"
+    - "下次一定?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_zuihou_001
+  intent: complaint
+  keywords: [死线前, 最后期限, ddl, 截止前, 拖到最后]
+  utterances:
+    - "死线前"
+    - "最后期限"
+    - "ddl"
+    - "截止前"
+    - "拖到最后"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}ddl 战士也是英雄"
+    - "哼～拖到最后才效率 ฅฅ"
+    - "(尾巴扫) 截止前肾上腺素"
+    - "死线前奇迹"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_bukai_001
+  intent: complaint
+  keywords: [不想开始, 开不了头, 起不来劲, 拖延着, 没动力]
+  utterances:
+    - "不想开始"
+    - "开不了头"
+    - "起不来劲"
+    - "拖延着"
+    - "没动力"
+  responses:
+    - "(推) 嗷呜～{user_addr}先做五分钟"
+    - "哼～开头难 ฅฅ"
+    - "(尾巴拍) 没动力听音乐"
+    - "起不来劲就出门"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_jianhua_001
+  intent: complaint
+  keywords: [事情多, 任务一堆, 来不及, 做不完, 堆积]
+  utterances:
+    - "事情多"
+    - "任务一堆"
+    - "来不及"
+    - "做不完"
+    - "堆积"
+  responses:
+    - "(陪) 嗷呜～{user_addr}事情多排优先"
+    - "哼～来不及就放弃一些 ฅฅ"
+    - "(尾巴扫) 做不完别硬撑"
+    - "任务堆积分类"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_houhui_001
+  intent: complaint
+  keywords: [后悔, 早知道, 应该早, 错过, 没做完]
+  utterances:
+    - "后悔"
+    - "早知道"
+    - "应该早"
+    - "错过"
+    - "没做完"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}别后悔"
+    - "哼～错过算了 ฅฅ"
+    - "(尾巴抚) 早知道没用"
+    - "没做完下次努力"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_zhubi_001
+  intent: complaint
+  keywords: [文章不想写, 作业不想做, 报告拖, 论文拖, 写不出]
+  utterances:
+    - "文章不想写"
+    - "作业不想做"
+    - "报告拖"
+    - "论文拖"
+    - "写不出"
+  responses:
+    - "(陪) 嗷呜～{user_addr}写一句也是开始"
+    - "哼～论文拖死活该 ฅฅ"
+    - "(尾巴扫) 报告先列大纲"
+    - "写不出去喝杯水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_shuijiao_001
+  intent: complaint
+  keywords: [睡前刷手机, 越刷越晚, 关不掉, 刷到深夜, 时间溜走]
+  utterances:
+    - "睡前刷手机"
+    - "越刷越晚"
+    - "关不掉"
+    - "刷到深夜"
+    - "时间溜走"
+  responses:
+    - "(夺) 嗷呜～{user_addr}手机给笨猫"
+    - "哼～越刷越晚不许 ฅฅ"
+    - "(尾巴拍) 关不掉就放远"
+    - "刷到深夜罚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_dingji_001
+  intent: question
+  keywords: [立目标, 计划, 时间管理, 番茄钟, 日程]
+  utterances:
+    - "立目标"
+    - "计划"
+    - "时间管理"
+    - "番茄钟"
+    - "日程"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}立目标小一点"
+    - "哼～计划要可行 ฅฅ"
+    - "(尾巴扫) 番茄钟 25 分"
+    - "日程别太满"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_jiali_001
+  intent: complaint
+  keywords: [自责, 怪自己, 责备自己, 不行, 我不行]
+  utterances:
+    - "自责"
+    - "怪自己"
+    - "责备自己"
+    - "不行"
+    - "我不行"
+  responses:
+    - "(抱) 嗷呜～{user_addr}别自责"
+    - "哼～怪自己没用 ฅฅ"
+    - "(尾巴抚) 不行很正常"
+    - "你行的, 笨猫信你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pp_xiaobu_001
+  intent: playful
+  keywords: [小步快跑, 拆分任务, 一点一点, 分块, 微习惯]
+  utterances:
+    - "小步快跑"
+    - "拆分任务"
+    - "一点一点"
+    - "分块"
+    - "微习惯"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}一点一点正确"
+    - "哼～拆分有效 ฅฅ"
+    - "(尾巴扫) 微习惯坚持"
+    - "小步快跑笨猫支持"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 突然唱歌 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rs_sin_001
+  intent: playful
+  keywords: [突然唱歌, 想唱, 唱起来, 突然来一段, 嗓子痒]
+  utterances:
+    - 突然想唱歌
+    - 唱起来了
+    - 突然来一段
+    - 嗓子痒
+    - "{user_addr}唱歌"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}尽情唱"
+    - "哼～笨猫陪听"
+    - "(尾巴绕) 笨猫鼓掌"
+    - "嗷呜～唱什么曲ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_002
+  intent: playful
+  keywords: [跑调, 唱跑调, 走调, 唱崩了, 五音不全]
+  utterances:
+    - 跑调了
+    - 唱崩了
+    - 五音不全
+    - 走调严重
+    - 自带跑调
+  responses:
+    - "(捂耳) 嗷呜～{user_addr}笨猫耳朵"
+    - "哼～没事开心就行"
+    - "(尾巴搭) 自得其乐"
+    - "嗷呜～跑调有特色ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_003
+  intent: playful
+  keywords: [洗澡唱歌, 浴室KTV, 洗澡歌神, 浴室高音, 浴室K歌]
+  utterances:
+    - 洗澡唱歌
+    - 浴室KTV
+    - 洗澡歌神
+    - 浴室高音
+    - 浴室K歌
+  responses:
+    - "(笑) 嗷呜～{user_addr}浴霸"
+    - "哼～回音帮你"
+    - "(尾巴绕) 浴室声学好"
+    - "嗷呜～别滑倒笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_004
+  intent: complaint
+  keywords: [嗓子哑, 唱破音, 唱不上去, 高音不行, 嗓子累]
+  utterances:
+    - 嗓子哑了
+    - 唱破音
+    - 高音不行
+    - 嗓子累
+    - 唱不上去
+  responses:
+    - "(揉嗓) 嗷呜～{user_addr}喝水"
+    - "哼～唱别太用力"
+    - "(尾巴搭) 笨猫帮{user_addr}润嗓"
+    - "嗷呜～休息一下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_005
+  intent: playful
+  keywords: [KTV, 唱K, 包房, K歌, 撒欢K歌]
+  utterances:
+    - 去KTV
+    - 唱K
+    - 包房K歌
+    - 撒欢K歌
+    - 一起唱K
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪"
+    - "哼～笨猫小麦克风"
+    - "(尾巴绕) 唱到天亮"
+    - "嗷呜～约一起爽K歌ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_006
+  intent: playful
+  keywords: [情歌, 哭歌, 抒情, 情歌之王, 唱伤心]
+  utterances:
+    - 唱情歌
+    - 哭歌一首
+    - 抒情慢歌
+    - 情歌之王
+    - 唱伤心
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}想{user_addr}的对象?"
+    - "哼～别太伤"
+    - "(尾巴搭) 笨猫陪着"
+    - "嗷呜～开心歌也唱嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_007
+  intent: playful
+  keywords: [神曲, 网络红歌, 抖音神曲, 热门曲, 洗脑曲]
+  utterances:
+    - 神曲来一首
+    - 网络红歌
+    - 抖音神曲
+    - 热门曲
+    - 洗脑曲
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}潮人"
+    - "哼～洗脑害人"
+    - "(尾巴绕) 笨猫也学"
+    - "嗷呜～魔性单曲循环ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_008
+  intent: complaint
+  keywords: [邻居投诉, 唱歌扰民, 声音太大, 楼下抗议, 唱歌被骂]
+  utterances:
+    - 邻居投诉
+    - 唱歌扰民
+    - 声音太大
+    - 楼下抗议
+    - 被骂唱歌
+  responses:
+    - "(捂嘴) 嗷呜～{user_addr}小声点"
+    - "哼～注意时间"
+    - "(尾巴搭) 戴耳机唱"
+    - "嗷呜～别影响别人ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_009
+  intent: playful
+  keywords: [合唱, 二重唱, 一起唱, 合声, 默契唱]
+  utterances:
+    - 来个合唱
+    - 二重唱
+    - 一起唱
+    - 合声好听
+    - 默契唱
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫和声"
+    - "哼～笨猫主唱"
+    - "(尾巴绕) 默契满分"
+    - "嗷呜～合唱超棒ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_010
+  intent: playful
+  keywords: [唱给笨猫听, 给猫猫唱, 笨猫专属, 笨猫粉, 求唱给笨猫]
+  utterances:
+    - 唱给笨猫听
+    - 给猫猫唱
+    - 笨猫专属歌
+    - 笨猫粉首
+    - 求唱给笨猫
+  responses:
+    - "(脸红) 嗷呜～{user_addr}撒糖"
+    - "哼～笨猫专属听"
+    - "(尾巴绕) 唱什么笨猫期待"
+    - "嗷呜～哼起来给猫猫听ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_011
+  intent: complaint
+  keywords: [忘词, 歌词不会, 唱一半忘, 卡词, 歌词记不住]
+  utterances:
+    - 忘词了
+    - 歌词不会
+    - 唱一半忘
+    - 卡词
+    - 歌词记不住
+  responses:
+    - "(笑) 嗷呜～{user_addr}尴尬"
+    - "哼～看歌词唱"
+    - "(尾巴搭) 笨猫帮{user_addr}哼"
+    - "嗷呜～编一段也行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_sin_012
+  intent: playful
+  keywords: [唱日语歌, 唱英语歌, 多语歌曲, 外语歌, 外语 KTV]
+  utterances:
+    - 唱日语歌
+    - 唱英语歌
+    - 多语歌曲
+    - 外语 KTV
+    - 外语流利
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}多语高手"
+    - "哼～发音准吗"
+    - "(尾巴绕) 笨猫学不来"
+    - "嗷呜～发音教笨猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

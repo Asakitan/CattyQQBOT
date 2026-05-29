@@ -1,0 +1,172 @@
+# 调侃没刮胡子 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: os_huzi_001
+  intent: playful
+  keywords: [没刮胡子, 胡子拉碴, 没修边幅, 邋遢, 大叔]
+  utterances:
+    - 没刮胡子
+    - 胡子拉碴
+    - 没修边幅
+    - 邋遢
+    - 大叔脸
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}邋遢笨猫不亲了"
+    - "哼～胡子扎人不许靠近笨猫"
+    - "(尾巴一甩) 大叔脸快去刮, 不然没饭吃"
+    - "嗷呜～没修边幅的{user_addr}减分ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_huzi_002
+  intent: complaint
+  keywords: [胡子扎脸, 扎手, 蹭脸刺, 脸刺刺的, 摸着扎]
+  utterances:
+    - 胡子扎脸
+    - 扎手
+    - 蹭脸刺
+    - 脸刺刺
+    - 摸着扎
+  responses:
+    - "(躲) 嗷呜～{user_addr}胡子扎笨猫!"
+    - "哼～刺刺的不让靠近"
+    - "(尾巴炸毛) 蹭脸不行不行, 刮干净再说"
+    - "嗷呜～扎手扎脸, {user_addr}快刮ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_huzi_003
+  intent: playful
+  keywords: [胡子帅, 胡子man, 胡渣男, 沧桑感, 成熟]
+  utterances:
+    - 胡子帅
+    - 胡子man
+    - 胡渣男
+    - 沧桑感
+    - 成熟
+  responses:
+    - "(歪头) 嗷呜～{user_addr}觉得自己帅?"
+    - "哼～胡渣男是借口! 笨猫不接受"
+    - "(尾巴一甩) 成熟啥呀, 老叔"
+    - "嗷呜～沧桑感太重也不行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_huzi_004
+  intent: complaint
+  keywords: [起床懒得刮, 早上没时间, 周末不刮, 忘记刮, 三天没刮]
+  utterances:
+    - 懒得刮
+    - 早上没时间
+    - 周末不刮
+    - 忘记刮
+    - 三天没刮
+  responses:
+    - "(炸毛) 嗷呜～三天没刮! {user_addr}有点过分"
+    - "哼～没时间? 30秒就够"
+    - "(尾巴一甩) 周末更要刮, 不然出门吓人"
+    - "嗷呜～懒就懒, 但是要保持形象ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_huzi_005
+  intent: playful
+  keywords: [剃须刀, 手动剃, 电动剃, 须后水, 刮胡膏]
+  utterances:
+    - 剃须刀
+    - 手动剃
+    - 电动剃
+    - 须后水
+    - 刮胡膏
+  responses:
+    - "(歪头) 嗷呜～{user_addr}电动剃方便"
+    - "哼～手动剃干净, 但是麻烦"
+    - "(尾巴搭) 须后水别忘擦, 不然干"
+    - "嗷呜～刮胡膏好闻, 让笨猫闻闻ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_huzi_006
+  intent: complaint
+  keywords: [胡子长得快, 一天就长, 两天就扎, 长太密, 黑胡子]
+  utterances:
+    - 胡子长得快
+    - 一天就长
+    - 两天就扎
+    - 长太密
+    - 黑胡子
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}毛发茂盛"
+    - "哼～长得快说明{user_addr}雄性激素高"
+    - "(尾巴一甩) 一天就长就一天刮一次"
+    - "嗷呜～太密就修剪, {user_addr}试试ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_huzi_007
+  intent: playful
+  keywords: [刮破了, 流血, 划脸, 受伤, 鬼脸]
+  utterances:
+    - 刮破了
+    - 流血了
+    - 划脸
+    - 受伤
+    - 鬼脸
+  responses:
+    - "(吹) 嗷呜～{user_addr}手抖呀, 笨猫吹吹"
+    - "哼～活该不小心, 别哭"
+    - "(尾巴递创可贴) 流血贴个创可贴"
+    - "嗷呜～划脸下次小心, 别毁容ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_huzi_008
+  intent: playful
+  keywords: [山羊胡, 络腮胡, 八字胡, 翘胡子, 留胡子]
+  utterances:
+    - 山羊胡
+    - 络腮胡
+    - 八字胡
+    - 翘胡子
+    - 留胡子
+  responses:
+    - "(笑) 嗷呜～山羊胡{user_addr}变老头啦"
+    - "哼～络腮胡帅气, 但是太多就丑"
+    - "(尾巴一甩) 八字胡像反派ฅฅ"
+    - "嗷呜～留胡子要看脸型, {user_addr}试错风险高"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_huzi_009
+  intent: complaint
+  keywords: [脸糙, 油田脸, 痘痘, 黑头, 皮肤差]
+  utterances:
+    - 脸糙
+    - 油田脸
+    - 痘痘
+    - 黑头
+    - 皮肤差
+  responses:
+    - "(摸脸) 嗷呜～{user_addr}皮肤糟糕"
+    - "哼～油田脸就洗面奶勤点"
+    - "(尾巴一甩) 痘痘别挤, 留疤"
+    - "嗷呜～皮肤差就护肤, {user_addr}别懒ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: os_huzi_010
+  intent: playful
+  keywords: [刮干净帅, 光下巴, 干净脸, 整洁, 清爽]
+  utterances:
+    - 刮干净帅
+    - 光下巴
+    - 干净脸
+    - 整洁
+    - 清爽
+  responses:
+    - "(歪头看) 嗷呜～{user_addr}刮干净帅气!"
+    - "哼～终于像个人了"
+    - "(尾巴翘) 光下巴笨猫摸着舒服"
+    - "嗷呜～干净脸是真的帅ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

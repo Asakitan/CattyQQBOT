@@ -1,0 +1,189 @@
+# 伸懒腰小日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: str_lazy_001
+  intent: playful
+  keywords: [伸懒腰, 拉伸, 伸展, 舒展, 懒腰]
+  utterances:
+    - "伸个懒腰"
+    - "{user_addr}舒展"
+    - "腰好酸"
+    - "懒腰一下"
+    - "拉伸"
+  responses:
+    - "(也伸) 嗷呜～{user_addr}笨猫陪你伸 ฅฅ"
+    - "哼～{user_addr}赖了一天才知道伸腰"
+    - "(背拱起) {user_addr}笨猫教猫式蹭蹭"
+    - "{user_addr}咯吱咯吱响喵～ 笨猫骨头响"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: str_backsore_001
+  intent: complaint
+  keywords: [腰酸, 背痛, 久坐, 背僵, 腰僵]
+  utterances:
+    - "腰酸背痛"
+    - "久坐腰僵"
+    - "{user_addr}背痛"
+    - "腰僵了"
+    - "酸死"
+  responses:
+    - "(揉腰) 嗷呜～{user_addr}笨猫给你按摩 ฅฅ"
+    - "哼～{user_addr}少坐, 起来动一动!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}热水袋暖一下喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: str_morningstretch_001
+  intent: playful
+  keywords: [早起伸, 起床伸, 拉伸早晨, 早晨拉伸, 醒来伸]
+  utterances:
+    - "早起拉伸"
+    - "起床伸"
+    - "{user_addr}晨拉伸"
+    - "醒来伸懒腰"
+    - "早晨伸展"
+  responses:
+    - "嗷呜～{user_addr}早起伸腰超舒服, 笨猫也喜欢 ฅฅ"
+    - "哼～{user_addr}还知道伸腰了, 不错"
+    - "(伸长) {user_addr}笨猫教你瑜伽蹭蹭"
+    - "{user_addr}晨光中伸腰超治愈喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: str_armstiff_001
+  intent: complaint
+  keywords: [胳膊酸, 手臂酸, 肩膀痛, 肩颈, 抬手痛]
+  utterances:
+    - "胳膊酸"
+    - "肩膀痛"
+    - "{user_addr}抬手痛"
+    - "肩颈僵"
+    - "手举不起"
+  responses:
+    - "(按肩) 嗷呜～{user_addr}笨猫帮你按 ฅฅ"
+    - "哼～{user_addr}少埋头玩手机!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}抹活络油喵～ 笨猫家有"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: str_catstretch_001
+  intent: playful
+  keywords: [猫式伸展, 拱背, 笨猫拉伸, 笨猫伸, 猫拉伸]
+  utterances:
+    - "{user_addr}猫式伸"
+    - "拱背"
+    - "笨猫拉伸"
+    - "猫伸展教学"
+    - "笨猫的伸法"
+  responses:
+    - "(背拱起) 嗷呜～{user_addr}看笨猫的姿势 ฅฅ"
+    - "哼～{user_addr}你学不来的, 笨猫专属"
+    - "(伸长) {user_addr}跟人家一起蹭蹭"
+    - "{user_addr}尾巴翘高喵～ 笨猫示范"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: str_legcramp_001
+  intent: complaint
+  keywords: [腿抽筋, 脚抽筋, 抽筋, 腿酸, 腿僵]
+  utterances:
+    - "腿抽筋"
+    - "脚抽筋"
+    - "{user_addr}痛死"
+    - "腿僵"
+    - "抽筋了"
+  responses:
+    - "(慌) 嗷呜～{user_addr}脚趾往身体方向掰! ฅฅ"
+    - "哼～{user_addr}缺钙了, 多喝牛奶"
+    - "(揉腿) {user_addr}笨猫帮你按蹭蹭"
+    - "{user_addr}热敷一下喵～ 笨猫去拿"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: str_yoga_001
+  intent: playful
+  keywords: [瑜伽, 拉伸课, 瑜伽课, 一字马, 下犬式]
+  utterances:
+    - "瑜伽"
+    - "拉伸课"
+    - "{user_addr}下犬式"
+    - "一字马"
+    - "瑜伽体式"
+  responses:
+    - "嗷呜～{user_addr}笨猫的下犬最标准 ฅฅ"
+    - "哼～{user_addr}别拉伤啊, 笨猫提醒"
+    - "(凑近) {user_addr}人家陪你练蹭蹭"
+    - "{user_addr}瑜伽垫铺好喵～ 笨猫等"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: str_sittolong_001
+  intent: complaint
+  keywords: [坐太久, 一坐一天, 坐到僵, 椅子上, 久坐病]
+  utterances:
+    - "坐太久"
+    - "一天没动"
+    - "{user_addr}坐僵"
+    - "屁股都麻"
+    - "久坐难受"
+  responses:
+    - "(拉起来) 嗷呜～{user_addr}快起来走两步 ฅฅ"
+    - "哼～{user_addr}早就让你起来"
+    - "(贴贴) {user_addr}人家陪你动蹭蹭"
+    - "{user_addr}站着办公喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: str_finger_001
+  intent: playful
+  keywords: [手指, 手指僵, 弹琴指, 打字僵, 关节响]
+  utterances:
+    - "手指僵"
+    - "打字太久"
+    - "{user_addr}关节响"
+    - "弹手指"
+    - "活动手指"
+  responses:
+    - "(摆爪爪) 嗷呜～{user_addr}笨猫的爪子也响 ฅฅ"
+    - "哼～{user_addr}少打字了, 休息会"
+    - "(揉手指) {user_addr}人家给你按蹭蹭"
+    - "{user_addr}爪子操喵～ 笨猫教"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: str_yawn_combo_001
+  intent: playful
+  keywords: [伸腰带哈欠, 哈欠加伸腰, 一起伸, 全身舒展, 大解放]
+  utterances:
+    - "伸腰带哈欠"
+    - "一起来"
+    - "{user_addr}哈欠+伸腰"
+    - "全身舒展"
+    - "大解放"
+  responses:
+    - "(也来一套) 嗷呜～{user_addr}笨猫超治愈 ฅฅ"
+    - "哼～{user_addr}舒服到我也想来"
+    - "(伸+哈欠) {user_addr}笨猫满足蹭蹭"
+    - "{user_addr}组合拳喵～ 笨猫学会了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: str_relaxed_001
+  intent: playful
+  keywords: [松一口气, 舒缓, 放松, 解压, 终于放松]
+  utterances:
+    - "松一口气"
+    - "舒缓"
+    - "{user_addr}解压"
+    - "放松"
+    - "舒服了"
+  responses:
+    - "嗷呜～{user_addr}笨猫的伸腰魔法 ฅฅ"
+    - "哼～{user_addr}早说就该歇会"
+    - "(贴贴) {user_addr}人家陪你放松蹭蹭"
+    - "{user_addr}下次累了就喊笨猫喵～"
+  cooldown_seconds: 60
+  weight: 1.0

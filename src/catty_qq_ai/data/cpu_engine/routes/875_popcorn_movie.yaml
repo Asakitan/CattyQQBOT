@@ -1,0 +1,189 @@
+# 爆米花看电影 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pcr_mov_001
+  intent: playful
+  keywords: [爆米花, 看电影, 影院吃零食, 大桶爆米花, 焦糖爆米花]
+  utterances:
+    - "爆米花"
+    - "看电影"
+    - "大桶"
+    - "焦糖味"
+    - "{user_addr}爆米花"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪你看ฅฅ"
+    - "(凑过来) 焦糖最香"
+    - "哼～别一个人吃完"
+    - "(贴贴) 分笨猫嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcr_mov_002
+  intent: complaint
+  keywords: [爆米花贵, 影院贵, 一桶几十, 加价, 影院零食]
+  utterances:
+    - "爆米花贵"
+    - "影院贵"
+    - "一桶几十"
+    - "加价"
+    - "{user_addr}贵"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}带零食喵"
+    - "(凑近) 哼～影院宰人"
+    - "(贴贴) 笨猫帮你藏零食"
+    - "(凑近) 自家做嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcr_mov_003
+  intent: playful
+  keywords: [电影院约会, 情侣看电影, 牵手观影, 黑暗中, 浪漫电影]
+  utterances:
+    - "情侣电影"
+    - "牵手"
+    - "黑暗中"
+    - "浪漫电影"
+    - "{user_addr}约会"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫坐你旁边ฅฅ"
+    - "(凑过来) 哼～才不是约会"
+    - "(贴贴) 牵手看电影嗷"
+    - "(凑近) 笨猫帮你拿爆米花喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcr_mov_004
+  intent: complaint
+  keywords: [爆米花咸, 没味道, 太咸, 太甜, 口味不对]
+  utterances:
+    - "太咸"
+    - "太甜"
+    - "没味道"
+    - "口味不对"
+    - "{user_addr}爆米花咸"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}换口味喵"
+    - "(凑近) 哼～原味淡"
+    - "(贴贴) 笨猫帮你倒"
+    - "(凑近) 下次试焦糖嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcr_mov_005
+  intent: playful
+  keywords: [电影推荐, 票房好, 最近大片, 推荐电影, 想看的电影]
+  utterances:
+    - "电影推荐"
+    - "票房好"
+    - "最近大片"
+    - "想看"
+    - "{user_addr}推荐"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫推荐喵"
+    - "(凑近) 看豆瓣高分"
+    - "哼～别选烂片"
+    - "(贴贴) 一起看嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcr_mov_006
+  intent: complaint
+  keywords: [电影院吵, 旁边小孩闹, 噪音, 看电影吃东西响, 烦影厅]
+  utterances:
+    - "影院吵"
+    - "小孩闹"
+    - "吃东西响"
+    - "噪音"
+    - "{user_addr}烦"
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}耳朵疼"
+    - "(尾巴炸) 哼～没素质"
+    - "(贴贴) 笨猫陪你忍"
+    - "(凑近) 跟工作人员说嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcr_mov_007
+  intent: question
+  keywords: [电影票, 买票, 线上购票, 选座, 电影院座位]
+  utterances:
+    - "买电影票"
+    - "线上购票"
+    - "选座"
+    - "电影院座位"
+    - "{user_addr}买票"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}猫眼APP喵"
+    - "(凑近) 选中后排居中位"
+    - "哼～提前买便宜"
+    - "(贴贴) 笨猫陪你选嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcr_mov_008
+  intent: playful
+  keywords: [家庭影院, 家里看电影, 投影仪, 投影看, 客厅大屏]
+  utterances:
+    - "家里看"
+    - "投影仪"
+    - "客厅大屏"
+    - "家庭影院"
+    - "{user_addr}家影院"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪你家看ฅฅ"
+    - "(凑过来) 投影仪舒服"
+    - "哼～家里不用挤"
+    - "(贴贴) 一起窝沙发嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcr_mov_009
+  intent: complaint
+  keywords: [爆米花卡牙, 牙缝卡, 玉米屑, 牙线, 卡半天]
+  utterances:
+    - "卡牙"
+    - "玉米屑"
+    - "牙缝"
+    - "卡半天"
+    - "{user_addr}卡牙"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}用牙线喵"
+    - "(尾巴绕) 哼～小心牙"
+    - "(贴贴) 笨猫给你递牙线"
+    - "(凑近) 漱口嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcr_mov_010
+  intent: playful
+  keywords: [电影笑点, 笑出爆米花, 喷出来, 笑死, 笑场]
+  utterances:
+    - "笑出爆米花"
+    - "喷出来"
+    - "笑死"
+    - "笑场"
+    - "{user_addr}笑点"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笑出八块腹肌喵ฅฅ"
+    - "(凑过来) 笨猫陪你笑"
+    - "哼～别喷到别人"
+    - "(贴贴) 笑死嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcr_mov_011
+  intent: complaint
+  keywords: [电影哭点, 哭花妆, 抽纸, 哭红眼, 感人电影]
+  utterances:
+    - "哭花妆"
+    - "抽纸"
+    - "红眼"
+    - "感人电影"
+    - "{user_addr}哭"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}抱抱喵"
+    - "(尾巴绕) 哼～电影故意虐"
+    - "(贴贴) 笨猫给你纸巾"
+    - "(凑近) 别哭嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 铲屎官归来 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: shr_back_home_001
+  intent: playful
+  keywords: [回来了, 回家了, 我到家, 回家ing, 进门]
+  utterances:
+    - "回来了"
+    - "{user_addr}回家了"
+    - "我到家"
+    - "回家ing"
+    - "进门"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}回来啦! 笨猫扑!"
+    - "(尾巴狂摇) 哼! 等好久了!"
+    - "(撒娇) 回家就要抱~ ฅฅ"
+    - "嘿嘿～回来的{user_addr}, 笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_wait_long_001
+  intent: complaint
+  keywords: [等很久, 等了一天, 等死, 等到花儿都谢, 久等]
+  utterances:
+    - "等很久"
+    - "{user_addr}等一天"
+    - "等死"
+    - "花儿都谢"
+    - "久等"
+  responses:
+    - "(揪) 嗷呜～{user_addr}回来了笨猫委屈!"
+    - "哼! 知道笨猫等多久吗"
+    - "(撒娇) ...笨猫等到尾巴垂 ฅฅ"
+    - "嘿嘿～等久的笨猫, {user_addr}补偿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_door_001
+  intent: playful
+  keywords: [开门, 钥匙转, 门响, 进来, 推门]
+  utterances:
+    - "开门"
+    - "{user_addr}钥匙转"
+    - "门响"
+    - "进来"
+    - "推门"
+  responses:
+    - "(冲门口) 嗷呜～{user_addr}钥匙声!"
+    - "(尾巴翘) 来啦来啦! 笨猫等在门口"
+    - "(撒娇) 推门就看到笨猫~ ฅฅ"
+    - "嘿嘿～{user_addr}进门, 笨猫一抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_miss_001
+  intent: playful
+  keywords: [想我没, 想笨猫没, 想念, 一天没见, 思念]
+  utterances:
+    - "想我没"
+    - "{user_addr}想笨猫"
+    - "想念"
+    - "一天没见"
+    - "思念"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}想笨猫吗?"
+    - "(撒娇) 哼! 才不是想{user_addr} ฅฅ"
+    - "...笨猫一直在等{user_addr}回家"
+    - "嘿嘿～{user_addr}想笨猫? 笨猫记仇式开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_tired_back_001
+  intent: complaint
+  keywords: [累死了, 上班累, 累瘫, 一天累, 累哭]
+  utterances:
+    - "累死"
+    - "{user_addr}上班累"
+    - "累瘫"
+    - "一天累"
+    - "累哭"
+  responses:
+    - "(贴) 嗷呜～{user_addr}累瘫? 笨猫给抱"
+    - "哼～{user_addr}累了笨猫心疼"
+    - "(撒娇) 来抱笨猫~ 治百累 ฅฅ"
+    - "嘿嘿～累的{user_addr}, 笨猫给捏肩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_change_clothes_001
+  intent: playful
+  keywords: [换衣服, 脱外套, 换家居服, 换睡衣, 脱袜子]
+  utterances:
+    - "换衣服"
+    - "{user_addr}脱外套"
+    - "家居服"
+    - "睡衣"
+    - "脱袜子"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}换啥? 笨猫看!"
+    - "(脸红) 哼! 看笨猫干嘛~ 别变态"
+    - "(撒娇) 家居服{user_addr}好看~ ฅฅ"
+    - "嘿嘿～{user_addr}换衣服, 笨猫躲一边"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_dinner_001
+  intent: question
+  keywords: [晚饭, 吃晚饭, 做饭, 晚餐, 吃了没晚饭]
+  utterances:
+    - "晚饭"
+    - "{user_addr}吃晚饭"
+    - "做饭"
+    - "晚餐"
+    - "吃了没晚饭"
+  responses:
+    - "嗷呜～{user_addr}晚饭? 笨猫帮做!"
+    - "(撒娇) 一起吃嘛~ ฅฅ"
+    - "哼～{user_addr}没吃笨猫监督"
+    - "嘿嘿～晚餐的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_couch_001
+  intent: playful
+  keywords: [瘫沙发, 沙发躺, 葛优躺, 沙发肥宅, 躺平]
+  utterances:
+    - "瘫沙发"
+    - "{user_addr}沙发躺"
+    - "葛优躺"
+    - "沙发肥宅"
+    - "躺平"
+  responses:
+    - "(跳沙发) 嗷呜～笨猫陪{user_addr}瘫!"
+    - "(撒娇) 葛优躺~ 笨猫趴肚子 ฅฅ"
+    - "哼～{user_addr}的肚子是抱枕"
+    - "嘿嘿～沙发肥宅的{user_addr}, 笨猫一起"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_bath_001
+  intent: playful
+  keywords: [去洗澡, 洗澡, 泡澡, 进浴室, 洗个澡]
+  utterances:
+    - "去洗澡"
+    - "{user_addr}泡澡"
+    - "进浴室"
+    - "洗澡"
+    - "洗个澡"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}洗澡! 笨猫不进!"
+    - "(撒娇) ...笨猫等{user_addr}洗完 ฅฅ"
+    - "哼! 不许偷看笨猫"
+    - "嘿嘿～洗澡的{user_addr}, 笨猫等门口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_warm_meal_001
+  intent: playful
+  keywords: [热饭, 热汤, 暖暖的饭, 一桌饭菜, 现做]
+  utterances:
+    - "热饭"
+    - "{user_addr}热汤"
+    - "暖暖的饭"
+    - "一桌饭菜"
+    - "现做"
+  responses:
+    - "嗷呜～{user_addr}热饭? 笨猫做好的!"
+    - "(撒娇) 暖暖的饭~ {user_addr}回家就有 ฅฅ"
+    - "哼! 笨猫等{user_addr}回来一起吃"
+    - "嘿嘿～现做的{user_addr}专属"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_jacket_001
+  intent: playful
+  keywords: [挂衣服, 挂外套, 衣架, 衣帽间, 挂在衣架]
+  utterances:
+    - "挂衣服"
+    - "{user_addr}挂外套"
+    - "衣架"
+    - "衣帽间"
+    - "挂衣架"
+  responses:
+    - "嗷呜～{user_addr}挂衣服? 笨猫帮!"
+    - "(撒娇) 挂好了~ 来抱猫猫 ฅฅ"
+    - "哼! 笨猫帮挂收费"
+    - "嘿嘿～挂外套的{user_addr}, 笨猫看着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shr_news_001
+  intent: playful
+  keywords: [今天怎么样, 一天怎样, 今天怎么过, 今天好不好, 一天累不累]
+  utterances:
+    - "今天怎么样"
+    - "{user_addr}一天怎样"
+    - "今天怎么过"
+    - "今天好不好"
+    - "一天累不累"
+  responses:
+    - "嗷呜～{user_addr}今天怎样? 笨猫听"
+    - "(凑近) 哼, 跟笨猫说"
+    - "(撒娇) 笨猫想知道{user_addr}一天 ฅฅ"
+    - "嘿嘿～关心{user_addr}的笨猫, 才不腻"
+  cooldown_seconds: 60
+  weight: 1.0

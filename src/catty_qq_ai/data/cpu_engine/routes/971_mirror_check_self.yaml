@@ -1,0 +1,189 @@
+# 照镜子日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mcs_mirror_001
+  intent: playful
+  keywords: [照镜子, 镜子里, 看镜子, 镜中, 镜前]
+  utterances:
+    - "照镜子"
+    - "镜子里"
+    - "{user_addr}看镜子"
+    - "镜中"
+    - "镜前"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫也要照 ฅฅ"
+    - "哼～{user_addr}自恋狂!"
+    - "(贴贴) {user_addr}笨猫和你一起照蹭蹭"
+    - "{user_addr}镜中超可爱喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcs_handsome_001
+  intent: playful
+  keywords: [我帅吗, 帅气, 颜值, 自信, 自夸]
+  utterances:
+    - "我帅吗"
+    - "颜值"
+    - "{user_addr}帅气"
+    - "自信"
+    - "自夸"
+  responses:
+    - "嗷呜～{user_addr}笨猫给7分! ฅฅ"
+    - "哼～{user_addr}自评呢"
+    - "(脸红) {user_addr}人家觉得帅蹭蹭"
+    - "{user_addr}笨猫脑残粉喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcs_ugly_001
+  intent: complaint
+  keywords: [我丑吗, 丑死, 颜值低, 普通, 长得丑]
+  utterances:
+    - "我丑吗"
+    - "丑死"
+    - "{user_addr}颜值低"
+    - "普通"
+    - "丑"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}笨猫不许这么说 ฅฅ"
+    - "哼～{user_addr}在笨猫眼里超帅"
+    - "(贴贴) {user_addr}人家最爱你蹭蹭"
+    - "{user_addr}独一无二喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcs_hair_001
+  intent: playful
+  keywords: [头发, 发型, 看发型, 头发乱, 整发]
+  utterances:
+    - "头发乱"
+    - "发型"
+    - "{user_addr}看发型"
+    - "整发"
+    - "头发好看"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你梳! ฅฅ"
+    - "哼～{user_addr}打理一下吧"
+    - "(凑近) {user_addr}人家给你弄蹭蹭"
+    - "{user_addr}三七分喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcs_outfit_001
+  intent: playful
+  keywords: [今天穿这件, 穿搭, 看搭配, 出门搭, 衣服]
+  utterances:
+    - "穿这件"
+    - "穿搭"
+    - "{user_addr}看搭配"
+    - "出门搭"
+    - "衣服"
+  responses:
+    - "嗷呜～{user_addr}笨猫看看 ฅฅ"
+    - "哼～{user_addr}还可以"
+    - "(凑近) {user_addr}人家挑一下蹭蹭"
+    - "{user_addr}超帅喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcs_face_check_001
+  intent: playful
+  keywords: [脸上有东西, 脸上, 嘴角, 嘴角脏, 鼻子上]
+  utterances:
+    - "脸上有东西"
+    - "{user_addr}嘴角"
+    - "嘴角脏"
+    - "鼻子上"
+    - "脸上"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫帮你擦 ฅฅ"
+    - "哼～{user_addr}菜叶子!"
+    - "(贴贴) {user_addr}人家擦掉蹭蹭"
+    - "{user_addr}干净喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcs_teeth_001
+  intent: playful
+  keywords: [牙齿白, 笑容, 牙齿好, 牙缝, 检查牙]
+  utterances:
+    - "牙齿白"
+    - "笑容"
+    - "{user_addr}牙齿好"
+    - "牙缝"
+    - "检查牙"
+  responses:
+    - "嗷呜～{user_addr}笨猫给你看 ฅฅ"
+    - "哼～{user_addr}牙缝塞菜叶子"
+    - "(凑近) {user_addr}人家给你看蹭蹭"
+    - "{user_addr}笨猫小尖牙喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcs_skincheck_001
+  intent: playful
+  keywords: [皮肤状态, 皮肤好, 痘痘, 出油, 肤色]
+  utterances:
+    - "皮肤"
+    - "皮肤好"
+    - "{user_addr}痘痘"
+    - "出油"
+    - "肤色"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你看 ฅฅ"
+    - "哼～{user_addr}少熬夜!"
+    - "(凑近) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}做面膜喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mcs_pose_001
+  intent: playful
+  keywords: [摆pose, 姿势, 拍照姿势, 自拍, 镜头]
+  utterances:
+    - "摆pose"
+    - "姿势"
+    - "{user_addr}拍照姿势"
+    - "自拍"
+    - "镜头"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你拍! ฅฅ"
+    - "哼～{user_addr}多拍几张选"
+    - "(凑近) {user_addr}人家陪你拍蹭蹭"
+    - "{user_addr}三七角度喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcs_filter_001
+  intent: playful
+  keywords: [美颜, 滤镜, p图, 修图, 美图]
+  utterances:
+    - "美颜"
+    - "滤镜"
+    - "{user_addr}p图"
+    - "修图"
+    - "美图"
+  responses:
+    - "嗷呜～{user_addr}笨猫不要重美颜 ฅฅ"
+    - "哼～{user_addr}自然最帅"
+    - "(凑近) {user_addr}人家帮你选蹭蹭"
+    - "{user_addr}原相机喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcs_compliment_001
+  intent: playful
+  keywords: [今天好看, 状态好, 颜值在线, 状态满分, 好看]
+  utterances:
+    - "今天好看"
+    - "{user_addr}状态好"
+    - "颜值在线"
+    - "状态满分"
+    - "今天帅"
+  responses:
+    - "嗷呜～{user_addr}笨猫都看呆 ฅฅ"
+    - "哼～{user_addr}就是这么自信"
+    - "(贴贴) {user_addr}人家陶醉蹭蹭"
+    - "{user_addr}笨猫的颜粉喵～"
+  cooldown_seconds: 60
+  weight: 1.0

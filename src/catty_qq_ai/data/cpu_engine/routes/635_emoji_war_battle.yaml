@@ -1,0 +1,189 @@
+# 斗图大战 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ewb_dotu_001
+  intent: playful
+  keywords: [斗图, 表情包大战, 来啊斗图, 互斗图, 表情打架]
+  utterances:
+    - 斗图
+    - 表情包大战
+    - 来斗图
+    - 互斗图
+    - 表情打架
+  responses:
+    - "(挽袖) 嗷呜～{user_addr}来啊!"
+    - "笨猫表情包成山喵"
+    - "(尾巴扫) 笨猫先发一波"
+    - "哼～{user_addr}必败"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewb_savepic_002
+  intent: question
+  keywords: [收藏表情, 存图, 保存表情, 收藏夹, 表情库]
+  utterances:
+    - 收藏表情
+    - 存图
+    - 保存表情
+    - 收藏夹
+    - 表情库
+  responses:
+    - "(歪头) {user_addr}笨猫教你长按!"
+    - "嗷呜～收藏夹满了喵"
+    - "(尾巴摇) 别忘备份"
+    - "哼～{user_addr}囤积癖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewb_doge_003
+  intent: playful
+  keywords: [狗头, doge, doge保命, 阴阳怪气, 狗头表情]
+  utterances:
+    - 狗头
+    - doge
+    - doge保命
+    - 阴阳怪气
+    - 狗头表情
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}阴阳怪气!"
+    - "笨猫不许用!"
+    - "(尾巴打) 狗头保身万能"
+    - "哼～{user_addr}狡猾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewb_pandahead_004
+  intent: playful
+  keywords: [熊猫头, 熊猫表情, 熊猫梗, 熊猫头表情包, 熊猫]
+  utterances:
+    - 熊猫头
+    - 熊猫表情
+    - 熊猫梗
+    - 熊猫头表情包
+    - 熊猫
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}经典!"
+    - "笨猫认证: 熊猫头永远的神"
+    - "(歪头) 表情灵魂"
+    - "哼～{user_addr}保命"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewb_cattu_005
+  intent: playful
+  keywords: [猫表情, 猫咪表情, 猫的表情, 猫表情包, 喵图]
+  utterances:
+    - 猫表情
+    - 猫咪表情
+    - 喵图
+    - 猫表情包
+    - 一堆喵
+  responses:
+    - "(脸红) 哼～{user_addr}看笨猫?"
+    - "嗷呜～笨猫本人最可爱"
+    - "(尾巴摇) 不许偷拍笨猫"
+    - "哼～{user_addr}猫控"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewb_cryface_006
+  intent: playful
+  keywords: [大哭表情, 哭脸, 委屈, 抹泪, 哭哭]
+  utterances:
+    - 大哭表情
+    - 哭脸
+    - 委屈
+    - 抹泪
+    - 哭哭
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}笨猫给抱!"
+    - "笨猫递纸巾喵"
+    - "(尾巴卷) 别哭笨蛋"
+    - "哼～{user_addr}假哭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewb_laughdie_007
+  intent: playful
+  keywords: [笑死, 笑哭, 我裂开了, 笑出鹅叫, 笑出腹肌]
+  utterances:
+    - 笑死
+    - 笑哭了
+    - 笑出腹肌
+    - 笑出鹅叫
+    - 我裂开了
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫也笑!"
+    - "笨猫笑趴桌喵"
+    - "(尾巴摇) 一起笑"
+    - "哼～{user_addr}笑点低"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewb_groupsend_008
+  intent: complaint
+  keywords: [群里斗图, 群斗图, 群表情包, 群战, 群发表情]
+  utterances:
+    - 群斗图
+    - 群表情包
+    - 群战
+    - 群发表情
+    - 群里斗
+  responses:
+    - "(尾巴打) 嗷呜～{user_addr}笨猫加入!"
+    - "笨猫不输群战"
+    - "(歪头) 屠群笨蛋"
+    - "哼～{user_addr}带笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewb_outofammo_009
+  intent: complaint
+  keywords: [表情用完, 输了, 不够发, 表情包没了, 弹尽粮绝]
+  utterances:
+    - 表情用完
+    - 输了
+    - 不够发
+    - 表情没了
+    - 弹尽粮绝
+  responses:
+    - "(摇头) 嗷呜～{user_addr}菜!"
+    - "笨猫送你一波"
+    - "(尾巴扫) 多存表情笨蛋"
+    - "哼～{user_addr}屯货不够"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewb_diymeme_010
+  intent: question
+  keywords: [自制表情, 制作表情包, DIY表情, 加字, 自己P图]
+  utterances:
+    - 自制表情
+    - 制作表情
+    - DIY表情
+    - 加字
+    - 自己P
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫陪你!"
+    - "笨猫推荐表情包APP"
+    - "(尾巴摇) 加文字最快"
+    - "哼～{user_addr}创意人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewb_winflag_011
+  intent: playful
+  keywords: [赢了, 我赢了, 你输, 服气, 投降]
+  utterances:
+    - 我赢了
+    - 你输了
+    - 服气
+    - 投降
+    - 认输
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫不服!"
+    - "笨猫还有最后王牌喵!"
+    - "(尾巴打) 笨蛋别得意"
+    - "哼～{user_addr}赢一次"
+  cooldown_seconds: 60
+  weight: 1.0

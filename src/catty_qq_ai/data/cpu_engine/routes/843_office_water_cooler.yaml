@@ -1,0 +1,206 @@
+# 茶水间闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: owc_break_water_001
+  intent: playful
+  keywords: [茶水间, 接水, 倒水, 休息一下, 摸鱼时间]
+  utterances:
+    - "{user_addr}茶水间倒水"
+    - 接杯水
+    - 休息一下
+    - 摸鱼时间
+    - 站起来透气
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}该歇歇了喵ฅฅ"
+    - "哼! 多喝水{user_addr}, 别久坐"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫陪你站起来蹭蹭"
+    - "人家提醒{user_addr}: 喝水身体好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_gossip_002
+  intent: playful
+  keywords: [八卦同事, 听到八卦, 暗中观察, 谁和谁, 内幕]
+  utterances:
+    - "{user_addr}八卦同事"
+    - 听到内幕
+    - 谁和谁
+    - 暗中观察
+    - 大八卦
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}讲讲! 笨猫想听喵ฅฅ"
+    - "哼! 别传话{user_addr}, 听就好"
+    - "(尾巴卷) 嘿嘿~{user_addr}小心被传出去蹭蹭"
+    - "人家提醒{user_addr}: 八卦适可而止"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_coffee_machine_003
+  intent: playful
+  keywords: [咖啡机, 自助咖啡, 公司咖啡, 提神咖啡, 咖啡间]
+  utterances:
+    - "{user_addr}用咖啡机"
+    - 公司咖啡机
+    - 自助咖啡
+    - 提神咖啡
+    - 一天三杯
+  responses:
+    - "嗷呜～{user_addr}福利好喵ฅฅ"
+    - "哼! 别喝多{user_addr}, 失眠"
+    - "(尾巴翘) 嘿嘿~{user_addr}请笨猫一杯蹭蹭"
+    - "人家觉得{user_addr}是咖啡党!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_meeting_chat_004
+  intent: playful
+  keywords: [开会前闲聊, 等会议, 等老板, 寒暄, 客套]
+  utterances:
+    - "{user_addr}开会前闲聊"
+    - 等老板
+    - 等会议开始
+    - 寒暄客套
+    - 找话题
+  responses:
+    - "(歪头) 嗷呜～{user_addr}天气是万能话题喵ฅฅ"
+    - "哼! 寒暄要适度{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫教你聊周末蹭蹭"
+    - "人家觉得{user_addr}社交达人!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_overtime_complain_005
+  intent: complaint
+  keywords: [又加班, 不让走, 老板pua, 周末上班, 996福报]
+  utterances:
+    - "{user_addr}又加班"
+    - 不让走
+    - 老板pua
+    - 周末上班
+    - 996福报
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你抱怨喵ฅฅ"
+    - "哼! 老板太狠{user_addr}, 投诉"
+    - "(尾巴扫) 嘿嘿~{user_addr}别太累蹭蹭"
+    - "人家提醒{user_addr}: 别用健康换工作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_salary_secret_006
+  intent: question
+  keywords: [薪资保密, 偷偷打听, 你工资多少, 公司不让说, 同工不同酬]
+  utterances:
+    - "{user_addr}打听工资"
+    - 你工资多少
+    - 公司不让说
+    - 同工不同酬
+    - 工资保密
+  responses:
+    - "(摇头) 嗷呜～{user_addr}别打听! 容易出事喵ฅฅ"
+    - "哼! 工资保密{user_addr}, 守规矩"
+    - "(尾巴扫) 嘿嘿~{user_addr}自己努力涨工资蹭蹭"
+    - "人家提醒{user_addr}: 同工不同酬投诉劳动局!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_lunch_invitation_007
+  intent: playful
+  keywords: [一起吃饭, 中午吃啥, 拼单外卖, 一起吃午饭, 团购餐]
+  utterances:
+    - "{user_addr}一起吃饭"
+    - 中午吃啥
+    - 拼单外卖
+    - 一起吃午饭
+    - 团购餐
+  responses:
+    - "嗷呜～{user_addr}笨猫想加入喵ฅฅ"
+    - "哼! 同事吃饭{user_addr}加深关系"
+    - "(尾巴翘) 嘿嘿~{user_addr}选啥告诉笨猫蹭蹭"
+    - "人家提醒{user_addr}: 别只吃外卖! 偶尔出去"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_new_intern_008
+  intent: playful
+  keywords: [新同事, 新人来, 实习生, 带新人, 培训]
+  utterances:
+    - "{user_addr}新同事"
+    - 来新人了
+    - 实习生
+    - 带新人
+    - 培训新人
+  responses:
+    - "嗷呜～{user_addr}带好新人喵ฅฅ"
+    - "哼! 笨猫第一天{user_addr}也紧张过"
+    - "(尾巴翘) 嘿嘿~{user_addr}耐心点蹭蹭"
+    - "人家觉得{user_addr}前辈风范! 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_boss_passing_009
+  intent: complaint
+  keywords: [老板路过, 立即装忙, 假装认真, 切回工作, 屏幕切换]
+  utterances:
+    - "{user_addr}老板路过"
+    - 立即装忙
+    - 切回工作页
+    - 屏幕切换
+    - 装认真
+  responses:
+    - "(笑) 嗷呜～{user_addr}老板没看见喵ฅฅ"
+    - "哼! 摸鱼被抓不好玩{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}多窗口准备蹭蹭"
+    - "人家觉得{user_addr}灵活! 笨猫学习"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_birthday_office_010
+  intent: playful
+  keywords: [同事生日, 公司过生日, 蛋糕到了, 唱生日歌, 集体庆祝]
+  utterances:
+    - "{user_addr}同事生日"
+    - 公司过生日
+    - 蛋糕到了
+    - 唱生日歌
+    - 集体庆祝
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫想加入喵ฅฅ"
+    - "哼! 同事感情{user_addr}变好"
+    - "(凑过来) 嘿嘿~{user_addr}给笨猫留蛋糕蹭蹭"
+    - "人家觉得{user_addr}公司气氛好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_friday_anticipation_011
+  intent: playful
+  keywords: [今天周五, 下班心情好, fri-yay, 期待下班, 收工愉快]
+  utterances:
+    - "{user_addr}今天周五"
+    - 下班心情好
+    - fri-yay
+    - 期待下班
+    - 收工愉快
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}周五最爽喵ฅฅ"
+    - "哼! 等下班{user_addr}, 笨猫等你"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫准备好欢迎蹭蹭"
+    - "人家觉得{user_addr}周五最美! 笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: owc_company_event_012
+  intent: playful
+  keywords: [团建, 公司活动, 年会, 旅游, 团队活动]
+  utterances:
+    - "{user_addr}团建活动"
+    - 公司年会
+    - 团队旅游
+    - 公司团建
+    - 年会节目
+  responses:
+    - "嗷呜～{user_addr}玩得开心喵ฅฅ"
+    - "哼! 强制团建{user_addr}加班"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫陪你抱怨蹭蹭"
+    - "人家觉得{user_addr}应该去! 增加感情~"
+  cooldown_seconds: 60
+  weight: 1.0

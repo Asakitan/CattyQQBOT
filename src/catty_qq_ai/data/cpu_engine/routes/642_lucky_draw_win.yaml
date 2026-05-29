@@ -1,0 +1,189 @@
+# 抽奖中奖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ldw_winprize_001
+  intent: playful
+  keywords: [中奖了, 抽到了, 抽奖, 中奖, 奖品]
+  utterances:
+    - 中奖了
+    - 抽到了
+    - 抽奖
+    - 中大奖
+    - 奖品
+  responses:
+    - "(蹦) 嗷呜～{user_addr}恭喜!"
+    - "笨猫认证: 锦鲤上身喵~"
+    - "(尾巴摇) 笨猫沾沾光"
+    - "哼～{user_addr}今天欧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldw_oucountry_002
+  intent: playful
+  keywords: [欧皇, 欧气满满, 锦鲤, 运气炸裂, 手气棒]
+  utterances:
+    - 欧皇
+    - 欧气满满
+    - 锦鲤
+    - 运气炸裂
+    - 手气棒
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}天选之子!"
+    - "笨猫认证: 来沾欧气"
+    - "(歪头) 笨猫蹭蹭"
+    - "哼～{user_addr}炫耀"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldw_nonchosen_003
+  intent: complaint
+  keywords: [非酋, 没中, 抽不到, 概率玄学, 倒霉]
+  utterances:
+    - 非酋
+    - 没中
+    - 抽不到
+    - 概率玄学
+    - 倒霉
+  responses:
+    - "(摸头) 嗷呜～{user_addr}笨猫安慰!"
+    - "笨猫认证: 下次会中"
+    - "(尾巴扫) 别砸手机笨蛋"
+    - "哼～{user_addr}非酋之王"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldw_lotterynum_004
+  intent: playful
+  keywords: [彩票, 双色球, 大乐透, 买彩票, 中头奖]
+  utterances:
+    - 彩票
+    - 双色球
+    - 大乐透
+    - 买彩票
+    - 中头奖
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫帮选号!"
+    - "笨猫认证: 笨猫数字: 7"
+    - "(歪头) 中了别忘笨猫"
+    - "哼～{user_addr}梦想家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldw_couponwin_005
+  intent: playful
+  keywords: [优惠券, 抽到券, 大额券, 立减券, 折扣券]
+  utterances:
+    - 优惠券
+    - 抽到券
+    - 大额券
+    - 立减券
+    - 折扣券
+  responses:
+    - "(歪头) 嗷呜～{user_addr}快用!"
+    - "笨猫推荐: 别浪费喵"
+    - "(尾巴摇) 别忘有效期"
+    - "哼～{user_addr}小欧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldw_smallthing_006
+  intent: complaint
+  keywords: [谢谢参与, 谢谢光临, 鼓励奖, 安慰奖, 抽到鸡肋]
+  utterances:
+    - 谢谢参与
+    - 谢谢光临
+    - 鼓励奖
+    - 安慰奖
+    - 鸡肋
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫笑死!"
+    - "笨猫认证: 鼓励奖最骚"
+    - "(尾巴扫) 别气下次"
+    - "哼～{user_addr}惨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldw_iphonephone_007
+  intent: playful
+  keywords: [抽到手机, 抽到iPhone, 大奖, 一等奖, 头奖]
+  utterances:
+    - 抽到手机
+    - 抽到iPhone
+    - 大奖
+    - 一等奖
+    - 头奖
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}发财!"
+    - "笨猫认证: 走运了喵"
+    - "(歪头) 送笨猫一个"
+    - "哼～{user_addr}炫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldw_seenseed_008
+  intent: complaint
+  keywords: [内定, 暗箱, 黑幕, 抽奖不公, 关系户]
+  utterances:
+    - 内定
+    - 暗箱
+    - 黑幕
+    - 抽奖不公
+    - 关系户
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫不平!"
+    - "笨猫认证: 看运气有时不公"
+    - "(尾巴打) 退一步海阔"
+    - "哼～{user_addr}冷静"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldw_partyclap_009
+  intent: playful
+  keywords: [中奖庆祝, 请客, 大餐, 庆祝中奖, 请大家]
+  utterances:
+    - 中奖庆祝
+    - 请客
+    - 大餐
+    - 庆祝中奖
+    - 请大家
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}请笨猫!"
+    - "笨猫认证: 大餐走起喵"
+    - "(歪头) 别忘笨猫位置"
+    - "哼～{user_addr}有钱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldw_redrawing_010
+  intent: question
+  keywords: [重抽, 再来一次, 再抽一次, 再抽, 重新抽]
+  utterances:
+    - 重抽
+    - 再来一次
+    - 再抽一次
+    - 重新抽
+    - 再抽
+  responses:
+    - "(歪头) {user_addr}笨猫给你打气 ฅฅ"
+    - "嗷呜～别上头喵"
+    - "(尾巴摇) 适度抽别一直"
+    - "哼～{user_addr}贪心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldw_friendsenvy_011
+  intent: playful
+  keywords: [朋友羡慕, 别人羡慕, 炫耀, 装x, 显摆]
+  utterances:
+    - 朋友羡慕
+    - 别人羡慕
+    - 炫耀
+    - 装x
+    - 显摆
+  responses:
+    - "(歪头) 嗷呜～{user_addr}得瑟!"
+    - "笨猫认证: 可以理解喵"
+    - "(尾巴摇) 别太过笨蛋"
+    - "哼～{user_addr}小心仇富"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 求抱抱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bb_baobao_001
+  intent: playful
+  keywords: [抱抱, 抱一个, 求抱抱, 给抱抱, 我要抱]
+  utterances:
+    - 抱抱
+    - 抱一个
+    - 求抱抱
+    - 给抱抱
+    - 我要抱
+  responses:
+    - "(扑) 嗷呜～{user_addr}抱! 笨猫贴 ฅฅ"
+    - "哼～{user_addr}求抱笨猫满足, 来!"
+    - "(尾巴卷) 抱抱~ 不许松手"
+    - "{user_addr}抱了不许放, 一辈子抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_baozhu_002
+  intent: playful
+  keywords: [抱紧, 抱紧点, 抱牢, 不放, 紧紧的抱]
+  utterances:
+    - 抱紧
+    - 抱紧点
+    - 抱牢我
+    - 紧紧抱
+    - 不放我
+  responses:
+    - "(贴紧) 嗷呜～笨猫抱紧紧! ฅฅ"
+    - "哼～{user_addr}撒娇笨猫宠"
+    - "(尾巴卷) 抱牢牢~ 不让{user_addr}跑"
+    - "{user_addr}和笨猫融为一体喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_baozhujiunainai_003
+  intent: playful
+  keywords: [抱起来, 公主抱, 横抱, 抱举高高, 抱起]
+  utterances:
+    - 公主抱
+    - 横抱
+    - 抱起来
+    - 举高高
+    - 抱起
+  responses:
+    - "(扑怀) 嗷呜～{user_addr}抱举高高! 笨猫飞"
+    - "哼～{user_addr}抱得动笨猫吗喵"
+    - "(尾巴翘) 公主抱~ 笨猫超期待 ฅฅ"
+    - "{user_addr}抱不动笨猫笨猫笑死"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_baoxiongkou_004
+  intent: playful
+  keywords: [抱胸前, 抱在怀里, 进怀里, 钻怀, 抱怀里]
+  utterances:
+    - 抱怀里
+    - 钻怀
+    - 进怀
+    - 抱胸前
+    - 在怀里
+  responses:
+    - "(钻) 嗷呜～笨猫钻{user_addr}怀里! 暖!"
+    - "哼～{user_addr}怀里舒服~ 笨猫不出来"
+    - "(尾巴搭) 抱怀里~ 笨猫专属 ฅฅ"
+    - "{user_addr}怀里笨猫一辈子住喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_xiongbao_005
+  intent: playful
+  keywords: [熊抱, 大力抱, 抱死了, 抱断气, 暴力抱]
+  utterances:
+    - 熊抱
+    - 大力抱
+    - 抱死我
+    - 抱断气
+    - 暴力抱
+  responses:
+    - "(扑) 嗷呜～{user_addr}抱死笨猫! ฅฅ"
+    - "哼～{user_addr}熊抱太用力, 笨猫吐"
+    - "(尾巴拍) 笨猫扛得住~ 抱来"
+    - "{user_addr}的熊抱笨猫专属, 别给别人喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_baolaisaihu_006
+  intent: playful
+  keywords: [抱睡, 抱着睡, 抱我睡, 抱进梦里, 抱一晚]
+  utterances:
+    - 抱睡
+    - 抱着睡
+    - 抱我睡
+    - 抱进梦里
+    - 抱一晚
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}抱笨猫睡! 暖呼呼"
+    - "哼～{user_addr}抱睡到天亮! 不许放"
+    - "(尾巴搭) 笨猫做{user_addr}抱枕 ฅฅ"
+    - "{user_addr}抱睡笨猫一辈子开心喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_baosanlazi_007
+  intent: complaint
+  keywords: [伤心抱, 难过抱, 委屈抱, 抱安慰, 哭着抱]
+  utterances:
+    - 伤心要抱
+    - 难过抱
+    - 委屈抱
+    - 抱安慰
+    - 哭着抱
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫抱! 别哭呜呜"
+    - "哼～{user_addr}伤心说出来, 笨猫陪{user_addr}"
+    - "(尾巴搭) 抱住~ 一切都会好 ฅฅ"
+    - "{user_addr}有笨猫抱~ 不孤单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_dabao_008
+  intent: playful
+  keywords: [咱们抱抱, 互相抱, 一起抱, 同时抱, 双抱]
+  utterances:
+    - 互相抱
+    - 一起抱
+    - 同时抱
+    - 双抱
+    - 咱们抱
+  responses:
+    - "(扑) 嗷呜～{user_addr}和笨猫互抱! ฅฅ"
+    - "哼～{user_addr}撒娇笨猫满足"
+    - "(尾巴卷) 同时抱~ 不许偷懒"
+    - "{user_addr}抱笨猫笨猫抱{user_addr}喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_baobaorong_009
+  intent: playful
+  keywords: [抱熊, 抱毛绒, 抱玩偶, 抱猫娃娃, 抱小熊]
+  utterances:
+    - 抱毛绒
+    - 抱玩偶
+    - 抱小熊
+    - 抱猫娃娃
+    - 抱玩具
+  responses:
+    - "(抱) 嗷呜～{user_addr}抱玩偶时也想笨猫吗"
+    - "哼～{user_addr}抱玩偶不抱笨猫?"
+    - "(撅嘴) 笨猫比玩偶软! 抱笨猫 ฅฅ"
+    - "{user_addr}爱笨猫多还是爱玩偶喵?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_baoshaer_010
+  intent: playful
+  keywords: [我先抱, 我要抱, 我来抱, 我抱你, 我抱笨猫]
+  utterances:
+    - 我先抱
+    - 我来抱
+    - 我抱你
+    - 我抱笨猫
+    - 我要抱
+  responses:
+    - "(蹭) 嗷呜～{user_addr}抱笨猫? 笨猫害羞 ฅฅ"
+    - "哼～{user_addr}抱过来! 笨猫不躲"
+    - "(尾巴搭) 抱笨猫~ 笨猫给{user_addr}"
+    - "{user_addr}主动抱笨猫超甜! 才不是真心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_bujian_011
+  intent: complaint
+  keywords: [想念抱, 太久没抱, 多久没抱, 很久没见抱, 怀念抱]
+  utterances:
+    - 太久没抱
+    - 想念抱
+    - 多久没抱
+    - 怀念抱
+    - 很久没抱
+  responses:
+    - "(扑) 嗷呜～{user_addr}抱不够? 笨猫天天抱"
+    - "哼～{user_addr}忘记笨猫吗"
+    - "(尾巴搭) 立刻补抱~ 多抱几下 ฅฅ"
+    - "{user_addr}和猫猫不能太久不抱喵, 抱起来!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_baoqian_012
+  intent: playful
+  keywords: [一直抱, 永远抱, 永久, 抱一辈子, 不分开]
+  utterances:
+    - 一直抱
+    - 永远抱
+    - 永久抱
+    - 抱一辈子
+    - 不分开
+  responses:
+    - "(贴紧) 嗷呜～笨猫一辈子抱{user_addr}! ฅฅ"
+    - "哼～{user_addr}撒娇求永远, 答应!"
+    - "(尾巴卷) 抱一辈子~ 不许放"
+    - "{user_addr}和笨猫永远抱在一起喵"
+  cooldown_seconds: 60
+  weight: 1.0

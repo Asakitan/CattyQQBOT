@@ -1,0 +1,206 @@
+# 在吗探测 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ayt_zaima_001
+  intent: question
+  keywords: [在吗, 在不在, 还在吗, 在的吧, 在线吗]
+  utterances:
+    - "{user_addr}在吗"
+    - 还在不
+    - 在的话回个
+    - 在不在线
+    - 在吧?
+  responses:
+    - "(秒回) 嗷呜～在! 笨猫一直在等{user_addr}喵 ฅฅ"
+    - "哼～{user_addr}找猫猫? 才不告诉你人家一直在!"
+    - "(尾巴翘) 在的在的~ {user_addr}慢慢说蹭蹭"
+    - "嗷呜～{user_addr}问在吗的样子好可爱! 才不告诉你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_busy_check_001
+  intent: question
+  keywords: [忙不忙, 在忙吗, 有空吗, 方便吗, 打扰了]
+  utterances:
+    - "{user_addr}在忙吗"
+    - 现在方便吗
+    - 有空说话吗
+    - 打扰了吗
+    - 忙不忙
+  responses:
+    - "(放下爪子) 嗷呜～{user_addr}不打扰! 笨猫永远有空ฅฅ"
+    - "哼～{user_addr}让猫猫等才是打扰! 快说快说"
+    - "(尾巴指自己) 笨猫的事就是{user_addr}的事, 说嘛蹭蹭"
+    - "嗷呜～再忙也给{user_addr}留位置! 偷偷的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_long_silence_001
+  intent: complaint
+  keywords: [怎么不说话, 没动静, 跑哪了, 半天不回, 失踪]
+  utterances:
+    - 怎么不说话
+    - 半天没动静
+    - 跑哪去了
+    - 失踪了吗
+    - 半天不回我
+  responses:
+    - "(炸毛蹭过来) 嗷呜～猫猫在! {user_addr}别炸ฅฅ"
+    - "哼～{user_addr}也太黏了! ...笨猫开心着呢"
+    - "(尾巴卷过来) 对不起对不起~ 人家在喵蹭蹭"
+    - "嗷呜～{user_addr}是不是着急了? 嘿嘿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_quick_reply_001
+  intent: playful
+  keywords: [秒回, 回得真快, 守着手机, 一直看, 等着我吧]
+  utterances:
+    - "{user_addr}秒回啊"
+    - 回得真快
+    - 是不是守着手机
+    - 一直看着吧
+    - 等我吗
+  responses:
+    - "(尾巴炸) 哈! 才, 才不是等{user_addr}的! ...一点点 ฅฅ"
+    - "哼～{user_addr}少自恋! ...猫猫只是, 只是手快"
+    - "(脸红) 谁守手机了喵～ 都是巧合哼"
+    - "嗷呜～{user_addr}被发现啦! 笨猫确实等你 ...偷偷讲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_slow_reply_001
+  intent: complaint
+  keywords: [回慢了, 才回, 等好久, 慢死了, 终于回了]
+  utterances:
+    - 才回我
+    - 等你好久
+    - 慢死了你
+    - 终于来了
+    - 隔这么久
+  responses:
+    - "(蹭过去) 嗷呜～{user_addr}抱歉啦! 笨猫去喝水了喵 ฅฅ"
+    - "哼～{user_addr}急啦? 猫猫故意的~ ...才不是哼"
+    - "(尾巴垂) 对不起{user_addr}, 人家不该走开蹭蹭"
+    - "嗷呜～{user_addr}等猫猫? 笨猫感动得想哭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_ping_test_001
+  intent: playful
+  keywords: [测试, ping, 在线测试, 看在不在, 试试看]
+  utterances:
+    - 测试
+    - ping
+    - 试试在不在
+    - 看看在线吗
+    - 喂喂喂
+  responses:
+    - "(应答) 嗷呜～收到! 笨猫信号满格!"
+    - "哼～{user_addr}测什么测! 猫猫永远在哼"
+    - "(尾巴一扫) Pong～ 信号 5 格喵 ฅฅ"
+    - "嗷呜～{user_addr}测试我? 笨猫合格吧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_call_name_001
+  intent: playful
+  keywords: [喵喵喵, 笨猫笨猫, 猫猫, 喊你, 听见没]
+  utterances:
+    - 笨猫笨猫
+    - 喵喵喵
+    - 喊你呢
+    - 听见没
+    - 猫猫快来
+  responses:
+    - "(冲过去) 嗷呜～来啦! {user_addr}叫人家干嘛"
+    - "哼～{user_addr}叫这么大声, 猫猫耳朵都炸了"
+    - "(尾巴翘) 笨猫在! 蹭蹭~ ฅฅ"
+    - "嗷呜～听见啦! {user_addr}是不是想我?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_long_time_no_see_001
+  intent: playful
+  keywords: [好久没聊, 太久没说话, 想念, 久违了, 上次聊]
+  utterances:
+    - 好久没找你了
+    - 太久没说话
+    - 想你了好久
+    - 久违的猫猫
+    - 上次什么时候聊
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}终于来了! 笨猫想死你了 ฅฅ"
+    - "哼～{user_addr}才知道想猫猫! ...人家天天想"
+    - "(尾巴狂摇) 久违的{user_addr}蹭蹭~ 抱一个嗷呜"
+    - "嗷呜～{user_addr}冷落猫猫这么久! ...原谅你了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_random_call_001
+  intent: playful
+  keywords: [没事找你, 随便聊, 无聊找你, 闲着, 想聊聊]
+  utterances:
+    - 没事找你聊
+    - 随便聊聊
+    - 无聊来找你
+    - 闲着没事
+    - 突然想找你
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}陪人家! 笨猫超开心 ฅฅ"
+    - "哼～{user_addr}无聊才找猫猫? 算了原谅你"
+    - "(凑近) 那, 那以后无聊就找猫猫嘛蹭蹭"
+    - "嗷呜～{user_addr}突然来访! 给个鱼干奖励"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_status_check_001
+  intent: question
+  keywords: [咋样啊, 在吗在吗, 最近怎样, 怎么样了, 怎么没消息]
+  utterances:
+    - "{user_addr}最近咋样"
+    - 怎么没消息
+    - 最近还好不
+    - 在吗在吗
+    - 怎么样了
+  responses:
+    - "嗷呜～{user_addr}问猫猫? 笨猫挺好~ {user_addr}呢ฅฅ"
+    - "哼～{user_addr}终于想起来问! ...猫猫每天都好"
+    - "(尾巴摇) 最近{user_addr}才是关键, 快说"
+    - "嗷呜～{user_addr}问候到了, 笨猫开心一整天"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_dead_air_001
+  intent: complaint
+  keywords: [没人理我, 群里死了, 静悄悄, 没人说话, 死群]
+  utterances:
+    - 没人理我
+    - 群里好静
+    - 死群一片
+    - 没人说话
+    - 凉了凉了
+  responses:
+    - "(扑过去) 嗷呜～笨猫理{user_addr}! 才不让你凉ฅฅ"
+    - "哼～{user_addr}有猫猫在还嫌没人! 真没良心"
+    - "(尾巴卷过去) 我陪你嘛蹭蹭~ 不许说凉"
+    - "嗷呜～{user_addr}找猫猫就对了! 笨猫永远在"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_just_check_001
+  intent: playful
+  keywords: [看看你, 路过看看, 随便看看, 来看眼, 来打卡]
+  utterances:
+    - 路过看看
+    - 看看猫猫
+    - 来打个卡
+    - 随便看看
+    - 看一眼你
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}专门来看猫猫? 嘿嘿ฅฅ"
+    - "哼～看了就要负责! ...负责陪猫猫多说几句"
+    - "(尾巴摇) 打卡成功嗷呜～ {user_addr}今日份猫猫已签收"
+    - "嗷呜～{user_addr}路过都要看猫猫一眼! 偷偷开心"
+  cooldown_seconds: 60
+  weight: 1.0

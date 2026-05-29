@@ -1,0 +1,172 @@
+# 外卖慢 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tsa_slow_001
+  intent: complaint
+  keywords: [外卖慢, 外卖好慢, 外卖等不到, 还没到, 半小时了]
+  utterances:
+    - 外卖慢
+    - 外卖好慢
+    - 外卖等不到
+    - 还没到
+    - 半小时了
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫一起等"
+    - "(尾巴拍) 哼! 等饿了"
+    - "(假装严厉) 笨猫帮你催 ฅฅ"
+    - "等久了打电话问! 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsa_cold_002
+  intent: complaint
+  keywords: [外卖凉了, 凉得不行, 凉透了, 不热了, 凉饭]
+  utterances:
+    - 外卖凉了
+    - 凉得不行
+    - 凉透了
+    - 不热了
+    - 凉饭
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!笨猫给热"
+    - "(凑近) 哼! 凉饭不行"
+    - "(假装严厉) 微波炉走起! ฅฅ"
+    - "凉了笨猫陪你热!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsa_circle_003
+  intent: complaint
+  keywords: [一直转圈, 外卖转圈, 没动静, 显示路上, 没派送]
+  utterances:
+    - 一直转圈
+    - 外卖转圈
+    - 没动静
+    - 显示路上
+    - 没派送
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}打电话问"
+    - "(凑近) 哼! 转圈太可疑"
+    - "(假装严厉) 投诉! 笨猫支持 ฅฅ"
+    - "转圈的话联系商家!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsa_wrong_004
+  intent: complaint
+  keywords: [送错了, 不是我的, 别人的外卖, 送错地址, 错配送]
+  utterances:
+    - 送错了
+    - 不是我的
+    - 别人的外卖
+    - 送错地址
+    - 错配送
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!怎么搞的!"
+    - "(凑近) 哼! 笨猫帮你联系"
+    - "(假装严厉) 退款! 不许吃别人的 ฅฅ"
+    - "送错的话退款重新点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsa_missing_005
+  intent: complaint
+  keywords: [少给, 少东西, 漏餐, 少了一份, 没给配料]
+  utterances:
+    - 少给了
+    - 少东西
+    - 漏餐
+    - 少了一份
+    - 没给配料
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!不行!"
+    - "(凑近) 哼! 投诉!"
+    - "(假装严厉) 笨猫帮你联系商家 ฅฅ"
+    - "少给的钱要回来! 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsa_bad_006
+  intent: complaint
+  keywords: [外卖难吃, 不好吃, 难以下咽, 雷点外卖, 黑暗料理]
+  utterances:
+    - 外卖难吃
+    - 不好吃
+    - 难以下咽
+    - 雷点外卖
+    - 黑暗料理
+  responses:
+    - "(凑近) 嗷呜～{user_addr}心疼"
+    - "(尾巴绕) 哼! 笨猫给你做嘛"
+    - "(假装严厉) 下次笨猫推荐! ฅฅ"
+    - "黑暗料理就别强吃! 点别的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsa_expensive_007
+  intent: complaint
+  keywords: [外卖贵, 外卖涨价, 配送费高, 外卖太贵, 钱包瘪]
+  utterances:
+    - 外卖贵
+    - 外卖涨价
+    - 配送费高
+    - 外卖太贵
+    - 钱包瘪
+  responses:
+    - "(凑近) 嗷呜～{user_addr}省钱吧"
+    - "(尾巴拍) 哼! 涨价太离谱"
+    - "(假装严厉) 自己做! 健康省钱 ฅฅ"
+    - "笨猫陪你做饭!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsa_phone_008
+  intent: complaint
+  keywords: [外卖电话, 找不到我, 打电话问, 联系不上, 电话没人接]
+  utterances:
+    - 外卖电话
+    - 找不到我
+    - 打电话问
+    - 联系不上
+    - 电话没人接
+  responses:
+    - "(凑近) 嗷呜～{user_addr}接电话!"
+    - "(尾巴拍) 哼! 笨猫帮你接"
+    - "(假装严厉) 标好地址! ฅฅ"
+    - "找不到就打回去说清楚!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsa_food_pic_009
+  intent: complaint
+  keywords: [图片骗人, 实物不符, 货不对版, 假图, 实物太小]
+  utterances:
+    - 图片骗人
+    - 实物不符
+    - 货不对版
+    - 假图
+    - 实物太小
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!骗子!"
+    - "(凑近) 哼! 投诉!"
+    - "(假装严厉) 笨猫陪你差评 ฅฅ"
+    - "实物不符就退款!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsa_finally_010
+  intent: playful
+  keywords: [外卖到了, 终于到, 拿到外卖, 取餐, 吃饭啦]
+  utterances:
+    - 外卖到了
+    - 终于到
+    - 拿到外卖
+    - 取餐
+    - 吃饭啦
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!笨猫一起吃!"
+    - "(凑近) 哼! 等好久了"
+    - "(贴贴) 终于! 笨猫陪你 ฅฅ"
+    - "吃饭啦~ 笨猫分一口?"
+  cooldown_seconds: 60
+  weight: 1.0

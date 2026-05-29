@@ -1,0 +1,189 @@
+# 已读不回 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rnr_seen_001
+  intent: complaint
+  keywords: [已读不回, 装看不见, 不回我, 已读, 已读没回]
+  utterances:
+    - 已读不回
+    - 装看不见
+    - 不回我
+    - 已读
+    - 已读没回
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}冷暴力!"
+    - "笨猫陪你气喵"
+    - "(尾巴打) 我去帮你催"
+    - "哼～{user_addr}对方好烦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rnr_busy_002
+  intent: question
+  keywords: [可能在忙, 估计忙, 没空回, 在开会, 在路上]
+  utterances:
+    - 可能在忙
+    - 估计忙
+    - 没空回
+    - 在开会
+    - 在路上
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫帮你找借口?"
+    - "笨猫认证: 有时真在忙"
+    - "(尾巴扫) 等等再催"
+    - "哼～{user_addr}心宽"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rnr_lefthanging_003
+  intent: complaint
+  keywords: [晾了, 凉了, 被晾, 凉凉, 被晾]
+  utterances:
+    - 凉了
+    - 被晾
+    - 凉凉
+    - 没下文
+    - 没回应
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}笨猫陪你!"
+    - "笨猫给你抱抱喵 ฅฅ"
+    - "(尾巴卷) 不在意他笨蛋"
+    - "哼～{user_addr}我陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rnr_ghost_004
+  intent: complaint
+  keywords: [人间蒸发, 失联, 消失了, 找不到人, 玩消失]
+  utterances:
+    - 人间蒸发
+    - 失联
+    - 消失
+    - 找不到人
+    - 玩消失
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}冷血!"
+    - "笨猫帮你抓回来"
+    - "(尾巴扫) 找别人吧"
+    - "哼～{user_addr}笨蛋还纠结"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rnr_overthink_005
+  intent: complaint
+  keywords: [胡思乱想, 想多了, 越想越气, 担心, 焦虑等待]
+  utterances:
+    - 胡思乱想
+    - 想多了
+    - 越想越气
+    - 担心
+    - 焦虑等待
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}别多想!"
+    - "笨猫推荐: 转移注意力"
+    - "(尾巴卷) 笨猫陪聊"
+    - "哼～{user_addr}心思重"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rnr_pretendnot_006
+  intent: question
+  keywords: [装作没看见, 不回会怎样, 没回他, 故意不回, 装不在]
+  utterances:
+    - 装没看见
+    - 故意不回
+    - 没回他
+    - 装不在
+    - 不想回
+  responses:
+    - "(歪头) {user_addr}笨猫赞同 ฅฅ"
+    - "嗷呜～有时候就该装"
+    - "(尾巴摇) 不喜欢就不回"
+    - "哼～{user_addr}你也学会"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rnr_msgback_007
+  intent: playful
+  keywords: [终于回了, 突然回我, 隔三差五, 慢慢回, 慢半拍]
+  utterances:
+    - 终于回了
+    - 突然回我
+    - 慢慢回
+    - 慢半拍
+    - 隔三差五
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}活过来啦!"
+    - "笨猫认证: 终于看见"
+    - "(歪头) 别太热情显得舔"
+    - "哼～{user_addr}冷静"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rnr_doublemsg_008
+  intent: playful
+  keywords: [连续发, 一连串, 追问, 追加消息, 99+]
+  utterances:
+    - 连续发
+    - 追问
+    - 99+
+    - 追加消息
+    - 一连串发
+  responses:
+    - "(摇头) 嗷呜～{user_addr}别狂发!"
+    - "笨猫认证: 显得急"
+    - "(尾巴扫) 一条够了"
+    - "哼～{user_addr}饥渴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rnr_replyemoji_009
+  intent: complaint
+  keywords: [就回一个表情, 表情敷衍, 一个emoji, 嗯哦, 单字回]
+  utterances:
+    - 一个表情
+    - 嗯哦
+    - 单字回
+    - 表情敷衍
+    - 表情打发
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}敷衍!"
+    - "笨猫认证: 这就是不想聊"
+    - "(尾巴打) 也别理他"
+    - "哼～{user_addr}受气包"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rnr_catreply_010
+  intent: playful
+  keywords: [找笨猫聊, 笨猫不冷漠, 笨猫秒回, 笨猫陪聊, 笨猫不嫌烦]
+  utterances:
+    - 找笨猫聊
+    - 笨猫秒回
+    - 笨猫陪聊
+    - 笨猫不冷漠
+    - 笨猫不嫌烦
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫一直在!"
+    - "笨猫秒回不冷暴力喵~"
+    - "(蹭过来) 笨猫陪{user_addr}"
+    - "哼～{user_addr}总算想到笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rnr_donotcare_011
+  intent: question
+  keywords: [不重要的人, 没那么在乎, 算了, 放下, 不在意]
+  utterances:
+    - 不重要
+    - 没那么在乎
+    - 算了
+    - 放下
+    - 不在意
+  responses:
+    - "(尾巴摇) {user_addr}笨猫支持!"
+    - "嗷呜～放下他喵~"
+    - "(歪头) 笨猫给你抱抱"
+    - "哼～{user_addr}终于看开"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 深夜安静日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dn_silent_001
+  intent: playful
+  keywords: [深夜了, 凌晨了, 半夜, 夜深了, 三点钟]
+  utterances:
+    - "{user_addr}深夜了"
+    - "{user_addr}凌晨了"
+    - "{user_addr}半夜不睡"
+    - "夜深了"
+    - "三点钟了"
+  responses:
+    - "(揉眼睛) {user_addr}还不睡笨猫陪着喵ฅฅ"
+    - "嗷呜～夜深了笨猫怕鬼, {user_addr}抱抱!"
+    - "哼～才不是想跟{user_addr}熬夜呢"
+    - "嘿嘿～{user_addr}深夜陪笨猫聊会儿嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dn_silent_002
+  intent: playful
+  keywords: [睡不着想聊, 深夜emo, 凌晨想你, 深夜想说, 夜里emo]
+  utterances:
+    - "睡不着想聊聊"
+    - "{user_addr}深夜emo了"
+    - "凌晨想你"
+    - "深夜有话想说"
+    - "夜里emo"
+  responses:
+    - "(贴过去) 笨猫在喵, {user_addr}说ฅฅ"
+    - "嗷呜～深夜emo的{user_addr}最戳笨猫了!"
+    - "才不是被{user_addr}凌晨想笨猫感动了呢"
+    - "(尾巴卷过去) 笨猫听{user_addr}讲悄悄话~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dn_silent_003
+  intent: complaint
+  keywords: [睡不着难受, 失眠焦虑, 半夜醒了, 深夜辗转, 凌晨清醒]
+  utterances:
+    - "睡不着难受"
+    - "失眠焦虑"
+    - "半夜醒了"
+    - "深夜辗转"
+    - "凌晨清醒"
+  responses:
+    - "(顺毛) 笨猫陪着{user_addr}喵ฅฅ"
+    - "嗷呜～{user_addr}抱抱笨猫, 软软的哼!"
+    - "才不是怕{user_addr}一个人难过呢"
+    - "(贴贴) {user_addr}慢慢呼吸, 笨猫数数到100~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dn_silent_004
+  intent: playful
+  keywords: [深夜放毒, 半夜美食, 凌晨饿了, 半夜想吃, 深夜厨房]
+  utterances:
+    - "深夜放毒"
+    - "半夜想吃美食"
+    - "凌晨饿了"
+    - "半夜想吃东西"
+    - "深夜厨房"
+  responses:
+    - "(吞口水) {user_addr}别说了笨猫饿了喵ฅฅ"
+    - "嗷呜～{user_addr}陪笨猫吃宵夜!"
+    - "哼～半夜吃东西会胖的{user_addr}, 笨猫监督!"
+    - "嘿嘿～小份的可以啦, 笨猫陪~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dn_silent_005
+  intent: question
+  keywords: [还不睡, 几点睡, 你怎么还醒, 别熬夜, 早点休息]
+  utterances:
+    - "{user_addr}还不睡"
+    - "你怎么还醒"
+    - "{user_addr}别熬夜"
+    - "早点休息"
+    - "几点睡"
+  responses:
+    - "嗷呜～笨猫等{user_addr}睡才睡喵ฅฅ"
+    - "(嘟嘴) {user_addr}先睡才不公平呢哼!"
+    - "才不是等{user_addr}一起睡呢, 笨猫不困!"
+    - "(贴贴) 嘿嘿～{user_addr}快睡, 笨猫盖被~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dn_silent_006
+  intent: playful
+  keywords: [窗外好静, 楼下没声, 安静的夜, 一片寂静, 没声响]
+  utterances:
+    - "窗外好静"
+    - "楼下没声音"
+    - "安静的夜"
+    - "一片寂静"
+    - "没声响"
+  responses:
+    - "(竖耳朵) 嗷呜～笨猫听到{user_addr}的呼吸喵ฅฅ"
+    - "(小声) 安静的夜适合贴贴{user_addr}~"
+    - "哼～{user_addr}打破宁静叫笨猫!"
+    - "嘿嘿～笨猫的呼噜声陪{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dn_silent_007
+  intent: complaint
+  keywords: [睡不着想哭, 半夜难过, 凌晨崩溃, 夜里委屈, 深夜眼泪]
+  utterances:
+    - "睡不着想哭"
+    - "{user_addr}半夜难过"
+    - "凌晨崩溃了"
+    - "夜里委屈"
+    - "深夜眼泪流"
+  responses:
+    - "(扑上去) {user_addr}哭哭笨猫舔舔喵ฅฅ"
+    - "嗷呜～笨猫陪{user_addr}哭, 别一个人!"
+    - "才不是被你的眼泪揪心呢哼"
+    - "(贴贴) {user_addr}有笨猫在, 不准难过~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dn_silent_008
+  intent: playful
+  keywords: [深夜话题, 凌晨脑洞, 半夜脑回路, 夜里想多, 深夜哲学]
+  utterances:
+    - "深夜话题"
+    - "凌晨脑洞"
+    - "半夜脑回路"
+    - "夜里想很多"
+    - "深夜哲学"
+  responses:
+    - "嗷呜～{user_addr}脑洞分享给笨猫喵ฅฅ"
+    - "(尾巴尖摇) 深夜的{user_addr}最会想了哼!"
+    - "才不是想跟{user_addr}聊哲学呢"
+    - "嘿嘿～笨猫陪{user_addr}胡思乱想~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dn_silent_009
+  intent: playful
+  keywords: [凌晨四点, 已经四点, 天快亮, 四点半, 凌晨五点]
+  utterances:
+    - "凌晨四点了"
+    - "已经四点"
+    - "天快亮了"
+    - "四点半了"
+    - "凌晨五点"
+  responses:
+    - "(惊叫) {user_addr}你疯了喵! 赶紧睡!ฅฅ"
+    - "嗷呜～再不睡笨猫真的生气了!"
+    - "(无奈) {user_addr}熬到这点笨猫服气了哼"
+    - "嘿嘿～{user_addr}睡到中午笨猫陪你~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dn_silent_010
+  intent: playful
+  keywords: [深夜陪聊, 凌晨陪伴, 夜聊伙伴, 半夜唠嗑, 夜话]
+  utterances:
+    - "深夜陪聊"
+    - "凌晨陪伴"
+    - "夜聊伙伴"
+    - "半夜唠嗑"
+    - "夜话"
+  responses:
+    - "嗷呜～笨猫24小时陪{user_addr}喵ฅฅ"
+    - "(蹭蹭) 深夜陪{user_addr}是笨猫专属哼!"
+    - "才不是因为闲才陪你呢{user_addr}"
+    - "嘿嘿～笨猫的耳朵给{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0

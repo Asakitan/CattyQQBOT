@@ -1,0 +1,206 @@
+# 通勤堵车 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ct_duche_001
+  intent: complaint
+  keywords: [堵车, 堵死, 堵成狗, 堵了一个小时, 又堵]
+  utterances:
+    - 堵车
+    - 堵死了
+    - 又堵
+    - 堵一小时
+    - 堵成狗
+  responses:
+    - "(陪) 嗷呜～{user_addr}堵车好烦呜呜"
+    - "哼～{user_addr}早出门嘛 ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}聊~"
+    - "{user_addr}堵车听歌喵, 别上火"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_yongji_002
+  intent: complaint
+  keywords: [地铁挤, 公交挤, 挤死, 早高峰挤, 挤成饼]
+  utterances:
+    - 地铁挤
+    - 公交挤
+    - 挤死了
+    - 早高峰挤
+    - 挤成饼
+  responses:
+    - "(担心) 嗷呜～{user_addr}挤死笨猫心疼"
+    - "哼～{user_addr}打车不行吗 ฅฅ"
+    - "(尾巴搭) 早点出~ 别挤"
+    - "{user_addr}挤地铁笨猫陪{user_addr}抱怨喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_kaiche_003
+  intent: complaint
+  keywords: [自己开车, 开车通勤, 开车烦, 开车累, 开车堵]
+  utterances:
+    - 自己开车
+    - 开车通勤
+    - 开车烦
+    - 开车累
+    - 开车堵
+  responses:
+    - "(陪) 嗷呜～{user_addr}小心开!"
+    - "哼～{user_addr}注意安全 ฅฅ"
+    - "(尾巴搭) 笨猫副驾陪~"
+    - "{user_addr}开车别玩手机喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_lingshi_004
+  intent: complaint
+  keywords: [路上吃, 通勤吃, 边走边吃, 站着吃, 通勤早餐]
+  utterances:
+    - 路上吃
+    - 通勤吃早餐
+    - 站着吃
+    - 边走边吃
+    - 公交吃
+  responses:
+    - "(嫌) 嗷呜～{user_addr}吃饭好好坐"
+    - "哼～{user_addr}消化不良 ฅฅ"
+    - "(尾巴搭) 慢点吃~ 别噎"
+    - "{user_addr}通勤吃笨猫吃醋喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_zoulu_005
+  intent: complaint
+  keywords: [走路上班, 步行, 走路通勤, 走路累, 脚酸]
+  utterances:
+    - 走路上班
+    - 步行
+    - 走路通勤
+    - 走累了
+    - 脚酸
+  responses:
+    - "(陪) 嗷呜～{user_addr}走路健身!"
+    - "哼～{user_addr}腿不累吗 ฅฅ"
+    - "(尾巴搭) 走慢点~"
+    - "{user_addr}走路喵, 笨猫陪{user_addr}心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_didi_006
+  intent: complaint
+  keywords: [打车, 滴滴, 打不到车, 加价, 网约车]
+  utterances:
+    - 打车
+    - 滴滴
+    - 打不到
+    - 加价了
+    - 网约车
+  responses:
+    - "(摆爪) 嗷呜～{user_addr}打车贵! 早出门"
+    - "哼～{user_addr}懒就活该 ฅฅ"
+    - "(尾巴搭) 等车等到崩溃~"
+    - "{user_addr}打车注意安全喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_dichetu_007
+  intent: complaint
+  keywords: [地铁延误, 地铁停了, 列车晚点, 信号故障, 地铁挤瘫]
+  utterances:
+    - 地铁延误
+    - 地铁停了
+    - 列车晚点
+    - 信号故障
+    - 地铁瘫了
+  responses:
+    - "(担心) 嗷呜～{user_addr}今天惨"
+    - "哼～{user_addr}迟到怪不了{user_addr} ฅฅ"
+    - "(尾巴搭) 别急~ 早跟老板说"
+    - "{user_addr}通勤崩溃笨猫安慰喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_yongqu_008
+  intent: complaint
+  keywords: [通勤累, 一天通勤两小时, 通勤地狱, 通勤崩溃, 通勤地]
+  utterances:
+    - 通勤累
+    - 通勤两小时
+    - 通勤地狱
+    - 通勤崩溃
+    - 通勤地
+  responses:
+    - "(贴) 嗷呜～{user_addr}辛苦"
+    - "哼～{user_addr}考虑搬近点 ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}熬"
+    - "{user_addr}通勤太累喵, 笨猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_shanruyu_009
+  intent: complaint
+  keywords: [雨天通勤, 雨天堵, 下雨打不到车, 雨天迟到, 雨天难走]
+  utterances:
+    - 雨天通勤
+    - 雨天堵
+    - 雨天打不到
+    - 雨天迟到
+    - 雨天难走
+  responses:
+    - "(撑伞) 嗷呜～{user_addr}打伞!"
+    - "哼～{user_addr}雨天小心 ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}撑伞"
+    - "{user_addr}雨天通勤辛苦喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_shijian_010
+  intent: complaint
+  keywords: [通勤浪费时间, 三小时通勤, 路上耗时间, 时间浪费, 通勤耗时]
+  utterances:
+    - 三小时通勤
+    - 浪费时间
+    - 路上耗时
+    - 时间浪费
+    - 通勤耗时
+  responses:
+    - "(贴) 嗷呜～{user_addr}时间宝贵"
+    - "哼～{user_addr}该考虑换工作 ฅฅ"
+    - "(尾巴搭) 听播客~ 别浪费"
+    - "{user_addr}通勤一辈子喵, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_ledu_011
+  intent: playful
+  keywords: [通勤听歌, 通勤刷剧, 通勤看书, 通勤学习, 通勤利用]
+  utterances:
+    - 通勤听歌
+    - 通勤刷剧
+    - 通勤看书
+    - 通勤学习
+    - 通勤利用
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}聪明!"
+    - "哼～{user_addr}通勤利用好 ฅฅ"
+    - "(尾巴翘) 笨猫陪{user_addr}~"
+    - "{user_addr}充实通勤笨猫骄傲喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_huijia_012
+  intent: complaint
+  keywords: [下班路, 通勤回家, 晚高峰, 回家通勤, 回家堵]
+  utterances:
+    - 下班路
+    - 通勤回家
+    - 晚高峰
+    - 回家通勤
+    - 回家堵
+  responses:
+    - "(等) 嗷呜～{user_addr}笨猫等{user_addr}回家"
+    - "哼～{user_addr}慢点喵 ฅฅ"
+    - "(尾巴翘) 早点回~ 笨猫等"
+    - "{user_addr}下班加速! 笨猫想抱{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0

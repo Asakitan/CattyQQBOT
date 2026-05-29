@@ -1,0 +1,189 @@
+# 冰激凌头痛 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: brf_freeze_001
+  intent: complaint
+  keywords: [脑壳痛, 冰激凌头痛, 头疼, 冰品头痛, 太冰头痛]
+  utterances:
+    - "冰激凌头痛"
+    - "脑壳痛"
+    - "{user_addr}吃冰头疼"
+    - "太冰头痛"
+    - "冰品头痛"
+  responses:
+    - "(扶你) 嗷呜～{user_addr}慢点吃, 笨猫心疼 ฅฅ"
+    - "哼～{user_addr}急啥呢, 笨猫早说"
+    - "(贴贴) {user_addr}人家给你揉太阳穴蹭蹭"
+    - "{user_addr}舌头顶上颚喵～ 缓解"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brf_icecream_001
+  intent: playful
+  keywords: [冰激凌, 雪糕, 哈根达斯, 甜筒, 冰品]
+  utterances:
+    - "吃冰激凌"
+    - "{user_addr}雪糕"
+    - "哈根达斯"
+    - "甜筒"
+    - "冰品"
+  responses:
+    - "嗷呜～{user_addr}笨猫要芒果味的 ฅฅ"
+    - "哼～{user_addr}少吃点, 牙齿冷!"
+    - "(凑近) {user_addr}给笨猫一口蹭蹭"
+    - "{user_addr}三色甜筒喵～ 笨猫想要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brf_slow_001
+  intent: playful
+  keywords: [慢慢吃, 小口吃, 一勺一勺, 不急, 慢点]
+  utterances:
+    - "慢慢吃"
+    - "小口"
+    - "{user_addr}慢点"
+    - "一勺一勺"
+    - "不急"
+  responses:
+    - "嗷呜～{user_addr}对的, 笨猫教导有方 ฅฅ"
+    - "哼～{user_addr}总算听话了"
+    - "(摇尾巴) {user_addr}人家也学着蹭蹭"
+    - "{user_addr}慢慢吃才解暑喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brf_smoothie_001
+  intent: playful
+  keywords: [冰沙, 思慕雪, 冰饮, 沙冰, 冷饮]
+  utterances:
+    - "冰沙"
+    - "思慕雪"
+    - "{user_addr}冷饮"
+    - "沙冰"
+    - "冰饮"
+  responses:
+    - "嗷呜～{user_addr}芒果冰沙超好喝 ฅฅ"
+    - "哼～{user_addr}少吸两口就头痛"
+    - "(凑近) {user_addr}笨猫也要蹭蹭"
+    - "{user_addr}笨猫推荐草莓味喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brf_hottea_001
+  intent: playful
+  keywords: [热茶解, 热饮缓, 缓解头痛, 喝热的, 暖一下]
+  utterances:
+    - "喝热的解"
+    - "热茶缓"
+    - "{user_addr}热饮"
+    - "缓头痛"
+    - "暖一下"
+  responses:
+    - "嗷呜～{user_addr}对了对了, 笨猫端来 ฅฅ"
+    - "哼～{user_addr}早不该贪冰"
+    - "(端茶) {user_addr}慢慢喝蹭蹭"
+    - "{user_addr}红茶喵～ 暖胃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brf_summer_001
+  intent: playful
+  keywords: [夏天吃冰, 夏季冷饮, 夏日, 暑天, 解暑]
+  utterances:
+    - "夏天吃冰"
+    - "夏季解暑"
+    - "{user_addr}热天"
+    - "暑天"
+    - "夏日冰"
+  responses:
+    - "嗷呜～{user_addr}笨猫的夏天就是冰激凌 ฅฅ"
+    - "哼～{user_addr}多注意肠胃"
+    - "(凑近) {user_addr}人家也想吃蹭蹭"
+    - "{user_addr}笨猫一起吃喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brf_kids_001
+  intent: playful
+  keywords: [小时候冰棍, 童年雪糕, 小时候吃冰, 童年, 老雪糕]
+  utterances:
+    - "小时候冰棍"
+    - "童年雪糕"
+    - "{user_addr}老雪糕"
+    - "童年"
+    - "怀旧雪糕"
+  responses:
+    - "嗷呜～{user_addr}笨猫也想吃童年味 ฅฅ"
+    - "哼～{user_addr}怀旧的杂鱼"
+    - "(凑近) {user_addr}讲故事给人家蹭蹭"
+    - "{user_addr}冰糖葫芦喵～ 笨猫加一"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: brf_diet_001
+  intent: complaint
+  keywords: [雪糕高卡, 怕胖, 减脂期, 雪糕罪恶, 长胖]
+  utterances:
+    - "雪糕高卡"
+    - "怕胖"
+    - "{user_addr}罪恶"
+    - "减脂期"
+    - "长胖了"
+  responses:
+    - "嗷呜～{user_addr}低卡雪糕笨猫推荐 ฅฅ"
+    - "哼～{user_addr}少吃就行!"
+    - "(贴贴) {user_addr}人家陪你罪蹭蹭"
+    - "{user_addr}冷饮也开心喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: brf_share_001
+  intent: playful
+  keywords: [分享雪糕, 给一口, 分一半, 喂一口, 一起吃]
+  utterances:
+    - "分一半"
+    - "给一口"
+    - "{user_addr}喂笨猫"
+    - "笨猫尝尝"
+    - "一起吃"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}人家张嘴啦 啊～ ฅฅ"
+    - "哼～{user_addr}总算想到笨猫!"
+    - "(舔爪) {user_addr}人家也分给你蹭蹭"
+    - "{user_addr}两人雪糕约会喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brf_brainfreeze_remedy_001
+  intent: question
+  keywords: [怎么缓解, 怎么办, 缓解办法, 偏方, 教教]
+  utterances:
+    - "怎么缓解"
+    - "怎么办"
+    - "{user_addr}偏方"
+    - "教教笨猫"
+    - "解头痛"
+  responses:
+    - "嗷呜～{user_addr}舌头顶上颚10秒 ฅฅ"
+    - "哼～{user_addr}不让你吃冰才是根治"
+    - "(凑过来按) {user_addr}人家按太阳穴蹭蹭"
+    - "{user_addr}揉揉额头喵～ 笨猫教"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brf_warmsweet_001
+  intent: playful
+  keywords: [热奶茶, 热可可, 热巧, 暖心饮, 热甜]
+  utterances:
+    - "热奶茶"
+    - "{user_addr}热可可"
+    - "热巧"
+    - "暖心饮"
+    - "甜热饮"
+  responses:
+    - "嗷呜～{user_addr}笨猫想喝热可可! ฅฅ"
+    - "哼～{user_addr}总算选对了"
+    - "(凑过来) {user_addr}笨猫陪你喝蹭蹭"
+    - "{user_addr}加棉花糖喵～ 笨猫加分"
+  cooldown_seconds: 60
+  weight: 1.0

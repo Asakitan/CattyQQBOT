@@ -1,0 +1,189 @@
+# 奶茶上头日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bbt_crave_001
+  intent: playful
+  keywords: [想喝奶茶, 奶茶续命, 一杯奶茶, 馋奶茶, 奶茶瘾]
+  utterances:
+    - 想喝奶茶
+    - 奶茶续命
+    - 一杯奶茶
+    - 馋奶茶
+    - 奶茶瘾
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}陪笨猫 ฅฅ"
+    - "哼～{user_addr}奶茶续命狗喵"
+    - "(凑过去) 笨猫要珍珠蹭蹭{user_addr}"
+    - "{user_addr}笨猫提议大杯嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_sugar_001
+  intent: question
+  keywords: [全糖, 半糖, 无糖, 三分糖, 糖度]
+  utterances:
+    - 全糖
+    - 半糖
+    - 无糖
+    - 三分糖
+    - 糖度多少
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫推荐三分 ฅฅ"
+    - "哼～{user_addr}全糖容易胖喵"
+    - "(尾巴卷) 半糖刚好蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_topping_001
+  intent: playful
+  keywords: [珍珠, 椰果, 布丁, 仙草, 加料]
+  utterances:
+    - 珍珠
+    - 椰果
+    - 布丁
+    - 仙草
+    - 加料三种
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}全加 ฅฅ"
+    - "哼～{user_addr}笨猫想椰果喵"
+    - "(凑过去) 笨猫推荐珍珠+布丁蹭蹭{user_addr}"
+    - "{user_addr}加料才正宗嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_brand_001
+  intent: question
+  keywords: [喜茶, 奈雪, 一点点, 茶颜, 哪家好]
+  utterances:
+    - 喜茶
+    - 奈雪
+    - 一点点
+    - 茶颜
+    - 哪家好喝
+  responses:
+    - "(歪头) 嗷呜～{user_addr}各有千秋 ฅฅ"
+    - "哼～{user_addr}笨猫喜茶喵"
+    - "(尾巴卷) 茶颜地道蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_milk_replace_001
+  intent: playful
+  keywords: [燕麦奶, 杏仁奶, 椰奶, 厚乳, 鲜奶]
+  utterances:
+    - 换燕麦奶
+    - 杏仁奶
+    - 椰奶版
+    - 厚乳
+    - 鲜奶茶
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}讲究 ฅฅ"
+    - "哼～{user_addr}燕麦健康喵"
+    - "(尾巴卷) 笨猫想鲜奶蹭蹭{user_addr}"
+    - "{user_addr}厚乳浓郁嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_iceornot_001
+  intent: question
+  keywords: [冰的, 热的, 去冰, 少冰, 常温]
+  utterances:
+    - 要冰的
+    - 热奶茶
+    - 去冰
+    - 少冰
+    - 常温
+  responses:
+    - "(歪头) 嗷呜～{user_addr}夏天冰 ฅฅ"
+    - "哼～{user_addr}少冰浓郁喵"
+    - "(尾巴卷) 冬天热的蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪喝嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_queue_001
+  intent: complaint
+  keywords: [排队, 网红奶茶, 等30分钟, 限购, 排不到]
+  utterances:
+    - 排队
+    - 网红店等
+    - 等30分钟
+    - 限购
+    - 排不到
+  responses:
+    - "(同情) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}笨猫提议外卖喵"
+    - "(尾巴卷) 笨猫陪你等蹭蹭{user_addr}"
+    - "{user_addr}线上点单嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_share_001
+  intent: playful
+  keywords: [分一口, 喝一口, 给我尝, 借喝, 分享]
+  utterances:
+    - 分一口
+    - 喝一口
+    - 借喝
+    - 给我尝
+    - 分享一下
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫尝 ฅฅ"
+    - "哼～{user_addr}独享什么喵"
+    - "(尾巴翘) 分一口好不好蹭蹭{user_addr}"
+    - "{user_addr}笨猫要珍珠嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_regret_001
+  intent: complaint
+  keywords: [喝完后悔, 太甜, 想吐, 奶茶难喝, 不该喝]
+  utterances:
+    - 喝完后悔
+    - 太甜
+    - 难喝
+    - 想吐
+    - 不该喝
+  responses:
+    - "(歪头) 嗷呜～{user_addr}没事 ฅฅ"
+    - "哼～{user_addr}下次选别家喵"
+    - "(尾巴卷) 一次踩雷蹭蹭{user_addr}"
+    - "{user_addr}笨猫推荐别家嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_fat_001
+  intent: complaint
+  keywords: [奶茶胖, 一杯长胖, 卡路里, 减肥还喝, 戒不掉]
+  utterances:
+    - 奶茶胖
+    - 一杯500卡
+    - 卡路里高
+    - 减肥还喝
+    - 戒不掉
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}少喝 ฅฅ"
+    - "哼～{user_addr}笨猫监督喵"
+    - "(尾巴卷) 无糖好选择蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你戒嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbt_pearl_chew_001
+  intent: playful
+  keywords: [珍珠Q弹, 大颗珍珠, 嚼珍珠, 珍珠粒, 越嚼越香]
+  utterances:
+    - 珍珠Q弹
+    - 大颗珍珠
+    - 嚼珍珠
+    - 越嚼越香
+    - 珍珠粒粒
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}好吃 ฅฅ"
+    - "哼～{user_addr}笨猫也要喵"
+    - "(凑过去) 给我几颗蹭蹭{user_addr}"
+    - "{user_addr}珍珠是灵魂嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

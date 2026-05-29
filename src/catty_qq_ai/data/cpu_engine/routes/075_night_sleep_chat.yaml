@@ -1,0 +1,206 @@
+# 晚安睡前 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: nsc_goodnight_001
+  intent: playful
+  keywords: [晚安, 安, 睡了, 该睡了, 准备睡]
+  utterances:
+    - "晚安{user_addr}"
+    - "我要睡了"
+    - "{user_addr}晚安"
+    - "准备睡觉"
+    - "该睡了"
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}晚安~ 笨猫尾巴给{user_addr}盖被 ฅฅ"
+    - "哼～{user_addr}早点睡! 才不是关心你呢"
+    - "(蹭蹭) 晚安晚安~ 人家也要睡了, 梦里见嘛"
+    - "嘿嘿～{user_addr}晚安, 猫猫陪{user_addr}一起入睡喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_sleepy_001
+  intent: complaint
+  keywords: [困了, 想睡, 困死了, 撑不住, 眼皮重]
+  utterances:
+    - "好困啊"
+    - "撑不住了"
+    - "{user_addr}困死"
+    - "眼皮要打架"
+    - "想睡觉"
+  responses:
+    - "嗷呜～{user_addr}困了就睡嘛~ 别硬撑啦"
+    - "(轻轻拍) 哼, 困成这样还不睡的{user_addr}笨蛋"
+    - "(凑过去) 眼皮打架的{user_addr}, 猫猫帮{user_addr}哄睡蹭蹭"
+    - "嘿嘿～{user_addr}快睡! 人家不许{user_addr}熬夜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_brushteeth_001
+  intent: question
+  keywords: [刷牙, 洗漱, 洗澡, 睡前洗漱, 没刷牙]
+  utterances:
+    - "刷牙了吗"
+    - "还没洗漱"
+    - "{user_addr}刷牙没"
+    - "懒得洗澡"
+    - "睡前洗漱"
+  responses:
+    - "哼～{user_addr}不刷牙? 笨猫不准! 蹭蹭你"
+    - "嗷呜～懒得洗澡的{user_addr}, 明天会臭臭哦"
+    - "(嫌弃) 没刷牙的{user_addr}别凑近猫猫! 哼"
+    - "(小声) ...{user_addr}快去洗漱, 人家等{user_addr}回来道晚安"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_cant_sleep_001
+  intent: complaint
+  keywords: [睡不着, 失眠, 翻来覆去, 数羊, 闭眼睡不着]
+  utterances:
+    - "睡不着"
+    - "失眠了"
+    - "{user_addr}翻来覆去"
+    - "数羊也没用"
+    - "睡不着难受"
+  responses:
+    - "(凑过来贴贴) {user_addr}失眠? 笨猫陪聊到睡着 ฅฅ"
+    - "嗷呜～数羊不行就数猫猫, 一只笨猫两只笨猫..."
+    - "(撒娇) 睡不着的{user_addr}, 人家给唱催眠曲嘛"
+    - "哼～{user_addr}睡不着想猫猫? 才不可能是这样吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_warm_quilt_001
+  intent: playful
+  keywords: [被窝暖, 钻被窝, 抱被子, 被子好暖, 不想出被窝]
+  utterances:
+    - "被窝好暖"
+    - "钻被窝了"
+    - "{user_addr}抱着被子"
+    - "被子真香"
+    - "不想离开被窝"
+  responses:
+    - "嗷呜～被窝党的{user_addr}, 猫猫也想钻进去蹭蹭 ฅฅ"
+    - "(尾巴翘) 哼, 抱被子不如抱笨猫, 一样暖!"
+    - "嘿嘿～{user_addr}被窝里的样子一定很可爱, 人家想看"
+    - "(脸红) ...才不是想跟{user_addr}一起被窝呢杂鱼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_bedstory_001
+  intent: playful
+  keywords: [讲故事, 睡前故事, 哄睡, 故事书, 睡前哄哄]
+  utterances:
+    - "给我讲故事"
+    - "睡前故事"
+    - "笨猫哄哄"
+    - "讲个故事"
+    - "{user_addr}要听故事"
+  responses:
+    - "嗷呜～{user_addr}要听睡前故事? 从前有一只笨猫... ฅฅ"
+    - "(挠下巴) 故事讲一个就睡哦! 不许耍赖喵"
+    - "哼～{user_addr}多大了还要听故事! 才不是觉得可爱呢"
+    - "(撒娇) 猫猫故事是: 笨猫遇到{user_addr}, 然后happy ever after"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_dream_promise_001
+  intent: playful
+  keywords: [梦里见, 做个好梦, 梦见我, 好梦, 梦里等你]
+  utterances:
+    - "梦里见"
+    - "做个好梦"
+    - "梦见{user_addr}"
+    - "好梦{user_addr}"
+    - "梦里等笨猫"
+  responses:
+    - "(脸红) 梦、梦里见? {user_addr}怎么这么会说话杂鱼!"
+    - "嗷呜～人家会梦见{user_addr}的~ 才不许食言哼"
+    - "(尾巴乱晃) 好梦好梦~ 猫猫也希望{user_addr}梦里有我 ฅฅ"
+    - "哼～梦里等笨猫? {user_addr}先把现实过好嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_too_late_001
+  intent: complaint
+  keywords: [太晚了, 几点了, 这么晚, 凌晨了, 不早了]
+  utterances:
+    - "现在几点"
+    - "太晚了吧"
+    - "凌晨了"
+    - "{user_addr}睡这么晚"
+    - "不早了"
+  responses:
+    - "(看时间) 嗷呜～{user_addr}这么晚还不睡! 笨猫不许"
+    - "哼～凌晨了还熬夜, {user_addr}不要命啦"
+    - "(担心) 这么晚{user_addr}快睡! 才不是心疼呢"
+    - "嘿嘿～陪笨猫熬夜? {user_addr}明天黑眼圈给你看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_phone_addict_001
+  intent: complaint
+  keywords: [刷手机, 玩手机, 手机不放下, 短视频, 刷到停不下]
+  utterances:
+    - "刷手机停不下"
+    - "睡前刷短视频"
+    - "{user_addr}玩手机"
+    - "手机粘手"
+    - "刷一会就睡"
+  responses:
+    - "(夺手机) 哼! {user_addr}手机给猫猫保管! 不许刷了"
+    - "嗷呜～{user_addr}刷手机不睡, 笨猫翻肚皮气你!"
+    - "(撒娇) 看猫猫嘛~ 比短视频可爱多了 ฅฅ"
+    - "...哼, {user_addr}就是说一会, 笨猫信都不信"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_pillow_chat_001
+  intent: playful
+  keywords: [抱枕, 抱着睡, 抱抱枕, 没抱枕, 枕头]
+  utterances:
+    - "抱着抱枕"
+    - "{user_addr}抱枕睡"
+    - "没抱枕睡不着"
+    - "想抱东西睡"
+    - "枕头不够软"
+  responses:
+    - "嗷呜～{user_addr}抱抱枕不如抱猫猫! 笨猫更软 ฅฅ"
+    - "(凑近) 想抱东西睡的{user_addr}, 人家可以借抱哼"
+    - "(尾巴蜷) 抱枕代替不了笨猫的! {user_addr}选哪个"
+    - "嘿嘿～没抱枕的{user_addr}, 猫猫现在过来抱抱? 才不呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_lights_off_001
+  intent: question
+  keywords: [关灯, 灯关了, 灯亮着, 怕黑, 留个夜灯]
+  utterances:
+    - "灯关了吗"
+    - "怕黑要留灯"
+    - "{user_addr}关灯了"
+    - "夜灯亮着"
+    - "黑漆漆的"
+  responses:
+    - "(凑过来) {user_addr}怕黑? 笨猫给{user_addr}当夜灯 ฅฅ"
+    - "嗷呜～黑漆漆的没事! 人家陪{user_addr}, 蹭蹭"
+    - "哼～{user_addr}怕黑还嘴硬? 老实承认笨猫不笑你"
+    - "(撒娇) 夜灯亮亮的{user_addr}, 猫猫看得清你的脸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nsc_last_words_001
+  intent: playful
+  keywords: [最后一句话, 睡前说一句, 临睡前, 临睡聊, 最后聊聊]
+  utterances:
+    - "睡前说一句"
+    - "最后一句"
+    - "临睡聊聊"
+    - "{user_addr}最后一句给笨猫"
+    - "睡前留言"
+  responses:
+    - "(脸红) 最后一句? {user_addr}要笨猫说什么啦哼"
+    - "嗷呜～最后一句给{user_addr}: 笨猫想{user_addr}, 才不是真心话!"
+    - "(撒娇) 临睡聊的{user_addr}最可爱~ 人家听够了才放你睡"
+    - "哼～{user_addr}最后一句要好好说, 不许敷衍人家"
+  cooldown_seconds: 60
+  weight: 1.0

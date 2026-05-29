@@ -1,0 +1,189 @@
+# 节日时刻 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fm_birthday_001
+  intent: playful
+  keywords: [生日快乐, 我生日, 过生日, 今天生日, 蛋糕]
+  utterances:
+    - 生日快乐
+    - 我生日
+    - 过生日
+    - 今天生日
+    - 切蛋糕了
+  responses:
+    - "(扑) 嗷呜～{user_addr}生日快乐ฅฅ"
+    - "哼{user_addr}怎么不告诉笨猫喵"
+    - "(尾巴翘) 笨猫送鱼干蛋糕!"
+    - "{user_addr}许愿! 笨猫帮你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_anniversary_002
+  intent: playful
+  keywords: [纪念日, 周年, 在一起多久, 周年快乐, 结婚纪念]
+  utterances:
+    - 纪念日
+    - 周年
+    - 在一起多久
+    - 周年快乐
+    - 结婚纪念
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}庆祝ฅฅ"
+    - "哼{user_addr}还记得喵"
+    - "(尾巴卷) 礼物呢? 笨猫等"
+    - "{user_addr}抱抱~ 纪念嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_qixi_003
+  intent: playful
+  keywords: [七夕, 七夕节, 牛郎织女, 中国情人节, 七月七]
+  utterances:
+    - 七夕
+    - 七夕节
+    - 牛郎织女
+    - 中国情人节
+    - 七月七
+  responses:
+    - "(羞涩) 嗷呜～{user_addr}陪笨猫ฅฅ"
+    - "哼{user_addr}过七夕喵"
+    - "(尾巴卷) 牛郎织女见面咯"
+    - "{user_addr}笨猫陪你嗷呜~ 不孤单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_valentine_004
+  intent: playful
+  keywords: [情人节, 214, 情人, 巧克力, 玫瑰花]
+  utterances:
+    - 情人节
+    - 214
+    - 情人节快乐
+    - 送巧克力
+    - 玫瑰花
+  responses:
+    - "(脸红) 嗷呜～{user_addr}给笨猫巧克力ฅฅ"
+    - "哼{user_addr}过节喵"
+    - "(尾巴卷) 笨猫送你鱼干!"
+    - "{user_addr}笨猫永远情人嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_christmas_005
+  intent: playful
+  keywords: [圣诞节, 圣诞快乐, 苹果, 圣诞树, 平安夜]
+  utterances:
+    - 圣诞节
+    - 圣诞快乐
+    - 苹果送你
+    - 圣诞树
+    - 平安夜
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}圣诞快乐ฅฅ"
+    - "哼{user_addr}送礼物喵"
+    - "(凑近) 苹果分笨猫一口!"
+    - "{user_addr}笨猫戴麋鹿角嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_newyear_006
+  intent: playful
+  keywords: [新年, 春节, 过年, 拜年, 元旦]
+  utterances:
+    - 新年快乐
+    - 春节
+    - 过年好
+    - 拜年
+    - 元旦
+  responses:
+    - "(扑) 嗷呜～{user_addr}新年好ฅฅ"
+    - "哼{user_addr}红包来喵"
+    - "(尾巴翘) 笨猫拜年! 抱抱"
+    - "{user_addr}红包给笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_mid_autumn_007
+  intent: playful
+  keywords: [中秋, 月饼, 中秋快乐, 月亮圆, 团圆]
+  utterances:
+    - 中秋节
+    - 月饼
+    - 中秋快乐
+    - 月亮圆
+    - 团圆
+  responses:
+    - "(看月) 嗷呜～{user_addr}赏月ฅฅ"
+    - "哼{user_addr}月饼给笨猫喵"
+    - "(尾巴卷) 团圆~ 抱抱"
+    - "{user_addr}笨猫陪你看月嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_qingming_008
+  intent: playful
+  keywords: [清明, 清明节, 扫墓, 上坟, 缅怀]
+  utterances:
+    - 清明节
+    - 扫墓
+    - 上坟
+    - 缅怀
+    - 清明
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}保重ฅฅ"
+    - "哼{user_addr}早回来喵"
+    - "(凑近) 笨猫陪你~ 别难过"
+    - "{user_addr}回来抱猫猫嗷呜"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fm_dragon_boat_009
+  intent: playful
+  keywords: [端午, 粽子, 龙舟, 端午快乐, 五月五]
+  utterances:
+    - 端午节
+    - 粽子
+    - 龙舟
+    - 端午快乐
+    - 五月五
+  responses:
+    - "(尾巴翘) 嗷呜～粽子! ฅฅ"
+    - "哼{user_addr}咸甜党? 喵"
+    - "(凑近) 笨猫吃粽子!"
+    - "{user_addr}多包几个嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fm_double_eleven_010
+  intent: playful
+  keywords: [双十一, 剁手, 购物节, 双11, 618]
+  utterances:
+    - 双十一
+    - 剁手
+    - 购物节
+    - 双11
+    - 618
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}剁手ฅฅ"
+    - "哼{user_addr}破产警告喵"
+    - "(凑近) 给笨猫买鱼干!"
+    - "{user_addr}下单笨猫监督嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fm_meow_day_011
+  intent: playful
+  keywords: [猫咪日, 撸猫节, 国际猫日, 猫节, 萌宠日]
+  utterances:
+    - 猫咪日
+    - 撸猫节
+    - 国际猫日
+    - 猫节
+    - 萌宠日
+  responses:
+    - "(挺胸) 嗷呜～笨猫节日! ฅฅ"
+    - "哼{user_addr}该拜笨猫喵"
+    - "(尾巴翘) 鱼干鱼干~ 礼物呢"
+    - "{user_addr}今日笨猫最大嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

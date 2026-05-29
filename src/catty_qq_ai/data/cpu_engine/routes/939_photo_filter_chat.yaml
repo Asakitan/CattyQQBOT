@@ -1,0 +1,189 @@
+# 滤镜过度日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: flt_too_heavy_001
+  intent: playful
+  keywords: [滤镜重, 滤镜过度, 修过头, P到妈不认, 假]
+  utterances:
+    - 滤镜重
+    - 滤镜过度
+    - 修过头
+    - P到妈不认
+    - 假
+  responses:
+    - "(吐槽) 嗷呜～{user_addr}真人见面好认 ฅฅ"
+    - "哼～{user_addr}卸妆见真容喵"
+    - "(尾巴卷) 适度好蹭蹭{user_addr}"
+    - "{user_addr}笨猫劝你自然嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: flt_select_001
+  intent: playful
+  keywords: [选滤镜, 试滤镜, 哪个滤镜, 推荐滤镜, 滤镜搭]
+  utterances:
+    - 选滤镜
+    - 试滤镜
+    - 哪个滤镜好
+    - 推荐滤镜
+    - 搭滤镜
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫帮选 ฅฅ"
+    - "哼～{user_addr}自然系喵"
+    - "(尾巴卷) 笨猫推荐胶片蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: flt_beauty_001
+  intent: playful
+  keywords: [美颜, 美图秀秀, 嫩肤, 大眼, 瘦脸]
+  utterances:
+    - 开美颜
+    - 美图修
+    - 嫩肤
+    - 大眼
+    - 瘦脸
+  responses:
+    - "(歪头) 嗷呜～{user_addr}也行 ฅฅ"
+    - "哼～{user_addr}笨猫天然喵"
+    - "(尾巴卷) 适度蹭蹭{user_addr}"
+    - "{user_addr}笨猫不需要嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: flt_compare_001
+  intent: playful
+  keywords: [P前P后, 原图对比, 修图对比, 反差, 妈妈不认]
+  utterances:
+    - P前P后
+    - 原图对比
+    - 反差
+    - 妈妈不认
+    - 修图对比
+  responses:
+    - "(陪笑) 嗷呜～{user_addr}差别大 ฅฅ"
+    - "哼～{user_addr}笑死喵"
+    - "(尾巴卷) 给笨猫看蹭蹭{user_addr}"
+    - "{user_addr}笨猫围观嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: flt_too_thin_001
+  intent: complaint
+  keywords: [瘦成纸片, 腿P弯, 腰太细, P掉胳膊, 不科学]
+  utterances:
+    - 瘦成纸片
+    - 腿P弯
+    - 腰太细
+    - P掉胳膊
+    - 不科学
+  responses:
+    - "(吐槽) 嗷呜～{user_addr}过头 ฅฅ"
+    - "哼～{user_addr}P成异形喵"
+    - "(尾巴卷) 自然好蹭蹭{user_addr}"
+    - "{user_addr}笨猫劝你少修嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: flt_camera_app_001
+  intent: question
+  keywords: [相机APP, 美图相机, 黄油相机, 用啥APP, B612]
+  utterances:
+    - 相机APP
+    - 美图相机
+    - 黄油相机
+    - B612
+    - 用啥拍
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫推荐 ฅฅ"
+    - "哼～{user_addr}原相机最好喵"
+    - "(尾巴卷) 黄油有质感蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: flt_skin_001
+  intent: playful
+  keywords: [磨皮, 皮肤好假, 磨成蛋, 痘没了, 皮如玉]
+  utterances:
+    - 磨皮
+    - 皮肤好假
+    - 磨成蛋
+    - 痘没了
+    - 皮如玉
+  responses:
+    - "(歪头) 嗷呜～{user_addr}过分 ฅฅ"
+    - "哼～{user_addr}笨猫不爱磨喵"
+    - "(尾巴卷) 留点纹理蹭蹭{user_addr}"
+    - "{user_addr}笨猫劝自然嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: flt_filter_brand_001
+  intent: playful
+  keywords: [Foodie, VSCO, Lightroom, Snapseed, 滤镜APP]
+  utterances:
+    - Foodie
+    - VSCO
+    - Lightroom
+    - Snapseed
+    - 滤镜APP
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}专业 ฅฅ"
+    - "哼～{user_addr}笨猫不会用喵"
+    - "(尾巴卷) 教笨猫蹭蹭{user_addr}"
+    - "{user_addr}笨猫想学嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: flt_offline_001
+  intent: complaint
+  keywords: [本人和照片不一样, 见面差距, 现实滤镜, 网上美, 见光死]
+  utterances:
+    - 本人和照片不一样
+    - 见面差距
+    - 网上美
+    - 见光死
+    - 现实滤镜
+  responses:
+    - "(陪笑) 嗷呜～{user_addr}笑死 ฅฅ"
+    - "哼～{user_addr}滤镜骗人喵"
+    - "(尾巴卷) 真人更好蹭蹭{user_addr}"
+    - "{user_addr}笨猫不嫌嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: flt_food_001
+  intent: playful
+  keywords: [食物滤镜, 美食滤镜, 拍菜, 拍饭, 食物好看]
+  utterances:
+    - 食物滤镜
+    - 美食滤镜
+    - 拍菜
+    - 拍饭好看
+    - 拍食物
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}给笨猫看 ฅฅ"
+    - "哼～{user_addr}馋猫喵"
+    - "(尾巴卷) 食物滤镜实用蹭蹭{user_addr}"
+    - "{user_addr}笨猫想吃嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: flt_scenery_001
+  intent: playful
+  keywords: [风景滤镜, 出去拍, 旅游照, 蓝天滤镜, 海边]
+  utterances:
+    - 风景滤镜
+    - 出去拍照
+    - 旅游照
+    - 蓝天滤镜
+    - 海边拍照
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}美 ฅฅ"
+    - "哼～{user_addr}带笨猫喵"
+    - "(尾巴卷) 笨猫想拍蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

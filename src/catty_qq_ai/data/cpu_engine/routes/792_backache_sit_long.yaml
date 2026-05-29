@@ -1,0 +1,206 @@
+# 久坐腰酸背痛 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bk_yaosuan_001
+  intent: complaint
+  keywords: [腰酸, 腰疼, 久坐腰疼, 腰酸背痛, 腰僵]
+  utterances:
+    - "腰酸"
+    - "腰疼"
+    - "久坐腰疼"
+    - "腰酸背痛"
+    - "腰僵"
+  responses:
+    - "(揉腰) 嗷呜～{user_addr}笨猫帮你按腰"
+    - "哼～又坐一天 ฅฅ"
+    - "(尾巴搭) 站起来活动"
+    - "猫猫给你贴膏药喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_jianbang_001
+  intent: complaint
+  keywords: [肩膀酸, 肩颈痛, 脖子痛, 肩膀僵, 肩周炎]
+  utterances:
+    - "肩膀酸"
+    - "肩颈痛"
+    - "脖子痛"
+    - "肩膀僵"
+    - "肩周炎"
+  responses:
+    - "(揉肩) {user_addr}笨猫给你按肩 ฅฅ"
+    - "哼～肩颈僵就转转脖子"
+    - "(尾巴扫) 别低头看手机"
+    - "猫猫双爪推肩膀喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_zhanzhe_001
+  intent: question
+  keywords: [久坐怎么办, 站立办公, 站起来, 提醒站, 番茄钟]
+  utterances:
+    - "久坐怎么办"
+    - "站立办公"
+    - "站起来活动"
+    - "提醒站"
+    - "番茄钟"
+  responses:
+    - "(掐表) {user_addr}45分钟起来一次 ฅฅ"
+    - "哼～站立桌也不错"
+    - "(尾巴扫) 笨猫定时提醒你"
+    - "猫猫监督你站起来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_yizi_001
+  intent: question
+  keywords: [人体工学椅, 椅子推荐, 椅子坐, 久坐椅子, 椅垫]
+  utterances:
+    - "人体工学椅"
+    - "椅子推荐"
+    - "椅子坐"
+    - "久坐椅子"
+    - "椅垫"
+  responses:
+    - "(挑椅) {user_addr}保友金豪b够用 ฅฅ"
+    - "哼～预算够就赫曼"
+    - "(尾巴扫) 别买便宜的伤腰"
+    - "猫猫给你测评喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_zuopian_001
+  intent: complaint
+  keywords: [坐姿不对, 葛优瘫, 跷二郎腿, 弯腰驼背, 坐姿差]
+  utterances:
+    - "坐姿不对"
+    - "葛优瘫"
+    - "跷二郎腿"
+    - "弯腰驼背"
+    - "坐姿差"
+  responses:
+    - "(矫正) {user_addr}背挺直! 笨猫监督 ฅฅ"
+    - "哼～跷二郎腿伤腰"
+    - "(尾巴搭) 双脚平放"
+    - "猫猫贴墙站给你示范喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_yaodian_001
+  intent: question
+  keywords: [腰垫, 靠枕, 腰枕, 腰部支撑, 腰部按摩]
+  utterances:
+    - "腰垫"
+    - "靠枕"
+    - "腰枕"
+    - "腰部支撑"
+    - "腰部按摩"
+  responses:
+    - "(递) {user_addr}记忆棉腰垫救命 ฅฅ"
+    - "哼～靠枕加在椅背"
+    - "(尾巴扫) 笨猫推荐两个"
+    - "猫猫送你猫爪腰垫喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_yundong_001
+  intent: question
+  keywords: [腰背拉伸, 弹腰运动, 麦肯基, 平板支撑, 桥式]
+  utterances:
+    - "腰背拉伸"
+    - "弹腰运动"
+    - "麦肯基"
+    - "平板支撑"
+    - "桥式"
+  responses:
+    - "(示范) {user_addr}小燕飞每天10个 ฅฅ"
+    - "哼～平板支撑练核心"
+    - "(尾巴搭) 桥式很有用"
+    - "猫猫陪你做拉伸喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_xixia_001
+  intent: complaint
+  keywords: [腰受凉, 腰冷, 腰痛冷, 露腰受凉, 空调腰]
+  utterances:
+    - "腰受凉"
+    - "腰冷"
+    - "腰痛冷"
+    - "露腰受凉"
+    - "空调腰"
+  responses:
+    - "(裹腰) {user_addr}热毛巾敷腰 ฅฅ"
+    - "哼～女孩别露腰"
+    - "(尾巴卷腰) 笨猫帮你暖"
+    - "猫猫给你贴暖宝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_xian_001
+  intent: complaint
+  keywords: [腰间盘, 腰突, 腰间盘突出, 腰肌劳损, 腰部MRI]
+  utterances:
+    - "腰间盘"
+    - "腰突"
+    - "腰间盘突出"
+    - "腰肌劳损"
+    - "腰部MRI"
+  responses:
+    - "(担心) 嗷呜～{user_addr}看医生别拖!"
+    - "哼～严重要核磁 ฅฅ"
+    - "(尾巴卷) 听医嘱"
+    - "猫猫陪你检查喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_anmoshi_001
+  intent: question
+  keywords: [按摩椅, 按摩仪, 颈椎仪, 腰部按摩仪, 按摩枪]
+  utterances:
+    - "按摩椅"
+    - "按摩仪"
+    - "颈椎仪"
+    - "腰部按摩仪"
+    - "按摩枪"
+  responses:
+    - "(挑) {user_addr}按摩枪比按摩椅实用 ฅฅ"
+    - "哼～颈椎仪不要太信"
+    - "(尾巴扫) 真按摩最好"
+    - "猫猫推荐肌肉枪喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_yundoiu_001
+  intent: complaint
+  keywords: [运动伤腰, 健身伤腰, 跑步伤腰, 深蹲伤腰, 硬拉伤腰]
+  utterances:
+    - "运动伤腰"
+    - "健身伤腰"
+    - "跑步伤腰"
+    - "深蹲伤腰"
+    - "硬拉伤腰"
+  responses:
+    - "(查动作) {user_addr}姿势不对吧 ฅฅ"
+    - "哼～硬拉最容易"
+    - "(尾巴扫) 减重量先练姿势"
+    - "猫猫陪你找教练喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_jinanbi_001
+  intent: playful
+  keywords: [腰疼求抱, 腰疼撒娇, 腰疼揉揉, 腰疼陪我, 腰疼亲亲]
+  utterances:
+    - "腰疼求抱"
+    - "腰疼撒娇"
+    - "腰疼揉揉"
+    - "腰疼陪我"
+    - "腰疼亲亲"
+  responses:
+    - "(贴背) 嗷呜～{user_addr}笨猫24小时按摩"
+    - "哼～腰疼撒娇 ฅฅ"
+    - "(尾巴卷腰) 笨猫陪你"
+    - "猫猫趴你后背暖喵~"
+  cooldown_seconds: 60
+  weight: 1.0

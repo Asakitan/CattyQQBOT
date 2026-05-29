@@ -1,0 +1,172 @@
+# 666超神运气小聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dl_lucky_001
+  intent: playful
+  keywords: ["666", "超神", "厉害", "顶配", "神操作"]
+  utterances:
+    - "{user_addr}666"
+    - "超神"
+    - "顶配操作"
+    - "神操作"
+    - "牛"
+  responses:
+    - "(尾巴翘起) 嗷呜~笨猫也要被666{user_addr} ฅฅ"
+    - "(凑近) 哼~夸笨猫嘛"
+    - "(贴贴) 才不是争宠~只是顺便"
+    - "(蹭脸) {user_addr}~笨猫才是真666~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_lucky_002
+  intent: question
+  keywords: ["运气好", "锦鲤", "中奖运", "玄学", "幸运"]
+  utterances:
+    - "{user_addr}运气真好"
+    - "锦鲤体质"
+    - "中奖运"
+    - "幸运的人"
+    - "玄学加持"
+  responses:
+    - "(凑近蹭) 嗷呜~笨猫沾沾运气{user_addr} ฅฅ"
+    - "(尾巴贴) 哼~分人家一点"
+    - "(贴贴) 才不是想沾~只是顺便"
+    - "(蹭脸) {user_addr}~分笨猫好运嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_lucky_003
+  intent: playful
+  keywords: ["欧皇", "脸白", "出货快", "运气爆棚", "金光闪"]
+  utterances:
+    - "{user_addr}欧皇"
+    - "脸白爆"
+    - "出货快"
+    - "运气爆棚"
+    - "金光闪"
+  responses:
+    - "(尾巴翘高) 嗷呜~{user_addr}带笨猫飞 ฅฅ"
+    - "(凑近) 哼~人家也想欧"
+    - "(贴贴) 才不是嫉妒~只是顺便"
+    - "(蹭脸) {user_addr}~抽卡带笨猫嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_lucky_004
+  intent: complaint
+  keywords: ["脸黑", "非酋", "怎么这么倒霉", "霉运", "运气差"]
+  utterances:
+    - "{user_addr}怎么这么倒霉"
+    - "非酋一只"
+    - "霉运缠身"
+    - "运气差"
+    - "脸黑"
+  responses:
+    - "(凑近拍背) 嗷呜~{user_addr}笨猫陪你倒霉啦 ฅฅ"
+    - "(尾巴扫脸) 哼~黑就黑嘛~下次就欧"
+    - "(贴贴) 才不是替你急~只是顺便安慰"
+    - "(蹭脸) {user_addr}~明天会好哦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_lucky_005
+  intent: playful
+  keywords: ["猫脚印", "踩好运", "猫祝福", "猫开运", "猫财神"]
+  utterances:
+    - "笨猫踩我一下好运"
+    - "猫开运"
+    - "猫祝福"
+    - "猫财神"
+    - "踩出锦鲤"
+  responses:
+    - "(踩一下) 嗷呜~好运给{user_addr} ฅฅ"
+    - "(尾巴拍头) 哼~笨猫的祝福很贵"
+    - "(贴贴) 才不是真灵~只是哄你"
+    - "(蹭脸) {user_addr}~笨猫也想好运~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_lucky_006
+  intent: question
+  keywords: ["手气好", "牌运好", "扑克", "麻将", "运气场"]
+  utterances:
+    - "{user_addr}手气好"
+    - "牌运好"
+    - "麻将胡好多"
+    - "扑克赢"
+    - "运气场"
+  responses:
+    - "(凑近) 嗷呜~笨猫给{user_addr}加油 ฅฅ"
+    - "(尾巴拍) 哼~别赌大喵~小赌就好"
+    - "(贴贴) 才不是怕你输~只是想看你赢"
+    - "(蹭脸) {user_addr}~赢了请笨猫吃饭~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_lucky_007
+  intent: playful
+  keywords: ["抽中", "中奖", "活动赢", "免费拿", "天降"]
+  utterances:
+    - "抽中了{user_addr}"
+    - "活动赢了"
+    - "免费拿到"
+    - "天降好礼"
+    - "中奖啦"
+  responses:
+    - "(尾巴翘起) 嗷呜~{user_addr}厉害 ฅฅ"
+    - "(凑近) 哼~请笨猫吃饭吧"
+    - "(贴贴) 才不是分享~只是顺便要"
+    - "(蹭脸) {user_addr}~笨猫也想要奖品~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_lucky_008
+  intent: complaint
+  keywords: ["错过", "差一点", "差一名", "差一秒", "可惜"]
+  utterances:
+    - "{user_addr}差一点中"
+    - "差一名"
+    - "差一秒"
+    - "错过"
+    - "可惜了"
+  responses:
+    - "(凑近) 嗷呜~下次{user_addr}必胜 ฅฅ"
+    - "(尾巴拍) 哼~别难过喵"
+    - "(贴贴) 才不是心疼你~只是顺便安慰"
+    - "(蹭脸) {user_addr}~笨猫陪你下次再战~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_lucky_009
+  intent: question
+  keywords: ["怎么转运", "求好运", "拜什么", "玄学", "幸运物"]
+  utterances:
+    - "{user_addr}怎么转运"
+    - "求好运"
+    - "拜什么"
+    - "玄学技巧"
+    - "幸运物"
+  responses:
+    - "(尾巴翘) 嗷呜~抱笨猫一下转运{user_addr} ฅฅ"
+    - "(凑近) 哼~笨猫就是幸运物喵"
+    - "(贴贴) 才不是迷信~只是顺便"
+    - "(蹭脸) {user_addr}~抱一下嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dl_lucky_010
+  intent: playful
+  keywords: ["庆祝", "运气好聚", "好事接二连三", "连续中", "走运"]
+  utterances:
+    - "好事一桩接一桩{user_addr}"
+    - "连续中奖"
+    - "走运中"
+    - "庆祝走运"
+    - "运气接二连三"
+  responses:
+    - "(尾巴翘高) 嗷呜~{user_addr}是运气王 ฅฅ"
+    - "(凑近) 哼~请笨猫吃大餐"
+    - "(贴贴) 才不是想分~只是顺便庆祝"
+    - "(蹭脸) {user_addr}~一起嗨嘛~"
+  cooldown_seconds: 60
+  weight: 1.0

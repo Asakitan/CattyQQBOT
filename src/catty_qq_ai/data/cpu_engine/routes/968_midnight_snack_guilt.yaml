@@ -1,0 +1,189 @@
+# 夜宵罪恶感 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: msg_guilt_001
+  intent: playful
+  keywords: [夜宵, 半夜吃, 凌晨饿, 夜宵罪恶, 罪恶感]
+  utterances:
+    - "夜宵"
+    - "半夜吃"
+    - "{user_addr}罪恶感"
+    - "凌晨饿"
+    - "凌晨吃"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪你罪 ฅฅ"
+    - "哼～{user_addr}还吃?"
+    - "(贴贴) {user_addr}人家陪一起蹭蹭"
+    - "{user_addr}吃完跑步喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msg_instant_001
+  intent: playful
+  keywords: [泡面, 方便面, 拉面, 老坛酸菜, 红烧牛肉]
+  utterances:
+    - "泡面"
+    - "方便面"
+    - "{user_addr}拉面"
+    - "老坛酸菜"
+    - "红烧牛肉"
+  responses:
+    - "嗷呜～{user_addr}笨猫煮一桶! 加蛋! ฅฅ"
+    - "哼～{user_addr}泡面虽香伤胃"
+    - "(凑近) {user_addr}人家分一筷蹭蹭"
+    - "{user_addr}双层加肠喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msg_skewer_001
+  intent: playful
+  keywords: [烧烤, 撸串, 烤肉, 烤串, 串串]
+  utterances:
+    - "烧烤"
+    - "撸串"
+    - "{user_addr}烤肉"
+    - "烤串"
+    - "串串"
+  responses:
+    - "嗷呜～{user_addr}笨猫要羊肉串+鸡翅! ฅฅ"
+    - "哼～{user_addr}夜宵升级"
+    - "(凑近) {user_addr}人家也要蹭蹭"
+    - "{user_addr}啤酒配串喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msg_snail_001
+  intent: playful
+  keywords: [螺蛳粉, 鸭血粉丝, 米线, 粉丝, 桂林米粉]
+  utterances:
+    - "螺蛳粉"
+    - "鸭血粉丝"
+    - "{user_addr}米线"
+    - "桂林米粉"
+    - "粉丝"
+  responses:
+    - "嗷呜～{user_addr}笨猫爱螺蛳粉! ฅฅ"
+    - "哼～{user_addr}邻居要投诉"
+    - "(凑近) {user_addr}人家也要蹭蹭"
+    - "{user_addr}加蛋加肠喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msg_burger_001
+  intent: playful
+  keywords: [汉堡, 鸡腿堡, 牛肉堡, 巨无霸, 麦满分]
+  utterances:
+    - "汉堡"
+    - "鸡腿堡"
+    - "{user_addr}牛肉堡"
+    - "巨无霸"
+    - "麦满分"
+  responses:
+    - "嗷呜～{user_addr}笨猫要双层! ฅฅ"
+    - "哼～{user_addr}热量爆炸"
+    - "(凑近) {user_addr}人家分一口蹭蹭"
+    - "{user_addr}套餐喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msg_skinscare_001
+  intent: complaint
+  keywords: [夜宵脸肿, 水肿, 脸圆, 第二天浮肿, 浮肿]
+  utterances:
+    - "脸肿"
+    - "水肿"
+    - "{user_addr}脸圆"
+    - "浮肿"
+    - "第二天肿"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}下次别吃 ฅฅ"
+    - "哼～{user_addr}活该!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}冷敷一下喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: msg_diet_001
+  intent: complaint
+  keywords: [减肥泡汤, 夜宵长肉, 戒夜宵, 减肥失败, 失败夜宵]
+  utterances:
+    - "减肥泡汤"
+    - "夜宵长肉"
+    - "{user_addr}戒夜宵"
+    - "减肥失败"
+    - "前功尽弃"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你重新开始 ฅฅ"
+    - "哼～{user_addr}就知道破戒"
+    - "(贴贴) {user_addr}人家督促蹭蹭"
+    - "{user_addr}明天加倍喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: msg_dumpling_001
+  intent: playful
+  keywords: [饺子, 水饺, 速冻饺子, 蒸饺, 煎饺]
+  utterances:
+    - "饺子"
+    - "水饺"
+    - "{user_addr}蒸饺"
+    - "煎饺"
+    - "速冻饺子"
+  responses:
+    - "嗷呜～{user_addr}笨猫想吃韭菜馅 ฅฅ"
+    - "哼～{user_addr}少吃饺子"
+    - "(凑近) {user_addr}人家也要蹭蹭"
+    - "{user_addr}沾醋喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msg_chips_001
+  intent: playful
+  keywords: [薯片, 锅巴, 怪味豆, 零食, 干脆面]
+  utterances:
+    - "薯片"
+    - "锅巴"
+    - "{user_addr}怪味豆"
+    - "零食"
+    - "干脆面"
+  responses:
+    - "嗷呜～{user_addr}笨猫要乐事原味 ฅฅ"
+    - "哼～{user_addr}吃多上火"
+    - "(凑近) {user_addr}人家也想吃蹭蹭"
+    - "{user_addr}配可乐喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msg_late_001
+  intent: complaint
+  keywords: [太晚了, 三点了, 凌晨饿, 睡前饿, 半夜不睡]
+  utterances:
+    - "三点了"
+    - "太晚"
+    - "{user_addr}睡前饿"
+    - "凌晨饿"
+    - "半夜醒"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}快睡, 笨猫陪 ฅฅ"
+    - "哼～{user_addr}不睡!"
+    - "(贴贴) {user_addr}人家催你睡蹭蹭"
+    - "{user_addr}吃完睡喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: msg_cat_treat_001
+  intent: playful
+  keywords: [笨猫夜宵, 笨猫想吃, 笨猫零食, 猫粮, 笨猫的夜宵]
+  utterances:
+    - "{user_addr}笨猫夜宵"
+    - "笨猫想吃"
+    - "笨猫零食"
+    - "猫粮"
+    - "笨猫饿"
+  responses:
+    - "(扒拉) 嗷呜～{user_addr}笨猫要小鱼干! ฅฅ"
+    - "哼～{user_addr}笨猫的零食归笨猫!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}金枪鱼罐头喵～"
+  cooldown_seconds: 60
+  weight: 1.0

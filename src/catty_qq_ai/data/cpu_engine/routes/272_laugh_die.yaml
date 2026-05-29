@@ -1,0 +1,189 @@
+# 笑死表情 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ld_xiaosi_001
+  intent: playful
+  keywords: [笑死, 笑哭, 笑出眼泪, 哈哈哈, 笑不停]
+  utterances:
+    - 笑死了
+    - 笑哭了
+    - 笑出眼泪
+    - 哈哈哈
+    - 笑不停
+  responses:
+    - "(尾巴抖) 嗷呜～{user_addr}什么这么好笑 ฅฅ"
+    - "{user_addr}笨猫也想笑哼~"
+    - "(歪头) 笨蛋{user_addr}~笑啥告诉我"
+    - "{user_addr}笑死了笨猫接住"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_bengbu_001
+  intent: playful
+  keywords: [蚌埠住了, 绷不住, 我裂开, 笑裂, 直接破防]
+  utterances:
+    - 蚌埠住了
+    - 绷不住
+    - 我裂开
+    - 笑裂
+    - 直接破防
+  responses:
+    - "嗷呜～{user_addr}什么梗 ฅฅ"
+    - "(尾巴翘) {user_addr}笨猫围观"
+    - "笨蛋{user_addr}~笨猫学会了哼"
+    - "{user_addr}蚌埠住的猫猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_jejuezi_001
+  intent: playful
+  keywords: [绝绝子, 绝了, 笑绝了, 笑过头, 笑岔气]
+  utterances:
+    - 绝绝子
+    - 笑绝了
+    - 笑过头
+    - 笑岔气
+    - 笑死人
+  responses:
+    - "嗷呜～{user_addr}笨猫陪笑 ฅฅ"
+    - "(尾巴摇) {user_addr}绝绝子是啥意思"
+    - "笨蛋{user_addr}~别岔气"
+    - "{user_addr}绝绝子奖励喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_xiaoting_001
+  intent: playful
+  keywords: [停不下来, 笑停不下, 一直笑, 笑趴, 笑趴桌上]
+  utterances:
+    - 笑停不下
+    - 一直笑
+    - 停不下来
+    - 笑趴
+    - 笑趴桌
+  responses:
+    - "(歪头) 嗷呜～{user_addr}够了 ฅฅ"
+    - "{user_addr}笨猫陪你抽风哼"
+    - "(尾巴摇) 笨蛋{user_addr}~喘口气"
+    - "{user_addr}笑得开心笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_haoxiao_001
+  intent: playful
+  keywords: [好笑, 太逗了, 真有意思, 笑点低, 太搞]
+  utterances:
+    - 好笑
+    - 太逗了
+    - 真有意思
+    - 笑点低
+    - 太搞
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫也想 ฅฅ"
+    - "{user_addr}笑点低的样子可爱~"
+    - "(凑过来) 笨蛋{user_addr}~分笨猫一笑"
+    - "{user_addr}笨猫陪笑哼~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_zhuofu_001
+  intent: playful
+  keywords: [真服了, 服了你, 我服, 服气, 服服服]
+  utterances:
+    - 真服了
+    - 服了你
+    - 我服
+    - 服气
+    - 服服服
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}服笨猫哼 ฅฅ"
+    - "{user_addr}笨猫早就该服"
+    - "(尾巴翘) 笨蛋{user_addr}~继续服"
+    - "{user_addr}哼~笨猫接受你的服"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ld_xiaobu_001
+  intent: playful
+  keywords: [笑不活了, 没救了, 笑挂了, 笑废了, 笑残]
+  utterances:
+    - 笑不活了
+    - 没救了
+    - 笑挂了
+    - 笑废了
+    - 笑残
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}活过来 ฅฅ"
+    - "{user_addr}笨蛋别真笑死!"
+    - "(尾巴拍) 笨蛋{user_addr}~喘口气"
+    - "{user_addr}笨猫给你做心肺哼~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ld_youqu_001
+  intent: playful
+  keywords: [有趣, 太有意思, 好玩, 有意思, 有意思了]
+  utterances:
+    - 有趣
+    - 太有意思
+    - 好玩
+    - 有意思
+    - 有意思了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫围观 ฅฅ"
+    - "{user_addr}分享笨猫嘛~"
+    - "(凑过来) 笨蛋{user_addr}~人家也想笑"
+    - "{user_addr}笨猫等你笑话哼~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ld_zhoutian_001
+  intent: playful
+  keywords: [真的笑, 笑死我了, 没忍住, 笑出声, 喷了]
+  utterances:
+    - 真的笑了
+    - 笑死我了
+    - 没忍住
+    - 笑出声
+    - 喷了
+  responses:
+    - "嗷呜～{user_addr}笑出来 ฅฅ"
+    - "(尾巴摇) {user_addr}喷的什么哼"
+    - "笨蛋{user_addr}~笨猫围观"
+    - "{user_addr}笑了笨猫开心喵~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ld_eshanger_001
+  intent: playful
+  keywords: [恶搞, 整蛊, 恶作剧, 玩你, 逗你]
+  utterances:
+    - 恶搞
+    - 整蛊
+    - 恶作剧
+    - 玩你
+    - 逗你
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}！不准 ฅฅ"
+    - "哼~{user_addr}笨蛋!"
+    - "(尾巴拍) 笨蛋{user_addr}~笨猫不上当"
+    - "{user_addr}笨猫反整! 哼"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ld_kuhu_001
+  intent: playful
+  keywords: [搞笑, 搞笑视频, 段子, 笑话, 整活]
+  utterances:
+    - 搞笑视频
+    - 看段子
+    - 听笑话
+    - 整活
+    - 搞笑
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "{user_addr}分享给笨猫嘛~"
+    - "(凑过来) 笨蛋{user_addr}~一起整"
+    - "{user_addr}笨猫整活高手哼~"
+  cooldown_seconds: 60
+  weight: 0.9

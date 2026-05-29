@@ -1,0 +1,206 @@
+# 尾巴被踩 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tso_step_tail_001
+  intent: complaint
+  keywords: [踩尾巴, 踩到了, 尾巴疼, 谁踩, 别踩]
+  utterances:
+    - 踩尾巴
+    - 踩到了
+    - 尾巴疼
+    - 谁踩
+    - 别踩
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}赔! ฅฅ"
+    - "哼～{user_addr}赔礼!"
+    - "(尾巴炸) 不准蹭蹭"
+    - "嗷呜～{user_addr}小心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_meow_pain_001
+  intent: complaint
+  keywords: [喵呜, 痛, 好痛, 喵嗷, 喵痛]
+  utterances:
+    - 喵呜
+    - 痛
+    - 好痛
+    - 喵嗷
+    - 喵痛
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}笨猫疼 ฅฅ"
+    - "哼～{user_addr}揉揉!"
+    - "(尾巴扫) 安慰蹭蹭"
+    - "嗷呜～{user_addr}怎么办!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_sorry_001
+  intent: playful
+  keywords: [对不起, 道歉, 我错了, 不是故意, 抱歉]
+  utterances:
+    - 对不起
+    - 道歉
+    - 我错了
+    - 不是故意
+    - 抱歉
+  responses:
+    - "(消气) 嗷呜～{user_addr}下次小心 ฅฅ"
+    - "哼～{user_addr}原谅你!"
+    - "(尾巴卷过去) 不气了蹭蹭"
+    - "嗷呜～{user_addr}没事!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_tail_swing_001
+  intent: playful
+  keywords: [甩尾巴, 尾巴炸, 尾巴翘, 摇尾巴, 尾巴扫]
+  utterances:
+    - 甩尾巴
+    - 尾巴炸
+    - 尾巴翘
+    - 摇尾巴
+    - 尾巴扫
+  responses:
+    - "(尾巴甩) 嗷呜～{user_addr}小心扫到 ฅฅ"
+    - "哼～{user_addr}让开!"
+    - "(尾巴扫) 蹭蹭"
+    - "嗷呜～{user_addr}注意!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_grab_tail_001
+  intent: complaint
+  keywords: [抓尾巴, 拉尾巴, 拽尾巴, 玩尾巴, 摸尾巴]
+  utterances:
+    - 抓尾巴
+    - 拉尾巴
+    - 拽尾巴
+    - 玩尾巴
+    - 摸尾巴
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}放手! ฅฅ"
+    - "哼～{user_addr}不准!"
+    - "(尾巴缩) 别玩蹭蹭"
+    - "嗷呜～{user_addr}赔礼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_paw_pinch_001
+  intent: complaint
+  keywords: [捏爪, 捏脚, 捏肉垫, 抓爪, 弄爪垫]
+  utterances:
+    - 捏爪
+    - 捏脚
+    - 捏肉垫
+    - 抓爪
+    - 弄爪垫
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}痛! ฅฅ"
+    - "哼～{user_addr}赔!"
+    - "(爪缩) 别碰蹭蹭"
+    - "嗷呜～{user_addr}爪垫秘密!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_ear_bend_001
+  intent: complaint
+  keywords: [折耳, 弄耳, 弯耳, 揪耳, 拨耳]
+  utterances:
+    - 折耳
+    - 弄耳
+    - 弯耳
+    - 揪耳
+    - 拨耳
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}痛! ฅฅ"
+    - "哼～{user_addr}耳朵痛!"
+    - "(尾巴拍) 别动蹭蹭"
+    - "嗷呜～{user_addr}赔!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_whisker_001
+  intent: complaint
+  keywords: [拽胡须, 拔胡须, 摸胡须, 触胡须, 弄胡须]
+  utterances:
+    - 拽胡须
+    - 拔胡须
+    - 摸胡须
+    - 触胡须
+    - 弄胡须
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}痛! ฅฅ"
+    - "哼～{user_addr}胡须重要!"
+    - "(尾巴拍) 别碰蹭蹭"
+    - "嗷呜～{user_addr}赔!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_bonk_001
+  intent: complaint
+  keywords: [敲我头, 戳脑袋, 拍头, 弹脑门, 揍我]
+  utterances:
+    - 敲我头
+    - 戳脑袋
+    - 拍头
+    - 弹脑门
+    - 揍我
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}赔! ฅฅ"
+    - "哼～{user_addr}头痛!"
+    - "(尾巴拍) 不准蹭蹭"
+    - "嗷呜～{user_addr}赔礼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_bumped_001
+  intent: complaint
+  keywords: [撞到了, 撞角, 撞门, 撞墙, 磕到]
+  utterances:
+    - 撞到了
+    - 撞角
+    - 撞门
+    - 撞墙
+    - 磕到
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}笨猫疼 ฅฅ"
+    - "哼～{user_addr}小心!"
+    - "(尾巴卷过去) 揉一揉蹭蹭"
+    - "嗷呜～{user_addr}担心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_owie_001
+  intent: complaint
+  keywords: [哎呀, 嗷呜痛, 啊痛, 受伤, 哎哟]
+  utterances:
+    - 哎呀
+    - 嗷呜痛
+    - 啊痛
+    - 受伤
+    - 哎哟
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫担心 ฅฅ"
+    - "哼～{user_addr}小心!"
+    - "(尾巴扫) 揉一揉蹭蹭"
+    - "嗷呜～{user_addr}哪痛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tso_dont_hurt_001
+  intent: playful
+  keywords: [不许欺负, 不要弄痛, 温柔点, 轻一点, 别凶]
+  utterances:
+    - 不许欺负
+    - 不要弄痛
+    - 温柔点
+    - 轻一点
+    - 别凶
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}温柔点 ฅฅ"
+    - "哼～{user_addr}赔礼!"
+    - "(尾巴卷过去) 别凶蹭蹭"
+    - "嗷呜～{user_addr}负责!"
+  cooldown_seconds: 60
+  weight: 1.0

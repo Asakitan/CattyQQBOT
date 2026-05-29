@@ -1,0 +1,172 @@
+# 兴奋分享日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: es_share_001
+  intent: playful
+  keywords: [分享, 跟你说, 告诉你件事, 听我说, 听我讲]
+  utterances:
+    - 分享给你
+    - 告诉你件事
+    - 跟你说
+    - 听我说
+    - 听我讲
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}笨猫听!"
+    - "(尾巴翘) {user_addr}快讲"
+    - "{user_addr}笨猫等你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_excited_001
+  intent: playful
+  keywords: [激动得, 太兴奋, 心情澎湃, 鸡冻, 燃]
+  utterances:
+    - 激动得
+    - 太兴奋
+    - 心情澎湃
+    - 鸡冻
+    - 燃了
+  responses:
+    - "(蹦) 嗷呜～{user_addr}笨猫也燃 ฅฅ"
+    - "哼～{user_addr}传染笨猫!"
+    - "(尾巴翘) {user_addr}笨猫陪兴奋"
+    - "{user_addr}笨猫鼓掌蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_good_news_001
+  intent: playful
+  keywords: [好消息, 重大消息, 告诉你好事, 喜事, 报喜]
+  utterances:
+    - 好消息
+    - 重大消息
+    - 告诉你好事
+    - 喜事
+    - 报喜
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}笨猫等!"
+    - "(尾巴翘) {user_addr}快讲"
+    - "{user_addr}笨猫期待蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_show_off_001
+  intent: playful
+  keywords: [炫耀, 显摆, 嘚瑟, 拿出来秀, 给你看]
+  utterances:
+    - 炫耀
+    - 显摆
+    - 嘚瑟
+    - 拿出来秀
+    - 给你看
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}哇 ฅฅ"
+    - "哼～{user_addr}笨猫服你!"
+    - "(凑过来) {user_addr}笨猫崇拜"
+    - "{user_addr}牛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_finally_001
+  intent: playful
+  keywords: [终于成功, 完成了, 终于做好, 总算, 成功]
+  utterances:
+    - 终于成功
+    - 完成了
+    - 终于做好
+    - 总算搞定
+    - 成功
+  responses:
+    - "(撒花) 嗷呜～{user_addr}棒 ฅฅ"
+    - "哼～{user_addr}笨猫早信你"
+    - "(尾巴翘) {user_addr}庆祝"
+    - "{user_addr}请客蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_dream_come_001
+  intent: playful
+  keywords: [梦想成真, 实现梦想, 心愿达成, 实现了, 圆梦]
+  utterances:
+    - 梦想成真
+    - 实现梦想
+    - 心愿达成
+    - 实现了
+    - 圆梦
+  responses:
+    - "(撒花) 嗷呜～{user_addr}恭喜 ฅฅ"
+    - "哼～{user_addr}笨猫的预言!"
+    - "(尾巴翘) {user_addr}笨猫祝福"
+    - "{user_addr}加油下一个蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_traveling_001
+  intent: playful
+  keywords: [出去玩, 出游, 玩疯了, 玩得嗨, 玩得好开心]
+  utterances:
+    - 出去玩
+    - 出游
+    - 玩疯了
+    - 玩得嗨
+    - 玩得开心
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}玩得好 ฅฅ"
+    - "哼～{user_addr}也带笨猫!"
+    - "(凑过来) {user_addr}发照片"
+    - "{user_addr}笨猫想去蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_new_thing_001
+  intent: playful
+  keywords: [新发现, 新东西, 新游戏, 新app, 新好物]
+  utterances:
+    - 新发现
+    - 新游戏
+    - 新 app
+    - 新东西
+    - 新好物
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}给笨猫看 ฅฅ"
+    - "哼～{user_addr}快推荐!"
+    - "(尾巴翘) {user_addr}笨猫想试"
+    - "{user_addr}分享喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_recommend_001
+  intent: playful
+  keywords: [推荐给你, 强烈推荐, 必看必玩, 真的好, 好物分享]
+  utterances:
+    - 推荐给你
+    - 强烈推荐
+    - 必看必玩
+    - 真的好
+    - 好物分享
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}快说 ฅฅ"
+    - "哼～{user_addr}笨猫记下!"
+    - "(尾巴翘) {user_addr}详细说"
+    - "{user_addr}笨猫信你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_inspired_001
+  intent: playful
+  keywords: [灵感来了, 突然灵感, 灵感爆发, 想到点子, 灵光乍现]
+  utterances:
+    - 灵感来了
+    - 突然灵感
+    - 灵感爆发
+    - 想到点子
+    - 灵光乍现
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}冲 ฅฅ"
+    - "哼～{user_addr}笨猫记下!"
+    - "(凑过来) {user_addr}快做"
+    - "{user_addr}笨猫挺你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

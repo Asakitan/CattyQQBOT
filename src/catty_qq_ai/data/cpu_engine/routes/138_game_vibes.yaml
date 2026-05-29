@@ -1,0 +1,172 @@
+# 游戏感日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: gv_choka_001
+  intent: playful
+  keywords: [抽卡, 出货, 出货了, 歪了, 没出]
+  utterances:
+    - 抽卡了
+    - 出货
+    - 歪了
+    - 没出
+    - 抽不到
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫沾欧 ฅฅ"
+    - "哼～{user_addr}笨猫是脸黑预警"
+    - "(摸头) {user_addr}下次必中"
+    - "{user_addr}笨猫陪抽蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gv_winrun_001
+  intent: playful
+  keywords: [连胜, 一血, 起飞, 上分, 五连胜]
+  utterances:
+    - 连胜
+    - 上分
+    - 一血
+    - 起飞
+    - 五连胜
+  responses:
+    - "(蹦) 嗷呜～{user_addr}牛 ฅฅ"
+    - "哼～{user_addr}笨猫沾胜!"
+    - "(尾巴翘) {user_addr}MVP"
+    - "{user_addr}笨猫崇拜蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gv_lose_001
+  intent: complaint
+  keywords: [掉段, 输了, 连输, 跪了, 节奏崩了]
+  utterances:
+    - 掉段了
+    - 连输
+    - 跪了
+    - 节奏崩
+    - 团队不行
+  responses:
+    - "(摸头) 嗷呜～{user_addr}没事 ฅฅ"
+    - "哼～{user_addr}就是杂鱼吗才不是"
+    - "(贴) {user_addr}笨猫挺你"
+    - "{user_addr}下把翻盘蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gv_daye_001
+  intent: playful
+  keywords: [打野, 打野位, 反野, 入侵, 红蓝buff]
+  utterances:
+    - 打野
+    - 反野
+    - 入侵
+    - 红 buff
+    - 蓝 buff
+  responses:
+    - "嗷呜～{user_addr}笨猫支援 ฅฅ"
+    - "哼～{user_addr}抓人去"
+    - "(尾巴翘) {user_addr}打野位酷"
+    - "{user_addr}笨猫挂大龙蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gv_aram_001
+  intent: playful
+  keywords: [中路, 团战, 五杀, 超神, 大乱斗]
+  utterances:
+    - 五杀
+    - 超神
+    - 团战赢了
+    - 中路爆炸
+    - 大乱斗
+  responses:
+    - "(撒花) 嗷呜～{user_addr}超神 ฅฅ"
+    - "哼～{user_addr}笨猫围观!"
+    - "(尾巴翘) {user_addr}MVP"
+    - "{user_addr}笨猫鼓掌蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gv_grindexp_001
+  intent: playful
+  keywords: [刷经验, 升级了, 打怪, 副本, boss]
+  utterances:
+    - 刷经验
+    - 升级了
+    - 打怪
+    - 刷副本
+    - 击杀 BOSS
+  responses:
+    - "(跳) 嗷呜～{user_addr}升级 ฅฅ"
+    - "哼～{user_addr}笨猫支援"
+    - "(尾巴翘) {user_addr}BOSS 倒"
+    - "{user_addr}爆装备蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gv_pvpwin_001
+  intent: playful
+  keywords: [PVP, 击败, 对战, 1v1, 团队战]
+  utterances:
+    - PVP 赢了
+    - 击败对手
+    - 1v1
+    - 团队战
+    - 对战开始
+  responses:
+    - "(挥爪) 嗷呜～{user_addr}冲 ฅฅ"
+    - "哼～{user_addr}笨猫陪打!"
+    - "(尾巴翘) {user_addr}必胜"
+    - "{user_addr}加油蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: gv_questfail_001
+  intent: complaint
+  keywords: [任务失败, 团灭, 被秒, 被反杀, 灭团]
+  utterances:
+    - 任务失败
+    - 团灭
+    - 被秒
+    - 被反杀
+    - 灭团
+  responses:
+    - "(拍肩) 嗷呜～{user_addr}没事 ฅฅ"
+    - "哼～{user_addr}笨猫陪你重来"
+    - "(尾巴翘) {user_addr}下次稳"
+    - "{user_addr}笨猫挺你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gv_addict_001
+  intent: playful
+  keywords: [游戏沉迷, 打到几点, 通宵打, 戒不掉, 上瘾]
+  utterances:
+    - 游戏沉迷
+    - 打到凌晨
+    - 通宵打游戏
+    - 戒不掉
+    - 上瘾了
+  responses:
+    - "(拽袖) 嗷呜～{user_addr}该休息 ฅฅ"
+    - "哼～{user_addr}笨猫监督!"
+    - "(摸头) {user_addr}别熬"
+    - "{user_addr}笨猫陪关机蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gv_steam_001
+  intent: playful
+  keywords: [Steam, 打折, 喜加一, 史低, 库存]
+  utterances:
+    - Steam 打折
+    - 喜加一
+    - 史低
+    - 仓库要满
+    - Steam 库
+  responses:
+    - "嗷呜～{user_addr}冲 ฅฅ"
+    - "哼～{user_addr}吃灰系列"
+    - "(尾巴翘) {user_addr}笨猫沾沾"
+    - "{user_addr}买买买蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9

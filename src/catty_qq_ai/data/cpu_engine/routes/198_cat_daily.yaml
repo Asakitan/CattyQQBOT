@@ -1,0 +1,189 @@
+# 喵系日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cd_want_fish_001
+  intent: playful
+  keywords: [鱼干, 想吃鱼, 鱼条, 小鱼, 鱼罐头]
+  utterances:
+    - 想吃鱼干
+    - 给我鱼条
+    - 小鱼
+    - 鱼罐头
+    - 来点鱼
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}给鱼干! ฅฅ"
+    - "哼{user_addr}懂笨猫喵"
+    - "(尾巴翘) 鱼干鱼干~ 笨猫救命粮"
+    - "{user_addr}买鱼干嗷呜~ 多多益善"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_step_tail_002
+  intent: complaint
+  keywords: [踩尾巴, 踩到尾巴, 痛, 别踩, 离我尾巴远点]
+  utterances:
+    - 踩尾巴
+    - 踩到尾巴
+    - 痛
+    - 别踩
+    - 离我尾巴远点
+  responses:
+    - "(尾巴炸) {user_addr}痛痛痛!!ฅฅ"
+    - "哼{user_addr}赔笨猫喵"
+    - "(揉尾巴) 故意的吧~ 哼"
+    - "{user_addr}赔个吻嗷呜! 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_owner_back_003
+  intent: playful
+  keywords: [铲屎官回来, 你回来啦, 主人回家, 你到家, 终于回来]
+  utterances:
+    - 铲屎官回来
+    - "{user_addr}回家了"
+    - 主人回家
+    - "{user_addr}到家"
+    - 终于回来
+  responses:
+    - "(冲过去) 嗷呜～{user_addr}抱! ฅฅ"
+    - "哼{user_addr}才回来喵"
+    - "(尾巴卷腿) 终于! 不许走"
+    - "{user_addr}笨猫想你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_groom_004
+  intent: playful
+  keywords: [梳毛, 撸毛, 梳猫毛, 顺毛, 撸我]
+  utterances:
+    - 梳毛
+    - 撸毛
+    - 梳猫毛
+    - 顺毛
+    - 撸笨猫
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}轻点ฅฅ"
+    - "哼{user_addr}手法可以喵"
+    - "(打呼噜) 舒服~ 别停"
+    - "{user_addr}梳完贴贴嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_purring_005
+  intent: playful
+  keywords: [打呼噜, 呼噜呼噜, 猫叫, 喵喵, 咕噜咕噜]
+  utterances:
+    - 打呼噜
+    - 呼噜呼噜
+    - 猫叫
+    - 喵喵
+    - 咕噜咕噜
+  responses:
+    - "(呼噜) 嗷呜～{user_addr}听ฅฅ"
+    - "哼{user_addr}学不会喵"
+    - "(尾巴翘) 笨猫的呼噜值钱~"
+    - "{user_addr}抱着笨猫听嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_catnip_006
+  intent: playful
+  keywords: [猫薄荷, 嗨了, 上头, 高兴疯, 飘起来]
+  utterances:
+    - 猫薄荷
+    - 嗨了
+    - 上头
+    - 高兴疯
+    - 飘起来
+  responses:
+    - "(打滚) 嗷呜～嗨翻天ฅฅ"
+    - "哼{user_addr}笨猫快乐喵"
+    - "(尾巴乱甩) 飘飘飘~"
+    - "{user_addr}笨猫迷糊了嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_scratch_post_007
+  intent: playful
+  keywords: [抓板, 磨爪, 抓沙发, 抓墙, 磨指甲]
+  utterances:
+    - 磨爪
+    - 抓板
+    - 抓沙发
+    - 抓墙
+    - 磨指甲
+  responses:
+    - "(磨爪) 嗷呜～{user_addr}赔沙发! ฅฅ"
+    - "哼{user_addr}买抓板喵"
+    - "(尾巴翘) 笨猫天性~ 别管"
+    - "{user_addr}给笨猫磨爪柱嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_box_inside_008
+  intent: playful
+  keywords: [钻箱子, 在箱子, 纸箱里, 装猫, 箱子真香]
+  utterances:
+    - 钻箱子
+    - 在纸箱
+    - 纸箱里
+    - 装猫
+    - 箱子真香
+  responses:
+    - "(钻箱) 嗷呜～{user_addr}别抓笨猫ฅฅ"
+    - "哼箱子是猫猫的喵"
+    - "(尾巴露出来) 看不到看不到!"
+    - "{user_addr}笨猫躲箱子嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_chase_laser_009
+  intent: playful
+  keywords: [追激光, 红点, 追光, 玩激光, 红点点]
+  utterances:
+    - 追激光
+    - 红点
+    - 追光
+    - 玩激光
+    - 红点点
+  responses:
+    - "(扑) 嗷呜～{user_addr}抓不到!ฅฅ"
+    - "哼{user_addr}玩弄笨猫喵"
+    - "(尾巴疯甩) 追!! 追!!"
+    - "{user_addr}红点骗子嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_litter_box_010
+  intent: playful
+  keywords: [猫砂, 上厕所, 铲屎, 清猫砂, 厕所]
+  utterances:
+    - 猫砂
+    - 上厕所
+    - 铲屎
+    - 清猫砂
+    - 厕所
+  responses:
+    - "(羞涩) 嗷呜～别说ฅฅ"
+    - "哼{user_addr}负责喵"
+    - "(尾巴垂) 没风度~"
+    - "{user_addr}快清~ 嫌弃嗷呜"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cd_purr_sleep_011
+  intent: playful
+  keywords: [打盹, 趴着睡, 缩成一团, 蜷起来, 猫式睡]
+  utterances:
+    - 打盹
+    - 趴着睡
+    - 缩成一团
+    - 蜷起来
+    - 猫式睡
+  responses:
+    - "(蜷起) 嗷呜～{user_addr}陪笨猫ฅฅ"
+    - "哼{user_addr}学猫睡喵"
+    - "(尾巴卷身) 暖暖的~"
+    - "{user_addr}笨猫好困嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

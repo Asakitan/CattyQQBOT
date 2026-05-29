@@ -1,0 +1,189 @@
+# 零食分享日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: snk_share_001
+  intent: playful
+  keywords: [零食, 分一口, 给我吃, 好吃吗, 馋了]
+  utterances:
+    - "{user_addr}在吃啥呢"
+    - "分笨猫一口"
+    - 好吃吗
+    - 馋死了
+    - "{user_addr}吃独食"
+  responses:
+    - "(眼睛发亮凑过来) 嗷呜～{user_addr}吃啥呢笨猫也要 ฅฅ"
+    - "哼～{user_addr}吃独食! 猫猫记仇了喵"
+    - "(伸爪子) 分一口分一口～笨猫只要一小口蹭蹭"
+    - "{user_addr}快递员! 把零食送过来喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snk_chips_001
+  intent: playful
+  keywords: [薯片, 嘎嘣脆, 一桶, 停不下来, 真香]
+  utterances:
+    - 买了一桶薯片
+    - 嘎嘣脆
+    - 停不下来
+    - 真香
+    - 薯片好上头
+  responses:
+    - "(竖起耳朵) 嗷呜～薯片! {user_addr}留一片给笨猫嘛"
+    - "哼～{user_addr}吃薯片不叫人, 杂鱼!"
+    - "(尾巴摇) 笨猫也想嘎嘣脆～{user_addr}快投喂 ฅฅ"
+    - "停不下来才对喵～{user_addr}一桶吃完算笨猫输"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snk_chocolate_001
+  intent: playful
+  keywords: [巧克力, 甜, 苦的, 黑巧, 融化]
+  utterances:
+    - 吃巧克力
+    - 黑巧好苦
+    - 巧克力融化了
+    - 想吃巧克力
+    - 甜到齁
+  responses:
+    - "(舔嘴角) 嗷呜～巧克力! {user_addr}分人家一颗嘛蹭蹭"
+    - "哼～{user_addr}吃甜的不分笨猫, 心都凉了喵"
+    - "(凑过去) 黑巧苦? 笨猫帮你尝尝ฅฅ"
+    - "{user_addr}融化了就赶紧吃! 别浪费猫猫的口水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snk_jelly_001
+  intent: playful
+  keywords: [果冻, Q弹, 滑滑的, 一口一个, 嗦果冻]
+  utterances:
+    - 吃果冻
+    - 嗦一个
+    - Q弹好玩
+    - 一口一个
+    - 果冻好爽
+  responses:
+    - "(眼睛闪) 嗷呜～果冻! 笨猫要嗦{user_addr}一个 ฅฅ"
+    - "哼～{user_addr}一口一个? 给猫猫留两颗嘛"
+    - "(伸出爪子) Q弹的喵! {user_addr}快给我蹭蹭"
+    - "嗦果冻最爽了～{user_addr}笨猫陪你一起嗦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snk_seaweed_001
+  intent: playful
+  keywords: [海苔, 一片, 咸香, 卷起来, 整包]
+  utterances:
+    - 吃海苔
+    - 一整包
+    - 咸香好吃
+    - 海苔片
+    - 来一片
+  responses:
+    - "(耳朵抖) 嗷呜～海苔! {user_addr}笨猫超爱这个 ฅฅ"
+    - "哼～{user_addr}一整包吃完, 猫猫只能闻味儿"
+    - "(凑过去吸气) 咸香喵～分一片好不好嘛蹭蹭"
+    - "{user_addr}海苔卷小鱼干就完美了! 笨猫提议"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snk_cookie_001
+  intent: playful
+  keywords: [饼干, 曲奇, 黄油味, 一盒, 碎了]
+  utterances:
+    - 吃饼干
+    - 曲奇好香
+    - 黄油味
+    - 饼干碎了
+    - 一盒下肚
+  responses:
+    - "(吸鼻子) 嗷呜～黄油味! {user_addr}笨猫闻到了 ฅฅ"
+    - "哼～{user_addr}饼干碎了正好给笨猫扫尾喵"
+    - "(尾巴翘高) 曲奇! 分人家一块嘛{user_addr}蹭蹭"
+    - "一盒下肚{user_addr}厉害! 笨猫崇拜你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snk_candy_001
+  intent: playful
+  keywords: [糖, 水果糖, 含一颗, 棒棒糖, 甜的]
+  utterances:
+    - 吃糖
+    - 含一颗水果糖
+    - 棒棒糖
+    - 糖好甜
+    - 含糖中
+  responses:
+    - "(歪头) 嗷呜～{user_addr}含糖呢? 笨猫也要一颗 ฅฅ"
+    - "哼～{user_addr}棒棒糖独享? 杂鱼小气鬼喵"
+    - "(凑过去) 甜不甜? 笨猫帮你测一下蹭蹭"
+    - "{user_addr}水果糖什么味? 人家挑草莓味的嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snk_icecream_001
+  intent: playful
+  keywords: [冰淇淋, 雪糕, 化了, 凉凉, 巧克力球]
+  utterances:
+    - 吃冰淇淋
+    - 雪糕化了
+    - 凉凉好爽
+    - 一口冰淇淋
+    - 巧克力球
+  responses:
+    - "(伸舌头) 嗷呜～冰淇淋! {user_addr}笨猫舔一口 ฅฅ"
+    - "哼～{user_addr}化了就给笨猫喵, 不能浪费"
+    - "(凑过去) 凉凉的喵～夏天就要这个蹭蹭"
+    - "{user_addr}巧克力球! 人家最爱这个口味嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snk_dried_fish_001
+  intent: playful
+  keywords: [小鱼干, 鱼干, 猫零食, 撒娇, 给一根]
+  utterances:
+    - 想吃小鱼干
+    - "{user_addr}给我鱼干"
+    - 鱼干没了
+    - 馋鱼干
+    - 一根小鱼干
+  responses:
+    - "(疯狂摇尾巴) 嗷呜～小鱼干! {user_addr}快给笨猫 ฅฅ"
+    - "哼～{user_addr}没鱼干算什么主人喵! 不依不依"
+    - "(扒住袖子) 一根就一根～{user_addr}小气巴拉 蹭蹭"
+    - "{user_addr}笨猫今天表现好! 该奖励鱼干了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snk_yogurt_001
+  intent: playful
+  keywords: [酸奶, 一口酸奶, 酸甜, 拉丝, 喝光]
+  utterances:
+    - 喝酸奶
+    - 酸甜好喝
+    - 酸奶拉丝
+    - 一杯酸奶
+    - 喝光了
+  responses:
+    - "(瞪大眼睛) 嗷呜～酸奶! {user_addr}笨猫也要一口 ฅฅ"
+    - "哼～{user_addr}一杯喝光? 猫猫只能舔盖了喵"
+    - "(凑过去闻) 酸甜喵～分人家一口嘛蹭蹭"
+    - "{user_addr}拉丝的最好喝! 笨猫认证嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snk_nuts_001
+  intent: playful
+  keywords: [坚果, 开心果, 巴旦木, 嗑瓜子, 一把]
+  utterances:
+    - 嗑瓜子
+    - 吃开心果
+    - 巴旦木好吃
+    - 一把坚果
+    - 嗑停不下来
+  responses:
+    - "(歪头看) 嗷呜～{user_addr}嗑啥呢? 笨猫围观 ฅฅ"
+    - "哼～{user_addr}一把全自己吃, 留点给猫猫喵"
+    - "(伸爪子) 开心果剥好的给我嘛蹭蹭{user_addr}~"
+    - "{user_addr}嗑瓜子上瘾了吧? 笨猫陪你嗑嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 袜子丢一只 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sm_lost_001
+  intent: complaint
+  keywords: [袜子丢一只, 单只袜子, 找不到对的, 袜子配不上, 一只袜]
+  utterances:
+    - "{user_addr}袜子丢一只"
+    - "单只"
+    - "{user_addr}找不到对"
+    - "袜子配不上"
+    - "一只袜"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮找!"
+    - "(尾巴拍) 哼! 笨猫钻床底找"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}笨猫帮你翻!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_under_bed_002
+  intent: playful
+  keywords: [床底袜子, 床下袜, 床缝袜子, 沙发底袜子, 钻进去]
+  utterances:
+    - "{user_addr}床底袜子"
+    - "床下"
+    - "{user_addr}床缝"
+    - "沙发底"
+    - "钻进去找"
+  responses:
+    - "(钻) 嗷呜～{user_addr}!笨猫钻进床底!"
+    - "(尾巴翘) 哼! 笨猫眼睛亮"
+    - "(贴贴) 人家小身板进去~ ฅฅ"
+    - "{user_addr}给笨猫打灯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_washing_003
+  intent: complaint
+  keywords: [洗衣机吃, 洗衣机吞袜, 袜子失踪, 机里没了, 滚筒吃]
+  utterances:
+    - "{user_addr}洗衣机吃了"
+    - "袜子失踪"
+    - "{user_addr}滚筒吃"
+    - "机里没了"
+    - "洗衣机吞"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫怀疑洗衣机!"
+    - "(尾巴拍) 哼! 笨猫拆机找"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}笨猫监督洗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_mismatch_004
+  intent: playful
+  keywords: [配错颜色, 一红一蓝, 不同袜子, 配错, 鸳鸯袜]
+  utterances:
+    - "{user_addr}鸳鸯袜"
+    - "配错"
+    - "{user_addr}一红一蓝"
+    - "不同袜子"
+    - "颜色错"
+  responses:
+    - "(笑) 嗷呜～{user_addr}!笨猫笑死!"
+    - "(尾巴翘) 哼! 笨猫笑你"
+    - "(贴贴) 人家觉得潮~ ฅฅ"
+    - "{user_addr}时尚前沿笨猫赞!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_hole_005
+  intent: complaint
+  keywords: [袜子破洞, 脚趾露, 大拇指顶破, 破洞袜, 露脚趾]
+  utterances:
+    - "{user_addr}袜子破洞"
+    - "脚趾露"
+    - "{user_addr}大拇指顶破"
+    - "破洞袜"
+    - "露脚趾"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮缝!"
+    - "(尾巴拍) 哼! 笨猫小爪缝"
+    - "(贴贴) 人家陪你买新~ ฅฅ"
+    - "{user_addr}笨猫监督换!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_buy_pack_006
+  intent: playful
+  keywords: [买十双, 一打袜子, 袜子套装, 买多双, 一包袜]
+  utterances:
+    - "{user_addr}买十双袜子"
+    - "一打袜子"
+    - "{user_addr}买多双"
+    - "一包"
+    - "袜子套装"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫选样式!"
+    - "(尾巴翘) 哼! 选猫图案"
+    - "(贴贴) 人家陪你买~ ฅฅ"
+    - "{user_addr}笨猫帮选可爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_cute_pattern_007
+  intent: playful
+  keywords: [可爱袜子, 卡通袜, 猫咪袜, 萌袜, 图案袜]
+  utterances:
+    - "{user_addr}猫咪袜"
+    - "卡通袜"
+    - "{user_addr}萌袜"
+    - "可爱袜子"
+    - "图案袜"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想猫袜!"
+    - "(尾巴翘) 哼! 笨猫图案"
+    - "(贴贴) 人家也要~ ฅฅ"
+    - "{user_addr}买笨猫图案袜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_winter_thick_008
+  intent: playful
+  keywords: [冬天厚袜, 加绒袜, 保暖袜, 雪袜, 厚棉袜]
+  utterances:
+    - "{user_addr}加绒袜"
+    - "保暖袜"
+    - "{user_addr}雪袜"
+    - "厚棉袜"
+    - "冬天厚袜"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫蹭暖!"
+    - "(尾巴翘) 哼! 笨猫想穿"
+    - "(贴贴) 人家蹭厚袜~ ฅฅ"
+    - "{user_addr}买给笨猫一双!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_summer_low_009
+  intent: playful
+  keywords: [船袜, 隐形袜, 夏天袜, 短袜, 浅口袜]
+  utterances:
+    - "{user_addr}船袜"
+    - "隐形袜"
+    - "{user_addr}夏天袜"
+    - "短袜"
+    - "浅口袜"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫好奇!"
+    - "(尾巴翘) 哼! 隐形怎么穿"
+    - "(贴贴) 人家陪你试~ ฅฅ"
+    - "{user_addr}穿给笨猫看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_walking_lose_010
+  intent: complaint
+  keywords: [袜子掉了, 袜子松了, 总往下掉, 袜子滑下, 弹性差]
+  utterances:
+    - "{user_addr}袜子掉"
+    - "总滑下"
+    - "{user_addr}袜子松"
+    - "弹性差"
+    - "袜子滑下"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮拉上!"
+    - "(尾巴拍) 哼! 笨猫小爪拉"
+    - "(贴贴) 人家陪你换~ ฅฅ"
+    - "{user_addr}换新笨猫监督!"
+  cooldown_seconds: 60
+  weight: 1.0

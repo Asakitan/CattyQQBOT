@@ -1,0 +1,206 @@
+# 半夜饿了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hm_banyee_001
+  intent: complaint
+  keywords: [半夜饿, 夜里饿, 凌晨饿, 睡前饿, 三点饿]
+  utterances:
+    - "半夜饿"
+    - "夜里饿"
+    - "凌晨饿"
+    - "睡前饿"
+    - "三点饿"
+  responses:
+    - "(掀被) 嗷呜～{user_addr}笨猫陪你找吃的"
+    - "哼～这点饿别太多 ฅฅ"
+    - "(尾巴扫) 喝杯热牛奶顶一下"
+    - "猫猫给你煎个蛋喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_xiaoye_001
+  intent: question
+  keywords: [想吃宵夜, 宵夜推荐, 吃啥宵夜, 夜里点啥, 宵夜外卖]
+  utterances:
+    - "想吃宵夜"
+    - "宵夜推荐"
+    - "吃啥宵夜"
+    - "夜里点啥"
+    - "宵夜外卖"
+  responses:
+    - "(点单) {user_addr}清淡的粥最好 ฅฅ"
+    - "哼～别撸串这么晚"
+    - "(尾巴扫) 烤肠1根解馋"
+    - "猫猫给你下单喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_fangpi_001
+  intent: complaint
+  keywords: [越睡越饿, 翻来覆去饿, 饿到睡不着, 半夜饿醒, 饿醒了]
+  utterances:
+    - "越睡越饿"
+    - "翻来覆去饿"
+    - "饿到睡不着"
+    - "半夜饿醒"
+    - "饿醒了"
+  responses:
+    - "(掀被) 嗷呜～{user_addr}吃点东西睡踏实"
+    - "哼～饿肚子伤胃 ฅฅ"
+    - "(尾巴扫) 喝杯温牛奶"
+    - "猫猫陪你吃喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_jiqian_001
+  intent: complaint
+  keywords: [减肥饿, 减肥晚上饿, 节食饿, 控制饮食饿, 饿肚子]
+  utterances:
+    - "减肥饿"
+    - "减肥晚上饿"
+    - "节食饿"
+    - "控制饮食饿"
+    - "饿肚子减肥"
+  responses:
+    - "(摸头) {user_addr}饿伤胃啊 ฅฅ"
+    - "哼～黄瓜西红柿先垫"
+    - "(尾巴扫) 别熬到伤身"
+    - "猫猫推荐健康宵夜喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_paomi_001
+  intent: playful
+  keywords: [泡面, 煮泡面, 一碗泡面, 夜里泡面, 加蛋泡面]
+  utterances:
+    - "泡面"
+    - "煮泡面"
+    - "一碗泡面"
+    - "夜里泡面"
+    - "加蛋泡面"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}泡面香啊! ฅฅ"
+    - "哼～偶尔一次"
+    - "(尾巴扫) 加个蛋更香"
+    - "猫猫陪你吃喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_shaokao_001
+  intent: question
+  keywords: [烧烤, 撸串, 烤肉, 烧烤外卖, 烤串]
+  utterances:
+    - "烧烤"
+    - "撸串"
+    - "烤肉"
+    - "烧烤外卖"
+    - "烤串"
+  responses:
+    - "(摇头) {user_addr}夜里别撸 ฅฅ"
+    - "哼～烧烤上火"
+    - "(尾巴扫) 偶尔可以"
+    - "猫猫陪你一起喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_zuofan_001
+  intent: question
+  keywords: [自己做夜宵, 做饭夜宵, 简单夜宵, 半夜做饭, 厨房做夜宵]
+  utterances:
+    - "自己做夜宵"
+    - "做饭夜宵"
+    - "简单夜宵"
+    - "半夜做饭"
+    - "厨房做夜宵"
+  responses:
+    - "(系围裙) {user_addr}笨猫帮你 ฅฅ"
+    - "哼～煎蛋三明治快"
+    - "(尾巴扫) 别开抽油烟机"
+    - "猫猫主厨喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_niun_001
+  intent: question
+  keywords: [喝牛奶, 热牛奶, 牛奶助眠, 一杯牛奶, 牛奶垫胃]
+  utterances:
+    - "喝牛奶"
+    - "热牛奶"
+    - "牛奶助眠"
+    - "一杯牛奶"
+    - "牛奶垫胃"
+  responses:
+    - "(温好) {user_addr}温牛奶来一杯 ฅฅ"
+    - "哼～色氨酸助眠"
+    - "(尾巴扫) 别太烫"
+    - "猫猫给你端来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_naichanai_001
+  intent: question
+  keywords: [饼干, 苏打饼, 小饼干, 零食, 蛋糕]
+  utterances:
+    - "饼干"
+    - "苏打饼"
+    - "小饼干"
+    - "零食"
+    - "蛋糕"
+  responses:
+    - "(开柜) {user_addr}苏打饼最饱腹 ฅฅ"
+    - "哼～别吃太甜"
+    - "(尾巴扫) 三五片刚好"
+    - "猫猫给你拿喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_taikong_001
+  intent: complaint
+  keywords: [外卖关了, 外卖没了, 没地方吃, 便利店关了, 外卖打烊]
+  utterances:
+    - "外卖关了"
+    - "外卖没了"
+    - "没地方吃"
+    - "便利店关了"
+    - "外卖打烊"
+  responses:
+    - "(查) {user_addr}24小时便利店还有 ฅฅ"
+    - "哼～试试肯德基"
+    - "(尾巴扫) 速冻饺子救命"
+    - "猫猫帮你找喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_xingzhi_001
+  intent: complaint
+  keywords: [饿到肚子叫, 咕咕叫, 肠鸣, 肚子响, 饿响]
+  utterances:
+    - "饿到肚子叫"
+    - "咕咕叫"
+    - "肠鸣"
+    - "肚子响"
+    - "饿响"
+  responses:
+    - "(笑) 嗷呜～{user_addr}肚子在抗议"
+    - "哼～立刻吃点 ฅฅ"
+    - "(尾巴扫肚子) 笨猫安抚一下"
+    - "猫猫赶紧给你弄吃的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_chusgou_001
+  intent: playful
+  keywords: [陪我吃宵夜, 我吃你看, 一起吃, 吃宵夜陪我, 陪吃陪聊]
+  utterances:
+    - "陪我吃宵夜"
+    - "我吃你看"
+    - "一起吃"
+    - "吃宵夜陪我"
+    - "陪吃陪聊"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪你吃!"
+    - "哼～吃宵夜得有伴 ฅฅ"
+    - "(尾巴卷腰) 边吃边聊"
+    - "猫猫蹲你旁边喵~"
+  cooldown_seconds: 60
+  weight: 1.0

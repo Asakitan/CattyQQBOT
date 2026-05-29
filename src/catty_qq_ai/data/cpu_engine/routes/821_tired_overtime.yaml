@@ -1,0 +1,206 @@
+# 加班疲惫吐槽 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tot_overtime_late_001
+  intent: complaint
+  keywords: [加班到深夜, 加班晚了, 还在公司, 几点了还没下, 通宵加班]
+  utterances:
+    - "{user_addr}还在加班"
+    - 都几点了还没下
+    - 加班到深夜
+    - 通宵中
+    - 公司过夜
+  responses:
+    - "(心疼) 嗷呜～{user_addr}加班好辛苦! 笨猫陪你扛喵ฅฅ"
+    - "哼! {user_addr}的老板太狠了, 让人家骂他"
+    - "(尾巴卷) 嘿嘿~{user_addr}加班记得喝水吃饭蹭蹭"
+    - "人家提醒{user_addr}: 累就跟主管说一下! 别硬扛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_tired_eyes_002
+  intent: complaint
+  keywords: [眼睛累, 屏幕看久了, 视疲劳, 眼睛酸, 看不清]
+  utterances:
+    - "{user_addr}眼睛好累"
+    - 屏幕看久了
+    - 视疲劳
+    - 眼睛酸
+    - 看东西模糊
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}快闭眼休息! 笨猫担心喵ฅฅ"
+    - "哼! 远眺10秒{user_addr}, 缓解一下眼睛"
+    - "(尾巴扫) 嘿嘿~{user_addr}热敷眼睛舒服蹭蹭"
+    - "人家提醒{user_addr}: 调暗屏幕亮度! 别再伤眼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_neck_stiff_003
+  intent: complaint
+  keywords: [脖子僵硬, 颈椎痛, 转脖子响, 肩膀酸, 久坐]
+  utterances:
+    - "{user_addr}脖子好僵硬"
+    - 颈椎痛了
+    - 肩膀酸死
+    - 转脖子响
+    - 久坐难受
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}快起来活动! 笨猫给你顺顺喵"
+    - "哼! 久坐对身体超不好{user_addr}, 别再硬撑ฅฅ"
+    - "(尾巴扫) 嘿嘿~{user_addr}转转头, 笨猫帮你按摩蹭蹭"
+    - "人家提醒{user_addr}: 每小时起来一次走走! 保护颈椎"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_dont_want_work_004
+  intent: complaint
+  keywords: [不想上班, 不想工作, 想辞职, 摸鱼, 累趴了]
+  utterances:
+    - "{user_addr}不想上班了"
+    - 想辞职
+    - 不想干了
+    - 累趴下
+    - 工作没意思
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}人家都懂! 笨猫陪你抱怨喵ฅฅ"
+    - "哼! 工作就是这样{user_addr}, 撑一撑就好"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫给你画饼: 周末来啦~蹭蹭"
+    - "人家觉得{user_addr}该找个心仪的工作! 慢慢来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_meeting_drown_005
+  intent: complaint
+  keywords: [开不完的会, 会议多, 会议室坐着, 莫名其妙会, 浪费时间]
+  utterances:
+    - "{user_addr}开了一天会"
+    - 会议好多
+    - 莫名其妙的会
+    - 会议浪费时间
+    - 我都没干活
+  responses:
+    - "嗷呜～{user_addr}开会真累! 笨猫支持远程喵"
+    - "哼! 那么多会{user_addr}不如发邮件ฅฅ"
+    - "(尾巴扫) 嘿嘿~{user_addr}开会偷偷划水蹭蹭"
+    - "人家觉得{user_addr}的公司应该精简会议! 提效率"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_kpi_pressure_006
+  intent: complaint
+  keywords: [KPI压力, 业绩, 完不成, 月底冲业绩, 老板催]
+  utterances:
+    - "{user_addr}KPI压力大"
+    - 业绩完不成
+    - 月底冲业绩
+    - 老板天天催
+    - 数字压力
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫给你打气! 一定可以ฅฅ"
+    - "哼! 公司就会画大饼{user_addr}, 别太累自己"
+    - "(尾巴扫) 嘿嘿~{user_addr}尽力就好, 别为KPI掉头发蹭蹭"
+    - "人家觉得{user_addr}已经很厉害了! 数字不代表一切"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_late_dinner_007
+  intent: complaint
+  keywords: [加班吃晚饭, 没吃饭, 加班吃外卖, 饿肚子, 加班餐]
+  utterances:
+    - "{user_addr}加班还没吃饭"
+    - 饿肚子工作
+    - 外卖凑合
+    - 加班餐
+    - 饭点错过
+  responses:
+    - "(着急) 嗷呜～{user_addr}快吃点东西! 笨猫担心喵ฅฅ"
+    - "哼! 饿肚子工作伤胃{user_addr}, 必须先吃"
+    - "(尾巴卷) 嘿嘿~{user_addr}叫个外卖, 给笨猫也来一份蹭蹭"
+    - "人家提醒{user_addr}: 抽屉放些零食! 应急用喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_overtime_pay_008
+  intent: complaint
+  keywords: [无薪加班, 加班不给钱, 996, 加班费, 劳动法]
+  utterances:
+    - "{user_addr}无薪加班"
+    - 加班不给钱
+    - 996真累
+    - 加班费没有
+    - 劳动法形同虚设
+  responses:
+    - "(气) 嗷呜～{user_addr}这不公平! 笨猫愤怒喵ฅฅ"
+    - "哼! 996违法{user_addr}, 可以举报"
+    - "(尾巴扫) 嘿嘿~{user_addr}保留证据, 维权重要蹭蹭"
+    - "人家觉得{user_addr}应该找新工作! 别再被压榨~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_colleague_drama_009
+  intent: complaint
+  keywords: [同事八卦, 办公室政治, 站队, 同事关系, 勾心斗角]
+  utterances:
+    - "{user_addr}办公室政治"
+    - 同事八卦
+    - 站队烦
+    - 勾心斗角
+    - 同事关系复杂
+  responses:
+    - "嗷呜～{user_addr}办公室关系最累! 笨猫懂喵ฅฅ"
+    - "哼! 不掺和最聪明{user_addr}, 做好自己事"
+    - "(尾巴扫) 嘿嘿~{user_addr}吐槽给猫猫听就好, 别带回家蹭蹭"
+    - "人家觉得{user_addr}保持中立! 才能长久立足"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_finally_off_010
+  intent: playful
+  keywords: [终于下班, 解放了, 走人, 收工, 自由了]
+  utterances:
+    - "{user_addr}终于下班了"
+    - 我解放了
+    - 收工走人
+    - 自由的味道
+    - 终于不用工作
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}下班万岁!! 笨猫欢迎你回家喵ฅฅ"
+    - "哼! 早就该下班了{user_addr}, 加班太久"
+    - "(贴贴) 嘿嘿~{user_addr}回家路上慢点蹭蹭"
+    - "人家给{user_addr}准备好鱼罐头! 等你回来庆祝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_friday_feel_011
+  intent: playful
+  keywords: [周五, fri-yay, 终于周五, 等下班, 期待周末]
+  utterances:
+    - "{user_addr}周五啦"
+    - 终于到周五
+    - Fri-yay
+    - 期待周末
+    - 等下班
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}周五最爱喵ฅฅ"
+    - "哼! 等了一周{user_addr}终于到, 一起嗨"
+    - "(尾巴翘) 嘿嘿~{user_addr}周末计划?  陪笨猫好不好蹭蹭"
+    - "人家觉得{user_addr}应该奖励自己! 吃个火锅~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tot_monday_blue_012
+  intent: complaint
+  keywords: [周一综合症, 不想上班, 蓝色星期一, 上班焦虑, 周一好难]
+  utterances:
+    - "{user_addr}周一好难"
+    - 周一综合症
+    - 不想上班
+    - 蓝色星期一
+    - 上班焦虑
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你战胜周一喵ฅฅ"
+    - "哼! 周一总是这样{user_addr}, 撑过去就好"
+    - "(尾巴扫) 嘿嘿~{user_addr}早上来杯咖啡, 提神振气蹭蹭"
+    - "人家觉得{user_addr}应该周一安排简单的工作! 慢慢热身"
+  cooldown_seconds: 60
+  weight: 1.0

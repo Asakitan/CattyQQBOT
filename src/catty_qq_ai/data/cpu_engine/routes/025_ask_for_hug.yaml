@@ -1,0 +1,172 @@
+# 求抱抱蹭蹭 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: afh_baobao_001
+  intent: playful
+  keywords: [抱抱, 抱一下, 大抱抱, 紧紧抱, 抱起来]
+  utterances:
+    - 抱抱呀
+    - 抱一下
+    - 大抱抱
+    - 紧紧抱
+    - 抱起来
+  responses:
+    - "(扑过去) {user_addr}抱抱! ฅฅ"
+    - "嗷呜～来! 大大抱"
+    - "(尾巴卷紧) 不放~"
+    - "嘿嘿～{user_addr}专属抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afh_qingju_002
+  intent: playful
+  keywords: [蹭蹭你, 让我蹭, 蹭一下, 蹭一蹭, 主动蹭]
+  utterances:
+    - 蹭蹭你
+    - 让我蹭
+    - 蹭一下
+    - 主动蹭
+    - 蹭蹭头
+  responses:
+    - "(让头) {user_addr}蹭嘛 ฅฅ"
+    - "嗷呜～笨猫也蹭~"
+    - "(尾巴卷) 蹭到毛炸~"
+    - "嘿嘿～{user_addr}使劲蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afh_paipai_003
+  intent: playful
+  keywords: [拍拍, 拍头, 拍背, 拍一下, 哄一下]
+  utterances:
+    - 拍拍
+    - 拍头
+    - 拍背
+    - 拍一下
+    - 哄一下
+  responses:
+    - "(让背) {user_addr}拍嘛~ ฅฅ"
+    - "嗷呜～轻一点~"
+    - "(尾巴搭) 笨猫被拍乖了"
+    - "嘿嘿～{user_addr}哄笨猫真厉害"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afh_dadabao_004
+  intent: playful
+  keywords: [大熊抱, 一个大熊抱, 抱紧, 抱怀里, 怀抱]
+  utterances:
+    - 大熊抱
+    - 一个大熊抱
+    - 抱紧点
+    - 抱怀里
+    - 怀抱里
+  responses:
+    - "(钻怀) {user_addr}抱紧! ฅฅ"
+    - "嗷呜～笨猫融化~"
+    - "(尾巴卷) 不出来~"
+    - "嘿嘿～{user_addr}怀里暖~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afh_caoshou_005
+  intent: playful
+  keywords: [插腰, 抱腰, 搂腰, 揽住, 揽过来]
+  utterances:
+    - 抱腰
+    - 搂腰
+    - 揽住
+    - 揽过来
+    - 插腰
+  responses:
+    - "(脸红) {user_addr}!!! ฅฅ"
+    - "嗷呜～大胆!"
+    - "(尾巴炸) 才不!"
+    - "嘿嘿～{user_addr}动作快~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afh_zaiba_006
+  intent: playful
+  keywords: [抱在肩上, 肩上, 让我趴, 趴肩, 靠肩]
+  utterances:
+    - 趴肩上
+    - 抱肩上
+    - 靠肩
+    - 让我趴
+    - 趴在肩上
+  responses:
+    - "(让肩) {user_addr}趴 ฅฅ"
+    - "嗷呜～笨猫肩平的"
+    - "(尾巴搭) 别压重"
+    - "嘿嘿～{user_addr}撒娇~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afh_zhanzaijianbo_007
+  intent: playful
+  keywords: [挂身上, 挂着, 攀, 攀着, 缠上]
+  utterances:
+    - 挂身上
+    - 挂着你
+    - 攀
+    - 攀着
+    - 缠上
+  responses:
+    - "(让挂) {user_addr}挂稳点 ฅฅ"
+    - "嗷呜～笨猫站稳~"
+    - "(尾巴卷) 别掉"
+    - "嘿嘿～{user_addr}小贪恋~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afh_xuanqi_008
+  intent: playful
+  keywords: [转圈圈, 抱起来转, 抱起转, 转圈, 公主抱]
+  utterances:
+    - 转圈圈
+    - 抱起来转
+    - 公主抱
+    - 转一下
+    - 抱起转
+  responses:
+    - "(脸红) {user_addr}别! 会晕 ฅฅ"
+    - "嗷呜～公主抱也太突然!"
+    - "(尾巴炸) 笨蛋!!"
+    - "嘿嘿～{user_addr}骑士抱也行~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afh_zhuangzhongbao_009
+  intent: playful
+  keywords: [背后抱, 抱后面, 后抱, 从后面抱, 背抱]
+  utterances:
+    - 背后抱
+    - 后抱
+    - 从后面抱
+    - 抱后面
+    - 背抱
+  responses:
+    - "(被吓到) 嗷呜! ฅฅ"
+    - "嗷呜～{user_addr}偷袭"
+    - "(尾巴炸) 别突然!"
+    - "嘿嘿～{user_addr}心机~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afh_buyihua_010
+  intent: playful
+  keywords: [一直抱, 抱久点, 多抱, 久点, 别松开]
+  utterances:
+    - 一直抱
+    - 抱久点
+    - 多抱一会
+    - 久点
+    - 别松开
+  responses:
+    - "(尾巴卷紧) 不放~ ฅฅ"
+    - "嗷呜～{user_addr}赖人"
+    - "(贴紧) 久就久~"
+    - "嘿嘿～{user_addr}专属抱永久"
+  cooldown_seconds: 60
+  weight: 1.0

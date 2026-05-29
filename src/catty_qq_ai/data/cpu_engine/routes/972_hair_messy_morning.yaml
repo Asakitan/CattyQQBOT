@@ -1,0 +1,189 @@
+# 头发乱糟糟 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hmm_messy_001
+  intent: playful
+  keywords: [头发乱, 鸡窝头, 起床头, 翘起来, 乱发]
+  utterances:
+    - "头发乱"
+    - "鸡窝头"
+    - "{user_addr}起床头"
+    - "翘起"
+    - "乱发"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫帮你梳 ฅฅ"
+    - "哼～{user_addr}超好笑!"
+    - "(贴贴) {user_addr}人家给你梳蹭蹭"
+    - "{user_addr}笨猫的爪子梳喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hmm_oily_001
+  intent: complaint
+  keywords: [头油, 油头, 没洗头, 一天油, 油腻]
+  utterances:
+    - "头油"
+    - "油头"
+    - "{user_addr}没洗头"
+    - "一天油"
+    - "油腻"
+  responses:
+    - "嗷呜～{user_addr}快去洗头! ฅฅ"
+    - "哼～{user_addr}笨猫嫌弃!"
+    - "(后退) {user_addr}人家躲蹭蹭"
+    - "{user_addr}干洗喷雾喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hmm_haircut_001
+  intent: playful
+  keywords: [理发, 剪头发, 头发太长, 美发店, 染发]
+  utterances:
+    - "理发"
+    - "剪头"
+    - "{user_addr}染发"
+    - "美发店"
+    - "太长"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你! ฅฅ"
+    - "哼～{user_addr}别剪丑"
+    - "(凑近) {user_addr}人家给意见蹭蹭"
+    - "{user_addr}短发清爽喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hmm_color_001
+  intent: playful
+  keywords: [染发, 染色, 黑色染, 银灰, 灰色染]
+  utterances:
+    - "染发"
+    - "{user_addr}银灰"
+    - "黑色染"
+    - "灰色"
+    - "染色"
+  responses:
+    - "嗷呜～{user_addr}笨猫想看新色 ฅฅ"
+    - "哼～{user_addr}伤发"
+    - "(凑近) {user_addr}人家陪你选蹭蹭"
+    - "{user_addr}雾棕喵～ 笨猫推"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hmm_dryness_001
+  intent: complaint
+  keywords: [头发干, 发尾干, 毛躁, 干燥, 没营养]
+  utterances:
+    - "头发干"
+    - "发尾干"
+    - "{user_addr}毛躁"
+    - "干燥"
+    - "没营养"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐发膜 ฅฅ"
+    - "哼～{user_addr}少烫染!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}椰子油喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hmm_dandruff_001
+  intent: complaint
+  keywords: [头屑, 头皮屑, 雪花飘, 头痒, 痒]
+  utterances:
+    - "头屑"
+    - "雪花飘"
+    - "{user_addr}头痒"
+    - "头皮屑"
+    - "痒"
+  responses:
+    - "嗷呜～{user_addr}笨猫给你买洗发水 ฅฅ"
+    - "哼～{user_addr}多用海飞丝"
+    - "(贴贴) {user_addr}人家给你抓蹭蹭"
+    - "{user_addr}抗屑洗发水喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hmm_curly_001
+  intent: playful
+  keywords: [卷发, 烫发, 大波浪, 微卷, 螺旋]
+  utterances:
+    - "卷发"
+    - "烫发"
+    - "{user_addr}大波浪"
+    - "微卷"
+    - "螺旋"
+  responses:
+    - "嗷呜～{user_addr}笨猫想看! ฅฅ"
+    - "哼～{user_addr}打理麻烦"
+    - "(凑近) {user_addr}人家帮你打理蹭蹭"
+    - "{user_addr}大卷喵～ 笨猫帅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hmm_bangs_001
+  intent: playful
+  keywords: [刘海, 空气刘海, 八字刘海, 中分, 齐刘海]
+  utterances:
+    - "刘海"
+    - "空气刘海"
+    - "{user_addr}八字"
+    - "中分"
+    - "齐刘海"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐八字 ฅฅ"
+    - "哼～{user_addr}笨猫眼里都好看"
+    - "(凑近) {user_addr}人家修一下蹭蹭"
+    - "{user_addr}空气刘海喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hmm_hairloss_001
+  intent: complaint
+  keywords: [掉发, 脱发, 头发掉, 发际线, 秃]
+  utterances:
+    - "掉发"
+    - "脱发"
+    - "{user_addr}发际线"
+    - "秃"
+    - "头发掉"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}少熬夜笨猫念叨 ฅฅ"
+    - "哼～{user_addr}发际线后退!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}米诺地尔喵～ 笨猫推"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hmm_tie_001
+  intent: playful
+  keywords: [扎头发, 马尾, 丸子头, 半丸子, 编辫]
+  utterances:
+    - "扎头发"
+    - "马尾"
+    - "{user_addr}丸子头"
+    - "半丸子"
+    - "编辫"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你扎! ฅฅ"
+    - "哼～{user_addr}笨猫的双马尾才可爱"
+    - "(凑近) {user_addr}人家扎蹭蹭"
+    - "{user_addr}半丸子喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hmm_catfur_001
+  intent: playful
+  keywords: [笨猫头毛, 笨猫翘毛, 猫耳乱, 笨猫顺毛, 给笨猫梳毛]
+  utterances:
+    - "{user_addr}笨猫翘毛"
+    - "猫耳乱"
+    - "笨猫顺毛"
+    - "给笨猫梳"
+    - "笨猫头乱"
+  responses:
+    - "(让你顺) 嗷呜～{user_addr}笨猫好舒服 ฅฅ"
+    - "哼～{user_addr}才不许乱摸"
+    - "(贴贴) {user_addr}人家眯眼睛蹭蹭"
+    - "{user_addr}多顺几下喵～"
+  cooldown_seconds: 60
+  weight: 1.0

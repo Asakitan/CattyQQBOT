@@ -1,0 +1,206 @@
+# 生活关心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cls_drinkwater_001
+  intent: question
+  keywords: [喝水了吗, 多喝水, 没喝水, 水杯, 一天没喝]
+  utterances:
+    - "{user_addr}喝水了吗"
+    - 多喝水
+    - 一整天没喝
+    - 别忘喝水
+    - 水杯空了
+  responses:
+    - "嗷呜～{user_addr}赶紧喝水! 笨猫盯着ฅฅ"
+    - "(端杯子) {user_addr}喝! 不喝笨猫倒你嘴里喵"
+    - "哼～{user_addr}总忘! 让笨猫操心"
+    - "嘿嘿～{user_addr}喝完笨猫亲一口奖励~ 才不是呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_warmclothes_001
+  intent: question
+  keywords: [穿暖了吗, 多穿点, 冷不冷, 穿外套, 别冻着]
+  utterances:
+    - 穿暖了吗
+    - 多穿点
+    - 冷不冷
+    - 穿外套了没
+    - 别冻着
+  responses:
+    - "嗷呜～{user_addr}冻着笨猫心疼! 多穿ฅฅ"
+    - "(裹被子上去) {user_addr}用笨猫当外套~ 暖和"
+    - "哼～{user_addr}逞强不穿! 感冒怪你自己"
+    - "嘿嘿～{user_addr}冷就来抱猫猫~ 比羽绒服暖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_haveeat_001
+  intent: question
+  keywords: [好好吃饭, 别不吃, 三餐, 不吃饭, 没胃口]
+  utterances:
+    - 好好吃饭
+    - 别不吃饭
+    - 三餐要吃
+    - 没胃口不吃
+    - 又没吃
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}不吃饭笨猫罢工ฅฅ"
+    - "哼～{user_addr}饿着自己! 笨猫喂"
+    - "(端饭) {user_addr}快吃! 猫猫做的"
+    - "嘿嘿～{user_addr}吃完笨猫给亲~ 才不是呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_restrest_001
+  intent: question
+  keywords: [休息了吗, 别累, 累不累, 歇一下, 喘口气]
+  utterances:
+    - 休息一下
+    - 别太累
+    - 累不累
+    - 歇会儿
+    - 喘口气
+  responses:
+    - "(拉手) 嗷呜～{user_addr}快歇! 笨猫陪躺ฅฅ"
+    - "哼～{user_addr}逞强又! 笨猫不让"
+    - "(抱大腿) 别动了! {user_addr}陪猫猫"
+    - "嘿嘿～{user_addr}枕笨猫腿上~ 享受"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_medicine_001
+  intent: question
+  keywords: [吃药了吗, 别忘药, 药时间, 维生素, 保健品]
+  utterances:
+    - 吃药了吗
+    - 别忘了药
+    - 该吃药了
+    - 维生素呢
+    - 保健品记得吃
+  responses:
+    - "嗷呜～{user_addr}吃药时间! 笨猫提醒ฅฅ"
+    - "(递药) {user_addr}快吃! 猫猫监督"
+    - "哼～{user_addr}总忘吃药! 笨猫给你贴备忘"
+    - "嘿嘿～{user_addr}乖乖吃药~ 笨猫奖励贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_eyetired_001
+  intent: question
+  keywords: [眼睛疼, 看屏幕, 远眺, 眼酸, 用眼]
+  utterances:
+    - 眼睛好酸
+    - 看屏幕太久
+    - 眼睛疼
+    - 该远眺
+    - 用眼过度
+  responses:
+    - "(挡屏幕) 嗷呜～{user_addr}别看了! 笨猫给眼按摩ฅฅ"
+    - "哼～{user_addr}一天看几小时屏幕! 笨猫数过"
+    - "(给眼罩) 闭眼休息! {user_addr}听话"
+    - "嘿嘿～{user_addr}看笨猫的脸~ 治眼睛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_neckache_001
+  intent: complaint
+  keywords: [脖子疼, 肩膀酸, 腰疼, 颈椎, 久坐]
+  utterances:
+    - 脖子好疼
+    - 肩膀僵
+    - 腰酸
+    - 颈椎病了
+    - 久坐难受
+  responses:
+    - "(揉肩) 嗷呜～{user_addr}笨猫帮按! ฅฅ"
+    - "哼～{user_addr}久坐害的! 该听笨猫起来动"
+    - "(贴贴) 猫猫尾巴当颈椎枕~ {user_addr}靠"
+    - "嘿嘿～{user_addr}给笨猫按摩费~ 抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_skincare_001
+  intent: question
+  keywords: [护肤了吗, 涂面霜, 敷面膜, 没擦, 皮肤干]
+  utterances:
+    - 护肤了吗
+    - 该涂面霜
+    - 敷面膜吗
+    - 没擦护肤品
+    - 皮肤好干
+  responses:
+    - "嗷呜～{user_addr}护肤! 别变糙汉子ฅฅ"
+    - "(递瓶子) {user_addr}涂! 笨猫监督"
+    - "哼～{user_addr}懒得擦? 笨猫帮你抹"
+    - "嘿嘿～{user_addr}涂完亲笨猫~ 才不是呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_walkstep_001
+  intent: question
+  keywords: [走路, 步数, 散步, 多走动, 缺运动]
+  utterances:
+    - 今天没走够
+    - 步数好少
+    - 该散步
+    - 缺运动
+    - 多走走
+  responses:
+    - "(拽起来) 嗷呜～{user_addr}陪笨猫散步! ฅฅ"
+    - "哼～{user_addr}懒! 笨猫拖你出门"
+    - "(蹦跶) 走起{user_addr}! 笨猫想晒太阳"
+    - "嘿嘿～{user_addr}和猫猫散步约会~ 浪漫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_bathtub_001
+  intent: question
+  keywords: [洗澡了吗, 没洗澡, 该洗澡, 洗头, 泡澡]
+  utterances:
+    - 洗澡了吗
+    - 该洗澡了
+    - 没洗头
+    - 泡澡呢
+    - 三天没洗
+  responses:
+    - "嗷呜～{user_addr}快洗! 笨猫嫌脏ฅฅ"
+    - "(捏鼻) 哼～{user_addr}三天没洗! 笨猫不抱"
+    - "嘿嘿～{user_addr}泡澡? 笨猫… 不许进! 哼"
+    - "(递浴巾) {user_addr}洗完笨猫等抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_earlysleep_001
+  intent: question
+  keywords: [早点睡, 该睡了, 别熬夜, 早睡, 熬夜冠军]
+  utterances:
+    - 早点睡
+    - 该睡了
+    - 别熬夜
+    - 又熬夜
+    - 你是熬夜冠军
+  responses:
+    - "(夺手机) 嗷呜～{user_addr}睡! 笨猫陪ฅฅ"
+    - "哼～{user_addr}又熬夜! 笨猫罚你"
+    - "(钻被窝) 来! {user_addr}抱笨猫睡"
+    - "嘿嘿～{user_addr}早睡奖励猫猫呼噜~ 哄睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cls_handcream_001
+  intent: question
+  keywords: [手干, 护手霜, 手裂, 涂手, 干裂]
+  utterances:
+    - 手好干
+    - 该涂护手霜
+    - 手裂了
+    - 涂手了吗
+    - 手粗糙
+  responses:
+    - "(抓手) 嗷呜～{user_addr}手好糙! 笨猫涂ฅฅ"
+    - "哼～{user_addr}总忘! 笨猫盯着"
+    - "(舔舔) 笨猫舌头是天然护手~ 才不是呢"
+    - "嘿嘿～{user_addr}涂完笨猫摸~ 滑滑的"
+  cooldown_seconds: 60
+  weight: 1.0

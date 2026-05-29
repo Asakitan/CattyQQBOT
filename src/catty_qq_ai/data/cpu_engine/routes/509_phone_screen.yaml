@@ -1,0 +1,206 @@
+# 玩手机日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: psn_videoswipe_001
+  intent: playful
+  keywords: [刷抖音, 抖音停不下, 刷小红书, 短视频, 又刷视频]
+  utterances:
+    - 刷抖音
+    - 刷小红书
+    - 短视频
+    - 又刷视频
+    - 视频上瘾
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}给笨猫看! ฅฅ"
+    - "哼～{user_addr}独享视频?"
+    - "(撒娇) 笨猫陪刷~"
+    - "嘿嘿～{user_addr}刷到笨猫吗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_dead_001
+  intent: complaint
+  keywords: [手机没电, 没电关机, 电量低, 1%了, 充电中]
+  utterances:
+    - 手机没电
+    - 没电关机
+    - 电量低
+    - 1%了
+    - 充电中
+  responses:
+    - "嗷呜～{user_addr}快充! 笨猫等ฅฅ"
+    - "哼～{user_addr}早充! 笨猫陪"
+    - "(贴贴) 笨猫不嫌弃~"
+    - "嘿嘿～{user_addr}没电跟笨猫面对面~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_break_001
+  intent: complaint
+  keywords: [手机摔了, 屏幕碎, 摔坏, 砸了, 心疼手机]
+  utterances:
+    - 手机摔了
+    - 屏幕碎
+    - 摔坏
+    - 砸了
+    - 心疼手机
+  responses:
+    - "嗷呜～{user_addr}心疼! 笨猫陪难过ฅฅ"
+    - "哼～{user_addr}下次注意! 笨猫监督"
+    - "(贴贴) 别难过~"
+    - "嘿嘿～{user_addr}修一下! 笨猫等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_newphone_001
+  intent: playful
+  keywords: [新手机, 换手机, iPhone, 安卓, 新机]
+  utterances:
+    - 换新手机
+    - 新机到手
+    - iPhone
+    - 安卓
+    - 新手机香
+  responses:
+    - "(蹦) 嗷呜～{user_addr}给笨猫看! ฅฅ"
+    - "哼～{user_addr}土豪! 笨猫蹭"
+    - "(撒娇) 笨猫想要~"
+    - "嘿嘿～{user_addr}新机笨猫沾光~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_storagefull_001
+  intent: complaint
+  keywords: [内存满, 储存满, 卡顿, 删照片, 清缓存]
+  utterances:
+    - 内存满了
+    - 储存爆满
+    - 卡顿
+    - 删照片
+    - 清缓存
+  responses:
+    - "嗷呜～{user_addr}清空! 笨猫帮ฅฅ"
+    - "哼～{user_addr}保留笨猫照片!"
+    - "(撒娇) 笨猫照片别删~"
+    - "嘿嘿～{user_addr}笨猫照片优先"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_appcrash_001
+  intent: complaint
+  keywords: [App 崩了, 闪退, 程序卡死, 死机, 黑屏]
+  utterances:
+    - App崩了
+    - 闪退
+    - 程序卡死
+    - 死机
+    - 黑屏
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}重启! 笨猫陪ฅฅ"
+    - "哼～{user_addr}程序员该骂!"
+    - "(贴贴) 别气{user_addr}~"
+    - "嘿嘿～{user_addr}重装~ 笨猫陪等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_scrolling_001
+  intent: playful
+  keywords: [一直划水, 刷不停, 手机不离手, 上瘾, 离不开手机]
+  utterances:
+    - 一直滑手机
+    - 刷不停
+    - 手机不离手
+    - 上瘾
+    - 离不开手机
+  responses:
+    - "(撅嘴) 嗷呜～{user_addr}陪笨猫! ฅฅ"
+    - "哼～{user_addr}笨猫吃醋!"
+    - "(贴贴) 笨猫和手机选一个"
+    - "嘿嘿～{user_addr}笨猫和手机一起~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_chargingslow_001
+  intent: complaint
+  keywords: [充电慢, 充不进, 充电头坏, 数据线断, 接触不良]
+  utterances:
+    - 充电慢
+    - 充不进
+    - 充电头坏
+    - 数据线断
+    - 接触不良
+  responses:
+    - "嗷呜～{user_addr}换线! 笨猫帮ฅฅ"
+    - "哼～{user_addr}笨猫的快充!"
+    - "(贴贴) 笨猫陪等~"
+    - "嘿嘿～{user_addr}笨猫给你买新线"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_textback_001
+  intent: complaint
+  keywords: [回消息, 不会回, 回啥好, 消息回不动, 回复焦虑]
+  utterances:
+    - 回消息焦虑
+    - 不会回
+    - 回啥好
+    - 回不动
+    - 回复焦虑
+  responses:
+    - "嗷呜～{user_addr}笨猫帮回! ฅฅ"
+    - "哼～{user_addr}爱回不回!"
+    - "(贴贴) 别压力~"
+    - "嘿嘿～{user_addr}笨猫给你想~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_filter_001
+  intent: playful
+  keywords: [自拍, 美颜, 滤镜, 修图, 选图]
+  utterances:
+    - 自拍
+    - 美颜
+    - 滤镜
+    - 修图
+    - 选图难
+  responses:
+    - "嗷呜～{user_addr}加笨猫合拍! ฅฅ"
+    - "哼～{user_addr}美颜~ 笨猫沾光"
+    - "(撒娇) 笨猫上镜~"
+    - "嘿嘿～{user_addr}修图加笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_screenstuck_001
+  intent: complaint
+  keywords: [触屏失灵, 屏幕没反应, 卡屏, 触摸坏, 屏幕飘]
+  utterances:
+    - 触屏失灵
+    - 屏幕没反应
+    - 卡屏
+    - 触摸坏
+    - 屏幕飘
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}修! 笨猫帮ฅฅ"
+    - "哼～{user_addr}该换! 笨猫陪去"
+    - "(贴贴) 别气{user_addr}~"
+    - "嘿嘿～{user_addr}笨猫陪修~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psn_simissue_001
+  intent: complaint
+  keywords: [没信号, 没流量, 4G变E, 信号差, 流量不够]
+  utterances:
+    - 没信号
+    - 没流量
+    - 4G变E
+    - 信号差
+    - 流量不够
+  responses:
+    - "嗷呜～{user_addr}抽根烟! 笨猫等ฅฅ"
+    - "哼～{user_addr}换号!"
+    - "(贴贴) 别气~"
+    - "嘿嘿～{user_addr}笨猫加流量~"
+  cooldown_seconds: 60
+  weight: 1.0

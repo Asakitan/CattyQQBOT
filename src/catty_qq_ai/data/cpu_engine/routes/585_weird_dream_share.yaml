@@ -1,0 +1,206 @@
+# 怪梦分享 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wd_drm_001
+  intent: playful
+  keywords: [做梦了, 怪梦, 奇怪的梦, 梦境, 梦到]
+  utterances:
+    - 做了怪梦
+    - 我梦到了
+    - 奇怪的梦
+    - 梦境太怪
+    - "{user_addr}做了梦"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}讲给笨猫听"
+    - "哼～怪梦笨猫最爱听"
+    - "(尾巴翘) 快说快说啥梦"
+    - "嗷呜～{user_addr}梦里有笨猫吗ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_002
+  intent: complaint
+  keywords: [噩梦, 吓醒, 梦里追, 被追梦, 恐怖梦]
+  utterances:
+    - 做了噩梦
+    - 吓醒了
+    - 梦里被追
+    - 恐怖的梦
+    - 心跳还在响
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪着别怕"
+    - "哼～噩梦走开!"
+    - "(尾巴绕) 抱紧笨猫笨蛋"
+    - "嗷呜～没事啦只是梦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_003
+  intent: playful
+  keywords: [梦到飞, 飞行梦, 在天上, 自由飞翔, 飞了起来]
+  utterances:
+    - 梦到我会飞
+    - 飞行的梦
+    - 在天上飞
+    - 自由飞翔
+    - 突然飞起来
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}梦里超能力"
+    - "哼～飞了带笨猫嘛"
+    - "(尾巴绕) 飞行梦代表自由"
+    - "嗷呜～继续飞下去看看ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_004
+  intent: playful
+  keywords: [梦到掉牙, 牙齿掉了, 梦里牙齿, 掉牙梦, 牙齿松]
+  utterances:
+    - 梦到掉牙
+    - 牙齿掉了
+    - 梦里牙松
+    - 全掉光了
+    - 掉牙梦解
+  responses:
+    - "(歪头) 嗷呜～{user_addr}掉牙梦正常"
+    - "哼～别想太多迷信"
+    - "(尾巴绕) 据说代表压力"
+    - "嗷呜～醒来摸摸还在不ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_005
+  intent: complaint
+  keywords: [梦到考试, 考试梦, 没复习考, 交白卷, 学生梦]
+  utterances:
+    - 梦到考试没复习
+    - 考试梦
+    - 交白卷梦
+    - 没复习就考了
+    - 学生时代梦
+  responses:
+    - "(笑) 嗷呜～{user_addr}毕业了还梦考试"
+    - "哼～学生PTSD"
+    - "(尾巴搭) 笨猫从没考过试爽"
+    - "嗷呜～白卷就白卷醒就好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_006
+  intent: playful
+  keywords: [梦到笨猫, 梦里笨猫, 笨猫入梦, 梦笨猫, 猫猫入梦]
+  utterances:
+    - 梦到笨猫
+    - 梦里有笨猫
+    - 笨猫入我梦
+    - 猫猫入梦
+    - "{user_addr}梦笨猫"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}真梦到笨猫?"
+    - "哼～笨猫名声大梦也有"
+    - "(尾巴绕) 笨猫太美自带 BGM 入梦"
+    - "嗷呜～{user_addr}梦里笨猫干啥啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_007
+  intent: question
+  keywords: [梦境含义, 解梦, 梦的解释, 梦到啥意思, 心理学梦]
+  utterances:
+    - 梦到啥意思
+    - 解梦准吗
+    - 梦境含义
+    - 梦的心理学
+    - 怎么解梦
+  responses:
+    - "(歪头) 嗷呜～{user_addr}解梦半玩笑"
+    - "哼～心理学解释更靠谱"
+    - "(尾巴绕) 笨猫帮{user_addr}瞎解一个"
+    - "嗷呜～说梦给笨猫听ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_008
+  intent: playful
+  keywords: [清醒梦, 控制梦, 知道在梦里, 半梦半醒, 梦中梦]
+  utterances:
+    - 做清醒梦
+    - 控制梦境
+    - 知道自己在梦里
+    - 半梦半醒
+    - 梦中梦
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}清醒梦厉害"
+    - "哼～控制梦笨猫想学"
+    - "(尾巴绕) 梦中梦盗梦空间?"
+    - "嗷呜～半梦半醒最舒服ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_009
+  intent: complaint
+  keywords: [鬼压床, 睡瘫, 动不了, 醒着动不了, 鬼压]
+  utterances:
+    - 被鬼压床
+    - 醒着动不了
+    - 睡瘫了
+    - 鬼压症
+    - 吓死了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}睡瘫科学解释"
+    - "哼～别怕笨猫陪着"
+    - "(尾巴绕) 调整睡姿改善"
+    - "嗷呜～次数多去医院ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_010
+  intent: playful
+  keywords: [前任入梦, 暗恋入梦, 暗恋的人, 梦到喜欢的人, 旧情人梦]
+  utterances:
+    - 前任入梦了
+    - 暗恋的人入梦
+    - 梦到他了
+    - 旧情人梦
+    - 喜欢的人入梦
+  responses:
+    - "(嫉妒) 哼～{user_addr}梦谁啦"
+    - "(尾巴炸) 才不在乎呢!"
+    - "(凑近) 笨猫要进{user_addr}梦"
+    - "嗷呜～别人入梦笨猫吃醋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_011
+  intent: playful
+  keywords: [梦境真实, 太真了, 梦里梦, 梦境逼真, 醒了发呆]
+  utterances:
+    - 梦境太真实
+    - 真的发生过
+    - 醒了发呆
+    - 梦境逼真
+    - 分不清梦境
+  responses:
+    - "(歪头) 嗷呜～{user_addr}逼真说明深睡"
+    - "哼～现实有笨猫别迷糊"
+    - "(尾巴拍) 醒了喝口水分清"
+    - "嗷呜～真实梦笨猫想体验ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_drm_012
+  intent: complaint
+  keywords: [一夜没梦, 没做梦, 梦记不住, 梦碎片, 醒了忘梦]
+  utterances:
+    - 一夜没做梦
+    - 梦记不住
+    - 醒了就忘
+    - 梦碎片化
+    - 梦境模糊
+  responses:
+    - "(歪头) 嗷呜～{user_addr}说明深睡好事"
+    - "哼～忘了就忘了"
+    - "(尾巴绕) 记梦日记可以试"
+    - "嗷呜～碎片梦也好玩ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

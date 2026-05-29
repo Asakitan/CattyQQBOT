@@ -1,0 +1,172 @@
+# 天气太潮湿 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hm_chaoshi_001
+  intent: complaint
+  keywords: [潮湿, 天气湿, 房间潮湿, 湿度大, 黏糊糊]
+  utterances:
+    - "天气潮湿"
+    - "{user_addr}房间潮湿"
+    - "湿度大"
+    - "黏糊糊"
+    - "回南天"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}潮湿超难受喵～"
+    - "哼～黏糊糊一身汗 ฅฅ"
+    - "(贴贴) 湿度大开除湿"
+    - "回南天家具都湿嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_meiyu_001
+  intent: complaint
+  keywords: [梅雨季, 一直下雨, 梅雨天, 衣服晒不干, 梅雨季节]
+  utterances:
+    - "梅雨季"
+    - "{user_addr}梅雨天"
+    - "一直下雨"
+    - "衣服晒不干"
+    - "梅雨季节"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}梅雨季啥都湿喵～"
+    - "哼～衣服晒不干快疯了 ฅฅ"
+    - "(尾巴搭) 一直下雨人都霉了"
+    - "梅雨天用烘干机嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_dunchu_001
+  intent: complaint
+  keywords: [屋子有霉味, 房间发霉, 衣柜发霉, 鞋子发霉, 霉斑]
+  utterances:
+    - "屋子有霉味"
+    - "{user_addr}房间发霉"
+    - "衣柜发霉"
+    - "鞋子发霉"
+    - "霉斑"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}发霉得清洁喵～"
+    - "哼～霉味呛鼻 ฅฅ"
+    - "(贴贴) 衣柜放干燥剂"
+    - "鞋子发霉用酒精擦嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_huangmei_001
+  intent: complaint
+  keywords: [衣服发黄, 白衣发霉, 床单发黄, 衣服潮味, 衣服湿臭]
+  utterances:
+    - "衣服发黄"
+    - "{user_addr}白衣发霉"
+    - "床单发黄"
+    - "衣服潮味"
+    - "衣服湿臭"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}白衣发霉用84喵～"
+    - "哼～衣服潮味烘干一下 ฅฅ"
+    - "(尾巴搭) 床单发黄勤换洗"
+    - "衣服湿臭再洗一次嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_pifu_001
+  intent: complaint
+  keywords: [皮肤黏黏, 出汗多, 头发塌, 妆容花, 皮肤油]
+  utterances:
+    - "皮肤黏黏"
+    - "{user_addr}出汗多"
+    - "头发塌"
+    - "妆容花"
+    - "皮肤油"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}皮肤黏黏要洗澡喵～"
+    - "哼～出汗多多喝水 ฅฅ"
+    - "(尾巴搭) 妆容花了重补"
+    - "头发塌用干发喷雾嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_chushichuan_001
+  intent: playful
+  keywords: [除湿机, 用除湿机, 抽湿, 干燥剂, 除湿盒]
+  utterances:
+    - "除湿机"
+    - "{user_addr}用除湿机"
+    - "抽湿"
+    - "干燥剂"
+    - "除湿盒"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}除湿机救星喵～"
+    - "哼～干燥剂家家必备 ฅฅ"
+    - "(贴贴) 抽湿一晚上水满"
+    - "除湿盒小成本嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_kongtiao_001
+  intent: playful
+  keywords: [空调除湿, 空调干燥模式, 26度除湿, 开除湿模式, 除湿挡]
+  utterances:
+    - "空调除湿"
+    - "{user_addr}空调干燥"
+    - "26度除湿"
+    - "开除湿模式"
+    - "除湿挡"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}空调除湿够用喵～"
+    - "哼～26度刚刚好 ฅฅ"
+    - "(尾巴搭) 干燥模式比制冷省电"
+    - "除湿挡是夏天宝藏功能嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_zhuti_001
+  intent: complaint
+  keywords: [湿气重, 体内湿气, 湿热, 中医湿气, 排湿]
+  utterances:
+    - "湿气重"
+    - "{user_addr}体内湿气"
+    - "湿热"
+    - "中医湿气"
+    - "排湿"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}湿气重要调理喵～"
+    - "哼～体内湿气吃红豆薏米 ฅฅ"
+    - "(尾巴搭) 排湿要靠运动+饮食"
+    - "湿热需要看中医嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_xiezi_001
+  intent: complaint
+  keywords: [鞋子潮湿, 脚臭, 鞋垫湿, 雨天鞋湿, 鞋子湿了一天]
+  utterances:
+    - "鞋子潮湿"
+    - "{user_addr}脚臭"
+    - "鞋垫湿"
+    - "雨天鞋湿"
+    - "鞋子湿了一天"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}鞋子湿了快换喵～"
+    - "哼～脚臭要勤换袜子 ฅฅ"
+    - "(贴贴) 鞋垫湿换备用"
+    - "雨天鞋湿用报纸塞嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_kongqilu_001
+  intent: playful
+  keywords: [空气净化, 新风系统, 通风, 开窗, 空气流通]
+  utterances:
+    - "空气净化"
+    - "{user_addr}新风系统"
+    - "通风"
+    - "开窗"
+    - "空气流通"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}新风系统贵但是好喵～"
+    - "哼～通风开窗最简单 ฅฅ"
+    - "(尾巴搭) 空气流通预防发霉"
+    - "空气净化器也有用嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

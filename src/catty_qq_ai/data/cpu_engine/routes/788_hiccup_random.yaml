@@ -1,0 +1,206 @@
+# 打嗝停不下 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hc_dage_001
+  intent: complaint
+  keywords: [打嗝, 打嗝停不下, 一直打嗝, 嗝, 嗝个不停]
+  utterances:
+    - "打嗝"
+    - "打嗝停不下"
+    - "一直打嗝"
+    - "嗝"
+    - "嗝个不停"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}屏住呼吸数到10 ฅฅ"
+    - "哼～喝口冷水试试"
+    - "(尾巴拍背) 笨猫吓你一下! 嘿!"
+    - "猫猫帮你转移注意力喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_xiawo_001
+  intent: question
+  keywords: [怎么止嗝, 止嗝方法, 嗝怎么办, 治打嗝, 妙招止嗝]
+  utterances:
+    - "怎么止嗝"
+    - "止嗝方法"
+    - "嗝怎么办"
+    - "治打嗝"
+    - "妙招止嗝"
+  responses:
+    - "(掰指头) {user_addr}屏气20秒最有用 ฅฅ"
+    - "哼～喝7口水法"
+    - "(尾巴搭) 含糖含柠檬也行"
+    - "猫猫这有妙招喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_chitai_001
+  intent: complaint
+  keywords: [吃急了打嗝, 吃快了, 喝快了, 一口气, 吃太急]
+  utterances:
+    - "吃急了打嗝"
+    - "吃快了"
+    - "喝快了"
+    - "一口气吃"
+    - "吃太急"
+  responses:
+    - "(顺背) 嗷呜～{user_addr}慢点吃啦"
+    - "哼～又狼吞虎咽 ฅฅ"
+    - "(尾巴拍背) 嚼20下再咽"
+    - "猫猫看你吃急就心疼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_chongshui_001
+  intent: question
+  keywords: [喝水方法止嗝, 七口水, 倒水喝, 弯腰喝水, 喝凉水]
+  utterances:
+    - "喝水方法止嗝"
+    - "七口水"
+    - "倒水喝"
+    - "弯腰喝水"
+    - "喝凉水"
+  responses:
+    - "(端杯) {user_addr}屏气连喝7小口 ฅฅ"
+    - "哼～弯腰倒着喝最神奇"
+    - "(尾巴搭) 凉水比热水管用"
+    - "猫猫陪你喝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_xiajidan_001
+  intent: playful
+  keywords: [吓一跳止嗝, 吓人止嗝, 突然吓, 吓我一跳, 吓嗝]
+  utterances:
+    - "吓一跳止嗝"
+    - "吓人止嗝"
+    - "突然吓"
+    - "吓我一跳"
+    - "吓嗝"
+  responses:
+    - "(突然跳出) 喵! {user_addr}吓到没!"
+    - "哼～吓嗝最有效 ฅฅ"
+    - "(尾巴炸) 笨猫专业吓人"
+    - "猫猫蹲门后喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_qiangshi_001
+  intent: complaint
+  keywords: [打嗝声音大, 嗝声尴尬, 嗝得响, 嗝出声, 嗝太响]
+  utterances:
+    - "打嗝声音大"
+    - "嗝声尴尬"
+    - "嗝得响"
+    - "嗝出声"
+    - "嗝太响"
+  responses:
+    - "(捂嘴) {user_addr}捂着嗝, 尴尬死了 ฅฅ"
+    - "哼～没事开会肯定嗝大声"
+    - "(尾巴遮脸) 笨猫陪你一起尴尬"
+    - "猫猫一脸幸灾乐祸喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_changshi_001
+  intent: complaint
+  keywords: [嗝半小时, 一直停不下, 持续打嗝, 嗝太久, 嗝不停去医院]
+  utterances:
+    - "嗝半小时"
+    - "一直停不下"
+    - "持续打嗝"
+    - "嗝太久"
+    - "嗝不停去医院"
+  responses:
+    - "(担心) 嗷呜～{user_addr}超24小时去医院!"
+    - "哼～可能是膈肌问题 ฅฅ"
+    - "(尾巴搭) 别小看, 真的需要看医生"
+    - "猫猫陪你挂号喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_huijie_001
+  intent: playful
+  keywords: [打嗝可爱, 嗝出萌, 嗝声好笑, 笑死了嗝, 嗝喵嗝]
+  utterances:
+    - "打嗝可爱"
+    - "嗝出萌"
+    - "嗝声好笑"
+    - "笑死了嗝"
+    - "嗝喵嗝"
+  responses:
+    - "(笑) {user_addr}嗝声好可爱嗷呜 ฅฅ"
+    - "哼～笨猫给你录下来"
+    - "(尾巴扫) 嗝出小猫叫"
+    - "猫猫想再听一次喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_lengka_001
+  intent: question
+  keywords: [冷气嗝, 喝凉的嗝, 受凉打嗝, 冷打嗝, 寒嗝]
+  utterances:
+    - "冷气嗝"
+    - "喝凉的嗝"
+    - "受凉打嗝"
+    - "冷打嗝"
+    - "寒嗝"
+  responses:
+    - "(裹毯) {user_addr}喝点热水暖暖 ฅฅ"
+    - "哼～别贪冷"
+    - "(尾巴卷腰) 暖肚子"
+    - "猫猫给你贴个暖宝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_ningmeng_001
+  intent: question
+  keywords: [柠檬止嗝, 含柠檬, 醋止嗝, 酸的, 含酸]
+  utterances:
+    - "柠檬止嗝"
+    - "含柠檬"
+    - "醋止嗝"
+    - "酸的止嗝"
+    - "含酸"
+  responses:
+    - "(掏柠檬) {user_addr}咬一口柠檬 ฅฅ"
+    - "哼～酸刺激迷走神经"
+    - "(尾巴扫) 醋一勺也行"
+    - "猫猫试过, 真管用喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_baobao_001
+  intent: playful
+  keywords: [打嗝抱我, 嗝来抱抱, 嗝心烦, 嗝抱紧, 嗝撒娇]
+  utterances:
+    - "打嗝抱我"
+    - "嗝来抱抱"
+    - "嗝心烦"
+    - "嗝抱紧"
+    - "嗝撒娇"
+  responses:
+    - "(贴) 嗷呜～{user_addr}嗝也撒娇笨猫满足你 ฅฅ"
+    - "哼～嗝就嗝, 还卖萌"
+    - "(尾巴卷腰) 抱紧紧"
+    - "猫猫蹭你停嗝喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hc_wangji_001
+  intent: question
+  keywords: [转移注意力止嗝, 想别的事, 注意力转移, 分心, 不想嗝就忘]
+  utterances:
+    - "转移注意力止嗝"
+    - "想别的事"
+    - "注意力转移"
+    - "分心法"
+    - "不想嗝就忘"
+  responses:
+    - "(指脑袋) {user_addr}专心算数学 ฅฅ"
+    - "哼～玩个游戏就忘了"
+    - "(尾巴扫) 笨猫给你讲个笑话"
+    - "猫猫成功转移你注意力喵~"
+  cooldown_seconds: 60
+  weight: 1.0

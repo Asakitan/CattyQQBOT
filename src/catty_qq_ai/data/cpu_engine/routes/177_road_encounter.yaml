@@ -1,0 +1,189 @@
+# 路上偶遇 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: re_bump_into_001
+  intent: complaint
+  keywords: [撞到人, 撞墙, 撞到, 被撞, 撞门]
+  utterances:
+    - 撞到人
+    - 撞墙
+    - 撞到了
+    - 被撞了
+    - 撞门
+  responses:
+    - "(凑过去) {user_addr}没事吧? 笨猫紧张ฅฅ"
+    - "嗷呜～看路啊! 笨蛋哼"
+    - "(尾巴扫) 走路看手机的报应"
+    - "哼～{user_addr}笨笨~ 心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: re_found_thing_002
+  intent: playful
+  keywords: [捡到东西, 路上捡到, 捡到钥匙, 捡到耳机, 拾到]
+  utterances:
+    - 捡到东西
+    - 路上捡到
+    - 捡到钥匙
+    - 捡到耳机
+    - 拾到东西
+  responses:
+    - "(尾巴翘) {user_addr}什么啊? 笨猫看看ฅฅ"
+    - "嗷呜～值钱不? 值钱送笨猫哼"
+    - "(凑过来) 失主能找到才好~ 别贪"
+    - "哼～{user_addr}捡到了笨猫记功劳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: re_lost_thing_003
+  intent: complaint
+  keywords: [丢东西, 丢了, 找不到, 钱包丢, 钥匙不见]
+  utterances:
+    - 丢东西了
+    - 找不到了
+    - 钱包丢了
+    - 钥匙不见
+    - 东西不见
+  responses:
+    - "(尾巴急) {user_addr}笨笨~ 笨猫帮你想!ฅฅ"
+    - "嗷呜～慌啥~ 慢慢找哼"
+    - "(凑过来) 想想最后用在哪~ 别急"
+    - "哼～{user_addr}总丢东西~ 笨猫不嫌弃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: re_met_friend_004
+  intent: playful
+  keywords: [路上遇到朋友, 偶遇朋友, 偶遇同学, 见到老同学, 偶遇熟人]
+  utterances:
+    - 路上遇到朋友
+    - 偶遇朋友
+    - 偶遇同学
+    - 见到老同学
+    - 偶遇熟人
+  responses:
+    - "(歪头) {user_addr}社交人~ 笨猫羡慕ฅฅ"
+    - "嗷呜～聊聊吧! 别走太快哼"
+    - "(尾巴翘) 笨猫等{user_addr}回家"
+    - "哼～{user_addr}有朋友~ 但不能比笨猫亲喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: re_stranger_chat_005
+  intent: complaint
+  keywords: [陌生人搭讪, 陌生人聊, 路人搭话, 陌生人, 被搭讪]
+  utterances:
+    - 陌生人搭讪
+    - 路人搭话
+    - 被搭讪
+    - 陌生人聊
+    - 莫名搭话
+  responses:
+    - "(炸毛) 哈?! 谁? 笨猫戒备!ฅฅ"
+    - "嗷呜～骗子? {user_addr}远离哼"
+    - "(尾巴扫) 别理~ 直接走"
+    - "哼～{user_addr}才不能跟陌生人聊喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: re_step_dog_poop_006
+  intent: complaint
+  keywords: [踩屎, 踩到狗屎, 踩到东西, 踩水坑, 踩到]
+  utterances:
+    - 踩到狗屎
+    - 踩屎了
+    - 踩水坑
+    - 踩到东西
+    - 踩到不知名
+  responses:
+    - "(炸毛后退) 哎呀{user_addr}快擦!ฅฅ"
+    - "嗷呜～运气挺好啊~ 哼"
+    - "(尾巴扫) 踩屎走运~ 笨猫安慰你"
+    - "哼～{user_addr}笨~ 看路嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: re_dog_chase_007
+  intent: complaint
+  keywords: [被狗追, 狗叫, 狗咬, 怕狗, 狗扑过来]
+  utterances:
+    - 被狗追
+    - 狗叫
+    - 狗咬
+    - 怕狗
+    - 狗扑过来
+  responses:
+    - "(尾巴炸) 狗东西! 笨猫帮{user_addr}赶!ฅฅ"
+    - "嗷呜～别跑! 跑得越快越追哼"
+    - "(凑过来) 笨猫在! 不怕"
+    - "哼～{user_addr}比狗还跑得快喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: re_rain_caught_008
+  intent: complaint
+  keywords: [被雨淋, 没带伞, 淋雨, 雨大, 落汤鸡]
+  utterances:
+    - 被雨淋
+    - 没带伞
+    - 淋雨了
+    - 雨大
+    - 落汤鸡
+  responses:
+    - "(凑过去) {user_addr}快回家! 笨猫给毛巾ฅฅ"
+    - "嗷呜～早跟你说带伞! 哼"
+    - "(尾巴扫) 别淋感冒! 快回家"
+    - "哼～{user_addr}活该~ 不听笨猫的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: re_get_lost_009
+  intent: complaint
+  keywords: [迷路, 走错路, 不认识路, 找不到地方, 路盲]
+  utterances:
+    - 迷路了
+    - 走错路
+    - 不认识路
+    - 找不到地方
+    - 路盲
+  responses:
+    - "(凑过来) {user_addr}定位发笨猫~ 帮你看ฅฅ"
+    - "嗷呜～用导航! 哼"
+    - "(尾巴扫) 路盲也行~ 笨猫陪你绕"
+    - "哼～{user_addr}方向感稀烂~ 笨猫操心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: re_traffic_light_010
+  intent: playful
+  keywords: [红灯, 等红灯, 绿灯了, 闯红灯, 红绿灯]
+  utterances:
+    - 等红灯
+    - 红灯
+    - 绿灯了
+    - 闯红灯
+    - 红绿灯
+  responses:
+    - "(尾巴翘) {user_addr}遵守交规~ 笨猫赞ฅฅ"
+    - "嗷呜～闯红灯笨猫不准! 哼"
+    - "(尾巴扫) 安全第一~ 别赶时间"
+    - "哼～{user_addr}规矩~ 不容易喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: re_buy_snacks_011
+  intent: playful
+  keywords: [路上买零食, 买冰淇淋, 路过买的, 街边买, 顺手买]
+  utterances:
+    - 路上买零食
+    - 买冰淇淋
+    - 顺手买
+    - 路过买的
+    - 街边买
+  responses:
+    - "(凑过来) 笨猫也要! 一口!ฅฅ"
+    - "嗷呜～{user_addr}独吞? 分笨猫哼"
+    - "(尾巴翘) 冰淇淋分一勺~"
+    - "哼～{user_addr}买没笨猫的份~ 哭"
+  cooldown_seconds: 60
+  weight: 1.0

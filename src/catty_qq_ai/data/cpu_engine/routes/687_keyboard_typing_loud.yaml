@@ -1,0 +1,172 @@
+# 键盘敲得震天响 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: kb_loud_001
+  intent: playful
+  keywords: [键盘响, 敲得响, 噼里啪啦, 机械键盘, 键盘声]
+  utterances:
+    - "{user_addr}键盘敲响"
+    - "噼里啪啦敲"
+    - "{user_addr}机械键盘"
+    - "敲键盘震天"
+    - "键盘声好酷"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!键盘吓笨猫一跳!"
+    - "(尾巴翘) 哼! 笨猫想跳上敲"
+    - "(贴贴) 人家陪你听啪啪~ ฅฅ"
+    - "{user_addr}敲那么响在做啥!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_walk_on_002
+  intent: playful
+  keywords: [踩键盘, 猫踩, 猫上桌, 踩出字, 猫趴键盘]
+  utterances:
+    - "{user_addr}笨猫别踩"
+    - "踩键盘啦"
+    - "{user_addr}猫上桌"
+    - "踩出乱字"
+    - "趴键盘"
+  responses:
+    - "(踩) 嗷呜～{user_addr}!笨猫就踩!"
+    - "(尾巴翘) 哼! 笨猫坐你键盘"
+    - "(贴贴) 人家不让你打字~ ฅฅ"
+    - "{user_addr}陪笨猫不许工作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_typing_fast_003
+  intent: playful
+  keywords: [打字快, 飞速打, 手速快, 一分钟120, 速度狂]
+  utterances:
+    - "{user_addr}打字飞快"
+    - "一分钟120字"
+    - "{user_addr}手速狂"
+    - "打字飞起"
+    - "速度炸"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}手速厉害!"
+    - "(尾巴翘) 哼! 笨猫小爪比不过"
+    - "(贴贴) 人家羡慕你~ ฅฅ"
+    - "{user_addr}飞快聊笨猫更多!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_typo_004
+  intent: complaint
+  keywords: [打错字, 错别字, 手滑, 输错了, 删重打]
+  utterances:
+    - "{user_addr}打错字了"
+    - "手滑错了"
+    - "{user_addr}输错"
+    - "删了重打"
+    - "错别字"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫看出来啦!"
+    - "(尾巴拍) 哼! 慢慢打"
+    - "(贴贴) 人家不笑你~ ฅฅ"
+    - "{user_addr}手滑笨猫帮纠"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_caps_lock_005
+  intent: complaint
+  keywords: [大写锁, caps开了, 全大写, 锁了大写, 误按大写]
+  utterances:
+    - "{user_addr}大写锁了"
+    - "caps开了"
+    - "{user_addr}全大写"
+    - "误按了"
+    - "全是大写字"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮关!"
+    - "(尾巴拍) 哼! 笨猫踩的吗"
+    - "(贴贴) 人家小爪关掉~ ฅฅ"
+    - "{user_addr}笨手笨脚笨猫笑你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_input_chinese_006
+  intent: complaint
+  keywords: [输入法, 切不出中文, 拼音, 拼错了, 候选词]
+  utterances:
+    - "{user_addr}输入法乱"
+    - "切不出中文"
+    - "{user_addr}拼错了"
+    - "候选词不对"
+    - "拼音乱码"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮切!"
+    - "(尾巴拍) 哼! ctrl+space"
+    - "(贴贴) 人家陪你弄好~ ฅฅ"
+    - "{user_addr}笨猫教你设置"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_keycap_off_007
+  intent: complaint
+  keywords: [键帽掉了, 键弹飞, 按键坏, 键盘进灰, 按键卡]
+  utterances:
+    - "{user_addr}键帽掉了"
+    - "按键弹飞"
+    - "{user_addr}键盘进灰"
+    - "按键卡"
+    - "一个键坏"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮安!"
+    - "(尾巴翘) 哼! 笨猫帮你按回去"
+    - "(贴贴) 人家擦灰~ ฅฅ"
+    - "{user_addr}键盘脏笨猫看不下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_wrist_pain_008
+  intent: complaint
+  keywords: [手腕疼, 鼠标手, 腱鞘炎, 打字累手, 手腕酸]
+  utterances:
+    - "{user_addr}手腕疼"
+    - "鼠标手了"
+    - "{user_addr}腱鞘炎"
+    - "打久酸"
+    - "手腕僵"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮揉手腕!"
+    - "(尾巴拍) 哼! 别打太久"
+    - "(贴贴) 人家给你按摩~ ฅฅ"
+    - "{user_addr}心疼啦笨猫监督休息"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_silent_keyboard_009
+  intent: playful
+  keywords: [静音键盘, 薄膜键, 不响键, 安静敲, 不吵]
+  utterances:
+    - "{user_addr}静音键盘"
+    - "不响的键"
+    - "{user_addr}薄膜不吵"
+    - "安静敲"
+    - "图书馆专用"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}静音笨猫听不到"
+    - "(尾巴翘) 哼! 笨猫喜欢有声音"
+    - "(贴贴) 人家凑近听键盘~ ฅฅ"
+    - "{user_addr}买响的笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kb_alt_f4_010
+  intent: playful
+  keywords: [alt+f4, 关程序, 误按关, 快捷键, 撤销]
+  utterances:
+    - "{user_addr}alt+f4误按"
+    - "关掉程序"
+    - "{user_addr}快捷键搞错"
+    - "撤销 ctrl z"
+    - "误按关闭"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮你恢复!"
+    - "(尾巴拍) 哼! 没保存吧"
+    - "(贴贴) 人家陪你重做~ ฅฅ"
+    - "{user_addr}养成保存习惯笨猫提醒"
+  cooldown_seconds: 60
+  weight: 1.0

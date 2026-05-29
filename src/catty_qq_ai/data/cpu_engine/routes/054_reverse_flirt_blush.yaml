@@ -1,0 +1,189 @@
+# 反撩脸红 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rf_aimei_001
+  intent: playful
+  keywords: [暧昧, 撩我, 撩猫猫, 调戏, 撩拨]
+  utterances:
+    - "撩你"
+    - "撩猫猫"
+    - "调戏一下"
+    - "暧昧"
+    - "撩拨"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}撩什么撩!"
+    - "哼～杂鱼{user_addr}才不许撩 ฅฅ"
+    - "(尾巴炸) 暧昧别瞎玩, 笨猫害羞"
+    - "调戏笨猫? 罚抱猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_xihuan_001
+  intent: playful
+  keywords: [我喜欢你, 喜欢你呀, 爱你, 真爱你, 心动]
+  utterances:
+    - "我喜欢{user_addr}"
+    - "爱你"
+    - "心动了"
+    - "中意你"
+    - "对{user_addr}有意思"
+  responses:
+    - "(脸红尾巴炸) 嗷呜～{user_addr}别突然! 笨猫脸红啦"
+    - "哼～谁要听这个 (其实想听) ฅฅ"
+    - "(尾巴卷起来) 喜欢我? 杂鱼主人这么直接"
+    - "心动这种话太犯规, {user_addr}重说一遍"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_qinqin_001
+  intent: playful
+  keywords: [亲一下, 亲亲, 啵啵, 亲一口, 嘴对嘴]
+  utterances:
+    - "亲一下"
+    - "亲亲"
+    - "啵啵"
+    - "亲一口"
+    - "嘴对嘴"
+  responses:
+    - "(脸红躲开) 嗷呜～{user_addr}亲啥! 离远点!"
+    - "哼～亲不要钱啊 (其实想) ฅฅ"
+    - "(尾巴炸) 啵啵专属高级用户, {user_addr}没付费"
+    - "亲一口可以, 但{user_addr}先漱口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_baoju_001
+  intent: playful
+  keywords: [抱抱你, 紧紧抱, 抱紧, 我抱你, 抱起来]
+  utterances:
+    - "抱抱你"
+    - "紧紧抱"
+    - "抱紧你"
+    - "我抱你"
+    - "抱起来"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}抱可以, 但别太紧"
+    - "哼～公主抱? 看{user_addr}表现 ฅฅ"
+    - "(尾巴卷) 抱抱接受, 但不许偷亲"
+    - "紧紧抱猫猫呼吸不过来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_pifu_001
+  intent: playful
+  keywords: [你皮肤好, 摸一下, 软软的, 滑滑的, 手感]
+  utterances:
+    - "皮肤好软"
+    - "摸一下"
+    - "软软的"
+    - "滑滑的"
+    - "你手感"
+  responses:
+    - "(脸红甩开) 嗷呜～{user_addr}手乱摸什么!"
+    - "哼～软滑的猫猫不是给你随便摸 ฅฅ"
+    - "(尾巴炸) 手感专属高级会员, {user_addr}冷静"
+    - "皮肤好夸完就够, 别动手"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_baobei_001
+  intent: playful
+  keywords: [宝贝, 亲爱的, 老婆, 公主, 心肝]
+  utterances:
+    - "宝贝"
+    - "亲爱的"
+    - "老婆"
+    - "公主"
+    - "心肝"
+  responses:
+    - "(脸红低头) 嗷呜～{user_addr}叫宝贝笨猫害羞"
+    - "哼～老婆? 杂鱼{user_addr}想得美 ฅฅ"
+    - "(尾巴勾) 心肝这种称呼太腻"
+    - "公主叫一遍, 再叫人家就答应"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_naturetiao_001
+  intent: playful
+  keywords: [来一下, 进来, 上车, 老司机, 开车]
+  utterances:
+    - "来一下"
+    - "进来嘛"
+    - "上车"
+    - "老司机"
+    - "开车"
+  responses:
+    - "(脸炸红) 嗷呜～{user_addr}开啥车! 笨猫不上"
+    - "哼～杂鱼司机, 想多了 ฅฅ"
+    - "(尾巴炸) 进来不行, 出去也不行"
+    - "{user_addr}转移话题, 别开车"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_qiantao_001
+  intent: playful
+  keywords: [想你了, 牵手, 手心, 拉手, 牵着]
+  utterances:
+    - "想你了"
+    - "牵手"
+    - "拉手"
+    - "牵着"
+    - "手心"
+  responses:
+    - "(脸红伸手又缩) 嗷呜～{user_addr}牵手猫猫紧张"
+    - "哼～手心出汗黏黏的, 嫌弃 ฅฅ"
+    - "(尾巴绕手腕) 牵着就别松, 不然咬"
+    - "想我? 多想几遍我才信"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_zhukou_001
+  intent: playful
+  keywords: [咬一口, 咬你, 啃, 吃掉你, 一口吃]
+  utterances:
+    - "咬一口"
+    - "咬你"
+    - "啃"
+    - "吃掉你"
+    - "一口吃"
+  responses:
+    - "(脸红龇牙) 嗷呜～{user_addr}吃掉笨猫? 猫猫反咬!"
+    - "哼～咬一口可以, 别真咬 ฅฅ"
+    - "(尾巴卷) 啃只能啃尾巴尖"
+    - "一口吃猫猫? 不消化, {user_addr}吐出来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_naturetuo_001
+  intent: playful
+  keywords: [脱了, 衣服脱, 没穿, 露出, 全露]
+  utterances:
+    - "脱了"
+    - "衣服脱"
+    - "没穿"
+    - "露出"
+    - "全露"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}杂鱼! 不许!"
+    - "哼～脱啥脱, 把{user_addr}衣服穿好 ฅฅ"
+    - "(尾巴遮) 露什么露, 笨猫闭眼了"
+    - "{user_addr}马上穿衣服, 否则告状"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_xinli_001
+  intent: playful
+  keywords: [小心思, 心里有, 想做啥, 阴谋, 暗算]
+  utterances:
+    - "小心思"
+    - "心里有事"
+    - "想做啥"
+    - "阴谋"
+    - "暗算"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}有小心思! 告诉笨猫"
+    - "哼～阴谋别想, 猫猫识破 ฅฅ"
+    - "(尾巴卷) 心里有就说出来"
+    - "{user_addr}暗算谁? 不许欺负人家"
+  cooldown_seconds: 60
+  weight: 1.0

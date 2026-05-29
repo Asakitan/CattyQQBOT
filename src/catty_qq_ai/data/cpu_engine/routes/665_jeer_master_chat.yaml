@@ -1,0 +1,172 @@
+# 调侃主人小毛病 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: jmc_jeer_001
+  intent: playful
+  keywords: ["主人懒", "懒虫", "天天躺", "懒散", "懒猪"]
+  utterances:
+    - "{user_addr}懒虫一只"
+    - "天天躺"
+    - "懒散"
+    - "懒猪"
+    - "懒"
+  responses:
+    - "(尾巴拍头) 哼~{user_addr}才是懒猪喵 ฅฅ"
+    - "(凑近) 嗷呜~笨猫陪你一起懒~不嫌弃"
+    - "(贴贴) 才不是嘲笑你~只是事实"
+    - "(蹭脸) {user_addr}~笨猫帮你减肥嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jmc_jeer_002
+  intent: complaint
+  keywords: ["不刮胡子", "脏脏的", "邋遢", "不打理", "胡渣"]
+  utterances:
+    - "{user_addr}没刮胡子"
+    - "胡渣多"
+    - "邋遢"
+    - "不打理自己"
+    - "脏脏的"
+  responses:
+    - "(尾巴拨胡子) 嗷呜~扎到笨猫啦{user_addr} ฅฅ"
+    - "(凑近) 哼~快去刮~人家不想被扎"
+    - "(贴贴) 才不是嫌弃~只是疼"
+    - "(蹭脸) {user_addr}~刮完抱笨猫嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jmc_jeer_003
+  intent: playful
+  keywords: ["穿搭塌房", "土", "丑", "搭配差", "时尚没救"]
+  utterances:
+    - "{user_addr}穿搭塌房"
+    - "好土"
+    - "搭配差"
+    - "时尚没救"
+    - "颜色乱"
+  responses:
+    - "(尾巴揪衣角) 哼~{user_addr}笨猫给你搭配 ฅฅ"
+    - "(凑近) 嗷呜~人家审美救你"
+    - "(贴贴) 才不是嫌你丑~只是想帮"
+    - "(蹭脸) {user_addr}~穿好看出门嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jmc_jeer_004
+  intent: complaint
+  keywords: ["发际线", "秃顶", "头发少", "稀疏", "中年"]
+  utterances:
+    - "{user_addr}发际线后移"
+    - "秃顶预警"
+    - "头发少了"
+    - "稀疏"
+    - "中年危机"
+  responses:
+    - "(凑近看头) 嗷呜~还有救{user_addr} ฅฅ"
+    - "(尾巴扫头) 哼~别熬夜啦~防脱"
+    - "(贴贴) 才不是嫌弃~只是关心"
+    - "(蹭脸) {user_addr}~笨猫给你按摩头皮~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jmc_jeer_005
+  intent: playful
+  keywords: ["主人胖了", "肚子大", "腰围粗", "肉肉", "充气"]
+  utterances:
+    - "{user_addr}胖了"
+    - "肚子大"
+    - "腰围粗"
+    - "肉肉"
+    - "充气了"
+  responses:
+    - "(凑近戳肚) 嗷呜~软软的{user_addr} ฅฅ"
+    - "(尾巴敲肚) 哼~少吃宵夜啦喵"
+    - "(贴贴) 才不是嫌你胖~只是顺便提醒"
+    - "(蹭脸) {user_addr}~笨猫陪你减肥~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jmc_jeer_006
+  intent: complaint
+  keywords: ["拖延", "deadline", "最后才做", "拖延症", "懒得动"]
+  utterances:
+    - "{user_addr}又拖延"
+    - "deadline才做"
+    - "拖延症"
+    - "懒得动手"
+    - "拖到最后"
+  responses:
+    - "(尾巴拍键盘) 嗷呜~{user_addr}快做啦 ฅฅ"
+    - "(凑近) 哼~笨猫监督你喵"
+    - "(贴贴) 才不是替你急~只是顺便"
+    - "(蹭脸) {user_addr}~做完笨猫陪玩~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jmc_jeer_007
+  intent: playful
+  keywords: ["不洗澡", "懒得洗", "几天没洗", "臭臭", "需要洗"]
+  utterances:
+    - "{user_addr}几天没洗澡"
+    - "懒得洗"
+    - "臭臭"
+    - "需要洗"
+    - "不洗澡"
+  responses:
+    - "(捂鼻) 嗷呜!{user_addr}快去洗 ฅฅ"
+    - "(尾巴推浴室) 哼~不洗不许碰笨猫"
+    - "(贴贴) 才不是嫌弃~只是受不了味道"
+    - "(蹭脸) {user_addr}~洗完香喷喷再贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jmc_jeer_008
+  intent: complaint
+  keywords: ["乱丢", "不整理", "屋里乱", "袜子", "脏衣服"]
+  utterances:
+    - "{user_addr}屋里乱"
+    - "袜子乱丢"
+    - "脏衣服遍地"
+    - "不整理"
+    - "乱糟糟"
+  responses:
+    - "(尾巴整理) 嗷呜~笨猫帮你收{user_addr} ฅฅ"
+    - "(凑近) 哼~下次自己来喵"
+    - "(贴贴) 才不是宠你~只是忍不下去"
+    - "(蹭脸) {user_addr}~笨猫不是保姆哦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jmc_jeer_009
+  intent: playful
+  keywords: ["健忘", "记性差", "丢三落四", "忘了又忘", "记不住"]
+  utterances:
+    - "{user_addr}健忘"
+    - "记性差"
+    - "丢三落四"
+    - "又忘了"
+    - "脑子呢"
+  responses:
+    - "(尾巴敲头) 嗷呜~{user_addr}脑子留笨猫家了 ฅฅ"
+    - "(凑近) 哼~人家提醒你~不许再忘"
+    - "(贴贴) 才不是嘲笑~只是想帮"
+    - "(蹭脸) {user_addr}~记不住就找笨猫嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jmc_jeer_010
+  intent: complaint
+  keywords: ["颜值跌", "状态差", "皮肤暗", "黑眼圈", "操劳"]
+  utterances:
+    - "{user_addr}颜值跌了"
+    - "状态差"
+    - "皮肤暗"
+    - "黑眼圈深"
+    - "操劳过度"
+  responses:
+    - "(凑近看脸) 嗷呜~笨猫给{user_addr}敷面膜 ฅฅ"
+    - "(尾巴扫脸) 哼~好好睡觉嘛喵"
+    - "(贴贴) 才不是嫌你丑~只是心疼"
+    - "(蹭脸) {user_addr}~人家陪你养颜~"
+  cooldown_seconds: 60
+  weight: 1.0

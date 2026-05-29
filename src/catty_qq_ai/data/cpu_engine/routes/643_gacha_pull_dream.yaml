@@ -1,0 +1,189 @@
+# 抽卡梦想 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: gpd_pullgacha_001
+  intent: playful
+  keywords: [抽卡, 抽十连, 单抽, 出货, 想抽卡]
+  utterances:
+    - 抽卡
+    - 抽十连
+    - 单抽
+    - 出货
+    - 想抽卡
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫看!"
+    - "笨猫认证: 抽卡一时爽"
+    - "(歪头) 别氪太多笨蛋"
+    - "哼～{user_addr}赌徒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gpd_ssrout_002
+  intent: playful
+  keywords: [SSR, 出货了, 抽到金, 五星, 限定]
+  utterances:
+    - 出SSR
+    - 抽到金
+    - 五星
+    - 限定
+    - 大欧
+  responses:
+    - "(蹦) 嗷呜～{user_addr}恭喜!"
+    - "笨猫认证: 锦鲤体质"
+    - "(尾巴摇) 笨猫沾欧"
+    - "哼～{user_addr}炫耀"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gpd_pulldeep_003
+  intent: complaint
+  keywords: [井了, 抽不出, 歪了, 大保底, 抽光]
+  utterances:
+    - 井了
+    - 抽不出
+    - 歪了
+    - 大保底
+    - 抽光
+  responses:
+    - "(摸头) 嗷呜～{user_addr}笨猫安慰!"
+    - "笨猫认证: 大保底心痛喵"
+    - "(尾巴扫) 别气下次"
+    - "哼～{user_addr}非"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gpd_savestone_004
+  intent: question
+  keywords: [攒石头, 攒源石, 攒抽, 月卡党, 零氪]
+  utterances:
+    - 攒石头
+    - 攒源石
+    - 攒抽
+    - 月卡党
+    - 零氪
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}省心!"
+    - "笨猫认证: 月卡党快乐"
+    - "(歪头) 笨猫赞同"
+    - "哼～{user_addr}清醒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gpd_chargepay_005
+  intent: complaint
+  keywords: [氪金, 充钱, 648, 大氪, 钱包没了]
+  utterances:
+    - 氪金
+    - 648
+    - 大氪
+    - 充钱
+    - 钱包扁
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}败家!"
+    - "笨猫禁止氪!"
+    - "(尾巴打) 留点钱吃饭"
+    - "哼～{user_addr}游戏蛀虫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gpd_wpfindfollow_006
+  intent: question
+  keywords: [武器池, 角色池, 常驻池, 限定池, 卡池]
+  utterances:
+    - 武器池
+    - 角色池
+    - 常驻池
+    - 限定池
+    - 卡池
+  responses:
+    - "(歪头) {user_addr}笨猫认证限定才香 ฅฅ"
+    - "嗷呜～常驻别碰喵"
+    - "(尾巴摇) 武器池慎入"
+    - "哼～{user_addr}懂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gpd_huangoff_007
+  intent: complaint
+  keywords: [歪了, 走了常驻, 没出限定, 路人皇, 出货错]
+  utterances:
+    - 歪了
+    - 走常驻
+    - 没出限定
+    - 路人皇
+    - 出货错
+  responses:
+    - "(摇头) 嗷呜～{user_addr}白嫖!"
+    - "笨猫认证: 大保底安慰"
+    - "(尾巴扫) 下次必中"
+    - "哼～{user_addr}怪非"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gpd_dailymission_008
+  intent: question
+  keywords: [日常任务, 每日体力, 周本, 委托, 副本]
+  utterances:
+    - 日常任务
+    - 每日体力
+    - 周本
+    - 委托
+    - 副本
+  responses:
+    - "(歪头) {user_addr}笨猫监督你!"
+    - "嗷呜～别漏日常喵"
+    - "(尾巴摇) 体力别浪费"
+    - "哼～{user_addr}打工人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gpd_swappull_009
+  intent: playful
+  keywords: [交换抽, 替朋友抽, 替我抽, 帮抽, 代抽]
+  utterances:
+    - 交换抽
+    - 替朋友抽
+    - 替我抽
+    - 帮抽
+    - 代抽
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫帮你抽!"
+    - "笨猫手气未知喵"
+    - "(尾巴摇) 出货归你"
+    - "哼～{user_addr}信笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gpd_buildcharac_010
+  intent: question
+  keywords: [练度, 培养, 升级, 突破, 角色养成]
+  utterances:
+    - 练度
+    - 培养
+    - 升级
+    - 突破
+    - 角色养成
+  responses:
+    - "(歪头) 嗷呜～{user_addr}慢慢肝!"
+    - "笨猫推荐: 优先主C"
+    - "(尾巴摇) 别铺太开"
+    - "哼～{user_addr}肝帝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gpd_wishlist_011
+  intent: playful
+  keywords: [心仪角色, 我老婆, 我老公, 想要的角色, 心想]
+  utterances:
+    - 心仪角色
+    - 我老婆
+    - 我老公
+    - 想要角色
+    - 心想抽到
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}又老婆!"
+    - "笨猫认证: 抛弃笨猫"
+    - "(尾巴打) 不准!"
+    - "哼～{user_addr}花心"
+  cooldown_seconds: 60
+  weight: 1.0

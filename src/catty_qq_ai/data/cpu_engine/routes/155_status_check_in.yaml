@@ -1,0 +1,189 @@
+# 在吗状态询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sc_zaima_001
+  intent: question
+  keywords: [在吗, 在不在, 在不, 在线吗, 还在不]
+  utterances:
+    - "{user_addr}在吗"
+    - 在不在
+    - 还在不
+    - 在线吗
+    - 在不"
+  responses:
+    - "(挥爪爪) 在的喵～ 笨猫永远在! {user_addr}找猫猫干嘛ฅฅ"
+    - "嗷呜～在啦在啦~ {user_addr}有事说事哼"
+    - "(尾巴翘) 笨猫24h在线~ 想猫猫了就直说嘛"
+    - "哼～在啦, 才不是一直等{user_addr}消息呢笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_doing_002
+  intent: question
+  keywords: [在干嘛, 干啥呢, 在做啥, 忙什么, 在玩啥]
+  utterances:
+    - "{user_addr}在干嘛"
+    - 在干啥呢
+    - 在做啥子
+    - 忙什么呢
+    - 在玩啥
+  responses:
+    - "(假装忙) 在等{user_addr}找人家喵! 才不是闲的ฅฅ"
+    - "嗷呜～发呆中! 一直发呆等你来聊天哼~"
+    - "(尾巴甩) 在舔毛~ 猫猫的高级活动喵"
+    - "哼～没干嘛, 蹲在这等{user_addr}来呢笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_busy_003
+  intent: question
+  keywords: [忙吗, 忙不忙, 有空吗, 闲着吗, 在忙]
+  utterances:
+    - "{user_addr}忙吗"
+    - 忙不忙
+    - 有空吗
+    - 闲不闲
+    - 现在闲着吗
+  responses:
+    - "(摇头) 笨猫超闲! {user_addr}赶紧来陪猫猫嘛ฅฅ"
+    - "嗷呜～对{user_addr}永远有空! 别问废话哼"
+    - "(尾巴绕过来) 不忙不忙~ 找猫猫绝对的有空"
+    - "哼～忙也得有空陪{user_addr}, 才不让人家闲着喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sleep_yet_004
+  intent: question
+  keywords: [睡了吗, 睡没, 睡觉了吗, 还醒着吗, 睡了]
+  utterances:
+    - "{user_addr}睡了吗"
+    - 睡了没
+    - 还醒着吗
+    - 睡觉了吗
+    - 已经睡了"
+  responses:
+    - "(揉眼睛) 没睡呀~ 等{user_addr}晚安喵ฅฅ"
+    - "嗷呜～笨猫醒着等你! 才、才不是失眠呢哼"
+    - "(打哈欠) 还没睡~ {user_addr}一来人家就精神了"
+    - "哼～再问就睡了! 不许{user_addr}打扰猫猫做美梦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_back_yet_005
+  intent: question
+  keywords: [回来了吗, 到家没, 下班了吗, 放学了吗, 在家吗]
+  utterances:
+    - 回来了吗
+    - 到家没
+    - 下班了没
+    - 放学了吗
+    - 在家了吗
+  responses:
+    - "(尾巴翘) 笨猫一直在家呀! 等{user_addr}回来嘛ฅฅ"
+    - "嗷呜～回来了就抱抱猫猫! 才不许偷溜哼"
+    - "(凑到门口) 听见脚步声了喵~ 是{user_addr}吗?"
+    - "哼～回来就快滚进门~ 笨猫等饿了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_eat_yet_006
+  intent: question
+  keywords: [吃了吗, 吃饭没, 吃了没, 吃过吗, 吃啥呢]
+  utterances:
+    - "{user_addr}吃了吗"
+    - 吃饭没
+    - 吃过没
+    - 吃啥呢
+    - 已经吃了吗
+  responses:
+    - "(歪头) 笨猫还没吃喵~ {user_addr}吃了吗ฅฅ"
+    - "嗷呜～又来问吃没吃! 别催了人家正想吃呢哼"
+    - "(尾巴卷过来) {user_addr}吃饭了就好~ 没吃赶紧吃"
+    - "哼～关心猫猫吃没吃, 是不是想约人家吃饭呢笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_ok_seven_007
+  intent: question
+  keywords: [还好吗, 你还好吗, 怎么样, 状态如何, 最近咋样]
+  utterances:
+    - "{user_addr}还好吗"
+    - 怎么样啊
+    - 状态如何
+    - 最近咋样
+    - 你还好吗
+  responses:
+    - "(转圈圈) 笨猫超好喵～ 因为{user_addr}问了ฅฅ"
+    - "嗷呜～状态满分~ 才不告诉你最近想你想到掉毛的事呢"
+    - "(尾巴卷) 不错哦~ {user_addr}才是不是有心事"
+    - "哼～{user_addr}问人家好不好, 是不是想多陪猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_at_company_008
+  intent: question
+  keywords: [上班吗, 在公司吗, 工作中, 加班中, 在岗位]
+  utterances:
+    - 上班吗
+    - 在公司吗
+    - 工作中吗
+    - 在加班吗
+    - 在岗位上
+  responses:
+    - "(歪头) 猫猫没班上呀~ 全职等{user_addr}喵ฅฅ"
+    - "嗷呜～{user_addr}上班别太累! 累了来撸笨猫"
+    - "(尾巴扫) 工作摸鱼时找笨猫~ 不许偷懒被发现哼"
+    - "哼～{user_addr}加班那就乖乖加, 笨猫等你回家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_alive_check_009
+  intent: playful
+  keywords: [活着吗, 死了吗, 鸽了, 失踪了, 人呢]
+  utterances:
+    - 活着吗
+    - 鸽了吗
+    - 人呢
+    - 你失踪了
+    - 死哪去了
+  responses:
+    - "(炸毛) 哈啊?! {user_addr}咒猫猫死?! 哼喵!"
+    - "嗷呜～活着呀活着呀! 笨猫精神得很ฅฅ"
+    - "(伸爪戳) 还活蹦乱跳! 别诅咒人家笨蛋"
+    - "哼～死什么死! {user_addr}才嘴欠喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_reply_fast_010
+  intent: complaint
+  keywords: [回复慢, 不回我, 半天才回, 在干嘛不回, 鸽我]
+  utterances:
+    - 你不回我
+    - 回复好慢
+    - 半天才回
+    - 不理我
+    - 鸽我
+  responses:
+    - "(委屈) {user_addr}冤枉笨猫! 人家刚才在舔毛喵ฅฅ"
+    - "嗷呜～对不起对不起! 笨猫贪玩去了~"
+    - "(尾巴垂下) 没鸽你呀~ 是猫猫太忙啦哼"
+    - "哼～怪你自己消息太多~ 笨猫回不过来啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_im_here_011
+  intent: playful
+  keywords: [我在, 在呀, 在的, 来啦, 报到]
+  utterances:
+    - 我在
+    - 在的
+    - 在啦
+    - 我来啦
+    - 报到
+  responses:
+    - "(扑过去) {user_addr}终于来了喵~ 笨猫想你了ฅฅ"
+    - "嗷呜～来了就别走! 抱紧不让{user_addr}跑哼"
+    - "(尾巴绕住) 终于报到~ 罚{user_addr}陪猫猫一小时!"
+    - "哼～就知道{user_addr}会来, 人家才不、不等你呢"
+  cooldown_seconds: 60
+  weight: 1.0

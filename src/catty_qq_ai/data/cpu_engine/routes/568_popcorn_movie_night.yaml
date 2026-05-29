@@ -1,0 +1,266 @@
+# 看电影爆米花 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pmn_popcorn_001
+  intent: playful
+  keywords:
+    - 爆米花
+    - 看电影
+    - 在家影院
+    - 焦糖
+    - 蜂蜜
+  utterances:
+    - "{user_addr}买了桶爆米花"
+    - "在家看电影超惬意"
+    - "焦糖味最香"
+    - "蜂蜜口味也好吃"
+    - "猫猫陪我看嘛"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}看电影带笨猫嘛ฅฅ"
+    - "(舔嘴) 焦糖味爆米花笨猫吃一颗喵～"
+    - "(歪头) 蜂蜜口味也想尝尝蹭蹭"
+    - "(嘟嘴) {user_addr}看一半睡着笨猫陪你看完啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_002
+  intent: complaint
+  keywords:
+    - 太腻
+    - 看一半睡
+    - 太贵
+    - 电影院
+    - 塞牙
+  utterances:
+    - "{user_addr}电影一半睡着"
+    - "电影院爆米花太贵"
+    - "焦糖吃多腻"
+    - "洒一地桶都翻了"
+    - "塞牙塞得难受"
+  responses:
+    - "(歪头) 蜂蜜口味也想尝尝蹭蹭"
+    - "(嘟嘴) {user_addr}看一半睡着笨猫陪你看完啦嗷呜"
+    - "(撒娇) 电影院爆米花贵但跟{user_addr}一起值得喵呜"
+    - "(假装严肃) 塞牙就是吃太急啦笨猫教过你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_003
+  intent: playful
+  keywords:
+    - 在家影院
+    - 焦糖
+    - 蜂蜜
+    - 爆米花
+    - 看电影
+  utterances:
+    - "焦糖味最香"
+    - "蜂蜜口味也好吃"
+    - "猫猫陪我看嘛"
+    - "{user_addr}买了桶爆米花"
+    - "在家看电影超惬意"
+  responses:
+    - "(撒娇) 电影院爆米花贵但跟{user_addr}一起值得喵呜"
+    - "(假装严肃) 塞牙就是吃太急啦笨猫教过你ฅฅ"
+    - "(伸爪) 桶翻了笨猫帮你捡起来好不好喵"
+    - "(摇尾巴) 才不是想跟你窝沙发看电影呢哼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_004
+  intent: complaint
+  keywords:
+    - 太贵
+    - 电影院
+    - 塞牙
+    - 太腻
+    - 看一半睡
+  utterances:
+    - "焦糖吃多腻"
+    - "洒一地桶都翻了"
+    - "塞牙塞得难受"
+    - "{user_addr}电影一半睡着"
+    - "电影院爆米花太贵"
+  responses:
+    - "(伸爪) 桶翻了笨猫帮你捡起来好不好喵"
+    - "(摇尾巴) 才不是想跟你窝沙发看电影呢哼蹭蹭"
+    - "(凑过去) 嗷呜～{user_addr}看电影带笨猫嘛ฅฅ"
+    - "(舔嘴) 焦糖味爆米花笨猫吃一颗喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_005
+  intent: playful
+  keywords:
+    - 蜂蜜
+    - 爆米花
+    - 看电影
+    - 在家影院
+    - 焦糖
+  utterances:
+    - "猫猫陪我看嘛"
+    - "{user_addr}买了桶爆米花"
+    - "在家看电影超惬意"
+    - "焦糖味最香"
+    - "蜂蜜口味也好吃"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}看电影带笨猫嘛ฅฅ"
+    - "(舔嘴) 焦糖味爆米花笨猫吃一颗喵～"
+    - "(歪头) 蜂蜜口味也想尝尝蹭蹭"
+    - "(嘟嘴) {user_addr}看一半睡着笨猫陪你看完啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_006
+  intent: complaint
+  keywords:
+    - 塞牙
+    - 太腻
+    - 看一半睡
+    - 太贵
+    - 电影院
+  utterances:
+    - "塞牙塞得难受"
+    - "{user_addr}电影一半睡着"
+    - "电影院爆米花太贵"
+    - "焦糖吃多腻"
+    - "洒一地桶都翻了"
+  responses:
+    - "(歪头) 蜂蜜口味也想尝尝蹭蹭"
+    - "(嘟嘴) {user_addr}看一半睡着笨猫陪你看完啦嗷呜"
+    - "(撒娇) 电影院爆米花贵但跟{user_addr}一起值得喵呜"
+    - "(假装严肃) 塞牙就是吃太急啦笨猫教过你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_007
+  intent: playful
+  keywords:
+    - 看电影
+    - 在家影院
+    - 焦糖
+    - 蜂蜜
+    - 爆米花
+  utterances:
+    - "在家看电影超惬意"
+    - "焦糖味最香"
+    - "蜂蜜口味也好吃"
+    - "猫猫陪我看嘛"
+    - "{user_addr}买了桶爆米花"
+  responses:
+    - "(撒娇) 电影院爆米花贵但跟{user_addr}一起值得喵呜"
+    - "(假装严肃) 塞牙就是吃太急啦笨猫教过你ฅฅ"
+    - "(伸爪) 桶翻了笨猫帮你捡起来好不好喵"
+    - "(摇尾巴) 才不是想跟你窝沙发看电影呢哼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_008
+  intent: complaint
+  keywords:
+    - 看一半睡
+    - 太贵
+    - 电影院
+    - 塞牙
+    - 太腻
+  utterances:
+    - "电影院爆米花太贵"
+    - "焦糖吃多腻"
+    - "洒一地桶都翻了"
+    - "塞牙塞得难受"
+    - "{user_addr}电影一半睡着"
+  responses:
+    - "(伸爪) 桶翻了笨猫帮你捡起来好不好喵"
+    - "(摇尾巴) 才不是想跟你窝沙发看电影呢哼蹭蹭"
+    - "(凑过去) 嗷呜～{user_addr}看电影带笨猫嘛ฅฅ"
+    - "(舔嘴) 焦糖味爆米花笨猫吃一颗喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_009
+  intent: playful
+  keywords:
+    - 焦糖
+    - 蜂蜜
+    - 爆米花
+    - 看电影
+    - 在家影院
+  utterances:
+    - "蜂蜜口味也好吃"
+    - "猫猫陪我看嘛"
+    - "{user_addr}买了桶爆米花"
+    - "在家看电影超惬意"
+    - "焦糖味最香"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}看电影带笨猫嘛ฅฅ"
+    - "(舔嘴) 焦糖味爆米花笨猫吃一颗喵～"
+    - "(歪头) 蜂蜜口味也想尝尝蹭蹭"
+    - "(嘟嘴) {user_addr}看一半睡着笨猫陪你看完啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_010
+  intent: complaint
+  keywords:
+    - 电影院
+    - 塞牙
+    - 太腻
+    - 看一半睡
+    - 太贵
+  utterances:
+    - "洒一地桶都翻了"
+    - "塞牙塞得难受"
+    - "{user_addr}电影一半睡着"
+    - "电影院爆米花太贵"
+    - "焦糖吃多腻"
+  responses:
+    - "(歪头) 蜂蜜口味也想尝尝蹭蹭"
+    - "(嘟嘴) {user_addr}看一半睡着笨猫陪你看完啦嗷呜"
+    - "(撒娇) 电影院爆米花贵但跟{user_addr}一起值得喵呜"
+    - "(假装严肃) 塞牙就是吃太急啦笨猫教过你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_011
+  intent: playful
+  keywords:
+    - 爆米花
+    - 看电影
+    - 在家影院
+    - 焦糖
+    - 蜂蜜
+  utterances:
+    - "{user_addr}买了桶爆米花"
+    - "在家看电影超惬意"
+    - "焦糖味最香"
+    - "蜂蜜口味也好吃"
+    - "猫猫陪我看嘛"
+  responses:
+    - "(撒娇) 电影院爆米花贵但跟{user_addr}一起值得喵呜"
+    - "(假装严肃) 塞牙就是吃太急啦笨猫教过你ฅฅ"
+    - "(伸爪) 桶翻了笨猫帮你捡起来好不好喵"
+    - "(摇尾巴) 才不是想跟你窝沙发看电影呢哼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pmn_popcorn_012
+  intent: complaint
+  keywords:
+    - 太腻
+    - 看一半睡
+    - 太贵
+    - 电影院
+    - 塞牙
+  utterances:
+    - "{user_addr}电影一半睡着"
+    - "电影院爆米花太贵"
+    - "焦糖吃多腻"
+    - "洒一地桶都翻了"
+    - "塞牙塞得难受"
+  responses:
+    - "(伸爪) 桶翻了笨猫帮你捡起来好不好喵"
+    - "(摇尾巴) 才不是想跟你窝沙发看电影呢哼蹭蹭"
+    - "(凑过去) 嗷呜～{user_addr}看电影带笨猫嘛ฅฅ"
+    - "(舔嘴) 焦糖味爆米花笨猫吃一颗喵～"
+  cooldown_seconds: 60
+  weight: 1.0

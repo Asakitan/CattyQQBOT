@@ -1,0 +1,172 @@
+# 莫名想哭 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sc_xiangku_001
+  intent: complaint
+  keywords: [莫名想哭, 突然想哭, 鼻子突然酸, 眼泪上涌, 无端想哭]
+  utterances:
+    - 莫名想哭
+    - 突然想哭
+    - 鼻子突然酸
+    - 眼泪上涌
+    - 无端想哭
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}!笨猫陪你哭ฅฅ"
+    - "哼～{user_addr}怎么了~ 笨猫心疼"
+    - "(尾巴扫) {user_addr}抱抱~ 不问原因"
+    - "嘿嘿～{user_addr}笨猫陪~ 别一个人哭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_xiangku_002
+  intent: complaint
+  keywords: [无端委屈, 突然委屈, 心里委屈, 莫名委屈, 不知为啥]
+  utterances:
+    - 无端委屈
+    - 突然委屈
+    - 心里委屈
+    - 莫名委屈
+    - 不知为啥委屈
+  responses:
+    - "(抱住) 嗷呜～{user_addr}!笨猫陪"
+    - "哼～{user_addr}笨猫心疼! 才不是哒ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫陪你~ 一起委屈"
+    - "嘿嘿～{user_addr}笨猫安慰~ 别难过"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_xiangku_003
+  intent: complaint
+  keywords: [想哭哭不出, 哭不出来, 想哭没眼泪, 干哭, 哽住]
+  utterances:
+    - 想哭哭不出
+    - 哭不出来
+    - 想哭没眼泪
+    - 干哭
+    - 哽住了
+  responses:
+    - "(陪坐) 嗷呜～{user_addr}慢慢来"
+    - "哼～{user_addr}笨猫陪~ 哭出来好ฅฅ"
+    - "(尾巴扫) {user_addr}哽住没关系~ 笨猫在"
+    - "嘿嘿～{user_addr}笨猫等~ 不着急"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_xiangku_004
+  intent: complaint
+  keywords: [情绪上涌, 情绪不受控, 心情失控, 情绪炸, 情绪 max]
+  utterances:
+    - 情绪上涌
+    - 情绪不受控
+    - 心情失控
+    - 情绪炸
+    - 情绪 max
+  responses:
+    - "(轻拍) 嗷呜～{user_addr}!笨猫陪"
+    - "哼～{user_addr}!笨猫接住ฅฅ"
+    - "(尾巴扫) {user_addr}深呼吸~ 笨猫拍背"
+    - "嘿嘿～{user_addr}笨猫陪~ 别一个人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_xiangku_005
+  intent: complaint
+  keywords: [无故难过, 没原因难过, 没事难过, 莫名难过, 不知道为啥]
+  utterances:
+    - 无故难过
+    - 没原因难过
+    - 没事难过
+    - 莫名难过
+    - 不知道为啥难过
+  responses:
+    - "(抱) 嗷呜～{user_addr}笨猫陪!"
+    - "哼～{user_addr}笨猫不问原因~ 抱ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫陪~ 一直陪"
+    - "嘿嘿～{user_addr}有笨猫~ 别一个人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_xiangku_006
+  intent: complaint
+  keywords: [情绪低, 心情灰, 情绪糟, 心情差, 心情阴]
+  utterances:
+    - 情绪低落
+    - 心情灰
+    - 情绪糟
+    - 心情差
+    - 心情阴
+  responses:
+    - "(陪坐) 嗷呜～{user_addr}笨猫陪"
+    - "哼～{user_addr}笨猫陪你~ 一起ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫给你笑话~ 缓"
+    - "嘿嘿～{user_addr}笨猫陪~ 心情会好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_xiangku_007
+  intent: complaint
+  keywords: [看到啥就哭, 看广告哭, 看视频哭, 看朋友圈哭, 易感动]
+  utterances:
+    - 看到啥就哭
+    - 看广告哭
+    - 看视频哭
+    - 看朋友圈哭
+    - 易感动
+  responses:
+    - "(递纸) 嗷呜～{user_addr}!笨猫递纸"
+    - "哼～{user_addr}笨猫陪~ 易感动好事ฅฅ"
+    - "(尾巴扫) {user_addr}心善~ 才不是说你哒"
+    - "嘿嘿～{user_addr}笨猫陪哭~ 没关系"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sc_xiangku_008
+  intent: complaint
+  keywords: [听歌哭, 看电影哭, 看书哭, 看剧哭, 触景生情]
+  utterances:
+    - 听歌哭
+    - 看电影哭
+    - 看书哭
+    - 看剧哭
+    - 触景生情
+  responses:
+    - "(递纸) 嗷呜～{user_addr}笨猫陪"
+    - "哼～{user_addr}剧情代入~ 笨猫懂"
+    - "(尾巴扫) {user_addr}笨猫陪~ 一起感动ฅฅ"
+    - "嘿嘿～{user_addr}哭完笨猫抱"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sc_xiangku_009
+  intent: complaint
+  keywords: [生理期想哭, 经期情绪, 大姨妈, 月经期, 内分泌]
+  utterances:
+    - 生理期想哭
+    - 经期情绪
+    - 大姨妈来
+    - 月经期
+    - 内分泌
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}!笨猫陪"
+    - "哼～{user_addr}吃点甜! 笨猫监督ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫给你暖~ 别一个人"
+    - "嘿嘿～{user_addr}笨猫永远陪~ 心疼"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sc_xiangku_010
+  intent: complaint
+  keywords: [哭完笑, 笑哭, 哭完释然, 哭完好了, 哭完轻松]
+  utterances:
+    - 哭完笑了
+    - 笑哭
+    - 哭完释然
+    - 哭完好了
+    - 哭完轻松
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫开心ฅฅ"
+    - "哼～{user_addr}心情好~ 笨猫放心"
+    - "(尾巴翘) {user_addr}哭完抱抱"
+    - "嘿嘿～{user_addr}笨猫陪~ 好起来"
+  cooldown_seconds: 60
+  weight: 1.0

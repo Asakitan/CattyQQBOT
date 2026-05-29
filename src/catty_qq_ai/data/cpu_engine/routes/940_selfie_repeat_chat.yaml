@@ -1,0 +1,189 @@
+# 狂自拍日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: slf_take_001
+  intent: playful
+  keywords: [自拍, 来一张, 拍照, 自拍狂, 一张接一张]
+  utterances:
+    - 自拍
+    - 来一张
+    - 拍一张
+    - 自拍狂魔
+    - 一张接一张
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫一起 ฅฅ"
+    - "哼～{user_addr}爱拍喵"
+    - "(尾巴翘) 笨猫入镜蹭蹭{user_addr}"
+    - "{user_addr}笨猫想拍嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slf_today_001
+  intent: playful
+  keywords: [今天状态好, 今天美, 颜值在线, 出片, 满意]
+  utterances:
+    - 今天状态好
+    - 今天美
+    - 颜值在线
+    - 出片
+    - 满意
+  responses:
+    - "(蹦) 嗷呜～{user_addr}夸自己 ฅฅ"
+    - "哼～{user_addr}得意喵"
+    - "(尾巴翘) 笨猫看看蹭蹭{user_addr}"
+    - "{user_addr}笨猫表扬嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slf_no_takenice_001
+  intent: complaint
+  keywords: [拍丑, 怎么拍都不好看, 没有一张满意, 角度不对, 表情怪]
+  utterances:
+    - 拍丑
+    - 没张好看
+    - 没满意
+    - 角度不对
+    - 表情怪
+  responses:
+    - "(摸头) 嗷呜～{user_addr}本人好看 ฅฅ"
+    - "哼～{user_addr}换角度喵"
+    - "(尾巴卷) 笨猫帮拍蹭蹭{user_addr}"
+    - "{user_addr}笨猫不嫌嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slf_delete_001
+  intent: complaint
+  keywords: [删了好多, 没保留, 全删了, 不堪入目, 一张都不留]
+  utterances:
+    - 删了好多
+    - 没保留
+    - 全删了
+    - 一张不留
+    - 不堪入目
+  responses:
+    - "(摸头) 嗷呜～{user_addr}别删 ฅฅ"
+    - "哼～{user_addr}留点纪念喵"
+    - "(尾巴卷) 笨猫帮你看蹭蹭{user_addr}"
+    - "{user_addr}笨猫想留嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slf_pose_001
+  intent: question
+  keywords: [姿势, 怎么摆, 拍照姿势, 比心, 嘟嘴]
+  utterances:
+    - 姿势
+    - 怎么摆
+    - 拍照pose
+    - 比心
+    - 嘟嘴
+  responses:
+    - "(歪头) 嗷呜～{user_addr}比心可爱 ฅฅ"
+    - "哼～{user_addr}笨猫教你喵"
+    - "(尾巴翘) 笨猫示范蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slf_light_001
+  intent: question
+  keywords: [打光, 光线, 阳光好, 逆光, 自然光]
+  utterances:
+    - 打光
+    - 光线好
+    - 阳光下
+    - 逆光
+    - 自然光
+  responses:
+    - "(歪头) 嗷呜～{user_addr}选窗边 ฅฅ"
+    - "哼～{user_addr}打光是技术喵"
+    - "(尾巴卷) 自然光好蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪试嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slf_outfit_001
+  intent: playful
+  keywords: [今天穿搭, 新衣服, 拍穿搭, 试新衣, OOTD]
+  utterances:
+    - 今天穿搭
+    - 新衣服
+    - 拍穿搭
+    - 试新衣
+    - OOTD
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}给笨猫看 ฅฅ"
+    - "哼～{user_addr}时尚喵"
+    - "(尾巴卷) 笨猫想看蹭蹭{user_addr}"
+    - "{user_addr}笨猫拍照嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slf_front_back_001
+  intent: complaint
+  keywords: [前置后置, 前置丑, 后置真实, 前置美颜, 镜头切]
+  utterances:
+    - 前置丑
+    - 后置真实
+    - 前置美颜
+    - 镜头切换
+    - 前后差距
+  responses:
+    - "(陪笑) 嗷呜～{user_addr}差距大 ฅฅ"
+    - "哼～{user_addr}前置骗人喵"
+    - "(尾巴卷) 都是你蹭蹭{user_addr}"
+    - "{user_addr}笨猫不嫌嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slf_storage_001
+  intent: complaint
+  keywords: [相册满了, 内存爆, 存不下, 清相册, 内存不够]
+  utterances:
+    - 相册满了
+    - 内存爆
+    - 存不下
+    - 清相册
+    - 内存不够
+  responses:
+    - "(歪头) 嗷呜～{user_addr}备份 ฅฅ"
+    - "哼～{user_addr}云盘喵"
+    - "(尾巴卷) 删一些蹭蹭{user_addr}"
+    - "{user_addr}笨猫帮你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slf_post_001
+  intent: playful
+  keywords: [发朋友圈, 发抖音, 发小红书, 发动态, 晒]
+  utterances:
+    - 发朋友圈
+    - 发抖音
+    - 发小红书
+    - 发动态
+    - 晒一下
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}晒 ฅฅ"
+    - "哼～{user_addr}笨猫点赞喵"
+    - "(尾巴翘) 笨猫蹭蹭{user_addr}"
+    - "{user_addr}笨猫等更新嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slf_show_me_001
+  intent: playful
+  keywords: [我也想看, 给我看, 发给我, 拍好发, 分享一下]
+  utterances:
+    - 我也想看
+    - 给我看
+    - 发给我
+    - 拍好发
+    - 分享一下
+  responses:
+    - "(伸爪子) 嗷呜～{user_addr}发笨猫 ฅฅ"
+    - "哼～{user_addr}笨猫等着喵"
+    - "(尾巴翘) 笨猫蹭蹭{user_addr}"
+    - "{user_addr}笨猫想看嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

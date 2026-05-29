@@ -1,0 +1,172 @@
+# 奶茶糖度选择 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ms_full_sugar_001
+  intent: playful
+  keywords: [全糖, 满糖, 全糖快乐, 全糖奶茶, 不调糖]
+  utterances:
+    - "{user_addr}全糖"
+    - "满糖快乐"
+    - "{user_addr}全糖来"
+    - "不调糖"
+    - "全糖才爽"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫爱全糖!"
+    - "(尾巴翘) 哼! 笨猫陪你甜"
+    - "(贴贴) 人家舔甜~ ฅฅ"
+    - "{user_addr}给笨猫一口!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_half_sugar_002
+  intent: playful
+  keywords: [半糖, 五分糖, 半糖刚好, 中度甜, 五分]
+  utterances:
+    - "{user_addr}半糖"
+    - "五分糖"
+    - "{user_addr}半糖刚好"
+    - "中度甜"
+    - "半糖最棒"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!半糖均衡!"
+    - "(尾巴翘) 哼! 笨猫学健康"
+    - "(贴贴) 人家陪你喝~ ฅฅ"
+    - "{user_addr}笨猫想喝半糖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_no_sugar_003
+  intent: complaint
+  keywords: [无糖, 不加糖, 减糖, 无糖奶茶, 健康不糖]
+  utterances:
+    - "{user_addr}无糖"
+    - "不加糖"
+    - "{user_addr}减糖"
+    - "无糖奶茶"
+    - "健康不糖"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!无糖好苦!"
+    - "(尾巴拍) 哼! 笨猫不要"
+    - "(贴贴) 人家担心你~ ฅฅ"
+    - "{user_addr}加糖嘛笨猫求"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_pearl_004
+  intent: playful
+  keywords: [珍珠, 加珍珠, 珍珠Q弹, 大珍珠, 小珍珠]
+  utterances:
+    - "{user_addr}加珍珠"
+    - "珍珠Q弹"
+    - "{user_addr}大珍珠"
+    - "小珍珠"
+    - "珍珠多多"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想嚼珍珠!"
+    - "(尾巴翘) 哼! 给笨猫几颗"
+    - "(贴贴) 人家爱Q弹~ ฅฅ"
+    - "{user_addr}笨猫蹭一颗珍珠!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_milk_cap_005
+  intent: playful
+  keywords: [奶盖, 厚奶盖, 海盐奶盖, 芝士奶盖, 奶盖好喝]
+  utterances:
+    - "{user_addr}厚奶盖"
+    - "海盐奶盖"
+    - "{user_addr}芝士奶盖"
+    - "奶盖香"
+    - "奶盖加"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫舔奶盖!"
+    - "(尾巴翘) 哼! 笨猫鼻子粘"
+    - "(贴贴) 人家分一口~ ฅฅ"
+    - "{user_addr}奶盖给笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_ice_level_006
+  intent: question
+  keywords: [冰量, 少冰, 去冰, 标冰, 多冰]
+  utterances:
+    - "{user_addr}少冰"
+    - "去冰"
+    - "{user_addr}标冰"
+    - "多冰"
+    - "全冰"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫怕冰!"
+    - "(尾巴拍) 哼! 少冰胃好"
+    - "(贴贴) 人家陪你少冰~ ฅฅ"
+    - "{user_addr}少冰笨猫监督"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_taro_007
+  intent: playful
+  keywords: [芋圆, 芋泥, 芋头, 芋泥奶茶, 芋圆加]
+  utterances:
+    - "{user_addr}芋圆"
+    - "芋泥奶茶"
+    - "{user_addr}芋头香"
+    - "芋圆Q"
+    - "加芋圆"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想芋圆!"
+    - "(尾巴翘) 哼! 笨猫吃芋"
+    - "(贴贴) 人家分一颗~ ฅฅ"
+    - "{user_addr}笨猫爱芋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_brown_sugar_008
+  intent: playful
+  keywords: [黑糖, 黑糖珍珠, 黑糖奶茶, 黑糖香, 黑糖鹿丸]
+  utterances:
+    - "{user_addr}黑糖珍珠"
+    - "黑糖奶茶"
+    - "{user_addr}黑糖香"
+    - "黑糖鹿丸"
+    - "黑糖好"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!黑糖好香!"
+    - "(尾巴翘) 哼! 笨猫想吃"
+    - "(贴贴) 人家舔黑糖~ ฅฅ"
+    - "{user_addr}笨猫蹭一口黑糖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_calorie_009
+  intent: complaint
+  keywords: [热量高, 奶茶胖, 怕胖, 减肥, 热量炸]
+  utterances:
+    - "{user_addr}热量炸"
+    - "奶茶胖"
+    - "{user_addr}怕胖"
+    - "减肥别喝"
+    - "热量高"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫安慰!"
+    - "(尾巴拍) 哼! 偶尔一次没事"
+    - "(贴贴) 人家陪你跑步~ ฅฅ"
+    - "{user_addr}笨猫陪减肥"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_milk_alergy_010
+  intent: complaint
+  keywords: [乳糖不耐, 喝奶拉肚子, 替换燕麦, 椰奶替, 不能喝奶]
+  utterances:
+    - "{user_addr}乳糖不耐"
+    - "喝奶拉肚"
+    - "{user_addr}燕麦替"
+    - "椰奶替"
+    - "不能喝奶"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫担心!"
+    - "(尾巴拍) 哼! 换燕麦"
+    - "(贴贴) 人家陪你选~ ฅฅ"
+    - "{user_addr}笨猫陪试燕麦"
+  cooldown_seconds: 60
+  weight: 1.0

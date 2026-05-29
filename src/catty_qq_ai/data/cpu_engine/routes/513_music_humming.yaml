@@ -1,0 +1,206 @@
+# 听歌哼唱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: msh_listen_001
+  intent: playful
+  keywords: [在听歌, 听歌呢, 音乐响, 戴耳机, 听音乐]
+  utterances:
+    - 在听歌
+    - 听音乐
+    - 戴耳机
+    - 音乐响
+    - 听歌呢
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫听! ฅฅ"
+    - "哼～{user_addr}给笨猫推荐!"
+    - "(撒娇) 一起听~"
+    - "嘿嘿～{user_addr}笨猫共享耳机"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_hum_001
+  intent: playful
+  keywords: [哼歌, 唱歌, 哼小调, 哼起来, 自己哼]
+  utterances:
+    - 哼歌中
+    - 唱歌
+    - 哼小调
+    - 哼起来
+    - 自己哼
+  responses:
+    - "嗷呜～{user_addr}唱给笨猫! ฅฅ"
+    - "哼～{user_addr}声音好听! 多哼"
+    - "(撒娇) 笨猫粉~ 续上"
+    - "嘿嘿～{user_addr}哼笨猫和~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_earworm_001
+  intent: complaint
+  keywords: [洗脑, 一直循环, 脑子里循环, 洗脑神曲, 单曲循环]
+  utterances:
+    - 洗脑神曲
+    - 一直循环
+    - 脑子里循环
+    - 单曲循环
+    - 洗脑了
+  responses:
+    - "嗷呜～{user_addr}什么歌? 笨猫听ฅฅ"
+    - "哼～{user_addr}笨猫陪洗脑"
+    - "(撒娇) 一起循环~"
+    - "嘿嘿～{user_addr}笨猫接收~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_concert_001
+  intent: playful
+  keywords: [演唱会, 现场, 抢票, 看演唱会, 演唱会票]
+  utterances:
+    - 演唱会
+    - 现场
+    - 抢票
+    - 看演唱会
+    - 演唱会票
+  responses:
+    - "(蹦) 嗷呜～{user_addr}带笨猫! ฅฅ"
+    - "哼～{user_addr}带笨猫去!"
+    - "(撒娇) 笨猫想去~"
+    - "嘿嘿～{user_addr}笨猫荧光棒~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_classic_001
+  intent: playful
+  keywords: [周杰伦, 老歌, 经典歌曲, 80年代, 回忆杀歌]
+  utterances:
+    - 周杰伦
+    - 老歌
+    - 经典歌曲
+    - 80年代
+    - 回忆杀歌
+  responses:
+    - "嗷呜～{user_addr}怀旧! ฅฅ"
+    - "哼～{user_addr}经典走起!"
+    - "(撒娇) 笨猫陪听~"
+    - "嘿嘿～{user_addr}笨猫加分~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_kpop_001
+  intent: playful
+  keywords: [K-POP, 韩团, 偶像, BTS, BLACKPINK]
+  utterances:
+    - K-POP
+    - 韩团
+    - 偶像
+    - BTS
+    - BLACKPINK
+  responses:
+    - "嗷呜～{user_addr}笨猫也粉! ฅฅ"
+    - "哼～{user_addr}笨猫陪 stan!"
+    - "(撒娇) 一起跳~"
+    - "嘿嘿～{user_addr}笨猫舞蹈~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_jpop_001
+  intent: playful
+  keywords: [J-POP, 日语歌, 二次元歌曲, 动漫OP, 米津玄师]
+  utterances:
+    - J-POP
+    - 日语歌
+    - 二次元歌曲
+    - 动漫OP
+    - 米津玄师
+  responses:
+    - "嗷呜～{user_addr}笨猫粉! ฅฅ"
+    - "哼～{user_addr}日漫好听"
+    - "(撒娇) 笨猫陪听~"
+    - "嘿嘿～{user_addr}笨猫翻译"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_singing_001
+  intent: playful
+  keywords: [K歌, 唱K, 麦霸, KTV, 卡拉OK]
+  utterances:
+    - K歌
+    - 唱K
+    - 麦霸
+    - KTV
+    - 卡拉OK
+  responses:
+    - "(蹦) 嗷呜～{user_addr}带笨猫! ฅฅ"
+    - "哼～{user_addr}笨猫麦霸"
+    - "(撒娇) 笨猫包场~"
+    - "嘿嘿～{user_addr}和笨猫合唱~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_emomusic_001
+  intent: complaint
+  keywords: [网抑云, 抑郁歌单, emo 歌, 悲伤情歌, 听哭了]
+  utterances:
+    - 网抑云
+    - emo歌单
+    - 悲伤情歌
+    - 听哭了
+    - emo 音乐
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别 emo! ฅฅ"
+    - "哼～{user_addr}笨猫切欢快!"
+    - "(撒娇) 抱笨猫~"
+    - "嘿嘿～{user_addr}笨猫陪 emo"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_makemusic_001
+  intent: playful
+  keywords: [写歌, 作曲, 弹吉他, 弹钢琴, 创作音乐]
+  utterances:
+    - 写歌
+    - 作曲
+    - 弹吉他
+    - 弹钢琴
+    - 创作音乐
+  responses:
+    - "(蹦) 嗷呜～{user_addr}写给笨猫! ฅฅ"
+    - "哼～{user_addr}笨猫主题曲"
+    - "(撒娇) 创作给笨猫~"
+    - "嘿嘿～{user_addr}笨猫粉头~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_dancetime_001
+  intent: playful
+  keywords: [跳舞, 跟跳, 舞蹈, dance, 街舞]
+  utterances:
+    - 跳舞
+    - 跟跳
+    - 舞蹈
+    - 跳起来
+    - 街舞
+  responses:
+    - "(蹦) 嗷呜～{user_addr}带笨猫跳! ฅฅ"
+    - "哼～{user_addr}笨猫加入"
+    - "(撒娇) 一起跳~"
+    - "嘿嘿～{user_addr}笨猫尾巴摇~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msh_playlist_001
+  intent: question
+  keywords: [推荐歌单, 求歌单, 听啥歌, 推荐音乐, 求推荐歌]
+  utterances:
+    - 推荐歌单
+    - 求歌单
+    - 听啥歌好
+    - 推荐音乐
+    - 求推荐歌
+  responses:
+    - "嗷呜～{user_addr}笨猫想想! ฅฅ"
+    - "哼～{user_addr}笨猫专属歌单"
+    - "(撒娇) 笨猫推荐~"
+    - "嘿嘿～{user_addr}笨猫的最爱~"
+  cooldown_seconds: 60
+  weight: 1.0

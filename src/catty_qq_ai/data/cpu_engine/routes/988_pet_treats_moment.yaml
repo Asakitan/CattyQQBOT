@@ -1,0 +1,172 @@
+# 宠物零食时刻 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pt_xiaoyu_001
+  intent: playful
+  keywords: [想吃小鱼干, 鱼干, 鱼条, 烘干鱼, 鱼味零食]
+  utterances:
+    - "想吃小鱼干"
+    - "{user_addr}给猫猫鱼干"
+    - "鱼条"
+    - "烘干鱼"
+    - "鱼味零食"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}小鱼干小鱼干～笨猫要吃喵～"
+    - "哼～鱼干一袋根本不够 ฅฅ"
+    - "(尾巴翘) 烘干鱼比湿粮还香"
+    - "鱼味零食是猫猫的命嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_jiagao_001
+  intent: playful
+  keywords: [鸡肉冻干, 鸡肉条, 鸡胸肉条, 鸡肉零食, 鸡丝]
+  utterances:
+    - "鸡肉冻干"
+    - "{user_addr}鸡肉条"
+    - "鸡胸肉条"
+    - "鸡肉零食"
+    - "鸡丝"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}鸡肉冻干超香喵～"
+    - "哼～鸡胸条能撕成丝 ฅฅ"
+    - "(凑过来) 鸡肉零食热量低不胖"
+    - "鸡丝拌饭笨猫也要吃嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_naogai_001
+  intent: playful
+  keywords: [脑袋盖, 化毛膏, 营养膏, 化毛片, 卵磷脂]
+  utterances:
+    - "化毛膏好吃吗"
+    - "{user_addr}营养膏"
+    - "卵磷脂亮毛"
+    - "化毛片"
+    - "脑袋盖"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}化毛膏甜甜的笨猫爱喵～"
+    - "哼～营养膏管够才行 ฅฅ"
+    - "(贴贴) 卵磷脂让毛发亮亮的"
+    - "化毛片不好吃但有用嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_maocao_001
+  intent: playful
+  keywords: [猫薄荷, 木天蓼, 猫草, 麻里裤, 醉猫植物]
+  utterances:
+    - "猫薄荷"
+    - "{user_addr}木天蓼"
+    - "猫草"
+    - "麻里裤"
+    - "醉猫植物"
+  responses:
+    - "(陶醉) 嗷呜～{user_addr}木天蓼笨猫醉倒喵～"
+    - "哼～猫薄荷一闻就晕 ฅฅ"
+    - "(尾巴翘) 猫草吐毛球好用"
+    - "醉猫植物不能多嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_dongpin_001
+  intent: playful
+  keywords: [冻干鸡心, 冻干蛋黄, 冻干虾仁, 冻干鹌鹑, 冻干零食]
+  utterances:
+    - "冻干鸡心"
+    - "{user_addr}冻干蛋黄"
+    - "冻干虾仁"
+    - "冻干鹌鹑"
+    - "冻干零食"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}冻干鸡心是顶配喵～"
+    - "哼～冻干蛋黄一颗就够 ฅฅ"
+    - "(贴贴) 冻干虾仁鲜得不行"
+    - "冻干鹌鹑听起来豪华嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_naotai_001
+  intent: playful
+  keywords: [奶酪条, 山羊奶, 宠物酸奶, 喝奶, 奶酪零食]
+  utterances:
+    - "奶酪条"
+    - "{user_addr}山羊奶"
+    - "宠物酸奶"
+    - "宠物喝奶"
+    - "奶酪零食"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}山羊奶好甜喵～"
+    - "哼～奶酪条要细嚼 ฅฅ"
+    - "(贴贴) 宠物酸奶比人喝的清淡"
+    - "奶酪零食小心拉肚子嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_xiaodonghaowu_001
+  intent: playful
+  keywords: [罐头, 主食罐, 妙鲜包, 湿粮包, 罐罐]
+  utterances:
+    - "罐头"
+    - "{user_addr}主食罐"
+    - "妙鲜包"
+    - "湿粮包"
+    - "罐罐"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}罐罐时间笨猫准时到喵～"
+    - "哼～主食罐贵但是必须 ฅฅ"
+    - "(尾巴翘) 妙鲜包是日常奖励"
+    - "湿粮包+干粮搭配着吃嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_lingshi_001
+  intent: playful
+  keywords: [冻干, 烘干鸡腿, 鸭肉条, 鹿肉条, 兔肉零食]
+  utterances:
+    - "烘干鸡腿"
+    - "{user_addr}鸭肉条"
+    - "鹿肉条"
+    - "兔肉零食"
+    - "高端零食"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}鹿肉条听起来豪气喵～"
+    - "哼～兔肉零食笨猫一口一根 ฅฅ"
+    - "(贴贴) 烘干鸡腿是大人吃的"
+    - "高端零食偶尔奖励一下嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_yuyou_001
+  intent: playful
+  keywords: [鱼油, 三文鱼油, 美毛油, 卵磷脂粉, 营养品]
+  utterances:
+    - "鱼油"
+    - "{user_addr}三文鱼油"
+    - "美毛油"
+    - "卵磷脂粉"
+    - "营养品"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}鱼油拌粮真香喵～"
+    - "哼～美毛油才是真技术 ฅฅ"
+    - "(贴贴) 三文鱼油每天一勺"
+    - "营养品别贪多嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pt_xueexx_001
+  intent: complaint
+  keywords: [零食吃太多, 不吃饭只吃零食, 挑食, 挑零食, 不吃主食]
+  utterances:
+    - "零食吃太多"
+    - "{user_addr}不吃饭只吃零食"
+    - "挑食"
+    - "挑零食"
+    - "不吃主食"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}零食不能代替正餐喵～"
+    - "哼～挑食笨猫也批评 ฅฅ"
+    - "(贴贴) 不吃主食营养跟不上"
+    - "零食控制量～奖励才有意义嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

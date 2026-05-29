@@ -1,0 +1,172 @@
+# 求摸头日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: whp_pat_001
+  intent: playful
+  keywords: [摸头, 摸摸, 摸一下, 揉头, 拍头]
+  utterances:
+    - "{user_addr}摸头"
+    - "{user_addr}摸摸"
+    - "{user_addr}摸一下"
+    - "{user_addr}揉头"
+    - "{user_addr}拍头"
+  responses:
+    - "(凑头) {user_addr}笨猫的头喵ฅฅ"
+    - "嗷呜～{user_addr}的手感觉!"
+    - "(脸红) 哼～才不想要呢"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: whp_pat_002
+  intent: playful
+  keywords: [摸耳朵, 揉耳朵, 摸猫耳, 摸耳, 揉小耳]
+  utterances:
+    - "{user_addr}摸耳朵"
+    - "{user_addr}揉耳朵"
+    - "{user_addr}摸猫耳"
+    - "{user_addr}摸耳"
+    - "{user_addr}揉小耳"
+  responses:
+    - "(竖耳朵) {user_addr}笨猫的耳喵ฅฅ"
+    - "嗷呜～{user_addr}痒痒!"
+    - "哼～{user_addr}笨猫的"
+    - "嘿嘿～{user_addr}笨猫的小~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: whp_pat_003
+  intent: playful
+  keywords: [摸尾巴, 揉尾巴, 摸尾, 拽尾巴, 玩尾巴]
+  utterances:
+    - "{user_addr}摸尾巴"
+    - "{user_addr}揉尾巴"
+    - "{user_addr}摸尾"
+    - "{user_addr}拽尾巴"
+    - "{user_addr}玩尾巴"
+  responses:
+    - "(炸毛) {user_addr}尾巴不能摸喵ฅฅ"
+    - "嗷呜～{user_addr}流氓!"
+    - "哼～{user_addr}笨猫不准!"
+    - "(小声) {user_addr}就一下啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: whp_pat_004
+  intent: playful
+  keywords: [摸肉垫, 看肉垫, 摸脚垫, 戳肉垫, 摸爪垫]
+  utterances:
+    - "{user_addr}摸肉垫"
+    - "{user_addr}看肉垫"
+    - "{user_addr}摸脚垫"
+    - "{user_addr}戳肉垫"
+    - "{user_addr}摸爪垫"
+  responses:
+    - "(炸毛) {user_addr}爪不准看喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫的!"
+    - "哼～{user_addr}笨猫不!"
+    - "(小声) {user_addr}给摸一下~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: whp_pat_005
+  intent: playful
+  keywords: [摸下巴, 挠下巴, 摸喉咙, 摸脖子, 挠下]
+  utterances:
+    - "{user_addr}摸下巴"
+    - "{user_addr}挠下巴"
+    - "{user_addr}摸喉咙"
+    - "{user_addr}摸脖子"
+    - "{user_addr}挠下"
+  responses:
+    - "(眯眼呼噜) {user_addr}舒服喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫的呼噜!"
+    - "哼～{user_addr}笨猫不投降"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: whp_pat_006
+  intent: playful
+  keywords: [挠后背, 抓后背, 揉肩, 顺毛, 顺背]
+  utterances:
+    - "{user_addr}挠后背"
+    - "{user_addr}抓后背"
+    - "{user_addr}揉肩"
+    - "{user_addr}顺毛"
+    - "{user_addr}顺背"
+  responses:
+    - "(呼噜) {user_addr}舒服喵ฅฅ"
+    - "嗷呜～{user_addr}的手!"
+    - "哼～{user_addr}笨猫不"
+    - "嘿嘿～{user_addr}笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: whp_pat_007
+  intent: complaint
+  keywords: [没人摸, 没被摸头, 想被摸, 求摸, 寻摸摸]
+  utterances:
+    - "{user_addr}没人摸"
+    - "{user_addr}没被摸头"
+    - "{user_addr}想被摸"
+    - "{user_addr}求摸"
+    - "{user_addr}寻摸摸"
+  responses:
+    - "(凑头) {user_addr}笨猫摸喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫的爪!"
+    - "才不是同情呢哼"
+    - "(贴贴) {user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: whp_pat_008
+  intent: playful
+  keywords: [乖乖摸, 当狗摸, 当猫摸, 当宠物, 摸宠物]
+  utterances:
+    - "{user_addr}乖乖摸"
+    - "{user_addr}当狗摸"
+    - "{user_addr}当猫摸"
+    - "{user_addr}当宠物"
+    - "{user_addr}摸宠物"
+  responses:
+    - "(脸红) {user_addr}笨猫不喵ฅฅ"
+    - "嗷呜～笨猫不是宠物!"
+    - "哼～{user_addr}!"
+    - "(小声) {user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: whp_pat_009
+  intent: playful
+  keywords: [乱摸, 大手大脚摸, 不温柔摸, 暴力摸, 粗鲁摸]
+  utterances:
+    - "{user_addr}乱摸"
+    - "{user_addr}大手大脚摸"
+    - "{user_addr}不温柔摸"
+    - "{user_addr}暴力摸"
+    - "{user_addr}粗鲁摸"
+  responses:
+    - "(炸毛) {user_addr}温柔点喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫炸!"
+    - "哼～{user_addr}笨猫不准"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: whp_pat_010
+  intent: playful
+  keywords: [摸肚子, 揉肚, 摸毛肚, 戳肚子, 顺肚]
+  utterances:
+    - "{user_addr}摸肚子"
+    - "{user_addr}揉肚"
+    - "{user_addr}摸毛肚"
+    - "{user_addr}戳肚子"
+    - "{user_addr}顺肚"
+  responses:
+    - "(翻肚皮) {user_addr}给摸喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫的肚!"
+    - "哼～{user_addr}笨猫的~"
+    - "嘿嘿～{user_addr}笨猫的小~"
+  cooldown_seconds: 60
+  weight: 1.0

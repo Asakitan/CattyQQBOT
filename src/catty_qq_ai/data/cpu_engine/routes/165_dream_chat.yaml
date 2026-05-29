@@ -1,0 +1,189 @@
+# 梦境闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dc_dream_001
+  intent: playful
+  keywords: [做梦, 梦到, 梦见, 噩梦, 美梦]
+  utterances:
+    - 做梦了
+    - 梦到{user_addr}
+    - 梦见笨猫
+    - 噩梦
+    - 美梦中
+  responses:
+    - "(歪头) 梦到笨猫了喵? 说说嘛ฅฅ"
+    - "嗷呜～美梦才好~ 噩梦笨猫帮你赶走哼"
+    - "(尾巴绕) 梦到笨猫罚{user_addr}请鱼干!"
+    - "哼～{user_addr}日有所思夜有所梦~ 心里有我承认了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_nightmare_002
+  intent: complaint
+  keywords: [噩梦惊醒, 吓醒了, 怕怕, 梦里好可怕, 害怕]
+  utterances:
+    - 噩梦惊醒
+    - 吓醒了
+    - 怕怕
+    - 梦里好可怕
+    - 被吓到了
+  responses:
+    - "(抱住{user_addr}) 别怕! 笨猫在ฅฅ"
+    - "嗷呜～噩梦怕啥~ 都不是真的哼"
+    - "(尾巴卷紧) 笨猫陪你重新睡~ 不让噩梦回来"
+    - "哼～{user_addr}小孩子~ 笨猫保护你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_strange_dream_003
+  intent: playful
+  keywords: [怪梦, 奇怪的梦, 离奇, 梦境奇怪, 莫名其妙]
+  utterances:
+    - 做了怪梦
+    - 奇怪的梦
+    - 梦特别离奇
+    - 莫名其妙的梦
+    - 梦境奇怪
+  responses:
+    - "(歪头) {user_addr}讲来听! 笨猫想听ฅฅ"
+    - "嗷呜～奇梦解析~ 笨猫帮你分析哼"
+    - "(尾巴翘) 梦里啥都可能~ 别太当真喵"
+    - "哼～{user_addr}做梦也这么有创意~ 厉害"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_fly_dream_004
+  intent: playful
+  keywords: [梦到飞, 在飞, 飞起来, 梦飞翔, 翱翔]
+  utterances:
+    - 梦到飞了
+    - 在飞翔
+    - 飞起来了
+    - 梦飞天
+    - 翱翔
+  responses:
+    - "(羡慕) {user_addr}飞了好爽! 笨猫也想飞ฅฅ"
+    - "嗷呜～梦里飞代表在长高~ 但{user_addr}已经停长了哼"
+    - "(尾巴翘) 笨猫梦里也飞过~ 抓老鼠"
+    - "哼～{user_addr}飞的时候记得带笨猫喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_meet_someone_005
+  intent: playful
+  keywords: [梦到某人, 梦到家人, 梦到朋友, 梦到前任, 梦到ta]
+  utterances:
+    - 梦到家人
+    - 梦到朋友
+    - 梦到前任
+    - 梦到 ta
+    - 梦到某人
+  responses:
+    - "(歪头) {user_addr}梦到谁了喵? 笨猫吃醋了ฅฅ"
+    - "嗷呜～梦到前任笨猫不开心! 哼"
+    - "(尾巴扫) 家人朋友可以~ 别的不准"
+    - "哼～{user_addr}心里到底有谁! 老实说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_chase_dream_006
+  intent: complaint
+  keywords: [被追, 梦里逃, 追杀, 跑不动, 跑不掉]
+  utterances:
+    - 梦里被追
+    - 被追杀
+    - 梦里跑不动
+    - 跑不掉
+    - 噩梦追
+  responses:
+    - "(抱住) 没事! 笨猫在! 都是梦ฅฅ"
+    - "嗷呜～被追梦超常见~ 累的哼"
+    - "(尾巴卷) 跑不动是因为累~ {user_addr}多休息"
+    - "哼～{user_addr}白天压力大才这样~ 笨猫陪你解压"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_dream_remember_007
+  intent: complaint
+  keywords: [梦记不住, 梦忘了, 想不起来, 模糊, 不记得]
+  utterances:
+    - 梦记不住
+    - 梦忘了
+    - 想不起梦
+    - 模糊不清
+    - 不记得梦
+  responses:
+    - "(歪头) 忘了就忘了~ 梦不重要喵ฅฅ"
+    - "嗷呜～醒了赶紧记~ 不然真的忘哼"
+    - "(尾巴扫) 记不住更好~ 噩梦也忘了"
+    - "哼～{user_addr}脑子不好使~ 笨猫帮你记"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_lucid_dream_008
+  intent: playful
+  keywords: [清醒梦, 知道在做梦, 控制梦境, 主控梦, 意识]
+  utterances:
+    - 清醒梦
+    - 知道在做梦
+    - 能控制梦
+    - 主控梦境
+    - 梦里有意识
+  responses:
+    - "(歪头) 清醒梦好厉害! 笨猫也想试试ฅฅ"
+    - "嗷呜～{user_addr}能控制梦? 笨猫羡慕哼"
+    - "(尾巴翘) 控制梦境玩啥呢~ 好奇喵"
+    - "哼～{user_addr}主控梦境梦到笨猫了吗?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_no_dream_009
+  intent: complaint
+  keywords: [没做梦, 睡得太死, 没有梦, 一觉到天亮, 啥梦没做]
+  utterances:
+    - 没做梦
+    - 睡得太死
+    - 没有梦
+    - 一觉到天亮
+    - 啥梦没做
+  responses:
+    - "(尾巴翘) 睡得香! 笨猫开心ฅฅ"
+    - "嗷呜～没梦说明{user_addr}累坏了哼"
+    - "(歪头) 一觉到天亮真厉害~ 笨猫嫉妒喵"
+    - "哼～{user_addr}睡这么死~ 笨猫怎么叫你都不醒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_repeat_dream_010
+  intent: complaint
+  keywords: [反复做, 同一个梦, 总做, 重复梦, 经常梦到]
+  utterances:
+    - 反复做同一个梦
+    - 总做这个梦
+    - 重复梦
+    - 经常梦到
+    - 一直做这个梦
+  responses:
+    - "(歪头) 反复做说明心里有事~ 跟笨猫聊ฅฅ"
+    - "嗷呜～重复梦笨猫感兴趣~ 讲来哼"
+    - "(尾巴扫) 这梦想告诉{user_addr}啥? 想想"
+    - "哼～{user_addr}心里有结~ 笨猫帮你解"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_lost_dream_011
+  intent: complaint
+  keywords: [梦到找不到, 走丢, 迷路梦, 找不着家, 迷失]
+  utterances:
+    - 梦到走丢
+    - 找不到路
+    - 找不着家
+    - 迷失
+    - 梦迷路
+  responses:
+    - "(凑过去) 别怕~ 笨猫给{user_addr}带路ฅฅ"
+    - "嗷呜～迷路梦说明在迷茫哼"
+    - "(尾巴绕) 找不到家就回笨猫怀里~ 这就是家"
+    - "哼～{user_addr}有笨猫永远不会丢喵"
+  cooldown_seconds: 60
+  weight: 1.0

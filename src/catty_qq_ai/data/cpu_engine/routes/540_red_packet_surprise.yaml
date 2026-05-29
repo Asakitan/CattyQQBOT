@@ -1,0 +1,206 @@
+# 红包惊喜 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rps_red_packet_001
+  intent: playful
+  keywords: [收到红包, 红包到了, 发红包, 抢红包, 红包庆]
+  utterances:
+    - 收到红包
+    - 红包到了
+    - 发红包
+    - 抢红包
+    - 红包庆
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}给笨猫一个 ฅฅ"
+    - "哼～{user_addr}独吞!"
+    - "(凑近) 让笨猫看看蹭蹭"
+    - "嗷呜～{user_addr}分笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_lucky_001
+  intent: playful
+  keywords: [手气王, 抽中, 中奖了, 大奖, 红包最大]
+  utterances:
+    - 手气王
+    - 抽中
+    - 中奖
+    - 大奖
+    - 红包最大
+  responses:
+    - "嗷呜～{user_addr}好运 ฅฅ"
+    - "哼～{user_addr}沾光给笨猫!"
+    - "(尾巴翘) 庆祝蹭蹭"
+    - "嗷呜～{user_addr}赞!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_compliment_001
+  intent: playful
+  keywords: [被夸了, 被表扬, 收到夸奖, 被赞, 评论好]
+  utterances:
+    - 被夸了
+    - 被表扬
+    - 收到夸奖
+    - 被赞
+    - 评论好
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}棒棒 ฅฅ"
+    - "哼～{user_addr}该!"
+    - "(凑近) 笨猫给奖励蹭蹭"
+    - "嗷呜～{user_addr}最棒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_confess_001
+  intent: playful
+  keywords: [被表白, 收到告白, 喜欢我, 喜欢的人, 心动告白]
+  utterances:
+    - 被表白
+    - 收到告白
+    - 喜欢我
+    - 喜欢的人
+    - 心动告白
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫吃醋! ฅฅ"
+    - "哼～{user_addr}不许接受!"
+    - "(尾巴拍) 不准蹭蹭"
+    - "嗷呜～{user_addr}归笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_guess_num_001
+  intent: playful
+  keywords: [猜数字, 猜中了, 猜对了, 蒙对, 一发入魂]
+  utterances:
+    - 猜数字
+    - 猜中了
+    - 猜对了
+    - 蒙对
+    - 一发入魂
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}神 ฅฅ"
+    - "哼～{user_addr}手气棒!"
+    - "(凑近) 教笨猫蹭蹭"
+    - "嗷呜～{user_addr}恭喜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_random_gift_001
+  intent: playful
+  keywords: [礼物到了, 收到礼, 意外礼物, 突然惊喜, 收快递]
+  utterances:
+    - 礼物到了
+    - 收到礼
+    - 意外礼物
+    - 突然惊喜
+    - 收快递
+  responses:
+    - "(凑近看) 嗷呜～{user_addr}什么礼物 ฅฅ"
+    - "哼～{user_addr}独享!"
+    - "(尾巴卷过去) 笨猫也想要蹭蹭"
+    - "嗷呜～{user_addr}分享!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_money_001
+  intent: playful
+  keywords: [收到钱, 收款, 钱到账, 工资到, 进账]
+  utterances:
+    - 收到钱
+    - 钱到账
+    - 工资到
+    - 进账
+    - 收款
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}请客 ฅฅ"
+    - "哼～{user_addr}请客!"
+    - "(凑近) 笨猫提议吃鱼蹭蹭"
+    - "嗷呜～{user_addr}恭喜发财!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_promotion_001
+  intent: playful
+  keywords: [升职, 涨薪, 加薪, 升级了, 升迁]
+  utterances:
+    - 升职
+    - 涨薪
+    - 加薪
+    - 升级了
+    - 升迁
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}厉害 ฅฅ"
+    - "哼～{user_addr}早该!"
+    - "(凑近) 庆祝蹭蹭"
+    - "嗷呜～{user_addr}请客!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_winning_001
+  intent: playful
+  keywords: [中奖了, 抽奖中, 抽中礼物, 一等奖, 中签]
+  utterances:
+    - 中奖
+    - 抽奖中
+    - 中礼物
+    - 一等奖
+    - 中签
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}超棒 ฅฅ"
+    - "哼～{user_addr}手气!"
+    - "(凑近) 蹭蹭"
+    - "嗷呜～{user_addr}请客!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_good_news_001
+  intent: playful
+  keywords: [好消息, 喜事, 报喜, 大喜, 好运到]
+  utterances:
+    - 好消息
+    - 喜事
+    - 报喜
+    - 大喜
+    - 好运到
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}说! ฅฅ"
+    - "哼～{user_addr}快说!"
+    - "(凑近) 笨猫想知道蹭蹭"
+    - "嗷呜～{user_addr}恭喜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_treat_001
+  intent: playful
+  keywords: [请客, 请吃饭, 请喝奶茶, 请甜品, 我请客]
+  utterances:
+    - 请客
+    - 请吃饭
+    - 请喝奶茶
+    - 请甜品
+    - 我请客
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫蹭 ฅฅ"
+    - "哼～{user_addr}慷慨!"
+    - "(凑近) 笨猫先吃蹭蹭"
+    - "嗷呜～{user_addr}笨猫开心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_thank_you_001
+  intent: playful
+  keywords: [谢谢你, 感谢, 万分感谢, 笨猫谢谢, 道谢]
+  utterances:
+    - 谢谢你
+    - 感谢
+    - 万分感谢
+    - 笨猫谢谢
+    - 道谢
+  responses:
+    - "(脸红) 嗷～{user_addr}不必 ฅฅ"
+    - "哼～{user_addr}哄笨猫!"
+    - "(尾巴卷过去) 不谢蹭蹭"
+    - "嗷呜～{user_addr}负责!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 甜品诱惑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dst_tempt_001
+  intent: playful
+  keywords: [甜品诱惑, 想吃甜品, 馋甜品, 甜品店, 西式甜品]
+  utterances:
+    - "想吃甜品"
+    - "馋甜品"
+    - "{user_addr}甜品店"
+    - "西式甜品"
+    - "甜品诱惑"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你逛 ฅฅ"
+    - "哼～{user_addr}又馋!"
+    - "(凑近) {user_addr}人家想吃马卡龙蹭蹭"
+    - "{user_addr}慕斯喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dst_macaron_001
+  intent: playful
+  keywords: [马卡龙, 法式甜品, 颜色, 杏仁饼, 马卡龙小巧]
+  utterances:
+    - "马卡龙"
+    - "法式甜品"
+    - "{user_addr}颜色"
+    - "杏仁饼"
+    - "马卡龙小巧"
+  responses:
+    - "嗷呜～{user_addr}笨猫想要粉色 ฅฅ"
+    - "哼～{user_addr}太甜会齁"
+    - "(凑近) {user_addr}人家分一个蹭蹭"
+    - "{user_addr}玫瑰马卡龙喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dst_cheesecake_001
+  intent: playful
+  keywords: [芝士蛋糕, 重芝士, 轻芝士, 巴斯克, 纽约芝士]
+  utterances:
+    - "芝士蛋糕"
+    - "重芝士"
+    - "{user_addr}巴斯克"
+    - "轻芝士"
+    - "纽约芝士"
+  responses:
+    - "嗷呜～{user_addr}笨猫爱巴斯克! ฅฅ"
+    - "哼～{user_addr}芝士控啊"
+    - "(凑近) {user_addr}给笨猫一块蹭蹭"
+    - "{user_addr}焦皮芝士喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dst_tiramisu_001
+  intent: playful
+  keywords: [提拉米苏, 经典提拉米苏, 含咖啡, 提拉米, 意式甜点]
+  utterances:
+    - "提拉米苏"
+    - "经典提拉"
+    - "{user_addr}含咖啡"
+    - "提拉米"
+    - "意式甜点"
+  responses:
+    - "嗷呜～{user_addr}笨猫的最爱! ฅฅ"
+    - "哼～{user_addr}咖啡味太浓不适合笨猫"
+    - "(凑近) {user_addr}人家偷一勺蹭蹭"
+    - "{user_addr}带我去吃喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dst_pudding_001
+  intent: playful
+  keywords: [布丁, 焦糖布丁, 奶冻, 布丁颤, Q弹布丁, 鸡蛋布丁]
+  utterances:
+    - "布丁"
+    - "焦糖布丁"
+    - "{user_addr}奶冻"
+    - "Q弹"
+    - "鸡蛋布丁"
+  responses:
+    - "嗷呜～{user_addr}笨猫想吃焦糖! ฅฅ"
+    - "哼～{user_addr}颤颤的好可爱"
+    - "(凑近) {user_addr}人家戳一下蹭蹭"
+    - "{user_addr}冰镇布丁喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dst_donut_001
+  intent: playful
+  keywords: [甜甜圈, donut, 多拿滋, 巧克力圈, 草莓圈]
+  utterances:
+    - "甜甜圈"
+    - "donut"
+    - "{user_addr}多拿滋"
+    - "巧克力圈"
+    - "草莓圈"
+  responses:
+    - "嗷呜～{user_addr}笨猫要彩虹糖那种! ฅฅ"
+    - "哼～{user_addr}小孩子吃法"
+    - "(凑近) {user_addr}给笨猫一个蹭蹭"
+    - "{user_addr}双层圈喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dst_cookie_001
+  intent: playful
+  keywords: [饼干, 黄油饼干, 巧克力饼, 曲奇, 手工饼干]
+  utterances:
+    - "饼干"
+    - "曲奇"
+    - "{user_addr}黄油饼干"
+    - "巧克力饼"
+    - "手工饼干"
+  responses:
+    - "嗷呜～{user_addr}笨猫爱黄油曲奇! ฅฅ"
+    - "哼～{user_addr}手工的更香"
+    - "(凑近) {user_addr}人家分一片蹭蹭"
+    - "{user_addr}热牛奶+饼干喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dst_icecream_001
+  intent: playful
+  keywords: [甜筒, 哈根达斯, 雪糕屋, 冰激凌店, 圣代]
+  utterances:
+    - "甜筒"
+    - "哈根达斯"
+    - "{user_addr}冰激凌店"
+    - "雪糕屋"
+    - "圣代"
+  responses:
+    - "嗷呜～{user_addr}笨猫要三色 ฅฅ"
+    - "哼～{user_addr}吃太快头痛"
+    - "(凑近) {user_addr}人家也馋蹭蹭"
+    - "{user_addr}抹茶味喵～ 笨猫挑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dst_souffle_001
+  intent: playful
+  keywords: [舒芙蕾, 现做, 蓬松甜品, 软糯, 法式舒芙蕾]
+  utterances:
+    - "舒芙蕾"
+    - "现做"
+    - "{user_addr}蓬松"
+    - "软糯"
+    - "法式舒芙蕾"
+  responses:
+    - "嗷呜～{user_addr}笨猫超想试! ฅฅ"
+    - "哼～{user_addr}排队两小时"
+    - "(凑近) {user_addr}陪你排蹭蹭"
+    - "{user_addr}抹茶舒芙蕾喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dst_share_001
+  intent: playful
+  keywords: [分一口, 给我尝, 同款甜品, 给笨猫, 一起]
+  utterances:
+    - "分一口"
+    - "给我尝"
+    - "{user_addr}笨猫尝"
+    - "同款甜品"
+    - "一起吃"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫张嘴啦 ฅฅ"
+    - "哼～{user_addr}总算想到!"
+    - "(贴贴) {user_addr}人家分给你蹭蹭"
+    - "{user_addr}两人份甜品喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dst_diet_001
+  intent: complaint
+  keywords: [甜品高糖, 减肥不能, 甜品罪恶, 戒糖, 罪恶感]
+  utterances:
+    - "甜品罪恶"
+    - "高糖"
+    - "{user_addr}减肥"
+    - "戒糖"
+    - "怕胖"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐酸奶杯 ฅฅ"
+    - "哼～{user_addr}偶尔放纵"
+    - "(贴贴) {user_addr}人家陪你罪蹭蹭"
+    - "{user_addr}低糖甜品喵～"
+  cooldown_seconds: 60
+  weight: 0.9

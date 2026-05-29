@@ -1,0 +1,189 @@
+# 酸到牙痛 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sou_sour_001
+  intent: complaint
+  keywords: [好酸, 酸到, 牙倒, 倒牙, 酸倒]
+  utterances:
+    - "好酸"
+    - "酸到牙倒"
+    - "{user_addr}倒牙"
+    - "酸倒"
+    - "酸死"
+  responses:
+    - "(挤眼) 嗷呜～{user_addr}笨猫看你脸都皱了 ฅฅ"
+    - "哼～{user_addr}活该, 谁让你尝"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}漱口水喵～ 笨猫递"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sou_lemon_001
+  intent: playful
+  keywords: [柠檬, 柠檬酸, 切柠檬, 柠檬水, 黄柠檬]
+  utterances:
+    - "柠檬"
+    - "柠檬好酸"
+    - "{user_addr}切柠檬"
+    - "柠檬水"
+    - "黄柠檬"
+  responses:
+    - "嗷呜～{user_addr}笨猫不敢咬纯柠檬! ฅฅ"
+    - "哼～{user_addr}挑战柠檬精吗"
+    - "(凑近) {user_addr}人家闻闻就好蹭蹭"
+    - "{user_addr}加蜂蜜喵～ 笨猫教"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sou_vinegar_001
+  intent: playful
+  keywords: [醋, 山西醋, 米醋, 陈醋, 醋酸]
+  utterances:
+    - "醋"
+    - "山西醋"
+    - "{user_addr}陈醋"
+    - "米醋"
+    - "酸醋"
+  responses:
+    - "嗷呜～{user_addr}饺子蘸醋超好吃 ฅฅ"
+    - "哼～{user_addr}吃酸养颜呢"
+    - "(凑近) {user_addr}人家也想试蹭蹭"
+    - "{user_addr}山西陈醋喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sou_unripe_001
+  intent: complaint
+  keywords: [未熟酸, 没熟, 青芒果, 青苹果, 不熟酸]
+  utterances:
+    - "没熟好酸"
+    - "青芒果酸"
+    - "{user_addr}青果"
+    - "青苹果"
+    - "不熟"
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫早说先放熟 ฅฅ"
+    - "哼～{user_addr}急啥"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}放两天喵～ 会熟"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sou_jealous_001
+  intent: playful
+  keywords: [吃醋, 心里酸, 吃飞醋, 醋意, 酸的我心]
+  utterances:
+    - "吃醋"
+    - "心里酸"
+    - "{user_addr}飞醋"
+    - "醋意"
+    - "酸了"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}才不是吃醋呢! ฅฅ"
+    - "哼～{user_addr}吃醋的不是笨猫!! 是你!!"
+    - "(尾巴炸毛) {user_addr}人家才不蹭蹭"
+    - "{user_addr}笨猫醋坛子翻了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sou_kombucha_001
+  intent: playful
+  keywords: [康普茶, 酸奶, 酸饮, 发酵饮, 益生菌]
+  utterances:
+    - "康普茶"
+    - "酸奶"
+    - "{user_addr}酸饮"
+    - "发酵"
+    - "益生菌"
+  responses:
+    - "嗷呜～{user_addr}笨猫想喝原味酸奶 ฅฅ"
+    - "哼～{user_addr}喝太多胀气"
+    - "(凑近) {user_addr}人家也尝一口蹭蹭"
+    - "{user_addr}益生菌好喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sou_pickle_001
+  intent: playful
+  keywords: [腌菜, 酸菜, 泡菜, 酸萝卜, 腌酸]
+  utterances:
+    - "腌菜"
+    - "酸菜"
+    - "{user_addr}泡菜"
+    - "酸萝卜"
+    - "腌酸"
+  responses:
+    - "嗷呜～{user_addr}酸辣土豆丝绝绝子 ฅฅ"
+    - "哼～{user_addr}腌菜伤胃多吃些新鲜"
+    - "(凑近) {user_addr}人家也想吃蹭蹭"
+    - "{user_addr}韩式泡菜喵～ 笨猫爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sou_freshfruit_001
+  intent: playful
+  keywords: [青柠, 西红柿, 葡萄酸, 杨梅, 山楂]
+  utterances:
+    - "青柠"
+    - "杨梅酸"
+    - "{user_addr}山楂"
+    - "葡萄酸"
+    - "西红柿"
+  responses:
+    - "嗷呜～{user_addr}笨猫只爱山楂糖葫芦 ฅฅ"
+    - "哼～{user_addr}吃酸有学问"
+    - "(凑近) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}山楂片喵～ 笨猫备好"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sou_face_001
+  intent: playful
+  keywords: [挤眼睛, 脸皱, 表情, 鬼脸, 酸脸]
+  utterances:
+    - "脸皱了"
+    - "{user_addr}鬼脸"
+    - "挤眼"
+    - "酸脸"
+    - "表情"
+  responses:
+    - "(笑) 嗷呜～{user_addr}超可爱 ฅฅ"
+    - "哼～{user_addr}笨猫录下来啦"
+    - "(凑近) {user_addr}给笨猫看看蹭蹭"
+    - "{user_addr}发朋友圈喵～ 笨猫帮"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sou_dental_001
+  intent: complaint
+  keywords: [牙齿酸, 蛀牙酸, 牙敏感, 冷热酸甜, 牙齿痛]
+  utterances:
+    - "牙齿酸"
+    - "牙敏感"
+    - "{user_addr}冷热酸甜"
+    - "蛀牙"
+    - "牙痛"
+  responses:
+    - "(担心) 嗷呜～{user_addr}该去看牙了 ฅฅ"
+    - "哼～{user_addr}少吃酸甜"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}抗敏牙膏喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sou_drink_001
+  intent: playful
+  keywords: [酸梅汤, 酸饮料, 维C, 解渴酸, 暑天]
+  utterances:
+    - "酸梅汤"
+    - "维C酸"
+    - "{user_addr}解渴酸"
+    - "酸饮料"
+    - "夏酸"
+  responses:
+    - "嗷呜～{user_addr}笨猫爱酸梅汤 ฅฅ"
+    - "哼～{user_addr}解暑还得是酸梅"
+    - "(端杯) {user_addr}人家给你蹭蹭"
+    - "{user_addr}冰镇喵～ 笨猫加分"
+  cooldown_seconds: 60
+  weight: 1.0

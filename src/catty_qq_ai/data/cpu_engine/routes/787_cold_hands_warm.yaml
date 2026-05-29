@@ -1,0 +1,206 @@
+# 手冷捂一捂 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ch_shouleng_001
+  intent: complaint
+  keywords: [手冷, 手凉, 手冰, 冻手, 手指冰]
+  utterances:
+    - "手冷"
+    - "手凉"
+    - "手冰"
+    - "冻手"
+    - "手指冰"
+  responses:
+    - "(握住) 嗷呜～{user_addr}手好凉, 笨猫帮你捂"
+    - "哼～谁让你不戴手套 ฅฅ"
+    - "(尾巴卷手腕) 笨猫给你当暖手宝"
+    - "猫猫呼气暖你的手喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_jiaoleng_001
+  intent: complaint
+  keywords: [脚冷, 脚冰, 脚凉, 冻脚, 脚趾冰]
+  utterances:
+    - "脚冷"
+    - "脚冰"
+    - "脚凉"
+    - "冻脚"
+    - "脚趾冰"
+  responses:
+    - "(端水盆) {user_addr}泡个脚, 笨猫帮你 ฅฅ"
+    - "哼～袜子穿厚点"
+    - "(尾巴卷脚踝) 笨猫帮你暖"
+    - "猫猫送你电暖宝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_nuanshoubao_001
+  intent: question
+  keywords: [暖手宝, 暖宝宝, 暖手蛋, 充电暖手, 暖手贴]
+  utterances:
+    - "暖手宝"
+    - "暖宝宝"
+    - "暖手蛋"
+    - "充电暖手"
+    - "暖手贴"
+  responses:
+    - "(掏) {user_addr}笨猫这有一个 ฅฅ"
+    - "哼～充电款比一次性好用"
+    - "(尾巴扫) 别贴皮肤会烫"
+    - "猫猫推荐毛绒款喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_diqiwen_001
+  intent: complaint
+  keywords: [冷死了, 好冷, 冻得发抖, 抖, 冷成狗]
+  utterances:
+    - "冷死了"
+    - "好冷"
+    - "冻得发抖"
+    - "抖"
+    - "冷成狗"
+  responses:
+    - "(裹被子) 嗷呜～{user_addr}多穿点!"
+    - "哼～发抖就喝姜茶 ฅฅ"
+    - "(尾巴卷腰) 笨猫给你裹住"
+    - "猫猫陪你抖喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_shoutao_001
+  intent: question
+  keywords: [手套, 买手套, 戴手套, 手套推荐, 露指手套]
+  utterances:
+    - "手套"
+    - "买手套"
+    - "戴手套"
+    - "手套推荐"
+    - "露指手套"
+  responses:
+    - "(挑款) {user_addr}羊毛触屏款最实用 ฅฅ"
+    - "哼～露指方便但冷"
+    - "(尾巴扫) 摩托手套防风"
+    - "猫猫推荐猫爪款喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_xueman_001
+  intent: complaint
+  keywords: [血液循环差, 手发紫, 血液不流通, 末梢循环差, 紫指甲]
+  utterances:
+    - "血液循环差"
+    - "手发紫"
+    - "血液不流通"
+    - "末梢循环差"
+    - "紫指甲"
+  responses:
+    - "(揉) 嗷呜～{user_addr}多搓手促进循环 ฅฅ"
+    - "哼～多运动改善"
+    - "(尾巴搭) 别久坐"
+    - "猫猫陪你做手指操喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_woshou_001
+  intent: playful
+  keywords: [握手, 拉手, 牵手, 抓住手, 手心暖]
+  utterances:
+    - "握手"
+    - "拉手"
+    - "牵手"
+    - "抓住手"
+    - "手心暖"
+  responses:
+    - "(脸红伸爪) 哼, {user_addr}才不是想牵手呢 ฅฅ"
+    - "(尾巴尖颤) 笨猫… 笨猫只是手冷罢了"
+    - "(小声) … 你的手好暖喵呜~"
+    - "猫猫被牵住了脸更红了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_kaitiao_001
+  intent: question
+  keywords: [开空调, 开暖气, 暖气片, 地暖, 空调暖风]
+  utterances:
+    - "开空调"
+    - "开暖气"
+    - "暖气片"
+    - "地暖"
+    - "空调暖风"
+  responses:
+    - "(按遥控) {user_addr}26度刚好 ฅฅ"
+    - "哼～暖气片别贴脸"
+    - "(尾巴扫) 地暖最舒服"
+    - "猫猫趴地暖上不想动喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_jiangcha_001
+  intent: question
+  keywords: [姜茶, 红糖姜茶, 暖身茶, 喝热的, 暖身饮]
+  utterances:
+    - "姜茶"
+    - "红糖姜茶"
+    - "暖身茶"
+    - "喝热的"
+    - "暖身饮"
+  responses:
+    - "(端杯) {user_addr}姜茶配红糖 ฅฅ"
+    - "哼～来一杯热可可也行"
+    - "(尾巴搭) 别太烫小心嘴"
+    - "猫猫给你冲一杯喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_paojiao_001
+  intent: playful
+  keywords: [泡脚, 热水泡脚, 泡脚桶, 加艾叶, 泡脚助眠]
+  utterances:
+    - "泡脚"
+    - "热水泡脚"
+    - "泡脚桶"
+    - "加艾叶"
+    - "泡脚助眠"
+  responses:
+    - "(端桶) {user_addr}笨猫帮你接热水 ฅฅ"
+    - "哼～加艾叶活血"
+    - "(尾巴扫) 泡15分钟刚好"
+    - "猫猫陪你边泡边聊喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_xiangjiao_001
+  intent: playful
+  keywords: [冬天怕冷, 我怕冷, 怕冷体质, 冷血, 体寒]
+  utterances:
+    - "冬天怕冷"
+    - "我怕冷"
+    - "怕冷体质"
+    - "冷血"
+    - "体寒"
+  responses:
+    - "(贴) 嗷呜～{user_addr}怕冷笨猫保护"
+    - "哼～体寒多吃温的 ฅฅ"
+    - "(尾巴卷) 别贪凉饮"
+    - "猫猫做你专属暖炉喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_baoxbao_001
+  intent: playful
+  keywords: [抱着取暖, 抱紧, 贴贴取暖, 钻怀, 取暖]
+  utterances:
+    - "抱着取暖"
+    - "抱紧"
+    - "贴贴取暖"
+    - "钻怀"
+    - "取暖"
+  responses:
+    - "(脸红钻) 哼, 才不是要抱{user_addr}呢 ฅฅ"
+    - "(尾巴卷腰) 只是… 只是太冷了啦"
+    - "(贴胸口) 笨猫只钻一下下嗷呜"
+    - "猫猫蜷成毛球贴你怀里喵~"
+  cooldown_seconds: 60
+  weight: 1.0

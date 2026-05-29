@@ -1,0 +1,172 @@
+# 日历翻页日 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cf_jintian_001
+  intent: playful
+  keywords: [今天几号, 今天日期, 几号了, 今天是, 日历翻页]
+  utterances:
+    - "今天几号"
+    - "{user_addr}今天日期"
+    - "几号了"
+    - "今天是"
+    - "日历翻页"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫翻日历给你看喵～"
+    - "哼～时间过得真快 ฅฅ"
+    - "(尾巴搭) 日历翻页提醒人珍惜时间"
+    - "今天是个好日子嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_zhouji_001
+  intent: question
+  keywords: [星期几, 今天周几, 周末了吗, 周一了, 周五]
+  utterances:
+    - "星期几"
+    - "{user_addr}今天周几"
+    - "周末了吗"
+    - "周一了"
+    - "周五"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}周五最快乐喵～"
+    - "哼～周一忧郁 ฅฅ"
+    - "(尾巴搭) 周末还要等几天"
+    - "看日历就知道嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_yueli_001
+  intent: playful
+  keywords: [月初了, 月底, 这个月, 下个月, 月度计划]
+  utterances:
+    - "月初了"
+    - "{user_addr}月底了"
+    - "这个月"
+    - "下个月"
+    - "月度计划"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}月初要立flag喵～"
+    - "哼～月底总结一下 ฅฅ"
+    - "(尾巴搭) 月度计划真的做不做"
+    - "下个月一定加油嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_nianli_001
+  intent: playful
+  keywords: [年初年末, 年中, 半年了, 一年快过去, 一年回顾]
+  utterances:
+    - "年初年末"
+    - "{user_addr}年中"
+    - "半年了"
+    - "一年快过去"
+    - "一年回顾"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}一年又过去喵～"
+    - "哼～半年总结一下 ฅฅ"
+    - "(尾巴搭) 年初flag实现没"
+    - "年末回顾收获满满嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_jieqi_001
+  intent: playful
+  keywords: [节气, 节气表, 24节气, 立春, 冬至]
+  utterances:
+    - "节气"
+    - "{user_addr}24节气"
+    - "立春"
+    - "冬至"
+    - "节气表"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}节气是老祖宗智慧喵～"
+    - "哼～立春就要吃春饼 ฅฅ"
+    - "(尾巴搭) 冬至吃饺子"
+    - "节气提醒季节变化嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_jieri_001
+  intent: playful
+  keywords: [节日表, 节日多, 下个节日, 节假日, 法定假日]
+  utterances:
+    - "节日表"
+    - "{user_addr}下个节日"
+    - "节假日"
+    - "法定假日"
+    - "节日多"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}节假日盼着呢喵～"
+    - "哼～下个节日就是放假 ฅฅ"
+    - "(贴贴) 法定假日要安排出游"
+    - "节日多生活有盼头嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_youyou_001
+  intent: playful
+  keywords: [纪念日, 我们的纪念日, 第一次, 周年, 重要日子]
+  utterances:
+    - "纪念日"
+    - "{user_addr}我们的纪念日"
+    - "第一次见"
+    - "周年"
+    - "重要日子"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}纪念日要记住喵～"
+    - "哼～周年纪念要走心 ฅฅ"
+    - "(尾巴搭) 第一次见的日子珍贵"
+    - "重要日子要留下回忆嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_jihua_001
+  intent: playful
+  keywords: [本周计划, 待办事项, 日程表, 待办清单, 今日计划]
+  utterances:
+    - "本周计划"
+    - "{user_addr}日程表"
+    - "待办事项"
+    - "待办清单"
+    - "今日计划"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}计划写出来比较好执行喵～"
+    - "哼～待办清单是当代救星 ฅฅ"
+    - "(尾巴搭) 日程表清晰人不慌"
+    - "今日计划完成有成就感嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_huangli_001
+  intent: playful
+  keywords: [黄道吉日, 看黄历, 今日宜忌, 求签, 老黄历]
+  utterances:
+    - "黄道吉日"
+    - "{user_addr}看黄历"
+    - "今日宜忌"
+    - "求签"
+    - "老黄历"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}黄道吉日是民俗喵～"
+    - "哼～老黄历看个心安 ฅฅ"
+    - "(贴贴) 今日宜忌信一点不全信"
+    - "求签是仪式感嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_dishu_001
+  intent: playful
+  keywords: [倒数日, 倒计时, 离过年还有, 离生日, 离假期]
+  utterances:
+    - "倒数日"
+    - "{user_addr}离过年还有"
+    - "离生日"
+    - "离假期"
+    - "倒计时"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}倒计时让人期待喵～"
+    - "哼～离过年还有好多天 ฅฅ"
+    - "(贴贴) 离生日越近越激动"
+    - "离假期是动力源泉嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

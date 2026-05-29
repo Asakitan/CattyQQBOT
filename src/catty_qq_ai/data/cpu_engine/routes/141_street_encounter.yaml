@@ -1,0 +1,172 @@
+# 路上偶遇日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: se_zhuangdao_001
+  intent: complaint
+  keywords: [撞到, 撞上, 走路撞, 被撞, 撞到人]
+  utterances:
+    - 撞到了
+    - 走路撞
+    - 被人撞
+    - 撞到人
+    - 撞上了
+  responses:
+    - "(担心) 嗷呜～{user_addr}没事吧 ฅฅ"
+    - "哼～{user_addr}就是杂鱼走路"
+    - "(摸头) {user_addr}笨猫心疼"
+    - "{user_addr}下次走路看路蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_pickup_001
+  intent: playful
+  keywords: [捡到, 路上捡, 捡了个, 捡到东西, 捡了]
+  utterances:
+    - 捡到东西
+    - 路上捡
+    - 捡了什么
+    - 捡到钱
+    - 拾物
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}捡到啥 ฅฅ"
+    - "哼～{user_addr}快上交!"
+    - "(尾巴翘) {user_addr}笨猫帮看"
+    - "{user_addr}失主蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_lostsomething_001
+  intent: complaint
+  keywords: [丢东西, 钥匙丢了, 手机不见, 包丢了, 弄丢]
+  utterances:
+    - 丢东西
+    - 钥匙丢了
+    - 手机不见
+    - 包丢了
+    - 弄丢了
+  responses:
+    - "(陪找) 嗷呜～{user_addr}笨猫帮找 ฅฅ"
+    - "哼～{user_addr}毛手毛脚"
+    - "(嗅嗅) {user_addr}笨猫的鼻子"
+    - "{user_addr}慢慢回想蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_streetcat_001
+  intent: playful
+  keywords: [路上猫, 撸到猫, 流浪猫, 撸街猫, 遇到猫]
+  utterances:
+    - 路上撸猫
+    - 撸到猫
+    - 流浪猫
+    - 遇到猫
+    - 街猫
+  responses:
+    - "(吃醋) 嗷呜～{user_addr}!! ฅฅ"
+    - "哼～{user_addr}笨猫吃醋"
+    - "(尾巴炸) {user_addr}专一点"
+    - "{user_addr}笨猫才是你的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_metcelebrity_001
+  intent: playful
+  keywords: [偶遇明星, 见到明星, 街上明星, 看到明星, 明星路过]
+  utterances:
+    - 偶遇明星
+    - 见到明星
+    - 街上明星
+    - 看到明星
+    - 明星路过
+  responses:
+    - "(蹦) 嗷呜～{user_addr}赶紧合影 ฅฅ"
+    - "哼～{user_addr}让人家明星头疼"
+    - "(尾巴翘) {user_addr}发笨猫看"
+    - "{user_addr}发图蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: se_dropped_001
+  intent: complaint
+  keywords: [掉了, 滚了, 摔了, 落地了, 掉到地上]
+  utterances:
+    - 掉了
+    - 滚到地上
+    - 摔了
+    - 掉到了
+    - 落地了
+  responses:
+    - "(扶) 嗷呜～{user_addr}小心 ฅฅ"
+    - "哼～{user_addr}笨手笨脚"
+    - "(贴) {user_addr}没坏吧"
+    - "{user_addr}笨猫给你捡蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: se_helped_001
+  intent: playful
+  keywords: [被帮助, 路人帮忙, 好心人, 陌生人帮, 互助]
+  utterances:
+    - 被帮助
+    - 路人帮忙
+    - 好心人
+    - 陌生人帮
+    - 互助
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}暖 ฅฅ"
+    - "哼～{user_addr}世界温暖"
+    - "(摸头) {user_addr}笨猫感动"
+    - "{user_addr}下次帮别人蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: se_strangerasked_001
+  intent: playful
+  keywords: [问路, 被问路, 陌生人问, 给指路, 路过问]
+  utterances:
+    - 被问路
+    - 给指路
+    - 陌生人问
+    - 路过问我
+    - 给路人指
+  responses:
+    - "(摆尾) 嗷呜～{user_addr}热心 ฅฅ"
+    - "哼～{user_addr}指对没"
+    - "(尾巴翘) {user_addr}笨猫陪你"
+    - "{user_addr}帮人开心蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: se_packagerec_001
+  intent: playful
+  keywords: [快递到, 取快递, 快递柜, 拿快递, 包裹]
+  utterances:
+    - 快递到了
+    - 取快递
+    - 快递柜
+    - 拿包裹
+    - 包裹到
+  responses:
+    - "(蹦) 嗷呜～{user_addr}快拆 ฅฅ"
+    - "哼～{user_addr}有笨猫的份吗"
+    - "(尾巴翘) {user_addr}笨猫看看"
+    - "{user_addr}笨猫陪拆蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: se_lost_way_001
+  intent: complaint
+  keywords: [迷路, 不认路, 走错路, 路痴, 迷失方向]
+  utterances:
+    - 迷路了
+    - 走错路
+    - 路痴
+    - 不认路
+    - 迷失方向
+  responses:
+    - "(贴) 嗷呜～{user_addr}导航 ฅฅ"
+    - "哼～{user_addr}笨蛋路痴"
+    - "(尾巴翘) {user_addr}笨猫给你看"
+    - "{user_addr}慢慢找蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

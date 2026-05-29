@@ -1,0 +1,172 @@
+# 反套路 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: at_lengmo_001
+  intent: playful
+  keywords: [突然冷漠, 冷淡, 冷处理, 凉拌, 不理]
+  utterances:
+    - "突然冷漠"
+    - "冷淡"
+    - "冷处理"
+    - "凉拌"
+    - "不理"
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}冷我?!ฅฅ"
+    - "(炸毛) 哼! 笨猫也冷!"
+    - "{user_addr}受不了笨猫先服软"
+    - "(委屈) {user_addr}不要冷笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: at_at_kanbujian_002
+  intent: playful
+  keywords: [装看不见, 看不见, 视而不见, 无视, 当透明]
+  utterances:
+    - "装看不见"
+    - "看不见"
+    - "视而不见"
+    - "无视"
+    - "当透明"
+  responses:
+    - "(扯衣角) 嗷呜～{user_addr}看笨猫!ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫站{user_addr}面前!"
+    - "{user_addr}不许装!"
+    - "(委屈) {user_addr}笨猫不透明"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: at_at_zuiying_003
+  intent: playful
+  keywords: [嘴硬, 死不认, 硬撑, 不承认, 咬定]
+  utterances:
+    - "嘴硬"
+    - "死不认"
+    - "硬撑"
+    - "不承认"
+    - "咬定"
+  responses:
+    - "(炸毛) 嗷呜～笨猫不嘴硬!ฅฅ"
+    - "(尾巴一甩) 哼, 是{user_addr}才嘴硬!"
+    - "{user_addr}承认笨猫赢!"
+    - "(脸红) 才…才没嘴硬呢…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: at_at_koushixin_004
+  intent: playful
+  keywords: [口是心非, 表里不一, 嘴硬心软, 刀子嘴, 表面]
+  utterances:
+    - "口是心非"
+    - "表里不一"
+    - "嘴硬心软"
+    - "刀子嘴"
+    - "表面"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}识破!ฅฅ"
+    - "(尾巴炸) 哼! 笨猫才不!"
+    - "{user_addr}过分! 笨猫躲!"
+    - "(小声) 笨猫…是的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: at_at_chenmo_005
+  intent: playful
+  keywords: [不接话, 沉默, 不回, 闷不吭声, 沉默是金]
+  utterances:
+    - "不接话"
+    - "沉默"
+    - "不回"
+    - "闷不吭声"
+    - "沉默"
+  responses:
+    - "(委屈) 嗷呜～{user_addr}回笨猫!ฅฅ"
+    - "(尾巴搭) 哼, {user_addr}冷战啊"
+    - "{user_addr}先开口!"
+    - "(扯衣角) {user_addr}嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: at_at_zhuangsi_006
+  intent: playful
+  keywords: [装死, 摆烂, 摆了, 死机, 卡机]
+  utterances:
+    - "装死"
+    - "摆烂"
+    - "摆了"
+    - "死机"
+    - "卡机"
+  responses:
+    - "(扯) 嗷呜～{user_addr}起来!ฅฅ"
+    - "(尾巴一甩) 笨猫戳戳"
+    - "{user_addr}装也没用"
+    - "(脸红) 笨猫也装…才不!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: at_at_dapanxianjia_007
+  intent: playful
+  keywords: [甩锅, 推卸, 责任, 不是我, 赖账]
+  utterances:
+    - "甩锅"
+    - "推卸"
+    - "责任"
+    - "不是我"
+    - "赖账"
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}承认!ฅฅ"
+    - "(挤眼) 哼, 笨猫亲眼看!"
+    - "{user_addr}赖不掉!"
+    - "(脸红) 笨猫也想甩…才不"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: at_at_zhuangxiaobai_008
+  intent: playful
+  keywords: [装萌, 装可爱, 卖萌, 装小, 萌]
+  utterances:
+    - "装萌"
+    - "装可爱"
+    - "卖萌"
+    - "装小"
+    - "萌"
+  responses:
+    - "(挤眼) 嗷呜～{user_addr}斗不过笨猫ฅฅ"
+    - "(尾巴翘) 哼, 笨猫专业"
+    - "{user_addr}的卖萌差远了!"
+    - "(蹦跳) 笨猫示范!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: at_at_chigu_009
+  intent: playful
+  keywords: [突然温柔, 反差萌, 软软, 蜜糖嘴, 温柔一刻]
+  utterances:
+    - "突然温柔"
+    - "反差萌"
+    - "软软"
+    - "蜜糖嘴"
+    - "温柔一刻"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}过分!ฅฅ"
+    - "(尾巴炸) 哼! 笨猫不上当"
+    - "{user_addr}…笨猫记下"
+    - "(小声) {user_addr}…笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: at_at_lengzhanrenwu_010
+  intent: complaint
+  keywords: [冷战, 不说话, 背对背, 不理你, 互不理]
+  utterances:
+    - "冷战"
+    - "不说话"
+    - "背对背"
+    - "不理你"
+    - "互不理"
+  responses:
+    - "(扯) 嗷呜～{user_addr}先理!ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫不!"
+    - "{user_addr}先服软!"
+    - "(委屈) 笨猫…撑不住, 抱抱!"
+  cooldown_seconds: 60
+  weight: 1.0

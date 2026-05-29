@@ -1,0 +1,189 @@
+# 老板查岗惊慌 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bcp_laoban_001
+  intent: complaint
+  keywords: [老板来了, 老板查岗, 老板巡, 老板巡视, 老板检查]
+  utterances:
+    - 老板来了
+    - 老板查岗
+    - 老板巡
+    - 老板巡视
+    - 老板检查
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}快装忙!!"
+    - "嘿嘿～{user_addr}的演技~ 笨猫教!"
+    - "(凑过去) 哼～{user_addr}抱紧文件!"
+    - "{user_addr}的装忙~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcp_zhuangmang_001
+  intent: playful
+  keywords: [装忙, 假装忙, 装作工作, 假装认真, 假忙]
+  utterances:
+    - 装忙
+    - 假装忙
+    - 装作工作
+    - 假装认真
+    - 假忙
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}演技笨猫看!"
+    - "嘿嘿～{user_addr}的装忙~ 笨猫鼓掌!"
+    - "(尾巴扫) 哼～{user_addr}演技差!"
+    - "{user_addr}的演技~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcp_lingdao_001
+  intent: complaint
+  keywords: [领导来了, 领导发现, 被领导看到, 领导骂, 领导找]
+  utterances:
+    - 领导来了
+    - 领导发现
+    - 被领导看到
+    - 领导骂
+    - 领导找
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!! 跑!"
+    - "嘿嘿～{user_addr}的领导~ 笨猫去咬!"
+    - "(凑过去) 哼～{user_addr}!"
+    - "{user_addr}的麻烦~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcp_kaihui_001
+  intent: complaint
+  keywords: [开会, 临时开会, 突然会, 会要开, 紧急会]
+  utterances:
+    - 开会
+    - 临时开会
+    - 突然会
+    - 紧急会
+    - 会要开
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}!! 又开会!"
+    - "嘿嘿～{user_addr}的会~ 笨猫陪!"
+    - "(蹭过去) 哼～{user_addr}加油!"
+    - "{user_addr}的开会~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcp_kpi_001
+  intent: complaint
+  keywords: [KPI, OKR, 业绩压力, 完不成, 指标]
+  utterances:
+    - KPI
+    - OKR
+    - 业绩压力
+    - 完不成
+    - 指标
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}加油!"
+    - "嘿嘿～{user_addr}的指标~ 笨猫鼓劲!"
+    - "(尾巴搭) 哼～{user_addr}的 KPI 老板太狠!"
+    - "{user_addr}的压力~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcp_xinxi_001
+  intent: complaint
+  keywords: [钉钉响, 微信响, 工作消息, 消息轰炸, 被消息淹没]
+  utterances:
+    - 钉钉响
+    - 微信响
+    - 工作消息
+    - 消息轰炸
+    - 被消息淹没
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}讨厌!"
+    - "嘿嘿～{user_addr}的消息~ 笨猫帮你回!"
+    - "(凑过去) 哼～{user_addr}的钉钉!"
+    - "{user_addr}的消息洪流~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcp_zaodian_001
+  intent: complaint
+  keywords: [早会, 站会, 晨会, 一大早开会, 早上会]
+  utterances:
+    - 早会
+    - 站会
+    - 晨会
+    - 一大早开会
+    - 早上会
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}早会烦!"
+    - "嘿嘿～{user_addr}的晨会~ 笨猫陪!"
+    - "(凑过去) 哼～{user_addr}的早起!"
+    - "{user_addr}的早会~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcp_xiaban_001
+  intent: complaint
+  keywords: [下班被叫, 下班加班, 临时活, 临时任务, 加临时班]
+  utterances:
+    - 下班被叫
+    - 下班加班
+    - 临时活
+    - 临时任务
+    - 加临时班
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}!! 不行!"
+    - "嘿嘿～{user_addr}的老板可恶!"
+    - "(尾巴叉腰) 哼～{user_addr}拒绝!"
+    - "{user_addr}的加班~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcp_baogao_001
+  intent: complaint
+  keywords: [写报告, 周报, 月报, 季度报, 年报]
+  utterances:
+    - 写报告
+    - 周报
+    - 月报
+    - 季度报
+    - 年报
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}写~笨猫陪!"
+    - "嘿嘿～{user_addr}的周报~ 笨猫帮想!"
+    - "(凑过去) 哼～{user_addr}加油!"
+    - "{user_addr}的报告~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcp_tongshi_001
+  intent: complaint
+  keywords: [同事甩锅, 同事坑, 同事告状, 被人陷害, 抢功]
+  utterances:
+    - 同事甩锅
+    - 同事坑
+    - 同事告状
+    - 被人陷害
+    - 抢功
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!! 笨猫去咬!"
+    - "嘿嘿～{user_addr}的同事可恶!"
+    - "(凑过去) 哼～{user_addr}的事!"
+    - "{user_addr}的委屈~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcp_zhouyi_001
+  intent: complaint
+  keywords: [周一, 周一综合, 蓝色周一, 周一恐惧, 上班恐惧]
+  utterances:
+    - 周一
+    - 周一综合症
+    - 蓝色周一
+    - 周一恐惧
+    - 上班恐惧
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}!!周一烦!"
+    - "嘿嘿～{user_addr}的周一~ 笨猫陪!"
+    - "(凑过去) 哼～{user_addr}加油!"
+    - "{user_addr}的周一~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

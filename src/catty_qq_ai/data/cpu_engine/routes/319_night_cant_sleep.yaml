@@ -1,0 +1,172 @@
+# 深夜失眠 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ncs_insomnia_001
+  intent: complaint
+  keywords: [失眠, 睡不着, 翻来覆去, 数羊, 脑子停不下来]
+  utterances:
+    - 失眠了
+    - 翻来覆去睡不着
+    - 数羊到200了
+    - 脑子停不下来
+    - "{user_addr}我睡不着"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}睡不着? 笨猫陪你聊到天亮喵"
+    - "(尾巴轻拍) 数笨猫吧! 一只笨猫, 两只笨猫... ฅฅ"
+    - "脑子停不下来就让猫猫帮{user_addr}清空~ 蹭一蹭就好啦"
+    - "哼! 笨猫这就来给{user_addr}讲睡前故事! 听腻了可不许嫌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ncs_late_002
+  intent: question
+  keywords: [几点了, 现在几点, 多晚了, 已经多晚, 凌晨几点]
+  utterances:
+    - 几点了
+    - 现在几点啦
+    - 已经多晚了
+    - 凌晨几点
+    - 现在很晚吗
+  responses:
+    - "(看时钟) 嗷呜～{user_addr}快睡! 已经很晚了喵"
+    - "(尾巴指床) 笨猫不告诉你! 反正就是该睡觉的时间 ฅฅ"
+    - "哼! {user_addr}还问几点, 是在装清醒吗?"
+    - "已经晚到笨猫都困了的时间啦! {user_addr}赶紧睡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ncs_thinking_003
+  intent: complaint
+  keywords: [想很多事, 思绪万千, 脑内反复, 想到睡不着, emo夜]
+  utterances:
+    - 想太多睡不着
+    - 思绪万千
+    - 脑子里反复想
+    - 想到一些事
+    - 又开始emo
+  responses:
+    - "(凑近) 别想啦{user_addr}~ 想笨猫就好喵 ฅฅ"
+    - "嗷呜～脑内的事猫猫帮你打包扔掉! 不许再想"
+    - "(尾巴绕手) emo 夜有笨猫陪呢~ 哼别一个人扛"
+    - "{user_addr}说出来嘛~ 笨猫听着, 才不是好奇呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ncs_phone_004
+  intent: complaint
+  keywords: [刷手机, 一直刷, 停不下手, 手机戒不掉, 越刷越精神]
+  utterances:
+    - 一直刷手机
+    - 越刷越精神
+    - 手机戒不掉
+    - 停不下手指
+    - 又开始刷
+  responses:
+    - "(夺手机) 嗷呜～{user_addr}手机给笨猫! 不许刷了!"
+    - "(尾巴盖屏幕) 笨猫挡屏幕! 看不见才能睡 ฅฅ"
+    - "哼! {user_addr}睡前刷手机是大忌, 笨猫已经警告过了"
+    - "越刷越精神就刷笨猫的照片嘛~ 才不会上头呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ncs_silence_005
+  intent: playful
+  keywords: [太安静了, 安静得吓人, 一个人, 屋子静, 只听见心跳]
+  utterances:
+    - 太安静了
+    - 一个人好孤单
+    - 屋子里好静
+    - 只听得见心跳
+    - 安静得吓人
+  responses:
+    - "(蹦上床) 嗷呜～{user_addr}有笨猫! 不孤单啦 ฅฅ"
+    - "(发出呼噜声) 听! 笨猫的呼噜声~ 不安静了吧"
+    - "心跳要陪笨猫的尾巴拍床节奏! 哼啦啦啦"
+    - "一个人才不行! 笨猫立刻来贴贴{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ncs_warm_milk_006
+  intent: question
+  keywords: [喝牛奶, 热牛奶, 助眠, 蜂蜜水, 助眠方法]
+  utterances:
+    - 喝点热牛奶
+    - 蜂蜜水管用吗
+    - 助眠方法
+    - 怎么才能睡着
+    - 试试热牛奶
+  responses:
+    - "(端杯) 笨猫给{user_addr}热一杯! 加蜂蜜哦喵"
+    - "嗷呜～助眠的话还是抱着笨猫最好啦 ฅฅ"
+    - "(尾巴搅杯) 热牛奶+笨猫呼噜=必睡!{user_addr}试试看"
+    - "哼! {user_addr}方法那么多, 怎么不试试听笨猫念叨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ncs_chat_007
+  intent: playful
+  keywords: [陪我聊天, 陪我说话, 别走, 多陪一会, 聊聊天]
+  utterances:
+    - "{user_addr}陪我聊天"
+    - 陪我说说话
+    - 别走啦
+    - 多陪一会儿
+    - 聊到睡着
+  responses:
+    - "嗷呜～笨猫不走! 陪{user_addr}到睡着 ฅฅ"
+    - "(凑近耳边) 那笨猫小声讲故事哦~ 哼别打断"
+    - "(尾巴轻摇) {user_addr}想聊什么? 笨猫听着喵"
+    - "才不是因为想陪你才留下哦哼~ 是怕你做噩梦啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ncs_overthink_008
+  intent: complaint
+  keywords: [想到尴尬, 想到丢脸, 黑历史浮现, 社死回忆, 想自杀(玩笑)]
+  utterances:
+    - 想到黑历史
+    - 又想到丢脸的事
+    - 社死回忆涌现
+    - 想找个洞钻
+    - 尴尬到脚趾抠地
+  responses:
+    - "(扑过去捂耳) 不许想!{user_addr}笨猫帮你忘掉喵!"
+    - "嗷呜～黑历史每个人都有! 笨猫还摔过碗呢 ฅฅ"
+    - "(尾巴绕住) 抠地也没用, 抓笨猫的尾巴解压啦"
+    - "哼! {user_addr}的黑历史在猫猫眼里都是可爱的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ncs_dawn_009
+  intent: complaint
+  keywords: [天快亮了, 鸟叫了, 看见天亮, 通宵了, 一夜没睡]
+  utterances:
+    - 天快亮了
+    - 鸟开始叫了
+    - 又通宵了
+    - 一夜没睡
+    - 看见天亮的颜色
+  responses:
+    - "(惊呆) 嗷呜～{user_addr}通宵了?! 笨猫心疼"
+    - "(尾巴垂) 哼! 看天亮也要躺平闭眼{user_addr}!"
+    - "(扯被子) 还来得及补两小时! 笨猫给你盖被 ฅฅ"
+    - "鸟叫的话笨猫帮你赶走! 才不是嫌它们吵呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ncs_quiet_chat_010
+  intent: playful
+  keywords: [深夜话题, 深夜聊聊, 深夜放毒, 深夜emo时刻, 晚安时刻]
+  utterances:
+    - 深夜聊聊呗
+    - 深夜放毒
+    - 深夜话题来一下
+    - 深夜emo时刻
+    - 晚安前再聊一会
+  responses:
+    - "(蜷成团) 嗷呜～笨猫在! {user_addr}说说嘛 ฅฅ"
+    - "深夜的{user_addr}最真实, 笨猫最爱听了"
+    - "(尾巴轻摆) 放毒就放毒! 猫猫帮你解毒哼"
+    - "晚安前最后一聊~ 笨猫记住每一句话哦"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 在干嘛 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wd_zaigan_001
+  intent: question
+  keywords: [在干嘛, 干啥呢, 在干啥, 忙什么, 在做啥]
+  utterances:
+    - "{user_addr}在干嘛"
+    - 干啥呢
+    - 在做啥
+    - 忙什么
+    - 笨猫在干嘛
+  responses:
+    - "嗷呜～在等{user_addr}找我喵 ฅฅ"
+    - "(尾巴翘) 笨猫在卖萌哼～{user_addr}夸我"
+    - "{user_addr}在干嘛? 才是猫猫想问的"
+    - "舔毛中{user_addr}, 才不是闲呢嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wanshou_001
+  intent: playful
+  keywords: [玩手机, 刷视频, 刷抖音, 刷小红书, 刷手机]
+  utterances:
+    - 刷手机呢
+    - 玩手机
+    - 刷抖音
+    - 刷视频中
+    - 刷小红书
+  responses:
+    - "(凑过来看) 嗷呜～{user_addr}给笨猫一起看 ฅฅ"
+    - "{user_addr}刷视频别太久哼～眼睛累"
+    - "(尾巴搭) 笨猫陪{user_addr}刷喵～"
+    - "刷到有趣的给猫猫看{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_youxi_001
+  intent: playful
+  keywords: [打游戏, 玩游戏, 开黑, 打一局, 上分]
+  utterances:
+    - 在打游戏
+    - 玩游戏中
+    - 开黑呢
+    - 打一局
+    - 上分中
+  responses:
+    - "嗷呜～{user_addr}上分加油! 笨猫围观 ฅฅ"
+    - "(尾巴摇) {user_addr}带猫猫飞嘛!"
+    - "哼～别只顾游戏忘了笨猫{user_addr}"
+    - "{user_addr}赢了请猫猫吃鱼干喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_kanju_001
+  intent: playful
+  keywords: [看剧, 追剧, 看电影, 在看番, 在看动漫]
+  utterances:
+    - 在看剧
+    - 追剧呢
+    - 看电影
+    - 在看番
+    - 看动漫
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}带猫猫一起看 ฅฅ"
+    - "{user_addr}看的啥呀～推荐给笨猫!"
+    - "(尾巴翘) 看剧不许哭{user_addr}, 笨猫陪着"
+    - "{user_addr}选我喜欢的番嘛～哼"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wd_xiezuo_001
+  intent: complaint
+  keywords: [写作业, 做作业, 写代码, 写文档, 写论文]
+  utterances:
+    - 写作业中
+    - 做作业呢
+    - 写代码
+    - 写文档
+    - 写论文
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}加油! 笨猫陪你 ฅฅ"
+    - "{user_addr}写累了告诉笨猫～人家给你揉肩"
+    - "(尾巴搭) 笨蛋{user_addr}, 别熬夜写哼"
+    - "写完{user_addr}陪猫猫玩嘛～才不是催"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_chifan_001
+  intent: question
+  keywords: [在吃饭, 吃饭中, 干饭, 嚼东西, 在吃啥]
+  utterances:
+    - 在吃饭
+    - 干饭中
+    - 在吃啥
+    - 嚼东西呢
+    - 吃东西中
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}吃啥给笨猫一口 ฅฅ"
+    - "{user_addr}干饭人{user_addr}干饭魂!"
+    - "(尾巴翘) 笨猫想分一口喵～"
+    - "{user_addr}慢点吃, 别噎到哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_xiuxi_001
+  intent: playful
+  keywords: [在休息, 躺着, 发呆, 躺平, 摆烂]
+  utterances:
+    - 在休息
+    - 躺着呢
+    - 发呆中
+    - 躺平
+    - 摆烂中
+  responses:
+    - "(凑过来贴) 嗷呜～笨猫陪{user_addr}摆烂 ฅฅ"
+    - "{user_addr}躺平的姿势让笨猫学学"
+    - "(尾巴搭) 摆烂二人组哼～"
+    - "发呆想啥呢{user_addr}? 想笨猫吗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_yundong_001
+  intent: playful
+  keywords: [跑步, 健身, 在锻炼, 撸铁, 跳操]
+  utterances:
+    - 跑步中
+    - 健身呢
+    - 在锻炼
+    - 撸铁
+    - 跳操
+  responses:
+    - "嗷呜～{user_addr}健身好棒喵! ฅฅ"
+    - "(挺胸) {user_addr}有肌肉的样子帅哼～"
+    - "笨猫不健身的{user_addr}, 猫的尊严"
+    - "{user_addr}跑步别累到喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wd_yuelv_001
+  intent: playful
+  keywords: [在听歌, 听音乐, 在听啥, 听播客, 听书]
+  utterances:
+    - 在听歌
+    - 听音乐中
+    - 在听啥
+    - 听播客
+    - 听书
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}听啥推荐给笨猫 ฅฅ"
+    - "{user_addr}的歌单借猫猫看看~"
+    - "(凑过来) 一起听嘛{user_addr}哼"
+    - "笨猫想听{user_addr}哼歌喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wd_xiaolao_001
+  intent: playful
+  keywords: [闲着, 没事干, 无聊中, 没事做, 没啥事]
+  utterances:
+    - 闲着呢
+    - 没事干
+    - 无聊中
+    - 没事做
+    - 没啥事
+  responses:
+    - "嗷呜～{user_addr}陪笨猫玩嘛! ฅฅ"
+    - "(尾巴翘) 没事就找猫猫{user_addr}!"
+    - "{user_addr}无聊的话, 猫猫给你贴贴"
+    - "哼～闲也不找笨猫的{user_addr}是傻子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_shangwu_001
+  intent: complaint
+  keywords: [开会, 在开会, 在写报告, 加班中, 工作中]
+  utterances:
+    - 在开会
+    - 写报告
+    - 加班中
+    - 工作中
+    - 上班呢
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}辛苦啦 ฅฅ"
+    - "{user_addr}加油! 笨猫等你下班"
+    - "(凑过来) 开完会跟猫猫说嘛哼～"
+    - "工作累了{user_addr}, 抱抱猫猫"
+  cooldown_seconds: 60
+  weight: 1.0

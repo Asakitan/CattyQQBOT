@@ -1,0 +1,206 @@
+# 打嗝停不下 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hs_hic_001
+  intent: complaint
+  keywords: [打嗝, 嗝不停, 打嗝半天, 嗝, 打嗝烦]
+  utterances:
+    - 一直打嗝
+    - 嗝不停
+    - 打嗝半天
+    - 嗝~
+    - 打嗝烦
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨蛋"
+    - "哼～喝水试"
+    - "(尾巴搭) 笨猫吓你"
+    - "嗷呜～忍住憋气ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_002
+  intent: playful
+  keywords: [嗝吃多了, 吃太快嗝, 吃饱打嗝, 吃过头嗝, 吃饱抱怨]
+  utterances:
+    - 吃多了嗝
+    - 吃太快嗝
+    - 吃饱打嗝
+    - 吃过头嗝
+    - 抱怨吃多
+  responses:
+    - "(笑) 嗷呜～{user_addr}吃货"
+    - "哼～慢慢吃"
+    - "(尾巴搭) 笨猫帮拍"
+    - "嗷呜～别贪吃啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_003
+  intent: question
+  keywords: [止嗝方法, 怎么止嗝, 喝水法, 憋气法, 民间偏方]
+  utterances:
+    - 怎么止嗝
+    - 止嗝方法
+    - 喝水法
+    - 憋气法
+    - 民间偏方
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}试试"
+    - "哼～大口水憋"
+    - "(尾巴搭) 笨猫吓一下"
+    - "嗷呜～多试几种ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_004
+  intent: complaint
+  keywords: [被吓后嗝停, 吓出来, 一吓就停, 吓人疗法, 突然惊吓]
+  utterances:
+    - 吓一下停嗝
+    - 突然惊吓
+    - 吓人疗法
+    - 一吓就停
+    - 被吓嗝停
+  responses:
+    - "(吓) 嗷呜～{user_addr}!"
+    - "哼～停了吗"
+    - "(尾巴搭) 笨猫一声吓"
+    - "嗷呜～管用就好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_005
+  intent: playful
+  keywords: [打嗝声音可爱, 萌嗝, 小嗝, 嗝呵, 嗝声音独特]
+  utterances:
+    - 打嗝声萌
+    - 萌嗝
+    - 小嗝可爱
+    - 嗝呵
+    - 嗝声独特
+  responses:
+    - "(笑) 嗷呜～{user_addr}萌"
+    - "哼～笨猫的也萌"
+    - "(尾巴搭) 嗝声纪念"
+    - "嗷呜～萌死啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_006
+  intent: complaint
+  keywords: [嗝一小时, 嗝停不下, 长时间嗝, 多小时嗝, 嗝一天]
+  utterances:
+    - 嗝一小时
+    - 嗝停不下
+    - 长时间嗝
+    - 多小时嗝
+    - 嗝一天
+  responses:
+    - "(担心) 嗷呜～{user_addr}医生看"
+    - "哼～太久不正常"
+    - "(尾巴搭) 检查一下"
+    - "嗷呜～严重就诊ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_007
+  intent: playful
+  keywords: [打嗝声音很大, 公共嗝, 嗝吓到人, 大声打嗝, 嗝惊扰]
+  utterances:
+    - 公共嗝
+    - 嗝吓到人
+    - 大声打嗝
+    - 嗝惊扰
+    - 大嗝
+  responses:
+    - "(笑) 嗷呜～{user_addr}社死"
+    - "哼～控制下"
+    - "(尾巴搭) 道歉一下"
+    - "嗷呜～自然啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_008
+  intent: complaint
+  keywords: [嗝同时打喷嚏, 嗝同时咳嗽, 嗝多症状, 嗝难受, 嗝喘]
+  utterances:
+    - 嗝同时打喷嚏
+    - 嗝咳嗽
+    - 嗝难受
+    - 嗝喘
+    - 嗝多症状
+  responses:
+    - "(担心) 嗷呜～{user_addr}看医生"
+    - "哼～别拖"
+    - "(尾巴搭) 笨猫陪{user_addr}"
+    - "嗷呜～病了就治ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_009
+  intent: playful
+  keywords: [打嗝原理, 横膈膜, 嗝是为啥, 生理嗝, 嗝原因]
+  utterances:
+    - 打嗝原理
+    - 横膈膜抽搐
+    - 嗝为啥
+    - 嗝原因
+    - 生理嗝
+  responses:
+    - "(歪头) 嗷呜～{user_addr}横膈膜痉挛"
+    - "哼～科学有解"
+    - "(尾巴搭) 笨猫学了"
+    - "嗷呜～有趣ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_010
+  intent: complaint
+  keywords: [嗝口臭, 嗝胃酸, 嗝难闻, 嗝带气, 嗝胃部]
+  utterances:
+    - 嗝口臭
+    - 嗝胃酸
+    - 嗝难闻
+    - 嗝带气
+    - 嗝胃部
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}注意肠胃"
+    - "哼～吃清淡"
+    - "(尾巴搭) 看胃病"
+    - "嗷呜～注意身体ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_011
+  intent: playful
+  keywords: [冷饮嗝, 喝可乐嗝, 碳酸饮料嗝, 饮料嗝, 冷饮触发]
+  utterances:
+    - 冷饮嗝
+    - 喝可乐嗝
+    - 碳酸饮料嗝
+    - 饮料嗝
+    - 冷饮触发
+  responses:
+    - "(笑) 嗷呜～{user_addr}慢喝"
+    - "哼～气泡多"
+    - "(尾巴搭) 别一口喝完"
+    - "嗷呜～慢点喝ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_hic_012
+  intent: complaint
+  keywords: [嗝晕过去, 嗝头晕, 嗝累, 嗝崩溃, 嗝想哭]
+  utterances:
+    - 嗝头晕
+    - 嗝累
+    - 嗝崩溃
+    - 嗝想哭
+    - 嗝晕过去
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪着"
+    - "哼～休息一下"
+    - "(尾巴搭) 喝温水"
+    - "嗷呜～慢慢缓ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

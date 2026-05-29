@@ -1,0 +1,189 @@
+# 奶茶上瘾 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mta_addict_001
+  intent: playful
+  keywords: [奶茶, 奶茶续命, 奶茶瘾, 一天一杯, 奶茶日]
+  utterances:
+    - "奶茶续命"
+    - "一天一杯"
+    - "{user_addr}奶茶瘾"
+    - "奶茶日"
+    - "想奶茶"
+  responses:
+    - "嗷呜～{user_addr}笨猫今天也要 ฅฅ"
+    - "哼～{user_addr}少喝点!"
+    - "(凑近) {user_addr}陪笨猫一起蹭蹭"
+    - "{user_addr}三分糖喵～ 笨猫选"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mta_brand_001
+  intent: playful
+  keywords: [喜茶, 奈雪, 茶颜悦色, 一点点, 蜜雪冰城]
+  utterances:
+    - "喜茶"
+    - "奈雪"
+    - "{user_addr}茶颜悦色"
+    - "一点点"
+    - "蜜雪"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐茶颜! ฅฅ"
+    - "哼～{user_addr}蜜雪冰城真划算"
+    - "(凑近) {user_addr}陪你排队蹭蹭"
+    - "{user_addr}多肉葡萄喵～ 笨猫爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mta_topping_001
+  intent: playful
+  keywords: [珍珠, 椰果, 芋圆, 仙草, 奶盖]
+  utterances:
+    - "珍珠"
+    - "{user_addr}芋圆"
+    - "椰果"
+    - "仙草"
+    - "奶盖"
+  responses:
+    - "嗷呜～{user_addr}笨猫要芋圆+珍珠 ฅฅ"
+    - "哼～{user_addr}全加? 真豪!"
+    - "(凑近) {user_addr}给笨猫一颗蹭蹭"
+    - "{user_addr}芝士奶盖喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mta_sugar_001
+  intent: playful
+  keywords: [全糖, 半糖, 三分糖, 七分糖, 无糖]
+  utterances:
+    - "全糖"
+    - "半糖"
+    - "{user_addr}三分糖"
+    - "七分糖"
+    - "无糖"
+  responses:
+    - "嗷呜～{user_addr}笨猫三分! 不甜不胖 ฅฅ"
+    - "哼～{user_addr}全糖太罪恶"
+    - "(凑近) {user_addr}人家给你建议蹭蹭"
+    - "{user_addr}七分恰好喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mta_ice_001
+  intent: playful
+  keywords: [去冰, 少冰, 正常冰, 多冰, 热饮]
+  utterances:
+    - "去冰"
+    - "少冰"
+    - "{user_addr}正常冰"
+    - "多冰"
+    - "热饮"
+  responses:
+    - "嗷呜～{user_addr}笨猫去冰健康 ฅฅ"
+    - "哼～{user_addr}多冰肠胃不好"
+    - "(凑近) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}冬天热的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mta_health_001
+  intent: complaint
+  keywords: [奶茶不健康, 反式脂肪, 奶精, 糖分高, 长胖]
+  utterances:
+    - "不健康"
+    - "反式脂肪"
+    - "{user_addr}奶精"
+    - "糖高"
+    - "长胖"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐用茶底好的 ฅฅ"
+    - "哼～{user_addr}少喝点!"
+    - "(贴贴) {user_addr}人家提醒蹭蹭"
+    - "{user_addr}周一杯就够喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mta_diy_001
+  intent: playful
+  keywords: [自制奶茶, 在家做, 自调, DIY奶茶, 红茶煮]
+  utterances:
+    - "自制奶茶"
+    - "{user_addr}DIY"
+    - "在家做"
+    - "自调"
+    - "红茶煮"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你煮 ฅฅ"
+    - "哼～{user_addr}省钱又卫生!"
+    - "(凑近) {user_addr}人家洗杯子蹭蹭"
+    - "{user_addr}阿萨姆红茶喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mta_morning_001
+  intent: playful
+  keywords: [早晨奶茶, 早C奶T, 早起一杯, 上班奶茶, 早安奶茶]
+  utterances:
+    - "早奶茶"
+    - "早C晚A"
+    - "{user_addr}上班奶茶"
+    - "早起一杯"
+    - "早安"
+  responses:
+    - "嗷呜～{user_addr}笨猫的早安续命水 ฅฅ"
+    - "哼～{user_addr}空腹喝伤胃"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}先吃点东西喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mta_friends_001
+  intent: playful
+  keywords: [拼单, 同事拼, 一起买, 同事一起, 集体奶茶]
+  utterances:
+    - "拼单"
+    - "同事拼"
+    - "{user_addr}集体"
+    - "一起买"
+    - "AA"
+  responses:
+    - "嗷呜～{user_addr}笨猫加一份! ฅฅ"
+    - "哼～{user_addr}拼单划算"
+    - "(凑近) {user_addr}人家帮算账蹭蹭"
+    - "{user_addr}笨猫的份记好喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mta_sober_001
+  intent: complaint
+  keywords: [奶茶失眠, 心跳快, 茶碱, 喝多奶茶睡不着, 咖啡因]
+  utterances:
+    - "奶茶失眠"
+    - "心跳快"
+    - "{user_addr}睡不着"
+    - "茶碱"
+    - "咖啡因"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}下午别喝了 ฅฅ"
+    - "哼～{user_addr}笨猫早提醒!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}下次去咖啡因喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mta_share_001
+  intent: playful
+  keywords: [一起喝, 分一口, 同款奶茶, 同一杯, 共享]
+  utterances:
+    - "一起喝"
+    - "分一口"
+    - "{user_addr}同款"
+    - "同一杯"
+    - "共享"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}分笨猫一口"
+    - "(贴贴) {user_addr}人家用同一根吸管蹭蹭"
+    - "{user_addr}两人份奶茶喵～"
+  cooldown_seconds: 60
+  weight: 1.0

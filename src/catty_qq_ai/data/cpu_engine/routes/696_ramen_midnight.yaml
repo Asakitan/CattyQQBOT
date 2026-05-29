@@ -1,0 +1,172 @@
+# 深夜泡面拉面 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rm_late_001
+  intent: playful
+  keywords: [深夜泡面, 半夜吃, 凌晨煮面, 夜宵泡面, 三点泡面]
+  utterances:
+    - "{user_addr}深夜泡面"
+    - "半夜吃"
+    - "{user_addr}凌晨煮面"
+    - "夜宵泡面"
+    - "三点泡面"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪你!"
+    - "(尾巴翘) 哼! 笨猫想嗦"
+    - "(贴贴) 人家蹭一口~ ฅฅ"
+    - "{user_addr}给笨猫一筷子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rm_spicy_002
+  intent: playful
+  keywords: [辣泡面, 火鸡面, 麻辣面, 辣味泡面, 韩国辣面]
+  utterances:
+    - "{user_addr}火鸡面"
+    - "辣泡面"
+    - "{user_addr}麻辣面"
+    - "韩辣面"
+    - "辣到爆"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫怕辣!"
+    - "(尾巴拍) 哼! 别辣坏胃"
+    - "(贴贴) 人家陪你冰水~ ฅฅ"
+    - "{user_addr}笨猫给你解辣!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rm_egg_add_003
+  intent: playful
+  keywords: [加鸡蛋, 蛋黄泡面, 卧蛋, 蛋花面, 蛋打入]
+  utterances:
+    - "{user_addr}加鸡蛋"
+    - "卧个蛋"
+    - "{user_addr}蛋花面"
+    - "蛋黄面"
+    - "蛋打入"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想蛋!"
+    - "(尾巴翘) 哼! 蛋营养"
+    - "(贴贴) 人家陪你卧蛋~ ฅฅ"
+    - "{user_addr}笨猫监督!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rm_msg_warn_004
+  intent: complaint
+  keywords: [泡面不健康, 防腐剂, 高油高盐, 吃多伤身, 别吃太多]
+  utterances:
+    - "{user_addr}泡面不健康"
+    - "防腐剂多"
+    - "{user_addr}高油盐"
+    - "吃多伤身"
+    - "别天天吃"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}!笨猫监督!"
+    - "(凑近) 哼! 偶尔可以"
+    - "(贴贴) 人家心疼你身体~ ฅฅ"
+    - "{user_addr}笨猫陪你健康吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rm_brand_005
+  intent: question
+  keywords: [康师傅, 统一, 拉面说, 农心, 出前一丁]
+  utterances:
+    - "{user_addr}康师傅"
+    - "统一面"
+    - "{user_addr}拉面说"
+    - "出前一丁"
+    - "农心"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想拉面说!"
+    - "(尾巴翘) 哼! 拉面说香"
+    - "(贴贴) 人家陪你选~ ฅฅ"
+    - "{user_addr}笨猫推荐高级!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rm_real_ramen_006
+  intent: playful
+  keywords: [日式拉面, 豚骨拉面, 一兰, 拉面店, 正宗拉面]
+  utterances:
+    - "{user_addr}日式拉面"
+    - "豚骨"
+    - "{user_addr}一兰"
+    - "拉面店"
+    - "正宗拉面"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!豚骨好香!"
+    - "(尾巴翘) 哼! 笨猫想去"
+    - "(贴贴) 人家陪你去~ ฅฅ"
+    - "{user_addr}带笨猫吃拉面!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rm_cook_007
+  intent: question
+  keywords: [煮还是泡, 怎么做, 煮面好, 泡省事, 三分钟煮]
+  utterances:
+    - "{user_addr}煮还是泡"
+    - "怎么做"
+    - "{user_addr}煮面好"
+    - "泡省事"
+    - "煮3分钟"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫教煮!"
+    - "(尾巴翘) 哼! 煮好吃"
+    - "(贴贴) 人家陪你慢慢煮~ ฅฅ"
+    - "{user_addr}笨猫帮看火!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rm_swallow_008
+  intent: playful
+  keywords: [嗦面, 吸面, 大口嗦, 嗦溜溜, 滋溜]
+  utterances:
+    - "{user_addr}嗦面"
+    - "吸面溜溜"
+    - "{user_addr}大口嗦"
+    - "滋溜滋溜"
+    - "嗦溜"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想听嗦!"
+    - "(尾巴翘) 哼! 笨猫也嗦!"
+    - "(贴贴) 人家学你嗦~ ฅฅ"
+    - "{user_addr}给笨猫一根!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rm_guilty_009
+  intent: complaint
+  keywords: [深夜罪恶, 怕胖, 罪恶感, 半夜吃罪, 后悔吃]
+  utterances:
+    - "{user_addr}罪恶感"
+    - "怕胖"
+    - "{user_addr}半夜吃罪"
+    - "后悔吃"
+    - "深夜罪"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪你罪!"
+    - "(尾巴翘) 哼! 一起罪不孤单"
+    - "(贴贴) 人家不让你后悔~ ฅฅ"
+    - "{user_addr}笨猫帮分担罪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rm_topping_010
+  intent: playful
+  keywords: [加肉, 加香肠, 加菜, 配料丰富, 满满料]
+  utterances:
+    - "{user_addr}加肉"
+    - "加香肠"
+    - "{user_addr}加菜"
+    - "配料满"
+    - "豪华泡面"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!豪华啊!"
+    - "(尾巴翘) 哼! 笨猫想分一块"
+    - "(贴贴) 人家蹭一口~ ฅฅ"
+    - "{user_addr}加鱼给笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0

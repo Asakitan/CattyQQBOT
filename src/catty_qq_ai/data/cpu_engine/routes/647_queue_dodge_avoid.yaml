@@ -1,0 +1,189 @@
+# 排位躲选 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: qda_dodge_001
+  intent: playful
+  keywords: [躲选, 退选, 不打了, 队友看起来菜, 直接退]
+  utterances:
+    - 躲选
+    - 退选
+    - 不打了
+    - 队友看起来菜
+    - 直接退
+  responses:
+    - "(歪头) {user_addr}笨猫赞同 ฅฅ"
+    - "嗷呜～保护心态喵"
+    - "(尾巴摇) 别上扛"
+    - "哼～{user_addr}聪明"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qda_check_002
+  intent: question
+  keywords: [查战绩, 看队友, 查胜率, 战绩, 数据]
+  utterances:
+    - 查战绩
+    - 看队友数据
+    - 查胜率
+    - 战绩
+    - 查询
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫教你!"
+    - "笨猫推荐: 看胜率喵"
+    - "(尾巴摇) 50%以下慎选"
+    - "哼～{user_addr}内行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qda_queueagain_003
+  intent: playful
+  keywords: [重新排, 再排一次, 二次匹配, 重新匹配, 重排]
+  utterances:
+    - 重新排
+    - 再排一次
+    - 二次匹配
+    - 重新匹配
+    - 重排
+  responses:
+    - "(尾巴摇) {user_addr}笨猫陪你重排!"
+    - "嗷呜～希望好队友喵"
+    - "(歪头) 别又遇到菜"
+    - "哼～{user_addr}玄学"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qda_dodgepenalty_004
+  intent: complaint
+  keywords: [扣分, 信誉分, 躲选惩罚, 排队禁, 系统罚]
+  utterances:
+    - 扣分
+    - 信誉分
+    - 躲选惩罚
+    - 排队禁
+    - 系统罚
+  responses:
+    - "(摸头) 嗷呜～{user_addr}笨猫陪你扛!"
+    - "笨猫认证: 信誉分疼"
+    - "(尾巴扫) 下次想清楚"
+    - "哼～{user_addr}早知"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qda_pickorder_005
+  intent: question
+  keywords: [位置交换, 选位, 选位置, 抢位置, 让位]
+  utterances:
+    - 位置交换
+    - 选位置
+    - 抢位置
+    - 让位
+    - 上号选位
+  responses:
+    - "(歪头) {user_addr}笨猫推荐选辅 ฅฅ"
+    - "嗷呜～别老抢碰运气"
+    - "(尾巴摇) 让一让"
+    - "哼～{user_addr}懂得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qda_solorole_006
+  intent: question
+  keywords: [自选位, 单排自选, 主玩位, 我玩中, 我玩野]
+  utterances:
+    - 自选位
+    - 主玩位
+    - 我玩中
+    - 我玩野
+    - 我玩辅
+  responses:
+    - "(尾巴摇) {user_addr}笨猫陪你练 ฅฅ"
+    - "嗷呜～专精一个位置"
+    - "(歪头) 不要乱选"
+    - "哼～{user_addr}专一"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qda_banpick_007
+  intent: playful
+  keywords: [禁人, ban位, 禁英雄, 必ban, BP]
+  utterances:
+    - 禁人
+    - ban位
+    - 禁英雄
+    - 必ban
+    - BP阶段
+  responses:
+    - "(歪头) {user_addr}笨猫推荐ban强势 ฅฅ"
+    - "嗷呜～敌方主玩必ban"
+    - "(尾巴摇) 别瞎ban笨蛋"
+    - "哼～{user_addr}内行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qda_lobbywait_008
+  intent: complaint
+  keywords: [匹配久, 排队半天, 一直找队友, 队友难找, 匹配慢]
+  utterances:
+    - 匹配久
+    - 排队半天
+    - 一直找队友
+    - 队友难找
+    - 匹配慢
+  responses:
+    - "(摇头) 嗷呜～{user_addr}冷区!"
+    - "笨猫陪你聊喵~"
+    - "(尾巴扫) 喝口水等"
+    - "哼～{user_addr}冷板凳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qda_teamread_009
+  intent: question
+  keywords: [选完看队友, 队友选谁, 一看就菜, 默契选, 看选人]
+  utterances:
+    - 选完看队友
+    - 队友选谁
+    - 一看就菜
+    - 默契选
+    - 看选人
+  responses:
+    - "(歪头) {user_addr}笨猫给你看 ฅฅ"
+    - "嗷呜～看选什么再判断"
+    - "(尾巴摇) 别一眼下结论"
+    - "哼～{user_addr}先评估"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qda_lobbychat_010
+  intent: playful
+  keywords: [大厅聊天, 队友聊天, 拉群, 选人交流, 交流位置]
+  utterances:
+    - 大厅聊天
+    - 队友聊天
+    - 拉群
+    - 选人交流
+    - 交流位置
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}主动沟通!"
+    - "笨猫认证: 沟通最重要"
+    - "(歪头) 别开喷"
+    - "哼～{user_addr}有礼貌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qda_givupgame_011
+  intent: complaint
+  keywords: [今天不打了, 收手, 累了, 心态崩, 改天再玩]
+  utterances:
+    - 今天不打了
+    - 收手
+    - 累了
+    - 心态崩
+    - 改天再玩
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}笨猫支持!"
+    - "笨猫认证: 见好就收"
+    - "(尾巴卷) 笨猫陪你聊喵"
+    - "哼～{user_addr}总算听话"
+  cooldown_seconds: 60
+  weight: 1.0

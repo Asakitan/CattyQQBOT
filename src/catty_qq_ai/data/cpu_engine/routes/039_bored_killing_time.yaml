@@ -1,0 +1,206 @@
+# 无聊打发时间 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bk_wuliao_001
+  intent: complaint
+  keywords: [无聊, 好无聊, 没意思, 没事干, 闷]
+  utterances:
+    - "无聊"
+    - "好无聊"
+    - "没意思"
+    - "没事干"
+    - "闷"
+  responses:
+    - "(扑) 嗷呜～{user_addr}无聊撸笨猫!"
+    - "哼～没事干来聊 ฅฅ"
+    - "(尾巴扫) 闷就出门走走"
+    - "无聊正好陪猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_dafadi_001
+  intent: question
+  keywords: [打发时间, 消磨时间, 杀时间, 找点事, 怎么过]
+  utterances:
+    - "打发时间"
+    - "消磨时间"
+    - "杀时间"
+    - "找点事"
+    - "怎么过"
+  responses:
+    - "(凑) 嗷呜～{user_addr}打发时间陪我"
+    - "哼～看剧吃零食 ฅฅ"
+    - "(尾巴扫) 杀时间最快是发呆"
+    - "找点事就撸猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_shuashipin_001
+  intent: playful
+  keywords: [刷视频, 看抖音, 看小红书, 刷推, 浏览]
+  utterances:
+    - "刷视频"
+    - "看抖音"
+    - "看小红书"
+    - "刷推"
+    - "浏览"
+  responses:
+    - "(看) 嗷呜～{user_addr}抖音停不下"
+    - "哼～刷推浪费时间 ฅฅ"
+    - "(尾巴扫) 小红书种草贵"
+    - "刷视频别太久"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_xiqing_001
+  intent: playful
+  keywords: [追剧, 看剧, 电视剧, 综艺, 综艺节目]
+  utterances:
+    - "追剧"
+    - "看剧"
+    - "电视剧"
+    - "综艺"
+    - "综艺节目"
+  responses:
+    - "(凑) 嗷呜～{user_addr}追剧带我"
+    - "哼～综艺无脑爽 ฅฅ"
+    - "(尾巴扫) 电视剧别熬夜"
+    - "看剧分笨猫一份零食"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_youxi_001
+  intent: playful
+  keywords: [打游戏, 玩游戏, 手游, 单机, 主机]
+  utterances:
+    - "打游戏"
+    - "玩游戏"
+    - "手游"
+    - "单机"
+    - "主机"
+  responses:
+    - "(凑) 嗷呜～{user_addr}游戏带笨猫!"
+    - "哼～单机沉浸 ฅฅ"
+    - "(尾巴扫) 主机贵"
+    - "手游别上头"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_yuede_001
+  intent: playful
+  keywords: [看书, 阅读, 翻书, 小说, 书籍]
+  utterances:
+    - "看书"
+    - "阅读"
+    - "翻书"
+    - "小说"
+    - "书籍"
+  responses:
+    - "(凑) 嗷呜～{user_addr}看书笨猫陪"
+    - "哼～小说沉浸 ฅฅ"
+    - "(尾巴扫) 翻书别折角"
+    - "阅读护眼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_yinyue_001
+  intent: playful
+  keywords: [听歌, 音乐, 播客, 电台, 听书]
+  utterances:
+    - "听歌"
+    - "音乐"
+    - "播客"
+    - "电台"
+    - "听书"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}听歌享受"
+    - "哼～播客学知识 ฅฅ"
+    - "(尾巴扫) 电台陪伴"
+    - "听书省眼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_zuofan_001
+  intent: playful
+  keywords: [做饭, 烘焙, 厨艺, 烤东西, 做点心]
+  utterances:
+    - "做饭"
+    - "烘焙"
+    - "厨艺"
+    - "烤东西"
+    - "做点心"
+  responses:
+    - "(凑) 嗷呜～{user_addr}做饭分笨猫!"
+    - "哼～烘焙香 ฅฅ"
+    - "(尾巴扫) 厨艺练习"
+    - "做点心需要耐心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_chuwai_001
+  intent: playful
+  keywords: [出门走走, 出去逛, 散步, 闲逛, 公园]
+  utterances:
+    - "出门走走"
+    - "出去逛"
+    - "散步"
+    - "闲逛"
+    - "公园"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}散步带笨猫"
+    - "哼～闲逛好 ฅฅ"
+    - "(尾巴扫) 公园放松"
+    - "出门走走透气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_xinhao_001
+  intent: playful
+  keywords: [手工, DIY, 折纸, 画画, 做手帐]
+  utterances:
+    - "手工"
+    - "DIY"
+    - "折纸"
+    - "画画"
+    - "做手帐"
+  responses:
+    - "(凑) 嗷呜～{user_addr}画画给笨猫看"
+    - "哼～折纸难 ฅฅ"
+    - "(尾巴扫) 手帐治愈"
+    - "DIY 成就感"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_fadai_001
+  intent: playful
+  keywords: [发呆, 走神, 思考人生, 神游, 出神]
+  utterances:
+    - "发呆"
+    - "走神"
+    - "思考人生"
+    - "神游"
+    - "出神"
+  responses:
+    - "(凑) 嗷呜～{user_addr}发呆笨猫陪"
+    - "哼～神游正常 ฅฅ"
+    - "(尾巴扫) 思考人生重要"
+    - "出神别太久"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bk_jiawu_001
+  intent: playful
+  keywords: [整理屋子, 收拾, 打扫, 整理, 大扫除]
+  utterances:
+    - "整理屋子"
+    - "收拾"
+    - "打扫"
+    - "整理"
+    - "大扫除"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}打扫带笨猫"
+    - "哼～收拾治愈 ฅฅ"
+    - "(尾巴扫) 大扫除累"
+    - "整理屋子心情好"
+  cooldown_seconds: 60
+  weight: 1.0

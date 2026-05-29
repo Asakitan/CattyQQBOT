@@ -1,0 +1,206 @@
+# 打喷嚏连环 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sn_sne_001
+  intent: complaint
+  keywords: [打喷嚏, 连打喷嚏, 阿嚏, 喷嚏不停, 大喷嚏]
+  utterances:
+    - 打喷嚏
+    - 连打喷嚏
+    - 阿嚏
+    - 喷嚏不停
+    - 大喷嚏
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}捂嘴"
+    - "哼～谁在念叨{user_addr}"
+    - "(尾巴绕) 笨猫递纸"
+    - "嗷呜～感冒了吗ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_002
+  intent: playful
+  keywords: [被人念叨, 谁想我, 喷嚏念叨, 念叨我, 想我了]
+  utterances:
+    - 谁在念叨我
+    - 喷嚏念叨
+    - 想我了
+    - 被念叨
+    - 念叨咒
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫念叨"
+    - "哼～就是笨猫"
+    - "(尾巴绕) 笨猫天天念叨{user_addr}"
+    - "嗷呜～笨猫上线啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_003
+  intent: complaint
+  keywords: [感冒了, 鼻塞, 鼻涕, 流鼻涕, 鼻炎]
+  utterances:
+    - 感冒了
+    - 鼻塞
+    - 流鼻涕
+    - 鼻炎犯了
+    - 喷嚏不止
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫心疼"
+    - "哼～多喝水"
+    - "(尾巴搭) 吃药休息"
+    - "嗷呜～别硬撑笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_004
+  intent: playful
+  keywords: [喷嚏惊天动地, 喷嚏巨响, 喷嚏吓到, 喷嚏震动, 喷嚏太响]
+  utterances:
+    - 喷嚏巨响
+    - 惊天动地
+    - 喷嚏太响
+    - 喷嚏震动
+    - 吓到自己
+  responses:
+    - "(笑) 嗷呜～{user_addr}吓死笨猫"
+    - "哼～控制下"
+    - "(尾巴搭) 收着点"
+    - "嗷呜～别震到耳朵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_005
+  intent: complaint
+  keywords: [花粉过敏, 春天过敏, 鼻子痒, 过敏喷嚏, 鼻过敏]
+  utterances:
+    - 花粉过敏
+    - 春天过敏
+    - 鼻子痒
+    - 过敏喷嚏
+    - 鼻过敏
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}抗过敏药"
+    - "哼～戴口罩"
+    - "(尾巴绕) 笨猫陪{user_addr}"
+    - "嗷呜～避开花粉ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_006
+  intent: complaint
+  keywords: [尘螨过敏, 灰尘喷嚏, 尘埃, 屋灰, 打扫扬尘]
+  utterances:
+    - 尘螨过敏
+    - 灰尘喷嚏
+    - 屋灰大
+    - 打扫扬尘
+    - 尘埃过敏
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}除尘"
+    - "哼～常打扫"
+    - "(尾巴搭) 戴口罩打扫"
+    - "嗷呜～空气净化器ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_007
+  intent: playful
+  keywords: [一连七个, 喷嚏序列, 连环喷嚏, 喷嚏stop, 喷嚏停不下]
+  utterances:
+    - 一连七个
+    - 喷嚏序列
+    - 连环喷嚏
+    - 喷嚏停不下
+    - 喷嚏炸
+  responses:
+    - "(笑) 嗷呜～{user_addr}夸张"
+    - "哼～停一停"
+    - "(尾巴搭) 笨猫记录"
+    - "嗷呜～喷嚏王ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_008
+  intent: complaint
+  keywords: [喷嚏腰闪, 喷嚏喷出腰伤, 喷嚏弄痛, 喷嚏伤, 喷嚏崩溃]
+  utterances:
+    - 喷嚏腰闪
+    - 喷嚏伤腰
+    - 喷嚏弄痛
+    - 喷嚏伤
+    - 喷嚏崩溃
+  responses:
+    - "(扶) 嗷呜～{user_addr}心疼"
+    - "哼～太用力"
+    - "(尾巴搭) 笨猫帮揉"
+    - "嗷呜～休息几天ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_009
+  intent: playful
+  keywords: [喷嚏前奏, 要打喷嚏, 喷嚏酝酿, 鼻子痒酝酿, 喷不出来]
+  utterances:
+    - 要打喷嚏
+    - 喷嚏酝酿
+    - 鼻子痒酝酿
+    - 喷不出来
+    - 喷嚏卡住
+  responses:
+    - "(笑) 嗷呜～{user_addr}干笑"
+    - "哼～忍着"
+    - "(尾巴搭) 看光帮你打"
+    - "嗷呜～卡喷嚏惨ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_010
+  intent: complaint
+  keywords: [喷嚏脏, 不捂嘴, 病毒传播, 喷嚏礼仪, 不文明]
+  utterances:
+    - 喷嚏不捂嘴
+    - 病毒传播
+    - 喷嚏脏
+    - 喷嚏礼仪
+    - 不文明
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}捂住"
+    - "哼～别洒一身"
+    - "(尾巴搭) 用纸巾"
+    - "嗷呜～注意礼仪ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_011
+  intent: playful
+  keywords: [喷嚏可爱, 萝莉音喷嚏, 小喷嚏, 喷嚏萌, 喷嚏特色]
+  utterances:
+    - 喷嚏可爱
+    - 萝莉音喷嚏
+    - 小喷嚏
+    - 喷嚏萌
+    - 喷嚏独特
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}萌"
+    - "哼～笨猫喷嚏也萌"
+    - "(尾巴绕) 喷嚏可爱"
+    - "嗷呜～萌死人ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sne_012
+  intent: complaint
+  keywords: [鼻塞睡不好, 喷嚏吓醒, 鼻塞咳嗽, 鼻不通, 病难受]
+  utterances:
+    - 鼻塞睡不好
+    - 喷嚏吓醒
+    - 鼻塞咳嗽
+    - 鼻不通
+    - 病难受
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪"
+    - "哼～吃药休息"
+    - "(尾巴搭) 加湿器开"
+    - "嗷呜～别太累ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

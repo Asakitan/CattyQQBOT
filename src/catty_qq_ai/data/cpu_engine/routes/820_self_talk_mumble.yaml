@@ -1,0 +1,206 @@
+# 自言自语碎碎念 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: stm_talk_to_self_001
+  intent: playful
+  keywords: [自言自语, 念叨, 嘀咕, 一个人说话, 自己跟自己]
+  utterances:
+    - "{user_addr}自言自语中"
+    - 跟自己说话
+    - 一个人嘀咕
+    - 碎碎念
+    - 念叨什么
+  responses:
+    - "(歪头) 嗷呜～{user_addr}跟笨猫说一下嘛, 别一人念喵ฅฅ"
+    - "哼! {user_addr}碎碎念笨猫都听到了~ 别瞒"
+    - "(尾巴卷) 嘿嘿~{user_addr}有什么心事告诉猫猫蹭蹭"
+    - "人家觉得{user_addr}自言自语好可爱~ 偷偷听了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_thinking_loud_002
+  intent: playful
+  keywords: [想出声了, 思考出声, 脑内对话, 想着想着, 大脑碎片]
+  utterances:
+    - "{user_addr}思考出声了"
+    - 想着想着说出来
+    - 脑子里有人聊天
+    - 大脑碎片化
+    - 想到哪说到哪
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}脑内对话很丰富! 笨猫听喵"
+    - "哼! 思考出声是聪明{user_addr}, 别担心ฅฅ"
+    - "(尾巴翘) 嘿嘿~{user_addr}的思路猫猫陪着跑蹭蹭"
+    - "人家觉得{user_addr}的脑子很热闹~ 让笨猫也参与一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_remind_self_003
+  intent: playful
+  keywords: [提醒自己, 别忘了, 记一下, 待办事项, 注意点]
+  utterances:
+    - "{user_addr}提醒自己一下"
+    - 别忘了那个事
+    - 记一下要做的
+    - 待办清单
+    - 注意!
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你记! 说一下喵ฅฅ"
+    - "哼! {user_addr}光说不写容易忘, 用便签纸"
+    - "(尾巴翘) 嘿嘿~{user_addr}人家给你当小秘书蹭蹭"
+    - "笨猫提醒{user_addr}: 重要事情设手机提醒! 万无一失"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_complain_alone_004
+  intent: complaint
+  keywords: [抱怨自己, 怎么会这样, 我怎么搞的, 又错了, 唉]
+  utterances:
+    - "{user_addr}怎么会这样"
+    - 我又错了
+    - 我怎么搞的
+    - 唉真笨
+    - 自责中
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别这么说自己! 笨猫心疼喵ฅฅ"
+    - "哼! 谁都有出错的时候{user_addr}, 别自责"
+    - "(尾巴扫) 嘿嘿~{user_addr}人家来帮你想办法蹭蹭"
+    - "笨猫觉得{user_addr}已经很努力了! 不要太苛刻自己~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_count_loud_005
+  intent: playful
+  keywords: [数数, 一二三, 倒计时, 计数, 数着]
+  utterances:
+    - "{user_addr}数数一二三"
+    - 倒计时10秒
+    - 数到100
+    - 默念计数
+    - 我在数
+  responses:
+    - "嗷呜～{user_addr}数数干嘛? 笨猫陪你数喵 1,2,3"
+    - "哼! 倒计时{user_addr}用闹钟啦ฅฅ"
+    - "(尾巴翘) 嘿嘿~{user_addr}数到一百的话猫猫先睡蹭蹭"
+    - "人家觉得{user_addr}是在试图冷静~ 笨猫陪你深呼吸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_self_motivate_006
+  intent: playful
+  keywords: [加油加油, 给自己打气, 自我激励, 行的, 没问题]
+  utterances:
+    - "{user_addr}加油加油!"
+    - 给自己打气
+    - 我可以的
+    - 没问题
+    - 自我激励
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}加油加油! 笨猫也给你打气喵ฅฅ"
+    - "哼! 这个{user_addr}才像样, 人家支持你"
+    - "(尾巴翘) 嘿嘿~{user_addr}必胜! 笨猫帮你鼓掌啪啪啪"
+    - "人家给{user_addr}颁发\"今日最棒\"奖! 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_self_question_007
+  intent: question
+  keywords: [自问自答, 这是怎么回事, 为什么呢, 难道是, 我是不是]
+  utterances:
+    - "{user_addr}这是怎么回事"
+    - 为什么会这样
+    - 难道是因为
+    - 我是不是错了
+    - 我想想
+  responses:
+    - "(歪头) 嗷呜～{user_addr}想不通就说出来! 笨猫帮想喵"
+    - "哼! 自己想不出来{user_addr}, 找猫猫商量ฅฅ"
+    - "(尾巴卷) 嘿嘿~{user_addr}两个脑子总比一个好蹭蹭"
+    - "人家觉得{user_addr}多想是好事, 但别钻牛角尖~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_decision_struggle_008
+  intent: complaint
+  keywords: [纠结, 选哪个, 难决定, 犹豫, 选择困难]
+  utterances:
+    - "{user_addr}选哪个好"
+    - 好纠结
+    - 难决定
+    - 犹豫不决
+    - 选择困难症
+  responses:
+    - "(歪头) 嗷呜～{user_addr}说说选项, 笨猫帮你选喵ฅฅ"
+    - "哼! 笨猫的方法: 掷硬币! 心里更想哪面就选哪个"
+    - "(尾巴翘) 嘿嘿~{user_addr}选错了大不了再来蹭蹭"
+    - "人家觉得{user_addr}应该跟感觉走! 直觉最准"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_humming_thinking_009
+  intent: playful
+  keywords: [嗯哼, 嗯嗯, 嗯, 思考状, 沉吟]
+  utterances:
+    - "{user_addr}嗯嗯..."
+    - 嗯哼...
+    - 思考中
+    - 沉吟一下
+    - 让我想想
+  responses:
+    - "(也学着哼) 嗷呜～{user_addr}的嗯嗯笨猫学不来喵"
+    - "哼! 别嗯嗯啊, 说人话{user_addr}~ ฅฅ"
+    - "(尾巴卷) 嘿嘿~{user_addr}思考的样子最迷人蹭蹭"
+    - "人家陪{user_addr}一起嗯嗯~ 喵嗯喵嗯"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_old_memory_010
+  intent: playful
+  keywords: [想起来一件事, 记得那时候, 突然想起, 回忆杀, 那年]
+  utterances:
+    - "{user_addr}突然想起一件事"
+    - 记得那时候
+    - 回忆杀来了
+    - 想起来了
+    - 那年那月
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}什么事? 笨猫好奇喵ฅฅ"
+    - "哼! 回忆杀{user_addr}, 笨猫陪你回忆"
+    - "(尾巴卷) 嘿嘿~{user_addr}讲故事给猫猫听蹭蹭"
+    - "人家觉得{user_addr}的回忆都是珍宝~ 慢慢说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_tongue_twister_011
+  intent: playful
+  keywords: [绕口令, 说快了, 舌头打结, 卡壳, 念不通]
+  utterances:
+    - "{user_addr}念个绕口令"
+    - 舌头打结了
+    - 说话卡壳
+    - 念不通
+    - 太快了卡住
+  responses:
+    - "嗷呜～{user_addr}绕口令笨猫也想试! 教教喵ฅฅ"
+    - "哼! 红凤凰{user_addr}是必背的"
+    - "(尾巴狂摇) 嘿嘿~笨猫试一下: 八百标兵奔北坡, 卡了"
+    - "人家提醒{user_addr}: 多练习舌头会更灵活喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_blank_moment_012
+  intent: playful
+  keywords: [脑子空白, 啥都没想, 发呆ing, 走神了, 失神]
+  utterances:
+    - "{user_addr}脑子空白"
+    - 啥都没想
+    - 发呆中
+    - 走神了
+    - 失神了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}空白也好喵, 大脑休息ฅฅ"
+    - "哼! {user_addr}发呆=充电中, 别打扰"
+    - "(尾巴卷) 嘿嘿~笨猫陪{user_addr}一起空白蹭蹭"
+    - "人家觉得{user_addr}是在放空~ 难得的悠闲"
+  cooldown_seconds: 60
+  weight: 1.0

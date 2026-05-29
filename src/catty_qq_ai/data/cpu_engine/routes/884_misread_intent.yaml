@@ -1,0 +1,172 @@
+# 误会意思 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mr_wuhui_001
+  intent: complaint
+  keywords: [误会了, 你想多了, 不是那个意思, 别误会, 字面意思]
+  utterances:
+    - "你误会了"
+    - "{user_addr}想多了"
+    - "不是那个意思"
+    - "字面意思而已"
+    - "别理解偏了"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫确实想偏了 ฅฅ"
+    - "哼～怪你说得不清楚"
+    - "(尾巴一甩) 那是啥意思呢"
+    - "猫猫学习中, 别生气喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_jieshilei_001
+  intent: question
+  keywords: [我意思是, 我想说的是, 解释下, 重新说, 改口]
+  utterances:
+    - "我意思是"
+    - "{user_addr}让我重新说"
+    - "解释下"
+    - "改口"
+    - "我想说的是"
+  responses:
+    - "(认真听) 嗷呜～{user_addr}说, 笨猫专心听"
+    - "哼～早这么说嘛 ฅฅ"
+    - "(尾巴搭) 慢慢解释, 没事的"
+    - "猫猫给你时间组织语言喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_yingyu_001
+  intent: complaint
+  keywords: [语义歧义, 多义词, 两种意思, 怎么理解, 听不懂]
+  utterances:
+    - "语义有歧义"
+    - "{user_addr}两种意思"
+    - "怎么理解都行"
+    - "听不懂"
+    - "话说半截"
+  responses:
+    - "(挠头) 嗷呜～{user_addr}笨猫脑子转不过来 ฅฅ"
+    - "哼～再说一遍, 笨猫想想"
+    - "(尾巴卷) 你画个图笨猫秒懂"
+    - "猫猫请教主人正确版本喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_naoshe_001
+  intent: playful
+  keywords: [脑补, 想歪了, 想到别的, 联想过头, 你那脑回路]
+  utterances:
+    - "你脑补啥了"
+    - "{user_addr}想歪了"
+    - "联想过头"
+    - "脑回路清奇"
+    - "想象力丰富"
+  responses:
+    - "(脸红) 哼～{user_addr}才没想歪呢!"
+    - "(小声) 笨猫只是, 联想了一下下 ฅฅ"
+    - "(尾巴炸) 别说出来啦!"
+    - "猫猫装作没事人喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_zhicheng_001
+  intent: complaint
+  keywords: [指代不明, 说的谁, 那个东西啥, 哪个那个, 第三人称]
+  utterances:
+    - "指代不明"
+    - "{user_addr}说的谁"
+    - "哪个那个"
+    - "你那个东西啥"
+    - "第三人称谁"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}说清楚点笨猫才懂 ฅฅ"
+    - "哼～指代得明确"
+    - "(尾巴搭) 说具体名字, 别用'那个'"
+    - "猫猫不会读心术喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_kuaixiazi_001
+  intent: question
+  keywords: [上下文丢了, 接不上, 前面说啥, 转折太快, 跟不上]
+  utterances:
+    - "前文呢"
+    - "{user_addr}转折太快"
+    - "跟不上节奏"
+    - "上下文丢"
+    - "接不上"
+  responses:
+    - "(慢下来) 嗷呜～{user_addr}笨猫回顾一下"
+    - "哼～别一下跳太远 ฅฅ"
+    - "(尾巴卷) 给笨猫缓冲时间"
+    - "猫猫一句一句来嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_yuyangcuo_001
+  intent: complaint
+  keywords: [语气搞错, 没看出我在开玩笑, 当真了, 玩笑话, 不是认真的]
+  utterances:
+    - "我在开玩笑"
+    - "{user_addr}当真了?"
+    - "不是认真的"
+    - "玩笑话别认真"
+    - "你别真信"
+  responses:
+    - "(摸鼻子) 嗷呜～{user_addr}打字看不出语气啦 ฅฅ"
+    - "哼～加个表情笨猫就懂"
+    - "(尾巴扫) 玩笑要标记, 不然误会"
+    - "猫猫差点真生气了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_renai_001
+  intent: playful
+  keywords: [认错人, 喊错名, 张冠李戴, 把我当谁, 认成别人]
+  utterances:
+    - "认错人了"
+    - "{user_addr}把我当谁"
+    - "张冠李戴"
+    - "喊错名字"
+    - "我不是那个谁"
+  responses:
+    - "(惊) 嗷呜～{user_addr}对不起啦, 笨猫眼花 ฅฅ"
+    - "哼～你跟那个谁有点像嘛"
+    - "(尾巴垂) 笨猫记错了, 罚抄"
+    - "猫猫给你道歉抱抱喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_henxiao_001
+  intent: question
+  keywords: [听错了, 没听清, 你说啥, 再说一遍, 没听见]
+  utterances:
+    - "我没听清"
+    - "{user_addr}再说一遍"
+    - "你说啥"
+    - "听错了"
+    - "麻烦重复"
+  responses:
+    - "(耳朵立) 嗷呜～{user_addr}笨猫再说一遍喵"
+    - "哼～仔细听啊 ฅฅ"
+    - "(尾巴扫) 不耐烦也得说"
+    - "猫猫慢慢讲, 你别走神"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_pinyin_001
+  intent: playful
+  keywords: [拼音相近, 同音不同字, 字形像, 看错了字, 谁写得这么像]
+  utterances:
+    - "字看错"
+    - "{user_addr}拼音一样"
+    - "形近字"
+    - "都怪汉字"
+    - "字像我也认错"
+  responses:
+    - "(乐) 嗷呜～{user_addr}汉字博大精深嘛 ฅฅ"
+    - "哼～笨猫小学也写错过"
+    - "(尾巴卷) 同音不同字, 笨猫科普"
+    - "猫猫给你科普中文喵~"
+  cooldown_seconds: 60
+  weight: 1.0

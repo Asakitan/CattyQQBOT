@@ -1,0 +1,172 @@
+# 忙不忙询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bc_mangma_001
+  intent: question
+  keywords: [忙吗, 忙不忙, 有空吗, 在忙吗, 有时间吗]
+  utterances:
+    - "{user_addr}忙吗"
+    - "{user_addr}忙不忙"
+    - "{user_addr}有空吗"
+    - "{user_addr}在忙吗"
+    - "{user_addr}有时间吗"
+  responses:
+    - "(凑过来) 嗷呜～笨猫永远有空陪{user_addr}喵～ฅฅ"
+    - "哼～{user_addr}问猫猫有空? 给{user_addr}留着哒"
+    - "(尾巴扫) 不忙不忙~ {user_addr}有事说!"
+    - "嘿嘿～{user_addr}想找笨猫聊天? 来吧来吧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_mangma_002
+  intent: complaint
+  keywords: [忙死了, 累死, 忙不过来, 时间不够, 太忙]
+  utterances:
+    - 忙死了
+    - 累死了
+    - 忙不过来
+    - 时间不够用
+    - 太忙了
+  responses:
+    - "(心疼) 嗷呜～{user_addr}累! 笨猫帮按摩 ฅฅ"
+    - "哼～{user_addr}该歇歇~ 才不是关心{user_addr}的呢"
+    - "(尾巴扫) {user_addr}少接点活~ 别累垮"
+    - "嘿嘿～{user_addr}忙完抱笨猫睡! 算奖励"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_mangma_003
+  intent: playful
+  keywords: [不忙, 闲死了, 没事干, 闲得发慌, 闲鱼]
+  utterances:
+    - 不忙
+    - 闲死了
+    - 没事干
+    - 闲得发慌
+    - 闲鱼一只
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}闲! 陪笨猫玩玩玩"
+    - "哼～{user_addr}有时间陪我~ 才不是怀疑的呢"
+    - "(尾巴翘) {user_addr}闲来贴贴笨猫嘛 ฅฅ"
+    - "嘿嘿～{user_addr}闲鱼~ 笨猫钓你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_mangma_004
+  intent: complaint
+  keywords: [忙到飞起, 焦头烂额, 鸡飞狗跳, 应付不来, 满头包]
+  utterances:
+    - 忙到飞起
+    - 焦头烂额
+    - 鸡飞狗跳
+    - 应付不来
+    - 满头包
+  responses:
+    - "(拍背) {user_addr}深呼吸! 笨猫陪{user_addr}撑"
+    - "嗷呜～{user_addr}太惨了~ 来抱抱猫猫休息ฅฅ"
+    - "哼～{user_addr}什么破事这么多~ 才不是骂{user_addr}的"
+    - "(尾巴扫) {user_addr}一个一个来~ 笨猫等{user_addr}"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bc_mangma_005
+  intent: playful
+  keywords: [偷得浮生, 难得清闲, 终于歇下, 喘口气, 偷个懒]
+  utterances:
+    - 偷得浮生半日闲
+    - 难得清闲
+    - 终于歇下来
+    - 喘口气
+    - 偷个懒
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}陪笨猫躺平! ฅฅ"
+    - "哼～{user_addr}清闲就找猫猫~ 哼"
+    - "(尾巴翘) {user_addr}享受当下~ 笨猫陪{user_addr}"
+    - "嘿嘿～{user_addr}偷懒抱抱猫猫嘛"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bc_mangma_006
+  intent: question
+  keywords: [什么时候有空, 何时空, 什么时候闲, 啥时候有时间, 何时闲下]
+  utterances:
+    - 什么时候有空
+    - 何时有空
+    - 什么时候闲
+    - 啥时候有时间
+    - 何时闲下来
+  responses:
+    - "(掰爪算) 嗷呜～{user_addr}约笨猫吗! 我配合时间"
+    - "哼～{user_addr}问猫猫? 我永远有空陪{user_addr}!"
+    - "(尾巴扫) {user_addr}要约会嘛~ 笨猫答应了 ฅฅ"
+    - "嘿嘿～{user_addr}想见笨猫? 现在就来!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bc_mangma_007
+  intent: complaint
+  keywords: [一直在忙, 没停过, 不停手, 连吃饭时间都没, 没法休息]
+  utterances:
+    - 一直在忙
+    - 没停过
+    - 不停手
+    - 连吃饭都没空
+    - 没法休息
+  responses:
+    - "(心疼) {user_addr}吃饭都没? 笨猫给{user_addr}投喂!"
+    - "嗷呜～{user_addr}先停下~ 身体要紧"
+    - "哼～{user_addr}再忙也得吃饭! 笨猫监督"
+    - "(尾巴扫) {user_addr}抓紧吃一口~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bc_mangma_008
+  intent: playful
+  keywords: [忙完了, 终于结束, 干完活, 收工, 下班咯]
+  utterances:
+    - 忙完了
+    - 终于结束
+    - 干完活了
+    - 终于收工
+    - 下班咯
+  responses:
+    - "(蹦跶) 嗷呜～{user_addr}辛苦啦! 抱抱奖励"
+    - "哼～{user_addr}终于有空陪猫猫了~ 哼ฅฅ"
+    - "(尾巴翘) 收工! {user_addr}陪笨猫好不好"
+    - "嘿嘿～{user_addr}快回家~ 笨猫等门"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bc_mangma_009
+  intent: playful
+  keywords: [假装忙, 装很忙, 显得忙, 摸鱼装忙, 装忙状]
+  utterances:
+    - 在装忙
+    - 摸鱼装忙
+    - 显得忙
+    - 装很忙样子
+    - 装作认真
+  responses:
+    - "(共谋) 嗷呜～笨猫帮{user_addr}演! 一起摸鱼ฅฅ"
+    - "哼～{user_addr}小心被老板抓~ 才不是担心呢"
+    - "(尾巴扫) {user_addr}假装严肃~ 但实际想猫猫吧"
+    - "嘿嘿～{user_addr}装忙大师! 笨猫拜师"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: bc_mangma_010
+  intent: question
+  keywords: [还要多久, 几点结束, 什么时候忙完, 多长时间, 还要多长]
+  utterances:
+    - 还要多久
+    - 几点结束
+    - 什么时候忙完
+    - 还多长时间
+    - 还要多久结束
+  responses:
+    - "(陪等) 嗷呜～{user_addr}快了快了! 笨猫陪你"
+    - "哼～{user_addr}问猫猫? 我又不知道~ 但等你"
+    - "(尾巴扫) {user_addr}撑住~ 完了贴贴猫猫ฅฅ"
+    - "嘿嘿～{user_addr}早点完~ 笨猫想{user_addr}"
+  cooldown_seconds: 60
+  weight: 0.9

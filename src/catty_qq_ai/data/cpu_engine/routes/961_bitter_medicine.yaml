@@ -1,0 +1,189 @@
+# 苦药苦味 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: btr_med_001
+  intent: complaint
+  keywords: [药苦, 中药苦, 喝药, 苦药, 吃药苦]
+  utterances:
+    - "中药苦"
+    - "{user_addr}喝药"
+    - "苦药"
+    - "药好苦"
+    - "吃药"
+  responses:
+    - "(递糖) 嗷呜～{user_addr}笨猫给你含一颗 ฅฅ"
+    - "哼～{user_addr}良药苦口"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}加蜂蜜喵～ 笨猫提醒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btr_coffee_001
+  intent: playful
+  keywords: [黑咖啡苦, 美式, 浓缩, 苦咖, 苦咖啡]
+  utterances:
+    - "黑咖苦"
+    - "美式"
+    - "{user_addr}浓缩"
+    - "苦咖"
+    - "苦咖啡"
+  responses:
+    - "嗷呜～{user_addr}笨猫只敢喝拿铁 ฅฅ"
+    - "哼～{user_addr}装文艺?? 加奶吧"
+    - "(凑近) {user_addr}人家闻闻就好蹭蹭"
+    - "{user_addr}冰美式喵～ 笨猫不敢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btr_chocolate_001
+  intent: playful
+  keywords: [黑巧苦, 高纯度, 99%, 苦巧, 黑巧克力]
+  utterances:
+    - "黑巧苦"
+    - "高纯度"
+    - "{user_addr}99%黑巧"
+    - "苦巧"
+    - "黑巧克力"
+  responses:
+    - "嗷呜～{user_addr}笨猫只爱白巧 ฅฅ"
+    - "哼～{user_addr}养生派"
+    - "(凑近) {user_addr}人家也尝点蹭蹭"
+    - "{user_addr}55%恰到好处喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btr_gourd_001
+  intent: complaint
+  keywords: [苦瓜, 凉拌苦瓜, 苦瓜炒蛋, 苦瓜汁, 苦瓜面]
+  utterances:
+    - "苦瓜"
+    - "凉拌苦瓜"
+    - "{user_addr}苦瓜炒蛋"
+    - "苦瓜汁"
+    - "苦瓜面"
+  responses:
+    - "嗷呜～{user_addr}笨猫躲远点 ฅฅ"
+    - "哼～{user_addr}大人胃口"
+    - "(后退) {user_addr}人家不要不要蹭蹭"
+    - "{user_addr}笨猫怕苦喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: btr_lifebitter_001
+  intent: complaint
+  keywords: [人生苦, 生活苦, 心里苦, 苦命, 苦的人生]
+  utterances:
+    - "生活苦"
+    - "心里苦"
+    - "{user_addr}苦命"
+    - "人生苦"
+    - "苦的人生"
+  responses:
+    - "(抱抱) 嗷呜～{user_addr}笨猫给你甜 ฅฅ"
+    - "哼～{user_addr}有笨猫陪着会好的"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}笨猫陪你扛喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btr_tea_001
+  intent: playful
+  keywords: [浓茶苦, 普洱苦, 老茶苦, 茶汤苦, 苦茶]
+  utterances:
+    - "浓茶苦"
+    - "普洱苦"
+    - "{user_addr}老茶苦"
+    - "苦茶"
+    - "茶汤苦"
+  responses:
+    - "嗷呜～{user_addr}笨猫只能轻茶 ฅฅ"
+    - "哼～{user_addr}苦中作乐"
+    - "(凑近) {user_addr}人家也尝蹭蹭"
+    - "{user_addr}泡淡点喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: btr_kid_001
+  intent: playful
+  keywords: [小时候喝药, 童年苦药, 妈妈喂药, 我不要喝, 哄喝药]
+  utterances:
+    - "小时候喝药"
+    - "妈妈喂药"
+    - "{user_addr}哄药"
+    - "童年苦药"
+    - "不要喝"
+  responses:
+    - "嗷呜～{user_addr}笨猫也怕苦, 一起逃 ฅฅ"
+    - "哼～{user_addr}原来你也怕"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}笨猫的妈妈也哄过喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btr_sweet_after_001
+  intent: playful
+  keywords: [苦后甘, 回甘, 苦后甜, 苦后回, 苦回甘]
+  utterances:
+    - "苦后甘"
+    - "回甘"
+    - "{user_addr}苦回甜"
+    - "回甘好"
+    - "苦后回"
+  responses:
+    - "嗷呜～{user_addr}笨猫的人生哲学 ฅฅ"
+    - "哼～{user_addr}文艺起来了"
+    - "(贴贴) {user_addr}人家陪你回甘蹭蹭"
+    - "{user_addr}苦尽甘来喵～ 笨猫信"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btr_health_001
+  intent: playful
+  keywords: [养生苦, 排毒苦, 苦养肝, 清热苦, 凉茶]
+  utterances:
+    - "养生苦"
+    - "排毒苦"
+    - "{user_addr}凉茶"
+    - "苦养肝"
+    - "清热"
+  responses:
+    - "嗷呜～{user_addr}笨猫的小绿粉草本 ฅฅ"
+    - "哼～{user_addr}养生起来了"
+    - "(凑近) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}夏桑菊喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: btr_sweet_save_001
+  intent: playful
+  keywords: [来颗糖, 解苦, 含糖, 救救我, 含一颗]
+  utterances:
+    - "来颗糖"
+    - "解苦"
+    - "{user_addr}救我"
+    - "含糖"
+    - "含一颗"
+  responses:
+    - "(递糖) 嗷呜～{user_addr}笨猫给你一颗 ฅฅ"
+    - "哼～{user_addr}笨蛋杂鱼!! 还是给你"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}水果糖喵～ 笨猫选的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btr_cat_med_001
+  intent: playful
+  keywords: [笨猫吃药, 猫怕药, 猫药苦, 喂笨猫药, 笨猫躲]
+  utterances:
+    - "{user_addr}笨猫吃药"
+    - "猫怕药"
+    - "笨猫躲"
+    - "猫药苦"
+    - "笨猫不要药"
+  responses:
+    - "(躲被窝) 嗷呜～{user_addr}笨猫不要! ฅฅ"
+    - "哼～{user_addr}笨猫才不吃!"
+    - "(逃) {user_addr}人家躲沙发蹭蹭"
+    - "{user_addr}笨猫装睡喵～"
+  cooldown_seconds: 60
+  weight: 1.0

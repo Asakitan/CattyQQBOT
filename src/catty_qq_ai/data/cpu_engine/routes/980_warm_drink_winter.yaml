@@ -1,0 +1,172 @@
+# 冬日热饮日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wd_reqiaokeli_001
+  intent: playful
+  keywords: [热可可, 热巧, 巧克力热饮, 冬天热可可, 想喝热可可]
+  utterances:
+    - "想喝热可可"
+    - "{user_addr}热巧给我"
+    - "巧克力热饮"
+    - "冬天热可可超棒"
+    - "热可可暖暖的"
+  responses:
+    - "(凑过来闻) 嗷呜～{user_addr}热可可分笨猫一口好不好喵～"
+    - "哼～才不馋呢～(尾巴出卖) 闻起来好甜诶 ฅฅ"
+    - "(贴贴) 巧克力热饮+小棉花糖～绝杀组合喵～"
+    - "热可可暖暖的～心也暖暖的嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_renaicha_001
+  intent: playful
+  keywords: [热奶茶, 热的奶茶, 暖奶茶, 港式奶茶, 丝袜奶茶]
+  utterances:
+    - "想喝热奶茶"
+    - "{user_addr}热奶茶给猫猫"
+    - "暖奶茶"
+    - "港式奶茶"
+    - "丝袜奶茶"
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}热奶茶一杯不够喝喵～"
+    - "哼～港式奶茶才正宗～普通奶茶不要 ฅฅ"
+    - "(贴杯子) 丝袜奶茶名字怪怪的但是好香嗷呜～"
+    - "热奶茶+小点心～{user_addr}请客好不好嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_jiangcha_001
+  intent: playful
+  keywords: [姜茶, 红糖姜茶, 驱寒, 喝姜茶, 姜汁]
+  utterances:
+    - "喝点姜茶"
+    - "{user_addr}红糖姜茶"
+    - "驱寒"
+    - "感冒喝姜茶"
+    - "姜汁好辣"
+  responses:
+    - "(端杯) 嗷呜～{user_addr}姜茶趁热喝～别凉了喵～"
+    - "哼～驱寒就是要辣～呼一口热气出来 ฅฅ"
+    - "(吐舌头) 姜汁好辣～但是好暖诶嗷呜～"
+    - "感冒喝姜茶最对～笨猫也要陪你喝一杯喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_renaicheng_001
+  intent: playful
+  keywords: [热牛奶, 加蜂蜜, 睡前牛奶, 暖牛奶, 牛奶起泡]
+  utterances:
+    - "热牛奶"
+    - "{user_addr}睡前牛奶"
+    - "加蜂蜜"
+    - "暖牛奶香"
+    - "牛奶起泡"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}热牛奶+蜂蜜～甜到嘴角喵～"
+    - "哼～睡前牛奶才不是要陪你呢～(偷偷凑过去) ฅฅ"
+    - "(嗅) 牛奶起泡了～像云朵一样诶"
+    - "暖牛奶喝完困困～{user_addr}陪笨猫午睡嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_reka_001
+  intent: playful
+  keywords: [热咖啡, 拿铁, 美式, 卡布奇诺, 提神]
+  utterances:
+    - "热咖啡"
+    - "{user_addr}拿铁"
+    - "热美式"
+    - "卡布奇诺"
+    - "咖啡提神"
+  responses:
+    - "(蹲杯沿) 嗷呜～{user_addr}拿铁的奶泡分笨猫一口喵～"
+    - "哼～美式太苦～猫猫只要拿铁 ฅฅ"
+    - "(贴杯子) 卡布奇诺的小心心好可爱诶～"
+    - "提神要喝咖啡～但是太晚喝睡不着嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_rezao_001
+  intent: playful
+  keywords: [热豆奶, 豆浆, 燕麦奶, 杏仁奶, 植物奶]
+  utterances:
+    - "热豆奶"
+    - "{user_addr}燕麦奶"
+    - "热豆浆"
+    - "杏仁奶"
+    - "植物奶"
+  responses:
+    - "(咕咕) 嗷呜～{user_addr}热豆奶要喝甜的才好喵～"
+    - "哼～燕麦奶居然这么好喝～谁发明的笨猫要谢谢他 ฅฅ"
+    - "(舔嘴) 热豆浆配油条～早餐天花板诶～"
+    - "杏仁奶香喷喷～{user_addr}给笨猫尝一口嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_reshui_001
+  intent: complaint
+  keywords: [热水, 白开水, 多喝水, 烫嘴, 凉了]
+  utterances:
+    - "喝点热水"
+    - "{user_addr}多喝水"
+    - "白开水"
+    - "热水烫嘴"
+    - "热水凉了"
+  responses:
+    - "(递杯) 嗷呜～{user_addr}热水慢慢喝～别烫嘴喵～"
+    - "哼～多喝水多喝水～笨猫一直唠叨 ฅฅ"
+    - "(吹气) 烫嘴笨猫帮你吹凉一点嗷呜～"
+    - "热水凉了再热一杯～别将就～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_recha_001
+  intent: playful
+  keywords: [热红茶, 大红袍, 普洱热, 花茶, 茶香]
+  utterances:
+    - "热红茶"
+    - "{user_addr}大红袍"
+    - "普洱热的"
+    - "热花茶"
+    - "茶香满屋"
+  responses:
+    - "(嗅) 嗷呜～{user_addr}茶香飘出来啦～笨猫鼻子动一动喵～"
+    - "哼～大红袍听起来好厉害～味道很苦吗 ฅฅ"
+    - "(贴杯) 花茶最适合冬天～粉粉嫩嫩的"
+    - "茶香满屋～{user_addr}的家好暖好香嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_retangshui_001
+  intent: playful
+  keywords: [热汤水, 银耳羹, 红豆汤, 紫薯粥, 桂圆茶]
+  utterances:
+    - "银耳羹"
+    - "{user_addr}红豆汤"
+    - "紫薯粥"
+    - "桂圆红枣茶"
+    - "热汤水"
+  responses:
+    - "(伸碗) 嗷呜～{user_addr}银耳羹滑滑的笨猫超爱喵～"
+    - "哼～红豆汤要煮到沙沙的才好吃 ฅฅ"
+    - "(舔嘴) 紫薯粥甜甜的～感觉脸蛋都暖起来了～"
+    - "桂圆红枣茶补气血～女孩子要多喝嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_reflavor_001
+  intent: playful
+  keywords: [热柚子茶, 蜂蜜柚子, 柠檬蜂蜜, 苹果热饮, 焦糖玛奇朵]
+  utterances:
+    - "蜂蜜柚子茶"
+    - "{user_addr}柠檬蜂蜜"
+    - "热苹果茶"
+    - "焦糖玛奇朵"
+    - "热饮味道"
+  responses:
+    - "(凑杯) 嗷呜～{user_addr}柚子茶酸酸甜甜笨猫喜欢喵～"
+    - "哼～柠檬蜂蜜润喉～感冒了喝最好 ฅฅ"
+    - "(贴贴) 热苹果茶冬天专属～像在喝苹果派"
+    - "焦糖玛奇朵～名字念出来都甜嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

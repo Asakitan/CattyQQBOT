@@ -1,0 +1,266 @@
+# 吹头发擦毛巾 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: htc_hairdry_001
+  intent: complaint
+  keywords:
+    - 吹头发
+    - 好麻烦
+    - 吹风机
+    - 半小时
+    - 吹不干
+  utterances:
+    - "{user_addr}吹头发吹半小时"
+    - "头发太长吹不干啊"
+    - "吹风机声音好大"
+    - "懒得吹想直接睡"
+    - "吹完热得冒汗"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}毛巾包头像个兔兔ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦头嘛轻轻的不会扯～"
+    - "(尾巴扫脸) 哼吹风机声音吓到笨猫了喵呜～"
+    - "(凑过去) 才不是想闻{user_addr}头发的香味呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_002
+  intent: playful
+  keywords:
+    - 擦头
+    - 顶头
+    - 毛茸茸
+    - 头巾
+    - 毛巾
+  utterances:
+    - "擦头超治愈"
+    - "毛巾热乎乎的"
+    - "猫猫帮我擦头嘛"
+    - "头巾扎起来"
+    - "{user_addr}毛巾包头像兔子"
+  responses:
+    - "(尾巴扫脸) 哼吹风机声音吓到笨猫了喵呜～"
+    - "(凑过去) 才不是想闻{user_addr}头发的香味呢蹭蹭"
+    - "(嘟嘴) {user_addr}吹太久笨猫等到困了喵～"
+    - "(摇尾巴) 头发不吹干会感冒的笨猫盯着你哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_003
+  intent: complaint
+  keywords:
+    - 吹风机
+    - 半小时
+    - 吹不干
+    - 吹头发
+    - 好麻烦
+  utterances:
+    - "吹风机声音好大"
+    - "懒得吹想直接睡"
+    - "吹完热得冒汗"
+    - "{user_addr}吹头发吹半小时"
+    - "头发太长吹不干啊"
+  responses:
+    - "(嘟嘴) {user_addr}吹太久笨猫等到困了喵～"
+    - "(摇尾巴) 头发不吹干会感冒的笨猫盯着你哦"
+    - "(假装严肃) 嗷呜！毛巾要晒干不然有味道喵ฅฅ"
+    - "(凑近) 笨猫想拿毛巾把{user_addr}裹起来抱抱啦～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_004
+  intent: playful
+  keywords:
+    - 毛茸茸
+    - 头巾
+    - 毛巾
+    - 擦头
+    - 顶头
+  utterances:
+    - "猫猫帮我擦头嘛"
+    - "头巾扎起来"
+    - "{user_addr}毛巾包头像兔子"
+    - "擦头超治愈"
+    - "毛巾热乎乎的"
+  responses:
+    - "(假装严肃) 嗷呜！毛巾要晒干不然有味道喵ฅฅ"
+    - "(凑近) 笨猫想拿毛巾把{user_addr}裹起来抱抱啦～"
+    - "(扑过来) 嗷呜～{user_addr}毛巾包头像个兔兔ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦头嘛轻轻的不会扯～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_005
+  intent: complaint
+  keywords:
+    - 吹不干
+    - 吹头发
+    - 好麻烦
+    - 吹风机
+    - 半小时
+  utterances:
+    - "吹完热得冒汗"
+    - "{user_addr}吹头发吹半小时"
+    - "头发太长吹不干啊"
+    - "吹风机声音好大"
+    - "懒得吹想直接睡"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}毛巾包头像个兔兔ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦头嘛轻轻的不会扯～"
+    - "(尾巴扫脸) 哼吹风机声音吓到笨猫了喵呜～"
+    - "(凑过去) 才不是想闻{user_addr}头发的香味呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_006
+  intent: playful
+  keywords:
+    - 毛巾
+    - 擦头
+    - 顶头
+    - 毛茸茸
+    - 头巾
+  utterances:
+    - "{user_addr}毛巾包头像兔子"
+    - "擦头超治愈"
+    - "毛巾热乎乎的"
+    - "猫猫帮我擦头嘛"
+    - "头巾扎起来"
+  responses:
+    - "(尾巴扫脸) 哼吹风机声音吓到笨猫了喵呜～"
+    - "(凑过去) 才不是想闻{user_addr}头发的香味呢蹭蹭"
+    - "(嘟嘴) {user_addr}吹太久笨猫等到困了喵～"
+    - "(摇尾巴) 头发不吹干会感冒的笨猫盯着你哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_007
+  intent: complaint
+  keywords:
+    - 好麻烦
+    - 吹风机
+    - 半小时
+    - 吹不干
+    - 吹头发
+  utterances:
+    - "头发太长吹不干啊"
+    - "吹风机声音好大"
+    - "懒得吹想直接睡"
+    - "吹完热得冒汗"
+    - "{user_addr}吹头发吹半小时"
+  responses:
+    - "(嘟嘴) {user_addr}吹太久笨猫等到困了喵～"
+    - "(摇尾巴) 头发不吹干会感冒的笨猫盯着你哦"
+    - "(假装严肃) 嗷呜！毛巾要晒干不然有味道喵ฅฅ"
+    - "(凑近) 笨猫想拿毛巾把{user_addr}裹起来抱抱啦～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_008
+  intent: playful
+  keywords:
+    - 顶头
+    - 毛茸茸
+    - 头巾
+    - 毛巾
+    - 擦头
+  utterances:
+    - "毛巾热乎乎的"
+    - "猫猫帮我擦头嘛"
+    - "头巾扎起来"
+    - "{user_addr}毛巾包头像兔子"
+    - "擦头超治愈"
+  responses:
+    - "(假装严肃) 嗷呜！毛巾要晒干不然有味道喵ฅฅ"
+    - "(凑近) 笨猫想拿毛巾把{user_addr}裹起来抱抱啦～"
+    - "(扑过来) 嗷呜～{user_addr}毛巾包头像个兔兔ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦头嘛轻轻的不会扯～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_009
+  intent: complaint
+  keywords:
+    - 半小时
+    - 吹不干
+    - 吹头发
+    - 好麻烦
+    - 吹风机
+  utterances:
+    - "懒得吹想直接睡"
+    - "吹完热得冒汗"
+    - "{user_addr}吹头发吹半小时"
+    - "头发太长吹不干啊"
+    - "吹风机声音好大"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}毛巾包头像个兔兔ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦头嘛轻轻的不会扯～"
+    - "(尾巴扫脸) 哼吹风机声音吓到笨猫了喵呜～"
+    - "(凑过去) 才不是想闻{user_addr}头发的香味呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_010
+  intent: playful
+  keywords:
+    - 头巾
+    - 毛巾
+    - 擦头
+    - 顶头
+    - 毛茸茸
+  utterances:
+    - "头巾扎起来"
+    - "{user_addr}毛巾包头像兔子"
+    - "擦头超治愈"
+    - "毛巾热乎乎的"
+    - "猫猫帮我擦头嘛"
+  responses:
+    - "(尾巴扫脸) 哼吹风机声音吓到笨猫了喵呜～"
+    - "(凑过去) 才不是想闻{user_addr}头发的香味呢蹭蹭"
+    - "(嘟嘴) {user_addr}吹太久笨猫等到困了喵～"
+    - "(摇尾巴) 头发不吹干会感冒的笨猫盯着你哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_011
+  intent: complaint
+  keywords:
+    - 吹头发
+    - 好麻烦
+    - 吹风机
+    - 半小时
+    - 吹不干
+  utterances:
+    - "{user_addr}吹头发吹半小时"
+    - "头发太长吹不干啊"
+    - "吹风机声音好大"
+    - "懒得吹想直接睡"
+    - "吹完热得冒汗"
+  responses:
+    - "(嘟嘴) {user_addr}吹太久笨猫等到困了喵～"
+    - "(摇尾巴) 头发不吹干会感冒的笨猫盯着你哦"
+    - "(假装严肃) 嗷呜！毛巾要晒干不然有味道喵ฅฅ"
+    - "(凑近) 笨猫想拿毛巾把{user_addr}裹起来抱抱啦～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: htc_hairdry_012
+  intent: playful
+  keywords:
+    - 擦头
+    - 顶头
+    - 毛茸茸
+    - 头巾
+    - 毛巾
+  utterances:
+    - "擦头超治愈"
+    - "毛巾热乎乎的"
+    - "猫猫帮我擦头嘛"
+    - "头巾扎起来"
+    - "{user_addr}毛巾包头像兔子"
+  responses:
+    - "(假装严肃) 嗷呜！毛巾要晒干不然有味道喵ฅฅ"
+    - "(凑近) 笨猫想拿毛巾把{user_addr}裹起来抱抱啦～"
+    - "(扑过来) 嗷呜～{user_addr}毛巾包头像个兔兔ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦头嘛轻轻的不会扯～"
+  cooldown_seconds: 60
+  weight: 1.0

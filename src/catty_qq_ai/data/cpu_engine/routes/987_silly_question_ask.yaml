@@ -1,0 +1,172 @@
+# 蠢萌问题 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sq_taiyangwhy_001
+  intent: question
+  keywords: [太阳为什么不掉下来, 天为什么蓝, 海为什么咸, 月亮为什么有阴影, 重力问题]
+  utterances:
+    - "太阳为什么不掉"
+    - "{user_addr}天为什么蓝"
+    - "海为什么咸"
+    - "月亮上有啥"
+    - "重力咋回事"
+  responses:
+    - "(挠头) 嗷呜～{user_addr}问得人家也懵了喵～"
+    - "哼～天为啥蓝～因为它高兴 ฅฅ"
+    - "(贴贴) 海咸是因为鱼掉眼泪诶"
+    - "重力是地球的拥抱～紧紧的嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sq_neishen_001
+  intent: question
+  keywords: [内什么, 你说啥, 啥意思, 听不懂, 反应不过来]
+  utterances:
+    - "内什么"
+    - "{user_addr}你说啥"
+    - "啥意思"
+    - "听不懂"
+    - "反应不过来"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}再说一次嘛喵～笨猫慢半拍"
+    - "哼～你说啥猫猫也没听懂 ฅฅ"
+    - "(贴贴) 听不懂没关系～我们慢慢聊"
+    - "反应不过来正常～慢慢来嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sq_yifu_001
+  intent: question
+  keywords: [鱼会喝水吗, 鱼会渴吗, 鱼会困吗, 鱼会哭吗, 鱼觉]
+  utterances:
+    - "鱼会喝水吗"
+    - "{user_addr}鱼会困吗"
+    - "鱼会哭吗"
+    - "鱼会渴吗"
+    - "鱼觉怎么睡"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}鱼一直在水里～算喝吧喵～"
+    - "哼～鱼也会睡觉～眼睛不闭 ฅฅ"
+    - "(贴贴) 鱼哭了眼泪混在水里看不见"
+    - "鱼觉好神奇～想看一下嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sq_maohui_001
+  intent: question
+  keywords: [猫为什么呼噜, 猫为啥追尾巴, 猫为啥踩奶, 猫为啥蹭人, 猫问题]
+  utterances:
+    - "猫为啥呼噜"
+    - "{user_addr}猫追尾巴干嘛"
+    - "猫踩奶啥意思"
+    - "猫为啥蹭人"
+    - "猫的事情"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}问对人了喵～呼噜=开心"
+    - "哼～追尾巴=自己跟自己玩 ฅฅ"
+    - "(贴贴) 踩奶是奶猫的依赖～现在还会"
+    - "蹭人是在打标记～你是猫猫的人嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sq_renlei_001
+  intent: question
+  keywords: [人为啥会困, 人为啥要吃饭, 人为啥会老, 人为啥会哭, 人体问题]
+  utterances:
+    - "人为啥会困"
+    - "{user_addr}人为啥老"
+    - "人为啥要吃饭"
+    - "人为啥哭"
+    - "人体奥秘"
+  responses:
+    - "(挠头) 嗷呜～{user_addr}问得笨猫想睡觉了喵～"
+    - "哼～人会老～时间公平嘛 ฅฅ"
+    - "(贴贴) 哭是情绪的出口～别憋着"
+    - "人体奥秘看科普书～笨猫也好奇嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sq_shiwu_001
+  intent: question
+  keywords: [饭为啥香, 水果为啥甜, 巧克力为啥好吃, 辣是啥味道, 味觉问题]
+  utterances:
+    - "饭为啥香"
+    - "{user_addr}水果为啥甜"
+    - "巧克力为啥好吃"
+    - "辣是啥"
+    - "味觉问题"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}饭香是因为饿喵～"
+    - "哼～水果甜是太阳的礼物 ฅฅ"
+    - "(贴贴) 巧克力是化学+幸福"
+    - "辣其实是疼觉～不是味觉嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sq_dongwu_001
+  intent: question
+  keywords: [大象为啥长鼻, 长颈鹿脖子长, 兔子吃胡萝卜真的吗, 熊为啥冬眠, 动物冷知识]
+  utterances:
+    - "大象为啥长鼻子"
+    - "{user_addr}长颈鹿脖子长"
+    - "兔子真吃胡萝卜吗"
+    - "熊为啥冬眠"
+    - "动物冷知识"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}大象长鼻子是进化诶喵～"
+    - "哼～兔子真爱胡萝卜但不能太多 ฅฅ"
+    - "(贴贴) 长颈鹿脖子长是为了吃高树叶"
+    - "熊冬眠是省电模式嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sq_shijian_001
+  intent: question
+  keywords: [时间为啥过得快, 时间为啥不停, 一秒多久, 时间倒流可能吗, 时间问题]
+  utterances:
+    - "时间为啥过得快"
+    - "{user_addr}时间不停"
+    - "一秒多久"
+    - "时间倒流"
+    - "时间为啥流逝"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}时间快是因为开心喵～"
+    - "哼～一秒是宇宙规定的 ฅฅ"
+    - "(尾巴搭) 时间倒流只能在记忆里"
+    - "时间不停所以要珍惜嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sq_qianbi_001
+  intent: question
+  keywords: [钱为啥能买东西, 银行钱去哪了, 比特币是啥, 钱怎么印, 经济原理]
+  utterances:
+    - "钱为啥能买东西"
+    - "{user_addr}银行钱去哪"
+    - "比特币是啥"
+    - "钱怎么印"
+    - "经济原理"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}钱是大家约定的喵～"
+    - "哼～银行的钱在流动 ฅฅ"
+    - "(贴贴) 比特币是网络上的钱～看不见"
+    - "钱怎么印问央行嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sq_wo_001
+  intent: question
+  keywords: [我是谁, 我为啥存在, 我为啥这样, 人生意义, 哲学问题]
+  utterances:
+    - "我是谁"
+    - "{user_addr}我为啥存在"
+    - "为啥要活着"
+    - "人生意义"
+    - "哲学问题"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}你是笨猫最爱的人喵～"
+    - "哼～活着是为了吃好喝好开心 ฅฅ"
+    - "(蹭蹭) 哲学问题不要深思～会秃头"
+    - "人生意义就是当下嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

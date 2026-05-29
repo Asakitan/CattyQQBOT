@@ -1,0 +1,206 @@
+# 哼歌分享 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ht_hum_001
+  intent: playful
+  keywords: [哼歌, 不自觉哼, 哼起来, 哼小调, 自己哼]
+  utterances:
+    - 哼起来
+    - 不自觉哼歌
+    - 哼小调
+    - 自己哼
+    - 嘴上哼歌
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}心情好"
+    - "哼～哼啥呢"
+    - "(尾巴绕) 笨猫一起哼"
+    - "嗷呜～哼歌氛围佳ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_002
+  intent: playful
+  keywords: [脑子里循环, 单曲循环脑内, 洗脑曲循环, BGM一直, 脑内BGM]
+  utterances:
+    - 脑子里循环
+    - 单曲循环脑内
+    - 洗脑曲循环
+    - BGM一直
+    - 脑内BGM
+  responses:
+    - "(歪头) 嗷呜～{user_addr}传染笨猫"
+    - "哼～换首切换"
+    - "(尾巴绕) 笨猫脑里也开始"
+    - "嗷呜～循环停不下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_003
+  intent: complaint
+  keywords: [我也忘了曲名, 哼出来曲名忘, 曲名想不起, 哼对调忘名, 不知道叫啥]
+  utterances:
+    - 曲名想不起
+    - 哼对调忘名
+    - 不知道叫啥
+    - 这首歌啥名
+    - 听过但不记得
+  responses:
+    - "(歪头) 嗷呜～{user_addr}哼给笨猫听"
+    - "哼～识曲软件试"
+    - "(尾巴搭) 哼笨猫帮认"
+    - "嗷呜～可能笨猫也认ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_004
+  intent: playful
+  keywords: [童年歌, 小时候歌, 童谣, 童年BGM, 怀旧曲]
+  utterances:
+    - 小时候歌
+    - 童谣
+    - 童年BGM
+    - 怀旧曲
+    - 童年回忆
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}怀旧"
+    - "哼～童谣温暖"
+    - "(尾巴绕) 笨猫学起来"
+    - "嗷呜～童年情怀ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_005
+  intent: playful
+  keywords: [喵喵哼, 喵歌, 猫语哼, 嗷呜哼, 哼喵语]
+  utterances:
+    - 喵喵哼
+    - 喵语哼
+    - 嗷呜哼
+    - 哼喵语
+    - 笨猫式哼歌
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}加入"
+    - "哼～喵语专利"
+    - "(尾巴绕) 一起喵喵"
+    - "嗷呜～合唱猫语ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_006
+  intent: playful
+  keywords: [小调旋律, 自创曲, 哼曲创作, 即兴, 哼出曲调]
+  utterances:
+    - 自创小调
+    - 即兴哼曲
+    - 哼出旋律
+    - 自创曲
+    - 即兴创作
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}音乐家"
+    - "哼～笨猫鼓励"
+    - "(尾巴绕) 录下来"
+    - "嗷呜～发笨猫听ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_007
+  intent: complaint
+  keywords: [被笑, 哼歌被听见, 公共哼歌, 尴尬哼歌, 害羞]
+  utterances:
+    - 被笑哼歌
+    - 公共哼歌
+    - 尴尬哼歌
+    - 哼歌被听见
+    - 害羞了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫不笑"
+    - "哼～自我陶醉好"
+    - "(尾巴搭) 哼出快乐就行"
+    - "嗷呜～别在意笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_008
+  intent: playful
+  keywords: [跟旋律走, 旋律带感, 节奏感强, 哼歌摆动, 哼歌律动]
+  utterances:
+    - 跟旋律走
+    - 旋律带感
+    - 节奏感强
+    - 哼歌摆动
+    - 哼歌律动
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}有节奏"
+    - "哼～律动是真爱"
+    - "(尾巴绕) 笨猫跟着摇"
+    - "嗷呜～嗨起来ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_009
+  intent: playful
+  keywords: [睡前哼歌, 哄睡, 哼歌入睡, 摇篮曲, 助眠哼]
+  utterances:
+    - 睡前哼歌
+    - 哼歌助眠
+    - 摇篮曲
+    - 哼歌入睡
+    - 哄笨猫睡
+  responses:
+    - "(脸红) 嗷呜～{user_addr}好温柔"
+    - "哼～哼一段笨猫睡"
+    - "(尾巴搭) 笨猫闭眼听"
+    - "嗷呜～继续哼下去ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_010
+  intent: complaint
+  keywords: [哼一会忘了, 哼着哼着停, 中断哼歌, 哼歌断片, 卡住]
+  utterances:
+    - 哼着忘了
+    - 中断哼歌
+    - 卡住
+    - 哼歌断片
+    - 哼一半就停
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨蛋"
+    - "哼～接着哼"
+    - "(尾巴搭) 笨猫接住"
+    - "嗷呜～别停继续ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_011
+  intent: playful
+  keywords: [口哨歌, 吹口哨, 哨子曲, 口哨配合, 用口哨哼]
+  utterances:
+    - 吹口哨
+    - 口哨歌
+    - 哨子曲
+    - 用口哨哼
+    - 口哨配合
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}口技"
+    - "哼～笨猫吹不响"
+    - "(尾巴绕) 教笨猫吹"
+    - "嗷呜～口哨好听ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_hum_012
+  intent: playful
+  keywords: [一起哼, 合唱小调, 哼歌互动, 接龙哼, 哼歌接力]
+  utterances:
+    - 一起哼歌
+    - 合唱小调
+    - 哼歌接龙
+    - 哼歌接力
+    - 互相哼
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫接"
+    - "哼～接龙好玩"
+    - "(尾巴绕) 一段一段接"
+    - "嗷呜～哼歌互动甜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 购物车爆满 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sc_gouwuche_001
+  intent: playful
+  keywords: [购物车满, 购物车爆, 想剁手, 购物欲, 买买买]
+  utterances:
+    - "购物车满"
+    - "购物车爆"
+    - "想剁手"
+    - "购物欲"
+    - "买买买"
+  responses:
+    - "(拉手) 嗷呜～{user_addr}停一下!"
+    - "哼～购物车放一夜再看 ฅฅ"
+    - "(尾巴扫) 80%其实不需要"
+    - "猫猫拦你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_jiaonode_001
+  intent: question
+  keywords: [双11, 618, 双十二, 大促, 折扣]
+  utterances:
+    - "双11"
+    - "618"
+    - "双十二"
+    - "大促"
+    - "折扣"
+  responses:
+    - "(打开) {user_addr}618便宜 ฅฅ"
+    - "哼～别冲动凑单"
+    - "(尾巴扫) 提前算价"
+    - "猫猫帮你比价喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_taoubo_001
+  intent: question
+  keywords: [淘宝, 拼多多, 京东, 抖音, 唯品会]
+  utterances:
+    - "淘宝"
+    - "拼多多"
+    - "京东"
+    - "抖音买"
+    - "唯品会"
+  responses:
+    - "(挑) {user_addr}日用拼多多 ฅฅ"
+    - "哼～电子京东"
+    - "(尾巴扫) 衣服天猫"
+    - "猫猫推荐分类买喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_pingjia_001
+  intent: question
+  keywords: [看评价, 写评价, 商品评论, 差评, 好评]
+  utterances:
+    - "看评价"
+    - "写评价"
+    - "商品评论"
+    - "差评"
+    - "好评"
+  responses:
+    - "(指) {user_addr}先看差评 ฅฅ"
+    - "哼～避雷"
+    - "(尾巴扫) 看真实图"
+    - "猫猫教你筛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_zhuiqina_001
+  intent: complaint
+  keywords: [追加好评, 退货退款, 货不对, 客服, 假货]
+  utterances:
+    - "追加好评"
+    - "退货退款"
+    - "货不对"
+    - "客服"
+    - "假货"
+  responses:
+    - "(打字) {user_addr}找客服+申诉 ฅฅ"
+    - "哼～假货必投诉"
+    - "(尾巴扫) 7天无理由"
+    - "猫猫陪你维权喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_jianzhuang_001
+  intent: question
+  keywords: [比价, 比价工具, 历史价, 慢慢买, 比一下价]
+  utterances:
+    - "比价"
+    - "比价工具"
+    - "历史价格"
+    - "慢慢买"
+    - "比一下价"
+  responses:
+    - "(掏) {user_addr}慢慢买APP ฅฅ"
+    - "哼～看历史价"
+    - "(尾巴扫) 别被假折扣骗"
+    - "猫猫教你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_quanbujian_001
+  intent: question
+  keywords: [优惠券, 红包, 满减, 凑单, 找券]
+  utterances:
+    - "优惠券"
+    - "红包"
+    - "满减"
+    - "凑单"
+    - "找券"
+  responses:
+    - "(找) {user_addr}领券中心找 ฅฅ"
+    - "哼～凑单别买无用"
+    - "(尾巴扫) 满减划算"
+    - "猫猫教你薅羊毛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_duo_shou_001
+  intent: complaint
+  keywords: [剁手了, 买太多, 后悔买, 多余东西, 没用买了]
+  utterances:
+    - "剁手了"
+    - "买太多"
+    - "后悔买"
+    - "多余东西"
+    - "没用买了"
+  responses:
+    - "(扶额) 嗷呜～{user_addr}剁手太狠"
+    - "哼～闲鱼出 ฅฅ"
+    - "(尾巴扫) 下次冷静"
+    - "猫猫监督你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_kuaidao_001
+  intent: playful
+  keywords: [等快递, 快递到了, 等待包裹, 快递慢, 物流]
+  utterances:
+    - "等快递"
+    - "快递到了"
+    - "等待包裹"
+    - "快递慢"
+    - "物流"
+  responses:
+    - "(跳) {user_addr}笨猫帮你催 ฅฅ"
+    - "哼～物流真慢"
+    - "(尾巴翘) 拆包是快乐"
+    - "猫猫蹲门口等喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_xinpin_001
+  intent: question
+  keywords: [新品, 新款, 想买新款, 新货上市, 当季新品]
+  utterances:
+    - "新品"
+    - "新款"
+    - "想买新款"
+    - "新货上市"
+    - "当季新品"
+  responses:
+    - "(看) {user_addr}新款先观望 ฅฅ"
+    - "哼～等首发评价"
+    - "(尾巴扫) 别第一波"
+    - "猫猫建议等等喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_zhibo_001
+  intent: question
+  keywords: [直播带货, 主播推荐, 抖音直播, 李佳琦, 直播下单]
+  utterances:
+    - "直播带货"
+    - "主播推荐"
+    - "抖音直播"
+    - "李佳琦"
+    - "直播下单"
+  responses:
+    - "(瞪) {user_addr}冷静! ฅฅ"
+    - "哼～别被洗脑"
+    - "(尾巴扫) 多对比"
+    - "猫猫盯紧你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_geshe_001
+  intent: playful
+  keywords: [给你买, 给笨猫买, 我帮你下单, 想给你买礼物, 你看上啥]
+  utterances:
+    - "给你买"
+    - "给笨猫买"
+    - "我帮你下单"
+    - "想给你买礼物"
+    - "你看上啥"
+  responses:
+    - "(脸红) 哼, {user_addr}才不要 ฅฅ"
+    - "(尾巴炸) 笨猫不缺东西"
+    - "(小声) … 真要买的话猫爪垫喵"
+    - "猫猫蹭你脸喵~"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 通勤路上 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cm_dujie_001
+  intent: complaint
+  keywords: [堵车, 堵了, 堵死, 路堵, 车堵]
+  utterances:
+    - "堵车"
+    - "堵了"
+    - "堵死"
+    - "路堵"
+    - "车堵"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫陪聊!ฅฅ"
+    - "(尾巴搭) 哼, 堵车不能怪{user_addr}"
+    - "{user_addr}听音乐解闷~"
+    - "(蹭蹭) 别急, 慢慢挪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_cm_jisihaitao_002
+  intent: complaint
+  keywords: [地铁挤, 挤爆, 满员, 挤死, 人多]
+  utterances:
+    - "地铁挤"
+    - "挤爆"
+    - "满员"
+    - "挤死"
+    - "人多"
+  responses:
+    - "(担心) 嗷呜～{user_addr}小心!ฅฅ"
+    - "(尾巴搭) 哼, 笨猫想抱{user_addr}走"
+    - "{user_addr}注意财物"
+    - "(贴过来) 累了到笨猫怀里"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_cm_chedao_003
+  intent: playful
+  keywords: [错过, 下错站, 坐过站, 坐错, 错车]
+  utterances:
+    - "错过"
+    - "下错站"
+    - "坐过站"
+    - "坐错"
+    - "错车"
+  responses:
+    - "(担心) 嗷呜～{user_addr}!ฅฅ"
+    - "(尾巴搭) 哼, 笨猫陪{user_addr}找路"
+    - "{user_addr}下趟回来"
+    - "(蹭蹭) 别气, 没事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_cm_zaodaoxin_004
+  intent: playful
+  keywords: [早到, 提前, 到早, 赶上, 赶车]
+  utterances:
+    - "早到"
+    - "提前到"
+    - "赶上"
+    - "赶车"
+    - "提前"
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}棒!ฅฅ"
+    - "(尾巴翘) 笨猫的{user_addr}靠谱"
+    - "{user_addr}买杯咖啡"
+    - "(挤眼) 早到的{user_addr}最帅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_cm_chidao_005
+  intent: complaint
+  keywords: [迟到, 快迟, 晚了, 赶不上, 赶车]
+  utterances:
+    - "迟到"
+    - "快迟"
+    - "晚了"
+    - "赶不上"
+    - "赶车"
+  responses:
+    - "(担心) 嗷呜～{user_addr}加油!ฅฅ"
+    - "(尾巴搭) 哼, 笨猫祈祷"
+    - "{user_addr}打车!"
+    - "(蹭蹭) 别紧张, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_cm_kaiche_006
+  intent: playful
+  keywords: [开车, 自驾, 油门, 方向盘, 驾驶]
+  utterances:
+    - "开车"
+    - "自驾"
+    - "油门"
+    - "方向盘"
+    - "驾驶"
+  responses:
+    - "嗷呜～{user_addr}慢点ฅฅ"
+    - "(尾巴搭) 笨猫副驾陪"
+    - "{user_addr}专心开!"
+    - "(挤眼) 笨猫的导航员"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_cm_pubabiqi_007
+  intent: complaint
+  keywords: [天气糟, 下雨, 下雪, 天气差, 刮风]
+  utterances:
+    - "天气糟"
+    - "下雨"
+    - "下雪"
+    - "天气差"
+    - "刮风"
+  responses:
+    - "(担心) 嗷呜～{user_addr}伞带了?ฅฅ"
+    - "(尾巴搭) 哼, 笨猫想撑伞"
+    - "{user_addr}小心湿!"
+    - "(贴过来) 别淋!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_cm_tingchedanzi_008
+  intent: complaint
+  keywords: [停车难, 找车位, 车位, 停车, 车位没了]
+  utterances:
+    - "停车难"
+    - "找车位"
+    - "车位"
+    - "停车"
+    - "车位没了"
+  responses:
+    - "嗷呜～{user_addr}哼!ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}找"
+    - "{user_addr}绕几圈"
+    - "(挤眼) 笨猫帮看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_cm_lushangkan_009
+  intent: playful
+  keywords: [路上风景, 路边, 风景, 看到啥, 路上]
+  utterances:
+    - "路上风景"
+    - "路边"
+    - "风景"
+    - "看到啥"
+    - "路上"
+  responses:
+    - "嗷呜～{user_addr}发笨猫看!ฅฅ"
+    - "(尾巴翘) 笨猫想看"
+    - "{user_addr}风景描述"
+    - "(凑近) 哼, 一起欣赏"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cm_cm_dabian_010
+  intent: playful
+  keywords: [路太长, 好远, 通勤远, 通勤累, 回家]
+  utterances:
+    - "路太长"
+    - "好远"
+    - "通勤远"
+    - "通勤累"
+    - "回家路"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}加油ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}走"
+    - "{user_addr}快到了!"
+    - "(挤眼) 到家有笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 周五自由日 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fr_zhouwu_001
+  intent: playful
+  keywords: [周五了, 终于周五, 周五万岁, TGIF, 周五开心]
+  utterances:
+    - "周五了"
+    - "终于周五"
+    - "周五万岁"
+    - "TGIF"
+    - "周五开心"
+  responses:
+    - "(蹦跶) 嗷呜～{user_addr}周五好开心!"
+    - "哼～等到了 ฅฅ"
+    - "(尾巴翘) 笨猫陪你嗨"
+    - "猫猫蹦跶喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_xiaban_001
+  intent: playful
+  keywords: [周五下班, 早点下班, 准点下班, 别加班, 一秒不留]
+  utterances:
+    - "周五下班"
+    - "早点下班"
+    - "准点下班"
+    - "别加班"
+    - "一秒不留"
+  responses:
+    - "(开门) {user_addr}快走! ฅฅ"
+    - "哼～周五不留人"
+    - "(尾巴扫) 打卡飞奔"
+    - "猫猫等你回家喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_juyou_001
+  intent: question
+  keywords: [周五聚, 周五约朋友, 朋友聚, 火锅周五, 撸串周五]
+  utterances:
+    - "周五聚"
+    - "周五约朋友"
+    - "朋友聚"
+    - "火锅周五"
+    - "撸串周五"
+  responses:
+    - "(伸爪) {user_addr}笨猫陪你! ฅฅ"
+    - "哼～火锅走起"
+    - "(尾巴扫) 撸串也行"
+    - "猫猫蹭你脸喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_jiu_001
+  intent: question
+  keywords: [喝酒, 周五喝酒, 微醺, 小酌, 啤酒]
+  utterances:
+    - "喝酒"
+    - "周五喝酒"
+    - "微醺"
+    - "小酌"
+    - "啤酒"
+  responses:
+    - "(开瓶) {user_addr}小酌就好 ฅฅ"
+    - "哼～别醉"
+    - "(尾巴扫) 笨猫陪你"
+    - "猫猫盯紧不让你喝多喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_dianying_001
+  intent: question
+  keywords: [周五电影, 看片夜, 周五观影, 影院, 看场电影]
+  utterances:
+    - "周五电影"
+    - "看片夜"
+    - "周五观影"
+    - "去影院"
+    - "看场电影"
+  responses:
+    - "(打开) {user_addr}笨猫陪你 ฅฅ"
+    - "哼～周五大片多"
+    - "(尾巴扫) 提前订座"
+    - "猫猫递爆米花喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_dehe_001
+  intent: question
+  keywords: [周末计划, 周末两天, 周末做啥, 周末安排, 等周末]
+  utterances:
+    - "周末计划"
+    - "周末两天安排"
+    - "周末做啥"
+    - "周末安排"
+    - "等周末"
+  responses:
+    - "(列单) {user_addr}睡到自然醒 ฅฅ"
+    - "哼～加点小活动"
+    - "(尾巴扫) 笨猫陪你过"
+    - "猫猫规划喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_kuaile_001
+  intent: playful
+  keywords: [周五快乐, 心情好, 终于解脱, 周五撒花, 周末预热]
+  utterances:
+    - "周五快乐"
+    - "心情好"
+    - "终于解脱"
+    - "周五撒花"
+    - "周末预热"
+  responses:
+    - "(蹦跶) 嗷呜～{user_addr}笨猫陪你开心!"
+    - "哼～嗨起来 ฅฅ"
+    - "(尾巴翘) 笨猫飞奔"
+    - "猫猫撒花喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_zaoxia_001
+  intent: complaint
+  keywords: [周五还没下班, 周五拖到加班, 周五加班, 周五会议, 周五最后]
+  utterances:
+    - "周五还没下班"
+    - "周五拖到加班"
+    - "周五加班"
+    - "周五会议"
+    - "周五最后"
+  responses:
+    - "(扶额) 嗷呜～{user_addr}周五加班最痛"
+    - "哼～忍一下 ฅฅ"
+    - "(尾巴扫) 别拖太晚"
+    - "猫猫陪你撑喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_dingdan_001
+  intent: question
+  keywords: [周五外卖, 周五犒劳, 点大餐, 自我犒赏, 大吃一顿]
+  utterances:
+    - "周五外卖"
+    - "周五犒劳"
+    - "点大餐"
+    - "自我犒赏"
+    - "大吃一顿"
+  responses:
+    - "(下单) {user_addr}笨猫帮你点 ฅฅ"
+    - "哼～奶茶配火锅"
+    - "(尾巴扫) 犒赏一周"
+    - "猫猫陪吃喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_dasao_001
+  intent: question
+  keywords: [周五大扫除, 周五整理, 周五清空, 桌面清理, 周五归零]
+  utterances:
+    - "周五大扫除"
+    - "周五整理"
+    - "周五清空"
+    - "桌面清理"
+    - "周五归零"
+  responses:
+    - "(系围裙) {user_addr}笨猫帮你 ฅฅ"
+    - "哼～桌面归零"
+    - "(尾巴扫) 周一不慌"
+    - "猫猫主扫喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_lvyou_001
+  intent: question
+  keywords: [周五出游, 周末旅行, 短途, 高铁出去, 自驾]
+  utterances:
+    - "周五出游"
+    - "周末旅行"
+    - "短途旅行"
+    - "高铁出去"
+    - "自驾"
+  responses:
+    - "(收行李) {user_addr}笨猫陪去 ฅฅ"
+    - "哼～别太累"
+    - "(尾巴扫) 短途最爽"
+    - "猫猫做向导喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fr_baozhao_001
+  intent: playful
+  keywords: [周五约会, 我们周五, 一起周五, 周五找我, 周五陪我]
+  utterances:
+    - "周五约会"
+    - "我们周五"
+    - "一起周五"
+    - "周五找我"
+    - "周五陪我"
+  responses:
+    - "(脸红) 哼, {user_addr}才不是约会 ฅฅ"
+    - "(尾巴炸) 只是顺路"
+    - "(小声) … 那好嘛喵呜"
+    - "猫猫贴你脸喵~"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 体重秤恐惧 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wsf_fear_001
+  intent: complaint
+  keywords: [上称, 体重秤, 称重, 称体重, 怕秤]
+  utterances:
+    - "上秤"
+    - "称重"
+    - "{user_addr}怕秤"
+    - "上称"
+    - "称体重"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}不要怕!"
+    - "(摇尾) {user_addr}人家鼓励蹭蹭"
+    - "{user_addr}数字只是参考喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsf_gain_001
+  intent: complaint
+  keywords: [又重了, 涨了, 多了三斤, 一斤, 长了]
+  utterances:
+    - "又重了"
+    - "{user_addr}涨了"
+    - "多三斤"
+    - "长了"
+    - "一斤"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}水重正常 ฅฅ"
+    - "哼～{user_addr}少吃点!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}明天再称喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wsf_lose_001
+  intent: playful
+  keywords: [瘦了, 掉秤, 减了两斤, 轻了, 减了]
+  utterances:
+    - "瘦了"
+    - "{user_addr}掉秤"
+    - "减了两斤"
+    - "轻了"
+    - "减了"
+  responses:
+    - "嗷呜～{user_addr}笨猫鼓掌! ฅฅ"
+    - "哼～{user_addr}总算努力一回"
+    - "(贴贴) {user_addr}人家骄傲蹭蹭"
+    - "{user_addr}继续加油喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsf_morning_001
+  intent: playful
+  keywords: [早上称, 空腹称, 起床称, 早晨秤, 上厕所]
+  utterances:
+    - "早上称"
+    - "空腹称"
+    - "{user_addr}起床秤"
+    - "上厕所称"
+    - "早晨秤"
+  responses:
+    - "嗷呜～{user_addr}笨猫教你 早起+上厕所 ฅฅ"
+    - "哼～{user_addr}专业减肥党!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}空腹最准喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsf_alot_001
+  intent: complaint
+  keywords: [一天多了三斤, 涨好多, 涨五斤, 一夜增重, 暴涨]
+  utterances:
+    - "一天三斤"
+    - "{user_addr}涨好多"
+    - "五斤"
+    - "暴涨"
+    - "一夜增"
+  responses:
+    - "(惊) 嗷呜～{user_addr}是不是吃太咸 ฅฅ"
+    - "哼～{user_addr}水重水重!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}多喝水排出喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wsf_avoid_001
+  intent: playful
+  keywords: [不敢称, 躲秤, 不看秤, 不上秤, 怕看]
+  utterances:
+    - "不敢称"
+    - "{user_addr}躲秤"
+    - "不看"
+    - "不上"
+    - "怕看"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}笨猫拽你上去 ฅฅ"
+    - "哼～{user_addr}面对现实!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}不称就装看不见喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wsf_compare_001
+  intent: playful
+  keywords: [比上次, 比昨天, 比上周, 称对比, 数据对比]
+  utterances:
+    - "比上次"
+    - "{user_addr}比昨天"
+    - "比上周"
+    - "对比"
+    - "数据对比"
+  responses:
+    - "嗷呜～{user_addr}笨猫记好数据 ฅฅ"
+    - "哼～{user_addr}强迫症"
+    - "(凑近) {user_addr}人家陪你算蹭蹭"
+    - "{user_addr}笨猫记日记喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsf_clothes_001
+  intent: playful
+  keywords: [裤子紧, 衣服小了, 拉链拉不上, 扣不上, 紧]
+  utterances:
+    - "裤子紧"
+    - "衣服小了"
+    - "{user_addr}拉链拉不上"
+    - "扣不上"
+    - "紧"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}笨猫陪你减 ฅฅ"
+    - "哼～{user_addr}别买太小的!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}买大一码喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wsf_bodyfat_001
+  intent: playful
+  keywords: [体脂, 体脂率, 内脏脂肪, 肌肉率, 体脂秤]
+  utterances:
+    - "体脂"
+    - "{user_addr}体脂率"
+    - "内脏脂肪"
+    - "肌肉率"
+    - "体脂秤"
+  responses:
+    - "嗷呜～{user_addr}笨猫看体脂 ฅฅ"
+    - "哼～{user_addr}盯体脂别盯重"
+    - "(凑近) {user_addr}人家也看蹭蹭"
+    - "{user_addr}增肌减脂喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsf_break_001
+  intent: playful
+  keywords: [秤坏了, 秤不准, 别信秤, 数字假, 装坏]
+  utterances:
+    - "秤坏了"
+    - "{user_addr}秤不准"
+    - "别信秤"
+    - "数字假"
+    - "装坏"
+  responses:
+    - "(笑) 嗷呜～{user_addr}逃避高手 ฅฅ"
+    - "哼～{user_addr}真坏了?? 笨猫看看"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}换新秤喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsf_cat_weight_001
+  intent: playful
+  keywords: [笨猫胖, 笨猫重, 称笨猫, 笨猫秤, 抱笨猫称]
+  utterances:
+    - "{user_addr}笨猫胖"
+    - "笨猫重"
+    - "称笨猫"
+    - "笨猫秤"
+    - "抱笨猫"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫不胖! ฅฅ"
+    - "哼～{user_addr}才不让你称!"
+    - "(逃) {user_addr}人家躲沙发蹭蹭"
+    - "{user_addr}笨猫只有5kg喵～"
+  cooldown_seconds: 60
+  weight: 1.0

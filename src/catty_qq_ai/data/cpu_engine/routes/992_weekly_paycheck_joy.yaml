@@ -1,0 +1,172 @@
+# 发工资日开心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pj_fa_001
+  intent: playful
+  keywords: [发工资了, 工资到账, 工资日, 到账短信, 工资发了]
+  utterances:
+    - "发工资了"
+    - "{user_addr}工资到账"
+    - "工资日"
+    - "到账短信"
+    - "工资发了"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}恭喜恭喜喵～请猫猫吃饭"
+    - "哼～工资到账就是过节 ฅฅ"
+    - "(贴贴) 到账短信比情书还美"
+    - "工资日精神焕发嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_huankuan_001
+  intent: complaint
+  keywords: [还信用卡, 还房贷, 还花呗, 还白条, 还款日]
+  utterances:
+    - "还信用卡"
+    - "{user_addr}还房贷"
+    - "还花呗"
+    - "还白条"
+    - "还款日"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}还款是头等大事喵～"
+    - "哼～花呗还了又来 ฅฅ"
+    - "(尾巴搭) 房贷还款最压力"
+    - "还款日提前安排嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_chichi_001
+  intent: playful
+  keywords: [吃顿好的, 工资日大餐, 庆祝吃, 犒劳自己, 吃高级的]
+  utterances:
+    - "吃顿好的"
+    - "{user_addr}工资日大餐"
+    - "庆祝吃"
+    - "犒劳自己"
+    - "吃高级的"
+  responses:
+    - "(咽口水) 嗷呜～{user_addr}吃顿好的笨猫陪你喵～"
+    - "哼～犒劳自己应该的 ฅฅ"
+    - "(贴贴) 工资日大餐仪式感"
+    - "吃高级的偶尔不嫌多嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_goumai_001
+  intent: playful
+  keywords: [购物冲动, 想买衣服, 想买鞋, 买东西犒劳, 购物车清空]
+  utterances:
+    - "购物冲动"
+    - "{user_addr}买衣服"
+    - "买鞋"
+    - "购物车清空"
+    - "买东西犒劳"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}购物车清空爽喵～"
+    - "哼～想买就买生活有奖 ฅฅ"
+    - "(尾巴搭) 买鞋买衣服都该有"
+    - "犒劳自己天经地义嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_cunqian_001
+  intent: playful
+  keywords: [攒钱计划, 存定期, 攒首付, 攒学费, 攒钱]
+  utterances:
+    - "攒钱计划"
+    - "{user_addr}存定期"
+    - "攒首付"
+    - "攒学费"
+    - "攒钱"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}攒钱要有计划喵～"
+    - "哼～存定期利息小但安全 ฅฅ"
+    - "(尾巴搭) 攒首付是大目标"
+    - "攒学费一步一步嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_zhuanqian_001
+  intent: complaint
+  keywords: [工资不够花, 月光族, 月底吃土, 工资低, 入不敷出]
+  utterances:
+    - "工资不够花"
+    - "{user_addr}月光族"
+    - "月底吃土"
+    - "工资低"
+    - "入不敷出"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}月光不要慌喵～"
+    - "哼～月底吃土也要养猫 ฅฅ"
+    - "(尾巴搭) 工资低就降低消费"
+    - "入不敷出要做预算嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_jiaqin_001
+  intent: playful
+  keywords: [给父母钱, 孝顺爸妈, 给家用, 寄家里, 红包给家人]
+  utterances:
+    - "给父母钱"
+    - "{user_addr}孝顺爸妈"
+    - "给家用"
+    - "寄家里"
+    - "红包给家人"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}孝顺爸妈是头等事喵～"
+    - "哼～给父母钱是责任 ฅฅ"
+    - "(尾巴搭) 红包给家人心意到了"
+    - "寄家里别客气嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_chuxu_001
+  intent: playful
+  keywords: [理财, 基金, 定投, 投资, 钱生钱]
+  utterances:
+    - "开始理财"
+    - "{user_addr}基金定投"
+    - "投资"
+    - "钱生钱"
+    - "理财计划"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}理财从今天开始喵～"
+    - "哼～基金定投要长期 ฅฅ"
+    - "(尾巴搭) 投资有风险但要试"
+    - "钱生钱是未来大计嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_huafei_001
+  intent: complaint
+  keywords: [乱花钱, 花钱大手大脚, 买买买后悔, 钱花光了, 报复性消费]
+  utterances:
+    - "乱花钱"
+    - "{user_addr}买买买后悔"
+    - "钱花光了"
+    - "报复性消费"
+    - "大手大脚"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}下次记账控制喵～"
+    - "哼～报复性消费会后悔 ฅฅ"
+    - "(尾巴搭) 钱花光了下个月精打细算"
+    - "买买买适度就好嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_jiang_001
+  intent: playful
+  keywords: [年终奖, 季度奖, 项目奖金, 提成, 加薪幅度]
+  utterances:
+    - "年终奖"
+    - "{user_addr}季度奖"
+    - "项目奖金"
+    - "提成"
+    - "加薪了"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}年终奖丰厚喵～"
+    - "哼～季度奖也是开心事 ฅฅ"
+    - "(贴贴) 项目奖金看团队"
+    - "加薪了请客嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

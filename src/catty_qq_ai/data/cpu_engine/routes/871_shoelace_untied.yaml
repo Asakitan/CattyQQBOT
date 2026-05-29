@@ -1,0 +1,189 @@
+# 鞋带散开 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: shl_unt_001
+  intent: complaint
+  keywords: [鞋带散, 鞋带松, 系鞋带, 鞋带开了, 走路绊]
+  utterances:
+    - "鞋带散"
+    - "鞋带松"
+    - "系鞋带"
+    - "鞋带开"
+    - "{user_addr}绊倒"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫帮你系喵ฅฅ"
+    - "(尾巴绕) 哼～系紧一点"
+    - "(贴贴) 别绊倒嗷"
+    - "(凑近) 系蝴蝶结好看嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shl_unt_002
+  intent: playful
+  keywords: [系鞋带教程, 蝴蝶结系法, 双结鞋带, 鞋带系紧, 花式系法]
+  utterances:
+    - "蝴蝶结系法"
+    - "双结"
+    - "鞋带系紧"
+    - "花式系法"
+    - "{user_addr}教系"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫教你喵ฅฅ"
+    - "(凑过来) 双结牢固"
+    - "哼～练几次就会"
+    - "(贴贴) 主人加油嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shl_unt_003
+  intent: complaint
+  keywords: [鞋带断, 鞋带磨, 鞋带太短, 鞋带颜色掉, 换鞋带]
+  utterances:
+    - "鞋带断"
+    - "鞋带磨"
+    - "鞋带短"
+    - "颜色掉"
+    - "{user_addr}换鞋带"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}买新鞋带喵"
+    - "(尾巴绕) 哼～别凑合"
+    - "(贴贴) 笨猫陪你挑色"
+    - "(凑近) 配色嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shl_unt_004
+  intent: question
+  keywords: [无鞋带鞋, 弹力鞋带, 一脚蹬, 免系鞋带, 懒人鞋]
+  utterances:
+    - "无鞋带"
+    - "弹力鞋带"
+    - "一脚蹬"
+    - "免系"
+    - "{user_addr}懒人鞋"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}懒人福音喵"
+    - "(凑近) 弹力鞋带便宜"
+    - "哼～主人不爱系"
+    - "(贴贴) 笨猫推荐嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shl_unt_005
+  intent: complaint
+  keywords: [鞋带太长, 鞋带拖地, 鞋带剪短, 长度不对, 鞋带过长]
+  utterances:
+    - "鞋带太长"
+    - "拖地"
+    - "剪短"
+    - "鞋带过长"
+    - "{user_addr}长鞋带"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}剪短点喵"
+    - "(凑近) 哼～拖地易绊"
+    - "(贴贴) 笨猫帮你剪"
+    - "(凑近) 烫尾防散嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shl_unt_006
+  intent: playful
+  keywords: [发光鞋带, 反光鞋带, 个性鞋带, 印花鞋带, 鞋带涂鸦]
+  utterances:
+    - "发光鞋带"
+    - "反光鞋带"
+    - "个性鞋带"
+    - "印花鞋带"
+    - "{user_addr}鞋带涂鸦"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}潮人喵ฅฅ"
+    - "(凑过来) 笨猫想要发光款"
+    - "哼～夜跑安全"
+    - "(贴贴) 主人潮嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shl_unt_007
+  intent: complaint
+  keywords: [鞋带太紧, 脚被勒, 勒红, 系太紧, 走路疼]
+  utterances:
+    - "鞋带太紧"
+    - "脚被勒"
+    - "勒红"
+    - "走路疼"
+    - "{user_addr}勒"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}放松点喵"
+    - "(尾巴绕) 哼～跟你说别系死"
+    - "(贴贴) 笨猫帮你松"
+    - "(凑近) 揉揉脚嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shl_unt_008
+  intent: question
+  keywords: [运动鞋带系法, 篮球鞋带, 跑鞋系法, 防松鞋带, 运动系法]
+  utterances:
+    - "运动鞋带系"
+    - "篮球鞋带"
+    - "跑鞋系"
+    - "防松"
+    - "{user_addr}运动系法"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}双结防松喵"
+    - "(凑近) 笨猫教锁扣法"
+    - "哼～跑步专门系"
+    - "(贴贴) 笨猫陪你嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shl_unt_009
+  intent: complaint
+  keywords: [系鞋带蹲, 蹲下不方便, 鞋带每天系, 系鞋带烦, 蹲下累]
+  utterances:
+    - "蹲下系鞋带"
+    - "每天系"
+    - "系鞋带烦"
+    - "蹲下累"
+    - "{user_addr}蹲烦"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}换免系喵"
+    - "(凑近) 哼～年纪大了笨蛋"
+    - "(贴贴) 笨猫帮你系"
+    - "(凑近) 弹力鞋带好嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shl_unt_010
+  intent: playful
+  keywords: [鞋带颜色, 配色, 撞色, 同色, 鞋带搭]
+  utterances:
+    - "鞋带配色"
+    - "撞色"
+    - "同色"
+    - "鞋带搭"
+    - "{user_addr}配色"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}撞色个性喵"
+    - "(凑过来) 笨猫推荐萌色"
+    - "哼～同色低调"
+    - "(贴贴) 主人帅嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shl_unt_011
+  intent: complaint
+  keywords: [鞋带脏, 鞋带洗, 鞋带发黄, 鞋带洗白, 鞋带臭]
+  utterances:
+    - "鞋带脏"
+    - "鞋带发黄"
+    - "鞋带洗"
+    - "鞋带臭"
+    - "{user_addr}鞋带洗"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}拆下来洗喵"
+    - "(凑近) 哼～小苏打白回来"
+    - "(贴贴) 笨猫帮你洗"
+    - "(凑近) 不行就换新嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

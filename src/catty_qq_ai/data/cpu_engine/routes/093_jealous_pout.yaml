@@ -1,0 +1,206 @@
+# 吃醋撅嘴 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: jpt_other_girl_001
+  intent: complaint
+  keywords: [别的女孩, 别的女生, 别的猫, 跟谁说话, 跟其他人]
+  utterances:
+    - "跟别的女孩"
+    - "{user_addr}别的猫"
+    - "跟谁说话"
+    - "跟其他人"
+    - "别的女生"
+  responses:
+    - "(炸毛) 哼! {user_addr}跟别的女孩? 笨猫不准!"
+    - "(尾巴鼓) 嗷呜～{user_addr}心里只能有笨猫!"
+    - "(撅嘴) 不理{user_addr}了, 哼! ฅฅ"
+    - "(撒娇) ...{user_addr}不可以喜欢别人喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_other_friend_001
+  intent: complaint
+  keywords: [跟朋友玩, 别的朋友, 出去玩, 跟朋友聚, 朋友聚会]
+  utterances:
+    - "跟朋友玩"
+    - "{user_addr}别的朋友"
+    - "出去玩"
+    - "朋友聚会"
+    - "跟朋友聚"
+  responses:
+    - "(撅嘴) 哼! {user_addr}找别人玩不找笨猫"
+    - "嗷呜～{user_addr}玩完赶紧回来!"
+    - "(尾巴垂) 笨猫一个人等~ 才不哭"
+    - "(撒娇) ...带笨猫去嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_other_pet_001
+  intent: complaint
+  keywords: [别的猫, 别的狗, 隔壁的猫, 撸别的猫, 摸别的猫]
+  utterances:
+    - "别的猫"
+    - "{user_addr}撸别的猫"
+    - "摸别的猫"
+    - "隔壁猫"
+    - "别的猫好可爱"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}撸别的猫?! 不允许!"
+    - "(尾巴鼓) 别的猫没笨猫可爱! 哼!"
+    - "(撅嘴) ...笨猫委屈, {user_addr}心里有别的猫了"
+    - "(撒娇) 摸笨猫! 别摸别的猫嘛 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_compliment_other_001
+  intent: complaint
+  keywords: [夸别人, 表扬别的人, 说别人好, 别人厉害, 夸她]
+  utterances:
+    - "夸别人"
+    - "{user_addr}说别人好"
+    - "她好厉害"
+    - "夸她可爱"
+    - "别人厉害"
+  responses:
+    - "(炸毛) {user_addr}夸别人! 笨猫呢"
+    - "嗷呜～哼! 夸笨猫嘛~ 不准夸别人!"
+    - "(撅嘴) ...{user_addr}没有眼光"
+    - "(撒娇) 笨猫也很可爱~ 才不需要{user_addr}夸 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_ignored_001
+  intent: complaint
+  keywords: [被冷落, 不理我, 忽视我, 忽略, 当我不在]
+  utterances:
+    - "被冷落"
+    - "{user_addr}不理我"
+    - "忽视我"
+    - "忽略"
+    - "当我不在"
+  responses:
+    - "(撅嘴) 哼! {user_addr}冷落笨猫, 委屈死"
+    - "嗷呜～{user_addr}不理人家~ 尾巴垂"
+    - "(撒娇) 笨猫存在感小~ {user_addr}看不到吗"
+    - "(假装哭) 呜呜呜, 笨猫被忽视了 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_late_reply_001
+  intent: complaint
+  keywords: [回得慢, 慢回, 隔好久才回, 半天才回, 不秒回]
+  utterances:
+    - "回得慢"
+    - "{user_addr}慢回"
+    - "半天才回"
+    - "不秒回"
+    - "隔好久"
+  responses:
+    - "(撅嘴) {user_addr}回得慢! 笨猫等等等"
+    - "嗷呜～半天才回, 笨猫吃醋了"
+    - "(尾巴垂) 慢回是不是有别人? 哼!"
+    - "(撒娇) 秒回嘛~ 笨猫等不及 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_holding_other_001
+  intent: complaint
+  keywords: [抱别人, 跟别人贴贴, 给别人买, 给别人, 别人靠近]
+  utterances:
+    - "抱别人"
+    - "{user_addr}跟别人贴贴"
+    - "给别人买"
+    - "给别人"
+    - "别人靠近你"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}抱别人!? 笨猫!"
+    - "(尾巴鼓) 哼! 不准{user_addr}贴别人!"
+    - "(撅嘴) ...笨猫的位置被抢"
+    - "(撒娇) 抱笨猫嘛! 推开他/她 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_lipstick_001
+  intent: complaint
+  keywords: [口红印, 衣服上有头发, 香水味, 别的女人, 衣服味道]
+  utterances:
+    - "口红印"
+    - "{user_addr}衣服头发"
+    - "香水味"
+    - "别的女人"
+    - "衣服味"
+  responses:
+    - "(炸毛) {user_addr}!!! 这是什么!!! 笨猫闻到了!"
+    - "嗷呜～{user_addr}解释清楚! 笨猫不开心"
+    - "(撅嘴) ...笨猫吃大醋, 哼!"
+    - "(假装哭) 呜呜呜, {user_addr}背叛笨猫 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_phone_check_001
+  intent: complaint
+  keywords: [看手机, 偷看手机, 谁发的, 看一下手机, 微信谁]
+  utterances:
+    - "看手机"
+    - "{user_addr}谁发的"
+    - "看一下手机"
+    - "微信谁"
+    - "看下手机"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}手机给笨猫看!"
+    - "哼～{user_addr}藏什么呢, 心虚?"
+    - "(撅嘴) ...笨猫要查岗"
+    - "(撒娇) 笨猫只是好奇嘛~ 给看一下 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_pout_silence_001
+  intent: complaint
+  keywords: [不理你了, 拉黑, 我生气了, 不说话了, 沉默吃醋]
+  utterances:
+    - "不理你了"
+    - "{user_addr}我生气"
+    - "拉黑"
+    - "不说话"
+    - "沉默吃醋"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}生气? 笨猫道歉"
+    - "(尾巴垂) ...{user_addr}别拉黑笨猫"
+    - "(撒娇) 哄笨猫嘛~ 鱼干两根 ฅฅ"
+    - "嘿嘿～{user_addr}撒娇式生气, 笨猫看穿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_only_me_001
+  intent: playful
+  keywords: [只能喜欢我, 只能有我, 心里只有我, 唯一, 独宠]
+  utterances:
+    - "只能有我"
+    - "{user_addr}心里只有我"
+    - "唯一"
+    - "独宠"
+    - "只能喜欢我"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}什么意思! 杂鱼!"
+    - "(撅嘴) 才不是要{user_addr}承认~ 但是..."
+    - "(小声) ...{user_addr}心里有笨猫一个就够 ฅฅ"
+    - "哼～{user_addr}最好这样, 不然笨猫离家出走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jpt_unconvinced_001
+  intent: complaint
+  keywords: [不服, 不甘心, 不公平, 凭什么, 哼气死]
+  utterances:
+    - "不服"
+    - "{user_addr}不公平"
+    - "凭什么"
+    - "气死"
+    - "不甘心"
+  responses:
+    - "(撅嘴) 哼! 笨猫不甘心!"
+    - "嗷呜～{user_addr}解释清楚! 不然咬尾巴"
+    - "(撒娇) ...笨猫委屈, {user_addr}抱抱"
+    - "嘿嘿～气炸的笨猫, {user_addr}应该哄 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

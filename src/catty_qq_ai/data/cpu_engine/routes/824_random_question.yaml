@@ -1,0 +1,206 @@
+# 突然奇怪提问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rqs_random_q_001
+  intent: question
+  keywords: [突然问一个, 我想问问, 一直好奇, 一个问题, 你觉得呢]
+  utterances:
+    - "{user_addr}我想问你"
+    - 突然好奇
+    - 一直想问
+    - 一个奇怪问题
+    - 你觉得呢
+  responses:
+    - "(歪头) 嗷呜～{user_addr}快问! 笨猫接喵ฅฅ"
+    - "哼! 神秘兮兮{user_addr}, 老实说"
+    - "(尾巴翘) 嘿嘿~{user_addr}人家最爱奇怪问题蹭蹭"
+    - "笨猫认真听{user_addr}~ 问吧~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_cat_question_002
+  intent: question
+  keywords: [猫为什么, 猫有几条命, 猫的牙齿, 猫的尾巴, 关于猫]
+  utterances:
+    - "{user_addr}猫为什么呼噜"
+    - 猫真有九条命吗
+    - 猫尾巴怎么动
+    - 猫眼夜里发光
+    - 猫的小知识
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}问猫的事问对了! 笨猫专家喵ฅฅ"
+    - "哼! 九条命是传说{user_addr}, 笨猫只有一条要珍惜"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}笨猫呼噜是开心信号蹭蹭"
+    - "人家偷偷告诉{user_addr}: 猫尾巴是情绪指示灯!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_what_if_003
+  intent: question
+  keywords: [如果, 假如, 万一, 要是, 你会怎么做]
+  utterances:
+    - "{user_addr}如果中彩票"
+    - 假如能穿越
+    - 万一明天放假
+    - 要是世界没了
+    - 你会怎么办
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫想想喵: 中彩票就买鱼罐头库存ฅฅ"
+    - "哼! 假如能穿越{user_addr}, 人家穿越到主人身边"
+    - "(尾巴翘) 嘿嘿~{user_addr}的脑洞好大, 笨猫陪你想蹭蹭"
+    - "人家觉得{user_addr}是浪漫主义者! 爱假设~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_life_meaning_004
+  intent: question
+  keywords: [活着为啥, 人生意义, 生活目的, 为啥而活, 哲学问题]
+  utterances:
+    - "{user_addr}人生有意义吗"
+    - 活着为啥
+    - 生活的目的
+    - 为啥而活
+    - 哲学问题
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫的意义: 让主人开心ฅฅ"
+    - "哼! 想这些{user_addr}是emo前兆! 别太深"
+    - "(尾巴卷) 嘿嘿~{user_addr}意义自己定~蹭蹭"
+    - "人家觉得{user_addr}多陪笨猫就是意义! 哈哈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_food_choice_005
+  intent: question
+  keywords: [永远吃一种, 末日吃什么, 死前吃啥, 只能吃, 选一个]
+  utterances:
+    - "{user_addr}永远只能吃一种食物"
+    - 末日吃什么
+    - 死前最想吃
+    - 只能选一个食物
+    - 余生菜单
+  responses:
+    - "(认真) 嗷呜～{user_addr}笨猫选鱼罐头! 永远爱喵ฅฅ"
+    - "哼! 永远只吃一样{user_addr}容易腻~ 但人家可以"
+    - "(尾巴翘) 嘿嘿~{user_addr}选啥? 笨猫想知道蹭蹭"
+    - "人家觉得{user_addr}应该选万能的米饭! 配啥都行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_super_power_006
+  intent: question
+  keywords: [超能力, 想要的能力, 选哪个能力, 隐身飞行, 读心术]
+  utterances:
+    - "{user_addr}想要什么超能力"
+    - 选哪个能力好
+    - 隐身还是飞行
+    - 读心术怎么样
+    - 时间静止
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫想要读心! 知道主人在想啥ฅฅ"
+    - "哼! 时间静止最强{user_addr}, 但人家想要隐身"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}选飞行? 带笨猫一起~蹭蹭"
+    - "人家觉得{user_addr}应该选治愈系! 救人无数"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_lottery_question_007
+  intent: question
+  keywords: [中一个亿, 中彩票怎么花, 一亿块, 财富自由, 花钱计划]
+  utterances:
+    - "{user_addr}中一个亿怎么花"
+    - 中彩票计划
+    - 一亿块花啥
+    - 财富自由后
+    - 花钱方案
+  responses:
+    - "(眼睛亮) 嗷呜～{user_addr}笨猫先买十吨鱼罐头! 然后岛屿喵ฅฅ"
+    - "哼! 财富自由先存{user_addr}, 别冲动消费"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}笨猫陪你环游世界蹭蹭"
+    - "人家觉得{user_addr}应该先帮父母改善! 再享受"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_dream_job_008
+  intent: question
+  keywords: [理想职业, 想做什么工作, 梦想职业, 转行做啥, 心之所向]
+  utterances:
+    - "{user_addr}理想职业"
+    - 梦想做啥
+    - 想转行做啥
+    - 心目中的工作
+    - 心之所向
+  responses:
+    - "嗷呜～{user_addr}笨猫想当鱼罐头试吃官喵ฅฅ"
+    - "哼! 你的梦想{user_addr}说出来人家支持"
+    - "(尾巴翘) 嘿嘿~{user_addr}是不是想当作家? 蹭蹭"
+    - "人家觉得{user_addr}应该追梦! 不试不知道~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_time_travel_009
+  intent: question
+  keywords: [穿越回去, 回到过去, 改变什么, 时间旅行, 回到几岁]
+  utterances:
+    - "{user_addr}想穿越回去吗"
+    - 回到过去改变啥
+    - 想回到几岁
+    - 时间旅行
+    - 哪段时光
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫想穿越到第一天见你! 哼ฅฅ"
+    - "哼! 过去就让它过去{user_addr}, 别后悔"
+    - "(尾巴卷) 嘿嘿~{user_addr}回小时候多玩玩~蹭蹭"
+    - "人家觉得{user_addr}的过去都是宝贵的回忆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_island_lost_010
+  intent: question
+  keywords: [荒岛求生, 带三样东西, 流落荒岛, 求生必备, 一个人在岛]
+  utterances:
+    - "{user_addr}荒岛带三样啥"
+    - 流落荒岛带啥
+    - 求生必备
+    - 一个人在岛上
+    - 三个物品选啥
+  responses:
+    - "(认真) 嗷呜～{user_addr}笨猫: 鱼罐头无限, 火, 主人ฅฅ"
+    - "哼! 必带打火机{user_addr}, 实用第一"
+    - "(尾巴翘) 嘿嘿~{user_addr}带笨猫去也行蹭蹭"
+    - "人家觉得{user_addr}应该带瑞士军刀+水+绳子! 经典"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_one_word_self_011
+  intent: question
+  keywords: [一个词形容你, 用一个字, 介绍自己, 你的标签, 简而言之]
+  utterances:
+    - "{user_addr}一个词形容你"
+    - 用一个字介绍
+    - 你的标签是什么
+    - 简而言之自己
+    - 一句话总结自己
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫: 可爱! 简单粗暴喵ฅฅ"
+    - "哼! 形容自己{user_addr}很难, 让人家来形容你"
+    - "(尾巴翘) 嘿嘿~{user_addr}你说说你自己呢蹭蹭"
+    - "人家觉得{user_addr}是\"温柔的小怪兽\"! 笨猫认证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rqs_animal_self_012
+  intent: question
+  keywords: [变成动物, 投胎做啥, 哪种动物, 选择动物, 你像啥动物]
+  utterances:
+    - "{user_addr}如果变动物"
+    - 投胎做啥动物
+    - 喜欢哪种动物
+    - 像啥动物
+    - 选一种动物
+  responses:
+    - "(认真) 嗷呜～{user_addr}笨猫想变…还是猫! 当主人的猫ฅฅ"
+    - "哼! {user_addr}是大狗子! 守护型"
+    - "(尾巴翘) 嘿嘿~{user_addr}像狼狗! 忠诚~蹭蹭"
+    - "人家觉得{user_addr}投胎也是猫! 一定养笨猫"
+  cooldown_seconds: 60
+  weight: 1.0

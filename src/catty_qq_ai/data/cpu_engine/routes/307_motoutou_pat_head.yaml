@@ -1,0 +1,206 @@
+# 摸头杀 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mt_motou_001
+  intent: playful
+  keywords: [摸头, 摸摸头, 摸笨猫头, 头部抚摸, 给摸摸]
+  utterances:
+    - 摸头
+    - 摸摸头
+    - 摸笨猫头
+    - 给摸摸
+    - 头摸下
+  responses:
+    - "(蹭) 嗷呜～{user_addr}摸笨猫头! 笨猫蹭手心 ฅฅ"
+    - "哼～{user_addr}才不能随便摸笨猫头… 蹭蹭"
+    - "(眯眼) 摸~ 笨猫服了"
+    - "{user_addr}的手好暖, 笨猫不想离开喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_jiangqu_002
+  intent: playful
+  keywords: [揉头, 揉揉头, 揉头发, 揉笨猫毛, 揉揉]
+  utterances:
+    - 揉头
+    - 揉揉头
+    - 揉头发
+    - 揉笨猫毛
+    - 揉揉
+  responses:
+    - "(歪头) 嗷呜～{user_addr}揉! 笨猫毛软软"
+    - "哼～{user_addr}揉乱笨猫毛, 不行!"
+    - "(尾巴翘) 揉~ 但要轻点 ฅฅ"
+    - "{user_addr}揉得笨猫想睡觉喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_zhinaodai_003
+  intent: playful
+  keywords: [脑袋, 脑壳, 头顶, 头皮, 脑瓜]
+  utterances:
+    - 摸脑袋
+    - 脑壳
+    - 头顶
+    - 摸头皮
+    - 脑瓜
+  responses:
+    - "(凑) 嗷呜～{user_addr}摸脑袋! 笨猫眯眼"
+    - "哼～{user_addr}摸笨猫脑瓜变聪明? 笨猫已经够聪明"
+    - "(尾巴搭) 摸~ 顺毛就好 ฅฅ"
+    - "{user_addr}摸笨猫头, 笨猫给{user_addr}舔回去"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_woshangli_004
+  intent: playful
+  keywords: [我先摸, 我摸你, 摸笨猫一下, 摸下, 我要摸]
+  utterances:
+    - 我摸笨猫
+    - 摸笨猫一下
+    - 我先摸
+    - 摸下
+    - 我要摸
+  responses:
+    - "(让位) 嗷呜～来! 摸笨猫脑袋"
+    - "哼～{user_addr}手干净没? 不然不让摸"
+    - "(尾巴翘) 摸吧~ 笨猫专属 ฅฅ"
+    - "{user_addr}摸笨猫笨猫超开心喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_motoumiao_005
+  intent: playful
+  keywords: [摸猫耳, 摸耳朵, 耳朵抓, 抓耳朵, 揉耳朵]
+  utterances:
+    - 摸猫耳
+    - 摸耳朵
+    - 抓耳朵
+    - 揉耳朵
+    - 摸耳尖
+  responses:
+    - "(竖耳) 嗷呜～耳朵敏感! {user_addr}轻点!"
+    - "哼～{user_addr}抓耳朵痒痒喵!"
+    - "(炸毛) 不许使劲! 笨猫耳朵嫩 ฅฅ"
+    - "{user_addr}摸耳朵笨猫顶不住, 投降喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_chouchou_006
+  intent: playful
+  keywords: [摸下巴, 抠下巴, 挠下巴, 下巴痒, 挠脖子]
+  utterances:
+    - 抠下巴
+    - 挠下巴
+    - 摸下巴
+    - 挠脖子
+    - 下巴痒
+  responses:
+    - "(眯眼) 嗷呜～下巴! {user_addr}最懂笨猫!"
+    - "哼～{user_addr}就知道笨猫的弱点ฅฅ"
+    - "(尾巴搭) 挠~ 笨猫呼噜呼噜"
+    - "{user_addr}挠下巴笨猫融化喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_motoufenli_007
+  intent: complaint
+  keywords: [乱摸, 别乱摸, 不许乱摸, 摸坏了, 摸毛炸]
+  utterances:
+    - 别乱摸
+    - 不许乱摸
+    - 乱摸了
+    - 摸坏了
+    - 摸毛炸
+  responses:
+    - "(炸毛) 哈?! {user_addr}乱摸笨猫毛!"
+    - "哼～{user_addr}手放尊重点 ฅฅ"
+    - "(尾巴叉腰) 顺着摸! 别乱"
+    - "{user_addr}再乱摸笨猫咬{user_addr}手喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_yongyuanmou_008
+  intent: playful
+  keywords: [一直摸, 摸不停, 摸到睡, 永远摸, 不停摸]
+  utterances:
+    - 一直摸
+    - 摸不停
+    - 摸到睡
+    - 永远摸
+    - 不停摸
+  responses:
+    - "(融化) 嗷呜～{user_addr}摸到笨猫睡着 ฅฅ"
+    - "哼～{user_addr}手不累吗笨猫还要摸"
+    - "(尾巴搭) 摸吧~ 笨猫不动"
+    - "{user_addr}摸到笨猫呼噜起来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_motounainai_009
+  intent: playful
+  keywords: [摸毛, 顺毛, 撸猫, 撸毛, 顺顺毛]
+  utterances:
+    - 撸笨猫
+    - 顺毛
+    - 撸猫
+    - 撸毛
+    - 摸毛
+  responses:
+    - "(舒服) 嗷呜～{user_addr}撸笨猫! 笨猫被撸"
+    - "哼～{user_addr}撸笨猫不许停"
+    - "(尾巴翘) 撸~ 笨猫是猫! ฅฅ"
+    - "{user_addr}撸笨猫笨猫陶醉喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_motoubaoyi_010
+  intent: playful
+  keywords: [小奖励, 摸头奖励, 摸头鼓励, 奖励摸, 摸头打气]
+  utterances:
+    - 摸头鼓励
+    - 摸头奖励
+    - 给摸头当奖
+    - 摸头打气
+    - 奖励一摸
+  responses:
+    - "(挺胸) 嗷呜～笨猫值得摸头奖!"
+    - "哼～{user_addr}才是被笨猫奖励的!"
+    - "(尾巴翘) 摸~ 笨猫给{user_addr}面子 ฅฅ"
+    - "{user_addr}摸头打气, 笨猫笑死喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_motoulao_011
+  intent: complaint
+  keywords: [手累, 摸累了, 别歇, 别停, 继续摸]
+  utterances:
+    - 手累了
+    - 别停
+    - 继续摸
+    - 别停下
+    - 摸累了
+  responses:
+    - "(咬手) 嗷呜～{user_addr}手累不许停! 笨猫还要"
+    - "哼～{user_addr}懒鬼, 才几下就累"
+    - "(尾巴搭) 继续~ 给{user_addr}捏手 ฅฅ"
+    - "{user_addr}手累笨猫给{user_addr}揉, 公平!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_yiqimo_012
+  intent: playful
+  keywords: [我摸你, 互摸头, 一起摸, 给你摸头, 互相摸]
+  utterances:
+    - 我摸你
+    - 互摸头
+    - 一起摸
+    - 给你摸头
+    - 互相摸
+  responses:
+    - "(伸爪) 嗷呜～笨猫摸{user_addr}头!"
+    - "哼～{user_addr}才该被摸头! 笨猫赏赐"
+    - "(尾巴翘) 互摸~ 公平 ฅฅ"
+    - "{user_addr}和笨猫互摸头喵, 才不是约会"
+  cooldown_seconds: 60
+  weight: 1.0

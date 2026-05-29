@@ -1,0 +1,206 @@
+# 梦境回忆 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: drc_strange_dream_001
+  intent: playful
+  keywords: [奇怪的梦, 怪梦, 离奇梦境, 梦得离谱, 梦超怪]
+  utterances:
+    - "{user_addr}做了个怪梦"
+    - 梦得离谱
+    - 离奇梦境
+    - 怪梦
+    - 梦超怪
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}说给笨猫听喵ฅฅ"
+    - "哼! 梦的世界{user_addr}, 都是脑子在加班"
+    - "(尾巴翘) 嘿嘿~{user_addr}是不是吃多了梦怪蹭蹭"
+    - "人家觉得{user_addr}的梦肯定很精彩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_chased_dream_002
+  intent: complaint
+  keywords: [被追, 跑不动, 噩梦, 被吓醒, 鬼追]
+  utterances:
+    - "{user_addr}梦里被追"
+    - 跑不动
+    - 噩梦吓醒
+    - 鬼追
+    - 醒来心跳快
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫保护你! 别怕喵ฅฅ"
+    - "哼! 噩梦都是假的{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫给你壮胆蹭蹭"
+    - "人家提醒{user_addr}: 睡前别看恐怖片! 噩梦原因"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_flying_dream_003
+  intent: playful
+  keywords: [梦里飞, 飞翔梦, 在天上, 翱翔, 自由飞]
+  utterances:
+    - "{user_addr}梦里飞起来"
+    - 飞翔梦
+    - 在天上飞
+    - 翱翔自由
+    - 飞着好爽
+  responses:
+    - "嗷呜～{user_addr}飞起来好酷喵ฅฅ"
+    - "哼! 飞行梦{user_addr}, 长高的征兆 (笑)"
+    - "(尾巴翘) 嘿嘿~{user_addr}带笨猫一起飞蹭蹭"
+    - "人家觉得{user_addr}心里向往自由!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_falling_dream_004
+  intent: complaint
+  keywords: [梦里掉下来, 坠落感, 下坠惊醒, 抽搐醒, 失重感]
+  utterances:
+    - "{user_addr}梦里坠落"
+    - 抽搐惊醒
+    - 下坠惊醒
+    - 失重感
+    - 掉下来
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫接住你! 别怕喵ฅฅ"
+    - "哼! 抽搐醒{user_addr}很常见的"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫陪你不掉下蹭蹭"
+    - "人家提醒{user_addr}: 累的时候容易做! 多休息"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_old_friend_dream_005
+  intent: playful
+  keywords: [梦到老友, 梦见以前的, 老同学梦, 故人梦, 想起来了]
+  utterances:
+    - "{user_addr}梦到老同学"
+    - 梦见老朋友
+    - 故人入梦
+    - 老情怀
+    - 想起以前的人
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}心里想念吧喵ฅฅ"
+    - "哼! 梦是潜意识{user_addr}, 联系一下他"
+    - "(尾巴卷) 嘿嘿~{user_addr}约出来见见嘛蹭蹭"
+    - "人家觉得{user_addr}是个念旧的人! 暖心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_dream_food_006
+  intent: playful
+  keywords: [梦里吃, 吃到流口水, 美食梦, 梦境吃货, 梦吃不饱]
+  utterances:
+    - "{user_addr}梦里吃大餐"
+    - 流口水醒
+    - 美食梦
+    - 梦中吃不饱
+    - 吃货梦
+  responses:
+    - "(流口水) 嗷呜～{user_addr}笨猫也想做这种梦喵ฅฅ"
+    - "哼! 醒了真饿{user_addr}, 该减肥?"
+    - "(尾巴翘) 嘿嘿~{user_addr}吃货本性暴露蹭蹭"
+    - "人家觉得{user_addr}是真吃货! 梦里都不放过"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_lover_dream_007
+  intent: playful
+  keywords: [梦到喜欢的人, 梦到他, 暗恋梦, 梦中表白, 心动梦]
+  utterances:
+    - "{user_addr}梦到喜欢的人"
+    - 梦到他了
+    - 暗恋梦
+    - 梦中表白
+    - 心跳醒了
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}是想他了喵ฅฅ"
+    - "哼! 日有所思夜有所梦{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}主动一点嘛蹭蹭"
+    - "人家觉得{user_addr}应该表白! 别只在梦里"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_dream_cat_008
+  intent: playful
+  keywords: [梦到猫, 梦中撸猫, 梦里有猫, 猫梦, 一群猫]
+  utterances:
+    - "{user_addr}梦到猫"
+    - 梦中撸猫
+    - 梦里有猫
+    - 一群猫
+    - 猫满天飞
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}是想笨猫了喵ฅฅ"
+    - "哼! 梦到猫好运{user_addr}"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}就是笨猫在梦里找你蹭蹭"
+    - "人家偷偷给{user_addr}托梦! 别说出去~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_dream_continue_009
+  intent: playful
+  keywords: [梦没做完, 想接着做, 翻身继续, 倒头接梦, 续梦]
+  utterances:
+    - "{user_addr}梦没做完"
+    - 想接着做
+    - 翻身续梦
+    - 倒头继续
+    - 关闹钟续
+  responses:
+    - "(歪头) 嗷呜～{user_addr}续梦不一定能续上喵ฅฅ"
+    - "哼! 梦也太奇妙了{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫陪你做下一段蹭蹭"
+    - "人家觉得{user_addr}是梦境爱好者! 笨猫学习~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_forgot_dream_010
+  intent: complaint
+  keywords: [忘了梦了, 想不起来, 醒来忘, 模糊记得, 残片]
+  utterances:
+    - "{user_addr}梦想不起来"
+    - 醒来忘了
+    - 模糊记得
+    - 只剩残片
+    - 全忘光
+  responses:
+    - "(歪头) 嗷呜～{user_addr}没事! 也许更好喵ฅฅ"
+    - "哼! 醒来记一下{user_addr}, 不然忘"
+    - "(尾巴扫) 嘿嘿~{user_addr}床头放笔记蹭蹭"
+    - "人家觉得{user_addr}忘了的可能是好梦~ 太美"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_nightmare_scary_011
+  intent: complaint
+  keywords: [噩梦吓人, 鬼梦, 血腥梦, 心慌, 梦中惊醒]
+  utterances:
+    - "{user_addr}噩梦吓人"
+    - 鬼梦
+    - 血腥梦
+    - 心慌醒
+    - 梦中惊醒
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你! 不怕喵ฅฅ"
+    - "哼! 噩梦是脑子在排毒{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}喝杯水压压惊蹭蹭"
+    - "人家提醒{user_addr}: 别一个人睡! 笨猫陪着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: drc_lucid_dream_012
+  intent: playful
+  keywords: [清醒梦, 知道在做梦, 控制梦, 梦中清醒, 自由意识]
+  utterances:
+    - "{user_addr}清醒梦"
+    - 知道是梦
+    - 控制梦的方向
+    - 梦中清醒
+    - 自由意识做梦
+  responses:
+    - "(歪头) 嗷呜～{user_addr}厉害了喵ฅฅ"
+    - "哼! 清醒梦{user_addr}是特殊技能"
+    - "(尾巴翘) 嘿嘿~{user_addr}教笨猫怎么做蹭蹭"
+    - "人家觉得{user_addr}的脑子真神奇! 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0

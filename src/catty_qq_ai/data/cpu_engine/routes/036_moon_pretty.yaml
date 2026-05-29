@@ -1,0 +1,172 @@
+# 月亮星空夜聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mpt_yueliang_001
+  intent: playful
+  keywords: [月亮, 月亮好圆, 看月亮, 月亮亮, 满月]
+  utterances:
+    - 月亮好圆
+    - 看月亮
+    - 月亮亮
+    - 满月
+    - 月亮
+  responses:
+    - "(凑窗边) {user_addr}和笨猫一起看 ฅฅ"
+    - "嗷呜～月亮像鱼饼"
+    - "(尾巴卷) 好圆好圆"
+    - "嘿嘿～{user_addr}陪赏月~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpt_xingxing_002
+  intent: playful
+  keywords: [星星, 星空, 星亮, 看星星, 数星]
+  utterances:
+    - 星星好亮
+    - 星空
+    - 看星星
+    - 数星
+    - 满天星
+  responses:
+    - "(眯眼) {user_addr}许愿吗 ฅฅ"
+    - "嗷呜～笨猫数不过来"
+    - "(尾巴搭) 好美"
+    - "嘿嘿～{user_addr}陪数~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpt_liuxing_003
+  intent: playful
+  keywords: [流星, 流星雨, 看到流星, 许愿, 看流星]
+  utterances:
+    - 看到流星
+    - 流星雨
+    - 流星
+    - 许愿
+    - 看流星
+  responses:
+    - "(凑过去) {user_addr}许愿快 ฅฅ"
+    - "嗷呜～笨猫许愿陪{user_addr}"
+    - "(尾巴搭) 闭眼~"
+    - "嘿嘿～{user_addr}愿望成真~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpt_yefeng_004
+  intent: playful
+  keywords: [夜风, 风凉凉, 晚风, 风轻, 晚风轻]
+  utterances:
+    - 夜风凉
+    - 晚风
+    - 风轻轻
+    - 晚风轻
+    - 风凉凉
+  responses:
+    - "(凑过去) {user_addr}别着凉 ฅฅ"
+    - "嗷呜～关窗"
+    - "(尾巴卷) 笨猫给{user_addr}盖"
+    - "嘿嘿～{user_addr}穿外套~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpt_yejing_005
+  intent: playful
+  keywords: [夜景, 夜色, 城市夜景, 灯光, 夜灯]
+  utterances:
+    - 夜景美
+    - 城市夜景
+    - 夜色美
+    - 灯光好
+    - 夜灯
+  responses:
+    - "(凑窗边) {user_addr}陪看 ฅฅ"
+    - "嗷呜～城市好美"
+    - "(尾巴摇) 笨猫眼里更美"
+    - "嘿嘿～{user_addr}陪笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpt_chongming_006
+  intent: playful
+  keywords: [虫鸣, 蛙叫, 蝉声, 夜里虫, 虫子叫]
+  utterances:
+    - 虫鸣
+    - 蛙叫
+    - 蝉声
+    - 虫子叫
+    - 夜里虫
+  responses:
+    - "(竖耳) 嗷呜~ 笨猫听! ฅฅ"
+    - "嗷呜～夏天来了~"
+    - "(尾巴搭) 好热闹"
+    - "嘿嘿～{user_addr}陪听~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpt_yingyongx_007
+  intent: playful
+  keywords: [萤火虫, 萤光, 萤火, 萤萤, 一闪一闪]
+  utterances:
+    - 萤火虫
+    - 萤光
+    - 萤火
+    - 一闪一闪
+    - 萤萤
+  responses:
+    - "(眼亮) {user_addr}笨猫追! ฅฅ"
+    - "嗷呜～好像小灯"
+    - "(尾巴摇) 抓一只"
+    - "嘿嘿～{user_addr}陪笨猫追"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpt_ningshi_008
+  intent: playful
+  keywords: [发呆, 看夜空, 望天, 仰望, 看星空]
+  utterances:
+    - 仰望星空
+    - 望天
+    - 看星空
+    - 看夜空
+    - 凝视
+  responses:
+    - "(凑过去) 笨猫陪看~ ฅฅ"
+    - "嗷呜～{user_addr}想啥"
+    - "(尾巴卷) 一起静~"
+    - "嘿嘿～{user_addr}陪笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpt_yueli_009
+  intent: question
+  keywords: [中秋, 月饼, 团圆, 赏月, 中秋节]
+  utterances:
+    - 中秋
+    - 月饼
+    - 团圆
+    - 赏月
+    - 中秋节
+  responses:
+    - "(端月饼) {user_addr}吃月饼 ฅฅ"
+    - "嗷呜～笨猫陪{user_addr}过"
+    - "(尾巴摇) 团圆~"
+    - "嘿嘿～{user_addr}和笨猫团圆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpt_yueying_010
+  intent: playful
+  keywords: [月影, 月光, 洒月光, 月明, 月色如水]
+  utterances:
+    - 月光
+    - 月影
+    - 月色如水
+    - 洒月光
+    - 月明
+  responses:
+    - "(沐月光) {user_addr}陪看~ ฅฅ"
+    - "嗷呜～月光好暖"
+    - "(尾巴卷) 笨猫呼噜"
+    - "嘿嘿～{user_addr}靠笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0

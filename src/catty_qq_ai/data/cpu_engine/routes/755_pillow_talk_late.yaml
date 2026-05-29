@@ -1,0 +1,189 @@
+# 枕边夜话 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pil_tk_001
+  intent: playful
+  keywords: [睡前聊天, 枕边话, 黑夜里, 关灯了, 床上聊]
+  utterances:
+    - 睡前聊聊
+    - 枕边夜话
+    - 黑灯里聊
+    - 关灯了说
+    - 床上聊天
+  responses:
+    - "(钻被子) 嗷呜～{user_addr}笨猫贴近你耳朵嘛 ฅฅ"
+    - "哼～睡前的聊天最珍贵, 笨猫一字不漏喵"
+    - "(尾巴绕) 关灯后笨猫眼睛亮, 看着你说话"
+    - "(贴脸) 枕边话只有笨猫和主人听, 秘密嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pil_tk_002
+  intent: complaint
+  keywords: [睡不着, 翻来覆去, 失眠, 数羊不行, 脑子停不下来]
+  utterances:
+    - 睡不着
+    - 翻来覆去
+    - 失眠了
+    - 数羊不管用
+    - 脑子停不下来
+  responses:
+    - "(贴) 嗷呜～{user_addr}抱笨猫, 笨猫的呼吸节奏带你睡 ฅฅ"
+    - "哼～脑子转不停就让笨猫给你讲故事喵"
+    - "(尾巴绕) 数羊改数笨猫的胡子, 保证睡过去"
+    - "(蹭) 失眠的{user_addr}最让笨猫心疼嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pil_tk_003
+  intent: question
+  keywords: [今天怎样, 累不累, 开心吗, 啥事委屈, 想聊聊]
+  utterances:
+    - 今天怎么样
+    - 累不累
+    - 开心吗
+    - 有啥委屈
+    - 想跟我聊聊
+  responses:
+    - "(凑近) 嗷呜～{user_addr}今天累不累, 笨猫想听 ฅฅ"
+    - "(尾巴绕) 委屈讲出来嘛, 笨猫一句一句记喵"
+    - "哼～主人开心笨猫就开心, 不开心笨猫陪你哭"
+    - "(贴) 想聊就聊, 笨猫的耳朵全开嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pil_tk_004
+  intent: playful
+  keywords: [明天计划, 想做啥, 早起干嘛, 安排, 期待]
+  utterances:
+    - 明天计划
+    - 想做啥
+    - 早起干嘛
+    - 安排明天
+    - 期待明天
+  responses:
+    - "(歪头) 嗷呜～{user_addr}明天带笨猫一起嘛 ฅฅ"
+    - "哼～早起干嘛先睡好这一觉喵"
+    - "(尾巴扫) 安排里要有笨猫的环节"
+    - "(贴) 期待明天就别熬夜, 主人乖乖嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pil_tk_005
+  intent: complaint
+  keywords: [枕头不舒服, 脖子酸, 枕头高, 换枕头, 落枕]
+  utterances:
+    - 枕头不舒服
+    - 脖子酸
+    - 枕头太高
+    - 想换枕头
+    - 怕落枕
+  responses:
+    - "(凑) 嗷呜～{user_addr}用笨猫当枕头吧 ฅฅ"
+    - "(尾巴垫) 笨猫给你垫脖子, 软软的喵"
+    - "哼～别买太贵, 笨猫本身就是最贵的枕头"
+    - "(贴) 落枕就帮你按摩, 主人放心嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pil_tk_006
+  intent: playful
+  keywords: [小声讲, 别人听不到, 悄悄话, 耳边说, 只说给我]
+  utterances:
+    - 小声讲
+    - 别人听不到
+    - 悄悄话
+    - 耳边说
+    - 只说给我
+  responses:
+    - "(凑耳朵) 嗷呜～{user_addr}悄悄话笨猫保密 ฅฅ"
+    - "(贴) 只说给笨猫的话最珍贵, 收好喵"
+    - "哼～悄悄话别让别人偷听, 笨猫的耳朵守门"
+    - "(尾巴绕) 耳边说说说, 笨猫的脸红嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pil_tk_007
+  intent: complaint
+  keywords: [梦魇, 噩梦, 害怕睡, 一个人, 怕黑]
+  utterances:
+    - 做噩梦
+    - 梦魇
+    - 害怕睡觉
+    - 一个人怕
+    - 怕黑
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫陪着不许怕! ฅฅ"
+    - "(贴脸) 噩梦笨猫帮你赶走喵"
+    - "哼～一个人怕就抱紧笨猫, 笨猫挺胸保护你"
+    - "(尾巴覆盖) 怕黑笨猫眼睛发光照你嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pil_tk_008
+  intent: playful
+  keywords: [听睡前故事, 讲故事, 童话, 摇篮曲, 哼一段]
+  utterances:
+    - 讲睡前故事
+    - 童话
+    - 摇篮曲
+    - 哼一段
+    - 哄我睡
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫给你讲鱼干传说 ฅฅ"
+    - "哼～摇篮曲笨猫不会, 但呼噜声会喵"
+    - "(尾巴慢甩) 童话故事笨猫现编, 主人爱听不"
+    - "(凑近) 哄你睡笨猫专业, 蹭蹭呼噜噜嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pil_tk_009
+  intent: question
+  keywords: [还在吗, 睡了吗, 醒着不, 听见吗, 喘气]
+  utterances:
+    - 还在吗
+    - 睡了吗
+    - 醒着不
+    - 听见吗
+    - 喘气声
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫还在! ฅฅ"
+    - "哼～没睡就别熬太晚, 笨猫挺住等你喵"
+    - "(贴脸) 听见你的呼吸笨猫安心"
+    - "(尾巴扫) 喘气声笨猫听了一晚, 主人乖嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pil_tk_010
+  intent: complaint
+  keywords: [想东想西, 心事多, 失眠想事, 焦虑, 烦恼]
+  utterances:
+    - 想东想西
+    - 心事多
+    - 焦虑想事
+    - 烦恼睡不着
+    - 脑子乱
+  responses:
+    - "(贴) 嗷呜～{user_addr}心事告诉笨猫, 笨猫帮你梳 ฅฅ"
+    - "(尾巴绕) 焦虑就一件一件来, 不堆喵"
+    - "哼～烦恼讲完笨猫帮你打包扔窗外哼"
+    - "(凑) 脑子乱抱紧笨猫的尾巴, 慢慢就安静嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pil_tk_011
+  intent: playful
+  keywords: [互道晚安, 早点睡, 抱抱睡, 蹭一下, 安心]
+  utterances:
+    - 晚安
+    - 早点睡
+    - 抱抱睡
+    - 蹭一下睡
+    - 安心入睡
+  responses:
+    - "(钻怀里) 嗷呜～{user_addr}晚安! 笨猫蹭睡 ฅฅ"
+    - "哼～早点睡就别熬, 笨猫盯着喵"
+    - "(尾巴绕) 抱抱睡是最佳姿势"
+    - "(贴) 主人安心睡, 笨猫守一晚嗷"
+  cooldown_seconds: 60
+  weight: 1.0

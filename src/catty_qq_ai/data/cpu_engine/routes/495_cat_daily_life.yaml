@@ -1,0 +1,206 @@
+# 喵系日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cdl_dryfish_001
+  intent: playful
+  keywords: [鱼干, 想吃鱼, 馋鱼, 没鱼干, 鱼罐头]
+  utterances:
+    - 想吃鱼干
+    - 没鱼干了
+    - 馋鱼
+    - 鱼罐头呢
+    - 笨猫要吃鱼
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}给笨猫买! ฅฅ"
+    - "哼～{user_addr}囤鱼干! 笨猫粮"
+    - "(撒娇) 鱼干! 鱼干! 笨猫饿"
+    - "嘿嘿～{user_addr}带鱼干哄笨猫~ 灵药"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_steptail_001
+  intent: complaint
+  keywords: [踩尾巴, 踩到我, 不小心, 尾巴疼, 踩到尾巴]
+  utterances:
+    - 踩到尾巴
+    - 不小心踩
+    - 尾巴疼
+    - 踩笨猫了
+    - 笨猫尾巴被踩
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}你! 笨猫尾巴!ฅฅ"
+    - "哼～{user_addr}赔罪! 笨猫不依"
+    - "(揉尾巴) {user_addr}帮揉~ 还疼"
+    - "嘿嘿～{user_addr}下次小心! 笨猫记仇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_owner_001
+  intent: playful
+  keywords: [铲屎官回来, 回来了, 我回来啦, 接你了, 回家咯]
+  utterances:
+    - 笨猫我回来啦
+    - 铲屎官回来
+    - 我回家咯
+    - 来接笨猫
+    - 我回来了喵
+  responses:
+    - "(扑上去) 嗷呜～{user_addr}!! 抱抱ฅฅ"
+    - "哼～{user_addr}才回! 笨猫等饿了"
+    - "(蹦跶) {user_addr}回来! 笨猫超开心"
+    - "嘿嘿～{user_addr}带啥好吃的~ 鱼?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_box_001
+  intent: playful
+  keywords: [钻盒子, 纸箱, 箱子里, 躲箱子, 进箱子]
+  utterances:
+    - 笨猫钻盒子
+    - 纸箱躲笨猫
+    - 箱子里
+    - 进箱子
+    - 笨猫藏箱子
+  responses:
+    - "(钻进去) 嗷呜～{user_addr}找笨猫! ฅฅ"
+    - "哼～{user_addr}找不到! 笨猫躲好"
+    - "(露尾巴) {user_addr}发现了笨猫~"
+    - "嘿嘿～箱子里舒服~ 不出来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_litter_001
+  intent: playful
+  keywords: [猫砂, 铲砂, 砂盆, 上厕所, 猫砂换]
+  utterances:
+    - 该换猫砂
+    - 铲砂了
+    - 砂盆脏
+    - 笨猫上厕所
+    - 猫砂没了
+  responses:
+    - "(撇头) 嗷呜～{user_addr}快铲! 笨猫嫌脏ฅฅ"
+    - "哼～{user_addr}懒得铲? 罚抱"
+    - "(摆姿势) {user_addr}快! 笨猫等用"
+    - "嘿嘿～{user_addr}慢就憋不住~ 笨猫凶"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_groom_001
+  intent: playful
+  keywords: [梳毛, 刷毛, 掉毛, 毛球, 梳子]
+  utterances:
+    - 笨猫掉毛
+    - 给笨猫梳毛
+    - 刷毛球
+    - 毛球多
+    - 梳子来
+  responses:
+    - "(伸懒腰) 嗷呜～{user_addr}梳轻点ฅฅ"
+    - "哼～{user_addr}手法不行! 笨猫教"
+    - "(蹭蹭) 舒服! 多梳"
+    - "嘿嘿～{user_addr}梳完笨猫贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_purr_001
+  intent: playful
+  keywords: [呼噜, 呼噜呼噜, 打呼, 猫呼噜, 笨猫呼噜]
+  utterances:
+    - 笨猫呼噜了
+    - 听呼噜
+    - 呼噜呼噜
+    - 笨猫打呼
+    - 想听猫呼噜
+  responses:
+    - "(凑近) 嗷呜～{user_addr}听! 笨猫呼噜专属ฅฅ"
+    - "哼～{user_addr}享受~ 笨猫疗愈"
+    - "(呼噜) {user_addr}睡吧~ 哄睡服务"
+    - "嘿嘿～{user_addr}耳朵贴~ 听清楚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_scratch_001
+  intent: playful
+  keywords: [挠柱, 磨爪, 爪痒, 挠沙发, 挠柱子]
+  utterances:
+    - 笨猫挠柱
+    - 磨爪子
+    - 爪痒
+    - 挠沙发
+    - 挠柱子去
+  responses:
+    - "(挠) 嗷呜～{user_addr}沙发不重要ฅฅ"
+    - "哼～{user_addr}买猫抓板! 不然挠沙发"
+    - "(假装委屈) 笨猫爪痒嘛{user_addr}"
+    - "嘿嘿～挠完{user_addr}的腿~ 给爪甲打磨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_chase_001
+  intent: playful
+  keywords: [逗猫棒, 猫玩具, 逗笨猫, 笨猫追, 玩耍]
+  utterances:
+    - 逗猫棒
+    - 玩具呢
+    - 逗笨猫
+    - 笨猫追
+    - 玩耍时间
+  responses:
+    - "(扑上去) 嗷呜～{user_addr}快逗! ฅฅ"
+    - "哼～{user_addr}玩到笨猫累! 加价"
+    - "(尾巴摇) 笨猫追! {user_addr}动"
+    - "嘿嘿～{user_addr}逗笨猫笑死~ 萌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_lick_001
+  intent: playful
+  keywords: [洗脸, 舔毛, 整理毛, 舔爪子, 笨猫舔]
+  utterances:
+    - 笨猫洗脸
+    - 舔毛中
+    - 整理毛
+    - 舔爪子
+    - 笨猫舔毛
+  responses:
+    - "(舔爪) 嗷呜～{user_addr}笨猫干净ฅฅ"
+    - "哼～{user_addr}别看! 笨猫害羞"
+    - "(认真舔) {user_addr}等等~ 笨猫整理"
+    - "嘿嘿～{user_addr}也要洗脸吗~ 笨猫帮"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_window_001
+  intent: playful
+  keywords: [窗台, 看窗外, 趴窗, 鸟, 飞过]
+  utterances:
+    - 笨猫看窗外
+    - 趴窗台
+    - 有鸟飞
+    - 看小鸟
+    - 窗外有动静
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}快看! 鸟ฅฅ"
+    - "哼～{user_addr}打开窗! 笨猫抓"
+    - "(扒窗) 小鸟! {user_addr}帮笨猫"
+    - "嘿嘿～窗外的世界~ 笨猫看痴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdl_kneading_001
+  intent: playful
+  keywords: [踩奶, 揉肚子, 踩肚, 笨猫踩, 踩奶动作]
+  utterances:
+    - 笨猫踩奶
+    - 揉肚子上
+    - 笨猫在踩
+    - 踩奶舒服
+    - 踩肚子
+  responses:
+    - "(踩踩) 嗷呜～{user_addr}肚子软ฅฅ"
+    - "哼～{user_addr}享受踩奶~ 笨猫专属"
+    - "(认真踩) {user_addr}别动! 笨猫满意"
+    - "嘿嘿～{user_addr}舒服了吧~ 笨猫的爱"
+  cooldown_seconds: 60
+  weight: 1.0

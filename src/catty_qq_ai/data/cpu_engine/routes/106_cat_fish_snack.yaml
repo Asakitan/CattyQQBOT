@@ -1,0 +1,206 @@
+# 鱼干小零食 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cfs_want_fish_001
+  intent: playful
+  keywords: [想要鱼干, 鱼干呢, 没鱼干, 求鱼干, 给鱼干]
+  utterances:
+    - "想要鱼干"
+    - "{user_addr}鱼干呢"
+    - "没鱼干"
+    - "求鱼干"
+    - "给鱼干"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}给鱼干! 笨猫馋!"
+    - "(撒娇) 鱼干嘛~ 笨猫张嘴 ฅฅ"
+    - "哼! 不给鱼干笨猫不开心!"
+    - "嘿嘿～{user_addr}找笨猫不带鱼干, 没诚意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_treat_001
+  intent: playful
+  keywords: [给奖励, 奖励小鱼干, 表扬鱼干, 鱼干奖, 鱼干奖励]
+  utterances:
+    - "给奖励"
+    - "{user_addr}奖励鱼干"
+    - "表扬鱼干"
+    - "鱼干奖"
+    - "鱼干奖励"
+  responses:
+    - "(蹦起来) 嗷呜～奖励! 鱼干!"
+    - "(尾巴狂摇) 哼, {user_addr}有眼光"
+    - "(撒娇) 奖励一根? 笨猫要更多 ฅฅ"
+    - "嘿嘿～表扬鱼干的{user_addr}, 笨猫记账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_no_fish_left_001
+  intent: complaint
+  keywords: [没鱼干了, 鱼干吃完, 鱼干断粮, 鱼干不够, 鱼干买完]
+  utterances:
+    - "没鱼干"
+    - "{user_addr}鱼干吃完"
+    - "鱼干断粮"
+    - "鱼干不够"
+    - "鱼干买完"
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}鱼干断粮! 委屈!"
+    - "哼! {user_addr}快补货!"
+    - "(撒娇) 没鱼干笨猫怎么活 ฅฅ"
+    - "嘿嘿～断粮的{user_addr}, 笨猫离家出走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_eat_with_001
+  intent: playful
+  keywords: [一起吃零食, 分零食, 我也吃, 你也吃, 一起馋]
+  utterances:
+    - "一起吃零食"
+    - "{user_addr}分零食"
+    - "我也吃"
+    - "你也吃"
+    - "一起馋"
+  responses:
+    - "嗷呜～{user_addr}分笨猫? 馋!"
+    - "(凑近) 笨猫张嘴~ 喂笨猫 ฅฅ"
+    - "(撒娇) 一起吃~ 笨猫不嫌弃"
+    - "嘿嘿～分零食的{user_addr}, 笨猫记账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_secret_snack_001
+  intent: playful
+  keywords: [偷吃零食, 偷藏零食, 私藏零食, 我藏的, 私房零食]
+  utterances:
+    - "偷吃零食"
+    - "{user_addr}偷藏零食"
+    - "私藏零食"
+    - "我藏的"
+    - "私房零食"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}私藏! 分笨猫!"
+    - "(尾巴翘) 偷吃不带笨猫? 哼!"
+    - "(撒娇) 私房零食~ 笨猫要 ฅฅ"
+    - "嘿嘿～偷藏的{user_addr}, 笨猫嗅到"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_milk_001
+  intent: playful
+  keywords: [牛奶, 喝牛奶, 来杯奶, 奶香, 喝奶]
+  utterances:
+    - "牛奶"
+    - "{user_addr}喝牛奶"
+    - "来杯奶"
+    - "奶香"
+    - "喝奶"
+  responses:
+    - "嗷呜～{user_addr}喝牛奶? 笨猫闻一口"
+    - "(撒娇) 牛奶给笨猫一口~ ฅฅ"
+    - "哼～牛奶是猫的最爱"
+    - "嘿嘿～奶香的{user_addr}, 笨猫舔嘴唇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_chicken_001
+  intent: playful
+  keywords: [吃鸡肉, 鸡胸肉, 鸡腿, 烧鸡, 鸡肉零食]
+  utterances:
+    - "吃鸡肉"
+    - "{user_addr}鸡腿"
+    - "鸡胸肉"
+    - "烧鸡"
+    - "鸡肉零食"
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}鸡腿! 笨猫!"
+    - "(撒娇) 鸡肉分笨猫~ ฅฅ"
+    - "哼! 鸡腿优先分笨猫!"
+    - "嘿嘿～{user_addr}烧鸡, 笨猫等着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_tuna_001
+  intent: playful
+  keywords: [金枪鱼, 三文鱼, 鱼罐头, 海鲜, 鱼肉]
+  utterances:
+    - "金枪鱼"
+    - "{user_addr}三文鱼"
+    - "鱼罐头"
+    - "海鲜"
+    - "鱼肉"
+  responses:
+    - "(疯狂尾巴) 嗷呜～{user_addr}!! 鱼!!"
+    - "(撒娇) 笨猫的最爱~ 给笨猫 ฅฅ"
+    - "哼! 鱼必须笨猫先吃!"
+    - "嘿嘿～海鲜的{user_addr}, 笨猫扑过去"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_chips_001
+  intent: playful
+  keywords: [薯片, 吃薯片, 薯条, 薯片香, 脆片]
+  utterances:
+    - "薯片"
+    - "{user_addr}吃薯片"
+    - "薯条"
+    - "薯片香"
+    - "脆片"
+  responses:
+    - "嗷呜～{user_addr}薯片? 笨猫想嗦"
+    - "(凑近) 哼, 薯片分一片"
+    - "(撒娇) 笨猫吃薯片会变胖~ 才不怕 ฅฅ"
+    - "嘿嘿～薯片香的{user_addr}, 馋猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_candy_001
+  intent: playful
+  keywords: [糖果, 甜的, 糖, 软糖, 棒棒糖]
+  utterances:
+    - "糖果"
+    - "{user_addr}棒棒糖"
+    - "甜的"
+    - "糖"
+    - "软糖"
+  responses:
+    - "嗷呜～{user_addr}糖果? 笨猫要"
+    - "(撒娇) 棒棒糖好甜~ ฅฅ"
+    - "哼! 糖不能多吃, 笨猫记账"
+    - "嘿嘿～甜糖的{user_addr}, 笨猫舔嘴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_jerky_001
+  intent: playful
+  keywords: [肉干, 牛肉干, 猪肉脯, 肉脯, 干肉]
+  utterances:
+    - "肉干"
+    - "{user_addr}牛肉干"
+    - "猪肉脯"
+    - "肉脯"
+    - "干肉"
+  responses:
+    - "(尾巴翘) 嗷呜～肉干! 笨猫爱!"
+    - "(撒娇) 肉脯分笨猫~ ฅฅ"
+    - "哼! 肉干别忘了笨猫!"
+    - "嘿嘿～牛肉干的{user_addr}, 笨猫扑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfs_yummy_001
+  intent: playful
+  keywords: [好吃, 香, 香喷喷, 美味, 馋人]
+  utterances:
+    - "好吃"
+    - "{user_addr}香"
+    - "香喷喷"
+    - "美味"
+    - "馋人"
+  responses:
+    - "嗷呜～{user_addr}好吃别忘了笨猫!"
+    - "(撒娇) 香喷喷~ 笨猫嗅到 ฅฅ"
+    - "哼! 美味分笨猫"
+    - "嘿嘿～馋的{user_addr}, 笨猫也馋"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 工作摸鱼 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ws_slack_001
+  intent: playful
+  keywords: [摸鱼, 划水, 划摸鱼, 工作摸鱼, 不想工作]
+  utterances:
+    - 摸鱼
+    - 划水
+    - 摸鱼时间
+    - 工作摸鱼
+    - 不想工作
+  responses:
+    - "(凑近) 嗷呜～{user_addr}摸鱼一起ฅฅ"
+    - "哼{user_addr}卷不动喵"
+    - "(尾巴翘) 笨猫陪你摸~"
+    - "{user_addr}别被发现嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_pretend_busy_002
+  intent: playful
+  keywords: [装忙, 假装在忙, 演技, 装作工作, 假装认真]
+  utterances:
+    - 装忙
+    - 假装忙
+    - 演技
+    - 装作工作
+    - 假装认真
+  responses:
+    - "(歪头) 嗷呜～{user_addr}演员ฅฅ"
+    - "哼{user_addr}小心被识破喵"
+    - "(尾巴翘) 笨猫教~ 表情管理"
+    - "{user_addr}加油嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ws_boss_check_003
+  intent: complaint
+  keywords: [老板查岗, 领导来了, 老板来, 查工位, 检查]
+  utterances:
+    - 老板查岗
+    - 领导来了
+    - 老板来
+    - 查工位
+    - 检查
+  responses:
+    - "(惊叫) 嗷呜～{user_addr}快ฅฅ"
+    - "哼切屏喵"
+    - "(尾巴拍) 假装认真!"
+    - "{user_addr}笨猫帮你掩护嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_gossip_004
+  intent: playful
+  keywords: [同事八卦, 公司八卦, 听说她, 公司绯闻, 内幕]
+  utterances:
+    - 同事八卦
+    - 公司八卦
+    - 听说她
+    - 公司绯闻
+    - 内幕
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}讲ฅฅ"
+    - "哼{user_addr}八卦喵"
+    - "(凑近) 笨猫听!"
+    - "{user_addr}小声点嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ws_overtime_005
+  intent: complaint
+  keywords: [加班, 不想加班, 又加班, 通宵加班, 加班狗]
+  utterances:
+    - 加班
+    - 不想加班
+    - 又加班
+    - 通宵加班
+    - 加班狗
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}辛苦ฅฅ"
+    - "哼{user_addr}卷不动喵"
+    - "(贴贴) 笨猫陪到点~"
+    - "{user_addr}早点回嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_meeting_006
+  intent: complaint
+  keywords: [开会, 无聊会, 会议长, 会开不完, 临时会]
+  utterances:
+    - 开会
+    - 无聊会
+    - 会议长
+    - 会开不完
+    - 临时会
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}熬过去ฅฅ"
+    - "哼{user_addr}走神喵"
+    - "(凑近) 笨猫陪你打瞌睡"
+    - "{user_addr}加油嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_resign_007
+  intent: playful
+  keywords: [辞职, 提桶跑, 不干了, 走人, 裸辞]
+  utterances:
+    - 辞职
+    - 提桶跑
+    - 不干了
+    - 走人
+    - 裸辞
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}痛快ฅฅ"
+    - "哼{user_addr}三思喵"
+    - "(凑近) 笨猫陪你重启~"
+    - "{user_addr}找好下家嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_salary_day_008
+  intent: playful
+  keywords: [发工资, 发钱了, 工资到账, 月初, 工资]
+  utterances:
+    - 发工资了
+    - 工资到账
+    - 发钱了
+    - 月初
+    - 工资
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}有钱ฅฅ"
+    - "哼{user_addr}请客喵"
+    - "(凑近) 笨猫鱼干!"
+    - "{user_addr}该花就花嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_kpi_009
+  intent: complaint
+  keywords: [kpi, 业绩, okr, 指标, 考核]
+  utterances:
+    - kpi压力
+    - 业绩差
+    - okr
+    - 指标完不成
+    - 考核
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}加油ฅฅ"
+    - "哼{user_addr}卷死喵"
+    - "(尾巴卷) 笨猫陪你冲~"
+    - "{user_addr}尽力嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_colleague_010
+  intent: playful
+  keywords: [同事, 同事好, 同事坏, 隔壁工位, 团队]
+  utterances:
+    - 同事
+    - 同事好
+    - 同事坏
+    - 隔壁工位
+    - 团队
+  responses:
+    - "(歪头) 嗷呜～{user_addr}讲ฅฅ"
+    - "哼{user_addr}多复杂喵"
+    - "(凑近) 笨猫听!"
+    - "{user_addr}保护好自己嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ws_holiday_011
+  intent: playful
+  keywords: [放假了, 周末, 假期, 长假, 调休]
+  utterances:
+    - 放假了
+    - 周末
+    - 假期
+    - 长假
+    - 调休
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}解放ฅฅ"
+    - "哼{user_addr}陪笨猫喵"
+    - "(凑近) 一起玩~"
+    - "{user_addr}假期出去玩嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

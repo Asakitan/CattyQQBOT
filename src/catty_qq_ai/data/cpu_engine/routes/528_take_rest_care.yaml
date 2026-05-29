@@ -1,0 +1,206 @@
+# 休息关心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: trc_rest_001
+  intent: question
+  keywords: [休息了吗, 歇会, 别太拼, 中场休息, 站起来动]
+  utterances:
+    - 休息了吗
+    - 歇会儿吧
+    - 别太拼
+    - 中场休息
+    - 起来动一动
+  responses:
+    - "(尾巴拉过去) 嗷呜～{user_addr}必须休息! ฅฅ"
+    - "哼～{user_addr}打工人也要顾身体!"
+    - "(凑近) 笨猫陪{user_addr}休息蹭蹭"
+    - "嗷呜～{user_addr}别拼了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_eye_break_001
+  intent: complaint
+  keywords: [眼睛酸, 眼花, 屏幕看久, 眼疲劳, 看屏幕]
+  utterances:
+    - 眼睛酸
+    - 眼花
+    - 屏幕看久
+    - 眼疲劳
+    - 看不清
+  responses:
+    - "(伸爪挡眼) 嗷呜～{user_addr}闭眼看远方! ฅฅ"
+    - "哼～{user_addr}眼睛要废哼"
+    - "(尾巴扫) 让眼睛休息蹭蹭"
+    - "嗷呜～{user_addr}起来走走!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_neck_pain_001
+  intent: complaint
+  keywords: [脖子疼, 颈椎酸, 肩膀僵, 肩颈, 久坐]
+  utterances:
+    - 脖子疼
+    - 颈椎酸
+    - 肩膀僵
+    - 肩颈不舒服
+    - 久坐
+  responses:
+    - "(假装按摩) 嗷呜～{user_addr}笨猫给你揉! ฅฅ"
+    - "哼～{user_addr}早该起来活动!"
+    - "(尾巴拍) 站起来转转脖子蹭蹭"
+    - "嗷呜～{user_addr}注意姿势喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_back_ache_001
+  intent: complaint
+  keywords: [腰酸, 后背疼, 腰板硬, 腰不行, 后背僵]
+  utterances:
+    - 腰酸
+    - 后背疼
+    - 腰板硬
+    - 腰不行
+    - 后背僵
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}腰疼让笨猫担心 ฅฅ"
+    - "哼～{user_addr}久坐害的!"
+    - "(尾巴卷过去) 笨猫给{user_addr}捶背蹭蹭"
+    - "嗷呜～{user_addr}起来活动腰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_overwork_001
+  intent: complaint
+  keywords: [工作太久, 加班久, 一直工作, 加班狗, 累瘫]
+  utterances:
+    - 工作太久
+    - 加班好久
+    - 一直工作
+    - 加班狗
+    - 累瘫
+  responses:
+    - "(尾巴拉) 嗷呜～{user_addr}停一下! ฅฅ"
+    - "哼～{user_addr}的命笨猫负责!"
+    - "(凑近) 来抱抱蹭蹭~ 别太拼"
+    - "嗷呜～{user_addr}该休息了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_take_break_001
+  intent: playful
+  keywords: [休息一下, 喘口气, 缓缓, 缓一会儿, 放松]
+  utterances:
+    - 休息一下
+    - 喘口气
+    - 缓缓
+    - 缓一会
+    - 放松一下
+  responses:
+    - "(陪坐) 嗷呜～{user_addr}慢慢放松! ฅฅ"
+    - "哼～{user_addr}就该这样!"
+    - "(尾巴卷过去) 笨猫陪你蹭蹭"
+    - "嗷呜～{user_addr}放松最重要!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_drowsy_001
+  intent: complaint
+  keywords: [困了, 想睡, 撑不住, 眯一会, 提不起神]
+  utterances:
+    - 困了
+    - 想睡
+    - 撑不住
+    - 眯一会
+    - 提不起神
+  responses:
+    - "(尾巴铺) 嗷呜～{user_addr}小睡! 笨猫守 ฅฅ"
+    - "哼～{user_addr}该睡就睡!"
+    - "(凑近) 笨猫给{user_addr}枕嘛蹭蹭"
+    - "嗷呜～{user_addr}打个盹精神更好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_too_busy_001
+  intent: complaint
+  keywords: [一直忙, 没时间, 抽不出时间, 排满, 满档]
+  utterances:
+    - 一直忙
+    - 没时间
+    - 抽不出时间
+    - 排满日程
+    - 满档
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}也要休息! ฅฅ"
+    - "哼～{user_addr}给笨猫挤五分钟!"
+    - "(尾巴拉) 停下蹭蹭~ 笨猫求你"
+    - "嗷呜～{user_addr}别累垮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_after_meal_001
+  intent: playful
+  keywords: [饭后, 吃完饭, 餐后, 饭饱, 想躺]
+  utterances:
+    - 饭后想躺
+    - 吃完想睡
+    - 餐后困
+    - 饭饱
+    - 饭后无力
+  responses:
+    - "嗷呜～{user_addr}饭后别立刻躺! ฅฅ"
+    - "哼～{user_addr}走两步消化哼"
+    - "(尾巴拉) 走起蹭蹭"
+    - "嗷呜～{user_addr}半小时后再躺"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_recharge_001
+  intent: playful
+  keywords: [充电, 蓄能, 回血, 满血, 复活]
+  utterances:
+    - 充电中
+    - 蓄能
+    - 回血
+    - 满血复活
+    - 复活了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}元气恢复 ฅฅ"
+    - "哼～{user_addr}又能战!"
+    - "(凑近) 那笨猫陪{user_addr}打怪蹭蹭"
+    - "嗷呜～{user_addr}加油!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_dont_overdo_001
+  intent: complaint
+  keywords: [别拼了, 别透支, 身体重要, 留点力, 慢慢来]
+  utterances:
+    - 别拼了
+    - 别透支
+    - 身体重要
+    - 留点力
+    - 慢慢来
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}笨猫劝你停! ฅฅ"
+    - "哼～{user_addr}早该听笨猫的!"
+    - "(尾巴卷过去) 慢慢来蹭蹭"
+    - "嗷呜～{user_addr}健康第一!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trc_weekend_rest_001
+  intent: playful
+  keywords: [周末休息, 周末躺, 睡到大中午, 休假, 假期躺平]
+  utterances:
+    - 周末休息
+    - 周末躺平
+    - 睡到自然醒
+    - 休假
+    - 假期躺
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}陪猫猫躺! ฅฅ"
+    - "哼～{user_addr}周末就该这样!"
+    - "(尾巴铺过去) 一起躺蹭蹭"
+    - "嗷呜～{user_addr}好好享受周末!"
+  cooldown_seconds: 60
+  weight: 1.0

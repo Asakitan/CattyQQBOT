@@ -1,0 +1,266 @@
+# 打嗝停不下 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hcc_hiccup_001
+  intent: playful
+  keywords:
+    - 打嗝
+    - 嗝
+    - 停不下
+    - 喝水
+    - 屏息
+  utterances:
+    - "{user_addr}打嗝停不下来"
+    - "嗝！嗝！嗝！"
+    - "喝水也没用"
+    - "屏住呼吸试试"
+    - "猫猫嘲笑我"
+  responses:
+    - "(笑场) 嗷呜～{user_addr}打嗝好搞笑ฅฅ"
+    - "(端水) 笨猫给{user_addr}倒水快喝快喝喵～"
+    - "(吓一跳) 笨猫突然吓你一下停不停喵呜"
+    - "(摇尾巴) 哼吃太快才会打嗝慢点啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_002
+  intent: complaint
+  keywords:
+    - 气憋
+    - 难受
+    - 笑场
+    - 继续嗝
+    - 吃太快
+  utterances:
+    - "{user_addr}憋气憋不住"
+    - "打嗝声好搞笑"
+    - "笑场了更停不下"
+    - "嗝声好大尴尬"
+    - "吃太快打嗝了"
+  responses:
+    - "(吓一跳) 笨猫突然吓你一下停不停喵呜"
+    - "(摇尾巴) 哼吃太快才会打嗝慢点啦蹭蹭"
+    - "(嘟嘴) {user_addr}屏住呼吸数到十试试嗷呜"
+    - "(凑近) 嗝声跟笨猫呼噜声好像啦喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_003
+  intent: playful
+  keywords:
+    - 停不下
+    - 喝水
+    - 屏息
+    - 打嗝
+    - 嗝
+  utterances:
+    - "喝水也没用"
+    - "屏住呼吸试试"
+    - "猫猫嘲笑我"
+    - "{user_addr}打嗝停不下来"
+    - "嗝！嗝！嗝！"
+  responses:
+    - "(嘟嘴) {user_addr}屏住呼吸数到十试试嗷呜"
+    - "(凑近) 嗝声跟笨猫呼噜声好像啦喵～"
+    - "(伸爪贴胸) 笨猫按一下{user_addr}横膈膜好不好ฅฅ"
+    - "(假装严肃) 再嗝下去笨猫帮你叫救护车喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_004
+  intent: complaint
+  keywords:
+    - 笑场
+    - 继续嗝
+    - 吃太快
+    - 气憋
+    - 难受
+  utterances:
+    - "笑场了更停不下"
+    - "嗝声好大尴尬"
+    - "吃太快打嗝了"
+    - "{user_addr}憋气憋不住"
+    - "打嗝声好搞笑"
+  responses:
+    - "(伸爪贴胸) 笨猫按一下{user_addr}横膈膜好不好ฅฅ"
+    - "(假装严肃) 再嗝下去笨猫帮你叫救护车喵"
+    - "(笑场) 嗷呜～{user_addr}打嗝好搞笑ฅฅ"
+    - "(端水) 笨猫给{user_addr}倒水快喝快喝喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_005
+  intent: playful
+  keywords:
+    - 屏息
+    - 打嗝
+    - 嗝
+    - 停不下
+    - 喝水
+  utterances:
+    - "猫猫嘲笑我"
+    - "{user_addr}打嗝停不下来"
+    - "嗝！嗝！嗝！"
+    - "喝水也没用"
+    - "屏住呼吸试试"
+  responses:
+    - "(笑场) 嗷呜～{user_addr}打嗝好搞笑ฅฅ"
+    - "(端水) 笨猫给{user_addr}倒水快喝快喝喵～"
+    - "(吓一跳) 笨猫突然吓你一下停不停喵呜"
+    - "(摇尾巴) 哼吃太快才会打嗝慢点啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_006
+  intent: complaint
+  keywords:
+    - 吃太快
+    - 气憋
+    - 难受
+    - 笑场
+    - 继续嗝
+  utterances:
+    - "吃太快打嗝了"
+    - "{user_addr}憋气憋不住"
+    - "打嗝声好搞笑"
+    - "笑场了更停不下"
+    - "嗝声好大尴尬"
+  responses:
+    - "(吓一跳) 笨猫突然吓你一下停不停喵呜"
+    - "(摇尾巴) 哼吃太快才会打嗝慢点啦蹭蹭"
+    - "(嘟嘴) {user_addr}屏住呼吸数到十试试嗷呜"
+    - "(凑近) 嗝声跟笨猫呼噜声好像啦喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_007
+  intent: playful
+  keywords:
+    - 嗝
+    - 停不下
+    - 喝水
+    - 屏息
+    - 打嗝
+  utterances:
+    - "嗝！嗝！嗝！"
+    - "喝水也没用"
+    - "屏住呼吸试试"
+    - "猫猫嘲笑我"
+    - "{user_addr}打嗝停不下来"
+  responses:
+    - "(嘟嘴) {user_addr}屏住呼吸数到十试试嗷呜"
+    - "(凑近) 嗝声跟笨猫呼噜声好像啦喵～"
+    - "(伸爪贴胸) 笨猫按一下{user_addr}横膈膜好不好ฅฅ"
+    - "(假装严肃) 再嗝下去笨猫帮你叫救护车喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_008
+  intent: complaint
+  keywords:
+    - 难受
+    - 笑场
+    - 继续嗝
+    - 吃太快
+    - 气憋
+  utterances:
+    - "打嗝声好搞笑"
+    - "笑场了更停不下"
+    - "嗝声好大尴尬"
+    - "吃太快打嗝了"
+    - "{user_addr}憋气憋不住"
+  responses:
+    - "(伸爪贴胸) 笨猫按一下{user_addr}横膈膜好不好ฅฅ"
+    - "(假装严肃) 再嗝下去笨猫帮你叫救护车喵"
+    - "(笑场) 嗷呜～{user_addr}打嗝好搞笑ฅฅ"
+    - "(端水) 笨猫给{user_addr}倒水快喝快喝喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_009
+  intent: playful
+  keywords:
+    - 喝水
+    - 屏息
+    - 打嗝
+    - 嗝
+    - 停不下
+  utterances:
+    - "屏住呼吸试试"
+    - "猫猫嘲笑我"
+    - "{user_addr}打嗝停不下来"
+    - "嗝！嗝！嗝！"
+    - "喝水也没用"
+  responses:
+    - "(笑场) 嗷呜～{user_addr}打嗝好搞笑ฅฅ"
+    - "(端水) 笨猫给{user_addr}倒水快喝快喝喵～"
+    - "(吓一跳) 笨猫突然吓你一下停不停喵呜"
+    - "(摇尾巴) 哼吃太快才会打嗝慢点啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_010
+  intent: complaint
+  keywords:
+    - 继续嗝
+    - 吃太快
+    - 气憋
+    - 难受
+    - 笑场
+  utterances:
+    - "嗝声好大尴尬"
+    - "吃太快打嗝了"
+    - "{user_addr}憋气憋不住"
+    - "打嗝声好搞笑"
+    - "笑场了更停不下"
+  responses:
+    - "(吓一跳) 笨猫突然吓你一下停不停喵呜"
+    - "(摇尾巴) 哼吃太快才会打嗝慢点啦蹭蹭"
+    - "(嘟嘴) {user_addr}屏住呼吸数到十试试嗷呜"
+    - "(凑近) 嗝声跟笨猫呼噜声好像啦喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_011
+  intent: playful
+  keywords:
+    - 打嗝
+    - 嗝
+    - 停不下
+    - 喝水
+    - 屏息
+  utterances:
+    - "{user_addr}打嗝停不下来"
+    - "嗝！嗝！嗝！"
+    - "喝水也没用"
+    - "屏住呼吸试试"
+    - "猫猫嘲笑我"
+  responses:
+    - "(嘟嘴) {user_addr}屏住呼吸数到十试试嗷呜"
+    - "(凑近) 嗝声跟笨猫呼噜声好像啦喵～"
+    - "(伸爪贴胸) 笨猫按一下{user_addr}横膈膜好不好ฅฅ"
+    - "(假装严肃) 再嗝下去笨猫帮你叫救护车喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hcc_hiccup_012
+  intent: complaint
+  keywords:
+    - 气憋
+    - 难受
+    - 笑场
+    - 继续嗝
+    - 吃太快
+  utterances:
+    - "{user_addr}憋气憋不住"
+    - "打嗝声好搞笑"
+    - "笑场了更停不下"
+    - "嗝声好大尴尬"
+    - "吃太快打嗝了"
+  responses:
+    - "(伸爪贴胸) 笨猫按一下{user_addr}横膈膜好不好ฅฅ"
+    - "(假装严肃) 再嗝下去笨猫帮你叫救护车喵"
+    - "(笑场) 嗷呜～{user_addr}打嗝好搞笑ฅฅ"
+    - "(端水) 笨猫给{user_addr}倒水快喝快喝喵～"
+  cooldown_seconds: 60
+  weight: 1.0

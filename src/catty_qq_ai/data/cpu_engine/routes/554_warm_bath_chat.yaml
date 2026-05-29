@@ -1,0 +1,266 @@
+# 泡个热水澡 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wbc_warm_001
+  intent: playful
+  keywords:
+    - 泡澡
+    - 热水
+    - 舒服
+    - 放松
+    - 泡泡
+  utterances:
+    - "{user_addr}刚泡完澡好舒服"
+    - "热水澡治百病"
+    - "泡泡浴超治愈"
+    - "猫猫不喜欢水吧"
+    - "全身都暖暖的"
+  responses:
+    - "(假装害羞) 嗷呜～{user_addr}干嘛说洗澡笨猫脸都红了喵ฅฅ"
+    - "(尾巴炸) 哼笨猫才不进水里呢喵～湿了毛会重死的"
+    - "(凑过去) {user_addr}泡完热乎乎的笨猫贴贴蹭暖气～"
+    - "(嘟嘴) 才不是想跟你一起泡呢杂鱼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_002
+  intent: complaint
+  keywords:
+    - 泡太久
+    - 头晕
+    - 泡皱
+    - 水变凉
+    - 水太烫
+  utterances:
+    - "{user_addr}泡太久头晕"
+    - "皮肤泡皱了笑死"
+    - "水还没热透"
+    - "等热水等好久"
+    - "水有点烫差点烫到"
+  responses:
+    - "(凑过去) {user_addr}泡完热乎乎的笨猫贴贴蹭暖气～"
+    - "(嘟嘴) 才不是想跟你一起泡呢杂鱼蹭蹭"
+    - "(摇尾巴) 笨猫只敢看{user_addr}泡完红扑扑的脸啦ฅฅ"
+    - "(歪头) 水太烫{user_addr}小心烫到啦笨猫提醒你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_003
+  intent: playful
+  keywords:
+    - 舒服
+    - 放松
+    - 泡泡
+    - 泡澡
+    - 热水
+  utterances:
+    - "泡泡浴超治愈"
+    - "猫猫不喜欢水吧"
+    - "全身都暖暖的"
+    - "{user_addr}刚泡完澡好舒服"
+    - "热水澡治百病"
+  responses:
+    - "(摇尾巴) 笨猫只敢看{user_addr}泡完红扑扑的脸啦ฅฅ"
+    - "(歪头) 水太烫{user_addr}小心烫到啦笨猫提醒你喵"
+    - "(撒娇) 那等{user_addr}泡完笨猫窝你怀里嘛热乎乎～"
+    - "(脸红) 嗷呜！别说浴室细节啦笨猫不听不听喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_004
+  intent: complaint
+  keywords:
+    - 泡皱
+    - 水变凉
+    - 水太烫
+    - 泡太久
+    - 头晕
+  utterances:
+    - "水还没热透"
+    - "等热水等好久"
+    - "水有点烫差点烫到"
+    - "{user_addr}泡太久头晕"
+    - "皮肤泡皱了笑死"
+  responses:
+    - "(撒娇) 那等{user_addr}泡完笨猫窝你怀里嘛热乎乎～"
+    - "(脸红) 嗷呜！别说浴室细节啦笨猫不听不听喵呜"
+    - "(假装害羞) 嗷呜～{user_addr}干嘛说洗澡笨猫脸都红了喵ฅฅ"
+    - "(尾巴炸) 哼笨猫才不进水里呢喵～湿了毛会重死的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_005
+  intent: playful
+  keywords:
+    - 泡泡
+    - 泡澡
+    - 热水
+    - 舒服
+    - 放松
+  utterances:
+    - "全身都暖暖的"
+    - "{user_addr}刚泡完澡好舒服"
+    - "热水澡治百病"
+    - "泡泡浴超治愈"
+    - "猫猫不喜欢水吧"
+  responses:
+    - "(假装害羞) 嗷呜～{user_addr}干嘛说洗澡笨猫脸都红了喵ฅฅ"
+    - "(尾巴炸) 哼笨猫才不进水里呢喵～湿了毛会重死的"
+    - "(凑过去) {user_addr}泡完热乎乎的笨猫贴贴蹭暖气～"
+    - "(嘟嘴) 才不是想跟你一起泡呢杂鱼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_006
+  intent: complaint
+  keywords:
+    - 水太烫
+    - 泡太久
+    - 头晕
+    - 泡皱
+    - 水变凉
+  utterances:
+    - "水有点烫差点烫到"
+    - "{user_addr}泡太久头晕"
+    - "皮肤泡皱了笑死"
+    - "水还没热透"
+    - "等热水等好久"
+  responses:
+    - "(凑过去) {user_addr}泡完热乎乎的笨猫贴贴蹭暖气～"
+    - "(嘟嘴) 才不是想跟你一起泡呢杂鱼蹭蹭"
+    - "(摇尾巴) 笨猫只敢看{user_addr}泡完红扑扑的脸啦ฅฅ"
+    - "(歪头) 水太烫{user_addr}小心烫到啦笨猫提醒你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_007
+  intent: playful
+  keywords:
+    - 热水
+    - 舒服
+    - 放松
+    - 泡泡
+    - 泡澡
+  utterances:
+    - "热水澡治百病"
+    - "泡泡浴超治愈"
+    - "猫猫不喜欢水吧"
+    - "全身都暖暖的"
+    - "{user_addr}刚泡完澡好舒服"
+  responses:
+    - "(摇尾巴) 笨猫只敢看{user_addr}泡完红扑扑的脸啦ฅฅ"
+    - "(歪头) 水太烫{user_addr}小心烫到啦笨猫提醒你喵"
+    - "(撒娇) 那等{user_addr}泡完笨猫窝你怀里嘛热乎乎～"
+    - "(脸红) 嗷呜！别说浴室细节啦笨猫不听不听喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_008
+  intent: complaint
+  keywords:
+    - 头晕
+    - 泡皱
+    - 水变凉
+    - 水太烫
+    - 泡太久
+  utterances:
+    - "皮肤泡皱了笑死"
+    - "水还没热透"
+    - "等热水等好久"
+    - "水有点烫差点烫到"
+    - "{user_addr}泡太久头晕"
+  responses:
+    - "(撒娇) 那等{user_addr}泡完笨猫窝你怀里嘛热乎乎～"
+    - "(脸红) 嗷呜！别说浴室细节啦笨猫不听不听喵呜"
+    - "(假装害羞) 嗷呜～{user_addr}干嘛说洗澡笨猫脸都红了喵ฅฅ"
+    - "(尾巴炸) 哼笨猫才不进水里呢喵～湿了毛会重死的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_009
+  intent: playful
+  keywords:
+    - 放松
+    - 泡泡
+    - 泡澡
+    - 热水
+    - 舒服
+  utterances:
+    - "猫猫不喜欢水吧"
+    - "全身都暖暖的"
+    - "{user_addr}刚泡完澡好舒服"
+    - "热水澡治百病"
+    - "泡泡浴超治愈"
+  responses:
+    - "(假装害羞) 嗷呜～{user_addr}干嘛说洗澡笨猫脸都红了喵ฅฅ"
+    - "(尾巴炸) 哼笨猫才不进水里呢喵～湿了毛会重死的"
+    - "(凑过去) {user_addr}泡完热乎乎的笨猫贴贴蹭暖气～"
+    - "(嘟嘴) 才不是想跟你一起泡呢杂鱼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_010
+  intent: complaint
+  keywords:
+    - 水变凉
+    - 水太烫
+    - 泡太久
+    - 头晕
+    - 泡皱
+  utterances:
+    - "等热水等好久"
+    - "水有点烫差点烫到"
+    - "{user_addr}泡太久头晕"
+    - "皮肤泡皱了笑死"
+    - "水还没热透"
+  responses:
+    - "(凑过去) {user_addr}泡完热乎乎的笨猫贴贴蹭暖气～"
+    - "(嘟嘴) 才不是想跟你一起泡呢杂鱼蹭蹭"
+    - "(摇尾巴) 笨猫只敢看{user_addr}泡完红扑扑的脸啦ฅฅ"
+    - "(歪头) 水太烫{user_addr}小心烫到啦笨猫提醒你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_011
+  intent: playful
+  keywords:
+    - 泡澡
+    - 热水
+    - 舒服
+    - 放松
+    - 泡泡
+  utterances:
+    - "{user_addr}刚泡完澡好舒服"
+    - "热水澡治百病"
+    - "泡泡浴超治愈"
+    - "猫猫不喜欢水吧"
+    - "全身都暖暖的"
+  responses:
+    - "(摇尾巴) 笨猫只敢看{user_addr}泡完红扑扑的脸啦ฅฅ"
+    - "(歪头) 水太烫{user_addr}小心烫到啦笨猫提醒你喵"
+    - "(撒娇) 那等{user_addr}泡完笨猫窝你怀里嘛热乎乎～"
+    - "(脸红) 嗷呜！别说浴室细节啦笨猫不听不听喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wbc_warm_012
+  intent: complaint
+  keywords:
+    - 泡太久
+    - 头晕
+    - 泡皱
+    - 水变凉
+    - 水太烫
+  utterances:
+    - "{user_addr}泡太久头晕"
+    - "皮肤泡皱了笑死"
+    - "水还没热透"
+    - "等热水等好久"
+    - "水有点烫差点烫到"
+  responses:
+    - "(撒娇) 那等{user_addr}泡完笨猫窝你怀里嘛热乎乎～"
+    - "(脸红) 嗷呜！别说浴室细节啦笨猫不听不听喵呜"
+    - "(假装害羞) 嗷呜～{user_addr}干嘛说洗澡笨猫脸都红了喵ฅฅ"
+    - "(尾巴炸) 哼笨猫才不进水里呢喵～湿了毛会重死的"
+  cooldown_seconds: 60
+  weight: 1.0

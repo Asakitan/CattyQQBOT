@@ -1,0 +1,172 @@
+# 手机没电瞬间 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lb_meidian_001
+  intent: complaint
+  keywords: [手机没电, 快没电了, 电量告急, 红色电量, 1%电]
+  utterances:
+    - "手机没电了"
+    - "{user_addr}快没电了"
+    - "电量告急"
+    - "红色电量"
+    - "1%电量"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}快找充电器喵～别断联了"
+    - "哼～电量告急还在玩 ฅฅ"
+    - "(贴贴) 1%了～最后珍贵的时间留给猫猫嘛"
+    - "红色电量自动省电模式启动嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_chongdianqi_001
+  intent: complaint
+  keywords: [没带充电器, 没带数据线, 充电器丢了, 借充电器, 找不到线]
+  utterances:
+    - "没带充电器"
+    - "{user_addr}充电器忘了"
+    - "数据线找不到"
+    - "借充电器"
+    - "充电器在家"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}问问周围人借一下喵～"
+    - "哼～又忘记带～你是不是脑子比手机先没电 ฅฅ"
+    - "(凑过来) 借充电器记得归还诶"
+    - "数据线丢笨猫帮你找嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_chongbuhui_001
+  intent: complaint
+  keywords: [充电器坏了, 充不进, 一直0%, 显示充电但不进, 接触不良]
+  utterances:
+    - "充电器坏了"
+    - "{user_addr}充不进电"
+    - "一直0%"
+    - "显示充电但不上"
+    - "接触不良"
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}试试换根线喵～"
+    - "哼～充不进笨猫帮你检查 ฅฅ"
+    - "(贴贴) 接触不良吹一下接口"
+    - "一直0%可能是电池老化嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_chongdianbao_001
+  intent: complaint
+  keywords: [充电宝忘带, 充电宝没电, 借充电宝, 共享充电宝, 充电宝丢了]
+  utterances:
+    - "充电宝没电"
+    - "{user_addr}充电宝忘带"
+    - "借充电宝"
+    - "共享充电宝好贵"
+    - "充电宝丢了"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}共享虽贵能救急喵～"
+    - "哼～充电宝丢了下次绑头上 ฅฅ"
+    - "(凑过来) 借充电宝记得归还诶"
+    - "充电宝是出门必备～嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_pingmusi_001
+  intent: complaint
+  keywords: [屏幕死机, 手机卡死, 手机黑屏, 重启不了, 关机不了]
+  utterances:
+    - "手机卡死"
+    - "{user_addr}屏幕死机"
+    - "手机黑屏"
+    - "重启不了"
+    - "关机不了"
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}长按电源键试试喵～"
+    - "哼～手机也罢工了 ฅฅ"
+    - "(贴贴) 黑屏可能是电池问题"
+    - "重启不了等电量耗光自动关嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_xiaoxidiu_001
+  intent: complaint
+  keywords: [手机没电错过消息, 错过电话, 没看到, 没人能联系, 失联了]
+  utterances:
+    - "错过你消息"
+    - "{user_addr}错过你电话"
+    - "没看到提醒"
+    - "失联了"
+    - "联系不上"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫还在等你呢喵～"
+    - "哼～失联好担心 ฅฅ"
+    - "(蹭蹭) 错过电话回一个抱歉"
+    - "下次手机没电先告诉笨猫嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_kuaichong_001
+  intent: playful
+  keywords: [快充救命, 5分钟充30%, 闪充, 快充给力, 救急充电]
+  utterances:
+    - "快充救命"
+    - "{user_addr}5分钟充30%"
+    - "闪充太顶"
+    - "救急充电"
+    - "快充给力"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}快充科技不可少喵～"
+    - "哼～5分钟回血～救命神器 ฅฅ"
+    - "(贴贴) 闪充用过回不去了"
+    - "救急充电是当代生存技能嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_diaodian_001
+  intent: complaint
+  keywords: [掉电太快, 一会就没电, 电池老化, 换电池, 电池不耐用]
+  utterances:
+    - "掉电太快"
+    - "{user_addr}电池老化"
+    - "一会就没电"
+    - "换电池"
+    - "电池不耐用"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}电池老化该换啦喵～"
+    - "哼～一会就没电太烦 ฅฅ"
+    - "(蹭蹭) 换电池便宜+续命"
+    - "电池不耐用就别开太多后台嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_chayanshendian_001
+  intent: complaint
+  keywords: [插上没反应, 充电没反应, 电源插座坏, 排插坏了, 火线掉了]
+  utterances:
+    - "插上没反应"
+    - "{user_addr}充电没反应"
+    - "电源插座坏"
+    - "排插坏了"
+    - "火线松了"
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}试试换个插座喵～"
+    - "哼～排插也坏了 ฅฅ"
+    - "(贴贴) 火线掉了快叫电工"
+    - "插座坏别硬插会触电嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lb_wuxianchong_001
+  intent: playful
+  keywords: [无线充电, 磁吸充电, 无线宝, 苹果magsafe, 无线快充]
+  utterances:
+    - "无线充电真方便"
+    - "{user_addr}磁吸贴贴"
+    - "magsafe好用"
+    - "无线快充"
+    - "无线宝"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}无线充电诶～未来感喵～"
+    - "哼～magsafe那一吸的感觉真好 ฅฅ"
+    - "(尾巴翘) 无线快充比有线还快～"
+    - "磁吸贴贴好像猫猫一样嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

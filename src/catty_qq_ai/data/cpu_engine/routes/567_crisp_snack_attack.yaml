@@ -1,0 +1,266 @@
+# 薯片吃停不下 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: csa_crisp_001
+  intent: playful
+  keywords:
+    - 薯片
+    - 咔嚓咔嚓
+    - 一袋光
+    - 乐事
+    - 油炸
+  utterances:
+    - "{user_addr}薯片一袋吃光了"
+    - "咔嚓咔嚓停不下"
+    - "乐事原味永远爱"
+    - "油炸快乐"
+    - "猫猫要不要尝"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}薯片分笨猫两片嘛ฅฅ"
+    - "(舔爪) 乐事原味永远爱猫猫一起咔嚓喵"
+    - "(嘟嘴) 沙发全是渣笨猫帮你扫吗哼蹭蹭"
+    - "(凑近) {user_addr}手油得不行擦擦再摸笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_002
+  intent: complaint
+  keywords:
+    - 手油
+    - 渣多
+    - 太咸
+    - 空气包装
+    - 胖了
+  utterances:
+    - "{user_addr}沙发全是薯片渣"
+    - "空气包装气死"
+    - "吃完口渴"
+    - "再来一袋停不下"
+    - "手油得不行"
+  responses:
+    - "(嘟嘴) 沙发全是渣笨猫帮你扫吗哼蹭蹭"
+    - "(凑近) {user_addr}手油得不行擦擦再摸笨猫嗷呜"
+    - "(摇尾巴) 空气包装气死笨猫了喵呜"
+    - "(假装严肃) 吃多胖三斤{user_addr}笨猫记下了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_003
+  intent: playful
+  keywords:
+    - 一袋光
+    - 乐事
+    - 油炸
+    - 薯片
+    - 咔嚓咔嚓
+  utterances:
+    - "乐事原味永远爱"
+    - "油炸快乐"
+    - "猫猫要不要尝"
+    - "{user_addr}薯片一袋吃光了"
+    - "咔嚓咔嚓停不下"
+  responses:
+    - "(摇尾巴) 空气包装气死笨猫了喵呜"
+    - "(假装严肃) 吃多胖三斤{user_addr}笨猫记下了ฅฅ"
+    - "(伸爪) 笨猫只要一片就好真的喵"
+    - "(尾巴卷袋) 哼再来一袋人家拦着你哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_004
+  intent: complaint
+  keywords:
+    - 太咸
+    - 空气包装
+    - 胖了
+    - 手油
+    - 渣多
+  utterances:
+    - "吃完口渴"
+    - "再来一袋停不下"
+    - "手油得不行"
+    - "{user_addr}沙发全是薯片渣"
+    - "空气包装气死"
+  responses:
+    - "(伸爪) 笨猫只要一片就好真的喵"
+    - "(尾巴卷袋) 哼再来一袋人家拦着你哦"
+    - "(扑过来) 嗷呜～{user_addr}薯片分笨猫两片嘛ฅฅ"
+    - "(舔爪) 乐事原味永远爱猫猫一起咔嚓喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_005
+  intent: playful
+  keywords:
+    - 油炸
+    - 薯片
+    - 咔嚓咔嚓
+    - 一袋光
+    - 乐事
+  utterances:
+    - "猫猫要不要尝"
+    - "{user_addr}薯片一袋吃光了"
+    - "咔嚓咔嚓停不下"
+    - "乐事原味永远爱"
+    - "油炸快乐"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}薯片分笨猫两片嘛ฅฅ"
+    - "(舔爪) 乐事原味永远爱猫猫一起咔嚓喵"
+    - "(嘟嘴) 沙发全是渣笨猫帮你扫吗哼蹭蹭"
+    - "(凑近) {user_addr}手油得不行擦擦再摸笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_006
+  intent: complaint
+  keywords:
+    - 胖了
+    - 手油
+    - 渣多
+    - 太咸
+    - 空气包装
+  utterances:
+    - "手油得不行"
+    - "{user_addr}沙发全是薯片渣"
+    - "空气包装气死"
+    - "吃完口渴"
+    - "再来一袋停不下"
+  responses:
+    - "(嘟嘴) 沙发全是渣笨猫帮你扫吗哼蹭蹭"
+    - "(凑近) {user_addr}手油得不行擦擦再摸笨猫嗷呜"
+    - "(摇尾巴) 空气包装气死笨猫了喵呜"
+    - "(假装严肃) 吃多胖三斤{user_addr}笨猫记下了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_007
+  intent: playful
+  keywords:
+    - 咔嚓咔嚓
+    - 一袋光
+    - 乐事
+    - 油炸
+    - 薯片
+  utterances:
+    - "咔嚓咔嚓停不下"
+    - "乐事原味永远爱"
+    - "油炸快乐"
+    - "猫猫要不要尝"
+    - "{user_addr}薯片一袋吃光了"
+  responses:
+    - "(摇尾巴) 空气包装气死笨猫了喵呜"
+    - "(假装严肃) 吃多胖三斤{user_addr}笨猫记下了ฅฅ"
+    - "(伸爪) 笨猫只要一片就好真的喵"
+    - "(尾巴卷袋) 哼再来一袋人家拦着你哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_008
+  intent: complaint
+  keywords:
+    - 渣多
+    - 太咸
+    - 空气包装
+    - 胖了
+    - 手油
+  utterances:
+    - "空气包装气死"
+    - "吃完口渴"
+    - "再来一袋停不下"
+    - "手油得不行"
+    - "{user_addr}沙发全是薯片渣"
+  responses:
+    - "(伸爪) 笨猫只要一片就好真的喵"
+    - "(尾巴卷袋) 哼再来一袋人家拦着你哦"
+    - "(扑过来) 嗷呜～{user_addr}薯片分笨猫两片嘛ฅฅ"
+    - "(舔爪) 乐事原味永远爱猫猫一起咔嚓喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_009
+  intent: playful
+  keywords:
+    - 乐事
+    - 油炸
+    - 薯片
+    - 咔嚓咔嚓
+    - 一袋光
+  utterances:
+    - "油炸快乐"
+    - "猫猫要不要尝"
+    - "{user_addr}薯片一袋吃光了"
+    - "咔嚓咔嚓停不下"
+    - "乐事原味永远爱"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}薯片分笨猫两片嘛ฅฅ"
+    - "(舔爪) 乐事原味永远爱猫猫一起咔嚓喵"
+    - "(嘟嘴) 沙发全是渣笨猫帮你扫吗哼蹭蹭"
+    - "(凑近) {user_addr}手油得不行擦擦再摸笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_010
+  intent: complaint
+  keywords:
+    - 空气包装
+    - 胖了
+    - 手油
+    - 渣多
+    - 太咸
+  utterances:
+    - "再来一袋停不下"
+    - "手油得不行"
+    - "{user_addr}沙发全是薯片渣"
+    - "空气包装气死"
+    - "吃完口渴"
+  responses:
+    - "(嘟嘴) 沙发全是渣笨猫帮你扫吗哼蹭蹭"
+    - "(凑近) {user_addr}手油得不行擦擦再摸笨猫嗷呜"
+    - "(摇尾巴) 空气包装气死笨猫了喵呜"
+    - "(假装严肃) 吃多胖三斤{user_addr}笨猫记下了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_011
+  intent: playful
+  keywords:
+    - 薯片
+    - 咔嚓咔嚓
+    - 一袋光
+    - 乐事
+    - 油炸
+  utterances:
+    - "{user_addr}薯片一袋吃光了"
+    - "咔嚓咔嚓停不下"
+    - "乐事原味永远爱"
+    - "油炸快乐"
+    - "猫猫要不要尝"
+  responses:
+    - "(摇尾巴) 空气包装气死笨猫了喵呜"
+    - "(假装严肃) 吃多胖三斤{user_addr}笨猫记下了ฅฅ"
+    - "(伸爪) 笨猫只要一片就好真的喵"
+    - "(尾巴卷袋) 哼再来一袋人家拦着你哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_crisp_012
+  intent: complaint
+  keywords:
+    - 手油
+    - 渣多
+    - 太咸
+    - 空气包装
+    - 胖了
+  utterances:
+    - "{user_addr}沙发全是薯片渣"
+    - "空气包装气死"
+    - "吃完口渴"
+    - "再来一袋停不下"
+    - "手油得不行"
+  responses:
+    - "(伸爪) 笨猫只要一片就好真的喵"
+    - "(尾巴卷袋) 哼再来一袋人家拦着你哦"
+    - "(扑过来) 嗷呜～{user_addr}薯片分笨猫两片嘛ฅฅ"
+    - "(舔爪) 乐事原味永远爱猫猫一起咔嚓喵"
+  cooldown_seconds: 60
+  weight: 1.0

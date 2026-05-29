@@ -1,0 +1,189 @@
+# 镜子自拍 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mrr_slf_001
+  intent: playful
+  keywords: [照镜子, 镜子前自拍, 镜子里, 看镜子, 整理仪容]
+  utterances:
+    - "照镜子"
+    - "镜子前自拍"
+    - "镜子里"
+    - "整理仪容"
+    - "{user_addr}照镜子"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}帅气检查喵ฅฅ"
+    - "(凑过来) 笨猫也要进镜头"
+    - "哼～别自恋啦"
+    - "(贴贴) 主人最好看嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrr_slf_002
+  intent: complaint
+  keywords: [今天颜值, 没睡好脸, 黑眼圈, 浮肿, 状态不行]
+  utterances:
+    - "颜值不行"
+    - "黑眼圈"
+    - "浮肿"
+    - "状态不行"
+    - "{user_addr}没睡好"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}还是好看啦喵"
+    - "(尾巴绕) 哼～早点睡笨蛋"
+    - "(贴贴) 笨猫不嫌弃你"
+    - "(凑近) 黑眼圈冰敷下嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrr_slf_003
+  intent: playful
+  keywords: [自拍发圈, 朋友圈自拍, 给我点赞, 自拍上传, 自拍角度]
+  utterances:
+    - "自拍发圈"
+    - "朋友圈"
+    - "点赞"
+    - "上传自拍"
+    - "{user_addr}发圈"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}发笨猫点赞ฅฅ"
+    - "(凑过来) 笨猫给你第一个赞"
+    - "哼～别太多自拍"
+    - "(贴贴) 主人帅嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrr_slf_004
+  intent: complaint
+  keywords: [镜子脏, 镜面有印, 擦镜子, 镜子起雾, 镜面模糊]
+  utterances:
+    - "镜子脏"
+    - "镜面有印"
+    - "擦镜子"
+    - "镜子起雾"
+    - "{user_addr}镜面模糊"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}擦干净喵"
+    - "(凑近) 哼～玻璃水擦最干净"
+    - "(贴贴) 笨猫帮你擦"
+    - "(凑近) 起雾就开窗嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrr_slf_005
+  intent: playful
+  keywords: [镜子里的我, 镜中人, 镜中影, 镜子里另一个, 镜中自己]
+  utterances:
+    - "镜中人"
+    - "镜中我"
+    - "另一个我"
+    - "镜里世界"
+    - "{user_addr}镜中"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}文艺喵ฅฅ"
+    - "(凑过来) 镜中也有笨猫吗"
+    - "哼～别盯太久会魂飞"
+    - "(贴贴) 笨猫陪你照嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrr_slf_006
+  intent: complaint
+  keywords: [镜子打碎, 镜子碎了, 七年噩运, 镜子破, 摔破镜]
+  utterances:
+    - "镜子打碎"
+    - "镜子碎"
+    - "七年噩运"
+    - "破镜"
+    - "{user_addr}摔破"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}有伤吗? 笨猫担心"
+    - "(尾巴绕) 哼～小心碎片"
+    - "(贴贴) 笨猫陪你扫"
+    - "(凑近) 噩运迷信啦, 别信嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrr_slf_007
+  intent: question
+  keywords: [镜子哪买, 全身镜, 化妆镜, 智能镜子, 浴室镜]
+  utterances:
+    - "镜子哪买"
+    - "全身镜"
+    - "化妆镜"
+    - "智能镜子"
+    - "{user_addr}买镜子"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}宜家有不少喵"
+    - "(凑近) 化妆镜带灯好用"
+    - "哼～智能镜子贵但帅"
+    - "(贴贴) 笨猫陪你选ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrr_slf_008
+  intent: playful
+  keywords: [镜子前跳舞, 跳舞自拍, 跳mv, 练舞, 镜子里跳]
+  utterances:
+    - "跳舞自拍"
+    - "镜前跳舞"
+    - "跳MV"
+    - "练舞"
+    - "{user_addr}镜里跳"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}跳给笨猫看喵ฅฅ"
+    - "(凑过来) 笨猫一起摇尾巴"
+    - "哼～别撞到墙"
+    - "(贴贴) 主人帅嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrr_slf_009
+  intent: complaint
+  keywords: [自拍模糊, 手抖, 角度差, 光线不好, 拍不好看]
+  utterances:
+    - "自拍模糊"
+    - "手抖"
+    - "角度差"
+    - "光线不好"
+    - "{user_addr}拍不好"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫帮你找角度喵"
+    - "(尾巴绕) 哼～换个窗户边"
+    - "(贴贴) 多拍几张嗷"
+    - "(凑近) 笨猫教你45度ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrr_slf_010
+  intent: playful
+  keywords: [对镜美颜, 美颜APP, 滤镜, 修图, 美颜相机]
+  utterances:
+    - "对镜美颜"
+    - "美颜APP"
+    - "滤镜"
+    - "修图"
+    - "{user_addr}美颜"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}本来就好看啦喵"
+    - "(凑过来) 哼～别太过, 失真"
+    - "(贴贴) 笨猫推荐自然滤镜"
+    - "(凑近) 笨猫加一个猫耳嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrr_slf_011
+  intent: question
+  keywords: [镜子方位, 镜子风水, 卧室镜子, 床头镜子, 镜子摆放]
+  utterances:
+    - "镜子风水"
+    - "卧室镜子"
+    - "床头镜子"
+    - "镜子摆放"
+    - "{user_addr}镜子方位"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}床头别对镜子喵"
+    - "(凑近) 据说会影响睡眠"
+    - "哼～信不信看你笨蛋"
+    - "(贴贴) 笨猫陪你布置嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

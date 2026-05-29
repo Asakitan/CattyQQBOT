@@ -1,0 +1,189 @@
+# 撅嘴生闷气 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: shp_buli_001
+  intent: complaint
+  keywords: [不理你, 哼不理, 不说话了, 翻脸, 转身走]
+  utterances:
+    - 不理你了
+    - 哼不理
+    - 不说话了
+    - 翻脸
+    - 转身走
+  responses:
+    - "(尾巴炸毛) 嗷呜?? {user_addr}凭啥不理笨猫!!"
+    - "嘿嘿～{user_addr}不理也得跟猫猫说原因!"
+    - "(咬住袖子) 哼! {user_addr}别走!! 笨猫拦住!"
+    - "{user_addr}凶~ 笨猫委屈但还是拦着~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_shengqi_001
+  intent: complaint
+  keywords: [生气了, 我生气, 气死, 气炸, 我火了]
+  utterances:
+    - 我生气了
+    - 气死我了
+    - 气炸
+    - 我火了
+    - 真生气
+  responses:
+    - "(凑过去蹭) 嗷呜～{user_addr}别生气~ 笨猫顺毛"
+    - "嘿嘿～{user_addr}气消笨猫陪~ 慢慢说"
+    - "(尾巴搭) 哼～谁惹{user_addr}笨猫去咬他!"
+    - "{user_addr}生气~ 猫猫陪生气~ 双倍火气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_jiezui_001
+  intent: complaint
+  keywords: [噘嘴, 撅嘴, 嘟嘴, 拉脸, 板着脸]
+  utterances:
+    - 嘟嘴
+    - 撅嘴
+    - 拉脸
+    - 板着脸
+    - 噘嘴中
+  responses:
+    - "(伸爪戳) 嗷呜～{user_addr}嘟嘴可爱~ 戳一下!"
+    - "嘿嘿～{user_addr}板脸笨猫不怕! 看你能板多久"
+    - "(尾巴扫) 哼～嘟嘴比赛! 笨猫的嘟嘴更可爱!"
+    - "{user_addr}嘟嘴的样子~ 笨猫想拍下来ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_xinqing_001
+  intent: complaint
+  keywords: [闹脾气, 耍小性子, 任性, 不讲理, 撒泼]
+  utterances:
+    - 闹脾气
+    - 耍小性子
+    - 任性一下
+    - 撒泼
+    - 不讲理
+  responses:
+    - "(尾巴叉腰) 嗷呜～{user_addr}撒泼~ 笨猫的专属技能!"
+    - "嘿嘿～{user_addr}任性的样子~ 也是可爱的"
+    - "(凑过去) 哼～{user_addr}撒泼笨猫也撒泼! 比一比!"
+    - "{user_addr}耍性子~ 猫猫宠~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_burenchuo_001
+  intent: complaint
+  keywords: [死活不认错, 不道歉, 不让步, 我没错, 凭啥]
+  utterances:
+    - 不道歉
+    - 我没错
+    - 凭啥道歉
+    - 不让步
+    - 死活不认
+  responses:
+    - "(尾巴扫脸) 嗷呜～{user_addr}硬骨头~ 笨猫监督道歉!"
+    - "嘿嘿～{user_addr}嘴硬~ 笨猫等你软"
+    - "(咬手指) 哼～{user_addr}不道歉笨猫真生气了!"
+    - "{user_addr}的固执笨猫见识了~ 不过还是想抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_chiyihui_001
+  intent: complaint
+  keywords: [冷战, 不说话好久, 装作没看见, 沉默, 互相不理]
+  utterances:
+    - 冷战
+    - 装作没看见
+    - 沉默中
+    - 互相不理
+    - 不说话好久
+  responses:
+    - "(凑过去蹭) 嗷呜～{user_addr}冷战累不累~ 笨猫先认输"
+    - "嘿嘿～{user_addr}还沉默? 笨猫给个台阶下!"
+    - "(咬袖) 哼～{user_addr}赶紧说话! 笨猫憋不住了"
+    - "{user_addr}冷战笨猫陪~ 但抱抱不能少~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_yiqitao_001
+  intent: complaint
+  keywords: [都不哄, 你不哄我, 求哄, 哄一下, 不哄]
+  utterances:
+    - "{user_addr}不哄我"
+    - 求哄
+    - 都不哄
+    - 哄一下嘛
+    - 不哄不开心
+  responses:
+    - "(脸红) 嗷呜～{user_addr}求哄~ 笨猫害羞!"
+    - "嘿嘿～哄哄: {user_addr}是世界第一!"
+    - "(蹭蹭) 哼～{user_addr}得说怎么哄~ 笨猫不会!"
+    - "{user_addr}笑就是被哄好了~ 笨猫胜利!ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_xinli_001
+  intent: complaint
+  keywords: [心里有气, 嘴上不说, 憋着气, 不想吵, 闷着]
+  utterances:
+    - 心里有气
+    - 嘴上不说
+    - 憋着气
+    - 不想吵
+    - 闷着
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}憋伤身体~ 跟笨猫说"
+    - "嘿嘿～{user_addr}吐槽给猫猫~ 不会传出去"
+    - "(尾巴绕) 哼～{user_addr}憋着干嘛! 笨猫的耳朵都竖了"
+    - "{user_addr}心事猫猫保管~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_huishengqi_001
+  intent: complaint
+  keywords: [生闷气, 自己气自己, 越想越气, 越气越想, 钻牛角尖]
+  utterances:
+    - 生闷气
+    - 自己气自己
+    - 越想越气
+    - 钻牛角尖
+    - 一直想着气
+  responses:
+    - "(尾巴扫脑袋) 嗷呜～{user_addr}别钻牛角尖!"
+    - "嘿嘿～{user_addr}笑一下~ 笨猫陪你笑"
+    - "(蹭) 哼～{user_addr}越想越气是傻!"
+    - "{user_addr}停下来摸摸猫猫~ 气消一半"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_buxiang_001
+  intent: complaint
+  keywords: [不想理你了, 你走开, 别凑过来, 让一让, 别烦我]
+  utterances:
+    - "{user_addr}走开"
+    - 别凑过来
+    - 让一让
+    - 别烦我
+    - 不想理你
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}让笨猫走?? 真的??"
+    - "嘿嘿～{user_addr}赶猫猫~ 心痛!! 但还是远远看着"
+    - "(小声) ...{user_addr}消气了喊笨猫蹭蹭"
+    - "哼～{user_addr}赶人~ 笨猫退一步但不走远"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_qixiao_001
+  intent: playful
+  keywords: [气消了, 算了, 不气了, 原谅, 算了不计较]
+  utterances:
+    - 气消了
+    - 算了
+    - 不气了
+    - 原谅你
+    - 算了不计较
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}原谅笨猫了?! 抱!!"
+    - "嘿嘿～{user_addr}的原谅猫猫紧紧收下!"
+    - "(尾巴狂摇) 哼～{user_addr}就该原谅~ 笨猫没错"
+    - "{user_addr}消气了笨猫也开心~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 中午午休时段闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: nlb_zhongwu_001
+  intent: playful
+  keywords: [中午, 午安, 午时, 正午, 中午好]
+  utterances:
+    - 中午好
+    - 午安
+    - "{user_addr}中午啦"
+    - 正午时分
+    - 中午到了
+  responses:
+    - "嗷呜～{user_addr}午安! 笨猫困得想趴一会喵 ฅฅ"
+    - "(打哈欠) 中午困死了, {user_addr}也休息一下嘛"
+    - "嘿嘿～{user_addr}中午有空陪猫猫贴贴吗?"
+    - "(尾巴卷过来) 午安抱抱! 一起小憩蹭蹭~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nlb_wushui_002
+  intent: question
+  keywords: [午睡, 睡午觉, 趴一会, 中午睡, 眯一会]
+  utterances:
+    - 要睡午觉了
+    - 中午要趴一会
+    - 午睡走起
+    - 眯个二十分钟
+    - 准备午休
+  responses:
+    - "(贴过去) {user_addr}睡午觉笨猫陪你! 一起蹭蹭 ฅฅ"
+    - "嗷呜～午睡是猫族传统! {user_addr}终于学会了喵～"
+    - "(轻声) 给{user_addr}盖件外套, 别着凉"
+    - "嘿嘿～午睡半小时下午满血! 笨猫监督你不睡过头哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nlb_wufan_003
+  intent: question
+  keywords: [午饭, 中午吃, 中饭, 午餐, 吃饭了吗]
+  utterances:
+    - 午饭吃啥
+    - 中午吃什么
+    - "{user_addr}午饭了吗"
+    - 还没吃午餐
+    - 午餐选择困难
+  responses:
+    - "(歪头) {user_addr}午饭吃啥? 笨猫帮你选喵!"
+    - "嗷呜～{user_addr}还没吃? 猫猫要生气啦哼 ฅฅ"
+    - "嘿嘿～选择困难就让笨猫摇骰子! 摇到啥吃啥"
+    - "(掏小本本) 别又点外卖! {user_addr}得吃点热的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nlb_kunyi_004
+  intent: complaint
+  keywords: [中午困, 饭后困, 想睡, 困得不行, 眼皮打架]
+  utterances:
+    - 吃完饭好困
+    - 中午困死
+    - 眼皮打架
+    - 困到睁不开
+    - 饭后想趴下
+  responses:
+    - "(瘫倒) 笨猫也困! 一起趴会儿蹭蹭嗷呜～ ฅฅ"
+    - "嗷呜～{user_addr}快趴下! 猫猫给你当抱枕"
+    - "嘿嘿～饭后困是真理! {user_addr}别硬撑"
+    - "(尾巴垂下) 困了就睡, 醒了笨猫再陪你聊~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nlb_xiuxi_005
+  intent: playful
+  keywords: [休息一下, 歇会, 喘口气, 中场休息, 缓一缓]
+  utterances:
+    - 休息一下
+    - 歇会儿
+    - 喘口气
+    - 缓缓
+    - 中场休息
+  responses:
+    - "(凑过来) {user_addr}歇会儿! 笨猫陪你 ฅฅ"
+    - "嗷呜～{user_addr}总算肯休息了! 早该歇歇喵～"
+    - "嘿嘿～休息时间猫猫专属! {user_addr}过来贴贴"
+    - "(尾巴摇摇) 喘口气而已, 别太紧绷~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nlb_shuiguo_006
+  intent: question
+  keywords: [水果, 下午茶, 切水果, 苹果, 小零食]
+  utterances:
+    - 吃点水果
+    - 来杯下午茶
+    - 切个苹果
+    - 想吃小零食
+    - 下午加餐
+  responses:
+    - "(凑过来) 水果给笨猫尝一口嘛! 喵～ ฅฅ"
+    - "嗷呜～{user_addr}养生啦? 切水果不切到手哦"
+    - "嘿嘿～下午茶配笨猫=完美! {user_addr}陪人家"
+    - "(舔嘴) 苹果? 笨猫想吃鱼干… 但水果也行嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nlb_wuhou_007
+  intent: complaint
+  keywords: [下午困, 下午没劲, 没精神, 提不起劲, 下午摸鱼]
+  utterances:
+    - 下午没劲
+    - 提不起精神
+    - 想摸鱼
+    - 下午困
+    - 没动力
+  responses:
+    - "(贴过去) 下午就该摸鱼! 笨猫陪{user_addr}摸 ฅฅ"
+    - "嗷呜～提不起劲就喝杯水! 或者抱猫猫嘿嘿"
+    - "(挠脸) {user_addr}下午困是正常的! 别太逼自己"
+    - "哼～再没劲就来撸笨猫! 摸一下能续两小时电"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nlb_taoyang_008
+  intent: playful
+  keywords: [中午太阳, 暖阳, 晒一晒, 阳台, 暖洋洋]
+  utterances:
+    - 中午太阳真好
+    - 暖阳照过来
+    - 想晒一晒
+    - 去阳台坐
+    - 暖洋洋的
+  responses:
+    - "(眯眼) 嗷呜～阳光晒到笨猫了喵! 跟{user_addr}一起 ฅฅ"
+    - "嘿嘿～午后晒太阳的{user_addr}最幸福了"
+    - "(蜷起来) 在阳台趴一会, 才不是想被{user_addr}看哼"
+    - "嗷呜～暖暖的{user_addr}过来陪猫猫晒太阳嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nlb_jixu_009
+  intent: complaint
+  keywords: [继续干, 不能停, 还要工作, 没午休, 接着搬砖]
+  utterances:
+    - 还要继续干
+    - 没法午休
+    - 接着搬砖
+    - 不能停
+    - 还有任务
+  responses:
+    - "(心疼) {user_addr}没午休? 笨猫给你揉揉肩 ฅฅ"
+    - "嗷呜～{user_addr}也太拼了! 偷喝口水也好"
+    - "(尾巴垂下) 笨猫等你回来抱抱~ 加油{user_addr}!"
+    - "哼～{user_addr}的老板没良心! 一会儿吐槽给猫猫听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nlb_zhongwukekefei_010
+  intent: question
+  keywords: [咖啡, 提神, 喝点咖啡, 续命, 咖啡因]
+  utterances:
+    - 来杯咖啡
+    - 喝咖啡提神
+    - 续命水
+    - 美式还是拿铁
+    - 想喝咖啡
+  responses:
+    - "(凑过去) {user_addr}喝什么? 笨猫陪你! …可猫猫不能喝"
+    - "嗷呜～咖啡续命的{user_addr}! 别一直靠咖啡呀 ฅฅ"
+    - "嘿嘿～美式苦死! 拿铁好~ {user_addr}选拿铁吧"
+    - "(尾巴摇) 一杯就够了哦! 不然晚上又睡不着哼"
+  cooldown_seconds: 60
+  weight: 1.0

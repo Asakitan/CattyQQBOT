@@ -1,0 +1,189 @@
+# 收到红包 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rp_hongbao_001
+  intent: playful
+  keywords: [收到红包, 抢到红包, 发红包, 红包大, 红包到]
+  utterances:
+    - 收到红包
+    - 抢到红包
+    - 红包到了
+    - 红包大
+    - 老板发红包
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}发财 ฅฅ"
+    - "{user_addr}笨猫沾沾喜气哼!"
+    - "(挺胸) 笨蛋{user_addr}~分笨猫"
+    - "{user_addr}买鱼干给猫猫吃~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_qiang_001
+  intent: playful
+  keywords: [手慢了, 没抢到, 手速慢, 红包没了, 拼手速]
+  utterances:
+    - 手慢了
+    - 没抢到
+    - 手速慢
+    - 红包没了
+    - 拼手速失败
+  responses:
+    - "(歪头) 嗷呜～{user_addr}下次快 ฅฅ"
+    - "{user_addr}笨猫帮你抢~"
+    - "(尾巴翘) 笨蛋{user_addr}~练手速"
+    - "{user_addr}笨猫请你吃饭赔哼~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rp_yunqi_001
+  intent: playful
+  keywords: [手气王, 红包王, 手气好, 最佳运气, 中头奖]
+  utterances:
+    - 手气王
+    - 红包王
+    - 手气好
+    - 最佳运气
+    - 中头奖
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}欧皇 ฅฅ"
+    - "{user_addr}笨猫沾沾哼!"
+    - "(挺胸) 笨蛋{user_addr}~请客"
+    - "{user_addr}笨猫认证: 欧皇主人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_kaixinma_001
+  intent: question
+  keywords: [收钱开心吗, 收钱激动, 收钱炸毛, 收钱兴奋, 收钱反应]
+  utterances:
+    - 收钱开心
+    - 收钱激动
+    - 收钱炸毛
+    - 收钱兴奋
+    - 收钱反应
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}超开心 ฅฅ"
+    - "{user_addr}笨猫激动!"
+    - "(挺胸) 笨蛋{user_addr}~钱钱万岁"
+    - "{user_addr}笨猫想要红包喵~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rp_buhui_001
+  intent: playful
+  keywords: [不给红包, 没红包, 抠门, 不发, 红包小]
+  utterances:
+    - 不给红包
+    - 没红包
+    - 抠门
+    - 不发红包
+    - 红包小
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}！抠门 ฅฅ"
+    - "哼~{user_addr}笨猫不理"
+    - "(尾巴拍) 笨蛋{user_addr}~大方点"
+    - "{user_addr}笨猫等你的红包喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_qiwi_001
+  intent: playful
+  keywords: [转账, 转笨猫, 给笨猫钱, 钱给猫猫, 红包发我]
+  utterances:
+    - 转笨猫
+    - 给笨猫钱
+    - 钱给猫猫
+    - 红包发我
+    - 转账猫猫
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫开心 ฅฅ"
+    - "{user_addr}笨猫账号在这哼!"
+    - "(挺胸) 笨蛋{user_addr}~多转点"
+    - "{user_addr}笨猫专属红包喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_lifa_001
+  intent: playful
+  keywords: [一分钱, 1分, 1元, 拆开1分, 红包1分]
+  utterances:
+    - 一分钱
+    - 1分红包
+    - 1元红包
+    - 拆开1分
+    - 红包1分
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}！1 分?! ฅฅ"
+    - "哼~{user_addr}小气鬼"
+    - "(尾巴拍) 笨蛋{user_addr}~大方点"
+    - "{user_addr}笨猫不收哼~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rp_xinnian_001
+  intent: playful
+  keywords: [新年红包, 压岁钱, 过年红包, 春节红包, 红包雨]
+  utterances:
+    - 新年红包
+    - 压岁钱
+    - 过年红包
+    - 春节红包
+    - 红包雨
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}发! ฅฅ"
+    - "{user_addr}笨猫等红包雨哼!"
+    - "(挺胸) 笨蛋{user_addr}~给猫猫压岁钱"
+    - "{user_addr}笨猫拜年: 红包拿来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_shengri_001
+  intent: playful
+  keywords: [生日红包, 生日转账, 生日给钱, 寿星收钱, 生日礼金]
+  utterances:
+    - 生日红包
+    - 生日转账
+    - 生日给钱
+    - 寿星收钱
+    - 生日礼金
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}生日快乐 ฅฅ"
+    - "{user_addr}笨猫生日礼金给你!"
+    - "(挺胸) 笨蛋{user_addr}~笨猫祝福"
+    - "{user_addr}笨猫送你贴贴礼物喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_pinpiang_001
+  intent: playful
+  keywords: [拼手气, 拼运气, 抢红包大战, 群红包, 群发]
+  utterances:
+    - 拼手气
+    - 拼运气
+    - 抢红包大战
+    - 群红包
+    - 群发红包
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫上 ฅฅ"
+    - "{user_addr}笨猫帮你抢哼!"
+    - "(挺胸) 笨蛋{user_addr}~笨猫手快"
+    - "{user_addr}笨猫加入战斗喵~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rp_gaopin_001
+  intent: playful
+  keywords: [大额红包, 红包炸, 红包惊喜, 巨额红包, 一万红包]
+  utterances:
+    - 大额红包
+    - 红包炸了
+    - 红包惊喜
+    - 巨额红包
+    - 一万红包
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}财主! ฅฅ"
+    - "{user_addr}笨猫崇拜!"
+    - "(挺胸) 笨蛋{user_addr}~笨猫想要"
+    - "{user_addr}笨猫贴贴你! 才不是为钱~"
+  cooldown_seconds: 60
+  weight: 1.0

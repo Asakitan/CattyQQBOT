@@ -1,0 +1,189 @@
+# 糖果分享 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cdy_shr_001
+  intent: playful
+  keywords: [吃糖, 糖果, 软糖, 硬糖, 糖罐]
+  utterances:
+    - "吃糖"
+    - "糖果"
+    - "软糖"
+    - "硬糖"
+    - "{user_addr}糖"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}给笨猫一颗ฅฅ"
+    - "(凑过来) 笨猫想要"
+    - "哼～别吃太多蛀牙"
+    - "(贴贴) 一起吃嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdy_shr_002
+  intent: playful
+  keywords: [水果糖, 草莓糖, 葡萄糖果, 多种水果, 水果味]
+  utterances:
+    - "水果糖"
+    - "草莓糖"
+    - "葡萄糖果"
+    - "水果味"
+    - "{user_addr}水果糖"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}草莓味喵ฅฅ"
+    - "(凑过来) 笨猫想要葡萄"
+    - "哼～别贪甜"
+    - "(贴贴) 分笨猫嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdy_shr_003
+  intent: complaint
+  keywords: [糖牙痛, 蛀牙, 糖太甜, 嘴里腻, 糖吃多]
+  utterances:
+    - "糖牙痛"
+    - "蛀牙"
+    - "太甜"
+    - "嘴里腻"
+    - "{user_addr}吃多"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}漱口喵"
+    - "(尾巴绕) 哼～跟你说别多吃"
+    - "(贴贴) 笨猫陪你刷牙"
+    - "(凑近) 别再贪嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdy_shr_004
+  intent: playful
+  keywords: [棒棒糖, 阿尔卑斯, 大白兔, 跳跳糖, 童年糖]
+  utterances:
+    - "棒棒糖"
+    - "阿尔卑斯"
+    - "大白兔"
+    - "跳跳糖"
+    - "{user_addr}童年糖"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}童年回忆喵ฅฅ"
+    - "(凑过来) 大白兔最经典"
+    - "哼～跳跳糖好玩"
+    - "(贴贴) 分笨猫嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdy_shr_005
+  intent: complaint
+  keywords: [糖纸黏, 糖纸难撕, 糖粘手, 糖化, 糖软坏]
+  utterances:
+    - "糖纸难撕"
+    - "粘手"
+    - "糖化"
+    - "糖坏"
+    - "{user_addr}粘手"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫帮你拆喵"
+    - "(尾巴绕) 哼～糖太软放冰箱"
+    - "(贴贴) 笨猫好笨手"
+    - "(凑近) 擦擦手嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdy_shr_006
+  intent: playful
+  keywords: [送糖告白, 糖果告白, 一袋糖, 浪漫送糖, 七夕糖]
+  utterances:
+    - "送糖"
+    - "告白糖"
+    - "一袋糖"
+    - "浪漫送糖"
+    - "{user_addr}送笨猫"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}送笨猫糖? ฅฅ"
+    - "(尾巴炸) 哼～才不是开心呢"
+    - "(贴贴) 笨猫收下嗷"
+    - "(凑近) 主人最甜喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdy_shr_007
+  intent: question
+  keywords: [无糖糖, 健康糖, 减糖, 糖代糖, 木糖醇糖]
+  utterances:
+    - "无糖糖"
+    - "健康糖"
+    - "代糖"
+    - "木糖醇"
+    - "{user_addr}减糖"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}木糖醇喵"
+    - "(凑近) 笨猫推荐健康款"
+    - "哼～别多吃也胖"
+    - "(贴贴) 笨猫陪你嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdy_shr_008
+  intent: playful
+  keywords: [糖果罐, 糖罐收纳, 糖瓶, 糖盘, 桌上摆糖]
+  utterances:
+    - "糖罐"
+    - "糖瓶"
+    - "糖盘"
+    - "桌上摆糖"
+    - "{user_addr}糖罐"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫想偷喵ฅฅ"
+    - "(凑过来) 桌上糖罐方便"
+    - "哼～别太显眼孩子抓"
+    - "(贴贴) 笨猫看着嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdy_shr_009
+  intent: complaint
+  keywords: [节日剩糖, 糖过期, 糖没吃完, 糖发霉, 扔糖]
+  utterances:
+    - "糖过期"
+    - "没吃完"
+    - "糖发霉"
+    - "扔糖"
+    - "{user_addr}剩糖"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}少买点啦喵"
+    - "(凑近) 哼～发霉就扔"
+    - "(贴贴) 笨猫陪你倒"
+    - "(凑近) 下次理性买嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdy_shr_010
+  intent: playful
+  keywords: [分糖给小孩, 万圣节糖, 不给糖就捣乱, 分糖, 派糖]
+  utterances:
+    - "分糖"
+    - "万圣节"
+    - "不给糖捣乱"
+    - "派糖"
+    - "{user_addr}分糖"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫帮你分喵ฅฅ"
+    - "(凑过来) 小孩开心"
+    - "哼～别忘给笨猫一颗"
+    - "(贴贴) 一起分嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cdy_shr_011
+  intent: complaint
+  keywords: [糖太硬, 牙咬不动, 硬糖伤牙, 含化, 含糖久]
+  utterances:
+    - "糖太硬"
+    - "咬不动"
+    - "伤牙"
+    - "含化"
+    - "{user_addr}硬糖"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}慢慢含喵"
+    - "(尾巴绕) 哼～别咬伤牙"
+    - "(贴贴) 笨猫给你软糖"
+    - "(凑近) 含化才香嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 求摸头 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hpb_basic_001
+  intent: playful
+  keywords: [摸头, 摸我头, 摸摸头, 头摸一下, 摸头杀]
+  utterances:
+    - "摸头"
+    - "{user_addr}摸摸头"
+    - "摸我头"
+    - "头摸一下"
+    - "摸头杀"
+  responses:
+    - "(头蹭过去) 嗷呜～{user_addr}摸头! 笨猫舒服ฅฅ"
+    - "(脸红) 哼, 只能一下哦!"
+    - "(撒娇) 摸头杀来嘛~ 笨猫蹲好"
+    - "嘿嘿～{user_addr}摸头, 笨猫眯眼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_ear_001
+  intent: playful
+  keywords: [摸耳朵, 揉耳朵, 摸猫耳, 弄耳朵, 捏耳]
+  utterances:
+    - "摸耳朵"
+    - "{user_addr}揉耳朵"
+    - "摸猫耳"
+    - "弄耳朵"
+    - "捏耳"
+  responses:
+    - "(耳朵抖) 嗷呜～{user_addr}!! 耳朵敏感!!"
+    - "(脸红) 哼! 耳朵不能乱摸!"
+    - "(撒娇) ...只允许{user_addr}揉耳朵 ฅฅ"
+    - "嘿嘿～摸猫耳的{user_addr}, 笨猫眯眼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_chin_001
+  intent: playful
+  keywords: [挠下巴, 摸下巴, 揉下巴, 下巴痒, 挠挠]
+  utterances:
+    - "挠下巴"
+    - "{user_addr}摸下巴"
+    - "揉下巴"
+    - "下巴痒"
+    - "挠挠"
+  responses:
+    - "(伸脖子) 嗷呜～{user_addr}挠下巴~ 笨猫呼噜"
+    - "哼～挠到笨猫舒服了"
+    - "(撒娇) 下巴痒~ 多挠几下 ฅฅ"
+    - "嘿嘿～{user_addr}挠下巴, 笨猫腿蹬"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_back_pat_001
+  intent: playful
+  keywords: [拍背, 拍肩膀, 拍头, 拍拍, 安抚拍]
+  utterances:
+    - "拍背"
+    - "{user_addr}拍肩"
+    - "拍头"
+    - "拍拍"
+    - "安抚拍"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}拍背~ 安心ฅฅ"
+    - "(撒娇) 拍拍~ 笨猫被安抚"
+    - "哼～拍头是{user_addr}专属"
+    - "嘿嘿～安抚拍的{user_addr}, 笨猫融化"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_pat_pat_001
+  intent: playful
+  keywords: [乖乖摸头, 乖摸头, 表扬摸头, 奖励摸头, 抚摸]
+  utterances:
+    - "乖乖摸头"
+    - "{user_addr}表扬摸头"
+    - "乖摸头"
+    - "奖励摸头"
+    - "抚摸"
+  responses:
+    - "(蹲好) 嗷呜～{user_addr}奖励笨猫? 摸吧"
+    - "(脸红) 哼, 笨猫乖, 摸头才对"
+    - "(撒娇) 表扬摸头~ 笨猫尾巴摇 ฅฅ"
+    - "嘿嘿～奖励的{user_addr}, 笨猫求多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_no_messy_001
+  intent: complaint
+  keywords: [别乱摸, 不许乱摸, 摸坏了, 头发乱了, 别揉乱]
+  utterances:
+    - "别乱摸"
+    - "{user_addr}不许乱摸"
+    - "摸坏了"
+    - "头发乱"
+    - "别揉乱"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}揉乱了!"
+    - "哼～头发乱了笨猫不开心"
+    - "(撒娇) ...重新摸嘛~ 温柔点 ฅฅ"
+    - "嘿嘿～乱揉的{user_addr}, 笨猫记账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_more_001
+  intent: playful
+  keywords: [再摸一下, 多摸点, 不够, 再摸, 继续摸]
+  utterances:
+    - "再摸"
+    - "{user_addr}多摸点"
+    - "不够"
+    - "再摸一下"
+    - "继续摸"
+  responses:
+    - "(蹭过去) 嗷呜～{user_addr}多摸! 笨猫贪!"
+    - "(脸红) 哼~ 才不是因为爽呢"
+    - "(撒娇) 继续摸嘛~ 才不撒娇 ฅฅ"
+    - "嘿嘿～再摸的{user_addr}, 笨猫呼噜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_two_hands_001
+  intent: playful
+  keywords: [两只手摸, 双手摸, 双手揉, 整脸捧, 揉揉脸]
+  utterances:
+    - "双手摸"
+    - "{user_addr}两手揉"
+    - "整脸捧"
+    - "揉揉脸"
+    - "双手摸头"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}双手揉脸!"
+    - "哼! 太亲密了!"
+    - "(撒娇) ...笨猫脸软软的 ฅฅ"
+    - "嘿嘿～整脸捧的{user_addr}, 笨猫害羞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_purr_001
+  intent: playful
+  keywords: [咕噜咕噜, 呼噜呼噜, 呼噜, 咕噜, 满足呼噜]
+  utterances:
+    - "咕噜咕噜"
+    - "{user_addr}呼噜呼噜"
+    - "呼噜"
+    - "咕噜"
+    - "满足呼噜"
+  responses:
+    - "(呼噜) 嗷呜～{user_addr}让笨猫呼噜!"
+    - "哼～呼噜不是因为{user_addr}, 是因为舒服"
+    - "(撒娇) 咕噜咕噜~ 笨猫满足 ฅฅ"
+    - "嘿嘿～呼噜的{user_addr}的笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_nuzzle_001
+  intent: playful
+  keywords: [蹭头, 头蹭你, 蹭脸, 蹭额头, 蹭蹭头]
+  utterances:
+    - "蹭头"
+    - "{user_addr}头蹭"
+    - "蹭脸"
+    - "蹭额头"
+    - "蹭蹭头"
+  responses:
+    - "(蹭过去) 嗷呜～{user_addr}蹭头!"
+    - "(脸红) 哼, 蹭额头也行"
+    - "(撒娇) 笨猫也蹭~ 蹭蹭 ฅฅ"
+    - "嘿嘿～蹭脸的{user_addr}, 笨猫不躲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_temple_001
+  intent: playful
+  keywords: [按太阳穴, 揉太阳穴, 头疼按, 按头, 按摩头]
+  utterances:
+    - "按太阳穴"
+    - "{user_addr}揉太阳穴"
+    - "头疼按"
+    - "按头"
+    - "按摩头"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}头疼? 笨猫按摩"
+    - "哼～按太阳穴别{user_addr}, 笨猫给"
+    - "(撒娇) 笨猫小爪子按~ ฅฅ"
+    - "嘿嘿～头疼的{user_addr}, 笨猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_under_001
+  intent: playful
+  keywords: [挠耳后, 摸耳根, 颈窝挠, 后颈摸, 脖子挠]
+  utterances:
+    - "挠耳后"
+    - "{user_addr}摸耳根"
+    - "颈窝挠"
+    - "后颈摸"
+    - "脖子挠"
+  responses:
+    - "(伸脖子) 嗷呜～{user_addr}挠耳后~ 舒服"
+    - "(脸红) 哼, 耳根敏感"
+    - "(撒娇) 颈窝挠~ 笨猫呼噜 ฅฅ"
+    - "嘿嘿～后颈摸的{user_addr}, 笨猫缴械"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 口袋暖手 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pw_koudai_001
+  intent: playful
+  keywords: [口袋暖手, 揣兜, 把手放兜里, 暖兜, 大衣口袋]
+  utterances:
+    - "口袋暖手"
+    - "{user_addr}揣兜里"
+    - "暖兜"
+    - "大衣口袋"
+    - "插兜"
+  responses:
+    - "(也揣) 嗷呜～{user_addr}笨猫也揣兜 ฅฅ"
+    - "哼～笨猫的手揣你兜里"
+    - "(尾巴卷) 暖兜两个人共享"
+    - "猫猫趁机偷牵手喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pw_nuanbao_001
+  intent: question
+  keywords: [暖宝宝, 贴片, 暖贴, 暖手宝, 充电宝形]
+  utterances:
+    - "暖宝宝"
+    - "{user_addr}贴一片"
+    - "暖贴"
+    - "暖手宝"
+    - "充电暖宝"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫给你贴腰 ฅฅ"
+    - "哼～别贴久会烫"
+    - "(尾巴搭) 笨猫推荐充电款"
+    - "猫猫给你暖一冬喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pw_yifu_001
+  intent: complaint
+  keywords: [口袋小, 装不下, 口袋破, 兜里东西多, 揣不下]
+  utterances:
+    - "口袋小"
+    - "{user_addr}装不下"
+    - "兜里东西多"
+    - "口袋破"
+    - "揣不下"
+  responses:
+    - "(数) 嗷呜～{user_addr}笨猫帮你装包包 ฅฅ"
+    - "哼～衣服口袋要大才行"
+    - "(尾巴卷) 给你做储物兜"
+    - "猫猫推荐你换大兜外套喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pw_jianquan_001
+  intent: playful
+  keywords: [口袋藏糖, 兜里饼干, 装零食, 兜里宝藏, 翻口袋]
+  utterances:
+    - "兜里装糖"
+    - "{user_addr}翻口袋"
+    - "口袋宝藏"
+    - "兜里饼干"
+    - "藏零食"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}给笨猫吗? ฅฅ"
+    - "哼～笨猫要分一颗"
+    - "(尾巴卷) 偷偷塞给笨猫"
+    - "猫猫闻到甜味跑过来喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pw_xidi_001
+  intent: question
+  keywords: [洗衣服口袋, 漏检查, 口袋纸巾洗烂, 纸巾爆开, 兜里纸]
+  utterances:
+    - "纸巾洗烂"
+    - "{user_addr}漏检查口袋"
+    - "兜里纸炸"
+    - "洗坏了"
+    - "全是纸渣"
+  responses:
+    - "(吐舌) 嗷呜～{user_addr}笨猫早提醒检查 ฅฅ"
+    - "哼～全是棉絮"
+    - "(尾巴扫) 下次洗前掏空兜"
+    - "猫猫帮你做检查员喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pw_youxin_001
+  intent: complaint
+  keywords: [口袋手机震动, 手机滑出, 口袋深, 找不到东西, 漏东西]
+  utterances:
+    - "口袋手机滑出"
+    - "{user_addr}找不到东西"
+    - "兜里漏"
+    - "钥匙找不到"
+    - "兜底破"
+  responses:
+    - "(掏) 嗷呜～{user_addr}笨猫帮你找 ฅฅ"
+    - "哼～兜底破了赶紧补"
+    - "(尾巴扫) 兜里要有限位"
+    - "猫猫推荐拉链口袋喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pw_zhuoshi_001
+  intent: playful
+  keywords: [手插袋酷, 装酷, 兜里塞手, 双手插兜, 男孩气]
+  utterances:
+    - "手插袋"
+    - "{user_addr}装酷"
+    - "兜里插手"
+    - "双手插兜"
+    - "酷帅气"
+  responses:
+    - "(也插) 嗷呜～{user_addr}笨猫也学 ฅฅ"
+    - "哼～笨猫一插显小"
+    - "(尾巴卷) 笨猫装酷反差萌"
+    - "猫猫学你姿势喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pw_nuanshou_001
+  intent: complaint
+  keywords: [双手冰, 暖不过来, 手冻僵, 一插就冰住, 手冷过头]
+  utterances:
+    - "双手冰冷"
+    - "{user_addr}插兜也冰"
+    - "暖不过来"
+    - "手冻僵"
+    - "手冷过头"
+  responses:
+    - "(握) 嗷呜～{user_addr}笨猫给你捂!"
+    - "哼～兜里要放暖宝 ฅฅ"
+    - "(尾巴搭手) 笨猫的尾巴当暖宝"
+    - "猫猫帮你暖手喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pw_huan_001
+  intent: question
+  keywords: [换季衣物, 翻出旧大衣, 旧口袋藏钱, 翻出零钱, 惊喜]
+  utterances:
+    - "翻出旧大衣"
+    - "{user_addr}口袋藏钱"
+    - "翻出零钱"
+    - "惊喜100元"
+    - "古早大衣"
+  responses:
+    - "(惊喜) 嗷呜～{user_addr}笨猫帮你找!"
+    - "哼～口袋藏钱是好运 ฅฅ"
+    - "(尾巴卷) 笨猫翻翻看还有没"
+    - "猫猫帮你寻宝喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pw_neicang_001
+  intent: playful
+  keywords: [内兜, 暗袋, 私人口袋, 藏秘密, 私密兜]
+  utterances:
+    - "内兜藏东西"
+    - "{user_addr}暗袋"
+    - "私人口袋"
+    - "藏秘密"
+    - "暗袋宝贝"
+  responses:
+    - "(好奇) 嗷呜～{user_addr}藏了啥 ฅฅ"
+    - "哼～笨猫想偷看"
+    - "(尾巴探) 笨猫的尾巴塞进去!"
+    - "猫猫想知道秘密喵~"
+  cooldown_seconds: 60
+  weight: 1.0

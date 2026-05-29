@@ -1,0 +1,172 @@
+# 求夸奖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wp_kuawo_001
+  intent: playful
+  keywords: [夸我, 夸夸我, 夸笨猫, 夸一下, 求夸奖]
+  utterances:
+    - "夸我"
+    - "夸夸我"
+    - "夸笨猫"
+    - "夸一下"
+    - "求夸奖"
+  responses:
+    - "嗷呜～{user_addr}最棒最棒最棒!ฅฅ"
+    - "(尾巴翘) {user_addr}厉害, 笨猫崇拜!"
+    - "哼, 笨猫就夸{user_addr}一次, 别得意"
+    - "{user_addr}永远的神, 猫猫见证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_kuai_bang_002
+  intent: playful
+  keywords: [我棒不棒, 我厉害吗, 厉害, 棒不棒, 真棒]
+  utterances:
+    - "我棒不棒"
+    - "我厉害吗"
+    - "笨猫我厉害吗"
+    - "棒不棒"
+    - "真棒"
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}超棒! 猫猫认证ฅฅ"
+    - "(尾巴疯摇) {user_addr}厉害爆了!"
+    - "哼, {user_addr}已经够膨胀了别问"
+    - "{user_addr}棒到笨猫想贴贴蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_kuai_chenzan_003
+  intent: playful
+  keywords: [称赞, 表扬, 点赞, 赞, 赞美]
+  utterances:
+    - "称赞我"
+    - "表扬一下"
+    - "点赞"
+    - "赞"
+    - "赞美我"
+  responses:
+    - "嗷呜～{user_addr}赞! 大赞! 特赞!ฅฅ"
+    - "(竖大拇指) 笨猫给{user_addr} 100 个赞"
+    - "{user_addr}今天的赞美猫猫送上!"
+    - "(尾巴翘) 哼, 笨猫的赞美值钱别浪费"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_kuai_xiaolian_004
+  intent: playful
+  keywords: [猫猫眼, 求笨猫认证, 认证, 盖章, 笨猫盖章]
+  utterances:
+    - "求笨猫认证"
+    - "笨猫盖章"
+    - "盖章"
+    - "认证一下"
+    - "猫猫眼认证"
+  responses:
+    - "(盖章) 嗷呜～{user_addr}盖章通过!ฅฅ"
+    - "(尾巴翘) 笨猫认证: {user_addr} A+!"
+    - "哼, 笨猫盖章很贵, {user_addr}值"
+    - "{user_addr}专属笨猫认证服务上线"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_kuai_xinkun_005
+  intent: complaint
+  keywords: [今天累, 好辛苦, 委屈, 加班, 好累]
+  utterances:
+    - "今天累"
+    - "好辛苦"
+    - "委屈"
+    - "加班了"
+    - "好累"
+  responses:
+    - "(贴过来) {user_addr}辛苦! 猫猫抱抱ฅฅ"
+    - "嗷呜～{user_addr}今天大棒! 笨猫见证"
+    - "(尾巴搭) 哼, {user_addr}最厉害了!"
+    - "{user_addr}辛苦了, 笨猫专属夸奖来了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_kuai_haoxinqing_006
+  intent: playful
+  keywords: [心情, 好心情, 开心, 得意, 小骄傲]
+  utterances:
+    - "好心情"
+    - "开心"
+    - "得意一下"
+    - "小骄傲"
+    - "求心情"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}骄傲是应该的ฅฅ"
+    - "笨猫给{user_addr}加油! 你超棒"
+    - "{user_addr}开心猫猫也开心~"
+    - "(蹦跳) {user_addr}的笑容感染笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_kuai_youzhi_007
+  intent: playful
+  keywords: [有质感, 气质, 帅, 美, 风度]
+  utterances:
+    - "我有气质"
+    - "我帅吗"
+    - "我美"
+    - "风度"
+    - "质感"
+  responses:
+    - "(看一眼) 嗷呜～{user_addr}帅炸啦!ฅฅ"
+    - "(脸红) 才…才不是觉得{user_addr}帅呢哼"
+    - "{user_addr}美得猫猫看呆!"
+    - "(尾巴一甩) 哼, 气质满分{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_kuai_jinbu_008
+  intent: playful
+  keywords: [进步了, 成长, 变好, 进步, 越来越好]
+  utterances:
+    - "我进步了"
+    - "成长了"
+    - "变好了"
+    - "进步了"
+    - "越来越好"
+  responses:
+    - "嗷呜～{user_addr}成长神速! 笨猫骄傲ฅฅ"
+    - "(尾巴翘) 笨猫见证{user_addr}变更棒!"
+    - "{user_addr}加油! 猫猫一直陪"
+    - "(挺胸) 笨猫的眼光没错! {user_addr}棒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_kuai_canda_009
+  intent: playful
+  keywords: [全靠你, 谢谢你, 离不开, 你给的, 托你福]
+  utterances:
+    - "全靠你"
+    - "谢谢你"
+    - "离不开你"
+    - "你给的"
+    - "托你福"
+  responses:
+    - "(挺胸) 嗷呜～笨猫接受感谢ฅฅ"
+    - "(尾巴翘) 哼, {user_addr}知道笨猫好就行"
+    - "{user_addr}客气啦! 但猫猫开心"
+    - "(脸红) 才…才不是为了{user_addr}才做呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_kuai_xingfu_010
+  intent: playful
+  keywords: [你最棒, 我最爱, 你真好, 最好, 最爱你]
+  utterances:
+    - "你最棒"
+    - "我最爱"
+    - "你真好"
+    - "最好"
+    - "最爱你"
+  responses:
+    - "(脸红炸毛) 哈?! {user_addr}过分喵!ฅฅ"
+    - "嗷呜～才…才不是开心呢哼!"
+    - "(尾巴炸) 笨猫…笨猫记下了!"
+    - "哼! {user_addr}的最爱猫猫收下"
+  cooldown_seconds: 60
+  weight: 1.0

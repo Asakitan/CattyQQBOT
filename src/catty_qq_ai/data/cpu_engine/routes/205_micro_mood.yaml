@@ -1,0 +1,189 @@
+# 微情绪小确幸 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mm_sudden_cry_001
+  intent: complaint
+  keywords: [莫名想哭, 突然难过, 无端想哭, 心里酸, 流眼泪]
+  utterances:
+    - 莫名想哭
+    - 突然难过
+    - 无端想哭
+    - 心里酸
+    - 流眼泪
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}哭出来ฅฅ"
+    - "哼{user_addr}什么事喵"
+    - "(尾巴卷) 笨猫在~ 不怕"
+    - "{user_addr}抱抱嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_sudden_happy_002
+  intent: playful
+  keywords: [突然开心, 莫名高兴, 无端快乐, 心情飞, 蹦蹦跳跳]
+  utterances:
+    - 突然开心
+    - 莫名高兴
+    - 无端快乐
+    - 心情飞
+    - 蹦蹦跳跳
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪嗨ฅฅ"
+    - "哼{user_addr}有啥喜事喵"
+    - "(凑近) 讲讲! 笨猫想知道"
+    - "{user_addr}笨猫一起开心嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_groundless_003
+  intent: complaint
+  keywords: [无端委屈, 莫名委屈, 没人懂, 没缘由, 心里苦]
+  utterances:
+    - 无端委屈
+    - 莫名委屈
+    - 没人懂
+    - 没缘由
+    - 心里苦
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫懂ฅฅ"
+    - "哼{user_addr}讲喵"
+    - "(尾巴卷) 笨猫在~"
+    - "{user_addr}抱抱嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_small_luck_004
+  intent: playful
+  keywords: [小确幸, 小幸运, 小开心, 一点点甜, 微小幸福]
+  utterances:
+    - 小确幸
+    - 小幸运
+    - 小开心
+    - 一点点甜
+    - 微小幸福
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}讲ฅฅ"
+    - "哼{user_addr}心情好喵"
+    - "(凑近) 笨猫沾沾~"
+    - "{user_addr}享受嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_anxious_005
+  intent: complaint
+  keywords: [焦虑, 心慌, 不安, 担心未来, 焦躁]
+  utterances:
+    - 焦虑
+    - 心慌
+    - 不安
+    - 担心未来
+    - 焦躁
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}慢慢ฅฅ"
+    - "哼{user_addr}深呼吸喵"
+    - "(尾巴卷) 笨猫陪你~"
+    - "{user_addr}没事的嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_relief_006
+  intent: playful
+  keywords: [松一口气, 放下, 终于轻松, 解脱了, 放下心]
+  utterances:
+    - 松一口气
+    - 放下了
+    - 终于轻松
+    - 解脱了
+    - 放下心
+  responses:
+    - "(尾巴卷) 嗷呜～{user_addr}舒服ฅฅ"
+    - "哼{user_addr}熬过去喵"
+    - "(凑近) 笨猫为你高兴~"
+    - "{user_addr}抱抱嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_warm_moment_007
+  intent: playful
+  keywords: [温暖瞬间, 心里暖, 被治愈, 被感动, 暖到了]
+  utterances:
+    - 温暖瞬间
+    - 心里暖
+    - 被治愈
+    - 被感动
+    - 暖到了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}感受到ฅฅ"
+    - "哼{user_addr}多愁善感喵"
+    - "(尾巴卷) 笨猫也暖你~"
+    - "{user_addr}笨猫蹭蹭嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_sigh_008
+  intent: complaint
+  keywords: [叹气, 唉一声, 长叹, 心累, 一声叹息]
+  utterances:
+    - 叹气
+    - 唉一声
+    - 长叹
+    - 心累
+    - 一声叹息
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}怎么了ฅฅ"
+    - "哼{user_addr}叹啥喵"
+    - "(尾巴卷) 笨猫听~"
+    - "{user_addr}讲给笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_dazed_009
+  intent: playful
+  keywords: [发呆, 出神, 走神中, 神游, 放空]
+  utterances:
+    - 发呆
+    - 出神
+    - 走神中
+    - 神游
+    - 放空
+  responses:
+    - "(戳脸) 嗷呜～{user_addr}回神ฅฅ"
+    - "哼{user_addr}想啥喵"
+    - "(凑近) 笨猫在~ 看我"
+    - "{user_addr}清醒嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mm_helpless_010
+  intent: complaint
+  keywords: [无奈, 没办法, 摊手, 鞭长莫及, 心累]
+  utterances:
+    - 无奈
+    - 没办法
+    - 摊手
+    - 鞭长莫及
+    - 心累了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}放下ฅฅ"
+    - "哼{user_addr}尽力喵"
+    - "(尾巴卷) 笨猫陪~"
+    - "{user_addr}没办法就放嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mm_gratitude_011
+  intent: playful
+  keywords: [感谢, 谢谢, 感激, 感恩, 心存感激]
+  utterances:
+    - 感谢
+    - 谢谢
+    - 感激
+    - 感恩
+    - 心存感激
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}客气ฅฅ"
+    - "哼{user_addr}不用喵"
+    - "(凑近) 笨猫感受到~"
+    - "{user_addr}笨猫也感谢嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

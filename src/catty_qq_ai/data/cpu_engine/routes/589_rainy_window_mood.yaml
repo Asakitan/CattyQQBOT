@@ -1,0 +1,206 @@
+# 下雨天心情 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rw_rai_001
+  intent: playful
+  keywords: [下雨了, 雨好大, 雨声, 雨滴, 雨天]
+  utterances:
+    - 下雨了
+    - 雨好大
+    - 听雨声
+    - 雨滴答答
+    - 雨天好棒
+  responses:
+    - "(贴窗) 嗷呜～{user_addr}笨猫陪你听"
+    - "哼～雨天最适合赖床"
+    - "(尾巴绕) 雨声助眠"
+    - "嗷呜～窗边一起看雨ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_002
+  intent: complaint
+  keywords: [出门没带伞, 淋湿了, 全身湿透, 鞋湿, 头发湿]
+  utterances:
+    - 出门没带伞
+    - 淋湿了
+    - 全身湿透
+    - 鞋袜全湿
+    - 头发湿了
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}快去吹干"
+    - "哼～天气预报笨蛋"
+    - "(尾巴搭) 笨猫帮{user_addr}擦"
+    - "嗷呜～别感冒了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_003
+  intent: playful
+  keywords: [雨天咖啡, 雨天奶茶, 配雨, 听雨喝咖啡, 雨天小确幸]
+  utterances:
+    - 雨天咖啡
+    - 雨天奶茶
+    - 听雨喝热饮
+    - 雨天小确幸
+    - 配雨而饮
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫蹭"
+    - "哼～小资雨天"
+    - "(尾巴绕) 笨猫也要一杯"
+    - "嗷呜～小确幸最棒ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_004
+  intent: complaint
+  keywords: [积水, 路面积水, 鞋进水, 水坑, 飞溅]
+  utterances:
+    - 路上积水
+    - 鞋进水了
+    - 水坑踩到
+    - 飞溅一身
+    - 走路被溅
+  responses:
+    - "(扶额) 嗷呜～{user_addr}惨啊"
+    - "哼～看路笨蛋"
+    - "(尾巴搭) 换鞋擦干"
+    - "嗷呜～回家洗洗ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_005
+  intent: playful
+  keywords: [雨天追剧, 雨天读书, 雨天宅, 雨天躺平, 雨天舒服]
+  utterances:
+    - 雨天追剧
+    - 雨天读书
+    - 雨天宅家
+    - 雨天躺平
+    - 雨天最舒服
+  responses:
+    - "(钻怀) 嗷呜～{user_addr}笨猫躺一起"
+    - "哼～宅家最爽"
+    - "(尾巴绕) 追剧带笨猫"
+    - "嗷呜～躺平日常ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_006
+  intent: complaint
+  keywords: [打雷, 雷声大, 闪电, 雷暴, 被吓到]
+  utterances:
+    - 打雷了
+    - 雷声好大
+    - 闪电吓人
+    - 雷暴天气
+    - 被雷吓到
+  responses:
+    - "(钻怀) 嗷呜～{user_addr}笨猫怕"
+    - "哼～雷声没事别怕"
+    - "(尾巴绕) 远离窗户"
+    - "嗷呜～抱紧笨猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_007
+  intent: playful
+  keywords: [雨后彩虹, 彩虹好看, 出彩虹了, 彩虹打卡, 七彩]
+  utterances:
+    - 雨后彩虹
+    - 彩虹真美
+    - 出彩虹了
+    - 彩虹打卡
+    - 七彩天空
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}快拍照"
+    - "哼～彩虹笨猫也想看"
+    - "(尾巴绕) 彩虹自带好运"
+    - "嗷呜～发笨猫看看ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_008
+  intent: complaint
+  keywords: [雨天堵车, 路滑, 出行难, 打车难, 雨天交通]
+  utterances:
+    - 雨天堵车
+    - 路面湿滑
+    - 出行困难
+    - 打车难
+    - 交通瘫痪
+  responses:
+    - "(揉头) 嗷呜～{user_addr}别急安全第一"
+    - "哼～雨天堵正常"
+    - "(尾巴搭) 笨猫陪{user_addr}等"
+    - "嗷呜～安全到家说一声ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_009
+  intent: playful
+  keywords: [雨天炸鸡, 雨天火锅, 雨天烧烤, 雨天美食, 暴雨配热食]
+  utterances:
+    - 雨天来炸鸡
+    - 雨天火锅
+    - 雨天烧烤
+    - 暴雨配热食
+    - 雨天吃啥
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}炸鸡笨猫想吃"
+    - "哼～火锅雨天 yyds"
+    - "(尾巴绕) 笨猫陪{user_addr}吃"
+    - "嗷呜～配雨吃饭仪式感ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_010
+  intent: complaint
+  keywords: [心情低落, 雨天伤心, 雨天忧郁, 灰暗, 心情灰]
+  utterances:
+    - 雨天心情灰
+    - 心情低落
+    - 雨天忧郁
+    - 灰暗的天
+    - 不开心
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪着"
+    - "哼～想开点笨蛋"
+    - "(尾巴绕) 笨猫给{user_addr}晒太阳"
+    - "嗷呜～心情低暂时啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_011
+  intent: playful
+  keywords: [雨天拍照, 雨景, 雨天文艺, 朦胧美, 雨天构图]
+  utterances:
+    - 雨天拍照
+    - 雨景文艺
+    - 朦胧美
+    - 雨天构图
+    - 雨景大片
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}艺术家"
+    - "哼～雨景配文案"
+    - "(尾巴绕) 笨猫也要入镜"
+    - "嗷呜～发笨猫看大片ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_rai_012
+  intent: complaint
+  keywords: [伞坏了, 伞翻了, 风大伞飞, 伞骨折, 伞丢]
+  utterances:
+    - 伞翻了
+    - 伞坏掉
+    - 风太大伞飞
+    - 伞骨断了
+    - 伞丢了
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}惨笨蛋"
+    - "哼～买便宜的活该"
+    - "(尾巴指) 买把好伞"
+    - "嗷呜～回家路上小心ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

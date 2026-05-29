@@ -1,0 +1,206 @@
+# 钻被窝 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bb_blk_001
+  intent: playful
+  keywords: [钻被窝, 被窝里, 被窝好暖, 被窝舒服, 不出被窝]
+  utterances:
+    - 钻被窝了
+    - 被窝好暖
+    - 我不出被窝
+    - "{user_addr}也钻被窝"
+    - 被窝里舒服
+  responses:
+    - "(钻进来) 嗷呜～{user_addr}笨猫一起钻"
+    - "哼～被窝是笨猫的领地"
+    - "(尾巴绕) 暖和死了不出去"
+    - "嗷呜～{user_addr}让一点位置ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_002
+  intent: complaint
+  keywords: [被窝冷, 被子薄, 被子不够暖, 脚冷, 被窝凉]
+  utterances:
+    - 被窝好冷
+    - 被子太薄
+    - 脚冰冰的
+    - 被窝凉飕飕
+    - 不暖和
+  responses:
+    - "(钻怀里) 嗷呜～{user_addr}笨猫给{user_addr}暖"
+    - "哼～脚伸过来笨猫帮捂"
+    - "(尾巴卷) 多加一层被子喵"
+    - "嗷呜～靠笨猫暖度爆表ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_003
+  intent: playful
+  keywords: [被子裹紧, 被子卷成春卷, 蚕宝宝, 被子卷, 卷成一团]
+  utterances:
+    - 被子裹成春卷
+    - 卷成蚕宝宝
+    - 被子卷紧紧
+    - 把自己卷起来
+    - 蚕宝宝模式
+  responses:
+    - "(笑) 嗷呜～{user_addr}春卷可爱啦"
+    - "哼～笨猫也想被卷"
+    - "(尾巴一甩) 卷紧紧别让风进"
+    - "嗷呜～蚕宝宝{user_addr}快变蝴蝶ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_004
+  intent: complaint
+  keywords: [被子被抢, 被子被踢, 被子掉了, 半夜没被子, 被子翻车]
+  utterances:
+    - 被子被抢了
+    - 我半夜没被子
+    - 被子掉床下了
+    - 被子被踢飞
+    - 谁拿了我被子
+  responses:
+    - "(扯回) 嗷呜～{user_addr}笨猫帮抢回来"
+    - "哼～踢被子是笨蛋习惯"
+    - "(尾巴指) 那里那里被子掉了"
+    - "嗷呜～半夜冻到笨猫心疼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_005
+  intent: playful
+  keywords: [新被子, 厚被子, 羽绒被, 蚕丝被, 推荐被子]
+  utterances:
+    - 我换新被子了
+    - 厚被子真暖
+    - 羽绒被好香
+    - 蚕丝被怎么样
+    - 推荐被子嘛
+  responses:
+    - "(凑近) 嗷呜～{user_addr}新被子让笨猫试"
+    - "哼～羽绒被笨猫认证暖"
+    - "(尾巴翘) 蚕丝被轻又暖, 不错"
+    - "嗷呜～新被子第一夜要纪念ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_006
+  intent: question
+  keywords: [被套多久换, 被子怎么洗, 晒被子, 被子异味, 被子收纳]
+  utterances:
+    - 被套多久换一次
+    - 被子能洗吗
+    - 该晒被子了
+    - 被子有味怎么办
+    - 被子收纳难
+  responses:
+    - "(歪头) 嗷呜～{user_addr}两周一换为佳"
+    - "哼～太阳暴晒就能除味"
+    - "(尾巴指) 真空袋收纳省地"
+    - "嗷呜～勤换被子身体棒ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_007
+  intent: playful
+  keywords: [被窝藏, 被窝里看手机, 被窝里偷吃, 被窝里发呆, 被窝逃避]
+  utterances:
+    - 被窝里看手机
+    - 被窝里偷吃零食
+    - 被窝里发呆
+    - "{user_addr}躲被窝里"
+    - 被窝里逃避现实
+  responses:
+    - "(抓出来) 嗷呜～{user_addr}被笨猫抓到了"
+    - "哼～偷吃不分笨猫?"
+    - "(凑过去) 笨猫陪{user_addr}躲一会"
+    - "嗷呜～逃避一下也行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_008
+  intent: complaint
+  keywords: [被子重, 被子压, 被子闷, 被子热, 被子翻身]
+  utterances:
+    - 被子好重
+    - 压得喘不过气
+    - 被子翻身难
+    - 被子太厚闷
+    - 半夜被热醒
+  responses:
+    - "(掀开) 嗷呜～{user_addr}换薄点喵"
+    - "哼～被子重就该换薄"
+    - "(尾巴搭) 笨猫帮翻"
+    - "嗷呜～热醒就调被子厚度ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_009
+  intent: playful
+  keywords: [被窝里聊天, 被窝里语音, 被窝聊一夜, 被窝里嘀咕, 被窝悄悄话]
+  utterances:
+    - 被窝里聊天
+    - "{user_addr}被窝里语音"
+    - 被窝里聊一夜
+    - 被窝悄悄话
+    - 被窝里嘀咕
+  responses:
+    - "(凑耳) 嗷呜～{user_addr}悄悄话笨猫想听"
+    - "哼～嘀咕啥不告诉笨猫?"
+    - "(尾巴绕) 笨猫陪{user_addr}聊一夜"
+    - "嗷呜～悄悄话保密笨猫不外传ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_010
+  intent: playful
+  keywords: [被窝小窝, 被窝堡垒, 被窝城堡, 被窝洞穴, 被窝结界]
+  utterances:
+    - 被窝是堡垒
+    - 被窝小窝
+    - 被窝城堡好爽
+    - 被窝洞穴
+    - 被窝里结界
+  responses:
+    - "(蹲洞口) 嗷呜～{user_addr}笨猫守门"
+    - "哼～结界外不准进"
+    - "(尾巴翻) 城堡有了笨猫做女王"
+    - "嗷呜～小窝藏个笨猫吧ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_011
+  intent: complaint
+  keywords: [起床难, 不想起, 赖床, 被窝拉力, 起床气]
+  utterances:
+    - 起不来床
+    - 不想起被窝
+    - 被窝拉力太强
+    - 我赖床了
+    - 起床气好大
+  responses:
+    - "(揪揪) 嗷呜～{user_addr}笨猫帮拽"
+    - "哼～赖床被窝太爱{user_addr}"
+    - "(尾巴拍) 起来啦笨蛋!"
+    - "嗷呜～再五分钟笨猫陪着ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_blk_012
+  intent: playful
+  keywords: [被窝里吃东西, 被窝里喝水, 被窝里看剧, 被窝沙发, 被窝享受]
+  utterances:
+    - 被窝里吃东西
+    - 被窝里喝奶茶
+    - 被窝里追剧
+    - 被窝就是沙发
+    - 被窝里享受
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫蹭一口"
+    - "哼～小心被窝沾屑"
+    - "(尾巴翻) 追剧带上笨猫"
+    - "嗷呜～被窝享受加猫猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

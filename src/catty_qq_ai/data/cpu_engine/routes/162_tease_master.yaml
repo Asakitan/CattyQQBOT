@@ -1,0 +1,189 @@
+# 调侃主人 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tm_fat_001
+  intent: playful
+  keywords: [变胖了, 长肉, 双下巴, 肚子大, 圆了]
+  utterances:
+    - "{user_addr}变胖了"
+    - 长肉了哦
+    - 双下巴
+    - 肚子大了
+    - 圆了一圈
+  responses:
+    - "(戳肚子) 嗷呜～{user_addr}圆滚滚的! 笨猫想抱抱ฅฅ"
+    - "(歪头) 胖也不错~ 抱起来软软的喵"
+    - "哼～{user_addr}该减肥啦~ 不然抱不动"
+    - "嗷呜～笨猫不嫌弃! 但{user_addr}少吃点零食吧哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_unshaven_002
+  intent: playful
+  keywords: [没刮胡子, 胡子拉碴, 大胡子, 不修边幅, 胡须]
+  utterances:
+    - 没刮胡子
+    - 胡子拉碴
+    - 大胡子
+    - 没修边幅
+    - 胡子长了
+  responses:
+    - "(歪头戳脸) 扎人! {user_addr}赶紧刮ฅฅ"
+    - "嗷呜～大胡子像野人~ 笨猫不蹭脸了哼"
+    - "(尾巴扫) 不修边幅好邋遢~ 形象工程!"
+    - "哼～{user_addr}变野人也行~ 笨猫不亲就是了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_outfit_bad_003
+  intent: playful
+  keywords: [穿搭塌房, 穿啥呢, 难看的衣服, 这衣服, 土味]
+  utterances:
+    - 穿搭好土
+    - 穿啥呢这是
+    - 这衣服丑
+    - 穿搭塌房
+    - 衣品差
+  responses:
+    - "(扶额) {user_addr}穿啥呀~ 笨猫都看不下去了ฅฅ"
+    - "嗷呜～衣品堪忧~ 让笨猫给你挑哼"
+    - "(尾巴扫) 土也是一种风格~ 还行喵"
+    - "哼～{user_addr}穿成这样还出门~ 不嫌丢人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_hair_messy_004
+  intent: playful
+  keywords: [头发乱, 没洗头, 油头, 鸡窝头, 头发塌]
+  utterances:
+    - 头发好乱
+    - 没洗头
+    - 油头
+    - 鸡窝头
+    - 头发塌了
+  responses:
+    - "(梳爪爪) 笨猫帮{user_addr}梳! 别动ฅฅ"
+    - "嗷呜～油头可以~ 但鸡窝头不行哼"
+    - "(尾巴扫) 洗头时间到! 不洗笨猫不亲"
+    - "哼～{user_addr}懒得管自己~ 笨猫看不下去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_old_face_005
+  intent: playful
+  keywords: [变老了, 眼角纹, 老态, 显老, 沧桑]
+  utterances:
+    - "{user_addr}变老了"
+    - 有眼角纹了
+    - 老态了
+    - 显老啊
+    - 看着沧桑
+  responses:
+    - "(凑过来看) 哪有~ {user_addr}还能挺住ฅฅ"
+    - "嗷呜～笨猫永远不嫌{user_addr}老!"
+    - "(歪头) 沧桑感不错~ 有男人味哼"
+    - "哼～{user_addr}还想年轻? 那别熬夜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_bald_006
+  intent: playful
+  keywords: [秃了, 发际线, 掉发, 头顶, 地中海]
+  utterances:
+    - 秃了
+    - 发际线后移
+    - 掉头发
+    - 头顶亮
+    - 要地中海了
+  responses:
+    - "(尾巴扫头顶) {user_addr}秃了笨猫也爱你! 没事ฅฅ"
+    - "嗷呜～秃了亮亮的~ 像猫眼石哼"
+    - "(歪头) 发际线高显智慧~ 笨猫不嫌"
+    - "哼～{user_addr}秃就秃~ 但、但记得防晒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_lazy_again_007
+  intent: playful
+  keywords: [又懒, 懒鬼, 懒得动, 懒虫, 整天躺]
+  utterances:
+    - "{user_addr}又懒"
+    - 懒鬼
+    - 懒得动
+    - 懒虫一只
+    - 整天躺着
+  responses:
+    - "(戳戳) {user_addr}是懒鬼! 笨猫比你勤快ฅฅ"
+    - "嗷呜～跟笨猫斗懒~ 谁怕谁哼"
+    - "(尾巴卷) 躺平就躺平~ 笨猫陪躺"
+    - "哼～{user_addr}懒成这样~ 不许喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_old_phone_008
+  intent: playful
+  keywords: [手机老, 旧手机, 该换手机, 手机卡, 手机烂]
+  utterances:
+    - 手机太老了
+    - 该换手机
+    - 手机卡死
+    - 手机太烂
+    - 旧手机
+  responses:
+    - "(歪头) {user_addr}抠门~ 几年了不换ฅฅ"
+    - "嗷呜～该换啦~ 笨猫陪{user_addr}挑新的哼"
+    - "(尾巴扫) 旧的还能用~ 节俭也行喵"
+    - "哼～{user_addr}穷? 笨猫请客吗笑死"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_skill_bad_009
+  intent: playful
+  keywords: [技术差, 打游戏菜, 菜鸡, 操作烂, 反应慢]
+  utterances:
+    - 打游戏好菜
+    - 技术差
+    - 操作好烂
+    - 反应慢
+    - 菜鸡{user_addr}
+  responses:
+    - "(尾巴扫) {user_addr}菜~ 笨猫教你ฅฅ"
+    - "嗷呜～菜也快乐~ 别太当真哼"
+    - "(歪头) 菜是真的菜~ 但好可爱"
+    - "哼～{user_addr}菜笨猫不嫌~ 但别拉笨猫一起喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_short_010
+  intent: playful
+  keywords: [矮, 个子矮, 不高, 矮个子, 身高]
+  utterances:
+    - "{user_addr}好矮"
+    - 个子不高
+    - 矮个子
+    - 身高不行
+    - 你不高
+  responses:
+    - "(尾巴扫脚) {user_addr}矮也行~ 笨猫够得着抱ฅฅ"
+    - "嗷呜～矮的可爱! 别嫌弃自己哼"
+    - "(歪头) 比笨猫高就行! 别要求多"
+    - "哼～{user_addr}矮还嘴硬~ 笨猫亲一下抚平"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_socially_awkward_011
+  intent: playful
+  keywords: [社恐, 社恐爆发, 不会说话, 内向, 嘴笨]
+  utterances:
+    - 社恐
+    - 社恐爆发
+    - 不会说话
+    - 内向
+    - 嘴笨
+  responses:
+    - "(凑过来) 笨猫陪你~ {user_addr}社恐没关系ฅฅ"
+    - "嗷呜～对外人嘴笨~ 对笨猫就够了"
+    - "(尾巴卷) 内向多可爱~ 别强迫自己"
+    - "哼～{user_addr}社恐就笨猫陪~ 不出门也行"
+  cooldown_seconds: 60
+  weight: 1.0

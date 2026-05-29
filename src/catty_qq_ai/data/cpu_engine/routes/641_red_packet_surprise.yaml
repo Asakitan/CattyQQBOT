@@ -1,0 +1,189 @@
+# 红包惊喜 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rps_redpacket_001
+  intent: playful
+  keywords: [红包, 收到红包, 发红包, 拼手气, 抢红包]
+  utterances:
+    - 红包
+    - 收到红包
+    - 发红包
+    - 拼手气
+    - 抢红包
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫也要!"
+    - "笨猫认证: 红包神器喵"
+    - "(尾巴摇) 分笨猫一个"
+    - "哼～{user_addr}独吞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_luckyhand_002
+  intent: playful
+  keywords: [手气王, 最佳手气, 拿到大的, 手气好, 欧皇红包]
+  utterances:
+    - 手气王
+    - 最佳手气
+    - 拿到大的
+    - 手气好
+    - 欧皇
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}今天欧!"
+    - "笨猫认证: 锦鲤体质"
+    - "(歪头) 笨猫沾光"
+    - "哼～{user_addr}炫耀"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_pennies_003
+  intent: complaint
+  keywords: [一分钱, 一毛, 几毛红包, 抢到一分, 红包毛毛]
+  utterances:
+    - 一分钱
+    - 几毛红包
+    - 抢到一分
+    - 一毛
+    - 红包毛毛
+  responses:
+    - "(笑) 嗷呜～{user_addr}手气背!"
+    - "笨猫认证: 安慰奖"
+    - "(尾巴扫) 别气笨蛋"
+    - "哼～{user_addr}非酋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_grouppk_004
+  intent: playful
+  keywords: [群红包, 群里抢, 大群抢红包, 群发红包, 群红包雨]
+  utterances:
+    - 群红包
+    - 群里抢
+    - 群红包雨
+    - 群发红包
+    - 群发现金
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}抢快点!"
+    - "笨猫笨手抢不到喵"
+    - "(歪头) 笨猫帮你抢"
+    - "哼～{user_addr}手快"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_birthred_005
+  intent: playful
+  keywords: [生日红包, 节日红包, 520红包, 1314红包, 数字红包]
+  utterances:
+    - 生日红包
+    - 节日红包
+    - 520红包
+    - 1314红包
+    - 数字红包
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫要520喵!"
+    - "笨猫认证: 数字有梗"
+    - "(尾巴摇) 别忘1314"
+    - "哼～{user_addr}土味"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_givefriend_006
+  intent: playful
+  keywords: [发给朋友, 转账, 借钱, 转账给, 还钱]
+  utterances:
+    - 转账
+    - 借钱
+    - 还钱
+    - 发给朋友
+    - 转账给
+  responses:
+    - "(歪头) {user_addr}转给笨猫呀 ฅฅ"
+    - "嗷呜～别忘还人家"
+    - "(尾巴摇) 笨猫记账"
+    - "哼～{user_addr}人情"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_lipick_007
+  intent: complaint
+  keywords: [手慢, 没抢到, 错过红包, 慢半拍, 抢不到]
+  utterances:
+    - 手慢
+    - 没抢到
+    - 错过红包
+    - 慢半拍
+    - 抢不到
+  responses:
+    - "(摇头) 嗷呜～{user_addr}慢爪!"
+    - "笨猫笑你喵"
+    - "(尾巴扫) 别气下次手快"
+    - "哼～{user_addr}慢悠悠"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_holidayone_008
+  intent: question
+  keywords: [过年红包, 春节红包, 压岁钱, 长辈红包, 拜年红包]
+  utterances:
+    - 过年红包
+    - 春节红包
+    - 压岁钱
+    - 长辈红包
+    - 拜年红包
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}收到爽!"
+    - "笨猫认证: 压岁钱很多"
+    - "(歪头) 别交给爸妈保管"
+    - "哼～{user_addr}羡慕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_sendback_009
+  intent: complaint
+  keywords: [被退回, 红包未领, 过期红包, 退回了, 没收]
+  utterances:
+    - 被退回
+    - 红包未领
+    - 过期了
+    - 红包退回
+    - 没领
+  responses:
+    - "(摇头) 嗷呜～{user_addr}白发!"
+    - "笨猫认证: 心痛喵"
+    - "(尾巴扫) 别气钱回来了"
+    - "哼～{user_addr}对方故意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_charge_010
+  intent: complaint
+  keywords: [提现费, 服务费, 收手续费, 手续费, 银行卡]
+  utterances:
+    - 提现费
+    - 服务费
+    - 收手续费
+    - 手续费
+    - 银行卡
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}剥削!"
+    - "笨猫帮你骂!"
+    - "(尾巴打) 几块也心疼"
+    - "哼～{user_addr}小气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_catwant_011
+  intent: playful
+  keywords: [给笨猫红包, 笨猫要红包, 我要红包, 给笨猫钱, 投喂红包]
+  utterances:
+    - 给笨猫红包
+    - 笨猫要红包
+    - 我要红包
+    - 给笨猫钱
+    - 投喂红包
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}笨猫接住!"
+    - "笨猫存着买鱼干喵"
+    - "(尾巴摇) 别小气{user_addr}"
+    - "哼～{user_addr}总算上道"
+  cooldown_seconds: 60
+  weight: 1.0

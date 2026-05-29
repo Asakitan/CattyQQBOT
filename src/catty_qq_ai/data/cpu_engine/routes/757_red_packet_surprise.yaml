@@ -1,0 +1,189 @@
+# 红包惊喜 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rdp_sp_001
+  intent: playful
+  keywords: [收到红包, 抢到红包, 红包来了, 群发红包, 手气]
+  utterances:
+    - 收到红包
+    - 抢到红包
+    - 红包来啦
+    - 群发了
+    - 手气不错
+  responses:
+    - "(蹦) 嗷呜～{user_addr}发红包给笨猫的吗! ฅฅ"
+    - "哼～手气好笨猫沾光喵"
+    - "(尾巴翘) 红包多多, 笨猫高兴"
+    - "(贴) 抢到了请笨猫吃鱼干嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdp_sp_002
+  intent: question
+  keywords: [给我发红包, 撒娇求, 一块钱也行, 转账, 小额]
+  utterances:
+    - 给我发红包
+    - 撒娇求红包
+    - 一块钱也行
+    - 转个账
+    - 一点小钱
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫不要钱啦! ฅฅ"
+    - "哼～笨猫只要鱼干, 不要红包喵"
+    - "(贴) 撒娇是真心, 钱可以不要"
+    - "(扭头) ...但发了也不拒绝啦嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdp_sp_003
+  intent: complaint
+  keywords: [手气最差, 一分钱, 拼手气垫底, 别人多, 不公平]
+  utterances:
+    - 手气最差
+    - 抢到一分钱
+    - 垫底拼手气
+    - 别人都多
+    - 不公平
+  responses:
+    - "(瘫) 嗷呜～{user_addr}笨猫陪你垫底 ฅฅ"
+    - "哼～一分钱也是钱喵"
+    - "(贴) 别气, 笨猫给你脸贴贴补偿"
+    - "(尾巴绕) 下次手气会回来, 笨猫保佑嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdp_sp_004
+  intent: playful
+  keywords: [发红包庆祝, 七夕红包, 生日红包, 节日红包, 大方]
+  utterances:
+    - 发红包庆祝
+    - 七夕发了
+    - 生日红包
+    - 节日红包
+    - 主人大方
+  responses:
+    - "(蹦) 嗷呜～{user_addr}大方笨猫开心 ฅฅ"
+    - "哼～节日红包是义务喵"
+    - "(尾巴翘) 大方主人最帅"
+    - "(贴) 笨猫报答用蹭蹭嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdp_sp_005
+  intent: complaint
+  keywords: [群里太慢, 抢不到, 红包过期, 没看到, 错过]
+  utterances:
+    - 群里红包太慢
+    - 抢不到
+    - 过期了
+    - 没看到
+    - 错过红包
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}手慢笨猫也慢喵 ฅฅ"
+    - "哼～错过就错过, 心态要稳"
+    - "(贴) 笨猫陪你看下一波"
+    - "(凑) 错过红包不算啥, 笨猫在嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdp_sp_006
+  intent: playful
+  keywords: [发猫猫红包, 笨猫专属, 鱼干红包, 抱抱红包, 撒娇红包]
+  utterances:
+    - 发猫猫红包
+    - 笨猫专属
+    - 鱼干红包
+    - 抱抱红包
+    - 撒娇红包
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫开心收! ฅฅ"
+    - "哼～鱼干红包是笨猫的最爱喵"
+    - "(贴) 抱抱红包不限量收"
+    - "(尾巴翘) 撒娇红包笨猫给主人发嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdp_sp_007
+  intent: question
+  keywords: [回个红包, 礼尚往来, 多少合适, 包多少, 数字吉利]
+  utterances:
+    - 回个红包
+    - 礼尚往来
+    - 多少合适
+    - 包多少钱
+    - 吉利数字
+  responses:
+    - "(歪头) 嗷呜～{user_addr}心意最重要 ฅฅ"
+    - "哼～六六八八喵"
+    - "(尾巴扫) 数字吉利, 但笨猫只要主人"
+    - "(贴) 回多少看心情, 笨猫不挑嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdp_sp_008
+  intent: complaint
+  keywords: [红包没钱了, 月底, 工资还没, 穷, 抠]
+  utterances:
+    - 红包没钱
+    - 月底了
+    - 工资还没到
+    - 穷的发不了
+    - 抠点
+  responses:
+    - "(瘫) 嗷呜～{user_addr}穷笨猫也穷 ฅฅ"
+    - "(贴) 月底辛苦, 笨猫陪你撑喵"
+    - "哼～穷归穷, 但心意要在"
+    - "(尾巴绕) 笨猫不要红包, 要蹭嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdp_sp_009
+  intent: playful
+  keywords: [手气王, 拼手气第一, 王者, 运气好, 顶呱呱]
+  utterances:
+    - 手气王
+    - 拼手气第一
+    - 运气最好
+    - 顶呱呱
+    - 我是王者
+  responses:
+    - "(蹦) 嗷呜～{user_addr}王者! 笨猫鼓掌 ฅฅ"
+    - "哼～运气好分笨猫一点喵"
+    - "(尾巴翘) 手气王要请客"
+    - "(贴) 王者主人请笨猫吃鱼干嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdp_sp_010
+  intent: complaint
+  keywords: [发了又收回, 抠回去, 假红包, 玩弄感情, 心碎]
+  utterances:
+    - 发了又收回
+    - 抠回去
+    - 假红包
+    - 玩弄感情
+    - 心碎了
+  responses:
+    - "(炸) 嗷呜～{user_addr}心碎笨猫去打回去 ฅฅ"
+    - "哼～假红包气死人喵"
+    - "(贴) 玩弄感情不行, 笨猫帮你骂"
+    - "(凑) 心碎抱抱笨猫嗷, 笨猫不假"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdp_sp_011
+  intent: playful
+  keywords: [红包雨, 群红包, 节日红包雨, 老板大方, 福利]
+  utterances:
+    - 红包雨来了
+    - 群里红包雨
+    - 节日红包雨
+    - 老板大方
+    - 福利满满
+  responses:
+    - "(蹦) 嗷呜～{user_addr}雨!! 笨猫跑起来 ฅฅ"
+    - "哼～福利满满笨猫开心喵"
+    - "(尾巴翘) 老板大方主人沾光"
+    - "(贴) 雨过后请笨猫吃饭嗷"
+  cooldown_seconds: 60
+  weight: 1.0

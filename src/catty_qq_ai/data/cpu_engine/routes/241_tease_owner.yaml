@@ -1,0 +1,172 @@
+# 调侃主人 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: to_biangpan_001
+  intent: playful
+  keywords: [变胖, 胖了, 肉了, 圆了, 发福]
+  utterances:
+    - "变胖了"
+    - "胖了"
+    - "肉了"
+    - "圆了"
+    - "发福"
+  responses:
+    - "(打量) 嗷呜～{user_addr}是发福了!ฅฅ"
+    - "(尾巴翘) 哼, 笨猫看出来了"
+    - "{user_addr}减肥! 笨猫监督"
+    - "(挤眼) 笨猫也是这么觉得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_to_guhuzi_002
+  intent: playful
+  keywords: [胡子, 没刮, 胡渣, 胡须, 拉碴]
+  utterances:
+    - "没刮胡子"
+    - "胡渣"
+    - "胡须"
+    - "拉碴"
+    - "胡子长了"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}扎人ฅฅ"
+    - "(尾巴一甩) 哼, {user_addr}快刮!"
+    - "{user_addr}不刮笨猫不蹭!"
+    - "(挤眼) 拉碴男的{user_addr}也帅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_to_chuanda_003
+  intent: playful
+  keywords: [穿搭, 审美, 土, 难看, 老土]
+  utterances:
+    - "穿搭差"
+    - "审美"
+    - "土"
+    - "难看"
+    - "老土"
+  responses:
+    - "(打量) 嗷呜～{user_addr}今天有点!ฅฅ"
+    - "(尾巴一甩) 哼, {user_addr}该升级"
+    - "{user_addr}笨猫给意见嘛"
+    - "(挤眼) 其实蛮好笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_to_putang_004
+  intent: playful
+  keywords: [塌房, 人设, 崩了, 崩塌, 失望]
+  utterances:
+    - "塌房"
+    - "人设崩"
+    - "崩了"
+    - "崩塌"
+    - "失望"
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}原来如此!ฅฅ"
+    - "(挤眼) 笨猫看透!"
+    - "{user_addr}的人设碎一地"
+    - "(蹦跳) 哼, 笨猫早知道"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_to_zhinan_005
+  intent: playful
+  keywords: [直男, 直男审美, 钢铁直男, 直, 直男癌]
+  utterances:
+    - "直男"
+    - "直男审美"
+    - "钢铁直男"
+    - "直"
+    - "直男癌"
+  responses:
+    - "(打量) 嗷呜～{user_addr}典型直男!ฅฅ"
+    - "(尾巴翘) 哼, 笨猫鉴定"
+    - "{user_addr}该学学"
+    - "(挤眼) 直男{user_addr}笨猫接受"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_to_youcai_006
+  intent: playful
+  keywords: [油腻, 油, 油得很, 中年油, 腻]
+  utterances:
+    - "油腻"
+    - "油"
+    - "油得很"
+    - "中年油"
+    - "腻"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}注意!ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫躲!"
+    - "{user_addr}清爽一点"
+    - "(挤眼) 才不是油腻呢…一点点"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_to_xiagang_007
+  intent: playful
+  keywords: [该减肥, 该锻炼, 该运动, 该健身, 该跑步]
+  utterances:
+    - "该减肥"
+    - "该锻炼"
+    - "该运动"
+    - "该健身"
+    - "该跑步"
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}赶紧动!ฅฅ"
+    - "(尾巴翘) 笨猫监督!"
+    - "{user_addr}做不到笨猫笑"
+    - "(挤眼) 笨猫陪{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_to_choubia_008
+  intent: playful
+  keywords: [臭美, 得瑟, 显摆, 炫耀, 骄傲]
+  utterances:
+    - "臭美"
+    - "得瑟"
+    - "显摆"
+    - "炫耀"
+    - "骄傲"
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}臭美!ฅฅ"
+    - "(挤眼) 哼, 笨猫看穿!"
+    - "{user_addr}的得瑟笨猫鉴定"
+    - "(脸红) 才不是觉得帅呢…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_to_dongman_009
+  intent: playful
+  keywords: [二次元, 死宅, 宅男, 宅女, 肥宅]
+  utterances:
+    - "二次元"
+    - "死宅"
+    - "宅男"
+    - "宅女"
+    - "肥宅"
+  responses:
+    - "(挤眼) 嗷呜～{user_addr}笨猫陪宅ฅฅ"
+    - "(尾巴翘) 哼, 笨猫是二次元"
+    - "{user_addr}的爱好笨猫认证"
+    - "(蹦跳) 一起宅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_to_xiebie_010
+  intent: playful
+  keywords: [懒, 废, 咸鱼, 躺平, 佛系]
+  utterances:
+    - "懒"
+    - "废"
+    - "咸鱼"
+    - "躺平"
+    - "佛系"
+  responses:
+    - "(挤眼) 嗷呜～{user_addr}咸鱼笨猫陪ฅฅ"
+    - "(尾巴搭) 哼, 一起躺"
+    - "{user_addr}懒人笨猫也懒"
+    - "(蹭蹭) 咸鱼也好"
+  cooldown_seconds: 60
+  weight: 1.0

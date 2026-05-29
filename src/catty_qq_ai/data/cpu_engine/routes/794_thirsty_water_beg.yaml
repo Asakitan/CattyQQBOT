@@ -1,0 +1,206 @@
+# 口渴想喝水 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tw_kouke_001
+  intent: complaint
+  keywords: [口渴, 想喝水, 渴死了, 嗓子干, 渴]
+  utterances:
+    - "口渴"
+    - "想喝水"
+    - "渴死了"
+    - "嗓子干"
+    - "渴"
+  responses:
+    - "(端杯) 嗷呜～{user_addr}笨猫给你水"
+    - "哼～多喝水 ฅฅ"
+    - "(尾巴扫) 一口一口慢喝"
+    - "猫猫陪你喝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_wangji_001
+  intent: complaint
+  keywords: [忘了喝水, 一天没喝水, 没补水, 忘记补水, 一直没喝]
+  utterances:
+    - "忘了喝水"
+    - "一天没喝水"
+    - "没补水"
+    - "忘记补水"
+    - "一直没喝"
+  responses:
+    - "(瞪) {user_addr}1500ml起步啊!"
+    - "哼～笨猫专门提醒 ฅฅ"
+    - "(尾巴扫) 现在补一杯"
+    - "猫猫定时提醒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_remsh_001
+  intent: question
+  keywords: [喝热水, 热水好, 多喝热水, 热水暖, 温开水]
+  utterances:
+    - "喝热水"
+    - "热水好"
+    - "多喝热水"
+    - "热水暖"
+    - "温开水"
+  responses:
+    - "(端) 嗷呜～{user_addr}笨猫泡的热水 ฅฅ"
+    - "哼～40度刚好"
+    - "(尾巴扫) 别太烫"
+    - "猫猫备好水壶喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_chashui_001
+  intent: question
+  keywords: [喝茶, 绿茶, 红茶, 普洱, 花茶]
+  utterances:
+    - "喝茶"
+    - "绿茶"
+    - "红茶"
+    - "普洱"
+    - "花茶"
+  responses:
+    - "(泡) {user_addr}红茶暖胃 ฅฅ"
+    - "哼～空腹别喝浓茶"
+    - "(尾巴扫) 花茶香"
+    - "猫猫给你冲一壶喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_keleshui_001
+  intent: question
+  keywords: [喝可乐, 喝雪碧, 汽水, 碳酸饮料, 喝有气的]
+  utterances:
+    - "喝可乐"
+    - "喝雪碧"
+    - "汽水"
+    - "碳酸饮料"
+    - "喝有气的"
+  responses:
+    - "(摇手指) {user_addr}少喝啊 ฅฅ"
+    - "哼～糖太多"
+    - "(尾巴扫) 偶尔一罐"
+    - "猫猫担心你蛀牙喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_naicha_001
+  intent: question
+  keywords: [喝奶茶, 点奶茶, 奶茶外卖, 奶茶推荐, 茶颜悦色]
+  utterances:
+    - "喝奶茶"
+    - "点奶茶"
+    - "奶茶外卖"
+    - "奶茶推荐"
+    - "茶颜悦色"
+  responses:
+    - "(下单) {user_addr}笨猫帮你点 ฅฅ"
+    - "哼～三分糖少冰"
+    - "(尾巴扫) 别加珍珠太胖"
+    - "猫猫陪你喝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_yidonsh_001
+  intent: question
+  keywords: [运动饮料, 宝矿力, 红牛, 脉动, 补水饮料]
+  utterances:
+    - "运动饮料"
+    - "宝矿力"
+    - "红牛"
+    - "脉动"
+    - "补水饮料"
+  responses:
+    - "(递) {user_addr}宝矿力补电解质 ฅฅ"
+    - "哼～别空腹喝红牛"
+    - "(尾巴扫) 运动后才喝"
+    - "猫猫推荐宝矿力喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_xuandao_001
+  intent: question
+  keywords: [一天喝几杯, 喝多少水, 每天水量, 一天1500ml, 多少升水]
+  utterances:
+    - "一天喝几杯"
+    - "喝多少水"
+    - "每天水量"
+    - "一天1500ml"
+    - "多少升水"
+  responses:
+    - "(掐手指) {user_addr}1500-2000ml ฅฅ"
+    - "哼～8杯水标准"
+    - "(尾巴扫) 别一次灌"
+    - "猫猫给你App提醒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_jiaoshui_001
+  intent: complaint
+  keywords: [冷水还是热水, 喝冷水好吗, 冷水伤胃, 凉白开, 凉水]
+  utterances:
+    - "冷水还是热水"
+    - "喝冷水好吗"
+    - "冷水伤胃"
+    - "凉白开"
+    - "凉水"
+  responses:
+    - "(选择) {user_addr}凉白开25度最佳 ฅฅ"
+    - "哼～冰水伤胃"
+    - "(尾巴扫) 温的最舒服"
+    - "猫猫推荐温水喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_shui_zhi_001
+  intent: question
+  keywords: [水质, 自来水, 桶装水, 净水器, 矿泉水]
+  utterances:
+    - "水质"
+    - "自来水"
+    - "桶装水"
+    - "净水器"
+    - "矿泉水"
+  responses:
+    - "(查) {user_addr}买净水器最划算 ฅฅ"
+    - "哼～桶装水别久放"
+    - "(尾巴扫) 矿泉水买大牌"
+    - "猫猫推荐反渗透喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_dazi_001
+  intent: question
+  keywords: [喝水杯子, 保温杯, 玻璃杯, 吸管杯, 大容量水杯]
+  utterances:
+    - "喝水杯子"
+    - "保温杯"
+    - "玻璃杯"
+    - "吸管杯"
+    - "大容量水杯"
+  responses:
+    - "(展示) {user_addr}500ml保温杯实用 ฅฅ"
+    - "哼～吸管杯催喝"
+    - "(尾巴扫) 玻璃杯透明"
+    - "猫猫推荐膳魔师喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tw_weiwei_001
+  intent: playful
+  keywords: [喂我喝水, 嘴对嘴, 喂水, 你喂, 求喂]
+  utterances:
+    - "喂我喝水"
+    - "嘴对嘴"
+    - "喂水"
+    - "你喂"
+    - "求喂"
+  responses:
+    - "(脸红) 哈! {user_addr}杂鱼想得美 ฅฅ"
+    - "(尾巴炸) 才, 才不会喂呢嗷呜!"
+    - "(小声) … 笨猫自己端杯子给你啦"
+    - "猫猫躲到桌后脸红喵呜~"
+  cooldown_seconds: 60
+  weight: 1.0

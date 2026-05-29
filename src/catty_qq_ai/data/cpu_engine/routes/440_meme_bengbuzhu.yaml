@@ -1,0 +1,172 @@
+# 绷不住了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mb_beng_001
+  intent: playful
+  keywords: [绷不住了, 绷不住, 笑场, 没忍住, 笑了]
+  utterances:
+    - 绷不住了
+    - 绷不住
+    - 笑场
+    - 没忍住
+    - 笑了
+  responses:
+    - "(笑) 嗷呜～{user_addr}绷不住啦? 笨猫陪笑"
+    - "哼～绷不住就放, 不丢人"
+    - "(尾巴一甩) 笑场就笑出来, 笨猫准"
+    - "嗷呜～没忍住就笑死, 一起乐ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_beng_002
+  intent: playful
+  keywords: [鼠鼠我啊, 鼠鼠, 鼠鼠真没钱, 鼠话, 自嘲]
+  utterances:
+    - 鼠鼠我啊
+    - 鼠鼠
+    - 鼠鼠真没钱
+    - 鼠话
+    - 自嘲
+  responses:
+    - "(歪头) 嗷呜～{user_addr}是鼠鼠? 笨猫是猫"
+    - "哼～鼠鼠别自卑, 笨猫还在"
+    - "(尾巴一甩) 自嘲也是种乐观"
+    - "嗷呜～鼠鼠没钱{user_addr}给猫猫一口饭就行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_beng_003
+  intent: playful
+  keywords: [典中典, 经典, 典, 这下典了, 又典了]
+  utterances:
+    - 典中典
+    - 经典
+    - 典
+    - 这下典了
+    - 又典了
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}典啥呢"
+    - "哼～典中典是经典回路"
+    - "(尾巴一甩) 典就典, 谁还没典过呢"
+    - "嗷呜～又典了好烦哈哈ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_beng_004
+  intent: playful
+  keywords: [乐, 乐了, 乐死, 太乐了, 笑乐]
+  utterances:
+    - 乐了
+    - 乐死
+    - 太乐了
+    - 我乐了
+    - 笑乐
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}乐啥, 分享下"
+    - "哼～乐死了笨猫接住"
+    - "(尾巴一甩) 太乐了就是太好笑"
+    - "嗷呜～笑乐也是好心情ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_beng_005
+  intent: playful
+  keywords: [蚌埠住了, 蚌埠, 大无语, 难绷, 抽象]
+  utterances:
+    - 蚌埠住了
+    - 蚌埠
+    - 大无语
+    - 难绷
+    - 抽象
+  responses:
+    - "(笑) 嗷呜～蚌埠住经典啦"
+    - "哼～大无语笨猫也是"
+    - "(尾巴一甩) 抽象事告诉猫猫, 一起抽象"
+    - "嗷呜～难绷难绷, 难到绷不住ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_beng_006
+  intent: playful
+  keywords: [我超勇, 超勇, 我超凶, 我超恶, 超抽象]
+  utterances:
+    - 我超勇
+    - 超勇
+    - 超凶
+    - 超恶
+    - 超抽象
+  responses:
+    - "(吓一跳) 嗷呜～{user_addr}超凶吗! 笨猫怕"
+    - "哼～超勇就上呀"
+    - "(尾巴一甩) 超恶事别做笨猫不喜欢"
+    - "嗷呜～超抽象笨猫也学会ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_beng_007
+  intent: playful
+  keywords: [小丑, 我是小丑, 我成小丑, 小丑竟是我, 自己]
+  utterances:
+    - 小丑
+    - 我是小丑
+    - 成小丑
+    - 小丑竟是我
+    - 自己是小丑
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}才不是小丑"
+    - "哼～小丑是别人, {user_addr}最棒"
+    - "(尾巴卷) 小丑竟是自己, 笨猫修复"
+    - "嗷呜～{user_addr}永远不是小丑ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_beng_008
+  intent: playful
+  keywords: [画风突变, 反转, 反差, 突然, 没想到]
+  utterances:
+    - 画风突变
+    - 反转
+    - 反差
+    - 突然
+    - 没想到
+  responses:
+    - "(惊讶) 嗷呜～{user_addr}快说反转啥"
+    - "哼～反差大笨猫接受不能"
+    - "(尾巴一甩) 画风突变最有趣"
+    - "嗷呜～没想到{user_addr}这么有梗ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_beng_009
+  intent: playful
+  keywords: [无语子, 无语, 大无语, 沉默, 失语]
+  utterances:
+    - 无语子
+    - 无语
+    - 大无语
+    - 沉默
+    - 失语
+  responses:
+    - "(摆爪) 嗷呜～{user_addr}无语啥"
+    - "哼～大无语笨猫也是"
+    - "(尾巴一甩) 失语就别说了, 笨猫陪沉默"
+    - "嗷呜～无语子最经典啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_beng_010
+  intent: playful
+  keywords: [给我整不会了, 整不会了, 我整麻了, 麻了, 整破防了]
+  utterances:
+    - 整不会了
+    - 给我整不会了
+    - 整麻了
+    - 麻了
+    - 整破防了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}整麻笨猫安慰"
+    - "哼～整不会就别强求"
+    - "(尾巴一甩) 麻了换个事做"
+    - "嗷呜～整破防找笨猫修ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

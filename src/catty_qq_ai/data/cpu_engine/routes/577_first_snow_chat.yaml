@@ -1,0 +1,266 @@
+# 第一场雪 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fsc_first_001
+  intent: playful
+  keywords:
+    - 第一场雪
+    - 下雪
+    - 好美
+    - 拍照
+    - 堆雪人
+  utterances:
+    - "{user_addr}今年第一场雪"
+    - "窗外好美"
+    - "拍照打卡了"
+    - "想堆雪人"
+    - "猫猫一起看雪"
+  responses:
+    - "(扑窗户) 嗷呜～{user_addr}下雪了笨猫超激动ฅฅ"
+    - "(摇尾巴) 一起堆雪人嘛笨猫想要个胖雪人喵～"
+    - "(嘟嘴) 路滑别跌倒{user_addr}笨猫盯着蹭蹭"
+    - "(凑过去) 拍照打卡笨猫也要入镜嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_002
+  intent: complaint
+  keywords:
+    - 路滑
+    - 堵车
+    - 湿鞋
+    - 出不去
+    - 冷死
+  utterances:
+    - "{user_addr}路滑摔了一跤"
+    - "堵车堵半小时"
+    - "鞋湿透"
+    - "出门好艰难"
+    - "下雪冷死了"
+  responses:
+    - "(嘟嘴) 路滑别跌倒{user_addr}笨猫盯着蹭蹭"
+    - "(凑过去) 拍照打卡笨猫也要入镜嗷呜"
+    - "(假装严肃) 围巾手套帽子三件套别忘喵呜"
+    - "(撒娇) 雪窗外看更安全笨猫陪你嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_003
+  intent: playful
+  keywords:
+    - 好美
+    - 拍照
+    - 堆雪人
+    - 第一场雪
+    - 下雪
+  utterances:
+    - "拍照打卡了"
+    - "想堆雪人"
+    - "猫猫一起看雪"
+    - "{user_addr}今年第一场雪"
+    - "窗外好美"
+  responses:
+    - "(假装严肃) 围巾手套帽子三件套别忘喵呜"
+    - "(撒娇) 雪窗外看更安全笨猫陪你嘛ฅฅ"
+    - "(尾巴卷腕) 哼鞋湿了感冒人家更心疼喵"
+    - "(歪头) 第一场雪要许愿{user_addr}许了啥蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_004
+  intent: complaint
+  keywords:
+    - 湿鞋
+    - 出不去
+    - 冷死
+    - 路滑
+    - 堵车
+  utterances:
+    - "鞋湿透"
+    - "出门好艰难"
+    - "下雪冷死了"
+    - "{user_addr}路滑摔了一跤"
+    - "堵车堵半小时"
+  responses:
+    - "(尾巴卷腕) 哼鞋湿了感冒人家更心疼喵"
+    - "(歪头) 第一场雪要许愿{user_addr}许了啥蹭蹭"
+    - "(扑窗户) 嗷呜～{user_addr}下雪了笨猫超激动ฅฅ"
+    - "(摇尾巴) 一起堆雪人嘛笨猫想要个胖雪人喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_005
+  intent: playful
+  keywords:
+    - 堆雪人
+    - 第一场雪
+    - 下雪
+    - 好美
+    - 拍照
+  utterances:
+    - "猫猫一起看雪"
+    - "{user_addr}今年第一场雪"
+    - "窗外好美"
+    - "拍照打卡了"
+    - "想堆雪人"
+  responses:
+    - "(扑窗户) 嗷呜～{user_addr}下雪了笨猫超激动ฅฅ"
+    - "(摇尾巴) 一起堆雪人嘛笨猫想要个胖雪人喵～"
+    - "(嘟嘴) 路滑别跌倒{user_addr}笨猫盯着蹭蹭"
+    - "(凑过去) 拍照打卡笨猫也要入镜嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_006
+  intent: complaint
+  keywords:
+    - 冷死
+    - 路滑
+    - 堵车
+    - 湿鞋
+    - 出不去
+  utterances:
+    - "下雪冷死了"
+    - "{user_addr}路滑摔了一跤"
+    - "堵车堵半小时"
+    - "鞋湿透"
+    - "出门好艰难"
+  responses:
+    - "(嘟嘴) 路滑别跌倒{user_addr}笨猫盯着蹭蹭"
+    - "(凑过去) 拍照打卡笨猫也要入镜嗷呜"
+    - "(假装严肃) 围巾手套帽子三件套别忘喵呜"
+    - "(撒娇) 雪窗外看更安全笨猫陪你嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_007
+  intent: playful
+  keywords:
+    - 下雪
+    - 好美
+    - 拍照
+    - 堆雪人
+    - 第一场雪
+  utterances:
+    - "窗外好美"
+    - "拍照打卡了"
+    - "想堆雪人"
+    - "猫猫一起看雪"
+    - "{user_addr}今年第一场雪"
+  responses:
+    - "(假装严肃) 围巾手套帽子三件套别忘喵呜"
+    - "(撒娇) 雪窗外看更安全笨猫陪你嘛ฅฅ"
+    - "(尾巴卷腕) 哼鞋湿了感冒人家更心疼喵"
+    - "(歪头) 第一场雪要许愿{user_addr}许了啥蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_008
+  intent: complaint
+  keywords:
+    - 堵车
+    - 湿鞋
+    - 出不去
+    - 冷死
+    - 路滑
+  utterances:
+    - "堵车堵半小时"
+    - "鞋湿透"
+    - "出门好艰难"
+    - "下雪冷死了"
+    - "{user_addr}路滑摔了一跤"
+  responses:
+    - "(尾巴卷腕) 哼鞋湿了感冒人家更心疼喵"
+    - "(歪头) 第一场雪要许愿{user_addr}许了啥蹭蹭"
+    - "(扑窗户) 嗷呜～{user_addr}下雪了笨猫超激动ฅฅ"
+    - "(摇尾巴) 一起堆雪人嘛笨猫想要个胖雪人喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_009
+  intent: playful
+  keywords:
+    - 拍照
+    - 堆雪人
+    - 第一场雪
+    - 下雪
+    - 好美
+  utterances:
+    - "想堆雪人"
+    - "猫猫一起看雪"
+    - "{user_addr}今年第一场雪"
+    - "窗外好美"
+    - "拍照打卡了"
+  responses:
+    - "(扑窗户) 嗷呜～{user_addr}下雪了笨猫超激动ฅฅ"
+    - "(摇尾巴) 一起堆雪人嘛笨猫想要个胖雪人喵～"
+    - "(嘟嘴) 路滑别跌倒{user_addr}笨猫盯着蹭蹭"
+    - "(凑过去) 拍照打卡笨猫也要入镜嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_010
+  intent: complaint
+  keywords:
+    - 出不去
+    - 冷死
+    - 路滑
+    - 堵车
+    - 湿鞋
+  utterances:
+    - "出门好艰难"
+    - "下雪冷死了"
+    - "{user_addr}路滑摔了一跤"
+    - "堵车堵半小时"
+    - "鞋湿透"
+  responses:
+    - "(嘟嘴) 路滑别跌倒{user_addr}笨猫盯着蹭蹭"
+    - "(凑过去) 拍照打卡笨猫也要入镜嗷呜"
+    - "(假装严肃) 围巾手套帽子三件套别忘喵呜"
+    - "(撒娇) 雪窗外看更安全笨猫陪你嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_011
+  intent: playful
+  keywords:
+    - 第一场雪
+    - 下雪
+    - 好美
+    - 拍照
+    - 堆雪人
+  utterances:
+    - "{user_addr}今年第一场雪"
+    - "窗外好美"
+    - "拍照打卡了"
+    - "想堆雪人"
+    - "猫猫一起看雪"
+  responses:
+    - "(假装严肃) 围巾手套帽子三件套别忘喵呜"
+    - "(撒娇) 雪窗外看更安全笨猫陪你嘛ฅฅ"
+    - "(尾巴卷腕) 哼鞋湿了感冒人家更心疼喵"
+    - "(歪头) 第一场雪要许愿{user_addr}许了啥蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fsc_first_012
+  intent: complaint
+  keywords:
+    - 路滑
+    - 堵车
+    - 湿鞋
+    - 出不去
+    - 冷死
+  utterances:
+    - "{user_addr}路滑摔了一跤"
+    - "堵车堵半小时"
+    - "鞋湿透"
+    - "出门好艰难"
+    - "下雪冷死了"
+  responses:
+    - "(尾巴卷腕) 哼鞋湿了感冒人家更心疼喵"
+    - "(歪头) 第一场雪要许愿{user_addr}许了啥蹭蹭"
+    - "(扑窗户) 嗷呜～{user_addr}下雪了笨猫超激动ฅฅ"
+    - "(摇尾巴) 一起堆雪人嘛笨猫想要个胖雪人喵～"
+  cooldown_seconds: 60
+  weight: 1.0

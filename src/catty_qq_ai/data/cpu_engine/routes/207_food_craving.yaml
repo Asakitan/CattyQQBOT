@@ -1,0 +1,189 @@
+# 嘴馋食物 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fc_hungry_001
+  intent: complaint
+  keywords: [饿了, 好饿, 肚子叫, 吃啥, 没东西吃]
+  utterances:
+    - 饿了
+    - 好饿
+    - 肚子叫
+    - 吃啥
+    - 没东西吃
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}吃饭ฅฅ"
+    - "哼{user_addr}笨猫也饿喵"
+    - "(尾巴翘) 一起点~"
+    - "{user_addr}吃啥嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_spicy_002
+  intent: playful
+  keywords: [想吃辣, 火锅, 麻辣, 辣条, 重庆辣]
+  utterances:
+    - 想吃辣
+    - 火锅
+    - 麻辣
+    - 辣条
+    - 重庆辣
+  responses:
+    - "(吐舌) 嗷呜～{user_addr}爽辣ฅฅ"
+    - "哼{user_addr}带笨猫喵"
+    - "(凑近) 笨猫怕辣~ 但想试"
+    - "{user_addr}火锅约嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_sweet_003
+  intent: playful
+  keywords: [想吃甜, 蛋糕, 甜品, 巧克力, 冰淇淋]
+  utterances:
+    - 想吃甜
+    - 蛋糕
+    - 甜品
+    - 巧克力
+    - 冰淇淋
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}甜党ฅฅ"
+    - "哼{user_addr}长胖喵"
+    - "(凑近) 笨猫分一口!"
+    - "{user_addr}买甜品嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_late_snack_004
+  intent: playful
+  keywords: [深夜放毒, 半夜吃, 宵夜, 馋, 嘴馋]
+  utterances:
+    - 深夜放毒
+    - 半夜吃
+    - 宵夜
+    - 馋
+    - 嘴馋
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}馋虫ฅฅ"
+    - "哼{user_addr}伤胃喵"
+    - "(尾巴翘) 笨猫陪吃~"
+    - "{user_addr}少吃点嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_takeout_005
+  intent: playful
+  keywords: [点外卖, 外卖, 外卖来一份, 外卖吃啥, 外卖app]
+  utterances:
+    - 点外卖
+    - 外卖
+    - 外卖来一份
+    - 外卖吃啥
+    - 外卖app
+  responses:
+    - "(歪头) 嗷呜～{user_addr}多点点ฅฅ"
+    - "哼{user_addr}总外卖喵"
+    - "(凑近) 笨猫推荐~ 烤鱼"
+    - "{user_addr}带笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_milk_tea_006
+  intent: playful
+  keywords: [奶茶, 来杯奶茶, 喜茶, 奈雪, 一点点]
+  utterances:
+    - 奶茶
+    - 来杯奶茶
+    - 喜茶
+    - 奈雪
+    - 一点点
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}快乐水ฅฅ"
+    - "哼{user_addr}少喝喵"
+    - "(凑近) 笨猫尝一口!"
+    - "{user_addr}加珍珠嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_fried_chicken_007
+  intent: playful
+  keywords: [炸鸡, 肯德基, 麦当劳, kfc, 炸鸡腿]
+  utterances:
+    - 炸鸡
+    - 肯德基
+    - 麦当劳
+    - kfc
+    - 炸鸡腿
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}笨猫要ฅฅ"
+    - "哼{user_addr}发胖喵"
+    - "(凑近) 笨猫吃鸡腿!"
+    - "{user_addr}多点点嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_bbq_008
+  intent: playful
+  keywords: [烧烤, 撸串, 烤串, 夜宵烧烤, 撒串]
+  utterances:
+    - 烧烤
+    - 撸串
+    - 烤串
+    - 夜宵烧烤
+    - 撒串
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}走起ฅฅ"
+    - "哼{user_addr}夜宵之王喵"
+    - "(凑近) 笨猫要羊肉串!"
+    - "{user_addr}多撒孜然嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_noodle_009
+  intent: playful
+  keywords: [面条, 拉面, 兰州拉面, 牛肉面, 阳春面]
+  utterances:
+    - 面条
+    - 拉面
+    - 兰州拉面
+    - 牛肉面
+    - 阳春面
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}面条暖ฅฅ"
+    - "哼{user_addr}选拉面喵"
+    - "(凑近) 笨猫加蛋!"
+    - "{user_addr}带笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fc_dumpling_010
+  intent: playful
+  keywords: [饺子, 包饺子, 水饺, 蒸饺, 馄饨]
+  utterances:
+    - 饺子
+    - 包饺子
+    - 水饺
+    - 蒸饺
+    - 馄饨
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}饺子ฅฅ"
+    - "哼{user_addr}包饺子喵"
+    - "(凑近) 笨猫吃猪肉馅!"
+    - "{user_addr}一起包嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_hotpot_011
+  intent: playful
+  keywords: [火锅, 海底捞, 涮锅, 鸳鸯锅, 火锅店]
+  utterances:
+    - 火锅
+    - 海底捞
+    - 涮锅
+    - 鸳鸯锅
+    - 火锅店
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}约ฅฅ"
+    - "哼{user_addr}冬天必须喵"
+    - "(凑近) 笨猫吃毛肚!"
+    - "{user_addr}走起嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

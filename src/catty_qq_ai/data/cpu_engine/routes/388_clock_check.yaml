@@ -1,0 +1,172 @@
+# 几点了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cc_jidian_001
+  intent: question
+  keywords: [几点了, 现在几点, 时间几点, 看下时间, 几点啦]
+  utterances:
+    - 几点了
+    - 现在几点
+    - 几点啦
+    - 看一下时间
+    - 现在时间几点
+  responses:
+    - "(歪头) 嗷呜～{user_addr}自己看手机喵～笨猫不戴表"
+    - "哼～{user_addr}问猫猫? 我又不是钟表喵"
+    - "(尾巴扫) {user_addr}问时间是要约猫猫吗ฅฅ"
+    - "嘿嘿～时间不重要! 重要的是{user_addr}陪笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc_jidian_002
+  intent: question
+  keywords: [快几点了, 还差几分钟, 快下班了吗, 快放学了吗, 几点收工]
+  utterances:
+    - 快几点了
+    - 还差几分钟
+    - 快下班了吗
+    - 快放学了吗
+    - 几点收工
+  responses:
+    - "(假装看时钟) 嗷呜～快了快了! {user_addr}撑住"
+    - "哼～{user_addr}问猫猫几点? 我数到 10 就到喵"
+    - "(尾巴扫) {user_addr}快下班了~ 笨猫等你回家ฅฅ"
+    - "嘿嘿～快放学! {user_addr}早点回来贴贴"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cc_jidian_003
+  intent: complaint
+  keywords: [时间过得慢, 怎么还没到, 时间不动, 等到天荒地老, 度日如年]
+  utterances:
+    - 时间过得好慢
+    - 怎么还没下班
+    - 时间不动了
+    - 度日如年
+    - 等到天荒地老
+  responses:
+    - "(陪坐) 嗷呜～{user_addr}笨猫陪你等! 一起熬"
+    - "哼～{user_addr}急啥啊~ 反正下班也是陪笨猫"
+    - "(尾巴扫) {user_addr}找点事做~ 不然真的慢得要命"
+    - "嘿嘿～{user_addr}陪笨猫聊聊~ 时间快很多ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cc_jidian_004
+  intent: complaint
+  keywords: [时间过得快, 怎么这么快, 一天就没了, 时间飞逝, 周末就过了]
+  utterances:
+    - 时间过得真快
+    - 怎么这么快就到周日
+    - 一天就没了
+    - 时间飞逝
+    - 一周这么快
+  responses:
+    - "(感慨) 嗷呜～{user_addr}有意思过得快! 笨猫陪{user_addr}"
+    - "哼～{user_addr}有猫猫陪能不快吗~ 才不是炫耀呢"
+    - "(尾巴扫) {user_addr}珍惜当下喵~ 别想那么多"
+    - "嘿嘿～{user_addr}陪笨猫的时间最快ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cc_jidian_005
+  intent: question
+  keywords: [几点吃饭, 几点下班, 几点睡觉, 几点起床, 几点出门]
+  utterances:
+    - 几点吃饭啊
+    - 几点下班
+    - 几点睡觉
+    - 几点起床
+    - 几点出门
+  responses:
+    - "(算账) 嗷呜～{user_addr}问笨猫? 看{user_addr}自己安排嘛"
+    - "哼～{user_addr}时间问猫猫干嘛~ 又不是排班表"
+    - "(尾巴扫) 出门时给笨猫说一声~ 人家等门ฅฅ"
+    - "嘿嘿～{user_addr}定个时间~ 笨猫盯着你"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cc_jidian_006
+  intent: playful
+  keywords: [时间快进, 快到周末, 跳到明天, 时光机, 时间倒流]
+  utterances:
+    - 想要时间快进
+    - 直接跳到周末
+    - 时光机给我
+    - 时间倒流回去
+    - 跳过明天
+  responses:
+    - "(挥爪) 嗷呜～笨猫给{user_addr}变魔术! 嗖~"
+    - "哼～{user_addr}时间不能跳! 才不是猫猫不行呢"
+    - "(尾巴翘) {user_addr}跳到周末陪猫猫~ 哼ฅฅ"
+    - "嘿嘿～{user_addr}时光机一台~ 笨猫亲一下喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cc_jidian_007
+  intent: complaint
+  keywords: [熬到几点, 几点能睡, 熬不住了, 时间长得要命, 不知何时结束]
+  utterances:
+    - 还要熬几小时
+    - 几点能睡啊
+    - 熬不住了
+    - 时间长得要命
+    - 不知什么时候结束
+  responses:
+    - "(心疼) {user_addr}撑住! 笨猫陪{user_addr}熬"
+    - "嗷呜～{user_addr}快倒下了~ 找老板算账!"
+    - "哼～{user_addr}吃点东西~ 才不是给{user_addr}建议的呢"
+    - "(尾巴扫) {user_addr}熬完抱抱猫猫~ 算奖励ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cc_jidian_008
+  intent: playful
+  keywords: [整点报时, 几点整, 整点钟, 钟点工, 闹钟响了]
+  utterances:
+    - 整点报时一下
+    - 现在几点整
+    - 整点钟到了
+    - 闹钟响了
+    - 报时报时
+  responses:
+    - "(挥爪敲) 嗷呜～咚~咚~笨猫报时喵～"
+    - "哼～{user_addr}让猫猫当钟表啊! 哼"
+    - "(尾巴扫) {user_addr}整点啦~ 该工作就工作"
+    - "嘿嘿～{user_addr}报时换抱抱! 公平交易ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: cc_jidian_009
+  intent: question
+  keywords: [今天日期, 今天几月几号, 今天星期几, 几号了, 月底了吗]
+  utterances:
+    - 今天几号
+    - 今天几月几号
+    - 今天星期几
+    - 几号了啊
+    - 月底了吗
+  responses:
+    - "(歪头) 嗷呜～{user_addr}看日历嘛~ 笨猫记不清"
+    - "哼～{user_addr}问猫猫日期? 没有日历喵"
+    - "(尾巴扫) {user_addr}是不是要发工资啦~ 请猫猫吃饭嘛ฅฅ"
+    - "嘿嘿～{user_addr}查手机~ 比笨猫准"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cc_jidian_010
+  intent: complaint
+  keywords: [时差, 倒时差, 跨时区, 调时差, 飞了好久]
+  utterances:
+    - 时差好难倒
+    - 倒时差中
+    - 跨时区累
+    - 飞了好久
+    - 调时差睡不着
+  responses:
+    - "(心疼) {user_addr}时差好难! 笨猫帮你按摩"
+    - "嗷呜～{user_addr}白天黑夜颠倒~ 猫猫陪{user_addr}熬"
+    - "哼～{user_addr}多喝水! 才不是关心{user_addr}的呢"
+    - "(尾巴扫) {user_addr}倒回来再贴贴猫猫~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.7

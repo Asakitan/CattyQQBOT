@@ -1,0 +1,172 @@
+# 背书背不下 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mt_beishu_001
+  intent: complaint
+  keywords: [背书, 背不下, 背了忘, 死记硬背, 课文]
+  utterances:
+    - 背书背不下
+    - 背了忘
+    - 死记硬背
+    - 背课文
+    - 背书痛苦
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}背书痛苦笨猫陪"
+    - "哼～背了忘正常啦, 多重复"
+    - "(尾巴搭) 死记硬背没用, 理解才行"
+    - "嗷呜～背完一段奖一个鱼干ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_beishu_002
+  intent: complaint
+  keywords: [背古诗, 背英语, 背单词, 背公式, 背史]
+  utterances:
+    - 背古诗
+    - 背英语
+    - 背单词
+    - 背公式
+    - 背史
+  responses:
+    - "(歪头) 嗷呜～{user_addr}背单词最难"
+    - "哼～古诗每天背一首"
+    - "(尾巴一甩) 公式理解了再背"
+    - "嗷呜～背史故事化记得快ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_beishu_003
+  intent: complaint
+  keywords: [脑容量小, 记性差, 记不住, 一秒就忘, 大脑过载]
+  utterances:
+    - 脑容量小
+    - 记性差
+    - 记不住
+    - 一秒就忘
+    - 大脑过载
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}记不住别急"
+    - "哼～脑子是用进废退"
+    - "(尾巴绕) 记性差多重复"
+    - "嗷呜～一秒就忘? 笨猫帮你记ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_beishu_004
+  intent: playful
+  keywords: [背书背出火, 不想背了, 烦背书, 闭上书, 摔书]
+  utterances:
+    - 背书背出火
+    - 不想背了
+    - 烦背书
+    - 闭上书
+    - 摔书
+  responses:
+    - "(炸毛) 嗷呜～别摔书! 书无辜"
+    - "哼～烦了就歇歇, 别硬背"
+    - "(尾巴搭) 闭上书出去走"
+    - "嗷呜～想背的时候再背ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_beishu_005
+  intent: playful
+  keywords: [口诀, 记忆方法, 联想记忆, 谐音梗记, 思维导图]
+  utterances:
+    - 记忆口诀
+    - 联想记忆
+    - 谐音梗记
+    - 思维导图
+    - 怎么记
+  responses:
+    - "(歪头) 嗷呜～口诀最好用"
+    - "哼～联想记忆笨猫推荐"
+    - "(尾巴一甩) 思维导图清晰"
+    - "嗷呜～谐音梗有趣ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_beishu_006
+  intent: complaint
+  keywords: [背一半, 背到中间, 中间断, 背一半忘, 卡壳]
+  utterances:
+    - 背一半
+    - 背到中间
+    - 中间断
+    - 背一半忘
+    - 卡壳
+  responses:
+    - "(摇头) 嗷呜～{user_addr}卡壳别急"
+    - "哼～从头来嘛"
+    - "(尾巴搭) 中间断笨猫帮提"
+    - "嗷呜～多背几遍就熟了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_beishu_007
+  intent: playful
+  keywords: [背给我听, 检查作业, 抽背, 让我背, 帮我抽]
+  utterances:
+    - 背给我听
+    - 检查作业
+    - 抽背
+    - 让我背
+    - 帮我抽
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}背! 笨猫听"
+    - "哼～抽背我来"
+    - "(尾巴一甩) 检查作业笨猫严格"
+    - "嗷呜～背得好奖鱼干ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_beishu_008
+  intent: complaint
+  keywords: [背书背到困, 背着背着睡, 背书入眠, 不想动, 太催眠]
+  utterances:
+    - 背到困
+    - 背着背着睡
+    - 背书入眠
+    - 不想动
+    - 太催眠
+  responses:
+    - "(笑) 嗷呜～{user_addr}背书是哄睡咒"
+    - "哼～背着睡也是一种成就"
+    - "(尾巴一甩) 太催眠就晚上背"
+    - "嗷呜～背书入眠最快ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_beishu_009
+  intent: complaint
+  keywords: [明天要默写, 明天要背, 时间不够, 来不及背, 临时抱佛脚]
+  utterances:
+    - 明天要默写
+    - 明天要背
+    - 时间不够
+    - 来不及背
+    - 临时抱佛脚
+  responses:
+    - "(着急) 嗷呜～{user_addr}快背! 笨猫陪"
+    - "哼～平时不背临时抱"
+    - "(尾巴搭) 抱佛脚也要抱稳"
+    - "嗷呜～默写笨猫祝{user_addr}过ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mt_beishu_010
+  intent: playful
+  keywords: [背完了, 终于背完, 背完了开心, 背完放松, 背完结束]
+  utterances:
+    - 背完了
+    - 终于背完
+    - 背完了开心
+    - 背完放松
+    - 背完结束
+  responses:
+    - "(欢呼) 嗷呜～{user_addr}背完啦! 笨猫骄傲"
+    - "哼～该奖励了"
+    - "(尾巴翘) 背完放松抱猫猫"
+    - "嗷呜～庆祝! 鱼干来一份ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

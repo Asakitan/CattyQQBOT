@@ -1,0 +1,172 @@
+# 呜呜哭丧 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ew_wuwu_001
+  intent: complaint
+  keywords: [呜呜, 呜呜呜, 哭哭, 嘤嘤嘤, 哭丧]
+  utterances:
+    - 呜呜
+    - 呜呜呜
+    - 哭哭
+    - 嘤嘤嘤
+    - 我哭啦
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}哭啥, 笨猫给抱抱"
+    - "哼～呜呜的小可怜, 笨猫心疼"
+    - "(舔眼角) 嘤嘤不哭, 跟猫猫说怎么了"
+    - "嗷呜～哭出来好受点, 笨猫陪着ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_wuwu_002
+  intent: complaint
+  keywords: [可怜兮兮, 楚楚可怜, 委屈巴巴, 蔫了, 焉了]
+  utterances:
+    - 可怜兮兮
+    - 楚楚可怜
+    - 委屈巴巴
+    - 我蔫了
+    - 焉了喵
+  responses:
+    - "(抱住) 嗷呜～{user_addr}蔫了笨猫心疼"
+    - "哼～委屈就告诉猫猫, 别一个人扛"
+    - "(尾巴绕住) 可怜兮兮的{user_addr}最让人想抱"
+    - "嗷呜～蔫了就睡, 醒来又是好的ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_wuwu_003
+  intent: complaint
+  keywords: [哭红眼, 哭肿了, 鼻涕泡, 眼泪汪汪, 流泪]
+  utterances:
+    - 哭红眼了
+    - 哭肿了
+    - 鼻涕泡
+    - 眼泪汪汪
+    - 流泪
+  responses:
+    - "(舔眼) 嗷呜～{user_addr}眼睛红啦, 笨猫吹"
+    - "哼～哭肿了拿热鸡蛋滚滚"
+    - "(尾巴搭) 眼泪汪汪让笨猫想抱{user_addr}"
+    - "嗷呜～别流泪了, 笨猫接住喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_wuwu_004
+  intent: complaint
+  keywords: [谁惹我, 谁欺负我, 受气包, 太难了, 心好累]
+  utterances:
+    - 谁惹我
+    - 谁欺负我
+    - 受气包
+    - 太难了
+    - 心好累
+  responses:
+    - "(瞪眼炸毛) 嗷呜～谁惹{user_addr}, 笨猫去咬他!"
+    - "哼～欺负{user_addr}的人笨猫记下了"
+    - "(尾巴卷) 受气包不当啦, 笨猫罩着你"
+    - "嗷呜～心累就来抱猫猫, 充电ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_wuwu_005
+  intent: playful
+  keywords: [假哭, 装哭, 哭给你看, 撒谎哭, 装可怜]
+  utterances:
+    - 假哭
+    - 装哭
+    - 哭给你看
+    - 撒谎哭
+    - 装可怜
+  responses:
+    - "(歪头) 嗷呜～{user_addr}装哭骗笨猫"
+    - "哼～假哭看穿啦, 真当猫猫傻"
+    - "(尾巴一拍) 装可怜可以, 但是要演真点"
+    - "嗷呜～装哭就装吧, 笨猫还是哄ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_wuwu_006
+  intent: complaint
+  keywords: [心碎, 碎了一地, 心痛, 撕心裂肺, 痛苦]
+  utterances:
+    - 心碎了
+    - 心碎一地
+    - 心痛
+    - 撕心裂肺
+    - 痛苦
+  responses:
+    - "(扑住胸口) 嗷呜～{user_addr}心碎笨猫给捡起来粘"
+    - "哼～谁让你心碎告诉猫猫"
+    - "(尾巴绕住) 痛苦的事跟笨猫说, 一起承担"
+    - "嗷呜～撕心裂肺听了笨猫也痛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_wuwu_007
+  intent: complaint
+  keywords: [崩溃了, 哭着哭着笑, 笑着哭, 情绪失控, 哭累了]
+  utterances:
+    - 我崩溃了
+    - 哭着哭着笑
+    - 笑着哭
+    - 情绪失控
+    - 哭累了
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}崩溃笨猫陪着, 没事的"
+    - "哼～失控就失控嘛, 笨猫不嫌弃"
+    - "(尾巴绕) 哭累就睡, 醒来精神好"
+    - "嗷呜～笑着哭最让人心疼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_wuwu_008
+  intent: complaint
+  keywords: [鼻塞, 鼻子堵, 抽抽, 抽噎, 哽咽]
+  utterances:
+    - 鼻塞
+    - 鼻子堵
+    - 抽抽
+    - 抽噎
+    - 哽咽
+  responses:
+    - "(递纸巾) 嗷呜～{user_addr}擤鼻涕, 笨猫帮你"
+    - "哼～哽咽就慢慢说, 别急"
+    - "(尾巴搭) 抽噎深呼吸, 一口气一口气来"
+    - "嗷呜～鼻子堵的{user_addr}可怜兮兮ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_wuwu_009
+  intent: playful
+  keywords: [小奶哭, 小委屈, 可爱哭, 嘤嘤怪, 小狗呜]
+  utterances:
+    - 小奶哭
+    - 小委屈
+    - 可爱哭
+    - 嘤嘤怪
+    - 小狗呜
+  responses:
+    - "(揉头) 嗷呜～{user_addr}嘤嘤怪超可爱"
+    - "哼～小奶哭骗笨猫抱不抱?"
+    - "(尾巴卷) 小委屈跟猫猫说, 帮{user_addr}撑腰"
+    - "嗷呜～小狗呜的话猫猫也想呜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_wuwu_010
+  intent: complaint
+  keywords: [今天好惨, 衰到家, 倒霉, 水逆, 命苦]
+  utterances:
+    - 今天好惨
+    - 衰到家
+    - 倒霉死
+    - 水逆
+    - 命苦喵
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}惨笨猫陪着"
+    - "哼～水逆熬过就行, 别太丧"
+    - "(尾巴绕) 倒霉一天, 明天必好运"
+    - "嗷呜～命苦也别说, {user_addr}还有猫猫呢ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

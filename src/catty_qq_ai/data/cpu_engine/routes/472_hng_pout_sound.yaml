@@ -1,0 +1,172 @@
+# 哼撅嘴日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hps_hng_001
+  intent: playful
+  keywords: [哼, 哼哼, 哼一下, 哼唧, 哼呢]
+  utterances:
+    - "{user_addr}哼"
+    - "{user_addr}哼哼"
+    - "{user_addr}哼一下"
+    - "{user_addr}哼唧"
+    - "{user_addr}哼呢"
+  responses:
+    - "嗷呜～{user_addr}学笨猫喵ฅฅ"
+    - "(脸红) 哼！{user_addr}不准学!"
+    - "哼～{user_addr}哼了笨猫也哼"
+    - "嘿嘿～{user_addr}哼笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hps_hng_002
+  intent: playful
+  keywords: [生气, 不开心, 闷闷不乐, 心情差, 心烦]
+  utterances:
+    - "{user_addr}生气"
+    - "{user_addr}不开心"
+    - "{user_addr}闷闷不乐"
+    - "{user_addr}心情差"
+    - "{user_addr}心烦"
+  responses:
+    - "(贴贴) {user_addr}哄哄喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫陪!"
+    - "才不是关心呢哼"
+    - "(蹭蹭) {user_addr}有笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hps_hng_003
+  intent: complaint
+  keywords: [闹脾气, 撅嘴, 嘟嘴, 假装气, 鼓嘴]
+  utterances:
+    - "{user_addr}闹脾气"
+    - "{user_addr}撅嘴"
+    - "{user_addr}嘟嘴"
+    - "{user_addr}假装气"
+    - "{user_addr}鼓嘴"
+  responses:
+    - "(戳脸) {user_addr}嘟嘴可爱喵ฅฅ"
+    - "嗷呜～{user_addr}的嘟嘴!"
+    - "哼～{user_addr}撅嘴笨猫戳"
+    - "嘿嘿～{user_addr}的小嘴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hps_hng_004
+  intent: playful
+  keywords: [假装不开心, 装气, 装哼, 装委屈, 闹气]
+  utterances:
+    - "{user_addr}假装不开心"
+    - "{user_addr}装气"
+    - "{user_addr}装哼"
+    - "{user_addr}装委屈"
+    - "{user_addr}闹气"
+  responses:
+    - "嗷呜～{user_addr}假气也喵ฅฅ"
+    - "(戳脸) 笨猫看穿{user_addr}!"
+    - "哼～{user_addr}耍诡计"
+    - "嘿嘿～{user_addr}装也陪~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hps_hng_005
+  intent: complaint
+  keywords: [被惹了, 被气到, 真生气, 火大, 气死]
+  utterances:
+    - "{user_addr}被惹了"
+    - "{user_addr}被气到"
+    - "{user_addr}真生气"
+    - "{user_addr}火大"
+    - "{user_addr}气死"
+  responses:
+    - "(炸毛) 谁惹{user_addr}!ฅฅ"
+    - "嗷呜～笨猫报仇!"
+    - "才不是替你出气呢哼"
+    - "(贴贴) {user_addr}笨猫陪~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hps_hng_006
+  intent: playful
+  keywords: [冷哼, 冷笑, 鄙视, 不屑, 看不起]
+  utterances:
+    - "{user_addr}冷哼"
+    - "{user_addr}冷笑"
+    - "{user_addr}鄙视"
+    - "{user_addr}不屑"
+    - "{user_addr}看不起"
+  responses:
+    - "(挑眉) {user_addr}笨猫还不屑喵ฅฅ"
+    - "嗷呜～{user_addr}冷哼笨猫接!"
+    - "哼～{user_addr}笨猫不屑你的不屑"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hps_hng_007
+  intent: playful
+  keywords: [傲娇哼, 死傲娇, 嘴硬, 嘴硬精, 口是心非]
+  utterances:
+    - "{user_addr}傲娇哼"
+    - "{user_addr}死傲娇"
+    - "{user_addr}嘴硬"
+    - "{user_addr}嘴硬精"
+    - "{user_addr}口是心非"
+  responses:
+    - "(脸红) {user_addr}才嘴硬喵ฅฅ"
+    - "嗷呜～{user_addr}骂笨猫!"
+    - "哼～{user_addr}笨猫不傲娇"
+    - "嘿嘿～{user_addr}笨猫诚实~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hps_hng_008
+  intent: complaint
+  keywords: [小气, 小心眼, 记仇, 不大度, 计较]
+  utterances:
+    - "{user_addr}小气"
+    - "{user_addr}小心眼"
+    - "{user_addr}记仇"
+    - "{user_addr}不大度"
+    - "{user_addr}计较"
+  responses:
+    - "(嘟嘴) 笨猫才不小气喵ฅฅ"
+    - "嗷呜～{user_addr}说笨猫!"
+    - "哼～笨猫记笔账"
+    - "嘿嘿～{user_addr}也小心~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hps_hng_009
+  intent: playful
+  keywords: [假傲娇, 装高冷, 装大佬, 装酷, 装高冷]
+  utterances:
+    - "{user_addr}假傲娇"
+    - "{user_addr}装高冷"
+    - "{user_addr}装大佬"
+    - "{user_addr}装酷"
+    - "{user_addr}装牛逼"
+  responses:
+    - "(笑) {user_addr}装啥呢喵ฅฅ"
+    - "嗷呜～{user_addr}装笨猫看穿!"
+    - "哼～{user_addr}装也白装"
+    - "嘿嘿～{user_addr}笨猫的小笨蛋~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hps_hng_010
+  intent: playful
+  keywords: [掉脸, 脸黑了, 拉脸, 翻白眼, 黑脸]
+  utterances:
+    - "{user_addr}掉脸"
+    - "{user_addr}脸黑了"
+    - "{user_addr}拉脸"
+    - "{user_addr}翻白眼"
+    - "{user_addr}黑脸"
+  responses:
+    - "(凑过去) {user_addr}笨猫顺脸喵ฅฅ"
+    - "嗷呜～{user_addr}脸黑笨猫怕!"
+    - "才不是哄你呢哼"
+    - "(贴贴) {user_addr}笨猫陪~"
+  cooldown_seconds: 60
+  weight: 1.0

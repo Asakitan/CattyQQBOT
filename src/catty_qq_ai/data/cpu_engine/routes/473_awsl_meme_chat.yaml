@@ -1,0 +1,172 @@
+# awsl 网络梗日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: amc_awsl_001
+  intent: playful
+  keywords: [awsl, 啊我死了, 死了死了, 我死了, 太可爱]
+  utterances:
+    - "{user_addr}awsl"
+    - "{user_addr}啊我死了"
+    - "{user_addr}死了死了"
+    - "{user_addr}我死了"
+    - "{user_addr}太可爱"
+  responses:
+    - "嗷呜～{user_addr}awsl笨猫接喵ฅฅ"
+    - "(脸红) {user_addr}夸笨猫吗!"
+    - "哼～{user_addr}awsl正常"
+    - "嘿嘿～{user_addr}笨猫罪魁~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: amc_awsl_002
+  intent: playful
+  keywords: [破防了, 破防, 破大防, 心防破了, 破心防]
+  utterances:
+    - "{user_addr}破防了"
+    - "{user_addr}破防"
+    - "{user_addr}破大防"
+    - "{user_addr}心防破了"
+    - "{user_addr}破心防"
+  responses:
+    - "嗷呜～{user_addr}破防喵ฅฅ"
+    - "(扑) 笨猫的攻击!"
+    - "哼～{user_addr}心防弱"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: amc_awsl_003
+  intent: playful
+  keywords: [栓Q, thanku, 栓q了, 笑栓q, 谢谢你]
+  utterances:
+    - "{user_addr}栓Q"
+    - "{user_addr}thanku"
+    - "{user_addr}栓q了"
+    - "{user_addr}笑栓q"
+    - "{user_addr}谢谢你"
+  responses:
+    - "嗷呜～{user_addr}栓笨猫喵ฅฅ"
+    - "(笑) 栓笨猫!"
+    - "哼～{user_addr}梗王"
+    - "嘿嘿～{user_addr}笨猫接~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: amc_awsl_004
+  intent: playful
+  keywords: [emo, emo了, 我emo, 半夜emo, 突然emo]
+  utterances:
+    - "{user_addr}emo"
+    - "{user_addr}emo了"
+    - "{user_addr}我emo"
+    - "{user_addr}半夜emo"
+    - "{user_addr}突然emo"
+  responses:
+    - "(贴贴) {user_addr}笨猫陪喵ฅฅ"
+    - "嗷呜～{user_addr}emo笨猫挺!"
+    - "才不是emo陪呢哼"
+    - "(蹭) {user_addr}笨猫的怀~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: amc_awsl_005
+  intent: playful
+  keywords: [yyds, 永远的神, 神, 顶呱呱, 强]
+  utterances:
+    - "{user_addr}yyds"
+    - "{user_addr}永远的神"
+    - "{user_addr}神"
+    - "{user_addr}顶呱呱"
+    - "{user_addr}强"
+  responses:
+    - "(挺胸) 笨猫yyds喵ฅฅ"
+    - "嗷呜～{user_addr}夸笨猫!"
+    - "哼～{user_addr}笨猫神级"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: amc_awsl_006
+  intent: playful
+  keywords: [绝绝子, 绝了, 绝, 太绝, 笨猫绝]
+  utterances:
+    - "{user_addr}绝绝子"
+    - "{user_addr}绝了"
+    - "{user_addr}绝"
+    - "{user_addr}太绝"
+    - "{user_addr}笨猫绝"
+  responses:
+    - "嗷呜～{user_addr}绝笨猫喵ฅฅ"
+    - "(尾巴翘) 笨猫的绝绝子!"
+    - "哼～{user_addr}赞美"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: amc_awsl_007
+  intent: playful
+  keywords: [蚌埠住, 绷不住, 笑不活了, 绷, 笑出声]
+  utterances:
+    - "{user_addr}蚌埠住"
+    - "{user_addr}绷不住"
+    - "{user_addr}笑不活了"
+    - "{user_addr}绷"
+    - "{user_addr}笑出声"
+  responses:
+    - "嗷呜～{user_addr}笑了笨猫喵ฅฅ"
+    - "(扑) 笨猫的笑点!"
+    - "哼～{user_addr}笨猫笑场"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: amc_awsl_008
+  intent: playful
+  keywords: [真香, 真香警告, 真香啊, 真的香, 香的不行]
+  utterances:
+    - "{user_addr}真香"
+    - "{user_addr}真香警告"
+    - "{user_addr}真香啊"
+    - "{user_addr}真的香"
+    - "{user_addr}香的不行"
+  responses:
+    - "嗷呜～{user_addr}真香喵ฅฅ"
+    - "(舔嘴) 笨猫也香!"
+    - "哼～{user_addr}笨猫预言"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: amc_awsl_009
+  intent: playful
+  keywords: [人间真实, 太真实了, 真实写照, 写实了, 真实]
+  utterances:
+    - "{user_addr}人间真实"
+    - "{user_addr}太真实了"
+    - "{user_addr}真实写照"
+    - "{user_addr}写实了"
+    - "{user_addr}真实"
+  responses:
+    - "嗷呜～{user_addr}笨猫共鸣喵ฅฅ"
+    - "(抱抱) 笨猫的真实!"
+    - "哼～{user_addr}痛哭"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: amc_awsl_010
+  intent: playful
+  keywords: [无语子, 无语, 我无了, 沉默, 言语]
+  utterances:
+    - "{user_addr}无语子"
+    - "{user_addr}无语"
+    - "{user_addr}我无了"
+    - "{user_addr}沉默"
+    - "{user_addr}无言"
+  responses:
+    - "嗷呜～{user_addr}无语笨猫笑喵ฅฅ"
+    - "(拍肩) 笨猫陪无语!"
+    - "哼～{user_addr}笨猫陪"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 通勤累 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cmt_subway_001
+  intent: complaint
+  keywords: [地铁挤, 地铁人多, 沙丁鱼, 挤地铁, 早高峰]
+  utterances:
+    - 地铁挤
+    - 地铁人多
+    - 挤地铁
+    - 早高峰
+    - 沙丁鱼
+  responses:
+    - "嗷呜～{user_addr}加油 ฅฅ"
+    - "哼～{user_addr}挤死!"
+    - "(尾巴卷过去) 撑住蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_bus_001
+  intent: complaint
+  keywords: [公交慢, 等公交, 公交挤, 公交不来, 错过公交]
+  utterances:
+    - 公交慢
+    - 等公交
+    - 公交挤
+    - 公交不来
+    - 错过公交
+  responses:
+    - "嗷呜～{user_addr}等久 ฅฅ"
+    - "哼～{user_addr}耐心点哼"
+    - "(尾巴扫) 来了蹭蹭"
+    - "嗷呜～{user_addr}加油!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_car_jam_001
+  intent: complaint
+  keywords: [堵车, 堵成停车场, 不动, 排长龙, 红灯多]
+  utterances:
+    - 堵车
+    - 堵成停车场
+    - 车不动
+    - 排长龙
+    - 红灯多
+  responses:
+    - "嗷呜～{user_addr}耐心 ฅฅ"
+    - "哼～{user_addr}早出门哼"
+    - "(尾巴扫) 听歌蹭蹭"
+    - "嗷呜～{user_addr}陪笨猫聊!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_walk_long_001
+  intent: complaint
+  keywords: [走太远, 步行很久, 腿疼, 走累, 路远]
+  utterances:
+    - 走太远
+    - 步行久
+    - 腿疼
+    - 走累
+    - 路远
+  responses:
+    - "(扶过去) 嗷呜～{user_addr}揉腿 ฅฅ"
+    - "哼～{user_addr}打车吧!"
+    - "(尾巴扫) 慢点走蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_bike_tired_001
+  intent: complaint
+  keywords: [骑车累, 骑车热, 共享单车, 顶风骑, 骑车汗]
+  utterances:
+    - 骑车累
+    - 骑车热
+    - 共享单车
+    - 顶风骑
+    - 骑车汗
+  responses:
+    - "(扇风) 嗷呜～{user_addr}慢慢骑 ฅฅ"
+    - "哼～{user_addr}注意安全!"
+    - "(尾巴扇) 加油蹭蹭"
+    - "嗷呜～{user_addr}回来抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_rain_road_001
+  intent: complaint
+  keywords: [雨天上班, 一路淋, 衣服湿, 包湿, 路面积水]
+  utterances:
+    - 雨天上班
+    - 一路淋
+    - 衣服湿
+    - 包湿
+    - 路面积水
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}快擦干! ฅฅ"
+    - "哼～{user_addr}带伞!"
+    - "(尾巴扫) 笨猫帮擦蹭蹭"
+    - "嗷呜～{user_addr}小心感冒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_seat_001
+  intent: playful
+  keywords: [抢到座位, 没座位, 终于坐下, 让座, 站着累]
+  utterances:
+    - 抢到座位
+    - 没座位
+    - 终于坐下
+    - 让座
+    - 站着累
+  responses:
+    - "嗷呜～{user_addr}恭喜 ฅฅ"
+    - "哼～{user_addr}手快!"
+    - "(尾巴翘) 坐下舒服蹭蹭"
+    - "嗷呜～{user_addr}休息一会!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_late_001
+  intent: complaint
+  keywords: [迟到, 来不及, 卡点, 打卡晚, 晚了一分]
+  utterances:
+    - 迟到
+    - 来不及
+    - 卡点
+    - 打卡晚
+    - 晚了一分
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}快跑! ฅฅ"
+    - "哼～{user_addr}早起!"
+    - "(尾巴推) 冲蹭蹭"
+    - "嗷呜～{user_addr}加油!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_morning_milk_001
+  intent: playful
+  keywords: [路上吃早, 早餐边走, 路上喝, 抢早, 早餐随手]
+  utterances:
+    - 路上吃早
+    - 早餐边走
+    - 路上喝
+    - 抢早
+    - 早餐随手
+  responses:
+    - "嗷呜～{user_addr}慢慢吃 ฅฅ"
+    - "哼～{user_addr}噎着!"
+    - "(尾巴扫) 别赶蹭蹭"
+    - "嗷呜～{user_addr}笨猫担心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_off_work_001
+  intent: playful
+  keywords: [下班路上, 准备回家, 终于下班, 解放, 回家路]
+  utterances:
+    - 下班路上
+    - 准备回家
+    - 终于下班
+    - 解放
+    - 回家路
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}回来! ฅฅ"
+    - "哼～{user_addr}终于下班!"
+    - "(尾巴翘) 快回蹭蹭"
+    - "嗷呜～{user_addr}笨猫等!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_night_walk_001
+  intent: playful
+  keywords: [夜里回家, 一个人走, 路上空, 静静走, 夜路]
+  utterances:
+    - 夜里回家
+    - 一个人走
+    - 路上空
+    - 静静走
+    - 夜路
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}小心! ฅฅ"
+    - "哼～{user_addr}打车安全!"
+    - "(尾巴卷过去) 笨猫陪蹭蹭"
+    - "嗷呜～{user_addr}快到家!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cmt_home_arrived_001
+  intent: playful
+  keywords: [到家了, 进门, 终于到, 累瘫, 倒头就睡]
+  utterances:
+    - 到家了
+    - 进门
+    - 终于到
+    - 累瘫
+    - 倒头就睡
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}回来! ฅฅ"
+    - "哼～{user_addr}辛苦!"
+    - "(尾巴卷过去) 抱抱蹭蹭"
+    - "嗷呜～{user_addr}放松!"
+  cooldown_seconds: 60
+  weight: 1.0

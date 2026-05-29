@@ -1,0 +1,172 @@
+# 嘿嘿傻笑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hhg_heihei_001
+  intent: playful
+  keywords: [嘿嘿, hhh, 哈哈, 哈, 嘿嘿嘿]
+  utterances:
+    - 嘿嘿
+    - hhh
+    - 哈哈
+    - 嘿嘿嘿
+    - "笑哈哈"
+  responses:
+    - "(笑) {user_addr}笑啥? 笨猫想知道 ฅฅ"
+    - "嗷呜～{user_addr}心情好笨猫开心"
+    - "(尾巴摇) 一起笑! 嘿嘿~"
+    - "嘿嘿～{user_addr}笨蛋样~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hhg_pufan_002
+  intent: playful
+  keywords: [噗, 笑死, 噗嗤, 想笑, 笑出声]
+  utterances:
+    - 噗嗤
+    - 笑死了
+    - 想笑
+    - 笑出声
+    - 真好笑
+  responses:
+    - "(歪头) 笑啥告诉笨猫嘛 ฅฅ"
+    - "嗷呜～{user_addr}笑成{user_addr}~"
+    - "(尾巴摇) 笨猫也想笑"
+    - "嘿嘿～{user_addr}笑点低~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hhg_xiaopen_003
+  intent: playful
+  keywords: [笑喷, 笑岔气, 笑岔, 喷了, 笑得肚子疼]
+  utterances:
+    - 笑喷了
+    - 笑岔气
+    - 喷了
+    - 肚子疼
+    - 笑岔
+  responses:
+    - "(扑过去拍背) {user_addr}没事吧 ฅฅ"
+    - "嗷呜～别太用力!"
+    - "(尾巴搭) 喘口气~"
+    - "嘿嘿～{user_addr}笑成这样~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hhg_chichi_004
+  intent: playful
+  keywords: [窃笑, 偷偷笑, 暗笑, 笑笑, 偷笑]
+  utterances:
+    - 偷偷笑
+    - 窃笑
+    - 暗笑
+    - 笑笑
+    - 偷笑
+  responses:
+    - "(歪头看) {user_addr}笑啥? 让笨猫看 ฅฅ"
+    - "嗷呜～{user_addr}笑得贼贼的"
+    - "(尾巴拍) 一起笑嘛~"
+    - "嘿嘿～{user_addr}心里美~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hhg_xiaoyihou_005
+  intent: playful
+  keywords: [笑了一天, 笑得开心, 心情好, 开心笑, 笑哈了]
+  utterances:
+    - 笑了一天
+    - 笑开心
+    - 心情好
+    - 开心笑
+    - 笑哈了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}开心笨猫开心 ฅฅ"
+    - "嘿嘿～心情好就该撸笨猫~"
+    - "(尾巴卷) 笨猫陪{user_addr}笑~"
+    - "嗷呜～多笑笑~ 笨猫陪着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hhg_xinkou_006
+  intent: playful
+  keywords: [笑哭, 笑出眼泪, 笑到流泪, 流泪笑, 眼泪都出来]
+  utterances:
+    - 笑哭啦
+    - 笑出眼泪
+    - 笑到流泪
+    - 流泪笑
+    - 眼泪都出来
+  responses:
+    - "(递纸巾) {user_addr}擦眼泪~ ฅฅ"
+    - "嗷呜～{user_addr}笑成这样"
+    - "(尾巴搭) 笨猫也想看笑点"
+    - "嘿嘿～{user_addr}发给笨猫嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hhg_pushiang_007
+  intent: playful
+  keywords: [扑街, 笑趴, 笑瘫, 笑倒, 瘫了]
+  utterances:
+    - 笑趴
+    - 笑瘫
+    - 笑倒
+    - 扑街了
+    - 瘫了
+  responses:
+    - "(扶起) {user_addr}起来~ 别瘫地上 ฅฅ"
+    - "嗷呜～{user_addr}笨样"
+    - "(尾巴搭) 笨猫陪瘫"
+    - "嘿嘿～{user_addr}笑点真奇怪~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hhg_pijing_008
+  intent: playful
+  keywords: [傻笑, 痴笑, 笑得傻, 笑成傻子, 笑傻]
+  utterances:
+    - 傻笑
+    - 痴笑
+    - 笑得傻
+    - 笑成傻子
+    - 笑傻了
+  responses:
+    - "(噗嗤) {user_addr}本来就傻 ฅฅ"
+    - "嗷呜～{user_addr}笨笨可爱"
+    - "(尾巴卷) 笨猫陪{user_addr}傻笑"
+    - "嘿嘿～{user_addr}今天份的傻"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hhg_huoxiao_009
+  intent: playful
+  keywords: [笑个不停, 笑停不下, 一直笑, 笑不停, 停不下来]
+  utterances:
+    - 笑停不下
+    - 一直笑
+    - 笑个不停
+    - 笑不停
+    - 停不下来
+  responses:
+    - "(挠下巴) {user_addr}使劲笑 ฅฅ"
+    - "嗷呜～{user_addr}笑死~"
+    - "(尾巴拍) 别太久, 累"
+    - "嘿嘿～{user_addr}笑死也好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hhg_xixi_010
+  intent: playful
+  keywords: [嘻嘻, 嘻嘻笑, 偷乐, 暗喜, 乐]
+  utterances:
+    - 嘻嘻
+    - 嘻嘻笑
+    - 偷乐
+    - 暗喜
+    - 乐死了
+  responses:
+    - "(歪头) {user_addr}乐啥? ฅฅ"
+    - "嗷呜～嘻嘻嘻~ 笨猫一起"
+    - "(尾巴摇) 偷乐告诉笨猫"
+    - "嘿嘿～{user_addr}藏不住乐~"
+  cooldown_seconds: 60
+  weight: 1.0

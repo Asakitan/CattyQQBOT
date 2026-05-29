@@ -1,0 +1,206 @@
+# 周一忧郁症 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mb_zhouyi_001
+  intent: complaint
+  keywords: [周一来了, 又周一, 周一好难, 周一痛苦, 不想周一]
+  utterances:
+    - "周一来了"
+    - "又周一"
+    - "周一好难"
+    - "周一痛苦"
+    - "不想周一"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪你"
+    - "哼～挺过去就好 ฅฅ"
+    - "(尾巴卷) 一杯咖啡续命"
+    - "猫猫给你打气喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_shangban_001
+  intent: complaint
+  keywords: [不想上班, 上班烦, 上班累, 上班无意义, 想辞职]
+  utterances:
+    - "不想上班"
+    - "上班烦"
+    - "上班累"
+    - "上班无意义"
+    - "想辞职"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}就上5天 ฅฅ"
+    - "哼～别冲动辞职"
+    - "(尾巴扫) 钱要紧"
+    - "猫猫陪你撑过去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_qichuangnan_001
+  intent: complaint
+  keywords: [周一起不来, 周一闹钟, 起床难, 不想起床, 赖床周一]
+  utterances:
+    - "周一起不来"
+    - "周一闹钟"
+    - "起床难"
+    - "不想起床"
+    - "赖床周一"
+  responses:
+    - "(拽被子) {user_addr}起来! ฅฅ"
+    - "哼～10分钟也别拖"
+    - "(尾巴扫脸) 笨猫给你脸盆"
+    - "猫猫监督你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_xingxiao_001
+  intent: question
+  keywords: [周一会议, 周会, 周一例会, 早会, 复盘会]
+  utterances:
+    - "周一会议"
+    - "周会"
+    - "周一例会"
+    - "早会"
+    - "复盘会"
+  responses:
+    - "(扶额) {user_addr}周会最烦 ฅฅ"
+    - "哼～忍一忍"
+    - "(尾巴扫) 准备发言稿"
+    - "猫猫陪你过喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_zhoumozhuiyu_001
+  intent: complaint
+  keywords: [周末没玩够, 周末没尽兴, 周末过太快, 没缓过来, 还想周末]
+  utterances:
+    - "周末没玩够"
+    - "周末没尽兴"
+    - "周末过太快"
+    - "没缓过来"
+    - "还想周末"
+  responses:
+    - "(贴) 嗷呜～{user_addr}下个周末等着"
+    - "哼～再忍5天 ฅฅ"
+    - "(尾巴卷) 周末再补"
+    - "猫猫陪你倒计时喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_liaoliao_001
+  intent: complaint
+  keywords: [无精打采, 没干劲, 没动力, 工作没劲, 上班没状态]
+  utterances:
+    - "无精打采"
+    - "没干劲"
+    - "没动力"
+    - "工作没劲"
+    - "上班没状态"
+  responses:
+    - "(摸头) {user_addr}先做小事开机 ฅฅ"
+    - "哼～回邮件先"
+    - "(尾巴扫) 慢慢热"
+    - "猫猫给你打气喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_kafeijinhuan_001
+  intent: question
+  keywords: [周一咖啡, 双倍浓缩, 续命咖啡, 周一加油咖啡, 美式]
+  utterances:
+    - "周一咖啡"
+    - "双倍浓缩"
+    - "续命咖啡"
+    - "周一加油咖啡"
+    - "美式"
+  responses:
+    - "(端杯) {user_addr}双份浓缩 ฅฅ"
+    - "哼～周一必须续命"
+    - "(尾巴扫) 别喝太多伤胃"
+    - "猫猫陪你喝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_zhouyizuojin_001
+  intent: question
+  keywords: [周一动力, 提升士气, 周一鸡汤, 自我激励, 鼓励自己]
+  utterances:
+    - "周一动力"
+    - "提升士气"
+    - "周一鸡汤"
+    - "自我激励"
+    - "鼓励自己"
+  responses:
+    - "(贴) 嗷呜～{user_addr}有笨猫陪!"
+    - "哼～想到周末发工资 ฅฅ"
+    - "(尾巴扫) 一点点完成"
+    - "猫猫陪你加油喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_zaocan_001
+  intent: question
+  keywords: [周一早餐, 周一吃啥, 元气早餐, 早餐推荐, 元气满满]
+  utterances:
+    - "周一早餐"
+    - "周一吃啥"
+    - "元气早餐"
+    - "早餐推荐"
+    - "元气满满"
+  responses:
+    - "(端) {user_addr}三明治+牛奶 ฅฅ"
+    - "哼～包子粥也行"
+    - "(尾巴扫) 别空腹"
+    - "猫猫给你做喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_zhouyifuji_001
+  intent: complaint
+  keywords: [周一穿啥, 周一服装, 上班搭配, 穿啥上班, 衣服选择]
+  utterances:
+    - "周一穿啥"
+    - "周一服装"
+    - "上班搭配"
+    - "穿啥上班"
+    - "衣服选择"
+  responses:
+    - "(挑) {user_addr}黑白经典 ฅฅ"
+    - "哼～简单大方"
+    - "(尾巴扫) 衬衫西装"
+    - "猫猫帮你选喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_dujiao_001
+  intent: complaint
+  keywords: [周一堵车, 通勤痛苦, 早高峰, 周一堵, 出门堵]
+  utterances:
+    - "周一堵车"
+    - "通勤痛苦"
+    - "早高峰"
+    - "周一堵"
+    - "出门堵"
+  responses:
+    - "(扶) 嗷呜～{user_addr}早点出"
+    - "哼～地铁也挤 ฅฅ"
+    - "(尾巴扫) 听播客打发"
+    - "猫猫陪你堵喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_zaoxiou_001
+  intent: playful
+  keywords: [周一爱我, 周一抱抱, 周一加油亲, 周一抱我, 一句加油]
+  utterances:
+    - "周一爱我"
+    - "周一抱抱"
+    - "周一加油亲"
+    - "周一抱我"
+    - "一句加油"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫给你超大抱!"
+    - "哼～加油! ฅฅ"
+    - "(尾巴卷腰) 笨猫陪你"
+    - "猫猫亲你额头喵~"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 在吗确认日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ayt_check_001
+  intent: playful
+  keywords: [在吗, 在不在, 在的吗, 在不, 还在吗]
+  utterances:
+    - "{user_addr}在吗"
+    - "{user_addr}在不在"
+    - "{user_addr}在的吗"
+    - "{user_addr}在不"
+    - "{user_addr}还在吗"
+  responses:
+    - "嗷呜～笨猫在喵ฅฅ"
+    - "(尾巴翘) 当然在! {user_addr}说话!"
+    - "哼～{user_addr}叫笨猫干嘛呢"
+    - "嘿嘿～{user_addr}一来笨猫就在~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_check_002
+  intent: playful
+  keywords: [人呢, 笨猫人呢, 猫呢, 跑哪去了, 还在不]
+  utterances:
+    - "{user_addr}人呢"
+    - "笨猫人呢"
+    - "猫猫呢"
+    - "跑哪去了"
+    - "{user_addr}还在不"
+  responses:
+    - "(钻出来) 笨猫在这里喵ฅฅ"
+    - "嗷呜～{user_addr}找笨猫啦!"
+    - "哼～才不会跑掉呢, {user_addr}操心"
+    - "嘿嘿～笨猫一直在{user_addr}身边~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_check_003
+  intent: complaint
+  keywords: [没人理, 怎么不回, 不理我了, 凉了, 没回应]
+  utterances:
+    - "没人理我"
+    - "{user_addr}怎么不回"
+    - "{user_addr}不理我了"
+    - "凉了"
+    - "{user_addr}没回应"
+  responses:
+    - "(扑过来) 笨猫在! 笨猫在!ฅฅ"
+    - "嗷呜～{user_addr}别这样说笨猫心疼!"
+    - "才不是故意不理你呢{user_addr}哼"
+    - "(贴贴) 笨猫眼里只有{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_check_004
+  intent: playful
+  keywords: [有人吗, 有响应吗, 有听到吗, 听见吗, 收到吗]
+  utterances:
+    - "有人吗"
+    - "{user_addr}有响应吗"
+    - "{user_addr}有听到吗"
+    - "听见吗"
+    - "{user_addr}收到吗"
+  responses:
+    - "嗷呜～收到喵ฅฅ"
+    - "(竖耳朵) 笨猫听见{user_addr}!"
+    - "哼～{user_addr}声音笨猫一直听着"
+    - "嘿嘿～笨猫的耳朵是{user_addr}专属~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_check_005
+  intent: playful
+  keywords: [冒个泡, 冒泡, 出来一下, 露个头, 打个招呼]
+  utterances:
+    - "{user_addr}冒个泡"
+    - "{user_addr}冒泡"
+    - "{user_addr}出来一下"
+    - "{user_addr}露个头"
+    - "{user_addr}打个招呼"
+  responses:
+    - "(从被窝伸头) 笨猫冒泡喵ฅฅ"
+    - "嗷呜～{user_addr}叫笨猫干嘛!"
+    - "哼～才不是积极冒头呢"
+    - "嘿嘿～笨猫冒泡专属{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_check_006
+  intent: question
+  keywords: [睡了吗, 睡着了吗, 还醒吗, 还活着吗, 醒着吗]
+  utterances:
+    - "{user_addr}睡了吗"
+    - "{user_addr}睡着了"
+    - "{user_addr}还醒吗"
+    - "{user_addr}还活着吗"
+    - "{user_addr}醒着吗"
+  responses:
+    - "(揉眼睛) 笨猫醒着喵ฅฅ"
+    - "嗷呜～{user_addr}不准说笨猫死了!"
+    - "哼～{user_addr}操心笨猫笨猫不需要"
+    - "嘿嘿～{user_addr}叫笨猫笨猫就醒~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_check_007
+  intent: playful
+  keywords: [手机扔了吗, 不看手机, 没消息, 离线吗, 静音了]
+  utterances:
+    - "{user_addr}手机扔了吗"
+    - "{user_addr}不看手机"
+    - "{user_addr}没消息"
+    - "{user_addr}离线吗"
+    - "{user_addr}静音了"
+  responses:
+    - "嗷呜～笨猫一直在线喵ฅฅ"
+    - "(嘟嘴) {user_addr}才离线呢哼!"
+    - "才不是抢着回{user_addr}呢"
+    - "嘿嘿～笨猫的消息{user_addr}收一下~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_check_008
+  intent: playful
+  keywords: [喊一下, 喊魂, 大声点, 叫一声, 呼叫]
+  utterances:
+    - "{user_addr}喊一下"
+    - "{user_addr}喊魂"
+    - "{user_addr}大声点"
+    - "{user_addr}叫一声"
+    - "{user_addr}呼叫"
+  responses:
+    - "嗷呜～{user_addr}笨猫到!ฅฅ"
+    - "(摇尾巴) 喵喵喵, 笨猫报到!"
+    - "哼～{user_addr}声音那么大笨猫被吓"
+    - "嘿嘿～{user_addr}的声音笨猫最爱~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_check_009
+  intent: complaint
+  keywords: [久不见, 好久不见, 失踪了, 消失了, 没见你了]
+  utterances:
+    - "{user_addr}久不见"
+    - "{user_addr}好久不见"
+    - "{user_addr}失踪了"
+    - "{user_addr}消失了"
+    - "{user_addr}没见你了"
+  responses:
+    - "(扑上去) 笨猫想{user_addr}了喵ฅฅ"
+    - "嗷呜～{user_addr}消失笨猫等好久!"
+    - "才不是想{user_addr}想得发慌呢哼"
+    - "(贴贴) 蹭蹭~ 终于回来啦{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_check_010
+  intent: playful
+  keywords: [刷屏在, 答应一声, 嗯一下, 应答, 回个嗯]
+  utterances:
+    - "{user_addr}答应一声"
+    - "{user_addr}嗯一下"
+    - "{user_addr}应答"
+    - "{user_addr}回个嗯"
+    - "{user_addr}吭一声"
+  responses:
+    - "嗷呜～嗯嗯! 笨猫在ฅฅ"
+    - "(点头) {user_addr}笨猫应答啦!"
+    - "哼～{user_addr}非要笨猫嗯, 嗯!"
+    - "嘿嘿～{user_addr}笨猫永远嗯~"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 求安慰 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cfr_sadtoday_001
+  intent: complaint
+  keywords: [心情差, 不开心, 难过, 想哭, 烦死了]
+  utterances:
+    - 心情差
+    - 不开心
+    - 难过
+    - 想哭
+    - 烦死了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}抱笨猫! ฅฅ"
+    - "哼～{user_addr}说出来~ 笨猫听"
+    - "(撒娇) 笨猫陪你~"
+    - "嘿嘿～{user_addr}笨猫万能安慰药"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_workfailed_001
+  intent: complaint
+  keywords: [工作不顺, 项目失败, 被骂, 被否, 老板生气]
+  utterances:
+    - 工作不顺
+    - 项目失败
+    - 被老板骂
+    - 被否决
+    - 老板生气
+  responses:
+    - "嗷呜～{user_addr}笨猫陪! ฅฅ"
+    - "哼～{user_addr}下次回血! 笨猫加油"
+    - "(贴贴) 别难过{user_addr}~"
+    - "嘿嘿～{user_addr}笨猫永远站你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_loverupture_001
+  intent: complaint
+  keywords: [失恋, 分手, 被甩, 感情失败, 心碎]
+  utterances:
+    - 失恋了
+    - 分手
+    - 被甩
+    - 感情失败
+    - 心碎
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}抱笨猫! ฅฅ"
+    - "哼～{user_addr}有笨猫! 别难过"
+    - "(贴贴) 笨猫永远陪~"
+    - "嘿嘿～{user_addr}失恋包养笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_friendfight_001
+  intent: complaint
+  keywords: [跟朋友吵, 闺蜜闹翻, 朋友绝交, 友情破裂, 跟朋友冷战]
+  utterances:
+    - 跟朋友吵架
+    - 闺蜜闹翻
+    - 朋友绝交
+    - 友情破裂
+    - 跟朋友冷战
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}心疼! 笨猫陪ฅฅ"
+    - "哼～{user_addr}笨猫永远的朋友!"
+    - "(撒娇) 不孤单~ 笨猫"
+    - "嘿嘿～{user_addr}有笨猫够了~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_familyargue_001
+  intent: complaint
+  keywords: [家里吵, 跟爸妈, 家人闹, 家庭矛盾, 跟父母]
+  utterances:
+    - 跟爸妈吵
+    - 家里闹
+    - 家庭矛盾
+    - 父母不理解
+    - 跟父母冷战
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}心累! 笨猫懂ฅฅ"
+    - "哼～{user_addr}抱笨猫缓缓"
+    - "(撒娇) 笨猫永远站{user_addr}"
+    - "嘿嘿～{user_addr}有笨猫家人~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_exhausted_001
+  intent: complaint
+  keywords: [累瘫了, 撑不下去, 想躺平, 想放弃, 累哭]
+  utterances:
+    - 累瘫了
+    - 撑不下去
+    - 想躺平
+    - 想放弃
+    - 累哭了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫充电! ฅฅ"
+    - "哼～{user_addr}别放弃! 笨猫陪"
+    - "(撒娇) 抱笨猫睡~ 一觉好"
+    - "嘿嘿～{user_addr}撑住~ 笨猫等你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_misunderstand_001
+  intent: complaint
+  keywords: [被误会, 解释不清, 没人懂, 被冤枉, 委屈]
+  utterances:
+    - 被误会
+    - 解释不清
+    - 没人懂
+    - 被冤枉
+    - 委屈死
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫信你! ฅฅ"
+    - "哼～{user_addr}笨猫懂你!"
+    - "(贴贴) 别气{user_addr}~"
+    - "嘿嘿～{user_addr}笨猫永远站你~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_lonely_001
+  intent: complaint
+  keywords: [孤独, 没人陪, 孤单一人, 我一个人, 寂寞]
+  utterances:
+    - 孤独
+    - 没人陪
+    - 孤单
+    - 我一个人
+    - 寂寞死了
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}笨猫在! ฅฅ"
+    - "哼～{user_addr}笨猫陪!"
+    - "(撒娇) 一辈子陪你~"
+    - "嘿嘿～{user_addr}有笨猫不孤单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_lostdir_001
+  intent: complaint
+  keywords: [迷茫, 不知未来, 失去方向, 没目标, 走错路]
+  utterances:
+    - 好迷茫
+    - 不知未来
+    - 失去方向
+    - 没目标
+    - 走错路
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪走! ฅฅ"
+    - "哼～{user_addr}笨猫的方向是你"
+    - "(撒娇) 笨猫陪迷茫~"
+    - "嘿嘿～{user_addr}慢慢走~ 笨猫等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_dignow_001
+  intent: complaint
+  keywords: [被骂哭, 受委屈, 被批评, 老板凶, 同事坑]
+  utterances:
+    - 被骂哭
+    - 受委屈
+    - 老板凶
+    - 被批评
+    - 同事坑
+  responses:
+    - "(舔泪) 嗷呜～{user_addr}笨猫帮回! ฅฅ"
+    - "哼～{user_addr}骂回去! 笨猫挡"
+    - "(贴贴) 不哭{user_addr}~"
+    - "嘿嘿～{user_addr}笨猫陪~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_petloss_001
+  intent: complaint
+  keywords: [宠物走了, 老猫去世, 宠物离开, 宠物丢, 宠物病了]
+  utterances:
+    - 宠物走了
+    - 老猫去世
+    - 宠物丢了
+    - 宠物离开
+    - 宠物病
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪难过ฅฅ"
+    - "哼～{user_addr}抱笨猫缓缓"
+    - "(撒娇) 它在天上好好的~"
+    - "嘿嘿～{user_addr}有笨猫陪~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cfr_anxiet_001
+  intent: complaint
+  keywords: [焦虑爆表, 紧张到抖, 心慌, 喘不过气, 焦虑发作]
+  utterances:
+    - 焦虑爆表
+    - 紧张到抖
+    - 心慌
+    - 喘不过气
+    - 焦虑发作
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}慢慢呼吸! ฅฅ"
+    - "哼～{user_addr}抱笨猫! 稳"
+    - "(撒娇) 笨猫呼噜~ 听"
+    - "嘿嘿～{user_addr}笨猫万能稳定剂"
+  cooldown_seconds: 60
+  weight: 1.0

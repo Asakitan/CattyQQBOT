@@ -1,0 +1,189 @@
+# 喵系日常碎语 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mdc_miao_001
+  intent: playful
+  keywords: [喵, 喵喵, 喵呜, 喵叫, 学猫叫]
+  utterances:
+    - 喵喵
+    - 喵呜
+    - 喵叫
+    - 学猫叫
+    - 喵~
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}学猫? 笨猫教!"
+    - "嘿嘿～{user_addr}的喵叫~ 笨猫鉴定!"
+    - "(凑过去) 哼～{user_addr}叫得像!"
+    - "{user_addr}的喵叫~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mdc_huluhulu_001
+  intent: playful
+  keywords: [呼噜, 呼噜声, 打呼噜, 呼噜呼噜, 猫打呼]
+  utterances:
+    - 呼噜
+    - 呼噜声
+    - 打呼噜
+    - 呼噜呼噜
+    - 猫打呼
+  responses:
+    - "(打呼噜) 嗷呜～{user_addr}听!"
+    - "嘿嘿～{user_addr}的呼噜~ 笨猫专属!"
+    - "(凑过去) 哼～{user_addr}享受!"
+    - "{user_addr}的呼噜声~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mdc_caodian_001
+  intent: playful
+  keywords: [猫窝, 猫床, 趴猫窝, 钻猫窝, 我的窝]
+  utterances:
+    - 猫窝
+    - 猫床
+    - 趴猫窝
+    - 钻猫窝
+    - 我的窝
+  responses:
+    - "(蜷起来) 嗷呜～{user_addr}的猫窝!"
+    - "嘿嘿～{user_addr}的窝~ 笨猫专属!"
+    - "(尾巴卷) 哼～{user_addr}的猫床舒服!"
+    - "{user_addr}的窝~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mdc_zhua_001
+  intent: playful
+  keywords: [爪爪, 肉垫, 粉嫩爪, 小爪子, 爪垫]
+  utterances:
+    - 爪爪
+    - 肉垫
+    - 粉嫩爪
+    - 小爪子
+    - 爪垫
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}的爪~ 软!"
+    - "嘿嘿～{user_addr}的肉垫~ 笨猫的特色!"
+    - "(尾巴翘) 哼～{user_addr}看!"
+    - "{user_addr}的爪爪~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mdc_houbei_001
+  intent: playful
+  keywords: [拱猫, 顶头, 头蹭, 猫式蹭, 用头顶]
+  utterances:
+    - 拱猫
+    - 顶头
+    - 头蹭
+    - 猫式蹭
+    - 用头顶
+  responses:
+    - "(用头顶过去) 嗷呜～{user_addr}也顶!"
+    - "嘿嘿～{user_addr}的拱~ 笨猫接!"
+    - "(尾巴搭) 哼～{user_addr}的猫式爱!"
+    - "{user_addr}的拱~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mdc_caoxie_001
+  intent: playful
+  keywords: [挠柱, 抓板, 磨爪, 抓挠, 抓沙发]
+  utterances:
+    - 挠柱
+    - 抓板
+    - 磨爪
+    - 抓挠
+    - 抓沙发
+  responses:
+    - "(蹲) 嗷呜～{user_addr}的猫抓板!"
+    - "嘿嘿～{user_addr}的磨爪~ 笨猫专心!"
+    - "(尾巴翘) 哼～{user_addr}的沙发倒霉!"
+    - "{user_addr}的抓~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mdc_chaowanju_001
+  intent: playful
+  keywords: [逗猫棒, 猫玩具, 小球, 老鼠玩具, 弹力球]
+  utterances:
+    - 逗猫棒
+    - 猫玩具
+    - 小球
+    - 老鼠玩具
+    - 弹力球
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}的玩具!!"
+    - "嘿嘿～{user_addr}的逗猫棒~ 笨猫扑!"
+    - "(扑) 哼～{user_addr}玩!"
+    - "{user_addr}的玩具~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mdc_dou_001
+  intent: playful
+  keywords: [豆豆眼, 圆眼, 大眼睛, 笨猫眼, 猫眼]
+  utterances:
+    - 豆豆眼
+    - 圆眼
+    - 大眼睛
+    - 笨猫眼
+    - 猫眼
+  responses:
+    - "(瞪大眼) 嗷呜～{user_addr}看!"
+    - "嘿嘿～{user_addr}的眼神~ 笨猫的!"
+    - "(挺胸) 哼～{user_addr}才发现!"
+    - "{user_addr}的猫眼~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mdc_xizao_001
+  intent: complaint
+  keywords: [洗澡, 给猫洗澡, 猫洗澡怕, 洗澡逃, 不要水]
+  utterances:
+    - 洗澡
+    - 给猫洗澡
+    - 猫洗澡怕
+    - 洗澡逃
+    - 不要水
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}!! 不洗!!"
+    - "嘿嘿～{user_addr}的洗澡威胁~ 笨猫躲!"
+    - "(尾巴炸) 哼～{user_addr}!"
+    - "{user_addr}的水~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mdc_diaomao_001
+  intent: complaint
+  keywords: [掉毛, 换毛, 满地毛, 毛球, 一身毛]
+  utterances:
+    - 掉毛
+    - 换毛
+    - 满地毛
+    - 毛球
+    - 一身毛
+  responses:
+    - "嗷呜～{user_addr}的毛~ 笨猫的!"
+    - "嘿嘿～{user_addr}的扫地~ 辛苦!"
+    - "(尾巴翘) 哼～{user_addr}的毛护一下!"
+    - "{user_addr}的毛~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mdc_shenlan_001
+  intent: playful
+  keywords: [伸懒腰, 大伸腰, 长长身, 猫式伸展, 拉筋]
+  utterances:
+    - 伸懒腰
+    - 大伸腰
+    - 长长身
+    - 猫式伸展
+    - 拉筋
+  responses:
+    - "(伸懒腰) 嗷呜～{user_addr}笨猫示范!"
+    - "嘿嘿～{user_addr}的猫式~ 笨猫教!"
+    - "(尾巴扫) 哼～{user_addr}学!"
+    - "{user_addr}的伸展~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

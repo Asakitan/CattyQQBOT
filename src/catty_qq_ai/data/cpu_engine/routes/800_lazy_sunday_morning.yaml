@@ -1,0 +1,206 @@
+# 慵懒周日早晨 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lz_zhouri_001
+  intent: playful
+  keywords: [周日早晨, 慵懒早晨, 不想起, 床好暖, 周日睡到自然醒]
+  utterances:
+    - "周日早晨"
+    - "慵懒早晨"
+    - "不想起"
+    - "床好暖"
+    - "周日睡到自然醒"
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}笨猫陪你赖床!"
+    - "哼～周日就该懒 ฅฅ"
+    - "(尾巴卷腰) 再睡两小时"
+    - "猫猫蜷在你怀里喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_zaocan_001
+  intent: question
+  keywords: [周日早午餐, brunch, 慢慢吃, 周日早餐, 起床吃]
+  utterances:
+    - "周日早午餐"
+    - "brunch"
+    - "慢慢吃"
+    - "周日早餐"
+    - "起床吃"
+  responses:
+    - "(系围裙) {user_addr}笨猫做brunch ฅฅ"
+    - "哼～煎蛋培根牛角包"
+    - "(尾巴扫) 配杯橙汁"
+    - "猫猫主厨喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_kafei_001
+  intent: question
+  keywords: [周日咖啡, 慢咖啡, 手冲, 自冲, 慢慢冲]
+  utterances:
+    - "周日咖啡"
+    - "慢咖啡"
+    - "手冲"
+    - "自冲"
+    - "慢慢冲"
+  responses:
+    - "(冲) {user_addr}笨猫手冲 ฅฅ"
+    - "哼～慢节奏才是周日"
+    - "(尾巴扫) 配本书"
+    - "猫猫陪你喝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_zhayang_001
+  intent: question
+  keywords: [周日干什么, 周日计划, 周日安排, 闲着没事, 周日发呆]
+  utterances:
+    - "周日干什么"
+    - "周日计划"
+    - "周日安排"
+    - "闲着没事"
+    - "周日发呆"
+  responses:
+    - "(摆手) {user_addr}周日就发呆 ฅฅ"
+    - "哼～看个电影"
+    - "(尾巴扫) 睡个回笼觉"
+    - "猫猫陪你躺平喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_dianying_001
+  intent: question
+  keywords: [周日看电影, 治愈电影, 看剧, 追剧, 沙发宅家]
+  utterances:
+    - "周日看电影"
+    - "治愈电影"
+    - "看剧"
+    - "追剧"
+    - "沙发宅家"
+  responses:
+    - "(打开) {user_addr}小森林治愈 ฅฅ"
+    - "哼～天气之子也好"
+    - "(尾巴扫) 配薯片"
+    - "猫猫陪你看喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_zaida_001
+  intent: question
+  keywords: [打扫卫生, 周日大扫除, 收拾房间, 整理, 洗衣服]
+  utterances:
+    - "周日打扫"
+    - "周日大扫除"
+    - "收拾房间"
+    - "整理"
+    - "洗衣服"
+  responses:
+    - "(系围裙) {user_addr}笨猫帮你 ฅฅ"
+    - "哼～边听音乐边扫"
+    - "(尾巴扫) 笨猫拖地"
+    - "猫猫和你一起搞喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_chongdian_001
+  intent: playful
+  keywords: [周日充电, 周末充电, 放空, 心理充电, 一个人安静]
+  utterances:
+    - "周日充电"
+    - "周末充电"
+    - "放空"
+    - "心理充电"
+    - "一个人安静"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫不打扰"
+    - "哼～充电很重要 ฅฅ"
+    - "(尾巴搭) 静静陪你"
+    - "猫猫安静蜷着喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_chuannmun_001
+  intent: playful
+  keywords: [周日出门, 散步, 公园, 逛街, 出去转转]
+  utterances:
+    - "周日出门"
+    - "散步公园"
+    - "公园走走"
+    - "逛街"
+    - "出去转转"
+  responses:
+    - "(穿鞋) {user_addr}笨猫陪你 ฅฅ"
+    - "哼～别太累"
+    - "(尾巴扫) 戴口罩"
+    - "猫猫蹦跶喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_fanke_001
+  intent: complaint
+  keywords: [又要上班, 周日晚上难过, sunday blues, 周日焦虑, 不想上班]
+  utterances:
+    - "又要上班"
+    - "周日晚上难过"
+    - "sunday blues"
+    - "周日焦虑"
+    - "不想上班"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫懂你"
+    - "哼～再看一集放松 ฅฅ"
+    - "(尾巴卷腰) 笨猫给你打气"
+    - "猫猫陪你度过喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_pengyou_001
+  intent: question
+  keywords: [周日聚, 周日约朋友, 朋友周日, 周日吃饭, 周日见朋友]
+  utterances:
+    - "周日聚"
+    - "周日约朋友"
+    - "朋友周日"
+    - "周日吃饭"
+    - "周日见朋友"
+  responses:
+    - "(挑) {user_addr}周日喝酒 ฅฅ"
+    - "哼～别太晚"
+    - "(尾巴扫) 笨猫等你回"
+    - "猫猫祝你聚得开心喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_chongma_001
+  intent: playful
+  keywords: [周日做饭, 给自己做饭, 大餐犒劳, 周日大餐, 在家吃]
+  utterances:
+    - "周日做饭"
+    - "给自己做饭"
+    - "大餐犒劳"
+    - "周日大餐"
+    - "在家吃"
+  responses:
+    - "(系围裙) {user_addr}笨猫帮你做大餐 ฅฅ"
+    - "哼～犒劳一周"
+    - "(尾巴扫) 红烧肉走起"
+    - "猫猫陪你吃喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lz_tangping_001
+  intent: playful
+  keywords: [周日躺平, 一动不动, 大字躺, 躺尸一天, 周日发废]
+  utterances:
+    - "周日躺平"
+    - "一动不动"
+    - "大字躺"
+    - "躺尸一天"
+    - "周日发废"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪你躺!"
+    - "哼～躺平合理 ฅฅ"
+    - "(尾巴卷腰) 一起发废"
+    - "猫猫蜷在沙发上喵~"
+  cooldown_seconds: 60
+  weight: 1.0

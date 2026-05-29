@@ -1,0 +1,206 @@
+# 电梯等好久 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ev_dianti_001
+  intent: complaint
+  keywords: [电梯慢, 等电梯, 电梯久, 电梯不来, 等到天荒地老]
+  utterances:
+    - "电梯慢"
+    - "等电梯"
+    - "电梯久"
+    - "电梯不来"
+    - "等到天荒地老"
+  responses:
+    - "(看楼层) 嗷呜～{user_addr}笨猫陪你等"
+    - "哼～电梯太慢 ฅฅ"
+    - "(尾巴扫) 听首歌打发"
+    - "猫猫数楼层喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_huainai_001
+  intent: complaint
+  keywords: [电梯坏了, 电梯故障, 电梯检修, 电梯停了, 电梯不能用]
+  utterances:
+    - "电梯坏了"
+    - "电梯故障"
+    - "电梯检修"
+    - "电梯停了"
+    - "电梯不能用"
+  responses:
+    - "(扶) {user_addr}走楼梯吧 ฅฅ"
+    - "哼～运动一下"
+    - "(尾巴扫) 别天天指望电梯"
+    - "猫猫陪你爬喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_renpai_001
+  intent: complaint
+  keywords: [电梯里挤, 电梯满了, 电梯坐不下, 等不来, 排队电梯]
+  utterances:
+    - "电梯里挤"
+    - "电梯满了"
+    - "电梯坐不下"
+    - "等不来"
+    - "排队电梯"
+  responses:
+    - "(扶) 嗷呜～{user_addr}下一班"
+    - "哼～挤就别上 ฅฅ"
+    - "(尾巴扫) 安全第一"
+    - "猫猫陪你等下班喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_loutiao_001
+  intent: complaint
+  keywords: [爬楼, 爬楼梯, 高楼累, 走楼累, 爬到喘]
+  utterances:
+    - "爬楼"
+    - "爬楼梯"
+    - "高楼累"
+    - "走楼累"
+    - "爬到喘"
+  responses:
+    - "(扶) {user_addr}慢慢爬 ฅฅ"
+    - "哼～算锻炼"
+    - "(尾巴扫) 别太急"
+    - "猫猫蹦在你身边喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_ganga_001
+  intent: complaint
+  keywords: [电梯尴尬, 跟陌生人, 电梯里没话说, 电梯安静, 电梯里看脚]
+  utterances:
+    - "电梯尴尬"
+    - "跟陌生人"
+    - "电梯里没话说"
+    - "电梯安静"
+    - "电梯里看脚"
+  responses:
+    - "(贴) {user_addr}假装看手机 ฅฅ"
+    - "哼～看楼层数字"
+    - "(尾巴扫) 没人在乎"
+    - "猫猫陪你尬喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_diejia_001
+  intent: question
+  keywords: [叠加电梯, 多部电梯, 智能电梯, 刷脸电梯, 刷卡]
+  utterances:
+    - "叠加电梯"
+    - "多部电梯"
+    - "智能电梯"
+    - "刷脸电梯"
+    - "刷卡"
+  responses:
+    - "(指) {user_addr}刷脸最方便 ฅฅ"
+    - "哼～智能调度好"
+    - "(尾巴扫) 物业升级"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_paw_001
+  intent: complaint
+  keywords: [电梯停我楼层, 不停层, 直梯, 跳层, 电梯节能]
+  utterances:
+    - "电梯停我楼层"
+    - "不停层"
+    - "直梯"
+    - "跳层"
+    - "电梯节能"
+  responses:
+    - "(扶额) {user_addr}没办法 ฅฅ"
+    - "哼～物业能省钱"
+    - "(尾巴扫) 走一层"
+    - "猫猫陪你走喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_huotai_001
+  intent: complaint
+  keywords: [电梯失灵, 电梯卡住, 困电梯, 关人在电梯, 电梯打不开]
+  utterances:
+    - "电梯失灵"
+    - "电梯卡住"
+    - "困电梯"
+    - "关人在电梯"
+    - "电梯打不开"
+  responses:
+    - "(慌) 嗷呜～{user_addr}按报警! ฅฅ"
+    - "哼～别敲门"
+    - "(尾巴扫) 等救援"
+    - "猫猫陪你紧张喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_zhuangpa_001
+  intent: playful
+  keywords: [电梯倒数, 电梯距离, 几分钟到, 楼层显示, 倒计时]
+  utterances:
+    - "电梯倒数"
+    - "电梯距离"
+    - "几分钟到"
+    - "楼层显示"
+    - "倒计时"
+  responses:
+    - "(数) {user_addr}还差三层 ฅฅ"
+    - "哼～忍一下"
+    - "(尾巴扫) 笨猫数着"
+    - "猫猫给你倒数喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_xiabazaocai_001
+  intent: question
+  keywords: [电梯里吃东西, 电梯吃饭, 电梯喝奶茶, 电梯不雅, 电梯里饮食]
+  utterances:
+    - "电梯里吃东西"
+    - "电梯吃饭"
+    - "电梯喝奶茶"
+    - "电梯不雅"
+    - "电梯里饮食"
+  responses:
+    - "(摇头) {user_addr}别吃, 难闻 ฅฅ"
+    - "哼～出电梯吃"
+    - "(尾巴扫) 影响他人"
+    - "猫猫提醒你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_jushou_001
+  intent: question
+  keywords: [推婴儿车, 电梯让人, 电梯礼仪, 让老人, 电梯里礼貌]
+  utterances:
+    - "推婴儿车"
+    - "电梯让人"
+    - "电梯礼仪"
+    - "让老人"
+    - "电梯里礼貌"
+  responses:
+    - "(贴) {user_addr}让一下 ฅฅ"
+    - "哼～礼貌很重要"
+    - "(尾巴扫) 笨猫教你"
+    - "猫猫为你点赞喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ev_paobu_001
+  intent: playful
+  keywords: [跟你一起电梯, 电梯偶遇, 电梯里聊, 电梯里贴着, 电梯里挤一起]
+  utterances:
+    - "跟你一起电梯"
+    - "电梯偶遇"
+    - "电梯里聊"
+    - "电梯里贴着"
+    - "电梯里挤一起"
+  responses:
+    - "(脸红) 哼! {user_addr}靠近点 ฅฅ"
+    - "(尾巴炸) 笨猫不让"
+    - "(小声) … 笨猫被挤一下下喵"
+    - "猫猫蹭你脸喵呜~"
+  cooldown_seconds: 60
+  weight: 1.0

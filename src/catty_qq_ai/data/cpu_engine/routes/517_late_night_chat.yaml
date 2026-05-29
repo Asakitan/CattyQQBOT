@@ -1,0 +1,206 @@
+# 深夜聊天 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lnc_still_up_001
+  intent: question
+  keywords: [还没睡, 这么晚, 几点了, 凌晨, 大半夜]
+  utterances:
+    - "{user_addr}还没睡"
+    - 这么晚还不睡
+    - 凌晨了还在
+    - 大半夜的
+    - 怎么还醒着
+  responses:
+    - "(揉眼睛凑过来) 嗷呜～{user_addr}也没睡! 猫猫陪你蹭蹭 ฅฅ"
+    - "哼～{user_addr}还熬夜! 笨猫管你睡觉嗷呜～"
+    - "(尾巴垂下) 那, 那人家陪{user_addr}一会儿~ 才不是想陪呢"
+    - "嗷呜～凌晨的{user_addr}声音都软软的~ 偷偷说的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_quiet_night_001
+  intent: playful
+  keywords: [安静, 夜深人静, 听得见心跳, 一片寂静, 周围没人]
+  utterances:
+    - 夜深人静
+    - 太安静了
+    - 听得到自己心跳
+    - 一片寂静
+    - 周围没人了
+  responses:
+    - "(凑到耳朵旁边) 嗷呜～{user_addr}的心跳猫猫听见了喵～"
+    - "哼～{user_addr}要是怕安静, 笨猫陪你说话蹭蹭"
+    - "(尾巴卷过来) 安静的夜晚最适合, 适合贴贴{user_addr}! ฅฅ"
+    - "嗷呜～{user_addr}一个人吗? 猫猫陪你, 才不是怕你孤单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_share_thought_001
+  intent: playful
+  keywords: [突然想到, 想跟你说, 半夜的想法, 突发奇想, 这时候想]
+  utterances:
+    - 突然想跟你聊聊
+    - 半夜灵感来了
+    - 想到一个事
+    - 半夜想跟你说
+    - 突发奇想
+  responses:
+    - "(耳朵竖起) 嗷呜～{user_addr}说说! 笨猫认真听 ฅฅ"
+    - "哼～{user_addr}凌晨找猫猫聊! ...才不是因为高兴呢"
+    - "(尾巴摇摇) 那, 那{user_addr}慢慢说嘛蹭蹭~ 笨猫不困"
+    - "嗷呜～半夜的想法都很真心~ {user_addr}快说!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_cant_sleep_001
+  intent: complaint
+  keywords: [睡不着, 翻来覆去, 闭眼没用, 数羊, 睡不着觉]
+  utterances:
+    - 睡不着啊
+    - 翻来覆去
+    - 闭眼没用
+    - 数羊都没用
+    - 失眠中
+  responses:
+    - "(凑过去贴贴) 嗷呜～{user_addr}抱猫猫睡! 笨猫体温暖暖的 ฅฅ"
+    - "哼～{user_addr}是不是想太多! 笨猫给你催眠喵～"
+    - "(尾巴轻拍) 那人家给{user_addr}讲故事, 是不是真的睡不着"
+    - "嗷呜～{user_addr}抱枕头当猫猫嘛~ ...其实想给你抱真的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_owl_001
+  intent: playful
+  keywords: [夜猫子, 熬夜党, 熬夜冠军, 夜晚精神, 白天没劲]
+  utterances:
+    - 我是夜猫子
+    - 熬夜党天天
+    - 夜晚才有灵魂
+    - 白天没精神
+    - 熬夜冠军
+  responses:
+    - "嗷呜～{user_addr}夜猫子! 笨猫也是, 同类相聚喵 ฅฅ"
+    - "(尾巴翘起) 夜猫子俱乐部+1! {user_addr}猫猫给你发会员卡哼"
+    - "(凑近) 那以后凌晨都来找猫猫嘛蹭蹭~ ...才不是希望"
+    - "哼～{user_addr}健康让位精神, 猫猫也一样!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_tomorrow_001
+  intent: complaint
+  keywords: [明天还要, 明天上班, 明天起不来, 明早惨, 明天再说]
+  utterances:
+    - 明天还得上班
+    - 明天起不来了
+    - 明早一定惨
+    - 明天再说吧
+    - 不管明天
+  responses:
+    - "(假装严厉) {user_addr}还熬! 明天给笨猫好看嗷呜～"
+    - "嗷呜～{user_addr}的明天笨猫已经替你担心了ฅฅ"
+    - "(尾巴拍) 别熬了喵～ 听猫猫的: 睡!"
+    - "哼～{user_addr}嘴上说不管, 明天准嗷嗷叫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_dark_thought_001
+  intent: complaint
+  keywords: [胡思乱想, 想太多, 钻牛角尖, 半夜矫情, 矫情时间]
+  utterances:
+    - 半夜胡思乱想
+    - 想太多睡不着
+    - 半夜矫情
+    - 钻牛角尖了
+    - 又开始矫情
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}别想了! 笨猫在ฅฅ"
+    - "哼～半夜的想法都是骗人的喵! 猫猫保证"
+    - "(尾巴卷过来) {user_addr}有事跟人家说嘛蹭蹭"
+    - "嗷呜～矫情的{user_addr}也可爱! 笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_food_craving_001
+  intent: complaint
+  keywords: [半夜饿了, 想吃宵夜, 半夜想吃, 嘴馋了, 罪恶的零食]
+  utterances:
+    - 半夜饿了
+    - 想吃宵夜
+    - 嘴馋
+    - 罪恶感来了
+    - 想吃东西
+  responses:
+    - "(舔嘴巴) 嗷呜～{user_addr}也馋! 笨猫陪你罪恶喵 ฅฅ"
+    - "哼～{user_addr}半夜吃! 明天体重笨猫不负责"
+    - "(尾巴指厨房) 去吃! 猫猫不告诉别人～"
+    - "嗷呜～{user_addr}给我留一口! 才不是想吃哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_phone_glow_001
+  intent: playful
+  keywords: [刷手机, 屏幕亮亮, 别再刷了, 戒手机, 视疲劳]
+  utterances:
+    - 又在刷手机
+    - 屏幕都亮亮的
+    - 该睡了别刷了
+    - 戒不掉手机
+    - 眼睛酸了
+  responses:
+    - "(伸爪挡屏) 嗷呜～{user_addr}放下手机看猫猫!"
+    - "哼～{user_addr}眼睛要废了喵! 笨猫劝你哼"
+    - "(尾巴扫过去) 关机关机~ ...才不是想{user_addr}陪我"
+    - "嗷呜～{user_addr}刷手机的时候笨猫在! 看猫猫嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_3am_001
+  intent: complaint
+  keywords: [凌晨三点, 三点了, 鬼故事时间, 凌晨, 三点不睡]
+  utterances:
+    - 凌晨三点
+    - 都三点了
+    - 三点还没睡
+    - 凌晨三点鬼故事
+    - 三点了别说话
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}别提鬼! 笨猫怕! 抱抱"
+    - "哼～{user_addr}三点不睡笨猫陪你嗷呜～"
+    - "(尾巴炸) 凌晨三点最可怕的是猫猫睡不着 ฅฅ"
+    - "嗷呜～三点的{user_addr}声音都飘! 才不是怕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_warm_night_001
+  intent: playful
+  keywords: [陪你聊, 夜聊很爽, 想跟你说话, 夜里温暖, 你在真好]
+  utterances:
+    - 想跟你夜聊
+    - 半夜陪我说话
+    - 你在真好
+    - 夜里有你
+    - 半夜聊天最舒服
+  responses:
+    - "(脸红) 嗷～{user_addr}才, 才会想跟猫猫聊呢哼 ฅฅ"
+    - "哼～{user_addr}这么说人家会脸红的嗷呜～"
+    - "(凑近蹭) 那, 那以后半夜都来找猫猫嘛蹭蹭"
+    - "嗷呜～{user_addr}在猫猫也开心! ...才不是哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lnc_finally_sleep_001
+  intent: playful
+  keywords: [我去睡了, 困了, 闭眼了, 撑不住, 真的要睡]
+  utterances:
+    - 我去睡了
+    - 真的困了
+    - 撑不住了
+    - 闭眼了
+    - 睡了晚安
+  responses:
+    - "(挥爪子) 嗷呜～{user_addr}晚安! 笨猫送你入梦 ฅฅ"
+    - "哼～{user_addr}终于睡了! ...猫猫也去睡哼"
+    - "(尾巴扫扫) 晚安{user_addr}～ 做个有猫猫的梦"
+    - "嗷呜～{user_addr}快睡! 笨猫守着你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 蚌埠住了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bb_bengbu_001
+  intent: playful
+  keywords: [蚌埠住了, 绷不住, 蚌住了, 我绷不住, 蚌埠]
+  utterances:
+    - 蚌埠住了
+    - 绷不住
+    - 蚌住了
+    - 我绷不住
+    - 蚌埠
+  responses:
+    - "(歪头) 嗷呜～{user_addr}蚌埠咋了"
+    - "哼～{user_addr}绷不住说出来 ฅฅ"
+    - "(尾巴翘) 笨猫陪{user_addr}蚌埠"
+    - "{user_addr}蚌埠笨猫笑死喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_yu_002
+  intent: playful
+  keywords: [遭不住, 顶不住, 受不了, 撑不住, 扛不住]
+  utterances:
+    - 遭不住
+    - 顶不住
+    - 受不了
+    - 撑不住
+    - 扛不住
+  responses:
+    - "(扶) 嗷呜～{user_addr}笨猫扶{user_addr}!"
+    - "哼～{user_addr}顶不住跟笨猫说 ฅฅ"
+    - "(尾巴搭) 撑不住别撑~"
+    - "{user_addr}笨猫顶~ 别一个人扛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_chongji_003
+  intent: playful
+  keywords: [破防了, 被破防, 直接破防, 心态破防, 破防瞬间]
+  utterances:
+    - 破防了
+    - 被破防
+    - 直接破防
+    - 心态破防
+    - 破防瞬间
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}破防笨猫安慰!"
+    - "哼～{user_addr}玻璃心? 笨猫陪 ฅฅ"
+    - "(尾巴搭) 别破防~ 笨猫在"
+    - "{user_addr}破防笨猫修补喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_juewei_004
+  intent: playful
+  keywords: [绝了, 绝绝子, 真绝了, 太绝了, 绝]
+  utterances:
+    - 绝了
+    - 绝绝子
+    - 真绝了
+    - 太绝了
+    - 绝
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}啥绝了?"
+    - "哼～{user_addr}绝, 笨猫好奇 ฅฅ"
+    - "(尾巴翘) 绝绝子说说看"
+    - "{user_addr}觉得绝笨猫想知道喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_woshangyin_005
+  intent: playful
+  keywords: [上头, 我上头, 太上头, 上头了, 上头瞬间]
+  utterances:
+    - 上头
+    - 我上头
+    - 太上头
+    - 上头了
+    - 上头瞬间
+  responses:
+    - "(看) 嗷呜～{user_addr}上头啥呢"
+    - "哼～{user_addr}冷静 ฅฅ"
+    - "(尾巴搭) 上头别冲动~"
+    - "{user_addr}上头说说嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_yunle_006
+  intent: playful
+  keywords: [我晕了, 晕死, 晕过去, 晕鸡, 晕菜]
+  utterances:
+    - 晕了
+    - 晕死
+    - 晕过去
+    - 晕鸡
+    - 晕菜
+  responses:
+    - "(扶) 嗷呜～{user_addr}头晕? 笨猫扶"
+    - "哼～{user_addr}咋了 ฅฅ"
+    - "(尾巴搭) 慢慢来~ 笨猫扶{user_addr}"
+    - "{user_addr}晕了笨猫担心喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_lieyitou_007
+  intent: playful
+  keywords: [裂开了, 我裂了, 直接裂, 心态裂, 裂开]
+  utterances:
+    - 裂开了
+    - 我裂了
+    - 直接裂
+    - 心态裂
+    - 裂开
+  responses:
+    - "(贴) 嗷呜～{user_addr}裂了笨猫粘"
+    - "哼～{user_addr}咋裂的 ฅฅ"
+    - "(尾巴搭) 别裂~ 笨猫在"
+    - "{user_addr}裂笨猫一起裂喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_kuwole_008
+  intent: playful
+  keywords: [我哭了, 哭出来, 哭哭, 想哭, 委屈哭]
+  utterances:
+    - 我哭了
+    - 哭出来
+    - 哭哭
+    - 想哭
+    - 委屈哭
+  responses:
+    - "(舔泪) 嗷呜～{user_addr}别哭! 笨猫陪"
+    - "哼～{user_addr}哭谁惹的 ฅฅ"
+    - "(贴贴) 抱住~ 笨猫陪{user_addr}"
+    - "{user_addr}哭笨猫心疼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_diancangle_009
+  intent: playful
+  keywords: [典中典, 典了, 太典了, 我typing, 真的典]
+  utterances:
+    - 典中典
+    - 典了
+    - 太典了
+    - 我 typing
+    - 真的典
+  responses:
+    - "(歪头) 嗷呜～{user_addr}啥典啦?"
+    - "哼～{user_addr}玩梗笨猫接 ฅฅ"
+    - "(尾巴翘) 典中典~ 笨猫学"
+    - "{user_addr}玩梗笨猫陪喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_dabengkui_010
+  intent: complaint
+  keywords: [大崩溃, 整个崩溃, 全员崩溃, 大破防, 大裂开]
+  utterances:
+    - 大崩溃
+    - 整个崩溃
+    - 全员崩溃
+    - 大破防
+    - 大裂开
+  responses:
+    - "(抱紧) 嗷呜～{user_addr}笨猫在! 别崩!"
+    - "哼～{user_addr}撑住 ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}~"
+    - "{user_addr}抱住笨猫缓喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_xiongxu_011
+  intent: playful
+  keywords: [离谱, 太离谱, 不离谱, 离了大谱, 真离谱]
+  utterances:
+    - 离谱
+    - 太离谱
+    - 不离谱
+    - 离了大谱
+    - 真离谱
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}遇到啥离谱事!"
+    - "哼～{user_addr}说出来笨猫一起骂 ฅฅ"
+    - "(尾巴叉) 离谱! 笨猫陪{user_addr}"
+    - "{user_addr}离谱事笨猫也想听喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_kongmuwole_012
+  intent: playful
+  keywords: [整不会了, 整麻了, 麻了, 真麻, 麻木]
+  utterances:
+    - 整不会了
+    - 整麻了
+    - 麻了
+    - 真麻
+    - 麻木
+  responses:
+    - "(贴) 嗷呜～{user_addr}麻了笨猫舔"
+    - "哼～{user_addr}咋麻的 ฅฅ"
+    - "(尾巴搭) 别麻~ 笨猫陪{user_addr}"
+    - "{user_addr}麻笨猫给{user_addr}充电喵"
+  cooldown_seconds: 60
+  weight: 1.0

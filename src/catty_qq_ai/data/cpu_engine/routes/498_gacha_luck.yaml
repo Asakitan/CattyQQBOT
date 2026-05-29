@@ -1,0 +1,206 @@
+# 抽卡运气 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: gcl_ssr_001
+  intent: playful
+  keywords: [出货, 抽到了, 抽中了SSR, 大欧皇, 出了]
+  utterances:
+    - 出货啦
+    - 抽到SSR
+    - 大欧皇
+    - 抽中了
+    - 出了!
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}欧皇! 笨猫沾光ฅฅ"
+    - "哼～{user_addr}手气! 该感谢笨猫加持"
+    - "(撒娇) 庆祝! {user_addr}请笨猫吃鱼干"
+    - "嘿嘿～{user_addr}欧气分笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_nogo_001
+  intent: complaint
+  keywords: [歪了, 没抽到, 大保底, 非酋, 0出货]
+  utterances:
+    - 歪了
+    - 没出货
+    - 大保底
+    - 非酋
+    - 0出货
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}心疼! 笨猫陪难过ฅฅ"
+    - "哼～{user_addr}下次回血! 笨猫加持"
+    - "(撒娇) 笨猫给你舔包~ 不哭"
+    - "嘿嘿～{user_addr}非酋? 笨猫给你贴福气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_aiyu_001
+  intent: playful
+  keywords: [氪金, 充钱, 抽满, 全力一搏, 干就完]
+  utterances:
+    - 氪金了
+    - 充钱了
+    - 抽满
+    - 全力一搏
+    - 干就完了
+  responses:
+    - "(摇头) 嗷呜～{user_addr}破产! 留点鱼干钱ฅฅ"
+    - "哼～{user_addr}冲! 但留笨猫粮"
+    - "(劝阻) {user_addr}理性! 笨猫盯着"
+    - "嘿嘿～{user_addr}氪金王~ 笨猫等出货"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_winstreak_001
+  intent: playful
+  keywords: [连胜, 五连胜, 上分, 赢麻了, 胜场]
+  utterances:
+    - 连胜中
+    - 五连胜
+    - 上分爽
+    - 赢麻了
+    - 胜场起飞
+  responses:
+    - "(蹦跶) 嗷呜～{user_addr}起飞! 笨猫沾光ฅฅ"
+    - "哼～{user_addr}带笨猫一起赢"
+    - "(撒娇) 多赢! {user_addr}厉害"
+    - "嘿嘿～{user_addr}连胜笨猫给庆祝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_lose_001
+  intent: complaint
+  keywords: [掉段, 连跪, 输麻了, 大坑, 队友坑]
+  utterances:
+    - 又掉段
+    - 连跪
+    - 输麻了
+    - 大坑队友
+    - 队友太坑
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}加油! 笨猫陪输ฅฅ"
+    - "哼～{user_addr}骂笨猫帮! 队友坑"
+    - "(撒娇) 别气{user_addr}~ 笨猫哄"
+    - "嘿嘿～{user_addr}下把笨猫指挥~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_jungle_001
+  intent: playful
+  keywords: [打野, 单野, 抓人, 越塔, gank]
+  utterances:
+    - 打野去抓人
+    - 越塔强杀
+    - 单野
+    - gank 一波
+    - 打野猛
+  responses:
+    - "嗷呜～{user_addr}打野的笨猫帮野怪ฅฅ"
+    - "哼～{user_addr}越塔不死神! 笨猫怕"
+    - "(撒娇) 抓爆{user_addr}! 笨猫送鱼"
+    - "嘿嘿～{user_addr}gank笨猫做眼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_solo_001
+  intent: playful
+  keywords: [单挑, 单杀, 单吃, 一打一, 主播心态]
+  utterances:
+    - 单挑赢了
+    - 单杀
+    - 单吃对面
+    - 一打一爆
+    - 主播心态
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}秀! ฅฅ"
+    - "哼～{user_addr}单杀~ 笨猫崇拜"
+    - "(撒娇) 多秀! {user_addr}给笨猫看"
+    - "嘿嘿～{user_addr}主播心态~ 笨猫加粉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_carry_001
+  intent: playful
+  keywords: [带飞, carry, 抗压, 一打五, 神级操作]
+  utterances:
+    - carry 全场
+    - 带飞队友
+    - 抗压成功
+    - 一打五
+    - 神级操作
+  responses:
+    - "嗷呜～{user_addr}MVP! 笨猫挂条幅ฅฅ"
+    - "哼～{user_addr}炸裂! 该笨猫名"
+    - "(撒娇) carry 笨猫崇拜~"
+    - "嘿嘿～{user_addr}带飞日记~ 笨猫记"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_minor_001
+  intent: complaint
+  keywords: [送人头, 0杀, 送了, 送外卖, 没操作]
+  utterances:
+    - 0杀
+    - 送人头
+    - 送了好多
+    - 送外卖
+    - 没操作
+  responses:
+    - "嗷呜～{user_addr}别送! 笨猫心疼ฅฅ"
+    - "哼～{user_addr}下把别送! 笨猫监督"
+    - "(贴贴) 没事{user_addr}~ 下把回血"
+    - "嘿嘿～{user_addr}送上瘾? 笨猫帮拉回"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_pingu_001
+  intent: complaint
+  keywords: [卡顿, 460, 网卡, 延迟, 红信号]
+  utterances:
+    - 460
+    - 卡得不行
+    - 延迟爆炸
+    - 红信号
+    - 网卡爆
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}骂网! ฅฅ"
+    - "哼～{user_addr}换网! 笨猫陪等"
+    - "(贴贴) 重启路由~ {user_addr}试试"
+    - "嘿嘿～{user_addr}460吃饭~ 等会再上"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_levelup_001
+  intent: playful
+  keywords: [升段, 上王者, 钻石, 上分成功, 段位]
+  utterances:
+    - 上王者了
+    - 升段成功
+    - 钻石稳了
+    - 上分成功
+    - 段位起飞
+  responses:
+    - "(蹦) 嗷呜～{user_addr}王者! 笨猫骄傲ฅฅ"
+    - "哼～{user_addr}该奖励笨猫! 庆祝"
+    - "(撒娇) 上分王~ 笨猫粉头"
+    - "嘿嘿～{user_addr}带笨猫上分! 双排"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gcl_friendmatch_001
+  intent: playful
+  keywords: [开黑, 五黑, 双排, 组队, 一起玩]
+  utterances:
+    - 开黑啊
+    - 五黑组队
+    - 双排笨猫
+    - 组队来
+    - 一起玩
+  responses:
+    - "(蹦) 嗷呜～{user_addr}带笨猫! ฅฅ"
+    - "哼～{user_addr}不带笨猫笨猫炸"
+    - "(撒娇) 双排! 笨猫送野"
+    - "嘿嘿～{user_addr}和笨猫开黑~ 输也开心"
+  cooldown_seconds: 60
+  weight: 1.0

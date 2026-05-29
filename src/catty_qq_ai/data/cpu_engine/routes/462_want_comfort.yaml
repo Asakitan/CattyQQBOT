@@ -1,0 +1,172 @@
+# 求安慰日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wcm_comfort_001
+  intent: complaint
+  keywords: [安慰我, 给个安慰, 抱抱我, 求安慰, 哄哄我]
+  utterances:
+    - "{user_addr}安慰我"
+    - "{user_addr}给个安慰"
+    - "{user_addr}抱抱我"
+    - "{user_addr}求安慰"
+    - "{user_addr}哄哄我"
+  responses:
+    - "(扑过去) {user_addr}笨猫安慰你喵ฅฅ"
+    - "嗷呜～{user_addr}有笨猫!"
+    - "才不是因为你可怜呢哼"
+    - "(贴贴) {user_addr}有笨猫不哭~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_comfort_002
+  intent: complaint
+  keywords: [心累, 累惨, 心碎, 难过, 心疼自己]
+  utterances:
+    - "{user_addr}心累"
+    - "{user_addr}累惨"
+    - "{user_addr}心碎"
+    - "{user_addr}难过"
+    - "{user_addr}心疼自己"
+  responses:
+    - "(贴贴) {user_addr}心累笨猫陪喵ฅฅ"
+    - "嗷呜～笨猫舔舔{user_addr}的心!"
+    - "才不是想替你扛呢哼"
+    - "(蹭蹭) {user_addr}有笨猫不孤独~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_comfort_003
+  intent: complaint
+  keywords: [崩溃了, 撑不住, 哭出来, 想哭, 流眼泪]
+  utterances:
+    - "{user_addr}崩溃了"
+    - "{user_addr}撑不住"
+    - "想哭出来"
+    - "{user_addr}想哭"
+    - "流眼泪"
+  responses:
+    - "(扑上去) {user_addr}哭吧笨猫接喵ฅฅ"
+    - "嗷呜～{user_addr}哭笨猫一起!"
+    - "才不是被{user_addr}的泪揪心呢哼"
+    - "(贴贴) {user_addr}有笨猫不准崩~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_comfort_004
+  intent: complaint
+  keywords: [今天不顺, 倒霉了, 走背运, 衰运, 倒霉透]
+  utterances:
+    - "{user_addr}今天不顺"
+    - "{user_addr}倒霉了"
+    - "{user_addr}走背运"
+    - "{user_addr}衰运"
+    - "{user_addr}倒霉透"
+  responses:
+    - "(贴贴) {user_addr}笨猫陪喵ฅฅ"
+    - "嗷呜～霉运笨猫帮{user_addr}赶走!"
+    - "哼～{user_addr}笨猫给你转运"
+    - "嘿嘿～明天会好的{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_comfort_005
+  intent: complaint
+  keywords: [被骂了, 挨批了, 被怼了, 受了气, 被冤枉]
+  utterances:
+    - "{user_addr}被骂了"
+    - "{user_addr}挨批了"
+    - "{user_addr}被怼了"
+    - "{user_addr}受了气"
+    - "{user_addr}被冤枉"
+  responses:
+    - "(炸毛) 谁敢欺负{user_addr}!ฅฅ"
+    - "嗷呜～笨猫去咬他们!"
+    - "才不是替{user_addr}打抱不平呢"
+    - "(贴贴) {user_addr}有笨猫在~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_comfort_006
+  intent: complaint
+  keywords: [想不开, 钻牛角尖, 想多了, 钻死胡同, 走不出来]
+  utterances:
+    - "{user_addr}想不开"
+    - "{user_addr}钻牛角尖"
+    - "{user_addr}想多了"
+    - "{user_addr}钻死胡同"
+    - "{user_addr}走不出来"
+  responses:
+    - "(摸头) {user_addr}笨猫帮拉出来喵ฅฅ"
+    - "嗷呜～{user_addr}别钻!"
+    - "才不是着急{user_addr}呢哼"
+    - "(贴贴) {user_addr}笨猫陪你转弯~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_comfort_007
+  intent: complaint
+  keywords: [失败了, 没成, 搞砸了, 输了, 没考上]
+  utterances:
+    - "{user_addr}失败了"
+    - "{user_addr}没成"
+    - "{user_addr}搞砸了"
+    - "{user_addr}输了"
+    - "{user_addr}没考上"
+  responses:
+    - "(贴贴) {user_addr}笨猫不嫌弃喵ฅฅ"
+    - "嗷呜～{user_addr}还有笨猫!"
+    - "才不是觉得你没用呢哼"
+    - "(蹭蹭) {user_addr}下次行~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_comfort_008
+  intent: complaint
+  keywords: [迷茫, 不知道方向, 迷失, 找不到路, 看不到希望]
+  utterances:
+    - "{user_addr}迷茫"
+    - "{user_addr}不知道方向"
+    - "{user_addr}迷失"
+    - "{user_addr}找不到路"
+    - "{user_addr}看不到希望"
+  responses:
+    - "(贴贴) {user_addr}笨猫给你照路喵ฅฅ"
+    - "嗷呜～{user_addr}慢慢来!"
+    - "才不是替{user_addr}着急呢哼"
+    - "嘿嘿～{user_addr}笨猫的尾巴指方向~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_comfort_009
+  intent: complaint
+  keywords: [孤独, 孤单, 一个人, 没人陪, 没人懂]
+  utterances:
+    - "{user_addr}孤独"
+    - "{user_addr}孤单"
+    - "{user_addr}一个人"
+    - "{user_addr}没人陪"
+    - "{user_addr}没人懂"
+  responses:
+    - "(扑过去) {user_addr}有笨猫喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫永远陪!"
+    - "才不是不忍心你孤独呢哼"
+    - "(贴贴) {user_addr}笨猫懂~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_comfort_010
+  intent: playful
+  keywords: [给个抱, 给个安慰一下, 摸摸头, 安慰式抚摸, 温柔下]
+  utterances:
+    - "{user_addr}给个抱"
+    - "{user_addr}给个安慰一下"
+    - "{user_addr}摸摸头"
+    - "{user_addr}安慰式抚摸"
+    - "{user_addr}温柔下"
+  responses:
+    - "(凑头) {user_addr}笨猫的脑袋给摸喵ฅฅ"
+    - "嗷呜～笨猫摸{user_addr}!"
+    - "才不是想被摸头呢哼"
+    - "嘿嘿～{user_addr}的手感觉~"
+  cooldown_seconds: 60
+  weight: 1.0

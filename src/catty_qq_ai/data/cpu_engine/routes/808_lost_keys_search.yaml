@@ -1,0 +1,206 @@
+# 钥匙丢了找 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lk_yueshi_001
+  intent: complaint
+  keywords: [钥匙丢了, 找不到钥匙, 钥匙不见, 钥匙不知道去哪, 钥匙在哪]
+  utterances:
+    - "钥匙丢了"
+    - "找不到钥匙"
+    - "钥匙不见"
+    - "钥匙不知道去哪"
+    - "钥匙在哪"
+  responses:
+    - "(翻包) 嗷呜～{user_addr}笨猫帮你找!"
+    - "哼～口袋翻了没 ฅฅ"
+    - "(尾巴扫) 沙发缝里"
+    - "猫猫蹲下找喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_jiaojui_001
+  intent: complaint
+  keywords: [锁外了, 进不去家, 关门外了, 锁门没钥匙, 没钥匙]
+  utterances:
+    - "锁外了"
+    - "进不去家"
+    - "关门外了"
+    - "锁门没钥匙"
+    - "没钥匙"
+  responses:
+    - "(扶) {user_addr}找开锁公司 ฅฅ"
+    - "哼～别砸锁"
+    - "(尾巴扫) 物业有备用"
+    - "猫猫陪你想办法喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_zhaozhilei_001
+  intent: question
+  keywords: [配钥匙, 开锁公司, 修锁, 配一把, 换锁]
+  utterances:
+    - "配钥匙"
+    - "开锁公司"
+    - "修锁"
+    - "配一把"
+    - "换锁"
+  responses:
+    - "(查) {user_addr}找正规公司 ฅฅ"
+    - "哼～登记备案的"
+    - "(尾巴扫) 配两把备用"
+    - "猫猫帮你查喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_qutie_001
+  intent: complaint
+  keywords: [钥匙挂哪了, 经常丢钥匙, 总忘钥匙, 钥匙乱放, 钥匙习惯]
+  utterances:
+    - "钥匙挂哪了"
+    - "经常丢钥匙"
+    - "总忘钥匙"
+    - "钥匙乱放"
+    - "钥匙习惯"
+  responses:
+    - "(指) {user_addr}门口挂钥匙挂 ฅฅ"
+    - "哼～固定一个位置"
+    - "(尾巴扫) 习惯就好"
+    - "猫猫监督你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_zhihui_001
+  intent: question
+  keywords: [智能锁, 指纹锁, 密码锁, 不用钥匙, 换电子锁]
+  utterances:
+    - "智能锁"
+    - "指纹锁"
+    - "密码锁"
+    - "不用钥匙"
+    - "换电子锁"
+  responses:
+    - "(挑) {user_addr}小米智能锁OK ฅฅ"
+    - "哼～凯迪仕也行"
+    - "(尾巴扫) 指纹+密码"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_chache_001
+  intent: complaint
+  keywords: [车钥匙丢, 汽车锁了, 车锁外, 车里钥匙, 车开不了]
+  utterances:
+    - "车钥匙丢"
+    - "汽车锁了"
+    - "车锁外"
+    - "车里钥匙"
+    - "车开不了"
+  responses:
+    - "(扶) {user_addr}找4S店 ฅฅ"
+    - "哼～4S有备用钥匙"
+    - "(尾巴扫) 别砸车窗"
+    - "猫猫陪你处理喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_shijian_001
+  intent: question
+  keywords: [防丢追踪器, 钥匙追踪, AirTag, 防丢器, 蓝牙追踪]
+  utterances:
+    - "防丢追踪器"
+    - "钥匙追踪"
+    - "AirTag"
+    - "防丢器"
+    - "蓝牙追踪"
+  responses:
+    - "(掏) {user_addr}AirTag挂钥匙 ฅฅ"
+    - "哼～国产也有"
+    - "(尾巴扫) 防丢神器"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_lvyou_001
+  intent: complaint
+  keywords: [旅行丢钥匙, 旅游忘钥匙, 钥匙在酒店, 退房忘拿, 钥匙落酒店]
+  utterances:
+    - "旅行丢钥匙"
+    - "旅游忘钥匙"
+    - "钥匙在酒店"
+    - "退房忘拿"
+    - "钥匙落酒店"
+  responses:
+    - "(联系) {user_addr}打电话给酒店 ฅฅ"
+    - "哼～让他们邮回"
+    - "(尾巴扫) 邮费自付"
+    - "猫猫陪你联系喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_diujia_001
+  intent: complaint
+  keywords: [钥匙圈断, 钥匙丢了一串, 一把丢了, 钥匙圈坏, 串都没了]
+  utterances:
+    - "钥匙圈断"
+    - "钥匙丢了一串"
+    - "一把丢了"
+    - "钥匙圈坏"
+    - "串都没了"
+  responses:
+    - "(扶) {user_addr}全换新 ฅฅ"
+    - "哼～包括锁芯"
+    - "(尾巴扫) 安全第一"
+    - "猫猫陪你换喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_zhao_jia_001
+  intent: question
+  keywords: [钥匙备份, 备份钥匙, 给谁备份, 邻居备份, 父母备份]
+  utterances:
+    - "钥匙备份"
+    - "备份钥匙"
+    - "给谁备份"
+    - "邻居备份"
+    - "父母备份"
+  responses:
+    - "(指) {user_addr}信任的人备份 ฅฅ"
+    - "哼～家人最好"
+    - "(尾巴扫) 别给陌生人"
+    - "猫猫提醒你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_zhanggui_001
+  intent: complaint
+  keywords: [钥匙挂坠, 钥匙太多, 钥匙串重, 钥匙包, 整理钥匙]
+  utterances:
+    - "钥匙挂坠"
+    - "钥匙太多"
+    - "钥匙串重"
+    - "钥匙包"
+    - "整理钥匙"
+  responses:
+    - "(整理) {user_addr}钥匙包整洁 ฅฅ"
+    - "哼～少挂坠不挂多"
+    - "(尾巴扫) 重了砸口袋"
+    - "猫猫帮你整理喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lk_baojia_001
+  intent: playful
+  keywords: [钥匙挂猫爪, 猫爪钥匙扣, 可爱钥匙扣, 钥匙小挂件, 挂萌物]
+  utterances:
+    - "钥匙挂猫爪"
+    - "猫爪钥匙扣"
+    - "可爱钥匙扣"
+    - "钥匙小挂件"
+    - "挂萌物"
+  responses:
+    - "(掏) {user_addr}笨猫送你猫爪扣 ฅฅ"
+    - "哼～萌哒哒"
+    - "(尾巴翘) 笨猫挑的"
+    - "猫猫送你喵~"
+  cooldown_seconds: 60
+  weight: 1.0

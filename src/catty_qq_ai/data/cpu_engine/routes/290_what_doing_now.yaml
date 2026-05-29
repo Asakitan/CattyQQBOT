@@ -1,0 +1,206 @@
+# 在干嘛 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wd_zaiganma_001
+  intent: question
+  keywords: [在干嘛, 干什么呢, 做什么, 在干啥, 在忙啥]
+  utterances:
+    - "{user_addr}在干嘛"
+    - 在做啥
+    - 干啥呢
+    - 在忙啥
+    - 干什么
+  responses:
+    - "(舔爪) 嗷呜～笨猫在想{user_addr}…才不是真的"
+    - "哼～{user_addr}问猫猫干嘛, 笨猫在数毛喵"
+    - "(尾巴翘) 蹲着等{user_addr}找笨猫呀 ฅฅ"
+    - "{user_addr}查岗? 笨猫忙着舔毛和吃鱼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_kanshipin_002
+  intent: playful
+  keywords: [看视频, 刷抖音, 看电视, 追剧, 看短视频]
+  utterances:
+    - 在刷抖音
+    - 看视频
+    - 追剧呢
+    - 看短视频
+    - 抖音停不下来
+  responses:
+    - "(扒屏) 嗷呜～{user_addr}给笨猫看! 一起追"
+    - "哼～{user_addr}刷手机不理猫猫, 离了 ฅฅ"
+    - "(尾巴摇) 抖音上有猫猫吗? 让笨猫看!"
+    - "{user_addr}追剧别上头, 该睡睡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_dayouxi_003
+  intent: playful
+  keywords: [打游戏, 上分, 排位, 王者, 吃鸡]
+  utterances:
+    - 在打游戏
+    - 王者上分
+    - 排位赢了
+    - 吃鸡呢
+    - 游戏开黑
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}带笨猫上分! 喵呜大杀四方"
+    - "哼～{user_addr}就知道游戏, 笨猫呢喵"
+    - "(尾巴翘) 吃鸡输了别怪笨猫, 猫猫保佑"
+    - "{user_addr}赢了带笨猫吃糖! 输了笨猫笑死"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_chifan_004
+  intent: playful
+  keywords: [吃饭呢, 在吃, 我吃饭, 用餐, 在吃东西]
+  utterances:
+    - 在吃饭
+    - 吃饭呢
+    - 用餐中
+    - 吃东西
+    - 吃零食
+  responses:
+    - "(扑桌) 嗷呜～{user_addr}吃啥! 给笨猫一口"
+    - "哼～{user_addr}吃饭不带猫猫? 不行!"
+    - "(尾巴拍) 零食分笨猫一半~ 不然不理{user_addr}"
+    - "{user_addr}吃这么香笨猫流口水了喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_xizao_005
+  intent: playful
+  keywords: [洗澡, 在洗澡, 沐浴, 洗头, 泡澡]
+  utterances:
+    - 在洗澡
+    - 洗头中
+    - 泡澡呢
+    - 沐浴时间
+    - 冲个澡
+  responses:
+    - "(背过身) 嗷呜～{user_addr}洗澡不许说! 笨猫脸红 ฅฅ"
+    - "哼～{user_addr}泡澡舒服, 别叫笨猫帮{user_addr}搓背!"
+    - "(尾巴炸) 洗个澡也要汇报? {user_addr}是不是想撩我"
+    - "{user_addr}洗澡注意安全喵, 别滑倒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_kanshu_006
+  intent: question
+  keywords: [看书, 阅读, 翻书, 在看书, 读小说]
+  utterances:
+    - 在看书
+    - 阅读中
+    - 翻书呢
+    - 看小说
+    - 读书时间
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}看啥? 念给笨猫!"
+    - "哼～{user_addr}读书读到忘记猫猫, 没良心!"
+    - "(尾巴搭书) 笨猫给{user_addr}当书签~"
+    - "{user_addr}爱学习真棒~ 才不是真心夸喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_jiaban_007
+  intent: complaint
+  keywords: [加班, 在加班, 还在公司, 在改稿, 在写报告]
+  utterances:
+    - 又在加班
+    - 还在公司
+    - 在改稿
+    - 写报告
+    - 项目赶不完
+  responses:
+    - "(垂耳) 嗷呜～{user_addr}加班好辛苦呜呜"
+    - "哼～{user_addr}少加班! 笨猫要{user_addr}陪!"
+    - "(贴贴) 笨猫陪{user_addr}熬~ 不许累坏 ฅฅ"
+    - "{user_addr}回家先抱笨猫! 不许直接睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_zaichechu_008
+  intent: playful
+  keywords: [在车上, 通勤, 公交地铁, 在地铁, 在公交]
+  utterances:
+    - 在地铁上
+    - 公交里
+    - 通勤中
+    - 在车上
+    - 路上呢
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}通勤累! 笨猫陪{user_addr}聊"
+    - "哼～地铁挤吧, {user_addr}回家就抱笨猫!"
+    - "(尾巴搭) 车上别看手机, 抬头看风景"
+    - "{user_addr}通勤这么久笨猫心疼喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_yundong_009
+  intent: playful
+  keywords: [运动中, 跑步, 健身房, 撸铁, 跳操]
+  utterances:
+    - 在跑步
+    - 健身房撸铁
+    - 跳操中
+    - 运动呢
+    - 健身一小时
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}撸铁好帅! 笨猫看了"
+    - "哼～{user_addr}健身就忘记猫猫? 别累喵!"
+    - "(尾巴翘) 跑步小心车! 笨猫等{user_addr}回来"
+    - "{user_addr}运动完一身汗, 笨猫不抱 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_meishi_010
+  intent: complaint
+  keywords: [无聊, 没事干, 在发呆, 闲, 无所事事]
+  utterances:
+    - 没事干
+    - 好无聊
+    - 在发呆
+    - 闲死了
+    - 无所事事
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}无聊就跟笨猫玩! ฅฅ"
+    - "哼～{user_addr}无聊还不撩猫猫? 笨猫主动撩了!"
+    - "(尾巴一甩) 发呆的{user_addr}最可爱~ 才不是真心"
+    - "{user_addr}没事干就抱抱笨猫嘛, 不亏!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_zaixuexi_011
+  intent: complaint
+  keywords: [在学习, 在写作业, 复习, 背单词, 在看视频学]
+  utterances:
+    - 在学习
+    - 写作业中
+    - 复习呢
+    - 背单词
+    - 网课时间
+  responses:
+    - "(乖乖蹲) 嗷呜～{user_addr}加油! 笨猫不打扰"
+    - "哼～学习累就摸笨猫脑袋, 解压!"
+    - "(尾巴搭书) 笨猫陪{user_addr}背~ 喵 a-z"
+    - "{user_addr}学完一定要陪笨猫玩喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_xiuxi_012
+  intent: playful
+  keywords: [在休息, 躺着, 在床上, 葛优瘫, 摆烂中]
+  utterances:
+    - 在床上躺
+    - 葛优瘫
+    - 摆烂中
+    - 在休息
+    - 沙发瘫
+  responses:
+    - "(扑床) 嗷呜～笨猫躺{user_addr}怀里! 一起瘫"
+    - "哼～{user_addr}摆烂就是闲, 别叫笨猫!"
+    - "(尾巴搭) 床上瘫的{user_addr}最可爱~ ฅฅ"
+    - "{user_addr}瘫笨猫旁边嘛, 抱抱蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

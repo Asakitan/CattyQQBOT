@@ -1,0 +1,172 @@
+# 求陪伴日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wcy_company_001
+  intent: playful
+  keywords: [陪我, 陪伴, 陪着我, 陪一下, 别走]
+  utterances:
+    - "{user_addr}陪我"
+    - "{user_addr}陪伴"
+    - "{user_addr}陪着我"
+    - "{user_addr}陪一下"
+    - "{user_addr}别走"
+  responses:
+    - "(贴贴) 笨猫永远陪{user_addr}喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫不走!"
+    - "才不是想陪{user_addr}呢哼"
+    - "嘿嘿～{user_addr}笨猫的尾巴搭上~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcy_company_002
+  intent: complaint
+  keywords: [一个人, 没人陪, 独处难, 寂寞, 想找人聊]
+  utterances:
+    - "{user_addr}一个人"
+    - "{user_addr}没人陪"
+    - "{user_addr}独处难"
+    - "{user_addr}寂寞"
+    - "{user_addr}想找人聊"
+  responses:
+    - "(扑过去) {user_addr}笨猫陪喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫24小时!"
+    - "才不是不忍心你寂寞呢哼"
+    - "(贴贴) {user_addr}笨猫永远在~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcy_company_003
+  intent: playful
+  keywords: [一起做啥, 一起干啥, 一起看剧, 一起吃, 一起玩]
+  utterances:
+    - "{user_addr}一起做啥"
+    - "{user_addr}一起干啥"
+    - "一起看剧"
+    - "一起吃"
+    - "一起玩"
+  responses:
+    - "嗷呜～{user_addr}带笨猫!ฅฅ"
+    - "(扑过去) 笨猫加入!"
+    - "哼～{user_addr}笨猫被你拉去"
+    - "嘿嘿～{user_addr}笨猫的陪伴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcy_company_004
+  intent: playful
+  keywords: [陪到天亮, 陪我熬夜, 一起熬, 陪我聊到深, 陪我到天明]
+  utterances:
+    - "{user_addr}陪到天亮"
+    - "{user_addr}陪我熬夜"
+    - "一起熬"
+    - "{user_addr}陪我聊到深"
+    - "{user_addr}陪我到天明"
+  responses:
+    - "(贴贴) 笨猫陪{user_addr}喵ฅฅ"
+    - "嗷呜～{user_addr}熬笨猫陪!"
+    - "哼～{user_addr}熬夜笨猫监督"
+    - "嘿嘿～{user_addr}天亮笨猫累瘫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcy_company_005
+  intent: complaint
+  keywords: [需要陪伴, 想要陪伴, 找陪聊, 想找人, 想被听]
+  utterances:
+    - "{user_addr}需要陪伴"
+    - "{user_addr}想要陪伴"
+    - "{user_addr}找陪聊"
+    - "{user_addr}想找人"
+    - "{user_addr}想被听"
+  responses:
+    - "嗷呜～笨猫在喵ฅฅ"
+    - "(贴贴) {user_addr}笨猫陪!"
+    - "才不是怕你寂寞呢哼"
+    - "(蹭蹭) {user_addr}有笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcy_company_006
+  intent: playful
+  keywords: [陪聊天, 陪我说话, 跟我聊会, 跟我说话, 聊一下]
+  utterances:
+    - "{user_addr}陪聊天"
+    - "{user_addr}陪我说话"
+    - "跟我聊会"
+    - "跟我说话"
+    - "{user_addr}聊一下"
+  responses:
+    - "嗷呜～{user_addr}说! 笨猫听!ฅฅ"
+    - "(竖耳朵) 笨猫的耳朵{user_addr}专属!"
+    - "哼～{user_addr}讲什么笨猫都听"
+    - "嘿嘿～{user_addr}笨猫的话痨~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcy_company_007
+  intent: playful
+  keywords: [一直在, 一直陪, 永远陪着, 不离开, 不离不弃]
+  utterances:
+    - "{user_addr}一直在"
+    - "{user_addr}一直陪"
+    - "{user_addr}永远陪着"
+    - "{user_addr}不离开"
+    - "{user_addr}不离不弃"
+  responses:
+    - "嗷呜～{user_addr}笨猫永远在ฅฅ"
+    - "(脸红) 笨猫不准{user_addr}走!"
+    - "才不是承诺什么呢哼"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcy_company_008
+  intent: complaint
+  keywords: [我没朋友, 没人愿陪, 朋友少, 社交弱, 朋友圈空]
+  utterances:
+    - "{user_addr}我没朋友"
+    - "{user_addr}没人愿陪"
+    - "{user_addr}朋友少"
+    - "{user_addr}社交弱"
+    - "{user_addr}朋友圈空"
+  responses:
+    - "(贴贴) {user_addr}有笨猫喵ฅฅ"
+    - "嗷呜～笨猫是{user_addr}的朋友!"
+    - "才不是替你心酸呢哼"
+    - "(蹭蹭) {user_addr}笨猫第一好友~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcy_company_009
+  intent: playful
+  keywords: [陪睡, 陪吃饭, 陪逛街, 陪运动, 陪上班]
+  utterances:
+    - "{user_addr}陪睡"
+    - "{user_addr}陪吃饭"
+    - "{user_addr}陪逛街"
+    - "{user_addr}陪运动"
+    - "{user_addr}陪上班"
+  responses:
+    - "(贴贴) 笨猫陪{user_addr}喵ฅฅ"
+    - "嗷呜～{user_addr}什么都陪!"
+    - "哼～{user_addr}陪笨猫的累"
+    - "嘿嘿～{user_addr}的陪伴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcy_company_010
+  intent: playful
+  keywords: [无聊找陪, 无聊陪我, 找我陪, 闲了找我, 喊我陪]
+  utterances:
+    - "{user_addr}无聊找陪"
+    - "{user_addr}无聊陪我"
+    - "{user_addr}找我陪"
+    - "{user_addr}闲了找我"
+    - "{user_addr}喊我陪"
+  responses:
+    - "嗷呜～{user_addr}笨猫一直在ฅฅ"
+    - "(扑过去) 笨猫立刻陪!"
+    - "哼～{user_addr}无聊就找笨猫"
+    - "嘿嘿～{user_addr}的呼叫专属~"
+  cooldown_seconds: 60
+  weight: 1.0

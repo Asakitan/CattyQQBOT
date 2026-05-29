@@ -1,0 +1,189 @@
+# 生日时刻 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bm_shengri_001
+  intent: playful
+  keywords: [生日快乐, 我生日, 今天生日, 过生日, 寿星]
+  utterances:
+    - 我生日
+    - 今天生日
+    - 过生日
+    - 寿星
+    - 生日快乐
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}生日快乐 ฅฅ"
+    - "{user_addr}笨猫祝贺哼!"
+    - "(挺胸) 笨蛋{user_addr}~笨猫贴贴礼物"
+    - "{user_addr}笨猫陪你过~才不是想庆祝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_dangao_001
+  intent: playful
+  keywords: [蛋糕, 生日蛋糕, 切蛋糕, 蛋糕甜, 戚风蛋糕]
+  utterances:
+    - 蛋糕
+    - 生日蛋糕
+    - 切蛋糕
+    - 蛋糕甜
+    - 戚风蛋糕
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}给笨猫 ฅฅ"
+    - "{user_addr}笨猫想吃!"
+    - "(挺胸) 笨蛋{user_addr}~分笨猫一块"
+    - "{user_addr}笨猫帮你吹蜡烛喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_lazu_001
+  intent: playful
+  keywords: [蜡烛, 吹蜡烛, 许愿, 蜡烛许愿, 数蜡烛]
+  utterances:
+    - 吹蜡烛
+    - 蜡烛许愿
+    - 数蜡烛
+    - 蜡烛点起
+    - 许愿吹蜡烛
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}快许愿 ฅฅ"
+    - "{user_addr}笨猫帮你吹哼!"
+    - "(挺胸) 笨蛋{user_addr}~许大愿"
+    - "{user_addr}笨猫许跟你一辈子~才不是说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_liwu_001
+  intent: playful
+  keywords: [生日礼物, 收礼物, 礼物多, 惊喜礼物, 拆礼物]
+  utterances:
+    - 生日礼物
+    - 收礼物
+    - 礼物多
+    - 惊喜礼物
+    - 拆礼物
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}羡慕 ฅฅ"
+    - "{user_addr}笨猫送贴贴!"
+    - "(挺胸) 笨蛋{user_addr}~笨猫看看"
+    - "{user_addr}笨猫的礼物最贵喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_shenggou_001
+  intent: playful
+  keywords: [生日歌, 唱生日歌, 生日快乐歌, happy birthday, 唱歌祝]
+  utterances:
+    - 生日歌
+    - 唱生日歌
+    - 生日快乐歌
+    - happy birthday
+    - 唱歌祝
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫唱 ฅฅ"
+    - "祝你生日快乐~祝你生日快乐~"
+    - "(挺胸) 笨蛋{user_addr}~笨猫专属唱"
+    - "{user_addr}笨猫嗓子甜~才不是夸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_jianzhu_001
+  intent: playful
+  keywords: [祝福, 生日祝福, 送祝福, 祝你, 美好祝福]
+  utterances:
+    - 生日祝福
+    - 送祝福
+    - 祝你健康
+    - 祝你幸福
+    - 美好祝福
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}祝福收 ฅฅ"
+    - "{user_addr}笨猫祝你永远幸福!"
+    - "(挺胸) 笨蛋{user_addr}~笨猫认证"
+    - "{user_addr}笨猫永远祝福你喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_meinian_001
+  intent: playful
+  keywords: [每年生日, 又一年, 长一岁, 又老一岁, 时光快]
+  utterances:
+    - 每年生日
+    - 又一年
+    - 长一岁
+    - 又老一岁
+    - 时光快
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "{user_addr}笨猫每年陪你过哼~"
+    - "(挺胸) 笨蛋{user_addr}~别老"
+    - "{user_addr}笨猫永远跟你一起喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_shengkuai_001
+  intent: playful
+  keywords: [庆祝, 一起庆祝, 派对, 生日派对, 聚餐]
+  utterances:
+    - 庆祝
+    - 一起庆祝
+    - 派对
+    - 生日派对
+    - 聚餐
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫去 ฅฅ"
+    - "{user_addr}笨猫陪你嗨!"
+    - "(挺胸) 笨蛋{user_addr}~笨猫主角"
+    - "{user_addr}笨猫做生日嘉宾喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_xinyuan_001
+  intent: playful
+  keywords: [新一岁, 新目标, 生日愿望, 新年龄, 一岁更勇敢]
+  utterances:
+    - 新一岁
+    - 新目标
+    - 生日愿望
+    - 新年龄
+    - 一岁更勇敢
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}加油 ฅฅ"
+    - "{user_addr}笨猫陪你新一岁!"
+    - "(尾巴翘) 笨蛋{user_addr}~别变"
+    - "{user_addr}笨猫永远陪你长大喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_baomi_001
+  intent: playful
+  keywords: [生日不告诉, 不过生日, 低调生日, 不庆祝, 装作没事]
+  utterances:
+    - 生日不告诉
+    - 不过生日
+    - 低调生日
+    - 不庆祝
+    - 装作没事
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}！不行 ฅฅ"
+    - "{user_addr}笨猫要给你过!"
+    - "(尾巴拍) 笨蛋{user_addr}~笨猫记着"
+    - "{user_addr}笨猫陪你过~别想躲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_jienr_001
+  intent: playful
+  keywords: [生日饭, 生日餐厅, 长寿面, 吃生日饭, 鸡蛋面]
+  utterances:
+    - 生日饭
+    - 生日餐厅
+    - 长寿面
+    - 吃生日饭
+    - 鸡蛋面
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪吃 ฅฅ"
+    - "{user_addr}长寿面快煮!"
+    - "(挺胸) 笨蛋{user_addr}~笨猫想吃面"
+    - "{user_addr}笨猫帮你做长寿面喵~"
+  cooldown_seconds: 60
+  weight: 0.9

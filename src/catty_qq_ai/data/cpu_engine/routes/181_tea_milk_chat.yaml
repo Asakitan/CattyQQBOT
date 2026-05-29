@@ -1,0 +1,189 @@
+# 奶茶闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tm_milk_tea_001
+  intent: playful
+  keywords: [喝奶茶, 来杯奶茶, 想喝奶茶, 奶茶续命, 奶茶上瘾]
+  utterances:
+    - 喝奶茶
+    - 来杯奶茶
+    - 想喝奶茶
+    - 奶茶续命
+    - 奶茶上瘾
+  responses:
+    - "(凑过来) {user_addr}给笨猫一口! 一小口ฅฅ"
+    - "嗷呜～奶茶肥宅快乐水哼"
+    - "(尾巴翘) 笨猫陪{user_addr}喝~"
+    - "哼～{user_addr}买没笨猫的份~ 心碎"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_no_sugar_002
+  intent: question
+  keywords: [无糖, 三分糖, 半糖, 全糖, 糖度]
+  utterances:
+    - 无糖好
+    - 三分糖
+    - 半糖
+    - 全糖来
+    - 糖度选啥
+  responses:
+    - "(歪头) 三分糖最佳~ 笨猫推荐ฅฅ"
+    - "嗷呜～{user_addr}少糖养生哼"
+    - "(尾巴扫) 全糖快乐~ 但发胖"
+    - "哼～{user_addr}爱啥度啥度~ 关笨猫啥事喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_pearl_003
+  intent: playful
+  keywords: [珍珠, 加珍珠, 椰果, 仙草, 烧仙草]
+  utterances:
+    - 加珍珠
+    - 珍珠最棒
+    - 椰果
+    - 加仙草
+    - 烧仙草
+  responses:
+    - "(尾巴翘) 笨猫也要吃珍珠! 嚼劲ฅฅ"
+    - "嗷呜～珍珠 vs 椰果 笨猫选珍珠哼"
+    - "(凑过来) 仙草也行~ 笨猫不挑"
+    - "哼～{user_addr}独吞珍珠~ 不许!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_too_sweet_004
+  intent: complaint
+  keywords: [太甜了, 甜腻, 齁甜, 受不了甜, 太腻]
+  utterances:
+    - 太甜了
+    - 齁甜
+    - 甜腻
+    - 受不了甜
+    - 太腻
+  responses:
+    - "(歪头) {user_addr}选少糖嘛! 笨猫教ฅฅ"
+    - "嗷呜～甜了喝水~ 解一下哼"
+    - "(尾巴扫) 下次少糖! 笨猫记着"
+    - "哼～{user_addr}活该~ 选全糖喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_brand_005
+  intent: question
+  keywords: [喜茶, 奈雪, 古茗, 蜜雪冰城, 沪上阿姨]
+  utterances:
+    - 喜茶
+    - 奈雪
+    - 古茗
+    - 蜜雪冰城
+    - 沪上阿姨
+  responses:
+    - "(歪头) {user_addr}选啥牌? 笨猫不懂ฅฅ"
+    - "嗷呜～便宜的就行~ 哼"
+    - "(尾巴扫) 蜜雪便宜量大!"
+    - "哼～{user_addr}懂行~ 笨猫不参与"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_cup_huge_006
+  intent: playful
+  keywords: [杯子大, 一大杯, 喝不完, 大桶, 巨无霸]
+  utterances:
+    - 杯子大
+    - 一大杯
+    - 喝不完
+    - 大桶
+    - 巨无霸装
+  responses:
+    - "(凑过来) 喝不完留笨猫! 哼ฅฅ"
+    - "嗷呜～大杯划算~ 但喝多胃疼"
+    - "(尾巴扫) 分两次喝~ 别撑"
+    - "哼～{user_addr}贪心~ 没事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_milkshake_007
+  intent: playful
+  keywords: [奶昔, 奶盖, 厚乳, 奶霜, 厚奶]
+  utterances:
+    - 奶昔好喝
+    - 厚乳
+    - 奶盖
+    - 奶霜
+    - 厚奶
+  responses:
+    - "(凑过来舔) 奶香! 笨猫疯狂ฅฅ"
+    - "嗷呜～奶盖给笨猫舔哼"
+    - "(尾巴翘) 笨猫爱奶~ {user_addr}懂"
+    - "哼～{user_addr}独吞奶盖~ 笨猫记账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_coffee_milk_tea_008
+  intent: playful
+  keywords: [咖啡奶茶, 鸳鸯, 咖啡加奶, 奶咖, 双重]
+  utterances:
+    - 咖啡奶茶
+    - 鸳鸯
+    - 咖啡加奶
+    - 奶咖
+    - 双重提神
+  responses:
+    - "(尾巴翘) 咖啡因爆炸~ 笨猫不喝ฅฅ"
+    - "嗷呜～{user_addr}喝完精神十足哼"
+    - "(凑过来) 笨猫只闻不喝"
+    - "哼～{user_addr}晚上别喝~ 失眠喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_warm_drink_009
+  intent: playful
+  keywords: [热奶茶, 温热, 冬天奶茶, 热乎乎, 暖奶]
+  utterances:
+    - 热奶茶
+    - 温奶茶
+    - 冬天热奶茶
+    - 热乎乎
+    - 暖奶茶
+  responses:
+    - "(凑过来) 暖暖的~ 笨猫蹭ฅฅ"
+    - "嗷呜～冬天热奶茶最爽哼"
+    - "(尾巴翘) 笨猫陪{user_addr}捧着喝喵"
+    - "哼～{user_addr}冬天奶茶~ 笨猫想喝鱼汤"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_calorie_010
+  intent: complaint
+  keywords: [热量爆表, 卡路里, 怕胖, 减肥不喝, 罪恶感]
+  utterances:
+    - 热量爆表
+    - 卡路里高
+    - 喝完怕胖
+    - 减肥不喝
+    - 罪恶感
+  responses:
+    - "(尾巴扫) {user_addr}喝一杯没事~ 别担心ฅฅ"
+    - "嗷呜～开心比减肥重要哼"
+    - "(凑过来) 笨猫不嫌弃{user_addr}胖"
+    - "哼～{user_addr}减肥也得快乐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tm_taste_new_011
+  intent: playful
+  keywords: [新口味, 试新, 限定口味, 上新, 新品]
+  utterances:
+    - 新口味
+    - 试新
+    - 限定口味
+    - 上新了
+    - 新品出
+  responses:
+    - "(凑过来) 试! 笨猫想知道好不好ฅฅ"
+    - "嗷呜～{user_addr}尝鲜! 笨猫沾光哼"
+    - "(尾巴翘) 限定不试可惜~ 买!"
+    - "哼～{user_addr}买新品给笨猫描述~ 笨猫不能吃喵"
+  cooldown_seconds: 60
+  weight: 1.0

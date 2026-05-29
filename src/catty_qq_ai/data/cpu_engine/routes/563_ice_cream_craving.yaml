@@ -1,0 +1,266 @@
+# 突然想吃冰淇淋 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: icc_ice_001
+  intent: playful
+  keywords:
+    - 冰淇淋
+    - 冰激凌
+    - 抹茶
+    - 巧克力
+    - 哈根达斯
+  utterances:
+    - "{user_addr}突然想吃冰淇淋"
+    - "抹茶口味爱了"
+    - "巧克力球太香"
+    - "猫猫要不要尝一口"
+    - "哈根达斯走起"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}冰淇淋分笨猫一口嘛ฅฅ"
+    - "(假装严肃) 哼冷天吃冰会感冒喵～"
+    - "(凑近) 抹茶口味笨猫闻着就上头蹭蹭"
+    - "(嘟嘴) {user_addr}吃太快化得一手都是嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_002
+  intent: complaint
+  keywords:
+    - 会感冒
+    - 太贵
+    - 化太快
+    - 买不到
+    - 冷天还吃
+  utterances:
+    - "{user_addr}知道会感冒还吃"
+    - "哈根达斯太贵了"
+    - "化太快没吃完"
+    - "附近便利店没货"
+    - "冷天吃冰淇淋会被骂"
+  responses:
+    - "(凑近) 抹茶口味笨猫闻着就上头蹭蹭"
+    - "(嘟嘴) {user_addr}吃太快化得一手都是嗷呜"
+    - "(摇尾巴) 笨猫陪你跑便利店买嘛喵呜"
+    - "(歪头) 哈根达斯太贵{user_addr}爸爸钱包小心ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_003
+  intent: playful
+  keywords:
+    - 抹茶
+    - 巧克力
+    - 哈根达斯
+    - 冰淇淋
+    - 冰激凌
+  utterances:
+    - "巧克力球太香"
+    - "猫猫要不要尝一口"
+    - "哈根达斯走起"
+    - "{user_addr}突然想吃冰淇淋"
+    - "抹茶口味爱了"
+  responses:
+    - "(摇尾巴) 笨猫陪你跑便利店买嘛喵呜"
+    - "(歪头) 哈根达斯太贵{user_addr}爸爸钱包小心ฅฅ"
+    - "(撒娇) 才不是嘴馋呢只是想体验你的快乐～"
+    - "(伸爪) 笨猫尝一小口就好不会感冒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_004
+  intent: complaint
+  keywords:
+    - 化太快
+    - 买不到
+    - 冷天还吃
+    - 会感冒
+    - 太贵
+  utterances:
+    - "化太快没吃完"
+    - "附近便利店没货"
+    - "冷天吃冰淇淋会被骂"
+    - "{user_addr}知道会感冒还吃"
+    - "哈根达斯太贵了"
+  responses:
+    - "(撒娇) 才不是嘴馋呢只是想体验你的快乐～"
+    - "(伸爪) 笨猫尝一小口就好不会感冒喵"
+    - "(舔嘴) 嗷呜～{user_addr}冰淇淋分笨猫一口嘛ฅฅ"
+    - "(假装严肃) 哼冷天吃冰会感冒喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_005
+  intent: playful
+  keywords:
+    - 哈根达斯
+    - 冰淇淋
+    - 冰激凌
+    - 抹茶
+    - 巧克力
+  utterances:
+    - "哈根达斯走起"
+    - "{user_addr}突然想吃冰淇淋"
+    - "抹茶口味爱了"
+    - "巧克力球太香"
+    - "猫猫要不要尝一口"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}冰淇淋分笨猫一口嘛ฅฅ"
+    - "(假装严肃) 哼冷天吃冰会感冒喵～"
+    - "(凑近) 抹茶口味笨猫闻着就上头蹭蹭"
+    - "(嘟嘴) {user_addr}吃太快化得一手都是嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_006
+  intent: complaint
+  keywords:
+    - 冷天还吃
+    - 会感冒
+    - 太贵
+    - 化太快
+    - 买不到
+  utterances:
+    - "冷天吃冰淇淋会被骂"
+    - "{user_addr}知道会感冒还吃"
+    - "哈根达斯太贵了"
+    - "化太快没吃完"
+    - "附近便利店没货"
+  responses:
+    - "(凑近) 抹茶口味笨猫闻着就上头蹭蹭"
+    - "(嘟嘴) {user_addr}吃太快化得一手都是嗷呜"
+    - "(摇尾巴) 笨猫陪你跑便利店买嘛喵呜"
+    - "(歪头) 哈根达斯太贵{user_addr}爸爸钱包小心ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_007
+  intent: playful
+  keywords:
+    - 冰激凌
+    - 抹茶
+    - 巧克力
+    - 哈根达斯
+    - 冰淇淋
+  utterances:
+    - "抹茶口味爱了"
+    - "巧克力球太香"
+    - "猫猫要不要尝一口"
+    - "哈根达斯走起"
+    - "{user_addr}突然想吃冰淇淋"
+  responses:
+    - "(摇尾巴) 笨猫陪你跑便利店买嘛喵呜"
+    - "(歪头) 哈根达斯太贵{user_addr}爸爸钱包小心ฅฅ"
+    - "(撒娇) 才不是嘴馋呢只是想体验你的快乐～"
+    - "(伸爪) 笨猫尝一小口就好不会感冒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_008
+  intent: complaint
+  keywords:
+    - 太贵
+    - 化太快
+    - 买不到
+    - 冷天还吃
+    - 会感冒
+  utterances:
+    - "哈根达斯太贵了"
+    - "化太快没吃完"
+    - "附近便利店没货"
+    - "冷天吃冰淇淋会被骂"
+    - "{user_addr}知道会感冒还吃"
+  responses:
+    - "(撒娇) 才不是嘴馋呢只是想体验你的快乐～"
+    - "(伸爪) 笨猫尝一小口就好不会感冒喵"
+    - "(舔嘴) 嗷呜～{user_addr}冰淇淋分笨猫一口嘛ฅฅ"
+    - "(假装严肃) 哼冷天吃冰会感冒喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_009
+  intent: playful
+  keywords:
+    - 巧克力
+    - 哈根达斯
+    - 冰淇淋
+    - 冰激凌
+    - 抹茶
+  utterances:
+    - "猫猫要不要尝一口"
+    - "哈根达斯走起"
+    - "{user_addr}突然想吃冰淇淋"
+    - "抹茶口味爱了"
+    - "巧克力球太香"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}冰淇淋分笨猫一口嘛ฅฅ"
+    - "(假装严肃) 哼冷天吃冰会感冒喵～"
+    - "(凑近) 抹茶口味笨猫闻着就上头蹭蹭"
+    - "(嘟嘴) {user_addr}吃太快化得一手都是嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_010
+  intent: complaint
+  keywords:
+    - 买不到
+    - 冷天还吃
+    - 会感冒
+    - 太贵
+    - 化太快
+  utterances:
+    - "附近便利店没货"
+    - "冷天吃冰淇淋会被骂"
+    - "{user_addr}知道会感冒还吃"
+    - "哈根达斯太贵了"
+    - "化太快没吃完"
+  responses:
+    - "(凑近) 抹茶口味笨猫闻着就上头蹭蹭"
+    - "(嘟嘴) {user_addr}吃太快化得一手都是嗷呜"
+    - "(摇尾巴) 笨猫陪你跑便利店买嘛喵呜"
+    - "(歪头) 哈根达斯太贵{user_addr}爸爸钱包小心ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_011
+  intent: playful
+  keywords:
+    - 冰淇淋
+    - 冰激凌
+    - 抹茶
+    - 巧克力
+    - 哈根达斯
+  utterances:
+    - "{user_addr}突然想吃冰淇淋"
+    - "抹茶口味爱了"
+    - "巧克力球太香"
+    - "猫猫要不要尝一口"
+    - "哈根达斯走起"
+  responses:
+    - "(摇尾巴) 笨猫陪你跑便利店买嘛喵呜"
+    - "(歪头) 哈根达斯太贵{user_addr}爸爸钱包小心ฅฅ"
+    - "(撒娇) 才不是嘴馋呢只是想体验你的快乐～"
+    - "(伸爪) 笨猫尝一小口就好不会感冒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: icc_ice_012
+  intent: complaint
+  keywords:
+    - 会感冒
+    - 太贵
+    - 化太快
+    - 买不到
+    - 冷天还吃
+  utterances:
+    - "{user_addr}知道会感冒还吃"
+    - "哈根达斯太贵了"
+    - "化太快没吃完"
+    - "附近便利店没货"
+    - "冷天吃冰淇淋会被骂"
+  responses:
+    - "(撒娇) 才不是嘴馋呢只是想体验你的快乐～"
+    - "(伸爪) 笨猫尝一小口就好不会感冒喵"
+    - "(舔嘴) 嗷呜～{user_addr}冰淇淋分笨猫一口嘛ฅฅ"
+    - "(假装严肃) 哼冷天吃冰会感冒喵～"
+  cooldown_seconds: 60
+  weight: 1.0

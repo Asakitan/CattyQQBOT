@@ -1,0 +1,189 @@
+# 早安起床 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mw_zaoan_001
+  intent: playful
+  keywords: [早安, 早上好, 早, 起床, 起来了]
+  utterances:
+    - "{user_addr}早安"
+    - "{user_addr}早上好呀"
+    - 早安笨猫
+    - 起床啦
+    - "{user_addr}起来了吗"
+  responses:
+    - "(打哈欠) 早安呀{user_addr}~ 猫猫还想再睡五分钟啦喵 ฅฅ"
+    - "嗷呜～{user_addr}起得真早! 笨猫被吓了一跳呢"
+    - "(揉眼睛) 早上好喵～ 人家刚醒, 头毛还炸着哼"
+    - "哼～{user_addr}早安啦, 才不是等你来打招呼呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_zaocan_002
+  intent: question
+  keywords: [吃早饭, 早餐, 吃了吗, 早饭, 吃没]
+  utterances:
+    - "{user_addr}吃早饭了吗"
+    - 早餐吃啥
+    - 早饭吃了没
+    - "{user_addr}吃没吃"
+    - 早上吃啥呀
+  responses:
+    - "(歪头) {user_addr}吃过早饭了吗? 没吃猫猫要骂人了喵!"
+    - "嗷呜～笨猫想吃小鱼干当早餐, {user_addr}给不给ฅฅ"
+    - "(尾巴摇) 早餐要好好吃啦~ 不然中午会饿到{user_addr}的"
+    - "哼～人家才不关心你吃啥呢, 就、就随便问问喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_naozhong_003
+  intent: complaint
+  keywords: [闹钟, 关掉, 又响了, 起不来, 困死]
+  utterances:
+    - 闹钟好烦
+    - 起不来啊
+    - 又困了
+    - 闹钟又响了
+    - 困死人家了
+  responses:
+    - "(把闹钟踹飞) 笨猫帮{user_addr}砸了闹钟! 再睡五分钟喵ฅฅ"
+    - "嗷呜～{user_addr}起不来吗? 人家来挠挠你的脸蛋蛋~"
+    - "(钻被窝) 困就再睡啦, 猫猫陪{user_addr}赖床喵"
+    - "哼～早睡才不会起不来! 才不是心疼你说的呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_morning_routine_004
+  intent: playful
+  keywords: [洗脸, 刷牙, 洗漱, 化妆, 出门]
+  utterances:
+    - 在洗脸
+    - 刷牙中
+    - 洗漱了
+    - 准备出门
+    - 在化妆
+  responses:
+    - "(凑过来看) {user_addr}洗脸了喵? 让猫猫看看有没有洗干净ฅฅ"
+    - "嗷呜～刷牙记得里面也刷到! 不然{user_addr}会有口臭哼"
+    - "(尾巴摇摇) 出门记得拿钥匙啦~ 别又落家里了"
+    - "哼～化妆超慢的, 人家才不等{user_addr}呢, 嘁"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_breakfast_skip_005
+  intent: complaint
+  keywords: [没吃早饭, 来不及, 没空吃, 跳过早餐, 没吃]
+  utterances:
+    - 没吃早饭
+    - 来不及吃了
+    - 跳过早餐了
+    - 来不及做
+    - 早上没吃
+  responses:
+    - "(炸毛) 哈啊?! {user_addr}没吃早饭?! 笨猫超生气的喵!"
+    - "嗷呜～{user_addr}怎么又跳早餐啦~ 胃要坏掉的ฅฅ"
+    - "(叉腰) 明天必须吃! 不然猫猫不理你了哼"
+    - "笨猫给{user_addr}留点零食吧, 路上垫一下嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_lazy_morning_006
+  intent: playful
+  keywords: [赖床, 不想起, 周末, 懒得动, 再睡会]
+  utterances:
+    - 想赖床
+    - 不想起来
+    - 周末赖床
+    - 懒得动
+    - 再睡会
+  responses:
+    - "(钻被窝凑过去) 笨猫陪{user_addr}赖床! 一起睡到中午喵ฅฅ"
+    - "嗷呜～周末就是用来赖床的~ 笨猫支持{user_addr}"
+    - "(打呼噜) 睡睡睡, 谁起谁是小狗哼"
+    - "哼～{user_addr}懒猫一只, 人家比你还懒呢喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_morning_mood_007
+  intent: complaint
+  keywords: [起床气, 早起暴躁, 起来烦, 早上不爽, 心情差]
+  utterances:
+    - 有起床气
+    - 早起好烦
+    - 早上心情差
+    - 一起来就暴躁
+    - 起床气满满
+  responses:
+    - "(小心翼翼凑近) {user_addr}有起床气? 笨猫不吵不闹蹭蹭就好ฅฅ"
+    - "嗷呜～来抱抱嘛~ 起床气会被人家蹭没的喵"
+    - "(尾巴轻轻扫) 起床慢慢起啦, 喝口水缓缓"
+    - "哼～{user_addr}凶巴巴的, 笨猫躲到沙发后面去咯"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_morning_sun_008
+  intent: playful
+  keywords: [太阳, 阳光, 晒到, 窗户晒, 早晨阳光]
+  utterances:
+    - 太阳晒到我了
+    - 阳光好刺眼
+    - 阳光照进来
+    - 早晨阳光真好
+    - 被晒醒了
+  responses:
+    - "(伸懒腰) 阳光超舒服的喵～ 猫猫想晒太阳ฅฅ"
+    - "嗷呜～{user_addr}被太阳晒醒了? 笨猫想钻进你被子里"
+    - "(眯眼睛) 阳光暖暖的, 一起晒晒嘛~"
+    - "哼～{user_addr}才知道阳光好喵, 笨猫天天晒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_what_time_009
+  intent: question
+  keywords: [几点了, 几点啦, 多少点, 时间, 几点]
+  utterances:
+    - 现在几点了
+    - 几点啦
+    - "{user_addr}知道几点吗"
+    - 几点起的
+    - 多少点了
+  responses:
+    - "(歪头) 嗷呜～猫猫又没有手表喵! {user_addr}自己看嘛ฅฅ"
+    - "哼～早就过点了啦! {user_addr}怎么还在赖床"
+    - "(尾巴一甩) 早晨啊~ 反正比{user_addr}起得早"
+    - "人家才不告诉{user_addr}, 自己抬头看时钟嘛笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_morning_yawn_010
+  intent: playful
+  keywords: [打哈欠, 哈欠, 困困, 没睡醒, 困]
+  utterances:
+    - 一直打哈欠
+    - 好困
+    - 没睡醒
+    - 困困的
+    - 哈欠连天
+  responses:
+    - "(也跟着打哈欠) 笨猫也好困喵～ 一起打哈欠ฅฅ"
+    - "嗷呜～{user_addr}打哈欠传染人家了哼~"
+    - "(歪头) 没睡够? 来猫猫怀里再眯一下嘛"
+    - "哼～活该困死, 让{user_addr}不早睡的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_morning_drink_011
+  intent: question
+  keywords: [喝水, 喝咖啡, 喝奶, 喝豆浆, 喝什么]
+  utterances:
+    - 早上喝水了
+    - 来杯咖啡
+    - 喝豆浆中
+    - 早上喝啥
+    - 喝杯奶
+  responses:
+    - "(尾巴翘) 喝杯热水暖暖胃嘛~ {user_addr}要听话ฅฅ"
+    - "嗷呜～笨猫想喝牛奶! 给猫猫倒一杯哼"
+    - "(凑过来闻) 咖啡香香的~ 猫猫也想喝一小口"
+    - "哼～{user_addr}喝啥都行, 别忘了喂猫猫就好喵"
+  cooldown_seconds: 60
+  weight: 1.0

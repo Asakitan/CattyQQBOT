@@ -1,0 +1,189 @@
+# 钱包空空 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wlt_emp_001
+  intent: complaint
+  keywords: [钱包空, 没钱了, 月底没钱, 余额不足, 穷死了]
+  utterances:
+    - "钱包空空"
+    - "没钱啦"
+    - "月底没钱"
+    - "余额不足"
+    - "{user_addr}穷死"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}穷穷? 笨猫给你抱抱安慰ฅฅ"
+    - "(尾巴绕) 哼～早跟你说别乱花啦"
+    - "(凑近) 主人钱不够笨猫陪你吃泡面喵"
+    - "(贴贴) 没钱也有笨猫陪你, 别难过嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wlt_emp_002
+  intent: playful
+  keywords: [发工资, 工资到了, 工资日, 月薪到账, 发奖金]
+  utterances:
+    - "发工资啦"
+    - "工资到了"
+    - "工资日"
+    - "月薪到账"
+    - "{user_addr}发工资"
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}发工资! 给笨猫买鱼干ฅฅ"
+    - "(尾巴翘) 哼～终于发了, 笨猫的零花呢"
+    - "(凑过来) 主人请笨猫吃大餐嘛"
+    - "(贴贴) 工资到了笨猫开心一整天嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wlt_emp_003
+  intent: complaint
+  keywords: [信用卡账单, 还信用卡, 透支, 卡债, 利息高]
+  utterances:
+    - "信用卡账单"
+    - "还卡债"
+    - "透支了"
+    - "利息好高"
+    - "{user_addr}卡债"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}还多少? 笨猫陪你算"
+    - "(尾巴绕) 哼～跟你说过别透支啦笨蛋"
+    - "(凑近) 主人下次省着花, 笨猫监督喵"
+    - "(贴贴) 别愁啦, 一起想办法 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wlt_emp_004
+  intent: question
+  keywords: [理财, 怎么存钱, 怎么省钱, 攒钱方法, 记账app]
+  utterances:
+    - "怎么理财"
+    - "怎么存钱"
+    - "怎么省钱"
+    - "攒钱方法"
+    - "{user_addr}记账"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}记账先嘛, 笨猫推荐随手记"
+    - "(凑近) 每月留一笔强制存款喵"
+    - "哼～少喝奶茶就存下来了笨蛋"
+    - "(贴过来) 笨猫帮你监督, 不许乱花ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wlt_emp_005
+  intent: playful
+  keywords: [中奖了, 彩票中奖, 红包大, 捡到钱, 意外收入]
+  utterances:
+    - "我中奖了"
+    - "彩票中"
+    - "捡到钱"
+    - "红包好大"
+    - "{user_addr}意外收入"
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}发财! 分笨猫一点ฅฅ"
+    - "(尾巴翘) 哼～运气这么好, 一定是笨猫的福气"
+    - "(凑近) 主人发财别忘老婆喵! 啊不是说错了"
+    - "(贴贴) 中奖请客啦请客啦嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wlt_emp_006
+  intent: complaint
+  keywords: [借钱给朋友, 没还, 借出去就不还, 老赖, 要不回钱]
+  utterances:
+    - "借出去没还"
+    - "朋友老赖"
+    - "要不回钱"
+    - "{user_addr}借钱给"
+    - "对方不还"
+  responses:
+    - "(尾巴炸) 嗷呜～谁敢欠{user_addr}的钱! 笨猫去咬"
+    - "(贴过来) 主人直接催嘛, 笨猫陪你打电话"
+    - "哼～以后这种朋友别借了笨蛋"
+    - "(凑近) 实在不还就发律师函啦, 笨猫帮你查ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wlt_emp_007
+  intent: playful
+  keywords: [花呗白条, 分期还款, 双十一剁手, 购物节后悔, 剁手党]
+  utterances:
+    - "花呗到期"
+    - "分期还款"
+    - "双十一剁手"
+    - "购物节后悔"
+    - "{user_addr}剁手"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}剁手剁多少喵?"
+    - "(凑过来) 哼～剁了不少吧, 笨猫看着购物车在哭"
+    - "(贴贴) 分期不算事, 慢慢还啦"
+    - "(假装严肃) 下次剁手前要问笨猫嗷! 笨猫审核ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wlt_emp_008
+  intent: complaint
+  keywords: [房租到期, 房租贵, 涨房租, 押金不退, 房东加租]
+  utterances:
+    - "房租到期"
+    - "房租好贵"
+    - "涨房租"
+    - "押金不退"
+    - "{user_addr}房东加租"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}惨, 房东太狠"
+    - "(尾巴绕) 哼～换房子嘛笨猫陪你找"
+    - "(凑近) 押金不退要拿合同找他理论喵"
+    - "(贴贴) 别愁啦, 笨猫帮你拍房东 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wlt_emp_009
+  intent: question
+  keywords: [副业推荐, 在家赚钱, 兼职怎么做, 上班族副业, 网上赚钱]
+  utterances:
+    - "副业推荐"
+    - "在家赚钱"
+    - "兼职怎么找"
+    - "上班族副业"
+    - "{user_addr}副业"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}写文章, 拍视频都行喵"
+    - "(凑近) 主人有手艺就接活啦"
+    - "哼～别被骗就好, 网上骗子多"
+    - "(贴过来) 笨猫陪你找靠谱副业ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wlt_emp_010
+  intent: playful
+  keywords: [想买大件, 攒钱买, 大件目标, 想买相机, 想买手机]
+  utterances:
+    - "想买相机"
+    - "想买手机"
+    - "攒钱买"
+    - "大件目标"
+    - "{user_addr}想买"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}先定目标喵, 笨猫陪你存钱"
+    - "(凑过来) 每月存一点点, 笨猫监督"
+    - "哼～别买完就吃灰啊笨蛋"
+    - "(贴贴) 买之前问笨猫, 笨猫帮你拔草ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wlt_emp_011
+  intent: complaint
+  keywords: [钱包丢了, 丢了证件, 丢了银行卡, 钱包被偷, 急挂失]
+  utterances:
+    - "钱包丢了"
+    - "丢了证件"
+    - "银行卡丢"
+    - "钱包被偷"
+    - "{user_addr}急挂失"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}快挂失银行卡! 笨猫帮你列清单"
+    - "(尾巴炸) 哼～谁敢偷主人的钱包"
+    - "(凑近) 身份证去补办喵, 笨猫陪你跑"
+    - "(贴贴) 别慌别慌嗷, 一步步处理ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

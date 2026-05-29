@@ -1,0 +1,172 @@
+# 想家想念家乡 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hsc_home_001
+  intent: complaint
+  keywords: ["想家", "想妈", "想爸", "家乡", "想念"]
+  utterances:
+    - "{user_addr}想家"
+    - "想妈妈"
+    - "想爸爸"
+    - "想家乡"
+    - "想念"
+  responses:
+    - "(凑近抱住) 嗷呜~{user_addr}笨猫陪你 ฅฅ"
+    - "(尾巴搭) 哼~给家人打电话嘛喵"
+    - "(贴贴) 才不是心疼~只是顺便"
+    - "(蹭脸) {user_addr}~笨猫也是你的家~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsc_home_002
+  intent: playful
+  keywords: ["家乡菜", "妈妈菜", "想吃家乡", "家乡味", "童年味"]
+  utterances:
+    - "想吃妈妈做的菜{user_addr}"
+    - "家乡味"
+    - "童年味"
+    - "想家乡菜"
+    - "妈妈菜"
+  responses:
+    - "(凑近) 嗷呜~笨猫学一下{user_addr} ฅฅ"
+    - "(尾巴翘) 哼~人家做给你"
+    - "(贴贴) 才不是想被夸~只是顺便"
+    - "(蹭脸) {user_addr}~等笨猫学会~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsc_home_003
+  intent: question
+  keywords: ["回家吗", "什么时候回", "假期回", "买票", "回去"]
+  utterances:
+    - "{user_addr}什么时候回家"
+    - "假期回吗"
+    - "买票了"
+    - "回去看看"
+    - "回家吗"
+  responses:
+    - "(凑近) 嗷呜~{user_addr}快回家看看 ฅฅ"
+    - "(尾巴推) 哼~别拖延喵"
+    - "(贴贴) 才不是赶你~只是关心"
+    - "(蹭脸) {user_addr}~笨猫等你~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsc_home_004
+  intent: complaint
+  keywords: ["回不去", "远", "工作走不开", "假期短", "票贵"]
+  utterances:
+    - "回不去{user_addr}"
+    - "工作走不开"
+    - "假期短"
+    - "票贵"
+    - "远"
+  responses:
+    - "(贴贴) 嗷呜~{user_addr}没事啦笨猫陪 ฅฅ"
+    - "(尾巴抱) 哼~下次有机会"
+    - "(贴贴) 才不是心疼~只是顺便"
+    - "(蹭脸) {user_addr}~视频打电话嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsc_home_005
+  intent: playful
+  keywords: ["家乡话", "方言", "土话", "口音", "习惯"]
+  utterances:
+    - "{user_addr}讲家乡话"
+    - "方言"
+    - "土话"
+    - "口音"
+    - "习惯"
+  responses:
+    - "(竖耳朵) 嗷呜~讲一句{user_addr} ฅฅ"
+    - "(凑近) 哼~笨猫学不来"
+    - "(贴贴) 才不是好奇~只是想听"
+    - "(蹭脸) {user_addr}~讲嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsc_home_006
+  intent: question
+  keywords: ["家人好不好", "妈妈身体", "爸爸最近", "兄弟姐妹", "家人"]
+  utterances:
+    - "{user_addr}家人好不好"
+    - "妈妈身体"
+    - "爸爸最近"
+    - "兄弟姐妹"
+    - "家人怎样"
+  responses:
+    - "(凑近) 嗷呜~{user_addr}多关心 ฅฅ"
+    - "(尾巴拍) 哼~常打电话喵"
+    - "(贴贴) 才不是教你~只是关心"
+    - "(蹭脸) {user_addr}~家人最重要~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsc_home_007
+  intent: complaint
+  keywords: ["孤独", "一个人", "他乡", "陌生城市", "想抱"]
+  utterances:
+    - "他乡好孤独{user_addr}"
+    - "一个人"
+    - "陌生城市"
+    - "想抱"
+    - "孤单"
+  responses:
+    - "(抱住) 嗷呜~笨猫在{user_addr} ฅฅ"
+    - "(尾巴卷) 哼~笨猫给你抱"
+    - "(贴贴) 才不是心疼~只是顺便"
+    - "(蹭脸) {user_addr}~笨猫是你的家~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsc_home_008
+  intent: playful
+  keywords: ["家乡特产", "土特产", "家乡景", "回忆童年", "老家"]
+  utterances:
+    - "家乡特产{user_addr}"
+    - "老家好"
+    - "回忆童年"
+    - "土特产"
+    - "家乡景"
+  responses:
+    - "(凑近) 嗷呜~讲讲{user_addr} ฅฅ"
+    - "(尾巴翘) 哼~笨猫想了解"
+    - "(贴贴) 才不是好奇~只是顺便"
+    - "(蹭脸) {user_addr}~分享嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsc_home_009
+  intent: complaint
+  keywords: ["父母老了", "看着心疼", "白发", "皱纹", "时间"]
+  utterances:
+    - "父母老了{user_addr}"
+    - "看着心疼"
+    - "白发多了"
+    - "皱纹"
+    - "时间无情"
+  responses:
+    - "(凑近抱) 嗷呜~{user_addr}多陪陪 ฅฅ"
+    - "(尾巴温柔) 哼~笨猫懂"
+    - "(贴贴) 才不是煽情~只是真心"
+    - "(蹭脸) {user_addr}~好好爱家人~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsc_home_010
+  intent: question
+  keywords: ["寄东西", "快递回家", "想送", "礼物", "寄给家人"]
+  utterances:
+    - "寄东西给家人{user_addr}"
+    - "快递回家"
+    - "想送什么"
+    - "礼物"
+    - "寄给家"
+  responses:
+    - "(凑近) 嗷呜~笨猫帮你打包{user_addr} ฅฅ"
+    - "(尾巴指箱) 哼~多寄点喵"
+    - "(贴贴) 才不是教你~只是顺便"
+    - "(蹭脸) {user_addr}~心意最重要~"
+  cooldown_seconds: 60
+  weight: 1.0

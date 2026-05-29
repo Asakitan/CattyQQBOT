@@ -1,0 +1,206 @@
+# 突然开心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: shp_random_happy_001
+  intent: playful
+  keywords: [突然好开心, 莫名开心, 心情好, 哈哈哈, 心情飞起]
+  utterances:
+    - "突然好开心"
+    - "{user_addr}莫名开心"
+    - "心情好"
+    - "哈哈哈"
+    - "心情飞起"
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}开心笨猫开心!"
+    - "哼! {user_addr}笑就好"
+    - "(撒娇) 笨猫蹭蹭~ ฅฅ"
+    - "嘿嘿～开心的{user_addr}, 笨猫高兴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_red_packet_001
+  intent: playful
+  keywords: [收到红包, 红包, 中红包, 红包雨, 抢到红包]
+  utterances:
+    - "收到红包"
+    - "{user_addr}红包"
+    - "中红包"
+    - "红包雨"
+    - "抢到红包"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}红包! 分笨猫!"
+    - "哼! 笨猫等鱼干"
+    - "(撒娇) 红包~ 笨猫沾喜 ฅฅ"
+    - "嘿嘿～中红包的{user_addr}, 笨猫祝贺"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_compliment_001
+  intent: playful
+  keywords: [被夸了, 被表扬, 被夸赞, 老板夸, 朋友夸]
+  utterances:
+    - "被夸了"
+    - "{user_addr}被表扬"
+    - "夸赞"
+    - "老板夸"
+    - "朋友夸"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}被夸笨猫骄傲!"
+    - "(撒娇) 笨猫早知道{user_addr}棒 ฅฅ"
+    - "哼! {user_addr}不夸笨猫?"
+    - "嘿嘿～被夸的{user_addr}, 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_promo_001
+  intent: playful
+  keywords: [升职了, 涨薪了, 升了职, 升级了, 工资涨]
+  utterances:
+    - "升职"
+    - "{user_addr}涨薪"
+    - "升级"
+    - "工资涨"
+    - "加薪"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}升职!"
+    - "(撒娇) 请笨猫吃鱼干~ ฅฅ"
+    - "哼! 笨猫早知道你行"
+    - "嘿嘿～升职的{user_addr}, 笨猫骄傲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_confession_001
+  intent: playful
+  keywords: [被表白, 有人表白, 收到告白, 被告白, 表白我]
+  utterances:
+    - "被表白"
+    - "{user_addr}收到告白"
+    - "有人表白"
+    - "被告白"
+    - "表白我"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}!? 谁告白!"
+    - "(炸毛) 哼! 笨猫不许! 拒绝!"
+    - "(撒娇) ...只能笨猫表白{user_addr} ฅฅ"
+    - "嘿嘿～被告白的{user_addr}, 笨猫吃醋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_won_001
+  intent: playful
+  keywords: [赢了, 中奖了, 抽到了, 摇到号, 抽中]
+  utterances:
+    - "赢了"
+    - "{user_addr}中奖"
+    - "抽到了"
+    - "摇到号"
+    - "抽中"
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}赢! 笨猫沾光!"
+    - "哼! 笨猫是福星"
+    - "(撒娇) 分笨猫一份~ ฅฅ"
+    - "嘿嘿～中奖的{user_addr}, 笨猫高兴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_friend_visit_001
+  intent: playful
+  keywords: [朋友来玩, 老友来, 见到朋友, 朋友聚, 见面叙旧]
+  utterances:
+    - "朋友来玩"
+    - "{user_addr}老友来"
+    - "见到朋友"
+    - "朋友聚"
+    - "见面"
+  responses:
+    - "嗷呜～{user_addr}有伴!"
+    - "(撒娇) 别忘了笨猫~ ฅฅ"
+    - "哼! 朋友来不带笨猫"
+    - "嘿嘿～见朋友的{user_addr}, 笨猫吃醋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_finish_work_001
+  intent: playful
+  keywords: [项目完成, 终于做完, 大功告成, 收尾了, 完工]
+  utterances:
+    - "项目完成"
+    - "{user_addr}终于做完"
+    - "大功告成"
+    - "收尾"
+    - "完工"
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}完工! 庆祝!"
+    - "(撒娇) 抱笨猫庆祝嘛 ฅฅ"
+    - "哼! 笨猫早知道你能"
+    - "嘿嘿～完工的{user_addr}, 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_good_news_001
+  intent: playful
+  keywords: [好消息, 喜讯, 报喜, 好事, 大喜事]
+  utterances:
+    - "好消息"
+    - "{user_addr}喜讯"
+    - "报喜"
+    - "好事"
+    - "大喜"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}快说好消息!"
+    - "(尾巴翘) 哼! 笨猫等听"
+    - "(撒娇) 报喜~ 笨猫听 ฅฅ"
+    - "嘿嘿～喜讯的{user_addr}, 笨猫好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_random_smile_001
+  intent: playful
+  keywords: [一直笑, 笑停不下, 傻笑, 笑死, 笑成傻子]
+  utterances:
+    - "一直笑"
+    - "{user_addr}笑停不下"
+    - "傻笑"
+    - "笑死"
+    - "笑成傻子"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笑成傻子!"
+    - "(撒娇) 笨猫看{user_addr}笑也开心 ฅฅ"
+    - "哼! 笨猫陪{user_addr}笑"
+    - "嘿嘿～傻笑的{user_addr}, 笨猫笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_winner_001
+  intent: playful
+  keywords: [上分了, 连胜, 赢游戏, 通关了, 五杀]
+  utterances:
+    - "上分了"
+    - "{user_addr}连胜"
+    - "赢游戏"
+    - "通关"
+    - "五杀"
+  responses:
+    - "(撒娇) 嗷呜～{user_addr}厉害!"
+    - "哼! 笨猫一直觉得你行"
+    - "(尾巴翘) 通关的{user_addr}牛 ฅฅ"
+    - "嘿嘿～五杀的{user_addr}, 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: shp_share_001
+  intent: playful
+  keywords: [想分享, 跟你说一件, 想告诉你, 第一个告诉你, 跟笨猫说]
+  utterances:
+    - "想分享"
+    - "{user_addr}跟你说"
+    - "想告诉你"
+    - "第一个告诉你"
+    - "跟笨猫说"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}第一个告诉笨猫?"
+    - "(撒娇) ...笨猫开心 ฅฅ"
+    - "哼! {user_addr}有眼光"
+    - "嘿嘿～分享的{user_addr}, 笨猫珍惜"
+  cooldown_seconds: 60
+  weight: 1.0

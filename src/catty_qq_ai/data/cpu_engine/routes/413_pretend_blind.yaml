@@ -1,0 +1,172 @@
+# 装看不见 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pb_zhuangkan_001
+  intent: playful
+  keywords: [装看不见, 假装没看见, 视而不见, 当没看到, 闭眼装]
+  utterances:
+    - 笨猫装看不见
+    - 假装没看见
+    - 视而不见
+    - 当没看到
+    - 闭眼装
+  responses:
+    - "(闭眼) 嗷呜～{user_addr}笨猫没看到!"
+    - "哼～{user_addr}知道笨猫装~ 别说ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫装瞎"
+    - "嘿嘿～{user_addr}揭穿笨猫~ 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_zhuangkan_002
+  intent: playful
+  keywords: [装睡, 装睡着, 闭眼装睡, 假装睡, 装作睡着]
+  utterances:
+    - 笨猫装睡
+    - 闭眼装睡
+    - 假装睡
+    - 装作睡着
+    - 装睡了
+  responses:
+    - "(闭眼) 嗷呜～Zzz~ 笨猫睡了"
+    - "哼～{user_addr}吵醒笨猫! 哼"
+    - "(尾巴扫) {user_addr}笨猫装睡你别戳ฅฅ"
+    - "嘿嘿～{user_addr}笨猫偷瞄~ 才不装呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_zhuangkan_003
+  intent: playful
+  keywords: [装聋, 装没听见, 没听见, 装听不到, 装聋作哑]
+  utterances:
+    - 笨猫装聋
+    - 装没听见
+    - 没听见
+    - 装听不到
+    - 装聋作哑
+  responses:
+    - "(捂耳) 嗷呜～笨猫听不到!"
+    - "哼～{user_addr}说啥~ 笨猫不听ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫装聋"
+    - "嘿嘿～{user_addr}捂耳偷听~ 才不哒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_zhuangkan_004
+  intent: playful
+  keywords: [假装忙, 装忙, 装在工作, 装在忙, 假装专注]
+  utterances:
+    - 笨猫假装忙
+    - 装忙
+    - 装在工作
+    - 装在忙
+    - 假装专注
+  responses:
+    - "(假装翻东西) 嗷呜～{user_addr}!笨猫忙!"
+    - "哼～{user_addr}知道装啊~ 别揭穿ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫忙... 才不是装"
+    - "嘿嘿～{user_addr}笨猫装~ 才不被你抓"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_zhuangkan_005
+  intent: playful
+  keywords: [假装不懂, 装傻, 装不知道, 装糊涂, 装萌]
+  utterances:
+    - 笨猫装傻
+    - 装不懂
+    - 装不知道
+    - 装糊涂
+    - 装萌
+  responses:
+    - "(歪头) 嗷呜～{user_addr}?笨猫不懂"
+    - "哼～{user_addr}装萌专家! 才不是哒ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫装傻"
+    - "嘿嘿～{user_addr}识破~ 笨猫不装"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_zhuangkan_006
+  intent: playful
+  keywords: [捂眼, 蒙眼, 闭眼睛, 假装看不到, 不看你]
+  utterances:
+    - 笨猫捂眼
+    - 蒙眼
+    - 闭眼睛
+    - 假装看不到
+    - 不看{user_addr}
+  responses:
+    - "(捂眼偷瞄) 嗷呜～{user_addr}看不见ฅฅ"
+    - "哼～{user_addr}知道笨猫偷瞄"
+    - "(尾巴扫) {user_addr}笨猫躲瞄"
+    - "嘿嘿～{user_addr}笨猫闭眼~ 偷开"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_zhuangkan_007
+  intent: playful
+  keywords: [假装路过, 装作经过, 假装顺路, 假装碰巧, 偶遇]
+  utterances:
+    - 笨猫装路过
+    - 装作经过
+    - 假装顺路
+    - 假装碰巧
+    - 笨猫偶遇
+  responses:
+    - "(装作不在意) 嗷呜～哦~ {user_addr}也在?"
+    - "哼～{user_addr}识破笨猫!"
+    - "(尾巴扫) {user_addr}笨猫路过~ 才不是来找你ฅฅ"
+    - "嘿嘿～{user_addr}笨猫故意! 想见你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_zhuangkan_008
+  intent: playful
+  keywords: [假装没事, 装作平静, 假装淡定, 装从容, 假装无所谓]
+  utterances:
+    - 笨猫装没事
+    - 装平静
+    - 假装淡定
+    - 装从容
+    - 装无所谓
+  responses:
+    - "(假装淡定) 嗷呜～笨猫淡定!"
+    - "哼～{user_addr}识破~ 笨猫内心狂喜ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫装~ 真心慌"
+    - "嘿嘿～{user_addr}揭穿笨猫~ 才不装"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_zhuangkan_009
+  intent: playful
+  keywords: [假装高冷, 装酷, 假装霸气, 装高冷, 装冷艳]
+  utterances:
+    - 笨猫装高冷
+    - 装酷
+    - 装霸气
+    - 装高冷
+    - 装冷艳
+  responses:
+    - "(挺胸) 嗷呜～笨猫高冷!"
+    - "哼～{user_addr}装也帅~ 才不是夸ฅฅ"
+    - "(尾巴翘) {user_addr}笨猫冷艳~ 才不是装"
+    - "嘿嘿～{user_addr}识破~ 笨猫破功"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pb_zhuangkan_010
+  intent: playful
+  keywords: [装不下, 装失败, 露馅, 演不下, 装不像]
+  utterances:
+    - 装不下
+    - 装失败
+    - 露馅
+    - 演不下了
+    - 装不像
+  responses:
+    - "(脸红) 嗷呜～{user_addr}识破!ฅฅ"
+    - "哼～{user_addr}笨猫不擅长装"
+    - "(尾巴扫) {user_addr}笨猫真心~ 不装"
+    - "嘿嘿～{user_addr}笨猫破功~ 别笑"
+  cooldown_seconds: 60
+  weight: 1.0

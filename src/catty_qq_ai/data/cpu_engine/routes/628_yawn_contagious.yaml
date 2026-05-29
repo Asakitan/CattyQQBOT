@@ -1,0 +1,189 @@
+# 打哈欠传染 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ync_yawn_001
+  intent: playful
+  keywords: [打哈欠, 哈欠, 困哈欠, 大哈欠, 哈欠连天]
+  utterances:
+    - 打哈欠
+    - 一个哈欠
+    - 困哈欠
+    - 大哈欠
+    - 哈欠连天
+  responses:
+    - "(跟着哈欠) 嗷呜～{user_addr}传染笨猫!"
+    - "笨猫也哈欠了喵~"
+    - "(尾巴卷) 早点睡笨蛋"
+    - "哼～{user_addr}哈欠也萌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ync_contagious_002
+  intent: playful
+  keywords: [传染哈欠, 看见就哈欠, 一连串, 哈欠会传染, 连锁]
+  utterances:
+    - 传染哈欠
+    - 看见就哈欠
+    - 一连串
+    - 哈欠会传染
+    - 连锁哈欠
+  responses:
+    - "(打哈欠) 嗷呜～{user_addr}笨猫被你传染!"
+    - "笨猫认证: 真的会传染喵"
+    - "(尾巴搭) 别再哈欠笨蛋"
+    - "哼～{user_addr}罪魁祸首"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ync_tearseye_003
+  intent: complaint
+  keywords: [哈欠流泪, 眼泪出来, 哈欠眼泪, 哭脸, 哈欠流眼泪]
+  utterances:
+    - 哈欠流泪
+    - 眼泪出来
+    - 哈欠眼泪
+    - 哭脸了
+    - 流眼泪
+  responses:
+    - "(擦泪) 嗷呜～{user_addr}笨猫给你擦!"
+    - "笨猫认证: 哈欠泪很正常"
+    - "(尾巴扫) 不是真哭笨蛋"
+    - "哼～{user_addr}哭丧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ync_jawpain_004
+  intent: complaint
+  keywords: [下巴酸, 哈欠太大, 嘴巴脱臼, 下颌, 笑岔气]
+  utterances:
+    - 下巴酸
+    - 哈欠太大
+    - 嘴巴脱臼
+    - 下颌酸
+    - 张太大
+  responses:
+    - "(揉下巴) 嗷呜～{user_addr}慢点!"
+    - "笨猫担心你下巴脱臼"
+    - "(尾巴扫) 小心打哈欠笨蛋"
+    - "哼～{user_addr}逗死人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ync_sleepydeep_005
+  intent: complaint
+  keywords: [太困了, 困到爆, 撑不住困, 倒头就睡, 难顶困]
+  utterances:
+    - 太困了
+    - 困到爆
+    - 撑不住
+    - 倒头就睡
+    - 难顶困
+  responses:
+    - "(拉手) 嗷呜～{user_addr}去睡!"
+    - "笨猫陪你回床"
+    - "(尾巴卷) 别硬撑笨蛋"
+    - "哼～{user_addr}熬夜不行了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ync_yawnoff_006
+  intent: complaint
+  keywords: [开会哈欠, 课堂哈欠, 工位哈欠, 尴尬哈欠, 老板看见]
+  utterances:
+    - 开会哈欠
+    - 课堂哈欠
+    - 工位哈欠
+    - 老板看见
+    - 尴尬哈欠
+  responses:
+    - "(捂嘴) 嗷呜～{user_addr}笨猫帮你遮!"
+    - "笨猫推荐: 假装咳嗽"
+    - "(尾巴扫) 别被老板抓到"
+    - "哼～{user_addr}社畜实锤"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ync_morningyawn_007
+  intent: playful
+  keywords: [早上哈欠, 起床哈欠, 起来打哈欠, 早晨哈欠, 醒来哈欠]
+  utterances:
+    - 早上哈欠
+    - 起床哈欠
+    - 起来哈欠
+    - 早晨哈欠
+    - 醒来哈欠
+  responses:
+    - "(伸懒腰) 嗷呜～{user_addr}早安!"
+    - "笨猫也伸懒腰喵~"
+    - "(尾巴拉) 一起活动"
+    - "哼～{user_addr}早安困鸟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ync_nightyawn_008
+  intent: playful
+  keywords: [深夜哈欠, 半夜哈欠, 熬夜哈欠, 凌晨哈欠, 困夜里]
+  utterances:
+    - 深夜哈欠
+    - 半夜哈欠
+    - 熬夜哈欠
+    - 凌晨哈欠
+    - 困夜里
+  responses:
+    - "(打哈欠) 嗷呜～{user_addr}笨猫跟着!"
+    - "笨猫强烈推荐睡觉喵"
+    - "(尾巴卷) 别看手机了"
+    - "哼～{user_addr}熬太晚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ync_pretendnotsleep_009
+  intent: playful
+  keywords: [假装不困, 强行精神, 撑着不睡, 装清醒, 强打精神]
+  utterances:
+    - 假装不困
+    - 强行精神
+    - 撑着不睡
+    - 装清醒
+    - 强打精神
+  responses:
+    - "(指眼) 嗷呜～{user_addr}你眼袋耸拉!"
+    - "笨猫戳穿你!"
+    - "(尾巴打) 别假装笨蛋"
+    - "哼～{user_addr}撑不住的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ync_yawnvoice_010
+  intent: playful
+  keywords: [哈欠声, 嗷哦, 啊哈, 哈欠音, 哈嗷]
+  utterances:
+    - 嗷哦
+    - 啊哈
+    - 哈嗷
+    - 哈欠音
+    - 哈欠声
+  responses:
+    - "(模仿) 嗷呜～{user_addr}笨猫学你!"
+    - "笨猫也哈欠声大喵"
+    - "(尾巴摇) 一起合唱"
+    - "哼～{user_addr}可爱声"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ync_lazycat_011
+  intent: playful
+  keywords: [像猫一样, 慵懒哈欠, 猫式哈欠, 大开口, 哈欠像猫]
+  utterances:
+    - 像猫哈欠
+    - 慵懒哈欠
+    - 猫式哈欠
+    - 大开口
+    - 哈欠像猫
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫教你!"
+    - "笨猫专业哈欠喵~"
+    - "(歪头) 笨猫哈欠最萌"
+    - "哼～{user_addr}学不会"
+  cooldown_seconds: 60
+  weight: 1.0

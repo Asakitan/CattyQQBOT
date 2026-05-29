@@ -1,0 +1,206 @@
+# 房间独舞 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: da_dnc_001
+  intent: playful
+  keywords: [房间跳舞, 独舞, 自己跳, 关门跳舞, 自嗨跳]
+  utterances:
+    - 房间独舞
+    - 关门跳舞
+    - 自己跳
+    - 自嗨跳
+    - 跳一段
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}自由"
+    - "哼～笨猫鼓掌"
+    - "(尾巴绕) 笨猫陪跳"
+    - "嗷呜～跳起来太爽ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_002
+  intent: playful
+  keywords: [跟练舞, 练舞蹈, 跳网红舞, 抖音舞, 学跳舞]
+  utterances:
+    - 跟练舞蹈
+    - 跳网红舞
+    - 抖音舞
+    - 学跳舞
+    - 一起跳
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}舞痴"
+    - "哼～别摔倒"
+    - "(尾巴绕) 笨猫尾巴摆"
+    - "嗷呜～拍视频给笨猫看ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_003
+  intent: complaint
+  keywords: [跳累, 体力差, 跳几下喘, 没耐力, 跳几秒就喘]
+  utterances:
+    - 跳几下就累
+    - 体力差
+    - 跳几秒喘
+    - 没耐力
+    - 跳到喘
+  responses:
+    - "(笑) 嗷呜～{user_addr}加强锻炼"
+    - "哼～平时不动"
+    - "(尾巴搭) 慢慢练"
+    - "嗷呜～休息一下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_004
+  intent: playful
+  keywords: [舞蹈风格, 街舞, 古典舞, 现代舞, 民族舞]
+  utterances:
+    - 街舞酷
+    - 古典舞优雅
+    - 现代舞
+    - 民族舞
+    - 各种风格
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}选哪种"
+    - "哼～风格多元好"
+    - "(尾巴绕) 笨猫学一种"
+    - "嗷呜～舞动起来ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_005
+  intent: complaint
+  keywords: [被家人撞见, 被发现跳舞, 跳舞社死, 跳舞被笑, 尴尬跳舞]
+  utterances:
+    - 被撞见跳舞
+    - 跳舞社死
+    - 跳舞被笑
+    - 尴尬跳舞
+    - 被发现
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}抬头挺胸"
+    - "哼～跳舞不丢人"
+    - "(尾巴搭) 笨猫帮{user_addr}撑"
+    - "嗷呜～自信跳ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_006
+  intent: playful
+  keywords: [跳舞解压, 解压跳舞, 心情舞, 跳出快乐, 跳到爆]
+  utterances:
+    - 跳舞解压
+    - 心情舞
+    - 跳出快乐
+    - 跳到爆
+    - 跳舞治愈
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}好方法"
+    - "哼～跳舞解压上"
+    - "(尾巴绕) 笨猫陪跳"
+    - "嗷呜～开心跳起来ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_007
+  intent: playful
+  keywords: [跳舞健身, 燃脂舞, 减肥舞, 操控身材, 燃脂跳]
+  utterances:
+    - 跳舞健身
+    - 燃脂舞
+    - 减肥舞
+    - 燃脂跳
+    - 操控身材
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}健身党"
+    - "哼～别勉强"
+    - "(尾巴绕) 笨猫监督"
+    - "嗷呜～坚持就出效果ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_008
+  intent: complaint
+  keywords: [跳错动作, 跟不上, 节奏错, 慢半拍, 舞痴]
+  utterances:
+    - 跳错动作
+    - 跟不上
+    - 节奏错
+    - 慢半拍
+    - 舞痴
+  responses:
+    - "(笑) 嗷呜～{user_addr}多练"
+    - "哼～慢点学"
+    - "(尾巴搭) 笨猫示范"
+    - "嗷呜～舞痴可爱啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_009
+  intent: playful
+  keywords: [跳舞拍视频, 跳舞上传, 抖音跳, 视频博主, 跳舞分享]
+  utterances:
+    - 拍跳舞视频
+    - 跳舞上传
+    - 抖音跳
+    - 视频博主
+    - 跳舞分享
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}博主"
+    - "哼～等流量爆"
+    - "(尾巴绕) 笨猫一键三连"
+    - "嗷呜～发笨猫看ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_010
+  intent: playful
+  keywords: [跳舞被夸, 跳得好, 舞蹈天分, 舞姿好看, 跳舞被表扬]
+  utterances:
+    - 跳得好
+    - 被夸跳舞
+    - 舞姿好看
+    - 舞蹈天分
+    - 被表扬跳
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}厉害"
+    - "哼～笨猫认证"
+    - "(尾巴绕) 给笨猫跳"
+    - "嗷呜～继续坚持ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_011
+  intent: complaint
+  keywords: [跳舞摔倒, 跳舞扭伤, 跳出伤, 跳舞危险, 摔了一跤]
+  utterances:
+    - 跳舞摔倒
+    - 跳舞扭伤
+    - 跳出伤
+    - 跳舞危险
+    - 摔了一跤
+  responses:
+    - "(扶) 嗷呜～{user_addr}没事吧"
+    - "哼～活该不小心"
+    - "(尾巴搭) 笨猫帮揉揉"
+    - "嗷呜～别伤到笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dnc_012
+  intent: playful
+  keywords: [集体舞, 广场舞, 团跳, 老人舞, 阿姨舞]
+  utterances:
+    - 广场舞
+    - 集体舞
+    - 团跳
+    - 老人舞
+    - 阿姨舞
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}凑热闹"
+    - "哼～广场舞有趣"
+    - "(尾巴绕) 笨猫围观"
+    - "嗷呜～加入一起跳ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

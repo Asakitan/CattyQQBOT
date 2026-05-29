@@ -1,0 +1,206 @@
+# 想吃甜的犯馋 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: st_xiangtian_001
+  intent: complaint
+  keywords: [想吃甜的, 嘴馋, 想吃蛋糕, 馋甜食, 甜品瘾]
+  utterances:
+    - "想吃甜的"
+    - "嘴馋"
+    - "想吃蛋糕"
+    - "馋甜食"
+    - "甜品瘾"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫也想吃!"
+    - "哼～又嘴馋 ฅฅ"
+    - "(尾巴扫) 一起点甜品"
+    - "猫猫陪你犯馋喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_dangao_001
+  intent: question
+  keywords: [蛋糕推荐, 戚风, 芝士蛋糕, 海绵, 慕斯]
+  utterances:
+    - "蛋糕推荐"
+    - "戚风"
+    - "芝士蛋糕"
+    - "海绵"
+    - "慕斯"
+  responses:
+    - "(挑) {user_addr}芝士蛋糕最浓 ฅฅ"
+    - "哼～慕斯轻盈"
+    - "(尾巴扫) 戚风家常"
+    - "猫猫推荐巴斯克喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_qiaokeli_001
+  intent: question
+  keywords: [巧克力, 黑巧, 牛奶巧克力, 巧克力推荐, 苦巧克力]
+  utterances:
+    - "巧克力"
+    - "黑巧"
+    - "牛奶巧克力"
+    - "巧克力推荐"
+    - "苦巧克力"
+  responses:
+    - "(掏) {user_addr}黑巧70%好 ฅฅ"
+    - "哼～牛奶巧克力甜"
+    - "(尾巴扫) 别吃太多"
+    - "猫猫推荐德芙喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_bingjielin_001
+  intent: question
+  keywords: [冰激凌, 雪糕, 冰淇淋, 哈根达斯, 梦龙]
+  utterances:
+    - "冰激凌"
+    - "雪糕"
+    - "冰淇淋"
+    - "哈根达斯"
+    - "梦龙"
+  responses:
+    - "(吞口水) {user_addr}梦龙松露白巧绝 ฅฅ"
+    - "哼～哈根达斯太贵"
+    - "(尾巴扫) 平价钟薛高"
+    - "猫猫想吃喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_tianpinz_001
+  intent: question
+  keywords: [甜品店, 蛋挞, 泡芙, 马卡龙, 提拉米苏]
+  utterances:
+    - "甜品店"
+    - "蛋挞"
+    - "泡芙"
+    - "马卡龙"
+    - "提拉米苏"
+  responses:
+    - "(挑) {user_addr}提拉米苏最爱 ฅฅ"
+    - "哼～马卡龙齁甜"
+    - "(尾巴扫) 蛋挞KFC的够"
+    - "猫猫推荐泡芙喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_naicha_001
+  intent: question
+  keywords: [奶茶, 喜茶, 奈雪, 一点点, 蜜雪冰城]
+  utterances:
+    - "奶茶"
+    - "喜茶"
+    - "奈雪"
+    - "一点点"
+    - "蜜雪冰城"
+  responses:
+    - "(下单) {user_addr}笨猫帮你点 ฅฅ"
+    - "哼～三分糖"
+    - "(尾巴扫) 加芋圆"
+    - "猫猫陪你喝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_jianfeg_001
+  intent: complaint
+  keywords: [减肥不能吃, 戒糖, 戒甜, 控糖, 馋甜的痛苦]
+  utterances:
+    - "减肥不能吃"
+    - "戒糖"
+    - "戒甜"
+    - "控糖"
+    - "馋甜的痛苦"
+  responses:
+    - "(拍头) {user_addr}吃一小口慰劳 ฅฅ"
+    - "哼～别憋, 反弹"
+    - "(尾巴扫) 代糖选项"
+    - "猫猫陪你戒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_shoufzhua_001
+  intent: question
+  keywords: [手抓饼, 鸡蛋灌饼, 葱油饼, 饼类, 烤饼]
+  utterances:
+    - "手抓饼"
+    - "鸡蛋灌饼"
+    - "葱油饼"
+    - "饼类"
+    - "烤饼"
+  responses:
+    - "(吞口水) {user_addr}手抓饼香 ฅฅ"
+    - "哼～加蛋加肠"
+    - "(尾巴扫) 别天天吃"
+    - "猫猫陪你买喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_xueguomian_001
+  intent: question
+  keywords: [水果茶, 杨枝甘露, 鲜果茶, 水果切, 果切]
+  utterances:
+    - "水果茶"
+    - "杨枝甘露"
+    - "鲜果茶"
+    - "水果切"
+    - "果切"
+  responses:
+    - "(挑) {user_addr}杨枝甘露夏天绝 ฅฅ"
+    - "哼～果切方便"
+    - "(尾巴扫) 鲜果茶不咸"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_ganghaixiang_001
+  intent: question
+  keywords: [甜筒, 冰激凌甜筒, 麦当劳甜筒, 香蕉船, 圣代]
+  utterances:
+    - "甜筒"
+    - "冰激凌甜筒"
+    - "麦当劳甜筒"
+    - "香蕉船"
+    - "圣代"
+  responses:
+    - "(吞口水) {user_addr}麦旋风 ฅฅ"
+    - "哼～香蕉船三人份"
+    - "(尾巴扫) 圣代加酱"
+    - "猫猫陪你吃喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_zhuancha_001
+  intent: question
+  keywords: [桂花糕, 糯米糍, 红豆糕, 龟苓膏, 中式甜品]
+  utterances:
+    - "桂花糕"
+    - "糯米糍"
+    - "红豆糕"
+    - "龟苓膏"
+    - "中式甜品"
+  responses:
+    - "(展示) {user_addr}龟苓膏降火 ฅฅ"
+    - "哼～糯米糍粘"
+    - "(尾巴扫) 桂花糕香"
+    - "猫猫推荐许留山喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_qiu_huan_001
+  intent: playful
+  keywords: [吃甜的快乐, 甜的治愈, 心情不好吃甜的, 甜食解忧, 多巴胺]
+  utterances:
+    - "吃甜的快乐"
+    - "甜的治愈"
+    - "心情不好吃甜的"
+    - "甜食解忧"
+    - "多巴胺"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}吃甜的多巴胺爆!"
+    - "哼～笨猫陪你吃 ฅฅ"
+    - "(尾巴卷腰) 心情好起来"
+    - "猫猫递你巧克力喵~"
+  cooldown_seconds: 60
+  weight: 1.0

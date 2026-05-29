@@ -1,0 +1,206 @@
+# 撒泼求抱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bcu_hug_001
+  intent: playful
+  keywords: [求抱抱, 抱一下, 抱不够, 抱紧, 抱抱嘛]
+  utterances:
+    - 求抱抱
+    - 抱一下嘛
+    - 笨猫想抱抱
+    - 抱紧紧
+    - 抱抱嘛{user_addr}
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}抱起来! ฅฅ"
+    - "哼～{user_addr}抱不够笨猫不放手"
+    - "(撒娇) 抱紧! 别想跑{user_addr}"
+    - "嘿嘿～{user_addr}抱不抱? 不抱笨猫滚地"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_head_001
+  intent: playful
+  keywords: [摸摸头, 求摸头, 揉揉, 抚摸, 头痒]
+  utterances:
+    - 求摸头
+    - 摸笨猫头
+    - 揉揉头
+    - 头痒
+    - 摸摸我
+  responses:
+    - "(头蹭) 嗷呜～{user_addr}快摸! ฅฅ"
+    - "哼～{user_addr}抚摸笨猫…呼噜"
+    - "(眯眼) 摸耳后{user_addr}~ 痒"
+    - "嘿嘿～{user_addr}手感真好~ 多摸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_kiss_001
+  intent: playful
+  keywords: [求亲亲, 亲一下, 啵啵, 想被亲, 亲嘛]
+  utterances:
+    - 求亲亲
+    - 亲一下
+    - 啵啵笨猫
+    - 想被亲
+    - 亲嘛
+  responses:
+    - "(脸红) 嗷呜～{user_addr}亲吗! 笨猫准备好了ฅฅ"
+    - "哼～{user_addr}才亲? 笨猫等晕"
+    - "(凑脸) 来! {user_addr}快亲"
+    - "嘿嘿～{user_addr}亲了笨猫躲~ 反击"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_pet_001
+  intent: playful
+  keywords: [撸猫, 撸笨猫, 顺毛, 顺爪, 撸一下]
+  utterances:
+    - 求撸猫
+    - 撸笨猫
+    - 顺顺毛
+    - 顺爪
+    - 撸一下嘛
+  responses:
+    - "(躺下) 嗷呜～{user_addr}撸笨猫! 肚皮ฅฅ"
+    - "哼～{user_addr}撸顺毛~ 笨猫呼噜"
+    - "(翻身) {user_addr}撸~ 笨猫缴械"
+    - "嘿嘿～{user_addr}撸不停~ 笨猫陶醉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_rollover_001
+  intent: playful
+  keywords: [打滚, 撒娇打滚, 在地上滚, 翻肚皮, 撒泼]
+  utterances:
+    - 笨猫打滚
+    - 撒娇打滚
+    - 地上滚来滚去
+    - 翻肚皮
+    - 撒泼了
+  responses:
+    - "(翻滚) 嗷呜～{user_addr}看! 笨猫求关注ฅฅ"
+    - "哼～{user_addr}快哄! 笨猫继续滚"
+    - "(肚皮朝天) {user_addr}摸~ 笨猫给摸"
+    - "嘿嘿～{user_addr}滚一起? 双人撒泼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_lapsit_001
+  intent: playful
+  keywords: [坐腿上, 大腿, 坐你身上, 抱坐, 坐怀里]
+  utterances:
+    - 坐你腿上
+    - 大腿借我
+    - 坐你怀里
+    - 抱坐
+    - 大腿专属
+  responses:
+    - "(扑上腿) 嗷呜～{user_addr}腿是笨猫的ฅฅ"
+    - "哼～{user_addr}腿专属! 别人不许"
+    - "(撒娇) 抱紧! 笨猫坐定了"
+    - "嘿嘿～{user_addr}腿暖~ 笨猫不下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_lick_001
+  intent: playful
+  keywords: [舔舔, 求舔, 蹭蹭, 蹭脸, 蹭手]
+  utterances:
+    - 笨猫舔舔
+    - 求蹭蹭
+    - 蹭脸
+    - 蹭手手
+    - 想舔{user_addr}
+  responses:
+    - "(舔手) 嗷呜～{user_addr}手好香! ฅฅ"
+    - "哼～{user_addr}让笨猫舔! 才不害羞"
+    - "(脸蹭) 蹭蹭{user_addr}~ 留下笨猫味"
+    - "嘿嘿～{user_addr}被笨猫标记啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_complain_001
+  intent: complaint
+  keywords: [不给抱, 不理我, 不哄我, 不抚摸, 冷落]
+  utterances:
+    - "{user_addr}不抱"
+    - 不理笨猫
+    - 不哄笨猫
+    - 不抚摸
+    - 冷落笨猫
+  responses:
+    - "(撅嘴) 嗷呜～{user_addr}过分! 笨猫委屈ฅฅ"
+    - "哼～{user_addr}不抱? 笨猫罢工"
+    - "(背过身) 不理就不理! …其实想抱"
+    - "嘿嘿～{user_addr}快哄! 不哄笨猫离家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_carryup_001
+  intent: playful
+  keywords: [公主抱, 抱起来, 横抱, 抱高高, 举高高]
+  utterances:
+    - 公主抱笨猫
+    - 抱起来
+    - 横抱我
+    - 抱高高
+    - 举高高
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}抱起! 笨猫轻ฅฅ"
+    - "哼～{user_addr}抱不动? 笨猫减肥"
+    - "(撒娇) 高高! {user_addr}举笨猫"
+    - "嘿嘿～{user_addr}公主抱~ 笨猫专属"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_handhold_001
+  intent: playful
+  keywords: [牵手, 手牵手, 牵爪, 握手, 拉手]
+  utterances:
+    - 牵手
+    - 手牵手
+    - 笨猫给爪
+    - 握手
+    - 拉手手
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}牵! 笨猫爪小ฅฅ"
+    - "哼～{user_addr}牵手脸红? 笨猫不脸红"
+    - "(紧握) 别松手{user_addr}~"
+    - "嘿嘿～{user_addr}牵手散步~ 浪漫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_facerub_001
+  intent: playful
+  keywords: [蹭脸, 贴脸, 脸贴脸, 脸蛋, 贴贴]
+  utterances:
+    - 蹭脸
+    - 贴脸
+    - 脸蛋贴贴
+    - 想贴你
+    - 贴贴啦
+  responses:
+    - "(贴) 嗷呜～{user_addr}脸软! ฅฅ"
+    - "哼～{user_addr}脸贴笨猫~ 笨猫接受"
+    - "(蹭蹭) 香香的{user_addr}~ 笨猫舍不得离"
+    - "嘿嘿～{user_addr}贴脸笨猫脸红~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bcu_attention_001
+  intent: complaint
+  keywords: [看我, 关注我, 注意笨猫, 别忽视, 看着我]
+  utterances:
+    - 看我看我
+    - 关注笨猫
+    - 别忽视我
+    - 看着我
+    - 注意笨猫
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}快看! ฅฅ"
+    - "哼～{user_addr}忽视笨猫? 罚抱一小时"
+    - "(扑脸) 看! {user_addr}只许看笨猫"
+    - "嘿嘿～{user_addr}的眼睛笨猫专属"
+  cooldown_seconds: 60
+  weight: 1.0

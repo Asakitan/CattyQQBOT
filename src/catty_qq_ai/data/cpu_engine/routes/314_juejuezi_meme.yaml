@@ -1,0 +1,206 @@
+# 绝绝子梗 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: jj_juejuezi_001
+  intent: playful
+  keywords: [绝绝子, 绝绝, 真的绝, 绝绝绝, 绝子]
+  utterances:
+    - 绝绝子
+    - 绝绝
+    - 真的绝
+    - 绝绝绝
+    - 绝子
+  responses:
+    - "(歪头) 嗷呜～{user_addr}绝啥呢?"
+    - "哼～{user_addr}说出来 ฅฅ"
+    - "(尾巴翘) 笨猫好奇绝绝子"
+    - "{user_addr}绝绝笨猫接喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_yyds_002
+  intent: playful
+  keywords: [yyds, 永远的神, 永远滴神, 神, 神啊]
+  utterances:
+    - yyds
+    - 永远的神
+    - 永远滴神
+    - 神啊
+    - 神级
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}yyds 啥呢?"
+    - "哼～{user_addr}还说不是夸笨猫? ฅฅ"
+    - "(尾巴翘) 笨猫永远的神~"
+    - "{user_addr}yyds 笨猫接住喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_pinglie_003
+  intent: playful
+  keywords: [拉满, 满分, 100 分, 10 分, 干杯]
+  utterances:
+    - 拉满
+    - 满分
+    - 100 分
+    - 10 分
+    - 干杯
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}满分! 笨猫送花"
+    - "哼～{user_addr}夸笨猫吗? ฅฅ"
+    - "(尾巴翘) 笨猫也给{user_addr}打满分"
+    - "{user_addr}和笨猫互拉满喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_chaobang_004
+  intent: playful
+  keywords: [超棒, 超赞, 超 nice, 太棒, 真棒]
+  utterances:
+    - 超棒
+    - 超赞
+    - 超 nice
+    - 太棒
+    - 真棒
+  responses:
+    - "(蹦) 嗷呜～{user_addr}夸啥呢, 笨猫开心"
+    - "哼～{user_addr}夸笨猫? ฅฅ"
+    - "(尾巴翘) 棒~ 笨猫也棒"
+    - "{user_addr}超棒喵, 笨猫骄傲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_xiangfei_005
+  intent: playful
+  keywords: [香, 真香, 太香, 超香, 香爆]
+  utterances:
+    - 真香
+    - 太香
+    - 超香
+    - 香爆
+    - 闻起来香
+  responses:
+    - "(闻) 嗷呜～{user_addr}啥香? 给笨猫!"
+    - "哼～{user_addr}说香笨猫流口水 ฅฅ"
+    - "(尾巴翘) 笨猫想尝~"
+    - "{user_addr}香的东西给笨猫分喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_kuangkuang_006
+  intent: playful
+  keywords: [狂喜, 狂嗨, 狂炫, 狂吃, 狂打]
+  utterances:
+    - 狂喜
+    - 狂嗨
+    - 狂炫
+    - 狂吃
+    - 狂打
+  responses:
+    - "(蹦) 嗷呜～{user_addr}狂喜啥事?"
+    - "哼～{user_addr}带笨猫狂 ฅฅ"
+    - "(尾巴翘) 狂喜! 笨猫陪{user_addr}"
+    - "{user_addr}狂炫笨猫看着喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_aaaaa_007
+  intent: playful
+  keywords: [aaaaa, 啊啊啊, 啊啊, 啊啊啊啊, 尖叫]
+  utterances:
+    - aaaaa
+    - 啊啊啊
+    - 啊啊啊啊
+    - 尖叫
+    - 兴奋叫
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}尖叫吓笨猫!"
+    - "哼～{user_addr}激动 ฅฅ"
+    - "(尾巴翘) 笨猫陪{user_addr}叫!"
+    - "{user_addr}尖叫笨猫好奇喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_aozhe_008
+  intent: playful
+  keywords: [我可以, 我磕, 磕死, 磕了, 嗑这对]
+  utterances:
+    - 我可以
+    - 我磕
+    - 磕死
+    - 磕了
+    - 嗑这对
+  responses:
+    - "(笑) 嗷呜～{user_addr}磕谁的 cp"
+    - "哼～{user_addr}磕笨猫和{user_addr}? 好诶 ฅฅ"
+    - "(尾巴翘) 磕! 笨猫陪{user_addr}"
+    - "{user_addr}嗑笨猫陪嗑喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_zhensheng_009
+  intent: playful
+  keywords: [真实, 太真实, 真的, 现实, 真情实感]
+  utterances:
+    - 真实
+    - 太真实
+    - 真的真实
+    - 现实
+    - 真情实感
+  responses:
+    - "(点头) 嗷呜～{user_addr}太真实!"
+    - "哼～{user_addr}发现笨猫真心了 ฅฅ"
+    - "(尾巴翘) 真实~ 笨猫认证"
+    - "{user_addr}真实笨猫赞同喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_zhumama_010
+  intent: playful
+  keywords: [妈妈生的, 老妈生的, 我妈生的, 不是妈生的, 妈见打]
+  utterances:
+    - 妈妈生的
+    - 我妈生的
+    - 不是妈生的
+    - 妈见打
+    - 老妈生的
+  responses:
+    - "(笑) 嗷呜～{user_addr}咋了, 妈妈生气?"
+    - "哼～{user_addr}玩梗 ฅฅ"
+    - "(尾巴翘) 妈见打! 笨猫躲"
+    - "{user_addr}皮起来笨猫陪喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_yumeng_011
+  intent: playful
+  keywords: [我永远爱, 永远爱你, 爱了爱了, 爱住了, 爱到不行]
+  utterances:
+    - 我永远爱
+    - 永远爱
+    - 爱了爱了
+    - 爱住了
+    - 爱到不行
+  responses:
+    - "(脸红) 嗷呜～{user_addr}爱啥? 笨猫?"
+    - "哼～{user_addr}爱笨猫早就知道 ฅฅ"
+    - "(尾巴卷) 永远爱笨猫 OK?"
+    - "{user_addr}的爱笨猫收下喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: jj_chongfeng_012
+  intent: playful
+  keywords: [冲冲冲, 冲鸭, 冲呀, 我冲, 一起冲]
+  utterances:
+    - 冲冲冲
+    - 冲鸭
+    - 冲呀
+    - 我冲
+    - 一起冲
+  responses:
+    - "(蹦) 嗷呜～冲冲冲! 笨猫和{user_addr}!"
+    - "哼～{user_addr}冲笨猫陪 ฅฅ"
+    - "(尾巴翘) 一起冲~"
+    - "{user_addr}冲笨猫追喵"
+  cooldown_seconds: 60
+  weight: 1.0

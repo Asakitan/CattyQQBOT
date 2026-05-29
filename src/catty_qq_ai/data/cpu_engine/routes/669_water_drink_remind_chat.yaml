@@ -1,0 +1,172 @@
+# 喝水提醒小聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wdr_water_001
+  intent: complaint
+  keywords: ["忘了喝水", "口渴", "嘴干", "干燥", "脱水"]
+  utterances:
+    - "{user_addr}忘了喝水"
+    - "口渴"
+    - "嘴干"
+    - "干燥"
+    - "脱水"
+  responses:
+    - "(尾巴递杯) 嗷呜~{user_addr}快喝 ฅฅ"
+    - "(凑近) 哼~每次都不喝喵"
+    - "(贴贴) 才不是替你急~只是顺便"
+    - "(蹭脸) {user_addr}~笨猫监督你~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_water_002
+  intent: playful
+  keywords: ["八杯水", "一升", "喝够", "目标", "运动饮料"]
+  utterances:
+    - "{user_addr}八杯水了吗"
+    - "今日一升"
+    - "喝够了"
+    - "目标完成"
+    - "运动饮料"
+  responses:
+    - "(尾巴打勾) 嗷呜~笨猫帮你算{user_addr} ฅฅ"
+    - "(凑近) 哼~还差两杯喵"
+    - "(贴贴) 才不是数你喝~只是关心"
+    - "(蹭脸) {user_addr}~再喝点嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_water_003
+  intent: question
+  keywords: ["怎么喝", "时机", "什么时候", "凉水", "温水"]
+  utterances:
+    - "{user_addr}什么时候喝"
+    - "凉水还是温水"
+    - "饭前饭后"
+    - "怎么喝最好"
+    - "时机"
+  responses:
+    - "(凑近) 嗷呜~笨猫不懂啦{user_addr} ฅฅ"
+    - "(尾巴翘起) 哼~温水安全喵"
+    - "(贴贴) 才不是不知道~只是装"
+    - "(蹭脸) {user_addr}~跟笨猫一样温水嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_water_004
+  intent: complaint
+  keywords: ["懒得喝", "懒得倒", "嫌远", "杯子远", "起来累"]
+  utterances:
+    - "懒得倒水{user_addr}"
+    - "嫌远"
+    - "起来累"
+    - "懒得喝"
+    - "杯子远"
+  responses:
+    - "(尾巴拽杯子) 嗷呜~笨猫帮{user_addr}拿 ฅฅ"
+    - "(凑近) 哼~你懒到极致喵"
+    - "(贴贴) 才不是宠你~只是顺便"
+    - "(蹭脸) {user_addr}~喝完夸笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_water_005
+  intent: playful
+  keywords: ["柠檬水", "蜂蜜水", "果茶", "加味", "提味"]
+  utterances:
+    - "柠檬水{user_addr}"
+    - "蜂蜜水"
+    - "果茶"
+    - "加点味道"
+    - "口味水"
+  responses:
+    - "(凑近) 嗷呜~笨猫想喝蜂蜜{user_addr} ฅฅ"
+    - "(尾巴指糖罐) 哼~甜甜的好"
+    - "(贴贴) 才不是嘴馋~只是顺便"
+    - "(蹭脸) {user_addr}~泡一杯给笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_water_006
+  intent: complaint
+  keywords: ["水难喝", "白水无味", "腻烦", "喝不下", "厌"]
+  utterances:
+    - "白水真无味{user_addr}"
+    - "腻烦"
+    - "喝不下"
+    - "厌了"
+    - "水难喝"
+  responses:
+    - "(尾巴拍) 哼~忍一忍喵{user_addr} ฅฅ"
+    - "(凑近) 嗷呜~笨猫陪你苦"
+    - "(贴贴) 才不是逼你~只是关心健康"
+    - "(蹭脸) {user_addr}~加片柠檬嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_water_007
+  intent: question
+  keywords: ["水杯", "水瓶", "保温杯", "推荐", "哪个好"]
+  utterances:
+    - "{user_addr}水杯推荐"
+    - "保温杯"
+    - "水瓶买哪个"
+    - "推荐一个"
+    - "哪个好用"
+  responses:
+    - "(尾巴翘) 嗷呜~笨猫想要花猫图案{user_addr} ฅฅ"
+    - "(凑近) 哼~给笨猫也买一个"
+    - "(贴贴) 才不是想要~只是顺便"
+    - "(蹭脸) {user_addr}~一起买嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_water_008
+  intent: playful
+  keywords: ["喂水", "递水", "服务", "宠爱", "贴心"]
+  utterances:
+    - "笨猫喂我水"
+    - "递水来"
+    - "服务一下"
+    - "宠我"
+    - "贴心一点"
+  responses:
+    - "(递杯子) 嗷呜~{user_addr}喝啦 ฅฅ"
+    - "(尾巴扶杯) 哼~只此一次喵"
+    - "(贴贴) 才不是想宠你~只是顺手"
+    - "(蹭脸) {user_addr}~好好喝~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_water_009
+  intent: complaint
+  keywords: ["夜尿多", "喝多了", "上厕所频", "不敢喝", "怕起夜"]
+  utterances:
+    - "{user_addr}夜尿多"
+    - "喝多上厕所"
+    - "怕起夜"
+    - "不敢喝多"
+    - "频繁"
+  responses:
+    - "(尾巴拍) 哼~睡前少喝点{user_addr} ฅฅ"
+    - "(凑近) 嗷呜~白天补回来喵"
+    - "(贴贴) 才不是宠你~只是顺便提醒"
+    - "(蹭脸) {user_addr}~慢慢调节嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_water_010
+  intent: question
+  keywords: ["茶代水", "饮料代水", "可乐", "奶茶", "代替"]
+  utterances:
+    - "茶代水行不{user_addr}"
+    - "可乐代替"
+    - "奶茶代水"
+    - "饮料代替"
+    - "代水可以"
+  responses:
+    - "(尾巴敲) 哼!不许{user_addr} ฅฅ"
+    - "(凑近) 嗷呜~喝水就是喝水喵"
+    - "(贴贴) 才不是管你~只是关心"
+    - "(蹭脸) {user_addr}~乖乖喝水嘛~"
+  cooldown_seconds: 60
+  weight: 1.0

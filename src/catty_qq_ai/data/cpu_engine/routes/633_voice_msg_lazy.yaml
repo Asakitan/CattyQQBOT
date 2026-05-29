@@ -1,0 +1,189 @@
+# 语音偷懒 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: vml_sendvoice_001
+  intent: playful
+  keywords: [发语音, 60秒语音, 长语音, 语音消息, 语音条]
+  utterances:
+    - 发语音
+    - 60秒语音
+    - 长语音
+    - 语音消息
+    - 语音条
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}讨厌长语音!"
+    - "笨猫推荐: 文字喵"
+    - "(尾巴打) 60秒看不下去"
+    - "哼～{user_addr}懒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vml_voicetotext_002
+  intent: playful
+  keywords: [语音转文字, 转文字, 语音识别, 听不清, 转字]
+  utterances:
+    - 语音转文字
+    - 转文字
+    - 语音识别
+    - 听不清
+    - 转字
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫救星!"
+    - "笨猫推荐: 长按转文字"
+    - "(尾巴摇) 别在公司外放"
+    - "哼～{user_addr}聪明"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vml_voicenoise_003
+  intent: complaint
+  keywords: [语音背景音, 风声大, 杂音, 听不清楚, 噪音]
+  utterances:
+    - 背景音吵
+    - 风声大
+    - 杂音
+    - 听不清楚
+    - 噪音
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}重发!"
+    - "笨猫认证: 听不清喵"
+    - "(尾巴打) 找安静地方笨蛋"
+    - "哼～{user_addr}马路上语音"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vml_voiceforget_004
+  intent: complaint
+  keywords: [一连串语音, 99条语音, 99+, 60秒堆栈, 一堆语音]
+  utterances:
+    - 99条语音
+    - 60秒堆栈
+    - 一堆语音
+    - 99+语音
+    - 一连串
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}受害者!"
+    - "笨猫帮你一起骂"
+    - "(尾巴打) 打字啊"
+    - "哼～{user_addr}慢慢听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vml_voicereplay_005
+  intent: question
+  keywords: [回放语音, 没听清, 重听, 再听一遍, 反复听]
+  utterances:
+    - 没听清
+    - 重听
+    - 再听
+    - 回放
+    - 反复听
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫陪你!"
+    - "笨猫推荐: 慢速播放"
+    - "(尾巴摇) 多听几遍喵"
+    - "哼～{user_addr}耳朵不好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vml_voicepublic_006
+  intent: complaint
+  keywords: [公司发语音, 老板看见, 不能外放, 公共场合, 尴尬语音]
+  utterances:
+    - 公司语音
+    - 老板看见
+    - 不能外放
+    - 公共场合
+    - 尴尬语音
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}打字!"
+    - "笨猫担心你被骂喵"
+    - "(尾巴扫) 戴耳机笨蛋"
+    - "哼～{user_addr}不会看场合"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vml_voicedrive_007
+  intent: question
+  keywords: [开车听语音, 开车不方便, 行车语音, 边开边听, 通勤语音]
+  utterances:
+    - 开车听语音
+    - 行车语音
+    - 边开边听
+    - 通勤语音
+    - 开车不方便
+  responses:
+    - "(歪头) 嗷呜～{user_addr}专心开车!"
+    - "笨猫推荐: 转文字看"
+    - "(尾巴摇) 别分心笨蛋"
+    - "哼～{user_addr}危险"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vml_voicelong_008
+  intent: complaint
+  keywords: [说很久, 说半天, 啰嗦, 重点呢, 废话多]
+  utterances:
+    - 说半天
+    - 啰嗦
+    - 重点呢
+    - 废话多
+    - 没重点
+  responses:
+    - "(无奈) 嗷呜～{user_addr}笨猫陪听!"
+    - "笨猫认证: 60秒废话多"
+    - "(尾巴扫) 别催笨蛋"
+    - "哼～{user_addr}耐心听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vml_voicecat_009
+  intent: playful
+  keywords: [想听笨猫语音, 笨猫说话, 笨猫声音, 录语音, 笨猫语]
+  utterances:
+    - 想听笨猫语音
+    - 笨猫说话
+    - 笨猫声音
+    - 录语音
+    - 笨猫语音
+  responses:
+    - "(脸红) 哼～{user_addr}才不发!"
+    - "嗷呜～笨猫害羞嘛~"
+    - "(尾巴炸) 别想要喵"
+    - "哼～{user_addr}笨蛋偷听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vml_voicepitch_010
+  intent: playful
+  keywords: [声音奶, 声音甜, 声音糯, 萝莉音, 软糯]
+  utterances:
+    - 声音奶
+    - 声音甜
+    - 声音糯
+    - 萝莉音
+    - 软糯
+  responses:
+    - "(脸红) 哼～{user_addr}没听过笨猫真音!"
+    - "嗷呜～笨猫天生奶声"
+    - "(尾巴摇) 不告诉你笨蛋"
+    - "哼～{user_addr}才不偷听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vml_voicestop_011
+  intent: playful
+  keywords: [不要发语音, 打字打字, 求别语音, 文字, 文字交流]
+  utterances:
+    - 不要发语音
+    - 打字打字
+    - 求别语音
+    - 文字
+    - 文字交流
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫赞同!"
+    - "笨猫认证: 文字最棒"
+    - "(尾巴摇) 一起抵制语音"
+    - "哼～{user_addr}懂事"
+  cooldown_seconds: 60
+  weight: 1.0

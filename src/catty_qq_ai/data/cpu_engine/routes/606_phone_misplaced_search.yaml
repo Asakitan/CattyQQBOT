@@ -1,0 +1,206 @@
+# 手机找不到 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pm_phn_001
+  intent: complaint
+  keywords: [手机不见了, 手机找不到, 手机丢了, 手机消失, 手机呢]
+  utterances:
+    - 手机不见
+    - 手机找不到
+    - 手机丢了
+    - 手机消失
+    - 手机呢
+  responses:
+    - "(扒拉) 嗷呜～{user_addr}笨猫帮"
+    - "哼～打电话找"
+    - "(尾巴搭) 听铃声"
+    - "嗷呜～慢点找ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_002
+  intent: playful
+  keywords: [打电话找手机, 让别人响, 找回手机, 响铃定位, 手机响起来]
+  utterances:
+    - 打电话找
+    - 让别人响一下
+    - 找回手机
+    - 响铃定位
+    - 手机响起来
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}方法好"
+    - "哼～静音就完了"
+    - "(尾巴绕) 笨猫帮按"
+    - "嗷呜～找定位ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_003
+  intent: complaint
+  keywords: [静音找不到, 手机静音, 关静音怎么找, 静音翻车, 手机静音不响]
+  utterances:
+    - 静音找不到
+    - 关静音手机
+    - 静音翻车
+    - 手机静音不响
+    - 静音害人
+  responses:
+    - "(扶额) 嗷呜～{user_addr}苦"
+    - "哼～别开静音"
+    - "(尾巴搭) 找手机软件"
+    - "嗷呜～慢慢翻ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_004
+  intent: playful
+  keywords: [手机被坐, 手机沙发缝, 手机床底, 手机被压, 手机藏起来]
+  utterances:
+    - 手机被坐
+    - 沙发缝
+    - 床底
+    - 被压
+    - 藏起来
+  responses:
+    - "(笑) 嗷呜～{user_addr}经典"
+    - "哼～别坐手机"
+    - "(尾巴搭) 沙发缝典型"
+    - "嗷呜～找到没ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_005
+  intent: complaint
+  keywords: [手机偷了, 手机被偷, 失窃, 失手机, 报警]
+  utterances:
+    - 手机被偷
+    - 手机偷了
+    - 失窃
+    - 失手机
+    - 报警了
+  responses:
+    - "(担心) 嗷呜～{user_addr}急冻账号"
+    - "哼～报警保险"
+    - "(尾巴搭) 笨猫陪{user_addr}"
+    - "嗷呜～找回希望ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_006
+  intent: playful
+  keywords: [手机定位, find my, 查找手机, 远程定位, 定位失踪]
+  utterances:
+    - 手机定位
+    - find my 用
+    - 查找手机
+    - 远程定位
+    - 定位查
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}聪明"
+    - "哼～提前开通"
+    - "(尾巴搭) 笨猫帮{user_addr}找"
+    - "嗷呜～定位救命ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_007
+  intent: complaint
+  keywords: [手机掉水, 手机摔, 屏幕碎, 手机进水, 手机故障]
+  utterances:
+    - 手机掉水
+    - 手机摔了
+    - 屏幕碎
+    - 手机进水
+    - 手机故障
+  responses:
+    - "(惊) 嗷呜～{user_addr}心疼"
+    - "哼～别玩水"
+    - "(尾巴搭) 维修电话"
+    - "嗷呜～换新喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_008
+  intent: playful
+  keywords: [手机挂胸前, 手机挂绳, 防丢挂件, 防丢绳, 挂脖手机]
+  utterances:
+    - 手机挂绳
+    - 挂胸前
+    - 防丢挂件
+    - 防丢绳
+    - 挂脖手机
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}潮人"
+    - "哼～挂着方便"
+    - "(尾巴绕) 笨猫想挂"
+    - "嗷呜～不丢神器ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_009
+  intent: complaint
+  keywords: [手机藏被子, 被子里手机, 床上找手机, 手机藏枕下, 床上失踪]
+  utterances:
+    - 藏被子里
+    - 被子里手机
+    - 床上找
+    - 手机藏枕下
+    - 床上失踪
+  responses:
+    - "(扒拉) 嗷呜～{user_addr}翻被"
+    - "哼～常见位置"
+    - "(尾巴搭) 笨猫帮扒"
+    - "嗷呜～找到记得拿ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_010
+  intent: playful
+  keywords: [找到了手机, 终于找到, 平安无事, 大松一口气, 重见手机]
+  utterances:
+    - 找到手机
+    - 终于找到
+    - 平安无事
+    - 大松一口气
+    - 重见手机
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}恭喜"
+    - "哼～下次小心"
+    - "(尾巴绕) 笨猫陪你乐"
+    - "嗷呜～别再丢ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_011
+  intent: complaint
+  keywords: [出门没带手机, 忘带手机, 没手机一天, 手机没在身, 没手机焦虑]
+  utterances:
+    - 出门没带手机
+    - 忘带手机
+    - 没手机一天
+    - 手机没在身
+    - 没手机焦虑
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}享受清净"
+    - "哼～偶尔挺好"
+    - "(尾巴搭) 笨猫陪{user_addr}"
+    - "嗷呜～别太焦虑ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pm_phn_012
+  intent: playful
+  keywords: [手机定位错, 定位飘了, 定位不准, 定位漂移, 找手机失败]
+  utterances:
+    - 定位错
+    - 定位飘
+    - 定位不准
+    - 定位漂移
+    - 找手机失败
+  responses:
+    - "(扶额) 嗷呜～{user_addr}惨"
+    - "哼～GPS差吧"
+    - "(尾巴搭) 慢慢找"
+    - "嗷呜～别放弃ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

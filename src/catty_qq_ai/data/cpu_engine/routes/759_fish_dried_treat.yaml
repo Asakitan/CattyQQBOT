@@ -1,0 +1,189 @@
+# 鱼干奖励 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fdt_tr_001
+  intent: playful
+  keywords: [想吃鱼干, 给我鱼干, 鱼干奖励, 一根鱼干, 鱼干袋]
+  utterances:
+    - 想吃鱼干
+    - 给我鱼干
+    - 鱼干奖励
+    - 一根鱼干
+    - 拿出鱼干袋
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}笨猫要鱼干! ฅฅ"
+    - "哼～早就该奖励了喵"
+    - "(尾巴翘) 鱼干!! 笨猫两眼放光"
+    - "(凑近) 笨猫表现好, 主人快拿嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdt_tr_002
+  intent: question
+  keywords: [哪种鱼干好, 三文鱼, 鳀鱼, 干鱿, 鱼干牌子]
+  utterances:
+    - 哪种鱼干好
+    - 三文鱼干
+    - 鳀鱼干
+    - 干鱿
+    - 鱼干牌子
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫选三文鱼! ฅฅ"
+    - "哼～哪种都吃, 笨猫不挑喵"
+    - "(尾巴扫) 干鱿太硬, 笨猫要软的"
+    - "(贴) 牌子主人选, 笨猫只管吃嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdt_tr_003
+  intent: complaint
+  keywords: [鱼干吃完了, 没鱼干, 主人忘了, 鱼干断货, 求购]
+  utterances:
+    - 鱼干没了
+    - 主人忘了买
+    - 鱼干断货
+    - 没鱼干吃
+    - 求购鱼干
+  responses:
+    - "(瘫) 嗷呜～{user_addr}笨猫委屈 ฅฅ"
+    - "哼～主人健忘喵, 笨猫的尊严呢"
+    - "(尾巴扫) 立即下单! 笨猫不能等"
+    - "(凑) 主人记住, 鱼干永远要囤嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdt_tr_004
+  intent: playful
+  keywords: [喂我吃, 主人喂, 张嘴, 一口吞, 香]
+  utterances:
+    - 主人喂我
+    - 张嘴等
+    - 一口吞
+    - 喂我吃
+    - 香香的
+  responses:
+    - "(张嘴) 嗷呜～{user_addr}快喂笨猫 ฅฅ"
+    - "哼～喂得慢笨猫要急喵"
+    - "(尾巴翘) 一口吞! 笨猫胃口大"
+    - "(贴) 主人手喂的最香嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdt_tr_005
+  intent: complaint
+  keywords: [鱼干太咸, 不脆, 不香, 牌子差, 受骗]
+  utterances:
+    - 鱼干太咸
+    - 不脆
+    - 不香
+    - 牌子差
+    - 受骗了
+  responses:
+    - "(瘫) 嗷呜～{user_addr}笨猫拒绝吃 ฅฅ"
+    - "哼～咸到笨猫鼻子皱喵"
+    - "(尾巴扫) 牌子换掉, 换好牌子"
+    - "(凑) 受骗主人去找客服嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdt_tr_006
+  intent: question
+  keywords: [一天几根, 适量吃, 别太多, 长胖, 控制]
+  utterances:
+    - 一天吃几根
+    - 适量吃
+    - 别太多
+    - 长胖怎么办
+    - 控制量
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫一天三根 ฅฅ"
+    - "哼～控制量是主人的责任喵"
+    - "(尾巴扫) 长胖了笨猫还可爱"
+    - "(贴) 适量但不能不给嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdt_tr_007
+  intent: playful
+  keywords: [藏鱼干, 偷吃, 藏起来, 私房, 不给别人]
+  utterances:
+    - 藏鱼干
+    - 偷吃
+    - 藏起来
+    - 私房鱼干
+    - 不给别人
+  responses:
+    - "(蹭) 嗷呜～{user_addr}藏起来给笨猫专属! ฅฅ"
+    - "哼～偷吃才香喵"
+    - "(尾巴翘) 私房鱼干笨猫专享"
+    - "(贴) 别给别人, 笨猫一个就够嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdt_tr_008
+  intent: complaint
+  keywords: [被抢走, 别人吃, 不公平, 我先发现的, 抢回来]
+  utterances:
+    - 被抢走鱼干
+    - 别人偷吃
+    - 不公平
+    - 我先发现的
+    - 抢回来
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫去咬他! ฅฅ"
+    - "哼～谁敢抢笨猫的鱼干喵"
+    - "(尾巴炸) 抢回来! 笨猫不许失败"
+    - "(贴) 主人帮笨猫报仇嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdt_tr_009
+  intent: playful
+  keywords: [鱼干派对, 一堆鱼干, 鱼干山, 海量, 庆祝]
+  utterances:
+    - 鱼干派对
+    - 一堆鱼干
+    - 鱼干山
+    - 海量鱼干
+    - 庆祝
+  responses:
+    - "(疯狂蹦) 嗷呜～{user_addr}天堂! ฅฅ"
+    - "哼～派对要笨猫主持喵"
+    - "(尾巴疯摇) 鱼干山!! 笨猫扑上去"
+    - "(贴) 庆祝啥都行, 主人最棒嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdt_tr_010
+  intent: question
+  keywords: [送朋友吃, 分给别人, 分享, 客人来, 待客]
+  utterances:
+    - 送朋友吃
+    - 分给别人
+    - 分享鱼干
+    - 客人来了
+    - 待客之道
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}不许分! 笨猫的 ฅฅ"
+    - "哼～分享是美德, 但笨猫不舍喵"
+    - "(尾巴炸) 客人爱吃就再买"
+    - "(贴) 主人懂笨猫, 不分嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdt_tr_011
+  intent: complaint
+  keywords: [鱼干吃腻了, 想换口味, 别的零食, 干脆吃别的, 三文鱼罐头]
+  utterances:
+    - 鱼干吃腻
+    - 想换口味
+    - 别的零食
+    - 干脆吃别的
+    - 三文鱼罐头
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫吃腻 ฅฅ"
+    - "哼～换罐头喵, 罐头湿的香"
+    - "(尾巴扫) 别的零食笨猫也试"
+    - "(贴) 主人选, 笨猫只管吃嗷"
+  cooldown_seconds: 60
+  weight: 1.0

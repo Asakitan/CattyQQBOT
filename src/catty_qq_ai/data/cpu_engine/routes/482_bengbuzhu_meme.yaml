@@ -1,0 +1,172 @@
+# 蚌埠住表情梗日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bbm_bbz_001
+  intent: playful
+  keywords: [蚌埠住, 蚌住, 蚌不住, 绷不住, 蚌埠居然]
+  utterances:
+    - "{user_addr}蚌埠住"
+    - "{user_addr}蚌住"
+    - "{user_addr}蚌不住"
+    - "{user_addr}绷不住"
+    - "{user_addr}蚌埠居然"
+  responses:
+    - "嗷呜～{user_addr}笨猫蚌喵ฅฅ"
+    - "(笑) 笨猫的蚌!"
+    - "哼～{user_addr}笨猫共鸣"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbm_bbz_002
+  intent: playful
+  keywords: [蚌埠住了, 绷住, 蚌住了, 绷住啦, 蚌啦]
+  utterances:
+    - "{user_addr}蚌埠住了"
+    - "{user_addr}绷住"
+    - "{user_addr}蚌住了"
+    - "{user_addr}绷住啦"
+    - "{user_addr}蚌啦"
+  responses:
+    - "嗷呜～{user_addr}笨猫蚌喵ฅฅ"
+    - "(笑) 笨猫的!"
+    - "哼～{user_addr}笨猫共鸣"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbm_bbz_003
+  intent: playful
+  keywords: [流泪猫猫头, 流泪表情, 流泪猫头, 流泪图, 哭泣猫]
+  utterances:
+    - "{user_addr}流泪猫猫头"
+    - "{user_addr}流泪表情"
+    - "{user_addr}流泪猫头"
+    - "{user_addr}流泪图"
+    - "{user_addr}哭泣猫"
+  responses:
+    - "嗷呜～笨猫就是猫猫头喵ฅฅ"
+    - "(扑) {user_addr}笨猫的!"
+    - "哼～{user_addr}笨猫接"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbm_bbz_004
+  intent: playful
+  keywords: [doge, 狗头, 滑稽, 笑哭, 猫狗表情]
+  utterances:
+    - "{user_addr}doge"
+    - "{user_addr}狗头"
+    - "{user_addr}滑稽"
+    - "{user_addr}笑哭"
+    - "{user_addr}猫狗表情"
+  responses:
+    - "嗷呜～{user_addr}笨猫表情包喵ฅฅ"
+    - "(扑) 笨猫的!"
+    - "哼～{user_addr}笨猫接"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbm_bbz_005
+  intent: playful
+  keywords: [表情包, 表情, 老表情, 经典表情, 抽象表情]
+  utterances:
+    - "{user_addr}表情包"
+    - "{user_addr}表情"
+    - "{user_addr}老表情"
+    - "{user_addr}经典表情"
+    - "{user_addr}抽象表情"
+  responses:
+    - "嗷呜～{user_addr}发笨猫看喵ฅฅ"
+    - "(扑) 笨猫收!"
+    - "哼～{user_addr}笨猫的表情"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbm_bbz_006
+  intent: playful
+  keywords: [斗图, 斗表情, 表情大战, 比表情, 给个表情]
+  utterances:
+    - "{user_addr}斗图"
+    - "{user_addr}斗表情"
+    - "{user_addr}表情大战"
+    - "{user_addr}比表情"
+    - "{user_addr}给个表情"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪斗喵ฅฅ"
+    - "(扑) 笨猫上!"
+    - "哼～{user_addr}笨猫赢"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbm_bbz_007
+  intent: playful
+  keywords: [笑场, 当场笑, 直接笑, 立马笑, 秒笑]
+  utterances:
+    - "{user_addr}笑场"
+    - "{user_addr}当场笑"
+    - "{user_addr}直接笑"
+    - "{user_addr}立马笑"
+    - "{user_addr}秒笑"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪笑喵ฅฅ"
+    - "(扑) 笨猫的笑!"
+    - "哼～{user_addr}笨猫好笑"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbm_bbz_008
+  intent: playful
+  keywords: [真服了, 我服了, 服气, 服了你, 受不了你]
+  utterances:
+    - "{user_addr}真服了"
+    - "{user_addr}我服了"
+    - "{user_addr}服气"
+    - "{user_addr}服了你"
+    - "{user_addr}受不了你"
+  responses:
+    - "嗷呜～{user_addr}笨猫接喵ฅฅ"
+    - "(挑眉) 笨猫的服!"
+    - "哼～{user_addr}笨猫"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbm_bbz_009
+  intent: playful
+  keywords: [离大谱, 谱离, 离谱他妈, 离大他妈谱, 谱]
+  utterances:
+    - "{user_addr}离大谱"
+    - "{user_addr}谱离"
+    - "{user_addr}离谱他妈"
+    - "{user_addr}离大他妈谱"
+    - "{user_addr}谱"
+  responses:
+    - "嗷呜～{user_addr}笨猫接喵ฅฅ"
+    - "(笑) 笨猫的谱!"
+    - "哼～{user_addr}笨猫共鸣"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbm_bbz_010
+  intent: playful
+  keywords: [我裂开, 心态崩, 心态裂, 心碎一地, 我崩了]
+  utterances:
+    - "{user_addr}我裂开"
+    - "{user_addr}心态崩"
+    - "{user_addr}心态裂"
+    - "{user_addr}心碎一地"
+    - "{user_addr}我崩了"
+  responses:
+    - "嗷呜～{user_addr}笨猫接喵ฅฅ"
+    - "(扑) 笨猫修复!"
+    - "哼～{user_addr}笨猫陪裂"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0

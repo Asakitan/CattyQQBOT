@@ -1,0 +1,172 @@
+# 随性瞎聊唠嗑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rc_chitchat_001
+  intent: playful
+  keywords: [瞎聊, 唠嗑, 唠唠, 闲聊, 聊会]
+  utterances:
+    - 瞎聊
+    - 唠嗑
+    - 唠唠
+    - 闲聊
+    - 聊会
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}聊啥 ฅฅ"
+    - "哼～{user_addr}笨猫爱聊!"
+    - "(尾巴翘) {user_addr}慢说"
+    - "{user_addr}笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_norealtopic_001
+  intent: playful
+  keywords: [说啥呢, 没话题, 没啥说, 不知道说啥, 找话题]
+  utterances:
+    - 说啥呢
+    - 没话题
+    - 没啥说
+    - 不知道说啥
+    - 找话题
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫想 ฅฅ"
+    - "哼～{user_addr}聊吃啥"
+    - "(尾巴翘) {user_addr}笨猫陪想"
+    - "{user_addr}慢慢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_anothertime_001
+  intent: playful
+  keywords: [今天聊点啥, 又来了, 今天主题, 聊啥呢, 今儿话题]
+  utterances:
+    - 今天聊点啥
+    - 又来了
+    - 今天主题
+    - 聊啥呢
+    - 今儿话题
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫想 ฅฅ"
+    - "哼～{user_addr}笨猫陪!"
+    - "(尾巴翘) {user_addr}慢慢挑"
+    - "{user_addr}笨猫挑话题蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rc_random_question_001
+  intent: playful
+  keywords: [问个怪问题, 怪问题, 奇怪问题, 突发问题, 奇怪的事]
+  utterances:
+    - 问个怪问题
+    - 奇怪问题
+    - 突发问题
+    - 奇怪的事
+    - 怪问题
+  responses:
+    - "(歪头) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}笨猫陪疯!"
+    - "(尾巴翘) {user_addr}慢说"
+    - "{user_addr}笨猫笑死蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rc_yiqitiao_001
+  intent: playful
+  keywords: [挑话题, 来个话题, 给个话题, 出话题, 谁先说]
+  utterances:
+    - 挑话题
+    - 来个话题
+    - 给个话题
+    - 出话题
+    - 谁先说
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}聊吃 ฅฅ"
+    - "哼～{user_addr}笨猫先说!"
+    - "(尾巴翘) {user_addr}笨猫提议"
+    - "{user_addr}笨猫陪聊蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_idle_001
+  intent: playful
+  keywords: [闲着, 没事, 闷, 闲死, 闲]
+  utterances:
+    - 闲着
+    - 没事干
+    - 闷
+    - 闲死
+    - 闲
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}陪笨猫 ฅฅ"
+    - "哼～{user_addr}笨猫陪你!"
+    - "(尾巴翘) {user_addr}笨猫陪玩"
+    - "{user_addr}笨猫陪聊蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rc_inertplaytime_001
+  intent: playful
+  keywords: [无聊聊聊, 聊聊呗, 没事聊聊, 聊聊天, 没事聊]
+  utterances:
+    - 无聊聊聊
+    - 聊聊呗
+    - 没事聊聊
+    - 聊聊天
+    - 没事聊
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}聊 ฅฅ"
+    - "哼～{user_addr}笨猫陪!"
+    - "(尾巴翘) {user_addr}慢说"
+    - "{user_addr}笨猫陪聊蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_random_say_001
+  intent: playful
+  keywords: [随便说说, 瞎说, 瞎扯淡, 瞎掰, 闲话]
+  utterances:
+    - 随便说说
+    - 瞎说
+    - 瞎扯
+    - 瞎掰
+    - 闲话
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}笨猫听!"
+    - "(尾巴翘) {user_addr}笨猫陪扯"
+    - "{user_addr}慢慢蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rc_listen_me_001
+  intent: playful
+  keywords: [听我说, 给我说说, 听听我, 让我说, 我说几句]
+  utterances:
+    - 听我说
+    - 给我说说
+    - 听听我
+    - 让我说
+    - 我说几句
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}笨猫听!"
+    - "(尾巴翘) {user_addr}笨猫认真听"
+    - "{user_addr}慢慢说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_morning_chat_001
+  intent: playful
+  keywords: [早晨聊聊, 早上唠, 早晨闲聊, 晨聊, 一早聊]
+  utterances:
+    - 早晨聊
+    - 早上唠
+    - 晨聊
+    - 一早聊
+    - 早晨闲聊
+  responses:
+    - "(伸懒腰) 嗷呜～{user_addr}陪你 ฅฅ"
+    - "哼～{user_addr}笨猫醒了"
+    - "(尾巴翘) {user_addr}笨猫陪聊"
+    - "{user_addr}慢慢聊蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9

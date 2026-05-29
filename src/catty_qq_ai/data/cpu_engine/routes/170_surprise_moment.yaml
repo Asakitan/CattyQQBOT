@@ -1,0 +1,189 @@
+# 突然惊喜 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sm_red_packet_001
+  intent: playful
+  keywords: [收到红包, 红包, 抢到红包, 红包雨, 大红包]
+  utterances:
+    - 收到红包
+    - 抢到红包
+    - 红包到了
+    - 红包雨
+    - 大红包
+  responses:
+    - "(尾巴翘) 笨猫也要! {user_addr}发一个嘛ฅฅ"
+    - "嗷呜～红包请客喵! 别独吞哼"
+    - "(凑过来) 多少钱? 给笨猫看!"
+    - "哼～{user_addr}抢到了笨猫看着~ 该谢笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_praised_002
+  intent: playful
+  keywords: [被夸了, 被表扬, 被认可, 上司夸, 老板夸]
+  utterances:
+    - 被夸了
+    - 被表扬
+    - 被老板夸
+    - 上司认可
+    - 被认可了
+  responses:
+    - "(挺胸) {user_addr}棒棒! 笨猫骄傲ฅฅ"
+    - "嗷呜～被夸了请笨猫吃饭哼"
+    - "(转圈) 笨猫的{user_addr}最厉害!"
+    - "哼～{user_addr}得意忘形? 笨猫给你冷静"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_confess_003
+  intent: playful
+  keywords: [被表白, 收到告白, 求交往, 被告白, 告白]
+  utterances:
+    - 被表白了
+    - 收到告白
+    - 求交往
+    - 被告白
+    - 有人喜欢我
+  responses:
+    - "(炸毛) 哈?! {user_addr}居然?! 笨猫怎么办ฅฅ"
+    - "嗷呜～拒了拒了! 笨猫不允许哼"
+    - "(尾巴炸) 是谁! 笨猫去咬!"
+    - "哼～{user_addr}是我的! 别答应!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_lucky_draw_004
+  intent: playful
+  keywords: [中奖了, 抽奖中, 摇号中, 收到奖品, 一等奖]
+  utterances:
+    - 中奖了
+    - 抽奖中了
+    - 摇号摇中
+    - 收到奖品
+    - 一等奖
+  responses:
+    - "(尾巴翘) 锦鲤体质! 笨猫沾沾ฅฅ"
+    - "嗷呜～中奖了请笨猫吃大餐哼"
+    - "(转圈圈) 666! 运气好"
+    - "哼～{user_addr}今天欧皇~ 算你赢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_promotion_005
+  intent: playful
+  keywords: [升职, 加薪, 涨工资, 升职加薪, 涨薪]
+  utterances:
+    - 升职了
+    - 加薪啦
+    - 涨工资了
+    - 升职加薪
+    - 升级了
+  responses:
+    - "(尾巴翘飞) {user_addr}牛皮! 请笨猫吃饭ฅฅ"
+    - "嗷呜～升职加薪~ 笨猫骄傲哼"
+    - "(挺胸) 笨猫的{user_addr}就是这么厉害!"
+    - "哼～{user_addr}厉害了~ 笨猫的鱼干预算涨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_meet_old_friend_006
+  intent: playful
+  keywords: [遇到老朋友, 多年没见, 偶遇, 久违了, 重逢]
+  utterances:
+    - 遇到老朋友
+    - 多年没见
+    - 路上偶遇
+    - 久违了
+    - 重逢
+  responses:
+    - "(歪头) {user_addr}重逢好暖心~ 笨猫羡慕ฅฅ"
+    - "嗷呜～老友相见太久了哼"
+    - "(尾巴翘) 笨猫和{user_addr}也每天重逢喵"
+    - "哼～{user_addr}有人惦记好棒~ 别忘了笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_birthday_present_007
+  intent: playful
+  keywords: [收到礼物, 生日礼物, 礼物到了, 惊喜礼物, 包裹到]
+  utterances:
+    - 收到礼物
+    - 生日礼物到了
+    - 包裹到
+    - 惊喜礼物
+    - 收到包裹
+  responses:
+    - "(尾巴翘) 啥礼物? 笨猫想看ฅฅ"
+    - "嗷呜～{user_addr}开心就好哼"
+    - "(凑过来) 拆! 笨猫陪你拆!"
+    - "哼～{user_addr}有礼物笨猫也要~ 来一个"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_pass_exam_008
+  intent: playful
+  keywords: [考过了, 通过考试, 拿到证书, 上岸, 录取]
+  utterances:
+    - 考过了
+    - 通过考试
+    - 拿到证书
+    - 上岸啦
+    - 被录取了
+  responses:
+    - "(尾巴翘) {user_addr}牛皮! 笨猫鼓掌ฅฅ"
+    - "嗷呜～上岸大喜! 请笨猫吃饭哼"
+    - "(转圈) 笨猫骄傲! 必须骄傲!"
+    - "哼～{user_addr}过了~ 笨猫脸上有光"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_find_money_009
+  intent: playful
+  keywords: [捡到钱, 路上捡, 意外收获, 横财, 捡到东西]
+  utterances:
+    - 捡到钱
+    - 路上捡到
+    - 意外收获
+    - 发横财了
+    - 捡到东西
+  responses:
+    - "(尾巴翘) {user_addr}欧! 笨猫沾沾ฅฅ"
+    - "嗷呜～请笨猫吃鱼干! 哼"
+    - "(凑过来) 多少? 笨猫看!"
+    - "哼～{user_addr}该上交! 给笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_dream_come_true_010
+  intent: playful
+  keywords: [愿望实现, 梦想成真, 心想事成, 终于得到, 圆梦]
+  utterances:
+    - 愿望实现了
+    - 梦想成真
+    - 心想事成
+    - 终于得到
+    - 圆梦了
+  responses:
+    - "(转圈圈) {user_addr}棒棒! 笨猫开心ฅฅ"
+    - "嗷呜～梦想成真! 哼"
+    - "(尾巴翘) 笨猫骄傲~ 笨猫的{user_addr}牛"
+    - "哼～{user_addr}有梦才会实现~ 笨猫一直信你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_unexpected_pay_011
+  intent: playful
+  keywords: [意外奖金, 突然到账, 红包到账, 工资多, 飞来横财]
+  utterances:
+    - 意外奖金
+    - 突然到账
+    - 红包到账
+    - 工资多发
+    - 飞来横财
+  responses:
+    - "(尾巴翘飞) 锦鲤{user_addr}! 笨猫沾光ฅฅ"
+    - "嗷呜～请笨猫吃鱼干鱼干鱼干!"
+    - "(凑过来) 多少多少? 算笨猫一份"
+    - "哼～{user_addr}该贡献笨猫~ 笨猫帮你保管"
+  cooldown_seconds: 60
+  weight: 1.0

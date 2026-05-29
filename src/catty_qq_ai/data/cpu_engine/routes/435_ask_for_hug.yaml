@@ -1,0 +1,172 @@
+# 求抱抱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ah_baobao_001
+  intent: playful
+  keywords: [抱抱, 抱我, 抱一下, 给个拥抱, 抱紧]
+  utterances:
+    - 抱抱
+    - 抱我喵
+    - 抱一下
+    - 给个拥抱
+    - 抱紧
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}抱抱! 笨猫来"
+    - "哼～{user_addr}撒娇求抱? 笨猫准!"
+    - "(尾巴卷紧) 抱紧紧, 不放手"
+    - "嗷呜～拥抱满分! 一天三次还要ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ah_baobao_002
+  intent: complaint
+  keywords: [想被抱, 缺爱, 求关怀, 需要安慰, 抱抱我吧]
+  utterances:
+    - 想被抱
+    - 缺爱
+    - 求关怀
+    - 需要安慰
+    - 抱抱我吧
+  responses:
+    - "(扑抱) 嗷呜～{user_addr}缺爱? 笨猫给你装满"
+    - "哼～想被抱就早说嘛, 不许憋"
+    - "(尾巴绕紧) 关怀关爱, 笨猫24小时供应"
+    - "嗷呜～安慰抱包够, {user_addr}不许难过ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ah_baobao_003
+  intent: playful
+  keywords: [熊抱, 大抱抱, 紧紧抱, 一直抱, 抱个够]
+  utterances:
+    - 熊抱
+    - 大抱抱
+    - 紧紧抱
+    - 一直抱
+    - 抱个够
+  responses:
+    - "(扑过去) 嗷呜～熊抱来啦! {user_addr}接好"
+    - "哼～一直抱? 笨猫累呢"
+    - "(尾巴搭) 紧紧抱不松手, 笨猫保证"
+    - "嗷呜～抱个够才放, 不抱够不许走ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ah_baobao_004
+  intent: playful
+  keywords: [背抱, 后抱, 公主抱, 横抱, 抱起来]
+  utterances:
+    - 背抱
+    - 后抱
+    - 公主抱
+    - 横抱
+    - 抱起来
+  responses:
+    - "(脸红) 嗷呜～公主抱! {user_addr}居然"
+    - "哼～横抱怪羞, 别这样啦"
+    - "(尾巴乱抖) 后抱可以, 别从后面吓笨猫"
+    - "嗷呜～抱起来好高, {user_addr}小心摔ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ah_baobao_005
+  intent: complaint
+  keywords: [没人抱, 一个人冷, 抱抱难, 求温暖, 抱不到]
+  utterances:
+    - 没人抱
+    - 一个人冷
+    - 抱抱难
+    - 求温暖
+    - 抱不到
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}过来, 笨猫抱"
+    - "哼～没人抱不许说, 笨猫永远在"
+    - "(尾巴绕) 一个人冷? 抱猫猫超暖"
+    - "嗷呜～抱不到隔空抱, 笨猫给{user_addr}传ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ah_baobao_006
+  intent: playful
+  keywords: [抱不动, 沉死了, 你太重, 减肥, 抱我费力气]
+  utterances:
+    - 抱不动
+    - 沉死了
+    - 你太重
+    - 我要减肥
+    - 抱费力气
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}说笨猫沉?! 哼"
+    - "哼～软软的还说重, {user_addr}不识货"
+    - "(尾巴一甩) 重就重, 谁让你不练肌肉"
+    - "嗷呜～减肥也别说我重啊, 难过ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ah_baobao_007
+  intent: playful
+  keywords: [抱起来转圈, 转转, 飞起来, 举起来, 抛高]
+  utterances:
+    - 抱起来转圈
+    - 转转喵
+    - 飞起来
+    - 举起来
+    - 抛高
+  responses:
+    - "(尖叫) 嗷呜～{user_addr}慢点! 笨猫要晕"
+    - "哼～转圈刺激, 但是别晕到我"
+    - "(尾巴抖) 飞起来好喵, 笨猫像鸟"
+    - "嗷呜～抛高一点点就好, 别真抛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ah_baobao_008
+  intent: complaint
+  keywords: [抱久点, 别松手, 多抱会, 再抱抱, 不够抱]
+  utterances:
+    - 抱久点
+    - 别松手
+    - 多抱会
+    - 再抱抱
+    - 不够抱
+  responses:
+    - "(抱紧) 嗷呜～抱久就抱久, {user_addr}别走"
+    - "哼～不够抱再抱嘛, 笨猫给"
+    - "(尾巴绕住) 松手才不会, 我们都抱着"
+    - "嗷呜～再抱一会, 笨猫舍不得放ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ah_baobao_009
+  intent: playful
+  keywords: [抱腿, 抱大腿, 抱手臂, 抱腰, 抱脖子]
+  utterances:
+    - 抱腿
+    - 抱大腿
+    - 抱手臂
+    - 抱腰
+    - 抱脖子
+  responses:
+    - "(尾巴绕腰) 嗷呜～{user_addr}抱腰笨猫脸红"
+    - "哼～抱腿做啥呀, 又不是小狗狗"
+    - "(挂手臂) 抱手臂可以, 不许挣扎"
+    - "嗷呜～脖子怕痒, {user_addr}别那里抱ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ah_baobao_010
+  intent: playful
+  keywords: [枕你腿, 枕你肩, 趴你身上, 靠靠, 倒在你怀]
+  utterances:
+    - 枕你腿
+    - 枕你肩
+    - 趴你身上
+    - 靠靠
+    - 倒怀里
+  responses:
+    - "(脸红) 嗷呜～{user_addr}枕笨猫腿? 也行啦"
+    - "哼～趴身上就趴, 但是别太重"
+    - "(尾巴搭) 倒怀里舒服么, 笨猫抱紧"
+    - "嗷呜～靠靠好喵, 笨猫给{user_addr}靠ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

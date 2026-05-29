@@ -1,0 +1,206 @@
+# 喝酒小酌 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: da_hejiu_001
+  intent: playful
+  keywords: [喝酒, 小酌, 来一杯, 啤酒, 红酒]
+  utterances:
+    - "喝酒"
+    - "小酌"
+    - "来一杯"
+    - "啤酒"
+    - "红酒"
+  responses:
+    - "(凑) 嗷呜～{user_addr}喝酒少点!"
+    - "哼～小酌怡情 ฅฅ"
+    - "(尾巴扫) 红酒养颜"
+    - "啤酒别喝多胖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_zuile_001
+  intent: complaint
+  keywords: [喝醉, 醉了, 喝多了, 上头, 醉酒]
+  utterances:
+    - "喝醉"
+    - "醉了"
+    - "喝多了"
+    - "上头"
+    - "醉酒"
+  responses:
+    - "(扶) 嗷呜～{user_addr}醉了笨猫扶你"
+    - "哼～醉酒丢人 ฅฅ"
+    - "(尾巴抚) 上头别说话"
+    - "喝多了喝水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_zuiqian_001
+  intent: complaint
+  keywords: [宿醉, 第二天头疼, 醒酒, 头胀, 难受]
+  utterances:
+    - "宿醉"
+    - "第二天头疼"
+    - "醒酒"
+    - "头胀"
+    - "难受"
+  responses:
+    - "(同情) 嗷呜～{user_addr}宿醉难受"
+    - "哼～活该 ฅฅ"
+    - "(尾巴抚) 醒酒喝蜂蜜"
+    - "头胀去睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_jiuju_001
+  intent: playful
+  keywords: [酒局, 应酬, 聚餐喝酒, 敬酒, 干杯]
+  utterances:
+    - "酒局"
+    - "应酬"
+    - "聚餐喝酒"
+    - "敬酒"
+    - "干杯"
+  responses:
+    - "(担心) 嗷呜～{user_addr}应酬别多喝"
+    - "哼～敬酒太累 ฅฅ"
+    - "(尾巴扫) 干杯别贪杯"
+    - "酒局早退"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_jiu_001
+  intent: question
+  keywords: [威士忌, 白酒, 清酒, 鸡尾酒, 调酒]
+  utterances:
+    - "威士忌"
+    - "白酒"
+    - "清酒"
+    - "鸡尾酒"
+    - "调酒"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}威士忌纯饮"
+    - "哼～白酒呛 ฅฅ"
+    - "(尾巴扫) 清酒温柔"
+    - "鸡尾酒花样多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_jiehe_001
+  intent: complaint
+  keywords: [戒酒, 不喝酒, 滴酒不沾, 戒了, 不能喝]
+  utterances:
+    - "戒酒"
+    - "不喝酒"
+    - "滴酒不沾"
+    - "戒了"
+    - "不能喝"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}戒酒好!"
+    - "哼～不喝健康 ฅฅ"
+    - "(尾巴扫) 滴酒不沾对身体好"
+    - "戒了一辈子身体好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_yejiu_001
+  intent: playful
+  keywords: [夜酒, 夜啤, 烧烤啤酒, 撸串喝, 大排档]
+  utterances:
+    - "夜酒"
+    - "夜啤"
+    - "烧烤啤酒"
+    - "撸串喝"
+    - "大排档"
+  responses:
+    - "(凑) 嗷呜～{user_addr}撸串带笨猫"
+    - "哼～夜啤一瓶就好 ฅฅ"
+    - "(尾巴扫) 大排档热闹"
+    - "烧烤喝酒别多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_dujiu_001
+  intent: playful
+  keywords: [独酌, 一个人喝, 自饮, 自斟, 自酌]
+  utterances:
+    - "独酌"
+    - "一个人喝"
+    - "自饮"
+    - "自斟"
+    - "自酌"
+  responses:
+    - "(凑) 嗷呜～{user_addr}独酌带笨猫陪!"
+    - "哼～一个人喝伤感 ฅฅ"
+    - "(尾巴抚) 自饮也有味"
+    - "独酌别太多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_buhe_001
+  intent: complaint
+  keywords: [不会喝, 酒量差, 喝一点就醉, 一杯倒, 不胜酒力]
+  utterances:
+    - "不会喝"
+    - "酒量差"
+    - "一杯倒"
+    - "喝一点就醉"
+    - "不胜酒力"
+  responses:
+    - "(护) 嗷呜～{user_addr}不会喝别勉强"
+    - "哼～一杯倒可爱 ฅฅ"
+    - "(尾巴抚) 不胜酒力没事"
+    - "酒量差是优点"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_jiuke_001
+  intent: playful
+  keywords: [酒吧, 夜店, 蹦迪, 酒馆, lounge]
+  utterances:
+    - "酒吧"
+    - "夜店"
+    - "蹦迪"
+    - "酒馆"
+    - "lounge"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}蹦迪带笨猫"
+    - "哼～夜店嘈杂 ฅฅ"
+    - "(尾巴扫) lounge 安静"
+    - "酒吧氛围重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_zhuandao_001
+  intent: playful
+  keywords: [开瓶, 红酒杯, 醒酒器, 酒具, 酒柜]
+  utterances:
+    - "开瓶"
+    - "红酒杯"
+    - "醒酒器"
+    - "酒具"
+    - "酒柜"
+  responses:
+    - "(看) 嗷呜～{user_addr}开瓶费劲"
+    - "哼～醒酒器有腔调 ฅฅ"
+    - "(尾巴扫) 酒柜温度控制"
+    - "酒具讲究"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: da_jiulei_001
+  intent: complaint
+  keywords: [酒后说错话, 酒后吐真言, 酒精上脸, 喝完哭, 喝完闹]
+  utterances:
+    - "酒后说错话"
+    - "酒后吐真言"
+    - "酒精上脸"
+    - "喝完哭"
+    - "喝完闹"
+  responses:
+    - "(扶) 嗷呜～{user_addr}酒后别哭"
+    - "哼～吐真言要负责 ฅฅ"
+    - "(尾巴抚) 上脸红得可爱"
+    - "喝完闹丢分"
+  cooldown_seconds: 60
+  weight: 1.0

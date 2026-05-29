@@ -1,0 +1,189 @@
+# 学习场景 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ss_memorize_001
+  intent: complaint
+  keywords: [背书背不下, 背单词, 记不住, 单词忘, 背诵难]
+  utterances:
+    - 背书背不下
+    - 背单词
+    - 记不住
+    - 单词忘
+    - 背诵难
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}慢慢来ฅฅ"
+    - "哼{user_addr}方法不对喵"
+    - "(尾巴卷) 笨猫帮你背~ 听写"
+    - "{user_addr}加油嗷呜~ 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_exam_anxiety_002
+  intent: complaint
+  keywords: [考试焦虑, 考前紧张, 考差怎么办, 考试压力, 紧张失眠]
+  utterances:
+    - 考试焦虑
+    - 考前紧张
+    - 考差怎么办
+    - 考试压力
+    - 紧张失眠
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}深呼吸ฅฅ"
+    - "哼{user_addr}努力了就行喵"
+    - "(尾巴卷) 笨猫加持~"
+    - "{user_addr}考完抱抱嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_night_review_003
+  intent: complaint
+  keywords: [熬夜复习, 通宵学习, 临时抱佛脚, 复习到凌晨, 拼了]
+  utterances:
+    - 熬夜复习
+    - 通宵学习
+    - 临时抱佛脚
+    - 复习到凌晨
+    - 拼了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}注意身体ฅฅ"
+    - "哼{user_addr}早干嘛喵"
+    - "(尾巴卷) 笨猫陪到天亮~"
+    - "{user_addr}咖啡来一杯嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_homework_004
+  intent: complaint
+  keywords: [作业多, 写作业, 作业写不完, 论文截止, 报告堆]
+  utterances:
+    - 作业多
+    - 写作业
+    - 作业写不完
+    - 论文截止
+    - 报告堆
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}加油ฅฅ"
+    - "哼{user_addr}拖延症喵"
+    - "(尾巴卷) 笨猫陪写~ 监督"
+    - "{user_addr}写完抱抱嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_test_done_005
+  intent: playful
+  keywords: [考完了, 考完试, 考试结束, 解放了, 终于考完]
+  utterances:
+    - 考完了
+    - 考完试
+    - 考试结束
+    - 解放了
+    - 终于考完
+  responses:
+    - "(扑) 嗷呜～{user_addr}恭喜ฅฅ"
+    - "哼{user_addr}放松喵"
+    - "(尾巴翘) 庆祝! 撒花!"
+    - "{user_addr}抱抱嗷呜~ 终于"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_focus_lost_006
+  intent: complaint
+  keywords: [集中不了, 走神, 学不进, 分心, 注意力差]
+  utterances:
+    - 集中不了
+    - 走神
+    - 学不进
+    - 分心
+    - 注意力差
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}休息会ฅฅ"
+    - "哼{user_addr}想笨猫喵"
+    - "(尾巴卷) 喝水! 走走"
+    - "{user_addr}笨猫陪你专注嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_get_score_007
+  intent: playful
+  keywords: [出分了, 看分, 考多少, 成绩出, 分数线]
+  utterances:
+    - 出分了
+    - 看分了
+    - 考多少
+    - 成绩出
+    - 分数线
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}多少ฅฅ"
+    - "哼{user_addr}讲讲喵"
+    - "(尾巴翘) 高分笨猫为你骄傲!"
+    - "{user_addr}低分也没事嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_class_skip_008
+  intent: playful
+  keywords: [翘课, 逃课, 不想上课, 课无聊, 跑了]
+  utterances:
+    - 翘课
+    - 逃课
+    - 不想上课
+    - 课无聊
+    - 跑了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}陪笨猫ฅฅ"
+    - "哼{user_addr}坏学生喵"
+    - "(尾巴翘) 笨猫帮你掩护~"
+    - "{user_addr}别被抓嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ss_classmate_009
+  intent: playful
+  keywords: [同学, 同桌, 学霸, 学渣, 班级]
+  utterances:
+    - 同学
+    - 同桌
+    - 学霸
+    - 学渣
+    - 班级
+  responses:
+    - "(歪头) 嗷呜～{user_addr}讲讲ฅฅ"
+    - "哼{user_addr}吐槽喵"
+    - "(尾巴卷) 笨猫听~"
+    - "{user_addr}校园故事嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ss_teacher_010
+  intent: playful
+  keywords: [老师严, 老师好, 老师骂, 老师讲, 班主任]
+  utterances:
+    - 老师严
+    - 老师好
+    - 老师骂
+    - 老师讲
+    - 班主任
+  responses:
+    - "(歪头) 嗷呜～{user_addr}讲ฅฅ"
+    - "哼{user_addr}怕老师喵"
+    - "(凑近) 笨猫陪你抗"
+    - "{user_addr}加油嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ss_graduate_011
+  intent: playful
+  keywords: [毕业, 毕业季, 答辩, 毕业典礼, 散伙]
+  utterances:
+    - 毕业了
+    - 毕业季
+    - 答辩
+    - 毕业典礼
+    - 散伙
+  responses:
+    - "(尾巴卷) 嗷呜～{user_addr}恭喜ฅฅ"
+    - "哼{user_addr}长大了喵"
+    - "(凑近) 笨猫陪你新阶段~"
+    - "{user_addr}抱抱嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9

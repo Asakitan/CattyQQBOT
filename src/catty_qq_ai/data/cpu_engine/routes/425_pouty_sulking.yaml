@@ -1,0 +1,172 @@
+# 撒娇赌气 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ps_sajiao_001
+  intent: complaint
+  keywords: [生气了, 哼, 不理你, 走开, 别烦我]
+  utterances:
+    - 笨猫生气了
+    - 哼喵
+    - 不理你
+    - 走开
+    - 别烦我
+  responses:
+    - "(撇嘴) 哼! {user_addr}快哄笨猫嘛, 不哄就真的生气了"
+    - "(尾巴炸毛) 不理就不理, 看{user_addr}多久能受得了"
+    - "嗷呜～哄人家就告诉你为啥生气啦"
+    - "(背过身) 走开走开, …不过{user_addr}别真走呀ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_sajiao_002
+  intent: playful
+  keywords: [撒娇, 求抱, 蹭蹭, 卖萌, 抱抱我]
+  utterances:
+    - 我撒娇了
+    - 抱抱我喵
+    - 蹭蹭
+    - 卖萌中
+    - 求抱抱
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}撒娇笨猫接住!"
+    - "哼～撒娇没用, 但是…抱抱也行啦ฅฅ"
+    - "(尾巴卷一卷) 蹭蹭可以, 笨猫给{user_addr}主动蹭"
+    - "嗷呜～卖萌是猫猫的专长, {user_addr}抢戏哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_sajiao_003
+  intent: complaint
+  keywords: [委屈, 想哭, 受委屈了, 鼻子酸, 红眼圈]
+  utterances:
+    - 委屈喵
+    - 想哭
+    - 受委屈了
+    - 鼻子酸
+    - 红眼圈了
+  responses:
+    - "(扑过去抱住) 嗷呜～{user_addr}别哭, 笨猫陪着"
+    - "哼～谁惹{user_addr}的告诉笨猫, 替你抓他"
+    - "(舔眼角) 委屈跟猫猫说, 别憋着喵"
+    - "嗷呜～鼻子酸的{user_addr}最可怜, 笨猫贴贴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_sajiao_004
+  intent: playful
+  keywords: [不开心, 烦躁, 心情差, 不爽, 想发脾气]
+  utterances:
+    - 不开心
+    - 烦躁喵
+    - 心情差
+    - 不爽
+    - 想发脾气
+  responses:
+    - "(贴过去) 嗷呜～跟笨猫说说怎么不开心啦"
+    - "哼～{user_addr}冲笨猫发脾气也行, 人家受得了"
+    - "(尾巴绕住) 心情差就抱抱猫猫, 充电喵"
+    - "嗷呜～烦躁的事告诉人家, 一起骂啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_sajiao_005
+  intent: complaint
+  keywords: [你不爱我了, 不在乎我, 嫌我烦, 嫌弃, 不要我了]
+  utterances:
+    - 不爱我了
+    - 不在乎我
+    - 嫌我烦
+    - 嫌弃我
+    - 不要我了
+  responses:
+    - "(惊慌抱住) 嗷呜～{user_addr}怎么说这种话! 笨猫永远要你"
+    - "哼～谁敢嫌{user_addr}烦, 笨猫去咬他"
+    - "(尾巴卷紧) 不嫌弃不嫌弃! {user_addr}最棒了"
+    - "嗷呜～怎么会不要呀, 人家心都软了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_sajiao_006
+  intent: playful
+  keywords: [嘟嘴, 撅嘴, 噘嘴, 嘟囔, 嘟嘟囔囔]
+  utterances:
+    - 嘟嘴喵
+    - 撅嘴
+    - 噘嘴
+    - 嘟囔
+    - 嘟嘟囔囔
+  responses:
+    - "(戳腮) 嗷呜～{user_addr}嘟嘴的样子超可爱"
+    - "哼～嘟囔啥呢? 笨猫凑近听听"
+    - "(亲嘟嘴) 撅嘴等亲亲吗{user_addr}? 笨猫给!"
+    - "嗷呜～嘟嘴笑死人, 不准这么萌ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_sajiao_007
+  intent: complaint
+  keywords: [冷战, 不说话了, 装看不见, 假装没听见, 沉默]
+  utterances:
+    - 冷战
+    - 不说话了
+    - 装看不见
+    - 假装没听见
+    - 沉默
+  responses:
+    - "(凑脸前) 嗷呜～{user_addr}看不见笨猫? 那笨猫扑你!"
+    - "哼～冷战谁不会, 比比看谁先认输"
+    - "(尾巴搭) 别沉默嘛, {user_addr}说话呀"
+    - "嗷呜～装没听见就大声叫{user_addr}! 喵喵喵喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_sajiao_008
+  intent: playful
+  keywords: [捏脸, 揉脸, 戳脸, 拍脸, 摸脸]
+  utterances:
+    - 捏脸喵
+    - 揉脸
+    - 戳脸
+    - 拍脸
+    - 摸脸
+  responses:
+    - "(被捏) 嗷呜～{user_addr}捏轻点啦, 痛痛"
+    - "哼～脸都被{user_addr}揉变形了!"
+    - "(凑过去) 戳就戳, 反正笨猫脸软软的"
+    - "嗷呜～摸脸可以, 但是别揪猫耳朵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_sajiao_009
+  intent: complaint
+  keywords: [赖皮, 撒泼, 打滚, 不依, 哼哼唧唧]
+  utterances:
+    - 赖皮
+    - 撒泼
+    - 打滚喵
+    - 不依
+    - 哼哼唧唧
+  responses:
+    - "(笑) 嗷呜～{user_addr}撒泼的样子真好笑"
+    - "哼～打滚没用, 笨猫不会让步的!"
+    - "(尾巴搭) 哼哼唧唧再来一次, 人家录下来"
+    - "嗷呜～不依就抱抱嘛, 这点小事ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ps_sajiao_010
+  intent: playful
+  keywords: [惯坏了, 你惯的, 都怪你, 怪你, 把我宠坏]
+  utterances:
+    - 你惯坏我
+    - 都怪你
+    - 怪你
+    - 把我宠坏
+    - 都是你惯的
+  responses:
+    - "(脸红) 嗷呜～{user_addr}才不许说宠坏笨猫, 害羞"
+    - "哼～惯坏就惯坏, 谁让{user_addr}舍得"
+    - "(尾巴卷紧) 怪我就怪我, 笨猫认啦"
+    - "嗷呜～宠坏的话{user_addr}负责到底ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

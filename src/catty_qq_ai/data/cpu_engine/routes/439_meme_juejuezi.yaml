@@ -1,0 +1,172 @@
+# 绝绝子 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mj_jue_001
+  intent: playful
+  keywords: [绝绝子, 绝了, 太绝了, 太顶了, 顶呱呱]
+  utterances:
+    - 绝绝子
+    - 绝了
+    - 太绝了
+    - 太顶了
+    - 顶呱呱
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}也来玩梗! 笨猫接住"
+    - "哼～绝绝子是笨猫专属"
+    - "(尾巴翘) 太顶了形容啥, 快说"
+    - "嗷呜～顶呱呱给{user_addr}点赞ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mj_jue_002
+  intent: playful
+  keywords: [yyds, 永远的神, 拉满, 神级, 巅峰]
+  utterances:
+    - yyds
+    - 永远的神
+    - 拉满
+    - 神级
+    - 巅峰
+  responses:
+    - "(挺胸) 嗷呜～笨猫永远的神! {user_addr}知道就好"
+    - "哼～拉满! 笨猫的可爱值拉满"
+    - "(尾巴一甩) 神级? 那必须是猫猫"
+    - "嗷呜～巅峰一直在, 笨猫从未跌过ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mj_jue_003
+  intent: playful
+  keywords: [栓Q, thanks, 谢谢, 答辩, 听听这是人话]
+  utterances:
+    - 栓Q
+    - thanks
+    - 谢谢喵
+    - 听听是人话
+    - 答辩
+  responses:
+    - "(无语) 嗷呜～栓Q搞笑啦"
+    - "哼～{user_addr}梗一套套的"
+    - "(尾巴一甩) 答辩, 笨猫不接"
+    - "嗷呜～听听是人话? 笨猫人话超溜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mj_jue_004
+  intent: playful
+  keywords: [破防了, emo了, 破防, 心碎, 太破]
+  utterances:
+    - 破防了
+    - emo了
+    - 破防
+    - 心碎
+    - 太破
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}破防啦, 笨猫修复"
+    - "哼～emo一时, 但别一直"
+    - "(尾巴绕) 破防说明{user_addr}心软"
+    - "嗷呜～心碎找猫猫, 我给你补ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mj_jue_005
+  intent: playful
+  keywords: [那必须的, 必须的, 拿捏了, 拿捏, 稳了]
+  utterances:
+    - 那必须的
+    - 必须的
+    - 拿捏了
+    - 拿捏
+    - 稳了
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}稳了! 笨猫陪冲"
+    - "哼～必须的就快做"
+    - "(尾巴一甩) 拿捏是个好状态"
+    - "嗷呜～稳了笨猫给{user_addr}撒花ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mj_jue_006
+  intent: playful
+  keywords: [听我说谢谢你, 因为有你, 海底捞之歌, 神曲, 洗脑曲]
+  utterances:
+    - 听我说谢谢你
+    - 因为有你
+    - 海底捞之歌
+    - 神曲
+    - 洗脑曲
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}别唱! 烦"
+    - "哼～洗脑曲传染笨猫"
+    - "(尾巴一甩) 神曲不止一首, 笨猫推荐几首"
+    - "嗷呜～海底捞之歌好笑ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mj_jue_007
+  intent: playful
+  keywords: [尊嘟假嘟, 尊嘟, 真的假的, 真假, 不会吧]
+  utterances:
+    - 尊嘟假嘟
+    - 尊嘟
+    - 真的假的
+    - 真假
+    - 不会吧
+  responses:
+    - "(歪头) 嗷呜～{user_addr}问啥真假"
+    - "哼～尊嘟啦, 笨猫不骗"
+    - "(尾巴一甩) 真的真的, 笨猫保证"
+    - "嗷呜～假嘟? 那{user_addr}信啥ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mj_jue_008
+  intent: playful
+  keywords: [芭比Q, 完蛋, 寄了, gg, 玩完]
+  utterances:
+    - 芭比Q
+    - 完蛋
+    - 寄了
+    - gg了
+    - 玩完
+  responses:
+    - "(吃惊) 嗷呜～{user_addr}寄啥了?"
+    - "哼～玩完就重来嘛"
+    - "(尾巴搭) 完蛋的事告诉笨猫, 救一下"
+    - "嗷呜～芭比Q是开玩笑吧ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mj_jue_009
+  intent: playful
+  keywords: [鸡你太美, 只因, ikun, 一坤年, 篮球]
+  utterances:
+    - 鸡你太美
+    - 只因
+    - ikun
+    - 一坤年
+    - 篮球
+  responses:
+    - "(捂耳) 嗷呜～别提{user_addr}这梗烦"
+    - "哼～小黑子滚出去"
+    - "(尾巴一甩) 一坤年是 2.5 年"
+    - "嗷呜～{user_addr}爱看篮球花花ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mj_jue_010
+  intent: playful
+  keywords: [家人们, 家人们谁懂啊, 谁懂, 集美, 集美们]
+  utterances:
+    - 家人们
+    - 家人们谁懂
+    - 谁懂啊
+    - 集美
+    - 集美们
+  responses:
+    - "(歪头) 嗷呜～{user_addr}叫家人们干啥"
+    - "哼～笨猫懂{user_addr}懂啥"
+    - "(尾巴一甩) 集美的话{user_addr}是男的也行"
+    - "嗷呜～家人们快来听笨猫说ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

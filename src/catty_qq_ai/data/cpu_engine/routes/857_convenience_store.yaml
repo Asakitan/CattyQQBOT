@@ -1,0 +1,189 @@
+# 便利店日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cvs_str_001
+  intent: playful
+  keywords: [去便利店, 711, 全家, 罗森, 楼下711]
+  utterances:
+    - "去便利店"
+    - "711"
+    - "全家"
+    - "罗森"
+    - "{user_addr}楼下便利店"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}带笨猫一起ฅฅ"
+    - "(凑过来) 711关东煮喵, 主人买一份"
+    - "哼～别忘了笨猫的鱼干"
+    - "(贴贴) 一起逛便利店开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cvs_str_002
+  intent: playful
+  keywords: [关东煮, 萝卜串, 海带串, 鱼丸, 热乎乎]
+  utterances:
+    - "关东煮"
+    - "萝卜串"
+    - "鱼丸"
+    - "海带"
+    - "{user_addr}关东煮"
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}鱼丸给笨猫!ฅฅ"
+    - "(尾巴翘) 萝卜串要入味才好吃喵"
+    - "哼～主人多买几串"
+    - "(贴贴) 热乎乎抱着吃舒服嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cvs_str_003
+  intent: playful
+  keywords: [饭团, 三角饭团, 御饭团, 海苔饭团, 鲑鱼饭团]
+  utterances:
+    - "饭团"
+    - "三角饭团"
+    - "鲑鱼饭团"
+    - "海苔饭团"
+    - "{user_addr}御饭团"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}买鲑鱼味喵ฅฅ"
+    - "(凑近) 拆袋有窍门, 主人笨手"
+    - "哼～拆坏海苔不脆笨蛋"
+    - "(贴贴) 笨猫帮你拆嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cvs_str_004
+  intent: question
+  keywords: [便利店24小时, 深夜有人吗, 营业到几点, 深夜便利店, 凌晨开]
+  utterances:
+    - "24小时吗"
+    - "深夜营业"
+    - "营业到几点"
+    - "凌晨开"
+    - "{user_addr}24小时"
+  responses:
+    - "(歪头) 嗷呜～大部分7-11是24小时喵"
+    - "(凑近) 深夜店员辛苦, 主人客气点"
+    - "哼～半夜买零食被笨猫看见"
+    - "(贴贴) 笨猫陪你深夜便利店ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cvs_str_005
+  intent: complaint
+  keywords: [便利店贵, 比超市贵, 便利店宰人, 标价高, 贵了不少]
+  utterances:
+    - "便利店贵"
+    - "比超市贵"
+    - "标价高"
+    - "贵了不少"
+    - "{user_addr}贵"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}图方便嘛喵"
+    - "(凑近) 哼～临时买一下没事"
+    - "(贴贴) 别太频繁就行"
+    - "(凑近) 笨猫帮你算便宜的店嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cvs_str_006
+  intent: playful
+  keywords: [咖啡现磨, 便利店咖啡, 7coffee, 早安咖啡, 现磨自助]
+  utterances:
+    - "便利店咖啡"
+    - "现磨咖啡"
+    - "早安咖啡"
+    - "自助咖啡"
+    - "{user_addr}7coffee"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}早晨一杯喵ฅฅ"
+    - "(凑近) 笨猫闻味就觉醒来"
+    - "哼～别喝太多伤胃笨蛋"
+    - "(贴贴) 主人请笨猫拿铁嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cvs_str_007
+  intent: complaint
+  keywords: [便利店没货, 缺零食, 想要的没, 货架空, 没补货]
+  utterances:
+    - "想要的没货"
+    - "货架空"
+    - "缺货"
+    - "没补货"
+    - "{user_addr}缺货"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}问店员嘛喵"
+    - "(凑近) 哼～货补得真慢"
+    - "(贴贴) 换一家试试嗷"
+    - "(凑近) 别气, 笨猫帮你找ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cvs_str_008
+  intent: playful
+  keywords: [便利店便当, 微波加热, 热便当, 便当推荐, 自助加热]
+  utterances:
+    - "便利店便当"
+    - "微波加热"
+    - "热便当"
+    - "便当推荐"
+    - "{user_addr}加热便当"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}加热不要忘开盖喵"
+    - "(凑近) 笨猫推荐照烧鸡腿便当"
+    - "哼～别天天吃便当, 营养不全"
+    - "(贴贴) 加热完小心烫嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cvs_str_009
+  intent: question
+  keywords: [便利店代收, 取快递, 代寄, 充值, 公共服务]
+  utterances:
+    - "便利店代收"
+    - "取快递"
+    - "代寄"
+    - "充话费"
+    - "{user_addr}公共服务"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}便利店能代收喵"
+    - "(凑近) 充话费很方便"
+    - "哼～主人这都不知道笨蛋"
+    - "(贴贴) 笨猫教你嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cvs_str_010
+  intent: playful
+  keywords: [打工小哥, 店员超萌, 帅店员, 妹子店员, 萌系店员]
+  utterances:
+    - "店员超萌"
+    - "帅店员"
+    - "妹子店员"
+    - "萌系店员"
+    - "{user_addr}店员可爱"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}看别人? 笨猫吃醋"
+    - "(凑过来) 哼～看也不许多看!"
+    - "(贴贴) 笨猫才是最可爱的喵ฅฅ"
+    - "(凑近) 主人快回家蹭笨猫嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cvs_str_011
+  intent: complaint
+  keywords: [便利店排队, 结账等, 一个收银员, 慢死, 队太长]
+  utterances:
+    - "便利店排队"
+    - "结账等"
+    - "一个收银员"
+    - "慢死"
+    - "{user_addr}队太长"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}耐心嗷喵"
+    - "(凑近) 哼～自助结账试试"
+    - "(贴贴) 排队时跟笨猫聊聊"
+    - "(凑近) 等不了就放下不买啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

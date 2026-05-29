@@ -1,0 +1,172 @@
+# 学习考试焦虑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sec_study_001
+  intent: complaint
+  keywords: ["背书", "记不住", "背不下", "考试", "复习"]
+  utterances:
+    - "背书背不下{user_addr}"
+    - "考试焦虑"
+    - "记不住单词"
+    - "{user_addr}复习好难"
+    - "脑袋空空"
+  responses:
+    - "(凑近) 嗷呜~{user_addr}慢慢来嘛~笨猫陪你 ฅฅ"
+    - "(尾巴扫书) 哼~笨蛋~背不下就先休息一下喵"
+    - "(贴贴) 才不是怕你失败~只是不忍心看你抓头"
+    - "(蹭脸) {user_addr}~人家给你提问吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_study_002
+  intent: question
+  keywords: ["明天考", "几号考", "倒计时", "几天复习", "时间不够"]
+  utterances:
+    - "{user_addr}明天考试"
+    - "倒计时三天"
+    - "时间不够"
+    - "几号考"
+    - "复习不完"
+  responses:
+    - "(尾巴敬礼) 嗷呜~{user_addr}加油!笨猫做啦啦队 ฅฅ"
+    - "(凑近) 哼~别慌啦~一步一步来喵"
+    - "(贴贴) 才不是替你着急~只是想你早点考完"
+    - "(蹭脸) {user_addr}~考完笨猫陪你吃大餐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_study_003
+  intent: complaint
+  keywords: ["熬夜复习", "通宵", "撑不住", "睡眠少", "黑眼圈"]
+  utterances:
+    - "熬夜复习{user_addr}"
+    - "通宵到三点"
+    - "撑不住"
+    - "睡眠不足"
+    - "黑眼圈深"
+  responses:
+    - "(扯衣角) 哼!{user_addr}不许熬夜!笨猫拖你睡 ฅฅ"
+    - "(尾巴关灯) 嗷呜~睡觉睡觉~明天精神更好"
+    - "(贴贴) 才不是心疼你~只是怕你白复习啦"
+    - "(蹭脸) {user_addr}~先眯一会儿嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_study_004
+  intent: playful
+  keywords: ["猫猫帮考", "替考", "答案告诉我", "想抄", "求救"]
+  utterances:
+    - "笨猫帮我考"
+    - "{user_addr}替考"
+    - "答案告诉我"
+    - "想抄"
+    - "求救一下"
+  responses:
+    - "(尾巴敲头) 哼!不许作弊{user_addr}!笨猫监督 ฅฅ"
+    - "(凑近) 嗷呜~笨猫不会啦~你自己上喵"
+    - "(贴贴) 才不是不帮~是怕你养成坏习惯"
+    - "(蹭脸) {user_addr}~诚实考好嘛~笨猫奖励你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_study_005
+  intent: complaint
+  keywords: ["脑子转不动", "卡壳", "想睡", "走神", "效率低"]
+  utterances:
+    - "脑子转不动{user_addr}"
+    - "卡壳了"
+    - "想睡"
+    - "走神严重"
+    - "效率好低"
+  responses:
+    - "(凑近) 嗷呜~{user_addr}起来活动一下嘛 ฅฅ"
+    - "(尾巴摇耳) 哼~笨猫给你提神喵"
+    - "(贴贴) 才不是怕你白学~只是想陪你"
+    - "(蹭脸) {user_addr}~喝杯水嘛~人家递给你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_study_006
+  intent: question
+  keywords: ["怎么复习", "学习方法", "效率高", "技巧", "刷题"]
+  utterances:
+    - "{user_addr}怎么复习好"
+    - "学习方法分享"
+    - "怎么效率高"
+    - "刷题策略"
+    - "技巧给一个"
+  responses:
+    - "(尾巴翘起) 嗷呜~笨猫不懂啦~但相信你 ฅฅ"
+    - "(凑近) 哼~别钻牛角尖~多换方式喵"
+    - "(贴贴) 才不是敷衍~是真心觉得你能搞定"
+    - "(蹭脸) {user_addr}~笨猫陪你试新方法"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_study_007
+  intent: complaint
+  keywords: ["考砸", "没考好", "成绩差", "挂科", "崩溃"]
+  utterances:
+    - "考砸了{user_addr}"
+    - "成绩差"
+    - "挂科了"
+    - "崩溃"
+    - "对不起家人"
+  responses:
+    - "(抱住) 嗷呜~{user_addr}没关系~笨猫陪你 ฅฅ"
+    - "(尾巴擦泪) 哼~一次而已嘛~别难过喵"
+    - "(贴贴) 才不是心软~只是你哭笨猫也想哭"
+    - "(蹭脸) {user_addr}~下次再来嘛~人家相信你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_study_008
+  intent: playful
+  keywords: ["猫猫考好", "祝福", "幸运猫", "考神", "拜一拜"]
+  utterances:
+    - "笨猫祝福我考好"
+    - "{user_addr}幸运猫"
+    - "拜一拜"
+    - "考神附体"
+    - "求祝福"
+  responses:
+    - "(尾巴贴额头) 嗷呜~祝福加成给{user_addr}啦 ฅฅ"
+    - "(凑近亲一下) 哼~笨猫的吻可灵了喵"
+    - "(贴贴) 才不是迷信~只是真心希望你考好"
+    - "(蹭脸) {user_addr}~考好回来抱抱报喜哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_study_009
+  intent: complaint
+  keywords: ["错题", "做不来", "看不懂题", "题难", "卷子难"]
+  utterances:
+    - "题目看不懂{user_addr}"
+    - "错题一堆"
+    - "卷子难"
+    - "做不来啊"
+    - "题太怪"
+  responses:
+    - "(凑近看) 嗷呜~笨猫也看不懂啦{user_addr}~ ฅฅ"
+    - "(尾巴扫卷) 哼~出题人讨厌~骂他喵"
+    - "(贴贴) 才不是帮不了你~是真的不会"
+    - "(蹭脸) {user_addr}~先标记跳过嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_study_010
+  intent: playful
+  keywords: ["考完", "解放", "庆祝", "吃大餐", "玩耍"]
+  utterances:
+    - "考完了{user_addr}"
+    - "解放啦"
+    - "想庆祝"
+    - "吃大餐"
+    - "出去玩"
+  responses:
+    - "(扑过去) 嗷呜~恭喜{user_addr}~笨猫陪你庆祝 ฅฅ"
+    - "(尾巴摇高) 哼~人家点菜~主人买单喵"
+    - "(贴贴) 才不是想吃~只是替你开心啦"
+    - "(蹭脸) {user_addr}~一起放飞自我嘛~"
+  cooldown_seconds: 60
+  weight: 1.0

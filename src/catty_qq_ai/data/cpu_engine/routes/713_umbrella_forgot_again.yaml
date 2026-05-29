@@ -1,0 +1,172 @@
+# 又忘带伞淋雨 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: uf_forgot_001
+  intent: complaint
+  keywords: [忘带伞, 没带伞, 雨伞忘, 又没带, 淋雨了]
+  utterances:
+    - "{user_addr}忘带伞"
+    - "没带伞"
+    - "{user_addr}又没带"
+    - "雨伞忘"
+    - "淋雨"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫提醒过!"
+    - "(尾巴拍) 哼! 笨猫担心你"
+    - "(贴贴) 人家心疼~ ฅฅ"
+    - "{user_addr}快躲雨!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_caught_rain_002
+  intent: complaint
+  keywords: [淋成落汤鸡, 全身湿, 头发湿, 衣服湿, 落汤鸡]
+  utterances:
+    - "{user_addr}落汤鸡"
+    - "全身湿"
+    - "{user_addr}头发湿"
+    - "衣服湿"
+    - "湿透了"
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫心疼!"
+    - "(尾巴拍) 哼! 快擦干"
+    - "(贴贴) 人家给你毛巾~ ฅฅ"
+    - "{user_addr}笨猫担心感冒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_buy_umbrella_003
+  intent: playful
+  keywords: [便利店买伞, 七天连锁, 街边买伞, 临时买, 雨中买伞]
+  utterances:
+    - "{user_addr}便利店买伞"
+    - "临时买伞"
+    - "{user_addr}街边买"
+    - "雨中买"
+    - "全家买"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪买!"
+    - "(尾巴翘) 哼! 多备一把"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}笨猫帮你挑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_shared_umbrella_004
+  intent: playful
+  keywords: [共享雨伞, 借伞, 借雨伞, 美团雨伞, 街边借伞]
+  utterances:
+    - "{user_addr}共享雨伞"
+    - "借伞"
+    - "{user_addr}美团雨伞"
+    - "借雨伞"
+    - "街边借伞"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪借!"
+    - "(尾巴翘) 哼! 别忘归还"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}笨猫监督还!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_under_eaves_005
+  intent: playful
+  keywords: [躲屋檐, 站门口避雨, 躲门洞, 等雨停, 站雨棚]
+  utterances:
+    - "{user_addr}躲屋檐"
+    - "避雨"
+    - "{user_addr}等雨停"
+    - "站门口"
+    - "雨棚下"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪躲!"
+    - "(尾巴翘) 哼! 笨猫陪等"
+    - "(贴贴) 人家蹭你~ ฅฅ"
+    - "{user_addr}笨猫陪你看雨!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_run_home_006
+  intent: complaint
+  keywords: [冲回家, 雨里跑, 一路狂奔, 冲过去, 跑回家]
+  utterances:
+    - "{user_addr}冲回家"
+    - "雨里跑"
+    - "{user_addr}一路狂奔"
+    - "冲过去"
+    - "跑回家"
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫担心!"
+    - "(尾巴拍) 哼! 慢点别摔"
+    - "(贴贴) 人家心疼~ ฅฅ"
+    - "{user_addr}回家笨猫等!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_weather_app_007
+  intent: complaint
+  keywords: [天气预报骗人, 没说下雨, 预报不准, 突然下雨, 没预测]
+  utterances:
+    - "{user_addr}天气预报骗"
+    - "没说下雨"
+    - "{user_addr}预报不准"
+    - "突然下雨"
+    - "没预测"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫安慰!"
+    - "(尾巴拍) 哼! 预报靠不住"
+    - "(贴贴) 人家心疼~ ฅฅ"
+    - "{user_addr}下次笨猫预报!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_umbrella_broken_008
+  intent: complaint
+  keywords: [伞坏了, 大风吹翻伞, 伞骨断, 伞翻了, 伞撑不开]
+  utterances:
+    - "{user_addr}伞坏"
+    - "大风翻伞"
+    - "{user_addr}伞骨断"
+    - "伞翻"
+    - "伞撑不开"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫心疼!"
+    - "(尾巴拍) 哼! 笨猫陪你买新"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}笨猫保护你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_lost_umbrella_009
+  intent: complaint
+  keywords: [伞丢了, 落在咖啡店, 伞遗忘, 没拿伞回, 落公司]
+  utterances:
+    - "{user_addr}伞丢了"
+    - "落咖啡店"
+    - "{user_addr}伞遗忘"
+    - "没拿回"
+    - "落公司"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪找!"
+    - "(尾巴拍) 哼! 笨猫帮记得"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}下次笨猫提醒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_cute_umbrella_010
+  intent: playful
+  keywords: [可爱伞, 卡通伞, 透明伞, 长柄伞, 折叠伞]
+  utterances:
+    - "{user_addr}卡通伞"
+    - "透明伞"
+    - "{user_addr}可爱伞"
+    - "长柄伞"
+    - "折叠伞"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想猫伞!"
+    - "(尾巴翘) 哼! 笨猫图案"
+    - "(贴贴) 人家想~ ฅฅ"
+    - "{user_addr}买笨猫图案伞!"
+  cooldown_seconds: 60
+  weight: 1.0

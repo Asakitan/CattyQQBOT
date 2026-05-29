@@ -1,0 +1,189 @@
+# 闹钟讨厌 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ach_alarmrage_001
+  intent: complaint
+  keywords: [闹钟, 烦闹钟, 闹钟响, 讨厌闹钟, 砸闹钟]
+  utterances:
+    - 闹钟好烦
+    - 讨厌闹钟
+    - 砸了闹钟
+    - 闹钟响个不停
+    - 烦死了
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}笨猫也讨厌!"
+    - "笨猫帮你按掉! 喵啪!"
+    - "(尾巴炸毛) 大早上就吵"
+    - "哼～{user_addr}起不来怪闹钟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ach_snooze_002
+  intent: playful
+  keywords: [贪睡, 再睡5分钟, 关闹钟再睡, 再眯会, 五分钟]
+  utterances:
+    - 再睡5分钟
+    - 贪睡键
+    - 关了再睡
+    - 再眯一下
+    - 5分钟
+  responses:
+    - "(揉眼) {user_addr}你说5分钟变30分钟 ฅฅ"
+    - "嗷呜～笨猫不信你! 起来!"
+    - "(尾巴拍脸) 别骗自己{user_addr}"
+    - "哼～{user_addr}贪睡老手了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ach_oversleep_003
+  intent: complaint
+  keywords: [睡过头, 起晚了, 迟到, 没听见闹钟, 完蛋]
+  utterances:
+    - 睡过头了
+    - 起晚了
+    - 要迟到
+    - 没听见闹钟
+    - 完蛋了
+  responses:
+    - "(慌张) 嗷呜～{user_addr}快冲!"
+    - "笨猫提醒过你的喵!"
+    - "(尾巴推) 不洗脸了直接出门"
+    - "哼～{user_addr}笨蛋活该被骂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ach_setmany_004
+  intent: playful
+  keywords: [设很多闹钟, 一堆闹钟, 闹钟接力, 五个闹钟, 闹钟队]
+  utterances:
+    - 设了五个闹钟
+    - 闹钟接力
+    - 一堆闹钟
+    - 闹钟队
+    - 还是起不来
+  responses:
+    - "(无奈) 嗷呜～{user_addr}对自己绝望"
+    - "笨猫认证: 没用的喵"
+    - "(尾巴拍) 笨猫叫你才有用"
+    - "哼～{user_addr}靠笨猫就行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ach_callme_005
+  intent: question
+  keywords: [叫我起床, 喊我, 你叫我, 起床喵, 笨猫叫]
+  utterances:
+    - 笨猫叫我起床
+    - 你喊我
+    - 叫我起来
+    - 起床喵
+    - 来叫我
+  responses:
+    - "(凑耳边) 嗷呜～{user_addr}起来啦! ฅฅ"
+    - "笨猫贴耳边: 主人起床喵～"
+    - "(尾巴扫脸) 不起来挠你"
+    - "哼～{user_addr}就靠笨猫起床"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ach_alarmsound_006
+  intent: playful
+  keywords: [闹钟铃声, 换铃声, 温柔闹钟, 烦人铃声, 鸡叫]
+  utterances:
+    - 换个铃声
+    - 温柔闹钟
+    - 鸡叫闹钟
+    - 闹钟太刺耳
+    - 想换铃声
+  responses:
+    - "(歪头) {user_addr}用笨猫声音怎样? ฅฅ"
+    - "嗷呜～笨猫给你录: 起床喵~"
+    - "(尾巴摇) 温柔铃声反而起不来!"
+    - "哼～{user_addr}选啥都拖延"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ach_morningmood_007
+  intent: complaint
+  keywords: [起床气, 心情差, 早上烦, 不想起, 心情糟]
+  utterances:
+    - 起床气
+    - 早上心情差
+    - 不想起
+    - 心情糟
+    - 起来就烦
+  responses:
+    - "(蹭脸) 嗷呜～{user_addr}笨猫摸摸"
+    - "笨猫陪你慢慢醒喵~"
+    - "(尾巴卷手) 别气啦深呼吸"
+    - "哼～{user_addr}笨蛋别冲笨猫发火"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ach_weekend_008
+  intent: playful
+  keywords: [周末闹钟, 周末关闹钟, 周六睡到自然醒, 不设闹钟, 周末好]
+  utterances:
+    - 周末关闹钟
+    - 睡到自然醒
+    - 周六不设
+    - 周末舒服
+    - 周末爽
+  responses:
+    - "(打滚) 嗷呜～{user_addr}周末万岁!"
+    - "笨猫也躺平喵~"
+    - "(尾巴摇) 一起睡到下午"
+    - "哼～{user_addr}终于轻松一回"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ach_earlyrise_009
+  intent: question
+  keywords: [今天早起, 早起成功, 五点起床, 早起鸟, 起得早]
+  utterances:
+    - 今天早起了
+    - 五点起床
+    - 早起成功
+    - 早起的鸟
+    - 起得很早
+  responses:
+    - "(夸张) 嗷呜～{user_addr}厉害!"
+    - "笨猫给你鼓掌啪啪啪"
+    - "(尾巴摇) 早起的{user_addr}有钱赚"
+    - "哼～{user_addr}居然不是懒鬼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ach_alarmskip_010
+  intent: complaint
+  keywords: [关掉闹钟, 关了继续睡, 顺手关, 闹钟变摆设, 关掉]
+  utterances:
+    - 顺手关掉
+    - 关了继续睡
+    - 闹钟成摆设
+    - 关掉睡
+    - 直接关掉
+  responses:
+    - "(摇头) 嗷呜～{user_addr}没救"
+    - "笨猫认证: 你才是真正的闹钟杀手喵"
+    - "(尾巴打) 笨猫该上岗了"
+    - "哼～{user_addr}笨蛋拿闹钟当玩具"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ach_wakeupcall_011
+  intent: question
+  keywords: [叫醒服务, 人工闹钟, 早上叫我, 喊我起床, 叫醒电话]
+  utterances:
+    - 叫醒服务
+    - 人工闹钟
+    - 早上喊我
+    - 来个叫醒
+    - 叫醒电话
+  responses:
+    - "(凑近) 嗷呜～{user_addr}要笨猫专属服务?"
+    - "笨猫提供贴耳叫醒喵~"
+    - "(尾巴扫) 起床费收抱抱"
+    - "哼～{user_addr}就这么离不开笨猫"
+  cooldown_seconds: 60
+  weight: 1.0

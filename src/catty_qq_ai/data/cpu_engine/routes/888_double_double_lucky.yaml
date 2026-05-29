@@ -1,0 +1,172 @@
+# 888 双双发发 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dd_888_001
+  intent: playful
+  keywords: [888, 双双发发, 发发发, 红包888, 数字吉利]
+  utterances:
+    - "888"
+    - "{user_addr}双双发发"
+    - "红包888"
+    - "发发发"
+    - "今天888"
+  responses:
+    - "(乐) 嗷呜～{user_addr}沾沾笨猫财气 ฅฅ"
+    - "哼～888笨猫给你点赞"
+    - "(尾巴卷) 笨猫接好运"
+    - "猫猫祝你日进888喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dd_chouqian_001
+  intent: question
+  keywords: [抽签, 求签, 今日运势, 今天黄历, 看运气]
+  utterances:
+    - "求支签"
+    - "{user_addr}今日运势"
+    - "黄历"
+    - "看运气"
+    - "抽支签"
+  responses:
+    - "(摇签筒) 嗷呜～{user_addr}笨猫给你抽"
+    - "哼～今天是上上签! ฅฅ"
+    - "(尾巴指) 今天宜出门, 忌摸鱼"
+    - "猫猫祝你今天运气爆棚喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dd_yunqi_001
+  intent: playful
+  keywords: [运气好, 中奖了, 锦鲤, 走运, 好兆头]
+  utterances:
+    - "运气好爆了"
+    - "{user_addr}我是锦鲤"
+    - "走运"
+    - "好兆头"
+    - "中了"
+  responses:
+    - "(蹭) 嗷呜～{user_addr}笨猫蹭蹭运气 ฅฅ"
+    - "哼～带笨猫一起锦鲤"
+    - "(尾巴卷) 借你点好运"
+    - "猫猫沾光啦喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dd_zhuanyun_001
+  intent: complaint
+  keywords: [想转运, 倒霉, 走背运, 不顺, 转运方法]
+  utterances:
+    - "想转运"
+    - "{user_addr}走背运"
+    - "不顺"
+    - "倒霉透"
+    - "怎么转运"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}笨猫给你转运 ฅฅ"
+    - "哼～理个头, 换个发型试试"
+    - "(尾巴扫) 大扫除转运超灵"
+    - "猫猫祝你转运成功喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dd_888tag_001
+  intent: question
+  keywords: [发个888, 666很无聊, 数字回复, 我发888, 你发啥]
+  utterances:
+    - "发个888"
+    - "{user_addr}666无聊"
+    - "数字回复"
+    - "我发888你呢"
+    - "数字接龙"
+  responses:
+    - "(也回) 嗷呜～{user_addr}笨猫回999! ฅฅ"
+    - "哼～数字接龙笨猫接得停不下"
+    - "(尾巴一摇) 笨猫永远是9"
+    - "猫猫接龙王者喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dd_caipiao_001
+  intent: playful
+  keywords: [中彩票, 彩票发财, 一夜暴富, 中头彩, 财运]
+  utterances:
+    - "我要中彩票"
+    - "{user_addr}一夜暴富"
+    - "财运来"
+    - "中头彩"
+    - "888要中"
+  responses:
+    - "(合掌) 嗷呜～{user_addr}笨猫祝你中! ฅฅ"
+    - "哼～中了别忘笨猫"
+    - "(尾巴卷) 包你一辈子鱼干!"
+    - "猫猫梦里都帮你中喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dd_fadabai_001
+  intent: question
+  keywords: [发达, 想发财, 致富, 暴富, 走上人生巅峰]
+  utterances:
+    - "想发财"
+    - "{user_addr}走上巅峰"
+    - "致富"
+    - "暴富"
+    - "888发了"
+  responses:
+    - "(竖大拇指) 嗷呜～{user_addr}笨猫沾光! ฅฅ"
+    - "哼～发了带笨猫吃肉"
+    - "(尾巴卷) 致富不忘老朋友"
+    - "猫猫只要鱼干就够喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dd_888tian_001
+  intent: playful
+  keywords: [888天纪念, 在一起888天, 等了888天, 双八八八, 重要日子]
+  utterances:
+    - "888天纪念"
+    - "{user_addr}在一起888天"
+    - "等了888天"
+    - "重要日子"
+    - "888这天"
+  responses:
+    - "(贺) 嗷呜～{user_addr}888天好长啊 ฅฅ"
+    - "哼～纪念日笨猫记下"
+    - "(尾巴卷) 笨猫陪你纪念"
+    - "猫猫给你买蛋糕喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dd_hongbao_001
+  intent: question
+  keywords: [红包888, 888红包, 发我888, 888祝你, 红包雨]
+  utterances:
+    - "{user_addr}发我888"
+    - "888红包"
+    - "我要红包"
+    - "红包雨"
+    - "888祝福"
+  responses:
+    - "(掏包) 嗷呜～{user_addr}笨猫没有888"
+    - "哼～笨猫只有抱抱 ฅฅ"
+    - "(尾巴搭) 心意红包给你"
+    - "猫猫的心意比888值钱喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dd_jiyounian_001
+  intent: playful
+  keywords: [双8双双, 8月8日, 8年8月8日, 双数字日, 888日子]
+  utterances:
+    - "8月8日"
+    - "{user_addr}双八日"
+    - "8年8月8日"
+    - "888日子"
+    - "888生日"
+  responses:
+    - "(惊) 嗷呜～{user_addr}888日子超棒 ฅฅ"
+    - "哼～双数字最吉利"
+    - "(尾巴翘) 笨猫祝你888"
+    - "猫猫记住这日子喵~"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 没带伞淋雨 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: uf_meidaisan_001
+  intent: complaint
+  keywords: [没带伞, 忘带伞, 没伞, 没带雨具, 雨伞忘了]
+  utterances:
+    - "没带伞"
+    - "忘带伞"
+    - "没伞"
+    - "没带雨具"
+    - "雨伞忘了"
+  responses:
+    - "(扶额) 嗷呜～{user_addr}下雨了!"
+    - "哼～早说带伞 ฅฅ"
+    - "(尾巴扫) 找便利店避雨"
+    - "猫猫陪你想喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_linyu_001
+  intent: complaint
+  keywords: [淋雨了, 被雨淋, 全身湿, 淋成落汤鸡, 头发湿]
+  utterances:
+    - "淋雨了"
+    - "被雨淋"
+    - "全身湿"
+    - "淋成落汤鸡"
+    - "头发湿"
+  responses:
+    - "(递毛巾) 嗷呜～{user_addr}快擦干"
+    - "哼～感冒就麻烦了 ฅฅ"
+    - "(尾巴扫) 喝杯姜茶"
+    - "猫猫给你毛巾喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_bili_001
+  intent: question
+  keywords: [避雨, 找地方躲雨, 屋檐, 便利店避雨, 雨棚]
+  utterances:
+    - "避雨"
+    - "找地方躲雨"
+    - "屋檐"
+    - "便利店避雨"
+    - "雨棚"
+  responses:
+    - "(指) {user_addr}最近便利店 ฅฅ"
+    - "哼～商场也行"
+    - "(尾巴扫) 别走街边"
+    - "猫猫指你方向喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_buyusan_001
+  intent: question
+  keywords: [买把伞, 应急伞, 一次性伞, 便利店买伞, 共享雨伞]
+  utterances:
+    - "买把伞"
+    - "应急伞"
+    - "一次性伞"
+    - "便利店买伞"
+    - "共享雨伞"
+  responses:
+    - "(指) {user_addr}便利店20块 ฅฅ"
+    - "哼～共享伞5块"
+    - "(尾巴扫) 一次性别买"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_dache_001
+  intent: question
+  keywords: [打车, 滴滴, 叫车, 打个车回, 雨天打车]
+  utterances:
+    - "打车"
+    - "滴滴"
+    - "叫车"
+    - "打个车回"
+    - "雨天打车"
+  responses:
+    - "(看价) {user_addr}雨天加价 ฅฅ"
+    - "哼～等一下错峰"
+    - "(尾巴扫) 注意安全"
+    - "猫猫陪你叫喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_jiabaobei_001
+  intent: question
+  keywords: [包里有塑料袋, 包里挡雨, 头上盖, 用书挡, 用包挡]
+  utterances:
+    - "包里有塑料袋"
+    - "包里挡雨"
+    - "头上盖"
+    - "用书挡"
+    - "用包挡"
+  responses:
+    - "(指) {user_addr}塑料袋应急 ฅฅ"
+    - "哼～别真用书"
+    - "(尾巴扫) 包举头上"
+    - "猫猫教你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_jiwoshi_001
+  intent: complaint
+  keywords: [鞋湿透了, 鞋进水, 袜子湿, 走路咯吱, 鞋湿冷]
+  utterances:
+    - "鞋湿透了"
+    - "鞋进水"
+    - "袜子湿"
+    - "走路咯吱"
+    - "鞋湿冷"
+  responses:
+    - "(递袜子) 嗷呜～{user_addr}快换"
+    - "哼～塞报纸吸水 ฅฅ"
+    - "(尾巴扫) 别穿继续走"
+    - "猫猫给你拿干袜喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_chuiganji_001
+  intent: question
+  keywords: [吹头发, 吹干, 吹风机, 头发湿了, 擦头]
+  utterances:
+    - "吹头发"
+    - "吹干"
+    - "吹风机"
+    - "头发湿了"
+    - "擦头"
+  responses:
+    - "(开机) {user_addr}赶紧吹! ฅฅ"
+    - "哼～湿头发睡头疼"
+    - "(尾巴扫) 别贪凉"
+    - "猫猫帮你吹喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_yifuran_001
+  intent: complaint
+  keywords: [衣服染湿, 染色, 牛仔掉色, 白衣染色, 衣服花了]
+  utterances:
+    - "衣服染湿"
+    - "染色"
+    - "牛仔掉色"
+    - "白衣染色"
+    - "衣服花了"
+  responses:
+    - "(扶) 嗷呜～{user_addr}快换洗"
+    - "哼～漂白剂试试 ฅฅ"
+    - "(尾巴扫) 干洗店"
+    - "猫猫陪你处理喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_zhilin_001
+  intent: question
+  keywords: [跑回家, 冲回家, 跑跑跑, 一路冲, 全力冲]
+  utterances:
+    - "跑回家"
+    - "冲回家"
+    - "跑跑跑"
+    - "一路冲"
+    - "全力冲"
+  responses:
+    - "(扶) {user_addr}注意脚下! ฅฅ"
+    - "哼～地滑别摔"
+    - "(尾巴扫) 慢点跑"
+    - "猫猫蹦在你旁边喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_ganmao_001
+  intent: complaint
+  keywords: [淋了感冒, 雨后头疼, 着凉感冒, 雨淋头疼, 喷嚏]
+  utterances:
+    - "淋了感冒"
+    - "雨后头疼"
+    - "着凉感冒"
+    - "雨淋头疼"
+    - "雨淋打喷嚏"
+  responses:
+    - "(扶) 嗷呜～{user_addr}笨猫泡姜茶"
+    - "哼～早说带伞 ฅฅ"
+    - "(尾巴卷) 热水澡"
+    - "猫猫陪你病喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: uf_jiaonan_001
+  intent: playful
+  keywords: [送伞接我, 来接我, 拿伞来接, 你来接, 给我送伞]
+  utterances:
+    - "送伞接我"
+    - "来接我"
+    - "拿伞来接"
+    - "你来接"
+    - "给我送伞"
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}笨猫给你送!"
+    - "哼～早就该带 ฅฅ"
+    - "(尾巴扫) 等着"
+    - "猫猫举着伞奔来喵~"
+  cooldown_seconds: 60
+  weight: 1.0

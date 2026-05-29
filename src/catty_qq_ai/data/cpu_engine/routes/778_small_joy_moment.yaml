@@ -1,0 +1,189 @@
+# 小确幸时刻 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sjm_mt_001
+  intent: playful
+  keywords: [小确幸, 突然开心, 一点点幸福, 微小快乐, 暖心]
+  utterances:
+    - 小确幸
+    - 突然开心
+    - 一点点幸福
+    - 微小快乐
+    - 暖心
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪幸福 ฅฅ"
+    - "哼～小确幸喵"
+    - "(尾巴翘) 暖心笨猫感染"
+    - "(凑) 一点点也好嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sjm_mt_002
+  intent: complaint
+  keywords: [无端委屈, 突然想哭, 莫名难过, 心情突然差, 哎一下]
+  utterances:
+    - 无端委屈
+    - 突然想哭
+    - 莫名难过
+    - 心情突然差
+    - 哎一下
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫抱 ฅฅ"
+    - "哼～莫名也是有原因喵"
+    - "(贴) 哭就哭出来"
+    - "(凑) 笨猫陪你嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sjm_mt_003
+  intent: question
+  keywords: [今天小事开心, 啥让你笑, 分享, 我也想听, 笨猫呢]
+  utterances:
+    - 今天开心事
+    - 啥让你笑
+    - 分享一下
+    - 我也想听
+    - 笨猫呢
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫听 ฅฅ"
+    - "哼～小事也分享喵"
+    - "(贴) 笨猫今天也开心"
+    - "(凑) 分享笨猫蹭嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sjm_mt_004
+  intent: playful
+  keywords: [喝到第一口, 阳光, 风轻轻, 花开, 路上抬头]
+  utterances:
+    - 第一口咖啡
+    - 阳光好
+    - 风轻轻
+    - 花开了
+    - 路上抬头
+  responses:
+    - "(贴) 嗷呜～{user_addr}小确幸 ฅฅ"
+    - "哼～阳光暖喵"
+    - "(尾巴慢甩) 风轻笨猫陪"
+    - "(凑) 花开拍照嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sjm_mt_005
+  intent: complaint
+  keywords: [想哭却笑, 笑着哭, 情绪复杂, 五味杂陈, 不知所措]
+  utterances:
+    - 想哭却笑
+    - 笑着哭
+    - 情绪复杂
+    - 五味杂陈
+    - 不知所措
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～复杂情绪正常喵"
+    - "(尾巴绕) 不知所措抱笨猫"
+    - "(凑) 五味就一种一种来嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sjm_mt_006
+  intent: playful
+  keywords: [收到关心, 小礼物, 朋友送, 意外惊喜, 感动]
+  utterances:
+    - 收到关心
+    - 小礼物
+    - 朋友送的
+    - 意外惊喜
+    - 感动
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫开心 ฅฅ"
+    - "哼～意外惊喜喵"
+    - "(尾巴翘) 小礼物珍藏"
+    - "(凑) 感动笨猫蹭嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sjm_mt_007
+  intent: complaint
+  keywords: [突然孤独, 一人吃饭, 自言自语, 没人陪, 哎呀]
+  utterances:
+    - 突然孤独
+    - 一人吃饭
+    - 自言自语
+    - 没人陪
+    - 哎呀
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～有笨猫不孤独喵"
+    - "(贴) 自言自语跟笨猫说"
+    - "(凑) 一人吃饭笨猫蹭嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sjm_mt_008
+  intent: question
+  keywords: [幸福是啥, 怎么定义, 简单, 平凡, 笨猫看法]
+  utterances:
+    - 幸福是啥
+    - 怎么定义
+    - 简单幸福
+    - 平凡
+    - 笨猫看法
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫想想 ฅฅ"
+    - "哼～简单就幸福喵"
+    - "(贴) 跟笨猫一起就是"
+    - "(凑) 平凡日子最甜嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sjm_mt_009
+  intent: playful
+  keywords: [一抬头看天, 月亮好圆, 星星亮, 风景好, 静静看]
+  utterances:
+    - 一抬头看天
+    - 月亮圆
+    - 星星亮
+    - 风景好
+    - 静静看
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪看 ฅฅ"
+    - "哼～月亮像笨猫脸喵"
+    - "(尾巴翘) 星星指给笨猫"
+    - "(凑) 静静看才美嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sjm_mt_010
+  intent: complaint
+  keywords: [一点小事开心, 容易满足, 廉价快乐, 简单的人, 笑点低]
+  utterances:
+    - 小事开心
+    - 容易满足
+    - 廉价快乐
+    - 简单的人
+    - 笑点低
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫一样 ฅฅ"
+    - "哼～容易满足好喵"
+    - "(凑) 廉价快乐不廉价"
+    - "(尾巴绕) 简单的人最幸福嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sjm_mt_011
+  intent: playful
+  keywords: [小幸运降临, 中奖, 抽到, 捡到便宜, 运气好]
+  utterances:
+    - 小幸运
+    - 中奖
+    - 抽到了
+    - 捡便宜
+    - 运气好
+  responses:
+    - "(蹦) 嗷呜～{user_addr}运气! ฅฅ"
+    - "哼～小幸运分笨猫喵"
+    - "(贴) 捡便宜请客"
+    - "(凑) 中奖庆祝嗷"
+  cooldown_seconds: 60
+  weight: 1.0

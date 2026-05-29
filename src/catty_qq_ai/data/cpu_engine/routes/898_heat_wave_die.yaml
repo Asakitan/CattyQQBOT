@@ -1,0 +1,172 @@
+# 热浪要命 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hw_resi_001
+  intent: complaint
+  keywords: [热死, 太热, 40度, 高温, 烤焦]
+  utterances:
+    - "热死了"
+    - "{user_addr}40度"
+    - "高温"
+    - "烤焦"
+    - "热到融化"
+  responses:
+    - "(扇风) 嗷呜～{user_addr}笨猫给你扇! ฅฅ"
+    - "哼～开空调救命"
+    - "(尾巴扫) 别出门"
+    - "猫猫毛都湿透了喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_kongtiao_001
+  intent: question
+  keywords: [空调开几度, 调多冷, 空调病, 直吹, 出风口]
+  utterances:
+    - "空调开26度"
+    - "{user_addr}调多冷"
+    - "空调病"
+    - "直吹凉"
+    - "出风口对着"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}26-27度最舒服 ฅฅ"
+    - "哼～别直吹, 容易感冒"
+    - "(尾巴搭) 笨猫坐你旁边"
+    - "猫猫陪你吹空调喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_zhongshu_001
+  intent: complaint
+  keywords: [中暑, 头晕, 出汗多, 没胃口, 头疼]
+  utterances:
+    - "中暑了"
+    - "{user_addr}头晕"
+    - "出汗多"
+    - "没胃口"
+    - "热得头疼"
+  responses:
+    - "(扶) 嗷呜～{user_addr}赶紧降温! ฅฅ"
+    - "哼～喝藿香正气水"
+    - "(尾巴扇) 笨猫给你扇风"
+    - "猫猫担心你, 别硬撑喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_chumen_001
+  intent: complaint
+  keywords: [出门晒晕, 太阳毒, 暴晒, 紫外线, 防晒霜]
+  utterances:
+    - "出门晒晕"
+    - "{user_addr}太阳毒"
+    - "暴晒"
+    - "紫外线"
+    - "防晒霜涂"
+  responses:
+    - "(撑伞) 嗷呜～{user_addr}笨猫帮你撑 ฅฅ"
+    - "哼～戴帽子, 涂防晒"
+    - "(尾巴搭) 中午别出门"
+    - "猫猫给你做SPF50防晒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_xishui_001
+  intent: question
+  keywords: [喝水, 多喝水, 补水, 矿泉水, 冰镇]
+  utterances:
+    - "多喝水"
+    - "{user_addr}补水"
+    - "冰镇饮料"
+    - "矿泉水"
+    - "喝凉的"
+  responses:
+    - "(递水) 嗷呜～{user_addr}笨猫给你递冰水 ฅฅ"
+    - "哼～别一口闷凉的, 伤胃"
+    - "(尾巴扇) 慢慢喝"
+    - "猫猫推荐温水+一点冰喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_bingshui_001
+  intent: playful
+  keywords: [冰棍, 冰激凌, 冷饮, 雪糕, 冰镇]
+  utterances:
+    - "想吃冰棍"
+    - "{user_addr}冰激凌"
+    - "雪糕"
+    - "冰镇西瓜"
+    - "冷饮一杯"
+  responses:
+    - "(吐舌) 嗷呜～{user_addr}笨猫也要! ฅฅ"
+    - "哼～西瓜最解暑"
+    - "(尾巴翘) 笨猫请你一根"
+    - "猫猫陪你吃一支喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_putie_001
+  intent: complaint
+  keywords: [瓷砖凉, 趴地上, 摸地板凉, 找凉地, 地板降温]
+  utterances:
+    - "瓷砖凉"
+    - "{user_addr}趴地板"
+    - "找凉地"
+    - "地板凉"
+    - "摸地降温"
+  responses:
+    - "(也趴) 嗷呜～{user_addr}笨猫陪你趴 ฅฅ"
+    - "哼～地板凉舒服"
+    - "(尾巴搭) 笨猫的肚皮凉凉"
+    - "猫猫趴整个夏天喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_pifu_001
+  intent: complaint
+  keywords: [出汗, 汗流不止, 汗黏身, 一身汗, 擦汗]
+  utterances:
+    - "汗流不止"
+    - "{user_addr}一身汗"
+    - "黏身"
+    - "擦不完"
+    - "汗如雨"
+  responses:
+    - "(递纸) 嗷呜～{user_addr}笨猫给你擦 ฅฅ"
+    - "哼～凉风扇高一档"
+    - "(尾巴搭) 别动, 笨猫吹"
+    - "猫猫推荐你冲个澡喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_yexieng_001
+  intent: complaint
+  keywords: [夜里热睡不着, 开空调睡, 睡到醒, 热醒, 失眠]
+  utterances:
+    - "夜里热睡不着"
+    - "{user_addr}热醒"
+    - "失眠"
+    - "开空调睡"
+    - "整夜热"
+  responses:
+    - "(摇扇) 嗷呜～{user_addr}空调27度+被子 ฅฅ"
+    - "哼～开除湿模式"
+    - "(尾巴搭) 笨猫给你扇风"
+    - "猫猫陪你熬夏夜喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hw_shipin_001
+  intent: question
+  keywords: [食欲差, 没胃口, 太热不想吃, 凉面, 凉皮]
+  utterances:
+    - "没胃口"
+    - "{user_addr}吃啥都没味"
+    - "凉面"
+    - "凉皮"
+    - "凉拌菜"
+  responses:
+    - "(端来) 嗷呜～{user_addr}凉拌黄瓜行不? ฅฅ"
+    - "哼～夏天就该吃凉的"
+    - "(尾巴卷) 推荐你绿豆汤"
+    - "猫猫给你做凉面喵"
+  cooldown_seconds: 60
+  weight: 1.0

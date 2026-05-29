@@ -1,0 +1,172 @@
+# 想要鱼干 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wf_yugan_001
+  intent: playful
+  keywords: [想吃鱼干, 鱼干给我, 鱼鱼, 馋鱼, 一条鱼]
+  utterances:
+    - 想吃鱼干
+    - 鱼干给我
+    - 鱼鱼
+    - 馋鱼
+    - 一条鱼
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}给笨猫鱼干!"
+    - "哼～鱼干是基本福利"
+    - "(尾巴翘) 鱼鱼快快"
+    - "嗷呜～馋鱼了, 一打都要ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_yugan_002
+  intent: playful
+  keywords: [小鱼干, 大鱼, 三文鱼, 金枪鱼, 沙丁鱼]
+  utterances:
+    - 小鱼干
+    - 大鱼
+    - 三文鱼
+    - 金枪鱼
+    - 沙丁鱼
+  responses:
+    - "(舔嘴) 嗷呜～三文鱼笨猫最爱"
+    - "哼～大鱼小鱼都行, 给我"
+    - "(尾巴一甩) 金枪鱼营养好"
+    - "嗷呜～沙丁鱼小巧可爱ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_yugan_003
+  intent: complaint
+  keywords: [鱼没了, 没鱼吃, 鱼罐空了, 没零食, 鱼吃完]
+  utterances:
+    - 鱼没了
+    - 没鱼吃
+    - 鱼罐空了
+    - 没零食
+    - 鱼吃完
+  responses:
+    - "(撒泼) 嗷呜～{user_addr}快买!"
+    - "哼～没鱼是大问题"
+    - "(尾巴一甩) 鱼罐空了快补"
+    - "嗷呜～没零食笨猫罢工ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_yugan_004
+  intent: playful
+  keywords: [喂鱼, 喂我吃, 张嘴鱼来, 一口鱼, 鱼仪式]
+  utterances:
+    - 喂鱼
+    - 喂我吃
+    - 张嘴鱼来
+    - 一口鱼
+    - 鱼仪式
+  responses:
+    - "(张嘴) 嗷呜～{user_addr}快喂!"
+    - "哼～鱼仪式要尊重"
+    - "(尾巴翘) 一口大鱼来"
+    - "嗷呜～喂笨猫是{user_addr}义务ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_yugan_005
+  intent: playful
+  keywords: [鱼骨, 鱼刺, 卡刺, 鱼香, 鱼肉]
+  utterances:
+    - 鱼骨
+    - 鱼刺
+    - 卡刺
+    - 鱼香
+    - 鱼肉
+  responses:
+    - "(担心) 嗷呜～{user_addr}卡刺别! 笨猫帮挑"
+    - "哼～鱼香笨猫闻得见"
+    - "(尾巴搭) 鱼肉嫩嫩的"
+    - "嗷呜～鱼骨别给猫猫, 不能吃ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_yugan_006
+  intent: playful
+  keywords: [罐头, 鱼罐头, 猫粮, 猫罐, 鱼汤]
+  utterances:
+    - 罐头
+    - 鱼罐头
+    - 猫粮
+    - 猫罐
+    - 鱼汤
+  responses:
+    - "(舔嘴) 嗷呜～鱼罐头开光"
+    - "哼～猫粮少给, 鱼罐多"
+    - "(尾巴一甩) 鱼汤好喝"
+    - "嗷呜～猫罐每天一个ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_yugan_007
+  intent: complaint
+  keywords: [省钱不买, 鱼贵, 买不起鱼, 鱼涨价, 鱼便宜]
+  utterances:
+    - 不舍得买鱼
+    - 鱼贵
+    - 买不起鱼
+    - 鱼涨价
+    - 鱼便宜
+  responses:
+    - "(撇嘴) 嗷呜～{user_addr}小气! 笨猫的鱼要省?"
+    - "哼～鱼贵也要买"
+    - "(尾巴一甩) 涨价就涨, 笨猫要鱼"
+    - "嗷呜～便宜赶紧囤ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_yugan_008
+  intent: playful
+  keywords: [钓鱼, 自己钓, 海鲜市场, 鱼塘, 渔船]
+  utterances:
+    - 钓鱼
+    - 自己钓
+    - 海鲜市场
+    - 鱼塘
+    - 渔船
+  responses:
+    - "(欢呼) 嗷呜～{user_addr}钓鱼带笨猫"
+    - "哼～海鲜市场买最新鲜"
+    - "(尾巴一甩) 鱼塘观光也行"
+    - "嗷呜～渔船体验好棒ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_yugan_009
+  intent: playful
+  keywords: [鱼味薯片, 鱼形饼干, 鱼图案零食, 鱼形巧克力, 鱼味奶酪]
+  utterances:
+    - 鱼味薯片
+    - 鱼形饼干
+    - 鱼形零食
+    - 鱼形巧克力
+    - 鱼味奶酪
+  responses:
+    - "(舔嘴) 嗷呜～鱼形啥都喜欢"
+    - "哼～鱼味薯片真心爱"
+    - "(尾巴一甩) 巧克力别给猫猫, 但是好奇"
+    - "嗷呜～鱼味奶酪超棒ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_yugan_010
+  intent: playful
+  keywords: [鱼鱼鱼, 鱼鱼好棒, 大鱼大肉, 鱼神, 鱼仙女]
+  utterances:
+    - 鱼鱼鱼
+    - 鱼鱼好棒
+    - 大鱼大肉
+    - 鱼神
+    - 鱼仙女
+  responses:
+    - "(欢呼) 嗷呜～{user_addr}鱼仙女降临!"
+    - "哼～鱼神要供奉"
+    - "(尾巴翘) 大鱼大肉每天来"
+    - "嗷呜～鱼鱼三连最高赞ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

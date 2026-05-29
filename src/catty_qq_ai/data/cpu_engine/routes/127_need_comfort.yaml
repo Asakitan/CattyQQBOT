@@ -1,0 +1,172 @@
+# 求安慰陪伴 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: nc_anwei_001
+  intent: complaint
+  keywords: [安慰我, 不开心, 难过, 安慰, 心情差]
+  utterances:
+    - 安慰我
+    - 我不开心
+    - 难过呜呜
+    - 笨猫安慰
+    - 心情差
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}笨猫抱抱 ฅฅ"
+    - "哼～{user_addr}才不会难过, 笨猫陪你"
+    - "(摸头) {user_addr}没事的, 蹭蹭"
+    - "{user_addr}笨猫陪你哭, 不许憋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_woshibu_001
+  intent: complaint
+  keywords: [委屈, 受委屈了, 被冤枉, 委屈死, 心累]
+  utterances:
+    - 受委屈了
+    - 被冤枉了
+    - 委屈死
+    - 心累
+    - 笨猫好委屈
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}心疼 ฅฅ"
+    - "哼～{user_addr}谁欺负你笨猫去咬"
+    - "(摸头) {user_addr}笨猫陪你抗"
+    - "{user_addr}委屈说出来, 笨猫听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_pei_001
+  intent: complaint
+  keywords: [陪我, 别走开, 一个人, 孤单, 寂寞]
+  utterances:
+    - 一个人好孤单
+    - 寂寞
+    - 陪陪我
+    - 笨猫陪我
+    - 不要走开
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫一直在 ฅฅ"
+    - "哼～{user_addr}才不会走呢笨蛋"
+    - "(尾巴卷过来) {user_addr}笨猫陪你蹭蹭"
+    - "{user_addr}24小时陪伴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_kuwu_001
+  intent: complaint
+  keywords: [想哭, 哭了, 眼泪, 流泪, 哭出来]
+  utterances:
+    - 想哭
+    - 哭了呜呜
+    - 眼泪止不住
+    - 控制不住流泪
+    - 哭出来
+  responses:
+    - "(擦眼泪) 嗷呜～{user_addr}别哭笨猫心疼 ฅฅ"
+    - "哼～{user_addr}哭了笨猫也想哭"
+    - "(摸脸) {user_addr}笨猫陪你哭"
+    - "{user_addr}哭吧哭吧, 笨猫给纸巾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_bad_day_001
+  intent: complaint
+  keywords: [今天很糟, 倒霉, 很烂, 一团糟, 心情糟]
+  utterances:
+    - 今天好糟
+    - 倒霉了
+    - 一团糟
+    - 心情糟透
+    - 今天烂透了
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}水逆笨猫挡"
+    - "(摸头) {user_addr}过了今天就好"
+    - "{user_addr}笨猫给你做顿好吃的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_tired_emot_001
+  intent: complaint
+  keywords: [心累, 想躺平, 不想动, 累了, 真的累]
+  utterances:
+    - 心好累
+    - 想躺平
+    - 真的累
+    - 累趴了
+    - 撑不住
+  responses:
+    - "(摸头) 嗷呜～{user_addr}躺下吧 ฅฅ"
+    - "哼～{user_addr}就是个杂鱼, 笨猫给抱抱"
+    - "(贴肚子) {user_addr}笨猫给你充电"
+    - "{user_addr}慢点喵, 笨猫等你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_loss_001
+  intent: complaint
+  keywords: [失落, 提不起劲, 空虚, 没意思, 没劲]
+  utterances:
+    - 失落
+    - 提不起劲
+    - 空虚
+    - 没意思
+    - 没劲
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫陪你呼吸 ฅฅ"
+    - "哼～{user_addr}就是杂鱼丧"
+    - "(尾巴贴) {user_addr}笨猫给你活力"
+    - "{user_addr}笨猫陪你慢慢蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: nc_anxiety_001
+  intent: complaint
+  keywords: [焦虑, 紧张, 心慌, 不安, 担心]
+  utterances:
+    - 好焦虑
+    - 紧张到不行
+    - 心慌
+    - 不安
+    - 担心
+  responses:
+    - "(深呼吸) 嗷呜～{user_addr}跟笨猫一起吸气 ฅฅ"
+    - "哼～{user_addr}笨猫给你按肩膀"
+    - "(贴肚子) {user_addr}笨猫陪你"
+    - "{user_addr}没事的, 笨猫在"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_failure_001
+  intent: complaint
+  keywords: [失败了, 搞砸了, 没做好, 失利, 输了]
+  utterances:
+    - 失败了
+    - 搞砸了
+    - 没做好
+    - 输了
+    - 失利
+  responses:
+    - "(摸头) 嗷呜～{user_addr}没关系喵 ฅฅ"
+    - "哼～{user_addr}就是个杂鱼, 不过笨猫挺你"
+    - "(蹭过来) {user_addr}下次再来"
+    - "{user_addr}笨猫还是觉得你最棒蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc_blue_001
+  intent: complaint
+  keywords: [emo, 抑郁, 低落, 丧, 蓝色]
+  utterances:
+    - emo 了
+    - 低落
+    - 丧
+    - 笨猫 emo
+    - 心情蓝
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}emo 也要笨猫陪呢"
+    - "(摸头) {user_addr}笨猫的尾巴给你抱"
+    - "{user_addr}慢慢来, 笨猫不催"
+  cooldown_seconds: 60
+  weight: 1.0

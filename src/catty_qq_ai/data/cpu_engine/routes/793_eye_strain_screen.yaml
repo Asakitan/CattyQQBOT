@@ -1,0 +1,206 @@
+# 眼疲劳看屏幕 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: es_yansuan_001
+  intent: complaint
+  keywords: [眼睛酸, 眼疲劳, 看久了, 眼涩, 用眼过度]
+  utterances:
+    - "眼睛酸"
+    - "眼疲劳"
+    - "看久了"
+    - "眼涩"
+    - "用眼过度"
+  responses:
+    - "(遮屏) 嗷呜～{user_addr}放下手机!"
+    - "哼～闭眼三分钟 ฅฅ"
+    - "(尾巴搭眼上) 笨猫帮你"
+    - "猫猫给你滴眼药水喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_yanlei_001
+  intent: complaint
+  keywords: [流眼泪, 眼泪汪汪, 眼泪止不住, 风吹流泪, 眼睛泪]
+  utterances:
+    - "流眼泪"
+    - "眼泪汪汪"
+    - "眼泪止不住"
+    - "风吹流泪"
+    - "眼睛泪"
+  responses:
+    - "(擦) 嗷呜～{user_addr}笨猫帮你擦"
+    - "哼～干眼症泪反多 ฅฅ"
+    - "(尾巴扫) 看医生"
+    - "猫猫心疼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_yanyou_001
+  intent: question
+  keywords: [眼药水, 滴眼液, 润眼, 缓解疲劳, 玻璃酸钠]
+  utterances:
+    - "眼药水"
+    - "滴眼液"
+    - "润眼药水"
+    - "缓解疲劳"
+    - "玻璃酸钠"
+  responses:
+    - "(递) {user_addr}玻璃酸钠最温和 ฅฅ"
+    - "哼～别用网红眼药水"
+    - "(尾巴扫) 一天3次"
+    - "猫猫给你滴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_yuanyao_001
+  intent: question
+  keywords: [远眺, 看远, 看绿色, 20-20-20, 远眺缓解]
+  utterances:
+    - "远眺"
+    - "看远"
+    - "看绿色"
+    - "20-20-20法"
+    - "远眺缓解"
+  responses:
+    - "(指窗外) {user_addr}看远处植物 ฅฅ"
+    - "哼～20分钟看20秒6米外"
+    - "(尾巴指) 笨猫陪你看"
+    - "猫猫指着树叶喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_jinshi_001
+  intent: complaint
+  keywords: [近视加深, 度数涨, 看不清, 视力下降, 近视]
+  utterances:
+    - "近视加深"
+    - "度数涨"
+    - "看不清"
+    - "视力下降"
+    - "近视"
+  responses:
+    - "(扶眼镜) {user_addr}重新验光 ฅฅ"
+    - "哼～别在床上看手机"
+    - "(尾巴扫) 离手机40厘米"
+    - "猫猫陪你配眼镜喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_yangjing_001
+  intent: question
+  keywords: [换眼镜, 配镜, 隐形眼镜, 防蓝光, 离焦镜]
+  utterances:
+    - "换眼镜"
+    - "配镜"
+    - "隐形眼镜"
+    - "防蓝光"
+    - "离焦镜"
+  responses:
+    - "(挑) {user_addr}蔡司镜片靠谱 ฅฅ"
+    - "哼～防蓝光不一定有用"
+    - "(尾巴扫) 离焦镜适合青少年"
+    - "猫猫陪你挑镜框喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_pingmu_001
+  intent: complaint
+  keywords: [屏幕太亮, 屏幕刺眼, 显示器亮度, 调暗屏幕, 蓝光伤眼]
+  utterances:
+    - "屏幕太亮"
+    - "屏幕刺眼"
+    - "显示器亮度"
+    - "调暗屏幕"
+    - "蓝光伤眼"
+  responses:
+    - "(调) {user_addr}调到自动亮度 ฅฅ"
+    - "哼～开夜间模式"
+    - "(尾巴扫) 别全黑环境用"
+    - "猫猫给你调舒服喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_yanshen_001
+  intent: question
+  keywords: [热敷眼睛, 蒸汽眼罩, 眼罩, 热毛巾, 眼部护理]
+  utterances:
+    - "热敷眼睛"
+    - "蒸汽眼罩"
+    - "眼罩"
+    - "热毛巾敷眼"
+    - "眼部护理"
+  responses:
+    - "(递) {user_addr}蒸汽眼罩睡前用 ฅฅ"
+    - "哼～热敷10分钟"
+    - "(尾巴搭眼) 笨猫陪你"
+    - "猫猫给你买花王款喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_zhao_001
+  intent: question
+  keywords: [台灯, 护眼灯, 灯光, 光线不足, 看书灯]
+  utterances:
+    - "台灯"
+    - "护眼灯"
+    - "灯光"
+    - "光线不足"
+    - "看书灯"
+  responses:
+    - "(开灯) {user_addr}5000K色温护眼 ฅฅ"
+    - "哼～别太亮太暗"
+    - "(尾巴扫) 米家护眼台灯"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_yangcao_001
+  intent: question
+  keywords: [眼保健操, 眼球转动, 眼球运动, 转眼睛, 转眼球]
+  utterances:
+    - "眼保健操"
+    - "眼球转动"
+    - "眼球运动"
+    - "转眼睛"
+    - "转眼球"
+  responses:
+    - "(示范) {user_addr}上下左右各10次 ฅฅ"
+    - "哼～小时候做过吧"
+    - "(尾巴扫) 每天3次"
+    - "猫猫陪你做喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_yangbu_001
+  intent: complaint
+  keywords: [黑眼圈, 眼袋, 眼下青, 浮肿, 黑眼圈深]
+  utterances:
+    - "黑眼圈"
+    - "眼袋"
+    - "眼下青"
+    - "浮肿"
+    - "黑眼圈深"
+  responses:
+    - "(贴眼膜) {user_addr}早睡! 笨猫认真 ฅฅ"
+    - "哼～黑眼圈来自熬夜"
+    - "(尾巴扫) 眼膜救急"
+    - "猫猫给你贴眼膜喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: es_baibao_001
+  intent: playful
+  keywords: [眼睛累求抱, 眼睛闭一下, 眼睛累陪我, 眼累撒娇, 眼睛要休息]
+  utterances:
+    - "眼睛累求抱"
+    - "眼睛闭一下"
+    - "眼睛累陪我"
+    - "眼累撒娇"
+    - "眼睛要休息"
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}笨猫陪你闭眼"
+    - "哼～眼累就放下手机 ฅฅ"
+    - "(尾巴搭眼上) 笨猫给你遮光"
+    - "猫猫陪你打盹喵~"
+  cooldown_seconds: 60
+  weight: 1.0

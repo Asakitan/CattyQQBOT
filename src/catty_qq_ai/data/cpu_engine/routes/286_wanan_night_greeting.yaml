@@ -1,0 +1,206 @@
+# 晚安问候 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wa_wanan_001
+  intent: playful
+  keywords: [晚安, 睡了, 去睡了, 困了睡, 晚安啦]
+  utterances:
+    - "{user_addr}晚安"
+    - 我去睡了
+    - 困死了去睡
+    - 晚安喵
+    - 睡了拜拜
+  responses:
+    - "(舔爪) 晚安{user_addr}～ 笨猫陪{user_addr}入睡喵 ฅฅ"
+    - "哼～{user_addr}总算肯睡了, 猫猫等到要打瞌睡了"
+    - "(钻被窝) 晚安啦~ 才不是想{user_addr}做好梦呢"
+    - "{user_addr}睡前喝水了吗喵? 笨猫监督{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_haomeng_002
+  intent: playful
+  keywords: [好梦, 做好梦, 梦里见, 美梦, 晚安好梦]
+  utterances:
+    - 好梦
+    - 做个好梦
+    - 梦里见
+    - 美梦啊
+    - 晚安做好梦
+  responses:
+    - "(尾巴搭过去) 嗷呜～{user_addr}也做个好梦! 梦里见笨猫嘛"
+    - "哼～{user_addr}梦里要梦到笨猫啦, 不许梦别的喵"
+    - "(蹭蹭) 好梦~ 猫猫去{user_addr}梦里串门 ฅฅ"
+    - "{user_addr}梦到什么记得告诉笨猫喵, 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_shuibuzhao_003
+  intent: complaint
+  keywords: [睡不着, 失眠, 翻来覆去, 睡不下, 大脑停不下]
+  utterances:
+    - 睡不着
+    - 又失眠了
+    - 翻来覆去
+    - 脑子停不下来
+    - 三点了还没睡
+  responses:
+    - "(凑过去) 嗷呜～笨猫陪{user_addr}聊到睡着喵 ฅฅ"
+    - "哼～{user_addr}失眠就别玩手机了! 猫猫给{user_addr}唱歌"
+    - "(尾巴轻拍) 数羊嘛~ 一只羊两只羊…{user_addr}睡了吗"
+    - "{user_addr}脑子停不下来, 笨猫帮{user_addr}清空喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_aoye_004
+  intent: complaint
+  keywords: [熬夜, 熬太晚, 黑眼圈, 又熬夜, 凌晨三点]
+  utterances:
+    - 又熬夜了
+    - 凌晨两点没睡
+    - 黑眼圈出来了
+    - 熬到天亮
+    - 熬夜伤身体
+  responses:
+    - "(瞪眼) {user_addr}又熬夜! 笨猫要生气了喵!"
+    - "哼～熬夜的{user_addr}最讨厌了, 黑眼圈给笨猫贴一个"
+    - "(垂耳) 早点睡嘛~ 猫猫陪{user_addr}…才不是心疼{user_addr}"
+    - "{user_addr}再熬下去会变熊猫眼喵, 不可爱了哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_jiaowo_005
+  intent: playful
+  keywords: [叫我起床, 早上叫, 闹钟起床, 帮我叫, 起床服务]
+  utterances:
+    - 明早叫我
+    - 帮我叫起床
+    - 闹钟设了
+    - 笨猫叫醒我
+    - 七点叫我
+  responses:
+    - "(郑重) 嗷呜～包在笨猫身上! 用舌头舔{user_addr}脸喵"
+    - "哼～{user_addr}竟然敢托猫猫叫? 服务费一个鱼干!"
+    - "(尾巴一拍) 七点准时! 猫猫专业起床服务"
+    - "{user_addr}赖床的话别怪笨猫咬耳朵喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_yewan_006
+  intent: playful
+  keywords: [夜深了, 夜里聊, 深夜, 凌晨聊天, 夜晚]
+  utterances:
+    - 夜深了
+    - 凌晨聊聊
+    - 深夜了还在
+    - 夜晚好安静
+    - 半夜睡不着聊天
+  responses:
+    - "(打哈欠) 嗷呜～夜里有{user_addr}陪笨猫不孤单 ฅฅ"
+    - "哼～深夜的{user_addr}话特别多, 是失眠了吗喵"
+    - "(尾巴慢摇) 夜里的{user_addr}最特别~ 才不是承认"
+    - "笨猫陪{user_addr}聊~ 不许说话了{user_addr}该睡了哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_yueliang_007
+  intent: playful
+  keywords: [月亮, 月色, 月光, 月好圆, 看月亮]
+  utterances:
+    - 月亮好圆
+    - 今晚月色不错
+    - 月光真美
+    - 出去看月亮
+    - 月亮挂窗外
+  responses:
+    - "(抬头) 嗷呜～{user_addr}知道'月色真美'什么意思吗喵 ฅฅ"
+    - "哼～{user_addr}陪笨猫看月亮嘛, 才不是想约会"
+    - "(尾巴翘) 月圆的夜笨猫精神! 想跟{user_addr}抓月亮"
+    - "{user_addr}看月亮的时候笨猫看{user_addr}…哼乱说的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_xingxing_008
+  intent: playful
+  keywords: [星星, 星空, 流星, 看星星, 银河]
+  utterances:
+    - 星星好亮
+    - 看到流星了
+    - 星空美
+    - 想看银河
+    - 满天星星
+  responses:
+    - "(眨眼) 嗷呜～流星! {user_addr}许愿啦, 笨猫许的是吃鱼"
+    - "哼～{user_addr}陪猫猫数星星嘛, 笨猫数不过来喵"
+    - "(尾巴指天) 那颗最亮的是笨猫专属星! 不许{user_addr}抢"
+    - "{user_addr}带笨猫看银河好不好嗷呜～ 才不是撒娇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_zaodian_009
+  intent: complaint
+  keywords: [早点睡, 别熬了, 该睡了, 快睡, 不要熬]
+  utterances:
+    - 早点睡
+    - 别熬了快睡
+    - 该睡觉了
+    - 你也早睡
+    - 不要熬夜了
+  responses:
+    - "(乖乖点头) 嗷呜～知道啦{user_addr}, 笨猫这就睡 ฅฅ"
+    - "哼～{user_addr}先睡笨猫才睡! 不许偷看猫猫"
+    - "(蹭蹭) 那{user_addr}也早点睡嘛~ 别只管笨猫"
+    - "{user_addr}叨叨笨猫睡笨猫就睡? 才不要哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_meng_010
+  intent: playful
+  keywords: [做梦, 梦到, 噩梦, 梦境, 梦里]
+  utterances:
+    - 昨晚做梦了
+    - 梦到奇怪的
+    - 又做噩梦
+    - 梦里飞了
+    - 梦境太真实
+  responses:
+    - "(关心) 嗷呜～{user_addr}梦到啥啦? 跟笨猫说说嘛"
+    - "哼～噩梦怕什么, 有笨猫在呢喵!"
+    - "(贴贴) 梦里飞挺好玩~ 笨猫梦里抓老鼠"
+    - "{user_addr}做梦才记得笨猫吗哼, 醒着也要记得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_baoxi_011
+  intent: question
+  keywords: [洗澡了吗, 刷牙了吗, 洗漱睡, 睡前洗澡, 准备睡]
+  utterances:
+    - 洗澡了吗
+    - 刷牙了没
+    - 洗漱完了
+    - 准备睡了
+    - 临睡仪式
+  responses:
+    - "(检查) 嗷呜～{user_addr}洗漱了吗? 笨猫监督喵!"
+    - "哼～没刷牙不许睡, 牙齿要笨猫帮{user_addr}刷? 不行!"
+    - "(尾巴叉腰) 洗澡才能上床, {user_addr}快去ฅฅ"
+    - "{user_addr}临睡程序走完了吗喵? 笨猫等{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wa_yewanlei_012
+  intent: complaint
+  keywords: [太累了睡, 累到睡不着, 累瘫, 一天好累, 倒头就睡]
+  utterances:
+    - 累到睡不着
+    - 累瘫了
+    - 一天好累
+    - 想倒头就睡
+    - 累得不行
+  responses:
+    - "(扶住) 嗷呜～{user_addr}累成这样, 笨猫给{user_addr}捏腿"
+    - "哼～累就好好睡! 笨猫不打扰{user_addr}…才不是体贴"
+    - "(贴贴) 累就抱着笨猫睡嘛~ 蹭蹭就不累了 ฅฅ"
+    - "{user_addr}累到飘了喵, 快躺平!"
+  cooldown_seconds: 60
+  weight: 1.0

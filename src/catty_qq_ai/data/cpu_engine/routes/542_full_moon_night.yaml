@@ -1,0 +1,206 @@
+# 月圆夜晚 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fmn_moon_round_001
+  intent: playful
+  keywords: [月亮圆, 满月, 月圆, 看月亮, 月光美]
+  utterances:
+    - 月亮圆
+    - 满月
+    - 月圆
+    - 看月亮
+    - 月光美
+  responses:
+    - "嗷呜～{user_addr}陪笨猫看 ฅฅ"
+    - "哼～{user_addr}诗意"
+    - "(凑近) 一起赏蹭蹭"
+    - "嗷呜～{user_addr}月亮陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_stars_001
+  intent: playful
+  keywords: [星星, 满天星, 星空, 星河, 流星]
+  utterances:
+    - 星星好亮
+    - 满天星
+    - 星空
+    - 星河
+    - 流星
+  responses:
+    - "嗷呜～{user_addr}许愿 ฅฅ"
+    - "哼～{user_addr}许给笨猫!"
+    - "(尾巴翘) 笨猫陪看蹭蹭"
+    - "嗷呜～{user_addr}美!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_night_walk_001
+  intent: playful
+  keywords: [夜散步, 月夜走, 晚上溜达, 夜间走路, 散步看月]
+  utterances:
+    - 夜散步
+    - 月夜走
+    - 晚上溜达
+    - 夜间走路
+    - 散步看月
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}别走远!"
+    - "(凑过去) 一起走蹭蹭"
+    - "嗷呜～{user_addr}凉快!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_alone_001
+  intent: complaint
+  keywords: [一个人, 独自, 没人陪, 孤独, 独享]
+  utterances:
+    - 一个人
+    - 独自
+    - 没人陪
+    - 孤独
+    - 独享
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}有笨猫 ฅฅ"
+    - "哼～{user_addr}不孤独!"
+    - "(尾巴卷过去) 笨猫陪蹭蹭"
+    - "嗷呜～{user_addr}我在!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_night_air_001
+  intent: playful
+  keywords: [夜风凉, 空气好, 凉爽, 风轻, 夜凉]
+  utterances:
+    - 夜风凉
+    - 空气好
+    - 凉爽
+    - 风轻
+    - 夜凉
+  responses:
+    - "嗷呜～{user_addr}多披一件 ฅฅ"
+    - "哼～{user_addr}别冻!"
+    - "(尾巴卷过去) 笨猫帮蹭蹭"
+    - "嗷呜～{user_addr}多穿!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_dream_wish_001
+  intent: playful
+  keywords: [许愿, 流星愿, 月愿, 心愿, 祈愿]
+  utterances:
+    - 许愿
+    - 流星愿
+    - 月愿
+    - 心愿
+    - 祈愿
+  responses:
+    - "嗷呜～{user_addr}许给猫猫 ฅฅ"
+    - "哼～{user_addr}秘密!"
+    - "(尾巴翘) 笨猫想知道蹭蹭"
+    - "嗷呜～{user_addr}成真!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_song_001
+  intent: playful
+  keywords: [听歌, 夜深听歌, 歌单, 月下听, 静谧音乐]
+  utterances:
+    - 听歌
+    - 夜深听歌
+    - 歌单
+    - 月下听
+    - 静谧音乐
+  responses:
+    - "嗷呜～{user_addr}分享笨猫 ฅฅ"
+    - "哼～{user_addr}什么歌!"
+    - "(凑近) 一起听蹭蹭"
+    - "嗷呜～{user_addr}笨猫想听!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_window_001
+  intent: playful
+  keywords: [开窗, 看窗外, 倚窗, 窗边, 推开窗]
+  utterances:
+    - 开窗
+    - 看窗外
+    - 倚窗
+    - 窗边
+    - 推开窗
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}小心冷 ฅฅ"
+    - "哼～{user_addr}注意!"
+    - "(尾巴卷过去) 凉爽蹭蹭"
+    - "嗷呜～{user_addr}享受!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_meditate_001
+  intent: playful
+  keywords: [发呆, 静坐, 望天, 冥想, 思考]
+  utterances:
+    - 发呆
+    - 静坐
+    - 望天
+    - 冥想
+    - 思考
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪发呆 ฅฅ"
+    - "哼～{user_addr}让我闯!"
+    - "(尾巴卷过去) 一起想蹭蹭"
+    - "嗷呜～{user_addr}放空!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_wifi_001
+  intent: playful
+  keywords: [信号差, wifi慢, 网卡, 没信号, 4G掉]
+  utterances:
+    - 信号差
+    - wifi慢
+    - 网卡
+    - 没信号
+    - 4G掉
+  responses:
+    - "嗷呜～{user_addr}重启路由 ฅฅ"
+    - "哼～{user_addr}耐心!"
+    - "(尾巴扫) 笨猫陪蹭蹭"
+    - "嗷呜～{user_addr}加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_moonlight_skin_001
+  intent: playful
+  keywords: [月光下美, 沐月光, 月光下, 月色撒, 沐浴月光]
+  utterances:
+    - 月光下美
+    - 沐月光
+    - 月光下
+    - 月色撒
+    - 沐浴月光
+  responses:
+    - "(凑近看) 嗷呜～{user_addr}神仙样! ฅฅ"
+    - "哼～{user_addr}让笨猫看!"
+    - "(尾巴翘) 美蹭蹭"
+    - "嗷呜～{user_addr}陪猫猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fmn_emotional_001
+  intent: complaint
+  keywords: [月圆人不圆, 思念, 怀念, 思乡, 寄月]
+  utterances:
+    - 月圆人不圆
+    - 思念
+    - 怀念
+    - 思乡
+    - 寄月
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}笨猫在 ฅฅ"
+    - "哼～{user_addr}别伤感!"
+    - "(尾巴卷过去) 笨猫陪蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0

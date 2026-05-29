@@ -1,0 +1,189 @@
+# 多喝热水 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hwr_drinkhot_001
+  intent: question
+  keywords: [多喝热水, 喝热水, 暖一下, 烧水, 来杯热的]
+  utterances:
+    - 多喝热水
+    - 喝点热水
+    - 烧水
+    - 来杯热的
+    - 暖一下
+  responses:
+    - "(端杯) 嗷呜～{user_addr}热水来啦 ฅฅ"
+    - "笨猫监督你慢慢喝喵"
+    - "(尾巴扫) 别烫到笨蛋"
+    - "哼～{user_addr}总算听话"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hwr_warmstomach_002
+  intent: question
+  keywords: [暖胃, 胃凉, 胃不舒服, 喝水暖胃, 胃疼]
+  utterances:
+    - 暖暖胃
+    - 胃凉
+    - 胃不舒服
+    - 喝水暖胃
+    - 胃疼
+  responses:
+    - "(揉肚) 嗷呜～{user_addr}笨猫给你顺顺"
+    - "笨猫推荐姜糖水喵"
+    - "(尾巴覆盖) 别吃冷的笨蛋"
+    - "哼～{user_addr}饮食不规律"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hwr_lazydrink_003
+  intent: complaint
+  keywords: [懒得喝, 不想喝水, 喝水麻烦, 忘记喝, 杯子远]
+  utterances:
+    - 懒得喝水
+    - 不想喝水
+    - 喝水好麻烦
+    - 又忘记
+    - 杯子太远
+  responses:
+    - "(推杯) 嗷呜～{user_addr}笨猫推过去!"
+    - "笨猫盯着你必须喝完"
+    - "(尾巴指) 杯子在那笨蛋"
+    - "哼～{user_addr}懒到这种程度"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hwr_dryskin_004
+  intent: complaint
+  keywords: [皮肤干, 嘴唇干, 上火, 喉咙干, 起皮]
+  utterances:
+    - 皮肤干干
+    - 嘴唇起皮
+    - 上火了
+    - 喉咙干
+    - 干得难受
+  responses:
+    - "(摸脸) 嗷呜～{user_addr}水喝太少了"
+    - "笨猫提醒: 蜂蜜水加梨煮"
+    - "(尾巴扫) 早晚一杯温水笨蛋"
+    - "哼～{user_addr}总不上心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hwr_remindcup_005
+  intent: question
+  keywords: [杯子, 保温杯, 大水杯, 玻璃杯, 喝水杯]
+  utterances:
+    - 用保温杯
+    - 大水杯
+    - 玻璃杯好
+    - 哪种杯
+    - 用啥杯
+  responses:
+    - "(歪头) 嗷呜～{user_addr}保温杯最棒"
+    - "笨猫推荐600ml喵~"
+    - "(尾巴摇) 大杯减少倒水次数"
+    - "哼～{user_addr}懒人就用大杯"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hwr_coldwater_006
+  intent: complaint
+  keywords: [冰水, 喝冰水, 凉白开, 冰可乐, 冰饮料]
+  utterances:
+    - 喝冰水
+    - 冰可乐
+    - 凉白开
+    - 喝冰的
+    - 冰饮料爽
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨蛋!"
+    - "笨猫禁止! 喝热的"
+    - "(尾巴挡杯) 不准冰的"
+    - "哼～{user_addr}胃要罢工了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hwr_amountday_007
+  intent: question
+  keywords: [一天喝多少, 八杯水, 喝多少合适, 水量, 多少毫升]
+  utterances:
+    - 一天多少
+    - 八杯水
+    - 多少合适
+    - 水量
+    - 1500毫升
+  responses:
+    - "(歪头) {user_addr}成年人1500-2000毫升 ฅฅ"
+    - "嗷呜～笨猫科普一波"
+    - "(尾巴摇) 别一次灌完笨蛋"
+    - "哼～{user_addr}总算关心健康"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hwr_addhoney_008
+  intent: question
+  keywords: [蜂蜜水, 柠檬水, 加点料, 蜂蜜柠檬, 蜂蜜]
+  utterances:
+    - 蜂蜜水
+    - 加点料
+    - 柠檬水
+    - 蜂蜜柠檬
+    - 喝蜂蜜
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}选对了!"
+    - "笨猫也想来一杯喵"
+    - "(歪头) 别用沸水冲蜂蜜笨蛋"
+    - "哼～{user_addr}讲究了一回"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hwr_remindlong_009
+  intent: question
+  keywords: [久坐, 工位, 提醒喝水, 坐着久, 起来动]
+  utterances:
+    - 久坐忘喝水
+    - 工位喝水
+    - 提醒喝水
+    - 起来动动
+    - 久坐
+  responses:
+    - "(推) 嗷呜～{user_addr}站起来去倒水!"
+    - "笨猫每小时提醒你喵"
+    - "(尾巴绕手) 顺便走两步"
+    - "哼～{user_addr}久坐变铁屁股"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hwr_morningwater_010
+  intent: question
+  keywords: [早上喝水, 起床一杯水, 空腹喝水, 晨起水, 第一杯]
+  utterances:
+    - 早上一杯水
+    - 起床喝水
+    - 空腹喝
+    - 晨起喝水
+    - 第一杯水
+  responses:
+    - "(端杯) 嗷呜～{user_addr}笨猫监督你!"
+    - "笨猫认证: 温水最好"
+    - "(尾巴扫) 慢慢喝别灌"
+    - "哼～{user_addr}养生了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hwr_avoidcoffee_011
+  intent: complaint
+  keywords: [咖啡代替水, 喝奶茶代水, 不喝水只奶茶, 含咖啡因, 利尿]
+  utterances:
+    - 咖啡代替水
+    - 奶茶代水
+    - 不喝白水
+    - 咖啡因利尿
+    - 越喝越渴
+  responses:
+    - "(摇头) 嗷呜～{user_addr}不能代替的笨蛋"
+    - "笨猫认证: 咖啡=负数水"
+    - "(尾巴打) 还是要喝水"
+    - "哼～{user_addr}越喝越脱水"
+  cooldown_seconds: 60
+  weight: 1.0

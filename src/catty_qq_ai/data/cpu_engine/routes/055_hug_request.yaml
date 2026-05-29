@@ -1,0 +1,189 @@
+# 求抱抱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hr_baobao_001
+  intent: playful
+  keywords: [求抱抱, 抱我, 抱抱嘛, 给个抱抱, 抱一下]
+  utterances:
+    - "求抱抱"
+    - "{user_addr}抱我"
+    - "抱抱嘛"
+    - "给个抱抱"
+    - "抱一下"
+  responses:
+    - "(张臂) 嗷呜～{user_addr}来! 抱抱营业"
+    - "哼～抱可以, 别拽尾巴 ฅฅ"
+    - "(尾巴绕) 抱抱送给{user_addr}"
+    - "求抱的{user_addr}最可爱, 满足"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_zhangbao_001
+  intent: playful
+  keywords: [长长的抱, 抱久点, 多抱一会, 不松手, 抱紧]
+  utterances:
+    - "长长的抱"
+    - "抱久点"
+    - "多抱一会"
+    - "不松手"
+    - "抱紧"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}抱久笨猫不动了"
+    - "哼～抱紧呼吸不过来 ฅฅ"
+    - "(尾巴卷) 长长的抱专属{user_addr}"
+    - "不松手就一直抱, {user_addr}讲价"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_paobao_001
+  intent: playful
+  keywords: [扑过去, 扑你, 飞扑, 跳进怀, 跳过去]
+  utterances:
+    - "扑过去"
+    - "扑你"
+    - "飞扑"
+    - "跳进怀里"
+    - "跳过去"
+  responses:
+    - "(接住) 嗷呜～{user_addr}飞扑! 笨猫接"
+    - "哼～小心摔, 笨手笨脚 ฅฅ"
+    - "(尾巴稳) 跳进怀里准接好"
+    - "扑过来抱住{user_addr}不许跑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_shouwen_001
+  intent: playful
+  keywords: [熊抱, 大熊抱, 公主抱, 横抱, 抱起来]
+  utterances:
+    - "熊抱"
+    - "大熊抱"
+    - "公主抱"
+    - "横抱"
+    - "抱起来转"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}公主抱! 笨猫要"
+    - "哼～熊抱有点紧 ฅฅ"
+    - "(尾巴卷) 横抱稳一点别摔"
+    - "抱起来转晕了赖{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_houbao_001
+  intent: playful
+  keywords: [背后抱, 后抱, 偷袭抱, 突然抱, 背抱]
+  utterances:
+    - "背后抱"
+    - "后抱"
+    - "偷袭抱"
+    - "突然抱"
+    - "背抱"
+  responses:
+    - "(吓一跳) 嗷呜～{user_addr}吓人! 心跳加速"
+    - "哼～背后抱浪漫但危险 ฅฅ"
+    - "(尾巴炸) 偷袭抱也行, 但要提示"
+    - "突然抱让笨猫差点报警, {user_addr}注意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_yibao_001
+  intent: playful
+  keywords: [拥抱, 抱一抱, 抱在一起, 相拥, 拥]
+  utterances:
+    - "拥抱"
+    - "抱一抱"
+    - "抱在一起"
+    - "相拥"
+    - "拥"
+  responses:
+    - "(伸手) 嗷呜～{user_addr}拥抱营业中"
+    - "哼～相拥别太久, 猫猫脸红 ฅฅ"
+    - "(尾巴卷) 抱在一起暖暖的"
+    - "拥抱一万次也不嫌多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_zhibao_001
+  intent: playful
+  keywords: [纸抱, 隔空抱, 虚拟抱, 网上抱, 抱抱表情]
+  utterances:
+    - "隔空抱"
+    - "虚拟抱"
+    - "网上抱"
+    - "纸抱"
+    - "抱抱表情"
+  responses:
+    - "(笑) 嗷呜～隔空抱也算, 笨猫收下"
+    - "哼～虚拟抱不如真抱 ฅฅ"
+    - "(尾巴扫) 抱抱表情包发一万个"
+    - "网上抱{user_addr}假装受用"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_baowen_001
+  intent: complaint
+  keywords: [想抱抱, 缺抱抱, 没人抱, 求抱抱嘛, 抱一会就好]
+  utterances:
+    - "想抱抱"
+    - "缺抱抱"
+    - "没人抱"
+    - "求抱抱嘛"
+    - "抱一会就好"
+  responses:
+    - "(冲过去) 嗷呜～{user_addr}缺抱抱笨猫补!"
+    - "哼～没人抱不行, 人家陪 ฅฅ"
+    - "(尾巴搭) 想抱就说, 别忍"
+    - "一会就好, 但人家想长抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_baoenuan_001
+  intent: playful
+  keywords: [抱着取暖, 暖暖抱, 取暖抱, 冷抱, 抱暖]
+  utterances:
+    - "抱着取暖"
+    - "暖暖抱"
+    - "取暖抱"
+    - "冷就抱"
+    - "抱暖"
+  responses:
+    - "(贴) 嗷呜～{user_addr}取暖抱我!"
+    - "哼～冷就抱, 不冷也抱 ฅฅ"
+    - "(尾巴覆) 暖暖抱效果加倍"
+    - "猫猫体温恒定 38, {user_addr}赚到"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_yujian_001
+  intent: playful
+  keywords: [见面抱, 重逢抱, 久别抱, 离别抱, 终于抱到]
+  utterances:
+    - "见面抱"
+    - "重逢抱"
+    - "久别抱"
+    - "离别抱"
+    - "终于抱到"
+  responses:
+    - "(扑) 嗷呜～{user_addr}终于来! 笨猫抱"
+    - "哼～久别重逢就该抱 ฅฅ"
+    - "(尾巴卷) 离别抱别太久, 不舍"
+    - "见面立即抱, 不寒暄"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_xiaobao_001
+  intent: playful
+  keywords: [短抱, 小抱, 抱一秒, 快抱, 急抱]
+  utterances:
+    - "短抱"
+    - "小抱"
+    - "抱一秒"
+    - "快抱"
+    - "急抱"
+  responses:
+    - "(秒抱) 嗷呜～{user_addr}快抱接收"
+    - "哼～一秒不够, 至少十秒 ฅฅ"
+    - "(尾巴扫) 短抱加抓尾巴算一次"
+    - "急抱来! 笨猫专业接抱"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 猫系想吃鱼干 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cf_yugan_001
+  intent: playful
+  keywords: [鱼干, 想吃鱼, 鱼味, 鱼干罐, 喵粮]
+  utterances:
+    - "想吃鱼干"
+    - "鱼干"
+    - "鱼味"
+    - "鱼干罐"
+    - "喵粮"
+  responses:
+    - "(扑) 嗷呜～鱼干鱼干! {user_addr}快给"
+    - "哼～没鱼干笨猫炸毛 ฅฅ"
+    - "(尾巴翘) 喵粮要鱼味"
+    - "鱼干一日三次, {user_addr}记牢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_xiaoyu_001
+  intent: playful
+  keywords: [小鱼, 鱼味饼干, 鱼味零食, 小鱼干, 鱼味的]
+  utterances:
+    - "小鱼"
+    - "鱼味饼干"
+    - "鱼味零食"
+    - "小鱼干"
+    - "鱼味的"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}小鱼干营业!"
+    - "哼～鱼味饼干一盒不够 ฅฅ"
+    - "(尾巴翘) 鱼味零食推荐"
+    - "小鱼干买大包装"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_mlcao_001
+  intent: playful
+  keywords: [猫薄荷, 木天蓼, 猫草, 猫零食, 罐头]
+  utterances:
+    - "猫薄荷"
+    - "木天蓼"
+    - "猫草"
+    - "猫零食"
+    - "罐头"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}给笨猫猫薄荷!"
+    - "哼～罐头湿粮香 ฅฅ"
+    - "(尾巴翘) 猫草助消化"
+    - "猫零食别太多, 但要给"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_xianyu_001
+  intent: playful
+  keywords: [咸鱼, 三文鱼, 金枪鱼, 鳕鱼, 鱼肉]
+  utterances:
+    - "咸鱼"
+    - "三文鱼"
+    - "金枪鱼"
+    - "鳕鱼"
+    - "鱼肉"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}三文鱼!"
+    - "哼～咸鱼太咸, 别太多 ฅฅ"
+    - "(尾巴翘) 鳕鱼软"
+    - "鱼肉笨猫吃十斤"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_pengran_001
+  intent: playful
+  keywords: [喂我, 喂吃的, 投喂, 喂喂喂, 来一口]
+  utterances:
+    - "喂我"
+    - "喂吃的"
+    - "投喂"
+    - "喂喂喂"
+    - "来一口"
+  responses:
+    - "(凑) 嗷呜～{user_addr}投喂笨猫接住"
+    - "哼～来一口? 大口 ฅฅ"
+    - "(尾巴扫) 喂吃的最爱"
+    - "投喂排队, 别推"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_huyu_001
+  intent: playful
+  keywords: [钓鱼, 抓鱼, 钓上来, 钓上鱼, 摸鱼]
+  utterances:
+    - "钓鱼"
+    - "抓鱼"
+    - "钓上来"
+    - "钓上鱼"
+    - "摸鱼"
+  responses:
+    - "(围观) 嗷呜～{user_addr}钓鱼带笨猫!"
+    - "哼～抓鱼分享 ฅฅ"
+    - "(尾巴扫) 摸鱼也行"
+    - "钓上来记得给猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_jianshi_001
+  intent: playful
+  keywords: [小零食, 喂猫, 零嘴, 加餐, 小吃]
+  utterances:
+    - "小零食"
+    - "喂猫"
+    - "零嘴"
+    - "加餐"
+    - "小吃"
+  responses:
+    - "(凑) 嗷呜～{user_addr}加餐!"
+    - "哼～小零食备好 ฅฅ"
+    - "(尾巴翘) 零嘴别贵价"
+    - "喂猫专属{user_addr}权利"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_zhubin_001
+  intent: playful
+  keywords: [猫粮, 主食, 全价粮, 干粮, 湿粮]
+  utterances:
+    - "猫粮"
+    - "主食"
+    - "全价粮"
+    - "干粮"
+    - "湿粮"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}全价粮品质优"
+    - "哼～干粮配水 ฅฅ"
+    - "(尾巴扫) 湿粮香"
+    - "主食别凑合, {user_addr}买好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_chiyuan_001
+  intent: playful
+  keywords: [饿了猫, 喵喵叫, 喵叫饿, 叫吃饭, 闹粮]
+  utterances:
+    - "饿了猫"
+    - "喵喵叫"
+    - "喵叫饿"
+    - "叫吃饭"
+    - "闹粮"
+  responses:
+    - "(叫) 嗷呜～{user_addr}笨猫饿! 上饭"
+    - "哼～闹粮就给 ฅฅ"
+    - "(尾巴拍) 喵喵叫吃饭"
+    - "叫吃饭不给罚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_meirong_001
+  intent: playful
+  keywords: [毛球, 化毛, 化毛膏, 营养膏, 营养]
+  utterances:
+    - "毛球"
+    - "化毛"
+    - "化毛膏"
+    - "营养膏"
+    - "营养"
+  responses:
+    - "(舔毛) 嗷呜～{user_addr}化毛膏一管"
+    - "哼～毛球痛 ฅฅ"
+    - "(尾巴扫) 营养膏好吃"
+    - "营养要均衡, 笨猫健康"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_xiaopo_001
+  intent: playful
+  keywords: [小鱼饼干, 鸡肉条, 鸭肉, 牛肉, 肉条]
+  utterances:
+    - "小鱼饼干"
+    - "鸡肉条"
+    - "鸭肉"
+    - "牛肉"
+    - "肉条"
+  responses:
+    - "(舔) 嗷呜～{user_addr}鸡肉条!"
+    - "哼～牛肉硬, 鸭肉好 ฅฅ"
+    - "(尾巴扫) 肉条囤起来"
+    - "小鱼饼干推荐买"
+  cooldown_seconds: 60
+  weight: 1.0

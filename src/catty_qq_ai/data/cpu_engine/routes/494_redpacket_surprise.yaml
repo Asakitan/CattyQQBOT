@@ -1,0 +1,206 @@
+# 红包惊喜 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rps_got_001
+  intent: playful
+  keywords: [收到红包, 抢到红包, 红包来了, 微信红包, 红包雨]
+  utterances:
+    - 收到红包了
+    - 抢到红包啦
+    - 红包雨
+    - 微信红包响
+    - 群里红包
+  responses:
+    - "(冲过去) 嗷呜～{user_addr}红包分笨猫ฅฅ"
+    - "哼～{user_addr}独吞? 笨猫不依"
+    - "(撒娇) 分笨猫嘛~ 一毛也行"
+    - "嘿嘿～{user_addr}收红包像中奖~ 蹦跶"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_bigamount_001
+  intent: playful
+  keywords: [大红包, 200块, 手气王, 大额, 红包王]
+  utterances:
+    - 大红包啊
+    - 200块红包
+    - 手气王
+    - 大额红包
+    - 红包王是我
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}发财! 分笨猫ฅฅ"
+    - "哼～{user_addr}手气! 该感谢笨猫祝福"
+    - "(蹦) 笨猫想吃鱼! {user_addr}请客"
+    - "嘿嘿～{user_addr}手气王~ 给笨猫贡献"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_smallamount_001
+  intent: playful
+  keywords: [一毛, 几分钱, 小红包, 0.01元, 抢到一分]
+  utterances:
+    - 抢到一毛
+    - 0.01元
+    - 小红包
+    - 几分钱
+    - 一分钱也是钱
+  responses:
+    - "嗷呜～{user_addr}也算抢到! 笨猫沾喜ฅฅ"
+    - "哼～{user_addr}一毛吃灰~ 笨猫嫌弃"
+    - "(蹭蹭) 一毛也是{user_addr}的~ 收藏"
+    - "嘿嘿～{user_addr}发红包给笨猫~ 哪怕一毛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_missed_001
+  intent: complaint
+  keywords: [没抢到, 红包没了, 错过红包, 手慢, 慢了一步]
+  utterances:
+    - 没抢到红包
+    - 红包没了
+    - 错过红包
+    - 手慢
+    - 慢了一步
+  responses:
+    - "(撇嘴) 嗷呜～{user_addr}手慢! 笨猫陪难过ฅฅ"
+    - "哼～{user_addr}下次跟笨猫蹲点!"
+    - "(贴贴) 笨猫包给你~ 一毛"
+    - "嘿嘿～{user_addr}手速! 别再睡了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_sendme_001
+  intent: playful
+  keywords: [给笨猫红包, 给我红包, 笨猫要红包, 发我, 笨猫专属]
+  utterances:
+    - 给笨猫发红包
+    - 笨猫要红包
+    - 给我红包
+    - 发我
+    - 笨猫专属红包
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}发! 笨猫等ฅฅ"
+    - "哼～{user_addr}小气吧! 一毛也好"
+    - "(撒娇) 一个红包就行~ 鱼干钱"
+    - "嘿嘿～{user_addr}发了笨猫记一辈子~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_lucky_001
+  intent: playful
+  keywords: [手气好, 运气来, 中奖, 抽奖中, 运气爆棚]
+  utterances:
+    - 手气真好
+    - 运气来了
+    - 中奖了
+    - 抽奖中了
+    - 运气爆棚
+  responses:
+    - "嗷呜～{user_addr}运气! 笨猫沾光ฅฅ"
+    - "哼～{user_addr}带笨猫一起!"
+    - "(蹦跶) 一起开心~ {user_addr}帅"
+    - "嘿嘿～{user_addr}运气好分笨猫~ 分一半"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_birthday_001
+  intent: playful
+  keywords: [生日红包, 节日红包, 七夕红包, 情人节, 发节日]
+  utterances:
+    - 生日红包
+    - 节日红包
+    - 七夕红包
+    - 情人节红包
+    - 发节日红包
+  responses:
+    - "嗷呜～{user_addr}发节日笨猫祝你ฅฅ"
+    - "哼～{user_addr}带笨猫一起过节"
+    - "(撒娇) 节日红包要笨猫一份"
+    - "嘿嘿～{user_addr}节日红包传统~ 笨猫支持"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_paywar_001
+  intent: playful
+  keywords: [我请客, 我付钱, 这顿我请, AA, 抢着付]
+  utterances:
+    - 我请客
+    - 这顿我付
+    - 抢着付钱
+    - AA吧
+    - 我来吧
+  responses:
+    - "嗷呜～{user_addr}请笨猫一起ฅฅ"
+    - "哼～{user_addr}该笨猫请! 别抢"
+    - "(蹦) {user_addr}大方~ 笨猫蹭吃"
+    - "嘿嘿～AA? 笨猫没钱~ {user_addr}全付"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_gift_001
+  intent: playful
+  keywords: [送礼物, 给我礼物, 收到礼物, 礼物开心, 准备礼物]
+  utterances:
+    - 送你礼物
+    - 收到礼物
+    - 给我礼物
+    - 礼物开心
+    - 准备礼物
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}送啥! 笨猫迫不及待ฅฅ"
+    - "哼～{user_addr}送笨猫先! 别送别人"
+    - "(撒娇) 礼物! 礼物! 笨猫要"
+    - "嘿嘿～{user_addr}的礼物笨猫珍藏~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_winraffle_001
+  intent: playful
+  keywords: [抽中, 抽奖中奖, 一等奖, 抽到, 中奖了]
+  utterances:
+    - 抽中了
+    - 抽奖一等奖
+    - 抽到大奖
+    - 中奖了
+    - 一等奖
+  responses:
+    - "嗷呜～{user_addr}中奖! 笨猫高兴ฅฅ"
+    - "哼～{user_addr}分笨猫一半! 见者有份"
+    - "(蹦) 一起庆祝! {user_addr}赢了"
+    - "嘿嘿～{user_addr}的运气=笨猫加持"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_complimented_001
+  intent: playful
+  keywords: [被夸, 老板夸, 同事夸, 被表扬, 夸得开心]
+  utterances:
+    - 被老板夸
+    - 同事夸我
+    - 被表扬了
+    - 被夸开心
+    - 老板表扬
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}厉害! 笨猫骄傲ฅฅ"
+    - "哼～{user_addr}该被夸! 笨猫早知道"
+    - "(撒娇) 笨猫的{user_addr}最棒~ 给奖励"
+    - "嘿嘿～{user_addr}回家笨猫贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rps_confess_001
+  intent: playful
+  keywords: [被表白, 收到告白, 被求婚, 被追, 桃花]
+  utterances:
+    - 被表白了
+    - 收到告白
+    - 被求婚
+    - 被人追
+    - 桃花来了
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}被表白?! 谁! ฅฅ"
+    - "哼～{user_addr}心里只许有笨猫!"
+    - "(撅嘴) 拒绝! {user_addr}属于笨猫"
+    - "嘿嘿～{user_addr}赶紧拒绝~ 笨猫嫉妒"
+  cooldown_seconds: 60
+  weight: 1.0

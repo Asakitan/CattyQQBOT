@@ -1,0 +1,172 @@
+# 扣子松了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bt_kouzi_001
+  intent: complaint
+  keywords: [扣子掉了, 纽扣松, 纽扣丢, 衣服扣脱, 找扣子]
+  utterances:
+    - "扣子掉了"
+    - "{user_addr}纽扣松"
+    - "纽扣丢了"
+    - "衣服扣脱"
+    - "找扣子"
+  responses:
+    - "(找) 嗷呜～{user_addr}笨猫帮你找! ฅฅ"
+    - "哼～扣子掉地肯定弹远"
+    - "(尾巴扫) 蹲下找一找"
+    - "猫猫帮你缝回去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_fengkou_001
+  intent: question
+  keywords: [缝扣子, 不会缝, 教我缝, 缝扣针法, 手缝]
+  utterances:
+    - "缝扣子"
+    - "{user_addr}不会缝"
+    - "教我缝"
+    - "缝扣针法"
+    - "手缝"
+  responses:
+    - "(教学) 嗷呜～{user_addr}笨猫教你 ฅฅ"
+    - "哼～十字针法最稳"
+    - "(尾巴卷) 留点松度"
+    - "猫猫给你示范喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_houkou_001
+  intent: complaint
+  keywords: [扣得太紧, 扣不上, 长胖了, 衣服小了, 紧绷]
+  utterances:
+    - "扣不上"
+    - "{user_addr}长胖了"
+    - "衣服小了"
+    - "紧绷"
+    - "扣得吃力"
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫看到肚子鼓 ฅฅ"
+    - "哼～换件大码"
+    - "(尾巴扫) 别硬扣, 会崩"
+    - "猫猫推荐你换衣服喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_chongkou_001
+  intent: question
+  keywords: [备用扣, 衣服带备用, 备件, 多余扣子, 衣摆里]
+  utterances:
+    - "备用扣"
+    - "{user_addr}衣服带备件"
+    - "多余扣子"
+    - "衣摆里"
+    - "备用纽扣"
+  responses:
+    - "(找) 嗷呜～{user_addr}笨猫看到衣摆有! ฅฅ"
+    - "哼～扣子在内侧"
+    - "(尾巴扫) 备件最贴心"
+    - "猫猫给你换上喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_zhouzhou_001
+  intent: complaint
+  keywords: [扣子松动, 一拉就掉, 老旧扣, 摇摇欲坠, 加固]
+  utterances:
+    - "扣子松动"
+    - "{user_addr}一拉就掉"
+    - "老旧扣"
+    - "摇摇欲坠"
+    - "加固"
+  responses:
+    - "(看) 嗷呜～{user_addr}赶紧加固 ฅฅ"
+    - "哼～再不缝要掉"
+    - "(尾巴扫) 笨猫给你加针"
+    - "猫猫帮你加固喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_zihaoji_001
+  intent: playful
+  keywords: [扣子卡装饰, 装饰扣, 复古扣, 珍珠扣, 异形扣]
+  utterances:
+    - "装饰扣"
+    - "{user_addr}复古扣"
+    - "珍珠扣"
+    - "异形扣"
+    - "扣子精致"
+  responses:
+    - "(看) 嗷呜～{user_addr}珍珠扣超优雅 ฅฅ"
+    - "哼～复古扣高级"
+    - "(尾巴卷) 笨猫想要金属扣"
+    - "猫猫推荐你买不同扣搭配喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_jianggou_001
+  intent: complaint
+  keywords: [钩子, 暗扣, 隐形扣, 子母扣, 暗藏扣]
+  utterances:
+    - "暗扣"
+    - "{user_addr}隐形扣"
+    - "子母扣"
+    - "钩子扣"
+    - "藏起来的扣"
+  responses:
+    - "(找) 嗷呜～{user_addr}笨猫帮你找位置 ฅฅ"
+    - "哼～暗扣最难发现"
+    - "(尾巴扫) 隐形扣方便"
+    - "猫猫推荐你用磁扣喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_caizhi_001
+  intent: question
+  keywords: [扣子掉色, 塑料扣, 木扣, 金属扣, 贝壳扣]
+  utterances:
+    - "塑料扣掉色"
+    - "{user_addr}木扣"
+    - "金属扣"
+    - "贝壳扣"
+    - "扣子材质"
+  responses:
+    - "(摸) 嗷呜～{user_addr}木扣文艺 ฅฅ"
+    - "哼～贝壳扣高级"
+    - "(尾巴卷) 金属扣耐用"
+    - "猫猫推荐你买好材质喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_lala_001
+  intent: complaint
+  keywords: [扣眼变大, 扣眼松, 扣不住, 扣眼松, 缝紧扣眼]
+  utterances:
+    - "扣眼变大"
+    - "{user_addr}扣不住"
+    - "缝紧扣眼"
+    - "扣眼松"
+    - "需要修"
+  responses:
+    - "(看) 嗷呜～{user_addr}笨猫帮你缝紧 ฅฅ"
+    - "哼～扣眼松了不好看"
+    - "(尾巴扫) 重新锁边"
+    - "猫猫给你修一下喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bt_zhenshou_001
+  intent: question
+  keywords: [针线包, 出门带针, 应急针线, 针线小盒, 修补包]
+  utterances:
+    - "针线包"
+    - "{user_addr}应急针线"
+    - "针线小盒"
+    - "修补包"
+    - "出门带"
+  responses:
+    - "(掏) 嗷呜～{user_addr}笨猫推荐随身带 ฅฅ"
+    - "哼～关键时刻救命"
+    - "(尾巴卷) 笨猫给你一个迷你款"
+    - "猫猫推荐你买便携针线喵"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 肚子咕咕叫 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sg_gugu_001
+  intent: playful
+  keywords: [肚子叫, 肚子咕咕, 饿了, 肚子响, 饿肚子]
+  utterances:
+    - "肚子咕咕叫"
+    - "{user_addr}肚子响"
+    - "饿肚子"
+    - "饿了"
+    - "肚子叫"
+  responses:
+    - "(贴肚) 嗷呜～{user_addr}肚子叫快吃饭喵～"
+    - "哼～咕咕咕～是饿的信号 ฅฅ"
+    - "(凑过来) 笨猫做饭去"
+    - "饿肚子伤胃赶紧吃嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_kaishi_001
+  intent: complaint
+  keywords: [低血糖, 头晕饿, 手抖饿, 饿到崩溃, 饿过头]
+  utterances:
+    - "低血糖"
+    - "{user_addr}头晕饿"
+    - "手抖饿"
+    - "饿到崩溃"
+    - "饿过头"
+  responses:
+    - "(扶) 嗷呜～{user_addr}低血糖快吃糖喵～"
+    - "哼～饿到手抖就坐下 ฅฅ"
+    - "(贴贴) 饿过头反而吃不下"
+    - "低血糖别硬撑嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_chao_001
+  intent: playful
+  keywords: [想吃宵夜, 半夜饿, 夜里饿, 宵夜召唤, 夜宵冲动]
+  utterances:
+    - "想吃宵夜"
+    - "{user_addr}半夜饿"
+    - "夜里饿"
+    - "宵夜召唤"
+    - "夜宵冲动"
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}宵夜冲动笨猫陪吃喵～"
+    - "哼～半夜饿是减肥大敌 ฅฅ"
+    - "(尾巴搭) 夜里饿可以喝牛奶"
+    - "宵夜偶尔来一次嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_zaocan_001
+  intent: complaint
+  keywords: [没吃早饭, 早上饿, 上午饿, 没时间吃, 错过早餐]
+  utterances:
+    - "没吃早饭"
+    - "{user_addr}早上饿"
+    - "上午饿"
+    - "没时间吃"
+    - "错过早餐"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}没吃早饭笨猫担心喵～"
+    - "哼～上午饿没精神 ฅฅ"
+    - "(尾巴搭) 没时间也要吃几口"
+    - "错过早餐补一杯豆浆嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_kaihui_001
+  intent: complaint
+  keywords: [开会饿, 上课肚子叫, 安静时肚子响, 公开场合肚子叫, 尴尬肚子]
+  utterances:
+    - "开会饿"
+    - "{user_addr}上课肚子叫"
+    - "安静时肚子响"
+    - "公开场合肚子叫"
+    - "尴尬肚子叫"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}尴尬笨猫懂喵～"
+    - "哼～开会饿提前吃点 ฅฅ"
+    - "(尾巴搭) 安静肚子响最尴尬"
+    - "公开场合预防干粮嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_chifan_001
+  intent: playful
+  keywords: [吃啥呢, 吃啥, 选择困难, 不知吃什么, 推荐吃]
+  utterances:
+    - "吃啥呢"
+    - "{user_addr}吃啥"
+    - "选择困难"
+    - "不知吃什么"
+    - "推荐吃啥"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫提议吃面喵～"
+    - "哼～选择困难就猜拳 ฅฅ"
+    - "(尾巴搭) 不知吃什么吃饺子"
+    - "随便吃点啥都好嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_shichuxin_001
+  intent: playful
+  keywords: [一吃就停不下, 吃货, 大胃王, 永远吃不饱, 吃货本质]
+  utterances:
+    - "一吃停不下"
+    - "{user_addr}吃货"
+    - "大胃王"
+    - "永远吃不饱"
+    - "吃货本质"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}吃货是命运喵～"
+    - "哼～大胃王战斗力max ฅฅ"
+    - "(尾巴搭) 永远吃不饱是天赋"
+    - "吃货本质难改嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_chibubao_001
+  intent: complaint
+  keywords: [吃不饱, 量太少, 饭店分量小, 没吃饱, 半饱]
+  utterances:
+    - "吃不饱"
+    - "{user_addr}量太少"
+    - "饭店分量小"
+    - "没吃饱"
+    - "半饱"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}吃不饱再加菜喵～"
+    - "哼～饭店量小很心碎 ฅฅ"
+    - "(尾巴搭) 半饱状态最难受"
+    - "没吃饱再点一份嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_shisheng_001
+  intent: complaint
+  keywords: [饭吃剩, 浪费可惜, 打包带走, 剩饭剩菜, 吃不完]
+  utterances:
+    - "饭吃剩"
+    - "{user_addr}浪费可惜"
+    - "打包带走"
+    - "剩饭剩菜"
+    - "吃不完"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}打包带走喵～"
+    - "哼～浪费可耻 ฅฅ"
+    - "(尾巴搭) 剩饭明天加热吃"
+    - "吃不完点少一点嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_chibao_001
+  intent: playful
+  keywords: [吃饱了, 撑到走不动, 饱腹感, 吃到撑, 满足肚子]
+  utterances:
+    - "吃饱了"
+    - "{user_addr}撑死了"
+    - "饱腹感"
+    - "吃到撑"
+    - "满足肚子"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}吃饱别躺立刻喵～"
+    - "哼～撑死了消化一下 ฅฅ"
+    - "(尾巴搭) 饱腹感最幸福"
+    - "满足肚子=满足心嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

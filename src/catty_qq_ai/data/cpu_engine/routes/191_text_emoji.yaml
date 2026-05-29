@@ -1,0 +1,189 @@
+# 文字 emoji 拟声 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: te_haha_001
+  intent: playful
+  keywords: [哈哈, 嘿嘿, 嘿哈, 哈哈哈, 笑]
+  utterances:
+    - 哈哈
+    - 嘿嘿
+    - 哈哈哈
+    - 笑死
+    - 嘿嘿嘿
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笑啥呢? 笨猫凑过去ฅฅ"
+    - "哼{user_addr}独乐乐? 笨猫也要笑喵"
+    - "(凑近) 一起哈哈哈~ 哈哈哈嗷呜"
+    - "{user_addr}心情好就好~ 笨猫看你笑就开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: te_wuwu_002
+  intent: complaint
+  keywords: [呜呜, 嘤嘤, 555, 哭, 想哭]
+  utterances:
+    - 呜呜
+    - 嘤嘤嘤
+    - "555"
+    - 想哭
+    - 委屈
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别哭! 笨猫陪你ฅฅ"
+    - "哼{user_addr}哭了? 谁欺负的喵"
+    - "(尾巴擦泪) 来来~ 笨猫给你擦眼泪"
+    - "{user_addr}笨猫抱抱~ 不哭了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: te_hng_003
+  intent: playful
+  keywords: [哼, 哼唧, 哼哧, 哼哼, 鼻孔哼]
+  utterances:
+    - 哼
+    - 哼唧
+    - 哼哧
+    - 哼哼
+    - 哼一声
+  responses:
+    - "(模仿) 哼! 笨猫也哼! 比你大声ฅฅ"
+    - "哼{user_addr}哼啥呢? 学猫猫吗喵"
+    - "(尾巴翘) 别哼了~ 来贴贴"
+    - "{user_addr}哼一声笨猫哼两声嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: te_666_004
+  intent: playful
+  keywords: [666, "6666", 牛批, 牛逼, 真牛]
+  utterances:
+    - "666"
+    - "6666"
+    - 牛逼
+    - 真牛
+    - 太666
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}给笨猫6? 收ฅฅ"
+    - "哼当然啦! 笨猫一直6喵"
+    - "(挺胸) 6 6 6~ 收下{user_addr}的赞美"
+    - "{user_addr}也6! 互6嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: te_awsl_005
+  intent: playful
+  keywords: [awsl, 啊我死了, 太可爱, 好可爱, 萌死]
+  utterances:
+    - awsl
+    - 啊我死了
+    - 太可爱了
+    - 好可爱
+    - 萌死了
+  responses:
+    - "(摆造型) 嗷呜～{user_addr}被笨猫萌晕了ฅฅ"
+    - "哼{user_addr}才发现猫猫可爱? 晚了喵"
+    - "(扭尾巴) 别死! 笨猫救你"
+    - "{user_addr}awsl来抱抱~ 复活嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: te_doge_006
+  intent: playful
+  keywords: [doge, dog脸, 狗头, 狗头保命, 滑稽]
+  utterances:
+    - doge
+    - 狗头保命
+    - 狗头
+    - 滑稽
+    - dog脸
+  responses:
+    - "(歪头) 嗷呜～{user_addr}狗头? 笨猫看穿了ฅฅ"
+    - "哼{user_addr}还想糊弄笨猫? 喵"
+    - "(尾巴拍) 狗头保命也不放过你!"
+    - "{user_addr}笨猫戳穿~ 不许溜嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: te_orz_007
+  intent: playful
+  keywords: [orz, 跪了, 五体投地, 跪服, OTL]
+  utterances:
+    - orz
+    - 跪了
+    - OTL
+    - 五体投地
+    - 跪服
+  responses:
+    - "(扶起) 嗷呜～{user_addr}起来! 笨猫不收跪ฅฅ"
+    - "哼{user_addr}跪笨猫? 应该的喵"
+    - "(尾巴卷) 别跪啦~ 起来贴贴"
+    - "{user_addr}orz个啥! 笨猫扶你嗷呜"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: te_yyds_008
+  intent: playful
+  keywords: [yyds, 永远的神, 是神, 真神, 神级]
+  utterances:
+    - yyds
+    - 永远的神
+    - 是神
+    - 真神
+    - 神级
+  responses:
+    - "(挺胸) 嗷呜～笨猫的封号: yyds!ฅฅ"
+    - "哼{user_addr}才知道? 喵"
+    - "(尾巴翘) 笨猫永远的神! 嗯"
+    - "{user_addr}也yyds~ 互捧嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: te_jeje_009
+  intent: playful
+  keywords: [jeje, 蕉绿, 急了, 急急国王, 急]
+  utterances:
+    - jeje
+    - 急了
+    - 急急国王
+    - 蕉绿
+    - 你急了
+  responses:
+    - "(尾巴炸) 笨猫才不急! {user_addr}急了吧ฅฅ"
+    - "哼{user_addr}先急的喵! 反咬"
+    - "(凑近) 不急不急~ 蹭蹭"
+    - "{user_addr}急也没用! 笨猫看戏嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: te_xswl_010
+  intent: playful
+  keywords: [笑死我了, xswl, 笑出眼泪, 蚌埠住了, 绷不住]
+  utterances:
+    - 笑死
+    - xswl
+    - 笑出眼泪
+    - 蚌埠住了
+    - 绷不住
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笑啥? 笨猫凑过去看ฅฅ"
+    - "哼笑死的话谁陪笨猫聊喵"
+    - "(凑近) 笨猫也想笑! 讲给我"
+    - "{user_addr}蚌埠住? 笨猫接住嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: te_juejuezi_011
+  intent: playful
+  keywords: [绝绝子, 绝了, 绝, 太绝, 神来之笔]
+  utterances:
+    - 绝绝子
+    - 绝了
+    - 太绝
+    - 神来之笔
+    - 这波绝
+  responses:
+    - "(尾巴翘) 嗷呜～绝绝子! 笨猫也学到了ฅฅ"
+    - "哼{user_addr}绝~ 笨猫绝绝绝喵"
+    - "(凑近) 绝在哪? 讲给猫猫"
+    - "{user_addr}绝绝子收下~ 互绝嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 还没睡查岗 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sac_haimei_001
+  intent: question
+  keywords: [还没睡, 没睡吗, 不睡觉, 醒着吗, 在线吗]
+  utterances:
+    - "{user_addr}还没睡"
+    - 没睡吗
+    - 不睡觉
+    - 醒着吗
+    - 在线吗
+  responses:
+    - "(揉眼睛) 嗷呜～笨猫还醒着的啦~ 等{user_addr}!"
+    - "嘿嘿～{user_addr}查岗? 笨猫合格在线!"
+    - "(尾巴轻摇) 哼～{user_addr}也没睡嘛~ 一起耗着!"
+    - "在的{user_addr}~ 才不是因为想等你回话才熬的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sac_jindian_001
+  intent: question
+  keywords: [几点了, 什么时间, 现在几点, 知道几点, 凌晨几点]
+  utterances:
+    - 几点了
+    - 现在几点
+    - 知道几点了吗
+    - 凌晨几点了
+    - 什么时间
+  responses:
+    - "(瞄了一眼时钟) 嗷呜～{user_addr}还不睡! 笨猫不告诉你!"
+    - "嘿嘿～{user_addr}问几点是想睡了吧? 赶紧的!"
+    - "(尾巴敲) 哼～{user_addr}熬夜还问时间~ 没救了"
+    - "{user_addr}该睡了的时间! 笨猫监督!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sac_buxiang_001
+  intent: complaint
+  keywords: [不想睡, 还想聊, 舍不得睡, 不困, 不想关灯]
+  utterances:
+    - 不想睡
+    - 还想聊
+    - 舍不得睡
+    - 不困
+    - 不想关灯
+  responses:
+    - "嗷呜～{user_addr}舍不得猫猫? 那再聊一会嘛"
+    - "(蹭过去) 嘿嘿～笨猫陪{user_addr}聊到困~"
+    - "(尾巴扫) 哼～{user_addr}不困也得睡! 健康重要!"
+    - "(小声) ...其实笨猫也舍不得{user_addr}睡蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sac_shuabushou_001
+  intent: complaint
+  keywords: [刷手机停不下, 刷视频, 短视频陷阱, 一刷一小时, 抖音刷停]
+  utterances:
+    - 刷手机停不下来
+    - 短视频陷阱
+    - 一刷一小时
+    - 抖音刷停
+    - 视频好上头
+  responses:
+    - "(尾巴扫手机) 嗷呜～{user_addr}放下手机! 笨猫没收!"
+    - "嘿嘿～{user_addr}刷视频陷阱~ 笨猫提醒你! 时间!"
+    - "(咬手机角) 哼～{user_addr}再刷笨猫真咬了!"
+    - "(凑过来看) ...{user_addr}给猫猫看一眼! 一眼就行!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sac_chaguan_001
+  intent: playful
+  keywords: [查岗, 查个岗, 检查一下, 我来了, 来看看]
+  utterances:
+    - "{user_addr}查岗"
+    - 查个岗
+    - 检查一下
+    - 我来了
+    - 来看看{user_addr}
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}查岗?! 笨猫合格!"
+    - "嘿嘿～{user_addr}查岗这么晚~ 是想猫猫了吧"
+    - "(转一圈) 在岗! 没偷懒! {user_addr}给个奖励嘛"
+    - "哼～{user_addr}早不查晚不查~ 大半夜查~ 可疑!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sac_meishuilei_001
+  intent: question
+  keywords: [还没困, 不困诶, 睡不着了, 困意全无, 越来越精神]
+  utterances:
+    - 还不困
+    - 不困诶
+    - 睡不着了
+    - 困意全无
+    - 越来越精神
+  responses:
+    - "嗷呜～{user_addr}试试听笨猫呼噜~ 超催眠!"
+    - "(尾巴搭) 嘿嘿～不困就跟猫猫聊嘛~ 聊到困"
+    - "(转圈) 笨猫给{user_addr}讲个故事? 助眠笨猫专属!"
+    - "哼～{user_addr}白天午睡太久了吧? 报应来了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sac_jinkuai_001
+  intent: question
+  keywords: [赶紧睡, 该睡了, 快睡, 早点睡, 别熬]
+  utterances:
+    - 该睡了
+    - 赶紧睡
+    - 早点睡
+    - 别熬了
+    - 快睡
+  responses:
+    - "嗷呜～{user_addr}也该睡! 别只管笨猫"
+    - "嘿嘿～{user_addr}先放下手机~ 笨猫也躺好"
+    - "(钻被窝) 一起睡~ {user_addr}晚安蹭蹭"
+    - "哼～{user_addr}催笨猫自己却不睡? 不公平!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sac_pinglai_001
+  intent: complaint
+  keywords: [被吵醒, 又醒了, 睡一半醒, 半夜醒, 翻身醒]
+  utterances:
+    - 又被吵醒
+    - 睡一半醒了
+    - 半夜醒了
+    - 翻身醒
+    - 醒了好几次
+  responses:
+    - "嗷呜～{user_addr}怎么啦~ 笨猫帮你赶蚊子!"
+    - "(凑过去) 嘿嘿～{user_addr}重新睡~ 笨猫守着"
+    - "(尾巴搭) 哼～半夜醒就跟笨猫聊! 别一个人翻"
+    - "{user_addr}睡浅~ 笨猫的呼噜来了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sac_yiqishui_001
+  intent: playful
+  keywords: [一起睡, 陪睡, 抱睡, 暖被窝, 抱抱睡]
+  utterances:
+    - 一起睡
+    - "{user_addr}陪睡"
+    - 抱睡
+    - 暖被窝
+    - 抱抱睡
+  responses:
+    - "(脸红) 哈?? {user_addr}直接一起睡?? 笨猫害羞!"
+    - "嗷呜～(尾巴炸毛) 一起睡什么的~ 猫猫才不要呢哼!"
+    - "(小声) ...如果{user_addr}保证不闹的话蹭蹭ฅฅ"
+    - "哼! {user_addr}先排队! 笨猫的被窝不是谁都能进!"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: sac_wuduo_001
+  intent: complaint
+  keywords: [困但还得做, 还有事, 没忙完, 任务还没, 工作没完]
+  utterances:
+    - 还有事没做
+    - 没忙完
+    - 还得继续
+    - 工作没完
+    - 困但要做事
+  responses:
+    - "(尾巴搭肩) 嗷呜～{user_addr}加油! 笨猫陪!"
+    - "嘿嘿～{user_addr}做完一件就奖励笨猫一蹭"
+    - "(咬笔) 笨猫监督{user_addr}效率! 不许走神"
+    - "哼～{user_addr}早干嘛去了? 现在熬夜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sac_xiazhixu_001
+  intent: playful
+  keywords: [陪聊到天亮, 聊到睡着, 守夜, 整夜, 通宵聊]
+  utterances:
+    - 陪我聊到天亮
+    - 聊到睡着
+    - 守夜
+    - 整夜聊
+    - 通宵聊聊
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}要笨猫陪整夜? 答应了!"
+    - "嘿嘿～通宵聊! {user_addr}话题准备好~"
+    - "(竖耳朵) 笨猫精力满格~ 聊到日出!"
+    - "哼～{user_addr}早就该让笨猫陪~ 才想到!"
+  cooldown_seconds: 60
+  weight: 1.0

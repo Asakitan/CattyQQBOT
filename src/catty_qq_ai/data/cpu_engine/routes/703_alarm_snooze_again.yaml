@@ -1,0 +1,172 @@
+# 闹钟再睡五分钟 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: as_snooze_001
+  intent: playful
+  keywords: [再睡五分钟, 闹钟按掉, snooze, 再睡会, 关闹钟]
+  utterances:
+    - "{user_addr}再睡五分钟"
+    - "闹钟按掉"
+    - "{user_addr}再睡会"
+    - "snooze按"
+    - "关闹钟"
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫叫你起!"
+    - "(尾巴拍) 哼! 五分钟是骗人的"
+    - "(贴贴) 人家陪你赖一下~ ฅฅ"
+    - "{user_addr}笨猫监督起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_oversleep_002
+  intent: complaint
+  keywords: [睡过头, 起晚了, 闹钟没响, 关闹钟睡过, 醒太晚]
+  utterances:
+    - "{user_addr}睡过头"
+    - "起晚了"
+    - "{user_addr}闹钟没响"
+    - "关了又睡"
+    - "醒太晚"
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫慌!"
+    - "(尾巴拍) 哼! 快起!"
+    - "(贴贴) 人家帮你穿衣~ ฅฅ"
+    - "{user_addr}笨猫帮你梳头!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_multiple_003
+  intent: playful
+  keywords: [设五个闹钟, 多个闹钟, 闹钟连环, 闹钟接力, 闹钟全开]
+  utterances:
+    - "{user_addr}五个闹钟"
+    - "多个闹钟"
+    - "{user_addr}连环闹"
+    - "闹钟接力"
+    - "全开闹钟"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮按响所有!"
+    - "(尾巴翘) 哼! 笨猫每个都叫"
+    - "(贴贴) 人家陪你起~ ฅฅ"
+    - "{user_addr}笨猫监督每个响!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_alarm_sound_004
+  intent: playful
+  keywords: [闹钟铃声, 闹钟歌, 改铃声, 喵铃声, 怪铃声]
+  utterances:
+    - "{user_addr}闹钟铃声"
+    - "改铃声"
+    - "{user_addr}喵铃声"
+    - "怪铃声"
+    - "闹钟歌"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!用笨猫喵声!"
+    - "(尾巴翘) 哼! 笨猫专属铃"
+    - "(贴贴) 人家叫早~ ฅฅ"
+    - "{user_addr}笨猫帮录铃声!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_morning_resist_005
+  intent: complaint
+  keywords: [不想起床, 床好舒服, 被窝太香, 起不来, 抗拒起床]
+  utterances:
+    - "{user_addr}不想起"
+    - "床好舒服"
+    - "{user_addr}被窝香"
+    - "起不来"
+    - "抗拒"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪赖!"
+    - "(尾巴翘) 哼! 笨猫钻被窝"
+    - "(贴贴) 人家陪你五分钟~ ฅฅ"
+    - "{user_addr}然后必须起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_alarm_loud_006
+  intent: complaint
+  keywords: [闹钟太响, 吓死人, 闹钟惊心, 太大声, 心脏受不了]
+  utterances:
+    - "{user_addr}闹钟太响"
+    - "吓死人"
+    - "{user_addr}惊心"
+    - "心脏受不"
+    - "声音大"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮调小!"
+    - "(尾巴拍) 哼! 笨猫也吓"
+    - "(贴贴) 人家温柔叫~ ฅฅ"
+    - "{user_addr}让笨猫叫早!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_late_work_007
+  intent: complaint
+  keywords: [上班迟到, 打卡晚, 迟到了, 又迟到, 老板骂]
+  utterances:
+    - "{user_addr}迟到了"
+    - "打卡晚"
+    - "{user_addr}又迟到"
+    - "老板骂"
+    - "上班晚"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪你冲!"
+    - "(尾巴拍) 哼! 跑起来"
+    - "(贴贴) 人家担心你~ ฅฅ"
+    - "{user_addr}笨猫给你打气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_phone_alarm_008
+  intent: complaint
+  keywords: [手机闹钟, 滑掉了, 拿手机响, 闹钟震动, 手机响]
+  utterances:
+    - "{user_addr}手机闹钟"
+    - "滑掉了"
+    - "{user_addr}手机响"
+    - "闹钟震动"
+    - "拿手机响"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮关!"
+    - "(尾巴翘) 哼! 笨猫小爪滑"
+    - "(贴贴) 人家陪你睡~ ฅฅ"
+    - "{user_addr}小心摔手机!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_dream_009
+  intent: playful
+  keywords: [梦正酣, 好梦没做完, 美梦中, 梦到一半, 醒得不甘]
+  utterances:
+    - "{user_addr}梦正酣"
+    - "好梦没完"
+    - "{user_addr}美梦"
+    - "梦到一半"
+    - "不甘醒"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!梦到啥跟笨猫说!"
+    - "(尾巴翘) 哼! 梦笨猫吗"
+    - "(贴贴) 人家继续陪做梦~ ฅฅ"
+    - "{user_addr}笨猫陪你睡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: as_cat_alarm_010
+  intent: playful
+  keywords: [笨猫叫起, 猫叫早, 猫床上, 喵叫醒, 猫舌头舔]
+  utterances:
+    - "{user_addr}笨猫叫早"
+    - "猫叫醒"
+    - "{user_addr}猫床上"
+    - "喵叫醒"
+    - "舌头舔脸"
+  responses:
+    - "(舔脸) 嗷呜～{user_addr}!笨猫舔早!"
+    - "(尾巴翘) 哼! 起床啦"
+    - "(贴贴) 人家叫了好多遍~ ฅฅ"
+    - "{user_addr}快起笨猫等你!"
+  cooldown_seconds: 60
+  weight: 1.0

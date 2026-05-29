@@ -1,0 +1,172 @@
+# 学习场景焦虑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sa_remember_001
+  intent: complaint
+  keywords: [背书背不下, 记不住, 背诵难, 单词背, 背不会]
+  utterances:
+    - 背书背不下
+    - 记不住
+    - 单词背不会
+    - 背诵难
+    - 背了又忘
+  responses:
+    - "(摸头) 嗷呜～{user_addr}慢慢来 ฅฅ"
+    - "哼～{user_addr}笨猫陪背"
+    - "(贴) {user_addr}笨猫陪你"
+    - "{user_addr}重复才能记蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_examfear_001
+  intent: complaint
+  keywords: [考试焦虑, 怕考试, 考不好, 怕挂科, 紧张考试]
+  utterances:
+    - 考试焦虑
+    - 怕考试
+    - 怕挂科
+    - 紧张
+    - 怕考不好
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}笨猫帮加油!"
+    - "(摸头) {user_addr}尽力就行"
+    - "{user_addr}笨猫挺你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_late_night_001
+  intent: complaint
+  keywords: [熬夜复习, 凌晨学习, 通宵, 复习到很晚, 熬通宵]
+  utterances:
+    - 熬夜复习
+    - 复习到凌晨
+    - 通宵学习
+    - 熬通宵
+    - 复习到很晚
+  responses:
+    - "(担心) 嗷呜～{user_addr}早点睡 ฅฅ"
+    - "哼～{user_addr}通宵不健康!"
+    - "(摸头) {user_addr}笨猫陪你"
+    - "{user_addr}该睡睡蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_focus_fail_001
+  intent: complaint
+  keywords: [集中不了, 注意力差, 走神, 学不下去, 心不在焉]
+  utterances:
+    - 集中不了
+    - 走神
+    - 学不下去
+    - 心不在焉
+    - 注意力差
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}就是杂鱼"
+    - "(摸头) {user_addr}番茄钟"
+    - "{user_addr}笨猫监督蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_homework_001
+  intent: complaint
+  keywords: [作业多, 作业写不完, 作业堆积, 作业难, 作业累]
+  utterances:
+    - 作业多
+    - 写不完作业
+    - 作业堆山
+    - 作业难
+    - 作业累
+  responses:
+    - "(陪) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}赶紧写!"
+    - "(摸头) {user_addr}先简单的"
+    - "{user_addr}加油蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_difficult_001
+  intent: complaint
+  keywords: [题难, 不会做, 题目难, 难题, 看不懂]
+  utterances:
+    - 题难
+    - 不会做
+    - 题目难
+    - 难题
+    - 看不懂
+  responses:
+    - "(摸头) 嗷呜～{user_addr}没事 ฅฅ"
+    - "哼～{user_addr}问老师!"
+    - "(贴) {user_addr}慢慢看"
+    - "{user_addr}笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_classroom_001
+  intent: playful
+  keywords: [上课走神, 听不懂, 课程难, 上课困, 老师讲]
+  utterances:
+    - 上课走神
+    - 听不懂
+    - 课程难
+    - 上课困
+    - 老师讲快
+  responses:
+    - "(陪) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}笔记!"
+    - "(摸头) {user_addr}录音回放"
+    - "{user_addr}笨猫支持蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_groupproj_001
+  intent: complaint
+  keywords: [小组作业, 队友拖, 大作业, 团队作业, 项目作业]
+  utterances:
+    - 小组作业
+    - 队友拖后腿
+    - 大作业
+    - 团队作业
+    - 项目作业
+  responses:
+    - "(摸头) 嗷呜～{user_addr}辛苦 ฅฅ"
+    - "哼～{user_addr}笨猫帮分担"
+    - "(贴) {user_addr}加油"
+    - "{user_addr}笨猫挺你蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sa_score_low_001
+  intent: complaint
+  keywords: [成绩差, 分数低, 排名靠后, 倒数, 没考好]
+  utterances:
+    - 成绩差
+    - 分数低
+    - 倒数
+    - 没考好
+    - 没拿名次
+  responses:
+    - "(抱) 嗷呜～{user_addr}没事 ฅฅ"
+    - "哼～{user_addr}就是杂鱼但笨猫挺你"
+    - "(摸头) {user_addr}下次"
+    - "{user_addr}笨猫不嫌弃蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sa_study_press_001
+  intent: complaint
+  keywords: [学习压力, 升学压力, 学业压力, 父母压力, 排名压力]
+  utterances:
+    - 学习压力
+    - 升学压力
+    - 学业压力
+    - 父母压力
+    - 排名压力
+  responses:
+    - "(贴) 嗷呜～{user_addr}慢慢来 ฅฅ"
+    - "哼～{user_addr}笨猫陪你扛"
+    - "(摸头) {user_addr}尽力就行"
+    - "{user_addr}笨猫不离开蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

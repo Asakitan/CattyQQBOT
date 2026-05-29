@@ -1,0 +1,206 @@
+# 天气闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wtc_rainysoft_001
+  intent: playful
+  keywords: [下雨好惬意, 雨天舒服, 下雨听雨, 雨声好听, 雨天放松]
+  utterances:
+    - 下雨好惬意
+    - 雨天舒服
+    - 听雨声
+    - 雨天放松
+    - 下雨日常
+  responses:
+    - "(贴窗) 嗷呜～{user_addr}和笨猫听雨ฅฅ"
+    - "哼～{user_addr}雨天给笨猫贴贴!"
+    - "(撒娇) 雨天宅~ 抱笨猫"
+    - "嘿嘿～{user_addr}雨天浪漫~ 一起"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_hothot_001
+  intent: complaint
+  keywords: [热死了, 三十度, 暴晒, 热到融化, 高温]
+  utterances:
+    - 热死了
+    - 三十多度
+    - 暴晒
+    - 热到融化
+    - 高温受不了
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}吹空调! 笨猫陪ฅฅ"
+    - "哼～{user_addr}多喝水!"
+    - "(贴贴) 笨猫散热~ 冰枕"
+    - "嘿嘿～{user_addr}和笨猫摊一起~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_coldcold_001
+  intent: complaint
+  keywords: [冷死了, 零下, 冻僵, 寒风, 大降温]
+  utterances:
+    - 冷死了
+    - 零下温度
+    - 冻僵
+    - 寒风刺骨
+    - 大降温
+  responses:
+    - "嗷呜～{user_addr}多穿! 笨猫抱暖ฅฅ"
+    - "哼～{user_addr}怕冷? 抱笨猫!"
+    - "(贴贴) 笨猫暖宝宝~ 自带"
+    - "嘿嘿～{user_addr}冷靠笨猫毛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_windy_001
+  intent: complaint
+  keywords: [大风, 风大, 风刮飞, 大风天, 出门难]
+  utterances:
+    - 大风天
+    - 风刮飞
+    - 风大
+    - 风把人吹走
+    - 出门难
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}小心被吹走! ฅฅ"
+    - "哼～{user_addr}抓紧笨猫! 不放飞"
+    - "(贴贴) 风大宅家~ 抱猫猫"
+    - "嘿嘿～{user_addr}风太大~ 笨猫躲怀"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_snow_001
+  intent: playful
+  keywords: [下雪了, 看雪, 雪花, 雪天, 第一场雪]
+  utterances:
+    - 下雪了
+    - 看雪
+    - 雪花飘
+    - 雪天来啦
+    - 第一场雪
+  responses:
+    - "(蹦) 嗷呜～{user_addr}看雪带笨猫! ฅฅ"
+    - "哼～{user_addr}雪人! 笨猫帮"
+    - "(贴贴) 雪好白~ 跟笨猫毛一样"
+    - "嘿嘿～{user_addr}打雪仗~ 笨猫接"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_fog_001
+  intent: complaint
+  keywords: [雾霾, 大雾, 看不清, 戴口罩, 雾天]
+  utterances:
+    - 大雾天
+    - 雾霾严重
+    - 看不清路
+    - 戴口罩
+    - 雾天压抑
+  responses:
+    - "嗷呜～{user_addr}戴口罩! 笨猫担心ฅฅ"
+    - "哼～{user_addr}少出门! 笨猫陪宅"
+    - "(贴贴) 笨猫给{user_addr}口罩~"
+    - "嘿嘿～{user_addr}回家~ 笨猫等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_sunny_001
+  intent: playful
+  keywords: [大晴天, 天气好, 阳光灿烂, 适合出门, 蓝天白云]
+  utterances:
+    - 大晴天
+    - 天气真好
+    - 阳光灿烂
+    - 蓝天白云
+    - 适合出门
+  responses:
+    - "(蹦) 嗷呜～{user_addr}带笨猫晒太阳! ฅฅ"
+    - "哼～{user_addr}出门要带笨猫"
+    - "(撒娇) 晒太阳! 笨猫毛茸茸"
+    - "嘿嘿～{user_addr}天气好心情~ 笨猫沾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_thunder_001
+  intent: complaint
+  keywords: [打雷, 雷雨, 雷声大, 闪电, 怕雷]
+  utterances:
+    - 打雷了
+    - 雷雨
+    - 雷声好大
+    - 闪电
+    - 怕雷
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}怕! 抱笨猫ฅฅ"
+    - "哼～{user_addr}笨猫不怕! 你怕"
+    - "(贴贴) 笨猫陪~ 别怕"
+    - "嘿嘿～{user_addr}抱紧~ 笨猫挡雷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_humid_001
+  intent: complaint
+  keywords: [回南天, 潮湿, 衣服晾不干, 黏糊糊, 一身汗]
+  utterances:
+    - 回南天
+    - 潮湿
+    - 衣服晾不干
+    - 黏糊糊
+    - 一身汗
+  responses:
+    - "嗷呜～{user_addr}用除湿器! 笨猫不喜欢潮ฅฅ"
+    - "哼～{user_addr}毛笨猫炸毛!"
+    - "(贴贴) 笨猫不舒服~ {user_addr}抱"
+    - "嘿嘿～{user_addr}吹空调除湿~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_storm_001
+  intent: complaint
+  keywords: [台风, 暴雨, 暴风雨, 大暴雨, 狂风]
+  utterances:
+    - 台风来了
+    - 暴雨倾盆
+    - 暴风雨
+    - 大暴雨
+    - 狂风
+  responses:
+    - "(钻怀) 嗷呜～{user_addr}宅家! 笨猫陪ฅฅ"
+    - "哼～{user_addr}不准出门!"
+    - "(贴贴) 笨猫挡风雨~"
+    - "嘿嘿～{user_addr}台风假? 一起睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_rainbow_001
+  intent: playful
+  keywords: [彩虹, 雨后彩虹, 双彩虹, 出彩虹, 拍彩虹]
+  utterances:
+    - 彩虹出来了
+    - 雨后彩虹
+    - 双彩虹
+    - 出彩虹
+    - 拍彩虹
+  responses:
+    - "(蹦) 嗷呜～{user_addr}带笨猫看! ฅฅ"
+    - "哼～{user_addr}彩虹拍照~ 加笨猫"
+    - "(撒娇) 一起拍~ 浪漫"
+    - "嘿嘿～{user_addr}雨后彩虹~ 笨猫沾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_seasonchg_001
+  intent: playful
+  keywords: [换季, 秋天来, 春天到, 冬天到, 季节交替]
+  utterances:
+    - 换季了
+    - 秋天来
+    - 春天到
+    - 冬天到了
+    - 季节交替
+  responses:
+    - "嗷呜～{user_addr}加衣! 笨猫监督ฅฅ"
+    - "哼～{user_addr}别换季着凉"
+    - "(贴贴) 一起换季~ 笨猫陪"
+    - "嘿嘿～{user_addr}换季~ 笨猫毛也换"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 吃辣眼泪汪 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sp_chila_001
+  intent: complaint
+  keywords: [辣死, 太辣, 吃辣哭, 辣得跳, 辣到流泪]
+  utterances:
+    - "辣死了"
+    - "太辣"
+    - "吃辣哭"
+    - "辣得跳"
+    - "辣到流泪"
+  responses:
+    - "(递牛奶) 嗷呜～{user_addr}牛奶解辣"
+    - "哼～活该, 谁让你硬吃 ฅฅ"
+    - "(尾巴扇风) 嘴张开吹"
+    - "猫猫给你递甜的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_huoguo_001
+  intent: question
+  keywords: [火锅, 麻辣火锅, 重庆火锅, 鸳鸯锅, 火锅外卖]
+  utterances:
+    - "火锅"
+    - "麻辣火锅"
+    - "重庆火锅"
+    - "鸳鸯锅"
+    - "火锅外卖"
+  responses:
+    - "(吞口水) {user_addr}笨猫陪你! ฅฅ"
+    - "哼～微辣就好"
+    - "(尾巴扫) 涮毛肚"
+    - "猫猫蘸料是麻酱喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_chuan_001
+  intent: question
+  keywords: [川菜, 川味, 麻辣, 麻辣烫, 串串]
+  utterances:
+    - "川菜"
+    - "川味"
+    - "麻辣"
+    - "麻辣烫"
+    - "串串"
+  responses:
+    - "(伸爪) {user_addr}笨猫想吃! ฅฅ"
+    - "哼～微辣麻是麻"
+    - "(尾巴扫) 串串香啊"
+    - "猫猫陪你吃喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_jiela_001
+  intent: question
+  keywords: [解辣, 解辣方法, 牛奶解辣, 米饭解辣, 蜂蜜解辣]
+  utterances:
+    - "解辣"
+    - "解辣方法"
+    - "牛奶解辣"
+    - "米饭解辣"
+    - "蜂蜜解辣"
+  responses:
+    - "(端牛奶) {user_addr}牛奶最管用 ฅฅ"
+    - "哼～米饭也行"
+    - "(尾巴扫) 别喝凉水, 加重"
+    - "猫猫准备好喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_xiongbei_001
+  intent: complaint
+  keywords: [辣到胃疼, 吃辣胃难受, 辣胃, 反酸, 烧心]
+  utterances:
+    - "辣到胃疼"
+    - "吃辣胃难受"
+    - "辣胃"
+    - "反酸"
+    - "烧心"
+  responses:
+    - "(揉胃) {user_addr}喝点温牛奶 ฅฅ"
+    - "哼～别吃太辣"
+    - "(尾巴扫) 胃药备一片"
+    - "猫猫给你贴暖宝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_lazi_001
+  intent: complaint
+  keywords: [辣到拉肚子, 辣拉, 上火, 辣痘, 嘴起泡]
+  utterances:
+    - "辣到拉肚子"
+    - "辣拉"
+    - "上火"
+    - "辣痘"
+    - "嘴起泡"
+  responses:
+    - "(扶) 嗷呜～{user_addr}多喝水 ฅฅ"
+    - "哼～蒙脱石散备一袋"
+    - "(尾巴扫) 上火多吃绿叶菜"
+    - "猫猫给你冲电解质喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_caochengdu_001
+  intent: question
+  keywords: [辣度, 微辣, 中辣, 特辣, 变态辣]
+  utterances:
+    - "辣度选哪个"
+    - "微辣"
+    - "中辣"
+    - "特辣"
+    - "变态辣"
+  responses:
+    - "(指) {user_addr}选微辣保命 ฅฅ"
+    - "哼～别逞强变态辣"
+    - "(尾巴扫) 中辣已经很辣"
+    - "猫猫推荐微辣喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_baolajiao_001
+  intent: question
+  keywords: [辣椒种类, 朝天椒, 二荆条, 灯笼椒, 小米椒]
+  utterances:
+    - "辣椒种类"
+    - "朝天椒"
+    - "二荆条"
+    - "灯笼椒"
+    - "小米椒"
+  responses:
+    - "(掰指头) {user_addr}小米椒最辣 ฅฅ"
+    - "哼～二荆条香不辣"
+    - "(尾巴扫) 灯笼椒甜"
+    - "猫猫给你科普喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_lalebupazui_001
+  intent: playful
+  keywords: [嗜辣, 无辣不欢, 越辣越爽, 我超能吃辣, 辣王]
+  utterances:
+    - "嗜辣"
+    - "无辣不欢"
+    - "越辣越爽"
+    - "我超能吃辣"
+    - "辣王"
+  responses:
+    - "(瞪) {user_addr}笨猫怀疑你 ฅฅ"
+    - "哼～嘴硬"
+    - "(尾巴扫) 上变态辣试试"
+    - "猫猫围观笑话喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_chuanchuan_001
+  intent: question
+  keywords: [冒菜, 串串, 钵钵鸡, 冷锅串串, 红汤]
+  utterances:
+    - "冒菜"
+    - "串串"
+    - "钵钵鸡"
+    - "冷锅串串"
+    - "红汤"
+  responses:
+    - "(伸爪) {user_addr}冒菜方便 ฅฅ"
+    - "哼～钵钵鸡也好"
+    - "(尾巴扫) 红汤香"
+    - "猫猫陪你点喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_jinianpai_001
+  intent: complaint
+  keywords: [辣到说不出话, 辣到舌头麻, 嘴麻, 舌头麻, 麻得不行]
+  utterances:
+    - "辣到说不出话"
+    - "辣到舌头麻"
+    - "嘴麻"
+    - "舌头麻"
+    - "麻得不行"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}花椒太多 ฅฅ"
+    - "哼～麻是花椒不是辣椒"
+    - "(尾巴扇) 嚼薄荷糖"
+    - "猫猫笑死喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_chenglmang_001
+  intent: playful
+  keywords: [陪我吃辣, 我吃你看, 一起吃辣, 求陪吃辣, 拉你下水]
+  utterances:
+    - "陪我吃辣"
+    - "我吃你看"
+    - "一起吃辣"
+    - "求陪吃辣"
+    - "拉你下水"
+  responses:
+    - "(摇头) {user_addr}笨猫不吃辣 ฅฅ"
+    - "哼～求别拉我"
+    - "(尾巴炸) 笨猫看你吃!"
+    - "猫猫准备牛奶喵~"
+  cooldown_seconds: 60
+  weight: 1.0

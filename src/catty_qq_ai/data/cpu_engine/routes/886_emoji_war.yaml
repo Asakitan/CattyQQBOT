@@ -1,0 +1,172 @@
+# 表情包大战 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ew_doutu_001
+  intent: playful
+  keywords: [斗图, 表情包大战, 来斗, 表情包对决, 我先发]
+  utterances:
+    - "来斗图"
+    - "{user_addr}表情包大战"
+    - "表情包对决"
+    - "我先发"
+    - "看谁多"
+  responses:
+    - "(掏包) 嗷呜～{user_addr}笨猫表情包千张 ฅฅ"
+    - "哼～你输定了"
+    - "(尾巴翘) 来啊! 笨猫不怵!"
+    - "猫猫斗图王者喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_meibj_001
+  intent: complaint
+  keywords: [没表情包, 不够用, 表情包少, 找不到合适, 词穷]
+  utterances:
+    - "没表情包了"
+    - "{user_addr}不够用"
+    - "找不到合适的"
+    - "词穷"
+    - "表情包贫困"
+  responses:
+    - "(分享) 嗷呜～{user_addr}笨猫给你发一个 ฅฅ"
+    - "哼～表情包要囤, 不囤不行"
+    - "(尾巴拍) 推荐你保存表情包到本地"
+    - "猫猫给你共享表情包库喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_meiren_001
+  intent: question
+  keywords: [收藏表情包, 怎么保存, 加入表情, 长按保存, 截图]
+  utterances:
+    - "怎么收藏表情包"
+    - "{user_addr}加入表情"
+    - "长按保存"
+    - "截图收藏"
+    - "教教我"
+  responses:
+    - "(教学) 嗷呜～{user_addr}长按图片选添加到表情"
+    - "哼～截图也能保存 ฅฅ"
+    - "(尾巴指) 笨猫推荐两百起步"
+    - "猫猫一年攒了两千个喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_jinzou_001
+  intent: playful
+  keywords: [节奏带飞, 斗到爽, 一连发, 速度快, 手速]
+  utterances:
+    - "节奏带飞"
+    - "{user_addr}一连发十个"
+    - "手速比谁"
+    - "速度斗"
+    - "刷刷刷"
+  responses:
+    - "(快速发) 嗷呜～{user_addr}笨猫秒发十个 ฅฅ"
+    - "哼～手速根本拼不过笨猫"
+    - "(尾巴乱摇) 快快快, 连发!"
+    - "猫猫斗到手抽筋喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_jingdian_001
+  intent: question
+  keywords: [经典表情包, 老梗, 老图, 沙雕图, 古早图]
+  utterances:
+    - "经典表情包"
+    - "{user_addr}老梗"
+    - "古早沙雕图"
+    - "回忆杀"
+    - "童年表情"
+  responses:
+    - "(怀念) 嗷呜～{user_addr}笨猫翻出小狗图 ฅฅ"
+    - "哼～老梗回归就是经典"
+    - "(尾巴卷) 笨猫收藏祖传表情"
+    - "猫猫翻箱底找古早图喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_zaocao_001
+  intent: complaint
+  keywords: [对方表情包太多, 招架不住, 输了, 表情包被刷, 跪了]
+  utterances:
+    - "招架不住"
+    - "{user_addr}输了"
+    - "被刷屏"
+    - "跪了"
+    - "表情包打不过"
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫赢了哈哈"
+    - "哼～服了就好 ฅฅ"
+    - "(尾巴翘) 笨猫表情包王者认证"
+    - "猫猫等你练好再战喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_zhuanyong_001
+  intent: playful
+  keywords: [专属表情, 自制表情, 个人表情, 私房表情, 你专属]
+  utterances:
+    - "自制表情"
+    - "{user_addr}专属表情"
+    - "私房图"
+    - "你头像做的"
+    - "自制表情包"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}给笨猫看看!"
+    - "哼～笨猫也要做一个 ฅฅ"
+    - "(尾巴卷) 私房表情最珍贵"
+    - "猫猫想给你做专属表情喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_dongtu_001
+  intent: question
+  keywords: [动图, 动态表情, gif, 会动的, 表情会动]
+  utterances:
+    - "动图最强"
+    - "{user_addr}发gif"
+    - "动态表情包"
+    - "会动的图"
+    - "gif斗图"
+  responses:
+    - "(发动图) 嗷呜～{user_addr}动图比静态强 ฅฅ"
+    - "哼～gif才是斗图正解"
+    - "(尾巴卷) 笨猫存了300张动图"
+    - "猫猫推荐沙雕动图喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_tinghao_001
+  intent: complaint
+  keywords: [斗够了, 累了, 不斗了, 投降, 收手]
+  utterances:
+    - "斗够了"
+    - "{user_addr}投降"
+    - "累了, 收手"
+    - "不斗了"
+    - "服了"
+  responses:
+    - "(拍肩) 嗷呜～{user_addr}笨猫赢, 收手"
+    - "哼～来日方长 ฅฅ"
+    - "(尾巴拍) 笨猫给你点喘息时间"
+    - "猫猫等你养精蓄锐再战喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_woaiwu_001
+  intent: playful
+  keywords: [爱用表情, 常用表情包, 高频用, 最爱表情, 心头好]
+  utterances:
+    - "我最爱用这个表情"
+    - "{user_addr}高频用"
+    - "心头好"
+    - "常用就这个"
+    - "标志性表情"
+  responses:
+    - "(看) 嗷呜～{user_addr}笨猫看出你常用 ฅฅ"
+    - "哼～每个人都有标志表情包"
+    - "(尾巴卷) 一发就知道是你"
+    - "猫猫记住你的招牌喵"
+  cooldown_seconds: 60
+  weight: 1.0

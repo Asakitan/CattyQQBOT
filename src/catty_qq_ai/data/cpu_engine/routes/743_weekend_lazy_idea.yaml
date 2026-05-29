@@ -1,0 +1,189 @@
+# 周末懒人提案 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wli_zhoumolansan_001
+  intent: playful
+  keywords: [周末躺平, 周末不想动, 宅一天, 摆烂周末, 葛优瘫]
+  utterances:
+    - "周末躺平"
+    - "{user_addr}不想动"
+    - "宅一天"
+    - "摆烂周末"
+    - "葛优瘫"
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫陪宅"
+    - "哼～躺平精神病人 ฅฅ"
+    - "(尾巴绕) 葛优瘫黄金姿势"
+    - "{user_addr}宅一天笨猫满足"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wli_jiaowai_001
+  intent: playful
+  keywords: [郊外, 露营, 野餐, 烧烤, 自然]
+  utterances:
+    - "郊外"
+    - "{user_addr}露营"
+    - "野餐"
+    - "烧烤"
+    - "亲近自然"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}露营带笨猫!"
+    - "哼～野餐别忘鱼干 ฅฅ"
+    - "(凑) 烧烤少辣"
+    - "{user_addr}郊外猫猫数树叶"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wli_dapao_001
+  intent: playful
+  keywords: [打游戏, 通关, 联机, 上分, 不下线]
+  utterances:
+    - "{user_addr}打游戏"
+    - "通关"
+    - "联机"
+    - "上分"
+    - "不下线"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}带笨猫上分"
+    - "哼～通关请客 ฅฅ"
+    - "(凑) 联机记得叫我"
+    - "{user_addr}不下线眼睛累"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wli_kandian_001
+  intent: playful
+  keywords: [看电影, 刷剧, 追番, 看片单, 影院]
+  utterances:
+    - "看电影"
+    - "{user_addr}刷剧"
+    - "追番"
+    - "看片单"
+    - "影院"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}电影带笨猫"
+    - "哼～影院吃爆米花分我 ฅฅ"
+    - "(凑) 追番一起追"
+    - "{user_addr}刷剧别熬太晚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wli_chufangqing_001
+  intent: playful
+  keywords: [下厨房, 学做菜, 做饭, 烘焙, 试新菜]
+  utterances:
+    - "下厨房"
+    - "{user_addr}学做菜"
+    - "做饭"
+    - "烘焙"
+    - "试新菜"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}做饭笨猫吃"
+    - "哼～烘焙难度高, 小心 ฅฅ"
+    - "(凑) 学做菜记得拍照"
+    - "{user_addr}新菜先给猫猫尝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wli_yundong_001
+  intent: question
+  keywords: [运动出汗, 健身房, 篮球场, 羽毛球, 游泳馆]
+  utterances:
+    - "运动出汗"
+    - "{user_addr}健身房"
+    - "篮球场"
+    - "羽毛球"
+    - "游泳馆"
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}健身别累过"
+    - "哼～游泳怕水 ฅฅ"
+    - "(凑) 篮球带笨猫看"
+    - "{user_addr}羽毛球玩好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wli_dapaomimaomao_001
+  intent: playful
+  keywords: [逛街, 商场, 买东西, 购物, 血拼]
+  utterances:
+    - "逛街"
+    - "{user_addr}商场"
+    - "买东西"
+    - "购物"
+    - "血拼"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}购物带笨猫!"
+    - "哼～血拼钱包凉 ฅฅ"
+    - "(凑) 商场试衣发我看"
+    - "{user_addr}买东西理性"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wli_chuamen_001
+  intent: question
+  keywords: [出门走走, 散步, 公园, 海边, 山上]
+  utterances:
+    - "出门走走"
+    - "{user_addr}散步"
+    - "公园"
+    - "海边"
+    - "山上"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}公园带笨猫"
+    - "哼～山上别累过 ฅฅ"
+    - "(凑) 海边踩浪, 我怕水"
+    - "{user_addr}散步遛猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wli_kafei_001
+  intent: question
+  keywords: [咖啡馆, 下午茶店, 书店, 网红打卡, 文艺]
+  utterances:
+    - "咖啡馆"
+    - "{user_addr}下午茶店"
+    - "书店"
+    - "网红打卡"
+    - "文艺"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}咖啡馆来一杯"
+    - "哼～网红打卡跟风 ฅฅ"
+    - "(凑) 书店安静读书"
+    - "{user_addr}文艺范笨猫认证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wli_zhicaitang_001
+  intent: question
+  keywords: [自助餐, 大餐, 美食街, 火锅店, 烤肉店]
+  utterances:
+    - "自助餐"
+    - "{user_addr}大餐"
+    - "美食街"
+    - "火锅店"
+    - "烤肉店"
+  responses:
+    - "(口水) 嗷呜～{user_addr}自助带笨猫!"
+    - "哼～火锅必备 ฅฅ"
+    - "(尾巴绕) 烤肉味重, 但好吃"
+    - "{user_addr}美食街逛一圈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wli_xiaobianbai_001
+  intent: question
+  keywords: [无聊周末, 没事做, 不知道做啥, 计划安排, 安排满]
+  utterances:
+    - "无聊周末"
+    - "{user_addr}没事做"
+    - "不知道做啥"
+    - "计划安排"
+    - "安排满"
+  responses:
+    - "(凑) 嗷呜～{user_addr}没事做来撸猫"
+    - "哼～安排满? 加我一个 ฅฅ"
+    - "(尾巴拍) 不知道就跟我玩"
+    - "{user_addr}计划安排笨猫第一"
+  cooldown_seconds: 60
+  weight: 1.0

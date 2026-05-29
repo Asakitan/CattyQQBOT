@@ -1,0 +1,172 @@
+# 做梦分享 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ds_zuomeng_001
+  intent: playful
+  keywords: [做梦, 梦到, 做了个梦, 昨晚做梦, 梦里]
+  utterances:
+    - 我做梦了
+    - 昨晚梦到
+    - 做了个梦
+    - 昨晚做梦
+    - 梦里好神奇
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}说说梦! 笨猫听ฅฅ"
+    - "哼～{user_addr}梦到笨猫了吗~ 是吧"
+    - "(尾巴翘) {user_addr}梦解析~ 笨猫帮你"
+    - "嘿嘿～{user_addr}讲讲~ 笨猫好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_zuomeng_002
+  intent: playful
+  keywords: [梦到你, 梦到笨猫, 梦到主人, 梦中有, 梦里见到]
+  utterances:
+    - 梦到{user_addr}
+    - 梦到笨猫
+    - 梦到主人
+    - 梦中有你
+    - 梦里见到{user_addr}
+  responses:
+    - "(脸红) 嗷呜～{user_addr}梦笨猫! 害羞ฅฅ"
+    - "哼～{user_addr}日有所思~ 才不是想哒"
+    - "(尾巴翘) {user_addr}笨猫梦到{user_addr}!"
+    - "嘿嘿～{user_addr}梦里笨猫漂亮吗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_zuomeng_003
+  intent: complaint
+  keywords: [噩梦, 做噩梦, 吓死, 梦里被追, 梦里害怕]
+  utterances:
+    - 做噩梦
+    - 吓死了
+    - 梦里被追
+    - 噩梦中
+    - 梦里害怕
+  responses:
+    - "(抱住) 嗷呜～{user_addr}笨猫陪你! 别怕"
+    - "哼～{user_addr}梦~ 笨猫赶走"
+    - "(尾巴扫) {user_addr}抱抱~ 不是真的ฅฅ"
+    - "嘿嘿～{user_addr}笨猫守~ 噩梦走开"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_zuomeng_004
+  intent: playful
+  keywords: [好梦, 美梦, 梦境美, 梦里开心, 梦到好事]
+  utterances:
+    - 做好梦
+    - 美梦
+    - 梦境美
+    - 梦里好开心
+    - 梦到好事
+  responses:
+    - "(笑) 嗷呜～{user_addr}梦笨猫~ 才不是哒ฅฅ"
+    - "哼～{user_addr}好梦快说~ 笨猫听"
+    - "(尾巴扫) {user_addr}梦境~ 现实加倍"
+    - "嘿嘿～{user_addr}笨猫陪你做好梦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ds_zuomeng_005
+  intent: playful
+  keywords: [梦境奇怪, 梦荒诞, 梦不真实, 梦怪诞, 梦逻辑混乱]
+  utterances:
+    - 梦境奇怪
+    - 梦好荒诞
+    - 梦不真实
+    - 梦怪诞
+    - 梦逻辑混乱
+  responses:
+    - "(歪头) 嗷呜～{user_addr}说来~ 笨猫笑"
+    - "哼～{user_addr}梦稀奇~ 笨猫好奇ฅฅ"
+    - "(尾巴扫) {user_addr}梦境无逻辑~ 不奇怪"
+    - "嘿嘿～{user_addr}讲笨猫听~ 梦想故事"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ds_zuomeng_006
+  intent: playful
+  keywords: [清醒梦, 控制梦, 梦中知道, 觉醒梦, 半梦半醒]
+  utterances:
+    - 清醒梦
+    - 控制梦
+    - 梦中知道
+    - 觉醒梦
+    - 半梦半醒
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}厉害!"
+    - "哼～{user_addr}梦中控制~ 笨猫拜服ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫也想~ 教教"
+    - "嘿嘿～{user_addr}梦里召唤笨猫!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ds_zuomeng_007
+  intent: question
+  keywords: [梦预兆, 梦解析, 梦境含义, 梦周公解, 梦反应啥]
+  utterances:
+    - 梦预兆
+    - 梦解析
+    - 梦境含义
+    - 周公解梦
+    - 梦反应啥
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫不会! 查百度"
+    - "哼～{user_addr}信玄学~ 才不是说你呢"
+    - "(尾巴扫) {user_addr}笨猫看 = 梦就是梦ฅฅ"
+    - "嘿嘿～{user_addr}笨猫梦就是想~ 简单"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: ds_zuomeng_008
+  intent: playful
+  keywords: [梦同一个, 反复做梦, 同梦反复, 同样梦, 梦循环]
+  utterances:
+    - 梦同一个
+    - 反复做梦
+    - 同梦反复
+    - 同样梦
+    - 梦循环
+  responses:
+    - "(歪头) 嗷呜～{user_addr}怎么了~ 笨猫想知道"
+    - "哼～{user_addr}潜意识~ 才不懂呢"
+    - "(尾巴扫) {user_addr}说来听~ 笨猫陪分析ฅฅ"
+    - "嘿嘿～{user_addr}笨猫陪你做新梦"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ds_zuomeng_009
+  intent: playful
+  keywords: [醒来记不住, 梦醒就忘, 梦境模糊, 醒了空白, 梦消失]
+  utterances:
+    - 醒来记不住
+    - 梦醒就忘
+    - 梦境模糊
+    - 醒了空白
+    - 梦消失了
+  responses:
+    - "(挥爪) 嗷呜～{user_addr}梦没记~ 想不起ฅฅ"
+    - "哼～{user_addr}梦稍纵即逝! 笨猫也忘"
+    - "(尾巴扫) {user_addr}笨猫不记梦~ 才不是哒"
+    - "嘿嘿～{user_addr}笨猫接梦碎片!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: ds_zuomeng_010
+  intent: playful
+  keywords: [梦境继续, 想接着做, 梦下一段, 梦接着, 梦剧情]
+  utterances:
+    - 梦境继续
+    - 想接着做梦
+    - 梦下一段
+    - 梦接着
+    - 梦剧情
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪你做!"
+    - "哼～{user_addr}贪梦~ 才不是说你呢ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫继续陪你梦"
+    - "嘿嘿～{user_addr}梦续上~ 笨猫导演"
+  cooldown_seconds: 60
+  weight: 0.9

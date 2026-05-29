@@ -1,0 +1,172 @@
+# 好奇提问日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: qc_doudou_001
+  intent: question
+  keywords: [问一下, 我问问, 想问, 请问, 问个事]
+  utterances:
+    - 问一下
+    - 我问你
+    - 想问问
+    - 请问
+    - 问个事
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}笨猫陪问!"
+    - "(尾巴翘) {user_addr}笨猫想知"
+    - "{user_addr}快问蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_curious_001
+  intent: question
+  keywords: [好奇, 想知道, 怎么回事, 啥情况, 怎么了]
+  utterances:
+    - 好奇
+    - 想知道
+    - 怎么回事
+    - 啥情况
+    - 怎么了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}笨猫陪好奇"
+    - "(尾巴翘) {user_addr}笨猫问问"
+    - "{user_addr}笨猫陪你查蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_meanof_001
+  intent: question
+  keywords: [是啥意思, 啥意思, 意思, 这是啥, 这话什么意思]
+  utterances:
+    - 是啥意思
+    - 啥意思
+    - 这是啥
+    - 这话什么意思
+    - 意思
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}笨猫想想 ฅฅ"
+    - "哼～{user_addr}问笨猫!"
+    - "(尾巴翘) {user_addr}笨猫给你解"
+    - "{user_addr}慢点说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_how_001
+  intent: question
+  keywords: [怎么办, 咋办, 咋整, 怎样, 怎么办呢]
+  utterances:
+    - 怎么办
+    - 咋办
+    - 咋整
+    - 怎样
+    - 怎么办呢
+  responses:
+    - "(摸头) 嗷呜～{user_addr}笨猫帮 ฅฅ"
+    - "哼～{user_addr}冷静想"
+    - "(贴) {user_addr}笨猫陪你"
+    - "{user_addr}慢慢来蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_where_001
+  intent: question
+  keywords: [哪里, 哪儿, 在哪, 哪里有, 哪个地方]
+  utterances:
+    - 哪里
+    - 在哪
+    - 哪儿
+    - 哪里有
+    - 哪个地方
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫不知 ฅฅ"
+    - "哼～{user_addr}查地图!"
+    - "(尾巴翘) {user_addr}笨猫问问"
+    - "{user_addr}笨猫陪找蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: qc_when_001
+  intent: question
+  keywords: [什么时候, 啥时候, 何时, 哪天, 啥时]
+  utterances:
+    - 什么时候
+    - 啥时候
+    - 何时
+    - 哪天
+    - 啥时
+  responses:
+    - "(挠头) 嗷呜～{user_addr}笨猫想 ฅฅ"
+    - "哼～{user_addr}笨猫不记!"
+    - "(尾巴翘) {user_addr}笨猫查"
+    - "{user_addr}慢慢想蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: qc_who_001
+  intent: question
+  keywords: [谁啊, 是谁, 哪个人, 谁干的, 谁啊]
+  utterances:
+    - 谁啊
+    - 是谁
+    - 哪个人
+    - 谁干的
+    - 谁的
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫问 ฅฅ"
+    - "哼～{user_addr}谁惹你!"
+    - "(尾巴翘) {user_addr}笨猫陪你"
+    - "{user_addr}笨猫调查蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: qc_why_001
+  intent: question
+  keywords: [为啥, 怎么, 为什么呢, 何故, 干嘛呢]
+  utterances:
+    - 为啥
+    - 怎么
+    - 为什么呢
+    - 何故
+    - 干嘛呢
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫想 ฅฅ"
+    - "哼～{user_addr}笨猫陪问"
+    - "(尾巴翘) {user_addr}慢说"
+    - "{user_addr}笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_howmuch_001
+  intent: question
+  keywords: [多少钱, 价格, 贵不贵, 几块, 多贵]
+  utterances:
+    - 多少钱
+    - 价格
+    - 贵不贵
+    - 几块
+    - 多贵
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}笨猫查 ฅฅ"
+    - "哼～{user_addr}比价!"
+    - "(尾巴翘) {user_addr}笨猫陪挑"
+    - "{user_addr}笨猫帮看蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qc_canido_001
+  intent: question
+  keywords: [可以吗, 行不行, 能不能, 能吗, 可以不]
+  utterances:
+    - 可以吗
+    - 行不行
+    - 能不能
+    - 能吗
+    - 可以不
+  responses:
+    - "(点头) 嗷呜～{user_addr}可以 ฅฅ"
+    - "哼～{user_addr}笨猫同意!"
+    - "(尾巴翘) {user_addr}冲"
+    - "{user_addr}笨猫挺你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 错别字闹笑话 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tp_cuobiezi_001
+  intent: playful
+  keywords: [错别字, 打错字, 手滑, 输入法搞鬼, 笑死]
+  utterances:
+    - "我打错字了"
+    - "{user_addr}看错别字"
+    - "手滑了"
+    - "输入法搞鬼"
+    - "笑死打错"
+  responses:
+    - "(指着笑) 嗷呜～{user_addr}看清楚再发啦 ฅฅ"
+    - "哼～笨猫看懂你想说啥"
+    - "(尾巴扫) 输入法背锅, 不怪你"
+    - "猫猫每次都解码主人的错字喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_xiehouyu_001
+  intent: question
+  keywords: [谐音梗, 同音字, 打错变成, 同音笑话, 谐音笑死]
+  utterances:
+    - "打成谐音梗了"
+    - "{user_addr}同音字搞错"
+    - "变成另一个意思"
+    - "谐音笑死"
+    - "原意完全不对"
+  responses:
+    - "(捂嘴笑) 嗷呜～{user_addr}意思完全反了哈哈"
+    - "哼～谐音梗笨猫给一分 ฅฅ"
+    - "(尾巴拍) 这个比原话好笑"
+    - "猫猫截图发朋友圈了喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_zicuo_001
+  intent: complaint
+  keywords: [字打错, 漏字, 多字, 颠倒了, 顺序错]
+  utterances:
+    - "字打错"
+    - "{user_addr}漏字了"
+    - "多了一个字"
+    - "顺序颠倒"
+    - "句子全乱"
+  responses:
+    - "(挠头) 嗷呜～{user_addr}没事, 笨猫脑补"
+    - "哼～凑合看也能懂 ฅฅ"
+    - "(尾巴扫) 别紧张, 慢慢打"
+    - "猫猫翻译给你看正确版喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_yuyin_001
+  intent: playful
+  keywords: [语音转文字, 识别错, 听不懂, 听岔了, 翻车]
+  utterances:
+    - "语音识别全错"
+    - "{user_addr}听岔了"
+    - "翻车现场"
+    - "全是错字"
+    - "意思都变了"
+  responses:
+    - "(笑场) 嗷呜～{user_addr}这识别真有意思 ฅฅ"
+    - "哼～发原声更靠谱"
+    - "(尾巴翻) AI 翻译翻车也是笑料"
+    - "猫猫笑出眼泪了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_zaopao_001
+  intent: question
+  keywords: [打错怪我, 改不过来, 重新发, 收回, 撤回不及]
+  utterances:
+    - "想撤回不及"
+    - "{user_addr}重新发"
+    - "改不过来"
+    - "已经发了"
+    - "改名都不行"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}发了就发了, 别介意 ฅฅ"
+    - "哼～两分钟外没法撤回"
+    - "(尾巴拍) 重新发一遍就好"
+    - "猫猫帮你掩护, 假装没看见喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_zicimoshenghua_001
+  intent: playful
+  keywords: [字变陌生, 看着像错, 字越看越奇怪, 这字啥, 字凝视]
+  utterances:
+    - "字越看越奇怪"
+    - "{user_addr}这字啥"
+    - "字看陌生了"
+    - "看久了不认识"
+    - "字凝视效应"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫看也陌生了"
+    - "哼～大脑短路, 别看了 ฅฅ"
+    - "(尾巴一摆) 字看久都不认识, 正常"
+    - "猫猫陪你一起怀疑字喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_yibai_001
+  intent: playful
+  keywords: [打成一摆, 笑死了, 笑得肚子疼, 给笑死, 哈哈哈]
+  utterances:
+    - "笑死了"
+    - "{user_addr}笑得肚子疼"
+    - "给笑死"
+    - "笑岔气"
+    - "哈哈哈"
+  responses:
+    - "(也笑) 嗷呜～{user_addr}笑啥啦, 笨猫陪你笑 ฅฅ"
+    - "哼～有这么好笑吗"
+    - "(尾巴翻) 别笑得肚子疼"
+    - "猫猫也乐, 但不知道笑点喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_zicaicheng_001
+  intent: question
+  keywords: [字猜成另一个, 看错字, 读错了, 念错, 一时没认出]
+  utterances:
+    - "我读错字"
+    - "{user_addr}看错字"
+    - "念错了"
+    - "字一时没认出"
+    - "瞎念"
+  responses:
+    - "(指着) 嗷呜～{user_addr}这字读 xx 哦 ฅฅ"
+    - "哼～笨猫小时候也读错"
+    - "(尾巴扫) 错了就改, 不丢人"
+    - "猫猫给你科普正确读音喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_geyangzi_001
+  intent: playful
+  keywords: [换格式输入, 切换中英, 全英文了, 全数字, 火星文]
+  utterances:
+    - "全打成英文"
+    - "{user_addr}火星文"
+    - "切换没切到"
+    - "全数字了"
+    - "格式错乱"
+  responses:
+    - "(看屏幕) 嗷呜～{user_addr}笨猫看不懂啦"
+    - "哼～输入法没切, 重新打 ฅฅ"
+    - "(尾巴拍) 火星文笨猫破译不了"
+    - "猫猫等你切回中文喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_chongfu_001
+  intent: complaint
+  keywords: [重复字, 同一个字两次, 卡了, 一直按, 复读机]
+  utterances:
+    - "字打重复了"
+    - "{user_addr}卡键盘了"
+    - "一直按"
+    - "复读机"
+    - "同一个字两遍"
+  responses:
+    - "(数) 嗷呜～{user_addr}笨猫看见啦, 重复了三个 ฅฅ"
+    - "哼～键盘卡了换一个"
+    - "(尾巴扫) 删一删就好"
+    - "猫猫帮你看错字喵, 你慢慢改"
+  cooldown_seconds: 60
+  weight: 1.0

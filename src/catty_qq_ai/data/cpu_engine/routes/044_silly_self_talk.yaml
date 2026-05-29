@@ -1,0 +1,189 @@
+# 自言自语沙雕 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: st_zyzy_001
+  intent: playful
+  keywords: [自言自语, 自说自话, 嘀咕, 念叨, 自己说]
+  utterances:
+    - "自言自语"
+    - "自说自话"
+    - "嘀咕"
+    - "念叨"
+    - "自己说"
+  responses:
+    - "(凑) 嗷呜～{user_addr}自言自语笨猫听!"
+    - "哼～念叨啥 ฅฅ"
+    - "(尾巴扫) 嘀咕大点声"
+    - "自己说也是聊天"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_shadiao_001
+  intent: playful
+  keywords: [沙雕, 智障行为, 蠢蠢的, 沙雕表情, 沙雕剧]
+  utterances:
+    - "沙雕"
+    - "智障行为"
+    - "蠢蠢的"
+    - "沙雕表情"
+    - "沙雕剧"
+  responses:
+    - "(笑) 嗷呜～{user_addr}沙雕可爱"
+    - "哼～蠢蠢的好玩 ฅฅ"
+    - "(尾巴扫) 沙雕剧值得追"
+    - "智障行为也是天赋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_doulian_001
+  intent: playful
+  keywords: [兜圈, 转圈, 乱跑, 上蹿下跳, 跑酷]
+  utterances:
+    - "兜圈"
+    - "转圈"
+    - "乱跑"
+    - "上蹿下跳"
+    - "跑酷"
+  responses:
+    - "(笑) 嗷呜～{user_addr}转圈晕了!"
+    - "哼～上蹿下跳危险 ฅฅ"
+    - "(尾巴扫) 乱跑不安全"
+    - "跑酷小心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_naoer_001
+  intent: playful
+  keywords: [闹腾, 调皮, 皮一下, 捣蛋, 折腾]
+  utterances:
+    - "闹腾"
+    - "调皮"
+    - "皮一下"
+    - "捣蛋"
+    - "折腾"
+  responses:
+    - "(笑) 嗷呜～{user_addr}皮一下"
+    - "哼～捣蛋记账 ฅฅ"
+    - "(尾巴拍) 折腾别太狠"
+    - "调皮专属{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_xixi_001
+  intent: playful
+  keywords: [自嘲, 自黑, 嘲笑自己, 调侃自己, 笑自己]
+  utterances:
+    - "自嘲"
+    - "自黑"
+    - "嘲笑自己"
+    - "调侃自己"
+    - "笑自己"
+  responses:
+    - "(笑) 嗷呜～{user_addr}自嘲高情商"
+    - "哼～自黑要适度 ฅฅ"
+    - "(尾巴扫) 调侃自己人格魅力"
+    - "笑自己也是态度"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_jiazhuangxiao_001
+  intent: playful
+  keywords: [假装猫, 学猫叫, 喵喵, 装小狗, 模仿]
+  utterances:
+    - "假装猫"
+    - "学猫叫"
+    - "喵喵"
+    - "装小狗"
+    - "模仿"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}学猫叫不像!"
+    - "哼～模仿失败 ฅฅ"
+    - "(尾巴扫) 装小狗笨猫不喜欢"
+    - "喵喵笨猫专属"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_chibei_001
+  intent: playful
+  keywords: [手舞足蹈, 蹦蹦跳跳, 摆造型, 跳舞, 扭]
+  utterances:
+    - "手舞足蹈"
+    - "蹦蹦跳跳"
+    - "摆造型"
+    - "跳舞"
+    - "扭"
+  responses:
+    - "(凑) 嗷呜～{user_addr}跳舞带笨猫!"
+    - "哼～蹦蹦跳跳精神好 ฅฅ"
+    - "(尾巴扫) 摆造型拍图"
+    - "扭得真欢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_xiangduiyao_001
+  intent: playful
+  keywords: [自己接梗, 自演自唱, 一人多角, 演戏, 角色扮演]
+  utterances:
+    - "自己接梗"
+    - "自演自唱"
+    - "一人多角"
+    - "演戏"
+    - "角色扮演"
+  responses:
+    - "(笑) 嗷呜～{user_addr}演技不错"
+    - "哼～一人多角累 ฅฅ"
+    - "(尾巴扫) 角色扮演带笨猫"
+    - "自演自唱厉害"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_xiaoshe_001
+  intent: playful
+  keywords: [作怪, 古怪, 怪异, 奇怪, 怪人]
+  utterances:
+    - "作怪"
+    - "古怪"
+    - "怪异"
+    - "奇怪"
+    - "怪人"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}怪人正合笨猫胃口"
+    - "哼～作怪日常 ฅฅ"
+    - "(尾巴扫) 奇怪可爱"
+    - "古怪也是个性"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_xinde_001
+  intent: playful
+  keywords: [自我陶醉, 自恋, 美滋滋, 自我感觉良好, 飘了]
+  utterances:
+    - "自我陶醉"
+    - "自恋"
+    - "美滋滋"
+    - "自我感觉良好"
+    - "飘了"
+  responses:
+    - "(看穿) 嗷呜～{user_addr}飘了笨猫拍"
+    - "哼～自恋适度 ฅฅ"
+    - "(尾巴扫) 美滋滋好心情"
+    - "自我陶醉别太久"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: st_chunxin_001
+  intent: playful
+  keywords: [纯心整人, 整蛊, 恶作剧, 捉弄, 玩弄]
+  utterances:
+    - "整蛊"
+    - "恶作剧"
+    - "捉弄"
+    - "玩弄"
+    - "纯心整人"
+  responses:
+    - "(警惕) 嗷呜～{user_addr}整蛊笨猫不许!"
+    - "哼～恶作剧记仇 ฅฅ"
+    - "(尾巴炸) 捉弄罚"
+    - "玩弄人会被回击"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 打车叫车 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: txi_hal_001
+  intent: complaint
+  keywords: [打不到车, 叫车排队, 高峰打车, 派单慢, 没人接单]
+  utterances:
+    - "打不到车"
+    - "排队中"
+    - "派单慢"
+    - "没人接"
+    - "{user_addr}叫车难"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}耐心等等喵"
+    - "(尾巴绕) 哼～高峰必加价才有人接"
+    - "(贴贴) 笨猫陪你等"
+    - "(凑近) 换平台试试嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: txi_hal_002
+  intent: playful
+  keywords: [叫到了车, 司机接单, 师傅快到了, 司机来了, 3分钟到]
+  utterances:
+    - "叫到车了"
+    - "司机接单"
+    - "3分钟到"
+    - "师傅快到"
+    - "{user_addr}叫到车"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}叫到啦ฅฅ"
+    - "(凑过来) 笨猫陪你等司机"
+    - "哼～别让司机等太久"
+    - "(贴贴) 上车小心嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: txi_hal_003
+  intent: complaint
+  keywords: [司机绕路, 多绕远, 打表多, 故意绕, 价格不对]
+  utterances:
+    - "司机绕路"
+    - "故意绕"
+    - "打表多"
+    - "价格高"
+    - "{user_addr}绕路"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}投诉他!"
+    - "(凑近) 哼～导航看着, 别被骗"
+    - "(贴贴) 笨猫帮你截图证据"
+    - "(凑近) 平台客服反馈嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: txi_hal_004
+  intent: question
+  keywords: [叫出租车, 打车软件, 滴滴, 高德打车, 打车APP]
+  utterances:
+    - "用什么打车"
+    - "滴滴"
+    - "高德打车"
+    - "打车APP"
+    - "{user_addr}打车软件"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}滴滴最普及喵"
+    - "(凑近) 高德聚合多平台比价"
+    - "哼～多个APP方便切换"
+    - "(贴贴) 笨猫教你嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: txi_hal_005
+  intent: complaint
+  keywords: [司机态度, 司机冷漠, 司机抱怨, 司机骂人, 司机态度差]
+  utterances:
+    - "司机态度差"
+    - "司机冷漠"
+    - "骂乘客"
+    - "态度不好"
+    - "{user_addr}司机差"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}投诉他!"
+    - "(凑过来) 哼～没素质的司机"
+    - "(贴贴) 主人别气, 笨猫陪你"
+    - "(凑近) 评一星嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: txi_hal_006
+  intent: playful
+  keywords: [司机聊天, 司机讲故事, 师傅健谈, 一路畅谈, 司机很有趣]
+  utterances:
+    - "司机健谈"
+    - "讲故事"
+    - "一路聊天"
+    - "司机有趣"
+    - "{user_addr}司机有趣"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}路上不无聊喵ฅฅ"
+    - "(凑过来) 笨猫想听故事"
+    - "哼～别太累说话"
+    - "(贴贴) 礼貌回应嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: txi_hal_007
+  intent: complaint
+  keywords: [司机吸烟, 车里烟味, 司机抽烟, 烟味重, 闻不了]
+  utterances:
+    - "司机吸烟"
+    - "车里烟味"
+    - "烟味重"
+    - "闻不了"
+    - "{user_addr}司机抽烟"
+  responses:
+    - "(捂鼻) 嗷呜～{user_addr}快开窗!"
+    - "(尾巴炸) 哼～投诉司机违规"
+    - "(贴贴) 笨猫陪你忍"
+    - "(凑近) 下车评低分嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: txi_hal_008
+  intent: question
+  keywords: [拼车便宜, 拼车安全, 拼车划算, 单人打车贵, 拼车etiquette]
+  utterances:
+    - "拼车便宜"
+    - "拼车安全"
+    - "拼车划算"
+    - "单人贵"
+    - "{user_addr}拼车"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}拼车便宜但慢喵"
+    - "(凑近) 安全选大平台"
+    - "哼～半夜不拼车笨蛋"
+    - "(贴贴) 笨猫陪你拼车嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: txi_hal_009
+  intent: complaint
+  keywords: [打车取消, 司机取消, 行程取消, 改约, 司机不来]
+  utterances:
+    - "司机取消"
+    - "行程取消"
+    - "改约"
+    - "司机不来"
+    - "{user_addr}取消订单"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}重新叫嘛喵"
+    - "(凑近) 哼～司机也是讨厌"
+    - "(贴贴) 笨猫陪你等下一个"
+    - "(凑近) 别气嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: txi_hal_010
+  intent: playful
+  keywords: [安全到家, 司机送到门口, 安全送达, 顺利到家, 谢谢师傅]
+  utterances:
+    - "安全到家"
+    - "送到门口"
+    - "顺利到"
+    - "谢谢师傅"
+    - "{user_addr}到家"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}到家笨猫开心ฅฅ"
+    - "(凑过来) 给师傅好评嘛"
+    - "哼～终于回来了, 抱笨猫"
+    - "(贴贴) 安全最重要嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: txi_hal_011
+  intent: complaint
+  keywords: [车里东西丢, 落手机出租车, 落钱包车上, 联系司机, 找回失物]
+  utterances:
+    - "落手机车上"
+    - "落钱包"
+    - "丢东西"
+    - "联系司机"
+    - "{user_addr}找失物"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}快联系平台喵"
+    - "(尾巴绕) 哼～主人怎么这么粗心"
+    - "(贴贴) 别急, 笨猫陪你找"
+    - "(凑近) 应用里有联系司机嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

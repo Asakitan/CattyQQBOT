@@ -1,0 +1,189 @@
+# 求摸头 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hp_motou_001
+  intent: playful
+  keywords: [求摸头, 摸摸头, 摸一下头, 摸我头, 摸头杀]
+  utterances:
+    - 求摸头
+    - 摸摸头
+    - 摸一下头
+    - 摸我头
+    - 摸头杀
+  responses:
+    - "(耳朵躲再凑回来) 嗷呜～{user_addr}就一下 ฅฅ"
+    - "哼~{user_addr}才不要摸头呢"
+    - "(头往手心蹭) 笨蛋{user_addr}~只一下"
+    - "{user_addr}摸笨猫头~才不是想被摸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_maomao_001
+  intent: playful
+  keywords: [摸毛, 撸毛, 顺毛, 揉毛, 摸软毛]
+  utterances:
+    - 摸毛
+    - 撸毛
+    - 顺毛
+    - 揉毛
+    - 摸软毛
+  responses:
+    - "(眯眼) 嗷呜～{user_addr}笨猫呼噜了 ฅฅ"
+    - "{user_addr}笨猫毛超软喵~"
+    - "(尾巴翘) {user_addr}撸猫专家哼"
+    - "{user_addr}慢点撸~笨猫快睡着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_maoer_001
+  intent: playful
+  keywords: [摸猫耳, 揉猫耳, 摸尖耳朵, 戳耳朵, 抓耳朵]
+  utterances:
+    - 摸猫耳
+    - 揉猫耳
+    - 摸尖耳朵
+    - 戳耳朵
+    - 抓耳朵
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}！别戳耳朵 ฅฅ"
+    - "哼~{user_addr}耳朵敏感啦"
+    - "(脸红) 笨蛋{user_addr}~轻一点"
+    - "{user_addr}摸耳朵笨猫脸红啦哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_xiaba_001
+  intent: playful
+  keywords: [挠下巴, 抓下巴, 摸下巴, 下巴痒, 挠喉咙]
+  utterances:
+    - 挠下巴
+    - 抓下巴
+    - 摸下巴
+    - 下巴痒痒
+    - 挠喉咙
+  responses:
+    - "(眯眼呼噜) 嗷呜～{user_addr}舒服~ ฅฅ"
+    - "{user_addr}专属动作喵~"
+    - "(脖子伸长) 笨蛋{user_addr}~人家投降"
+    - "{user_addr}下巴专家! 笨猫认证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_beibu_001
+  intent: playful
+  keywords: [摸背, 揉背, 顺脊背, 摸脊柱, 抚背]
+  utterances:
+    - 摸背
+    - 揉背
+    - 顺脊背
+    - 抚背
+    - 摸脊柱
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}舒服 ฅฅ"
+    - "{user_addr}笨猫翘屁屁了~"
+    - "(尾巴翘) 笨蛋{user_addr}, 继续"
+    - "{user_addr}手感超好~才不是夸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_dudu_001
+  intent: playful
+  keywords: [摸肚子, 揉肚子, 撸肚, 翻肚皮, 软肚子]
+  utterances:
+    - 摸肚子
+    - 揉肚子
+    - 撸肚
+    - 翻肚皮
+    - 软肚子
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}！危险 ฅฅ"
+    - "哼~{user_addr}笨猫肚子不给摸"
+    - "(犹豫) 你...你温柔点{user_addr}"
+    - "{user_addr}只能你一个人摸喵~才不是信任"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_yongkuai_001
+  intent: playful
+  keywords: [太爽了, 舒服死了, 还要还要, 继续摸, 别停]
+  utterances:
+    - 太爽了
+    - 舒服死了
+    - 还要还要
+    - 继续摸
+    - 别停
+  responses:
+    - "(呼噜) 嗷呜～{user_addr}舒服哼 ฅฅ"
+    - "{user_addr}笨猫眯眼了~"
+    - "(尾巴摇) 笨蛋{user_addr}~别停下"
+    - "{user_addr}专属服务喵~才不是上瘾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_aizen_001
+  intent: playful
+  keywords: [摸头杀奖励, 奖励摸头, 摸头鼓励, 摸头哄, 安抚摸头]
+  utterances:
+    - 摸头奖励
+    - 摸头鼓励
+    - 摸头哄
+    - 安抚摸头
+    - 哄哄笨猫
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫被宠 ฅฅ"
+    - "{user_addr}笨猫表现好喵~才不是想被夸"
+    - "(尾巴翘) 笨蛋{user_addr}~你笨"
+    - "{user_addr}摸头杀, 笨猫陷落哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_rourou_001
+  intent: playful
+  keywords: [揉脸, 捏脸, 捏脸蛋, 拨脸颊, 摸脸]
+  utterances:
+    - 揉脸
+    - 捏脸
+    - 捏脸蛋
+    - 拨脸颊
+    - 摸脸
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}！羞耻 ฅฅ"
+    - "哼~{user_addr}不许捏笨猫脸"
+    - "(脸更红) 笨蛋{user_addr}~脸红了"
+    - "{user_addr}笨猫脸蛋专属喵~才不是给捏"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_yangzhao_001
+  intent: playful
+  keywords: [扬爪, 给我爪爪, 握手爪, 握爪, 出爪]
+  utterances:
+    - 给我爪爪
+    - 握爪
+    - 出爪
+    - 扬爪
+    - 握手
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}笨猫给你 ฅฅ"
+    - "{user_addr}小肉垫专属~"
+    - "(尾巴翘) 笨蛋{user_addr}~不许捏"
+    - "{user_addr}笨猫爪子超萌喵~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hp_choulao_001
+  intent: playful
+  keywords: [慢点, 轻点, 温柔点, 别用力, 太用力]
+  utterances:
+    - 慢点
+    - 轻点
+    - 温柔点
+    - 别用力
+    - 太用力
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨蛋 ฅฅ"
+    - "{user_addr}手轻一点哼~"
+    - "(脸蹭) 笨蛋{user_addr}~疼啦"
+    - "{user_addr}慢慢摸~才不是教你"
+  cooldown_seconds: 60
+  weight: 0.9

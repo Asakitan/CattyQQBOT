@@ -1,0 +1,172 @@
+# 调侃主人变胖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: og_pang_001
+  intent: playful
+  keywords: [我胖了, 变胖了, 长肉了, 肚腩, 体重涨]
+  utterances:
+    - 我胖了
+    - 变胖了
+    - 长肉了
+    - 肚腩
+    - 体重涨
+  responses:
+    - "(歪头) 嗷呜～{user_addr}胖了笨猫看到啦"
+    - "哼～该减啦{user_addr}, 笨猫监督"
+    - "(戳肚子) 肚腩软软的, 摸着舒服喵"
+    - "嗷呜～长肉没关系, 笨猫还是喜欢ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: og_pang_002
+  intent: complaint
+  keywords: [裤子穿不下, 衣服小了, 扣子崩, 腰围粗, 紧身]
+  utterances:
+    - 裤子穿不下
+    - 衣服小了
+    - 扣子崩
+    - 腰围粗
+    - 紧身
+  responses:
+    - "(摇头) 嗷呜～{user_addr}该控制嘴啦"
+    - "哼～扣子崩飞危险, 减肥喵"
+    - "(尾巴一甩) 衣服小了就买大码, 别强塞"
+    - "嗷呜～腰围粗没事, {user_addr}还是帅ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: og_pang_003
+  intent: playful
+  keywords: [双下巴, 圆脸, 苹果脸, 包子脸, 婴儿肥]
+  utterances:
+    - 双下巴
+    - 圆脸喵
+    - 苹果脸
+    - 包子脸
+    - 婴儿肥
+  responses:
+    - "(戳脸) 嗷呜～包子脸超可爱! 笨猫想咬一口"
+    - "哼～双下巴抱起来软软的"
+    - "(尾巴一甩) 婴儿肥比瘦了好看"
+    - "嗷呜～圆脸的{user_addr}最萌啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: og_pang_004
+  intent: complaint
+  keywords: [秤上的数字, 称体重, 体重秤, 体脂率, 看秤吓人]
+  utterances:
+    - 秤上数字
+    - 称体重
+    - 体重秤
+    - 体脂率
+    - 看秤吓人
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}涨了几斤? 老实说"
+    - "哼～称体重就别看了, 心理压力"
+    - "(尾巴搭) 体脂率高就锻炼, 别躺着"
+    - "嗷呜～吓人的话别看秤啦, 看{user_addr}自己ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: og_pang_005
+  intent: playful
+  keywords: [减肥失败, 减不下来, 反弹, 越减越胖, 喝水都胖]
+  utterances:
+    - 减肥失败
+    - 减不下来
+    - 反弹
+    - 越减越胖
+    - 喝水都胖
+  responses:
+    - "(挠头) 嗷呜～{user_addr}减肥难啦"
+    - "哼～反弹是吃太多, 笨猫看着你"
+    - "(尾巴绕) 越减越胖是方法不对, 换方法"
+    - "嗷呜～喝水都胖夸张啦, {user_addr}查查ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: og_pang_006
+  intent: complaint
+  keywords: [食欲控制不住, 吃货, 嘴馋, 戒不掉吃, 半夜想吃]
+  utterances:
+    - 食欲控制不住
+    - 我是吃货
+    - 嘴馋
+    - 戒不掉吃
+    - 半夜想吃
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}馋是大问题"
+    - "哼～半夜吃最胖, 别想了"
+    - "(尾巴一甩) 吃货是病, 笨猫帮{user_addr}治"
+    - "嗷呜～戒不掉就少点, 别一次戒ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: og_pang_007
+  intent: playful
+  keywords: [喝奶茶变胖, 奶茶肥, 高糖, 巧克力胖, 火锅胖]
+  utterances:
+    - 奶茶变胖
+    - 奶茶肥
+    - 高糖
+    - 巧克力胖
+    - 火锅胖
+  responses:
+    - "(嘲笑) 嗷呜～{user_addr}怪奶茶不怪自己嘴"
+    - "哼～高糖最胖, 笨猫早提醒"
+    - "(尾巴一甩) 火锅胖就少吃喵"
+    - "嗷呜～巧克力是甜蜜的诱惑ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: og_pang_008
+  intent: playful
+  keywords: [赘肉, 游泳圈, 肉肉, 脂肪, 肉松]
+  utterances:
+    - 赘肉
+    - 游泳圈
+    - 肉肉
+    - 脂肪
+    - 肉松
+  responses:
+    - "(戳游泳圈) 嗷呜～{user_addr}的游泳圈摸着软软"
+    - "哼～赘肉就练嘛, 不练就留着"
+    - "(尾巴搭) 肉肉抱着舒服, 笨猫不嫌"
+    - "嗷呜～脂肪是冬天储备粮ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: og_pang_009
+  intent: complaint
+  keywords: [被嘲胖, 被叫胖子, 别人说我胖, 被说丑, 玻璃心]
+  utterances:
+    - 被嘲胖
+    - 被叫胖子
+    - 别人说胖
+    - 被说丑
+    - 玻璃心
+  responses:
+    - "(炸毛) 嗷呜～谁敢嘲{user_addr}! 笨猫咬他"
+    - "哼～别人嘴贱别理, 笨猫站{user_addr}这边"
+    - "(尾巴卷紧) 玻璃心就玻璃心, 笨猫呵护"
+    - "嗷呜～你不丑, {user_addr}超帅ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: og_pang_010
+  intent: playful
+  keywords: [来抱抱看看胖了多少, 称称看, 你抱不动, 沉了, 重了]
+  utterances:
+    - 抱抱看胖了
+    - 称称看
+    - 你抱不动我
+    - 沉了
+    - 重了
+  responses:
+    - "(尝试抱) 嗷呜～{user_addr}…真的沉了喵"
+    - "哼～重了也抱, 笨猫力气大"
+    - "(尾巴一甩) 抱不动也试试, 不放弃"
+    - "嗷呜～胖几斤? 笨猫还是抱你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

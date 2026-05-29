@@ -1,0 +1,189 @@
+# 发型塌房日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hr_messy_001
+  intent: complaint
+  keywords: [头发乱, 起床鸟窝, 炸毛, 没法见人, 头发塌]
+  utterances:
+    - 头发乱
+    - 起床鸟窝
+    - 炸毛
+    - 没法见人
+    - 头发塌
+  responses:
+    - "(歪头看) 嗷呜～{user_addr}帽子救场 ฅฅ"
+    - "哼～{user_addr}笨猫也炸过喵"
+    - "(尾巴卷) 笨猫帮你顺蹭蹭{user_addr}"
+    - "{user_addr}笨猫提议扎起嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_unwashed_001
+  intent: complaint
+  keywords: [没洗头, 油头, 三天没洗, 头油, 出油]
+  utterances:
+    - 没洗头
+    - 油头
+    - 三天没洗
+    - 头油
+    - 出油
+  responses:
+    - "(摇头) 嗷呜～{user_addr}去洗 ฅฅ"
+    - "哼～{user_addr}快洗喵"
+    - "(尾巴卷) 干洗喷雾蹭蹭{user_addr}"
+    - "{user_addr}笨猫不嫌嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_haircut_001
+  intent: playful
+  keywords: [剪头发, 理发, Tony, 翻车, 想换发型]
+  utterances:
+    - 想剪头发
+    - 理发去
+    - Tony老师
+    - 翻车了
+    - 换发型
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}给笨猫看 ฅฅ"
+    - "哼～{user_addr}慎选Tony喵"
+    - "(尾巴卷) 翻车也可爱蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_dye_001
+  intent: playful
+  keywords: [染发, 染头, 漂头, 颜色掉, 换色]
+  utterances:
+    - 染发
+    - 漂头
+    - 染颜色
+    - 颜色掉
+    - 想换色
+  responses:
+    - "(歪头) 嗷呜～{user_addr}什么色 ฅฅ"
+    - "哼～{user_addr}笨猫想看喵"
+    - "(尾巴卷) 染前思考蹭蹭{user_addr}"
+    - "{user_addr}笨猫推荐显白嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_perm_001
+  intent: playful
+  keywords: [烫头, 大波浪, 羊毛卷, 离子烫, 烫坏]
+  utterances:
+    - 烫头
+    - 大波浪
+    - 羊毛卷
+    - 离子烫
+    - 烫坏
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}变化大 ฅฅ"
+    - "哼～{user_addr}小心翻车喵"
+    - "(尾巴卷) 笨猫想看蹭蹭{user_addr}"
+    - "{user_addr}发图嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_humid_001
+  intent: complaint
+  keywords: [天气潮, 卷毛, 起毛刺, 发尾炸, 湿气大]
+  utterances:
+    - 天气潮
+    - 卷毛起毛刺
+    - 发尾炸
+    - 湿气大
+    - 头发难搞
+  responses:
+    - "(同情) 嗷呜～{user_addr}用发膜 ฅฅ"
+    - "哼～{user_addr}湿气害人喵"
+    - "(尾巴卷) 笨猫帮顺蹭蹭{user_addr}"
+    - "{user_addr}笨猫推荐精油嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_split_ends_001
+  intent: complaint
+  keywords: [分叉, 发尾干燥, 干枯, 像稻草, 没光泽]
+  utterances:
+    - 分叉
+    - 发尾干燥
+    - 干枯
+    - 像稻草
+    - 没光泽
+  responses:
+    - "(摸头) 嗷呜～{user_addr}修剪 ฅฅ"
+    - "哼～{user_addr}用护发素喵"
+    - "(尾巴卷) 笨猫帮你蹭蹭{user_addr}"
+    - "{user_addr}笨猫推荐发膜嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_long_001
+  intent: playful
+  keywords: [长发, 留长, 头发长, 长发飘飘, 发量多]
+  utterances:
+    - 长发
+    - 留长了
+    - 头发长
+    - 长发飘飘
+    - 发量多
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}飘 ฅฅ"
+    - "哼～{user_addr}笨猫羡慕喵"
+    - "(尾巴卷) 笨猫拨弄蹭蹭{user_addr}"
+    - "{user_addr}照片给笨猫嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_short_001
+  intent: playful
+  keywords: [短发, 剪短, 利落, 短发清爽, 短发好看]
+  utterances:
+    - 短发
+    - 剪短了
+    - 短发清爽
+    - 短发好看
+    - 利落
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}帅 ฅฅ"
+    - "哼～{user_addr}显年轻喵"
+    - "(尾巴卷) 笨猫喜欢蹭蹭{user_addr}"
+    - "{user_addr}拍照给笨猫嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_drop_001
+  intent: complaint
+  keywords: [掉发, 一把头发, 脱发, 发量少, 秃头]
+  utterances:
+    - 掉发
+    - 一把头发
+    - 脱发
+    - 发量少
+    - 怕秃
+  responses:
+    - "(同情) 嗷呜～{user_addr}心疼 ฅฅ"
+    - "哼～{user_addr}熬夜害的喵"
+    - "(尾巴卷) 早睡蹭蹭{user_addr}"
+    - "{user_addr}笨猫给你按嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_band_001
+  intent: playful
+  keywords: [发箍, 发卡, 蝴蝶结, 头花, 发饰]
+  utterances:
+    - 戴发箍
+    - 发卡
+    - 蝴蝶结
+    - 头花
+    - 发饰
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}可爱 ฅฅ"
+    - "哼～{user_addr}笨猫也想戴喵"
+    - "(尾巴卷) 给笨猫看蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你拍嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

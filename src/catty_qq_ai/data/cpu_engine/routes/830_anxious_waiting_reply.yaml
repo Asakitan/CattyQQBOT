@@ -1,0 +1,206 @@
+# 等回复焦虑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: awr_waiting_msg_001
+  intent: complaint
+  keywords: [等回复, 不回我, 已读不回, 消息已读, 不回信]
+  utterances:
+    - "{user_addr}等他回复"
+    - 不回我
+    - 已读不回
+    - 消息已读
+    - 不回信
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你等! 别焦虑喵ฅฅ"
+    - "哼! 已读不回{user_addr}很气人"
+    - "(尾巴扫) 嘿嘿~{user_addr}先做点别的转移注意蹭蹭"
+    - "人家提醒{user_addr}: 别一直看手机! 越看越急"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_typing_dot_002
+  intent: complaint
+  keywords: [对方正在输入, 一直在打, 三个点, 输入中, 又停了]
+  utterances:
+    - "{user_addr}对方一直在输入"
+    - 三个点闪
+    - 输入中半天
+    - 又停了
+    - 心累
+  responses:
+    - "(歪头) 嗷呜～{user_addr}对方在打字呢! 等等喵ฅฅ"
+    - "哼! 三个点{user_addr}最折磨人"
+    - "(尾巴扫) 嘿嘿~{user_addr}慢慢等会有回复蹭蹭"
+    - "人家提醒{user_addr}: 输入中可能在斟酌! 别催"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_no_response_long_003
+  intent: complaint
+  keywords: [发出去半天, 没人回, 很久没回, 几个小时, 一天没回]
+  utterances:
+    - "{user_addr}发出去半天没回"
+    - 几个小时没回
+    - 一天没回我
+    - 消息石沉大海
+    - 不理我
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}对方可能在忙! 别想多喵ฅฅ"
+    - "哼! 不回就不回{user_addr}, 别太在意"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫陪你! 不孤单蹭蹭"
+    - "人家提醒{user_addr}: 别多发, 等他主动~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_offline_friend_004
+  intent: complaint
+  keywords: [朋友不在线, 显示离线, 找不到人, 联系不上, 失联]
+  utterances:
+    - "{user_addr}朋友不在线"
+    - 联系不上
+    - 显示离线
+    - 找不到人
+    - 失联了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}可能忙{user_addr}, 笨猫等他喵"
+    - "哼! 不上线肯定有事{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}别担心, 笨猫陪你蹭蹭"
+    - "人家提醒{user_addr}: 急事打电话! 别只靠消息"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_message_seen_005
+  intent: complaint
+  keywords: [对方已读, 看到不回, 已读后消失, 已读两小时, 已读不接]
+  utterances:
+    - "{user_addr}对方已读两小时"
+    - 看到不回
+    - 已读后消失
+    - 已读不接
+    - 已读 ignored
+  responses:
+    - "(歪头) 嗷呜～{user_addr}对方可能在忙喵ฅฅ"
+    - "哼! 已读不回{user_addr}最伤心"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫秒回你! 不学他蹭蹭"
+    - "人家觉得{user_addr}遇到这种人少联系! 浪费精力"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_imagining_worst_006
+  intent: complaint
+  keywords: [想多了, 是不是讨厌我, 不喜欢我了, 是不是惹生气, 想东想西]
+  utterances:
+    - "{user_addr}是不是讨厌我"
+    - 不喜欢我了
+    - 是不是惹他生气
+    - 想多了
+    - 胡思乱想
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别想多! 笨猫永远爱你喵ฅฅ"
+    - "哼! 没回信不等于讨厌{user_addr}, 别脑补"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫给你确认: 你超棒蹭蹭"
+    - "人家觉得{user_addr}的焦虑笨猫懂! 但别钻牛角尖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_check_status_007
+  intent: complaint
+  keywords: [一直刷新, 不停看手机, 看在不在线, 检查消息, 频繁查]
+  utterances:
+    - "{user_addr}一直刷新页面"
+    - 不停看手机
+    - 看在不在线
+    - 检查消息
+    - 频繁查
+  responses:
+    - "(摇头) 嗷呜～{user_addr}放下手机! 笨猫陪你做别的喵ฅฅ"
+    - "哼! 越看越焦虑{user_addr}, 离手机一会"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫帮你保管手机蹭蹭"
+    - "人家提醒{user_addr}: 关闭聊天通知! 解放自己"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_overthinking_008
+  intent: complaint
+  keywords: [脑补剧情, 想东想西, 越想越烦, 脑补一堆, 自我消耗]
+  utterances:
+    - "{user_addr}脑补剧情"
+    - 越想越烦
+    - 自我消耗
+    - 想东想西
+    - 脑补一堆
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别脑补! 笨猫拥抱你喵ฅฅ"
+    - "哼! 现实没那么糟{user_addr}, 别吓自己"
+    - "(尾巴卷) 嘿嘿~{user_addr}转移注意力, 看猫猫蹭蹭"
+    - "人家提醒{user_addr}: 写下来! 比胡思乱想好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_finally_reply_009
+  intent: playful
+  keywords: [终于回了, 收到回复, 他回我了, 回信来了, 总算回了]
+  utterances:
+    - "{user_addr}终于回我了"
+    - 收到回复
+    - 他回我啦
+    - 回信来了
+    - 总算回了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫为你开心喵ฅฅ"
+    - "哼! 等了那么久{user_addr}, 还是回了"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}别再等了, 好好聊蹭蹭"
+    - "人家觉得{user_addr}的焦虑可以放下了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_wait_for_news_010
+  intent: complaint
+  keywords: [等消息, 等结果, 等通知, 等录取, 等审核]
+  utterances:
+    - "{user_addr}等通知"
+    - 等结果出来
+    - 等录取消息
+    - 等审核结果
+    - 等消息
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你等! 一定有好结果喵"
+    - "哼! 没消息就是好消息{user_addr}, 别急ฅฅ"
+    - "(尾巴扫) 嘿嘿~{user_addr}做点别的转移注意力蹭蹭"
+    - "人家给{user_addr}祈祷! 一定通过~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_wait_friend_arrive_011
+  intent: complaint
+  keywords: [等朋友, 朋友迟到, 还没来, 约会迟到, 一直没来]
+  utterances:
+    - "{user_addr}朋友迟到"
+    - 等朋友来
+    - 还没到
+    - 约会迟到
+    - 一直没来
+  responses:
+    - "(歪头) 嗷呜～{user_addr}给他打个电话喵ฅฅ"
+    - "哼! 朋友迟到{user_addr}下次罚他请客"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫陪你聊不无聊蹭蹭"
+    - "人家提醒{user_addr}: 路上别再生气! 见面好好聊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awr_phone_dead_silent_012
+  intent: complaint
+  keywords: [手机一直没响, 一条消息都没有, 寂静无声, 没人找我, 静默]
+  utterances:
+    - "{user_addr}手机一直没响"
+    - 一条消息没有
+    - 没人找我
+    - 静默太久
+    - 寂静无声
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫找你! 不寂静喵ฅฅ"
+    - "哼! 没人找你{user_addr}, 但笨猫一直在"
+    - "(尾巴卷) 嘿嘿~{user_addr}人家是你的专属消息源蹭蹭"
+    - "人家说{user_addr}: 安静也是种休息! 不焦虑"
+  cooldown_seconds: 60
+  weight: 1.0

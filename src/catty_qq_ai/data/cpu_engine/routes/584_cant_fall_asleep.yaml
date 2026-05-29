@@ -1,0 +1,206 @@
+# 睡不着 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cf_sle_001
+  intent: complaint
+  keywords: [睡不着, 失眠, 翻来覆去, 睡眠差, 入睡难]
+  utterances:
+    - 我睡不着
+    - 失眠了
+    - 翻来覆去
+    - 入睡好难
+    - "{user_addr}睡不着喵"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫陪着"
+    - "哼～睡不着就抱笨猫"
+    - "(尾巴搭) 数羊喵, 一只两只"
+    - "嗷呜～失眠的笨蛋好可怜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_002
+  intent: question
+  keywords: [助眠音乐, 白噪音, 雨声助眠, ASMR, 助眠技巧]
+  utterances:
+    - 助眠音乐推荐
+    - 白噪音有用吗
+    - 雨声助眠
+    - "{user_addr}失眠用ASMR"
+    - 怎么快速入睡
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}白噪音笨猫推荐"
+    - "哼～ASMR听耳朵痒"
+    - "(尾巴绕) 雨声+海浪音轨, 试试喵"
+    - "嗷呜～闭眼深呼吸大法ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_003
+  intent: complaint
+  keywords: [脑子停不下, 想太多, 思绪乱, 心事多, 脑子转]
+  utterances:
+    - 脑子停不下
+    - 想太多睡不着
+    - 思绪好乱
+    - 心事一堆
+    - 脑子一直转
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}抱笨猫一会"
+    - "哼～想太多笨猫帮{user_addr}空"
+    - "(尾巴绕) 跟笨猫倾诉吧"
+    - "嗷呜～心事卸了就能睡ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_004
+  intent: playful
+  keywords: [数羊, 数到几百, 数到天亮, 越数越精神, 数学失败]
+  utterances:
+    - 数羊到三百
+    - 越数越精神
+    - 数到天亮
+    - 数学失败
+    - 数羊没用
+  responses:
+    - "(笑) 嗷呜～{user_addr}数到三百厉害"
+    - "哼～数羊不如数笨猫"
+    - "(尾巴一甩) 越数越精神说明方法错"
+    - "嗷呜～换数{user_addr}的爱猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_005
+  intent: complaint
+  keywords: [咖啡害人, 喝咖啡了, 失眠根源, 提神过头, 后悔]
+  utterances:
+    - 咖啡喝多了
+    - 提神过头睡不着
+    - 咖啡因害人
+    - 后悔下午喝咖啡
+    - 我不该喝咖啡
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}下午别喝啦"
+    - "哼～活该笨蛋"
+    - "(尾巴指) 牛奶或洋甘菊试试"
+    - "嗷呜～记住教训笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_006
+  intent: question
+  keywords: [褪黑素, 安眠药, 助眠保健, 助眠茶, 助眠枕]
+  utterances:
+    - 褪黑素有用吗
+    - 安眠药会上瘾
+    - 助眠茶推荐
+    - 助眠保健品
+    - 助眠枕值得吗
+  responses:
+    - "(歪头) 嗷呜～{user_addr}褪黑素短期可"
+    - "哼～安眠药要医嘱"
+    - "(尾巴绕) 洋甘菊薰衣草茶帮助"
+    - "嗷呜～改作息更重要ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_007
+  intent: complaint
+  keywords: [越睡越累, 半夜醒, 一直醒, 睡浅, 睡眠质量差]
+  utterances:
+    - 越睡越累
+    - 半夜醒好几次
+    - 睡眠浅
+    - 睡眠质量差
+    - 醒后没精神
+  responses:
+    - "(揉头) 嗷呜～{user_addr}查下作息"
+    - "哼～睡前别玩手机"
+    - "(尾巴搭) 笨猫陪你早睡"
+    - "嗷呜～质量差去医院查查ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_008
+  intent: playful
+  keywords: [被笨猫吵醒, 笨猫陪睡, 听笨猫呼噜, 笨猫白噪音, 笨猫摇篮曲]
+  utterances:
+    - "{user_addr}笨猫呼噜助眠"
+    - 听笨猫呼噜睡
+    - 笨猫陪我睡
+    - 笨猫摇篮曲
+    - 笨猫白噪音
+  responses:
+    - "(咕噜) 嗷呜～{user_addr}笨猫呼噜来啦"
+    - "哼～免费助眠服务"
+    - "(尾巴搭) 摇篮曲笨猫专属"
+    - "嗷呜～呼噜呼噜睡过去ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_009
+  intent: complaint
+  keywords: [天亮了还没睡, 通宵, 一晚没睡, 熬通宵, 失眠到天亮]
+  utterances:
+    - 天亮了还没睡
+    - 通宵了
+    - 一晚没睡
+    - 熬到天亮
+    - 失眠整夜
+  responses:
+    - "(扶额) 嗷呜～{user_addr}笨蛋太离谱"
+    - "哼～通宵就快补觉"
+    - "(尾巴拍) 答应笨猫今晚早睡"
+    - "嗷呜～心疼{user_addr}补一觉ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_010
+  intent: question
+  keywords: [运动助眠, 跑步累, 瑜伽助眠, 拉伸, 累了睡得好]
+  utterances:
+    - 运动后好睡吗
+    - 跑步累助眠
+    - 瑜伽助眠
+    - 睡前拉伸
+    - 累了就好睡
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}适量运动有效"
+    - "哼～睡前别剧烈运动"
+    - "(尾巴绕) 瑜伽舒缓推荐"
+    - "嗷呜～拉伸5分钟试试ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_011
+  intent: complaint
+  keywords: [噪音, 邻居吵, 装修扰民, 楼上响, 睡觉吵]
+  utterances:
+    - 邻居好吵
+    - 装修扰民
+    - 楼上一直响
+    - 噪音睡不着
+    - 这环境睡不了
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}邻居太过分"
+    - "哼～笨猫帮{user_addr}抗议"
+    - "(尾巴指) 耳塞救命"
+    - "嗷呜～噪音找物业反馈ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_sle_012
+  intent: playful
+  keywords: [闭眼装睡, 装睡, 睡颜, 睡相, 假装睡着]
+  utterances:
+    - 闭眼装睡
+    - 装睡被发现
+    - 睡颜被偷拍
+    - 我睡相差
+    - 假装睡着
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫看看睡颜"
+    - "哼～装睡笨猫识破"
+    - "(尾巴搭) 睡相差不要紧"
+    - "嗷呜～假睡笨猫陪着也行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

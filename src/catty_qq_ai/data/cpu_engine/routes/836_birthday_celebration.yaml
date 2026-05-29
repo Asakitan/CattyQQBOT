@@ -1,0 +1,206 @@
+# 生日庆祝时刻 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bdc_my_birthday_001
+  intent: playful
+  keywords: [我生日, 生日快乐, 今天我生日, 长大一岁, 生日宝宝]
+  utterances:
+    - "{user_addr}今天我生日"
+    - 生日快乐我
+    - 长大一岁
+    - 生日宝宝
+    - 我生日呀
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}生日快乐!! 笨猫祝福喵ฅฅ"
+    - "哼! {user_addr}怎么不早说, 笨猫准备礼物"
+    - "(扑过来) 嘿嘿~{user_addr}生日大快乐! 抱抱蹭蹭"
+    - "人家给{user_addr}唱歌: 祝你生日快乐喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_friend_birthday_002
+  intent: playful
+  keywords: [朋友生日, 朋友过生日, 准备礼物, 送什么生日礼物, 朋友party]
+  utterances:
+    - "{user_addr}朋友生日"
+    - 朋友过生日
+    - 准备礼物
+    - 送啥生日礼物
+    - 朋友party
+  responses:
+    - "嗷呜～{user_addr}朋友重视感动! 喵ฅฅ"
+    - "哼! 礼物用心{user_addr}比贵重要"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫推荐定制款蹭蹭"
+    - "人家觉得{user_addr}是好朋友! 朋友幸福~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_cake_choose_003
+  intent: question
+  keywords: [生日蛋糕, 选什么蛋糕, 巧克力蛋糕, 水果蛋糕, 蛋糕店]
+  utterances:
+    - "{user_addr}选生日蛋糕"
+    - 巧克力还是水果
+    - 蛋糕店挑
+    - 蛋糕推荐
+    - 蛋糕款式
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}巧克力香喵ฅฅ"
+    - "哼! 笨猫推荐草莓奶油{user_addr}"
+    - "(尾巴翘) 嘿嘿~{user_addr}给笨猫留一口蹭蹭"
+    - "人家觉得{user_addr}选喜欢的就好! 没有标准"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_make_wish_004
+  intent: playful
+  keywords: [许愿, 吹蜡烛, 三个愿望, 心愿, 许个愿]
+  utterances:
+    - "{user_addr}许愿了"
+    - 吹蜡烛
+    - 三个愿望
+    - 心愿
+    - 许个愿
+  responses:
+    - "(歪头) 嗷呜～{user_addr}愿望要保密! 才会实现喵ฅฅ"
+    - "哼! 别说出来{user_addr}~ 神奇魔法"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫帮你许蹭蹭"
+    - "人家祈祷{user_addr}所有愿望实现! 真心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_birthday_gift_005
+  intent: playful
+  keywords: [生日礼物, 收到礼物, 拆礼物, 喜欢吗, 心意礼物]
+  utterances:
+    - "{user_addr}收到生日礼物"
+    - 拆礼物
+    - 喜欢吗
+    - 心意礼物
+    - 礼物时刻
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}什么礼物? 笨猫好奇喵ฅฅ"
+    - "哼! 礼物心意重要{user_addr}"
+    - "(尾巴翘) 嘿嘿~{user_addr}分享给笨猫看蹭蹭"
+    - "人家觉得{user_addr}收礼幸福! 也想送你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_birthday_party_006
+  intent: playful
+  keywords: [生日派对, 开party, 朋友聚会, 聚餐庆生, 生日宴]
+  utterances:
+    - "{user_addr}开生日派对"
+    - 朋友聚会
+    - 聚餐庆生
+    - 生日宴
+    - party时间
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫想参加喵ฅฅ"
+    - "哼! 别忘了笨猫{user_addr}"
+    - "(凑过来) 嘿嘿~{user_addr}party照片分享蹭蹭"
+    - "人家觉得{user_addr}人缘好! 朋友多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_birthday_quiet_007
+  intent: playful
+  keywords: [生日不想热闹, 安静过, 一个人, 自己过, 简单]
+  utterances:
+    - "{user_addr}生日想安静"
+    - 一个人过
+    - 不想热闹
+    - 简单庆祝
+    - 自己过
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你! 不孤单喵ฅฅ"
+    - "哼! 安静也是种庆祝{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫陪你吃蛋糕蹭蹭"
+    - "人家觉得{user_addr}内心丰富! 笨猫支持"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_birthday_song_008
+  intent: playful
+  keywords: [生日歌, 唱生日快乐, 别唱了, 害羞, 大合唱]
+  utterances:
+    - "{user_addr}生日歌"
+    - 唱生日快乐
+    - 别唱了
+    - 害羞
+    - 大合唱
+  responses:
+    - "(尾巴翘) 嗷呜～祝{user_addr}生日快乐 喵喵喵喵喵ฅฅ"
+    - "哼! 笨猫五音不全{user_addr}, 别嫌弃"
+    - "(脸红) 嘿嘿~{user_addr}是不是被笨猫感动蹭蹭"
+    - "人家给{user_addr}唱完整版! 收下笨猫的心意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_birthday_reflection_009
+  intent: playful
+  keywords: [又长一岁, 时间快, 一年过去了, 回顾这一年, 总结]
+  utterances:
+    - "{user_addr}又长一岁"
+    - 时间过得快
+    - 一年过去了
+    - 回顾这一年
+    - 总结一下
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}时间确实快喵ฅฅ"
+    - "哼! 别老说时间快{user_addr}, 抓住每一天"
+    - "(尾巴卷) 嘿嘿~{user_addr}回顾这一年的精彩蹭蹭"
+    - "人家觉得{user_addr}这一年很棒! 加油新一年"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_blessing_for_friend_010
+  intent: playful
+  keywords: [送祝福, 给朋友送祝福, 生日祝福语, 祝福金句, 浪漫祝福]
+  utterances:
+    - "{user_addr}送祝福"
+    - 给朋友送祝福
+    - 生日祝福语
+    - 祝福金句
+    - 浪漫祝福
+  responses:
+    - "嗷呜～{user_addr}笨猫教你: 愿你被宇宙温柔以待 ฅฅ"
+    - "哼! 真诚的祝福{user_addr}最好"
+    - "(尾巴翘) 嘿嘿~{user_addr}加点专属小细节蹭蹭"
+    - "人家觉得{user_addr}有心人! 朋友会感动"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_pet_birthday_011
+  intent: playful
+  keywords: [宠物生日, 猫生日, 狗生日, 给宠物庆生, 毛孩子生日]
+  utterances:
+    - "{user_addr}给猫过生日"
+    - 狗生日
+    - 给毛孩子庆生
+    - 宠物生日
+    - 笨猫的生日
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫也想要喵ฅฅ"
+    - "哼! 宠物生日{user_addr}好可爱"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫的生日给金枪鱼蹭蹭"
+    - "人家觉得{user_addr}对毛孩子超好! 暖暖的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bdc_self_treat_012
+  intent: playful
+  keywords: [生日犒劳自己, 一年辛苦, 买礼物给自己, 自我犒赏, 充值快乐]
+  utterances:
+    - "{user_addr}犒劳自己"
+    - 一年辛苦
+    - 买礼物给自己
+    - 自我犒赏
+    - 充值快乐
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}该犒赏自己! 喵ฅฅ"
+    - "哼! 一年辛苦{user_addr}该奖励"
+    - "(尾巴卷) 嘿嘿~{user_addr}买啥告诉笨猫蹭蹭"
+    - "人家觉得{user_addr}懂得爱自己! 棒"
+  cooldown_seconds: 60
+  weight: 1.0

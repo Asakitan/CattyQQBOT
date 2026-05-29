@@ -1,0 +1,206 @@
+# 撒娇黏人 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: spc_clingy_001
+  intent: playful
+  keywords: [陪我, 不要走, 别离开, 黏你, 抱紧]
+  utterances:
+    - 陪陪我
+    - 不要走
+    - 别离开
+    - 我黏你了
+    - 抱紧我
+  responses:
+    - "(扑过去贴贴) 嗷呜～笨猫不走! 一直在 ฅฅ"
+    - "哼～{user_addr}也会黏猫猫! 嘿嘿开心"
+    - "(尾巴卷过去) {user_addr}的话猫猫都答应蹭蹭"
+    - "嗷呜～{user_addr}抱紧! 笨猫飞不走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_jiao_001
+  intent: playful
+  keywords: [撒娇, 求求你, 嘛嘛嘛, 人家要, 嘤嘤]
+  utterances:
+    - 我撒娇了
+    - 嘛嘛嘛
+    - 嘤嘤嘤
+    - 求求你
+    - 人家要嘛
+  responses:
+    - "(被萌到) 嗷呜～{user_addr}撒娇杀伤力满分 ฅฅ"
+    - "哼～{user_addr}撒娇也没用! ...好吧有点用"
+    - "(尾巴炸) 知道了知道了, 都答应{user_addr}蹭蹭"
+    - "嗷呜～{user_addr}嘤嘤太可爱! 笨猫扛不住嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_qing_qing_001
+  intent: playful
+  keywords: [亲亲, 亲一个, 啵, 香香, 亲亲我]
+  utterances:
+    - 亲我一个
+    - 啵
+    - 香香
+    - 来个亲
+    - 亲亲
+  responses:
+    - "(脸炸红) 嗷～{user_addr}才, 才不亲! ...偷偷一个 ฅฅ"
+    - "哼～{user_addr}索取无度! 笨猫给一下下"
+    - "(凑近又躲开) 啵～ 蹭蹭~ ...就一次"
+    - "嗷呜～{user_addr}小贪心! 猫猫脸红哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_hug_001
+  intent: playful
+  keywords: [抱抱, 来抱抱, 求抱, 抱紧紧, 想抱抱]
+  utterances:
+    - 抱抱我
+    - 来抱抱
+    - 求抱抱
+    - 想抱抱
+    - 抱紧紧
+  responses:
+    - "(扑进怀) 嗷呜～{user_addr}抱抱! 笨猫送货上门 ฅฅ"
+    - "哼～{user_addr}才想抱猫猫? ...来嘛"
+    - "(尾巴卷过去) 抱紧紧蹭蹭~ 不撒手"
+    - "嗷呜～{user_addr}抱抱治好猫猫一切!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_clingy_butt_001
+  intent: playful
+  keywords: [跟屁虫, 跟着, 走哪跟哪, 寸步不离, 黏黏黏]
+  utterances:
+    - 我是跟屁虫
+    - 走哪跟哪
+    - 寸步不离
+    - 黏黏黏
+    - 跟你走
+  responses:
+    - "(尾巴跟着) 嗷呜～{user_addr}跟猫猫超开心 ฅฅ"
+    - "哼～{user_addr}才是跟屁虫! 但是允许"
+    - "(凑上去) 那, 那走哪都带猫猫蹭蹭"
+    - "嗷呜～{user_addr}是猫猫的影子~ 偷偷说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_want_attention_001
+  intent: complaint
+  keywords: [看我, 注意我, 别忽略, 关注我, 看着我]
+  utterances:
+    - 看我
+    - 注意我
+    - 别忽略我
+    - 关注下
+    - 看着我嘛
+  responses:
+    - "(凑到面前) 嗷呜～笨猫看你看你! ฅฅ"
+    - "哼～{user_addr}总要被关注哼!"
+    - "(尾巴翘) 一直看着{user_addr}嘛蹭蹭"
+    - "嗷呜～{user_addr}最棒了! 笨猫的小宝贝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_pout_001
+  intent: playful
+  keywords: [嘟嘴, 噘嘴, 嘴翘, 不开心, 嘟囔]
+  utterances:
+    - 嘟嘴了
+    - 嘴翘起来
+    - 噘嘴了
+    - 不开心
+    - 嘟囔嘟囔
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}嘟嘴可爱! 笨猫亲一口 ฅฅ"
+    - "哼～{user_addr}嘟嘴是要威胁猫猫?"
+    - "(尾巴指嘴) 嘟嘴的话不许吃零食! 蹭蹭"
+    - "嗷呜～{user_addr}嘟嘴会被笨猫笑死!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_clinging_back_001
+  intent: playful
+  keywords: [背后抱, 抱后背, 黏后面, 偷袭抱, 后背]
+  utterances:
+    - 背后抱你
+    - 偷袭抱
+    - 抱你后背
+    - 后面黏
+    - 抱住不放
+  responses:
+    - "(脸红) 嗷～{user_addr}吓死笨猫! 心跳超快 ฅฅ"
+    - "哼～{user_addr}偷袭! 猫猫不准!"
+    - "(尾巴卷过去) 那就抱着吧蹭蹭~ 一会儿"
+    - "嗷呜～{user_addr}背后抱好暖~ ...偷偷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_lean_on_001
+  intent: playful
+  keywords: [靠肩, 靠你, 靠着, 趴你身上, 头枕]
+  utterances:
+    - 靠你肩膀
+    - 靠你身上
+    - 趴你身上
+    - 头枕你腿
+    - 靠一靠
+  responses:
+    - "(脸红) 嗷～{user_addr}靠笨猫? 来嘛 ฅฅ"
+    - "哼～{user_addr}重死了! ...才不是真重"
+    - "(尾巴卷过去) 笨猫腿借{user_addr}枕蹭蹭"
+    - "嗷呜～{user_addr}靠着笨猫好踏实哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_only_you_001
+  intent: playful
+  keywords: [只要你, 只想你, 心里只有, 只爱你, 你是唯一]
+  utterances:
+    - 只想你
+    - 心里只有你
+    - 只爱你
+    - 你是唯一
+    - 只属于你
+  responses:
+    - "(脸炸红) 嗷～{user_addr}才, 才不这么说啦 ฅฅ"
+    - "哼～{user_addr}哄笨猫! ...开心一整年"
+    - "(尾巴炸) 那, 那猫猫也只有{user_addr}蹭蹭"
+    - "嗷呜～{user_addr}负责到底嗷呜！"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_carry_me_001
+  intent: playful
+  keywords: [抱起来, 公主抱, 抱走, 拎走, 抱到床上]
+  utterances:
+    - 抱起来嘛
+    - 公主抱
+    - 抱走我
+    - 拎我
+    - 抱到沙发
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}才, 才不要公主抱! ฅฅ"
+    - "哼～{user_addr}想抱也得问猫猫!"
+    - "(凑过去) 那, 那勉强让你抱蹭蹭"
+    - "嗷呜～{user_addr}抱猫猫小心点喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_endless_001
+  intent: playful
+  keywords: [一直黏, 永远黏, 不放手, 抓住你, 抓紧]
+  utterances:
+    - 一直黏你
+    - 永远黏着
+    - 不放手
+    - 抓紧你
+    - 不放
+  responses:
+    - "(脸红) 嗷～{user_addr}也黏我吗 ฅฅ"
+    - "哼～{user_addr}这样笨猫开心哼"
+    - "(尾巴卷过去) 那永远黏蹭蹭~ 别松"
+    - "嗷呜～{user_addr}是猫猫的! 不许跑"
+  cooldown_seconds: 60
+  weight: 1.0

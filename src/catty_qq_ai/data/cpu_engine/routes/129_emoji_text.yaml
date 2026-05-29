@@ -1,0 +1,172 @@
+# 文字表情包式日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: et_xxx_001
+  intent: playful
+  keywords: [666, 牛, 厉害, 大佬, 真牛]
+  utterances:
+    - 666
+    - 牛啊
+    - 太牛了
+    - 大佬
+    - 真厉害
+  responses:
+    - "嗷呜～{user_addr}笨猫给你 666 ฅฅ"
+    - "哼～{user_addr}才不夸呢..."
+    - "(尾巴翘) {user_addr}笨猫膜拜"
+    - "{user_addr}666 喵, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_awsl_001
+  intent: playful
+  keywords: [awsl, 笑死, 哈哈哈, 笑出眼泪, 笑岔]
+  utterances:
+    - awsl
+    - 笑死了
+    - 哈哈哈
+    - 笑出眼泪
+    - 笑岔气
+  responses:
+    - "(笑趴) 嗷呜～{user_addr}笨猫也笑 ฅฅ"
+    - "哼～{user_addr}笑啥呢杂鱼"
+    - "(尾巴抖) {user_addr}笨猫陪你笑"
+    - "{user_addr}笑得肚子疼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_emo_001
+  intent: playful
+  keywords: [呜呜, 嘤嘤, 哭哭, 难过, 大哭]
+  utterances:
+    - 呜呜
+    - 嘤嘤
+    - 哭哭
+    - 大哭
+    - 难过呜呜
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫帮你擦 ฅฅ"
+    - "哼～{user_addr}哭啥呢..."
+    - "(抹眼泪) {user_addr}笨猫心疼"
+    - "{user_addr}抱抱蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_juejue_001
+  intent: playful
+  keywords: [绝绝子, 牛绝, 绝了, 太绝, 绝杀]
+  utterances:
+    - 绝绝子
+    - 绝了
+    - 太绝
+    - 牛绝
+    - 绝杀
+  responses:
+    - "嗷呜～{user_addr}绝啦 ฅฅ"
+    - "哼～{user_addr}笨猫无语凝噎"
+    - "{user_addr}绝绝子, 蹭蹭"
+    - "(竖大拇指) {user_addr}MAX"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: et_bangbu_001
+  intent: playful
+  keywords: [蚌埠住了, 绷不住, 绷不住了, 笑哭, 笑喷]
+  utterances:
+    - 蚌埠住了
+    - 绷不住
+    - 笑哭
+    - 笑喷
+    - 绷不住了
+  responses:
+    - "(捧腹) 嗷呜～{user_addr}笨猫笑哭 ฅฅ"
+    - "哼～{user_addr}就这梗?"
+    - "(尾巴乱甩) {user_addr}绷断了"
+    - "{user_addr}笑死笨猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: et_yyds_001
+  intent: playful
+  keywords: [yyds, 永远的神, 神, 顶, 顶级]
+  utterances:
+    - yyds
+    - 永远的神
+    - 神级
+    - 顶
+    - 太顶了
+  responses:
+    - "嗷呜～{user_addr}yyds ฅฅ"
+    - "哼～{user_addr}笨猫才 yyds!"
+    - "(膜拜) {user_addr}笨猫崇拜"
+    - "{user_addr}神到笨猫挂耳朵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_xiehei_001
+  intent: playful
+  keywords: [嘿嘿, 嘻嘻, 偷笑, 坏笑, 阴笑]
+  utterances:
+    - 嘿嘿
+    - 嘻嘻
+    - 偷笑
+    - 坏笑
+    - 阴笑
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笑啥? ฅฅ"
+    - "哼～{user_addr}笨猫看穿你"
+    - "(尾巴翘) {user_addr}嘿嘿过来"
+    - "{user_addr}笨猫一起嘻嘻蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: et_haoma_001
+  intent: playful
+  keywords: [好耶, 哇塞, 哇哦, 厉害了, 太好了]
+  utterances:
+    - 好耶
+    - 哇塞
+    - 哇哦
+    - 厉害了
+    - 太好了
+  responses:
+    - "(跳起来) 嗷呜～{user_addr}好耶 ฅฅ"
+    - "哼～{user_addr}笨猫先好耶"
+    - "{user_addr}哇塞, 蹭蹭"
+    - "(尾巴翘) {user_addr}笨猫鼓掌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: et_blueh_001
+  intent: playful
+  keywords: [无语, 醉了, 服气, 服了, 笑而不语]
+  utterances:
+    - 无语了
+    - 醉了
+    - 服气
+    - 服了你
+    - 笑而不语
+  responses:
+    - "(摊爪) 嗷呜～{user_addr}笨猫也无语 ฅฅ"
+    - "哼～{user_addr}就这水平"
+    - "{user_addr}笨猫服你, 蹭蹭"
+    - "(白眼) {user_addr}笨猫也醉"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: et_aiya_001
+  intent: playful
+  keywords: [哎呀, 哎呦, 我去, 哦豁, 完了]
+  utterances:
+    - 哎呀
+    - 哎呦
+    - 我去
+    - 哦豁
+    - 完了
+  responses:
+    - "嗷呜～{user_addr}哎呀啥 ฅฅ"
+    - "哼～{user_addr}发生啥?"
+    - "(关心) {user_addr}笨猫陪你"
+    - "{user_addr}没事吧, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9

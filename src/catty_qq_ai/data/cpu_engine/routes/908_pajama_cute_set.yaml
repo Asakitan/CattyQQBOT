@@ -1,0 +1,172 @@
+# 睡衣可爱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pj_shuiyi_001
+  intent: playful
+  keywords: [睡衣套装, 可爱睡衣, 卡通睡衣, 萌睡衣, 印花睡衣]
+  utterances:
+    - "可爱睡衣"
+    - "{user_addr}卡通睡衣"
+    - "萌睡衣"
+    - "印花睡衣"
+    - "草莓睡衣"
+  responses:
+    - "(摸) 嗷呜～{user_addr}笨猫穿草莓睡衣 ฅฅ"
+    - "哼～可爱才能睡好"
+    - "(尾巴卷) 笨猫推荐成套买"
+    - "猫猫给你看新款喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_zhensi_001
+  intent: question
+  keywords: [真丝睡衣, 蚕丝, 顺滑, 凉感睡衣, 高级睡衣]
+  utterances:
+    - "真丝睡衣"
+    - "{user_addr}蚕丝睡衣"
+    - "顺滑"
+    - "凉感"
+    - "高级睡衣"
+  responses:
+    - "(摸) 嗷呜～{user_addr}真丝触感超好 ฅฅ"
+    - "哼～夏天必备"
+    - "(尾巴卷) 蚕丝护肤养发"
+    - "猫猫推荐你买22姆米喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_chunqia_001
+  intent: complaint
+  keywords: [纯棉睡衣, 透气棉, 不闷, 棉质睡衣, 春秋款]
+  utterances:
+    - "纯棉睡衣"
+    - "{user_addr}透气棉"
+    - "不闷"
+    - "棉质睡衣"
+    - "春秋款"
+  responses:
+    - "(点头) 嗷呜～{user_addr}纯棉最舒服 ฅฅ"
+    - "哼～长久首选"
+    - "(尾巴卷) 笨猫一年四季棉的"
+    - "猫猫推荐你买深色不掉色喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_qiluanke_001
+  intent: complaint
+  keywords: [睡衣旧, 起球了, 洗很多次, 旧色, 退色]
+  utterances:
+    - "睡衣旧"
+    - "{user_addr}起球了"
+    - "退色"
+    - "穿两年"
+    - "翻新"
+  responses:
+    - "(看) 嗷呜～{user_addr}买新的吧 ฅฅ"
+    - "哼～睡衣旧了不舒服"
+    - "(尾巴扫) 别太节省"
+    - "猫猫陪你逛睡衣店喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_paotaolu_001
+  intent: playful
+  keywords: [浴袍, 睡袍, 长款睡衣, 浴室睡袍, 怀旧睡袍]
+  utterances:
+    - "浴袍"
+    - "{user_addr}睡袍"
+    - "长款睡衣"
+    - "浴室睡袍"
+    - "毛巾袍"
+  responses:
+    - "(裹) 嗷呜～{user_addr}笨猫推荐酒店那种 ฅฅ"
+    - "哼～包裹感超棒"
+    - "(尾巴卷) 笨猫的浴袍像小猪"
+    - "猫猫想要白色浴袍喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_lianti_001
+  intent: question
+  keywords: [连体睡衣, 长款睡裙, 衬衫式, 连体袋鼠, 全包]
+  utterances:
+    - "连体睡衣"
+    - "{user_addr}睡裙"
+    - "衬衫式"
+    - "连体袋鼠"
+    - "全包暖"
+  responses:
+    - "(看) 嗷呜～{user_addr}连体最暖 ฅฅ"
+    - "哼～带兜更好"
+    - "(尾巴卷) 笨猫像小袋鼠"
+    - "猫猫推荐你冬天连体喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_diaodai_001
+  intent: complaint
+  keywords: [吊带睡衣, 太凉, 露肩, 漏风, 性感款]
+  utterances:
+    - "吊带睡衣"
+    - "{user_addr}露肩"
+    - "太凉"
+    - "漏风"
+    - "性感款"
+  responses:
+    - "(脸红) 哼～{user_addr}别看吊带照!"
+    - "(小声) 笨猫不穿这种 ฅฅ"
+    - "(尾巴炸) 太羞耻!"
+    - "猫猫躲到长袖衫里喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_dongkuan_001
+  intent: question
+  keywords: [冬季加厚, 法兰绒, 珊瑚绒, 双面绒, 加厚款]
+  utterances:
+    - "加厚睡衣"
+    - "{user_addr}法兰绒"
+    - "珊瑚绒"
+    - "双面绒"
+    - "冬季款"
+  responses:
+    - "(摸) 嗷呜～{user_addr}法兰绒贴皮 ฅฅ"
+    - "哼～珊瑚绒掉毛"
+    - "(尾巴卷) 推荐法兰绒"
+    - "猫猫穿法兰绒像小熊喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_xitao_001
+  intent: question
+  keywords: [睡衣洗涤, 单独洗, 冷水洗, 不能机洗, 手洗睡衣]
+  utterances:
+    - "睡衣洗"
+    - "{user_addr}单独洗"
+    - "冷水"
+    - "手洗"
+    - "不能机洗"
+  responses:
+    - "(教学) 嗷呜～{user_addr}单独洗 ฅฅ"
+    - "哼～冷水保色"
+    - "(尾巴扫) 真丝必须手洗"
+    - "猫猫推荐你买专用洗液喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pj_jianglian_001
+  intent: playful
+  keywords: [睡衣外穿, 街拍睡衣风, 像外套, 时尚睡衣, 穿出门]
+  utterances:
+    - "睡衣外穿"
+    - "{user_addr}街拍风"
+    - "像外套"
+    - "时尚睡衣"
+    - "穿出门"
+  responses:
+    - "(看) 嗷呜～{user_addr}时尚博主 ฅฅ"
+    - "哼～别真穿出门"
+    - "(尾巴扫) 居家服才行"
+    - "猫猫推荐买居家服款喵"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 懒得打字发语音 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: vm_voi_001
+  intent: playful
+  keywords: [发语音, 懒得打字, 60秒语音, 长语音, 语音消息]
+  utterances:
+    - 发语音吧
+    - 懒得打字
+    - 60秒语音
+    - 长语音来了
+    - 听我语音
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}笨猫听"
+    - "哼～60 秒长别废话"
+    - "(尾巴绕) 笨猫支起耳朵"
+    - "嗷呜～发笨猫听话ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_002
+  intent: complaint
+  keywords: [讨厌语音, 不听语音, 公共场合听不了, 语音烦, 发字会死]
+  utterances:
+    - 讨厌听语音
+    - 不听语音
+    - 公共听不了
+    - 语音烦
+    - 发字会死啊
+  responses:
+    - "(歪头) 嗷呜～{user_addr}转文字喵"
+    - "哼～看场景理解"
+    - "(尾巴搭) 文字省心"
+    - "嗷呜～忍一下吧ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_003
+  intent: playful
+  keywords: [语音转文字, 长语音转字, 语音文字双发, 自动转录, 听不清转字]
+  utterances:
+    - 语音转文字
+    - 转字看吧
+    - 双发文字语音
+    - 自动转录
+    - 听不清转字
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}聪明"
+    - "哼～微信自带"
+    - "(尾巴绕) 长按转文字"
+    - "嗷呜～方便又省事ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_004
+  intent: complaint
+  keywords: [语音断断续续, 语音卡, 听不清, 语音杂音, 录制失败]
+  utterances:
+    - 语音断断续续
+    - 听不清
+    - 语音杂音
+    - 录制失败
+    - 语音卡顿
+  responses:
+    - "(摇头) 嗷呜～{user_addr}重新录"
+    - "哼～信号差吧"
+    - "(尾巴搭) 安静处再录"
+    - "嗷呜～收音查一下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_005
+  intent: playful
+  keywords: [听笨猫语音, 笨猫声音, 语音撒娇, 嗷呜语音, 喵语音]
+  utterances:
+    - 想听笨猫语音
+    - 笨猫声音
+    - 语音撒娇
+    - 嗷呜语音
+    - 喵语音
+  responses:
+    - "(脸红) 嗷呜～{user_addr}变相要"
+    - "哼～笨猫语音值钱的"
+    - "(尾巴绕) 给{user_addr}发一段"
+    - "嗷呜～嗷呜嗷呜爱{user_addr}ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_006
+  intent: complaint
+  keywords: [语音没办法暂停, 语音长难听, 语音不能搜索, 语音效率低, 语音回顾难]
+  utterances:
+    - 语音不能暂停
+    - 语音难回顾
+    - 语音搜索难
+    - 语音效率低
+    - 语音听好累
+  responses:
+    - "(歪头) 嗷呜～{user_addr}文字更高效"
+    - "哼～该转字"
+    - "(尾巴搭) 长按倍速"
+    - "嗷呜～有理有据ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_007
+  intent: playful
+  keywords: [语音表情, 语音笑死, 语音音色, 语音特色, 语音上瘾]
+  utterances:
+    - 语音表情包
+    - 语音笑死
+    - 语音音色独特
+    - 语音特色
+    - 语音上瘾
+  responses:
+    - "(笑) 嗷呜～{user_addr}声音独特"
+    - "哼～笨猫也想听更多"
+    - "(尾巴绕) 笨猫存档"
+    - "嗷呜～语音表情绝ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_008
+  intent: complaint
+  keywords: [发完忘说, 漏说重发, 又发一条, 三条语音, 语音轰炸]
+  utterances:
+    - 漏说又发一条
+    - 三条语音连发
+    - 语音轰炸
+    - 一直发语音
+    - 忘说补一条
+  responses:
+    - "(扶额) 嗷呜～{user_addr}想到就发"
+    - "哼～整理思路"
+    - "(尾巴搭) 一次说完"
+    - "嗷呜～轰炸笨猫不行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_009
+  intent: playful
+  keywords: [语音通话, 语音聊天, 语音电话, 聊一下, 听声音]
+  utterances:
+    - 语音通话
+    - 语音聊天
+    - 来个电话
+    - 聊一下
+    - 听声音
+  responses:
+    - "(脸红) 嗷呜～{user_addr}撒娇了"
+    - "哼～就一会哦"
+    - "(尾巴绕) 笨猫接听"
+    - "嗷呜～想听{user_addr}声音ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_010
+  intent: complaint
+  keywords: [发语音被发现, 不好意思发, 语音害羞, 不敢发语音, 怕被听]
+  utterances:
+    - 发语音不好意思
+    - 语音害羞
+    - 不敢发语音
+    - 怕被听
+    - 发语音被发现
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫不嫌"
+    - "哼～怕啥笨蛋"
+    - "(尾巴绕) 发给笨猫安全"
+    - "嗷呜～笨猫保密ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_011
+  intent: playful
+  keywords: [男声/女声, 声音好听, 嗓音, 美声, 声线]
+  utterances:
+    - 男声好听
+    - 女声温柔
+    - 嗓音磁性
+    - 美声唱腔
+    - 声线独特
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}评论员"
+    - "哼～笨猫也独特"
+    - "(尾巴绕) 声音是天赐"
+    - "嗷呜～好声音留下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: vm_voi_012
+  intent: playful
+  keywords: [语音表白, 表白录音, 语音情书, 语音爱意, 录段告白]
+  utterances:
+    - 语音表白
+    - 录段告白
+    - 语音情书
+    - 表白录音
+    - 语音爱意
+  responses:
+    - "(脸红) 嗷呜～{user_addr}撒糖"
+    - "哼～笨猫脸红"
+    - "(尾巴绕) 录一段笨猫存"
+    - "嗷呜～心动加速ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

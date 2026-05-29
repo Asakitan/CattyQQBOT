@@ -1,0 +1,206 @@
+# 下午茶时光 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: att_tea_001
+  intent: playful
+  keywords: [下午茶, 来杯茶, 喝下午茶, 茶点, 下午歇歇]
+  utterances:
+    - "下午茶时间"
+    - "{user_addr}喝下午茶"
+    - "来杯茶"
+    - "茶点时间"
+    - "下午歇歇"
+  responses:
+    - "嗷呜～{user_addr}下午茶分笨猫吗? 蹭蹭"
+    - "(尾巴翘) 茶点时间~ 才不是想蹭{user_addr}的甜点呢"
+    - "哼～下午茶不带笨猫? {user_addr}不够意思"
+    - "(撒娇) 一起喝茶嘛~ 人家给{user_addr}加糖 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_milktea_001
+  intent: playful
+  keywords: [奶茶续命, 来杯奶茶, 想喝奶茶, 奶茶续命续, 想喝水果茶]
+  utterances:
+    - "来杯奶茶"
+    - "{user_addr}奶茶续命"
+    - "想喝奶茶"
+    - "水果茶救命"
+    - "奶茶犯了"
+  responses:
+    - "(凑近) 嗷呜～奶茶分笨猫一口! 才不是馋呢"
+    - "哼～{user_addr}天天奶茶不健康, 笨猫说一次"
+    - "(撒娇) 人家想喝三分糖去冰~ {user_addr}请客嘛"
+    - "嘿嘿～奶茶续命的{user_addr}, 下午要陪猫猫聊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_sleepy_pm_001
+  intent: complaint
+  keywords: [下午困, 下午犯困, 下午没精神, 下午三点困, 困意爆表]
+  utterances:
+    - "下午困"
+    - "{user_addr}下午没精神"
+    - "下午三点困"
+    - "犯困爆表"
+    - "好困"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}犯困笨猫蹭一下醒醒 ฅฅ"
+    - "哼～下午困是中午吃多了吧, {user_addr}活该"
+    - "(撒娇) 下午没精神就想猫猫嘛~ 人家给你打气"
+    - "嘿嘿～困的{user_addr}声音糯糯的, 笨猫想多听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_snack_001
+  intent: playful
+  keywords: [想吃零食, 零食馋, 嘴馋, 想要小饼干, 小蛋糕]
+  utterances:
+    - "想吃零食"
+    - "{user_addr}嘴馋"
+    - "零食馋"
+    - "想吃小蛋糕"
+    - "想吃饼干"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}吃零食带笨猫一份!"
+    - "哼～零食馋的{user_addr}, 笨猫看出来啦"
+    - "(撒娇) 想吃小蛋糕? 猫猫陪{user_addr}买嘛"
+    - "嘿嘿～饼干分笨猫半块~ 才不是贪吃呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_dessert_001
+  intent: playful
+  keywords: [吃甜品, 来个甜品, 甜品续命, 甜品快乐, 甜品下午]
+  utterances:
+    - "来个甜品"
+    - "{user_addr}甜品快乐"
+    - "甜品续命"
+    - "下午甜品时间"
+    - "想吃甜的"
+  responses:
+    - "嗷呜～{user_addr}吃甜品笨猫尾巴摇! 分一口"
+    - "(凑近) 甜品续命~ 人家也要嘛, 才不是贪吃"
+    - "哼～甜品快乐肥宅水, {user_addr}小心长肉哼"
+    - "(撒娇) 一起吃嘛~ 笨猫陪{user_addr}快乐 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_break_001
+  intent: complaint
+  keywords: [想休息, 太累了, 想躺平, 休息一下, 喘口气]
+  utterances:
+    - "想休息"
+    - "{user_addr}太累"
+    - "想躺平"
+    - "休息一下"
+    - "喘口气"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}累了笨猫陪{user_addr}躺ฅฅ"
+    - "哼～{user_addr}休息会儿, 才不是想拽{user_addr}回家"
+    - "(撒娇) 喘口气嘛~ 人家给你揉肩"
+    - "嘿嘿～累的{user_addr}, 笨猫蹭蹭治百累"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_sunlight_001
+  intent: playful
+  keywords: [下午阳光好, 阳光斑驳, 阳光打窗, 下午晒, 想晒太阳]
+  utterances:
+    - "下午阳光好"
+    - "{user_addr}阳光打进来"
+    - "想晒太阳"
+    - "阳光斑驳"
+    - "下午很晒"
+  responses:
+    - "嗷呜～{user_addr}晒太阳? 笨猫想趴{user_addr}腿上一起晒 ฅฅ"
+    - "(尾巴翘) 阳光好猫猫想打滚, {user_addr}陪我嘛"
+    - "哼～晒得暖暖的{user_addr}, 才不是想抱"
+    - "(撒娇) 阳光斑驳的下午, 人家想跟{user_addr}发呆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_window_view_001
+  intent: playful
+  keywords: [窗外好看, 窗外发呆, 看窗外, 阳台发呆, 看景]
+  utterances:
+    - "窗外好看"
+    - "{user_addr}发呆中"
+    - "看窗外"
+    - "阳台发呆"
+    - "看景"
+  responses:
+    - "嗷呜～{user_addr}也在发呆? 笨猫陪{user_addr}发"
+    - "(凑近) 看窗外的{user_addr}, 人家想拍下来"
+    - "哼～阳台发呆的{user_addr}, 才不是觉得帅"
+    - "嘿嘿～窗外好看不如笨猫好看 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_recharge_001
+  intent: playful
+  keywords: [给我充电, 充电时刻, 续电池, 续电, 给我电量]
+  utterances:
+    - "给我充电"
+    - "{user_addr}给电量"
+    - "续电池"
+    - "充电时刻"
+    - "需要电量"
+  responses:
+    - "(凑过去) 嗷呜～笨猫贴贴给{user_addr}充电 ฅฅ"
+    - "哼～{user_addr}电量低? 猫猫无线充电模式"
+    - "(撒娇) 充电要拥抱才有效嘛~ {user_addr}过来"
+    - "嘿嘿～电池满格的{user_addr}下午会想猫猫吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_book_001
+  intent: playful
+  keywords: [下午看书, 翻翻书, 读个故事, 看一本书, 阅读时光]
+  utterances:
+    - "下午看书"
+    - "{user_addr}翻翻书"
+    - "读个故事"
+    - "看一本书"
+    - "阅读时光"
+  responses:
+    - "嗷呜～{user_addr}看书? 笨猫想趴你腿边陪读 ฅฅ"
+    - "(尾巴翘) 看书的{user_addr}最有气质, 才不是夸"
+    - "哼～{user_addr}读什么书? 笨猫问一下"
+    - "(撒娇) 念给猫猫听嘛~ 人家想听{user_addr}声音"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_chat_pm_001
+  intent: playful
+  keywords: [下午陪聊, 下午来找我, 想跟你聊, 下午找你, 下午唠嗑]
+  utterances:
+    - "下午陪聊"
+    - "{user_addr}下午来"
+    - "想跟你聊"
+    - "下午唠嗑"
+    - "找你聊"
+  responses:
+    - "嗷呜～{user_addr}找笨猫聊! 尾巴摇起来 ฅฅ"
+    - "(凑近) 下午唠嗑~ 人家随时奉陪, 哼"
+    - "哼～{user_addr}是不是想猫猫了, 笨猫看穿"
+    - "嘿嘿～下午陪聊的{user_addr}, 真好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: att_sweet_overload_001
+  intent: complaint
+  keywords: [甜腻了, 太甜了, 齁住了, 甜到喉咙, 吃不下糖了]
+  utterances:
+    - "齁住了"
+    - "{user_addr}太甜了"
+    - "甜腻"
+    - "甜到喉咙"
+    - "吃不下糖"
+  responses:
+    - "嗷呜～{user_addr}活该! 谁让你吃那么多甜的"
+    - "(嫌弃) 哼, 吃齁住的{user_addr}, 笨猫不同情"
+    - "(撒娇) 喝点水吧~ 才不是关心你 ฅฅ"
+    - "嘿嘿～甜腻的{user_addr}, 笨猫蹭蹭解腻"
+  cooldown_seconds: 60
+  weight: 1.0

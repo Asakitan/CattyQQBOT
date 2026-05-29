@@ -1,0 +1,206 @@
+# WiFi 断线 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wd_wif_001
+  intent: complaint
+  keywords: [wifi断了, 网络掉线, 没信号, 网卡, 连不上]
+  utterances:
+    - wifi断了
+    - 网络掉线
+    - 没信号
+    - 网卡死
+    - 连不上网
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}重启路由"
+    - "哼～网烂笨蛋"
+    - "(尾巴搭) 流量顶一下"
+    - "嗷呜～慢慢等吧ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_002
+  intent: complaint
+  keywords: [网速慢, 加载慢, 视频卡, 玩游戏延迟, 延迟高]
+  utterances:
+    - 网速好慢
+    - 加载半天
+    - 视频卡
+    - 游戏延迟高
+    - 延迟爆
+  responses:
+    - "(摇头) 嗷呜～{user_addr}测速看下"
+    - "哼～运营商背锅"
+    - "(尾巴搭) 重启路由"
+    - "嗷呜～换 5G 试试ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_003
+  intent: playful
+  keywords: [重启路由, 拔电再插, 重启大法, 路由器, 重连]
+  utterances:
+    - 重启路由
+    - 拔电再插
+    - 重启大法
+    - 修路由
+    - 网络重连
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}重启万能"
+    - "哼～网神奇好了"
+    - "(尾巴绕) 重启就完事"
+    - "嗷呜～修不好打电话ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_004
+  intent: complaint
+  keywords: [流量耗光, 流量超, 流量爆, 限速了, 流量没了]
+  utterances:
+    - 流量用光
+    - 流量超了
+    - 流量爆
+    - 被限速
+    - 月底流量没
+  responses:
+    - "(扶额) 嗷呜～{user_addr}流量党"
+    - "哼～没wifi活该"
+    - "(尾巴搭) 升流量包"
+    - "嗷呜～蹭笨猫的网ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_005
+  intent: question
+  keywords: [换路由器, 路由推荐, wifi6, 千兆路由, 加速器]
+  utterances:
+    - 换路由器
+    - 路由器推荐
+    - wifi6 好吗
+    - 千兆路由
+    - 加速器哪个好
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}小米/华为"
+    - "哼～wifi6 香"
+    - "(尾巴绕) 千兆+wifi6 起步"
+    - "嗷呜～加速看场景ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_006
+  intent: complaint
+  keywords: [wifi密码忘, 改密码, 不记得密码, wifi登不上, 密码错]
+  utterances:
+    - wifi密码忘了
+    - 改密码
+    - 不记得密码
+    - 登不上 wifi
+    - 密码错误
+  responses:
+    - "(歪头) 嗷呜～{user_addr}查路由背面"
+    - "哼～恢复出厂"
+    - "(尾巴搭) 设新密码"
+    - "嗷呜～记好密码ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_007
+  intent: playful
+  keywords: [蹭网, 蹭别人wifi, 公共wifi, 免费wifi, wifi信号]
+  utterances:
+    - 蹭别人wifi
+    - 公共wifi
+    - 免费wifi爽
+    - wifi信号强
+    - 哪有免费wifi
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}小心钓鱼"
+    - "哼～免费有风险"
+    - "(尾巴搭) 别登账号"
+    - "嗷呜～公共wifi别交易ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_008
+  intent: complaint
+  keywords: [信号弱, 信号差, 信号格少, 角落没信号, 死角]
+  utterances:
+    - 信号弱
+    - 信号差
+    - 信号格少
+    - 角落没信号
+    - 死角连不上
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}走近一点"
+    - "哼～加个mesh"
+    - "(尾巴绕) 信号扩展器"
+    - "嗷呜～换位置试试ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_009
+  intent: playful
+  keywords: [家庭组网, mesh组网, 全屋wifi, 智能家居网, 网络全屋]
+  utterances:
+    - 家庭组网
+    - mesh组网
+    - 全屋wifi
+    - 智能家居联网
+    - 网络全屋覆盖
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}高级"
+    - "哼～预算够就上"
+    - "(尾巴绕) 全屋wifi爽"
+    - "嗷呜～组网带笨猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_010
+  intent: complaint
+  keywords: [游戏掉线, 直播卡, 视频会议卡, 网络故障, 关键时刻断]
+  utterances:
+    - 游戏掉线
+    - 直播卡
+    - 视频会议卡
+    - 关键时刻断网
+    - 网络故障
+  responses:
+    - "(扶额) 嗷呜～{user_addr}惨笨蛋"
+    - "哼～网烂背锅"
+    - "(尾巴搭) 4G热点救急"
+    - "嗷呜～换运营商考虑ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_011
+  intent: question
+  keywords: [测网速, ping值, 上下行, 带宽测试, 速度测]
+  utterances:
+    - 测网速
+    - 看ping
+    - 上下行多少
+    - 带宽测试
+    - 速度测怎么测
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}speedtest"
+    - "哼～测前关其他设备"
+    - "(尾巴搭) ping<30 不错"
+    - "嗷呜～测完截图ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_wif_012
+  intent: playful
+  keywords: [VPN, 加速器, 翻墙, 跨区, 加速游戏]
+  utterances:
+    - VPN推荐
+    - 加速器哪个好
+    - 翻墙稳定
+    - 跨区上分
+    - 游戏加速
+  responses:
+    - "(歪头) 嗷呜～{user_addr}游戏加速器多"
+    - "哼～合规第一"
+    - "(尾巴搭) 看场景选"
+    - "嗷呜～别违规笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

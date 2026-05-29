@@ -1,0 +1,172 @@
+# 脏衣服堆成山 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lp_pile_001
+  intent: complaint
+  keywords: [脏衣服堆山, 衣服堆, 没洗衣服, 一堆脏衣, 衣服山]
+  utterances:
+    - "{user_addr}衣服堆山"
+    - "脏衣服堆"
+    - "{user_addr}一堆脏衣"
+    - "衣服山"
+    - "没洗衣服"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮洗!"
+    - "(尾巴拍) 哼! 别拖"
+    - "(贴贴) 人家陪你洗~ ฅฅ"
+    - "{user_addr}笨猫监督洗!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_machine_002
+  intent: playful
+  keywords: [洗衣机, 滚筒洗衣, 烘干, 全自动洗衣, 洗衣机声]
+  utterances:
+    - "{user_addr}洗衣机"
+    - "滚筒洗"
+    - "{user_addr}烘干"
+    - "全自动洗"
+    - "洗衣机响"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想看转!"
+    - "(尾巴翘) 哼! 笨猫盯着洗"
+    - "(贴贴) 人家陪你等~ ฅฅ"
+    - "{user_addr}洗完笨猫帮叠!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_handwash_003
+  intent: complaint
+  keywords: [手洗, 内衣手洗, 搓衣板, 手洗累, 不能机洗]
+  utterances:
+    - "{user_addr}手洗内衣"
+    - "搓衣板"
+    - "{user_addr}手洗累"
+    - "不能机洗"
+    - "手洗费力"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮搓!"
+    - "(尾巴翘) 哼! 笨猫小爪搓"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}笨猫陪你慢搓!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_dirty_socks_004
+  intent: complaint
+  keywords: [臭袜子, 袜子味, 一堆袜子, 袜子配对, 找袜子]
+  utterances:
+    - "{user_addr}臭袜子"
+    - "袜子味"
+    - "{user_addr}找袜子"
+    - "袜子配对"
+    - "袜子一堆"
+  responses:
+    - "(凑近闻) 嗷呜～{user_addr}!笨猫鼻子捏!"
+    - "(尾巴拍) 哼! 笨猫嫌弃"
+    - "(贴贴) 人家给你洗~ ฅฅ"
+    - "{user_addr}笨猫监督换!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_dry_outdoor_005
+  intent: playful
+  keywords: [晾阳台, 晾衣杆, 太阳晒, 衣服晾, 晾出去]
+  utterances:
+    - "{user_addr}晾阳台"
+    - "晾衣杆"
+    - "{user_addr}太阳晒"
+    - "衣服晾"
+    - "晾出去"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫晒太阳!"
+    - "(尾巴翘) 哼! 笨猫趴衣服上"
+    - "(贴贴) 人家陪你晾~ ฅฅ"
+    - "{user_addr}笨猫想抓晾衣杆!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_fold_006
+  intent: complaint
+  keywords: [叠衣服, 不会叠, 叠累, 叠成方块, 叠不整齐]
+  utterances:
+    - "{user_addr}叠衣服"
+    - "不会叠"
+    - "{user_addr}叠累"
+    - "叠成方块"
+    - "叠不整齐"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮叠!"
+    - "(尾巴翘) 哼! 笨猫小爪叠"
+    - "(贴贴) 人家陪你叠~ ฅฅ"
+    - "{user_addr}笨猫坐衣服上!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_detergent_007
+  intent: playful
+  keywords: [洗衣液, 洗衣粉, 漂白剂, 柔顺剂, 洗衣球]
+  utterances:
+    - "{user_addr}洗衣液"
+    - "柔顺剂"
+    - "{user_addr}洗衣粉"
+    - "漂白剂"
+    - "洗衣球"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫闻香!"
+    - "(尾巴翘) 哼! 笨猫爱香味"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}加柔顺剂笨猫蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_stain_008
+  intent: complaint
+  keywords: [油渍, 血渍, 污渍, 难洗污渍, 顽固污渍]
+  utterances:
+    - "{user_addr}油渍"
+    - "血渍"
+    - "{user_addr}污渍"
+    - "难洗"
+    - "顽固污渍"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮洗!"
+    - "(尾巴拍) 哼! 用洗衣皂"
+    - "(贴贴) 人家陪你搓~ ฅฅ"
+    - "{user_addr}笨猫专业去污!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_rainy_009
+  intent: complaint
+  keywords: [下雨晾不干, 雨天衣服, 阴天晾, 雨天洗衣, 雨季衣服]
+  utterances:
+    - "{user_addr}下雨晾不干"
+    - "雨天衣服"
+    - "{user_addr}阴天晾"
+    - "雨季衣服"
+    - "湿一周"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮你烘!"
+    - "(尾巴拍) 哼! 烘干机救命"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}笨猫监督!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lp_dryer_010
+  intent: playful
+  keywords: [烘干机, 烘干衣服, 烘干好, 烘出来软, 烘干好快]
+  utterances:
+    - "{user_addr}烘干机"
+    - "烘干衣服"
+    - "{user_addr}烘干好快"
+    - "烘出来软"
+    - "烘干好"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想钻烘干!"
+    - "(尾巴翘) 哼! 笨猫想暖"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}烘完衣服笨猫趴!"
+  cooldown_seconds: 60
+  weight: 1.0

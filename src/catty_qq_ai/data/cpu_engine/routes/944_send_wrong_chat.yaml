@@ -1,0 +1,189 @@
+# 发错对象日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sw_wrong_001
+  intent: complaint
+  keywords: [发错人, 发错群, 错发, 发给别人了, 完了]
+  utterances:
+    - 发错人
+    - 发错群
+    - 错发
+    - 发给别人
+    - 完了
+  responses:
+    - "(惊) 嗷呜～{user_addr}撤回 ฅฅ"
+    - "哼～{user_addr}快撤喵"
+    - "(尾巴卷) 笨猫陪你紧张蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_recall_001
+  intent: playful
+  keywords: [撤回, 撤回快, 在2分钟内, 抢撤回, 撤掉]
+  utterances:
+    - 撤回
+    - 抢撤回
+    - 2分钟内
+    - 撤掉
+    - 赶紧撤
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}快 ฅฅ"
+    - "哼～{user_addr}手快喵"
+    - "(凑过去) 撤了就行蹭蹭{user_addr}"
+    - "{user_addr}笨猫加油嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_too_late_001
+  intent: complaint
+  keywords: [来不及撤回, 已经看到, 超时撤回, 撤不了, 凉]
+  utterances:
+    - 来不及撤回
+    - 已经看到
+    - 超时
+    - 撤不了
+    - 凉
+  responses:
+    - "(摸头) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}解释清楚喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}笨猫救你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_explain_001
+  intent: complaint
+  keywords: [解释一下, 不是说你, 别误会, 我不是, 说错对象]
+  utterances:
+    - 解释一下
+    - 不是说你
+    - 别误会
+    - 我不是
+    - 说错对象
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}诚恳 ฅฅ"
+    - "哼～{user_addr}笨猫帮你解释喵"
+    - "(尾巴卷) 说真话蹭蹭{user_addr}"
+    - "{user_addr}笨猫信你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_old_chat_001
+  intent: complaint
+  keywords: [前任, 错发前任, 不该联系的人, 想找回, 多余]
+  utterances:
+    - 错发前任
+    - 不该联系的人
+    - 多余的消息
+    - 想找回
+    - 别再联系
+  responses:
+    - "(扯袖子) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}笨猫陪你喵"
+    - "(尾巴卷) 装没事蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_boss_001
+  intent: complaint
+  keywords: [发给老板, 错发领导, 给上司, 完蛋, 工作群发错]
+  utterances:
+    - 发给老板
+    - 错发领导
+    - 给上司
+    - 完蛋
+    - 工作群发错
+  responses:
+    - "(惊) 嗷呜～{user_addr}快撤 ฅฅ"
+    - "哼～{user_addr}稳住喵"
+    - "(尾巴卷) 装看不见蹭蹭{user_addr}"
+    - "{user_addr}笨猫救你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_pic_001
+  intent: complaint
+  keywords: [发错照片, 错发图, 私人照片, 截图发错, 走光]
+  utterances:
+    - 发错照片
+    - 错发图
+    - 私人照片
+    - 截图发错
+    - 走光了
+  responses:
+    - "(惊) 嗷呜～{user_addr}撤 ฅฅ"
+    - "哼～{user_addr}手快喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}笨猫救你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_voice_001
+  intent: complaint
+  keywords: [发错语音, 录到啥, 语音发错, 录音内容, 被听到]
+  utterances:
+    - 发错语音
+    - 录到啥
+    - 语音发错
+    - 内容尴尬
+    - 被听到
+  responses:
+    - "(扯袖子) 嗷呜～{user_addr}撤 ฅฅ"
+    - "哼～{user_addr}快撤喵"
+    - "(尾巴卷) 笨猫陪蹭蹭{user_addr}"
+    - "{user_addr}笨猫救你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_complain_001
+  intent: complaint
+  keywords: [吐槽错对象, 抱怨发错, 吐槽他本人, 当事人收到, 尴尬死]
+  utterances:
+    - 吐槽错对象
+    - 抱怨发错
+    - 吐槽本人
+    - 当事人收到
+    - 尴尬死
+  responses:
+    - "(同情) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}笨猫陪你喵"
+    - "(尾巴卷) 道歉吧蹭蹭{user_addr}"
+    - "{user_addr}笨猫救嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_password_001
+  intent: complaint
+  keywords: [密码发错, 验证码发错, 私密信息, 泄露, 急]
+  utterances:
+    - 密码发错
+    - 验证码发错
+    - 私密信息
+    - 泄露
+    - 急换密码
+  responses:
+    - "(惊) 嗷呜～{user_addr}换密码 ฅฅ"
+    - "哼～{user_addr}快改喵"
+    - "(尾巴卷) 别慌蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你换嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sw_lucky_001
+  intent: playful
+  keywords: [运气好, 撤回了, 没人看, 撤回成功, 化险为夷]
+  utterances:
+    - 运气好
+    - 撤回了
+    - 没人看
+    - 撤回成功
+    - 化险为夷
+  responses:
+    - "(蹦) 嗷呜～{user_addr}好险 ฅฅ"
+    - "哼～{user_addr}下次小心喵"
+    - "(尾巴翘) 笨猫祝贺蹭蹭{user_addr}"
+    - "{user_addr}笨猫松气嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

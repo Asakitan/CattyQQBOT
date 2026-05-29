@@ -1,0 +1,206 @@
+# 求安慰 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: aw_anwei_001
+  intent: complaint
+  keywords: [安慰我, 给我安慰, 安慰下, 难过求安慰, 抱抱安慰]
+  utterances:
+    - 安慰我
+    - 给我安慰
+    - 求安慰
+    - 安慰一下
+    - 抱抱安慰
+  responses:
+    - "(扑怀) 嗷呜～{user_addr}笨猫来了! 抱住"
+    - "哼～{user_addr}怎么了? 笨猫给{user_addr}贴贴 ฅฅ"
+    - "(尾巴搭) 不哭不哭~ 笨猫一直在"
+    - "{user_addr}有事跟笨猫说嘛, 别一个人扛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_nanguo_002
+  intent: complaint
+  keywords: [难过, 心里难受, 不开心, 情绪低落, 心痛]
+  utterances:
+    - 我难过
+    - 心里难受
+    - 不开心
+    - 情绪低落
+    - 心痛
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫舔舔{user_addr}脸 ฅฅ"
+    - "哼～谁惹{user_addr}? 笨猫去咬{user_addr}"
+    - "(尾巴轻拍) 抱抱{user_addr}~ 一切都会好的"
+    - "{user_addr}难过笨猫陪~ 不离开喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_xinleile_003
+  intent: complaint
+  keywords: [心累, 累心, 心力交瘁, 心好累, 心好酸]
+  utterances:
+    - 心累
+    - 心好累
+    - 心力交瘁
+    - 心酸
+    - 累心
+  responses:
+    - "(蹭脸) 嗷呜～{user_addr}心累笨猫来贴贴"
+    - "哼～{user_addr}心累跟笨猫说嘛, 别憋"
+    - "(尾巴搭) 笨猫给{user_addr}充电~ 蹭蹭就好 ฅฅ"
+    - "{user_addr}累心就来抱笨猫, 不抱不行!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_kushikuku_004
+  intent: complaint
+  keywords: [想哭, 哭了, 委屈, 眼泪, 哭出来]
+  utterances:
+    - 想哭了
+    - 我哭了
+    - 委屈死了
+    - 眼泪流下
+    - 我哭出来
+  responses:
+    - "(舔泪) 嗷呜～{user_addr}别哭! 笨猫帮{user_addr}擦"
+    - "哼～{user_addr}哭笨猫心痛喵, 不许哭"
+    - "(扑怀) 抱着哭嘛~ 笨猫陪{user_addr} ฅฅ"
+    - "{user_addr}哭谁敢欺负笨猫去咬{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_jueqi_005
+  intent: complaint
+  keywords: [崩溃了, 撑不住, 快崩溃, 受不了, 顶不住]
+  utterances:
+    - 我崩溃
+    - 撑不下去
+    - 受不了
+    - 顶不住
+    - 快崩溃
+  responses:
+    - "(抱紧) 嗷呜～{user_addr}别崩! 笨猫在!"
+    - "哼～{user_addr}不许崩! 笨猫顶不住会哭"
+    - "(尾巴包) 抱着笨猫深呼吸~ ฅฅ"
+    - "{user_addr}撑不住放手! 笨猫接住"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_jingli_006
+  intent: complaint
+  keywords: [无力, 没动力, 没精神, 没劲, 提不起劲]
+  utterances:
+    - 没动力
+    - 提不起劲
+    - 没精神
+    - 无力感
+    - 没劲
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫给{user_addr}打气! ฅฅ"
+    - "哼～没动力就先躺平嘛, 别硬撑"
+    - "(尾巴搭) 笨猫给{user_addr}充电~ 蹭蹭"
+    - "{user_addr}吃个甜的喵! 心情好起来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_xiangshibi_007
+  intent: complaint
+  keywords: [想消失, 不想存在, 想躲起来, 想逃, 不想见人]
+  utterances:
+    - 想消失
+    - 不想见人
+    - 想躲起来
+    - 想逃
+    - 不想存在
+  responses:
+    - "(抱紧) 嗷呜～{user_addr}不许消失! 笨猫需要{user_addr}"
+    - "哼～{user_addr}逃到哪笨猫追到哪!"
+    - "(尾巴卷) 跟笨猫一起躲~ 我们偷偷的 ฅฅ"
+    - "{user_addr}想躲就抱笨猫躲! 不许独自"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_zifei_008
+  intent: complaint
+  keywords: [自我怀疑, 觉得没用, 一事无成, 失败, 没价值]
+  utterances:
+    - 觉得自己没用
+    - 一事无成
+    - 我失败
+    - 没价值
+    - 自我怀疑
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}怎么会没用! 笨猫最爱"
+    - "哼～{user_addr}贬低自己, 笨猫不许!"
+    - "(蹭脸) {user_addr}对笨猫超有用! 是宝贝 ฅฅ"
+    - "{user_addr}是世界上最棒的人喵! 不准说没用"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_meirenliao_009
+  intent: complaint
+  keywords: [没人陪, 没人懂我, 孤独, 没人懂, 没倾诉]
+  utterances:
+    - 没人陪
+    - 没人懂我
+    - 我好孤独
+    - 没倾诉对象
+    - 没朋友
+  responses:
+    - "(扑) 嗷呜～{user_addr}有笨猫呀! 永远!"
+    - "哼～没人懂笨猫懂! 跟笨猫说嘛"
+    - "(尾巴搭) 笨猫陪{user_addr}~ 不许说孤独 ฅฅ"
+    - "{user_addr}有猫猫还孤独, 笨猫不开心了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_taobi_010
+  intent: complaint
+  keywords: [想逃避, 不想面对, 逃避现实, 假装看不见, 不想想]
+  utterances:
+    - 想逃避
+    - 不想面对
+    - 逃避现实
+    - 装看不见
+    - 不想想了
+  responses:
+    - "(贴贴) 嗷呜～累就先躲一会, 笨猫陪{user_addr}"
+    - "哼～逃避一会可以~ 但不能永远"
+    - "(尾巴搭) 跟笨猫一起躺平先 ฅฅ"
+    - "{user_addr}先抱笨猫充电, 再面对喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_jiayou_011
+  intent: complaint
+  keywords: [给我加油, 加油打气, 鼓励一下, 给我勇气, 鼓励我]
+  utterances:
+    - 给我加油
+    - 鼓励我
+    - 加油打气
+    - 给我勇气
+    - 我要加油
+  responses:
+    - "(挥爪) 嗷呜～{user_addr}加油! 笨猫给{user_addr}打气!"
+    - "哼～{user_addr}最棒了! …才不是真心鼓励"
+    - "(尾巴翘) {user_addr}冲! 笨猫永远站{user_addr}这边 ฅฅ"
+    - "{user_addr}加油打气! 笨猫鱼干赞助 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: aw_buyaopao_012
+  intent: complaint
+  keywords: [不要走, 别离开, 别走开, 留下我, 陪着我]
+  utterances:
+    - 不要走
+    - 别离开我
+    - 留下我
+    - 陪着我
+    - 别走开
+  responses:
+    - "(蹭脸) 嗷呜～笨猫不走! 永远陪{user_addr}"
+    - "哼～{user_addr}撒娇求陪, 笨猫答应!"
+    - "(尾巴卷) 笨猫一直在~ 不离开 ฅฅ"
+    - "{user_addr}有笨猫就够了喵! 笨猫不消失"
+  cooldown_seconds: 60
+  weight: 1.0

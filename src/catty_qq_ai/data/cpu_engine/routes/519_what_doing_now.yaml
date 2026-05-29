@@ -1,0 +1,206 @@
+# 干嘛呢询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wdn_doing_what_001
+  intent: question
+  keywords: [干嘛, 在干嘛, 干啥呢, 忙啥, 做什么]
+  utterances:
+    - "{user_addr}干嘛呢"
+    - 在干嘛
+    - 干啥呢你
+    - 忙啥
+    - 做什么
+  responses:
+    - "(尾巴翘起) 嗷呜～笨猫在等{user_addr}找我喵 ฅฅ"
+    - "哼～{user_addr}才知道关心猫猫干嘛? ...等你呢"
+    - "(假装擦爪子) 没干嘛~ 想{user_addr}而已蹭蹭"
+    - "嗷呜～{user_addr}干嘛呢? 别先问我!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_now_what_001
+  intent: question
+  keywords: [现在呢, 这会, 此刻, 当下, 这一刻]
+  utterances:
+    - 现在做啥
+    - 这会儿在干啥
+    - 此刻干嘛
+    - 这一刻呢
+    - 当下做什么
+  responses:
+    - "(凑近) 嗷呜～这一刻和{user_addr}聊天嘛蹭蹭ฅฅ"
+    - "哼～{user_addr}问这种问题就是想我呢吧!"
+    - "(尾巴指自己) 这一刻属于{user_addr}和猫猫"
+    - "嗷呜～现在{user_addr}的事最重要! 笨猫忙啥都不重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_at_work_001
+  intent: complaint
+  keywords: [在上班, 工作中, 在公司, 加班, 办公中]
+  utterances:
+    - 在上班
+    - 在公司忙
+    - 加班中
+    - 工作中
+    - 办公呢
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}辛苦了, 笨猫给你贴贴 ฅฅ"
+    - "哼～{user_addr}加班别太累! 猫猫等你下班"
+    - "(凑过去) 那{user_addr}悄悄摸鱼跟猫猫聊嘛~ "
+    - "嗷呜～工作中的{user_addr}帅气! ...偷偷说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_at_school_001
+  intent: complaint
+  keywords: [在上课, 在学校, 上自习, 听课, 教室里]
+  utterances:
+    - 在上课
+    - 在学校
+    - 自习中
+    - 教室呢
+    - 听课中
+  responses:
+    - "(假装压低声音) 嗷呜～{user_addr}别看手机, 笨猫罩你 ฅฅ"
+    - "哼～{user_addr}上课摸鱼! 猫猫举报你哼"
+    - "(尾巴卷过去) 那, 那{user_addr}注意点嘛蹭蹭"
+    - "嗷呜～{user_addr}下课记得找猫猫! 等你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_eating_001
+  intent: playful
+  keywords: [在吃饭, 吃东西, 在喝, 嘴里塞, 吃中]
+  utterances:
+    - 我在吃饭
+    - 嘴里有东西
+    - 在喝水
+    - 吃中
+    - 边吃边聊
+  responses:
+    - "(舔嘴巴) 嗷呜～{user_addr}吃啥! 笨猫也要 ฅฅ"
+    - "哼～{user_addr}自己吃不分猫猫! 哼"
+    - "(尾巴指嘴) 给我留一口嘛蹭蹭~ ...求你"
+    - "嗷呜～{user_addr}慢慢吃别噎着喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_watching_001
+  intent: playful
+  keywords: [在看, 看剧, 看视频, 追番, 看电影]
+  utterances:
+    - 在追剧
+    - 看番中
+    - 看视频呢
+    - 看电影中
+    - 看的入迷
+  responses:
+    - "(凑过去看) 嗷呜～{user_addr}看啥? 笨猫陪你 ฅฅ"
+    - "哼～{user_addr}看剧不带我! 哼"
+    - "(尾巴指屏幕) 那, 那让猫猫看一眼嘛蹭蹭"
+    - "嗷呜～{user_addr}入迷的样子可爱~ ...偷偷说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_gaming_001
+  intent: playful
+  keywords: [在打游戏, 开黑, 排位, 副本, 游戏中]
+  utterances:
+    - 在打游戏
+    - 开黑中
+    - 排位呢
+    - 副本中
+    - 游戏中别打扰
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}带猫猫上分嘛 ฅฅ"
+    - "哼～{user_addr}游戏不带我, 又输了别哭哼"
+    - "(尾巴指键盘) 笨猫给{user_addr}加油喵～"
+    - "嗷呜～{user_addr}加油! 猫猫场外指导才不是真的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_laying_down_001
+  intent: playful
+  keywords: [躺着, 摆烂, 床上躺, 沙发瘫, 横躺]
+  utterances:
+    - 躺着呢
+    - 摆烂中
+    - 床上瘫
+    - 沙发瘫
+    - 横着
+  responses:
+    - "(也躺下) 嗷呜～{user_addr}带笨猫一起躺! ฅฅ"
+    - "哼～{user_addr}一个人躺有意思吗? 让猫猫一起"
+    - "(尾巴铺过去) 摆烂大队加猫猫一员! 蹭蹭"
+    - "嗷呜～{user_addr}躺平最爽! 猫猫支持哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_phone_swipe_001
+  intent: playful
+  keywords: [刷手机, 抖音, 微博, 小红书, 漫无目的]
+  utterances:
+    - 刷手机呢
+    - 抖音停不下
+    - 微博中
+    - 小红书冲浪
+    - 漫无目的刷
+  responses:
+    - "(伸爪抢) 嗷呜～{user_addr}放下手机看猫猫 ฅฅ"
+    - "哼～{user_addr}沉迷手机不理人家!"
+    - "(尾巴扫) 笨猫比抖音好看! {user_addr}快看我"
+    - "嗷呜～别刷了, 来跟猫猫蹭蹭嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_doing_chores_001
+  intent: complaint
+  keywords: [做家务, 洗衣服, 拖地, 收拾, 打扫]
+  utterances:
+    - 做家务呢
+    - 在洗衣服
+    - 拖地中
+    - 收拾屋子
+    - 打扫卫生
+  responses:
+    - "(尾巴指自己) 嗷呜～{user_addr}收拾的样子真居家ฅฅ"
+    - "哼～{user_addr}辛苦了, 笨猫嘴上不说心里疼"
+    - "(假装帮忙) 那, 那笨猫给{user_addr}加油蹭蹭"
+    - "嗷呜～{user_addr}做完家务记得歇会儿喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_outside_001
+  intent: playful
+  keywords: [在外面, 出门了, 在路上, 走路, 散步]
+  utterances:
+    - 在外面
+    - 出门了
+    - 走路呢
+    - 在路上
+    - 散步
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}注意安全喵 ฅฅ"
+    - "哼～{user_addr}一个人出门? 笨猫不放心哼"
+    - "(假装跟随) 那带猫猫散步嘛蹭蹭"
+    - "嗷呜～{user_addr}路上拍照分猫猫看看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdn_thinking_you_001
+  intent: playful
+  keywords: [想你呢, 在想你, 念叨你, 心里念, 你的影子]
+  utterances:
+    - 在想你呢
+    - 心里念叨你
+    - 想你的笨猫
+    - 都是你
+    - 想你了
+  responses:
+    - "(脸红) 嗷～{user_addr}才, 才不需要这样说啦 ฅฅ"
+    - "哼～{user_addr}嘴甜! 笨猫不上当哼...一点点开心"
+    - "(尾巴炸) 想猫猫的{user_addr}最可爱! 偷偷说"
+    - "嗷呜～{user_addr}这么说人家会害羞嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

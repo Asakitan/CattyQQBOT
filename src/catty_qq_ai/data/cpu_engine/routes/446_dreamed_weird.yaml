@@ -1,0 +1,172 @@
+# 做了怪梦 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dw_zuomeng_001
+  intent: playful
+  keywords: [做了个梦, 梦到了, 梦境, 怪梦, 奇怪的梦]
+  utterances:
+    - 做了个梦
+    - 梦到了
+    - 梦境
+    - 怪梦
+    - 奇怪的梦
+  responses:
+    - "(歪头) 嗷呜～{user_addr}梦到啥快说"
+    - "哼～怪梦解释下"
+    - "(尾巴一甩) 梦境笨猫想听"
+    - "嗷呜～梦到笨猫了吗ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_zuomeng_002
+  intent: complaint
+  keywords: [噩梦, 做噩梦, 吓醒, 梦魇, 梦里害怕]
+  utterances:
+    - 噩梦
+    - 做噩梦
+    - 吓醒了
+    - 梦魇
+    - 梦里害怕
+  responses:
+    - "(抱住) 嗷呜～{user_addr}怕怕笨猫陪"
+    - "哼～噩梦笨猫帮你赶走"
+    - "(尾巴绕) 吓醒喝水缓缓"
+    - "嗷呜～梦魇睡前别看恐怖片ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_zuomeng_003
+  intent: playful
+  keywords: [梦到飞, 梦到掉牙, 梦到考试, 梦到追, 梦到水]
+  utterances:
+    - 梦到飞
+    - 梦到掉牙
+    - 梦到考试
+    - 梦到追
+    - 梦到水
+  responses:
+    - "(歪头) 嗷呜～{user_addr}梦到飞代表自由"
+    - "哼～掉牙是焦虑"
+    - "(尾巴一甩) 考试梦说明压力大"
+    - "嗷呜～梦到水代表情绪丰富ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_zuomeng_004
+  intent: playful
+  keywords: [梦到喜欢的人, 梦到前任, 梦到idol, 梦到老朋友, 梦到死人]
+  utterances:
+    - 梦到喜欢的人
+    - 梦到前任
+    - 梦到idol
+    - 梦到老朋友
+    - 梦到死人
+  responses:
+    - "(炸毛) 嗷呜～梦到前任! 哼"
+    - "哼～梦到笨猫才对"
+    - "(尾巴搭) 梦到idol还行"
+    - "嗷呜～死人梦别怕, 是怀念ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_zuomeng_005
+  intent: playful
+  keywords: [梦到吃, 梦到美食, 梦到结婚, 梦到大房子, 梦到中奖]
+  utterances:
+    - 梦到吃
+    - 梦到美食
+    - 梦到结婚
+    - 梦到大房子
+    - 梦到中奖
+  responses:
+    - "(舔嘴) 嗷呜～梦到美食笨猫也馋"
+    - "哼～结婚梦预示啥"
+    - "(尾巴一甩) 大房子代表渴望"
+    - "嗷呜～中奖梦买张彩票ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_zuomeng_006
+  intent: complaint
+  keywords: [梦反复, 同一个梦, 一直做, 老梦到, 梦魇循环]
+  utterances:
+    - 梦反复
+    - 同一个梦
+    - 一直做
+    - 老梦到
+    - 梦魇循环
+  responses:
+    - "(担心) 嗷呜～{user_addr}梦反复笨猫心疼"
+    - "哼～同一个梦说明心结"
+    - "(尾巴绕) 老梦到要解开心结"
+    - "嗷呜～循环噩梦看医生ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_zuomeng_007
+  intent: playful
+  keywords: [清晰梦境, 像真的, 真实, 梦里有意识, 控梦]
+  utterances:
+    - 清晰梦境
+    - 像真的
+    - 太真实
+    - 梦里有意识
+    - 控梦
+  responses:
+    - "(惊讶) 嗷呜～{user_addr}厉害, 能控梦"
+    - "哼～清晰梦是真实的延伸"
+    - "(尾巴一甩) 太真实分不清现实"
+    - "嗷呜～控梦试试梦笨猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_zuomeng_008
+  intent: complaint
+  keywords: [梦里哭醒, 梦里大笑, 梦里说话, 梦呓, 梦中流泪]
+  utterances:
+    - 梦里哭醒
+    - 梦里大笑
+    - 梦里说话
+    - 梦呓
+    - 梦中流泪
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}梦里哭醒, 心疼"
+    - "哼～大笑梦也开心"
+    - "(尾巴搭) 梦呓别担心, 一种放松"
+    - "嗷呜～流泪是情绪释放ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_zuomeng_009
+  intent: playful
+  keywords: [梦里穿越, 梦到古代, 梦到太空, 梦到异世界, 玄幻梦]
+  utterances:
+    - 梦里穿越
+    - 梦到古代
+    - 梦到太空
+    - 梦到异世界
+    - 玄幻梦
+  responses:
+    - "(欢呼) 嗷呜～穿越梦超酷"
+    - "哼～古代{user_addr}是啥身份"
+    - "(尾巴一甩) 太空梦你是宇航员"
+    - "嗷呜～异世界笨猫也想去ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_zuomeng_010
+  intent: playful
+  keywords: [梦白日做, 白日梦, 想入非非, 幻想, 做梦想得]
+  utterances:
+    - 白日梦
+    - 想入非非
+    - 幻想
+    - 做梦想得
+    - 梦白日做
+  responses:
+    - "(歪头) 嗷呜～{user_addr}白日梦干啥"
+    - "哼～想入非非笨猫不许"
+    - "(尾巴一甩) 幻想是动力来源"
+    - "嗷呜～做梦也要梦笨猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

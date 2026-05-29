@@ -1,0 +1,189 @@
+# 游戏抽卡 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: gg_choka_001
+  intent: playful
+  keywords: [抽卡, 十连, 单抽, 卡池, 出货]
+  utterances:
+    - "抽卡"
+    - "十连"
+    - "单抽"
+    - "卡池"
+    - "出货"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}十连欧!"
+    - "哼～单抽看脸 ฅฅ"
+    - "(尾巴翘) 出货请笨猫吃"
+    - "卡池新角色冲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gg_oushou_001
+  intent: playful
+  keywords: [欧皇, 非酋, 脸黑, 脸白, 运气]
+  utterances:
+    - "欧皇"
+    - "非酋"
+    - "脸黑"
+    - "脸白"
+    - "运气好"
+  responses:
+    - "(羡慕) 嗷呜～{user_addr}欧皇! 借运"
+    - "哼～非酋打死再抽 ฅฅ"
+    - "(尾巴扫) 脸黑就停手"
+    - "运气好分笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gg_baodi_001
+  intent: complaint
+  keywords: [保底, 大保底, 小保底, 歪了, 歪]
+  utterances:
+    - "保底"
+    - "大保底"
+    - "歪了"
+    - "歪"
+    - "小保底"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}歪了心疼"
+    - "哼～保底也是命 ฅฅ"
+    - "(尾巴抚) 大保底必出"
+    - "小保底歪了再来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gg_lianxi_001
+  intent: playful
+  keywords: [连胜, 上分, 赢了, 连赢, 顺风]
+  utterances:
+    - "连胜"
+    - "上分"
+    - "赢了"
+    - "连赢"
+    - "顺风"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}连胜! 牛"
+    - "哼～上分别飘 ฅฅ"
+    - "(尾巴翘) 连赢请笨猫"
+    - "顺风别浪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gg_diaoduan_001
+  intent: complaint
+  keywords: [掉段, 掉分, 输了, 连败, 逆风]
+  utterances:
+    - "掉段"
+    - "掉分"
+    - "输了"
+    - "连败"
+    - "逆风"
+  responses:
+    - "(贴) 嗷呜～{user_addr}掉段笨猫陪"
+    - "哼～连败休息 ฅฅ"
+    - "(尾巴抚) 输了别上头"
+    - "逆风局也要稳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gg_dayue_001
+  intent: playful
+  keywords: [打野, 上单, 中单, 辅助, ADC]
+  utterances:
+    - "打野"
+    - "上单"
+    - "中单"
+    - "辅助"
+    - "ADC"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}打野 carry"
+    - "哼～辅助也重要 ฅฅ"
+    - "(尾巴扫) 中单看技术"
+    - "ADC 站后排"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gg_kaihei_001
+  intent: playful
+  keywords: [开黑, 排位, 双排, 五排, 黑车]
+  utterances:
+    - "开黑"
+    - "排位"
+    - "双排"
+    - "五排"
+    - "黑车"
+  responses:
+    - "(凑) 嗷呜～开黑带笨猫!"
+    - "哼～排位别送 ฅฅ"
+    - "(尾巴扫) 五排稳赢"
+    - "双排带飞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gg_lianpiao_001
+  intent: complaint
+  keywords: [掉装备, 没出装, 装备贵, 战力低, 战力不够]
+  utterances:
+    - "掉装备"
+    - "没出装"
+    - "装备贵"
+    - "战力低"
+    - "战力不够"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}战力低没事"
+    - "哼～装备慢慢攒 ฅฅ"
+    - "(尾巴扫) 不堆数值靠技术"
+    - "装备贵养小号"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gg_meixingyun_001
+  intent: complaint
+  keywords: [活动, 打活动, 日常, 任务, 周常]
+  utterances:
+    - "活动"
+    - "打活动"
+    - "日常"
+    - "任务"
+    - "周常"
+  responses:
+    - "(累) 嗷呜～{user_addr}日常打完累"
+    - "哼～活动赶时间 ฅฅ"
+    - "(尾巴扫) 周常别拖"
+    - "任务清完睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gg_xindiezi_001
+  intent: playful
+  keywords: [新角色, 新皮肤, 新机制, 新版本, 新卡]
+  utterances:
+    - "新角色"
+    - "新皮肤"
+    - "新机制"
+    - "新版本"
+    - "新卡"
+  responses:
+    - "(凑) 嗷呜～{user_addr}新皮肤晒图"
+    - "哼～新机制要研究 ฅฅ"
+    - "(尾巴扫) 新角色强不"
+    - "新版本氪起来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gg_youxihaoye_001
+  intent: playful
+  keywords: [游戏好玩, 游戏菜, 游戏烂, 弃坑, 退游]
+  utterances:
+    - "游戏好玩"
+    - "游戏菜"
+    - "游戏烂"
+    - "弃坑"
+    - "退游"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}游戏好玩多玩"
+    - "哼～弃坑很正常 ฅฅ"
+    - "(尾巴扫) 退游来陪猫猫"
+    - "游戏烂就换"
+  cooldown_seconds: 60
+  weight: 1.0

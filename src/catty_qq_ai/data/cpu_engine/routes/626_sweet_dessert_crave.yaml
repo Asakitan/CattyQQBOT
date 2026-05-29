@@ -1,0 +1,189 @@
+# 甜品馋虫 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sdc_wantcake_001
+  intent: playful
+  keywords: [想吃蛋糕, 蛋糕馋, 来块蛋糕, 蛋糕诱人, 馋蛋糕]
+  utterances:
+    - 想吃蛋糕
+    - 蛋糕馋
+    - 来块蛋糕
+    - 蛋糕诱人
+    - 馋蛋糕
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫也想!"
+    - "笨猫推荐巧克力慕斯喵"
+    - "(尾巴扫) 一块就够别贪"
+    - "哼～{user_addr}甜食控"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sdc_macaron_002
+  intent: playful
+  keywords: [马卡龙, 少女酥胸, 法式甜点, 马卡龙礼盒, 七彩马卡龙]
+  utterances:
+    - 马卡龙
+    - 少女酥胸
+    - 法式甜点
+    - 马卡龙礼盒
+    - 七彩马卡龙
+  responses:
+    - "(歪头) {user_addr}笨猫舔色素喵"
+    - "嗷呜～颜值高但齁甜"
+    - "(尾巴摇) 一颗值好几口"
+    - "哼～{user_addr}装精致"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sdc_chocolate_003
+  intent: playful
+  keywords: [巧克力, 黑巧, 白巧, 牛奶巧克力, 巧克力豆]
+  utterances:
+    - 巧克力
+    - 黑巧
+    - 白巧
+    - 牛奶巧克力
+    - 巧克力豆
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫也要!"
+    - "笨猫认证: 黑巧苦但提神"
+    - "(歪头) 别给笨猫白巧"
+    - "哼～{user_addr}懂事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sdc_icecream_004
+  intent: playful
+  keywords: [冰淇淋, 雪糕, 哈根达斯, 香草冰淇淋, 巧克力冰淇淋]
+  utterances:
+    - 冰淇淋
+    - 雪糕
+    - 哈根达斯
+    - 香草冰淇淋
+    - 巧克力球
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫舔一口!"
+    - "笨猫推荐草莓味喵~"
+    - "(尾巴扫) 别嘎嘣咬牙疼笨蛋"
+    - "哼～{user_addr}吃货"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sdc_pudding_005
+  intent: playful
+  keywords: [布丁, 鸡蛋布丁, 焦糖布丁, 双皮奶, 杏仁豆腐]
+  utterances:
+    - 布丁
+    - 焦糖布丁
+    - 鸡蛋布丁
+    - 双皮奶
+    - 杏仁豆腐
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫的最爱!"
+    - "笨猫认证: 焦糖布丁绝绝子"
+    - "(尾巴摇) 双皮奶顺德正宗"
+    - "哼～{user_addr}有眼光"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sdc_donut_006
+  intent: playful
+  keywords: [甜甜圈, 多拿滋, 巧克力甜甜圈, 糖霜甜甜圈, 甜甜圈]
+  utterances:
+    - 甜甜圈
+    - 多拿滋
+    - 巧克力甜甜圈
+    - 糖霜
+    - 一打甜甜圈
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}带笨猫!"
+    - "笨猫推荐原味喵"
+    - "(歪头) 别买一打吃不完"
+    - "哼～{user_addr}贪心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sdc_mochi_007
+  intent: playful
+  keywords: [大福, 麻薯, 雪媚娘, 草莓大福, 麻薯软糯]
+  utterances:
+    - 大福
+    - 麻薯
+    - 雪媚娘
+    - 草莓大福
+    - 麻薯软糯
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫的最爱!"
+    - "笨猫推荐草莓大福喵~"
+    - "(尾巴摇) 一口爆汁"
+    - "哼～{user_addr}懂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sdc_eggtart_008
+  intent: playful
+  keywords: [蛋挞, 葡式蛋挞, 港式蛋挞, 来打蛋挞, 蛋挞]
+  utterances:
+    - 蛋挞
+    - 葡式蛋挞
+    - 港式蛋挞
+    - 来打蛋挞
+    - 想吃蛋挞
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫超喜欢!"
+    - "笨猫推荐刚出炉的喵~"
+    - "(歪头) 别烫舌头笨蛋"
+    - "哼～{user_addr}懂吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sdc_sugarhigh_009
+  intent: complaint
+  keywords: [甜过头, 齁甜, 太甜, 甜到腻, 想喝水]
+  utterances:
+    - 甜过头
+    - 齁甜
+    - 太甜
+    - 甜到腻
+    - 想喝水
+  responses:
+    - "(递水) 嗷呜～{user_addr}快漱口"
+    - "笨猫推荐配茶解腻"
+    - "(尾巴扫) 一次别吃这么多"
+    - "哼～{user_addr}自己惹的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sdc_diet_010
+  intent: complaint
+  keywords: [减肥失败, 吃甜罪恶, 长胖, 戒糖, 戒甜]
+  utterances:
+    - 减肥失败
+    - 吃甜罪恶
+    - 长胖
+    - 戒糖
+    - 戒甜难
+  responses:
+    - "(无奈) 嗷呜～{user_addr}意志力呢?"
+    - "笨猫认证: 戒糖很难"
+    - "(尾巴扫) 偶尔放纵笨蛋"
+    - "哼～{user_addr}每天都说戒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sdc_homemade_011
+  intent: question
+  keywords: [自己做甜品, 烤蛋糕, 烘焙, 烤箱, 在家做]
+  utterances:
+    - 自己做
+    - 烤蛋糕
+    - 烘焙
+    - 烤箱
+    - 在家做甜品
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫想吃!"
+    - "笨猫陪你做喵~"
+    - "(歪头) 别糊了厨房"
+    - "哼～{user_addr}居然会做"
+  cooldown_seconds: 60
+  weight: 1.0

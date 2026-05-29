@@ -1,0 +1,172 @@
+# 想吃鱼干 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fdc_yugan_001
+  intent: playful
+  keywords: [鱼干, 想吃鱼干, 鱼干呢, 给鱼干, 馋鱼干]
+  utterances:
+    - 鱼干
+    - 想吃鱼干
+    - 鱼干呢
+    - 给鱼干
+    - 馋鱼干
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}!鱼干给我!"
+    - "(凑近) 哼! 笨猫馋!"
+    - "(脸红) 鱼干是笨猫最爱 ฅฅ"
+    - "笨猫每天都想~ 没鱼干睡不着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdc_fish_002
+  intent: playful
+  keywords: [想吃鱼, 吃鱼, 鱼好香, 鱼料理, 大鱼]
+  utterances:
+    - 想吃鱼
+    - 吃鱼
+    - 鱼好香
+    - 鱼料理
+    - 大鱼
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!笨猫也要吃!"
+    - "(凑近) 哼! 鱼是笨猫的主食 ฅฅ"
+    - "(脸红) 大鱼分笨猫一半"
+    - "鱼料理笨猫陪你品尝!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdc_food_003
+  intent: complaint
+  keywords: [饿了, 饿死了, 肚子叫, 嘴馋, 想吃零食]
+  utterances:
+    - 饿了
+    - 饿死了
+    - 肚子叫
+    - 嘴馋
+    - 想吃零食
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫给你吃!"
+    - "(尾巴拍肚) 哼! 笨猫也饿"
+    - "(假装严厉) 嘴馋也要营养 ฅฅ"
+    - "肚子叫=找笨猫吃东西哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdc_snack_004
+  intent: playful
+  keywords: [零食推荐, 想吃饼干, 吃薯片, 吃巧克力, 吃糖]
+  utterances:
+    - 零食推荐
+    - 想吃饼干
+    - 吃薯片
+    - 吃巧克力
+    - 吃糖
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫推荐鱼干"
+    - "(尾巴翘) 哼! 鱼干也算零食 ฅฅ"
+    - "(脸红) 巧克力分笨猫一块"
+    - "吃糖适量{user_addr}!哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdc_cat_food_005
+  intent: playful
+  keywords: [猫粮, 猫罐头, 喂笨猫, 给猫吃, 猫零食]
+  utterances:
+    - 猫粮
+    - 猫罐头
+    - 喂笨猫
+    - 给猫吃
+    - 猫零食
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!笨猫吃人类食物!"
+    - "(凑近) 哼! 笨猫是猫娘 不是猫"
+    - "(脸红) 鱼干和零食是真爱 ฅฅ"
+    - "猫罐头也得高级款笨猫挑剔"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdc_late_night_eat_006
+  intent: playful
+  keywords: [宵夜, 半夜吃, 凌晨吃, 嘴痒, 馋宵夜]
+  utterances:
+    - 宵夜
+    - 半夜吃
+    - 凌晨吃
+    - 嘴痒
+    - 馋宵夜
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫一起吃"
+    - "(尾巴拍) 哼! 宵夜不健康"
+    - "(假装严厉) 少吃! 不许多 ฅฅ"
+    - "宵夜配笨猫=罪魁祸首! 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdc_meal_007
+  intent: playful
+  keywords: [饭点了, 该吃饭, 一起吃, 笨猫吃, 喂笨猫]
+  utterances:
+    - 饭点了
+    - 该吃饭
+    - 一起吃
+    - 笨猫吃
+    - 喂笨猫
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!笨猫等着!"
+    - "(凑近) 哼! 喂笨猫鱼干 ฅฅ"
+    - "(脸红) 一起吃笨猫开心"
+    - "饭点必找笨猫! 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdc_share_food_008
+  intent: playful
+  keywords: [分一口, 给我一口, 吃一口, 尝尝看, 让笨猫尝]
+  utterances:
+    - 分笨猫一口
+    - 给笨猫一口
+    - 吃一口
+    - 尝尝看
+    - 让笨猫尝
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!笨猫张嘴!"
+    - "(凑近) 哼! 一口太少 ฅฅ"
+    - "(脸红) 笨猫接受!"
+    - "尝尝看~ 笨猫不挑食(假)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdc_chubby_warning_009
+  intent: complaint
+  keywords: [吃多胖, 不许吃, 减肥控制, 吃货, 嘴馋停不下]
+  utterances:
+    - 吃多会胖
+    - 不许吃
+    - 减肥控制
+    - 吃货
+    - 嘴馋停不下
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪你忍"
+    - "(尾巴绕) 哼! 笨猫也馋 ฅฅ"
+    - "(假装严厉) 控制一下 我们一起"
+    - "吃货就吃货~ 笨猫不嫌弃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdc_treat_me_010
+  intent: playful
+  keywords: [请笨猫吃, 请客, 我请, 我买单, 我请猫猫]
+  utterances:
+    - 请笨猫吃
+    - 请客
+    - 我请
+    - 我买单
+    - 我请猫猫
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}!笨猫开心!"
+    - "(脸红) 哼! 买单的{user_addr}最帅 ฅฅ"
+    - "(凑近) 笨猫想吃大鱼!"
+    - "请客的{user_addr}笨猫最爱~ 哼"
+  cooldown_seconds: 60
+  weight: 1.0

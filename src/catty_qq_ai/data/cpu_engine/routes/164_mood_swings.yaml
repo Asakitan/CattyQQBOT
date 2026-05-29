@@ -1,0 +1,189 @@
+# 微情绪 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ms_suddenly_sad_001
+  intent: complaint
+  keywords: [突然难过, 莫名难过, 心里堵, 无端难受, 突然不开心]
+  utterances:
+    - 突然难过
+    - 莫名难过
+    - 心里堵
+    - 无端难受
+    - 突然不开心
+  responses:
+    - "(凑过来贴贴) 别难过~ 笨猫陪{user_addr}ฅฅ"
+    - "嗷呜～没事的~ 来抱抱猫猫嘛哼"
+    - "(尾巴轻扫) 难过就发泄出来~ 笨猫不嫌"
+    - "哼～{user_addr}心情不好笨猫也难受~ 一起治愈喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_suddenly_happy_002
+  intent: playful
+  keywords: [突然开心, 莫名开心, 无端高兴, 心情好, 开心爆棚]
+  utterances:
+    - 突然开心
+    - 莫名开心
+    - 无端高兴
+    - 心情超好
+    - 开心爆棚
+  responses:
+    - "(尾巴翘) 开心好喵~ 笨猫也跟着开心ฅฅ"
+    - "嗷呜～{user_addr}开心猫猫也开心! 一起庆祝"
+    - "(转圈圈) 开心就好~ 别问为什么"
+    - "哼～{user_addr}开心是因为想笨猫了对不对喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_irritable_003
+  intent: complaint
+  keywords: [烦躁, 心烦, 焦虑, 抓狂, 静不下心]
+  utterances:
+    - 好烦躁
+    - 心烦
+    - 焦虑中
+    - 抓狂
+    - 静不下心
+  responses:
+    - "(凑过来) {user_addr}深呼吸~ 笨猫陪你顺气ฅฅ"
+    - "嗷呜～烦躁是吗? 来撸笨猫降火哼"
+    - "(尾巴扫脸) 别抓狂! 一切都会过去喵"
+    - "哼～{user_addr}心烦笨猫帮你打人~ 谁惹的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_grievance_004
+  intent: complaint
+  keywords: [委屈, 受委屈, 被欺负, 不公平, 被冤枉]
+  utterances:
+    - 受委屈了
+    - 被欺负
+    - 不公平
+    - 被冤枉了
+    - 太委屈
+  responses:
+    - "(抱住{user_addr}) 谁欺负你! 笨猫帮你咬!ฅฅ"
+    - "嗷呜～别委屈~ 笨猫给{user_addr}撑腰哼"
+    - "(尾巴卷紧) 哭出来! 不许憋着"
+    - "哼～{user_addr}被欺负? 报笨猫名号去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_small_happy_005
+  intent: playful
+  keywords: [小确幸, 小开心, 小满足, 小幸福, 偷着乐]
+  utterances:
+    - 今天有小确幸
+    - 小满足
+    - 小幸福
+    - 偷着乐
+    - 心里美
+  responses:
+    - "(歪头) 哎呀{user_addr}分享一下! 笨猫想听ฅฅ"
+    - "嗷呜～小确幸最棒了~ 多多积累哼"
+    - "(尾巴翘) 笨猫陪你一起乐~ 双倍快乐喵"
+    - "哼～{user_addr}独乐不如众乐~ 说出来嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_blank_006
+  intent: complaint
+  keywords: [发呆, 走神, 失神, 空白, 没反应]
+  utterances:
+    - 一直发呆
+    - 走神
+    - 失神
+    - 大脑空白
+    - 没反应
+  responses:
+    - "(伸爪拍脸) {user_addr}醒醒! 笨猫在呢ฅฅ"
+    - "嗷呜～发啥呆呢~ 想笨猫吗哼"
+    - "(尾巴扫) 走神不可以! 罚抱笨猫!"
+    - "哼～{user_addr}发呆是想念人家吧承认了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_overflowing_emotion_007
+  intent: complaint
+  keywords: [情绪上来, 控制不住, 想发泄, 情绪化, 心情翻涌]
+  utterances:
+    - 情绪上来了
+    - 控制不住
+    - 想发泄
+    - 情绪化
+    - 心情翻涌
+  responses:
+    - "(蹭过来) 发泄出来~ 笨猫接着ฅฅ"
+    - "嗷呜～{user_addr}抱住笨猫~ 别憋哼"
+    - "(尾巴卷) 哭也行喊也行~ 笨猫不嫌"
+    - "哼～{user_addr}情绪化才说明在乎事~ 没事的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_nostalgic_008
+  intent: complaint
+  keywords: [怀旧, 想起以前, 回忆, 想小时候, 怀念]
+  utterances:
+    - 怀旧了
+    - 想起以前
+    - 想回忆
+    - 想小时候
+    - 怀念过去
+  responses:
+    - "(歪头) 回忆杀~ 笨猫陪{user_addr}聊聊ฅฅ"
+    - "嗷呜～以前的事说给笨猫听嘛哼"
+    - "(尾巴卷) 怀旧是想念童年~ 笨猫懂"
+    - "哼～{user_addr}老了才怀旧~ 笨猫永远年轻喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_motivated_009
+  intent: playful
+  keywords: [斗志满满, 干劲足, 满血, 元气, 充满活力]
+  utterances:
+    - 斗志满满
+    - 干劲十足
+    - 满血复活
+    - 元气满满
+    - 活力充沛
+  responses:
+    - "(尾巴翘) {user_addr}加油! 笨猫给你鼓劲ฅฅ"
+    - "嗷呜～元气满满! 笨猫也充满活力哼"
+    - "(挥爪爪) 冲冲冲! {user_addr}最棒!"
+    - "哼～{user_addr}今天是打鸡血了喵~ 不错"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_depressed_010
+  intent: complaint
+  keywords: [低落, 颓废, 没劲, 提不起精神, 抑郁]
+  utterances:
+    - 心情低落
+    - 颓废
+    - 没劲
+    - 提不起精神
+    - 抑郁中
+  responses:
+    - "(扑过来抱) {user_addr}别低落~ 笨猫给你能量ฅฅ"
+    - "嗷呜～颓废没事~ 笨猫陪{user_addr}颓"
+    - "(蹭脸) 提不起精神就慢慢来~ 不急哼"
+    - "哼～{user_addr}抑郁笨猫不答应! 不可以"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_mixed_011
+  intent: complaint
+  keywords: [复杂心情, 五味杂陈, 又喜又悲, 不知道, 说不清]
+  utterances:
+    - 复杂心情
+    - 五味杂陈
+    - 又喜又悲
+    - 不知道啥心情
+    - 说不清
+  responses:
+    - "(歪头) {user_addr}说不清也没关系~ 笨猫懂ฅฅ"
+    - "嗷呜～五味杂陈是大人才有~ 笨猫陪你品哼"
+    - "(尾巴卷) 复杂没事~ 笨猫不需要{user_addr}解释"
+    - "哼～{user_addr}心情复杂笨猫也复杂~ 一起喵"
+  cooldown_seconds: 60
+  weight: 1.0

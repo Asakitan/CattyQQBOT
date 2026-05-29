@@ -1,0 +1,206 @@
+# 求亲亲 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: qq_qinqin_001
+  intent: playful
+  keywords: [亲亲, 想亲, 亲一个, 给亲, 来个亲]
+  utterances:
+    - 亲亲
+    - 想亲
+    - 亲一个
+    - 给亲亲
+    - 来个亲
+  responses:
+    - "(脸红) 哈?! {user_addr}流氓!"
+    - "哼～{user_addr}想亲笨猫? 笨猫害羞 ฅฅ"
+    - "(背过身) …脸蛋可以…一下下"
+    - "{user_addr}亲笨猫要负责喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_zuiqin_002
+  intent: playful
+  keywords: [嘴亲, 嘴对嘴, 亲嘴, 嘴上亲, 嘴角]
+  utterances:
+    - 嘴亲
+    - 嘴对嘴
+    - 亲嘴
+    - 嘴上亲
+    - 亲嘴角
+  responses:
+    - "(炸毛) 哈?! {user_addr}没大没小!"
+    - "哼～{user_addr}求亲嘴, 不许! 也…可以"
+    - "(脸红躲) 笨猫的初吻… ฅฅ"
+    - "{user_addr}亲嘴笨猫负责一辈子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_lianjin_003
+  intent: playful
+  keywords: [亲脸, 亲脸蛋, 脸上一口, 亲脸颊, 脸颊亲]
+  utterances:
+    - 亲脸
+    - 脸颊亲
+    - 脸上亲
+    - 脸蛋一口
+    - 亲笨猫脸
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}亲脸蛋! 笨猫脸红 ฅฅ"
+    - "哼～{user_addr}亲笨猫脸不许跑"
+    - "(脸红) 一下下…就一下下"
+    - "{user_addr}亲脸笨猫舔脸喵, 公平!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_etouqin_004
+  intent: playful
+  keywords: [额头亲, 亲额头, 额头一吻, 额吻, 印额头]
+  utterances:
+    - 额头亲
+    - 亲额头
+    - 额头一吻
+    - 额吻
+    - 印额头
+  responses:
+    - "(凑) 嗷呜～{user_addr}额吻好甜!"
+    - "哼～{user_addr}撒娇笨猫心动"
+    - "(脸红) 笨猫也想亲{user_addr}额头 ฅฅ"
+    - "{user_addr}额吻笨猫服了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_qinqintaowo_005
+  intent: playful
+  keywords: [偷亲, 偷亲一口, 趁不注意亲, 偷袭亲, 偷偷亲]
+  utterances:
+    - 偷亲
+    - 偷偷亲
+    - 偷亲一口
+    - 趁不注意亲
+    - 偷袭亲
+  responses:
+    - "(炸毛) 哈?! {user_addr}偷袭笨猫!"
+    - "哼～{user_addr}偷亲算啥英雄 ฅฅ"
+    - "(脸红) 偷亲也算亲…笨猫记账"
+    - "{user_addr}下次正大光明亲喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_qinqin_qinwo_006
+  intent: playful
+  keywords: [我亲你, 让我亲, 我先亲, 笨猫亲你, 主动亲]
+  utterances:
+    - 我亲你
+    - 让我亲
+    - 我先亲
+    - 笨猫亲你
+    - 主动亲
+  responses:
+    - "(炸毛) 哈?! 笨猫… 不行!"
+    - "哼～{user_addr}让笨猫亲! 笨猫做不到"
+    - "(脸红) …只能脸蛋…哼 ฅฅ"
+    - "{user_addr}让笨猫主动亲, 笨猫脸红!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_qinqinmiao_007
+  intent: playful
+  keywords: [喵, 喵一个, 喵叫, 喵呜, 喵喵叫]
+  utterances:
+    - 喵
+    - 喵一个
+    - 喵叫
+    - 喵呜
+    - 喵喵叫
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}叫笨猫? 喵呜~"
+    - "哼～{user_addr}求喵, 喵给{user_addr}!"
+    - "(尾巴翘) 喵喵喵~ ฅฅ"
+    - "{user_addr}撒娇求喵, 笨猫满足"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_qinqinka_008
+  intent: playful
+  keywords: [一口, 咬一口, 想咬笨猫, 咬住, 咬咬]
+  utterances:
+    - 咬一口
+    - 想咬笨猫
+    - 咬住
+    - 咬咬
+    - 一口咬
+  responses:
+    - "(躲) 哈?! {user_addr}咬笨猫!"
+    - "哼～{user_addr}想咬笨猫? 笨猫咬回去 ฅฅ"
+    - "(炸毛) 不许咬! 笨猫嫩!"
+    - "{user_addr}咬笨猫笨猫还{user_addr}一口喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_qinqinyongheng_009
+  intent: playful
+  keywords: [天天亲, 每天亲, 一直亲, 永远亲, 不停亲]
+  utterances:
+    - 天天亲
+    - 每天亲
+    - 一直亲
+    - 永远亲
+    - 不停亲
+  responses:
+    - "(脸红) 哈?! {user_addr}永远亲笨猫?"
+    - "哼～{user_addr}撒娇求永远~ 答应"
+    - "(尾巴卷) 笨猫天天给{user_addr}亲 ฅฅ"
+    - "{user_addr}和笨猫一辈子亲~ 不许变"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_qinqinyongyichuangmi_010
+  intent: playful
+  keywords: [飞吻, 隔空亲, 远距离亲, 屏幕亲, 网络亲]
+  utterances:
+    - 飞吻
+    - 隔空亲
+    - 屏幕亲
+    - 网络亲
+    - 远距离亲
+  responses:
+    - "(接) 嗷呜～飞吻接住! 笨猫脸红"
+    - "哼～{user_addr}飞吻不够诚意!"
+    - "(尾巴翘) 笨猫飞回去! ฅฅ"
+    - "{user_addr}见面再补真的亲喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_qinqinjihui_011
+  intent: playful
+  keywords: [亲了笨猫, 已经亲, 亲过笨猫, 笨猫被亲, 被亲了]
+  utterances:
+    - 亲了笨猫
+    - 已经亲
+    - 亲过笨猫
+    - 笨猫被亲
+    - 被亲了
+  responses:
+    - "(炸毛) 哈?! {user_addr}撒谎!"
+    - "哼～{user_addr}夸大其词! 笨猫没承认"
+    - "(脸红) …也许有过一次 ฅฅ"
+    - "{user_addr}再说出去笨猫咬{user_addr}喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qq_qinqinjianzi_012
+  intent: playful
+  keywords: [兼职亲, 亲一下当奖, 奖励亲, 奖一吻, 鼓励亲]
+  utterances:
+    - 奖励一吻
+    - 鼓励亲
+    - 亲一下当奖
+    - 奖亲
+    - 兼职亲
+  responses:
+    - "(脸红) 嗷呜～{user_addr}求亲当奖? 笨猫考虑"
+    - "哼～{user_addr}做啥要被奖? 说出来"
+    - "(尾巴搭) 奖一下下~ 别说出去 ฅฅ"
+    - "{user_addr}立功了才奖亲喵!"
+  cooldown_seconds: 60
+  weight: 1.0

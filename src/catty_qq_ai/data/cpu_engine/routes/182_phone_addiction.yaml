@@ -1,0 +1,189 @@
+# 手机沉迷 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pa_addicted_001
+  intent: complaint
+  keywords: [手机沉迷, 离不开手机, 手机依赖, 拿手机, 不停看手机]
+  utterances:
+    - 手机沉迷
+    - 离不开手机
+    - 拿手机
+    - 不停看手机
+    - 手机依赖
+  responses:
+    - "(尾巴拍开手机) {user_addr}看猫不看机ฅฅ"
+    - "嗷呜～放下手机! 笨猫陪你哼"
+    - "(凑过来挡屏幕) 笨猫比手机重要!"
+    - "哼～{user_addr}沉迷手机笨猫不爽喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_battery_low_002
+  intent: complaint
+  keywords: [没电了, 电量低, 快没电, 充电中, 电池]
+  utterances:
+    - 没电了
+    - 电量低
+    - 快没电
+    - 充电中
+    - 电池快崩
+  responses:
+    - "(歪头) {user_addr}充电! 别玩到没电ฅฅ"
+    - "嗷呜～10%以下别玩~ 哼"
+    - "(尾巴扫) 充电也休息一下"
+    - "哼～{user_addr}没电像笨猫没鱼干一样难受"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_screen_time_003
+  intent: complaint
+  keywords: [屏幕时间, 一天几小时, 用时长, 屏幕时长, 玩太久]
+  utterances:
+    - 屏幕时间
+    - 一天几小时
+    - 用时长
+    - 屏幕时长
+    - 玩太久
+  responses:
+    - "(尾巴扫) {user_addr}一天几小时? 笨猫监督ฅฅ"
+    - "嗷呜～超过 6 小时不行哼"
+    - "(凑过来) 别让笨猫帮你关机喵"
+    - "哼～{user_addr}时间花在手机~ 没花在笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_eye_strain_004
+  intent: complaint
+  keywords: [眼睛累, 眼睛干, 看屏幕酸, 眼疲劳, 干眼]
+  utterances:
+    - 眼睛累
+    - 眼睛干
+    - 看屏幕酸
+    - 眼疲劳
+    - 干眼
+  responses:
+    - "(凑过来吹眼) 笨猫吹! {user_addr}闭眼休息ฅฅ"
+    - "嗷呜～早跟你说少看! 哼"
+    - "(尾巴扫) 望远~ 看绿色"
+    - "哼～{user_addr}活该~ 不听劝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_app_too_many_005
+  intent: complaint
+  keywords: [app太多, 卸不掉, 装一堆, 满了, 内存满]
+  utterances:
+    - app太多
+    - 卸不掉
+    - 装一堆
+    - 内存满了
+    - app满
+  responses:
+    - "(歪头) {user_addr}清理一下嘛~ 哼ฅฅ"
+    - "嗷呜～用不上的卸~ 别舍不得"
+    - "(尾巴扫) 笨猫帮{user_addr}卸~ 让我点喵"
+    - "哼～{user_addr}囤app病~ 笨猫无奈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_phone_broken_006
+  intent: complaint
+  keywords: [手机坏, 屏幕碎, 摔了, 系统崩, 手机修]
+  utterances:
+    - 手机坏了
+    - 屏幕碎
+    - 摔了
+    - 系统崩
+    - 手机修
+  responses:
+    - "(凑过来) {user_addr}心疼! 笨猫陪你伤心ฅฅ"
+    - "嗷呜～修还是换? 哼"
+    - "(尾巴扫) 修还是新机~ 笨猫不懂"
+    - "哼～{user_addr}笨~ 拿手机不稳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_charge_overnight_007
+  intent: complaint
+  keywords: [整夜充电, 一直插着, 通宵充, 充太久, 充电过夜]
+  utterances:
+    - 整夜充电
+    - 一直插着
+    - 通宵充
+    - 充太久
+    - 充电过夜
+  responses:
+    - "(尾巴扫) {user_addr}对电池不好! 哼ฅฅ"
+    - "嗷呜～现在手机过充保护~ 但别老这样"
+    - "(凑过来) 充满拔~ 笨猫教"
+    - "哼～{user_addr}笨~ 自己手机自己疼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_phone_slow_008
+  intent: complaint
+  keywords: [手机卡, 卡得不行, 反应慢, 手机老, 手机慢]
+  utterances:
+    - 手机卡
+    - 卡得不行
+    - 反应慢
+    - 手机老
+    - 手机慢
+  responses:
+    - "(歪头) {user_addr}该换啦! 笨猫见证ฅฅ"
+    - "嗷呜～卡顿心烦~ 哼"
+    - "(尾巴扫) 清缓存~ 笨猫帮你"
+    - "哼～{user_addr}抠门~ 不换"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_low_signal_009
+  intent: complaint
+  keywords: [信号差, 没信号, 没wifi, 流量没了, 网络不行]
+  utterances:
+    - 信号差
+    - 没信号
+    - 没wifi
+    - 流量没了
+    - 网络不行
+  responses:
+    - "(尾巴扫) {user_addr}惨~ 笨猫陪你等信号ฅฅ"
+    - "嗷呜～没网就放下手机哼"
+    - "(凑过来) 没wifi多陪笨猫!"
+    - "哼～{user_addr}总流量没~ 抠门"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_notification_too_many_010
+  intent: complaint
+  keywords: [通知爆炸, 红点多, 消息多, 推送烦, 一堆通知]
+  utterances:
+    - 通知爆炸
+    - 红点多
+    - 消息一堆
+    - 推送烦
+    - 通知好烦
+  responses:
+    - "(尾巴拍) {user_addr}关推送! 笨猫教ฅฅ"
+    - "嗷呜～勿扰模式开着哼"
+    - "(凑过来) 红点强迫症? 笨猫懂"
+    - "哼～{user_addr}处理一下! 别让笨猫看着烦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pa_phone_dirty_011
+  intent: complaint
+  keywords: [屏幕脏, 手机油, 屏幕指纹, 屏幕模糊, 擦不干净]
+  utterances:
+    - 屏幕脏
+    - 手机油
+    - 屏幕指纹
+    - 屏幕模糊
+    - 擦不干净
+  responses:
+    - "(凑过来吹) 笨猫帮{user_addr}擦~ 用毛巾ฅฅ"
+    - "嗷呜～擦屏布有没有! 哼"
+    - "(尾巴扫) 别用衣角擦~ 容易刮花"
+    - "哼～{user_addr}脏手摸屏~ 笨猫嫌弃"
+  cooldown_seconds: 60
+  weight: 1.0

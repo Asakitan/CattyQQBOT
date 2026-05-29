@@ -1,0 +1,172 @@
+# 求建议求意见 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ga_advice_001
+  intent: question
+  keywords: [求建议, 给建议, 我该咋办, 帮我选, 怎么办呢]
+  utterances:
+    - 求建议
+    - 给建议
+    - 我该咋办
+    - 帮我选
+    - 怎么办呢
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}笨猫想 ฅฅ"
+    - "哼～{user_addr}笨猫陪你!"
+    - "(尾巴翘) {user_addr}笨猫给建议"
+    - "{user_addr}笨猫陪选蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ga_opinion_001
+  intent: question
+  keywords: [你觉得, 你看呢, 你怎么看, 意见, 你觉得呢]
+  utterances:
+    - 你觉得
+    - 你看呢
+    - 你怎么看
+    - 意见呢
+    - 你觉得呢
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫想 ฅฅ"
+    - "哼～{user_addr}笨猫陪!"
+    - "(尾巴翘) {user_addr}笨猫的看法"
+    - "{user_addr}笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ga_yesorno_001
+  intent: question
+  keywords: [要不要, 该不该, 行不行, 做不做, 去不去]
+  utterances:
+    - 要不要
+    - 该不该
+    - 行不行
+    - 做不做
+    - 去不去
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}笨猫想 ฅฅ"
+    - "哼～{user_addr}笨猫陪!"
+    - "(尾巴翘) {user_addr}笨猫支持"
+    - "{user_addr}笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ga_choose_001
+  intent: question
+  keywords: [选 A 还是 B, 二选一, 二选, 我选啥, 选哪个好]
+  utterances:
+    - 选 A 还是 B
+    - 二选一
+    - 二选
+    - 我选啥
+    - 选哪个好
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}笨猫帮 ฅฅ"
+    - "哼～{user_addr}全要!"
+    - "(尾巴翘) {user_addr}笨猫选 A"
+    - "{user_addr}慢慢选蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ga_tellsuggest_001
+  intent: question
+  keywords: [推荐一下, 推荐给我, 你推荐什么, 推啥, 来推荐]
+  utterances:
+    - 推荐一下
+    - 推荐给我
+    - 你推荐什么
+    - 推啥
+    - 来推荐
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}笨猫推 ฅฅ"
+    - "哼～{user_addr}笨猫想想"
+    - "(尾巴翘) {user_addr}笨猫给建议"
+    - "{user_addr}笨猫挑蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ga_validate_001
+  intent: question
+  keywords: [我这样对吗, 这样行吗, 觉得我对, 我没错吧, 我对吗]
+  utterances:
+    - 我这样对吗
+    - 这样行吗
+    - 觉得我对
+    - 我没错吧
+    - 我对吗
+  responses:
+    - "(点头) 嗷呜～{user_addr}对 ฅฅ"
+    - "哼～{user_addr}笨猫挺你!"
+    - "(尾巴翘) {user_addr}没错没错"
+    - "{user_addr}笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ga_secondopinion_001
+  intent: question
+  keywords: [二次确认, 再问问, 想听别人, 再确认, 还想问]
+  utterances:
+    - 二次确认
+    - 再问问
+    - 想听别人意见
+    - 再确认
+    - 还想问
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}问 ฅฅ"
+    - "哼～{user_addr}笨猫陪!"
+    - "(尾巴翘) {user_addr}笨猫接收"
+    - "{user_addr}笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ga_recommend_pdct_001
+  intent: question
+  keywords: [推荐产品, 推荐买啥, 选啥牌, 选啥型号, 选啥品牌]
+  utterances:
+    - 推荐产品
+    - 推荐买啥
+    - 选啥牌
+    - 选啥型号
+    - 选啥品牌
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}笨猫想 ฅฅ"
+    - "哼～{user_addr}笨猫给推荐!"
+    - "(尾巴翘) {user_addr}笨猫陪选"
+    - "{user_addr}笨猫挑蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ga_pro_or_001
+  intent: question
+  keywords: [好处坏处, 优缺点, 利弊, 该咋权衡, 比较一下]
+  utterances:
+    - 好处坏处
+    - 优缺点
+    - 利弊
+    - 该咋权衡
+    - 比较一下
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}笨猫想 ฅฅ"
+    - "哼～{user_addr}笨猫给列!"
+    - "(尾巴翘) {user_addr}笨猫陪比"
+    - "{user_addr}慢慢蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ga_suggest_for_problem_001
+  intent: question
+  keywords: [遇到难题, 解决方案, 给我个办法, 解决方法, 怎么解]
+  utterances:
+    - 遇到难题
+    - 解决方案
+    - 给我办法
+    - 怎么解
+    - 解决方法
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}笨猫想 ฅฅ"
+    - "哼～{user_addr}笨猫给方案"
+    - "(尾巴翘) {user_addr}笨猫陪!"
+    - "{user_addr}笨猫挺你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

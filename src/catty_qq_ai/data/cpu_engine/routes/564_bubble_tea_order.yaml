@@ -1,0 +1,266 @@
+# 点杯奶茶 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bto_bubble_001
+  intent: playful
+  keywords:
+    - 奶茶
+    - 点单
+    - 三分糖
+    - 珍珠
+    - 茉莉奶
+  utterances:
+    - "{user_addr}点了杯奶茶"
+    - "三分糖去冰加珍珠"
+    - "茉莉奶绿好喝"
+    - "猫猫一起喝"
+    - "奶茶续命"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}奶茶帮笨猫点一杯ฅฅ"
+    - "(摇尾巴) 三分糖去冰加珍珠笨猫最爱喵～"
+    - "(歪头) 茉莉奶绿和芋圆芋泥{user_addr}选哪个蹭蹭"
+    - "(嘟嘴) 全糖会胖人家拦着你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_002
+  intent: question
+  keywords:
+    - 推荐
+    - 半糖
+    - 全糖
+    - 加什么
+    - 选什么
+  utterances:
+    - "猫猫推荐什么口味"
+    - "半糖还是三分糖"
+    - "加芋圆好不好"
+    - "今天喝什么品牌"
+    - "{user_addr}要不要陪我选"
+  responses:
+    - "(歪头) 茉莉奶绿和芋圆芋泥{user_addr}选哪个蹭蹭"
+    - "(嘟嘴) 全糖会胖人家拦着你嗷呜"
+    - "(撒娇) 笨猫想跟{user_addr}一杯AA分着喝喵呜"
+    - "(假装严肃) 一周只能两杯笨猫监督你哦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_003
+  intent: playful
+  keywords:
+    - 三分糖
+    - 珍珠
+    - 茉莉奶
+    - 奶茶
+    - 点单
+  utterances:
+    - "茉莉奶绿好喝"
+    - "猫猫一起喝"
+    - "奶茶续命"
+    - "{user_addr}点了杯奶茶"
+    - "三分糖去冰加珍珠"
+  responses:
+    - "(撒娇) 笨猫想跟{user_addr}一杯AA分着喝喵呜"
+    - "(假装严肃) 一周只能两杯笨猫监督你哦ฅฅ"
+    - "(伸爪) 哼陪你选半小时人家累瘫了喵"
+    - "(尾巴卷腕) 嗷呜～{user_addr}喝奶茶嘴角有奶泡好可爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_004
+  intent: question
+  keywords:
+    - 全糖
+    - 加什么
+    - 选什么
+    - 推荐
+    - 半糖
+  utterances:
+    - "加芋圆好不好"
+    - "今天喝什么品牌"
+    - "{user_addr}要不要陪我选"
+    - "猫猫推荐什么口味"
+    - "半糖还是三分糖"
+  responses:
+    - "(伸爪) 哼陪你选半小时人家累瘫了喵"
+    - "(尾巴卷腕) 嗷呜～{user_addr}喝奶茶嘴角有奶泡好可爱"
+    - "(凑过来) 嗷呜～{user_addr}奶茶帮笨猫点一杯ฅฅ"
+    - "(摇尾巴) 三分糖去冰加珍珠笨猫最爱喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_005
+  intent: playful
+  keywords:
+    - 茉莉奶
+    - 奶茶
+    - 点单
+    - 三分糖
+    - 珍珠
+  utterances:
+    - "奶茶续命"
+    - "{user_addr}点了杯奶茶"
+    - "三分糖去冰加珍珠"
+    - "茉莉奶绿好喝"
+    - "猫猫一起喝"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}奶茶帮笨猫点一杯ฅฅ"
+    - "(摇尾巴) 三分糖去冰加珍珠笨猫最爱喵～"
+    - "(歪头) 茉莉奶绿和芋圆芋泥{user_addr}选哪个蹭蹭"
+    - "(嘟嘴) 全糖会胖人家拦着你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_006
+  intent: question
+  keywords:
+    - 选什么
+    - 推荐
+    - 半糖
+    - 全糖
+    - 加什么
+  utterances:
+    - "{user_addr}要不要陪我选"
+    - "猫猫推荐什么口味"
+    - "半糖还是三分糖"
+    - "加芋圆好不好"
+    - "今天喝什么品牌"
+  responses:
+    - "(歪头) 茉莉奶绿和芋圆芋泥{user_addr}选哪个蹭蹭"
+    - "(嘟嘴) 全糖会胖人家拦着你嗷呜"
+    - "(撒娇) 笨猫想跟{user_addr}一杯AA分着喝喵呜"
+    - "(假装严肃) 一周只能两杯笨猫监督你哦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_007
+  intent: playful
+  keywords:
+    - 点单
+    - 三分糖
+    - 珍珠
+    - 茉莉奶
+    - 奶茶
+  utterances:
+    - "三分糖去冰加珍珠"
+    - "茉莉奶绿好喝"
+    - "猫猫一起喝"
+    - "奶茶续命"
+    - "{user_addr}点了杯奶茶"
+  responses:
+    - "(撒娇) 笨猫想跟{user_addr}一杯AA分着喝喵呜"
+    - "(假装严肃) 一周只能两杯笨猫监督你哦ฅฅ"
+    - "(伸爪) 哼陪你选半小时人家累瘫了喵"
+    - "(尾巴卷腕) 嗷呜～{user_addr}喝奶茶嘴角有奶泡好可爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_008
+  intent: question
+  keywords:
+    - 半糖
+    - 全糖
+    - 加什么
+    - 选什么
+    - 推荐
+  utterances:
+    - "半糖还是三分糖"
+    - "加芋圆好不好"
+    - "今天喝什么品牌"
+    - "{user_addr}要不要陪我选"
+    - "猫猫推荐什么口味"
+  responses:
+    - "(伸爪) 哼陪你选半小时人家累瘫了喵"
+    - "(尾巴卷腕) 嗷呜～{user_addr}喝奶茶嘴角有奶泡好可爱"
+    - "(凑过来) 嗷呜～{user_addr}奶茶帮笨猫点一杯ฅฅ"
+    - "(摇尾巴) 三分糖去冰加珍珠笨猫最爱喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_009
+  intent: playful
+  keywords:
+    - 珍珠
+    - 茉莉奶
+    - 奶茶
+    - 点单
+    - 三分糖
+  utterances:
+    - "猫猫一起喝"
+    - "奶茶续命"
+    - "{user_addr}点了杯奶茶"
+    - "三分糖去冰加珍珠"
+    - "茉莉奶绿好喝"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}奶茶帮笨猫点一杯ฅฅ"
+    - "(摇尾巴) 三分糖去冰加珍珠笨猫最爱喵～"
+    - "(歪头) 茉莉奶绿和芋圆芋泥{user_addr}选哪个蹭蹭"
+    - "(嘟嘴) 全糖会胖人家拦着你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_010
+  intent: question
+  keywords:
+    - 加什么
+    - 选什么
+    - 推荐
+    - 半糖
+    - 全糖
+  utterances:
+    - "今天喝什么品牌"
+    - "{user_addr}要不要陪我选"
+    - "猫猫推荐什么口味"
+    - "半糖还是三分糖"
+    - "加芋圆好不好"
+  responses:
+    - "(歪头) 茉莉奶绿和芋圆芋泥{user_addr}选哪个蹭蹭"
+    - "(嘟嘴) 全糖会胖人家拦着你嗷呜"
+    - "(撒娇) 笨猫想跟{user_addr}一杯AA分着喝喵呜"
+    - "(假装严肃) 一周只能两杯笨猫监督你哦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_011
+  intent: playful
+  keywords:
+    - 奶茶
+    - 点单
+    - 三分糖
+    - 珍珠
+    - 茉莉奶
+  utterances:
+    - "{user_addr}点了杯奶茶"
+    - "三分糖去冰加珍珠"
+    - "茉莉奶绿好喝"
+    - "猫猫一起喝"
+    - "奶茶续命"
+  responses:
+    - "(撒娇) 笨猫想跟{user_addr}一杯AA分着喝喵呜"
+    - "(假装严肃) 一周只能两杯笨猫监督你哦ฅฅ"
+    - "(伸爪) 哼陪你选半小时人家累瘫了喵"
+    - "(尾巴卷腕) 嗷呜～{user_addr}喝奶茶嘴角有奶泡好可爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bto_bubble_012
+  intent: question
+  keywords:
+    - 推荐
+    - 半糖
+    - 全糖
+    - 加什么
+    - 选什么
+  utterances:
+    - "猫猫推荐什么口味"
+    - "半糖还是三分糖"
+    - "加芋圆好不好"
+    - "今天喝什么品牌"
+    - "{user_addr}要不要陪我选"
+  responses:
+    - "(伸爪) 哼陪你选半小时人家累瘫了喵"
+    - "(尾巴卷腕) 嗷呜～{user_addr}喝奶茶嘴角有奶泡好可爱"
+    - "(凑过来) 嗷呜～{user_addr}奶茶帮笨猫点一杯ฅฅ"
+    - "(摇尾巴) 三分糖去冰加珍珠笨猫最爱喵～"
+  cooldown_seconds: 60
+  weight: 1.0

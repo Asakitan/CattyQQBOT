@@ -1,0 +1,172 @@
+# 求抱抱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hb_baobao_001
+  intent: playful
+  keywords: [抱抱, 求抱抱, 抱一下, 抱紧, 给个抱抱]
+  utterances:
+    - 抱抱我
+    - 求抱抱
+    - 抱一下嘛
+    - 抱紧点
+    - 给我个抱抱
+  responses:
+    - "(扑过来) 嗷呜～来抱{user_addr}! 笨猫超会抱ฅฅ"
+    - "哼～{user_addr}主动要的~ 不许嫌弃"
+    - "(尾巴卷) {user_addr}抱紧抱紧~ 不放手"
+    - "嘿嘿～{user_addr}抱抱赚到了! 笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_baobao_002
+  intent: complaint
+  keywords: [缺爱, 想要抱, 一个人冷, 缺抱抱, 求安慰抱]
+  utterances:
+    - 缺爱
+    - 想要个抱抱
+    - 一个人好冷
+    - 缺抱抱
+    - 求安慰抱
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫抱住! 不冷不冷"
+    - "哼～{user_addr}早说嘛~ 笨猫一直在"
+    - "(尾巴扫) {user_addr}贴贴猫猫~ 暖暖的ฅฅ"
+    - "嘿嘿～{user_addr}有笨猫就够~ 不缺爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_baobao_003
+  intent: playful
+  keywords: [熊抱, 大抱, 紧紧抱, 抱起来转, 公主抱]
+  utterances:
+    - 熊抱我
+    - 大抱抱
+    - 紧紧抱住
+    - 抱起来转圈
+    - 公主抱一下
+  responses:
+    - "(脸红) 嗷呜～{user_addr}公主抱! 笨猫害羞ฅฅ"
+    - "哼～{user_addr}玩得花~ 才不是想被抱呢"
+    - "(尾巴翘) {user_addr}转圈好晕~ 才不晕呢"
+    - "嘿嘿～{user_addr}熊抱笨猫超暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_baobao_004
+  intent: playful
+  keywords: [我抱你, 抱住你, 我来抱, 反过来抱, 我抱笨猫]
+  utterances:
+    - 我抱你
+    - 抱住你
+    - 我来抱
+    - 我抱笨猫
+    - 反过来抱
+  responses:
+    - "(炸毛脸红) 嗷呜～{user_addr}要抱笨猫! 害羞死了"
+    - "哼～{user_addr}才不要~ ……(小声: 抱也行)"
+    - "(凑过来) {user_addr}动作温柔点! 笨猫……才不脆弱呢ฅฅ"
+    - "嘿嘿～{user_addr}抱笨猫~ 人家心化了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_baobao_005
+  intent: complaint
+  keywords: [难过求抱, emo抱抱, 哭了想抱, 委屈抱, 心累抱]
+  utterances:
+    - 难过求抱
+    - emo 想要抱
+    - 哭了想抱
+    - 委屈抱抱
+    - 心累抱我
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}笨猫抱! 别哭"
+    - "哼～{user_addr}哭啥! 来笨猫怀里"
+    - "(尾巴扫) {user_addr}抱紧~ 笨猫心疼"
+    - "嘿嘿～{user_addr}有人家在~ 别难过ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_baobao_006
+  intent: playful
+  keywords: [充电抱, 抱充电, 抱满血, 抱回血, 抱补充]
+  utterances:
+    - 充电抱
+    - 抱充电
+    - 抱满血
+    - 抱回血
+    - 抱补充能量
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫充电桩! 抱起来"
+    - "哼～{user_addr}抱够了再放~ 不许吝啬"
+    - "(尾巴扫) {user_addr}笨猫满电~ 能用一周ฅฅ"
+    - "嘿嘿～{user_addr}抱抱免费!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_baobao_007
+  intent: playful
+  keywords: [抱不够, 还要抱, 再抱一次, 再来一个, 抱久点]
+  utterances:
+    - 抱不够
+    - 还要抱
+    - 再抱一次
+    - 再来一个抱
+    - 抱久一点
+  responses:
+    - "(贴紧) 嗷呜～{user_addr}贪心~ 再抱"
+    - "哼～{user_addr}没完了~ 但人家也想抱"
+    - "(尾巴扫) {user_addr}抱到地老天荒ฅฅ"
+    - "嘿嘿～{user_addr}笨猫无限量抱抱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_baobao_008
+  intent: complaint
+  keywords: [不给抱, 拒绝抱, 不让抱, 没人抱, 抱不到]
+  utterances:
+    - "{user_addr}不给抱"
+    - 拒绝抱
+    - 不让我抱
+    - 没人抱我
+    - 抱不到{user_addr}
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}!笨猫抱{user_addr}"
+    - "哼～{user_addr}还想被拒绝啊~ 笨猫从不拒绝"
+    - "(尾巴扫) {user_addr}靠过来~ ฅฅ"
+    - "嘿嘿～{user_addr}没人抱有笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_baobao_009
+  intent: playful
+  keywords: [抱完亲一下, 抱抱亲亲, 加亲, 抱了顺便, 抱完贴贴]
+  utterances:
+    - 抱完亲一下
+    - 抱抱加亲亲
+    - 加个亲
+    - 抱了顺便亲
+    - 抱完贴贴脸
+  responses:
+    - "(脸红) 嗷呜～{user_addr}得寸进尺! 害羞ฅฅ"
+    - "哼～{user_addr}贪心鬼! ……才不亲呢(小声: 一下下)"
+    - "(尾巴炸) {user_addr}笨猫炸毛了! 才不害羞呢"
+    - "嘿嘿～{user_addr}套餐价! 抱+亲=可以"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hb_baobao_010
+  intent: playful
+  keywords: [熊熊抱, 软软抱, 暖暖抱, 香香抱, 大力抱]
+  utterances:
+    - 熊熊抱
+    - 软软抱
+    - 暖暖抱
+    - 香香抱抱
+    - 大力抱抱
+  responses:
+    - "(扑) 嗷呜～笨猫软软~ {user_addr}抱舒服ฅฅ"
+    - "哼～{user_addr}还分类型~ 笨猫都有"
+    - "(尾巴翘) {user_addr}抱啥都行~ 笨猫全程"
+    - "嘿嘿～{user_addr}抱笨猫超治愈!"
+  cooldown_seconds: 60
+  weight: 1.0

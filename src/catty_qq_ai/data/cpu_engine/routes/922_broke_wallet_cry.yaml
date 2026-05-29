@@ -1,0 +1,189 @@
+# 穷哭了日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: brk_nomoney_001
+  intent: complaint
+  keywords: [没钱了, 余额不足, 穷, 钱包空, 一分没有]
+  utterances:
+    - 没钱了
+    - 余额不足
+    - 穷死了
+    - 钱包空空
+    - 一分都没
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你哭 ฅฅ"
+    - "哼～{user_addr}下次别乱花喵"
+    - "(尾巴卷) 笨猫请你吃白米饭蹭蹭{user_addr}"
+    - "{user_addr}人家陪你度过寒冬嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brk_huabei_001
+  intent: complaint
+  keywords: [花呗还不上, 信用卡, 账单一堆, 滞纳金, 还款]
+  utterances:
+    - 花呗还不上
+    - 信用卡逾期
+    - 账单一堆
+    - 滞纳金
+    - 还款期
+  responses:
+    - "(同情) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}下次别透支喵"
+    - "(尾巴卷) 想办法分期蹭蹭{user_addr}"
+    - "{user_addr}笨猫不许你信用裂嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brk_ate_yesterday_001
+  intent: complaint
+  keywords: [昨天大吃, 后悔, 今天吃土, 一顿吃光, 工资没了]
+  utterances:
+    - 昨天吃太好
+    - 今天吃土
+    - 一顿吃光
+    - 工资没了
+    - 后悔大吃
+  responses:
+    - "(同情) 嗷呜～{user_addr}计划性差 ฅฅ"
+    - "哼～{user_addr}笨猫监督你喵"
+    - "(尾巴卷) 今天吃面条蹭蹭{user_addr}"
+    - "{user_addr}下次分餐安排嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brk_eattu_001
+  intent: complaint
+  keywords: [吃土, 啃泥巴, 月底吃土, 没饭, 一无所有]
+  utterances:
+    - 月底吃土
+    - 啃泥巴
+    - 没饭吃
+    - 一无所有
+    - 真的吃土
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}笨猫请你 ฅฅ"
+    - "哼～{user_addr}没钱也别真吃土喵"
+    - "(尾巴卷) 笨猫家有蹭蹭{user_addr}"
+    - "{user_addr}吃饭找笨猫嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brk_borrow_001
+  intent: complaint
+  keywords: [借钱, 借我, 周转, 哥们儿借, 借一点]
+  utterances:
+    - 借我点钱
+    - 周转一下
+    - 哥们儿借
+    - 借一点
+    - 求借钱
+  responses:
+    - "(摸口袋) 嗷呜～{user_addr}笨猫只有鱼干 ฅฅ"
+    - "哼～{user_addr}借钱小心朋友散喵"
+    - "(尾巴卷) 真有难处再借蹭蹭{user_addr}"
+    - "{user_addr}笨猫不催还嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brk_unexpected_001
+  intent: complaint
+  keywords: [突发花钱, 急用钱, 突然花销, 大支出, 没准备]
+  utterances:
+    - 突然要花钱
+    - 急用钱
+    - 大支出来了
+    - 没准备
+    - 计划外开销
+  responses:
+    - "(同情) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}下次留应急金喵"
+    - "(尾巴卷) 处理完会好的蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brk_savetip_001
+  intent: question
+  keywords: [怎么省钱, 省钱攻略, 节流, 省钱方法, 攒钱方法]
+  utterances:
+    - 怎么省钱
+    - 省钱攻略
+    - 节流方法
+    - "{user_addr}有招吗"
+    - 攒钱办法
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫教你 ฅฅ"
+    - "哼～{user_addr}别点外卖喵"
+    - "(尾巴卷) 自带午饭蹭蹭{user_addr}"
+    - "{user_addr}笨猫提议自炊嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brk_unaffordable_001
+  intent: complaint
+  keywords: [买不起, 价格离谱, 太贵了, 卖不起, 望而却步]
+  utterances:
+    - 买不起
+    - 价格离谱
+    - 太贵了
+    - 望而却步
+    - 卖天价
+  responses:
+    - "(摸头) 嗷呜～{user_addr}心疼 ฅฅ"
+    - "哼～{user_addr}买不起就放弃喵"
+    - "(尾巴卷) 平替也不错蹭蹭{user_addr}"
+    - "{user_addr}存够再买嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brk_rentkill_001
+  intent: complaint
+  keywords: [房租贵, 涨房租, 一半工资, 房租压垮, 租金]
+  utterances:
+    - 房租贵
+    - 涨房租
+    - 房租压垮
+    - 一半工资交房租
+    - 租金涨了
+  responses:
+    - "(同情) 嗷呜～{user_addr}心疼 ฅฅ"
+    - "哼～{user_addr}考虑搬家喵"
+    - "(尾巴卷) 房租是大头蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你扛嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brk_invest_loss_001
+  intent: complaint
+  keywords: [基金跌, 亏了, 股票跌, 亏麻了, 巨亏]
+  utterances:
+    - 基金跌了
+    - 股票亏了
+    - 亏麻了
+    - 巨亏
+    - 跌不停
+  responses:
+    - "(同情) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}不割肉等回血喵"
+    - "(尾巴卷) 长期看蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brk_cheap_food_001
+  intent: playful
+  keywords: [吃泡面, 啃馒头, 白米饭, 拌酱油, 简餐]
+  utterances:
+    - 吃泡面
+    - 啃馒头
+    - 白米饭
+    - 拌酱油
+    - 简餐
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪吃 ฅฅ"
+    - "哼～{user_addr}省钱阶段坚持喵"
+    - "(尾巴卷) 馒头管饱蹭蹭{user_addr}"
+    - "{user_addr}笨猫给你加个蛋嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

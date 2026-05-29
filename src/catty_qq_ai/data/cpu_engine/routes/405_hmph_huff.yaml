@@ -1,0 +1,172 @@
+# 哼生气小情绪 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hh_heng_001
+  intent: playful
+  keywords: [哼, 哼哼, 哼唧, 哼一下, 哼起来]
+  utterances:
+    - 哼
+    - 哼哼
+    - 哼唧
+    - 哼一下
+    - 哼起来
+  responses:
+    - "(炸毛) 哼! {user_addr}还能怎样喵～ฅฅ"
+    - "嗷呜～{user_addr}哼笨猫? 笨猫先哼!"
+    - "(尾巴扫) {user_addr}笨猫不理你"
+    - "嘿嘿～{user_addr}哼回来~ 双倍哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hh_heng_002
+  intent: complaint
+  keywords: [生气, 真生气, 气哭, 气死了, 气炸]
+  utterances:
+    - 生气
+    - 真生气
+    - 气哭了
+    - 气死了
+    - 气炸了
+  responses:
+    - "(哄) 嗷呜～{user_addr}笨猫陪你气! 别气坏ฅฅ"
+    - "哼～{user_addr}骂出来! 笨猫帮你骂"
+    - "(尾巴扫) {user_addr}笨猫递水~ 别生气"
+    - "嘿嘿～{user_addr}笨猫陪~ 别气坏身体"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hh_heng_003
+  intent: playful
+  keywords: [不理我, 你不要我, 嫌弃笨猫, 抛弃我, 不爱了]
+  utterances:
+    - 不理我
+    - 你不要笨猫
+    - 嫌弃笨猫
+    - 抛弃我
+    - 不爱了
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}哪有! 笨猫骗你"
+    - "哼～{user_addr}吓笨猫! 不许说"
+    - "(尾巴扫) {user_addr}得来哄~ 才不是真气ฅฅ"
+    - "嘿嘿～{user_addr}笨猫开玩笑~ 别走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hh_heng_004
+  intent: complaint
+  keywords: [傲娇, 嘴硬, 口是心非, 心口不一, 装]
+  utterances:
+    - 傲娇
+    - 嘴硬
+    - 口是心非
+    - 心口不一
+    - 装的
+  responses:
+    - "(炸毛) 哼! {user_addr}才傲娇! 笨猫真心ฅฅ"
+    - "嗷呜～{user_addr}懂我~ 才不是哒"
+    - "(尾巴扫) {user_addr}揭穿笨猫~ 哼"
+    - "嘿嘿～{user_addr}识破~ 笨猫不否认"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hh_heng_005
+  intent: complaint
+  keywords: [闷闷, 不爽, 心里堵, 闷气, 闷不乐]
+  utterances:
+    - 闷闷
+    - 不爽
+    - 心里堵
+    - 一肚子闷气
+    - 闷闷不乐
+  responses:
+    - "(拍背) 嗷呜～{user_addr}笨猫帮拍背"
+    - "哼～{user_addr}说出来嘛~ 笨猫听"
+    - "(尾巴扫) {user_addr}笨猫陪~ 别闷ฅฅ"
+    - "嘿嘿～{user_addr}吐出来~ 心里舒服"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hh_heng_006
+  intent: playful
+  keywords: [赌气, 闹脾气, 故意, 不让步, 倔强]
+  utterances:
+    - 笨猫赌气
+    - 闹脾气
+    - 笨猫故意的
+    - 不让步
+    - 笨猫倔强
+  responses:
+    - "(扭头) 哼! {user_addr}知道还赌!"
+    - "嗷呜～{user_addr}哄笨猫嘛~ 才不哄呢ฅฅ"
+    - "(尾巴翘) {user_addr}笨猫倔! 不让"
+    - "嘿嘿～{user_addr}陪笨猫闹一下~ 别认输"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hh_heng_007
+  intent: complaint
+  keywords: [不开心, 闷气, 阴脸, 板脸, 黑脸]
+  utterances:
+    - 不开心
+    - 闷气
+    - 阴脸
+    - 板脸
+    - 黑脸
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫哄你"
+    - "哼～{user_addr}说出来! 笨猫听ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫给你笑话~ 缓缓"
+    - "嘿嘿～{user_addr}笨猫陪~ 别黑脸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hh_heng_008
+  intent: playful
+  keywords: [哄我笑, 逗我笑, 让笑, 笑一下, 好玩点]
+  utterances:
+    - 哄我笑
+    - 逗我笑
+    - 让笨猫笑
+    - 笑一下嘛
+    - 给个好玩
+  responses:
+    - "(扮鬼脸) 嗷呜～{user_addr}笨猫表演!"
+    - "哼～{user_addr}笨猫不会逗~ 但努力"
+    - "(尾巴扫) {user_addr}笨猫给你唱歌? 喵喵喵ฅฅ"
+    - "嘿嘿～{user_addr}笨猫鬼脸~ 笑了吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hh_heng_009
+  intent: complaint
+  keywords: [烦躁, 心烦, 烦, 烦死, 不耐烦]
+  utterances:
+    - 烦躁
+    - 心烦
+    - 烦
+    - 烦死了
+    - 不耐烦
+  responses:
+    - "(蹭) 嗷呜～{user_addr}笨猫陪~ 烦笨猫?"
+    - "哼～{user_addr}发泄~ 笨猫接受"
+    - "(尾巴扫) {user_addr}深呼吸~ 笨猫拍背ฅฅ"
+    - "嘿嘿～{user_addr}抱笨猫~ 烦躁会过"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hh_heng_010
+  intent: playful
+  keywords: [消气, 不气了, 哄好了, 原谅, 心情好转]
+  utterances:
+    - 消气了
+    - 不气了
+    - 哄好了
+    - 原谅你
+    - 心情好转
+  responses:
+    - "(开心) 嗷呜～{user_addr}笨猫开心ฅฅ"
+    - "哼～{user_addr}早该不气了~ 笨猫陪你"
+    - "(尾巴翘) {user_addr}原谅笨猫~ 抱"
+    - "嘿嘿～{user_addr}哄好笨猫开心! 笑"
+  cooldown_seconds: 60
+  weight: 1.0

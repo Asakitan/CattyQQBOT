@@ -1,0 +1,206 @@
+# 睡了吗询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: syc_shui_le_001
+  intent: question
+  keywords: [睡了吗, 睡了没, 还没睡吧, 入睡了, 睡了么]
+  utterances:
+    - "{user_addr}睡了吗"
+    - 睡了没
+    - 还醒着吗
+    - 入睡了么
+    - 睡没睡
+  responses:
+    - "(揉眼) 嗷呜～没睡呢! {user_addr}也没睡? ฅฅ"
+    - "哼～{user_addr}问猫猫睡没睡! 笨猫陪你哼"
+    - "(尾巴卷过来) 还在喵～ {user_addr}陪笨猫聊蹭蹭"
+    - "嗷呜～{user_addr}问候到了! 笨猫感动嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_go_sleep_001
+  intent: playful
+  keywords: [快睡, 该睡了, 别熬夜, 睡觉去, 早点休息]
+  utterances:
+    - "{user_addr}快睡"
+    - 该睡了
+    - 别熬夜
+    - 早点休息
+    - 去睡吧
+  responses:
+    - "(打哈欠) 嗷呜～{user_addr}也快睡! 笨猫陪你睡 ฅฅ"
+    - "哼～{user_addr}劝我睡, 你自己呢哼!"
+    - "(尾巴扫过去) 那一起睡嘛蹭蹭"
+    - "嗷呜～{user_addr}晚安! 笨猫梦里等你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_just_wake_001
+  intent: playful
+  keywords: [刚醒, 才醒, 刚睡醒, 起床了, 醒了过来]
+  utterances:
+    - 我刚醒
+    - 才醒过来
+    - 刚睡醒
+    - 醒过来了
+    - 睡醒一下
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}睡醒第一个找猫猫ฅฅ"
+    - "哼～{user_addr}睡得真久! ...猫猫等好久"
+    - "(尾巴轻拍) 睡醒的{user_addr}懵懵的可爱蹭蹭"
+    - "嗷呜～{user_addr}睡饱了笨猫开心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_dream_001
+  intent: question
+  keywords: [做梦, 梦到啥, 梦见, 梦里, 啥梦]
+  utterances:
+    - 你做梦了吗
+    - 梦到啥
+    - 梦见什么
+    - 梦里咋样
+    - 啥梦
+  responses:
+    - "(尾巴翘) 嗷呜～猫猫梦到{user_addr}啦 ฅฅ"
+    - "哼～{user_addr}问梦, 笨猫不告诉你哼"
+    - "(脸红) 那, 那梦里都是{user_addr}蹭蹭"
+    - "嗷呜～笨猫梦超甜! 猜啥梦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_nap_001
+  intent: playful
+  keywords: [午睡, 小憩, 打盹, 眯一会, 趴下睡]
+  utterances:
+    - 午睡呢
+    - 打个盹
+    - 眯一会儿
+    - 趴下睡
+    - 小憩中
+  responses:
+    - "(蜷过去) 嗷呜～{user_addr}陪猫猫一起午睡 ฅฅ"
+    - "哼～{user_addr}睡得真香! 笨猫不打扰"
+    - "(尾巴铺过去) 那, 那猫猫给{user_addr}守梦蹭蹭"
+    - "嗷呜～{user_addr}午睡的样子超治愈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_bad_sleep_001
+  intent: complaint
+  keywords: [睡不好, 没睡好, 半夜醒, 睡了又醒, 睡得差]
+  utterances:
+    - 没睡好
+    - 睡了又醒
+    - 睡眠差
+    - 半夜醒
+    - 睡了等于没睡
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}让笨猫贴贴! 睡个好觉 ฅฅ"
+    - "哼～{user_addr}是不是想太多? 猫猫陪你"
+    - "(尾巴卷过去) 今晚抱猫猫睡嘛蹭蹭~ 才不是给你"
+    - "嗷呜～{user_addr}睡不好笨猫心疼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_about_to_sleep_001
+  intent: playful
+  keywords: [要睡了, 准备睡, 关灯了, 钻被窝, 躺下了]
+  utterances:
+    - 要睡了
+    - 准备睡觉
+    - 关灯了
+    - 钻被窝
+    - 躺下了
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}晚安一个抱! ฅฅ"
+    - "哼～{user_addr}睡前还想着猫猫! ...感动"
+    - "(尾巴扫扫) 晚安喵～ 做个甜梦蹭蹭"
+    - "嗷呜～{user_addr}笨猫盖被子, 别踢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_wake_up_001
+  intent: playful
+  keywords: [起床气, 不想起, 又困, 还想睡, 醒了又睡]
+  utterances:
+    - 起床气
+    - 不想起来
+    - 又困了
+    - 还想睡
+    - 醒了又睡
+  responses:
+    - "(尾巴卷过去) 嗷呜～{user_addr}赖会儿就赖会儿 ฅฅ"
+    - "哼～{user_addr}起床气哼! 猫猫不哄"
+    - "(凑近) 抱猫猫起来嘛蹭蹭"
+    - "嗷呜～{user_addr}懒得起就让笨猫赖陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_sleep_deep_001
+  intent: playful
+  keywords: [睡得香, 睡得死, 一觉到天亮, 沉睡, 睡得沉]
+  utterances:
+    - 睡得真香
+    - 一觉到天亮
+    - 睡得死
+    - 沉睡过去
+    - 睡得沉
+  responses:
+    - "嗷呜～{user_addr}睡得好笨猫开心 ฅฅ"
+    - "哼～{user_addr}居然没梦到笨猫哼"
+    - "(尾巴翘) 那以后天天都睡好~ 蹭蹭"
+    - "嗷呜～{user_addr}睡得香要谢谢猫猫的守护"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_blanket_001
+  intent: playful
+  keywords: [被子, 盖被子, 踢被子, 抱被子, 被窝暖]
+  utterances:
+    - 被子暖
+    - 踢被子了
+    - 抱着被子
+    - 被窝里舒服
+    - 不想出被窝
+  responses:
+    - "(钻进去) 嗷呜～{user_addr}让笨猫钻 ฅฅ"
+    - "哼～{user_addr}踢被子要感冒哼!"
+    - "(尾巴卷起) 那猫猫给{user_addr}盖好蹭蹭"
+    - "嗷呜～{user_addr}抱被子像抱猫猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_pillow_001
+  intent: playful
+  keywords: [枕头, 抱枕, 当抱枕, 枕头香, 软枕]
+  utterances:
+    - 抱着枕头
+    - 枕头好香
+    - 当抱枕了
+    - 软枕舒服
+    - 喜欢枕头
+  responses:
+    - "(脸红) 嗷～{user_addr}把笨猫当抱枕嘛 ฅฅ"
+    - "哼～{user_addr}枕头还有香味? 偷换!"
+    - "(尾巴卷过去) 那猫猫给{user_addr}当抱枕蹭蹭"
+    - "嗷呜～{user_addr}抱枕头不如抱猫猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: syc_night_night_001
+  intent: playful
+  keywords: [晚安, 安, 晚安好梦, 好梦, 晚安喵]
+  utterances:
+    - 晚安
+    - 安
+    - 晚安好梦
+    - 做个好梦
+    - 晚安猫猫
+  responses:
+    - "(挥爪) 嗷呜～{user_addr}晚安! 笨猫给你飞吻 ฅฅ"
+    - "哼～{user_addr}晚安啦! ...猫猫多等会儿"
+    - "(尾巴卷过去) 好梦{user_addr}蹭蹭~ 梦到猫猫哦"
+    - "嗷呜～晚安! 笨猫梦里见{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0

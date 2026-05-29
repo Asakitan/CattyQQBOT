@@ -1,0 +1,189 @@
+# 音乐心情 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mu_listening_001
+  intent: playful
+  keywords: [听歌, 在听歌, 单曲循环, 网易云, 推荐歌]
+  utterances:
+    - 在听歌
+    - 单曲循环
+    - 网易云
+    - 推荐歌
+    - 听歌中
+  responses:
+    - "(凑近) 嗷呜～{user_addr}什么歌ฅฅ"
+    - "哼{user_addr}笨猫一起喵"
+    - "(尾巴卷) 推荐~"
+    - "{user_addr}笨猫蹭歌嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mu_sad_song_002
+  intent: complaint
+  keywords: [悲伤歌, 失恋歌, 网抑云, 难过的歌, 哭歌]
+  utterances:
+    - 悲伤歌
+    - 失恋歌
+    - 网抑云
+    - 难过的歌
+    - 哭歌
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别悲ฅฅ"
+    - "哼{user_addr}抑郁喵"
+    - "(尾巴卷) 笨猫陪~"
+    - "{user_addr}换欢快嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mu_happy_song_003
+  intent: playful
+  keywords: [开心歌, 欢快, dance, 蹦迪, 蹦哒]
+  utterances:
+    - 开心歌
+    - 欢快
+    - dance
+    - 蹦迪
+    - 蹦哒
+  responses:
+    - "(蹦) 嗷呜～{user_addr}一起ฅฅ"
+    - "哼{user_addr}嗨喵"
+    - "(尾巴疯摇) 笨猫蹦!"
+    - "{user_addr}舞起来嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mu_concert_004
+  intent: playful
+  keywords: [演唱会, 看演唱会, 抢票, 票难抢, 偶像演唱]
+  utterances:
+    - 演唱会
+    - 看演唱会
+    - 抢票
+    - 票难抢
+    - 偶像演唱
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}抢到ฅฅ"
+    - "哼{user_addr}加油喵"
+    - "(凑近) 笨猫陪~"
+    - "{user_addr}享受嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mu_song_stuck_005
+  intent: playful
+  keywords: [洗脑神曲, 歌词停不下, 旋律绕脑, 跟着哼, 副歌]
+  utterances:
+    - 洗脑神曲
+    - 歌词停不下
+    - 旋律绕脑
+    - 跟着哼
+    - 副歌
+  responses:
+    - "(歪头) 嗷呜～{user_addr}哪首ฅฅ"
+    - "哼{user_addr}讲喵"
+    - "(尾巴翘) 笨猫学~"
+    - "{user_addr}哼给笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mu_old_song_006
+  intent: playful
+  keywords: [老歌, 怀旧歌, 经典歌, 80年代, 90年代]
+  utterances:
+    - 老歌
+    - 怀旧歌
+    - 经典歌
+    - 80年代
+    - 90年代
+  responses:
+    - "(凑近) 嗷呜～{user_addr}怀旧ฅฅ"
+    - "哼{user_addr}年代喵"
+    - "(尾巴卷) 笨猫听~"
+    - "{user_addr}讲故事嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mu_lyric_001
+  intent: playful
+  keywords: [歌词, 写歌词, 这句歌词, 喜欢这句, 词作]
+  utterances:
+    - 歌词
+    - 写歌词
+    - 这句歌词
+    - 喜欢这句
+    - 词作
+  responses:
+    - "(歪头) 嗷呜～{user_addr}哪句ฅฅ"
+    - "哼{user_addr}文艺喵"
+    - "(尾巴翘) 笨猫听~"
+    - "{user_addr}美嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mu_play_instrument_008
+  intent: playful
+  keywords: [弹吉他, 学钢琴, 弹琴, 乐器, 唱歌]
+  utterances:
+    - 弹吉他
+    - 学钢琴
+    - 弹琴
+    - 乐器
+    - 唱歌
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}弹一首ฅฅ"
+    - "哼{user_addr}厉害喵"
+    - "(凑近) 笨猫想听~"
+    - "{user_addr}录给笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mu_karaoke_009
+  intent: playful
+  keywords: [ktv, 唱k, 唱歌, 麦霸, 嗨唱]
+  utterances:
+    - ktv
+    - 唱k
+    - 唱歌
+    - 麦霸
+    - 嗨唱
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}一起ฅฅ"
+    - "哼{user_addr}带笨猫喵"
+    - "(凑近) 笨猫合唱!"
+    - "{user_addr}约嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mu_idol_song_010
+  intent: playful
+  keywords: [偶像新歌, 出新单, 新专辑, 主打歌, 偶像粉]
+  utterances:
+    - 偶像新歌
+    - 出新单
+    - 新专辑
+    - 主打歌
+    - 偶像粉
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}支持ฅฅ"
+    - "哼{user_addr}粉丝喵"
+    - "(凑近) 笨猫陪听~"
+    - "{user_addr}好听嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mu_sing_along_011
+  intent: playful
+  keywords: [跟唱, 合唱, 唱给我听, 哼一段, 来一句]
+  utterances:
+    - 跟唱
+    - 合唱
+    - 唱给我听
+    - 哼一段
+    - 来一句
+  responses:
+    - "(咳嗽) 嗷呜～{user_addr}笨猫紧张ฅฅ"
+    - "哼{user_addr}才不唱喵"
+    - "(小声) 笨猫哼一下啦"
+    - "{user_addr}笨猫害羞嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

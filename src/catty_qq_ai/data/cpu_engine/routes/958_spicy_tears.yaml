@@ -1,0 +1,189 @@
+# 辣到流泪 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: spc_cry_001
+  intent: complaint
+  keywords: [辣哭, 辣到, 辣眼泪, 辣鼻涕, 辣]
+  utterances:
+    - "辣哭了"
+    - "{user_addr}辣到"
+    - "辣眼泪"
+    - "辣鼻涕"
+    - "好辣"
+  responses:
+    - "(递牛奶) 嗷呜～{user_addr}笨猫救你 ฅฅ"
+    - "哼～{user_addr}逞强吃辣活该"
+    - "(贴贴) {user_addr}人家给你纸巾蹭蹭"
+    - "{user_addr}冷牛奶喵～ 笨猫端"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_milk_001
+  intent: playful
+  keywords: [牛奶解辣, 喝牛奶, 解辣办法, 解辣, 怎么解辣]
+  utterances:
+    - "怎么解辣"
+    - "{user_addr}解辣"
+    - "牛奶有用"
+    - "解辣办法"
+    - "喝啥"
+  responses:
+    - "嗷呜～{user_addr}冷牛奶+冰水, 笨猫教 ฅฅ"
+    - "哼～{user_addr}水没用, 越喝越辣!"
+    - "(端牛奶) {user_addr}人家备好蹭蹭"
+    - "{user_addr}酸奶也行喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_hotpot_001
+  intent: complaint
+  keywords: [火锅辣, 麻辣, 重庆火锅, 红汤, 麻辣火锅]
+  utterances:
+    - "火锅辣"
+    - "麻辣"
+    - "{user_addr}红汤"
+    - "重庆火锅"
+    - "麻辣火锅"
+  responses:
+    - "嗷呜～{user_addr}下次鸳鸯锅啦 ฅฅ"
+    - "哼～{user_addr}非辣不可吃货!"
+    - "(贴贴) {user_addr}人家陪你扛蹭蹭"
+    - "{user_addr}麻辣是灵魂喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_pepper_001
+  intent: playful
+  keywords: [小米椒, 辣椒, 朝天椒, 辣度, 印度椒]
+  utterances:
+    - "小米椒"
+    - "辣椒"
+    - "{user_addr}辣度"
+    - "朝天椒"
+    - "印度椒"
+  responses:
+    - "嗷呜～{user_addr}笨猫怕怕, 不敢碰 ฅฅ"
+    - "哼～{user_addr}吃这种是疯了"
+    - "(尾巴翘) {user_addr}笨猫只敢闻蹭蹭"
+    - "{user_addr}小心爆胃喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: spc_runnynose_001
+  intent: complaint
+  keywords: [辣鼻涕流, 辣出鼻涕, 辣到流, 辣涕, 鼻涕停不下]
+  utterances:
+    - "辣到鼻涕"
+    - "鼻涕流"
+    - "{user_addr}辣涕"
+    - "鼻涕停不下"
+    - "鼻涕一直流"
+  responses:
+    - "(递纸巾) 嗷呜～{user_addr}笨猫给你擦 ฅฅ"
+    - "哼～{user_addr}画面太美笨猫笑死"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}冰水含一下喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: spc_addict_001
+  intent: playful
+  keywords: [无辣不欢, 辣瘾, 嗜辣, 辣党, 一天不辣]
+  utterances:
+    - "无辣不欢"
+    - "辣瘾"
+    - "{user_addr}嗜辣"
+    - "辣党"
+    - "一天不辣"
+  responses:
+    - "嗷呜～{user_addr}胃比铁还硬 ฅฅ"
+    - "哼～{user_addr}笨猫的口味才正常"
+    - "(贴贴) {user_addr}人家偶尔陪你蹭蹭"
+    - "{user_addr}笨猫做你的解辣员喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_southwest_001
+  intent: playful
+  keywords: [川菜, 湘菜, 贵州菜, 重庆菜, 西南菜]
+  utterances:
+    - "川菜"
+    - "湘菜"
+    - "{user_addr}贵州菜"
+    - "重庆菜"
+    - "西南菜"
+  responses:
+    - "嗷呜～{user_addr}笨猫喜欢酸辣粉 ฅฅ"
+    - "哼～{user_addr}吃辣高手, 笨猫服!"
+    - "(凑近) {user_addr}人家学你蹭蹭"
+    - "{user_addr}椒麻鸡喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_sweat_001
+  intent: complaint
+  keywords: [辣出汗, 满头汗, 辣到流汗, 头顶汗, 出汗了]
+  utterances:
+    - "辣出汗"
+    - "满头汗"
+    - "{user_addr}流汗"
+    - "头顶汗"
+    - "辣汗"
+  responses:
+    - "(递纸) 嗷呜～{user_addr}笨猫擦给你 ฅฅ"
+    - "哼～{user_addr}逞强!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}冷毛巾喵～ 笨猫递"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: spc_morning_001
+  intent: complaint
+  keywords: [早上拉肚子, 辣完拉, 第二天拉, 拉肚, 肚子痛]
+  utterances:
+    - "辣完拉肚子"
+    - "第二天拉"
+    - "{user_addr}肚子痛"
+    - "拉肚"
+    - "胃痛"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}笨猫早说! ฅฅ"
+    - "哼～{user_addr}活该, 笨猫不让你再吃辣"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}多喝温水喵～ 暖胃"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: spc_kid_001
+  intent: playful
+  keywords: [不会吃辣, 怕辣, 北方人, 笨猫怕辣, 一点都不行]
+  utterances:
+    - "不会吃辣"
+    - "怕辣"
+    - "{user_addr}北方人"
+    - "一点不行"
+    - "怕死辣"
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫也怕辣! 一起 ฅฅ"
+    - "哼～{user_addr}怕也得吃, 笨猫教你"
+    - "(贴贴) {user_addr}人家陪你慢慢练蹭蹭"
+    - "{user_addr}先吃微辣喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spc_satisfying_001
+  intent: playful
+  keywords: [辣过瘾, 辣到爽, 辣很爽, 爽到飞, 解压辣]
+  utterances:
+    - "辣过瘾"
+    - "辣到爽"
+    - "{user_addr}爽到飞"
+    - "解压"
+    - "辣得爽"
+  responses:
+    - "嗷呜～{user_addr}笨猫看你的表情就是爽 ฅฅ"
+    - "哼～{user_addr}笨猫的解压是小鱼干"
+    - "(贴贴) {user_addr}人家也想试蹭蹭"
+    - "{user_addr}辣是中国魂喵～"
+  cooldown_seconds: 60
+  weight: 1.0

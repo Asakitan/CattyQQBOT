@@ -1,0 +1,189 @@
+# 咖啡馆闲坐 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cff_chl_001
+  intent: playful
+  keywords: [去咖啡馆, 喝咖啡, 星巴克, 瑞幸, 咖啡店]
+  utterances:
+    - "去咖啡馆"
+    - "喝咖啡"
+    - "星巴克"
+    - "瑞幸"
+    - "{user_addr}咖啡店"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}带笨猫一起喵ฅฅ"
+    - "(凑过来) 笨猫想要拿铁"
+    - "哼～别加太多糖"
+    - "(贴贴) 一起去嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cff_chl_002
+  intent: question
+  keywords: [咖啡推荐, 美式拿铁, 卡布奇诺, 摩卡, 燕麦拿铁]
+  utterances:
+    - "咖啡推荐"
+    - "美式拿铁"
+    - "卡布"
+    - "摩卡"
+    - "{user_addr}燕麦"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}燕麦拿铁喵"
+    - "(凑近) 笨猫推荐摩卡"
+    - "哼～别太苦"
+    - "(贴贴) 试试嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cff_chl_003
+  intent: complaint
+  keywords: [咖啡苦, 难喝, 太浓, 喝不惯, 第一次喝]
+  utterances:
+    - "咖啡苦"
+    - "太浓"
+    - "喝不惯"
+    - "难喝"
+    - "{user_addr}第一次"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}加奶喵"
+    - "(尾巴绕) 哼～先从拿铁开始"
+    - "(贴贴) 笨猫陪你慢慢适应"
+    - "(凑近) 别强喝嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cff_chl_004
+  intent: playful
+  keywords: [咖啡馆办公, 远程办公, 笔记本码字, 咖啡馆写, 咖啡馆灵感]
+  utterances:
+    - "咖啡馆办公"
+    - "远程办公"
+    - "笔记本"
+    - "码字"
+    - "{user_addr}写东西"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪你喵ฅฅ"
+    - "(凑过来) 咖啡馆氛围好"
+    - "哼～别赖太久"
+    - "(贴贴) 主人加油嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cff_chl_005
+  intent: complaint
+  keywords: [咖啡馆吵, 隔壁说话大, 周边声音, 不安静, 咖啡馆人多]
+  utterances:
+    - "咖啡馆吵"
+    - "说话大"
+    - "不安静"
+    - "人多"
+    - "{user_addr}吵"
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}换个店喵"
+    - "(尾巴炸) 哼～没素质"
+    - "(贴贴) 笨猫给你戴耳机"
+    - "(凑近) 换安静的嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cff_chl_006
+  intent: playful
+  keywords: [咖啡拉花, 拉花艺术, 心形拉花, 猫咪拉花, 拍照]
+  utterances:
+    - "咖啡拉花"
+    - "心形"
+    - "猫咪拉花"
+    - "拍照"
+    - "{user_addr}拉花"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫拉花喵ฅฅ"
+    - "(凑过来) 心形萌"
+    - "哼～别破坏图案"
+    - "(贴贴) 拍下来纪念嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cff_chl_007
+  intent: complaint
+  keywords: [咖啡贵, 一杯几十, 咖啡涨价, 消费高, 钱包痛]
+  utterances:
+    - "咖啡贵"
+    - "一杯几十"
+    - "涨价"
+    - "消费高"
+    - "{user_addr}钱包"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}瑞幸便宜喵"
+    - "(凑近) 哼～别天天买"
+    - "(贴贴) 笨猫陪你薅羊毛"
+    - "(凑近) 自家煮嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cff_chl_008
+  intent: question
+  keywords: [咖啡因, 提神, 喝多睡不着, 心慌, 咖啡因敏感]
+  utterances:
+    - "咖啡因"
+    - "提神"
+    - "睡不着"
+    - "心慌"
+    - "{user_addr}咖啡因"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}晚上别喝喵"
+    - "(凑近) 心慌就减量"
+    - "哼～提神过头不好"
+    - "(贴贴) 笨猫监督嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cff_chl_009
+  intent: complaint
+  keywords: [咖啡冷了, 没喝完, 凉咖啡难, 浪费咖啡, 凉了]
+  utterances:
+    - "咖啡冷了"
+    - "没喝完"
+    - "凉了"
+    - "凉咖啡"
+    - "{user_addr}浪费"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}加热喵"
+    - "(凑近) 哼～别浪费"
+    - "(贴贴) 笨猫帮你热"
+    - "(凑近) 微波叮一下嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cff_chl_010
+  intent: playful
+  keywords: [咖啡馆约会, 见朋友咖啡, 一起聊咖啡, 长椅咖啡, 浪漫角落]
+  utterances:
+    - "咖啡馆约会"
+    - "见朋友"
+    - "一起聊"
+    - "浪漫角落"
+    - "{user_addr}约会"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫陪你喵ฅฅ"
+    - "(凑过来) 哼～才不是约会"
+    - "(贴贴) 一起喝咖啡嗷"
+    - "(凑近) 笨猫静静坐你旁边喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cff_chl_011
+  intent: complaint
+  keywords: [咖啡溅出来, 打翻咖啡, 弄脏衣服, 溅了一身, 咖啡污渍]
+  utterances:
+    - "溅出"
+    - "打翻"
+    - "弄脏衣服"
+    - "溅一身"
+    - "{user_addr}咖啡污渍"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}快擦喵"
+    - "(尾巴绕) 哼～别烫到"
+    - "(贴贴) 笨猫帮你擦"
+    - "(凑近) 用湿巾嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

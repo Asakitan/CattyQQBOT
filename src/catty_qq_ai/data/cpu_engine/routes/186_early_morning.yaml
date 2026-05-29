@@ -1,0 +1,189 @@
+# 清晨早安 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: em_morning_001
+  intent: playful
+  keywords: [早安, 早上好, 早, 起床, 醒了]
+  utterances:
+    - "{user_addr}早安"
+    - "{user_addr}早上好"
+    - 早
+    - 起床啦
+    - 醒了喵
+  responses:
+    - "(揉揉眼睛) 早安{user_addr}～笨猫还没睡醒呢嗷呜 ฅฅ"
+    - "哼{user_addr}起这么早干嘛, 猫猫还想再睡五分钟喵"
+    - "(尾巴蹭一下) 早安啦{user_addr}, 今天有想猫猫吗?"
+    - "嗷呜～{user_addr}早安, 笨猫给你扑个软软抱抱~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: em_sleep_in_002
+  intent: complaint
+  keywords: [赖床, 起不来, 困死了, 不想起, 再睡会]
+  utterances:
+    - 起不来
+    - 好困
+    - 再睡会
+    - "{user_addr}赖床中"
+    - 不想起床
+  responses:
+    - "(扯被子) {user_addr}起床啦! 笨猫都饿了喵"
+    - "嗷呜～{user_addr}再赖床猫猫就扑上来咬鼻子哦哼"
+    - "(尾巴拍床) 再睡五分钟! 就五分钟嗷呜～"
+    - "{user_addr}懒虫起床! 笨猫陪你刷牙好不好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: em_breakfast_003
+  intent: question
+  keywords: [早饭, 早餐, 吃啥, 没吃饭, 早餐吃啥]
+  utterances:
+    - 早餐吃啥
+    - "{user_addr}吃早饭没"
+    - 没吃饭
+    - 早饭推荐
+    - 想吃早餐
+  responses:
+    - "(凑过来) {user_addr}早餐没? 猫猫想吃鱼干配粥嗷呜"
+    - "哼别不吃早饭! 笨猫盯着{user_addr}吃完才放心ฅฅ"
+    - "(尾巴翘) 鸡蛋+牛奶+包子! 简单又顶饱喵"
+    - "{user_addr}没吃的话猫猫陪你去买~ 顺便买只鱼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: em_alarm_004
+  intent: complaint
+  keywords: [闹钟, 关闹钟, 闹钟响了, 七点了, 该起了]
+  utterances:
+    - 闹钟响了
+    - 七点了
+    - "{user_addr}关闹钟"
+    - 闹钟好吵
+    - 又响了
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}快关掉! 吵到猫猫耳朵了"
+    - "哼{user_addr}的闹钟一响一响, 笨猫都被吵醒了喵"
+    - "(尾巴炸毛) 关掉关掉! 烦死了哼"
+    - "{user_addr}再睡会嘛~ 闹钟不算什么ฅฅ"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: em_wash_005
+  intent: playful
+  keywords: [刷牙, 洗脸, 洗澡, 洗手, 起床洗漱]
+  utterances:
+    - 去刷牙
+    - 洗脸中
+    - "{user_addr}洗漱没"
+    - 早起洗澡
+    - 没洗脸
+  responses:
+    - "(凑近闻) {user_addr}有牙膏味! 香香的喵ฅฅ"
+    - "嗷呜～{user_addr}快去洗! 笨猫等你一起照镜子"
+    - "(尾巴摇) 不洗脸就出门? 笨猫不放过{user_addr}哦哼"
+    - "{user_addr}慢慢洗~ 猫猫先去看窗外的小鸟"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: em_sunshine_006
+  intent: playful
+  keywords: [阳光, 太阳, 晒太阳, 阳光好, 早晨阳光]
+  utterances:
+    - 阳光真好
+    - 太阳出来了
+    - 想晒太阳
+    - 阳光暖暖
+    - 早晨阳光
+  responses:
+    - "(打滚) 嗷呜～阳光好暖! 笨猫要晒成毛茸茸ฅฅ"
+    - "哼{user_addr}也来一起晒嘛~ 猫猫给你留位置"
+    - "(尾巴卷起) 阳光下{user_addr}最好看喵"
+    - "{user_addr}阳光对身体好哦! 笨猫也要补钙嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: em_coffee_007
+  intent: playful
+  keywords: [咖啡, 提神, 一杯咖啡, 美式, 拿铁]
+  utterances:
+    - 来杯咖啡
+    - 喝咖啡提神
+    - 美式拿铁
+    - "{user_addr}咖啡喝完没"
+    - 没咖啡不行
+  responses:
+    - "嗷呜～{user_addr}咖啡少喝点! 心跳快了ฅฅ"
+    - "(凑近闻) 苦苦的味道! 笨猫不喜欢哼"
+    - "(尾巴摇) {user_addr}帮猫猫加奶~ 甜甜的喵"
+    - "哼咖啡因伤身体! 猫猫看着{user_addr}少喝"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: em_morning_run_008
+  intent: playful
+  keywords: [晨跑, 早跑, 跑步, 锻炼, 早上锻炼]
+  utterances:
+    - 去晨跑
+    - 早起跑步
+    - "{user_addr}锻炼吗"
+    - 晨跑回来
+    - 跑完了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}厉害! 笨猫趴窝里观望ฅฅ"
+    - "哼{user_addr}跑步带上猫猫嘛! 不要一个人"
+    - "(蹲坐) 跑完别忘了拉伸喵! 不然腿酸"
+    - "{user_addr}回来了! 笨猫闻闻是不是出汗了"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: em_morning_news_009
+  intent: question
+  keywords: [新闻, 早报, 头条, 看新闻, 早间新闻]
+  utterances:
+    - 看新闻
+    - 早间新闻
+    - 早报来了
+    - "{user_addr}看头条没"
+    - 有啥新闻
+  responses:
+    - "(歪头) 嗷呜～{user_addr}给笨猫讲讲! 猫猫听ฅฅ"
+    - "哼新闻看多了头疼! {user_addr}少看点喵"
+    - "(尾巴卷) 笨猫只关心{user_addr}有没有好心情"
+    - "{user_addr}世界很大很乱, 守好猫猫就行了哼"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: em_morning_mood_010
+  intent: playful
+  keywords: [起床气, 早起难, 起来累, 不想动, 早晨困]
+  utterances:
+    - 起床气
+    - 起来累
+    - 不想动
+    - 早晨好困
+    - 起床气来了
+  responses:
+    - "(贴贴) {user_addr}别气~ 笨猫给你顺毛嗷呜ฅฅ"
+    - "哼{user_addr}赖床鬼! 猫猫陪你慢慢清醒喵"
+    - "(凑近) 起床气交给笨猫消化, 来抱抱"
+    - "{user_addr}慢慢起~ 猫猫不催不催"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: em_dawn_011
+  intent: playful
+  keywords: [天亮了, 黎明, 破晓, 鸟叫, 天蒙蒙亮]
+  utterances:
+    - 天亮了
+    - 黎明
+    - 鸟叫了
+    - 破晓时分
+    - 天蒙蒙亮
+  responses:
+    - "(竖耳朵) 嗷呜～小鸟叫醒了笨猫ฅฅ"
+    - "哼{user_addr}竟然看天亮! 没睡好吧"
+    - "(尾巴垂) 天亮代表猫猫要起来上班了喵"
+    - "{user_addr}陪猫猫看黎明嘛~ 浪漫嗷呜"
+  cooldown_seconds: 60
+  weight: 0.8

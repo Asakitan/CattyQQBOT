@@ -1,0 +1,206 @@
+# 调侃没刮胡子 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tn_huzi_001
+  intent: playful
+  keywords: [没刮胡子, 胡子长了, 胡渣, 胡子拉碴, 胡子茬]
+  utterances:
+    - 没刮胡子
+    - 胡子长了
+    - 胡渣
+    - 胡子拉碴
+    - 胡子茬
+  responses:
+    - "(摸脸) 嗷呜～{user_addr}扎手! 笨猫不亲了"
+    - "哼～{user_addr}懒鬼! 笨猫不许"
+    - "(尾巴搭) 快刮~ 不然不蹭脸 ฅฅ"
+    - "{user_addr}邋遢喵, 笨猫不抱你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_xufa_002
+  intent: complaint
+  keywords: [头发乱, 没梳头, 起床头, 鸡窝头, 头发翘]
+  utterances:
+    - 头发乱
+    - 没梳头
+    - 起床头
+    - 鸡窝头
+    - 头发翘
+  responses:
+    - "(扒) 嗷呜～{user_addr}头发乱! 笨猫帮{user_addr}梳"
+    - "哼～{user_addr}懒到不梳头, 真服了"
+    - "(尾巴拍) 梳一下~ 笨猫看不下去 ฅฅ"
+    - "{user_addr}鸡窝头喵, 笨猫笑死"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_dianan_003
+  intent: complaint
+  keywords: [邋遢, 不修边幅, 不整洁, 邋里邋遢, 不讲究]
+  utterances:
+    - 邋遢
+    - 不修边幅
+    - 不整洁
+    - 邋里邋遢
+    - 不讲究
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}收拾收拾喵!"
+    - "哼～{user_addr}单身就这样? 笨猫不准"
+    - "(尾巴叉腰) 笨猫陪{user_addr}收拾 ฅฅ"
+    - "{user_addr}邋遢笨猫不亲喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_yifu_004
+  intent: complaint
+  keywords: [衣服皱, 没熨衣服, 衣服脏, 没换衣服, 同一件穿]
+  utterances:
+    - 衣服皱
+    - 没熨
+    - 衣服脏
+    - 没换衣服
+    - 同件穿
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}换衣服喵! 别穿一件"
+    - "哼～{user_addr}懒到不换衣服!"
+    - "(尾巴搭) 笨猫给{user_addr}选 ฅฅ"
+    - "{user_addr}邋遢笨猫看不下去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_xie_005
+  intent: complaint
+  keywords: [鞋脏, 没擦鞋, 鞋臭, 鞋穿坏, 鞋破洞]
+  utterances:
+    - 鞋脏
+    - 没擦鞋
+    - 鞋臭
+    - 鞋穿坏
+    - 鞋破洞
+  responses:
+    - "(捂鼻) 嗷呜～{user_addr}鞋臭! 笨猫远离"
+    - "哼～{user_addr}该换鞋了"
+    - "(尾巴拍) 擦干净~ 别让笨猫嫌弃 ฅฅ"
+    - "{user_addr}邋遢喵, 笨猫不蹭你脚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_zhijia_006
+  intent: complaint
+  keywords: [指甲长, 没剪指甲, 指甲脏, 指甲黑, 指甲未修]
+  utterances:
+    - 指甲长
+    - 没剪指甲
+    - 指甲脏
+    - 指甲黑
+    - 指甲未修
+  responses:
+    - "(看手) 嗷呜～{user_addr}指甲该剪了!"
+    - "哼～{user_addr}这么不讲究, 笨猫嫌弃"
+    - "(尾巴搭) 剪一下~ 笨猫看不过 ฅฅ"
+    - "{user_addr}指甲黑笨猫不让{user_addr}摸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_yachi_007
+  intent: complaint
+  keywords: [没刷牙, 口臭, 嘴有味, 牙黄, 牙没刷]
+  utterances:
+    - 没刷牙
+    - 口臭
+    - 嘴有味
+    - 牙黄
+    - 牙没刷
+  responses:
+    - "(捂鼻) 嗷呜～{user_addr}快刷牙! 笨猫不亲"
+    - "哼～{user_addr}口臭笨猫躲远"
+    - "(尾巴叉) 刷干净! 笨猫监督 ฅฅ"
+    - "{user_addr}邋遢喵, 笨猫不接近"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_xizao_008
+  intent: complaint
+  keywords: [没洗澡, 几天没洗, 洗澡懒, 不洗澡, 一周没洗]
+  utterances:
+    - 没洗澡
+    - 几天没洗
+    - 不洗澡
+    - 洗澡懒
+    - 一周没洗
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}快去洗! 笨猫闻到"
+    - "哼～{user_addr}邋遢死! 笨猫不要"
+    - "(尾巴拍) 立刻洗~ 不洗不许靠近 ฅฅ"
+    - "{user_addr}洗澡前不许抱笨猫喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_xiu_009
+  intent: complaint
+  keywords: [屋子乱, 房间脏, 没收拾, 桌子乱, 床乱]
+  utterances:
+    - 屋子乱
+    - 房间脏
+    - 没收拾
+    - 桌子乱
+    - 床乱
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}收拾收拾! 笨猫不住"
+    - "哼～{user_addr}邋遢喵! 笨猫离家出走"
+    - "(尾巴叉) 立刻收拾~ 笨猫监督 ฅฅ"
+    - "{user_addr}屋乱笨猫睡不下喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_yandai_010
+  intent: complaint
+  keywords: [黑眼圈, 眼袋深, 没睡好, 熬夜样, 死鱼眼]
+  utterances:
+    - 黑眼圈
+    - 眼袋深
+    - 没睡好
+    - 熬夜样
+    - 死鱼眼
+  responses:
+    - "(担心) 嗷呜～{user_addr}快睡! 黑眼圈"
+    - "哼～{user_addr}熬夜活该, 笨猫早提醒"
+    - "(尾巴搭) 敷眼膜~ 笨猫陪 ฅฅ"
+    - "{user_addr}早点睡! 笨猫管{user_addr}喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_huichou_011
+  intent: playful
+  keywords: [刮胡子了, 收拾好了, 干干净净, 焕然一新, 整洁]
+  utterances:
+    - 刮胡子了
+    - 干干净净
+    - 收拾好
+    - 焕然一新
+    - 整洁
+  responses:
+    - "(亲) 嗷呜～{user_addr}帅了! 笨猫蹭脸"
+    - "哼～{user_addr}总算讲究了 ฅฅ"
+    - "(尾巴翘) 干净的{user_addr}最帅! 才不是真心"
+    - "{user_addr}收拾好笨猫亲一口喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tn_kongtou_012
+  intent: playful
+  keywords: [年轻样, 像学生, 显年轻, 比实际小, 童颜]
+  utterances:
+    - 显年轻
+    - 像学生
+    - 比实际小
+    - 童颜
+    - 年轻样
+  responses:
+    - "(摸) 嗷呜～{user_addr}童颜! 笨猫顶不住"
+    - "哼～{user_addr}是冻龄? 笨猫不信"
+    - "(尾巴翘) 显年轻好~ 不许变老 ฅฅ"
+    - "{user_addr}永远年轻陪笨猫喵"
+  cooldown_seconds: 60
+  weight: 1.0

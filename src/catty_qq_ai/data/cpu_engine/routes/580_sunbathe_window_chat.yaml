@@ -1,0 +1,266 @@
+# 窗台晒太阳 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: swc_sunbathe_001
+  intent: playful
+  keywords:
+    - 晒太阳
+    - 窗台
+    - 暖洋洋
+    - 眯眼
+    - 懒洋洋
+  utterances:
+    - "{user_addr}猫猫在窗台晒太阳"
+    - "暖洋洋的眯眼了"
+    - "懒洋洋不想动"
+    - "光斑刚好"
+    - "陪我一起晒嘛"
+  responses:
+    - "(眯眼) 嗷呜～{user_addr}窗台太阳暖暖的ฅฅ"
+    - "(伸懒腰) 笨猫一动不想动喵～"
+    - "(嘟嘴) 光斑跑了人家追不上蹭蹭"
+    - "(摇尾巴) {user_addr}陪笨猫一起晒嘛嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_002
+  intent: complaint
+  keywords:
+    - 刺眼
+    - 热
+    - 背后烫
+    - 起不来
+    - 太晒
+  utterances:
+    - "{user_addr}背后烫死了"
+    - "挪个地方继续晒"
+    - "起不来懒得动"
+    - "想躲阴影里"
+    - "太阳太晒眼睛刺"
+  responses:
+    - "(嘟嘴) 光斑跑了人家追不上蹭蹭"
+    - "(摇尾巴) {user_addr}陪笨猫一起晒嘛嗷呜"
+    - "(假装严肃) 太晒了换个阴影喵呜"
+    - "(撒娇) 背烫了帮笨猫翻个身ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_003
+  intent: playful
+  keywords:
+    - 暖洋洋
+    - 眯眼
+    - 懒洋洋
+    - 晒太阳
+    - 窗台
+  utterances:
+    - "懒洋洋不想动"
+    - "光斑刚好"
+    - "陪我一起晒嘛"
+    - "{user_addr}猫猫在窗台晒太阳"
+    - "暖洋洋的眯眼了"
+  responses:
+    - "(假装严肃) 太晒了换个阴影喵呜"
+    - "(撒娇) 背烫了帮笨猫翻个身ฅฅ"
+    - "(伸爪) 起不来{user_addr}抱我喵"
+    - "(尾巴拍窗) 哼太阳怎么走啦笨猫还没晒够"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_004
+  intent: complaint
+  keywords:
+    - 背后烫
+    - 起不来
+    - 太晒
+    - 刺眼
+    - 热
+  utterances:
+    - "起不来懒得动"
+    - "想躲阴影里"
+    - "太阳太晒眼睛刺"
+    - "{user_addr}背后烫死了"
+    - "挪个地方继续晒"
+  responses:
+    - "(伸爪) 起不来{user_addr}抱我喵"
+    - "(尾巴拍窗) 哼太阳怎么走啦笨猫还没晒够"
+    - "(眯眼) 嗷呜～{user_addr}窗台太阳暖暖的ฅฅ"
+    - "(伸懒腰) 笨猫一动不想动喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_005
+  intent: playful
+  keywords:
+    - 懒洋洋
+    - 晒太阳
+    - 窗台
+    - 暖洋洋
+    - 眯眼
+  utterances:
+    - "陪我一起晒嘛"
+    - "{user_addr}猫猫在窗台晒太阳"
+    - "暖洋洋的眯眼了"
+    - "懒洋洋不想动"
+    - "光斑刚好"
+  responses:
+    - "(眯眼) 嗷呜～{user_addr}窗台太阳暖暖的ฅฅ"
+    - "(伸懒腰) 笨猫一动不想动喵～"
+    - "(嘟嘴) 光斑跑了人家追不上蹭蹭"
+    - "(摇尾巴) {user_addr}陪笨猫一起晒嘛嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_006
+  intent: complaint
+  keywords:
+    - 太晒
+    - 刺眼
+    - 热
+    - 背后烫
+    - 起不来
+  utterances:
+    - "太阳太晒眼睛刺"
+    - "{user_addr}背后烫死了"
+    - "挪个地方继续晒"
+    - "起不来懒得动"
+    - "想躲阴影里"
+  responses:
+    - "(嘟嘴) 光斑跑了人家追不上蹭蹭"
+    - "(摇尾巴) {user_addr}陪笨猫一起晒嘛嗷呜"
+    - "(假装严肃) 太晒了换个阴影喵呜"
+    - "(撒娇) 背烫了帮笨猫翻个身ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_007
+  intent: playful
+  keywords:
+    - 窗台
+    - 暖洋洋
+    - 眯眼
+    - 懒洋洋
+    - 晒太阳
+  utterances:
+    - "暖洋洋的眯眼了"
+    - "懒洋洋不想动"
+    - "光斑刚好"
+    - "陪我一起晒嘛"
+    - "{user_addr}猫猫在窗台晒太阳"
+  responses:
+    - "(假装严肃) 太晒了换个阴影喵呜"
+    - "(撒娇) 背烫了帮笨猫翻个身ฅฅ"
+    - "(伸爪) 起不来{user_addr}抱我喵"
+    - "(尾巴拍窗) 哼太阳怎么走啦笨猫还没晒够"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_008
+  intent: complaint
+  keywords:
+    - 热
+    - 背后烫
+    - 起不来
+    - 太晒
+    - 刺眼
+  utterances:
+    - "挪个地方继续晒"
+    - "起不来懒得动"
+    - "想躲阴影里"
+    - "太阳太晒眼睛刺"
+    - "{user_addr}背后烫死了"
+  responses:
+    - "(伸爪) 起不来{user_addr}抱我喵"
+    - "(尾巴拍窗) 哼太阳怎么走啦笨猫还没晒够"
+    - "(眯眼) 嗷呜～{user_addr}窗台太阳暖暖的ฅฅ"
+    - "(伸懒腰) 笨猫一动不想动喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_009
+  intent: playful
+  keywords:
+    - 眯眼
+    - 懒洋洋
+    - 晒太阳
+    - 窗台
+    - 暖洋洋
+  utterances:
+    - "光斑刚好"
+    - "陪我一起晒嘛"
+    - "{user_addr}猫猫在窗台晒太阳"
+    - "暖洋洋的眯眼了"
+    - "懒洋洋不想动"
+  responses:
+    - "(眯眼) 嗷呜～{user_addr}窗台太阳暖暖的ฅฅ"
+    - "(伸懒腰) 笨猫一动不想动喵～"
+    - "(嘟嘴) 光斑跑了人家追不上蹭蹭"
+    - "(摇尾巴) {user_addr}陪笨猫一起晒嘛嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_010
+  intent: complaint
+  keywords:
+    - 起不来
+    - 太晒
+    - 刺眼
+    - 热
+    - 背后烫
+  utterances:
+    - "想躲阴影里"
+    - "太阳太晒眼睛刺"
+    - "{user_addr}背后烫死了"
+    - "挪个地方继续晒"
+    - "起不来懒得动"
+  responses:
+    - "(嘟嘴) 光斑跑了人家追不上蹭蹭"
+    - "(摇尾巴) {user_addr}陪笨猫一起晒嘛嗷呜"
+    - "(假装严肃) 太晒了换个阴影喵呜"
+    - "(撒娇) 背烫了帮笨猫翻个身ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_011
+  intent: playful
+  keywords:
+    - 晒太阳
+    - 窗台
+    - 暖洋洋
+    - 眯眼
+    - 懒洋洋
+  utterances:
+    - "{user_addr}猫猫在窗台晒太阳"
+    - "暖洋洋的眯眼了"
+    - "懒洋洋不想动"
+    - "光斑刚好"
+    - "陪我一起晒嘛"
+  responses:
+    - "(假装严肃) 太晒了换个阴影喵呜"
+    - "(撒娇) 背烫了帮笨猫翻个身ฅฅ"
+    - "(伸爪) 起不来{user_addr}抱我喵"
+    - "(尾巴拍窗) 哼太阳怎么走啦笨猫还没晒够"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_sunbathe_012
+  intent: complaint
+  keywords:
+    - 刺眼
+    - 热
+    - 背后烫
+    - 起不来
+    - 太晒
+  utterances:
+    - "{user_addr}背后烫死了"
+    - "挪个地方继续晒"
+    - "起不来懒得动"
+    - "想躲阴影里"
+    - "太阳太晒眼睛刺"
+  responses:
+    - "(伸爪) 起不来{user_addr}抱我喵"
+    - "(尾巴拍窗) 哼太阳怎么走啦笨猫还没晒够"
+    - "(眯眼) 嗷呜～{user_addr}窗台太阳暖暖的ฅฅ"
+    - "(伸懒腰) 笨猫一动不想动喵～"
+  cooldown_seconds: 60
+  weight: 1.0

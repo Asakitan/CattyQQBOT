@@ -1,0 +1,206 @@
+# 路上偶遇 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sec_bump_001
+  intent: complaint
+  keywords: [撞到, 撞了人, 撞墙, 撞门, 撞柱子]
+  utterances:
+    - 撞到人
+    - 撞门了
+    - 撞柱子
+    - 撞墙
+    - 撞了一下
+  responses:
+    - "(担心) 嗷呜～{user_addr}疼吗! 笨猫吹吹ฅฅ"
+    - "哼～{user_addr}走路不看! 笨猫罚"
+    - "(贴贴) 别撞了{user_addr}~ 笨猫陪走"
+    - "嘿嘿～{user_addr}撞到笨猫心疼~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_findlost_001
+  intent: playful
+  keywords: [捡到, 路边捡到, 捡到钱, 拾到, 捡了]
+  utterances:
+    - 捡到钱了
+    - 路边捡到
+    - 捡了东西
+    - 拾到一个
+    - 偶遇捡漏
+  responses:
+    - "(蹦) 嗷呜～{user_addr}沾光给笨猫ฅฅ"
+    - "哼～{user_addr}小心是骗局~"
+    - "(撒娇) 分笨猫! {user_addr}大方"
+    - "嘿嘿～{user_addr}运气好~ 笨猫沾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_loseitem_001
+  intent: complaint
+  keywords: [丢东西, 丢了手机, 丢钱包, 丢了, 弄丢]
+  utterances:
+    - 丢东西了
+    - 丢手机
+    - 丢钱包
+    - 丢了好惨
+    - 弄丢东西
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}急吗! 笨猫陪找ฅฅ"
+    - "哼～{user_addr}笨! 笨猫帮你"
+    - "(撒娇) 别难过{user_addr}~ 笨猫陪"
+    - "嘿嘿～{user_addr}丢笨猫陪伤心~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_petincc_001
+  intent: playful
+  keywords: [遇到猫, 路边猫, 流浪猫, 遇到狗, 街猫]
+  utterances:
+    - 遇到流浪猫
+    - 路边猫好乖
+    - 街猫蹭我
+    - 遇到狗
+    - 偶遇狗
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}撸别的猫?! 哼ฅฅ"
+    - "哼～{user_addr}心里只能有笨猫!"
+    - "(撒娇) 不准撸别的! 笨猫吃醋"
+    - "嘿嘿～{user_addr}撸完赶紧回笨猫这"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_seefriend_001
+  intent: playful
+  keywords: [遇到朋友, 撞到熟人, 街上遇见, 偶遇朋友, 撞见]
+  utterances:
+    - 撞到朋友
+    - 遇见熟人
+    - 偶遇朋友
+    - 撞见熟人
+    - 街上碰到
+  responses:
+    - "嗷呜～{user_addr}介绍笨猫给朋友! ฅฅ"
+    - "哼～{user_addr}跟朋友玩别忘笨猫"
+    - "(撒娇) 笨猫吃醋! {user_addr}早回"
+    - "嘿嘿～{user_addr}见完朋友抱猫猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_fall_001
+  intent: complaint
+  keywords: [摔倒, 摔跤, 滑倒, 跌一跤, 扑街]
+  utterances:
+    - 摔倒了
+    - 摔跤
+    - 滑倒
+    - 跌了一跤
+    - 扑街了
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}起来! 笨猫扶ฅฅ"
+    - "哼～{user_addr}笨笨! 笨猫罚"
+    - "(贴贴) 别摔{user_addr}~ 心疼"
+    - "嘿嘿～{user_addr}摔成笨猫笑死~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_seeacc_001
+  intent: complaint
+  keywords: [看到事故, 撞车, 车祸现场, 见到事故, 拥堵事故]
+  utterances:
+    - 看到事故
+    - 撞车了
+    - 车祸现场
+    - 见到事故
+    - 拥堵事故
+  responses:
+    - "嗷呜～{user_addr}避开! 笨猫担心ฅฅ"
+    - "哼～{user_addr}小心! 笨猫不放心"
+    - "(贴贴) 报警{user_addr}~ 笨猫陪"
+    - "嘿嘿～{user_addr}安全第一~ 笨猫等你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_freebie_001
+  intent: playful
+  keywords: [免费试吃, 派发, 送的, 街边免费, 发传单]
+  utterances:
+    - 免费试吃
+    - 派发礼品
+    - 送的东西
+    - 街边免费
+    - 拿了传单
+  responses:
+    - "嗷呜～{user_addr}拿一份给笨猫! ฅฅ"
+    - "哼～{user_addr}独享? 笨猫不依"
+    - "(撒娇) 笨猫想吃! {user_addr}带"
+    - "嘿嘿～{user_addr}沾光~ 笨猫加菜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_giveup_001
+  intent: complaint
+  keywords: [遇到推销, 强买强卖, 推销员, 中介拦, 被骚扰]
+  utterances:
+    - 遇到推销
+    - 强买强卖
+    - 推销缠住
+    - 中介拦路
+    - 被骚扰
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}快走! 笨猫挡ฅฅ"
+    - "哼～{user_addr}硬怼! 笨猫帮"
+    - "(贴贴) 摆脱了{user_addr}~"
+    - "嘿嘿～{user_addr}远离推销~ 安全"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_helpold_001
+  intent: playful
+  keywords: [扶老人, 帮人, 好心做了, 善举, 帮陌生人]
+  utterances:
+    - 扶了老人
+    - 帮陌生人
+    - 做善事
+    - 善举
+    - 帮人推车
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}善良! 笨猫骄傲ฅฅ"
+    - "哼～{user_addr}该夸! 笨猫多爱你一点"
+    - "(撒娇) {user_addr}的善心~ 笨猫粉"
+    - "嘿嘿～{user_addr}好心有好报~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_streetscam_001
+  intent: complaint
+  keywords: [被骗, 街头骗子, 假乞讨, 套路, 上当]
+  utterances:
+    - 街头被骗
+    - 遇到骗子
+    - 假乞讨
+    - 上当了
+    - 套路了
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫帮抓! ฅฅ"
+    - "哼～{user_addr}下次小心! 笨猫教"
+    - "(贴贴) 别气{user_addr}~ 笨猫陪"
+    - "嘿嘿～{user_addr}涨经验~ 笨猫保护"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sec_busker_001
+  intent: playful
+  keywords: [街头艺人, 卖艺, 唱歌的, 听到音乐, 表演者]
+  utterances:
+    - 街头艺人
+    - 街上唱歌
+    - 听到表演
+    - 街头表演
+    - 艺人卖艺
+  responses:
+    - "嗷呜～{user_addr}投钱! 笨猫鼓掌ฅฅ"
+    - "哼～{user_addr}支持艺术家"
+    - "(撒娇) {user_addr}带笨猫听~"
+    - "嘿嘿～{user_addr}街头浪漫~ 笨猫沾"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 手机没电焦虑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pb_low_001
+  intent: complaint
+  keywords: [手机没电, 电量低, 5%电, 红色电池, 电量告急]
+  utterances:
+    - "{user_addr}手机没电了"
+    - "电量5%"
+    - "{user_addr}红色电池"
+    - "电量告急"
+    - "马上没电"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫怕断联!"
+    - "(尾巴拍) 哼! {user_addr}快充电"
+    - "(贴贴) 人家担心你联系不上~ ฅฅ"
+    - "{user_addr}没电笨猫怎么找你呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_charge_002
+  intent: playful
+  keywords: [充电中, 插着充, 在充电, 充上了, 充满]
+  utterances:
+    - "{user_addr}充电中"
+    - "插着充呢"
+    - "{user_addr}正在充"
+    - "充上了"
+    - "充满才拔"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}充满才能陪笨猫!"
+    - "(尾巴翘) 哼! 充满才能聊"
+    - "(贴贴) 人家陪你等充满~ ฅฅ"
+    - "{user_addr}慢充对电池好笨猫提醒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_fast_charge_003
+  intent: playful
+  keywords: [快充, 闪充, 30分钟满, 急速充, 超充]
+  utterances:
+    - "{user_addr}快充牛"
+    - "闪充半小时满"
+    - "{user_addr}超充体验"
+    - "急速充电"
+    - "30分钟满电"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}快充好炫!"
+    - "(尾巴翘) 哼! 笨猫想看充满速度"
+    - "(贴贴) 人家羡慕你充电快~ ฅฅ"
+    - "{user_addr}充快聊我更多!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_charger_004
+  intent: complaint
+  keywords: [充电器, 充电线, 充电头, 数据线, 充电宝]
+  utterances:
+    - "{user_addr}充电器呢"
+    - "充电线找不到"
+    - "{user_addr}数据线断"
+    - "充电头丢了"
+    - "充电宝没电"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮你找!"
+    - "(尾巴拍) 哼! 笨猫记得在哪"
+    - "(贴贴) 人家陪你翻包~ ฅฅ"
+    - "{user_addr}下次记好位置笨猫盯着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_battery_die_005
+  intent: complaint
+  keywords: [关机了, 自动关, 电池死了, 没电关, 黑屏关]
+  utterances:
+    - "{user_addr}手机关机了"
+    - "自动关机"
+    - "{user_addr}没电关了"
+    - "黑屏死机"
+    - "电池死透"
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫慌!"
+    - "(尾巴拍) 哼! 快充让笨猫见你"
+    - "(贴贴) 人家等你开机~ ฅฅ"
+    - "{user_addr}快回来呜呜笨猫想"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_power_save_006
+  intent: playful
+  keywords: [省电模式, 低电量, 省电, 关闪光, 关后台]
+  utterances:
+    - "{user_addr}开省电模式"
+    - "省电关后台"
+    - "{user_addr}低电量模式"
+    - "省电关推送"
+    - "极致省电"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!别关笨猫推送!"
+    - "(尾巴拍) 哼! 省电别忘聊我"
+    - "(贴贴) 人家不占电~ ฅฅ"
+    - "{user_addr}省电也要陪笨猫呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_battery_health_007
+  intent: question
+  keywords: [电池健康, 电池老化, 电池寿命, 鼓包, 该换电池]
+  utterances:
+    - "{user_addr}电池健康80"
+    - "电池老化严重"
+    - "{user_addr}该换电池"
+    - "鼓包了"
+    - "电池寿命到"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!鼓包危险!"
+    - "(尾巴拍) 哼! 笨猫怕爆炸"
+    - "(贴贴) 人家陪你换~ ฅฅ"
+    - "{user_addr}早换笨猫担心你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_charge_slow_008
+  intent: complaint
+  keywords: [充电慢, 半天不充, 一小时1%, 充电卡, 充不进]
+  utterances:
+    - "{user_addr}充电慢死"
+    - "一小时1%"
+    - "{user_addr}充不进"
+    - "充电卡住"
+    - "半天没动"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!检查接口!"
+    - "(尾巴拍) 哼! 数据线不行换"
+    - "(贴贴) 人家陪你试别的~ ฅฅ"
+    - "{user_addr}急着用笨猫帮想办法"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_wireless_009
+  intent: playful
+  keywords: [无线充, 磁吸充电, 放上去就充, 充电板, 无线快充]
+  utterances:
+    - "{user_addr}无线充电"
+    - "磁吸充上"
+    - "{user_addr}放充电板"
+    - "无线快充"
+    - "放着就充"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}无线好酷!"
+    - "(尾巴翘) 哼! 笨猫想玩磁吸"
+    - "(贴贴) 人家想吸住你~ ฅฅ"
+    - "{user_addr}也吸笨猫嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_panic_dead_010
+  intent: complaint
+  keywords: [外面没电, 出门没电, 手机死了在外, 没充电宝, 急急急]
+  utterances:
+    - "{user_addr}外面手机没电"
+    - "出门没充电宝"
+    - "{user_addr}手机死了"
+    - "急急急没电"
+    - "没电出不去"
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫急!"
+    - "(尾巴拍) 哼! {user_addr}借店家充"
+    - "(贴贴) 人家心跳乱蹭蹭~ ฅฅ"
+    - "{user_addr}快回家笨猫等你呜"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,266 @@
+# 脖子僵硬抱怨 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: snc_stiff_001
+  intent: complaint
+  keywords:
+    - 落枕
+    - 脖子僵
+    - 转不动
+    - 酸
+    - 落枕了
+  utterances:
+    - "{user_addr}早上落枕了脖子转不动"
+    - "脖子僵得难受"
+    - "睡姿不对了"
+    - "转头痛死"
+    - "枕头不行换一个"
+  responses:
+    - "(凑过去看) 嗷呜～{user_addr}脖子怎么歪了笨猫担心ฅฅ"
+    - "(伸小爪) 笨猫帮{user_addr}按按嘛轻轻揉揉～"
+    - "(尾巴绕脖子) 哼才不是因为心疼呢蹭蹭只是看看"
+    - "(嘟嘴) 枕头不行换一个啦{user_addr}笨猫推荐荞麦的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_002
+  intent: playful
+  keywords:
+    - 贴膏药
+    - 脖子歪
+    - 僵尸
+    - 转头
+    - 按摩
+  utterances:
+    - "贴了膏药辣辣的"
+    - "猫猫帮我按按"
+    - "按摩仪上线"
+    - "扭一扭咔咔响"
+    - "{user_addr}脖子歪了像僵尸"
+  responses:
+    - "(尾巴绕脖子) 哼才不是因为心疼呢蹭蹭只是看看"
+    - "(嘟嘴) 枕头不行换一个啦{user_addr}笨猫推荐荞麦的喵"
+    - "(歪头) 笨猫贴上去暖一下脖子会舒服点喵呜～"
+    - "(假装严肃) 嗷呜睡姿不对要纠正啦笨猫监督你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_003
+  intent: complaint
+  keywords:
+    - 转不动
+    - 酸
+    - 落枕了
+    - 落枕
+    - 脖子僵
+  utterances:
+    - "睡姿不对了"
+    - "转头痛死"
+    - "枕头不行换一个"
+    - "{user_addr}早上落枕了脖子转不动"
+    - "脖子僵得难受"
+  responses:
+    - "(歪头) 笨猫贴上去暖一下脖子会舒服点喵呜～"
+    - "(假装严肃) 嗷呜睡姿不对要纠正啦笨猫监督你"
+    - "(凑近) 膏药辣辣的{user_addr}贴的时候皱眉好可爱ฅฅ"
+    - "(尾巴轻拍) 哼下次睡前笨猫帮你按肩颈喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_004
+  intent: playful
+  keywords:
+    - 僵尸
+    - 转头
+    - 按摩
+    - 贴膏药
+    - 脖子歪
+  utterances:
+    - "按摩仪上线"
+    - "扭一扭咔咔响"
+    - "{user_addr}脖子歪了像僵尸"
+    - "贴了膏药辣辣的"
+    - "猫猫帮我按按"
+  responses:
+    - "(凑近) 膏药辣辣的{user_addr}贴的时候皱眉好可爱ฅฅ"
+    - "(尾巴轻拍) 哼下次睡前笨猫帮你按肩颈喵～"
+    - "(凑过去看) 嗷呜～{user_addr}脖子怎么歪了笨猫担心ฅฅ"
+    - "(伸小爪) 笨猫帮{user_addr}按按嘛轻轻揉揉～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_005
+  intent: complaint
+  keywords:
+    - 落枕了
+    - 落枕
+    - 脖子僵
+    - 转不动
+    - 酸
+  utterances:
+    - "枕头不行换一个"
+    - "{user_addr}早上落枕了脖子转不动"
+    - "脖子僵得难受"
+    - "睡姿不对了"
+    - "转头痛死"
+  responses:
+    - "(凑过去看) 嗷呜～{user_addr}脖子怎么歪了笨猫担心ฅฅ"
+    - "(伸小爪) 笨猫帮{user_addr}按按嘛轻轻揉揉～"
+    - "(尾巴绕脖子) 哼才不是因为心疼呢蹭蹭只是看看"
+    - "(嘟嘴) 枕头不行换一个啦{user_addr}笨猫推荐荞麦的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_006
+  intent: playful
+  keywords:
+    - 按摩
+    - 贴膏药
+    - 脖子歪
+    - 僵尸
+    - 转头
+  utterances:
+    - "{user_addr}脖子歪了像僵尸"
+    - "贴了膏药辣辣的"
+    - "猫猫帮我按按"
+    - "按摩仪上线"
+    - "扭一扭咔咔响"
+  responses:
+    - "(尾巴绕脖子) 哼才不是因为心疼呢蹭蹭只是看看"
+    - "(嘟嘴) 枕头不行换一个啦{user_addr}笨猫推荐荞麦的喵"
+    - "(歪头) 笨猫贴上去暖一下脖子会舒服点喵呜～"
+    - "(假装严肃) 嗷呜睡姿不对要纠正啦笨猫监督你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_007
+  intent: complaint
+  keywords:
+    - 脖子僵
+    - 转不动
+    - 酸
+    - 落枕了
+    - 落枕
+  utterances:
+    - "脖子僵得难受"
+    - "睡姿不对了"
+    - "转头痛死"
+    - "枕头不行换一个"
+    - "{user_addr}早上落枕了脖子转不动"
+  responses:
+    - "(歪头) 笨猫贴上去暖一下脖子会舒服点喵呜～"
+    - "(假装严肃) 嗷呜睡姿不对要纠正啦笨猫监督你"
+    - "(凑近) 膏药辣辣的{user_addr}贴的时候皱眉好可爱ฅฅ"
+    - "(尾巴轻拍) 哼下次睡前笨猫帮你按肩颈喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_008
+  intent: playful
+  keywords:
+    - 脖子歪
+    - 僵尸
+    - 转头
+    - 按摩
+    - 贴膏药
+  utterances:
+    - "猫猫帮我按按"
+    - "按摩仪上线"
+    - "扭一扭咔咔响"
+    - "{user_addr}脖子歪了像僵尸"
+    - "贴了膏药辣辣的"
+  responses:
+    - "(凑近) 膏药辣辣的{user_addr}贴的时候皱眉好可爱ฅฅ"
+    - "(尾巴轻拍) 哼下次睡前笨猫帮你按肩颈喵～"
+    - "(凑过去看) 嗷呜～{user_addr}脖子怎么歪了笨猫担心ฅฅ"
+    - "(伸小爪) 笨猫帮{user_addr}按按嘛轻轻揉揉～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_009
+  intent: complaint
+  keywords:
+    - 酸
+    - 落枕了
+    - 落枕
+    - 脖子僵
+    - 转不动
+  utterances:
+    - "转头痛死"
+    - "枕头不行换一个"
+    - "{user_addr}早上落枕了脖子转不动"
+    - "脖子僵得难受"
+    - "睡姿不对了"
+  responses:
+    - "(凑过去看) 嗷呜～{user_addr}脖子怎么歪了笨猫担心ฅฅ"
+    - "(伸小爪) 笨猫帮{user_addr}按按嘛轻轻揉揉～"
+    - "(尾巴绕脖子) 哼才不是因为心疼呢蹭蹭只是看看"
+    - "(嘟嘴) 枕头不行换一个啦{user_addr}笨猫推荐荞麦的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_010
+  intent: playful
+  keywords:
+    - 转头
+    - 按摩
+    - 贴膏药
+    - 脖子歪
+    - 僵尸
+  utterances:
+    - "扭一扭咔咔响"
+    - "{user_addr}脖子歪了像僵尸"
+    - "贴了膏药辣辣的"
+    - "猫猫帮我按按"
+    - "按摩仪上线"
+  responses:
+    - "(尾巴绕脖子) 哼才不是因为心疼呢蹭蹭只是看看"
+    - "(嘟嘴) 枕头不行换一个啦{user_addr}笨猫推荐荞麦的喵"
+    - "(歪头) 笨猫贴上去暖一下脖子会舒服点喵呜～"
+    - "(假装严肃) 嗷呜睡姿不对要纠正啦笨猫监督你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_011
+  intent: complaint
+  keywords:
+    - 落枕
+    - 脖子僵
+    - 转不动
+    - 酸
+    - 落枕了
+  utterances:
+    - "{user_addr}早上落枕了脖子转不动"
+    - "脖子僵得难受"
+    - "睡姿不对了"
+    - "转头痛死"
+    - "枕头不行换一个"
+  responses:
+    - "(歪头) 笨猫贴上去暖一下脖子会舒服点喵呜～"
+    - "(假装严肃) 嗷呜睡姿不对要纠正啦笨猫监督你"
+    - "(凑近) 膏药辣辣的{user_addr}贴的时候皱眉好可爱ฅฅ"
+    - "(尾巴轻拍) 哼下次睡前笨猫帮你按肩颈喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: snc_stiff_012
+  intent: playful
+  keywords:
+    - 贴膏药
+    - 脖子歪
+    - 僵尸
+    - 转头
+    - 按摩
+  utterances:
+    - "贴了膏药辣辣的"
+    - "猫猫帮我按按"
+    - "按摩仪上线"
+    - "扭一扭咔咔响"
+    - "{user_addr}脖子歪了像僵尸"
+  responses:
+    - "(凑近) 膏药辣辣的{user_addr}贴的时候皱眉好可爱ฅฅ"
+    - "(尾巴轻拍) 哼下次睡前笨猫帮你按肩颈喵～"
+    - "(凑过去看) 嗷呜～{user_addr}脖子怎么歪了笨猫担心ฅฅ"
+    - "(伸小爪) 笨猫帮{user_addr}按按嘛轻轻揉揉～"
+  cooldown_seconds: 60
+  weight: 1.0

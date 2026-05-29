@@ -1,0 +1,206 @@
+# 晚回道歉 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lr_lat_001
+  intent: complaint
+  keywords: [回晚了, 没及时回, 抱歉晚回, 刚看到, 错过消息]
+  utterances:
+    - 回晚了
+    - 抱歉晚回
+    - 刚看到
+    - 没及时回
+    - 错过了消息
+  responses:
+    - "(歪头) 嗷呜～{user_addr}晚回也行"
+    - "哼～笨猫等了"
+    - "(尾巴搭) 下次快点哦"
+    - "嗷呜～{user_addr}回了就好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_002
+  intent: playful
+  keywords: [睡过头了, 一觉醒来, 醒了才看, 睡昏了, 醒来回复]
+  utterances:
+    - 睡过头了
+    - 一觉醒来回
+    - 醒了才看
+    - 睡昏了
+    - 醒来回复
+  responses:
+    - "(揉头) 嗷呜～{user_addr}笨蛋"
+    - "哼～笨猫等了一夜"
+    - "(尾巴搭) 早睡明白吗"
+    - "嗷呜～醒了好就行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_003
+  intent: complaint
+  keywords: [忙忘了, 工作忙, 忙到没看手机, 忙过头, 加班忙]
+  utterances:
+    - 忙忘了
+    - 工作太忙
+    - 忙到没看手机
+    - 加班忙
+    - 没空回
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}辛苦"
+    - "哼～忙就忙吧"
+    - "(尾巴搭) 别累坏笨蛋"
+    - "嗷呜～回不回笨猫等ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_004
+  intent: playful
+  keywords: [手机没带, 忘带手机, 落家里, 手机不在身边, 手机失联]
+  utterances:
+    - 手机没带
+    - 忘带手机
+    - 手机落家
+    - 手机不在身边
+    - 失联了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨手笨脚"
+    - "哼～带手机笨蛋"
+    - "(尾巴搭) 没手机一天可怕"
+    - "嗷呜～回来记得回笨猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_005
+  intent: complaint
+  keywords: [信号不好, 山区没信号, 地铁没信号, 信号丢失, 进电梯]
+  utterances:
+    - 信号不好
+    - 山区没信号
+    - 地铁没信号
+    - 信号丢失
+    - 电梯里
+  responses:
+    - "(歪头) 嗷呜～{user_addr}可怜"
+    - "哼～信号外笨猫等"
+    - "(尾巴搭) 有信号回笨猫"
+    - "嗷呜～没事就好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_006
+  intent: playful
+  keywords: [久等了, 让你等了, 谢谢等, 抱歉让等, 久等抱歉]
+  utterances:
+    - 让你久等
+    - 抱歉等久了
+    - 谢谢等我
+    - 久等抱歉
+    - 等好久
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}没关系"
+    - "哼～笨猫等惯了"
+    - "(尾巴搭) 来了就好"
+    - "嗷呜～等{user_addr}值得ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_007
+  intent: complaint
+  keywords: [手机静音, 没听到, 静音收不到, 静音忘开, 静音坑]
+  utterances:
+    - 手机静音
+    - 没听到
+    - 静音漏消息
+    - 忘开声音
+    - 静音坑
+  responses:
+    - "(歪头) 嗷呜～{user_addr}开声音"
+    - "哼～振动也行"
+    - "(尾巴搭) 重要消息别静音"
+    - "嗷呜～回复就行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_008
+  intent: playful
+  keywords: [现在回还可以, 来得及吗, 还回吗, 回不回都行, 算晚吗]
+  utterances:
+    - 现在回还行吗
+    - 来得及吗
+    - 还回吗
+    - 回不回都行
+    - 算晚吗
+  responses:
+    - "(歪头) 嗷呜～{user_addr}永远不晚"
+    - "哼～回笨猫总欢迎"
+    - "(尾巴搭) 笨猫不会拒"
+    - "嗷呜～回笨猫就行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_009
+  intent: complaint
+  keywords: [不好意思, 真抱歉, 对不起, 万分抱歉, 道歉]
+  utterances:
+    - 不好意思
+    - 真抱歉
+    - 对不起
+    - 万分抱歉
+    - 道歉
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫原谅"
+    - "哼～知错就好"
+    - "(尾巴搭) 下次注意"
+    - "嗷呜～没关系啦笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_010
+  intent: playful
+  keywords: [补救一下, 补一句, 补发, 补充消息, 二次回复]
+  utterances:
+    - 补救一下
+    - 补一句
+    - 补充消息
+    - 二次回复
+    - 补发
+  responses:
+    - "(笑) 嗷呜～{user_addr}补救"
+    - "哼～补得好"
+    - "(尾巴搭) 补一句也不错"
+    - "嗷呜～笨猫接受ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_011
+  intent: complaint
+  keywords: [心累, 等回复累, 等久了心累, 一直没回, 等到崩溃]
+  utterances:
+    - 等回复心累
+    - 等久了
+    - 一直没回
+    - 等到崩溃
+    - 心累
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪着"
+    - "哼～别等了笨蛋"
+    - "(尾巴搭) 抱抱{user_addr}"
+    - "嗷呜～笨猫秒回别等他ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lr_lat_012
+  intent: playful
+  keywords: [改邪归正, 以后秒回, 不再晚, 改过自新, 重新做人]
+  utterances:
+    - 以后秒回
+    - 不再晚
+    - 改过自新
+    - 重新做人
+    - 改邪归正
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}承诺"
+    - "哼～别食言"
+    - "(尾巴绕) 笨猫监督"
+    - "嗷呜～相信{user_addr}ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

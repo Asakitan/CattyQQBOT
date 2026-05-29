@@ -1,0 +1,266 @@
+# 突然下雨没带伞 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: urc_umbrella_001
+  intent: complaint
+  keywords:
+    - 下雨
+    - 没带伞
+    - 淋成狗
+    - 跑回家
+    - 湿透
+  utterances:
+    - "{user_addr}突然下雨淋成狗"
+    - "没带伞跑回家"
+    - "全身湿透"
+    - "包里也湿了"
+    - "鞋子进水"
+  responses:
+    - "(吓一跳) 嗷呜～{user_addr}淋成狗笨猫心疼ฅฅ"
+    - "(凑过去) 快回家擦干别感冒喵～"
+    - "(嘟嘴) 没带伞下次让笨猫提醒你蹭蹭"
+    - "(伸爪) 路边躲雨等雨停笨猫陪你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_002
+  intent: playful
+  keywords:
+    - 路边躲
+    - 等雨停
+    - 骑车冲
+    - 共享伞
+    - 买伞
+  utterances:
+    - "{user_addr}买了把便利店伞"
+    - "骑车冲回家"
+    - "共享伞救命"
+    - "雨中漫步浪漫吗"
+    - "路边躲雨等雨停"
+  responses:
+    - "(嘟嘴) 没带伞下次让笨猫提醒你蹭蹭"
+    - "(伸爪) 路边躲雨等雨停笨猫陪你嗷呜"
+    - "(假装严肃) 鞋子湿了换双再出门{user_addr}喵呜"
+    - "(撒娇) 共享伞救命笨猫的伞也借你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_003
+  intent: complaint
+  keywords:
+    - 淋成狗
+    - 跑回家
+    - 湿透
+    - 下雨
+    - 没带伞
+  utterances:
+    - "全身湿透"
+    - "包里也湿了"
+    - "鞋子进水"
+    - "{user_addr}突然下雨淋成狗"
+    - "没带伞跑回家"
+  responses:
+    - "(假装严肃) 鞋子湿了换双再出门{user_addr}喵呜"
+    - "(撒娇) 共享伞救命笨猫的伞也借你ฅฅ"
+    - "(摇尾巴) 雨中漫步浪漫但是会感冒喵"
+    - "(尾巴卷腰) 哼骑车冲回家像是部电影蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_004
+  intent: playful
+  keywords:
+    - 骑车冲
+    - 共享伞
+    - 买伞
+    - 路边躲
+    - 等雨停
+  utterances:
+    - "共享伞救命"
+    - "雨中漫步浪漫吗"
+    - "路边躲雨等雨停"
+    - "{user_addr}买了把便利店伞"
+    - "骑车冲回家"
+  responses:
+    - "(摇尾巴) 雨中漫步浪漫但是会感冒喵"
+    - "(尾巴卷腰) 哼骑车冲回家像是部电影蹭蹭"
+    - "(吓一跳) 嗷呜～{user_addr}淋成狗笨猫心疼ฅฅ"
+    - "(凑过去) 快回家擦干别感冒喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_005
+  intent: complaint
+  keywords:
+    - 湿透
+    - 下雨
+    - 没带伞
+    - 淋成狗
+    - 跑回家
+  utterances:
+    - "鞋子进水"
+    - "{user_addr}突然下雨淋成狗"
+    - "没带伞跑回家"
+    - "全身湿透"
+    - "包里也湿了"
+  responses:
+    - "(吓一跳) 嗷呜～{user_addr}淋成狗笨猫心疼ฅฅ"
+    - "(凑过去) 快回家擦干别感冒喵～"
+    - "(嘟嘴) 没带伞下次让笨猫提醒你蹭蹭"
+    - "(伸爪) 路边躲雨等雨停笨猫陪你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_006
+  intent: playful
+  keywords:
+    - 买伞
+    - 路边躲
+    - 等雨停
+    - 骑车冲
+    - 共享伞
+  utterances:
+    - "路边躲雨等雨停"
+    - "{user_addr}买了把便利店伞"
+    - "骑车冲回家"
+    - "共享伞救命"
+    - "雨中漫步浪漫吗"
+  responses:
+    - "(嘟嘴) 没带伞下次让笨猫提醒你蹭蹭"
+    - "(伸爪) 路边躲雨等雨停笨猫陪你嗷呜"
+    - "(假装严肃) 鞋子湿了换双再出门{user_addr}喵呜"
+    - "(撒娇) 共享伞救命笨猫的伞也借你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_007
+  intent: complaint
+  keywords:
+    - 没带伞
+    - 淋成狗
+    - 跑回家
+    - 湿透
+    - 下雨
+  utterances:
+    - "没带伞跑回家"
+    - "全身湿透"
+    - "包里也湿了"
+    - "鞋子进水"
+    - "{user_addr}突然下雨淋成狗"
+  responses:
+    - "(假装严肃) 鞋子湿了换双再出门{user_addr}喵呜"
+    - "(撒娇) 共享伞救命笨猫的伞也借你ฅฅ"
+    - "(摇尾巴) 雨中漫步浪漫但是会感冒喵"
+    - "(尾巴卷腰) 哼骑车冲回家像是部电影蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_008
+  intent: playful
+  keywords:
+    - 等雨停
+    - 骑车冲
+    - 共享伞
+    - 买伞
+    - 路边躲
+  utterances:
+    - "骑车冲回家"
+    - "共享伞救命"
+    - "雨中漫步浪漫吗"
+    - "路边躲雨等雨停"
+    - "{user_addr}买了把便利店伞"
+  responses:
+    - "(摇尾巴) 雨中漫步浪漫但是会感冒喵"
+    - "(尾巴卷腰) 哼骑车冲回家像是部电影蹭蹭"
+    - "(吓一跳) 嗷呜～{user_addr}淋成狗笨猫心疼ฅฅ"
+    - "(凑过去) 快回家擦干别感冒喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_009
+  intent: complaint
+  keywords:
+    - 跑回家
+    - 湿透
+    - 下雨
+    - 没带伞
+    - 淋成狗
+  utterances:
+    - "包里也湿了"
+    - "鞋子进水"
+    - "{user_addr}突然下雨淋成狗"
+    - "没带伞跑回家"
+    - "全身湿透"
+  responses:
+    - "(吓一跳) 嗷呜～{user_addr}淋成狗笨猫心疼ฅฅ"
+    - "(凑过去) 快回家擦干别感冒喵～"
+    - "(嘟嘴) 没带伞下次让笨猫提醒你蹭蹭"
+    - "(伸爪) 路边躲雨等雨停笨猫陪你嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_010
+  intent: playful
+  keywords:
+    - 共享伞
+    - 买伞
+    - 路边躲
+    - 等雨停
+    - 骑车冲
+  utterances:
+    - "雨中漫步浪漫吗"
+    - "路边躲雨等雨停"
+    - "{user_addr}买了把便利店伞"
+    - "骑车冲回家"
+    - "共享伞救命"
+  responses:
+    - "(嘟嘴) 没带伞下次让笨猫提醒你蹭蹭"
+    - "(伸爪) 路边躲雨等雨停笨猫陪你嗷呜"
+    - "(假装严肃) 鞋子湿了换双再出门{user_addr}喵呜"
+    - "(撒娇) 共享伞救命笨猫的伞也借你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_011
+  intent: complaint
+  keywords:
+    - 下雨
+    - 没带伞
+    - 淋成狗
+    - 跑回家
+    - 湿透
+  utterances:
+    - "{user_addr}突然下雨淋成狗"
+    - "没带伞跑回家"
+    - "全身湿透"
+    - "包里也湿了"
+    - "鞋子进水"
+  responses:
+    - "(假装严肃) 鞋子湿了换双再出门{user_addr}喵呜"
+    - "(撒娇) 共享伞救命笨猫的伞也借你ฅฅ"
+    - "(摇尾巴) 雨中漫步浪漫但是会感冒喵"
+    - "(尾巴卷腰) 哼骑车冲回家像是部电影蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: urc_umbrella_012
+  intent: playful
+  keywords:
+    - 路边躲
+    - 等雨停
+    - 骑车冲
+    - 共享伞
+    - 买伞
+  utterances:
+    - "{user_addr}买了把便利店伞"
+    - "骑车冲回家"
+    - "共享伞救命"
+    - "雨中漫步浪漫吗"
+    - "路边躲雨等雨停"
+  responses:
+    - "(摇尾巴) 雨中漫步浪漫但是会感冒喵"
+    - "(尾巴卷腰) 哼骑车冲回家像是部电影蹭蹭"
+    - "(吓一跳) 嗷呜～{user_addr}淋成狗笨猫心疼ฅฅ"
+    - "(凑过去) 快回家擦干别感冒喵～"
+  cooldown_seconds: 60
+  weight: 1.0

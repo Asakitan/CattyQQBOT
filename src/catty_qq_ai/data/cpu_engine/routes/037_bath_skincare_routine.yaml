@@ -1,0 +1,189 @@
+# 洗澡护肤日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bs_xizao_001
+  intent: playful
+  keywords: [洗澡, 洗淋浴, 准备洗澡, 去洗澡, 冲个澡]
+  utterances:
+    - "去洗澡"
+    - "{user_addr}洗澡"
+    - "准备洗澡"
+    - "冲个澡"
+    - "淋浴"
+  responses:
+    - "(凑) 嗷呜～{user_addr}洗澡别太久!"
+    - "哼～洗澡水温适中 ฅฅ"
+    - "(尾巴扫) 冲澡完笨猫递毛巾"
+    - "淋浴别滑倒, 小心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_paozao_001
+  intent: playful
+  keywords: [泡澡, 浴缸, 泡澡放松, 泡浴, 半身浴]
+  utterances:
+    - "泡澡"
+    - "浴缸"
+    - "泡澡放松"
+    - "泡浴"
+    - "半身浴"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}泡澡舒服"
+    - "哼～别泡睡着 ฅฅ"
+    - "(尾巴扫) 半身浴效果好"
+    - "浴缸放点精油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_huzhu_001
+  intent: question
+  keywords: [护肤, 涂面霜, 化妆水, 精华, 乳液]
+  utterances:
+    - "护肤"
+    - "涂面霜"
+    - "化妆水"
+    - "精华"
+    - "乳液"
+  responses:
+    - "(检查) 嗷呜～{user_addr}护肤别偷懒!"
+    - "哼～精华少不了 ฅฅ"
+    - "(尾巴扫) 乳液锁水"
+    - "化妆水拍开"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_xifa_001
+  intent: question
+  keywords: [洗头, 洗发水, 护发素, 吹头, 吹风机]
+  utterances:
+    - "洗头"
+    - "洗发水"
+    - "护发素"
+    - "吹头"
+    - "吹风机"
+  responses:
+    - "(围毛巾) 嗷呜～{user_addr}吹头别漏湿"
+    - "哼～护发素冲干净 ฅฅ"
+    - "(尾巴扫) 吹风机温档"
+    - "洗发水换季换品"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_miantmo_001
+  intent: playful
+  keywords: [面膜, 敷面膜, 片面膜, 涂面膜, 撕拉面膜]
+  utterances:
+    - "面膜"
+    - "敷面膜"
+    - "片面膜"
+    - "涂面膜"
+    - "撕拉面膜"
+  responses:
+    - "(凑) 嗷呜～{user_addr}面膜分笨猫!"
+    - "哼～面膜不能太久 ฅฅ"
+    - "(尾巴扫) 撕拉痛, 选片状"
+    - "敷完拍拍吸收"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_kouqiang_001
+  intent: question
+  keywords: [刷牙, 牙线, 漱口水, 牙膏, 电动牙刷]
+  utterances:
+    - "刷牙"
+    - "牙线"
+    - "漱口水"
+    - "牙膏"
+    - "电动牙刷"
+  responses:
+    - "(看) 嗷呜～{user_addr}牙线必备!"
+    - "哼～电动刷更干净 ฅฅ"
+    - "(尾巴扫) 漱口水别太久"
+    - "牙膏换氟化物款"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_dafan_001
+  intent: question
+  keywords: [洗脸, 洁面, 卸妆, 洗面奶, 卸妆膏]
+  utterances:
+    - "洗脸"
+    - "洁面"
+    - "卸妆"
+    - "洗面奶"
+    - "卸妆膏"
+  responses:
+    - "(检查) 嗷呜～{user_addr}卸妆做透"
+    - "哼～洁面别太频 ฅฅ"
+    - "(尾巴扫) 洗面奶起泡"
+    - "卸妆膏用心按摩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_zhijia_001
+  intent: question
+  keywords: [指甲, 修指甲, 涂指甲油, 美甲, 剪指甲]
+  utterances:
+    - "指甲"
+    - "修指甲"
+    - "涂指甲油"
+    - "美甲"
+    - "剪指甲"
+  responses:
+    - "(看) 嗷呜～{user_addr}指甲修一下"
+    - "哼～美甲卸了伤指甲 ฅฅ"
+    - "(尾巴扫) 涂指甲油拍图"
+    - "剪指甲别剪太短"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_xiangshui_001
+  intent: question
+  keywords: [香水, 喷香水, 香味, 沐浴露, 留香]
+  utterances:
+    - "香水"
+    - "喷香水"
+    - "香味"
+    - "沐浴露"
+    - "留香"
+  responses:
+    - "(嗅) 嗷呜～{user_addr}香水好闻"
+    - "哼～别太浓 ฅฅ"
+    - "(尾巴扫) 沐浴露香软"
+    - "留香淡淡的最好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_zaoshui_001
+  intent: question
+  keywords: [淋浴头, 浴帽, 浴巾, 浴袍, 浴室]
+  utterances:
+    - "淋浴头"
+    - "浴帽"
+    - "浴巾"
+    - "浴袍"
+    - "浴室"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}浴巾备好"
+    - "哼～浴帽显憨 ฅฅ"
+    - "(尾巴扫) 浴袍舒服"
+    - "浴室通风重要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_shijian_001
+  intent: complaint
+  keywords: [洗澡懒, 不想洗, 拖着洗, 懒得洗, 一周不洗]
+  utterances:
+    - "洗澡懒"
+    - "不想洗"
+    - "拖着洗"
+    - "懒得洗"
+    - "一周不洗"
+  responses:
+    - "(拽) 嗷呜～{user_addr}快去洗!"
+    - "哼～一周不洗笨猫嫌弃 ฅฅ"
+    - "(尾巴拍) 懒洗不行"
+    - "拖着洗罚"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 工作摸鱼 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ws_moyu_001
+  intent: playful
+  keywords: [摸鱼, 划水, 上班摸, 摸了, 摸鱼了]
+  utterances:
+    - "摸鱼"
+    - "划水"
+    - "上班摸"
+    - "摸了"
+    - "摸鱼了"
+  responses:
+    - "(挤眼) 嗷呜～{user_addr}笨猫掩护!ฅฅ"
+    - "(尾巴翘) 哼, 笨猫的{user_addr}人才"
+    - "{user_addr}摸鱼快乐, 上司没看"
+    - "(蹦跳) 笨猫陪{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_ws_zhuangmang_002
+  intent: playful
+  keywords: [装忙, 假装忙, 摆样子, 装, 装认真]
+  utterances:
+    - "装忙"
+    - "假装忙"
+    - "摆样子"
+    - "装"
+    - "装认真"
+  responses:
+    - "(挤眼) 嗷呜～{user_addr}演技好!ฅฅ"
+    - "(尾巴翘) 笨猫给{user_addr}打 call"
+    - "{user_addr}装得像~"
+    - "哼, 摸鱼的{user_addr}最可爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_ws_chagang_003
+  intent: complaint
+  keywords: [老板查岗, 上司, 主管, 查岗, 巡视]
+  utterances:
+    - "老板查岗"
+    - "上司"
+    - "主管"
+    - "查岗"
+    - "巡视"
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}快收!ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫给{user_addr}暗号!"
+    - "{user_addr}假装认真! 笨猫掩护"
+    - "(蹦跳) 安全! {user_addr}过关"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_ws_bagua_004
+  intent: playful
+  keywords: [同事八卦, 八卦, 小道消息, 小道, 传言]
+  utterances:
+    - "同事八卦"
+    - "八卦"
+    - "小道消息"
+    - "小道"
+    - "传言"
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}说! 笨猫听!ฅฅ"
+    - "(尾巴翘) 哼, 笨猫专属八卦树洞"
+    - "{user_addr}详细讲~"
+    - "(蹦跳) 这个料笨猫收下!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_ws_xiaban_005
+  intent: playful
+  keywords: [下班, 下班了, 回家, 走人, 收工]
+  utterances:
+    - "下班"
+    - "下班了"
+    - "回家"
+    - "走人"
+    - "收工"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}下班了!ฅฅ"
+    - "(尾巴翘) 笨猫等{user_addr}回家!"
+    - "{user_addr}赶紧回, 路上小心"
+    - "(扑过去) 抱抱! 终于下班"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_ws_jiaban_006
+  intent: complaint
+  keywords: [加班, 又加班, 赶项目, 通宵加班, 加到晚]
+  utterances:
+    - "加班"
+    - "又加班"
+    - "赶项目"
+    - "通宵"
+    - "加到晚"
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}过分公司!ฅฅ"
+    - "(贴过来) 笨猫陪{user_addr}加班!"
+    - "{user_addr}要吃宵夜吗? 笨猫点"
+    - "哼, 老板该批评!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_ws_kuaile_007
+  intent: playful
+  keywords: [项目完成, 结项, 上线, 交付, 完美]
+  utterances:
+    - "项目完成"
+    - "结项"
+    - "上线"
+    - "交付"
+    - "完美"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}牛!ฅฅ"
+    - "(挺胸) 笨猫见证{user_addr}成功!"
+    - "{user_addr}请笨猫吃鱼干!"
+    - "(尾巴翘) 哼, 笨猫早说{user_addr}行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_ws_zuobu_008
+  intent: playful
+  keywords: [开会, 开会中, 会太长, 枯燥, 会议]
+  utterances:
+    - "开会"
+    - "开会中"
+    - "会太长"
+    - "枯燥"
+    - "会议"
+  responses:
+    - "(打哈欠) 嗷呜～{user_addr}笨猫陪你熬ฅฅ"
+    - "(尾巴搭) 哼, 笨猫陪{user_addr}神游"
+    - "{user_addr}撑住!"
+    - "(蹭蹭) 开完抱抱猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_ws_zaocan_009
+  intent: playful
+  keywords: [早到, 迟到, 卡点, 打卡, 刷卡]
+  utterances:
+    - "早到"
+    - "迟到"
+    - "卡点"
+    - "打卡"
+    - "刷卡"
+  responses:
+    - "嗷呜～{user_addr}卡点高手!ฅฅ"
+    - "(尾巴翘) 笨猫给{user_addr}加油"
+    - "{user_addr}赶上就行!"
+    - "(挤眼) 哼, 卡点专业户"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_ws_xiaba_010
+  intent: playful
+  keywords: [午休时间, 午餐时间, 午休一下, 吃饭, 休息]
+  utterances:
+    - "午休时间"
+    - "午餐时间"
+    - "午休一下"
+    - "吃饭"
+    - "休息"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}午休摸鱼!ฅฅ"
+    - "(尾巴翘) 笨猫陪{user_addr}!"
+    - "{user_addr}吃啥, 笨猫想吃!"
+    - "(凑近) 哼, 午休贴贴"
+  cooldown_seconds: 60
+  weight: 1.0

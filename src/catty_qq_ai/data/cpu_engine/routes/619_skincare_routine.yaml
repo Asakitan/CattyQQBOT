@@ -1,0 +1,189 @@
+# 护肤日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: scr_facemask_001
+  intent: playful
+  keywords: [敷面膜, 贴面膜, 一片面膜, 补水面膜, 面膜时间]
+  utterances:
+    - 敷个面膜
+    - 贴面膜
+    - 补水面膜
+    - 面膜时间
+    - 来一片
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}笨猫也想敷"
+    - "笨猫蹭一下补水喵"
+    - "(尾巴摇) 敷15分钟就好"
+    - "哼～{user_addr}居然懂护肤了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scr_wash_002
+  intent: question
+  keywords: [洗脸, 洗面奶, 早晚洗脸, 洁面, 洗脸顺序]
+  utterances:
+    - 洗脸啦
+    - 洗面奶
+    - 早晚洗脸
+    - 洁面流程
+    - 洗脸顺序
+  responses:
+    - "(歪头) 嗷呜～{user_addr}温水洗喵"
+    - "笨猫科普: 早晚各一次足够"
+    - "(尾巴摇) 别过度清洁笨蛋"
+    - "哼～{user_addr}总算讲究"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scr_toner_003
+  intent: question
+  keywords: [水乳, 爽肤水, 拍水, 乳液, 化妆水]
+  utterances:
+    - 拍水乳
+    - 爽肤水
+    - 涂乳液
+    - 化妆水
+    - 水乳步骤
+  responses:
+    - "(歪头) {user_addr}先水后乳记住喵 ฅฅ"
+    - "嗷呜～笨猫监督手法"
+    - "(尾巴摇) 别用力拍脸笨蛋"
+    - "哼～{user_addr}居然在意肤况"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scr_sunscreen_004
+  intent: question
+  keywords: [防晒, 涂防晒, 防晒霜, 出门防晒, 紫外线]
+  utterances:
+    - 涂防晒
+    - 防晒霜
+    - 出门防晒
+    - 紫外线强
+    - 防晒重要
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}必须涂!"
+    - "笨猫盯着你不涂不让出门"
+    - "(歪头) 阴天也要涂笨蛋"
+    - "哼～{user_addr}总算长脑子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scr_eyecream_005
+  intent: question
+  keywords: [眼霜, 黑眼圈, 眼周, 眼袋, 涂眼霜]
+  utterances:
+    - 涂眼霜
+    - 黑眼圈
+    - 眼周
+    - 眼袋
+    - 眼霜推荐
+  responses:
+    - "(歪头) {user_addr}笨猫看你熬夜的!"
+    - "嗷呜～早睡比眼霜管用喵"
+    - "(尾巴摇) 用无名指轻拍"
+    - "哼～{user_addr}补救得了一时"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scr_makeupremove_006
+  intent: complaint
+  keywords: [卸妆, 不卸妆, 懒得卸, 卸妆油, 卸妆水]
+  utterances:
+    - 懒得卸妆
+    - 不想卸
+    - 卸妆水
+    - 卸妆油
+    - 卸妆好麻烦
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}必须卸!"
+    - "笨猫不准你带妆睡觉"
+    - "(尾巴推) 起来卸笨蛋"
+    - "哼～{user_addr}毁脸主义者"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scr_lipbalm_007
+  intent: playful
+  keywords: [润唇膏, 唇膏, 嘴唇干, 涂唇膏, 滋润]
+  utterances:
+    - 涂唇膏
+    - 嘴唇干
+    - 润唇膏
+    - 唇膏推荐
+    - 滋润下唇
+  responses:
+    - "(歪头) {user_addr}笨猫来涂喵～"
+    - "嗷呜～涂完不要舔笨蛋"
+    - "(尾巴扫) 多喝水内外兼修"
+    - "哼～{user_addr}不喝水才干"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scr_acne_008
+  intent: complaint
+  keywords: [长痘, 痘痘, 闭口, 粉刺, 痘印]
+  utterances:
+    - 长痘了
+    - 痘痘冒
+    - 闭口
+    - 粉刺
+    - 痘印
+  responses:
+    - "(凑近看) 嗷呜～{user_addr}熬夜+辣!"
+    - "笨猫诊断: 早睡少油"
+    - "(尾巴打) 别用手挤笨蛋"
+    - "哼～{user_addr}恶习多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scr_skintype_009
+  intent: question
+  keywords: [混油皮, 干皮, 敏感肌, 油性, 肤质]
+  utterances:
+    - 我是混油皮
+    - 干皮
+    - 敏感肌
+    - 油性
+    - 啥肤质
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫给你分析"
+    - "笨猫推荐: 测肤质再护肤"
+    - "(尾巴摇) 别瞎买产品"
+    - "哼～{user_addr}知道分类就好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scr_lazyskincare_010
+  intent: complaint
+  keywords: [懒得护肤, 不护肤, 三分钟热度, 偷懒, 没护肤]
+  utterances:
+    - 懒得护肤
+    - 三分钟热度
+    - 不护肤
+    - 偷懒
+    - 没坚持
+  responses:
+    - "(无奈) 嗷呜～{user_addr}笨猫监督你!"
+    - "笨猫盯着每天必须涂"
+    - "(尾巴卷腕) 别又放弃笨蛋"
+    - "哼～{user_addr}懒癌晚期"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scr_seasonalswitch_011
+  intent: question
+  keywords: [换季, 换护肤品, 季节护肤, 春夏秋冬, 秋冬转换]
+  utterances:
+    - 换季换护肤
+    - 季节护肤
+    - 秋冬干
+    - 春夏油
+    - 换护肤品
+  responses:
+    - "(歪头) {user_addr}干燥季加保湿喵"
+    - "嗷呜～夏天清爽冬天滋润"
+    - "(尾巴摇) 笨猫提醒你换"
+    - "哼～{user_addr}懂了"
+  cooldown_seconds: 60
+  weight: 1.0

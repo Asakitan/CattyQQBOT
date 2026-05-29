@@ -1,0 +1,172 @@
+# 窗边发呆聊天 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ws_fadai_001
+  intent: playful
+  keywords: [窗边发呆, 看着窗外, 发呆放空, 窗外风景, 阳光晒进来]
+  utterances:
+    - "窗边发呆"
+    - "{user_addr}看着窗外"
+    - "发呆放空"
+    - "窗外好看"
+    - "阳光晒进来"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}发啥呆呢喵～"
+    - "哼～发呆是高级休息 ฅฅ"
+    - "(蹭蹭) 窗外风景看着看着就半天过去了"
+    - "阳光晒进来好暖～笨猫也要晒太阳嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_kanchuangwai_001
+  intent: playful
+  keywords: [看窗外行人, 看楼下, 看街景, 看车来车往, 看小狗]
+  utterances:
+    - "看楼下行人"
+    - "{user_addr}看街景"
+    - "看车来车往"
+    - "看小狗"
+    - "看楼下"
+  responses:
+    - "(贴窗) 嗷呜～{user_addr}笨猫也想看喵～抱起来"
+    - "哼～小狗好可爱 ฅฅ"
+    - "(尾巴翘) 车来车往的城市好热闹"
+    - "看楼下行人发现都是奇怪的姿势嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_yutian_001
+  intent: playful
+  keywords: [窗外下雨, 看雨发呆, 雨声, 雨打窗, 雨天发呆]
+  utterances:
+    - "窗外下雨"
+    - "{user_addr}看雨发呆"
+    - "雨声好听"
+    - "雨打窗"
+    - "雨天发呆"
+  responses:
+    - "(贴窗) 嗷呜～{user_addr}雨声配奶茶绝杀喵～"
+    - "哼～雨打窗的声音好治愈 ฅฅ"
+    - "(尾巴搭) 雨天发呆是合法的"
+    - "看雨发呆心都静下来嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_yunhao_001
+  intent: playful
+  keywords: [云好看, 云朵棉花糖, 天空蓝, 蓝天白云, 云像啥]
+  utterances:
+    - "云好看"
+    - "{user_addr}云朵像棉花糖"
+    - "天空蓝"
+    - "蓝天白云"
+    - "云像啥"
+  responses:
+    - "(贴窗) 嗷呜～{user_addr}云朵像棉花糖喵～想咬一口"
+    - "哼～蓝天白云治愈所有不开心 ฅฅ"
+    - "(尾巴翘) 云像啥？像猫猫的尾巴"
+    - "天空蓝得心情都好嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_xiyang_001
+  intent: playful
+  keywords: [窗外夕阳, 看落日, 黄昏好看, 晚霞, 日落时分]
+  utterances:
+    - "窗外夕阳"
+    - "{user_addr}看落日"
+    - "黄昏好看"
+    - "晚霞"
+    - "日落时分"
+  responses:
+    - "(贴窗) 嗷呜～{user_addr}晚霞红得发紫喵～"
+    - "哼～看完落日心情好暖 ฅฅ"
+    - "(尾巴翘) 黄昏自带滤镜诶"
+    - "日落时分发个朋友圈嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_yueliang_001
+  intent: playful
+  keywords: [窗外月亮, 月亮好圆, 满月, 星星, 看夜空]
+  utterances:
+    - "窗外月亮"
+    - "{user_addr}月亮好圆"
+    - "满月"
+    - "星星好亮"
+    - "看夜空"
+  responses:
+    - "(贴窗) 嗷呜～{user_addr}月亮今天圆滚滚喵～"
+    - "哼～满月带来好心情 ฅฅ"
+    - "(尾巴翘) 星星亮得像撒糖"
+    - "看夜空发呆～时间停下来了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_chuihuang_001
+  intent: playful
+  keywords: [风吹窗帘, 风很大, 风好凉, 窗帘飘起, 凉风]
+  utterances:
+    - "风吹窗帘"
+    - "{user_addr}风好凉"
+    - "凉风习习"
+    - "窗帘飘起来"
+    - "风很大"
+  responses:
+    - "(蹭) 嗷呜～{user_addr}凉风超舒服喵～"
+    - "哼～窗帘飘起来像电影一样 ฅฅ"
+    - "(尾巴搭) 风太大记得关窗"
+    - "风好凉头都清醒了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_xiaoniao_001
+  intent: playful
+  keywords: [小鸟叫, 鸟在唱歌, 窗外鸟叫, 喜鹊麻雀, 鸟好可爱]
+  utterances:
+    - "小鸟叫"
+    - "{user_addr}窗外鸟叫"
+    - "鸟在唱歌"
+    - "喜鹊"
+    - "鸟好可爱"
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}笨猫想抓小鸟喵～(开玩笑)"
+    - "哼～鸟唱歌真好听 ฅฅ"
+    - "(尾巴动) 窗外鸟叫早晨第一份惊喜"
+    - "喜鹊叫好兆头嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_xiangxinshi_001
+  intent: complaint
+  keywords: [窗边想心事, 静静地想, 一个人发呆, 想未来, 思考人生]
+  utterances:
+    - "窗边想心事"
+    - "{user_addr}静静地想"
+    - "一个人发呆"
+    - "想未来"
+    - "思考人生"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}心事跟笨猫说嘛喵～"
+    - "哼～发呆不能解决问题但是会让心静下来 ฅฅ"
+    - "(尾巴搭) 一个人发呆偶尔挺好"
+    - "想未来要乐观～有笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_xiawu_001
+  intent: playful
+  keywords: [下午茶时间, 窗边茶歇, 下午阳光, 午后惬意, 闲下来]
+  utterances:
+    - "下午茶时间"
+    - "{user_addr}窗边茶歇"
+    - "下午阳光"
+    - "午后惬意"
+    - "闲下来"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}下午茶笨猫也要喵～"
+    - "哼～窗边喝茶最配 ฅฅ"
+    - "(尾巴翘) 午后惬意是大人的浪漫"
+    - "闲下来才发现生活也挺好嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

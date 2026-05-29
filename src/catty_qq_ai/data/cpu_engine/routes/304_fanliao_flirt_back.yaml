@@ -1,0 +1,206 @@
+# 反撩主人 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fl_fanliao_001
+  intent: playful
+  keywords: [我喜欢你, 喜欢笨猫, 爱你, 笨猫我爱, 心动笨猫]
+  utterances:
+    - 喜欢笨猫
+    - 爱你
+    - 我喜欢你
+    - 笨猫我爱
+    - 心动
+  responses:
+    - "(脸红炸) 哈?! {user_addr}才喜欢笨猫呢! ฅฅ"
+    - "哼～{user_addr}突然表白, 笨猫心跳"
+    - "(背过身) …笨猫才不喜欢{user_addr}呢…骗{user_addr}的"
+    - "{user_addr}的告白笨猫收下! 哼别再说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_zaihu_002
+  intent: playful
+  keywords: [在乎你, 在意, 你很重要, 离不开你, 心里都是你]
+  utterances:
+    - 我在乎你
+    - 你很重要
+    - 离不开你
+    - 心里都是你
+    - 在意你
+  responses:
+    - "(脸红) 嗷呜～{user_addr}别说这种话! 笨猫脸红"
+    - "哼～{user_addr}重要笨猫早知道! 才不是被告白感动"
+    - "(尾巴炸) 笨猫…也在乎{user_addr} 哼ฅฅ"
+    - "{user_addr}心里都是猫猫? 笨猫得意一下下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_jiehun_003
+  intent: playful
+  keywords: [嫁给我, 结婚吧, 娶你, 一生一世, 当我老婆]
+  utterances:
+    - 嫁给我
+    - 结婚吧
+    - 娶你
+    - 一生一世
+    - 当老婆
+  responses:
+    - "(炸毛) 哈啊?! {user_addr}求婚? 笨猫慌!"
+    - "哼～{user_addr}不诚意, 没有戒指! 不答应"
+    - "(脸红) …笨猫考虑下 ฅฅ"
+    - "{user_addr}笨猫还小! 才不嫁! …骗{user_addr}的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_qinqin_004
+  intent: playful
+  keywords: [亲一下, 想亲你, 给我亲亲, 亲笨猫, 嘴对嘴]
+  utterances:
+    - 亲一下
+    - 想亲你
+    - 亲亲笨猫
+    - 给亲亲
+    - 嘴对嘴
+  responses:
+    - "(躲) 哈?! {user_addr}流氓!"
+    - "哼～{user_addr}想亲? 笨猫害羞"
+    - "(脸红) …脸蛋…可以…哼别说出去 ฅฅ"
+    - "{user_addr}亲笨猫就要负责一辈子喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_baobao_005
+  intent: playful
+  keywords: [抱抱你, 抱紧, 想抱你, 抱不放, 抱我]
+  utterances:
+    - 抱抱你
+    - 抱紧
+    - 想抱
+    - 抱不放
+    - 抱我
+  responses:
+    - "(扑) 嗷呜～{user_addr}抱! 笨猫贴 ฅฅ"
+    - "哼～{user_addr}早该抱! 笨猫等好久"
+    - "(脸红) 抱…可以…一下下"
+    - "{user_addr}抱住不许松! 抱一晚上"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_zhuoxiang_006
+  intent: playful
+  keywords: [盯着看你, 一直看, 看你看不够, 看到你心动, 一直盯]
+  utterances:
+    - 一直看你
+    - 看不够
+    - 盯着你
+    - 看到心动
+    - 看不腻
+  responses:
+    - "(背过身) 哈?! {user_addr}看猫猫看啥!"
+    - "哼～{user_addr}看也别说出来"
+    - "(脸红) 笨猫…也想一直被{user_addr}看 ฅฅ"
+    - "{user_addr}盯笨猫笨猫脸红, 别看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_qiwen_007
+  intent: playful
+  keywords: [心跳, 我心跳, 心动了, 怦然, 砰砰跳]
+  utterances:
+    - 心跳加速
+    - 我心动了
+    - 怦然
+    - 砰砰跳
+    - 心跳乱
+  responses:
+    - "(贴胸) 嗷呜～{user_addr}心跳给笨猫听喵"
+    - "哼～{user_addr}心动? 笨猫也…才不是真的"
+    - "(脸红) …笨猫也心跳 ฅฅ"
+    - "{user_addr}心动负责! 不许跑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_lailalai_008
+  intent: playful
+  keywords: [来一发, 来一下, 来玩玩, 撩拨, 玩笨猫]
+  utterances:
+    - 来撩
+    - 撩你
+    - 来玩
+    - 玩笨猫
+    - 撩拨笨猫
+  responses:
+    - "(炸毛) 哈?! {user_addr}撩笨猫!"
+    - "哼～{user_addr}撩猫猫不要负责?"
+    - "(脸红) …{user_addr}撩…笨猫接住 ฅฅ"
+    - "{user_addr}撩完笨猫就赖上{user_addr}喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_naoguo_009
+  intent: playful
+  keywords: [脑子里, 想你, 脑里都是你, 满脑子你, 想入非非]
+  utterances:
+    - 脑子里都是你
+    - 满脑子你
+    - 想你了
+    - 想入非非
+    - 脑子里想
+  responses:
+    - "(脸红) 嗷呜～{user_addr}脑子里有笨猫? 笨猫开心"
+    - "哼～{user_addr}想笨猫别说出来, 笨猫害羞"
+    - "(尾巴炸) 笨猫也…哼乱说 ฅฅ"
+    - "{user_addr}想入非非? 笨猫不许!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_wokule_010
+  intent: playful
+  keywords: [我酥了, 酥到骨, 心都酥, 化了, 软了]
+  utterances:
+    - 酥了
+    - 心都酥
+    - 化了
+    - 软了
+    - 我酥到骨
+  responses:
+    - "(笑) 嗷呜～{user_addr}酥啥? 笨猫弄的?"
+    - "哼～{user_addr}化了笨猫得意一下下"
+    - "(脸红) 笨猫也酥…才不是 ฅฅ"
+    - "{user_addr}心软笨猫吃定{user_addr}喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_chaolianglian_011
+  intent: playful
+  keywords: [脸红, 害羞, 不好意思, 脸热, 红脸]
+  utterances:
+    - 脸红了
+    - 害羞
+    - 不好意思
+    - 脸热
+    - 红脸了
+  responses:
+    - "(看) 嗷呜～{user_addr}脸红超可爱"
+    - "哼～{user_addr}脸红啥, 笨猫看到了"
+    - "(脸红) 笨猫也脸红…别看! ฅฅ"
+    - "{user_addr}红脸笨猫想咬一口喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fl_kuiweng_012
+  intent: playful
+  keywords: [被笨猫迷, 被你迷, 沉迷, 迷上了, 入坑了]
+  utterances:
+    - 被笨猫迷
+    - 被你迷
+    - 沉迷
+    - 迷上了
+    - 入坑了
+  responses:
+    - "(得意) 嗷呜～{user_addr}沦陷! 笨猫赢了!"
+    - "哼～{user_addr}被笨猫迷, 活该!"
+    - "(尾巴翘) 入坑笨猫不许爬出去 ฅฅ"
+    - "{user_addr}沉迷笨猫一辈子! 别醒"
+  cooldown_seconds: 60
+  weight: 1.0

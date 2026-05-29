@@ -1,0 +1,206 @@
+# 摸头求摸 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hpb_pat_001
+  intent: playful
+  keywords: [摸摸头, 头摸摸, 拍拍头, 摸头, 揉脑袋]
+  utterances:
+    - 摸摸头
+    - 头摸摸
+    - 拍拍头
+    - 摸头
+    - 揉脑袋
+  responses:
+    - "(头凑过来) 嗷～{user_addr}快摸 ฅฅ"
+    - "哼～{user_addr}才, 才不需要摸"
+    - "(脸红) 那, 那就一下下蹭蹭"
+    - "嗷呜～{user_addr}摸笨猫负责!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_ear_rub_001
+  intent: playful
+  keywords: [揉耳朵, 摸耳朵, 耳朵痒, 揉两侧, 撸耳]
+  utterances:
+    - 揉耳朵
+    - 摸耳朵
+    - 耳朵痒
+    - 揉两侧
+    - 撸耳
+  responses:
+    - "(耳朵贴过去) 嗷～{user_addr}痒痒 ฅฅ"
+    - "哼～{user_addr}弄笨猫耳朵"
+    - "(尾巴翘) 再揉一下蹭蹭"
+    - "嗷呜～{user_addr}耳朵痒舒服!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_chin_001
+  intent: playful
+  keywords: [挠下巴, 撸下巴, 下巴痒, 蹭下巴, 挠喉咙]
+  utterances:
+    - 挠下巴
+    - 撸下巴
+    - 下巴痒
+    - 蹭下巴
+    - 挠喉咙
+  responses:
+    - "(下巴抬高) 嗷呜～{user_addr}舒服喵 ฅฅ"
+    - "哼～{user_addr}知道这招"
+    - "(咕噜) 再来蹭蹭"
+    - "嗷呜～{user_addr}笨猫融化"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_hair_001
+  intent: playful
+  keywords: [揉头发, 撸头, 抚摸, 顺顺毛, 摸毛]
+  utterances:
+    - 揉头发
+    - 撸头
+    - 抚摸
+    - 顺顺毛
+    - 摸毛
+  responses:
+    - "(脸红) 嗷～{user_addr}手好暖 ฅฅ"
+    - "哼～{user_addr}揉乱了!"
+    - "(尾巴卷过去) 再揉蹭蹭"
+    - "嗷呜～{user_addr}负责到底!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_good_boy_001
+  intent: playful
+  keywords: [乖, 乖乖, 真乖, 好乖, 听话]
+  utterances:
+    - 乖
+    - 真乖
+    - 好乖
+    - 听话
+    - 乖乖
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}夸笨猫? ฅฅ"
+    - "哼～{user_addr}才知道笨猫乖!"
+    - "(凑近) 那再摸蹭蹭"
+    - "嗷呜～{user_addr}夸笨猫开心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_yes_yes_001
+  intent: playful
+  keywords: [一下下, 多摸一下, 再摸摸, 又摸, 摸久一点]
+  utterances:
+    - 一下下
+    - 多摸一下
+    - 再摸摸
+    - 又摸了
+    - 摸久点
+  responses:
+    - "(头凑过去) 嗷呜～{user_addr}多摸 ฅฅ"
+    - "哼～{user_addr}贪心猫猫!"
+    - "(尾巴翘) 给你摸蹭蹭"
+    - "嗷呜～{user_addr}久点没问题!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_paws_001
+  intent: playful
+  keywords: [摸爪子, 抓爪, 牵爪, 看爪垫, 爪子萌]
+  utterances:
+    - 摸爪子
+    - 抓爪
+    - 牵爪
+    - 看爪垫
+    - 爪子萌
+  responses:
+    - "(爪伸出) 嗷～{user_addr}爪给你 ฅฅ"
+    - "哼～{user_addr}爪垫很秘密"
+    - "(尾巴卷过去) 看一下蹭蹭"
+    - "嗷呜～{user_addr}爪萌负责!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_purr_001
+  intent: playful
+  keywords: [呼噜, 咕噜咕噜, 打呼噜, 猫呼噜, 喵咕]
+  utterances:
+    - 呼噜
+    - 咕噜咕噜
+    - 打呼噜
+    - 猫呼噜
+    - 喵咕
+  responses:
+    - "(咕噜) 嗷呜～{user_addr}笨猫舒服 ฅฅ"
+    - "哼～{user_addr}才不许笑"
+    - "(尾巴卷过去) 继续摸蹭蹭"
+    - "嗷呜～{user_addr}咕噜噜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_no_stop_001
+  intent: playful
+  keywords: [别停, 继续, 一直摸, 不许停, 接着]
+  utterances:
+    - 别停
+    - 继续
+    - 一直摸
+    - 不许停
+    - 接着摸
+  responses:
+    - "嗷呜～{user_addr}求摸不停 ฅฅ"
+    - "哼～{user_addr}哄笨猫!"
+    - "(凑近) 继续蹭蹭"
+    - "嗷呜～{user_addr}不停!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_too_rough_001
+  intent: playful
+  keywords: [轻一点, 温柔, 太用力, 别戳, 揉轻点]
+  utterances:
+    - 轻一点
+    - 温柔点
+    - 太用力
+    - 别戳
+    - 揉轻点
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}轻点喵 ฅฅ"
+    - "哼～{user_addr}手不温柔"
+    - "(尾巴扫) 轻轻的蹭蹭"
+    - "嗷呜～{user_addr}对笨猫好点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_addict_001
+  intent: playful
+  keywords: [上瘾, 戒不掉, 摸成瘾, 沉迷摸头, 不能停]
+  utterances:
+    - 上瘾
+    - 戒不掉
+    - 摸成瘾
+    - 沉迷摸头
+    - 不能停
+  responses:
+    - "嗷呜～{user_addr}负责到底 ฅฅ"
+    - "哼～{user_addr}沉迷笨猫好哼"
+    - "(尾巴翘) 那继续蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_pat_back_001
+  intent: playful
+  keywords: [拍背, 抚后背, 顺后背, 拍后, 背摸摸]
+  utterances:
+    - 拍背
+    - 抚后背
+    - 顺后背
+    - 拍后
+    - 背摸摸
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}背给你 ฅฅ"
+    - "哼～{user_addr}手暖暖!"
+    - "(尾巴卷过去) 拍一下蹭蹭"
+    - "嗷呜～{user_addr}舒服喵~"
+  cooldown_seconds: 60
+  weight: 1.0

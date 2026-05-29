@@ -1,0 +1,189 @@
+# 开会无聊日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mtg_boring_001
+  intent: complaint
+  keywords: [开会无聊, 听不下去, 想睡, 浪费时间, 神游]
+  utterances:
+    - 开会无聊
+    - 听不下去
+    - 想睡
+    - 浪费时间
+    - 神游中
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}假装认真喵"
+    - "(尾巴卷) 撑住蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你聊嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mtg_long_001
+  intent: complaint
+  keywords: [开会久, 一开三小时, 散会遥遥无期, 没完, 拖]
+  utterances:
+    - 开会三小时
+    - 散不会
+    - 拖时间
+    - 没完没了
+    - 一直没散
+  responses:
+    - "(同情) 嗷呜～{user_addr}哭了 ฅฅ"
+    - "哼～{user_addr}老板话多喵"
+    - "(尾巴卷) 撑住蹭蹭{user_addr}"
+    - "{user_addr}散会请你喝奶茶嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mtg_called_001
+  intent: complaint
+  keywords: [被点名, 突然问, 没听清, 卡壳, 出丑]
+  utterances:
+    - 被点名
+    - 突然问我
+    - 没听清问题
+    - 卡壳了
+    - 出丑
+  responses:
+    - "(摸头) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}下次专心点喵"
+    - "(尾巴卷) 装一下听过蹭蹭{user_addr}"
+    - "{user_addr}笨猫帮你脱困嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mtg_secret_chat_001
+  intent: playful
+  keywords: [开会偷聊, 偷偷发消息, 微信开会, 摸鱼聊天, 小窗]
+  utterances:
+    - 偷聊
+    - 小窗发消息
+    - 开会摸鱼
+    - 微信开会
+    - 偷偷聊
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫小窗 ฅฅ"
+    - "哼～{user_addr}小心被抓喵"
+    - "(尾巴翘) 笨猫陪你聊蹭蹭{user_addr}"
+    - "{user_addr}悄悄发嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mtg_ppt_001
+  intent: complaint
+  keywords: [PPT好长, 100页PPT, 看PPT头晕, 念PPT, 翻不完]
+  utterances:
+    - PPT好长
+    - 100页
+    - 头晕
+    - 念PPT
+    - 翻不完
+  responses:
+    - "(同情) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}抓重点喵"
+    - "(尾巴卷) 睁眼装看蹭蹭{user_addr}"
+    - "{user_addr}笨猫提议跳页嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mtg_camera_001
+  intent: complaint
+  keywords: [开摄像头, 视频会议, 关镜头, 怕被看见, 表情管理]
+  utterances:
+    - 视频会议
+    - 开摄像头
+    - 关镜头
+    - 怕被看见
+    - 表情管理
+  responses:
+    - "(歪头) 嗷呜～{user_addr}装认真 ฅฅ"
+    - "哼～{user_addr}笨猫教你假笑喵"
+    - "(尾巴卷) 关镜头蹭蹭{user_addr}"
+    - "{user_addr}笨猫不许你打瞌睡嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mtg_wechat_001
+  intent: playful
+  keywords: [微信群, 群里讨论, 工作群, 群消息炸, 99+]
+  utterances:
+    - 群消息炸
+    - 工作群
+    - 群里讨论
+    - 99+
+    - 微信群活跃
+  responses:
+    - "(歪头) 嗷呜～{user_addr}回不过来 ฅฅ"
+    - "哼～{user_addr}先看重点喵"
+    - "(尾巴卷) 别全回蹭蹭{user_addr}"
+    - "{user_addr}笨猫帮你筛嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mtg_end_001
+  intent: playful
+  keywords: [散会, 终于散了, 解放, 出来透气, 散场]
+  utterances:
+    - 散会了
+    - 终于散
+    - 解放
+    - 出来透气
+    - 终于散场
+  responses:
+    - "(蹦) 嗷呜～{user_addr}解放 ฅฅ"
+    - "哼～{user_addr}总算结束喵"
+    - "(尾巴翘) 笨猫祝贺蹭蹭{user_addr}"
+    - "{user_addr}喝口水嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mtg_arguue_001
+  intent: complaint
+  keywords: [开会吵架, 互喷, 杠精, 起冲突, 撕]
+  utterances:
+    - 开会吵
+    - 互喷
+    - 杠精
+    - 起冲突
+    - 撕起来
+  responses:
+    - "(同情) 嗷呜～{user_addr}头疼 ฅฅ"
+    - "哼～{user_addr}别参与喵"
+    - "(尾巴卷) 看戏吧蹭蹭{user_addr}"
+    - "{user_addr}冷静最重要嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mtg_minutes_001
+  intent: complaint
+  keywords: [写会议纪要, 记纪要, 会后整理, 记录, 总结一下]
+  utterances:
+    - 写会议纪要
+    - 记纪要
+    - 会后整理
+    - 记录
+    - 总结一下
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫帮你 ฅฅ"
+    - "哼～{user_addr}录音转文字喵"
+    - "(尾巴卷) 列重点蹭蹭{user_addr}"
+    - "{user_addr}笨猫推荐用AI嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mtg_doodle_001
+  intent: playful
+  keywords: [开会画画, 画涂鸦, 笔记本上画, 走神画图, 自娱]
+  utterances:
+    - 画涂鸦
+    - 开会画画
+    - 笔记本画
+    - 走神画图
+    - 自娱中
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}画了啥 ฅฅ"
+    - "哼～{user_addr}画笨猫吗喵"
+    - "(尾巴翘) 给笨猫看蹭蹭{user_addr}"
+    - "{user_addr}画我可爱嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

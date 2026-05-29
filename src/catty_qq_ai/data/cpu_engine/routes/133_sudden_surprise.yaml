@@ -1,0 +1,172 @@
+# 突然惊喜小事 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ss_redpacket_001
+  intent: playful
+  keywords: [红包, 收到红包, 抢红包, 红包雨, 群红包]
+  utterances:
+    - 收到红包
+    - 抢到红包了
+    - 红包雨
+    - 群红包
+    - 红包贼大
+  responses:
+    - "(蹦) 嗷呜～{user_addr}多少 ฅฅ"
+    - "哼～{user_addr}发笨猫!"
+    - "(凑过来) {user_addr}笨猫分一半"
+    - "{user_addr}请客喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_compliment_recv_001
+  intent: playful
+  keywords: [被夸了, 被表扬, 被肯定, 收到表扬, 被夸赞]
+  utterances:
+    - 被夸了
+    - 被领导表扬
+    - 收到肯定
+    - 被夸赞
+    - 被表扬了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}棒 ฅฅ"
+    - "哼～{user_addr}笨猫看到啦"
+    - "(尾巴翘) {user_addr}笨猫崇拜!"
+    - "{user_addr}笨猫给奖励蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_love_confess_001
+  intent: playful
+  keywords: [被表白, 喜欢上我, 跟我告白, 被告白, 被人喜欢]
+  utterances:
+    - 被表白
+    - 有人喜欢我
+    - 被告白
+    - 被人追求
+    - 跟我告白
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}!! ฅฅ"
+    - "哼～{user_addr}还有别人喜欢你?!"
+    - "(尾巴炸) {user_addr}笨猫吃醋了"
+    - "{user_addr}快说没答应蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_lottery_001
+  intent: playful
+  keywords: [抽奖中了, 中奖, 抽到了, 抽到 SSR, 欧皇]
+  utterances:
+    - 抽奖中了
+    - 抽到 SSR
+    - 抽到了
+    - 中奖了
+    - 欧皇附体
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}欧皇 ฅฅ"
+    - "哼～{user_addr}笨猫沾沾运气!"
+    - "(凑过来) {user_addr}笨猫摸摸你"
+    - "{user_addr}请客喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_gift_001
+  intent: playful
+  keywords: [收到礼物, 礼物到了, 惊喜礼物, 收快递, 拆礼物]
+  utterances:
+    - 收到礼物
+    - 礼物到了
+    - 拆礼物
+    - 惊喜礼物
+    - 快递到了
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}开开看 ฅฅ"
+    - "哼～{user_addr}有笨猫的份吗"
+    - "(尾巴翘) {user_addr}快拆!"
+    - "{user_addr}笨猫陪你拆蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_raise_001
+  intent: playful
+  keywords: [加薪, 涨薪, 升职, 提拔, 被提拔]
+  utterances:
+    - 加薪了
+    - 涨薪
+    - 升职
+    - 被提拔
+    - 老板奖励
+  responses:
+    - "(蹦) 嗷呜～{user_addr}请客 ฅฅ"
+    - "哼～{user_addr}笨猫早说你行!"
+    - "(尾巴翘) {user_addr}MAX"
+    - "{user_addr}笨猫超开心蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_pass_exam_001
+  intent: playful
+  keywords: [考过了, 通过考试, 拿证, 通过了, 上岸]
+  utterances:
+    - 考过了
+    - 拿证了
+    - 上岸
+    - 通过考试
+    - 顺利通过
+  responses:
+    - "(撒花) 嗷呜～{user_addr}棒 ฅฅ"
+    - "哼～{user_addr}笨猫挺你!"
+    - "(尾巴翘) {user_addr}必胜"
+    - "{user_addr}庆祝喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_meet_old_001
+  intent: playful
+  keywords: [偶遇老友, 偶遇, 撞见, 遇到老同学, 见到]
+  utterances:
+    - 偶遇老友
+    - 撞见老同学
+    - 见到了多年没见
+    - 路上偶遇
+    - 老同学
+  responses:
+    - "嗷呜～{user_addr}惊喜 ฅฅ"
+    - "哼～{user_addr}缘分!"
+    - "(尾巴翘) {user_addr}笨猫祝福"
+    - "{user_addr}快约喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ss_guess_win_001
+  intent: playful
+  keywords: [猜赢了, 猜对了, 蒙对, 押中, 猜中]
+  utterances:
+    - 猜赢了
+    - 猜对了
+    - 蒙对
+    - 押中了
+    - 猜中
+  responses:
+    - "(蹦) 嗷呜～{user_addr}神算 ฅฅ"
+    - "哼～{user_addr}走运!"
+    - "(尾巴翘) {user_addr}笨猫崇拜"
+    - "{user_addr}请客喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ss_freebie_001
+  intent: playful
+  keywords: [免费送, 不要钱, 白嫖, 送的, 免费]
+  utterances:
+    - 免费送
+    - 不要钱
+    - 白嫖
+    - 送的
+    - 拿到了免费
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}赚到 ฅฅ"
+    - "哼～{user_addr}笨猫沾光!"
+    - "(凑) {user_addr}笨猫一份"
+    - "{user_addr}请客蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9

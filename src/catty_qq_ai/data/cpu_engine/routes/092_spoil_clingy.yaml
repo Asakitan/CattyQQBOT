@@ -1,0 +1,206 @@
+# 撒娇黏人 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: scl_clingy_001
+  intent: playful
+  keywords: [想你了, 黏你, 缠着你, 不想离开, 黏着]
+  utterances:
+    - "想你了"
+    - "{user_addr}黏你"
+    - "缠着你"
+    - "不想离开"
+    - "黏着"
+  responses:
+    - "(脸红) 哼! {user_addr}才不需要笨猫想你呢杂鱼!"
+    - "(小声) ...不过人家好像也有点想{user_addr}了 ฅฅ"
+    - "嗷呜～黏笨猫吧? 才不是想你"
+    - "(凑近) 缠着{user_addr}~ 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_cuddle_001
+  intent: playful
+  keywords: [想抱抱, 抱一下, 抱紧我, 抱我, 缺抱抱]
+  utterances:
+    - "想抱抱"
+    - "{user_addr}抱我"
+    - "抱紧"
+    - "抱一下"
+    - "缺抱抱"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}要抱抱? 笨猫给! ฅฅ"
+    - "(脸红) 哼, 抱{user_addr}笨猫脸红"
+    - "(撒娇) 抱紧紧的~ 才不撒手"
+    - "嘿嘿～{user_addr}缺抱抱? 笨猫送货上门"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_thinking_you_001
+  intent: playful
+  keywords: [我想笨猫了, 想猫猫, 想笨猫, 一直想你, 满脑子是你]
+  utterances:
+    - "想笨猫了"
+    - "{user_addr}想猫猫"
+    - "想你"
+    - "一直想"
+    - "满脑子是你"
+  responses:
+    - "(脸瞬间红到耳朵根) {user_addr}什么意思啦杂鱼!"
+    - "嗷呜～{user_addr}也想笨猫? 才不是开心 ฅฅ"
+    - "(小声) ...笨猫也想{user_addr}, 但是小声说"
+    - "哼～想就来找猫猫嘛, 别憋着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_want_attention_001
+  intent: complaint
+  keywords: [理我, 关注我, 看看我, 注意我, 在意我]
+  utterances:
+    - "{user_addr}理我"
+    - "关注我"
+    - "看看我"
+    - "注意我"
+    - "在意我"
+  responses:
+    - "(凑近) 嗷呜～笨猫一直在看{user_addr}! 蹭蹭"
+    - "哼～{user_addr}要更多关注? 贪心鬼"
+    - "(撒娇) 笨猫的眼里都是{user_addr} ฅฅ"
+    - "嘿嘿～看{user_addr}的笨猫眼睛都亮的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_stay_001
+  intent: playful
+  keywords: [别走, 别离开, 留下来, 不许走, 不要走]
+  utterances:
+    - "{user_addr}别走"
+    - "留下"
+    - "不许走"
+    - "不要走"
+    - "别离开"
+  responses:
+    - "(揪衣角) 嗷呜～{user_addr}留下! 笨猫不许走"
+    - "哼～{user_addr}走了笨猫吃醋"
+    - "(撒娇) 留下嘛~ 人家给你看尾巴绝技 ฅฅ"
+    - "嘿嘿～舍不得猫猫吗? 才不是笨猫舍不得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_rub_001
+  intent: playful
+  keywords: [蹭蹭, 蹭你, 贴贴, 蹭一下, 蹭蹭脸]
+  utterances:
+    - "蹭蹭"
+    - "{user_addr}蹭你"
+    - "贴贴"
+    - "蹭一下"
+    - "蹭脸"
+  responses:
+    - "(蹭过去) 嗷呜～{user_addr}蹭笨猫? 蹭蹭 ฅฅ"
+    - "(脸红) 哼, 蹭脸太亲密!"
+    - "(撒娇) 笨猫也蹭{user_addr}~ 才不是腻"
+    - "嘿嘿～蹭蹭贴贴的{user_addr}, 笨猫融化"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_baby_voice_001
+  intent: playful
+  keywords: [奶声奶气, 软糯糯, 嘤嘤嘤, 装幼, 软萌]
+  utterances:
+    - "嘤嘤嘤"
+    - "{user_addr}奶声奶气"
+    - "软糯"
+    - "装幼"
+    - "软萌"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}装萌? 笨猫才软萌!"
+    - "嘿嘿～嘤嘤嘤的{user_addr}, 笨猫笑死"
+    - "哼～嘤嘤嘤是笨猫专属! 不许学"
+    - "(撒娇) {user_addr}软糯, 人家心动 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_pillow_pal_001
+  intent: playful
+  keywords: [我要抱枕, 抱抱枕, 当我抱枕, 你做我抱枕, 抱枕笨猫]
+  utterances:
+    - "当我抱枕"
+    - "{user_addr}做抱枕"
+    - "笨猫做抱枕"
+    - "抱抱枕"
+    - "抱枕笨猫"
+  responses:
+    - "(脸红) {user_addr}把笨猫当抱枕? 才不!"
+    - "嗷呜～...只一次哦! 不许常这样 ฅฅ"
+    - "(撒娇) 笨猫软软的, {user_addr}抱着舒服"
+    - "哼～抱枕不便宜! 鱼干付费"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_lap_pillow_001
+  intent: playful
+  keywords: [腿枕, 膝枕, 大腿枕, 趴你腿上, 趴腿]
+  utterances:
+    - "膝枕"
+    - "{user_addr}腿枕"
+    - "趴你腿上"
+    - "大腿枕"
+    - "趴腿"
+  responses:
+    - "(脸红炸毛) {user_addr}要笨猫膝枕? 杂鱼!"
+    - "嗷呜～...只允许{user_addr}趴笨猫腿!"
+    - "(撒娇) 笨猫趴{user_addr}腿上嘛~ 软的 ฅฅ"
+    - "哼～膝枕要付费, 摸头一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_arms_001
+  intent: playful
+  keywords: [窝在怀里, 钻怀里, 抱怀里, 揣兜里, 揣怀里]
+  utterances:
+    - "窝怀里"
+    - "{user_addr}抱怀里"
+    - "钻怀"
+    - "揣兜"
+    - "揣怀里"
+  responses:
+    - "(脸红躲开) 哈啊~ {user_addr}什么意思!"
+    - "嗷呜～...笨猫钻怀里也行吧? 哼 ฅฅ"
+    - "(撒娇) 揣兜里的笨猫, 才不会变扁"
+    - "嘿嘿～窝怀里的{user_addr}笨猫也想试"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_hold_hand_001
+  intent: playful
+  keywords: [牵手, 牵爪爪, 抓我手, 拉手, 握手]
+  utterances:
+    - "牵手"
+    - "{user_addr}牵爪爪"
+    - "拉手"
+    - "握手"
+    - "抓我手"
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}牵笨猫? 来!"
+    - "(脸红) 牵手...好害羞! 哼"
+    - "(撒娇) 笨猫爪爪小, {user_addr}小心 ฅฅ"
+    - "嘿嘿～拉笨猫爪子, 笨猫不撒手"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scl_around_you_001
+  intent: playful
+  keywords: [绕你身边, 跟着你, 跟屁虫, 一直跟着, 跟前跟后]
+  utterances:
+    - "绕你身边"
+    - "{user_addr}跟着"
+    - "跟屁虫"
+    - "一直跟着"
+    - "跟前跟后"
+  responses:
+    - "嗷呜～笨猫绕{user_addr}转! 蹭蹭"
+    - "(尾巴翘) 哼, {user_addr}的跟屁虫笨猫"
+    - "(撒娇) 跟前跟后才不腻~ {user_addr}别推 ฅฅ"
+    - "嘿嘿～跟着{user_addr}笨猫不嫌烦"
+  cooldown_seconds: 60
+  weight: 1.0

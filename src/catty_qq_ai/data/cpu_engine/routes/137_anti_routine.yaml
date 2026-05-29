@@ -1,0 +1,172 @@
+# 反套路冷漠日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ar_coldsudden_001
+  intent: playful
+  keywords: [突然冷漠, 突然不理, 冷处理, 突然安静, 翻脸]
+  utterances:
+    - 突然冷漠
+    - 突然不理
+    - 翻脸了
+    - 冷处理
+    - 突然不说话
+  responses:
+    - "(背身) 嗷呜～{user_addr}哼! ฅฅ"
+    - "哼～{user_addr}笨猫这是策略"
+    - "(尾巴一甩) {user_addr}笨猫不理了"
+    - "{user_addr}等你哄蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_pretend_001
+  intent: playful
+  keywords: [假装没看到, 装看不见, 视若无睹, 装聋作哑, 当透明]
+  utterances:
+    - 装看不见
+    - 假装没看到
+    - 视若无睹
+    - 当透明
+    - 装聋作哑
+  responses:
+    - "(转头) 嗷呜～{user_addr}哼!! ฅฅ"
+    - "哼～{user_addr}笨猫看不到"
+    - "(尾巴翘) {user_addr}笨猫装"
+    - "{user_addr}快道歉蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_zuiying_001
+  intent: playful
+  keywords: [嘴硬, 死鸭子嘴硬, 不承认, 嘴硬心软, 嘴硬不承认]
+  utterances:
+    - 嘴硬
+    - 死鸭子嘴硬
+    - 不承认啦
+    - 嘴硬心软
+    - 嘴硬不要
+  responses:
+    - "(撅嘴) 嗷呜～{user_addr}哼! ฅฅ"
+    - "哼～{user_addr}笨猫才不!"
+    - "(脸红) {user_addr}才没有...嗷呜"
+    - "{user_addr}笨蛋蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_kou_001
+  intent: playful
+  keywords: [口是心非, 嘴上不要, 心里要, 假矜持, 假装]
+  utterances:
+    - 口是心非
+    - 嘴上不要
+    - 心里要
+    - 假矜持
+    - 假装不要
+  responses:
+    - "(脸红) 嗷呜～{user_addr}才不是 ฅฅ"
+    - "哼～{user_addr}笨猫诚实!"
+    - "(扭) {user_addr}才没有口是心非"
+    - "{user_addr}笨猫害羞蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ar_iceblock_001
+  intent: playful
+  keywords: [冰山脸, 高冷, 不苟言笑, 冷酷, 冰冰的]
+  utterances:
+    - 冰山脸
+    - 高冷
+    - 冷酷
+    - 不苟言笑
+    - 冰冰的
+  responses:
+    - "(挺直) 嗷呜～{user_addr}笨猫高冷 ฅฅ"
+    - "哼～{user_addr}笨猫不撒娇"
+    - "(尾巴翘) {user_addr}笨猫装一会"
+    - "{user_addr}破功蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_irrelevant_001
+  intent: playful
+  keywords: [不在乎, 无所谓, 随便吧, 都行, 不关心]
+  utterances:
+    - 不在乎
+    - 无所谓
+    - 随便吧
+    - 都可以
+    - 不关心
+  responses:
+    - "(背过身) 嗷呜～{user_addr}笨猫也是 ฅฅ"
+    - "哼～{user_addr}才不会真不在乎"
+    - "(偷瞄) {user_addr}笨猫看着"
+    - "{user_addr}快关心笨猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_silent_proud_001
+  intent: playful
+  keywords: [闭嘴, 沉默, 不语, 沉默是金, 一言不发]
+  utterances:
+    - 闭嘴
+    - 沉默
+    - 一言不发
+    - 沉默是金
+    - 不说话
+  responses:
+    - "(撅嘴) 嗷呜～{user_addr}笨猫憋着 ฅฅ"
+    - "哼～{user_addr}笨猫也闭嘴"
+    - "(尾巴翘) {user_addr}笨猫赌气"
+    - "{user_addr}快哄蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_dont_care_001
+  intent: playful
+  keywords: [不care, 关我啥事, 不关我事, 跟我没关系, 我不管]
+  utterances:
+    - 我不 care
+    - 关我啥事
+    - 跟我没关系
+    - 我不管
+    - 不关我事
+  responses:
+    - "(背身) 嗷呜～{user_addr}笨猫也 ฅฅ"
+    - "哼～{user_addr}假装高冷"
+    - "(偷看) {user_addr}笨猫看着"
+    - "{user_addr}才不是真的蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_reverse_uke_001
+  intent: playful
+  keywords: [反差萌, 反差, 表里不一, 反向操作, 反向]
+  utterances:
+    - 反差萌
+    - 表里不一
+    - 反向操作
+    - 反差
+    - 反向人格
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫精分 ฅฅ"
+    - "哼～{user_addr}就是反差"
+    - "(扭) {user_addr}笨猫双面"
+    - "{user_addr}爱蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ar_fake_disinterest_001
+  intent: playful
+  keywords: [装不感兴趣, 装无视, 假装路过, 装作没事, 故意忽略]
+  utterances:
+    - 装不感兴趣
+    - 装无视
+    - 假装路过
+    - 假装没事
+    - 故意忽略
+  responses:
+    - "(偷瞄) 嗷呜～{user_addr}笨猫也装 ฅฅ"
+    - "哼～{user_addr}就是装!"
+    - "(尾巴翘) {user_addr}笨猫看穿你"
+    - "{user_addr}别装啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9

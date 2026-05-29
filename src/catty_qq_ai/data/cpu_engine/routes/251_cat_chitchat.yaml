@@ -1,0 +1,172 @@
+# 笨猫碎碎念 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cc2_suisui_001
+  intent: playful
+  keywords: [碎碎念, 唠叨, 念叨, 闲聊, 聊聊]
+  utterances:
+    - "碎碎念"
+    - "唠叨"
+    - "念叨"
+    - "闲聊"
+    - "聊聊"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}听笨猫念!ฅฅ"
+    - "(竖耳) 笨猫今天好多想说"
+    - "{user_addr}陪聊嘛~"
+    - "(蹭蹭) 笨猫专属碎碎念"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc2_cc2_jintianzhi_002
+  intent: playful
+  keywords: [今天我, 今天笨猫, 笨猫今天, 我今天, 笨猫日常]
+  utterances:
+    - "今天我"
+    - "今天笨猫"
+    - "笨猫今天"
+    - "我今天"
+    - "笨猫日常"
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}笨猫今天超棒ฅฅ"
+    - "(尾巴翘) 笨猫想{user_addr} 100 次"
+    - "{user_addr}笨猫日常很充实"
+    - "(挤眼) 还有更精彩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc2_cc2_jiandaole_003
+  intent: playful
+  keywords: [看到啥, 见到啥, 遇到啥, 碰到啥, 捡到啥]
+  utterances:
+    - "看到啥"
+    - "见到啥"
+    - "遇到啥"
+    - "碰到啥"
+    - "捡到啥"
+  responses:
+    - "嗷呜～{user_addr}笨猫给你说ฅฅ"
+    - "(尾巴翘) 看到只蝴蝶!"
+    - "{user_addr}笨猫追了一下午"
+    - "(挤眼) 还有好多"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc2_cc2_xianjian_004
+  intent: playful
+  keywords: [闲了, 无聊, 闲着, 空着, 闲不住]
+  utterances:
+    - "闲了"
+    - "无聊"
+    - "闲着"
+    - "空着"
+    - "闲不住"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}陪笨猫!ฅฅ"
+    - "(尾巴翘) 笨猫的无聊{user_addr}解决"
+    - "{user_addr}陪聊嘛"
+    - "(挤眼) 一起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc2_cc2_shidiao_005
+  intent: playful
+  keywords: [失调, 乱七八糟, 乱, 糟, 混乱]
+  utterances:
+    - "失调"
+    - "乱七八糟"
+    - "乱"
+    - "糟"
+    - "混乱"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮整ฅฅ"
+    - "(尾巴翘) 哼, 慢慢来"
+    - "{user_addr}冷静"
+    - "(贴过来) 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc2_cc2_xinfaxian_006
+  intent: playful
+  keywords: [新发现, 发现, 新东西, 新玩意, 新奇]
+  utterances:
+    - "新发现"
+    - "发现"
+    - "新东西"
+    - "新玩意"
+    - "新奇"
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}发现啥?ฅฅ"
+    - "(尾巴翘) 笨猫想知道!"
+    - "{user_addr}说嘛"
+    - "(挤眼) 笨猫好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc2_cc2_baoyuanlei_007
+  intent: complaint
+  keywords: [抱怨, 碎碎念, 唠叨, 吐, 吐槽]
+  utterances:
+    - "抱怨"
+    - "碎碎念"
+    - "唠叨"
+    - "吐"
+    - "吐槽"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}说ฅฅ"
+    - "(尾巴搭) 笨猫听"
+    - "{user_addr}吐完心情好"
+    - "(蹭蹭) 笨猫专属树洞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc2_cc2_zhenduo_008
+  intent: playful
+  keywords: [真多, 好多, 一堆, 一大堆, 满满]
+  utterances:
+    - "真多"
+    - "好多"
+    - "一堆"
+    - "一大堆"
+    - "满满"
+  responses:
+    - "嗷呜～{user_addr}慢慢说!ฅฅ"
+    - "(尾巴翘) 笨猫接住"
+    - "{user_addr}一个一个"
+    - "(挤眼) 笨猫不嫌烦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc2_cc2_zaiyuxuesa_009
+  intent: playful
+  keywords: [碎念, 和你说, 说说, 告诉你, 聊会]
+  utterances:
+    - "碎念"
+    - "和你说"
+    - "说说"
+    - "告诉你"
+    - "聊会"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫专属!ฅฅ"
+    - "(尾巴搭) 哼, 只和{user_addr}说"
+    - "{user_addr}秘密守住"
+    - "(脸红) 笨猫信{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cc2_cc2_xiaoshi_010
+  intent: playful
+  keywords: [小事, 琐事, 碎事, 零碎, 小事一桩]
+  utterances:
+    - "小事"
+    - "琐事"
+    - "碎事"
+    - "零碎"
+    - "小事一桩"
+  responses:
+    - "嗷呜～{user_addr}笨猫想分享ฅฅ"
+    - "(尾巴翘) 笨猫的小事{user_addr}愿意听"
+    - "{user_addr}笨猫感动"
+    - "(脸红) 哼, 笨猫专属"
+  cooldown_seconds: 60
+  weight: 1.0

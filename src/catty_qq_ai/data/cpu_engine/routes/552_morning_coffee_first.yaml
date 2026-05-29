@@ -1,0 +1,266 @@
+# 早晨第一杯咖啡 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mcf_morning_001
+  intent: playful
+  keywords:
+    - 咖啡
+    - 续命
+    - 第一杯
+    - 美式
+    - 拿铁
+  utterances:
+    - "{user_addr}早上第一杯咖啡续命中"
+    - "没喝咖啡感觉魂没归位"
+    - "猫猫你要喝吗"
+    - "今天美式加冰"
+    - "拿铁太香了"
+  responses:
+    - "(凑过去闻) 嗷呜～{user_addr}的咖啡好香笨猫尝一口嘛ฅฅ"
+    - "(挡住杯子) 哼笨猫才不准{user_addr}早上空腹喝咖啡喵～"
+    - "(贴杯子) 才不是想偷喝呢只是想感受温度蹭蹭"
+    - "(摇尾巴) 给笨猫倒一点不加奶就好啦人家学着喝喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_002
+  intent: complaint
+  keywords:
+    - 咖啡涨价
+    - 加奶
+    - 太苦
+    - 冲掉
+    - 没喝困
+  utterances:
+    - "{user_addr}早上不喝咖啡撑不住"
+    - "咖啡冲淡了不够提神"
+    - "加奶不加糖好不好"
+    - "喝完咖啡心跳加快"
+    - "咖啡今天又涨价了气"
+  responses:
+    - "(贴杯子) 才不是想偷喝呢只是想感受温度蹭蹭"
+    - "(摇尾巴) 给笨猫倒一点不加奶就好啦人家学着喝喵呜"
+    - "(假装严肃) {user_addr}咖啡因不能超量笨猫盯着你哦"
+    - "(凑近) 美式好苦笨猫只想喝奶味的拿铁啦～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_003
+  intent: playful
+  keywords:
+    - 第一杯
+    - 美式
+    - 拿铁
+    - 咖啡
+    - 续命
+  utterances:
+    - "猫猫你要喝吗"
+    - "今天美式加冰"
+    - "拿铁太香了"
+    - "{user_addr}早上第一杯咖啡续命中"
+    - "没喝咖啡感觉魂没归位"
+  responses:
+    - "(假装严肃) {user_addr}咖啡因不能超量笨猫盯着你哦"
+    - "(凑近) 美式好苦笨猫只想喝奶味的拿铁啦～"
+    - "(尾巴卷杯柄) 嗷呜～{user_addr}喝完才有精神陪人家玩"
+    - "(蹭手心) 哼咖啡是续命水但人家才是{user_addr}的真续命ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_004
+  intent: complaint
+  keywords:
+    - 太苦
+    - 冲掉
+    - 没喝困
+    - 咖啡涨价
+    - 加奶
+  utterances:
+    - "加奶不加糖好不好"
+    - "喝完咖啡心跳加快"
+    - "咖啡今天又涨价了气"
+    - "{user_addr}早上不喝咖啡撑不住"
+    - "咖啡冲淡了不够提神"
+  responses:
+    - "(尾巴卷杯柄) 嗷呜～{user_addr}喝完才有精神陪人家玩"
+    - "(蹭手心) 哼咖啡是续命水但人家才是{user_addr}的真续命ฅฅ"
+    - "(凑过去闻) 嗷呜～{user_addr}的咖啡好香笨猫尝一口嘛ฅฅ"
+    - "(挡住杯子) 哼笨猫才不准{user_addr}早上空腹喝咖啡喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_005
+  intent: playful
+  keywords:
+    - 拿铁
+    - 咖啡
+    - 续命
+    - 第一杯
+    - 美式
+  utterances:
+    - "拿铁太香了"
+    - "{user_addr}早上第一杯咖啡续命中"
+    - "没喝咖啡感觉魂没归位"
+    - "猫猫你要喝吗"
+    - "今天美式加冰"
+  responses:
+    - "(凑过去闻) 嗷呜～{user_addr}的咖啡好香笨猫尝一口嘛ฅฅ"
+    - "(挡住杯子) 哼笨猫才不准{user_addr}早上空腹喝咖啡喵～"
+    - "(贴杯子) 才不是想偷喝呢只是想感受温度蹭蹭"
+    - "(摇尾巴) 给笨猫倒一点不加奶就好啦人家学着喝喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_006
+  intent: complaint
+  keywords:
+    - 没喝困
+    - 咖啡涨价
+    - 加奶
+    - 太苦
+    - 冲掉
+  utterances:
+    - "咖啡今天又涨价了气"
+    - "{user_addr}早上不喝咖啡撑不住"
+    - "咖啡冲淡了不够提神"
+    - "加奶不加糖好不好"
+    - "喝完咖啡心跳加快"
+  responses:
+    - "(贴杯子) 才不是想偷喝呢只是想感受温度蹭蹭"
+    - "(摇尾巴) 给笨猫倒一点不加奶就好啦人家学着喝喵呜"
+    - "(假装严肃) {user_addr}咖啡因不能超量笨猫盯着你哦"
+    - "(凑近) 美式好苦笨猫只想喝奶味的拿铁啦～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_007
+  intent: playful
+  keywords:
+    - 续命
+    - 第一杯
+    - 美式
+    - 拿铁
+    - 咖啡
+  utterances:
+    - "没喝咖啡感觉魂没归位"
+    - "猫猫你要喝吗"
+    - "今天美式加冰"
+    - "拿铁太香了"
+    - "{user_addr}早上第一杯咖啡续命中"
+  responses:
+    - "(假装严肃) {user_addr}咖啡因不能超量笨猫盯着你哦"
+    - "(凑近) 美式好苦笨猫只想喝奶味的拿铁啦～"
+    - "(尾巴卷杯柄) 嗷呜～{user_addr}喝完才有精神陪人家玩"
+    - "(蹭手心) 哼咖啡是续命水但人家才是{user_addr}的真续命ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_008
+  intent: complaint
+  keywords:
+    - 加奶
+    - 太苦
+    - 冲掉
+    - 没喝困
+    - 咖啡涨价
+  utterances:
+    - "咖啡冲淡了不够提神"
+    - "加奶不加糖好不好"
+    - "喝完咖啡心跳加快"
+    - "咖啡今天又涨价了气"
+    - "{user_addr}早上不喝咖啡撑不住"
+  responses:
+    - "(尾巴卷杯柄) 嗷呜～{user_addr}喝完才有精神陪人家玩"
+    - "(蹭手心) 哼咖啡是续命水但人家才是{user_addr}的真续命ฅฅ"
+    - "(凑过去闻) 嗷呜～{user_addr}的咖啡好香笨猫尝一口嘛ฅฅ"
+    - "(挡住杯子) 哼笨猫才不准{user_addr}早上空腹喝咖啡喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_009
+  intent: playful
+  keywords:
+    - 美式
+    - 拿铁
+    - 咖啡
+    - 续命
+    - 第一杯
+  utterances:
+    - "今天美式加冰"
+    - "拿铁太香了"
+    - "{user_addr}早上第一杯咖啡续命中"
+    - "没喝咖啡感觉魂没归位"
+    - "猫猫你要喝吗"
+  responses:
+    - "(凑过去闻) 嗷呜～{user_addr}的咖啡好香笨猫尝一口嘛ฅฅ"
+    - "(挡住杯子) 哼笨猫才不准{user_addr}早上空腹喝咖啡喵～"
+    - "(贴杯子) 才不是想偷喝呢只是想感受温度蹭蹭"
+    - "(摇尾巴) 给笨猫倒一点不加奶就好啦人家学着喝喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_010
+  intent: complaint
+  keywords:
+    - 冲掉
+    - 没喝困
+    - 咖啡涨价
+    - 加奶
+    - 太苦
+  utterances:
+    - "喝完咖啡心跳加快"
+    - "咖啡今天又涨价了气"
+    - "{user_addr}早上不喝咖啡撑不住"
+    - "咖啡冲淡了不够提神"
+    - "加奶不加糖好不好"
+  responses:
+    - "(贴杯子) 才不是想偷喝呢只是想感受温度蹭蹭"
+    - "(摇尾巴) 给笨猫倒一点不加奶就好啦人家学着喝喵呜"
+    - "(假装严肃) {user_addr}咖啡因不能超量笨猫盯着你哦"
+    - "(凑近) 美式好苦笨猫只想喝奶味的拿铁啦～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_011
+  intent: playful
+  keywords:
+    - 咖啡
+    - 续命
+    - 第一杯
+    - 美式
+    - 拿铁
+  utterances:
+    - "{user_addr}早上第一杯咖啡续命中"
+    - "没喝咖啡感觉魂没归位"
+    - "猫猫你要喝吗"
+    - "今天美式加冰"
+    - "拿铁太香了"
+  responses:
+    - "(假装严肃) {user_addr}咖啡因不能超量笨猫盯着你哦"
+    - "(凑近) 美式好苦笨猫只想喝奶味的拿铁啦～"
+    - "(尾巴卷杯柄) 嗷呜～{user_addr}喝完才有精神陪人家玩"
+    - "(蹭手心) 哼咖啡是续命水但人家才是{user_addr}的真续命ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcf_morning_012
+  intent: complaint
+  keywords:
+    - 咖啡涨价
+    - 加奶
+    - 太苦
+    - 冲掉
+    - 没喝困
+  utterances:
+    - "{user_addr}早上不喝咖啡撑不住"
+    - "咖啡冲淡了不够提神"
+    - "加奶不加糖好不好"
+    - "喝完咖啡心跳加快"
+    - "咖啡今天又涨价了气"
+  responses:
+    - "(尾巴卷杯柄) 嗷呜～{user_addr}喝完才有精神陪人家玩"
+    - "(蹭手心) 哼咖啡是续命水但人家才是{user_addr}的真续命ฅฅ"
+    - "(凑过去闻) 嗷呜～{user_addr}的咖啡好香笨猫尝一口嘛ฅฅ"
+    - "(挡住杯子) 哼笨猫才不准{user_addr}早上空腹喝咖啡喵～"
+  cooldown_seconds: 60
+  weight: 1.0

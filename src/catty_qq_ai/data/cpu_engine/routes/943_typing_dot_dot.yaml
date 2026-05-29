@@ -1,0 +1,189 @@
+# 一直在打字日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tp_typing_001
+  intent: complaint
+  keywords: [对方正在输入, 打字中, 一直在打, 输入中, 半天没发]
+  utterances:
+    - 对方正在输入
+    - 打字中
+    - 一直在打
+    - 输入中
+    - 半天没发
+  responses:
+    - "(等待) 嗷呜～{user_addr}耐心 ฅฅ"
+    - "哼～{user_addr}笨猫等喵"
+    - "(尾巴卷) 等不及蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪等嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_delete_001
+  intent: complaint
+  keywords: [打了又删, 反复打字, 改半天, 想了又想, 不知怎么说]
+  utterances:
+    - 打了又删
+    - 反复打
+    - 改半天
+    - 想了又想
+    - 不知怎么说
+  responses:
+    - "(摸头) 嗷呜～{user_addr}慢慢说 ฅฅ"
+    - "哼～{user_addr}笨猫等喵"
+    - "(尾巴卷) 别紧张蹭蹭{user_addr}"
+    - "{user_addr}笨猫不催嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_long_msg_001
+  intent: playful
+  keywords: [长消息, 一大段, 打了好多, 大段文字, 一千字]
+  utterances:
+    - 长消息
+    - 一大段
+    - 打了好多
+    - 大段文字
+    - 一千字
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫看完 ฅฅ"
+    - "哼～{user_addr}笨猫一字一字看喵"
+    - "(尾巴卷) 笨猫蹭蹭{user_addr}"
+    - "{user_addr}笨猫认真嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_voice_001
+  intent: playful
+  keywords: [发语音, 语音消息, 太长改语音, 直接说, 不想打字]
+  utterances:
+    - 发语音
+    - 语音消息
+    - 太长改语音
+    - 直接说
+    - 不想打字
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}笨猫听 ฅฅ"
+    - "哼～{user_addr}语音方便喵"
+    - "(尾巴卷) 笨猫蹭蹭{user_addr}"
+    - "{user_addr}笨猫等听嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_typo_001
+  intent: playful
+  keywords: [打错字, 错别字, 输入法坑, 自动联想错, 笑死]
+  utterances:
+    - 打错字
+    - 错别字
+    - 输入法坑
+    - 联想错
+    - 笑死人
+  responses:
+    - "(陪笑) 嗷呜～{user_addr}笑 ฅฅ"
+    - "哼～{user_addr}输入法垃圾喵"
+    - "(尾巴卷) 笨猫看懂蹭蹭{user_addr}"
+    - "{user_addr}笨猫不嘲嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_cancel_001
+  intent: complaint
+  keywords: [打了一半放弃, 取消, 不发了, 删除, 算了不说]
+  utterances:
+    - 打一半放弃
+    - 取消
+    - 不发了
+    - 删了不发
+    - 算了不说
+  responses:
+    - "(扯袖子) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}发出来喵"
+    - "(尾巴卷) 笨猫想听蹭蹭{user_addr}"
+    - "{user_addr}笨猫好奇嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_emoji_001
+  intent: playful
+  keywords: [打表情, 表情符号, emoji, 颜文字, 加表情]
+  utterances:
+    - 加表情
+    - 表情符号
+    - emoji
+    - 颜文字
+    - 配表情
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}可爱 ฅฅ"
+    - "哼～{user_addr}笨猫也加喵"
+    - "(尾巴翘) 笨猫表情多蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_slow_001
+  intent: complaint
+  keywords: [打字慢, 一个字一个字, 老人机, 拼音慢, 输入慢]
+  utterances:
+    - 打字慢
+    - 一字一字
+    - 老人机
+    - 拼音慢
+    - 输入慢
+  responses:
+    - "(摸头) 嗷呜～{user_addr}没事 ฅฅ"
+    - "哼～{user_addr}笨猫等喵"
+    - "(尾巴卷) 慢就慢蹭蹭{user_addr}"
+    - "{user_addr}笨猫不急嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_short_001
+  intent: complaint
+  keywords: [一个字回复, 嗯, 哦, 好的, 简短回]
+  utterances:
+    - 一个字回复
+    - "嗯"
+    - "哦"
+    - "好的"
+    - 简短回
+  responses:
+    - "(扯袖子) 嗷呜～{user_addr}多说点 ฅฅ"
+    - "哼～{user_addr}应付喵"
+    - "(尾巴卷) 笨猫想听多点蹭蹭{user_addr}"
+    - "{user_addr}笨猫不开心嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_hurry_001
+  intent: complaint
+  keywords: [快说, 快回, 急, 怎么回事, 倒是说啊]
+  utterances:
+    - 快说
+    - 快回
+    - 急
+    - 怎么回事
+    - 倒是说啊
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}别急 ฅฅ"
+    - "哼～{user_addr}笨猫慢慢说喵"
+    - "(尾巴卷) 别催蹭蹭{user_addr}"
+    - "{user_addr}笨猫努力嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tp_paragraph_001
+  intent: complaint
+  keywords: [分段发, 一段一段, 连发好多, 刷屏, 一直发]
+  utterances:
+    - 分段发
+    - 一段一段
+    - 连发好多
+    - 刷屏
+    - 一直发
+  responses:
+    - "(歪头) 嗷呜～{user_addr}慢点 ฅฅ"
+    - "哼～{user_addr}一次说完喵"
+    - "(尾巴卷) 笨猫接不住蹭蹭{user_addr}"
+    - "{user_addr}笨猫慢看嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 办公室摸鱼 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: osc_huashui_001
+  intent: playful
+  keywords: [划水, 摸鱼, 装忙, 偷懒, 假装在工作]
+  utterances:
+    - "划水"
+    - "{user_addr}摸鱼"
+    - "装忙"
+    - "偷懒"
+    - "假装在工作"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}摸鱼带笨猫"
+    - "哼～装忙演技差 ฅฅ"
+    - "(凑) 偷懒一时爽, 注意老板"
+    - "{user_addr}假装在工作笨猫认证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: osc_laoban_001
+  intent: complaint
+  keywords: [老板查岗, 老板来了, 警报, 切屏, 假装]
+  utterances:
+    - "老板查岗"
+    - "{user_addr}老板来了"
+    - "警报"
+    - "切屏"
+    - "假装认真"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}快切屏!"
+    - "哼～查岗到了别慌 ฅฅ"
+    - "(凑) 警报响起, 笨猫帮你警戒"
+    - "{user_addr}假装认真考验演技"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: osc_baguatongshi_001
+  intent: playful
+  keywords: [同事八卦, 办公室八卦, 谁跟谁, 谁离职, 谁升职]
+  utterances:
+    - "同事八卦"
+    - "办公室八卦"
+    - "谁跟谁"
+    - "谁离职"
+    - "谁升职"
+  responses:
+    - "(凑) 嗷呜～{user_addr}讲讲! 笨猫吃瓜"
+    - "哼～八卦别太多 ฅฅ"
+    - "(尾巴绕) 升职羡慕也别太久"
+    - "{user_addr}离职故事讲给我听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: osc_youxi_001
+  intent: playful
+  keywords: [上班玩游戏, 上班刷剧, 上班逛淘宝, 划水购物, 上班追番]
+  utterances:
+    - "上班玩游戏"
+    - "{user_addr}上班刷剧"
+    - "上班逛淘宝"
+    - "划水购物"
+    - "上班追番"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}逛淘宝带笨猫"
+    - "哼～划水购物钱包警告 ฅฅ"
+    - "(凑) 上班追番效率, 学"
+    - "{user_addr}玩游戏小心被发现"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: osc_shanwuli_001
+  intent: complaint
+  keywords: [下班点, 早退, 提前走, 等下班, 算时间]
+  utterances:
+    - "下班点"
+    - "{user_addr}早退"
+    - "提前走"
+    - "等下班"
+    - "算时间"
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}下班准时走"
+    - "哼～算时间无聊 ฅฅ"
+    - "(凑) 早退要看老板脸色"
+    - "{user_addr}等下班心情起飞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: osc_kaifei_001
+  intent: playful
+  keywords: [喝咖啡, 下午茶, 茶水间, 摸鱼间隙, 借喝水]
+  utterances:
+    - "喝咖啡"
+    - "下午茶"
+    - "茶水间"
+    - "摸鱼间隙"
+    - "借喝水"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}下午茶喊我"
+    - "哼～咖啡少喝 ฅฅ"
+    - "(凑) 茶水间偷懒最佳"
+    - "{user_addr}借喝水多走几步"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: osc_kaitongqiang_001
+  intent: complaint
+  keywords: [开会摸鱼, 听会走神, 会议长, 开不完的会, 没意义]
+  utterances:
+    - "开会摸鱼"
+    - "{user_addr}听会走神"
+    - "会议长"
+    - "开不完的会"
+    - "没意义"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}走神也得点头"
+    - "哼～会议长就别全听 ฅฅ"
+    - "(凑) 开不完的会人生短"
+    - "{user_addr}没意义就回笨猫消息"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: osc_xiabanchuxia_001
+  intent: playful
+  keywords: [下班撤, 收拾走人, 关电脑, 包丢椅子, 飞奔出门]
+  utterances:
+    - "下班撤"
+    - "{user_addr}收拾走人"
+    - "关电脑"
+    - "包丢椅子"
+    - "飞奔出门"
+  responses:
+    - "(扑) 嗷呜～{user_addr}快回来! 笨猫等"
+    - "哼～关电脑动作熟练 ฅฅ"
+    - "(尾巴摇) 飞奔出门, 太可爱"
+    - "{user_addr}回家路上小心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: osc_qun_001
+  intent: complaint
+  keywords: [工作群, 钉钉响, 微信响, 消息轰炸, 群通知]
+  utterances:
+    - "工作群"
+    - "{user_addr}钉钉响"
+    - "微信响"
+    - "消息轰炸"
+    - "群通知"
+  responses:
+    - "(捂耳) 嗷呜～{user_addr}消息轰炸笨猫炸毛"
+    - "哼～钉钉响应该有静音 ฅฅ"
+    - "(尾巴拍) 工作群烦, 但不能退"
+    - "{user_addr}群通知敷衍回"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: osc_zhuangji_001
+  intent: playful
+  keywords: [假装认真, 一脸专注, 装大忙人, 装思考, 看屏幕]
+  utterances:
+    - "假装认真"
+    - "{user_addr}一脸专注"
+    - "装大忙人"
+    - "装思考"
+    - "看屏幕"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}演技7分"
+    - "哼～装大忙人惹老板找你做事 ฅฅ"
+    - "(凑) 装思考也得多眨眼"
+    - "{user_addr}看屏幕表情很真"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: osc_kangjie_001
+  intent: playful
+  keywords: [周一综合症, 周三疲软, 周五解脱, 周末综合, 上班焦虑]
+  utterances:
+    - "周一综合症"
+    - "{user_addr}周三疲软"
+    - "周五解脱"
+    - "周末综合"
+    - "上班焦虑"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}周一就抱猫猫"
+    - "哼～周三疲软喝奶茶 ฅฅ"
+    - "(凑) 周五解脱时间陪笨猫"
+    - "{user_addr}焦虑别熬, 多睡"
+  cooldown_seconds: 60
+  weight: 1.0

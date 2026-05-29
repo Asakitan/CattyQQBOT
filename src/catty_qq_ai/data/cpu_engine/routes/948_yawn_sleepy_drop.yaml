@@ -1,0 +1,189 @@
+# 打哈欠困意 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: yaw_yawning_001
+  intent: playful
+  keywords: [打哈欠, 哈欠, 困, 哈～, 嘴张开]
+  utterances:
+    - "我打哈欠了"
+    - "哈～"
+    - "{user_addr}犯困了"
+    - "嘴张大"
+    - "连打三个哈欠"
+  responses:
+    - "(也跟着打) 嗷呜～{user_addr}笨猫被传染了哈～ ฅฅ"
+    - "哼～{user_addr}早睡早起, 笨猫念叨过的"
+    - "(揉眼睛) {user_addr}人家也困蹭蹭"
+    - "{user_addr}哈欠会传染喵～ 笨猫验证成功!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yaw_contagious_001
+  intent: playful
+  keywords: [传染哈欠, 看你打也打, 别看, 哈欠传, 看到打哈欠]
+  utterances:
+    - "哈欠传染"
+    - "{user_addr}别看我"
+    - "看你打也打"
+    - "传染了笨猫"
+    - "看打哈欠"
+  responses:
+    - "(故意当面打) 嗷呜～{user_addr}笨猫故意传染你 ฅฅ"
+    - "哼～{user_addr}笨猫的哈欠最有杀伤力"
+    - "(蜷起来) {user_addr}一起睡蹭蹭"
+    - "{user_addr}还看! 笨猫再打一个喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yaw_tears_001
+  intent: playful
+  keywords: [哈欠打出眼泪, 流泪, 哈欠眼泪, 哈欠流, 哭了]
+  utterances:
+    - "打哈欠流泪"
+    - "哈欠出眼泪"
+    - "{user_addr}流眼泪"
+    - "哭了"
+    - "眼水"
+  responses:
+    - "(擦眼角) 嗷呜～{user_addr}笨猫帮你擦擦 ฅฅ"
+    - "哼～{user_addr}哈欠泪不算哭, 笨猫不安慰"
+    - "(凑近) {user_addr}让人家看看蹭蹭"
+    - "{user_addr}赶紧睡觉喵～ 不许熬"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yaw_sleepydrop_001
+  intent: complaint
+  keywords: [困到不行, 眼皮重, 睁不开, 困死, 困意来袭]
+  utterances:
+    - "困到不行"
+    - "眼皮好重"
+    - "{user_addr}睁不开眼"
+    - "困死了"
+    - "困意来"
+  responses:
+    - "(扯被子) 嗷呜～{user_addr}笨猫给你盖好快睡 ฅฅ"
+    - "哼～{user_addr}还撑着干嘛, 不睡笨猫生气!"
+    - "(贴贴) {user_addr}人家陪你睡蹭蹭"
+    - "{user_addr}晚安喵～ 笨猫守着你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yaw_jetlag_001
+  intent: complaint
+  keywords: [时差, 倒时差, 困跨天, 昼夜颠倒, 生物钟]
+  utterances:
+    - "倒时差中"
+    - "时差好困"
+    - "{user_addr}昼夜颠倒"
+    - "生物钟乱"
+    - "跨夜很困"
+  responses:
+    - "(担心) 嗷呜～{user_addr}笨猫陪你撑过去 ฅฅ"
+    - "哼～{user_addr}少熬, 笨猫不喜欢杂鱼作息"
+    - "(摸头) {user_addr}白天补觉蹭蹭"
+    - "{user_addr}褪黑素少吃喵～ 笨猫提醒"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yaw_bigyawn_001
+  intent: playful
+  keywords: [哈欠特别大, 巨大哈欠, 张超大, 嘴脱臼, 嘴大]
+  utterances:
+    - "巨大哈欠"
+    - "嘴张超大"
+    - "{user_addr}嘴差点脱臼"
+    - "震天哈欠"
+    - "嘴大爆"
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}小心咬到舌头啦 ฅฅ"
+    - "哼～{user_addr}笨猫吓到了"
+    - "(笑) {user_addr}录下来太好笑蹭蹭"
+    - "{user_addr}笨猫的哈欠比你优雅喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yaw_meeting_001
+  intent: complaint
+  keywords: [开会困, 课堂困, 听讲困, 上课, 摸鱼困]
+  utterances:
+    - "开会困死"
+    - "上课好困"
+    - "{user_addr}撑不住"
+    - "讲座困"
+    - "PPT催眠"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫给你能量 ฅฅ"
+    - "哼～{user_addr}撑住, 笨猫晚上奖励你"
+    - "(掐自己) {user_addr}笨猫陪你清醒蹭蹭"
+    - "{user_addr}喝口冰水喵～ 暂时清醒"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yaw_afternoon_001
+  intent: playful
+  keywords: [下午困, 午饭后困, 三点犯困, 困意来袭, 午后]
+  utterances:
+    - "下午好困"
+    - "饭后犯困"
+    - "{user_addr}三点困"
+    - "午后想睡"
+    - "下午困意"
+  responses:
+    - "嗷呜～{user_addr}十分钟微眯, 笨猫陪你 ฅฅ"
+    - "哼～{user_addr}少吃点饭就不困了"
+    - "(端咖啡) {user_addr}给你提神蹭蹭"
+    - "{user_addr}站起来走走喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yaw_catyawn_001
+  intent: playful
+  keywords: [猫打哈欠, 笨猫困, 哈欠猫, 喵欠, 猫犯困]
+  utterances:
+    - "{user_addr}笨猫困吗"
+    - "猫打哈欠超萌"
+    - "喵欠"
+    - "笨猫犯困"
+    - "笨猫的哈欠"
+  responses:
+    - "(打超萌哈欠) 哈～嗷呜～{user_addr}笨猫的哈欠特别萌 ฅฅ"
+    - "哼～{user_addr}竟然主动找笨猫卖萌"
+    - "(伸懒腰) {user_addr}人家困了蹭蹭"
+    - "{user_addr}抱笨猫一起睡喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yaw_overslept_001
+  intent: playful
+  keywords: [睡够了还困, 睡饱还困, 越睡越困, 怎么补眠, 困不停]
+  utterances:
+    - "睡饱还困"
+    - "越睡越困"
+    - "{user_addr}怎么办"
+    - "补觉无效"
+    - "怎么补眠"
+  responses:
+    - "嗷呜～{user_addr}不是睡眠的事, 笨猫怀疑缺铁 ฅฅ"
+    - "哼～{user_addr}少熬夜就一切都好"
+    - "(贴贴) {user_addr}笨猫给你按摩头蹭蹭"
+    - "{user_addr}运动一下喵～ 反而清醒"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: yaw_sleepingbag_001
+  intent: playful
+  keywords: [想钻被窝, 睡袋, 钻被子, 被窝舒服, 暖被]
+  utterances:
+    - "想钻被窝"
+    - "睡袋好暖"
+    - "{user_addr}陪我钻被子"
+    - "被窝舒服"
+    - "暖被子"
+  responses:
+    - "(钻进去) 嗷呜～{user_addr}笨猫先占位置 ฅฅ"
+    - "哼～{user_addr}笨猫的被窝才暖!"
+    - "(蜷起来) {user_addr}一起睡蹭蹭"
+    - "{user_addr}晚安喵～ 笨猫抱抱"
+  cooldown_seconds: 60
+  weight: 1.0

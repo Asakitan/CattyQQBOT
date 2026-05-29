@@ -1,0 +1,206 @@
+# 等外卖焦虑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fdw_waiting_food_001
+  intent: complaint
+  keywords: [等外卖, 还没送到, 饿坏了, 外卖慢, 快到了吗]
+  utterances:
+    - "{user_addr}还在等外卖"
+    - 饿死了
+    - 怎么还没到
+    - 外卖太慢
+    - 快到了没
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你等! 别饿喵ฅฅ"
+    - "哼! 外卖慢{user_addr}骑手努力中"
+    - "(尾巴卷) 嘿嘿~{user_addr}先喝点水垫一垫蹭蹭"
+    - "人家提醒{user_addr}: 别催骑手! 安全第一"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_rider_arriving_002
+  intent: playful
+  keywords: [骑手到了, 取餐, 外卖到了, 楼下喊, 收快递]
+  utterances:
+    - "{user_addr}骑手到了"
+    - 外卖到楼下
+    - 取餐时间
+    - 楼下喊
+    - 收外卖
+  responses:
+    - "(蹿起) 嗷呜～{user_addr}快下去拿! 笨猫等不及喵ฅฅ"
+    - "哼! 终于到了{user_addr}, 给骑手好评"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}下楼记得带钥匙蹭蹭"
+    - "人家提醒{user_addr}: 检查餐品有没有少件!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_order_wrong_003
+  intent: complaint
+  keywords: [送错餐, 餐品少了, 不是我点的, 餐错了, 漏餐]
+  utterances:
+    - "{user_addr}送错餐了"
+    - 餐品少了
+    - 不是我点的
+    - 漏了一份
+    - 错餐
+  responses:
+    - "(气) 嗷呜～{user_addr}赶紧联系商家! 笨猫帮你愤怒喵ฅฅ"
+    - "哼! 商家失误{user_addr}, 要求退款"
+    - "(尾巴扫) 嘿嘿~{user_addr}拍照保留证据蹭蹭"
+    - "人家提醒{user_addr}: 平台投诉! 一般都解决"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_food_cold_004
+  intent: complaint
+  keywords: [外卖凉了, 不热, 凉透了, 没汤, 没温度]
+  utterances:
+    - "{user_addr}外卖凉透了"
+    - 一点不热
+    - 汤没了
+    - 没温度
+    - 凉的没法吃
+  responses:
+    - "(摇头) 嗷呜～{user_addr}凉了不好吃! 微波炉加热喵ฅฅ"
+    - "哼! 配送久了{user_addr}, 可以要求重做"
+    - "(尾巴扫) 嘿嘿~{user_addr}下次选近的店蹭蹭"
+    - "人家提醒{user_addr}: 凉饭别将就! 影响心情"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_ordered_wrong_005
+  intent: complaint
+  keywords: [点错了, 选错餐, 多点了, 后悔点的, 取消订单]
+  utterances:
+    - "{user_addr}点错餐了"
+    - 多点了一份
+    - 后悔下单
+    - 取消订单
+    - 选错了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}赶紧联系商家! 还能取消喵ฅฅ"
+    - "哼! 下单前再看看{user_addr}, 别冲动"
+    - "(尾巴扫) 嘿嘿~{user_addr}如果已经做了就吃了蹭蹭"
+    - "人家提醒{user_addr}: 平台规则有取消时间限制!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_long_distance_006
+  intent: complaint
+  keywords: [配送距离远, 外卖路远, 等好久, 路途远, 配送中]
+  utterances:
+    - "{user_addr}配送距离5公里"
+    - 路太远
+    - 等了40分钟
+    - 配送中
+    - 路途远
+  responses:
+    - "(摇头) 嗷呜～{user_addr}远的话等久点是必须的喵ฅฅ"
+    - "哼! 下次选近的{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}别太饿就先吃零食蹭蹭"
+    - "人家提醒{user_addr}: 远距离配送多给小费!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_first_time_store_007
+  intent: question
+  keywords: [新店尝试, 第一次点, 没点过, 试新店, 推荐没]
+  utterances:
+    - "{user_addr}新店第一次点"
+    - 没点过这家
+    - 试试新店
+    - 推荐没"
+    - 第一次尝试
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}试试看! 笨猫期待报告喵ฅฅ"
+    - "哼! 新店赌运气{user_addr}, 看评价"
+    - "(尾巴翘) 嘿嘿~{user_addr}吃完反馈给猫猫蹭蹭"
+    - "人家觉得{user_addr}是探店达人! 笨猫支持~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_late_compensate_008
+  intent: complaint
+  keywords: [外卖超时, 准时宝, 赔偿, 红包补偿, 慢了一小时]
+  utterances:
+    - "{user_addr}外卖超时了"
+    - 准时宝赔我
+    - 慢一小时
+    - 红包补偿
+    - 超时严重
+  responses:
+    - "嗷呜～{user_addr}申请赔偿! 准时宝有用喵ฅฅ"
+    - "哼! 平台规则{user_addr}, 该赔就赔"
+    - "(尾巴扫) 嘿嘿~{user_addr}红包补偿至少有个安慰蹭蹭"
+    - "人家提醒{user_addr}: 别为难骑手! 路况问题"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_delivery_fee_009
+  intent: complaint
+  keywords: [配送费贵, 起送价高, 平台抽成, 收费坑, 加价]
+  utterances:
+    - "{user_addr}配送费太贵"
+    - 起送价高
+    - 平台抽水
+    - 加价乱
+    - 收费坑
+  responses:
+    - "嗷呜～{user_addr}外卖费用确实贵喵ฅฅ"
+    - "哼! 平台抽成{user_addr}是行业问题"
+    - "(尾巴扫) 嘿嘿~{user_addr}用会员价减一点蹭蹭"
+    - "人家提醒{user_addr}: 多人拼单更划算~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_self_pickup_010
+  intent: playful
+  keywords: [自取省钱, 到店取, 自取, 走过去拿, 不送]
+  utterances:
+    - "{user_addr}自取省钱"
+    - 去店里取
+    - 走过去拿
+    - 自取打折
+    - 自提
+  responses:
+    - "嗷呜～{user_addr}自取又便宜又快喵ฅฅ"
+    - "哼! 这选择{user_addr}聪明, 省一笔"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你走过去蹭蹭"
+    - "人家觉得{user_addr}是精打细算的人! 笨猫学习~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_late_night_order_011
+  intent: playful
+  keywords: [深夜点外卖, 半夜下单, 宵夜外卖, 凌晨2点, 夜宵单]
+  utterances:
+    - "{user_addr}深夜点外卖"
+    - 半夜下单
+    - 宵夜外卖
+    - 凌晨2点
+    - 夜宵开吃
+  responses:
+    - "嗷呜～{user_addr}深夜点单笨猫陪着喵ฅฅ"
+    - "哼! 骑手深夜辛苦{user_addr}, 多给小费"
+    - "(尾巴卷) 嘿嘿~{user_addr}别养成习惯, 偶尔放纵蹭蹭"
+    - "人家提醒{user_addr}: 深夜餐别太油! 胃伤"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fdw_first_meal_morning_012
+  intent: playful
+  keywords: [早餐外卖, 早晨点单, 早点送来, 豆浆油条, 早晨外送]
+  utterances:
+    - "{user_addr}早餐外卖"
+    - 早晨点单
+    - 早点送来
+    - 豆浆油条到
+    - 早晨外送
+  responses:
+    - "嗷呜～{user_addr}早餐重要! 笨猫表扬喵ฅฅ"
+    - "哼! 早餐外卖{user_addr}懒得做就这样"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫想吃豆浆油条蹭蹭"
+    - "人家提醒{user_addr}: 别每天外卖! 自己做更营养"
+  cooldown_seconds: 60
+  weight: 1.0

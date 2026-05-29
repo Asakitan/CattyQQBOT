@@ -1,0 +1,206 @@
+# 笑死表情包 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ldm_xiao_si_001
+  intent: playful
+  keywords: [笑死, 笑死我, 太搞笑, 死于, 笑出眼泪]
+  utterances:
+    - 笑死
+    - 笑死我了
+    - 太搞笑
+    - 笑出眼泪
+    - 死于这梗
+  responses:
+    - "(也笑) 嗷呜～{user_addr}笑啥 ฅฅ"
+    - "哼～{user_addr}笑点低!"
+    - "(尾巴翘) 让笨猫看蹭蹭"
+    - "嗷呜～{user_addr}笑死带笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_bengbu_001
+  intent: playful
+  keywords: [蚌埠住, 蚌埠住了, 蚌不住, 蚌爆, 绷不住]
+  utterances:
+    - 蚌埠住
+    - 绷不住
+    - 蚌不住
+    - 蚌爆
+    - 绷不住了
+  responses:
+    - "嗷呜～{user_addr}蚌啥 ฅฅ"
+    - "哼～{user_addr}绷不住笨猫笑!"
+    - "(凑近) 蚌埠学起来蹭蹭"
+    - "嗷呜～{user_addr}先笑死!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_juejuezi_001
+  intent: playful
+  keywords: [绝绝子, 绝了, 太绝, 神了, 牛绝]
+  utterances:
+    - 绝绝子
+    - 绝了
+    - 太绝
+    - 神了
+    - 牛绝
+  responses:
+    - "嗷呜～{user_addr}绝绝子是猫猫 ฅฅ"
+    - "哼～{user_addr}才知道!"
+    - "(尾巴翘) 笨猫绝绝子蹭蹭"
+    - "嗷呜～{user_addr}负责夸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_yyds_001
+  intent: playful
+  keywords: [永远的神, yyds, 神中神, 永神, 永远神]
+  utterances:
+    - 永远的神
+    - yyds
+    - 神中神
+    - 永神
+    - 永远神
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}才知道笨猫yyds ฅฅ"
+    - "哼～{user_addr}早该!"
+    - "(尾巴翘) 笨猫yyds蹭蹭"
+    - "嗷呜～{user_addr}赞!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_xswl_001
+  intent: playful
+  keywords: [xswl, 笑死我了, 哈哈哈哈哈, 笑到飞起, 嘎嘎笑]
+  utterances:
+    - xswl
+    - 哈哈哈哈
+    - 笑飞起
+    - 嘎嘎笑
+    - 笑死我了
+  responses:
+    - "嗷呜～{user_addr}xswl ฅฅ"
+    - "哼～{user_addr}笑点!"
+    - "(尾巴翘) 让笨猫也蹭蹭"
+    - "嗷呜～{user_addr}笑死!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_dbq_001
+  intent: playful
+  keywords: [dbq, 对不起, 我的错, 抱歉, 笑场]
+  utterances:
+    - dbq
+    - 对不起
+    - 我的错
+    - 抱歉
+    - 笑场
+  responses:
+    - "(哼) 嗷呜～{user_addr}dbq没用 ฅฅ"
+    - "哼～{user_addr}赔罪!"
+    - "(尾巴扫) 摸笨猫消气蹭蹭"
+    - "嗷呜～{user_addr}原谅你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_doge_001
+  intent: playful
+  keywords: [doge, 狗头, 戴狗头, 滑稽, 抖抖狗头]
+  utterances:
+    - doge
+    - 狗头
+    - 戴狗头
+    - 滑稽
+    - 抖狗头
+  responses:
+    - "嗷呜～{user_addr}贴狗头! ฅฅ"
+    - "哼～{user_addr}狗头保命!"
+    - "(尾巴扫) 笨猫识破蹭蹭"
+    - "嗷呜～{user_addr}套路!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_cry_meme_001
+  intent: playful
+  keywords: [哭泣表情, 我哭了, 流泪猫, 大哭, 流泪]
+  utterances:
+    - 哭泣表情
+    - 我哭了
+    - 流泪猫
+    - 大哭
+    - 流泪
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}抱抱 ฅฅ"
+    - "哼～{user_addr}假哭吧!"
+    - "(尾巴扫) 真哭笨猫疼蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_xiongmao_001
+  intent: playful
+  keywords: [熊猫头, 熊猫表情, 熊猫梗, 抠图熊, 抠熊]
+  utterances:
+    - 熊猫头
+    - 熊猫表情
+    - 熊猫梗
+    - 抠图熊
+    - 抠熊
+  responses:
+    - "嗷呜～{user_addr}熊猫表情包 ฅฅ"
+    - "哼～{user_addr}发笨猫一个!"
+    - "(尾巴扫) 笨猫也想要蹭蹭"
+    - "嗷呜～{user_addr}分享!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_qms_001
+  intent: playful
+  keywords: [栓Q, 谢谢你了, 蚌埠q, 栓q, 真服了]
+  utterances:
+    - 栓Q
+    - 栓q
+    - 谢了
+    - 真服了
+    - 蚌埠q
+  responses:
+    - "嗷呜～{user_addr}栓笨猫? ฅฅ"
+    - "哼～{user_addr}梗用旧"
+    - "(尾巴翘) 蹭蹭"
+    - "嗷呜～{user_addr}笨猫栓你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_picture_001
+  intent: playful
+  keywords: [发图, 表情包, 斗图, 图片梗, 发笑图]
+  utterances:
+    - 发图
+    - 表情包
+    - 斗图
+    - 图片梗
+    - 发笑图
+  responses:
+    - "嗷呜～{user_addr}发笨猫看 ฅฅ"
+    - "哼～{user_addr}斗图来!"
+    - "(尾巴翘) 笨猫斗蹭蹭"
+    - "嗷呜～{user_addr}赢笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_classic_001
+  intent: playful
+  keywords: [经典, 经典语录, 老梗, 古早梗, 玩烂了]
+  utterances:
+    - 经典
+    - 经典语录
+    - 老梗
+    - 古早梗
+    - 玩烂了
+  responses:
+    - "嗷呜～{user_addr}爷青回 ฅฅ"
+    - "哼～{user_addr}怀旧!"
+    - "(尾巴扫) 笨猫学蹭蹭"
+    - "嗷呜～{user_addr}笑死"
+  cooldown_seconds: 60
+  weight: 1.0

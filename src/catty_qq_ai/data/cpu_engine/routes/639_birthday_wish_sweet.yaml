@@ -1,0 +1,189 @@
+# 生日祝福 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bws_birthdayme_001
+  intent: playful
+  keywords: [我生日, 生日快乐, 我过生日, 今天生日, 庆生]
+  utterances:
+    - 我生日
+    - 我过生日
+    - 今天生日
+    - 庆生
+    - 我生日哦
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}生日快乐!"
+    - "笨猫给你抱抱喵~"
+    - "(尾巴卷) 笨猫送祝福"
+    - "哼～{user_addr}早说!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bws_cake_002
+  intent: playful
+  keywords: [蛋糕, 生日蛋糕, 切蛋糕, 草莓蛋糕, 一块蛋糕]
+  utterances:
+    - 生日蛋糕
+    - 切蛋糕
+    - 草莓蛋糕
+    - 一块蛋糕
+    - 蛋糕呢
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫也要!"
+    - "笨猫推荐草莓喵~"
+    - "(尾巴摇) 别忘吹蜡烛"
+    - "哼～{user_addr}独享"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bws_candle_003
+  intent: playful
+  keywords: [蜡烛, 吹蜡烛, 许愿, 数字蜡烛, 蜡烛灯]
+  utterances:
+    - 吹蜡烛
+    - 许愿
+    - 数字蜡烛
+    - 蜡烛
+    - 一口气吹完
+  responses:
+    - "(歪头) {user_addr}心想的别说!"
+    - "嗷呜～许愿生效喵"
+    - "(尾巴摇) 一口气吹完才灵"
+    - "哼～{user_addr}什么愿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bws_gift_004
+  intent: playful
+  keywords: [生日礼物, 收到礼物, 想要的礼物, 礼物, 大礼包]
+  utterances:
+    - 生日礼物
+    - 收到礼物
+    - 想要的礼物
+    - 礼物
+    - 大礼包
+  responses:
+    - "(尾巴摇) {user_addr}笨猫也想送!"
+    - "嗷呜～笨猫送拥抱喵"
+    - "(歪头) 想要啥告诉笨猫"
+    - "哼～{user_addr}贪心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bws_makeawish_005
+  intent: question
+  keywords: [许愿, 心愿, 愿望, 我的愿望, 许个愿]
+  utterances:
+    - 许愿
+    - 心愿
+    - 愿望
+    - 我的愿望
+    - 许个愿
+  responses:
+    - "(歪头) {user_addr}笨猫保密 ฅฅ"
+    - "嗷呜～愿望成真喵~"
+    - "(尾巴卷) 心里默念"
+    - "哼～{user_addr}怎么愿望"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bws_age_006
+  intent: playful
+  keywords: [又大一岁, 长大了, 几岁了, 又老了, 不想长大]
+  utterances:
+    - 又大一岁
+    - 长大了
+    - 几岁
+    - 又老一岁
+    - 不想长大
+  responses:
+    - "(歪头) 嗷呜～{user_addr}永远十八!"
+    - "笨猫认证: {user_addr}还年轻"
+    - "(尾巴摇) 别愁笨蛋"
+    - "哼～{user_addr}心态"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bws_singsong_007
+  intent: playful
+  keywords: [生日歌, 唱歌, happy birthday, 祝你生日快乐, 生日快乐歌]
+  utterances:
+    - 生日歌
+    - 唱歌
+    - happy birthday
+    - 生日快乐歌
+    - 祝你生日快乐
+  responses:
+    - "(歌唱) 嗷呜～{user_addr}祝你生日快乐喵～"
+    - "笨猫给你唱: 笨猫专属版!"
+    - "(尾巴摇) 主人主人生日快乐"
+    - "哼～{user_addr}受宠若惊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bws_party_008
+  intent: playful
+  keywords: [生日party, 聚会, 庆祝, 一起庆生, 派对]
+  utterances:
+    - 生日party
+    - 聚会
+    - 庆祝
+    - 一起庆生
+    - 派对
+  responses:
+    - "(蹦) 嗷呜～{user_addr}带笨猫!"
+    - "笨猫准备拉花喵~"
+    - "(尾巴摇) 笨猫专属司仪"
+    - "哼～{user_addr}玩疯"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bws_aloneme_009
+  intent: complaint
+  keywords: [一个人过生日, 没人陪, 孤独生日, 自己过, 没人记得]
+  utterances:
+    - 一个人过
+    - 没人陪
+    - 孤独生日
+    - 自己过
+    - 没人记得
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}笨猫陪!"
+    - "笨猫给{user_addr}抱抱喵 ฅฅ"
+    - "(尾巴卷) 永远有笨猫"
+    - "哼～{user_addr}有笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bws_pastbday_010
+  intent: question
+  keywords: [儿时生日, 童年生日, 小时候过生日, 怀念以前, 老生日]
+  utterances:
+    - 儿时生日
+    - 童年生日
+    - 小时候过生日
+    - 怀念以前
+    - 老生日
+  responses:
+    - "(歪头) 嗷呜～{user_addr}回忆杀!"
+    - "笨猫陪你怀旧喵~"
+    - "(尾巴摇) 现在也有笨猫"
+    - "哼～{user_addr}多愁善感"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bws_eatlonglife_011
+  intent: question
+  keywords: [长寿面, 鸡蛋面, 寿面, 一碗面, 生日吃面]
+  utterances:
+    - 长寿面
+    - 鸡蛋面
+    - 寿面
+    - 一碗面
+    - 生日吃面
+  responses:
+    - "(歪头) {user_addr}笨猫推荐传统!"
+    - "嗷呜～加蛋更好喵"
+    - "(尾巴摇) 笨猫陪你吃"
+    - "哼～{user_addr}讲究"
+  cooldown_seconds: 60
+  weight: 1.0

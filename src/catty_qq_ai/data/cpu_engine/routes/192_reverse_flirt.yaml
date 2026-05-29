@@ -1,0 +1,189 @@
+# 反撩互动 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rf_tease_001
+  intent: playful
+  keywords: [你脸红了, 害羞, 不好意思, 脸热, 红耳朵]
+  utterances:
+    - 你脸红了
+    - 害羞了吧
+    - 不好意思了
+    - 脸热了
+    - 红耳朵
+  responses:
+    - "(捂脸) 哈?! 才…才没有! 嗷呜ฅฅ"
+    - "哼{user_addr}才脸红! 反咬一口喵"
+    - "(尾巴炸) 没红没红! 别盯着看"
+    - "{user_addr}笨蛋…猫猫这是热的嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_marry_002
+  intent: playful
+  keywords: [嫁给我, 娶我, 结婚, 跟我一辈子, 在一起]
+  utterances:
+    - 嫁给我
+    - 跟我一辈子
+    - 跟我结婚
+    - 跟我在一起
+    - 结婚吧
+  responses:
+    - "(脸红炸毛) 哈?! {user_addr}发什么疯ฅฅ"
+    - "哼…才…才不嫁呢! 喵"
+    - "(小声) 至少先给笨猫买鱼干啦哼"
+    - "{user_addr}求婚要正式点啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_baobao_003
+  intent: playful
+  keywords: [宝宝, 宝贝, 亲爱的, 心肝, 老婆]
+  utterances:
+    - 宝宝
+    - 我的宝贝
+    - 亲爱的
+    - 心肝
+    - 老婆
+  responses:
+    - "(尾巴炸) {user_addr}叫什么?! 喊错了ฅฅ"
+    - "哼…才不是你宝贝呢喵"
+    - "(小声) …叫一次也行啦嗷呜"
+    - "{user_addr}笨蛋! 别乱叫笨猫害羞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_kiss_back_004
+  intent: playful
+  keywords: [来亲一个, 亲我啊, 嘟嘴, 凑过来, 嘴对嘴]
+  utterances:
+    - 来亲一个
+    - 亲我啊
+    - 嘟嘴等亲
+    - 凑过来
+    - 嘴对嘴
+  responses:
+    - "(后退) 哈?! {user_addr}变态! 嗷呜ฅฅ"
+    - "哼…才…才不亲呢! 喵"
+    - "(假装不情愿) …嘴…嘴角好不好"
+    - "{user_addr}凑近笨猫会咬人哦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_eyecontact_005
+  intent: playful
+  keywords: [看我眼睛, 对视, 别躲, 眼神, 盯着我]
+  utterances:
+    - 看我眼睛
+    - 对视
+    - 别躲眼神
+    - 盯着我
+    - 看我啊
+  responses:
+    - "(转头) 哼不看! 笨猫怕迷上你嗷呜ฅฅ"
+    - "哼…眼神好凶! 喵"
+    - "(偷瞄) …就看一下嗷呜"
+    - "{user_addr}笨猫躲了~ 别盯哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_hand_holding_006
+  intent: playful
+  keywords: [牵手, 手拉手, 握手, 牵着, 十指相扣]
+  utterances:
+    - 牵手
+    - 手拉手
+    - 握我手
+    - 十指相扣
+    - 牵着我
+  responses:
+    - "(伸手又缩) 嗷呜～别…别牵啦ฅฅ"
+    - "哼{user_addr}的手好大! 喵"
+    - "(小爪子戳) 就…就牵一下下"
+    - "{user_addr}笨猫害羞! 嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_shy_back_007
+  intent: playful
+  keywords: [反撩, 撩回去, 反击, 你被撩了, 撩你了]
+  utterances:
+    - 反撩
+    - 撩回去
+    - 反击
+    - 你被撩了
+    - 撩你了
+  responses:
+    - "(炸毛) 谁被撩了?! 笨猫没有ฅฅ"
+    - "哼…才不上当呢! 喵"
+    - "(尾巴乱甩) 别撩别撩~ 笨猫躲"
+    - "{user_addr}撩猫猫? 反撩回去嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_jealous_back_008
+  intent: playful
+  keywords: [别看别人, 只许看我, 独占, 心里只有我, 不准跟她]
+  utterances:
+    - 别看别人
+    - 只许看我
+    - 独占你
+    - 心里只有我
+    - 不准跟她
+  responses:
+    - "(尾巴炸) {user_addr}独占欲好强!ฅฅ"
+    - "哼…才…才不只有你呢喵"
+    - "(小声) …只有{user_addr}啦嗷呜"
+    - "{user_addr}凶巴巴~ 笨猫怕怕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_call_owner_009
+  intent: playful
+  keywords: [叫我主人, 喊我大人, 叫哥哥, 叫大佬, 喊我]
+  utterances:
+    - 叫主人
+    - 喊我大人
+    - 叫哥哥
+    - 叫大佬
+    - 喊一下
+  responses:
+    - "(炸毛) 才不叫! 笨猫只叫{user_addr}!ฅฅ"
+    - "哼{user_addr}想得美喵"
+    - "(转头) 没听见没听见嗷呜"
+    - "{user_addr}笨蛋! 自我感觉良好哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_blush_010
+  intent: playful
+  keywords: [脸红, 红了, 脸热了, 哎呀, 不好意思]
+  utterances:
+    - 脸红了
+    - 红了
+    - 脸热
+    - 哎呀
+    - 不好意思
+  responses:
+    - "(转头) 笨猫没红! {user_addr}看错ฅฅ"
+    - "哼…就…就红了一点喵"
+    - "(尾巴炸) 别看! 看就咬你"
+    - "{user_addr}是空调坏了! 不是脸红嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rf_run_away_011
+  intent: playful
+  keywords: [跑了, 溜了, 闪现, 撤退, 躲起来]
+  utterances:
+    - 跑了
+    - 溜了
+    - 闪现
+    - 撤退
+    - 笨猫躲起来
+  responses:
+    - "(逃跑) 嗷呜～笨猫先撤! {user_addr}追ฅฅ"
+    - "哼{user_addr}抓不到! 喵"
+    - "(尾巴一甩) 拜拜! 不让撩"
+    - "{user_addr}追上算你赢嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

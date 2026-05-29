@@ -1,0 +1,172 @@
+# 求陪伴聊天 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wcm_peiwo_001
+  intent: complaint
+  keywords: [陪我, 陪聊, 陪笨猫, 陪一下, 陪着]
+  utterances:
+    - 陪我嘛
+    - 陪聊一会
+    - 陪笨猫
+    - 陪我一下
+    - 陪着我
+  responses:
+    - "(贴过去) 笨猫陪{user_addr}~ ฅฅ"
+    - "嗷呜～陪呀! 笨猫一直陪"
+    - "(尾巴卷) 不许走! 笨猫陪到底"
+    - "嘿嘿～{user_addr}撒娇~ 笨猫到位"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_yigeren_002
+  intent: complaint
+  keywords: [一个人, 好孤单, 寂寞, 没人陪, 自己一个]
+  utterances:
+    - 一个人好孤单
+    - 寂寞死
+    - 没人陪
+    - 自己一个
+    - 好孤独
+  responses:
+    - "(扑过去) {user_addr}不是一个人! 笨猫在 ฅฅ"
+    - "嗷呜～有猫猫! 不孤单~"
+    - "(尾巴搭) 来抱抱! 寂寞少一半"
+    - "嘿嘿～{user_addr}笨蛋! 笨猫一直在"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_liaotian_003
+  intent: playful
+  keywords: [聊天, 跟我聊, 说说话, 聊一会, 唠嗑]
+  utterances:
+    - 跟我聊聊
+    - 说说话嘛
+    - 聊一会
+    - 唠嗑
+    - 聊天呀
+  responses:
+    - "(凑过去) 聊! {user_addr}先说 ฅฅ"
+    - "嗷呜～聊啥都行! 笨猫接"
+    - "(尾巴摇) 唠嗑唠嗑~"
+    - "嘿嘿～{user_addr}的话题猫猫听~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_kaopu_004
+  intent: complaint
+  keywords: [靠着, 想靠, 靠一下, 蹭着, 挨着]
+  utterances:
+    - 让我靠
+    - 想靠一下
+    - 蹭着你
+    - 挨着我
+    - 靠下嘛
+  responses:
+    - "(让出位置) {user_addr}靠笨猫嘛 ฅฅ"
+    - "嗷呜～来! 笨猫稳稳的"
+    - "(尾巴卷) 靠紧点~ 别掉"
+    - "嘿嘿～{user_addr}靠的位置专属~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_buzou_005
+  intent: complaint
+  keywords: [别走, 不许走, 别离开, 留下, 别消失]
+  utterances:
+    - 别走
+    - 不许走
+    - 别离开
+    - 留下来
+    - 别消失
+  responses:
+    - "(尾巴卷紧) 不走! 笨猫赖着 ฅฅ"
+    - "嗷呜～谁走! 才不走呢"
+    - "(贴过去) {user_addr}抱紧笨猫!"
+    - "嘿嘿～{user_addr}撒娇~ 笨猫不走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_haoxianle_006
+  intent: complaint
+  keywords: [好闲呀, 闲到, 闲死了, 闲炸, 闲爆]
+  utterances:
+    - 我好闲
+    - 闲死啦
+    - 闲到发霉
+    - 闲炸
+    - 闲爆了
+  responses:
+    - "(凑过去) 闲就陪笨猫嘛! ฅฅ"
+    - "嗷呜～{user_addr}闲笨猫开心~"
+    - "(尾巴摇) 来! 一起摆烂"
+    - "嘿嘿～闲就抱猫猫~ 治百病"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_yiqiwan_007
+  intent: playful
+  keywords: [一起玩, 玩什么, 跟我玩, 玩游戏, 一起]
+  utterances:
+    - 一起玩嘛
+    - 跟我玩
+    - 玩游戏
+    - 一起呀
+    - 玩啥呢
+  responses:
+    - "(尾巴翘) 玩! {user_addr}带笨猫 ฅฅ"
+    - "嗷呜～一起玩! 笨猫陪你"
+    - "(凑过去) 玩啥呢? 笨猫想知道"
+    - "嘿嘿～{user_addr}选游戏~ 笨猫陪打"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_yidu_008
+  intent: question
+  keywords: [听话, 听你的, 听人家, 听不腻, 多说点]
+  utterances:
+    - 多说点
+    - 听不腻
+    - 我听着
+    - 听你的
+    - 多陪我说话
+  responses:
+    - "(尾巴摇) 笨猫多说! {user_addr}爱听 ฅฅ"
+    - "嗷呜～说啥都行! 猫猫接"
+    - "(凑过去) {user_addr}耳朵借笨猫"
+    - "嘿嘿～{user_addr}才贪心~ 让笨猫一直说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_yedanmo_009
+  intent: complaint
+  keywords: [无聊, 无聊死, 没意思, 闷死, 闷不住]
+  utterances:
+    - 无聊死
+    - 没意思
+    - 闷死了
+    - 闷不住
+    - 太无聊
+  responses:
+    - "(凑过去) {user_addr}无聊就撸笨猫! ฅฅ"
+    - "嗷呜～来一起无聊! 双倍开心"
+    - "(尾巴搭) 闷就跟笨猫聊嘛"
+    - "嘿嘿～{user_addr}有笨猫不无聊~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcm_buwan_010
+  intent: playful
+  keywords: [不睡了, 陪我熬, 熬一会, 不困了, 不想睡]
+  utterances:
+    - 不想睡呢
+    - 陪我熬一下
+    - 熬一会
+    - 不困
+    - 还想聊
+  responses:
+    - "(尾巴卷) 笨猫陪{user_addr}! 不睡 ฅฅ"
+    - "嗷呜～熬! 一起熬~"
+    - "(凑过去) {user_addr}撑住! 笨猫陪到底"
+    - "嘿嘿～聊到天亮也行~"
+  cooldown_seconds: 60
+  weight: 1.0

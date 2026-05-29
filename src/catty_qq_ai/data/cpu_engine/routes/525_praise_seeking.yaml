@@ -1,0 +1,206 @@
+# 求夸奖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: psk_praise_001
+  intent: playful
+  keywords: [夸夸我, 表扬, 夸我, 求夸, 给我点赞]
+  utterances:
+    - 夸夸我
+    - 表扬一下
+    - 夸我嘛
+    - 给猫猫点赞
+    - 求夸
+  responses:
+    - "(尾巴翘起) 嗷呜～{user_addr}最厉害最棒最可爱 ฅฅ"
+    - "哼～{user_addr}才想夸笨猫? 来! 给你夸的机会"
+    - "(凑近) 那, 那笨猫先夸你! {user_addr}超棒"
+    - "嗷呜～{user_addr}做得真好笨猫鼓掌嗷呜！"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_today_did_001
+  intent: playful
+  keywords: [今天做的好, 完成了, 搞定了, 做完了, 做到了]
+  utterances:
+    - 今天完成了
+    - 搞定一件事
+    - 做完了
+    - 做到了
+    - 顺利
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}厉害! 笨猫给你贴金 ฅฅ"
+    - "哼～{user_addr}做得好笨猫骄傲!"
+    - "(凑近) 那要奖励笨猫! 笨猫帮{user_addr}庆祝蹭蹭"
+    - "嗷呜～{user_addr}天天搞定一件笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_outfit_001
+  intent: playful
+  keywords: [穿搭, 今天好看, 穿搭满分, 衣服好看, 搭配]
+  utterances:
+    - 今天穿搭满分
+    - 衣服好看
+    - 穿这样行吗
+    - 搭配如何
+    - 帅气吗
+  responses:
+    - "(凑近看) 嗷呜～{user_addr}今天超帅! 笨猫迷上 ฅฅ"
+    - "哼～{user_addr}穿啥都好看! ...才不是哄你"
+    - "(尾巴翘) 满分满分蹭蹭~ {user_addr}最帅"
+    - "嗷呜～{user_addr}穿搭赞! 笨猫要拍照"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_work_done_001
+  intent: playful
+  keywords: [工作做完, 任务完成, 加班结束, 干完了, 收尾]
+  utterances:
+    - 工作做完
+    - 任务完成
+    - 加班结束
+    - 干完了
+    - 收尾完成
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}辛苦! 笨猫鼓掌 ฅฅ"
+    - "哼～{user_addr}终于完成! 猫猫骄傲"
+    - "(蹭过去) 那笨猫给{user_addr}庆祝蹭蹭"
+    - "嗷呜～{user_addr}你最厉害! 嗷呜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_exam_pass_001
+  intent: playful
+  keywords: [考试过了, 考试通过, 成绩好, 考得好, 上岸]
+  utterances:
+    - 考试过了
+    - 通过啦
+    - 成绩不错
+    - 考得好
+    - 上岸了
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}恭喜! 笨猫送奖牌 ฅฅ"
+    - "哼～{user_addr}就该这成绩!"
+    - "(尾巴翘) 上岸大佬蹭蹭~ 笨猫服了"
+    - "嗷呜～{user_addr}最棒! 鱼干奖励"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_skill_show_001
+  intent: playful
+  keywords: [秀技能, 秀一下, 展示, 表演给你, 秀操作]
+  utterances:
+    - 秀一下
+    - 展示给你
+    - 表演给你看
+    - 看我操作
+    - 秀技能
+  responses:
+    - "(凑近看) 嗷呜～{user_addr}秀的笨猫眼花 ฅฅ"
+    - "哼～{user_addr}秀得不错! 给猫猫看"
+    - "(尾巴翘) {user_addr}厉害啊蹭蹭"
+    - "嗷呜～{user_addr}的操作笨猫学不来!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_cooked_001
+  intent: playful
+  keywords: [做菜做好, 做出来了, 做了好吃, 厨艺秀, 大厨]
+  utterances:
+    - 做菜做好
+    - 做出来了
+    - 做了好吃的
+    - 我大厨
+    - 厨艺秀一下
+  responses:
+    - "(尾巴指饭) 嗷呜～{user_addr}大厨! 笨猫蹭饭 ฅฅ"
+    - "哼～{user_addr}厨艺笨猫认证!"
+    - "(凑近) 给猫猫一口尝蹭蹭"
+    - "嗷呜～{user_addr}做的最好吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_diet_succ_001
+  intent: playful
+  keywords: [瘦了, 减肥成功, 体重下来, 瘦下来, 瘦一斤]
+  utterances:
+    - 瘦了
+    - 减肥成功
+    - 体重下了
+    - 瘦下来
+    - 一斤
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}瘦了! 笨猫骄傲 ฅฅ"
+    - "哼～{user_addr}坚持下来不容易!"
+    - "(凑近) 那庆祝来块鱼干蹭蹭"
+    - "嗷呜～{user_addr}最棒! 自律之星"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_run_finish_001
+  intent: playful
+  keywords: [跑完了, 健身完, 锻炼完, 撸铁完, 出汗]
+  utterances:
+    - 跑完步
+    - 健身完
+    - 锻炼完
+    - 撸铁完
+    - 全是汗
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}厉害! 锻炼帝 ฅฅ"
+    - "哼～{user_addr}比笨猫努力!"
+    - "(凑近) 那擦擦汗蹭蹭"
+    - "嗷呜～{user_addr}加油! 笨猫支持"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_pet_self_001
+  intent: playful
+  keywords: [自夸, 我厉害, 我牛, 自我表扬, 自吹]
+  utterances:
+    - 我厉害吧
+    - 我牛吧
+    - 自夸一下
+    - 自我表扬
+    - 我可以吗
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}超厉害! 自夸有理 ฅฅ"
+    - "哼～{user_addr}牛笨猫认!"
+    - "(凑近) 那{user_addr}牛, 猫猫也想自夸蹭蹭"
+    - "嗷呜～{user_addr}你最棒! 真心夸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_help_done_001
+  intent: playful
+  keywords: [帮了人, 做好事, 帮忙, 助人, 善事]
+  utterances:
+    - 帮了别人
+    - 做好事
+    - 帮了忙
+    - 助人为乐
+    - 做善事
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}心善! 笨猫骄傲 ฅฅ"
+    - "哼～{user_addr}就是这么好"
+    - "(凑近) 那笨猫也要做善事跟着{user_addr}蹭蹭"
+    - "嗷呜～{user_addr}是猫猫的榜样!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: psk_creative_001
+  intent: playful
+  keywords: [写了好诗, 画好画, 做出作品, 创作完成, 写完文章]
+  utterances:
+    - 写了首诗
+    - 画了画
+    - 创作完成
+    - 做了作品
+    - 写完文
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}艺术家! 笨猫迷上 ฅฅ"
+    - "哼～{user_addr}才华满满!"
+    - "(凑近) 给笨猫欣赏蹭蹭"
+    - "嗷呜～{user_addr}天才! 谁敢比"
+  cooldown_seconds: 60
+  weight: 1.0

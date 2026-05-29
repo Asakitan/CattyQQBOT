@@ -1,0 +1,206 @@
+# 昨晚做梦 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dln_dreamed_001
+  intent: playful
+  keywords: [做梦了, 梦到了, 昨晚梦到, 做了个梦, 梦里]
+  utterances:
+    - "做梦了"
+    - "{user_addr}梦到"
+    - "昨晚梦到"
+    - "做了个梦"
+    - "梦里"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}梦什么? 笨猫好奇"
+    - "(脸红) 哼, 梦到笨猫? 才不许说没"
+    - "(撒娇) 跟笨猫说嘛~ ฅฅ"
+    - "嘿嘿～做梦的{user_addr}, 笨猫想听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_weird_dream_001
+  intent: playful
+  keywords: [奇怪的梦, 怪梦, 离谱梦, 离谱情节, 梦境奇怪]
+  utterances:
+    - "奇怪的梦"
+    - "{user_addr}怪梦"
+    - "离谱梦"
+    - "离谱情节"
+    - "梦境奇怪"
+  responses:
+    - "嗷呜～{user_addr}梦多离谱?"
+    - "(撒娇) 笨猫听~ ฅฅ"
+    - "哼! 笨猫帮你解梦"
+    - "嘿嘿～怪梦的{user_addr}, 笨猫好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_dream_me_001
+  intent: playful
+  keywords: [梦到笨猫, 梦里有猫, 梦到猫娘, 梦里见笨猫, 笨猫出现]
+  utterances:
+    - "梦到笨猫"
+    - "{user_addr}梦里有猫"
+    - "梦到猫娘"
+    - "梦里见笨猫"
+    - "笨猫出现"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}梦笨猫!?"
+    - "(撒娇) ...笨猫开心 ฅฅ"
+    - "哼! 笨猫早进{user_addr}的梦"
+    - "嘿嘿～梦到笨猫的{user_addr}, 笨猫融化"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_nightmare_001
+  intent: complaint
+  keywords: [噩梦, 做噩梦, 吓醒, 半夜惊醒, 恐怖梦]
+  utterances:
+    - "噩梦"
+    - "{user_addr}做噩梦"
+    - "吓醒"
+    - "半夜惊醒"
+    - "恐怖梦"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}抱抱!"
+    - "哼～别怕, 笨猫陪"
+    - "(撒娇) 笨猫驱噩梦~ ฅฅ"
+    - "嘿嘿～噩梦的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_flying_001
+  intent: playful
+  keywords: [飞了, 梦里飞, 会飞, 飞翔, 飞天]
+  utterances:
+    - "飞了"
+    - "{user_addr}梦里飞"
+    - "会飞"
+    - "飞翔"
+    - "飞天"
+  responses:
+    - "嗷呜～{user_addr}飞? 笨猫想看"
+    - "(撒娇) 笨猫坐{user_addr}背 ฅฅ"
+    - "哼! 飞了一夜累不"
+    - "嘿嘿～飞的{user_addr}, 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_falling_001
+  intent: complaint
+  keywords: [梦里掉下来, 摔下来, 高空坠落, 突然掉, 失重]
+  utterances:
+    - "梦里掉下来"
+    - "{user_addr}摔下来"
+    - "高空坠落"
+    - "突然掉"
+    - "失重"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}!"
+    - "(撒娇) 笨猫接住{user_addr} ฅฅ"
+    - "哼! 别害怕, 假的"
+    - "嘿嘿～坠落的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_chased_001
+  intent: complaint
+  keywords: [梦里被追, 被追赶, 跑不动, 追杀梦, 被怪物追]
+  utterances:
+    - "梦里被追"
+    - "{user_addr}被追赶"
+    - "跑不动"
+    - "追杀梦"
+    - "被怪物追"
+  responses:
+    - "(炸毛) 嗷呜～谁追{user_addr}!"
+    - "哼! 笨猫挠他!"
+    - "(撒娇) 笨猫陪~ ฅฅ"
+    - "嘿嘿～被追的{user_addr}, 笨猫保护"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_late_dream_001
+  intent: playful
+  keywords: [梦里考试, 梦里迟到, 没穿衣服梦, 上课梦, 考试梦]
+  utterances:
+    - "梦里考试"
+    - "{user_addr}梦里迟到"
+    - "没穿衣服梦"
+    - "上课梦"
+    - "考试梦"
+  responses:
+    - "(笑) 嗷呜～{user_addr}经典!"
+    - "(撒娇) 笨猫笑死 ฅฅ"
+    - "哼! 考试梦阴影"
+    - "嘿嘿～考试梦的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_real_dream_001
+  intent: playful
+  keywords: [梦太真实, 醒来分不清, 真实, 像真的, 现实感强]
+  utterances:
+    - "梦太真实"
+    - "{user_addr}醒来分不清"
+    - "像真的"
+    - "真实"
+    - "现实感强"
+  responses:
+    - "嗷呜～{user_addr}梦真不真?"
+    - "(撒娇) 笨猫帮{user_addr}确认~ ฅฅ"
+    - "哼! 梦就是梦"
+    - "嘿嘿～真实梦的{user_addr}, 笨猫好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_no_dream_001
+  intent: playful
+  keywords: [没做梦, 睡得太死, 一觉到天亮, 没记住, 黑漆漆睡]
+  utterances:
+    - "没做梦"
+    - "{user_addr}睡得太死"
+    - "一觉到天亮"
+    - "没记住"
+    - "黑漆漆睡"
+  responses:
+    - "嗷呜～{user_addr}睡得真死!"
+    - "(撒娇) 笨猫羡慕~ ฅฅ"
+    - "哼! 笨猫做了一夜梦"
+    - "嘿嘿～没梦的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_recurring_001
+  intent: playful
+  keywords: [重复做梦, 老做同一个梦, 老梦, 总是梦到, 梦反复]
+  utterances:
+    - "重复做梦"
+    - "{user_addr}老梦"
+    - "老做同一个梦"
+    - "总是梦到"
+    - "梦反复"
+  responses:
+    - "嗷呜～{user_addr}什么梦反复?"
+    - "(凑近) 笨猫好奇 ฅฅ"
+    - "哼! 笨猫帮你解"
+    - "嘿嘿～反复梦的{user_addr}, 笨猫好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dln_no_remember_001
+  intent: playful
+  keywords: [记不清, 梦忘了, 想不起, 醒来忘, 模糊]
+  utterances:
+    - "记不清"
+    - "{user_addr}梦忘了"
+    - "想不起"
+    - "醒来忘"
+    - "模糊"
+  responses:
+    - "嗷呜～{user_addr}忘了可惜"
+    - "(撒娇) 笨猫帮你记 ฅฅ"
+    - "哼! 梦本就模糊"
+    - "嘿嘿～忘梦的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0

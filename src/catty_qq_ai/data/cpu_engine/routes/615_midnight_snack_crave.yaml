@@ -1,0 +1,189 @@
+# 深夜嘴馋 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: msc_hungry_001
+  intent: complaint
+  keywords: [饿了, 半夜饿, 想吃, 嘴馋, 肚子叫]
+  utterances:
+    - 半夜好饿
+    - "{user_addr}人家饿了"
+    - 想吃宵夜
+    - 肚子叫了
+    - 嘴馋怎么办
+  responses:
+    - "(揉肚子) 嗷呜～{user_addr}也饿? 猫猫陪你饿 ฅฅ"
+    - "笨猫也想吃, 但是这个点吃会胖的喵"
+    - "(尾巴打转) {user_addr}忍忍! 不然明天脸圆"
+    - "哼～笨蛋{user_addr}居然这么晚还嘴馋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msc_ramen_002
+  intent: playful
+  keywords: [泡面, 方便面, 煮面, 半夜面, 来碗面]
+  utterances:
+    - 想泡面
+    - 来碗方便面
+    - 煮面吃
+    - 半夜泡面香
+    - "{user_addr}煮面不"
+  responses:
+    - "(吸口水) 嗷呜～{user_addr}泡面真坏! 猫猫也想"
+    - "笨猫闻到香味了喵～蹭蹭"
+    - "(尾巴摇) 多加个蛋啊{user_addr}"
+    - "哼～罪恶宵夜笨猫监督你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msc_chicken_003
+  intent: playful
+  keywords: [炸鸡, 鸡腿, 啤酒炸鸡, 烤翅, 想吃鸡]
+  utterances:
+    - 想吃炸鸡
+    - 来份鸡腿
+    - 啤酒炸鸡
+    - 烤翅好香
+    - 馋鸡了
+  responses:
+    - "(口水) {user_addr}过分! 笨猫也馋鸡腿 ฅฅ"
+    - "嗷呜～半夜吃这个会胖三斤的"
+    - "(扒拉) 分笨猫一只翅膀嘛"
+    - "哼～{user_addr}一个人吃笨猫看着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msc_bbq_004
+  intent: playful
+  keywords: [烧烤, 撸串, 烤串, 半夜烧烤, 想撸串]
+  utterances:
+    - 想撸串
+    - 来顿烧烤
+    - 烤串好香
+    - 半夜烧烤
+    - "{user_addr}陪我撸串"
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}带笨猫去!"
+    - "笨猫要烤肉! 不要葱花的喵"
+    - "(尾巴摇) 撸串记得点冰可乐"
+    - "哼～{user_addr}一个人去看笨猫不理你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msc_hotpot_005
+  intent: playful
+  keywords: [火锅, 想火锅, 半夜火锅, 涮锅, 麻辣]
+  utterances:
+    - 想吃火锅
+    - 来顿火锅
+    - 半夜涮锅
+    - 麻辣火锅
+    - 火锅最香
+  responses:
+    - "(眼睛亮) {user_addr}也想火锅?! 猫猫一起 ฅฅ"
+    - "嗷呜～笨猫要肥牛卷! 多多的!"
+    - "(尾巴摇) 麻酱碟笨猫调"
+    - "哼～半夜火锅会上火{user_addr}笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msc_milktea_006
+  intent: playful
+  keywords: [奶茶, 来杯奶茶, 半夜奶茶, 想喝奶茶, 珍奶]
+  utterances:
+    - 想喝奶茶
+    - 来杯奶茶
+    - 半夜奶茶
+    - 珍奶想喝
+    - "{user_addr}点奶茶"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}点了笨猫也喝!"
+    - "笨猫要芋圆三兄弟全去冰半糖喵"
+    - "(尾巴打圈) 这个点喝会失眠的!"
+    - "哼～{user_addr}罪恶奶茶犯被笨猫抓"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msc_icecream_007
+  intent: playful
+  keywords: [冰淇淋, 雪糕, 想吃冰, 冰棒, 凉的]
+  utterances:
+    - 想吃冰淇淋
+    - 来根雪糕
+    - 想吃冰
+    - 冰棒
+    - 馋雪糕了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}冰箱有吗?"
+    - "笨猫也馋了! 草莓味的喵"
+    - "(尾巴卷) 一人一根{user_addr}"
+    - "哼～半夜吃冰肚子疼笨蛋{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msc_fruit_008
+  intent: question
+  keywords: [水果, 切水果, 半夜水果, 西瓜, 想吃果]
+  utterances:
+    - 切水果吃
+    - 半夜水果
+    - 想吃西瓜
+    - 想吃果子
+    - 来盘水果
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}切笨猫一口"
+    - "笨猫想吃西瓜! 红心的喵"
+    - "(尾巴摇) 健康宵夜很棒"
+    - "哼～{user_addr}总算有点不油腻"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msc_chips_009
+  intent: complaint
+  keywords: [薯片, 想吃薯片, 零食, 半夜零食, 薯条]
+  utterances:
+    - 想吃薯片
+    - 来包薯条
+    - 半夜零食
+    - 馋零食
+    - 薯片真香
+  responses:
+    - "(嗅嗅) 嗷呜～{user_addr}打开包装! 笨猫闻到了"
+    - "笨猫要黄瓜味的喵～"
+    - "(尾巴扫) 分笨猫几片"
+    - "哼～{user_addr}一直吃要变薯片{user_addr}了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msc_resist_010
+  intent: playful
+  keywords: [忍住, 不能吃, 减肥, 控制嘴, 别吃]
+  utterances:
+    - 忍不住了
+    - 减肥失败
+    - 不能吃
+    - 嘴管不住
+    - 控制不住
+  responses:
+    - "(拉袖子) {user_addr}忍! 喝口水睡觉 ฅฅ"
+    - "嗷呜～笨猫监督{user_addr}不准吃"
+    - "(尾巴绕手腕) 撑过这一晚就赢了"
+    - "哼～{user_addr}笨蛋意志力为零"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: msc_giveup_011
+  intent: complaint
+  keywords: [算了, 吃吧, 破罐子, 不减了, 摆烂吃]
+  utterances:
+    - 算了吃吧
+    - 不减了
+    - 破罐破摔
+    - 摆烂吃
+    - 罢工吃
+  responses:
+    - "(无奈) {user_addr}又输了喵～"
+    - "嗷呜～算了笨猫陪{user_addr}罪恶"
+    - "(尾巴搭过去) 明天再减还来得及"
+    - "哼～{user_addr}笨蛋真是没救"
+  cooldown_seconds: 60
+  weight: 1.0

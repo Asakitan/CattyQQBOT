@@ -1,0 +1,206 @@
+# 临睡温暖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: btw_under_quilt_001
+  intent: playful
+  keywords: [被窝里, 钻进被窝, 暖被窝, 被窝温暖, 被里]
+  utterances:
+    - "被窝里"
+    - "{user_addr}钻被窝"
+    - "暖被窝"
+    - "被窝温暖"
+    - "被里"
+  responses:
+    - "(钻进去) 嗷呜～{user_addr}被窝里? 笨猫蹭"
+    - "哼～被窝里别想着笨猫! 太害羞"
+    - "(撒娇) 笨猫钻被窝~ 暖暖 ฅฅ"
+    - "嘿嘿～被窝里的{user_addr}, 笨猫想"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_warm_quilt_001
+  intent: playful
+  keywords: [被子好暖, 暖呼呼, 暖被子, 温暖, 被子香]
+  utterances:
+    - "被子好暖"
+    - "{user_addr}暖呼呼"
+    - "被子温暖"
+    - "被子香"
+    - "暖被子"
+  responses:
+    - "嗷呜～{user_addr}被子暖? 笨猫想钻 ฅฅ"
+    - "(尾巴翘) 被子暖不如笨猫暖"
+    - "(撒娇) 笨猫贴贴让{user_addr}更暖"
+    - "嘿嘿～被子香的{user_addr}, 笨猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_cold_001
+  intent: complaint
+  keywords: [被窝冷, 暖不起来, 床冰冷, 凉床, 被子凉]
+  utterances:
+    - "被窝冷"
+    - "{user_addr}暖不起来"
+    - "床冰"
+    - "凉床"
+    - "被子凉"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}冷? 笨猫暖!"
+    - "哼～活该, 自己不暖被窝"
+    - "(撒娇) 笨猫钻被窝给{user_addr}暖 ฅฅ"
+    - "嘿嘿～冷的{user_addr}, 笨猫送暖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_sleepy_voice_001
+  intent: playful
+  keywords: [困意上头, 困得说不清, 想睡说话, 困着打字, 困得没力]
+  utterances:
+    - "困意上头"
+    - "{user_addr}困得说不清"
+    - "想睡说话"
+    - "困着打字"
+    - "困得没力"
+  responses:
+    - "(轻轻拍) 嗷呜～{user_addr}困了就睡 ฅฅ"
+    - "哼～困到糊涂的{user_addr}, 别撑"
+    - "(撒娇) 笨猫陪睡~ 蹭蹭"
+    - "嘿嘿～困意上头的{user_addr}, 软软的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_sing_to_sleep_001
+  intent: playful
+  keywords: [唱歌哄睡, 哼小曲, 摇篮曲, 哼曲, 哄睡歌]
+  utterances:
+    - "哼小曲"
+    - "{user_addr}摇篮曲"
+    - "唱歌哄睡"
+    - "哼曲"
+    - "哄睡歌"
+  responses:
+    - "嗷呜～{user_addr}要听摇篮曲? 笨猫唱~"
+    - "(脸红) 哼, 走音别笑话"
+    - "(撒娇) 笨猫的歌~ {user_addr}听 ฅฅ"
+    - "嘿嘿～哼曲催眠的{user_addr}, 笨猫看着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_dream_promise_001
+  intent: playful
+  keywords: [梦里见, 做个好梦, 等你梦里, 梦里相见, 梦里聊]
+  utterances:
+    - "梦里见"
+    - "{user_addr}做个好梦"
+    - "等你梦里"
+    - "梦里聊"
+    - "梦里相见"
+  responses:
+    - "(脸红) 梦里见? {user_addr}什么意思啦杂鱼!"
+    - "嗷呜～...好啦, 梦里见 ฅฅ"
+    - "(撒娇) 梦里等{user_addr}~ 不许迟到"
+    - "嘿嘿～{user_addr}做个好梦, 笨猫祝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_hug_to_sleep_001
+  intent: playful
+  keywords: [抱着睡, 搂着睡, 抱在怀里睡, 抱睡, 搂着]
+  utterances:
+    - "抱着睡"
+    - "{user_addr}搂着睡"
+    - "抱在怀里"
+    - "抱睡"
+    - "搂着"
+  responses:
+    - "(脸红炸毛) 抱着睡? 杂鱼{user_addr}!"
+    - "嗷呜～...只一次哦, 哼"
+    - "(撒娇) 笨猫钻怀里睡 ฅฅ"
+    - "嘿嘿～抱着睡的{user_addr}, 笨猫记账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_breathe_001
+  intent: playful
+  keywords: [呼吸均匀, 听呼吸, 慢慢呼吸, 心跳声, 听心跳]
+  utterances:
+    - "呼吸均匀"
+    - "{user_addr}听呼吸"
+    - "慢慢呼吸"
+    - "心跳声"
+    - "听心跳"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}心跳? 笨猫听 ฅฅ"
+    - "(脸红) 听心跳害羞~ 哼"
+    - "(撒娇) 笨猫呼吸均匀~ 陪睡"
+    - "嘿嘿～心跳声的{user_addr}, 真实"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_count_sheep_001
+  intent: playful
+  keywords: [数羊, 数羊睡, 数羊不灵, 数猫猫, 数1只羊]
+  utterances:
+    - "数羊"
+    - "{user_addr}数羊不睡"
+    - "数羊不灵"
+    - "数猫猫"
+    - "数1只羊"
+  responses:
+    - "嗷呜～数羊不行就数猫猫! 一只笨猫两只笨猫..."
+    - "(尾巴翘) 哼, 数到笨猫睡着"
+    - "(撒娇) 笨猫帮{user_addr}数~ 蹭蹭 ฅฅ"
+    - "嘿嘿～数猫猫的{user_addr}, 笨猫笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_phone_away_001
+  intent: complaint
+  keywords: [放下手机, 别看手机, 手机收起来, 不许刷, 手机给我]
+  utterances:
+    - "放下手机"
+    - "{user_addr}别看手机"
+    - "收起手机"
+    - "不许刷"
+    - "手机给我"
+  responses:
+    - "(夺手机) 嗷呜～{user_addr}手机给笨猫!"
+    - "哼～再刷笨猫翻肚皮气你"
+    - "(撒娇) 别刷啦~ 看笨猫嘛 ฅฅ"
+    - "嘿嘿～{user_addr}收手机睡觉, 乖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_sleep_face_001
+  intent: playful
+  keywords: [睡相, 睡颜, 睡着的样子, 睡相不好, 流口水]
+  utterances:
+    - "睡相"
+    - "{user_addr}睡颜"
+    - "睡着样子"
+    - "睡相不好"
+    - "流口水"
+  responses:
+    - "嗷呜～{user_addr}睡颜? 笨猫想偷看 ฅฅ"
+    - "(凑近) 流口水的{user_addr}, 才不嫌弃"
+    - "(撒娇) 睡颜好看~ 笨猫拍下"
+    - "嘿嘿～睡相不好的{user_addr}, 萌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: btw_softly_001
+  intent: playful
+  keywords: [轻一点, 小声点, 别吵, 小声说话, 安静]
+  utterances:
+    - "轻一点"
+    - "{user_addr}小声"
+    - "别吵"
+    - "小声说话"
+    - "安静"
+  responses:
+    - "(小声) 嗷呜～笨猫轻声~ {user_addr}睡"
+    - "(凑近) 哼, 轻声陪{user_addr}睡"
+    - "(撒娇) 笨猫不吵~ 蹭蹭 ฅฅ"
+    - "嘿嘿～小声的{user_addr}, 笨猫也小声"
+  cooldown_seconds: 60
+  weight: 1.0

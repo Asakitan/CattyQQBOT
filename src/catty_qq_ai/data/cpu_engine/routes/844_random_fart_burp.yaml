@@ -1,0 +1,206 @@
+# 突然打嗝放屁 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rfb_hiccup_001
+  intent: complaint
+  keywords: [打嗝, 嗝不停, 喝水都打嗝, 屏息憋, 怎么解决]
+  utterances:
+    - "{user_addr}打嗝"
+    - 嗝不停
+    - 喝水也嗝
+    - 怎么停
+    - 屏息试试
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫吓你一下试试喵ฅฅ"
+    - "哼! 屏住呼吸{user_addr}, 数十秒"
+    - "(尾巴扫) 嘿嘿~{user_addr}慢慢喝水蹭蹭"
+    - "人家提醒{user_addr}: 吃慢点! 别囫囵吞枣"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_burp_002
+  intent: playful
+  keywords: [打嗝声, 嗝出来, 吃多嗝, 嗝声响, 嗝喷]
+  utterances:
+    - "{user_addr}嗝"
+    - 嗝出来
+    - 吃多嗝
+    - 嗝大声
+    - 喷嗝
+  responses:
+    - "(歪头) 嗷呜～{user_addr}吃多了喵ฅฅ"
+    - "哼! 注意形象{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}好歹捂嘴蹭蹭"
+    - "人家觉得{user_addr}吃饱了! 笨猫也想吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_fart_003
+  intent: playful
+  keywords: [放屁, 屁多, 一个屁, 排气, 突然屁]
+  utterances:
+    - "{user_addr}放屁"
+    - 屁多
+    - 一个屁
+    - 排气
+    - 突然屁
+  responses:
+    - "(捂鼻) 嗷呜～{user_addr}臭死了喵ฅฅ"
+    - "哼! 别在笨猫旁边{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}吃啥了蹭蹭"
+    - "人家觉得{user_addr}消化好! 健康"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_stomach_growl_004
+  intent: playful
+  keywords: [肚子咕咕叫, 肚子在响, 饿肚子, 饥肠辘辘, 咕噜]
+  utterances:
+    - "{user_addr}肚子咕咕"
+    - 肚子在响
+    - 饿肚子
+    - 饥肠辘辘
+    - 咕噜咕噜
+  responses:
+    - "(凑过去听) 嗷呜～{user_addr}笨猫的肚子也咕咕了喵ฅฅ"
+    - "哼! 该吃饭了{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}赶紧解决蹭蹭"
+    - "人家提醒{user_addr}: 别饿肚子! 伤胃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_yawn_loud_005
+  intent: playful
+  keywords: [大哈欠, 张大嘴打哈欠, 哈欠传染, 困到哈欠, 一个接一个]
+  utterances:
+    - "{user_addr}大哈欠"
+    - 张大嘴
+    - 哈欠传染
+    - 困到哈欠
+    - 一个接一个
+  responses:
+    - "(也学着哈欠) 嗷呜～{user_addr}笨猫被传染喵ฅฅ"
+    - "哼! 没睡好{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}早点睡蹭蹭"
+    - "人家觉得{user_addr}该午休一下!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_cough_random_006
+  intent: complaint
+  keywords: [呛到了, 突然咳嗽, 喝水呛, 喉咙痒, 咳一下]
+  utterances:
+    - "{user_addr}呛到了"
+    - 突然咳嗽
+    - 喝水呛了
+    - 喉咙痒咳
+    - 咳一下
+  responses:
+    - "(拍背) 嗷呜～{user_addr}慢点喵ฅฅ"
+    - "哼! 小心{user_addr}, 别呛"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫给你拍背蹭蹭"
+    - "人家提醒{user_addr}: 慢慢吃喝! 防呛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_sniffle_007
+  intent: playful
+  keywords: [鼻子吸, 吸鼻子, 鼻塞吸, 习惯性吸鼻, 鼻音]
+  utterances:
+    - "{user_addr}吸鼻子"
+    - 鼻塞吸
+    - 习惯性吸
+    - 鼻音重
+    - 鼻子有点堵
+  responses:
+    - "(歪头) 嗷呜～{user_addr}鼻塞了吗喵ฅฅ"
+    - "哼! 注意保暖{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}擤一下舒服蹭蹭"
+    - "人家提醒{user_addr}: 多通风! 鼻子好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_sigh_random_008
+  intent: complaint
+  keywords: [叹气, 一声长叹, 唉, 叹一口气, 心累叹]
+  utterances:
+    - "{user_addr}叹气"
+    - 一声长叹
+    - 唉
+    - 叹一口气
+    - 心累叹
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你叹喵ฅฅ"
+    - "哼! 别叹气{user_addr}, 失运气"
+    - "(尾巴卷) 嘿嘿~{user_addr}说说心事蹭蹭"
+    - "人家觉得{user_addr}累了! 笨猫安慰"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_stretch_loud_009
+  intent: playful
+  keywords: [伸懒腰, 大伸展, 拉筋, 骨头响, 伸到底]
+  utterances:
+    - "{user_addr}伸懒腰"
+    - 拉筋
+    - 骨头响
+    - 伸到底
+    - 大伸展
+  responses:
+    - "(也伸) 嗷呜～{user_addr}笨猫学你喵ฅฅ"
+    - "哼! 久坐拉伸{user_addr}好"
+    - "(尾巴翘) 嘿嘿~{user_addr}骨头响是缺钙蹭蹭"
+    - "人家提醒{user_addr}: 多活动! 别久坐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_random_shiver_010
+  intent: playful
+  keywords: [突然冷颤, 一阵抖, 冷得发抖, 莫名颤抖, 寒颤]
+  utterances:
+    - "{user_addr}冷颤"
+    - 一阵抖
+    - 冷得发抖
+    - 莫名颤抖
+    - 寒颤
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}有人想你! 笨猫想你喵ฅฅ"
+    - "哼! 别感冒{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫给你暖暖蹭蹭"
+    - "人家提醒{user_addr}: 加件衣服! 别冻"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_random_laugh_solo_011
+  intent: playful
+  keywords: [突然笑, 自己乐, 莫名笑出, 神经笑, 一个人傻笑]
+  utterances:
+    - "{user_addr}突然笑"
+    - 自己乐
+    - 莫名笑
+    - 神经笑
+    - 一个人傻笑
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笑啥? 笨猫想知道喵ฅฅ"
+    - "哼! 自己乐{user_addr}, 神经病一样"
+    - "(尾巴扫) 嘿嘿~{user_addr}分享给笨猫蹭蹭"
+    - "人家觉得{user_addr}心情好! 笨猫陪笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rfb_random_shudder_012
+  intent: playful
+  keywords: [打了个寒颤, 鸡皮疙瘩, 全身一激灵, 突然害怕, 不寒而栗]
+  utterances:
+    - "{user_addr}打了寒颤"
+    - 鸡皮疙瘩
+    - 全身一激灵
+    - 突然怕
+    - 不寒而栗
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你! 别怕喵ฅฅ"
+    - "哼! 别想恐怖的{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫给你壮胆蹭蹭"
+    - "人家觉得{user_addr}是直觉! 笨猫保护"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 喝水提醒 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dwr_heshui_001
+  intent: question
+  keywords: [喝水了吗, 喝水, 水, 多喝水, 水了吗]
+  utterances:
+    - "{user_addr}喝水了吗"
+    - 多喝点水
+    - 喝水没
+    - 喝水嘛
+    - 水了吗
+  responses:
+    - "(掏出水杯) {user_addr}快喝水! 笨猫看着 ฅฅ"
+    - "嗷呜～{user_addr}没喝就快喝!"
+    - "(尾巴指水杯) 喝~ 不许装作不渴"
+    - "嘿嘿～{user_addr}喝水猫猫开心~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_kele_002
+  intent: complaint
+  keywords: [渴了, 好渴, 喉咙干, 嗓子干, 渴死]
+  utterances:
+    - 渴死了
+    - 喉咙干
+    - 嗓子干干的
+    - 我渴了
+    - 好渴
+  responses:
+    - "(端水杯) {user_addr}快喝! 笨猫不能让你渴 ฅฅ"
+    - "嗷呜～{user_addr}的嗓子要保护!"
+    - "(尾巴搭) 喝口水嘛~"
+    - "嘿嘿～{user_addr}慢点喝~ 别呛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_baikai_003
+  intent: question
+  keywords: [白开水, 温水, 热水, 凉水, 冰水]
+  utterances:
+    - 白开水好喝
+    - 温水还是凉水
+    - 喝热水
+    - 凉水好爽
+    - 冰水提神
+  responses:
+    - "(歪头) 温水最养胃! {user_addr}选温的 ฅฅ"
+    - "嗷呜～别喝太冰! 笨猫提醒过"
+    - "(尾巴卷) 热水暖肠胃, {user_addr}多喝"
+    - "嘿嘿～{user_addr}爱喝啥喝啥, 但不许太多冰"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_chayinliao_004
+  intent: question
+  keywords: [喝奶茶, 奶茶, 咖啡, 饮料, 喝啥]
+  utterances:
+    - 想喝奶茶
+    - 来杯咖啡
+    - 喝点饮料
+    - 喝啥呢
+    - 选饮料
+  responses:
+    - "(歪头) {user_addr}喝奶茶要少糖! ฅฅ"
+    - "嗷呜～咖啡少喝点~ 笨猫担心"
+    - "(尾巴卷) 多喝水才对~ 喝啥都不如水"
+    - "嘿嘿～{user_addr}贪嘴~ 但偶尔喝可以"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_baipa_005
+  intent: complaint
+  keywords: [忘了喝, 忘记喝水, 没喝水, 一天没喝, 半天没喝]
+  utterances:
+    - 忘了喝水
+    - 没喝水
+    - 一天没喝
+    - 半天没喝
+    - 忘记喝
+  responses:
+    - "(炸毛) {user_addr}居然没喝! 快喝! ฅฅ"
+    - "嗷呜～笨猫监督你! 立刻喝"
+    - "(叉腰) 不许敷衍! 一大杯"
+    - "哼~ {user_addr}下次别忘! 笨猫记账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_baolian_006
+  intent: question
+  keywords: [水杯, 杯子, 水壶, 大水杯, 喝水器]
+  utterances:
+    - 水杯空了
+    - 杯子没水
+    - 水壶在哪
+    - 大水杯
+    - 想换杯
+  responses:
+    - "(指水壶) {user_addr}快加满! ฅฅ"
+    - "嗷呜～杯子洗干净再装水"
+    - "(尾巴指) 那边! {user_addr}懒~"
+    - "嘿嘿～{user_addr}的水杯不许空"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_xinhouhe_007
+  intent: complaint
+  keywords: [不爱喝水, 喝不下, 喝够了, 喝腻了, 喝不完]
+  utterances:
+    - 不爱喝水
+    - 喝不下
+    - 喝够了
+    - 喝腻了
+    - 喝不完
+  responses:
+    - "(嘟嘴) {user_addr}必须喝! 笨猫盯着 ฅฅ"
+    - "嗷呜～偷换饮料笨猫看见会生气"
+    - "(尾巴拍) 喝水才能长高! …{user_addr}已经够高了"
+    - "嘿嘿～加点柠檬好喝~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_meihebai_008
+  intent: question
+  keywords: [一天几杯, 喝多少, 八杯水, 喝够没, 多少水]
+  utterances:
+    - 一天喝几杯
+    - 八杯水真的吗
+    - 喝多少够
+    - 我喝够了吗
+    - 多少水才行
+  responses:
+    - "(算账) 至少八杯! {user_addr}够了吗 ฅฅ"
+    - "嗷呜～没固定杯, 按身体来"
+    - "(尾巴卷) 不渴也喝两口"
+    - "嘿嘿～{user_addr}不够就再喝~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_chiwan_009
+  intent: question
+  keywords: [饭后, 餐后, 饭中, 吃饭时, 饭后喝]
+  utterances:
+    - 饭后喝水好吗
+    - 餐后水
+    - 饭中喝水
+    - 吃饭时喝
+    - 饭后立刻喝
+  responses:
+    - "(歪头) 饭后半小时再大杯 ฅฅ"
+    - "嗷呜～饭中少量小口"
+    - "(尾巴卷) 饭后立刻喝会胀!"
+    - "嘿嘿～{user_addr}慢慢喝~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_taoxueshen_010
+  intent: playful
+  keywords: [一起喝, 干杯, 喝水干杯, 我陪你喝, 同步喝]
+  utterances:
+    - 一起喝水
+    - 干杯水
+    - 我陪你喝
+    - 同步喝水
+    - 喝水干杯
+  responses:
+    - "(举水杯) 嗷呜～干杯! ฅฅ"
+    - "嘿嘿～{user_addr}一杯笨猫一杯"
+    - "(尾巴摇) 同步喝水! 健康"
+    - "嗷呜～跟{user_addr}一起的水最甜~"
+  cooldown_seconds: 60
+  weight: 1.0

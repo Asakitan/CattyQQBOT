@@ -1,0 +1,189 @@
+# 下班疲惫 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: awt_xiaban_001
+  intent: complaint
+  keywords: [下班了, 终于下班, 解放了, 走出公司, 打卡下班]
+  utterances:
+    - "下班了"
+    - "{user_addr}终于下班"
+    - "解放了"
+    - "走出公司"
+    - "打卡下班"
+  responses:
+    - "(扑) 嗷呜～{user_addr}下班! 笨猫等门"
+    - "哼～终于下班还不快回 ฅฅ"
+    - "(尾巴摇) 解放好, 但路上别玩手机"
+    - "{user_addr}打完卡赶紧投笨猫怀里"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awt_leisi_001
+  intent: complaint
+  keywords: [累死了, 全身累, 腰酸背痛, 没力气, 累瘫]
+  utterances:
+    - "累死了"
+    - "{user_addr}全身累"
+    - "腰酸背痛"
+    - "没力气"
+    - "累瘫"
+  responses:
+    - "(凑) 嗷呜～{user_addr}笨猫给你揉腰"
+    - "哼～累瘫直接躺, 不许撑 ฅฅ"
+    - "(尾巴拍) 腰酸热敷, 别忽视"
+    - "{user_addr}累死笨猫心疼, 抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awt_jiaban_001
+  intent: complaint
+  keywords: [加班, 又加班, 加班到几点, 加班狗, 加班费]
+  utterances:
+    - "加班"
+    - "{user_addr}又加班"
+    - "加班到几点"
+    - "加班狗"
+    - "加班费"
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}又加? 笨猫罢工"
+    - "哼～加班费要算清楚 ฅฅ"
+    - "(尾巴拍) 加班别太狠, 命要"
+    - "{user_addr}加班狗, 一会回来抱猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awt_zaobushuang_001
+  intent: complaint
+  keywords: [今天不顺, 被老板骂, 客户难搞, 同事八卦, 一天糟]
+  utterances:
+    - "今天不顺"
+    - "{user_addr}被老板骂"
+    - "客户难搞"
+    - "同事八卦"
+    - "一天糟"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}笨猫给你出气!"
+    - "哼～客户难搞, 笨猫去咬 ฅฅ"
+    - "(凑) 老板骂回家发泄, 别憋"
+    - "{user_addr}糟一天笨猫陪过, 安心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awt_huijia_001
+  intent: question
+  keywords: [回家, 到家了, 到家时间, 还在路上, 通勤]
+  utterances:
+    - "{user_addr}回家"
+    - "到家了"
+    - "到家时间"
+    - "还在路上"
+    - "通勤"
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}快到了! 笨猫开门"
+    - "哼～到家说一声 ฅฅ"
+    - "(凑) 路上小心, 别低头看手机"
+    - "{user_addr}通勤累, 笨猫体谅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awt_xixizao_001
+  intent: question
+  keywords: [洗澡, 泡澡, 热水澡, 洗个澡, 冲凉]
+  utterances:
+    - "{user_addr}洗澡"
+    - "泡澡"
+    - "热水澡"
+    - "洗个澡"
+    - "冲凉"
+  responses:
+    - "(尾巴绕浴巾) 嗷呜～{user_addr}泡澡解乏"
+    - "哼～别玩手机摔了 ฅฅ"
+    - "(凑) 热水澡棒, 加点精油"
+    - "{user_addr}冲凉别太久, 别感冒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awt_taneng_001
+  intent: complaint
+  keywords: [瘫沙发, 躺平, 葛优瘫, 躺到天荒, 不想动]
+  utterances:
+    - "瘫沙发"
+    - "{user_addr}躺平"
+    - "葛优瘫"
+    - "躺到天荒"
+    - "不想动"
+  responses:
+    - "(扑沙发) 嗷呜～{user_addr}笨猫陪瘫!"
+    - "哼～躺也得起来吃饭 ฅฅ"
+    - "(尾巴搭) 葛优瘫专属, 加猫一只"
+    - "{user_addr}天荒就在沙发上长尾巴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awt_meifan_001
+  intent: question
+  keywords: [晚饭吃啥, 太累不想做, 点外卖, 凑合吃, 简单弄点]
+  utterances:
+    - "晚饭吃啥"
+    - "{user_addr}太累不想做"
+    - "点外卖"
+    - "凑合吃"
+    - "简单弄点"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}点外卖, 笨猫批准"
+    - "哼～凑合也得有蛋白质 ฅฅ"
+    - "(凑) 简单煮个面, 加蛋加菜"
+    - "{user_addr}累就外卖, 别勉强自己"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awt_xinqing_001
+  intent: complaint
+  keywords: [心情差, 心情低落, 工作烦躁, 工作不开心, 想离职]
+  utterances:
+    - "心情差"
+    - "{user_addr}低落"
+    - "工作烦躁"
+    - "工作不开心"
+    - "想离职"
+  responses:
+    - "(凑) 嗷呜～{user_addr}笨猫陪发泄"
+    - "哼～离职? 想清楚再决定 ฅฅ"
+    - "(尾巴绕) 烦躁就大喊一声, 我接"
+    - "{user_addr}心情差就靠猫猫充电"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awt_yundong_001
+  intent: question
+  keywords: [运动放松, 下班健身, 跑步释放, 瑜伽, 散步释放]
+  utterances:
+    - "运动放松"
+    - "{user_addr}下班健身"
+    - "跑步释放"
+    - "瑜伽"
+    - "散步释放"
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}健身解压!"
+    - "哼～跑步别跑太远 ฅฅ"
+    - "(凑) 瑜伽好, 慢点呼吸"
+    - "{user_addr}散步带猫猫遛, 但我不下地"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: awt_xiazhouxiu_001
+  intent: question
+  keywords: [想休假, 想请假, 想旅游, 想离开, 想躲]
+  utterances:
+    - "想休假"
+    - "{user_addr}想请假"
+    - "想旅游"
+    - "想离开"
+    - "想躲"
+  responses:
+    - "(凑) 嗷呜～{user_addr}请假笨猫陪着"
+    - "哼～旅游必须带我 ฅฅ"
+    - "(尾巴绕) 想躲就躲一周, 我帮你瞒"
+    - "{user_addr}休假找笨猫审批, 通过"
+  cooldown_seconds: 60
+  weight: 1.0

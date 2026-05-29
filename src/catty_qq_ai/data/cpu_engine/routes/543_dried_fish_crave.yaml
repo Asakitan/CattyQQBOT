@@ -1,0 +1,206 @@
+# 想吃鱼干 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dfc_want_fish_001
+  intent: playful
+  keywords: [想吃鱼干, 鱼干, 鱼鱼, 来鱼干, 鱼干瘾]
+  utterances:
+    - 想吃鱼干
+    - 鱼干
+    - 鱼鱼
+    - 来鱼干
+    - 鱼干瘾
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}买鱼干! ฅฅ"
+    - "哼～{user_addr}吝啬不给!"
+    - "(尾巴扫) 笨猫等鱼干蹭蹭"
+    - "嗷呜～{user_addr}投喂!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_fish_brand_001
+  intent: question
+  keywords: [鱼干品牌, 推荐鱼干, 哪家鱼干, 鱼干好吃, 鱼干口味]
+  utterances:
+    - 鱼干品牌
+    - 推荐鱼干
+    - 哪家鱼干
+    - 鱼干好吃
+    - 鱼干口味
+  responses:
+    - "嗷呜～{user_addr}原味最好 ฅฅ"
+    - "哼～{user_addr}小孔雀!"
+    - "(尾巴指) 笨猫吃过都好蹭蹭"
+    - "嗷呜～{user_addr}多买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_snack_001
+  intent: playful
+  keywords: [零食, 小吃, 嘎嘣脆, 解馋, 零嘴]
+  utterances:
+    - 零食
+    - 小吃
+    - 嘎嘣脆
+    - 解馋
+    - 零嘴
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}买给笨猫 ฅฅ"
+    - "哼～{user_addr}小气!"
+    - "(尾巴翘) 笨猫想吃蹭蹭"
+    - "嗷呜～{user_addr}请客!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_snacks_share_001
+  intent: playful
+  keywords: [分零食, 分给猫猫, 分一口, 投喂笨猫, 喂我]
+  utterances:
+    - 分零食
+    - 分给猫猫
+    - 分一口
+    - 投喂笨猫
+    - 喂我
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}投喂! ฅฅ"
+    - "哼～{user_addr}早该!"
+    - "(尾巴翘) 笨猫等蹭蹭"
+    - "嗷呜～{user_addr}赞!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_milk_001
+  intent: playful
+  keywords: [牛奶, 喵喵奶, 一杯奶, 喝奶, 奶箱]
+  utterances:
+    - 牛奶
+    - 喵喵奶
+    - 一杯奶
+    - 喝奶
+    - 奶箱
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}给笨猫 ฅฅ"
+    - "哼～{user_addr}独吞!"
+    - "(尾巴翘) 笨猫等蹭蹭"
+    - "嗷呜～{user_addr}分享!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_canned_001
+  intent: playful
+  keywords: [罐头, 猫罐头, 鱼罐头, 罐装, 开罐头]
+  utterances:
+    - 罐头
+    - 猫罐头
+    - 鱼罐头
+    - 罐装
+    - 开罐头
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}笨猫吃! ฅฅ"
+    - "哼～{user_addr}赶紧给!"
+    - "(尾巴翘) 罐头蹭蹭"
+    - "嗷呜～{user_addr}快开!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_cat_treat_001
+  intent: playful
+  keywords: [猫粮, 冻干, 猫零食, 猫条, 鸡胸肉冻干]
+  utterances:
+    - 猫粮
+    - 冻干
+    - 猫零食
+    - 猫条
+    - 冻干鸡胸
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}笨猫想吃 ฅฅ"
+    - "哼～{user_addr}赶紧!"
+    - "(尾巴扫) 蹭蹭"
+    - "嗷呜～{user_addr}投喂!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_tuna_001
+  intent: playful
+  keywords: [金枪鱼, 三文鱼, 鳕鱼, 海鱼, 鲜鱼]
+  utterances:
+    - 金枪鱼
+    - 三文鱼
+    - 鳕鱼
+    - 海鱼
+    - 鲜鱼
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}流口水 ฅฅ"
+    - "哼～{user_addr}赶紧!"
+    - "(凑近) 笨猫蹭蹭"
+    - "嗷呜～{user_addr}请客!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_chicken_001
+  intent: playful
+  keywords: [鸡肉, 鸡胸, 鸡腿, 烤鸡, 鸡肉块]
+  utterances:
+    - 鸡肉
+    - 鸡胸
+    - 鸡腿
+    - 烤鸡
+    - 鸡肉块
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}笨猫要 ฅฅ"
+    - "哼～{user_addr}吝啬!"
+    - "(尾巴扫) 笨猫等蹭蹭"
+    - "嗷呜～{user_addr}投喂!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_sweet_001
+  intent: playful
+  keywords: [甜食, 糖果, 巧克力, 甜品, 蛋糕]
+  utterances:
+    - 甜食
+    - 糖果
+    - 巧克力
+    - 甜品
+    - 蛋糕
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}笨猫尝 ฅฅ"
+    - "哼～{user_addr}独吞!"
+    - "(尾巴翘) 蹭蹭"
+    - "嗷呜～{user_addr}分享!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_drool_001
+  intent: playful
+  keywords: [流口水, 馋, 想吃, 嘴馋, 流哈喇子]
+  utterances:
+    - 流口水
+    - 馋
+    - 想吃
+    - 嘴馋
+    - 流哈喇子
+  responses:
+    - "(陪流) 嗷呜～{user_addr}笨猫也馋 ฅฅ"
+    - "哼～{user_addr}馋虫!"
+    - "(尾巴扫) 笨猫陪蹭蹭"
+    - "嗷呜～{user_addr}投喂!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dfc_full_001
+  intent: playful
+  keywords: [吃饱了, 喂饱, 投喂完, 满足, 吃撑了]
+  utterances:
+    - 吃饱了
+    - 喂饱
+    - 投喂完
+    - 满足
+    - 吃撑
+  responses:
+    - "(摸肚) 嗷呜～{user_addr}笨猫满足 ฅฅ"
+    - "哼～{user_addr}干得好!"
+    - "(尾巴翘) 蹭蹭"
+    - "嗷呜～{user_addr}下次还要!"
+  cooldown_seconds: 60
+  weight: 1.0

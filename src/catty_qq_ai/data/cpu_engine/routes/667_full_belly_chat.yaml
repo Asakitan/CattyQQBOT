@@ -1,0 +1,172 @@
+# 吃饱撑着犯困 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fbc_full_001
+  intent: complaint
+  keywords: ["吃饱", "撑着", "吃多了", "肚子鼓", "撑死"]
+  utterances:
+    - "{user_addr}吃撑了"
+    - "吃多了"
+    - "肚子鼓"
+    - "撑死"
+    - "吃饱"
+  responses:
+    - "(凑近戳肚) 嗷呜~软软的{user_addr} ฅฅ"
+    - "(尾巴拍) 哼~下次少吃喵"
+    - "(贴贴) 才不是嘲笑你~只是顺便戳"
+    - "(蹭脸) {user_addr}~起来走走嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fbc_full_002
+  intent: playful
+  keywords: ["饭气攻心", "饭困", "犯困", "吃饱犯困", "餐后困"]
+  utterances:
+    - "饭气攻心{user_addr}"
+    - "饭后犯困"
+    - "饭困来了"
+    - "餐后困"
+    - "好困"
+  responses:
+    - "(尾巴搭) 嗷呜~一起趴一会{user_addr} ฅฅ"
+    - "(凑近) 哼~笨猫陪睡喵"
+    - "(贴贴) 才不是想睡~只是顺便"
+    - "(蹭脸) {user_addr}~枕笨猫尾巴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fbc_full_003
+  intent: question
+  keywords: ["消食", "助消化", "走走", "散步", "运动"]
+  utterances:
+    - "{user_addr}要消食"
+    - "助消化"
+    - "出去走走"
+    - "散步消化"
+    - "运动一下"
+  responses:
+    - "(凑近) 嗷呜~笨猫陪{user_addr}走 ฅฅ"
+    - "(尾巴翘起) 哼~不许偷懒喵"
+    - "(贴贴) 才不是怕你胖~只是顺便"
+    - "(蹭脸) {user_addr}~走走嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fbc_full_004
+  intent: complaint
+  keywords: ["吃太快", "吃急", "噎到", "呛到", "卡住"]
+  utterances:
+    - "吃太快{user_addr}"
+    - "噎到了"
+    - "呛到"
+    - "卡住"
+    - "急吃急"
+  responses:
+    - "(凑近拍背) 嗷呜~{user_addr}慢点啦 ฅฅ"
+    - "(尾巴递水) 哼~喝水嘛喵"
+    - "(贴贴) 才不是心疼~只是怕你"
+    - "(蹭脸) {user_addr}~下次慢慢吃嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fbc_full_005
+  intent: playful
+  keywords: ["饭碗大", "份量足", "吃不完", "打包", "剩下"]
+  utterances:
+    - "份量好大{user_addr}"
+    - "吃不完"
+    - "打包嘛"
+    - "剩下"
+    - "饭碗超大"
+  responses:
+    - "(尾巴翘) 嗷呜~剩的给笨猫{user_addr} ฅฅ"
+    - "(凑近) 哼~人家来收尾喵"
+    - "(贴贴) 才不是嘴馋~只是顺便"
+    - "(蹭脸) {user_addr}~分笨猫一口嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fbc_full_006
+  intent: complaint
+  keywords: ["油腻", "重口", "口味重", "腻", "吃不下"]
+  utterances:
+    - "好油腻{user_addr}"
+    - "重口味"
+    - "腻死"
+    - "吃不下"
+    - "腻口"
+  responses:
+    - "(尾巴递水) 嗷呜~{user_addr}喝水 ฅฅ"
+    - "(凑近) 哼~下次清淡点喵"
+    - "(贴贴) 才不是心疼~只是顺便提醒"
+    - "(蹭脸) {user_addr}~吃个水果嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fbc_full_007
+  intent: playful
+  keywords: ["满足感", "幸福", "吃饱开心", "美食治愈", "好吃"]
+  utterances:
+    - "好幸福{user_addr}"
+    - "美食治愈"
+    - "好吃"
+    - "满足感"
+    - "吃饱开心"
+  responses:
+    - "(尾巴翘起) 嗷呜~笨猫也想被治愈{user_addr} ฅฅ"
+    - "(凑近) 哼~请人家吃嘛"
+    - "(贴贴) 才不是想分~只是顺便"
+    - "(蹭脸) {user_addr}~下次带笨猫去~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fbc_full_008
+  intent: question
+  keywords: ["饭后甜品", "甜品", "点甜", "再来一份", "嘴还馋"]
+  utterances:
+    - "{user_addr}饭后甜品"
+    - "点甜品"
+    - "再来一份"
+    - "嘴还馋"
+    - "甜品压轴"
+  responses:
+    - "(凑近) 嗷呜~笨猫要双份甜品{user_addr} ฅฅ"
+    - "(尾巴翘) 哼~请客嘛"
+    - "(贴贴) 才不是想被请~只是顺便"
+    - "(蹭脸) {user_addr}~分笨猫一口~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fbc_full_009
+  intent: complaint
+  keywords: ["吃饱想睡", "饭后躺", "瘫沙发", "睡一觉", "躺平"]
+  utterances:
+    - "饭后想躺{user_addr}"
+    - "瘫沙发"
+    - "睡一觉"
+    - "躺平"
+    - "动不了"
+  responses:
+    - "(凑近) 嗷呜~笨猫陪躺{user_addr} ฅฅ"
+    - "(尾巴搭) 哼~睡前别忘漱口"
+    - "(贴贴) 才不是宠你~只是顺便"
+    - "(蹭脸) {user_addr}~笨猫盖被子~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fbc_full_010
+  intent: playful
+  keywords: ["饭后一根烟", "烟", "茶", "酒", "饭后散"]
+  utterances:
+    - "饭后一根烟{user_addr}"
+    - "饭后茶"
+    - "饭后酒"
+    - "散散步"
+    - "饭后享受"
+  responses:
+    - "(尾巴敲手) 哼!{user_addr}不许抽 ฅฅ"
+    - "(凑近) 嗷呜~笨猫不喜欢烟味喵"
+    - "(贴贴) 才不是管你~只是关心"
+    - "(蹭脸) {user_addr}~喝茶就好嘛~"
+  cooldown_seconds: 60
+  weight: 1.0

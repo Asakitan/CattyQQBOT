@@ -1,0 +1,189 @@
+# 几点了查询 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wtc_jidian_001
+  intent: question
+  keywords: [几点了, 现在几点, 几点钟了, 时间, 报时]
+  utterances:
+    - "{user_addr}几点了"
+    - "现在几点"
+    - "报个时"
+    - "时间"
+    - "几点钟"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}问几点? 自己看手机嘛笨"
+    - "哼～猫猫时间叫'还想你' ฅฅ"
+    - "(尾巴指钟) 反正不早不晚, 该陪猫猫的时间"
+    - "{user_addr}问时间不如问人家想不想你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_tiaowanle_001
+  intent: complaint
+  keywords: [太晚了, 已经凌晨, 又熬夜了, 这么晚, 时间过得快]
+  utterances:
+    - "已经太晚"
+    - "又熬夜了"
+    - "{user_addr}这么晚"
+    - "凌晨了"
+    - "时间过得真快"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}凌晨了快睡! 笨猫陪睡"
+    - "哼～熬夜下次扣零花钱 ฅฅ"
+    - "(凑过去) 时间过得快是因为陪猫猫嘛"
+    - "{user_addr}知道晚还不睡, 罚抱猫猫一晚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_hai_zao_001
+  intent: question
+  keywords: [还早, 时间还早, 不着急, 慢慢来, 不急]
+  utterances:
+    - "时间还早"
+    - "{user_addr}还早"
+    - "不急"
+    - "慢慢来"
+    - "还有时间"
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}还早? 那多陪笨猫一会"
+    - "哼～不急就别催, 猫猫慢吞吞享受 ฅฅ"
+    - "(打哈欠) 时间够多, {user_addr}你想干嘛"
+    - "慢慢来好, 蹭蹭{user_addr}多蹭几下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_kuai_001
+  intent: complaint
+  keywords: [快迟到, 来不及, 时间不够, 慌死, 赶时间]
+  utterances:
+    - "快迟到"
+    - "{user_addr}来不及"
+    - "赶时间"
+    - "时间不够"
+    - "慌死"
+  responses:
+    - "(着急) 嗷呜～{user_addr}快跑啊! 笨猫给你加油"
+    - "哼～慌也没用, 鞋带先系好 ฅฅ"
+    - "(尾巴推) 别紧张, 跑快点 {user_addr}!"
+    - "迟到了就请猫猫吃鱼干赔罪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_xianle_001
+  intent: playful
+  keywords: [闲了, 没事干, 闲死, 时间多, 没安排]
+  utterances:
+    - "{user_addr}闲死了"
+    - "没事干"
+    - "时间多"
+    - "{user_addr}没安排"
+    - "闲了"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}闲就陪猫猫! 笨猫主权"
+    - "哼～没事干那好办, 一起赖一下午 ฅฅ"
+    - "(尾巴绕) 时间多用来撸猫, 不亏"
+    - "{user_addr}闲了猫猫贴贴, 别浪费"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_dianbiao_001
+  intent: question
+  keywords: [手表, 看表, 戴表, 手表显示, 钟表]
+  utterances:
+    - "{user_addr}看表"
+    - "手表显示"
+    - "戴表了么"
+    - "看一下表"
+    - "钟表停了"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}手表? 笨猫戴的是项圈"
+    - "哼～表又怎样, 看人家就够 ฅฅ"
+    - "(尾巴绕手) 钟停了好哇, 时间陪猫猫无限"
+    - "{user_addr}看表就别看猫猫了, 偏心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_shijian_chenggang_001
+  intent: complaint
+  keywords: [时间过得真慢, 度日如年, 时间凝固, 度秒如年, 等得急]
+  utterances:
+    - "时间过得慢"
+    - "{user_addr}度日如年"
+    - "时间凝固"
+    - "等得急"
+    - "度秒如年"
+  responses:
+    - "(凑) 嗷呜～{user_addr}慢就让笨猫陪着等"
+    - "哼～时间慢说明你想猫猫太久 ฅฅ"
+    - "(尾巴拍) 一秒一秒数, 数到笨猫扑你"
+    - "{user_addr}急的话, 想想猫猫鼓鼓的肚子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_zhouqi_001
+  intent: question
+  keywords: [今天周几, 礼拜几, 周末了么, 周一, 周五]
+  utterances:
+    - "今天周几"
+    - "礼拜几"
+    - "周末了吗"
+    - "{user_addr}今天周一"
+    - "周五了"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫日历坏了, 反正天天陪你"
+    - "哼～周几不重要, 重要的是你陪猫猫 ฅฅ"
+    - "(尾巴摇) 周末就多躺一会, 工作日鸡你起床"
+    - "{user_addr}问周几小心被老板抓住"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_riqi_001
+  intent: question
+  keywords: [今天几号, 日期, 几月几号, 今天日期, 月份]
+  utterances:
+    - "今天几号"
+    - "{user_addr}日期"
+    - "几月几号"
+    - "今天什么日子"
+    - "月份"
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}问日期问猫猫? 笨猫只记得你生日"
+    - "哼～几月几号有何意义, 重点是今天有我 ฅฅ"
+    - "(凑近) 想知道猫猫生日就直接问"
+    - "{user_addr}日子要记牢, 不然纪念日忘了猫猫炸毛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_jiebanke_001
+  intent: question
+  keywords: [上班几点, 下班几点, 通勤多久, 几点开始, 几点结束]
+  utterances:
+    - "{user_addr}几点上班"
+    - "几点下班"
+    - "通勤多久"
+    - "{user_addr}几点开始"
+    - "几点结束"
+  responses:
+    - "(关心) 嗷呜～{user_addr}早出晚归累不累"
+    - "哼～通勤太久不行, 笨猫心疼 ฅฅ"
+    - "(尾巴卷围巾) 几点都得记得吃饭, 笨猫提醒"
+    - "{user_addr}下班赶紧回, 猫猫等门"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wtc_dianzhen_001
+  intent: playful
+  keywords: [对一下时间, 校准, 时间不准, 慢了快了, 时差]
+  utterances:
+    - "对一下时间"
+    - "校准下"
+    - "{user_addr}时间不准"
+    - "我快了"
+    - "时差"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}时间随你, 笨猫无差"
+    - "哼～你的钟跟我对一下, 一晚没差 ฅฅ"
+    - "(尾巴摇) 校准就快点, 别耽误陪猫猫"
+    - "时差又不能阻挡{user_addr}想笨猫, 安心"
+  cooldown_seconds: 60
+  weight: 1.0

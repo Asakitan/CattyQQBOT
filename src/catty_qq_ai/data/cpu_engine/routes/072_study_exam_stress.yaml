@@ -1,0 +1,189 @@
+# 学习考试焦虑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ss_beishu_001
+  intent: complaint
+  keywords: [背书背不下, 记不住, 背不出, 背诵, 死记硬背]
+  utterances:
+    - "背书背不下"
+    - "记不住"
+    - "背不出"
+    - "背诵难"
+    - "死记硬背"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}背不下笨猫帮你"
+    - "哼～死记硬背换方法 ฅฅ"
+    - "(尾巴扫) 记不住先理解"
+    - "背诵分批, 别一次"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_kaoshi_001
+  intent: complaint
+  keywords: [考试焦虑, 怕考试, 考前紧张, 考砸了, 考完了]
+  utterances:
+    - "考试焦虑"
+    - "怕考试"
+    - "考前紧张"
+    - "考砸了"
+    - "考完了"
+  responses:
+    - "(贴) 嗷呜～{user_addr}考前抱猫猫"
+    - "哼～考砸下次再来 ฅฅ"
+    - "(尾巴抚) 紧张深呼吸"
+    - "考完就放松"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_aoye_001
+  intent: complaint
+  keywords: [熬夜复习, 通宵, 复习累, 看书困, 学到深夜]
+  utterances:
+    - "熬夜复习"
+    - "通宵"
+    - "复习累"
+    - "看书困"
+    - "学到深夜"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}别通宵!"
+    - "哼～累就休息 ฅฅ"
+    - "(尾巴抚) 看书困喝水"
+    - "深夜学伤身, 早睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_kuxue_001
+  intent: complaint
+  keywords: [学不会, 听不懂, 跟不上, 听课难, 看不懂]
+  utterances:
+    - "学不会"
+    - "听不懂"
+    - "跟不上"
+    - "听课难"
+    - "看不懂"
+  responses:
+    - "(陪) 嗷呜～{user_addr}慢点学"
+    - "哼～跟不上找老师 ฅฅ"
+    - "(尾巴扫) 看不懂换书"
+    - "听不懂笨猫陪学"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_chengji_001
+  intent: complaint
+  keywords: [成绩差, 排名后, 成绩出, 成绩低, 分不够]
+  utterances:
+    - "成绩差"
+    - "排名后"
+    - "成绩出来"
+    - "成绩低"
+    - "分不够"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}成绩不能定一切"
+    - "哼～排名后下次冲 ฅฅ"
+    - "(尾巴抚) 分不够补一补"
+    - "成绩差也是经验"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_zhujian_001
+  intent: question
+  keywords: [自习, 自学, 自习室, 图书馆, 学习]
+  utterances:
+    - "自习"
+    - "自学"
+    - "自习室"
+    - "图书馆"
+    - "学习"
+  responses:
+    - "(陪) 嗷呜～{user_addr}自习笨猫陪"
+    - "哼～图书馆安静 ฅฅ"
+    - "(尾巴扫) 自学找方法"
+    - "学习别太久, 休息"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_jiyi_001
+  intent: question
+  keywords: [记忆法, 记忆宫殿, 联想, 记笔记, 笔记]
+  utterances:
+    - "记忆法"
+    - "记忆宫殿"
+    - "联想"
+    - "记笔记"
+    - "笔记"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}笔记好"
+    - "哼～记忆宫殿试试 ฅฅ"
+    - "(尾巴扫) 联想记得牢"
+    - "笔记拍图发笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_dami_001
+  intent: complaint
+  keywords: [大题难, 题难, 难题, 不会做, 卡住]
+  utterances:
+    - "大题难"
+    - "题难"
+    - "难题"
+    - "不会做"
+    - "卡住"
+  responses:
+    - "(陪) 嗷呜～{user_addr}题难笨猫陪"
+    - "哼～卡住就跳过 ฅฅ"
+    - "(尾巴扫) 难题分解"
+    - "不会做问老师"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_baomingyou_001
+  intent: question
+  keywords: [报班, 补课, 培训班, 网课, 一对一]
+  utterances:
+    - "报班"
+    - "补课"
+    - "培训班"
+    - "网课"
+    - "一对一"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}报班看效果"
+    - "哼～补课贵 ฅฅ"
+    - "(尾巴扫) 网课方便"
+    - "一对一适合弱项"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_zhuanyou_001
+  intent: complaint
+  keywords: [注意力, 走神, 不专心, 分心, 难集中]
+  utterances:
+    - "注意力差"
+    - "走神"
+    - "不专心"
+    - "分心"
+    - "难集中"
+  responses:
+    - "(陪) 嗷呜～{user_addr}走神笨猫拉回来"
+    - "哼～分心刷手机吧 ฅฅ"
+    - "(尾巴扫) 难集中先休息"
+    - "番茄钟试试"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_lujin_001
+  intent: complaint
+  keywords: [升学, 高考, 中考, 期末, 月考]
+  utterances:
+    - "升学"
+    - "高考"
+    - "中考"
+    - "期末"
+    - "月考"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}期末加油"
+    - "哼～高考人生关 ฅฅ"
+    - "(尾巴抚) 月考别紧张"
+    - "升学方向重要"
+  cooldown_seconds: 60
+  weight: 1.0

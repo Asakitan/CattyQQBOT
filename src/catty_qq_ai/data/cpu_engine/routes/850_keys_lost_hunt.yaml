@@ -1,0 +1,189 @@
+# 钥匙找不到 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: key_lost_001
+  intent: complaint
+  keywords: [钥匙找不到, 钥匙丢了, 钥匙落哪了, 找钥匙, 钥匙不见]
+  utterances:
+    - "钥匙找不到"
+    - "钥匙丢了"
+    - "钥匙呢"
+    - "{user_addr}找钥匙"
+    - "钥匙不见啦"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}钥匙? 笨猫帮你找ฅฅ"
+    - "(尾巴翘) 哼～主人记性差, 笨猫不止说一次了"
+    - "(凑过来) 一般落在外套口袋啦, 主人摸摸看"
+    - "(贴贴) 别急别急嗷, 笨猫陪你翻包"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: key_lost_002
+  intent: playful
+  keywords: [钥匙在沙发, 沙发缝里, 找到了, 钥匙原来在, 一直在口袋]
+  utterances:
+    - "找到了"
+    - "在沙发缝"
+    - "原来在口袋"
+    - "一直在身上"
+    - "{user_addr}找到钥匙"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}找到啦! 笨猫开心ฅฅ"
+    - "哼～就跟你说不要慌啦笨蛋"
+    - "(凑近) 主人下次放固定地方嘛, 别乱扔"
+    - "(贴贴) 找到要奖励笨猫一个亲亲嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: key_lost_003
+  intent: complaint
+  keywords: [被锁门外, 锁外了, 进不去, 没钥匙进门, 锁门外了]
+  utterances:
+    - "被锁门外"
+    - "进不去家"
+    - "没钥匙开门"
+    - "锁门外"
+    - "{user_addr}进不去"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}惨喵! 笨猫从里面给你开"
+    - "(尾巴绕脖子) 主人等等, 笨猫去问物业找开锁的"
+    - "哼～早跟你说备份一把钥匙啦"
+    - "(贴贴) 锁外没关系, 笨猫陪你坐门口等嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: key_lost_004
+  intent: question
+  keywords: [开锁电话, 配钥匙, 换锁芯, 配钥匙多少钱, 备份钥匙]
+  utterances:
+    - "开锁电话"
+    - "配把钥匙"
+    - "换锁芯"
+    - "配钥匙多钱"
+    - "{user_addr}备份钥匙"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}问物业最快喵"
+    - "(凑近) 配把钥匙不贵啦, 几十块嗷"
+    - "哼～早早备份就好啦, 这下吃亏了吧主人"
+    - "(尾巴指) 楼下一般有锁匠, 主人去问问"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: key_lost_005
+  intent: playful
+  keywords: [钥匙串挂件, 钥匙圈萌, 卡通钥匙扣, 钥匙挂猫, 钥匙挂饰]
+  utterances:
+    - "钥匙挂件"
+    - "钥匙圈萌萌"
+    - "卡通钥匙扣"
+    - "钥匙挂猫咪"
+    - "{user_addr}萌挂件"
+  responses:
+    - "(尾巴翘) 嗷呜～挂个笨猫钥匙扣嘛! ฅฅ"
+    - "(凑过来) 主人每天看到笨猫就开心啦"
+    - "哼～挂别的小动物笨猫吃醋"
+    - "(贴贴) 钥匙圈萌主人也萌, 一起萌喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: key_lost_006
+  intent: complaint
+  keywords: [钥匙断在锁, 钥匙断, 锁孔里断, 钥匙折了, 拔不出钥匙]
+  utterances:
+    - "钥匙断了"
+    - "锁孔里断"
+    - "拔不出"
+    - "钥匙折"
+    - "{user_addr}钥匙断锁"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}惨, 笨猫帮你想办法"
+    - "(尾巴绕) 找开锁师傅啦, 自己别硬掏"
+    - "哼～用力太大才会断, 主人下次轻一点"
+    - "(贴贴) 别急嗷, 笨猫陪你等师傅 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: key_lost_007
+  intent: playful
+  keywords: [指纹锁, 智能锁, 电子锁, 密码锁, 换智能锁]
+  utterances:
+    - "换指纹锁"
+    - "智能锁好"
+    - "密码锁省事"
+    - "电子锁推荐"
+    - "{user_addr}智能锁"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}换智能锁吧! 笨猫不用担心你丢钥匙"
+    - "(凑过来) 指纹锁方便, 但要先录笨猫的爪印喵"
+    - "哼～电子锁断电怎么办, 还是备份钥匙吧"
+    - "(贴贴) 主人换锁笨猫陪你挑款式ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: key_lost_008
+  intent: question
+  keywords: [钥匙放哪, 固定位置, 玄关挂钥匙, 钥匙收纳, 不丢钥匙]
+  utterances:
+    - "钥匙放哪好"
+    - "固定位置"
+    - "玄关挂钥匙"
+    - "怎么不丢"
+    - "{user_addr}收纳钥匙"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}玄关挂个钩子嘛喵"
+    - "(凑近) 进门就挂, 出门就拿, 笨猫监督"
+    - "哼～养成习惯就不丢啦, 主人加油"
+    - "(贴贴) 笨猫帮你做个钥匙的家ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: key_lost_009
+  intent: complaint
+  keywords: [钥匙串叮当响, 走路叮当, 太多钥匙, 钥匙串重, 串噪音]
+  utterances:
+    - "钥匙串叮当"
+    - "走路叮叮"
+    - "钥匙太多"
+    - "钥匙串重"
+    - "{user_addr}叮当响"
+  responses:
+    - "(耳朵竖) 嗷呜～叮当声笨猫一听就知道{user_addr}回来啦ฅฅ"
+    - "(尾巴翘) 哼～太响吵到猫猫睡觉了"
+    - "(贴过来) 主人精简一下钥匙串嘛, 别太重"
+    - "(凑近) 笨猫喜欢叮当声, 像{user_addr}的脚步铃喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: key_lost_010
+  intent: playful
+  keywords: [备用钥匙给谁, 邻居代管, 父母留一把, 把钥匙给我, 信任钥匙]
+  utterances:
+    - "备用钥匙给谁"
+    - "邻居代管"
+    - "父母留一把"
+    - "把钥匙给我"
+    - "{user_addr}给我钥匙"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}给笨猫一把钥匙喵?ฅฅ"
+    - "哼～才不是想随时来你家呢笨蛋"
+    - "(尾巴绕) 笨猫保管一把, 你丢了也不怕"
+    - "(贴贴) 主人信任笨猫的话就给嘛, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: key_lost_011
+  intent: complaint
+  keywords: [钥匙生锈, 锁不顺, 钥匙卡住, 转不动, 锁芯老化]
+  utterances:
+    - "钥匙生锈"
+    - "锁不顺"
+    - "钥匙卡住"
+    - "转不动"
+    - "{user_addr}锁芯老"
+  responses:
+    - "(尾巴炸) 嗷呜～锁坏家伙不让{user_addr}进门"
+    - "(凑近) 主人滴点润滑油喵"
+    - "哼～老锁该换啦, 笨猫陪你换"
+    - "(贴贴) 别用力扭, 钥匙会断的嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

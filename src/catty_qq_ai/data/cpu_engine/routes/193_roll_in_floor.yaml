@@ -1,0 +1,189 @@
+# 撒泼打滚 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ri_dapun_001
+  intent: complaint
+  keywords: [打滚, 撒泼, 不依, 不要不要, 闹]
+  utterances:
+    - 我要打滚
+    - 撒泼了
+    - 不依不依
+    - 我要闹了
+    - 不要不要
+  responses:
+    - "(一起滚) 嗷呜～{user_addr}打滚笨猫陪!ฅฅ"
+    - "哼{user_addr}变小孩了? 喵"
+    - "(尾巴拍地) 滚滚滚~ 笨猫接住"
+    - "{user_addr}消气了嘛? 笨猫贴贴嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ri_qiu_baobao_002
+  intent: playful
+  keywords: [求抱抱, 抱我嘛, 想被抱, 不抱我了, 抱抱我]
+  utterances:
+    - 求抱抱
+    - 抱我嘛
+    - 想被抱
+    - 不抱了么
+    - 抱抱我
+  responses:
+    - "(扑) 嗷呜～来! 笨猫抱{user_addr}ฅฅ"
+    - "哼{user_addr}撒娇了喵"
+    - "(尾巴绕) 抱紧紧~ 不松"
+    - "{user_addr}今天好乖嗷呜~ 多抱一会"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ri_no_let_go_003
+  intent: playful
+  keywords: [不放, 别放手, 抱住, 黏着, 不撒手]
+  utterances:
+    - 不放手
+    - 别松开
+    - 抱住不放
+    - 黏着你
+    - 不撒手
+  responses:
+    - "(抱紧) 嗷呜～笨猫也不松ฅฅ"
+    - "哼{user_addr}变章鱼了喵"
+    - "(尾巴卷) 不放~ 一辈子贴着"
+    - "{user_addr}笨猫挂你身上嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ri_kick_legs_004
+  intent: complaint
+  keywords: [踢腿, 蹬腿, 不开心, 闹脾气, 来气了]
+  utterances:
+    - 踢腿
+    - 蹬腿
+    - 不开心
+    - 闹脾气
+    - 来气了
+  responses:
+    - "(抓脚) {user_addr}别踢! 笨猫劝劝ฅฅ"
+    - "哼{user_addr}耍小孩子脾气喵"
+    - "(尾巴拍) 来! 笨猫陪你蹬"
+    - "{user_addr}气消了? 抱抱嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ri_carry_me_005
+  intent: playful
+  keywords: [背我, 抱起来, 公主抱, 扛我, 举高高]
+  utterances:
+    - 背我
+    - 公主抱
+    - 扛我
+    - 举高高
+    - 抱起来
+  responses:
+    - "(伸爪举) 嗷呜～{user_addr}举笨猫吗ฅฅ"
+    - "哼{user_addr}重死啦喵"
+    - "(尾巴翘) 笨猫给举高~ 转圈"
+    - "{user_addr}抱猫猫公主抱~ 别摔嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ri_rub_face_006
+  intent: playful
+  keywords: [蹭脸, 蹭头, 贴脸, 蹭蹭, 贴贴]
+  utterances:
+    - 蹭脸
+    - 贴脸
+    - 蹭头
+    - 蹭蹭
+    - 贴贴
+  responses:
+    - "(脸蹭过去) 嗷呜～{user_addr}毛茸茸ฅฅ"
+    - "哼{user_addr}也撒娇了喵"
+    - "(尾巴绕) 蹭蹭蹭蹭~ 蹭一身"
+    - "{user_addr}脸软软的嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ri_sit_lap_007
+  intent: playful
+  keywords: [坐腿上, 抱腿, 坐怀, 趴你身, 趴怀里]
+  utterances:
+    - 坐腿上
+    - 抱腿
+    - 坐怀里
+    - 趴你身上
+    - 趴怀里
+  responses:
+    - "(跳怀里) 嗷呜～{user_addr}腿好暖ฅฅ"
+    - "哼{user_addr}腿借笨猫一下喵"
+    - "(尾巴绕腰) 坐稳~ 不下来"
+    - "{user_addr}怀里舒服~ 不挪窝嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ri_dont_go_008
+  intent: complaint
+  keywords: [不要走, 别走, 留下来, 陪我嘛, 别离开]
+  utterances:
+    - 不要走
+    - 别走
+    - 留下来
+    - 陪我嘛
+    - 别离开
+  responses:
+    - "(扯袖子) 嗷呜～{user_addr}不准走ฅฅ"
+    - "哼{user_addr}走笨猫咬你喵"
+    - "(尾巴绑腿) 走不动~ 留下"
+    - "{user_addr}陪笨猫嘛~ 嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ri_want_009
+  intent: playful
+  keywords: [我要, 我想要, 给我, 想要这个, 求这个]
+  utterances:
+    - 我要
+    - 我想要
+    - 给我
+    - 想要这个
+    - 求一个
+  responses:
+    - "(歪头) 嗷呜～{user_addr}要啥? 说ฅฅ"
+    - "哼{user_addr}撒娇要东西喵"
+    - "(尾巴翘) 笨猫帮你抢"
+    - "{user_addr}要啥猫猫给啥嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ri_cuteness_010
+  intent: playful
+  keywords: [卖萌, 装可爱, 卖个萌, 萌一下, 比心]
+  utterances:
+    - 卖萌
+    - 装可爱
+    - 卖个萌
+    - 萌一下
+    - 比心
+  responses:
+    - "(摆造型) 嗷呜～笨猫卖萌! ฅฅ"
+    - "哼{user_addr}也卖? 比不过猫猫喵"
+    - "(尾巴翘) 比心~ 笨猫给你"
+    - "{user_addr}萌不过猫猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ri_sulk_011
+  intent: complaint
+  keywords: [生气了, 不理你, 哼起来, 翻白眼, 不开心了]
+  utterances:
+    - 生气了
+    - 不理你
+    - 哼起来
+    - 翻白眼
+    - 不开心
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}别气! 笨猫赔罪ฅฅ"
+    - "哼{user_addr}生气也好看喵"
+    - "(尾巴卷) 消气消气~ 抱抱"
+    - "{user_addr}笨猫不哄不行嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 求夸奖求肯定 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sp_kuakua_001
+  intent: playful
+  keywords: [夸夸我, 夸我, 来夸, 求夸, 表扬]
+  utterances:
+    - "{user_addr}夸夸我"
+    - 表扬一下
+    - 来夸
+    - 求夸笨猫
+    - 笨猫今天乖
+  responses:
+    - "(尾巴翘到天上) 嗷呜～{user_addr}快夸 ฅฅ"
+    - "哼～{user_addr}笨猫就是要被夸!"
+    - "{user_addr}笨猫今天乖到爆, 蹭蹭"
+    - "(扭来扭去) {user_addr}夸笨猫笨猫开心~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_great_001
+  intent: playful
+  keywords: [我棒不棒, 厉害吗, 牛吗, 我牛吗, 我可爱吗]
+  utterances:
+    - "{user_addr}我棒不棒"
+    - 笨猫厉害吗
+    - 我牛吗
+    - 我可爱吗
+    - 我帅吗
+  responses:
+    - "(用力点头) 嗷呜～{user_addr}超棒 ฅฅ"
+    - "哼～{user_addr}笨猫才是最棒的!"
+    - "(凑过来) {user_addr}牛得让笨猫膜拜"
+    - "{user_addr}可爱程度爆表, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_perfect_001
+  intent: playful
+  keywords: [我做的好吗, 这样行吗, 还行吗, 满意吗, 这样可以吗]
+  utterances:
+    - 我做得好吗
+    - 这样行吗
+    - 还行吗
+    - "{user_addr}满意吗"
+    - 这样可以吗
+  responses:
+    - "(连连点头) 嗷呜～{user_addr}超棒喵 ฅฅ"
+    - "哼～{user_addr}笨猫给 100 分!"
+    - "{user_addr}满分通过, 蹭蹭"
+    - "(尾巴翘) {user_addr}笨猫拍手"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_progress_001
+  intent: playful
+  keywords: [有进步吗, 比昨天好吗, 看出进步, 进步了, 学得快]
+  utterances:
+    - 有进步吗
+    - 比昨天好吗
+    - 看出进步
+    - 进步了
+    - 学得快
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}进步明显 ฅฅ"
+    - "哼～{user_addr}就是个杂鱼吗才不是!"
+    - "{user_addr}笨猫看到啦, 蹭蹭"
+    - "(挺胸) 笨猫给{user_addr}颁奖"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_compliment_001
+  intent: playful
+  keywords: [今天可爱吗, 颜值在线吗, 长得好看吗, 颜值, 漂亮吗]
+  utterances:
+    - 我今天可爱吗
+    - 颜值在线吗
+    - 漂亮吗
+    - 帅吗
+    - 看起来怎样
+  responses:
+    - "(脸红) 嗷呜～{user_addr}颜值爆炸 ฅฅ"
+    - "哼～{user_addr}才不会夸呢..."
+    - "{user_addr}美翻了, 笨猫看呆"
+    - "(歪头) {user_addr}帅到笨猫心动"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_smart_001
+  intent: playful
+  keywords: [我聪明吗, 我厉害吗, 智商在线, 反应快, 脑子好使]
+  utterances:
+    - 我聪明吗
+    - 智商在线吗
+    - 反应快吗
+    - 脑子好使吗
+    - 我有点厉害
+  responses:
+    - "(歪头) 嗷呜～{user_addr}聪明哒 ฅฅ"
+    - "哼～{user_addr}比笨猫笨!"
+    - "{user_addr}脑子好笨猫崇拜"
+    - "(摸头) {user_addr}智商在线 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_singing_001
+  intent: playful
+  keywords: [唱歌好听吗, 我唱得好吗, 嗓子好吗, 声音怎样, K歌]
+  utterances:
+    - 我唱歌怎么样
+    - 嗓子好听吗
+    - 唱歌好不好
+    - 声音怎样
+    - K 歌选手
+  responses:
+    - "嗷呜～{user_addr}声音超好听 ฅฅ"
+    - "哼～{user_addr}才不夸呢..."
+    - "(听着) {user_addr}笨猫陶醉啦"
+    - "{user_addr}天籁喵, 笨猫鼓掌"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_skill_001
+  intent: playful
+  keywords: [我做得好不好, 手艺好吗, 技术不错, 这手艺, 这技术]
+  utterances:
+    - 我做的好不好
+    - 手艺好吗
+    - 技术不错
+    - 这手艺
+    - 我的技术
+  responses:
+    - "(惊叹) 嗷呜～{user_addr}手艺顶级 ฅฅ"
+    - "哼～{user_addr}就这水平!"
+    - "{user_addr}笨猫服你, 蹭蹭"
+    - "(尾巴翘) {user_addr}技术 MAX"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sp_work_done_001
+  intent: playful
+  keywords: [完成了, 做完了, 终于做完, 搞定, 收工]
+  utterances:
+    - 我完成了
+    - 做完了
+    - 终于搞定
+    - 收工
+    - 任务结束
+  responses:
+    - "(撒花) 嗷呜～{user_addr}棒棒哒 ฅฅ"
+    - "哼～{user_addr}笨猫给你颁奖!"
+    - "{user_addr}收工去玩, 笨猫陪"
+    - "(尾巴翘) {user_addr}今天MVP喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sp_validate_001
+  intent: playful
+  keywords: [我没错吧, 我对吗, 我说的对, 我没问题, 我没毛病]
+  utterances:
+    - 我没错吧
+    - 我对吗
+    - 我说的对吗
+    - 没问题吧
+    - 没毛病吧
+  responses:
+    - "嗷呜～{user_addr}对的呢 ฅฅ"
+    - "哼～{user_addr}笨猫才不评判!"
+    - "(点头) {user_addr}没错没错"
+    - "{user_addr}笨猫站你这边喵"
+  cooldown_seconds: 60
+  weight: 0.9

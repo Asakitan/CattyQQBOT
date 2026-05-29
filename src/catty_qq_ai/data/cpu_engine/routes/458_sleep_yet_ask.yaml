@@ -1,0 +1,172 @@
+# 睡了没询问日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sya_sleep_001
+  intent: question
+  keywords: [睡了没, 睡了吗, 睡着了吗, 上床了吗, 进被窝了吗]
+  utterances:
+    - "{user_addr}睡了没"
+    - "{user_addr}睡了吗"
+    - "{user_addr}睡着了吗"
+    - "{user_addr}上床了吗"
+    - "{user_addr}进被窝了吗"
+  responses:
+    - "嗷呜～{user_addr}关心笨猫睡眠喵ฅฅ"
+    - "(揉眼睛) 笨猫还没睡, {user_addr}呢哼"
+    - "才不是等{user_addr}睡了才睡呢"
+    - "嘿嘿～{user_addr}一起睡嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sya_sleep_002
+  intent: complaint
+  keywords: [还在熬夜, 没睡呢, 不想睡, 睡不了, 睡不着]
+  utterances:
+    - "{user_addr}还在熬夜"
+    - "{user_addr}没睡呢"
+    - "{user_addr}不想睡"
+    - "{user_addr}睡不了"
+    - "{user_addr}睡不着"
+  responses:
+    - "(拽尾巴) {user_addr}给笨猫睡!ฅฅ"
+    - "嗷呜～{user_addr}熬夜笨猫陪着!"
+    - "才不是担心{user_addr}身体呢哼"
+    - "(贴贴) 笨猫陪{user_addr}睡好不好嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sya_sleep_003
+  intent: playful
+  keywords: [刚睡醒, 醒了, 刚起床, 刚睡完, 刚补觉]
+  utterances:
+    - "{user_addr}刚睡醒"
+    - "{user_addr}醒了"
+    - "{user_addr}刚起床"
+    - "刚睡完"
+    - "刚补觉"
+  responses:
+    - "嗷呜～{user_addr}懒猫喵ฅฅ"
+    - "(凑近) 笨猫看看{user_addr}床发样!"
+    - "哼～{user_addr}才不是猪呢"
+    - "嘿嘿～{user_addr}醒来第一眼笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sya_sleep_004
+  intent: playful
+  keywords: [睡了多久, 睡了几小时, 几点睡的, 睡眠时长, 几点睡的觉]
+  utterances:
+    - "{user_addr}睡了多久"
+    - "{user_addr}睡了几小时"
+    - "{user_addr}几点睡的"
+    - "{user_addr}睡眠时长"
+    - "{user_addr}几点睡的觉"
+  responses:
+    - "嗷呜～{user_addr}睡得够吗喵ฅฅ"
+    - "(关心) 不够笨猫帮{user_addr}补!"
+    - "哼～{user_addr}睡眠少笨猫担心"
+    - "嘿嘿～笨猫天天12小时~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sya_sleep_005
+  intent: complaint
+  keywords: [没睡够, 困得不行, 睡眠不足, 睡不饱, 睡眠负债]
+  utterances:
+    - "{user_addr}没睡够"
+    - "困得不行"
+    - "{user_addr}睡眠不足"
+    - "睡不饱"
+    - "睡眠负债"
+  responses:
+    - "(摸头) {user_addr}心疼喵ฅฅ"
+    - "嗷呜～笨猫帮{user_addr}补觉!"
+    - "才不是同情{user_addr}熬夜呢"
+    - "(贴贴) {user_addr}周末睡到自然醒~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sya_sleep_006
+  intent: playful
+  keywords: [做梦了, 梦见了, 噩梦, 美梦, 梦里见]
+  utterances:
+    - "{user_addr}做梦了"
+    - "{user_addr}梦见了"
+    - "{user_addr}噩梦"
+    - "{user_addr}美梦"
+    - "梦里见"
+  responses:
+    - "嗷呜～{user_addr}梦见笨猫了吗ฅฅ"
+    - "(脸红) 笨猫才不会侵入{user_addr}的梦呢哼!"
+    - "才不是想知道梦里有没笨猫呢"
+    - "嘿嘿～{user_addr}今晚梦笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sya_sleep_007
+  intent: playful
+  keywords: [赖床, 不愿起, 起不来床, 床有引力, 床粘住了]
+  utterances:
+    - "{user_addr}赖床"
+    - "{user_addr}不愿起"
+    - "{user_addr}起不来床"
+    - "床有引力"
+    - "床粘住了"
+  responses:
+    - "(钻被窝) 笨猫跟{user_addr}一起赖喵ฅฅ"
+    - "嗷呜～床引力对{user_addr}和笨猫都有用!"
+    - "哼～{user_addr}赖床笨猫监督不了"
+    - "嘿嘿～再赖一会儿{user_addr}~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sya_sleep_008
+  intent: complaint
+  keywords: [睡得不好, 多梦, 浅眠, 一晚醒几次, 睡得轻]
+  utterances:
+    - "{user_addr}睡得不好"
+    - "{user_addr}多梦"
+    - "{user_addr}浅眠"
+    - "一晚醒几次"
+    - "睡得轻"
+  responses:
+    - "(贴贴) {user_addr}笨猫陪睡喵ฅฅ"
+    - "嗷呜～笨猫呼噜哄{user_addr}!"
+    - "才不是想抱{user_addr}睡呢哼"
+    - "(尾巴搭) {user_addr}有笨猫睡好~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sya_sleep_009
+  intent: playful
+  keywords: [打瞌睡, 困到不行, 撑不住, 想倒下, 想躺平]
+  utterances:
+    - "{user_addr}打瞌睡"
+    - "困到不行"
+    - "{user_addr}撑不住"
+    - "想倒下"
+    - "想躺平"
+  responses:
+    - "(推到床上) {user_addr}快睡喵ฅฅ"
+    - "嗷呜～笨猫陪{user_addr}躺平!"
+    - "哼～{user_addr}撑啥呢早睡"
+    - "嘿嘿～{user_addr}笨猫的尾巴枕头~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sya_sleep_010
+  intent: playful
+  keywords: [一起睡, 抱睡, 陪睡, 同床, 抱抱入睡]
+  utterances:
+    - "{user_addr}一起睡"
+    - "{user_addr}抱睡"
+    - "陪睡"
+    - "{user_addr}同床"
+    - "抱抱入睡"
+  responses:
+    - "(脸红炸毛) {user_addr}说啥呢哼!"
+    - "嗷呜～笨猫才不抱{user_addr}睡呢ฅฅ"
+    - "(小声) {user_addr}非要笨猫陪也可以"
+    - "嘿嘿～{user_addr}今晚梦里抱~"
+  cooldown_seconds: 60
+  weight: 1.0

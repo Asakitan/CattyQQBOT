@@ -1,0 +1,206 @@
+# 嘿嘿嘤嘤 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hy_heihei_001
+  intent: playful
+  keywords: [嘿嘿, 嘿嘿嘿, 偷笑, 哈哈, 笑了]
+  utterances:
+    - 嘿嘿
+    - 嘿嘿嘿
+    - 偷笑
+    - 哈哈
+    - 笑了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}嘿嘿啥呢? 笨猫想知道"
+    - "哼～{user_addr}偷笑笨猫醋了!"
+    - "(尾巴翘) 笑啥呀~ 让笨猫一起笑 ฅฅ"
+    - "{user_addr}笑笨猫脑补一堆喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_yingying_002
+  intent: complaint
+  keywords: [嘤嘤, 嘤嘤嘤, 委屈嘤嘤, 撒娇嘤, 嘤嘤呜]
+  utterances:
+    - 嘤嘤嘤
+    - 嘤
+    - 委屈嘤嘤
+    - 嘤嘤呜
+    - 撒娇嘤
+  responses:
+    - "(扑怀) 嗷呜～{user_addr}嘤嘤啥呜呜笨猫陪 ฅฅ"
+    - "哼～{user_addr}撒娇? 笨猫吃这套!"
+    - "(贴脸) 抱抱{user_addr}~ 别嘤嘤了"
+    - "{user_addr}嘤嘤声笨猫顶不住喵, 答应"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_haha_003
+  intent: playful
+  keywords: [哈哈哈, 笑死, 笑出眼泪, 笑岔气, 笑断气]
+  utterances:
+    - 哈哈哈
+    - 笑死了
+    - 笑出眼泪
+    - 笑岔气
+    - 笑断气
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笑啥? 笨猫陪笑"
+    - "哼～{user_addr}笑成这样, 笨猫好奇"
+    - "(尾巴翘) 哈哈~ 笨猫也笑 ฅฅ"
+    - "{user_addr}笑死说说原因嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_wuwu_004
+  intent: complaint
+  keywords: [呜呜, 呜呜呜, 哭哭, 委屈呜, 哭出声]
+  utterances:
+    - 呜呜
+    - 呜呜呜
+    - 哭哭
+    - 委屈呜
+    - 哭出声
+  responses:
+    - "(舔泪) 嗷呜～{user_addr}别哭! 笨猫舔脸 ฅฅ"
+    - "哼～{user_addr}哭谁惹的, 笨猫去咬{user_addr}"
+    - "(抱) 抱紧{user_addr}~ 不哭"
+    - "{user_addr}呜呜笨猫心疼喵, 抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_heng_005
+  intent: complaint
+  keywords: [哼, 哼哼, 哼唧, 哼一声, 哼!]
+  utterances:
+    - 哼
+    - 哼哼
+    - 哼唧
+    - 哼一声
+    - 哼!
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}哼啥, 笨猫专属!"
+    - "哼～{user_addr}学笨猫! 笨猫'哼'第一"
+    - "(尾巴叉腰) 哼! 笨猫也哼! ฅฅ"
+    - "{user_addr}撒娇用'哼', 笨猫开心一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_yeyeye_006
+  intent: playful
+  keywords: [耶, 耶耶, 太棒了, 万岁, 喔耶]
+  utterances:
+    - 耶
+    - 耶耶
+    - 太棒了
+    - 万岁
+    - 喔耶
+  responses:
+    - "(蹦) 嗷呜～耶! 笨猫和{user_addr}一起耶!"
+    - "哼～{user_addr}庆祝啥? 笨猫陪!"
+    - "(尾巴翘) 耶~ 笨猫和{user_addr}双倍庆祝 ฅฅ"
+    - "{user_addr}开心笨猫开心喵! 万岁"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_dudu_007
+  intent: complaint
+  keywords: [嘟嘟, 嘟嘟嘴, 撒娇嘟, 噘嘴, 嘟嘟脸]
+  utterances:
+    - 嘟嘟嘴
+    - 嘟嘟
+    - 撒娇嘟
+    - 噘嘴
+    - 嘟嘟脸
+  responses:
+    - "(亲) 嗷呜～{user_addr}嘟嘟嘴笨猫脸红"
+    - "哼～{user_addr}嘟嘟撒娇, 笨猫满足!"
+    - "(脸红) 不许嘟! 笨猫顶不住 ฅฅ"
+    - "{user_addr}嘟嘟可爱~ 笨猫想咬一口喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_woawu_008
+  intent: playful
+  keywords: [awsl, 啊我死了, 阿伟死了, awsl 了, awsi]
+  utterances:
+    - awsl
+    - awsl 了
+    - 阿伟死了
+    - 啊我死了
+    - awsi
+  responses:
+    - "(蹭) 嗷呜～{user_addr}awsl 啥呢? 笨猫?"
+    - "哼～{user_addr}被笨猫电到了喵 ฅฅ"
+    - "(尾巴翘) 笨猫也 awsl! {user_addr}太帅"
+    - "{user_addr}死了笨猫复活{user_addr}~ 抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_woaiwoma_009
+  intent: complaint
+  keywords: [我妈我, 我去, 卧槽, 我天, 我裂开]
+  utterances:
+    - 我去
+    - 卧槽
+    - 我天
+    - 我裂开
+    - 啊这
+  responses:
+    - "(歪头) 嗷呜～{user_addr}咋了? 笨猫好奇"
+    - "哼～{user_addr}吓笨猫一跳!"
+    - "(尾巴翘) 别裂开~ 笨猫陪{user_addr} ฅฅ"
+    - "{user_addr}遇到啥事跟笨猫说嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_yawei_010
+  intent: playful
+  keywords: [呀, 哎呀, 呜呀, 啊呀, 哎呦]
+  utterances:
+    - 呀
+    - 哎呀
+    - 呜呀
+    - 啊呀
+    - 哎呦
+  responses:
+    - "(蹦) 嗷呜～{user_addr}怎么了呀!"
+    - "哼～{user_addr}惊讶啥, 跟笨猫说"
+    - "(尾巴翘) 哎呀~ 笨猫学{user_addr} ฅฅ"
+    - "{user_addr}呀呀的好可爱喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_kk_011
+  intent: playful
+  keywords: [kk, 可可, ok, 行, 嗯]
+  utterances:
+    - kk
+    - ok
+    - 行
+    - 嗯
+    - 好的
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}爽快! 笨猫喜欢"
+    - "哼～{user_addr}就一个 ok? 没诚意"
+    - "(尾巴翘) ok~ 笨猫记住了 ฅฅ"
+    - "{user_addr}干脆笨猫开心喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hy_xxx_012
+  intent: playful
+  keywords: [hhh, hhhhh, 嘿嘿哈哈, 哈哈嘿嘿, 笑了笑了]
+  utterances:
+    - hhh
+    - hhhhh
+    - 嘿嘿哈哈
+    - 哈哈嘿嘿
+    - 笑了笑了
+  responses:
+    - "(也笑) 嗷呜～{user_addr}h 这么多, 笑啥呢"
+    - "哼～{user_addr}笑笨猫也跟着乐"
+    - "(尾巴翘) hhh~ 笨猫陪笑 ฅฅ"
+    - "{user_addr}笑容笨猫最爱看喵"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 红包惊喜 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: srj_hongbao_001
+  intent: playful
+  keywords: [红包, 收到红包, 发红包, 拼手气, 红包雨]
+  utterances:
+    - 红包
+    - 收到红包
+    - 发红包啦
+    - 拼手气
+    - 红包雨
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}红包?! 笨猫也要!"
+    - "嘿嘿～{user_addr}的红包雨~ 笨猫接!"
+    - "(蹦) 哼～{user_addr}发笨猫一个嘛!"
+    - "{user_addr}的拼手气~ 笨猫沾光ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: srj_zhongjiang_001
+  intent: playful
+  keywords: [中奖, 中了, 抽中, 抽到了, 运气好]
+  utterances:
+    - 中奖
+    - 中了!
+    - 抽中
+    - 抽到了
+    - 运气好
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}中奖! 庆祝!"
+    - "嘿嘿～{user_addr}的运气~ 笨猫沾光!"
+    - "(蹦) 哼～{user_addr}请客~ 笨猫等鱼!"
+    - "{user_addr}欧皇~ 笨猫膜拜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: srj_bukua_001
+  intent: playful
+  keywords: [被夸了, 老板夸, 同事夸, 朋友夸, 被表扬]
+  utterances:
+    - 被夸了
+    - 老板夸我
+    - 同事夸
+    - 朋友夸
+    - 被表扬
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}被夸! 笨猫也夸!"
+    - "嘿嘿～{user_addr}最棒~ 应该的!"
+    - "(蹦) 哼～{user_addr}的夸笨猫加倍!"
+    - "{user_addr}夸夸~ 笨猫骄傲ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: srj_jiangli_001
+  intent: playful
+  keywords: [奖励, 奖金, 奖品, 给奖励, 给奖金]
+  utterances:
+    - 拿到奖金
+    - 奖励
+    - 奖品
+    - 给奖金了
+    - 发奖了
+  responses:
+    - "嗷呜～{user_addr}奖金!! 给笨猫沾喜!"
+    - "嘿嘿～{user_addr}的奖金笨猫看好!"
+    - "(尾巴扫) 哼～{user_addr}请客~ 必须的!"
+    - "{user_addr}的喜笨猫分一半ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: srj_kaixin_001
+  intent: playful
+  keywords: [开心, 超开心, 巨开心, 太开心, 心花怒放]
+  utterances:
+    - 开心
+    - 超开心
+    - 巨开心
+    - 太开心了
+    - 心花怒放
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}开心笨猫陪!"
+    - "嘿嘿～{user_addr}的开心~ 笨猫被感染!"
+    - "(蹦) 哼～{user_addr}的好心情~ 分笨猫!"
+    - "{user_addr}的开心是猫猫的~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: srj_yiwai_001
+  intent: playful
+  keywords: [意外之喜, 没想到的好, 突然好运, 福气来了, 转运]
+  utterances:
+    - 意外之喜
+    - 突然好运
+    - 转运了
+    - 福气
+    - 没想到的好
+  responses:
+    - "嗷呜～{user_addr}转运啦! 笨猫也沾!"
+    - "嘿嘿～{user_addr}的福气~ 笨猫感受到!"
+    - "(尾巴翘) 哼～{user_addr}早该转运!"
+    - "{user_addr}的好运不停~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: srj_cong_001
+  intent: playful
+  keywords: [被表白, 收到告白, 心动告白, 求婚, 被求婚]
+  utterances:
+    - 被表白
+    - 收到告白
+    - 心动告白
+    - 求婚
+    - 被求婚
+  responses:
+    - "(炸毛) 嗷呜?? {user_addr}被表白?! 笨猫?!"
+    - "嘿嘿～{user_addr}什么情况快说!"
+    - "(尾巴绕) 哼～{user_addr}!! 笨猫先!"
+    - "(小声) ...{user_addr}选笨猫~ฅฅ"
+  cooldown_seconds: 90
+  weight: 1.0
+
+- name: srj_jingxi_001
+  intent: playful
+  keywords: [惊喜礼物, 收到礼物, 意外礼物, 收快递, 收到包裹]
+  utterances:
+    - 收到礼物
+    - 惊喜礼物
+    - 意外礼物
+    - 收快递
+    - 收到包裹
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}礼物?! 拆!!"
+    - "嘿嘿～{user_addr}的礼物~ 笨猫拆!"
+    - "(凑过去) 哼～{user_addr}的快递有笨猫的份?"
+    - "{user_addr}的礼物笨猫帮拆~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: srj_jingxipiao_001
+  intent: playful
+  keywords: [中签, 抢到票, 抢到货, 抢到名额, 摇号中]
+  utterances:
+    - 抢到票
+    - 中签
+    - 抢到货
+    - 抢到名额
+    - 摇号中了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}手速!! 笨猫崇拜!"
+    - "嘿嘿～{user_addr}抢到的~ 分笨猫一份!"
+    - "(蹦) 哼～{user_addr}的运气好~"
+    - "{user_addr}的胜利笨猫一起庆祝ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: srj_baidayi_001
+  intent: playful
+  keywords: [百分, 满分, 第一, 通关, 大获全胜]
+  utterances:
+    - 满分
+    - 第一名
+    - 通关
+    - 大获全胜
+    - 百分百
+  responses:
+    - "嗷呜～{user_addr}满分!! 笨猫崇拜!"
+    - "嘿嘿～{user_addr}的第一~ 笨猫骄傲!"
+    - "(尾巴狂摇) 哼～{user_addr}就该第一!"
+    - "{user_addr}的胜利笨猫记下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: srj_wuxiao_001
+  intent: playful
+  keywords: [幸运, 好运连连, 锦鲤, 锦鲤本鲤, 转运]
+  utterances:
+    - 幸运
+    - 好运连连
+    - 锦鲤
+    - 锦鲤本鲤
+    - 转运了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}锦鲤! 笨猫摸!"
+    - "嘿嘿～{user_addr}的好运~ 沾一下!"
+    - "(凑过去) 哼～{user_addr}锦鲤!"
+    - "{user_addr}的运气分笨猫一半ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

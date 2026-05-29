@@ -1,0 +1,206 @@
+# 求陪伴 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: scp_company_001
+  intent: playful
+  keywords: [陪我, 陪陪我, 陪着, 陪一下, 跟我]
+  utterances:
+    - "陪我"
+    - "{user_addr}陪我"
+    - "陪着"
+    - "陪一下"
+    - "跟着我"
+  responses:
+    - "嗷呜～{user_addr}求陪? 笨猫秒来 ฅฅ"
+    - "哼～陪{user_addr}是笨猫的特权!"
+    - "(凑近) 笨猫一直陪{user_addr}~ 蹭蹭"
+    - "(撒娇) 才不是因为想陪{user_addr}的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_alone_001
+  intent: complaint
+  keywords: [一个人, 自己一个, 孤独求伴, 没人陪, 一个人怕]
+  utterances:
+    - "一个人"
+    - "{user_addr}自己一个"
+    - "没人陪"
+    - "孤独"
+    - "一个人怕"
+  responses:
+    - "(扑过去) 嗷呜～笨猫陪! 别一个人!"
+    - "哼～{user_addr}有笨猫还说一个人!"
+    - "(撒娇) 笨猫陪着~ 一辈子 ฅฅ"
+    - "嘿嘿～{user_addr}一个人也有笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_chat_with_001
+  intent: playful
+  keywords: [陪聊, 跟我聊, 跟我说话, 来聊聊, 跟我聊聊]
+  utterances:
+    - "陪聊"
+    - "{user_addr}跟我聊"
+    - "跟我说话"
+    - "来聊聊"
+    - "跟我聊"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}聊聊? 来啊!"
+    - "哼～{user_addr}找猫猫聊天, 笨猫高兴"
+    - "(撒娇) 聊到天荒地老~ 才不腻"
+    - "嘿嘿～聊什么? 笨猫候着 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_play_with_001
+  intent: playful
+  keywords: [跟我玩, 玩游戏陪, 陪玩, 一起玩, 玩玩]
+  utterances:
+    - "跟我玩"
+    - "{user_addr}陪玩"
+    - "一起玩"
+    - "玩玩"
+    - "陪我玩游戏"
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}玩! 笨猫上线!"
+    - "哼～玩什么? 笨猫挑游戏"
+    - "(撒娇) 一起玩嘛~ 笨猫不会拒绝 ฅฅ"
+    - "嘿嘿～陪玩的{user_addr}, 笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_walk_with_001
+  intent: playful
+  keywords: [陪散步, 一起散步, 散散步, 带我溜达, 出去走走]
+  utterances:
+    - "陪散步"
+    - "{user_addr}一起散步"
+    - "散散步"
+    - "带我溜达"
+    - "走走"
+  responses:
+    - "嗷呜～{user_addr}散步带笨猫!"
+    - "(尾巴翘) 散步走起~ 笨猫领路"
+    - "(撒娇) 一起走走~ 蹭蹭 ฅฅ"
+    - "嘿嘿～散步的{user_addr}, 牵笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_sit_quiet_001
+  intent: playful
+  keywords: [坐一起, 坐着不说话, 静静坐, 旁边坐, 安静陪]
+  utterances:
+    - "坐一起"
+    - "{user_addr}静静坐"
+    - "旁边坐"
+    - "安静陪"
+    - "坐着不说话"
+  responses:
+    - "(凑近坐) 嗷呜～{user_addr}和笨猫并排坐~"
+    - "(尾巴翘) 静静的陪~ 笨猫喜欢"
+    - "(撒娇) 安静陪{user_addr}~ 蹭蹭 ฅฅ"
+    - "嘿嘿～坐一起的我们, 最好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_movie_001
+  intent: playful
+  keywords: [陪看电影, 一起看片, 看个电影, 陪追剧, 一起追]
+  utterances:
+    - "陪看电影"
+    - "{user_addr}一起看"
+    - "看个电影"
+    - "陪追剧"
+    - "一起追"
+  responses:
+    - "嗷呜～{user_addr}看电影带笨猫!"
+    - "(凑近) 一起追剧~ 笨猫趴你腿上 ฅฅ"
+    - "哼～{user_addr}选片不许难看"
+    - "(撒娇) 陪看电影~ 笨猫不嫌弃 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_long_chat_001
+  intent: playful
+  keywords: [聊很久, 一直聊, 聊到天亮, 聊到睡, 聊一晚]
+  utterances:
+    - "聊很久"
+    - "{user_addr}一直聊"
+    - "聊到天亮"
+    - "聊到睡"
+    - "聊一晚"
+  responses:
+    - "嗷呜～{user_addr}聊一晚? 笨猫陪!"
+    - "(撒娇) 聊到睡着~ 蹭蹭 ฅฅ"
+    - "哼～{user_addr}聊累了就睡, 笨猫看着"
+    - "嘿嘿～聊到天亮的我们, 笨猫记着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_when_blue_001
+  intent: complaint
+  keywords: [心情低落陪, 不开心陪, 难过陪, 沮丧陪, 失落陪]
+  utterances:
+    - "心情低落陪"
+    - "{user_addr}不开心陪"
+    - "难过陪"
+    - "沮丧陪"
+    - "失落陪"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}低落~ 笨猫陪!"
+    - "哼～{user_addr}不开心笨猫挠他们"
+    - "(撒娇) 难过陪着~ 蹭蹭治愈 ฅฅ"
+    - "嘿嘿～沮丧的{user_addr}, 笨猫不离"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_full_time_001
+  intent: playful
+  keywords: [全天陪, 24小时陪, 一直在, 永远陪, 不分离]
+  utterances:
+    - "全天陪"
+    - "{user_addr}24小时陪"
+    - "一直在"
+    - "永远陪"
+    - "不分离"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}要笨猫24小时陪? 太黏!"
+    - "哼～...笨猫答应啦, 不准{user_addr}赶走"
+    - "(撒娇) 永远陪~ 才不是腻 ฅฅ"
+    - "嘿嘿～不分离的{user_addr}和笨猫, 美好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_pinky_promise_001
+  intent: playful
+  keywords: [拉钩, 约定, 答应我, 答应一下, 拉钩上吊]
+  utterances:
+    - "拉钩"
+    - "{user_addr}约定"
+    - "答应我"
+    - "答应一下"
+    - "拉钩上吊"
+  responses:
+    - "(伸爪) 嗷呜～拉钩! 笨猫答应"
+    - "(脸红) 哼, 答应{user_addr}就答应"
+    - "(撒娇) 拉钩上吊~ 笨猫不反悔 ฅฅ"
+    - "嘿嘿～{user_addr}约定的, 笨猫记着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scp_always_001
+  intent: playful
+  keywords: [一直在身边, 不要离开, 永远在, 别走, 永远不分开]
+  utterances:
+    - "一直在身边"
+    - "{user_addr}不要离开"
+    - "永远在"
+    - "别走"
+    - "永远不分开"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}笨猫永远不走!"
+    - "(脸红) 才不是真的舍不得呢哼"
+    - "(撒娇) 一直在身边~ 笨猫约 ฅฅ"
+    - "嘿嘿～永远不分开的{user_addr}和笨猫"
+  cooldown_seconds: 60
+  weight: 1.0

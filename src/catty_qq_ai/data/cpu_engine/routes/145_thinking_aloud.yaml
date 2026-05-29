@@ -1,0 +1,172 @@
+# 自言自语思考 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ta_zibimuyu_001
+  intent: playful
+  keywords: [我在想, 思考中, 想着想着, 在想事, 想事情]
+  utterances:
+    - 我在想
+    - 思考中
+    - 想着想着
+    - 在想事
+    - 想事情
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}笨猫陪想"
+    - "(歪头) {user_addr}笨猫听"
+    - "{user_addr}慢慢说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ta_doubt_001
+  intent: playful
+  keywords: [真的吗, 是吗, 真的假的, 不会吧, 怀疑]
+  utterances:
+    - 真的吗
+    - 真的假的
+    - 不会吧
+    - 是吗
+    - 怀疑
+  responses:
+    - "嗷呜～{user_addr}真的喵 ฅฅ"
+    - "哼～{user_addr}不信问笨猫"
+    - "(摇尾) {user_addr}笨猫担保"
+    - "{user_addr}真的真的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ta_thinking_001
+  intent: playful
+  keywords: [让我想想, 思考一下, 等等, 我想想, 等想想]
+  utterances:
+    - 让我想想
+    - 思考一下
+    - 等等
+    - 我想想
+    - 慢着想
+  responses:
+    - "(等) 嗷呜～{user_addr}笨猫等 ฅฅ"
+    - "哼～{user_addr}快想!"
+    - "(尾巴翘) {user_addr}笨猫陪"
+    - "{user_addr}笨猫给你时间蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ta_aha_001
+  intent: playful
+  keywords: [原来如此, 我懂了, 明白了, 哦哦, 知道了]
+  utterances:
+    - 原来如此
+    - 我懂了
+    - 明白了
+    - 哦哦
+    - 知道了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}聪明 ฅฅ"
+    - "哼～{user_addr}笨猫早知道!"
+    - "(凑过来) {user_addr}笨猫陪悟"
+    - "{user_addr}聪明蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ta_wonder_001
+  intent: playful
+  keywords: [为什么, 怎么会, 怎么这样, 难道, 怎么搞的]
+  utterances:
+    - 为什么
+    - 怎么会
+    - 怎么这样
+    - 难道
+    - 怎么搞的
+  responses:
+    - "(歪头) 嗷呜～{user_addr}问啥 ฅฅ"
+    - "哼～{user_addr}笨猫不知道"
+    - "(尾巴翘) {user_addr}笨猫问问"
+    - "{user_addr}笨猫陪你想蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ta_planning_001
+  intent: playful
+  keywords: [我计划, 安排一下, 打算做, 准备做, 计划]
+  utterances:
+    - 我计划
+    - 安排一下
+    - 打算做
+    - 准备做
+    - 计划
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}说说 ฅฅ"
+    - "哼～{user_addr}笨猫帮看"
+    - "(尾巴翘) {user_addr}笨猫支持"
+    - "{user_addr}加油蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ta_recall_001
+  intent: playful
+  keywords: [想起来, 突然记起, 想到, 记起, 突然想起]
+  utterances:
+    - 想起来了
+    - 突然记起
+    - 想到
+    - 记起
+    - 突然想起
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}笨猫听"
+    - "(尾巴翘) {user_addr}慢说"
+    - "{user_addr}笨猫陪回忆蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ta_compare_001
+  intent: playful
+  keywords: [选哪个, 二选一, 怎么选, 哪个好, 选择困难]
+  utterances:
+    - 选哪个
+    - 二选一
+    - 怎么选
+    - 哪个好
+    - 选择困难
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}笨猫帮选 ฅฅ"
+    - "哼～{user_addr}全要!"
+    - "(尾巴翘) {user_addr}笨猫看看"
+    - "{user_addr}笨猫选 A蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ta_realize_001
+  intent: playful
+  keywords: [我才发现, 原来, 突然意识, 才知道, 发现]
+  utterances:
+    - 我才发现
+    - 原来
+    - 突然意识
+    - 才知道
+    - 发现
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}聪明 ฅฅ"
+    - "哼～{user_addr}笨猫早就知道"
+    - "(尾巴翘) {user_addr}笨猫陪发现"
+    - "{user_addr}慢慢学蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ta_explainme_001
+  intent: playful
+  keywords: [想跟你说, 告诉你, 让你知道, 跟你讲, 说给你听]
+  utterances:
+    - 想跟你说
+    - 告诉你
+    - 让你知道
+    - 跟你讲
+    - 说给你听
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}快讲!"
+    - "(尾巴翘) {user_addr}笨猫认真听"
+    - "{user_addr}笨猫等你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

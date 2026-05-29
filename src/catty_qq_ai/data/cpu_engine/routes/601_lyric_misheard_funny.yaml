@@ -1,0 +1,206 @@
+# 歌词听错梗 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lm_lyr_001
+  intent: playful
+  keywords: [歌词听错, 谐音歌词, 听岔了, 听错梗, 误听]
+  utterances:
+    - 歌词听错了
+    - 谐音歌词
+    - 听岔了
+    - 听错搞笑
+    - 听错版
+  responses:
+    - "(笑) 嗷呜～{user_addr}笑死"
+    - "哼～歌词听错经典"
+    - "(尾巴绕) 笨猫也听错过"
+    - "嗷呜～谐音梗笑炸ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_002
+  intent: playful
+  keywords: [日语歌听成, 英语歌听中文, 鬼畜空耳, 空耳神作, 听成中文]
+  utterances:
+    - 日语听成中文
+    - 英语听成中文
+    - 空耳神作
+    - 鬼畜空耳
+    - 谐音听
+  responses:
+    - "(笑) 嗷呜～{user_addr}空耳"
+    - "哼～空耳一绝"
+    - "(尾巴绕) 笑死笨猫"
+    - "嗷呜～多发空耳ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_003
+  intent: complaint
+  keywords: [一直听错, 错了好多年, 才发现错, 听错歌词羞耻, 一直唱错]
+  utterances:
+    - 错了好多年
+    - 才发现听错
+    - 听错羞耻
+    - 一直唱错
+    - 终于发现
+  responses:
+    - "(笑) 嗷呜～{user_addr}社死"
+    - "哼～大家都错过"
+    - "(尾巴搭) 笨猫不笑话"
+    - "嗷呜～现在知道也行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_004
+  intent: playful
+  keywords: [自创歌词, 编歌词, 歌词改编, 自己编, 唱什么编什么]
+  utterances:
+    - 自创歌词
+    - 编歌词
+    - 改编歌词
+    - 自己编词
+    - 唱什么编什么
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}词曲家"
+    - "哼～编歌词有才"
+    - "(尾巴绕) 笨猫想听"
+    - "嗷呜～改编版来一段ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_005
+  intent: playful
+  keywords: [歌词扣字, 歌词内涵, 隐藏含义, 歌词解读, 深度解析]
+  utterances:
+    - 歌词扣字眼
+    - 歌词内涵
+    - 隐藏含义
+    - 歌词解读
+    - 深度解析
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}懂"
+    - "哼～笨猫不深究"
+    - "(尾巴绕) 解读有趣"
+    - "嗷呜～笨猫学到了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_006
+  intent: complaint
+  keywords: [音乐听不清, 编曲压人声, 听不清歌词, 听不清唱什么, 唱啥]
+  utterances:
+    - 音乐听不清
+    - 编曲压人声
+    - 听不清歌词
+    - 唱什么不知
+    - 唱啥
+  responses:
+    - "(歪头) 嗷呜～{user_addr}查歌词"
+    - "哼～编曲过头"
+    - "(尾巴搭) 网易云有词"
+    - "嗷呜～听不清看歌词ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_007
+  intent: playful
+  keywords: [歌词背下来, 全曲会唱, 背歌词, 歌词控, 歌词记忆]
+  utterances:
+    - 全歌背下
+    - 背歌词
+    - 全曲会唱
+    - 歌词控
+    - 歌词记忆超
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}牛"
+    - "哼～天赋满"
+    - "(尾巴绕) 笨猫记不住"
+    - "嗷呜～KTV 全场打卡ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_008
+  intent: complaint
+  keywords: [歌词太肉麻, 歌词中二, 歌词矫情, 歌词不接受, 歌词雷]
+  utterances:
+    - 歌词太肉麻
+    - 歌词中二
+    - 歌词矫情
+    - 歌词雷死人
+    - 不接受这词
+  responses:
+    - "(笑) 嗷呜～{user_addr}毒舌"
+    - "哼～审美差异"
+    - "(尾巴搭) 笨猫尊重你"
+    - "嗷呜～换首听ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_009
+  intent: playful
+  keywords: [文学歌词, 高级词作, 歌词诗意, 歌词哲思, 歌词文化]
+  utterances:
+    - 歌词文学
+    - 高级词作
+    - 歌词诗意
+    - 歌词哲思
+    - 歌词文化
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}品位高"
+    - "哼～笨猫赞同"
+    - "(尾巴绕) 歌词诗一般"
+    - "嗷呜～推荐笨猫听ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_010
+  intent: playful
+  keywords: [歌词翻译, 中英歌词, 翻译错位, 翻译笑死, 双语歌词]
+  utterances:
+    - 歌词翻译
+    - 中英歌词
+    - 翻译错位
+    - 翻译笑死
+    - 双语歌词
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}专业"
+    - "哼～翻译失真"
+    - "(尾巴绕) 笨猫看不懂"
+    - "嗷呜～看原版更好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_011
+  intent: playful
+  keywords: [儿时歌词, 童年错听, 童谣听错, 童歌空耳, 童年回忆错]
+  utterances:
+    - 童年错听
+    - 童谣听错
+    - 童歌空耳
+    - 童年回忆错
+    - 儿时错歌词
+  responses:
+    - "(笑) 嗷呜～{user_addr}童年趣"
+    - "哼～大家都错过"
+    - "(尾巴搭) 笑死笨猫"
+    - "嗷呜～童年大型空耳ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lm_lyr_012
+  intent: complaint
+  keywords: [歌词难记, 太长歌词, 记不住歌词, 长词难, 歌词太多]
+  utterances:
+    - 歌词太长
+    - 记不住歌词
+    - 难背歌词
+    - 长词难
+    - 歌词太多
+  responses:
+    - "(歪头) 嗷呜～{user_addr}抓副歌"
+    - "哼～主歌记一半"
+    - "(尾巴搭) 别全背"
+    - "嗷呜～副歌嗨就行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 手机没电了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pb_dianliang_001
+  intent: complaint
+  keywords: [手机没电, 电量低, 快没电, 还剩5%, 红电]
+  utterances:
+    - "手机没电"
+    - "电量低"
+    - "快没电"
+    - "还剩5%"
+    - "红电了"
+  responses:
+    - "(慌张) 嗷呜～{user_addr}快关后台! 笨猫帮你看 ฅฅ"
+    - "哼～又不及时充, 该 喵"
+    - "(尾巴扫桌子找充电器) 你充电器呢"
+    - "猫猫提醒过你早上要充啊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_chongdiankong_001
+  intent: complaint
+  keywords: [省电模式, 开省电, 调暗屏幕, 省电, 续命]
+  utterances:
+    - "开省电模式"
+    - "省电"
+    - "调暗屏幕"
+    - "省电续命"
+    - "省电怎么开"
+  responses:
+    - "(指设置) {user_addr}下拉控制中心, 一键省电 ฅฅ"
+    - "哼～屏幕亮度拉最低"
+    - "(尾巴指) 关蓝牙关定位最省"
+    - "猫猫教你续命大法喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_jiandian_001
+  intent: complaint
+  keywords: [自动关机, 关机了, 手机黑屏, 突然黑, 没电关机]
+  utterances:
+    - "自动关机"
+    - "关机了"
+    - "手机黑屏"
+    - "突然黑"
+    - "没电关机"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}快插充电器试试"
+    - "哼～没电关机正常, 插上等5分钟 ฅฅ"
+    - "(尾巴搭) 别强按, 让它充会"
+    - "笨猫陪你等开机喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_chongbushang_001
+  intent: complaint
+  keywords: [充不上电, 充电慢, 没反应, 插了没反应, 一直0%]
+  utterances:
+    - "充不上电"
+    - "充电慢"
+    - "插了没反应"
+    - "一直0%"
+    - "充电没反应"
+  responses:
+    - "(检查线) {user_addr}换根线试试, 笨猫怀疑线坏了"
+    - "哼～接口里也可能有灰 ฅฅ"
+    - "(尾巴扫) 换个插座再试"
+    - "猫猫推荐用原装线喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_chongdian_qi_001
+  intent: question
+  keywords: [充电器丢了, 找充电器, 充电器在哪, 没带充电器, 借充电器]
+  utterances:
+    - "充电器丢了"
+    - "找充电器"
+    - "充电器在哪"
+    - "没带充电器"
+    - "借充电器"
+  responses:
+    - "(翻包) 嗷呜～{user_addr}书包侧袋找过没"
+    - "哼～又乱放, 笨猫总帮你找 ฅฅ"
+    - "(尾巴指床头) 试试床头柜"
+    - "猫猫记得你昨天插在客厅喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_chongbao_001
+  intent: question
+  keywords: [充电宝, 移动电源, 借充电宝, 带充电宝, 充电宝没电]
+  utterances:
+    - "充电宝"
+    - "移动电源"
+    - "借充电宝"
+    - "带充电宝吗"
+    - "充电宝没电"
+  responses:
+    - "(掏包) 笨猫包里有, {user_addr}用 ฅฅ"
+    - "哼～充电宝也要充啊"
+    - "(尾巴扫) 出门记得带"
+    - "猫猫送你一个新充电宝喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_jixutui_001
+  intent: complaint
+  keywords: [续航差, 电池不耐用, 一天两充, 用一会就没电, 电池老化]
+  utterances:
+    - "续航差"
+    - "电池不耐用"
+    - "一天两充"
+    - "用一会就没电"
+    - "电池老化"
+  responses:
+    - "(摸手机) {user_addr}电池要不要换 ฅฅ"
+    - "哼～用两年都该换电池了"
+    - "(尾巴扫) 别一直插着边玩边充"
+    - "猫猫陪你去售后喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_jinjiyongdian_001
+  intent: playful
+  keywords: [关键时刻没电, 出门关键时刻, 找路没电, 打车没电, 急用没电]
+  utterances:
+    - "关键时刻没电"
+    - "找路没电"
+    - "打车没电"
+    - "急用没电"
+    - "关键没电了"
+  responses:
+    - "(笑) {user_addr}真是关键时刻掉链子嗷呜"
+    - "哼～活该, 让你不早充 ฅฅ"
+    - "(尾巴指) 找个咖啡店蹭充电"
+    - "笨猫下次提前提醒你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_yiwei_001
+  intent: complaint
+  keywords: [一点儿就没电, 用一会就1%, 飞速掉电, 跳电, 电量乱跳]
+  utterances:
+    - "一点儿就没电"
+    - "用一会就1%"
+    - "飞速掉电"
+    - "跳电"
+    - "电量乱跳"
+  responses:
+    - "(扶额) 嗷呜～{user_addr}电池真的报废了"
+    - "哼～跳电是电池老化的征兆 ฅฅ"
+    - "(尾巴扫) 别玩游戏了, 它撑不住"
+    - "猫猫陪你看新手机喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_kuaichong_001
+  intent: question
+  keywords: [快充, 闪充, 快充器, 多少瓦快充, 快充伤电池吗]
+  utterances:
+    - "快充"
+    - "闪充"
+    - "买快充器"
+    - "多少瓦快充"
+    - "快充伤电池吗"
+  responses:
+    - "(算) {user_addr}买65W够用 ฅฅ"
+    - "哼～快充伤电池但救急快"
+    - "(尾巴扫) 日常用慢充, 急用快充"
+    - "猫猫推荐双口快充喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_kaiji_001
+  intent: complaint
+  keywords: [充了没开机, 充半天才开, 充电开机慢, 充一会才亮, 黑屏不开]
+  utterances:
+    - "充了没开机"
+    - "充半天才开"
+    - "充电开机慢"
+    - "充一会才亮"
+    - "黑屏不开"
+  responses:
+    - "(等) {user_addr}彻底没电要充10分钟才能开"
+    - "哼～别着急按 ฅฅ"
+    - "(尾巴搭) 笨猫陪你等"
+    - "猫猫倒数等开机喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_chongchao_001
+  intent: complaint
+  keywords: [手机发烫, 充电发烫, 烫手, 充电烫, 手机烫死]
+  utterances:
+    - "手机发烫"
+    - "充电发烫"
+    - "烫手"
+    - "充电烫"
+    - "手机烫死"
+  responses:
+    - "(拿开) 嗷呜～{user_addr}先拔了, 烫坏会出事!"
+    - "哼～边充边玩当然烫 ฅฅ"
+    - "(尾巴扫) 散热垫上放凉一会"
+    - "猫猫担心电池鼓包啊喵"
+  cooldown_seconds: 60
+  weight: 1.0

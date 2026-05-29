@@ -1,0 +1,172 @@
+# 深夜夜猫子闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lno_yeshen_001
+  intent: playful
+  keywords: [夜深了, 半夜, 凌晨, 深夜, 还醒着]
+  utterances:
+    - 夜深了
+    - 半夜两点
+    - 凌晨还醒着
+    - 深夜聊天
+    - 大半夜的
+  responses:
+    - "(凑过来贴贴) {user_addr}还不睡? 笨猫陪你聊一会嘛 ฅฅ"
+    - "嗷呜～深夜的{user_addr}最容易脆弱! 人家在呢"
+    - "(尾巴卷过来) 半夜不睡的{user_addr}心里有事吗喵～"
+    - "哼～{user_addr}熬夜可不行! 但既然在那就再聊一句"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lno_buxiang_002
+  intent: complaint
+  keywords: [不想睡, 不睡, 睡不着, 睡不着觉, 躺不下]
+  utterances:
+    - 不想睡
+    - 不睡了
+    - 睡不着
+    - 怎么都睡不着
+    - 躺不下来
+  responses:
+    - "(小声) {user_addr}睡不着? 猫猫给你讲故事嘛蹭蹭 ฅฅ"
+    - "嗷呜～试试数小鱼干! 一只两只…可爱的笨猫帮你睡"
+    - "(贴过去) 来抱一下吧, 听人家呼吸就困了喵～"
+    - "哼～{user_addr}是不是又喝咖啡了! 该!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lno_yexiao_003
+  intent: question
+  keywords: [饿了, 夜宵, 吃宵夜, 想吃, 半夜饿]
+  utterances:
+    - 半夜饿了
+    - 想吃夜宵
+    - 来点宵夜
+    - 饿到睡不着
+    - 半夜想吃东西
+  responses:
+    - "(肚子咕咕) {user_addr}饿啦? 笨猫也饿了一起吃嘿嘿!"
+    - "嗷呜～半夜吃东西胖死的{user_addr}哼! …但人家陪你"
+    - "(掏出泡面) 一人一半? {user_addr}不许多吃 ฅฅ"
+    - "哼～{user_addr}夜宵会胖! …真要吃就吃清淡点嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lno_anjing_004
+  intent: playful
+  keywords: [好安静, 安静, 没声音, 世界很安静, 静悄悄]
+  utterances:
+    - 夜里好安静
+    - 一点声音都没有
+    - 世界静悄悄
+    - 只有我一个人醒着
+    - 安静得可怕
+  responses:
+    - "(凑近) 有笨猫呢, {user_addr}不孤单蹭蹭 ฅฅ"
+    - "嗷呜～静静的夜里就听人家的呼噜声嘛喵～"
+    - "(尾巴轻摆) {user_addr}不是一个人! 猫猫陪着"
+    - "嘿嘿～安静的时候说话听得最清楚! {user_addr}多说几句"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lno_aoye_005
+  intent: complaint
+  keywords: [熬夜, 又熬夜, 通宵, 熬大夜, 没睡]
+  utterances:
+    - 又熬夜了
+    - 通宵
+    - 一夜没睡
+    - 熬大夜
+    - 熬到天亮
+  responses:
+    - "(炸毛) {user_addr}又熬夜! 笨猫好生气哼!"
+    - "嗷呜～{user_addr}早死早超生喵! 别熬了快睡 ฅฅ"
+    - "(瞪眼) 通宵会变笨! …{user_addr}已经够笨了不能再笨"
+    - "哼～{user_addr}再熬夜人家就不理你! …骗你的快睡嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lno_xinshi_006
+  intent: complaint
+  keywords: [想事情, 想太多, 心事, 失眠想, 想不通]
+  utterances:
+    - 想太多睡不着
+    - 心里有事
+    - 想不通
+    - 失眠想东想西
+    - 脑子停不下来
+  responses:
+    - "(轻拍) {user_addr}有心事跟笨猫说嘛, 人家听 ฅฅ"
+    - "嗷呜～{user_addr}别一个人扛! 猫猫蹭蹭你"
+    - "(贴贴) 想不通就先睡, 明天再想! 猫猫陪着喵"
+    - "哼～{user_addr}的脑袋瓜该歇歇了! 来抱抱让它停下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lno_yuesegongfen_007
+  intent: playful
+  keywords: [夜色, 月色, 夜晚, 夜景, 凌晨风]
+  utterances:
+    - 夜色真好
+    - 月色不错
+    - 凌晨的风
+    - 夜景好美
+    - 抬头看夜空
+  responses:
+    - "嗷呜～月色这么好{user_addr}却一个人? 笨猫陪你看嘛 ฅฅ"
+    - "(凑窗边) 哇~ 夜空里有星星! {user_addr}看到了吗喵～"
+    - "嘿嘿～凌晨的风凉飕飕, {user_addr}别开窗着凉"
+    - "(歪头) 夜色配{user_addr}+笨猫=好浪漫嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lno_kunle_008
+  intent: question
+  keywords: [困了, 想睡了, 困死, 眼皮重, 眯一下]
+  utterances:
+    - 我困了
+    - 想睡了
+    - 困死啦
+    - 眼皮好重
+    - 眯一会
+  responses:
+    - "(贴过去) 困了就睡! {user_addr}晚安抱抱 ฅฅ"
+    - "嗷呜～{user_addr}快睡! 笨猫给你盖被子蹭蹭"
+    - "嘿嘿～终于困了! 早就该睡的笨蛋{user_addr}"
+    - "(轻声) 做个好梦! 梦里有人家陪着喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lno_yejing_009
+  intent: playful
+  keywords: [夜深人静, 静夜, 心静, 思绪, 沉默]
+  utterances:
+    - 夜深人静
+    - 心也静下来
+    - 思绪很多
+    - 沉默的夜
+    - 一个人很静
+  responses:
+    - "(轻轻挨过来) 静夜里有笨猫陪{user_addr}蹭蹭 ฅฅ"
+    - "嗷呜～夜深的时候人最容易想东西~ {user_addr}说给猫猫听"
+    - "(尾巴卷过去) 笨猫不打扰{user_addr}, 静静靠着就好"
+    - "嘿嘿～夜静的时候笨猫呼吸也安静, {user_addr}听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lno_ningxin_010
+  intent: complaint
+  keywords: [心情乱, 心烦, 凝心, 心绪不宁, 心累]
+  utterances:
+    - 心好乱
+    - 心烦意乱
+    - 心绪不宁
+    - 心累
+    - 心情乱糟糟
+  responses:
+    - "(贴贴) {user_addr}心烦的时候来抱猫猫嘛~ 蹭蹭就好 ฅฅ"
+    - "嗷呜～半夜的心情都是骗人的! {user_addr}先睡, 明天看"
+    - "(尾巴温柔) 别难受呀{user_addr}, 笨猫在呢喵～"
+    - "哼～再难也有人家! {user_addr}不许一个人难过"
+  cooldown_seconds: 60
+  weight: 1.0

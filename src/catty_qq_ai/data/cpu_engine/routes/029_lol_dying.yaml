@@ -1,0 +1,172 @@
+# 笑死蚌埠住表情包 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lld_xiaosi_001
+  intent: playful
+  keywords: [笑死, 笑死人, 笑死爆, 把我笑死, 笑得绝]
+  utterances:
+    - 笑死
+    - 笑死人
+    - 笑死爆
+    - 笑死我
+    - 笑得绝
+  responses:
+    - "(噗嗤) {user_addr}笑啥 ฅฅ"
+    - "嗷呜～发笨猫看看"
+    - "(尾巴摇) 一起笑"
+    - "嘿嘿～{user_addr}笑成笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lld_bengbuzhu_002
+  intent: playful
+  keywords: [蚌埠住, 绷不住, 蚌住, 没绷住, 崩了]
+  utterances:
+    - 蚌埠住了
+    - 绷不住
+    - 没绷住
+    - 蚌住
+    - 崩了
+  responses:
+    - "(笑) {user_addr}蚌埠人? ฅฅ"
+    - "嗷呜～笨猫也绷不住"
+    - "(尾巴拍) 一起蚌住"
+    - "嘿嘿～{user_addr}绷不住正常~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lld_juejuezi_003
+  intent: playful
+  keywords: [绝绝子, 绝了, 绝顶, 太绝, 绝绝]
+  utterances:
+    - 绝绝子
+    - 绝了
+    - 绝顶
+    - 太绝
+    - 绝绝
+  responses:
+    - "(尾巴翘) 笨猫也绝绝子! ฅฅ"
+    - "嗷呜～{user_addr}绝啥"
+    - "(尾巴摇) 绝就绝~"
+    - "嘿嘿～{user_addr}绝绝子认证"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lld_aoyu_004
+  intent: playful
+  keywords: [yyds, 永远的神, 真神, 大神, 神]
+  utterances:
+    - yyds
+    - 永远的神
+    - 真神
+    - 大神
+    - 神之
+  responses:
+    - "(挺胸) 笨猫 yyds! ฅฅ"
+    - "嗷呜～{user_addr}才知道"
+    - "(尾巴翘) 早该夸"
+    - "嘿嘿～{user_addr}才是神~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lld_liubaowu_005
+  intent: playful
+  keywords: [666, 6666, 牛, 牛逼, 太牛]
+  utterances:
+    - 666
+    - 6666
+    - 牛逼
+    - 太牛了
+    - 牛 牛
+  responses:
+    - "(尾巴摇) 6 6 6! ฅฅ"
+    - "嗷呜～{user_addr}也 6"
+    - "(挺胸) 笨猫 6 到飞起"
+    - "嘿嘿～{user_addr}多 6 几个"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lld_awsl_006
+  intent: playful
+  keywords: [awsl, 啊我死了, 啊我哭了, 萌死, 可爱死]
+  utterances:
+    - awsl
+    - 啊我死了
+    - 啊我哭了
+    - 萌死
+    - 可爱死
+  responses:
+    - "(歪头) {user_addr}咋了 ฅฅ"
+    - "嗷呜～看啥这么激动"
+    - "(尾巴摇) 笨猫陪你死~"
+    - "嘿嘿～{user_addr}夸张~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lld_xiongd_007
+  intent: playful
+  keywords: [雀氏, 确实, 雀实, 没错没错, 是的]
+  utterances:
+    - 雀氏
+    - 确实
+    - 雀实
+    - 是的
+    - 没错没错
+  responses:
+    - "(点头) {user_addr}懂笨猫 ฅฅ"
+    - "嗷呜～雀氏!"
+    - "(尾巴摇) 笨猫也觉得"
+    - "嘿嘿～{user_addr}雀氏会说话"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lld_xinmianbao_008
+  intent: playful
+  keywords: [无语, 无语死, 我无语, 服了, 服了你]
+  utterances:
+    - 无语
+    - 无语死
+    - 服了
+    - 服了你
+    - 我无语
+  responses:
+    - "(歪头) {user_addr}发生啥 ฅฅ"
+    - "嗷呜～跟笨猫吐"
+    - "(尾巴搭) 笨猫陪无语"
+    - "嘿嘿～{user_addr}笑了吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lld_aimama_009
+  intent: playful
+  keywords: [妈耶, 妈呀, 我的妈, 哎妈呀, 妈妈咪呀]
+  utterances:
+    - 妈耶
+    - 妈呀
+    - 我的妈
+    - 哎妈呀
+    - 妈妈咪呀
+  responses:
+    - "(吓一跳) {user_addr}吓笨猫 ฅฅ"
+    - "嗷呜～啥事这么炸"
+    - "(尾巴炸) 别一惊一乍"
+    - "嘿嘿～{user_addr}夸张~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lld_xiufu_010
+  intent: playful
+  keywords: [秀, 秀儿, 秀翻, 太秀, 秀爆]
+  utterances:
+    - 秀儿
+    - 秀
+    - 秀翻
+    - 太秀
+    - 秀爆
+  responses:
+    - "(尾巴翘) 笨猫秀爆 ฅฅ"
+    - "嗷呜～{user_addr}也秀"
+    - "(挺胸) 一起秀"
+    - "嘿嘿～{user_addr}秀给笨猫看~"
+  cooldown_seconds: 60
+  weight: 1.0

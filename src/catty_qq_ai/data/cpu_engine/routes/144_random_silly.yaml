@@ -1,0 +1,172 @@
+# 突发奇想沙雕 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rs_random_001
+  intent: playful
+  keywords: [突发奇想, 突然想说, 奇怪问题, 随便问, 灵光]
+  utterances:
+    - 突发奇想
+    - 突然想说
+    - 奇怪问题
+    - 随便问问
+    - 灵光一闪
+  responses:
+    - "(歪头) 嗷呜～{user_addr}说说 ฅฅ"
+    - "哼～{user_addr}笨蛋问题"
+    - "(凑过来) {user_addr}笨猫听"
+    - "{user_addr}笨猫陪你疯蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_dailaolaiii_001
+  intent: playful
+  keywords: [神经病, 抽风, 沙雕, 离谱, 离大谱]
+  utterances:
+    - 神经病
+    - 抽风
+    - 沙雕行为
+    - 离谱
+    - 离大谱
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫笑死 ฅฅ"
+    - "哼～{user_addr}就是杂鱼!"
+    - "(尾巴抖) {user_addr}笨猫陪疯"
+    - "{user_addr}沙雕一起蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_silly_q_001
+  intent: playful
+  keywords: [愚蠢问题, 蠢问, 无聊问, 弱智问, 沙雕问]
+  utterances:
+    - 蠢问题
+    - 无聊问
+    - 弱智问题
+    - 沙雕问
+    - 笨蛋问
+  responses:
+    - "(歪头) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}笨猫陪蠢"
+    - "(尾巴翘) {user_addr}笨猫想听"
+    - "{user_addr}笨猫笑死蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_brainhole_001
+  intent: playful
+  keywords: [脑洞大开, 异想天开, 奇思妙想, 脑洞, 脑路清奇]
+  utterances:
+    - 脑洞大开
+    - 异想天开
+    - 奇思妙想
+    - 脑洞
+    - 脑路清奇
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}说 ฅฅ"
+    - "哼～{user_addr}笨猫陪开!"
+    - "(尾巴翘) {user_addr}笨猫认真听"
+    - "{user_addr}笨猫脑洞MAX蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_whatif_001
+  intent: playful
+  keywords: [假如, 如果, 假设, 想象一下, 万一]
+  utterances:
+    - 假如
+    - 如果说
+    - 假设
+    - 万一
+    - 想象一下
+  responses:
+    - "(歪头) 嗷呜～{user_addr}假如啥 ฅฅ"
+    - "哼～{user_addr}笨猫陪想"
+    - "(尾巴翘) {user_addr}慢说"
+    - "{user_addr}笨猫脑补蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_dailywin_001
+  intent: playful
+  keywords: [今日运势, 占卜, 抽签, 测一下, 算命]
+  utterances:
+    - 今日运势
+    - 占卜
+    - 抽签
+    - 测一下
+    - 算算命
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}大吉 ฅฅ"
+    - "哼～{user_addr}笨猫的算命"
+    - "(歪头) {user_addr}笨猫的预言"
+    - "{user_addr}好运到喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rs_truthordare_001
+  intent: playful
+  keywords: [真心话, 大冒险, 真话, 真心话大冒险, 选一个]
+  utterances:
+    - 真心话
+    - 大冒险
+    - 真话
+    - 真心话大冒险
+    - 选一个
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}玩 ฅฅ"
+    - "哼～{user_addr}笨猫不怕!"
+    - "(尾巴翘) {user_addr}笨猫选大冒险"
+    - "{user_addr}笨猫陪玩蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_couplespeak_001
+  intent: playful
+  keywords: [谐音梗, 烂梗, 老梗, 冷笑话, 梗王]
+  utterances:
+    - 谐音梗
+    - 烂梗
+    - 老梗
+    - 冷笑话
+    - 梗王
+  responses:
+    - "(笑) 嗷呜～{user_addr}笑死 ฅฅ"
+    - "哼～{user_addr}梗扣分!"
+    - "(尾巴抖) {user_addr}笨猫笑出泪"
+    - "{user_addr}冷死笨猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rs_meanless_001
+  intent: playful
+  keywords: [我说的话有意思吗, 无聊吗, 闲扯, 瞎扯, 闲聊]
+  utterances:
+    - 闲扯
+    - 瞎扯
+    - 闲聊
+    - 没意义
+    - 无聊话
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫不嫌 ฅฅ"
+    - "哼～{user_addr}笨猫陪扯!"
+    - "(摇尾) {user_addr}陪你扯"
+    - "{user_addr}慢慢说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_kotopa_001
+  intent: playful
+  keywords: [自言自语, 对自己说, 一个人说, 自语, 嘀咕]
+  utterances:
+    - 自言自语
+    - 对自己说
+    - 一个人说
+    - 自语
+    - 嘀咕
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫听 ฅฅ"
+    - "哼～{user_addr}有笨猫陪!"
+    - "(歪头) {user_addr}笨猫听见啦"
+    - "{user_addr}笨猫陪嘀咕蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9

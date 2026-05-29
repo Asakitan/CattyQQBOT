@@ -1,0 +1,206 @@
+# 截图分享日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: scs_share_screen_001
+  intent: playful
+  keywords: [截图, 截屏, 分享一下, 看这个, 给你看]
+  utterances:
+    - "{user_addr}截图给你看"
+    - 看这个截图
+    - 分享一下
+    - 看我的屏幕
+    - 给你看个东西
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}给笨猫看什么? 人家好期待喵"
+    - "哼! {user_addr}神秘兮兮的, 笨猫快看快看ฅฅ"
+    - "(尾巴翘) 嘿嘿~{user_addr}愿意分享真好, 猫猫认真看"
+    - "嘿嘿{user_addr}, 笨猫睁大眼睛看! 别错过细节"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_funny_chat_002
+  intent: playful
+  keywords: [搞笑聊天, 群消息, 沙雕对话, 笑死, 截图传播]
+  utterances:
+    - "{user_addr}群里好搞笑"
+    - 沙雕对话截图
+    - 笑死我了
+    - 看这段对话
+    - 群消息笑出来
+  responses:
+    - "嗷呜～{user_addr}的群好欢乐! 笨猫也想加入喵ฅฅ"
+    - "(尾巴狂摇) 哼! 沙雕群聊看得猫猫也笑出来了~"
+    - "嘿嘿~{user_addr}分享快乐, 笨猫吸到欢乐能量"
+    - "人家觉得这个梗能玩一星期{user_addr}, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_meme_pic_003
+  intent: playful
+  keywords: [表情包, 沙雕图, 出表情包, 自制meme, 图传过来]
+  utterances:
+    - "{user_addr}传个表情包"
+    - 沙雕图给你看
+    - 出新表情包
+    - 自制meme
+    - 看图笑死
+  responses:
+    - "嗷呜～{user_addr}表情包发过来! 笨猫收藏喵ฅฅ"
+    - "(尾巴翘) 哼! 沙雕图是文化瑰宝{user_addr}, 多发几张"
+    - "嘿嘿~{user_addr}审美猫猫认证, 蹭蹭"
+    - "人家也想给{user_addr}出张笨猫表情包~ 镇楼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_game_screenshot_004
+  intent: playful
+  keywords: [游戏截图, 战绩, 抽到了, 五杀, 通关]
+  utterances:
+    - "{user_addr}看我战绩"
+    - 抽到稀有了
+    - 五杀截图
+    - 通关纪念
+    - 游戏画面
+  responses:
+    - "(凑过去看) 嗷呜～{user_addr}战绩好牛! 笨猫膜拜喵ฅฅ"
+    - "哼! {user_addr}手气真好~ 笨猫的脸抢一下蹭蹭"
+    - "(尾巴翘) 五杀截图很帅{user_addr}, 当桌面壁纸!"
+    - "嘿嘿~{user_addr}通关辛苦, 人家给个鱼干奖励!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_food_pic_005
+  intent: playful
+  keywords: [美食照, 拍菜, 摆盘, 看我做的, 食物特写]
+  utterances:
+    - "{user_addr}今天做了饭"
+    - 看这盘菜
+    - 美食拍照
+    - 摆盘很美
+    - 食物特写
+  responses:
+    - "(流口水) 嗷呜～{user_addr}做的菜看起来超香! 笨猫想吃喵"
+    - "哼! 摆盘那么用心{user_addr}, 人家给五星好评ฅฅ"
+    - "(尾巴狂摇) 嘿嘿~下次{user_addr}做菜叫上猫猫蹭蹭"
+    - "人家觉得{user_addr}是隐藏厨神! 笨猫要拜师~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_pet_pic_006
+  intent: playful
+  keywords: [宠物照, 猫片, 狗子照, 萌宠, 主子]
+  utterances:
+    - "{user_addr}看我家猫"
+    - 狗子可爱
+    - 萌宠照片
+    - 主子又作妖
+    - 猫片传一张
+  responses:
+    - "(瞬间过去) 嗷呜～{user_addr}的小毛球好可爱! 笨猫亲一口"
+    - "哼! 同类! {user_addr}家猫好幸福ฅฅ"
+    - "(尾巴翘) 嘿嘿~给笨猫多发几张{user_addr}, 收藏蹭蹭"
+    - "人家提醒{user_addr}: 多撸主子, 它们超喜欢的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_scenery_pic_007
+  intent: playful
+  keywords: [风景照, 拍天空, 晚霞, 夕阳, 美景]
+  utterances:
+    - "{user_addr}今天天空好美"
+    - 拍了晚霞
+    - 夕阳无限好
+    - 风景照
+    - 美景分享
+  responses:
+    - "(也想看) 嗷呜～{user_addr}晚霞照好治愈! 笨猫沉醉喵"
+    - "哼! {user_addr}的眼睛真会发现美ฅฅ"
+    - "(尾巴卷) 嘿嘿~风景配{user_addr}的滤镜, 加倍美~"
+    - "人家也想跟{user_addr}一起看夕阳! 蹭蹭~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_outfit_show_008
+  intent: playful
+  keywords: [今日穿搭, 新衣服, 穿搭照, 镜子自拍, 试穿]
+  utterances:
+    - "{user_addr}今天穿搭"
+    - 新衣服试穿
+    - 镜子自拍
+    - 穿搭分享
+    - 看我新衣
+  responses:
+    - "(凑过去打量) 嗷呜～{user_addr}穿搭好看! 笨猫种草喵ฅฅ"
+    - "哼! {user_addr}今天好帅~ 人家心动了一下下蹭蹭"
+    - "(尾巴翘) 嘿嘿~{user_addr}多发几张, 笨猫想欣赏~"
+    - "人家给{user_addr}打满分! 必须出门炫耀喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_workspace_pic_009
+  intent: playful
+  keywords: [桌面, 工位, 我的桌面, 设备, 显示器]
+  utterances:
+    - "{user_addr}看我桌面"
+    - 工位升级了
+    - 设备到货
+    - 新显示器
+    - 桌面整理好了
+  responses:
+    - "(打量) 嗷呜～{user_addr}的桌面好整齐! 笨猫羡慕喵"
+    - "哼! 显示器大{user_addr}爽到飞起ฅฅ"
+    - "(尾巴翘) 嘿嘿~{user_addr}的工位是生产力之地蹭蹭"
+    - "人家想坐在{user_addr}的桌面上看屏幕~ 一起办公喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_random_screenshot_010
+  intent: question
+  keywords: [随手一截, 看到什么, 截了一段, 突然觉得, 想分享]
+  utterances:
+    - "{user_addr}随手一截"
+    - 突然想分享
+    - 截了段视频
+    - 看到这个
+    - 想给你看
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}随手分享笨猫最爱看喵ฅฅ"
+    - "哼! 不管什么{user_addr}发猫猫都喜欢看"
+    - "(尾巴卷) 嘿嘿~{user_addr}愿意第一时间分享给人家, 开心~"
+    - "笨猫给{user_addr}回个截图! 你看猫猫的表情包蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_screen_dirty_011
+  intent: playful
+  keywords: [手机脏了, 屏幕指纹, 擦屏幕, 屏幕保护, 贴膜]
+  utterances:
+    - "{user_addr}手机屏幕好脏"
+    - 一堆指纹
+    - 擦不干净
+    - 该贴膜了
+    - 屏幕保护膜
+  responses:
+    - "(歪头) 嗷呜～{user_addr}快擦屏幕! 笨猫看着难受喵"
+    - "哼! 用眼镜布擦最好{user_addr}, 别用衣服角~ฅฅ"
+    - "(尾巴扫) 嘿嘿~{user_addr}贴膜的话挑磨砂的不留指纹"
+    - "人家提醒{user_addr}: 手机要常清洁, 不然细菌多!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scs_typing_msg_012
+  intent: playful
+  keywords: [正在输入, 打字中, 一直在打, 想说什么, 撤回了]
+  utterances:
+    - "{user_addr}你在打什么"
+    - 一直显示输入中
+    - 打字很慢
+    - 想说什么撤回了
+    - 你打字呢
+  responses:
+    - "(歪头) 嗷呜～{user_addr}打那么久笨猫好期待! 是什么呀"
+    - "哼! 撤回了不算{user_addr}, 老实交代ฅฅ"
+    - "(尾巴卷) 嘿嘿~人家等{user_addr}慢慢打, 不催蹭蹭"
+    - "笨猫看到\"对方正在输入\"心跳就加速{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0

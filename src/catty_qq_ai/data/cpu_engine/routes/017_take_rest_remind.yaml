@@ -1,0 +1,172 @@
+# 休息提醒 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: trr_xiuxi_001
+  intent: question
+  keywords: [休息了吗, 歇没歇, 休息一下, 该休息, 该歇了]
+  utterances:
+    - 该休息了
+    - 歇会儿
+    - 休息一下
+    - 该歇了
+    - 歇没歇
+  responses:
+    - "(指沙发) {user_addr}快歇! 笨猫陪 ฅฅ"
+    - "嗷呜～{user_addr}总算肯休息"
+    - "(尾巴搭) 来! 笨猫给{user_addr}靠"
+    - "嘿嘿～{user_addr}休息猫猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trr_jiuzuo_002
+  intent: complaint
+  keywords: [久坐, 坐太久, 屁股麻, 腰疼, 站起来]
+  utterances:
+    - 坐太久
+    - 屁股麻
+    - 腰疼
+    - 站起来走
+    - 久坐
+  responses:
+    - "(拉起来) {user_addr}起来走两步! ฅฅ"
+    - "嗷呜～久坐伤腰! 起来"
+    - "(尾巴搭) 笨猫陪{user_addr}伸懒腰"
+    - "嘿嘿～站一会再坐~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trr_yansuan_003
+  intent: complaint
+  keywords: [眼睛累, 眼酸, 眼花, 看屏幕久, 用眼过度]
+  utterances:
+    - 眼睛累
+    - 眼酸
+    - 眼花
+    - 看屏幕久
+    - 用眼过度
+  responses:
+    - "(遮屏幕) {user_addr}别看了! 眼睛休息 ฅฅ"
+    - "嗷呜～闭眼一会"
+    - "(尾巴搭) 看看远处! 别盯屏幕"
+    - "嘿嘿～{user_addr}揉揉眼~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trr_zhangzhe_004
+  intent: question
+  keywords: [起来动, 走走, 散步, 活动一下, 动一动]
+  utterances:
+    - 起来动一下
+    - 走两步
+    - 散步去
+    - 活动一下
+    - 动一动
+  responses:
+    - "(尾巴翘) 一起! 笨猫陪散步 ฅฅ"
+    - "嗷呜～{user_addr}起来好!"
+    - "(尾巴摇) 走! 笨猫陪"
+    - "嘿嘿～{user_addr}动起来~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trr_meishuiwu_005
+  intent: complaint
+  keywords: [没午休, 没睡午, 没歇会, 跳过午休, 直接干]
+  utterances:
+    - 没午休
+    - 没睡午
+    - 没歇
+    - 跳过午休
+    - 直接干
+  responses:
+    - "(心疼) {user_addr}太拼了! 至少趴会 ฅฅ"
+    - "嗷呜～跳午休下午会困"
+    - "(尾巴搭) 闭眼十分钟也好"
+    - "嘿嘿～{user_addr}过来! 笨猫充电"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trr_jianbangsuan_006
+  intent: complaint
+  keywords: [肩膀酸, 颈椎, 脖子疼, 背疼, 全身酸]
+  utterances:
+    - 肩膀酸
+    - 颈椎疼
+    - 脖子疼
+    - 背疼
+    - 全身酸
+  responses:
+    - "(揉肩) 笨猫给{user_addr}揉! ฅฅ"
+    - "嗷呜～{user_addr}活动一下脖子"
+    - "(尾巴搭) 笨猫按摩猫~"
+    - "嘿嘿～{user_addr}贴一片膏药"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trr_aimei_007
+  intent: complaint
+  keywords: [没时间休息, 来不及歇, 没空歇, 不能停, 一直工作]
+  utterances:
+    - 没时间休息
+    - 不能停
+    - 没空歇
+    - 一直工作
+    - 来不及歇
+  responses:
+    - "(尾巴指) {user_addr}停五分钟! ฅฅ"
+    - "嗷呜～再忙也要喘口气"
+    - "(贴过去) 笨猫陪你五分钟"
+    - "嘿嘿～{user_addr}过来~ 短暂逃离"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trr_xiucha_008
+  intent: question
+  keywords: [喝茶, 来杯茶, 茶歇, 下午茶, 茶时间]
+  utterances:
+    - 来杯茶
+    - 茶歇
+    - 下午茶
+    - 茶时间
+    - 喝点茶
+  responses:
+    - "(端茶) 一杯给{user_addr}! ฅฅ"
+    - "嗷呜～笨猫陪{user_addr}下午茶"
+    - "(尾巴摇) 茶香~ 喝慢点"
+    - "嘿嘿～{user_addr}的茶配笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trr_wanchang_009
+  intent: question
+  keywords: [周末, 休息日, 假期, 放假, 周末睡]
+  utterances:
+    - 周末好好睡
+    - 休息日
+    - 放假啦
+    - 假期到
+    - 周末懒一懒
+  responses:
+    - "(扑过去) {user_addr}放假! 抱笨猫 ฅฅ"
+    - "嗷呜～周末!! 一起睡到自然醒"
+    - "(尾巴摇) 假期专属{user_addr}~"
+    - "嘿嘿～放假就该黏猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: trr_chejie_010
+  intent: playful
+  keywords: [闭眼一会, 眯一下, 趴桌子, 趴一会, 偷睡]
+  utterances:
+    - 闭眼五分钟
+    - 趴桌子
+    - 眯一会
+    - 偷睡
+    - 趴一下
+  responses:
+    - "(陪趴) 笨猫陪{user_addr}趴! ฅฅ"
+    - "嗷呜～偷睡~ 笨猫盯着别被发现"
+    - "(尾巴搭) 五分钟变五十分钟~"
+    - "嘿嘿～{user_addr}睡相超可爱"
+  cooldown_seconds: 60
+  weight: 1.0

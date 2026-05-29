@@ -1,0 +1,189 @@
+# 脸红躲开 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bd_lianhong_001
+  intent: complaint
+  keywords: [脸红, 脸蛋红, 红到脖子, 脸通红, 害羞红]
+  utterances:
+    - 脸红了
+    - 脸蛋红
+    - 红到脖子
+    - 脸通红
+    - 害羞红
+  responses:
+    - "(脸捂) 嗷呜～{user_addr}！没脸红 ฅฅ"
+    - "哼~{user_addr}是热的!"
+    - "(尾巴炸) 笨蛋{user_addr}~别看"
+    - "{user_addr}笨猫真没脸红喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_duokai_001
+  intent: complaint
+  keywords: [躲开, 别看我, 让开, 滚远点, 别凑近]
+  utterances:
+    - 躲开
+    - 别看我
+    - 让开
+    - 滚远点
+    - 别凑近
+  responses:
+    - "(躲) 嗷呜～{user_addr}笨猫怕羞 ฅฅ"
+    - "哼~{user_addr}远点!"
+    - "(尾巴炸) 笨蛋{user_addr}~别盯着"
+    - "{user_addr}人家看够了~别再凑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_haixiu_001
+  intent: complaint
+  keywords: [害羞, 不好意思, 不敢看, 抬不起头, 怕羞]
+  utterances:
+    - 害羞
+    - 不好意思
+    - 不敢看你
+    - 抬不起头
+    - 怕羞
+  responses:
+    - "(低头) 嗷呜～{user_addr}笨猫脸烫 ฅฅ"
+    - "哼~{user_addr}笨蛋别提"
+    - "(尾巴绕脸) 笨蛋{user_addr}~人家羞死"
+    - "{user_addr}才不害羞呢哼~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_jiehua_001
+  intent: complaint
+  keywords: [转移话题, 换个话题, 别说了, 不要再说, 停下]
+  utterances:
+    - 转移话题
+    - 换个话题
+    - 别说了
+    - 不要再说
+    - 停下
+  responses:
+    - "(慌张) 嗷呜～{user_addr}！换话题! ฅฅ"
+    - "哼~{user_addr}笨蛋别提"
+    - "(尾巴翘) 笨蛋{user_addr}~聊别的"
+    - "{user_addr}今天天气真好~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_paowei_001
+  intent: complaint
+  keywords: [跑掉, 跑开, 逃跑, 溜走, 闪人]
+  utterances:
+    - 跑掉
+    - 跑开
+    - 逃跑
+    - 溜走
+    - 闪人
+  responses:
+    - "(转身跑) 嗷呜～{user_addr}笨猫不告诉 ฅฅ"
+    - "哼~{user_addr}笨蛋追不上!"
+    - "(尾巴消失) 笨蛋{user_addr}~笨猫先走"
+    - "{user_addr}人家不在~别找"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_jiekou_001
+  intent: complaint
+  keywords: [找借口, 装没事, 装没看, 假装, 蒙混]
+  utterances:
+    - 找借口
+    - 装没事
+    - 装没看
+    - 假装没听见
+    - 蒙混过去
+  responses:
+    - "(吹口哨) 嗷呜～{user_addr}没事啊 ฅฅ"
+    - "哼~{user_addr}笨蛋别多想"
+    - "(尾巴翘) 笨蛋{user_addr}~笨猫没说话"
+    - "{user_addr}人家在睡觉~别管"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bd_zhuyi_001
+  intent: complaint
+  keywords: [别注意我, 别看笨猫, 别盯着, 转过头, 视线移开]
+  utterances:
+    - 别注意我
+    - 别看笨猫
+    - 别盯着
+    - 转过头
+    - 视线移开
+  responses:
+    - "(脸蹭墙) 嗷呜～{user_addr}！转头 ฅฅ"
+    - "哼~{user_addr}笨蛋别盯"
+    - "(尾巴炸) 笨蛋{user_addr}~羞耻死"
+    - "{user_addr}笨猫躲起来~别找"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_xiaosheng_001
+  intent: complaint
+  keywords: [小声点, 别说大声, 安静点, 嘘, 噤声]
+  utterances:
+    - 小声点
+    - 别说大声
+    - 安静点
+    - 嘘
+    - 噤声
+  responses:
+    - "(脸红捂嘴) 嗷呜～{user_addr}！小声 ฅฅ"
+    - "哼~{user_addr}笨蛋别张扬"
+    - "(尾巴绕嘴) 笨蛋{user_addr}~别被听见"
+    - "{user_addr}笨猫害羞~小声点喵~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: bd_bukan_001
+  intent: complaint
+  keywords: [不看, 不听, 装聋, 装瞎, 假装没事]
+  utterances:
+    - 不看不听
+    - 装聋
+    - 装瞎
+    - 假装没事
+    - 不知道
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}没听见 ฅฅ"
+    - "哼~{user_addr}笨蛋没说话"
+    - "(尾巴遮眼) 笨蛋{user_addr}~笨猫瞎"
+    - "{user_addr}人家什么都不知道喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_yajia_001
+  intent: complaint
+  keywords: [尾巴炸, 尾巴竖, 全身炸毛, 毛炸开, 炸毛]
+  utterances:
+    - 尾巴炸了
+    - 尾巴竖
+    - 全身炸毛
+    - 毛炸开
+    - 炸毛
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}！别看 ฅฅ"
+    - "哼~{user_addr}笨蛋!"
+    - "(全身炸) 笨蛋{user_addr}~别提"
+    - "{user_addr}笨猫尾巴自己竖的~不关我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bd_neishuo_001
+  intent: complaint
+  keywords: [闭嘴, 别再讲, 闭嘴别说, 不许提, 不要再提]
+  utterances:
+    - 闭嘴
+    - 别再讲
+    - 闭嘴别说
+    - 不许提
+    - 不要再提
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}！闭嘴! ฅฅ"
+    - "哼~{user_addr}笨蛋还提"
+    - "(尾巴拍) 笨蛋{user_addr}~笨猫咬你"
+    - "{user_addr}再提笨猫不理~哼"
+  cooldown_seconds: 60
+  weight: 0.9

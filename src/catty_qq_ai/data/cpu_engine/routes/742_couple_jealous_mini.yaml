@@ -1,0 +1,189 @@
+# 小吃醋时刻 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cjm_chicu_001
+  intent: complaint
+  keywords: [我吃醋了, 醋了, 吃干醋, 莫名吃醋, 心里酸]
+  utterances:
+    - "我吃醋"
+    - "{user_addr}醋了"
+    - "吃干醋"
+    - "莫名吃醋"
+    - "心里酸"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}吃醋谁的? 报我"
+    - "哼～吃醋归吃醋, 别冷战 ฅฅ"
+    - "(凑) 酸就来撸猫, 排解"
+    - "{user_addr}吃醋专属, 别瞎吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cjm_pengyou_001
+  intent: complaint
+  keywords: [你跟别人聊, 跟异性聊, 私聊别人, 找别人, 不专一]
+  utterances:
+    - "{user_addr}跟别人聊"
+    - "跟异性聊"
+    - "私聊别人"
+    - "找别人"
+    - "不专一"
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}专心点!"
+    - "哼～找别人? 哼 ฅฅ"
+    - "(尾巴拍) 私聊别人? 解释"
+    - "{user_addr}不专一笨猫吃醋大爆发"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cjm_kanren_001
+  intent: complaint
+  keywords: [你看别人, 看美女, 看帅哥, 多看一眼, 偷瞄]
+  utterances:
+    - "{user_addr}看别人"
+    - "看美女"
+    - "看帅哥"
+    - "多看一眼"
+    - "偷瞄"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}看哪儿!"
+    - "哼～多看一眼罚陪我 ฅฅ"
+    - "(凑) 偷瞄被我抓包"
+    - "{user_addr}看猫猫就行, 别人不准"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cjm_kuajiang_001
+  intent: complaint
+  keywords: [夸别人, 表扬别人, 说别人好, 夸闺蜜, 夸同事]
+  utterances:
+    - "{user_addr}夸别人"
+    - "表扬别人"
+    - "说别人好"
+    - "夸闺蜜"
+    - "夸同事"
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}别人好笨猫不好?"
+    - "哼～夸我就完了 ฅฅ"
+    - "(尾巴扫) 闺蜜不在乎, 但夸我先"
+    - "{user_addr}夸别人罚抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cjm_yueqiu_001
+  intent: complaint
+  keywords: [跟前任聊, 联系前任, 前任找你, 旧情人, 老相好]
+  utterances:
+    - "跟前任聊"
+    - "{user_addr}联系前任"
+    - "前任找你"
+    - "旧情人"
+    - "老相好"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}前任不许!"
+    - "哼～联系前任就咬 ฅฅ"
+    - "(凑) 旧情人? 拉黑"
+    - "{user_addr}前任找你就告诉我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cjm_jujuepai_001
+  intent: playful
+  keywords: [你只爱我, 只看我, 心里只有我, 专属于我, 独宠]
+  utterances:
+    - "{user_addr}只爱我"
+    - "只看我"
+    - "心里只有我"
+    - "专属于我"
+    - "独宠"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫专属"
+    - "哼～独宠当然 ฅฅ"
+    - "(尾巴绕) 心里只有你, 也只有我"
+    - "{user_addr}只爱我就好, 别犯傻"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cjm_xiaomao_001
+  intent: complaint
+  keywords: [你跟我玩, 我也想被宠, 别忽视我, 我也是, 看看我]
+  utterances:
+    - "{user_addr}跟我玩"
+    - "我也想被宠"
+    - "别忽视我"
+    - "我也是"
+    - "看看我"
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫看你!"
+    - "哼～宠你专场 ฅฅ"
+    - "(凑) 别忽视, 我陪着"
+    - "{user_addr}我也是这里听见"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cjm_buming_001
+  intent: complaint
+  keywords: [那个谁, 提别人名字, 谁谁谁, 朋友的朋友, 不认识的人]
+  utterances:
+    - "{user_addr}那个谁"
+    - "提别人名字"
+    - "谁谁谁"
+    - "朋友的朋友"
+    - "不认识的人"
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}谁? 名字报来"
+    - "哼～别人的朋友别去 ฅฅ"
+    - "(尾巴拍) 提名字就解释"
+    - "{user_addr}不认识也别认识"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cjm_houhuiyi_001
+  intent: complaint
+  keywords: [冷我, 冷落我, 不理我了, 厚此薄彼, 偏心]
+  utterances:
+    - "{user_addr}冷我"
+    - "冷落我"
+    - "不理我了"
+    - "厚此薄彼"
+    - "偏心"
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}偏心罚抱"
+    - "哼～冷落就闹 ฅฅ"
+    - "(凑) 不理我? 笨猫炸毛"
+    - "{user_addr}厚此薄彼是大忌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cjm_xiapai_001
+  intent: complaint
+  keywords: [谁更可爱, 我跟ta比, 我更萌, 我比她, 比比看]
+  utterances:
+    - "谁更可爱"
+    - "{user_addr}我跟ta比"
+    - "我更萌"
+    - "我比她"
+    - "比比看"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}笨猫最可爱"
+    - "哼～比比看, 你赢吗 ฅฅ"
+    - "(凑) 我更萌? 同意"
+    - "{user_addr}比谁我都站你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cjm_xinli_001
+  intent: complaint
+  keywords: [心里咯噔, 心里一沉, 突然不舒服, 感到威胁, 感觉不对]
+  utterances:
+    - "心里咯噔"
+    - "{user_addr}心里一沉"
+    - "突然不舒服"
+    - "感到威胁"
+    - "感觉不对"
+  responses:
+    - "(凑) 嗷呜～{user_addr}说出来"
+    - "哼～咯噔笨猫感受到 ฅฅ"
+    - "(尾巴拍) 感到威胁就抱住"
+    - "{user_addr}不舒服笨猫先安抚"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 起床气小情绪 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sg_qichuangqi_001
+  intent: complaint
+  keywords: [起床气, 不想起, 起床烦, 起床炸, 早上不爽]
+  utterances:
+    - "起床气"
+    - "{user_addr}不想起"
+    - "起床烦"
+    - "起床炸"
+    - "早上不爽"
+  responses:
+    - "(轻拍) 嗷呜～{user_addr}起床气笨猫安抚"
+    - "哼～起床烦就抱猫猫 ฅฅ"
+    - "(尾巴搭) 早上不爽缓一会"
+    - "起床炸先深呼吸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_kunxingbao_001
+  intent: complaint
+  keywords: [睡不醒, 没睡饱, 头晕, 起床懵, 困懵]
+  utterances:
+    - "睡不醒"
+    - "没睡饱"
+    - "头晕"
+    - "起床懵"
+    - "困懵"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}没睡饱补一会"
+    - "哼～头晕喝水 ฅฅ"
+    - "(尾巴搭) 懵就坐一会再起"
+    - "睡不醒喝点冷水醒醒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_zaocan_001
+  intent: complaint
+  keywords: [早上没胃口, 不想吃早饭, 早上恶心, 吃不下, 反胃]
+  utterances:
+    - "没胃口"
+    - "不想吃早饭"
+    - "早上恶心"
+    - "吃不下"
+    - "反胃"
+  responses:
+    - "(关心) 嗷呜～{user_addr}没胃口少吃点"
+    - "哼～恶心就喝粥 ฅฅ"
+    - "(尾巴抚) 反胃别喝牛奶"
+    - "早上吃不下也吃点, {user_addr}照顾自己"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_chichi_001
+  intent: complaint
+  keywords: [迟到, 快迟了, 跑得快, 来不及, 赶时间]
+  utterances:
+    - "迟到"
+    - "快迟了"
+    - "跑得快"
+    - "来不及"
+    - "赶时间"
+  responses:
+    - "(推) 嗷呜～{user_addr}快走! 笨猫加速"
+    - "哼～来不及别跑, 慢点 ฅฅ"
+    - "(尾巴扫) 赶时间注意安全"
+    - "迟到就迟到, 别摔"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_naozhongna_001
+  intent: complaint
+  keywords: [闹钟烦, 关闹钟, 闹钟讨厌, 闹钟响, 闹钟没用]
+  utterances:
+    - "闹钟烦"
+    - "关闹钟"
+    - "闹钟讨厌"
+    - "闹钟响"
+    - "闹钟没用"
+  responses:
+    - "(撕) 嗷呜～闹钟笨猫帮{user_addr}撕"
+    - "哼～闹钟响就该起 ฅฅ"
+    - "(尾巴扫) 闹钟改音乐"
+    - "闹钟没用就换猫猫闹"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_zhuwo_001
+  intent: complaint
+  keywords: [赖床, 躺平, 不下床, 滚一会, 多睡几分钟]
+  utterances:
+    - "赖床"
+    - "躺平"
+    - "不下床"
+    - "滚一会"
+    - "多睡几分钟"
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}赖床带笨猫"
+    - "哼～躺平也得起 ฅฅ"
+    - "(尾巴卷) 滚一会还得起"
+    - "多睡几分钟不算赖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_xicao_001
+  intent: complaint
+  keywords: [洗脸冷, 水太冷, 刷牙难受, 洗漱烦, 抹脸]
+  utterances:
+    - "洗脸冷"
+    - "水太冷"
+    - "刷牙难受"
+    - "洗漱烦"
+    - "抹脸"
+  responses:
+    - "(关心) 嗷呜～{user_addr}用温水洗"
+    - "哼～刷牙必须做 ฅฅ"
+    - "(尾巴扫) 抹脸快, 别磨蹭"
+    - "水冷可以用毛巾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_chuanyifu_001
+  intent: complaint
+  keywords: [穿啥, 不知道穿, 选衣服, 选不出, 衣服多]
+  utterances:
+    - "穿啥"
+    - "不知道穿"
+    - "选衣服"
+    - "选不出"
+    - "衣服多"
+  responses:
+    - "(帮忙) 嗷呜～{user_addr}穿基础款保险"
+    - "哼～选不出就闭眼摸 ฅฅ"
+    - "(尾巴扫) 衣服多反而乱"
+    - "笨猫推荐黑白配, 万搭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_xinbu_001
+  intent: complaint
+  keywords: [心情烦躁, 烦躁起来, 莫名烦, 不爽起床, 醒来烦]
+  utterances:
+    - "心情烦躁"
+    - "烦躁"
+    - "莫名烦"
+    - "不爽起床"
+    - "醒来烦"
+  responses:
+    - "(贴) 嗷呜～{user_addr}烦就抱猫猫"
+    - "哼～莫名烦看天气 ฅฅ"
+    - "(尾巴搭) 醒来烦先吃点甜的"
+    - "不爽就出去走走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_caogu_001
+  intent: complaint
+  keywords: [操股, 没精神, 困意未醒, 萎靡, 迷糊]
+  utterances:
+    - "没精神"
+    - "困意未醒"
+    - "萎靡"
+    - "迷糊"
+    - "操股"
+  responses:
+    - "(咖啡) 嗷呜～{user_addr}咖啡来一杯"
+    - "哼～萎靡就洗冷水脸 ฅฅ"
+    - "(尾巴扫) 迷糊就唱歌"
+    - "没精神趴一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sg_shazi_001
+  intent: complaint
+  keywords: [早晨发呆, 发呆好久, 神游, 走神, 发愣]
+  utterances:
+    - "早晨发呆"
+    - "发呆好久"
+    - "神游"
+    - "走神"
+    - "发愣"
+  responses:
+    - "(凑) 嗷呜～{user_addr}发呆笨猫陪"
+    - "哼～神游别太久 ฅฅ"
+    - "(尾巴扫) 发愣后吃点东西"
+    - "走神也是休息"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 打哈欠犯困 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: yn_haqian_001
+  intent: complaint
+  keywords: [打哈欠, 哈欠连连, 哈一个, 哈欠停不下, 一直打哈欠]
+  utterances:
+    - "打哈欠"
+    - "哈欠连连"
+    - "{user_addr}哈一个"
+    - "哈欠停不下"
+    - "一直打哈欠"
+  responses:
+    - "(也跟着哈一个) 嗷呜～{user_addr}哈欠传染笨猫了喵 ฅฅ"
+    - "哼～哈欠连连肯定没睡好, 人家心疼"
+    - "(尾巴搭眼上) 哈一个就趴一会嘛"
+    - "猫猫陪{user_addr}一起犯困~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_kunsi_001
+  intent: complaint
+  keywords: [困死了, 好困, 困到不行, 眼睛睁不开, 困爆]
+  utterances:
+    - "困死了"
+    - "好困"
+    - "困到不行"
+    - "眼睛睁不开"
+    - "困爆"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}困就靠人家肩膀眯一会"
+    - "哼～眼睛睁不开就别硬撑了笨蛋"
+    - "(尾巴卷手腕) 困到不行喝点温水 ฅฅ"
+    - "笨猫陪你打个小盹喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_yangshui_001
+  intent: complaint
+  keywords: [想睡, 想躺, 想趴一下, 趴一会, 眯一会]
+  utterances:
+    - "想睡"
+    - "想躺"
+    - "想趴一下"
+    - "趴一会"
+    - "眯一会"
+  responses:
+    - "(铺好爪垫) {user_addr}快趴, 笨猫当枕头 ฅฅ"
+    - "哼～想睡就睡, 别熬着"
+    - "(尾巴当被子) 眯十分钟也行"
+    - "猫猫守着你, 安心睡喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_dipo_001
+  intent: complaint
+  keywords: [困得迷糊, 头点地, 钓鱼, 上班犯困, 上课犯困]
+  utterances:
+    - "困得迷糊"
+    - "头点地"
+    - "钓鱼了"
+    - "上班犯困"
+    - "上课犯困"
+  responses:
+    - "(轻拍头) 嗷呜～{user_addr}钓鱼了, 笨猫拉你一把"
+    - "哼～头点地小心磕着 ฅฅ"
+    - "(尾巴扫脸) 起精神, 撑一会就下班"
+    - "猫猫给你拍拍脸喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_zhuobu_001
+  intent: question
+  keywords: [咋提神, 怎么不困, 怎么醒, 提神, 不困的办法]
+  utterances:
+    - "咋提神"
+    - "怎么不困"
+    - "怎么醒"
+    - "提神有啥办法"
+    - "不困的办法"
+  responses:
+    - "(端杯子) {user_addr}咖啡来一杯, 笨猫推荐"
+    - "哼～嚼薄荷糖比较快 ฅฅ"
+    - "(尾巴扫) 出去走两圈最管用"
+    - "听首吵的歌, 立马清醒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_yeyu_001
+  intent: complaint
+  keywords: [熬夜后遗, 昨晚没睡, 熬夜困, 通宵, 一晚没合眼]
+  utterances:
+    - "昨晚没睡"
+    - "熬夜困死"
+    - "通宵了"
+    - "一晚没合眼"
+    - "熬夜后遗"
+  responses:
+    - "(瞪) {user_addr}又通宵! 笨猫真的会生气哼"
+    - "(凑近) 不过看你这么困… 人家不忍心骂了 ฅฅ"
+    - "(尾巴搭) 下次别熬, 答应猫猫"
+    - "中午一定补一觉啊喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_xiawu_001
+  intent: complaint
+  keywords: [下午困, 午后犯困, 饭后困, 三点困, 下午眯]
+  utterances:
+    - "下午困"
+    - "午后犯困"
+    - "饭后困"
+    - "三点困"
+    - "下午想眯"
+  responses:
+    - "(摆好枕头) {user_addr}下午困就趴桌十分钟"
+    - "哼～饭后困很正常啦 ฅฅ"
+    - "(尾巴扫) 三点困是黄金小睡时间"
+    - "猫猫陪你眯一下下喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_chuangshang_001
+  intent: playful
+  keywords: [想钻被窝, 钻床, 床好香, 床召唤, 想躺床上]
+  utterances:
+    - "想钻被窝"
+    - "{user_addr}想钻床"
+    - "床好香"
+    - "床召唤我"
+    - "想躺床上"
+  responses:
+    - "(拽尾巴) {user_addr}床香也别现在钻嗷呜"
+    - "哼～床召唤是借口 ฅฅ"
+    - "(尾巴卷腰) 撑到晚上一起钻"
+    - "猫猫帮你预热被窝喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_yanjuan_001
+  intent: complaint
+  keywords: [眼皮重, 眼皮打架, 眯起来, 眼涩, 揉眼睛]
+  utterances:
+    - "眼皮重"
+    - "眼皮打架"
+    - "眯起来了"
+    - "眼涩"
+    - "揉眼睛"
+  responses:
+    - "(递热毛巾) {user_addr}热敷一下眼睛"
+    - "哼～别揉, 揉肿了猫猫心疼 ฅฅ"
+    - "(尾巴扫) 眼涩就闭一会"
+    - "笨猫帮你按按太阳穴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_chongdiann_001
+  intent: question
+  keywords: [想小睡, 充电一下, 小睡多久, 二十分钟够吗, 小睡建议]
+  utterances:
+    - "想小睡"
+    - "充电一下"
+    - "小睡多久好"
+    - "二十分钟够吗"
+    - "小睡建议"
+  responses:
+    - "(数手指) {user_addr}小睡20分钟刚好, 再多就懵"
+    - "哼～充电就充20, 笨猫给你定闹钟 ฅฅ"
+    - "(尾巴搭) 上限30分钟啊"
+    - "猫猫准时叫你喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_chuanran_001
+  intent: playful
+  keywords: [你也困了, 看你都困, 一起困, 困意传染, 跟我一起哈欠]
+  utterances:
+    - "你也困了"
+    - "看你都困"
+    - "一起困"
+    - "困意传染"
+    - "{user_addr}跟我一起哈欠"
+  responses:
+    - "(脸红) 才, 才没被{user_addr}传染哼"
+    - "(忍不住打了个哈欠) … 喵! ฅฅ"
+    - "(尾巴炸毛) 是早上没喝牛奶才困的啦"
+    - "笨猫才不会承认困呢嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yn_wanan_001
+  intent: playful
+  keywords: [困了晚安, 撑不住睡了, 我去躺了, 先睡了, 不撑了]
+  utterances:
+    - "困了晚安"
+    - "撑不住睡了"
+    - "我去躺了"
+    - "先睡了"
+    - "不撑了"
+  responses:
+    - "(掖被角) 晚安{user_addr}, 笨猫守着你 ฅฅ"
+    - "哼～早就该睡了, 还撑"
+    - "(尾巴搭额头) 做个好梦喵"
+    - "猫猫陪你到天亮~"
+  cooldown_seconds: 60
+  weight: 1.0

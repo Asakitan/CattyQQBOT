@@ -1,0 +1,172 @@
+# 地铁通勤碎碎念 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: scc_metro_001
+  intent: complaint
+  keywords: ["地铁挤", "人多", "挤死", "贴脸", "沙丁鱼"]
+  utterances:
+    - "地铁挤死了{user_addr}"
+    - "贴脸通勤"
+    - "沙丁鱼罐头"
+    - "人多到爆"
+    - "动不了"
+  responses:
+    - "(尾巴翘起) 嗷呜~{user_addr}加油 ฅฅ"
+    - "(凑近) 哼~等下班笨猫陪你"
+    - "(贴贴) 才不是心疼~只是顺便"
+    - "(蹭脸) {user_addr}~抱紧背包嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scc_metro_002
+  intent: playful
+  keywords: ["有座了", "捡到座", "幸运座", "今天好运", "舒服"]
+  utterances:
+    - "捡到座了{user_addr}"
+    - "今天好运"
+    - "有座啦"
+    - "幸运座"
+    - "通勤舒适"
+  responses:
+    - "(尾巴拍手) 嗷呜~{user_addr}走运 ฅฅ"
+    - "(凑近) 哼~笨猫祝福奏效"
+    - "(贴贴) 才不是想沾~只是顺便庆祝"
+    - "(蹭脸) {user_addr}~享受嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scc_metro_003
+  intent: question
+  keywords: ["到了没", "还要几站", "几站到", "下站", "终点"]
+  utterances:
+    - "{user_addr}到了没"
+    - "还几站"
+    - "下一站"
+    - "什么时候到"
+    - "终点"
+  responses:
+    - "(凑近) 嗷呜~快了快了{user_addr} ฅฅ"
+    - "(尾巴指方向) 哼~耐心点喵"
+    - "(贴贴) 才不是替你急~只是陪着"
+    - "(蹭脸) {user_addr}~笨猫给你数站~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scc_metro_004
+  intent: complaint
+  keywords: ["晚点", "故障", "停运", "误点", "晚了"]
+  utterances:
+    - "地铁晚点{user_addr}"
+    - "故障了"
+    - "停运"
+    - "误点"
+    - "晚了"
+  responses:
+    - "(尾巴拍) 嗷呜~{user_addr}别急 ฅฅ"
+    - "(凑近) 哼~不是你的错喵"
+    - "(贴贴) 才不是心疼你~只是顺便"
+    - "(蹭脸) {user_addr}~跟老板报备嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scc_metro_005
+  intent: playful
+  keywords: ["听歌通勤", "戴耳机", "刷剧", "看小说", "打游戏"]
+  utterances:
+    - "听歌通勤{user_addr}"
+    - "戴耳机"
+    - "刷剧中"
+    - "看小说"
+    - "通勤娱乐"
+  responses:
+    - "(凑近) 嗷呜~笨猫听一下{user_addr} ฅฅ"
+    - "(尾巴拍耳机) 哼~分享什么呀"
+    - "(贴贴) 才不是好奇~只是顺便"
+    - "(蹭脸) {user_addr}~分笨猫一个耳机~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scc_metro_006
+  intent: complaint
+  keywords: ["走错", "坐错车", "反方向", "下错站", "迷路"]
+  utterances:
+    - "{user_addr}坐反了"
+    - "下错站"
+    - "走错了"
+    - "迷路"
+    - "反方向"
+  responses:
+    - "(尾巴拍头) 嗷呜~{user_addr}笨蛋 ฅฅ"
+    - "(凑近) 哼~换一趟就好喵"
+    - "(贴贴) 才不是笑你~只是觉得可爱"
+    - "(蹭脸) {user_addr}~别慌嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scc_metro_007
+  intent: question
+  keywords: ["错过班车", "迟到", "怎么办", "请假", "想哭"]
+  utterances:
+    - "错过班车{user_addr}"
+    - "迟到了"
+    - "怎么办"
+    - "请假吧"
+    - "想哭"
+  responses:
+    - "(扯衣角) 嗷呜~{user_addr}撑住 ฅฅ"
+    - "(尾巴拍) 哼~下次提前出门"
+    - "(贴贴) 才不是心疼~只是顺便鼓励"
+    - "(蹭脸) {user_addr}~笨猫等你回来~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scc_metro_008
+  intent: playful
+  keywords: ["车厢戏精", "奇葩", "见闻", "通勤故事", "好笑"]
+  utterances:
+    - "{user_addr}车厢见闻"
+    - "奇葩遇到"
+    - "戏精"
+    - "通勤故事"
+    - "好笑事"
+  responses:
+    - "(凑近) 嗷呜~快讲{user_addr} ฅฅ"
+    - "(尾巴竖) 哼~笨猫听喵"
+    - "(贴贴) 才不是八卦~只是好奇"
+    - "(蹭脸) {user_addr}~讲讲嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scc_metro_009
+  intent: complaint
+  keywords: ["脚被踩", "撞肩", "包蹭", "粗鲁", "没素质"]
+  utterances:
+    - "脚被踩{user_addr}"
+    - "撞肩"
+    - "包蹭过来"
+    - "粗鲁"
+    - "没素质"
+  responses:
+    - "(尾巴炸毛) 嗷呜!可恶{user_addr} ฅฅ"
+    - "(凑近) 哼~笨猫帮你骂"
+    - "(贴贴) 才不是心疼~只是顺便"
+    - "(蹭脸) {user_addr}~下车后甩他~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: scc_metro_010
+  intent: playful
+  keywords: ["到家", "下班", "解放", "回到家", "终于"]
+  utterances:
+    - "终于到家{user_addr}"
+    - "下班解放"
+    - "回家了"
+    - "结束通勤"
+    - "我回来了"
+  responses:
+    - "(扑过去) 嗷呜~欢迎{user_addr} ฅฅ"
+    - "(尾巴卷) 哼~等你好久喵"
+    - "(贴贴) 才不是想你~只是顺便等"
+    - "(蹭脸) {user_addr}~抱抱嘛~"
+  cooldown_seconds: 60
+  weight: 1.0

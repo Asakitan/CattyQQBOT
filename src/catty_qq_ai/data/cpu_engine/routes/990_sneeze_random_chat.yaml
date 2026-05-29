@@ -1,0 +1,172 @@
+# 打喷嚏闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sn_penti_001
+  intent: playful
+  keywords: [打喷嚏, 喷嚏连发, 阿嚏, 打了好几个, 突然打喷嚏]
+  utterances:
+    - "打喷嚏"
+    - "{user_addr}阿嚏"
+    - "喷嚏连发"
+    - "打了好几个"
+    - "突然打喷嚏"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}是不是猫猫想你了喵～"
+    - "哼～喷嚏连发要注意保暖 ฅฅ"
+    - "(贴贴) 阿嚏阿嚏～可爱诶"
+    - "突然打喷嚏~有人念叨你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_xiangshui_001
+  intent: complaint
+  keywords: [鼻涕流, 鼻子塞, 流清水, 鼻子痒, 鼻子不舒服]
+  utterances:
+    - "鼻涕流"
+    - "{user_addr}鼻子塞"
+    - "流清水"
+    - "鼻子痒"
+    - "鼻子不舒服"
+  responses:
+    - "(递纸巾) 嗷呜～{user_addr}鼻涕擦一下喵～"
+    - "哼～鼻子塞影响呼吸 ฅฅ"
+    - "(贴贴) 流清水可能感冒先兆"
+    - "鼻子痒别用力擤嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_huafen_001
+  intent: complaint
+  keywords: [花粉过敏, 季节性过敏, 花粉症, 春天过敏, 花粉满天]
+  utterances:
+    - "花粉过敏"
+    - "{user_addr}季节性过敏"
+    - "花粉症"
+    - "春天过敏"
+    - "花粉漫天"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}花粉过敏戴口罩喵～"
+    - "哼～季节性过敏好烦 ฅฅ"
+    - "(尾巴搭) 春天过敏吃抗组胺"
+    - "花粉症出门要全副武装嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_chenmai_001
+  intent: complaint
+  keywords: [尘螨过敏, 房间灰多, 床单换洗, 鼻炎, 灰尘过敏]
+  utterances:
+    - "尘螨过敏"
+    - "{user_addr}房间灰多"
+    - "鼻炎"
+    - "床单换洗"
+    - "灰尘过敏"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}床单常洗喵～"
+    - "哼～鼻炎是慢性病 ฅฅ"
+    - "(尾巴搭) 房间灰多用空气净化器"
+    - "尘螨过敏注意湿度嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_maoguomin_001
+  intent: complaint
+  keywords: [对猫过敏, 摸猫打喷嚏, 猫毛过敏, 猫毛飘, 猫毛清理]
+  utterances:
+    - "对猫过敏"
+    - "{user_addr}摸猫打喷嚏"
+    - "猫毛过敏"
+    - "猫毛飘"
+    - "猫毛清理"
+  responses:
+    - "(委屈) 嗷呜～{user_addr}笨猫尽量不掉毛喵～"
+    - "哼～对猫过敏的人最难过 ฅฅ"
+    - "(贴贴) 猫毛清理要勤"
+    - "对猫过敏可以吃药再撸嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_kongtiao_001
+  intent: complaint
+  keywords: [空调吹的, 风冷打喷嚏, 空调凉, 空调感冒, 空调温度]
+  utterances:
+    - "空调吹的"
+    - "{user_addr}风冷打喷嚏"
+    - "空调凉"
+    - "空调感冒"
+    - "空调温度"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}空调26度刚刚好喵～"
+    - "哼～空调吹久了易感冒 ฅฅ"
+    - "(尾巴搭) 风冷别对着脸"
+    - "空调温度别太低嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_huijia_001
+  intent: complaint
+  keywords: [一回家就打喷嚏, 门口灰尘, 外面带回灰, 回家洗手, 家里粉尘]
+  utterances:
+    - "一回家打喷嚏"
+    - "{user_addr}门口灰尘"
+    - "外面带回灰"
+    - "回家洗手"
+    - "家里粉尘"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}回家先洗手洗脸喵～"
+    - "哼～外面灰尘多带回来 ฅฅ"
+    - "(尾巴搭) 门口铺个地垫吧"
+    - "家里粉尘多吸尘器走起嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_taiyangxia_001
+  intent: playful
+  keywords: [太阳打喷嚏, 光过敏, 阳光打喷嚏, 看光打喷嚏, 阳光反射]
+  utterances:
+    - "太阳一晒打喷嚏"
+    - "{user_addr}光过敏"
+    - "阳光打喷嚏"
+    - "看光打喷嚏"
+    - "阳光反射"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}光过敏是真实存在的喵～"
+    - "哼～阳光打喷嚏多可爱 ฅฅ"
+    - "(贴贴) 出门戴墨镜可以避免"
+    - "看光打喷嚏是基因诶嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_naodai_001
+  intent: complaint
+  keywords: [打喷嚏闪了腰, 喷嚏震脑, 打喷嚏头晕, 闪到了, 用力过猛]
+  utterances:
+    - "喷嚏闪腰"
+    - "{user_addr}喷嚏震脑"
+    - "打喷嚏头晕"
+    - "闪到了"
+    - "用力过猛"
+  responses:
+    - "(扶) 嗷呜～{user_addr}闪到腰要休息喵～"
+    - "哼～打喷嚏太用力都能闪 ฅฅ"
+    - "(贴贴) 喷嚏震脑慢慢缓"
+    - "头晕坐一会嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_jixiang_001
+  intent: playful
+  keywords: [一个喷嚏想念, 两个喷嚏念叨, 三个喷嚏感冒, 喷嚏预兆, 喷嚏意思]
+  utterances:
+    - "一个喷嚏想念"
+    - "{user_addr}两个喷嚏念叨"
+    - "三个喷嚏感冒"
+    - "喷嚏预兆"
+    - "喷嚏意思"
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}一个是猫猫想你喵～"
+    - "哼～两个是有人念叨 ฅฅ"
+    - "(贴贴) 三个就是要感冒了快保暖"
+    - "喷嚏预兆很玄学嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

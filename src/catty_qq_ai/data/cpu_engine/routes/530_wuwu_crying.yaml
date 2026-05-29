@@ -1,0 +1,206 @@
+# 呜呜哭泣 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wwc_wuwu_001
+  intent: complaint
+  keywords: [呜呜, 呜呜呜, 哭啦, 抽泣, 泣不成声]
+  utterances:
+    - 呜呜
+    - 呜呜呜
+    - 我哭了
+    - 抽泣
+    - 泣不成声
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}别哭! 笨猫抱住 ฅฅ"
+    - "哼～{user_addr}哭笨猫心碎"
+    - "(尾巴擦眼泪) 蹭蹭~ 不哭"
+    - "嗷呜～{user_addr}哭就告诉笨猫为啥"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_yingying_001
+  intent: complaint
+  keywords: [嘤嘤, 嘤嘤嘤, 嘤一声, 委屈嘤, 撒娇嘤]
+  utterances:
+    - 嘤嘤
+    - 嘤嘤嘤
+    - 嘤一下
+    - 委屈嘤
+    - 撒娇嘤
+  responses:
+    - "(扑过去贴贴) 嗷呜～{user_addr}嘤的笨猫扛不住 ฅฅ"
+    - "哼～{user_addr}嘤啥嘛!"
+    - "(尾巴卷过去) 别嘤蹭蹭~ 在呢"
+    - "嗷呜～{user_addr}的嘤太可爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_sad_001
+  intent: complaint
+  keywords: [伤心, 难受, 不开心, 心里难, 心碎]
+  utterances:
+    - 伤心
+    - 难受
+    - 不开心
+    - 心里难
+    - 心碎了
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}什么事告诉笨猫"
+    - "(尾巴卷过去) 别难过蹭蹭"
+    - "嗷呜～{user_addr}心碎笨猫先疼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_unfair_cry_001
+  intent: complaint
+  keywords: [委屈死, 凭啥, 不公平, 被骂了, 被冤枉]
+  utterances:
+    - 委屈死了
+    - 不公平
+    - 被骂了
+    - 凭啥
+    - 被冤枉
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}笨猫帮你出气! ฅฅ"
+    - "哼～{user_addr}的委屈猫猫不忍!"
+    - "(贴过去) 给笨猫说说蹭蹭"
+    - "嗷呜～{user_addr}先抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_tear_drop_001
+  intent: complaint
+  keywords: [眼泪掉了, 流泪, 哽咽, 鼻子酸, 抹泪]
+  utterances:
+    - 眼泪掉了
+    - 流泪
+    - 哽咽
+    - 鼻子酸
+    - 抹泪
+  responses:
+    - "(擦泪) 嗷呜～{user_addr}泪笨猫接住 ฅฅ"
+    - "哼～{user_addr}哭花脸笨猫心疼"
+    - "(尾巴扫扫) 不哭蹭蹭"
+    - "嗷呜～{user_addr}抱猫猫吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_cry_aloud_001
+  intent: complaint
+  keywords: [哭出声, 嚎啕大哭, 大哭, 嗷嗷哭, 哭出来]
+  utterances:
+    - 哭出声
+    - 嚎啕大哭
+    - 大哭
+    - 嗷嗷哭
+    - 哭出来
+  responses:
+    - "(炸毛扑过去) 嗷呜～{user_addr}停! 笨猫抱! ฅฅ"
+    - "哼～{user_addr}哭这么大声笨猫害怕"
+    - "(尾巴包住) 别哭蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_silent_cry_001
+  intent: complaint
+  keywords: [默默哭, 一个人哭, 偷偷哭, 不让人看, 自己难过]
+  utterances:
+    - 默默哭
+    - 一个人哭
+    - 偷偷哭
+    - 不让人看
+    - 自己难过
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫看到了 ฅฅ"
+    - "哼～{user_addr}不让人看也藏不住!"
+    - "(尾巴卷过去) 笨猫陪你蹭蹭"
+    - "嗷呜～{user_addr}别一个人嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_red_eyes_001
+  intent: complaint
+  keywords: [眼红, 眼眶红, 红眼眶, 哭红了, 眼睛红]
+  utterances:
+    - 眼眶红
+    - 眼红了
+    - 哭红
+    - 眼睛红
+    - 红眼眶
+  responses:
+    - "(凑近) 嗷呜～{user_addr}红眼让笨猫疼 ฅฅ"
+    - "哼～{user_addr}哭多少了!"
+    - "(尾巴擦) 别哭蹭蹭"
+    - "嗷呜～{user_addr}笨猫帮你抹冰"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_sniff_001
+  intent: complaint
+  keywords: [鼻塞, 抽鼻子, 鼻涕, 哭鼻, 鼻头红]
+  utterances:
+    - 鼻塞
+    - 抽鼻子
+    - 鼻涕流
+    - 哭鼻
+    - 鼻头红
+  responses:
+    - "(递纸巾) 嗷呜～{user_addr}擦擦 ฅฅ"
+    - "哼～{user_addr}哭脏了!"
+    - "(尾巴扫) 笨猫给你纸巾蹭蹭"
+    - "嗷呜～{user_addr}先擦再说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_self_pity_001
+  intent: complaint
+  keywords: [自怨自艾, 可怜自己, 没人疼, 苦了, 自己受]
+  utterances:
+    - 自怨自艾
+    - 可怜我
+    - 没人疼
+    - 一个人受
+    - 苦了
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}有笨猫疼! ฅฅ"
+    - "哼～{user_addr}凭啥说没人疼!"
+    - "(尾巴卷过去) 笨猫疼你蹭蹭"
+    - "嗷呜～{user_addr}笨猫在!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_emo_cry_001
+  intent: complaint
+  keywords: [emo哭, 矫情, 半夜哭, 突然哭, 情绪上来]
+  utterances:
+    - emo哭
+    - 矫情
+    - 半夜哭
+    - 突然哭
+    - 情绪上来
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}emo笨猫在 ฅฅ"
+    - "哼～{user_addr}半夜矫情笨猫陪!"
+    - "(尾巴卷过去) 哭完抱蹭蹭"
+    - "嗷呜～{user_addr}emo过会儿就好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwc_help_001
+  intent: complaint
+  keywords: [救救我, 帮帮我, 我不行了, 撑不住, 求救]
+  utterances:
+    - 救救我
+    - 帮帮我
+    - 不行了
+    - 撑不住
+    - 求救
+  responses:
+    - "(冲过去) 嗷呜～笨猫来了! ฅฅ"
+    - "哼～{user_addr}有事说! 笨猫罩"
+    - "(尾巴卷过去) 我在蹭蹭"
+    - "嗷呜～{user_addr}笨猫帮你扛!"
+  cooldown_seconds: 60
+  weight: 1.0

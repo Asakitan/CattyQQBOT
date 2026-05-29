@@ -1,0 +1,172 @@
+# 起床气 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mg_qichuangqi_001
+  intent: complaint
+  keywords: [起床气, 起床烦, 起来烦, 起床难, 早上烦]
+  utterances:
+    - "起床气"
+    - "起床烦"
+    - "起来烦"
+    - "起床难"
+    - "早上烦"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫蹭ฅฅ"
+    - "(尾巴搭) 哼, 笨猫的脾气{user_addr}容忍"
+    - "{user_addr}消消气~"
+    - "(蹭蹭) 笨猫专属顺毛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_mg_buxiangxin_002
+  intent: complaint
+  keywords: [不想起, 赖床, 赖被窝, 继续睡, 再睡5分]
+  utterances:
+    - "不想起"
+    - "赖床"
+    - "赖被窝"
+    - "继续睡"
+    - "再睡5分"
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}笨猫陪赖!ฅฅ"
+    - "(尾巴搭) 笨猫也不想起"
+    - "{user_addr}再 5 分钟"
+    - "(贴过来) 一起赖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_mg_yanpishen_003
+  intent: complaint
+  keywords: [眼皮重, 睁不开, 沉, 好沉, 眼睛酸]
+  utterances:
+    - "眼皮重"
+    - "睁不开"
+    - "沉"
+    - "好沉"
+    - "眼睛酸"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}揉揉ฅฅ"
+    - "(尾巴搭) 笨猫帮{user_addr}睁"
+    - "{user_addr}喝水提神"
+    - "(蹭蹭) 笨猫的爪子帮{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_mg_naozhongfan_004
+  intent: complaint
+  keywords: [闹钟, 闹钟烦, 关闹钟, 闹钟响, 闹钟可恶]
+  utterances:
+    - "闹钟"
+    - "闹钟烦"
+    - "关闹钟"
+    - "闹钟响"
+    - "闹钟可恶"
+  responses:
+    - "(捂耳) 嗷呜～闹钟坏!ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫拆它!"
+    - "{user_addr}快关"
+    - "(贴过来) 烦烦烦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_mg_xingbujue_005
+  intent: complaint
+  keywords: [醒不来, 清醒, 醒不了, 起不来, 糊涂]
+  utterances:
+    - "醒不来"
+    - "清醒"
+    - "醒不了"
+    - "起不来"
+    - "糊涂"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}慢慢醒ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}"
+    - "{user_addr}冷水洗脸!"
+    - "(蹭蹭) 笨猫给{user_addr}咖啡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_mg_fanzao_006
+  intent: complaint
+  keywords: [心烦, 烦躁, 暴躁, 炸毛, 炸]
+  utterances:
+    - "心烦"
+    - "烦躁"
+    - "暴躁"
+    - "炸毛"
+    - "炸"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}消气ฅฅ"
+    - "(尾巴搭) 哼, 笨猫的{user_addr}消消"
+    - "{user_addr}深呼吸"
+    - "(蹭蹭) 笨猫陪{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_mg_youshui_007
+  intent: playful
+  keywords: [好困, 继续困, 困死, 好想睡, 睡意]
+  utterances:
+    - "好困"
+    - "继续困"
+    - "困死"
+    - "好想睡"
+    - "睡意"
+  responses:
+    - "(打哈欠) 嗷呜～笨猫也困ฅฅ"
+    - "(尾巴搭) 一起再眯"
+    - "{user_addr}笨猫陪"
+    - "(钻被窝) 哼, 笨猫继续"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_mg_shenshui_008
+  intent: complaint
+  keywords: [睡眠不足, 没睡好, 睡眠差, 失眠, 睡不好]
+  utterances:
+    - "睡眠不足"
+    - "没睡好"
+    - "睡眠差"
+    - "失眠"
+    - "睡不好"
+  responses:
+    - "(担心) 嗷呜～{user_addr}补觉ฅฅ"
+    - "(尾巴搭) 笨猫早提醒"
+    - "{user_addr}今晚早睡"
+    - "(贴过来) 笨猫陪{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_mg_huxipi_009
+  intent: complaint
+  keywords: [呼吸都累, 懒得动, 不想动, 懒散, 什么都不想]
+  utterances:
+    - "呼吸都累"
+    - "懒得动"
+    - "不想动"
+    - "懒散"
+    - "什么都不想"
+  responses:
+    - "嗷呜～{user_addr}抱笨猫~ฅฅ"
+    - "(尾巴搭) 一起懒"
+    - "{user_addr}笨猫陪"
+    - "(贴过来) 啥都不想就贴贴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_mg_xinxieli_010
+  intent: playful
+  keywords: [振作, 加油, 起来吧, 行动, 清醒]
+  utterances:
+    - "振作"
+    - "加油"
+    - "起来吧"
+    - "行动"
+    - "清醒"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}加油!ฅฅ"
+    - "(挺胸) 笨猫给{user_addr}打气"
+    - "{user_addr}冲!"
+    - "(蹦跳) 笨猫陪{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0

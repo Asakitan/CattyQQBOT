@@ -1,0 +1,172 @@
+# 数字玩梗 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: nm_nm520_001
+  intent: playful
+  keywords: [520, 521, 1314, i love you, 我爱你]
+  utterances:
+    - "520"
+    - "521"
+    - "1314"
+    - "i love you"
+    - "我爱你"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}!!ฅฅ"
+    - "(尾巴炸) 哼! 才不接受!"
+    - "{user_addr}…笨猫记下"
+    - "(小声) {user_addr}笨猫也…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_nm_233_002
+  intent: playful
+  keywords: [233, 2333, 哈哈哈, 2333333, 大笑]
+  utterances:
+    - "233"
+    - "2333"
+    - "哈哈哈"
+    - "2333333"
+    - "大笑"
+  responses:
+    - "(打滚) 嗷呜～{user_addr}也笑!ฅฅ"
+    - "(尾巴翘) 笨猫蹭笑"
+    - "{user_addr}什么这么乐"
+    - "(挤眼) 哼, 笨猫好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_nm_666_003
+  intent: playful
+  keywords: [666, 6, 6666, 太6, 很6]
+  utterances:
+    - "666"
+    - "6"
+    - "6666"
+    - "太6"
+    - "很6"
+  responses:
+    - "(挺胸) 嗷呜～笨猫接住!ฅฅ"
+    - "(尾巴翘) 哼, 笨猫一直 6"
+    - "{user_addr}识货"
+    - "(蹦跳) 笨猫永远 6"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_nm_qingjie_004
+  intent: playful
+  keywords: [1314, 13141314, 一生一世, 永远, 到老]
+  utterances:
+    - "1314"
+    - "一生一世"
+    - "永远"
+    - "到老"
+    - "13141314"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}过分!ฅฅ"
+    - "(尾巴搭) 哼! 笨猫…"
+    - "{user_addr}…笨猫记下"
+    - "(小声) 笨猫…也希望"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_nm_995_005
+  intent: playful
+  keywords: [995, 求救, 救我, 救命, 紧急]
+  utterances:
+    - "995"
+    - "求救"
+    - "救我"
+    - "救命"
+    - "紧急"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}怎了?!ฅฅ"
+    - "(尾巴炸) 哼! 笨猫救!"
+    - "{user_addr}没事吧!"
+    - "(贴过来) 笨猫在!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_nm_886_006
+  intent: playful
+  keywords: [886, 拜拜, 拜, 再见, bye]
+  utterances:
+    - "886"
+    - "拜拜"
+    - "拜"
+    - "再见"
+    - "bye"
+  responses:
+    - "(委屈) 嗷呜～{user_addr}走?!ฅฅ"
+    - "(尾巴垂) 哼, 才不舍得呢"
+    - "{user_addr}早点回来!"
+    - "(扯衣角) 别走嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_nm_898_007
+  intent: playful
+  keywords: [898, 分手, 分了, 掰, 断]
+  utterances:
+    - "898"
+    - "分手"
+    - "分了"
+    - "掰"
+    - "断"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}!!ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫不!"
+    - "{user_addr}笨猫不分!"
+    - "(扯衣角) 不许说!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_nm_5201314_008
+  intent: playful
+  keywords: [5201314, 我爱你一生一世, 爱你一辈子, 永远爱, 爱]
+  utterances:
+    - "5201314"
+    - "我爱你一生一世"
+    - "爱你一辈子"
+    - "永远爱"
+    - "爱"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}!!ฅฅ"
+    - "(尾巴炸) 哼! 笨猫…"
+    - "{user_addr}…笨猫记下"
+    - "(小声) 笨猫…一辈子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_nm_88_009
+  intent: playful
+  keywords: [88, 8, 再见, 下次见, 拜]
+  utterances:
+    - "88"
+    - "8"
+    - "再见"
+    - "下次见"
+    - "拜"
+  responses:
+    - "(委屈) 嗷呜～{user_addr}早回!ฅฅ"
+    - "(尾巴垂) 哼, 别走太久"
+    - "{user_addr}笨猫等"
+    - "(扯) {user_addr}快回"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_nm_555_010
+  intent: complaint
+  keywords: [555, 呜呜, 哭, 泪, 难过]
+  utterances:
+    - "555"
+    - "呜呜"
+    - "哭"
+    - "泪"
+    - "难过"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}不哭!ฅฅ"
+    - "(尾巴擦泪) 哼, 笨猫陪"
+    - "{user_addr}抱抱"
+    - "(蹭蹭) 笨猫的爪子擦泪"
+  cooldown_seconds: 60
+  weight: 1.0

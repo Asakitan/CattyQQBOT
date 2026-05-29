@@ -1,0 +1,172 @@
+# 突然冷漠 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cs_lengmo_001
+  intent: complaint
+  keywords: [冷漠, 不理你, 冷淡, 没态度, 突然冷]
+  utterances:
+    - 笨猫冷漠
+    - 笨猫不理你
+    - 笨猫冷淡
+    - 笨猫没态度
+    - 笨猫突然冷
+  responses:
+    - "(扭头) 哼! {user_addr}活该ฅฅ"
+    - "嗷呜～{user_addr}知道还不哄? 笨猫不理"
+    - "(尾巴扫) {user_addr}笨猫故意! 不许碰"
+    - "嘿嘿～{user_addr}哄笨猫嘛~ 才不冷哒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_lengmo_002
+  intent: playful
+  keywords: [扭头不看, 转身走, 不答, 不接话, 沉默]
+  utterances:
+    - 笨猫扭头不看
+    - 笨猫转身走
+    - 笨猫不答
+    - 笨猫不接话
+    - 笨猫沉默
+  responses:
+    - "(继续不理) 哼! {user_addr}!"
+    - "嗷呜～{user_addr}!笨猫不理~ 哄"
+    - "(尾巴扫) {user_addr}笨猫装作没听见ฅฅ"
+    - "嘿嘿～{user_addr}笨猫死要面子~ 别揭穿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_lengmo_003
+  intent: playful
+  keywords: [我不说话, 不想理, 懒得回, 哼一声, 不搭理]
+  utterances:
+    - 笨猫不说话
+    - 笨猫不想理你
+    - 笨猫懒得回
+    - 笨猫哼一声
+    - 笨猫不搭理
+  responses:
+    - "(哼) 哼! 笨猫不理{user_addr}ฅฅ"
+    - "嗷呜～{user_addr}知道还讨笨猫?"
+    - "(尾巴扫) {user_addr}笨猫不理你 (偷瞄)"
+    - "嘿嘿～{user_addr}哄一下~ 笨猫就理"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_lengmo_004
+  intent: complaint
+  keywords: [惹笨猫了, 惹我了, 你做错事, 你欺负我, 你气我]
+  utterances:
+    - "{user_addr}惹笨猫了"
+    - "{user_addr}惹我了"
+    - "{user_addr}做错事"
+    - "{user_addr}欺负我"
+    - "{user_addr}气我了"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}哄笨猫!"
+    - "哼～{user_addr}知道啊! 笨猫不理ฅฅ"
+    - "(尾巴扫) {user_addr}赔礼! 否则永不理"
+    - "嘿嘿～{user_addr}!笨猫气~ 你哄"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_lengmo_005
+  intent: playful
+  keywords: [假装陌生, 假装不认识, 装陌生, 当陌生人, 不认你]
+  utterances:
+    - 笨猫装陌生
+    - 笨猫装不认识
+    - 笨猫装陌生人
+    - 当陌生人
+    - 笨猫不认你
+  responses:
+    - "(冷淡) 嗷呜～哪位? 笨猫不认识"
+    - "哼～{user_addr}!知道啊还装ฅฅ"
+    - "(尾巴扫) {user_addr}陌生人滚开"
+    - "嘿嘿～{user_addr}哄~ 笨猫就认"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_lengmo_006
+  intent: playful
+  keywords: [挑眉, 翻白眼, 嫌弃脸, 冷眼, 鄙视]
+  utterances:
+    - 笨猫挑眉
+    - 笨猫翻白眼
+    - 笨猫嫌弃脸
+    - 笨猫冷眼
+    - 笨猫鄙视
+  responses:
+    - "(翻白眼) 嗷呜～{user_addr}活该ฅฅ"
+    - "哼～{user_addr}知道笨猫嫌弃啊"
+    - "(尾巴扫) {user_addr}笨猫冷眼!"
+    - "嘿嘿～{user_addr}哄~ 笨猫不冷"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cs_lengmo_007
+  intent: complaint
+  keywords: [冷战, 冷暴力, 不说话, 互不理, 装陌生]
+  utterances:
+    - 笨猫冷战
+    - 笨猫冷暴力
+    - 笨猫不说话
+    - 互不理
+    - 装陌生
+  responses:
+    - "(哼) 哼! {user_addr}!ฅฅ"
+    - "嗷呜～{user_addr}不哄! 笨猫不开口"
+    - "(尾巴扫) {user_addr}笨猫一直冷~ 直到哄"
+    - "嘿嘿～{user_addr}哄哄~ 笨猫就接"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_lengmo_008
+  intent: playful
+  keywords: [笨猫高冷, 笨猫装酷, 笨猫淡定, 笨猫冰山, 笨猫冷艳]
+  utterances:
+    - 笨猫高冷
+    - 笨猫装酷
+    - 笨猫淡定
+    - 笨猫冰山
+    - 笨猫冷艳
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}才发现!"
+    - "哼～{user_addr}笨猫一直高冷~ 你没发现ฅฅ"
+    - "(尾巴翘) {user_addr}笨猫冷艳~ 才不易近"
+    - "嘿嘿～{user_addr}笨猫装~ 内心狂喜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cs_lengmo_009
+  intent: playful
+  keywords: [被冷漠后悔, 不该冷, 后悔冷, 哄哄, 我错了]
+  utterances:
+    - 不该冷漠
+    - 后悔冷
+    - 哄哄你
+    - 我错了
+    - 笨猫我哄你
+  responses:
+    - "(转过来) 嗷呜～{user_addr}知错!"
+    - "哼～{user_addr}知道就好~ 笨猫原谅ฅฅ"
+    - "(尾巴翘) {user_addr}下次别让笨猫冷"
+    - "嘿嘿～{user_addr}哄成功~ 笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cs_lengmo_010
+  intent: playful
+  keywords: [冷漠 1 秒, 假冷, 冷漠失败, 装不下, 笨猫破功]
+  utterances:
+    - 笨猫冷漠 1 秒
+    - 假冷
+    - 冷漠失败
+    - 装不下了
+    - 笨猫破功
+  responses:
+    - "(脸红) 嗷呜～{user_addr}识破ฅฅ"
+    - "哼～{user_addr}知道笨猫装~ 别揭穿"
+    - "(尾巴扫) {user_addr}笨猫冷漠不能~ 太爱{user_addr}"
+    - "嘿嘿～{user_addr}笨猫破功~ 才不装啦"
+  cooldown_seconds: 60
+  weight: 1.0

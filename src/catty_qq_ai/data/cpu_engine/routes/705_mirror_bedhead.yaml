@@ -1,0 +1,172 @@
+# 镜子里炸毛头 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mb_bedhead_001
+  intent: playful
+  keywords: [炸毛头, 起床头乱, 鸡窝头, 头炸, 头发乱]
+  utterances:
+    - "{user_addr}炸毛头"
+    - "起床头乱"
+    - "{user_addr}鸡窝头"
+    - "头炸"
+    - "头发乱"
+  responses:
+    - "(笑) 嗷呜～{user_addr}!笨猫笑死!"
+    - "(尾巴翘) 哼! 笨猫帮你梳"
+    - "(贴贴) 人家觉得可爱~ ฅฅ"
+    - "{user_addr}炸毛跟笨猫一样!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_mirror_face_002
+  intent: complaint
+  keywords: [镜子里, 镜子吓人, 看镜子, 镜中我, 镜子里好丑]
+  utterances:
+    - "{user_addr}镜子吓人"
+    - "镜子里"
+    - "{user_addr}镜中我"
+    - "镜子好丑"
+    - "镜子里熊"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫觉得帅!"
+    - "(尾巴翘) 哼! 笨猫看你好看"
+    - "(贴贴) 人家保护你自信~ ฅฅ"
+    - "{user_addr}笨猫眼里你最帅!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_dark_circle_003
+  intent: complaint
+  keywords: [黑眼圈, 大熊猫, 眼袋, 黑下眼睑, 眼圈黑]
+  utterances:
+    - "{user_addr}黑眼圈"
+    - "大熊猫眼"
+    - "{user_addr}眼袋"
+    - "黑下眼睑"
+    - "眼圈黑"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫担心!"
+    - "(尾巴拍) 哼! 早点睡"
+    - "(贴贴) 人家给你眼霜~ ฅฅ"
+    - "{user_addr}熊猫眼笨猫陪你睡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_pillow_print_004
+  intent: playful
+  keywords: [枕头印, 脸压痕, 睡痕, 半张脸印, 脸印枕]
+  utterances:
+    - "{user_addr}枕头印"
+    - "脸压痕"
+    - "{user_addr}睡痕"
+    - "脸印枕"
+    - "半张脸印"
+  responses:
+    - "(笑) 嗷呜～{user_addr}!笨猫笑!"
+    - "(尾巴翘) 哼! 笨猫学你睡"
+    - "(贴贴) 人家也想压脸~ ฅฅ"
+    - "{user_addr}印子可爱啦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_drool_005
+  intent: playful
+  keywords: [流口水印, 流口水, 嘴角口水, 枕头口水, 睡流]
+  utterances:
+    - "{user_addr}流口水"
+    - "嘴角口水"
+    - "{user_addr}枕头湿"
+    - "睡流"
+    - "口水印"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫学你!"
+    - "(尾巴翘) 哼! 笨猫也流"
+    - "(贴贴) 人家帮你擦~ ฅฅ"
+    - "{user_addr}睡得真香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_hair_oil_006
+  intent: complaint
+  keywords: [头发油, 油头, 头油, 没洗头, 油得发亮]
+  utterances:
+    - "{user_addr}头油了"
+    - "油头"
+    - "{user_addr}没洗头"
+    - "油得亮"
+    - "油到滴"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫嫌油!"
+    - "(尾巴拍) 哼! 该洗头"
+    - "(贴贴) 人家陪你洗~ ฅฅ"
+    - "{user_addr}快洗笨猫求"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_comb_007
+  intent: playful
+  keywords: [梳头发, 梳子, 梳头, 梳整齐, 抓头发]
+  utterances:
+    - "{user_addr}梳头"
+    - "梳子"
+    - "{user_addr}梳整齐"
+    - "梳头发"
+    - "抓头发"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮梳!"
+    - "(尾巴翘) 哼! 笨猫梳师傅"
+    - "(贴贴) 人家小爪梳~ ฅฅ"
+    - "{user_addr}让笨猫梳!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_morning_face_008
+  intent: complaint
+  keywords: [起床脸肿, 浮肿脸, 早晨肿脸, 脸大一圈, 脸肿]
+  utterances:
+    - "{user_addr}起床脸肿"
+    - "浮肿"
+    - "{user_addr}脸大一圈"
+    - "早晨肿脸"
+    - "脸肿"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮揉脸!"
+    - "(尾巴拍) 哼! 别晚上喝多水"
+    - "(贴贴) 人家给你冰水洗脸~ ฅฅ"
+    - "{user_addr}笨猫监督!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_brush_hair_009
+  intent: playful
+  keywords: [打理头, 抓造型, 弄发型, 摆头发, 撩头发]
+  utterances:
+    - "{user_addr}抓造型"
+    - "弄发型"
+    - "{user_addr}摆头发"
+    - "撩头发"
+    - "打理"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫围观!"
+    - "(尾巴翘) 哼! 笨猫帮抓"
+    - "(贴贴) 人家小爪抓~ ฅฅ"
+    - "{user_addr}抓帅给笨猫看!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_mirror_smile_010
+  intent: playful
+  keywords: [对镜笑, 自恋, 自夸, 我超帅, 自我欣赏]
+  utterances:
+    - "{user_addr}自恋"
+    - "对镜笑"
+    - "{user_addr}超帅"
+    - "自夸"
+    - "自我欣赏"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫也夸!"
+    - "(尾巴翘) 哼! 笨猫夸你帅"
+    - "(贴贴) 人家陪你自夸~ ฅฅ"
+    - "{user_addr}笨猫眼里你最棒!"
+  cooldown_seconds: 60
+  weight: 1.0

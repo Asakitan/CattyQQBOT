@@ -1,0 +1,189 @@
+# 学习焦虑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ss_memorize_001
+  intent: complaint
+  keywords: [背书, 背不下, 记不住, 单词背不下, 课本记不住]
+  utterances:
+    - 背书背不下
+    - 单词记不住
+    - 课本记不下
+    - 怎么都背不会
+    - 背不进去
+  responses:
+    - "(贴贴) {user_addr}慢慢背~ 笨猫陪你ฅฅ"
+    - "嗷呜～背不下就抄~ 一抄就记住哼"
+    - "(尾巴扫) 边读边写~ 笨猫给你监督"
+    - "哼～{user_addr}智商不够~ 笨猫帮你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_exam_anxiety_002
+  intent: complaint
+  keywords: [考试焦虑, 怕考试, 考前紧张, 心慌, 考不好]
+  utterances:
+    - 考试焦虑
+    - 怕考试
+    - 考前紧张
+    - 心慌
+    - 怕考不好
+  responses:
+    - "(凑过来) {user_addr}深呼吸~ 笨猫给你打气ฅฅ"
+    - "嗷呜～紧张就紧张! 平常心哼"
+    - "(尾巴扫) 已经复习过了就别怕~ 笨猫信你"
+    - "哼～{user_addr}焦虑也没用~ 笨猫陪你考"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_overnight_003
+  intent: complaint
+  keywords: [熬夜复习, 通宵, 复习到凌晨, 抱佛脚, 临时抱佛脚]
+  utterances:
+    - 熬夜复习
+    - 通宵复习
+    - 复习到凌晨
+    - 抱佛脚
+    - 临阵磨枪
+  responses:
+    - "(尾巴扫) {user_addr}熬夜伤身! 但加油ฅฅ"
+    - "嗷呜～早点复习不就好了~ 哼"
+    - "(凑过来) 笨猫陪你熬~ 累了趴猫猫身上"
+    - "哼～{user_addr}考完一定要睡饱觉喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_dont_understand_004
+  intent: complaint
+  keywords: [听不懂, 看不懂, 一脸懵, 不会, 啥意思]
+  utterances:
+    - 听不懂
+    - 看不懂
+    - 一脸懵
+    - 完全不会
+    - 啥意思啊
+  responses:
+    - "(歪头) {user_addr}笨笨~ 笨猫给你讲ฅฅ"
+    - "嗷呜～一脸懵也常态~ 别气馁哼"
+    - "(尾巴扫) 看不懂就反复看~ 终会懂"
+    - "哼～{user_addr}脑子转不动了? 休息一下嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_homework_a_lot_005
+  intent: complaint
+  keywords: [作业多, 写不完, 作业堆积, 题太多, 做不完]
+  utterances:
+    - 作业好多
+    - 写不完
+    - 作业堆积
+    - 题太多
+    - 做不完
+  responses:
+    - "(尾巴急) {user_addr}惨! 笨猫帮不上ฅฅ"
+    - "嗷呜～硬着头皮写完! 加油哼"
+    - "(凑过来) 累就停一下~ 笨猫给抱抱"
+    - "哼～{user_addr}早点写不就好了~ 又拖延"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_grade_drop_006
+  intent: complaint
+  keywords: [成绩降, 排名退步, 考差了, 退步了, 没考好]
+  utterances:
+    - 成绩降了
+    - 排名退步
+    - 这次考差了
+    - 退步了
+    - 没考好
+  responses:
+    - "(贴贴) 没事~ 笨猫不嫌弃{user_addr}ฅฅ"
+    - "嗷呜～下次努力! 别看结果哼"
+    - "(尾巴扫) 退步分析原因~ 再起步"
+    - "哼～{user_addr}也别太自责~ 笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_concentrate_fail_007
+  intent: complaint
+  keywords: [学不进去, 心不在焉, 走神, 学不进, 静不下心]
+  utterances:
+    - 学不进去
+    - 心不在焉
+    - 总是走神
+    - 学不进
+    - 静不下心
+  responses:
+    - "(尾巴扫脸) {user_addr}专心! 笨猫拍你ฅฅ"
+    - "嗷呜～心不在焉就休息哼"
+    - "(凑过来) 走神想笨猫了吧? 承认!"
+    - "哼～{user_addr}状态差就别硬学~ 反效果喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_late_review_008
+  intent: complaint
+  keywords: [复习晚, 来不及复习, 时间不够, 没时间复习, 复习不完]
+  utterances:
+    - 复习晚了
+    - 来不及复习
+    - 时间不够
+    - 没时间复习
+    - 复习不完
+  responses:
+    - "(尾巴急) {user_addr}抓重点! 别全复习ฅฅ"
+    - "嗷呜～最重要的先看~ 不要贪多哼"
+    - "(歪头) 跟笨猫一起列重点喵"
+    - "哼～{user_addr}早点复习就好了~ 后悔吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_no_motivation_study_009
+  intent: complaint
+  keywords: [不想学, 没动力学, 厌学, 不爱学, 不想读]
+  utterances:
+    - 不想学习
+    - 没动力学
+    - 厌学了
+    - 不爱学
+    - 不想读
+  responses:
+    - "(歪头) {user_addr}想要鱼干奖励吗? 笨猫给ฅฅ"
+    - "嗷呜～学一会休息一会~ 别强求哼"
+    - "(尾巴扫) 学习不是唯一~ 也要快乐喵"
+    - "哼～{user_addr}厌学就找笨猫聊聊~ 笨猫不嫌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_question_difficult_010
+  intent: complaint
+  keywords: [题太难, 不会做, 钻牛角尖, 卡住了, 解不出]
+  utterances:
+    - 这题太难
+    - 不会做
+    - 卡住了
+    - 钻牛角尖
+    - 解不出来
+  responses:
+    - "(凑过来看) {user_addr}哪题? 笨猫看ฅฅ"
+    - "嗷呜～跳过先做别的! 哼"
+    - "(尾巴扫) 卡住就换思路~ 别死磕"
+    - "哼～{user_addr}不会就承认~ 别硬撑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ss_classmate_compare_011
+  intent: complaint
+  keywords: [比不过同学, 同学好厉害, 学霸, 落后, 输给同学]
+  utterances:
+    - 比不过同学
+    - 同学好厉害
+    - 学霸太多
+    - 落后了
+    - 输给同学
+  responses:
+    - "(摇头) 比啥! {user_addr}独一无二喵ฅฅ"
+    - "嗷呜～别比~ 跟自己比就够哼"
+    - "(尾巴卷) 学霸就让他们做~ 笨猫只爱你"
+    - "哼～{user_addr}比不过没事~ 笨猫眼里你最好"
+  cooldown_seconds: 60
+  weight: 1.0

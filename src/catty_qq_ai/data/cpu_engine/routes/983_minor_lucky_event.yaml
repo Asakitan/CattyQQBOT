@@ -1,0 +1,172 @@
+# 小幸运事件 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ml_jianqian_001
+  intent: playful
+  keywords: [捡到钱, 路上捡到, 地上钱, 捡到一块, 捡到红包]
+  utterances:
+    - "捡到钱了"
+    - "{user_addr}路上捡到钱"
+    - "地上有钱"
+    - "捡到一块"
+    - "捡到红包"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}发财啦发财啦喵～"
+    - "哼～捡到钱要请猫猫吃东西诶 ฅฅ"
+    - "(贴贴) 一块也是钱～小幸运叠buff"
+    - "捡到红包～福气来了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ml_dengludeng_001
+  intent: playful
+  keywords: [一路绿灯, 红绿灯都绿, 不堵车, 顺利通行, 没有红灯]
+  utterances:
+    - "一路绿灯"
+    - "{user_addr}没有红灯"
+    - "不堵车"
+    - "顺利通行"
+    - "全是绿灯"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}今天有锦鲤附体喵～"
+    - "哼～一路绿灯～天选打工人 ฅฅ"
+    - "(贴贴) 不堵车的早上是奢侈品"
+    - "顺利通行～今天事情都会顺嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ml_chouzhong_001
+  intent: playful
+  keywords: [抽中了, 抽奖中了, 中奖了, 抽到隐藏, 抽到限量]
+  utterances:
+    - "抽奖中了"
+    - "{user_addr}抽到隐藏款"
+    - "中奖了"
+    - "抽到限量"
+    - "抽中啦"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}中奖锦鲤本鲤喵～"
+    - "哼～抽到隐藏款～运气全堆这里了 ฅฅ"
+    - "(贴贴) 限量到手是命中注定"
+    - "中奖了请猫猫吃东西嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ml_youhuijuan_001
+  intent: playful
+  keywords: [优惠券到了, 满减券, 折扣码, 神券, 限时折扣]
+  utterances:
+    - "抢到优惠券"
+    - "{user_addr}满减券到手"
+    - "折扣码可用"
+    - "神券"
+    - "限时折扣"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}抢到神券好厉害喵～"
+    - "哼～满减券是穷人快乐源泉 ฅฅ"
+    - "(贴贴) 折扣码秒到不愧是你"
+    - "限时折扣抓住～机会不等人嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ml_zaocan_001
+  intent: playful
+  keywords: [早餐免单, 老板送的, 赠送小菜, 加蛋免费, 老板娘可爱]
+  utterances:
+    - "早餐免单"
+    - "{user_addr}老板送的"
+    - "赠送小菜"
+    - "加蛋免费"
+    - "老板娘人好"
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}免单啦好开心喵～"
+    - "哼～加蛋免费～等下笨猫也要去 ฅฅ"
+    - "(贴贴) 老板娘人好的店要常去"
+    - "送小菜是缘分～多说谢谢嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ml_kuaidi_001
+  intent: playful
+  keywords: [快递提前到, 双十一提前, 包裹早到, 快递员好快, 提前送达]
+  utterances:
+    - "快递提前到"
+    - "{user_addr}双十一提前送达"
+    - "包裹早到"
+    - "快递员好快"
+    - "提前到了"
+  responses:
+    - "(扒包裹) 嗷呜～{user_addr}早到啦快拆喵～"
+    - "哼～快递员太给力 ฅฅ"
+    - "(贴贴) 双十一提前到=隐藏 buff"
+    - "包裹早到拆开看看～嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ml_yujian_001
+  intent: playful
+  keywords: [偶遇老朋友, 路上撞见, 巧遇, 同班同学, 遇到熟人]
+  utterances:
+    - "偶遇老朋友"
+    - "{user_addr}路上撞见同学"
+    - "巧遇"
+    - "遇到熟人"
+    - "巧遇老同学"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}缘分诶～该聊聊了喵～"
+    - "哼～偶遇老朋友的概率比中奖还低 ฅฅ"
+    - "(贴贴) 遇到熟人记得拍合照"
+    - "巧遇是宇宙的小温柔嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ml_jiangjin_001
+  intent: playful
+  keywords: [年终奖到了, 加薪, 升职, 奖金, 老板发钱]
+  utterances:
+    - "年终奖到"
+    - "{user_addr}加薪了"
+    - "升职了"
+    - "奖金到账"
+    - "老板发钱"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}发达了发达了喵～"
+    - "哼～加薪升职～请笨猫吃顿大的 ฅฅ"
+    - "(贴贴) 年终奖到账是回家的底气"
+    - "奖金到账～消费降级先暂停嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ml_bandao_001
+  intent: playful
+  keywords: [搬到一楼, 房子涨价, 老房升值, 户型超棒, 邻居很好]
+  utterances:
+    - "搬家顺利"
+    - "{user_addr}老房升值"
+    - "户型超棒"
+    - "邻居很好"
+    - "房子涨价"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}搬家顺利运气max喵～"
+    - "哼～老房升值偷着乐 ฅฅ"
+    - "(尾巴翘) 邻居好的小区是稀缺资源"
+    - "户型棒+邻居好＝双 buff嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ml_xiaoshier_001
+  intent: playful
+  keywords: [捡到漂亮东西, 捡到小玩具, 路上捡花, 捡到小石头, 路边小惊喜]
+  utterances:
+    - "捡到漂亮叶子"
+    - "{user_addr}捡到小石头"
+    - "路上捡到花"
+    - "路边小惊喜"
+    - "捡到可爱玩具"
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}给笨猫看看喵～"
+    - "哼～捡到的都是缘分 ฅฅ"
+    - "(贴贴) 路边小惊喜是宇宙的小礼物"
+    - "可爱的东西要珍惜嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

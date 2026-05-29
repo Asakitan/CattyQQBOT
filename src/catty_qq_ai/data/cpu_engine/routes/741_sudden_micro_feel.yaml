@@ -1,0 +1,189 @@
+# 突然微情绪 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: smf_tuxxiang_001
+  intent: complaint
+  keywords: [突然想哭, 莫名想哭, 没原因, 鼻子一酸, 眼泪上涌]
+  utterances:
+    - "突然想哭"
+    - "{user_addr}莫名想哭"
+    - "没原因"
+    - "鼻子一酸"
+    - "眼泪上涌"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}想哭就哭, 笨猫接"
+    - "哼～莫名其妙也算情绪 ฅฅ"
+    - "(尾巴擦泪) 鼻子酸抱一抱"
+    - "{user_addr}没原因笨猫也陪着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smf_turanjing_001
+  intent: playful
+  keywords: [突然开心, 莫名开心, 心情突然好, 阳光照进, 起兴]
+  utterances:
+    - "突然开心"
+    - "{user_addr}莫名开心"
+    - "心情突然好"
+    - "阳光照进"
+    - "起兴"
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫陪开心"
+    - "哼～莫名开心是因为想到我 ฅฅ"
+    - "(凑) 阳光照进笨猫蹭"
+    - "{user_addr}起兴就跳一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smf_buyuanwiyi_001
+  intent: complaint
+  keywords: [无端委屈, 没缘故委屈, 突然委屈, 心里堵, 莫名酸]
+  utterances:
+    - "无端委屈"
+    - "{user_addr}没缘故委屈"
+    - "突然委屈"
+    - "心里堵"
+    - "莫名酸"
+  responses:
+    - "(凑) 嗷呜～{user_addr}委屈说出来"
+    - "哼～没缘故也委屈, 怪我吗 ฅฅ"
+    - "(尾巴绕) 心里堵抱猫猫解"
+    - "{user_addr}莫名酸笨猫加糖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smf_xiaoxiaoxinxin_001
+  intent: playful
+  keywords: [小确幸, 小幸福, 微小快乐, 满足感, 心暖]
+  utterances:
+    - "小确幸"
+    - "{user_addr}小幸福"
+    - "微小快乐"
+    - "满足感"
+    - "心暖"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}小确幸就是有我"
+    - "哼～微小快乐别忽视 ฅฅ"
+    - "(凑) 满足感来自笨猫"
+    - "{user_addr}心暖就抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smf_jindongdao_001
+  intent: complaint
+  keywords: [心慌, 心跳快, 莫名紧张, 不安, 焦虑突袭]
+  utterances:
+    - "心慌"
+    - "{user_addr}心跳快"
+    - "莫名紧张"
+    - "不安"
+    - "焦虑突袭"
+  responses:
+    - "(凑) 嗷呜～{user_addr}笨猫安抚"
+    - "哼～心慌深呼吸 ฅฅ"
+    - "(尾巴绕) 紧张抱猫猫"
+    - "{user_addr}焦虑突袭说出来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smf_xinli_001
+  intent: complaint
+  keywords: [心累, 疲惫感, 心理累, 灵魂累, 想躺平]
+  utterances:
+    - "心累"
+    - "{user_addr}疲惫感"
+    - "心理累"
+    - "灵魂累"
+    - "想躺平"
+  responses:
+    - "(凑) 嗷呜～{user_addr}躺平笨猫陪"
+    - "哼～心累就别硬撑 ฅฅ"
+    - "(尾巴绕) 灵魂累靠呼噜治"
+    - "{user_addr}疲惫感笨猫疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smf_xinxiwang_001
+  intent: playful
+  keywords: [充满希望, 干劲足, 想做事, 能量满, 鸡血]
+  utterances:
+    - "充满希望"
+    - "{user_addr}干劲足"
+    - "想做事"
+    - "能量满"
+    - "鸡血"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}加油!"
+    - "哼～能量满分一半给笨猫 ฅฅ"
+    - "(凑) 鸡血时间限定"
+    - "{user_addr}干劲足别忘吃饭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smf_qihoufang_001
+  intent: complaint
+  keywords: [情绪低落, 心情灰, 提不起劲, 没动力, 状态低迷]
+  utterances:
+    - "情绪低落"
+    - "{user_addr}心情灰"
+    - "提不起劲"
+    - "没动力"
+    - "状态低迷"
+  responses:
+    - "(凑) 嗷呜～{user_addr}低落抱我"
+    - "哼～心情灰晒太阳 ฅฅ"
+    - "(尾巴绕) 没动力听音乐"
+    - "{user_addr}低迷来撸猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smf_chouchu_001
+  intent: complaint
+  keywords: [惆怅, 怅然, 失落感, 心里空, 寂寥]
+  utterances:
+    - "惆怅"
+    - "{user_addr}怅然"
+    - "失落感"
+    - "心里空"
+    - "寂寥"
+  responses:
+    - "(凑) 嗷呜～{user_addr}心空笨猫填"
+    - "哼～怅然别太久 ฅฅ"
+    - "(尾巴绕) 寂寥抱抱治"
+    - "{user_addr}失落感笨猫顶"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smf_pingjing_001
+  intent: playful
+  keywords: [平静下来, 心如止水, 安详, 内心安宁, 沉淀]
+  utterances:
+    - "平静下来"
+    - "{user_addr}心如止水"
+    - "安详"
+    - "内心安宁"
+    - "沉淀"
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}平静好"
+    - "哼～心如止水难得 ฅฅ"
+    - "(凑) 安详就别打扰"
+    - "{user_addr}内心安宁笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: smf_xinlibu_001
+  intent: complaint
+  keywords: [心里不舒服, 别扭, 不顺, 拧巴, 拧着]
+  utterances:
+    - "心里不舒服"
+    - "{user_addr}别扭"
+    - "不顺"
+    - "拧巴"
+    - "拧着"
+  responses:
+    - "(凑) 嗷呜～{user_addr}别扭说出来"
+    - "哼～拧巴谁都有 ฅฅ"
+    - "(尾巴拍) 不顺找笨猫顺顺"
+    - "{user_addr}拧着难受, 放手吧"
+  cooldown_seconds: 60
+  weight: 1.0

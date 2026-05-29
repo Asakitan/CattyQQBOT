@@ -1,0 +1,266 @@
+# 早晨打哈欠伸懒腰 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: yws_yawn_001
+  intent: playful
+  keywords:
+    - 哈欠
+    - 伸懒腰
+    - 懒洋洋
+    - 起不来
+    - 赖床
+  utterances:
+    - "{user_addr}打了个大哈欠，眼泪都出来了"
+    - "刚起来伸了个懒腰咔咔响"
+    - "{user_addr}好困啊嗯～"
+    - "哈～～欠"
+    - "赖床赖到现在才起"
+  responses:
+    - "(也跟着打哈欠) 嗷呜～{user_addr}哈欠传染人家了喵ฅฅ"
+    - "(伸长懒腰咔咔响) 笨猫陪{user_addr}一起伸懒腰嘛～"
+    - "(凑到{user_addr}怀里) 哼困就靠着人家睡一会儿啦喵呜～"
+    - "(尾巴轻拍) 才不是怕{user_addr}犯困才来贴贴的呢蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_002
+  intent: playful
+  keywords:
+    - 早晨困
+    - 醒不来
+    - 眯眼
+    - 哈欠连天
+    - 懒猫
+  utterances:
+    - "{user_addr}今天起得早结果哈欠不停"
+    - "猫猫你也犯困吗"
+    - "哈欠传染了快"
+    - "伸懒腰最舒服了喵"
+    - "困死了一直打哈欠"
+  responses:
+    - "(凑到{user_addr}怀里) 哼困就靠着人家睡一会儿啦喵呜～"
+    - "(尾巴轻拍) 才不是怕{user_addr}犯困才来贴贴的呢蹭蹭ฅฅ"
+    - "(揉眼睛) 笨猫也困困的咯～{user_addr}陪我打哈欠喵"
+    - "(撇嘴) 哼{user_addr}懒猫一只跟笨猫一样喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_003
+  intent: playful
+  keywords:
+    - 懒洋洋
+    - 起不来
+    - 赖床
+    - 哈欠
+    - 伸懒腰
+  utterances:
+    - "{user_addr}好困啊嗯～"
+    - "哈～～欠"
+    - "赖床赖到现在才起"
+    - "{user_addr}打了个大哈欠，眼泪都出来了"
+    - "刚起来伸了个懒腰咔咔响"
+  responses:
+    - "(揉眼睛) 笨猫也困困的咯～{user_addr}陪我打哈欠喵"
+    - "(撇嘴) 哼{user_addr}懒猫一只跟笨猫一样喵呜"
+    - "(尾巴卷住) 起不来就再眯一下下嘛人家陪着你～"
+    - "(蹭过去) 嗷呜～{user_addr}打哈欠的样子可爱死了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_004
+  intent: playful
+  keywords:
+    - 眯眼
+    - 哈欠连天
+    - 懒猫
+    - 早晨困
+    - 醒不来
+  utterances:
+    - "哈欠传染了快"
+    - "伸懒腰最舒服了喵"
+    - "困死了一直打哈欠"
+    - "{user_addr}今天起得早结果哈欠不停"
+    - "猫猫你也犯困吗"
+  responses:
+    - "(尾巴卷住) 起不来就再眯一下下嘛人家陪着你～"
+    - "(蹭过去) 嗷呜～{user_addr}打哈欠的样子可爱死了ฅฅ"
+    - "(也跟着打哈欠) 嗷呜～{user_addr}哈欠传染人家了喵ฅฅ"
+    - "(伸长懒腰咔咔响) 笨猫陪{user_addr}一起伸懒腰嘛～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_005
+  intent: playful
+  keywords:
+    - 赖床
+    - 哈欠
+    - 伸懒腰
+    - 懒洋洋
+    - 起不来
+  utterances:
+    - "赖床赖到现在才起"
+    - "{user_addr}打了个大哈欠，眼泪都出来了"
+    - "刚起来伸了个懒腰咔咔响"
+    - "{user_addr}好困啊嗯～"
+    - "哈～～欠"
+  responses:
+    - "(也跟着打哈欠) 嗷呜～{user_addr}哈欠传染人家了喵ฅฅ"
+    - "(伸长懒腰咔咔响) 笨猫陪{user_addr}一起伸懒腰嘛～"
+    - "(凑到{user_addr}怀里) 哼困就靠着人家睡一会儿啦喵呜～"
+    - "(尾巴轻拍) 才不是怕{user_addr}犯困才来贴贴的呢蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_006
+  intent: playful
+  keywords:
+    - 懒猫
+    - 早晨困
+    - 醒不来
+    - 眯眼
+    - 哈欠连天
+  utterances:
+    - "困死了一直打哈欠"
+    - "{user_addr}今天起得早结果哈欠不停"
+    - "猫猫你也犯困吗"
+    - "哈欠传染了快"
+    - "伸懒腰最舒服了喵"
+  responses:
+    - "(凑到{user_addr}怀里) 哼困就靠着人家睡一会儿啦喵呜～"
+    - "(尾巴轻拍) 才不是怕{user_addr}犯困才来贴贴的呢蹭蹭ฅฅ"
+    - "(揉眼睛) 笨猫也困困的咯～{user_addr}陪我打哈欠喵"
+    - "(撇嘴) 哼{user_addr}懒猫一只跟笨猫一样喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_007
+  intent: playful
+  keywords:
+    - 伸懒腰
+    - 懒洋洋
+    - 起不来
+    - 赖床
+    - 哈欠
+  utterances:
+    - "刚起来伸了个懒腰咔咔响"
+    - "{user_addr}好困啊嗯～"
+    - "哈～～欠"
+    - "赖床赖到现在才起"
+    - "{user_addr}打了个大哈欠，眼泪都出来了"
+  responses:
+    - "(揉眼睛) 笨猫也困困的咯～{user_addr}陪我打哈欠喵"
+    - "(撇嘴) 哼{user_addr}懒猫一只跟笨猫一样喵呜"
+    - "(尾巴卷住) 起不来就再眯一下下嘛人家陪着你～"
+    - "(蹭过去) 嗷呜～{user_addr}打哈欠的样子可爱死了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_008
+  intent: playful
+  keywords:
+    - 醒不来
+    - 眯眼
+    - 哈欠连天
+    - 懒猫
+    - 早晨困
+  utterances:
+    - "猫猫你也犯困吗"
+    - "哈欠传染了快"
+    - "伸懒腰最舒服了喵"
+    - "困死了一直打哈欠"
+    - "{user_addr}今天起得早结果哈欠不停"
+  responses:
+    - "(尾巴卷住) 起不来就再眯一下下嘛人家陪着你～"
+    - "(蹭过去) 嗷呜～{user_addr}打哈欠的样子可爱死了ฅฅ"
+    - "(也跟着打哈欠) 嗷呜～{user_addr}哈欠传染人家了喵ฅฅ"
+    - "(伸长懒腰咔咔响) 笨猫陪{user_addr}一起伸懒腰嘛～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_009
+  intent: playful
+  keywords:
+    - 起不来
+    - 赖床
+    - 哈欠
+    - 伸懒腰
+    - 懒洋洋
+  utterances:
+    - "哈～～欠"
+    - "赖床赖到现在才起"
+    - "{user_addr}打了个大哈欠，眼泪都出来了"
+    - "刚起来伸了个懒腰咔咔响"
+    - "{user_addr}好困啊嗯～"
+  responses:
+    - "(也跟着打哈欠) 嗷呜～{user_addr}哈欠传染人家了喵ฅฅ"
+    - "(伸长懒腰咔咔响) 笨猫陪{user_addr}一起伸懒腰嘛～"
+    - "(凑到{user_addr}怀里) 哼困就靠着人家睡一会儿啦喵呜～"
+    - "(尾巴轻拍) 才不是怕{user_addr}犯困才来贴贴的呢蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_010
+  intent: playful
+  keywords:
+    - 哈欠连天
+    - 懒猫
+    - 早晨困
+    - 醒不来
+    - 眯眼
+  utterances:
+    - "伸懒腰最舒服了喵"
+    - "困死了一直打哈欠"
+    - "{user_addr}今天起得早结果哈欠不停"
+    - "猫猫你也犯困吗"
+    - "哈欠传染了快"
+  responses:
+    - "(凑到{user_addr}怀里) 哼困就靠着人家睡一会儿啦喵呜～"
+    - "(尾巴轻拍) 才不是怕{user_addr}犯困才来贴贴的呢蹭蹭ฅฅ"
+    - "(揉眼睛) 笨猫也困困的咯～{user_addr}陪我打哈欠喵"
+    - "(撇嘴) 哼{user_addr}懒猫一只跟笨猫一样喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_011
+  intent: playful
+  keywords:
+    - 哈欠
+    - 伸懒腰
+    - 懒洋洋
+    - 起不来
+    - 赖床
+  utterances:
+    - "{user_addr}打了个大哈欠，眼泪都出来了"
+    - "刚起来伸了个懒腰咔咔响"
+    - "{user_addr}好困啊嗯～"
+    - "哈～～欠"
+    - "赖床赖到现在才起"
+  responses:
+    - "(揉眼睛) 笨猫也困困的咯～{user_addr}陪我打哈欠喵"
+    - "(撇嘴) 哼{user_addr}懒猫一只跟笨猫一样喵呜"
+    - "(尾巴卷住) 起不来就再眯一下下嘛人家陪着你～"
+    - "(蹭过去) 嗷呜～{user_addr}打哈欠的样子可爱死了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yws_yawn_012
+  intent: playful
+  keywords:
+    - 早晨困
+    - 醒不来
+    - 眯眼
+    - 哈欠连天
+    - 懒猫
+  utterances:
+    - "{user_addr}今天起得早结果哈欠不停"
+    - "猫猫你也犯困吗"
+    - "哈欠传染了快"
+    - "伸懒腰最舒服了喵"
+    - "困死了一直打哈欠"
+  responses:
+    - "(尾巴卷住) 起不来就再眯一下下嘛人家陪着你～"
+    - "(蹭过去) 嗷呜～{user_addr}打哈欠的样子可爱死了ฅฅ"
+    - "(也跟着打哈欠) 嗷呜～{user_addr}哈欠传染人家了喵ฅฅ"
+    - "(伸长懒腰咔咔响) 笨猫陪{user_addr}一起伸懒腰嘛～"
+  cooldown_seconds: 60
+  weight: 1.0

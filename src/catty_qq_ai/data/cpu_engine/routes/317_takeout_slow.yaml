@@ -1,0 +1,206 @@
+# 外卖慢吐槽 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ts_waiman_001
+  intent: complaint
+  keywords: [外卖慢, 外卖好慢, 外卖等好久, 等外卖, 外卖时间长]
+  utterances:
+    - 外卖好慢
+    - 外卖等久
+    - 等外卖
+    - 外卖时间长
+    - 外卖怎么还没到
+  responses:
+    - "(扒门) 嗷呜～{user_addr}饿了喵! 笨猫陪等"
+    - "哼～{user_addr}骑手堵车了 ฅฅ"
+    - "(尾巴搭) 笨猫给{user_addr}找点零食垫"
+    - "{user_addr}耐心等喵, 笨猫陪等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_qishou_002
+  intent: complaint
+  keywords: [骑手在哪, 骑手不动, 骑手卡住, 骑手延迟, 骑手赶不到]
+  utterances:
+    - 骑手不动
+    - 骑手在哪
+    - 骑手卡住
+    - 骑手延迟
+    - 骑手赶不到
+  responses:
+    - "(看app) 嗷呜～{user_addr}骑手堵车!"
+    - "哼～{user_addr}打电话催 ฅฅ"
+    - "(尾巴搭) 别催太凶~"
+    - "{user_addr}骑手辛苦喵, 多理解"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_chao_003
+  intent: complaint
+  keywords: [饿炸了, 等不及, 不等了, 饿到头晕, 饿崩溃]
+  utterances:
+    - 饿炸了
+    - 等不及
+    - 不等了
+    - 饿头晕
+    - 饿崩溃
+  responses:
+    - "(慌) 嗷呜～{user_addr}先喝水! 别饿坏"
+    - "哼～{user_addr}早做饭嘛 ฅฅ"
+    - "(尾巴搭) 笨猫找零食给{user_addr}"
+    - "{user_addr}稳住~ 笨猫陪等喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_caosha_004
+  intent: complaint
+  keywords: [菜凉了, 外卖凉, 凉饭, 凉菜, 凉汤]
+  utterances:
+    - 菜凉了
+    - 外卖凉
+    - 凉饭
+    - 凉菜
+    - 凉汤
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}加热!"
+    - "哼～{user_addr}吃凉的拉肚子 ฅฅ"
+    - "(尾巴搭) 微波炉转一下~"
+    - "{user_addr}凉了别吃喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_shao_005
+  intent: complaint
+  keywords: [漏餐, 少东西, 没送齐, 漏发, 缺餐]
+  utterances:
+    - 漏餐
+    - 少东西
+    - 没送齐
+    - 漏发
+    - 缺餐
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}投诉商家!"
+    - "哼～{user_addr}申请退款 ฅฅ"
+    - "(尾巴叉) 商家敷衍! 笨猫帮{user_addr}骂"
+    - "{user_addr}漏餐笨猫去找商家喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_kouwei_006
+  intent: complaint
+  keywords: [口味差, 不好吃, 难吃外卖, 翻车, 外卖难吃]
+  utterances:
+    - 口味差
+    - 不好吃
+    - 难吃
+    - 翻车
+    - 外卖难吃
+  responses:
+    - "(笑) 嗷呜～{user_addr}选店选错"
+    - "哼～{user_addr}下次笨猫推荐 ฅฅ"
+    - "(尾巴搭) 别再点这家"
+    - "{user_addr}差评喵, 笨猫陪{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_bushan_007
+  intent: complaint
+  keywords: [不卫生, 看到头发, 异物, 卫生问题, 不干净]
+  utterances:
+    - 不卫生
+    - 头发
+    - 有异物
+    - 卫生问题
+    - 不干净
+  responses:
+    - "(炸) 嗷呜～{user_addr}举报!"
+    - "哼～{user_addr}恶心 ฅฅ"
+    - "(尾巴叉) 找平台~ 退款"
+    - "{user_addr}投诉商家喵, 笨猫支持"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_paisongshijian_008
+  intent: complaint
+  keywords: [预计时间, 时间变长, 超时, 预计 30 变 60, 时间不准]
+  utterances:
+    - 预计时间长
+    - 时间变长
+    - 超时
+    - 显示 60 分钟
+    - 时间不准
+  responses:
+    - "(摇头) 嗷呜～{user_addr}早点叫"
+    - "哼～{user_addr}饿就别等 ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}熬"
+    - "{user_addr}耐心喵, 笨猫陪等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_dianxin_009
+  intent: complaint
+  keywords: [取消订单, 商家取消, 配送取消, 退订单, 重新下]
+  utterances:
+    - 商家取消
+    - 取消订单
+    - 配送取消
+    - 退订单
+    - 重新下
+  responses:
+    - "(瞪) 嗷呜～{user_addr}商家太过分!"
+    - "哼～{user_addr}差评走起 ฅฅ"
+    - "(尾巴叉) 换别家~ 笨猫帮{user_addr}选"
+    - "{user_addr}吐槽喵, 笨猫一起骂商家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_dianpin_010
+  intent: complaint
+  keywords: [推荐外卖, 外卖选啥, 外卖吃啥, 帮选外卖, 外卖推荐]
+  utterances:
+    - 推荐外卖
+    - 外卖选啥
+    - 帮选外卖
+    - 外卖吃啥
+    - 推荐我
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}吃鱼套餐!"
+    - "哼～{user_addr}懒得选, 笨猫做主 ฅฅ"
+    - "(尾巴翘) 麻辣烫嘛~ 给笨猫加肉"
+    - "{user_addr}爱吃啥喵? 笨猫帮{user_addr}选"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_jiazi_011
+  intent: complaint
+  keywords: [加价, 配送费高, 包装费, 外卖贵, 外卖加]
+  utterances:
+    - 配送费贵
+    - 加价了
+    - 包装费
+    - 外卖贵
+    - 暴雨加价
+  responses:
+    - "(摸钱) 嗷呜～{user_addr}破费了!"
+    - "哼～{user_addr}自己做嘛 ฅฅ"
+    - "(尾巴搭) 给笨猫分一点喵"
+    - "{user_addr}外卖贵, 笨猫推荐自己做"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ts_daozhi_012
+  intent: playful
+  keywords: [外卖到了, 终于到, 配送完成, 外卖来了, 取到了]
+  utterances:
+    - 外卖到了
+    - 终于到
+    - 配送完成
+    - 外卖来了
+    - 取到了
+  responses:
+    - "(蹦) 嗷呜～{user_addr}吃! 笨猫蹭!"
+    - "哼～{user_addr}总算到 ฅฅ"
+    - "(尾巴翘) 开吃! 给笨猫分"
+    - "{user_addr}吃饭笨猫蹲桌底喵"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 充电器忘家里 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cf_wangle_001
+  intent: complaint
+  keywords: [忘带充电器, 充电器忘家了, 没带数据线, 数据线忘带, 忘拿了]
+  utterances:
+    - "忘带充电器"
+    - "充电器忘家了"
+    - "没带数据线"
+    - "数据线忘带"
+    - "忘拿了"
+  responses:
+    - "(扶额) 嗷呜～{user_addr}又忘! 笨猫想念叨你"
+    - "哼～早提醒过了 ฅฅ"
+    - "(尾巴搭) 借同事的先用一下"
+    - "猫猫晚上帮你贴张提醒条喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_jiebandian_001
+  intent: question
+  keywords: [借充电器, 谁有充电器, 借线, 借头, 借电]
+  utterances:
+    - "借充电器"
+    - "谁有充电器"
+    - "借根线"
+    - "借个头"
+    - "借电用"
+  responses:
+    - "(掏自己包) {user_addr}笨猫这有, 拿去 ฅฅ"
+    - "哼～就知道你要借"
+    - "(尾巴扫) 用完记得还啊"
+    - "猫猫备用线送你喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_keqie_001
+  intent: question
+  keywords: [找咖啡店充电, 商场充电, 共享充电, 哪里能充电, 充电桩]
+  utterances:
+    - "找咖啡店充电"
+    - "商场充电"
+    - "共享充电宝"
+    - "哪里能充电"
+    - "找充电桩"
+  responses:
+    - "(看地图) {user_addr}星巴克麦当劳都行 ฅฅ"
+    - "哼～共享充电宝1块钱半小时"
+    - "(尾巴指) 商场服务台一般有"
+    - "猫猫陪你找充电的地方喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_huangbianbao_001
+  intent: complaint
+  keywords: [出门慌, 出门慌张, 慌慌张张, 总是忘东西, 慌乱出门]
+  utterances:
+    - "出门慌"
+    - "出门慌张"
+    - "慌慌张张"
+    - "总是忘东西"
+    - "慌乱出门"
+  responses:
+    - "(摸头) {user_addr}慢点收拾, 笨猫帮你列清单 ฅฅ"
+    - "哼～急了肯定忘东西"
+    - "(尾巴搭) 出门前坐30秒确认"
+    - "猫猫给你做个出门小贴贴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_diqianxi_001
+  intent: question
+  keywords: [清单贴墙, 出门清单, 必带物品, 三件套, 必带清单]
+  utterances:
+    - "出门清单"
+    - "必带物品"
+    - "三件套清单"
+    - "清单贴墙"
+    - "必带提醒"
+  responses:
+    - "(列指头) {user_addr}手机钱包钥匙三件套 ฅฅ"
+    - "哼～加充电器纸巾耳机就齐了"
+    - "(尾巴搭) 笨猫帮你做便签"
+    - "猫猫陪你养习惯喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_yifuanwei_001
+  intent: playful
+  keywords: [自责, 又忘了, 我怎么又忘, 我真笨, 怎么又忘]
+  utterances:
+    - "又忘了"
+    - "我怎么又忘"
+    - "我真笨"
+    - "怎么又忘"
+    - "自责"
+  responses:
+    - "(贴脸) {user_addr}你才不笨呢, 笨猫才笨 ฅฅ"
+    - "哼～谁都会忘, 别自责"
+    - "(尾巴搭) 笨猫帮你记着"
+    - "猫猫贴你脸上提醒喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_zhuanyebao_001
+  intent: question
+  keywords: [备用充电器, 公司放一个, 办公室充电器, 备用一根, 多备一根]
+  utterances:
+    - "备用充电器"
+    - "公司放一个"
+    - "办公室充电器"
+    - "备用一根"
+    - "多备一根"
+  responses:
+    - "(点头) {user_addr}公司家里各一根, 解决问题 ฅฅ"
+    - "哼～聪明了"
+    - "(尾巴扫) 车上再放一根"
+    - "猫猫推荐你三根备齐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_yongchajian_001
+  intent: question
+  keywords: [插头不一样, 接口不对, type-c, lightning, 接口不匹配]
+  utterances:
+    - "插头不一样"
+    - "接口不对"
+    - "type-c"
+    - "lightning"
+    - "接口不匹配"
+  responses:
+    - "(掏转接头) {user_addr}转接头救命 ฅฅ"
+    - "哼～type-c最通用"
+    - "(尾巴搭) 苹果党痛苦"
+    - "猫猫送你一个二合一线喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_chuanyixiri_001
+  intent: complaint
+  keywords: [出差忘带, 旅行忘带, 出门忘带, 长途忘带, 行李没带]
+  utterances:
+    - "出差忘带"
+    - "旅行忘带"
+    - "出门忘带"
+    - "长途忘带"
+    - "行李没带"
+  responses:
+    - "(叹气) {user_addr}出差最不能忘充电器 ฅฅ"
+    - "哼～酒店前台一般可以借"
+    - "(尾巴扫) 急的话去便利店买"
+    - "猫猫给你做出差专属清单喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_jiulaopo_001
+  intent: playful
+  keywords: [回家拿, 跑回去拿, 折返, 回头取, 倒回去]
+  utterances:
+    - "回家拿"
+    - "跑回去拿"
+    - "折返"
+    - "回头取"
+    - "倒回去"
+  responses:
+    - "(指时间) {user_addr}回家拿还来得及吗"
+    - "哼～折返浪费半小时 ฅฅ"
+    - "(尾巴扫) 不如借同事"
+    - "猫猫陪你算时间喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_xinwosbu_001
+  intent: question
+  keywords: [无线充, 无线充电板, 桌面无线充, 无线快充, 无线充推荐]
+  utterances:
+    - "无线充"
+    - "无线充电板"
+    - "桌面无线充"
+    - "无线快充"
+    - "无线充推荐"
+  responses:
+    - "(展示) {user_addr}桌面无线充方便, 一放就充 ฅฅ"
+    - "哼～就是稍微贵"
+    - "(尾巴扫) 15W够日常"
+    - "猫猫推荐磁吸款喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_qianzhuangshi_001
+  intent: playful
+  keywords: [挂脖, 挂袋, 钥匙圈, 一起挂, 挂腰上]
+  utterances:
+    - "挂脖"
+    - "挂袋"
+    - "钥匙圈挂"
+    - "一起挂"
+    - "挂腰上"
+  responses:
+    - "(笑) {user_addr}充电器挂钥匙圈, 不丢 ฅฅ"
+    - "哼～小型迷你款最好挂"
+    - "(尾巴扫) 挂脖款也很流行"
+    - "猫猫给你做猫爪挂件喵~"
+  cooldown_seconds: 60
+  weight: 1.0

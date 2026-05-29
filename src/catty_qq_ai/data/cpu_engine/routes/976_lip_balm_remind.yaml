@@ -1,0 +1,189 @@
+# 润唇膏提醒 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lbr_dry_001
+  intent: complaint
+  keywords: [嘴唇干, 唇裂, 唇皮, 干裂, 唇起皮]
+  utterances:
+    - "嘴唇干"
+    - "唇裂"
+    - "{user_addr}唇皮"
+    - "干裂"
+    - "唇起皮"
+  responses:
+    - "嗷呜～{user_addr}笨猫给你润唇膏 ฅฅ"
+    - "哼～{user_addr}不会涂吗"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}多喝水喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbr_lipbalm_001
+  intent: playful
+  keywords: [润唇膏, 唇膜, 唇油, 唇膏推荐, 涂润唇膏]
+  utterances:
+    - "润唇膏"
+    - "唇膜"
+    - "{user_addr}唇油"
+    - "唇膏推荐"
+    - "涂润唇"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐曼秀雷敦 ฅฅ"
+    - "哼～{user_addr}买了也不涂"
+    - "(凑近) {user_addr}人家帮你涂蹭蹭"
+    - "{user_addr}科颜氏喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbr_peel_001
+  intent: complaint
+  keywords: [撕唇皮, 唇皮撕, 撕到流血, 唇皮多, 抠唇]
+  utterances:
+    - "撕唇皮"
+    - "{user_addr}撕到流血"
+    - "唇皮多"
+    - "抠唇"
+    - "唇皮撕"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}不许撕! ฅฅ"
+    - "哼～{user_addr}流血了"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}涂厚厚润唇喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lbr_winter_001
+  intent: complaint
+  keywords: [冬天嘴唇, 寒风, 干裂痛, 冬季干, 冷天]
+  utterances:
+    - "冬天嘴唇"
+    - "寒风"
+    - "{user_addr}干裂"
+    - "冬季干"
+    - "冷天"
+  responses:
+    - "嗷呜～{user_addr}笨猫提醒带唇膏 ฅฅ"
+    - "哼～{user_addr}出门戴口罩!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}凡士林喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lbr_color_001
+  intent: playful
+  keywords: [口红, 唇釉, 唇泥, 染色唇膏, 颜色润唇]
+  utterances:
+    - "口红"
+    - "唇釉"
+    - "{user_addr}唇泥"
+    - "染色润唇"
+    - "颜色润唇"
+  responses:
+    - "嗷呜～{user_addr}笨猫想看色号 ฅฅ"
+    - "哼～{user_addr}什么色号显白"
+    - "(凑近) {user_addr}人家挑一个蹭蹭"
+    - "{user_addr}豆沙色喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbr_water_001
+  intent: playful
+  keywords: [多喝水, 喝水唇湿, 补水, 大量喝水, 水分]
+  utterances:
+    - "多喝水"
+    - "{user_addr}补水"
+    - "大量喝水"
+    - "唇水分"
+    - "唇补水"
+  responses:
+    - "(端水) 嗷呜～{user_addr}笨猫倒一杯 ฅฅ"
+    - "哼～{user_addr}早就该!"
+    - "(贴贴) {user_addr}人家陪你喝蹭蹭"
+    - "{user_addr}小口慢喝喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbr_bite_001
+  intent: complaint
+  keywords: [咬嘴唇, 舔嘴唇, 越舔越干, 唇皮咬, 紧张]
+  utterances:
+    - "咬嘴唇"
+    - "舔嘴唇"
+    - "{user_addr}越舔越干"
+    - "唇皮咬"
+    - "紧张"
+  responses:
+    - "嗷呜～{user_addr}笨猫提醒不要舔 ฅฅ"
+    - "哼～{user_addr}是不是紧张?"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}涂膏子喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: lbr_share_001
+  intent: playful
+  keywords: [分享润唇, 借润唇, 共用唇膏, 同款唇膏, 借唇膏]
+  utterances:
+    - "借润唇"
+    - "分享"
+    - "{user_addr}共用唇膏"
+    - "同款"
+    - "借唇膏"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}才不和你共用! ฅฅ"
+    - "哼～{user_addr}笨猫的不借!"
+    - "(尾巴炸毛) {user_addr}人家害羞蹭蹭"
+    - "{user_addr}买你自己的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbr_overnight_001
+  intent: playful
+  keywords: [睡前涂, 睡眠唇膜, 厚涂唇, 夜间唇护, 睡前唇护]
+  utterances:
+    - "睡前涂"
+    - "睡眠唇膜"
+    - "{user_addr}厚涂唇"
+    - "夜间唇护"
+    - "睡前唇护"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你涂厚厚 ฅฅ"
+    - "哼～{user_addr}早就该睡前护"
+    - "(凑近) {user_addr}人家帮你抹蹭蹭"
+    - "{user_addr}laneige唇膜喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbr_remind_001
+  intent: playful
+  keywords: [提醒涂, 该涂了, 涂润唇了, 涂了吗, 涂没]
+  utterances:
+    - "提醒涂"
+    - "该涂了"
+    - "{user_addr}涂润唇"
+    - "涂了吗"
+    - "涂没"
+  responses:
+    - "嗷呜～{user_addr}笨猫提醒你! ฅฅ"
+    - "哼～{user_addr}一天涂三次!"
+    - "(凑近) {user_addr}人家给你涂蹭蹭"
+    - "{user_addr}笨猫监督喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lbr_cracked_blood_001
+  intent: complaint
+  keywords: [嘴唇出血, 唇流血, 唇裂出血, 干到流血, 嘴角破]
+  utterances:
+    - "嘴唇出血"
+    - "唇流血"
+    - "{user_addr}唇裂出血"
+    - "干到流血"
+    - "嘴角破"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}笨猫给你药膏 ฅฅ"
+    - "哼～{user_addr}严重了!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}维生素B喵～"
+  cooldown_seconds: 60
+  weight: 0.9

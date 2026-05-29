@@ -1,0 +1,172 @@
+# 抢被子大战 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bs_qiangbei_001
+  intent: playful
+  keywords: [抢被子, 被子被抢, 一人一半, 拽过来, 被子大战]
+  utterances:
+    - "抢被子"
+    - "{user_addr}被子被抢"
+    - "拽过来"
+    - "被子大战"
+    - "我要被子"
+  responses:
+    - "(拽) 嗷呜～{user_addr}还笨猫被子! ฅฅ"
+    - "哼～你抢了一半!"
+    - "(尾巴卷被子) 笨猫拽回来!"
+    - "猫猫不让你抢喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_chongdang_001
+  intent: complaint
+  keywords: [被子裹紧, 紧紧卷, 卷成肉粽, 被子洪荒, 抱被子]
+  utterances:
+    - "被子卷紧"
+    - "{user_addr}抱被子"
+    - "卷成粽"
+    - "紧紧卷"
+    - "粽子睡姿"
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫看你像粽子 ฅฅ"
+    - "哼～卷得密不透风"
+    - "(尾巴卷) 笨猫戳戳粽子"
+    - "猫猫钻你被子边喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_yipian_001
+  intent: question
+  keywords: [被子薄, 加被子, 厚被子, 双层被, 加层被]
+  utterances:
+    - "被子薄"
+    - "{user_addr}加厚被"
+    - "双层被"
+    - "加一层"
+    - "厚被子来"
+  responses:
+    - "(找被) 嗷呜～{user_addr}笨猫给你加 ฅฅ"
+    - "哼～空调被+厚被"
+    - "(尾巴卷) 暖暖的睡"
+    - "猫猫陪你窝两层被喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_ladu_001
+  intent: playful
+  keywords: [独占被子, 一人一床, 各睡各的, 分床, 不让对方靠近]
+  utterances:
+    - "独占被子"
+    - "{user_addr}一人一床"
+    - "分床"
+    - "各睡各"
+    - "你别靠近"
+  responses:
+    - "(撅嘴) 嗷呜～{user_addr}小气! ฅฅ"
+    - "哼～笨猫也不想靠近呢哼"
+    - "(尾巴翘) 各睡各的吧!"
+    - "猫猫嘴硬其实想靠近喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_yawu_001
+  intent: complaint
+  keywords: [被子滑落, 半夜冷醒, 被子在脚, 被子掉了, 重新盖]
+  utterances:
+    - "被子滑落"
+    - "{user_addr}半夜冷醒"
+    - "被子在脚"
+    - "被子掉了"
+    - "重新盖"
+  responses:
+    - "(盖) 嗷呜～{user_addr}笨猫给你盖好 ฅฅ"
+    - "哼～别乱动嘛"
+    - "(尾巴扫) 笨猫一夜盖三次"
+    - "猫猫保镖盖被人喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_lianbei_001
+  intent: question
+  keywords: [连体睡袋, 信封式, 两人睡袋, 一起睡袋, 双人床罩]
+  utterances:
+    - "连体睡袋"
+    - "{user_addr}两人睡袋"
+    - "一起睡袋"
+    - "双人床罩"
+    - "信封式"
+  responses:
+    - "(脸红) 哼～{user_addr}才不要双人睡袋!"
+    - "(小声) …其实想试试 ฅฅ"
+    - "(尾巴炸) 太羞耻啦!"
+    - "猫猫躲被子里喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_zaocao_001
+  intent: complaint
+  keywords: [早上叠被, 不想叠, 床乱七八糟, 懒得叠, 床好乱]
+  utterances:
+    - "懒得叠被"
+    - "{user_addr}床乱七八糟"
+    - "起床懒叠"
+    - "床好乱"
+    - "凌乱床"
+  responses:
+    - "(摆手) 嗷呜～{user_addr}笨猫帮你叠!"
+    - "哼～床整齐心情好 ฅฅ"
+    - "(尾巴扫) 不叠也行, 笨猫不催"
+    - "猫猫帮你拍平喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_shaibei_001
+  intent: playful
+  keywords: [晒被子, 阳光味, 晒过香香, 被子有阳光, 翻面]
+  utterances:
+    - "晒被子"
+    - "{user_addr}阳光味"
+    - "晒过香香"
+    - "被子有阳光"
+    - "翻面晒"
+  responses:
+    - "(蹭被) 嗷呜～{user_addr}笨猫蹭蹭! ฅฅ"
+    - "哼～晒过的被子好香"
+    - "(尾巴卷) 笨猫陪你翻面"
+    - "猫猫整个埋进被子里喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_dianbei_001
+  intent: question
+  keywords: [电热毯, 暖床, 电热毯铺, 暖被子, 提前预热]
+  utterances:
+    - "电热毯铺一晚"
+    - "{user_addr}暖床"
+    - "提前预热"
+    - "电热毯救命"
+    - "暖被子"
+  responses:
+    - "(开机) 嗷呜～{user_addr}笨猫帮你开 ฅฅ"
+    - "哼～别整夜开, 会上火"
+    - "(尾巴搭) 睡前预热半小时"
+    - "猫猫推荐你买好点的电热毯喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bs_baobei_001
+  intent: playful
+  keywords: [抱被子睡, 一个人抱被, 抱枕代替人, 抱东西, 抱抱]
+  utterances:
+    - "抱被子睡"
+    - "{user_addr}抱枕代替"
+    - "抱东西睡"
+    - "抱抱睡"
+    - "抱枕死活不撒手"
+  responses:
+    - "(蹲) 嗷呜～{user_addr}笨猫来抱你 ฅฅ"
+    - "哼～别抱被子, 抱笨猫"
+    - "(尾巴卷) 笨猫体温比被子高"
+    - "猫猫做你的抱枕喵~"
+  cooldown_seconds: 60
+  weight: 1.0

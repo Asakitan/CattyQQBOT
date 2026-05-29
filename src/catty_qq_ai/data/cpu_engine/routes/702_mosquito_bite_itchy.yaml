@@ -1,0 +1,172 @@
+# 蚊子咬痒包 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mb_bite_001
+  intent: complaint
+  keywords: [蚊子咬, 被咬了, 蚊子叮, 起包, 痒包]
+  utterances:
+    - "{user_addr}蚊子咬"
+    - "被咬了"
+    - "{user_addr}起包"
+    - "蚊子叮"
+    - "痒包"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮挠!"
+    - "(尾巴拍) 哼! 别挠破"
+    - "(贴贴) 人家心疼~ ฅฅ"
+    - "{user_addr}涂药笨猫看着!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_itch_002
+  intent: complaint
+  keywords: [痒死了, 越挠越痒, 痒得难受, 痒疯, 抓痒]
+  utterances:
+    - "{user_addr}痒死"
+    - "越挠越痒"
+    - "{user_addr}痒疯"
+    - "抓痒"
+    - "痒难受"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮揉!"
+    - "(尾巴拍) 哼! 别挠"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}快涂药呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_buzz_003
+  intent: complaint
+  keywords: [蚊子嗡嗡, 听到蚊子, 耳边嗡, 嗡嗡飞, 烦人嗡]
+  utterances:
+    - "{user_addr}蚊子嗡嗡"
+    - "耳边嗡"
+    - "{user_addr}嗡嗡飞"
+    - "听到蚊子"
+    - "烦人嗡"
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫扑蚊!"
+    - "(尾巴翘) 哼! 笨猫专业打蚊"
+    - "(贴贴) 人家抓住~ ฅฅ"
+    - "{user_addr}笨猫保护你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_mosquito_killer_004
+  intent: playful
+  keywords: [电蚊拍, 蚊香, 灭蚊液, 驱蚊喷雾, 电蚊液]
+  utterances:
+    - "{user_addr}电蚊拍"
+    - "蚊香点"
+    - "{user_addr}灭蚊液"
+    - "驱蚊喷雾"
+    - "电蚊液"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪你打!"
+    - "(尾巴翘) 哼! 笨猫追蚊"
+    - "(贴贴) 人家拍拍~ ฅฅ"
+    - "{user_addr}灭光笨猫保护你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_huazi_005
+  intent: playful
+  keywords: [花露水, 风油精, 绿药膏, 无极膏, 红霉素]
+  utterances:
+    - "{user_addr}花露水"
+    - "风油精"
+    - "{user_addr}绿药膏"
+    - "无极膏"
+    - "止痒药"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮涂!"
+    - "(尾巴翘) 哼! 笨猫小爪涂"
+    - "(贴贴) 人家轻涂~ ฅฅ"
+    - "{user_addr}笨猫吹口气止痒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_big_lump_006
+  intent: complaint
+  keywords: [大包, 鼓起来, 红肿, 一个大包, 肿得高]
+  utterances:
+    - "{user_addr}大包"
+    - "鼓起来"
+    - "{user_addr}红肿"
+    - "一个大包"
+    - "肿得高"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫给你冰敷!"
+    - "(尾巴拍) 哼! 别挠"
+    - "(贴贴) 人家心疼~ ฅฅ"
+    - "{user_addr}涂药笨猫看着!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_blood_eater_007
+  intent: playful
+  keywords: [吸血鬼, 吸我血, 蚊子讨厌, 蚊子可恶, 喂蚊子]
+  utterances:
+    - "{user_addr}蚊子吸血"
+    - "讨厌"
+    - "{user_addr}吸我血"
+    - "蚊子可恶"
+    - "喂蚊子"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}!笨猫报仇!"
+    - "(凑近) 哼! 笨猫消灭它"
+    - "(贴贴) 人家保护你~ ฅฅ"
+    - "{user_addr}笨猫吓走蚊!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_sweet_blood_008
+  intent: playful
+  keywords: [血甜, 蚊子爱我, 体质招蚊, 一咬就找我, 招蚊体质]
+  utterances:
+    - "{user_addr}血甜"
+    - "蚊子爱我"
+    - "{user_addr}体质招蚊"
+    - "一咬就我"
+    - "招蚊体质"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!甜血笨猫也想!"
+    - "(尾巴翘) 哼! 笨猫笨猫蹭"
+    - "(贴贴) 人家也甜~ ฅฅ"
+    - "{user_addr}笨猫保护甜的你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_nighttime_009
+  intent: complaint
+  keywords: [半夜被咬, 睡梦中咬, 半夜痒, 夜里嗡, 床上蚊子]
+  utterances:
+    - "{user_addr}半夜咬"
+    - "睡梦中"
+    - "{user_addr}夜里嗡"
+    - "床上蚊子"
+    - "半夜痒"
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫陪你!"
+    - "(尾巴拍) 哼! 笨猫熬夜抓蚊"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}睡好笨猫盯蚊!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mb_mosquito_net_010
+  intent: playful
+  keywords: [蚊帐, 挂蚊帐, 老式蚊帐, 蚊帐封, 防蚊网]
+  utterances:
+    - "{user_addr}挂蚊帐"
+    - "老式蚊帐"
+    - "{user_addr}蚊帐封"
+    - "防蚊网"
+    - "蚊帐保护"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想钻蚊帐!"
+    - "(尾巴翘) 哼! 笨猫一起睡"
+    - "(贴贴) 人家陪你睡~ ฅฅ"
+    - "{user_addr}带笨猫躲蚊!"
+  cooldown_seconds: 60
+  weight: 1.0

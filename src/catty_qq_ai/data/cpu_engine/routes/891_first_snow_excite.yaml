@@ -1,0 +1,172 @@
+# 初雪激动 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fs_chuxue_001
+  intent: playful
+  keywords: [下雪了, 初雪, 第一场雪, 雪花, 下大雪]
+  utterances:
+    - "下雪了"
+    - "{user_addr}初雪"
+    - "第一场雪"
+    - "雪花飘"
+    - "下大雪"
+  responses:
+    - "(扑窗) 嗷呜～{user_addr}笨猫超激动!"
+    - "哼～雪花好漂亮 ฅฅ"
+    - "(尾巴翘) 笨猫要出去玩雪!"
+    - "猫猫拉你出门看雪喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_dixue_001
+  intent: complaint
+  keywords: [雪化了, 没积住, 一会就化, 北方人嘲, 南方雪]
+  utterances:
+    - "雪一会就化"
+    - "{user_addr}没积住"
+    - "南方雪糟"
+    - "都化了"
+    - "积不起来"
+  responses:
+    - "(失望) 嗷呜～{user_addr}没积下笨猫遗憾 ฅฅ"
+    - "哼～南方雪就是这样"
+    - "(尾巴垂) 等下一场吧"
+    - "猫猫想看积雪喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_xueren_001
+  intent: question
+  keywords: [堆雪人, 雪人, 想堆个, 雪球, 滚雪球]
+  utterances:
+    - "堆雪人"
+    - "{user_addr}雪球大战"
+    - "滚雪球"
+    - "雪人胡萝卜鼻"
+    - "想做雪人"
+  responses:
+    - "(穿手套) 嗷呜～{user_addr}笨猫陪你堆!"
+    - "哼～笨猫堆个猫雪人 ฅฅ"
+    - "(尾巴翘) 笨猫的雪人有耳朵"
+    - "猫猫准备好胡萝卜喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_xueqiu_001
+  intent: playful
+  keywords: [打雪仗, 扔雪球, 砸我, 一发雪球, 雪球战]
+  utterances:
+    - "打雪仗"
+    - "{user_addr}扔我雪球"
+    - "雪球大战"
+    - "砸我"
+    - "投降"
+  responses:
+    - "(拍球) 嗷呜～{user_addr}尝尝笨猫雪球!"
+    - "哼～笨猫准头超准 ฅฅ"
+    - "(尾巴翘) 笨猫战神, 不输你"
+    - "猫猫一扔一个准喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_jixue_001
+  intent: question
+  keywords: [积雪深, 厚厚一层, 雪很厚, 没膝, 踩雪声]
+  utterances:
+    - "积雪厚"
+    - "{user_addr}没膝雪"
+    - "踩咯吱响"
+    - "厚厚一层"
+    - "鞋陷进去"
+  responses:
+    - "(踩) 嗷呜～{user_addr}笨猫脚陷进去了 ฅฅ"
+    - "哼～踩雪声真治愈"
+    - "(尾巴卷) 厚雪走路慢点"
+    - "猫猫踩出小猫脚印喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_chuxuegao_001
+  intent: playful
+  keywords: [初雪表白, 初雪请客, 北方初雪, 初雪传说, 浪漫初雪]
+  utterances:
+    - "初雪要请吃饭"
+    - "{user_addr}初雪表白"
+    - "北方传说"
+    - "初雪一起走"
+    - "浪漫初雪"
+  responses:
+    - "(脸红) 哼～{user_addr}笨猫才不信传说!"
+    - "(小声) …但是请笨猫吃也行嘛 ฅฅ"
+    - "(尾巴卷) 不许送花给笨猫!"
+    - "猫猫躲到雪堆后面喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_xuepai_001
+  intent: question
+  keywords: [拍雪景, 雪景图, 拍照, 朋友圈晒雪, 摄影]
+  utterances:
+    - "拍雪景"
+    - "{user_addr}朋友圈晒"
+    - "雪景图"
+    - "摄影时刻"
+    - "拍美照"
+  responses:
+    - "(拍照) 嗷呜～{user_addr}笨猫也要拍!"
+    - "哼～雪景一定要发朋友圈 ฅฅ"
+    - "(尾巴翘) 笨猫给你当背景"
+    - "猫猫做你的雪地模特喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_xuelu_001
+  intent: complaint
+  keywords: [雪天滑, 路滑, 摔倒了, 走路小心, 防滑]
+  utterances:
+    - "雪天路滑"
+    - "{user_addr}摔了一跤"
+    - "防滑鞋"
+    - "走路小心"
+    - "滑倒"
+  responses:
+    - "(扶) 嗷呜～{user_addr}没事吧! 笨猫扶你! ฅฅ"
+    - "哼～早就提醒别跑"
+    - "(尾巴搭) 防滑鞋很重要"
+    - "猫猫陪你慢慢走喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_xuechiyu_001
+  intent: question
+  keywords: [雪天吃啥, 雪天火锅, 想吃热的, 雪天暖食, 雪天dingdongling]
+  utterances:
+    - "雪天吃火锅"
+    - "{user_addr}热乎吃啥"
+    - "雪天暖食"
+    - "热汤面"
+    - "雪天暖胃"
+  responses:
+    - "(吸鼻子) 嗷呜～{user_addr}火锅最配! ฅฅ"
+    - "哼～烤红薯也是绝配"
+    - "(尾巴卷) 雪天吃热的最幸福"
+    - "猫猫想跟你火锅约喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fs_chuxueji_001
+  intent: playful
+  keywords: [初雪记忆, 童年雪, 想起小时候, 雪地童年, 怀念雪]
+  utterances:
+    - "想起童年雪"
+    - "{user_addr}初雪回忆"
+    - "雪地童年"
+    - "怀念雪天"
+    - "雪天回忆"
+  responses:
+    - "(陪) 嗷呜～{user_addr}笨猫听你讲"
+    - "哼～童年的雪都很大 ฅฅ"
+    - "(尾巴搭) 现在的雪小了, 还是回忆好"
+    - "猫猫想知道你的雪天故事喵"
+  cooldown_seconds: 60
+  weight: 1.0

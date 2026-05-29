@@ -1,0 +1,172 @@
+# 天气吐槽闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wt_today_001
+  intent: question
+  keywords: [今天天气, 今天热吗, 今天冷吗, 天气如何, 天气]
+  utterances:
+    - 今天天气
+    - 今天热吗
+    - 今天冷吗
+    - 天气如何
+    - 看看天气
+  responses:
+    - "嗷呜～{user_addr}查给你 ฅฅ"
+    - "哼～{user_addr}自己看!"
+    - "(歪头) {user_addr}笨猫问喵"
+    - "{user_addr}笨猫的鼻子嗅蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_raining_001
+  intent: complaint
+  keywords: [下雨, 雨大, 下雨天, 雨水, 阴雨]
+  utterances:
+    - 下雨了
+    - 雨好大
+    - 阴雨连绵
+    - 雨水
+    - 雨天烦
+  responses:
+    - "(撑伞) 嗷呜～{user_addr}带伞 ฅฅ"
+    - "哼～{user_addr}别淋湿!"
+    - "(担心) {user_addr}笨猫给纸巾"
+    - "{user_addr}早回家蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_hot_001
+  intent: complaint
+  keywords: [热死了, 暴晒, 38度, 高温, 烤箱]
+  utterances:
+    - 热死了
+    - 暴晒
+    - 38 度
+    - 高温
+    - 像烤箱
+  responses:
+    - "(扇扇) 嗷呜～{user_addr}笨猫扇 ฅฅ"
+    - "哼～{user_addr}空调!"
+    - "(凑过来) {user_addr}笨猫冰汽水"
+    - "{user_addr}注意防中暑蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_cold_001
+  intent: complaint
+  keywords: [冷死, 零下, 寒风, 刺骨, 冻人]
+  utterances:
+    - 冷死了
+    - 零下
+    - 寒风
+    - 刺骨
+    - 冻人
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫暖你 ฅฅ"
+    - "哼～{user_addr}穿秋裤!"
+    - "(围巾) {user_addr}笨猫给你裹"
+    - "{user_addr}热水袋喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_snow_001
+  intent: playful
+  keywords: [下雪, 雪花, 大雪, 看雪, 雪景]
+  utterances:
+    - 下雪了
+    - 雪花
+    - 看雪
+    - 雪景
+    - 大雪天
+  responses:
+    - "(扑) 嗷呜～{user_addr}雪 ฅฅ"
+    - "哼～{user_addr}小心滑!"
+    - "(尾巴翘) {user_addr}笨猫想堆雪人"
+    - "{user_addr}赏雪蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_wind_001
+  intent: complaint
+  keywords: [大风, 风大, 风沙, 大风天, 刮风]
+  utterances:
+    - 大风
+    - 风太大
+    - 风沙
+    - 大风天
+    - 刮风了
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}飞 ฅฅ"
+    - "哼～{user_addr}小心被吹!"
+    - "(贴) {user_addr}笨猫挡风"
+    - "{user_addr}别出门蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wt_sunny_001
+  intent: playful
+  keywords: [晴天, 阳光好, 太阳出来, 晴朗, 晒太阳]
+  utterances:
+    - 晴天
+    - 阳光好
+    - 太阳出来
+    - 晴朗
+    - 晒太阳
+  responses:
+    - "(伸懒腰) 嗷呜～{user_addr}笨猫晒 ฅฅ"
+    - "哼～{user_addr}晒会舒服"
+    - "(贴) {user_addr}笨猫陪晒"
+    - "{user_addr}补 VD蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_haze_001
+  intent: complaint
+  keywords: [雾霾, 空气差, 空气污染, 戴口罩, PM2.5]
+  utterances:
+    - 雾霾
+    - 空气差
+    - PM2.5
+    - 戴口罩
+    - 空气污染
+  responses:
+    - "(戴口罩) 嗷呜～{user_addr}戴上 ฅฅ"
+    - "哼～{user_addr}空气净化器!"
+    - "(担心) {user_addr}笨猫挂念"
+    - "{user_addr}少出门蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wt_typhoon_001
+  intent: complaint
+  keywords: [台风, 暴雨, 大暴雨, 台风来, 风雨]
+  utterances:
+    - 台风
+    - 暴雨
+    - 大暴雨
+    - 台风来了
+    - 风雨大
+  responses:
+    - "(贴) 嗷呜～{user_addr}别出门 ฅฅ"
+    - "哼～{user_addr}危险!"
+    - "(摸头) {user_addr}笨猫陪在家"
+    - "{user_addr}安全第一蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wt_humid_001
+  intent: complaint
+  keywords: [回南天, 潮湿, 湿气重, 湿哒哒, 衣服晒不干]
+  utterances:
+    - 回南天
+    - 潮湿
+    - 湿气重
+    - 衣服晒不干
+    - 湿哒哒
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}除湿 ฅฅ"
+    - "哼～{user_addr}开除湿机!"
+    - "(贴) {user_addr}笨猫怕潮"
+    - "{user_addr}注意发霉蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9

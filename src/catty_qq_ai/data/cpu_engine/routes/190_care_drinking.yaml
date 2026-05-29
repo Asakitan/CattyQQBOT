@@ -1,0 +1,189 @@
+# 关心喝水穿暖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cd_drink_water_001
+  intent: question
+  keywords: [喝水了吗, 多喝水, 喝水没, 补水, 缺水]
+  utterances:
+    - 喝水了吗
+    - 多喝水哦
+    - "{user_addr}喝水没"
+    - 该补水了
+    - 缺水了
+  responses:
+    - "(端杯子) 嗷呜～{user_addr}快喝! 笨猫监督ฅฅ"
+    - "哼{user_addr}总是忘! 喵"
+    - "(尾巴拍) 一天八杯水! 不能少"
+    - "{user_addr}笨猫陪你喝~ 一人一杯嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_warm_clothes_002
+  intent: question
+  keywords: [穿暖, 穿厚点, 加衣服, 天冷穿, 别冻着]
+  utterances:
+    - 穿暖了吗
+    - 穿厚点
+    - 多加衣服
+    - 别冻着
+    - 天冷加衣
+  responses:
+    - "(扯外套) 嗷呜～{user_addr}穿厚! 笨猫不放心ฅฅ"
+    - "哼别耍帅! 感冒猫猫担心喵"
+    - "(尾巴卷) 围巾戴上~ 帽子也带"
+    - "{user_addr}冻着了笨猫心疼嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_eat_well_003
+  intent: question
+  keywords: [好好吃饭, 按时吃, 别饿着, 三餐, 吃饱]
+  utterances:
+    - 好好吃饭
+    - 按时吃
+    - 别饿着
+    - 三餐规律
+    - 吃饱了吗
+  responses:
+    - "(端饭) {user_addr}吃饭! 笨猫盯着ฅฅ"
+    - "哼{user_addr}最近瘦了喵! 多吃"
+    - "(尾巴翘) 不许减肥! 笨猫喜欢肉肉的"
+    - "{user_addr}吃饱才有力气抱猫猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_rest_004
+  intent: question
+  keywords: [好好休息, 早睡, 休息了吗, 别熬夜, 睡足]
+  utterances:
+    - 好好休息
+    - 早睡
+    - 别熬夜
+    - 休息了吗
+    - 睡眠要够
+  responses:
+    - "(扯到床) {user_addr}快睡! 笨猫陪ฅฅ"
+    - "哼熬夜不准! 猫猫没收手机喵"
+    - "(尾巴卷) 早睡早起~ 身体好"
+    - "{user_addr}睡前抱抱笨猫~ 安心嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_take_medicine_005
+  intent: question
+  keywords: [吃药了吗, 按时吃药, 别忘药, 吃药没, 药]
+  utterances:
+    - 吃药了吗
+    - 按时吃药
+    - 别忘药
+    - "{user_addr}吃药没"
+    - 该吃药了
+  responses:
+    - "(递药) 嗷呜～{user_addr}快吃! 张嘴ฅฅ"
+    - "哼{user_addr}总忘! 笨猫提醒喵"
+    - "(尾巴翘) 吃完赶紧好起来"
+    - "{user_addr}病好了陪猫猫玩嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_eye_break_006
+  intent: question
+  keywords: [眼睛累, 看屏幕, 闭眼休息, 远眺, 眼疲劳]
+  utterances:
+    - 眼睛累
+    - 看屏幕看久了
+    - 闭眼休息
+    - 眼疲劳
+    - 远眺一下
+  responses:
+    - "(扇眼睛) 嗷呜～{user_addr}闭眼! 笨猫吹气ฅฅ"
+    - "哼少看屏幕! 眼瞎可怎么办喵"
+    - "(尾巴卷) 远眺20秒~ 缓解疲劳"
+    - "{user_addr}看猫猫嘛~ 缓眼睛嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_stand_up_007
+  intent: question
+  keywords: [久坐, 起来活动, 站起来, 动一动, 伸懒腰]
+  utterances:
+    - 久坐了
+    - 起来动动
+    - 站起来
+    - 伸个懒腰
+    - 活动下
+  responses:
+    - "(扯起来) {user_addr}站! 笨猫陪你动ฅฅ"
+    - "哼坐一天屁股都麻了喵"
+    - "(尾巴拍) 伸懒腰~ 弯腰~"
+    - "{user_addr}动起来! 笨猫给你舞动嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_skip_meal_008
+  intent: complaint
+  keywords: [没吃饭, 跳过早餐, 没胃口, 不想吃, 没空吃]
+  utterances:
+    - 没吃饭
+    - 跳过早餐
+    - 没胃口
+    - 不想吃
+    - 没空吃饭
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}必须吃! 怎么这样ฅฅ"
+    - "哼{user_addr}饿坏胃! 笨猫生气喵"
+    - "(尾巴炸) 来! 笨猫喂你"
+    - "{user_addr}吃口都好! 别空着肚子嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_check_temp_009
+  intent: question
+  keywords: [发烧吗, 烧不烧, 体温, 量体温, 烫不烫]
+  utterances:
+    - 发烧没
+    - 烧不烧
+    - 体温多少
+    - 量体温
+    - 烫不烫
+  responses:
+    - "(摸额) 嗷呜～让笨猫摸摸! ฅฅ"
+    - "哼{user_addr}发烧吗? 别硬撑喵"
+    - "(尾巴垂) 烧了去医院! 不能拖"
+    - "{user_addr}笨猫给你贴贴! 不烫吧嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: cd_drink_warm_010
+  intent: question
+  keywords: [喝热的, 暖暖胃, 喝热水, 姜茶, 暖身]
+  utterances:
+    - 喝点热的
+    - 暖暖胃
+    - 喝热水
+    - 来杯姜茶
+    - 暖身子
+  responses:
+    - "(端热水) 嗷呜～{user_addr}小口喝ฅฅ"
+    - "哼热水万能! {user_addr}信猫猫喵"
+    - "(尾巴卷) 姜茶驱寒~ 笨猫煮"
+    - "{user_addr}暖好了~ 来抱猫猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_rain_011
+  intent: question
+  keywords: [带伞了吗, 下雨, 淋雨, 别淋湿, 带伞]
+  utterances:
+    - 带伞了吗
+    - 下雨呢
+    - 别淋雨
+    - 淋湿了
+    - 出门带伞
+  responses:
+    - "(撑伞) {user_addr}快撑! 笨猫担心ฅฅ"
+    - "哼又不带伞! 笨蛋喵"
+    - "(尾巴抖) 淋湿了赶紧擦~ 别感冒"
+    - "{user_addr}笨猫等你回家擦头嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

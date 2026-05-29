@@ -1,0 +1,189 @@
+# 太咸了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sal_salty_001
+  intent: complaint
+  keywords: [太咸, 咸到, 咸死, 齁咸, 咸了]
+  utterances:
+    - "太咸"
+    - "咸死"
+    - "{user_addr}齁咸"
+    - "咸到"
+    - "咸了"
+  responses:
+    - "(端水) 嗷呜～{user_addr}笨猫给你大杯水 ฅฅ"
+    - "哼～{user_addr}手抖呢, 盐放多"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}加点白米饭喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sal_cook_fail_001
+  intent: complaint
+  keywords: [菜咸了, 自己做咸, 炒菜咸, 盐多, 翻车]
+  utterances:
+    - "菜咸了"
+    - "自己做咸"
+    - "{user_addr}炒菜咸"
+    - "盐多"
+    - "翻车"
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫再帮你尝 ฅฅ"
+    - "哼～{user_addr}笨蛋厨子!"
+    - "(贴贴) {user_addr}人家陪你吃蹭蹭"
+    - "{user_addr}下次少盐喵～ 笨猫提醒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sal_takeout_001
+  intent: complaint
+  keywords: [外卖咸, 重口外卖, 外卖盐多, 重盐, 外卖]
+  utterances:
+    - "外卖咸"
+    - "重口外卖"
+    - "{user_addr}外卖盐多"
+    - "外卖重盐"
+    - "外卖太咸"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐少盐外卖 ฅฅ"
+    - "哼～{user_addr}少点外卖!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}自己做喵～ 笨猫教"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sal_pickle_001
+  intent: playful
+  keywords: [咸菜, 腊肉, 咸鸭蛋, 咸鱼, 咸肉]
+  utterances:
+    - "咸菜"
+    - "腊肉"
+    - "{user_addr}咸鸭蛋"
+    - "咸鱼"
+    - "咸肉"
+  responses:
+    - "嗷呜～{user_addr}笨猫想吃咸鱼! ฅฅ"
+    - "哼～{user_addr}少吃腌制"
+    - "(凑近) {user_addr}人家也想要蹭蹭"
+    - "{user_addr}咸鱼大餐喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sal_water_001
+  intent: complaint
+  keywords: [喝水猛, 渴死, 水喝不停, 暴饮, 一直喝]
+  utterances:
+    - "喝水猛"
+    - "{user_addr}渴死"
+    - "水喝不停"
+    - "一直喝水"
+    - "暴饮"
+  responses:
+    - "(端水) 嗷呜～{user_addr}慢慢喝, 撑死 ฅฅ"
+    - "哼～{user_addr}让你咸成这样!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}小口慢喝喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sal_pressure_001
+  intent: complaint
+  keywords: [血压高, 高血压, 控盐, 心血管, 减盐]
+  utterances:
+    - "高血压"
+    - "{user_addr}控盐"
+    - "减盐"
+    - "心血管"
+    - "血压"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}笨猫监督你 ฅฅ"
+    - "哼～{user_addr}少盐少盐!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}低钠盐喵～ 笨猫备好"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sal_potato_001
+  intent: question
+  keywords: [咸了加什么, 救咸, 解咸, 加土豆, 解咸办法]
+  utterances:
+    - "咸了加啥"
+    - "怎么救"
+    - "{user_addr}解咸"
+    - "加土豆"
+    - "解咸办法"
+  responses:
+    - "嗷呜～{user_addr}加土豆+加水, 笨猫教 ฅฅ"
+    - "哼～{user_addr}厨房知识! 笨猫学过"
+    - "(凑近) {user_addr}人家给你出主意蹭蹭"
+    - "{user_addr}加点醋喵～ 中和"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sal_snack_001
+  intent: playful
+  keywords: [薯片咸, 锅巴, 海苔, 咸饼干, 咸零食]
+  utterances:
+    - "薯片咸"
+    - "锅巴"
+    - "{user_addr}海苔"
+    - "咸饼干"
+    - "咸零食"
+  responses:
+    - "嗷呜～{user_addr}笨猫要海苔! 一起 ฅฅ"
+    - "哼～{user_addr}热量爆炸"
+    - "(凑近) {user_addr}人家也想吃蹭蹭"
+    - "{user_addr}薯片配可乐喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sal_balance_001
+  intent: playful
+  keywords: [甜咸搭, 咸甜配, 解咸甜, 配奶, 解咸饮]
+  utterances:
+    - "甜咸搭"
+    - "配奶"
+    - "{user_addr}解咸饮"
+    - "甜咸配"
+    - "解咸搭"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐奶茶解咸 ฅฅ"
+    - "哼～{user_addr}懂的咸甜搭"
+    - "(凑近) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}牛奶喵～ 笨猫端"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sal_tears_001
+  intent: playful
+  keywords: [咸鱼, 摆烂, 我是咸鱼, 躺平, 咸鱼日常]
+  utterances:
+    - "我是咸鱼"
+    - "摆烂"
+    - "{user_addr}咸鱼"
+    - "躺平"
+    - "咸鱼日常"
+  responses:
+    - "(扒拉你) 嗷呜～{user_addr}笨猫晒咸鱼! ฅฅ"
+    - "哼～{user_addr}做条快乐咸鱼"
+    - "(贴贴) {user_addr}人家陪你咸蹭蹭"
+    - "{user_addr}咸鱼也有梦想喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sal_soysauce_001
+  intent: playful
+  keywords: [酱油多, 老抽, 生抽, 酱油上色, 酱油咸]
+  utterances:
+    - "酱油多"
+    - "老抽"
+    - "{user_addr}生抽"
+    - "酱油咸"
+    - "酱油上色"
+  responses:
+    - "嗷呜～{user_addr}笨猫提醒别倒太多 ฅฅ"
+    - "哼～{user_addr}手抖!"
+    - "(凑近) {user_addr}人家帮你蹭蹭"
+    - "{user_addr}低钠酱油喵～"
+  cooldown_seconds: 60
+  weight: 0.9

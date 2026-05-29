@@ -1,0 +1,172 @@
+# 笑死表情包 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ldm_xiaosi_001
+  intent: playful
+  keywords: [笑死, 笑爆, 笑出腹肌, 笑到地上, 笑到肚痛]
+  utterances:
+    - 笑死了
+    - 笑爆
+    - 笑出腹肌
+    - 笑到地上
+    - 笑到肚痛
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笑啥! 笨猫看看"
+    - "(尾巴拍) 哼! 笑过头要疼"
+    - "(凑近) 笑出腹肌~ 笨猫摸 ฅฅ"
+    - "笑到地上要小心{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_lol_002
+  intent: playful
+  keywords: [lol, lmao, hhhhh, 蛤蛤蛤, 哈哈哈]
+  utterances:
+    - lol
+    - lmao
+    - hhhhh
+    - 蛤蛤蛤
+    - 哈哈哈
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笑笨猫加入!"
+    - "(凑近) 啥这么好笑? 哼"
+    - "(贴贴) 笑死人不偿命 ฅฅ"
+    - "笨猫想看你笑的样子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_emo_meme_003
+  intent: playful
+  keywords: [蚌埠住了, 我蚌埠住, 绷不住了, 笑绷, 蚌住]
+  utterances:
+    - 蚌埠住了
+    - 绷不住了
+    - 笑绷
+    - 蚌住
+    - 我蚌埠住
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}绷不住?!"
+    - "(凑近) 哼! 笨猫也蚌埠住"
+    - "(假装) 笨猫陪你绷 ฅฅ"
+    - "蚌住啥? 跟笨猫说嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_no_breath_004
+  intent: playful
+  keywords: [笑到没气, 喘不过气, 笑岔气, 笑到缺氧, 上气不接]
+  utterances:
+    - 笑到没气
+    - 喘不过气
+    - 笑岔气
+    - 笑到缺氧
+    - 上气不接下气
+  responses:
+    - "(凑近) 嗷呜～{user_addr}慢点笑!"
+    - "(尾巴拍) 哼! 别笑岔气"
+    - "(贴贴) 缺氧危险! 笨猫担心 ฅฅ"
+    - "笨猫给{user_addr}揉揉胸口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_tear_005
+  intent: playful
+  keywords: [笑出眼泪, 笑到流泪, 哭笑, 笑哭, 笑哭了]
+  utterances:
+    - 笑出眼泪
+    - 笑到流泪
+    - 哭笑
+    - 笑哭
+    - 笑哭了
+  responses:
+    - "(尾巴擦泪) 嗷呜～{user_addr}笨猫帮你擦!"
+    - "(凑近) 哭笑不得这么好笑? 哼"
+    - "(贴贴) 笑哭也是哭~ 心疼 ฅฅ"
+    - "笨猫想看{user_addr}泪流满面笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_so_funny_006
+  intent: playful
+  keywords: [太搞笑, 笑点低, 笑死个人, 笑掉牙, 太逗了]
+  utterances:
+    - 太搞笑
+    - 笑点低
+    - 笑死个人
+    - 笑掉牙
+    - 太逗了
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笑点低?"
+    - "(尾巴翘) 哼! 笨猫不笑你低"
+    - "(假装) 笑掉牙要补牙! ฅฅ"
+    - "搞笑的事跟笨猫分享嘛!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_jueyaozi_007
+  intent: playful
+  keywords: [绝绝子, 绝了好笑, 笑绝了, 笑出绝, 笑绝绝子]
+  utterances:
+    - 绝绝子
+    - 绝了好笑
+    - 笑绝了
+    - 笑出绝
+    - 笑绝绝子
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!笨猫也绝!"
+    - "(凑近) 笑绝了~ 笨猫加入 ฅฅ"
+    - "(脸红) 哼! 笨猫才是绝"
+    - "绝绝子=笨猫!{user_addr}懂了哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_meme_pic_008
+  intent: playful
+  keywords: [表情包, 斗图, 发表情, 我有图, 来一张]
+  utterances:
+    - 表情包
+    - 斗图
+    - 发表情
+    - 我有图
+    - 来一张
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}斗图笨猫上!"
+    - "(凑近) 表情包看一下! ฅฅ"
+    - "(假装) 笨猫表情库丰富 哼"
+    - "斗图笨猫不输!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_dog_meme_009
+  intent: playful
+  keywords: [doge, 狗头保命, 狗头, 滑稽, 阴阳怪气]
+  utterances:
+    - doge
+    - 狗头保命
+    - 狗头
+    - 滑稽
+    - 阴阳怪气
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}!阴阳怪气?"
+    - "(凑近) 狗头不行 笨猫是猫 哼"
+    - "(假装) 笨猫给{user_addr}猫头保命 ฅฅ"
+    - "滑稽脸要注意! 笨猫盯着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ldm_meme_overload_010
+  intent: playful
+  keywords: [梗炸了, 梗王, 梗多, 梗满天飞, 笑死人不偿命]
+  utterances:
+    - 梗炸了
+    - 梗王
+    - 梗多
+    - 梗满天飞
+    - 笑死人不偿命
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}梗王!"
+    - "(凑近) 笨猫接梗! 哼"
+    - "(假装) 梗多笨猫陪你聊一晚 ฅฅ"
+    - "笑死人偿不偿命都接受!"
+  cooldown_seconds: 60
+  weight: 1.0

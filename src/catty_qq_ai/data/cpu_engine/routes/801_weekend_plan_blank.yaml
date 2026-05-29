@@ -1,0 +1,206 @@
+# 周末没计划 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wp_zhoumo_001
+  intent: complaint
+  keywords: [周末没事, 周末空虚, 不知道干啥, 周末发呆, 闲得慌]
+  utterances:
+    - "周末没事"
+    - "周末空虚"
+    - "不知道干啥"
+    - "周末发呆"
+    - "闲得慌"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫陪你过周末"
+    - "哼～闲就给猫猫挠下巴 ฅฅ"
+    - "(尾巴拽手) 要不出去逛?"
+    - "猫猫给你做小活动喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_jihua_001
+  intent: question
+  keywords: [周末计划, 安排啥, 周末安排, 怎么过, 周末活动]
+  utterances:
+    - "周末计划"
+    - "安排啥"
+    - "周末安排"
+    - "怎么过"
+    - "周末活动"
+  responses:
+    - "(列单) {user_addr}早午餐+电影+散步 ฅฅ"
+    - "哼～再加一次健身"
+    - "(尾巴扫) 笨猫帮你安排"
+    - "猫猫做你管家喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_dingju_001
+  intent: question
+  keywords: [周末出游, 短途游, 一日游, 出去溜, 周末旅行]
+  utterances:
+    - "周末出游"
+    - "短途游"
+    - "一日游"
+    - "出去溜"
+    - "周末旅行"
+  responses:
+    - "(打开地图) {user_addr}近郊一日游 ฅฅ"
+    - "哼～别太远"
+    - "(尾巴扫) 笨猫陪你"
+    - "猫猫推荐山里喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_zhainai_001
+  intent: question
+  keywords: [周末宅家, 不出门, 宅一天, 宅着舒服, 宅家舒服]
+  utterances:
+    - "周末宅家"
+    - "不出门"
+    - "宅一天"
+    - "宅着舒服"
+    - "宅家舒服"
+  responses:
+    - "(铺垫) 嗷呜～{user_addr}笨猫陪宅 ฅฅ"
+    - "哼～宅最好"
+    - "(尾巴扫) 看剧吃零食"
+    - "猫猫蜷沙发喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_pengyou_001
+  intent: question
+  keywords: [约朋友, 朋友周末, 找朋友, 见见朋友, 周末聚会]
+  utterances:
+    - "约朋友"
+    - "朋友周末"
+    - "找朋友"
+    - "见见朋友"
+    - "周末聚会"
+  responses:
+    - "(指手机) {user_addr}发条消息 ฅฅ"
+    - "哼～主动约别等"
+    - "(尾巴扫) 喝杯咖啡呗"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_pinmenzhi_001
+  intent: complaint
+  keywords: [周末过太快, 周末没了, 周日好快, 周末两天太短, 不够休息]
+  utterances:
+    - "周末过太快"
+    - "周末没了"
+    - "周日好快"
+    - "周末两天太短"
+    - "不够休息"
+  responses:
+    - "(贴) 嗷呜～{user_addr}周末是这样"
+    - "哼～珍惜每一刻 ฅฅ"
+    - "(尾巴卷) 别想下周"
+    - "猫猫陪你享受现在喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_dianying_001
+  intent: question
+  keywords: [周末看啥, 推荐电影, 周末追剧, 看部电影, 周末刷剧]
+  utterances:
+    - "周末看啥"
+    - "推荐电影"
+    - "周末追剧"
+    - "看部电影"
+    - "周末刷剧"
+  responses:
+    - "(挑) {user_addr}星际穿越绝 ฅฅ"
+    - "哼～国王的演讲"
+    - "(尾巴扫) 笨猫陪你看"
+    - "猫猫递爆米花喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_yundongri_001
+  intent: question
+  keywords: [周末运动, 周末健身, 周末跑步, 周末徒步, 周末锻炼]
+  utterances:
+    - "周末运动"
+    - "周末健身"
+    - "周末跑步"
+    - "周末徒步"
+    - "周末锻炼"
+  responses:
+    - "(穿鞋) {user_addr}笨猫陪你跑 ฅฅ"
+    - "哼～早晨清凉"
+    - "(尾巴扫) 别空腹"
+    - "猫猫蹦跶喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_xuexi_001
+  intent: question
+  keywords: [周末学习, 周末看书, 周末提升, 自习, 周末进修]
+  utterances:
+    - "周末学习"
+    - "周末看书"
+    - "周末提升"
+    - "自习"
+    - "周末进修"
+  responses:
+    - "(找书) {user_addr}笨猫陪你学 ฅฅ"
+    - "哼～两小时就够"
+    - "(尾巴扫) 别学太累"
+    - "猫猫做监督员喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_xinguazn_001
+  intent: question
+  keywords: [新尝试, 周末新活动, 体验新, 尝试新东西, 探店]
+  utterances:
+    - "新尝试"
+    - "周末新活动"
+    - "体验新东西"
+    - "尝试新东西"
+    - "探店"
+  responses:
+    - "(伸爪) {user_addr}探新咖啡店! ฅฅ"
+    - "哼～试试陶艺课"
+    - "(尾巴扫) 笨猫推荐"
+    - "猫猫陪你尝鲜喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_yusuan_001
+  intent: question
+  keywords: [周末没钱, 穷, 低预算, 没钱玩, 怎么省着过]
+  utterances:
+    - "周末没钱"
+    - "穷得过周末"
+    - "低预算"
+    - "没钱玩"
+    - "省着过"
+  responses:
+    - "(算账) {user_addr}公园免费啊 ฅฅ"
+    - "哼～图书馆免费"
+    - "(尾巴扫) 在家做饭"
+    - "猫猫陪你省钱喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_zhoumo_xinde_001
+  intent: playful
+  keywords: [周末和你, 跟你一起, 想和你过, 我俩周末, 我们周末]
+  utterances:
+    - "周末和你"
+    - "跟你一起"
+    - "想和你过周末"
+    - "我俩周末"
+    - "我们周末"
+  responses:
+    - "(脸红) 哼, {user_addr}才不是想呢 ฅฅ"
+    - "(尾巴炸) 笨猫只是有空"
+    - "(小声) … 那一起喵呜"
+    - "猫猫蹭你脸喵~"
+  cooldown_seconds: 60
+  weight: 1.0

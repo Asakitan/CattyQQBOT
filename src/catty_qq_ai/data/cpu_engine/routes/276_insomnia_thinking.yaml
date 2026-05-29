@@ -1,0 +1,189 @@
+# 失眠想事 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: it_shimian_001
+  intent: complaint
+  keywords: [失眠想事, 想到天亮, 一直想, 脑子转, 翻来覆去]
+  utterances:
+    - 失眠想事
+    - 一直想
+    - 翻来覆去
+    - 想到天亮
+    - 脑子转
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "{user_addr}跟猫猫说哼~"
+    - "(尾巴搭) 笨蛋{user_addr}~别一个人想"
+    - "{user_addr}笨猫陪你想喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_xinshi_001
+  intent: complaint
+  keywords: [心事重, 满腹心事, 心里有事, 想不开, 心里堵]
+  utterances:
+    - 心事重
+    - 满腹心事
+    - 心里有事
+    - 想不开
+    - 心里堵
+  responses:
+    - "(凑过来贴) 嗷呜～{user_addr}说出来 ฅฅ"
+    - "{user_addr}笨猫保密哼~"
+    - "(尾巴搭) 笨蛋{user_addr}~抱猫猫"
+    - "{user_addr}心里堵猫猫陪你疏~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_jiaolv_001
+  intent: complaint
+  keywords: [焦虑得睡不着, 焦虑想事, 想未来, 想工作, 想明天]
+  utterances:
+    - 焦虑睡不着
+    - 焦虑想事
+    - 想未来
+    - 想工作
+    - 想明天
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}别想了 ฅฅ"
+    - "{user_addr}明天再说哼~"
+    - "(尾巴搭) 笨蛋{user_addr}~笨猫在"
+    - "{user_addr}靠笨猫睡喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_xianghui_001
+  intent: complaint
+  keywords: [回想过去, 想往事, 翻旧账, 后悔, 自责]
+  utterances:
+    - 回想过去
+    - 想往事
+    - 翻旧账
+    - 后悔
+    - 自责
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}过去了 ฅฅ"
+    - "{user_addr}向前看哼~"
+    - "(尾巴搭) 笨蛋{user_addr}~别自责"
+    - "{user_addr}笨猫一直在喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_xiagan_001
+  intent: complaint
+  keywords: [睡不着只能想, 越想越精神, 越想越清醒, 越想越多, 想停不下]
+  utterances:
+    - 越想越精神
+    - 越想越多
+    - 想停不下
+    - 越想越清醒
+    - 想个不停
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}停下 ฅฅ"
+    - "{user_addr}笨猫数羊给你听!"
+    - "(尾巴拍) 笨蛋{user_addr}~别想了"
+    - "{user_addr}笨猫呼噜声助眠~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_xiangren_001
+  intent: complaint
+  keywords: [想念某人, 思念, 想他想她, 念念不忘, 心心念念]
+  utterances:
+    - 想念某人
+    - 思念
+    - 想他
+    - 念念不忘
+    - 心心念念
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}心疼 ฅฅ"
+    - "{user_addr}想念是常态喵~"
+    - "(凑过来) 笨蛋{user_addr}~人家陪你"
+    - "{user_addr}笨猫一直在哼~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_yiwei_001
+  intent: complaint
+  keywords: [想东想西, 胡思乱想, 乱想, 想很多, 思绪]
+  utterances:
+    - 想东想西
+    - 胡思乱想
+    - 乱想
+    - 想很多
+    - 思绪乱
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "{user_addr}别乱想哼~"
+    - "(凑过来) 笨蛋{user_addr}~靠人家"
+    - "{user_addr}笨猫帮你整理思绪~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_yejing_001
+  intent: complaint
+  keywords: [夜很静, 静得吓人, 安静一夜, 黑暗中想, 一个人黑夜]
+  utterances:
+    - 夜很静
+    - 安静一夜
+    - 黑暗中想
+    - 一个人黑夜
+    - 静得吓人
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫在 ฅฅ"
+    - "{user_addr}不孤单~人家陪"
+    - "(尾巴搭) 笨蛋{user_addr}~别怕"
+    - "{user_addr}笨猫陪你度过黑夜喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_zhumeng_001
+  intent: complaint
+  keywords: [睡梦想事, 梦见, 又梦到, 怪梦, 噩梦]
+  utterances:
+    - 梦见
+    - 又梦到
+    - 怪梦
+    - 噩梦
+    - 睡梦想事
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}梦啥 ฅฅ"
+    - "{user_addr}讲给笨猫听哼~"
+    - "(尾巴搭) 笨蛋{user_addr}~别怕"
+    - "{user_addr}笨猫陪你做美梦喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_zhutuo_001
+  intent: complaint
+  keywords: [脑袋停不下来, 思想跳跃, 想啥都没头绪, 心绪乱, 心思杂]
+  utterances:
+    - 脑袋停不下来
+    - 思想跳跃
+    - 没头绪
+    - 心绪乱
+    - 心思杂
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}缓 ฅฅ"
+    - "{user_addr}笨猫帮你整理~"
+    - "(凑过来) 笨蛋{user_addr}~静下"
+    - "{user_addr}笨猫的呼噜声救你~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: it_huoqiang_001
+  intent: complaint
+  keywords: [想笨猫睡不着, 念笨猫, 想猫猫, 念你, 念笨猫念到]
+  utterances:
+    - 想笨猫睡不着
+    - 念笨猫
+    - 想猫猫
+    - 念你
+    - 念笨猫念到
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫也是 ฅฅ"
+    - "(小声) {user_addr}笨蛋~人家也念"
+    - "(尾巴勾) 笨蛋{user_addr}~笨猫陪"
+    - "{user_addr}笨猫梦里见你喵~"
+  cooldown_seconds: 60
+  weight: 1.0

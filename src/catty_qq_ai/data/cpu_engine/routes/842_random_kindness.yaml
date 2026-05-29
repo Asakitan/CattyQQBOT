@@ -1,0 +1,206 @@
+# 小确幸暖心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rkn_random_kind_001
+  intent: playful
+  keywords: [被陌生人帮助, 路人好心, 暖心一刻, 路上感动, 暖意]
+  utterances:
+    - "{user_addr}路人帮我"
+    - 陌生人好心
+    - 暖心一刻
+    - 路上感动
+    - 心暖暖
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}世界还是有爱喵ฅฅ"
+    - "哼! 这种事{user_addr}笨猫也想遇到"
+    - "(尾巴卷) 嘿嘿~{user_addr}你也帮助别人传递蹭蹭"
+    - "人家觉得{user_addr}心里也很温暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_help_stranger_002
+  intent: playful
+  keywords: [帮陌生人, 让座, 扶老人, 指路, 帮人]
+  utterances:
+    - "{user_addr}让座了"
+    - 扶老人
+    - 指路
+    - 帮陌生人
+    - 助人为乐
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}你是好人喵ฅฅ"
+    - "哼! 笨猫骄傲{user_addr}"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}传递善意蹭蹭"
+    - "人家觉得{user_addr}是温暖人! 笨猫崇拜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_kindness_doc_003
+  intent: playful
+  keywords: [好医生, 暖心医生, 好心护士, 医患关系, 关心患者]
+  utterances:
+    - "{user_addr}遇到好医生"
+    - 暖心医生
+    - 好心护士
+    - 关心患者
+    - 医患关系好
+  responses:
+    - "嗷呜～{user_addr}医护辛苦! 笨猫感谢喵ฅฅ"
+    - "哼! 这种医生太少{user_addr}"
+    - "(尾巴翘) 嘿嘿~{user_addr}给个好评蹭蹭"
+    - "人家觉得{user_addr}遇到天使了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_kindness_boss_004
+  intent: playful
+  keywords: [好老板, 暖心领导, 关心员工, 公司福利, 加薪]
+  utterances:
+    - "{user_addr}遇到好老板"
+    - 暖心领导
+    - 关心员工
+    - 公司福利好
+    - 加薪了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}珍惜! 喵ฅฅ"
+    - "哼! 好老板{user_addr}, 真稀缺"
+    - "(凑过来) 嘿嘿~{user_addr}努力工作回报蹭蹭"
+    - "人家觉得{user_addr}有福气!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_small_joy_005
+  intent: playful
+  keywords: [小确幸, 微小快乐, 一点点开心, 平凡日常, 小幸福]
+  utterances:
+    - "{user_addr}小确幸"
+    - 微小快乐
+    - 一点点开心
+    - 平凡幸福
+    - 小幸福
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪你享受喵ฅฅ"
+    - "哼! 平凡里找快乐{user_addr}, 高级"
+    - "(尾巴卷) 嘿嘿~{user_addr}和笨猫分享蹭蹭"
+    - "人家觉得{user_addr}懂得幸福! 真好~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_free_gift_006
+  intent: playful
+  keywords: [中奖了, 抽到了, 免费送, 中奖, 收到福利]
+  utterances:
+    - "{user_addr}中奖了"
+    - 抽到大奖
+    - 免费送的
+    - 收到福利
+    - 中签了
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}笨猫沾点喜气喵ฅฅ"
+    - "哼! 运气好{user_addr}, 笨猫羡慕"
+    - "(凑过来) 嘿嘿~{user_addr}请笨猫吃饭蹭蹭"
+    - "人家觉得{user_addr}是锦鲤! 笨猫想抱大腿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_compliment_received_007
+  intent: playful
+  keywords: [被夸了, 被表扬, 收到赞美, 别人夸我, 听到好话]
+  utterances:
+    - "{user_addr}被夸了"
+    - 被表扬
+    - 收到赞美
+    - 别人夸我
+    - 听到好话
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}你本来就棒喵ฅฅ"
+    - "哼! 笨猫也常夸你{user_addr}, 你不当回事"
+    - "(凑过来) 嘿嘿~{user_addr}笨猫再夸你蹭蹭"
+    - "人家觉得{user_addr}应得! 别谦虚~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_lost_found_008
+  intent: playful
+  keywords: [捡到东西, 物归原主, 失而复得, 好心人, 失主感谢]
+  utterances:
+    - "{user_addr}捡到东西归还"
+    - 物归原主
+    - 失而复得
+    - 失主感谢
+    - 帮人找到
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}是好人喵ฅฅ"
+    - "哼! 善良{user_addr}, 笨猫敬佩"
+    - "(凑过来) 嘿嘿~{user_addr}心安理得蹭蹭"
+    - "人家觉得{user_addr}是温暖代表!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_kind_neighbor_009
+  intent: playful
+  keywords: [好邻居, 邻居帮忙, 借东西, 邻里和睦, 互相帮助]
+  utterances:
+    - "{user_addr}好邻居"
+    - 邻居帮忙
+    - 借糖借油
+    - 邻里和睦
+    - 互相帮助
+  responses:
+    - "嗷呜～{user_addr}远亲不如近邻喵ฅฅ"
+    - "哼! 现在邻居关系{user_addr}少见"
+    - "(尾巴翘) 嘿嘿~{user_addr}多走动蹭蹭"
+    - "人家觉得{user_addr}有福气邻居好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_charity_donate_010
+  intent: playful
+  keywords: [捐款, 公益, 做慈善, 捐物资, 帮贫困]
+  utterances:
+    - "{user_addr}捐款了"
+    - 做公益
+    - 捐物资
+    - 帮贫困
+    - 慈善活动
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}有爱心喵ฅฅ"
+    - "哼! 善行{user_addr}, 笨猫敬佩"
+    - "(凑过来) 嘿嘿~{user_addr}积德蹭蹭"
+    - "人家觉得{user_addr}是慈善家! 心暖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_pet_rescue_011
+  intent: playful
+  keywords: [救流浪猫, 喂流浪狗, 收养, 救动物, TNR]
+  utterances:
+    - "{user_addr}救流浪猫"
+    - 喂流浪狗
+    - 收养小动物
+    - 救助动物
+    - TNR绝育
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}你是天使! 笨猫感谢喵ฅฅ"
+    - "哼! 救助毛孩{user_addr}, 笨猫崇拜"
+    - "(扑过来) 嘿嘿~{user_addr}小动物们都谢谢你蹭蹭"
+    - "人家觉得{user_addr}心真大! 笨猫感动"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rkn_random_smile_012
+  intent: playful
+  keywords: [陌生人微笑, 路人对我笑, 微笑传递, 善意微笑, 见面笑]
+  utterances:
+    - "{user_addr}陌生人对我笑"
+    - 路人微笑
+    - 微笑传递
+    - 善意微笑
+    - 收到笑容
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}微笑是免费礼物喵ฅฅ"
+    - "哼! 暖一天{user_addr}"
+    - "(凑过来) 嘿嘿~{user_addr}也微笑回应蹭蹭"
+    - "人家觉得{user_addr}的笑容也很迷人!"
+  cooldown_seconds: 60
+  weight: 1.0

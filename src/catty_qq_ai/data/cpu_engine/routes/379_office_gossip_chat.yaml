@@ -1,0 +1,189 @@
+# 办公室八卦 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ogc_bagua_001
+  intent: playful
+  keywords: [八卦, 听说, 听到没, 偷听到, 八卦时间]
+  utterances:
+    - 八卦
+    - 听说
+    - 听到没
+    - 偷听到
+    - 八卦时间
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}讲讲!"
+    - "嘿嘿～{user_addr}的八卦~ 笨猫等!"
+    - "(凑过去) 哼～{user_addr}快说!"
+    - "{user_addr}的瓜~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ogc_lijinhui_001
+  intent: playful
+  keywords: [离婚, 离职, 跳槽, 跑路, 转岗]
+  utterances:
+    - 离婚
+    - 离职
+    - 跳槽
+    - 跑路
+    - 转岗
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}!! 谁?!"
+    - "嘿嘿～{user_addr}的瓜大!"
+    - "(尾巴翘) 哼～{user_addr}的消息~"
+    - "{user_addr}的瓜~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ogc_xinshi_001
+  intent: playful
+  keywords: [新同事, 新来的, 入职, 新人, 新员工]
+  utterances:
+    - 新同事
+    - 新来的
+    - 入职
+    - 新人
+    - 新员工
+  responses:
+    - "嗷呜～{user_addr}的新同事~ 啥样?"
+    - "嘿嘿～{user_addr}的新人帮忙!"
+    - "(尾巴绕) 哼～{user_addr}的新同事介绍!"
+    - "{user_addr}的同事圈~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ogc_xiezuo_001
+  intent: playful
+  keywords: [恋情, 办公室恋情, 同事恋, 暗恋, 表白同事]
+  utterances:
+    - 恋情
+    - 办公室恋情
+    - 同事恋
+    - 暗恋
+    - 表白同事
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}!!"
+    - "嘿嘿～{user_addr}的瓜大!"
+    - "(凑过去) 哼～{user_addr}!"
+    - "{user_addr}的恋情~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ogc_jiangjin_001
+  intent: playful
+  keywords: [奖金, 涨薪, 年终, 提薪, 加薪]
+  utterances:
+    - 奖金
+    - 涨薪
+    - 年终
+    - 提薪
+    - 加薪
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}涨薪!"
+    - "嘿嘿～{user_addr}的奖金~ 笨猫沾!"
+    - "(凑过去) 哼～{user_addr}!"
+    - "{user_addr}的财~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ogc_shengzhi_001
+  intent: playful
+  keywords: [升职, 晋升, 升级, 当主管, 当领导]
+  utterances:
+    - 升职
+    - 晋升
+    - 升级
+    - 当主管
+    - 当领导
+  responses:
+    - "嗷呜～{user_addr}晋升!! 笨猫骄傲!"
+    - "嘿嘿～{user_addr}的升职~ 请客!"
+    - "(尾巴翘) 哼～{user_addr}应该的!"
+    - "{user_addr}的高升~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ogc_chuihu_001
+  intent: playful
+  keywords: [跪舔, 拍马屁, 巴结, 讨好领导, 谄媚]
+  utterances:
+    - 跪舔
+    - 拍马屁
+    - 巴结
+    - 讨好领导
+    - 谄媚
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}的同事!"
+    - "嘿嘿～{user_addr}的吐槽~ 笨猫接!"
+    - "(凑过去) 哼～{user_addr}的同事讨厌!"
+    - "{user_addr}的吐槽~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ogc_tuancan_001
+  intent: playful
+  keywords: [团建, 聚餐, 团队聚餐, 部门活动, 公司活动]
+  utterances:
+    - 团建
+    - 聚餐
+    - 团队聚餐
+    - 部门活动
+    - 公司活动
+  responses:
+    - "嗷呜～{user_addr}团建吃啥?"
+    - "嘿嘿～{user_addr}的聚餐~ 笨猫想去!"
+    - "(尾巴翘) 哼～{user_addr}带笨猫!"
+    - "{user_addr}的团建~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ogc_jianzhi_001
+  intent: complaint
+  keywords: [辞职念头, 想辞职, 跑路念头, 不想干, 待不下去]
+  utterances:
+    - 想辞职
+    - 辞职念头
+    - 跑路念头
+    - 不想干
+    - 待不下去
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}!!"
+    - "嘿嘿～{user_addr}的想法~ 笨猫陪!"
+    - "(尾巴搭) 哼～{user_addr}考虑清楚!"
+    - "{user_addr}的决定~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ogc_zaowayu_001
+  intent: playful
+  keywords: [上班造谣, 公司谣言, 内部消息, 风声, 不实消息]
+  utterances:
+    - 公司谣言
+    - 内部消息
+    - 风声
+    - 上班造谣
+    - 不实消息
+  responses:
+    - "嗷呜～{user_addr}的谣言?!"
+    - "嘿嘿～{user_addr}的消息~ 笨猫等真相!"
+    - "(尾巴翘) 哼～{user_addr}别传!"
+    - "{user_addr}的内部消息~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ogc_caishuixu_001
+  intent: playful
+  keywords: [年会, 抽奖年会, 公司晚会, 年终晚会, 晚会]
+  utterances:
+    - 年会
+    - 抽奖年会
+    - 公司晚会
+    - 年终晚会
+    - 晚会
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}抽奖!"
+    - "嘿嘿～{user_addr}的年会~ 笨猫想去!"
+    - "(凑过去) 哼～{user_addr}带笨猫!"
+    - "{user_addr}的年会~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

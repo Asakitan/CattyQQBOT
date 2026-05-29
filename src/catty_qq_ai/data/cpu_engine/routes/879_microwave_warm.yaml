@@ -1,0 +1,189 @@
+# 微波炉加热 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mcw_wrm_001
+  intent: playful
+  keywords: [微波炉加热, 微波热饭, 叮一下, 微波叮, 用微波]
+  utterances:
+    - "微波加热"
+    - "热饭"
+    - "叮一下"
+    - "微波"
+    - "{user_addr}叮饭"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪你叮喵ฅฅ"
+    - "(凑过来) 微波快速"
+    - "哼～别加热过头"
+    - "(贴贴) 笨猫给你计时嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcw_wrm_002
+  intent: complaint
+  keywords: [微波不均, 中间冷, 边缘烫, 热得不均, 加热不彻底]
+  utterances:
+    - "中间冷"
+    - "边缘烫"
+    - "热不均"
+    - "不彻底"
+    - "{user_addr}不均"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}中途搅一搅喵"
+    - "(凑近) 哼～盖盖子均匀"
+    - "(贴贴) 笨猫帮你搅"
+    - "(凑近) 多热一会嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcw_wrm_003
+  intent: complaint
+  keywords: [饭爆开, 蛋爆开, 微波爆炸, 不能加热, 危险加热]
+  utterances:
+    - "蛋爆开"
+    - "饭爆"
+    - "爆炸"
+    - "不能加热"
+    - "{user_addr}爆"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}小心!"
+    - "(尾巴炸) 哼～蛋别整个进笨蛋"
+    - "(贴贴) 笨猫陪你清理"
+    - "(凑近) 戳孔放气嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcw_wrm_004
+  intent: question
+  keywords: [微波容器, 玻璃可以, 塑料安全, 金属不能, 微波专用]
+  utterances:
+    - "微波容器"
+    - "玻璃可以"
+    - "塑料安全"
+    - "金属不能"
+    - "{user_addr}专用"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}玻璃陶瓷安全喵"
+    - "(凑近) 金属一定不能"
+    - "哼～塑料看标志"
+    - "(贴贴) 笨猫教你嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcw_wrm_005
+  intent: complaint
+  keywords: [微波时间, 几分钟, 热多久, 时间不对, 烧焦]
+  utterances:
+    - "几分钟"
+    - "热多久"
+    - "时间不对"
+    - "烧焦"
+    - "{user_addr}时间"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}饭2分钟喵"
+    - "(凑近) 肉3分钟"
+    - "哼～别一次太久"
+    - "(贴贴) 笨猫帮你计时ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcw_wrm_006
+  intent: playful
+  keywords: [微波烤红薯, 简易微波, 微波蛋糕, 微波小菜, 创意微波]
+  utterances:
+    - "微波红薯"
+    - "简易微波"
+    - "微波蛋糕"
+    - "微波小菜"
+    - "{user_addr}创意"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}红薯快喵ฅฅ"
+    - "(凑过来) 笨猫想吃微波蛋糕"
+    - "哼～别每次都微波"
+    - "(贴贴) 一起试嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcw_wrm_007
+  intent: complaint
+  keywords: [微波声音, 嗡嗡响, 转盘响, 微波声大, 噪音]
+  utterances:
+    - "嗡嗡响"
+    - "转盘响"
+    - "声音大"
+    - "噪音"
+    - "{user_addr}微波吵"
+  responses:
+    - "(捂耳朵) 嗷呜～{user_addr}耳朵疼"
+    - "(尾巴炸) 哼～该清洁了"
+    - "(贴贴) 笨猫陪你忍"
+    - "(凑近) 检查嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcw_wrm_008
+  intent: question
+  keywords: [微波清洁, 微波油渍, 怎么清, 柠檬水蒸, 清理小妙招]
+  utterances:
+    - "怎么清"
+    - "油渍"
+    - "柠檬水"
+    - "清理"
+    - "{user_addr}清洁"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}柠檬水蒸喵"
+    - "(凑近) 油渍湿巾擦"
+    - "哼～勤清洁笨蛋"
+    - "(贴贴) 笨猫教你嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcw_wrm_009
+  intent: complaint
+  keywords: [微波辐射, 担心辐射, 站旁边, 辐射大, 健康担忧]
+  utterances:
+    - "微波辐射"
+    - "担心辐射"
+    - "站旁边"
+    - "辐射大"
+    - "{user_addr}辐射"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}远点站喵"
+    - "(凑近) 微波辐射不大"
+    - "哼～别担心"
+    - "(贴贴) 笨猫科普嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcw_wrm_010
+  intent: playful
+  keywords: [冬天热饭, 微波速食, 快速一餐, 急吃微波, 节省时间]
+  utterances:
+    - "速食"
+    - "快速一餐"
+    - "急吃"
+    - "节省时间"
+    - "{user_addr}冬天热饭"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}快速喵ฅฅ"
+    - "(凑过来) 笨猫推荐快餐"
+    - "哼～别天天速食"
+    - "(贴贴) 健康均衡嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mcw_wrm_011
+  intent: complaint
+  keywords: [微波坏了, 不加热, 转盘不转, 微波故障, 灯不亮]
+  utterances:
+    - "微波坏了"
+    - "不加热"
+    - "转盘不转"
+    - "灯不亮"
+    - "{user_addr}故障"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}找维修喵"
+    - "(凑近) 哼～年限到了"
+    - "(贴贴) 笨猫陪你换新"
+    - "(凑近) 修不好就买嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

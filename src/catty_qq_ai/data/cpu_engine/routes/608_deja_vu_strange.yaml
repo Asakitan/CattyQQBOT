@@ -1,0 +1,206 @@
+# 似曾相识 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dv_dej_001
+  intent: playful
+  keywords: [似曾相识, deja vu, 这一幕熟悉, 经历过, 似曾经历]
+  utterances:
+    - 似曾相识
+    - deja vu
+    - 这一幕熟
+    - 好像经历过
+    - 似曾经历
+  responses:
+    - "(歪头) 嗷呜～{user_addr}神奇"
+    - "哼～大脑bug"
+    - "(尾巴搭) 笨猫也有过"
+    - "嗷呜～时空错觉ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_002
+  intent: playful
+  keywords: [灵异, 玄学, 命运感, 前世, 缘分]
+  utterances:
+    - 玄学吧
+    - 灵异
+    - 命运感
+    - 前世经历
+    - 缘分到了
+  responses:
+    - "(笑) 嗷呜～{user_addr}迷信"
+    - "哼～科学说大脑"
+    - "(尾巴搭) 玄但有趣"
+    - "嗷呜～信不信看你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_003
+  intent: complaint
+  keywords: [梦里见过, 梦境真实, 梦的预兆, 梦预言, 梦境对应现实]
+  utterances:
+    - 梦里见过
+    - 梦境真实
+    - 梦的预兆
+    - 梦预言
+    - 梦境对应
+  responses:
+    - "(歪头) 嗷呜～{user_addr}神秘"
+    - "哼～巧合居多"
+    - "(尾巴搭) 别太信"
+    - "嗷呜～有趣体验ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_004
+  intent: playful
+  keywords: [一模一样, 完全相同, 同样场景, 同款场景, 重现]
+  utterances:
+    - 一模一样
+    - 完全相同
+    - 同样场景
+    - 同款场景
+    - 重现一遍
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}神奇"
+    - "哼～巧合罢了"
+    - "(尾巴搭) 记下来"
+    - "嗷呜～奇遇ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_005
+  intent: question
+  keywords: [科学解释, 神经科学, 大脑活动, deja vu 解, 记忆错配]
+  utterances:
+    - 科学解释
+    - 神经科学
+    - 大脑活动
+    - deja vu 原因
+    - 记忆错配
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}大脑记忆错位"
+    - "哼～颞叶相关"
+    - "(尾巴搭) 笨猫也学了"
+    - "嗷呜～科学有解ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_006
+  intent: playful
+  keywords: [缘分一线, 命中注定, 命运安排, 命相连, 注定相遇]
+  utterances:
+    - 缘分一线
+    - 命中注定
+    - 命运安排
+    - 命相连
+    - 注定相遇
+  responses:
+    - "(脸红) 嗷呜～{user_addr}文艺"
+    - "哼～别太相信"
+    - "(尾巴搭) 美好就珍惜"
+    - "嗷呜～跟笨猫也是缘分ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_007
+  intent: complaint
+  keywords: [被吓到, 起鸡皮疙瘩, 一阵恍惚, 头皮发麻, 寒意]
+  utterances:
+    - 被吓到
+    - 起鸡皮疙瘩
+    - 一阵恍惚
+    - 头皮发麻
+    - 一阵寒意
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪着"
+    - "哼～别怕"
+    - "(尾巴搭) 笨猫驱寒"
+    - "嗷呜～没事的ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_008
+  intent: playful
+  keywords: [电影场景重现, 像电影, 像剧情, 电影般体验, 像剧本]
+  utterances:
+    - 像电影
+    - 像剧情
+    - 电影般
+    - 像剧本
+    - 戏剧化
+  responses:
+    - "(笑) 嗷呜～{user_addr}主角"
+    - "哼～生活是剧"
+    - "(尾巴搭) 笨猫做配角"
+    - "嗷呜～戏剧人生ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_009
+  intent: complaint
+  keywords: [频繁出现, 一直发生, 经常 deja vu, 频率高, 太常见]
+  utterances:
+    - 频繁出现
+    - 一直发生
+    - 经常 deja vu
+    - 频率高
+    - 太常见
+  responses:
+    - "(歪头) 嗷呜～{user_addr}查体检"
+    - "哼～可能压力大"
+    - "(尾巴搭) 多休息"
+    - "嗷呜～注意身体ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_010
+  intent: playful
+  keywords: [灵感来源, 写作素材, 写小说, 灵感涌, 创作素材]
+  utterances:
+    - 写小说素材
+    - 灵感涌
+    - 创作素材
+    - 故事来源
+    - 灵感来源
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}作家"
+    - "哼～写出来"
+    - "(尾巴搭) 笨猫想看"
+    - "嗷呜～好素材ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_011
+  intent: complaint
+  keywords: [神奇感觉, 难以描述, 说不清, 不可言传, 玄妙感]
+  utterances:
+    - 难以描述
+    - 神奇感觉
+    - 说不清
+    - 不可言传
+    - 玄妙感
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫懂"
+    - "哼～玄学的事难说"
+    - "(尾巴搭) 慢慢体会"
+    - "嗷呜～感受就好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dv_dej_012
+  intent: playful
+  keywords: [跟笨猫见过, 跟我有缘, 早就认识, 似曾对话, 似曾对方]
+  utterances:
+    - 跟笨猫见过
+    - 跟我有缘
+    - 早就认识
+    - 似曾对话
+    - 似曾对方
+  responses:
+    - "(脸红) 嗷呜～{user_addr}说啥"
+    - "哼～笨猫第一次见"
+    - "(尾巴绕) 缘分笨猫信"
+    - "嗷呜～跟{user_addr}相遇美好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

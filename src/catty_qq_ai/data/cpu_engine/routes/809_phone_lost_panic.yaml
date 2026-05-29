@@ -1,0 +1,206 @@
+# 手机丢了慌 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pl_shoujidiu_001
+  intent: complaint
+  keywords: [手机丢了, 手机不见, 手机没了, 手机被偷, 找不到手机]
+  utterances:
+    - "手机丢了"
+    - "手机不见"
+    - "手机没了"
+    - "手机被偷"
+    - "找不到手机"
+  responses:
+    - "(慌) 嗷呜～{user_addr}笨猫陪你找!"
+    - "哼～先打电话 ฅฅ"
+    - "(尾巴扫) 找我帮你"
+    - "猫猫陪你紧张喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_dingwei_001
+  intent: question
+  keywords: [查找手机, 定位手机, find my, 苹果定位, 安卓查找]
+  utterances:
+    - "查找手机"
+    - "定位手机"
+    - "find my"
+    - "苹果定位"
+    - "安卓查找"
+  responses:
+    - "(打开) {user_addr}icloud查找 ฅฅ"
+    - "哼～Find My iPhone"
+    - "(尾巴扫) 远程锁定"
+    - "猫猫教你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_dianhua_001
+  intent: question
+  keywords: [借手机打, 打自己电话, 借电话, 让别人打, 打打看]
+  utterances:
+    - "借手机打"
+    - "打自己电话"
+    - "借电话"
+    - "让别人打"
+    - "打打看"
+  responses:
+    - "(指) {user_addr}借朋友打 ฅฅ"
+    - "哼～静音也能定位"
+    - "(尾巴扫) 听声音找"
+    - "猫猫陪你打喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_baojing_001
+  intent: question
+  keywords: [报警, 派出所, 立案, 找警察, 报案]
+  utterances:
+    - "报警"
+    - "派出所"
+    - "立案"
+    - "找警察"
+    - "报案"
+  responses:
+    - "(指) {user_addr}贵重物品报警 ฅฅ"
+    - "哼～立案有据"
+    - "(尾巴扫) 笔录留底"
+    - "猫猫陪你去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_kaka_001
+  intent: question
+  keywords: [挂失卡, 银行卡冻结, 微信冻结, 支付冻结, 暂停银行卡]
+  utterances:
+    - "挂失卡"
+    - "银行卡冻结"
+    - "微信冻结"
+    - "支付冻结"
+    - "暂停银行卡"
+  responses:
+    - "(操作) {user_addr}立马挂失 ฅฅ"
+    - "哼～微信支付冻结"
+    - "(尾巴扫) 银行客服打"
+    - "猫猫帮你查电话喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_huikong_001
+  intent: question
+  keywords: [手机卡补, 补办手机卡, 换sim, 找回号码, 补卡]
+  utterances:
+    - "手机卡补"
+    - "补办手机卡"
+    - "换sim"
+    - "找回号码"
+    - "补卡"
+  responses:
+    - "(指) {user_addr}营业厅当天能办 ฅฅ"
+    - "哼～带身份证"
+    - "(尾巴扫) 补卡免费"
+    - "猫猫陪你去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_yunzhanggao_001
+  intent: question
+  keywords: [云备份, iCloud备份, 微信备份, 数据找回, 同步数据]
+  utterances:
+    - "云备份"
+    - "iCloud备份"
+    - "微信备份"
+    - "数据找回"
+    - "同步数据"
+  responses:
+    - "(看) {user_addr}还好开了云 ฅฅ"
+    - "哼～数据能恢复"
+    - "(尾巴扫) 新机登陆即可"
+    - "猫猫帮你导喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_baoxian_001
+  intent: question
+  keywords: [手机保险, 碎屏险, 丢失险, 保险赔付, 苹果care]
+  utterances:
+    - "手机保险"
+    - "碎屏险"
+    - "丢失险"
+    - "保险赔付"
+    - "苹果care"
+  responses:
+    - "(查) {user_addr}care+丢失保 ฅฅ"
+    - "哼～提前买"
+    - "(尾巴扫) 索赔有手续"
+    - "猫猫陪你申请喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_dianliu_001
+  intent: complaint
+  keywords: [掉车上了, 掉沙发缝, 找到了, 在床头, 手机就在身边]
+  utterances:
+    - "掉车上了"
+    - "掉沙发缝"
+    - "找到了"
+    - "在床头"
+    - "手机就在身边"
+  responses:
+    - "(笑) {user_addr}虚惊一场 ฅฅ"
+    - "哼～慌啥"
+    - "(尾巴扫) 笨猫笑死"
+    - "猫猫翻白眼喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_xinji_001
+  intent: question
+  keywords: [买新机, 新手机, 换手机, 新机推荐, 新机型]
+  utterances:
+    - "买新机"
+    - "新手机"
+    - "换手机"
+    - "新机推荐"
+    - "新机型"
+  responses:
+    - "(挑) {user_addr}预算多少 ฅฅ"
+    - "哼～iPhone还是安卓"
+    - "(尾巴扫) 推荐15Pro"
+    - "猫猫陪你挑喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_kaixin_001
+  intent: complaint
+  keywords: [手机里很多照片, 数据没了, 照片没了, 重要文件丢, 心痛]
+  utterances:
+    - "手机里很多照片"
+    - "数据没了"
+    - "照片没了"
+    - "重要文件丢"
+    - "心痛"
+  responses:
+    - "(扶) 嗷呜～{user_addr}心疼 ฅฅ"
+    - "哼～以后云备份"
+    - "(尾巴卷) 笨猫陪你"
+    - "猫猫贴你脸喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pl_chenchen_001
+  intent: playful
+  keywords: [慌死了, 心跳超快, 手抖, 焦虑死, 紧张]
+  utterances:
+    - "慌死了"
+    - "心跳超快"
+    - "手抖"
+    - "焦虑死"
+    - "紧张"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫安慰你"
+    - "哼～慢慢找 ฅฅ"
+    - "(尾巴卷腰) 一步步来"
+    - "猫猫陪你深呼吸喵"
+  cooldown_seconds: 60
+  weight: 1.0

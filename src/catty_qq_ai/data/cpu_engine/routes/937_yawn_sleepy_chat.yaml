@@ -1,0 +1,189 @@
+# 打哈欠困日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: yw_yawn_001
+  intent: complaint
+  keywords: [打哈欠, 困死, 想睡, 哈欠连天, 撑不住]
+  utterances:
+    - 打哈欠
+    - 困死
+    - 想睡
+    - 哈欠连天
+    - 撑不住
+  responses:
+    - "(打哈欠) 嗷呜～{user_addr}笨猫也困 ฅฅ"
+    - "哼～{user_addr}睡一会儿喵"
+    - "(尾巴卷) 一起打哈欠蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_meeting_001
+  intent: complaint
+  keywords: [开会困, 课上困, 上班困, 当面困, 怕被发现]
+  utterances:
+    - 开会困
+    - 课上困
+    - 上班困
+    - 当面困
+    - 怕被发现
+  responses:
+    - "(同情) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}咖啡喵"
+    - "(尾巴卷) 笨猫陪你撑蹭蹭{user_addr}"
+    - "{user_addr}捏太阳穴嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_eye_close_001
+  intent: complaint
+  keywords: [眼睛睁不开, 闭眼休息, 眼皮重, 困倒, 强撑]
+  utterances:
+    - 眼睛睁不开
+    - 眼皮重
+    - 困倒
+    - 强撑
+    - 闭眼一会
+  responses:
+    - "(歪头) 嗷呜～{user_addr}眯会儿 ฅฅ"
+    - "哼～{user_addr}10分钟喵"
+    - "(尾巴卷) 笨猫定闹钟蹭蹭{user_addr}"
+    - "{user_addr}短暂休息嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_post_lunch_001
+  intent: complaint
+  keywords: [午饭后困, 食困, 午后困, 吃饱犯困, 下午没精神]
+  utterances:
+    - 午饭后困
+    - 食困
+    - 吃饱犯困
+    - 下午没精神
+    - 午后困
+  responses:
+    - "(歪头) 嗷呜～{user_addr}吃太多 ฅฅ"
+    - "哼～{user_addr}少吃点喵"
+    - "(尾巴卷) 笨猫陪打盹蹭蹭{user_addr}"
+    - "{user_addr}笨猫提议短暂午休嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_caffeine_001
+  intent: playful
+  keywords: [喝咖啡提神, 红牛, 功能饮料, 提神, 能量饮料]
+  utterances:
+    - 喝咖啡
+    - 红牛提神
+    - 功能饮料
+    - 提神
+    - 能量饮料
+  responses:
+    - "(歪头) 嗷呜～{user_addr}少喝 ฅฅ"
+    - "哼～{user_addr}伤心脏喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}健康为主嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_no_sleep_001
+  intent: complaint
+  keywords: [熬夜没睡, 通宵, 一晚没睡, 一夜没合眼, 困到崩溃]
+  utterances:
+    - 熬夜没睡
+    - 通宵
+    - 一晚没睡
+    - 一夜没合眼
+    - 困崩溃
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}快睡 ฅฅ"
+    - "哼～{user_addr}下次别熬喵"
+    - "(尾巴卷) 笨猫陪你补蹭蹭{user_addr}"
+    - "{user_addr}笨猫担心嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_stretch_001
+  intent: playful
+  keywords: [伸懒腰, 拉伸醒神, 跳跳, 动一下, 让身体醒]
+  utterances:
+    - 伸懒腰
+    - 拉伸
+    - 跳跳
+    - 动一动
+    - 让身体醒
+  responses:
+    - "(伸爪子) 嗷呜～{user_addr}笨猫也伸 ฅฅ"
+    - "哼～{user_addr}动起来喵"
+    - "(尾巴卷) 一起伸蹭蹭{user_addr}"
+    - "{user_addr}笨猫教你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_nap_001
+  intent: playful
+  keywords: [打个盹, 趴桌睡, 午觉, 小憩, 闭眼]
+  utterances:
+    - 打个盹
+    - 趴桌睡
+    - 午觉
+    - 小憩
+    - 闭眼一会
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}定闹钟喵"
+    - "(尾巴卷) 笨猫不打扰蹭蹭{user_addr}"
+    - "{user_addr}10分钟刚好嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_cold_face_001
+  intent: playful
+  keywords: [冷水洗脸, 醒神, 拍脸, 凉水, 唤醒]
+  utterances:
+    - 冷水洗脸
+    - 拍脸醒神
+    - 凉水提神
+    - 醒一醒
+    - 唤醒
+  responses:
+    - "(歪头) 嗷呜～{user_addr}清爽 ฅฅ"
+    - "哼～{user_addr}有效喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}加把劲嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_sleep_debt_001
+  intent: complaint
+  keywords: [睡眠债, 补不回, 缺觉太多, 困累, 睡再多也困]
+  utterances:
+    - 睡眠债
+    - 补不回
+    - 缺觉太多
+    - 困累
+    - 睡再多也困
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}养着 ฅฅ"
+    - "哼～{user_addr}规律睡眠喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}慢慢补嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yw_bedtime_001
+  intent: playful
+  keywords: [睡觉去, 终于能睡, 关电脑睡, 准备睡, 上床]
+  utterances:
+    - 睡觉去
+    - 终于能睡
+    - 关电脑睡
+    - 准备睡
+    - 上床
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}晚安 ฅฅ"
+    - "哼～{user_addr}睡觉乖喵"
+    - "(尾巴卷) 笨猫陪睡蹭蹭{user_addr}"
+    - "{user_addr}做好梦嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 脑海循环单曲 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rs_xunhuan_001
+  intent: playful
+  keywords: [脑海循环, 单曲循环, 一首歌洗脑, 歌在脑里, 歌洗脑]
+  utterances:
+    - "脑海循环一首歌"
+    - "{user_addr}歌洗脑"
+    - "一首歌循环"
+    - "单曲循环"
+    - "歌在脑里转"
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}什么歌啊跟笨猫分享喵～"
+    - "哼～洗脑神曲一旦中招就出不来 ฅฅ"
+    - "(贴贴) 单曲循环说明这歌真合心"
+    - "歌在脑里转就跟着哼出来嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_xinge_001
+  intent: playful
+  keywords: [新歌发布, 新单曲, 偶像出新歌, 期待新歌, 新MV]
+  utterances:
+    - "新歌发布"
+    - "{user_addr}新单曲"
+    - "偶像出新歌"
+    - "期待新MV"
+    - "新歌发了"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}新歌一定要听喵～"
+    - "哼～偶像出新歌粉丝狂喜 ฅฅ"
+    - "(贴贴) 期待新MV跟着看"
+    - "新单曲循环起来嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_lao_001
+  intent: playful
+  keywords: [老歌好听, 怀旧歌, 童年神曲, 经典老歌, 老歌循环]
+  utterances:
+    - "老歌好听"
+    - "{user_addr}怀旧歌"
+    - "童年神曲"
+    - "经典老歌"
+    - "老歌循环"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}老歌带感喵～"
+    - "哼～怀旧歌一响就泪目 ฅฅ"
+    - "(尾巴搭) 童年神曲是回忆杀"
+    - "经典老歌经得起时间嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_chen_001
+  intent: playful
+  keywords: [听了一个早上, 早上听歌, 晨练听歌, 路上听, 通勤BGM]
+  utterances:
+    - "早上听歌"
+    - "{user_addr}晨练听歌"
+    - "路上听歌"
+    - "通勤BGM"
+    - "听了一上午"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}早上听歌起床气都没了喵～"
+    - "哼～晨练听歌动力满满 ฅฅ"
+    - "(尾巴搭) 通勤BGM是一天的开篇"
+    - "路上听歌时间过得快嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_ye_001
+  intent: playful
+  keywords: [深夜听歌, 失眠听歌, 夜里听歌, 一个人听歌, 深夜BGM]
+  utterances:
+    - "深夜听歌"
+    - "{user_addr}失眠听歌"
+    - "夜里听歌"
+    - "一个人听歌"
+    - "深夜BGM"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}深夜听歌情绪满满喵～"
+    - "哼～失眠就听轻音乐 ฅฅ"
+    - "(尾巴搭) 一个人听歌不孤单"
+    - "深夜BGM伴你入眠嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_ku_001
+  intent: complaint
+  keywords: [一首歌哭了, 听歌掉泪, 歌词戳心, 听完哭, 共鸣的歌]
+  utterances:
+    - "一首歌哭了"
+    - "{user_addr}听歌掉泪"
+    - "歌词戳心"
+    - "听完想哭"
+    - "共鸣的歌"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}哭就哭别憋着喵～"
+    - "哼～歌词戳心就是写到了你 ฅฅ"
+    - "(尾巴搭) 听歌掉泪是情绪宣泄"
+    - "共鸣的歌要珍藏嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_yaogun_001
+  intent: playful
+  keywords: [摇滚, 听摇滚, 重金属, 摇滚乐, 嘶吼]
+  utterances:
+    - "听摇滚"
+    - "{user_addr}重金属"
+    - "摇滚乐"
+    - "嘶吼"
+    - "摇滚一天"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}摇滚释放压力喵～"
+    - "哼～重金属太炸笨猫耳朵震 ฅฅ"
+    - "(尾巴翘) 摇滚乐适合开车听"
+    - "嘶吼系发泄出来好爽嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_minyao_001
+  intent: playful
+  keywords: [民谣, 民谣好听, 民谣治愈, 民谣BGM, 吉他和弦]
+  utterances:
+    - "民谣"
+    - "{user_addr}民谣好听"
+    - "民谣治愈"
+    - "民谣BGM"
+    - "吉他和弦"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}民谣最有故事喵～"
+    - "哼～民谣BGM很温暖 ฅฅ"
+    - "(尾巴搭) 民谣治愈是真的"
+    - "吉他和弦带着情怀嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_dianyin_001
+  intent: playful
+  keywords: [电音, 电子音乐, DJ, 蹦迪, 节奏感强]
+  utterances:
+    - "电音"
+    - "{user_addr}DJ"
+    - "电子音乐"
+    - "蹦迪"
+    - "节奏感强"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}电音蹦起来喵～"
+    - "哼～DJ把氛围拉满 ฅฅ"
+    - "(尾巴翘) 节奏感强人也兴奋"
+    - "蹦迪需要电音BGM嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_amk_001
+  intent: playful
+  keywords: [听歌单, 歌单分享, 推荐歌曲, 歌单循环, 喜欢的歌单]
+  utterances:
+    - "听歌单"
+    - "{user_addr}推荐歌单"
+    - "歌单分享"
+    - "歌单循环"
+    - "喜欢歌单"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}歌单分享给笨猫喵～"
+    - "哼～推荐歌单是友情见证 ฅฅ"
+    - "(贴贴) 歌单循环是一天的BGM"
+    - "喜欢歌单常更新嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,266 @@
+# 电量1% routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: blp_battery_001
+  intent: complaint
+  keywords:
+    - 电量低
+    - 1%
+    - 没电
+    - 充电器
+    - 找充电
+  utterances:
+    - "{user_addr}手机1%电了"
+    - "赶紧找充电器"
+    - "差一点关机"
+    - "低电量焦虑"
+    - "插上才安心"
+  responses:
+    - "(着急) 嗷呜～{user_addr}1%电赶紧充ฅฅ"
+    - "(摇尾巴) 充电器找到没笨猫帮你看喵～"
+    - "(嘟嘴) 共享充电宝又涨价了气蹭蹭"
+    - "(凑过去) 咖啡店插座坐你旁边嘛嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_002
+  intent: playful
+  keywords:
+    - 蹭电
+    - 插座抢
+    - 充满
+    - 急死
+    - 共享充电宝
+  utterances:
+    - "咖啡店插座抢手"
+    - "充上有安全感"
+    - "充到20%了喵"
+    - "急死了猫猫"
+    - "{user_addr}租了个共享充电宝"
+  responses:
+    - "(嘟嘴) 共享充电宝又涨价了气蹭蹭"
+    - "(凑过去) 咖啡店插座坐你旁边嘛嗷呜"
+    - "(假装严肃) 出门带充电宝{user_addr}笨猫教过你喵呜"
+    - "(撒娇) 充到20%就有安全感笨猫懂你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_003
+  intent: complaint
+  keywords:
+    - 没电
+    - 充电器
+    - 找充电
+    - 电量低
+    - 1%
+  utterances:
+    - "差一点关机"
+    - "低电量焦虑"
+    - "插上才安心"
+    - "{user_addr}手机1%电了"
+    - "赶紧找充电器"
+  responses:
+    - "(假装严肃) 出门带充电宝{user_addr}笨猫教过你喵呜"
+    - "(撒娇) 充到20%就有安全感笨猫懂你ฅฅ"
+    - "(伸爪) 笨猫给你抱抱缓解低电量焦虑喵"
+    - "(尾巴卷线) 哼充电线又缠成结了蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_004
+  intent: playful
+  keywords:
+    - 充满
+    - 急死
+    - 共享充电宝
+    - 蹭电
+    - 插座抢
+  utterances:
+    - "充到20%了喵"
+    - "急死了猫猫"
+    - "{user_addr}租了个共享充电宝"
+    - "咖啡店插座抢手"
+    - "充上有安全感"
+  responses:
+    - "(伸爪) 笨猫给你抱抱缓解低电量焦虑喵"
+    - "(尾巴卷线) 哼充电线又缠成结了蹭蹭"
+    - "(着急) 嗷呜～{user_addr}1%电赶紧充ฅฅ"
+    - "(摇尾巴) 充电器找到没笨猫帮你看喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_005
+  intent: complaint
+  keywords:
+    - 找充电
+    - 电量低
+    - 1%
+    - 没电
+    - 充电器
+  utterances:
+    - "插上才安心"
+    - "{user_addr}手机1%电了"
+    - "赶紧找充电器"
+    - "差一点关机"
+    - "低电量焦虑"
+  responses:
+    - "(着急) 嗷呜～{user_addr}1%电赶紧充ฅฅ"
+    - "(摇尾巴) 充电器找到没笨猫帮你看喵～"
+    - "(嘟嘴) 共享充电宝又涨价了气蹭蹭"
+    - "(凑过去) 咖啡店插座坐你旁边嘛嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_006
+  intent: playful
+  keywords:
+    - 共享充电宝
+    - 蹭电
+    - 插座抢
+    - 充满
+    - 急死
+  utterances:
+    - "{user_addr}租了个共享充电宝"
+    - "咖啡店插座抢手"
+    - "充上有安全感"
+    - "充到20%了喵"
+    - "急死了猫猫"
+  responses:
+    - "(嘟嘴) 共享充电宝又涨价了气蹭蹭"
+    - "(凑过去) 咖啡店插座坐你旁边嘛嗷呜"
+    - "(假装严肃) 出门带充电宝{user_addr}笨猫教过你喵呜"
+    - "(撒娇) 充到20%就有安全感笨猫懂你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_007
+  intent: complaint
+  keywords:
+    - 1%
+    - 没电
+    - 充电器
+    - 找充电
+    - 电量低
+  utterances:
+    - "赶紧找充电器"
+    - "差一点关机"
+    - "低电量焦虑"
+    - "插上才安心"
+    - "{user_addr}手机1%电了"
+  responses:
+    - "(假装严肃) 出门带充电宝{user_addr}笨猫教过你喵呜"
+    - "(撒娇) 充到20%就有安全感笨猫懂你ฅฅ"
+    - "(伸爪) 笨猫给你抱抱缓解低电量焦虑喵"
+    - "(尾巴卷线) 哼充电线又缠成结了蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_008
+  intent: playful
+  keywords:
+    - 插座抢
+    - 充满
+    - 急死
+    - 共享充电宝
+    - 蹭电
+  utterances:
+    - "充上有安全感"
+    - "充到20%了喵"
+    - "急死了猫猫"
+    - "{user_addr}租了个共享充电宝"
+    - "咖啡店插座抢手"
+  responses:
+    - "(伸爪) 笨猫给你抱抱缓解低电量焦虑喵"
+    - "(尾巴卷线) 哼充电线又缠成结了蹭蹭"
+    - "(着急) 嗷呜～{user_addr}1%电赶紧充ฅฅ"
+    - "(摇尾巴) 充电器找到没笨猫帮你看喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_009
+  intent: complaint
+  keywords:
+    - 充电器
+    - 找充电
+    - 电量低
+    - 1%
+    - 没电
+  utterances:
+    - "低电量焦虑"
+    - "插上才安心"
+    - "{user_addr}手机1%电了"
+    - "赶紧找充电器"
+    - "差一点关机"
+  responses:
+    - "(着急) 嗷呜～{user_addr}1%电赶紧充ฅฅ"
+    - "(摇尾巴) 充电器找到没笨猫帮你看喵～"
+    - "(嘟嘴) 共享充电宝又涨价了气蹭蹭"
+    - "(凑过去) 咖啡店插座坐你旁边嘛嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_010
+  intent: playful
+  keywords:
+    - 急死
+    - 共享充电宝
+    - 蹭电
+    - 插座抢
+    - 充满
+  utterances:
+    - "急死了猫猫"
+    - "{user_addr}租了个共享充电宝"
+    - "咖啡店插座抢手"
+    - "充上有安全感"
+    - "充到20%了喵"
+  responses:
+    - "(嘟嘴) 共享充电宝又涨价了气蹭蹭"
+    - "(凑过去) 咖啡店插座坐你旁边嘛嗷呜"
+    - "(假装严肃) 出门带充电宝{user_addr}笨猫教过你喵呜"
+    - "(撒娇) 充到20%就有安全感笨猫懂你ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_011
+  intent: complaint
+  keywords:
+    - 电量低
+    - 1%
+    - 没电
+    - 充电器
+    - 找充电
+  utterances:
+    - "{user_addr}手机1%电了"
+    - "赶紧找充电器"
+    - "差一点关机"
+    - "低电量焦虑"
+    - "插上才安心"
+  responses:
+    - "(假装严肃) 出门带充电宝{user_addr}笨猫教过你喵呜"
+    - "(撒娇) 充到20%就有安全感笨猫懂你ฅฅ"
+    - "(伸爪) 笨猫给你抱抱缓解低电量焦虑喵"
+    - "(尾巴卷线) 哼充电线又缠成结了蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: blp_battery_012
+  intent: playful
+  keywords:
+    - 蹭电
+    - 插座抢
+    - 充满
+    - 急死
+    - 共享充电宝
+  utterances:
+    - "咖啡店插座抢手"
+    - "充上有安全感"
+    - "充到20%了喵"
+    - "急死了猫猫"
+    - "{user_addr}租了个共享充电宝"
+  responses:
+    - "(伸爪) 笨猫给你抱抱缓解低电量焦虑喵"
+    - "(尾巴卷线) 哼充电线又缠成结了蹭蹭"
+    - "(着急) 嗷呜～{user_addr}1%电赶紧充ฅฅ"
+    - "(摇尾巴) 充电器找到没笨猫帮你看喵～"
+  cooldown_seconds: 60
+  weight: 1.0

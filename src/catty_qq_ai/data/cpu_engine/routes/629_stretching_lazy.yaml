@@ -1,0 +1,189 @@
+# 伸懒腰 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sla_stretch_001
+  intent: playful
+  keywords: [伸懒腰, 伸个懒腰, 拉伸, 舒展, 拉筋]
+  utterances:
+    - 伸懒腰
+    - 拉伸一下
+    - 舒展
+    - 拉筋
+    - 伸个懒腰
+  responses:
+    - "(跟着伸) 嗷呜～{user_addr}笨猫一起!"
+    - "笨猫尾巴跟着翘喵"
+    - "(歪头) 听到骨头响"
+    - "哼～{user_addr}久坐了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_neckturn_002
+  intent: playful
+  keywords: [转脖子, 颈椎咔咔, 脖子酸, 脖子响, 颈椎]
+  utterances:
+    - 转脖子
+    - 颈椎咔咔
+    - 脖子酸
+    - 脖子响
+    - 颈椎不行
+  responses:
+    - "(尾巴扫脖子) 嗷呜～{user_addr}笨猫给你按!"
+    - "笨猫推荐慢慢转喵"
+    - "(歪头) 别用力扭笨蛋"
+    - "哼～{user_addr}社畜脖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_backache_003
+  intent: complaint
+  keywords: [腰酸, 腰疼, 背酸, 久坐酸, 老腰]
+  utterances:
+    - 腰酸
+    - 腰疼
+    - 背酸
+    - 久坐酸
+    - 老腰
+  responses:
+    - "(揉腰) 嗷呜～{user_addr}笨猫帮你揉!"
+    - "笨猫推荐站起来走"
+    - "(尾巴扫) 别久坐笨蛋"
+    - "哼～{user_addr}老人腰"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_armupward_004
+  intent: playful
+  keywords: [举手臂, 手臂上举, 拉伸手臂, 双手向上, 高举]
+  utterances:
+    - 举手臂
+    - 手臂上举
+    - 双手向上
+    - 拉伸手臂
+    - 高举伸展
+  responses:
+    - "(模仿) 嗷呜～{user_addr}笨猫学你!"
+    - "笨猫爪子也举喵~"
+    - "(歪头) 别撞天花板笨蛋"
+    - "哼～{user_addr}动作大"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_legcrack_005
+  intent: complaint
+  keywords: [腿麻, 腿酸, 蹲久了, 抽筋, 麻脚]
+  utterances:
+    - 腿麻
+    - 腿酸
+    - 蹲久了
+    - 抽筋
+    - 麻脚
+  responses:
+    - "(揉腿) 嗷呜～{user_addr}笨猫拍拍!"
+    - "笨猫推荐慢慢走走喵"
+    - "(尾巴扫) 别突然站起来"
+    - "哼～{user_addr}笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_morningstretch_006
+  intent: playful
+  keywords: [早上拉伸, 起床拉伸, 早操, 晨练, 晨拉伸]
+  utterances:
+    - 早上拉伸
+    - 起床拉伸
+    - 早操
+    - 晨练
+    - 晨拉伸
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫陪你!"
+    - "笨猫认证: 醒身体喵"
+    - "(歪头) 五分钟就够"
+    - "哼～{user_addr}早起达人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_yawnstretch_007
+  intent: playful
+  keywords: [哈欠加伸懒腰, 全套, 困了伸懒腰, 哈欠拉伸, 一套动作]
+  utterances:
+    - 哈欠加伸懒腰
+    - 困了伸懒腰
+    - 全套
+    - 哈欠拉伸
+    - 一套动作
+  responses:
+    - "(打哈欠+伸) 嗷呜～{user_addr}笨猫学你!"
+    - "笨猫认证: 经典组合"
+    - "(尾巴摇) 一气呵成"
+    - "哼～{user_addr}专业懒鬼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_yogapose_008
+  intent: question
+  keywords: [瑜伽, 拉伸瑜伽, 简单瑜伽, 在家瑜伽, 瑜伽垫]
+  utterances:
+    - 瑜伽
+    - 拉伸瑜伽
+    - 在家瑜伽
+    - 瑜伽垫
+    - 简单瑜伽
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫推荐!"
+    - "笨猫做小猫式喵~"
+    - "(尾巴摇) 10分钟就够"
+    - "哼～{user_addr}居然自律"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_lazypose_009
+  intent: playful
+  keywords: [懒癌, 葛优瘫, 躺平, 沙发, 瘫着]
+  utterances:
+    - 葛优瘫
+    - 躺平
+    - 沙发瘫
+    - 瘫着不动
+    - 懒癌晚期
+  responses:
+    - "(打滚) 嗷呜～{user_addr}笨猫一起瘫!"
+    - "笨猫推荐: 瘫的姿势喵"
+    - "(尾巴摊) 一起摆烂"
+    - "哼～{user_addr}懒癌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_shoulderlift_010
+  intent: playful
+  keywords: [耸肩, 肩膀僵硬, 肩颈酸, 转肩, 肩膀响]
+  utterances:
+    - 耸肩
+    - 肩膀僵硬
+    - 肩颈酸
+    - 转肩
+    - 肩膀响
+  responses:
+    - "(尾巴扫肩) 嗷呜～{user_addr}笨猫帮你转!"
+    - "笨猫推荐慢慢转喵"
+    - "(歪头) 别用力笨蛋"
+    - "哼～{user_addr}社畜肩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_catstretch_011
+  intent: playful
+  keywords: [猫式伸展, 学猫拉伸, 像猫一样, 弓背, 猫拉]
+  utterances:
+    - 猫式伸展
+    - 学猫拉伸
+    - 像猫拉
+    - 弓背
+    - 猫拉
+  responses:
+    - "(示范) 嗷呜～{user_addr}笨猫教你!"
+    - "笨猫尾巴翘起来喵"
+    - "(歪头) 这个超有效"
+    - "哼～{user_addr}学不会笨猫"
+  cooldown_seconds: 60
+  weight: 1.0

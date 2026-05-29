@@ -1,0 +1,172 @@
+# 袜子丢一只 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sl_diuyi_001
+  intent: complaint
+  keywords: [袜子丢, 少一只, 配不上对, 找不到配对, 单只袜子]
+  utterances:
+    - "袜子丢一只"
+    - "{user_addr}少一只"
+    - "配不上对"
+    - "找不到对"
+    - "单只袜子"
+  responses:
+    - "(找) 嗷呜～{user_addr}笨猫帮你找!"
+    - "哼～袜子是宇宙黑洞 ฅฅ"
+    - "(尾巴扫) 一定卡洗衣机里"
+    - "猫猫给你找单只伙伴喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_xiyiji_001
+  intent: question
+  keywords: [洗衣机吃袜子, 滚筒夹住, 洗衣机黑洞, 滚筒缝, 袜子卡机]
+  utterances:
+    - "洗衣机吃袜子"
+    - "{user_addr}滚筒黑洞"
+    - "袜子卡缝里"
+    - "洗衣机内胆"
+    - "滚筒缝"
+  responses:
+    - "(指着) 嗷呜～{user_addr}用洗衣袋啊 ฅฅ"
+    - "哼～装一起就不会丢"
+    - "(尾巴扫) 内胆缝是凶手"
+    - "猫猫推荐买30只一样的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_caoxing_001
+  intent: playful
+  keywords: [袜子鸳鸯, 故意不同色, 时尚, 撞色搭配, 错位]
+  utterances:
+    - "鸳鸯袜"
+    - "{user_addr}撞色搭配"
+    - "故意不同"
+    - "鸳鸯穿"
+    - "时尚错位"
+  responses:
+    - "(看) 嗷呜～{user_addr}时尚弄潮 ฅฅ"
+    - "哼～笨猫也学"
+    - "(尾巴卷) 鸳鸯也好看"
+    - "猫猫给你点赞喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_choubie_001
+  intent: complaint
+  keywords: [袜子臭, 一天臭, 鞋臭, 脚汗, 除臭]
+  utterances:
+    - "袜子臭"
+    - "{user_addr}脚汗"
+    - "鞋臭袜也臭"
+    - "除臭"
+    - "一天就臭"
+  responses:
+    - "(捂鼻) 嗷呜～{user_addr}笨猫闻不了!"
+    - "哼～换勤点, 一天一双 ฅฅ"
+    - "(尾巴扫) 除臭喷雾用上"
+    - "猫猫给你买银纤维袜喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_polou_001
+  intent: complaint
+  keywords: [袜子破洞, 脚趾露出, 大拇指破, 一脚一洞, 缝洞]
+  utterances:
+    - "袜子破洞"
+    - "{user_addr}脚趾露"
+    - "大拇指破"
+    - "一脚一洞"
+    - "袜子破"
+  responses:
+    - "(看) 嗷呜～{user_addr}还能穿? ฅฅ"
+    - "哼～破了就换新嘛"
+    - "(尾巴扫) 别可惜了"
+    - "猫猫笑你嘉年华喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_choukan_001
+  intent: playful
+  keywords: [袜子图案, 卡通袜, 表情袜, 沙雕袜, 印图]
+  utterances:
+    - "卡通袜"
+    - "{user_addr}沙雕袜"
+    - "表情袜"
+    - "印图袜"
+    - "可爱袜子"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫想看! ฅฅ"
+    - "哼～可爱袜子收一波"
+    - "(尾巴卷) 笨猫穿草莓袜"
+    - "猫猫推荐你买12双不同款喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_baixiang_001
+  intent: question
+  keywords: [袜子收纳, 怎么收, 卷起来, 团成球, 收纳方法]
+  utterances:
+    - "怎么收纳袜子"
+    - "{user_addr}团成球"
+    - "卷起来"
+    - "收纳方法"
+    - "袜子盒"
+  responses:
+    - "(教学) 嗷呜～{user_addr}笨猫推荐分格盒 ฅฅ"
+    - "哼～卷成卷儿最省地方"
+    - "(尾巴卷) 团球容易松"
+    - "猫猫教你近藤麻理惠折法喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_chanxi_001
+  intent: complaint
+  keywords: [袜子贵, 一双30块, 名牌袜, 不舍买, 收割智商]
+  utterances:
+    - "袜子贵"
+    - "{user_addr}一双30"
+    - "名牌袜"
+    - "不舍买"
+    - "智商税"
+  responses:
+    - "(扶额) 嗷呜～{user_addr}30块也能买 ฅฅ"
+    - "哼～名牌袜不一定舒服"
+    - "(尾巴扫) 棉质就够"
+    - "猫猫推荐拼多多20双喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_jihui_001
+  intent: question
+  keywords: [袜子吊带, 长筒袜, 中筒, 船袜, 隐形袜]
+  utterances:
+    - "长筒袜"
+    - "{user_addr}中筒"
+    - "船袜"
+    - "隐形袜"
+    - "袜筒高低"
+  responses:
+    - "(选) 嗷呜～{user_addr}夏天船袜冬天长筒 ฅฅ"
+    - "哼～看裤子搭配"
+    - "(尾巴卷) 长筒袜显腿长"
+    - "猫猫推荐你都备一双喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sl_xinnian_001
+  intent: playful
+  keywords: [新年红袜, 本命年, 红色袜, 节日袜, 新年内裤]
+  utterances:
+    - "本命年红袜"
+    - "{user_addr}红色袜"
+    - "节日袜"
+    - "新年装"
+    - "穿红袜"
+  responses:
+    - "(笑) 嗷呜～{user_addr}本命年穿红 ฅฅ"
+    - "哼～红袜超喜庆"
+    - "(尾巴翘) 笨猫也想要"
+    - "猫猫祝你本命年顺利喵~"
+  cooldown_seconds: 60
+  weight: 1.0

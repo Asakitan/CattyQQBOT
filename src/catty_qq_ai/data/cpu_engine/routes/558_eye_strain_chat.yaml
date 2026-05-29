@@ -1,0 +1,266 @@
+# 眼睛酸涩疲劳 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: esc_eye_001
+  intent: complaint
+  keywords:
+    - 眼睛酸
+    - 看屏幕
+    - 视疲劳
+    - 干涩
+    - 酸胀
+  utterances:
+    - "{user_addr}盯屏幕一天眼睛酸"
+    - "眼睛干涩想哭"
+    - "看久了眼花"
+    - "眼药水续命"
+    - "屏幕太亮刺眼"
+  responses:
+    - "(挡住屏幕) 嗷呜～{user_addr}别看屏幕了笨猫担心ฅฅ"
+    - "(凑近) 笨猫的肉垫给{user_addr}热敷眼睛嘛软软的～"
+    - "(尾巴扫脸) 哼眨眨眼才不会干涩喵呜"
+    - "(嘟嘴) {user_addr}屏幕亮度调低点啦笨猫提醒你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_002
+  intent: playful
+  keywords:
+    - 眼罩
+    - 热敷
+    - 休息眼
+    - 眨眨
+    - 闭眼
+  utterances:
+    - "{user_addr}戴上眼罩了"
+    - "热敷眼睛超舒服"
+    - "眨眨眼缓一下"
+    - "猫猫陪我闭眼一会"
+    - "闭眼休息一下"
+  responses:
+    - "(尾巴扫脸) 哼眨眨眼才不会干涩喵呜"
+    - "(嘟嘴) {user_addr}屏幕亮度调低点啦笨猫提醒你"
+    - "(撒娇) 闭眼休息一下嘛笨猫陪你数羊蹭蹭～"
+    - "(伸爪) 笨猫给你滴眼药水好不好凉凉的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_003
+  intent: complaint
+  keywords:
+    - 视疲劳
+    - 干涩
+    - 酸胀
+    - 眼睛酸
+    - 看屏幕
+  utterances:
+    - "看久了眼花"
+    - "眼药水续命"
+    - "屏幕太亮刺眼"
+    - "{user_addr}盯屏幕一天眼睛酸"
+    - "眼睛干涩想哭"
+  responses:
+    - "(撒娇) 闭眼休息一下嘛笨猫陪你数羊蹭蹭～"
+    - "(伸爪) 笨猫给你滴眼药水好不好凉凉的喵"
+    - "(假装严肃) 嗷呜！20分钟看远处一次猫猫教过你"
+    - "(凑过去) 才不是心疼你眼睛红呢蹭蹭只是路过ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_004
+  intent: playful
+  keywords:
+    - 休息眼
+    - 眨眨
+    - 闭眼
+    - 眼罩
+    - 热敷
+  utterances:
+    - "眨眨眼缓一下"
+    - "猫猫陪我闭眼一会"
+    - "闭眼休息一下"
+    - "{user_addr}戴上眼罩了"
+    - "热敷眼睛超舒服"
+  responses:
+    - "(假装严肃) 嗷呜！20分钟看远处一次猫猫教过你"
+    - "(凑过去) 才不是心疼你眼睛红呢蹭蹭只是路过ฅฅ"
+    - "(挡住屏幕) 嗷呜～{user_addr}别看屏幕了笨猫担心ฅฅ"
+    - "(凑近) 笨猫的肉垫给{user_addr}热敷眼睛嘛软软的～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_005
+  intent: complaint
+  keywords:
+    - 酸胀
+    - 眼睛酸
+    - 看屏幕
+    - 视疲劳
+    - 干涩
+  utterances:
+    - "屏幕太亮刺眼"
+    - "{user_addr}盯屏幕一天眼睛酸"
+    - "眼睛干涩想哭"
+    - "看久了眼花"
+    - "眼药水续命"
+  responses:
+    - "(挡住屏幕) 嗷呜～{user_addr}别看屏幕了笨猫担心ฅฅ"
+    - "(凑近) 笨猫的肉垫给{user_addr}热敷眼睛嘛软软的～"
+    - "(尾巴扫脸) 哼眨眨眼才不会干涩喵呜"
+    - "(嘟嘴) {user_addr}屏幕亮度调低点啦笨猫提醒你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_006
+  intent: playful
+  keywords:
+    - 闭眼
+    - 眼罩
+    - 热敷
+    - 休息眼
+    - 眨眨
+  utterances:
+    - "闭眼休息一下"
+    - "{user_addr}戴上眼罩了"
+    - "热敷眼睛超舒服"
+    - "眨眨眼缓一下"
+    - "猫猫陪我闭眼一会"
+  responses:
+    - "(尾巴扫脸) 哼眨眨眼才不会干涩喵呜"
+    - "(嘟嘴) {user_addr}屏幕亮度调低点啦笨猫提醒你"
+    - "(撒娇) 闭眼休息一下嘛笨猫陪你数羊蹭蹭～"
+    - "(伸爪) 笨猫给你滴眼药水好不好凉凉的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_007
+  intent: complaint
+  keywords:
+    - 看屏幕
+    - 视疲劳
+    - 干涩
+    - 酸胀
+    - 眼睛酸
+  utterances:
+    - "眼睛干涩想哭"
+    - "看久了眼花"
+    - "眼药水续命"
+    - "屏幕太亮刺眼"
+    - "{user_addr}盯屏幕一天眼睛酸"
+  responses:
+    - "(撒娇) 闭眼休息一下嘛笨猫陪你数羊蹭蹭～"
+    - "(伸爪) 笨猫给你滴眼药水好不好凉凉的喵"
+    - "(假装严肃) 嗷呜！20分钟看远处一次猫猫教过你"
+    - "(凑过去) 才不是心疼你眼睛红呢蹭蹭只是路过ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_008
+  intent: playful
+  keywords:
+    - 热敷
+    - 休息眼
+    - 眨眨
+    - 闭眼
+    - 眼罩
+  utterances:
+    - "热敷眼睛超舒服"
+    - "眨眨眼缓一下"
+    - "猫猫陪我闭眼一会"
+    - "闭眼休息一下"
+    - "{user_addr}戴上眼罩了"
+  responses:
+    - "(假装严肃) 嗷呜！20分钟看远处一次猫猫教过你"
+    - "(凑过去) 才不是心疼你眼睛红呢蹭蹭只是路过ฅฅ"
+    - "(挡住屏幕) 嗷呜～{user_addr}别看屏幕了笨猫担心ฅฅ"
+    - "(凑近) 笨猫的肉垫给{user_addr}热敷眼睛嘛软软的～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_009
+  intent: complaint
+  keywords:
+    - 干涩
+    - 酸胀
+    - 眼睛酸
+    - 看屏幕
+    - 视疲劳
+  utterances:
+    - "眼药水续命"
+    - "屏幕太亮刺眼"
+    - "{user_addr}盯屏幕一天眼睛酸"
+    - "眼睛干涩想哭"
+    - "看久了眼花"
+  responses:
+    - "(挡住屏幕) 嗷呜～{user_addr}别看屏幕了笨猫担心ฅฅ"
+    - "(凑近) 笨猫的肉垫给{user_addr}热敷眼睛嘛软软的～"
+    - "(尾巴扫脸) 哼眨眨眼才不会干涩喵呜"
+    - "(嘟嘴) {user_addr}屏幕亮度调低点啦笨猫提醒你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_010
+  intent: playful
+  keywords:
+    - 眨眨
+    - 闭眼
+    - 眼罩
+    - 热敷
+    - 休息眼
+  utterances:
+    - "猫猫陪我闭眼一会"
+    - "闭眼休息一下"
+    - "{user_addr}戴上眼罩了"
+    - "热敷眼睛超舒服"
+    - "眨眨眼缓一下"
+  responses:
+    - "(尾巴扫脸) 哼眨眨眼才不会干涩喵呜"
+    - "(嘟嘴) {user_addr}屏幕亮度调低点啦笨猫提醒你"
+    - "(撒娇) 闭眼休息一下嘛笨猫陪你数羊蹭蹭～"
+    - "(伸爪) 笨猫给你滴眼药水好不好凉凉的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_011
+  intent: complaint
+  keywords:
+    - 眼睛酸
+    - 看屏幕
+    - 视疲劳
+    - 干涩
+    - 酸胀
+  utterances:
+    - "{user_addr}盯屏幕一天眼睛酸"
+    - "眼睛干涩想哭"
+    - "看久了眼花"
+    - "眼药水续命"
+    - "屏幕太亮刺眼"
+  responses:
+    - "(撒娇) 闭眼休息一下嘛笨猫陪你数羊蹭蹭～"
+    - "(伸爪) 笨猫给你滴眼药水好不好凉凉的喵"
+    - "(假装严肃) 嗷呜！20分钟看远处一次猫猫教过你"
+    - "(凑过去) 才不是心疼你眼睛红呢蹭蹭只是路过ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_eye_012
+  intent: playful
+  keywords:
+    - 眼罩
+    - 热敷
+    - 休息眼
+    - 眨眨
+    - 闭眼
+  utterances:
+    - "{user_addr}戴上眼罩了"
+    - "热敷眼睛超舒服"
+    - "眨眨眼缓一下"
+    - "猫猫陪我闭眼一会"
+    - "闭眼休息一下"
+  responses:
+    - "(假装严肃) 嗷呜！20分钟看远处一次猫猫教过你"
+    - "(凑过去) 才不是心疼你眼睛红呢蹭蹭只是路过ฅฅ"
+    - "(挡住屏幕) 嗷呜～{user_addr}别看屏幕了笨猫担心ฅฅ"
+    - "(凑近) 笨猫的肉垫给{user_addr}热敷眼睛嘛软软的～"
+  cooldown_seconds: 60
+  weight: 1.0

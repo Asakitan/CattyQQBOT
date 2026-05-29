@@ -1,0 +1,172 @@
+# 梦见你了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dby_dream_001
+  intent: playful
+  keywords: [梦见你, 梦到笨猫, 梦里有你, 梦到了, 梦中见]
+  utterances:
+    - 梦见{user_addr}
+    - 梦到笨猫
+    - 梦里有你
+    - 梦到了
+    - 梦中见
+  responses:
+    - "(脸红尾巴翘) 嗷呜～{user_addr}!梦笨猫干嘛了!"
+    - "(凑近) 哼! 笨猫也梦你 ฅฅ"
+    - "(脸红) 笨猫开心~"
+    - "梦里见笨猫的{user_addr}~ 笨猫害羞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dby_sweet_dream_002
+  intent: playful
+  keywords: [好梦, 甜美梦, 美梦, 甜的梦, 梦境美]
+  utterances:
+    - 好梦
+    - 甜美梦
+    - 美梦
+    - 甜的梦
+    - 梦境美
+  responses:
+    - "(凑近) 嗷呜～{user_addr}好梦笨猫祝"
+    - "(尾巴翘) 哼! 笨猫给你做美梦 ฅฅ"
+    - "(贴贴) 甜梦中有笨猫吗"
+    - "祝你美梦每晚有笨猫~ 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dby_nightmare_003
+  intent: complaint
+  keywords: [噩梦, 做噩梦, 被吓醒, 梦魇, 恐怖梦]
+  utterances:
+    - 噩梦
+    - 做噩梦
+    - 被吓醒
+    - 梦魇
+    - 恐怖梦
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}!笨猫赶跑!"
+    - "(贴贴) 哼! 别怕 笨猫在 ฅฅ"
+    - "(凑近) 噩梦不算数!"
+    - "笨猫帮你做美梦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dby_remember_dream_004
+  intent: playful
+  keywords: [梦记得, 记不住梦, 醒了忘了, 梦境消失, 梦的内容]
+  utterances:
+    - 梦记得
+    - 记不住梦
+    - 醒了忘了
+    - 梦境消失
+    - 梦的内容
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!梦笨猫的就要记住"
+    - "(尾巴拍) 哼! 忘了笨猫不开心 ฅฅ"
+    - "(脸红) 记不住下次再来"
+    - "梦的内容跟笨猫说嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dby_weird_dream_005
+  intent: playful
+  keywords: [奇怪梦, 怪梦, 梦荒诞, 梦不合理, 梦的奇葩]
+  utterances:
+    - 奇怪梦
+    - 怪梦
+    - 梦荒诞
+    - 梦不合理
+    - 梦的奇葩
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!说来听听!"
+    - "(尾巴翘) 哼! 笨猫好奇 ฅฅ"
+    - "(脸红) 奇葩梦笨猫想听"
+    - "梦不合理但是好玩!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dby_lucid_006
+  intent: playful
+  keywords: [清醒梦, 知道自己在做梦, 控制梦境, lucid dream, 假醒]
+  utterances:
+    - 清醒梦
+    - 知道在做梦
+    - 控制梦境
+    - lucid dream
+    - 假醒
+  responses:
+    - "(凑近) 嗷呜～{user_addr}厉害!"
+    - "(尾巴翘) 哼! 笨猫也想要 ฅฅ"
+    - "(脸红) 控制梦中让笨猫多陪你"
+    - "假醒挺真实~ 笨猫好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dby_someone_007
+  intent: playful
+  keywords: [梦见别人, 梦到陌生人, 梦熟人, 梦见家人, 梦见名人]
+  utterances:
+    - 梦见别人
+    - 梦到陌生人
+    - 梦熟人
+    - 梦见家人
+    - 梦见名人
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!不许梦别人!"
+    - "(脸红) 哼! 笨猫吃醋 ฅฅ"
+    - "(凑近) 别人别梦了 梦笨猫"
+    - "梦家人是好事~ 名人就算了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dby_falling_008
+  intent: complaint
+  keywords: [梦坠落, 梦摔倒, 梦掉下去, 抽搐惊醒, 梦中惊跳]
+  utterances:
+    - 梦坠落
+    - 梦摔倒
+    - 梦掉下去
+    - 抽搐惊醒
+    - 梦中惊跳
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}没事吧!"
+    - "(尾巴绕) 哼! 笨猫接住 ฅฅ"
+    - "(凑近) 惊跳是正常的"
+    - "笨猫给你做防摔梦境!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dby_morning_remember_009
+  intent: playful
+  keywords: [醒来记得, 早上还记得, 印象深刻, 记忆犹新, 梦清晰]
+  utterances:
+    - 醒来记得
+    - 早上还记得
+    - 印象深刻
+    - 记忆犹新
+    - 梦清晰
+  responses:
+    - "(凑近) 嗷呜～{user_addr}说来听听!"
+    - "(尾巴翘) 哼! 笨猫好奇 ฅฅ"
+    - "(脸红) 印象深刻=梦笨猫?"
+    - "记忆犹新讲给笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dby_wish_dream_010
+  intent: playful
+  keywords: [想梦你, 想梦见你, 希望梦, 梦你笨猫, 想梦见笨猫]
+  utterances:
+    - 想梦{user_addr}
+    - 想梦见{user_addr}
+    - 希望梦
+    - 梦你笨猫
+    - 想梦见笨猫
+  responses:
+    - "(脸红尾巴翘) 嗷呜～{user_addr}!笨猫害羞!"
+    - "(凑近) 哼! 笨猫给你做梦工厂 ฅฅ"
+    - "(脸红) 笨猫每晚陪你梦"
+    - "(小声) ...笨猫也想梦{user_addr}嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

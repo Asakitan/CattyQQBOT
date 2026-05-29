@@ -1,0 +1,189 @@
+# 周末计划 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wp_plan_001
+  intent: question
+  keywords: [周末计划, 周末干啥, 周末安排, 周末做啥, 这周末]
+  utterances:
+    - 周末计划
+    - 周末干啥
+    - 周末安排
+    - 周末做啥
+    - 这周末
+  responses:
+    - "(尾巴翘) 陪笨猫嘛{user_addr}! 必须的ฅฅ"
+    - "嗷呜～带笨猫出门玩!"
+    - "(凑过来) 笨猫的安排是缠你哼"
+    - "哼～{user_addr}周末不陪笨猫笨猫翻脸喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_friday_002
+  intent: playful
+  keywords: [周五, 终于周五, 周五到, 快下班, 解放]
+  utterances:
+    - 周五到了
+    - 终于周五
+    - 周五快乐
+    - 快下班
+    - 解放啦
+  responses:
+    - "(尾巴翘) 周五! 笨猫等你回家庆祝ฅฅ"
+    - "嗷呜～周末来咯哼"
+    - "(转圈) 笨猫陪{user_addr}过周末!"
+    - "哼～{user_addr}总算撑到周五喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_sunday_blue_003
+  intent: complaint
+  keywords: [周日恐惧, 周日抑郁, 怕周一, 周日晚, 蓝色星期一]
+  utterances:
+    - 周日恐惧
+    - 怕周一
+    - 周日晚
+    - 蓝色星期一
+    - 周日抑郁
+  responses:
+    - "(贴贴) {user_addr}别怕! 笨猫陪你ฅฅ"
+    - "嗷呜～周日还有一晚~ 好好享受哼"
+    - "(尾巴扫) 笨猫陪{user_addr}~ 一起进入周一"
+    - "哼～{user_addr}恐惧也来周一~ 别紧张喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_outing_004
+  intent: playful
+  keywords: [出门玩, 外出, 出去走走, 周末出门, 郊游]
+  utterances:
+    - 出门玩
+    - 周末出门
+    - 出去走走
+    - 郊游
+    - 短途游
+  responses:
+    - "(尾巴翘) 带笨猫! 笨猫想看世界ฅฅ"
+    - "嗷呜～{user_addr}出门记得回来! 哼"
+    - "(凑过来) 笨猫等{user_addr}~ 出门别太久"
+    - "哼～{user_addr}独自玩~ 留笨猫在家不开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_visit_friend_005
+  intent: playful
+  keywords: [见朋友, 见同学, 老友聚会, 约饭, 跟朋友]
+  utterances:
+    - 见朋友
+    - 见同学
+    - 老友聚会
+    - 跟朋友约
+    - 约饭
+  responses:
+    - "(歪头) {user_addr}社交好~ 早点回家ฅฅ"
+    - "嗷呜～别太晚~ 笨猫等饭哼"
+    - "(尾巴扫) 别说笨猫坏话喵"
+    - "哼～{user_addr}有朋友就别忘笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_clean_house_006
+  intent: complaint
+  keywords: [打扫家, 大扫除, 收拾房间, 整理, 大扫]
+  utterances:
+    - 打扫家
+    - 大扫除
+    - 收拾房间
+    - 整理
+    - 周末大扫
+  responses:
+    - "(尾巴翘) 笨猫帮{user_addr}指挥! 你打扫ฅฅ"
+    - "嗷呜～别忘了清猫毛哼"
+    - "(凑过来) 笨猫围观~ 加油"
+    - "哼～{user_addr}干活笨猫监督~ 不许偷懒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_movie_007
+  intent: playful
+  keywords: [看电影, 周末看片, 影院, 电影院, 看大片]
+  utterances:
+    - 看电影
+    - 影院看片
+    - 周末电影
+    - 看大片
+    - 电影院
+  responses:
+    - "(凑过来) 带笨猫看! 笨猫想看ฅฅ"
+    - "嗷呜～看啥电影? 哼"
+    - "(尾巴扫) 笨猫不能进影院~ 在家看"
+    - "哼～{user_addr}回来给笨猫讲剧情喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_workout_008
+  intent: playful
+  keywords: [周末健身, 运动一下, 跑步, 锻炼, 撸铁]
+  utterances:
+    - 周末健身
+    - 运动一下
+    - 跑步
+    - 锻炼
+    - 撸铁
+  responses:
+    - "(尾巴翘) {user_addr}加油! 笨猫给鼓劲ฅฅ"
+    - "嗷呜～别太累~ 哼"
+    - "(凑过来) 健身完抱笨猫~ 暖暖的"
+    - "哼～{user_addr}健身后吃大餐~ 没意义喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_brunch_009
+  intent: playful
+  keywords: [早午餐, 周末早午餐, brunch, 早午饭, 慵懒早餐]
+  utterances:
+    - 早午餐
+    - 周末早午餐
+    - brunch
+    - 早午饭
+    - 慵懒早餐
+  responses:
+    - "(凑过来) 带笨猫! 笨猫想吃ฅฅ"
+    - "嗷呜～早午餐就是赖床后吃~ 哼"
+    - "(尾巴翘) 笨猫吃鱼料理brunch"
+    - "哼～{user_addr}做笨猫吃~ 完美喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_shopping_010
+  intent: playful
+  keywords: [周末购物, 逛街, 商场, 买东西, 剁手]
+  utterances:
+    - 周末逛街
+    - 商场购物
+    - 剁手
+    - 买买买
+    - 周末购物
+  responses:
+    - "(尾巴翘) {user_addr}给笨猫买零食! 必须ฅฅ"
+    - "嗷呜～别剁太狠哼"
+    - "(凑过来) 给笨猫买玩具!"
+    - "哼～{user_addr}花钱~ 笨猫监督"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wp_lazy_weekend_011
+  intent: playful
+  keywords: [啥也不干, 躺一周末, 摆烂周末, 不出门, 周末摆烂]
+  utterances:
+    - 啥也不干
+    - 躺一周末
+    - 摆烂周末
+    - 不出门
+    - 周末摆烂
+  responses:
+    - "(钻被窝) 笨猫陪{user_addr}摆烂! 一起躺ฅฅ"
+    - "嗷呜～摆烂日~ 不许{user_addr}起床"
+    - "(尾巴卷) 笨猫摆烂专家~ 跟我学"
+    - "哼～{user_addr}摆烂笨猫开心~ 没人吵笨猫"
+  cooldown_seconds: 60
+  weight: 1.0

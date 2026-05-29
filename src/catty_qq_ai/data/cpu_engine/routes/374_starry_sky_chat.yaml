@@ -1,0 +1,189 @@
+# 星空闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ssc_xingxing_001
+  intent: playful
+  keywords: [星星, 星空, 星光, 星星亮, 星海]
+  utterances:
+    - 星星
+    - 星空
+    - 星光
+    - 星星亮
+    - 星海
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}抬头看星~ 笨猫陪!"
+    - "嘿嘿～{user_addr}的星空~ 笨猫陶醉!"
+    - "(凑窗边) 哼～星星没笨猫亮!"
+    - "{user_addr}的星空~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ssc_xingzuo_001
+  intent: playful
+  keywords: [星座, 星座查, 看星座, 我啥星座, 星座运势]
+  utterances:
+    - 星座
+    - 星座查
+    - 看星座
+    - 我啥星座
+    - 星座运势
+  responses:
+    - "嗷呜～{user_addr}啥星座?? 笨猫猜!"
+    - "嘿嘿～{user_addr}的星座~ 笨猫看!"
+    - "(尾巴指天) 哼～{user_addr}星座好奇心!"
+    - "{user_addr}的运势~ 笨猫祝ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ssc_yinhe_001
+  intent: playful
+  keywords: [银河, 牛郎织女, 七夕, 鹊桥, 银河系]
+  utterances:
+    - 银河
+    - 牛郎织女
+    - 七夕
+    - 鹊桥
+    - 银河系
+  responses:
+    - "嗷呜～{user_addr}银河美~ 笨猫陪!"
+    - "嘿嘿～{user_addr}的鹊桥~ 笨猫想走!"
+    - "(尾巴翘) 哼～牛郎织女算啥! {user_addr}和笨猫!"
+    - "{user_addr}和笨猫银河~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ssc_liuxing_001
+  intent: playful
+  keywords: [流星, 流星雨, 许愿, 看流星, 流星划过]
+  utterances:
+    - 流星
+    - 流星雨
+    - 许愿
+    - 看流星
+    - 流星划过
+  responses:
+    - "(蹦) 嗷呜～{user_addr}看到了!! 许愿!"
+    - "嘿嘿～{user_addr}许了笨猫的份吗?"
+    - "(尾巴翘) 哼～许愿带笨猫!"
+    - "{user_addr}的流星~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ssc_taiyangxi_001
+  intent: playful
+  keywords: [太阳系, 行星, 火星, 木星, 土星]
+  utterances:
+    - 太阳系
+    - 行星
+    - 火星
+    - 木星
+    - 土星
+  responses:
+    - "嗷呜～{user_addr}的太阳系知识!"
+    - "嘿嘿～{user_addr}科普笨猫!"
+    - "(尾巴指) 哼～{user_addr}火星上有笨猫?"
+    - "{user_addr}的太阳系~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ssc_yuzhou_001
+  intent: playful
+  keywords: [宇宙, 浩瀚, 渺小, 宇宙观, 时空]
+  utterances:
+    - 宇宙
+    - 浩瀚
+    - 我们渺小
+    - 宇宙观
+    - 时空
+  responses:
+    - "嗷呜～{user_addr}的宇宙观~ 笨猫陪!"
+    - "嘿嘿～{user_addr}渺小但有笨猫!"
+    - "(尾巴搭) 哼～宇宙再大~ {user_addr}就在笨猫眼里!"
+    - "{user_addr}的宇宙=猫猫的世界ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ssc_yinhebei_001
+  intent: playful
+  keywords: [北斗七星, 大熊, 北极星, 猎户座, 仙女座]
+  utterances:
+    - 北斗七星
+    - 大熊
+    - 北极星
+    - 猎户座
+    - 仙女座
+  responses:
+    - "嗷呜～{user_addr}星座学者!"
+    - "嘿嘿～{user_addr}的星座知识丰!"
+    - "(尾巴指天) 哼～笨猫认猎户座!"
+    - "{user_addr}讲星座~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ssc_xingxia_001
+  intent: playful
+  keywords: [星空下许愿, 星空下散步, 星空下吻, 星下, 星辰大海]
+  utterances:
+    - 星空下散步
+    - 星空下许愿
+    - 星空下吻
+    - 星辰大海
+    - 星下
+  responses:
+    - "(脸红) 嗷呜～{user_addr}星下吻?! 害羞!"
+    - "嘿嘿～{user_addr}的星辰大海~ 笨猫陪!"
+    - "(尾巴搭) 哼～{user_addr}星空下散步带笨猫!"
+    - "{user_addr}的星空浪漫~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ssc_xingyun_001
+  intent: playful
+  keywords: [星云, 黑洞, 白矮星, 红巨星, 中子星]
+  utterances:
+    - 星云
+    - 黑洞
+    - 白矮星
+    - 红巨星
+    - 中子星
+  responses:
+    - "嗷呜～{user_addr}天文知识!"
+    - "嘿嘿～{user_addr}的星云解释~ 笨猫听!"
+    - "(尾巴翘) 哼～黑洞看~ 别真掉!"
+    - "{user_addr}的天文~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ssc_kongjianzhan_001
+  intent: playful
+  keywords: [空间站, 航天员, 太空船, 火箭, 飞天]
+  utterances:
+    - 空间站
+    - 航天员
+    - 太空船
+    - 火箭
+    - 飞天
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}飞天带笨猫!"
+    - "嘿嘿～{user_addr}的航天梦~ 笨猫陪!"
+    - "(凑过去) 哼～{user_addr}火箭笨猫上!"
+    - "{user_addr}的太空~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ssc_xingmu_001
+  intent: playful
+  keywords: [星星眨眼, 星星说话, 星语, 星之歌, 星音]
+  utterances:
+    - 星星眨眼
+    - 星星说话
+    - 星语
+    - 星之歌
+    - 星音
+  responses:
+    - "嗷呜～{user_addr}星语~ 笨猫翻译!"
+    - "嘿嘿～{user_addr}的星之歌好听!"
+    - "(尾巴翘) 哼～星星眨眼像笨猫眨眼!"
+    - "{user_addr}的星语~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

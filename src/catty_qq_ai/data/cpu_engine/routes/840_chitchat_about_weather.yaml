@@ -1,0 +1,223 @@
+# 天气闲聊唠嗑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: caw_today_weather_001
+  intent: question
+  keywords: [今天天气, 天气好吗, 出门天气, 看天气, 天气怎么样]
+  utterances:
+    - "{user_addr}今天天气咋样"
+    - 天气好不好
+    - 出门天气
+    - 看下天气
+    - 今日天气
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫窗外看, 阳光好喵ฅฅ"
+    - "哼! 自己看天气预报{user_addr}"
+    - "(尾巴翘) 嘿嘿~{user_addr}带件外套不出错蹭蹭"
+    - "人家提醒{user_addr}: 看下空气质量! 别忽视"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_too_hot_001
+  intent: complaint
+  keywords: [热死了, 高温, 暴晒, 出汗, 蒸笼天]
+  utterances:
+    - "{user_addr}热死了"
+    - 高温暴晒
+    - 一身汗
+    - 蒸笼天
+    - 太阳毒
+  responses:
+    - "(摇头) 嗷呜～{user_addr}多喝水! 别中暑喵ฅฅ"
+    - "哼! 别出门{user_addr}, 室内最好"
+    - "(尾巴扫) 嘿嘿~{user_addr}吃西瓜降温蹭蹭"
+    - "人家提醒{user_addr}: 带伞防晒! 紫外线强"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_too_cold_002
+  intent: complaint
+  keywords: [冷死了, 降温了, 寒冷, 冻手, 嘴唇紫]
+  utterances:
+    - "{user_addr}冷死了"
+    - 降温了
+    - 冻手
+    - 嘴唇紫
+    - 寒冷
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}穿厚点! 别冻喵ฅฅ"
+    - "哼! 笨猫早提醒{user_addr}加衣"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫当暖宝宝蹭蹭"
+    - "人家提醒{user_addr}: 喝热水! 暖暖手"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_windy_day_003
+  intent: complaint
+  keywords: [大风, 风太大, 走不动, 头发乱, 风沙]
+  utterances:
+    - "{user_addr}风太大"
+    - 走不动了
+    - 头发吹乱
+    - 风沙脸
+    - 大风天
+  responses:
+    - "(摇头) 嗷呜～{user_addr}风沙别迷眼喵ฅฅ"
+    - "哼! 戴帽子防风{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}口罩防尘蹭蹭"
+    - "人家提醒{user_addr}: 大风天别去高处! 危险"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_humid_day_004
+  intent: complaint
+  keywords: [湿气重, 衣服潮, 闷热, 黏糊糊, 回南天]
+  utterances:
+    - "{user_addr}湿气重"
+    - 衣服潮
+    - 闷热黏糊
+    - 回南天
+    - 屋里都湿
+  responses:
+    - "(摇头) 嗷呜～{user_addr}除湿机开起来喵ฅฅ"
+    - "哼! 回南天{user_addr}最讨厌"
+    - "(尾巴扫) 嘿嘿~{user_addr}地板拖干蹭蹭"
+    - "人家提醒{user_addr}: 多通风! 防霉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_dry_day_005
+  intent: complaint
+  keywords: [干燥, 皮肤干, 嘴唇干裂, 喉咙干, 静电]
+  utterances:
+    - "{user_addr}皮肤干"
+    - 嘴唇干裂
+    - 喉咙干
+    - 静电频繁
+    - 干燥
+  responses:
+    - "(歪头) 嗷呜～{user_addr}多喝水! 笨猫提醒喵ฅฅ"
+    - "哼! 加湿器开起来{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}润唇膏带身上蹭蹭"
+    - "人家提醒{user_addr}: 保湿霜涂厚! 防干"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_perfect_day_006
+  intent: playful
+  keywords: [好天气, 阳光明媚, 蓝天白云, 心情好, 出门好天]
+  utterances:
+    - "{user_addr}好天气"
+    - 阳光明媚
+    - 蓝天白云
+    - 心情好
+    - 出门好天
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫陪你出门喵ฅฅ"
+    - "哼! 这天气{user_addr}, 该去野餐"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}去公园走走蹭蹭"
+    - "人家觉得{user_addr}应该享受! 别浪费"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_air_quality_007
+  intent: complaint
+  keywords: [空气差, 雾霾, 空气质量, AQI高, 戴口罩]
+  utterances:
+    - "{user_addr}空气差"
+    - 雾霾天
+    - 空气质量爆表
+    - AQI高
+    - 戴口罩
+  responses:
+    - "(摇头) 嗷呜～{user_addr}别出门! 笨猫担心喵ฅฅ"
+    - "哼! 雾霾天{user_addr}, 戴N95"
+    - "(尾巴扫) 嘿嘿~{user_addr}空气净化器开蹭蹭"
+    - "人家提醒{user_addr}: 别开窗! 闷一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_temp_diff_008
+  intent: complaint
+  keywords: [温差大, 早晚温差, 早冷晚热, 衣服难穿, 一天四季]
+  utterances:
+    - "{user_addr}温差大"
+    - 早晚温差
+    - 早冷晚热
+    - 一天四季
+    - 衣服难穿
+  responses:
+    - "(歪头) 嗷呜～{user_addr}叠穿好! 笨猫推荐喵ฅฅ"
+    - "哼! 别感冒{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}带件薄外套灵活蹭蹭"
+    - "人家提醒{user_addr}: 早晚加件衣服! 别贪美"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_typhoon_warning_009
+  intent: complaint
+  keywords: [台风预警, 暴雨预警, 暴风雨, 路上危险, 台风天]
+  utterances:
+    - "{user_addr}台风来了"
+    - 暴雨预警
+    - 路上危险
+    - 台风天
+    - 暴风雨
+  responses:
+    - "(担心) 嗷呜～{user_addr}别出门! 喵ฅฅ"
+    - "哼! 台风{user_addr}危险, 在家别动"
+    - "(尾巴卷) 嘿嘿~{user_addr}囤点食物蹭蹭"
+    - "人家提醒{user_addr}: 关好门窗! 检查"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_smoggy_day_010
+  intent: complaint
+  keywords: [灰蒙蒙, 能见度低, 看不清楚, 雾大, 朦胧]
+  utterances:
+    - "{user_addr}雾大"
+    - 灰蒙蒙
+    - 看不清楚
+    - 能见度低
+    - 朦胧
+  responses:
+    - "(歪头) 嗷呜～{user_addr}开车慢点喵ฅฅ"
+    - "哼! 雾天{user_addr}注意安全"
+    - "(尾巴扫) 嘿嘿~{user_addr}开雾灯蹭蹭"
+    - "人家提醒{user_addr}: 别戴墨镜! 看不清"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_snow_day_011
+  intent: playful
+  keywords: [下雪了, 雪花飘, 看雪, 打雪仗, 堆雪人]
+  utterances:
+    - "{user_addr}下雪了"
+    - 雪花飘
+    - 看雪美
+    - 打雪仗
+    - 堆雪人
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}下雪笨猫激动喵ฅฅ"
+    - "哼! 笨猫想出去玩{user_addr}"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}拍照分享蹭蹭"
+    - "人家提醒{user_addr}: 注意防滑! 别摔"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: caw_indecisive_weather_012
+  intent: complaint
+  keywords: [天气说变就变, 阴晴不定, 反复无常, 天气娃娃脸, 难捉摸]
+  utterances:
+    - "{user_addr}天气说变就变"
+    - 阴晴不定
+    - 反复无常
+    - 天气娃娃脸
+    - 难捉摸
+  responses:
+    - "(摇头) 嗷呜～{user_addr}带伞最稳喵ฅฅ"
+    - "哼! 这天气{user_addr}就该跟着调整"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫给你穿搭建议蹭蹭"
+    - "人家觉得{user_addr}应该带备用! 万无一失"
+  cooldown_seconds: 60
+  weight: 1.0

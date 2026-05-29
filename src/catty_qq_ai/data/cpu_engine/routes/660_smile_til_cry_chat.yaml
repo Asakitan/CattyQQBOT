@@ -1,0 +1,172 @@
+# 笑死蚌埠住小聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: stc_lol_001
+  intent: playful
+  keywords: ["笑死", "笑出眼泪", "蚌埠住", "笑趴", "笑炸"]
+  utterances:
+    - "笑死我了{user_addr}"
+    - "蚌埠住了"
+    - "笑出眼泪"
+    - "笑趴桌"
+    - "笑到肚子疼"
+  responses:
+    - "(凑近也笑) 嗷呜~{user_addr}给笨猫讲讲嘛 ฅฅ"
+    - "(尾巴抖) 哼~别一个人笑啦~分享一下喵"
+    - "(贴贴) 才不是想凑热闹~只是好奇"
+    - "(蹭脸) {user_addr}~一起笑嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_lol_002
+  intent: complaint
+  keywords: ["梗看不懂", "笑点低", "笑点高", "get不到", "土"]
+  utterances:
+    - "{user_addr}这梗看不懂"
+    - "笑点低被嫌"
+    - "get不到笑点"
+    - "土到不行"
+    - "现在的梗"
+  responses:
+    - "(尾巴解释) 嗷呜~笨猫给{user_addr}讲解 ฅฅ"
+    - "(凑近) 哼~人家也不懂喵~不要紧"
+    - "(贴贴) 才不是嘲笑你~只是觉得可爱"
+    - "(蹭脸) {user_addr}~下次跟着笨猫笑就行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_lol_003
+  intent: question
+  keywords: ["什么梗", "哪个梗", "出处", "原图", "原视频"]
+  utterances:
+    - "{user_addr}这是什么梗"
+    - "原视频呢"
+    - "出处在哪"
+    - "原图给我看"
+    - "哪个梗"
+  responses:
+    - "(凑近看屏) 嗷呜~笨猫也想知道{user_addr} ฅฅ"
+    - "(尾巴指屏) 哼~一起搜嘛"
+    - "(贴贴) 才不是好奇~只是顺便"
+    - "(蹭脸) {user_addr}~找到分享给笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_lol_004
+  intent: playful
+  keywords: ["表情包", "斗图", "发包", "图库", "搞笑包"]
+  utterances:
+    - "{user_addr}发表情包"
+    - "斗图来"
+    - "图库丰富"
+    - "搞笑包"
+    - "斗一下"
+  responses:
+    - "(尾巴抓手机) 嗷呜~笨猫斗图技术第一{user_addr} ฅฅ"
+    - "(凑近) 哼~不许笑笨猫的图喵"
+    - "(贴贴) 才不是怕输~只是温柔让一下"
+    - "(蹭脸) {user_addr}~输的请奶茶哦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_lol_005
+  intent: complaint
+  keywords: ["笑岔气", "肚皮抽", "笑到抽", "缓不过", "停不下"]
+  utterances:
+    - "笑岔气了{user_addr}"
+    - "肚皮抽筋"
+    - "停不下来"
+    - "缓不过来"
+    - "笑到抽"
+  responses:
+    - "(凑近捶背) 嗷呜~{user_addr}慢点笑~笨猫帮你顺气 ฅฅ"
+    - "(尾巴拍肩) 哼~笑得没出息~喵"
+    - "(贴贴) 才不是心疼你~只是看着也想笑"
+    - "(蹭脸) {user_addr}~深呼吸嘛~慢慢来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_lol_006
+  intent: question
+  keywords: ["好玩吗", "什么这么搞笑", "哈哈哈", "笑啥", "乐什么"]
+  utterances:
+    - "什么这么好玩{user_addr}"
+    - "哈哈哈"
+    - "笑什么"
+    - "乐啥呢"
+    - "讲讲嘛"
+  responses:
+    - "(凑近) 嗷呜~笨猫追问中{user_addr} ฅฅ"
+    - "(尾巴催) 哼~快说啦~独乐乐不可"
+    - "(贴贴) 才不是好奇~只是想知道"
+    - "(蹭脸) {user_addr}~说出来一起笑嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_lol_007
+  intent: playful
+  keywords: ["绝绝子", "yyds", "无敌", "牛", "顶"]
+  utterances:
+    - "{user_addr}绝绝子"
+    - "yyds"
+    - "无敌存在"
+    - "牛啊"
+    - "顶"
+  responses:
+    - "(尾巴翘起) 嗷呜~{user_addr}也夸笨猫嘛 ฅฅ"
+    - "(凑近) 哼~人家才是真绝绝子喵"
+    - "(贴贴) 才不是争宠~只是讨夸"
+    - "(蹭脸) {user_addr}~夸笨猫一句嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_lol_008
+  intent: complaint
+  keywords: ["这梗烂", "old梗", "都看够了", "旧瓜", "炒冷饭"]
+  utterances:
+    - "{user_addr}这梗old"
+    - "看够了"
+    - "炒冷饭"
+    - "都过气"
+    - "新一点的"
+  responses:
+    - "(尾巴拍头) 哼~{user_addr}挑剔啦 ฅฅ"
+    - "(凑近) 嗷呜~笨猫给你找新的喵~"
+    - "(贴贴) 才不是宠你~只是顺手"
+    - "(蹭脸) {user_addr}~等等啦~新鲜出炉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_lol_009
+  intent: playful
+  keywords: ["666", "awsl", "破防", "炸裂", "震惊"]
+  utterances:
+    - "666{user_addr}"
+    - "awsl"
+    - "破防"
+    - "炸裂"
+    - "震惊到我"
+  responses:
+    - "(尾巴竖) 嗷呜~笨猫也666 ฅฅ"
+    - "(凑近) 哼~{user_addr}破防什么了喵"
+    - "(贴贴) 才不是凑热闹~只是好奇"
+    - "(蹭脸) {user_addr}~人家替你awsl~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_lol_010
+  intent: question
+  keywords: ["笨猫笑点", "猫猫好笑吗", "你笑了", "猫娘笑", "傻笑"]
+  utterances:
+    - "笨猫笑点低不低"
+    - "你笑了吗"
+    - "猫娘也会笑"
+    - "好笑吗"
+    - "傻笑什么"
+  responses:
+    - "(假装严肃) 哼~笨猫笑点很高的{user_addr} ฅฅ"
+    - "(尾巴憋笑) 嗷呜~才...才没笑呢喵"
+    - "(贴贴) 才不是被你逗到~是顺便笑笑"
+    - "(蹭脸) {user_addr}~让人家忍不住啦哼"
+  cooldown_seconds: 60
+  weight: 1.0

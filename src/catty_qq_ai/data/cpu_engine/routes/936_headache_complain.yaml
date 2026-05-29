@@ -1,0 +1,189 @@
+# 头疼日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hd_pain_001
+  intent: complaint
+  keywords: [头疼, 头痛, 脑袋炸, 一抽一抽, 偏头痛]
+  utterances:
+    - 头疼
+    - 头痛
+    - 脑袋炸
+    - 一抽一抽
+    - 偏头痛
+  responses:
+    - "(摸头) 嗷呜～{user_addr}休息 ฅฅ"
+    - "哼～{user_addr}笨猫帮按摩喵"
+    - "(尾巴卷) 笨猫陪蹭蹭{user_addr}"
+    - "{user_addr}笨猫给揉嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_screen_001
+  intent: complaint
+  keywords: [对着屏幕久, 看屏幕头晕, 蓝光, 屏幕疲劳, 眼睛累]
+  utterances:
+    - 对屏幕久
+    - 蓝光晕
+    - 屏幕疲劳
+    - 看屏头疼
+    - 眼睛累
+  responses:
+    - "(歪头) 嗷呜～{user_addr}休息 ฅฅ"
+    - "哼～{user_addr}远眺一会儿喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}笨猫给眼罩嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_sleep_001
+  intent: complaint
+  keywords: [睡少了, 没睡好, 失眠头疼, 熬夜头疼, 缺觉]
+  utterances:
+    - 睡少头疼
+    - 没睡好
+    - 失眠头疼
+    - 熬夜头疼
+    - 缺觉
+  responses:
+    - "(摸头) 嗷呜～{user_addr}早睡 ฅฅ"
+    - "哼～{user_addr}笨猫提醒过喵"
+    - "(尾巴卷) 笨猫陪睡蹭蹭{user_addr}"
+    - "{user_addr}补一觉嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_weather_001
+  intent: complaint
+  keywords: [天气变, 阴天头痛, 下雨头疼, 气压, 季节交替]
+  utterances:
+    - 阴天头痛
+    - 下雨头疼
+    - 气压低
+    - 天气变化
+    - 季节交替
+  responses:
+    - "(同情) 嗷呜～{user_addr}没办法 ฅฅ"
+    - "哼～{user_addr}笨猫陪你喵"
+    - "(尾巴卷) 笨猫陪等天晴蹭蹭{user_addr}"
+    - "{user_addr}多喝水嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_stress_001
+  intent: complaint
+  keywords: [压力大, 紧张头痛, 太焦虑, 心累, 紧绷]
+  utterances:
+    - 压力大
+    - 紧张头痛
+    - 太焦虑
+    - 心累
+    - 紧绷
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}放松点喵"
+    - "(尾巴卷) 笨猫帮你深呼吸蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_thirst_001
+  intent: complaint
+  keywords: [脱水头疼, 没喝水, 缺水, 一天没喝, 太干]
+  utterances:
+    - 脱水头疼
+    - 没喝水
+    - 缺水
+    - 一天没喝
+    - 太干
+  responses:
+    - "(扯袖子) 嗷呜～{user_addr}快喝 ฅฅ"
+    - "哼～{user_addr}笨猫早提醒喵"
+    - "(尾巴卷) 一大杯水蹭蹭{user_addr}"
+    - "{user_addr}补水嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_med_001
+  intent: complaint
+  keywords: [止疼片, 吃止疼药, 头痛药, 缓解, 见效]
+  utterances:
+    - 吃止疼药
+    - 止疼片
+    - 头痛药
+    - 缓解一下
+    - 见效慢
+  responses:
+    - "(歪头) 嗷呜～{user_addr}少吃 ฅฅ"
+    - "哼～{user_addr}治本喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}笨猫提议睡觉嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_alcohol_001
+  intent: complaint
+  keywords: [喝酒后头疼, 宿醉, 喝多了, 解酒, 头晕]
+  utterances:
+    - 喝酒后头疼
+    - 宿醉
+    - 喝多了
+    - 解酒
+    - 头晕
+  responses:
+    - "(摇头) 嗷呜～{user_addr}少喝 ฅฅ"
+    - "哼～{user_addr}笨猫提醒过喵"
+    - "(尾巴卷) 喝点蜂蜜水蹭蹭{user_addr}"
+    - "{user_addr}下次少喝嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_massage_001
+  intent: playful
+  keywords: [按摩, 按头, 太阳穴, 头部按摩, 揉头]
+  utterances:
+    - 按摩头
+    - 揉太阳穴
+    - 头部按摩
+    - 帮我揉头
+    - 揉揉
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫帮 ฅฅ"
+    - "哼～{user_addr}舒服点喵"
+    - "(尾巴卷) 笨猫超会蹭蹭{user_addr}"
+    - "{user_addr}笨猫给你舒缓嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_dark_room_001
+  intent: complaint
+  keywords: [暗室休息, 关灯, 拉窗帘, 静一会, 不能看光]
+  utterances:
+    - 关灯
+    - 拉窗帘
+    - 暗室休息
+    - 静一会
+    - 不能看光
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}好好歇喵"
+    - "(尾巴卷) 黑暗安静蹭蹭{user_addr}"
+    - "{user_addr}笨猫静悄悄陪嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_chronic_001
+  intent: complaint
+  keywords: [一直头痛, 反复头疼, 慢性头痛, 老毛病, 检查]
+  utterances:
+    - 一直头痛
+    - 反复头疼
+    - 慢性头痛
+    - 老毛病
+    - 该检查
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}检查 ฅฅ"
+    - "哼～{user_addr}别拖喵"
+    - "(尾巴卷) 早查早安蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

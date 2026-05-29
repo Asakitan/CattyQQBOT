@@ -1,0 +1,189 @@
+# 断网暴怒 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wdr_disconnect_001
+  intent: complaint
+  keywords: [断网, 网断了, wifi掉了, 没网, 连不上]
+  utterances:
+    - 断网了
+    - wifi掉
+    - 没网
+    - 连不上
+    - 信号丢
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫帮你骂!"
+    - "笨猫推荐重启路由器喵"
+    - "(尾巴打) 急死人笨蛋"
+    - "哼～{user_addr}破网"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_restart_002
+  intent: question
+  keywords: [重启路由器, 拔电源, 重启光猫, 修网, 重启wifi]
+  utterances:
+    - 重启路由器
+    - 拔电源
+    - 重启光猫
+    - 修网
+    - 重启wifi
+  responses:
+    - "(歪头) {user_addr}笨猫监督你拔电!"
+    - "嗷呜～等30秒再插喵"
+    - "(尾巴摇) 90%都能修好"
+    - "哼～{user_addr}总算动手"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_signalweak_003
+  intent: complaint
+  keywords: [信号差, 微弱信号, 一格信号, 信号弱, 房间没信号]
+  utterances:
+    - 信号差
+    - 一格信号
+    - 信号弱
+    - 房间没信号
+    - 微弱信号
+  responses:
+    - "(歪头) 嗷呜～{user_addr}换位置!"
+    - "笨猫推荐路由器中心位置"
+    - "(尾巴扫) 信号扩展器笨蛋"
+    - "哼～{user_addr}房间挡墙"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_lagvideo_004
+  intent: complaint
+  keywords: [视频卡, 加载圈, 缓冲圈, 卡顿, 加载慢]
+  utterances:
+    - 视频卡
+    - 加载圈
+    - 缓冲圈
+    - 卡顿
+    - 加载慢
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}骂!"
+    - "笨猫推荐切4G"
+    - "(尾巴打) 缓冲圈烦死"
+    - "哼～{user_addr}流氓宽带"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_gameping_005
+  intent: complaint
+  keywords: [游戏ping高, 延迟, 460, 卡死, 网络波动]
+  utterances:
+    - ping高
+    - 460
+    - 延迟
+    - 卡死
+    - 网络波动
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}460队友怒!"
+    - "笨猫推荐: 加速器"
+    - "(尾巴打) 别打游戏"
+    - "哼～{user_addr}背锅了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_passwordforgot_006
+  intent: complaint
+  keywords: [wifi密码忘了, 密码改了, 改wifi, 路由器密码, 改密码]
+  utterances:
+    - wifi密码忘
+    - 密码改了
+    - 改wifi
+    - 路由器密码
+    - 改密码
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫教你!"
+    - "笨猫推荐: 后台找回喵"
+    - "(尾巴摇) 别瞎重置"
+    - "哼～{user_addr}笨蛋健忘"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_neighbour_007
+  intent: complaint
+  keywords: [蹭网, 邻居蹭, 别人连我wifi, 蹭wifi, 网慢蹭]
+  utterances:
+    - 蹭网
+    - 邻居蹭
+    - 别人连我wifi
+    - 蹭wifi
+    - 蹭走带宽
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}改密码!"
+    - "笨猫推荐: 黑名单笨蛋"
+    - "(尾巴打) 设强密码"
+    - "哼～{user_addr}白被蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_5g4g_008
+  intent: question
+  keywords: [5G信号, 4G切换, 流量包, 数据网络, 网络选哪个]
+  utterances:
+    - 5G信号
+    - 4G切换
+    - 流量包
+    - 数据网络
+    - 选哪个
+  responses:
+    - "(歪头) {user_addr}笨猫推荐5G但耗电 ฅฅ"
+    - "嗷呜～4G省电"
+    - "(尾巴摇) 看流量笨蛋"
+    - "哼～{user_addr}贵不贵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_loaderror_009
+  intent: complaint
+  keywords: [DNS, 加载错误, 网页打不开, 域名失效, 网页错误]
+  utterances:
+    - DNS出错
+    - 加载错误
+    - 网页打不开
+    - 域名失效
+    - 网页错误
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫教你换DNS!"
+    - "笨猫推荐: 114.114"
+    - "(尾巴摇) 换Google的"
+    - "哼～{user_addr}科普"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_outage_010
+  intent: complaint
+  keywords: [全区断网, 大面积断网, 维修中, 运营商故障, 大停网]
+  utterances:
+    - 全区断网
+    - 维修中
+    - 运营商故障
+    - 大面积断
+    - 大停网
+  responses:
+    - "(无奈) 嗷呜～{user_addr}等修喵"
+    - "笨猫陪你聊天打发"
+    - "(尾巴扫) 用流量先顶"
+    - "哼～{user_addr}倒霉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdr_speedtest_011
+  intent: question
+  keywords: [测速, 网速慢, 宽带测速, 网速多少, 网速差]
+  utterances:
+    - 测速
+    - 网速慢
+    - 宽带测速
+    - 网速多少
+    - 网速差
+  responses:
+    - "(歪头) {user_addr}笨猫推荐speedtest喵"
+    - "嗷呜～100兆够用"
+    - "(尾巴摇) 不够就升级"
+    - "哼～{user_addr}测好就投诉"
+  cooldown_seconds: 60
+  weight: 1.0

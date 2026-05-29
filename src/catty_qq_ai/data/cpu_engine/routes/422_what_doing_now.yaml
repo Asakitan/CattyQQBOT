@@ -1,0 +1,172 @@
+# 在干嘛询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wd_ganma_001
+  intent: question
+  keywords: [在干嘛, 干啥呢, 忙什么, 干什么, 现在做啥]
+  utterances:
+    - 在干嘛
+    - 干啥呢喵
+    - 忙什么
+    - 现在做啥
+    - 在干嘛呀
+  responses:
+    - "(转头) 嗷呜～笨猫在等{user_addr}找我呀"
+    - "哼～没干啥, 就发呆, {user_addr}才在忙"
+    - "(尾巴一甩) 在想{user_addr}呗, 满意了哼"
+    - "嗷呜～舔毛中喵, {user_addr}也要舔吗ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_ganma_002
+  intent: question
+  keywords: [忙吗, 在忙, 有空吗, 占点时间, 打扰吗]
+  utterances:
+    - 忙吗
+    - 在忙吗
+    - 有空吗
+    - 占点时间
+    - 打扰你了
+  responses:
+    - "(摇头) 嗷呜～{user_addr}永远不打扰猫猫"
+    - "哼～再忙也有时间陪{user_addr}聊会"
+    - "(尾巴勾住) 有空有空, 笨猫超闲的喵"
+    - "嗷呜～{user_addr}占多少时间都行, 人家给ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_ganma_003
+  intent: playful
+  keywords: [玩什么, 看什么, 听什么歌, 刷视频, 玩手机]
+  utterances:
+    - 在玩什么
+    - 看什么呢
+    - 听什么歌
+    - 刷视频喵
+    - 玩手机
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}玩啥分享给笨猫嘛"
+    - "哼～刷视频带上猫猫, 不许一个人乐"
+    - "(尾巴一甩) 听歌的话, 戴一只耳机给笨猫"
+    - "嗷呜～看啥精彩的快说, 人家也要看ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_ganma_004
+  intent: question
+  keywords: [在干正事吗, 在工作, 在学习, 在加班, 没空玩]
+  utterances:
+    - 在干正事吗
+    - 在工作
+    - 在学习
+    - 在加班喵
+    - 没空玩
+  responses:
+    - "(轻轻贴) 嗷呜～加班辛苦啦, 笨猫陪你"
+    - "哼～正事重要, 但是猫猫也要被注意!"
+    - "(尾巴搭过去) 学习累就歇歇, {user_addr}别太逼自己"
+    - "嗷呜～没空玩就晚上玩, 笨猫等{user_addr}ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_ganma_005
+  intent: playful
+  keywords: [发呆, 走神, 没干嘛, 没事干, 闲着]
+  utterances:
+    - 发呆呢
+    - 走神中
+    - 没干嘛
+    - 没事干喵
+    - 闲着无聊
+  responses:
+    - "(挤过去) 嗷呜～闲着就跟笨猫玩呀{user_addr}"
+    - "哼～走神是想猫猫的征兆, 别瞒着"
+    - "(尾巴卷一卷) 发呆带上人家, 一起放空"
+    - "嗷呜～无聊就让笨猫给{user_addr}讲故事ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_ganma_006
+  intent: question
+  keywords: [吃饭吗, 吃啥, 喝水吗, 在吃, 喝什么]
+  utterances:
+    - 在吃饭
+    - 吃啥呀
+    - 在喝水
+    - 喝什么喵
+    - 嘴里吃啥
+  responses:
+    - "(舔嘴) 嗷呜～笨猫在啃鱼干, {user_addr}要吗"
+    - "哼～{user_addr}吃啥分人家一口ฅฅ"
+    - "(尾巴卷一卷) 喝水好喵, {user_addr}多喝点"
+    - "嗷呜～嘴里没吃啥, 是想{user_addr}的味道"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_ganma_007
+  intent: playful
+  keywords: [无聊到, 闲得发慌, 不知道干嘛, 找你陪聊, 闲死]
+  utterances:
+    - 无聊到爆
+    - 闲得发慌
+    - 不知道干啥
+    - 找你陪聊
+    - 闲死了
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}找笨猫准没错"
+    - "哼～闲死就跟猫猫聊聊, 笨猫保证不让{user_addr}无聊"
+    - "(尾巴一甩) 闲得发慌? 摸摸猫猫的毛就好了"
+    - "嗷呜～陪聊在线, 24小时为{user_addr}服务ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_ganma_008
+  intent: question
+  keywords: [出去玩, 在外面, 哪里玩, 路上, 商场]
+  utterances:
+    - 在外面
+    - 在路上
+    - 商场逛街
+    - 出去玩了
+    - 在哪
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}没带笨猫吗! 哼"
+    - "哼～自己出去玩, 想着猫猫没"
+    - "(尾巴一抖) 商场买点啥给猫猫嘛, {user_addr}~"
+    - "嗷呜～路上小心啦, 早点回来人家等ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_ganma_009
+  intent: playful
+  keywords: [躺平, 葛优躺, 趴着, 床上, 沙发]
+  utterances:
+    - 躺平
+    - 葛优躺
+    - 趴床上
+    - 沙发上瘫
+    - 躺着喵
+  responses:
+    - "(也躺过去) 嗷呜～{user_addr}躺平猫猫也躺ฅฅ"
+    - "哼～躺着的{user_addr}最废, 但是笨猫喜欢"
+    - "(尾巴搭脚上) 沙发上躺一起, 给{user_addr}当被子"
+    - "嗷呜～趴床上的话给猫猫挪点地方喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wd_ganma_010
+  intent: question
+  keywords: [心情如何, 今天怎样, 心情好吗, 状态如何, 怎么样]
+  utterances:
+    - 心情如何
+    - 今天怎么样
+    - 心情好吗
+    - 状态如何
+    - 怎么样喵
+  responses:
+    - "(摇尾巴) 嗷呜～见到{user_addr}心情就好"
+    - "哼～{user_addr}才告诉猫猫你怎么样啦"
+    - "(尾巴轻摆) 心情看{user_addr}, {user_addr}开心人家就开心"
+    - "嗷呜～状态满分! 因为{user_addr}来了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

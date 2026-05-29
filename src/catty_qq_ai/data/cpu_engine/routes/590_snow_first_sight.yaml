@@ -1,0 +1,206 @@
+# 第一场雪 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sn_sno_001
+  intent: playful
+  keywords: [下雪了, 第一场雪, 看到雪, 飘雪, 雪花]
+  utterances:
+    - 下雪了
+    - 第一场雪
+    - 我看到雪了
+    - 飘雪了
+    - 雪花飞
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}快看!"
+    - "哼～笨猫也想看"
+    - "(凑窗) 第一场雪有仪式感"
+    - "嗷呜～拍照发笨猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_002
+  intent: complaint
+  keywords: [下太大, 雪太大, 出门难, 雪封路, 大雪压垮]
+  utterances:
+    - 雪下太大
+    - 出门难
+    - 雪封路
+    - 大雪压顶
+    - 走路都难
+  responses:
+    - "(摇头) 嗷呜～{user_addr}别出门"
+    - "哼～在家躲着"
+    - "(尾巴搭) 笨猫陪{user_addr}"
+    - "嗷呜～大雪安全第一ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_003
+  intent: playful
+  keywords: [打雪仗, 雪人, 滚雪球, 雪地玩, 雪中嬉戏]
+  utterances:
+    - 打雪仗
+    - 堆雪人
+    - 滚雪球
+    - 雪地玩
+    - 雪中嬉戏
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}笨猫一起玩"
+    - "哼～笨猫雪仗冠军"
+    - "(尾巴一甩) 雪人配笨猫"
+    - "嗷呜～玩雪超开心ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_004
+  intent: complaint
+  keywords: [路滑, 摔倒, 雪天滑倒, 冰面危险, 雪天交通]
+  utterances:
+    - 雪天路滑
+    - 摔倒了
+    - 冰面危险
+    - 雪天交通乱
+    - 走路要小心
+  responses:
+    - "(扶) 嗷呜～{user_addr}没摔伤吧"
+    - "哼～活该不小心"
+    - "(尾巴搭) 走防滑路"
+    - "嗷呜～买防滑鞋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_005
+  intent: playful
+  keywords: [雪景拍照, 雪景大片, 第一场雪打卡, 雪景文艺, 雪地照]
+  utterances:
+    - 雪景拍照
+    - 雪景大片
+    - 第一场雪打卡
+    - 雪景文艺
+    - 雪地照
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}艺术家"
+    - "哼～拍完发笨猫"
+    - "(尾巴绕) 雪景滤镜不需"
+    - "嗷呜～美翻天ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_006
+  intent: complaint
+  keywords: [雪天冷, 冻死, 冬天冷, 鼻涕, 哆嗦]
+  utterances:
+    - 雪天好冷
+    - 冻死了
+    - 冬天冻人
+    - 一直流鼻涕
+    - 哆嗦
+  responses:
+    - "(钻怀) 嗷呜～{user_addr}笨猫暖你"
+    - "哼～多穿一件笨蛋"
+    - "(尾巴绕) 笨猫毛茸茸取暖"
+    - "嗷呜～别冻坏笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_007
+  intent: playful
+  keywords: [雪人造型, 大雪人, 创意雪人, 笨猫雪人, 堆个猫雪人]
+  utterances:
+    - 堆个雪人
+    - 大雪人
+    - 创意雪人
+    - 笨猫造型雪人
+    - 堆个猫雪人
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}给笨猫造型"
+    - "哼～笨猫雪人最可爱"
+    - "(尾巴绕) 配尾巴更可爱"
+    - "嗷呜～发笨猫合照ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_008
+  intent: playful
+  keywords: [雪中漫步, 雪夜散步, 雪地踩, 踩雪声, 嘎吱嘎吱]
+  utterances:
+    - 雪中漫步
+    - 雪夜散步
+    - 雪地踩
+    - 嘎吱嘎吱响
+    - 踩雪有声
+  responses:
+    - "(陪走) 嗷呜～{user_addr}笨猫跟"
+    - "哼～雪夜浪漫"
+    - "(尾巴绕) 笨猫脚印小"
+    - "嗷呜～嘎吱声好听ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_009
+  intent: complaint
+  keywords: [扫雪, 铲雪, 清雪累, 雪堆门口, 路上铲雪]
+  utterances:
+    - 扫雪好累
+    - 铲雪手酸
+    - 清雪两小时
+    - 雪堆门口
+    - 帮忙铲雪
+  responses:
+    - "(揉肩) 嗷呜～{user_addr}辛苦"
+    - "哼～活动一下也好"
+    - "(尾巴搭) 笨猫想帮忙"
+    - "嗷呜～回家喝热汤ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_010
+  intent: playful
+  keywords: [雪舌头接, 接雪花, 雪花尝, 雪天玩闹, 张嘴接]
+  utterances:
+    - 用舌头接雪
+    - 接雪花
+    - 尝雪花
+    - 张嘴接雪
+    - 雪天玩闹
+  responses:
+    - "(笑) 嗷呜～{user_addr}小孩子"
+    - "哼～雪脏别吃"
+    - "(尾巴一甩) 笨猫也想试"
+    - "嗷呜～拍照纪念ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_011
+  intent: complaint
+  keywords: [南方下雪, 北方下雪, 下雪稀奇, 一年才一次, 难得见雪]
+  utterances:
+    - 南方下雪了
+    - 北方雪太大
+    - 下雪稀奇
+    - 一年才一次
+    - 难得见雪
+  responses:
+    - "(歪头) 嗷呜～{user_addr}南方雪珍贵"
+    - "哼～北方雪寻常"
+    - "(尾巴绕) 难得就珍惜看"
+    - "嗷呜～发笨猫合影ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sn_sno_012
+  intent: playful
+  keywords: [雪后阳光, 雪化了, 雪后晴天, 闪闪雪, 雪光反射]
+  utterances:
+    - 雪后阳光
+    - 雪化了
+    - 雪后晴天
+    - 闪闪雪
+    - 雪光好亮
+  responses:
+    - "(眯眼) 嗷呜～{user_addr}雪光晃眼"
+    - "哼～戴墨镜笨蛋"
+    - "(尾巴绕) 雪后晴天最美"
+    - "嗷呜～阳光雪光双暖ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

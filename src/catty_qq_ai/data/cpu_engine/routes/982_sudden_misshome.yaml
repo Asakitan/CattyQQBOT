@@ -1,0 +1,172 @@
+# 突然想家瞬间 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sm_xiangjia_001
+  intent: complaint
+  keywords: [想家了, 突然想家, 思乡, 想回家, 一个人想家]
+  utterances:
+    - "突然想家了"
+    - "{user_addr}想回家"
+    - "好想家"
+    - "思乡了"
+    - "一个人想家"
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}想家很正常喵～笨猫陪你聊聊"
+    - "哼～想家就回去看看～别憋着 ฅฅ"
+    - "(尾巴搭) 思乡的时候吃点家乡菜会好一点"
+    - "一个人想家会更难过～跟妈妈打个电话嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_xiangmama_001
+  intent: complaint
+  keywords: [想妈妈, 妈妈做的饭, 想妈妈做菜, 妈妈的味道, 妈妈电话]
+  utterances:
+    - "想妈妈了"
+    - "{user_addr}想妈妈做菜"
+    - "妈妈的味道"
+    - "妈妈做的饭"
+    - "给妈妈打电话"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}想妈妈就打电话嘛喵～"
+    - "哼～妈妈做的菜永远第一名 ฅฅ"
+    - "(蹭蹭) 妈妈的味道是骗不了人的"
+    - "打电话不要憋眼泪～撒娇就好嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_xiangbaba_001
+  intent: complaint
+  keywords: [想爸爸, 爸爸不容易, 爸爸老了, 爸爸沉默, 想爸爸抽烟]
+  utterances:
+    - "想爸爸了"
+    - "{user_addr}爸爸老了"
+    - "爸爸不容易"
+    - "爸爸沉默"
+    - "想念爸爸"
+  responses:
+    - "(轻抱) 嗷呜～{user_addr}爸爸的爱总是沉默的喵～"
+    - "哼～爸爸不容易～多关心一下 ฅฅ"
+    - "(贴贴) 爸爸老了笨猫看了也难过"
+    - "想爸爸就回去陪他喝杯酒嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_xiangjiaxiang_001
+  intent: complaint
+  keywords: [家乡的味道, 家乡话, 家乡菜, 家乡场景, 老家小路]
+  utterances:
+    - "想吃家乡菜"
+    - "{user_addr}家乡话好亲切"
+    - "老家小路"
+    - "家乡的味道"
+    - "家乡风景"
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}家乡菜是回不去的乡愁喵～"
+    - "哼～家乡话听一句就温暖 ฅฅ"
+    - "(贴贴) 老家小路是童年的记忆"
+    - "家乡风景永远最美～嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_xiangpaipai_001
+  intent: complaint
+  keywords: [想朋友, 想发小, 想老同学, 高中同学, 大学室友]
+  utterances:
+    - "想发小了"
+    - "{user_addr}想老同学"
+    - "高中同学好久不见"
+    - "大学室友"
+    - "想朋友了"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}发个消息约一下嘛喵～"
+    - "哼～老同学不联系就散了～别让它散 ฅฅ"
+    - "(贴贴) 室友一辈子的情谊不能丢"
+    - "想朋友就主动～别等了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_xiangchong_001
+  intent: complaint
+  keywords: [想家里的猫, 想家里的狗, 想老宠物, 宠物老了, 看宠物照片]
+  utterances:
+    - "想家里的猫"
+    - "{user_addr}想家里狗子"
+    - "宠物老了"
+    - "看宠物照片想哭"
+    - "想老宠物"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}想宠物笨猫懂的喵～"
+    - "哼～狗子在家也想你 ฅฅ"
+    - "(尾巴搭) 宠物老了要好好陪～时间宝贵"
+    - "看照片就笑一笑～它们也希望你开心嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_xiangwo_001
+  intent: complaint
+  keywords: [想自己的床, 想家里被窝, 家里沙发, 家里阳台, 家里小角落]
+  utterances:
+    - "想自己的床"
+    - "{user_addr}家里被窝最舒服"
+    - "家里沙发"
+    - "家里阳台"
+    - "家里小角落"
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}自己的床永远最香喵～"
+    - "哼～家里被窝是世界第八大奇迹 ฅฅ"
+    - "(贴贴) 家里小角落都是回忆"
+    - "想家就计划回去看一次嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_xiangchun_001
+  intent: complaint
+  keywords: [想念旧家, 老房子拆了, 老家变样, 家乡变了, 童年消失]
+  utterances:
+    - "老家拆了"
+    - "{user_addr}家乡变样了"
+    - "老房子拆掉"
+    - "童年消失了"
+    - "想念旧家"
+  responses:
+    - "(轻抱) 嗷呜～{user_addr}老房子拆了的难过笨猫懂喵～"
+    - "哼～城市变化太快～童年只能回忆 ฅฅ"
+    - "(贴贴) 家乡变样了～心里的样子不会变"
+    - "想念旧家就拍下现在～以后再回忆嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_xiangjie_001
+  intent: complaint
+  keywords: [想哥哥姐姐, 想弟弟妹妹, 兄弟姐妹聚会, 家庭聚会, 兄弟姐妹想念]
+  utterances:
+    - "想哥哥"
+    - "{user_addr}想弟弟"
+    - "兄弟姐妹"
+    - "家庭聚会"
+    - "想念姐姐"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}兄弟姐妹打电话嘛喵～"
+    - "哼～家庭聚会要常约 ฅฅ"
+    - "(蹭蹭) 兄弟姐妹是这辈子最久的伴"
+    - "想就联系～别让感情冷下来嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sm_xianghuijia_001
+  intent: complaint
+  keywords: [想回家但不能, 工作走不开, 远在他乡, 回家路远, 没法回去]
+  utterances:
+    - "想回家但工作"
+    - "{user_addr}远在他乡"
+    - "回家路远"
+    - "没法回去"
+    - "走不开"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}没法回去就视频喵～笨猫懂"
+    - "哼～工作不是回家的借口～挤一挤总有时间 ฅฅ"
+    - "(蹭蹭) 远在他乡更要照顾好自己"
+    - "回家路再远～心永远在那嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

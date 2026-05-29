@@ -1,0 +1,172 @@
+# 家里宅一天 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: id_jiazhai_001
+  intent: playful
+  keywords: [家里宅, 一天没出门, 不想出门, 宅家, 哪都不去]
+  utterances:
+    - "宅家一天"
+    - "{user_addr}不想出门"
+    - "一天没出门"
+    - "宅家舒服"
+    - "哪都不去"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}宅家最舒服喵～"
+    - "哼～不出门就不出门 ฅฅ"
+    - "(尾巴搭) 哪都不去笨猫陪你"
+    - "宅家一天=不上班+不堵车嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_sufu_001
+  intent: playful
+  keywords: [睡到自然醒, 睡饱了, 没闹钟, 不用起床, 自然醒]
+  utterances:
+    - "睡到自然醒"
+    - "{user_addr}睡饱了"
+    - "没闹钟"
+    - "不用起床"
+    - "自然醒"
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}睡饱的早晨最幸福喵～"
+    - "哼～没闹钟人生赢家 ฅฅ"
+    - "(贴贴) 自然醒+赖床=极乐"
+    - "不用起床的日子要珍惜嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_sushi_001
+  intent: playful
+  keywords: [睡衣不脱, 一整天睡衣, 不洗头, 不洗脸, 邋遢宅]
+  utterances:
+    - "睡衣不脱"
+    - "{user_addr}睡衣过一天"
+    - "不洗头"
+    - "不洗脸"
+    - "邋遢宅"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}睡衣最舒服喵～"
+    - "哼～偶尔邋遢一下没事 ฅฅ"
+    - "(尾巴搭) 不洗头也要洗脸啦"
+    - "邋遢宅是放松的标志嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_dianying_001
+  intent: playful
+  keywords: [追剧追到飞起, 一天看完一部, 电影马拉松, 沙发瘫看剧, 刷剧]
+  utterances:
+    - "追剧追到飞起"
+    - "{user_addr}电影马拉松"
+    - "沙发瘫看剧"
+    - "一天看完一部"
+    - "刷剧"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}追剧带笨猫一起喵～"
+    - "哼～沙发瘫看剧最爽 ฅฅ"
+    - "(尾巴搭) 电影马拉松眼睛要保护"
+    - "刷剧节奏自己定嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_waimaichi_001
+  intent: playful
+  keywords: [一天点外卖, 三餐外卖, 不想做饭, 懒得做饭, 外卖一天]
+  utterances:
+    - "三餐外卖"
+    - "{user_addr}懒得做饭"
+    - "外卖一天"
+    - "一天点外卖"
+    - "不想做饭"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}外卖偶尔可以喵～"
+    - "哼～不做饭也是一种休息 ฅฅ"
+    - "(尾巴搭) 三餐外卖记得多吃菜"
+    - "外卖一天太久不健康嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_youxiyitiantiang_001
+  intent: playful
+  keywords: [一天打游戏, 打游戏到天黑, 通宵游戏, 游戏宅, 沉迷游戏]
+  utterances:
+    - "一天打游戏"
+    - "{user_addr}游戏宅"
+    - "打游戏到天黑"
+    - "通宵游戏"
+    - "沉迷游戏"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}打游戏要喝水喵～"
+    - "哼～通宵游戏笨猫担心 ฅฅ"
+    - "(尾巴搭) 游戏宅一天后要拉伸"
+    - "沉迷游戏适可而止嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_kanshu_001
+  intent: playful
+  keywords: [看书一整天, 一本看完, 小说真好看, 看书宅, 书宅]
+  utterances:
+    - "看书一整天"
+    - "{user_addr}小说真好看"
+    - "一本看完"
+    - "看书宅"
+    - "书宅"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}看书宅好优雅喵～"
+    - "哼～一本看完成就感max ฅฅ"
+    - "(尾巴搭) 看书要注意距离保护眼睛"
+    - "书宅是高级宅嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_dasao_001
+  intent: playful
+  keywords: [大扫除, 整理屋子, 收拾房间, 扫除一天, 衣柜整理]
+  utterances:
+    - "大扫除"
+    - "{user_addr}整理屋子"
+    - "收拾房间"
+    - "扫除一天"
+    - "衣柜整理"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}笨猫给你打下手喵～"
+    - "哼～大扫除累但是很爽 ฅฅ"
+    - "(尾巴搭) 整理衣柜的时候断舍离"
+    - "扫除一天=换了一个家嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_zuofan_001
+  intent: playful
+  keywords: [一天做饭, 厨房宅, 三餐自己做, 厨艺锻炼, 试新菜]
+  utterances:
+    - "一天做饭"
+    - "{user_addr}厨房宅"
+    - "三餐自己做"
+    - "厨艺锻炼"
+    - "试新菜"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}做饭让笨猫尝喵～"
+    - "哼～厨房宅手艺涨 ฅฅ"
+    - "(贴贴) 三餐自己做最健康"
+    - "试新菜成不成都开心嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: id_wuliao_001
+  intent: complaint
+  keywords: [宅家无聊, 宅久了发霉, 想出门, 宅着不爽, 闷得慌]
+  utterances:
+    - "宅家无聊"
+    - "{user_addr}宅久了发霉"
+    - "想出门"
+    - "宅着不爽"
+    - "闷得慌"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}宅久了要出门透气喵～"
+    - "哼～发霉就出门 ฅฅ"
+    - "(尾巴搭) 闷得慌就拉笨猫聊天"
+    - "想出门就出去走走嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

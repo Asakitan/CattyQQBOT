@@ -1,0 +1,189 @@
+# 连胜炫耀感 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wsb_lianshen_001
+  intent: playful
+  keywords: [连胜, 几连胜, 一直赢, 上分顺, 战绩好]
+  utterances:
+    - "连胜"
+    - "{user_addr}几连胜"
+    - "一直赢"
+    - "上分顺"
+    - "战绩好"
+  responses:
+    - "(扑) 嗷呜～{user_addr}连胜! 沾沾"
+    - "哼～战绩别太久, 翻车 ฅฅ"
+    - "(尾巴绕) 上分顺继续"
+    - "{user_addr}一直赢的人最帅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsb_diaodu_001
+  intent: complaint
+  keywords: [掉段, 掉星, 输了, 翻车, 连败]
+  utterances:
+    - "掉段"
+    - "{user_addr}掉星"
+    - "输了"
+    - "翻车"
+    - "连败"
+  responses:
+    - "(凑) 嗷呜～{user_addr}输了笨猫陪"
+    - "哼～翻车正常, 别砸键盘 ฅฅ"
+    - "(尾巴拍) 掉段先休息"
+    - "{user_addr}连败来撸猫, 转运"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsb_pojin_001
+  intent: playful
+  keywords: [上王者, 上钻, 上铂金, 上分了, 升段]
+  utterances:
+    - "上王者"
+    - "{user_addr}上钻"
+    - "上铂金"
+    - "上分了"
+    - "升段"
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}王者!"
+    - "哼～升段奖励抱抱 ฅฅ"
+    - "(凑) 钻石请客"
+    - "{user_addr}上分笨猫骄傲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsb_danwei_001
+  intent: playful
+  keywords: [carry, MVP, 五杀, 大乱斗, 操作秀]
+  utterances:
+    - "carry"
+    - "{user_addr}MVP"
+    - "五杀"
+    - "大乱斗"
+    - "操作秀"
+  responses:
+    - "(扑) 嗷呜～{user_addr}MVP! 神操作"
+    - "哼～五杀好厉害 ฅฅ"
+    - "(尾巴绕) carry全场带笨猫"
+    - "{user_addr}操作秀, 猫猫眼花"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsb_kuaizan_001
+  intent: playful
+  keywords: [夸我帅, 夸我猛, 队友夸, 全场最佳, 高光]
+  utterances:
+    - "夸我帅"
+    - "{user_addr}夸我猛"
+    - "队友夸"
+    - "全场最佳"
+    - "高光"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}帅是真的"
+    - "哼～队友夸夸笨猫不夸 ฅฅ"
+    - "(凑) 高光时刻拍下来"
+    - "{user_addr}全场最佳奖励"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsb_yundang_001
+  intent: complaint
+  keywords: [运营, 喷队友, 坑队友, 摆烂队友, 演员]
+  utterances:
+    - "{user_addr}喷队友"
+    - "坑队友"
+    - "摆烂队友"
+    - "演员"
+    - "运营差"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}别喷队友"
+    - "哼～演员举报 ฅฅ"
+    - "(凑) 坑队友气死人"
+    - "{user_addr}运营差靠笨猫加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsb_neg_001
+  intent: complaint
+  keywords: [代打, 上分难, 单排炸, 双排, 五黑]
+  utterances:
+    - "{user_addr}代打"
+    - "上分难"
+    - "单排炸"
+    - "双排"
+    - "五黑"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}双排带笨猫"
+    - "哼～代打作弊 ฅฅ"
+    - "(凑) 单排炸来组队"
+    - "{user_addr}五黑笨猫加入"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsb_juedi_001
+  intent: playful
+  keywords: [极限翻盘, 残血逆袭, 一血, 偷家, 帅气走位]
+  utterances:
+    - "极限翻盘"
+    - "{user_addr}残血逆袭"
+    - "一血"
+    - "偷家"
+    - "帅气走位"
+  responses:
+    - "(扑) 嗷呜～{user_addr}逆袭! 神"
+    - "哼～偷家狡猾笨猫服 ฅฅ"
+    - "(凑) 走位帅就奖励"
+    - "{user_addr}一血手感好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsb_xiufu_001
+  intent: playful
+  keywords: [秀操作, 反杀, 0换4, 残血反杀, 1换3]
+  utterances:
+    - "秀操作"
+    - "{user_addr}反杀"
+    - "0换4"
+    - "残血反杀"
+    - "1换3"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}反杀帅!"
+    - "哼～0换4牛逼 ฅฅ"
+    - "(凑) 残血反杀心脏停"
+    - "{user_addr}秀操作录像保留"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsb_zhanji_001
+  intent: playful
+  keywords: [战绩页面, KDA高, 输出爆炸, 胜率高, 数据漂亮]
+  utterances:
+    - "战绩页面"
+    - "{user_addr}KDA高"
+    - "输出爆炸"
+    - "胜率高"
+    - "数据漂亮"
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}KDA爆炸"
+    - "哼～胜率高继续保持 ฅฅ"
+    - "(凑) 数据漂亮值得发圈"
+    - "{user_addr}输出爆炸笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wsb_chuixu_001
+  intent: playful
+  keywords: [吹自己, 我就是, 谁能比我, 我天下, 自信满满]
+  utterances:
+    - "吹自己"
+    - "{user_addr}我就是"
+    - "谁能比我"
+    - "我天下"
+    - "自信满满"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}吹一下可以"
+    - "哼～天下? 笨猫天下 ฅฅ"
+    - "(凑) 自信好, 但别飘"
+    - "{user_addr}没人比你, 我同意"
+  cooldown_seconds: 60
+  weight: 1.0

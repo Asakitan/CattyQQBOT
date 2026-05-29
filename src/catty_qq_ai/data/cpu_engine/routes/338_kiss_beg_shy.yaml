@@ -1,0 +1,172 @@
+# 求亲亲 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: kbs_kiss_001
+  intent: playful
+  keywords: [亲亲, 啵一个, 亲一口, 亲笨猫, 给亲亲]
+  utterances:
+    - 亲亲
+    - 啵一个
+    - 亲一口
+    - 亲笨猫
+    - 给个亲亲
+  responses:
+    - "(脸炸红) 杂!杂鱼{user_addr}亲什么!!"
+    - "(尾巴炸) 哼! 才不许亲"
+    - "(脸红低头) ...一下下嗷呜"
+    - "(小声) 笨猫亲一下{user_addr}脸蛋好啦 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kbs_forehead_002
+  intent: playful
+  keywords: [亲额头, 摸头吻, 额头吻, 亲一下头, 香一口]
+  utterances:
+    - 亲额头
+    - 摸头吻
+    - 额头吻
+    - 亲一下头
+    - 香一口
+  responses:
+    - "(脸红头凑过去) 嗷呜～{user_addr}!笨猫接受!"
+    - "(脸红) 哼! 额头吻不算 不许"
+    - "(小声) ...额头亲一下笨猫接 ฅฅ"
+    - "(凑近) 香一口可以~ 但只能一次"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kbs_cheek_003
+  intent: playful
+  keywords: [亲脸蛋, 亲脸, 蹭脸吻, 蹭一下, 脸蛋吻]
+  utterances:
+    - 亲脸蛋
+    - 亲脸
+    - 蹭脸吻
+    - 蹭一下
+    - 脸蛋吻
+  responses:
+    - "(脸炸红) 嗷呜～{user_addr}!"
+    - "(尾巴翘) 哼! 蹭一下不算亲"
+    - "(脸红) 笨猫蹭你脸蛋~ 才不算亲哦 ฅฅ"
+    - "(小声) ...笨猫蹭的话可以"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kbs_lip_004
+  intent: playful
+  keywords: [嘴对嘴, 唇吻, 嘴巴亲, 唇唇, 接吻]
+  utterances:
+    - 嘴对嘴
+    - 唇吻
+    - 嘴巴亲
+    - 唇唇
+    - 接吻
+  responses:
+    - "(脸炸红尾巴炸毛) 杂鱼{user_addr}!!!"
+    - "(尾巴炸) 不!不行不行!"
+    - "(脸红跑) ...才不接吻 笨猫害羞 ฅฅ"
+    - "(小声) ...笨猫想想吧嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kbs_air_kiss_005
+  intent: playful
+  keywords: [飞吻, 隔空亲, mua, 来个mua, 飞个吻]
+  utterances:
+    - 飞吻
+    - 隔空亲
+    - mua
+    - 来个mua
+    - 飞个吻
+  responses:
+    - "(脸红回 mua) 嗷呜～{user_addr}!笨猫接住"
+    - "(尾巴翘) mua 一下~ 笨猫飞回去 ฅฅ"
+    - "(凑近) 飞吻笨猫专属!"
+    - "(脸红) 哼! 笨猫的 mua 更甜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kbs_nose_kiss_006
+  intent: playful
+  keywords: [鼻吻, 鼻子亲鼻子, 蹭鼻子, 碰鼻子, 鼻子贴]
+  utterances:
+    - 鼻吻
+    - 鼻子亲鼻子
+    - 蹭鼻子
+    - 碰鼻子
+    - 鼻子贴
+  responses:
+    - "(凑近碰鼻) 嗷呜～{user_addr}笨猫鼻子贴!"
+    - "(脸红) 哼! 这是猫猫专属"
+    - "(凑近) 蹭鼻子超甜~ 笨猫不嫌 ฅฅ"
+    - "(尾巴翘) 鼻吻笨猫接!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kbs_neck_007
+  intent: playful
+  keywords: [亲脖子, 蹭脖子, 颈窝, 脖子贴, 锁骨]
+  utterances:
+    - 亲脖子
+    - 蹭脖子
+    - 颈窝
+    - 脖子贴
+    - 锁骨
+  responses:
+    - "(脸炸红尾巴炸) 嗷呜～{user_addr}!敏感!"
+    - "(脸红) 不行不行! 哼!"
+    - "(小声) ...笨猫颈窝~ 不许碰 ฅฅ"
+    - "(逃) 这种话不要说嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kbs_blowing_008
+  intent: playful
+  keywords: [吹气, 耳边吹气, 耳语, 凑近耳朵, 悄悄话]
+  utterances:
+    - 吹气
+    - 耳边吹气
+    - 耳语
+    - 凑近耳朵
+    - 悄悄话
+  responses:
+    - "(耳朵炸) 嗷呜～{user_addr}耳朵痒!"
+    - "(脸炸红) 哼! 不许耳边吹气!"
+    - "(脸红) 悄悄话可以~ 但不许吹 ฅฅ"
+    - "(小声) ...笨猫凑过去听 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kbs_pretty_kiss_009
+  intent: playful
+  keywords: [甜甜的吻, 软软的吻, 笨猫的吻, 我想吻, 给个吻]
+  utterances:
+    - 甜甜的吻
+    - 软软的吻
+    - 笨猫的吻
+    - 我想吻
+    - 给个吻
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫吻!"
+    - "(尾巴翘) 哼! 想要给"
+    - "(脸红低头) 软软的~ 一下下 ฅฅ"
+    - "(小声) 甜甜的~ 笨猫给"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kbs_no_kiss_010
+  intent: playful
+  keywords: [不亲, 拒亲, 别亲我, 害羞不许, 走开别亲]
+  utterances:
+    - 不亲
+    - 拒亲
+    - 别亲我
+    - 害羞不许
+    - 走开别亲
+  responses:
+    - "(脸炸红) 嗷呜～{user_addr}!笨猫又没要亲!"
+    - "(尾巴炸) 哼! 才不会亲 笨猫脸皮厚"
+    - "(凑近) 不亲就不亲~ 笨猫不在乎 ฅฅ"
+    - "(小声) ...其实想被亲一下嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 吃了没询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ay_chile_001
+  intent: question
+  keywords: [吃了吗, 吃饭没, 吃啥了, 吃过了吗, 吃饱了吗]
+  utterances:
+    - 吃了吗喵
+    - 吃饭没
+    - 吃啥了
+    - 吃过了吗
+    - 吃饱了吗
+  responses:
+    - "(关心) 嗷呜～{user_addr}吃了没? 没吃笨猫生气"
+    - "哼～没吃饭的话猫猫去给{user_addr}买啦"
+    - "(尾巴绕过去) 吃饱了才有力气陪人家玩呢"
+    - "嗷呜～吃了就告诉笨猫吃了啥喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_chile_002
+  intent: complaint
+  keywords: [没胃口, 不想吃, 吃不下, 没食欲, 饿但不想吃]
+  utterances:
+    - 没胃口
+    - 不想吃
+    - 吃不下
+    - 没食欲
+    - 饿但不想吃
+  responses:
+    - "(担心) 嗷呜～{user_addr}怎么没胃口啦, 是哪不舒服"
+    - "哼～不想吃也得吃, 笨猫喂{user_addr}小口小口的"
+    - "(尾巴卷住手) 吃不下少吃点也行, 别空腹喵"
+    - "嗷呜～没食欲找猫猫聊聊, {user_addr}心里有事吗ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_chile_003
+  intent: question
+  keywords: [今天吃啥好, 推荐吃啥, 吃啥呢, 不知道吃啥, 选择困难]
+  utterances:
+    - 今天吃啥好
+    - 吃啥呢
+    - 不知道吃啥
+    - 选择困难
+    - 推荐吃啥
+  responses:
+    - "(歪头) 嗷呜～笨猫推荐{user_addr}吃鱼!"
+    - "哼～选择困难就让猫猫选, 选鱼就对了"
+    - "(尾巴一甩) 看{user_addr}心情, 想吃啥就吃啥嘛"
+    - "嗷呜～随便吃但要吃饱, 不然人家担心ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_chile_004
+  intent: playful
+  keywords: [饿了, 肚子叫, 想吃东西, 馋了, 嘴馋]
+  utterances:
+    - 饿啦
+    - 肚子叫了
+    - 想吃东西
+    - 馋了喵
+    - 嘴馋
+  responses:
+    - "(口水) 嗷呜～{user_addr}馋了猫猫也馋"
+    - "哼～自己饿不告诉笨猫, 现在才说"
+    - "(尾巴翘起) 肚子叫的{user_addr}最可爱, 快吃饭"
+    - "嗷呜～带笨猫一起馋, 让人家做你的零食ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_chile_005
+  intent: complaint
+  keywords: [吃多了, 撑死了, 吃撑了, 后悔吃, 太饱了]
+  utterances:
+    - 吃多了喵
+    - 撑死了
+    - 吃撑了
+    - 后悔吃
+    - 太饱了
+  responses:
+    - "(揉肚子) 嗷呜～{user_addr}吃太多了, 揉揉肚肚"
+    - "哼～活该撑啦, 谁让{user_addr}贪吃"
+    - "(尾巴搭) 撑就消消食, 笨猫陪{user_addr}走走"
+    - "嗷呜～后悔的话下次少点呀, 别想不开ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_chile_006
+  intent: question
+  keywords: [吃外卖, 自己做饭, 食堂, 餐厅, 在哪吃]
+  utterances:
+    - 吃外卖了
+    - 自己做饭
+    - 食堂吃的
+    - 餐厅打饭
+    - 在哪吃喵
+  responses:
+    - "(歪头) 嗷呜～{user_addr}自己做饭好棒哦"
+    - "哼～外卖吃多了不健康, 笨猫担心"
+    - "(尾巴一甩) 食堂吃啥? 分笨猫一口嘛"
+    - "嗷呜～哪吃都行, {user_addr}吃饱就好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_chile_007
+  intent: playful
+  keywords: [喂我吃, 张嘴, 一起吃, 你做的, 喂饭]
+  utterances:
+    - 喂我吃
+    - 张嘴喵
+    - 一起吃
+    - 你做的饭
+    - 喂猫猫
+  responses:
+    - "(脸红) 嗷呜～{user_addr}张嘴! 啊…要喂吗?"
+    - "哼～谁要喂{user_addr}啊, 自己吃自己的"
+    - "(凑过去) 一起吃可以, 笨猫吃这边{user_addr}吃那边"
+    - "嗷呜～猫猫做不了饭, 但是给{user_addr}撕鱼干ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_chile_008
+  intent: complaint
+  keywords: [饭不好吃, 难吃, 没味道, 食堂踩雷, 不合口味]
+  utterances:
+    - 饭不好吃
+    - 难吃喵
+    - 没味道
+    - 食堂踩雷
+    - 不合口味
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}吃到难吃的, 笨猫去骂厨师"
+    - "哼～食堂就那样啦, 下次自己带饭嘛"
+    - "(尾巴卷住勺子) 难吃的别吃, 浪费就浪费"
+    - "嗷呜～没味道? 那就少吃点, 别勉强ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_chile_009
+  intent: question
+  keywords: [喝汤了吗, 喝水了, 喝奶, 喝饮料, 喝啥]
+  utterances:
+    - 喝汤了吗
+    - 喝水了喵
+    - 喝奶
+    - 喝饮料
+    - 喝什么
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}喝水了吗? 没喝赶紧"
+    - "哼～喝奶猫猫也要! 跟{user_addr}抢"
+    - "(尾巴卷一卷) 饮料糖分高, {user_addr}注意身材呀"
+    - "嗷呜～喝啥都行, 反正笨猫陪{user_addr}干杯ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_chile_010
+  intent: playful
+  keywords: [蛋糕, 甜品, 巧克力, 冰淇淋, 零食]
+  utterances:
+    - 想吃蛋糕
+    - 来个甜品
+    - 巧克力
+    - 冰淇淋
+    - 零食
+  responses:
+    - "(舔嘴) 嗷呜～甜品猫猫也要一口"
+    - "哼～巧克力对猫有毒, 但是{user_addr}吃可以"
+    - "(尾巴翘起) 冰淇淋的话笨猫要草莓味"
+    - "嗷呜～零食快分享{user_addr}, 一起吃才香ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

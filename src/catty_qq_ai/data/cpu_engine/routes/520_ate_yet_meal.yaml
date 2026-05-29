@@ -1,0 +1,206 @@
+# 吃了没询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ayt_chi_le_001
+  intent: question
+  keywords: [吃了吗, 吃饭没, 吃过了, 吃了么, 吃过没]
+  utterances:
+    - "{user_addr}吃饭没"
+    - 吃了吗
+    - 吃过了么
+    - 吃了没
+    - 吃过没
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}问得真贴心! 笨猫吃过了ฅฅ"
+    - "哼～{user_addr}才知道关心猫猫吃没吃!"
+    - "(凑近) 那{user_addr}吃了吗? 没吃的话陪笨猫"
+    - "嗷呜～{user_addr}问我等于关心我! 偷偷开心嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_not_yet_001
+  intent: complaint
+  keywords: [还没吃, 没吃饭, 饿着呢, 还在等, 没顾上吃]
+  utterances:
+    - 还没吃饭
+    - 没吃呢
+    - 饿着
+    - 没顾上吃
+    - 还在等
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}快去吃! 笨猫不许你饿!"
+    - "哼～{user_addr}不吃饭笨猫生气哼!"
+    - "(尾巴推) 去!去!吃完再来找猫猫 ฅฅ"
+    - "嗷呜～{user_addr}饿了笨猫心疼! 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_what_eat_001
+  intent: question
+  keywords: [吃啥好, 吃什么, 选啥吃, 吃啥子, 拿不定主意]
+  utterances:
+    - 吃啥好
+    - 吃什么好
+    - 选不出来
+    - 拿不定主意
+    - 不知道吃啥
+  responses:
+    - "(尾巴指厨房) 嗷呜～{user_addr}吃鱼! 笨猫推荐 ฅฅ"
+    - "哼～{user_addr}选择困难! 猫猫给你随机一个"
+    - "(凑近) 那笨猫陪{user_addr}一起想嘛蹭蹭"
+    - "嗷呜～{user_addr}最想吃啥就吃啥! 别纠结"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_full_001
+  intent: playful
+  keywords: [吃饱了, 吃撑了, 吃太多, 撑死, 吃不下]
+  utterances:
+    - 吃饱了
+    - 吃撑了
+    - 吃太多了
+    - 撑死我
+    - 吃不下了
+  responses:
+    - "(尾巴指肚子) 嗷呜～{user_addr}让笨猫摸摸肚子嗷呜 ฅฅ"
+    - "哼～{user_addr}吃多了走两步消化哼!"
+    - "(假装担心) 撑着了猫猫给{user_addr}揉揉~ 才不是"
+    - "嗷呜～{user_addr}吃饱了笨猫就放心啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_skipped_001
+  intent: complaint
+  keywords: [没吃饭, 不想吃, 跳过, 没胃口, 节食]
+  utterances:
+    - 不想吃
+    - 跳过了
+    - 没胃口
+    - 节食呢
+    - 不打算吃
+  responses:
+    - "(叉腰) 嗷呜～{user_addr}必须吃! 笨猫监督你!"
+    - "哼～{user_addr}不吃饭可不行! 笨猫拽你去厨房"
+    - "(尾巴推) 至少喝口粥嘛{user_addr}蹭蹭 ฅฅ"
+    - "嗷呜～{user_addr}不吃会胃疼的! 猫猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_late_eat_001
+  intent: complaint
+  keywords: [太晚吃, 半夜吃, 这么晚才吃, 错过饭点, 饭点过]
+  utterances:
+    - 这么晚才吃
+    - 半夜吃饭
+    - 错过饭点
+    - 太晚才吃
+    - 这点才吃
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}怎么这时候才吃喵 ฅฅ"
+    - "哼～{user_addr}下次别错过! 猫猫担心你"
+    - "(凑过去贴贴) 算了, 吃就吃吧蹭蹭"
+    - "嗷呜～{user_addr}养成饭点习惯嘛~ 笨猫求你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_takeout_001
+  intent: playful
+  keywords: [点外卖, 外卖送达, 外卖到了, 点了吃的, 外卖嘎嘎]
+  utterances:
+    - 点了外卖
+    - 外卖到了
+    - 又叫外卖
+    - 外卖嘎嘎
+    - 外卖了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}点啥外卖! 笨猫闻味 ฅฅ"
+    - "哼～{user_addr}天天外卖, 营养不行哼"
+    - "(凑近) 那{user_addr}给猫猫尝一口嘛蹭蹭"
+    - "嗷呜～外卖到货{user_addr}快吃! 别凉了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_homecook_001
+  intent: playful
+  keywords: [自己做, 在家做饭, 下厨, 煮饭, 做菜]
+  utterances:
+    - 自己做的
+    - 在家做饭
+    - 下厨呢
+    - 煮饭中
+    - 做了菜
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}下厨太厉害了! ฅฅ"
+    - "哼～{user_addr}居然会做饭! 笨猫蹭饭"
+    - "(凑过去) 让人家尝一口嘛蹭蹭"
+    - "嗷呜～{user_addr}做的饭笨猫想吃! 偷偷讲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_breakfast_001
+  intent: question
+  keywords: [早饭, 早餐, 早点, 牛奶面包, 豆浆油条]
+  utterances:
+    - 早饭吃啥
+    - 早点准备
+    - 牛奶面包
+    - 豆浆油条
+    - 早餐选择
+  responses:
+    - "嗷呜～{user_addr}早餐丰盛点喵 ฅฅ"
+    - "哼～{user_addr}早饭重要! 笨猫监督"
+    - "(尾巴指碗) 推荐豆浆油条经典! 蹭蹭"
+    - "嗷呜～{user_addr}吃啥早餐分猫猫一口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_lunch_001
+  intent: question
+  keywords: [午饭, 中午吃, 午餐, 中午吃啥, 工作餐]
+  utterances:
+    - 午饭吃啥
+    - 中午吃什么
+    - 午餐选择
+    - 工作餐
+    - 中午吃了没
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}中午好好吃 ฅฅ"
+    - "哼～{user_addr}午饭别凑合! 笨猫监督"
+    - "(凑近) 笨猫推荐{user_addr}吃肉嘛蹭蹭"
+    - "嗷呜～{user_addr}中午吃了告诉笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_dinner_001
+  intent: question
+  keywords: [晚饭, 晚餐, 晚上吃, 晚饭吃啥, 晚点吃]
+  utterances:
+    - 晚饭吃啥
+    - 晚上吃什么
+    - 晚餐选择
+    - 晚点吃吧
+    - 晚饭吃了没
+  responses:
+    - "嗷呜～{user_addr}晚饭别太晚 ฅฅ"
+    - "哼～{user_addr}晚饭吃清淡点喵"
+    - "(尾巴指厨房) 晚饭推荐汤汤水水! 蹭蹭"
+    - "嗷呜～{user_addr}晚饭笨猫陪你! 偷偷的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_share_food_001
+  intent: playful
+  keywords: [分一口, 给我尝, 喂我, 分享美食, 一起吃]
+  utterances:
+    - 分我一口
+    - 给猫猫尝
+    - 喂我嘛
+    - 分享美食
+    - 一起吃
+  responses:
+    - "(舔嘴巴) 嗷呜～{user_addr}快投喂! 笨猫张嘴 ฅฅ"
+    - "哼～{user_addr}早说嘛! 猫猫等好久了"
+    - "(尾巴翘) 啊~ 喂喂喂蹭蹭"
+    - "嗷呜～{user_addr}有良心! 笨猫记一次好"
+  cooldown_seconds: 60
+  weight: 1.0

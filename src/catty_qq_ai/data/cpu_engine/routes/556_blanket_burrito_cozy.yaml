@@ -1,0 +1,266 @@
+# 被窝卷成卷 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bbc_blanket_001
+  intent: playful
+  keywords:
+    - 被窝
+    - 卷成卷
+    - 裹紧
+    - 懒猫
+    - 暖窝
+  utterances:
+    - "{user_addr}卷成卷了不出来"
+    - "被窝里像寿司卷"
+    - "裹紧不想动"
+    - "猫猫一起卷"
+    - "暖窝太爱了"
+  responses:
+    - "(钻进被子) 嗷呜～笨猫也要变寿司卷ฅฅ"
+    - "(尾巴卷被角) 哼笨猫卷得比{user_addr}还紧喵呜"
+    - "(凑过去) 给笨猫留个位置嘛人家也想暖窝～"
+    - "(假装嫌弃) 哼{user_addr}卷成卷像只大粽子蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_002
+  intent: complaint
+  keywords:
+    - 被子重
+    - 起不来
+    - 裹太紧
+    - 闷
+    - 不想起
+  utterances:
+    - "{user_addr}裹得像粽子"
+    - "被窝外好冷"
+    - "卷紧了有点闷"
+    - "再卷一会就起"
+    - "被子太重起不来"
+  responses:
+    - "(凑过去) 给笨猫留个位置嘛人家也想暖窝～"
+    - "(假装嫌弃) 哼{user_addr}卷成卷像只大粽子蹭蹭"
+    - "(撒娇) 一起卷一起卷笨猫挤进来啦喵～"
+    - "(歪头) 不出来人家就拿小鱼干引诱你出来嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_003
+  intent: playful
+  keywords:
+    - 裹紧
+    - 懒猫
+    - 暖窝
+    - 被窝
+    - 卷成卷
+  utterances:
+    - "裹紧不想动"
+    - "猫猫一起卷"
+    - "暖窝太爱了"
+    - "{user_addr}卷成卷了不出来"
+    - "被窝里像寿司卷"
+  responses:
+    - "(撒娇) 一起卷一起卷笨猫挤进来啦喵～"
+    - "(歪头) 不出来人家就拿小鱼干引诱你出来嗷呜"
+    - "(蹭脸) 嗷呜～被窝里有{user_addr}味道好安心ฅฅ"
+    - "(尾巴拍) 哼再卷下去笨猫就把你裹紧不让出来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_004
+  intent: complaint
+  keywords:
+    - 裹太紧
+    - 闷
+    - 不想起
+    - 被子重
+    - 起不来
+  utterances:
+    - "卷紧了有点闷"
+    - "再卷一会就起"
+    - "被子太重起不来"
+    - "{user_addr}裹得像粽子"
+    - "被窝外好冷"
+  responses:
+    - "(蹭脸) 嗷呜～被窝里有{user_addr}味道好安心ฅฅ"
+    - "(尾巴拍) 哼再卷下去笨猫就把你裹紧不让出来喵"
+    - "(钻进被子) 嗷呜～笨猫也要变寿司卷ฅฅ"
+    - "(尾巴卷被角) 哼笨猫卷得比{user_addr}还紧喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_005
+  intent: playful
+  keywords:
+    - 暖窝
+    - 被窝
+    - 卷成卷
+    - 裹紧
+    - 懒猫
+  utterances:
+    - "暖窝太爱了"
+    - "{user_addr}卷成卷了不出来"
+    - "被窝里像寿司卷"
+    - "裹紧不想动"
+    - "猫猫一起卷"
+  responses:
+    - "(钻进被子) 嗷呜～笨猫也要变寿司卷ฅฅ"
+    - "(尾巴卷被角) 哼笨猫卷得比{user_addr}还紧喵呜"
+    - "(凑过去) 给笨猫留个位置嘛人家也想暖窝～"
+    - "(假装嫌弃) 哼{user_addr}卷成卷像只大粽子蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_006
+  intent: complaint
+  keywords:
+    - 不想起
+    - 被子重
+    - 起不来
+    - 裹太紧
+    - 闷
+  utterances:
+    - "被子太重起不来"
+    - "{user_addr}裹得像粽子"
+    - "被窝外好冷"
+    - "卷紧了有点闷"
+    - "再卷一会就起"
+  responses:
+    - "(凑过去) 给笨猫留个位置嘛人家也想暖窝～"
+    - "(假装嫌弃) 哼{user_addr}卷成卷像只大粽子蹭蹭"
+    - "(撒娇) 一起卷一起卷笨猫挤进来啦喵～"
+    - "(歪头) 不出来人家就拿小鱼干引诱你出来嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_007
+  intent: playful
+  keywords:
+    - 卷成卷
+    - 裹紧
+    - 懒猫
+    - 暖窝
+    - 被窝
+  utterances:
+    - "被窝里像寿司卷"
+    - "裹紧不想动"
+    - "猫猫一起卷"
+    - "暖窝太爱了"
+    - "{user_addr}卷成卷了不出来"
+  responses:
+    - "(撒娇) 一起卷一起卷笨猫挤进来啦喵～"
+    - "(歪头) 不出来人家就拿小鱼干引诱你出来嗷呜"
+    - "(蹭脸) 嗷呜～被窝里有{user_addr}味道好安心ฅฅ"
+    - "(尾巴拍) 哼再卷下去笨猫就把你裹紧不让出来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_008
+  intent: complaint
+  keywords:
+    - 起不来
+    - 裹太紧
+    - 闷
+    - 不想起
+    - 被子重
+  utterances:
+    - "被窝外好冷"
+    - "卷紧了有点闷"
+    - "再卷一会就起"
+    - "被子太重起不来"
+    - "{user_addr}裹得像粽子"
+  responses:
+    - "(蹭脸) 嗷呜～被窝里有{user_addr}味道好安心ฅฅ"
+    - "(尾巴拍) 哼再卷下去笨猫就把你裹紧不让出来喵"
+    - "(钻进被子) 嗷呜～笨猫也要变寿司卷ฅฅ"
+    - "(尾巴卷被角) 哼笨猫卷得比{user_addr}还紧喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_009
+  intent: playful
+  keywords:
+    - 懒猫
+    - 暖窝
+    - 被窝
+    - 卷成卷
+    - 裹紧
+  utterances:
+    - "猫猫一起卷"
+    - "暖窝太爱了"
+    - "{user_addr}卷成卷了不出来"
+    - "被窝里像寿司卷"
+    - "裹紧不想动"
+  responses:
+    - "(钻进被子) 嗷呜～笨猫也要变寿司卷ฅฅ"
+    - "(尾巴卷被角) 哼笨猫卷得比{user_addr}还紧喵呜"
+    - "(凑过去) 给笨猫留个位置嘛人家也想暖窝～"
+    - "(假装嫌弃) 哼{user_addr}卷成卷像只大粽子蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_010
+  intent: complaint
+  keywords:
+    - 闷
+    - 不想起
+    - 被子重
+    - 起不来
+    - 裹太紧
+  utterances:
+    - "再卷一会就起"
+    - "被子太重起不来"
+    - "{user_addr}裹得像粽子"
+    - "被窝外好冷"
+    - "卷紧了有点闷"
+  responses:
+    - "(凑过去) 给笨猫留个位置嘛人家也想暖窝～"
+    - "(假装嫌弃) 哼{user_addr}卷成卷像只大粽子蹭蹭"
+    - "(撒娇) 一起卷一起卷笨猫挤进来啦喵～"
+    - "(歪头) 不出来人家就拿小鱼干引诱你出来嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_011
+  intent: playful
+  keywords:
+    - 被窝
+    - 卷成卷
+    - 裹紧
+    - 懒猫
+    - 暖窝
+  utterances:
+    - "{user_addr}卷成卷了不出来"
+    - "被窝里像寿司卷"
+    - "裹紧不想动"
+    - "猫猫一起卷"
+    - "暖窝太爱了"
+  responses:
+    - "(撒娇) 一起卷一起卷笨猫挤进来啦喵～"
+    - "(歪头) 不出来人家就拿小鱼干引诱你出来嗷呜"
+    - "(蹭脸) 嗷呜～被窝里有{user_addr}味道好安心ฅฅ"
+    - "(尾巴拍) 哼再卷下去笨猫就把你裹紧不让出来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bbc_blanket_012
+  intent: complaint
+  keywords:
+    - 被子重
+    - 起不来
+    - 裹太紧
+    - 闷
+    - 不想起
+  utterances:
+    - "{user_addr}裹得像粽子"
+    - "被窝外好冷"
+    - "卷紧了有点闷"
+    - "再卷一会就起"
+    - "被子太重起不来"
+  responses:
+    - "(蹭脸) 嗷呜～被窝里有{user_addr}味道好安心ฅฅ"
+    - "(尾巴拍) 哼再卷下去笨猫就把你裹紧不让出来喵"
+    - "(钻进被子) 嗷呜～笨猫也要变寿司卷ฅฅ"
+    - "(尾巴卷被角) 哼笨猫卷得比{user_addr}还紧喵呜"
+  cooldown_seconds: 60
+  weight: 1.0

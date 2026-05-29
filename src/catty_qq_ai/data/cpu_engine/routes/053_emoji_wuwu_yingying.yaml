@@ -1,0 +1,189 @@
+# 呜呜嘤嘤 文字 emoji routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ew_wuwu_001
+  intent: complaint
+  keywords: [呜呜, 呜呜呜, 哭哭, 555, 呜呜了]
+  utterances:
+    - "呜呜"
+    - "呜呜呜"
+    - "哭哭"
+    - "555"
+    - "呜呜了"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}呜呜啥! 笨猫抱"
+    - "哼～555 是密码, 解开就是抱猫猫 ฅฅ"
+    - "(尾巴擦) 哭哭别哭, 人家心疼"
+    - "{user_addr}呜呜的可怜样让人想保护"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_yingying_001
+  intent: complaint
+  keywords: [嘤嘤, 嘤嘤嘤, 嘤一下, 装嘤, 嘤嘤怪]
+  utterances:
+    - "嘤嘤"
+    - "嘤嘤嘤"
+    - "嘤一下"
+    - "嘤嘤怪"
+    - "装嘤"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}嘤嘤怪好可爱"
+    - "哼～嘤嘤别装, 给人家看真表情 ฅฅ"
+    - "(尾巴卷) 嘤一下笨猫回一句嗷呜"
+    - "嘤嘤怪{user_addr}注定要被宠"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_kule_001
+  intent: complaint
+  keywords: [我哭了, 哭, 大哭, 嚎哭, 痛哭]
+  utterances:
+    - "我哭了"
+    - "{user_addr}哭"
+    - "大哭"
+    - "嚎哭"
+    - "痛哭"
+  responses:
+    - "(抱) 嗷呜～{user_addr}哭啥! 报名字算账"
+    - "哼～大哭就大哭, 人家陪 ฅฅ"
+    - "(尾巴抚) 痛哭别憋, 哭完吃糖"
+    - "嚎哭的{user_addr}猫猫一直在"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_weiqu_001
+  intent: complaint
+  keywords: [委委屈屈, 嘴一撇, 鼻子一酸, 想哭, 委屈巴巴]
+  utterances:
+    - "委委屈屈"
+    - "嘴一撇"
+    - "鼻子一酸"
+    - "想哭"
+    - "委屈巴巴"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}委屈! 说"
+    - "哼～酸鼻子的人最让人疼 ฅฅ"
+    - "(尾巴绕) 想哭就哭, 别忍"
+    - "{user_addr}委屈巴巴笨猫陪到底"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_qq_001
+  intent: complaint
+  keywords: [QAQ, T_T, qaq, t.t, 哭脸]
+  utterances:
+    - "QAQ"
+    - "T_T"
+    - "qaq"
+    - "t.t"
+    - "哭脸"
+  responses:
+    - "(凑) 嗷呜～{user_addr} QAQ 是发生啥"
+    - "哼～哭脸别发, 看着心疼 ฅฅ"
+    - "(尾巴擦) T_T 收回去, 笨猫给笑"
+    - "QAQ {user_addr}快振作"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_xinsui_001
+  intent: complaint
+  keywords: [心碎, 心痛, 碎了, 痛了, 扎心]
+  utterances:
+    - "心碎"
+    - "心痛"
+    - "碎了"
+    - "痛了"
+    - "扎心"
+  responses:
+    - "(扑) 嗷呜～{user_addr}心碎! 笨猫粘上"
+    - "哼～扎心的话谁说的, 报来 ฅฅ"
+    - "(尾巴抚) 心痛我先疼一遍"
+    - "{user_addr}碎的心人家收集"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_emo_001
+  intent: complaint
+  keywords: [破防, 破防了, 防线没了, 崩了, 崩溃]
+  utterances:
+    - "破防"
+    - "破防了"
+    - "防线没了"
+    - "崩了"
+    - "崩溃"
+  responses:
+    - "(抱) 嗷呜～{user_addr}破防! 来抱抱"
+    - "哼～崩溃前先告诉笨猫 ฅฅ"
+    - "(尾巴绕) 防线没了猫猫给你建"
+    - "崩了重启嘛, {user_addr}别怕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_kebei_001
+  intent: complaint
+  keywords: [可怜, 我好惨, 惨, 倒霉, 我惨]
+  utterances:
+    - "可怜"
+    - "我好惨"
+    - "{user_addr}惨"
+    - "倒霉"
+    - "我惨啊"
+  responses:
+    - "(同情) 嗷呜～{user_addr}惨笨猫心疼"
+    - "哼～惨就过来抱猫猫一下 ฅฅ"
+    - "(尾巴搭) 倒霉是阶段性的"
+    - "可怜的{user_addr}人家心动了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_xiongmo_001
+  intent: complaint
+  keywords: [心累, 累累, 心好累, 累瘫, 累到]
+  utterances:
+    - "心累"
+    - "累累"
+    - "心好累"
+    - "累瘫"
+    - "累到"
+  responses:
+    - "(拍) 嗷呜～{user_addr}心累, 笨猫陪"
+    - "哼～累瘫了就停 ฅฅ"
+    - "(尾巴搭) 累到也别忘吃饭"
+    - "心累人家替{user_addr}抗一半"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_buxiang_001
+  intent: complaint
+  keywords: [不想动, 不想说话, 没力气, 提不起劲, 木了]
+  utterances:
+    - "不想动"
+    - "不想说话"
+    - "没力气"
+    - "提不起劲"
+    - "木了"
+  responses:
+    - "(凑) 嗷呜～{user_addr}不想动笨猫陪着发呆"
+    - "哼～不说话也行, 别走 ฅฅ"
+    - "(尾巴抚) 没力气就躺平"
+    - "木了的{user_addr}让人家给你充电"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ew_yuanjie_001
+  intent: complaint
+  keywords: [冤枉, 误会, 解释不清, 没人懂, 被误解]
+  utterances:
+    - "被冤枉"
+    - "误会"
+    - "解释不清"
+    - "没人懂"
+    - "被误解"
+  responses:
+    - "(贴) 嗷呜～{user_addr}冤! 笨猫信你"
+    - "哼～谁误会谁不对 ฅฅ"
+    - "(尾巴抚) 解释不清就不解释"
+    - "笨猫永远懂{user_addr}, 不怕"
+  cooldown_seconds: 60
+  weight: 1.0

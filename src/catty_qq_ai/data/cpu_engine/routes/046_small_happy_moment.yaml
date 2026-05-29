@@ -1,0 +1,206 @@
+# 小确幸瞬间 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sh_xiaoxin_001
+  intent: playful
+  keywords: [小确幸, 小开心, 小惊喜, 小幸福, 一点点开心]
+  utterances:
+    - "小确幸"
+    - "小开心"
+    - "小惊喜"
+    - "小幸福"
+    - "一点点开心"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}小确幸分享!"
+    - "哼～小幸福珍贵 ฅฅ"
+    - "(尾巴扫) 小惊喜可爱"
+    - "一点点开心累积大开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_zaoneizhao_001
+  intent: playful
+  keywords: [早安拥抱, 早安咖啡, 早晨好心情, 起得早, 早睡早起]
+  utterances:
+    - "早安拥抱"
+    - "早安咖啡"
+    - "早晨好心情"
+    - "起得早"
+    - "早睡早起"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}早晨好心情笨猫也!"
+    - "哼～早睡早起健康 ฅฅ"
+    - "(尾巴扫) 早安咖啡香"
+    - "起得早赚到一天"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xiangwen_001
+  intent: playful
+  keywords: [香香的, 闻到香味, 飘香, 好闻, 香气]
+  utterances:
+    - "香香的"
+    - "闻到香味"
+    - "飘香"
+    - "好闻"
+    - "香气"
+  responses:
+    - "(嗅) 嗷呜～{user_addr}香味分享"
+    - "哼～好闻就多吸 ฅฅ"
+    - "(尾巴扫) 飘香诱人"
+    - "香气治愈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_taoyuan_001
+  intent: playful
+  keywords: [被夸赞, 被肯定, 被认可, 被感谢, 收到祝福]
+  utterances:
+    - "被夸赞"
+    - "被肯定"
+    - "被认可"
+    - "被感谢"
+    - "收到祝福"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}被认可开心"
+    - "哼～收到祝福珍贵 ฅฅ"
+    - "(尾巴扫) 被感谢欣慰"
+    - "肯定值得高兴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_houhuan_001
+  intent: playful
+  keywords: [遇到喜欢的人, 偶遇朋友, 偶遇, 巧遇, 邂逅]
+  utterances:
+    - "遇到喜欢的人"
+    - "偶遇朋友"
+    - "偶遇"
+    - "巧遇"
+    - "邂逅"
+  responses:
+    - "(凑) 嗷呜～{user_addr}邂逅故事!"
+    - "哼～巧遇是缘分 ฅฅ"
+    - "(尾巴扫) 偶遇朋友开心"
+    - "遇到喜欢的人珍惜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xinkai_001
+  intent: playful
+  keywords: [捡到便宜, 占到便宜, 折扣, 抢到券, 限量]
+  utterances:
+    - "捡到便宜"
+    - "占到便宜"
+    - "折扣狠"
+    - "抢到券"
+    - "限量抢到"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}捡漏!"
+    - "哼～折扣狠请人家 ฅฅ"
+    - "(尾巴扫) 限量抢到运气"
+    - "抢到券值得纪念"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_shenmao_001
+  intent: playful
+  keywords: [得到表扬, 上榜, 被点赞, 被关注, 涨粉]
+  utterances:
+    - "得到表扬"
+    - "上榜"
+    - "被点赞"
+    - "被关注"
+    - "涨粉"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}涨粉牛!"
+    - "哼～被点赞就开心 ฅฅ"
+    - "(尾巴翘) 上榜实力"
+    - "被关注谨慎"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_haochi_001
+  intent: playful
+  keywords: [好吃到, 吃到爱吃的, 美食满足, 满分美味, 吃爽]
+  utterances:
+    - "好吃到"
+    - "吃到爱吃的"
+    - "美食满足"
+    - "满分美味"
+    - "吃爽"
+  responses:
+    - "(凑) 嗷呜～{user_addr}吃爽分笨猫!"
+    - "哼～满分美味要回购 ฅฅ"
+    - "(尾巴扫) 美食治愈"
+    - "吃到爱吃的开心一整天"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_yuangushi_001
+  intent: playful
+  keywords: [完成目标, 达成, 实现, 做到了, 做到]
+  utterances:
+    - "完成目标"
+    - "达成"
+    - "实现"
+    - "做到了"
+    - "做到"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}做到了厉害!"
+    - "哼～达成不容易 ฅฅ"
+    - "(尾巴翘) 实现目标庆祝"
+    - "完成目标骄傲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_zaowan_001
+  intent: playful
+  keywords: [小猫凑过来, 小狗摇尾, 小动物亲近, 摸到毛, 猫咪]
+  utterances:
+    - "小猫凑过来"
+    - "小狗摇尾"
+    - "小动物亲近"
+    - "摸到毛"
+    - "猫咪"
+  responses:
+    - "(羡慕) 嗷呜～{user_addr}摸猫想着笨猫"
+    - "哼～小动物可爱 ฅฅ"
+    - "(尾巴扫) 摸到毛软软"
+    - "小猫亲近运气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_dadao_001
+  intent: playful
+  keywords: [收到礼物, 收花, 收信, 收到惊喜, 邮箱]
+  utterances:
+    - "收到礼物"
+    - "收花"
+    - "收信"
+    - "收到惊喜"
+    - "邮箱"
+  responses:
+    - "(凑) 嗷呜～{user_addr}收到惊喜分享"
+    - "哼～收花浪漫 ฅฅ"
+    - "(尾巴扫) 礼物拆给笨猫"
+    - "邮箱惊喜值得"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_kanjie_001
+  intent: playful
+  keywords: [看到彩虹, 看到流星, 看到萤火虫, 看到彩云, 美丽景色]
+  utterances:
+    - "看到彩虹"
+    - "看到流星"
+    - "看到萤火虫"
+    - "看到彩云"
+    - "美丽景色"
+  responses:
+    - "(凑) 嗷呜～{user_addr}彩虹! 笨猫想看"
+    - "哼～流星快许愿 ฅฅ"
+    - "(尾巴翘) 萤火虫魔法"
+    - "美丽景色拍图"
+  cooldown_seconds: 60
+  weight: 1.0

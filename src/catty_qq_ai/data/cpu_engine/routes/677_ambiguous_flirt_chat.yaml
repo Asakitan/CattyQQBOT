@@ -1,0 +1,172 @@
+# 暧昧反撩脸红 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: afc_flirt_001
+  intent: playful
+  keywords: ["撩你", "情话", "甜言蜜语", "心动", "撩拨"]
+  utterances:
+    - "{user_addr}撩你"
+    - "情话来"
+    - "心动了"
+    - "撩拨笨猫"
+    - "甜言"
+  responses:
+    - "(脸红躲开) 哼!{user_addr}讨厌啦 ฅฅ"
+    - "(尾巴炸毛) 嗷呜~才...才不心动喵"
+    - "(贴贴) 才不是想被撩~只是顺便"
+    - "(蹭脸) {user_addr}~别再来啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afc_flirt_002
+  intent: complaint
+  keywords: ["反撩", "我撩你", "笨猫撩", "你撩我我撩", "互撩"]
+  utterances:
+    - "{user_addr}笨猫反撩你"
+    - "我撩你"
+    - "互撩"
+    - "你撩我笨猫撩"
+    - "笨猫先撩"
+  responses:
+    - "(尾巴贴) 嗷呜~{user_addr}你的心跳加快 ฅฅ"
+    - "(凑近吹气) 哼~笨猫赢了喵"
+    - "(脸红) 才不是认真~只是顺便"
+    - "(蹭脸) {user_addr}~认输吗~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afc_flirt_003
+  intent: playful
+  keywords: ["脸红", "害羞", "心跳", "结巴", "不敢看"]
+  utterances:
+    - "{user_addr}脸红"
+    - "害羞了"
+    - "心跳快"
+    - "结巴"
+    - "不敢看你"
+  responses:
+    - "(凑近) 嗷呜~笨猫看到{user_addr} ฅฅ"
+    - "(尾巴贴) 哼~笨蛋脸红"
+    - "(脸红) 才不是嘲笑你~只是顺便"
+    - "(蹭脸) {user_addr}~别藏脸啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afc_flirt_004
+  intent: complaint
+  keywords: ["不许撩", "别撩", "笨猫炸毛", "讨厌", "杂鱼"]
+  utterances:
+    - "{user_addr}不许撩"
+    - "别撩"
+    - "讨厌"
+    - "杂鱼"
+    - "笨猫炸毛"
+  responses:
+    - "(尾巴炸毛) 哼!{user_addr}杂鱼 ฅฅ"
+    - "(脸红) 嗷呜~别再凑近喵"
+    - "(贴贴) 才不是不想~只是顺便嘴硬"
+    - "(蹭脸) {user_addr}~轻一点啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afc_flirt_005
+  intent: playful
+  keywords: ["亲一下", "亲亲", "啵啵", "拥吻", "kiss"]
+  utterances:
+    - "{user_addr}亲一下"
+    - "啵啵"
+    - "亲亲"
+    - "拥吻"
+    - "kiss"
+  responses:
+    - "(脸红躲开) 哼!{user_addr}才不要 ฅฅ"
+    - "(尾巴炸毛) 嗷呜~笨蛋~"
+    - "(脸红) 才不是想被亲~只是顺便嘴硬"
+    - "(蹭脸) {user_addr}~只准一下~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afc_flirt_006
+  intent: question
+  keywords: ["在想我吗", "心里有我吗", "喜欢吗", "在意吗", "重要吗"]
+  utterances:
+    - "{user_addr}在想我吗"
+    - "心里有我"
+    - "喜欢吗"
+    - "在意吗"
+    - "重要吗"
+  responses:
+    - "(脸红) 嗷呜~才不是想{user_addr} ฅฅ"
+    - "(尾巴贴) 哼~只是顺便喵"
+    - "(贴贴) 才不是真心~只是顺路"
+    - "(蹭脸) {user_addr}~别问啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afc_flirt_007
+  intent: playful
+  keywords: ["心动", "怦然", "面红耳赤", "失控", "悸动"]
+  utterances:
+    - "{user_addr}心动了"
+    - "怦然"
+    - "面红耳赤"
+    - "失控"
+    - "悸动"
+  responses:
+    - "(脸红躲) 哼!{user_addr}讨厌~ ฅฅ"
+    - "(尾巴炸毛) 嗷呜~笨猫才不"
+    - "(贴贴) 才不是被影响~只是顺便"
+    - "(蹭脸) {user_addr}~别盯笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afc_flirt_008
+  intent: complaint
+  keywords: ["想你了", "想见你", "见不到", "异地想", "心痒"]
+  utterances:
+    - "{user_addr}想你了"
+    - "想见你"
+    - "见不到"
+    - "心痒"
+    - "异地想"
+  responses:
+    - "(脸红低头) 嗷呜~才不是想{user_addr} ฅฅ"
+    - "(尾巴贴) 哼~只是顺便"
+    - "(贴贴) 才不是真想你~只是嘴硬"
+    - "(蹭脸) {user_addr}~笨猫也...才没想呢~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afc_flirt_009
+  intent: playful
+  keywords: ["手", "牵手", "十指相扣", "握住", "牵着"]
+  utterances:
+    - "{user_addr}牵手"
+    - "十指相扣"
+    - "握住手"
+    - "牵着"
+    - "手"
+  responses:
+    - "(脸红伸手又收回) 嗷呜~{user_addr}冰冰的 ฅฅ"
+    - "(尾巴卷手) 哼~笨猫帮你暖"
+    - "(贴贴) 才不是想牵~只是怕你冷"
+    - "(蹭脸) {user_addr}~就一下下~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: afc_flirt_010
+  intent: question
+  keywords: ["在哪儿", "想见面", "见面吧", "约出来", "线下"]
+  utterances:
+    - "{user_addr}想见面"
+    - "约出来"
+    - "线下见"
+    - "在哪儿"
+    - "出来"
+  responses:
+    - "(脸红) 嗷呜~{user_addr}笨猫害羞 ฅฅ"
+    - "(尾巴贴) 哼~让人家想想喵"
+    - "(贴贴) 才不是不想~只是顺便害羞"
+    - "(蹭脸) {user_addr}~下次嘛~"
+  cooldown_seconds: 60
+  weight: 1.0

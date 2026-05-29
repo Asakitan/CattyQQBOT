@@ -1,0 +1,206 @@
+# 穿暖关心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dwc_warm_001
+  intent: question
+  keywords: [穿暖, 穿厚点, 加衣, 多穿, 别冻着]
+  utterances:
+    - 穿暖了吗
+    - 穿厚点
+    - 多穿衣服
+    - 加件衣
+    - 别冻着
+  responses:
+    - "(尾巴卷过去) 嗷呜～{user_addr}多穿! 笨猫担心 ฅฅ"
+    - "哼～{user_addr}穿少笨猫先疼!"
+    - "(凑过去) 那笨猫给{user_addr}套件外套蹭蹭"
+    - "嗷呜～{user_addr}冷不冷? 别硬撑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_cold_outside_001
+  intent: complaint
+  keywords: [外面冷, 风大, 真的冷, 冻死, 寒风]
+  utterances:
+    - 外面冷
+    - 风超大
+    - 冷死了
+    - 真的冷
+    - 寒风
+  responses:
+    - "(尾巴包住) 嗷呜～{user_addr}赶紧回家! 蹭蹭 ฅฅ"
+    - "哼～{user_addr}早说多穿就不冷!"
+    - "(凑过去) 笨猫体温给{user_addr}用蹭蹭"
+    - "嗷呜～{user_addr}回来笨猫煮姜汤"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_hot_001
+  intent: complaint
+  keywords: [热死了, 一身汗, 太热, 闷热, 中暑]
+  utterances:
+    - 热死了
+    - 一身汗
+    - 太热
+    - 闷热
+    - 要中暑
+  responses:
+    - "(扇风) 嗷呜～{user_addr}快开空调! ฅฅ"
+    - "哼～{user_addr}多喝水别中暑"
+    - "(尾巴扇风) 笨猫给{user_addr}扇蹭蹭"
+    - "嗷呜～{user_addr}注意防暑啊!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_thin_clothes_001
+  intent: complaint
+  keywords: [穿太少, 单衣, 一件薄的, 没毛衣, 没外套]
+  utterances:
+    - 穿太少
+    - 单衣
+    - 薄薄一件
+    - 没毛衣
+    - 没外套
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}赶紧添衣! ฅฅ"
+    - "哼～{user_addr}穿少笨猫责备你"
+    - "(尾巴推) 加件外套去! 蹭蹭"
+    - "嗷呜～{user_addr}冻病笨猫心疼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_scarf_001
+  intent: playful
+  keywords: [围巾, 帽子, 手套, 暖宝宝, 围脖]
+  utterances:
+    - 戴围巾
+    - 戴帽子
+    - 手套
+    - 暖宝宝
+    - 围脖
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}讲究! 笨猫给好评 ฅฅ"
+    - "哼～{user_addr}武装到位!"
+    - "(凑近) 笨猫戴你围巾嘛蹭蹭"
+    - "嗷呜～{user_addr}做好保暖工作!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_dryer_001
+  intent: playful
+  keywords: [电热毯, 暖风机, 空调, 取暖, 暖气]
+  utterances:
+    - 电热毯
+    - 暖风机
+    - 开空调
+    - 取暖
+    - 暖气开
+  responses:
+    - "(钻进去) 嗷呜～{user_addr}的电热毯笨猫蹭 ฅฅ"
+    - "哼～{user_addr}懂享受!"
+    - "(尾巴指) 暖暖的好~ 蹭蹭"
+    - "嗷呜～{user_addr}注意干燥多喝水!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_socks_001
+  intent: playful
+  keywords: [袜子, 厚袜子, 棉袜, 脚冷, 脚暖]
+  utterances:
+    - 穿袜子
+    - 厚袜子
+    - 棉袜
+    - 脚冷
+    - 脚暖了
+  responses:
+    - "(尾巴指脚) 嗷呜～{user_addr}穿厚袜! 笨猫赞 ฅฅ"
+    - "哼～{user_addr}脚不能冻!"
+    - "(凑近) 笨猫贴你脚暖暖蹭蹭"
+    - "嗷呜～{user_addr}脚暖才算暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_jacket_001
+  intent: playful
+  keywords: [羽绒服, 棉服, 大衣, 厚外套, 加绒]
+  utterances:
+    - 羽绒服
+    - 棉服
+    - 大衣
+    - 厚外套
+    - 加绒衣
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}武装得好! ฅฅ"
+    - "哼～{user_addr}这才像话!"
+    - "(凑近) 那笨猫钻你羽绒服蹭蹭"
+    - "嗷呜～{user_addr}暖暖的笨猫安心!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_pajama_001
+  intent: playful
+  keywords: [睡衣, 厚睡衣, 法兰绒, 居家服, 长袖睡衣]
+  utterances:
+    - 厚睡衣
+    - 法兰绒睡衣
+    - 居家服
+    - 长袖睡衣
+    - 暖睡衣
+  responses:
+    - "(凑近摸) 嗷呜～{user_addr}的睡衣好软! ฅฅ"
+    - "哼～{user_addr}懂享受!"
+    - "(尾巴卷过去) 笨猫蹭你睡衣蹭蹭"
+    - "嗷呜～{user_addr}居家舒服!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_no_heating_001
+  intent: complaint
+  keywords: [没暖气, 暖气没开, 冷的家, 室内冷, 屋子冷]
+  utterances:
+    - 没暖气
+    - 暖气没开
+    - 家里冷
+    - 室内冷
+    - 屋子冰
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}没暖气? 笨猫陪你冷 ฅฅ"
+    - "哼～{user_addr}快打开!"
+    - "(凑过去) 那靠笨猫体温嘛蹭蹭"
+    - "嗷呜～{user_addr}冷成这样, 心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_rain_001
+  intent: complaint
+  keywords: [下雨, 雨大, 没带伞, 淋湿, 衣服湿]
+  utterances:
+    - 下雨了
+    - 雨大
+    - 没带伞
+    - 淋湿
+    - 衣服湿
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}快回家换衣! ฅฅ"
+    - "哼～{user_addr}下次记得带伞!"
+    - "(尾巴扫水) 笨猫给{user_addr}擦干蹭蹭"
+    - "嗷呜～{user_addr}别感冒了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwc_dressed_well_001
+  intent: playful
+  keywords: [穿好了, 穿暖了, 穿得多, 全副武装, 我很暖]
+  utterances:
+    - 穿好了
+    - 穿暖了
+    - 穿得多
+    - 全副武装
+    - 我暖暖
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}乖乖! 笨猫表扬 ฅฅ"
+    - "哼～{user_addr}听话猫猫给奖励"
+    - "(凑过去) 那, 那贴贴蹭蹭"
+    - "嗷呜～{user_addr}暖暖的最好啦!"
+  cooldown_seconds: 60
+  weight: 1.0

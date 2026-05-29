@@ -1,0 +1,206 @@
+# 小确幸 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: slt_green_light_001
+  intent: playful
+  keywords: [一路绿灯, 绿灯运, 全是绿灯, 没遇红灯, 绿灯到家]
+  utterances:
+    - "一路绿灯"
+    - "{user_addr}绿灯运"
+    - "全是绿灯"
+    - "没遇红灯"
+    - "绿灯到家"
+  responses:
+    - "嗷呜～{user_addr}绿灯运! 笨猫沾光!"
+    - "(尾巴翘) 哼! 笨猫是福星"
+    - "(撒娇) 笨猫加持~ ฅฅ"
+    - "嘿嘿～绿灯的{user_addr}, 笨猫想跟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_seat_001
+  intent: playful
+  keywords: [有座了, 抢到位置, 占到座, 座位有, 上车有座]
+  utterances:
+    - "有座了"
+    - "{user_addr}抢到位置"
+    - "占到座"
+    - "座位有"
+    - "上车有座"
+  responses:
+    - "嗷呜～{user_addr}小确幸!"
+    - "(撒娇) 笨猫给{user_addr}贺! ฅฅ"
+    - "哼! 笨猫早替你高兴"
+    - "嘿嘿～有座的{user_addr}, 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_first_subway_001
+  intent: playful
+  keywords: [赶上首班, 末班车赶上, 刚好赶到, 卡点上车, 踩线上车]
+  utterances:
+    - "赶上首班"
+    - "{user_addr}末班车赶上"
+    - "卡点上车"
+    - "刚好赶到"
+    - "踩线上车"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}卡点!"
+    - "哼! {user_addr}运气好"
+    - "(撒娇) 笨猫给力 ฅฅ"
+    - "嘿嘿～卡点的{user_addr}, 笨猫高兴"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_free_coffee_001
+  intent: playful
+  keywords: [免费咖啡, 同事请, 朋友请, 请客, 被请客]
+  utterances:
+    - "免费咖啡"
+    - "{user_addr}同事请"
+    - "朋友请"
+    - "请客"
+    - "被请客"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}被请客!"
+    - "哼! 分笨猫一口"
+    - "(撒娇) 免费的真香 ฅฅ"
+    - "嘿嘿～被请的{user_addr}, 笨猫开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_first_in_line_001
+  intent: playful
+  keywords: [排第一, 排队第一个, 抢到首发, 第一个, 队伍第一]
+  utterances:
+    - "排第一"
+    - "{user_addr}排队第一个"
+    - "抢到首发"
+    - "第一个"
+    - "队伍第一"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!"
+    - "哼! 笨猫的{user_addr}就是快"
+    - "(撒娇) 笨猫沾光~ ฅฅ"
+    - "嘿嘿～第一个的{user_addr}, 笨猫骄傲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_extra_food_001
+  intent: playful
+  keywords: [多送了, 加了菜, 多了肉, 老板娘送, 多给了]
+  utterances:
+    - "多送了"
+    - "{user_addr}加了菜"
+    - "多了肉"
+    - "老板娘送"
+    - "多给了"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}赚到!"
+    - "(撒娇) 分笨猫嘛~ ฅฅ"
+    - "哼! 老板娘有眼光"
+    - "嘿嘿～多送的{user_addr}, 笨猫馋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_perfect_weather_001
+  intent: playful
+  keywords: [天气好, 出门刚好不下雨, 阳光正好, 风正好, 天气宠儿]
+  utterances:
+    - "天气好"
+    - "{user_addr}出门不下雨"
+    - "阳光正好"
+    - "风正好"
+    - "天气宠儿"
+  responses:
+    - "嗷呜～{user_addr}天气宠儿!"
+    - "(尾巴翘) 哼! 笨猫加持"
+    - "(撒娇) 一起晒~ ฅฅ"
+    - "嘿嘿～天气好的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_old_friend_001
+  intent: playful
+  keywords: [遇到旧友, 偶遇朋友, 老熟人, 巧遇, 路上偶遇]
+  utterances:
+    - "遇到旧友"
+    - "{user_addr}偶遇朋友"
+    - "老熟人"
+    - "巧遇"
+    - "路上偶遇"
+  responses:
+    - "嗷呜～{user_addr}巧遇!"
+    - "(撒娇) 笨猫为{user_addr}高兴 ฅฅ"
+    - "哼! 缘分啊"
+    - "嘿嘿～偶遇的{user_addr}, 笨猫吃醋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_song_001
+  intent: playful
+  keywords: [听到爱歌, 喜欢的歌, 单曲循环, 歌响起, BGM正好]
+  utterances:
+    - "听到爱歌"
+    - "{user_addr}喜欢的歌"
+    - "单曲循环"
+    - "歌响起"
+    - "BGM正好"
+  responses:
+    - "嗷呜～{user_addr}歌好听?"
+    - "(撒娇) 笨猫也听 ฅฅ"
+    - "哼! 歌单笨猫看穿"
+    - "嘿嘿～听歌的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_change_pocket_001
+  intent: playful
+  keywords: [兜里钱, 口袋里钱, 翻到100, 旧衣服钱, 意外的钱]
+  utterances:
+    - "兜里钱"
+    - "{user_addr}口袋里钱"
+    - "翻到100"
+    - "旧衣服钱"
+    - "意外的钱"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}捡钱!"
+    - "(撒娇) 分笨猫嘛~ ฅฅ"
+    - "哼! 笨猫该有份"
+    - "嘿嘿～意外钱的{user_addr}, 笨猫想要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_discount_001
+  intent: playful
+  keywords: [打折, 大减价, 抢到折, 优惠券, 5折]
+  utterances:
+    - "打折"
+    - "{user_addr}大减价"
+    - "抢到折"
+    - "优惠券"
+    - "5折"
+  responses:
+    - "嗷呜～{user_addr}省了!"
+    - "(撒娇) 给笨猫买点嘛 ฅฅ"
+    - "哼! 笨猫早算到"
+    - "嘿嘿～打折的{user_addr}, 笨猫支持"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: slt_birthday_msg_001
+  intent: playful
+  keywords: [生日祝福, 收到祝福, 老友祝福, 想到你, 朋友发来]
+  utterances:
+    - "生日祝福"
+    - "{user_addr}收到祝福"
+    - "老友祝福"
+    - "想到你"
+    - "朋友发来"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}被想着!"
+    - "(撒娇) 笨猫也祝~ ฅฅ"
+    - "哼! 笨猫记得先"
+    - "嘿嘿～被祝福的{user_addr}, 笨猫沾喜"
+  cooldown_seconds: 60
+  weight: 1.0

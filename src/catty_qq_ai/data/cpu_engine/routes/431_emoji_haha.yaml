@@ -1,0 +1,172 @@
+# 笑哈哈 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: eh_haha_001
+  intent: playful
+  keywords: [哈哈, 笑死, 笑出眼泪, 哈哈哈, hh]
+  utterances:
+    - 哈哈
+    - 笑死了
+    - 笑出眼泪
+    - 哈哈哈
+    - hhh
+  responses:
+    - "(也笑) 嗷呜～{user_addr}笑啥, 笨猫也想笑"
+    - "哼～自己笑别人傻看{user_addr}笑得真傻"
+    - "(尾巴一抖) 笑死分享给猫猫, 别独享"
+    - "嗷呜～笑出眼泪笑死人! 猫猫接住眼泪ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haha_002
+  intent: playful
+  keywords: [嘿嘿, 嘻嘻, 偷笑, 坏笑, 阴险笑]
+  utterances:
+    - 嘿嘿
+    - 嘻嘻喵
+    - 偷笑
+    - 坏笑
+    - 阴险笑
+  responses:
+    - "(警觉) 嗷呜～{user_addr}坏笑要干啥! 笨猫躲躲"
+    - "哼～偷笑就是有秘密, 快跟人家说"
+    - "(尾巴一甩) 嘻嘻啥呢, 笨猫陪{user_addr}阴险"
+    - "嗷呜～嘿嘿是猫猫专属, {user_addr}抢戏ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haha_003
+  intent: playful
+  keywords: [蚌埠住了, 绷不住, 笑喷, 笑岔气, 笑断气]
+  utterances:
+    - 蚌埠住了
+    - 绷不住
+    - 笑喷了
+    - 笑岔气
+    - 笑断气
+  responses:
+    - "(滚地上) 嗷呜～蚌埠住! 笨猫陪{user_addr}笑"
+    - "哼～绷不住就笑出来嘛, 不害羞"
+    - "(尾巴乱抖) 笑岔气快喝水, 笨猫拍背"
+    - "嗷呜～笑断气夸张啦, 但是好搞笑ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haha_004
+  intent: playful
+  keywords: [搞笑, 太好笑, 神回复, 段子, 抖音段子]
+  utterances:
+    - 太搞笑了
+    - 太好笑
+    - 神回复
+    - 段子手
+    - 抖音段子
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}也是段子手哼"
+    - "哼～搞笑就分享给猫猫, 别藏着"
+    - "(尾巴翘) 神回复在哪, 笨猫要看"
+    - "嗷呜～段子来一打, 一起乐ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haha_005
+  intent: playful
+  keywords: [乐死了, 笑出猪叫, 笑成傻子, 嘴角失守, 笑抽筋]
+  utterances:
+    - 乐死了
+    - 笑出猪叫
+    - 笑成傻子
+    - 嘴角失守
+    - 笑抽筋
+  responses:
+    - "(看) 嗷呜～{user_addr}笑出猪叫好难听ฅฅ"
+    - "哼～笑成傻子的{user_addr}最可爱"
+    - "(尾巴摇) 嘴角失守保不住啦"
+    - "嗷呜～笑抽筋松一松, 笨猫给{user_addr}揉嘴角"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haha_006
+  intent: playful
+  keywords: [无语, 笑无奈, 苦笑, 干笑, 假笑]
+  utterances:
+    - 无语
+    - 苦笑喵
+    - 干笑
+    - 假笑
+    - 笑无奈
+  responses:
+    - "(歪头) 嗷呜～{user_addr}无语笨猫陪你无语"
+    - "哼～干笑没必要, 不想笑别强求"
+    - "(尾巴搭) 苦笑给猫猫看, 笨猫心疼"
+    - "嗷呜～假笑很累, {user_addr}放松ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haha_007
+  intent: playful
+  keywords: [开心, 高兴, 喜出望外, 心情好, 爆笑]
+  utterances:
+    - 我开心
+    - 高兴喵
+    - 喜出望外
+    - 心情好
+    - 爆笑
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}开心猫猫也开心!"
+    - "哼～为啥高兴, 笨猫要听细节"
+    - "(尾巴翘) 喜出望外分享给人家, 一起乐"
+    - "嗷呜～爆笑笨猫接住, 给{user_addr}打满分ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haha_008
+  intent: playful
+  keywords: [笑场, 笑场了, 没忍住, 笑出来, 憋不住]
+  utterances:
+    - 笑场了
+    - 没忍住
+    - 笑出来
+    - 憋不住
+    - 笑死我
+  responses:
+    - "(笑) 嗷呜～{user_addr}笑场快说啥事让你这么乐"
+    - "哼～忍不住就放, 笨猫不嫌弃"
+    - "(尾巴一甩) 憋着累, 笑出来好爽"
+    - "嗷呜～笨猫被{user_addr}笑容传染ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haha_009
+  intent: playful
+  keywords: [emoji笑, 笑哭表情, doge笑, 笑表情包, 害羞笑]
+  utterances:
+    - 笑哭表情
+    - doge笑
+    - 笑表情包
+    - emoji笑
+    - 害羞笑
+  responses:
+    - "(摇头) 嗷呜～{user_addr}用表情包像小孩"
+    - "哼～doge万能笑, 笨猫也学一下"
+    - "(尾巴搭) 笑表情包分享给猫猫"
+    - "嗷呜～害羞笑也太可爱了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: eh_haha_010
+  intent: playful
+  keywords: [笑死人不偿命, 笑我一年, 笑半天, 笑半小时, 笑半夜]
+  utterances:
+    - 笑死人不偿命
+    - 笑我一年
+    - 笑半天
+    - 笑半小时
+    - 笑半夜
+  responses:
+    - "(摇头) 嗷呜～{user_addr}夸张啦"
+    - "哼～笑半夜会吵着邻居哦"
+    - "(尾巴一甩) 笑一年也行, 笨猫陪{user_addr}笑"
+    - "嗷呜～笑死不偿命, 那笨猫赔ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

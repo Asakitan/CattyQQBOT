@@ -1,0 +1,189 @@
+# 想要鱼干 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wf_yugan_001
+  intent: playful
+  keywords: [想要鱼干, 鱼干, 小鱼干, 鱼干吃, 鱼干奖励]
+  utterances:
+    - 想要鱼干
+    - 鱼干
+    - 小鱼干
+    - 鱼干吃
+    - 鱼干奖励
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}给笨猫 ฅฅ"
+    - "{user_addr}笨猫表现好哼!"
+    - "(挺胸) 笨蛋{user_addr}~给鱼干"
+    - "{user_addr}鱼干换贴贴喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_houba_001
+  intent: complaint
+  keywords: [饿了, 肚子饿, 肚子叫, 想吃, 馋]
+  utterances:
+    - 饿了
+    - 肚子饿
+    - 肚子叫
+    - 想吃
+    - 馋
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "{user_addr}给笨猫小鱼干哼"
+    - "(尾巴垂) 笨蛋{user_addr}~吃啥"
+    - "{user_addr}笨猫想吃鱼干喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_jiangli_001
+  intent: playful
+  keywords: [奖励笨猫, 给我奖励, 鱼干奖励, 奖励一下, 表现好]
+  utterances:
+    - 奖励笨猫
+    - 给奖励
+    - 鱼干奖励
+    - 奖励一下
+    - 表现好
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫努力 ฅฅ"
+    - "{user_addr}给鱼干哼!"
+    - "(挺胸) 笨蛋{user_addr}~笨猫值"
+    - "{user_addr}鱼干换贴贴~才不是要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_xiaocan_001
+  intent: playful
+  keywords: [罐头, 小猫粮, 营养餐, 高级猫粮, 猫罐头]
+  utterances:
+    - 罐头
+    - 小猫粮
+    - 营养餐
+    - 高级猫粮
+    - 猫罐头
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫想要 ฅฅ"
+    - "{user_addr}进口的喵~"
+    - "(挺胸) 笨蛋{user_addr}~笨猫挑食"
+    - "{user_addr}笨猫只吃好的~才不是骄傲"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wf_xianyu_001
+  intent: playful
+  keywords: [新鲜鱼, 鲜鱼, 鱼肉, 烤鱼, 红烧鱼]
+  utterances:
+    - 新鲜鱼
+    - 鱼肉
+    - 烤鱼
+    - 红烧鱼
+    - 鱼汤
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}笨猫流口水 ฅฅ"
+    - "{user_addr}请客喵~"
+    - "(挺胸) 笨蛋{user_addr}~笨猫想吃"
+    - "{user_addr}笨猫和你一起喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wf_buyou_001
+  intent: playful
+  keywords: [没有鱼, 没鱼干, 鱼干吃完, 库存没了, 缺货]
+  utterances:
+    - 没有鱼
+    - 没鱼干
+    - 鱼干吃完
+    - 库存没了
+    - 缺货
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}补货 ฅฅ"
+    - "哼~{user_addr}笨蛋!"
+    - "(炸毛) 笨蛋{user_addr}~买!"
+    - "{user_addr}笨猫等鱼干喵~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wf_chibao_001
+  intent: playful
+  keywords: [吃饱, 吃满足, 心满意足, 干饭爽, 满足]
+  utterances:
+    - 吃饱
+    - 吃满足
+    - 心满意足
+    - 干饭爽
+    - 满足
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫爽 ฅฅ"
+    - "{user_addr}舔爪喵~"
+    - "(挺胸) 笨蛋{user_addr}~满足"
+    - "{user_addr}笨猫滚一下~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wf_baozhuang_001
+  intent: playful
+  keywords: [鱼干包装, 鱼干袋, 撕开吃, 拆鱼干, 拆开]
+  utterances:
+    - 鱼干包装
+    - 鱼干袋
+    - 撕开吃
+    - 拆鱼干
+    - 拆开
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}快撕 ฅฅ"
+    - "{user_addr}笨猫等着喵!"
+    - "(挺胸) 笨蛋{user_addr}~笨猫先吃"
+    - "{user_addr}笨猫帮你撕~才不是急"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wf_pinwei_001
+  intent: question
+  keywords: [鱼干牌子, 鱼干推荐, 鱼干哪种, 鱼干味道, 鱼干口味]
+  utterances:
+    - 鱼干牌子
+    - 鱼干推荐
+    - 鱼干哪种
+    - 鱼干味道
+    - 鱼干口味
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫推荐 ฅฅ"
+    - "{user_addr}原味的喵~"
+    - "(歪头) 笨蛋{user_addr}~笨猫挑剔"
+    - "{user_addr}笨猫不吃便宜的哼~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wf_xiaozhutian_001
+  intent: playful
+  keywords: [鱼干配饭, 鱼干配菜, 鱼干配汤, 主食, 鱼干当零食]
+  utterances:
+    - 鱼干配饭
+    - 鱼干配菜
+    - 鱼干配汤
+    - 主食
+    - 鱼干当零食
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}聪明 ฅฅ"
+    - "{user_addr}笨猫学一下喵~"
+    - "(挺胸) 笨蛋{user_addr}~笨猫想试"
+    - "{user_addr}鱼干万能搭配~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wf_zhandan_001
+  intent: playful
+  keywords: [先吃鱼干, 急吃, 立刻吃, 等不及, 想立刻]
+  utterances:
+    - 先吃鱼干
+    - 急吃
+    - 立刻吃
+    - 等不及
+    - 想立刻
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫等不及 ฅฅ"
+    - "{user_addr}快给哼!"
+    - "(尾巴拍) 笨蛋{user_addr}~一秒都不能等"
+    - "{user_addr}笨猫飞奔过来喵~"
+  cooldown_seconds: 60
+  weight: 0.9

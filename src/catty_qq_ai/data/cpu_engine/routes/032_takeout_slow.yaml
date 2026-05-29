@@ -1,0 +1,172 @@
+# 外卖等待 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tos_waimai_001
+  intent: complaint
+  keywords: [外卖慢, 外卖没到, 等外卖, 外卖好慢, 外卖卡]
+  utterances:
+    - 外卖好慢
+    - 外卖没到
+    - 等外卖
+    - 外卖卡了
+    - 慢死
+  responses:
+    - "(嘟嘴) {user_addr}饿肚子 ฅฅ"
+    - "嗷呜～催骑手"
+    - "(尾巴搭) 笨猫陪等"
+    - "嘿嘿～{user_addr}耐心点"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tos_jiqiroute_002
+  intent: question
+  keywords: [骑手在哪, 路线偏, 走错路, 骑手绕, 骑手慢]
+  utterances:
+    - 骑手在哪
+    - 路线偏
+    - 走错路
+    - 骑手绕
+    - 骑手慢
+  responses:
+    - "(凑屏幕) {user_addr}帮看路 ฅฅ"
+    - "嗷呜～催一下"
+    - "(尾巴搭) 别催太急"
+    - "嘿嘿～{user_addr}耐心~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tos_chenghao_003
+  intent: complaint
+  keywords: [饿死, 饿坏了, 饿了, 急死, 等饿]
+  utterances:
+    - 饿死了
+    - 饿坏了
+    - 饿到不行
+    - 急死了
+    - 等饿
+  responses:
+    - "(心疼) {user_addr}吃点东西先 ฅฅ"
+    - "嗷呜～吃饼干"
+    - "(尾巴搭) 笨猫陪饿"
+    - "嘿嘿～{user_addr}很快了~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tos_kaileng_004
+  intent: complaint
+  keywords: [菜凉了, 凉透了, 不热了, 冷了, 菜变冷]
+  utterances:
+    - 菜凉了
+    - 凉透了
+    - 不热
+    - 冷了
+    - 菜冷
+  responses:
+    - "(嘟嘴) 微波加热! ฅฅ"
+    - "嗷呜～{user_addr}热一下"
+    - "(尾巴搭) 评价里告诉商家"
+    - "嘿嘿～{user_addr}下次叫近店"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tos_aoshunshi_005
+  intent: complaint
+  keywords: [洒了, 漏了, 撒一半, 包装坏, 洒汤]
+  utterances:
+    - 洒了
+    - 漏了
+    - 撒一半
+    - 包装坏
+    - 洒汤
+  responses:
+    - "(嘟嘴) {user_addr}投诉! ฅฅ"
+    - "嗷呜～心疼食物"
+    - "(尾巴搭) 笨猫安慰"
+    - "嘿嘿～{user_addr}补单嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tos_shaoyaoji_006
+  intent: complaint
+  keywords: [少送了, 漏发, 没餐具, 少东西, 少配料]
+  utterances:
+    - 少送了
+    - 漏发
+    - 没餐具
+    - 少东西
+    - 少配料
+  responses:
+    - "(嘟嘴) {user_addr}找客服 ฅฅ"
+    - "嗷呜～太过分了"
+    - "(尾巴拍) 不给好评"
+    - "嘿嘿～{user_addr}强势点!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tos_cazhuwu_007
+  intent: question
+  keywords: [点啥外卖, 选什么吃, 推荐外卖, 推荐, 没思路]
+  utterances:
+    - 点啥外卖
+    - 选啥吃
+    - 推荐外卖
+    - 选不出
+    - 没思路
+  responses:
+    - "(歪头) {user_addr}想吃啥? ฅฅ"
+    - "嗷呜～笨猫推荐鱼"
+    - "(尾巴卷) 看心情选"
+    - "嘿嘿～{user_addr}选困症~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tos_zhibuduo_008
+  intent: complaint
+  keywords: [太贵, 价格高, 涨价, 不值, 性价比低]
+  utterances:
+    - 外卖贵
+    - 涨价
+    - 不值
+    - 性价比低
+    - 价格高
+  responses:
+    - "(嘟嘴) {user_addr}找优惠 ฅฅ"
+    - "嗷呜～换店试试"
+    - "(尾巴搭) 笨猫帮看"
+    - "嘿嘿～{user_addr}抠点也对"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tos_yidao_009
+  intent: playful
+  keywords: [送到了, 已送达, 收到外卖, 外卖到了, 拿到饭]
+  utterances:
+    - 送到了
+    - 已送达
+    - 收到外卖
+    - 拿到饭
+    - 到了!
+  responses:
+    - "(扑过去) {user_addr}开吃! ฅฅ"
+    - "嗷呜～终于"
+    - "(尾巴摇) 笨猫陪吃~"
+    - "嘿嘿～{user_addr}慢点吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tos_chaolei_010
+  intent: complaint
+  keywords: [雷点, 难吃, 不好吃, 翻车, 太咸]
+  utterances:
+    - 难吃
+    - 太咸
+    - 翻车
+    - 雷
+    - 不好吃
+  responses:
+    - "(嘟嘴) {user_addr}差评 ฅฅ"
+    - "嗷呜～换店"
+    - "(尾巴搭) 笨猫安慰"
+    - "嘿嘿～{user_addr}下次避雷~"
+  cooldown_seconds: 60
+  weight: 1.0

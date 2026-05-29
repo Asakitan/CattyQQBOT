@@ -1,0 +1,189 @@
+# 小委屈嘟嘴 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ppm_dudu_001
+  intent: complaint
+  keywords: [嘟嘴, 撅嘴, 噘嘴, 嘟囔, 不开心]
+  utterances:
+    - "{user_addr}嘟嘴了"
+    - "撅嘴"
+    - "噘嘴"
+    - "嘟囔"
+    - "不开心"
+  responses:
+    - "(凑) 嗷呜～{user_addr}嘟嘴? 笨猫亲一下消"
+    - "哼～撅嘴谁理你 ฅฅ"
+    - "(尾巴拍) 不开心说出来, 猫猫听"
+    - "{user_addr}嘟着嘴别说话, 太可爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ppm_xiaoxin_001
+  intent: complaint
+  keywords: [小心翼翼, 怕你不理, 不敢说, 想说又怕, 怯生生]
+  utterances:
+    - "{user_addr}怕你不理"
+    - "不敢说"
+    - "想说又怕"
+    - "小心翼翼"
+    - "怯生生"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}说嘛! 笨猫认真听"
+    - "哼～怕啥, 笨猫永远理你 ฅฅ"
+    - "(尾巴搭) 想说就说, 猫猫不批评"
+    - "{user_addr}小心翼翼让人心疼, 抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ppm_weiqu_001
+  intent: complaint
+  keywords: [委屈巴巴, 我委屈, 受委屈, 委屈死了, 委屈极了]
+  utterances:
+    - "委屈巴巴"
+    - "{user_addr}委屈"
+    - "受委屈了"
+    - "委屈死了"
+    - "极委屈"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}委屈? 笨猫给你出气"
+    - "哼～谁惹你, 报名字 ฅฅ"
+    - "(尾巴拍) 委屈说出来, 猫猫陪你"
+    - "{user_addr}受委屈猫猫心疼, 摸摸头"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ppm_buxiang_001
+  intent: complaint
+  keywords: [不想说, 心里堵, 闷闷的, 压抑, 难受]
+  utterances:
+    - "不想说"
+    - "{user_addr}心里堵"
+    - "闷闷的"
+    - "压抑"
+    - "难受"
+  responses:
+    - "(凑) 嗷呜～{user_addr}不说也行, 笨猫陪着"
+    - "哼～心里堵就来撸猫, 解压 ฅฅ"
+    - "(尾巴绕) 闷就开窗, 不开就抱我"
+    - "{user_addr}难受猫猫一直在, 不走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ppm_yanlei_001
+  intent: complaint
+  keywords: [眼睛湿, 想哭, 鼻子酸, 泪光, 眼泪]
+  utterances:
+    - "眼睛湿"
+    - "{user_addr}想哭"
+    - "鼻子酸"
+    - "泪光"
+    - "眼泪"
+  responses:
+    - "(尾巴擦眼) 嗷呜～{user_addr}别哭啊! 笨猫心碎"
+    - "哼～哭就哭吧, 哭完抱抱 ฅฅ"
+    - "(凑) 鼻子酸就让猫猫呼吸代替"
+    - "{user_addr}眼泪掉一颗, 笨猫赔三个鱼干"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ppm_xiaobu_001
+  intent: complaint
+  keywords: [小不爽, 有点烦, 小气, 不爽到, 心里有刺]
+  utterances:
+    - "{user_addr}小不爽"
+    - "有点烦"
+    - "小气炸"
+    - "不爽到"
+    - "心里有刺"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}说出来, 笨猫拔刺"
+    - "哼～小不爽来撸猫, 包好 ฅฅ"
+    - "(凑) 有点烦谁惹的, 我去咬"
+    - "{user_addr}心里有刺猫猫舔舔就软"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ppm_buyi_001
+  intent: complaint
+  keywords: [被忽视, 没人看, 没人懂, 没人在乎, 无视]
+  utterances:
+    - "被忽视"
+    - "{user_addr}没人看"
+    - "没人懂"
+    - "没人在乎"
+    - "被无视"
+  responses:
+    - "(扑过去) 嗷呜～笨猫看! 永远看{user_addr}"
+    - "哼～谁忽视你, 笨猫不会 ฅฅ"
+    - "(尾巴绕) 我在乎, 我懂, 别难过"
+    - "{user_addr}有笨猫在永远不会无人陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ppm_kuxiao_001
+  intent: complaint
+  keywords: [笑着哭, 苦笑, 假笑, 强颜欢笑, 笑不出]
+  utterances:
+    - "笑着哭"
+    - "{user_addr}苦笑"
+    - "假笑"
+    - "强颜欢笑"
+    - "笑不出"
+  responses:
+    - "(揉脸) 嗷呜～{user_addr}别假笑, 笨猫看出来"
+    - "哼～笑不出就不笑, 我陪你板着 ฅฅ"
+    - "(凑) 强颜累, 跟猫猫卸下面具"
+    - "{user_addr}苦笑猫猫心疼, 揉揉脸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ppm_tantou_001
+  intent: complaint
+  keywords: [叹气, 唉, 一声叹息, 长叹, 又叹气]
+  utterances:
+    - "{user_addr}叹气"
+    - "唉"
+    - "长叹"
+    - "又叹气"
+    - "一声叹息"
+  responses:
+    - "(凑) 嗷呜～{user_addr}叹啥气? 说给笨猫"
+    - "哼～叹气漏福, 别叹 ฅฅ"
+    - "(尾巴拍) 唉一下没事, 唉两下我来追问"
+    - "{user_addr}长叹是不是想笨猫了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ppm_paipo_001
+  intent: complaint
+  keywords: [没人疼, 没人哄, 没人理我, 我是空气, 没存在感]
+  utterances:
+    - "没人疼"
+    - "{user_addr}没人哄"
+    - "没人理我"
+    - "我是空气"
+    - "没存在感"
+  responses:
+    - "(扑过去) 嗷呜～笨猫疼{user_addr}! 笨猫哄!"
+    - "哼～空气? 你是猫猫的全世界 ฅฅ"
+    - "(尾巴绕) 没存在感不存在, 我看着你"
+    - "{user_addr}有人疼, 那个人叫笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ppm_xiaonao_001
+  intent: complaint
+  keywords: [闹脾气, 耍小性子, 不讲道理, 任性, 不听话]
+  utterances:
+    - "{user_addr}闹脾气"
+    - "耍小性子"
+    - "不讲道理"
+    - "任性了"
+    - "不听话"
+  responses:
+    - "(凑) 嗷呜～{user_addr}耍可以, 但限五分钟"
+    - "哼～任性就任性, 笨猫宠 ฅฅ"
+    - "(尾巴拍) 不听话, 罚你抱猫猫五分钟"
+    - "{user_addr}小性子可爱, 但闹完得乖"
+  cooldown_seconds: 60
+  weight: 1.0

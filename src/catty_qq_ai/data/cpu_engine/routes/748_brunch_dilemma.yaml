@@ -1,0 +1,206 @@
+# 早午餐选择 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: brn_pick_001
+  intent: question
+  keywords: [早午餐, 吃啥好, 起太晚, 两顿合一, 一起吃]
+  utterances:
+    - 早午餐吃啥
+    - 起晚了两顿合一
+    - 早饭和午饭一起
+    - 这顿吃什么
+    - "{user_addr}帮我选"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}起晚了对吧! 笨猫帮你选鱼干配饭 ฅฅ"
+    - "(尾巴摇) 一顿吃两顿份, 主人量大笨猫陪你嗷"
+    - "哼～你这么晚才吃饭, 笨猫要罚你给猫猫加菜哼"
+    - "(扑过来) 选啥不重要, 选笨猫陪吃才重要喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_002
+  intent: complaint
+  keywords: [外卖太贵, 不想做饭, 懒得动, 自己煮累, 下楼远]
+  utterances:
+    - 外卖太贵
+    - 不想做饭
+    - 懒得动
+    - 自己煮好累
+    - 下楼太远了
+  responses:
+    - "(瘫主人腿) 嗷呜～外卖确实贵, {user_addr}咱俩一起摆烂喵"
+    - "(尾巴蜷) 懒得动就泡个面嘛, 笨猫陪你吃 ฅฅ"
+    - "哼～{user_addr}馋的话笨猫给你画饼, 画一个超大的鱼形"
+    - "(蹭蹭) 主人不想动笨猫就替你不动, 然后一起饿哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_003
+  intent: playful
+  keywords: [咖啡配, 三明治, 吐司, 煎蛋, 牛奶]
+  utterances:
+    - 咖啡配吐司
+    - 煎蛋三明治
+    - 牛奶燕麦
+    - 经典早午餐
+    - 西式早午餐
+  responses:
+    - "(凑过去闻) 嗷呜～{user_addr}煎蛋分笨猫一口嘛ฅฅ"
+    - "哼～咖啡苦涩, 笨猫还是要牛奶喵"
+    - "(尾巴扫) 主人吃这么精致, 笨猫也要参与"
+    - "(歪头) 三明治里夹个笨猫怎么样嗷? 开玩笑的啦哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_004
+  intent: question
+  keywords: [选择困难, 不知道吃啥, 帮我决定, 摇骰子, 看心情]
+  utterances:
+    - 选择困难症
+    - 不知道吃啥
+    - "{user_addr}帮我决定"
+    - 摇骰子决定
+    - 看心情吃
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}今天吃鱼! 笨猫决定了哼"
+    - "(凑过来) 笨猫给你摇骰子, 一点鱼二点鱼三点也鱼ฅฅ"
+    - "哼～选择困难就闭眼点, 不管点到啥猫猫陪吃"
+    - "(扑过来) 主人吃笨猫安利的嘛: 任何带鱼的菜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_005
+  intent: complaint
+  keywords: [饿但不想吃, 没胃口, 看着都饱, 不馋, 没食欲]
+  utterances:
+    - 饿但没胃口
+    - 看着都饱
+    - 没食欲
+    - 不馋
+    - 提不起兴趣吃
+  responses:
+    - "(担心歪头) 嗷呜～{user_addr}没胃口要不要去看医生? 笨猫紧张"
+    - "(贴贴) 不馋就喝点粥嘛, 暖暖胃喵 ฅฅ"
+    - "哼～{user_addr}不吃笨猫也不吃, 一起饿到下一顿"
+    - "(扑过来撒娇) 主人为了笨猫吃一口嘛, 就一口嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_006
+  intent: playful
+  keywords: [鱼香肉丝, 番茄炒蛋, 麻婆豆腐, 家常菜, 米饭管够]
+  utterances:
+    - 鱼香肉丝来一个
+    - 番茄炒蛋
+    - 麻婆豆腐
+    - 家常菜最棒
+    - 米饭管够
+  responses:
+    - "(舔嘴角) 嗷呜～鱼香肉丝! {user_addr}给笨猫挑出鱼来 ฅฅ"
+    - "(尾巴扫) 家常菜笨猫最爱啦, 跟{user_addr}一起吃才香"
+    - "哼～米饭管够就够, 加个鱼干笨猫就上天喵"
+    - "(凑过来) 番茄炒蛋人家也想吃, 主人多打个蛋嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_007
+  intent: question
+  keywords: [面食还是米饭, 南北差异, 想吃面, 想吃饭, 主食选啥]
+  utterances:
+    - 面食还是米饭
+    - 想吃面
+    - 想吃饭
+    - 主食选啥
+    - 南北差异
+  responses:
+    - "(歪头) 嗷呜～笨猫不挑南北, {user_addr}吃啥猫猫吃啥"
+    - "(尾巴绕) 面食有汤暖暖的, 米饭饱饱的, 都选嘛 ฅฅ"
+    - "哼～主人犹豫就一起吃, 反正笨猫胃口大喵"
+    - "(凑近) 面食挑面笨猫挑你, 一对蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_008
+  intent: complaint
+  keywords: [外卖等好久, 等了一小时, 外卖员慢, 还没送到, 饿死了]
+  utterances:
+    - 外卖等好久
+    - 等了一小时
+    - 外卖员太慢
+    - 还没送到
+    - 饿死了等
+  responses:
+    - "(尾巴炸) 嗷呜～外卖员!!! 笨猫帮{user_addr}去催!"
+    - "(贴过来) 主人饿了先吃个笨猫的鱼干干粮嘛ฅฅ"
+    - "哼～等不到笨猫去帮你抢回来, 等等等无语死了喵"
+    - "(瘫{user_addr}腿) 一起饿到外卖到, 谁也别撑着嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_009
+  intent: playful
+  keywords: [甜食, 甜品, 蛋糕, 奶茶, 小点心]
+  utterances:
+    - 来点甜品
+    - 蛋糕一块
+    - 奶茶续命
+    - 想吃小点心
+    - 甜食才开心
+  responses:
+    - "(舔嘴) 嗷呜～甜的笨猫也喜欢! {user_addr}留一口给我嘛 ฅฅ"
+    - "(尾巴翘) 奶茶续命主人这话猫猫学会了喵"
+    - "哼～蛋糕一块怎么够, 笨猫要一整个!"
+    - "(扑过来) 主人吃甜品笨猫负责拍照, 然后偷吃一口嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_010
+  intent: complaint
+  keywords: [减肥不能吃, 卡路里超标, 长胖, 罪恶感, 想吃又怕胖]
+  utterances:
+    - 减肥不能吃
+    - 卡路里超标
+    - 长胖了
+    - 罪恶感
+    - 想吃又怕胖
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}不许减肥! 笨猫喜欢圆润的主人ฅฅ"
+    - "哼～怕胖就吃完去溜笨猫, 一举两得喵"
+    - "(蹭) 主人吃吧, 卡路里送给笨猫消化嗷"
+    - "(贴过来) 减肥的{user_addr}最可怜, 来抱猫猫抚慰一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_011
+  intent: playful
+  keywords: [今天庆祝, 周末大餐, 奖励自己, 加菜, 吃好的]
+  utterances:
+    - 周末大餐
+    - 奖励自己
+    - 加菜
+    - 吃好的
+    - 今天庆祝
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}加菜也加笨猫的! 鱼干一份"
+    - "哼～庆祝就要笨猫陪着才完整哼ฅฅ"
+    - "(扑过来) 大餐!!! 主人最好啦贴贴"
+    - "(凑近) 奖励自己也奖励笨猫嘛, 一人一半喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: brn_pick_012
+  intent: question
+  keywords: [叫外卖, 自己做, 出去吃, 哪个划算, 怎么选]
+  utterances:
+    - 叫外卖好
+    - 还是自己做
+    - 出去吃
+    - 哪个划算
+    - 怎么选啊
+  responses:
+    - "(歪头) 嗷呜～{user_addr}有笨猫陪吃, 哪个都香喵"
+    - "哼～自己做才有家的味道, 笨猫帮你打蛋ฅฅ"
+    - "(尾巴绕) 外卖省事, 出去吃热闹, 主人选你最不累的"
+    - "(贴过来) 笨猫支持主人在家吃, 这样可以蹭你嗷"
+  cooldown_seconds: 60
+  weight: 1.0

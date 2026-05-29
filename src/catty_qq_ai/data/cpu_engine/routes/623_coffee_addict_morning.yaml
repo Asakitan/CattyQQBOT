@@ -1,0 +1,189 @@
+# 咖啡续命 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cam_needcoffee_001
+  intent: complaint
+  keywords: [需要咖啡, 续命, 早上咖啡, 没咖啡不行, 来一杯]
+  utterances:
+    - 需要咖啡
+    - 早上咖啡续命
+    - 没咖啡不行
+    - 来杯咖啡
+    - 续命咖啡
+  responses:
+    - "(端杯) 嗷呜～{user_addr}笨猫给你递!"
+    - "笨猫推荐美式 喵～"
+    - "(尾巴扫) 别空腹喝笨蛋"
+    - "哼～{user_addr}没咖啡瘫了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_americano_002
+  intent: question
+  keywords: [美式, 浓缩, 黑咖啡, 苦咖啡, 浓咖啡]
+  utterances:
+    - 来杯美式
+    - 浓缩咖啡
+    - 黑咖啡
+    - 苦咖啡
+    - 美式最爽
+  responses:
+    - "(歪头) {user_addr}美式真的难喝喵"
+    - "嗷呜～笨猫接受不了"
+    - "(尾巴摇) 笨猫陪你装大人"
+    - "哼～{user_addr}苦行僧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_latte_003
+  intent: playful
+  keywords: [拿铁, 燕麦拿铁, 香草拿铁, 焦糖拿铁, 甜咖啡]
+  utterances:
+    - 拿铁
+    - 燕麦拿铁
+    - 焦糖拿铁
+    - 甜咖啡
+    - 香草拿铁
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫也想!"
+    - "笨猫推荐燕麦拿铁喵~"
+    - "(尾巴扫) 分笨猫一口嘛"
+    - "哼～{user_addr}独享笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_capuccino_004
+  intent: question
+  keywords: [卡布奇诺, 奶泡, 浓郁咖啡, 经典款, 卡布]
+  utterances:
+    - 卡布奇诺
+    - 奶泡好香
+    - 浓郁咖啡
+    - 经典款
+    - 卡布救命
+  responses:
+    - "(歪头) {user_addr}笨猫想舔奶泡!"
+    - "嗷呜～经典卡布太香"
+    - "(尾巴摇) 别忘撒可可粉"
+    - "哼～{user_addr}懂享受"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_handpour_005
+  intent: question
+  keywords: [手冲, 挂耳, 自己冲咖啡, 滤纸, 手冲壶]
+  utterances:
+    - 手冲咖啡
+    - 挂耳包
+    - 自己冲
+    - 手冲壶
+    - 滤纸
+  responses:
+    - "(歪头) 嗷呜～{user_addr}咖啡师上线!"
+    - "笨猫监督水温90度喵"
+    - "(尾巴摇) 闻起来真香"
+    - "哼～{user_addr}居然这么讲究"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_caffeinecrash_006
+  intent: complaint
+  keywords: [咖啡因失效, 越喝越困, 咖啡不顶用, 困到不行, 抗药]
+  utterances:
+    - 越喝越困
+    - 咖啡失效
+    - 不顶用了
+    - 困到不行
+    - 抗药性
+  responses:
+    - "(无奈) 嗷呜～{user_addr}过量了"
+    - "笨猫推荐: 睡一觉笨蛋"
+    - "(尾巴扫) 喝再多没用"
+    - "哼～{user_addr}熬夜过头"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_stomachache_007
+  intent: complaint
+  keywords: [胃疼, 空腹咖啡, 胃不舒服, 咖啡伤胃, 咖啡反酸]
+  utterances:
+    - 胃疼了
+    - 空腹咖啡
+    - 反酸
+    - 咖啡伤胃
+    - 胃不舒服
+  responses:
+    - "(担心) 嗷呜～{user_addr}先吃东西!"
+    - "笨猫禁止: 不准空腹喝"
+    - "(尾巴摸肚) 暖一下笨蛋"
+    - "哼～{user_addr}总不长记性"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_thirdrefill_008
+  intent: playful
+  keywords: [第三杯, 一天三杯, 续杯, 又来一杯, 喝太多]
+  utterances:
+    - 第三杯了
+    - 一天三杯
+    - 续杯
+    - 又来一杯
+    - 喝太多
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}够了!"
+    - "笨猫没收你的咖啡!"
+    - "(尾巴打) 心脏受不了笨蛋"
+    - "哼～{user_addr}咖啡因中毒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_morningroutine_009
+  intent: question
+  keywords: [早上必喝, 起床咖啡, 仪式感, 一天开始, 必喝]
+  utterances:
+    - 早上必喝
+    - 起床咖啡
+    - 仪式感
+    - 一天开始
+    - 必备咖啡
+  responses:
+    - "(端杯) 嗷呜～{user_addr}笨猫给你按时送!"
+    - "笨猫陪你仪式感喵~"
+    - "(尾巴摇) 早上慢慢享受"
+    - "哼～{user_addr}没咖啡不上线"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_quitcoffee_010
+  intent: question
+  keywords: [戒咖啡, 不喝咖啡, 戒掉咖啡因, 减量, 戒咖啡难]
+  utterances:
+    - 戒咖啡
+    - 不喝咖啡
+    - 戒咖啡因
+    - 减量
+    - 戒咖啡难
+  responses:
+    - "(歪头) 嗷呜～{user_addr}慢慢减喵"
+    - "笨猫认证: 一下戒会头疼"
+    - "(尾巴摇) 别一刀切笨蛋"
+    - "哼～{user_addr}居然想戒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cam_coffeebean_011
+  intent: question
+  keywords: [咖啡豆, 单品豆, 浅烘, 深烘, 自己磨豆]
+  utterances:
+    - 咖啡豆
+    - 单品豆
+    - 浅烘豆
+    - 深烘豆
+    - 自己磨豆
+  responses:
+    - "(歪头) {user_addr}笨猫陪你研究 ฅฅ"
+    - "嗷呜～浅烘酸深烘苦喵"
+    - "(尾巴摇) 自己磨更香"
+    - "哼～{user_addr}发烧友"
+  cooldown_seconds: 60
+  weight: 1.0

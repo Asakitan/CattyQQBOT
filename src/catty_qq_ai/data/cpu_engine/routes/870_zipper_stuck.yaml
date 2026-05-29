@@ -1,0 +1,189 @@
+# 拉链卡住 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: zpr_stk_001
+  intent: complaint
+  keywords: [拉链卡, 拉链卡布, 拉不动, 拉链坏, 拉链卡住]
+  utterances:
+    - "拉链卡"
+    - "拉链坏"
+    - "拉不动"
+    - "拉链卡布"
+    - "{user_addr}拉链"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}慢慢退喵"
+    - "(尾巴绕) 哼～别用力扯断"
+    - "(贴贴) 笨猫帮你解"
+    - "(凑近) 涂点蜡试试嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: zpr_stk_002
+  intent: playful
+  keywords: [拉链坏掉, 修拉链, 换拉链头, 修衣店, 配拉链]
+  utterances:
+    - "修拉链"
+    - "换拉链头"
+    - "修衣店"
+    - "配拉链"
+    - "{user_addr}修"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}修衣店便宜喵"
+    - "(凑近) 笨猫陪你去"
+    - "哼～别自己拆坏了"
+    - "(贴贴) 修好了笨猫帮你保养嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: zpr_stk_003
+  intent: complaint
+  keywords: [拉链头掉, 拉链滑落, 拉链开, 自动滑下, 拉链不固定]
+  utterances:
+    - "拉链头掉"
+    - "拉链滑落"
+    - "拉链开"
+    - "自动滑下"
+    - "{user_addr}拉链开"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}笨猫帮你扣喵"
+    - "(凑近) 哼～该换新拉链"
+    - "(贴贴) 临时用别针"
+    - "(凑近) 别尴尬嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: zpr_stk_004
+  intent: question
+  keywords: [润滑拉链, 蜡擦, 肥皂擦, 拉链润滑, 拉链保养]
+  utterances:
+    - "润滑拉链"
+    - "蜡擦"
+    - "肥皂擦"
+    - "保养"
+    - "{user_addr}润滑"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}蜡或肥皂喵"
+    - "(凑近) 笨猫推荐铅笔涂"
+    - "哼～别用油会脏"
+    - "(贴贴) 笨猫教你嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: zpr_stk_005
+  intent: complaint
+  keywords: [背包拉链坏, 包包拉链, 拉链开了, 东西要漏, 包包没保险]
+  utterances:
+    - "背包拉链坏"
+    - "包包拉链"
+    - "东西漏"
+    - "包没保险"
+    - "{user_addr}包拉链"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}赶紧修喵"
+    - "(尾巴绕) 哼～别东西丢"
+    - "(贴贴) 笨猫帮你找修包店"
+    - "(凑近) 临时用绳绑嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: zpr_stk_006
+  intent: playful
+  keywords: [拉链好玩, 拉来拉去, 玩拉链, 拉链声音, 拉链有趣]
+  utterances:
+    - "玩拉链"
+    - "拉来拉去"
+    - "拉链有趣"
+    - "拉链声音"
+    - "{user_addr}玩"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}小孩心ฅฅ"
+    - "(凑过来) 笨猫想玩拉链"
+    - "哼～别玩坏笨蛋"
+    - "(贴贴) 一起玩嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: zpr_stk_007
+  intent: complaint
+  keywords: [裤子拉链开, 没拉上, 没注意拉链, 尴尬, 走光]
+  utterances:
+    - "裤子拉链开"
+    - "没拉上"
+    - "尴尬"
+    - "走光"
+    - "{user_addr}没拉链"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}快拉上!ฅฅ"
+    - "(尾巴绕) 哼～主人粗心啦"
+    - "(贴贴) 笨猫帮你提醒"
+    - "(凑近) 出门检查嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: zpr_stk_008
+  intent: question
+  keywords: [拉链锁住, 反锁拉链, 拉链反向, 解开拉链, 拉链锁定]
+  utterances:
+    - "拉链锁住"
+    - "反锁"
+    - "反向"
+    - "解开拉链"
+    - "{user_addr}锁"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}用钳子轻夹喵"
+    - "(凑近) 笨猫帮你"
+    - "哼～拉链反锁有原因"
+    - "(贴贴) 慢慢来嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: zpr_stk_009
+  intent: complaint
+  keywords: [拉链卡布, 衣服夹拉链, 布被卡, 卡进拉链, 拉链布纹]
+  utterances:
+    - "卡布"
+    - "夹住布"
+    - "卡进拉链"
+    - "布纹"
+    - "{user_addr}卡布"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}慢慢倒着拉喵"
+    - "(尾巴绕) 哼～别拉断"
+    - "(贴贴) 笨猫帮你"
+    - "(凑近) 用镊子嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: zpr_stk_010
+  intent: playful
+  keywords: [拉链装饰, 拉链头挂件, 拉链头萌, 个性拉链, 拉链饰品]
+  utterances:
+    - "拉链头挂件"
+    - "拉链装饰"
+    - "拉链头萌"
+    - "个性拉链"
+    - "{user_addr}拉链饰品"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}挂笨猫挂件喵ฅฅ"
+    - "(凑过来) 笨猫想要"
+    - "哼～别太花哨"
+    - "(贴贴) 主人个性嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: zpr_stk_011
+  intent: complaint
+  keywords: [拉链生锈, 旧拉链, 拉链氧化, 卡顿, 拉链锈住]
+  utterances:
+    - "拉链生锈"
+    - "氧化"
+    - "拉链锈住"
+    - "旧拉链"
+    - "{user_addr}锈"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}用醋擦喵"
+    - "(凑近) 哼～除锈用润滑"
+    - "(贴贴) 笨猫帮你处理"
+    - "(凑近) 太严重换拉链嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

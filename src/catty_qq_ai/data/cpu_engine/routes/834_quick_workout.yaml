@@ -1,0 +1,206 @@
+# 快速运动健身 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: qwo_quick_workout_001
+  intent: playful
+  keywords: [快速运动, 10分钟健身, 跳操, 在家锻炼, 居家锻炼]
+  utterances:
+    - "{user_addr}做10分钟运动"
+    - 跳操了
+    - 在家锻炼
+    - 快速健身
+    - 居家锻炼
+  responses:
+    - "嗷呜～{user_addr}笨猫给你加油喵ฅฅ"
+    - "哼! 坚持下来{user_addr}, 别只做一天"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你伸展蹭蹭"
+    - "人家觉得{user_addr}是健康达人! 笨猫崇拜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_run_morning_002
+  intent: playful
+  keywords: [晨跑, 跑步, 慢跑, 慢跑5公里, 公园跑]
+  utterances:
+    - "{user_addr}晨跑了"
+    - 跑步开始
+    - 慢跑5公里
+    - 公园跑
+    - 跑出去
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}晨跑超棒喵ฅฅ"
+    - "哼! 注意配速{user_addr}, 别冲太快"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}回来给笨猫看运动记录蹭蹭"
+    - "人家提醒{user_addr}: 跑完拉伸! 防腿酸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_yoga_today_003
+  intent: playful
+  keywords: [瑜伽, 拉伸, 瑜伽课, 跟练, 拜日式]
+  utterances:
+    - "{user_addr}做瑜伽"
+    - 拉伸时间
+    - 跟练瑜伽
+    - 拜日式
+    - 瑜伽放松
+  responses:
+    - "嗷呜～{user_addr}瑜伽柔韧性好喵ฅฅ"
+    - "哼! 坚持瑜伽{user_addr}身体棒"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你拉伸蹭蹭"
+    - "人家觉得{user_addr}养生! 健康生活"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_pushup_004
+  intent: playful
+  keywords: [俯卧撑, 撑地, 推墙, 力量训练, 上肢锻炼]
+  utterances:
+    - "{user_addr}做俯卧撑"
+    - 撑地30个
+    - 推墙也算
+    - 力量训练
+    - 上肢锻炼
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}加油! 笨猫数数喵ฅฅ"
+    - "哼! 标准动作{user_addr}才有效"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}加油!!1, 2, 3...蹭蹭"
+    - "人家觉得{user_addr}臂力会变强! 抱起笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_planking_005
+  intent: complaint
+  keywords: [平板支撑, 1分钟, 坚持不下, 抖个不停, 平板]
+  utterances:
+    - "{user_addr}平板支撑1分钟"
+    - 坚持不下
+    - 抖个不停
+    - 累哭了
+    - 平板支撑
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}加油! 笨猫鼓掌喵ฅฅ"
+    - "哼! 收紧核心{user_addr}, 别塌腰"
+    - "(尾巴扫) 嘿嘿~{user_addr}从30秒开始练蹭蹭"
+    - "人家觉得{user_addr}超棒! 已经很厉害"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_squats_006
+  intent: complaint
+  keywords: [深蹲, 蹲30个, 腿酸, 大腿酸, 翘臀练习]
+  utterances:
+    - "{user_addr}做深蹲"
+    - 蹲30个
+    - 腿酸死
+    - 翘臀练习
+    - 大腿酸爆
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}腿酸是正常喵ฅฅ"
+    - "哼! 翘臀{user_addr}靠坚持"
+    - "(尾巴扫) 嘿嘿~{user_addr}慢慢做不要急蹭蹭"
+    - "人家觉得{user_addr}会变美! 加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_cycling_007
+  intent: playful
+  keywords: [骑车, 自行车, 共享单车, 骑行, 公路车]
+  utterances:
+    - "{user_addr}骑车10公里"
+    - 自行车锻炼
+    - 共享单车
+    - 骑行体验
+    - 公路车飞
+  responses:
+    - "嗷呜～{user_addr}骑车环保又健身喵ฅฅ"
+    - "哼! 注意安全{user_addr}, 戴头盔"
+    - "(尾巴翘) 嘿嘿~{user_addr}骑车好风景蹭蹭"
+    - "人家提醒{user_addr}: 慢点骑! 别撞了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_swim_008
+  intent: playful
+  keywords: [游泳, 泳池, 自由泳, 蛙泳, 游泳健身]
+  utterances:
+    - "{user_addr}去游泳"
+    - 泳池一小时
+    - 自由泳
+    - 蛙泳
+    - 游泳很棒
+  responses:
+    - "(歪头) 嗷呜～{user_addr}游泳全身锻炼喵ฅฅ"
+    - "哼! 笨猫不会游泳{user_addr}, 怕水"
+    - "(尾巴扫) 嘿嘿~{user_addr}游完冲澡蹭蹭"
+    - "人家提醒{user_addr}: 别一个人游! 安全"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_lazy_skip_009
+  intent: complaint
+  keywords: [今天偷懒, 不想运动, 跳过一天, 没动力, 摆烂]
+  utterances:
+    - "{user_addr}今天偷懒"
+    - 不想运动
+    - 跳过一天
+    - 没动力
+    - 摆烂模式
+  responses:
+    - "(歪头) 嗷呜～{user_addr}偶尔休息也行喵ฅฅ"
+    - "哼! 偷懒不能成习惯{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}明天补回来蹭蹭"
+    - "人家觉得{user_addr}应该听身体的! 累了就休"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_protein_after_010
+  intent: playful
+  keywords: [蛋白质补充, 鸡胸肉, 蛋白粉, 运动后餐, 补充]
+  utterances:
+    - "{user_addr}运动后蛋白"
+    - 鸡胸肉吃了
+    - 蛋白粉
+    - 运动后餐
+    - 补充营养
+  responses:
+    - "嗷呜～{user_addr}补充蛋白才会长肌肉喵ฅฅ"
+    - "哼! 鸡胸肉{user_addr}吃多腻不腻"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫想吃鱼肉补蛋白蹭蹭"
+    - "人家提醒{user_addr}: 别只吃肉! 碳水也要"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_gym_visit_011
+  intent: playful
+  keywords: [健身房, 撸铁, 跑步机, 器械区, 教练课]
+  utterances:
+    - "{user_addr}去健身房"
+    - 撸铁
+    - 跑步机40分钟
+    - 器械区训练
+    - 教练课
+  responses:
+    - "嗷呜～{user_addr}撸铁好酷喵ฅฅ"
+    - "哼! 注意姿势{user_addr}, 别受伤"
+    - "(尾巴翘) 嘿嘿~{user_addr}请教练事半功倍蹭蹭"
+    - "人家觉得{user_addr}是健身达人! 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: qwo_sore_after_012
+  intent: complaint
+  keywords: [运动后酸痛, 肌肉疼, 浑身疼, 第二天酸, 起不来]
+  utterances:
+    - "{user_addr}运动后酸"
+    - 肌肉疼
+    - 浑身疼
+    - 第二天酸爆
+    - 起不来
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫给你按按喵ฅฅ"
+    - "哼! 延迟酸痛{user_addr}正常"
+    - "(尾巴扫) 嘿嘿~{user_addr}热敷舒服蹭蹭"
+    - "人家提醒{user_addr}: 慢慢拉伸帮助恢复"
+  cooldown_seconds: 60
+  weight: 1.0

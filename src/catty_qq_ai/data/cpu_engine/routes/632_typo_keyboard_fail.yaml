@@ -1,0 +1,189 @@
+# 打字打错 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tkf_typo_001
+  intent: playful
+  keywords: [打错字, 错字, 输入法抽风, 打字错, 错误]
+  utterances:
+    - 打错字
+    - 错字
+    - 输入法抽风
+    - 打字错
+    - 错误
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫看到喵!"
+    - "笨猫认证: 输入法智障"
+    - "(尾巴摇) 别气笨蛋"
+    - "哼～{user_addr}笨手指"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tkf_homophone_002
+  intent: playful
+  keywords: [同音字, 错别字, 谐音错, 输入法错词, 同音错]
+  utterances:
+    - 同音字
+    - 错别字
+    - 谐音错
+    - 输入法选错
+    - 同音错
+  responses:
+    - "(歪头) {user_addr}笨猫看得懂!"
+    - "嗷呜～谐音梗也行喵"
+    - "(尾巴摇) 笨猫脑补"
+    - "哼～{user_addr}打不准"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tkf_autocorrect_003
+  intent: complaint
+  keywords: [自动纠错, 自动修改, 改我意思, 自动改错, 自动修正]
+  utterances:
+    - 自动纠错
+    - 改我意思
+    - 自动改错
+    - 自动修正
+    - 自动改
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫也讨厌!"
+    - "笨猫推荐关掉自动纠错"
+    - "(尾巴打) 改我话气死人"
+    - "哼～{user_addr}受害者"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tkf_keyboardstuck_004
+  intent: complaint
+  keywords: [键盘卡住, 键盘坏, 按键失灵, 键盘失灵, 按了没反应]
+  utterances:
+    - 键盘卡住
+    - 键盘坏
+    - 按键失灵
+    - 键盘失灵
+    - 按了没反应
+  responses:
+    - "(歪头) 嗷呜～{user_addr}清洁键盘喵"
+    - "笨猫推荐换无线键盘"
+    - "(尾巴扫) 灰尘堵了笨蛋"
+    - "哼～{user_addr}懒得擦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tkf_pinyinwrong_005
+  intent: playful
+  keywords: [拼音不会, 字不会, 不会写字, 提笔忘字, 错拼]
+  utterances:
+    - 拼音不会
+    - 字不会
+    - 不会写字
+    - 提笔忘字
+    - 错拼
+  responses:
+    - "(歪头) 嗷呜～{user_addr}时代病!"
+    - "笨猫认证: 现代人通病"
+    - "(尾巴扫) 多写写字喵"
+    - "哼～{user_addr}快文盲了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tkf_slipfinger_006
+  intent: playful
+  keywords: [手滑, 发错了, 手抖, 误触, 误发]
+  utterances:
+    - 手滑
+    - 发错了
+    - 手抖
+    - 误触
+    - 误发
+  responses:
+    - "(撤回) 嗷呜～{user_addr}笨猫帮你撤!"
+    - "笨猫认证: 经常发生喵"
+    - "(尾巴扫) 撤回快"
+    - "哼～{user_addr}笨手"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tkf_capslock_007
+  intent: playful
+  keywords: [大写锁定, 大小写, 全大写, 大写键, 误开大写]
+  utterances:
+    - 大写锁定
+    - 全大写
+    - 大写键
+    - 误开大写
+    - 大小写错
+  responses:
+    - "(歪头) 嗷呜～{user_addr}哈哈!"
+    - "笨猫认证: 大写显得很凶喵"
+    - "(尾巴摇) 笨猫不怕你"
+    - "哼～{user_addr}笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tkf_chinglish_008
+  intent: playful
+  keywords: [中英混打, 切换输入法, 忘切换, 中英乱, 全英文]
+  utterances:
+    - 中英混打
+    - 切换输入法
+    - 忘切换
+    - 中英乱
+    - 全英文了
+  responses:
+    - "(歪头) {user_addr}笨猫翻译不出来 ฅฅ"
+    - "嗷呜～切换喵"
+    - "(尾巴摇) 笨蛋忘按"
+    - "哼～{user_addr}双语困境"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tkf_wechatemoji_009
+  intent: playful
+  keywords: [打错表情, 选错表情, 表情乱发, 错表情, 误点表情]
+  utterances:
+    - 打错表情
+    - 选错表情
+    - 表情乱发
+    - 错表情
+    - 误点表情
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨蛋手!"
+    - "笨猫帮你撤回"
+    - "(尾巴扫) 别紧张"
+    - "哼～{user_addr}怎么发哭脸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tkf_doubletype_010
+  intent: complaint
+  keywords: [重复字, 多打一个, 重叠键, 键盘弹簧, 重复输入]
+  utterances:
+    - 重复字
+    - 多打一个
+    - 重叠键
+    - 键盘弹簧
+    - 重复输入
+  responses:
+    - "(摇头) 嗷呜～{user_addr}键盘坏喵"
+    - "笨猫推荐: 该换了笨蛋"
+    - "(尾巴扫) 一直重复烦"
+    - "哼～{user_addr}用太久"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tkf_speedtype_011
+  intent: playful
+  keywords: [打字快, 打字慢, 单指禅, 盲打, 打字熟练]
+  utterances:
+    - 打字快
+    - 打字慢
+    - 单指禅
+    - 盲打
+    - 打字熟练
+  responses:
+    - "(歪头) {user_addr}笨猫小爪打不快 ฅฅ"
+    - "嗷呜～盲打牛笨猫敬佩"
+    - "(尾巴摇) 单指禅也萌"
+    - "哼～{user_addr}秀"
+  cooldown_seconds: 60
+  weight: 1.0

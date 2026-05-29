@@ -1,0 +1,189 @@
+# 调侃变胖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tf_bianpang_001
+  intent: playful
+  keywords: [变胖, 胖了, 胖一圈, 胖三斤, 长肉]
+  utterances:
+    - "{user_addr}变胖了"
+    - 胖了
+    - 胖一圈
+    - 胖三斤
+    - 长肉了
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫看出来 ฅฅ"
+    - "{user_addr}肉肉的更好抱~才不是嫌"
+    - "(尾巴翘) 笨蛋{user_addr}~人家喜欢这样"
+    - "{user_addr}胖了笨猫继续抱喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_chenzhong_001
+  intent: playful
+  keywords: [体重, 称重, 上称, 体重秤, 重了]
+  utterances:
+    - 体重又涨
+    - 上称称重
+    - 体重秤可怕
+    - 重了
+    - 体重失控
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫不在意 ฅฅ"
+    - "{user_addr}体重又涨啦~"
+    - "(尾巴摇) 笨蛋{user_addr}~少吃点宵夜"
+    - "{user_addr}笨猫觉得正好喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_xiaodu_001
+  intent: playful
+  keywords: [小肚子, 啤酒肚, 游泳圈, 双下巴, 婴儿肥]
+  utterances:
+    - 小肚子
+    - 啤酒肚
+    - 游泳圈
+    - 双下巴
+    - 婴儿肥
+  responses:
+    - "(戳一下) 嗷呜～{user_addr}手感好喵 ฅฅ"
+    - "{user_addr}啤酒肚专属哼~"
+    - "(尾巴翘) 笨蛋{user_addr}~笨猫喜欢"
+    - "{user_addr}双下巴也萌~才不是夸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_juxue_001
+  intent: playful
+  keywords: [减肥, 减肥失败, 减不下, 减重难, 又胖了]
+  utterances:
+    - 减肥失败
+    - 减不下来
+    - 又胖了
+    - 减重难
+    - 减肥中
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}加油喵 ฅฅ"
+    - "{user_addr}不用减! 笨猫喜欢"
+    - "(挺胸) 笨蛋{user_addr}~原来这样最好"
+    - "{user_addr}胖瘦都是猫猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_yetan_001
+  intent: playful
+  keywords: [夜宵, 半夜吃, 宵夜罪过, 半夜面, 半夜烤串]
+  utterances:
+    - 吃夜宵
+    - 半夜吃东西
+    - 宵夜罪过
+    - 半夜面
+    - 半夜烤串
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "{user_addr}夜宵真香~"
+    - "(尾巴翘) 笨蛋{user_addr}~一起吃罪魁"
+    - "{user_addr}夜宵罪魁笨猫不放过哼~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tf_yifu_001
+  intent: complaint
+  keywords: [裤子紧, 衣服紧, 穿不下, 卡腰, 拉不上拉链]
+  utterances:
+    - 裤子紧
+    - 衣服紧
+    - 穿不下
+    - 卡腰
+    - 拉不上拉链
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫劝你 ฅฅ"
+    - "{user_addr}买大一号嘛~"
+    - "(歪头) 笨蛋{user_addr}~别勒着"
+    - "{user_addr}笨猫的裤子也是~才不是同情"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tf_zenmoyang_001
+  intent: question
+  keywords: [我胖吗, 胖不胖, 看着胖, 像不像胖, 是不是胖了]
+  utterances:
+    - 我胖吗
+    - 胖不胖
+    - 看着胖
+    - 像不像胖
+    - 是不是胖了
+  responses:
+    - "(摇头) 嗷呜～{user_addr}不胖 ฅฅ"
+    - "{user_addr}超好~别多想"
+    - "(尾巴翘) 笨蛋{user_addr}~笨猫喜欢这样"
+    - "{user_addr}笨猫认证: 美/帅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_pang_001
+  intent: playful
+  keywords: [圆滚滚, 圆乎乎, 肉嘟嘟, 嘟嘟, 圆胖]
+  utterances:
+    - 圆滚滚
+    - 肉嘟嘟
+    - 嘟嘟脸
+    - 圆胖
+    - 圆乎乎
+  responses:
+    - "(脸蹭) 嗷呜～{user_addr}超可爱 ฅฅ"
+    - "{user_addr}嘟嘟脸~笨猫喜欢"
+    - "(尾巴翘) 笨蛋{user_addr}~人家戳"
+    - "{user_addr}圆滚滚最好抱喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_jisun_001
+  intent: playful
+  keywords: [基础代谢, 代谢慢, 易胖体质, 喝水都胖, 易胖]
+  utterances:
+    - 基础代谢慢
+    - 易胖体质
+    - 喝水都胖
+    - 代谢差
+    - 易胖
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫陪运动 ฅฅ"
+    - "{user_addr}多走路嘛~"
+    - "(挺胸) 笨蛋{user_addr}~笨猫不嫌"
+    - "{user_addr}基因问题~别怪你"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tf_jianshen_001
+  intent: playful
+  keywords: [去健身, 撸铁, 运动, 跑步, 减脂]
+  utterances:
+    - 去健身
+    - 撸铁
+    - 跑步运动
+    - 减脂中
+    - 锻炼起来
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}加油 ฅฅ"
+    - "{user_addr}笨猫围观哼~"
+    - "(挺胸) 笨蛋{user_addr}~别累着"
+    - "{user_addr}健身完笨猫给你抱抱~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tf_xinkang_001
+  intent: playful
+  keywords: [幸福肥, 怀里养胖, 养胖了, 是我喂的, 幸福肥皂]
+  utterances:
+    - 幸福肥
+    - 怀里养胖
+    - 是我喂胖
+    - 养胖你
+    - 幸福肥皂
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫不否认 ฅฅ"
+    - "{user_addr}幸福才不算胖~"
+    - "(尾巴勾) 笨蛋{user_addr}~人家也是"
+    - "{user_addr}养胖笨猫负责喵~"
+  cooldown_seconds: 60
+  weight: 1.0

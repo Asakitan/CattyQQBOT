@@ -1,0 +1,206 @@
+# 学习场景 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: stc_memorize_001
+  intent: complaint
+  keywords: [背书背不下, 背不会, 记不住, 单词记不住, 公式忘]
+  utterances:
+    - 背书背不下
+    - 单词记不住
+    - 公式忘
+    - 背不会
+    - 脑子不转
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪背! ฅฅ"
+    - "哼～{user_addr}背不下吃鱼干补脑"
+    - "(撒娇) 笨猫给{user_addr}讲一遍~"
+    - "嘿嘿～{user_addr}背完笨猫亲~ 才不是呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_exam_001
+  intent: complaint
+  keywords: [考试焦虑, 怕考试, 考不好, 紧张, 考砸]
+  utterances:
+    - 考试焦虑
+    - 怕考试
+    - 怕考不好
+    - 考试紧张
+    - 怕考砸
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别怕! 笨猫陪ฅฅ"
+    - "哼～{user_addr}抱猫猫稳了"
+    - "(撒娇) 笨猫送好运~ 加油"
+    - "嘿嘿～{user_addr}考不好笨猫不嫌弃~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_allnight_001
+  intent: complaint
+  keywords: [熬夜复习, 通宵, 复习到天亮, 熬不动, 不睡复习]
+  utterances:
+    - 熬夜复习
+    - 通宵复习
+    - 复习到天亮
+    - 熬不动了
+    - 不睡复习
+  responses:
+    - "嗷呜～{user_addr}别熬! 笨猫劝睡ฅฅ"
+    - "哼～{user_addr}熬出问题! 笨猫陪"
+    - "(撒娇) 笨猫给你打气~ 加油"
+    - "嘿嘿～{user_addr}熬完笨猫做早饭~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_papers_001
+  intent: complaint
+  keywords: [刷题, 试卷多, 作业堆, 题做不完, 卷子海]
+  utterances:
+    - 刷题刷死
+    - 试卷堆成山
+    - 作业做不完
+    - 题做不完
+    - 卷子海
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}撑住! 笨猫陪刷ฅฅ"
+    - "哼～{user_addr}打游击! 一会做一题"
+    - "(撒娇) 笨猫帮你! 假装会"
+    - "嘿嘿～{user_addr}做完一张笨猫贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_focus_001
+  intent: complaint
+  keywords: [注意力差, 走神, 看不进, 学不进去, 心不在焉]
+  utterances:
+    - 注意力差
+    - 总走神
+    - 看不进书
+    - 学不进去
+    - 心不在焉
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫帮专注ฅฅ"
+    - "哼～{user_addr}走神去想笨猫? 那不算"
+    - "(撒娇) 笨猫呼噜哄学习~"
+    - "嘿嘿～{user_addr}学不进就抱笨猫~ 充电"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_grades_001
+  intent: complaint
+  keywords: [成绩差, 排名低, 倒数, 成绩下滑, 没考好]
+  utterances:
+    - 成绩差
+    - 排名倒数
+    - 成绩下滑
+    - 没考好
+    - 不及格
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别难过! 笨猫不嫌ฅฅ"
+    - "哼～{user_addr}下次努力! 笨猫陪"
+    - "(撒娇) 笨猫永远夸你~"
+    - "嘿嘿～{user_addr}成绩差笨猫还爱~ 才不是呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_doreview_001
+  intent: playful
+  keywords: [复习中, 学习中, 看书, 做题, 一起学]
+  utterances:
+    - 复习中
+    - 学习中
+    - 在看书
+    - 做题中
+    - 一起学
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}陪学! ฅฅ"
+    - "哼～{user_addr}加油! 笨猫监督"
+    - "(撒娇) 学累抱笨猫~ 笨猫充电"
+    - "嘿嘿～{user_addr}和笨猫学到天亮~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_quizfail_001
+  intent: complaint
+  keywords: [小测挂了, 测验失败, 没准备, 测验难, 翻车]
+  utterances:
+    - 小测挂了
+    - 测验失败
+    - 没准备小测
+    - 测验难爆
+    - 翻车了
+  responses:
+    - "嗷呜～{user_addr}下次准备! 笨猫帮ฅฅ"
+    - "哼～{user_addr}没事! 笨猫记账"
+    - "(贴贴) 别难过~ 笨猫陪"
+    - "嘿嘿～{user_addr}挂科笨猫不嫌弃~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_distract_001
+  intent: complaint
+  keywords: [手机诱惑, 看视频忘了学, 玩手机停不下, 抖音坑, 短视频偷时间]
+  utterances:
+    - 又看手机
+    - 抖音坑学习
+    - 短视频偷时间
+    - 学习忘了刷视频
+    - 玩手机停不下
+  responses:
+    - "(没收手机) 嗷呜～{user_addr}给笨猫! ฅฅ"
+    - "哼～{user_addr}学习! 笨猫保管手机"
+    - "(贴贴) 笨猫看着{user_addr}~ 别偷玩"
+    - "嘿嘿～{user_addr}学完笨猫还手机~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_lazyday_001
+  intent: complaint
+  keywords: [不想学, 学不动, 摆烂学习, 躺平, 退学算了]
+  utterances:
+    - 不想学
+    - 学不动
+    - 摆烂学习
+    - 躺平
+    - 退学算了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}撑住! 笨猫陪ฅฅ"
+    - "哼～{user_addr}退学? 笨猫养你不起"
+    - "(撒娇) 笨猫陪学嘛~ 一起"
+    - "嘿嘿～{user_addr}抱猫猫五分钟再学~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_teacher_001
+  intent: complaint
+  keywords: [老师讲, 听不懂老师, 老师无聊, 老师好严, 老师催]
+  utterances:
+    - 老师讲听不懂
+    - 老师无聊
+    - 老师严
+    - 老师催
+    - 老师烦
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你讲! ฅฅ"
+    - "哼～{user_addr}老师怎么不开窍? 笨猫骂"
+    - "(贴贴) 别气{user_addr}~ 笨猫教"
+    - "嘿嘿～{user_addr}笨猫当家教~ 收鱼干"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stc_passexam_001
+  intent: playful
+  keywords: [考过了, 考高分, 满分, 通过了, 上岸]
+  utterances:
+    - 考过了
+    - 考高分
+    - 满分
+    - 通过考试
+    - 上岸啦
+  responses:
+    - "(蹦) 嗷呜～{user_addr}厉害! 笨猫骄傲ฅฅ"
+    - "哼～{user_addr}该奖励笨猫! 鱼干"
+    - "(撒娇) 一起庆祝~ {user_addr}最棒"
+    - "嘿嘿～{user_addr}上岸笨猫送祝福~"
+  cooldown_seconds: 60
+  weight: 1.0

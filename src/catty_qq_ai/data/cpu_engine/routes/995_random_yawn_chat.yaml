@@ -1,0 +1,172 @@
+# 打哈欠闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: yc_hexianjie_001
+  intent: playful
+  keywords: [打哈欠, 哈欠连天, 困哈欠, 打了一个大哈欠, 哈欠不止]
+  utterances:
+    - "打哈欠"
+    - "{user_addr}哈欠连天"
+    - "困哈欠"
+    - "打了大哈欠"
+    - "哈欠不止"
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}哈欠连天该休息喵～"
+    - "哼～大哈欠笨猫看着都困 ฅฅ"
+    - "(贴贴) 困哈欠是身体在喊累"
+    - "哈欠不止可能缺氧嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_chuanran_001
+  intent: playful
+  keywords: [哈欠传染, 看人哈欠也想打, 一打俩, 哈欠会传染, 互相传染]
+  utterances:
+    - "哈欠传染"
+    - "{user_addr}看人哈欠也想打"
+    - "一打俩"
+    - "哈欠会传染"
+    - "互相传染"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}哈欠传染是真的喵～"
+    - "哼～一个连一个停不下来 ฅฅ"
+    - "(尾巴搭) 看到笨猫哈欠你也跟着"
+    - "互相传染感情深嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_xiawu_001
+  intent: complaint
+  keywords: [下午困, 午后困, 饭后困, 下午想睡, 困意来袭]
+  utterances:
+    - "下午困"
+    - "{user_addr}饭后困"
+    - "下午想睡"
+    - "午后困"
+    - "困意来袭"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}饭后困是血糖喵～"
+    - "哼～下午困趴一会 ฅฅ"
+    - "(尾巴搭) 午后小睡20分钟很管用"
+    - "困意来袭别硬撑嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_kaihui_001
+  intent: complaint
+  keywords: [开会困, 上课困, 听讲困, 老板讲话困, 报告困]
+  utterances:
+    - "开会困"
+    - "{user_addr}上课困"
+    - "听讲困"
+    - "老板讲话困"
+    - "报告困"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}开会困憋住喵～"
+    - "哼～老板讲话也催眠 ฅฅ"
+    - "(尾巴搭) 上课困掐自己一下"
+    - "报告困提前喝咖啡嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_zaoshang_001
+  intent: complaint
+  keywords: [早上困, 起床困, 早起想睡, 早晨哈欠, 早上没睡醒]
+  utterances:
+    - "早上困"
+    - "{user_addr}起床困"
+    - "早起想睡"
+    - "早晨哈欠"
+    - "早上没醒"
+  responses:
+    - "(蹭蹭) 嗷呜～{user_addr}早上困洗脸醒喵～"
+    - "哼～起床困谁懂 ฅฅ"
+    - "(贴贴) 早起想睡就赖床5分钟"
+    - "早晨哈欠是常态嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_wancan_001
+  intent: complaint
+  keywords: [熬夜困, 通宵困, 凌晨困, 早睡困, 困到走不动]
+  utterances:
+    - "熬夜困"
+    - "{user_addr}凌晨困"
+    - "通宵困"
+    - "早睡困"
+    - "困到走不动"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}熬夜伤身喵～"
+    - "哼～凌晨困赶紧睡 ฅฅ"
+    - "(尾巴搭) 通宵困补一觉"
+    - "困到走不动赶紧休息嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_yanleihaqian_001
+  intent: playful
+  keywords: [哈欠流泪, 哈欠眼泪, 打哈欠流眼泪, 哈欠掉泪, 哈欠湿眼眶]
+  utterances:
+    - "哈欠流泪"
+    - "{user_addr}打哈欠流眼泪"
+    - "哈欠掉泪"
+    - "哈欠湿眼眶"
+    - "哈欠眼泪"
+  responses:
+    - "(笑) 嗷呜～{user_addr}哈欠流泪好可爱喵～"
+    - "哼～打太大哈欠就眼泪 ฅฅ"
+    - "(贴贴) 哈欠掉泪正常生理"
+    - "湿眼眶笨猫给擦嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_haqianxin_001
+  intent: question
+  keywords: [哈欠原因, 为什么打哈欠, 哈欠机理, 哈欠原因是啥, 哈欠学问]
+  utterances:
+    - "哈欠原因"
+    - "{user_addr}为什么哈欠"
+    - "哈欠机理"
+    - "哈欠原因是啥"
+    - "哈欠学问"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}哈欠是大脑缺氧喵～"
+    - "哼～机理至今未完全弄清 ฅฅ"
+    - "(贴贴) 哈欠原因复杂"
+    - "笨猫只知道哈欠就是要睡了嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_bao_001
+  intent: playful
+  keywords: [被你气得打哈欠, 无聊到哈欠, 太无聊哈欠, 听烦了哈欠, 嫌弃哈欠]
+  utterances:
+    - "无聊到哈欠"
+    - "{user_addr}太无聊哈欠"
+    - "听烦了哈欠"
+    - "气得打哈欠"
+    - "嫌弃哈欠"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫给你讲笑话喵～"
+    - "哼～气得打哈欠是新表达 ฅฅ"
+    - "(尾巴搭) 太无聊找点事做"
+    - "听烦了换个话题嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yc_kapian_001
+  intent: playful
+  keywords: [一打哈欠想你, 哈欠是想念, 哈欠传情, 哈欠说想, 哈欠表情包]
+  utterances:
+    - "哈欠是想你"
+    - "{user_addr}哈欠是想念"
+    - "哈欠传情"
+    - "哈欠说想"
+    - "哈欠表情包"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}哈欠是猫猫想你喵～"
+    - "哼～哈欠传情很浪漫 ฅฅ"
+    - "(蹭蹭) 哈欠说想真是新理由"
+    - "想念就来抱抱嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

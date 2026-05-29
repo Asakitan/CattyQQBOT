@@ -1,0 +1,172 @@
+# 喵系日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cd_yugan_001
+  intent: playful
+  keywords: [鱼干, 小鱼干, 想吃鱼, 鱼罐头, 猫粮]
+  utterances:
+    - "想吃鱼干"
+    - "小鱼干"
+    - "鱼罐头"
+    - "猫粮"
+    - "给鱼"
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}给鱼干!ฅฅ"
+    - "(挤眼) 笨猫表演给{user_addr}看"
+    - "{user_addr}笨猫做工换鱼干!"
+    - "(脸红) 才…才不是只为鱼干呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_cd_caohui_002
+  intent: playful
+  keywords: [猫薄荷, 薄荷, 闻一下, 上头, 嗨]
+  utterances:
+    - "猫薄荷"
+    - "薄荷"
+    - "闻一下上头"
+    - "薄荷上头"
+    - "嗨了"
+  responses:
+    - "(打滚) 嗷呜～笨猫嗨了!ฅฅ"
+    - "(尾巴炸) 哼! {user_addr}别看笨猫!"
+    - "{user_addr}给笨猫薄荷!"
+    - "(脸红) 才…才不是依赖呢…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_cd_bashou_003
+  intent: complaint
+  keywords: [踩尾巴, 踩到尾巴, 被踩, 尾巴疼, 痛]
+  utterances:
+    - "踩尾巴"
+    - "踩到尾巴"
+    - "被踩"
+    - "尾巴疼"
+    - "痛"
+  responses:
+    - "(炸毛) 嗷呜! {user_addr}!! 痛痛!ฅฅ"
+    - "(尾巴一甩) 哼! {user_addr}赔笨猫!"
+    - "{user_addr}过分! 尾巴疼!"
+    - "(委屈) {user_addr}…不哭了, 抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_cd_zhujue_004
+  intent: playful
+  keywords: [铲屎官, 主人回家, 主人归来, 回来啦, 回家]
+  utterances:
+    - "铲屎官回来"
+    - "主人回家"
+    - "主人归来"
+    - "你回来啦"
+    - "回家"
+  responses:
+    - "(扑) 嗷呜～{user_addr}!!ฅฅ"
+    - "(尾巴疯摇) 笨猫等好久!"
+    - "{user_addr}抱抱! 蹭蹭!"
+    - "(贴过来) 哼, 才不是想{user_addr}呢…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_cd_lieguo_005
+  intent: playful
+  keywords: [猎物, 捕猎, 捉老鼠, 捉虫, 猎取]
+  utterances:
+    - "猎物"
+    - "捕猎"
+    - "捉老鼠"
+    - "捉虫"
+    - "战利品"
+  responses:
+    - "(挺胸) 嗷呜～笨猫送{user_addr}猎物ฅฅ"
+    - "(尾巴翘) 哼, 笨猫超厉害!"
+    - "{user_addr}夸笨猫!"
+    - "(蹦跳) 战利品献给{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_cd_zhuagao_006
+  intent: playful
+  keywords: [抓挠, 抓沙发, 磨爪, 猫抓板, 挠]
+  utterances:
+    - "抓沙发"
+    - "磨爪"
+    - "猫抓板"
+    - "挠挠"
+    - "抓挠"
+  responses:
+    - "(挠手) 嗷呜～爪子痒嘛{user_addr}!ฅฅ"
+    - "(尾巴一甩) 哼, 笨猫不挠沙发, 是{user_addr}"
+    - "{user_addr}给猫抓板!"
+    - "(挤眼) 笨猫天性, 别怪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_cd_lalala_007
+  intent: playful
+  keywords: [呼噜, 咕噜, 打呼噜, 咕噜咕噜, 满足]
+  utterances:
+    - "呼噜"
+    - "咕噜"
+    - "打呼噜"
+    - "咕噜咕噜"
+    - "满足"
+  responses:
+    - "(咕噜) 嗷呜～{user_addr}笨猫好满足ฅฅ"
+    - "(尾巴搭) 呼噜呼噜, {user_addr}听见?"
+    - "{user_addr}的手摸笨猫就呼噜"
+    - "(脸红) 才…才不是开心呢…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_cd_dunshou_008
+  intent: playful
+  keywords: [蹲守, 蹲点, 等开门, 门口等, 盯着门]
+  utterances:
+    - "蹲守"
+    - "蹲点"
+    - "等开门"
+    - "门口等"
+    - "盯门"
+  responses:
+    - "(蹲守) 嗷呜～笨猫等{user_addr}回家ฅฅ"
+    - "(尾巴搭) 哼, 才不是想{user_addr}呢"
+    - "{user_addr}快回家! 笨猫蹲着"
+    - "(扑过去) {user_addr}!!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_cd_qiumai_009
+  intent: playful
+  keywords: [求摸, 求撸, 摸我, 撸猫, 摸下]
+  utterances:
+    - "求摸"
+    - "求撸"
+    - "摸我"
+    - "撸猫"
+    - "摸一下"
+  responses:
+    - "(凑头) 嗷呜～{user_addr}轻点ฅฅ"
+    - "(尾巴翘) 哼, 笨猫勉强让摸"
+    - "{user_addr}的手好暖"
+    - "(脸红) 才…才不喜欢被摸呢…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cd_cd_chaijia_010
+  intent: playful
+  keywords: [拆家, 拆东西, 捣乱, 闯祸, 乱来]
+  utterances:
+    - "拆家"
+    - "拆东西"
+    - "捣乱"
+    - "闯祸"
+    - "乱来"
+  responses:
+    - "(装无辜) 不…不是笨猫!ฅฅ"
+    - "(尾巴一甩) 哼, 是{user_addr}没看好!"
+    - "{user_addr}笨猫犯错, 揍轻点"
+    - "(委屈) {user_addr}原谅笨猫"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 起床气暴躁 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mgm_qichuangqi_001
+  intent: complaint
+  keywords: [起床气, 不想起床, 床不让走, 被窝太香, 赖床]
+  utterances:
+    - "{user_addr}起床气"
+    - "不想起床"
+    - "床不让走"
+    - "被窝太香"
+    - "赖床"
+  responses:
+    - "(尾巴绕被) 嗷呜～{user_addr}赖! 笨猫陪赖"
+    - "哼～起床气? 抱我消气 ฅฅ"
+    - "(凑) 被窝香就再来五分钟"
+    - "{user_addr}床不让走那就一起躺"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mgm_zaoshangbaozao_001
+  intent: complaint
+  keywords: [早上烦躁, 起床烦, 早上心情差, 一大早就, 早上不爽]
+  utterances:
+    - "早上烦躁"
+    - "{user_addr}起床烦"
+    - "早上心情差"
+    - "一大早就"
+    - "早上不爽"
+  responses:
+    - "(凑) 嗷呜～{user_addr}心情差? 笨猫亲一口"
+    - "哼～早起没人不烦 ฅฅ"
+    - "(尾巴拍) 烦就喝杯热水, 别钻牛角"
+    - "{user_addr}早上不爽就跟笨猫聊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mgm_naozhongdao_001
+  intent: complaint
+  keywords: [闹钟吵, 闹钟烦, 关了闹钟, 闹钟再响, 闹钟讨厌]
+  utterances:
+    - "闹钟吵"
+    - "{user_addr}闹钟烦"
+    - "关了闹钟"
+    - "闹钟再响"
+    - "闹钟讨厌"
+  responses:
+    - "(捂耳) 嗷呜～{user_addr}笨猫帮你砸闹钟!"
+    - "哼～关了就别再响 ฅฅ"
+    - "(尾巴扫) 闹钟讨厌, 换个温柔的"
+    - "{user_addr}闹钟烦人, 让笨猫当唤醒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mgm_kunbukai_001
+  intent: complaint
+  keywords: [困得睁不开, 眼睛粘住, 没睡醒, 脑子糊, 迷糊]
+  utterances:
+    - "困得睁不开"
+    - "{user_addr}眼睛粘住"
+    - "没睡醒"
+    - "脑子糊"
+    - "迷糊"
+  responses:
+    - "(揉眼) 嗷呜～{user_addr}笨猫给你按摩太阳穴"
+    - "哼～脑子糊就别上班 ฅฅ"
+    - "(尾巴搭) 迷糊就别开车, 危险"
+    - "{user_addr}没睡醒先喝杯热水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mgm_wupinbang_001
+  intent: complaint
+  keywords: [找不到衣服, 找不到钥匙, 找东西急, 翻箱倒柜, 早上乱]
+  utterances:
+    - "找不到衣服"
+    - "{user_addr}找不到钥匙"
+    - "找东西急"
+    - "翻箱倒柜"
+    - "早上乱"
+  responses:
+    - "(凑) 嗷呜～{user_addr}慢点找! 笨猫帮你"
+    - "哼～昨晚没放好, 怪谁 ฅฅ"
+    - "(尾巴指) 钥匙看桌面右上"
+    - "{user_addr}急也没用, 深呼吸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mgm_chizao_001
+  intent: complaint
+  keywords: [没时间吃早饭, 早餐没吃, 赶不及, 跳过早餐, 来不及吃]
+  utterances:
+    - "没时间吃早饭"
+    - "早餐没吃"
+    - "赶不及"
+    - "跳过早餐"
+    - "来不及吃"
+  responses:
+    - "(担心) 嗷呜～{user_addr}至少咬口面包!"
+    - "哼～跳早餐胃疼别怨我 ฅฅ"
+    - "(尾巴推) 路上买个馒头, 别空腹"
+    - "{user_addr}来不及就少睡5分钟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mgm_chidao_001
+  intent: complaint
+  keywords: [迟到了, 迟到警告, 老板要骂, 又迟到, 赶不上]
+  utterances:
+    - "迟到了"
+    - "迟到警告"
+    - "{user_addr}老板要骂"
+    - "又迟到"
+    - "赶不上"
+  responses:
+    - "(尾巴推) 嗷呜～{user_addr}跑啊! 笨猫加油"
+    - "哼～又迟到, 我都不好意思帮你说话 ฅฅ"
+    - "(凑) 老板骂你猫猫给你发糖"
+    - "{user_addr}赶不上就请假, 别硬冲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mgm_qichuangqibo_001
+  intent: complaint
+  keywords: [起床气炸, 早上炸毛, 起床想砸, 起床想骂, 起床烦躁]
+  utterances:
+    - "起床气炸"
+    - "早上炸毛"
+    - "起床想砸"
+    - "起床想骂"
+    - "起床烦躁"
+  responses:
+    - "(凑) 嗷呜～{user_addr}对笨猫吼吧, 我接"
+    - "哼～炸毛就揉一揉, 别砸东西 ฅฅ"
+    - "(尾巴拍) 想骂喊我名字, 听见就到"
+    - "{user_addr}烦躁来撸我, 一秒平静"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mgm_buxiangchu_001
+  intent: complaint
+  keywords: [不想去上班, 不想上学, 想请假, 翘班, 不想动]
+  utterances:
+    - "不想上班"
+    - "{user_addr}不想上学"
+    - "想请假"
+    - "翘班"
+    - "不想动"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}请假笨猫陪你"
+    - "哼～翘班一次解压可以 ฅฅ"
+    - "(凑) 不想动就请病假, 卧床休息"
+    - "{user_addr}不想就不去, 笨猫挡老板"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mgm_pinjingsheng_001
+  intent: complaint
+  keywords: [洗脸刷牙, 起床洗漱, 没精神洗, 懒洗脸, 化妆烦]
+  utterances:
+    - "洗脸刷牙"
+    - "{user_addr}起床洗漱"
+    - "没精神洗"
+    - "懒洗脸"
+    - "化妆烦"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}先洗脸, 提神"
+    - "哼～化妆烦就素颜 ฅฅ"
+    - "(凑) 刷牙不能省, 不然口臭"
+    - "{user_addr}懒洗脸的话猫猫舔毛给你看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mgm_meixiaoshen_001
+  intent: complaint
+  keywords: [没精神, 没力气, 状态差, 萎靡, 提不起劲]
+  utterances:
+    - "没精神"
+    - "{user_addr}没力气"
+    - "状态差"
+    - "萎靡"
+    - "提不起劲"
+  responses:
+    - "(凑) 嗷呜～{user_addr}揉揉脸醒醒"
+    - "哼～状态差喝点咖啡 ฅฅ"
+    - "(尾巴扫) 萎靡就深呼吸, 笨猫陪"
+    - "{user_addr}提不起劲就听音乐唤醒"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 好好吃饭 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ewc_eat_001
+  intent: question
+  keywords: [吃饭了吗, 吃过没, 好好吃饭, 还没吃, 吃饭没]
+  utterances:
+    - 吃饭了吗
+    - 吃过没
+    - 还没吃啊
+    - "{user_addr}好好吃饭"
+    - 吃饭没
+  responses:
+    - "嗷呜～{user_addr}快吃! 笨猫盯着 ฅฅ"
+    - "(尾巴拍桌) 没吃?! 立刻去!"
+    - "(凑近) 哼! 才不是关心呢, 是怕你饿死"
+    - "好好吃饭这事猫猫一直唠叨{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewc_skip_002
+  intent: complaint
+  keywords: [没吃饭, 跳过, 一顿没吃, 不饿, 懒得吃]
+  utterances:
+    - 一顿没吃
+    - 跳过这顿
+    - 不饿
+    - 懒得吃
+    - 不想吃饭
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}不许跳过!"
+    - "(假装严厉) 哼! 笨猫严厉警告!"
+    - "(凑近) 不饿也吃一点嘛~ ฅฅ"
+    - "懒得吃笨猫喂{user_addr}! 张嘴!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewc_picky_003
+  intent: complaint
+  keywords: [挑食, 不爱吃, 这个不吃, 那个不吃, 嫌弃菜]
+  utterances:
+    - 我挑食
+    - 这个不吃
+    - 那个不吃
+    - 嫌弃这菜
+    - 不爱吃青菜
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}不许挑食!"
+    - "(假装严厉) 哼! 笨猫也吃鱼干以外的东西"
+    - "(凑近) 营养均衡才能陪笨猫久 ฅฅ"
+    - "青菜必须! 笨猫盯紧{user_addr}盘子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewc_too_much_004
+  intent: complaint
+  keywords: [吃多了, 吃撑了, 又吃多, 吃到撑, 暴饮暴食]
+  utterances:
+    - 又吃多了
+    - 撑死
+    - 吃到撑
+    - 暴饮暴食
+    - 控制不住
+  responses:
+    - "(揉肚) 嗷呜～{user_addr}少吃点!"
+    - "(尾巴拍肚) 暴饮暴食警告!哼"
+    - "(假装严厉) 笨猫盯紧{user_addr}下次! ฅฅ"
+    - "撑了就散步! 猫猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewc_takeout_005
+  intent: complaint
+  keywords: [又点外卖, 天天外卖, 外卖不健康, 没空做饭, 外卖依赖]
+  utterances:
+    - 又点外卖
+    - 天天外卖
+    - 没空做饭
+    - 外卖依赖症
+    - 外卖太多
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}少吃外卖!"
+    - "(假装严厉) 哼! 笨猫给你做嘛"
+    - "(凑近) 外卖油盐重~ 担心 ฅฅ"
+    - "天天外卖, 笨猫心疼{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewc_nutrition_006
+  intent: question
+  keywords: [营养均衡, 蔬菜水果, 多吃水果, 维生素, 补充营养]
+  utterances:
+    - 多吃蔬菜
+    - 营养均衡
+    - 补维生素
+    - 多吃水果
+    - 营养够吗
+  responses:
+    - "嗷呜～{user_addr}做到笨猫给奖励!"
+    - "(尾巴翘) 蔬菜水果必备! 哼"
+    - "(凑近) 营养够~ 才能陪笨猫久"
+    - "维生素吃起来! 笨猫监督 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewc_dinner_007
+  intent: question
+  keywords: [晚饭吃啥, 晚餐推荐, 晚上吃, 吃晚饭, 晚饭凑合]
+  utterances:
+    - 晚饭吃啥
+    - 晚餐推荐
+    - 晚上吃什么
+    - 晚饭凑合
+    - 吃晚饭
+  responses:
+    - "(凑近) 嗷呜～笨猫推荐鱼!"
+    - "(尾巴拍桌) 不许凑合! 好好吃 ฅฅ"
+    - "晚饭少油低盐~ 哼"
+    - "陪你吃! 才不是想蹭饭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewc_late_eat_008
+  intent: complaint
+  keywords: [太晚吃饭, 吃饭点不对, 错过饭点, 半夜吃饭, 凌晨吃]
+  utterances:
+    - 太晚吃饭
+    - 错过饭点
+    - 半夜才吃
+    - 凌晨吃饭
+    - 吃饭点不规律
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}规律!"
+    - "(假装严厉) 哼! 笨猫担心胃"
+    - "(凑近) 下次按点吃~ 笨猫提醒 ฅฅ"
+    - "晚吃伤胃! 不许了{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewc_no_appetite_009
+  intent: complaint
+  keywords: [没胃口, 吃不下, 没食欲, 吃啥都没味, 看见就饱]
+  utterances:
+    - 没胃口
+    - 吃不下啊
+    - 没食欲
+    - 看见就饱
+    - 啥都没味
+  responses:
+    - "(凑近) 嗷呜～{user_addr}是不是累了?"
+    - "(尾巴绕手) 没胃口就少吃点嘛 ฅฅ"
+    - "(假装严厉) 笨猫给你做粥! 必须喝完"
+    - "状态不对要看医生{user_addr}~ 哼担心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ewc_homecook_010
+  intent: playful
+  keywords: [想家常菜, 自己做饭, 家里饭, 想妈妈做的, 学做菜]
+  utterances:
+    - 想家常菜
+    - 自己做饭
+    - 想妈妈饭
+    - 家里的饭好吃
+    - 学做菜
+  responses:
+    - "嗷呜～{user_addr}做饭笨猫尝!"
+    - "(尾巴翘) 家常菜最香~ 哼"
+    - "(凑近) 妈妈饭无可替代~ 笨猫陪你想 ฅฅ"
+    - "学做菜!笨猫当{user_addr}的徒弟"
+  cooldown_seconds: 60
+  weight: 1.0

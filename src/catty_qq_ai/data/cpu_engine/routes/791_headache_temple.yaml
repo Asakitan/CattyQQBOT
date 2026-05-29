@@ -1,0 +1,206 @@
+# 头疼太阳穴 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ht_toutong_001
+  intent: complaint
+  keywords: [头疼, 头痛, 偏头痛, 一边头疼, 太阳穴疼]
+  utterances:
+    - "头疼"
+    - "头痛"
+    - "偏头痛"
+    - "一边头疼"
+    - "太阳穴疼"
+  responses:
+    - "(按太阳穴) 嗷呜～{user_addr}笨猫帮你按"
+    - "哼～是不是没喝水 ฅฅ"
+    - "(尾巴搭头) 安静会儿"
+    - "猫猫给你揉揉喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_toutongyaoyaoun_001
+  intent: question
+  keywords: [布洛芬, 止疼药, 头疼药, 安乃近, 散利痛]
+  utterances:
+    - "布洛芬"
+    - "止疼药"
+    - "头疼药"
+    - "安乃近"
+    - "散利痛"
+  responses:
+    - "(递药) {user_addr}布洛芬一片 ฅฅ"
+    - "哼～别空腹吃"
+    - "(尾巴扫) 吃完别躺立马"
+    - "猫猫给你倒水喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_jiajiao_001
+  intent: complaint
+  keywords: [头胀, 头晕脑胀, 闷头, 脑袋紧, 头沉]
+  utterances:
+    - "头胀"
+    - "头晕脑胀"
+    - "闷头"
+    - "脑袋紧"
+    - "头沉"
+  responses:
+    - "(贴) 嗷呜～{user_addr}是不是熬夜了"
+    - "哼～头胀就开窗 ฅฅ"
+    - "(尾巴搭) 深呼吸"
+    - "猫猫陪你休息喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_yali_001
+  intent: complaint
+  keywords: [压力大头疼, 紧张头疼, 工作头疼, 焦虑头疼, 想太多头疼]
+  utterances:
+    - "压力大头疼"
+    - "紧张头疼"
+    - "工作头疼"
+    - "焦虑头疼"
+    - "想太多头疼"
+  responses:
+    - "(贴) 嗷呜～{user_addr}先别想了"
+    - "哼～脑子也要休息 ฅฅ"
+    - "(尾巴卷) 笨猫给你按按"
+    - "猫猫陪你深呼吸喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_shuibuhao_001
+  intent: complaint
+  keywords: [失眠头疼, 没睡好头疼, 熬夜头疼, 睡少头疼, 醒来头疼]
+  utterances:
+    - "失眠头疼"
+    - "没睡好头疼"
+    - "熬夜头疼"
+    - "睡少头疼"
+    - "醒来头疼"
+  responses:
+    - "(瞪) {user_addr}早提醒你别熬!"
+    - "哼～头疼活该 ฅฅ"
+    - "(尾巴搭) 补一觉"
+    - "猫猫给你拉窗帘喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_pianton_001
+  intent: question
+  keywords: [偏头痛犯, 慢性偏头痛, 老偏头痛, 季节性头痛, 一变天头疼]
+  utterances:
+    - "偏头痛犯了"
+    - "慢性偏头痛"
+    - "老偏头痛"
+    - "季节性头痛"
+    - "一变天头疼"
+  responses:
+    - "(贴) {user_addr}偏头痛得吃专药 ฅฅ"
+    - "哼～避光休息"
+    - "(尾巴扫) 别吃巧克力刺激"
+    - "猫猫给你贴风油精喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_yixu_001
+  intent: question
+  keywords: [按摩头, 头部按摩, 按头穴位, 按摩仪, 头疗]
+  utterances:
+    - "按摩头"
+    - "头部按摩"
+    - "按头穴位"
+    - "按摩仪"
+    - "头疗"
+  responses:
+    - "(按头) {user_addr}笨猫给你头部按摩 ฅฅ"
+    - "哼～太阳穴+风池穴"
+    - "(尾巴搭) 力度别太重"
+    - "猫猫双爪按摩师喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_kafeitouton_001
+  intent: complaint
+  keywords: [咖啡因头痛, 戒咖啡头疼, 喝咖啡少头疼, 没喝咖啡头疼, 戒断头疼]
+  utterances:
+    - "咖啡因头痛"
+    - "戒咖啡头疼"
+    - "喝咖啡少头疼"
+    - "没喝咖啡头疼"
+    - "戒断头疼"
+  responses:
+    - "(递杯) {user_addr}今天喝半杯过渡 ฅฅ"
+    - "哼～戒咖啡要慢慢减"
+    - "(尾巴扫) 头疼很正常"
+    - "猫猫陪你戒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_yibuyouzu_001
+  intent: complaint
+  keywords: [头疼到吐, 头疼想吐, 头痛恶心, 头痛剧烈, 严重头疼]
+  utterances:
+    - "头疼到吐"
+    - "头疼想吐"
+    - "头痛恶心"
+    - "头痛剧烈"
+    - "严重头疼"
+  responses:
+    - "(扶) 嗷呜～{user_addr}严重了去医院!"
+    - "哼～可能是颅内问题 ฅฅ"
+    - "(尾巴卷) 别犹豫"
+    - "猫猫陪你挂急诊喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_yan_001
+  intent: complaint
+  keywords: [屏幕看久头疼, 看手机头疼, 用电脑头疼, 看书头疼, 视疲劳头疼]
+  utterances:
+    - "屏幕看久头疼"
+    - "看手机头疼"
+    - "用电脑头疼"
+    - "看书头疼"
+    - "视疲劳头疼"
+  responses:
+    - "(拿走手机) {user_addr}闭眼休息 ฅฅ"
+    - "哼～20-20-20法则"
+    - "(尾巴卷腰) 远眺5分钟"
+    - "猫猫给你滴眼药水喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_lengshui_001
+  intent: question
+  keywords: [冷敷头疼, 热敷头疼, 冰袋, 毛巾敷, 敷头]
+  utterances:
+    - "冷敷头疼"
+    - "热敷头疼"
+    - "冰袋敷头"
+    - "毛巾敷头"
+    - "敷头"
+  responses:
+    - "(端冰袋) {user_addr}偏头痛冷敷 ฅฅ"
+    - "哼～紧张性头疼热敷"
+    - "(尾巴扫) 选对很关键"
+    - "猫猫给你包毛巾喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ht_baoxiang_001
+  intent: playful
+  keywords: [头疼求抱, 头疼撒娇, 头疼抱抱, 头疼摸头, 摸我头]
+  utterances:
+    - "头疼求抱"
+    - "头疼撒娇"
+    - "头疼抱抱"
+    - "头疼摸头"
+    - "摸我头"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫摸头治百病"
+    - "哼～头疼也撒娇 ฅฅ"
+    - "(尾巴卷头) 笨猫陪你"
+    - "猫猫贴你额头喵~"
+  cooldown_seconds: 60
+  weight: 1.0

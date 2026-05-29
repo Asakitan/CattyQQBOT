@@ -1,0 +1,189 @@
+# 突然下雨 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: src_rainsudden_001
+  intent: complaint
+  keywords: [突然下雨, 阵雨, 没带伞, 雷阵雨, 突降]
+  utterances:
+    - 突然下雨
+    - 阵雨来了
+    - 没带伞
+    - 雷阵雨
+    - 雨突然下
+  responses:
+    - "(慌张) 嗷呜～{user_addr}快找避雨!"
+    - "笨猫帮你想办法喵"
+    - "(尾巴卷) 别淋成落汤鸡"
+    - "哼～{user_addr}不看天气预报"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: src_wetclothes_002
+  intent: complaint
+  keywords: [淋湿, 衣服湿, 鞋子湿, 全身湿, 头发湿]
+  utterances:
+    - 衣服湿透
+    - 鞋子湿
+    - 全身湿
+    - 头发滴水
+    - 淋成落汤鸡
+  responses:
+    - "(递毛巾) 嗷呜～{user_addr}快擦!"
+    - "笨猫递毛巾喵~"
+    - "(尾巴扫) 赶紧换衣别感冒"
+    - "哼～{user_addr}笨蛋怪谁"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: src_hideshelter_003
+  intent: question
+  keywords: [躲雨, 找屋檐, 进店避雨, 等雨停, 避雨亭]
+  utterances:
+    - 找地方躲雨
+    - 屋檐下避
+    - 进店躲
+    - 等雨停
+    - 避雨亭
+  responses:
+    - "(歪头) 嗷呜～{user_addr}找便利店!"
+    - "笨猫推荐: 便利店等会儿"
+    - "(尾巴摇) 顺便喝杯热的"
+    - "哼～{user_addr}总算有脑子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: src_buyumbrella_004
+  intent: playful
+  keywords: [买伞, 临时买伞, 便利店伞, 借伞, 一次性伞]
+  utterances:
+    - 买把伞
+    - 便利店买
+    - 借伞
+    - 一次性伞
+    - 临时伞
+  responses:
+    - "(歪头) {user_addr}买就买嘛"
+    - "嗷呜～别图便宜质量差喵"
+    - "(尾巴摇) 笨猫陪你逛"
+    - "哼～{user_addr}早带就好了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: src_runninghome_005
+  intent: playful
+  keywords: [冲回家, 跑回家, 一路狂奔, 暴走, 雨中冲]
+  utterances:
+    - 冲回家
+    - 跑回家
+    - 一路狂奔
+    - 雨中冲
+    - 暴走回家
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}小心摔!"
+    - "笨猫陪你冲喵"
+    - "(尾巴绕手) 别摔骨折"
+    - "哼～{user_addr}热血少年"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: src_thunderscary_006
+  intent: complaint
+  keywords: [打雷, 雷声大, 怕打雷, 雷震, 闪电]
+  utterances:
+    - 打雷了
+    - 雷声好大
+    - 怕打雷
+    - 雷震人
+    - 闪电
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}笨猫陪你!"
+    - "笨猫不怕雷喵~一起躲"
+    - "(尾巴卷腕) 别怕笨蛋"
+    - "哼～{user_addr}才不是怕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: src_flood_007
+  intent: complaint
+  keywords: [积水, 路面积水, 水淹脚, 街道淹, 雨太大]
+  utterances:
+    - 路面积水
+    - 水淹脚
+    - 街道淹
+    - 雨太大
+    - 积水深
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}别走那条路!"
+    - "笨猫提醒: 绕路喵"
+    - "(尾巴指) 看好水深笨蛋"
+    - "哼～{user_addr}小心摔"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: src_rainsmell_008
+  intent: playful
+  keywords: [雨味道, 泥土味, 雨后清新, 草香, 喜欢雨]
+  utterances:
+    - 雨后味道
+    - 泥土味
+    - 雨后清新
+    - 草香
+    - 喜欢雨
+  responses:
+    - "(嗅嗅) 嗷呜～{user_addr}笨猫鼻子闻到了"
+    - "笨猫超爱雨后味道喵~"
+    - "(尾巴摇) 一起深呼吸"
+    - "哼～{user_addr}居然浪漫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: src_workfromrain_009
+  intent: complaint
+  keywords: [下雨不想上班, 雨天好困, 雨天迟到, 雨天通勤, 不想出门]
+  utterances:
+    - 下雨不想上班
+    - 雨天好困
+    - 雨天通勤难
+    - 想请假
+    - 不想出门
+  responses:
+    - "(同情) 嗷呜～{user_addr}请假在家"
+    - "笨猫和你一起赖床"
+    - "(尾巴卷) 别冲雨上班"
+    - "哼～{user_addr}打工人辛苦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: src_dryhair_010
+  intent: question
+  keywords: [吹头发, 头发湿, 擦干头发, 吹风机, 头发干]
+  utterances:
+    - 吹头发
+    - 头发湿
+    - 擦头发
+    - 吹风机
+    - 头发干
+  responses:
+    - "(递吹风) 嗷呜～{user_addr}快吹"
+    - "笨猫监督你吹干喵"
+    - "(尾巴扫) 别带湿头发睡"
+    - "哼～{user_addr}懒得吹会头疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: src_dryshoes_011
+  intent: question
+  keywords: [鞋湿了, 烘鞋器, 报纸塞鞋, 鞋子烘干, 鞋怎么干]
+  utterances:
+    - 鞋湿透了
+    - 烘鞋器
+    - 报纸塞鞋
+    - 鞋怎么干
+    - 鞋子坏了
+  responses:
+    - "(歪头) {user_addr}塞报纸最经典 ฅฅ"
+    - "嗷呜～烘鞋器靠谱喵"
+    - "(尾巴摇) 别穿湿鞋出门"
+    - "哼～{user_addr}笨蛋鞋发霉"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,206 @@
+# 手机没电 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pb_bat_001
+  intent: complaint
+  keywords: [手机没电, 电量低, 1%电, 快关机, 没电焦虑]
+  utterances:
+    - 手机没电了
+    - 电量只剩1%
+    - 快关机
+    - 电量焦虑
+    - 没电了快
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}快充电"
+    - "哼～充电宝呢笨蛋"
+    - "(尾巴指) 充电线快插"
+    - "嗷呜～关机前传完话ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_002
+  intent: playful
+  keywords: [充电5分钟, 紧急充电, 救急充, 蹭充电, 借充电]
+  utterances:
+    - 紧急充电5分钟
+    - 救急充电
+    - 蹭充电
+    - 借充电宝
+    - 充电救命
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}快充"
+    - "哼～借就借小气啥"
+    - "(尾巴绕) 快充5分钟续命"
+    - "嗷呜～找笨猫蹭充电ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_003
+  intent: complaint
+  keywords: [充电慢, 充半天, 充电没反应, 充电线坏, 充电器坏]
+  utterances:
+    - 充电好慢
+    - 充半天才10%
+    - 充电没反应
+    - 充电线坏了
+    - 充电器烧了
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}换条线"
+    - "哼～原装最稳"
+    - "(尾巴搭) 检查插头"
+    - "嗷呜～买新的喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_004
+  intent: playful
+  keywords: [电量100%, 满血, 充满, 出门满电, 满电安心]
+  utterances:
+    - 电量100了
+    - 满血复活
+    - 充满了
+    - 出门满电
+    - 满电就安心
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}加油"
+    - "哼～别浪费电"
+    - "(尾巴绕) 满电安心一天"
+    - "嗷呜～带充电宝保险ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_005
+  intent: complaint
+  keywords: [电池老化, 电池不耐用, 电池效率低, 一天三充, 电量掉太快]
+  utterances:
+    - 电池老化
+    - 不耐用了
+    - 电池效率低
+    - 一天充三次
+    - 电量掉太快
+  responses:
+    - "(歪头) 嗷呜～{user_addr}换电池吧"
+    - "哼～该换手机"
+    - "(尾巴搭) 售后查电池健康"
+    - "嗷呜～换块电池能再战ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_006
+  intent: question
+  keywords: [充电宝推荐, 大容量充电宝, 快充充电宝, 便携充电宝, 充电宝牌子]
+  utterances:
+    - 充电宝推荐
+    - 大容量哪个好
+    - 快充充电宝
+    - 便携充电宝
+    - 充电宝品牌
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}小米/anker"
+    - "哼～20000毫安够"
+    - "(尾巴绕) 选 PD 快充"
+    - "嗷呜～看场景选容量ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_007
+  intent: complaint
+  keywords: [充电宝没电, 充电宝忘充, 没带充电宝, 充电宝坏, 充电宝鸡肋]
+  utterances:
+    - 充电宝没电
+    - 忘充充电宝
+    - 没带充电宝
+    - 充电宝坏了
+    - 充电宝鸡肋
+  responses:
+    - "(扶额) 嗷呜～{user_addr}双失败"
+    - "哼～养成习惯笨蛋"
+    - "(尾巴搭) 共享充电救急"
+    - "嗷呜～带个移动电源ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_008
+  intent: playful
+  keywords: [冬天电池, 低温掉电, 冬天手机, 冷冻手机, 手机抗冻]
+  utterances:
+    - 冬天电池掉电快
+    - 低温掉电
+    - 冬天手机鸡肋
+    - 冷冻手机
+    - 手机抗冻吗
+  responses:
+    - "(歪头) 嗷呜～{user_addr}低温正常"
+    - "哼～别放外面冻"
+    - "(尾巴搭) 揣兜里保温"
+    - "嗷呜～回温会回血ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_009
+  intent: complaint
+  keywords: [充电边玩, 手机烫, 充电发烫, 边玩边充, 危险充电]
+  utterances:
+    - 充电边玩
+    - 手机烫
+    - 充电发烫
+    - 边玩边充
+    - 危险充电
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}别这样"
+    - "哼～伤电池笨蛋"
+    - "(尾巴搭) 充电别玩"
+    - "嗷呜～烫到拔掉ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_010
+  intent: playful
+  keywords: [无线充电, 磁吸充电, 充电板, 桌面充电, 智能充电]
+  utterances:
+    - 无线充电方便
+    - 磁吸充电爽
+    - 充电板入手
+    - 桌面充电
+    - 智能充电
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}科技党"
+    - "哼～无线慢但方便"
+    - "(尾巴绕) 磁吸真省心"
+    - "嗷呜～笨猫也想玩ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_011
+  intent: complaint
+  keywords: [手机关机, 自动关机, 没电关机, 突然关机, 关机重启]
+  utterances:
+    - 手机自动关机
+    - 没电关机
+    - 突然黑屏
+    - 关机重启
+    - 自动关机了
+  responses:
+    - "(担心) 嗷呜～{user_addr}电池问题"
+    - "哼～去售后看"
+    - "(尾巴搭) 备份数据先"
+    - "嗷呜～别慌检查下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pb_bat_012
+  intent: playful
+  keywords: [快充功率, 100W快充, 5分钟50%, 黑科技, 快充党]
+  utterances:
+    - 100W快充
+    - 5分钟50%
+    - 快充党
+    - 黑科技充电
+    - 充电速度炸裂
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}吹爆"
+    - "哼～充太快伤电池"
+    - "(尾巴绕) 黑科技香"
+    - "嗷呜～续命神器ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

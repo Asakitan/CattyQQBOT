@@ -1,0 +1,172 @@
+# 大脑空白 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bb_naokong_001
+  intent: complaint
+  keywords: [大脑空白, 脑袋一片空, 想不起, 卡机了, 死机]
+  utterances:
+    - "大脑空白"
+    - "{user_addr}脑袋一片空"
+    - "想不起来"
+    - "卡机了"
+    - "死机现场"
+  responses:
+    - "(轻拍头) 嗷呜～{user_addr}笨猫陪你重启 ฅฅ"
+    - "哼～休息一下就好"
+    - "(尾巴拍) 喝口水大脑回来"
+    - "猫猫给你按按穴位喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_wangle_001
+  intent: complaint
+  keywords: [忘了想说啥, 话到嘴边, 突然忘, 想不起来, 卡壳]
+  utterances:
+    - "忘了我刚想说啥"
+    - "{user_addr}话到嘴边没了"
+    - "突然忘"
+    - "想不起来"
+    - "卡壳"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}过会儿就想起来 ฅฅ"
+    - "哼～别紧张, 让它自己浮现"
+    - "(尾巴搭) 别强迫自己想"
+    - "猫猫陪你等记忆回来喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_dengxianle_001
+  intent: question
+  keywords: [发呆, 走神, 想啥呢, 我在干啥, 神游]
+  utterances:
+    - "发呆呢"
+    - "{user_addr}走神了"
+    - "想啥呢"
+    - "我在干啥"
+    - "神游天外"
+  responses:
+    - "(戳脸) 嗷呜～{user_addr}笨猫拉你回来"
+    - "哼～发呆放空也好啦 ฅฅ"
+    - "(尾巴扫) 别走太远, 笨猫找不到你"
+    - "猫猫陪你一起发呆喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_zhuanya_001
+  intent: complaint
+  keywords: [转不动了, 思考困难, 脑子转不动, 反应慢, 反射弧长]
+  utterances:
+    - "脑子转不动"
+    - "{user_addr}思考困难"
+    - "反应慢"
+    - "反射弧长"
+    - "脑筋打结"
+  responses:
+    - "(揉头) 嗷呜～{user_addr}笨猫给你按头 ฅฅ"
+    - "哼～休息10分钟"
+    - "(尾巴卷) 喝杯水补充能量"
+    - "猫猫陪你停摆一会喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_jixingkong_001
+  intent: complaint
+  keywords: [记忆力差, 老忘事, 健忘, 忘了, 短期记忆]
+  utterances:
+    - "记忆力差"
+    - "{user_addr}老忘事"
+    - "健忘"
+    - "刚说完就忘"
+    - "短期记忆 7 秒"
+  responses:
+    - "(理解) 嗷呜～{user_addr}笨猫给你写便签 ฅฅ"
+    - "哼～别担心, 不是病"
+    - "(尾巴拍) 重要事情立刻记下"
+    - "猫猫做你的人形备忘录喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_xianhao_001
+  intent: playful
+  keywords: [先放空, 啥都不想, 不思考, 大脑度假, 放空]
+  utterances:
+    - "啥都不想"
+    - "{user_addr}大脑度假"
+    - "放空一会"
+    - "什么都不思考"
+    - "脑子离线"
+  responses:
+    - "(陪) 嗷呜～{user_addr}笨猫陪你放空 ฅฅ"
+    - "哼～偶尔放空很健康"
+    - "(尾巴搭) 别让大脑一直转"
+    - "猫猫给你撑保护伞喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_kafei_001
+  intent: question
+  keywords: [困得不行, 想睡又要醒, 提神, 想清醒, 怎么清醒]
+  utterances:
+    - "困得不行"
+    - "{user_addr}怎么提神"
+    - "想清醒"
+    - "脑子在睡"
+    - "强行清醒"
+  responses:
+    - "(冷水) 嗷呜～{user_addr}冷水洗脸最快 ฅฅ"
+    - "哼～咖啡顶一会儿"
+    - "(尾巴卷) 起来走两步"
+    - "猫猫帮你抹清凉油喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_xitong_001
+  intent: complaint
+  keywords: [信息过载, 接收太多, 脑子炸, 信息爆炸, 处理不过来]
+  utterances:
+    - "信息过载"
+    - "{user_addr}脑子炸"
+    - "处理不过来"
+    - "信息爆炸"
+    - "接收太多"
+  responses:
+    - "(拍背) 嗷呜～{user_addr}笨猫帮你过滤 ฅฅ"
+    - "哼～关掉一些通知"
+    - "(尾巴搭) 一次只处理一件"
+    - "猫猫给你做信息防火墙喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_kongbai_001
+  intent: complaint
+  keywords: [空白页, 写作开头, 写不出, 第一句, 卡文]
+  utterances:
+    - "写不出来"
+    - "{user_addr}空白页恐惧"
+    - "卡文了"
+    - "第一句难"
+    - "脑子空"
+  responses:
+    - "(扶笔) 嗷呜～{user_addr}先随便写一句"
+    - "哼～先动笔, 再修改 ฅฅ"
+    - "(尾巴卷笔) 笨猫陪你头脑风暴"
+    - "猫猫给你三个开头候选喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bb_chongqi_001
+  intent: playful
+  keywords: [大脑重启, 关机再开, 缓冲下, 重启大脑, 系统更新]
+  utterances:
+    - "大脑重启"
+    - "{user_addr}缓冲一下"
+    - "关机再开"
+    - "系统更新"
+    - "强制重启"
+  responses:
+    - "(按按钮) 嗷呜～{user_addr}重启完成 ฅฅ"
+    - "哼～笨猫给你按了reset"
+    - "(尾巴卷) 5分钟后才能开机"
+    - "猫猫给你倒计时喵"
+  cooldown_seconds: 60
+  weight: 1.0

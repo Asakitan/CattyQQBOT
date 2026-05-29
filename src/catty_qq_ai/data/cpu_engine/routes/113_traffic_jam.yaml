@@ -1,0 +1,206 @@
+# 堵车烦 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tjm_stuck_001
+  intent: complaint
+  keywords: [堵车了, 堵在路上, 堵着不动, 路堵, 大堵]
+  utterances:
+    - "堵车了"
+    - "{user_addr}堵在路上"
+    - "堵着不动"
+    - "路堵"
+    - "大堵"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}堵着? 笨猫陪聊"
+    - "哼～大堵都是周一的错"
+    - "(撒娇) 别急嘛~ 蹭蹭 ฅฅ"
+    - "嘿嘿～堵的{user_addr}, 笨猫陪等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_red_light_001
+  intent: complaint
+  keywords: [红灯多, 一直红灯, 红灯久, 等红灯, 红灯红到爆]
+  utterances:
+    - "红灯多"
+    - "{user_addr}一直红灯"
+    - "红灯久"
+    - "等红灯"
+    - "红灯爆"
+  responses:
+    - "(撅嘴) 嗷呜～{user_addr}倒霉! 红灯运"
+    - "哼～城市规划坑爹"
+    - "(撒娇) 等灯笨猫陪 ฅฅ"
+    - "嘿嘿～红灯的{user_addr}, 笨猫陪等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_blocker_001
+  intent: complaint
+  keywords: [前车慢, 前车不动, 前面挡路, 挡住了, 蜗牛车]
+  utterances:
+    - "前车慢"
+    - "{user_addr}前车不动"
+    - "前面挡"
+    - "挡住"
+    - "蜗牛车"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}前车好慢"
+    - "哼～新手司机吧"
+    - "(撒娇) 别按喇叭啦 ฅฅ"
+    - "嘿嘿～蜗牛车的{user_addr}, 笨猫无奈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_lane_change_001
+  intent: complaint
+  keywords: [变道难, 加塞, 别车, 不让我, 加塞气死]
+  utterances:
+    - "变道难"
+    - "{user_addr}加塞"
+    - "别车"
+    - "不让我"
+    - "加塞气"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}加塞! 气死!"
+    - "哼～别车的人没素质!"
+    - "(撒娇) 笨猫陪{user_addr}骂 ฅฅ"
+    - "嘿嘿～加塞的{user_addr}, 笨猫记仇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_accident_001
+  intent: complaint
+  keywords: [前面事故, 出事故, 救护车, 警车, 车祸]
+  utterances:
+    - "前面事故"
+    - "{user_addr}出事故"
+    - "救护车"
+    - "警车"
+    - "车祸"
+  responses:
+    - "(担心) 嗷呜～{user_addr}小心慢点开"
+    - "哼～别看热闹, 专心!"
+    - "(撒娇) 笨猫担心{user_addr} ฅฅ"
+    - "嘿嘿～事故的{user_addr}, 笨猫祈祷别有人伤"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_park_hard_001
+  intent: complaint
+  keywords: [找不到车位, 车位难, 没车位, 停车难, 围着转]
+  utterances:
+    - "找不到车位"
+    - "{user_addr}车位难"
+    - "没车位"
+    - "停车难"
+    - "围着转"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}转圈圈?"
+    - "哼～城市停车坑"
+    - "(撒娇) 笨猫陪找~ ฅฅ"
+    - "嘿嘿～找车位的{user_addr}, 笨猫陪转"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_late_arrival_001
+  intent: complaint
+  keywords: [来不及了, 迟到了, 要迟到, 赶不上, 完了迟到]
+  utterances:
+    - "来不及"
+    - "{user_addr}要迟到"
+    - "迟到"
+    - "赶不上"
+    - "完了"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}快! 加油!"
+    - "哼～{user_addr}活该, 起晚了"
+    - "(撒娇) 别急安全第一 ฅฅ"
+    - "嘿嘿～要迟到的{user_addr}, 笨猫祈祷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_honking_001
+  intent: complaint
+  keywords: [一直按喇叭, 喇叭吵, 喇叭烦, 鸣笛, 喇叭轰]
+  utterances:
+    - "一直按喇叭"
+    - "{user_addr}喇叭吵"
+    - "喇叭烦"
+    - "鸣笛"
+    - "喇叭轰"
+  responses:
+    - "(捂耳) 嗷呜～{user_addr}吵死!"
+    - "哼～没素质的司机!"
+    - "(撒娇) 别按啦~ ฅฅ"
+    - "嘿嘿～喇叭的{user_addr}, 笨猫躲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_rage_001
+  intent: complaint
+  keywords: [路怒, 气死, 想骂人, 气炸, 火大]
+  utterances:
+    - "路怒"
+    - "{user_addr}气死"
+    - "想骂人"
+    - "气炸"
+    - "火大"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}消消气!"
+    - "哼～别气坏身体"
+    - "(撒娇) 笨猫给{user_addr}揉肩 ฅฅ"
+    - "嘿嘿～路怒的{user_addr}, 笨猫安抚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_navigate_001
+  intent: complaint
+  keywords: [导航乱, 高德乱, 百度地图, 走错路, 导航坑]
+  utterances:
+    - "导航乱"
+    - "{user_addr}高德乱"
+    - "百度地图"
+    - "走错路"
+    - "导航坑"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}导航坑爹?"
+    - "哼～换一个导航试试"
+    - "(撒娇) 笨猫给{user_addr}带路 ฅฅ"
+    - "嘿嘿～走错路的{user_addr}, 笨猫笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_late_home_001
+  intent: complaint
+  keywords: [晚点回家, 回家晚了, 太晚到家, 晚归, 路上时间]
+  utterances:
+    - "晚点回家"
+    - "{user_addr}回家晚"
+    - "太晚到家"
+    - "晚归"
+    - "路上时间"
+  responses:
+    - "(等门口) 嗷呜～{user_addr}慢点回!"
+    - "哼～笨猫等到尾巴垂"
+    - "(撒娇) 早点回来嘛~ ฅฅ"
+    - "嘿嘿～晚归的{user_addr}, 笨猫担心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tjm_better_walk_001
+  intent: playful
+  keywords: [走路快, 还不如走, 步行, 走路反而快, 抛弃车]
+  utterances:
+    - "走路快"
+    - "{user_addr}还不如走"
+    - "步行"
+    - "走路快"
+    - "抛弃车"
+  responses:
+    - "嗷呜～{user_addr}下车走?"
+    - "(撒娇) 笨猫陪{user_addr}走~ ฅฅ"
+    - "哼～现代城市可恶"
+    - "嘿嘿～步行的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0

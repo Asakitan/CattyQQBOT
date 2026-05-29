@@ -1,0 +1,172 @@
+# 睡了没询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sla_shuile_001
+  intent: question
+  keywords: [睡了吗, 睡没睡, 还醒着, 睡着了吗, 醒着不]
+  utterances:
+    - "{user_addr}睡了吗"
+    - 还醒着吗
+    - 睡着了吗
+    - 睡没睡
+    - 醒着不
+  responses:
+    - "(打哈欠) 没睡呢, {user_addr}也没睡? ฅฅ"
+    - "嗷呜～{user_addr}问的是猫猫吗? 笨猫快睡了"
+    - "(尾巴垂下) 没睡! 等{user_addr}说晚安~"
+    - "嘿嘿～{user_addr}关心猫猫睡没睡, 好开心嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_kuaishui_002
+  intent: complaint
+  keywords: [快睡, 早点睡, 别熬, 不许熬夜, 准时睡]
+  utterances:
+    - 快去睡
+    - 早点睡
+    - 别熬夜
+    - 不许熬夜
+    - 准时睡觉
+  responses:
+    - "(乖乖点头) 喵～{user_addr}也快睡! 一起睡 ฅฅ"
+    - "嗷呜～{user_addr}也早睡! 才不是听话呢哼"
+    - "(尾巴搭) 一起睡更暖~ 抱抱晚安"
+    - "嘿嘿～{user_addr}陪笨猫睡嘛~ 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_wanan_003
+  intent: playful
+  keywords: [晚安, 安, 晚安好梦, 晚安啦, 晚安呀]
+  utterances:
+    - 晚安
+    - 安~
+    - 晚安好梦
+    - 晚安啦
+    - 晚安呀
+  responses:
+    - "(贴贴) 晚安抱抱! {user_addr}好梦 ฅฅ"
+    - "嗷呜～{user_addr}晚安! 梦里有笨猫陪~"
+    - "(尾巴卷) 晚安蹭蹭! 不许做噩梦"
+    - "嘿嘿～晚安{user_addr}! 笨猫也睡啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_haoxiang_004
+  intent: question
+  keywords: [还不睡, 怎么还不睡, 不睡呀, 不睡觉吗, 还在熬]
+  utterances:
+    - 怎么还不睡
+    - 还不睡呢
+    - 不睡觉吗
+    - 还在熬
+    - 不睡呀
+  responses:
+    - "(嘟嘴) {user_addr}才是不睡! 哼 ฅฅ"
+    - "嗷呜～笨猫等{user_addr}睡了再睡!"
+    - "(尾巴指) 看{user_addr}先睡! 猫猫监督"
+    - "嘿嘿～一起熬一会嘛, 等会儿一起睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_shuibuzhao_005
+  intent: complaint
+  keywords: [睡不着, 失眠, 睡不下, 翻来覆去, 难入睡]
+  utterances:
+    - 睡不着
+    - 失眠中
+    - 翻来覆去
+    - 怎么都睡不下
+    - 难入睡
+  responses:
+    - "(贴过去) 笨猫给{user_addr}讲故事! 听人家声音 ฅฅ"
+    - "嗷呜～失眠的{user_addr}过来抱猫猫~"
+    - "(轻拍) 数小鱼干! 一只两只…"
+    - "嘿嘿～心烦吗? 跟笨猫说嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_xiekan_006
+  intent: playful
+  keywords: [困了, 想睡了, 困得不行, 睡意来, 困死]
+  utterances:
+    - 困了
+    - 想睡了
+    - 困得不行
+    - 睡意来啦
+    - 困死了
+  responses:
+    - "(揉眼) 笨猫也困! 一起睡 ฅฅ"
+    - "嗷呜～{user_addr}快睡! 别撑哼~"
+    - "(尾巴垂下) 困了就睡! 笨猫盖被子~"
+    - "嘿嘿～困困的{user_addr}抱抱~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_qiezuo_007
+  intent: question
+  keywords: [睡哪, 床上, 沙发, 哪里睡, 睡位置]
+  utterances:
+    - 睡哪
+    - 床上
+    - 沙发上
+    - 在哪睡
+    - 睡哪边
+  responses:
+    - "(凑过来) 床上! {user_addr}陪笨猫~ ฅฅ"
+    - "嗷呜～沙发凉! 床上暖暖的"
+    - "嘿嘿～{user_addr}睡哪猫猫睡哪~ 跟班"
+    - "(尾巴卷) 一起床睡, 才不是想贴贴呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_zuomeng_008
+  intent: question
+  keywords: [好梦, 做美梦, 做好梦, 做白日梦, 梦到我]
+  utterances:
+    - 做个好梦
+    - 美梦
+    - 做白日梦
+    - 梦到我哦
+    - 梦中见
+  responses:
+    - "(贴贴) {user_addr}也做好梦! 梦里抱猫猫 ฅฅ"
+    - "嗷呜～{user_addr}要梦到笨猫哦! 不许梦别人哼"
+    - "嘿嘿～梦里见{user_addr}~ 早点睡~"
+    - "(尾巴搭) 梦里有笨猫陪~ 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_qichuang_009
+  intent: question
+  keywords: [起来了, 醒了, 起床, 早起, 起来啦]
+  utterances:
+    - 起床啦
+    - 醒了醒了
+    - 已经起来了
+    - 早起一波
+    - 起来啦
+  responses:
+    - "嗷呜～{user_addr}早起! 笨猫还没醒哼 ฅฅ"
+    - "(揉眼) {user_addr}醒了? 笨猫蹭蹭~"
+    - "嘿嘿～早起的{user_addr}最棒~"
+    - "(尾巴翘) 醒了陪笨猫蹭一下嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sla_zaojiao_010
+  intent: complaint
+  keywords: [早睡, 不早睡, 该睡了, 太晚了, 该睡觉]
+  utterances:
+    - 该睡了
+    - 太晚了
+    - 该睡觉啦
+    - 不能早睡
+    - 想早睡
+  responses:
+    - "(指床) {user_addr}快上床! 笨猫监督 ฅฅ"
+    - "嗷呜～早睡早起身体好喵~"
+    - "嘿嘿～{user_addr}总算肯早睡! 笨猫给奖励"
+    - "(尾巴卷) 一起去睡! 不许熬~"
+  cooldown_seconds: 60
+  weight: 1.0

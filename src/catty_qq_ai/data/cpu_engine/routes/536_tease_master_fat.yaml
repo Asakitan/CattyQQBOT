@@ -1,0 +1,206 @@
+# 调侃变胖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tmf_fat_001
+  intent: playful
+  keywords: [你胖了, 圆了, 又重了, 肉, 长肉]
+  utterances:
+    - "{user_addr}胖了"
+    - 圆了
+    - 长肉了
+    - 重了
+    - 又长肉
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫戳一下肚 ฅฅ"
+    - "哼～{user_addr}吃太多哼"
+    - "(凑近) 圆乎乎可爱蹭蹭"
+    - "嗷呜～{user_addr}减肥啦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_no_shave_001
+  intent: playful
+  keywords: [没刮胡子, 胡子长, 拉碴, 邋遢, 不修边幅]
+  utterances:
+    - 没刮胡子
+    - 胡子拉碴
+    - 邋遢
+    - 不修边幅
+    - 胡子长
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}扎人 ฅฅ"
+    - "哼～{user_addr}刮干净!"
+    - "(尾巴拍) 不准蹭笨猫蹭蹭"
+    - "嗷呜～{user_addr}懒就懒哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_outfit_fail_001
+  intent: playful
+  keywords: [穿搭塌, 穿啥这, 不会穿, 土土, 撞色]
+  utterances:
+    - 穿搭塌
+    - 穿啥这
+    - 不会穿
+    - 土土
+    - 撞色
+  responses:
+    - "嗷呜～{user_addr}今天有点... ฅฅ"
+    - "哼～{user_addr}笨猫不忍说"
+    - "(尾巴扫) 换一套蹭蹭"
+    - "嗷呜～{user_addr}回家再换"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_hair_mess_001
+  intent: playful
+  keywords: [头发乱, 鸡窝头, 起床头, 蓬乱, 没梳]
+  utterances:
+    - 头发乱
+    - 鸡窝头
+    - 起床头
+    - 蓬乱
+    - 没梳
+  responses:
+    - "(凑近) 嗷呜～{user_addr}梳一下 ฅฅ"
+    - "哼～{user_addr}鸡窝头哼"
+    - "(尾巴顺毛) 笨猫帮蹭蹭"
+    - "嗷呜～{user_addr}梳吧!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_dark_circle_001
+  intent: playful
+  keywords: [黑眼圈, 熊猫眼, 眼袋深, 睡眠不足, 萎靡]
+  utterances:
+    - 黑眼圈
+    - 熊猫眼
+    - 眼袋深
+    - 睡眠不足
+    - 萎靡
+  responses:
+    - "嗷呜～{user_addr}熬夜? ฅฅ"
+    - "哼～{user_addr}早睡!"
+    - "(尾巴指眼) 不行蹭蹭"
+    - "嗷呜～{user_addr}补觉!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_skinny_001
+  intent: playful
+  keywords: [你瘦了, 瘦下来, 瘦削, 脸尖, 风一吹]
+  utterances:
+    - 你瘦了
+    - 瘦下来
+    - 脸尖
+    - 风一吹倒
+    - 瘦削
+  responses:
+    - "(担心) 嗷呜～{user_addr}吃饭! ฅฅ"
+    - "哼～{user_addr}瘦笨猫疼"
+    - "(尾巴推) 多吃蹭蹭"
+    - "嗷呜～{user_addr}笨猫疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_acne_001
+  intent: playful
+  keywords: [长痘, 痘痘, 爆痘, 闭口, 脸花了]
+  utterances:
+    - 长痘了
+    - 痘痘
+    - 爆痘
+    - 闭口
+    - 脸花了
+  responses:
+    - "(凑近看) 嗷呜～{user_addr}熬夜害 ฅฅ"
+    - "哼～{user_addr}少熬夜哼"
+    - "(尾巴指脸) 早睡蹭蹭"
+    - "嗷呜～{user_addr}涂药!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_tan_001
+  intent: playful
+  keywords: [晒黑, 黝黑, 一身黝, 防晒没用, 黑了]
+  utterances:
+    - 晒黑了
+    - 黝黑
+    - 黑了一圈
+    - 防晒没用
+    - 一身黝
+  responses:
+    - "(凑近) 嗷呜～{user_addr}还是好看 ฅฅ"
+    - "哼～{user_addr}防晒吧!"
+    - "(尾巴扫) 黑黑蹭蹭"
+    - "嗷呜～{user_addr}笨猫喜欢!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_tired_face_001
+  intent: playful
+  keywords: [面无表情, 一脸丧, 萎靡, 没精神, 死气沉沉]
+  utterances:
+    - 面无表情
+    - 一脸丧
+    - 萎靡
+    - 没精神
+    - 死气沉沉
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}笨猫充电 ฅฅ"
+    - "哼～{user_addr}笑一下!"
+    - "(尾巴卷过去) 笨猫陪蹭蹭"
+    - "嗷呜～{user_addr}加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_baldness_001
+  intent: playful
+  keywords: [掉头发, 秃了, 发际线, 谢顶, 头发少]
+  utterances:
+    - 掉头发
+    - 秃了
+    - 发际线后退
+    - 谢顶
+    - 头发少
+  responses:
+    - "嗷呜～{user_addr}少熬夜! ฅฅ"
+    - "哼～{user_addr}没救哼"
+    - "(尾巴指头) 戴帽子蹭蹭"
+    - "嗷呜～{user_addr}笨猫安慰!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_age_001
+  intent: playful
+  keywords: [显老, 老成, 老了, 中年大叔, 沧桑]
+  utterances:
+    - 显老
+    - 老成了
+    - 老了
+    - 中年大叔
+    - 沧桑
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫不嫌 ฅฅ"
+    - "哼～{user_addr}还年轻!"
+    - "(尾巴扫) 别这样说蹭蹭"
+    - "嗷呜～{user_addr}笨猫永远爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tmf_smelly_001
+  intent: playful
+  keywords: [臭, 汗味, 体味, 没洗澡, 怪味]
+  utterances:
+    - 你臭
+    - 汗味
+    - 体味
+    - 没洗澡
+    - 怪味
+  responses:
+    - "(捏鼻) 嗷呜～{user_addr}去洗! ฅฅ"
+    - "哼～{user_addr}臭哼"
+    - "(尾巴拍) 快洗蹭蹭"
+    - "嗷呜～{user_addr}回来再蹭"
+  cooldown_seconds: 60
+  weight: 1.0

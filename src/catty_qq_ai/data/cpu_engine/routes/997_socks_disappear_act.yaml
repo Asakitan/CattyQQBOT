@@ -1,0 +1,172 @@
+# 袜子消失奇案 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sd_diushao_001
+  intent: complaint
+  keywords: [袜子丢一只, 找不到袜子, 单只袜子, 袜子配不齐, 袜子失踪]
+  utterances:
+    - "袜子丢一只"
+    - "{user_addr}找不到袜子"
+    - "单只袜子"
+    - "袜子配不齐"
+    - "袜子失踪"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}袜子被洗衣机吃了喵～"
+    - "哼～单只袜子超烦 ฅฅ"
+    - "(贴贴) 配不齐就买新的"
+    - "袜子失踪是世界未解之谜嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_xiyiji_001
+  intent: complaint
+  keywords: [洗衣机吃袜子, 滚筒洗衣机, 袜子卡, 洗衣机缝, 洗衣机偷袜子]
+  utterances:
+    - "洗衣机吃袜子"
+    - "{user_addr}袜子卡了"
+    - "洗衣机缝"
+    - "滚筒洗衣机"
+    - "洗衣机偷袜子"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}洗衣机就是袜子怪物喵～"
+    - "哼～滚筒缝里藏袜子 ฅฅ"
+    - "(尾巴搭) 用洗衣袋装袜子"
+    - "洗衣机吃袜子是定律嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_pifang_001
+  intent: complaint
+  keywords: [袜子破洞, 大拇指破, 脚后跟磨破, 袜子磨损, 袜子寿命]
+  utterances:
+    - "袜子破洞"
+    - "{user_addr}大拇指破"
+    - "脚后跟磨破"
+    - "袜子磨损"
+    - "袜子寿命"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}破了就换喵～"
+    - "哼～大拇指破不能要 ฅฅ"
+    - "(尾巴搭) 脚后跟磨破因为鞋不合"
+    - "袜子寿命短嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_chouwei_001
+  intent: complaint
+  keywords: [袜子臭, 脚臭袜子, 袜子洗不掉味, 臭袜子, 抗菌袜]
+  utterances:
+    - "袜子臭"
+    - "{user_addr}脚臭袜子"
+    - "袜子洗不掉味"
+    - "臭袜子"
+    - "抗菌袜"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}臭袜子赶紧洗喵～"
+    - "哼～抗菌袜值得买 ฅฅ"
+    - "(贴贴) 袜子洗不掉味就用消毒"
+    - "脚臭治根才是关键嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_dapeishi_001
+  intent: question
+  keywords: [袜子配色, 袜子搭配, 短袜长袜, 船袜还是中筒, 袜子哪种]
+  utterances:
+    - "袜子配色"
+    - "{user_addr}袜子搭配"
+    - "短袜长袜"
+    - "船袜还是中筒"
+    - "袜子哪种"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}船袜显腿长喵～"
+    - "哼～中筒袜运动风 ฅฅ"
+    - "(尾巴搭) 袜子配色不要太花"
+    - "短袜夏天长袜冬天嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_keai_001
+  intent: playful
+  keywords: [可爱袜子, 卡通袜, 印花袜, 长筒袜, 过膝袜]
+  utterances:
+    - "可爱袜子"
+    - "{user_addr}卡通袜"
+    - "印花袜"
+    - "长筒袜"
+    - "过膝袜"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}卡通袜笨猫也要喵～"
+    - "哼～过膝袜超萌 ฅฅ"
+    - "(贴贴) 长筒袜冬天暖"
+    - "印花袜亮眼嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_quanchun_001
+  intent: playful
+  keywords: [全棉袜, 纯棉舒服, 棉袜透气, 袜子材质, 吸汗袜]
+  utterances:
+    - "全棉袜"
+    - "{user_addr}纯棉舒服"
+    - "棉袜透气"
+    - "袜子材质"
+    - "吸汗袜"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}纯棉舒服喵～"
+    - "哼～棉袜透气脚不闷 ฅฅ"
+    - "(尾巴搭) 袜子材质要选好"
+    - "吸汗袜运动必备嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_zhipei_001
+  intent: complaint
+  keywords: [袜子组合错, 穿成两只不一样, 出门看袜子, 配错袜子, 鸳鸯袜]
+  utterances:
+    - "袜子穿错"
+    - "{user_addr}两只不一样"
+    - "出门看袜子"
+    - "配错袜子"
+    - "鸳鸯袜"
+  responses:
+    - "(笑) 嗷呜～{user_addr}鸳鸯袜很潮喵～"
+    - "哼～出门发现配错笑死 ฅฅ"
+    - "(贴贴) 两只不一样也是一种风格"
+    - "配错就大方点嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_xishu_001
+  intent: complaint
+  keywords: [洗袜子手洗, 袜子放洗衣机, 袜子单独洗, 袜子和内衣, 袜子分洗]
+  utterances:
+    - "袜子手洗"
+    - "{user_addr}袜子放洗衣机"
+    - "袜子单独洗"
+    - "袜子和内衣"
+    - "袜子分洗"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}袜子最好单独洗喵～"
+    - "哼～和内衣分开比较好 ฅฅ"
+    - "(尾巴搭) 手洗最干净"
+    - "袜子用网袋扔洗衣机嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_cunfang_001
+  intent: complaint
+  keywords: [袜子怎么放, 袜子叠不齐, 袜子收纳, 抽屉袜子乱, 袜子整理]
+  utterances:
+    - "袜子叠不齐"
+    - "{user_addr}袜子收纳"
+    - "抽屉袜子乱"
+    - "袜子怎么放"
+    - "袜子整理"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}袜子收纳盒分格喵～"
+    - "哼～袜子叠成方块好看 ฅฅ"
+    - "(尾巴搭) 抽屉乱就买分隔器"
+    - "袜子整理一次后顺眼嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

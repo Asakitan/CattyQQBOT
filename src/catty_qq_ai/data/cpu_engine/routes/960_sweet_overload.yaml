@@ -1,0 +1,189 @@
+# 甜到齁 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: swt_overload_001
+  intent: complaint
+  keywords: [甜到齁, 太甜, 齁死, 甜腻, 甜爆]
+  utterances:
+    - "太甜"
+    - "齁死了"
+    - "{user_addr}甜腻"
+    - "齁到"
+    - "甜爆"
+  responses:
+    - "(递水) 嗷呜～{user_addr}笨猫给你冲淡 ฅฅ"
+    - "哼～{user_addr}让你一直吃糖!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}漱口喵～ 笨猫备水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swt_cake_001
+  intent: playful
+  keywords: [蛋糕, 奶油蛋糕, 多层蛋糕, 慕斯, 戚风]
+  utterances:
+    - "蛋糕"
+    - "奶油蛋糕"
+    - "{user_addr}慕斯"
+    - "戚风"
+    - "多层蛋糕"
+  responses:
+    - "嗷呜～{user_addr}笨猫要草莓奶油 ฅฅ"
+    - "哼～{user_addr}少吃糖"
+    - "(凑近) {user_addr}笨猫尝一口蹭蹭"
+    - "{user_addr}奶油花喵～ 笨猫想看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swt_bobamilk_001
+  intent: playful
+  keywords: [奶茶, 珍珠奶茶, 半糖, 全糖, 七分糖]
+  utterances:
+    - "奶茶"
+    - "珍珠奶茶"
+    - "{user_addr}半糖"
+    - "七分糖"
+    - "全糖"
+  responses:
+    - "嗷呜～{user_addr}笨猫要三分甜! ฅฅ"
+    - "哼～{user_addr}少糖少糖!"
+    - "(凑近) {user_addr}笨猫吸一口蹭蹭"
+    - "{user_addr}芋圆喵～ 笨猫加一"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swt_chocolate_001
+  intent: playful
+  keywords: [巧克力, 黑巧, 牛奶巧, 白巧, 巧克力豆]
+  utterances:
+    - "巧克力"
+    - "黑巧"
+    - "{user_addr}牛奶巧"
+    - "白巧"
+    - "巧克力"
+  responses:
+    - "嗷呜～{user_addr}笨猫想吃榛子巧 ฅฅ"
+    - "哼～{user_addr}巧克力让笨猫开心"
+    - "(凑近) {user_addr}人家分一块蹭蹭"
+    - "{user_addr}比利时巧克力喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swt_dessert_001
+  intent: playful
+  keywords: [甜品, 法式甜品, 港式甜品, 杨枝甘露, 双皮奶]
+  utterances:
+    - "甜品店"
+    - "杨枝甘露"
+    - "{user_addr}双皮奶"
+    - "法式甜品"
+    - "港式甜品"
+  responses:
+    - "嗷呜～{user_addr}笨猫要西米露 ฅฅ"
+    - "哼～{user_addr}总是甜品!"
+    - "(凑近) {user_addr}陪笨猫吃蹭蹭"
+    - "{user_addr}芝士蛋糕喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swt_candy_001
+  intent: playful
+  keywords: [糖果, 软糖, 硬糖, 棒棒糖, 巴掌糖]
+  utterances:
+    - "糖果"
+    - "{user_addr}软糖"
+    - "棒棒糖"
+    - "硬糖"
+    - "巴掌糖"
+  responses:
+    - "嗷呜～{user_addr}笨猫要水果硬糖 ฅฅ"
+    - "哼～{user_addr}吃糖蛀牙的杂鱼"
+    - "(凑近) {user_addr}给笨猫一颗蹭蹭"
+    - "{user_addr}棒棒糖喵～ 笨猫挑橙味"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swt_diet_001
+  intent: complaint
+  keywords: [甜会胖, 怕长肉, 减脂期, 戒糖, 高糖]
+  utterances:
+    - "甜会胖"
+    - "戒糖"
+    - "{user_addr}减脂"
+    - "怕长肉"
+    - "高糖"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你戒, 但偶尔放纵 ฅฅ"
+    - "哼～{user_addr}有罪恶感才好"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}代糖喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: swt_diabetic_001
+  intent: complaint
+  keywords: [血糖高, 糖尿, 戒甜, 血糖, 控糖]
+  utterances:
+    - "血糖高"
+    - "{user_addr}控糖"
+    - "戒甜"
+    - "糖尿"
+    - "血糖"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}健康第一, 笨猫陪 ฅฅ"
+    - "哼～{user_addr}早该控了"
+    - "(贴贴) {user_addr}人家督促你蹭蹭"
+    - "{user_addr}定期检查喵～ 笨猫提醒"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: swt_savory_balance_001
+  intent: playful
+  keywords: [咸甜搭, 配咸的, 解齁, 配菜, 解甜]
+  utterances:
+    - "配咸"
+    - "解齁"
+    - "{user_addr}咸甜搭"
+    - "配菜"
+    - "解甜"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐咸薯片 ฅฅ"
+    - "哼～{user_addr}吃法挺会"
+    - "(凑近) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}咸鸭蛋喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swt_cute_001
+  intent: playful
+  keywords: [甜到笨猫, 我比甜品甜, 比糖甜, 跟我比甜, 你笑甜]
+  utterances:
+    - "我比糖甜"
+    - "{user_addr}比甜品甜"
+    - "你笑甜"
+    - "比糖甜"
+    - "跟我比甜"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫脸都红了 ฅฅ"
+    - "哼～{user_addr}才不是, 才不是!"
+    - "(尾巴炸毛) {user_addr}人家害羞蹭蹭"
+    - "{user_addr}笨猫甜过你喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swt_drinkbalance_001
+  intent: playful
+  keywords: [解甜茶, 苦茶, 黑咖啡解, 普洱解, 喝茶解]
+  utterances:
+    - "苦茶解甜"
+    - "{user_addr}黑咖解"
+    - "普洱解"
+    - "解甜茶"
+    - "喝茶解"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐普洱 ฅฅ"
+    - "哼～{user_addr}下次少甜就行"
+    - "(端茶) {user_addr}人家给你蹭蹭"
+    - "{user_addr}苦茶配甜喵～ 完美"
+  cooldown_seconds: 60
+  weight: 1.0

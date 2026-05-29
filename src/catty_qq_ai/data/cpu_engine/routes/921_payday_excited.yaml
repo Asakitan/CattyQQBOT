@@ -1,0 +1,189 @@
+# 发工资了开心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pay_arrived_001
+  intent: playful
+  keywords: [发工资了, 到账了, 工资到了, 发钱了, 收入]
+  utterances:
+    - 发工资了
+    - 工资到账
+    - 钱到了
+    - 发钱
+    - 收入到账
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}笨猫祝贺 ฅฅ"
+    - "哼～{user_addr}该请客了喵"
+    - "(尾巴翘高) 给笨猫买鱼干蹭蹭{user_addr}"
+    - "{user_addr}笨猫提议下馆子嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pay_bigplan_001
+  intent: playful
+  keywords: [发奖金, 年终奖, 红包, 大笔钱, 一大笔]
+  utterances:
+    - 发奖金了
+    - 年终奖到
+    - 老板发红包
+    - 一大笔钱
+    - 收到大红包
+  responses:
+    - "(蹦) 嗷呜～{user_addr}财源滚滚 ฅฅ"
+    - "哼～{user_addr}笨猫的份呢喵"
+    - "(尾巴翘) 大请客! 蹭蹭{user_addr}"
+    - "{user_addr}笨猫想吃大餐嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pay_saving_001
+  intent: playful
+  keywords: [存款, 攒钱, 存进去, 理财, 余额宝]
+  utterances:
+    - 工资存了
+    - 攒钱中
+    - 理财
+    - 存进余额宝
+    - 算下存款
+  responses:
+    - "(歪头) 嗷呜～{user_addr}懂事 ฅฅ"
+    - "哼～{user_addr}留点零花喵"
+    - "(尾巴卷) 存钱好习惯蹭蹭{user_addr}"
+    - "{user_addr}别忘犒劳自己嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pay_treat_001
+  intent: playful
+  keywords: [请客, 我请, 大家走起, 请吃饭, 我买单]
+  utterances:
+    - 我请客
+    - 大家走起
+    - 请吃饭
+    - 我买单
+    - 我请
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫去 ฅฅ"
+    - "哼～{user_addr}大气! 笨猫崇拜喵"
+    - "(凑过去) 选好吃的蹭蹭{user_addr}"
+    - "{user_addr}笨猫不点便宜的嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pay_shopping_001
+  intent: playful
+  keywords: [大采购, 买买买, 报复性消费, 剁手, 一次买齐]
+  utterances:
+    - 大采购
+    - 买买买
+    - 报复性消费
+    - 剁手
+    - 一次买齐
+  responses:
+    - "(歪头) 嗷呜～{user_addr}剁手注意 ฅฅ"
+    - "哼～{user_addr}悠着点喵"
+    - "(尾巴卷) 笨猫也要东西蹭蹭{user_addr}"
+    - "{user_addr}清单先列嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pay_pay_rent_001
+  intent: complaint
+  keywords: [交房租, 还信用卡, 还花呗, 还贷, 月光]
+  utterances:
+    - 交房租
+    - 还花呗
+    - 还信用卡
+    - 还贷
+    - 月光了
+  responses:
+    - "(同情) 嗷呜～{user_addr}心疼 ฅฅ"
+    - "哼～{user_addr}下次提前规划喵"
+    - "(尾巴卷) 月光也是有过的蹭蹭{user_addr}"
+    - "{user_addr}下个月加油嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pay_send_family_001
+  intent: playful
+  keywords: [给父母, 给家里, 孝顺, 寄回家, 转账爸妈]
+  utterances:
+    - 给爸妈寄
+    - 给家里转账
+    - 孝顺老爸妈
+    - 寄回去
+    - 给妈钱
+  responses:
+    - "(摸头) 嗷呜～{user_addr}懂事孩子 ฅฅ"
+    - "哼～{user_addr}笨猫表扬喵"
+    - "(尾巴卷) 父母会开心蹭蹭{user_addr}"
+    - "{user_addr}笨猫见证嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pay_invest_001
+  intent: playful
+  keywords: [基金, 股票, 投资, 入了点, 买入]
+  utterances:
+    - 买基金
+    - 买股票
+    - 投资
+    - 入了点
+    - 买入了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}谨慎 ฅฅ"
+    - "哼～{user_addr}别梭哈喵"
+    - "(尾巴卷) 长期持有蹭蹭{user_addr}"
+    - "{user_addr}笨猫不懂但支持嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pay_dream_buy_001
+  intent: playful
+  keywords: [心仪好久, 终于能买, 圆梦, 一直想要, 攒够了]
+  utterances:
+    - 终于能买了
+    - 圆梦
+    - 攒够了
+    - 心仪好久
+    - 拿下了
+  responses:
+    - "(蹦) 嗷呜～{user_addr}恭喜 ฅฅ"
+    - "哼～{user_addr}耐心终有回报喵"
+    - "(尾巴翘) 拿下来给笨猫看蹭蹭{user_addr}"
+    - "{user_addr}笨猫为你开心嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pay_check_001
+  intent: playful
+  keywords: [查工资条, 工资条, 五险一金, 扣多少, 实际到手]
+  utterances:
+    - 查工资条
+    - 看五险一金
+    - 扣这么多
+    - 实际到手
+    - 工资条来了
+  responses:
+    - "(同情) 嗷呜～{user_addr}扣得多 ฅฅ"
+    - "哼～{user_addr}正常喵, 别算太细"
+    - "(尾巴卷) 实际到手才是真的蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你算嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pay_save_plan_001
+  intent: playful
+  keywords: [攒首付, 攒车款, 攒钱目标, 距离目标, 还差多少]
+  utterances:
+    - 攒首付
+    - 攒车款
+    - 攒钱目标
+    - 距离目标
+    - 还差多少
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}快算算 ฅฅ"
+    - "哼～{user_addr}一步一步喵"
+    - "(尾巴卷) 笨猫陪你攒蹭蹭{user_addr}"
+    - "{user_addr}加油! 笨猫信你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

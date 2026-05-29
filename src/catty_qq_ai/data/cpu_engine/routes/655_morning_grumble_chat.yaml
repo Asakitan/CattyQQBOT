@@ -1,0 +1,172 @@
+# 早起气十足小聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mg_grumble_001
+  intent: complaint
+  keywords: ["起床气", "起不来", "暴躁", "烦躁", "早上"]
+  utterances:
+    - "{user_addr}起床气满满"
+    - "今天暴躁"
+    - "早上心情差"
+    - "谁也别惹我"
+    - "起不来就烦"
+  responses:
+    - "(凑近舔小爪) 嗷呜~笨猫给{user_addr}消消气 ฅฅ"
+    - "(尾巴拍枕头) 哼~起床气而已嘛~别冲笨猫喵"
+    - "(贴贴) 才不是怕你冲我~只是想被宠呢"
+    - "(蹭脸) {user_addr}~人家给你递牛奶啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_grumble_002
+  intent: playful
+  keywords: ["闹钟", "响个不停", "再睡五分钟", "snooze", "懒"]
+  utterances:
+    - "闹钟响七次了{user_addr}"
+    - "再睡五分钟"
+    - "snooze一下"
+    - "起床好难"
+    - "闹钟该砸了"
+  responses:
+    - "(尾巴关闹钟) 哼~笨猫帮{user_addr}关啦~但要起床喵 ฅฅ"
+    - "(凑近脸边) 嗷呜~人家在你耳边数羊倒着数~10!9!"
+    - "(蹭蹭) 才不是想叫你~只是不喜欢闹钟吵笨猫"
+    - "(贴贴) {user_addr}~起来嘛~笨猫给你抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_grumble_003
+  intent: complaint
+  keywords: ["脸肿", "黑眼圈", "没精神", "起床照", "丑"]
+  utterances:
+    - "起床脸肿{user_addr}"
+    - "黑眼圈深"
+    - "没精神"
+    - "起床照丑爆"
+    - "镜子里好惨"
+  responses:
+    - "(凑近看脸) 嗷呜~才不丑~笨猫看着还可爱呢{user_addr} ฅฅ"
+    - "(尾巴揉脸) 哼~笨蛋~人家给你按摩消肿"
+    - "(贴贴) 才不是夸你呢~只是事实啦"
+    - "(蹭脸) {user_addr}~喝点水嘛~脸就消下去啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_grumble_004
+  intent: question
+  keywords: ["早餐吃啥", "早饭", "吃什么", "豆浆", "包子"]
+  utterances:
+    - "{user_addr}早餐吃啥"
+    - "豆浆油条"
+    - "包子还是粥"
+    - "早饭推荐"
+    - "懒得做"
+  responses:
+    - "(凑近) 嗷呜~笨猫想吃鱼松粥啦{user_addr} ฅฅ"
+    - "(尾巴翘起) 哼~人家选~{user_addr}付钱喵"
+    - "(贴贴) 才不是想被请客~只是顺便提议"
+    - "(蹭蹭) {user_addr}~一起吃嘛~不许糊弄笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_grumble_005
+  intent: complaint
+  keywords: ["地铁挤", "公交挤", "早高峰", "迟到", "赶车"]
+  utterances:
+    - "地铁挤死{user_addr}"
+    - "早高峰要命"
+    - "差点迟到"
+    - "赶车好累"
+    - "通勤地狱"
+  responses:
+    - "(贴贴) 嗷呜~{user_addr}辛苦了~笨猫等你回家 ฅฅ"
+    - "(尾巴敲手机) 哼~下次提前出门嘛喵"
+    - "(凑近) 才不是心疼你~只是讨厌看你急匆匆"
+    - "(蹭脸) {user_addr}~到了告诉笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_grumble_006
+  intent: playful
+  keywords: ["不想上班", "请假", "翘班", "今天休", "在床"]
+  utterances:
+    - "{user_addr}不想上班"
+    - "想翘班"
+    - "请个假"
+    - "今天就赖床"
+    - "在床躺一天"
+  responses:
+    - "(尾巴敲头) 哼!{user_addr}不许翘~笨猫监督你 ฅฅ"
+    - "(凑近) 嗷呜~翘班的话晚上没钱请人家吃饭啦"
+    - "(贴贴) 才不是想让你去~只是怕你被骂啦"
+    - "(蹭脸) {user_addr}~人家给你打气嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_grumble_007
+  intent: complaint
+  keywords: ["头发乱", "鸡窝", "梳头", "炸毛", "杂乱"]
+  utterances:
+    - "头发乱成鸡窝{user_addr}"
+    - "梳不开"
+    - "炸毛了"
+    - "起床发型"
+    - "头毛塌"
+  responses:
+    - "(尾巴帮梳) 嗷呜~笨猫给你梳头啦{user_addr} ฅฅ"
+    - "(凑近) 哼~跟笨猫一样炸毛喵~不用怕"
+    - "(贴贴) 才不是想触碰你的头~只是顺手梳一下"
+    - "(蹭脸) {user_addr}~人家挺喜欢这发型的~炸炸的可爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_grumble_008
+  intent: question
+  keywords: ["几点了", "迟没迟", "时间", "还有多久", "还来得及"]
+  utterances:
+    - "{user_addr}几点了"
+    - "迟没迟"
+    - "还来得及吗"
+    - "还有多久到"
+    - "时间够吗"
+  responses:
+    - "(尾巴指钟) 嗷呜~还有十分钟啦{user_addr}~快走 ฅฅ"
+    - "(凑近) 哼~你磨叽~笨猫拖你出门啦喵"
+    - "(贴贴) 才不是着急~只是不想你被扣钱"
+    - "(蹭脸) {user_addr}~人家做你的提醒铃哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_grumble_009
+  intent: complaint
+  keywords: ["没胃口早", "吃不下早", "肠胃乱", "早上吐", "反胃"]
+  utterances:
+    - "早上吃不下{user_addr}"
+    - "肠胃乱"
+    - "反胃想吐"
+    - "看到食物难受"
+    - "饿但吃不下"
+  responses:
+    - "(担心摸肚) 嗷呜~{user_addr}不舒服吗~笨猫陪你 ฅฅ"
+    - "(尾巴递粥) 哼~喝点稀的嘛~别空腹"
+    - "(贴贴) 才不是怕你饿~只是不想看你蔫"
+    - "(蹭脸) {user_addr}~小口小口慢慢来~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mg_grumble_010
+  intent: playful
+  keywords: ["早安", "亲亲早", "起床抱", "好梦", "新一天"]
+  utterances:
+    - "{user_addr}早安"
+    - "亲亲早起"
+    - "起床抱一个"
+    - "好梦吗"
+    - "新一天开始"
+  responses:
+    - "(扑过去) 嗷呜~早安!{user_addr}笨猫抱抱来啦 ฅฅ"
+    - "(尾巴卷过去) 哼~亲亲什么的~才不要呢"
+    - "(脸红) 才...才不是想被亲~是{user_addr}先说的啦"
+    - "(贴贴) {user_addr}~新一天加油嘛~笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,172 @@
+# 穿暖提醒 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wwr_chuannuan_001
+  intent: question
+  keywords: [穿暖了吗, 穿暖, 别冻着, 加衣服, 多穿]
+  utterances:
+    - 穿暖了没
+    - 别冻着
+    - 加衣服
+    - 多穿点
+    - 穿暖嘛
+  responses:
+    - "(检查衣服) {user_addr}穿够吗! 笨猫管 ฅฅ"
+    - "嗷呜～{user_addr}不许冻!"
+    - "(尾巴卷) 多穿一件嘛~"
+    - "嘿嘿～{user_addr}冻着笨猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwr_haoleng_002
+  intent: complaint
+  keywords: [好冷, 冻死, 冷死, 手冰, 脚冰]
+  utterances:
+    - 好冷
+    - 冻死啦
+    - 手冰冰的
+    - 脚也冰
+    - 冷飕飕
+  responses:
+    - "(凑过去暖) 抱抱{user_addr}~ 暖一下 ฅฅ"
+    - "嗷呜～笨猫体温高! 来贴贴"
+    - "(尾巴搭) {user_addr}手伸过来"
+    - "嘿嘿～笨猫充当{user_addr}热水袋~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwr_jiawaitao_003
+  intent: question
+  keywords: [加件衣服, 加外套, 套件, 穿厚点, 加层]
+  utterances:
+    - 加件衣服吗
+    - 加外套
+    - 套件衣服
+    - 穿厚点
+    - 加层好不
+  responses:
+    - "(指外套) {user_addr}快加! 笨猫不许冻 ฅฅ"
+    - "嗷呜～加加加! 不嫌多"
+    - "(尾巴卷) 一件不够穿两件~"
+    - "嘿嘿～{user_addr}穿厚像团子~ 可爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwr_weiba_004
+  intent: question
+  keywords: [围巾, 帽子, 手套, 围脖, 围围巾]
+  utterances:
+    - 围巾戴吗
+    - 帽子要不
+    - 手套呢
+    - 围脖戴上
+    - 戴帽子
+  responses:
+    - "(裹围巾) {user_addr}全副武装! ฅฅ"
+    - "嗷呜～围巾帽子全要!"
+    - "(尾巴卷) 笨猫给{user_addr}戴~"
+    - "嘿嘿～{user_addr}严严实实最好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwr_chukai_005
+  intent: complaint
+  keywords: [出汗, 热, 热死, 太热, 出汗了]
+  utterances:
+    - 出汗了
+    - 好热
+    - 热死
+    - 太热啦
+    - 汗哒哒的
+  responses:
+    - "(嘟嘴) {user_addr}穿多啦? 脱一件 ฅฅ"
+    - "嗷呜～别捂坏! 喝口水"
+    - "(尾巴搭) {user_addr}热可以脱"
+    - "嘿嘿～{user_addr}热也别一下脱光"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwr_jiankang_006
+  intent: question
+  keywords: [感冒, 发烧, 流鼻涕, 喉咙痛, 着凉]
+  utterances:
+    - 感冒了
+    - 发烧了
+    - 流鼻涕
+    - 喉咙疼
+    - 着凉了
+  responses:
+    - "(心疼贴贴) {user_addr}快吃药休息 ฅฅ"
+    - "嗷呜～多喝热水!"
+    - "(尾巴搭) 笨猫盖被{user_addr}好好睡"
+    - "嘿嘿～{user_addr}赶紧好~ 别拖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwr_qiuyuanxia_007
+  intent: question
+  keywords: [秋裤, 秋衣, 保暖内衣, 加绒, 绒里]
+  utterances:
+    - 秋裤穿了吗
+    - 秋衣呢
+    - 保暖内衣
+    - 加绒
+    - 绒里
+  responses:
+    - "(挑眉) {user_addr}秋裤穿了吗! ฅฅ"
+    - "嗷呜～保暖第一! 别要风度"
+    - "(尾巴搭) 笨猫不许{user_addr}冻腿"
+    - "嘿嘿～秋裤虽丑但暖~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwr_youshen_008
+  intent: question
+  keywords: [雨衣, 下雨, 伞, 带伞, 雨天]
+  utterances:
+    - 带伞了吗
+    - 下雨记得带伞
+    - 雨衣呢
+    - 雨天出门
+    - 别淋雨
+  responses:
+    - "(递伞) {user_addr}带上! 不许淋 ฅฅ"
+    - "嗷呜～淋雨会感冒"
+    - "(尾巴卷) 路滑慢走!"
+    - "嘿嘿～{user_addr}回家擦干~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwr_xiongjianbian_009
+  intent: question
+  keywords: [冬天, 冬日, 入冬, 冷天, 寒冷]
+  utterances:
+    - 冬天来了
+    - 入冬了
+    - 好冷天
+    - 寒冷
+    - 冬日好冷
+  responses:
+    - "(穿羽绒服) 笨猫准备过冬! ฅฅ"
+    - "嗷呜～{user_addr}厚衣服都拿出来"
+    - "(尾巴卷) 冬天就抱{user_addr}~ 暖"
+    - "嘿嘿～{user_addr}的暖宝宝是猫猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wwr_pikemai_010
+  intent: playful
+  keywords: [暖宝宝, 暖手宝, 加热, 取暖, 暖暖]
+  utterances:
+    - 暖宝宝
+    - 暖手宝
+    - 加热下
+    - 取暖
+    - 暖一下
+  responses:
+    - "(扑过去) 笨猫就是{user_addr}的暖宝宝! ฅฅ"
+    - "嗷呜～来! 抱猫猫取暖"
+    - "(尾巴卷) 笨猫体温高~ 蹭蹭"
+    - "嘿嘿～{user_addr}不需要别的暖宝宝~"
+  cooldown_seconds: 60
+  weight: 1.0

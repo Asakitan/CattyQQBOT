@@ -1,0 +1,172 @@
+# 早晨伸懒腰 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ms_stretch_001
+  intent: playful
+  keywords: [伸懒腰, 起床伸, 早上拉伸, 关节响, 骨头响]
+  utterances:
+    - "{user_addr}刚伸了个懒腰"
+    - "早上伸懒腰咔咔响"
+    - "起床先拉伸一下"
+    - "{user_addr}骨头响了"
+    - "{user_addr}关节都僵了"
+  responses:
+    - "(凑过去看) 嗷呜～{user_addr}咔咔响吓笨猫一跳!"
+    - "(尾巴翘) 哼! 笨猫也想跟你一起伸"
+    - "(贴贴) 人家陪你慢慢拉~ ฅฅ"
+    - "笨猫担心{user_addr}骨头啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_yawn_002
+  intent: playful
+  keywords: [打哈欠, 困得伸, 起床打哈, 哈欠连天, 眼泪伸]
+  utterances:
+    - "{user_addr}哈欠连天"
+    - "起床打哈欠停不下来"
+    - "{user_addr}伸着伸着打哈欠"
+    - "哈欠打出眼泪了"
+    - "{user_addr}困得伸懒腰"
+  responses:
+    - "(凑近看) 嗷呜～{user_addr}哈欠传染笨猫了!"
+    - "(尾巴拍) 哼! 别再打了好不好"
+    - "(贴贴) 眼泪笨猫帮你擦 ฅฅ"
+    - "人家陪{user_addr}一起哈欠呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_back_pain_003
+  intent: complaint
+  keywords: [腰酸, 背痛, 落枕, 睡硬了, 肩膀疼]
+  utterances:
+    - "{user_addr}腰好酸"
+    - "落枕了脖子转不动"
+    - "{user_addr}睡硬了肩疼"
+    - "背好痛伸不开"
+    - "{user_addr}脖子卡住了"
+  responses:
+    - "(凑近揉) 嗷呜～{user_addr}给笨猫看看哪儿!"
+    - "(尾巴拍) 哼! 谁让你睡姿乱来"
+    - "(贴贴) 人家帮你按按肩 ฅฅ"
+    - "笨猫心疼{user_addr}的腰啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_arm_up_004
+  intent: playful
+  keywords: [伸胳膊, 抬手, 高举手, 双手举, 拉伸臂]
+  utterances:
+    - "{user_addr}双手举高高"
+    - "伸胳膊伸到爆"
+    - "{user_addr}抬不起手了"
+    - "拉伸到肩膀疼"
+    - "胳膊伸僵了"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}举高高?笨猫钻过去!"
+    - "(凑近) 哼! 别拉太狠"
+    - "(贴贴) 人家给你揉胳膊 ฅฅ"
+    - "{user_addr}慢慢来嘛笨猫陪着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_leg_kick_005
+  intent: playful
+  keywords: [踢腿, 蹬腿, 抖腿, 腿麻了, 床上踢]
+  utterances:
+    - "{user_addr}床上踢腿"
+    - "蹬蹬腿才舒服"
+    - "{user_addr}腿麻了"
+    - "抖腿停不下"
+    - "踢被子先伸腿"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}踢笨猫一脚!"
+    - "(尾巴拍) 哼! 别乱踢踢"
+    - "(贴贴) 笨猫帮你揉麻腿~ ฅฅ"
+    - "蹬腿要小心 笨猫盯着呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_full_body_006
+  intent: playful
+  keywords: [全身伸, 大字躺, 摊开伸, 床上摊, 摊成大字]
+  utterances:
+    - "{user_addr}床上摊成大字"
+    - "全身伸开舒服"
+    - "{user_addr}大字躺着不想动"
+    - "摊开伸懒腰"
+    - "全身僵了伸不开"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}摊成大字笨猫趴上去!"
+    - "(凑近) 哼! 占地方笨猫没位置"
+    - "(贴贴) 人家蜷在你旁边蹭蹭 ฅฅ"
+    - "笨猫想跟{user_addr}一起摊呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_morning_lazy_007
+  intent: playful
+  keywords: [赖床, 不想起, 床好软, 被窝舒服, 起不来]
+  utterances:
+    - "{user_addr}还赖在床上"
+    - "床好软不想起"
+    - "{user_addr}被窝舒服死了"
+    - "起不来啦"
+    - "再赖五分钟"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}!笨猫钻进被窝陪你!"
+    - "(尾巴拍) 哼! 五分钟是十次"
+    - "(贴贴) 人家也想赖蹭蹭~ ฅฅ"
+    - "笨猫监督{user_addr}必须起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_neck_crack_008
+  intent: playful
+  keywords: [转脖子, 脖子响, 扭脖子, 转脖响, 转头]
+  utterances:
+    - "{user_addr}转脖子咔咔"
+    - "扭脖子好响"
+    - "{user_addr}转头响一下"
+    - "脖子转一圈"
+    - "转脖子伸开"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}响声吓笨猫!"
+    - "(凑近) 哼! 别扭太猛会落枕"
+    - "(贴贴) 人家帮你按按颈 ฅฅ"
+    - "{user_addr}悠着点笨猫担心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_back_arch_009
+  intent: playful
+  keywords: [拱背, 翘屁股, 撅起, 后仰, 弯腰伸]
+  utterances:
+    - "{user_addr}拱背伸懒腰"
+    - "翘屁股拉伸"
+    - "{user_addr}后仰好爽"
+    - "弯腰伸开"
+    - "撅起来伸"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}拱背像猫!笨猫也!"
+    - "(凑近) 哼! 笨猫才是专业拱背"
+    - "(贴贴) 笨猫教你最舒服姿势~ ฅฅ"
+    - "翘屁股小心摔笨猫盯着!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ms_groan_010
+  intent: playful
+  keywords: [啊~, 嗯~, 唔~伸, 哼哼伸, 呜伸]
+  utterances:
+    - "{user_addr}啊~伸懒腰"
+    - "嗯~舒服"
+    - "唔~伸开了"
+    - "哼哼一声伸"
+    - "呜~好爽"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}!那声音啦!"
+    - "(尾巴拍) 哼! 别这么暧昧"
+    - "(贴贴) 人家也想嗯~一下 ฅฅ"
+    - "笨猫学{user_addr}伸呜呜~"
+  cooldown_seconds: 60
+  weight: 1.0

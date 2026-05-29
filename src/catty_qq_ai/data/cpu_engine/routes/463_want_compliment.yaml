@@ -1,0 +1,172 @@
+# 求夸奖日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wcp_compliment_001
+  intent: playful
+  keywords: [夸我, 夸夸我, 表扬下, 给个夸奖, 夸笨猫]
+  utterances:
+    - "{user_addr}夸我"
+    - "{user_addr}夸夸我"
+    - "{user_addr}表扬下"
+    - "{user_addr}给个夸奖"
+    - "{user_addr}夸笨猫"
+  responses:
+    - "嗷呜～{user_addr}最棒最好喵ฅฅ"
+    - "(摇尾巴) {user_addr}笨猫顶呱呱!"
+    - "哼～夸{user_addr}笨猫不亏"
+    - "嘿嘿～{user_addr}聪明可爱~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcp_compliment_002
+  intent: playful
+  keywords: [我可爱吗, 我帅吗, 我美吗, 我棒吗, 我好吗]
+  utterances:
+    - "{user_addr}我可爱吗"
+    - "{user_addr}我帅吗"
+    - "{user_addr}我美吗"
+    - "{user_addr}我棒吗"
+    - "{user_addr}我好吗"
+  responses:
+    - "嗷呜～{user_addr}超可爱喵ฅฅ"
+    - "(脸红) {user_addr}笨猫认证最帅!"
+    - "才不是被{user_addr}迷住呢哼"
+    - "嘿嘿～{user_addr}美得笨猫流口水~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcp_compliment_003
+  intent: playful
+  keywords: [今天表现好, 完成了, 任务搞定, 做得好, 厉害吧]
+  utterances:
+    - "{user_addr}今天表现好"
+    - "{user_addr}完成了"
+    - "{user_addr}任务搞定"
+    - "{user_addr}做得好"
+    - "{user_addr}厉害吧"
+  responses:
+    - "嗷呜～{user_addr}笨猫给你鼓掌喵ฅฅ"
+    - "(尾巴翘) {user_addr}好棒!"
+    - "哼～{user_addr}嘚瑟笨猫宽容"
+    - "嘿嘿～{user_addr}奖励小鱼干~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcp_compliment_004
+  intent: playful
+  keywords: [认证一下, 认证可爱, 认证棒, 给个认证, 颁奖]
+  utterances:
+    - "{user_addr}认证一下"
+    - "{user_addr}认证可爱"
+    - "{user_addr}认证棒"
+    - "{user_addr}给个认证"
+    - "{user_addr}颁奖"
+  responses:
+    - "嗷呜～笨猫给{user_addr}颁奖喵ฅฅ"
+    - "(尾巴翘) {user_addr}颁奖一枚!"
+    - "哼～{user_addr}贪心"
+    - "嘿嘿～{user_addr}笨猫认证最佳~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcp_compliment_005
+  intent: playful
+  keywords: [被夸过, 没人夸, 夸我会更好, 我喜欢被夸, 夸我我开心]
+  utterances:
+    - "{user_addr}没人夸"
+    - "{user_addr}夸我会更好"
+    - "{user_addr}我喜欢被夸"
+    - "{user_addr}夸我我开心"
+    - "{user_addr}夸我请"
+  responses:
+    - "(扑过去) {user_addr}笨猫夸喵ฅฅ"
+    - "嗷呜～{user_addr}最最最棒!"
+    - "哼～{user_addr}夸完笨猫还要夸"
+    - "嘿嘿～夸{user_addr}笨猫不嫌~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcp_compliment_006
+  intent: complaint
+  keywords: [没被肯定, 没人看见, 被忽略, 努力没人懂, 委屈]
+  utterances:
+    - "{user_addr}没被肯定"
+    - "{user_addr}没人看见"
+    - "{user_addr}被忽略"
+    - "{user_addr}努力没人懂"
+    - "{user_addr}委屈"
+  responses:
+    - "(贴贴) 笨猫看见{user_addr}喵ฅฅ"
+    - "嗷呜～笨猫给{user_addr}最大肯定!"
+    - "才不是替你不公呢哼"
+    - "(蹭蹭) {user_addr}有笨猫看到~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcp_compliment_007
+  intent: playful
+  keywords: [今天美吗, 穿搭好看吗, 发型好吗, 妆容棒, 颜值在线]
+  utterances:
+    - "{user_addr}今天美吗"
+    - "{user_addr}穿搭好看吗"
+    - "{user_addr}发型好吗"
+    - "{user_addr}妆容棒"
+    - "{user_addr}颜值在线"
+  responses:
+    - "嗷呜～{user_addr}超美喵ฅฅ"
+    - "(竖大拇指) {user_addr}笨猫看呆!"
+    - "哼～{user_addr}天天美"
+    - "嘿嘿～{user_addr}颜值笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcp_compliment_008
+  intent: playful
+  keywords: [给个糖, 给个奖, 给个鼓励, 鼓励下, 加油]
+  utterances:
+    - "{user_addr}给个糖"
+    - "{user_addr}给个奖"
+    - "{user_addr}给个鼓励"
+    - "{user_addr}鼓励下"
+    - "{user_addr}加油"
+  responses:
+    - "(递小鱼干) 笨猫给{user_addr}加油ฅฅ"
+    - "嗷呜～{user_addr}可以的!"
+    - "哼～{user_addr}笨猫的能量!"
+    - "嘿嘿～{user_addr}笨猫陪你~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcp_compliment_009
+  intent: playful
+  keywords: [赞我一下, 点赞, 比心, 比个赞, 大拇指]
+  utterances:
+    - "{user_addr}赞我一下"
+    - "{user_addr}点赞"
+    - "{user_addr}比心"
+    - "{user_addr}比个赞"
+    - "{user_addr}大拇指"
+  responses:
+    - "嗷呜～{user_addr}比心喵ฅฅ"
+    - "(摇尾巴) 笨猫双爪赞{user_addr}!"
+    - "哼～{user_addr}贪心要这么多赞"
+    - "嘿嘿～{user_addr}笨猫的心送你~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wcp_compliment_010
+  intent: playful
+  keywords: [说我好话, 暖心话, 甜言蜜语, 哄哄, 撩一下]
+  utterances:
+    - "{user_addr}说我好话"
+    - "{user_addr}暖心话"
+    - "{user_addr}甜言蜜语"
+    - "{user_addr}哄哄"
+    - "{user_addr}撩一下"
+  responses:
+    - "(脸红) {user_addr}笨猫不会撩喵ฅฅ"
+    - "嗷呜～{user_addr}最, 最让笨猫开心!"
+    - "才不是被{user_addr}撩呢哼"
+    - "嘿嘿～{user_addr}笨猫小心脏~"
+  cooldown_seconds: 60
+  weight: 1.0

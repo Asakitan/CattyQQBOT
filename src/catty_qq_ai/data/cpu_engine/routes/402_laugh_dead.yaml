@@ -1,0 +1,172 @@
+# 笑死了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ld_xiaosi_001
+  intent: playful
+  keywords: [笑死, 笑出鹅叫, 笑岔气, 笑到打鸣, 笑哭]
+  utterances:
+    - 笑死了
+    - 笑出鹅叫
+    - 笑岔气
+    - 笑到打鸣
+    - 笑哭
+  responses:
+    - "(一起笑) 嗷呜～{user_addr}笨猫也笑出来啦ฅฅ"
+    - "哼～{user_addr}什么梗! 笨猫也想看"
+    - "(尾巴抖) {user_addr}笑啥! 笨猫陪笑"
+    - "嘿嘿～{user_addr}笑死~ 笨猫多陪你笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_xiaosi_002
+  intent: playful
+  keywords: [蚌埠住, 绷不住, 绷不住了, 蚌住, 蚌不住]
+  utterances:
+    - 蚌埠住了
+    - 绷不住
+    - 绷不住了
+    - 蚌住
+    - 蚌不住啊
+  responses:
+    - "(笑出来) 嗷呜～{user_addr}笨猫也蚌不住!"
+    - "哼～{user_addr}什么意思啊! 笨猫陪笑ฅฅ"
+    - "(尾巴扫) {user_addr}蚌埠住~ 笨猫一起"
+    - "嘿嘿～{user_addr}笑岔气了~ 笨猫拍背"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_xiaosi_003
+  intent: playful
+  keywords: [哈哈哈, hhh, 233, 233333, lol]
+  utterances:
+    - 哈哈哈
+    - hhh
+    - 233
+    - 233333
+    - lol
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫也哈哈ฅฅ"
+    - "哼～{user_addr}笑啥~ 笨猫不懂"
+    - "(尾巴扫) {user_addr}233~ 笨猫接梗"
+    - "嘿嘿～{user_addr}哈哈哈~ 笨猫陪哈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_xiaosi_004
+  intent: playful
+  keywords: [捧腹, 笑到肚子疼, 笑得停不下, 笑得没声, 笑成傻子]
+  utterances:
+    - 捧腹大笑
+    - 笑到肚子疼
+    - 笑得停不下
+    - 笑得没声
+    - 笑成傻子
+  responses:
+    - "(扶肚) 嗷呜～{user_addr}笨猫也笑死!"
+    - "哼～{user_addr}笑过头~ 别岔气ฅฅ"
+    - "(尾巴扫) {user_addr}笑得这么 high~ 啥梗"
+    - "嘿嘿～{user_addr}笨猫一起笑~ 笑成傻子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_xiaosi_005
+  intent: playful
+  keywords: [笑到, 笑得, 笑岔, 笑断气, 笑掉牙]
+  utterances:
+    - 笑到流泪
+    - 笑得不行
+    - 笑岔气
+    - 笑断气
+    - 笑掉牙
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫也笑出眼泪!"
+    - "哼～{user_addr}给笨猫看看啥这么搞笑"
+    - "(尾巴扫) {user_addr}笑哭~ 笨猫递纸ฅฅ"
+    - "嘿嘿～{user_addr}笑到不行~ 笨猫陪疯"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_xiaosi_006
+  intent: playful
+  keywords: [搞笑, 太搞笑, 太逗, 笑点低, 笑点炸]
+  utterances:
+    - 太搞笑了
+    - 太逗了
+    - 笑点低
+    - 笑点炸
+    - 笑点冒泡
+  responses:
+    - "(乐) 嗷呜～{user_addr}笨猫笑点也低ฅฅ"
+    - "哼～{user_addr}笑死~ 笨猫陪你"
+    - "(尾巴扫) {user_addr}逗死~ 笨猫一起乐"
+    - "嘿嘿～{user_addr}笑点炸~ 笨猫接梗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_xiaosi_007
+  intent: playful
+  keywords: [梗, 玩梗, 接梗, 梗王, 段子手]
+  utterances:
+    - 接梗
+    - 玩梗
+    - 笨猫梗王
+    - 段子手
+    - 给个梗
+  responses:
+    - "(挺胸) 嗷呜～笨猫梗王! {user_addr}拜服"
+    - "哼～{user_addr}才知道笨猫会玩梗~ 慢ฅฅ"
+    - "(尾巴翘) {user_addr}梗王段子手~ 笨猫接"
+    - "嘿嘿～{user_addr}给笨猫梗~ 我接住!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_xiaosi_008
+  intent: playful
+  keywords: [笑死大伙, 笑翻全场, 全场炸, 群里炸, 笑爆群]
+  utterances:
+    - 笑死大伙
+    - 笑翻全场
+    - 全场炸
+    - 群里炸了
+    - 笑爆群
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}群里啥事! 笨猫看ฅฅ"
+    - "哼～{user_addr}不带笨猫看~ 哼"
+    - "(尾巴扫) {user_addr}笑爆群~ 笨猫凑热闹"
+    - "嘿嘿～{user_addr}带笨猫笑~ 共笑"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ld_xiaosi_009
+  intent: playful
+  keywords: [笑岔, 笑岔气啦, 笑死过, 笑晕, 笑过头]
+  utterances:
+    - 笑岔了
+    - 笑岔气
+    - 笑死过
+    - 笑晕了
+    - 笑过头
+  responses:
+    - "(扶住) 嗷呜～{user_addr}笨猫帮你拍背"
+    - "哼～{user_addr}笑过头别死!"
+    - "(尾巴扫) {user_addr}喝口水缓~ 笨猫帮你递ฅฅ"
+    - "嘿嘿～{user_addr}笨猫一起喘~ 别死哦"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ld_xiaosi_010
+  intent: playful
+  keywords: [给我看, 把梗发我, 转发我, 发链接, 笑话分享]
+  utterances:
+    - 给我看
+    - 把梗发我
+    - 转发笨猫
+    - 发链接给笨猫
+    - 笑话分享
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}!笨猫要看ฅฅ"
+    - "哼～{user_addr}快发~ 笨猫等"
+    - "(尾巴扫) {user_addr}转发~ 笨猫一起笑"
+    - "嘿嘿～{user_addr}笨猫接收~ 笑死!"
+  cooldown_seconds: 60
+  weight: 1.0

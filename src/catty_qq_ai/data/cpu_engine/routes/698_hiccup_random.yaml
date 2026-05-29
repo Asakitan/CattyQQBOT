@@ -1,0 +1,172 @@
+# 突然打嗝 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hr_hic_001
+  intent: playful
+  keywords: [打嗝, 嗝了, 嗝不停, 一直嗝, 打嗝停不下]
+  utterances:
+    - "{user_addr}打嗝了"
+    - "嗝不停"
+    - "{user_addr}一直嗝"
+    - "嗝停不下"
+    - "突然嗝"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫吓你!"
+    - "(尾巴翘) 哼! 笨猫学嗝"
+    - "(贴贴) 人家拍背~ ฅฅ"
+    - "{user_addr}水喝几口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_water_save_002
+  intent: playful
+  keywords: [喝水止嗝, 一口气水, 水救命, 多喝水, 水治嗝]
+  utterances:
+    - "{user_addr}喝水止嗝"
+    - "一口气水"
+    - "{user_addr}水救命"
+    - "多喝水"
+    - "水治嗝"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫递杯水!"
+    - "(尾巴翘) 哼! 慢喝"
+    - "(贴贴) 人家陪你~ ฅฅ"
+    - "{user_addr}笨猫监督停嗝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_scare_003
+  intent: playful
+  keywords: [吓一跳止嗝, 突然吓, 偏方止嗝, 吓嗝停, 嗷一下]
+  utterances:
+    - "{user_addr}吓一跳止嗝"
+    - "突然吓你"
+    - "{user_addr}吓嗝停"
+    - "偏方"
+    - "嗷一下"
+  responses:
+    - "(突然喵) 嗷呜～{user_addr}!吓你一跳!"
+    - "(尾巴翘) 哼! 笨猫吓人专业"
+    - "(贴贴) 人家小猫爪~ ฅฅ"
+    - "{user_addr}停了没?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_breath_hold_004
+  intent: playful
+  keywords: [屏气止嗝, 憋气, 憋住呼吸, 屏一会, 憋住]
+  utterances:
+    - "{user_addr}屏气止嗝"
+    - "憋气"
+    - "{user_addr}屏一会"
+    - "憋住呼吸"
+    - "屏住"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫数!"
+    - "(尾巴翘) 哼! 一二三四五"
+    - "(贴贴) 人家陪你屏~ ฅฅ"
+    - "{user_addr}慢慢呼吸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_eat_too_fast_005
+  intent: complaint
+  keywords: [吃太快, 嗝了, 狼吞虎咽, 吃快嗝, 急吃嗝]
+  utterances:
+    - "{user_addr}吃太快嗝"
+    - "狼吞虎咽"
+    - "{user_addr}急吃嗝"
+    - "吃快嗝了"
+    - "饭快嗝"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}!慢慢吃!"
+    - "(凑近) 哼! 笨猫监督慢"
+    - "(贴贴) 人家陪你细嚼~ ฅฅ"
+    - "{user_addr}笨猫盯着!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_carbonate_006
+  intent: complaint
+  keywords: [喝可乐打嗝, 气泡水嗝, 碳酸嗝, 雪碧嗝, 气多]
+  utterances:
+    - "{user_addr}可乐嗝"
+    - "气泡水嗝"
+    - "{user_addr}碳酸嗝"
+    - "雪碧嗝"
+    - "气多嗝"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪嗝!"
+    - "(尾巴翘) 哼! 笨猫拍背"
+    - "(贴贴) 人家陪你打~ ฅฅ"
+    - "{user_addr}嗝完笨猫求摸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_someone_miss_007
+  intent: playful
+  keywords: [有人想你, 想我了, 谁想我, 嗝是想念, 思念信号]
+  utterances:
+    - "{user_addr}有人想你"
+    - "想我了"
+    - "{user_addr}谁想我"
+    - "嗝是想念"
+    - "思念信号"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想你嗯!"
+    - "(尾巴翘) 哼! 是笨猫想"
+    - "(贴贴) 人家招供~ ฅฅ"
+    - "{user_addr}是笨猫念叨!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_burp_008
+  intent: playful
+  keywords: [饱嗝, 吃饱嗝, 满足嗝, 饭后嗝, 大饱]
+  utterances:
+    - "{user_addr}饱嗝"
+    - "吃饱嗝"
+    - "{user_addr}满足嗝"
+    - "饭后嗝"
+    - "大饱嗝"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!吃多饱啦!"
+    - "(尾巴翘) 哼! 笨猫蹭肚"
+    - "(贴贴) 人家也想饱~ ฅฅ"
+    - "{user_addr}下次留笨猫一口"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_endless_009
+  intent: complaint
+  keywords: [打嗝半小时, 嗝一晚, 嗝停不了, 顽固嗝, 嗝太久]
+  utterances:
+    - "{user_addr}嗝半小时"
+    - "嗝一晚"
+    - "{user_addr}顽固嗝"
+    - "停不了"
+    - "嗝太久"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫担心!"
+    - "(尾巴拍) 哼! 该去医院"
+    - "(贴贴) 人家心疼蹭蹭~ ฅฅ"
+    - "{user_addr}笨猫陪你去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hr_funny_010
+  intent: playful
+  keywords: [嗝声好笑, 嗝出节奏, 萌嗝, 嗝可爱, 嗝起来]
+  utterances:
+    - "{user_addr}嗝声好笑"
+    - "萌嗝"
+    - "{user_addr}嗝节奏"
+    - "嗝可爱"
+    - "嗝起来"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫学你嗝!"
+    - "(尾巴翘) 哼! 笨猫嗝呜呜"
+    - "(贴贴) 人家也想嗝萌~ ฅฅ"
+    - "{user_addr}嗝得笨猫笑!"
+  cooldown_seconds: 60
+  weight: 1.0

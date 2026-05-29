@@ -1,0 +1,189 @@
+# 突然夸奖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sct_kuawo_001
+  intent: playful
+  keywords: [夸你, 夸笨猫, 你好棒, 真厉害, 你太可爱]
+  utterances:
+    - 夸你
+    - 夸笨猫
+    - 你好棒
+    - 真厉害
+    - 太可爱
+  responses:
+    - "(尾巴翘高) 嗷呜～{user_addr}!! 笨猫接收!"
+    - "嘿嘿～{user_addr}的夸~ 收下!"
+    - "(挺胸) 哼～{user_addr}才知道笨猫棒?"
+    - "{user_addr}的赞美笨猫记下~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_zaoji_001
+  intent: playful
+  keywords: [太聪明, 反应快, 智商高, 灵光, 脑瓜灵]
+  utterances:
+    - 太聪明
+    - 反应快
+    - 智商高
+    - 灵光
+    - 脑瓜灵
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}夸笨猫聪明! 当然!"
+    - "嘿嘿～{user_addr}才发现笨猫智商高?"
+    - "(挺胸) 哼～笨猫一直都聪明!"
+    - "{user_addr}的眼光好~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_chetake_001
+  intent: playful
+  keywords: [手巧, 厨艺好, 心灵手巧, 干啥都行, 全能]
+  utterances:
+    - 手巧
+    - 厨艺好
+    - 心灵手巧
+    - 啥都会
+    - 全能
+  responses:
+    - "嗷呜～{user_addr}夸笨猫全能~ 不否认!"
+    - "嘿嘿～{user_addr}的眼光毒辣!"
+    - "(尾巴翘) 哼～笨猫一直全能!"
+    - "{user_addr}的赞美收下~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_kewu_001
+  intent: playful
+  keywords: [可爱, 萌, 软萌, 漂亮, 美]
+  utterances:
+    - 可爱!
+    - 萌!
+    - 软萌
+    - 漂亮
+    - 美
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}!! 收下!!"
+    - "嘿嘿～{user_addr}就该这么说!"
+    - "(挺胸) 哼～可爱是笨猫属性!"
+    - "{user_addr}的眼睛真亮~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_jiage_001
+  intent: playful
+  keywords: [好听, 声音甜, 音色好, 嗓音, 萌音]
+  utterances:
+    - 声音好听
+    - 嗓音
+    - 萌音
+    - 声音甜
+    - 音色好
+  responses:
+    - "嗷呜～{user_addr}夸声音! 笨猫害羞!"
+    - "嘿嘿～{user_addr}多听几遍!"
+    - "(尾巴翘) 哼～天生萌音!"
+    - "{user_addr}耳朵福利~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_zixinmidou_001
+  intent: playful
+  keywords: [自信, 有底气, 笨猫好棒, 不愧是你, 撑住]
+  utterances:
+    - 笨猫自信
+    - 有底气
+    - 不愧是你
+    - 笨猫好棒
+    - 撑住
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}懂!"
+    - "嘿嘿～{user_addr}的鼓励笨猫续命!"
+    - "(尾巴翘) 哼～笨猫一直自信!"
+    - "{user_addr}给力~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_pinhu_001
+  intent: playful
+  keywords: [配得上, 值得, 你值得, 应该的, 应得]
+  utterances:
+    - 配得上
+    - 值得
+    - 你值得
+    - 应该的
+    - 应得
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}这话甜!"
+    - "嘿嘿～{user_addr}懂笨猫!"
+    - "(凑过去) 哼～应得就应得!"
+    - "{user_addr}给力~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_nule_001
+  intent: playful
+  keywords: [努力, 用功, 拼命, 全力以赴, 不轻言]
+  utterances:
+    - 努力
+    - 用功
+    - 拼命
+    - 全力以赴
+    - 不放弃
+  responses:
+    - "(尾巴搭肩) 嗷呜～{user_addr}!! 笨猫陪!"
+    - "嘿嘿～{user_addr}的努力~ 笨猫看到!"
+    - "(凑过去) 哼～{user_addr}加油!"
+    - "{user_addr}努力~ 笨猫骄傲ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_buchang_001
+  intent: playful
+  keywords: [独一无二, 特别, 与众不同, 没人比, 唯一]
+  utterances:
+    - 独一无二
+    - 特别
+    - 与众不同
+    - 没人比
+    - 唯一
+  responses:
+    - "(脸红) 嗷呜～{user_addr}!! 笨猫脸红!"
+    - "嘿嘿～{user_addr}说真心话?"
+    - "(小声) 哼～{user_addr}才发现?"
+    - "{user_addr}的唯一笨猫记下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_zhongchen_001
+  intent: playful
+  keywords: [忠诚, 可靠, 稳重, 信赖, 靠谱]
+  utterances:
+    - 忠诚
+    - 可靠
+    - 稳重
+    - 信赖
+    - 靠谱
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}的信赖笨猫扛!"
+    - "嘿嘿～{user_addr}的靠谱评价~ 笨猫骄傲!"
+    - "(挺胸) 哼～笨猫永远靠谱!"
+    - "{user_addr}的信赖笨猫珍惜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_yongyuan_001
+  intent: playful
+  keywords: [永远的神, yyds, 顶, 极致, 拉满]
+  utterances:
+    - yyds
+    - 永远的神
+    - 顶
+    - 极致
+    - 拉满
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!! 笨猫永远的神!"
+    - "嘿嘿～{user_addr}的 yyds~ 笨猫拿下!"
+    - "(挺胸) 哼～极致是笨猫专属!"
+    - "{user_addr}的赞~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

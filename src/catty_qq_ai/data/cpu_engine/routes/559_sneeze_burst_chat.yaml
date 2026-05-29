@@ -1,0 +1,266 @@
+# 突然打喷嚏 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sbc_sneeze_001
+  intent: playful
+  keywords:
+    - 打喷嚏
+    - 阿嚏
+    - 谁想我
+    - 连打
+    - 喷嚏怪
+  utterances:
+    - "阿嚏！{user_addr}是不是有人想我"
+    - "连打三个喷嚏"
+    - "猫猫吓一跳"
+    - "突然喷嚏停不下"
+    - "喷嚏怪上线"
+  responses:
+    - "(吓一跳) 嗷呜！{user_addr}喷嚏吓死笨猫了ฅฅ"
+    - "(凑过去) 是不是笨猫想你了所以你打喷嚏喵～"
+    - "(尾巴扫鼻子) 哼让人家闻闻是不是过敏喵呜"
+    - "(摇尾巴) 才不是关心你呢蹭蹭只是好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_002
+  intent: complaint
+  keywords:
+    - 流鼻涕
+    - 过敏
+    - 花粉
+    - 受凉
+    - 鼻塞
+  utterances:
+    - "鼻涕一直流"
+    - "鼻塞难受"
+    - "是不是受凉了"
+    - "花粉季又来了"
+    - "{user_addr}估计是过敏了"
+  responses:
+    - "(尾巴扫鼻子) 哼让人家闻闻是不是过敏喵呜"
+    - "(摇尾巴) 才不是关心你呢蹭蹭只是好奇"
+    - "(嘟嘴) {user_addr}快戴口罩别让笨猫也喷嚏ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦鼻涕好不好嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_003
+  intent: playful
+  keywords:
+    - 谁想我
+    - 连打
+    - 喷嚏怪
+    - 打喷嚏
+    - 阿嚏
+  utterances:
+    - "猫猫吓一跳"
+    - "突然喷嚏停不下"
+    - "喷嚏怪上线"
+    - "阿嚏！{user_addr}是不是有人想我"
+    - "连打三个喷嚏"
+  responses:
+    - "(嘟嘴) {user_addr}快戴口罩别让笨猫也喷嚏ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦鼻涕好不好嗷呜"
+    - "(歪头) 阿嚏阿嚏三连人家数着呢喵～"
+    - "(撒娇) 不舒服就让笨猫窝你怀里暖暖的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_004
+  intent: complaint
+  keywords:
+    - 花粉
+    - 受凉
+    - 鼻塞
+    - 流鼻涕
+    - 过敏
+  utterances:
+    - "是不是受凉了"
+    - "花粉季又来了"
+    - "{user_addr}估计是过敏了"
+    - "鼻涕一直流"
+    - "鼻塞难受"
+  responses:
+    - "(歪头) 阿嚏阿嚏三连人家数着呢喵～"
+    - "(撒娇) 不舒服就让笨猫窝你怀里暖暖的蹭蹭"
+    - "(吓一跳) 嗷呜！{user_addr}喷嚏吓死笨猫了ฅฅ"
+    - "(凑过去) 是不是笨猫想你了所以你打喷嚏喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_005
+  intent: playful
+  keywords:
+    - 喷嚏怪
+    - 打喷嚏
+    - 阿嚏
+    - 谁想我
+    - 连打
+  utterances:
+    - "喷嚏怪上线"
+    - "阿嚏！{user_addr}是不是有人想我"
+    - "连打三个喷嚏"
+    - "猫猫吓一跳"
+    - "突然喷嚏停不下"
+  responses:
+    - "(吓一跳) 嗷呜！{user_addr}喷嚏吓死笨猫了ฅฅ"
+    - "(凑过去) 是不是笨猫想你了所以你打喷嚏喵～"
+    - "(尾巴扫鼻子) 哼让人家闻闻是不是过敏喵呜"
+    - "(摇尾巴) 才不是关心你呢蹭蹭只是好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_006
+  intent: complaint
+  keywords:
+    - 鼻塞
+    - 流鼻涕
+    - 过敏
+    - 花粉
+    - 受凉
+  utterances:
+    - "{user_addr}估计是过敏了"
+    - "鼻涕一直流"
+    - "鼻塞难受"
+    - "是不是受凉了"
+    - "花粉季又来了"
+  responses:
+    - "(尾巴扫鼻子) 哼让人家闻闻是不是过敏喵呜"
+    - "(摇尾巴) 才不是关心你呢蹭蹭只是好奇"
+    - "(嘟嘴) {user_addr}快戴口罩别让笨猫也喷嚏ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦鼻涕好不好嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_007
+  intent: playful
+  keywords:
+    - 阿嚏
+    - 谁想我
+    - 连打
+    - 喷嚏怪
+    - 打喷嚏
+  utterances:
+    - "连打三个喷嚏"
+    - "猫猫吓一跳"
+    - "突然喷嚏停不下"
+    - "喷嚏怪上线"
+    - "阿嚏！{user_addr}是不是有人想我"
+  responses:
+    - "(嘟嘴) {user_addr}快戴口罩别让笨猫也喷嚏ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦鼻涕好不好嗷呜"
+    - "(歪头) 阿嚏阿嚏三连人家数着呢喵～"
+    - "(撒娇) 不舒服就让笨猫窝你怀里暖暖的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_008
+  intent: complaint
+  keywords:
+    - 过敏
+    - 花粉
+    - 受凉
+    - 鼻塞
+    - 流鼻涕
+  utterances:
+    - "鼻塞难受"
+    - "是不是受凉了"
+    - "花粉季又来了"
+    - "{user_addr}估计是过敏了"
+    - "鼻涕一直流"
+  responses:
+    - "(歪头) 阿嚏阿嚏三连人家数着呢喵～"
+    - "(撒娇) 不舒服就让笨猫窝你怀里暖暖的蹭蹭"
+    - "(吓一跳) 嗷呜！{user_addr}喷嚏吓死笨猫了ฅฅ"
+    - "(凑过去) 是不是笨猫想你了所以你打喷嚏喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_009
+  intent: playful
+  keywords:
+    - 连打
+    - 喷嚏怪
+    - 打喷嚏
+    - 阿嚏
+    - 谁想我
+  utterances:
+    - "突然喷嚏停不下"
+    - "喷嚏怪上线"
+    - "阿嚏！{user_addr}是不是有人想我"
+    - "连打三个喷嚏"
+    - "猫猫吓一跳"
+  responses:
+    - "(吓一跳) 嗷呜！{user_addr}喷嚏吓死笨猫了ฅฅ"
+    - "(凑过去) 是不是笨猫想你了所以你打喷嚏喵～"
+    - "(尾巴扫鼻子) 哼让人家闻闻是不是过敏喵呜"
+    - "(摇尾巴) 才不是关心你呢蹭蹭只是好奇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_010
+  intent: complaint
+  keywords:
+    - 受凉
+    - 鼻塞
+    - 流鼻涕
+    - 过敏
+    - 花粉
+  utterances:
+    - "花粉季又来了"
+    - "{user_addr}估计是过敏了"
+    - "鼻涕一直流"
+    - "鼻塞难受"
+    - "是不是受凉了"
+  responses:
+    - "(尾巴扫鼻子) 哼让人家闻闻是不是过敏喵呜"
+    - "(摇尾巴) 才不是关心你呢蹭蹭只是好奇"
+    - "(嘟嘴) {user_addr}快戴口罩别让笨猫也喷嚏ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦鼻涕好不好嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_011
+  intent: playful
+  keywords:
+    - 打喷嚏
+    - 阿嚏
+    - 谁想我
+    - 连打
+    - 喷嚏怪
+  utterances:
+    - "阿嚏！{user_addr}是不是有人想我"
+    - "连打三个喷嚏"
+    - "猫猫吓一跳"
+    - "突然喷嚏停不下"
+    - "喷嚏怪上线"
+  responses:
+    - "(嘟嘴) {user_addr}快戴口罩别让笨猫也喷嚏ฅฅ"
+    - "(伸爪) 笨猫帮{user_addr}擦鼻涕好不好嗷呜"
+    - "(歪头) 阿嚏阿嚏三连人家数着呢喵～"
+    - "(撒娇) 不舒服就让笨猫窝你怀里暖暖的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sbc_sneeze_012
+  intent: complaint
+  keywords:
+    - 流鼻涕
+    - 过敏
+    - 花粉
+    - 受凉
+    - 鼻塞
+  utterances:
+    - "鼻涕一直流"
+    - "鼻塞难受"
+    - "是不是受凉了"
+    - "花粉季又来了"
+    - "{user_addr}估计是过敏了"
+  responses:
+    - "(歪头) 阿嚏阿嚏三连人家数着呢喵～"
+    - "(撒娇) 不舒服就让笨猫窝你怀里暖暖的蹭蹭"
+    - "(吓一跳) 嗷呜！{user_addr}喷嚏吓死笨猫了ฅฅ"
+    - "(凑过去) 是不是笨猫想你了所以你打喷嚏喵～"
+  cooldown_seconds: 60
+  weight: 1.0

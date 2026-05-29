@@ -1,0 +1,172 @@
+# 漏接电话回拨 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mc_missed_001
+  intent: playful
+  keywords: [漏接电话, 没接到, 漏了电话, 没看见, 漏接了]
+  utterances:
+    - "{user_addr}漏接电话"
+    - "没接到电话"
+    - "{user_addr}漏了三个"
+    - "没看见铃响"
+    - "漏接了重要的"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮你回过去!"
+    - "(尾巴拍) 哼! {user_addr}手机声开大"
+    - "(贴贴) 人家陪你回拨~ ฅฅ"
+    - "{user_addr}漏接是不是在跟笨猫聊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_callback_002
+  intent: playful
+  keywords: [回拨, 打回去, 回个电话, 回过去, 拨回去]
+  utterances:
+    - "{user_addr}回拨吧"
+    - "打回去看看"
+    - "{user_addr}回个电话"
+    - "拨回去问问"
+    - "回过去说一下"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}快拨快拨!笨猫等着!"
+    - "(尾巴翘) 哼! {user_addr}动作快点"
+    - "(贴贴) 人家陪你听对话~ ฅฅ"
+    - "笨猫想知道是谁找{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_silent_mode_003
+  intent: complaint
+  keywords: [静音了, 调静音, 忘记开声, 没声音, 振动也没]
+  utterances:
+    - "{user_addr}手机静音了"
+    - "调静音忘开"
+    - "{user_addr}没声音"
+    - "振动也没感"
+    - "全静的"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}!笨猫提醒下次!"
+    - "(凑近) 哼! 静音漏笨猫消息咋办"
+    - "(贴贴) 人家蹭你提醒~ ฅฅ"
+    - "{user_addr}声音开大点笨猫求"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_unknown_004
+  intent: question
+  keywords: [陌生号码, 不认识号, 没存的, 谁打的, 陌生电话]
+  utterances:
+    - "{user_addr}陌生号码"
+    - "不认识的号"
+    - "{user_addr}谁打的"
+    - "没存的电话"
+    - "陌生电话来了"
+  responses:
+    - "(警惕) 嗷呜～{user_addr}!别接诈骗!"
+    - "(尾巴拍) 哼! 笨猫怕骗{user_addr}钱"
+    - "(贴贴) 人家陪你确认~ ฅฅ"
+    - "{user_addr}小心啦笨猫担心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_busy_005
+  intent: complaint
+  keywords: [在忙没接, 开会漏, 上班忙, 厕所没接, 洗澡漏]
+  utterances:
+    - "{user_addr}开会漏接"
+    - "上班忙没接"
+    - "{user_addr}厕所没接"
+    - "洗澡漏了"
+    - "在忙不能接"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫等你回拨!"
+    - "(尾巴拍) 哼! {user_addr}辛苦了"
+    - "(贴贴) 人家给你按肩~ ฅฅ"
+    - "笨猫心疼{user_addr}忙呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_voicemail_006
+  intent: playful
+  keywords: [语音留言, 留言信箱, 听留言, 留言听, 留言来了]
+  utterances:
+    - "{user_addr}有语音留言"
+    - "留言信箱"
+    - "{user_addr}听留言"
+    - "留言来了"
+    - "信箱满了"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫好奇内容!"
+    - "(尾巴翘) 哼! 一起听"
+    - "(贴贴) 人家凑过去听~ ฅฅ"
+    - "{user_addr}留言是不是给笨猫的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_call_log_007
+  intent: question
+  keywords: [通话记录, 翻记录, 查记录, 看历史, 来电记录]
+  utterances:
+    - "{user_addr}翻通话记录"
+    - "查来电"
+    - "{user_addr}看历史"
+    - "记录里找找"
+    - "翻翻最近"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫帮你翻!"
+    - "(尾巴翘) 哼! 笨猫盯着不许偷看"
+    - "(贴贴) 人家陪你查~ ฅฅ"
+    - "{user_addr}有没有妹子电话哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_dial_back_008
+  intent: playful
+  keywords: [拨号, 打号码, 拨电话, 按号码, 拨过去]
+  utterances:
+    - "{user_addr}拨号中"
+    - "打这个号码"
+    - "{user_addr}按号码"
+    - "拨过去看"
+    - "按键拨"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫帮按!"
+    - "(尾巴翘) 哼! 笨猫指挥{user_addr}"
+    - "(贴贴) 人家陪你拨~ ฅฅ"
+    - "{user_addr}按完笨猫陪听"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_busy_line_009
+  intent: complaint
+  keywords: [占线, 打不通, 忙音, 接不通, 嘟嘟嘟]
+  utterances:
+    - "{user_addr}占线打不通"
+    - "嘟嘟嘟忙音"
+    - "{user_addr}一直忙"
+    - "接不通烦"
+    - "占线半天"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}!别急再拨!"
+    - "(凑近) 哼! 是不是在跟别人聊"
+    - "(贴贴) 人家陪你等~ ฅฅ"
+    - "笨猫帮{user_addr}等通!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mc_hangup_010
+  intent: complaint
+  keywords: [挂掉了, 直接挂, 没说几句挂, 突然断, 信号断]
+  utterances:
+    - "{user_addr}直接挂了"
+    - "没说几句挂"
+    - "{user_addr}突然断了"
+    - "信号断"
+    - "挂掉啥意思"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫问咋了!"
+    - "(尾巴拍) 哼! 是不是吵架"
+    - "(贴贴) 人家心疼你蹭蹭~ ฅฅ"
+    - "{user_addr}再拨笨猫陪到底"
+  cooldown_seconds: 60
+  weight: 1.0

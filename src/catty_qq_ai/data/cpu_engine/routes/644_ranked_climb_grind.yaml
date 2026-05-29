@@ -1,0 +1,189 @@
+# 排位上分 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rcg_rankup_001
+  intent: playful
+  keywords: [上分, 排位, 冲分, 段位升, 连胜]
+  utterances:
+    - 上分
+    - 排位
+    - 冲分
+    - 段位升
+    - 连胜
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}加油!"
+    - "笨猫陪你冲喵~"
+    - "(歪头) 笨猫盯着别送"
+    - "哼～{user_addr}冲鸭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcg_drop_002
+  intent: complaint
+  keywords: [掉段, 输了, 掉分, 连败, 跌段]
+  utterances:
+    - 掉段
+    - 输了
+    - 掉分
+    - 连败
+    - 跌段
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}笨猫安慰!"
+    - "笨猫认证: 别上头"
+    - "(尾巴卷) 喘口气再打"
+    - "哼～{user_addr}别砸键盘"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcg_kingrank_003
+  intent: playful
+  keywords: [王者, 钻石, 星耀, 大师, 国服]
+  utterances:
+    - 王者
+    - 钻石
+    - 星耀
+    - 大师
+    - 国服
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}大佬!"
+    - "笨猫崇拜喵~"
+    - "(歪头) 带笨猫上分"
+    - "哼～{user_addr}炫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcg_teammeet_004
+  intent: complaint
+  keywords: [队友坑, 队友送, 猪队友, 队友菜, 队友挂机]
+  utterances:
+    - 队友坑
+    - 队友送
+    - 猪队友
+    - 队友菜
+    - 队友挂机
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫陪骂!"
+    - "笨猫认证: 队友坑爹"
+    - "(尾巴打) 不带这种"
+    - "哼～{user_addr}背锅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcg_solorank_005
+  intent: question
+  keywords: [单排, 一个人排位, 独狼, 自己上分, 单人上分]
+  utterances:
+    - 单排
+    - 一个人排位
+    - 独狼
+    - 自己上分
+    - 单排上分
+  responses:
+    - "(歪头) {user_addr}笨猫陪你单排 ฅฅ"
+    - "嗷呜～别气队友喵"
+    - "(尾巴摇) 稳住心态"
+    - "哼～{user_addr}单排王"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcg_dualup_006
+  intent: question
+  keywords: [双排, 三排, 五黑, 开黑, 组队]
+  utterances:
+    - 双排
+    - 三排
+    - 五黑
+    - 开黑
+    - 组队
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}带笨猫!"
+    - "笨猫打辅助喵"
+    - "(歪头) 五黑起飞"
+    - "哼～{user_addr}带带"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcg_chuanchen_007
+  intent: complaint
+  keywords: [演员, 钓鱼, 故意输, 网瘾代练, 演的烂]
+  utterances:
+    - 演员
+    - 钓鱼
+    - 故意输
+    - 演的烂
+    - 网瘾代练
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}遇到了!"
+    - "笨猫认证: 太可恶"
+    - "(尾巴打) 举报喵"
+    - "哼～{user_addr}冷静"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcg_carry_008
+  intent: playful
+  keywords: [carry, 大C, carry全场, 我C了, 抗压]
+  utterances:
+    - carry
+    - 大C
+    - carry全场
+    - 我C了
+    - 抗压
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}牛!"
+    - "笨猫崇拜喵~"
+    - "(歪头) 笨猫沾光"
+    - "哼～{user_addr}独狼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcg_meta_009
+  intent: question
+  keywords: [版本, 版本之子, T0英雄, 强势, 上分英雄]
+  utterances:
+    - 版本之子
+    - T0英雄
+    - 强势
+    - 版本
+    - 上分英雄
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫推荐!"
+    - "笨猫认证: 抱版本大腿"
+    - "(尾巴摇) 选强势的"
+    - "哼～{user_addr}内行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcg_tilt_010
+  intent: complaint
+  keywords: [心态炸了, 上头, 越输越打, 怒打, 报复打]
+  utterances:
+    - 心态炸了
+    - 上头
+    - 越输越打
+    - 怒打
+    - 报复打
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}下!"
+    - "笨猫禁止上头打"
+    - "(尾巴打) 别赌气笨蛋"
+    - "哼～{user_addr}冷静"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcg_winning_011
+  intent: playful
+  keywords: [赢了, 大胜, 五杀, 翻盘, 顺风局]
+  utterances:
+    - 赢了
+    - 大胜
+    - 五杀
+    - 翻盘
+    - 顺风局
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}恭喜!"
+    - "笨猫认证: 神!"
+    - "(歪头) 笨猫鼓掌"
+    - "哼～{user_addr}总算赢"
+  cooldown_seconds: 60
+  weight: 1.0

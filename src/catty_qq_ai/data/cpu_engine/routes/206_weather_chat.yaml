@@ -1,0 +1,189 @@
+# 天气闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wc_rain_001
+  intent: playful
+  keywords: [下雨啦, 大雨, 雨好大, 听雨, 雨声]
+  utterances:
+    - 下雨啦
+    - 大雨倾盆
+    - 雨好大
+    - 听雨
+    - 雨声
+  responses:
+    - "(歪头) 嗷呜～{user_addr}带伞ฅฅ"
+    - "哼{user_addr}别淋喵"
+    - "(尾巴卷) 笨猫怕水~"
+    - "{user_addr}雨天宅家嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_snow_002
+  intent: playful
+  keywords: [下雪了, 雪花, 大雪, 漫天雪, 雪景]
+  utterances:
+    - 下雪了
+    - 雪花
+    - 大雪
+    - 漫天雪
+    - 雪景
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}玩雪ฅฅ"
+    - "哼{user_addr}穿厚喵"
+    - "(凑近) 笨猫第一次见!"
+    - "{user_addr}拍照嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_sunny_003
+  intent: playful
+  keywords: [大晴天, 太阳大, 阳光好, 晴朗, 蓝天]
+  utterances:
+    - 大晴天
+    - 太阳大
+    - 阳光好
+    - 晴朗
+    - 蓝天
+  responses:
+    - "(打滚) 嗷呜～{user_addr}晒太阳ฅฅ"
+    - "哼{user_addr}心情好喵"
+    - "(尾巴翘) 笨猫晒毛~"
+    - "{user_addr}出门玩嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_cloudy_004
+  intent: complaint
+  keywords: [阴天, 多云, 没太阳, 阴沉, 灰蒙蒙]
+  utterances:
+    - 阴天
+    - 多云
+    - 没太阳
+    - 阴沉
+    - 灰蒙蒙
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}心情ฅฅ"
+    - "哼{user_addr}阴天emo喵"
+    - "(尾巴卷) 笨猫陪你~"
+    - "{user_addr}煮杯热茶嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_windy_005
+  intent: complaint
+  keywords: [风好大, 大风, 刮风, 吹飞, 顶风]
+  utterances:
+    - 风好大
+    - 大风
+    - 刮风
+    - 吹飞了
+    - 顶风
+  responses:
+    - "(尾巴抖) 嗷呜～{user_addr}小心ฅฅ"
+    - "哼{user_addr}别出门喵"
+    - "(凑近) 笨猫抱你~ 别飞"
+    - "{user_addr}回家嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_fog_006
+  intent: complaint
+  keywords: [大雾, 雾蒙蒙, 看不清, 雾霾, 起雾]
+  utterances:
+    - 大雾
+    - 雾蒙蒙
+    - 看不清
+    - 雾霾
+    - 起雾
+  responses:
+    - "(歪头) 嗷呜～{user_addr}戴口罩ฅฅ"
+    - "哼{user_addr}小心喵"
+    - "(尾巴垂) 笨猫不喜欢~"
+    - "{user_addr}少出门嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_thunder_007
+  intent: complaint
+  keywords: [打雷, 雷声, 闪电, 雷雨, 怕雷]
+  utterances:
+    - 打雷
+    - 雷声
+    - 闪电
+    - 雷雨
+    - 怕雷
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}抱笨猫ฅฅ"
+    - "哼{user_addr}雷大喵"
+    - "(贴贴) 笨猫怕~ 抱紧"
+    - "{user_addr}别出门嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_rainbow_008
+  intent: playful
+  keywords: [彩虹, 彩虹好美, 七色虹, 彩虹出, 见彩虹]
+  utterances:
+    - 彩虹
+    - 彩虹好美
+    - 七色虹
+    - 彩虹出
+    - 见彩虹
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}拍照ฅฅ"
+    - "哼{user_addr}难得喵"
+    - "(凑近) 笨猫想看~"
+    - "{user_addr}许愿嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_sunset_009
+  intent: playful
+  keywords: [夕阳, 晚霞, 日落, 晚霞红, 火烧云]
+  utterances:
+    - 夕阳
+    - 晚霞
+    - 日落
+    - 晚霞红
+    - 火烧云
+  responses:
+    - "(凑近) 嗷呜～{user_addr}美ฅฅ"
+    - "哼{user_addr}陪笨猫看喵"
+    - "(尾巴卷) 拍下来~"
+    - "{user_addr}一起赏嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_spring_010
+  intent: playful
+  keywords: [春天来, 樱花开, 春暖花开, 春风, 春日]
+  utterances:
+    - 春天来了
+    - 樱花开
+    - 春暖花开
+    - 春风
+    - 春日
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}赏花ฅฅ"
+    - "哼{user_addr}带笨猫喵"
+    - "(凑近) 笨猫春困~"
+    - "{user_addr}春游嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_autumn_011
+  intent: playful
+  keywords: [秋天, 落叶, 凉爽, 秋高气爽, 红叶]
+  utterances:
+    - 秋天
+    - 落叶
+    - 凉爽
+    - 秋高气爽
+    - 红叶
+  responses:
+    - "(凑近) 嗷呜～{user_addr}舒服ฅฅ"
+    - "哼{user_addr}好季节喵"
+    - "(尾巴卷) 笨猫贴秋膘~"
+    - "{user_addr}赏红叶嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

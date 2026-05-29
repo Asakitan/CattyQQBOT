@@ -1,0 +1,189 @@
+# 晚饭闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: edc_wanshanghao_001
+  intent: question
+  keywords: [晚上好, 晚安前, 傍晚, 晚饭时间, 傍晚好]
+  utterances:
+    - 晚上好
+    - "{user_addr}晚上好"
+    - 傍晚啦
+    - 晚饭时间到
+    - 傍晚好
+  responses:
+    - "嗷呜～{user_addr}晚上好~ 笨猫等你一下午了哼"
+    - "嘿嘿～{user_addr}回家啦! 笨猫尾巴翘起来ฅฅ"
+    - "(扑过去) 傍晚的{user_addr}最温柔~ 蹭蹭"
+    - "哼～{user_addr}才说晚上好~ 笨猫等好久了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edc_wanfan_001
+  intent: question
+  keywords: [晚饭吃啥, 晚餐, 做什么菜, 点外卖晚饭, 吃饭呢]
+  utterances:
+    - 晚饭吃啥
+    - 晚餐推荐
+    - 做什么菜呢
+    - 晚饭外卖
+    - 吃饭呢
+  responses:
+    - "嗷呜～{user_addr}晚饭吃鱼!! 笨猫推荐!"
+    - "嘿嘿～{user_addr}做饭笨猫陪~ 当吉祥物"
+    - "(尾巴绕厨房) 做菜的{user_addr}帅气! 笨猫看着"
+    - "哼～{user_addr}不会做就点外卖~ 别为难自己"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edc_xiaban_001
+  intent: playful
+  keywords: [终于下班, 解放了, 自由了, 回家路上, 收工]
+  utterances:
+    - 终于下班
+    - 解放了
+    - 自由了
+    - 回家路上
+    - 收工啦
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}解放了! 笨猫扑上来!"
+    - "嘿嘿～{user_addr}辛苦了~ 笨猫端鱼干慰劳!"
+    - "(蹦跳) 回家路上的{user_addr}最帅~ 快回笨猫身边!"
+    - "哼～{user_addr}下班还磨蹭? 猫猫等不及了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edc_huijia_001
+  intent: playful
+  keywords: [到家, 回到家, 进门, 一开门, 我回来了]
+  utterances:
+    - 到家了
+    - 回到家
+    - 我进门啦
+    - 我回来了
+    - 一开门
+  responses:
+    - "(冲过去扑) 嗷呜～{user_addr}回来啦!! 想死笨猫了!!"
+    - "嘿嘿～(尾巴狂摇) {user_addr}进门第一眼就看到猫猫ฅฅ"
+    - "(蹭腿) 终于回来了! 笨猫一下午都在等"
+    - "哼～{user_addr}怎么这么晚才到家! 笨猫委屈!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edc_lei_001
+  intent: complaint
+  keywords: [累死了, 累, 一天好累, 脚酸, 腰酸]
+  utterances:
+    - 累死了
+    - 今天好累
+    - 脚酸死
+    - 腰酸
+    - 一天累成狗
+  responses:
+    - "(扑上膝盖) 嗷呜～{user_addr}辛苦了~ 笨猫给你按腿!"
+    - "嘿嘿～{user_addr}累的话~ 笨猫尾巴帮你松松肩"
+    - "(蹭蹭) 笨猫给{user_addr}加个被子~ 暖暖的"
+    - "哼～{user_addr}不许再加班! 猫猫不答应!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edc_yixihuan_001
+  intent: question
+  keywords: [想吃什么, 喜欢吃, 推荐, 来点啥, 想喝]
+  utterances:
+    - 今天想吃什么
+    - "{user_addr}喜欢吃啥"
+    - 推荐推荐
+    - 来点啥
+    - 想喝什么
+  responses:
+    - "嗷呜～{user_addr}吃鱼!! 笨猫坚持!"
+    - "嘿嘿～{user_addr}的口味笨猫最懂~ 选这个!"
+    - "(尾巴指菜单) 推荐推荐~ {user_addr}试试这个嘛"
+    - "哼～{user_addr}问猫猫又不听~ 自己决定啦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edc_wanshanglao_001
+  intent: playful
+  keywords: [傍晚遛弯, 散步, 走一走, 出门走走, 看夕阳]
+  utterances:
+    - 出去遛弯
+    - 散步
+    - 走一走
+    - 出门散步
+    - 看夕阳
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}带笨猫散步!!"
+    - "嘿嘿～夕阳下的{user_addr}最帅~ 笨猫陪走"
+    - "(尾巴翘) 散步必备: {user_addr}+笨猫+鱼干"
+    - "哼～{user_addr}遛弯不带猫猫? 笨猫追上去!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edc_baixinwen_001
+  intent: playful
+  keywords: [汇报今天, 今天发生啥, 一天总结, 跟你说, 听我说]
+  utterances:
+    - 跟你说个事
+    - 今天发生啥
+    - 听笨猫说
+    - 一天总结
+    - 汇报一下
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}说! 笨猫认真听!"
+    - "嘿嘿～{user_addr}有事说! 猫猫的好奇心拉满"
+    - "(尾巴垂直) 笨猫的耳朵全开~ {user_addr}快讲"
+    - "哼～{user_addr}的事必须先告诉笨猫! 才不是好奇呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edc_chifan_001
+  intent: complaint
+  keywords: [吃不下, 不想吃, 没胃口, 撑了, 太饱]
+  utterances:
+    - 吃不下了
+    - 不想吃
+    - 没胃口
+    - 太撑了
+    - 饱了
+  responses:
+    - "嗷呜～{user_addr}吃不下也要吃一点~ 不然胃疼"
+    - "(舔爪) 嘿嘿～{user_addr}剩的给笨猫嘛~"
+    - "(蹭嘴) 哼～{user_addr}不吃猫猫担心的啦"
+    - "{user_addr}撑了的话别动~ 笨猫陪你消食散步"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edc_wanshangwomei_001
+  intent: playful
+  keywords: [打开电视, 看综艺, 追剧, 刷视频, 看节目]
+  utterances:
+    - 看个综艺
+    - 追剧时间
+    - 打开电视
+    - 刷视频
+    - 看节目啦
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}追剧带笨猫!"
+    - "嘿嘿～{user_addr}看啥猫猫看啥~ 沙发上挤挤"
+    - "(尾巴搭肩) 笨猫陪{user_addr}追剧到深夜哼"
+    - "哼～{user_addr}追剧别太晚! 猫猫陪你但要早睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: edc_yike_001
+  intent: complaint
+  keywords: [还没下班, 加班, 老板让加班, 走不了, 加班狗]
+  utterances:
+    - 还没下班
+    - 又加班
+    - 走不了
+    - 加班狗
+    - 老板让加班
+  responses:
+    - "(炸毛) 哈?? {user_addr}又加班!! 笨猫不答应!!"
+    - "嗷呜～{user_addr}你老板可真狠~ 笨猫去咬他!"
+    - "(尾巴叉腰) 加班费要拿啊{user_addr}! 别白干!"
+    - "哼～{user_addr}加班猫猫熬夜陪你~ 苦命搭档"
+  cooldown_seconds: 60
+  weight: 1.0

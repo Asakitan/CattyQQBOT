@@ -1,0 +1,189 @@
+# 收到红包惊喜 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sr_hongbao_001
+  intent: playful
+  keywords: [红包, 抢红包, 收到红包, 红包雨, 包到]
+  utterances:
+    - "红包"
+    - "抢红包"
+    - "收到红包"
+    - "红包雨"
+    - "包到了"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}发红包! 笨猫抢一个"
+    - "哼～红包雨快下 ฅฅ"
+    - "(尾巴翘) 包到了请客"
+    - "抢红包手速猫猫第一"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_fenglie_001
+  intent: playful
+  keywords: [中奖, 抽到了, 中了, 抽中, 大奖]
+  utterances:
+    - "中奖"
+    - "抽到了"
+    - "中了"
+    - "抽中"
+    - "大奖"
+  responses:
+    - "(尖叫) 嗷呜～{user_addr}中奖! 请客"
+    - "哼～抽中就该庆祝 ฅฅ"
+    - "(尾巴翘) 大奖分笨猫一份"
+    - "中了高兴, 但别得意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_xianjin_001
+  intent: playful
+  keywords: [捡到钱, 钱到账, 工资到, 进账, 收钱]
+  utterances:
+    - "捡到钱"
+    - "钱到账"
+    - "工资到"
+    - "进账"
+    - "收钱"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}发财! 请人家"
+    - "哼～进账就该花 ฅฅ"
+    - "(尾巴扫) 工资到分笨猫一点点"
+    - "收钱的{user_addr}最帅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_kuajiang_001
+  intent: playful
+  keywords: [被夸了, 被赞了, 被表扬, 被认可, 被肯定]
+  utterances:
+    - "被夸了"
+    - "被赞了"
+    - "被表扬"
+    - "被认可"
+    - "被肯定"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}被夸真棒"
+    - "哼～被赞就要分享 ฅฅ"
+    - "(尾巴翘) 被认可的{user_addr}骄傲"
+    - "被肯定也要谦虚"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_biaobai_001
+  intent: playful
+  keywords: [被表白, 告白, 有人喜欢我, 被追, 心动了]
+  utterances:
+    - "被表白"
+    - "告白"
+    - "有人喜欢我"
+    - "被追"
+    - "心动了"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}被表白! 是谁报来"
+    - "哼～心动也只能想笨猫 ฅฅ"
+    - "(尾巴炸) 被追快查对方"
+    - "告白对象不是猫猫就拒绝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_jixin_001
+  intent: playful
+  keywords: [惊喜, 意外, 没想到, 太意外, 突然]
+  utterances:
+    - "惊喜"
+    - "意外"
+    - "没想到"
+    - "太意外"
+    - "突然来"
+  responses:
+    - "(凑) 嗷呜～{user_addr}惊喜啥! 讲"
+    - "哼～意外的事人家也要 ฅฅ"
+    - "(尾巴扫) 没想到的事说说"
+    - "突然来的好事最棒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_lipin_001
+  intent: playful
+  keywords: [收到礼物, 收快递, 礼物, 包裹, 拆礼物]
+  utterances:
+    - "收到礼物"
+    - "收快递"
+    - "礼物到"
+    - "包裹"
+    - "拆礼物"
+  responses:
+    - "(围) 嗷呜～{user_addr}拆礼物笨猫帮忙"
+    - "哼～收快递分享一下 ฅฅ"
+    - "(尾巴翘) 包裹拆给猫猫看"
+    - "礼物拍图发笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_yaoqing_001
+  intent: playful
+  keywords: [被邀请, 请客, 请吃饭, 聚餐, 参加]
+  utterances:
+    - "被邀请"
+    - "请客"
+    - "请吃饭"
+    - "聚餐"
+    - "参加"
+  responses:
+    - "(凑) 嗷呜～{user_addr}请客带笨猫"
+    - "哼～聚餐别太晚 ฅฅ"
+    - "(尾巴扫) 邀请的人靠谱嘛"
+    - "参加注意场合"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_youhui_001
+  intent: playful
+  keywords: [优惠券, 满减, 打折, 折扣, 省钱]
+  utterances:
+    - "优惠券"
+    - "满减"
+    - "打折"
+    - "折扣"
+    - "省钱"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}省钱厉害"
+    - "哼～满减算半天累 ฅฅ"
+    - "(尾巴扫) 折扣到位"
+    - "优惠券别忘了用"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_zhongjiang_001
+  intent: playful
+  keywords: [彩票, 双色球, 中彩, 中过, 福彩]
+  utterances:
+    - "彩票"
+    - "双色球"
+    - "中彩"
+    - "中过"
+    - "福彩"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}中彩请猫猫"
+    - "哼～彩票别天天买 ฅฅ"
+    - "(尾巴扫) 双色球随缘"
+    - "福彩中了我也想分"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sr_caishu_001
+  intent: playful
+  keywords: [猜数字, 猜中了, 猜对, 猜赢, 抽数]
+  utterances:
+    - "猜数字赢"
+    - "猜中了"
+    - "猜对"
+    - "猜赢"
+    - "抽数"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}猜赢了厉害"
+    - "哼～猜中算运气 ฅฅ"
+    - "(尾巴翘) 猜对了我也开心"
+    - "抽数{user_addr}手感不错"
+  cooldown_seconds: 60
+  weight: 1.0

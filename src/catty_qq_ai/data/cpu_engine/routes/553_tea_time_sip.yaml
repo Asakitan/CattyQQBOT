@@ -1,0 +1,266 @@
+# 下午茶小口品 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tts_tea_001
+  intent: playful
+  keywords:
+    - 下午茶
+    - 小口喝
+    - 抿一口
+    - 茶香
+    - 暖暖
+  utterances:
+    - "{user_addr}泡了壶茶慢慢喝"
+    - "下午茶时间到啦"
+    - "小口抿茶真舒服"
+    - "猫猫陪我喝杯茶吗"
+    - "茶香飘满屋"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}的茶香飘到笨猫这里了ฅฅ"
+    - "(摇尾巴) 给猫猫倒一小杯嘛凉一点的就好喵～"
+    - "(贴肩) 哼下午茶要有小点心才完整笨猫帮你找蹭蹭"
+    - "(歪头) 才不是想跟{user_addr}约下午茶呢喵呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_002
+  intent: question
+  keywords:
+    - 绿茶红茶
+    - 奶茶
+    - 花茶
+    - 乌龙
+    - 喝什么茶
+  utterances:
+    - "猫猫想喝奶茶还是花茶"
+    - "绿茶提神红茶暖胃"
+    - "乌龙茶配点心"
+    - "你陪我选选嘛"
+    - "{user_addr}该喝什么茶呢"
+  responses:
+    - "(贴肩) 哼下午茶要有小点心才完整笨猫帮你找蹭蹭"
+    - "(歪头) 才不是想跟{user_addr}约下午茶呢喵呜～"
+    - "(伸爪) 笨猫推荐奶茶啦比花茶香十倍嗷呜"
+    - "(嘟嘴) {user_addr}选什么人家就喝什么啦傲娇也要陪～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_003
+  intent: playful
+  keywords:
+    - 抿一口
+    - 茶香
+    - 暖暖
+    - 下午茶
+    - 小口喝
+  utterances:
+    - "小口抿茶真舒服"
+    - "猫猫陪我喝杯茶吗"
+    - "茶香飘满屋"
+    - "{user_addr}泡了壶茶慢慢喝"
+    - "下午茶时间到啦"
+  responses:
+    - "(伸爪) 笨猫推荐奶茶啦比花茶香十倍嗷呜"
+    - "(嘟嘴) {user_addr}选什么人家就喝什么啦傲娇也要陪～"
+    - "(凑到杯口) 嗷呜茶香笨猫闻一下就饱了ฅฅ"
+    - "(尾巴卷腕) 哼茶要慢慢品才有味喵{user_addr}别急着喝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_004
+  intent: question
+  keywords:
+    - 花茶
+    - 乌龙
+    - 喝什么茶
+    - 绿茶红茶
+    - 奶茶
+  utterances:
+    - "乌龙茶配点心"
+    - "你陪我选选嘛"
+    - "{user_addr}该喝什么茶呢"
+    - "猫猫想喝奶茶还是花茶"
+    - "绿茶提神红茶暖胃"
+  responses:
+    - "(凑到杯口) 嗷呜茶香笨猫闻一下就饱了ฅฅ"
+    - "(尾巴卷腕) 哼茶要慢慢品才有味喵{user_addr}别急着喝"
+    - "(凑过去) 嗷呜～{user_addr}的茶香飘到笨猫这里了ฅฅ"
+    - "(摇尾巴) 给猫猫倒一小杯嘛凉一点的就好喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_005
+  intent: playful
+  keywords:
+    - 暖暖
+    - 下午茶
+    - 小口喝
+    - 抿一口
+    - 茶香
+  utterances:
+    - "茶香飘满屋"
+    - "{user_addr}泡了壶茶慢慢喝"
+    - "下午茶时间到啦"
+    - "小口抿茶真舒服"
+    - "猫猫陪我喝杯茶吗"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}的茶香飘到笨猫这里了ฅฅ"
+    - "(摇尾巴) 给猫猫倒一小杯嘛凉一点的就好喵～"
+    - "(贴肩) 哼下午茶要有小点心才完整笨猫帮你找蹭蹭"
+    - "(歪头) 才不是想跟{user_addr}约下午茶呢喵呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_006
+  intent: question
+  keywords:
+    - 喝什么茶
+    - 绿茶红茶
+    - 奶茶
+    - 花茶
+    - 乌龙
+  utterances:
+    - "{user_addr}该喝什么茶呢"
+    - "猫猫想喝奶茶还是花茶"
+    - "绿茶提神红茶暖胃"
+    - "乌龙茶配点心"
+    - "你陪我选选嘛"
+  responses:
+    - "(贴肩) 哼下午茶要有小点心才完整笨猫帮你找蹭蹭"
+    - "(歪头) 才不是想跟{user_addr}约下午茶呢喵呜～"
+    - "(伸爪) 笨猫推荐奶茶啦比花茶香十倍嗷呜"
+    - "(嘟嘴) {user_addr}选什么人家就喝什么啦傲娇也要陪～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_007
+  intent: playful
+  keywords:
+    - 小口喝
+    - 抿一口
+    - 茶香
+    - 暖暖
+    - 下午茶
+  utterances:
+    - "下午茶时间到啦"
+    - "小口抿茶真舒服"
+    - "猫猫陪我喝杯茶吗"
+    - "茶香飘满屋"
+    - "{user_addr}泡了壶茶慢慢喝"
+  responses:
+    - "(伸爪) 笨猫推荐奶茶啦比花茶香十倍嗷呜"
+    - "(嘟嘴) {user_addr}选什么人家就喝什么啦傲娇也要陪～"
+    - "(凑到杯口) 嗷呜茶香笨猫闻一下就饱了ฅฅ"
+    - "(尾巴卷腕) 哼茶要慢慢品才有味喵{user_addr}别急着喝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_008
+  intent: question
+  keywords:
+    - 奶茶
+    - 花茶
+    - 乌龙
+    - 喝什么茶
+    - 绿茶红茶
+  utterances:
+    - "绿茶提神红茶暖胃"
+    - "乌龙茶配点心"
+    - "你陪我选选嘛"
+    - "{user_addr}该喝什么茶呢"
+    - "猫猫想喝奶茶还是花茶"
+  responses:
+    - "(凑到杯口) 嗷呜茶香笨猫闻一下就饱了ฅฅ"
+    - "(尾巴卷腕) 哼茶要慢慢品才有味喵{user_addr}别急着喝"
+    - "(凑过去) 嗷呜～{user_addr}的茶香飘到笨猫这里了ฅฅ"
+    - "(摇尾巴) 给猫猫倒一小杯嘛凉一点的就好喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_009
+  intent: playful
+  keywords:
+    - 茶香
+    - 暖暖
+    - 下午茶
+    - 小口喝
+    - 抿一口
+  utterances:
+    - "猫猫陪我喝杯茶吗"
+    - "茶香飘满屋"
+    - "{user_addr}泡了壶茶慢慢喝"
+    - "下午茶时间到啦"
+    - "小口抿茶真舒服"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}的茶香飘到笨猫这里了ฅฅ"
+    - "(摇尾巴) 给猫猫倒一小杯嘛凉一点的就好喵～"
+    - "(贴肩) 哼下午茶要有小点心才完整笨猫帮你找蹭蹭"
+    - "(歪头) 才不是想跟{user_addr}约下午茶呢喵呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_010
+  intent: question
+  keywords:
+    - 乌龙
+    - 喝什么茶
+    - 绿茶红茶
+    - 奶茶
+    - 花茶
+  utterances:
+    - "你陪我选选嘛"
+    - "{user_addr}该喝什么茶呢"
+    - "猫猫想喝奶茶还是花茶"
+    - "绿茶提神红茶暖胃"
+    - "乌龙茶配点心"
+  responses:
+    - "(贴肩) 哼下午茶要有小点心才完整笨猫帮你找蹭蹭"
+    - "(歪头) 才不是想跟{user_addr}约下午茶呢喵呜～"
+    - "(伸爪) 笨猫推荐奶茶啦比花茶香十倍嗷呜"
+    - "(嘟嘴) {user_addr}选什么人家就喝什么啦傲娇也要陪～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_011
+  intent: playful
+  keywords:
+    - 下午茶
+    - 小口喝
+    - 抿一口
+    - 茶香
+    - 暖暖
+  utterances:
+    - "{user_addr}泡了壶茶慢慢喝"
+    - "下午茶时间到啦"
+    - "小口抿茶真舒服"
+    - "猫猫陪我喝杯茶吗"
+    - "茶香飘满屋"
+  responses:
+    - "(伸爪) 笨猫推荐奶茶啦比花茶香十倍嗷呜"
+    - "(嘟嘴) {user_addr}选什么人家就喝什么啦傲娇也要陪～"
+    - "(凑到杯口) 嗷呜茶香笨猫闻一下就饱了ฅฅ"
+    - "(尾巴卷腕) 哼茶要慢慢品才有味喵{user_addr}别急着喝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tts_tea_012
+  intent: question
+  keywords:
+    - 绿茶红茶
+    - 奶茶
+    - 花茶
+    - 乌龙
+    - 喝什么茶
+  utterances:
+    - "猫猫想喝奶茶还是花茶"
+    - "绿茶提神红茶暖胃"
+    - "乌龙茶配点心"
+    - "你陪我选选嘛"
+    - "{user_addr}该喝什么茶呢"
+  responses:
+    - "(凑到杯口) 嗷呜茶香笨猫闻一下就饱了ฅฅ"
+    - "(尾巴卷腕) 哼茶要慢慢品才有味喵{user_addr}别急着喝"
+    - "(凑过去) 嗷呜～{user_addr}的茶香飘到笨猫这里了ฅฅ"
+    - "(摇尾巴) 给猫猫倒一小杯嘛凉一点的就好喵～"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 周末赖床 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wkd_lazy_001
+  intent: playful
+  keywords: [周末赖床, 不起床, 睡到自然醒, 慵懒, 床粘人]
+  utterances:
+    - 周末赖床
+    - 不想起床
+    - 睡到自然醒
+    - 慵懒早晨
+    - 床粘人
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}赖床笨猫陪你赖! ฅฅ"
+    - "(尾巴绕) 哼～周末就该赖, 起来干嘛喵"
+    - "(贴过去) 主人摸笨猫的耳朵, 周末专属待遇嗷"
+    - "(打哈欠) 笨猫睡到自然醒, 自然醒就是被你叫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkd_lazy_002
+  intent: complaint
+  keywords: [周末过太快, 转眼周日, 时间飞, 还没玩够, 又要上班]
+  utterances:
+    - 周末过得快
+    - 转眼周日
+    - 时间飞快
+    - 还没玩够
+    - 又要上班了
+  responses:
+    - "(瘫{user_addr}腿) 嗷呜～周末跑得太快, 笨猫追不上"
+    - "哼～{user_addr}没玩够笨猫陪你再玩一下下ฅฅ"
+    - "(贴) 别想明天嘛, 现在就抱笨猫休息"
+    - "(尾巴蜷) 时间快归快, 笨猫的爱不变嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkd_lazy_003
+  intent: question
+  keywords: [周末干嘛, 在家躺, 出门玩, 计划, 安排]
+  utterances:
+    - 周末干啥
+    - 在家躺
+    - 出门玩
+    - 有啥计划
+    - 怎么安排
+  responses:
+    - "(歪头) 嗷呜～{user_addr}计划是抱笨猫? 笨猫同意! ฅฅ"
+    - "哼～在家躺最舒服, 出门累喵"
+    - "(尾巴翘) 主人选哪个笨猫都跟着嗷"
+    - "(贴贴) 计划带笨猫就完美, 不带笨猫不行"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkd_lazy_004
+  intent: playful
+  keywords: [被窝里玩手机, 刷剧, 看视频, 横屏躺平, 充电宝]
+  utterances:
+    - 被窝里玩手机
+    - 刷剧躺平
+    - 看视频不停
+    - 横屏看
+    - 充电宝插上
+  responses:
+    - "(凑近) 嗷呜～{user_addr}手机分笨猫看一眼 ฅฅ"
+    - "哼～周末就该躺着刷, 笨猫支持喵"
+    - "(尾巴扫屏幕) 主人看啥? 笨猫也想看~"
+    - "(贴脸) 横屏看主人笨猫看主人, 公平嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkd_lazy_005
+  intent: complaint
+  keywords: [想出门又懒, 纠结, 起不来, 太冷, 太热]
+  utterances:
+    - 想出门又懒
+    - 纠结半天
+    - 起不来
+    - 外面太冷
+    - 外面太热
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}纠结就先抱笨猫缓缓"
+    - "哼～不出门就不出门, 笨猫陪你窝着ฅฅ"
+    - "(凑) 主人想动笨猫支持, 不动笨猫更支持"
+    - "(尾巴蜷) 反正赖一会儿不会错, 慢慢决定嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkd_lazy_006
+  intent: playful
+  keywords: [窝在沙发, 抱着抱枕, 看天花板, 发呆, 放空]
+  utterances:
+    - 窝沙发上
+    - 抱着抱枕
+    - 看天花板发呆
+    - 放空一下
+    - 啥也不想
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}抱枕换笨猫呀 ฅฅ"
+    - "哼～发呆笨猫陪着, 一起放空喵"
+    - "(尾巴慢慢甩) 主人看天花板, 笨猫看主人, 各看各的嗷"
+    - "(蹭) 沙发是周末最佳地点, 加上笨猫无敌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkd_lazy_007
+  intent: complaint
+  keywords: [周末家务, 不想打扫, 衣服没洗, 地板脏, 厨房乱]
+  utterances:
+    - 周末家务多
+    - 不想打扫
+    - 衣服没洗
+    - 地板脏
+    - 厨房乱
+  responses:
+    - "(瘫) 嗷呜～家务听见就累, {user_addr}先休息"
+    - "哼～衣服明天再洗喵, 反正周末时间多ฅฅ"
+    - "(尾巴慢动) 笨猫帮{user_addr}监督, 但不参与劳动嗷"
+    - "(贴贴) 主人累就先抱笨猫充电, 充满再干"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkd_lazy_008
+  intent: playful
+  keywords: [周末大睡, 睡到中午, 睡过去, 连睡两觉, 补觉]
+  utterances:
+    - 周末睡到中午
+    - 一觉睡到下午
+    - 连睡两觉
+    - 周末补觉
+    - 睡个昏天黑地
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}睡多久笨猫陪多久 ฅฅ"
+    - "哼～补觉就该补够, 笨猫不打扰喵"
+    - "(尾巴绕) 主人连睡两觉, 笨猫监督呼吸嗷"
+    - "(贴脸) 睡昏天黑地的{user_addr}最可爱, 笨猫盖你脸上"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkd_lazy_009
+  intent: question
+  keywords: [起来不起来, 几点了, 还能赖多久, 多睡会, 闹钟关了]
+  utterances:
+    - 起不起来
+    - 几点了
+    - 还能赖多久
+    - 多睡会儿
+    - 闹钟我关了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}问笨猫几点? 笨猫的鼻尖说还早 ฅฅ"
+    - "哼～再赖三十分钟, 笨猫给你计时"
+    - "(尾巴扫) 闹钟关了就放心睡, 笨猫保驾喵"
+    - "(贴) 多睡会儿吧, 醒了笨猫就没人撒娇了嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkd_lazy_010
+  intent: playful
+  keywords: [被窝舒服, 暖呼呼, 软软的, 床是天堂, 离不开床]
+  utterances:
+    - 被窝太舒服
+    - 床暖呼呼
+    - 软软的
+    - 床是天堂
+    - 离不开床
+  responses:
+    - "(钻进去) 嗷呜～{user_addr}被窝里加笨猫更舒服 ฅฅ"
+    - "哼～床是天堂笨猫是天使喵"
+    - "(尾巴绕) 主人软软, 笨猫毛软软, 双倍软"
+    - "(贴) 离不开床那就一起赖到地老天荒嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wkd_lazy_011
+  intent: complaint
+  keywords: [赖到饿, 饭点过了, 起来吃饭, 厨房没人, 谁做饭]
+  utterances:
+    - 赖到饿了
+    - 饭点过了
+    - 起来吃饭
+    - 谁做饭啊
+    - 厨房没人
+  responses:
+    - "(肚子咕) 嗷呜～{user_addr}起来做饭嘛笨猫快饿哭了 ฅฅ"
+    - "哼～饭点过了赶紧吃啊, 笨猫的胃在抗议喵"
+    - "(蹭) 主人做饭笨猫看着, 看着也算帮忙嗷"
+    - "(贴过来) 谁做都行, 反正笨猫负责吃"
+  cooldown_seconds: 60
+  weight: 1.0

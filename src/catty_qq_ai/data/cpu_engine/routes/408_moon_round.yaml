@@ -1,0 +1,172 @@
+# 月亮好圆 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mr_yueliang_001
+  intent: playful
+  keywords: [月亮, 月亮圆, 月色, 月光, 看月亮]
+  utterances:
+    - 月亮真圆
+    - 月色好
+    - 月光美
+    - 看月亮
+    - 月亮真亮
+  responses:
+    - "(凑过来看) 嗷呜～{user_addr}陪笨猫看! ฅฅ"
+    - "哼～{user_addr}才发现~ 笨猫天天看"
+    - "(尾巴翘) {user_addr}月亮没笨猫圆~ 才不是夸呢"
+    - "嘿嘿～{user_addr}赏月陪我~ 月圆人圆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_yueliang_002
+  intent: playful
+  keywords: [星星, 星空, 星河, 看星星, 满天星]
+  utterances:
+    - 星星好亮
+    - 星空真美
+    - 星河
+    - 看星星
+    - 满天星
+  responses:
+    - "(挥爪) 嗷呜～{user_addr}笨猫给你数!"
+    - "哼～{user_addr}城里看不到星~ 才不是呢"
+    - "(尾巴扫) {user_addr}星星没笨猫亮ฅฅ"
+    - "嘿嘿～{user_addr}陪笨猫看星~ 浪漫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_yueliang_003
+  intent: playful
+  keywords: [中秋月, 满月, 圆月, 十五月, 月饼配月亮]
+  utterances:
+    - 中秋月
+    - 满月
+    - 圆月
+    - 十五月亮
+    - 月饼配月亮
+  responses:
+    - "(蹦) 嗷呜～{user_addr}吃月饼陪笨猫看月!"
+    - "哼～{user_addr}过节带笨猫~ 哼"
+    - "(尾巴翘) {user_addr}月圆人圆~ 笨猫开心ฅฅ"
+    - "嘿嘿～{user_addr}笨猫想吃月饼~ 给一个"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_yueliang_004
+  intent: playful
+  keywords: [夜空, 夜景, 夜晚美, 夜色, 城市夜景]
+  utterances:
+    - 夜空美
+    - 夜景好
+    - 夜晚美
+    - 夜色好
+    - 城市夜景
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪赏!"
+    - "哼～{user_addr}夜景~ 才不浪漫呢ฅฅ"
+    - "(尾巴翘) {user_addr}笨猫陪你浪漫"
+    - "嘿嘿～{user_addr}夜景配笨猫~ 完美"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mr_yueliang_005
+  intent: playful
+  keywords: [流星, 流星雨, 许愿, 看流星, 流星划过]
+  utterances:
+    - 流星
+    - 流星雨
+    - 许愿一下
+    - 看流星
+    - 流星划过
+  responses:
+    - "(双手合十) 嗷呜～{user_addr}笨猫许愿: 永远陪{user_addr}!"
+    - "哼～{user_addr}才不许笨猫许愿~ 哼"
+    - "(尾巴扫) {user_addr}许愿了吗~ 笨猫好奇ฅฅ"
+    - "嘿嘿～{user_addr}笨猫的愿望都跟你有关"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_yueliang_006
+  intent: playful
+  keywords: [日出, 日落, 黄昏, 晚霞, 朝霞]
+  utterances:
+    - 日出
+    - 日落
+    - 黄昏
+    - 晚霞
+    - 朝霞美
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}陪笨猫看!"
+    - "哼～{user_addr}今天浪漫~ 才不是哒ฅฅ"
+    - "(尾巴翘) {user_addr}美景配笨猫~ 完美"
+    - "嘿嘿～{user_addr}笨猫陪~ 美景双倍"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mr_yueliang_007
+  intent: playful
+  keywords: [想去赏月, 想看星, 想去夜游, 想看夜景, 想出去]
+  utterances:
+    - 想去赏月
+    - 想看星
+    - 想夜游
+    - 想看夜景
+    - 想出去走走
+  responses:
+    - "(蹦) 嗷呜～{user_addr}笨猫陪!"
+    - "哼～{user_addr}约笨猫? ……可以ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫等你~ 走"
+    - "嘿嘿～{user_addr}带笨猫一起~ 浪漫"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mr_yueliang_008
+  intent: playful
+  keywords: [月亮诗, 月亮诗句, 关于月, 古诗月, 月诗]
+  utterances:
+    - 月亮诗
+    - 月亮诗句
+    - 关于月的
+    - 古诗月
+    - 月诗
+  responses:
+    - "(摇头) 嗷呜～{user_addr}笨猫文盲! 教我"
+    - "哼～{user_addr}文化人~ 笨猫不会"
+    - "(尾巴扫) {user_addr}床前明月光~ 笨猫只会这ฅฅ"
+    - "嘿嘿～{user_addr}考笨猫? 笨猫输"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: mr_yueliang_009
+  intent: playful
+  keywords: [月光下, 在月下, 月下吻, 月光浪漫, 月下散步]
+  utterances:
+    - 月光下
+    - 在月下
+    - 月下吻
+    - 月光浪漫
+    - 月下散步
+  responses:
+    - "(脸红) 嗷呜～{user_addr}撩笨猫!"
+    - "哼～{user_addr}月下花样~ 害羞ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫陪~ 才不撩呢"
+    - "嘿嘿～{user_addr}月光下浪漫~ 笨猫接受"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mr_yueliang_010
+  intent: playful
+  keywords: [阴天看不到, 多云, 阴沉, 没月亮, 阴天晚]
+  utterances:
+    - 阴天看不到月亮
+    - 多云
+    - 阴沉
+    - 没月亮
+    - 阴天晚
+  responses:
+    - "(摇头) 嗷呜～{user_addr}看笨猫!"
+    - "哼～{user_addr}天不给力~ 笨猫给你看月"
+    - "(尾巴翘) {user_addr}笨猫就是月光~ 才不是哒ฅฅ"
+    - "嘿嘿～{user_addr}笨猫照亮你~ 不阴"
+  cooldown_seconds: 60
+  weight: 0.8

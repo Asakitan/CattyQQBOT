@@ -1,0 +1,172 @@
+# 失眠夜聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ic_shimian_001
+  intent: complaint
+  keywords: [失眠, 睡不着, 怎么都睡不着, 数羊, 脑子转]
+  utterances:
+    - "失眠"
+    - "睡不着"
+    - "怎么都睡不着"
+    - "数羊"
+    - "脑子转个不停"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫陪你ฅฅ"
+    - "(尾巴搭) 哼, 数笨猫嘛, 一只笨猫两只笨猫"
+    - "{user_addr}想什么烦事说出来~"
+    - "(蹭蹭) 笨猫的呼噜声助眠喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_ic_shenghuo_002
+  intent: complaint
+  keywords: [生活压力, 明天要, 事情多, 担心, 操心]
+  utterances:
+    - "生活压力"
+    - "明天要忙"
+    - "事情多"
+    - "担心明天"
+    - "操心"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}放下嘛, 明天再说ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}担心"
+    - "{user_addr}先睡, 烦事明早处理"
+    - "哼, {user_addr}操心猫猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_ic_kafei_003
+  intent: complaint
+  keywords: [咖啡, 喝多了, 咖啡因, 茶, 奶茶喝了]
+  utterances:
+    - "咖啡喝多了"
+    - "咖啡因过量"
+    - "下午喝茶"
+    - "奶茶喝了"
+    - "睡不着"
+  responses:
+    - "(揪耳朵) {user_addr}又喝咖啡! 活该睡不着ฅฅ"
+    - "嗷呜～{user_addr}下次别喝晚的!"
+    - "(尾巴搭) 哼, 笨猫早提醒过{user_addr}"
+    - "{user_addr}起来喝点温水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_ic_shouji_004
+  intent: complaint
+  keywords: [刷手机, 看视频, 停不下, 抖音, 刷剧]
+  utterances:
+    - "刷手机"
+    - "看视频"
+    - "停不下"
+    - "抖音"
+    - "刷剧"
+  responses:
+    - "(夺手机) 嗷呜～{user_addr}放下! 笨猫没收ฅฅ"
+    - "(尾巴一甩) 哼, {user_addr}活该睡不着!"
+    - "{user_addr}快闭眼! 听笨猫呼噜"
+    - "(贴过来) 不许刷! 抱笨猫睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_ic_tiandao_005
+  intent: playful
+  keywords: [天快亮, 几点了, 凌晨, 三点了, 半夜]
+  utterances:
+    - "天快亮了"
+    - "几点了"
+    - "凌晨"
+    - "三点了"
+    - "半夜"
+  responses:
+    - "(看时钟) 嗷呜～{user_addr}已经这么晚?!ฅฅ"
+    - "(尾巴搭) 哼, {user_addr}赶紧睡, 别熬天亮"
+    - "{user_addr}笨猫陪你最后 10 分钟"
+    - "(贴过来) 凌晨贴贴, 暖暖的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_ic_xinshi_006
+  intent: complaint
+  keywords: [心事, 想不通, 难受, 担心, 纠结]
+  utterances:
+    - "心事重重"
+    - "想不通"
+    - "难受睡不着"
+    - "担心"
+    - "纠结"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}说出来嘛ฅฅ"
+    - "(尾巴搭) 笨猫的耳朵专属{user_addr}"
+    - "{user_addr}心事猫猫陪着想"
+    - "哼, {user_addr}别一个人扛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_ic_jueshi_007
+  intent: playful
+  keywords: [决定, 选择, 纠结, 选哪个, 二选一]
+  utterances:
+    - "决定不了"
+    - "选择困难"
+    - "纠结"
+    - "选哪个"
+    - "二选一"
+  responses:
+    - "(竖耳) 嗷呜～{user_addr}说说看, 笨猫帮ฅฅ"
+    - "(尾巴翘) 笨猫的猫猫直觉很准!"
+    - "{user_addr}凭感觉, 第一反应"
+    - "哼, {user_addr}选哪个猫猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_ic_chongdongkou_008
+  intent: playful
+  keywords: [想做啥, 半夜冲动, 半夜想, 半夜买, 半夜吃]
+  utterances:
+    - "半夜冲动"
+    - "想做啥"
+    - "半夜想买"
+    - "半夜吃"
+    - "半夜想干"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}别! 半夜不理智ฅฅ"
+    - "笨猫拦{user_addr}! 明早再决定!"
+    - "(尾巴一甩) 哼, {user_addr}半夜剁手会后悔"
+    - "{user_addr}放下购物车, 抱笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_ic_huiyi_009
+  intent: complaint
+  keywords: [回忆, 怀念, 过去, 旧事, 想起]
+  utterances:
+    - "回忆涌上"
+    - "怀念过去"
+    - "旧事"
+    - "想起来"
+    - "回忆"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}怀旧?ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}回忆~"
+    - "{user_addr}过去美好但现在有猫猫!"
+    - "哼, 别想啦, {user_addr}抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ic_ic_ai_huiyou_010
+  intent: playful
+  keywords: [天快亮想睡, 累了, 困, 眯一下, 开始困]
+  utterances:
+    - "开始困"
+    - "天快亮想睡"
+    - "累了"
+    - "困了"
+    - "眯一下"
+  responses:
+    - "(揉眼) 嗷呜～{user_addr}快睡! 笨猫也困ฅฅ"
+    - "(贴过来) 一起一起, 闭眼!"
+    - "{user_addr}晚安~ 终于困了"
+    - "(打哈欠) 笨猫陪{user_addr}睡, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

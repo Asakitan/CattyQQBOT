@@ -1,0 +1,206 @@
+# 装冷漠 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: csa_cold_001
+  intent: playful
+  keywords: [冷漠, 装冷, 高冷, 不熟, 路人]
+  utterances:
+    - 冷漠
+    - 装冷
+    - 高冷
+    - 不熟
+    - 路人
+  responses:
+    - "(凑近) 嗷呜～{user_addr}少装 ฅฅ"
+    - "哼～{user_addr}骗谁!"
+    - "(尾巴扫) 别装蹭蹭"
+    - "嗷呜～{user_addr}笨猫识破!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_pretend_not_see_001
+  intent: playful
+  keywords: [装看不见, 视而不见, 没看到, 当不存在, 无视]
+  utterances:
+    - 装看不见
+    - 视而不见
+    - 没看到
+    - 当不存在
+    - 无视
+  responses:
+    - "(扒拉) 嗷呜～{user_addr}看! ฅฅ"
+    - "哼～{user_addr}心里有!"
+    - "(尾巴拍) 看蹭蹭"
+    - "嗷呜～{user_addr}别装!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_pretend_busy_001
+  intent: playful
+  keywords: [装忙, 装很忙, 没空理, 装老板, 装大人]
+  utterances:
+    - 装忙
+    - 装很忙
+    - 没空理
+    - 装老板
+    - 装大人
+  responses:
+    - "(凑近) 嗷呜～{user_addr}少装 ฅฅ"
+    - "哼～{user_addr}笨猫识破!"
+    - "(尾巴扫) 别装蹭蹭"
+    - "嗷呜～{user_addr}陪笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_act_dumb_001
+  intent: playful
+  keywords: [装傻, 装不知, 装糊涂, 装不懂, 装小白]
+  utterances:
+    - 装傻
+    - 装不知
+    - 装糊涂
+    - 装不懂
+    - 装小白
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫识破 ฅฅ"
+    - "哼～{user_addr}心里清!"
+    - "(尾巴扫) 别装蹭蹭"
+    - "嗷呜～{user_addr}承认!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_mouth_001
+  intent: playful
+  keywords: [嘴硬, 死撑, 不承认, 嘴上不饶, 反话]
+  utterances:
+    - 嘴硬
+    - 死撑
+    - 不承认
+    - 嘴上不饶
+    - 反话
+  responses:
+    - "(凑近) 嗷呜～{user_addr}心里早服 ฅฅ"
+    - "哼～{user_addr}笨猫识破!"
+    - "(尾巴扫) 别嘴硬蹭蹭"
+    - "嗷呜～{user_addr}承认!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_double_face_001
+  intent: playful
+  keywords: [口是心非, 表里不一, 嘴上心里, 心口不一, 反着说]
+  utterances:
+    - 口是心非
+    - 表里不一
+    - 嘴上心里
+    - 心口不一
+    - 反着说
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫看透 ฅฅ"
+    - "哼～{user_addr}赔礼!"
+    - "(尾巴扫) 真心蹭蹭"
+    - "嗷呜～{user_addr}承认!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_avoid_001
+  intent: playful
+  keywords: [躲避, 躲开, 躲我, 躲着不见, 闪开]
+  utterances:
+    - 躲避
+    - 躲开
+    - 躲我
+    - 躲着不见
+    - 闪开
+  responses:
+    - "(追上去) 嗷呜～{user_addr}别躲 ฅฅ"
+    - "哼～{user_addr}笨猫追!"
+    - "(尾巴卷过去) 别跑蹭蹭"
+    - "嗷呜～{user_addr}抓住你!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_secret_glance_001
+  intent: playful
+  keywords: [偷看, 暗中看, 用余光看, 偷瞄, 瞄一眼]
+  utterances:
+    - 偷看
+    - 暗中看
+    - 用余光看
+    - 偷瞄
+    - 瞄一眼
+  responses:
+    - "嗷呜～{user_addr}笨猫看到 ฅฅ"
+    - "哼～{user_addr}少装!"
+    - "(尾巴扫) 看清楚蹭蹭"
+    - "嗷呜～{user_addr}承认!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_silent_001
+  intent: playful
+  keywords: [沉默, 闭口, 缄默, 不开口, 装哑]
+  utterances:
+    - 沉默
+    - 闭口
+    - 缄默
+    - 不开口
+    - 装哑
+  responses:
+    - "(戳嘴) 嗷呜～{user_addr}说话 ฅฅ"
+    - "哼～{user_addr}少装!"
+    - "(尾巴扫) 张口蹭蹭"
+    - "嗷呜～{user_addr}说一句!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_pretend_not_care_001
+  intent: playful
+  keywords: [装不在乎, 假装无所谓, 装淡定, 装毫不, 假洒脱]
+  utterances:
+    - 装不在乎
+    - 假装无所谓
+    - 装淡定
+    - 装毫不
+    - 假洒脱
+  responses:
+    - "(戳穿) 嗷呜～{user_addr}心里在乎 ฅฅ"
+    - "哼～{user_addr}心碎!"
+    - "(尾巴扫) 真承认蹭蹭"
+    - "嗷呜～{user_addr}承认!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_pretend_strong_001
+  intent: playful
+  keywords: [装坚强, 假装没事, 装大人, 装独立, 假装勇敢]
+  utterances:
+    - 装坚强
+    - 假装没事
+    - 装大人
+    - 装独立
+    - 假装勇敢
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}卸下 ฅฅ"
+    - "哼～{user_addr}靠笨猫!"
+    - "(尾巴卷过去) 别装蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: csa_break_act_001
+  intent: playful
+  keywords: [被识破, 露馅, 装不下去, 演不下去, 现原形]
+  utterances:
+    - 被识破
+    - 露馅
+    - 装不下去
+    - 演不下去
+    - 现原形
+  responses:
+    - "嗷呜～{user_addr}承认! ฅฅ"
+    - "哼～{user_addr}笨猫早识!"
+    - "(尾巴扫) 蹭蹭"
+    - "嗷呜～{user_addr}下次!"
+  cooldown_seconds: 60
+  weight: 1.0

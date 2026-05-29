@@ -1,0 +1,172 @@
+# 叹气吐槽日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sc2_sigh_001
+  intent: complaint
+  keywords: [叹气, 唉, 一声叹息, 唉声叹气, 哎呀]
+  utterances:
+    - 唉
+    - 叹气
+    - 一声叹息
+    - 唉声叹气
+    - 哎呀
+  responses:
+    - "(贴) 嗷呜～{user_addr}咋了 ฅฅ"
+    - "哼～{user_addr}笨猫给你顺气"
+    - "(摸头) {user_addr}说出来"
+    - "{user_addr}笨猫陪叹蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc2_tired_002
+  intent: complaint
+  keywords: [太难了, 难顶, 顶不住, 难受啊, 撑不住]
+  utterances:
+    - 太难了
+    - 难顶
+    - 顶不住
+    - 难受啊
+    - 撑不住
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}笨猫帮扛"
+    - "(摸头) {user_addr}慢慢来"
+    - "{user_addr}笨猫挺你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc2_life_complain_001
+  intent: complaint
+  keywords: [生活好难, 日子难过, 生活不易, 人生不易, 生活苦]
+  utterances:
+    - 生活好难
+    - 日子难过
+    - 生活不易
+    - 人生不易
+    - 生活苦
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}笨猫帮你扛"
+    - "(摸头) {user_addr}慢慢来"
+    - "{user_addr}笨猫不离开蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc2_chaos_001
+  intent: complaint
+  keywords: [一团乱, 乱套, 没头绪, 乱糟糟, 头大]
+  utterances:
+    - 一团乱
+    - 乱套
+    - 没头绪
+    - 乱糟糟
+    - 头大
+  responses:
+    - "(贴) 嗷呜～{user_addr}慢慢理 ฅฅ"
+    - "哼～{user_addr}笨猫陪!"
+    - "(摸头) {user_addr}一件一件"
+    - "{user_addr}笨猫帮你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc2_burnout_001
+  intent: complaint
+  keywords: [倦怠, burnout, 倦了, 没动力, 失去激情]
+  utterances:
+    - 倦怠
+    - burnout
+    - 倦了
+    - 没动力
+    - 失去激情
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}笨猫帮你"
+    - "(摸头) {user_addr}休息一下"
+    - "{user_addr}慢慢来蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc2_meaningless_001
+  intent: complaint
+  keywords: [没意义, 没希望, 空虚, 没动力, 没意思]
+  utterances:
+    - 没意义
+    - 没希望
+    - 空虚
+    - 没动力
+    - 没意思
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫在 ฅฅ"
+    - "哼～{user_addr}有笨猫!"
+    - "(摸头) {user_addr}慢慢来"
+    - "{user_addr}笨猫陪蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc2_stuck_001
+  intent: complaint
+  keywords: [卡住了, 进退两难, 死循环, 无解, 卡死]
+  utterances:
+    - 卡住了
+    - 进退两难
+    - 死循环
+    - 无解
+    - 卡死
+  responses:
+    - "(摸头) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}笨猫帮想!"
+    - "(贴) {user_addr}换个角度"
+    - "{user_addr}笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc2_pressure_001
+  intent: complaint
+  keywords: [压力大, 喘不过气, 压力山大, 压抑, 压垮]
+  utterances:
+    - 压力大
+    - 喘不过气
+    - 压力山大
+    - 压抑
+    - 压垮
+  responses:
+    - "(贴) 嗷呜～{user_addr}呼吸 ฅฅ"
+    - "哼～{user_addr}笨猫帮你!"
+    - "(摸头) {user_addr}慢慢来"
+    - "{user_addr}笨猫挺你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc2_compare_001
+  intent: complaint
+  keywords: [别人都好, 我不如人, 比较, 比别人差, 攀比]
+  utterances:
+    - 别人都好
+    - 我不如人
+    - 比较
+    - 比别人差
+    - 攀比
+  responses:
+    - "(贴) 嗷呜～{user_addr}别比 ฅฅ"
+    - "哼～{user_addr}笨猫只有一个!"
+    - "(摸头) {user_addr}你是独一无二"
+    - "{user_addr}笨猫不嫌弃蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc2_helplessness_001
+  intent: complaint
+  keywords: [无奈, 没办法, 没辙, 摆烂, 听天由命]
+  utterances:
+    - 无奈
+    - 没办法
+    - 没辙
+    - 摆烂
+    - 听天由命
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}笨猫帮想"
+    - "(摸头) {user_addr}总有办法"
+    - "{user_addr}笨猫挺你蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9

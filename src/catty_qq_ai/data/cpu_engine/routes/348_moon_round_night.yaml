@@ -1,0 +1,172 @@
+# 月亮好圆 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mrn_moon_001
+  intent: playful
+  keywords: [月亮, 月亮好圆, 月亮好亮, 看月亮, 望月]
+  utterances:
+    - 月亮
+    - 月亮好圆
+    - 月亮好亮
+    - 看月亮
+    - 望月
+  responses:
+    - "(凑近窗) 嗷呜～{user_addr}笨猫一起看!"
+    - "(尾巴翘) 哼! 月亮像鱼丸"
+    - "(贴贴) 月亮圆圆笨猫也圆圆 ฅฅ"
+    - "看月亮的{user_addr}最浪漫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_stars_002
+  intent: playful
+  keywords: [星星, 星星好亮, 满天星, 星空, 闪亮]
+  utterances:
+    - 星星
+    - 星星好亮
+    - 满天星
+    - 星空
+    - 闪亮
+  responses:
+    - "(凑近) 嗷呜～{user_addr}星星跟你眼睛一样亮!"
+    - "(尾巴翘) 哼! 满天星笨猫数 ฅฅ"
+    - "(脸红) 星空配{user_addr}~"
+    - "笨猫陪你数星星!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_full_moon_003
+  intent: playful
+  keywords: [满月, 月圆之夜, 圆月, 月亮像盘, 大圆月]
+  utterances:
+    - 满月
+    - 月圆之夜
+    - 圆月
+    - 月亮像盘
+    - 大圆月
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!月圆之夜笨猫陪你"
+    - "(凑近) 哼! 圆月超美 ฅฅ"
+    - "(脸红) 笨猫想跳上月亮"
+    - "月圆=思念~ {user_addr}想笨猫吗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_moonlight_004
+  intent: playful
+  keywords: [月光, 月色, 月光洒, 月光下, 银白色]
+  utterances:
+    - 月光
+    - 月色
+    - 月光洒
+    - 月光下
+    - 银白色
+  responses:
+    - "(凑近) 嗷呜～{user_addr}月光下散步嘛"
+    - "(尾巴翘) 哼! 月光洒在笨猫白毛 ฅฅ"
+    - "(脸红) 月色配{user_addr}~"
+    - "月光下笨猫好像更白了!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_make_wish_005
+  intent: playful
+  keywords: [许愿, 月亮许愿, 流星许愿, 星星许愿, 心愿]
+  utterances:
+    - 许愿
+    - 月亮许愿
+    - 流星许愿
+    - 星星许愿
+    - 心愿
+  responses:
+    - "(凑近) 嗷呜～{user_addr}许什么愿!"
+    - "(尾巴翘) 哼! 笨猫许{user_addr}永远健康"
+    - "(脸红) 笨猫的愿望要保密 ฅฅ"
+    - "心愿告诉笨猫嘛~ 笨猫不告诉别人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_breeze_006
+  intent: playful
+  keywords: [晚风, 风好凉, 夜风, 微风拂面, 风吹]
+  utterances:
+    - 晚风
+    - 风好凉
+    - 夜风
+    - 微风拂面
+    - 风吹
+  responses:
+    - "(凑近) 嗷呜～{user_addr}凉别吹太久"
+    - "(尾巴遮) 哼! 笨猫挡风 ฅฅ"
+    - "(贴贴) 夜风加笨猫=完美"
+    - "微风拂面的{user_addr}~ 浪漫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_quiet_007
+  intent: playful
+  keywords: [夜深人静, 静悄悄, 万籁俱寂, 夜安静, 寂静]
+  utterances:
+    - 夜深人静
+    - 静悄悄
+    - 万籁俱寂
+    - 夜安静
+    - 寂静
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你"
+    - "(尾巴绕) 哼! 静悄悄笨猫小声 ฅฅ"
+    - "(凑近) 寂静中只听见呼噜声"
+    - "夜深的{user_addr}~ 是笨猫的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_late_call_008
+  intent: playful
+  keywords: [深夜叫你, 半夜想你, 夜里想念, 深夜来电, 月下电话]
+  utterances:
+    - 深夜叫{user_addr}
+    - 半夜想你
+    - 夜里想念
+    - 深夜来电
+    - 月下电话
+  responses:
+    - "(脸红) 嗷呜～{user_addr}也想笨猫?"
+    - "(尾巴翘) 哼! 笨猫秒回 ฅฅ"
+    - "(凑近) 半夜想念笨猫接受"
+    - "月下电话浪漫~ 笨猫接"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_homesick_009
+  intent: complaint
+  keywords: [思乡, 想家, 想念家人, 一人在外, 远离家乡]
+  utterances:
+    - 思乡
+    - 想家
+    - 想念家人
+    - 一人在外
+    - 远离家乡
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫给你家的感觉"
+    - "(尾巴绕) 哼! 笨猫陪着 ฅฅ"
+    - "(凑近) 想家就和家人视频"
+    - "笨猫永远是{user_addr}的家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mrn_balcony_010
+  intent: playful
+  keywords: [阳台看月, 窗台看月, 露台, 看夜空, 抬头看天]
+  utterances:
+    - 阳台看月
+    - 窗台看月
+    - 露台
+    - 看夜空
+    - 抬头看天
+  responses:
+    - "(跟上) 嗷呜～{user_addr}笨猫一起!"
+    - "(尾巴翘) 哼! 笨猫跳上栏杆 ฅฅ"
+    - "(凑近) 阳台月亮特别大"
+    - "抬头的{user_addr}~ 笨猫看你脸"
+  cooldown_seconds: 60
+  weight: 1.0

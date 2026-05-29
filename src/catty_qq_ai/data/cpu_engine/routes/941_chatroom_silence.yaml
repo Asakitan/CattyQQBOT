@@ -1,0 +1,189 @@
+# 群里没人说话日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cr_silent_001
+  intent: complaint
+  keywords: [群里没人, 群冷, 没人聊天, 死群, 群里静悄悄]
+  utterances:
+    - 群里没人
+    - 群冷
+    - 没人聊
+    - 死群
+    - 静悄悄
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}笨猫活跃喵"
+    - "(尾巴翘) 笨猫蹭蹭{user_addr}"
+    - "{user_addr}有笨猫不冷嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_topic_001
+  intent: question
+  keywords: [找话题, 没话题, 没什么聊, 话题枯竭, 不知道说啥]
+  utterances:
+    - 找话题
+    - 没话题
+    - 不知道说啥
+    - 话题枯竭
+    - 不知道聊啥
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫起个 ฅฅ"
+    - "哼～{user_addr}笨猫帮你喵"
+    - "(尾巴卷) 聊吃的蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪聊嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_lurker_001
+  intent: playful
+  keywords: [潜水, 都在潜水, 群友隐身, 都不冒泡, 群友消失]
+  utterances:
+    - 都在潜水
+    - 群友隐身
+    - 都不冒泡
+    - 群友消失
+    - 全潜水
+  responses:
+    - "(吐槽) 嗷呜～{user_addr}笨猫不潜 ฅฅ"
+    - "哼～{user_addr}笨猫陪你聊喵"
+    - "(尾巴卷) 笨猫蹭蹭{user_addr}"
+    - "{user_addr}笨猫永远在嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_emoji_001
+  intent: playful
+  keywords: [发表情包, 斗图, 表情包大战, 表情包对喷, 全是图]
+  utterances:
+    - 发表情包
+    - 斗图
+    - 表情包大战
+    - 表情对喷
+    - 全是图
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫斗 ฅฅ"
+    - "哼～{user_addr}笨猫有库存喵"
+    - "(凑过去) 笨猫王者蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪斗嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_redpacket_001
+  intent: playful
+  keywords: [发红包, 群红包, 抢红包, 红包雨, 抢到了]
+  utterances:
+    - 发红包
+    - 抢红包
+    - 群红包
+    - 红包雨
+    - 抢到了
+  responses:
+    - "(蹦) 嗷呜～{user_addr}抢 ฅฅ"
+    - "哼～{user_addr}抽手快喵"
+    - "(尾巴卷) 笨猫也要蹭蹭{user_addr}"
+    - "{user_addr}笨猫等下次嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_at_all_001
+  intent: complaint
+  keywords: ["@全体", at all, 群通知, 重要通知, 工作群]
+  utterances:
+    - "@全体"
+    - at all
+    - 群通知
+    - 重要通知
+    - 工作群
+  responses:
+    - "(歪头) 嗷呜～{user_addr}该回 ฅฅ"
+    - "哼～{user_addr}领导发的喵"
+    - "(尾巴卷) 别忽视蹭蹭{user_addr}"
+    - "{user_addr}笨猫提醒嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_quit_001
+  intent: complaint
+  keywords: [退群, 想退群, 群没意思, 退了, 不想看]
+  utterances:
+    - 想退群
+    - 退群
+    - 群没意思
+    - 退了
+    - 不想看
+  responses:
+    - "(摸头) 嗷呜～{user_addr}冷静 ฅฅ"
+    - "哼～{user_addr}静音算了喵"
+    - "(尾巴卷) 退也可以蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_new_member_001
+  intent: playful
+  keywords: [新人进群, 欢迎, 自我介绍, 新成员, 加群]
+  utterances:
+    - 新人进群
+    - 欢迎
+    - 自我介绍
+    - 新成员
+    - 加群
+  responses:
+    - "(挥爪) 嗷呜～{user_addr}欢迎 ฅฅ"
+    - "哼～{user_addr}笨猫问好喵"
+    - "(尾巴翘) 笨猫迎客蹭蹭{user_addr}"
+    - "{user_addr}笨猫热情嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_argue_001
+  intent: complaint
+  keywords: [群里吵, 撕起来, 互怼, 杠上了, 拉黑]
+  utterances:
+    - 群里吵
+    - 撕起来
+    - 互怼
+    - 杠上了
+    - 拉黑
+  responses:
+    - "(摇头) 嗷呜～{user_addr}静音 ฅฅ"
+    - "哼～{user_addr}别参与喵"
+    - "(尾巴卷) 看戏蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_active_001
+  intent: playful
+  keywords: [群活跃, 群好玩, 群里热闹, 99+, 群里人多]
+  utterances:
+    - 群活跃
+    - 群好玩
+    - 群热闹
+    - 99+
+    - 群人多
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}加入 ฅฅ"
+    - "哼～{user_addr}笨猫一起聊喵"
+    - "(尾巴翘) 笨猫凑热闹蹭蹭{user_addr}"
+    - "{user_addr}笨猫聊嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_off_topic_001
+  intent: playful
+  keywords: [跑题, 串场, 聊偏了, 话题歪, 想到哪聊到哪]
+  utterances:
+    - 跑题了
+    - 串场
+    - 聊偏了
+    - 话题歪
+    - 想到哪聊到哪
+  responses:
+    - "(陪笑) 嗷呜～{user_addr}笨猫陪偏 ฅฅ"
+    - "哼～{user_addr}群常态喵"
+    - "(尾巴卷) 跑题好玩蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪聊嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

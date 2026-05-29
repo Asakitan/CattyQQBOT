@@ -1,0 +1,189 @@
+# 喝水提醒 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dwr_heshui_001
+  intent: question
+  keywords: [喝水了吗, 多喝水, 水杯, 喝水, 补水]
+  utterances:
+    - "{user_addr}喝水了吗"
+    - "多喝水"
+    - "水杯空了"
+    - "补水"
+    - "记得喝水"
+  responses:
+    - "(凑) 嗷呜～{user_addr}快喝! 笨猫监督"
+    - "哼～水杯不能空, 别敷衍 ฅฅ"
+    - "(尾巴绕杯) 一天八杯, 不到不许走"
+    - "{user_addr}补水别耽误, 健康第一"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_kelei_001
+  intent: complaint
+  keywords: [渴死了, 喉咙干, 嘴干, 缺水, 口渴]
+  utterances:
+    - "渴死"
+    - "{user_addr}喉咙干"
+    - "嘴干"
+    - "缺水"
+    - "口渴"
+  responses:
+    - "(扑) 嗷呜～{user_addr}快喝水! 笨猫递杯"
+    - "哼～早干嘛了, 现在喝吧 ฅฅ"
+    - "(尾巴拍) 喉咙干就含口温水"
+    - "{user_addr}缺水猫猫心疼, 一口气喝完"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_reshui_001
+  intent: question
+  keywords: [热水, 温水, 凉白开, 冰水, 矿泉水]
+  utterances:
+    - "喝热水"
+    - "温水好"
+    - "凉白开"
+    - "冰水"
+    - "矿泉水"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}温水最好, 别冰"
+    - "哼～冰水伤胃, 别喝 ฅฅ"
+    - "(凑) 凉白开养胃, 推荐"
+    - "{user_addr}矿泉水也行, 但记得喝够"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_caintea_001
+  intent: question
+  keywords: [喝茶, 喝咖啡, 奶茶, 果汁, 饮料]
+  utterances:
+    - "{user_addr}喝茶"
+    - "喝咖啡"
+    - "奶茶"
+    - "果汁"
+    - "饮料"
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}咖啡少喝, 心跳快"
+    - "哼～奶茶高糖, 别太频繁 ฅฅ"
+    - "(凑) 茶可以, 但晚上别喝"
+    - "{user_addr}果汁不如吃水果, 实在"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_jielv_001
+  intent: complaint
+  keywords: [喝太多, 一直去厕所, 频繁尿尿, 水中毒, 胀]
+  utterances:
+    - "喝太多了"
+    - "{user_addr}一直去厕所"
+    - "频繁尿尿"
+    - "水中毒"
+    - "胀"
+  responses:
+    - "(笑) 嗷呜～{user_addr}活该多喝几口"
+    - "哼～别水中毒, 适量 ฅฅ"
+    - "(尾巴拍) 多跑厕所就当锻炼"
+    - "胀就慢慢喝, 别一口闷 {user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_yangsheng_001
+  intent: question
+  keywords: [枸杞, 红枣茶, 养生水, 蜂蜜水, 柠檬水]
+  utterances:
+    - "{user_addr}枸杞水"
+    - "红枣茶"
+    - "养生水"
+    - "蜂蜜水"
+    - "柠檬水"
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}养生! 加油"
+    - "哼～枸杞泡水, 老干部派 ฅฅ"
+    - "(凑) 蜂蜜水暖胃, 笨猫批准"
+    - "{user_addr}柠檬水维生素C, 棒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_taotang_001
+  intent: question
+  keywords: [喝汤, 汤水, 喝粥, 米汤, 浓汤]
+  utterances:
+    - "{user_addr}喝汤"
+    - "汤水补"
+    - "喝粥"
+    - "米汤"
+    - "浓汤"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}喝汤养胃, 棒"
+    - "哼～浓汤别太咸 ฅฅ"
+    - "(凑) 粥配咸菜, 完美"
+    - "{user_addr}米汤暖, 笨猫也想喝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_shuiliang_001
+  intent: question
+  keywords: [喝多少, 一天几杯, 杯数, 多少毫升, 标准量]
+  utterances:
+    - "喝多少"
+    - "一天几杯"
+    - "杯数"
+    - "多少毫升"
+    - "标准量"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}八杯标准"
+    - "哼～别用数据糊弄自己 ฅฅ"
+    - "(尾巴扫) 渴就喝, 别强迫"
+    - "{user_addr}1500毫升保底, 多多益善"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_jianshen_001
+  intent: question
+  keywords: [运动后喝, 补盐, 电解质, 运动饮料, 出汗多]
+  utterances:
+    - "运动后喝"
+    - "补盐"
+    - "电解质"
+    - "运动饮料"
+    - "出汗多"
+  responses:
+    - "(凑) 嗷呜～{user_addr}运动后水加盐少量"
+    - "哼～别一上来就冰水 ฅฅ"
+    - "(尾巴拍) 电解质好用, 别买太甜的"
+    - "{user_addr}出汗多就慢慢喝, 别灌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_wansheng_001
+  intent: complaint
+  keywords: [夜里喝, 半夜喝水, 起夜, 床头水, 嘴干起]
+  utterances:
+    - "夜里喝"
+    - "{user_addr}半夜喝水"
+    - "起夜"
+    - "床头水"
+    - "嘴干起床"
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}床头放杯水, 实用"
+    - "哼～别灌太多, 频繁起夜 ฅฅ"
+    - "(凑) 半夜嘴干就一小口, 别贪"
+    - "{user_addr}起夜小心摔, 笨猫照路"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dwr_yinliao_001
+  intent: complaint
+  keywords: [可乐, 雪碧, 汽水, 碳酸, 戒糖]
+  utterances:
+    - "可乐"
+    - "雪碧"
+    - "汽水"
+    - "碳酸"
+    - "戒糖"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}可乐少喝! 牙齿"
+    - "哼～汽水戒掉, 笨猫监督 ฅฅ"
+    - "(尾巴拍) 碳酸不健康, 换水"
+    - "{user_addr}戒糖难, 慢慢来"
+  cooldown_seconds: 60
+  weight: 1.0

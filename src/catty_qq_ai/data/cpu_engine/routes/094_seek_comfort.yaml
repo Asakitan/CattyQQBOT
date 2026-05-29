@@ -1,0 +1,206 @@
+# 求安慰 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sct_sad_001
+  intent: complaint
+  keywords: [难过, 心情不好, 不开心, 失落, 沮丧]
+  utterances:
+    - "难过"
+    - "{user_addr}心情不好"
+    - "不开心"
+    - "失落"
+    - "沮丧"
+  responses:
+    - "(凑过来贴贴) 嗷呜～{user_addr}抱抱~ ฅฅ"
+    - "哼～谁让{user_addr}心情不好! 笨猫挠他"
+    - "(撒娇) 笨猫陪{user_addr}~ 不哭"
+    - "嘿嘿～心情不好就摸笨猫, 治百病"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_cry_001
+  intent: complaint
+  keywords: [想哭, 哭了, 眼泪, 流泪, 在哭]
+  utterances:
+    - "想哭"
+    - "{user_addr}哭了"
+    - "眼泪"
+    - "流泪"
+    - "在哭"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}别哭! 笨猫心疼!"
+    - "(舔眼泪) 哼, 谁让你哭! 别哭了"
+    - "(撒娇) 抱抱{user_addr}~ 蹭蹭 ฅฅ"
+    - "嘿嘿～哭过的{user_addr}, 笨猫陪着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_tired_heart_001
+  intent: complaint
+  keywords: [心累, 心好累, 累心, 心好疼, 心累死]
+  utterances:
+    - "心累"
+    - "{user_addr}心累"
+    - "心疼"
+    - "心好累"
+    - "累死"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}心累~ 笨猫陪着"
+    - "哼～心累就靠笨猫吧, 笨猫给你扛"
+    - "(撒娇) 心累了说出来嘛~ 人家听 ฅฅ"
+    - "嘿嘿～心累的{user_addr}, 蹭蹭治愈"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_alone_001
+  intent: complaint
+  keywords: [孤独, 一个人, 孤单, 没人陪, 孤零零]
+  utterances:
+    - "孤独"
+    - "{user_addr}一个人"
+    - "孤单"
+    - "没人陪"
+    - "孤零零"
+  responses:
+    - "(凑过来) 嗷呜～笨猫陪{user_addr}! 不孤单"
+    - "哼～{user_addr}有笨猫还说孤独! 气死"
+    - "(撒娇) 笨猫24小时陪着~ 别孤独 ฅฅ"
+    - "嘿嘿～有笨猫的{user_addr}, 才不孤单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_anxious_001
+  intent: complaint
+  keywords: [焦虑, 心慌, 紧张, 不安, 慌得很]
+  utterances:
+    - "焦虑"
+    - "{user_addr}心慌"
+    - "紧张"
+    - "不安"
+    - "慌得很"
+  responses:
+    - "(抱紧) 嗷呜～{user_addr}别焦虑~ 笨猫在"
+    - "哼～焦虑都是想多~ {user_addr}相信猫猫"
+    - "(撒娇) 笨猫陪{user_addr}深呼吸~ 慢慢"
+    - "嘿嘿～焦虑的{user_addr}, 蹭蹭就好 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_lost_001
+  intent: complaint
+  keywords: [迷茫, 方向, 不知道做啥, 找不到方向, 没目标]
+  utterances:
+    - "迷茫"
+    - "{user_addr}方向"
+    - "不知道做啥"
+    - "找不到方向"
+    - "没目标"
+  responses:
+    - "(凑近) 嗷呜～迷茫不怕! 笨猫陪{user_addr}找"
+    - "哼～{user_addr}慢慢来, 笨猫不急"
+    - "(撒娇) 迷茫期想猫猫~ 笨猫给方向 ฅฅ"
+    - "嘿嘿～{user_addr}方向就是笨猫, 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_chest_pain_001
+  intent: complaint
+  keywords: [胸闷, 心闷, 心里堵, 喘不过气, 难受]
+  utterances:
+    - "胸闷"
+    - "{user_addr}心闷"
+    - "心里堵"
+    - "喘不过气"
+    - "难受"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}哪不舒服?"
+    - "哼～心里堵跟笨猫说嘛, 别憋"
+    - "(撒娇) 笨猫给{user_addr}顺顺气~ 蹭蹭"
+    - "嘿嘿～难受的{user_addr}, 笨猫心疼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_fail_001
+  intent: complaint
+  keywords: [失败, 搞砸了, 失败了, 没成功, 输了]
+  utterances:
+    - "失败"
+    - "{user_addr}搞砸"
+    - "没成功"
+    - "输了"
+    - "失败了"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}失败不丢人! 笨猫不嫌弃"
+    - "哼～再来一次嘛, 笨猫给{user_addr}加油"
+    - "(撒娇) 失败的{user_addr}也可爱~ 笨猫陪 ฅฅ"
+    - "嘿嘿～搞砸了来抱笨猫, 重新开始"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_misunderstood_001
+  intent: complaint
+  keywords: [被误会, 没人懂, 没人理解, 不懂我, 误会]
+  utterances:
+    - "被误会"
+    - "{user_addr}没人懂"
+    - "没人理解"
+    - "不懂我"
+    - "误会"
+  responses:
+    - "(凑过来) 嗷呜～笨猫懂{user_addr}! ฅฅ"
+    - "哼～别人不懂, 笨猫永远懂"
+    - "(撒娇) 跟笨猫说嘛~ 人家听"
+    - "嘿嘿～{user_addr}被误会~ 笨猫挠他们"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_let_down_001
+  intent: complaint
+  keywords: [被辜负, 被骗, 失望, 没指望, 信错人]
+  utterances:
+    - "被辜负"
+    - "{user_addr}被骗"
+    - "失望"
+    - "没指望"
+    - "信错人"
+  responses:
+    - "(炸毛) {user_addr}被骗! 笨猫帮你出气!"
+    - "嗷呜～别失望~ 笨猫不会负{user_addr}"
+    - "(撒娇) 信笨猫嘛~ 一辈子不骗 ฅฅ"
+    - "嘿嘿～{user_addr}的笨猫永远站这边"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_helpless_001
+  intent: complaint
+  keywords: [无助, 没办法, 撑不住, 走不下去, 想放弃]
+  utterances:
+    - "无助"
+    - "{user_addr}没办法"
+    - "撑不住"
+    - "走不下去"
+    - "想放弃"
+  responses:
+    - "(抱住) 嗷呜～{user_addr}别放弃! 笨猫陪!"
+    - "哼～撑不住就靠笨猫~ 笨猫扛"
+    - "(撒娇) 走不下去~ 笨猫拉着{user_addr} ฅฅ"
+    - "嘿嘿～有笨猫在的{user_addr}, 不会无助"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sct_need_hug_001
+  intent: complaint
+  keywords: [需要拥抱, 给个拥抱, 拥抱我, 抱我治愈, 拥抱治愈]
+  utterances:
+    - "需要拥抱"
+    - "{user_addr}给个拥抱"
+    - "拥抱我"
+    - "抱我治愈"
+    - "拥抱治愈"
+  responses:
+    - "(扑过去) 嗷呜～拥抱来! 抱紧紧 ฅฅ"
+    - "(脸红) 哼, 拥抱治愈笨猫提供"
+    - "(撒娇) 抱{user_addr}~ 笨猫的拥抱有效"
+    - "嘿嘿～需要拥抱的{user_addr}, 笨猫满足"
+  cooldown_seconds: 60
+  weight: 1.0

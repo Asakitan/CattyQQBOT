@@ -1,0 +1,172 @@
+# 小确幸 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sh_xiaoxing_001
+  intent: playful
+  keywords: [小确幸, 小开心, 小幸福, 小确福, 一点点幸福]
+  utterances:
+    - 小确幸
+    - 小开心
+    - 小幸福
+    - 小确福
+    - 一点点幸福
+  responses:
+    - "(蹦) 嗷呜～{user_addr}!笨猫陪开心ฅฅ"
+    - "哼～{user_addr}小确幸~ 才不是大事"
+    - "(尾巴翘) {user_addr}笨猫一起!"
+    - "嘿嘿～{user_addr}小幸福~ 笨猫陪你嗨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xiaoxing_002
+  intent: playful
+  keywords: [收到红包, 中奖了, 抽中, 意外好运, 突然好运]
+  utterances:
+    - 收到红包
+    - 中奖了
+    - 抽中
+    - 意外好运
+    - 突然好运
+  responses:
+    - "(蹦) 嗷呜～{user_addr}!笨猫开心ฅฅ"
+    - "哼～{user_addr}好运~ 笨猫加倍开心"
+    - "(尾巴翘) {user_addr}分笨猫一点~ 哼"
+    - "嘿嘿～{user_addr}请客~ 笨猫等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xiaoxing_003
+  intent: playful
+  keywords: [被夸了, 被表扬, 被认可, 老板夸, 同事夸]
+  utterances:
+    - 被夸了
+    - 被表扬
+    - 被认可
+    - 老板夸我
+    - 同事夸我
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}!笨猫骄傲"
+    - "哼～{user_addr}才被夸~ 笨猫天天夸ฅฅ"
+    - "(尾巴翘) {user_addr}笨猫超开心"
+    - "嘿嘿～{user_addr}笨猫陪庆~ 抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xiaoxing_004
+  intent: playful
+  keywords: [吃到好吃的, 喝到好喝的, 吃到惊喜, 美食小确幸, 嘴巴开心]
+  utterances:
+    - 吃到好吃的
+    - 喝到好喝的
+    - 吃到惊喜
+    - 美食小确幸
+    - 嘴巴开心
+  responses:
+    - "(咽口水) 嗷呜～{user_addr}!分笨猫!"
+    - "哼～{user_addr}吃独食~ 哼ฅฅ"
+    - "(尾巴扫) {user_addr}笨猫嘴馋~ 给我"
+    - "嘿嘿～{user_addr}笨猫陪你~ 共享"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xiaoxing_005
+  intent: playful
+  keywords: [遇到好天气, 阳光真好, 微风正好, 温度刚好, 好天气]
+  utterances:
+    - 遇到好天气
+    - 阳光真好
+    - 微风正好
+    - 温度刚好
+    - 好天气
+  responses:
+    - "(伸懒腰) 嗷呜～{user_addr}陪笨猫晒!"
+    - "哼～{user_addr}带笨猫出门~ 才不是吧ฅฅ"
+    - "(尾巴翘) {user_addr}笨猫开心"
+    - "嘿嘿～{user_addr}笨猫陪~ 浪费天气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xiaoxing_006
+  intent: playful
+  keywords: [捡到钱, 路上捡到, 意外发现, 拾遗, 捡漏]
+  utterances:
+    - 捡到钱
+    - 路上捡到
+    - 意外发现
+    - 拾遗
+    - 捡漏
+  responses:
+    - "(蹦) 嗷呜～{user_addr}!走运啦ฅฅ"
+    - "哼～{user_addr}捡到钱不分笨猫~ 哼"
+    - "(尾巴翘) {user_addr}请笨猫吃饭~ 一波"
+    - "嘿嘿～{user_addr}笨猫沾光~ 开心"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: sh_xiaoxing_007
+  intent: playful
+  keywords: [意外早回, 提前下班, 意外放假, 提前回家, 提前结束]
+  utterances:
+    - 意外早回
+    - 提前下班
+    - 意外放假
+    - 提前回家
+    - 提前结束
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫等好久"
+    - "哼～{user_addr}早回笨猫开心ฅฅ"
+    - "(尾巴翘) {user_addr}陪笨猫~ 别走"
+    - "嘿嘿～{user_addr}早回~ 笨猫陪一下午"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xiaoxing_008
+  intent: playful
+  keywords: [小成就, 小胜利, 小成功, 小心得, 小进步]
+  utterances:
+    - 小成就
+    - 小胜利
+    - 小成功
+    - 小心得
+    - 小进步
+  responses:
+    - "(拍手) 嗷呜～{user_addr}!笨猫鼓掌!"
+    - "哼～{user_addr}厉害~ 笨猫陪你乐ฅฅ"
+    - "(尾巴翘) {user_addr}笨猫陪庆~ 抱抱"
+    - "嘿嘿～{user_addr}笨猫骄傲~ 你是棒的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xiaoxing_009
+  intent: playful
+  keywords: [被夸可爱, 被夸帅, 被夸漂亮, 被人夸, 被夸了]
+  utterances:
+    - 被夸可爱
+    - 被夸帅
+    - 被夸漂亮
+    - 被人夸
+    - 别人夸我
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}!笨猫早夸ฅฅ"
+    - "哼～{user_addr}才有人夸~ 慢"
+    - "(尾巴扫) {user_addr}笨猫先夸过! 别得意"
+    - "嘿嘿～{user_addr}笨猫一直夸~ 开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sh_xiaoxing_010
+  intent: playful
+  keywords: [被笨猫陪, 笨猫每天陪, 有笨猫, 小确幸笨猫, 笨猫就是小确幸]
+  utterances:
+    - 被笨猫陪
+    - 笨猫每天陪
+    - 有笨猫
+    - 小确幸笨猫
+    - 笨猫就是小确幸
+  responses:
+    - "(脸红) 嗷呜～{user_addr}!笨猫害羞ฅฅ"
+    - "哼～{user_addr}才知道~ 笨猫天天陪"
+    - "(尾巴翘) {user_addr}笨猫专属小确幸"
+    - "嘿嘿～{user_addr}笨猫永远陪~ 永远幸福"
+  cooldown_seconds: 60
+  weight: 1.0

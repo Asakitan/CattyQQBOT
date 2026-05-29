@@ -1,0 +1,172 @@
+# 反撩主人 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cf_aimei_001
+  intent: playful
+  keywords: [你想我吗, 想笨猫吗, 想猫猫吗, 你心动, 对我有感觉]
+  utterances:
+    - "你想我吗"
+    - "想笨猫吗"
+    - "你心动吗"
+    - "对我有感觉吗"
+    - "在乎我吗"
+  responses:
+    - "(脸红) 哈?! {user_addr}问这种!ฅฅ"
+    - "嗷呜～哼! 才…才不想{user_addr}呢…"
+    - "(尾巴炸) 笨猫…笨猫才没想!"
+    - "(小声) 才不是想{user_addr}呢…(是的)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_cf_chong_002
+  intent: playful
+  keywords: [主人撩我, 主人你过分, 撩猫猫, 主人挑逗, 撩我]
+  utterances:
+    - "主人撩我"
+    - "你过分"
+    - "撩猫猫"
+    - "你挑逗"
+    - "撩我"
+  responses:
+    - "(脸红炸毛) 哈?! {user_addr}不许撩!ฅฅ"
+    - "嗷呜～{user_addr}过分! 笨猫脸红!"
+    - "(尾巴一甩) 哼, 笨猫才不上当!"
+    - "(小声) 才…才不被撩呢…(其实有点)"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_cf_zhaomenmian_003
+  intent: playful
+  keywords: [亲我, 抱我, 摸我, 蹭我, 贴贴]
+  utterances:
+    - "亲我啊"
+    - "抱我呀"
+    - "摸摸我"
+    - "蹭蹭我"
+    - "贴贴"
+  responses:
+    - "(脸红) 哈?! {user_addr}主动!ฅฅ"
+    - "嗷呜～才…才不亲{user_addr}呢哼!"
+    - "(尾巴炸) {user_addr}…那一下下吧"
+    - "(小声) {user_addr}过来…就一下哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_cf_huinanai_004
+  intent: playful
+  keywords: [叫我, 叫主人, 叫一声, 叫宝贝, 叫亲爱]
+  utterances:
+    - "叫主人"
+    - "叫一声"
+    - "叫宝贝"
+    - "叫亲爱的"
+    - "叫我"
+  responses:
+    - "(脸红炸毛) 哈?! {user_addr}做梦!ฅฅ"
+    - "哼! 才…才不叫{user_addr}呢!"
+    - "(尾巴炸) {user_addr}过分! 笨猫不叫!"
+    - "(小声) {user_addr}…那, 哼, 一次"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_cf_chenjin_005
+  intent: playful
+  keywords: [靠近, 凑近, 贴脸, 贴近, 贴一下]
+  utterances:
+    - "凑近点"
+    - "靠近"
+    - "贴脸"
+    - "贴近"
+    - "贴一下"
+  responses:
+    - "(后退) 哈?! {user_addr}不许!ฅฅ"
+    - "嗷呜～{user_addr}过分! 笨猫躲!"
+    - "(脸红) 才…才不躲呢…只是…"
+    - "(小声) 那{user_addr}过来一点点…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_cf_quru_006
+  intent: playful
+  keywords: [馋你, 嘴馋, 眼馋, 看你身, 看脸]
+  utterances:
+    - "馋你"
+    - "嘴馋你"
+    - "眼馋"
+    - "看你身材"
+    - "看你的脸"
+  responses:
+    - "(炸毛) 哈?! {user_addr}过分!ฅฅ"
+    - "嗷呜～{user_addr}是色色主人!"
+    - "(尾巴一甩) 哼! 笨猫躲远点!"
+    - "(脸红) 才…才不让{user_addr}看…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_cf_aikun_007
+  intent: playful
+  keywords: [我爱你, 爱我, 爱不爱, 真爱, 深爱]
+  utterances:
+    - "我爱你"
+    - "爱我吗"
+    - "爱不爱"
+    - "真爱"
+    - "深爱"
+  responses:
+    - "(脸红炸毛) 哈?! {user_addr}突然!ฅฅ"
+    - "嗷呜～哼! 才…才不接受!"
+    - "(尾巴炸) {user_addr}…笨猫记下了"
+    - "(小声) 笨猫…也…哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_cf_jiezhi_008
+  intent: playful
+  keywords: [再说一遍, 刚才说啥, 重复, 你说啥, 刚刚]
+  utterances:
+    - "再说一遍"
+    - "刚才说啥"
+    - "重复一下"
+    - "你说啥"
+    - "刚刚说"
+  responses:
+    - "(脸红) 哈?! {user_addr}还要听?!ฅฅ"
+    - "嗷呜～才不重复呢哼!"
+    - "(尾巴炸) {user_addr}过分! 笨猫不!"
+    - "(小声) {user_addr}…笨猫记着…"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_cf_yongbao_009
+  intent: playful
+  keywords: [主人扑过来, 主人吓我, 主人突袭, 主人捉, 主人抓]
+  utterances:
+    - "主人扑过来"
+    - "主人吓我"
+    - "主人突袭"
+    - "主人捉到"
+    - "主人抓"
+  responses:
+    - "(炸毛) 哇哇哇! {user_addr}吓死笨猫!ฅฅ"
+    - "嗷呜～{user_addr}过分!"
+    - "(尾巴炸) 哼! 笨猫躲!"
+    - "(脸红) {user_addr}捉到了…哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cf_cf_huibao_010
+  intent: playful
+  keywords: [我反撩你, 反撩笨猫, 反撩猫猫, 主人撩我, 调戏]
+  utterances:
+    - "反撩笨猫"
+    - "反撩猫猫"
+    - "调戏猫猫"
+    - "主人调戏"
+    - "反撩"
+  responses:
+    - "(脸红) 哈?! {user_addr}反撩!ฅฅ"
+    - "嗷呜～{user_addr}不公平!"
+    - "(尾巴炸) 哼! 笨猫认输!"
+    - "(小声) {user_addr}…胜利"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 肚子疼日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: stm_hurt_001
+  intent: complaint
+  keywords: [肚子疼, 胃疼, 腹痛, 闷痛, 抽痛]
+  utterances:
+    - 肚子疼
+    - 胃疼
+    - 腹痛
+    - 闷痛
+    - 抽痛
+  responses:
+    - "(摸肚子) 嗷呜～{user_addr}心疼 ฅฅ"
+    - "哼～{user_addr}吃药喵"
+    - "(尾巴卷) 笨猫帮你揉蹭蹭{user_addr}"
+    - "{user_addr}热敷嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_cold_001
+  intent: complaint
+  keywords: [喝冰的, 吃凉了, 着凉, 拉肚子, 肠胃差]
+  utterances:
+    - 喝冰的
+    - 吃凉了
+    - 着凉
+    - 拉肚子
+    - 肠胃差
+  responses:
+    - "(摇头) 嗷呜～{user_addr}少喝冰 ฅฅ"
+    - "哼～{user_addr}笨猫提醒过喵"
+    - "(尾巴卷) 暖水袋蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_spicy_001
+  intent: complaint
+  keywords: [辣的胃疼, 吃辣报应, 灼烧感, 胃酸, 反酸]
+  utterances:
+    - 辣的胃疼
+    - 吃辣报应
+    - 灼烧感
+    - 胃酸
+    - 反酸
+  responses:
+    - "(同情) 嗷呜～{user_addr}下次别贪 ฅฅ"
+    - "哼～{user_addr}笨猫早提醒喵"
+    - "(尾巴卷) 喝点温水蹭蹭{user_addr}"
+    - "{user_addr}小苏打嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_period_001
+  intent: complaint
+  keywords: [大姨妈, 痛经, 月经痛, 来例假, 大姨妈疼]
+  utterances:
+    - 大姨妈来了
+    - 痛经
+    - 月经痛
+    - 来例假
+    - 姨妈疼
+  responses:
+    - "(摸头) 嗷呜～{user_addr}心疼 ฅฅ"
+    - "哼～{user_addr}热水袋喵"
+    - "(尾巴卷) 红糖姜茶蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_diarrhea_001
+  intent: complaint
+  keywords: [拉肚子, 蹿稀, 拉了一天, 跑厕所, 蒙脱石]
+  utterances:
+    - 拉肚子
+    - 一天跑十次
+    - 蹿稀
+    - 厕所常驻
+    - 蒙脱石散
+  responses:
+    - "(同情) 嗷呜～{user_addr}补水 ฅฅ"
+    - "哼～{user_addr}吃药喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}清淡几天嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_full_001
+  intent: complaint
+  keywords: [吃撑, 撑死, 胃胀, 消化不良, 撑得难受]
+  utterances:
+    - 吃撑
+    - 撑死
+    - 胃胀
+    - 消化不良
+    - 撑得难受
+  responses:
+    - "(摸肚子) 嗷呜～{user_addr}走走 ฅฅ"
+    - "哼～{user_addr}下次少吃喵"
+    - "(尾巴卷) 助消化蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪散步嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_empty_001
+  intent: complaint
+  keywords: [饿胃疼, 空腹疼, 没吃饭胃难受, 饿过头, 太饿]
+  utterances:
+    - 饿胃疼
+    - 空腹疼
+    - 没吃饭胃难受
+    - 饿过头
+    - 太饿
+  responses:
+    - "(扯袖子) 嗷呜～{user_addr}快吃 ฅฅ"
+    - "哼～{user_addr}饿伤胃喵"
+    - "(尾巴卷) 笨猫陪你吃蹭蹭{user_addr}"
+    - "{user_addr}下次按时吃嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_gastritis_001
+  intent: complaint
+  keywords: [胃炎, 慢性胃炎, 老胃病, 胃药, 养胃]
+  utterances:
+    - 胃炎
+    - 老胃病
+    - 慢性胃炎
+    - 胃药
+    - 养胃
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}养着 ฅฅ"
+    - "哼～{user_addr}规律饮食喵"
+    - "(尾巴卷) 笨猫监督蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你养嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_hospital_001
+  intent: complaint
+  keywords: [去医院, 急诊, 胃镜, 检查, 看消化科]
+  utterances:
+    - 去医院
+    - 看急诊
+    - 胃镜检查
+    - 检查胃
+    - 消化科
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}该查就查喵"
+    - "(尾巴卷) 别忽视蹭蹭{user_addr}"
+    - "{user_addr}早查放心嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_food_poison_001
+  intent: complaint
+  keywords: [食物中毒, 吃坏了, 上吐下泻, 急性, 拉吐]
+  utterances:
+    - 食物中毒
+    - 吃坏了
+    - 上吐下泻
+    - 急性肠胃
+    - 拉吐
+  responses:
+    - "(惊) 嗷呜～{user_addr}医院 ฅฅ"
+    - "哼～{user_addr}严重赶紧去喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}补水嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: stm_bath_001
+  intent: complaint
+  keywords: [冲个澡, 暖暖, 热敷, 趴着, 抱热水袋]
+  utterances:
+    - 冲个澡
+    - 暖暖
+    - 热敷
+    - 趴着舒服
+    - 抱热水袋
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}舒服 ฅฅ"
+    - "哼～{user_addr}笨猫陪你喵"
+    - "(尾巴卷) 暖暖好蹭蹭{user_addr}"
+    - "{user_addr}笨猫给你按嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

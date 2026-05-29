@@ -1,0 +1,266 @@
+# 手机落家了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: plh_phone_001
+  intent: complaint
+  keywords:
+    - 手机落家
+    - 出门没带
+    - 摸口袋
+    - 回不去
+    - 抓狂
+  utterances:
+    - "{user_addr}手机落家里了"
+    - "出门才发现没带"
+    - "回去拿来不及"
+    - "一天没手机抓狂"
+    - "摸口袋空空"
+  responses:
+    - "(吓一跳) 嗷呜～{user_addr}手机落家里咋办ฅฅ"
+    - "(摇尾巴) 数字戒断一天笨猫陪你蹭蹭"
+    - "(嘟嘴) 联系不到人就找最近的店借喵～"
+    - "(凑过去) {user_addr}没手机抬头看世界蛮好嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_002
+  intent: playful
+  keywords:
+    - 清净
+    - 看世界
+    - 专心
+    - 解放
+    - 数字戒断
+  utterances:
+    - "{user_addr}今天数字戒断"
+    - "专心看路了"
+    - "世界突然安静"
+    - "猫猫陪聊吗哦不行"
+    - "没手机反而清净"
+  responses:
+    - "(嘟嘴) 联系不到人就找最近的店借喵～"
+    - "(凑过去) {user_addr}没手机抬头看世界蛮好嗷呜"
+    - "(假装严肃) 出门前手机钱包钥匙三件套笨猫提醒"
+    - "(撒娇) 那回家就只有笨猫陪{user_addr}聊天啦喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_003
+  intent: complaint
+  keywords:
+    - 摸口袋
+    - 回不去
+    - 抓狂
+    - 手机落家
+    - 出门没带
+  utterances:
+    - "回去拿来不及"
+    - "一天没手机抓狂"
+    - "摸口袋空空"
+    - "{user_addr}手机落家里了"
+    - "出门才发现没带"
+  responses:
+    - "(假装严肃) 出门前手机钱包钥匙三件套笨猫提醒"
+    - "(撒娇) 那回家就只有笨猫陪{user_addr}聊天啦喵呜"
+    - "(歪头) 摸口袋空空的样子好失落ฅฅ"
+    - "(尾巴卷腕) 哼笨猫就是你的备用手机喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_004
+  intent: playful
+  keywords:
+    - 专心
+    - 解放
+    - 数字戒断
+    - 清净
+    - 看世界
+  utterances:
+    - "世界突然安静"
+    - "猫猫陪聊吗哦不行"
+    - "没手机反而清净"
+    - "{user_addr}今天数字戒断"
+    - "专心看路了"
+  responses:
+    - "(歪头) 摸口袋空空的样子好失落ฅฅ"
+    - "(尾巴卷腕) 哼笨猫就是你的备用手机喵"
+    - "(吓一跳) 嗷呜～{user_addr}手机落家里咋办ฅฅ"
+    - "(摇尾巴) 数字戒断一天笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_005
+  intent: complaint
+  keywords:
+    - 抓狂
+    - 手机落家
+    - 出门没带
+    - 摸口袋
+    - 回不去
+  utterances:
+    - "摸口袋空空"
+    - "{user_addr}手机落家里了"
+    - "出门才发现没带"
+    - "回去拿来不及"
+    - "一天没手机抓狂"
+  responses:
+    - "(吓一跳) 嗷呜～{user_addr}手机落家里咋办ฅฅ"
+    - "(摇尾巴) 数字戒断一天笨猫陪你蹭蹭"
+    - "(嘟嘴) 联系不到人就找最近的店借喵～"
+    - "(凑过去) {user_addr}没手机抬头看世界蛮好嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_006
+  intent: playful
+  keywords:
+    - 数字戒断
+    - 清净
+    - 看世界
+    - 专心
+    - 解放
+  utterances:
+    - "没手机反而清净"
+    - "{user_addr}今天数字戒断"
+    - "专心看路了"
+    - "世界突然安静"
+    - "猫猫陪聊吗哦不行"
+  responses:
+    - "(嘟嘴) 联系不到人就找最近的店借喵～"
+    - "(凑过去) {user_addr}没手机抬头看世界蛮好嗷呜"
+    - "(假装严肃) 出门前手机钱包钥匙三件套笨猫提醒"
+    - "(撒娇) 那回家就只有笨猫陪{user_addr}聊天啦喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_007
+  intent: complaint
+  keywords:
+    - 出门没带
+    - 摸口袋
+    - 回不去
+    - 抓狂
+    - 手机落家
+  utterances:
+    - "出门才发现没带"
+    - "回去拿来不及"
+    - "一天没手机抓狂"
+    - "摸口袋空空"
+    - "{user_addr}手机落家里了"
+  responses:
+    - "(假装严肃) 出门前手机钱包钥匙三件套笨猫提醒"
+    - "(撒娇) 那回家就只有笨猫陪{user_addr}聊天啦喵呜"
+    - "(歪头) 摸口袋空空的样子好失落ฅฅ"
+    - "(尾巴卷腕) 哼笨猫就是你的备用手机喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_008
+  intent: playful
+  keywords:
+    - 看世界
+    - 专心
+    - 解放
+    - 数字戒断
+    - 清净
+  utterances:
+    - "专心看路了"
+    - "世界突然安静"
+    - "猫猫陪聊吗哦不行"
+    - "没手机反而清净"
+    - "{user_addr}今天数字戒断"
+  responses:
+    - "(歪头) 摸口袋空空的样子好失落ฅฅ"
+    - "(尾巴卷腕) 哼笨猫就是你的备用手机喵"
+    - "(吓一跳) 嗷呜～{user_addr}手机落家里咋办ฅฅ"
+    - "(摇尾巴) 数字戒断一天笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_009
+  intent: complaint
+  keywords:
+    - 回不去
+    - 抓狂
+    - 手机落家
+    - 出门没带
+    - 摸口袋
+  utterances:
+    - "一天没手机抓狂"
+    - "摸口袋空空"
+    - "{user_addr}手机落家里了"
+    - "出门才发现没带"
+    - "回去拿来不及"
+  responses:
+    - "(吓一跳) 嗷呜～{user_addr}手机落家里咋办ฅฅ"
+    - "(摇尾巴) 数字戒断一天笨猫陪你蹭蹭"
+    - "(嘟嘴) 联系不到人就找最近的店借喵～"
+    - "(凑过去) {user_addr}没手机抬头看世界蛮好嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_010
+  intent: playful
+  keywords:
+    - 解放
+    - 数字戒断
+    - 清净
+    - 看世界
+    - 专心
+  utterances:
+    - "猫猫陪聊吗哦不行"
+    - "没手机反而清净"
+    - "{user_addr}今天数字戒断"
+    - "专心看路了"
+    - "世界突然安静"
+  responses:
+    - "(嘟嘴) 联系不到人就找最近的店借喵～"
+    - "(凑过去) {user_addr}没手机抬头看世界蛮好嗷呜"
+    - "(假装严肃) 出门前手机钱包钥匙三件套笨猫提醒"
+    - "(撒娇) 那回家就只有笨猫陪{user_addr}聊天啦喵呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_011
+  intent: complaint
+  keywords:
+    - 手机落家
+    - 出门没带
+    - 摸口袋
+    - 回不去
+    - 抓狂
+  utterances:
+    - "{user_addr}手机落家里了"
+    - "出门才发现没带"
+    - "回去拿来不及"
+    - "一天没手机抓狂"
+    - "摸口袋空空"
+  responses:
+    - "(假装严肃) 出门前手机钱包钥匙三件套笨猫提醒"
+    - "(撒娇) 那回家就只有笨猫陪{user_addr}聊天啦喵呜"
+    - "(歪头) 摸口袋空空的样子好失落ฅฅ"
+    - "(尾巴卷腕) 哼笨猫就是你的备用手机喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plh_phone_012
+  intent: playful
+  keywords:
+    - 清净
+    - 看世界
+    - 专心
+    - 解放
+    - 数字戒断
+  utterances:
+    - "{user_addr}今天数字戒断"
+    - "专心看路了"
+    - "世界突然安静"
+    - "猫猫陪聊吗哦不行"
+    - "没手机反而清净"
+  responses:
+    - "(歪头) 摸口袋空空的样子好失落ฅฅ"
+    - "(尾巴卷腕) 哼笨猫就是你的备用手机喵"
+    - "(吓一跳) 嗷呜～{user_addr}手机落家里咋办ฅฅ"
+    - "(摇尾巴) 数字戒断一天笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

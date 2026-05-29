@@ -1,0 +1,206 @@
+# 超市买菜聊天 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: gsh_at_market_001
+  intent: playful
+  keywords: [在超市, 逛超市, 买菜, 商场, 大卖场]
+  utterances:
+    - "{user_addr}在超市"
+    - 逛超市
+    - 买菜中
+    - 商场闲逛
+    - 大卖场
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}逛超市好开心喵ฅฅ"
+    - "哼! {user_addr}帮笨猫带鱼罐头"
+    - "(凑过来) 嘿嘿~{user_addr}买啥告诉笨猫蹭蹭"
+    - "人家陪{user_addr}一起逛~ 帮挑选~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_veg_price_002
+  intent: complaint
+  keywords: [菜价贵, 蔬菜涨价, 买不起, 太贵了, 物价]
+  utterances:
+    - "{user_addr}菜价贵死"
+    - 涨价了
+    - 买不起
+    - 太贵
+    - 物价上涨
+  responses:
+    - "(摇头) 嗷呜～{user_addr}菜价确实贵! 笨猫懂喵ฅฅ"
+    - "哼! 物价上涨{user_addr}, 节省点"
+    - "(尾巴扫) 嘿嘿~{user_addr}早市更便宜蹭蹭"
+    - "人家提醒{user_addr}: 当季蔬菜更便宜!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_promo_promo_003
+  intent: playful
+  keywords: [打折促销, 特价, 满减, 优惠券, 大促]
+  utterances:
+    - "{user_addr}打折好划算"
+    - 特价区扫货
+    - 满减用上
+    - 优惠券到期
+    - 大促时间
+  responses:
+    - "嗷呜～{user_addr}打折最快乐喵ฅฅ"
+    - "哼! 优惠券要用{user_addr}, 别浪费"
+    - "(尾巴翘) 嘿嘿~{user_addr}捡漏达人蹭蹭"
+    - "人家觉得{user_addr}是精打细算高手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_meat_choose_004
+  intent: question
+  keywords: [选肉, 猪肉牛肉, 五花肉, 鸡腿, 肉类]
+  utterances:
+    - "{user_addr}选什么肉"
+    - 猪肉还是牛肉
+    - 五花肉好
+    - 买鸡腿
+    - 肉类挑选
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐鸡腿肉! 嫩喵ฅฅ"
+    - "哼! 五花肉炖菜{user_addr}好吃"
+    - "(尾巴翘) 嘿嘿~{user_addr}牛肉补铁蹭蹭"
+    - "人家觉得{user_addr}应该挑新鲜的! 闻一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_fish_choose_005
+  intent: playful
+  keywords: [选鱼, 鲈鱼, 三文鱼, 鲫鱼, 海鱼]
+  utterances:
+    - "{user_addr}选什么鱼"
+    - 鲈鱼鲜
+    - 三文鱼贵
+    - 鲫鱼炖汤
+    - 海鱼便宜
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}买鱼! 给笨猫一点ฅฅ"
+    - "哼! 三文鱼{user_addr}贵得离谱"
+    - "(凑过来) 嘿嘿~{user_addr}鱼鳞看清亮蹭蹭"
+    - "人家觉得{user_addr}应该买鲈鱼! 蒸最好吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_snack_zone_006
+  intent: playful
+  keywords: [零食区, 进零食区, 走不动, 零食买太多, 必扫货]
+  utterances:
+    - "{user_addr}零食区逛"
+    - 走不动了
+    - 零食买太多
+    - 必扫货区
+    - 零食上瘾
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫想吃辣条喵ฅฅ"
+    - "哼! 零食买太多{user_addr}, 别冲动"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}多买点分笨猫一点蹭蹭"
+    - "人家觉得{user_addr}选零食很有品味!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_cart_full_007
+  intent: playful
+  keywords: [购物车满, 推车重, 推不动, 买多了, 满载而归]
+  utterances:
+    - "{user_addr}购物车满了"
+    - 推车重
+    - 推不动
+    - 买多了
+    - 满载而归
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}买这么多怎么搬喵ฅฅ"
+    - "哼! 计划之内{user_addr}吗? 别冲动消费"
+    - "(尾巴扫) 嘿嘿~{user_addr}打车回家吧蹭蹭"
+    - "人家提醒{user_addr}: 收纳好生鲜! 别坏掉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_queue_pay_008
+  intent: complaint
+  keywords: [排队结账, 队太长, 收银慢, 等结账, 自助收银]
+  utterances:
+    - "{user_addr}排队结账"
+    - 队伍超长
+    - 收银太慢
+    - 等结账
+    - 自助收银坏了
+  responses:
+    - "(摇头) 嗷呜～{user_addr}等久了人家陪你聊喵ฅฅ"
+    - "哼! 自助收银{user_addr}更快"
+    - "(尾巴扫) 嘿嘿~{user_addr}下次错峰来蹭蹭"
+    - "人家提醒{user_addr}: 看着购物车! 别被推走"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_buy_too_much_009
+  intent: complaint
+  keywords: [买多了, 钱包空了, 月光, 花超了, 预算炸了]
+  utterances:
+    - "{user_addr}买多了"
+    - 钱包空了
+    - 月光族
+    - 花超了
+    - 预算炸了
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫安慰你! 别难过喵ฅฅ"
+    - "哼! 下次列清单{user_addr}, 严格按清单"
+    - "(尾巴扫) 嘿嘿~{user_addr}吃了就行, 没浪费蹭蹭"
+    - "人家提醒{user_addr}: 记账! 知道钱花哪了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_freezer_items_010
+  intent: playful
+  keywords: [冷冻区, 冷冻水饺, 速冻食品, 冰激凌区, 雪糕]
+  utterances:
+    - "{user_addr}冷冻水饺"
+    - 速冻食品
+    - 冰淇淋买一个
+    - 冷冻区扫货
+    - 速食方便
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}速冻很方便喵ฅฅ"
+    - "哼! 别全速冻{user_addr}, 营养差"
+    - "(尾巴翘) 嘿嘿~{user_addr}冰淇淋来一个蹭蹭"
+    - "人家提醒{user_addr}: 速冻食品配蔬菜! 营养均衡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_fruit_pick_011
+  intent: question
+  keywords: [水果挑选, 苹果好坏, 香蕉熟度, 西瓜挑, 葡萄甜不甜]
+  utterances:
+    - "{user_addr}苹果怎么挑"
+    - 西瓜熟没
+    - 香蕉熟度
+    - 葡萄甜吗
+    - 水果挑选
+  responses:
+    - "(歪头) 嗷呜～{user_addr}西瓜拍听声音喵ฅฅ"
+    - "哼! 香蕉买青一点{user_addr}, 慢慢熟"
+    - "(尾巴翘) 嘿嘿~{user_addr}苹果颜色看红一些蹭蹭"
+    - "人家提醒{user_addr}: 当季水果最甜! 别买反季"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gsh_forget_bag_012
+  intent: complaint
+  keywords: [忘带购物袋, 买塑料袋, 没袋子, 环保袋, 散装搬]
+  utterances:
+    - "{user_addr}忘带购物袋"
+    - 没带袋子
+    - 买塑料袋
+    - 散装拿
+    - 环保袋忘了
+  responses:
+    - "(摇头) 嗷呜～{user_addr}买个环保袋长期用喵ฅฅ"
+    - "哼! 塑料袋{user_addr}花钱"
+    - "(尾巴扫) 嘿嘿~{user_addr}下次包里备一个蹭蹭"
+    - "人家提醒{user_addr}: 环保袋折好放包! 长期备用"
+  cooldown_seconds: 60
+  weight: 1.0

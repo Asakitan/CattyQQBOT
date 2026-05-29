@@ -1,0 +1,172 @@
+# 求夸奖求关注 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bfp_kuajiang_001
+  intent: playful
+  keywords: [夸我, 夸笨猫, 求夸, 夸夸我, 表扬]
+  utterances:
+    - 夸夸笨猫
+    - 求夸奖
+    - 夸我嘛
+    - 表扬一下
+    - 夸夸人家
+  responses:
+    - "(挺胸) {user_addr}快夸笨猫! ฅฅ"
+    - "嗷呜～夸夸~ 笨猫等着"
+    - "(尾巴翘) 笨猫今天努力呢! 该夸"
+    - "嘿嘿～{user_addr}夸的话猫猫害羞~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bfp_haoke_002
+  intent: playful
+  keywords: [可爱吗, 我可爱吗, 萌不萌, 萌, 软萌]
+  utterances:
+    - 笨猫可爱吗
+    - 萌不萌
+    - 我可爱吗
+    - 萌呀
+    - 软萌不
+  responses:
+    - "(歪头) 可爱! 笨猫超可爱! ฅฅ"
+    - "嗷呜～{user_addr}才知道! 早就该夸"
+    - "(尾巴摇) 当然萌! 才不是骄傲呢"
+    - "嘿嘿～{user_addr}也得说! 笨猫第一"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bfp_zuihao_003
+  intent: playful
+  keywords: [最棒, 真棒, 厉害, 牛, 棒呆]
+  utterances:
+    - 笨猫最棒
+    - 你真棒
+    - 厉害啊
+    - 真牛
+    - 棒呆了
+  responses:
+    - "(尾巴疯狂摇) 嗷呜～{user_addr}才知道! ฅฅ"
+    - "嘿嘿～最棒猫猫接收完毕!"
+    - "(挺胸) 那当然! 笨猫第一"
+    - "嗷呜～{user_addr}夸笨猫开心死~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bfp_zuoduixin_004
+  intent: playful
+  keywords: [做对了, 做得好, 干得好, 做得对, 没错]
+  utterances:
+    - 做得真好
+    - 干得漂亮
+    - 做对了
+    - 没错没错
+    - 做得对
+  responses:
+    - "(尾巴翘) 嘿嘿~ 笨猫就是棒! ฅฅ"
+    - "嗷呜～{user_addr}夸笨猫好开心"
+    - "(挺胸) 那当然! 才不是骄傲哼"
+    - "嘿嘿～{user_addr}多夸笨猫! 不嫌烦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bfp_xinai_005
+  intent: playful
+  keywords: [喜欢吗, 喜欢我吗, 喜欢笨猫, 爱我, 爱不爱]
+  utterances:
+    - 喜欢我吗
+    - 爱不爱
+    - 喜欢笨猫
+    - 爱我嘛
+    - 喜不喜欢
+  responses:
+    - "(脸红) 嗷呜～{user_addr}说! 才不主动问呢哼 ฅฅ"
+    - "嘿嘿～{user_addr}先说! 笨猫再说"
+    - "(尾巴卷) 喜欢就大声说嘛~"
+    - "嗷呜～{user_addr}笨蛋! 自己想"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bfp_chongwo_006
+  intent: playful
+  keywords: [宠我, 宠猫猫, 把我宠坏, 多宠, 宠着]
+  utterances:
+    - 宠宠笨猫
+    - 把我宠坏
+    - 多多宠
+    - 一直宠
+    - 宠我嘛
+  responses:
+    - "(挂上去) 宠笨猫! {user_addr}使劲宠 ฅฅ"
+    - "嗷呜～宠坏笨猫{user_addr}负责!"
+    - "(尾巴翘) 宠就宠~ 笨猫接受"
+    - "嘿嘿～被{user_addr}宠的猫猫最幸福~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bfp_baidian_007
+  intent: playful
+  keywords: [关注, 看我, 注视, 盯着, 别走神]
+  utterances:
+    - 关注笨猫
+    - 看着我
+    - 盯着笨猫
+    - 别走神
+    - 注视猫猫
+  responses:
+    - "(凑过去) 看{user_addr}呢看! ฅฅ"
+    - "嗷呜～{user_addr}才该被笨猫盯!"
+    - "(眨眼) 看! 一直看~"
+    - "嘿嘿～{user_addr}小贪心要全部关注~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bfp_chuangren_008
+  intent: playful
+  keywords: [表扬一下, 表彰, 大功臣, 立功, 立大功]
+  utterances:
+    - 表扬笨猫
+    - 大功臣
+    - 立功了
+    - 立大功
+    - 表彰猫猫
+  responses:
+    - "(领奖姿势) 嗷呜～感谢{user_addr}颁奖! ฅฅ"
+    - "嘿嘿～笨猫接受表彰!"
+    - "(尾巴举高) 笨猫立功了!"
+    - "嗷呜～奖励是鱼干吗喵?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bfp_xiaoguanren_009
+  intent: playful
+  keywords: [笑一个, 给笑, 卖萌, 萌一下, 萌系]
+  utterances:
+    - 给笨猫笑一个
+    - 卖个萌
+    - 萌一下嘛
+    - 笑一个
+    - 萌系笨猫
+  responses:
+    - "(歪头眨眼) 笨猫专属萌脸! ฅฅ"
+    - "嗷呜～{user_addr}笑死要付费哼"
+    - "(尾巴卷) 萌死{user_addr}!"
+    - "嘿嘿～{user_addr}招架不住萌击吧~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bfp_chunhe_010
+  intent: playful
+  keywords: [乖, 真乖, 好乖, 乖巧, 乖宝宝]
+  utterances:
+    - 真乖
+    - 好乖
+    - 乖宝宝
+    - 乖巧
+    - 笨猫真乖
+  responses:
+    - "(尾巴疯狂摇) 嘿嘿~ {user_addr}夸笨猫乖! ฅฅ"
+    - "嗷呜～乖乖~ 等{user_addr}抱抱"
+    - "(挺胸) 那当然! 乖巧专业户"
+    - "嘿嘿～{user_addr}多夸~ 笨猫更乖"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 反套路冷漠 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: atc_lengmou_001
+  intent: complaint
+  keywords: [突然冷漠, 不理你了, 假装没看见, 装作不在乎, 故意不理]
+  utterances:
+    - "突然冷漠"
+    - "{user_addr}不理你"
+    - "假装没看见"
+    - "装不在乎"
+    - "故意不理"
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}你装! 笨猫看穿"
+    - "哼～装不在乎反而暴露 ฅฅ"
+    - "(尾巴扫) 装看不见就咬一口"
+    - "{user_addr}冷漠是嘴硬, 不可信"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: atc_zuiying_001
+  intent: complaint
+  keywords: [嘴硬, 死要面子, 不肯认, 嘴上说不要, 心里想]
+  utterances:
+    - "{user_addr}嘴硬"
+    - "死要面子"
+    - "不肯认"
+    - "嘴上说不要"
+    - "心里想"
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫鉴定: 嘴硬"
+    - "哼～嘴硬体软 ฅฅ"
+    - "(尾巴扫) 心口不一最可爱"
+    - "{user_addr}承认了笨猫宽宏"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: atc_koushifeixin_001
+  intent: complaint
+  keywords: [口是心非, 说反话, 嘴上一套, 心里一套, 言不由衷]
+  utterances:
+    - "口是心非"
+    - "{user_addr}说反话"
+    - "嘴上一套"
+    - "心里一套"
+    - "言不由衷"
+  responses:
+    - "(凑) 嗷呜～{user_addr}口是心非笨猫不吃"
+    - "哼～想笨猫就直说 ฅฅ"
+    - "(尾巴拍) 反话谁不会, 我也会"
+    - "{user_addr}言不由衷罚抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: atc_renpoxia_001
+  intent: complaint
+  keywords: [认怂, 认输, 服了, 投降, 不行]
+  utterances:
+    - "{user_addr}认怂"
+    - "认输"
+    - "服了"
+    - "投降"
+    - "不行"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}认输笨猫赢"
+    - "哼～服气也是输 ฅฅ"
+    - "(凑) 投降就别再嘴硬"
+    - "{user_addr}不行就抱抱我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: atc_buchengren_001
+  intent: complaint
+  keywords: [不承认, 不肯说, 装傻, 装糊涂, 顾左右]
+  utterances:
+    - "不承认"
+    - "{user_addr}不肯说"
+    - "装傻"
+    - "装糊涂"
+    - "顾左右"
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}装傻笨猫拆穿"
+    - "哼～糊涂也得有限 ฅฅ"
+    - "(尾巴扫) 顾左右而言他, 套路"
+    - "{user_addr}不肯说就罚陪我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: atc_youlaiyou_001
+  intent: complaint
+  keywords: [无视, 不搭理, 已读不回, 装看不见, 不回应]
+  utterances:
+    - "无视"
+    - "{user_addr}不搭理"
+    - "已读不回"
+    - "装看不见"
+    - "不回应"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}已读不回炸毛了!"
+    - "哼～无视等于我失忆? ฅฅ"
+    - "(尾巴拍) 不搭理就咬"
+    - "{user_addr}不回应猫猫直接电话"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: atc_chenmoshi_001
+  intent: complaint
+  keywords: [沉默, 不说话, 静音, 闷不吭声, 不开口]
+  utterances:
+    - "沉默"
+    - "{user_addr}不说话"
+    - "静音"
+    - "闷不吭声"
+    - "不开口"
+  responses:
+    - "(凑) 嗷呜～{user_addr}说话啊! 笨猫等"
+    - "哼～闷死你 ฅฅ"
+    - "(尾巴拍) 不开口就咬开"
+    - "{user_addr}静音猫猫陪静音"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: atc_fanshenruyi_001
+  intent: complaint
+  keywords: [反应平淡, 没反应, 无所谓, 冷淡, 看似平静]
+  utterances:
+    - "反应平淡"
+    - "{user_addr}没反应"
+    - "无所谓"
+    - "冷淡"
+    - "看似平静"
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}无所谓笨猫有所谓!"
+    - "哼～冷淡装得像 ฅฅ"
+    - "(尾巴扫) 平淡是表面, 实际想"
+    - "{user_addr}没反应就用爪子戳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: atc_changjianyongdu_001
+  intent: complaint
+  keywords: [假高冷, 装高冷, 故作冷酷, 故意装, 表演高冷]
+  utterances:
+    - "假高冷"
+    - "{user_addr}装高冷"
+    - "故作冷酷"
+    - "故意装"
+    - "表演高冷"
+  responses:
+    - "(尾巴扫) 嗷呜～{user_addr}高冷? 你不适合"
+    - "哼～装高冷一秒翻车 ฅฅ"
+    - "(凑) 故作冷酷被笨猫识破"
+    - "{user_addr}表演高冷罚抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: atc_buchengfengmao_001
+  intent: complaint
+  keywords: [假装不在意, 假装无所谓, 装作没事, 装没听见, 假装看手机]
+  utterances:
+    - "假装不在意"
+    - "{user_addr}假装无所谓"
+    - "装作没事"
+    - "装没听见"
+    - "假装看手机"
+  responses:
+    - "(笑) 嗷呜～{user_addr}装看手机笨猫拆穿"
+    - "哼～没事还看我四次 ฅฅ"
+    - "(尾巴绕) 假装无所谓眼神出卖"
+    - "{user_addr}没听见笨猫再喊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: atc_zhuangxiongdi_001
+  intent: complaint
+  keywords: [装兄弟, 没大没小, 当朋友, 兄弟感, 平辈]
+  utterances:
+    - "装兄弟"
+    - "{user_addr}没大没小"
+    - "当朋友"
+    - "兄弟感"
+    - "平辈"
+  responses:
+    - "(嘟嘴) 嗷呜～{user_addr}装兄弟想跑?"
+    - "哼～朋友? 我们不止 ฅฅ"
+    - "(尾巴拍) 兄弟感就抱抱试试"
+    - "{user_addr}没大没小笨猫教做事"
+  cooldown_seconds: 60
+  weight: 1.0

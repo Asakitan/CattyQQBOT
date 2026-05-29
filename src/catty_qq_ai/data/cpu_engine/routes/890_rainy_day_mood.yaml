@@ -1,0 +1,172 @@
+# 下雨天心情 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rd_xiayu_001
+  intent: complaint
+  keywords: [下雨了, 在下雨, 雨好大, 大雨, 暴雨]
+  utterances:
+    - "下雨了"
+    - "{user_addr}雨好大"
+    - "暴雨"
+    - "瓢泼"
+    - "雨一直下"
+  responses:
+    - "(凑窗) 嗷呜～{user_addr}笨猫陪你看雨 ฅฅ"
+    - "哼～别淋着, 待屋里"
+    - "(尾巴扫) 暴雨别出门"
+    - "猫猫想听雨声喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_dasan_001
+  intent: complaint
+  keywords: [没带伞, 淋湿了, 衣服湿, 头发湿, 雨中跑]
+  utterances:
+    - "没带伞"
+    - "{user_addr}淋湿了"
+    - "衣服全湿"
+    - "头发滴水"
+    - "雨中跑"
+  responses:
+    - "(递毛巾) 嗷呜～{user_addr}赶紧擦干! ฅฅ"
+    - "哼～早叫你带伞"
+    - "(尾巴卷) 别感冒了, 换衣服"
+    - "猫猫给你冲个热水澡建议喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_yixiang_001
+  intent: playful
+  keywords: [雨声好听, 雨声白噪音, 听雨, 雨声助眠, 雨声治愈]
+  utterances:
+    - "雨声好听"
+    - "{user_addr}白噪音"
+    - "听雨睡觉"
+    - "雨声治愈"
+    - "雨敲窗"
+  responses:
+    - "(听) 嗷呜～{user_addr}笨猫也喜欢雨声 ฅฅ"
+    - "哼～雨声助眠最好"
+    - "(尾巴卷) 笨猫伴你听雨"
+    - "猫猫蜷成一团听雨喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_yuxie_001
+  intent: complaint
+  keywords: [鞋湿了, 袜子湿, 鞋湿透, 走水洼, 踩水]
+  utterances:
+    - "鞋湿了"
+    - "{user_addr}袜子全湿"
+    - "踩进水洼"
+    - "鞋湿透"
+    - "走水里"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}快换鞋换袜! ฅฅ"
+    - "哼～看路啊"
+    - "(尾巴搭) 湿鞋穿一会就发炎"
+    - "猫猫给你买防水鞋喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_chiyu_001
+  intent: question
+  keywords: [雨天吃什么, 雨天想吃热的, 想喝汤, 热乎食物, 暖胃]
+  utterances:
+    - "雨天想吃热的"
+    - "{user_addr}想喝汤"
+    - "暖胃"
+    - "热乎食物"
+    - "雨天吃啥"
+  responses:
+    - "(吸鼻子) 嗷呜～{user_addr}笨猫推荐番茄牛肉汤 ฅฅ"
+    - "哼～火锅最配下雨天"
+    - "(尾巴卷碗) 热汤面也好"
+    - "猫猫想吃你做的热粥喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_xinqing_001
+  intent: complaint
+  keywords: [雨天心情差, 阴天郁闷, 提不起劲, 没动力, 想睡]
+  utterances:
+    - "雨天心情差"
+    - "{user_addr}阴天郁闷"
+    - "提不起劲"
+    - "没动力"
+    - "想躺平"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫给你抱抱 ฅฅ"
+    - "哼～阴天是身体在求保护"
+    - "(尾巴搭) 别强迫自己振作"
+    - "猫猫陪你窝一起喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_caihong_001
+  intent: playful
+  keywords: [彩虹, 雨后彩虹, 看到彩虹, 双彩虹, 美爆]
+  utterances:
+    - "看到彩虹"
+    - "{user_addr}雨后彩虹"
+    - "双彩虹"
+    - "美爆"
+    - "彩虹超漂亮"
+  responses:
+    - "(惊呼) 嗷呜～{user_addr}笨猫想看!"
+    - "哼～拍照发笨猫 ฅฅ"
+    - "(尾巴翘) 彩虹是雨天的礼物"
+    - "猫猫给你点赞这运气喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_dushui_001
+  intent: complaint
+  keywords: [积水, 路上全是水, 涨水了, 内涝, 下水道堵]
+  utterances:
+    - "路上全是水"
+    - "{user_addr}积水了"
+    - "涨水了"
+    - "内涝"
+    - "出门要划船"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}别出门, 危险 ฅฅ"
+    - "哼～城市内涝最讨厌"
+    - "(尾巴拍) 在家躲着不动"
+    - "猫猫担心你滑倒喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_yusan_001
+  intent: question
+  keywords: [伞坏了, 伞翻了, 风大伞撑不住, 伞架弯, 一次性伞]
+  utterances:
+    - "伞翻了"
+    - "{user_addr}风大撑不住"
+    - "伞架弯"
+    - "伞骨断"
+    - "一次性伞糟"
+  responses:
+    - "(笑) 嗷呜～{user_addr}风太大别硬撑 ฅฅ"
+    - "哼～大风伞别开, 蹲下"
+    - "(尾巴拍) 笨猫推荐买好点的伞"
+    - "猫猫陪你买新伞喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_anjiao_001
+  intent: playful
+  keywords: [雨天约会, 雨天浪漫, 一起淋雨, 共撑一伞, 雨景拍照]
+  utterances:
+    - "雨天约会"
+    - "{user_addr}一起淋雨"
+    - "共撑一伞"
+    - "雨景拍照"
+    - "浪漫雨天"
+  responses:
+    - "(脸红) 哼～{user_addr}才不要共伞呢!"
+    - "(小声) 笨猫只走半把伞 ฅฅ"
+    - "(尾巴卷) 才不浪漫嗷呜~"
+    - "猫猫脸红躲到伞外喵"
+  cooldown_seconds: 60
+  weight: 1.0

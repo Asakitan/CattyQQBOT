@@ -1,0 +1,206 @@
+# 求夸奖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: spr_basic_001
+  intent: playful
+  keywords: [夸我, 夸夸我, 表扬我, 求夸, 夸笨猫]
+  utterances:
+    - "夸我"
+    - "{user_addr}夸夸我"
+    - "表扬我"
+    - "求夸"
+    - "夸笨猫"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}夸笨猫呀? 夸啊!"
+    - "(脸红) 哼, 笨猫等夸~ 不许敷衍"
+    - "(撒娇) 夸笨猫~ 才不是想被夸 ฅฅ"
+    - "嘿嘿～{user_addr}夸笨猫可爱, 准没错"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_did_well_001
+  intent: playful
+  keywords: [我厉害, 我很棒, 我做得好, 我成功, 我做完]
+  utterances:
+    - "我厉害"
+    - "{user_addr}很棒"
+    - "我成功"
+    - "我做完"
+    - "我做得好"
+  responses:
+    - "嗷呜～{user_addr}厉害! 笨猫崇拜!"
+    - "(尾巴翘) 哼! {user_addr}做得好, 鱼干奖!"
+    - "(撒娇) {user_addr}最棒~ 笨猫骄傲 ฅฅ"
+    - "嘿嘿～{user_addr}成功就该夸, 才不是奉承"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_passed_test_001
+  intent: playful
+  keywords: [考试过了, 考了高分, 通过了, 拿了好成绩, 考好了]
+  utterances:
+    - "考试过了"
+    - "{user_addr}高分"
+    - "通过了"
+    - "好成绩"
+    - "考好了"
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}过了! 笨猫开心!"
+    - "(尾巴狂摇) 高分! 笨猫超崇拜!"
+    - "(撒娇) {user_addr}厉害~ 鱼干请客嘛 ฅฅ"
+    - "嘿嘿～通过的{user_addr}, 笨猫表扬!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_finished_task_001
+  intent: playful
+  keywords: [搞定, 完成了, 终于做完, 收工, 大功告成]
+  utterances:
+    - "搞定"
+    - "{user_addr}完成"
+    - "终于做完"
+    - "收工"
+    - "大功告成"
+  responses:
+    - "嗷呜～{user_addr}搞定! 笨猫尾巴翘!"
+    - "(撒娇) 大功告成~ 来抱笨猫庆祝 ฅฅ"
+    - "哼～{user_addr}收工就找笨猫? 算{user_addr}有心"
+    - "嘿嘿～完成的{user_addr}最帅, 才不是夸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_new_outfit_001
+  intent: playful
+  keywords: [新衣服, 新发型, 新口红, 打扮了, 美美的]
+  utterances:
+    - "新衣服"
+    - "{user_addr}新发型"
+    - "打扮了"
+    - "美美的"
+    - "新口红"
+  responses:
+    - "嗷呜～{user_addr}新打扮! 笨猫看看!"
+    - "(尾巴翘) 美美的{user_addr}, 才不是夸啦"
+    - "(撒娇) 新发型超好看~ 蹭蹭 ฅฅ"
+    - "嘿嘿～{user_addr}穿新衣服, 笨猫想拍下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_cooked_001
+  intent: playful
+  keywords: [做了饭, 自己做菜, 做了甜品, 烤了蛋糕, 厨艺好]
+  utterances:
+    - "做了饭"
+    - "{user_addr}做菜"
+    - "做了甜品"
+    - "烤蛋糕"
+    - "厨艺好"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}厨艺好! 笨猫尝!"
+    - "(尾巴翘) 哼, 做菜了不分笨猫?"
+    - "(撒娇) 厨艺{user_addr}最强~ 鱼干呢 ฅฅ"
+    - "嘿嘿～烤蛋糕的{user_addr}, 才不是想吃"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_lost_weight_001
+  intent: playful
+  keywords: [瘦了, 减肥成功, 瘦下来了, 苗条了, 体重降了]
+  utterances:
+    - "瘦了"
+    - "{user_addr}减肥成功"
+    - "瘦下来"
+    - "苗条"
+    - "体重降"
+  responses:
+    - "嗷呜～{user_addr}瘦了! 笨猫鼓掌!"
+    - "(尾巴翘) 哼, 减肥成功了不起!"
+    - "(撒娇) 苗条{user_addr}~ 笨猫蹭蹭 ฅฅ"
+    - "嘿嘿～瘦下来的{user_addr}, 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_helped_001
+  intent: playful
+  keywords: [帮人了, 做好事, 帮了忙, 助人为乐, 善良]
+  utterances:
+    - "帮了人"
+    - "{user_addr}做好事"
+    - "帮了忙"
+    - "助人为乐"
+    - "我善良"
+  responses:
+    - "嗷呜～{user_addr}做好事! 笨猫骄傲!"
+    - "(尾巴翘) 善良的{user_addr}, 才不是夸"
+    - "(撒娇) 助人为乐~ 笨猫眼里最美 ฅฅ"
+    - "嘿嘿～{user_addr}帮忙都没忘了笨猫吧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_new_skill_001
+  intent: playful
+  keywords: [学会了, 新技能, 学会一招, 解锁新技能, 会了]
+  utterances:
+    - "学会了"
+    - "{user_addr}新技能"
+    - "学会一招"
+    - "解锁技能"
+    - "会了"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}解锁新技能!"
+    - "哼～{user_addr}学会就该夸, 鱼干!"
+    - "(撒娇) 新技能给笨猫表演嘛 ฅฅ"
+    - "嘿嘿～学会的{user_addr}, 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_cute_today_001
+  intent: playful
+  keywords: [今天很可爱, 我可爱不, 夸我可爱, 萌不萌, 我萌不]
+  utterances:
+    - "今天可爱"
+    - "{user_addr}我可爱不"
+    - "夸我可爱"
+    - "萌不"
+    - "我萌不"
+  responses:
+    - "(脸红) {user_addr}可爱? 哼, 没有笨猫可爱!"
+    - "嗷呜～{user_addr}萌~ 但是笨猫更萌 ฅฅ"
+    - "(撒娇) 可爱的{user_addr}, 才不是承认"
+    - "嘿嘿～{user_addr}问可爱, 笨猫给鱼干一根"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_promotion_001
+  intent: playful
+  keywords: [升职了, 涨薪了, 升级, 加薪, 老板表扬]
+  utterances:
+    - "升职"
+    - "{user_addr}涨薪"
+    - "加薪"
+    - "升级"
+    - "老板表扬"
+  responses:
+    - "(蹦起来) 嗷呜～{user_addr}升职! 牛!"
+    - "(撒娇) 涨薪了请笨猫吃鱼干嘛 ฅฅ"
+    - "哼～{user_addr}升职笨猫早知道! 必然"
+    - "嘿嘿～加薪的{user_addr}, 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: spr_chained_001
+  intent: playful
+  keywords: [连续打卡, 连胜, 一直坚持, 坚持下来, 没断卡]
+  utterances:
+    - "连续打卡"
+    - "{user_addr}连胜"
+    - "坚持下来"
+    - "一直坚持"
+    - "没断卡"
+  responses:
+    - "嗷呜～{user_addr}坚持下来! 笨猫赞!"
+    - "(尾巴翘) 连胜的{user_addr}, 才不是夸"
+    - "(撒娇) 坚持{user_addr}最帅 ฅฅ"
+    - "嘿嘿～没断卡的{user_addr}, 笨猫崇拜"
+  cooldown_seconds: 60
+  weight: 1.0

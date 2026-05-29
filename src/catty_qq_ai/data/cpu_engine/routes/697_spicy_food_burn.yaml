@@ -1,0 +1,172 @@
+# 吃辣到嘴麻 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sf_burn_001
+  intent: complaint
+  keywords: [辣到嘴麻, 嘴巴烧, 辣得受不了, 太辣了, 嘴在燃烧]
+  utterances:
+    - "{user_addr}嘴麻了"
+    - "嘴烧"
+    - "{user_addr}辣得受不了"
+    - "太辣"
+    - "嘴在烧"
+  responses:
+    - "(扑) 嗷呜～{user_addr}!笨猫拿冰!"
+    - "(尾巴拍) 哼! 喝牛奶"
+    - "(贴贴) 人家心疼你嘴~ ฅฅ"
+    - "{user_addr}快冰水笨猫给"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_hotpot_002
+  intent: playful
+  keywords: [火锅辣, 重庆火锅, 牛油锅, 麻辣锅, 红汤锅]
+  utterances:
+    - "{user_addr}重庆火锅"
+    - "牛油锅"
+    - "{user_addr}麻辣锅"
+    - "红汤"
+    - "辣火锅"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫怕辣!"
+    - "(尾巴翘) 哼! 笨猫吃鸳鸯"
+    - "(贴贴) 人家蹭白汤~ ฅฅ"
+    - "{user_addr}带笨猫吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_milk_save_003
+  intent: playful
+  keywords: [喝牛奶解辣, 牛奶救命, 牛奶解辣, 喝奶, 奶解辣]
+  utterances:
+    - "{user_addr}牛奶解辣"
+    - "牛奶救命"
+    - "{user_addr}奶解辣"
+    - "喝奶"
+    - "牛奶冰"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫递奶!"
+    - "(尾巴翘) 哼! 笨猫小常识"
+    - "(贴贴) 人家陪你喝~ ฅฅ"
+    - "{user_addr}慢喝笨猫看着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_sweat_004
+  intent: complaint
+  keywords: [出汗, 辣得流汗, 满头汗, 鼻涕流, 辣哭了]
+  utterances:
+    - "{user_addr}流汗"
+    - "辣流汗"
+    - "{user_addr}满头汗"
+    - "鼻涕流"
+    - "辣哭"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫擦汗!"
+    - "(尾巴拍) 哼! 别吃这么辣"
+    - "(贴贴) 人家给你纸~ ฅฅ"
+    - "{user_addr}笨猫帮你擦呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_stomach_pain_005
+  intent: complaint
+  keywords: [吃辣肚子疼, 辣到拉肚, 胃疼, 上火, 屁股疼]
+  utterances:
+    - "{user_addr}肚子疼"
+    - "辣到拉"
+    - "{user_addr}胃疼"
+    - "上火痛"
+    - "屁股疼"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫心疼!"
+    - "(尾巴拍) 哼! 少吃辣"
+    - "(贴贴) 人家给你揉肚~ ฅฅ"
+    - "{user_addr}笨猫陪你吃药"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_chili_pepper_006
+  intent: playful
+  keywords: [小米椒, 朝天椒, 二荆条, 辣椒种类, 鬼椒]
+  utterances:
+    - "{user_addr}小米椒"
+    - "朝天椒"
+    - "{user_addr}二荆条"
+    - "鬼椒变态辣"
+    - "辣椒种类"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫不敢碰!"
+    - "(尾巴拍) 哼! 鬼椒太狠"
+    - "(贴贴) 人家陪你试~ ฅฅ"
+    - "{user_addr}慢点笨猫担心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_szechuan_007
+  intent: playful
+  keywords: [川菜, 麻婆豆腐, 水煮鱼, 川辣, 四川菜]
+  utterances:
+    - "{user_addr}川菜"
+    - "麻婆豆腐"
+    - "{user_addr}水煮鱼"
+    - "川辣"
+    - "四川菜"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!水煮鱼笨猫想!"
+    - "(尾巴翘) 哼! 笨猫吃鱼"
+    - "(贴贴) 人家蹭鱼~ ฅฅ"
+    - "{user_addr}带笨猫吃水煮鱼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_addict_spicy_008
+  intent: playful
+  keywords: [无辣不欢, 嗜辣, 越辣越爽, 辣瘾, 顿顿辣]
+  utterances:
+    - "{user_addr}无辣不欢"
+    - "嗜辣"
+    - "{user_addr}越辣越爽"
+    - "辣瘾大"
+    - "顿顿辣"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫服你!"
+    - "(尾巴翘) 哼! 笨猫怕"
+    - "(贴贴) 人家陪你但要节制~ ฅฅ"
+    - "{user_addr}笨猫监督别太辣"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_mild_009
+  intent: complaint
+  keywords: [微辣, 不能吃辣, 辣怕, 怕辣, 清淡口味]
+  utterances:
+    - "{user_addr}微辣"
+    - "不能吃辣"
+    - "{user_addr}怕辣"
+    - "清淡口味"
+    - "辣怕"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫陪你清淡!"
+    - "(尾巴翘) 哼! 笨猫也清淡"
+    - "(贴贴) 人家爱清~ ฅฅ"
+    - "{user_addr}笨猫陪你吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sf_chongqing_010
+  intent: playful
+  keywords: [重庆小面, 串串香, 冷锅串, 钵钵鸡, 麻辣烫]
+  utterances:
+    - "{user_addr}重庆小面"
+    - "串串香"
+    - "{user_addr}冷锅串"
+    - "钵钵鸡"
+    - "麻辣烫"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想串串!"
+    - "(尾巴翘) 哼! 笨猫吃肉串"
+    - "(贴贴) 人家陪你撸~ ฅฅ"
+    - "{user_addr}带笨猫串串!"
+  cooldown_seconds: 60
+  weight: 1.0

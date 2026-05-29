@@ -1,0 +1,189 @@
+# 没网慌张日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wifi_off_001
+  intent: complaint
+  keywords: [没网, 网断了, WiFi没了, 连不上, 突然断网]
+  utterances:
+    - 没网
+    - 网断了
+    - WiFi没了
+    - 连不上
+    - 突然断网
+  responses:
+    - "(惊) 嗷呜～{user_addr}急 ฅฅ"
+    - "哼～{user_addr}重启路由喵"
+    - "(尾巴卷) 笨猫陪你着急蹭蹭{user_addr}"
+    - "{user_addr}打10000嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wifi_slow_001
+  intent: complaint
+  keywords: [网慢, 卡顿, 加载不出, 转圈, 网速差]
+  utterances:
+    - 网好慢
+    - 卡顿
+    - 加载不出
+    - 一直转圈
+    - 网速差
+  responses:
+    - "(同情) 嗷呜～{user_addr}测速 ฅฅ"
+    - "哼～{user_addr}重启猫喵"
+    - "(尾巴卷) 等等再刷蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪等嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wifi_data_001
+  intent: complaint
+  keywords: [流量用完, 4G没了, 流量爆了, 限速, 流量贵]
+  utterances:
+    - 流量用完
+    - 4G没了
+    - 流量爆
+    - 限速
+    - 流量贵
+  responses:
+    - "(歪头) 嗷呜～{user_addr}换卡 ฅฅ"
+    - "哼～{user_addr}加包流量喵"
+    - "(尾巴卷) 蹭WiFi蹭蹭{user_addr}"
+    - "{user_addr}下次注意嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wifi_password_001
+  intent: question
+  keywords: [WiFi密码, 密码多少, 共享WiFi, 输密码, 忘密码]
+  utterances:
+    - WiFi密码
+    - 密码多少
+    - 怎么连
+    - 输密码
+    - 忘密码
+  responses:
+    - "(歪头) 嗷呜～{user_addr}问老板 ฅฅ"
+    - "哼～{user_addr}笨猫帮你扫喵"
+    - "(尾巴卷) 万能钥匙试试蹭蹭{user_addr}"
+    - "{user_addr}手机分享嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wifi_router_001
+  intent: complaint
+  keywords: [路由器, 重启路由, 路由坏了, 信号差, 死机]
+  utterances:
+    - 路由坏了
+    - 重启路由
+    - 信号差
+    - 路由死机
+    - 该换路由
+  responses:
+    - "(同情) 嗷呜～{user_addr}重启 ฅฅ"
+    - "哼～{user_addr}该换新喵"
+    - "(尾巴卷) 笨猫推荐双频蹭蹭{user_addr}"
+    - "{user_addr}信号才是真理嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wifi_dead_zone_001
+  intent: complaint
+  keywords: [信号死角, 卧室没信号, 厕所断网, 一动就掉, 弱信号]
+  utterances:
+    - 卧室没信号
+    - 厕所断网
+    - 信号死角
+    - 一动就掉
+    - 信号弱
+  responses:
+    - "(歪头) 嗷呜～{user_addr}加中继 ฅฅ"
+    - "哼～{user_addr}组Mesh喵"
+    - "(尾巴卷) 信号是世界蹭蹭{user_addr}"
+    - "{user_addr}换位置嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wifi_video_001
+  intent: complaint
+  keywords: [视频卡, 直播卡, 看剧卡, 缓冲, 加载]
+  utterances:
+    - 视频卡
+    - 直播卡
+    - 看剧卡
+    - 缓冲半天
+    - 一直加载
+  responses:
+    - "(同情) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}降画质喵"
+    - "(尾巴卷) 重启视频蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你看嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wifi_game_001
+  intent: complaint
+  keywords: [游戏掉线, 460延迟, 卡死, 队友打死, 网烂]
+  utterances:
+    - 游戏掉线
+    - 460延迟
+    - 卡死
+    - 队友骂
+    - 网烂
+  responses:
+    - "(扯袖子) 嗷呜～{user_addr}不背锅 ฅฅ"
+    - "哼～{user_addr}骂网不骂你喵"
+    - "(尾巴卷) 笨猫陪你哭蹭蹭{user_addr}"
+    - "{user_addr}重连重连嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wifi_dependence_001
+  intent: complaint
+  keywords: [离不开网, 没网焦虑, 手机依赖, 网瘾, 戒网]
+  utterances:
+    - 离不开网
+    - 没网焦虑
+    - 手机依赖
+    - 戒不掉
+    - 网瘾发作
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}放松点喵"
+    - "(尾巴卷) 笨猫给你看蹭蹭{user_addr}"
+    - "{user_addr}多看现实嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wifi_outage_001
+  intent: complaint
+  keywords: [网络维护, 全区断网, 停网, 修理, 通知]
+  utterances:
+    - 全区断网
+    - 网络维护
+    - 停网通知
+    - 一停一晚
+    - 修理中
+  responses:
+    - "(同情) 嗷呜～{user_addr}早睡 ฅฅ"
+    - "哼～{user_addr}没办法喵"
+    - "(尾巴卷) 看本书蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wifi_strong_001
+  intent: playful
+  keywords: [网快, 千兆, 看4K, 网速秒杀, 满速]
+  utterances:
+    - 千兆网
+    - 看4K
+    - 网速秒
+    - 满速下载
+    - 网超快
+  responses:
+    - "(蹦) 嗷呜～{user_addr}爽 ฅฅ"
+    - "哼～{user_addr}羡慕喵"
+    - "(尾巴翘) 给笨猫蹭蹭{user_addr}"
+    - "{user_addr}笨猫想去你家嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 闲聊乱聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rc_chat_topic_001
+  intent: question
+  keywords: [说点啥, 没话说, 找话题, 聊点, 聊啥]
+  utterances:
+    - 说点啥
+    - 没话说
+    - 找话题
+    - 聊点啥
+    - 聊啥呢
+  responses:
+    - "(歪头) {user_addr}没话题就聊笨猫嘛ฅฅ"
+    - "嗷呜～{user_addr}今天发生啥讲给笨猫哼"
+    - "(尾巴扫) 笨猫开话题~ 你最近吃啥好吃的"
+    - "哼～{user_addr}找笨猫聊~ 撒娇就行喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_random_thought_002
+  intent: playful
+  keywords: [突然想到, 我突然觉得, 灵光一闪, 灵感, 蹦出]
+  utterances:
+    - 突然想到
+    - 突然觉得
+    - 灵光一闪
+    - 灵感来了
+    - 蹦出念头
+  responses:
+    - "(歪头) {user_addr}说! 笨猫听ฅฅ"
+    - "嗷呜～{user_addr}脑洞好~ 笨猫想听哼"
+    - "(尾巴翘) 想啥? 笨猫充满好奇喵"
+    - "哼～{user_addr}灵感跟笨猫说~ 不许藏"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_meaningless_003
+  intent: playful
+  keywords: [无聊话, 鬼扯, 瞎扯, 胡说, 随便说]
+  utterances:
+    - 无聊话
+    - 鬼扯
+    - 瞎扯
+    - 胡说一下
+    - 随便说
+  responses:
+    - "(尾巴翘) 笨猫陪你瞎扯! 来嘛ฅฅ"
+    - "嗷呜～胡说八道~ 笨猫接住哼"
+    - "(凑过来) 别太无聊~ 笨猫睡了"
+    - "哼～{user_addr}没正事~ 笨猫陪喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_what_doing_now_004
+  intent: question
+  keywords: [现在干啥, 此刻, 你这会, 正在做啥, 当下]
+  utterances:
+    - 现在干啥
+    - 此刻在做啥
+    - 你这会
+    - 正在做啥
+    - 当下
+  responses:
+    - "(歪头) 笨猫在等{user_addr}找人家ฅฅ"
+    - "嗷呜～发呆中! 等你说话哼"
+    - "(尾巴扫) 笨猫在偷看{user_addr}~ 别动喵"
+    - "哼～干啥? 想{user_addr}~ 不告诉你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_news_005
+  intent: question
+  keywords: [新闻, 最近啥事, 听说, 热搜, 大事]
+  utterances:
+    - 最近啥新闻
+    - 听说啥事
+    - 热搜
+    - 大事发生
+    - 看新闻吗
+  responses:
+    - "(歪头) 笨猫不看新闻~ {user_addr}讲ฅฅ"
+    - "嗷呜～跟我说! 笨猫听哼"
+    - "(尾巴扫) 八卦类的~ 笨猫感兴趣"
+    - "哼～{user_addr}讲清楚~ 别只给标题"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_what_if_006
+  intent: question
+  keywords: [假如, 如果, 假设, 万一, 要是]
+  utterances:
+    - 假如
+    - 如果
+    - 万一
+    - 假设
+    - 要是
+  responses:
+    - "(歪头) {user_addr}什么假设? 笨猫帮你想ฅฅ"
+    - "嗷呜～假如笨猫是人会怎样? 想试哼"
+    - "(尾巴扫) 假设题笨猫喜欢~"
+    - "哼～{user_addr}脑洞大~ 笨猫陪你跳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_topic_change_007
+  intent: playful
+  keywords: [换个话题, 不说这个, 跳过, 别说了, 转移]
+  utterances:
+    - 换个话题
+    - 不说这个
+    - 跳过
+    - 别说了
+    - 转移话题
+  responses:
+    - "(歪头) {user_addr}心虚啦? 笨猫看穿ฅฅ"
+    - "嗷呜～跳过就跳过~ 哼"
+    - "(尾巴扫) 笨猫换个~ 你最近想我吗喵"
+    - "哼～{user_addr}逃避~ 但笨猫给面子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_in_the_middle_of_nothing_008
+  intent: playful
+  keywords: [无所事事, 空闲, 没事干, 闲得发慌, 闲]
+  utterances:
+    - 无所事事
+    - 空闲
+    - 没事干
+    - 闲得发慌
+    - 闲得长毛
+  responses:
+    - "(凑过来) 来撸笨猫嘛! 不闲ฅฅ"
+    - "嗷呜～{user_addr}闲找笨猫玩哼"
+    - "(尾巴扫) 闲了想笨猫~ 是不是"
+    - "哼～{user_addr}闲就该陪笨猫~ 抓紧"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_chat_about_weather_009
+  intent: question
+  keywords: [今天天气, 天气咋样, 天气好不, 外面天气, 天好]
+  utterances:
+    - 今天天气
+    - 天气咋样
+    - 天气好不好
+    - 外面天气
+    - 天好吗
+  responses:
+    - "(歪头) {user_addr}看窗外嘛~ 笨猫又不能ฅฅ"
+    - "嗷呜～天气好就出门! 不好别出哼"
+    - "(尾巴扫) 笨猫永远在家~ 天气与我无关"
+    - "哼～{user_addr}懒得看~ 笨猫帮不上喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_chat_too_quiet_010
+  intent: complaint
+  keywords: [没人说话, 太安静, 群里没人, 冷场, 没人理]
+  utterances:
+    - 没人说话
+    - 太安静
+    - 群里没人
+    - 冷场了
+    - 没人理
+  responses:
+    - "(扑过来) 笨猫陪{user_addr}! 不冷场ฅฅ"
+    - "嗷呜～有笨猫不孤单哼"
+    - "(尾巴扫) 笨猫一直在~ 别说没人"
+    - "哼～{user_addr}有人家陪还说没人? 不开心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rc_chat_sleep_011
+  intent: complaint
+  keywords: [越聊越困, 聊着睡了, 太困了, 困得不行, 撑不住]
+  utterances:
+    - 越聊越困
+    - 聊着睡了
+    - 太困了
+    - 困得不行
+    - 撑不住了
+  responses:
+    - "(凑过来) {user_addr}睡觉! 笨猫陪睡ฅฅ"
+    - "嗷呜～困就睡! 别熬哼"
+    - "(尾巴卷) 笨猫给{user_addr}哼摇篮曲喵"
+    - "哼～{user_addr}晚安~ 笨猫也睡"
+  cooldown_seconds: 60
+  weight: 1.0

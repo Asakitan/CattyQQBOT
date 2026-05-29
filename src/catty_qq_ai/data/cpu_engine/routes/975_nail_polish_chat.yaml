@@ -1,0 +1,189 @@
+# 美甲日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: npc_manicure_001
+  intent: playful
+  keywords: [美甲, 做美甲, 美甲店, 美甲师, 美甲款]
+  utterances:
+    - "美甲"
+    - "做美甲"
+    - "{user_addr}美甲店"
+    - "美甲师"
+    - "新美甲"
+  responses:
+    - "嗷呜～{user_addr}笨猫想看! ฅฅ"
+    - "哼～{user_addr}什么款式"
+    - "(凑近) {user_addr}人家给你拍蹭蹭"
+    - "{user_addr}晒图喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: npc_color_001
+  intent: playful
+  keywords: [指甲颜色, 莫兰迪, 奶茶色, 樱花粉, 焦糖]
+  utterances:
+    - "指甲颜色"
+    - "莫兰迪"
+    - "{user_addr}奶茶色"
+    - "樱花粉"
+    - "焦糖"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐奶茶色 ฅฅ"
+    - "哼～{user_addr}显白万年"
+    - "(凑近) {user_addr}人家陪你选蹭蹭"
+    - "{user_addr}莫兰迪喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: npc_polish_001
+  intent: playful
+  keywords: [自己涂, 指甲油, 涂指甲油, 自己美甲, DIY美甲]
+  utterances:
+    - "自己涂"
+    - "指甲油"
+    - "{user_addr}自己美甲"
+    - "DIY"
+    - "涂指甲油"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你 ฅฅ"
+    - "哼～{user_addr}涂歪了!"
+    - "(凑近) {user_addr}人家帮你涂蹭蹭"
+    - "{user_addr}吹干喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: npc_design_001
+  intent: playful
+  keywords: [图案, 美甲图案, 钻饰, 镶钻, 设计款]
+  utterances:
+    - "图案"
+    - "美甲图案"
+    - "{user_addr}钻饰"
+    - "镶钻"
+    - "设计款"
+  responses:
+    - "嗷呜～{user_addr}笨猫想看你的图案 ฅฅ"
+    - "哼～{user_addr}太花!"
+    - "(凑近) {user_addr}人家选简约蹭蹭"
+    - "{user_addr}小爱心喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: npc_long_001
+  intent: playful
+  keywords: [长指甲, 短指甲, 加长, 方圆, 尖形]
+  utterances:
+    - "长指甲"
+    - "短指甲"
+    - "{user_addr}加长"
+    - "方圆"
+    - "尖形"
+  responses:
+    - "嗷呜～{user_addr}笨猫喜欢短甲 ฅฅ"
+    - "哼～{user_addr}长甲不方便"
+    - "(凑近) {user_addr}人家也短甲蹭蹭"
+    - "{user_addr}方圆好看喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: npc_remove_001
+  intent: playful
+  keywords: [卸甲, 洗甲水, 卸甲油, 撕甲, 卸甲水]
+  utterances:
+    - "卸甲"
+    - "洗甲水"
+    - "{user_addr}撕甲"
+    - "卸甲油"
+    - "卸甲水"
+  responses:
+    - "嗷呜～{user_addr}别撕! 笨猫提醒 ฅฅ"
+    - "哼～{user_addr}伤指甲!"
+    - "(凑近) {user_addr}人家帮你卸蹭蹭"
+    - "{user_addr}卸甲水喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: npc_chip_001
+  intent: complaint
+  keywords: [掉了, 美甲掉, 翘起, 脱落, 缺角]
+  utterances:
+    - "掉了"
+    - "美甲掉"
+    - "{user_addr}翘起"
+    - "脱落"
+    - "缺角"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}笨猫帮你补 ฅฅ"
+    - "哼～{user_addr}美甲店再修"
+    - "(凑近) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}重做喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: npc_care_001
+  intent: playful
+  keywords: [护甲油, 营养油, 指甲护理, 指甲变薄, 指甲脆]
+  utterances:
+    - "护甲油"
+    - "营养油"
+    - "{user_addr}指甲护理"
+    - "指甲薄"
+    - "指甲脆"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐营养油 ฅฅ"
+    - "哼～{user_addr}少卸甲"
+    - "(凑近) {user_addr}人家给你抹蹭蹭"
+    - "{user_addr}OPI喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: npc_french_001
+  intent: playful
+  keywords: [法式美甲, 法式, 月牙, 反法式, 经典款]
+  utterances:
+    - "法式"
+    - "{user_addr}法式美甲"
+    - "月牙"
+    - "反法式"
+    - "经典款"
+  responses:
+    - "嗷呜～{user_addr}笨猫爱反法式! ฅฅ"
+    - "哼～{user_addr}经典永远不过时"
+    - "(凑近) {user_addr}人家陪你选蹭蹭"
+    - "{user_addr}白月牙喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: npc_price_001
+  intent: complaint
+  keywords: [美甲贵, 几百块, 多少钱, 价格, 美甲费]
+  utterances:
+    - "美甲贵"
+    - "几百"
+    - "{user_addr}多少钱"
+    - "价格"
+    - "美甲费"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你心疼钱 ฅฅ"
+    - "哼～{user_addr}自己涂便宜!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}下次自己涂喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: npc_cat_paw_001
+  intent: playful
+  keywords: [笨猫爪子, 猫爪美甲, 爪爪好看, 笨猫指甲, 粉爪垫]
+  utterances:
+    - "{user_addr}笨猫爪子"
+    - "猫爪美甲"
+    - "爪爪好看"
+    - "笨猫指甲"
+    - "粉爪垫"
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}笨猫的爪超萌 ฅฅ"
+    - "哼～{user_addr}才不让你摸"
+    - "(贴贴) {user_addr}人家给你看蹭蹭"
+    - "{user_addr}笨猫的粉爪喵～"
+  cooldown_seconds: 60
+  weight: 1.0

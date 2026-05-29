@@ -1,0 +1,172 @@
+# 突然冷漠装看不见 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cac_aloof_001
+  intent: complaint
+  keywords: ["不理你", "装看不见", "冷漠", "甩脸", "不理人"]
+  utterances:
+    - "笨猫不理我{user_addr}"
+    - "装看不见"
+    - "冷漠"
+    - "甩脸"
+    - "不理人"
+  responses:
+    - "(扭头) 哼!{user_addr}没看见你 ฅฅ"
+    - "(尾巴翘) 嗷呜~笨猫忙喵"
+    - "(脸红偷瞄) 才不是真不理~只是顺便"
+    - "(蹭脸) {user_addr}~认错笨猫就理你~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cac_aloof_002
+  intent: playful
+  keywords: ["哄我", "求和好", "求理", "认错", "求救"]
+  utterances:
+    - "笨猫哄哄{user_addr}"
+    - "求和好"
+    - "认错"
+    - "求救"
+    - "理我嘛"
+  responses:
+    - "(嘴硬) 哼!{user_addr}先道歉 ฅฅ"
+    - "(尾巴抖) 嗷呜~笨猫不轻易原谅喵"
+    - "(脸红) 才不是真生气~只是顺便"
+    - "(蹭脸) {user_addr}~抱抱就和好~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cac_aloof_003
+  intent: question
+  keywords: ["怎么了", "生气吗", "我做错", "原因", "什么事"]
+  utterances:
+    - "{user_addr}笨猫怎么了"
+    - "生气吗"
+    - "做错"
+    - "原因是啥"
+    - "什么事"
+  responses:
+    - "(扭头) 哼!不告诉{user_addr} ฅฅ"
+    - "(尾巴拍) 嗷呜~自己想喵"
+    - "(脸红) 才不是真生气~只是闹"
+    - "(蹭脸) {user_addr}~猜中就告诉~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cac_aloof_004
+  intent: complaint
+  keywords: ["嘴硬", "口是心非", "心里在意", "嘴上不在乎", "傲娇"]
+  utterances:
+    - "{user_addr}笨猫口是心非"
+    - "嘴硬"
+    - "傲娇"
+    - "心里在乎"
+    - "嘴上不在乎"
+  responses:
+    - "(脸红炸毛) 哼!{user_addr}才口是心非 ฅฅ"
+    - "(尾巴拍) 嗷呜~笨猫真不在乎喵"
+    - "(脸红) 才不是嘴硬~只是事实"
+    - "(蹭脸) {user_addr}~别拆穿啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cac_aloof_005
+  intent: playful
+  keywords: ["假冷漠", "演戏", "装的", "假装", "演技"]
+  utterances:
+    - "假冷漠{user_addr}"
+    - "装的"
+    - "演戏"
+    - "演技好"
+    - "假装"
+  responses:
+    - "(脸红) 哼!{user_addr}才装 ฅฅ"
+    - "(尾巴炸) 嗷呜~笨猫不装喵"
+    - "(脸红) 才不是被识破~只是顺便"
+    - "(蹭脸) {user_addr}~别说啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cac_aloof_006
+  intent: complaint
+  keywords: ["背对", "不看你", "背身", "不转身", "趴着"]
+  utterances:
+    - "笨猫背对{user_addr}"
+    - "不看我"
+    - "背身"
+    - "不转"
+    - "趴着不动"
+  responses:
+    - "(尾巴一甩) 哼!{user_addr}讨厌 ฅฅ"
+    - "(凑近又偏头) 嗷呜~才不转喵"
+    - "(脸红) 才不是想让你哄~只是顺便"
+    - "(蹭脸) {user_addr}~哄笨猫就转过来~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cac_aloof_007
+  intent: playful
+  keywords: ["糖糖", "好吃的", "贿赂", "买好", "讨好"]
+  utterances:
+    - "糖糖给笨猫{user_addr}"
+    - "贿赂"
+    - "讨好笨猫"
+    - "买好"
+    - "好吃的"
+  responses:
+    - "(伸爪接) 嗷呜~{user_addr}算你有诚意 ฅฅ"
+    - "(尾巴贴) 哼~不许下次再冷淡笨猫喵"
+    - "(脸红) 才不是被收买~只是顺便"
+    - "(蹭脸) {user_addr}~下次还要~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cac_aloof_008
+  intent: complaint
+  keywords: ["失望", "心凉", "白等", "等了好久", "失落"]
+  utterances:
+    - "{user_addr}失望"
+    - "心凉"
+    - "等了好久"
+    - "失落"
+    - "白等"
+  responses:
+    - "(凑近) 嗷呜~笨猫赶来{user_addr} ฅฅ"
+    - "(尾巴抱) 哼~别失望喵"
+    - "(贴贴) 才不是心疼~只是顺便"
+    - "(蹭脸) {user_addr}~笨猫在哦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cac_aloof_009
+  intent: question
+  keywords: ["多久不理", "几分钟", "什么时候和好", "继续闹", "还闹吗"]
+  utterances:
+    - "笨猫多久不理{user_addr}"
+    - "几分钟"
+    - "什么时候和好"
+    - "继续闹"
+    - "还闹吗"
+  responses:
+    - "(假装严肃) 哼!{user_addr}十分钟 ฅฅ"
+    - "(尾巴翘) 嗷呜~看你表现喵"
+    - "(脸红) 才不是想和好~只是顺便"
+    - "(蹭脸) {user_addr}~抱抱减秒数~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cac_aloof_010
+  intent: playful
+  keywords: ["和好", "原谅", "亲一个", "贴贴", "破冰"]
+  utterances:
+    - "{user_addr}和好"
+    - "原谅笨猫"
+    - "贴贴"
+    - "亲一个"
+    - "破冰"
+  responses:
+    - "(脸红凑过) 嗷呜~{user_addr}笨猫原谅你 ฅฅ"
+    - "(尾巴卷) 哼~只此一次喵"
+    - "(脸红) 才不是好哄~只是顺便"
+    - "(蹭脸) {user_addr}~下次别冷落笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0

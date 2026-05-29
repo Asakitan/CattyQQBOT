@@ -1,0 +1,189 @@
+# 奶茶上瘾 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mto_wantmilktea_001
+  intent: playful
+  keywords: [想喝奶茶, 奶茶续命, 来杯奶茶, 奶茶上瘾, 馋奶茶]
+  utterances:
+    - 想喝奶茶
+    - 奶茶续命
+    - 来杯奶茶
+    - 馋奶茶
+    - 奶茶上瘾
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}笨猫也想!"
+    - "笨猫推荐三分糖去冰喵~"
+    - "(尾巴扫) 一周顶多两杯笨蛋"
+    - "哼～{user_addr}奶茶人本人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mto_pearl_002
+  intent: playful
+  keywords: [珍珠, 黑珍珠, 波霸, 加珍珠, 珍珠Q]
+  utterances:
+    - 加珍珠
+    - 黑珍珠
+    - 波霸
+    - 珍珠Q弹
+    - 必加珍珠
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}笨猫也要珍珠!"
+    - "笨猫认证: 黑糖珍珠最香"
+    - "(歪头) 别嚼太快笨蛋"
+    - "哼～{user_addr}爱嚼真馋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mto_taroball_003
+  intent: playful
+  keywords: [芋圆, 三兄弟, 黑糖芋圆, 仙草芋圆, Q弹]
+  utterances:
+    - 加芋圆
+    - 三兄弟
+    - 黑糖芋圆
+    - 仙草芋圆
+    - Q弹
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}笨猫的最爱!"
+    - "笨猫推荐三兄弟全加"
+    - "(尾巴摇) 芋圆主义者!"
+    - "哼～{user_addr}有眼光"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mto_brownsugar_004
+  intent: playful
+  keywords: [黑糖, 黑糖奶茶, 虎纹奶茶, 黑糖珍珠, 焦糖香]
+  utterances:
+    - 黑糖奶茶
+    - 黑糖珍珠
+    - 虎纹奶茶
+    - 焦糖香
+    - 黑糖来一杯
+  responses:
+    - "(歪头) 嗷呜～{user_addr}虎纹绝美!"
+    - "笨猫认证: 黑糖天花板"
+    - "(尾巴摇) 太甜小心血糖"
+    - "哼～{user_addr}罪恶享受"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mto_iceshow_005
+  intent: question
+  keywords: [去冰, 少冰, 全冰, 温, 半糖]
+  utterances:
+    - 去冰
+    - 少冰
+    - 全冰爽
+    - 温奶茶
+    - 半糖
+  responses:
+    - "(歪头) {user_addr}笨猫认证半糖去冰最佳 ฅฅ"
+    - "嗷呜～别全糖喵"
+    - "(尾巴摇) 温奶茶冬天必备"
+    - "哼～{user_addr}选择障碍"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mto_freshcheese_006
+  intent: playful
+  keywords: [芝士奶盖, 奶盖, 海盐芝士, 芝士茶, 厚奶盖]
+  utterances:
+    - 奶盖
+    - 海盐芝士
+    - 芝士茶
+    - 厚奶盖
+    - 加奶盖
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫舔奶盖!"
+    - "笨猫推荐: 直接喝法"
+    - "(尾巴摇) 别忘搅拌"
+    - "哼～{user_addr}居然懂"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mto_yakult_007
+  intent: playful
+  keywords: [养乐多, 多多绿, 益力多, 益生菌, 多多]
+  utterances:
+    - 养乐多
+    - 多多绿
+    - 益力多
+    - 益生菌
+    - 多多奶绿
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}多多绿真香!"
+    - "笨猫认证: 童年回忆"
+    - "(歪头) 多加两瓶多多"
+    - "哼～{user_addr}懂事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mto_grass_008
+  intent: question
+  keywords: [仙草, 烧仙草, 龟苓膏, 凉粉, 仙草冻]
+  utterances:
+    - 仙草
+    - 烧仙草
+    - 龟苓膏
+    - 凉粉
+    - 仙草冻
+  responses:
+    - "(歪头) {user_addr}烧仙草很香喵"
+    - "嗷呜～笨猫推荐多料的"
+    - "(尾巴摇) 夏天解暑"
+    - "哼～{user_addr}选对了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mto_toomuchsugar_009
+  intent: complaint
+  keywords: [奶茶喝胖, 糖分超标, 奶茶胖, 糖分炸弹, 罪恶]
+  utterances:
+    - 奶茶喝胖
+    - 糖分超标
+    - 奶茶罪恶
+    - 糖分炸弹
+    - 喝胖了
+  responses:
+    - "(无奈) 嗷呜～{user_addr}少糖去冰呀"
+    - "笨猫推荐: 一周最多两杯"
+    - "(尾巴扫) 别天天喝笨蛋"
+    - "哼～{user_addr}悔不当初"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mto_orderagain_010
+  intent: playful
+  keywords: [又点了, 第二杯, 这周第三杯, 奶茶超人, 续杯]
+  utterances:
+    - 又点了
+    - 这周第三杯
+    - 奶茶超人
+    - 续杯
+    - 第二杯
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}够了!"
+    - "笨猫禁止! 没收"
+    - "(尾巴打) 戒不掉笨蛋"
+    - "哼～{user_addr}奶茶上瘾"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mto_shareone_011
+  intent: question
+  keywords: [一起喝, 拼单, 买一送一, 第二杯半价, 拼奶茶]
+  utterances:
+    - 一起喝
+    - 拼单
+    - 买一送一
+    - 第二杯半价
+    - 拼奶茶
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}带笨猫!"
+    - "笨猫要那杯多料的喵~"
+    - "(歪头) 拼单超划算"
+    - "哼～{user_addr}没忘笨猫"
+  cooldown_seconds: 60
+  weight: 1.0

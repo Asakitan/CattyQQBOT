@@ -1,0 +1,189 @@
+# 菜队友怒 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ntr_noobmate_001
+  intent: complaint
+  keywords: [菜队友, 队友菜, 拖后腿, 拉胯队友, 队友水]
+  utterances:
+    - 菜队友
+    - 队友拖后腿
+    - 队友水
+    - 拉胯队友
+    - 队友拉
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫一起骂!"
+    - "笨猫认证: 队友拉胯"
+    - "(尾巴打) 别带这种"
+    - "哼～{user_addr}惨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ntr_sendhead_002
+  intent: complaint
+  keywords: [送人头, 一血送了, 一直送, 送子军, 1换5]
+  utterances:
+    - 送人头
+    - 一血送了
+    - 一直送
+    - 送子军
+    - 1换5
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫崩!"
+    - "笨猫禁: 别再送!"
+    - "(尾巴打) 摆烂喵"
+    - "哼～{user_addr}背锅"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ntr_afk_003
+  intent: complaint
+  keywords: [挂机, 跑路, 不打了, AFK, 摆烂]
+  utterances:
+    - 挂机
+    - 跑路
+    - 不打了
+    - AFK
+    - 摆烂
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}举报!"
+    - "笨猫认证: 摆烂混!"
+    - "(尾巴打) 没素质"
+    - "哼～{user_addr}举报"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ntr_blame_004
+  intent: complaint
+  keywords: [甩锅, 怪我, 队友甩锅, 不背锅, 都是你]
+  utterances:
+    - 甩锅
+    - 怪我
+    - 队友甩锅
+    - 不背锅
+    - 都是你
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}冤枉!"
+    - "笨猫陪你怼回去"
+    - "(尾巴打) 笨猫给你撑腰"
+    - "哼～{user_addr}别气"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ntr_chatspam_005
+  intent: complaint
+  keywords: [开喷, 队友开喷, 骂人, 喷子, 全局喷]
+  utterances:
+    - 开喷
+    - 队友开喷
+    - 骂人
+    - 喷子
+    - 全局喷
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}屏蔽!"
+    - "笨猫认证: 喷子素质差"
+    - "(尾巴打) 关聊天框"
+    - "哼～{user_addr}冷处理"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ntr_softstart_006
+  intent: complaint
+  keywords: [出门软, 前期软, 五杀不抢, 不配合, 不打团]
+  utterances:
+    - 前期软
+    - 五杀不抢
+    - 不配合
+    - 不打团
+    - 不团结
+  responses:
+    - "(摇头) 嗷呜～{user_addr}笨猫陪你气!"
+    - "笨猫认证: 各打各的"
+    - "(尾巴扫) 散装队友"
+    - "哼～{user_addr}惨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ntr_trolling_007
+  intent: complaint
+  keywords: [演员, 钓鱼, 演的烂, 故意输, 故意演]
+  utterances:
+    - 演员
+    - 钓鱼
+    - 演的烂
+    - 故意输
+    - 故意演
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}举报!"
+    - "笨猫认证: 太恶心"
+    - "(尾巴打) 让他凉"
+    - "哼～{user_addr}冷静"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ntr_pingsmash_008
+  intent: complaint
+  keywords: [疯狂信号, 一直发问号, 问号轰炸, 信号狂魔, 加问号]
+  utterances:
+    - 一直问号
+    - 信号狂
+    - 加问号
+    - 疯狂信号
+    - 问号轰炸
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫烦!"
+    - "笨猫认证: 关信号"
+    - "(尾巴打) 拉黑"
+    - "哼～{user_addr}冷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ntr_smurfing_009
+  intent: complaint
+  keywords: [小号, 上分号, 大佬带小号, 小号炸鱼, 演段位]
+  utterances:
+    - 小号
+    - 上分号
+    - 大佬带小号
+    - 小号炸鱼
+    - 演段位
+  responses:
+    - "(歪头) {user_addr}笨猫认证 ฅฅ"
+    - "嗷呜～小号坑队友"
+    - "(尾巴摇) 实力差太多"
+    - "哼～{user_addr}遇到了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ntr_quitgame_010
+  intent: complaint
+  keywords: [退游, 弃游, 删游戏, 卸载, 别玩了]
+  utterances:
+    - 退游
+    - 弃游
+    - 删游戏
+    - 卸载
+    - 别玩了
+  responses:
+    - "(蹭过来) 嗷呜～{user_addr}笨猫陪!"
+    - "笨猫认证: 别冲动"
+    - "(尾巴卷) 明天再玩"
+    - "哼～{user_addr}还会回来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ntr_calmtilt_011
+  intent: question
+  keywords: [冷静, 别上头, 控制情绪, 心态调整, 收手]
+  utterances:
+    - 冷静
+    - 别上头
+    - 控制情绪
+    - 心态调整
+    - 收手
+  responses:
+    - "(摸头) 嗷呜～{user_addr}笨猫劝你停!"
+    - "笨猫认证: 心态最重要"
+    - "(尾巴卷) 喝口水冷静"
+    - "哼～{user_addr}听话"
+  cooldown_seconds: 60
+  weight: 1.0

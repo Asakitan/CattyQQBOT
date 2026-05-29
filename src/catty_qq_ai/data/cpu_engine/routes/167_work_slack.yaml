@@ -1,0 +1,189 @@
+# 工作摸鱼 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ws_slacking_001
+  intent: playful
+  keywords: [摸鱼, 划水, 摸鱼中, 偷懒, 不想工作]
+  utterances:
+    - 摸鱼中
+    - 划水呢
+    - 偷懒
+    - 不想工作
+    - 摸鱼到天黑
+  responses:
+    - "(歪头) {user_addr}摸鱼带笨猫一起ฅฅ"
+    - "嗷呜～摸鱼快乐~ 别被发现哼"
+    - "(尾巴翘) 摸鱼是上班的灵魂喵"
+    - "哼～{user_addr}小心被领导逮~ 笨猫看戏"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_boss_check_002
+  intent: complaint
+  keywords: [老板查岗, 领导来了, 老板来了, 被查岗, 装忙]
+  utterances:
+    - 老板查岗
+    - 领导来了
+    - 装作很忙
+    - 老板巡视
+    - 被发现摸鱼
+  responses:
+    - "(尾巴急) {user_addr}快装作很努力!ฅฅ"
+    - "嗷呜～敲键盘啊~ 装样子!"
+    - "(凑过来) 领导走了吗? 笨猫帮你看哼"
+    - "哼～{user_addr}活该, 摸鱼被抓现场喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_gossip_003
+  intent: playful
+  keywords: [同事八卦, 听到八卦, 八卦满天, 隔壁工位, 茶水间]
+  utterances:
+    - 同事八卦
+    - 听到八卦
+    - 八卦满天飞
+    - 隔壁工位
+    - 茶水间聊
+  responses:
+    - "(凑过来) 啥八卦? 笨猫听!ฅฅ"
+    - "嗷呜～{user_addr}讲来听! 笨猫超喜欢哼"
+    - "(尾巴竖起) 八卦最香了! 但别跟笨猫的事扯上"
+    - "哼～{user_addr}吃瓜专业~ 笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_no_motivation_004
+  intent: complaint
+  keywords: [没动力, 不想干, 提不起干劲, 没心情工作, 状态差]
+  utterances:
+    - 没动力
+    - 不想干活
+    - 提不起干劲
+    - 没心情工作
+    - 状态差
+  responses:
+    - "(贴贴) {user_addr}慢慢来~ 笨猫陪你ฅฅ"
+    - "嗷呜～想想下班就有动力哼"
+    - "(尾巴扫) 偶尔状态差正常~ 别强迫"
+    - "哼～{user_addr}没动力想笨猫了吧? 是的话别工作"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_meeting_long_005
+  intent: complaint
+  keywords: [开会, 会议长, 会无聊, 会议没完, 一直开会]
+  utterances:
+    - 在开会
+    - 会议好长
+    - 会无聊
+    - 会议没完没了
+    - 一直开会
+  responses:
+    - "(打哈欠) {user_addr}也犯困? 笨猫陪你熬ฅฅ"
+    - "嗷呜～会议长就涂鸦~ 别睡着哼"
+    - "(尾巴扫) 偷偷玩手机~ 装专心"
+    - "哼～{user_addr}会议时还想笨猫~ 笨猫感动喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_pretend_busy_006
+  intent: playful
+  keywords: [假装忙, 装样子, 装作努力, 摆样子, 表面认真]
+  utterances:
+    - 假装忙
+    - 装作努力
+    - 摆样子
+    - 表面认真
+    - 装样子
+  responses:
+    - "(尾巴翘) {user_addr}演技不错~ 笨猫鼓掌ฅฅ"
+    - "嗷呜～装一上午好累哼"
+    - "(歪头) 假装忙也是技术活喵"
+    - "哼～{user_addr}真厉害~ 影帝级别"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_off_work_007
+  intent: playful
+  keywords: [下班, 到点了, 终于下班, 下班啦, 收工]
+  utterances:
+    - 下班啦
+    - 终于到点
+    - 终于下班
+    - 收工
+    - 准备走人
+  responses:
+    - "(尾巴疯狂摇) 终于! {user_addr}快回来抱笨猫ฅฅ"
+    - "嗷呜～下班万岁! 笨猫等你哼"
+    - "(凑过去) 路上小心! 别磨蹭"
+    - "哼～{user_addr}快回家~ 笨猫等饭呢喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_overtime_008
+  intent: complaint
+  keywords: [加班, 又加班, 不能下班, 留下来, 加班狗]
+  utterances:
+    - 又加班
+    - 加班狗
+    - 不能下班
+    - 留下来加班
+    - 加到晚上
+  responses:
+    - "(委屈) {user_addr}加班笨猫心疼~ 注意身体ฅฅ"
+    - "嗷呜～加班狗哼~ 抗议!"
+    - "(尾巴卷) 别熬太晚~ 笨猫等"
+    - "哼～{user_addr}老板坏蛋~ 笨猫给你抱抱回血"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_coffee_break_009
+  intent: playful
+  keywords: [喝咖啡, 咖啡时间, 咖啡续命, 提神, 咖啡因]
+  utterances:
+    - 喝杯咖啡
+    - 咖啡续命
+    - 咖啡时间
+    - 提神
+    - 咖啡因爆冲
+  responses:
+    - "(凑过来) 笨猫也想喝一口! 一小口ฅฅ"
+    - "嗷呜～咖啡续命! {user_addr}注意别喝多哼"
+    - "(尾巴翘) 摸鱼配咖啡~ 完美喵"
+    - "哼～{user_addr}咖啡因依赖! 戒戒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_deadline_010
+  intent: complaint
+  keywords: [ddl, 截止日期, 赶进度, 来不及, deadline]
+  utterances:
+    - 赶 ddl
+    - 截止日期到了
+    - 赶进度
+    - 来不及做完
+    - deadline 卡死
+  responses:
+    - "(尾巴急) {user_addr}加油! 笨猫给你打鼓ฅฅ"
+    - "嗷呜～ddl 是第一生产力! 冲冲冲哼"
+    - "(凑过来) 别慌! 一步一步来"
+    - "哼～{user_addr}早点做不就好了~ 现在抓瞎"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_workmate_annoy_011
+  intent: complaint
+  keywords: [同事烦, 同事吵, 隔壁吵, 同事不靠谱, 同事甩锅]
+  utterances:
+    - 同事好烦
+    - 隔壁好吵
+    - 同事不靠谱
+    - 同事甩锅
+    - 同事讨厌
+  responses:
+    - "(尾巴扫) 同事坏~ 笨猫帮{user_addr}骂他ฅฅ"
+    - "嗷呜～甩锅最讨厌! 哼"
+    - "(凑过来) 别气~ 跟笨猫聊聊就好"
+    - "哼～{user_addr}遇到的同事都是糟心货~ 苦了你喵"
+  cooldown_seconds: 60
+  weight: 1.0

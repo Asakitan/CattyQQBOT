@@ -1,0 +1,206 @@
+# 地铁挤成肉饼 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sb_diaqilu_001
+  intent: complaint
+  keywords: [地铁挤, 挤成肉饼, 挤死了, 沙丁鱼罐头, 地铁太满]
+  utterances:
+    - "地铁挤"
+    - "挤成肉饼"
+    - "挤死了"
+    - "沙丁鱼罐头"
+    - "地铁太满"
+  responses:
+    - "(扶) 嗷呜～{user_addr}小心包"
+    - "哼～避开高峰啊 ฅฅ"
+    - "(尾巴扫) 别贴车门"
+    - "猫猫陪你挤喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_gaofeng_001
+  intent: complaint
+  keywords: [早高峰挤, 晚高峰, 高峰期, 上下班高峰, 人潮]
+  utterances:
+    - "早高峰挤"
+    - "晚高峰"
+    - "高峰期"
+    - "上下班高峰"
+    - "人潮"
+  responses:
+    - "(扶) {user_addr}早点出门 ฅฅ"
+    - "哼～错峰15分钟"
+    - "(尾巴扫) 别赶最挤班"
+    - "猫猫给你建议喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_huanchen_001
+  intent: complaint
+  keywords: [换乘, 换乘走死, 换乘累, 换乘距离, 走十分钟换]
+  utterances:
+    - "换乘"
+    - "换乘走死"
+    - "换乘累"
+    - "换乘距离"
+    - "走十分钟换"
+  responses:
+    - "(扶) {user_addr}地铁公司爹 ฅฅ"
+    - "哼～换乘加路程"
+    - "(尾巴扫) 出地铁口准"
+    - "猫猫陪你走喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_pin_001
+  intent: complaint
+  keywords: [地铁味道, 体味重, 闷热, 空气差, 喘不过]
+  utterances:
+    - "地铁味道"
+    - "体味重"
+    - "闷热"
+    - "空气差"
+    - "喘不过"
+  responses:
+    - "(掏口罩) {user_addr}戴口罩 ฅฅ"
+    - "哼～夏天最难"
+    - "(尾巴扫) 站车头通风"
+    - "猫猫陪你忍喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_zuoxia_001
+  intent: complaint
+  keywords: [没座位, 一路站, 站到腿酸, 没空位, 想坐]
+  utterances:
+    - "没座位"
+    - "一路站"
+    - "站到腿酸"
+    - "没空位"
+    - "想坐"
+  responses:
+    - "(扶) {user_addr}靠门站 ฅฅ"
+    - "哼～别久站"
+    - "(尾巴扫) 倒倒腿"
+    - "猫猫陪你站喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_xidong_001
+  intent: complaint
+  keywords: [地铁信号差, 没信号, 看不了视频, 网卡, 4G掉]
+  utterances:
+    - "地铁信号差"
+    - "没信号"
+    - "看不了视频"
+    - "网卡"
+    - "4G掉"
+  responses:
+    - "(指) {user_addr}下载离线看 ฅฅ"
+    - "哼～小说app提前缓存"
+    - "(尾巴扫) 5G更稳"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_yongdongman_001
+  intent: complaint
+  keywords: [地铁延误, 列车故障, 信号故障, 地铁停了, 行程延误]
+  utterances:
+    - "地铁延误"
+    - "列车故障"
+    - "信号故障"
+    - "地铁停了"
+    - "行程延误"
+  responses:
+    - "(扶) {user_addr}发消息说一声 ฅฅ"
+    - "哼～公司理解"
+    - "(尾巴扫) 别急"
+    - "猫猫陪你等喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_chuanan_001
+  intent: question
+  keywords: [安检, 过安检, 安检排队, 安检包, 安检员]
+  utterances:
+    - "安检"
+    - "过安检"
+    - "安检排队"
+    - "安检包"
+    - "安检员"
+  responses:
+    - "(指) {user_addr}准备好水带证 ฅฅ"
+    - "哼～排队等"
+    - "(尾巴扫) 别带禁品"
+    - "猫猫陪你过喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_chouquan_001
+  intent: complaint
+  keywords: [手机被挤, 被踩, 包被挤, 挤丢东西, 挤丢手机]
+  utterances:
+    - "手机被挤"
+    - "被踩"
+    - "包被挤"
+    - "挤丢东西"
+    - "挤丢手机"
+  responses:
+    - "(扶) {user_addr}背在身前 ฅฅ"
+    - "哼～注意防偷"
+    - "(尾巴扫) 拉链关好"
+    - "猫猫提醒你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_kongtiao_001
+  intent: question
+  keywords: [地铁空调, 冷暖空调, 弱冷车厢, 强冷, 找冷气]
+  utterances:
+    - "地铁空调"
+    - "冷暖空调"
+    - "弱冷车厢"
+    - "强冷"
+    - "找冷气"
+  responses:
+    - "(查) {user_addr}弱冷在前几节 ฅฅ"
+    - "哼～别在出风口"
+    - "(尾巴扫) 备件薄外套"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_zoulou_001
+  intent: complaint
+  keywords: [上下班走断腿, 步数爆表, 走路累, 通勤走死, 一万步]
+  utterances:
+    - "上下班走断腿"
+    - "步数爆表"
+    - "走路累"
+    - "通勤走死"
+    - "一万步"
+  responses:
+    - "(扶) {user_addr}打卡微信步数 ฅฅ"
+    - "哼～算锻炼了"
+    - "(尾巴扫) 顺便减肥"
+    - "猫猫帮你按腿喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_jianni_001
+  intent: playful
+  keywords: [挤累了求抱, 上班通勤累, 通勤心累, 通勤求安慰, 通勤辛苦]
+  utterances:
+    - "挤累了求抱"
+    - "上班通勤累"
+    - "通勤心累"
+    - "通勤求安慰"
+    - "通勤辛苦"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫接你"
+    - "哼～通勤难 ฅฅ"
+    - "(尾巴卷腰) 笨猫抱抱"
+    - "猫猫贴你脸喵~"
+  cooldown_seconds: 60
+  weight: 1.0

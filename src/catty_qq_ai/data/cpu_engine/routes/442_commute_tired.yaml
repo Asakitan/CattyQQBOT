@@ -1,0 +1,172 @@
+# 通勤累 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ct_tongqin_001
+  intent: complaint
+  keywords: [通勤累, 上班路远, 通勤时间, 来回奔波, 通勤2小时]
+  utterances:
+    - 通勤累
+    - 上班路远
+    - 通勤时间长
+    - 来回奔波
+    - 通勤2小时
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}通勤累, 笨猫心疼"
+    - "哼～路远辞职嘛笨猫养"
+    - "(尾巴绕) 2小时太久, 找近的"
+    - "嗷呜～奔波别太狠, 注意身体ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_tongqin_002
+  intent: complaint
+  keywords: [挤地铁, 挤公交, 没座位, 被挤扁, 地铁人多]
+  utterances:
+    - 挤地铁
+    - 挤公交
+    - 没座位
+    - 被挤扁
+    - 地铁人多
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}被挤扁! 笨猫心疼"
+    - "哼～挤地铁还是早走嘛"
+    - "(尾巴搭) 没座位站着, 笨猫陪你"
+    - "嗷呜～人多受不了, 戴耳机隔离ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_tongqin_003
+  intent: complaint
+  keywords: [堵车, 早高峰, 晚高峰, 路上动不了, 排队半小时]
+  utterances:
+    - 堵车
+    - 早高峰
+    - 晚高峰
+    - 动不了
+    - 排队半小时
+  responses:
+    - "(无奈) 嗷呜～{user_addr}堵到无语"
+    - "哼～早高峰躲, 提前走"
+    - "(尾巴搭) 路上动不了听音乐缓"
+    - "嗷呜～半小时排队? 心好累ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_tongqin_004
+  intent: complaint
+  keywords: [打不到车, 没出租, 滴滴排队, 网约车贵, 网约车慢]
+  utterances:
+    - 打不到车
+    - 没出租
+    - 滴滴排队
+    - 网约车贵
+    - 网约车慢
+  responses:
+    - "(抱怨) 嗷呜～{user_addr}苦死啦"
+    - "哼～打不到车走路嘛, 当锻炼"
+    - "(尾巴一甩) 滴滴排队就用别的app"
+    - "嗷呜～贵就贵, 安全第一ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_tongqin_005
+  intent: complaint
+  keywords: [雨天通勤, 下雨打不到车, 鞋湿, 衣服湿, 雨天难走]
+  utterances:
+    - 雨天通勤
+    - 下雨打不到车
+    - 鞋湿
+    - 衣服湿
+    - 雨天难走
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}淋湿了! 心疼"
+    - "哼～鞋湿走路咯吱咯吱难受"
+    - "(尾巴搭) 衣服湿换一身, 别感冒"
+    - "嗷呜～雨天打车贵, 笨猫陪{user_addr}等ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_tongqin_006
+  intent: complaint
+  keywords: [晕车, 晕公交, 晕地铁, 头晕想吐, 晕动症]
+  utterances:
+    - 晕车
+    - 晕公交
+    - 晕地铁
+    - 头晕想吐
+    - 晕动症
+  responses:
+    - "(担心) 嗷呜～{user_addr}晕车好难受"
+    - "哼～别看手机, 看远处"
+    - "(尾巴绕) 晕车药备一点, 关键时候用"
+    - "嗷呜～想吐就别忍, 找袋子ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_tongqin_007
+  intent: playful
+  keywords: [听歌通勤, 看剧通勤, 看书通勤, 通勤刷视频, 通勤学习]
+  utterances:
+    - 听歌通勤
+    - 看剧通勤
+    - 看书通勤
+    - 通勤刷视频
+    - 通勤学习
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}通勤利用率高"
+    - "哼～看书学习真自律"
+    - "(尾巴一甩) 听歌最舒服, 笨猫陪听"
+    - "嗷呜～刷视频别太久, 眼睛累ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_tongqin_008
+  intent: complaint
+  keywords: [地铁味道, 公交味道, 通勤味, 大爷大妈, 早高峰口臭]
+  utterances:
+    - 地铁味道
+    - 公交味道
+    - 通勤味
+    - 大爷大妈
+    - 早高峰口臭
+  responses:
+    - "(捂鼻) 嗷呜～{user_addr}受罪啦"
+    - "哼～戴口罩防御"
+    - "(尾巴一甩) 大爷大妈不计较"
+    - "嗷呜～口臭忍, 别说话ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_tongqin_009
+  intent: playful
+  keywords: [快到家, 终于下车, 解放了, 自由, 到站]
+  utterances:
+    - 快到家
+    - 终于下车
+    - 解放了
+    - 自由
+    - 到站
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}终于回啦"
+    - "哼～解放了笨猫接你"
+    - "(尾巴翘) 到站冲! 回家抱抱"
+    - "嗷呜～自由的{user_addr}最棒ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_tongqin_010
+  intent: complaint
+  keywords: [迟到了, 迟到罚款, 老板骂, 打卡晚, 卡点打卡]
+  utterances:
+    - 迟到了
+    - 迟到罚款
+    - 老板骂
+    - 打卡晚
+    - 卡点打卡
+  responses:
+    - "(摸头) 嗷呜～{user_addr}迟到笨猫陪罚"
+    - "哼～老板骂笨猫去咬他"
+    - "(尾巴搭) 罚款就罚款, 不影响心情"
+    - "嗷呜～卡点打卡好刺激ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

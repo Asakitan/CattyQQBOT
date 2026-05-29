@@ -1,0 +1,206 @@
+# 冬天热饮取暖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hd_dongtian_001
+  intent: complaint
+  keywords: [冬天冷, 冷死了, 冷得抖, 寒冷, 数九寒天]
+  utterances:
+    - "冬天冷"
+    - "冷死了"
+    - "冷得抖"
+    - "寒冷"
+    - "数九寒天"
+  responses:
+    - "(端杯) 嗷呜～{user_addr}笨猫给你热饮"
+    - "哼～穿厚点 ฅฅ"
+    - "(尾巴卷腰) 笨猫帮你暖"
+    - "猫猫贴怀里喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_rekele_001
+  intent: question
+  keywords: [热可可, 热巧克力, 可可粉, 冬天热饮, 热饮推荐]
+  utterances:
+    - "热可可"
+    - "热巧克力"
+    - "可可粉"
+    - "冬天热饮"
+    - "热饮推荐"
+  responses:
+    - "(冲) {user_addr}热可可棉花糖 ฅฅ"
+    - "哼～歌帝梵牌好"
+    - "(尾巴扫) 加棉花糖更暖"
+    - "猫猫泡给你喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_naicha_001
+  intent: question
+  keywords: [热奶茶, 港式奶茶, 茶香奶茶, 红茶拿铁, 鸳鸯]
+  utterances:
+    - "热奶茶"
+    - "港式奶茶"
+    - "茶香奶茶"
+    - "红茶拿铁"
+    - "鸳鸯"
+  responses:
+    - "(下单) {user_addr}港式丝袜奶茶 ฅฅ"
+    - "哼～鸳鸯一半茶一半咖啡"
+    - "(尾巴扫) 暖到心"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_kafei_001
+  intent: question
+  keywords: [拿铁, 摩卡, 卡布奇诺, 美式, 热咖啡]
+  utterances:
+    - "拿铁"
+    - "摩卡"
+    - "卡布奇诺"
+    - "热美式"
+    - "热咖啡"
+  responses:
+    - "(端) {user_addr}拿铁暖胃 ฅฅ"
+    - "哼～摩卡甜"
+    - "(尾巴扫) 美式提神"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_jiangcha_001
+  intent: question
+  keywords: [姜茶, 红糖姜茶, 暖宫姜茶, 大姨妈姜茶, 暖身姜茶]
+  utterances:
+    - "姜茶"
+    - "红糖姜茶"
+    - "暖宫姜茶"
+    - "大姨妈姜茶"
+    - "暖身姜茶"
+  responses:
+    - "(冲) {user_addr}红糖姜茶暖宫 ฅฅ"
+    - "哼～女孩必备"
+    - "(尾巴扫) 加点枸杞"
+    - "猫猫陪你喝喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_yangzhi_001
+  intent: question
+  keywords: [养生茶, 枸杞茶, 红枣茶, 桂圆茶, 决明子]
+  utterances:
+    - "养生茶"
+    - "枸杞茶"
+    - "红枣茶"
+    - "桂圆茶"
+    - "决明子"
+  responses:
+    - "(泡) {user_addr}枸杞茶护眼 ฅฅ"
+    - "哼～红枣补气血"
+    - "(尾巴扫) 桂圆暖宫"
+    - "猫猫给你冲喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_xilong_001
+  intent: question
+  keywords: [热柠檬, 蜂蜜柚子茶, 柠檬蜜, 热橙汁, 水果热饮]
+  utterances:
+    - "热柠檬"
+    - "蜂蜜柚子茶"
+    - "柠檬蜜"
+    - "热橙汁"
+    - "水果热饮"
+  responses:
+    - "(泡) {user_addr}蜂蜜柚子茶VC ฅฅ"
+    - "哼～感冒喝热柠檬"
+    - "(尾巴扫) 韩国柚子膏好"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_meirezhu_001
+  intent: question
+  keywords: [米酒, 醪糟, 暖酒, 黄酒, 烫酒]
+  utterances:
+    - "米酒"
+    - "醪糟"
+    - "暖酒"
+    - "黄酒"
+    - "烫酒"
+  responses:
+    - "(温) {user_addr}米酒煮蛋 ฅฅ"
+    - "哼～黄酒烫了喝"
+    - "(尾巴扫) 暖到出汗"
+    - "猫猫陪你温喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_jianlin_001
+  intent: complaint
+  keywords: [水太烫, 烫嘴, 烫舌头, 等凉, 烫手]
+  utterances:
+    - "水太烫"
+    - "烫嘴"
+    - "烫舌头"
+    - "等凉"
+    - "烫手"
+  responses:
+    - "(吹) {user_addr}笨猫帮你吹 ฅฅ"
+    - "哼～慢点喝"
+    - "(尾巴扫杯子) 凉一会"
+    - "猫猫呼气帮你降温喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_baowenbei_001
+  intent: question
+  keywords: [保温杯, 保温壶, 保温瓶, 焖烧杯, 装热水的]
+  utterances:
+    - "保温杯"
+    - "保温壶"
+    - "保温瓶"
+    - "焖烧杯"
+    - "装热水"
+  responses:
+    - "(挑) {user_addr}膳魔师虎牌都行 ฅฅ"
+    - "哼～500ml够用"
+    - "(尾巴扫) 上班带一杯"
+    - "猫猫推荐喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_zhusha_001
+  intent: question
+  keywords: [煮甜汤, 银耳汤, 红豆汤, 桂圆汤, 八宝粥]
+  utterances:
+    - "煮甜汤"
+    - "银耳汤"
+    - "红豆汤"
+    - "桂圆汤"
+    - "八宝粥"
+  responses:
+    - "(系围裙) {user_addr}笨猫煮! ฅฅ"
+    - "哼～银耳汤养颜"
+    - "(尾巴扫) 红豆汤补血"
+    - "猫猫熬给你喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hd_yongmen_001
+  intent: playful
+  keywords: [捧着喝, 暖手暖心, 一杯暖心, 抱着杯子, 暖到心里]
+  utterances:
+    - "捧着喝"
+    - "暖手暖心"
+    - "一杯暖心"
+    - "抱着杯子"
+    - "暖到心里"
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫一起喝!"
+    - "哼～两手捧着 ฅฅ"
+    - "(尾巴卷杯) 暖心又暖手"
+    - "猫猫蹭你脸喵~"
+  cooldown_seconds: 60
+  weight: 1.0

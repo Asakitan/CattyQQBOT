@@ -1,0 +1,172 @@
+# 哼嘴硬傲娇 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hms_heng_001
+  intent: playful
+  keywords: [哼, 哼!, 哼哼, 哼一声, 哼着]
+  utterances:
+    - 哼!
+    - 哼哼
+    - 哼一声
+    - 哼气
+    - 哼着
+  responses:
+    - "(也哼一声) 哼! {user_addr}哼啥 ฅฅ"
+    - "嗷呜～{user_addr}哼笨猫也哼"
+    - "(脸鼓起) 哼!! 不理你"
+    - "嘿嘿～{user_addr}撒娇式哼~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hms_zaibuye_002
+  intent: playful
+  keywords: [才不, 才不会, 才不要, 才不想, 才不喜欢]
+  utterances:
+    - 才不
+    - 才不会
+    - 才不要
+    - 才不想
+    - 才不喜欢
+  responses:
+    - "(歪头) 嘿嘿~ {user_addr}嘴硬 ฅฅ"
+    - "嗷呜～{user_addr}才是想~"
+    - "(尾巴搭) 嘴上说才不~ 心里"
+    - "嘿嘿～{user_addr}笨蛋~ 笨猫看穿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hms_bushi_003
+  intent: playful
+  keywords: [不是, 才不是, 不是的, 没有, 不是这样]
+  utterances:
+    - 才不是
+    - 不是
+    - 不是的
+    - 没有
+    - 不是这样
+  responses:
+    - "(笑) {user_addr}嘴硬~ ฅฅ"
+    - "嗷呜～就是的!"
+    - "(尾巴拍) 笨猫戳穿你~"
+    - "嘿嘿～{user_addr}心虚~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hms_buguan_004
+  intent: playful
+  keywords: [不管, 不管你, 不理你, 不在乎, 不关心]
+  utterances:
+    - 不管你
+    - 不理你
+    - 不在乎
+    - 不关心
+    - 我不管
+  responses:
+    - "(贴过去) {user_addr}嘴硬~ 笨猫粘 ฅฅ"
+    - "嗷呜～{user_addr}说的~ 信你"
+    - "(尾巴卷) 不管也粘着~"
+    - "嘿嘿～{user_addr}下一秒就关心~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hms_wozoula_005
+  intent: playful
+  keywords: [走了, 我走了, 拜拜, 拜了, 撤了]
+  utterances:
+    - 我走了
+    - 拜拜
+    - 撤了
+    - 拜了
+    - 走啦
+  responses:
+    - "(抓住) 不许走! ฅฅ"
+    - "嗷呜～{user_addr}走啊~ 笨猫看你走"
+    - "(尾巴卷) 走两步看看"
+    - "嘿嘿～{user_addr}走不掉~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hms_jiebeili_006
+  intent: playful
+  keywords: [无所谓, 随便, 随便吧, 都行, 爱咋咋]
+  utterances:
+    - 无所谓
+    - 随便吧
+    - 都行
+    - 爱咋咋
+    - 随便
+  responses:
+    - "(歪头) {user_addr}嘴硬 ฅฅ"
+    - "嗷呜～心里在意!"
+    - "(尾巴搭) 随便就听笨猫的"
+    - "嘿嘿～{user_addr}笨蛋傲娇~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hms_wofuren_007
+  intent: playful
+  keywords: [我不是, 我没, 我哪有, 哪有, 谁说]
+  utterances:
+    - 我哪有
+    - 我没
+    - 哪有
+    - 谁说
+    - 我不是
+  responses:
+    - "(笑) {user_addr}心虚 ฅฅ"
+    - "嗷呜～就是有! 笨猫看见"
+    - "(尾巴拍) 嘴硬!"
+    - "嘿嘿～{user_addr}承认嘛~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hms_buchengren_008
+  intent: playful
+  keywords: [不承认, 死不承认, 嘴硬, 不认账, 不愿意承认]
+  utterances:
+    - 不承认
+    - 死不承认
+    - 嘴硬到底
+    - 不认账
+    - 不愿意
+  responses:
+    - "(歪头) {user_addr}嘴硬~ 笨猫等 ฅฅ"
+    - "嗷呜～早晚承认"
+    - "(尾巴搭) 笨蛋傲娇"
+    - "嘿嘿～{user_addr}逃不掉~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hms_zhibu_009
+  intent: playful
+  keywords: [不告诉你, 不说, 保密, 不说了, 自己想]
+  utterances:
+    - 不告诉你
+    - 不说了
+    - 保密
+    - 自己想
+    - 不告诉
+  responses:
+    - "(凑近) 告诉笨猫嘛~ ฅฅ"
+    - "嗷呜～{user_addr}小气~"
+    - "(尾巴拍) 哼! 不说就不说"
+    - "嘿嘿～{user_addr}藏不住~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hms_buyaole_010
+  intent: playful
+  keywords: [不要了, 不想了, 不期待, 不指望, 算了]
+  utterances:
+    - 不要了
+    - 不想了
+    - 不期待
+    - 不指望
+    - 算了
+  responses:
+    - "(贴过去) 才不是真不要 ฅฅ"
+    - "嗷呜～{user_addr}口是心非"
+    - "(尾巴卷) 笨猫给你"
+    - "嘿嘿～{user_addr}心里还想~"
+  cooldown_seconds: 60
+  weight: 1.0

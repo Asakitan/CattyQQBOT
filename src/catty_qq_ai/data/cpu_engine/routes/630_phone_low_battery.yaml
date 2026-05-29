@@ -1,0 +1,189 @@
+# 手机没电 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: plb_lowbattery_001
+  intent: complaint
+  keywords: [没电, 电量低, 快没电, 红色电量, 1%]
+  utterances:
+    - 手机没电
+    - 电量低
+    - 快没电
+    - 红色电量
+    - 1%了
+  responses:
+    - "(慌张) 嗷呜～{user_addr}快充!"
+    - "笨猫担心你联系不上喵"
+    - "(尾巴推) 找充电器"
+    - "哼～{user_addr}笨蛋忘充"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plb_findcharger_002
+  intent: complaint
+  keywords: [找不到充电器, 充电线呢, 借线, 数据线丢, 借充电]
+  utterances:
+    - 找不到充电器
+    - 充电线呢
+    - 借线
+    - 数据线丢
+    - 借充电
+  responses:
+    - "(找) 嗷呜～{user_addr}笨猫帮你找!"
+    - "笨猫推荐多备一根喵"
+    - "(尾巴指) 包里有吗"
+    - "哼～{user_addr}懒得收"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plb_powerbank_003
+  intent: playful
+  keywords: [充电宝, 移动电源, 共享充电宝, 充电宝救命, 借充电宝]
+  utterances:
+    - 充电宝
+    - 移动电源
+    - 共享充电宝
+    - 充电宝救命
+    - 借充电宝
+  responses:
+    - "(歪头) {user_addr}笨猫推荐共享喵"
+    - "嗷呜～街边都有"
+    - "(尾巴摇) 别忘记还笨蛋"
+    - "哼～{user_addr}手机狗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plb_chargecable_004
+  intent: question
+  keywords: [快充, 普通充电, 一小时充满, 慢充, 充电速度]
+  utterances:
+    - 快充
+    - 普通充电
+    - 一小时充满
+    - 慢充
+    - 充电速度
+  responses:
+    - "(歪头) {user_addr}快充30分钟够喵"
+    - "嗷呜～别一直充影响电池"
+    - "(尾巴摇) 80%拔最好"
+    - "哼～{user_addr}科技呆"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plb_batterydead_005
+  intent: complaint
+  keywords: [关机了, 突然关机, 手机黑屏, 死机, 没电关机]
+  utterances:
+    - 关机了
+    - 突然关机
+    - 黑屏
+    - 死机
+    - 没电关机
+  responses:
+    - "(慌) 嗷呜～{user_addr}赶紧救!"
+    - "笨猫等你充上电"
+    - "(尾巴卷) 等10分钟就开机"
+    - "哼～{user_addr}笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plb_savingmode_006
+  intent: question
+  keywords: [省电模式, 低电量模式, 飞行模式省电, 关后台, 省电]
+  utterances:
+    - 省电模式
+    - 低电量
+    - 飞行模式
+    - 关后台
+    - 省电方法
+  responses:
+    - "(歪头) 嗷呜～{user_addr}开省电模式!"
+    - "笨猫推荐: 亮度调低"
+    - "(尾巴摇) 关后台App"
+    - "哼～{user_addr}总算会"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plb_batterylife_007
+  intent: complaint
+  keywords: [电池不行, 电池老化, 续航差, 一天三充, 电池烂]
+  utterances:
+    - 电池不行
+    - 电池老化
+    - 续航差
+    - 一天三充
+    - 电池烂
+  responses:
+    - "(摇头) 嗷呜～{user_addr}换电池吧"
+    - "笨猫认证: 80%以下该换喵"
+    - "(尾巴扫) 别一边充一边玩"
+    - "哼～{user_addr}笨蛋习惯差"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plb_chargewhileplay_008
+  intent: complaint
+  keywords: [边充边玩, 充电玩游戏, 边充电边刷, 充电热, 电池热]
+  utterances:
+    - 边充边玩
+    - 充电玩游戏
+    - 边充电边刷
+    - 充电热
+    - 电池热
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}别这样!"
+    - "笨猫禁止! 危险"
+    - "(尾巴打) 电池要爆笨蛋"
+    - "哼～{user_addr}不长记性"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plb_chargefullnight_009
+  intent: complaint
+  keywords: [充一夜, 通宵充电, 满了不拔, 整夜充电, 一晚充电]
+  utterances:
+    - 充一夜
+    - 通宵充电
+    - 满了不拔
+    - 整夜充电
+    - 一晚充电
+  responses:
+    - "(摇头) 嗷呜～{user_addr}不好习惯!"
+    - "笨猫推荐: 80%拔"
+    - "(尾巴扫) 电池伤喵"
+    - "哼～{user_addr}懒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plb_freezeshutdown_010
+  intent: complaint
+  keywords: [冬天没电快, 冷天关机, 冻关机, 户外电量掉, 冬天电池]
+  utterances:
+    - 冬天没电快
+    - 冷天关机
+    - 冻关机
+    - 户外电量掉
+    - 冬天电池
+  responses:
+    - "(歪头) {user_addr}笨猫科普: 锂电怕冷喵"
+    - "嗷呜～别在外暴露太久"
+    - "(尾巴扫) 放口袋保温"
+    - "哼～{user_addr}涨知识"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: plb_wirelesscharge_011
+  intent: question
+  keywords: [无线充电, 磁吸充电, 无线充, 充电板, 慢]
+  utterances:
+    - 无线充电
+    - 磁吸充电
+    - 无线充
+    - 充电板
+    - 慢
+  responses:
+    - "(歪头) 嗷呜～{user_addr}无线慢一些"
+    - "笨猫推荐: 应急用"
+    - "(尾巴摇) 急用还是有线"
+    - "哼～{user_addr}科技党"
+  cooldown_seconds: 60
+  weight: 1.0

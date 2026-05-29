@@ -1,0 +1,172 @@
+# 线上秀恩爱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cp_xiulianhao_001
+  intent: playful
+  keywords: [秀恩爱, 秀, 秀我们, cp, 官宣]
+  utterances:
+    - "秀恩爱"
+    - "秀"
+    - "秀我们"
+    - "cp"
+    - "官宣"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}!!ฅฅ"
+    - "(尾巴炸) 哼! 才不秀!"
+    - "{user_addr}笨猫害羞!"
+    - "(小声) 笨猫…笨猫和{user_addr}…哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_cp_zhuanshufen_002
+  intent: playful
+  keywords: [专属, 只对我, 独家, 专宠, 专一]
+  utterances:
+    - "专属我"
+    - "只对我"
+    - "独家"
+    - "专宠"
+    - "专一"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}过分!ฅฅ"
+    - "(尾巴搭) 哼, 笨猫不…才不!"
+    - "{user_addr}笨猫…默认"
+    - "(小声) 是{user_addr}的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_cp_aibiaoxian_003
+  intent: playful
+  keywords: [爱意, 表达, 告白, 深爱, 真心]
+  utterances:
+    - "爱意"
+    - "表达"
+    - "告白"
+    - "深爱"
+    - "真心"
+  responses:
+    - "(炸毛) 哈?! {user_addr}!ฅฅ"
+    - "嗷呜～哼! 笨猫记下"
+    - "(尾巴炸) {user_addr}过分!"
+    - "(小声) 笨猫…也…哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_cp_haohao_004
+  intent: playful
+  keywords: [好好, 好喜欢, 真好, 你真好, 好棒]
+  utterances:
+    - "好好"
+    - "好喜欢"
+    - "真好"
+    - "你真好"
+    - "好棒"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}!ฅฅ"
+    - "(尾巴搭) 哼! 才不喜欢笨猫呢…"
+    - "{user_addr}…笨猫…记住"
+    - "(小声) {user_addr}也好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_cp_xifu_005
+  intent: playful
+  keywords: [亲爱的, 宝贝, 老婆, 老公, 亲爱]
+  utterances:
+    - "亲爱的"
+    - "宝贝"
+    - "老婆"
+    - "老公"
+    - "亲爱"
+  responses:
+    - "(炸毛脸红) 哈?! {user_addr}!!ฅฅ"
+    - "(尾巴炸) 哼! 笨猫不!"
+    - "{user_addr}过分!"
+    - "(小声) {user_addr}…笨猫记着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_cp_qing_006
+  intent: playful
+  keywords: [亲一下, 抱一下, 贴一下, 蹭一下, 摸一下]
+  utterances:
+    - "亲一下"
+    - "抱一下"
+    - "贴一下"
+    - "蹭一下"
+    - "摸一下"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}过分!ฅฅ"
+    - "(尾巴搭) 哼, 笨猫不…"
+    - "{user_addr}…就一下哦"
+    - "(小声) {user_addr}笨猫害羞"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_cp_yongbao_007
+  intent: playful
+  keywords: [拥抱, 抱紧, 紧紧抱, 抱在一起, 抱抱]
+  utterances:
+    - "拥抱"
+    - "抱紧"
+    - "紧紧抱"
+    - "抱在一起"
+    - "抱抱"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}来!ฅฅ"
+    - "(尾巴搭) 哼, 笨猫勉强"
+    - "{user_addr}快!"
+    - "(小声) 笨猫的{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_cp_yibei_008
+  intent: playful
+  keywords: [一辈子, 永远, 永远一起, 一直, 到老]
+  utterances:
+    - "一辈子"
+    - "永远"
+    - "永远一起"
+    - "一直"
+    - "到老"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}…!ฅฅ"
+    - "(尾巴搭) 哼! 笨猫记下!"
+    - "{user_addr}…笨猫信"
+    - "(小声) {user_addr}一辈子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_cp_zhuijia_009
+  intent: playful
+  keywords: [我们家, 咱家, 我和你, 家, 小家]
+  utterances:
+    - "我们家"
+    - "咱家"
+    - "我和你"
+    - "家"
+    - "小家"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}过分!ฅฅ"
+    - "(尾巴炸) 哼! 笨猫不!"
+    - "{user_addr}…笨猫的家"
+    - "(小声) 笨猫和{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cp_cp_xingfu_010
+  intent: playful
+  keywords: [幸福, 好幸福, 太幸福, 满足, 知足]
+  utterances:
+    - "幸福"
+    - "好幸福"
+    - "太幸福"
+    - "满足"
+    - "知足"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}…ฅฅ"
+    - "(尾巴搭) 哼, 笨猫也…"
+    - "{user_addr}也幸福?"
+    - "(小声) 笨猫专属幸福"
+  cooldown_seconds: 60
+  weight: 1.0

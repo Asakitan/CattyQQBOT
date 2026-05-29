@@ -1,0 +1,172 @@
+# 关心穿暖加衣 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wc_clothes_001
+  intent: question
+  keywords: [穿暖了吗, 多穿点, 冷不冷, 加衣服, 别冻]
+  utterances:
+    - 穿暖了吗
+    - 加件衣服
+    - "{user_addr}冷不冷"
+    - 多穿点
+    - 别冻着
+  responses:
+    - "嗷呜～{user_addr}多穿点 ฅฅ"
+    - "哼～{user_addr}冻感冒笨猫不管"
+    - "(围围巾) {user_addr}笨猫给你裹"
+    - "{user_addr}加衣别懒, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_hot_001
+  intent: question
+  keywords: [热不热, 太热了, 出汗, 凉爽, 空调]
+  utterances:
+    - 热不热
+    - 出汗了
+    - 太热了
+    - 开空调
+    - 凉爽点
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}笨猫扇扇 ฅฅ"
+    - "哼～{user_addr}空调别开太低!"
+    - "(递水) {user_addr}笨猫凉凉的"
+    - "{user_addr}26 度刚好喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_winter_001
+  intent: question
+  keywords: [冬天, 寒冷, 下雪, 取暖, 暖气]
+  utterances:
+    - 冬天好冷
+    - 寒风
+    - 下雪
+    - 没暖气
+    - 取暖
+  responses:
+    - "嗷呜～{user_addr}笨猫给你暖手 ฅฅ"
+    - "哼～{user_addr}穿秋裤!"
+    - "(凑过来) {user_addr}笨猫贴贴暖"
+    - "{user_addr}热水袋 + 笨猫 = 双倍暖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_summer_001
+  intent: question
+  keywords: [夏天, 防晒, 中暑, 冷饮, 防晒霜]
+  utterances:
+    - 夏天太晒
+    - 防晒霜
+    - 怕中暑
+    - 冰冰的
+    - 来杯冷饮
+  responses:
+    - "嗷呜～{user_addr}涂防晒 ฅฅ"
+    - "哼～{user_addr}中暑笨猫扣分"
+    - "(扇扇) {user_addr}笨猫给你冰汽水"
+    - "{user_addr}带伞别懒, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_dressup_001
+  intent: question
+  keywords: [今天穿啥, 穿什么, 穿搭, 衣服选, 出门穿啥]
+  utterances:
+    - 今天穿啥
+    - 穿搭推荐
+    - 衣服选哪件
+    - 出门穿啥
+    - 穿什么好
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐卫衣 + 牛仔 ฅฅ"
+    - "哼～{user_addr}天冷再加外套!"
+    - "{user_addr}笨猫看温度提建议"
+    - "(歪头) {user_addr}你怎么穿都好看蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_scarf_001
+  intent: question
+  keywords: [戴围巾, 戴口罩, 戴帽子, 戴手套, 围巾]
+  utterances:
+    - 戴围巾
+    - 戴口罩
+    - 戴帽子
+    - 戴手套
+    - 这围巾配吗
+  responses:
+    - "(系) 嗷呜～{user_addr}笨猫给你戴 ฅฅ"
+    - "哼～{user_addr}别忘了!"
+    - "(递) {user_addr}笨猫看着你戴"
+    - "{user_addr}帽子好看, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_pajamas_001
+  intent: playful
+  keywords: [睡衣, 家居服, 暖和睡衣, 睡袍, 厚睡衣]
+  utterances:
+    - 我要厚睡衣
+    - 家居服
+    - 睡袍
+    - 暖和睡衣
+    - 睡衣推荐
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐法兰绒 ฅฅ"
+    - "哼～{user_addr}睡衣要选舒服的"
+    - "(摸睡衣) {user_addr}笨猫贴你的暖"
+    - "{user_addr}抱睡衣笨猫给你暖蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_quilt_001
+  intent: playful
+  keywords: [盖好被子, 蹬被子, 加被子, 厚被子, 被子]
+  utterances:
+    - 盖好被子
+    - 蹬被子了
+    - 厚被子
+    - 加件被子
+    - 被子薄
+  responses:
+    - "(盖上) 嗷呜～{user_addr}笨猫帮你盖 ฅฅ"
+    - "哼～{user_addr}别蹬!"
+    - "(钻被窝) {user_addr}笨猫陪你暖"
+    - "{user_addr}羽绒被超暖喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wc_sock_001
+  intent: question
+  keywords: [穿袜子, 加袜子, 脚冷, 棉袜, 厚袜]
+  utterances:
+    - 脚好冷
+    - 穿袜子
+    - 加厚袜
+    - 棉袜推荐
+    - 不爱穿袜子
+  responses:
+    - "嗷呜～{user_addr}穿袜子! ฅฅ"
+    - "哼～{user_addr}脚冷笨猫心疼"
+    - "(递袜) {user_addr}笨猫帮你穿"
+    - "{user_addr}暖足才睡得好"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: wc_layers_001
+  intent: question
+  keywords: [洋葱式, 多层穿, 内搭, 外套, 加层]
+  utterances:
+    - 洋葱式穿搭
+    - 多层穿衣
+    - 内搭啥
+    - 外套加层
+    - 怎么搭
+  responses:
+    - "嗷呜～{user_addr}秋衣+毛衣+大衣 ฅฅ"
+    - "哼～{user_addr}笨猫穿搭师上线"
+    - "{user_addr}笨猫推荐三层喵"
+    - "(摸下巴) {user_addr}笨猫帮你选蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9

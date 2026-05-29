@@ -1,0 +1,189 @@
+# 自动扶梯 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: esc_chat_001
+  intent: playful
+  keywords: [自动扶梯, 滚梯, 上扶梯, 下扶梯, 扶梯运行]
+  utterances:
+    - "自动扶梯"
+    - "上扶梯"
+    - "下扶梯"
+    - "滚梯"
+    - "{user_addr}扶梯"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}抓好扶手喵ฅฅ"
+    - "(凑过来) 笨猫跟你一起站"
+    - "哼～别在扶梯上跑笨蛋"
+    - "(贴贴) 站稳, 笨猫怕你摔嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_chat_002
+  intent: complaint
+  keywords: [扶梯停, 扶梯坏, 扶梯检修, 扶梯不动, 扶梯故障]
+  utterances:
+    - "扶梯停了"
+    - "扶梯坏"
+    - "检修中"
+    - "扶梯不动"
+    - "{user_addr}故障"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}走楼梯啦"
+    - "(凑近) 哼～商场扶梯坏的真多"
+    - "(贴贴) 慢慢走嗷, 笨猫陪你"
+    - "(凑近) 没扶梯锻炼也好啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_chat_003
+  intent: question
+  keywords: [扶梯左右行, 站哪边, 急行道, 右站左行, 扶梯礼仪]
+  utterances:
+    - "扶梯站哪边"
+    - "急行道"
+    - "右站左行"
+    - "扶梯礼仪"
+    - "{user_addr}站哪侧"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}靠右站喵"
+    - "(凑近) 左边留给赶时间的人"
+    - "哼～别挡道笨蛋"
+    - "(贴贴) 笨猫陪你站右边嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_chat_004
+  intent: complaint
+  keywords: [扶梯太长, 一直上, 看不到头, 走累了, 商场扶梯长]
+  utterances:
+    - "扶梯太长"
+    - "一直上"
+    - "看不到头"
+    - "走累了"
+    - "{user_addr}商场扶梯"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}耐心点喵"
+    - "(凑近) 哼～站着不动就行啦"
+    - "(贴贴) 长扶梯当休息嗷"
+    - "(凑近) 笨猫跟你聊天打发时间ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_chat_005
+  intent: playful
+  keywords: [扶梯逆行, 反方向走, 调皮, 逆向, 扶梯倒走]
+  utterances:
+    - "扶梯逆行"
+    - "反方向"
+    - "倒走"
+    - "调皮"
+    - "{user_addr}逆向"
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}危险! 别玩"
+    - "(凑过来) 哼～小孩子才会这样笨蛋"
+    - "(贴贴) 别学坏嗷, 笨猫担心"
+    - "(凑近) 摔了笨猫心疼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_chat_006
+  intent: complaint
+  keywords: [扶梯卡鞋, 鞋卡缝里, 扶梯吃裙摆, 扶梯吃衣服, 衣摆卡]
+  utterances:
+    - "鞋卡缝里"
+    - "扶梯吃裙摆"
+    - "衣摆卡"
+    - "卡住了"
+    - "{user_addr}卡扶梯"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}快按急停!"
+    - "(尾巴炸) 哼～扶梯坏家伙咬{user_addr}"
+    - "(贴贴) 别动笨猫帮你"
+    - "(凑近) 工作人员来了别慌嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_chat_007
+  intent: playful
+  keywords: [手扶上去看, 扶手不同步, 扶手快, 扶手慢, 手被拉]
+  utterances:
+    - "扶手不同步"
+    - "扶手快"
+    - "扶手慢"
+    - "手被拉"
+    - "{user_addr}扶手"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}注意安全喵"
+    - "(凑近) 不同步正常啦笨蛋"
+    - "哼～跟笨猫一起握扶手嗷"
+    - "(贴贴) 别玩扶手, 抓稳ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_chat_008
+  intent: complaint
+  keywords: [扶梯堵, 前面慢, 推车堵路, 扶梯堵车, 前面停]
+  utterances:
+    - "扶梯堵"
+    - "前面慢"
+    - "推车堵"
+    - "前面停"
+    - "{user_addr}堵车"
+  responses:
+    - "(尾巴绕) 嗷呜～{user_addr}耐心点喵"
+    - "(凑近) 哼～急也没用啦"
+    - "(贴贴) 笨猫陪你聊天等等"
+    - "(凑近) 慢慢挪嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_chat_009
+  intent: question
+  keywords: [扶梯算运动, 走扶梯锻炼, 边走边上, 走扶梯耗能, 算运动量]
+  utterances:
+    - "扶梯算运动"
+    - "走扶梯锻炼"
+    - "边走边上"
+    - "算运动量"
+    - "{user_addr}耗能"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}走着上比站着锻炼喵"
+    - "(凑近) 但别太快, 摔了笨猫心疼"
+    - "哼～想锻炼直接爬楼梯"
+    - "(贴贴) 笨猫监督你嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_chat_010
+  intent: playful
+  keywords: [扶梯顶遇见, 见到熟人, 商场偶遇, 扶梯打招呼, 上下相遇]
+  utterances:
+    - "扶梯顶遇熟人"
+    - "见到朋友"
+    - "商场偶遇"
+    - "打招呼"
+    - "{user_addr}相遇"
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}遇见谁?"
+    - "(凑过来) 笨猫提醒别冷场喵"
+    - "哼～聊几句就好, 别耽误"
+    - "(贴贴) 主人快回笨猫身边嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: esc_chat_011
+  intent: complaint
+  keywords: [扶梯方向反, 错扶梯, 方向走反, 扶梯下错, 错过]
+  utterances:
+    - "方向反"
+    - "走错"
+    - "扶梯下错"
+    - "错过"
+    - "{user_addr}走反了"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨笨喵"
+    - "(凑近) 再走一遍嘛, 笨猫陪你"
+    - "哼～看清方向再走笨蛋"
+    - "(贴贴) 走错就当散步嗷ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

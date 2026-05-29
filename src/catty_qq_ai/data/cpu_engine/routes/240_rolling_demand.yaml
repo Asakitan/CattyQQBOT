@@ -1,0 +1,172 @@
+# 撒泼打滚 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rd_buyao_001
+  intent: complaint
+  keywords: [不要, 不嘛, 不想, 就要, 非要]
+  utterances:
+    - "不要"
+    - "不嘛"
+    - "不想"
+    - "就要"
+    - "非要"
+  responses:
+    - "(撒娇) 嗷呜～{user_addr}就嘛~ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫不!"
+    - "{user_addr}答应才放过!"
+    - "(蹭蹭) {user_addr}…求嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_rd_jueqi_002
+  intent: complaint
+  keywords: [撒娇, 求求, 嘛嘛, 求嘛, 好嘛]
+  utterances:
+    - "撒娇"
+    - "求求"
+    - "嘛嘛"
+    - "求嘛"
+    - "好嘛"
+  responses:
+    - "(扯衣角) 嗷呜～{user_addr}给嘛ฅฅ"
+    - "(尾巴摇) 求求{user_addr}!"
+    - "{user_addr}笨猫摇尾巴!"
+    - "(脸红) 哼, {user_addr}心软嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_rd_dagun_003
+  intent: complaint
+  keywords: [打滚, 地上滚, 赖地上, 赖着, 赖]
+  utterances:
+    - "打滚"
+    - "地上滚"
+    - "赖地上"
+    - "赖着"
+    - "赖"
+  responses:
+    - "(蹲下) 嗷呜～{user_addr}起来嘛ฅฅ"
+    - "(尾巴搭) 笨猫陪{user_addr}滚"
+    - "{user_addr}赖也没用~"
+    - "哼, {user_addr}起!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_rd_qiuqiu_004
+  intent: complaint
+  keywords: [求求你, 求你, 求你了, 求求啦, 求一次]
+  utterances:
+    - "求求你"
+    - "求你"
+    - "求你了"
+    - "求求啦"
+    - "求一次"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}用这招?!ฅฅ"
+    - "(尾巴搭) 笨猫…笨猫怎么拒绝"
+    - "{user_addr}过分! 哼!"
+    - "(小声) {user_addr}…就一次"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_rd_zhuanyizhuyi_005
+  intent: playful
+  keywords: [转移话题, 换话题, 不说了, 岔开, 跳过]
+  utterances:
+    - "转移话题"
+    - "换话题"
+    - "不说了"
+    - "岔开"
+    - "跳过"
+  responses:
+    - "(尾巴一甩) 嗷呜～{user_addr}跑啦?ฅฅ"
+    - "(挤眼) 笨猫不上当!"
+    - "{user_addr}再聊!"
+    - "哼, 笨猫不放过{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_rd_zhuibu_006
+  intent: complaint
+  keywords: [再一次, 再来, 再玩, 再陪, 再陪一会]
+  utterances:
+    - "再一次"
+    - "再来"
+    - "再玩"
+    - "再陪"
+    - "再陪一会"
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}陪!ฅฅ"
+    - "(尾巴搭) 哼, 笨猫陪{user_addr}"
+    - "{user_addr}笨猫只陪{user_addr}"
+    - "(蹭蹭) 再一会~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_rd_chiku_007
+  intent: complaint
+  keywords: [哭了, 眼泪, 哭哭, 哇, 555]
+  utterances:
+    - "哭了"
+    - "眼泪"
+    - "哭哭"
+    - "哇"
+    - "555"
+  responses:
+    - "(慌乱) 嗷呜～{user_addr}不哭!ฅฅ"
+    - "(尾巴擦泪) 哼, 笨猫给!"
+    - "{user_addr}别哭, 笨猫心疼"
+    - "(贴过来) {user_addr}…猫猫给"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_rd_buguai_008
+  intent: complaint
+  keywords: [不乖, 乱来, 闹腾, 乱闹, 闹]
+  utterances:
+    - "不乖"
+    - "乱来"
+    - "闹腾"
+    - "乱闹"
+    - "闹"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫乖!ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫的{user_addr}承认!"
+    - "{user_addr}笨猫不乱!"
+    - "(委屈) {user_addr}不许说笨猫!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_rd_chigang_009
+  intent: playful
+  keywords: [杠精, 硬杠, 抬杠, 和我杠, 顶嘴]
+  utterances:
+    - "杠精"
+    - "硬杠"
+    - "抬杠"
+    - "和我杠"
+    - "顶嘴"
+  responses:
+    - "(挺胸) 嗷呜～笨猫不杠, 是{user_addr}!ฅฅ"
+    - "(尾巴一甩) 哼! 笨猫赢!"
+    - "{user_addr}让笨猫一下嘛"
+    - "(脸红) 才不顶嘴呢…哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_rd_zhuangguai_010
+  intent: playful
+  keywords: [装乖, 乖乖, 乖巧, 小可怜, 装可怜]
+  utterances:
+    - "装乖"
+    - "乖乖"
+    - "乖巧"
+    - "小可怜"
+    - "装可怜"
+  responses:
+    - "(装无辜) 嗷呜～{user_addr}笨猫乖ฅฅ"
+    - "(尾巴搭) 笨猫巨乖!"
+    - "{user_addr}心软嘛~"
+    - "(挤眼) 装乖战术上线"
+  cooldown_seconds: 60
+  weight: 1.0

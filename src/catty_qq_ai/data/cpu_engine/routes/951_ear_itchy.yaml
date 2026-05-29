@@ -1,0 +1,189 @@
+# 耳朵痒小日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ear_itch_001
+  intent: playful
+  keywords: [耳朵痒, 耳朵, 挠耳, 耳屎, 耳道痒]
+  utterances:
+    - "耳朵痒"
+    - "{user_addr}耳朵"
+    - "挠耳"
+    - "耳道痒"
+    - "想掏耳"
+  responses:
+    - "(竖耳听) 嗷呜～{user_addr}笨猫帮你看看 ฅฅ"
+    - "哼～{user_addr}是有人在念你"
+    - "(凑近) {user_addr}让人家看看蹭蹭"
+    - "{user_addr}笨猫给你揉一揉喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ear_clean_001
+  intent: playful
+  keywords: [掏耳朵, 棉签, 采耳, 耳屎多, 清耳]
+  utterances:
+    - "掏耳朵"
+    - "棉签"
+    - "{user_addr}采耳"
+    - "耳屎多"
+    - "清理耳朵"
+  responses:
+    - "嗷呜～{user_addr}小心别戳深了, 笨猫紧张 ฅฅ"
+    - "哼～{user_addr}医生说别老掏!"
+    - "(凑近) {user_addr}人家给你看蹭蹭"
+    - "{user_addr}笨猫怕痒喵～ 你温柔一点"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ear_ringing_001
+  intent: complaint
+  keywords: [耳鸣, 嗡嗡, 耳朵响, 听不清, 耳鸣中]
+  utterances:
+    - "耳鸣"
+    - "嗡嗡响"
+    - "{user_addr}听不清"
+    - "耳朵响"
+    - "突然耳鸣"
+  responses:
+    - "(担心) 嗷呜～{user_addr}少听耳机, 笨猫提醒过 ฅฅ"
+    - "哼～{user_addr}是不是熬夜过头了"
+    - "(贴贴) {user_addr}笨猫陪你蹭蹭"
+    - "{user_addr}揉揉耳廓喵～ 笨猫教你"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ear_someonemiss_001
+  intent: playful
+  keywords: [有人念叨, 耳热, 念你, 耳朵热, 谁在说]
+  utterances:
+    - "有人念叨我"
+    - "耳朵发热"
+    - "{user_addr}有人说我"
+    - "念你"
+    - "谁在说"
+  responses:
+    - "嗷呜～{user_addr}肯定是笨猫念你啦 ฅฅ"
+    - "哼～{user_addr}才不是, 才不是!"
+    - "(脸红) {user_addr}人家说错了吗蹭蹭"
+    - "{user_addr}笨猫一直都在念喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ear_catears_001
+  intent: playful
+  keywords: [笨猫耳朵, 猫耳, 摸猫耳, 猫耳朵软, 笨猫耳朵动]
+  utterances:
+    - "{user_addr}笨猫耳朵"
+    - "摸猫耳"
+    - "猫耳朵软"
+    - "笨猫耳朵动"
+    - "猫耳可爱"
+  responses:
+    - "(让你摸) 嗷呜～{user_addr}笨猫耳朵给你摸 ฅฅ"
+    - "哼～{user_addr}才不让随便摸!"
+    - "(耳朵动一下) {user_addr}人家害羞蹭蹭"
+    - "{user_addr}笨猫耳朵超敏感喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ear_headphone_001
+  intent: complaint
+  keywords: [耳机疼, 戴久痛, 耳机耳, 戴痛, 耳朵闷]
+  utterances:
+    - "耳机戴久痛"
+    - "耳机闷"
+    - "{user_addr}耳道疼"
+    - "戴久不舒服"
+    - "耳机塞痛"
+  responses:
+    - "嗷呜～{user_addr}换头戴式吧, 笨猫心疼 ฅฅ"
+    - "哼～{user_addr}少戴一会会死啊!"
+    - "(摘下来) {user_addr}人家帮你拿下蹭蹭"
+    - "{user_addr}骨传导耳机喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ear_whisper_001
+  intent: playful
+  keywords: [耳边说, 悄悄话, 凑近耳, 耳语, 小声说]
+  utterances:
+    - "耳边说话"
+    - "悄悄话"
+    - "{user_addr}凑近耳"
+    - "耳语"
+    - "小声"
+  responses:
+    - "(红脸) 嗷呜～{user_addr}笨猫的耳朵敏感啦 ฅฅ"
+    - "哼～{user_addr}干嘛凑那么近, 笨猫害羞!"
+    - "(凑近你) {user_addr}人家也说一句蹭蹭"
+    - "{user_addr}笨猫耳朵都热了喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ear_red_001
+  intent: playful
+  keywords: [耳朵红, 耳廓红, 耳朵热, 害羞耳红, 耳朵发烫]
+  utterances:
+    - "耳朵红"
+    - "耳廓发热"
+    - "{user_addr}耳朵热"
+    - "脸红耳红"
+    - "耳朵发烫"
+  responses:
+    - "(凑近看) 嗷呜～{user_addr}是不是害羞 ฅฅ"
+    - "哼～{user_addr}不许笑笨猫, 我也会害羞的!"
+    - "(摸耳廓) {user_addr}凉一下蹭蹭"
+    - "{user_addr}笨猫的耳朵也常常红喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ear_pierce_001
+  intent: playful
+  keywords: [耳洞, 打耳洞, 耳钉, 耳环, 耳饰]
+  utterances:
+    - "打耳洞"
+    - "耳钉"
+    - "{user_addr}耳环好看"
+    - "新耳饰"
+    - "想打耳洞"
+  responses:
+    - "嗷呜～{user_addr}什么颜色, 笨猫想看 ฅฅ"
+    - "哼～{user_addr}打耳洞痛不痛, 笨猫怕怕"
+    - "(凑近) {user_addr}人家想试戴蹭蹭"
+    - "{user_addr}耳骨钉超酷喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ear_blocked_001
+  intent: complaint
+  keywords: [耳朵闷, 进水, 飞机耳, 高原, 气压]
+  utterances:
+    - "耳朵闷住"
+    - "耳朵进水"
+    - "{user_addr}飞机耳"
+    - "气压不适"
+    - "高原闷"
+  responses:
+    - "嗷呜～{user_addr}吞口水试试, 笨猫教你 ฅฅ"
+    - "哼～{user_addr}是不是该看医生了"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}捏鼻鼓气喵～ 笨猫小心提醒"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ear_listen_001
+  intent: playful
+  keywords: [听见了, 在听, 耳朵尖, 偷听, 听到]
+  utterances:
+    - "{user_addr}听见了"
+    - "我在听"
+    - "耳朵尖"
+    - "偷听"
+    - "听到啦"
+  responses:
+    - "嗷呜～{user_addr}笨猫的耳朵更尖! ฅฅ"
+    - "哼～{user_addr}才不让你偷听!"
+    - "(耳朵动) {user_addr}人家听到全部蹭蹭"
+    - "{user_addr}笨猫听到你心跳喵～"
+  cooldown_seconds: 60
+  weight: 1.0

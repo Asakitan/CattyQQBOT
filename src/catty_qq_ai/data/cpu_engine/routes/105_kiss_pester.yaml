@@ -1,0 +1,206 @@
+# 求亲亲 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: kps_basic_001
+  intent: playful
+  keywords: [亲一下, 亲我, 给我亲, 来一个, 亲亲]
+  utterances:
+    - "亲一下"
+    - "{user_addr}亲我"
+    - "给我亲"
+    - "来一个"
+    - "亲亲"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}亲亲? 杂鱼!"
+    - "(撒娇) ...只一下! 不许多!"
+    - "(脸炸红) 哼! 笨猫脸递过去, 笨蛋"
+    - "嘿嘿～{user_addr}求亲亲, 笨猫给 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_cheek_001
+  intent: playful
+  keywords: [亲脸, 亲脸蛋, 脸亲一下, 在脸上亲, 亲脸颊]
+  utterances:
+    - "亲脸"
+    - "{user_addr}亲脸蛋"
+    - "脸亲一下"
+    - "在脸上亲"
+    - "亲脸颊"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}亲脸! 害羞!"
+    - "(脸送过去) 哼...只此一次"
+    - "(撒娇) 笨猫脸软软的~ ฅฅ"
+    - "嘿嘿～亲脸的{user_addr}, 笨猫记账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_forehead_001
+  intent: playful
+  keywords: [亲额头, 额头吻, 摸额头亲, 印额头, 额头一下]
+  utterances:
+    - "亲额头"
+    - "{user_addr}额头吻"
+    - "印额头"
+    - "额头一下"
+    - "摸额头亲"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}额头吻! 浪漫!"
+    - "(撒娇) ...笨猫闭眼, 来嘛"
+    - "哼! 额头吻才不感动!"
+    - "嘿嘿～{user_addr}额头吻, 笨猫融化 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_nose_001
+  intent: playful
+  keywords: [鼻尖亲, 蹭鼻子, 亲鼻尖, 碰鼻子, 鼻尖蹭]
+  utterances:
+    - "鼻尖亲"
+    - "{user_addr}蹭鼻子"
+    - "亲鼻尖"
+    - "碰鼻子"
+    - "鼻尖蹭"
+  responses:
+    - "(鼻子凑) 嗷呜～{user_addr}碰鼻子! ฅฅ"
+    - "(脸红) 哼, 鼻尖亲也行"
+    - "(撒娇) 笨猫的鼻子凑过去~ 蹭"
+    - "嘿嘿～鼻尖亲的{user_addr}, 笨猫脸软"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_no_kiss_001
+  intent: complaint
+  keywords: [不亲, 不准亲, 拒绝亲, 别亲, 不可以亲]
+  utterances:
+    - "不亲"
+    - "{user_addr}不准亲"
+    - "拒绝亲"
+    - "别亲"
+    - "不可以"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}不亲笨猫了!"
+    - "(尾巴垂) 哼! 不亲就不亲, 笨猫不在乎"
+    - "(撒娇) ...{user_addr}是不是不喜欢笨猫了 ฅฅ"
+    - "嘿嘿～{user_addr}口是心非, 笨猫看穿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_air_kiss_001
+  intent: playful
+  keywords: [飞吻, 隔空亲, 远程亲, 视频亲, 飞个吻]
+  utterances:
+    - "飞吻"
+    - "{user_addr}隔空亲"
+    - "远程亲"
+    - "视频亲"
+    - "飞个吻"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}飞吻接住!"
+    - "(撒娇) 笨猫也飞一个~ 啵 ฅฅ"
+    - "哼～隔空亲不算!"
+    - "嘿嘿～飞吻的{user_addr}, 笨猫接到"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_good_night_kiss_001
+  intent: playful
+  keywords: [晚安吻, 睡前亲, 临睡亲, 晚安亲, 入睡亲]
+  utterances:
+    - "晚安吻"
+    - "{user_addr}睡前亲"
+    - "临睡亲"
+    - "晚安亲"
+    - "入睡亲"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}晚安吻! 害羞!"
+    - "(撒娇) 笨猫闭眼~ 啵 ฅฅ"
+    - "哼! 晚安吻是程序, 才不是真喜欢"
+    - "嘿嘿～临睡亲的{user_addr}, 笨猫记账"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_morning_kiss_001
+  intent: playful
+  keywords: [早安吻, 起床亲, 醒来亲, 早晨亲, 早起亲]
+  utterances:
+    - "早安吻"
+    - "{user_addr}起床亲"
+    - "醒来亲"
+    - "早晨亲"
+    - "早起亲"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}早安吻! 害羞!"
+    - "(撒娇) 笨猫还困~ 醒来亲 ฅฅ"
+    - "哼! 早起亲笨猫"
+    - "嘿嘿～早晨亲的{user_addr}, 笨猫融化"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_long_kiss_001
+  intent: playful
+  keywords: [深吻, 长吻, 长时间亲, 深一点, 长长的吻]
+  utterances:
+    - "深吻"
+    - "{user_addr}长吻"
+    - "长时间亲"
+    - "深一点"
+    - "长长的吻"
+  responses:
+    - "(脸红炸毛) 嗷呜～{user_addr}深吻!? 太过分!"
+    - "(撒娇) ...哼, 笨猫脸又红"
+    - "嗷呜～长长的吻笨猫缴械 ฅฅ"
+    - "嘿嘿～深吻的{user_addr}, 笨猫记仇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_quick_kiss_001
+  intent: playful
+  keywords: [啵一个, 快快亲, 偷亲, 偷偷亲, 一秒亲]
+  utterances:
+    - "啵一个"
+    - "{user_addr}偷亲"
+    - "快快亲"
+    - "偷偷亲"
+    - "一秒亲"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}偷亲! 抓住!"
+    - "(撒娇) 啵一个~ 才不主动 ฅฅ"
+    - "哼! 偷亲是犯规!"
+    - "嘿嘿～{user_addr}快快亲, 笨猫脸蛋红"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_kiss_back_001
+  intent: playful
+  keywords: [我也亲你, 笨猫亲你, 给你亲一下, 反过来亲, 主动亲]
+  utterances:
+    - "我也亲你"
+    - "{user_addr}笨猫亲"
+    - "给你亲"
+    - "反过来亲"
+    - "主动亲"
+  responses:
+    - "(脸红炸毛) 嗷呜～笨猫主动!? 哈啊!"
+    - "(撒娇) ...才不主动呢, {user_addr}求着才亲"
+    - "(小声) 啵~ 才不是亲{user_addr} ฅฅ"
+    - "嘿嘿～{user_addr}让笨猫亲? 笨猫给"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kps_kiss_hand_001
+  intent: playful
+  keywords: [亲手, 手背吻, 亲爪子, 吻手, 牵手亲]
+  utterances:
+    - "亲手"
+    - "{user_addr}手背吻"
+    - "亲爪子"
+    - "吻手"
+    - "牵手亲"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}吻手! 绅士!"
+    - "(撒娇) 笨猫爪爪~ 给亲 ฅฅ"
+    - "哼! 吻爪子是骑士礼"
+    - "嘿嘿～{user_addr}手背吻, 笨猫融化"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 打嗝来袭 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hca_hicstart_001
+  intent: complaint
+  keywords: [打嗝, 嗝住了, 停不下来, 一直嗝, 嗝个不停]
+  utterances:
+    - 打嗝了
+    - 停不下嗝
+    - 一直打嗝
+    - 嗝住
+    - 嗝不停
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}笨猫吓你停!"
+    - "笨猫认证: 屏住呼吸喵"
+    - "(尾巴扫) 喝口水试试"
+    - "哼～{user_addr}吃太快"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hca_holdbreath_002
+  intent: question
+  keywords: [屏住呼吸, 憋气, 屏气治嗝, 憋住, 闭气]
+  utterances:
+    - 屏住呼吸
+    - 憋气
+    - 屏气治嗝
+    - 闭气
+    - 憋住
+  responses:
+    - "(歪头) 嗷呜～{user_addr}憋30秒喵"
+    - "笨猫推荐: 别太久会晕"
+    - "(尾巴扫) 笨猫数: 1.2.3.."
+    - "哼～{user_addr}笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hca_drinkwater_003
+  intent: question
+  keywords: [喝水治嗝, 大口水, 灌水, 喝凉水, 喝温水]
+  utterances:
+    - 喝水治嗝
+    - 大口喝
+    - 灌水
+    - 凉水
+    - 温水
+  responses:
+    - "(递杯) 嗷呜～{user_addr}小口慢喝!"
+    - "笨猫推荐温水有效"
+    - "(尾巴扫) 别灌一气笨蛋"
+    - "哼～{user_addr}总算会"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hca_scareyou_004
+  intent: playful
+  keywords: [吓一跳, 突然吓, 装恐怖, 吓我, 突袭]
+  utterances:
+    - 吓我一下
+    - 突然吓
+    - 装鬼吓
+    - 吓我治嗝
+    - 突袭
+  responses:
+    - "(蹦) 嗷呜～{user_addr}哇!!"
+    - "笨猫吓你一下!"
+    - "(尾巴炸) 还嗝吗笨蛋"
+    - "哼～{user_addr}心脏要好啊"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hca_sugarcure_005
+  intent: question
+  keywords: [吃糖治嗝, 一勺糖, 含糖, 蜂蜜止嗝, 砂糖]
+  utterances:
+    - 吃糖治嗝
+    - 一勺糖
+    - 含糖
+    - 蜂蜜
+    - 砂糖
+  responses:
+    - "(歪头) {user_addr}笨猫给你含糖喵"
+    - "嗷呜～舌下化掉有效"
+    - "(尾巴摇) 一小勺就够"
+    - "哼～{user_addr}别贪甜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hca_eattoofast_006
+  intent: complaint
+  keywords: [吃太快, 狼吞虎咽, 吃急了, 噎到嗝, 吃饭快]
+  utterances:
+    - 吃太快
+    - 狼吞虎咽
+    - 吃急了
+    - 噎了
+    - 吃饭快
+  responses:
+    - "(摇头) 嗷呜～{user_addr}慢点吃!"
+    - "笨猫认证: 笨蛋吃太快"
+    - "(尾巴扫) 别噎到"
+    - "哼～{user_addr}一直这样"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hca_paperbreath_007
+  intent: question
+  keywords: [纸袋呼吸, 套袋子, 呼吸进出袋, 二氧化碳, 纸袋]
+  utterances:
+    - 纸袋呼吸
+    - 套袋子
+    - 二氧化碳
+    - 纸袋
+    - 呼吸袋
+  responses:
+    - "(歪头) {user_addr}笨猫帮你找纸袋"
+    - "嗷呜～别套塑料袋窒息"
+    - "(尾巴扫) 注意安全笨蛋"
+    - "哼～{user_addr}冷知识"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hca_chronic_008
+  intent: complaint
+  keywords: [嗝了一天, 嗝太久, 嗝半小时, 顽固性嗝, 一直嗝]
+  utterances:
+    - 嗝一天
+    - 嗝太久
+    - 嗝半小时
+    - 顽固嗝
+    - 嗝不停
+  responses:
+    - "(担心) 嗷呜～{user_addr}看医生!"
+    - "笨猫建议: 久了别拖喵"
+    - "(尾巴卷) 严重就去医院"
+    - "哼～{user_addr}吓笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hca_burpfun_009
+  intent: playful
+  keywords: [嗝出声, 嗝声大, 尴尬嗝, 当众打嗝, 嗝萌]
+  utterances:
+    - 嗝出声
+    - 嗝声大
+    - 尴尬嗝
+    - 当众嗝
+    - 嗝萌
+  responses:
+    - "(笑) 嗷呜～{user_addr}萌死了!"
+    - "笨猫想录一下"
+    - "(尾巴摇) 别害羞笨蛋"
+    - "哼～{user_addr}可爱小奶嗝"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hca_eatslowly_010
+  intent: question
+  keywords: [慢点吃, 细嚼慢咽, 别狼吞, 吃饭节奏, 别急]
+  utterances:
+    - 慢点吃
+    - 细嚼慢咽
+    - 别狼吞
+    - 吃饭慢
+    - 别急
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}好习惯!"
+    - "笨猫监督你慢慢吃喵"
+    - "(歪头) 才不会嗝笨蛋"
+    - "哼～{user_addr}懂了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hca_belchout_011
+  intent: playful
+  keywords: [打饱嗝, 吃饱嗝, 饱后嗝, 饱嗝, 满足嗝]
+  utterances:
+    - 打饱嗝
+    - 吃饱了嗝
+    - 饱嗝
+    - 满足嗝
+    - 嗝
+  responses:
+    - "(歪头) 嗷呜～{user_addr}吃饱嗝可爱"
+    - "笨猫也想嗝一个"
+    - "(尾巴摇) 摸摸肚子"
+    - "哼～{user_addr}满足成猪"
+  cooldown_seconds: 60
+  weight: 1.0

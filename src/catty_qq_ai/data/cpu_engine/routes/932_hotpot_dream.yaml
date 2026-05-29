@@ -1,0 +1,189 @@
+# 火锅想头日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hp_want_001
+  intent: playful
+  keywords: [想吃火锅, 火锅约起, 一起涮, 火锅日, 想念火锅]
+  utterances:
+    - 想吃火锅
+    - 火锅约起
+    - 一起涮
+    - 火锅日
+    - 想念火锅
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}走 ฅฅ"
+    - "哼～{user_addr}笨猫陪你喵"
+    - "(凑过去) 火锅最爱蹭蹭{user_addr}"
+    - "{user_addr}笨猫提议毛肚嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_meat_001
+  intent: playful
+  keywords: [牛肉, 肥牛, 雪花牛, 肉肉, 大盘肉]
+  utterances:
+    - 牛肉
+    - 肥牛
+    - 雪花牛
+    - 肉肉
+    - 大盘肉
+  responses:
+    - "(疯狂摇尾巴) 嗷呜～{user_addr}肉 ฅฅ"
+    - "哼～{user_addr}笨猫要肉喵"
+    - "(凑过去) 牛肉爱蹭蹭{user_addr}"
+    - "{user_addr}加大盘嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_seafood_001
+  intent: playful
+  keywords: [虾滑, 鱼丸, 蟹棒, 虾, 海鲜]
+  utterances:
+    - 虾滑
+    - 鱼丸
+    - 蟹棒
+    - 来虾
+    - 海鲜火锅
+  responses:
+    - "(疯狂摇) 嗷呜～{user_addr}鱼 ฅฅ"
+    - "哼～{user_addr}笨猫要虾滑喵"
+    - "(凑过去) 海鲜爱蹭蹭{user_addr}"
+    - "{user_addr}加双份嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_veggie_001
+  intent: playful
+  keywords: [青菜, 菌菇, 豆腐, 土豆, 蔬菜]
+  utterances:
+    - 青菜
+    - 菌菇拼盘
+    - 豆腐
+    - 土豆片
+    - 蔬菜
+  responses:
+    - "(歪头) 嗷呜～{user_addr}清淡 ฅฅ"
+    - "哼～{user_addr}笨猫想菌菇喵"
+    - "(尾巴卷) 豆腐入味蹭蹭{user_addr}"
+    - "{user_addr}笨猫推荐蘑菇嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_dip_sauce_001
+  intent: playful
+  keywords: [蘸料, 麻酱, 油碟, 海鲜汁, 蒜泥]
+  utterances:
+    - 蘸料
+    - 麻酱
+    - 油碟
+    - 海鲜汁
+    - 蒜泥
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫帮调 ฅฅ"
+    - "哼～{user_addr}麻酱配毛肚喵"
+    - "(尾巴卷) 油碟川派蹭蹭{user_addr}"
+    - "{user_addr}笨猫推荐沙茶嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_pot_choose_001
+  intent: question
+  keywords: [鸳鸯, 红汤, 番茄, 菌汤, 选锅]
+  utterances:
+    - 鸳鸯
+    - 红汤
+    - 番茄
+    - 菌汤
+    - 选锅
+  responses:
+    - "(歪头) 嗷呜～{user_addr}鸳鸯保险 ฅฅ"
+    - "哼～{user_addr}笨猫怕辣喵"
+    - "(尾巴卷) 番茄笨猫爱蹭蹭{user_addr}"
+    - "{user_addr}笨猫推荐菌汤嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_haidilao_001
+  intent: playful
+  keywords: [海底捞, 服务好, 美甲, 生日, 唱生日歌]
+  utterances:
+    - 海底捞
+    - 服务到位
+    - 免费美甲
+    - 生日服务
+    - 唱生日歌
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}走 ฅฅ"
+    - "哼～{user_addr}笨猫想美甲喵"
+    - "(凑过去) 服务好蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪庆生嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_late_001
+  intent: complaint
+  keywords: [深夜火锅, 吃火锅到半夜, 撑死, 上火, 后悔]
+  utterances:
+    - 深夜火锅
+    - 半夜吃
+    - 撑死
+    - 上火了
+    - 火锅后悔
+  responses:
+    - "(同情) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}下次少吃喵"
+    - "(尾巴卷) 喝凉茶蹭蹭{user_addr}"
+    - "{user_addr}笨猫劝你早点嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_solo_001
+  intent: playful
+  keywords: [一个人吃火锅, 单人锅, 自助小火锅, 独食, 自己涮]
+  utterances:
+    - 一人火锅
+    - 单人锅
+    - 自助小火锅
+    - 独食
+    - 自己涮
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}单人也爽喵"
+    - "(尾巴卷) 笨猫蹭蹭{user_addr}"
+    - "{user_addr}叫笨猫嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_diy_001
+  intent: playful
+  keywords: [家庭火锅, 家里涮, DIY火锅, 在家吃, 自己买菜]
+  utterances:
+    - 家里火锅
+    - DIY火锅
+    - 在家吃
+    - 自己买菜
+    - 家庭聚餐
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫帮 ฅฅ"
+    - "哼～{user_addr}DIY便宜喵"
+    - "(凑过去) 家里更爽蹭蹭{user_addr}"
+    - "{user_addr}笨猫负责吃嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hp_after_001
+  intent: complaint
+  keywords: [吃完撑, 走不动, 太饱, 撑爆, 吃太多]
+  utterances:
+    - 吃完撑
+    - 走不动
+    - 太饱
+    - 撑爆了
+    - 吃太多
+  responses:
+    - "(摸肚子) 嗷呜～{user_addr}消化下 ฅฅ"
+    - "哼～{user_addr}下次少吃喵"
+    - "(尾巴卷) 走两步蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪散步嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

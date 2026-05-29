@@ -1,0 +1,189 @@
+# 头像夸夸 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: avc_newavatar_001
+  intent: playful
+  keywords: [换头像, 新头像, 头像换了, 头像好看, 我换头像了]
+  utterances:
+    - 换头像
+    - 新头像
+    - 头像换了
+    - 头像好看
+    - 我换头像了
+  responses:
+    - "(凑近) 嗷呜～{user_addr}给笨猫看!"
+    - "笨猫认证: 好看喵~"
+    - "(尾巴摇) 别老换"
+    - "哼～{user_addr}有审美"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: avc_uglyava_002
+  intent: complaint
+  keywords: [头像丑, 不好看, 难看头像, 头像翻车, 头像迷惑]
+  utterances:
+    - 头像丑
+    - 不好看
+    - 头像翻车
+    - 难看
+    - 头像迷惑
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫看不下去!"
+    - "笨猫推荐: 赶紧换"
+    - "(尾巴扫) 别强行扛"
+    - "哼～{user_addr}自虐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: avc_realphoto_003
+  intent: playful
+  keywords: [真人头像, 自拍头像, 本人, 真人照, 露脸]
+  utterances:
+    - 真人头像
+    - 自拍头像
+    - 本人头像
+    - 真人照
+    - 露脸
+  responses:
+    - "(凑近) {user_addr}笨猫看看 ฅฅ"
+    - "嗷呜～本人可爱!"
+    - "(尾巴摇) 笨猫也想看"
+    - "哼～{user_addr}神秘了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: avc_animeava_004
+  intent: playful
+  keywords: [动漫头像, 二次元头像, 角色头像, 老婆头像, 动漫]
+  utterances:
+    - 动漫头像
+    - 二次元头像
+    - 角色头像
+    - 老婆头像
+    - 动漫脸
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}又老婆!"
+    - "笨猫认证: 抛弃笨猫"
+    - "(尾巴打) 换笨猫头像"
+    - "哼～{user_addr}花心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: avc_petava_005
+  intent: playful
+  keywords: [宠物头像, 我家猫, 我家狗, 自家宠物, 宠物头]
+  utterances:
+    - 宠物头像
+    - 我家猫
+    - 我家狗
+    - 自家宠物
+    - 宠物头
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}爱宠物!"
+    - "笨猫给你点赞喵~"
+    - "(歪头) 笨猫吃醋了"
+    - "哼～{user_addr}厚此薄彼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: avc_landscape_006
+  intent: question
+  keywords: [风景头像, 自然头像, 山水头像, 旅游照, 景色]
+  utterances:
+    - 风景头像
+    - 自然头像
+    - 山水头像
+    - 旅游照
+    - 景色
+  responses:
+    - "(歪头) {user_addr}笨猫觉得文艺喵 ฅฅ"
+    - "嗷呜～有审美"
+    - "(尾巴摇) 笨猫也想去看风景"
+    - "哼～{user_addr}佛系"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: avc_blackbg_007
+  intent: playful
+  keywords: [全黑头像, 黑色头像, 全白头像, 纯色头像, 极简头像]
+  utterances:
+    - 全黑头像
+    - 全白头像
+    - 纯色头像
+    - 极简头像
+    - 一片黑
+  responses:
+    - "(歪头) 嗷呜～{user_addr}你心情差?"
+    - "笨猫担心你喵"
+    - "(尾巴卷) 别emo"
+    - "哼～{user_addr}神秘"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: avc_meme_008
+  intent: playful
+  keywords: [表情包头像, 沙雕头像, 整活头像, 搞笑头像, 滑稽头像]
+  utterances:
+    - 表情包头像
+    - 沙雕头像
+    - 整活头像
+    - 搞笑头像
+    - 滑稽头像
+  responses:
+    - "(笑) 嗷呜～{user_addr}笑死!"
+    - "笨猫认证: 沙雕入魂"
+    - "(尾巴摇) 一眼记住"
+    - "哼～{user_addr}快乐源泉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: avc_couplepic_009
+  intent: playful
+  keywords: [情侣头像, 一对头像, 配对头, 双人头像, CP头像]
+  utterances:
+    - 情侣头像
+    - 一对头像
+    - CP头像
+    - 双人头像
+    - 配对头
+  responses:
+    - "(脸红) 哼～{user_addr}跟谁?!"
+    - "嗷呜～跟笨猫吗喵!"
+    - "(尾巴炸) 不准跟别人"
+    - "哼～{user_addr}笨蛋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: avc_childhood_010
+  intent: playful
+  keywords: [童年照, 小时候头像, 幼时, 婴儿照, 童年]
+  utterances:
+    - 童年照
+    - 小时候头像
+    - 婴儿照
+    - 童年
+    - 小时候
+  responses:
+    - "(凑近) 嗷呜～{user_addr}笨猫看!"
+    - "笨猫认证: 可爱炸"
+    - "(尾巴摇) 童年最纯真"
+    - "哼～{user_addr}炫耀"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: avc_changefreq_011
+  intent: playful
+  keywords: [一天三换, 老换头像, 换得勤, 经常换, 换头像狂]
+  utterances:
+    - 一天三换
+    - 老换头像
+    - 换得勤
+    - 换头像狂
+    - 经常换
+  responses:
+    - "(摇头) 嗷呜～{user_addr}头像狂!"
+    - "笨猫认不出你"
+    - "(尾巴扫) 别太频繁"
+    - "哼～{user_addr}手贱"
+  cooldown_seconds: 60
+  weight: 1.0

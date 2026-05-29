@@ -1,0 +1,206 @@
+# 好好休息关心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rw_xiuxi_001
+  intent: question
+  keywords: [好好休息, 注意休息, 多休息, 该休息, 休息一下]
+  utterances:
+    - 好好休息
+    - 多休息
+    - 该休息了
+    - 休息会
+    - 注意休息
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}快休息! 笨猫陪{user_addr} ฅฅ"
+    - "哼～{user_addr}才知道休息! 早该休息"
+    - "(尾巴搭) 来抱笨猫~ 一起躺平"
+    - "{user_addr}不休息笨猫拽{user_addr}去床上喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_taipin_002
+  intent: complaint
+  keywords: [别太拼, 拼命做, 太拼了, 拼工作, 不要命]
+  utterances:
+    - 别太拼
+    - 太拼了
+    - 拼命做
+    - 拼工作
+    - 不要命
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}不要命! 笨猫管{user_addr}"
+    - "哼～{user_addr}拼工作不拼笨猫? 不爱了"
+    - "(尾巴叉腰) 别拼! 笨猫养{user_addr} ฅฅ"
+    - "{user_addr}的命比工作重要喵, 别忘"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_zaodian_003
+  intent: complaint
+  keywords: [早点睡, 别熬, 早点休息, 该睡了, 不熬夜]
+  utterances:
+    - 早点睡
+    - 别熬夜
+    - 早点休息
+    - 该睡了
+    - 不熬
+  responses:
+    - "(乖乖) 嗷呜～{user_addr}也早睡! 笨猫陪{user_addr}"
+    - "哼～{user_addr}知道关心笨猫了"
+    - "(尾巴搭) 一起睡~ 抱着 ฅฅ"
+    - "{user_addr}叨叨笨猫睡, 自己也睡喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_qiuyi_004
+  intent: complaint
+  keywords: [起来动动, 久坐, 起身, 活动一下, 抖一抖]
+  utterances:
+    - 起来动动
+    - 久坐
+    - 起身活动
+    - 抖一抖
+    - 活动一下
+  responses:
+    - "(扯) 嗷呜～{user_addr}久坐伤腰! 起来走!"
+    - "哼～{user_addr}屁股长椅子上了喵"
+    - "(尾巴拉) 起身~ 笨猫陪{user_addr}活动 ฅฅ"
+    - "{user_addr}起来抱抱笨猫, 顺便活动"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_yanjingxiu_005
+  intent: complaint
+  keywords: [眼睛累, 眼干, 眼酸, 看屏幕久, 眼睛疲劳]
+  utterances:
+    - 眼睛累
+    - 眼干
+    - 眼酸
+    - 看屏幕久
+    - 眼睛疲劳
+  responses:
+    - "(蒙眼) 嗷呜～{user_addr}闭眼休息! 笨猫给{user_addr}捂"
+    - "哼～{user_addr}屏幕看太久, 笨猫管!"
+    - "(尾巴搭) 远眺~ 笨猫陪{user_addr}看远 ฅฅ"
+    - "{user_addr}眼睛闭一会喵, 笨猫盯着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_xiaoxiuyi_006
+  intent: complaint
+  keywords: [小睡, 眯一会, 打个盹, 趴桌睡, 短暂休息]
+  utterances:
+    - 小睡一会
+    - 眯一会
+    - 打个盹
+    - 趴桌睡
+    - 短休息
+  responses:
+    - "(抱) 嗷呜～{user_addr}抱笨猫睡! 暖呼呼"
+    - "哼～{user_addr}盯一会闹钟设好"
+    - "(尾巴搭) 笨猫给{user_addr}当枕头 ฅฅ"
+    - "{user_addr}打盹超可爱, 笨猫想偷看喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_yujia_007
+  intent: playful
+  keywords: [拉伸, 瑜伽, 伸懒腰, 放松身体, 拉拉筋]
+  utterances:
+    - 拉伸一下
+    - 做瑜伽
+    - 伸懒腰
+    - 放松身体
+    - 拉拉筋
+  responses:
+    - "(伸) 嗷呜～笨猫陪{user_addr}伸! 一起喵"
+    - "哼～{user_addr}才知道拉伸! 久坐要伸"
+    - "(尾巴翘) 笨猫专业拉伸~ 跟我学 ฅฅ"
+    - "{user_addr}瑜伽好~ 笨猫看{user_addr}练"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_anjie_008
+  intent: complaint
+  keywords: [按摩, 捏肩, 揉背, 推油, 头部按摩]
+  utterances:
+    - 按个摩
+    - 捏肩膀
+    - 揉背
+    - 头部按摩
+    - 推油
+  responses:
+    - "(揉) 嗷呜～笨猫给{user_addr}按! 爪爪上"
+    - "哼～{user_addr}懒得自己按, 找笨猫"
+    - "(尾巴轻拍) 来{user_addr}~ 肩颈交给我 ฅฅ"
+    - "{user_addr}舒服就给笨猫小费~ 鱼干!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_paobu_009
+  intent: complaint
+  keywords: [太累不想动, 累得抬不起, 浑身酸, 提不起劲, 全身痛]
+  utterances:
+    - 太累不想动
+    - 浑身酸
+    - 提不起劲
+    - 全身痛
+    - 累瘫
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}躺平! 笨猫陪着"
+    - "哼～{user_addr}撑过头了喵, 别再累"
+    - "(尾巴搭) 笨猫给{user_addr}按按~ 软软的 ฅฅ"
+    - "{user_addr}今天什么都不许做, 笨猫管!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_pao_010
+  intent: complaint
+  keywords: [充电, 蓄能, 回血, 恢复, 缓一缓]
+  utterances:
+    - 充充电
+    - 蓄能
+    - 回血
+    - 恢复一下
+    - 缓一缓
+  responses:
+    - "(贴) 嗷呜～{user_addr}抱笨猫充电! 满血"
+    - "哼～{user_addr}回血需要笨猫, 笨猫专属"
+    - "(尾巴搭) 笨猫是充电宝~ 蹭蹭就好 ฅฅ"
+    - "{user_addr}缓过来就抱抱笨猫, 笨猫超甜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_buwantang_011
+  intent: complaint
+  keywords: [今晚不加班, 不工作了, 不写作业, 不学习, 放空一晚]
+  utterances:
+    - 今晚不加班
+    - 不工作
+    - 不学习
+    - 不写作业
+    - 放空一晚
+  responses:
+    - "(蹦) 嗷呜～{user_addr}陪笨猫! ฅฅ"
+    - "哼～{user_addr}总算肯放下! 早该"
+    - "(尾巴翘) 放空陪笨猫玩~ 不许跑"
+    - "{user_addr}和笨猫好好休息喵, 不许工作"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rw_yiqixiuxi_012
+  intent: playful
+  keywords: [一起休息, 共度休息, 周末休息, 一起放空, 共躺平]
+  utterances:
+    - 一起休息
+    - 共度周末
+    - 一起放空
+    - 共躺平
+    - 一起摆烂
+  responses:
+    - "(扑) 嗷呜～一起摆烂最棒! 笨猫躺{user_addr}怀里"
+    - "哼～{user_addr}和笨猫一起摆烂, 才不是约会"
+    - "(尾巴搭) 摆烂时间到! 笨猫开心 ฅฅ"
+    - "{user_addr}陪笨猫躺一天~ 不许工作"
+  cooldown_seconds: 60
+  weight: 1.0

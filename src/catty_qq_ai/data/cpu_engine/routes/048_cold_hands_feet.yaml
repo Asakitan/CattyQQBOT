@@ -1,0 +1,206 @@
+# 手脚冰凉 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ch_shoubing_001
+  intent: complaint
+  keywords: [手凉, 手冰, 手冷, 手脚冰凉, 手没温度]
+  utterances:
+    - "手凉"
+    - "手冰"
+    - "手冷"
+    - "手脚冰凉"
+    - "手没温度"
+  responses:
+    - "(握手) 嗷呜～{user_addr}手冰笨猫捂热"
+    - "哼～手冷喝姜茶 ฅฅ"
+    - "(尾巴抚) 手脚冰凉气血差"
+    - "手没温度泡热水"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_jiaobing_001
+  intent: complaint
+  keywords: [脚冰, 脚冷, 脚踩到冰, 脚趾冷, 脚发凉]
+  utterances:
+    - "脚冰"
+    - "脚冷"
+    - "脚踩到冰"
+    - "脚趾冷"
+    - "脚发凉"
+  responses:
+    - "(摸脚) 嗷呜～{user_addr}脚冷穿厚袜"
+    - "哼～脚趾冷泡脚 ฅฅ"
+    - "(尾巴扫) 脚发凉运动"
+    - "脚冰盖好被"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_paojiao_001
+  intent: question
+  keywords: [泡脚, 泡脚桶, 泡脚药, 泡脚时间, 加点料]
+  utterances:
+    - "泡脚"
+    - "泡脚桶"
+    - "泡脚药"
+    - "泡脚时间"
+    - "加点料"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}泡脚舒服"
+    - "哼～泡脚 20 分钟 ฅฅ"
+    - "(尾巴扫) 加艾草驱寒"
+    - "泡脚桶高一点好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_redai_001
+  intent: question
+  keywords: [暖宝宝, 热水袋, 暖手宝, 充电暖, 暖物]
+  utterances:
+    - "暖宝宝"
+    - "热水袋"
+    - "暖手宝"
+    - "充电暖"
+    - "暖物"
+  responses:
+    - "(递) 嗷呜～{user_addr}暖手宝必备"
+    - "哼～热水袋经典 ฅฅ"
+    - "(尾巴扫) 充电暖方便"
+    - "暖宝宝贴下腹"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_xueqi_001
+  intent: complaint
+  keywords: [气血差, 血液循环, 贫血, 头晕乏力, 气血不足]
+  utterances:
+    - "气血差"
+    - "血液循环"
+    - "贫血"
+    - "头晕乏力"
+    - "气血不足"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}气血差补一补"
+    - "哼～贫血多吃肉 ฅฅ"
+    - "(尾巴扫) 循环差运动"
+    - "头晕乏力查血"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_jiangwen_001
+  intent: complaint
+  keywords: [冬天怕冷, 怕冷, 不耐寒, 怕风, 怕冻]
+  utterances:
+    - "冬天怕冷"
+    - "怕冷"
+    - "不耐寒"
+    - "怕风"
+    - "怕冻"
+  responses:
+    - "(裹) 嗷呜～{user_addr}怕冷穿厚"
+    - "哼～怕风戴围巾 ฅฅ"
+    - "(尾巴抚) 不耐寒锻炼提升"
+    - "怕冻屋里别少穿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_renshen_001
+  intent: question
+  keywords: [人参, 当归, 黄芪, 红枣, 补气]
+  utterances:
+    - "人参"
+    - "当归"
+    - "黄芪"
+    - "红枣"
+    - "补气"
+  responses:
+    - "(查) 嗷呜～{user_addr}红枣茶喝"
+    - "哼～人参贵但效 ฅฅ"
+    - "(尾巴扫) 黄芪补气"
+    - "当归月经后补"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_yundong_001
+  intent: question
+  keywords: [运动暖身, 跑步暖身, 散步, 拉伸, 动起来]
+  utterances:
+    - "运动暖身"
+    - "跑步暖身"
+    - "散步"
+    - "拉伸"
+    - "动起来"
+  responses:
+    - "(挥爪) 嗷呜～{user_addr}动起来!"
+    - "哼～运动暖好 ฅฅ"
+    - "(尾巴扫) 拉伸放松"
+    - "散步循环改善"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_yiwu_001
+  intent: question
+  keywords: [秋裤, 保暖内衣, 加绒裤, 法兰绒, 摇粒绒]
+  utterances:
+    - "秋裤"
+    - "保暖内衣"
+    - "加绒裤"
+    - "法兰绒"
+    - "摇粒绒"
+  responses:
+    - "(扯) 嗷呜～{user_addr}必须秋裤!"
+    - "哼～保暖内衣得穿 ฅฅ"
+    - "(尾巴扫) 加绒裤暖"
+    - "法兰绒舒服"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_jianyi_001
+  intent: question
+  keywords: [姜茶, 红糖姜, 桂圆, 枸杞, 暖饮]
+  utterances:
+    - "姜茶"
+    - "红糖姜"
+    - "桂圆"
+    - "枸杞"
+    - "暖饮"
+  responses:
+    - "(端) 嗷呜～{user_addr}红糖姜茶暖"
+    - "哼～桂圆补血 ฅฅ"
+    - "(尾巴扫) 枸杞泡水"
+    - "暖饮冬日必备"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_anmo_001
+  intent: question
+  keywords: [按摩, 推拿, 艾灸, 拔罐, 刮痧]
+  utterances:
+    - "按摩"
+    - "推拿"
+    - "艾灸"
+    - "拔罐"
+    - "刮痧"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}按摩舒服"
+    - "哼～艾灸驱寒 ฅฅ"
+    - "(尾巴扫) 拔罐看体质"
+    - "推拿要专业"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ch_xiaomei_001
+  intent: complaint
+  keywords: [手指僵, 关节痛, 指尖冷, 手抖, 手没力]
+  utterances:
+    - "手指僵"
+    - "关节痛"
+    - "指尖冷"
+    - "手抖"
+    - "手没力"
+  responses:
+    - "(摸) 嗷呜～{user_addr}手指僵活动"
+    - "哼～关节痛保暖 ฅฅ"
+    - "(尾巴抚) 指尖冷搓手"
+    - "手抖查原因"
+  cooldown_seconds: 60
+  weight: 1.0

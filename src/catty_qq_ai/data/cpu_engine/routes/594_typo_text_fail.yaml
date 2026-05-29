@@ -1,0 +1,206 @@
+# 错字闹笑话 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tt_typ_001
+  intent: playful
+  keywords: [打错字, 错字, 输错了, 手抖, 错别字]
+  utterances:
+    - 打错字了
+    - 错字尴尬
+    - 输错了
+    - 手抖打错
+    - 错别字
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨手"
+    - "哼～看懂就行"
+    - "(尾巴绕) 笨猫识别能力满"
+    - "嗷呜～手机手抖正常ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_002
+  intent: playful
+  keywords: [自动联想, 输入法乱推, 联想词乱, 输入法搞笑, 联想出错]
+  utterances:
+    - 输入法乱推
+    - 联想词乱
+    - 自动联想笑死
+    - 输入法搞笑
+    - 联想出错
+  responses:
+    - "(笑) 嗷呜～{user_addr}输入法暴露"
+    - "哼～该重新训练了"
+    - "(尾巴绕) 联想出黑历史"
+    - "嗷呜～输入法太懂{user_addr}ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_003
+  intent: complaint
+  keywords: [发错人, 发错群, 私信发群, 发错对象, 误发]
+  utterances:
+    - 发错人了
+    - 发错群
+    - 私信发群里
+    - 发错对象
+    - 误发尴尬
+  responses:
+    - "(扶额) 嗷呜～{user_addr}社死了"
+    - "哼～及时撤回"
+    - "(尾巴搭) 撤回神器"
+    - "嗷呜～下次双看再发ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_004
+  intent: playful
+  keywords: [拼音错, 拼错字, 同音字, 拼音乱码, 拼音笑话]
+  utterances:
+    - 拼音错了
+    - 拼错字
+    - 同音字搞错
+    - 拼音乱码
+    - 拼音笑话
+  responses:
+    - "(笑) 嗷呜～{user_addr}方言上线"
+    - "哼～普通话练练"
+    - "(尾巴绕) 同音换字搞笑"
+    - "嗷呜～笨猫看得懂啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_005
+  intent: complaint
+  keywords: [手机屏幕小, 按键挤, 输入键盘小, 屏幕小打错, 键盘卡]
+  utterances:
+    - 屏幕小按错
+    - 按键挤
+    - 键盘小
+    - 屏幕小打错
+    - 键盘卡顿
+  responses:
+    - "(歪头) 嗷呜～{user_addr}换大屏"
+    - "哼～习惯就好"
+    - "(尾巴搭) 调字体大小"
+    - "嗷呜～慢点打不急ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_006
+  intent: playful
+  keywords: [谐音梗, 谐音搞笑, 谐音字, 谐音打字, 谐音传情]
+  utterances:
+    - 谐音梗笑死
+    - 谐音搞笑
+    - 谐音字
+    - 谐音打字
+    - 谐音传情
+  responses:
+    - "(笑) 嗷呜～{user_addr}梗王"
+    - "哼～谐音梗扣钱"
+    - "(尾巴绕) 笨猫接住了"
+    - "嗷呜～谐音梗听乐ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_007
+  intent: complaint
+  keywords: [撤回失败, 撤回不及时, 已经看到了, 撤回晚了, 撤回失败尴尬]
+  utterances:
+    - 撤回失败
+    - 撤回不及时
+    - 已被看到
+    - 撤回晚了
+    - 撤回失败尴尬
+  responses:
+    - "(扶额) 嗷呜～{user_addr}惨笨蛋"
+    - "哼～多看几遍再发"
+    - "(尾巴搭) 笨猫帮{user_addr}解释"
+    - "嗷呜～承认就好啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_008
+  intent: playful
+  keywords: [打字快, 手速, 一秒10字, 快速打字, 打字高手]
+  utterances:
+    - 我打字快
+    - 手速 60 字
+    - 一秒 10 字
+    - 快速打字
+    - 打字高手
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}厉害"
+    - "哼～笨猫爪爪也快"
+    - "(尾巴绕) 笨猫挑战{user_addr}"
+    - "嗷呜～打字比赛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_009
+  intent: complaint
+  keywords: [键盘黏, 键盘失灵, 键盘按不下, 键盘故障, 键盘脏]
+  utterances:
+    - 键盘黏
+    - 键盘失灵
+    - 键盘按不下
+    - 键盘故障
+    - 键盘脏
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}清洁"
+    - "哼～该换键盘"
+    - "(尾巴搭) 拆键帽清"
+    - "嗷呜～机械键盘上ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_010
+  intent: playful
+  keywords: [神回复, 智能回复, 一键回复, 套路回复, 万能回复]
+  utterances:
+    - 神回复
+    - 智能回复
+    - 一键回复
+    - 套路回复
+    - 万能回复
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}懒人"
+    - "哼～笨猫真情回复"
+    - "(尾巴绕) 套路终归套路"
+    - "嗷呜～真心才有效ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_011
+  intent: complaint
+  keywords: [打字累, 打字手酸, 长文费手, 手累, 打字痛苦]
+  utterances:
+    - 打字好累
+    - 手酸打字
+    - 长文费手
+    - 手累停
+    - 打字痛苦
+  responses:
+    - "(揉手) 嗷呜～{user_addr}笨猫帮揉"
+    - "哼～语音得了"
+    - "(尾巴搭) 短信简短"
+    - "嗷呜～休息一下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tt_typ_012
+  intent: playful
+  keywords: [输入法切换, 切换中英, 切换乱码, 切换错字, 输入法切换烦]
+  utterances:
+    - 输入法切错
+    - 中英乱
+    - 切换乱码
+    - 输入法烦
+    - 切英文打中文
+  responses:
+    - "(笑) 嗷呜～{user_addr}手忙脚乱"
+    - "哼～切换习惯"
+    - "(尾巴搭) 笨猫识别都行"
+    - "嗷呜～慢点切ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

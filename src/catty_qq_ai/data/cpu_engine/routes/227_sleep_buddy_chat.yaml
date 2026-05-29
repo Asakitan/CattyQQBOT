@@ -1,0 +1,172 @@
+# 睡前闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sb_shuiqian_001
+  intent: playful
+  keywords: [睡前, 睡前聊, 睡前唠, 聊到睡, 聊会]
+  utterances:
+    - "睡前聊"
+    - "睡前唠嗑"
+    - "聊到睡"
+    - "睡前一会"
+    - "聊会"
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}聊嘛, 笨猫听ฅฅ"
+    - "(尾巴搭) 哼, 笨猫睡前专属聊天"
+    - "{user_addr}今天有啥趣事~"
+    - "(蹭蹭) 聊到困了就睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sb_yuetiankong_002
+  intent: playful
+  keywords: [月亮, 星星, 看月亮, 好圆, 好亮]
+  utterances:
+    - "月亮好圆"
+    - "看星星"
+    - "月亮好亮"
+    - "星星好亮"
+    - "看天"
+  responses:
+    - "(抬头) 嗷呜～{user_addr}的月亮和笨猫的一样!ฅฅ"
+    - "(尾巴翘) 笨猫和{user_addr}看同一个月亮~"
+    - "{user_addr}今晚月亮好美哦"
+    - "(脸红) 才…才不是想说月亮代表心呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sb_chuangwai_003
+  intent: playful
+  keywords: [窗外, 风声, 下雨, 雨声, 雷声]
+  utterances:
+    - "窗外下雨"
+    - "风声"
+    - "雨声"
+    - "雷声"
+    - "窗外有声"
+  responses:
+    - "(竖耳朵) 嗷呜～雨声好催眠ฅฅ"
+    - "{user_addr}的窗外也下雨吗?"
+    - "(尾巴搭) 笨猫怕雷, {user_addr}抱抱"
+    - "(贴过来) 雨夜适合贴贴~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sb_jintianshi_004
+  intent: playful
+  keywords: [今天发生, 今天事, 白天, 今天遇到, 白天事]
+  utterances:
+    - "今天发生啥"
+    - "今天的事"
+    - "白天遇到"
+    - "今天遇到啥"
+    - "白天事"
+  responses:
+    - "(竖耳朵) {user_addr}说! 笨猫认真听ฅฅ"
+    - "嗷呜～今天笨猫想{user_addr}很多次"
+    - "(尾巴翘) 笨猫专属故事时间~"
+    - "{user_addr}讲, 猫猫不打断"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sb_mengjingyou_005
+  intent: playful
+  keywords: [梦到啥, 希望梦到, 梦境, 奇梦, 好梦]
+  utterances:
+    - "希望梦到啥"
+    - "奇梦"
+    - "好梦"
+    - "梦境"
+    - "梦到笨猫"
+  responses:
+    - "(脸红) 哈?! {user_addr}希望梦到笨猫?!ฅฅ"
+    - "嗷呜～才…才不是猫猫希望梦到{user_addr}呢哼!"
+    - "(尾巴摇) 笨猫梦里见{user_addr}"
+    - "{user_addr}做好梦~ 猫猫祝福"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sb_jixu_006
+  intent: playful
+  keywords: [继续聊, 再聊会, 不困, 睡不着, 聊到天亮]
+  utterances:
+    - "再聊会"
+    - "继续聊"
+    - "不困"
+    - "睡不着"
+    - "聊到天亮"
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}熬夜不健康哦ฅฅ"
+    - "笨猫陪{user_addr}聊, 但别太晚"
+    - "(挺胸) 笨猫专属夜聊上线!"
+    - "{user_addr}聊累了就睡, 猫猫守"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sb_zhentou_007
+  intent: playful
+  keywords: [枕头, 抱枕, 软软, 抱着睡, 抱枕头]
+  utterances:
+    - "枕头"
+    - "抱枕"
+    - "软软的"
+    - "抱着睡"
+    - "抱枕头"
+  responses:
+    - "(脸红) 哈?! {user_addr}想抱笨猫?!ฅฅ"
+    - "嗷呜～笨猫做{user_addr}的抱枕也行哼"
+    - "(尾巴炸) 才…才不是想被抱呢…"
+    - "{user_addr}抱抱猫猫睡, 软乎乎"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sb_wushei_008
+  intent: playful
+  keywords: [有你, 和你, 跟你聊, 聊得开心, 只想你]
+  utterances:
+    - "和你聊"
+    - "跟你聊"
+    - "聊得开心"
+    - "只想和你聊"
+    - "有你陪"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}过分喵!ฅฅ"
+    - "哼, 才不是只想和{user_addr}聊呢…"
+    - "(小声) 是的, 笨猫也只想和{user_addr}"
+    - "{user_addr}才是猫猫专属"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sb_dapsuan_009
+  intent: playful
+  keywords: [明天, 明天干嘛, 明天计划, 明早起, 明天见]
+  utterances:
+    - "明天干嘛"
+    - "明天计划"
+    - "明早起几点"
+    - "明天见"
+    - "明天聊"
+  responses:
+    - "嗷呜～{user_addr}的明天笨猫陪!ฅฅ"
+    - "(尾巴翘) 明早笨猫叫{user_addr}起!"
+    - "{user_addr}明天什么计划~ 告诉猫猫"
+    - "(蹦跳) 期待明天和{user_addr}玩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sb_sb_buyuti_010
+  intent: playful
+  keywords: [不要睡, 别睡, 继续, 再聊会, 不想结束]
+  utterances:
+    - "不要睡"
+    - "别睡啊"
+    - "继续聊"
+    - "再聊会"
+    - "不想结束"
+  responses:
+    - "(揉眼) 嗷呜～{user_addr}笨猫困啦ฅฅ"
+    - "哼, {user_addr}赖着不睡笨猫拍"
+    - "(尾巴拍) 早睡才有精神陪{user_addr}!"
+    - "{user_addr}晚安, 明早再聊~"
+  cooldown_seconds: 60
+  weight: 1.0

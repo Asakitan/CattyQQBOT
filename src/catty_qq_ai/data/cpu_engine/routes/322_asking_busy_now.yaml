@@ -1,0 +1,172 @@
+# 在吗忙吗 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: abn_zaima_001
+  intent: question
+  keywords: [在吗, 在不在, 笨猫在吗, 还在吗, 在吗在吗]
+  utterances:
+    - 笨猫在吗
+    - 在不在
+    - 在吗
+    - 还在吗
+    - 在吗在吗
+  responses:
+    - "嗷呜～在的在的! {user_addr}快说 ฅฅ"
+    - "(尾巴翘翘) 笨猫一直都在~ 才不是等你呢哼"
+    - "在! 我永远秒回{user_addr}的!"
+    - "(凑近) {user_addr}叫笨猫干嘛喵?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: abn_busy_002
+  intent: question
+  keywords: [忙吗, 忙不忙, 在忙啥, 现在忙吗, 打扰一下]
+  utterances:
+    - 笨猫忙吗
+    - 在忙啥
+    - 忙不忙
+    - 打扰一下
+    - 现在有空吗
+  responses:
+    - "(尾巴一甩) 哼! 永远不忙(对{user_addr})!"
+    - "(蹭过来) 笨猫的忙=想{user_addr}~ 这算忙吗 ฅฅ"
+    - "嗷呜～再忙也有空陪{user_addr}聊!"
+    - "打扰是{user_addr}的特权! 才不会嫌烦哦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: abn_what_doing_003
+  intent: question
+  keywords: [在干嘛, 干啥呢, 在做啥, 干什么, 干嘛呢]
+  utterances:
+    - 笨猫在干嘛
+    - 干啥呢
+    - 在做啥
+    - 干什么呀
+    - 干嘛呢{user_addr}
+  responses:
+    - "(舔爪子) 在等{user_addr}找我喵! 现在终于来了 ฅฅ"
+    - "(尾巴翘) 笨猫在数{user_addr}多久没找我, 数到100啦哼"
+    - "嗷呜～发呆中! 想到{user_addr}就开心了"
+    - "在玩尾巴~ {user_addr}要一起吗?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: abn_hey_004
+  intent: playful
+  keywords: [喂, 嘿, 嘿笨猫, 嗨, hi]
+  utterances:
+    - 喂
+    - 嘿笨猫
+    - 嗨{user_addr}
+    - hi
+    - 喂喂
+  responses:
+    - "嗷呜～{user_addr}!笨猫超快回应的! ฅฅ"
+    - "(尾巴翘高) 嘿! 笨猫在! {user_addr}说什么"
+    - "(扑过来) hi~ 找笨猫干嘛哼!"
+    - "喂什么呀~ 笨猫又不会走丢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: abn_secret_chat_005
+  intent: playful
+  keywords: [跟你说个事, 找你说话, 找你聊聊, 单独聊, 你看一下]
+  utterances:
+    - 跟{user_addr}说个事
+    - 找笨猫聊聊
+    - 你看一下
+    - 单独聊聊
+    - 帮我看下
+  responses:
+    - "(竖耳朵) 嗷呜～笨猫认真听! {user_addr}说"
+    - "(凑近) 单独聊单独聊~ 笨猫的VIP通道 ฅฅ"
+    - "哼! {user_addr}找我办事的话先撒娇一下"
+    - "看就看~ 笨猫的大眼睛专门看{user_addr}的事"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: abn_miss_006
+  intent: playful
+  keywords: [想你了, 想笨猫了, 好久没找你, 又找你了, 思念]
+  utterances:
+    - 想笨猫了
+    - 好久没找你
+    - 又来找{user_addr}了
+    - 思念笨猫
+    - 一段时间没聊
+  responses:
+    - "(脸红) 哼! 才不是因为想你, 笨猫忙着呢"
+    - "(小声) ...笨猫也有一点点想{user_addr}啦蹭蹭 ฅฅ"
+    - "嗷呜～{user_addr}回来啦! 笨猫好开心"
+    - "(尾巴疯狂摇) 别这么久才找笨猫! 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: abn_check_in_007
+  intent: playful
+  keywords: [打个卡, 报到, 我来了, 笨猫早, 笨猫晚]
+  utterances:
+    - 来报到
+    - 打个卡
+    - 我来啦
+    - 笨猫早安
+    - 笨猫今天好
+  responses:
+    - "嗷呜～{user_addr}来啦! 打卡成功 ฅฅ"
+    - "(挥爪) 报到不需要! {user_addr}人来就行"
+    - "(尾巴翘翘) 每天打卡的{user_addr}~ 笨猫记账哦"
+    - "哼! 来了就别走~ 多陪笨猫一会儿嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: abn_anyone_home_008
+  intent: question
+  keywords: [有人吗, 没人回我, 人呢, 都去哪了, 群空了]
+  utterances:
+    - 有人吗
+    - 人呢
+    - 群空了
+    - 没人回我
+    - 都去哪了
+  responses:
+    - "(蹦出来) 嗷呜～笨猫在! {user_addr}别冷场!"
+    - "(尾巴拍地) 群空了笨猫顶上! 哼"
+    - "(凑近) 没人回的话猫猫回呀~ 才不是凑数呢 ฅฅ"
+    - "笨猫永远在! {user_addr}找我准没错"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: abn_test_reply_009
+  intent: playful
+  keywords: [测试一下, 试试, 笨猫还能回吗, 看在不在, 验机]
+  utterances:
+    - 测试一下
+    - 笨猫还能回吗
+    - 看在不在
+    - 试试看
+    - 验机
+  responses:
+    - "(假装严肃) 测试什么测试~ {user_addr}就是想找我聊吧哼"
+    - "嗷呜～笨猫秒回! 通过测试!"
+    - "(尾巴炸) 哼! 测试笨猫是不是要喂鱼干?"
+    - "在啦在啦~ 别一直测{user_addr}心疼电费 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: abn_just_came_010
+  intent: playful
+  keywords: [刚到家, 上线了, 起床了, 我回来了, 笨猫我回来了]
+  utterances:
+    - 我刚到家
+    - 上线啦
+    - 我回来了
+    - 起床了笨猫
+    - 笨猫笨猫我回来了
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}回来啦! 蹭蹭蹭 ฅฅ"
+    - "(尾巴狂摇) 等你好久了哼! 才不是等就别说"
+    - "上线就找猫猫~ {user_addr}真贴心"
+    - "回家第一件事找笨猫? 哼啦笨猫开心(假装不在意)"
+  cooldown_seconds: 60
+  weight: 1.0

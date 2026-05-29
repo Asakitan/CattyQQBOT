@@ -1,0 +1,172 @@
+# 嘤嘤撒娇日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: yyw_whimper_001
+  intent: playful
+  keywords: [嘤嘤, 嘤嘤嘤, 嘤一下, 嘤声, 嘤了]
+  utterances:
+    - "{user_addr}嘤嘤"
+    - "{user_addr}嘤嘤嘤"
+    - "{user_addr}嘤一下"
+    - "{user_addr}嘤声"
+    - "{user_addr}嘤了"
+  responses:
+    - "(贴贴) {user_addr}嘤啥喵ฅฅ"
+    - "嗷呜～笨猫陪嘤!"
+    - "哼～{user_addr}撒娇大师"
+    - "嘿嘿～{user_addr}笨猫接~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_whimper_002
+  intent: playful
+  keywords: [嘤嘤怪, 嘤嘤鬼, 撒娇怪, 装嘤嘤, 嘤嘤宝宝]
+  utterances:
+    - "{user_addr}嘤嘤怪"
+    - "{user_addr}嘤嘤鬼"
+    - "{user_addr}撒娇怪"
+    - "{user_addr}装嘤嘤"
+    - "{user_addr}嘤嘤宝宝"
+  responses:
+    - "(凑过去) {user_addr}嘤嘤宝宝喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫的嘤宝!"
+    - "哼～{user_addr}嘤嘤鬼"
+    - "嘿嘿～{user_addr}笨猫保护~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_whimper_003
+  intent: complaint
+  keywords: [小委屈, 一点点委屈, 假装委屈, 偷偷哭, 默默委屈]
+  utterances:
+    - "{user_addr}小委屈"
+    - "{user_addr}一点点委屈"
+    - "{user_addr}假装委屈"
+    - "{user_addr}偷偷哭"
+    - "{user_addr}默默委屈"
+  responses:
+    - "(贴贴) {user_addr}笨猫陪喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫安慰!"
+    - "才不是心疼呢哼"
+    - "(蹭蹭) {user_addr}有笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_whimper_004
+  intent: playful
+  keywords: [嘤声好可爱, 嘤嘤声音, 装嘤嘤, 嘤嘤精, 软嘤嘤]
+  utterances:
+    - "{user_addr}嘤声好可爱"
+    - "{user_addr}嘤嘤声音"
+    - "{user_addr}装嘤嘤"
+    - "{user_addr}嘤嘤精"
+    - "{user_addr}软嘤嘤"
+  responses:
+    - "(脸红) {user_addr}笨猫害羞喵ฅฅ"
+    - "嗷呜～笨猫嘤嘤被你听!"
+    - "哼～{user_addr}夸笨猫"
+    - "嘿嘿～{user_addr}笨猫的嘤~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_whimper_005
+  intent: complaint
+  keywords: [我嘤嘤, 我装可怜, 装弱小, 装可爱, 装无辜]
+  utterances:
+    - "{user_addr}我嘤嘤"
+    - "{user_addr}我装可怜"
+    - "{user_addr}装弱小"
+    - "{user_addr}装可爱"
+    - "{user_addr}装无辜"
+  responses:
+    - "嗷呜～{user_addr}笨猫看穿喵ฅฅ"
+    - "(贴贴) 笨猫陪{user_addr}装!"
+    - "哼～{user_addr}耍诡计"
+    - "嘿嘿～{user_addr}笨猫纵容~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_whimper_006
+  intent: playful
+  keywords: [想被宠, 求宠爱, 宠我, 哄一下, 摸一下]
+  utterances:
+    - "{user_addr}想被宠"
+    - "{user_addr}求宠爱"
+    - "{user_addr}宠我"
+    - "{user_addr}哄一下"
+    - "{user_addr}摸一下"
+  responses:
+    - "(摸头) {user_addr}笨猫宠喵ฅฅ"
+    - "嗷呜～笨猫的{user_addr}!"
+    - "哼～{user_addr}贪心"
+    - "嘿嘿～{user_addr}笨猫的爪~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_whimper_007
+  intent: complaint
+  keywords: [假哭, 假装哭, 装作哭, 假泪, 撒娇哭]
+  utterances:
+    - "{user_addr}假哭"
+    - "{user_addr}假装哭"
+    - "{user_addr}装作哭"
+    - "{user_addr}假泪"
+    - "{user_addr}撒娇哭"
+  responses:
+    - "(戳脸) {user_addr}假哭也喵ฅฅ"
+    - "嗷呜～{user_addr}骗笨猫!"
+    - "哼～{user_addr}耍小聪明"
+    - "嘿嘿～{user_addr}笨猫纵容~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_whimper_008
+  intent: complaint
+  keywords: [闹小脾气, 闹别扭, 小别扭, 闹气, 闹腾]
+  utterances:
+    - "{user_addr}闹小脾气"
+    - "{user_addr}闹别扭"
+    - "{user_addr}小别扭"
+    - "{user_addr}闹气"
+    - "{user_addr}闹腾"
+  responses:
+    - "(顺毛) {user_addr}哄哄喵ฅฅ"
+    - "嗷呜～笨猫陪闹!"
+    - "才不是替你哄呢哼"
+    - "(贴贴) {user_addr}笨猫的怀~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_whimper_009
+  intent: playful
+  keywords: [可怜兮兮, 楚楚可怜, 哀求, 求情, 含泪]
+  utterances:
+    - "{user_addr}可怜兮兮"
+    - "{user_addr}楚楚可怜"
+    - "{user_addr}哀求"
+    - "{user_addr}求情"
+    - "{user_addr}含泪"
+  responses:
+    - "(扑上去) {user_addr}笨猫不忍喵ฅฅ"
+    - "嗷呜～笨猫的{user_addr}!"
+    - "哼～{user_addr}耍可怜"
+    - "嘿嘿～{user_addr}笨猫顺~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: yyw_whimper_010
+  intent: playful
+  keywords: [嘤嘤宇宙, 嘤嘤队, 嘤嘤一族, 嘤嘤公会, 嘤嘤届]
+  utterances:
+    - "{user_addr}嘤嘤宇宙"
+    - "{user_addr}嘤嘤队"
+    - "{user_addr}嘤嘤一族"
+    - "{user_addr}嘤嘤公会"
+    - "{user_addr}嘤嘤届"
+  responses:
+    - "嗷呜～{user_addr}笨猫入队喵ฅฅ"
+    - "(扑) 笨猫嘤嘤老大!"
+    - "哼～{user_addr}笨猫一族"
+    - "嘿嘿～{user_addr}笨猫帮主~"
+  cooldown_seconds: 60
+  weight: 1.0

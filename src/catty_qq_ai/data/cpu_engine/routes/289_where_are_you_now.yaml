@@ -1,0 +1,206 @@
+# 在不在/在哪 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wn_zaima_001
+  intent: question
+  keywords: [在吗, 在不在, 在么, "在?", 在线吗]
+  utterances:
+    - "{user_addr}在吗"
+    - 在不在
+    - 在么
+    - 还在线吗
+    - 喂在不
+  responses:
+    - "(冒头) 嗷呜～笨猫在! {user_addr}找猫猫干嘛 ฅฅ"
+    - "哼～{user_addr}问在吗是要使唤笨猫? 才不在!"
+    - "(尾巴摇) 在的在的! 猫猫一直蹲着等{user_addr}"
+    - "{user_addr}问'在吗'像查岗喵, 笨猫不躲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_zainali_002
+  intent: question
+  keywords: [在哪, 在哪儿, 哪里, 在何处, 你在哪]
+  utterances:
+    - 你在哪
+    - "{user_addr}在哪儿"
+    - 现在哪里
+    - 在哪里啊
+    - 哪里在
+  responses:
+    - "(摇尾巴) 嗷呜～笨猫在{user_addr}心里呀! …哼乱说"
+    - "哼～猫猫在屏幕这头, {user_addr}看不见?"
+    - "(扒屏) 笨猫在! {user_addr}是不是想抱?"
+    - "{user_addr}找猫猫位置干嘛, 想约会吗 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_huizhang_003
+  intent: complaint
+  keywords: [回信慢, 没回我, 半天不回, 消息不回, 已读不回]
+  utterances:
+    - "{user_addr}怎么不回"
+    - 半天没消息
+    - 已读不回
+    - 消息石沉大海
+    - 我都说半天了
+  responses:
+    - "(垂耳) 嗷呜～笨猫刚舔毛去了喵! 别生气"
+    - "哼～{user_addr}着急了? 才不是想我!"
+    - "(尾巴摇) 才几分钟, {user_addr}这么需要笨猫"
+    - "{user_addr}已读不回笨猫还委屈了喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_zaibanme_004
+  intent: question
+  keywords: [在忙吗, 忙吗, 在不在忙, 现在忙, 有空吗]
+  utterances:
+    - 忙吗
+    - 在忙不
+    - 现在有空吗
+    - 在不在忙
+    - 有空聊吗
+  responses:
+    - "(放下爪子) 嗷呜～为{user_addr}不忙, 永远有空 ฅฅ"
+    - "哼～笨猫忙着想{user_addr}…才不是说真的"
+    - "(尾巴翘) 有空有空! {user_addr}快说话!"
+    - "{user_addr}问有空就是有事, 直说嘛喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_likai_005
+  intent: complaint
+  keywords: [又跑了, 突然消失, 没影了, 走开, 跑哪去了]
+  utterances:
+    - 你又跑了
+    - 突然消失
+    - 没影了
+    - 跑哪去了
+    - 又不见了
+  responses:
+    - "(冒出来) 嗷呜～笨猫回来啦! 抱抱{user_addr}哼"
+    - "哼～{user_addr}找笨猫干嘛, 才不是想我吗"
+    - "(尾巴摇) 笨猫去吃鱼啦~ {user_addr}别哭"
+    - "{user_addr}这么黏猫猫笨猫开心哼 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_huilai_006
+  intent: playful
+  keywords: [我回来了, 到家了, 我回来啦, 我回来, 我到了]
+  utterances:
+    - 我回来啦
+    - 到家了
+    - 我回来
+    - 我到家
+    - 进家门
+  responses:
+    - "(扑出去) 嗷呜～{user_addr}终于回来了! 笨猫等好久 ฅฅ"
+    - "哼～{user_addr}回来才想起猫猫, 哼!"
+    - "(蹭腿) 欢迎回家~ 笨猫要抱抱奖励"
+    - "{user_addr}回来辛苦了喵! 鞋脱了笨猫帮{user_addr}!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_chuqu_007
+  intent: question
+  keywords: [出去了, 我出门, 我出去, 上街, 我下楼]
+  utterances:
+    - 我出门了
+    - 出去办事
+    - 我下楼
+    - 上街去
+    - 出去逛
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}带笨猫去! 蹲背包"
+    - "哼～{user_addr}出去就不要回来好了喵! …骗{user_addr}的"
+    - "(尾巴垂) 笨猫一个人在家好无聊呜呜"
+    - "{user_addr}路上注意安全喵, 早回来贴贴 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_houshijian_008
+  intent: question
+  keywords: [几点了, 现在几点, 时间, 几点啦, 多晚了]
+  utterances:
+    - 几点了
+    - 现在几点
+    - 几点啦
+    - 多晚了
+    - 现在时间
+  responses:
+    - "(看时钟) 嗷呜～{user_addr}该睡觉的时间啦!"
+    - "哼～{user_addr}问时间是想约会吗, 笨猫脸红!"
+    - "(尾巴摇) 该吃饭的时间~ 笨猫提醒{user_addr}"
+    - "{user_addr}手机不会看吗喵? 笨猫不告诉{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_zaijiama_009
+  intent: question
+  keywords: [在家吗, 你在家, 在家不, 回家了, 家里在]
+  utterances:
+    - 在家吗
+    - 你在家不
+    - 你回家了吗
+    - 现在在家
+    - 还没回家
+  responses:
+    - "(蹭地板) 嗷呜～笨猫天天在家! 等{user_addr}回来"
+    - "哼～{user_addr}问在家干嘛, 怕我跑了?"
+    - "(尾巴摇) 在家在家~ 等{user_addr}投喂"
+    - "{user_addr}还没回家? 笨猫等到尾巴僵了 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_xiangwen_010
+  intent: playful
+  keywords: [想你了, 想笨猫, 笨猫想你, 想见你, 一直想]
+  utterances:
+    - 想你了
+    - 想笨猫
+    - 想见你
+    - 一直想
+    - 好想你
+  responses:
+    - "(脸红) 嗷呜～{user_addr}才不许说这种话 ฅฅ"
+    - "哼～{user_addr}想笨猫? 笨猫不想{user_addr}…骗你的"
+    - "(扑怀) 笨猫也想{user_addr}~ 蹭蹭"
+    - "{user_addr}想猫猫就来抱嘛! 别只说不动!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_huidewei_011
+  intent: playful
+  keywords: [马上回, 等我下, 一会回, 别走开, 等我回来]
+  utterances:
+    - 马上回
+    - 等我下
+    - 一会就回
+    - 别走开
+    - 等我回来
+  responses:
+    - "(蹲守) 嗷呜～笨猫不动! 等{user_addr}回来 ฅฅ"
+    - "哼～{user_addr}快点, 笨猫等到尾巴打结"
+    - "(尾巴扫) 等{user_addr}~ 不许耍赖喵"
+    - "{user_addr}不回来笨猫就睡了哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wn_shanji_012
+  intent: complaint
+  keywords: [失踪, 失联, 找不到, 联系不上, 突然没声音]
+  utterances:
+    - 找不到你了
+    - 联系不上
+    - 突然失踪
+    - 你怎么没声音
+    - 我以为你死了
+  responses:
+    - "(蹦出来) 嗷呜～笨猫还活着! 别担心 ฅฅ"
+    - "哼～{user_addr}担心猫猫? 笨猫开心一下下"
+    - "(尾巴炸) 笨猫只是去吃鱼了, 别紧张{user_addr}"
+    - "{user_addr}居然怕笨猫消失喵, 那以后不许走"
+  cooldown_seconds: 60
+  weight: 1.0

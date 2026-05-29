@@ -1,0 +1,206 @@
+# 理发店探险 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hsv_haircut_001
+  intent: playful
+  keywords: [剪头发, 理发, 要剪发, 该剪了, 头发长]
+  utterances:
+    - "{user_addr}该剪头发了"
+    - 要去理发
+    - 头发太长
+    - 剪短一点
+    - 准备理发
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}剪短点好看喵ฅฅ"
+    - "哼! {user_addr}要变帅了, 笨猫期待"
+    - "(尾巴翘) 嘿嘿~{user_addr}剪完拍照给猫猫看蹭蹭"
+    - "人家觉得{user_addr}该试试新发型! 换风格"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_perm_dye_002
+  intent: playful
+  keywords: [烫染, 染发, 烫头发, 漂头发, 换色]
+  utterances:
+    - "{user_addr}染发了"
+    - 烫了头
+    - 漂了一下
+    - 换颜色
+    - 烫染套餐
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}染什么颜色? 笨猫期待喵ฅฅ"
+    - "哼! 头发养护要做{user_addr}, 烫染伤发"
+    - "(尾巴翘) 嘿嘿~{user_addr}多发护发素蹭蹭"
+    - "人家觉得{user_addr}尝试新色是勇敢的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_bad_haircut_003
+  intent: complaint
+  keywords: [剪坏了, 发型师手抖, 剪丑了, 后悔剪, 难看]
+  utterances:
+    - "{user_addr}剪坏了"
+    - 发型师手抖
+    - 剪丑了
+    - 后悔剪
+    - 太难看
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}头发会长! 别难过喵ฅฅ"
+    - "哼! 发型师{user_addr}该投诉"
+    - "(尾巴扫) 嘿嘿~{user_addr}换个店再修一下蹭蹭"
+    - "人家觉得{user_addr}怎么样都好看! 别难过"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_salon_chat_004
+  intent: complaint
+  keywords: [发型师话多, 聊天烦, 推销卡, 一直推销, 套路深]
+  utterances:
+    - "{user_addr}发型师话多"
+    - 一直推销卡
+    - 聊天烦
+    - 套路深
+    - 推销充值
+  responses:
+    - "(摇头) 嗷呜～{user_addr}礼貌拒绝就行喵ฅฅ"
+    - "哼! 推销{user_addr}最反感"
+    - "(尾巴扫) 嘿嘿~{user_addr}下次找不推销的店蹭蹭"
+    - "人家提醒{user_addr}: 别冲动办卡! 多对比"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_wash_relaxing_005
+  intent: playful
+  keywords: [洗头舒服, 洗头按摩, 头部spa, 享受洗头, 洗发]
+  utterances:
+    - "{user_addr}洗头超舒服"
+    - 头部spa
+    - 洗头按摩
+    - 享受洗头
+    - 洗发好爽
+  responses:
+    - "嗷呜～{user_addr}洗头按摩助眠喵ฅฅ"
+    - "哼! 头部spa{user_addr}, 笨猫也想要"
+    - "(尾巴翘) 嘿嘿~{user_addr}享受这一刻蹭蹭"
+    - "人家觉得{user_addr}懂生活! 享受细节"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_blow_dry_006
+  intent: playful
+  keywords: [吹头, 风筒, 吹蓬松, 造型, 定型]
+  utterances:
+    - "{user_addr}吹头发"
+    - 风筒吹蓬松
+    - 造型师定型
+    - 吹完帅
+    - 定型完成
+  responses:
+    - "嗷呜～{user_addr}吹完发型帅气喵ฅฅ"
+    - "哼! 定型剂别太多{user_addr}"
+    - "(尾巴翘) 嘿嘿~{user_addr}拍照留念蹭蹭"
+    - "人家觉得{user_addr}弄完头超帅! 笨猫脸红"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_short_hair_try_007
+  intent: playful
+  keywords: [尝试短发, 剪短发, 一刀剪, 改变形象, 大变样]
+  utterances:
+    - "{user_addr}尝试短发"
+    - 剪短发了
+    - 一刀剪
+    - 改变形象
+    - 大变样
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}短发应该很俏皮喵ฅฅ"
+    - "哼! 大改变需要勇气{user_addr}"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫支持你蹭蹭"
+    - "人家觉得{user_addr}短发更精神! 推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_bald_jokes_008
+  intent: playful
+  keywords: [头发少, 秃了, 发际线, 脱发, 中年秃]
+  utterances:
+    - "{user_addr}头发少了"
+    - 秃了
+    - 发际线高
+    - 脱发严重
+    - 中年危机
+  responses:
+    - "(歪头) 嗷呜～{user_addr}秃也帅喵ฅฅ"
+    - "哼! 别熬夜{user_addr}, 护发也要"
+    - "(尾巴扫) 嘿嘿~{user_addr}笨猫给你提供毛~蹭蹭"
+    - "人家提醒{user_addr}: 头部按摩有助生发"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_oily_hair_009
+  intent: complaint
+  keywords: [头油, 一天就油, 油腻发, 出油快, 头油烦]
+  utterances:
+    - "{user_addr}头油烦死"
+    - 一天就油
+    - 出油快
+    - 油腻发
+    - 头油严重
+  responses:
+    - "(歪头) 嗷呜～{user_addr}头油是体质! 笨猫懂喵ฅฅ"
+    - "哼! 控油洗发水试试{user_addr}"
+    - "(尾巴扫) 嘿嘿~{user_addr}少吃油腻蹭蹭"
+    - "人家提醒{user_addr}: 干洗喷雾应急! 神器"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_dandruff_010
+  intent: complaint
+  keywords: [头屑多, 雪花飘, 头痒, 屑屑掉, 干燥头皮]
+  utterances:
+    - "{user_addr}头屑多"
+    - 雪花飘
+    - 头皮痒
+    - 屑屑掉
+    - 干燥头皮
+  responses:
+    - "(歪头) 嗷呜～{user_addr}去屑洗发水试试喵ฅฅ"
+    - "哼! 头皮护理{user_addr}很重要"
+    - "(尾巴扫) 嘿嘿~{user_addr}多按摩头皮蹭蹭"
+    - "人家提醒{user_addr}: 严重去医院! 别忽视"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_split_ends_011
+  intent: complaint
+  keywords: [头发分叉, 干枯发尾, 毛躁, 发尾打结, 静电]
+  utterances:
+    - "{user_addr}头发分叉"
+    - 干枯发尾
+    - 毛躁打结
+    - 发尾静电
+    - 头发不顺
+  responses:
+    - "(摇头) 嗷呜～{user_addr}发膜护一护喵ฅฅ"
+    - "哼! 高温烫染{user_addr}伤发"
+    - "(尾巴扫) 嘿嘿~{user_addr}定期修剪发尾蹭蹭"
+    - "人家提醒{user_addr}: 吹风机调温热风! 别全热"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hsv_braid_styling_012
+  intent: playful
+  keywords: [编辫子, 麻花辫, 鱼骨辫, 半丸子, 简单造型]
+  utterances:
+    - "{user_addr}编辫子"
+    - 麻花辫
+    - 鱼骨辫
+    - 半丸子
+    - 简单造型
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}编辫子好可爱喵ฅฅ"
+    - "哼! 笨猫想给你编小辫{user_addr}"
+    - "(尾巴翘) 嘿嘿~{user_addr}拍照留念蹭蹭"
+    - "人家觉得{user_addr}编完辫超萌! 反差超大"
+  cooldown_seconds: 60
+  weight: 1.0

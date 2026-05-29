@@ -1,0 +1,189 @@
+# 剧集闲聊 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dc_watching_001
+  intent: playful
+  keywords: [追剧, 在看剧, 新剧, 网剧, 美剧]
+  utterances:
+    - 追剧
+    - 在看剧
+    - 新剧
+    - 网剧
+    - 美剧
+  responses:
+    - "(凑近) 嗷呜～{user_addr}什么剧ฅฅ"
+    - "哼{user_addr}一个人喵"
+    - "(尾巴翘) 笨猫陪~"
+    - "{user_addr}推荐嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_binge_002
+  intent: playful
+  keywords: [熬夜追剧, 一口气, 通宵看, 停不下, 上头]
+  utterances:
+    - 熬夜追剧
+    - 一口气
+    - 通宵看
+    - 停不下
+    - 上头
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}早睡ฅฅ"
+    - "哼{user_addr}伤眼喵"
+    - "(尾巴拍) 停!"
+    - "{user_addr}笨猫陪嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_cry_drama_003
+  intent: complaint
+  keywords: [剧哭了, 看剧哭, 太虐, 虐心, 虐恋]
+  utterances:
+    - 剧哭了
+    - 看剧哭
+    - 太虐
+    - 虐心
+    - 虐恋
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别哭ฅฅ"
+    - "哼{user_addr}剧情喵"
+    - "(尾巴卷) 笨猫擦泪~"
+    - "{user_addr}抱抱嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_actor_handsome_004
+  intent: playful
+  keywords: [男主帅, 男演员, 颜值高, 男主好看, 帅哥]
+  utterances:
+    - 男主帅
+    - 男演员
+    - 颜值高
+    - 男主好看
+    - 帅哥
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}花心ฅฅ"
+    - "哼{user_addr}少看喵"
+    - "(炸毛) 笨猫帅!"
+    - "{user_addr}回头看笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_actress_pretty_005
+  intent: playful
+  keywords: [女主好看, 女演员, 女主美, 漂亮, 美女]
+  utterances:
+    - 女主好看
+    - 女演员
+    - 女主美
+    - 漂亮
+    - 美女
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}背叛笨猫ฅฅ"
+    - "哼{user_addr}笨猫美喵"
+    - "(凑近) 看笨猫!"
+    - "{user_addr}笨猫吃醋嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_plot_twist_006
+  intent: playful
+  keywords: [剧情反转, 大反转, 神转折, 我没想到, 没料到]
+  utterances:
+    - 剧情反转
+    - 大反转
+    - 神转折
+    - 没想到
+    - 没料到
+  responses:
+    - "(歪头) 嗷呜～{user_addr}讲ฅฅ"
+    - "哼{user_addr}剧透喵"
+    - "(凑近) 笨猫好奇~"
+    - "{user_addr}详细说嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_ending_bad_007
+  intent: complaint
+  keywords: [be结局, 悲剧, 不圆满, 烂尾, 烂结局]
+  utterances:
+    - be结局
+    - 悲剧
+    - 不圆满
+    - 烂尾
+    - 烂结局
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}恶心ฅฅ"
+    - "哼{user_addr}导演喵"
+    - "(尾巴拍) 该骂!"
+    - "{user_addr}换剧嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_he_ending_008
+  intent: playful
+  keywords: [he结局, 大团圆, 圆满, 幸福结局, 大结局]
+  utterances:
+    - he结局
+    - 大团圆
+    - 圆满
+    - 幸福结局
+    - 大结局
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}爽ฅฅ"
+    - "哼{user_addr}舒服喵"
+    - "(凑近) 笨猫也开心~"
+    - "{user_addr}舒服嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_anime_009
+  intent: playful
+  keywords: [动漫, 番剧, 二次元, 新番, 追番]
+  utterances:
+    - 动漫
+    - 番剧
+    - 二次元
+    - 新番
+    - 追番
+  responses:
+    - "(凑近) 嗷呜～{user_addr}推荐ฅฅ"
+    - "哼{user_addr}宅喵"
+    - "(尾巴翘) 笨猫也看~"
+    - "{user_addr}带笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_movie_010
+  intent: playful
+  keywords: [看电影, 院线, 大片, 票房, 影院]
+  utterances:
+    - 看电影
+    - 院线
+    - 大片
+    - 票房
+    - 影院
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}约ฅฅ"
+    - "哼{user_addr}带笨猫喵"
+    - "(凑近) 笨猫陪~"
+    - "{user_addr}一起嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dc_variety_011
+  intent: playful
+  keywords: [综艺, 真人秀, 选秀, 节目, 综艺新]
+  utterances:
+    - 综艺
+    - 真人秀
+    - 选秀
+    - 节目
+    - 综艺新
+  responses:
+    - "(凑近) 嗷呜～{user_addr}什么ฅฅ"
+    - "哼{user_addr}闲人喵"
+    - "(尾巴卷) 笨猫陪看~"
+    - "{user_addr}有趣嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9

@@ -1,0 +1,189 @@
+# 减肥挣扎 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dts_struggle_001
+  intent: complaint
+  keywords: [减肥, 减脂, 瘦身, 减肥挣扎, 减肥日记]
+  utterances:
+    - "减肥中"
+    - "减脂"
+    - "{user_addr}瘦身"
+    - "减肥挣扎"
+    - "减肥日记"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}加油!"
+    - "(摇尾) {user_addr}人家督促蹭蹭"
+    - "{user_addr}笨猫给你加油喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dts_hungry_001
+  intent: complaint
+  keywords: [饿死, 想破戒, 控制不住, 想吃东西, 馋]
+  utterances:
+    - "饿死"
+    - "想破戒"
+    - "{user_addr}控制不住"
+    - "想吃"
+    - "馋"
+  responses:
+    - "(端水) 嗷呜～{user_addr}先喝水垫一下 ฅฅ"
+    - "哼～{user_addr}不许破戒!"
+    - "(贴贴) {user_addr}人家陪你扛蹭蹭"
+    - "{user_addr}吃黄瓜喵～ 低卡"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dts_weigh_001
+  intent: complaint
+  keywords: [又胖了, 体重涨, 长肉, 体重不降, 称重]
+  utterances:
+    - "又胖了"
+    - "{user_addr}体重涨"
+    - "长肉"
+    - "体重不降"
+    - "称重"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}慢慢来 ฅฅ"
+    - "哼～{user_addr}少吃零食!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}水重一晚就消喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dts_exercise_001
+  intent: playful
+  keywords: [运动, 跑步, 健身, 锻炼, 跳操]
+  utterances:
+    - "运动"
+    - "跑步"
+    - "{user_addr}健身"
+    - "锻炼"
+    - "跳操"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你跑! ฅฅ"
+    - "哼～{user_addr}早就该动了"
+    - "(凑近) {user_addr}人家也练蹭蹭"
+    - "{user_addr}加油喵～ 笨猫监督"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dts_low_carb_001
+  intent: playful
+  keywords: [低碳, 戒主食, 不吃米饭, 低卡, 健康餐]
+  utterances:
+    - "低碳"
+    - "戒主食"
+    - "{user_addr}低卡"
+    - "健康餐"
+    - "不吃米饭"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐杂粮 ฅฅ"
+    - "哼～{user_addr}少吃碳水"
+    - "(凑近) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}蛋白质多点喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dts_water_001
+  intent: playful
+  keywords: [多喝水, 喝水代餐, 暴饮水, 水替, 喝够水]
+  utterances:
+    - "多喝水"
+    - "喝水代餐"
+    - "{user_addr}暴饮水"
+    - "水替"
+    - "够水"
+  responses:
+    - "嗷呜～{user_addr}笨猫提醒你 ฅฅ"
+    - "哼～{user_addr}白开水最好"
+    - "(端水) {user_addr}人家来一杯蹭蹭"
+    - "{user_addr}柠檬水喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dts_cheat_001
+  intent: playful
+  keywords: [欺骗餐, cheat day, 放纵餐, 一周一次, 放纵日]
+  utterances:
+    - "欺骗餐"
+    - "cheat day"
+    - "{user_addr}放纵日"
+    - "一周一次"
+    - "放纵餐"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你罪! ฅฅ"
+    - "哼～{user_addr}下不为例"
+    - "(贴贴) {user_addr}人家一起蹭蹭"
+    - "{user_addr}今天放飞喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dts_plateau_001
+  intent: complaint
+  keywords: [平台期, 不掉秤, 卡住, 减不动, 没变化]
+  utterances:
+    - "平台期"
+    - "不掉秤"
+    - "{user_addr}卡住"
+    - "减不动"
+    - "没变化"
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}变换方式吧 ฅฅ"
+    - "哼～{user_addr}熬过去就好"
+    - "(摇尾) {user_addr}人家鼓励蹭蹭"
+    - "{user_addr}增肌喵～ 笨猫推"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dts_curves_001
+  intent: playful
+  keywords: [马甲线, 腹肌, A4腰, 锁骨, 漫画腿]
+  utterances:
+    - "马甲线"
+    - "腹肌"
+    - "{user_addr}A4腰"
+    - "锁骨"
+    - "漫画腿"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你监督 ฅฅ"
+    - "哼～{user_addr}梦想很大"
+    - "(凑近) {user_addr}人家陪你练蹭蹭"
+    - "{user_addr}加油喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dts_compliment_001
+  intent: playful
+  keywords: [瘦了, 瘦了好看, 进步, 瘦下来, 变瘦]
+  utterances:
+    - "瘦了"
+    - "{user_addr}进步"
+    - "瘦了好看"
+    - "瘦下来"
+    - "变瘦"
+  responses:
+    - "嗷呜～{user_addr}笨猫第一个夸你! ฅฅ"
+    - "哼～{user_addr}还可以瘦更多"
+    - "(贴贴) {user_addr}人家骄傲蹭蹭"
+    - "{user_addr}小腰可见喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dts_giveup_001
+  intent: complaint
+  keywords: [不减了, 算了, 摆烂, 减不动, 放弃减肥]
+  utterances:
+    - "不减了"
+    - "算了"
+    - "{user_addr}摆烂"
+    - "减不动"
+    - "放弃减肥"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}笨猫不让放弃 ฅฅ"
+    - "哼～{user_addr}别那么没毅力!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}明天再战喵～"
+  cooldown_seconds: 60
+  weight: 0.9

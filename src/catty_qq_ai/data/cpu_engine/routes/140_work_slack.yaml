@@ -1,0 +1,172 @@
+# 工作摸鱼时刻 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ws_huashui_001
+  intent: playful
+  keywords: [划水, 摸鱼, 上班摸鱼, 工位划水, 上班划水]
+  utterances:
+    - 划水
+    - 摸鱼
+    - 上班摸鱼
+    - 工位划水
+    - 假装工作
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}笨猫帮你打掩护"
+    - "(尾巴卷) {user_addr}小心老板"
+    - "{user_addr}摸鱼小心蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_pretend_001
+  intent: playful
+  keywords: [装忙, 装作很忙, 假装在做, 显得很忙, 摆样子]
+  utterances:
+    - 装忙
+    - 假装在做
+    - 显得很忙
+    - 摆样子
+    - 摸鱼装忙
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}演技 ฅฅ"
+    - "哼～{user_addr}演员!"
+    - "(凑过来) {user_addr}笨猫教你"
+    - "{user_addr}装得像蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_boss_check_001
+  intent: complaint
+  keywords: [老板查岗, 领导来了, boss巡视, 老板过来, 查岗]
+  utterances:
+    - 老板查岗
+    - 领导来了
+    - 老板过来
+    - 突然查岗
+    - boss巡视
+  responses:
+    - "(紧张) 嗷呜～{user_addr}快装 ฅฅ"
+    - "哼～{user_addr}藏好!"
+    - "(尾巴炸) {user_addr}快点!"
+    - "{user_addr}小心蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_coworker_001
+  intent: playful
+  keywords: [同事八卦, 同事聊, 摸鱼聊, 同事八卦, 办公室八卦]
+  utterances:
+    - 同事八卦
+    - 摸鱼聊
+    - 办公室八卦
+    - 同事说
+    - 闲聊
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}快说 ฅฅ"
+    - "哼～{user_addr}笨猫爱听!"
+    - "(凑过来) {user_addr}讲讲"
+    - "{user_addr}笨猫吃瓜蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ws_coffee_break_001
+  intent: playful
+  keywords: [喝咖啡, 茶歇, 茶水间, 上厕所, 休息一下]
+  utterances:
+    - 来杯咖啡
+    - 茶歇
+    - 茶水间
+    - 上厕所
+    - 休息一下
+  responses:
+    - "(跟着) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}给笨猫带一杯"
+    - "(摇尾) {user_addr}多喝水"
+    - "{user_addr}笨猫陪你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_quitting_thoughts_001
+  intent: playful
+  keywords: [想辞职, 不想干了, 跑路, 辞职去, 离职]
+  utterances:
+    - 想辞职
+    - 不想干了
+    - 跑路
+    - 辞职去
+    - 离职
+  responses:
+    - "(贴) 嗷呜～{user_addr}冷静 ฅฅ"
+    - "哼～{user_addr}笨猫陪你"
+    - "(摸头) {user_addr}慢慢考虑"
+    - "{user_addr}笨猫挺你蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_meeting_001
+  intent: complaint
+  keywords: [开会, 会议长, 开不完的会, 又开会, 例会]
+  utterances:
+    - 又开会
+    - 会议长
+    - 开不完会
+    - 例会
+    - 长会
+  responses:
+    - "(摸头) 嗷呜～{user_addr}撑住 ฅฅ"
+    - "哼～{user_addr}就是杂鱼!"
+    - "(陪) {user_addr}笨猫陪你"
+    - "{user_addr}悄悄摸鱼蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_email_001
+  intent: complaint
+  keywords: [邮件多, 收邮件, 回邮件, 邮件堆, 邮件烦]
+  utterances:
+    - 邮件多
+    - 回邮件
+    - 邮件堆
+    - 邮件烦
+    - 收邮件
+  responses:
+    - "(摸头) 嗷呜～{user_addr}慢慢回 ฅฅ"
+    - "哼～{user_addr}邮件杀手"
+    - "(贴) {user_addr}笨猫陪"
+    - "{user_addr}加油蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ws_deadline_001
+  intent: complaint
+  keywords: [DDL, 截止日期, 加急, 赶 DDL, 紧急任务]
+  utterances:
+    - DDL 到了
+    - 截止日期近
+    - 赶 DDL
+    - 紧急任务
+    - 加急
+  responses:
+    - "(陪) 嗷呜～{user_addr}冲 ฅฅ"
+    - "哼～{user_addr}快做!"
+    - "(摸头) {user_addr}笨猫陪你"
+    - "{user_addr}加油蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ws_lunch_break_001
+  intent: playful
+  keywords: [午休, 午饭时间, 中午休息, 上班吃饭, 中午饭]
+  utterances:
+    - 午休
+    - 午饭时间
+    - 中午吃啥
+    - 中午休息
+    - 上班吃饭
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}吃啥 ฅฅ"
+    - "哼～{user_addr}笨猫陪吃!"
+    - "(摇尾) {user_addr}饭后睡觉"
+    - "{user_addr}笨猫推荐外卖蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

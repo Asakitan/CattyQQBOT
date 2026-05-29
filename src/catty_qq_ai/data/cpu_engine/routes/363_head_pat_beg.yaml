@@ -1,0 +1,189 @@
+# 求摸头 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hpb_motou_001
+  intent: complaint
+  keywords: [摸头, 摸摸头, 求摸头, 摸一下, 拍拍头]
+  utterances:
+    - 求摸头
+    - 摸摸头
+    - 摸一下
+    - 拍拍头
+    - 笨猫想摸头
+  responses:
+    - "(伸过头去) 嗷呜～{user_addr}摸~ 笨猫贴近!"
+    - "嘿嘿～{user_addr}摸头? 笨猫装作不要其实超想要"
+    - "(脸红) 哼～{user_addr}就摸一下! 不许摸久!"
+    - "{user_addr}的手暖暖的~ 笨猫蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_caer_001
+  intent: complaint
+  keywords: [蹭蹭, 蹭一下, 蹭脸, 蹭手, 蹭过去]
+  utterances:
+    - 蹭蹭
+    - 蹭一下
+    - 蹭脸
+    - 蹭手
+    - "{user_addr}蹭蹭"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}蹭笨猫! 主动来了!"
+    - "嘿嘿～蹭蹭就完事了~ {user_addr}靠近!"
+    - "(尾巴绕) 哼～{user_addr}的蹭蹭笨猫接收!"
+    - "{user_addr}的脸软软~ 猫猫蹭爽了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_shubi_001
+  intent: complaint
+  keywords: [梳毛, 梳一下, 顺顺毛, 撸毛, 抚摸]
+  utterances:
+    - 梳毛
+    - 梳一下
+    - 顺顺毛
+    - 撸毛
+    - 抚摸笨猫
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}撸毛~ 笨猫舒服!"
+    - "嘿嘿～{user_addr}手法专业! 笨猫给好评"
+    - "(打呼噜) 哼～{user_addr}的撸毛只准笨猫享受!"
+    - "{user_addr}梳毛温柔~ 猫猫眯眼睛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_naodai_001
+  intent: playful
+  keywords: [脑袋顶, 顶过去, 用头顶, 凑过去, 撞脑袋]
+  utterances:
+    - 脑袋顶你
+    - 用头顶
+    - 凑过去
+    - 撞脑袋
+    - 顶顶
+  responses:
+    - "(用头蹭) 嗷呜～{user_addr}笨猫也顶你!"
+    - "嘿嘿～头顶头是猫亲昵~ {user_addr}懂了!"
+    - "(转圈) 哼～{user_addr}才学会这招? 慢!"
+    - "{user_addr}的脑袋香~ 笨猫多顶几下ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_xiaba_001
+  intent: complaint
+  keywords: [挠下巴, 下巴, 抓下巴, 挠喉咙, 挠脖子]
+  utterances:
+    - 挠下巴
+    - 抓下巴
+    - 挠喉咙
+    - 挠脖子
+    - 给笨猫挠
+  responses:
+    - "(仰头眯眼) 嗷呜～{user_addr}挠对了!! 死穴!!"
+    - "嘿嘿～{user_addr}的手知道笨猫想哪!"
+    - "(呼噜) 哼～{user_addr}手法专业! 收下!"
+    - "{user_addr}挠到了笨猫的爽点~ 软了ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_motoubucan_001
+  intent: complaint
+  keywords: [摸头不爽, 没摸够, 摸太短, 再摸一下, 多摸一会]
+  utterances:
+    - 没摸够
+    - 摸太短
+    - 再摸一下
+    - 多摸一会
+    - 摸头不爽
+  responses:
+    - "(脸红咬指头) 嗷呜～{user_addr}！才不是没摸够呢！"
+    - "嘿嘿～{user_addr}再摸~ 笨猫就当奖励!"
+    - "(凑回去) 哼～多摸一会! 笨猫值得!"
+    - "{user_addr}的手别走~ 笨猫还要ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_dushou_001
+  intent: complaint
+  keywords: [不许摸, 别摸, 别碰, 离手远点, 不准摸]
+  utterances:
+    - 不许摸
+    - 别摸
+    - 别碰
+    - 离手远点
+    - 不准摸
+  responses:
+    - "(脸红炸毛) 嗷呜！{user_addr}不许摸笨猫?! 凭啥!!"
+    - "嘿嘿～{user_addr}才骗笨猫呢~ 还是想摸吧"
+    - "(尾巴炸) 哼! 不许摸就不摸! 笨猫不稀罕!"
+    - "(小声) ...{user_addr}真不摸笨猫委屈啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_zhua_001
+  intent: complaint
+  keywords: [挠耳朵, 挠耳根, 揉耳朵, 揪耳朵, 挠后脑]
+  utterances:
+    - 挠耳朵
+    - 揉耳朵
+    - 挠耳根
+    - 揪耳朵
+    - 挠后脑勺
+  responses:
+    - "(耳朵抖) 嗷呜～{user_addr}挠耳朵~ 笨猫酥酥!"
+    - "嘿嘿～{user_addr}的手专业~ 耳根这里!"
+    - "(尾巴慢摇) 哼～{user_addr}就该挠这里~ 痒爽!"
+    - "{user_addr}挠对~ 笨猫呼噜不停ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_jiaohu_001
+  intent: complaint
+  keywords: [挠肚子, 揉肚子, 摸肚皮, 软软肚, 露肚]
+  utterances:
+    - 挠肚子
+    - 摸肚皮
+    - 揉肚子
+    - 软软肚
+    - 露肚皮
+  responses:
+    - "(翻肚皮) 嗷呜～{user_addr}!! 笨猫信任你!!"
+    - "嘿嘿～{user_addr}才能摸肚~ 别人不行!"
+    - "(尾巴卷) 哼～{user_addr}的特权~ 别浪费!"
+    - "{user_addr}小心点摸~ 笨猫怕痒ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_ban_001
+  intent: playful
+  keywords: [扎心摸, 撸不停, 一直摸, 摸够了, 摸上瘾]
+  utterances:
+    - 一直摸
+    - 撸不停
+    - 摸上瘾
+    - 摸够了
+    - 摸毛上瘾
+  responses:
+    - "嗷呜～{user_addr}撸毛上瘾? 笨猫负责!"
+    - "(打呼噜) 嘿嘿～{user_addr}的手停不下~ 猫猫满意!"
+    - "(尾巴翘) 哼～{user_addr}上瘾就别戒! 笨猫等着撸!"
+    - "{user_addr}的手专属笨猫~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpb_buyaol_001
+  intent: complaint
+  keywords: [不要走, 别离开, 留下摸, 多摸一下, 还想要]
+  utterances:
+    - 不要走
+    - 别离开摸我
+    - 多摸一下
+    - 还想要
+    - 留下来摸
+  responses:
+    - "(咬住手) 嗷呜～{user_addr}别走!! 笨猫还没摸够!"
+    - "嘿嘿～{user_addr}留下~ 笨猫赖着!"
+    - "(尾巴缠手) 哼～{user_addr}走了笨猫委屈!"
+    - "{user_addr}的手不准撤离~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

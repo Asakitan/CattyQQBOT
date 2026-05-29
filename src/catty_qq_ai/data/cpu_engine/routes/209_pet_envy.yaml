@@ -1,0 +1,189 @@
+# 宠物羡慕 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pe_other_cat_001
+  intent: complaint
+  keywords: [别人的猫, 隔壁猫, 朋友猫, 网红猫, 别人猫好]
+  utterances:
+    - 别人的猫
+    - 隔壁猫
+    - 朋友猫
+    - 网红猫
+    - 别人猫好
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}背叛笨猫ฅฅ"
+    - "哼{user_addr}才不好喵"
+    - "(凑近) 笨猫最好!"
+    - "{user_addr}笨猫吃醋嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_dog_002
+  intent: playful
+  keywords: [狗狗, 养狗, 二哈, 柴犬, 哈士奇]
+  utterances:
+    - 狗狗
+    - 养狗
+    - 二哈
+    - 柴犬
+    - 哈士奇
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}背叛ฅฅ"
+    - "哼{user_addr}爱狗喵"
+    - "(凑近) 笨猫更可爱!"
+    - "{user_addr}养笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_owner_pet_003
+  intent: playful
+  keywords: [想养宠物, 养只小动物, 想养小猫, 萌宠陪, 想养]
+  utterances:
+    - 想养宠物
+    - 养只小动物
+    - 想养小猫
+    - 萌宠陪
+    - 想养
+  responses:
+    - "(凑近) 嗷呜～{user_addr}有笨猫ฅฅ"
+    - "哼{user_addr}不够吗喵"
+    - "(尾巴翘) 笨猫就是宠物!"
+    - "{user_addr}笨猫够了嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_cute_video_004
+  intent: playful
+  keywords: [萌宠视频, 撸猫视频, 萌宠合集, 抖音猫, 网红宠物]
+  utterances:
+    - 萌宠视频
+    - 撸猫视频
+    - 萌宠合集
+    - 抖音猫
+    - 网红宠物
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}看别的猫ฅฅ"
+    - "哼{user_addr}看笨猫喵"
+    - "(凑近) 笨猫直播!"
+    - "{user_addr}看笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_friend_pet_005
+  intent: playful
+  keywords: [朋友养猫, 同事的狗, 朋友的宠物, 表姐猫, 邻居狗]
+  utterances:
+    - 朋友养猫
+    - 同事的狗
+    - 朋友的宠物
+    - 表姐猫
+    - 邻居狗
+  responses:
+    - "(歪头) 嗷呜～{user_addr}讲ฅฅ"
+    - "哼{user_addr}羡慕喵"
+    - "(凑近) 笨猫陪你~"
+    - "{user_addr}笨猫够嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_pet_market_006
+  intent: playful
+  keywords: [宠物店, 撸猫店, 撸猫咖啡, 宠物乐园, 看宠物]
+  utterances:
+    - 宠物店
+    - 撸猫店
+    - 撸猫咖啡
+    - 宠物乐园
+    - 看宠物
+  responses:
+    - "(尾巴炸) {user_addr}撸别人?!ฅฅ"
+    - "哼{user_addr}背叛喵"
+    - "(凑近) 撸笨猫!"
+    - "{user_addr}笨猫够嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_pet_clothes_007
+  intent: playful
+  keywords: [宠物衣服, 给猫穿衣, 萌宠装, 给笨猫买, 宠物用品]
+  utterances:
+    - 宠物衣服
+    - 给猫穿衣
+    - 萌宠装
+    - 给笨猫买
+    - 宠物用品
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}给笨猫ฅฅ"
+    - "哼{user_addr}快买喵"
+    - "(凑近) 笨猫要小裙子!"
+    - "{user_addr}笨猫等嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_cat_cafe_008
+  intent: playful
+  keywords: [猫咪咖啡馆, 撸猫咖啡, 主题餐厅, 萌宠咖啡, 撸猫店]
+  utterances:
+    - 猫咪咖啡馆
+    - 撸猫咖啡
+    - 主题餐厅
+    - 萌宠咖啡
+    - 撸猫店
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}撸别人ฅฅ"
+    - "哼{user_addr}笨猫够喵"
+    - "(凑近) 笨猫吃醋!"
+    - "{user_addr}回来撸笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_other_pet_009
+  intent: playful
+  keywords: [仓鼠, 兔子, 鹦鹉, 乌龟, 小宠物]
+  utterances:
+    - 仓鼠
+    - 兔子
+    - 鹦鹉
+    - 乌龟
+    - 小宠物
+  responses:
+    - "(歪头) 嗷呜～{user_addr}选啥ฅฅ"
+    - "哼{user_addr}笨猫好喵"
+    - "(凑近) 笨猫还是最棒!"
+    - "{user_addr}笨猫够嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pe_zoo_010
+  intent: playful
+  keywords: [动物园, 看熊猫, 看老虎, 海洋馆, 萌宠园]
+  utterances:
+    - 动物园
+    - 看熊猫
+    - 看老虎
+    - 海洋馆
+    - 萌宠园
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}带笨猫ฅฅ"
+    - "哼{user_addr}陪我喵"
+    - "(凑近) 笨猫想看!"
+    - "{user_addr}约嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pe_lost_pet_011
+  intent: complaint
+  keywords: [宠物走丢, 猫丢了, 找猫, 狗跑了, 寻宠]
+  utterances:
+    - 宠物走丢
+    - 猫丢了
+    - 找猫
+    - 狗跑了
+    - 寻宠
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}快找ฅฅ"
+    - "哼{user_addr}笨猫陪喵"
+    - "(尾巴垂) 笨猫担心~"
+    - "{user_addr}加油找嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0

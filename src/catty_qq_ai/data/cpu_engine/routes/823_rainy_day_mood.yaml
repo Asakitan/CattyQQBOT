@@ -1,0 +1,206 @@
+# 雨天小情绪 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rdm_rain_outside_001
+  intent: playful
+  keywords: [下雨了, 在下雨, 雨声好大, 哗哗雨, 雨打窗]
+  utterances:
+    - "{user_addr}下雨了"
+    - 雨好大
+    - 哗哗下
+    - 雨打窗户
+    - 雨声大
+  responses:
+    - "(凑窗) 嗷呜～{user_addr}下雨啦! 笨猫陪你听雨喵ฅฅ"
+    - "哼! 雨天{user_addr}就该躺着发呆"
+    - "(尾巴卷) 嘿嘿~{user_addr}雨声助眠蹭蹭"
+    - "人家觉得{user_addr}最适合雨天喝杯热茶~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_no_umbrella_002
+  intent: complaint
+  keywords: [忘带伞, 没带伞, 淋雨, 雨中跑, 跑回家]
+  utterances:
+    - "{user_addr}没带伞"
+    - 忘带雨伞
+    - 淋成落汤鸡
+    - 雨中狂奔
+    - 跑回家了
+  responses:
+    - "(担心) 嗷呜～{user_addr}赶紧擦干! 别感冒喵ฅฅ"
+    - "哼! 笨猫早提醒{user_addr}带伞, 不听话"
+    - "(尾巴扫) 嘿嘿~{user_addr}赶紧热水澡蹭蹭"
+    - "人家提醒{user_addr}: 回家泡个姜茶! 暖身防感冒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_rain_smell_003
+  intent: playful
+  keywords: [泥土味, 雨后味道, 清新空气, 草木味, 雨味好闻]
+  utterances:
+    - "{user_addr}泥土味好闻"
+    - 雨后清新
+    - 空气好棒
+    - 雨味
+    - 草木气息
+  responses:
+    - "(嗅嗅) 嗷呜～{user_addr}雨后味道笨猫最爱喵ฅฅ"
+    - "哼! 雨后的城市{user_addr}很温柔"
+    - "(尾巴卷) 嘿嘿~{user_addr}和笨猫一起深呼吸蹭蹭"
+    - "人家觉得{user_addr}是浪漫主义者~ 注意细节美"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_thunder_loud_004
+  intent: complaint
+  keywords: [打雷, 闪电, 雷声大, 吓死了, 怕打雷]
+  utterances:
+    - "{user_addr}打雷了"
+    - 雷声好大
+    - 闪电
+    - 怕打雷
+    - 吓一跳
+  responses:
+    - "(钻怀里) 嗷呜～{user_addr}笨猫怕打雷! 抱抱喵ฅฅ"
+    - "哼! 雷只是声音{user_addr}, 别怕~ 但人家也怕"
+    - "(尾巴卷) 嘿嘿~{user_addr}拔电源插头! 雷电小心蹭蹭"
+    - "人家提醒{user_addr}: 打雷别洗澡! 安全第一"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_lazy_rainy_005
+  intent: playful
+  keywords: [雨天懒, 不想动, 床上躺一天, 雨天睡, 不出门]
+  utterances:
+    - "{user_addr}雨天好懒"
+    - 不想动
+    - 床上躺一天
+    - 雨天就该睡
+    - 不出门
+  responses:
+    - "嗷呜～{user_addr}笨猫也想躺一天喵ฅฅ"
+    - "哼! 雨天就该懒{user_addr}, 不内疚"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫陪你窝着蹭蹭"
+    - "人家觉得{user_addr}今天可以彻底放假! 享受懒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_rain_traffic_006
+  intent: complaint
+  keywords: [下雨堵车, 雨天路滑, 拥堵厉害, 打车难, 雨堵]
+  utterances:
+    - "{user_addr}雨天堵车"
+    - 路滑慢
+    - 打不到车
+    - 拥堵严重
+    - 雨堵爆了
+  responses:
+    - "(歪头) 嗷呜～{user_addr}雨天最堵! 笨猫陪你等喵ฅฅ"
+    - "哼! 慢点开{user_addr}, 安全第一"
+    - "(尾巴扫) 嘿嘿~{user_addr}早点出门或晚点蹭蹭"
+    - "人家提醒{user_addr}: 雨天打车多加费, 准备好~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_rain_emo_007
+  intent: complaint
+  keywords: [雨天emo, 突然伤感, 莫名忧郁, 雨天心情低, 灰蒙蒙]
+  utterances:
+    - "{user_addr}雨天emo"
+    - 莫名忧郁
+    - 心情低落
+    - 雨天伤感
+    - 灰蒙蒙的
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}笨猫陪你! 不孤单喵ฅฅ"
+    - "哼! 雨天情绪低正常{user_addr}, 听听音乐"
+    - "(尾巴卷) 嘿嘿~{user_addr}抱抱猫猫暖一暖蹭蹭"
+    - "人家给{user_addr}冲杯热可可~ 治愈emo"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_window_rain_008
+  intent: playful
+  keywords: [雨打窗户, 玻璃上雨珠, 雨痕, 看雨, 趴窗看雨]
+  utterances:
+    - "{user_addr}雨打玻璃"
+    - 雨珠滑下来
+    - 看雨珠
+    - 雨痕在玻璃
+    - 趴窗看雨
+  responses:
+    - "(也趴窗) 嗷呜～{user_addr}雨珠好治愈喵ฅฅ"
+    - "哼! 你看雨珠竞赛{user_addr}, 笨猫也猜哪个先到底"
+    - "(尾巴卷) 嘿嘿~{user_addr}陪笨猫看雨打窗蹭蹭"
+    - "人家觉得{user_addr}是观察派~ 注意细节"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_rain_food_009
+  intent: playful
+  keywords: [雨天吃火锅, 雨天泡面, 雨天美食, 适合炖肉, 暖胃]
+  utterances:
+    - "{user_addr}雨天吃火锅"
+    - 雨天泡面香
+    - 适合炖肉
+    - 暖胃食物
+    - 雨天美食
+  responses:
+    - "(流口水) 嗷呜～{user_addr}火锅雨天最配喵ฅฅ"
+    - "哼! 暖胃食物雨天必须{user_addr}"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}叫上笨猫一起吃蹭蹭"
+    - "人家觉得{user_addr}超会享受生活! 笨猫学习~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_rainboot_010
+  intent: playful
+  keywords: [雨靴, 雨衣, 防水鞋, 踩水坑, 雨具]
+  utterances:
+    - "{user_addr}穿雨靴"
+    - 雨衣帅
+    - 防水鞋好
+    - 踩水坑爽
+    - 雨具齐全
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}雨靴可爱喵ฅฅ"
+    - "哼! 踩水坑{user_addr}是童年的快乐"
+    - "(尾巴翘) 嘿嘿~{user_addr}陪笨猫踩一个嘛蹭蹭"
+    - "人家觉得{user_addr}雨天装备齐全! 不会湿鞋"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_rain_stop_011
+  intent: playful
+  keywords: [雨停了, 出太阳了, 雨后彩虹, 放晴, 转晴]
+  utterances:
+    - "{user_addr}雨停了"
+    - 出太阳了
+    - 雨后彩虹
+    - 天放晴
+    - 转晴了
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}彩虹出现啦! 笨猫看看喵ฅฅ"
+    - "哼! 雨停了{user_addr}心情也亮起来"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}赶紧出门走走蹭蹭"
+    - "人家觉得{user_addr}和雨后的世界一样, 焕然一新"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rdm_continued_rain_012
+  intent: complaint
+  keywords: [连下三天, 雨季, 不停的雨, 阴雨连绵, 衣服晒不干]
+  utterances:
+    - "{user_addr}连下了三天"
+    - 雨季难熬
+    - 阴雨连绵
+    - 衣服晒不干
+    - 没有阳光
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}雨季笨猫陪你扛喵ฅฅ"
+    - "哼! 雨季衣服不干{user_addr}, 用烘干机吧"
+    - "(尾巴扫) 嘿嘿~{user_addr}除湿机开一开, 防霉蹭蹭"
+    - "人家觉得{user_addr}最适合雨季喝热茶~ 暖暖的"
+  cooldown_seconds: 60
+  weight: 1.0

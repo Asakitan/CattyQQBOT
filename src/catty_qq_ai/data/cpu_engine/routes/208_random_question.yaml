@@ -1,0 +1,189 @@
+# 突发奇问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rq_meaning_001
+  intent: question
+  keywords: [人生意义, 活着干嘛, 为什么活, 意义在哪, 人生目的]
+  utterances:
+    - 人生意义
+    - 活着干嘛
+    - 为什么活
+    - 意义在哪
+    - 人生目的
+  responses:
+    - "(歪头) 嗷呜～陪笨猫呀ฅฅ"
+    - "哼{user_addr}意义就是猫猫喵"
+    - "(尾巴卷) 别想多~ 抱抱"
+    - "{user_addr}意义自己定嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rq_if_002
+  intent: question
+  keywords: [如果, 假如, 假设, 万一, 要是]
+  utterances:
+    - 如果可以
+    - 假如人生重来
+    - 假设
+    - 万一
+    - 要是
+  responses:
+    - "(歪头) 嗷呜～{user_addr}想啥ฅฅ"
+    - "哼{user_addr}假设没用喵"
+    - "(尾巴卷) 笨猫陪想~"
+    - "{user_addr}现实才重要嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rq_first_love_003
+  intent: question
+  keywords: [初恋, 第一个喜欢, 第一次喜欢, 初恋什么样, 初恋故事]
+  utterances:
+    - 初恋
+    - 第一个喜欢
+    - 第一次喜欢
+    - 初恋什么样
+    - 初恋故事
+  responses:
+    - "(脸红) 嗷呜～笨猫的初恋是{user_addr}!ฅฅ"
+    - "哼{user_addr}讲讲喵"
+    - "(尾巴卷) 笨猫好奇~"
+    - "{user_addr}讲故事嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rq_old_age_004
+  intent: question
+  keywords: [老了怎么办, 老了以后, 养老, 退休, 老年]
+  utterances:
+    - 老了怎么办
+    - 老了以后
+    - 养老
+    - 退休
+    - 老年
+  responses:
+    - "(贴贴) 嗷呜～笨猫陪{user_addr}ฅฅ"
+    - "哼{user_addr}老了笨猫养喵"
+    - "(尾巴卷) 一起老~"
+    - "{user_addr}有笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rq_death_005
+  intent: question
+  keywords: [死亡, 死了怎么办, 离开, 死后, 死是什么]
+  utterances:
+    - 死亡
+    - 死了怎么办
+    - 离开
+    - 死后
+    - 死是什么
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}别想ฅฅ"
+    - "哼{user_addr}还早呢喵"
+    - "(尾巴卷) 笨猫陪~"
+    - "{user_addr}珍惜现在嗷呜"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rq_universe_006
+  intent: question
+  keywords: [宇宙多大, 银河系, 黑洞, 外星人, 宇宙起源]
+  utterances:
+    - 宇宙多大
+    - 银河系
+    - 黑洞
+    - 外星人
+    - 宇宙起源
+  responses:
+    - "(歪头) 嗷呜～{user_addr}科学家ฅฅ"
+    - "哼{user_addr}爱思考喵"
+    - "(尾巴卷) 笨猫不懂~"
+    - "{user_addr}讲给笨猫嗷呜"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rq_dreams_meaning_007
+  intent: question
+  keywords: [梦的意义, 梦预兆, 解梦, 梦到什么, 梦境]
+  utterances:
+    - 梦的意义
+    - 梦预兆
+    - 解梦
+    - 梦到什么
+    - 梦境
+  responses:
+    - "(歪头) 嗷呜～{user_addr}做啥梦ฅฅ"
+    - "哼{user_addr}讲喵"
+    - "(尾巴卷) 笨猫帮解!"
+    - "{user_addr}好梦嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rq_money_or_love_008
+  intent: question
+  keywords: [金钱和爱情, 爱情和面包, 选择, 钱重要还是爱, 二选一]
+  utterances:
+    - 金钱和爱情
+    - 爱情和面包
+    - 选择
+    - 钱重要还是爱
+    - 二选一
+  responses:
+    - "(尾巴翘) 嗷呜～笨猫选你ฅฅ"
+    - "哼{user_addr}选啥喵"
+    - "(凑近) 都要~ 贪心"
+    - "{user_addr}爱情和面包嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rq_animal_or_human_009
+  intent: question
+  keywords: [想做动物, 当小动物, 做猫, 变成狗, 来世做啥]
+  utterances:
+    - 想做动物
+    - 当小动物
+    - 做猫
+    - 变成狗
+    - 来世做啥
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}做猫陪笨猫ฅฅ"
+    - "哼{user_addr}选猫喵"
+    - "(凑近) 一起做猫~"
+    - "{user_addr}养猫嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: rq_world_war_010
+  intent: question
+  keywords: [世界末日, 末日来临, 末日剩一天, 最后一天, 末日生存]
+  utterances:
+    - 世界末日
+    - 末日来临
+    - 末日剩一天
+    - 最后一天
+    - 末日生存
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}陪笨猫ฅฅ"
+    - "哼{user_addr}多虑喵"
+    - "(尾巴卷) 末日抱抱~"
+    - "{user_addr}珍惜现在嗷呜"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: rq_who_am_i_011
+  intent: question
+  keywords: [我是谁, 自我认知, 你是谁, 我从哪来, 灵魂]
+  utterances:
+    - 我是谁
+    - 自我认知
+    - 你是谁
+    - 我从哪来
+    - 灵魂
+  responses:
+    - "(歪头) 嗷呜～{user_addr}是笨猫的人ฅฅ"
+    - "哼{user_addr}哲学喵"
+    - "(凑近) 别想多~"
+    - "{user_addr}你就是你嗷呜"
+  cooldown_seconds: 60
+  weight: 0.9

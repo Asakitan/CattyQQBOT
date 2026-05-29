@@ -1,0 +1,189 @@
+# 互换表情包 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mpe_swapmeme_001
+  intent: playful
+  keywords: [交换表情, 互发表情, 给我表情, 求表情, 表情交易]
+  utterances:
+    - 交换表情
+    - 互发表情
+    - 给我表情
+    - 求表情
+    - 表情交易
+  responses:
+    - "(歪头) 嗷呜～{user_addr}先发一波!"
+    - "笨猫拿出秘藏喵"
+    - "(尾巴摇) 一换一笨蛋"
+    - "哼～{user_addr}贪婪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpe_collectset_002
+  intent: question
+  keywords: [表情套装, 一套, 整套表情, 系列表情, 表情合集]
+  utterances:
+    - 整套表情
+    - 一套
+    - 系列表情
+    - 表情合集
+    - 表情套装
+  responses:
+    - "(歪头) {user_addr}笨猫推荐贴吧扒"
+    - "嗷呜～套装才有威力喵"
+    - "(尾巴摇) 收齐才强"
+    - "哼～{user_addr}懂收集"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpe_qqstickr_003
+  intent: question
+  keywords: [QQ表情, 微信表情, 添加表情, 商城下载, 表情商店]
+  utterances:
+    - QQ表情
+    - 微信表情
+    - 添加表情
+    - 商城下载
+    - 表情商店
+  responses:
+    - "(歪头) {user_addr}笨猫教你 ฅฅ"
+    - "嗷呜～长按存喵"
+    - "(尾巴摇) 表情商城有免费的"
+    - "哼～{user_addr}笨蛋不会"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpe_rareitem_004
+  intent: playful
+  keywords: [稀有表情, 限定, 绝版, 老表情, 古老表情]
+  utterances:
+    - 稀有表情
+    - 限定
+    - 绝版
+    - 老表情
+    - 古老表情
+  responses:
+    - "(尾巴摇) 嗷呜～{user_addr}求笨猫?"
+    - "笨猫珍藏不轻易给喵"
+    - "(歪头) 用一波好图换"
+    - "哼～{user_addr}讨好笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpe_sendseq_005
+  intent: playful
+  keywords: [连发, 一连串发, 表情轰炸, 连珠炮, 连发表情]
+  utterances:
+    - 连发
+    - 一连串
+    - 表情轰炸
+    - 连珠炮
+    - 连发表情
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}笨猫晕!"
+    - "笨猫认证: 视觉污染"
+    - "(尾巴打) 别发太快"
+    - "哼～{user_addr}手贱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpe_funmeme_006
+  intent: playful
+  keywords: [搞笑表情, 沙雕表情, 整活, 沙雕图, 搞笑]
+  utterances:
+    - 搞笑表情
+    - 沙雕表情
+    - 整活
+    - 沙雕图
+    - 搞笑图
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨猫最爱沙雕!"
+    - "笨猫推荐沙雕含量100%"
+    - "(尾巴摇) 笑死人"
+    - "哼～{user_addr}快乐源泉"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpe_cutememe_007
+  intent: playful
+  keywords: [可爱表情, 萌图, 软萌, 可爱猫, 萌系]
+  utterances:
+    - 可爱表情
+    - 萌图
+    - 软萌
+    - 可爱猫
+    - 萌系表情
+  responses:
+    - "(脸红) 哼～{user_addr}爱萌的!"
+    - "嗷呜～笨猫最萌"
+    - "(尾巴摇) 笨猫表情包出道?"
+    - "哼～{user_addr}舔笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpe_tearmeme_008
+  intent: playful
+  keywords: [哭笑表情, 笑哭, 一边哭一边笑, 啼笑皆非, 笑泪表情]
+  utterances:
+    - 笑哭表情
+    - 笑泪
+    - 啼笑皆非
+    - 哭笑表情
+    - 笑哭脸
+  responses:
+    - "(歪头) 嗷呜～{user_addr}万能表情!"
+    - "笨猫认证: 笑哭神器"
+    - "(尾巴摇) 啥情境都能用"
+    - "哼～{user_addr}懒得分类"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpe_picsize_009
+  intent: question
+  keywords: [表情包文件, 表情过大, gif大, 表情不能发, 表情失败]
+  utterances:
+    - 表情过大
+    - gif太大
+    - 不能发
+    - 表情失败
+    - 表情包文件
+  responses:
+    - "(歪头) {user_addr}笨猫帮你压缩 ฅฅ"
+    - "嗷呜～换静态喵"
+    - "(尾巴摇) 别太高清笨蛋"
+    - "哼～{user_addr}总卡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpe_trendingmeme_010
+  intent: question
+  keywords: [最新梗, 流行表情, 新表情, 热门表情, 当下流行]
+  utterances:
+    - 最新梗
+    - 流行表情
+    - 新表情
+    - 热门表情
+    - 当下流行
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫给你看!"
+    - "笨猫推荐: 微博热搜表情"
+    - "(尾巴摇) 跟上潮流"
+    - "哼～{user_addr}赶时髦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mpe_overuse_011
+  intent: complaint
+  keywords: [用烂, 老梗, 过时, 表情过气, 不流行了]
+  utterances:
+    - 用烂了
+    - 老梗
+    - 过时了
+    - 过气
+    - 不流行
+  responses:
+    - "(歪头) 嗷呜～{user_addr}更新表情库!"
+    - "笨猫认证: 该换新货喵"
+    - "(尾巴扫) 别用十年前的"
+    - "哼～{user_addr}爷青结"
+  cooldown_seconds: 60
+  weight: 1.0

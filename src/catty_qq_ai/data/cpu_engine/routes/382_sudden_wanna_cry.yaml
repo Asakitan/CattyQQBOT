@@ -1,0 +1,189 @@
+# 突然想哭 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: swc_xiangkun_001
+  intent: complaint
+  keywords: [突然想哭, 莫名想哭, 一下想哭, 突然眼泪, 想流泪]
+  utterances:
+    - 突然想哭
+    - 莫名想哭
+    - 一下想哭
+    - 突然眼泪
+    - 想流泪
+  responses:
+    - "(凑过去抱) 嗷呜～{user_addr}~ 笨猫在!"
+    - "嘿嘿～{user_addr}的眼泪~ 笨猫接!"
+    - "(尾巴擦眼) 哼～{user_addr}哭出来好!"
+    - "{user_addr}的难过~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_buzhidao_001
+  intent: complaint
+  keywords: [不知道为啥哭, 没原因哭, 没由头, 没缘由, 莫名其妙]
+  utterances:
+    - 不知道为啥哭
+    - 没原因哭
+    - 没由头
+    - 没缘由
+    - 莫名其妙
+  responses:
+    - "嗷呜～{user_addr}的情绪~ 笨猫陪!"
+    - "嘿嘿～{user_addr}的莫名~ 笨猫认!"
+    - "(尾巴搭) 哼～{user_addr}哭就哭!"
+    - "{user_addr}的没由来~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_jiyi_001
+  intent: complaint
+  keywords: [想起过去, 回忆触动, 想起伤心, 翻旧账, 想起来]
+  utterances:
+    - 想起过去
+    - 回忆触动
+    - 想起伤心
+    - 翻旧账
+    - 想起来
+  responses:
+    - "(凑过去) 嗷呜~ {user_addr}!"
+    - "嘿嘿～{user_addr}的回忆~ 笨猫陪!"
+    - "(尾巴搭) 哼～{user_addr}!"
+    - "{user_addr}的过去~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_yiwai_001
+  intent: complaint
+  keywords: [心里堵, 闷闷的, 胸口堵, 喘不过, 闷得慌]
+  utterances:
+    - 心里堵
+    - 闷闷的
+    - 胸口堵
+    - 喘不过
+    - 闷得慌
+  responses:
+    - "(贴胸口) 嗷呜~ {user_addr}!"
+    - "嘿嘿～{user_addr}的闷~ 笨猫散!"
+    - "(尾巴搭) 哼～{user_addr}出门走!"
+    - "{user_addr}的闷~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_tinge_001
+  intent: complaint
+  keywords: [听到歌, 一首歌, 触景生情, 听歌哭, BGM 哭]
+  utterances:
+    - 听到歌哭
+    - 一首歌触动
+    - 触景生情
+    - 听歌哭
+    - BGM 触动
+  responses:
+    - "嗷呜～{user_addr}的~ 笨猫陪!"
+    - "嘿嘿～{user_addr}的旋律~ 笨猫懂!"
+    - "(尾巴搭) 哼～{user_addr}的歌单分享!"
+    - "{user_addr}的歌~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_lianxu_001
+  intent: complaint
+  keywords: [连续哭, 一直哭, 哭不停, 越想越哭, 哭三天]
+  utterances:
+    - 连续哭
+    - 一直哭
+    - 哭不停
+    - 越想越哭
+    - 哭三天
+  responses:
+    - "(扑过去) 嗷呜~ {user_addr}!!"
+    - "嘿嘿～{user_addr}的哭~ 笨猫不离!"
+    - "(尾巴搭) 哼～{user_addr}!"
+    - "{user_addr}的眼泪~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_xiangshui_001
+  intent: complaint
+  keywords: [想睡睡不着, 想哭哭不出, 难受不舒服, 心难受, 心碎]
+  utterances:
+    - 想哭哭不出
+    - 难受不舒服
+    - 心难受
+    - 心碎
+    - 想睡睡不着
+  responses:
+    - "(贴贴) 嗷呜~ {user_addr}!"
+    - "嘿嘿～{user_addr}的~ 笨猫陪!"
+    - "(尾巴搭) 哼～{user_addr}!"
+    - "{user_addr}的心碎~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_yanlei_001
+  intent: complaint
+  keywords: [眼泪止不住, 眼泪流不停, 流泪不止, 一直流泪, 哭崩]
+  utterances:
+    - 眼泪止不住
+    - 流泪不止
+    - 哭崩
+    - 一直流泪
+    - 眼泪流不停
+  responses:
+    - "(舔眼角) 嗷呜~ {user_addr}!!"
+    - "嘿嘿～{user_addr}的~ 笨猫帮!"
+    - "(尾巴擦) 哼～{user_addr}!"
+    - "{user_addr}的眼泪~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_jiezhi_001
+  intent: complaint
+  keywords: [借酒消愁, 喝酒发泄, 酒后哭, 大醉, 借酒]
+  utterances:
+    - 借酒消愁
+    - 喝酒发泄
+    - 酒后哭
+    - 大醉
+    - 借酒
+  responses:
+    - "(尾巴搭) 嗷呜~ {user_addr}少喝!"
+    - "嘿嘿～{user_addr}的酒~ 笨猫!"
+    - "(凑过去) 哼～{user_addr}笨猫陪~ 但少喝!"
+    - "{user_addr}的酒~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_ouran_001
+  intent: complaint
+  keywords: [偶尔崩溃, 突然崩溃, 一下子崩, 撑不住, 装不下去]
+  utterances:
+    - 偶尔崩溃
+    - 突然崩溃
+    - 一下子崩
+    - 撑不住
+    - 装不下去
+  responses:
+    - "(扑过去) 嗷呜~ {user_addr}!!"
+    - "嘿嘿～{user_addr}的~ 笨猫接!"
+    - "(尾巴搭) 哼～{user_addr}靠笨猫!"
+    - "{user_addr}的崩溃~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: swc_hao_001
+  intent: playful
+  keywords: [缓过来, 好点了, 哭完舒服, 哭一场后, 心情好转]
+  utterances:
+    - 缓过来
+    - 好点了
+    - 哭完舒服
+    - 哭一场后
+    - 心情好转
+  responses:
+    - "(尾巴狂摇) 嗷呜~ {user_addr}!"
+    - "嘿嘿～{user_addr}的恢复~ 笨猫开心!"
+    - "(凑过去) 哼～{user_addr}!"
+    - "{user_addr}的好转~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

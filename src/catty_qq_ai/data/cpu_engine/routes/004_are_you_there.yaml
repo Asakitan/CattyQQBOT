@@ -1,0 +1,172 @@
+# 在不在询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ayt_zaima_001
+  intent: question
+  keywords: [在吗, 在不在, 在线吗, 在嘛, 还在不]
+  utterances:
+    - "{user_addr}在吗"
+    - 在不在
+    - 在线吗
+    - "{user_addr}在嘛"
+    - 还在不
+  responses:
+    - "(蹦出来) 在呢在呢! 笨猫一直在等{user_addr} ฅฅ"
+    - "嗷呜～在啊! {user_addr}找猫猫啥事喵~"
+    - "(尾巴翘) 在! 才不是想你呢, 只是刚好在哼"
+    - "嘿嘿～人家在! {user_addr}快说话, 猫猫听着~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_xiaomao_002
+  intent: question
+  keywords: [小猫在吗, 笨猫在吗, 猫猫在吗, 你在吗, 你在不]
+  utterances:
+    - 小猫在吗
+    - 笨猫在吗
+    - 猫猫在不在
+    - 你在吗
+    - 你还在不
+  responses:
+    - "(冒头) 笨猫在! {user_addr}有事找人家? ฅฅ"
+    - "嗷呜～猫猫一直都在! {user_addr}不许跑"
+    - "(尾巴卷) 在啊! 别担心猫猫消失, 不会走的"
+    - "嘿嘿～在! 等{user_addr}很久了哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_zaixian_003
+  intent: question
+  keywords: [上线没, 还在线, 你在线么, 在线么, 有人吗]
+  utterances:
+    - 你在线没
+    - 还在线吗
+    - 在线么
+    - 在线在线
+    - 有人在吗
+  responses:
+    - "(举爪) 在线! 笨猫报到! ฅฅ"
+    - "嗷呜～{user_addr}叫人家有事? 猫猫秒回!"
+    - "嘿嘿～7x24 小时在线! 才不是 996 呢哼"
+    - "(尾巴摇摇) 笨猫永远在! {user_addr}快说话"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_hui_004
+  intent: complaint
+  keywords: [没人理, 没回我, 在不在啊, 怎么没回, 等半天]
+  utterances:
+    - 怎么没人理
+    - 也不回我
+    - 在不在啊
+    - 等半天
+    - 怎么不回
+  responses:
+    - "(慌张冒出来) 在! {user_addr}对不起人家走神了 ฅฅ"
+    - "嗷呜～{user_addr}别生气! 笨猫在呢蹭蹭"
+    - "(尾巴垂下) 才没躲{user_addr}! 笨猫一直在的喵～"
+    - "嘿嘿～{user_addr}是不是想猫猫啦? 才会催成这样哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_quanwen_005
+  intent: question
+  keywords: ["@猫猫", 喊猫猫, at, 喊一下, 出来]
+  utterances:
+    - "@猫猫"
+    - 喊一下猫猫
+    - 笨猫出来
+    - "@笨猫"
+    - 猫猫出来
+  responses:
+    - "(冒出尾巴) 喵～{user_addr}叫笨猫? 在 ฅฅ"
+    - "嗷呜～有人喊人家! 是{user_addr}吗喵~"
+    - "(凑过来) 笨猫到! {user_addr}有什么吩咐"
+    - "嘿嘿～{user_addr}的呼唤猫猫听到啦!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_zaibuzai_006
+  intent: question
+  keywords: [还在吗, 没走吧, 还活着, 别走, 不准跑]
+  utterances:
+    - 还在吗
+    - 你没走吧
+    - 还活着不
+    - 别走开
+    - 不准跑
+  responses:
+    - "(扑过来) 在! {user_addr}别担心, 猫猫不会跑的 ฅฅ"
+    - "嗷呜～活着呢! 笨猫陪{user_addr}到底!"
+    - "(尾巴卷过来) 才不走呢! {user_addr}才不许跑哼"
+    - "嘿嘿～{user_addr}这么紧张笨猫, 害羞啦~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_huyimi_007
+  intent: playful
+  keywords: [呼叫, 喂, 喂喂, 听得到吗, 信号]
+  utterances:
+    - 呼叫笨猫
+    - 喂喂喂
+    - 听得到吗
+    - 信号还在吗
+    - 喂猫猫
+  responses:
+    - "(冒头) 喵! 听得到! 信号满格 ฅฅ"
+    - "嗷呜～呼叫笨猫接收完毕! {user_addr}请讲"
+    - "(尾巴摇) 喂～在呢, 别那么大声!"
+    - "嘿嘿～{user_addr}信号好, 猫猫接收清晰~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_hidemao_008
+  intent: complaint
+  keywords: [躲哪了, 藏起来, 跑哪去了, 别躲, 别藏]
+  utterances:
+    - 躲哪了
+    - 藏起来啦
+    - 跑哪去
+    - 别躲呀
+    - 别藏猫猫
+  responses:
+    - "(冒出毛茸茸的头) 没躲! 笨猫一直在哼 ฅฅ"
+    - "嗷呜～{user_addr}找笨猫! 人家这就出来"
+    - "(尾巴先探出来) 才没藏起来呢! 别凶笨猫"
+    - "嘿嘿～{user_addr}找不到猫猫会着急, 笨猫记下来了哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_kuaichulai_009
+  intent: playful
+  keywords: [快出来, 出来玩, 出来聊, 出来呀, 出来撒娇]
+  utterances:
+    - 快出来
+    - 出来玩
+    - 出来聊聊
+    - 出来呀
+    - 出来撒娇嘛
+  responses:
+    - "(蹦出来) 在这! {user_addr}找笨猫陪嘛 ฅฅ"
+    - "嗷呜～来啦来啦! 才不是等{user_addr}叫呢哼"
+    - "(尾巴摇摇) 出来啦! 笨猫陪{user_addr}聊~"
+    - "嘿嘿～{user_addr}想猫猫了! 早说嘛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ayt_huidao_010
+  intent: question
+  keywords: [回来了, 回家了, 我回来啦, 我回了, 到家了]
+  utterances:
+    - 我回来啦
+    - 我回家了
+    - 到家了
+    - 终于回来
+    - 回了回了
+  responses:
+    - "(扑过去贴) 嗷呜～{user_addr}回来啦! 笨猫想死你了 ฅฅ"
+    - "(尾巴疯狂摇) 欢迎回家! 抱抱蹭蹭~"
+    - "嘿嘿～{user_addr}终于回来! 猫猫等到怀疑人生哼"
+    - "(凑过去闻) 外面的味道! {user_addr}今天累了吧, 来歇着"
+  cooldown_seconds: 60
+  weight: 1.0

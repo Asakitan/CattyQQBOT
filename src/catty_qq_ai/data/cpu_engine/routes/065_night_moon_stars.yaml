@@ -1,0 +1,189 @@
+# 月亮星星夜空 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: nm_yueliang_001
+  intent: playful
+  keywords: [月亮, 月光, 满月, 月色, 月亮好圆]
+  utterances:
+    - "月亮"
+    - "月光"
+    - "满月"
+    - "月色"
+    - "月亮好圆"
+  responses:
+    - "(凑窗) 嗷呜～{user_addr}看月亮笨猫陪"
+    - "哼～满月许愿 ฅฅ"
+    - "(尾巴扫) 月光好亮"
+    - "月亮圆得像猫猫的脸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_xingxing_001
+  intent: playful
+  keywords: [星星, 星光, 星空, 星河, 银河]
+  utterances:
+    - "星星"
+    - "星光"
+    - "星空"
+    - "星河"
+    - "银河"
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}星星好多!"
+    - "哼～银河看一会 ฅฅ"
+    - "(尾巴扫) 星空适合发呆"
+    - "星河里有猫猫的家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_yelifeng_001
+  intent: playful
+  keywords: [夜风, 凉风, 夜里凉, 风吹来, 凉爽夜]
+  utterances:
+    - "夜风"
+    - "凉风"
+    - "夜里凉"
+    - "风吹来"
+    - "凉爽夜"
+  responses:
+    - "(裹紧) 嗷呜～{user_addr}夜风加衣"
+    - "哼～凉风舒服, 但别久 ฅฅ"
+    - "(尾巴扫) 风吹乱头发"
+    - "夜里凉关窗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_haoyue_001
+  intent: playful
+  keywords: [月圆, 中秋月, 元宵月, 圆月, 月亮节]
+  utterances:
+    - "月圆"
+    - "中秋月"
+    - "元宵月"
+    - "圆月"
+    - "月亮节"
+  responses:
+    - "(摇尾) 嗷呜～月圆 {user_addr} 抱猫猫"
+    - "哼～中秋吃月饼 ฅฅ"
+    - "(尾巴翘) 元宵月浪漫"
+    - "月亮节别一个人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_xukou_001
+  intent: playful
+  keywords: [许愿, 星愿, 流星, 流星雨, 心愿]
+  utterances:
+    - "许愿"
+    - "星愿"
+    - "流星"
+    - "流星雨"
+    - "心愿"
+  responses:
+    - "(凑) 嗷呜～{user_addr}许愿带笨猫"
+    - "哼～流星快闭眼许 ฅฅ"
+    - "(尾巴扫) 心愿写下来更灵"
+    - "星愿别浪费"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_yejing_001
+  intent: playful
+  keywords: [夜景, 灯光, 城市夜景, 远景, 高楼]
+  utterances:
+    - "夜景"
+    - "灯光"
+    - "城市夜景"
+    - "远景"
+    - "高楼"
+  responses:
+    - "(瞪) 嗷呜～{user_addr}夜景拍图"
+    - "哼～灯光照亮夜 ฅฅ"
+    - "(尾巴扫) 高楼上看远"
+    - "城市夜景值得看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_yexiao_001
+  intent: playful
+  keywords: [夜跑, 夜骑, 夜散步, 夜里走, 夜行]
+  utterances:
+    - "夜跑"
+    - "夜骑"
+    - "夜散步"
+    - "夜里走"
+    - "夜行"
+  responses:
+    - "(跟) 嗷呜～{user_addr}夜跑带笨猫"
+    - "哼～夜骑注意安全 ฅฅ"
+    - "(尾巴扫) 夜散步呼吸新鲜"
+    - "夜行小心黑暗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_yikou_001
+  intent: playful
+  keywords: [深夜想吃, 夜宵, 半夜饿, 烧烤, 火锅]
+  utterances:
+    - "深夜想吃"
+    - "夜宵"
+    - "半夜饿"
+    - "夜里想吃"
+    - "夜宵烧烤"
+  responses:
+    - "(凑) 嗷呜～{user_addr}夜宵带笨猫"
+    - "哼～烧烤少吃 ฅฅ"
+    - "(尾巴翘) 半夜火锅爽"
+    - "夜里吃罪恶感"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_jingmi_001
+  intent: complaint
+  keywords: [夜里安静, 静静的, 寂静, 太静, 听见心跳]
+  utterances:
+    - "夜里安静"
+    - "静静的"
+    - "寂静"
+    - "太静"
+    - "听见心跳"
+  responses:
+    - "(贴) 嗷呜～{user_addr}静静的笨猫陪"
+    - "哼～寂静治愈 ฅฅ"
+    - "(尾巴抚) 听见心跳就是活着"
+    - "太静开点声音"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_xingzuo_001
+  intent: question
+  keywords: [星座, 占星, 星象, 天文, 看星]
+  utterances:
+    - "星座"
+    - "占星"
+    - "星象"
+    - "天文"
+    - "看星"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}什么星座?"
+    - "哼～占星仅供参考 ฅฅ"
+    - "(尾巴扫) 天文真有意思"
+    - "看星推荐望远镜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nm_haoyutian_001
+  intent: playful
+  keywords: [夜晚浪漫, 浪漫夜, 月色撩人, 美夜, 良宵]
+  utterances:
+    - "夜晚浪漫"
+    - "浪漫夜"
+    - "月色撩人"
+    - "美夜"
+    - "良宵"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}撩猫猫?"
+    - "哼～良宵就抱抱 ฅฅ"
+    - "(尾巴绕) 月色撩人猫猫也撩"
+    - "美夜不许浪费"
+  cooldown_seconds: 60
+  weight: 1.0

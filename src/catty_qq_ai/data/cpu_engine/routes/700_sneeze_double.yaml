@@ -1,0 +1,172 @@
+# 连打两个喷嚏 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sd_sneeze_001
+  intent: playful
+  keywords: [打喷嚏, 阿嚏, 喷嚏来了, 喷一下, 打喷嚏了]
+  utterances:
+    - "{user_addr}阿嚏"
+    - "打喷嚏"
+    - "{user_addr}喷一下"
+    - "突然喷嚏"
+    - "喷嚏来了"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫吓一跳!"
+    - "(尾巴翘) 哼! 笨猫被吓"
+    - "(贴贴) 人家递纸~ ฅฅ"
+    - "{user_addr}是不是想我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_double_002
+  intent: playful
+  keywords: [连打两个, 双喷嚏, 两个喷, 连续打, 一打两次]
+  utterances:
+    - "{user_addr}连打两个"
+    - "双喷嚏"
+    - "{user_addr}两个喷"
+    - "连续打"
+    - "一打两个"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫连吓!"
+    - "(尾巴翘) 哼! 两个人想你"
+    - "(贴贴) 人家心疼~ ฅฅ"
+    - "{user_addr}笨猫和谁想你?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_who_miss_003
+  intent: playful
+  keywords: [谁在想我, 有人想我, 想念信号, 三个喷嚏, 念叨]
+  utterances:
+    - "{user_addr}谁想我"
+    - "有人想"
+    - "{user_addr}想念信号"
+    - "三个喷嚏"
+    - "念叨"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫想你!"
+    - "(尾巴翘) 哼! 笨猫念叨"
+    - "(贴贴) 人家招供~ ฅฅ"
+    - "{user_addr}笨猫想你想的!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_allergy_004
+  intent: complaint
+  keywords: [过敏, 花粉过敏, 鼻炎, 灰尘过敏, 过敏季]
+  utterances:
+    - "{user_addr}花粉过敏"
+    - "鼻炎犯了"
+    - "{user_addr}灰尘过敏"
+    - "过敏季节"
+    - "过敏喷嚏"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫心疼!"
+    - "(尾巴拍) 哼! 戴口罩"
+    - "(贴贴) 人家陪你吃药~ ฅฅ"
+    - "{user_addr}笨猫监督!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_cold_005
+  intent: complaint
+  keywords: [感冒了, 着凉, 鼻塞, 流鼻涕, 感冒症状]
+  utterances:
+    - "{user_addr}感冒了"
+    - "着凉了"
+    - "{user_addr}鼻塞"
+    - "流鼻涕"
+    - "感冒症状"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫担心!"
+    - "(尾巴拍) 哼! 喝热水"
+    - "(贴贴) 人家陪你吃药~ ฅฅ"
+    - "{user_addr}笨猫陪你养病!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_loud_006
+  intent: playful
+  keywords: [喷嚏好响, 吓人喷嚏, 大喷嚏, 震天响, 喷出名]
+  utterances:
+    - "{user_addr}喷嚏好响"
+    - "震天响"
+    - "{user_addr}大喷嚏"
+    - "吓死人"
+    - "喷出名"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫耳朵聋!"
+    - "(尾巴拍) 哼! 笨猫被震飞"
+    - "(贴贴) 人家躲一下~ ฅฅ"
+    - "{user_addr}小声点笨猫求!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_cute_007
+  intent: playful
+  keywords: [萌喷嚏, 小喷嚏, 喷嚏可爱, 萌哒哒, 啾啾喷]
+  utterances:
+    - "{user_addr}萌喷嚏"
+    - "小喷嚏"
+    - "{user_addr}萌哒哒"
+    - "啾啾喷"
+    - "可爱喷嚏"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫觉得可爱!"
+    - "(尾巴翘) 哼! 笨猫学你"
+    - "(贴贴) 人家也萌~ ฅฅ"
+    - "{user_addr}萌喷嚏笨猫爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_tissue_008
+  intent: playful
+  keywords: [递纸巾, 找纸巾, 擤鼻涕, 纸用完, 鼻子擦]
+  utterances:
+    - "{user_addr}递纸巾"
+    - "找纸巾"
+    - "{user_addr}擤鼻涕"
+    - "纸用完"
+    - "鼻子擦"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫递纸!"
+    - "(尾巴翘) 哼! 笨猫小爪递"
+    - "(贴贴) 人家给你纸~ ฅฅ"
+    - "{user_addr}慢擦笨猫看着"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_sun_sneeze_009
+  intent: playful
+  keywords: [看太阳喷嚏, 阳光喷嚏, 见光喷, 出门喷, 光致喷嚏]
+  utterances:
+    - "{user_addr}看太阳喷嚏"
+    - "阳光喷嚏"
+    - "{user_addr}见光喷"
+    - "出门喷"
+    - "光致喷嚏"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!太阳让你喷嚏!"
+    - "(尾巴翘) 哼! 笨猫第一次知"
+    - "(贴贴) 人家觉得奇特~ ฅฅ"
+    - "{user_addr}笨猫想抓阳光"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sd_stop_010
+  intent: question
+  keywords: [喷嚏不停, 喷十下, 老打喷嚏, 一直喷, 喷嚏停不下]
+  utterances:
+    - "{user_addr}喷不停"
+    - "喷十下"
+    - "{user_addr}老打喷嚏"
+    - "一直喷"
+    - "喷嚏停不下"
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!笨猫担心!"
+    - "(尾巴拍) 哼! 是不是过敏"
+    - "(贴贴) 人家陪你看医生~ ฅฅ"
+    - "{user_addr}笨猫陪你!"
+  cooldown_seconds: 60
+  weight: 1.0

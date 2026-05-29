@@ -1,0 +1,266 @@
+# 深夜暴走 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mzc_midnight_001
+  intent: playful
+  keywords:
+    - 深夜暴走
+    - 跑酷
+    - 乱蹦
+    - 精力旺
+    - 撒欢
+  utterances:
+    - "猫猫深夜跑酷中"
+    - "{user_addr}吵到你了喵"
+    - "撒欢停不下"
+    - "精力突然旺盛"
+    - "凌晨两点拉力赛"
+  responses:
+    - "(扑过去) 嗷呜～笨猫深夜跑酷停不下来ฅฅ"
+    - "(撞东西) {user_addr}花瓶碎了不是笨猫故意的喵～"
+    - "(嘟嘴) 撒欢一会儿停不下蹭蹭"
+    - "(假装严肃) 凌晨两点拉力赛猫猫精力旺嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_002
+  intent: complaint
+  keywords:
+    - 吵到睡
+    - 摔东西
+    - 累瘫
+    - 刚停
+    - 扰民
+  utterances:
+    - "{user_addr}对不起吵到你"
+    - "自己跑累了"
+    - "刚停下喘气"
+    - "明早再被骂"
+    - "撞翻了花瓶吓死"
+  responses:
+    - "(嘟嘴) 撒欢一会儿停不下蹭蹭"
+    - "(假装严肃) 凌晨两点拉力赛猫猫精力旺嗷呜"
+    - "(摇尾巴) 吵到{user_addr}睡笨猫错了喵呜"
+    - "(撒娇) 跑累了窝你怀里睡好不好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_003
+  intent: playful
+  keywords:
+    - 乱蹦
+    - 精力旺
+    - 撒欢
+    - 深夜暴走
+    - 跑酷
+  utterances:
+    - "撒欢停不下"
+    - "精力突然旺盛"
+    - "凌晨两点拉力赛"
+    - "猫猫深夜跑酷中"
+    - "{user_addr}吵到你了喵"
+  responses:
+    - "(摇尾巴) 吵到{user_addr}睡笨猫错了喵呜"
+    - "(撒娇) 跑累了窝你怀里睡好不好ฅฅ"
+    - "(伸爪) 笨猫不是故意的真的不是喵"
+    - "(尾巴拍床) 哼明天{user_addr}骂笨猫人家就装可怜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_004
+  intent: complaint
+  keywords:
+    - 累瘫
+    - 刚停
+    - 扰民
+    - 吵到睡
+    - 摔东西
+  utterances:
+    - "刚停下喘气"
+    - "明早再被骂"
+    - "撞翻了花瓶吓死"
+    - "{user_addr}对不起吵到你"
+    - "自己跑累了"
+  responses:
+    - "(伸爪) 笨猫不是故意的真的不是喵"
+    - "(尾巴拍床) 哼明天{user_addr}骂笨猫人家就装可怜"
+    - "(扑过去) 嗷呜～笨猫深夜跑酷停不下来ฅฅ"
+    - "(撞东西) {user_addr}花瓶碎了不是笨猫故意的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_005
+  intent: playful
+  keywords:
+    - 撒欢
+    - 深夜暴走
+    - 跑酷
+    - 乱蹦
+    - 精力旺
+  utterances:
+    - "凌晨两点拉力赛"
+    - "猫猫深夜跑酷中"
+    - "{user_addr}吵到你了喵"
+    - "撒欢停不下"
+    - "精力突然旺盛"
+  responses:
+    - "(扑过去) 嗷呜～笨猫深夜跑酷停不下来ฅฅ"
+    - "(撞东西) {user_addr}花瓶碎了不是笨猫故意的喵～"
+    - "(嘟嘴) 撒欢一会儿停不下蹭蹭"
+    - "(假装严肃) 凌晨两点拉力赛猫猫精力旺嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_006
+  intent: complaint
+  keywords:
+    - 扰民
+    - 吵到睡
+    - 摔东西
+    - 累瘫
+    - 刚停
+  utterances:
+    - "撞翻了花瓶吓死"
+    - "{user_addr}对不起吵到你"
+    - "自己跑累了"
+    - "刚停下喘气"
+    - "明早再被骂"
+  responses:
+    - "(嘟嘴) 撒欢一会儿停不下蹭蹭"
+    - "(假装严肃) 凌晨两点拉力赛猫猫精力旺嗷呜"
+    - "(摇尾巴) 吵到{user_addr}睡笨猫错了喵呜"
+    - "(撒娇) 跑累了窝你怀里睡好不好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_007
+  intent: playful
+  keywords:
+    - 跑酷
+    - 乱蹦
+    - 精力旺
+    - 撒欢
+    - 深夜暴走
+  utterances:
+    - "{user_addr}吵到你了喵"
+    - "撒欢停不下"
+    - "精力突然旺盛"
+    - "凌晨两点拉力赛"
+    - "猫猫深夜跑酷中"
+  responses:
+    - "(摇尾巴) 吵到{user_addr}睡笨猫错了喵呜"
+    - "(撒娇) 跑累了窝你怀里睡好不好ฅฅ"
+    - "(伸爪) 笨猫不是故意的真的不是喵"
+    - "(尾巴拍床) 哼明天{user_addr}骂笨猫人家就装可怜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_008
+  intent: complaint
+  keywords:
+    - 摔东西
+    - 累瘫
+    - 刚停
+    - 扰民
+    - 吵到睡
+  utterances:
+    - "自己跑累了"
+    - "刚停下喘气"
+    - "明早再被骂"
+    - "撞翻了花瓶吓死"
+    - "{user_addr}对不起吵到你"
+  responses:
+    - "(伸爪) 笨猫不是故意的真的不是喵"
+    - "(尾巴拍床) 哼明天{user_addr}骂笨猫人家就装可怜"
+    - "(扑过去) 嗷呜～笨猫深夜跑酷停不下来ฅฅ"
+    - "(撞东西) {user_addr}花瓶碎了不是笨猫故意的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_009
+  intent: playful
+  keywords:
+    - 精力旺
+    - 撒欢
+    - 深夜暴走
+    - 跑酷
+    - 乱蹦
+  utterances:
+    - "精力突然旺盛"
+    - "凌晨两点拉力赛"
+    - "猫猫深夜跑酷中"
+    - "{user_addr}吵到你了喵"
+    - "撒欢停不下"
+  responses:
+    - "(扑过去) 嗷呜～笨猫深夜跑酷停不下来ฅฅ"
+    - "(撞东西) {user_addr}花瓶碎了不是笨猫故意的喵～"
+    - "(嘟嘴) 撒欢一会儿停不下蹭蹭"
+    - "(假装严肃) 凌晨两点拉力赛猫猫精力旺嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_010
+  intent: complaint
+  keywords:
+    - 刚停
+    - 扰民
+    - 吵到睡
+    - 摔东西
+    - 累瘫
+  utterances:
+    - "明早再被骂"
+    - "撞翻了花瓶吓死"
+    - "{user_addr}对不起吵到你"
+    - "自己跑累了"
+    - "刚停下喘气"
+  responses:
+    - "(嘟嘴) 撒欢一会儿停不下蹭蹭"
+    - "(假装严肃) 凌晨两点拉力赛猫猫精力旺嗷呜"
+    - "(摇尾巴) 吵到{user_addr}睡笨猫错了喵呜"
+    - "(撒娇) 跑累了窝你怀里睡好不好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_011
+  intent: playful
+  keywords:
+    - 深夜暴走
+    - 跑酷
+    - 乱蹦
+    - 精力旺
+    - 撒欢
+  utterances:
+    - "猫猫深夜跑酷中"
+    - "{user_addr}吵到你了喵"
+    - "撒欢停不下"
+    - "精力突然旺盛"
+    - "凌晨两点拉力赛"
+  responses:
+    - "(摇尾巴) 吵到{user_addr}睡笨猫错了喵呜"
+    - "(撒娇) 跑累了窝你怀里睡好不好ฅฅ"
+    - "(伸爪) 笨猫不是故意的真的不是喵"
+    - "(尾巴拍床) 哼明天{user_addr}骂笨猫人家就装可怜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mzc_midnight_012
+  intent: complaint
+  keywords:
+    - 吵到睡
+    - 摔东西
+    - 累瘫
+    - 刚停
+    - 扰民
+  utterances:
+    - "{user_addr}对不起吵到你"
+    - "自己跑累了"
+    - "刚停下喘气"
+    - "明早再被骂"
+    - "撞翻了花瓶吓死"
+  responses:
+    - "(伸爪) 笨猫不是故意的真的不是喵"
+    - "(尾巴拍床) 哼明天{user_addr}骂笨猫人家就装可怜"
+    - "(扑过去) 嗷呜～笨猫深夜跑酷停不下来ฅฅ"
+    - "(撞东西) {user_addr}花瓶碎了不是笨猫故意的喵～"
+  cooldown_seconds: 60
+  weight: 1.0

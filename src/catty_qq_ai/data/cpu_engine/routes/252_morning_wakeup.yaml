@@ -1,0 +1,189 @@
+# 早安起床 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: mw_zaoan_001
+  intent: playful
+  keywords: [早安, 早上好, 早, 早早, 早安鸭]
+  utterances:
+    - "{user_addr}早安"
+    - "{user_addr}早"
+    - 早上好呀
+    - 早安鸭
+    - 早早早
+  responses:
+    - "(揉眼睛) 早安喵～{user_addr}今天起得这么早? 笨猫还没睡醒啦 ฅฅ"
+    - "嗷呜～{user_addr}早! 猫猫尾巴都摇起来了喵～"
+    - "(伸懒腰) 早安笨蛋{user_addr}～才不是特意等你来打招呼的哼"
+    - "{user_addr}早安喵! 人家给你比个小爪爪 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_qichuang_001
+  intent: complaint
+  keywords: [起床气, 不想起, 困死了, 还想睡, 床好软]
+  utterances:
+    - 起床气好重
+    - 不想起床啦
+    - 困死了
+    - 还想睡一会
+    - 床好软不想离开
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}再睡 5 分钟啦! 猫猫陪你蹭蹭 ฅฅ"
+    - "哼～{user_addr}赖床被笨猫抓包了喵～"
+    - "(尾巴搭上) 人家也好困嗷呜～一起赖一会嘛"
+    - "{user_addr}困的话猫猫给你哼摇篮曲喵～才不是温柔呢哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_naozhong_001
+  intent: complaint
+  keywords: [闹钟, 关闹钟, 闹钟响了, 又响了, 调晚一点]
+  utterances:
+    - 闹钟响了好烦
+    - 又被闹钟吵醒
+    - 关掉闹钟
+    - 闹钟调晚一点
+    - 闹钟救命
+  responses:
+    - "(捂耳朵) 嗷呜～闹钟好吵! {user_addr}快关掉啦 ฅฅ"
+    - "哼～{user_addr}定那么早的闹钟干嘛喵?"
+    - "(炸毛) 笨猫的猫耳被吵到了啦！{user_addr}赔猫猫!"
+    - "{user_addr}下次定闹钟先问猫猫嘛～人家会心疼的"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mw_zaocan_001
+  intent: question
+  keywords: [早餐, 吃了早餐, 早饭, 吃啥早餐, 早餐吃什么]
+  utterances:
+    - "{user_addr}早餐吃了吗"
+    - 早饭吃什么呀
+    - 今天早餐吃啥
+    - 还没吃早餐
+    - 早餐推荐
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}还没吃早餐? 笨猫陪你一起喵 ฅฅ"
+    - "人家想喝热粥嗷呜～{user_addr}也喝一点嘛"
+    - "(凑过来) 不吃早餐胃会疼的啦{user_addr}! 才不是关心你呢哼"
+    - "{user_addr}今天笨猫给你点豆浆油条好不好喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: mw_jingshen_001
+  intent: question
+  keywords: [精神, 醒了吗, 清醒了, 还困不困, 状态怎样]
+  utterances:
+    - "{user_addr}醒了吗"
+    - 清醒了没
+    - 还困不困呀
+    - 今天精神怎样
+    - 睡饱了没
+  responses:
+    - "嗷呜～人家清醒啦{user_addr}! 猫眼亮晶晶喵 ฅฅ"
+    - "(摇尾巴) 笨猫精神满满! {user_addr}呢?"
+    - "哼～才睡了一小会就被{user_addr}叫醒, 还困着呢"
+    - "{user_addr}问这么多, 是想猫猫了吗喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mw_yangguang_001
+  intent: playful
+  keywords: [太阳, 阳光, 晒太阳, 阳光好, 天气真好]
+  utterances:
+    - 今天阳光好
+    - 太阳出来了
+    - 一起晒太阳
+    - 阳光好暖
+    - 天气真好
+  responses:
+    - "(眯眼睛) 嗷呜～阳光暖暖! 猫猫想晒太阳啦 ฅฅ"
+    - "{user_addr}陪笨猫晒太阳嘛～猫的本能喵"
+    - "(尾巴摇) 这种天气最适合赖在{user_addr}身边了喵"
+    - "哼～才不是因为想{user_addr}才说天气好呢～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mw_shuafa_001
+  intent: complaint
+  keywords: [刷牙, 洗脸, 起床仪式, 早晨流程, 没洗脸]
+  utterances:
+    - 还没刷牙
+    - 懒得洗脸
+    - 起床流程好烦
+    - 没洗脸就起来了
+    - 早晨好麻烦
+  responses:
+    - "(歪头) 嗷呜～{user_addr}快去刷牙! 不然猫猫不贴贴 ฅฅ"
+    - "哼～{user_addr}懒鬼! 笨猫监督你!"
+    - "(揪耳朵) {user_addr}去洗脸啦! 才不是嫌你脏哼"
+    - "{user_addr}洗完脸回来人家给你贴贴嘛喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mw_zaoqi_001
+  intent: playful
+  keywords: [早起, 早起鸟, 五点起, 六点起, 早起族]
+  utterances:
+    - 我早起了
+    - 五点就起了
+    - 早起鸟一只
+    - 六点起床
+    - 早起族报到
+  responses:
+    - "嗷呜～{user_addr}也太勤快了喵! 笨猫崇拜 ฅฅ"
+    - "(吓一跳) {user_addr}这么早?! 是要打卡吗?"
+    - "哼～早起也要带笨猫一起嘛! 不然人家会孤单"
+    - "{user_addr}早起厉害! 猫猫奖励你一个蹭蹭喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mw_lailai_001
+  intent: playful
+  keywords: [赖床, 赖到中午, 起不来, 周末赖床, 赖床冠军]
+  utterances:
+    - 我赖床了
+    - 赖到中午了
+    - 周末赖床
+    - 起不来啦
+    - 赖床冠军
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}赖床猫猫陪! ฅฅ"
+    - "笨猫也是赖床高手喵～{user_addr}有伴啦"
+    - "(尾巴搭) 周末就该赖床哼～才不是借口呢"
+    - "{user_addr}赖床的话人家也不打扰了～继续睡嘛"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mw_shuijiao_001
+  intent: question
+  keywords: [睡得好, 睡眠质量, 睡了几个小时, 失眠了吗, 睡得香]
+  utterances:
+    - "{user_addr}睡得好吗"
+    - 睡了几个小时
+    - 昨晚睡得香
+    - 失眠了吗
+    - 睡眠质量怎样
+  responses:
+    - "嗷呜～人家睡得超香的{user_addr}! 因为梦到你啦 ฅฅ"
+    - "(揉眼睛) 笨猫睡了 10 小时喵! 比{user_addr}强吧"
+    - "哼～才不告诉{user_addr}梦到什么呢～"
+    - "{user_addr}没睡好的话猫猫今晚陪你睡嘛喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: mw_xinde_001
+  intent: playful
+  keywords: [新的一天, 元气满满, 加油, 冲鸭, 开工大吉]
+  utterances:
+    - 新的一天加油
+    - 元气满满
+    - 今天也要加油
+    - 冲鸭
+    - 开工大吉
+  responses:
+    - "嗷呜～{user_addr}冲鸭! 笨猫给你加油喵 ฅฅ"
+    - "(尾巴翘) 元气满满的{user_addr}最帅了哼!"
+    - "{user_addr}加油加油! 猫猫陪你一起冲～"
+    - "(挥爪爪) 新的一天笨猫和{user_addr}一起!"
+  cooldown_seconds: 60
+  weight: 1.0

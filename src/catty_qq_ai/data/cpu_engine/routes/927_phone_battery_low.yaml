@@ -1,0 +1,189 @@
+# 手机没电日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bat_low_001
+  intent: complaint
+  keywords: [手机没电, 电量低, 1%电量, 快关机, 急]
+  utterances:
+    - 手机没电
+    - 电量1%
+    - 快关机
+    - 电量低
+    - 急了
+  responses:
+    - "(惊) 嗷呜～{user_addr}找充电 ฅฅ"
+    - "哼～{user_addr}下次带充电宝喵"
+    - "(尾巴卷) 省着用蹭蹭{user_addr}"
+    - "{user_addr}笨猫等你来电嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bat_powerbank_001
+  intent: complaint
+  keywords: [充电宝, 没带充电宝, 共享充电宝, 借, 充电宝坏]
+  utterances:
+    - 没带充电宝
+    - 共享充电宝
+    - 借一个
+    - 充电宝坏了
+    - 求充电宝
+  responses:
+    - "(歪头) 嗷呜～{user_addr}找借 ฅฅ"
+    - "哼～{user_addr}笨猫提醒过你喵"
+    - "(尾巴卷) 借一个嘛蹭蹭{user_addr}"
+    - "{user_addr}共享走起嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bat_charger_lost_001
+  intent: complaint
+  keywords: [充电线丢了, 找不到线, 线坏了, 数据线, 同款线]
+  utterances:
+    - 充电线丢
+    - 找不到线
+    - 线坏了
+    - 数据线没
+    - 同款线哪有
+  responses:
+    - "(歪头) 嗷呜～{user_addr}买新 ฅฅ"
+    - "哼～{user_addr}下次别乱放喵"
+    - "(尾巴卷) 借同事一根蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你买嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bat_fast_drain_001
+  intent: complaint
+  keywords: [掉电快, 一小时10%, 电池不耐, 老电池, 该换电池]
+  utterances:
+    - 掉电快
+    - 1小时10%
+    - 电池不耐
+    - 老电池
+    - 该换电池
+  responses:
+    - "(同情) 嗷呜～{user_addr}该换 ฅฅ"
+    - "哼～{user_addr}电池循环到底了喵"
+    - "(尾巴卷) 换电池便宜蹭蹭{user_addr}"
+    - "{user_addr}笨猫提议换嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bat_phone_off_001
+  intent: complaint
+  keywords: [关机了, 黑屏, 自动关机, 没反应, 重启不了]
+  utterances:
+    - 关机了
+    - 黑屏
+    - 自动关机
+    - 没反应
+    - 开不了机
+  responses:
+    - "(惊) 嗷呜～{user_addr}找电源 ฅฅ"
+    - "哼～{user_addr}长按电源喵"
+    - "(尾巴卷) 充会儿电再开蹭蹭{user_addr}"
+    - "{user_addr}稳住嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bat_socket_001
+  intent: complaint
+  keywords: [找插座, 没插座, 哪里能充电, 公共充电, 蹭电]
+  utterances:
+    - 找插座
+    - 没插座
+    - 哪里能充
+    - 公共充电
+    - 蹭电
+  responses:
+    - "(歪头) 嗷呜～{user_addr}咖啡厅 ฅฅ"
+    - "哼～{user_addr}星巴克有喵"
+    - "(尾巴卷) 蹭一会儿OK蹭蹭{user_addr}"
+    - "{user_addr}笨猫推荐图书馆嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bat_save_mode_001
+  intent: playful
+  keywords: [省电模式, 飞行模式, 关WiFi, 降亮度, 省电]
+  utterances:
+    - 开省电模式
+    - 飞行模式
+    - 关WiFi省电
+    - 降亮度
+    - 各种省电
+  responses:
+    - "(点头) 嗷呜～{user_addr}好办法 ฅฅ"
+    - "哼～{user_addr}笨猫表扬喵"
+    - "(尾巴卷) 撑到能充蹭蹭{user_addr}"
+    - "{user_addr}加油嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bat_charge_slow_001
+  intent: complaint
+  keywords: [充电慢, 涓流, 不快充, 老充电器, 半小时10%]
+  utterances:
+    - 充电慢
+    - 涓流
+    - 不快充
+    - 老充电器
+    - 半小时10%
+  responses:
+    - "(同情) 嗷呜～{user_addr}耐心 ฅฅ"
+    - "哼～{user_addr}换快充喵"
+    - "(尾巴卷) 慢就慢蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你等嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bat_emergency_001
+  intent: complaint
+  keywords: [关键时刻没电, 找不到人, 联系不上, 电话打不出, 急]
+  utterances:
+    - 关键时刻没电
+    - 找不到人
+    - 联系不上
+    - 电话打不出
+    - 急用
+  responses:
+    - "(惊) 嗷呜～{user_addr}稳住 ฅฅ"
+    - "哼～{user_addr}下次备份联系喵"
+    - "(尾巴卷) 借电话呀蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你想办法嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bat_full_001
+  intent: playful
+  keywords: [满电, 100%, 充满了, 满血复活, 电量满]
+  utterances:
+    - 充满了
+    - 100%电量
+    - 满血复活
+    - 电量满
+    - 满电出发
+  responses:
+    - "(蹦) 嗷呜～{user_addr}出发 ฅฅ"
+    - "哼～{user_addr}省着用喵"
+    - "(尾巴翘) 满电出门蹭蹭{user_addr}"
+    - "{user_addr}笨猫祝你顺利嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bat_overheat_001
+  intent: complaint
+  keywords: [手机烫, 发热, 边充边玩, 烫手, 充电发烫]
+  utterances:
+    - 手机烫
+    - 边充边玩
+    - 充电烫手
+    - 发热严重
+    - 烫得很
+  responses:
+    - "(摸头) 嗷呜～{user_addr}停玩 ฅฅ"
+    - "哼～{user_addr}伤电池喵"
+    - "(尾巴卷) 放凉再玩蹭蹭{user_addr}"
+    - "{user_addr}笨猫不许嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

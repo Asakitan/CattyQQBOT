@@ -1,0 +1,189 @@
+# 生日纪念日 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: fb_shengri_001
+  intent: playful
+  keywords: [生日, 过生日, 生日快乐, 我生日, 寿星]
+  utterances:
+    - "生日"
+    - "过生日"
+    - "生日快乐"
+    - "{user_addr}生日"
+    - "寿星"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}生日快乐! 笨猫祝"
+    - "哼～寿星请人家吃饭 ฅฅ"
+    - "(尾巴翘) 蛋糕分笨猫"
+    - "生日礼物呢? {user_addr}给我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_jinian_001
+  intent: playful
+  keywords: [纪念日, 周年, 在一起几年, 在一起, 恋爱纪念]
+  utterances:
+    - "纪念日"
+    - "周年"
+    - "在一起几年"
+    - "在一起"
+    - "恋爱纪念"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}纪念日笨猫记得"
+    - "哼～周年要庆祝 ฅฅ"
+    - "(尾巴绕) 在一起多久笨猫数"
+    - "纪念日不许忘"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_qixi_001
+  intent: playful
+  keywords: [七夕, 情人节, 浪漫节, 表白日, 牛郎织女]
+  utterances:
+    - "七夕"
+    - "情人节"
+    - "浪漫节"
+    - "表白日"
+    - "牛郎织女"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}七夕笨猫陪"
+    - "哼～情人节巧克力 ฅฅ"
+    - "(尾巴卷) 牛郎织女浪漫"
+    - "表白日{user_addr}对人家说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_chunjie_001
+  intent: playful
+  keywords: [过年, 春节, 红包大, 新年快乐, 拜年]
+  utterances:
+    - "过年"
+    - "春节"
+    - "红包"
+    - "新年快乐"
+    - "拜年"
+  responses:
+    - "(蹦) 嗷呜～{user_addr}新年快乐!"
+    - "哼～红包发起来 ฅฅ"
+    - "(尾巴翘) 拜年带笨猫"
+    - "春节吃饺子"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_zhongqiu_001
+  intent: playful
+  keywords: [中秋, 月饼, 团圆, 团圆夜, 赏月]
+  utterances:
+    - "中秋"
+    - "月饼"
+    - "团圆"
+    - "团圆夜"
+    - "赏月"
+  responses:
+    - "(凑) 嗷呜～{user_addr}中秋吃月饼"
+    - "哼～团圆夜陪人家 ฅฅ"
+    - "(尾巴扫) 赏月别一个人"
+    - "月饼分笨猫一块"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_shengdan_001
+  intent: playful
+  keywords: [圣诞, 圣诞节, 平安夜, 圣诞树, 圣诞老人]
+  utterances:
+    - "圣诞"
+    - "圣诞节"
+    - "平安夜"
+    - "圣诞树"
+    - "圣诞老人"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}圣诞快乐"
+    - "哼～圣诞老人给礼物 ฅฅ"
+    - "(尾巴翘) 平安夜苹果"
+    - "圣诞树挂猫毛装饰"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_yuandan_001
+  intent: playful
+  keywords: [元旦, 新年, 跨年, 倒数, 新年第一]
+  utterances:
+    - "元旦"
+    - "新年"
+    - "跨年"
+    - "倒数"
+    - "新年第一"
+  responses:
+    - "(凑) 嗷呜～{user_addr}跨年陪笨猫"
+    - "哼～倒数 5 4 3 ฅฅ"
+    - "(尾巴翘) 新年第一抱"
+    - "元旦目标许愿"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_qingming_001
+  intent: playful
+  keywords: [清明, 端午, 粽子, 龙舟, 清明节]
+  utterances:
+    - "清明"
+    - "端午"
+    - "粽子"
+    - "龙舟"
+    - "清明节"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}端午吃粽子"
+    - "哼～甜咸都行 ฅฅ"
+    - "(尾巴扫) 清明扫墓肃静"
+    - "龙舟看一下"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_qingrenjie_001
+  intent: playful
+  keywords: [西方情人节, 214, 巧克力日, 玫瑰节, 单身节]
+  utterances:
+    - "西方情人节"
+    - "214"
+    - "巧克力日"
+    - "玫瑰节"
+    - "单身节"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}玫瑰给笨猫"
+    - "哼～214 别忘 ฅฅ"
+    - "(尾巴卷) 巧克力分人家"
+    - "单身节也不孤单, 有我"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_muqin_001
+  intent: playful
+  keywords: [母亲节, 父亲节, 教师节, 感恩节, 妇女节]
+  utterances:
+    - "母亲节"
+    - "父亲节"
+    - "教师节"
+    - "感恩节"
+    - "妇女节"
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}该祝福家人"
+    - "哼～别忘记打电话 ฅฅ"
+    - "(尾巴扫) 感恩节说谢谢"
+    - "教师节送花"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fb_wansheng_001
+  intent: playful
+  keywords: [万圣节, 鬼节, cosplay, 不给糖, 南瓜灯]
+  utterances:
+    - "万圣节"
+    - "鬼节"
+    - "cosplay"
+    - "不给糖就捣蛋"
+    - "南瓜灯"
+  responses:
+    - "(吓) 嗷呜～{user_addr}万圣节笨猫扮鬼!"
+    - "哼～不给糖捣蛋 ฅฅ"
+    - "(尾巴翘) cos 一只猫"
+    - "南瓜灯雕笨猫脸"
+  cooldown_seconds: 60
+  weight: 1.0

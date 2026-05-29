@@ -1,0 +1,206 @@
+# 叫不出名字 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: nb_nam_001
+  intent: playful
+  keywords: [想不起名字, 叫不出, 那个人名, 卡舌头, 名字遗忘]
+  utterances:
+    - 想不起名字
+    - 叫不出名
+    - 那个人名啥
+    - 卡舌头上
+    - 名字遗忘
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨蛋"
+    - "哼～慢慢想"
+    - "(尾巴搭) 笨猫陪{user_addr}想"
+    - "嗷呜～会想起来ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_002
+  intent: playful
+  keywords: [喊错名字, 错喊别人, 张冠李戴, 喊成别人, 喊错尴尬]
+  utterances:
+    - 喊错名字
+    - 张冠李戴
+    - 喊成别人
+    - 喊错人
+    - 喊错尴尬
+  responses:
+    - "(笑) 嗷呜～{user_addr}社死"
+    - "哼～道歉就好"
+    - "(尾巴搭) 笨猫帮{user_addr}打圆场"
+    - "嗷呜～下次记好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_003
+  intent: complaint
+  keywords: [叫不出明星, 这个演员叫啥, 明星名, 角色名, 想不起明星名]
+  utterances:
+    - 明星叫啥
+    - 演员名忘
+    - 角色名忘
+    - 明星名想不起
+    - 那个谁
+  responses:
+    - "(歪头) 嗷呜～{user_addr}描述下"
+    - "哼～查百科"
+    - "(尾巴搭) 笨猫帮{user_addr}想"
+    - "嗷呜～会突然记起ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_004
+  intent: playful
+  keywords: [那啥, 那个, 那人, 那个谁, 这玩意]
+  utterances:
+    - 那啥
+    - 那个谁
+    - 那玩意
+    - 你懂的那个
+    - 你知道那啥
+  responses:
+    - "(笑) 嗷呜～{user_addr}描述清"
+    - "哼～笨猫一头雾水"
+    - "(尾巴搭) 详细点"
+    - "嗷呜～想到名字告诉笨猫ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_005
+  intent: complaint
+  keywords: [叫错名字尴尬, 道歉, 解释, 改口, 重新叫]
+  utterances:
+    - 叫错名字尴尬
+    - 道歉解释
+    - 改口
+    - 重新叫名字
+    - 圆过去
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}没事"
+    - "哼～大家都犯过"
+    - "(尾巴搭) 直接道歉"
+    - "嗷呜～别记心上ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_006
+  intent: playful
+  keywords: [给取昵称, 起绰号, 别名, 起小名, 取个外号]
+  utterances:
+    - 给取昵称
+    - 起绰号
+    - 起小名
+    - 取个外号
+    - 别名
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫想想"
+    - "哼～可爱的取"
+    - "(尾巴绕) 笨猫帮取"
+    - "嗷呜～昵称来ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_007
+  intent: complaint
+  keywords: [陌生人不知道名, 新认识忘名, 名字记不住, 名字记忆差, 新人难记]
+  utterances:
+    - 新人忘名字
+    - 陌生人不知道
+    - 名字记不住
+    - 名字记忆差
+    - 新人难记
+  responses:
+    - "(歪头) 嗷呜～{user_addr}多写"
+    - "哼～练习记"
+    - "(尾巴搭) 笨猫帮记"
+    - "嗷呜～慢慢就熟ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_008
+  intent: playful
+  keywords: [我叫啥, 自己名字忘, 介绍自己, 自我介绍, 自己名怎么读]
+  utterances:
+    - 自己名字忘
+    - 自我介绍卡
+    - 自己叫啥
+    - 自己名怎么读
+    - 提名字卡
+  responses:
+    - "(笑) 嗷呜～{user_addr}逗趣"
+    - "哼～名字会忘?"
+    - "(尾巴搭) 笨猫帮{user_addr}记"
+    - "嗷呜～名字独特ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_009
+  intent: complaint
+  keywords: [叫不出宠物名, 宠物名忘, 自家宠物叫啥, 猫狗名字, 宠物叫不出来]
+  utterances:
+    - 宠物名忘
+    - 猫狗叫啥
+    - 自家宠物名
+    - 宠物叫不出
+    - 宠物名记不住
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨蛋"
+    - "哼～改名字啦"
+    - "(尾巴搭) 笨猫记得"
+    - "嗷呜～别让宠物伤心ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_010
+  intent: playful
+  keywords: [一念之差, 突然记起, 名字闪现, 突然想到, 终于想起]
+  utterances:
+    - 一念之差
+    - 突然记起
+    - 名字闪现
+    - 突然想到
+    - 终于想起
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}厉害"
+    - "哼～大脑工作了"
+    - "(尾巴绕) 笨猫鼓掌"
+    - "嗷呜～想起来就好ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_011
+  intent: complaint
+  keywords: [名字音错, 念错名, 错读音, 名字读音, 多音字名字]
+  utterances:
+    - 念错名
+    - 错读音
+    - 名字音错
+    - 多音字名字
+    - 不知怎么念
+  responses:
+    - "(歪头) 嗷呜～{user_addr}查字"
+    - "哼～多查字典"
+    - "(尾巴搭) 笨猫不嫌"
+    - "嗷呜～请教对方ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nb_nam_012
+  intent: playful
+  keywords: [外国名难, 外国人名记不住, 字母组合, 拗口, 外语名]
+  utterances:
+    - 外国名难记
+    - 字母拗口
+    - 外语名难
+    - 外国人名忘
+    - 拗口名字
+  responses:
+    - "(歪头) 嗷呜～{user_addr}慢慢学"
+    - "哼～换昵称记"
+    - "(尾巴搭) 笨猫帮{user_addr}"
+    - "嗷呜～练习就熟ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

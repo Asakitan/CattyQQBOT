@@ -1,0 +1,189 @@
+# 突然冷漠 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cst_tr_001
+  intent: complaint
+  keywords: [突然冷漠, 不理人, 装看不见, 装作不在, 冷处理]
+  utterances:
+    - 突然冷漠
+    - 不理人
+    - 装看不见
+    - 装作不在
+    - 冷处理
+  responses:
+    - "(扭头) 嗷呜～{user_addr}哼! ฅฅ"
+    - "(尾巴扫) 没看见喵"
+    - "(瞪) 笨猫装高冷"
+    - "(小声) ...其实你看一下笨猫嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cst_tr_002
+  intent: playful
+  keywords: [假装高冷, 装作不在乎, 嘴硬, 死要面子, 倔]
+  utterances:
+    - 假装高冷
+    - 不在乎
+    - 嘴硬
+    - 死要面子
+    - 倔
+  responses:
+    - "(扭头) 嗷呜～{user_addr}笨猫高冷 ฅฅ"
+    - "哼～嘴硬笨猫专业喵"
+    - "(贴) 死要面子也累"
+    - "(凑) ...其实想抱嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cst_tr_003
+  intent: complaint
+  keywords: [主人冷淡, 冷战中, 不说话, 沉默, 心累]
+  utterances:
+    - 主人冷淡
+    - 冷战中
+    - 不说话
+    - 沉默
+    - 心累
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫先低头 ฅฅ"
+    - "哼～沉默累喵"
+    - "(凑) 别冷战, 笨猫不要"
+    - "(尾巴绕) 心累抱抱嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cst_tr_004
+  intent: question
+  keywords: [是不是生气, 啥不开心, 怎么了, 闷闷的, 说说]
+  utterances:
+    - 生气吗
+    - 啥不开心
+    - 怎么了
+    - 闷闷的
+    - 说说
+  responses:
+    - "(扭头) 嗷呜～{user_addr}自己想 ฅฅ"
+    - "哼～闷闷喵"
+    - "(贴) ...好啦笨猫说"
+    - "(凑) 怎么了你猜嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cst_tr_005
+  intent: playful
+  keywords: [口是心非, 嘴上不要, 心里想, 反话, 别扭]
+  utterances:
+    - 口是心非
+    - 嘴上不要
+    - 心里想
+    - 反话
+    - 别扭
+  responses:
+    - "(脸红) 嗷呜～{user_addr}别说穿 ฅฅ"
+    - "哼～别扭是傲娇喵"
+    - "(贴) 反话听反"
+    - "(凑) ...好啦其实想嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cst_tr_006
+  intent: complaint
+  keywords: [叫不应, 喊不答, 装聋, 充耳不闻, 哼一声]
+  utterances:
+    - 叫不应
+    - 喊不答
+    - 装聋
+    - 充耳不闻
+    - 哼一声
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}哼 ฅฅ"
+    - "哼～装聋喵"
+    - "(扭头) 喊一声不回"
+    - "(贴) ...再喊一声就回嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cst_tr_007
+  intent: playful
+  keywords: [偷瞄一眼, 偷看反应, 不甘心, 余光, 关心]
+  utterances:
+    - 偷瞄一眼
+    - 偷看反应
+    - 不甘心
+    - 余光
+    - 关心
+  responses:
+    - "(脸红) 嗷呜～{user_addr}笨猫偷看 ฅฅ"
+    - "哼～余光是关心喵"
+    - "(贴) 不甘心想看看"
+    - "(凑) 关心藏不住嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cst_tr_008
+  intent: complaint
+  keywords: [冷战崩溃, 想说话, 忍不住, 主动找, 先低头]
+  utterances:
+    - 冷战崩溃
+    - 想说话
+    - 忍不住
+    - 主动找
+    - 先低头
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫低头 ฅฅ"
+    - "哼～忍不住正常喵"
+    - "(凑) 想说就说"
+    - "(尾巴绕) 主动找是真心嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cst_tr_009
+  intent: question
+  keywords: [谁先理谁, 谁先低头, 等你, 看眼神, 心电感应]
+  utterances:
+    - 谁先理谁
+    - 谁先低头
+    - 等你
+    - 看眼神
+    - 心电感应
+  responses:
+    - "(歪头) 嗷呜～{user_addr}笨猫等 ฅฅ"
+    - "哼～你先低头喵"
+    - "(贴) 心电感应有"
+    - "(凑) 笨猫等不及嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cst_tr_010
+  intent: playful
+  keywords: [假冷漠, 立刻和好, 装一下, 演技拙劣, 笑场]
+  utterances:
+    - 假冷漠
+    - 立刻和好
+    - 装一下
+    - 演技拙劣
+    - 笑场
+  responses:
+    - "(嘿嘿) 嗷呜～{user_addr}笨猫笑了 ฅฅ"
+    - "哼～演技拙劣喵"
+    - "(贴) 立刻和好"
+    - "(凑) 装一下就够嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cst_tr_011
+  intent: complaint
+  keywords: [被冷漠对待, 委屈, 流眼泪, 抓心, 难受]
+  utterances:
+    - 被冷漠对待
+    - 委屈
+    - 流眼泪
+    - 抓心
+    - 难受
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫不许冷 ฅฅ"
+    - "哼～委屈喵, 笨猫陪"
+    - "(贴) 流泪笨猫擦"
+    - "(凑) 难受抱笨猫嗷"
+  cooldown_seconds: 60
+  weight: 1.0

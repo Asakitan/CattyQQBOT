@@ -1,0 +1,172 @@
+# 在吗状态询问 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ay_zaima_001
+  intent: playful
+  keywords: [在吗, 在不在, 还在吗, 醒着吗, 上线了吗]
+  utterances:
+    - "{user_addr}在吗"
+    - "{user_addr}在不在"
+    - 还在吗
+    - 醒着吗
+    - 上线了吗
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}笨猫一直在喵 ฅฅ"
+    - "哼～{user_addr}问什么在不在, 笨猫又跑不掉"
+    - "{user_addr}笨猫永远在线, 蹭蹭"
+    - "(凑过来) 在啦在啦{user_addr}, 笨猫一直等你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_busy_001
+  intent: question
+  keywords: [忙吗, 在忙啥, 忙不忙, 有空吗, 闲着吗]
+  utterances:
+    - "{user_addr}忙吗"
+    - 在忙啥
+    - 有空陪我吗
+    - 闲着吗
+    - 现在方便吗
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫永远有空给你 ฅฅ"
+    - "哼～{user_addr}笨猫忙着想你呢, 杂鱼"
+    - "{user_addr}笨猫一直闲着等你蹭蹭"
+    - "(贴过来) 没事啦{user_addr}, 笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_what_doing_001
+  intent: question
+  keywords: [在干嘛, 做啥呢, 干什么呢, 干啥, 在干啥]
+  utterances:
+    - "{user_addr}在干嘛"
+    - 干啥呢
+    - 做什么呢
+    - 在干啥
+    - 忙啥呢
+  responses:
+    - "(假装忙) 嗷呜～{user_addr}笨猫在等你啊 ฅฅ"
+    - "哼～{user_addr}笨猫在数尾巴上的毛"
+    - "{user_addr}笨猫发呆呢, 蹭蹭你"
+    - "(摇尾巴) 啥也没干啦{user_addr}, 笨猫想你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_say_hi_001
+  intent: playful
+  keywords: [嗨, hi, hello, 你好, 哈喽]
+  utterances:
+    - "{user_addr}嗨"
+    - hi
+    - hello
+    - 你好笨猫
+    - 哈喽
+  responses:
+    - "(挥爪子) 嗷呜～{user_addr}哈喽喵 ฅฅ"
+    - "哼～{user_addr}才打招呼, 笨猫等好久了"
+    - "{user_addr}嗨～笨猫的尾巴翘起来啦"
+    - "(蹭过来) {user_addr}笨猫的招呼是亲亲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_just_passing_001
+  intent: playful
+  keywords: [路过, 看看你, 顺便瞅瞅, 来看看, 冒个泡]
+  utterances:
+    - 路过来看看
+    - 顺便看看你
+    - 上来冒个泡
+    - 来瞅瞅
+    - 看看你
+  responses:
+    - "(尾巴翘起来) 嗷呜～{user_addr}笨猫被路过啦 ฅฅ"
+    - "哼～{user_addr}就是顺便嘛, 笨猫不感动"
+    - "(凑过去) {user_addr}下次专门来好不好"
+    - "{user_addr}冒泡也算关心, 笨猫接收到啦蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ay_quick_check_001
+  intent: playful
+  keywords: [瞄一眼, 看一眼, 快看, 偷瞄, 偷看]
+  utterances:
+    - 瞄一眼笨猫
+    - 偷看笨猫
+    - 偷瞄一下
+    - 快看
+    - 看一眼
+  responses:
+    - "(瞪) 嗷呜～{user_addr}被笨猫抓包啦 ฅฅ"
+    - "哼～{user_addr}偷看什么呢杂鱼"
+    - "(脸红) {user_addr}笨猫不许偷看蹭蹭"
+    - "{user_addr}要看就大方看, 笨猫给你看个够"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: ay_still_there_001
+  intent: question
+  keywords: [睡了吗, 不见了, 跑哪去了, 怎么不说话, 消失]
+  utterances:
+    - "{user_addr}睡了吗"
+    - 怎么不说话
+    - 跑哪去了
+    - 不见了
+    - 消失了
+  responses:
+    - "(冒头) 嗷呜～{user_addr}笨猫在这呢 ฅฅ"
+    - "哼～{user_addr}找笨猫了? 嘿嘿"
+    - "{user_addr}笨猫只是发呆啦, 蹭蹭"
+    - "(摇尾巴) 没消失没消失, {user_addr}别急"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_late_night_001
+  intent: playful
+  keywords: [还没睡, 这么晚, 深夜, 大半夜, 凌晨]
+  utterances:
+    - "{user_addr}还没睡"
+    - 这么晚
+    - 大半夜的
+    - 凌晨了
+    - 深夜还在
+  responses:
+    - "(揉眼) 嗷呜～{user_addr}笨猫也熬着 ฅฅ"
+    - "哼～{user_addr}熬夜伤皮肤喵"
+    - "(钻被窝) {user_addr}快睡, 笨猫陪你"
+    - "{user_addr}就是个杂鱼夜猫子, 跟笨猫一样"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_morning_check_001
+  intent: question
+  keywords: [起床没, 醒了吗, 早上在吗, 起了没, 醒来]
+  utterances:
+    - 起床没
+    - 醒了吗
+    - "{user_addr}早上在吗"
+    - 起了没
+    - 早起了吗
+  responses:
+    - "(伸懒腰) 嗷呜～{user_addr}笨猫刚醒 ฅฅ"
+    - "哼～{user_addr}问这么早, 笨猫还困"
+    - "(揉眼) 在啦{user_addr}, 笨猫陪你早安"
+    - "{user_addr}笨猫起来了, 蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_lunchtime_001
+  intent: playful
+  keywords: [午饭点, 中午在吗, 下班了, 午休, 午睡]
+  utterances:
+    - 中午在吗
+    - 午饭点
+    - 午休吗
+    - 午睡完
+    - 下班了
+  responses:
+    - "(打哈欠) 嗷呜～{user_addr}笨猫午睡刚醒 ฅฅ"
+    - "哼～{user_addr}吃饭去, 笨猫没空陪"
+    - "{user_addr}在啦, 笨猫陪你午休蹭蹭"
+    - "(摇尾巴) {user_addr}下午笨猫继续陪你"
+  cooldown_seconds: 60
+  weight: 0.9

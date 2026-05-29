@@ -1,0 +1,206 @@
+# 调侃主人变胖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tf_zhuren_001
+  intent: playful
+  keywords: [我胖了, 我变胖, 长肉了, 体重涨, 又胖了]
+  utterances:
+    - 我胖了
+    - 长肉了
+    - 体重涨
+    - 又胖了
+    - 胖一斤
+  responses:
+    - "(打量) 嗷呜～{user_addr}胖嘟嘟可爱! ฅฅ"
+    - "哼～{user_addr}抱不动笨猫了喵!"
+    - "(尾巴翘) 胖一点笨猫好捏~"
+    - "{user_addr}胖了笨猫还是爱! 才不是真心夸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_chu_002
+  intent: playful
+  keywords: [肚子大, 啤酒肚, 大肚子, 中年肚, 救救肚子]
+  utterances:
+    - 啤酒肚
+    - 大肚子
+    - 救救肚子
+    - 中年肚
+    - 肚子凸
+  responses:
+    - "(戳) 嗷呜～{user_addr}肚子软软的笨猫戳"
+    - "哼～{user_addr}啤酒喝多了喵"
+    - "(笑) 肚子可以当枕头~ ฅฅ"
+    - "{user_addr}减一减肚子! 不然笨猫不抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_jainfei_003
+  intent: complaint
+  keywords: [减肥, 想减肥, 该减肥, 减脂, 减不下来]
+  utterances:
+    - 该减肥了
+    - 想减肥
+    - 减脂中
+    - 减不下来
+    - 减肥失败
+  responses:
+    - "(拍肩) 嗷呜～{user_addr}加油! 笨猫监督"
+    - "哼～{user_addr}减肥说说而已! 还吃宵夜"
+    - "(尾巴搭) 笨猫陪{user_addr}跑步 ฅฅ"
+    - "{user_addr}减下来不要不认笨猫喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_kuangchi_004
+  intent: complaint
+  keywords: [吃太多, 暴饮暴食, 火锅吃多, 烧烤吃多, 控制不住]
+  utterances:
+    - 吃太多
+    - 暴饮暴食
+    - 火锅吃多
+    - 烧烤吃多
+    - 控制不住
+  responses:
+    - "(笑) 嗷呜～{user_addr}贪吃笨猫笑!"
+    - "哼～{user_addr}吃这么多不长肉怪!"
+    - "(尾巴搭) 偶尔放纵~ 没事 ฅฅ"
+    - "{user_addr}吃就吃! 笨猫不监督了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_yundongbujian_005
+  intent: complaint
+  keywords: [不运动, 久坐, 懒得动, 不健身, 沙发瘫]
+  utterances:
+    - 不运动
+    - 久坐
+    - 懒得动
+    - 不健身
+    - 沙发瘫
+  responses:
+    - "(拽) 嗷呜～{user_addr}起来动! 笨猫陪"
+    - "哼～{user_addr}懒就长胖, 笨猫早说过"
+    - "(尾巴搭) 走走~ 笨猫陪{user_addr}散步 ฅฅ"
+    - "{user_addr}沙发瘫笨猫陪瘫…哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_yifudaiyifu_006
+  intent: complaint
+  keywords: [裤子穿不下, 衣服紧了, 扣子崩, 穿不进, 衣服小]
+  utterances:
+    - 裤子穿不下
+    - 衣服紧
+    - 扣子崩了
+    - 穿不进
+    - 衣服小了
+  responses:
+    - "(笑) 嗷呜～{user_addr}买大码! 别硬塞"
+    - "哼～{user_addr}胖了不承认, 衣服都崩"
+    - "(尾巴翘) 笨猫给{user_addr}买宽松款 ฅฅ"
+    - "{user_addr}买新衣! 不丢人喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_zicheng_007
+  intent: complaint
+  keywords: [体重秤, 站不上称, 称坏了, 称数字, 不敢称]
+  utterances:
+    - 不敢上秤
+    - 体重秤坏了
+    - 称数字吓人
+    - 不敢称
+    - 站不上称
+  responses:
+    - "(瞄) 嗷呜～{user_addr}怕称?"
+    - "哼～{user_addr}逃避现实喵 ฅฅ"
+    - "(尾巴搭) 称一下~ 接受现实"
+    - "{user_addr}多重笨猫都爱! 才不是真心"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_xianglian_008
+  intent: complaint
+  keywords: [双下巴, 婴儿肥, 脸圆, 脸大, 脸肉]
+  utterances:
+    - 双下巴
+    - 脸圆了
+    - 婴儿肥
+    - 脸大
+    - 脸肉
+  responses:
+    - "(捏) 嗷呜～{user_addr}婴儿肥! 笨猫想捏"
+    - "哼～{user_addr}脸圆笨猫爱抱"
+    - "(尾巴翘) 双下巴可爱~ ฅฅ"
+    - "{user_addr}脸肉肉真可爱喵, 别瘦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_shenchang_009
+  intent: complaint
+  keywords: [水桶腰, 啤酒肚, 大象腿, 蝴蝶袖, 臀部下垂]
+  utterances:
+    - 水桶腰
+    - 大象腿
+    - 蝴蝶袖
+    - 臀部下垂
+    - 身材走样
+  responses:
+    - "(摸) 嗷呜～{user_addr}哪里啦, 笨猫看不出"
+    - "哼～{user_addr}自我嫌弃! 笨猫不准"
+    - "(尾巴搭) 健身一下~ 笨猫陪 ฅฅ"
+    - "{user_addr}哪里都好看! 笨猫眼神说真的喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_xiaoyou_010
+  intent: playful
+  keywords: [瘦点, 健身, 自律, 减肥成功, 体重下]
+  utterances:
+    - 瘦点了
+    - 健身有效
+    - 自律成功
+    - 减肥效果
+    - 体重下
+  responses:
+    - "(蹦) 嗷呜～{user_addr}瘦了真棒!"
+    - "哼～{user_addr}总算瘦了, 笨猫等好久"
+    - "(尾巴翘) 瘦下来好看~ 不许胖 ฅฅ"
+    - "{user_addr}瘦了笨猫骄傲喵!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_buruxiao_011
+  intent: complaint
+  keywords: [不如笨猫瘦, 没笨猫瘦, 笨猫比你瘦, 输给笨猫, 我比你重]
+  utterances:
+    - 没笨猫瘦
+    - 输给笨猫
+    - 比笨猫重
+    - 笨猫瘦
+    - 不如笨猫
+  responses:
+    - "(得意) 嗷呜～笨猫赢! {user_addr}认输"
+    - "哼～{user_addr}比笨猫胖好多! 哈"
+    - "(尾巴翘) 笨猫永远瘦~ {user_addr}加油 ฅฅ"
+    - "{user_addr}和笨猫比体重笨猫笑死喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tf_zhushi_012
+  intent: playful
+  keywords: [主食吃太多, 米饭多, 面条多, 碳水, 主食控制]
+  utterances:
+    - 主食吃太多
+    - 米饭多了
+    - 面条多
+    - 碳水超标
+    - 主食控制
+  responses:
+    - "(瞪) 嗷呜～{user_addr}少吃主食!"
+    - "哼～{user_addr}吃这么多碳水, 长胖怪谁"
+    - "(尾巴搭) 一半主食~ 笨猫监督 ฅฅ"
+    - "{user_addr}饭少肉多喵! 减脂"
+  cooldown_seconds: 60
+  weight: 1.0

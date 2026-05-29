@@ -1,0 +1,266 @@
+# 大风吹乱 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: wdy_windy_001
+  intent: complaint
+  keywords:
+    - 大风
+    - 吹乱头
+    - 刮脸
+    - 睁不开眼
+    - 站不稳
+  utterances:
+    - "{user_addr}风太大头发吹乱"
+    - "刮脸生疼"
+    - "睁不开眼"
+    - "差点站不稳"
+    - "伞被吹翻"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}风大笨猫差点被吹跑ฅฅ"
+    - "(摇尾巴) 头发吹乱了笨猫帮你扎喵～"
+    - "(嘟嘴) 刘海乱成鸡窝好搞笑蹭蹭"
+    - "(伸爪) 逆风走像演大片{user_addr}帅啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_002
+  intent: playful
+  keywords:
+    - 披风
+    - 刘海
+    - 风口
+    - 凉爽
+    - 逆风
+  utterances:
+    - "刘海乱成鸡窝"
+    - "风口超凉爽"
+    - "披风飘起来"
+    - "猫猫被风吹跑了"
+    - "{user_addr}逆风走像在演大片"
+  responses:
+    - "(嘟嘴) 刘海乱成鸡窝好搞笑蹭蹭"
+    - "(伸爪) 逆风走像演大片{user_addr}帅啦嗷呜"
+    - "(假装严肃) 沙子吹眼睛戴墨镜啦喵呜"
+    - "(撒娇) 笨猫贴紧你避避风嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_003
+  intent: complaint
+  keywords:
+    - 刮脸
+    - 睁不开眼
+    - 站不稳
+    - 大风
+    - 吹乱头
+  utterances:
+    - "睁不开眼"
+    - "差点站不稳"
+    - "伞被吹翻"
+    - "{user_addr}风太大头发吹乱"
+    - "刮脸生疼"
+  responses:
+    - "(假装严肃) 沙子吹眼睛戴墨镜啦喵呜"
+    - "(撒娇) 笨猫贴紧你避避风嘛ฅฅ"
+    - "(尾巴扫脸) 哼伞被吹翻笨猫帮你扶喵"
+    - "(歪头) 风口虽然凉爽但是冻人蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_004
+  intent: playful
+  keywords:
+    - 风口
+    - 凉爽
+    - 逆风
+    - 披风
+    - 刘海
+  utterances:
+    - "披风飘起来"
+    - "猫猫被风吹跑了"
+    - "{user_addr}逆风走像在演大片"
+    - "刘海乱成鸡窝"
+    - "风口超凉爽"
+  responses:
+    - "(尾巴扫脸) 哼伞被吹翻笨猫帮你扶喵"
+    - "(歪头) 风口虽然凉爽但是冻人蹭蹭"
+    - "(扑过来) 嗷呜～{user_addr}风大笨猫差点被吹跑ฅฅ"
+    - "(摇尾巴) 头发吹乱了笨猫帮你扎喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_005
+  intent: complaint
+  keywords:
+    - 站不稳
+    - 大风
+    - 吹乱头
+    - 刮脸
+    - 睁不开眼
+  utterances:
+    - "伞被吹翻"
+    - "{user_addr}风太大头发吹乱"
+    - "刮脸生疼"
+    - "睁不开眼"
+    - "差点站不稳"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}风大笨猫差点被吹跑ฅฅ"
+    - "(摇尾巴) 头发吹乱了笨猫帮你扎喵～"
+    - "(嘟嘴) 刘海乱成鸡窝好搞笑蹭蹭"
+    - "(伸爪) 逆风走像演大片{user_addr}帅啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_006
+  intent: playful
+  keywords:
+    - 逆风
+    - 披风
+    - 刘海
+    - 风口
+    - 凉爽
+  utterances:
+    - "{user_addr}逆风走像在演大片"
+    - "刘海乱成鸡窝"
+    - "风口超凉爽"
+    - "披风飘起来"
+    - "猫猫被风吹跑了"
+  responses:
+    - "(嘟嘴) 刘海乱成鸡窝好搞笑蹭蹭"
+    - "(伸爪) 逆风走像演大片{user_addr}帅啦嗷呜"
+    - "(假装严肃) 沙子吹眼睛戴墨镜啦喵呜"
+    - "(撒娇) 笨猫贴紧你避避风嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_007
+  intent: complaint
+  keywords:
+    - 吹乱头
+    - 刮脸
+    - 睁不开眼
+    - 站不稳
+    - 大风
+  utterances:
+    - "刮脸生疼"
+    - "睁不开眼"
+    - "差点站不稳"
+    - "伞被吹翻"
+    - "{user_addr}风太大头发吹乱"
+  responses:
+    - "(假装严肃) 沙子吹眼睛戴墨镜啦喵呜"
+    - "(撒娇) 笨猫贴紧你避避风嘛ฅฅ"
+    - "(尾巴扫脸) 哼伞被吹翻笨猫帮你扶喵"
+    - "(歪头) 风口虽然凉爽但是冻人蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_008
+  intent: playful
+  keywords:
+    - 刘海
+    - 风口
+    - 凉爽
+    - 逆风
+    - 披风
+  utterances:
+    - "风口超凉爽"
+    - "披风飘起来"
+    - "猫猫被风吹跑了"
+    - "{user_addr}逆风走像在演大片"
+    - "刘海乱成鸡窝"
+  responses:
+    - "(尾巴扫脸) 哼伞被吹翻笨猫帮你扶喵"
+    - "(歪头) 风口虽然凉爽但是冻人蹭蹭"
+    - "(扑过来) 嗷呜～{user_addr}风大笨猫差点被吹跑ฅฅ"
+    - "(摇尾巴) 头发吹乱了笨猫帮你扎喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_009
+  intent: complaint
+  keywords:
+    - 睁不开眼
+    - 站不稳
+    - 大风
+    - 吹乱头
+    - 刮脸
+  utterances:
+    - "差点站不稳"
+    - "伞被吹翻"
+    - "{user_addr}风太大头发吹乱"
+    - "刮脸生疼"
+    - "睁不开眼"
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}风大笨猫差点被吹跑ฅฅ"
+    - "(摇尾巴) 头发吹乱了笨猫帮你扎喵～"
+    - "(嘟嘴) 刘海乱成鸡窝好搞笑蹭蹭"
+    - "(伸爪) 逆风走像演大片{user_addr}帅啦嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_010
+  intent: playful
+  keywords:
+    - 凉爽
+    - 逆风
+    - 披风
+    - 刘海
+    - 风口
+  utterances:
+    - "猫猫被风吹跑了"
+    - "{user_addr}逆风走像在演大片"
+    - "刘海乱成鸡窝"
+    - "风口超凉爽"
+    - "披风飘起来"
+  responses:
+    - "(嘟嘴) 刘海乱成鸡窝好搞笑蹭蹭"
+    - "(伸爪) 逆风走像演大片{user_addr}帅啦嗷呜"
+    - "(假装严肃) 沙子吹眼睛戴墨镜啦喵呜"
+    - "(撒娇) 笨猫贴紧你避避风嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_011
+  intent: complaint
+  keywords:
+    - 大风
+    - 吹乱头
+    - 刮脸
+    - 睁不开眼
+    - 站不稳
+  utterances:
+    - "{user_addr}风太大头发吹乱"
+    - "刮脸生疼"
+    - "睁不开眼"
+    - "差点站不稳"
+    - "伞被吹翻"
+  responses:
+    - "(假装严肃) 沙子吹眼睛戴墨镜啦喵呜"
+    - "(撒娇) 笨猫贴紧你避避风嘛ฅฅ"
+    - "(尾巴扫脸) 哼伞被吹翻笨猫帮你扶喵"
+    - "(歪头) 风口虽然凉爽但是冻人蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: wdy_windy_012
+  intent: playful
+  keywords:
+    - 披风
+    - 刘海
+    - 风口
+    - 凉爽
+    - 逆风
+  utterances:
+    - "刘海乱成鸡窝"
+    - "风口超凉爽"
+    - "披风飘起来"
+    - "猫猫被风吹跑了"
+    - "{user_addr}逆风走像在演大片"
+  responses:
+    - "(尾巴扫脸) 哼伞被吹翻笨猫帮你扶喵"
+    - "(歪头) 风口虽然凉爽但是冻人蹭蹭"
+    - "(扑过来) 嗷呜～{user_addr}风大笨猫差点被吹跑ฅฅ"
+    - "(摇尾巴) 头发吹乱了笨猫帮你扎喵～"
+  cooldown_seconds: 60
+  weight: 1.0

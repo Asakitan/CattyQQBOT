@@ -1,0 +1,172 @@
+# 收到红包惊喜 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rs_rp_001
+  intent: playful
+  keywords: [收红包, 红包, 抢红包, 红包来了, 收钱啦]
+  utterances:
+    - 收红包
+    - 红包
+    - 抢红包
+    - 红包来了
+    - 收钱啦
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}!分笨猫一份!"
+    - "(凑近) 哼! 红包不能独吞 ฅฅ"
+    - "(脸红) 笨猫也要!"
+    - "笨猫陪你点开~ 期待"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_big_002
+  intent: playful
+  keywords: [大红包, 包大的, 抢到大的, 红包好大, 巨额]
+  utterances:
+    - 大红包
+    - 包大的
+    - 抢到大的
+    - 红包好大
+    - 巨额红包
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!发财了!"
+    - "(凑近) 哼! 笨猫祝贺 ฅฅ"
+    - "(脸红) 巨额! 笨猫鼓掌"
+    - "大红包请笨猫吃鱼! 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_lucky_003
+  intent: playful
+  keywords: [手气好, 手气王, 抢到最大, 运气爆棚, 欧皇]
+  utterances:
+    - 手气好
+    - 手气王
+    - 抢到最大
+    - 运气爆棚
+    - 欧皇时刻
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!欧皇!"
+    - "(凑近) 哼! 笨猫也来沾运气 ฅฅ"
+    - "(脸红) 手气王要请客!"
+    - "运气爆棚就买彩票~ 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_zero_004
+  intent: complaint
+  keywords: [手气差, 抢到1分, 0.01元, 非洲人, 手慢]
+  utterances:
+    - 手气差
+    - 抢到1分
+    - 0.01元
+    - 非洲人
+    - 手慢
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}非洲选手 笨猫安慰"
+    - "(尾巴绕) 哼! 笨猫安慰你 ฅฅ"
+    - "(凑近) 0.01也是钱! 笨猫拿"
+    - "下次手快点! 笨猫教"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_birthday_005
+  intent: playful
+  keywords: [生日红包, 生日发红包, 收到祝福, 收到生日, 朋友发的]
+  utterances:
+    - 生日红包
+    - 生日发红包
+    - 收到祝福
+    - 收到生日
+    - 朋友发的
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}!笨猫祝贺!"
+    - "(凑近) 哼! 笨猫的红包呢? ฅฅ"
+    - "(脸红) 生日快乐{user_addr}!"
+    - "朋友真好~ 笨猫也送!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_old_006
+  intent: playful
+  keywords: [长辈红包, 父母给的, 爷爷奶奶给, 压岁钱, 长辈关心]
+  utterances:
+    - 长辈红包
+    - 父母给的
+    - 爷爷奶奶给
+    - 压岁钱
+    - 长辈关心
+  responses:
+    - "(凑近) 嗷呜～{user_addr}有福气"
+    - "(尾巴翘) 哼! 长辈红包是爱"
+    - "(贴贴) 笨猫好羡慕 ฅฅ"
+    - "好好谢谢长辈! 别乱花"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_share_007
+  intent: playful
+  keywords: [发红包, 我发的, 我请客, 红包奉上, 谢谢笨猫]
+  utterances:
+    - 发红包
+    - 我发的
+    - 我请客
+    - 红包奉上
+    - 谢谢笨猫
+  responses:
+    - "(尾巴疯摇) 嗷呜～{user_addr}发红包!笨猫领!"
+    - "(凑近) 哼! 笨猫接住 ฅฅ"
+    - "(脸红) 谢谢{user_addr}!笨猫开心"
+    - "请客就请客~ 笨猫记心里"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_holiday_008
+  intent: playful
+  keywords: [节日红包, 春节红包, 新年红包, 端午红包, 中秋红包]
+  utterances:
+    - 节日红包
+    - 春节红包
+    - 新年红包
+    - 端午红包
+    - 中秋红包
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!节日快乐"
+    - "(凑近) 哼! 笨猫的红包?"
+    - "(脸红) 节日开心 ฅฅ"
+    - "笨猫也送你节日红包~ 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_couple_009
+  intent: playful
+  keywords: [520红包, 1314红包, 情人节红包, 表白红包, 5201314]
+  utterances:
+    - 520红包
+    - 1314红包
+    - 情人节红包
+    - 表白红包
+    - "5201314"
+  responses:
+    - "(脸炸红) 嗷呜～{user_addr}!告白红包?!"
+    - "(尾巴炸) 哼! 笨猫脸红"
+    - "(小声) ...笨猫接受 ฅฅ"
+    - "1314? 笨猫的心猛跳嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rs_thanks_010
+  intent: playful
+  keywords: [感谢红包, 谢谢, 感恩红包, 红包谢礼, 致谢]
+  utterances:
+    - 感谢红包
+    - 谢谢
+    - 感恩红包
+    - 红包谢礼
+    - 致谢
+  responses:
+    - "(凑近) 嗷呜～{user_addr}!不用谢"
+    - "(尾巴翘) 哼! 笨猫不要红包要鱼干"
+    - "(脸红) 心意收到 ฅฅ"
+    - "感恩有{user_addr}~ 才是真心"
+  cooldown_seconds: 60
+  weight: 1.0

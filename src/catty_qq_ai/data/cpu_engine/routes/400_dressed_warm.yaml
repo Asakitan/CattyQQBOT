@@ -1,0 +1,172 @@
+# 穿暖了吗 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dw_chuannuan_001
+  intent: question
+  keywords: [穿暖, 穿够吗, 加衣服, 多穿点, 别冻着]
+  utterances:
+    - "{user_addr}穿暖了吗"
+    - "{user_addr}穿够了吗"
+    - 加件衣服
+    - 多穿点
+    - 别冻着
+  responses:
+    - "(摸衣领) 嗷呜～{user_addr}多穿件! 笨猫怕你冷ฅฅ"
+    - "哼～{user_addr}穿少了不许出门! 笨猫监督"
+    - "(尾巴扫) {user_addr}冷别撑着~ 加衣服!"
+    - "嘿嘿～{user_addr}笨猫陪你穿~ 一起暖"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_chuannuan_002
+  intent: complaint
+  keywords: [好冷, 冻死, 手脚冰, 冷得发抖, 冷冷冷]
+  utterances:
+    - 好冷
+    - 冻死了
+    - 手脚冰
+    - 冷得发抖
+    - 冷冷冷
+  responses:
+    - "(扑过来) 嗷呜～{user_addr}笨猫给你抱! 暖暖ฅฅ"
+    - "哼～{user_addr}穿少了吧! 才不是关心呢"
+    - "(尾巴扫) {user_addr}快多穿! 喝热水"
+    - "嘿嘿～{user_addr}笨猫小暖炉! 来抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_chuannuan_003
+  intent: question
+  keywords: [今天冷不, 天气冷吗, 加秋裤, 加棉袄, 加羽绒服]
+  utterances:
+    - 今天冷不冷
+    - 天气冷吗
+    - 要加秋裤吗
+    - 加棉袄吗
+    - 加羽绒服吗
+  responses:
+    - "(歪头) 嗷呜～{user_addr}查天气! 笨猫不知道"
+    - "哼～{user_addr}觉得冷就加! 笨猫给你建议"
+    - "(尾巴扫) {user_addr}加秋裤! 别要风度不要温度ฅฅ"
+    - "嘿嘿～{user_addr}多穿点~ 比啥都强"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_chuannuan_004
+  intent: playful
+  keywords: [围巾, 帽子, 手套, 厚袜子, 暖宝宝]
+  utterances:
+    - 围巾戴了
+    - 帽子戴
+    - 手套戴
+    - 厚袜子穿
+    - 暖宝宝贴
+  responses:
+    - "(点头) 嗷呜～{user_addr}很好! 笨猫表扬"
+    - "哼～{user_addr}才学会保暖~ 慢"
+    - "(尾巴扫) {user_addr}笨猫监督有效ฅฅ"
+    - "嘿嘿～{user_addr}全副武装~ 才不冷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_chuannuan_005
+  intent: complaint
+  keywords: [太热, 穿多了, 闷热, 出汗了, 厚重难受]
+  utterances:
+    - 太热了
+    - 穿多了
+    - 闷死了
+    - 出汗了
+    - 厚衣服难受
+  responses:
+    - "(扇风) 嗷呜～{user_addr}脱一件! 笨猫给你扇"
+    - "哼～{user_addr}知道还穿多~ 笨猫白心疼"
+    - "(尾巴扫) {user_addr}别捂感冒! 适度脱ฅฅ"
+    - "嘿嘿～{user_addr}笨猫陪你扇风~"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dw_chuannuan_006
+  intent: question
+  keywords: [穿啥, 穿什么, 搭配, 配色, 穿搭]
+  utterances:
+    - 穿啥
+    - 穿什么好
+    - 怎么搭配
+    - 配什么颜色
+    - 穿搭推荐
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}给笨猫看! 选一套"
+    - "哼～{user_addr}问笨猫? 笨猫品味好"
+    - "(尾巴扫) {user_addr}舒服就行~ 别想太多ฅฅ"
+    - "嘿嘿～{user_addr}穿啥都帅~ 才不是夸你呢"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dw_chuannuan_007
+  intent: playful
+  keywords: [秋裤, 秋裤季, 大棉袄, 二棉裤, 羊毛衫]
+  utterances:
+    - 穿秋裤了
+    - 秋裤季节
+    - 大棉袄
+    - 二棉裤
+    - 羊毛衫穿
+  responses:
+    - "(点赞) 嗷呜～{user_addr}保暖王者! ฅฅ"
+    - "哼～{user_addr}秋裤党~ 笨猫支持"
+    - "(尾巴扫) {user_addr}健康至上!"
+    - "嘿嘿～{user_addr}穿秋裤别嫌弃~ 暖才是真"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dw_chuannuan_008
+  intent: complaint
+  keywords: [感冒, 受凉, 着凉, 鼻塞, 咳嗽]
+  utterances:
+    - 感冒了
+    - 受凉了
+    - 着凉
+    - 鼻塞了
+    - 咳嗽
+  responses:
+    - "(着急) 嗷呜～{user_addr}心疼! 喝热水多躺ฅฅ"
+    - "哼～{user_addr}早说穿暖! 不听话"
+    - "(尾巴扫) {user_addr}吃药盖好被子! 笨猫照顾"
+    - "嘿嘿～{user_addr}笨猫陪~ 早点好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_chuannuan_009
+  intent: playful
+  keywords: [暖宝宝, 热水袋, 取暖器, 电热毯, 暖气]
+  utterances:
+    - 暖宝宝贴
+    - 热水袋抱
+    - 取暖器开
+    - 电热毯
+    - 暖气来
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫一起暖!"
+    - "哼～{user_addr}享受不带笨猫? 哼ฅฅ"
+    - "(尾巴扫) {user_addr}小心烫~ 别低温烫伤"
+    - "嘿嘿～{user_addr}笨猫天然暖~ 不收费"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dw_chuannuan_010
+  intent: playful
+  keywords: [冬天美穿搭, 穿好看冷, 风度温度, 冬季时尚, 冷美丽冻人]
+  utterances:
+    - 冬天穿好看
+    - 风度不要温度
+    - 冬季时尚
+    - 美丽冻人
+    - 穿薄了好看
+  responses:
+    - "(叉腰) 嗷呜～{user_addr}笨猫不许! 温度!"
+    - "哼～{user_addr}知道我说啥! 别冻着ฅฅ"
+    - "(尾巴扫) {user_addr}冬天健康第一!"
+    - "嘿嘿～{user_addr}保暖再美~ 才不矛盾呢"
+  cooldown_seconds: 60
+  weight: 0.9

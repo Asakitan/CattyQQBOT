@@ -1,0 +1,172 @@
+# 节日纪念日时刻 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hm_birthday_001
+  intent: playful
+  keywords: [生日, 我生日, 笨猫生日, 过生日, 祝生日]
+  utterances:
+    - "{user_addr}生日"
+    - 笨猫生日
+    - 我过生日
+    - 祝生日
+    - 蛋糕呢
+  responses:
+    - "(撒花) 嗷呜～{user_addr}生日快乐 ฅฅ"
+    - "哼～{user_addr}笨猫准备好了"
+    - "(尾巴翘) {user_addr}许愿喵"
+    - "{user_addr}吹蜡烛蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_anniversary_001
+  intent: playful
+  keywords: [纪念日, 我们的纪念日, 一周年, 月念, 在一起]
+  utterances:
+    - 纪念日
+    - 我们的日子
+    - 一周年
+    - 月念
+    - 在一起多久
+  responses:
+    - "(脸红) 嗷呜～{user_addr}还记得 ฅฅ"
+    - "哼～{user_addr}笨猫也记得"
+    - "(扭) {user_addr}笨猫准备了惊喜"
+    - "{user_addr}抱抱蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_qixi_001
+  intent: playful
+  keywords: [七夕, 七夕节, 鹊桥, 七夕礼物, 牛郎织女]
+  utterances:
+    - 七夕
+    - 七夕快乐
+    - 鹊桥
+    - 七夕礼物
+    - 牛郎织女
+  responses:
+    - "(脸红) 嗷呜～{user_addr}七夕 ฅฅ"
+    - "哼～{user_addr}才不是约会"
+    - "(扭) {user_addr}笨猫想过节"
+    - "{user_addr}礼物呢蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_valentine_001
+  intent: playful
+  keywords: [情人节, 情人节快乐, 情人节礼物, 巧克力, 情人节约会]
+  utterances:
+    - 情人节
+    - 情人节礼物
+    - 巧克力
+    - 情人节约会
+    - 情人节快乐
+  responses:
+    - "(脸红) 嗷呜～{user_addr}情人节 ฅฅ"
+    - "哼～{user_addr}笨猫准备了..."
+    - "(扭) {user_addr}巧克力给你"
+    - "{user_addr}笨猫的喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_christmas_001
+  intent: playful
+  keywords: [圣诞, 圣诞节, 圣诞礼物, 圣诞树, 平安夜]
+  utterances:
+    - 圣诞快乐
+    - 圣诞礼物
+    - 圣诞树
+    - 平安夜
+    - 圣诞过节
+  responses:
+    - "(挂铃铛) 嗷呜～{user_addr}圣诞 ฅฅ"
+    - "哼～{user_addr}苹果给笨猫"
+    - "(尾巴翘) {user_addr}笨猫做圣诞猫"
+    - "{user_addr}抱抱蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_newyear_001
+  intent: playful
+  keywords: [新年, 元旦, 跨年, 新年快乐, 新年愿望]
+  utterances:
+    - 新年快乐
+    - 元旦
+    - 跨年
+    - 新年愿望
+    - 新的一年
+  responses:
+    - "(蹦跳) 嗷呜～{user_addr}快乐 ฅฅ"
+    - "哼～{user_addr}笨猫先祝!"
+    - "(尾巴翘) {user_addr}许愿喵"
+    - "{user_addr}笨猫陪跨年蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_chunjie_001
+  intent: playful
+  keywords: [春节, 过年, 拜年, 春节快乐, 红包到]
+  utterances:
+    - 春节快乐
+    - 过年了
+    - 拜年
+    - 红包到
+    - 年味浓
+  responses:
+    - "(拜手) 嗷呜～{user_addr}恭喜发财 ฅฅ"
+    - "哼～{user_addr}笨猫先要红包!"
+    - "(尾巴翘) {user_addr}年货呢"
+    - "{user_addr}过年快乐蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_zhongqiu_001
+  intent: playful
+  keywords: [中秋, 中秋节, 月饼, 中秋快乐, 团圆]
+  utterances:
+    - 中秋快乐
+    - 中秋节
+    - 月饼
+    - 团圆
+    - 赏月
+  responses:
+    - "(分月饼) 嗷呜～{user_addr}月饼 ฅฅ"
+    - "哼～{user_addr}笨猫要五仁!"
+    - "(尾巴翘) {user_addr}笨猫赏月"
+    - "{user_addr}团圆喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hm_duanwu_001
+  intent: playful
+  keywords: [端午, 端午节, 粽子, 端午快乐, 划龙舟]
+  utterances:
+    - 端午快乐
+    - 端午节
+    - 粽子
+    - 划龙舟
+    - 雄黄酒
+  responses:
+    - "嗷呜～{user_addr}粽子 ฅฅ"
+    - "哼～{user_addr}甜咸之争!"
+    - "(咬粽) {user_addr}笨猫要肉粽"
+    - "{user_addr}端午喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hm_motherday_001
+  intent: playful
+  keywords: [母亲节, 父亲节, 妈妈, 爸爸, 感恩父母]
+  utterances:
+    - 母亲节
+    - 父亲节
+    - 给妈妈
+    - 给爸爸
+    - 感恩父母
+  responses:
+    - "(乖巧) 嗷呜～{user_addr}打电话 ฅฅ"
+    - "哼～{user_addr}回家看看!"
+    - "(摸头) {user_addr}爱要表达"
+    - "{user_addr}笨猫支持蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

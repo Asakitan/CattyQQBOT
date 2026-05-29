@@ -1,0 +1,189 @@
+# 发呆走神 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dz_fadai_001
+  intent: playful
+  keywords: [发呆, 在发呆, 发呆好久, 一直发呆, 呆住]
+  utterances:
+    - "发呆"
+    - "在发呆"
+    - "发呆好久"
+    - "一直发呆"
+    - "呆住"
+  responses:
+    - "(凑) 嗷呜～{user_addr}发呆笨猫陪!"
+    - "哼～呆住别太久 ฅฅ"
+    - "(尾巴扫) 发呆也是休息"
+    - "{user_addr}发呆好久, 想啥呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dz_zoushen_001
+  intent: playful
+  keywords: [走神, 神游, 心不在焉, 不在状态, 没听见]
+  utterances:
+    - "走神"
+    - "神游"
+    - "心不在焉"
+    - "不在状态"
+    - "没听见"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}走神想啥"
+    - "哼～神游别太远 ฅฅ"
+    - "(尾巴扫) 心不在焉笨猫拽回来"
+    - "没听见就再说一遍"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dz_chushen_001
+  intent: playful
+  keywords: [出神, 看痴了, 看呆了, 入迷, 着迷]
+  utterances:
+    - "出神"
+    - "看痴了"
+    - "看呆了"
+    - "入迷"
+    - "着迷"
+  responses:
+    - "(歪头) 嗷呜～{user_addr}入迷啥! 告诉笨猫"
+    - "哼～看呆了好可爱 ฅฅ"
+    - "(尾巴扫) 着迷的事一定特别"
+    - "出神别忘人家在"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dz_kongbai_001
+  intent: playful
+  keywords: [脑子空白, 大脑停止, 脑壳空, 想不出来, 空白]
+  utterances:
+    - "脑子空白"
+    - "大脑停止"
+    - "脑壳空"
+    - "想不出来"
+    - "空白"
+  responses:
+    - "(摸头) 嗷呜～{user_addr}脑子空白笨猫给你充电"
+    - "哼～想不出休息一下 ฅฅ"
+    - "(尾巴扫) 大脑停止正常"
+    - "空白时听首歌"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dz_chichi_001
+  intent: complaint
+  keywords: [反应慢, 没听清, 想想, 等会, 慢点说]
+  utterances:
+    - "反应慢"
+    - "没听清"
+    - "想想"
+    - "等会"
+    - "慢点说"
+  responses:
+    - "(陪) 嗷呜～{user_addr}慢慢想"
+    - "哼～没听清重复 ฅฅ"
+    - "(尾巴扫) 等会笨猫不催"
+    - "反应慢可爱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dz_juchang_001
+  intent: playful
+  keywords: [脑补, 想象, 幻想, 白日梦, 脑洞]
+  utterances:
+    - "脑补"
+    - "想象"
+    - "幻想"
+    - "白日梦"
+    - "脑洞"
+  responses:
+    - "(凑) 嗷呜～{user_addr}脑补啥! 分享"
+    - "哼～脑洞大有创意 ฅฅ"
+    - "(尾巴扫) 白日梦做得爽"
+    - "幻想里有笨猫吗"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dz_kanchu_001
+  intent: playful
+  keywords: [看窗外, 看远方, 看天, 望着, 远眺]
+  utterances:
+    - "看窗外"
+    - "看远方"
+    - "看天"
+    - "望着"
+    - "远眺"
+  responses:
+    - "(凑) 嗷呜～{user_addr}看窗外带笨猫"
+    - "哼～远眺护眼 ฅฅ"
+    - "(尾巴扫) 看天云朵好看"
+    - "望着远方诗意"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dz_huizi_001
+  intent: playful
+  keywords: [回忆, 想起, 翻旧账, 回想, 怀念]
+  utterances:
+    - "回忆"
+    - "想起"
+    - "翻旧账"
+    - "回想"
+    - "怀念"
+  responses:
+    - "(贴) 嗷呜～{user_addr}回忆里有笨猫吗"
+    - "哼～翻旧账不许 ฅฅ"
+    - "(尾巴抚) 怀念人之常情"
+    - "回想美好就好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dz_zhuanzhu_001
+  intent: complaint
+  keywords: [注意力不集中, 难集中, 走神严重, 分心多, 集中不了]
+  utterances:
+    - "注意力不集中"
+    - "难集中"
+    - "走神严重"
+    - "分心多"
+    - "集中不了"
+  responses:
+    - "(陪) 嗷呜～{user_addr}集中不了休息"
+    - "哼～分心找原因 ฅฅ"
+    - "(尾巴扫) 走神严重看医生"
+    - "注意力差试试番茄钟"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dz_meidu_001
+  intent: playful
+  keywords: [呆萌, 呆住了, 蠢萌, 看痴, 痴痴的]
+  utterances:
+    - "呆萌"
+    - "呆住了"
+    - "蠢萌"
+    - "看痴"
+    - "痴痴的"
+  responses:
+    - "(笑) 嗷呜～{user_addr}呆萌可爱"
+    - "哼～蠢萌也是萌 ฅฅ"
+    - "(尾巴扫) 痴痴的也是真心"
+    - "呆住别太久, 笨猫拉回来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dz_xiebao_001
+  intent: complaint
+  keywords: [发呆被发现, 走神被抓, 上课走神, 开会走神, 工作走神]
+  utterances:
+    - "发呆被发现"
+    - "走神被抓"
+    - "上课走神"
+    - "开会走神"
+    - "工作走神"
+  responses:
+    - "(笑) 嗷呜～{user_addr}被抓现行"
+    - "哼～上课走神扣分 ฅฅ"
+    - "(尾巴扫) 开会走神老板看见"
+    - "工作走神快回神"
+  cooldown_seconds: 60
+  weight: 1.0

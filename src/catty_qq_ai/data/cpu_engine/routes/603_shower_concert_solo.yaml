@@ -1,0 +1,206 @@
+# 浴室演唱会 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: sc_sho_001
+  intent: playful
+  keywords: [浴室演唱, 洗澡K歌, 淋浴唱, 浴室麦, 洗澡天后]
+  utterances:
+    - 浴室演唱会
+    - 洗澡 K 歌
+    - 淋浴唱
+    - 浴室麦
+    - 洗澡天后
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}天王"
+    - "哼～回音帮你高音"
+    - "(尾巴绕) 笨猫窗外应援"
+    - "嗷呜～注意防滑ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_002
+  intent: playful
+  keywords: [洗澡时间长, 洗澡半小时, 洗澡爽, 长时间淋浴, 沐浴时光]
+  utterances:
+    - 洗澡半小时
+    - 洗澡爽
+    - 长时间淋浴
+    - 沐浴时光
+    - 不舍出来
+  responses:
+    - "(等门) 嗷呜～{user_addr}快出来"
+    - "哼～烫水浪费"
+    - "(尾巴搭) 笨猫等"
+    - "嗷呜～别太久笨蛋ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_003
+  intent: complaint
+  keywords: [水太烫, 水温忽冷忽热, 没热水, 水压低, 喷头小]
+  utterances:
+    - 水太烫
+    - 水温忽冷忽热
+    - 没热水
+    - 水压低
+    - 喷头小
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}检查"
+    - "哼～修热水器"
+    - "(尾巴搭) 调节水温"
+    - "嗷呜～换喷头喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_004
+  intent: playful
+  keywords: [浴室回音, 高音爆表, 浴室共振, 唱得通透, 回音buff]
+  utterances:
+    - 浴室回音爽
+    - 高音爆表
+    - 浴室共振
+    - 唱得通透
+    - 回音buff
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}厉害"
+    - "哼～回音外挂"
+    - "(尾巴绕) 出浴室秒变路人"
+    - "嗷呜～开KTV吧ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_005
+  intent: playful
+  keywords: [浴室思考, 灵感来了, 脑洞大开, 洗澡灵感, 浴室哲学]
+  utterances:
+    - 浴室思考
+    - 灵感来了
+    - 脑洞大开
+    - 洗澡灵感
+    - 浴室哲学
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}思想家"
+    - "哼～想完记下来"
+    - "(尾巴绕) 笨猫想听灵感"
+    - "嗷呜～洗澡产灵感ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_006
+  intent: complaint
+  keywords: [洗澡冷, 洗到一半冷, 浴霸没开, 浴室阴冷, 洗澡哆嗦]
+  utterances:
+    - 洗澡时冷
+    - 浴霸没开
+    - 浴室阴冷
+    - 洗澡哆嗦
+    - 出浴冷
+  responses:
+    - "(尾巴搭) 嗷呜～{user_addr}开浴霸"
+    - "哼～提前预热"
+    - "(尾巴绕) 抹身大毛巾"
+    - "嗷呜～别冻着ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_007
+  intent: playful
+  keywords: [洗澡放歌, 蓝牙音箱, 防水音箱, 洗澡听歌, 浴室音乐]
+  utterances:
+    - 洗澡放歌
+    - 蓝牙音箱
+    - 防水音箱
+    - 洗澡听歌
+    - 浴室音乐
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}科技党"
+    - "哼～别进水"
+    - "(尾巴绕) 笨猫蹲外面听"
+    - "嗷呜～舒压浴ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_008
+  intent: playful
+  keywords: [泡澡, 浴缸泡澡, 泡澡放松, 泡个澡, 泡澡享受]
+  utterances:
+    - 泡澡放松
+    - 浴缸泡澡
+    - 泡个澡
+    - 泡澡享受
+    - 泡到睡着
+  responses:
+    - "(凑近) 嗷呜～{user_addr}享受"
+    - "哼～别泡太久"
+    - "(尾巴搭) 笨猫陪外面"
+    - "嗷呜～别在浴缸睡ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_009
+  intent: complaint
+  keywords: [洗发水进眼, 沐浴露眼, 眼睛辣, 洗澡进眼, 揉眼睛]
+  utterances:
+    - 洗发水进眼
+    - 沐浴露进眼
+    - 眼睛辣痛
+    - 洗澡进眼
+    - 揉眼睛
+  responses:
+    - "(摸眼) 嗷呜～{user_addr}冲水"
+    - "哼～注意闭眼"
+    - "(尾巴搭) 别揉清水"
+    - "嗷呜～严重洗眼液ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_010
+  intent: playful
+  keywords: [浴室霸主, 占用浴室, 独霸卫浴, 长占浴室, 浴室霸位]
+  utterances:
+    - 浴室霸主
+    - 占用浴室
+    - 独霸卫浴
+    - 长占浴室
+    - 浴室霸位
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}让一让"
+    - "哼～别人也要用"
+    - "(尾巴搭) 排队喵"
+    - "嗷呜～别霸太久ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_011
+  intent: complaint
+  keywords: [水管堵, 浴室排水, 排水慢, 浴室积水, 头发堵]
+  utterances:
+    - 水管堵了
+    - 浴室排水慢
+    - 浴室积水
+    - 头发堵
+    - 下水道堵
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}找通水管"
+    - "哼～头发清理"
+    - "(尾巴搭) 通水器买"
+    - "嗷呜～通完干净ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_sho_012
+  intent: playful
+  keywords: [浴室派对, 浴室趴, 一起洗澡, 双人浴, 浴室约会]
+  utterances:
+    - 浴室派对
+    - 一起洗澡
+    - 双人浴
+    - 浴室约会
+    - 浴室趴
+  responses:
+    - "(脸红) 嗷呜～{user_addr}羞死"
+    - "哼～想啥呢"
+    - "(尾巴一甩) 笨猫不要"
+    - "嗷呜～太大胆ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

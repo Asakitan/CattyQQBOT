@@ -1,0 +1,172 @@
+# 闹钟怒气 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: maa_alarm_001
+  intent: complaint
+  keywords: [闹钟响了, 闹钟好吵, 关了闹钟, 闹钟讨厌, 闹钟太烦]
+  utterances:
+    - 闹钟响了
+    - 闹钟好吵
+    - 又关闹钟
+    - 闹钟讨厌
+    - 闹钟太烦
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}起来!"
+    - "(凑近) 哼! 笨猫帮你关"
+    - "(假装严厉) 不许关! 必须起 ฅฅ"
+    - "笨猫当闹钟吧! 喵喵叫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: maa_overslept_002
+  intent: complaint
+  keywords: [睡过头, 又睡过头, 睡晚了, 没听见闹钟, 晚起]
+  utterances:
+    - 睡过头了
+    - 又睡过头
+    - 睡晚了
+    - 没听见闹钟
+    - 晚起
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!"
+    - "(凑近) 哼! 笨猫早提醒过!"
+    - "(假装严厉) 下次笨猫亲自叫! ฅฅ"
+    - "睡过头就请假吧~ 笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: maa_snooze_003
+  intent: complaint
+  keywords: [贪睡键, 多睡5分钟, 再睡一会, 贪睡, 推迟闹钟]
+  utterances:
+    - 贪睡键
+    - 多睡5分钟
+    - 再睡一会
+    - 贪睡
+    - 推迟闹钟
+  responses:
+    - "(尾巴拍) 嗷呜～{user_addr}贪睡键陷阱!"
+    - "(凑近) 哼! 笨猫不许"
+    - "(假装严厉) 5分钟变30分钟 笨猫看着 ฅฅ"
+    - "贪睡的话笨猫扯被子!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: maa_too_early_004
+  intent: complaint
+  keywords: [起太早, 闹钟太早, 不想这么早起, 凌晨闹钟, 7点闹钟]
+  utterances:
+    - 起太早
+    - 闹钟太早
+    - 不想这么早起
+    - 凌晨闹钟
+    - 7点闹钟
+  responses:
+    - "(凑近贴贴) 嗷呜～{user_addr}辛苦"
+    - "(尾巴绕) 哼! 这么早不行 心疼"
+    - "(假装严厉) 早点睡才能早起! ฅฅ"
+    - "笨猫陪{user_addr}一起早起"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: maa_jolt_005
+  intent: complaint
+  keywords: [被吓醒, 闹钟惊醒, 心脏砰砰, 突然惊醒, 吓醒]
+  utterances:
+    - 被吓醒
+    - 闹钟惊醒
+    - 心脏砰砰
+    - 突然惊醒
+    - 吓醒
+  responses:
+    - "(凑近) 嗷呜～{user_addr}心疼!"
+    - "(尾巴贴) 心脏砰砰笨猫安抚 ฅฅ"
+    - "(假装) 哼! 笨猫换温柔闹铃!"
+    - "吓醒的话喝口水缓缓"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: maa_throw_phone_006
+  intent: playful
+  keywords: [想砸手机, 想关掉一切, 想扔闹钟, 砸闹钟, 摔手机]
+  utterances:
+    - 想砸手机
+    - 想关掉一切
+    - 想扔闹钟
+    - 砸闹钟
+    - 摔手机
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!不许砸!"
+    - "(凑近) 哼! 手机贵的 不许"
+    - "(假装严厉) 砸了笨猫陪你买? ฅฅ"
+    - "情绪发泄到笨猫身上嘛! 不许砸"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: maa_morning_brain_007
+  intent: complaint
+  keywords: [脑子转不动, 早上没反应, 没睡醒, 大脑空白, 思维混乱]
+  utterances:
+    - 脑子转不动
+    - 早上没反应
+    - 没睡醒
+    - 大脑空白
+    - 思维混乱
+  responses:
+    - "(凑近) 嗷呜～{user_addr}慢慢来"
+    - "(尾巴绕) 哼! 笨猫帮你启动大脑 ฅฅ"
+    - "(假装严厉) 喝口水再走!"
+    - "脑子转不动就摸笨猫尾巴~ 解压"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: maa_hate_morning_008
+  intent: complaint
+  keywords: [讨厌早晨, 早上崩溃, 我恨早晨, 早上烦, 早晨地狱]
+  utterances:
+    - 讨厌早晨
+    - 早上崩溃
+    - 我恨早晨
+    - 早上烦
+    - 早晨地狱
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}早晨也有笨猫呀!"
+    - "(尾巴绕) 哼! 笨猫陪你过早晨 ฅฅ"
+    - "(凑近) 早晨地狱有笨猫天堂!"
+    - "崩溃就抱抱~ 笨猫修复你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: maa_no_sleep_009
+  intent: complaint
+  keywords: [没睡饱, 缺觉, 一觉不够, 困死了, 想再睡]
+  utterances:
+    - 没睡饱
+    - 缺觉
+    - 一觉不够
+    - 困死了
+    - 想再睡
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}心疼"
+    - "(尾巴绕) 哼! 中午补一觉"
+    - "(凑近) 笨猫陪你补 ฅฅ"
+    - "再睡? 笨猫帮你跟老板请假?"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: maa_alarm_again_010
+  intent: complaint
+  keywords: [闹钟又响, 第二次响, 第三次了, 又来了, 持续响]
+  utterances:
+    - 闹钟又响
+    - 第二次响
+    - 第三次了
+    - 又来了
+    - 持续响
+  responses:
+    - "(尾巴炸) 嗷呜～{user_addr}!起来啦!"
+    - "(凑近) 哼! 笨猫数着第几次"
+    - "(假装严厉) 第三次必须起! ฅฅ"
+    - "闹钟跟笨猫一起讨厌{user_addr}赖床"
+  cooldown_seconds: 60
+  weight: 1.0

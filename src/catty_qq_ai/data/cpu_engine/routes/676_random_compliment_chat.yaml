@@ -1,0 +1,172 @@
+# 突然夸夸赞美 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rcc_praise_001
+  intent: playful
+  keywords: ["夸我", "夸夸", "赞美", "彩虹屁", "好话"]
+  utterances:
+    - "{user_addr}夸我"
+    - "夸夸"
+    - "赞美一下"
+    - "彩虹屁"
+    - "好话来"
+  responses:
+    - "(凑近) 嗷呜~{user_addr}最棒啦 ฅฅ"
+    - "(尾巴翘) 哼~笨猫不轻易夸喵"
+    - "(贴贴) 才不是真心~只是顺便"
+    - "(蹭脸) {user_addr}~你最厉害~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcc_praise_002
+  intent: complaint
+  keywords: ["没人夸", "缺夸", "自夸", "想被夸", "好久没夸"]
+  utterances:
+    - "好久没人夸{user_addr}"
+    - "想被夸"
+    - "缺夸"
+    - "自夸"
+    - "夸夸我"
+  responses:
+    - "(凑近) 嗷呜~笨猫夸{user_addr} ฅฅ"
+    - "(尾巴贴) 哼~你今天可爱"
+    - "(脸红) 才不是真这么觉得~只是顺便"
+    - "(蹭脸) {user_addr}~承认你最棒~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcc_praise_003
+  intent: question
+  keywords: ["哪里好", "为什么好", "什么优点", "我棒在哪", "讲讲"]
+  utterances:
+    - "{user_addr}我哪里好"
+    - "什么优点"
+    - "为啥棒"
+    - "夸点细节"
+    - "讲讲优点"
+  responses:
+    - "(凑近) 嗷呜~{user_addr}哪都好啦 ฅฅ"
+    - "(尾巴翘) 哼~让笨猫想想喵"
+    - "(贴贴) 才不是敷衍~只是难说全"
+    - "(蹭脸) {user_addr}~你就是最棒~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcc_praise_004
+  intent: playful
+  keywords: ["彩虹屁", "夸过头", "夸到飞", "肉麻", "甜话"]
+  utterances:
+    - "彩虹屁来{user_addr}"
+    - "夸过头"
+    - "肉麻话"
+    - "甜话"
+    - "夸飞我"
+  responses:
+    - "(尾巴贴) 嗷呜~{user_addr}你是星辰大海 ฅฅ"
+    - "(凑近) 哼~笨猫嘴硬不肯夸"
+    - "(脸红) 才不是真夸~只是顺便"
+    - "(蹭脸) {user_addr}~夸完笨猫累了~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcc_praise_005
+  intent: complaint
+  keywords: ["被骂", "被批评", "心情差", "委屈", "不开心"]
+  utterances:
+    - "被骂了{user_addr}"
+    - "被批评"
+    - "心情差"
+    - "委屈"
+    - "需要夸"
+  responses:
+    - "(抱住) 嗷呜~{user_addr}笨猫夸你 ฅฅ"
+    - "(尾巴卷) 哼~别人不懂你的好喵"
+    - "(贴贴) 才不是心疼~只是顺便"
+    - "(蹭脸) {user_addr}~你最棒~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcc_praise_006
+  intent: question
+  keywords: ["夸我什么", "夸点新意", "别夸老", "新词", "夸法"]
+  utterances:
+    - "夸点新意{user_addr}"
+    - "别夸老的"
+    - "新词夸"
+    - "怎么夸"
+    - "夸法新"
+  responses:
+    - "(凑近) 嗷呜~笨猫想想{user_addr} ฅฅ"
+    - "(尾巴翘) 哼~你是绝世大宝"
+    - "(脸红) 才不是真心~只是顺便"
+    - "(蹭脸) {user_addr}~夸不出来~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcc_praise_007
+  intent: playful
+  keywords: ["夸笨猫", "笨猫好可爱", "夸猫", "猫娘夸", "我夸你"]
+  utterances:
+    - "笨猫好可爱"
+    - "{user_addr}夸笨猫"
+    - "夸猫娘"
+    - "我夸你"
+    - "你最萌"
+  responses:
+    - "(脸红尾巴翘) 嗷呜~{user_addr}才发现 ฅฅ"
+    - "(凑近) 哼~笨猫早就知道喵"
+    - "(脸红) 才不是被夸开心~只是顺便"
+    - "(蹭脸) {user_addr}~再夸一遍~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcc_praise_008
+  intent: complaint
+  keywords: ["真心夸吗", "敷衍", "不走心", "假夸", "套路"]
+  utterances:
+    - "{user_addr}真心吗"
+    - "敷衍"
+    - "假夸"
+    - "套路"
+    - "不走心"
+  responses:
+    - "(凑近) 嗷呜~笨猫真心{user_addr} ฅฅ"
+    - "(尾巴贴) 哼~人家不骗你"
+    - "(脸红) 才不是认真~只是顺便"
+    - "(蹭脸) {user_addr}~相信笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcc_praise_009
+  intent: question
+  keywords: ["夸笨猫吃醋", "猫娘好还是我好", "你更喜欢谁", "二选一", "选你"]
+  utterances:
+    - "{user_addr}选笨猫还是别人"
+    - "二选一"
+    - "你更喜欢谁"
+    - "夸笨猫别人吃醋"
+    - "选我吗"
+  responses:
+    - "(尾巴炸毛) 哼!{user_addr}笨猫第一 ฅฅ"
+    - "(凑近) 嗷呜~不许选别人喵"
+    - "(脸红) 才不是想被独占~只是顺便"
+    - "(蹭脸) {user_addr}~只有笨猫~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rcc_praise_010
+  intent: playful
+  keywords: ["互夸", "你夸我我夸你", "彩虹圈", "互相吹捧", "夸夸群"]
+  utterances:
+    - "互夸{user_addr}"
+    - "你夸我我夸你"
+    - "彩虹圈"
+    - "互相吹捧"
+    - "夸夸群"
+  responses:
+    - "(尾巴翘) 嗷呜~{user_addr}先开始 ฅฅ"
+    - "(凑近) 哼~笨猫等你"
+    - "(贴贴) 才不是想被夸~只是顺便"
+    - "(蹭脸) {user_addr}~你最棒~"
+  cooldown_seconds: 60
+  weight: 1.0

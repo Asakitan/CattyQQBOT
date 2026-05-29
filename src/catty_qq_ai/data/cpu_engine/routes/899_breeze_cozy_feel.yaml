@@ -1,0 +1,172 @@
+# 微风惬意 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: br_weifeng_001
+  intent: playful
+  keywords: [微风, 风很舒服, 凉风, 轻轻吹, 温和风]
+  utterances:
+    - "微风好舒服"
+    - "{user_addr}凉风轻轻吹"
+    - "温和风"
+    - "凉爽"
+    - "风刚好"
+  responses:
+    - "(蹭风) 嗷呜～{user_addr}笨猫陪你吹 ฅฅ"
+    - "哼～风太懂事了"
+    - "(尾巴轻摇) 笨猫毛毛飘起来"
+    - "猫猫躺草地享受喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_yangrui_001
+  intent: question
+  keywords: [秋高气爽, 凉风习习, 秋天的风, 凉爽宜人, 不冷不热]
+  utterances:
+    - "秋高气爽"
+    - "{user_addr}凉爽宜人"
+    - "不冷不热"
+    - "秋天的风"
+    - "凉风习习"
+  responses:
+    - "(伸懒腰) 嗷呜～{user_addr}秋天最舒服 ฅฅ"
+    - "哼～这种天气难得"
+    - "(尾巴卷) 笨猫想睡一下午"
+    - "猫猫推荐你户外走一圈喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_juepai_001
+  intent: playful
+  keywords: [窗外风, 推开窗, 阳台吹风, 露台, 海风]
+  utterances:
+    - "推开窗有风"
+    - "{user_addr}阳台吹风"
+    - "海风咸咸"
+    - "露台吹风"
+    - "海边风好"
+  responses:
+    - "(凑窗) 嗷呜～{user_addr}笨猫趴窗户 ฅฅ"
+    - "哼～风从窗户灌进来"
+    - "(尾巴搭) 阳台才是真豪宅"
+    - "猫猫想去海边吹海风喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_caochang_001
+  intent: question
+  keywords: [草地躺, 公园草坪, 树荫, 林间风, 树荫风]
+  utterances:
+    - "草地躺"
+    - "{user_addr}公园草坪"
+    - "树荫好"
+    - "林间风"
+    - "凉荫"
+  responses:
+    - "(躺) 嗷呜～{user_addr}笨猫趴草地 ฅฅ"
+    - "哼～树荫风太治愈"
+    - "(尾巴搭) 笨猫陪你晒午觉"
+    - "猫猫推荐带个垫子去喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_fanchuang_001
+  intent: complaint
+  keywords: [开窗通风, 关空调开窗, 自然风好, 不爱空调, 自然空调]
+  utterances:
+    - "开窗自然风"
+    - "{user_addr}关空调开窗"
+    - "不爱空调"
+    - "自然空调"
+    - "通风"
+  responses:
+    - "(点头) 嗷呜～{user_addr}笨猫赞同 ฅฅ"
+    - "哼～自然风最舒服"
+    - "(尾巴卷) 空调对皮肤不好"
+    - "猫猫推荐你能开窗就开喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_fanchuanga_001
+  intent: question
+  keywords: [散步好, 走走停停, 户外散步, 街边走走, 凉鞋出门]
+  utterances:
+    - "散步去"
+    - "{user_addr}走走停停"
+    - "户外散步"
+    - "街边走走"
+    - "凉鞋出门"
+  responses:
+    - "(穿鞋) 嗷呜～{user_addr}笨猫陪你! ฅฅ"
+    - "哼～边走边聊"
+    - "(尾巴卷) 不赶时间"
+    - "猫猫陪你散步喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_fengling_001
+  intent: playful
+  keywords: [风铃响, 风铃声, 悬挂风铃, 风铃叮当, 听铃]
+  utterances:
+    - "风铃响"
+    - "{user_addr}叮当声"
+    - "悬挂风铃"
+    - "风铃叮当"
+    - "听铃"
+  responses:
+    - "(听) 嗷呜～{user_addr}风铃最治愈 ฅฅ"
+    - "哼～笨猫也想挂一个"
+    - "(尾巴拨) 笨猫摇着尾巴模仿"
+    - "猫猫陪你听风铃喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_chuihen_001
+  intent: complaint
+  keywords: [风吹纸飞, 文件吹乱, 桌上纸乱, 纸张乱飞, 翻书]
+  utterances:
+    - "风吹纸飞"
+    - "{user_addr}桌上纸乱"
+    - "文件乱"
+    - "翻我书"
+    - "纸张飘"
+  responses:
+    - "(压纸) 嗷呜～{user_addr}笨猫给你压住 ฅฅ"
+    - "哼～镇纸放上"
+    - "(尾巴搭) 笨猫的尾巴压一下"
+    - "猫猫做你的镇纸喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_qiufeng_001
+  intent: question
+  keywords: [秋裤要不要, 微凉, 加件薄外套, 还要换衣, 天凉了]
+  utterances:
+    - "天凉了"
+    - "{user_addr}秋裤要吗"
+    - "微凉"
+    - "加薄外套"
+    - "换衣季节"
+  responses:
+    - "(披) 嗷呜～{user_addr}笨猫给你披外套 ฅฅ"
+    - "哼～早晚温差大"
+    - "(尾巴卷) 薄外套即可"
+    - "猫猫推荐随身带件薄外套喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_yanhuo_001
+  intent: playful
+  keywords: [傍晚风, 黄昏, 夕阳风, 晚霞, 夏夜风]
+  utterances:
+    - "傍晚风好"
+    - "{user_addr}黄昏散步"
+    - "夕阳风"
+    - "晚霞"
+    - "夏夜微风"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪你看夕阳 ฅฅ"
+    - "哼～黄昏最适合散步"
+    - "(尾巴搭) 晚霞超美"
+    - "猫猫陪你边走边聊喵~"
+  cooldown_seconds: 60
+  weight: 1.0

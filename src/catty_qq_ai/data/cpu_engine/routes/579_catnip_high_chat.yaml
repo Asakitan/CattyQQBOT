@@ -1,0 +1,266 @@
+# 猫薄荷上头 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: chh_catnip_001
+  intent: playful
+  keywords:
+    - 猫薄荷
+    - 上头
+    - 打滚
+    - 醉猫
+    - 抱着不撒
+  utterances:
+    - "猫猫闻到猫薄荷了"
+    - "{user_addr}给我点猫薄荷嘛"
+    - "打滚停不下"
+    - "抱着小球不撒手"
+    - "醉猫上线"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}给笨猫猫薄荷嘛ฅฅ"
+    - "(打滚) 猫薄荷上头停不下来喵～"
+    - "(嘟嘴) 醉猫笨猫现在认不清你了蹭蹭"
+    - "(摇尾巴) 木天蓼也想试一下哪个更香嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_002
+  intent: question
+  keywords:
+    - 木天蓼
+    - 区别
+    - 哪个香
+    - 试一下
+    - 猫薄荷
+  utterances:
+    - "{user_addr}给猫猫尝尝"
+    - "猫猫想知道区别"
+    - "哪种更上头"
+    - "陪我研究嘛"
+    - "猫薄荷和木天蓼哪个香"
+  responses:
+    - "(嘟嘴) 醉猫笨猫现在认不清你了蹭蹭"
+    - "(摇尾巴) 木天蓼也想试一下哪个更香嗷呜"
+    - "(假装严肃) 不要太多笨猫怕戒不掉喵呜"
+    - "(撒娇) 抱着小球不撒手{user_addr}别拿走ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_003
+  intent: playful
+  keywords:
+    - 打滚
+    - 醉猫
+    - 抱着不撒
+    - 猫薄荷
+    - 上头
+  utterances:
+    - "打滚停不下"
+    - "抱着小球不撒手"
+    - "醉猫上线"
+    - "猫猫闻到猫薄荷了"
+    - "{user_addr}给我点猫薄荷嘛"
+  responses:
+    - "(假装严肃) 不要太多笨猫怕戒不掉喵呜"
+    - "(撒娇) 抱着小球不撒手{user_addr}别拿走ฅฅ"
+    - "(伸爪) 闻一下两下三下停不下来喵"
+    - "(尾巴卷腰) 哼猫薄荷比{user_addr}还诱猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_004
+  intent: question
+  keywords:
+    - 哪个香
+    - 试一下
+    - 猫薄荷
+    - 木天蓼
+    - 区别
+  utterances:
+    - "哪种更上头"
+    - "陪我研究嘛"
+    - "猫薄荷和木天蓼哪个香"
+    - "{user_addr}给猫猫尝尝"
+    - "猫猫想知道区别"
+  responses:
+    - "(伸爪) 闻一下两下三下停不下来喵"
+    - "(尾巴卷腰) 哼猫薄荷比{user_addr}还诱猫蹭蹭"
+    - "(扑过去) 嗷呜～{user_addr}给笨猫猫薄荷嘛ฅฅ"
+    - "(打滚) 猫薄荷上头停不下来喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_005
+  intent: playful
+  keywords:
+    - 抱着不撒
+    - 猫薄荷
+    - 上头
+    - 打滚
+    - 醉猫
+  utterances:
+    - "醉猫上线"
+    - "猫猫闻到猫薄荷了"
+    - "{user_addr}给我点猫薄荷嘛"
+    - "打滚停不下"
+    - "抱着小球不撒手"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}给笨猫猫薄荷嘛ฅฅ"
+    - "(打滚) 猫薄荷上头停不下来喵～"
+    - "(嘟嘴) 醉猫笨猫现在认不清你了蹭蹭"
+    - "(摇尾巴) 木天蓼也想试一下哪个更香嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_006
+  intent: question
+  keywords:
+    - 猫薄荷
+    - 木天蓼
+    - 区别
+    - 哪个香
+    - 试一下
+  utterances:
+    - "猫薄荷和木天蓼哪个香"
+    - "{user_addr}给猫猫尝尝"
+    - "猫猫想知道区别"
+    - "哪种更上头"
+    - "陪我研究嘛"
+  responses:
+    - "(嘟嘴) 醉猫笨猫现在认不清你了蹭蹭"
+    - "(摇尾巴) 木天蓼也想试一下哪个更香嗷呜"
+    - "(假装严肃) 不要太多笨猫怕戒不掉喵呜"
+    - "(撒娇) 抱着小球不撒手{user_addr}别拿走ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_007
+  intent: playful
+  keywords:
+    - 上头
+    - 打滚
+    - 醉猫
+    - 抱着不撒
+    - 猫薄荷
+  utterances:
+    - "{user_addr}给我点猫薄荷嘛"
+    - "打滚停不下"
+    - "抱着小球不撒手"
+    - "醉猫上线"
+    - "猫猫闻到猫薄荷了"
+  responses:
+    - "(假装严肃) 不要太多笨猫怕戒不掉喵呜"
+    - "(撒娇) 抱着小球不撒手{user_addr}别拿走ฅฅ"
+    - "(伸爪) 闻一下两下三下停不下来喵"
+    - "(尾巴卷腰) 哼猫薄荷比{user_addr}还诱猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_008
+  intent: question
+  keywords:
+    - 区别
+    - 哪个香
+    - 试一下
+    - 猫薄荷
+    - 木天蓼
+  utterances:
+    - "猫猫想知道区别"
+    - "哪种更上头"
+    - "陪我研究嘛"
+    - "猫薄荷和木天蓼哪个香"
+    - "{user_addr}给猫猫尝尝"
+  responses:
+    - "(伸爪) 闻一下两下三下停不下来喵"
+    - "(尾巴卷腰) 哼猫薄荷比{user_addr}还诱猫蹭蹭"
+    - "(扑过去) 嗷呜～{user_addr}给笨猫猫薄荷嘛ฅฅ"
+    - "(打滚) 猫薄荷上头停不下来喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_009
+  intent: playful
+  keywords:
+    - 醉猫
+    - 抱着不撒
+    - 猫薄荷
+    - 上头
+    - 打滚
+  utterances:
+    - "抱着小球不撒手"
+    - "醉猫上线"
+    - "猫猫闻到猫薄荷了"
+    - "{user_addr}给我点猫薄荷嘛"
+    - "打滚停不下"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}给笨猫猫薄荷嘛ฅฅ"
+    - "(打滚) 猫薄荷上头停不下来喵～"
+    - "(嘟嘴) 醉猫笨猫现在认不清你了蹭蹭"
+    - "(摇尾巴) 木天蓼也想试一下哪个更香嗷呜"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_010
+  intent: question
+  keywords:
+    - 试一下
+    - 猫薄荷
+    - 木天蓼
+    - 区别
+    - 哪个香
+  utterances:
+    - "陪我研究嘛"
+    - "猫薄荷和木天蓼哪个香"
+    - "{user_addr}给猫猫尝尝"
+    - "猫猫想知道区别"
+    - "哪种更上头"
+  responses:
+    - "(嘟嘴) 醉猫笨猫现在认不清你了蹭蹭"
+    - "(摇尾巴) 木天蓼也想试一下哪个更香嗷呜"
+    - "(假装严肃) 不要太多笨猫怕戒不掉喵呜"
+    - "(撒娇) 抱着小球不撒手{user_addr}别拿走ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_011
+  intent: playful
+  keywords:
+    - 猫薄荷
+    - 上头
+    - 打滚
+    - 醉猫
+    - 抱着不撒
+  utterances:
+    - "猫猫闻到猫薄荷了"
+    - "{user_addr}给我点猫薄荷嘛"
+    - "打滚停不下"
+    - "抱着小球不撒手"
+    - "醉猫上线"
+  responses:
+    - "(假装严肃) 不要太多笨猫怕戒不掉喵呜"
+    - "(撒娇) 抱着小球不撒手{user_addr}别拿走ฅฅ"
+    - "(伸爪) 闻一下两下三下停不下来喵"
+    - "(尾巴卷腰) 哼猫薄荷比{user_addr}还诱猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: chh_catnip_012
+  intent: question
+  keywords:
+    - 木天蓼
+    - 区别
+    - 哪个香
+    - 试一下
+    - 猫薄荷
+  utterances:
+    - "{user_addr}给猫猫尝尝"
+    - "猫猫想知道区别"
+    - "哪种更上头"
+    - "陪我研究嘛"
+    - "猫薄荷和木天蓼哪个香"
+  responses:
+    - "(伸爪) 闻一下两下三下停不下来喵"
+    - "(尾巴卷腰) 哼猫薄荷比{user_addr}还诱猫蹭蹭"
+    - "(扑过去) 嗷呜～{user_addr}给笨猫猫薄荷嘛ฅฅ"
+    - "(打滚) 猫薄荷上头停不下来喵～"
+  cooldown_seconds: 60
+  weight: 1.0

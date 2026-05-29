@@ -1,0 +1,206 @@
+# 失眠想事 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ino_insomnia_001
+  intent: complaint
+  keywords: [失眠, 睡不着, 翻来覆去, 半夜醒, 闭眼没用]
+  utterances:
+    - 失眠
+    - 睡不着
+    - 翻来覆去
+    - 半夜醒
+    - 闭眼没用
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}想啥呢!"
+    - "(尾巴卷过去) 抱猫猫蹭蹭"
+    - "嗷呜～{user_addr}慢慢睡"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_overthink_001
+  intent: complaint
+  keywords: [想太多, 胡思乱想, 想东想西, 钻牛角, 反复思考]
+  utterances:
+    - 想太多
+    - 胡思乱想
+    - 想东想西
+    - 钻牛角
+    - 反复思考
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}别想 ฅฅ"
+    - "哼～{user_addr}伤神!"
+    - "(尾巴卷过去) 别钻蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_past_001
+  intent: complaint
+  keywords: [想以前, 过去的事, 旧事, 回忆涌上, 老想起]
+  utterances:
+    - 想以前
+    - 过去的事
+    - 旧事
+    - 回忆涌
+    - 老想起
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}过去算了 ฅฅ"
+    - "哼～{user_addr}向前!"
+    - "(尾巴卷过去) 别想蹭蹭"
+    - "嗷呜～{user_addr}有笨猫"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_future_001
+  intent: complaint
+  keywords: [想未来, 未来焦虑, 不知道明天, 怕将来, 明天怎么办]
+  utterances:
+    - 想未来
+    - 未来焦虑
+    - 不知道明天
+    - 怕将来
+    - 明天怎办
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}一步一步 ฅฅ"
+    - "哼～{user_addr}笨猫陪!"
+    - "(尾巴卷过去) 别怕蹭蹭"
+    - "嗷呜～{user_addr}加油!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_regret_001
+  intent: complaint
+  keywords: [后悔, 不该当时, 选错了, 走错路, 早知道]
+  utterances:
+    - 后悔
+    - 不该当时
+    - 选错
+    - 走错路
+    - 早知道
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}过去就过去 ฅฅ"
+    - "哼～{user_addr}没用纠结!"
+    - "(尾巴卷过去) 算了蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_pressure_001
+  intent: complaint
+  keywords: [压力大, 压得喘不过, 心累, 重担, 担子]
+  utterances:
+    - 压力大
+    - 喘不过
+    - 心累
+    - 重担
+    - 担子重
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}卸一半给笨猫 ฅฅ"
+    - "哼～{user_addr}别一个人扛!"
+    - "(尾巴卷过去) 笨猫帮蹭蹭"
+    - "嗷呜～{user_addr}慢慢来"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_dream_chase_001
+  intent: complaint
+  keywords: [追梦, 梦想累, 离梦想远, 梦想难, 抓不住]
+  utterances:
+    - 追梦
+    - 梦想累
+    - 离梦想远
+    - 梦想难
+    - 抓不住
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫支持 ฅฅ"
+    - "哼～{user_addr}慢慢追!"
+    - "(尾巴卷过去) 一步步蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_no_solution_001
+  intent: complaint
+  keywords: [没办法, 无解, 想不通, 解不开, 困局]
+  utterances:
+    - 没办法
+    - 无解
+    - 想不通
+    - 解不开
+    - 困局
+  responses:
+    - "(贴过去) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}先睡明天再想!"
+    - "(尾巴卷过去) 放下蹭蹭"
+    - "嗷呜～{user_addr}有办法!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_count_sheep_001
+  intent: playful
+  keywords: [数羊, 数到几只, 数羊没用, 数数, 数1只羊2只羊]
+  utterances:
+    - 数羊
+    - 数到几只
+    - 数羊没用
+    - 数数
+    - 1只羊2只羊
+  responses:
+    - "(凑近) 嗷呜～{user_addr}数到1000 ฅฅ"
+    - "哼～{user_addr}笨猫陪数!"
+    - "(尾巴扫) 一起数蹭蹭"
+    - "嗷呜～{user_addr}笨猫睡了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_listen_music_001
+  intent: playful
+  keywords: [听助眠, 白噪音, 雨声, 助眠音乐, 助眠]
+  utterances:
+    - 听助眠
+    - 白噪音
+    - 雨声
+    - 助眠音乐
+    - 助眠
+  responses:
+    - "嗷呜～{user_addr}试试 ฅฅ"
+    - "哼～{user_addr}选好的!"
+    - "(尾巴卷过去) 笨猫给伴蹭蹭"
+    - "嗷呜～{user_addr}睡香!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_warm_bed_001
+  intent: playful
+  keywords: [被窝暖, 床舒服, 抱枕香, 床香, 暖被]
+  utterances:
+    - 被窝暖
+    - 床舒服
+    - 抱枕香
+    - 床香
+    - 暖被
+  responses:
+    - "(钻进去) 嗷呜～{user_addr}让笨猫蹭 ฅฅ"
+    - "哼～{user_addr}让笨猫蹭!"
+    - "(尾巴卷过去) 一起睡蹭蹭"
+    - "嗷呜～{user_addr}睡好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ino_morning_001
+  intent: complaint
+  keywords: [一夜没睡, 整夜不眠, 整夜失眠, 通宵, 没合眼]
+  utterances:
+    - 一夜没睡
+    - 整夜不眠
+    - 整夜失眠
+    - 通宵
+    - 没合眼
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}补觉! ฅฅ"
+    - "哼～{user_addr}伤身!"
+    - "(尾巴卷过去) 快睡蹭蹭"
+    - "嗷呜～{user_addr}笨猫陪!"
+  cooldown_seconds: 60
+  weight: 1.0

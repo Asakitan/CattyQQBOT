@@ -1,0 +1,189 @@
+# 痘痘焦虑 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pim_panic_001
+  intent: complaint
+  keywords: [长痘, 痘痘, 脸上痘, 痤疮, 痘豆]
+  utterances:
+    - "长痘"
+    - "痘痘"
+    - "{user_addr}脸上痘"
+    - "痤疮"
+    - "痘豆"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}笨猫看看 ฅฅ"
+    - "哼～{user_addr}熬夜结果"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}涂点药膏喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pim_squeeze_001
+  intent: complaint
+  keywords: [挤痘, 挤痘痘, 用手挤, 留印, 痘印]
+  utterances:
+    - "挤痘"
+    - "{user_addr}留疤"
+    - "用手挤"
+    - "留印"
+    - "痘印"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}笨猫不许挤! ฅฅ"
+    - "哼～{user_addr}会留疤"
+    - "(贴贴) {user_addr}人家阻止蹭蹭"
+    - "{user_addr}痘痘贴喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pim_skincare_001
+  intent: playful
+  keywords: [护肤, 水乳, 精华, 面膜, 护肤品]
+  utterances:
+    - "护肤"
+    - "水乳"
+    - "{user_addr}精华"
+    - "面膜"
+    - "护肤品"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你护肤 ฅฅ"
+    - "哼～{user_addr}早就该了"
+    - "(凑近) {user_addr}人家给你抹蹭蹭"
+    - "{user_addr}珂润喵～ 笨猫推"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pim_diet_001
+  intent: complaint
+  keywords: [吃辣长痘, 吃甜长痘, 高糖, 油炸, 牛奶痘]
+  utterances:
+    - "吃辣长痘"
+    - "{user_addr}吃甜痘"
+    - "高糖"
+    - "油炸"
+    - "牛奶痘"
+  responses:
+    - "嗷呜～{user_addr}笨猫提醒少吃辛辣 ฅฅ"
+    - "哼～{user_addr}活该!"
+    - "(贴贴) {user_addr}人家陪你忌口蹭蹭"
+    - "{user_addr}清淡饮食喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pim_sleep_001
+  intent: complaint
+  keywords: [熬夜痘, 失眠痘, 内分泌, 晚睡, 熬夜]
+  utterances:
+    - "熬夜痘"
+    - "失眠痘"
+    - "{user_addr}内分泌"
+    - "晚睡"
+    - "熬夜"
+  responses:
+    - "嗷呜～{user_addr}早睡好不好 ฅฅ"
+    - "哼～{user_addr}笨猫念叨多少次了!"
+    - "(贴贴) {user_addr}人家陪你早睡蹭蹭"
+    - "{user_addr}十一点睡喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pim_makeup_001
+  intent: playful
+  keywords: [遮瑕, 化妆遮, 痘痘上妆, 粉底, 隔离]
+  utterances:
+    - "遮瑕"
+    - "化妆遮"
+    - "{user_addr}痘痘上妆"
+    - "粉底"
+    - "隔离"
+  responses:
+    - "嗷呜～{user_addr}笨猫教你遮 ฅฅ"
+    - "哼～{user_addr}遮不住啊"
+    - "(凑近) {user_addr}人家帮你蹭蹭"
+    - "{user_addr}遮瑕笔喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pim_period_001
+  intent: complaint
+  keywords: [月经痘, 大姨妈痘, 例假痘, 周期痘, 例假]
+  utterances:
+    - "月经痘"
+    - "大姨妈痘"
+    - "{user_addr}例假痘"
+    - "周期痘"
+    - "例假"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你过 ฅฅ"
+    - "哼～{user_addr}这是正常"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}红糖水喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pim_redswelling_001
+  intent: complaint
+  keywords: [红肿痘, 大颗痘, 红肿, 红痘, 痘痘红]
+  utterances:
+    - "红肿"
+    - "{user_addr}大颗痘"
+    - "红痘"
+    - "痘痘红"
+    - "红肿痘"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}痘痘贴贴! ฅฅ"
+    - "哼～{user_addr}别挤!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}班赛膏喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pim_back_001
+  intent: complaint
+  keywords: [后背痘, 背上痘, 胸前痘, 屁股痘, 身体痘]
+  utterances:
+    - "后背痘"
+    - "背上痘"
+    - "{user_addr}胸前痘"
+    - "屁股痘"
+    - "身体痘"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐沐浴露 ฅฅ"
+    - "哼～{user_addr}枕巾床单要勤换!"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}含水杨酸喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: pim_clean_001
+  intent: playful
+  keywords: [洗面奶, 清洁, 卸妆, 二次清洁, 深层清洁]
+  utterances:
+    - "洗面奶"
+    - "清洁"
+    - "{user_addr}卸妆"
+    - "二次清洁"
+    - "深层清洁"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你清洁 ฅฅ"
+    - "哼～{user_addr}卸妆要彻底"
+    - "(凑近) {user_addr}人家给你蹭蹭"
+    - "{user_addr}氨基酸喵～ 温和"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pim_dermatology_001
+  intent: playful
+  keywords: [看皮肤科, 医院皮肤, 医院看痘, 红光, 刷酸]
+  utterances:
+    - "看皮肤科"
+    - "医院"
+    - "{user_addr}刷酸"
+    - "红光"
+    - "看痘"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你去 ฅฅ"
+    - "哼～{user_addr}早该看医生"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}规范治疗喵～"
+  cooldown_seconds: 60
+  weight: 0.9

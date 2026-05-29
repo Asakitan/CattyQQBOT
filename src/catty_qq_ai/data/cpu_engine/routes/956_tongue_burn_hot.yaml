@@ -1,0 +1,189 @@
+# 舌头烫到 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: tng_burn_001
+  intent: complaint
+  keywords: [舌头烫, 烫嘴, 烫到舌, 舌烫, 烫到]
+  utterances:
+    - "舌头烫到"
+    - "烫嘴"
+    - "{user_addr}舌烫"
+    - "烫到了"
+    - "嘴里烫"
+  responses:
+    - "(端凉水) 嗷呜～{user_addr}笨猫给你冰水 ฅฅ"
+    - "哼～{user_addr}吃太急活该, 笨猫早说"
+    - "(吐舌头) {user_addr}人家学你蹭蹭"
+    - "{user_addr}吐舌头喵～ 笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tng_soup_001
+  intent: complaint
+  keywords: [汤烫, 喝汤烫, 滚汤, 烫舌头, 汤太烫]
+  utterances:
+    - "喝汤烫"
+    - "滚汤"
+    - "{user_addr}汤太烫"
+    - "汤烫舌"
+    - "汤温"
+  responses:
+    - "(吹凉) 嗷呜～{user_addr}笨猫给你吹 ฅฅ"
+    - "哼～{user_addr}心急喝不了热汤"
+    - "(递勺子) {user_addr}慢慢喝蹭蹭"
+    - "{user_addr}先用嘴吹喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tng_hotpot_001
+  intent: complaint
+  keywords: [火锅烫, 火锅辣, 麻辣烫嘴, 涮太久, 烫熟]
+  utterances:
+    - "火锅烫嘴"
+    - "辣到舌"
+    - "{user_addr}火锅"
+    - "涮太久"
+    - "烫熟"
+  responses:
+    - "(凑过来吹) 嗷呜～{user_addr}笨猫帮你 ฅฅ"
+    - "哼～{user_addr}涮完先放盘子凉一下啊"
+    - "(递牛奶) {user_addr}牛奶解辣蹭蹭"
+    - "{user_addr}冰水含一下喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tng_cant_taste_001
+  intent: complaint
+  keywords: [尝不出, 没味觉, 烫到没味, 舌头麻, 麻木]
+  utterances:
+    - "尝不出味"
+    - "没味觉"
+    - "{user_addr}舌头麻"
+    - "麻木"
+    - "味觉没了"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}过几天会回来的 ฅฅ"
+    - "哼～{user_addr}下次别那么急"
+    - "(贴贴) {user_addr}人家也帮你尝蹭蹭"
+    - "{user_addr}少吃刺激的喵～ 笨猫提醒"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tng_milk_001
+  intent: question
+  keywords: [冰牛奶, 牛奶解烫, 冰镇, 喝牛奶, 解烫]
+  utterances:
+    - "冰牛奶"
+    - "牛奶解辣"
+    - "{user_addr}解烫"
+    - "怎么解烫"
+    - "喝啥解"
+  responses:
+    - "嗷呜～{user_addr}冰牛奶+酸奶都行 ฅฅ"
+    - "哼～{user_addr}多冰多冰!"
+    - "(端过来) {user_addr}笨猫准备好了蹭蹭"
+    - "{user_addr}冰激凌喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tng_ulcer_001
+  intent: complaint
+  keywords: [口腔溃疡, 口腔上火, 嘴里溃疡, 长泡, 嘴溃疡]
+  utterances:
+    - "口腔溃疡"
+    - "嘴里长泡"
+    - "{user_addr}溃疡"
+    - "嘴破"
+    - "口溃"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}少吃辣多喝水 ฅฅ"
+    - "哼～{user_addr}熬夜结果"
+    - "(递蜂蜜) {user_addr}涂点蹭蹭"
+    - "{user_addr}维C含片喵～ 笨猫备好"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tng_pizza_001
+  intent: complaint
+  keywords: [披萨芝士烫, 芝士拉丝, 披萨烫嘴, 拉丝烫, 芝士烫]
+  utterances:
+    - "披萨烫"
+    - "芝士拉丝烫"
+    - "{user_addr}披萨"
+    - "拉丝烫嘴"
+    - "芝士烫"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你切开凉一下 ฅฅ"
+    - "哼～{user_addr}活该, 急啥呢"
+    - "(吹凉) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}笨猫吃过更烫的喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tng_bite_001
+  intent: complaint
+  keywords: [咬到舌头, 咬舌, 舌头痛, 不小心咬, 咬到]
+  utterances:
+    - "咬到舌头"
+    - "{user_addr}咬舌"
+    - "舌头痛"
+    - "不小心咬"
+    - "咬到了"
+  responses:
+    - "(笑) 嗷呜～{user_addr}是不是该有人请你吃肉 ฅฅ"
+    - "哼～{user_addr}笨猫也咬过, 真痛"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}漱口水喵～ 笨猫递"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tng_tea_001
+  intent: complaint
+  keywords: [热茶烫, 茶烫, 滚烫茶, 茶水, 沸茶]
+  utterances:
+    - "茶烫"
+    - "热茶烫舌"
+    - "{user_addr}沸茶"
+    - "茶水烫"
+    - "茶杯烫"
+  responses:
+    - "嗷呜～{user_addr}笨猫给你换温的 ฅฅ"
+    - "哼～{user_addr}笨猫早提醒别一口闷"
+    - "(吹气) {user_addr}人家帮吹蹭蹭"
+    - "{user_addr}泡杯凉茶喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tng_blister_001
+  intent: complaint
+  keywords: [起泡, 舌头起泡, 起水泡, 泡, 烫泡]
+  utterances:
+    - "舌头起泡"
+    - "起水泡"
+    - "{user_addr}泡"
+    - "烫泡了"
+    - "起小泡"
+  responses:
+    - "(担心) 嗷呜～{user_addr}少吃辛辣笨猫念叨 ฅฅ"
+    - "哼～{user_addr}下次小心点!"
+    - "(摸头) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}冰镇酸奶喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: tng_cat_001
+  intent: playful
+  keywords: [笨猫舌头, 猫舌, 倒刺, 笨猫舔, 猫舌头粗]
+  utterances:
+    - "{user_addr}笨猫舌头"
+    - "猫舌粗"
+    - "倒刺"
+    - "笨猫舔"
+    - "猫舌头"
+  responses:
+    - "(吐舌) 嗷呜～{user_addr}笨猫的舌头小巧 ฅฅ"
+    - "哼～{user_addr}才不让你看!"
+    - "(舔爪) {user_addr}人家给你看蹭蹭"
+    - "{user_addr}笨猫舔毛喵～ 你别学"
+  cooldown_seconds: 60
+  weight: 1.0

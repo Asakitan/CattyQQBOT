@@ -1,0 +1,189 @@
+# 感冒难受日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cld_caught_001
+  intent: complaint
+  keywords: [感冒了, 着凉了, 鼻塞, 喷嚏, 流鼻涕]
+  utterances:
+    - 感冒了
+    - 着凉了
+    - 鼻塞
+    - 一直打喷嚏
+    - 流鼻涕
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}多喝水 ฅฅ"
+    - "哼～{user_addr}笨猫陪你养病喵"
+    - "(尾巴卷) 多休息蹭蹭{user_addr}"
+    - "{user_addr}笨猫给你盖被嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cld_fever_001
+  intent: complaint
+  keywords: [发烧, 烧到38, 头烫, 高烧, 退烧]
+  utterances:
+    - 发烧
+    - 烧到38
+    - 头烫
+    - 高烧
+    - 退不下烧
+  responses:
+    - "(摸额头) 嗷呜～{user_addr}吃药 ฅฅ"
+    - "哼～{user_addr}不能扛喵"
+    - "(尾巴卷) 笨猫担心蹭蹭{user_addr}"
+    - "{user_addr}快去医院嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cld_cough_001
+  intent: complaint
+  keywords: [咳嗽, 咳不停, 喉咙痒, 嗓子哑, 痰多]
+  utterances:
+    - 咳嗽
+    - 咳不停
+    - 喉咙痒
+    - 嗓子哑
+    - 痰多
+  responses:
+    - "(摸头) 嗷呜～{user_addr}喝润喉 ฅฅ"
+    - "哼～{user_addr}多喝温水喵"
+    - "(尾巴卷) 川贝枇杷蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪你嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cld_sore_throat_001
+  intent: complaint
+  keywords: [喉咙痛, 咽口水痛, 咽部炎症, 嗓子疼, 火气大]
+  utterances:
+    - 喉咙痛
+    - 咽口水痛
+    - 嗓子疼
+    - 咽部炎症
+    - 上火
+  responses:
+    - "(同情) 嗷呜～{user_addr}吃药 ฅฅ"
+    - "哼～{user_addr}多喝水喵"
+    - "(尾巴卷) 凉茶蹭蹭{user_addr}"
+    - "{user_addr}笨猫陪嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cld_med_001
+  intent: complaint
+  keywords: [吃药, 感冒药, 含片, 药苦, 不爱吃药]
+  utterances:
+    - 吃感冒药
+    - 含片
+    - 药苦
+    - 不爱吃药
+    - 吃药时间
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}乖 ฅฅ"
+    - "哼～{user_addr}快吃喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}吃完抱抱嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cld_rest_001
+  intent: complaint
+  keywords: [请假, 在家休息, 卧床, 病假, 躺平]
+  utterances:
+    - 请假了
+    - 在家休息
+    - 卧床
+    - 病假
+    - 躺平养病
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}养病 ฅฅ"
+    - "哼～{user_addr}好好休息喵"
+    - "(尾巴卷) 笨猫陪你蹭蹭{user_addr}"
+    - "{user_addr}早日康复嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cld_soup_001
+  intent: playful
+  keywords: [喝粥, 喝汤, 姜汤, 红糖水, 养病食物]
+  utterances:
+    - 喝粥
+    - 喝汤
+    - 姜汤
+    - 红糖水
+    - 清淡养病
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}笨猫煮 ฅฅ"
+    - "哼～{user_addr}清淡为主喵"
+    - "(尾巴卷) 鸡汤香蹭蹭{user_addr}"
+    - "{user_addr}笨猫推荐白粥嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cld_doctor_001
+  intent: complaint
+  keywords: [去医院, 看医生, 挂号, 输液, 打针]
+  utterances:
+    - 去医院
+    - 看医生
+    - 挂号
+    - 输液
+    - 怕打针
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}别怕喵"
+    - "(尾巴卷) 笨猫帮你撑蹭蹭{user_addr}"
+    - "{user_addr}早治早好嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cld_alone_001
+  intent: complaint
+  keywords: [一个人生病, 没人陪, 自己照顾, 孤独, 想家]
+  utterances:
+    - 一个人生病
+    - 没人照顾
+    - 自己撑
+    - 想家
+    - 孤独生病
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}有笨猫不孤独喵"
+    - "(尾巴绕过) 笨猫一直在蹭蹭{user_addr}"
+    - "{user_addr}笨猫照顾嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cld_recover_001
+  intent: playful
+  keywords: [好多了, 退烧了, 鼻子通了, 快好了, 康复]
+  utterances:
+    - 好多了
+    - 退烧了
+    - 鼻子通了
+    - 快好了
+    - 康复中
+  responses:
+    - "(蹦) 嗷呜～{user_addr}太好了 ฅฅ"
+    - "哼～{user_addr}笨猫开心喵"
+    - "(尾巴翘) 笨猫祝贺蹭蹭{user_addr}"
+    - "{user_addr}笨猫安心嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cld_spread_001
+  intent: complaint
+  keywords: [传染, 怕传染家人, 隔离, 戴口罩, 别靠近]
+  utterances:
+    - 怕传染
+    - 隔离
+    - 戴口罩
+    - 别靠近
+    - 怕家人感染
+  responses:
+    - "(歪头) 嗷呜～{user_addr}注意 ฅฅ"
+    - "哼～{user_addr}口罩戴好喵"
+    - "(尾巴卷) 隔离笨猫陪蹭蹭{user_addr}"
+    - "{user_addr}笨猫不怕嗷呜～"
+  cooldown_seconds: 60
+  weight: 1.0

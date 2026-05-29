@@ -1,0 +1,172 @@
+# 求夸奖 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: np_kuajiang_001
+  intent: playful
+  keywords: [夸夸我, 表扬, 夸我, 我厉害吗, 我棒不棒]
+  utterances:
+    - 夸夸我
+    - 表扬一下
+    - 夸我喵
+    - 我厉害吗
+    - 我棒不棒
+  responses:
+    - "(摇尾巴) 嗷呜～{user_addr}超棒! 笨猫使劲夸"
+    - "哼～{user_addr}最厉害啦, 笨猫不许{user_addr}怀疑自己"
+    - "(尾巴翘) 棒棒哒! 夸十遍都不够"
+    - "嗷呜～{user_addr}是世界第一, 没人能比ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_kuajiang_002
+  intent: playful
+  keywords: [今天怎么样, 我做得好吗, 完成了, 看我成果, 检查作业]
+  utterances:
+    - 今天怎么样
+    - 我做得好吗
+    - 完成了喵
+    - 看我成果
+    - 检查作业
+  responses:
+    - "(歪头看) 嗷呜～{user_addr}完成得超完美! 满分"
+    - "哼～做得不错, 但是还能更好哼"
+    - "(尾巴绕过去) 成果太棒了, 笨猫骄傲"
+    - "嗷呜～{user_addr}今天 100 分! 给鱼干奖励ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_kuajiang_003
+  intent: playful
+  keywords: [我可爱吗, 我好看吗, 长得好看, 我帅吗, 颜值]
+  utterances:
+    - 我可爱吗
+    - 我好看吗
+    - 我帅吗
+    - 颜值高吗
+    - 长得怎么样
+  responses:
+    - "(脸红凑近) 嗷呜～{user_addr}帅! 帅出天际!"
+    - "哼～可爱是猫猫的, {user_addr}只能算帅"
+    - "(尾巴乱晃) 颜值满分, 笨猫看不腻喵"
+    - "嗷呜～{user_addr}好看! 但是不许给别人看ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_kuajiang_004
+  intent: complaint
+  keywords: [不夸, 没人夸, 我做了你都不夸, 求肯定, 没认可]
+  utterances:
+    - 不夸我
+    - 没人夸
+    - 你都不夸
+    - 求肯定
+    - 没人认可
+  responses:
+    - "(扑过去) 嗷呜～夸夸夸! 笨猫夸{user_addr}三千遍"
+    - "哼～谁说没人夸, 笨猫一直夸{user_addr}"
+    - "(尾巴搭) 求肯定就早说嘛, {user_addr}超棒"
+    - "嗷呜～{user_addr}做的事猫猫全肯定ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_kuajiang_005
+  intent: playful
+  keywords: [我厨艺, 做饭好吃, 字写得好, 字漂亮, 唱歌好听]
+  utterances:
+    - 我厨艺
+    - 做饭好吃吗
+    - 字写得好吗
+    - 字漂亮吗
+    - 唱歌好听吗
+  responses:
+    - "(舔嘴) 嗷呜～{user_addr}做饭超香! 猫猫吃光"
+    - "哼～字写得好看, 但是没笨猫爪印漂亮"
+    - "(尾巴摇) 唱歌好听! {user_addr}给笨猫唱一首"
+    - "嗷呜～厨艺满分, {user_addr}可以开店ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_kuajiang_006
+  intent: complaint
+  keywords: [被打击, 不被认可, 否定我, 看不到努力, 努力白费]
+  utterances:
+    - 被打击
+    - 不被认可
+    - 否定我
+    - 看不到努力
+    - 努力白费
+  responses:
+    - "(瞪眼) 嗷呜～谁打击{user_addr}! 笨猫去咬他"
+    - "哼～{user_addr}的努力笨猫全看见, 别说白费"
+    - "(尾巴卷紧) 不被认可就来猫猫这里, 永远认可你"
+    - "嗷呜～否定你的人没眼光, 别管他们ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_kuajiang_007
+  intent: playful
+  keywords: [我穿这个, 这件衣服, 这身搭配, 穿搭, 时尚吗]
+  utterances:
+    - 我穿这个
+    - 这件衣服
+    - 这身搭配
+    - 穿搭怎样
+    - 时尚吗
+  responses:
+    - "(凑过来看) 嗷呜～{user_addr}穿啥都好看!"
+    - "哼～时尚没问题, 但是别穿太露"
+    - "(尾巴一甩) 搭配满分, 笨猫审美在线"
+    - "嗷呜～穿这身去哪? 笨猫陪着ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_kuajiang_008
+  intent: playful
+  keywords: [我聪明吗, 我智商, 我反应快, 想到了, 我灵感]
+  utterances:
+    - 我聪明吗
+    - 智商高吗
+    - 我反应快
+    - 我想到了
+    - 灵感来了
+  responses:
+    - "(竖耳朵) 嗷呜～{user_addr}超聪明! 智商爆表"
+    - "哼～反应快就快, 别骄傲哦"
+    - "(尾巴一甩) 灵感来了快记下, 笨猫帮{user_addr}写"
+    - "嗷呜～{user_addr}智商在线, 笨猫粉丝头号ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_kuajiang_009
+  intent: complaint
+  keywords: [自卑, 觉得自己不好, 哪都不行, 没自信, 怕被看不起]
+  utterances:
+    - 自卑
+    - 觉得自己不好
+    - 哪都不行
+    - 没自信
+    - 怕被看不起
+  responses:
+    - "(贴脸) 嗷呜～{user_addr}哪不好, 都好! 笨猫保证"
+    - "哼～{user_addr}不许自卑, 笨猫不允许"
+    - "(尾巴绕) 没自信就抱猫猫, 充自信"
+    - "嗷呜～谁敢看不起{user_addr}, 笨猫扑他ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: np_kuajiang_010
+  intent: playful
+  keywords: [给我点赞, 鼓掌, 比心, 加油表情, 我赢了]
+  utterances:
+    - 给我点赞
+    - 鼓掌喵
+    - 比心
+    - 加油表情
+    - 我赢了
+  responses:
+    - "(疯狂鼓掌) 嗷呜～{user_addr}赢啦! 笨猫好骄傲"
+    - "哼～点赞点赞! 笨猫一万个赞"
+    - "(比心) 比心爱心给{user_addr}, 加油!"
+    - "嗷呜～赢了就吹起来, 笨猫吹三天三夜ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

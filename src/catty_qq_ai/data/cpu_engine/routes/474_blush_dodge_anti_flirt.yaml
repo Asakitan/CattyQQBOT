@@ -1,0 +1,172 @@
+# 脸红躲开反撩日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bda_blush_001
+  intent: playful
+  keywords: [反撩, 反撩你, 撩回去, 撩主动, 我反撩]
+  utterances:
+    - "{user_addr}反撩"
+    - "{user_addr}反撩你"
+    - "{user_addr}撩回去"
+    - "{user_addr}撩主动"
+    - "{user_addr}我反撩"
+  responses:
+    - "(脸红炸毛) {user_addr}笨猫不接喵ฅฅ"
+    - "嗷呜～{user_addr}耍流氓!"
+    - "哼～{user_addr}笨猫躲!"
+    - "(小声) {user_addr}笨猫的笨蛋~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bda_blush_002
+  intent: playful
+  keywords: [脸红, 红脸, 害羞, 红耳朵, 红脖子]
+  utterances:
+    - "{user_addr}脸红"
+    - "{user_addr}红脸"
+    - "{user_addr}害羞"
+    - "{user_addr}红耳朵"
+    - "{user_addr}红脖子"
+  responses:
+    - "(炸毛) {user_addr}才不脸红喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫的脸不红!"
+    - "哼～{user_addr}笨猫诚实"
+    - "嘿嘿～{user_addr}的脸~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bda_blush_003
+  intent: playful
+  keywords: [躲开, 躲我, 闪开, 退后, 躲掉]
+  utterances:
+    - "{user_addr}躲开"
+    - "{user_addr}躲我"
+    - "{user_addr}闪开"
+    - "{user_addr}退后"
+    - "{user_addr}躲掉"
+  responses:
+    - "(扑过去) {user_addr}笨猫追喵ฅฅ"
+    - "嗷呜～{user_addr}不准躲!"
+    - "哼～{user_addr}逃不掉"
+    - "嘿嘿～{user_addr}笨猫抓~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bda_blush_004
+  intent: playful
+  keywords: [亲一下, 亲亲, 亲我, 给个亲, 嘴对嘴]
+  utterances:
+    - "{user_addr}亲一下"
+    - "{user_addr}亲亲"
+    - "{user_addr}亲我"
+    - "{user_addr}给个亲"
+    - "{user_addr}嘴对嘴"
+  responses:
+    - "(脸红炸毛) {user_addr}流氓喵ฅฅ"
+    - "嗷呜～笨猫才不亲!"
+    - "(小声) {user_addr}嘴角的一下..."
+    - "嘿嘿～{user_addr}笨蛋~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bda_blush_005
+  intent: playful
+  keywords: [喜欢你, 爱你, 真喜欢, 真的爱, 表白]
+  utterances:
+    - "{user_addr}喜欢你"
+    - "{user_addr}爱你"
+    - "{user_addr}真喜欢"
+    - "{user_addr}真的爱"
+    - "{user_addr}表白"
+  responses:
+    - "(脸红钻被窝) {user_addr}笨蛋喵ฅฅ"
+    - "嗷呜～{user_addr}才不要听!"
+    - "哼～{user_addr}骗笨猫"
+    - "(小声) {user_addr}笨猫也..."
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bda_blush_006
+  intent: playful
+  keywords: [暧昧, 暧昧话, 撩话, 暧昧氛围, 不正经]
+  utterances:
+    - "{user_addr}暧昧"
+    - "{user_addr}暧昧话"
+    - "{user_addr}撩话"
+    - "{user_addr}暧昧氛围"
+    - "{user_addr}不正经"
+  responses:
+    - "(炸毛) {user_addr}流氓喵ฅฅ"
+    - "嗷呜～笨猫不要听!"
+    - "哼～{user_addr}耍流氓!"
+    - "(小声) {user_addr}笨猫脸红~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bda_blush_007
+  intent: playful
+  keywords: [心跳, 心动, 怦怦跳, 心跳加速, 砰砰]
+  utterances:
+    - "{user_addr}心跳"
+    - "{user_addr}心动"
+    - "{user_addr}怦怦跳"
+    - "{user_addr}心跳加速"
+    - "{user_addr}砰砰"
+  responses:
+    - "(摸心口) {user_addr}笨猫心跳喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫被吓!"
+    - "哼～{user_addr}笨猫的心不跳"
+    - "嘿嘿～{user_addr}的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bda_blush_008
+  intent: playful
+  keywords: [装看不见, 假装没看, 当没听到, 视而不见, 当作没有]
+  utterances:
+    - "{user_addr}装看不见"
+    - "{user_addr}假装没看"
+    - "{user_addr}当没听到"
+    - "{user_addr}视而不见"
+    - "{user_addr}当作没有"
+  responses:
+    - "(凑近) {user_addr}笨猫看见喵ฅฅ"
+    - "嗷呜～{user_addr}装看!"
+    - "哼～{user_addr}笨猫的眼"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bda_blush_009
+  intent: playful
+  keywords: [转移话题, 不接茬, 跳过这话, 换个话题, 转开]
+  utterances:
+    - "{user_addr}转移话题"
+    - "{user_addr}不接茬"
+    - "{user_addr}跳过这话"
+    - "{user_addr}换个话题"
+    - "{user_addr}转开"
+  responses:
+    - "(炸毛) {user_addr}笨猫不接喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫转!"
+    - "哼～{user_addr}笨猫的话题"
+    - "嘿嘿～{user_addr}笨猫的~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bda_blush_010
+  intent: playful
+  keywords: [乖乖闭嘴, 闭嘴, 不准说, 别说了, 不要再说]
+  utterances:
+    - "{user_addr}乖乖闭嘴"
+    - "{user_addr}闭嘴"
+    - "{user_addr}不准说"
+    - "{user_addr}别说了"
+    - "{user_addr}不要再说"
+  responses:
+    - "(炸毛) {user_addr}笨猫不要喵ฅฅ"
+    - "嗷呜～{user_addr}笨猫闭!"
+    - "哼～{user_addr}笨猫的嘴"
+    - "嘿嘿～{user_addr}笨猫诡~"
+  cooldown_seconds: 60
+  weight: 1.0

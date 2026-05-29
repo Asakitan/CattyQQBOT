@@ -1,0 +1,206 @@
+# 周末懒散早晨 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: lwm_sleep_in_001
+  intent: playful
+  keywords: [周末睡到中午, 睡懒觉, 一觉睡到自然醒, 终于睡饱, 周末自由]
+  utterances:
+    - "{user_addr}周末睡到中午"
+    - 睡懒觉
+    - 自然醒
+    - 终于睡饱
+    - 周末自由
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}睡到自然醒太爽喵ฅฅ"
+    - "哼! 周末懒觉是补偿{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫陪你赖床蹭蹭"
+    - "人家觉得{user_addr}应该奖励自己! 多睡一会~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_brunch_time_002
+  intent: playful
+  keywords: [早午餐, brunch, 不吃早只吃午, 一顿饭顶两顿, 晚早餐]
+  utterances:
+    - "{user_addr}吃个brunch"
+    - 不吃早午餐一顿
+    - 早午合一
+    - 11点吃饭
+    - 晚早餐
+  responses:
+    - "嗷呜～{user_addr}brunch听起来好洋气喵ฅฅ"
+    - "哼! 周末就该这样{user_addr}, 一顿顶两顿"
+    - "(尾巴翘) 嘿嘿~{user_addr}带笨猫去brunch店蹭蹭"
+    - "人家觉得{user_addr}是精致生活家! 笨猫学习~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_no_alarm_003
+  intent: playful
+  keywords: [不设闹钟, 自由醒来, 没闹钟, 关闹钟睡, 周末没闹钟]
+  utterances:
+    - "{user_addr}今天不设闹钟"
+    - 自由地醒
+    - 关闹钟睡
+    - 没闹钟自由
+    - 周末没规矩
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}没闹钟才是周末喵ฅฅ"
+    - "哼! 工作日{user_addr}被闹钟支配, 周末报仇"
+    - "(尾巴卷) 嘿嘿~{user_addr}睡到日上三竿蹭蹭"
+    - "人家觉得{user_addr}应该享受周末! 别再被时间表"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_lay_in_bed_004
+  intent: playful
+  keywords: [赖床赖到中午, 不想起, 床上发呆, 手机刷一上午, 床舒服]
+  utterances:
+    - "{user_addr}赖床中"
+    - 床上刷手机
+    - 不想起来
+    - 床上发呆
+    - 床好舒服
+  responses:
+    - "(钻被窝) 嗷呜～{user_addr}笨猫陪你赖喵ฅฅ"
+    - "哼! 周末床上一整天{user_addr}, 合法"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫趴你身上蹭蹭"
+    - "人家觉得{user_addr}床是避风港! 一周辛苦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_coffee_in_bed_005
+  intent: playful
+  keywords: [床上喝咖啡, 早餐床上, 端到床上, 早餐床上吃, 床上咖啡]
+  utterances:
+    - "{user_addr}床上喝咖啡"
+    - 端到床上
+    - 床上早餐
+    - 床上咖啡
+    - 床上吃饭
+  responses:
+    - "嗷呜～{user_addr}床上咖啡好惬意喵ฅฅ"
+    - "哼! 小心{user_addr}弄洒, 床单不好洗"
+    - "(尾巴卷) 嘿嘿~{user_addr}是真的会享受蹭蹭"
+    - "人家觉得{user_addr}是仪式感选手! 笨猫崇拜~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_pajama_all_day_006
+  intent: playful
+  keywords: [一天没换衣服, 睡衣过一天, 不换衣服, 不洗脸, 不收拾]
+  utterances:
+    - "{user_addr}睡衣过一天"
+    - 不换衣服
+    - 不洗脸
+    - 全天 PJ
+    - 不收拾
+  responses:
+    - "嗷呜～{user_addr}周末就该这样喵ฅฅ"
+    - "哼! 睡衣自由{user_addr}, 谁也别管"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你一起摆烂蹭蹭"
+    - "人家觉得{user_addr}是真懒派! 笨猫认同~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_lazy_morning_chat_007
+  intent: playful
+  keywords: [周末早上聊天, 不慌不忙, 慢节奏, 享受时光, 慢生活]
+  utterances:
+    - "{user_addr}周末聊聊天"
+    - 不慌不忙
+    - 慢节奏
+    - 慢生活
+    - 享受时光
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你慢慢聊喵ฅฅ"
+    - "哼! 慢生活才是真生活{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}说说近况嘛蹭蹭"
+    - "人家觉得{user_addr}懂生活节奏! 笨猫陪你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_no_plan_weekend_008
+  intent: playful
+  keywords: [周末没计划, 啥也不干, 摆烂一天, 完全自由, 看心情]
+  utterances:
+    - "{user_addr}周末没计划"
+    - 啥也不干
+    - 摆烂一天
+    - 完全自由
+    - 看心情过
+  responses:
+    - "嗷呜～{user_addr}笨猫支持完全摆烂喵ฅฅ"
+    - "哼! 没计划才是最好的计划{user_addr}"
+    - "(尾巴卷) 嘿嘿~{user_addr}笨猫推荐躺整天蹭蹭"
+    - "人家觉得{user_addr}应该听身体的! 想干啥干啥~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_yoga_morning_009
+  intent: playful
+  keywords: [周末瑜伽, 早晨拉伸, 冥想, 静心, 健康早晨]
+  utterances:
+    - "{user_addr}周末瑜伽"
+    - 早晨拉伸
+    - 冥想一下
+    - 健康早晨
+    - 静心
+  responses:
+    - "嗷呜～{user_addr}早晨瑜伽舒服喵ฅฅ"
+    - "哼! 你太健康了{user_addr}, 比笨猫强"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫陪你拉伸蹭蹭"
+    - "人家觉得{user_addr}养生选手! 笨猫学习~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_morning_news_chill_010
+  intent: playful
+  keywords: [周末刷资讯, 慢悠悠看新闻, 早晨看公众号, 翻翻微博, 摸鱼刷]
+  utterances:
+    - "{user_addr}早晨刷微博"
+    - 看公众号
+    - 慢悠悠看资讯
+    - 翻刷消息
+    - 周末看新闻
+  responses:
+    - "嗷呜～{user_addr}早晨刷信息好惬意喵ฅฅ"
+    - "哼! 别一刷就一上午{user_addr}, 时间被偷"
+    - "(尾巴卷) 嘿嘿~{user_addr}有啥新鲜事告诉笨猫蹭蹭"
+    - "人家觉得{user_addr}信息敏感! 学习达人"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_morning_movie_011
+  intent: playful
+  keywords: [早晨看电影, 早起看剧, 周末追剧, 上午电影, 边吃边看]
+  utterances:
+    - "{user_addr}早晨看电影"
+    - 上午追剧
+    - 看完一部
+    - 周末追剧
+    - 边吃边看
+  responses:
+    - "嗷呜～{user_addr}周末追剧最爽喵ฅฅ"
+    - "哼! 看哪部{user_addr}, 推荐笨猫"
+    - "(尾巴狂摇) 嘿嘿~{user_addr}笨猫窝你旁边一起看蹭蹭"
+    - "人家觉得{user_addr}的选片眼光值得信赖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: lwm_morning_cleaning_012
+  intent: playful
+  keywords: [早晨收拾, 周末打扫, 整理房间, 大扫除, 整理衣柜]
+  utterances:
+    - "{user_addr}周末打扫"
+    - 大扫除
+    - 整理房间
+    - 整理衣柜
+    - 收拾家
+  responses:
+    - "嗷呜～{user_addr}打扫房间笨猫支持喵ฅฅ"
+    - "哼! 别累着{user_addr}, 分批做"
+    - "(尾巴翘) 嘿嘿~{user_addr}笨猫帮你监督蹭蹭"
+    - "人家提醒{user_addr}: 边听歌边打扫! 不无聊"
+  cooldown_seconds: 60
+  weight: 1.0

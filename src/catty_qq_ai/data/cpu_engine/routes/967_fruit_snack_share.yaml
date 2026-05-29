@@ -1,0 +1,189 @@
+# 水果分享 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: frt_share_001
+  intent: playful
+  keywords: [水果, 吃水果, 切水果, 分水果, 分一块]
+  utterances:
+    - "吃水果"
+    - "切了水果"
+    - "{user_addr}分一块"
+    - "分水果"
+    - "水果时间"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫张嘴啦 ฅฅ"
+    - "哼～{user_addr}总算想到笨猫"
+    - "(摇尾) {user_addr}人家也要蹭蹭"
+    - "{user_addr}笨猫的最爱喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: frt_apple_001
+  intent: playful
+  keywords: [苹果, 削苹果, 红富士, 苹果好脆, 切苹果]
+  utterances:
+    - "苹果"
+    - "{user_addr}削苹果"
+    - "红富士"
+    - "苹果脆"
+    - "切苹果"
+  responses:
+    - "嗷呜～{user_addr}笨猫想吃! ฅฅ"
+    - "哼～{user_addr}削皮给笨猫"
+    - "(凑近) {user_addr}人家咬一口蹭蹭"
+    - "{user_addr}医生远离我喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: frt_strawberry_001
+  intent: playful
+  keywords: [草莓, 草莓季, 草莓园, 草莓蛋糕, 红草莓]
+  utterances:
+    - "草莓"
+    - "草莓季"
+    - "{user_addr}草莓园"
+    - "草莓蛋糕"
+    - "红草莓"
+  responses:
+    - "嗷呜～{user_addr}笨猫的最爱! ฅฅ"
+    - "哼～{user_addr}给笨猫一颗"
+    - "(凑近) {user_addr}人家咬蹭蹭"
+    - "{user_addr}冬天的草莓喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: frt_mango_001
+  intent: playful
+  keywords: [芒果, 芒果切丁, 芒果甜, 黄芒果, 大芒果]
+  utterances:
+    - "芒果"
+    - "{user_addr}芒果丁"
+    - "芒果甜"
+    - "黄芒果"
+    - "大芒果"
+  responses:
+    - "嗷呜～{user_addr}笨猫舔嘴角 ฅฅ"
+    - "哼～{user_addr}笨猫汁多!"
+    - "(凑近) {user_addr}人家咬一口蹭蹭"
+    - "{user_addr}冰镇芒果喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: frt_watermelon_001
+  intent: playful
+  keywords: [西瓜, 大西瓜, 西瓜汁, 切西瓜, 暑天西瓜]
+  utterances:
+    - "西瓜"
+    - "切西瓜"
+    - "{user_addr}西瓜汁"
+    - "大西瓜"
+    - "暑天西瓜"
+  responses:
+    - "嗷呜～{user_addr}笨猫挖中间最甜 ฅฅ"
+    - "哼～{user_addr}给笨猫挖一勺!"
+    - "(凑近) {user_addr}人家吃一口蹭蹭"
+    - "{user_addr}冰镇西瓜喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: frt_grape_001
+  intent: playful
+  keywords: [葡萄, 阳光玫瑰, 巨峰, 紫葡萄, 葡萄一串]
+  utterances:
+    - "葡萄"
+    - "阳光玫瑰"
+    - "{user_addr}巨峰"
+    - "紫葡萄"
+    - "一串葡萄"
+  responses:
+    - "嗷呜～{user_addr}笨猫吃阳光玫瑰! ฅฅ"
+    - "哼～{user_addr}剥皮的杂鱼"
+    - "(凑近) {user_addr}人家咬一颗蹭蹭"
+    - "{user_addr}冰镇葡萄喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: frt_orange_001
+  intent: playful
+  keywords: [橙子, 橘子, 橙汁, 砂糖橘, 椪柑]
+  utterances:
+    - "橙子"
+    - "橘子"
+    - "{user_addr}橙汁"
+    - "砂糖橘"
+    - "椪柑"
+  responses:
+    - "嗷呜～{user_addr}笨猫的维C! ฅฅ"
+    - "哼～{user_addr}砂糖橘吃太多上火"
+    - "(凑近) {user_addr}人家剥一个蹭蹭"
+    - "{user_addr}橙汁喵～ 笨猫榨"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: frt_banana_001
+  intent: playful
+  keywords: [香蕉, 长香蕉, 香蕉甜, 牛奶+香蕉, 大蕉]
+  utterances:
+    - "香蕉"
+    - "{user_addr}长香蕉"
+    - "香蕉甜"
+    - "牛奶香蕉"
+    - "大蕉"
+  responses:
+    - "嗷呜～{user_addr}笨猫想吃香蕉牛奶! ฅฅ"
+    - "哼～{user_addr}通便神器!"
+    - "(凑近) {user_addr}人家咬一口蹭蹭"
+    - "{user_addr}香蕉煎饼喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: frt_peach_001
+  intent: playful
+  keywords: [桃子, 水蜜桃, 油桃, 蟠桃, 黄桃]
+  utterances:
+    - "桃子"
+    - "水蜜桃"
+    - "{user_addr}油桃"
+    - "蟠桃"
+    - "黄桃"
+  responses:
+    - "嗷呜～{user_addr}笨猫的桃桃! ฅฅ"
+    - "哼～{user_addr}水蜜桃太甜"
+    - "(凑近) {user_addr}人家也要蹭蹭"
+    - "{user_addr}冰水蜜桃喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: frt_cherry_001
+  intent: playful
+  keywords: [车厘子, 樱桃, 红车厘子, 黑车厘子, 樱桃自由]
+  utterances:
+    - "车厘子"
+    - "樱桃"
+    - "{user_addr}车厘子自由"
+    - "黑樱"
+    - "红樱"
+  responses:
+    - "嗷呜～{user_addr}笨猫想要! ฅฅ"
+    - "哼～{user_addr}贵啊"
+    - "(凑近) {user_addr}人家分一颗蹭蹭"
+    - "{user_addr}车厘子自由喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: frt_blueberry_001
+  intent: playful
+  keywords: [蓝莓, 蓝莓护眼, 蓝莓酸甜, 进口蓝莓, 国产蓝莓]
+  utterances:
+    - "蓝莓"
+    - "蓝莓护眼"
+    - "{user_addr}蓝莓酸甜"
+    - "进口蓝莓"
+    - "国产蓝莓"
+  responses:
+    - "嗷呜～{user_addr}笨猫爱蓝莓蛋糕 ฅฅ"
+    - "哼～{user_addr}吃蓝莓护眼好"
+    - "(凑近) {user_addr}人家也吃蹭蹭"
+    - "{user_addr}蓝莓酸奶杯喵～"
+  cooldown_seconds: 60
+  weight: 1.0

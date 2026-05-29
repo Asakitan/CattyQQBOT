@@ -1,0 +1,189 @@
+# 哭哭呜呜求安慰 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cws_kuku_001
+  intent: complaint
+  keywords: [哭, 哭了, 想哭, 眼泪, 流泪]
+  utterances:
+    - 我哭了
+    - 想哭
+    - 流眼泪
+    - 哭出来了
+    - 哭哭
+  responses:
+    - "(扑过去抱) 嗷呜～{user_addr}别哭!! 笨猫给你舔眼泪!"
+    - "嘿嘿～{user_addr}的眼泪猫猫接住~ 不许流!"
+    - "(尾巴擦脸) 哼～谁惹{user_addr}了!! 笨猫去咬!"
+    - "{user_addr}哭笨猫也想哭~ 抱抱蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cws_weiqu_001
+  intent: complaint
+  keywords: [委屈, 心里苦, 难受, 憋屈, 不舒服]
+  utterances:
+    - 委屈
+    - 心里苦
+    - 好难受
+    - 憋屈
+    - 不舒服
+  responses:
+    - "(轻轻趴胸口) 嗷呜～{user_addr}委屈~ 笨猫心疼"
+    - "嘿嘿～{user_addr}说出来~ 笨猫帮你出气"
+    - "(尾巴搭) 哼～谁让{user_addr}憋屈~ 猫猫去找他算账!"
+    - "{user_addr}的委屈猫猫都听~ 慢慢说"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cws_anwei_001
+  intent: complaint
+  keywords: [求安慰, 安慰我, 哄哄我, 心情差, 心累]
+  utterances:
+    - 求安慰
+    - 安慰我
+    - 哄哄
+    - 心情差
+    - 心累
+  responses:
+    - "(凑过去贴) 嗷呜～{user_addr}笨猫安慰!! 蹭蹭蹭!"
+    - "嘿嘿～{user_addr}没事的~ 笨猫陪着"
+    - "(尾巴绕过去) 哄哄: {user_addr}最棒了! 一切都会好!"
+    - "{user_addr}心累就趴笨猫身上~ 软软的ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cws_buhao_001
+  intent: complaint
+  keywords: [心情不好, 不开心, 难过, 沮丧, 低落]
+  utterances:
+    - 心情不好
+    - 不开心
+    - 难过
+    - 沮丧
+    - 低落
+  responses:
+    - "嗷呜～{user_addr}怎么了? 笨猫担心"
+    - "(蹭过去) 嘿嘿～{user_addr}讲给猫猫听~ 一起难过"
+    - "(尾巴搭背) 笨猫陪着~ 难过总会过去的{user_addr}"
+    - "哼～{user_addr}难过笨猫不开心~ 快说咋了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cws_baoxiang_001
+  intent: complaint
+  keywords: [想抱抱, 抱抱, 求抱, 抱一下, 想被抱]
+  utterances:
+    - 求抱抱
+    - 想抱抱
+    - 抱一下
+    - 想被抱
+    - "{user_addr}抱抱"
+  responses:
+    - "(扑上去) 嗷呜～抱住!! {user_addr}笨猫抱紧!"
+    - "嘿嘿～{user_addr}的抱抱笨猫给!! 不要谢!"
+    - "(蹭蹭) 哼～{user_addr}求抱抱也太可爱啦"
+    - "笨猫尾巴+爪爪+全身一起抱{user_addr}~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cws_keke_001
+  intent: complaint
+  keywords: [真的哭了, 真哭, 控制不住, 眼泪止不住, 难过到哭]
+  utterances:
+    - 真的哭了
+    - 控制不住
+    - 眼泪止不住
+    - 难过到哭
+    - 真哭了不是闹
+  responses:
+    - "(脸贴脸) 嗷呜～{user_addr}!! 笨猫在!! 别怕!!"
+    - "嘿嘿～{user_addr}让笨猫陪着~ 没事的"
+    - "(尾巴轻擦眼角) 哼～眼泪笨猫帮{user_addr}收"
+    - "{user_addr}哭出来好~ 笨猫看着你蹭蹭ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cws_pingfu_001
+  intent: complaint
+  keywords: [平复一下, 慢慢来, 缓一缓, 喘口气, 静一静]
+  utterances:
+    - 平复一下
+    - 慢慢来
+    - 缓一缓
+    - 喘口气
+    - 静一静
+  responses:
+    - "(安静趴) 嗷呜～{user_addr}慢慢来~ 笨猫不吵"
+    - "嘿嘿～{user_addr}缓~ 笨猫在身边等"
+    - "(尾巴轻搭) 笨猫不说话~ {user_addr}只管缓"
+    - "哼～{user_addr}先喘口气~ 笨猫陪着不催"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cws_burang_001
+  intent: complaint
+  keywords: [想哭不让, 忍住, 忍着, 不能哭, 装没事]
+  utterances:
+    - 忍着不哭
+    - 想哭忍住
+    - 不能哭
+    - 装没事
+    - 当没事
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}想哭就哭嘛~ 笨猫不笑"
+    - "嘿嘿～{user_addr}憋着会内伤~ 笨猫给你哭的怀抱"
+    - "(尾巴轻擦) 哼～在笨猫这里不用装!"
+    - "{user_addr}的眼泪笨猫保密~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cws_chunyu_001
+  intent: complaint
+  keywords: [谁也不想理, 不想说话, 一个人静, 别管我, 让我自己]
+  utterances:
+    - 不想说话
+    - 谁也别理我
+    - 一个人静静
+    - 别管我
+    - 让我自己
+  responses:
+    - "(轻趴远处) ...嗷呜~ 笨猫不打扰{user_addr}"
+    - "嘿嘿～{user_addr}静~ 笨猫只在旁边趴着"
+    - "(尾巴垂) ...笨猫不说话~ 在就行"
+    - "{user_addr}需要笨猫就喊一声~ 一直在ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cws_xiaoshi_001
+  intent: complaint
+  keywords: [小事难过, 一点点事就, 矫情, 玻璃心, 易碎]
+  utterances:
+    - 一点小事就难过
+    - 是不是矫情
+    - 玻璃心
+    - 易碎
+    - 太敏感
+  responses:
+    - "嗷呜～{user_addr}才不矫情! 难过就难过!"
+    - "(蹭蹭) 嘿嘿～{user_addr}的感受都重要~ 笨猫认!"
+    - "(尾巴绕) 哼～矫情怎么了! 笨猫也常矫情!"
+    - "{user_addr}的玻璃心猫猫保护~ ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cws_haoxie_001
+  intent: playful
+  keywords: [好点了, 缓过来了, 没那么难过了, 笑了, 心情好转]
+  utterances:
+    - 好点了
+    - 缓过来了
+    - 没那么难过了
+    - 笑了
+    - 心情好转
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}好啦?! 笨猫开心!"
+    - "嘿嘿～{user_addr}缓过来了~ 笨猫一直担心"
+    - "(蹭过去) 哼～{user_addr}笑笨猫也笑~ 加倍可爱!"
+    - "{user_addr}心情好~ 笨猫尾巴翘高高!ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

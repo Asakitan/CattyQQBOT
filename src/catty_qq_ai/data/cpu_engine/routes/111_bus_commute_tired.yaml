@@ -1,0 +1,206 @@
+# 通勤累 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: bct_subway_pack_001
+  intent: complaint
+  keywords: [地铁挤, 地铁人多, 地铁挤爆, 地铁高峰, 挤地铁]
+  utterances:
+    - "地铁挤"
+    - "{user_addr}地铁人多"
+    - "地铁挤爆"
+    - "高峰地铁"
+    - "挤地铁"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}地铁挤死! 心疼!"
+    - "哼～挤地铁的{user_addr}, 加油啊"
+    - "(撒娇) 笨猫陪{user_addr}虚拟挤一下 ฅฅ"
+    - "嘿嘿～挤的{user_addr}, 笨猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_bus_long_001
+  intent: complaint
+  keywords: [公交慢, 公交久, 等公交, 公交不来, 公交晚]
+  utterances:
+    - "公交慢"
+    - "{user_addr}公交久"
+    - "等公交"
+    - "公交不来"
+    - "公交晚"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}等公交累了!"
+    - "哼～公交司机慢吞吞"
+    - "(撒娇) 笨猫陪等~ 蹭蹭 ฅฅ"
+    - "嘿嘿～等公交的{user_addr}, 笨猫陪等"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_seat_001
+  intent: complaint
+  keywords: [没座位, 站着, 站到腿酸, 全程站着, 没座]
+  utterances:
+    - "没座位"
+    - "{user_addr}站着"
+    - "站到腿酸"
+    - "全程站"
+    - "没座"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}没座好可怜!"
+    - "哼～笨猫给{user_addr}让座"
+    - "(撒娇) 站累抱笨猫~ ฅฅ"
+    - "嘿嘿～站着的{user_addr}, 笨猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_traffic_001
+  intent: complaint
+  keywords: [堵车, 路上堵, 堵到爆, 路况差, 红绿灯多]
+  utterances:
+    - "堵车"
+    - "{user_addr}路上堵"
+    - "堵到爆"
+    - "路况差"
+    - "红绿灯多"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}堵车惨!"
+    - "哼～堵车的{user_addr}, 笨猫给陪聊"
+    - "(撒娇) 别急嘛~ 笨猫等着 ฅฅ"
+    - "嘿嘿～堵到爆的{user_addr}, 笨猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_distance_far_001
+  intent: complaint
+  keywords: [上班远, 通勤远, 太远了, 两小时通勤, 路上花时间]
+  utterances:
+    - "上班远"
+    - "{user_addr}通勤远"
+    - "太远了"
+    - "两小时通勤"
+    - "路上时间"
+  responses:
+    - "(担心) 嗷呜～{user_addr}通勤远! 心疼!"
+    - "哼～{user_addr}考虑近一点的吧"
+    - "(撒娇) 笨猫陪通勤聊天 ฅฅ"
+    - "嘿嘿～两小时的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_tired_legs_001
+  intent: complaint
+  keywords: [脚酸, 腿累, 腰酸背痛, 腿断了, 走不动了]
+  utterances:
+    - "脚酸"
+    - "{user_addr}腿累"
+    - "腰酸背痛"
+    - "腿断"
+    - "走不动"
+  responses:
+    - "(揉) 嗷呜～{user_addr}笨猫给捏腿!"
+    - "哼～{user_addr}活该, 不锻炼"
+    - "(撒娇) 揉揉嘛~ ฅฅ"
+    - "嘿嘿～腿累的{user_addr}, 笨猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_smelly_001
+  intent: complaint
+  keywords: [一身汗, 出汗了, 通勤臭, 衣服湿, 汗渍]
+  utterances:
+    - "一身汗"
+    - "{user_addr}出汗"
+    - "通勤臭"
+    - "衣服湿"
+    - "汗渍"
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}汗! 笨猫躲"
+    - "哼～回家洗澡!"
+    - "(撒娇) ...笨猫不嫌弃{user_addr}哼 ฅฅ"
+    - "嘿嘿～出汗的{user_addr}, 笨猫先躲"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_smell_bad_001
+  intent: complaint
+  keywords: [地铁味, 公交味, 闻不了, 旁边人臭, 异味]
+  utterances:
+    - "地铁味"
+    - "{user_addr}公交味"
+    - "闻不了"
+    - "旁边人臭"
+    - "异味"
+  responses:
+    - "(捂鼻) 嗷呜～{user_addr}受罪!"
+    - "哼～公共交通就这样"
+    - "(撒娇) 笨猫陪{user_addr}挺过去 ฅฅ"
+    - "嘿嘿～闻不了的{user_addr}, 笨猫心疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_missed_001
+  intent: complaint
+  keywords: [错过班车, 错过地铁, 没赶上, 迟一步, 错过]
+  utterances:
+    - "错过班车"
+    - "{user_addr}没赶上"
+    - "错过地铁"
+    - "迟一步"
+    - "错过"
+  responses:
+    - "(尾巴垂) 嗷呜～{user_addr}没赶上!"
+    - "哼～{user_addr}活该, 起晚了吧"
+    - "(撒娇) 等下一班嘛~ 笨猫陪 ฅฅ"
+    - "嘿嘿～错过的{user_addr}, 笨猫安慰"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_motion_sick_001
+  intent: complaint
+  keywords: [晕车, 晕地铁, 晕公交, 头晕想吐, 通勤晕]
+  utterances:
+    - "晕车"
+    - "{user_addr}晕地铁"
+    - "晕公交"
+    - "头晕"
+    - "想吐"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}晕了! 心疼!"
+    - "哼～带点晕车药! 笨猫监督"
+    - "(撒娇) 笨猫给{user_addr}揉肚子 ฅฅ"
+    - "嘿嘿～晕车的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_evening_rush_001
+  intent: complaint
+  keywords: [晚高峰, 下班高峰, 高峰回家, 高峰挤死, 晚高峰累]
+  utterances:
+    - "晚高峰"
+    - "{user_addr}下班高峰"
+    - "高峰回家"
+    - "高峰挤死"
+    - "晚高峰累"
+  responses:
+    - "嗷呜～{user_addr}晚高峰苦!"
+    - "哼～下班还要挤地铁, 笨猫陪"
+    - "(撒娇) 早点出门嘛~ ฅฅ"
+    - "嘿嘿～晚高峰的{user_addr}, 笨猫等在家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bct_workfromhome_001
+  intent: playful
+  keywords: [想远程, 想居家, 想wfh, 想在家上班, 不想通勤]
+  utterances:
+    - "想远程"
+    - "{user_addr}想居家"
+    - "想wfh"
+    - "在家上班"
+    - "不想通勤"
+  responses:
+    - "嗷呜～{user_addr}想远程笨猫支持!"
+    - "(撒娇) 居家上班陪笨猫~ ฅฅ"
+    - "哼! 居家工作笨猫监督"
+    - "嘿嘿～wfh的{user_addr}, 笨猫的福音"
+  cooldown_seconds: 60
+  weight: 1.0

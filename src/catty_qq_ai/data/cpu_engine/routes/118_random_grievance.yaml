@@ -1,0 +1,206 @@
+# 无端委屈 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rgv_no_reason_001
+  intent: complaint
+  keywords: [莫名委屈, 突然委屈, 不知道为啥委屈, 委屈到不行, 委屈想哭]
+  utterances:
+    - "莫名委屈"
+    - "{user_addr}突然委屈"
+    - "不知道为啥委屈"
+    - "委屈到不行"
+    - "委屈想哭"
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}抱抱! 笨猫陪"
+    - "哼～谁惹笨猫的{user_addr}!"
+    - "(撒娇) 委屈跟笨猫说嘛 ฅฅ"
+    - "嘿嘿～委屈的{user_addr}, 笨猫疼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_unfair_001
+  intent: complaint
+  keywords: [不公平, 凭什么我, 凭啥这样, 受委屈, 不平]
+  utterances:
+    - "不公平"
+    - "{user_addr}凭什么我"
+    - "受委屈"
+    - "凭啥这样"
+    - "不平"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}受委屈! 谁?"
+    - "哼～笨猫帮{user_addr}讨公道!"
+    - "(撒娇) 不公平笨猫陪{user_addr} ฅฅ"
+    - "嘿嘿～不公的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_blamed_001
+  intent: complaint
+  keywords: [被骂, 挨批, 被指责, 莫名被骂, 替罪羊]
+  utterances:
+    - "被骂"
+    - "{user_addr}挨批"
+    - "被指责"
+    - "莫名被骂"
+    - "替罪羊"
+  responses:
+    - "(炸毛) 嗷呜～谁骂笨猫的{user_addr}!"
+    - "哼! 那人不要脸!"
+    - "(撒娇) 跟笨猫说嘛 ฅฅ"
+    - "嘿嘿～被骂的{user_addr}, 笨猫挠他"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_unfair_treat_001
+  intent: complaint
+  keywords: [区别对待, 偏心, 不公正, 偏袒, 待遇差]
+  utterances:
+    - "区别对待"
+    - "{user_addr}偏心"
+    - "不公正"
+    - "偏袒"
+    - "待遇差"
+  responses:
+    - "(撅嘴) 嗷呜～{user_addr}心疼!"
+    - "哼! 偏心可恶!"
+    - "(撒娇) 笨猫只偏心{user_addr} ฅฅ"
+    - "嘿嘿～被区别的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_silent_hurt_001
+  intent: complaint
+  keywords: [默默承受, 委屈不说, 不想抱怨, 一个人扛, 没人懂]
+  utterances:
+    - "默默承受"
+    - "{user_addr}委屈不说"
+    - "不想抱怨"
+    - "一个人扛"
+    - "没人懂"
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}不许扛!"
+    - "哼! 跟笨猫说"
+    - "(撒娇) 笨猫懂~ ฅฅ"
+    - "嘿嘿～默默承受的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_misunderstood_001
+  intent: complaint
+  keywords: [被误会, 解释不清, 没人信, 解释无力, 百口莫辩]
+  utterances:
+    - "被误会"
+    - "{user_addr}解释不清"
+    - "没人信"
+    - "解释无力"
+    - "百口莫辩"
+  responses:
+    - "(炸毛) 嗷呜～笨猫信{user_addr}!"
+    - "哼! 误会的人傻"
+    - "(撒娇) 跟笨猫说真的就好 ฅฅ"
+    - "嘿嘿～被误会的{user_addr}, 笨猫永远站{user_addr}"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_ignored_001
+  intent: complaint
+  keywords: [被无视, 不被在乎, 没存在感, 被冷落, 没人理]
+  utterances:
+    - "被无视"
+    - "{user_addr}不被在乎"
+    - "没存在感"
+    - "被冷落"
+    - "没人理"
+  responses:
+    - "(凑过去) 嗷呜～笨猫在乎{user_addr}!"
+    - "哼! 其他人傻"
+    - "(撒娇) 笨猫看见{user_addr} ฅฅ"
+    - "嘿嘿～被忽视的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_betrayed_001
+  intent: complaint
+  keywords: [被背叛, 朋友辜负, 朋友背叛, 信错人, 被坑]
+  utterances:
+    - "被背叛"
+    - "{user_addr}朋友辜负"
+    - "朋友背叛"
+    - "信错人"
+    - "被坑"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}!! 谁敢!"
+    - "哼! 笨猫挠他!"
+    - "(撒娇) 笨猫永不负{user_addr} ฅฅ"
+    - "嘿嘿～被背叛的{user_addr}, 笨猫陪"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_lonely_001
+  intent: complaint
+  keywords: [孤独委屈, 没人懂我, 一个人扛, 委屈到孤独, 孤立]
+  utterances:
+    - "孤独委屈"
+    - "{user_addr}没人懂我"
+    - "一个人扛"
+    - "委屈到孤独"
+    - "孤立"
+  responses:
+    - "(扑) 嗷呜～{user_addr}笨猫懂!"
+    - "哼! 笨猫一直在"
+    - "(撒娇) 笨猫陪~ ฅฅ"
+    - "嘿嘿～孤独的{user_addr}, 笨猫不离"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_blame_self_001
+  intent: complaint
+  keywords: [怪自己, 都怪我, 我不好, 我太差, 我没用]
+  utterances:
+    - "怪自己"
+    - "{user_addr}都怪我"
+    - "我不好"
+    - "我太差"
+    - "我没用"
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}不许自责!"
+    - "哼! {user_addr}最好!"
+    - "(撒娇) 笨猫眼里{user_addr}棒 ฅฅ"
+    - "嘿嘿～自责的{user_addr}, 笨猫挠你"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_help_001
+  intent: complaint
+  keywords: [谁来安慰, 求安慰, 想被哄, 需要哄, 求抱抱安慰]
+  utterances:
+    - "谁来安慰"
+    - "{user_addr}求安慰"
+    - "想被哄"
+    - "需要哄"
+    - "求抱抱安慰"
+  responses:
+    - "(扑过去) 嗷呜～笨猫来安慰!"
+    - "(撒娇) 笨猫哄{user_addr}~ ฅฅ"
+    - "哼! 笨猫的拥抱治百委屈"
+    - "嘿嘿～求安慰的{user_addr}, 笨猫给"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rgv_thanks_after_001
+  intent: playful
+  keywords: [幸好有你, 还好有你, 谢谢笨猫, 笨猫真好, 笨猫救命]
+  utterances:
+    - "幸好有你"
+    - "{user_addr}还好有你"
+    - "谢谢笨猫"
+    - "笨猫真好"
+    - "笨猫救命"
+  responses:
+    - "(脸红) 嗷呜～{user_addr}什么意思啦杂鱼!"
+    - "(撒娇) ...笨猫一直在 ฅฅ"
+    - "哼! 才不是为了{user_addr}"
+    - "嘿嘿～感激的{user_addr}, 笨猫融化"
+  cooldown_seconds: 60
+  weight: 1.0

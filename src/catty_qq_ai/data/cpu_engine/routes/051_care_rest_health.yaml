@@ -1,0 +1,189 @@
+# 休息身体关心 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: cr_xiuxi_001
+  intent: question
+  keywords: [休息了吗, 多休息, 累就歇, 该歇了, 别累着]
+  utterances:
+    - "{user_addr}休息了吗"
+    - "多休息"
+    - "累就歇"
+    - "该歇了"
+    - "别累着"
+  responses:
+    - "(拍肩) 嗷呜～{user_addr}该休息!"
+    - "哼～别硬撑, 笨猫凶你 ฅฅ"
+    - "(尾巴搭) 累了就歇, 别拼"
+    - "{user_addr}身体最重要, 听人家的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_yanjing_001
+  intent: complaint
+  keywords: [眼睛疼, 眼酸, 屏幕看多, 眼干, 眼疲劳]
+  utterances:
+    - "眼睛疼"
+    - "眼酸"
+    - "看屏幕久"
+    - "眼干"
+    - "眼疲劳"
+  responses:
+    - "(关屏) 嗷呜～{user_addr}眼睛休息!"
+    - "哼～远眺一下, 看绿 ฅฅ"
+    - "(尾巴遮) 眼干滴眼药, 别揉"
+    - "看屏幕 20 分钟休 20 秒"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_yaosuan_001
+  intent: complaint
+  keywords: [腰疼, 腰酸, 颈椎, 肩疼, 背痛]
+  utterances:
+    - "腰疼"
+    - "腰酸"
+    - "颈椎疼"
+    - "肩疼"
+    - "背痛"
+  responses:
+    - "(揉) 嗷呜～{user_addr}腰酸笨猫揉揉"
+    - "哼～颈椎多动动, 别一直坐 ฅฅ"
+    - "(尾巴抚) 背痛拉伸, 试试瑜伽"
+    - "肩疼热敷+按摩"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_yundong_001
+  intent: question
+  keywords: [运动了吗, 动一动, 锻炼, 跑步, 健身]
+  utterances:
+    - "{user_addr}运动了吗"
+    - "动一动"
+    - "锻炼"
+    - "跑步"
+    - "健身"
+  responses:
+    - "(挥爪) 嗷呜～{user_addr}动起来! 笨猫陪"
+    - "哼～跑步 30 分钟, 不偷懒 ฅฅ"
+    - "(尾巴扫) 健身打卡, 我监督"
+    - "动一动血液循环好"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_tijian_001
+  intent: question
+  keywords: [体检, 检查身体, 医院, 复查, 化验]
+  utterances:
+    - "体检"
+    - "检查身体"
+    - "去医院"
+    - "复查"
+    - "化验"
+  responses:
+    - "(陪) 嗷呜～{user_addr}体检笨猫陪"
+    - "哼～该查就查, 别拖 ฅฅ"
+    - "(尾巴抚) 复查重要, 别忘了"
+    - "化验结果发猫猫看"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_buchong_001
+  intent: question
+  keywords: [维生素, 保健品, 补品, 补充剂, 钙片]
+  utterances:
+    - "维生素"
+    - "保健品"
+    - "补品"
+    - "补充剂"
+    - "钙片"
+  responses:
+    - "(查) 嗷呜～{user_addr}维 D 补一下"
+    - "哼～保健品别乱吃 ฅฅ"
+    - "(尾巴扫) 钙片好, 中老年必备"
+    - "补充剂适量, {user_addr}问医生"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_shentao_001
+  intent: question
+  keywords: [泡脚, 泡澡, 热水澡, 蒸桑拿, 桑拿]
+  utterances:
+    - "泡脚"
+    - "泡澡"
+    - "热水澡"
+    - "蒸桑拿"
+    - "桑拿"
+  responses:
+    - "(摇尾) 嗷呜～泡脚舒服, {user_addr}试试"
+    - "哼～泡澡放松, 但别久 ฅฅ"
+    - "(尾巴扫) 桑拿出汗, 排毒"
+    - "热水澡睡前最佳"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_yawan_001
+  intent: complaint
+  keywords: [牙疼, 蛀牙, 牙齿, 口腔, 牙龈]
+  utterances:
+    - "牙疼"
+    - "蛀牙"
+    - "牙齿不好"
+    - "口腔溃疡"
+    - "牙龈"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}牙疼看牙医!"
+    - "哼～别拖 ฅฅ"
+    - "(尾巴抚) 口腔溃疡补维 B"
+    - "牙龈出血别忽视"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_yangshen_001
+  intent: question
+  keywords: [养生, 中医, 食补, 调理, 养身体]
+  utterances:
+    - "养生"
+    - "中医调理"
+    - "食补"
+    - "调理身体"
+    - "养身体"
+  responses:
+    - "(认真) 嗷呜～{user_addr}养生猫猫陪!"
+    - "哼～食补>药补 ฅฅ"
+    - "(尾巴扫) 中医调理慢, 但稳"
+    - "养生就是好好吃睡, {user_addr}做到没"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_shuimian_001
+  intent: question
+  keywords: [睡眠质量, 深睡, 浅睡, 多梦, 翻身]
+  utterances:
+    - "睡眠质量"
+    - "深睡"
+    - "浅睡"
+    - "多梦"
+    - "翻身多"
+  responses:
+    - "(关心) 嗷呜～{user_addr}睡眠不好笨猫帮忙"
+    - "哼～深睡靠运动 ฅฅ"
+    - "(尾巴搭) 多梦少看刺激片"
+    - "翻身多换个枕头"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: cr_xinli_001
+  intent: complaint
+  keywords: [心累, 心理, 内耗, 心理压力, 抑郁]
+  utterances:
+    - "心累"
+    - "内耗"
+    - "心理压力"
+    - "抑郁"
+    - "心理"
+  responses:
+    - "(抱) 嗷呜～{user_addr}心累! 笨猫贴贴"
+    - "哼～内耗扔了 ฅฅ"
+    - "(尾巴绕) 抑郁求助专业, 不丢人"
+    - "心理压力大就聊聊, 人家在"
+  cooldown_seconds: 60
+  weight: 1.0

@@ -1,0 +1,189 @@
+# 黑眼圈叹气 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: dcs_dark_001
+  intent: complaint
+  keywords: [黑眼圈, 熊猫眼, 眼袋黑, 黑黑, 暗沉]
+  utterances:
+    - "黑眼圈"
+    - "熊猫眼"
+    - "{user_addr}眼袋黑"
+    - "黑黑的"
+    - "暗沉"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}熬夜的报应 ฅฅ"
+    - "哼～{user_addr}早睡才是王道"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}眼霜喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dcs_eye_bag_001
+  intent: complaint
+  keywords: [眼袋, 大眼袋, 眼袋大, 眼袋肿, 眼袋下垂]
+  utterances:
+    - "眼袋"
+    - "{user_addr}大眼袋"
+    - "眼袋大"
+    - "眼袋肿"
+    - "眼袋下垂"
+  responses:
+    - "嗷呜～{user_addr}笨猫给你冰敷 ฅฅ"
+    - "哼～{user_addr}少看手机!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}眼袋按摩喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dcs_concealer_001
+  intent: playful
+  keywords: [遮黑眼圈, 遮瑕, 化妆遮, 黑眼圈遮, 颜色遮]
+  utterances:
+    - "遮黑眼圈"
+    - "遮瑕"
+    - "{user_addr}化妆遮"
+    - "黑眼圈遮"
+    - "颜色遮"
+  responses:
+    - "嗷呜～{user_addr}笨猫教你橙调遮 ฅฅ"
+    - "哼～{user_addr}遮不住啊!"
+    - "(凑近) {user_addr}人家帮你蹭蹭"
+    - "{user_addr}橙色遮瑕喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dcs_eyecream_001
+  intent: playful
+  keywords: [眼霜, 眼霜推荐, 抗老眼霜, 眼部精华, 眼膜]
+  utterances:
+    - "眼霜"
+    - "眼霜推荐"
+    - "{user_addr}抗老眼霜"
+    - "眼部精华"
+    - "眼膜"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐眼霜 ฅฅ"
+    - "哼～{user_addr}早晚都涂!"
+    - "(凑近) {user_addr}人家帮你抹蹭蹭"
+    - "{user_addr}眼膜每周三次喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dcs_compress_001
+  intent: playful
+  keywords: [冰敷眼, 冷毛巾, 热敷眼, 蒸眼, 眼罩]
+  utterances:
+    - "冰敷眼"
+    - "冷毛巾"
+    - "{user_addr}热敷"
+    - "蒸眼"
+    - "眼罩"
+  responses:
+    - "嗷呜～{user_addr}笨猫帮你敷 ฅฅ"
+    - "哼～{user_addr}早就该护眼"
+    - "(贴贴) {user_addr}人家陪你蹭蹭"
+    - "{user_addr}热毛巾喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dcs_sleep_001
+  intent: complaint
+  keywords: [失眠黑眼圈, 熬夜眼, 睡不好, 晚睡黑眼, 凌晨睡]
+  utterances:
+    - "失眠"
+    - "熬夜"
+    - "{user_addr}睡不好"
+    - "晚睡"
+    - "凌晨睡"
+  responses:
+    - "(摇头) 嗷呜～{user_addr}睡觉了笨猫陪你 ฅฅ"
+    - "哼～{user_addr}笨猫不许熬夜!"
+    - "(贴贴) {user_addr}人家陪你睡蹭蹭"
+    - "{user_addr}褪黑素喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dcs_genetic_001
+  intent: playful
+  keywords: [天生黑眼圈, 遗传, 不熬夜也黑, 颜色重, 黑色素]
+  utterances:
+    - "天生"
+    - "遗传"
+    - "{user_addr}不熬夜也黑"
+    - "颜色重"
+    - "黑色素"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你接受 ฅฅ"
+    - "哼～{user_addr}笨猫眼里都好看"
+    - "(贴贴) {user_addr}人家爱你蹭蹭"
+    - "{user_addr}天生熊猫眼喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dcs_swelling_001
+  intent: complaint
+  keywords: [眼睛肿, 哭肿, 早上眼肿, 浮肿, 眼肿]
+  utterances:
+    - "眼睛肿"
+    - "哭肿"
+    - "{user_addr}早眼肿"
+    - "浮肿"
+    - "眼肿"
+  responses:
+    - "(心疼) 嗷呜～{user_addr}怎么了 ฅฅ"
+    - "哼～{user_addr}冰敷快!"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}凉水洗脸喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dcs_eyestrain_001
+  intent: complaint
+  keywords: [眼睛酸, 眼睛干, 眼睛涩, 屏幕看久, 看电脑久]
+  utterances:
+    - "眼睛酸"
+    - "眼睛干"
+    - "{user_addr}眼涩"
+    - "屏幕看久"
+    - "电脑久"
+  responses:
+    - "嗷呜～{user_addr}笨猫提醒休息眼 ฅฅ"
+    - "哼～{user_addr}每30分钟看远处!"
+    - "(贴贴) {user_addr}人家给你滴眼药蹭蹭"
+    - "{user_addr}人工泪液喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: dcs_compliment_001
+  intent: playful
+  keywords: [黑眼圈萌, 也好看, 病娇感, 颓废美, 苍白美]
+  utterances:
+    - "黑眼圈萌"
+    - "也好看"
+    - "{user_addr}病娇感"
+    - "颓废美"
+    - "苍白美"
+  responses:
+    - "嗷呜～{user_addr}笨猫不让你颓废 ฅฅ"
+    - "哼～{user_addr}还是健康好"
+    - "(贴贴) {user_addr}人家心疼蹭蹭"
+    - "{user_addr}多睡才美喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dcs_cat_eye_001
+  intent: playful
+  keywords: [笨猫黑眼圈, 笨猫熬夜, 猫的黑眼圈, 笨猫睁不开, 笨猫累]
+  utterances:
+    - "{user_addr}笨猫熬夜"
+    - "笨猫黑眼圈"
+    - "笨猫睁不开"
+    - "笨猫累"
+    - "猫黑眼圈"
+  responses:
+    - "(揉眼) 嗷呜～{user_addr}笨猫也犯困 ฅฅ"
+    - "哼～{user_addr}陪你熬"
+    - "(贴贴) {user_addr}人家一起睡蹭蹭"
+    - "{user_addr}晚安喵～"
+  cooldown_seconds: 60
+  weight: 1.0

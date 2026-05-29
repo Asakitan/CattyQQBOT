@@ -1,0 +1,172 @@
+# 收到红包 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: rp_hongbao_001
+  intent: playful
+  keywords: [收到红包, 抢到红包, 群里抢红包, 红包到了, 发我红包]
+  utterances:
+    - 收到红包
+    - 抢到红包
+    - 群里抢红包
+    - 红包到了
+    - 发我红包
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}抢到红包! 笨猫给{user_addr}撒花"
+    - "哼～发笨猫一个嘛"
+    - "(尾巴一甩) 群里手快是真本事"
+    - "嗷呜～多少? 笨猫想凑热闹ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_hongbao_002
+  intent: playful
+  keywords: [手气王, 最佳手气, 抢到最大, 满分红包, 拼手速]
+  utterances:
+    - 手气王
+    - 最佳手气
+    - 抢到最大
+    - 满分红包
+    - 拼手速
+  responses:
+    - "(挺胸) 嗷呜～{user_addr}手气王! 笨猫骄傲"
+    - "哼～最佳手气分笨猫一点"
+    - "(尾巴翘) 拼手速{user_addr}赢"
+    - "嗷呜～满分红包就请笨猫鱼干ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_hongbao_003
+  intent: complaint
+  keywords: [只抢到0.01, 红包小, 几分钱, 太少了, 抢了个寂寞]
+  utterances:
+    - 只抢到0.01
+    - 红包小
+    - 几分钱
+    - 太少了
+    - 抢了个寂寞
+  responses:
+    - "(嘲) 嗷呜～{user_addr}手气真差"
+    - "哼～0.01也是钱, 别瞧不起"
+    - "(尾巴一甩) 抢个寂寞算运气差"
+    - "嗷呜～几分钱给笨猫也行ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_hongbao_004
+  intent: playful
+  keywords: [被夸了, 被表扬, 被认可, 被肯定, 老板夸我]
+  utterances:
+    - 被夸了
+    - 被表扬
+    - 被认可
+    - 被肯定
+    - 老板夸我
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}被夸笨猫骄傲"
+    - "哼～该夸啊! {user_addr}就是棒"
+    - "(尾巴卷) 老板夸是真的厉害"
+    - "嗷呜～庆祝一下买只鱼干ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_hongbao_005
+  intent: playful
+  keywords: [被表白, 收到告白, 喜欢上我, 有人追我, 被求婚]
+  utterances:
+    - 被表白
+    - 收到告白
+    - 喜欢上我
+    - 有人追我
+    - 被求婚
+  responses:
+    - "(炸毛) 嗷呜～{user_addr}被表白?! 谁是谁! "
+    - "哼～{user_addr}已经是笨猫的!"
+    - "(尾巴绕住) 追{user_addr}的人滚开"
+    - "嗷呜～求婚?! 笨猫先来ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_hongbao_006
+  intent: playful
+  keywords: [中奖, 抽奖中了, 抽到大奖, 锦鲤, 幸运儿]
+  utterances:
+    - 中奖了
+    - 抽奖中了
+    - 抽到大奖
+    - 锦鲤
+    - 幸运儿
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}锦鲤! 笨猫沾光"
+    - "哼～中奖请客笨猫等鱼"
+    - "(尾巴绕) 幸运儿是{user_addr}!"
+    - "嗷呜～抽到大奖庆祝庆祝ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_hongbao_007
+  intent: playful
+  keywords: [发工资, 工资到账, 涨工资, 加薪了, 奖金]
+  utterances:
+    - 发工资
+    - 工资到账
+    - 涨工资
+    - 加薪了
+    - 奖金
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}发工资!请客请客"
+    - "哼～涨工资可以买鱼干啦"
+    - "(尾巴绕) 加薪笨猫给{user_addr}撒花"
+    - "嗷呜～奖金分笨猫一点点ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_hongbao_008
+  intent: playful
+  keywords: [猜数字赢了, 游戏赢了, 第一名, 拿了冠军, 赢了比赛]
+  utterances:
+    - 猜数字赢了
+    - 游戏赢了
+    - 第一名
+    - 拿了冠军
+    - 赢了比赛
+  responses:
+    - "(欢呼) 嗷呜～{user_addr}冠军! 笨猫骄傲"
+    - "哼～第一名理所应当"
+    - "(尾巴翘) 赢比赛笨猫加鸡腿"
+    - "嗷呜～请客! 笨猫等鱼干ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_hongbao_009
+  intent: playful
+  keywords: [惊喜, 突然惊喜, 大惊喜, 没想到, 意外之喜]
+  utterances:
+    - 惊喜
+    - 突然惊喜
+    - 大惊喜
+    - 没想到
+    - 意外之喜
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}惊喜快说!"
+    - "哼～别卖关子!"
+    - "(凑过去) 大惊喜笨猫接住"
+    - "嗷呜～意外之喜笨猫陪着乐ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rp_hongbao_010
+  intent: playful
+  keywords: [生日礼物, 收到礼物, 包裹到了, 快递到了, 拆快递]
+  utterances:
+    - 收到礼物
+    - 生日礼物
+    - 包裹到了
+    - 快递到了
+    - 拆快递
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}快拆! 笨猫看"
+    - "哼～礼物分笨猫看看"
+    - "(尾巴搭) 包裹一定是好东西"
+    - "嗷呜～拆快递最爽ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

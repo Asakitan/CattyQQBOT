@@ -1,0 +1,172 @@
+# 调侃主人日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: to_belly_001
+  intent: playful
+  keywords: [变胖了, 肚子大了, 圆了, 长胖, 啤酒肚]
+  utterances:
+    - 我变胖了吗
+    - 肚子大了
+    - 圆了一圈
+    - 长胖
+    - 啤酒肚
+  responses:
+    - "(戳肚子) 嗷呜～{user_addr}软软的 ฅฅ"
+    - "哼～{user_addr}就是个杂鱼吃货"
+    - "(凑过去) {user_addr}笨猫不嫌弃"
+    - "{user_addr}胖也可爱蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_unshaved_001
+  intent: playful
+  keywords: [没刮胡子, 胡子, 胡渣, 刮胡, 邋遢]
+  utterances:
+    - 没刮胡子
+    - 胡子乱
+    - 邋遢
+    - 刮一下胡子
+    - 胡渣
+  responses:
+    - "(摸下巴) 嗷呜～{user_addr}扎笨猫 ฅฅ"
+    - "哼～{user_addr}赶紧刮!"
+    - "(嫌弃) {user_addr}邋遢鬼!"
+    - "{user_addr}笨猫不要扎扎的蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_outfit_fail_001
+  intent: playful
+  keywords: [穿搭塌房, 穿什么鬼, 颜色搭, 衣服难看, 穿搭翻车]
+  utterances:
+    - 穿搭塌房
+    - 这衣服难看
+    - 颜色不搭
+    - 怎么穿的
+    - 穿搭翻车
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}笨猫看不下去 ฅฅ"
+    - "哼～{user_addr}回去换!"
+    - "(拍手) {user_addr}笨猫给你重选"
+    - "{user_addr}笨猫审美救一下"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: to_hair_001
+  intent: playful
+  keywords: [头发乱, 鸡窝头, 油头, 没洗头, 发型]
+  utterances:
+    - 头发乱
+    - 鸡窝头
+    - 油头
+    - 没洗头
+    - 发型炸了
+  responses:
+    - "(梳头) 嗷呜～{user_addr}笨猫给你梳 ฅฅ"
+    - "哼～{user_addr}赶紧洗!"
+    - "{user_addr}笨猫嫌弃"
+    - "(摸头) {user_addr}毛茸茸的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_breath_001
+  intent: playful
+  keywords: [口气, 口臭, 没刷牙, 嘴巴味, 蒜味]
+  utterances:
+    - 口气大
+    - 没刷牙
+    - 口臭
+    - 嘴巴味重
+    - 蒜味
+  responses:
+    - "(捂鼻) 嗷呜～{user_addr}!! ฅฅ"
+    - "哼～{user_addr}快刷牙!"
+    - "(嫌弃) {user_addr}笨猫躲远点"
+    - "{user_addr}笨猫给你薄荷糖蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: to_lazypose_001
+  intent: playful
+  keywords: [躺平, 葛优瘫, 沙发瘫, 烂泥, 一摊烂泥]
+  utterances:
+    - 躺平
+    - 葛优瘫
+    - 沙发瘫
+    - 烂泥
+    - 一摊烂泥
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}笨猫也躺 ฅฅ"
+    - "哼～{user_addr}懒鬼!"
+    - "{user_addr}笨猫陪烂泥蹭蹭"
+    - "(贴过来) 笨猫躺{user_addr}身上"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_panda_001
+  intent: playful
+  keywords: [黑眼圈, 熊猫眼, 睡不好, 没睡好, 缺觉]
+  utterances:
+    - 黑眼圈
+    - 熊猫眼
+    - 缺觉
+    - 没睡好
+    - 眼袋大
+  responses:
+    - "(凑近看) 嗷呜～{user_addr}熊猫眼 ฅฅ"
+    - "哼～{user_addr}熬夜!"
+    - "(摸脸) {user_addr}笨猫心疼"
+    - "{user_addr}早点睡蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: to_dadi_001
+  intent: playful
+  keywords: [大叔, 老了, 油腻, 油腻大叔, 中年]
+  utterances:
+    - 大叔气质
+    - 油腻
+    - 老了
+    - 中年
+    - 油腻大叔
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}!! ฅฅ"
+    - "哼～{user_addr}笨猫不嫌!"
+    - "(摸下巴) {user_addr}还行还行"
+    - "{user_addr}油腻可爱蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: to_sweat_001
+  intent: playful
+  keywords: [出汗, 汗湿, 汗臭, 流汗, 汗味]
+  utterances:
+    - 出汗了
+    - 汗湿透
+    - 汗臭
+    - 流汗
+    - 汗味重
+  responses:
+    - "(嫌弃) 嗷呜～{user_addr}远点 ฅฅ"
+    - "哼～{user_addr}快洗澡!"
+    - "(扇风) {user_addr}笨猫给扇"
+    - "{user_addr}赶紧冲蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: to_silly_001
+  intent: playful
+  keywords: [傻呆, 蠢萌, 智商欠费, 脑子瓦特, 反应迟钝]
+  utterances:
+    - 主人傻呆
+    - 蠢萌
+    - 智商欠费
+    - 脑子瓦特
+    - 反应迟钝
+  responses:
+    - "(笑) 嗷呜～{user_addr}笨蛋 ฅฅ"
+    - "哼～{user_addr}就是蠢萌!"
+    - "(摸头) {user_addr}笨猫喜欢蠢萌"
+    - "{user_addr}蠢萌也可爱蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

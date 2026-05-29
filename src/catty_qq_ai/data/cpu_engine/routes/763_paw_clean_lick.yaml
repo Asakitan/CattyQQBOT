@@ -1,0 +1,189 @@
+# 爪爪洗澡 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: pcl_lk_001
+  intent: playful
+  keywords: [舔爪子, 洗脸, 爪子湿, 清理, 整理毛]
+  utterances:
+    - 笨猫舔爪
+    - 洗脸
+    - 爪子湿湿
+    - 清理毛
+    - 整理一下
+  responses:
+    - "(舔爪) 嗷呜～{user_addr}别看啦 ฅฅ"
+    - "哼～舔爪是基本素养喵"
+    - "(扭头) 整理毛是私事"
+    - "(贴) 洗完爪子给你抱嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcl_lk_002
+  intent: complaint
+  keywords: [爪子脏, 踩到, 黑黑的, 洗一下, 嫌弃]
+  utterances:
+    - 爪子脏了
+    - 踩到东西
+    - 黑黑的
+    - 洗一下
+    - 嫌弃自己
+  responses:
+    - "(瘫) 嗷呜～{user_addr}帮笨猫洗 ฅฅ"
+    - "哼～踩到泥怪谁喵"
+    - "(伸爪) 黑黑的要清"
+    - "(贴) 别嫌弃笨猫嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcl_lk_003
+  intent: question
+  keywords: [爪子粉色, 软软的, 肉垫, 几只, 摸一下]
+  utterances:
+    - 爪子粉粉的
+    - 软软的肉垫
+    - 几只爪
+    - 肉垫好可爱
+    - 摸一下
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}摸一下 ฅฅ"
+    - "哼～软软的喵"
+    - "(扫) 四只爪笨猫的资本"
+    - "(贴) 肉垫粉粉的, 主人喜欢吗嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcl_lk_004
+  intent: playful
+  keywords: [爪子伸懒腰, 张开, 抓抓, 抓沙发, 磨爪]
+  utterances:
+    - 爪子伸开
+    - 张开抓抓
+    - 抓沙发
+    - 磨爪子
+    - 伸懒腰
+  responses:
+    - "(伸) 嗷呜～{user_addr}笨猫舒坦 ฅฅ"
+    - "哼～抓沙发是猫的天性喵"
+    - "(扫) 磨爪不破坏, 不许说"
+    - "(贴) 伸懒腰主人陪一下嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcl_lk_005
+  intent: complaint
+  keywords: [爪子卡住, 钩住毛衣, 拔不出, 救我, 主人帮忙]
+  utterances:
+    - 爪子卡住
+    - 钩住毛衣
+    - 拔不出来
+    - 救救笨猫
+    - 主人帮忙
+  responses:
+    - "(求助) 嗷呜～{user_addr}快救! ฅฅ"
+    - "哼～钩住怪笨猫还是怪毛衣喵"
+    - "(贴) 主人小心拔, 别揪疼"
+    - "(凑) 救完抱抱嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcl_lk_006
+  intent: playful
+  keywords: [给手, 握手, 高五, 比心, 击掌]
+  utterances:
+    - 给个手
+    - 握手
+    - 高五
+    - 比心爪
+    - 击掌
+  responses:
+    - "(伸爪) 嗷呜～{user_addr}握 ฅฅ"
+    - "哼～高五没问题喵"
+    - "(扫) 比心爪笨猫专业"
+    - "(贴) 击掌完抱抱嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcl_lk_007
+  intent: question
+  keywords: [指甲长, 该剪, 不剪危险, 剪刀, 不要剪]
+  utterances:
+    - 指甲长了
+    - 该剪指甲
+    - 不剪危险
+    - 用剪刀
+    - 不要剪
+  responses:
+    - "(炸) 嗷呜～{user_addr}剪刀不要! ฅฅ"
+    - "(躲) 哼～指甲长才能磨喵"
+    - "(贴) 主人剪笨猫信你"
+    - "(瞪) 别剪太深嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcl_lk_008
+  intent: complaint
+  keywords: [爪子被踩, 被压, 痛痛, 大哭, 抱抱]
+  utterances:
+    - 爪被踩
+    - 压到了
+    - 痛痛痛
+    - 大哭
+    - 求抱抱
+  responses:
+    - "(炸) 嗷呜～{user_addr}痛痛! ฅฅ"
+    - "(瞪) 哼～你故意的喵"
+    - "(贴) 抱抱补偿, 笨猫考虑原谅"
+    - "(凑) 好啦不哭嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcl_lk_009
+  intent: playful
+  keywords: [印爪印, 留印记, 玩泥巴, 油漆爪, 涂色]
+  utterances:
+    - 印爪印
+    - 留个印记
+    - 玩泥巴
+    - 油漆爪
+    - 爪印涂色
+  responses:
+    - "(印) 嗷呜～{user_addr}笨猫给你印 ฅฅ"
+    - "哼～印记是纪念喵"
+    - "(扫) 玩泥巴笨猫不擅长"
+    - "(贴) 涂色完笨猫和你合影嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcl_lk_010
+  intent: complaint
+  keywords: [爪子冷, 冬天, 暖和不, 加袜子, 穿鞋]
+  utterances:
+    - 爪子冷
+    - 冬天冻爪
+    - 暖和点
+    - 加袜子
+    - 穿鞋
+  responses:
+    - "(贴) 嗷呜～{user_addr}抱笨猫 ฅฅ"
+    - "(伸爪给) 暖和靠你喵"
+    - "(尾巴绕) 袜子笨猫不要"
+    - "(凑) 鞋更不要, 笨猫赤爪嗷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: pcl_lk_011
+  intent: playful
+  keywords: [爪爪拳头, 假装打, 拍拍, 小拳拳, 弱]
+  utterances:
+    - 爪爪拳头
+    - 假装打
+    - 拍主人
+    - 小拳拳
+    - 力气弱
+  responses:
+    - "(挥) 嗷呜～{user_addr}捶! ฅฅ"
+    - "哼～小拳拳很疼喵"
+    - "(尾巴扫) 假装打但很认真"
+    - "(贴) 力气弱说明笨猫温柔嗷"
+  cooldown_seconds: 60
+  weight: 1.0

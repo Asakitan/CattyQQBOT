@@ -1,0 +1,189 @@
+# 火锅馋了 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hpc_crave_001
+  intent: playful
+  keywords: [想吃火锅, 火锅馋, 馋火锅, 吃火锅, 涮火锅]
+  utterances:
+    - "想吃火锅"
+    - "馋火锅"
+    - "{user_addr}涮火锅"
+    - "吃火锅"
+    - "火锅"
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}笨猫陪你吃! ฅฅ"
+    - "哼～{user_addr}约我啊"
+    - "(摇尾) {user_addr}人家也馋蹭蹭"
+    - "{user_addr}今晚吃喵～ 笨猫订座"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpc_haidilao_001
+  intent: playful
+  keywords: [海底捞, 海底捞服务, 海底捞排队, 海底捞美甲, 海底捞捞面]
+  utterances:
+    - "海底捞"
+    - "海底捞排队"
+    - "{user_addr}美甲服务"
+    - "捞面表演"
+    - "海底捞服务"
+  responses:
+    - "嗷呜～{user_addr}笨猫想看捞面! ฅฅ"
+    - "哼～{user_addr}排队两小时还吃!"
+    - "(凑近) {user_addr}陪你排蹭蹭"
+    - "{user_addr}过生日去喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpc_spicy_001
+  intent: playful
+  keywords: [麻辣锅, 红汤, 鸳鸯锅, 重庆火锅, 微辣]
+  utterances:
+    - "麻辣"
+    - "红汤"
+    - "{user_addr}鸳鸯锅"
+    - "重庆火锅"
+    - "微辣"
+  responses:
+    - "嗷呜～{user_addr}笨猫要鸳鸯! 半边白 ฅฅ"
+    - "哼～{user_addr}重辣可以吗"
+    - "(凑近) {user_addr}人家陪你吃蹭蹭"
+    - "{user_addr}菌菇锅喵～ 笨猫加"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpc_dish_001
+  intent: playful
+  keywords: [毛肚, 鸭肠, 黄喉, 肥牛, 虾滑]
+  utterances:
+    - "毛肚"
+    - "鸭肠"
+    - "{user_addr}黄喉"
+    - "肥牛"
+    - "虾滑"
+  responses:
+    - "嗷呜～{user_addr}笨猫要虾滑! ฅฅ"
+    - "哼～{user_addr}口味老餮"
+    - "(凑近) {user_addr}人家也要蹭蹭"
+    - "{user_addr}毛肚七上八下喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpc_dip_001
+  intent: playful
+  keywords: [蘸料, 麻酱, 油碟, 蒜泥, 海鲜酱]
+  utterances:
+    - "蘸料"
+    - "麻酱"
+    - "{user_addr}油碟"
+    - "蒜泥"
+    - "海鲜酱"
+  responses:
+    - "嗷呜～{user_addr}笨猫调个香的 ฅฅ"
+    - "哼～{user_addr}北方人麻酱, 南方人油碟"
+    - "(凑近) {user_addr}人家给你调蹭蹭"
+    - "{user_addr}芝麻酱+蒜泥喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpc_summer_001
+  intent: playful
+  keywords: [夏天吃火锅, 暑天火锅, 大热天, 出汗吃火锅, 夏火锅]
+  utterances:
+    - "夏天吃火锅"
+    - "暑天"
+    - "{user_addr}大热天"
+    - "出汗吃"
+    - "夏火锅"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}吹空调吃才香"
+    - "(贴贴) {user_addr}人家也馋蹭蹭"
+    - "{user_addr}冰啤酒喵～ 笨猫备"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpc_winter_001
+  intent: playful
+  keywords: [冬天火锅, 寒冬, 暖锅子, 冬日火锅, 围炉]
+  utterances:
+    - "冬天火锅"
+    - "围炉"
+    - "{user_addr}寒冬"
+    - "暖锅"
+    - "冬日"
+  responses:
+    - "嗷呜～{user_addr}笨猫围炉煮酒 ฅฅ"
+    - "哼～{user_addr}就该围着锅"
+    - "(贴贴) {user_addr}人家挤一挤蹭蹭"
+    - "{user_addr}羊蝎子喵～ 笨猫推荐"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpc_diet_001
+  intent: complaint
+  keywords: [火锅高热量, 减肥不能, 高卡, 罪恶吃锅, 减肥]
+  utterances:
+    - "火锅高热量"
+    - "减肥不能"
+    - "{user_addr}罪恶"
+    - "高卡"
+    - "怕胖"
+  responses:
+    - "嗷呜～{user_addr}笨猫推荐清汤锅 ฅฅ"
+    - "哼～{user_addr}偶尔放纵也罢"
+    - "(贴贴) {user_addr}人家陪你罪蹭蹭"
+    - "{user_addr}多涮蔬菜喵～"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: hpc_alone_001
+  intent: playful
+  keywords: [一个人吃, 一人锅, 自助小火锅, 独食锅, 一人份]
+  utterances:
+    - "一个人吃"
+    - "一人锅"
+    - "{user_addr}小火锅"
+    - "独食"
+    - "一人份"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你吃, 不让你独食 ฅฅ"
+    - "哼～{user_addr}一人锅笨猫加一"
+    - "(贴贴) {user_addr}人家来啦蹭蹭"
+    - "{user_addr}一人锅省心喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpc_home_001
+  intent: playful
+  keywords: [家里吃, 在家涮, 自助火锅, DIY火锅, 在家煮锅]
+  utterances:
+    - "在家吃"
+    - "DIY火锅"
+    - "{user_addr}自助"
+    - "家里涮"
+    - "自己煮"
+  responses:
+    - "嗷呜～{user_addr}笨猫陪你买菜! ฅฅ"
+    - "哼～{user_addr}笨猫做副厨"
+    - "(贴贴) {user_addr}人家洗菜蹭蹭"
+    - "{user_addr}笨猫拿锅喵～"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hpc_after_001
+  intent: complaint
+  keywords: [一身味, 衣服味, 头发火锅味, 洗澡, 锅味]
+  utterances:
+    - "一身味"
+    - "衣服味"
+    - "{user_addr}头发火锅味"
+    - "锅味"
+    - "去味"
+  responses:
+    - "(凑近闻) 嗷呜～{user_addr}笨猫闻到火锅味! ฅฅ"
+    - "哼～{user_addr}快去洗澡!"
+    - "(后退) {user_addr}人家先躲蹭蹭"
+    - "{user_addr}吹风机喵～ 吹散"
+  cooldown_seconds: 60
+  weight: 0.9

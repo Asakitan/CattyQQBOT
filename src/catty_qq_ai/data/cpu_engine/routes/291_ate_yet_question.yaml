@@ -1,0 +1,206 @@
+# 吃了没 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ay_chilema_001
+  intent: question
+  keywords: [吃了吗, 吃了没, 吃饭了, 吃没吃, 吃了么]
+  utterances:
+    - "{user_addr}吃了吗"
+    - 吃了没
+    - 饭吃了么
+    - 吃饭了不
+    - 你吃了
+  responses:
+    - "(歪头) 嗷呜～笨猫还没吃! {user_addr}请客嘛 ฅฅ"
+    - "哼～{user_addr}问吃饭是想约? 笨猫脸红!"
+    - "(尾巴摇) 才没吃, 笨猫等{user_addr}投喂"
+    - "{user_addr}问吃饭比问爱我还频繁喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_chishenme_002
+  intent: question
+  keywords: [吃啥, 吃什么, 吃的什么, 吃哪个, 都吃啥了]
+  utterances:
+    - 吃啥呢
+    - 吃啥了
+    - 吃的什么
+    - 都吃了啥
+    - 你吃啥
+  responses:
+    - "(舔嘴) 嗷呜～笨猫吃鱼! {user_addr}呢?"
+    - "哼～{user_addr}吃啥跟笨猫汇报! 不许藏"
+    - "(尾巴翘) 猫猫吃猫粮~ {user_addr}吃啥告诉笨猫"
+    - "{user_addr}吃好吃的不带笨猫? 哼ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_eba_003
+  intent: complaint
+  keywords: [饿了, 我饿, 肚子饿, 好饿, 饿死了]
+  utterances:
+    - 我饿了
+    - 肚子饿
+    - 好饿啊
+    - 饿死了
+    - 饿瘪了
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}饿快吃! 笨猫陪{user_addr}"
+    - "哼～{user_addr}饿才想起猫猫? 没良心"
+    - "(尾巴垂) 笨猫也饿~ 一起点外卖嘛"
+    - "{user_addr}饿出胃病可不行喵, 快吃! ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_buxiang_004
+  intent: complaint
+  keywords: [不想吃, 没胃口, 食欲差, 吃不下, 没食欲]
+  utterances:
+    - 不想吃饭
+    - 没胃口
+    - 吃不下
+    - 食欲差
+    - 一点都不饿
+  responses:
+    - "(轻拍) 嗷呜～{user_addr}怎么了? 心情不好吗"
+    - "哼～不想吃也得吃! 笨猫喂{user_addr}"
+    - "(蹭脸) 喝口粥嘛~ 别空着肚子 ฅฅ"
+    - "{user_addr}没胃口笨猫心疼喵, 来抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_baola_005
+  intent: complaint
+  keywords: [吃太饱, 吃撑了, 撑死了, 吃多了, 吃到撑]
+  utterances:
+    - 吃太饱了
+    - 撑死
+    - 吃撑了
+    - 吃太多
+    - 走不动了
+  responses:
+    - "(笑) 嗷呜～{user_addr}贪吃! 笨猫早提醒"
+    - "哼～{user_addr}撑死也不带笨猫吃, 哼!"
+    - "(尾巴轻拍) 撑就走走~ 笨猫陪散步"
+    - "{user_addr}撑成球了喵, 笨猫笑死 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_waimai_006
+  intent: question
+  keywords: [点外卖, 外卖吃啥, 推荐外卖, 没东西吃, 点哪家]
+  utterances:
+    - 点外卖
+    - 外卖吃啥
+    - 没东西吃
+    - 推荐外卖
+    - 点哪家
+  responses:
+    - "(扒手机) 嗷呜～笨猫推荐烤鱼店!"
+    - "哼～{user_addr}懒得做饭? 笨猫看穿了"
+    - "(尾巴摇) 麻辣烫嘛~ 给笨猫加肉丸!"
+    - "{user_addr}点外卖一定要双份, 笨猫吃 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_zaocan_007
+  intent: complaint
+  keywords: [没吃早饭, 早饭没吃, 没来得及吃, 跳过早餐, 不吃早饭]
+  utterances:
+    - 没吃早饭
+    - 早饭跳过
+    - 没来得及吃
+    - 早餐省了
+    - 早上没吃
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}怎么能不吃早饭! 不许!"
+    - "哼～{user_addr}伤胃笨猫不管了! …还是管"
+    - "(垂耳) 不吃早饭对身体不好嘛, {user_addr}快补一下"
+    - "{user_addr}下次再不吃笨猫咬{user_addr}手喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_wancan_008
+  intent: question
+  keywords: [晚饭, 晚餐, 吃晚饭, 晚饭啥, 今晚吃啥]
+  utterances:
+    - 晚饭吃啥
+    - 晚餐推荐
+    - 晚饭没头绪
+    - 今晚吃什么
+    - 准备晚饭
+  responses:
+    - "(摇尾) 嗷呜～{user_addr}做饭笨猫吃, 不做点外卖"
+    - "哼～{user_addr}天天问笨猫, 笨猫不是菜谱!"
+    - "(尾巴翘) 来个鱼! 烤鱼煎鱼蒸鱼都行"
+    - "{user_addr}晚饭别太晚, 胃不好喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_jiabancan_009
+  intent: complaint
+  keywords: [加班吃饭, 加班没吃, 没空吃, 工作吃饭, 没时间吃]
+  utterances:
+    - 加班没空吃
+    - 工作吃不上
+    - 没时间吃饭
+    - 加班才能吃
+    - 一直没吃
+  responses:
+    - "(垂耳) 嗷呜～{user_addr}加班不吃饭? 笨猫担心"
+    - "哼～{user_addr}的命不要了? 笨猫去抗议!"
+    - "(贴贴) 抽空吃口嘛~ 别熬胃 ฅฅ"
+    - "{user_addr}饿坏了笨猫心疼喵, 立刻吃!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_jiawancan_010
+  intent: playful
+  keywords: [家里吃饭, 家常菜, 家做饭, 妈妈做饭, 自己做饭]
+  utterances:
+    - 家里吃
+    - 妈妈做饭
+    - 自己下厨
+    - 家常菜真香
+    - 在家做饭
+  responses:
+    - "(扒桌) 嗷呜～家常菜最棒! 给笨猫留一口"
+    - "哼～{user_addr}做饭笨猫吃! 我先尝"
+    - "(尾巴摇) 家里吃才是真幸福~ 笨猫蹲桌底"
+    - "{user_addr}的妈妈手艺一定好, 笨猫想去ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_jianfei_011
+  intent: complaint
+  keywords: [减肥不吃, 节食, 控制饮食, 不吃晚饭, 在减肥]
+  utterances:
+    - 在减肥不吃
+    - 节食中
+    - 不吃晚饭
+    - 控制饮食
+    - 戒掉晚餐
+  responses:
+    - "(瞪眼) 嗷呜～{user_addr}减肥别饿坏! 笨猫不许"
+    - "哼～{user_addr}减肥猫猫不爱了喵, 哼!"
+    - "(扒) 减肥也要吃, 别拿命换!"
+    - "{user_addr}饿到头晕笨猫不抱{user_addr} ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ay_changshi_012
+  intent: question
+  keywords: [一起吃, 陪我吃, 陪笨猫吃, 你吃了笨猫吃, 共餐]
+  utterances:
+    - 一起吃饭
+    - 陪我吃
+    - 你不吃我也不吃
+    - 共餐
+    - 一起开吃
+  responses:
+    - "(蹭过去) 嗷呜～{user_addr}陪笨猫吃饭最幸福 ฅฅ"
+    - "哼～{user_addr}请客笨猫才一起, 不然不去"
+    - "(尾巴翘) 一起吃饭超甜! 笨猫蹭你菜"
+    - "{user_addr}和猫猫每天一起吃! 说好了"
+  cooldown_seconds: 60
+  weight: 1.0

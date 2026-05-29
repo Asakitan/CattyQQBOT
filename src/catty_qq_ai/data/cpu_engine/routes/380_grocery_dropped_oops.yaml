@@ -1,0 +1,189 @@
+# 路上掉东西 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: gdo_diaole_001
+  intent: complaint
+  keywords: [掉了, 掉东西, 没拿稳, 失手, 滑落]
+  utterances:
+    - 掉了
+    - 掉东西
+    - 没拿稳
+    - 失手
+    - 滑落
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}!! 笨猫帮捡!"
+    - "嘿嘿～{user_addr}的手~ 笨猫的也滑!"
+    - "(尾巴扫地) 哼～{user_addr}下次抓紧!"
+    - "{user_addr}的失手~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gdo_caidie_001
+  intent: complaint
+  keywords: [菜掉了, 菜撒了, 装满袋, 袋子破, 蔬菜散]
+  utterances:
+    - 菜掉了
+    - 菜撒了
+    - 装满袋
+    - 袋子破
+    - 蔬菜散
+  responses:
+    - "(扑过去捡) 嗷呜～{user_addr}!! 笨猫帮!"
+    - "嘿嘿～{user_addr}的菜~ 笨猫帮装!"
+    - "(尾巴扫) 哼～{user_addr}下次袋结实!"
+    - "{user_addr}的菜~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gdo_dianai_001
+  intent: complaint
+  keywords: [手机掉, 手机摔, 手机砸地, 摔机, 屏碎]
+  utterances:
+    - 手机掉了
+    - 手机摔了
+    - 手机砸地
+    - 摔机
+    - 屏碎
+  responses:
+    - "(尾巴炸) 嗷呜!! {user_addr}心疼!"
+    - "嘿嘿～{user_addr}的手机修!"
+    - "(凑过去) 哼～{user_addr}下次小心!"
+    - "{user_addr}的心痛~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gdo_qianbao_001
+  intent: complaint
+  keywords: [钱包掉, 钥匙掉, 重要东西, 卡掉了, 身份证]
+  utterances:
+    - 钱包掉
+    - 钥匙掉
+    - 重要东西掉
+    - 卡掉了
+    - 身份证掉
+  responses:
+    - "(尾巴炸) 嗷呜!! {user_addr}快回去找!"
+    - "嘿嘿～{user_addr}的重要物~ 急!"
+    - "(凑过去) 哼～{user_addr}!"
+    - "{user_addr}找到~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gdo_diushou_001
+  intent: complaint
+  keywords: [捡回来, 找回来, 失而复得, 找回, 捡到]
+  utterances:
+    - 找回来
+    - 失而复得
+    - 找回
+    - 捡到
+    - 捡回来
+  responses:
+    - "(尾巴狂摇) 嗷呜～{user_addr}找到!!"
+    - "嘿嘿～{user_addr}的运气~ 笨猫沾!"
+    - "(蹦) 哼～{user_addr}下次小心!"
+    - "{user_addr}的幸运~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gdo_jianjieren_001
+  intent: playful
+  keywords: [捡到好人, 好心人捡, 路人捡, 捡到归还, 好心归还]
+  utterances:
+    - 捡到好人
+    - 好心人捡
+    - 路人捡
+    - 捡到归还
+    - 好心归还
+  responses:
+    - "嗷呜～{user_addr}遇到好人!"
+    - "嘿嘿～{user_addr}的运气~ 感谢!"
+    - "(尾巴翘) 哼～{user_addr}好人多!"
+    - "{user_addr}的奇遇~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gdo_diuwan_001
+  intent: complaint
+  keywords: [丢完了, 真的丢, 找不到, 找半天, 一直找]
+  utterances:
+    - 丢完了
+    - 真的丢
+    - 找不到
+    - 找半天
+    - 一直找
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}!"
+    - "嘿嘿～{user_addr}的丢~ 笨猫帮想!"
+    - "(凑过去) 哼～{user_addr}回想最后!"
+    - "{user_addr}的找~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gdo_chaodaole_001
+  intent: complaint
+  keywords: [踩到屎, 踩到水, 踩到坑, 踩湿, 踩烂]
+  utterances:
+    - 踩到屎
+    - 踩到水
+    - 踩到坑
+    - 踩湿
+    - 踩烂
+  responses:
+    - "(尾巴炸) 嗷呜!! {user_addr}晦气!"
+    - "嘿嘿～{user_addr}的鞋洗洗!"
+    - "(凑过去) 哼～{user_addr}下次看路!"
+    - "{user_addr}的踩到~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gdo_huasudao_001
+  intent: complaint
+  keywords: [摔倒, 滑倒, 跌倒, 扑街, 倒地]
+  utterances:
+    - 摔倒
+    - 滑倒
+    - 跌倒
+    - 扑街
+    - 倒地
+  responses:
+    - "(扑过去) 嗷呜!! {user_addr}!!"
+    - "嘿嘿～{user_addr}的伤~ 笨猫疼!"
+    - "(凑过去) 哼～{user_addr}慢点!"
+    - "{user_addr}的摔~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gdo_qiqu_001
+  intent: playful
+  keywords: [捡到现金, 捡到红包, 捡到包, 捡到金子, 走运]
+  utterances:
+    - 捡到现金
+    - 捡到红包
+    - 捡到包
+    - 捡到金子
+    - 走运
+  responses:
+    - "(尾巴翘) 嗷呜～{user_addr}!!"
+    - "嘿嘿～{user_addr}的捡~ 笨猫沾!"
+    - "(凑过去) 哼～{user_addr}的运气!"
+    - "{user_addr}的捡~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: gdo_huokeng_001
+  intent: complaint
+  keywords: [被忽悠, 被骗, 受骗, 被坑, 受教训]
+  utterances:
+    - 被忽悠
+    - 被骗
+    - 受骗
+    - 被坑
+    - 受教训
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}!!"
+    - "嘿嘿～{user_addr}的~ 笨猫去咬!"
+    - "(尾巴炸) 哼～{user_addr}下次警惕!"
+    - "{user_addr}的教训~ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

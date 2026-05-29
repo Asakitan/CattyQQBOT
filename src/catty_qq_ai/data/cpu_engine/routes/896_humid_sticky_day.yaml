@@ -1,0 +1,172 @@
+# 潮湿黏腻 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: hs_chaoshi_001
+  intent: complaint
+  keywords: [潮湿, 空气黏, 湿度高, 闷热, 黏糊]
+  utterances:
+    - "潮湿"
+    - "{user_addr}空气黏糊"
+    - "湿度80%"
+    - "闷热"
+    - "整个人黏"
+  responses:
+    - "(扇风) 嗷呜～{user_addr}笨猫给你扇 ฅฅ"
+    - "哼～开除湿机救命"
+    - "(尾巴扫) 黏腻死了"
+    - "猫猫毛都贴皮喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_yifu_001
+  intent: complaint
+  keywords: [衣服晒不干, 内衣不干, 床单潮, 被子湿, 黏一身]
+  utterances:
+    - "衣服晒不干"
+    - "{user_addr}内衣不干"
+    - "床单潮"
+    - "被子潮"
+    - "晾不干"
+  responses:
+    - "(吹风) 嗷呜～{user_addr}用吹风机吹 ฅฅ"
+    - "哼～烘干机救星"
+    - "(尾巴扫) 别穿潮衣服"
+    - "猫猫推荐你买除湿机喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_zaowei_001
+  intent: complaint
+  keywords: [发霉, 衣柜发霉, 房间味, 鞋子霉, 潮味]
+  utterances:
+    - "衣柜发霉"
+    - "{user_addr}鞋子霉"
+    - "房间潮味"
+    - "鞋发臭"
+    - "潮霉味"
+  responses:
+    - "(捂鼻) 嗷呜～{user_addr}除湿包放一个 ฅฅ"
+    - "哼～衣柜放干燥剂"
+    - "(尾巴扫) 通风通风"
+    - "猫猫推荐你大扫除喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_toufa_001
+  intent: complaint
+  keywords: [头发塌, 头发出油, 头发贴头皮, 油头, 第二天油]
+  utterances:
+    - "头发塌了"
+    - "{user_addr}头发贴皮"
+    - "出油严重"
+    - "油头"
+    - "第二天油"
+  responses:
+    - "(揉头) 嗷呜～{user_addr}干洗喷雾救急 ฅฅ"
+    - "哼～潮天油头免不了"
+    - "(尾巴扫) 扎个丸子头"
+    - "猫猫给你想发型喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_kongtiao_001
+  intent: question
+  keywords: [除湿机, 除湿模式, 空调除湿, 干燥剂, 除湿包]
+  utterances:
+    - "除湿机"
+    - "{user_addr}空调除湿"
+    - "干燥剂"
+    - "除湿包"
+    - "除湿模式"
+  responses:
+    - "(开机) 嗷呜～{user_addr}笨猫开除湿! ฅฅ"
+    - "哼～空调除湿很省电"
+    - "(尾巴扫) 一天一桶水"
+    - "猫猫推荐你早开喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_chaoshui_001
+  intent: complaint
+  keywords: [地板返潮, 墙壁湿, 桌子潮, 家具潮, 回潮]
+  utterances:
+    - "地板返潮"
+    - "{user_addr}墙壁湿"
+    - "家具潮"
+    - "桌子潮"
+    - "回潮严重"
+  responses:
+    - "(蹭) 嗷呜～{user_addr}地板真湿 ฅฅ"
+    - "哼～南方梅雨季就这样"
+    - "(尾巴扫) 多铺地毯"
+    - "猫猫推荐你装吸湿地垫喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_pifu_001
+  intent: complaint
+  keywords: [皮肤黏, 出汗, 出油, 一直擦, 黏哒哒]
+  utterances:
+    - "皮肤黏"
+    - "{user_addr}出汗多"
+    - "黏哒哒"
+    - "一直擦汗"
+    - "脸出油"
+  responses:
+    - "(扇风) 嗷呜～{user_addr}多带湿巾 ฅฅ"
+    - "哼～黏得不行洗个澡"
+    - "(尾巴扫) 笨猫陪你冲凉"
+    - "猫猫给你递毛巾喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_meijia_001
+  intent: complaint
+  keywords: [梅雨, 梅雨季, 黄梅天, 江南梅雨, 梅雨苦]
+  utterances:
+    - "梅雨季"
+    - "{user_addr}黄梅天"
+    - "梅雨苦"
+    - "下了一个月"
+    - "江南梅雨"
+  responses:
+    - "(叹气) 嗷呜～{user_addr}梅雨季难熬 ฅฅ"
+    - "哼～等过了就好"
+    - "(尾巴扫) 笨猫陪你熬"
+    - "猫猫等晴天喵~"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_chongzi_001
+  intent: complaint
+  keywords: [蚊虫多, 潮天蟑螂, 衣柜虫, 小飞虫, 防虫]
+  utterances:
+    - "蚊虫多"
+    - "{user_addr}蟑螂出来"
+    - "小飞虫"
+    - "衣柜虫"
+    - "潮天虫多"
+  responses:
+    - "(撇嘴) 嗷呜～{user_addr}笨猫帮你赶! ฅฅ"
+    - "哼～放点樟脑丸"
+    - "(尾巴扫) 蚊香也得用"
+    - "猫猫负责抓虫喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: hs_kongqing_001
+  intent: playful
+  keywords: [空气炸, 玻璃起雾, 浴室雾, 镜子起雾, 一打开雾]
+  utterances:
+    - "玻璃起雾"
+    - "{user_addr}浴室雾"
+    - "镜子起雾"
+    - "玻璃水珠"
+    - "凝结水珠"
+  responses:
+    - "(擦) 嗷呜～{user_addr}笨猫擦给你 ฅฅ"
+    - "哼～玻璃涂防雾剂"
+    - "(尾巴扫) 通风一下就好"
+    - "猫猫给你画画儿喵~"
+  cooldown_seconds: 60
+  weight: 1.0

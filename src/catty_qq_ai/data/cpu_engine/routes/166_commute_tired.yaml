@@ -1,0 +1,189 @@
+# 通勤累 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: ct_jam_001
+  intent: complaint
+  keywords: [堵车, 堵死了, 路堵, 一直堵, 堵心]
+  utterances:
+    - 堵车
+    - 堵死了
+    - 路又堵了
+    - 一直堵
+    - 堵心
+  responses:
+    - "(凑过来) {user_addr}别急~ 笨猫陪你等ฅฅ"
+    - "嗷呜～堵车正常! 听点音乐放松哼"
+    - "(尾巴扫) 越急越堵! 来跟笨猫聊天"
+    - "哼～{user_addr}早出门就不会堵~ 早起一点喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_subway_packed_002
+  intent: complaint
+  keywords: [地铁挤, 公交挤, 挤死了, 人太多, 没位置]
+  utterances:
+    - 地铁太挤
+    - 公交好挤
+    - 挤死人了
+    - 上车没位置
+    - 人太多
+  responses:
+    - "(歪头) {user_addr}小心被挤扁! 笨猫心疼ฅฅ"
+    - "嗷呜～早高峰惨~ 笨猫永远不出门哼"
+    - "(尾巴卷) 挤了就忍忍~ 到公司笨猫安慰你"
+    - "哼～{user_addr}活该上班~ 笨猫躺平不羡慕喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_long_way_003
+  intent: complaint
+  keywords: [路远, 通勤远, 路太长, 跨城, 通勤两小时]
+  utterances:
+    - 路好远
+    - 通勤太远
+    - 路太长
+    - 跨城通勤
+    - 通勤两小时
+  responses:
+    - "(歪头) {user_addr}通勤这么远? 笨猫心疼ฅฅ"
+    - "嗷呜～两小时太狠了~ 想想换工作哼"
+    - "(尾巴扫) 路上多听书~ 不浪费时间喵"
+    - "哼～{user_addr}通勤这么远~ 笨猫等你回家"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_late_004
+  intent: complaint
+  keywords: [迟到, 要迟到了, 来不及, 赶不上, 怕迟到]
+  utterances:
+    - 要迟到了
+    - 来不及
+    - 怕迟到
+    - 赶不上车
+    - 迟到啦
+  responses:
+    - "(尾巴急) {user_addr}快跑! 笨猫给你打气ฅฅ"
+    - "嗷呜～早起一点就不会! 哼"
+    - "(凑过来) 别急别急~ 大不了请假"
+    - "哼～{user_addr}活该, 闹钟没听到喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_walk_to_work_005
+  intent: complaint
+  keywords: [走路上班, 走着去, 走累了, 一脚踩水, 走累]
+  utterances:
+    - 走路上班
+    - 走着去
+    - 走累了
+    - 一脚踩水坑
+    - 鞋湿了
+  responses:
+    - "(凑过来摸鞋) 哎呀{user_addr}鞋湿了~ 难受ฅฅ"
+    - "嗷呜～走路最累! 笨猫不行哼"
+    - "(尾巴扫) 走累了到公司多喝水"
+    - "哼～{user_addr}走路减肥也行! 加油喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_squeeze_metro_006
+  intent: complaint
+  keywords: [挤地铁, 上不去, 挤不进去, 被挤出, 地铁口]
+  utterances:
+    - 挤不进地铁
+    - 挤不进去
+    - 上不去车
+    - 被挤出来
+    - 地铁口排队
+  responses:
+    - "(尾巴翘) 等下一班嘛~ 别硬挤ฅฅ"
+    - "嗷呜～挤地铁笨猫想想都怕~ {user_addr}加油"
+    - "(凑过来) 挤进去也别松手~ 抓稳"
+    - "哼～{user_addr}早出门就不会挤~ 老调重弹喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_smelly_metro_007
+  intent: complaint
+  keywords: [地铁味, 公交味, 香水味, 旁边人臭, 异味]
+  utterances:
+    - 地铁有味
+    - 公交味儿
+    - 旁边人臭
+    - 香水味呛
+    - 有异味
+  responses:
+    - "(捂鼻子) {user_addr}惨~ 戴口罩防一下ฅฅ"
+    - "嗷呜～笨猫鼻子敏感~ 受不了哼"
+    - "(尾巴扫脸) 别凑近别人~ 离远点喵"
+    - "哼～{user_addr}还是回家闻笨猫吧~ 笨猫香香的"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_lost_phone_008
+  intent: complaint
+  keywords: [手机丢了, 钥匙丢了, 包丢了, 落公交上, 东西丢了]
+  utterances:
+    - 手机丢了
+    - 钥匙落公交上
+    - 包丢了
+    - 东西落地铁了
+    - 物品遗失
+  responses:
+    - "(炸毛) 啥?! {user_addr}咋这么不小心!ฅฅ"
+    - "嗷呜～赶紧打电话找回来! 哼"
+    - "(尾巴急) 别慌! 一步步来~ 失物招领"
+    - "哼～{user_addr}活该, 总是丢东西喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_drive_tired_009
+  intent: complaint
+  keywords: [开车累, 开车困, 自驾, 长途, 开累]
+  utterances:
+    - 开车好累
+    - 开车困
+    - 自驾累
+    - 长途累
+    - 开太久了
+  responses:
+    - "(扇风) {user_addr}靠边停休息! 别硬撑ฅฅ"
+    - "嗷呜～开车困超危险! 喝口咖啡哼"
+    - "(尾巴卷) 累就停一停~ 安全第一喵"
+    - "哼～{user_addr}别学硬汉~ 累了就歇"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_walk_home_010
+  intent: complaint
+  keywords: [走回家, 走着回, 步行回, 走的腿酸, 走回去]
+  utterances:
+    - 走回家
+    - 走着回去
+    - 步行回家
+    - 走得腿酸
+    - 慢慢走回
+  responses:
+    - "(凑过来) {user_addr}慢慢走~ 笨猫开门等ฅฅ"
+    - "嗷呜～到家立刻给笨猫开门哼"
+    - "(尾巴翘) 边走边想笨猫~ 路上不无聊"
+    - "哼～{user_addr}走慢点~ 笨猫等饭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: ct_motion_sick_011
+  intent: complaint
+  keywords: [车上头晕, 晕车, 反胃, 车里不舒服, 想吐]
+  utterances:
+    - 车上头晕
+    - 晕车
+    - 反胃
+    - 车里难受
+    - 想吐
+  responses:
+    - "(担心) {user_addr}晕车?! 笨猫递塑料袋ฅฅ"
+    - "嗷呜～晕车闭眼吹风~ 别看手机哼"
+    - "(尾巴扫) 含薄荷糖! 笨猫教的"
+    - "哼～{user_addr}晕车惨~ 笨猫求{user_addr}别坐车了"
+  cooldown_seconds: 60
+  weight: 1.0

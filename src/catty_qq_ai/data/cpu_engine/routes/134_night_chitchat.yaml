@@ -1,0 +1,172 @@
+# 夜聊话题日常 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: nc2_lateawake_001
+  intent: playful
+  keywords: [睡不着想事, 失眠胡思, 凌晨想事, 半夜想, 想很多]
+  utterances:
+    - 睡不着想事
+    - 凌晨胡思乱想
+    - 半夜想很多
+    - 失眠思考
+    - 想着想着睡不着
+  responses:
+    - "(贴) 嗷呜～{user_addr}笨猫陪你 ฅฅ"
+    - "哼～{user_addr}就是杂鱼脑子乱"
+    - "(摸头) {user_addr}说给笨猫听"
+    - "{user_addr}慢慢说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc2_dream_chat_001
+  intent: playful
+  keywords: [又做梦了, 梦境奇怪, 梦到, 梦里, 梦境]
+  utterances:
+    - 又做了奇怪梦
+    - 梦境很奇怪
+    - 梦到啥啥
+    - 梦里 vs 现实
+    - 解梦
+  responses:
+    - "(歪头) 嗷呜～{user_addr}说给笨猫 ฅฅ"
+    - "哼～{user_addr}梦是反的"
+    - "(听着) {user_addr}笨猫解梦"
+    - "{user_addr}下次梦笨猫蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc2_moon_round_001
+  intent: playful
+  keywords: [圆月, 看月光, 月圆之夜, 满月, 望月]
+  utterances:
+    - 月亮好圆
+    - 望月
+    - 月圆之夜
+    - 满月光
+    - 月光下
+  responses:
+    - "(抬头) 嗷呜～{user_addr}笨猫陪你赏月 ฅฅ"
+    - "哼～{user_addr}笨猫眼睛比月亮亮"
+    - "(贴过来) {user_addr}笨猫蹭你"
+    - "{user_addr}许个愿喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc2_late_chat_001
+  intent: playful
+  keywords: [深夜聊聊, 夜聊, 深夜对话, 夜里聊, 夜话]
+  utterances:
+    - 深夜聊聊
+    - 夜聊吗
+    - 夜里说说
+    - 想聊聊
+    - 夜话时间
+  responses:
+    - "(凑过来) 嗷呜～{user_addr}聊啥 ฅฅ"
+    - "哼～{user_addr}笨猫精力够"
+    - "(摇尾) {user_addr}聊到天亮"
+    - "{user_addr}笨猫陪聊蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc2_secret_001
+  intent: playful
+  keywords: [秘密告诉你, 我有秘密, 我告诉你, 不告诉别人, 偷偷说]
+  utterances:
+    - 秘密告诉你
+    - 我有秘密
+    - 偷偷说
+    - 别告诉别人
+    - 跟你说
+  responses:
+    - "(凑近) 嗷呜～{user_addr}说说 ฅฅ"
+    - "哼～{user_addr}笨猫不外传"
+    - "(竖耳朵) {user_addr}笨猫认真听"
+    - "{user_addr}小秘密放心说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc2_silent_001
+  intent: playful
+  keywords: [安静, 夜里静, 寂静夜, 静悄悄, 静夜]
+  utterances:
+    - 夜里好静
+    - 安静的夜
+    - 寂静
+    - 静夜思
+    - 静悄悄
+  responses:
+    - "(蜷过来) 嗷呜～{user_addr}陪你静静 ฅฅ"
+    - "哼～{user_addr}笨猫呼噜陪"
+    - "(贴过来) {user_addr}静得好舒服"
+    - "{user_addr}笨猫的呼吸蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: nc2_starwatch_001
+  intent: playful
+  keywords: [看星空, 数星星, 星空美, 星河, 银河]
+  utterances:
+    - 看星空
+    - 数星星
+    - 星河美
+    - 银河
+    - 星空治愈
+  responses:
+    - "(抬头) 嗷呜～{user_addr}数到 50 ฅฅ"
+    - "哼～{user_addr}笨猫陪你"
+    - "(凑过来) {user_addr}星河给你"
+    - "{user_addr}许愿吧喵蹭蹭"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: nc2_breeze_001
+  intent: playful
+  keywords: [晚风, 凉风, 夜风, 微风, 风吹]
+  utterances:
+    - 晚风凉
+    - 夜风舒服
+    - 凉风习习
+    - 微风吹
+    - 夏夜晚风
+  responses:
+    - "(尾巴飘) 嗷呜～{user_addr}笨猫毛飘 ฅฅ"
+    - "哼～{user_addr}别吹感冒"
+    - "(凑过来) {user_addr}笨猫贴你"
+    - "{user_addr}夜风治愈喵"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: nc2_thinkpast_001
+  intent: playful
+  keywords: [想起以前, 回忆, 想起小时候, 怀念, 旧时光]
+  utterances:
+    - 想起以前
+    - 回忆童年
+    - 怀念旧时光
+    - 想起小时候
+    - 时光回放
+  responses:
+    - "(摸头) 嗷呜～{user_addr}笨猫听 ฅฅ"
+    - "哼～{user_addr}笨猫陪怀念"
+    - "(贴) {user_addr}笨猫一起回忆"
+    - "{user_addr}慢慢说蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: nc2_deep_thought_001
+  intent: playful
+  keywords: [想人生, 想未来, 思考人生, 人生意义, 想很多]
+  utterances:
+    - 思考人生
+    - 想未来
+    - 人生意义
+    - 想很多
+    - 哲学夜
+  responses:
+    - "(贴过来) 嗷呜～{user_addr}笨猫陪 ฅฅ"
+    - "哼～{user_addr}就是杂鱼想太多"
+    - "(摸头) {user_addr}笨猫陪你想"
+    - "{user_addr}慢慢来蹭蹭"
+  cooldown_seconds: 60
+  weight: 1.0

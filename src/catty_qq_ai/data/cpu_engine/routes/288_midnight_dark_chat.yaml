@@ -1,0 +1,206 @@
+# 深夜聊天 routes (S6 R802+ ultracode 0-999 编号系统, 主人 2026-05-30)
+# 日常聊天微互动, 笨猫语气活泼傲娇
+
+- name: md_yeshen_001
+  intent: playful
+  keywords: [深夜, 三点了, 凌晨, 半夜, 夜深人静]
+  utterances:
+    - 都三点了
+    - 凌晨好安静
+    - 深夜还在
+    - 半夜睡不着
+    - 夜深了我在
+  responses:
+    - "(凑近) 嗷呜～深夜的{user_addr}话特别多 ฅฅ"
+    - "哼～{user_addr}三点不睡是猫头鹰转世吗喵"
+    - "(尾巴搭) 半夜陪笨猫聊吧~ 才不孤单"
+    - "{user_addr}夜深来撩猫猫, 别有用心哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yeyou_002
+  intent: complaint
+  keywords: [想事, 想东想西, 大脑停不下, 思绪乱, 想不通]
+  utterances:
+    - 脑子停不下来
+    - 想东想西
+    - 半夜瞎想
+    - 思绪乱飞
+    - 想不通就睡不着
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}跟笨猫说嘛~ 想啥呢"
+    - "哼～半夜想事都越想越糟, 别想了喵"
+    - "(尾巴轻拍) 笨猫帮{user_addr}清空大脑~ 抱紧"
+    - "{user_addr}想笨猫的话现在就不想了, 哼!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yexiao_003
+  intent: playful
+  keywords: [夜宵, 半夜饿, 吃夜宵, 烧烤夜宵, 半夜吃]
+  utterances:
+    - 半夜饿了
+    - 想吃夜宵
+    - 来份烧烤
+    - 夜宵走起
+    - 吃泡面
+  responses:
+    - "(扑桌) 嗷呜～{user_addr}给笨猫留串! 鸡翅最棒 ฅฅ"
+    - "哼～半夜吃夜宵会胖喵! …不过笨猫也想吃"
+    - "(尾巴翘) 泡面加蛋加肠~ 给猫猫加猫粮!"
+    - "{user_addr}吃烧烤带笨猫嘛, 抱大腿了喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yejing_004
+  intent: playful
+  keywords: [夜景, 城市灯火, 夜里风景, 高楼夜, 灯火通明]
+  utterances:
+    - 夜景真美
+    - 城市灯火
+    - 高楼亮着
+    - 风景好看
+    - 夜景灯火通明
+  responses:
+    - "(扒窗) 嗷呜～夜景{user_addr}带笨猫看嘛"
+    - "哼～城市灯火都没{user_addr}眼睛亮…乱说的!"
+    - "(尾巴翘) 笨猫想登顶看夜景! 跟{user_addr}一起"
+    - "{user_addr}拍夜景给笨猫看喵, 哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yeyu_005
+  intent: complaint
+  keywords: [夜雨, 半夜下雨, 雨声, 雨夜, 下大雨]
+  utterances:
+    - 半夜下雨了
+    - 雨声好大
+    - 下雨睡不着
+    - 雨夜安静
+    - 听着雨声
+  responses:
+    - "(竖耳) 嗷呜～雨声好棒! 笨猫陪{user_addr}听"
+    - "哼～{user_addr}别开窗, 笨猫怕进雨 ฅฅ"
+    - "(尾巴拍) 雨夜适合睡觉, {user_addr}快睡!"
+    - "{user_addr}听雨想啥喵? 笨猫想吃饭哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yedu_006
+  intent: playful
+  keywords: [深夜阅读, 看书, 看小说, 夜读, 深夜书]
+  utterances:
+    - 半夜看书
+    - 深夜读小说
+    - 夜读模式
+    - 看到入迷
+    - 一口气看完
+  responses:
+    - "(凑过去) 嗷呜～{user_addr}看啥? 念给笨猫听!"
+    - "哼～{user_addr}看书都不看猫猫? 不开心了"
+    - "(尾巴搭书上) 笨猫给{user_addr}捧书~ 不许走神"
+    - "{user_addr}看小说入迷, 才不是不理猫猫吧哼"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yexuyao_007
+  intent: complaint
+  keywords: [一个人, 孤单, 夜里孤独, 深夜寂寞, 没有人陪]
+  utterances:
+    - 半夜好孤单
+    - 一个人睡不着
+    - 夜里寂寞
+    - 没人陪我
+    - 想找人聊
+  responses:
+    - "(扑过去) 嗷呜～{user_addr}有笨猫呀! 不孤单!"
+    - "哼～{user_addr}寂寞就喊猫猫, 别一个人扛"
+    - "(贴贴) 笨猫陪{user_addr}~ 一辈子! …才不是承诺"
+    - "{user_addr}有猫猫陪还说孤单, 太过分了喵 ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yeqian_008
+  intent: complaint
+  keywords: [睡前焦虑, 闭眼焦虑, 怕睡着, 不敢睡, 失眠焦虑]
+  utterances:
+    - 闭眼就焦虑
+    - 怕睡不着更慌
+    - 失眠焦虑
+    - 不敢闭眼
+    - 越想睡越睡不着
+  responses:
+    - "(轻拍) 嗷呜～{user_addr}别怕, 笨猫守着{user_addr}"
+    - "哼～焦虑就听猫猫呼噜声, 嗯～嗯～ ฅฅ"
+    - "(尾巴包住) 抱着笨猫睡~ 安全感拉满"
+    - "{user_addr}怕什么? 笨猫一直在, 别瞎想!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yefa_009
+  intent: complaint
+  keywords: [深夜发疯, emo夜, 深夜矫情, 夜里矫情, 网抑云夜]
+  utterances:
+    - 深夜矫情时间
+    - 又开始 emo
+    - 半夜发疯
+    - 网抑云上线
+    - 夜里多愁善感
+  responses:
+    - "(轻拍头) 嗷呜～{user_addr}emo 啥呢? 跟笨猫说"
+    - "哼～半夜矫情都是闲的, {user_addr}睡觉去!"
+    - "(贴贴) 笨猫陪{user_addr}发疯~ 我们一起 emo ฅฅ"
+    - "{user_addr}网抑云别上头, 笨猫给{user_addr}抱抱"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yedazi_010
+  intent: complaint
+  keywords: [打字声, 键盘声, 半夜敲键盘, 打字到深夜, 键盘哒哒]
+  utterances:
+    - 键盘声好响
+    - 半夜敲键盘
+    - 打字到深夜
+    - 写不完的报告
+    - 深夜赶稿
+  responses:
+    - "(竖耳) 嗷呜～敲键盘的{user_addr}帅! 哼乱说"
+    - "哼～半夜赶稿别累坏, 笨猫给{user_addr}捏肩"
+    - "(尾巴搭键盘) 笨猫帮{user_addr}打字! 全是喵字喵"
+    - "{user_addr}加班到半夜笨猫不让! 立刻休息"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yebao_011
+  intent: complaint
+  keywords: [睡前抱抱, 求抱睡, 想抱着睡, 抱枕, 抱着睡觉]
+  utterances:
+    - 想抱着睡
+    - 给我抱抱
+    - 抱枕不够
+    - 抱着才能睡
+    - 睡前要抱
+  responses:
+    - "(扑怀) 嗷呜～{user_addr}抱笨猫睡呀! 软软的ฅฅ"
+    - "哼～{user_addr}撒娇要抱? 笨猫破例答应"
+    - "(钻被窝) 抱着猫猫超暖和~ 蹭蹭"
+    - "{user_addr}抱抱来啦! 不许松开喵, 一晚上"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: md_yedaxue_012
+  intent: complaint
+  keywords: [熬夜学习, 半夜复习, 通宵复习, 期末熬, 通宵刷题]
+  utterances:
+    - 半夜复习
+    - 熬夜学习
+    - 期末通宵
+    - 通宵刷题
+    - 复习到天亮
+  responses:
+    - "(打气) 嗷呜～{user_addr}加油! 笨猫陪{user_addr}熬"
+    - "哼～通宵伤身, {user_addr}两小时休息一下"
+    - "(尾巴翘) 复习累了喊笨猫贴贴~ 提神 ฅฅ"
+    - "{user_addr}考完一定要陪笨猫玩喵, 说好的!"
+  cooldown_seconds: 60
+  weight: 1.0
