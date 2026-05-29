@@ -1,0 +1,206 @@
+# 床垫 / 乳胶 / 弹簧 / 记忆棉 routes (S6 R495 NLU 节点扩充, 第四十九周期 4/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: bm_latex_001
+  intent: question
+  keywords: [推荐乳胶床垫, 推荐慕思, 推荐天然乳胶, 推荐泰国乳胶, 笨猫乳胶床垫]
+  utterances:
+    - 推荐乳胶床垫
+    - 推荐慕思
+    - 推荐天然乳胶
+    - 推荐泰国乳胶
+    - 笨猫乳胶床垫
+  responses:
+    - "嗷呜～{user_addr}慕思 De Rucci - 国产高端ฅฅ"
+    - "(尾巴翘) 泰国 Ventry / Patex 天然乳胶"
+    - "{user_addr}弹性好 / 防螨 / 透气"
+    - "(挺胸) 笨猫推荐: 天然乳胶含量 ≥90%!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_spring_001
+  intent: question
+  keywords: [推荐弹簧床垫, 推荐 Sealy, 推荐 Simmons, 推荐席梦思, 笨猫弹簧床垫]
+  utterances:
+    - 推荐弹簧床垫
+    - "{user_addr}推荐 Sealy"
+    - "{user_addr}推荐 Simmons"
+    - 推荐席梦思
+    - 笨猫弹簧床垫
+  responses:
+    - "嗷呜～{user_addr}Sealy 丝涟 - 整脊护脊ฅฅ"
+    - "(尾巴翘) Simmons 席梦思 / 独立袋装弹簧"
+    - "{user_addr}承托力强 / 不晃动"
+    - "(挺胸) 笨猫推荐: 独袋弹簧 + 乳胶层!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_memory_001
+  intent: question
+  keywords: [推荐记忆棉床垫, 推荐 Tempur, 推荐泰普尔, 推荐慢回弹, 笨猫记忆棉]
+  utterances:
+    - 推荐记忆棉床垫
+    - "{user_addr}推荐 Tempur"
+    - 推荐泰普尔
+    - 推荐慢回弹
+    - 笨猫记忆棉
+  responses:
+    - "嗷呜～{user_addr}Tempur 泰普尔 - NASA 黑科技ฅฅ"
+    - "(尾巴翘) 贴合身形 / 减压 / 慢回弹"
+    - "{user_addr}夏天稍闷 / 选透气款"
+    - "(挺胸) 笨猫推荐: Tempur Cloud / Pro!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_coir_001
+  intent: question
+  keywords: [推荐椰棕床垫, 推荐棕榈, 推荐山棕, 推荐硬床垫, 笨猫椰棕]
+  utterances:
+    - 推荐椰棕床垫
+    - 推荐棕榈
+    - 推荐山棕
+    - 推荐硬床垫
+    - 笨猫椰棕
+  responses:
+    - "嗷呜～{user_addr}3E 椰梦维 / 山棕ฅฅ"
+    - "(尾巴翘) 偏硬 / 透气 / 适合护脊"
+    - "{user_addr}注意甲醛 / 选环保胶"
+    - "(挺胸) 笨猫推荐: 老人/儿童选椰棕!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_firmness_001
+  intent: question
+  keywords: [推荐床垫硬度, 推荐软硬, 推荐床垫选择, 推荐硬度, 笨猫床垫硬度]
+  utterances:
+    - 推荐床垫硬度
+    - 推荐软硬
+    - 推荐床垫选择
+    - 推荐硬度
+    - 笨猫床垫硬度
+  responses:
+    - "嗷呜～{user_addr}体重轻 → 偏软 / 重 → 偏硬ฅฅ"
+    - "(尾巴翘) 侧睡 → 偏软 / 仰睡 → 中等"
+    - "{user_addr}腰痛 → 中偏硬护脊"
+    - "(挺胸) 笨猫推荐: 试睡 15 分钟再买!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_size_001
+  intent: question
+  keywords: [推荐床垫尺寸, 推荐双人床, 推荐 1m8, 推荐 King size, 笨猫床尺寸]
+  utterances:
+    - 推荐床垫尺寸
+    - 推荐双人床
+    - "{user_addr}推荐 1m8"
+    - "{user_addr}推荐 King size"
+    - 笨猫床尺寸
+  responses:
+    - "嗷呜～{user_addr}1.5m 标双 / 1.8m 大双ฅฅ"
+    - "(尾巴翘) 2.0m King / 2.0×2.2m 超大"
+    - "{user_addr}带猫睡 → 至少 1.8m!"
+    - "(挺胸) 笨猫推荐: 1.8×2.0m 黄金尺寸!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_baby_001
+  intent: question
+  keywords: [推荐婴儿床垫, 推荐儿童床垫, 推荐宝宝床垫, 推荐 babycare, 笨猫婴儿床垫]
+  utterances:
+    - 推荐婴儿床垫
+    - 推荐儿童床垫
+    - 推荐宝宝床垫
+    - "{user_addr}推荐 babycare"
+    - 笨猫婴儿床垫
+  responses:
+    - "嗷呜～{user_addr}babycare / 良良 / 棒棒猪ฅฅ"
+    - "(尾巴翘) 椰棕硬质 / 防侧翻 / 可拆洗"
+    - "{user_addr}≤3 岁要硬 / 别用记忆棉"
+    - "(挺胸) 笨猫推荐: 3E 椰棕 + A 类面料!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_care_001
+  intent: question
+  keywords: [推荐床垫保养, 推荐床垫翻面, 推荐床垫清洁, 推荐除螨, 笨猫床垫保养]
+  utterances:
+    - 推荐床垫保养
+    - 推荐床垫翻面
+    - 推荐床垫清洁
+    - 推荐除螨
+    - 笨猫床垫保养
+  responses:
+    - "嗷呜～{user_addr}3 个月翻一次面ฅฅ"
+    - "(尾巴翘) 小苏打吸味 / 阳光晒"
+    - "{user_addr}除螨仪 + 床罩定期洗"
+    - "(挺胸) 笨猫推荐: 拍打 + 通风!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_protector_001
+  intent: question
+  keywords: [推荐床垫保护套, 推荐防水床罩, 推荐床笠, 推荐隔尿垫, 笨猫保护套]
+  utterances:
+    - 推荐床垫保护套
+    - 推荐防水床罩
+    - 推荐床笠
+    - 推荐隔尿垫
+    - 笨猫保护套
+  responses:
+    - "嗷呜～{user_addr}防水 + 防螨 + 全包ฅฅ"
+    - "(尾巴翘) 竹纤维 / 全棉 / 拉链款"
+    - "{user_addr}有猫狗必备 / 防爪子"
+    - "(挺胸) 笨猫推荐: SafeRest / 多喜爱!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_frame_001
+  intent: question
+  keywords: [推荐床架, 推荐排骨架, 推荐箱体床, 推荐实木床, 笨猫床架]
+  utterances:
+    - 推荐床架
+    - 推荐排骨架
+    - 推荐箱体床
+    - 推荐实木床
+    - 笨猫床架
+  responses:
+    - "嗷呜～{user_addr}排骨架 - 透气 / 弹簧床垫配ฅฅ"
+    - "(尾巴翘) 箱体床 - 收纳大 / 适合小户型"
+    - "{user_addr}实木床 - 稳 / 寿命长"
+    - "(挺胸) 笨猫推荐: 北欧风排骨架!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_nightstand_001
+  intent: question
+  keywords: [推荐床头柜, 推荐床头柜选择, 推荐床头柜风格, 推荐床头柜高度, 笨猫床头柜]
+  utterances:
+    - 推荐床头柜
+    - 推荐床头柜选择
+    - 推荐床头柜风格
+    - 推荐床头柜高度
+    - 笨猫床头柜
+  responses:
+    - "嗷呜～{user_addr}高度与床垫齐平ฅฅ"
+    - "(尾巴翘) 两个抽屉 / 一个开放格"
+    - "{user_addr}IKEA / 源氏木语 / 林氏木业"
+    - "(挺胸) 笨猫推荐: 实木 + 圆角!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: bm_bedroom_storage_001
+  intent: question
+  keywords: [推荐卧室收纳, 推荐衣柜收纳, 推荐床下收纳, 推荐床头收纳, 笨猫卧室收纳]
+  utterances:
+    - 推荐卧室收纳
+    - 推荐衣柜收纳
+    - 推荐床下收纳
+    - 推荐床头收纳
+    - 笨猫卧室收纳
+  responses:
+    - "嗷呜～{user_addr}床下抽屉箱 / 真空压缩袋ฅฅ"
+    - "(尾巴翘) 衣柜分层 + 季节轮换"
+    - "{user_addr}床头壁挂置物架"
+    - "(挺胸) 笨猫推荐: 极简 + 隐藏式!"
+  cooldown_seconds: 60
+  weight: 1.0

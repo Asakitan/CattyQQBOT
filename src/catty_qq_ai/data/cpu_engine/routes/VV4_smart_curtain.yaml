@@ -1,0 +1,206 @@
+# 智能窗帘 / 电动 / 米家 routes (S6 R496 NLU 节点扩充, 第四十九周期 5/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: sc_brand_001
+  intent: question
+  keywords: [推荐智能窗帘, 推荐米家窗帘, 推荐 Aqara 窗帘, 推荐绿米窗帘, 笨猫智能窗帘]
+  utterances:
+    - 推荐智能窗帘
+    - 推荐米家窗帘
+    - 推荐 Aqara 窗帘
+    - 推荐绿米窗帘
+    - 笨猫智能窗帘
+  responses:
+    - "嗷呜～{user_addr}米家智能窗帘 - 生态全ฅฅ"
+    - "(尾巴翘) Aqara 绿米 - 子品牌精品"
+    - "{user_addr}HomeKit 接入选 Aqara"
+    - "(挺胸) 笨猫推荐: 米家入门 Aqara 进阶!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_motor_001
+  intent: question
+  keywords: [推荐电动窗帘电机, 推荐杜亚, 推荐欧瑞博, 推荐邦先生, 笨猫窗帘电机]
+  utterances:
+    - 推荐电动窗帘电机
+    - 推荐杜亚
+    - 推荐欧瑞博
+    - 推荐邦先生
+    - 笨猫窗帘电机
+  responses:
+    - "嗷呜～{user_addr}杜亚 Dooya - 老牌专业ฅฅ"
+    - "(尾巴翘) 欧瑞博 / 邦先生 / 创明"
+    - "{user_addr}电机看扭矩 / 噪音"
+    - "(挺胸) 笨猫推荐: 杜亚 DT52!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_track_001
+  intent: question
+  keywords: [推荐窗帘轨道, 推荐静音轨道, 推荐铝合金轨道, 推荐弯轨, 笨猫窗帘轨道]
+  utterances:
+    - 推荐窗帘轨道
+    - 推荐静音轨道
+    - 推荐铝合金轨道
+    - 推荐弯轨
+    - 笨猫窗帘轨道
+  responses:
+    - "嗷呜～{user_addr}铝合金轨道 - 主流稳ฅฅ"
+    - "(尾巴翘) 静音轨道带 PU 滚轮"
+    - "{user_addr}弯轨可绕 L 型转角"
+    - "(挺胸) 笨猫推荐: 杜亚原装静音轨!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_voice_001
+  intent: question
+  keywords: [推荐智能控制, 推荐语音窗帘, 推荐小爱同学, 推荐 Siri 窗帘, 笨猫语音控制]
+  utterances:
+    - 推荐智能控制
+    - 推荐语音窗帘
+    - 推荐小爱同学
+    - 推荐 Siri 窗帘
+    - 笨猫语音控制
+  responses:
+    - "嗷呜～{user_addr}小爱同学 / 天猫精灵ฅฅ"
+    - "(尾巴翘) Siri (HomeKit) / Google Home"
+    - "{user_addr}多平台用 HA Home Assistant"
+    - "(挺胸) 笨猫推荐: 小爱+米家闭环!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_fabric_001
+  intent: question
+  keywords: [推荐窗帘材质, 推荐遮光布, 推荐棉麻窗帘, 推荐天鹅绒, 笨猫窗帘材质]
+  utterances:
+    - 推荐窗帘材质
+    - 推荐遮光布
+    - 推荐棉麻窗帘
+    - 推荐天鹅绒
+    - 笨猫窗帘材质
+  responses:
+    - "嗷呜～{user_addr}遮光布 - 卧室必备ฅฅ"
+    - "(尾巴翘) 棉麻 / 雪尼尔 / 天鹅绒"
+    - "{user_addr}客厅纱+布双层好看"
+    - "(挺胸) 笨猫推荐: 卧室全遮光客厅半遮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_double_001
+  intent: question
+  keywords: [推荐双层窗帘, 推荐纱帘, 推荐布纱一体, 推荐窗纱, 笨猫双层窗帘]
+  utterances:
+    - 推荐双层窗帘
+    - 推荐纱帘
+    - 推荐布纱一体
+    - 推荐窗纱
+    - 笨猫双层窗帘
+  responses:
+    - "嗷呜～{user_addr}布+纱双层 - 客厅最美ฅฅ"
+    - "(尾巴翘) 双电机分别控制布纱"
+    - "{user_addr}白天拉纱晚上拉布"
+    - "(挺胸) 笨猫推荐: 客厅必上双层!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_roller_001
+  intent: question
+  keywords: [推荐卷帘, 推荐罗马帘, 推荐百叶帘, 推荐蜂巢帘, 笨猫卷帘]
+  utterances:
+    - 推荐卷帘
+    - 推荐罗马帘
+    - 推荐百叶帘
+    - 推荐蜂巢帘
+    - 笨猫卷帘
+  responses:
+    - "嗷呜～{user_addr}卷帘 - 厨房/书房简洁ฅฅ"
+    - "(尾巴翘) 罗马帘 / 蜂巢帘 / 百叶帘"
+    - "{user_addr}蜂巢帘保温好"
+    - "(挺胸) 笨猫推荐: 厨房卷帘卧室布帘!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_prepare_001
+  intent: question
+  keywords: [推荐窗帘装修预留, 推荐窗帘盒, 推荐电源预留, 推荐窗帘开关, 笨猫装修预留]
+  utterances:
+    - 推荐窗帘装修预留
+    - 推荐窗帘盒
+    - 推荐电源预留
+    - 推荐窗帘开关
+    - 笨猫装修预留
+  responses:
+    - "嗷呜～{user_addr}窗帘盒 15cm 深ฅฅ"
+    - "(尾巴翘) 窗帘两侧留 220V 电源"
+    - "{user_addr}预留 86 底盒装窗帘开关"
+    - "(挺胸) 笨猫推荐: 装修就要想好!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_linkage_001
+  intent: question
+  keywords: [推荐智能窗帘联动, 推荐光照联动, 推荐起床场景, 推荐回家场景, 笨猫窗帘联动]
+  utterances:
+    - 推荐智能窗帘联动
+    - 推荐光照联动
+    - 推荐起床场景
+    - 推荐回家场景
+    - 笨猫窗帘联动
+  responses:
+    - "嗷呜～{user_addr}日出自动开窗帘ฅฅ"
+    - "(尾巴翘) 起床场景: 灯+窗帘+音乐"
+    - "{user_addr}光照传感器联动夏天遮阳"
+    - "(挺胸) 笨猫推荐: 米家自动化超爽!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_outdoor_001
+  intent: question
+  keywords: [推荐户外遮阳棚, 推荐电动雨棚, 推荐天幕, 推荐户外帘, 笨猫户外遮阳]
+  utterances:
+    - 推荐户外遮阳棚
+    - 推荐电动雨棚
+    - 推荐天幕
+    - 推荐户外帘
+    - 笨猫户外遮阳
+  responses:
+    - "嗷呜～{user_addr}户外电动遮阳棚ฅฅ"
+    - "(尾巴翘) 防水 / 抗风 / 电机外置"
+    - "{user_addr}阳台天幕配照明氛围好"
+    - "(挺胸) 笨猫推荐: 露台必上!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: sc_install_001
+  intent: question
+  keywords: [推荐窗帘安装方式, 推荐顶装, 推荐侧装, 推荐窗帘杆, 笨猫窗帘安装]
+  utterances:
+    - 推荐窗帘安装方式
+    - 推荐顶装
+    - 推荐侧装
+    - 推荐窗帘杆
+    - 笨猫窗帘安装
+  responses:
+    - "嗷呜～{user_addr}顶装隐藏好看ฅฅ"
+    - "(尾巴翘) 侧装适合没窗帘盒"
+    - "{user_addr}窗帘杆复古风可选"
+    - "(挺胸) 笨猫推荐: 新房顶装+窗帘盒!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: sc_trouble_001
+  intent: question
+  keywords: [推荐智能窗帘故障, 推荐电机异响, 推荐不到位, 推荐离线, 笨猫窗帘故障]
+  utterances:
+    - 推荐智能窗帘故障
+    - 推荐电机异响
+    - 推荐不到位
+    - 推荐离线
+    - 笨猫窗帘故障
+  responses:
+    - "嗷呜～{user_addr}异响检查轨道滚轮ฅฅ"
+    - "(尾巴翘) 不到位重新校准行程"
+    - "{user_addr}离线检查 WiFi / Zigbee 网关"
+    - "(挺胸) 笨猫推荐: 先重启电机!"
+  cooldown_seconds: 60
+  weight: 0.8

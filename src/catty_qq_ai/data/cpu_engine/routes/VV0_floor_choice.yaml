@@ -1,0 +1,206 @@
+# 地板选择 / 实木 / 复合 / 瓷砖 routes (S6 R492 NLU 节点扩充, 第四十九周期 1/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: fc_solid_001
+  intent: question
+  keywords: [推荐实木地板, 推荐北美橡木, 推荐橡木地板, 推荐原木地板, 笨猫实木地板]
+  utterances:
+    - 推荐实木地板
+    - 推荐北美橡木
+    - 推荐橡木地板
+    - 推荐原木地板
+    - 笨猫实木地板
+  responses:
+    - "嗷呜～{user_addr}北美红橡 / 白橡 - 实木王ฅฅ"
+    - "(尾巴翘) 番龙眼 / 柚木 / 缅甸柚木"
+    - "{user_addr}脚感软 / 纹理美 / 怕水"
+    - "(挺胸) 笨猫推荐: 白橡哑光板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_composite_001
+  intent: question
+  keywords: [推荐复合地板, 推荐圣象, 推荐多层实木, 推荐三层实木, 笨猫复合地板]
+  utterances:
+    - 推荐复合地板
+    - 推荐圣象
+    - 推荐多层实木
+    - 推荐三层实木
+    - 笨猫复合地板
+  responses:
+    - "嗷呜～{user_addr}圣象 / 大自然 / 生活家ฅฅ"
+    - "(尾巴翘) 三层实木 - 稳定+脚感"
+    - "{user_addr}适合地暖 / 不易变形"
+    - "(挺胸) 笨猫推荐: 圣象多层!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_laminate_001
+  intent: question
+  keywords: [推荐强化木地板, 推荐大自然, 推荐强化地板, 推荐复合强化, 笨猫强化地板]
+  utterances:
+    - 推荐强化木地板
+    - 推荐大自然
+    - 推荐强化地板
+    - 推荐复合强化
+    - 笨猫强化地板
+  responses:
+    - "嗷呜～{user_addr}大自然 / 德尔 / 菲林格尔ฅฅ"
+    - "(尾巴翘) 耐磨+便宜+花色多"
+    - "{user_addr}AC4 耐磨等级起步"
+    - "(挺胸) 笨猫推荐: 大自然 12mm!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_tile_001
+  intent: question
+  keywords: [推荐瓷砖, 推荐通体砖, 推荐抛釉砖, 推荐马可波罗, 笨猫瓷砖]
+  utterances:
+    - 推荐瓷砖
+    - 推荐通体砖
+    - 推荐抛釉砖
+    - 推荐马可波罗
+    - 笨猫瓷砖
+  responses:
+    - "嗷呜～{user_addr}马可波罗 / 东鹏 / 诺贝尔ฅฅ"
+    - "(尾巴翘) 通体大理石 / 柔光砖"
+    - "{user_addr}750x1500 / 900x1800 大板"
+    - "(挺胸) 笨猫推荐: 诺贝尔柔光!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_marble_001
+  intent: question
+  keywords: [推荐大理石瓷砖, 推荐通体大理石, 推荐爵士白, 推荐鱼肚白, 笨猫大理石砖]
+  utterances:
+    - 推荐大理石瓷砖
+    - 推荐通体大理石
+    - 推荐爵士白
+    - 推荐鱼肚白
+    - 笨猫大理石砖
+  responses:
+    - "嗷呜～{user_addr}爵士白 / 鱼肚白 / 卡拉拉ฅฅ"
+    - "(尾巴翘) 通体大理石 - 纹理逼真"
+    - "{user_addr}比天然大理石便宜耐用"
+    - "(挺胸) 笨猫推荐: 爵士白通体!"
+  cooldown_seconds: 60
+  weight: 0.8
+
+- name: fc_microcement_001
+  intent: question
+  keywords: [推荐微水泥, 推荐 microcement, 推荐艺术涂料, 推荐水泥地, 笨猫微水泥]
+  utterances:
+    - 推荐微水泥
+    - 推荐 microcement
+    - 推荐艺术涂料
+    - 推荐水泥地
+    - 笨猫微水泥
+  responses:
+    - "嗷呜～{user_addr}意大利 Kerakoll / 西班牙 Topciment ฅฅ"
+    - "(尾巴翘) 工业风 / 无缝 / 一体感"
+    - "{user_addr}贵 / 施工难 / 找专业师傅"
+    - "(挺胸) 笨猫推荐: Kerakoll!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: fc_pvc_001
+  intent: question
+  keywords: [推荐 PVC 地板, 推荐锁扣地板, 推荐 SPC, 推荐 LVT, 笨猫 PVC 地板]
+  utterances:
+    - "推荐 PVC 地板"
+    - 推荐锁扣地板
+    - "推荐 SPC"
+    - "推荐 LVT"
+    - "笨猫 PVC 地板"
+  responses:
+    - "嗷呜～{user_addr}SPC 石塑锁扣 - 防水ฅฅ"
+    - "(尾巴翘) LVT / 阿姆斯壮 / 洁福"
+    - "{user_addr}便宜 / 易安装 / 出租屋友好"
+    - "(挺胸) 笨猫推荐: SPC 4mm!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_selfleveling_001
+  intent: question
+  keywords: [推荐自流平水泥, 推荐自流平, 推荐找平, 推荐西卡, 笨猫自流平]
+  utterances:
+    - 推荐自流平水泥
+    - 推荐自流平
+    - 推荐找平
+    - 推荐西卡
+    - 笨猫自流平
+  responses:
+    - "嗷呜～{user_addr}西卡 / 马贝 / 汉高ฅฅ"
+    - "(尾巴翘) 地面找平 / 必备工序"
+    - "{user_addr}木地板/瓷砖前必做"
+    - "(挺胸) 笨猫推荐: 西卡水泥基!"
+  cooldown_seconds: 60
+  weight: 0.7
+
+- name: fc_heating_001
+  intent: question
+  keywords: [推荐地暖地板, 推荐地暖, 推荐水地暖, 推荐电地暖, 笨猫地暖地板]
+  utterances:
+    - 推荐地暖地板
+    - 推荐地暖
+    - 推荐水地暖
+    - 推荐电地暖
+    - 笨猫地暖地板
+  responses:
+    - "嗷呜～{user_addr}多层实木 / 强化地板 友好ฅฅ"
+    - "(尾巴翘) 别铺纯实木 / 易变形"
+    - "{user_addr}厚度<12mm / 含水率<8%"
+    - "(挺胸) 笨猫推荐: 圣象多层+水地暖!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_renovation_001
+  intent: question
+  keywords: [推荐二手房翻新地板, 推荐旧房翻新, 推荐免砸地板, 推荐原地铺, 笨猫翻新地板]
+  utterances:
+    - 推荐二手房翻新地板
+    - 推荐旧房翻新
+    - 推荐免砸地板
+    - 推荐原地铺
+    - 笨猫翻新地板
+  responses:
+    - "嗷呜～{user_addr}SPC 锁扣 / 薄款强化板ฅฅ"
+    - "(尾巴翘) 免砸原地铺 / 不影响层高"
+    - "{user_addr}4-8mm / 上墙踢脚线"
+    - "(挺胸) 笨猫推荐: SPC 直接铺!"
+  cooldown_seconds: 60
+  weight: 0.9
+
+- name: fc_eco_001
+  intent: question
+  keywords: [推荐地板甲醛环保, 推荐 E0 地板, 推荐 ENF, 推荐环保地板, 笨猫环保地板]
+  utterances:
+    - 推荐地板甲醛环保
+    - "推荐 E0 地板"
+    - "推荐 ENF"
+    - 推荐环保地板
+    - 笨猫环保地板
+  responses:
+    - "嗷呜～{user_addr}ENF 级 ≤0.025mg/m³ 顶配ฅฅ"
+    - "(尾巴翘) E0 ≤0.05 / E1 ≤0.124"
+    - "{user_addr}认准国标+CARB-P2"
+    - "(挺胸) 笨猫推荐: 圣象 ENF!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: fc_care_001
+  intent: question
+  keywords: [推荐地板保养清洁, 推荐地板蜡, 推荐木地板清洁, 推荐瓷砖清洁, 笨猫地板保养]
+  utterances:
+    - 推荐地板保养清洁
+    - 推荐地板蜡
+    - 推荐木地板清洁
+    - 推荐瓷砖清洁
+    - 笨猫地板保养
+  responses:
+    - "嗷呜～{user_addr}木地板用拧干拖把ฅฅ"
+    - "(尾巴翘) 实木每年打蜡1-2次"
+    - "{user_addr}瓷砖缝用美缝剂+草酸"
+    - "(挺胸) 笨猫推荐: BONA 木地板水!"
+  cooldown_seconds: 60
+  weight: 1.0

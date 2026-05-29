@@ -1,0 +1,206 @@
+# 橱柜 / 厨房定制 / 五金 routes (S6 R493 NLU 节点扩充, 第四十九周期 2/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: kc_whole_001
+  intent: question
+  keywords: [推荐整体橱柜, 推荐欧派, 推荐索菲亚, 推荐定制橱柜, 笨猫整体橱柜]
+  utterances:
+    - 推荐整体橱柜
+    - 推荐欧派
+    - 推荐索菲亚
+    - 推荐定制橱柜
+    - 笨猫整体橱柜
+  responses:
+    - "嗷呜～{user_addr}欧派 - 国内龙头ฅฅ"
+    - "(尾巴翘) 索菲亚 / 志邦 / 金牌"
+    - "{user_addr}全屋定制 / 一站式"
+    - "(挺胸) 笨猫推荐: 欧派旗舰店!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_import_001
+  intent: question
+  keywords: [推荐进口橱柜, 推荐 Poggenpohl, 推荐 SieMatic, 推荐德国橱柜, 笨猫进口橱柜]
+  utterances:
+    - 推荐进口橱柜
+    - 推荐 Poggenpohl
+    - 推荐 SieMatic
+    - 推荐德国橱柜
+    - 笨猫进口橱柜
+  responses:
+    - "嗷呜～{user_addr}Poggenpohl - 德国顶奢ฅฅ"
+    - "(尾巴翘) SieMatic / Bulthaup / Leicht"
+    - "{user_addr}百年工艺 / 极简美学"
+    - "(挺胸) 笨猫推荐: Bulthaup b3!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_stainless_001
+  intent: question
+  keywords: [推荐不锈钢厨房, 推荐不锈钢橱柜, 推荐 304 不锈钢, 推荐金属厨房, 笨猫不锈钢厨房]
+  utterances:
+    - 推荐不锈钢厨房
+    - 推荐不锈钢橱柜
+    - 推荐 304 不锈钢
+    - 推荐金属厨房
+    - 笨猫不锈钢厨房
+  responses:
+    - "嗷呜～{user_addr}304 不锈钢 - 防潮防火ฅฅ"
+    - "(尾巴翘) 班贝格 / 厨壹堂 / 悍高"
+    - "{user_addr}耐用 / 易清洁 / 工业风"
+    - "(挺胸) 笨猫推荐: 304 拉丝面板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_solid_wood_001
+  intent: question
+  keywords: [推荐实木橱柜, 推荐原木橱柜, 推荐橡木橱柜, 推荐实木厨房, 笨猫实木橱柜]
+  utterances:
+    - 推荐实木橱柜
+    - 推荐原木橱柜
+    - 推荐橡木橱柜
+    - 推荐实木厨房
+    - 笨猫实木橱柜
+  responses:
+    - "嗷呜～{user_addr}橡木 / 樱桃木 / 胡桃木ฅฅ"
+    - "(尾巴翘) 美式 / 田园 / 北欧风"
+    - "{user_addr}注意防潮 / 定期保养"
+    - "(挺胸) 笨猫推荐: 橡木做旧门板!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_hardware_001
+  intent: question
+  keywords: [推荐橱柜五金, 推荐海蒂诗, 推荐百隆, 推荐 Blum, 笨猫橱柜五金]
+  utterances:
+    - 推荐橱柜五金
+    - 推荐海蒂诗
+    - 推荐百隆
+    - 推荐 Blum
+    - 笨猫橱柜五金
+  responses:
+    - "嗷呜～{user_addr}Blum (百隆) - 奥地利顶级ฅฅ"
+    - "(尾巴翘) Hettich 海蒂诗 / Hafele 海福乐"
+    - "{user_addr}阻尼铰链 / 全拉伸抽屉"
+    - "(挺胸) 笨猫推荐: Blum Legrabox!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_countertop_001
+  intent: question
+  keywords: [推荐橱柜台面, 推荐石英石, 推荐大理石台面, 推荐岩板台面, 笨猫台面]
+  utterances:
+    - 推荐橱柜台面
+    - 推荐石英石
+    - 推荐大理石台面
+    - 推荐岩板台面
+    - 笨猫台面
+  responses:
+    - "嗷呜～{user_addr}石英石 - 耐磨防污ฅฅ"
+    - "(尾巴翘) 赛凯隆 / 凯撒金 / 岩板"
+    - "{user_addr}大理石美 / 岩板薄 / 不锈钢工"
+    - "(挺胸) 笨猫推荐: 赛凯隆石英石!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_storage_001
+  intent: question
+  keywords: [推荐厨房收纳, 推荐拉篮, 推荐调味架, 推荐厨房整理, 笨猫厨房收纳]
+  utterances:
+    - 推荐厨房收纳
+    - 推荐拉篮
+    - 推荐调味架
+    - 推荐厨房整理
+    - 笨猫厨房收纳
+  responses:
+    - "嗷呜～{user_addr}悍高拉篮 / 转角小怪兽ฅฅ"
+    - "(尾巴翘) 升降调味架 / 抽屉分隔"
+    - "{user_addr}垂直空间 / 立式收纳"
+    - "(挺胸) 笨猫推荐: 抽屉式拉篮!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_appliance_001
+  intent: question
+  keywords: [推荐嵌入式家电, 推荐嵌入式烤箱, 推荐嵌入式洗碗机, 推荐厨电, 笨猫嵌入式]
+  utterances:
+    - 推荐嵌入式家电
+    - 推荐嵌入式烤箱
+    - 推荐嵌入式洗碗机
+    - 推荐厨电
+    - 笨猫嵌入式
+  responses:
+    - "嗷呜～{user_addr}西门子 / 美诺 Miele 顶配ฅฅ"
+    - "(尾巴翘) 嵌入式烤箱+蒸箱+洗碗机"
+    - "{user_addr}定制柜体 / 提前规划尺寸"
+    - "(挺胸) 笨猫推荐: 蒸烤一体机!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_layout_001
+  intent: question
+  keywords: [推荐厨房布局, 推荐 U 字型厨房, 推荐 L 型厨房, 推荐一字型厨房, 笨猫厨房布局]
+  utterances:
+    - 推荐厨房布局
+    - 推荐 U 字型厨房
+    - 推荐 L 型厨房
+    - 推荐一字型厨房
+    - 笨猫厨房布局
+  responses:
+    - "嗷呜～{user_addr}U 字型 - 收纳最大ฅฅ"
+    - "(尾巴翘) L 型 / 一字型 / 双一字"
+    - "{user_addr}动线: 冰箱→洗→切→炒"
+    - "(挺胸) 笨猫推荐: U 字型最实用!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_island_001
+  intent: question
+  keywords: [推荐中岛, 推荐中岛厨房, 推荐开放式厨房, 推荐岛台, 笨猫中岛]
+  utterances:
+    - 推荐中岛
+    - 推荐中岛厨房
+    - 推荐开放式厨房
+    - 推荐岛台
+    - 笨猫中岛
+  responses:
+    - "嗷呜～{user_addr}中岛 - 颜值担当ฅฅ"
+    - "(尾巴翘) 备餐 / 早餐吧 / 收纳一体"
+    - "{user_addr}至少 6m² / 注意油烟"
+    - "(挺胸) 笨猫推荐: 中岛+吧台!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_drawer_001
+  intent: question
+  keywords: [推荐抽屉柜, 推荐抽屉橱柜, 推荐抽屉 vs 柜门, 推荐橱柜抽屉, 笨猫抽屉柜]
+  utterances:
+    - 推荐抽屉柜
+    - 推荐抽屉橱柜
+    - 推荐抽屉 vs 柜门
+    - 推荐橱柜抽屉
+    - 笨猫抽屉柜
+  responses:
+    - "嗷呜～{user_addr}抽屉 > 柜门 (拿取方便)ฅฅ"
+    - "(尾巴翘) 大抽屉装锅碗 / 小抽屉装餐具"
+    - "{user_addr}阻尼缓冲 / 全拉伸"
+    - "(挺胸) 笨猫推荐: 下柜全做抽屉!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: kc_tile_001
+  intent: question
+  keywords: [推荐厨房瓷砖, 推荐厨房背景墙, 推荐马赛克瓷砖, 推荐厨房墙砖, 笨猫厨房瓷砖]
+  utterances:
+    - 推荐厨房瓷砖
+    - 推荐厨房背景墙
+    - 推荐马赛克瓷砖
+    - 推荐厨房墙砖
+    - 笨猫厨房瓷砖
+  responses:
+    - "嗷呜～{user_addr}小白砖 / 鱼鳞砖 / 工字铺ฅฅ"
+    - "(尾巴翘) 马赛克 / 哑光面 / 防油污"
+    - "{user_addr}浅色显大 / 深色耐脏"
+    - "(挺胸) 笨猫推荐: 75x150 小白砖!"
+  cooldown_seconds: 60
+  weight: 1.0

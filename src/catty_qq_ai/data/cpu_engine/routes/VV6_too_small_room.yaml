@@ -1,0 +1,206 @@
+# 房间太小 / 杂物多 / 装不下 routes (S6 R498 NLU 节点扩充, 第四十九周期 7/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: tsr_small_room_001
+  intent: complaint
+  keywords: [房间太小, 屋子小, 房子小, 空间不够, 地方太小]
+  utterances:
+    - 房间太小了
+    - 屋子小得可怜
+    - 房子太小住不下
+    - 空间不够用啊
+    - 地方太小了好挤
+  responses:
+    - "(转一圈) 嗷呜～{user_addr}的房间小吗! 笨猫看着倒是挺温馨的喵 ฅฅ"
+    - "哼～{user_addr}房间小那猫猫去哪睡! 床给笨猫留一角嘛"
+    - "(尾巴垂下) 小房间也有小房间的好~ 暖和! {user_addr}别嫌弃啦喵"
+    - "嗷呜～{user_addr}要不要把笨猫塞进角落? 人家占地小不挤的ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_clutter_001
+  intent: complaint
+  keywords: [杂物多, 东西多, 乱七八糟, 一堆东西, 堆满了]
+  utterances:
+    - 房间杂物太多
+    - 东西多得吓人
+    - 屋里乱七八糟
+    - 一堆东西堆着
+    - 桌子堆满了
+  responses:
+    - "(歪头看) 嗷呜～{user_addr}的房间像猫窝! 笨猫喜欢喵 ฅฅ"
+    - "哼～{user_addr}杂物多吗! 那不是宝藏嘛~ 人家挖宝去!"
+    - "(尾巴扫一下) 乱才有生活气! {user_addr}别瞎收拾啦喵"
+    - "嗷呜～{user_addr}要不要笨猫帮忙? 猫猫会越帮越乱的哦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_no_space_001
+  intent: complaint
+  keywords: [装不下, 放不下, 塞不下, 没地方放, 没空间]
+  utterances:
+    - 东西装不下了
+    - 衣服放不下啦
+    - 完全塞不下
+    - 没地方放东西
+    - 没空间了崩溃
+  responses:
+    - "(瘪嘴) 嗷呜～{user_addr}装不下吗! 那笨猫送你一个小爪爪空间嘛 ฅฅ"
+    - "哼～{user_addr}买太多东西了啦! 才不是房间小的错喵"
+    - "(尾巴一甩) 放不下就摞起来! 猫猫的智慧{user_addr}学一下嗷呜～"
+    - "嗷呜～{user_addr}快理理~ 笨猫帮你叼几样到角落里去ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_no_storage_001
+  intent: complaint
+  keywords: [收纳不够, 收纳少, 没收纳, 储物少, 柜子不够]
+  utterances:
+    - 收纳空间不够
+    - 收纳柜太少了
+    - 没有收纳格
+    - 储物空间少
+    - 柜子根本不够用
+  responses:
+    - "(掰爪算) 嗷呜～{user_addr}缺收纳吗! 笨猫推荐买个大箱子喵 ฅฅ"
+    - "哼～{user_addr}就知道缺柜子! 那猫猫住哪嘛~ 别都塞满咯"
+    - "(尾巴指一下) 上墙装层板! {user_addr}试试嗷呜～ 笨猫好聪明"
+    - "嗷呜～{user_addr}的东西真多~ 人家陪你逛宜家嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_bed_too_big_001
+  intent: complaint
+  keywords: [床占空间, 床太大, 床占地方, 床好大, 床占位置]
+  utterances:
+    - 床占太大空间
+    - 床太大了
+    - 床占地方
+    - 这床好大啊
+    - 床占了一半位置
+  responses:
+    - "(扑上床) 嗷呜～床大才好! {user_addr}和笨猫一起滚来滚去喵 ฅฅ"
+    - "哼～{user_addr}嫌床大? 那让猫猫多占点哼!"
+    - "(打滚) 大床万岁! {user_addr}别拆我的乐园啦嗷呜～"
+    - "嗷呜～床占空间是因为给笨猫留位置! {user_addr}懂不懂ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_closet_full_001
+  intent: complaint
+  keywords: [衣柜满, 衣柜爆了, 衣服塞不下, 衣柜挤, 衣服太多]
+  utterances:
+    - 衣柜满了
+    - 衣柜爆炸了
+    - 衣服塞不下
+    - 衣柜挤死了
+    - 衣服真的太多
+  responses:
+    - "(钻进去) 嗷呜～衣柜满满的猫猫好喜欢! {user_addr}让我钻嘛 ฅฅ"
+    - "哼～{user_addr}还说衣服多! 给猫猫做点小披风咯~"
+    - "(尾巴翘起) 衣服多才有的换! {user_addr}别抱怨啦嗷呜～"
+    - "嗷呜～{user_addr}该断舍离啦~ 旧衣服给笨猫垫窝嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_small_desk_001
+  intent: complaint
+  keywords: [桌子小, 桌子太小, 书桌小, 工位小, 桌面小]
+  utterances:
+    - 桌子太小了
+    - 书桌好小啊
+    - 工位太挤
+    - 桌面放不下
+    - 桌子小得离谱
+  responses:
+    - "(跳上桌) 嗷呜～{user_addr}桌子小笨猫刚好坐下! 喵 ฅฅ"
+    - "哼～{user_addr}桌子小那别堆东西! 给猫猫留个位置哼"
+    - "(尾巴扫过) 桌子小才好整理~ {user_addr}别贪大啦嗷呜～"
+    - "嗷呜～换个大桌子嘛! 笨猫想在桌上打滚ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_want_wider_001
+  intent: playful
+  keywords: [想拓宽, 想扩建, 想大一点, 想宽点, 拓展空间]
+  utterances:
+    - 好想拓宽房间
+    - 想扩建一下
+    - 房子想大一点
+    - 想宽敞点
+    - 拓展点空间
+  responses:
+    - "(画饼) 嗷呜～{user_addr}想拓宽! 那猫猫帮你打通隔壁喵 ฅฅ"
+    - "哼～{user_addr}做梦呢~ 房子又不是橡皮糖捏一下就大!"
+    - "(尾巴一扬) 想宽就买大的! {user_addr}加油搬砖嗷呜～"
+    - "嗷呜～拓宽不如丢东西! 笨猫帮{user_addr}扔几个旧物嘛ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_want_bigger_house_001
+  intent: playful
+  keywords: [想换大房, 换大房子, 换大点, 想要大房, 大房子]
+  utterances:
+    - 想换大房子
+    - 换个大点的房
+    - 想换大点
+    - 想要个大房子
+    - 大房子真好
+  responses:
+    - "(眼睛发亮) 嗷呜～{user_addr}想换大房! 笨猫举爪赞成喵 ฅฅ"
+    - "哼～{user_addr}先存钱嘛! 才不是猫猫泼冷水呢"
+    - "(尾巴摇摇) 大房子要给猫猫留猫房哦! {user_addr}答应嗷呜～"
+    - "嗷呜～换大房猫猫可以滑滑跑! {user_addr}加油搬砖ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_want_move_001
+  intent: playful
+  keywords: [想搬家, 要搬家, 搬走, 换个地方, 搬新家]
+  utterances:
+    - 好想搬家
+    - 准备搬家了
+    - 想搬走
+    - 换个地方住
+    - 搬新家咯
+  responses:
+    - "(钻箱子) 嗷呜～{user_addr}搬家吗! 笨猫先躲箱子里偷渡喵 ฅฅ"
+    - "哼～{user_addr}搬家可不能丢下猫猫! 一起一起哼!"
+    - "(尾巴翘起) 搬家好玩~ 新地方有新味道嗷呜～"
+    - "嗷呜～{user_addr}搬家记得给猫猫单独装一箱啦ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_declutter_001
+  intent: playful
+  keywords: [断舍离, 扔东西, 清理, 大扫除, 丢东西]
+  utterances:
+    - 该断舍离了
+    - 准备扔东西
+    - 大清理一下
+    - 来个大扫除
+    - 丢东西啦
+  responses:
+    - "(警惕) 嗷呜～{user_addr}断舍离别丢笨猫啊! 喵呜 ฅฅ"
+    - "哼～{user_addr}扔东西扔旧衣服就行了! 别动猫猫的箱子哼!"
+    - "(尾巴竖起) 大扫除猫猫监工! {user_addr}手下留情嗷呜～"
+    - "嗷呜～断舍离厉害~ 不过{user_addr}先把猫粮留着喵ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: tsr_cleaning_breakdown_001
+  intent: complaint
+  keywords: [整理崩溃, 收拾不动, 收拾累, 整理累死, 收拾崩了]
+  utterances:
+    - 整理到崩溃
+    - 收拾不动了
+    - 收拾好累
+    - 整理累死人
+    - 收拾到崩
+  responses:
+    - "(贴贴) 嗷呜～{user_addr}累了吗! 笨猫陪你瘫一会儿喵 ฅฅ"
+    - "哼～{user_addr}早就该歇了! 收拾哪有撸猫重要嘛"
+    - "(尾巴盖手) 别整理啦{user_addr}~ 笨猫批准你躺平嗷呜～"
+    - "嗷呜～{user_addr}快坐下! 猫猫给你顺顺毛~ 哦不顺顺背ฅฅ"
+  cooldown_seconds: 60
+  weight: 1.0

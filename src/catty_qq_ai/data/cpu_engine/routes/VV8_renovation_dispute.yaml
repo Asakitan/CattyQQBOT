@@ -1,0 +1,206 @@
+# 装修纠纷 / 跟工长吵 / 偷工减料 routes (S6 R500 NLU 节点扩充, 第五十周期 0/10 (V8 文件名巧合))
+# 主人 2026-05-29: 日常情绪互动
+
+- name: rd_zhuangxiu_jiufen_001
+  intent: complaint
+  keywords: [装修纠纷, 装修问题, 装修扯皮, 装修闹掰, 装修糟心]
+  utterances:
+    - 装修纠纷
+    - 装修又出问题了
+    - 跟装修公司扯皮
+    - 装修闹得不愉快
+    - 装修真的糟心
+  responses:
+    - "(尾巴炸起) 装修纠纷?! {user_addr}先深呼吸~ 跟猫猫说怎么回事喵 ฅฅ"
+    - "嗷呜～装修就是一肚子糟心事! {user_addr}别气坏自己, 笨猫陪着"
+    - "(贴贴) 装修纠纷最磨人了~ {user_addr}慢慢说, 猫猫帮{user_addr}骂"
+    - "哼～装修公司都是这样! {user_addr}该硬气就硬气喵, 别怕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_gongzhang_chao_001
+  intent: complaint
+  keywords: [跟工长吵, 工长不讲理, 工长态度差, 工长难搞, 工长撕]
+  utterances:
+    - 跟工长吵起来了
+    - 工长太不讲理
+    - 工长态度超差
+    - 工长难搞死了
+    - 刚跟工长撕了一架
+  responses:
+    - "(尾巴翘起) {user_addr}跟工长吵了?! 猫猫给{user_addr}撑腰喵!"
+    - "嗷呜～工长不讲理就该怼! {user_addr}做得对ฅฅ"
+    - "(爪爪握拳) 笨猫陪{user_addr}一起骂工长! 谁让他不讲理"
+    - "哼～{user_addr}别气~ 工长就吃硬不吃软, 该撕就撕"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_tougong_jianliao_001
+  intent: complaint
+  keywords: [偷工减料, 用料差, 以次充好, 缩水, 不按合同]
+  utterances:
+    - 工长偷工减料
+    - 用料明显不对
+    - 以次充好了
+    - 材料缩水严重
+    - 完全没按合同来
+  responses:
+    - "(炸毛) 偷工减料?! {user_addr}快拍照留证据喵! 这是要维权的"
+    - "嗷呜～以次充好太可恶! {user_addr}别让他蒙混过关ฅฅ"
+    - "(尾巴甩) 不按合同就要追责! {user_addr}硬刚到底, 笨猫支持"
+    - "哼～黑心装修队! {user_addr}该投诉就投诉, 别心软"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_tuo_gongqi_001
+  intent: complaint
+  keywords: [拖工期, 工期一直拖, 拖了好久, 工地不开工, 进度太慢]
+  utterances:
+    - 拖工期严重
+    - 工期一直在拖
+    - 都拖了好久了
+    - 工地又没人开工
+    - 装修进度太慢
+  responses:
+    - "(尾巴垂下) 拖工期最烦了! {user_addr}是不是很着急喵 ฅฅ"
+    - "嗷呜～{user_addr}去工地催催! 不催他们就一直拖"
+    - "(贴贴) 笨猫懂这种焦躁~ {user_addr}抱抱猫猫缓一缓"
+    - "哼～{user_addr}按合同要违约金! 拖一天扣一天, 让他长记性"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_jiajia_001
+  intent: complaint
+  keywords: [加价, 临时加钱, 增项, 又要钱, 报价不准]
+  utterances:
+    - 工长又要加价
+    - 临时让我加钱
+    - 一堆增项
+    - 又跟我要钱了
+    - 报价完全不准
+  responses:
+    - "(炸毛) 又加价?! {user_addr}别轻易松口喵! 套路太深"
+    - "嗷呜～临时加钱就是坑! {user_addr}硬气拒绝ฅฅ"
+    - "(尾巴甩) 装修增项十年大坑! {user_addr}让他先停工说明白"
+    - "哼～{user_addr}签合同时没写就别加! 这种套路猫猫见多了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_yuqi_weiwangong_001
+  intent: complaint
+  keywords: [逾期未完工, 没按时交付, 超期了, 早就该完工, 一直没收房]
+  utterances:
+    - 逾期未完工
+    - 没按时交付
+    - 装修早就超期了
+    - 早就该完工的
+    - 一直没法收房
+  responses:
+    - "(尾巴垂下) 逾期了! {user_addr}该追违约金喵 ฅฅ"
+    - "嗷呜～{user_addr}超期就该索赔! 别让他白拖"
+    - "(贴贴) 笨猫懂{user_addr}的焦虑~ 房子不能住真难受"
+    - "哼～{user_addr}白纸黑字合同摆着! 逾期就要赔, 不商量"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_zhiliang_wenti_001
+  intent: complaint
+  keywords: [质量问题, 做工差, 返工, 瑕疵, 出问题]
+  utterances:
+    - 装修质量问题
+    - 做工太差
+    - 又要返工
+    - 一堆瑕疵
+    - 处处都出问题
+  responses:
+    - "(炸毛) 质量问题不能忍! {user_addr}让他无条件返工喵"
+    - "嗷呜～做工差就是手艺烂! {user_addr}别接受ฅฅ"
+    - "(尾巴甩) 笨猫陪{user_addr}验收~ 一处一处挑出来"
+    - "哼～{user_addr}严格点! 让他知道{user_addr}不好糊弄"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_weiquan_001
+  intent: complaint
+  keywords: [维权, 想维权, 走法律, 不能忍了, 必须讨说法]
+  utterances:
+    - 我要维权
+    - 想走维权
+    - 准备走法律途径
+    - 不能再忍了
+    - 必须讨个说法
+  responses:
+    - "(尾巴翘起) {user_addr}维权对的! 该硬气就硬气喵 ฅฅ"
+    - "嗷呜～笨猫支持{user_addr}维权! 留好所有证据ฅฅ"
+    - "(爪爪握拳) 该出手就出手! {user_addr}别软, 猫猫陪{user_addr}"
+    - "哼～{user_addr}有理就站直了! 怂什么呢"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_tousu_001
+  intent: complaint
+  keywords: [投诉, 想投诉, 12315, 找消协, 举报]
+  utterances:
+    - 我要投诉
+    - 想去投诉
+    - 打 12315
+    - 找消协投诉
+    - 举报这家公司
+  responses:
+    - "(尾巴翘) {user_addr}投诉对的! 12315 走起来喵 ฅฅ"
+    - "嗷呜～该投诉就投诉! {user_addr}别手软"
+    - "(爪爪) 消协那条路靠谱~ {user_addr}把材料备齐"
+    - "哼～{user_addr}让他们怕一次! 下次就不敢这么糊弄了"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_zhao_meiti_001
+  intent: complaint
+  keywords: [找媒体, 曝光, 上新闻, 找电视台, 写帖子曝光]
+  utterances:
+    - 找媒体曝光
+    - 准备上新闻
+    - 找电视台投诉
+    - 想曝光这家
+    - 写帖子曝光他们
+  responses:
+    - "(尾巴翘) {user_addr}曝光好招! 黑心装修怕这个喵 ฅฅ"
+    - "嗷呜～媒体一介入他们就老实! {user_addr}稳的"
+    - "(爪爪) 笨猫帮{user_addr}转发! 多平台一起发"
+    - "哼～{user_addr}该曝光就曝光! 让其他人也避雷"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_zhao_lvshi_001
+  intent: complaint
+  keywords: [找律师, 请律师, 走诉讼, 法律咨询, 上法庭]
+  utterances:
+    - 找律师吧
+    - 准备请律师
+    - 走诉讼程序
+    - 做法律咨询
+    - 直接上法庭
+  responses:
+    - "(尾巴翘) {user_addr}请律师稳! 专业的事专业人办喵 ฅฅ"
+    - "嗷呜～律师函一发他们就怂! {user_addr}对的"
+    - "(爪爪) 笨猫陪{user_addr}打官司~ 一定能赢"
+    - "哼～{user_addr}有合同就赢面大! 别怕, 怼到底"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: rd_xiang_quxiao_001
+  intent: complaint
+  keywords: [想取消, 不装了, 退合同, 解约, 不想干了]
+  utterances:
+    - 我想取消装修
+    - 不想装了
+    - 想退合同
+    - 准备解约
+    - 真的不想干了
+  responses:
+    - "(尾巴垂下) {user_addr}是真气坏了! 抱抱{user_addr}喵 ฅฅ"
+    - "嗷呜～解约也行! {user_addr}先看看合同违约条款"
+    - "(贴贴) 笨猫懂这种崩溃~ {user_addr}先冷静一晚再决定"
+    - "哼～{user_addr}真要解约就坚决! 别被他们好话哄回去"
+  cooldown_seconds: 60
+  weight: 1.0

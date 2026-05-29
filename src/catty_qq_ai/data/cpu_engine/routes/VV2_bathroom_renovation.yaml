@@ -1,0 +1,206 @@
+# 卫浴 / 马桶 / 花洒 routes (S6 R494 NLU 节点扩充, 第四十九周期 3/10)
+# 主人 2026-05-29: 推荐型, 带笨猫语气
+
+- name: br_smart_toilet_001
+  intent: question
+  keywords: [推荐智能马桶, 推荐 TOTO, 推荐科勒, 推荐智能坐便器, 笨猫智能马桶]
+  utterances:
+    - 推荐智能马桶
+    - 推荐 TOTO
+    - 推荐科勒
+    - 推荐智能坐便器
+    - 笨猫智能马桶
+  responses:
+    - "嗷呜～{user_addr}TOTO 卫洗丽 - 日系顶级ฅฅ"
+    - "(尾巴翘) 科勒 Kohler / 松下 Panasonic"
+    - "{user_addr}恒洁 / 九牧 - 国产性价比"
+    - "(挺胸) 笨猫推荐: TOTO 一体式入门!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_normal_toilet_001
+  intent: question
+  keywords: [推荐普通马桶, 推荐坐便器, 推荐连体马桶, 推荐分体马桶, 笨猫马桶]
+  utterances:
+    - 推荐普通马桶
+    - 推荐坐便器
+    - 推荐连体马桶
+    - 推荐分体马桶
+    - 笨猫马桶
+  responses:
+    - "嗷呜～{user_addr}虹吸式 - 静音冲水ฅฅ"
+    - "(尾巴翘) 连体省空间 / 分体易维修"
+    - "{user_addr}惠达 / 箭牌 / 法恩莎"
+    - "(挺胸) 笨猫推荐: 虹吸连体看坑距!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_shower_001
+  intent: question
+  keywords: [推荐花洒, 推荐 Grohe, 推荐汉斯格雅, 推荐淋浴头, 笨猫花洒]
+  utterances:
+    - 推荐花洒
+    - 推荐 Grohe
+    - 推荐汉斯格雅
+    - 推荐淋浴头
+    - 笨猫花洒
+  responses:
+    - "嗷呜～{user_addr}汉斯格雅 Hansgrohe - 德系顶级ฅฅ"
+    - "(尾巴翘) Grohe 高仪 / GROHE SmartControl"
+    - "{user_addr}摩恩 Moen / 高仪入门款"
+    - "(挺胸) 笨猫推荐: 顶喷+手持双模式!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_bathtub_001
+  intent: question
+  keywords: [推荐浴缸, 推荐嵌入式浴缸, 推荐独立浴缸, 推荐亚克力浴缸, 笨猫浴缸]
+  utterances:
+    - 推荐浴缸
+    - 推荐嵌入式浴缸
+    - 推荐独立浴缸
+    - 推荐亚克力浴缸
+    - 笨猫浴缸
+  responses:
+    - "嗷呜～{user_addr}独立浴缸 - 颜值担当ฅฅ"
+    - "(尾巴翘) 嵌入式省空间 / 亚克力轻"
+    - "{user_addr}科勒 / TOTO / 帝王 Empire"
+    - "(挺胸) 笨猫推荐: 1.5m 起够泡澡!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_cabinet_001
+  intent: question
+  keywords: [推荐浴室柜, 推荐洗手台, 推荐台盆, 推荐多层柜, 笨猫浴室柜]
+  utterances:
+    - 推荐浴室柜
+    - 推荐洗手台
+    - 推荐台盆
+    - 推荐多层柜
+    - 笨猫浴室柜
+  responses:
+    - "嗷呜～{user_addr}实木多层板 - 防潮王ฅฅ"
+    - "(尾巴翘) 陶瓷一体盆 / 台上盆"
+    - "{user_addr}九牧 / 箭牌 / 恒洁"
+    - "(挺胸) 笨猫推荐: 多层板+不锈钢架!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_mirror_001
+  intent: question
+  keywords: [推荐镜柜, 推荐智能镜, 推荐浴室镜, 推荐 LED 镜, 笨猫智能镜]
+  utterances:
+    - 推荐镜柜
+    - 推荐智能镜
+    - 推荐浴室镜
+    - 推荐 LED 镜
+    - 笨猫智能镜
+  responses:
+    - "嗷呜～{user_addr}智能镜柜 - LED+除雾ฅฅ"
+    - "(尾巴翘) 蓝牙音响 / 触控开关"
+    - "{user_addr}欧普 OPPLE / 雷士 NVC"
+    - "(挺胸) 笨猫推荐: 防雾+暖光必选!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_dry_wet_001
+  intent: question
+  keywords: [推荐干湿分离, 推荐淋浴房, 推荐三式分离, 推荐玻璃隔断, 笨猫干湿分离]
+  utterances:
+    - 推荐干湿分离
+    - 推荐淋浴房
+    - 推荐三式分离
+    - 推荐玻璃隔断
+    - 笨猫干湿分离
+  responses:
+    - "嗷呜～{user_addr}玻璃隔断 - 通透不憋ฅฅ"
+    - "(尾巴翘) 三分离: 洗漱/马桶/淋浴"
+    - "{user_addr}钢化玻璃 8mm / 防爆膜"
+    - "(挺胸) 笨猫推荐: 二式分离起步!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_floor_tile_001
+  intent: question
+  keywords: [推荐浴室地砖, 推荐防滑砖, 推荐通体砖, 推荐马赛克砖, 笨猫浴室砖]
+  utterances:
+    - 推荐浴室地砖
+    - 推荐防滑砖
+    - 推荐通体砖
+    - 推荐马赛克砖
+    - 笨猫浴室砖
+  responses:
+    - "嗷呜～{user_addr}通体大理石砖 - 颜值高ฅฅ"
+    - "(尾巴翘) 防滑 R10+ / 哑光面"
+    - "{user_addr}马可波罗 / 东鹏 / 诺贝尔"
+    - "(挺胸) 笨猫推荐: 300x600 防滑哑光!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_anti_slip_001
+  intent: question
+  keywords: [推荐防滑设计, 推荐防滑地垫, 推荐扶手, 推荐适老化, 笨猫防滑]
+  utterances:
+    - 推荐防滑设计
+    - 推荐防滑地垫
+    - 推荐扶手
+    - 推荐适老化
+    - 笨猫防滑
+  responses:
+    - "嗷呜～{user_addr}防滑垫+扶手 - 安全王ฅฅ"
+    - "(尾巴翘) 硅藻泥垫 / 不锈钢扶手"
+    - "{user_addr}马桶旁/淋浴区/浴缸边都装"
+    - "(挺胸) 笨猫推荐: 老人房必装扶手!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_heater_001
+  intent: question
+  keywords: [推荐浴霸, 推荐暖风机, 推荐风暖, 推荐灯暖, 笨猫浴霸]
+  utterances:
+    - 推荐浴霸
+    - 推荐暖风机
+    - 推荐风暖
+    - 推荐灯暖
+    - 笨猫浴霸
+  responses:
+    - "嗷呜～{user_addr}风暖浴霸 - 全屋热ฅฅ"
+    - "(尾巴翘) 奥普 AUPU / 美的 / 松下"
+    - "{user_addr}灯暖快+干燥 / 风暖匀"
+    - "(挺胸) 笨猫推荐: 风暖+换气一体!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_waterproof_001
+  intent: question
+  keywords: [推荐卫浴防水, 推荐防水涂料, 推荐 K11, 推荐聚氨酯, 笨猫防水]
+  utterances:
+    - 推荐卫浴防水
+    - 推荐防水涂料
+    - 推荐 K11
+    - 推荐聚氨酯
+    - 笨猫防水
+  responses:
+    - "嗷呜～{user_addr}K11 柔韧型 - 经典款ฅฅ"
+    - "(尾巴翘) 聚氨酯 / 德高 / 雨虹"
+    - "{user_addr}墙面 1.8m / 地面满涂"
+    - "(挺胸) 笨猫推荐: 涂 2 遍+闭水 48h!"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: br_storage_001
+  intent: question
+  keywords: [推荐卫浴收纳, 推荐毛巾架, 推荐置物架, 推荐壁龛, 笨猫卫浴收纳]
+  utterances:
+    - 推荐卫浴收纳
+    - 推荐毛巾架
+    - 推荐置物架
+    - 推荐壁龛
+    - 笨猫卫浴收纳
+  responses:
+    - "嗷呜～{user_addr}壁龛 - 嵌入零占地ฅฅ"
+    - "(尾巴翘) 太空铝置物架 / 镜柜"
+    - "{user_addr}毛巾杆电热 / 304 不锈钢"
+    - "(挺胸) 笨猫推荐: 壁龛+镜柜组合拳!"
+  cooldown_seconds: 60
+  weight: 1.0

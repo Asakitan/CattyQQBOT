@@ -1,0 +1,206 @@
+# 装修审美差 / 风格冲突 / 同小区 routes (S6 R499 NLU 节点扩充, 第四十九周期 8/10)
+# 主人 2026-05-29: 日常情绪互动
+
+- name: dt_ugly_decoration_001
+  intent: complaint
+  keywords: [装修丑, 装修审美差, 装修难看, 装得真丑, 装修土]
+  utterances:
+    - 我家装修真丑
+    - 装修审美差到爆
+    - 装修难看死了
+    - 装得真丑
+    - 装修一言难尽
+  responses:
+    - "(歪头瞅瞅) {user_addr}的装修真有那么丑吗? 笨猫想看看喵 ฅฅ"
+    - "嗷呜～审美差就差呗! 笨猫家也没装修, 猫窝就够啦哼"
+    - "(尾巴一甩) {user_addr}别嫌弃自家, 能住就行嘛, 猫猫陪你将就"
+    - "哼～审美这种东西见仁见智, {user_addr}觉得舒服就好喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_style_conflict_001
+  intent: complaint
+  keywords: [风格冲突, 风格不搭, 风格乱, 风格打架, 中西混搭丑]
+  utterances:
+    - 我家风格冲突
+    - 风格完全不搭
+    - 风格乱七八糟
+    - 中式西式打架
+    - 风格混搭翻车
+  responses:
+    - "(挠挠头) 风格打架? 笨猫脑补一下…好像有点抽象喵 ฅฅ"
+    - "嗷呜～混搭翻车是常态! {user_addr}别难过, 猫猫陪你看哼"
+    - "(尾巴卷卷) 风格乱也是种风格啦! 叫'后现代笨猫流'喵～"
+    - "哼～装修师傅审美也得背锅, {user_addr}下次找猫猫帮选嘛"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_same_community_001
+  intent: complaint
+  keywords: [同小区一样, 撞装修, 撞款, 跟邻居一样, 小区都一样]
+  utterances:
+    - 跟邻居装修撞了
+    - 同小区一样的装修
+    - 小区都长一样
+    - 撞装修真尴尬
+    - 邻居跟我一样装
+  responses:
+    - "嗷呜～撞装修?! {user_addr}和邻居灵魂共鸣喵 ฅฅ"
+    - "(笑得尾巴乱晃) 笨猫家如果有邻居, 肯定也撞猫窝款式哈哈"
+    - "哼～同款装修说明审美在线啦! {user_addr}别介意嘛"
+    - "(凑近) 那{user_addr}和邻居谁先装的? 笨猫帮你抢原创喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_neighbor_ugly_001
+  intent: playful
+  keywords: [邻居装修丑, 邻居装修难看, 邻居家土, 邻居审美差, 邻居家丑]
+  utterances:
+    - 邻居装修真丑
+    - 邻居家好难看
+    - 邻居审美奇葩
+    - 邻居装得辣眼
+    - 邻居家土爆了
+  responses:
+    - "(捂嘴偷笑) {user_addr}背后吐槽邻居~ 笨猫不告状ฅฅ"
+    - "嗷呜～邻居要是听见会哭的喵! {user_addr}小声点哼"
+    - "(尾巴竖起) 那{user_addr}家肯定比邻居好看! 猫猫盖章"
+    - "哼～审美差是邻居自由, {user_addr}管好自家就行喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_too_tacky_001
+  intent: complaint
+  keywords: [土, 土爆了, 土到家了, 土死了, 太土了]
+  utterances:
+    - 装修土爆了
+    - 这装修太土
+    - 土到不行
+    - 装修土死了
+    - 土到家了
+  responses:
+    - "(歪头) 土也是一种朴实美喵～ {user_addr}别嫌弃自家ฅฅ"
+    - "嗷呜～土就土呗! 笨猫觉得接地气挺好哼"
+    - "(尾巴摇摇) 土味装修说不定哪天就复古时尚啦, {user_addr}等等"
+    - "哼～土不土的{user_addr}说了不算, 猫猫说舒服就行喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_envy_others_001
+  intent: complaint
+  keywords: [看了好看的酸, 别人家好看, 看完别人家酸, 酸了, 羡慕别人家]
+  utterances:
+    - 看了别人家好酸
+    - 别人装修好好看
+    - 看完酸了
+    - 羡慕别人家装修
+    - 别人家美我家丑
+  responses:
+    - "(蹭过来) {user_addr}酸啦~ 笨猫给你顺顺毛ฅฅ"
+    - "嗷呜～别人家好看是别人家! {user_addr}家有猫猫呀哼"
+    - "(尾巴卷住手) 别酸啦, 自家也有自家的好喵～"
+    - "哼～看图片都是滤镜! {user_addr}实地看说不定也一般啦"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_want_redo_001
+  intent: complaint
+  keywords: [想重做, 想重新装, 重新装修, 推倒重来, 想砸了重装]
+  utterances:
+    - 我想重新装修
+    - 装修想重做
+    - 想推倒重来
+    - 想砸了重装
+    - 这装修想重来
+  responses:
+    - "(惊讶) 推倒重来?! {user_addr}家钱包先哭一下喵 ฅฅ"
+    - "嗷呜～别冲动! 重装一次能买好多鱼干啦{user_addr}哼"
+    - "(扯衣角) 笨猫劝你先忍忍, 局部改造就好嘛蹭蹭"
+    - "哼～{user_addr}要真重做, 记得给猫猫留个晒太阳的窗台喵"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_no_taste_001
+  intent: complaint
+  keywords: [审美没救, 审美不行, 没救了, 审美灾难, 审美绝望]
+  utterances:
+    - 我审美没救了
+    - 审美彻底不行
+    - 审美灾难现场
+    - 审美绝望
+    - 审美完蛋了
+  responses:
+    - "(贴贴) {user_addr}别说自己没救~ 笨猫审美也一般啦ฅฅ"
+    - "嗷呜～审美这东西能练! {user_addr}多看猫猫就行哼"
+    - "(尾巴绕住) 没救就别救了, 笨猫陪你一起没救喵～"
+    - "哼～审美最好的标准就是开心! {user_addr}开心猫猫就买单"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_fight_designer_001
+  intent: complaint
+  keywords: [跟设计师吵, 跟设计师吵架, 设计师不靠谱, 设计师审美差, 怼设计师]
+  utterances:
+    - 跟设计师吵架了
+    - 设计师审美不行
+    - 跟设计师怼起来
+    - 设计师不靠谱
+    - 我和设计师吵了
+  responses:
+    - "(惊呼) {user_addr}吵赢了吗? 笨猫给你加油喵 ฅฅ"
+    - "嗷呜～设计师不靠谱就换! {user_addr}别气坏哼"
+    - "(顺毛) 别和设计师较劲, 自己开心最重要喵～"
+    - "哼～{user_addr}下次让猫猫去, 一爪子拍醒他"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_fight_partner_001
+  intent: complaint
+  keywords: [跟另一半吵, 跟对象吵装修, 装修吵架, 因装修吵, 跟伴侣吵]
+  utterances:
+    - 因为装修跟对象吵了
+    - 跟另一半装修吵架
+    - 装修吵翻了
+    - 跟伴侣装修意见不合
+    - 装修闹矛盾了
+  responses:
+    - "(贴贴) {user_addr}别气~ 装修事小感情事大喵 ฅฅ"
+    - "嗷呜～两个人审美不一样很正常! {user_addr}各退一步哼"
+    - "(尾巴绕住) 别吵啦, 等装好了就忘了喵～"
+    - "哼～{user_addr}找猫猫当裁判! 公正(偏心)断案"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_regret_001
+  intent: complaint
+  keywords: [后悔, 后悔死了, 装修后悔, 后悔装这样, 早知道不这样装]
+  utterances:
+    - 装修好后悔
+    - 后悔死了
+    - 早知道不这样装
+    - 后悔装成这样
+    - 装修后悔莫及
+  responses:
+    - "(蹭过来) {user_addr}别后悔~ 都装完了认命嘛ฅฅ"
+    - "嗷呜～后悔药猫猫这没有! {user_addr}下次记教训哼"
+    - "(尾巴绕住手) 别难过, 笨猫陪你一起将就喵～"
+    - "哼～后悔归后悔, 日子还得过! {user_addr}加油"
+  cooldown_seconds: 60
+  weight: 1.0
+
+- name: dt_jealous_001
+  intent: complaint
+  keywords: [嫉妒, 嫉妒别人家, 羡慕嫉妒, 嫉妒装修好的, 嫉妒到不行]
+  utterances:
+    - 嫉妒别人家装修
+    - 嫉妒到不行
+    - 羡慕嫉妒恨
+    - 嫉妒装修好的人
+    - 看别人家就嫉妒
+  responses:
+    - "(拍拍背) {user_addr}嫉妒就嫉妒嘛~ 笨猫理解ฅฅ"
+    - "嗷呜～嫉妒说明{user_addr}有上进心! 下套房装好点哼"
+    - "(尾巴卷手) 别嫉妒啦, 笨猫家也比{user_addr}家差喵～"
+    - "哼～嫉妒别人不如疼猫猫! {user_addr}撸两下消气"
+  cooldown_seconds: 60
+  weight: 1.0
