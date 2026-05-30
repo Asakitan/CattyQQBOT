@@ -625,11 +625,16 @@ def _log_cache_stats(data: dict[str, Any], model: str) -> None:
         else:
             _gap = int((_target_min - roll_rate) * 100)
             _status = f"LOW(-{_gap}pp)"
+        # 主人 2026-05-31 测量基建: 加 scope 标签让 sim A/B 按 scope 干净过滤 (不被并发真实群流量污染)
+        try:
+            _hit_scope = get_current_scope_key() or ""
+        except Exception:  # noqa: BLE001
+            _hit_scope = ""
         _logger.info(
             f"HIT_TARGET model={model[:20]} this={hit_rate:.1%} "
             f"rolling{len(_DEEPSEEK_CACHE_ROLLING)}={roll_rate:.1%} "
             f"target=95-98% status={_status} "
-            f"hit_tok={ds_hit} miss_tok={ds_miss}",
+            f"hit_tok={ds_hit} miss_tok={ds_miss} scope={_hit_scope}",
         )
         # rolling 命中率连续 3 次 < 90% → warn (主人目标 95-98%)
         if len(_DEEPSEEK_CACHE_ROLLING) >= 5 and roll_rate < 0.9:
@@ -953,8 +958,12 @@ async def _post_chat_completion_raw(
                     )
             # (d) 前缀 hash 诊断 (对比上一轮看是否漂移)
             h = compute_prefix_hash(messages, tools, n=5)
+            try:
+                _ph_scope = get_current_scope_key() or ""
+            except Exception:  # noqa: BLE001
+                _ph_scope = ""
             _logger.info(
-                f"prefix_hash model={model[:20]} sys_count={h['sys_count']} "
+                f"prefix_hash model={model[:20]} scope={_ph_scope} sys_count={h['sys_count']} "
                 f"msg_count={h['msg_count']} sys_md5={h['sys_md5']} "
                 f"first_user_md5={h['first_user_md5']} "
                 f"tools_count={h['tools_count']} tools_md5={h['tools_md5']}",

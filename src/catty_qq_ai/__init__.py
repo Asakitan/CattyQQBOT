@@ -6453,10 +6453,12 @@ def _direct_reply_required_prompt(incoming: ExtractedMessage) -> str:
     if incoming.directed_strength == "direct_address":
         reasons.append("本地判断是直接喊名/叫你办事")
     reason_text = "、".join(reasons) or "这是私聊或明确对你说话"
+    # 主人 2026-05-31 L3 cache: 压字节降每轮 miss(reply-gate 永远 inline 在 current user
+    # 尾部进不了 cache 前缀), 保留全部接话/NO_REPLY 判断语义.
     return (
-        f"本轮属于必须回复场景：{reason_text}。"
-        f"通常应该接话；但如果上下文显示是在重复回复同一条消息、顺手 @ 到猫猫、A 对 B 说话、误触发或明显不该接话，可以输出 {NO_REPLY_MARKER}。"
-        "如果信息不足，就用笨猫口吻短短追问；如果只是 @/回复但没文字，也可以自然应一声。"
+        f"必须回复场景（{reason_text}）：一般接话；"
+        f"若重复回复同一条/顺手@到猫猫/A对B说话/误触发则输出 {NO_REPLY_MARKER}；"
+        "信息不足就用笨猫口吻短追问。"
     )
 
 
@@ -6468,18 +6470,17 @@ def _soft_directed_reply_prompt(
 ) -> str:
     probability_percent = round(_clamp_probability(reply_probability) * 100)
     boost_text = f"；记忆加成原因：{memory_boost_reason}" if memory_boost_reason else ""
+    # 主人 2026-05-31 L3 cache: 压字节降每轮 miss, 接话/NO_REPLY 判断语义不变.
     if incoming.directed_strength == "direct_address":
         return (
-            "本轮没有明确 @ 你、回复你或使用严格开头前缀，但本地判断更像是在直接喊你/叫你办事。"
-            f"当前回复倾向约 {probability_percent}%{boost_text}。"
-            "请结合上下文自己判断是否真的要接话；如果该接，按场景自己决定回复长短，自然接住重点。"
-            f"不要机械回复“你叫我了/我在”；如果只是误触发或第三人称闲聊，只输出 {NO_REPLY_MARKER}。"
+            f"疑似直接喊你/叫你办事（倾向{probability_percent}%{boost_text}）："
+            "自行结合上下文判断是否接；该接就自然接住重点、别机械回“我在”；"
+            f"误触发或第三人称闲聊则只输出 {NO_REPLY_MARKER}。"
         )
     return (
-        "本轮没有明确 @ 你、回复你或使用开头前缀，只是句子中出现了你的名字、指向词或功能词。"
-        f"当前回复倾向约 {probability_percent}%{boost_text}。"
-        "请根据整句主语、称呼对象和上下文意图判断是否自然接话。"
-        f"不要根据关键词机械回应；如果不该回复，只输出 {NO_REPLY_MARKER}。"
+        f"句中出现你的名字/指向词/功能词（倾向{probability_percent}%{boost_text}）："
+        "按整句主语和上下文意图判断是否自然接话、别按关键词机械回应；"
+        f"不该回就只输出 {NO_REPLY_MARKER}。"
     )
 
 
