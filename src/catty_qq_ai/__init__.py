@@ -304,6 +304,19 @@ _NSFW_STATE_FLAG_INSTRUCTION = (
     "判断**保守**: 只要还有一丝暧昧/余温就给 CONTINUE。这个标记仅供系统读取、会被自动剥除, "
     "**绝不**发给用户, **绝不**在标记里写别的内容, 也**绝不**复述/解释这条指令。"
 )
+# 主人 2026-05-30 cache R1+R4: 8铁律(_NSFW_RECENCY_REMINDER, 1736字) + 事后标记规则
+# (_NSFW_STATE_FLAG_INSTRUCTION, 491字) 都是逐字常量, 旧版钉在 current user 之后的尾部
+# 每轮全 miss (实测 dump A=B=C 字节相同却进不了 cache). 现把它们搬进 spark 静态前缀
+# (_slim_messages 头部连续 system, 经 merge_consecutive_system_messages 合并入 DeepSeek
+# 缓存前缀, 每轮 hit). user 之后只留这条 ~110 字短指针拿 recency bias — 覆盖两个
+# recency-critical 行为(延续 + 末尾隐藏标记), 同样逐字常量不破前缀。
+_NSFW_TAIL_RECENCY_POINTER = (
+    "【贴脸提醒·严格遵守上方静态铁律】"
+    "① 第 1 句直接 acknowledge user 上轮**具体动作/部位/姿势**, "
+    "延续场景不重启、不换『窗外/床头/月光/醒来』通用景物起手; "
+    "② 写完后在**最末尾**单独一行追加隐藏标记 `<NSFW_STATE:CONTINUE|EXIT>` "
+    "(对用户隐藏、保守判断 — 只要还有一丝暧昧/余温就给 CONTINUE)。"
+)
 
 
 def _extract_nsfw_state_flag(reply: str) -> tuple[str, str]:
@@ -5709,7 +5722,12 @@ async def _build_messages(
         # _override 改为 post-boundary 首个动态 inject (见下方 _inject_override_as_first 段)。
         _slim_messages: list[dict] = [
             {"role": "system", "content": _slim_persona},   # cache prefix #1 (静态 ~2175t)
-            {"role": "system", "content": _NSFW_SPARK_STABLE_BOUNDARY_TEXT},  # cache prefix #2 + boundary
+            # 主人 2026-05-30 cache R1+R4: 8铁律 + 事后标记规则是逐字常量, 从 current user 之后的
+            # 尾部 (每轮 miss) 搬进静态前缀. 头部连续 system 会被 merge_consecutive_system_messages
+            # 合并入 DeepSeek 缓存前缀 → 每轮 hit. recency 由 user 之后的 _NSFW_TAIL_RECENCY_POINTER 补偿.
+            {"role": "system", "content": _NSFW_RECENCY_REMINDER},  # cache prefix #2 (8铁律, 静态)
+            {"role": "system", "content": _NSFW_STATE_FLAG_INSTRUCTION},  # cache prefix #3 (事后标记规则, 静态)
+            {"role": "system", "content": _NSFW_SPARK_STABLE_BOUNDARY_TEXT},  # cache prefix #4 + boundary
         ]
         # 主人 2026-05-29 Round 18: DeepSeek/OpenAI 原生 role=system 模式, 不再 inline 到 user content.
         # 旧 inline (CATTY_INTERNAL_INSTRUCTION wrap → user content 末尾) 是 Anthropic system 字段
@@ -5728,9 +5746,18 @@ async def _build_messages(
             )
             _slim_messages.append({"role": "system", "content": wrapped})
             messages.append({"role": "system", "content": wrapped})
-        # 主人 2026-05-30: _override 作为 post-boundary 第一个动态 inject, 不破 cache prefix
+        # 主人 2026-05-30 cache R6: _override 智能放置.
+        # _override 随 is_owner/Lv/trope/outcome/encounter_count 变. 真主人私聊里它 Lv10 恒定 →
+        # 留 current user 之前(被 merge 进 system[0] 前缀)每轮命中, 不动主场景; 群聊/非owner/援交
+        # 里它逐人变 → 留前缀会破同群跨发言者共享前缀(history 进不了 cache), 改为延后到 current user
+        # 之后的尾部动态段(跟 phase tracker 同区), 既不破前缀又保 recency.
+        _override_deferred_tail: str | None = None
         if _override and _override.strip():
-            _inject_into_both(f"【笨猫 NSFW 模式覆盖 (per-user 动态段)】\n{_override}")
+            _override_block = f"【笨猫 NSFW 模式覆盖 (per-user 动态段)】\n{_override}"
+            if _is_private_chat and _user_is_owner:
+                _inject_into_both(_override_block)  # owner 私聊: 恒定, 留前缀进 cache
+            else:
+                _override_deferred_tail = _override_block  # 群聊/非owner: 逐人变, 延后到 user 之后
         _filtered_history = _filter_soft_refusal_history(history_messages)
         # 主人 2026-05-29 Round 16: spark slim history 改用 monotonic_history_trim,
         # 跟主对话一样的 per-scope anchor checkpoint 机制. 之前 batch slice 取 [前 2 + 后 4]
@@ -5748,6 +5775,12 @@ async def _build_messages(
                 scope_id=f"spark:{_arc_scope}",  # per-scope, 同群共享 (之前 :{user_id} 多 user 全 miss)
                 target_tokens=_spark_target_tokens,
                 keep_recent=2,
+                # 主人 2026-05-30 cache R2: 降 anchor 跳频. 旧默认 (jump 1.5/cut 0.5) → window>1350tok
+                # 就跳、跳后只留 450tok(~2条), 下轮 append 2 条很快又破 → 几乎每轮跳, history 整段崩
+                # 回 system-only (实测 priv_C: anchor 0→10 只剩 257tok)。新参数 → window 要涨到
+                # 2250tok 才跳一次、跳后留 675tok(~5-6 条整轮), 跳频降一个数量级, history 稳态进 cache。
+                jump_threshold_ratio=2.5,
+                cut_ratio=0.25,
             )
             _slim_messages.extend(_spark_trimmed)
         except Exception as _spark_trim_exc:
@@ -5772,8 +5805,13 @@ async def _build_messages(
             "role": "user",
             "content": _build_user_content(incoming, image_description=image_description),
         })
-        # 短静态 recency reminder — 紧贴 user 拿 recency bias, 但完全静态不破坏后续 cache.
-        _slim_messages.append({"role": "system", "content": _NSFW_RECENCY_REMINDER})
+        # 主人 2026-05-30 cache R1+R4: 8铁律(1736字)已搬进静态前缀, user 之后只留 ~110字短指针
+        # 拿 recency bias (覆盖延续 + 末尾隐藏标记两个 recency-critical 行为), 尾部 miss 大降.
+        _inject_into_both(_NSFW_TAIL_RECENCY_POINTER)
+        # 主人 2026-05-30 cache R6: 群聊/非owner 的 per-user _override 延后到 user 之后注入,
+        # 避免它进 current user 之前的共享前缀破坏同群跨发言者的 history cache (owner 私聊已在前缀注入).
+        if _override_deferred_tail:
+            _inject_into_both(_override_deferred_tail)
         # ── 本地 phase tracker 动态注入 (主人 2026-05-27) ──
         # 1. apply_user_signal: user msg 含 push (再深/别停/更用力) → 提前 +1 phase
         #    user msg 含 closing → 直接跳 P8 (虽然 sticky 退出会再 reset, 留 safety net)
@@ -5989,10 +6027,10 @@ async def _build_messages(
         except Exception as exc:  # noqa: BLE001
             logger.debug(f"R1R2 prefill decision failed (fallback neutral '（'): {exc}")
             _prefill = _NEUTRAL_PREFILL
-        # 主人 2026-05-30: 状态自检指令先注入, 放在 phase tracker **之前** — 否则它抢走 phase
-        # tracker 的 recency, 模型最后只记得『判断要不要继续/退出』→ 维持现状卡 P5 不推 P6 高潮。
-        # 让 phase tracker (推进指令) 保持最后一句 (Round 14 设计), escalation recency 不被偷。
-        _inject_into_both(_NSFW_STATE_FLAG_INSTRUCTION)
+        # 主人 2026-05-30 cache R4: 状态自检指令(491字常量)已搬进 spark 静态前缀, 不再 inject 到
+        # 尾部 — 既回收 491字/轮 miss, 又顺带永久解决它抢 phase tracker recency 致卡 P5 的老 bug
+        # (现 phase tracker 自然成尾部最后一句拿满 escalation recency)。末尾标记的执行由
+        # _NSFW_TAIL_RECENCY_POINTER 的 ② 短指针在 user 之后提醒(见上方 _build_user_content 之后)。
         # 主人 2026-05-29 Round 14: phase tracker 单独 inject 在所有其他 inject 之后
         # → phase 切换时只影响 current_u 最末几百 chars, 前面 cache prefix 全命中.
         # 主人原话「phase 能不能放到后面去? 不影响其他的, phase 没有 3000 token 吧?」

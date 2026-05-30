@@ -352,6 +352,24 @@ def monotonic_history_trim(
             new_anchor = i + 1
             break
         acc += t
+    # 主人 2026-05-30 cache R3: 跳后落点强制对齐 user 整轮边界 — 让跳后 history 总是从完整一轮
+    # (user→assistant) 开始, 跨轮即便重算 anchor 也字节对齐, 且上游 _filter_soft_refusal_history
+    # 删 assistant 不会让 user/assistant 错位 (spark 特有二次漂移源)。优先向下 snap (保更多/更
+    # cache 友好), 向下到 anchor 都没 user 再向上找; 始终 ≥ anchor (anchor 单调不回退)。
+    if 0 <= new_anchor < n and isinstance(history[new_anchor], dict) \
+            and history[new_anchor].get("role") != "user":
+        snapped = None
+        for j in range(new_anchor, anchor - 1, -1):  # 向下找最近 user (≥ anchor)
+            if isinstance(history[j], dict) and history[j].get("role") == "user":
+                snapped = j
+                break
+        if snapped is None:
+            for j in range(new_anchor + 1, max(n - keep_recent, 0) + 1):  # 向下没有再向上找
+                if 0 <= j < n and isinstance(history[j], dict) and history[j].get("role") == "user":
+                    snapped = j
+                    break
+        if snapped is not None:
+            new_anchor = snapped
     # 不超过 n - keep_recent (强保 keep_recent 末尾)
     new_anchor = min(max(new_anchor, 0), max(n - keep_recent, 0))
 
