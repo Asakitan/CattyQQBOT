@@ -11107,12 +11107,19 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                         # ── 主人 2026-05-29 升级『怀孕按笨猫高潮(P6)计数』──
                         # 本轮 phase 推进进 P6 (高潮峰值) = 笨猫高潮一次 → record + 同步预选 kitten
                         try:
+                            # 主人 2026-05-31: 主人本人受孕 → father_addr 记「主人」(明确归属),
+                            #   非主人受孕才存其昵称. 跟主路径同款.
+                            try:
+                                _preg_father_owner = affection_store.is_owner(str(event.user_id))
+                            except Exception:  # noqa: BLE001
+                                _preg_father_owner = False
+                            _preg_father_addr = "主人" if _preg_father_owner else _spark_user_addr
                             for _preg_i in range(_preg_climax_n):
                                 _predict_meta = _PREGNANCY_PREDICT or {}
                                 _override_name = _predict_meta.get("predicted_kitten", "")
                                 _preg_result = pregnancy_store.record_intercourse(
                                     father_id=str(event.user_id),
-                                    father_addr=_spark_user_addr,
+                                    father_addr=_preg_father_addr,
                                     override_kitten_name=_override_name,
                                 )
                                 _preg_st_after = _preg_result["state"]
@@ -11320,12 +11327,19 @@ async def handle_chat(matcher: Matcher, bot: Bot, event: MessageEvent, state: T_
                 # 怀孕计数 (主路径) — 跟 spark 路径同款逻辑, 按笨猫高潮(P6)计数
                 # 主人 2026-05-30: 公共版 father 追踪
                 try:
+                    # 主人 2026-05-31: 主人本人受孕 → father_addr 直接记「主人」(明确归属),
+                    #   非主人受孕才存其昵称. 避免孩子父亲被记成裸昵称 → hint 显示混乱.
+                    try:
+                        _preg_father_owner_main = affection_store.is_owner(str(event.user_id))
+                    except Exception:  # noqa: BLE001
+                        _preg_father_owner_main = False
+                    _preg_father_addr_main = "主人" if _preg_father_owner_main else _user_real_display
                     for _preg_i_main in range(_preg_climax_n_main):
                         _predict_meta_main = _PREGNANCY_PREDICT or {}
                         _override_name_main = _predict_meta_main.get("predicted_kitten", "")
                         _preg_result_main = pregnancy_store.record_intercourse(
                             father_id=str(event.user_id),
-                            father_addr=_user_real_display,
+                            father_addr=_preg_father_addr_main,
                             override_kitten_name=_override_name_main,
                         )
                         _preg_st_after_main = _preg_result_main["state"]

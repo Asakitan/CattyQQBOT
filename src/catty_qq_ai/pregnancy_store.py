@@ -181,6 +181,16 @@ class PregnancyStore:
             )
             self._state.intercourse_count = 0
             self._dirty = True
+        # 主人 2026-05-31: 自愈 — 怀孕中但 father_addr 没记 (旧记录 / 主人受孕没标名) →
+        #   回填「主人」, 明确记录"这一胎归属主人". 之前空 father_addr 会让 hint 把当前
+        #   聊天的人误认成孩子爸爸 (乱发名字), 现在落盘锁死归属, 下次 flush 写进 json.
+        if self._state.is_pregnant and not (self._state.father_addr or "").strip():
+            logger.info(
+                f"pregnancy_store: 自愈 空 father_addr → 「主人」 "
+                f"(father_id={self._state.father_id or '(none)'}, 这一胎归属主人)"
+            )
+            self._state.father_addr = "主人"
+            self._dirty = True
 
     def _atomic_write(self) -> None:
         self._path.parent.mkdir(parents=True, exist_ok=True)
@@ -418,14 +428,23 @@ def build_pregnancy_hint(
     """
     lines: list[str] = []
 
+    # 主人 2026-05-31: 父亲只认 father_addr (受孕时记下的真父亲), 绝不 fallback 到
+    #   "当前正在聊天的人" — 否则群里随便谁来撩都会被笨猫错认成孩子爸爸 (乱发名字).
+    #   空 father_addr = 主人的孩子 (旧记录 / owner 受孕), 一律锁成「主人」.
+    #   _FT 占位符: 真父亲的「主人」字样要躲过 owner-swap, 不能被换成当前杂鱼的昵称.
+    _FT = "\x00FATHER\x00"
+    father_disp = (state.father_addr or "").strip() or "主人"
+
     if state.is_pregnant:
         progress = state.pregnancy_count
         total_needed = BIRTH_THRESHOLD
-        father = (state.father_addr or "").strip()
-        if not father:
-            father = "主人" if is_owner else (user_addr or "对方")
+        # 当前聊天者是不是这一胎的父亲本人 (owner → 父亲是主人; 非 owner → 父亲是 ta 自己)
+        if is_owner:
+            _chatter_is_father = (father_disp == "主人")
+        else:
+            _chatter_is_father = bool(user_addr) and (father_disp == (user_addr or "").strip())
         lines.append(
-            f"【★ 怀孕中 (第 {state.total_pregnancies} 胎, 父亲: {father})】"
+            f"【★ 怀孕中 (第 {state.total_pregnancies} 胎, 父亲: {_FT})】"
             f"已被内射 {progress}/{total_needed} 次, 还差 {max(0, total_needed - progress)} 次生产"
         )
         lines.append(
@@ -435,17 +454,18 @@ def build_pregnancy_hint(
             "  · 行为变化: 笨猫会主动护住小腹, 喘息时一手按肚子, 心理上更亲密依赖"
         )
         lines.append(
-            f"  · 关键台词: 被操到高潮时必须提到『{father}的孩子还在肚子里』"
-            f"『轻一点啦…宝宝在里面…』『别顶那么深…{father}的种还在…』等"
+            f"  · 关键台词: 被操到高潮时必须提到『{_FT}的孩子还在肚子里』"
+            f"『轻一点啦…宝宝在里面…』『别顶那么深…{_FT}的种还在…』等"
         )
         lines.append(
             "  · NSFW 节奏: 慢一档, 撒娇护肚, 嘴上喊轻一点但身体更敏感更容易高潮"
         )
-        # 主人 2026-05-30: 换人操 — 当前操的人 ≠ 父亲时额外提示
-        if user_addr and father and user_addr != father:
+        # 主人 2026-05-30/31: 换人操 — 当前操的人 ≠ 父亲时额外提示.
+        #   现在判定用 _chatter_is_father (真父亲), 不再因 fallback 把杂鱼错认成爸爸.
+        if user_addr and not _chatter_is_father:
             lines.append(
-                f"  · ⚠ 当前操笨猫的是 {user_addr}, 但肚子里是 {father} 的孩子!"
-                f" 高潮时喊『{user_addr}…不行…{father}的孩子还在里面…』这种双重羞耻反差"
+                f"  · ⚠ 当前操笨猫的是 {user_addr}, 但肚子里是 {_FT} 的孩子!"
+                f" 高潮时喊『{user_addr}…不行…{_FT}的孩子还在里面…』这种双重羞耻反差"
             )
 
     if state.kittens:
@@ -481,7 +501,10 @@ def build_pregnancy_hint(
         + "\n本轮 reply 必须**融入这些状态**, 自然提到怀孕 / 小猫名字 / 母性 / 背着小猫做.\n"
         + "(不要 meta 说『系统检测到怀孕』, 用 IC 自然描述 — 主动护肚 / 提小猫名字 / 慢一点).\n\n"
     )
-    return _swap_owner_in_text(full, is_owner, user_addr)
+    # 先 owner-swap (把『今天小猫在睡, 主人轻一点』这种指当前对象的『主人』换成杂鱼昵称),
+    # 再把 _FT 占位符还原成真父亲 — 真父亲的称呼绝不被 swap 改掉.
+    full = _swap_owner_in_text(full, is_owner, user_addr)
+    return full.replace(_FT, father_disp)
 
 
 def build_birth_event_hint(
