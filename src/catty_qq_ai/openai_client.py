@@ -885,6 +885,7 @@ async def _post_chat_completion_raw(
     # 参考: dist/deepseek硬盘缓存规则.txt + QwenLM/qwen-code#4065.
     try:
         from .prompt_cache import (
+            collapse_trailing_systems_into_last_user,
             compute_prefix_hash,
             is_claude_endpoint,
             merge_consecutive_system_messages,
@@ -930,6 +931,17 @@ async def _post_chat_completion_raw(
             if merged > 0:
                 _logger.debug(
                     "deepseek prefix opt: merged %d system blocks", merged,
+                )
+            # (b2) 主人 2026-05-30 决定性修复: 末尾连续 system → inline 进 current user,
+            # 让 messages 结尾 = user. 真实 dump 重放实测: 末尾=system 时 history 死锁不进
+            # cache (hit 7808), 改成末尾=user 后 history 进 cache (hit 7808→12224, +30pp).
+            # 根因 = DeepSeek 只在 user-end/output-end 落盘 turn 边界单元, 末尾 system 两头不沾.
+            # spark 末尾是 assistant prefill 不触发此函数 → 自动只修群聊主路径, 不碰 spark.
+            collapsed = collapse_trailing_systems_into_last_user(messages)
+            if collapsed > 0:
+                _logger.info(
+                    "deepseek prefix opt: collapsed %d trailing system(s) into last user "
+                    "(末尾→user → history 可进 cache)", collapsed,
                 )
             # (c) tools 字典序排锁死 (QwenLM 翻车: 顺序变→97.5%→81.5%)
             if tools:

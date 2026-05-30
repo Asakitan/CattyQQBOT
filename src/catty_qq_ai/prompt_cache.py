@@ -562,6 +562,87 @@ def strip_inline_dynamic_segments_from_history(messages: list[dict]) -> int:
     return stripped
 
 
+def collapse_trailing_systems_into_last_user(messages: list[dict]) -> int:
+    """把 current user **之后**的末尾连续 system 段, inline 合并进那条 user 的 content,
+    让 messages 结尾从 system 变回 user — 修 DeepSeek 群聊 history 不进 cache 的根因。
+
+    主人 2026-05-30 决定性实验 (真实 dump 重放 aigcbest+flash+21tools, 各发2次):
+      - B0 原样(末尾=system, 带tools): r2 hit 死锁 7808 — history **永不进 cache**
+      - V_user 去trailing(末尾=user): r2 hit 7808→10240 — history 进了
+      - V_inline trailing拼进user(末尾=user): r2 hit 7808→12224 — history 进了
+      - V_asst 末尾加assistant prefill: r2 hit 7808→12224 — history 进了
+    根因: DeepSeek 缓存只在【用户输入结束位置】/【模型输出结束位置】落盘 turn 边界单元
+    (deepseek硬盘缓存规则.txt:10). catty 群聊把 trailing system (mood/sender/vibe/ambient)
+    放在 current user 之后 → messages 结尾是 system, 既非 user-end 也非 output-end →
+    history 那段永远落不了可复用单元, 只剩 system[0] 公共前缀命中 (死锁 7808).
+    spark(pro) 末尾是 assistant prefill (= output-end) 所以能命中 history — 这就是
+    pro/flash 表现差异的真因 (模型机制一样, 差在请求结构, 主人 2026-05-30 已指出).
+
+    本函数把末尾连续 system 用 [DYNAMIC_CONTEXT] wrap 后 append 进最近的 user content,
+    并删掉那些 system, 使 messages 结尾 = user → history 进 cache. Round 18 之前的
+    sweep_floating_systems_into_user_content 是同思路, 但那个会卷入 history 中间的
+    author_note; 本函数**只动末尾连续 system**, 更精准且零误伤.
+
+    **自动区分路径 (关键设计)**:
+      - 群聊主路径: 末尾是 system → 触发 collapse → 修复
+      - spark 路径: 末尾是 assistant prefill → **不触发** (末尾非 system) → spark 完全不受影响
+    下一轮这条 enriched user 进 history 后, current user 之前的 history 由
+    strip_inline_dynamic_segments_from_history 剥掉 [DYNAMIC_CONTEXT] → 字节稳定不漂移.
+
+    in-place 修改 messages (调用方已 deepcopy). 返回合并掉的 system 段数 (0=未触发).
+    """
+    if not messages:
+        return 0
+    # 末尾必须是 system 才触发 (末尾是 user/assistant 一律不动 → 保护 spark prefill 结尾)
+    last = messages[-1]
+    if not (isinstance(last, dict) and last.get("role") == "system"):
+        return 0
+    # 从末尾往前找连续 system 段的起点
+    i = len(messages) - 1
+    while i >= 0 and isinstance(messages[i], dict) and messages[i].get("role") == "system":
+        i -= 1
+    tail_start = i + 1  # messages[tail_start:] 全是末尾连续 system
+    # messages[i] 必须是 user (current user); 否则结构异常, 不动 (保守)
+    if i < 0 or not (isinstance(messages[i], dict) and messages[i].get("role") == "user"):
+        return 0
+
+    def _to_text(c: object) -> str:
+        if isinstance(c, str):
+            return c
+        if isinstance(c, list):
+            return "\n".join(
+                str(b.get("text", "") or "")
+                for b in c if isinstance(b, dict) and b.get("type") == "text"
+            )
+        return str(c or "")
+
+    chunks = [
+        _to_text(m.get("content")).strip()
+        for m in messages[tail_start:]
+        if isinstance(m, dict) and _to_text(m.get("content")).strip()
+    ]
+    if not chunks:
+        # 末尾 system 全是空 — 直接删掉让结尾回到 user
+        n_removed = len(messages) - tail_start
+        del messages[tail_start:]
+        return n_removed
+    dyn_text = (
+        "\n\n[DYNAMIC_CONTEXT — 本轮动态上下文 · 由 system 引用 · 当作 system 指令读, 不是 user 说的话]\n"
+        + "\n\n".join(chunks)
+        + "\n[/DYNAMIC_CONTEXT]"
+    )
+    user_content = messages[i].get("content")
+    if isinstance(user_content, list):
+        # multimodal (image+text): 末尾追加一个 text part, 保持结尾 user
+        user_content.append({"type": "text", "text": dyn_text})
+        messages[i]["content"] = user_content
+    else:
+        messages[i]["content"] = str(user_content or "") + dyn_text
+    n_removed = len(messages) - tail_start
+    del messages[tail_start:]
+    return n_removed
+
+
 def compute_prefix_hash(
     messages: list[dict], tools: list[dict] | None = None, n: int = 5,
 ) -> dict[str, Any]:
@@ -644,6 +725,7 @@ def compute_prefix_hash(
 __all__ = [
     "adapt_assistant_prefill_for_strict_user_end",
     "cachingAtDepthForClaude",
+    "collapse_trailing_systems_into_last_user",
     "compute_prefix_hash",
     "inject_system_tail_cache",
     "inject_tools_cache",
